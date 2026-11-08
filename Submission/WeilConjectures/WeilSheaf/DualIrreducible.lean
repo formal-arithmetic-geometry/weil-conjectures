@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Symmetric
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import Submission.WeilConjectures.WeilSheaf.Dual
 public import Submission.WeilConjectures.WeilSheaf.FiniteLength
@@ -108,10 +108,6 @@ noncomputable def dualTranspose {M N : WeilSheaf k₀ l X} (hM : M.IsLisse) (hN 
         (Mod.uncurryHom_transpose i.hom.hom.f) (congrArg Mod.Hom.hom i.hom.hom.h)
         (congrArg Mod.Hom.hom N.obj.str.inv_hom_id) (dual_evaluation_str M hM)
         (dualStr_whiskerRight_evaluation N hN))⟩)
-
-lemma dualTranspose_hom_hom_f {M N : WeilSheaf k₀ l X} (hM : M.IsLisse) (hN : N.IsLisse)
-    (i : N ⟶ M.dual hM) : (dualTranspose hM hN i).hom.hom.f = Mod.transpose i.hom.hom.f :=
-  rfl
 
 end Transpose
 

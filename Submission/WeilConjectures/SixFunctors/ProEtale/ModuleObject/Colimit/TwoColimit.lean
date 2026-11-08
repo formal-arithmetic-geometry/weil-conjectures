@@ -13,21 +13,33 @@ public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colim
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurj
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitHomSurj
 
-import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import Submission.WeilConjectures.AlgebraicGeometry.SplitCoefficientDerivedFaithful
-import Submission.WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorComparison
 import all Submission.WeilConjectures.AlgebraicGeometry.CondensedFiniteModelProofAPI
 import Submission.WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import Submission.WeilConjectures.CategoryTheory.HomColimitExtension
 import Submission.WeilConjectures.CategoryTheory.DirectedTriangulatedImage
-import Submission.WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 import Submission.WeilConjectures.AlgebraicGeometry.CondensedFinitePresentationDescent
 import Submission.WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import Submission.WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexPresentation
-public import Submission.WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.Condensed.CondensedDerivedTensorComparisonSupplement
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Ab
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import Submission.WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import Submission.WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorComparison
 public import Submission.WeilConjectures.AlgebraicGeometry.Condensed.CondensedFiniteModelProofAPISupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.ProperBaseChange.SplitCoefficientDerivedFaithfulSupplement
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.Topology.Algebra.Module.FiniteDimension
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -360,10 +372,6 @@ private lemma bounded_factors_cocone
   exact CategoryTheory.factors_of_colimit_cocone N DerivedCategory.Q c hc K
     (CategoryTheory.factors_iso _ ((shiftFunctorZero _ ℤ).app K)
       (CategoryTheory.shiftFactors_of_hom_colimit N DerivedCategory.Q K h 0))
-
-omit [TopologicalSpace.NoetherianSpace X] in
-private lemma tensorComp_eq {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    derivedExtendScalarsCompIso X ℓ h = finiteCoefficientDerivedTensorCompIso X ℓ h := rfl
 
 attribute [local irreducible] derivedExtendScalarsCompIso
 

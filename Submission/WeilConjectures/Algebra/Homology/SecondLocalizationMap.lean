@@ -9,7 +9,6 @@ module
 public import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 
-public import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtension
 public import Submission.WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

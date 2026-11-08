@@ -88,20 +88,6 @@ noncomputable def glOfMatrix (M M' : Matrix (Fin n) (Fin n) (locallyFiniteFuncti
     · subst hij; simp
     · simp [Matrix.one_apply_ne hij]
 
-lemma coe_glOfMatrix_apply (M M' : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T))
-    (hMM' : M * M' = 1) (hM'M : M' * M = 1) (hM : ∀ i j t, (M i j).1 t ∈ E)
-    (hM' : ∀ i j t, (M' i j).1 t ∈ E) (t : T) (i j : Fin n) :
-    (((glOfMatrix M M' hMM' hM'M hM hM' t : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i j :
-      PadicAlgCl l) = (M i j).1 t :=
-  rfl
-
-lemma coe_glOfMatrix_inv_apply (M M' : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T))
-    (hMM' : M * M' = 1) (hM'M : M' * M = 1) (hM : ∀ i j t, (M i j).1 t ∈ E)
-    (hM' : ∀ i j t, (M' i j).1 t ∈ E) (t : T) (i j : Fin n) :
-    ((((glOfMatrix M M' hMM' hM'M hM hM' t)⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) i j :
-      PadicAlgCl l) = (M' i j).1 t :=
-  rfl
-
 lemma continuous_glOfMatrix_apply (M M' : Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T))
     (hMM' : M * M' = 1) (hM'M : M' * M = 1) (hM : ∀ i j t, (M i j).1 t ∈ E)
     (hM' : ∀ i j t, (M' i j).1 t ∈ E) (i j : Fin n) :
@@ -150,11 +136,6 @@ noncomputable def matrixOfGL (σ : T → GL (Fin n) E)
     (hσ : ∀ i j, Continuous fun t ↦ (σ t : Matrix (Fin n) (Fin n) E) i j) :
     Matrix (Fin n) (Fin n) (locallyFiniteFunctions l T) :=
   Matrix.of fun i j ↦ lfOfContinuous _ (hσ i j)
-
-lemma matrixOfGL_apply (σ : T → GL (Fin n) E)
-    (hσ : ∀ i j, Continuous fun t ↦ (σ t : Matrix (Fin n) (Fin n) E) i j) (i j : Fin n)
-    (t : T) : (matrixOfGL σ hσ i j).1 t = ((σ t : Matrix (Fin n) (Fin n) E) i j : PadicAlgCl l) :=
-  rfl
 
 /-- The values of `matrixOfGL`. -/
 lemma matrixOfGL_map (σ : T → GL (Fin n) E)

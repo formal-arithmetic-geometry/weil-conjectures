@@ -434,10 +434,6 @@ namespace DerivedCategory
 
 variable {J I}
 
-lemma derivedComplete_iff (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    derivedComplete J I K ↔ Pretriangulated.IsHomotopyLimit (derivedCompletionCone J I K) :=
-  Iff.rfl
-
 /-- Given a homotopy limit `c` of the tower of reductions `K ⊗ᴸ R/Iⁿ`, the object `K` is
 derived complete if and only if it is isomorphic to `c.pt = R lim_n (K ⊗ᴸ R/Iⁿ)` compatibly
 with the maps to the reductions. -/

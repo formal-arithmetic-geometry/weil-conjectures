@@ -208,10 +208,6 @@ noncomputable def constAct (c : ULift.{u + 1} (PadicAlgCl l)) : N.X ⟶ N.X :=
         ((map_abSectionAct N f _ x).trans
           (congrArg (abSectionAct N · _) (map_constScalarSection f c))).symm } }
 
-lemma constAct_app (c : ULift.{u + 1} (PadicAlgCl l)) (x : N.X.obj.obj U) :
-    (constAct N c).hom.app U x = abSectionAct N (constScalarSection U c) x :=
-  rfl
-
 /-- The constant sections act on a module object over `forgetAb ℚ̄_ℓ,X` through a ring
 homomorphism `ℚ̄_ℓ →+* End N`. -/
 noncomputable def constActRingHom : ULift.{u + 1} (PadicAlgCl l) →+* End N.X where
@@ -274,11 +270,6 @@ noncomputable def weilActApp :
     (fun c a x ↦ by
       rw [toWeilSheaf_smul, toWeilSheaf_smul, ← abSectionAct_mul, ← abSectionAct_mul, mul_comm])
 
-lemma weilActApp_tmul (a : (adicConstantSheaf l X).obj.obj U)
-    (x : ((toWeilSheaf l X).obj N).obj.obj U) :
-    (weilActApp N U).hom (a ⊗ₜ x) = abSectionAct N a x :=
-  rfl
-
 /-- The action of `ℚ̄_ℓ,X` on the underlying presheaf of `ℚ̄_ℓ`-modules. -/
 noncomputable def weilAct :
     (adicConstantSheaf l X).obj ⊗ ((toWeilSheaf l X).obj N).obj ⟶
@@ -338,11 +329,6 @@ noncomputable def sheafifyModXIso :
 lemma sheafToPresheaf_map_sheafifyModXIso_hom :
     (sheafToPresheaf _ _).map (sheafifyModXIso N).hom = inv (presheafModUnit N).hom :=
   (fullyFaithfulSheafToPresheaf _ _).map_preimage _
-
-variable (l X) in
-/-- The comparison of the two ring structures on the presheaf `ℚ̄_ℓ,X` is the identity. -/
-lemma adicConstantSheafObjMonHom_hom : (adicConstantSheafObjMonHom X l).hom = 𝟙 _ :=
-  rfl
 
 /-- The action of the sheafification of `presheafMod N`, transported along `sheafifyModXIso N`,
 restricts to the action `weilAct N` on the objectwise tensor product. -/
@@ -446,11 +432,6 @@ noncomputable def sheafHomOfForgetAb (f : (forgetAb l X).obj M ⟶ (forgetAb l X
             exact hom_abSectionAct _ f _ x }
       naturality _ _ φ := ModuleCat.hom_ext (LinearMap.ext fun x ↦
         ConcreteCategory.congr_hom (f.hom.hom.naturality φ) x) } }
-
-/-- The components of `sheafHomOfForgetAb f` are those of `f`. -/
-lemma sheafHomOfForgetAb_app (f : (forgetAb l X).obj M ⟶ (forgetAb l X).obj M')
-    (x : M.X.obj.obj U) : (sheafHomOfForgetAb f).hom.app U x = f.hom.hom.app U x :=
-  rfl
 
 /-- A morphism of module objects `forgetAb M ⟶ forgetAb M'` is a morphism of `ℓ`-adic
 sheaves. -/

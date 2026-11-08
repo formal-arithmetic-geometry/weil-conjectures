@@ -9,7 +9,23 @@ public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Triangulated.Adjunction
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import Submission.WeilConjectures.WeilSheaf.LisseLocus
-public import Submission.WeilConjectures.WeilSheaf.SmoothBaseChange
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.MateUnitIsIso
+public import Submission.WeilConjectures.WeilSheaf.Localization
+public import Submission.WeilConjectures.WeilSheaf.UpperStarId
+public import Submission.WeilConjectures.AlgebraicGeometry.NativeBaseChange.NativeBaseChangeForgetComparison
+import Submission.WeilConjectures.AlgebraicGeometry.NativeBaseChange.GeometricProperBaseChange
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Submission.WeilConjectures.AlgebraicGeometry.Native.NativeBaseChangeOpenChart
+import Submission.WeilConjectures.AlgebraicGeometry.Native.NativeDerivedExchangeComparison
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChange
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
+import Submission.WeilConjectures.AlgebraicGeometry.ProperBaseChange.OverSquare
+import Submission.WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Submission.WeilConjectures.CategoryTheory.Endofunctor.FixedPairDerivedForgetComparison
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -156,16 +172,5 @@ lemma exists_dense_isLisse_homologySheaf_upperStar {X : Scheme.{u}}
   · exact isLisse_upperStar_of_le (Finset.inf_le hn) (h n).choose_spec.2
   · exact isLisse_of_isZero ((WeilSheaf.upperStar _).map_isZero
       (isZero_homologySheaf_of_notMem_Icc K ha hb hn))
-
-/-- If `X` is empty, the unit `K ⟶ Rφ_* φ^* K` is an isomorphism for every `φ : Y ⟶ X`, both
-sides being zero. -/
-lemma isIso_unit_app_of_isEmpty {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [Y.Over (Spec (CommRingCat.of k₀))] (φ : Y ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))]
-    [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsEmpty X] (K : WeilComplex k₀ l X) :
-    IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) φ).unit.app K) :=
-  isIso_of_source_target_iso_zero _ (isZero_of_isEmpty _).isoZero
-    (isZero_of_isEmpty _).isoZero
 
 end AlgebraicGeometry.WeilComplex

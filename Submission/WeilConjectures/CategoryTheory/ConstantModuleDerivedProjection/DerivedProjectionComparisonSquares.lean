@@ -118,35 +118,4 @@ structure NormalizedComparison
   projection : ProjectionSquare L R L' R' adj adj' S T
     (tensorL left tensor) (tensorL' left tensor) mS mT left right
 
-set_option maxHeartbeats 40000 in
--- Bound elaboration of the representative equation.
-/-- The flat-total normalization of a localized exact tensor functor.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-derived-projection-comparison-squares). -/
-def TensorNormalization
-    (B : Type a) (E : Type b) [Category.{ha} B] [Category.{hb} E]
-    [Abelian B] [Abelian E] [IsGrothendieckAbelian.{ha} B]
-    [IsGrothendieckAbelian.{hb} E]
-    [HasColimitsOfSize.{0, 0} B] [HasColimitsOfSize.{0, 0} E]
-    [MonoidalCategory B] [MonoidalCategory E]
-    [MonoidalClosed B] [MonoidalClosed E]
-    [MonoidalPreadditive B] [MonoidalPreadditive E]
-    [BraidedCategory B] [BraidedCategory E]
-    [Abelian.HasFunctorialFlatResolution B] [Abelian.HasFunctorialFlatResolution E]
-    [HasDerivedCategory.{wa} B] [HasDerivedCategory.{wb} E]
-    (G : B ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesColimitsOfSize.{0, 0} G]
-    (m : G.Monoidal) (n : G.mapDerivedCategory.Monoidal) : Prop :=
-  letI := m
-  ∀ (P Q : CochainComplex B ℤ), P.IsKFlatForTotalTensor → Q.IsKFlatForTotalTensor →
-    @Functor.OplaxMonoidal.δ _ _ _ _ _ _ G.mapDerivedCategory
-        n.toOplaxMonoidal (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≫
-      (G.mapDerivedCategoryFactors.hom.app P ⊗ₘ G.mapDerivedCategoryFactors.hom.app Q) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((G.mapHomologicalComplex (.up ℤ)).obj P)
-        ((G.mapHomologicalComplex (.up ℤ)).obj Q) =
-    G.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
-      G.mapDerivedCategoryFactors.hom.app (P ⊗ Q) ≫
-      DerivedCategory.Q.map (Functor.mapCochainComplexμIso G P Q).inv
-
 end CategoryTheory.ConstantModuleDerivedProjection

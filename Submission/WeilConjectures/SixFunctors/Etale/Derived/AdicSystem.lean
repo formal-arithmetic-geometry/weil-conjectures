@@ -252,44 +252,6 @@ section Compatibility
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] [Finite Λ] [Finite Λ'] (ρ : Λ →+* Λ')
   {X s : Scheme.{u}} {g : X ⟶ X} {h : s ⟶ s}
 
-/-- A coefficient comparison `α : Res ∘ RΓ_c(X, -) ≅ RΓ_c(X, -) ∘ Res` *is compatible with the
-compact-support base change* along a pair `(g, h)` of automorphisms
-(`AlgebraicGeometry.Etale.compactPullback`): the square
-```
-  RΓ_c(X, Res K') ────── g_c^* ──────▶ RΓ_c(X, Lg^* Res K') ≅ RΓ_c(X, Res Lg^* K')
-        │ α                                                        │ α
-        ▼                                                          ▼
-  Res RΓ_c(X, K') ──── Res g_c^* ────▶ Res RΓ_c(X, Lg^* K')
-```
-commutes, the identification `Lg^* Res ≅ Res Lg^*` being
-`AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso`. -/
-def IsCompactPullbackCompatible {a : X ⟶ s} [QuasiCompact a] [HasCompactification a]
-    (α : Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ ⋙
-        compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a ≅
-      compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') a ⋙
-        ModuleCat.derivedRestrictScalars ρ)
-    (sq : IsPullback g a a h) [IsIso h] : Prop :=
-  ∀ K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')),
-    α.hom.app K' ≫ (ModuleCat.derivedRestrictScalars ρ).map ((compactPullback Λ' sq).app K') =
-      (compactPullback Λ sq).app ((Sheaf.derivedRestrictScalars _ ρ).obj K') ≫
-        (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).map
-          ((leftDerivedUpperStarRestrictScalarsIso ρ g).hom.app K') ≫
-        α.hom.app ((L((g)^*[ModuleCat.{u + 1} Λ'])).obj K')
-
-/-- A coefficient comparison `β : Res ∘ (-)_x̄ ≅ (-)_x̄ ∘ Res` of geometric stalks *is compatible
-with the stalk transport* at a point `x̄` fixed by a pair `(g, h)` of automorphisms
-(`AlgebraicGeometry.Etale.stalkPullback`), in the same sense as
-`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`. -/
-def IsStalkPullbackCompatible {x : s ⟶ X}
-    (β : Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ ⋙ geometricStalk Λ x ≅
-      geometricStalk Λ' x ⋙ ModuleCat.derivedRestrictScalars ρ)
-    (hx : h ≫ x = x ≫ g) [IsIso h] : Prop :=
-  ∀ K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')),
-    β.hom.app K' ≫ (ModuleCat.derivedRestrictScalars ρ).map ((stalkPullback Λ' hx).app K') =
-      (stalkPullback Λ hx).app ((Sheaf.derivedRestrictScalars _ ρ).obj K') ≫
-        (geometricStalk Λ x).map ((leftDerivedUpperStarRestrictScalarsIso ρ g).hom.app K') ≫
-        β.hom.app ((L((g)^*[ModuleCat.{u + 1} Λ'])).obj K')
-
 end Compatibility
 
 namespace AdicSystem
@@ -341,45 +303,6 @@ noncomputable def stalkTower (x : Spec (.of k) ⟶ X)
 variable [IsLocalRing R] [IsAdicComplete I R] {ϖ : R} (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
   (hI : I = Ideal.span {ϖ})
 
-omit [QuasiCompact aX] [IsSeparated aX] in
-include hϖ hI in
-/-- Compact cohomology: the derived limit `P_𝒪 = R lim_n RΓ_c(X, L_n)` over `R` of the compact
-cohomology of a normalized system is perfect, represented by a bounded complex of finite free
-`R`-modules, and it reduces to the levels: each projection `P_𝒪 ⟶ Res RΓ_c(X, L_{n+1})` exhibits
-`RΓ_c(X, L_{n+1})` as `P_𝒪 ⊗ᴸ_R A_{n+1}`. -/
-theorem compactSupportTower_realization
-    (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
-        compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
-      compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX ⋙
-        ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
-    (hα : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (α n))
-    {c : Cone (S.compactSupportTower aX α hα).restrict} (hc : IsHomotopyLimit c) :
-    (∃ (M : CochainComplex (ModuleCat.{u + 1} R) ℤ) (a b : ℤ), M.IsStrictlyGE a ∧
-      M.IsStrictlyLE b ∧ (∀ i, Module.Free R (M.X i) ∧ Module.Finite R (M.X i)) ∧
-      Nonempty (c.pt ≅ DerivedCategory.Q.obj M)) ∧
-    ∀ n, ModuleCat.IsDerivedBaseChange (f := I.powSuccMk n) (c.π.app (op n)) :=
-  ⟨(S.compactSupportTower aX α hα).exists_iso_Q_obj_of_isAdicComplete hϖ hI hc,
-    (S.compactSupportTower aX α hα).isDerivedBaseChange_π_app_of_isAdicComplete hϖ hI hc⟩
-
-omit [QuasiCompact aX] [IsSeparated aX] [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
-include hϖ hI in
-/-- Geometric stalks: the derived limit `P_{x̄, 𝒪} = R lim_n (L_n)_x̄` over `R` of the geometric
-stalks of a normalized system is perfect, represented by a bounded complex of finite free
-`R`-modules, and each projection `P_{x̄, 𝒪} ⟶ Res (L_{n+1})_x̄` exhibits `(L_{n+1})_x̄` as
-`P_{x̄, 𝒪} ⊗ᴸ_R A_{n+1}`. -/
-theorem stalkTower_realization (x : Spec (.of k) ⟶ X)
-    (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
-        geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
-      geometricStalk (R ⧸ I ^ (n + 1)) x ⋙ ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
-    (hβ : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (β n))
-    {c : Cone (S.stalkTower x β hβ).restrict} (hc : IsHomotopyLimit c) :
-    (∃ (M : CochainComplex (ModuleCat.{u + 1} R) ℤ) (a b : ℤ), M.IsStrictlyGE a ∧
-      M.IsStrictlyLE b ∧ (∀ i, Module.Free R (M.X i) ∧ Module.Finite R (M.X i)) ∧
-      Nonempty (c.pt ≅ DerivedCategory.Q.obj M)) ∧
-    ∀ n, ModuleCat.IsDerivedBaseChange (f := I.powSuccMk n) (c.π.app (op n)) :=
-  ⟨(S.stalkTower x β hβ).exists_iso_Q_obj_of_isAdicComplete hϖ hI hc,
-    (S.stalkTower x β hβ).isDerivedBaseChange_π_app_of_isAdicComplete hϖ hI hc⟩
-
 end Geometric
 
 end AdicSystem
@@ -408,17 +331,6 @@ theorem realization {c : Cone (S.restrict ⋙
         c.pt.IsGE a ∧ c.pt.IsLE b :=
   ProEtale.derivedComplete_and_exists_iso_of_isNormalizedTower hϖ hI
     S.isNormalizedTower_restrict hc
-
-/-- The realization `R lim_n ν^* Res L_n` of a normalized system exists: the derived category of
-pro-étale sheaves of `R`-modules has countable products, countable products of pro-étale
-sheaves being exact (`CategoryTheory.derivedCategory_hasCountableProducts`). -/
-lemma exists_isHomotopyLimit_realization :
-    ∃ c : Cone (S.restrict ⋙
-      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory),
-      IsHomotopyLimit c :=
-  have := derivedCategory_hasCountableProducts
-    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))
-  exists_isHomotopyLimit _
 
 end AdicSystem
 

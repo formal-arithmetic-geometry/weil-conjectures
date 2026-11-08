@@ -156,16 +156,6 @@ noncomputable def adicSheafDerivedEquivCondensedMod :
         (condensedRingObj (Profinite.padicAlgClRingObj l) X)) :=
   (adicSheafEquivCondensedMod l X).mapDerivedCategory
 
-lemma adicSheafDerivedEquivCondensedMod_functor :
-    (adicSheafDerivedEquivCondensedMod l X).functor =
-      (adicSheafEquivCondensedMod l X).functor.mapDerivedCategory :=
-  rfl
-
-lemma adicSheafDerivedEquivCondensedMod_inverse :
-    (adicSheafDerivedEquivCondensedMod l X).inverse =
-      (adicSheafEquivCondensedMod l X).inverse.mapDerivedCategory :=
-  rfl
-
 /-- The derived comparison commutes with the shifts. -/
 noncomputable instance : (adicSheafDerivedEquivCondensedMod l X).functor.CommShift ℤ :=
   inferInstanceAs ((adicSheafEquivCondensedMod l X).functor.mapDerivedCategory.CommShift ℤ)

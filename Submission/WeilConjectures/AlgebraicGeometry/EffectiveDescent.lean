@@ -15,10 +15,12 @@ public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.CategoryTheory.Sites.Over
 public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineLocal
 public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
-public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
+public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveDescent.Basic
 public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import Submission.WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
-public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
+public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverImmersion
+public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

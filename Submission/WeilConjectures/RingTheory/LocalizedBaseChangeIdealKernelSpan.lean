@@ -13,9 +13,28 @@ public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 import Submission.WeilConjectures.RingTheory.BaseChangeIdealKernelGenerators
 import Submission.WeilConjectures.RingTheory.LocalizationIdealKernelGenerators
-import Submission.WeilConjectures.Algebra.TorOneSurjectiveChangeRings
-import Submission.WeilConjectures.RingTheory.TorIdealKernelNaturality
-import Submission.WeilConjectures.RingTheory.TorOneSurjectiveFlatMiddle
+import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.LinearAlgebra.FreeModule.Basic
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Mathlib.RingTheory.Ideal.Maps
+import Mathlib.CategoryTheory.Abelian.Projective.Resolution
+import Mathlib.CategoryTheory.Monoidal.Tor
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.CategoryTheory.Abelian.Exact
+import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.Algebra.Module.Projective
+import Mathlib.RingTheory.Flat.Basic
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.Algebra.Homology.ConcreteCategory
+import Mathlib.RingTheory.Flat.Equalizer
+import Mathlib.Algebra.Homology.ShortComplex.Linear
+import Mathlib.CategoryTheory.Linear.FunctorCategory
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

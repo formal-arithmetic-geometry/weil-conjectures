@@ -226,28 +226,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 section DerivedLowerStar
 
-/-- The total right derived functor `Rf_* : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_Y})` of the
-pushforward `f_*` on module objects over `Λ`, on the unbounded derived categories,
-computed on K-injective resolutions.
-
-It is not a definition of its own: it is the generic `Functor.rightDerivedFunctor`, written
-`R(-)`, applied to the underived pushforward `(f)_*⟦Λ⟧`. -/
-noncomputable example :
-    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤
-      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-        (condensedRingObj Λ Y)) :=
-  R((f)_*⟦Λ⟧)
-
-/-- The right derived functor `Rf_* : D⁺(Mod_{Λ_X}) ⥤ D⁺(Mod_{Λ_Y})` of the pushforward
-`f_*` on module objects, on the *bounded below* derived categories: the generic
-`Functor.rightDerivedFunctorPlus`, written `R+(-)`, applied to `(f)_*⟦Λ⟧`. -/
-noncomputable example :
-    DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) ⥤
-      DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-        (condensedRingObj Λ Y)) :=
-  R+((f)_*⟦Λ⟧)
-
 /-- The derived pushforward on module objects is the total right derived functor of
 `mapMod(f_*) : Mod_{Λ_X} ⥤ Mod_{f_* Λ_X}` followed by the levelwise restriction of scalars
 along `η_f : Λ_Y ⟶ f_* Λ_X`: the restriction of scalars is exact, so right deriving the
@@ -287,18 +265,6 @@ instance preservesKFlatQuasiIso_upperStar : (f)^*⟦Λ⟧.PreservesKFlatQuasiIso
   Functor.preservesKFlatQuasiIso_comp
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalars (condensedPullbackHom Λ f))
-
-/-- The total left derived functor `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` of the pullback
-`f^*` on module objects over `Λ`, on the unbounded derived categories, computed on K-flat
-resolutions: `Lf^* M = Λ_X ⊗ᴸ_{f^* Λ_Y} f^* M`.
-
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`, written
-`L(-)`, applied to the underived pullback `(f)^*⟦Λ⟧`. -/
-noncomputable example :
-    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
-      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj Λ X)) :=
-  L((f)^*⟦Λ⟧)
 
 /-- The derived pullback on module objects is the levelwise pullback
 `D(mapMod(f^*)) : D(Mod_{Λ_Y}) ⥤ D(Mod_{f^* Λ_Y})` followed by the derived extension of

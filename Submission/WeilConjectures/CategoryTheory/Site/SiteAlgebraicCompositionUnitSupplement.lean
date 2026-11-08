@@ -145,18 +145,6 @@ private theorem compare_binary
   rw [← hx', ← hy', ← h₀ V z, compareMap_image, nat_section, h₁]
   rw [compareMap_image, compareMap_image, nat_section, nat_section]
 
-private theorem compare_constant
-    {F G : Sheaf J (Type s) ⥤ Sheaf K (Type s)} (γ : F ⟶ G)
-    {X : Sheaf J (Type s)} {X₀ X₁ : Sheaf K (Type s)}
-    (e₀ : F.obj X ≅ X₀) (e₁ : G.obj X ≅ X₁) (t : X ⟶ X)
-    (n₀ : ∀ V, X₀.obj.obj V) (n₁ : ∀ V, X₁.obj.obj V)
-    (h₀ : ∀ V (z : (F.obj X).obj.obj V),
-      e₀.hom.hom.app V ((F.map t).hom.app V z) = n₀ V)
-    (h₁ : ∀ V (z : (G.obj X).obj.obj V),
-      e₁.hom.hom.app V ((G.map t).hom.app V z) = n₁ V) (V : Dᵒᵖ) :
-    (compareMap γ e₀ e₁).hom.app V (n₀ V) = n₁ V := by
-  rw [← h₀ V (e₀.inv.hom.app V (n₀ V)), compareMap_image, nat_section, h₁]
-
 end Transport
 
 noncomputable section AlgebraicTransport
@@ -191,27 +179,6 @@ private def binaryMap {X Y Z : Sheaf J (Type s)}
       · exact (congrArg (fun k ↦ k z) ((prod.fst : X ⨯ Y ⟶ X).hom.naturality i)).symm
       · exact (congrArg (fun k ↦ k z) ((prod.snd : X ⨯ Y ⟶ Y).hom.naturality i)).symm)
 
-private def ringAddMap (R : Sheaf J CommRingCat.{s}) :
-    ringSets R ⨯ ringSets R ⟶ ringSets R :=
-  binaryMap (fun _ a b ↦ ULift.up (a.down + b.down)) (by
-    intro V W i a b
-    apply ULift.ext
-    exact map_add (R.obj.map i).hom a.down b.down)
-
-private def ringMulMap (R : Sheaf J CommRingCat.{s}) :
-    ringSets R ⨯ ringSets R ⟶ ringSets R :=
-  binaryMap (fun _ a b ↦ ULift.up (a.down * b.down)) (by
-    intro V W i a b
-    apply ULift.ext
-    exact map_mul (R.obj.map i).hom a.down b.down)
-
-private def ringConstMap (R : Sheaf J CommRingCat.{s}) (n : ℕ) :
-    ringSets R ⟶ ringSets R :=
-  sectionMap (fun V _ ↦ ULift.up (n : R.obj.obj V)) (by
-    intro V W i x
-    apply ULift.ext
-    exact map_natCast (R.obj.map i).hom n)
-
 private def moduleAddMap {R : Sheaf J CommRingCat.{s}}
     (M : ringedSiteModules.{s} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     moduleSets M ⨯ moduleSets M ⟶ moduleSets M :=
@@ -245,84 +212,6 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   (γ : F ⟶ G) {R : Sheaf J CommRingCat.{s}} {R₀ R₁ : Sheaf K CommRingCat.{s}}
   (A₀ : SheafOfModules.AlgebraicInverseImageOfUniverses F R R₀)
   (A₁ : SheafOfModules.AlgebraicInverseImageOfUniverses G R R₁)
-
-private theorem ring_compare_add (V : Dᵒᵖ) (a b : R₀.obj.obj V) :
-    ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up (a + b))).down =
-      ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up a)).down +
-        ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up b)).down := by
-  apply congrArg ULift.down
-    (compare_binary γ A₀.ringUnderlying A₀.ringUnderlying A₀.ringUnderlying
-      A₁.ringUnderlying A₁.ringUnderlying A₁.ringUnderlying (ringAddMap R)
-      (fun _ a b ↦ ULift.up (a.down + b.down))
-      (fun _ a b ↦ ULift.up (a.down + b.down)) ?_ ?_ V (ULift.up a) (ULift.up b))
-  · intro V z
-    apply ULift.ext
-    exact A₀.ringAdd _ _ _ _ (fun _ _ ↦ rfl) V z
-  · intro V z
-    apply ULift.ext
-    exact A₁.ringAdd _ _ _ _ (fun _ _ ↦ rfl) V z
-
-private theorem ring_compare_mul (V : Dᵒᵖ) (a b : R₀.obj.obj V) :
-    ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up (a * b))).down =
-      ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up a)).down *
-        ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up b)).down := by
-  apply congrArg ULift.down
-    (compare_binary γ A₀.ringUnderlying A₀.ringUnderlying A₀.ringUnderlying
-      A₁.ringUnderlying A₁.ringUnderlying A₁.ringUnderlying (ringMulMap R)
-      (fun _ a b ↦ ULift.up (a.down * b.down))
-      (fun _ a b ↦ ULift.up (a.down * b.down)) ?_ ?_ V (ULift.up a) (ULift.up b))
-  · intro V z
-    apply ULift.ext
-    exact A₀.ringMul _ _ _ _ (fun _ _ ↦ rfl) V z
-  · intro V z
-    apply ULift.ext
-    exact A₁.ringMul _ _ _ _ (fun _ _ ↦ rfl) V z
-
-omit [PreservesFiniteLimits F] in
-private theorem ring_compare_zero (V : Dᵒᵖ) :
-    ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up 0)).down = 0 := by
-  apply congrArg ULift.down
-    (compare_constant γ A₀.ringUnderlying A₁.ringUnderlying (ringConstMap R 0)
-      (fun _ ↦ ULift.up 0) (fun _ ↦ ULift.up 0) ?_ ?_ V)
-  · intro V z
-    apply ULift.ext
-    exact A₀.ringZero _ _ (fun _ _ ↦ by simp [ringConstMap, sectionMap]) V z
-  · intro V z
-    apply ULift.ext
-    exact A₁.ringZero _ _ (fun _ _ ↦ by simp [ringConstMap, sectionMap]) V z
-
-omit [PreservesFiniteLimits F] in
-private theorem ring_compare_one (V : Dᵒᵖ) :
-    ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V (ULift.up 1)).down = 1 := by
-  apply congrArg ULift.down
-    (compare_constant γ A₀.ringUnderlying A₁.ringUnderlying (ringConstMap R 1)
-      (fun _ ↦ ULift.up 1) (fun _ ↦ ULift.up 1) ?_ ?_ V)
-  · intro V z
-    apply ULift.ext
-    exact A₀.ringOne _ _ (fun _ _ ↦ by simp [ringConstMap, sectionMap]) V z
-  · intro V z
-    apply ULift.ext
-    exact A₁.ringOne _ _ (fun _ _ ↦ by simp [ringConstMap, sectionMap]) V z
-
-private def ringComparisonMap : R₀ ⟶ R₁ :=
-  ⟨{ app V := CommRingCat.ofHom
-       { toFun a := ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.app V
-           (ULift.up a)).down
-         map_one' := ring_compare_one γ A₀ A₁ V
-         map_mul' := ring_compare_mul γ A₀ A₁ V
-         map_zero' := ring_compare_zero γ A₀ A₁ V
-         map_add' := ring_compare_add γ A₀ A₁ V }
-     naturality := by
-       intro V W i
-       ext a
-       exact congrArg ULift.down (congrArg (fun k ↦ k (ULift.up a))
-         ((compareMap γ A₀.ringUnderlying A₁.ringUnderlying).hom.naturality i)) }⟩
-
-private theorem ringComparisonMap_underlying :
-    (sheafCompose K (CategoryTheory.forget CommRingCat.{s} ⋙ uliftFunctor.{s, s})).map
-      (ringComparisonMap γ A₀ A₁) = compareMap γ A₀.ringUnderlying A₁.ringUnderlying := by
-  ext V a
-  rfl
 
 private theorem module_compare_add
     (M : ringedSiteModules.{s} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -412,55 +301,6 @@ private theorem moduleComparisonApp_underlying
       (A₁.moduleUnderlying.app M).symm := by
   ext V a
   rfl
-
-private theorem algebraicComparison : SiteAlgebraicComparison γ.hom := by
-  intro R R₀ R₁ A₀ A₁
-  let er := A₀.ringUnderlying.symm ≪≫ γ.app _ ≪≫ A₁.ringUnderlying
-  have : IsIso ((sheafCompose K
-      (CategoryTheory.forget CommRingCat.{s} ⋙ uliftFunctor.{s, s})).map
-        (ringComparisonMap γ.hom A₀ A₁)) := by
-    rw [ringComparisonMap_underlying]
-    change IsIso er.hom
-    infer_instance
-  have : IsIso (ringComparisonMap γ.hom A₀ A₁) :=
-    isIso_of_reflects_iso _ (sheafCompose K
-      (CategoryTheory.forget CommRingCat.{s} ⋙ uliftFunctor.{s, s}))
-  refine ⟨asIso (ringComparisonMap γ.hom A₀ A₁),
-    ringComparisonMap_underlying γ.hom A₀ A₁, ?_⟩
-  let em := A₀.moduleUnderlying ≪≫ Functor.isoWhiskerLeft
-    (SheafOfModules.toSheaf _ ⋙ sheafCompose J
-      (CategoryTheory.forget AddCommGrpCat.{s} ⋙ uliftFunctor.{s, s})) γ ≪≫
-        A₁.moduleUnderlying.symm
-  let τ : A₀.modules ⋙ SheafOfModules.toSheaf _ ⟶
-      A₁.modules ⋙ SheafOfModules.toSheaf _ :=
-    { app := moduleComparisonApp γ A₀ A₁
-      naturality := by
-        intro M N f
-        apply (sheafCompose K
-          (CategoryTheory.forget AddCommGrpCat.{s} ⋙ uliftFunctor.{s, s})).map_injective
-        simp only [Functor.map_comp, moduleComparisonApp_underlying]
-        simpa only [em, compareMap, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
-          NatTrans.comp_app,
-          Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.app_hom,
-          Iso.app_inv, Functor.comp_map, Category.assoc] using em.hom.naturality f }
-  have (M : ringedSiteModules.{s}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) : IsIso (τ.app M) := by
-    have : IsIso ((sheafCompose K
-        (CategoryTheory.forget AddCommGrpCat.{s} ⋙ uliftFunctor.{s, s})).map (τ.app M)) := by
-      change IsIso ((sheafCompose K
-        (CategoryTheory.forget AddCommGrpCat.{s} ⋙ uliftFunctor.{s, s})).map
-          (moduleComparisonApp γ A₀ A₁ M))
-      rw [moduleComparisonApp_underlying]
-      change IsIso (em.hom.app M)
-      infer_instance
-    exact isIso_of_reflects_iso _ (sheafCompose K
-      (CategoryTheory.forget AddCommGrpCat.{s} ⋙ uliftFunctor.{s, s}))
-  have : IsIso τ := NatIso.isIso_of_isIso_app τ
-  refine ⟨asIso τ, ?_, ?_⟩
-  · intro M
-    exact moduleComparisonApp_underlying γ A₀ A₁ M
-  · intro M V a x
-    exact module_compare_smul γ.hom A₀ A₁ M V a x
 
 end FinishTransport
 

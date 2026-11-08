@@ -76,11 +76,6 @@ noncomputable def pushforward (α : BorelMooreSection ℓ T) : BorelMooreSection
       (dualizingComplexComp ℓ h).inv ≫
     (boundedConstructibleUpperShriekAdjunction ℓ h).counit.app _
 
-/-- The pushforward of Borel–Moore sections is additive. -/
-lemma pushforward_add (α β : BorelMooreSection ℓ T) :
-    pushforward h (α + β) = pushforward h α + pushforward h β := by
-  simp only [pushforward, Preadditive.comp_add, Functor.map_add, Preadditive.add_comp]
-
 end Pushforward
 
 section Scalar

@@ -247,10 +247,6 @@ noncomputable def coefficientDualDoubleDual :
 
 variable {A X}
 
-lemma coefficientDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (coefficientDualDoubleDual A X).app K = MonoidalClosed.toIhomIhomUnit K :=
-  rfl
-
 /-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
 This is also the biduality clause of blueprint `thm-sf-dual-perfect`.
 

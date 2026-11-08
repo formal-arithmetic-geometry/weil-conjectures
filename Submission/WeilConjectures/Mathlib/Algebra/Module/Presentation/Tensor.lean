@@ -40,10 +40,6 @@ abbrev baseChange (ρ : Relations.{w₀, w₁} A) (f : A →+* B) : Relations.{w
   R := ρ.R
   relation r := Finsupp.mapRange f f.map_zero (ρ.relation r)
 
-lemma baseChange_relation (ρ : Relations.{w₀, w₁} A) (f : A →+* B) (r : ρ.R) :
-    (ρ.baseChange f).relation r = Finsupp.mapRange f f.map_zero (ρ.relation r) :=
-  rfl
-
 /-- Linear combinations with coefficients mapped along a ring homomorphism `f : A →+* B` are
 linear combinations with the original coefficients, if `A` acts through `f`. -/
 lemma linearCombination_mapRange_of_smul_eq (f : A →+* B) {G N : Type*} [AddCommGroup N]

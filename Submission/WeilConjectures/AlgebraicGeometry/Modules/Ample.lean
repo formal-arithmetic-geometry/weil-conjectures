@@ -14,7 +14,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
-public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import Mathlib.CategoryTheory.Limits.Lattice
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
@@ -133,15 +138,6 @@ characteristics involved may be junk values.
 This is also blueprint `def-sc-hilbert-degree`. -/
 noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
   Δ_[1] ^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
-
-/-- The degree as an explicit alternating sum of Euler characteristics:
-`∑_{i=0}^{g} (-1)^(g-i) (g choose i) χ(X, M^{⊗ i})`. -/
-lemma Scheme.Hom.degree_eq_sum (f : X ⟶ Spec (.of K)) (M : X.Modules) :
-    f.degree M = ∑ i ∈ Finset.range (((topologicalKrullDim X).unbotD 0).toNat + 1),
-      ((-1 : ℤ) ^ (((topologicalKrullDim X).unbotD 0).toNat - i) *
-        (((topologicalKrullDim X).unbotD 0).toNat.choose i : ℤ)) • f.hilbertFunction M i := by
-  rw [degree, fwdDiff_iter_eq_sum_shift]
-  simp
 
 /-- On a `K`-scheme of dimension one, the degree with respect to `M` is the cohomological
 degree `χ(M) - χ(𝒪_X)` of `AlgebraicGeometry.Scheme.Modules.degree`. -/

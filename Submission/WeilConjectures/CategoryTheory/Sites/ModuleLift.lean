@@ -266,34 +266,4 @@ open AlgebraicGeometry CategoryTheory MonObj
 variable {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
   [IsCommMonObj R] (Λ : Type (u + 1)) [CommRing Λ] (φ : Λ →+* Γ R)
 
-noncomputable example : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
-    Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) :=
-  Sheaf.moduleLift (Mod.forget R) (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))
-
-example : (Sheaf.moduleLift (Λ := Λ) (Mod.forget R) (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))).Additive := inferInstance
-
-example : PreservesFiniteLimits (Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
-    (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))) := inferInstance
-
-example : PreservesFiniteColimits (Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
-    (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))) := inferInstance
-
-example : (Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
-    (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))).ReflectsIsomorphisms := inferInstance
-
-example : (Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
-    (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c))).Faithful := inferInstance
-
-example : Sheaf.moduleLift (Λ := Λ) (Mod.forget R)
-    (fun M ↦ (Mod.sectionActRingHom M).comp φ)
-    (fun f c ↦ Mod.sectionActRingHom_comp_hom f (φ c)) ⋙
-      sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) = Mod.forget R :=
-  Sheaf.moduleLift_comp_sheafCompose (Λ := Λ) (Mod.forget R) _ _
-
 end Example

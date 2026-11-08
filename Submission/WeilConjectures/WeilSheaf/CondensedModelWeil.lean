@@ -215,13 +215,6 @@ lemma toCondensedUpperStar_obj_carrier (F : ProEtaleWeilSheaf k₀ l X) :
         F.carrier :=
   rfl
 
-lemma toCondensedUpperStar_obj_str (F : ProEtaleWeilSheaf k₀ l X) :
-    ((toCondensedUpperStar k₀ l X).obj F).str =
-      (condensedUpperStarFrobeniusComparison k₀ l X).app F.carrier ≪≫
-        (adicSheafEquivCondensedMod l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.mapIso F.str :=
-  Endofunctor.IsoAlgebra.mapOfNatIso_obj_str _ F
-
 end ProEtaleWeilSheaf
 
 end AlgebraicGeometry

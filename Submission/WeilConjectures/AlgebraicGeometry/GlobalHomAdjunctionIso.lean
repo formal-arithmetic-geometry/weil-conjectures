@@ -7,15 +7,267 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
-public import Submission.WeilConjectures.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
+public import Submission.WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Adjunction.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedCategory
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Submission.WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+import Mathlib.Algebra.DirectSum.Module
+import Mathlib.Algebra.Category.ModuleCat.Products
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import Submission.WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Mathlib.CategoryTheory.Abelian.RightDerived
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.AlgebraicGeometry.QcqsCohomologyDirectSum
+import Submission.WeilConjectures.Topology.OpenModuleCohomology
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Submission.WeilConjectures.AlgebraicGeometry.HigherDirectImagePresheaf
+import Submission.WeilConjectures.AlgebraicGeometry.OpenRestrictionModuleCohomology
+import Submission.WeilConjectures.AlgebraicGeometry.HigherDirectImageResolutionNaturality
+import Mathlib.Topology.Sheaves.SheafCondition.Sites
+import Mathlib.AlgebraicGeometry.AffineScheme
+import Submission.WeilConjectures.AlgebraicGeometry.PQFCohomology
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.CategoryTheory.Filtration
+import Submission.WeilConjectures.CategoryTheory.CanonicalFiltration
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import Submission.WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
+import Submission.WeilConjectures.CategoryTheory.TruncationCouple
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import Submission.WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
+import Submission.WeilConjectures.CategoryTheory.TruncationTriangle
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
+import Submission.WeilConjectures.CategoryTheory.PBCFiltration
+import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
+import Submission.WeilConjectures.AlgebraicGeometry.Ample
+import Submission.WeilConjectures.CategoryTheory.ImageFiltration
+import Submission.WeilConjectures.CategoryTheory.HalfPlaneConvergence
+import Mathlib.Data.Int.Interval
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+import Submission.WeilConjectures.CategoryTheory.HalfPlaneDiagonalColimits
+import Submission.WeilConjectures.CategoryTheory.HalfPlaneWeakConvergence
+import Submission.WeilConjectures.CategoryTheory.DerivedCoupleExact
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Submission.WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.AlgebraicGeometry.Restrict
+import Submission.WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+import Submission.WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Submission.WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
+import Submission.WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Submission.WeilConjectures.Topology.RingedSpaceModuleCohomology
+import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Submission.WeilConjectures.AlgebraicGeometry.HigherDirectImageOpenRestriction
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Submission.WeilConjectures.Topology.OpenModuleDerivedSections
+import Mathlib.Topology.Sheaves.Abelian
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.CompactlyGenerated
+import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Mathlib.Topology.QuasiSeparated
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Mathlib.CategoryTheory.ObjectProperty.Retract
+import Submission.WeilConjectures.AlgebraicGeometry.PerfectAffineClassesSmall
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.CategoryTheory.Skeletal
+import Mathlib.Logic.Small.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Submission.WeilConjectures.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+import Mathlib.CategoryTheory.Abelian.CommSq
+import Mathlib.Algebra.Homology.HomologicalComplexBiprod
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import Submission.WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Submission.WeilConjectures.CategoryTheory.CompactObject
+import Mathlib.Algebra.Homology.Localization
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+import Mathlib.Algebra.Homology.HomotopyCategory
+import Mathlib.Algebra.Homology.Single
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
+import Mathlib.Algebra.DirectSum.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Submission.WeilConjectures.Algebra.Homology.KFlatResolution
+import Submission.WeilConjectures.Algebra.Homology.KFlat
+import Submission.WeilConjectures.Algebra.Homology.KFlatPullback
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRings
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Submission.WeilConjectures.AlgebraicGeometry.InverseImageTensorPullbackComparison
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Submission.WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import Submission.WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullback
+import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Submission.WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Submission.WeilConjectures.Algebra.Homology.KFlatStalkCriterion
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.CategoryTheory.Whiskering
+import Submission.WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensor
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
+import Submission.WeilConjectures.AlgebraicGeometry.TensorPullback
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+import Submission.WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Mathlib.CategoryTheory.Preadditive.LeftExact
+import Submission.WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
+import Mathlib.Algebra.Homology.Additive
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
+import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHom
+import Mathlib.CategoryTheory.Yoneda
+import Submission.WeilConjectures.Algebra.Homology.HomComplex
+import Submission.WeilConjectures.Algebra.Homology.HomComplexProjections
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
+import Submission.WeilConjectures.Algebra.Homology.InternalHomOverNaturality
+import Mathlib.CategoryTheory.MorphismProperty.Retract
+import Submission.WeilConjectures.RingTheory.FiniteProjectivePrimeLocalFree
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Submission.WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import Mathlib.Algebra.Homology.BifunctorShift
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
+import Mathlib.CategoryTheory.Localization.Monoidal.Functor
+import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Submission.WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
+import Mathlib.CategoryTheory.Monad.Adjunction
+import Submission.WeilConjectures.Algebra.Homology.OpenExtensionCounitStalk
+import Submission.WeilConjectures.Algebra.Homology.StalkTensorComplex
+import Submission.WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Submission.WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Mathlib.CategoryTheory.Linear.LinearFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.InternalHomOverEquiv
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Submission.WeilConjectures.AlgebraicGeometry.OpenModuleContractionTransport
+import Submission.WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHomModel
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import Submission.WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+import Submission.WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import Mathlib.Topology.Sheaves.Module
+import Submission.WeilConjectures.Algebra.Homology.ModuleRestrictionStalkComponents
+import Mathlib.Geometry.RingedSpace.Stalks
+import Mathlib.CategoryTheory.Localization.LocallySmall
+import Submission.WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+import Mathlib.CategoryTheory.Triangulated.Orthogonal
+import Mathlib.CategoryTheory.Triangulated.Functor
+import Mathlib.CategoryTheory.EssentiallySmall
+import Submission.WeilConjectures.CategoryTheory.BrownCohomologicalRepresentability
+import Submission.WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
+import Submission.WeilConjectures.CategoryTheory.CompactGenerationEquivalence
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Submission.WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Submission.WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-import Submission.WeilConjectures.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
-import Submission.WeilConjectures.AlgebraicGeometry.QCqsSheafRHomAdjunction
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
+import Mathlib.CategoryTheory.Comma.Arrow
+import Mathlib.CategoryTheory.Localization.Adjunction
+import Submission.WeilConjectures.AlgebraicGeometry.KFlatBifunctorIsoDescent
+import Mathlib.CategoryTheory.Localization.Prod
+import Mathlib.CategoryTheory.Localization.Equivalence
+import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedAdjoint
+import Mathlib.CategoryTheory.Adjunction.Mates
+import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import Mathlib.CategoryTheory.Retract
+import Mathlib.CategoryTheory.Triangulated.Yoneda
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Abelian.Exact
+import Submission.WeilConjectures.Algebra.Homology.LargeFilteredFreeResolution
+import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Submission.WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
-import Submission.WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
-import Submission.WeilConjectures.AlgebraicGeometry.DQCoheratorAdjunction
-import Submission.WeilConjectures.AlgebraicGeometry.InternalHomMateCounitTransport
+import Mathlib.CategoryTheory.Monoidal.Category
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -54,89 +306,6 @@ variable (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)
   (hy : ∀ (A A' L L' M M' : D) (a : A' ⟶ A) (b : L' ⟶ L) (d : M ⟶ M')
     (g : A ⟶ J.obj (op L, M)),
     ey A' L' M' (a ≫ g ≫ J.map (b.op, d)) = (a ⊗ₘ b) ≫ ey A L M g ≫ d)
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-include hx hy in
-/-- Transpose evaluation with fixed natural tensor-Hom bijections.
-Source: Stacks, Tag 08I3 (blueprint: lem-pc-global-hom-adjunction). -/
-private theorem internalHomMate_exists :
-    ∃ c : H ⋙ R ⟶ R.op.prod R ⋙ J,
-      ∀ (L M : C) (A : D) (α : A ⟶ R.obj (H.obj (op L, M))),
-        ey A (R.obj L) (R.obj M) (α ≫ c.app (op L, M)) =
-          p.homEquiv _ M (t.hom.app (A, R.obj L) ≫
-            (𝟙 _ ⊗ₘ p.counit.app L) ≫ ex _ L M ((p.homEquiv _ _).symm α)) := by
-  let c (L M : C) : R.obj (H.obj (op L, M)) ⟶ J.obj (op (R.obj L), R.obj M) :=
-    (ey _ _ _).symm (p.homEquiv _ M (t.hom.app (_, R.obj L) ≫
-      (𝟙 _ ⊗ₘ p.counit.app L) ≫ ex _ L M ((p.homEquiv _ _).symm (𝟙 _))))
-  have mate (L M : C) (A : D) (α : A ⟶ R.obj (H.obj (op L, M))) :
-      ey A (R.obj L) (R.obj M) (α ≫ c L M) =
-        p.homEquiv _ M (t.hom.app (A, R.obj L) ≫
-          (𝟙 _ ⊗ₘ p.counit.app L) ≫ ex _ L M ((p.homEquiv _ _).symm α)) := by
-    have h₁ := hy _ _ _ _ _ _ α (𝟙 (R.obj L)) (𝟙 (R.obj M)) (c L M)
-    change ey _ _ _ (α ≫ c L M ≫ J.map (𝟙 _)) = _ at h₁
-    simp only [CategoryTheory.Functor.map_id, Category.comp_id] at h₁
-    rw [h₁]
-    dsimp only [c]
-    rw [Equiv.apply_symm_apply, ← p.homEquiv_naturality_left]
-    congr 1
-    have h₂ := hx _ _ _ _ _ _ (F.map α) (𝟙 L) (𝟙 M)
-      ((p.homEquiv _ _).symm (𝟙 (R.obj (H.obj (op L, M)))))
-    change ex _ _ _ (F.map α ≫ _ ≫ H.map (𝟙 _)) = _ at h₂
-    simp only [CategoryTheory.Functor.map_id, Category.comp_id] at h₂
-    have hp := p.homEquiv_naturality_left_symm α (𝟙 (R.obj (H.obj (op L, M))))
-    simp only [Category.comp_id] at hp
-    rw [hp]
-    dsimp only [Functor.prod_obj] at *
-    rw [h₂]
-    have ht := t.hom.naturality (X := (A, R.obj L))
-      (Y := (R.obj (H.obj (op L, M)), R.obj L)) (α, 𝟙 (R.obj L))
-    dsimp at ht
-    simp only [CategoryTheory.Functor.map_id] at ht
-    rw [← Category.assoc, ht]
-    simp only [Category.assoc, MonoidalCategory.tensorHom_comp_tensorHom_assoc,
-      Category.id_comp, Category.comp_id]
-    congr 2
-    simp
-  refine ⟨{ app := fun Z ↦ c Z.1.unop Z.2, naturality := ?_ }, mate⟩
-  intro Z Z' g
-  obtain ⟨L, M⟩ := Z
-  obtain ⟨L', M'⟩ := Z'
-  obtain ⟨b, d⟩ := g
-  dsimp
-  apply (ey _ _ _).injective
-  rw [mate]
-  have hn := hy _ _ _ _ _ _ (𝟙 (R.obj (H.obj (L, M))))
-    (R.map b.unop) (R.map d) (c L.unop M)
-  simp only [Category.id_comp] at hn
-  change ey _ _ _ (c L.unop M ≫ J.map ((R.map b.unop).op, R.map d)) = _ at hn
-  rw [hn]
-  dsimp only [c]
-  rw [Equiv.apply_symm_apply]
-  rw [← p.homEquiv_naturality_right, ← p.homEquiv_naturality_left]
-  congr 1
-  have he := hx _ _ _ _ _ _ (𝟙 (F.obj (R.obj (H.obj (L, M))))) b.unop d
-    ((p.homEquiv _ _).symm (𝟙 (R.obj (H.obj (L, M)))))
-  simp only [Category.id_comp] at he
-  have hp := p.homEquiv_naturality_right_symm (𝟙 (R.obj (H.obj (L, M))))
-    (H.map (b, d))
-  simp only [Category.id_comp] at hp
-  rw [hp]
-  dsimp only [Functor.prod_obj] at *
-  simp only [Quiver.Hom.op_unop] at he
-  rw [he]
-  have ht := t.hom.naturality
-    (X := (R.obj (H.obj (L, M)), R.obj L'.unop))
-    (Y := (R.obj (H.obj (L, M)), R.obj L.unop))
-    (𝟙 _, R.map b.unop)
-  dsimp at ht
-  simp only [CategoryTheory.Functor.map_id] at ht
-  simp only [Category.assoc]
-  rw [reassoc_of% ht]
-  simp only [tensorHom_comp_tensorHom_assoc, Category.id_comp]
-  congr 2
-  exact congrArg (fun z ↦ (𝟙 (F.obj (R.obj (H.obj (L, M))))) ⊗ₘ z)
-    (p.counit_naturality b.unop).symm
-
 end InternalHomMate
 
 section TensorHomAdjunction
@@ -146,27 +315,6 @@ variable {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
   (h : ∀ (A A' L L' M M' : C) (a : A' ⟶ A) (b : L' ⟶ L) (d : M ⟶ M')
     (g : A ⟶ H.obj (op L, M)),
     e A' L' M' (a ≫ g ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A L M g ≫ d)
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-/-- Build the tensor-Hom adjunction from the pinned natural bijections.
-Source: Stacks, Tag 08DJ (blueprint: lem-pc-global-hom-adjunction). -/
-private def tensorAdjunctionCore (L : C) :
-    Adjunction.CoreHomEquiv (tensorRight L) ((Functor.curry.obj H).obj (op L)) where
-  homEquiv A M := (e A L M).symm
-  homEquiv_naturality_left_symm {A'} {A} {M} a g := by
-    change e A' L M (a ≫ g) = (a ▷ L) ≫ e A L M g
-    have h' := h _ _ _ _ _ _ a (𝟙 L) (𝟙 _) g
-    change e _ _ _ (a ≫ g ≫ H.map (𝟙 _)) = _ at h'
-    erw [H.map_id, Category.comp_id] at h'
-    erw [Category.comp_id] at h'
-    simpa only [tensorHom_id] using h'
-  homEquiv_naturality_right g d := by
-    apply (e _ _ _).injective
-    erw [Equiv.apply_symm_apply]
-    have h' := h _ _ _ _ _ _ (𝟙 _) (𝟙 L) d ((e _ _ _).symm g)
-    simp only [Category.id_comp, id_tensorHom_id, Equiv.apply_symm_apply] at h'
-    exact h'.symm
-
 end TensorHomAdjunction
 
 
@@ -178,104 +326,6 @@ variable {C : Type uC} {D : Type uD} {E : Type uE} {B : Type uB}
 
 end LerayNaturality
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-/-- Derived Leray from acyclicity and an exact change of scalar category.
-Source: Stacks, Tag 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
-private theorem lerayCore
-    {C D B E : Type*} [Category* C] [Category* D] [Category* B] [Category* E]
-    [Abelian C] [Abelian D] [Abelian B] [Abelian E]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    [HasDerivedCategory B] [HasDerivedCategory E]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
-    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ B) (S : B ⥤ E)
-    [F.Additive] [G.Additive] [H.Additive] [S.Additive]
-    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
-    (e : F ⋙ G ≅ H ⋙ S)
-    (h : ∀ (I : CochainComplex C ℤ) [I.IsKInjective],
-      IsIso (G.rightDerivedFunctorUnit.app
-        ((F.mapHomotopyCategory (.up ℤ)).obj
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj I)))) :
-    ∃ c : F.rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅
-        H.rightDerivedFunctor ⋙ S.mapDerivedCategory,
-      ∀ K : HomotopyCategory C (.up ℤ),
-        G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-            G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app K) ≫
-            c.hom.app (DerivedCategory.Qh.obj K) =
-          DerivedCategory.Qh.map
-            ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K ≫
-              (Functor.mapHomotopyCategoryCompIso e.symm (.up ℤ)).inv.app K) ≫
-            S.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj K) ≫
-            S.mapDerivedCategory.map (H.rightDerivedFunctorUnit.app K) := by
-  let α : (F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
-      DerivedCategory.Qh ⋙ (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) :=
-    Functor.whiskerRight
-        (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv
-          DerivedCategory.Qh ≫
-      (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft (F.mapHomotopyCategory (.up ℤ)) G.rightDerivedFunctorUnit ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight F.rightDerivedFunctorUnit G.rightDerivedFunctor ≫
-      (Functor.associator _ _ _).hom
-  let β : (F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
-      DerivedCategory.Qh ⋙ (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) :=
-    Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso e.symm (.up ℤ)).inv
-        DerivedCategory.Qh ≫
-      (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft (H.mapHomotopyCategory (.up ℤ))
-        S.mapDerivedCategoryFactorsh.inv ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight H.rightDerivedFunctorUnit S.mapDerivedCategory ≫
-      (Functor.associator _ _ _).hom
-  have hα : (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).IsRightDerivedFunctor α
-      (HomotopyCategory.quasiIso C (.up ℤ)) := by
-    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
-      ((F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso
-        _ (fun J ↦ ?_)
-    obtain ⟨I, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
-    change IsIso (α.app ((HomotopyCategory.quotient C (.up ℤ)).obj I))
-    have h₁ : IsIso (F.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj I)) := inferInstance
-    have h₂ := h I
-    dsimp [α]
-    infer_instance
-  have hβ : (H.rightDerivedFunctor ⋙ S.mapDerivedCategory).IsRightDerivedFunctor β
-      (HomotopyCategory.quasiIso C (.up ℤ)) := by
-    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
-      ((F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso
-        _ (fun J ↦ ?_)
-    obtain ⟨I, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
-    change IsIso (β.app ((HomotopyCategory.quotient C (.up ℤ)).obj I))
-    have h₁ : IsIso (H.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj I)) := inferInstance
-    dsimp [β]
-    infer_instance
-  let δ := (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).rightDerivedDesc α
-    (HomotopyCategory.quasiIso C (.up ℤ))
-    (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) β
-  have : IsIso δ :=
-    (Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc
-      (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) α
-      (HomotopyCategory.quasiIso C (.up ℤ))
-      (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) β).mp hβ
-  refine ⟨asIso δ, ?_⟩
-  intro K
-  have hd := Functor.rightDerived_fac_app
-    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) α
-    (HomotopyCategory.quasiIso C (.up ℤ))
-    (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) β K
-  simp only [α, β, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id] at hd
-  have hd' := congrArg
-    (fun z ↦ DerivedCategory.Qh.map
-      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) ≫ z) hd
-  simp only [Category.assoc] at hd'
-  rw [← Category.assoc, ← DerivedCategory.Qh.map_comp,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hd'
-  simpa only [δ, α, β, asIso_hom,
-    CategoryTheory.Functor.map_comp, Category.assoc] using hd'
-
 
 /-- Exact restriction along the map on global functions.
 Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
@@ -285,75 +335,6 @@ def schemeGlobalScalarRestriction
   (ModuleCat.restrictScalars.{u}
     (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
     (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom).mapDerivedCategory
-
-/-- The normalized Leray comparison with independent module and sheaf localization universes.
-Source: Stacks Tags 0D5T and 0B6I. Its derived-unit equation determines the comparison.
-(blueprint: lem-sc-mixed-global-sections-direct-image-iso). -/
-theorem exists_mixedGlobalSectionsDirectImageIso
-    [∀ Z : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ∃ (c₀ : RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
-        RingedSpace.globalSectionsFunctor Y.toRingedSpace ≅
-      RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
-        ModuleCat.restrictScalars.{u}
-          (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
-          (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom)
-      (c : schemeDerivedDirectImage f ⋙ schemeDerivedGlobalSections Y ≅
-        schemeDerivedGlobalSections X ⋙ schemeGlobalScalarRestriction f),
-      (∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
-        (x : (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
-          RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj F),
-        (c₀.hom.app F).hom x = x) ∧
-      (∀ K : HomotopyCategory
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),
-        (RingedSpace.globalSectionsFunctor Y.toRingedSpace).rightDerivedFunctorUnit.app
-            (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory
-              (ComplexShape.up ℤ)).obj K) ≫
-          (schemeDerivedGlobalSections Y).map
-            ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) ≫
-          c.hom.app (DerivedCategory.Qh.obj K) =
-        (DerivedCategory.Qh
-          (C := ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))).map
-          ((Functor.mapHomotopyCategoryCompIso
-            (Iso.refl (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
-              RingedSpace.globalSectionsFunctor Y.toRingedSpace))
-            (ComplexShape.up ℤ)).hom.app K ≫
-            (Functor.mapHomotopyCategoryCompIso c₀.symm
-              (ComplexShape.up ℤ)).inv.app K) ≫
-          (ModuleCat.restrictScalars.{u}
-            (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
-            (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤))
-            f.appTop.hom).mapDerivedCategoryFactorsh.inv.app
-              (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyCategory
-                (ComplexShape.up ℤ)).obj K) ≫
-          (schemeGlobalScalarRestriction f).map
-            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K))
-      := by
-  let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-  let G := RingedSpace.globalSectionsFunctor Y.toRingedSpace
-  let H := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  let S := ModuleCat.restrictScalars.{u}
-    (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
-    (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom
-  let c₀ : F ⋙ G ≅ H ⋙ S := Iso.refl _
-  obtain ⟨c, hc⟩ := lerayCore F G H S c₀
-    (fun I ↦ isIso_directImage_globalSections_unit_on_kInjective f I)
-  refine ⟨c₀, c, ?_, hc⟩
-  intro M x
-  rfl
-
-/-- The canonical derived Leray isomorphism, chosen with its unit compatibility.
-Source: Stacks, Tags 0B6I and 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
-def mixedGlobalSectionsDirectImageIso
-    [∀ Z : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    schemeDerivedDirectImage f ⋙ schemeDerivedGlobalSections Y ≅
-      schemeDerivedGlobalSections X ⋙ schemeGlobalScalarRestriction f :=
-  Classical.choose (Classical.choose_spec (exists_mixedGlobalSectionsDirectImageIso f))
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -406,71 +387,7 @@ def mixedHomTensorPullbackIso {T S : Scheme.{u}} (h : T ⟶ S) :
       (derivedPullback h).prod (derivedPullback h) ⋙ tensor (schemeDerivedCategory T) :=
   Classical.choose (exists_mixedHomTensorPullbackIso h)
 
-omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- Naturality of the fixed family, isolated from its representative equation.
-Source: Stacks, Tag 08DJ (blueprint: lem-pc-global-hom-adjunction). -/
-private theorem schemeHomTensorHom_naturality (X : Scheme.{u})
-    (A A' L L' M M' : schemeDerivedCategory X)
-    (a : A' ⟶ A) (b : L' ⟶ L) (d : M ⟶ M')
-    (g : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op L, M)) :
-    schemeDerivedTensorHomEquiv X A' L' M'
-        (a ≫ g ≫ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map (b.op, d)) =
-      (a ⊗ₘ b) ≫ schemeDerivedTensorHomEquiv X A L M g ≫ d :=
-  (Classical.choose_spec (exists_canonicalDerivedTensorHom X)).1 A A' L L' M M' a b d g
-
 attribute [local irreducible] schemeHomPullbackAdjunction mixedHomTensorPullbackIso
 
-omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
-/-- Existence of the evaluation-mate direct-image internal Hom comparison.
-Fixed-data form of the existing `exists_derivedDirectImage_internalHom_comparison`,
-using the pinned tensor-Hom family.
-All adjunction and tensor data here are fixed, shared with the pullback comparison.
-Source: Stacks, Tags 08I3 and 0B6I (blueprint: lem-pc-global-hom-adjunction).
-Proof: for every test object A transpose a map into Rf_* internal Hom by the
-pullback adjunction and tensor-Hom bijection. Pull back A tensor Rf_*L, apply the
-counit at L, then evaluation. Transpose back. This is natural in A, so Yoneda
-gives the specified map, and naturality in both Hom entries gives the transformation. -/
-theorem exists_schemeHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ∃ c : derivedInternalHom (Opens.grothendieckTopology X) X.sheaf ⋙
-        schemeDerivedDirectImage f ⟶
-      (schemeDerivedDirectImage f).op.prod (schemeDerivedDirectImage f) ⋙
-        derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf,
-      ∀ (L M : schemeDerivedCategory X) (A : schemeDerivedCategory Y)
-        (α : A ⟶ (schemeDerivedDirectImage f).obj
-          ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op L, M))),
-        (schemeDerivedTensorHomEquiv Y) A
-          ((schemeDerivedDirectImage f).obj L) ((schemeDerivedDirectImage f).obj M)
-            (α ≫ c.app (op L, M)) =
-          (schemeHomPullbackAdjunction f).homEquiv (A ⊗ (schemeDerivedDirectImage f).obj L) M
-            ((mixedHomTensorPullbackIso f).hom.app (A, (schemeDerivedDirectImage f).obj L) ≫
-              (𝟙 ((derivedPullback f).obj A) ⊗ₘ
-                (schemeHomPullbackAdjunction f).counit.app L) ≫
-              (schemeDerivedTensorHomEquiv X)
-                ((derivedPullback f).obj A) L M
-                  (((schemeHomPullbackAdjunction f).homEquiv A
-                    ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj
-                      (op L, M))).symm α)) := by
-  exact @internalHomMate_exists (schemeDerivedCategory X) (schemeDerivedCategory Y)
-    inferInstance inferInstance (schemeDerivedTensorMonoidal X) (schemeDerivedTensorMonoidal Y)
-    (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)
-    (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf)
-    (derivedPullback f) (schemeDerivedDirectImage f)
-    (schemeHomPullbackAdjunction f) (mixedHomTensorPullbackIso f)
-    (schemeDerivedTensorHomEquiv X) (schemeDerivedTensorHomEquiv Y)
-    (schemeHomTensorHom_naturality X) (schemeHomTensorHom_naturality Y)
-
-
-/-- The canonical global direct-image Hom comparison: Leray followed by the
-internal-Hom comparison defined by the evaluation mate equation.
-Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
-def schemeGlobalHomDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (P Q : schemeDerivedCategory X) :
-    (schemeGlobalScalarRestriction f).obj ((schemeGlobalDerivedHom X).obj (op P, Q)) ⟶
-      (schemeGlobalDerivedHom Y).obj
-        (op ((schemeDerivedDirectImage f).obj P), (schemeDerivedDirectImage f).obj Q) :=
-  (mixedGlobalSectionsDirectImageIso f).inv.app
-      ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op P, Q)) ≫
-    (schemeDerivedGlobalSections Y).map
-      ((Classical.choose (exists_schemeHomDirectImageComparison f)).app (op P, Q))
 
 end AlgebraicGeometry

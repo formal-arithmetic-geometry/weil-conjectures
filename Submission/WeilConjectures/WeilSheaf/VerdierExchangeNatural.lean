@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.WeilSheaf.DerivedHom
-public import Submission.WeilConjectures.WeilSheaf.VerdierExchangeYoneda
+public import Submission.WeilConjectures.WeilSheaf.VerdierExchange
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Functor.FullyFaithful
 public import Submission.WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import Submission.WeilConjectures.WeilSheaf.Localization
 

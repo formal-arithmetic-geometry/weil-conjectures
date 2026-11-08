@@ -156,34 +156,4 @@ lemma isIso_nsmul_id_padicSubfield (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteInter
     (isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr hn)) G
 
 
-/-- A natural number prime to `ℓ` is a unit of the ring of integers `𝒪_E` of a finite extension
-`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`: it has absolute value `1`. -/
-lemma isUnit_natCast_integers (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {n : ℕ}
-    (hn : ℓ.Coprime n) : IsUnit (n : integers ℓ E.1) := by
-  have h1 : ‖algebraMap E.1 (PadicAlgCl ℓ) (n : E.1)‖₊ = 1 := by
-    rw [map_natCast, ← NNReal.coe_inj, coe_nnnorm, NNReal.coe_one,
-      show ((n : PadicAlgCl ℓ)) = ((n : ℚ_[ℓ]) : PadicAlgCl ℓ) by simp, PadicAlgCl.norm_extends,
-      Padic.norm_natCast_eq_one_iff]
-    exact hn
-  have hne : (n : E.1) ≠ 0 := by
-    intro h
-    rw [h, map_zero, nnnorm_zero] at h1
-    exact zero_ne_one h1
-  refine ⟨⟨n, ⟨(n : E.1)⁻¹, ?_⟩, ?_, ?_⟩, rfl⟩
-  · change ‖algebraMap E.1 (PadicAlgCl ℓ) (n : E.1)⁻¹‖₊ ≤ 1
-    rw [map_inv₀, nnnorm_inv, h1, inv_one]
-  · exact Subtype.ext (mul_inv_cancel₀ hne)
-  · exact Subtype.ext (inv_mul_cancel₀ hne)
-
-/-- Multiplication by a natural number prime to `ℓ` is invertible on `D(Mod_{𝒪_E,X})` for the
-ring of integers `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
-lemma isIso_nsmul_id_padicIntegers (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
-    {X : Scheme.{u}} {n : ℕ} (hn : ℓ.Coprime n)
-    (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
-    IsIso (n • 𝟙 G) :=
-  letI := normedFieldOfAlgebra ℓ E.1
-  isIso_nsmul_id_of_isUnit _ (Profinite.continuousMapConstRingHom.{u} (integers ℓ E.1))
-    (isUnit_natCast_integers ℓ E hn) G
-
 end AlgebraicGeometry.ProEtale.CondensedRing

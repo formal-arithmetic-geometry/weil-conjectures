@@ -220,15 +220,6 @@ noncomputable def boundedConstructibleUpperShriekExtendScalars :
     (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv
 
-/-- The exchange for `f^!` as the mate of a two-square. -/
-lemma boundedConstructibleUpperShriekExtendScalars_eq_mateEquiv :
-    boundedConstructibleUpperShriekExtendScalars ℓ E f =
-      (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 f)
-        (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-        (TwoSquare.mk _ _ _ _
-          (boundedConstructibleLowerShriekExtendScalarsIso ℓ E f).inv)).natTrans :=
-  rfl
-
 /-- **The exchange for `f^!` is an isomorphism** for `𝒪_E ⟶ E` (blueprint
 `det-prop-scalar-six-exceptional`): the extension of scalars is a rationalization on both sides,
 and `β` is the mate of the isomorphism (Shriek). -/

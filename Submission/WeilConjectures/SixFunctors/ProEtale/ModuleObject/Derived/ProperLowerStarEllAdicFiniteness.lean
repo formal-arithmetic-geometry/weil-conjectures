@@ -108,22 +108,6 @@ lemma boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueFieldFi
   boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField ℓ E p (hp E) K₀.obj
     K₀.property
 
-/-- Blueprint `det-thm-sfb-proper-base-change-rational` (1), from the residue field input: for a
-finite extension `E` of `ℚ_ℓ`, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧`. -/
-theorem boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_residueField
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (hp : ResidueFieldFiniteness ℓ p)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Z)))
-    (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) := by
-  have : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType p
-  obtain ⟨E', e, _⟩ := Profinite.exists_continuousMapRingObj_iso.{u} ℓ E
-  exact boundedConstructible_rightDerivedLowerStar_of_iso e p
-    (fun K hK ↦ boundedConstructible_rightDerivedLowerStar_obj_continuousMapRingObj_of_padicIntegers
-      ℓ p E' (boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueFieldFiniteness
-        ℓ p hp E') ⟨K, hK⟩) K hK
-
 /-- Blueprint `sk-thm-sfb-proper-base-change` for `ℚ̄_ℓ`, from the residue field input: `Rp_*` maps
 `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_padicAlgClRingObj_of_residueField
@@ -156,43 +140,5 @@ variable {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)] (aY : Y ⟶ Spec (.o
 include aY
 
 omit [IsNoetherian Y]
-
-/-- Blueprint `det-thm-sfb-proper-base-change-integral` (1): for `p : Z ⟶ Y` proper with `Y` of
-finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into
-`Dᵇc(Y)⟦𝒪_E⟧`. -/
-theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicIntegersRingObj_of_finiteType
-    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
-    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) Z)))
-    (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj K) :=
-  have := isNoetherian_of_locallyOfFiniteType aY
-  boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField ℓ p E
-    (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
-
-/-- Blueprint `det-thm-sfb-proper-base-change-rational` (1): for `p : Z ⟶ Y` proper with `Y` of
-finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into
-`Dᵇc(Y)⟦E⟧`. -/
-theorem boundedConstructible_rightDerivedLowerStar_of_isProper_continuousMapRingObj_of_finiteType
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Z)))
-    (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) :=
-  have := isNoetherian_of_locallyOfFiniteType aY
-  boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_residueField ℓ p E
-    (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
-
-/-- Blueprint `sk-thm-sfb-proper-base-change`: for `p : Z ⟶ Y` proper with `Y` of finite type over
-a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
-theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicAlgClRingObj_of_finiteType
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Z)))
-    (hK : boundedConstructible _ K) :
-    boundedConstructible _ (R((p)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧).obj K) :=
-  have := isNoetherian_of_locallyOfFiniteType aY
-  boundedConstructible_rightDerivedLowerStar_padicAlgClRingObj_of_residueField ℓ p
-    (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -11,7 +11,6 @@ public import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohom
 
 public import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
-public import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtension
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 import Submission.WeilConjectures.Algebra.Homology.KFlatResolution
@@ -161,108 +160,6 @@ def tensorMap (z : X') :
   letI := rightAlgebra f f' g g' sq z
   Classical.choose (exists_tensorMap f f' g g' sq z)
 
-/-- The original representative's stalk complex, using the shared module stalk functor.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-abbrev stalkComplex (z : X')
-    (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
-  ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).mapHomologicalComplex
-    (.up ℤ)).obj P
-
-/-- The existing base-derived tensor cohomology model at a point of this square.
-The R-, A-, B- and tensor-algebra structures are the actual scheme stalk maps;
-the model fixes the localized comparison by its derived counit equations.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-def cohomologyModel (z : X')
-    (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
-  letI := leftAlgebra f g' z
-  letI := rightAlgebra f f' g g' sq z
-  letI := (tensorMap f f' g g' sq z).toAlgebra
-  letI := HasDerivedCategory.standard (ModuleCat.{uSC} (R f g' z))
-  letI := HasDerivedCategory.standard (ModuleCat.{uSC} (B f' z))
-  ModuleCat.baseDerivedTensorCohomologyModel (R f g' z) (A g' z) (B f' z)
-    (stalkComplex g' z P) (C z)
-
-/-- Ordinary scalar extension of the stalk complex along A -> A tensor-over-R B -> C.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-def tensorComplex (z : X')
-    (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :=
-  letI := leftAlgebra f g' z
-  letI := rightAlgebra f f' g g' sq z
-  ((ModuleCat.extendScalars ((tensorMap f f' g g' sq z).comp
-    (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomologicalComplex
-      (.up ℤ)).obj (stalkComplex g' z P)
-
-/-- Existence of the canonical degreewise pullback-stalk identification.
-Proof: the tensorMap restriction equation identifies its A-to-C map with the
-stalk map of g'. Apply the existing natural pullback-stalk isomorphism in every
-degree. Its naturality for each differential shows that these components give a
-chain isomorphism, whose components are precisely the displayed maps.
-Source: Stacks Project, Tag 0098 and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-theorem exists_tensorStalkIso (z : X')
-    (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :
-    letI := leftAlgebra f g' z
-    letI := rightAlgebra f f' g g' sq z
-    ∃ e : tensorComplex f f' g g' sq z P ≅
-      ((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
-        (.up ℤ)).obj (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ,
-      ∀ i : ℤ, e.hom.f i =
-        eqToHom (congrArg (fun a : A g' z →+* C z =>
-          (ModuleCat.extendScalars a).obj
-            ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).obj (P.X i)))
-              (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1) ≫
-          (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-            (P.X i) := by
-  let _ := leftAlgebra f g' z
-  let _ := rightAlgebra f f' g g' sq z
-  have h (a : A g' z →+* C z) (ha : a = (g'.stalkMap z).hom) :
-      ∃ e : ((ModuleCat.extendScalars a).mapHomologicalComplex (.up ℤ)).obj
-          (stalkComplex g' z P) ≅
-        ((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
-          (.up ℤ)).obj
-          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P),
-        ∀ i : ℤ, e.hom.f i =
-          eqToHom (congrArg (fun b : A g' z →+* C z =>
-            (ModuleCat.extendScalars b).obj
-              ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).obj (P.X i))) ha) ≫
-            (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
-              (P.X i) := by
-    subst a
-    have : (ModuleCat.extendScalars.{uSC, uSC, uSC} (g'.stalkMap z).hom).Additive :=
-      ModuleCat.baseDerivedTensor_extendScalars_additive _
-    -- Pin zero-preservation at the universe of the stalk modules.
-    have hs0 : (RingedSpace.moduleStalkFunctor X.toRingedSpace
-        (g' z)).PreservesZeroMorphisms := inferInstance
-    have he0 : (ModuleCat.extendScalars.{uSC, uSC, uSC}
-        (g'.stalkMap z).hom).PreservesZeroMorphisms := inferInstance
-    have hc0 : (RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z) ⋙
-        ModuleCat.extendScalars.{uSC, uSC, uSC}
-          (g'.stalkMap z).hom).PreservesZeroMorphisms := inferInstance
-    have : (Scheme.Modules.tensorPullback g').Additive :=
-      tensorPullbackAdditive.{uSC, wSC} g'
-    have hp0 : (Scheme.Modules.tensorPullback g').PreservesZeroMorphisms := inferInstance
-    have ht0 : (RingedSpace.moduleStalkFunctor X'.toRingedSpace
-        z).PreservesZeroMorphisms := inferInstance
-    have hd0 : (Scheme.Modules.tensorPullback g' ⋙
-        RingedSpace.moduleStalkFunctor X'.toRingedSpace z).PreservesZeroMorphisms :=
-      inferInstance
-    let e := Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)
-    exact ⟨(NatIso.mapHomologicalComplex e.symm (.up ℤ)).app P, fun _ => by simp [e]⟩
-  exact h _ (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1
-
-/-- The canonical pullback-stalk chain isomorphism specified degreewise above.
-Source: Stacks Project, Tag 0098 and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-def tensorStalkIso (z : X')
-    (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ) :
-    tensorComplex f f' g g' sq z P ≅
-      ((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
-        (.up ℤ)).obj (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) :=
-  Classical.choose (exists_tensorStalkIso f f' g g' sq z P)
-
 /-- K-flat coordinates for the given derived morphism. P represents K, N represents
 K', and t represents phi through the specified left-derived counit and the two
 representative isomorphisms. No arbitrary stalk comparison is included.
@@ -363,38 +260,5 @@ theorem nonempty_coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCa
   rw [ht]
   simp only [cast_eq, q, Category.assoc, Iso.inv_hom_id, Category.comp_id,
     IsIso.hom_inv_id_assoc]
-
-/-- The canonical map H^i(K_x tensor-derived-over-R B) tensor-over-(A tensor-over-R B) C
--> H^i(K'_z), expressed in given K-flat coordinates c for phi.
-It is the existing localized tensor comparison followed by the canonical
-pullback-stalk identification and the stalk of c.t. The target H^i(N_z) identifies
-canonically with H^i(K')_z through c.e' and exactness of stalks. Postcomposing by
-that identification preserves and reflects invertibility. The represents equation
-of c ensures this is the map induced by the given phi, rather than a free comparison.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-def stalkComparison {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
-    {φ : (derivedPullback g').obj K ⟶ K'} (c : Coordinates g' K K' φ) (z : X') (i : ℤ) :=
-  letI := leftAlgebra f g' z
-  letI := rightAlgebra f f' g g' sq z
-  letI := (tensorMap f f' g g' sq z).toAlgebra
-  letI := HasDerivedCategory.standard (ModuleCat.{uSC} (R f g' z))
-  letI := HasDerivedCategory.standard (ModuleCat.{uSC} (B f' z))
-  (cohomologyModel f f' g g' sq z c.P).localizedComparison i ≫
-    HomologicalComplex.homologyMap (tensorStalkIso f f' g g' sq z c.P).hom i ≫
-    HomologicalComplex.homologyMap
-      (((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex
-        (.up ℤ)).map c.t) i
-
-/-- The single-complex stalk condition (equation-bc of Tag 0DJ8 an isomorphism for
-every z and i). Invertibility of the comparison does not depend on the K-flat
-coordinates, so it is required for all of them; they exist by `nonempty_coordinates`,
-so the condition is not vacuous. No coordinate system is chosen.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
-(blueprint: def-pc-single-complex-base-change-stalk-condition). -/
-def StalkCondition (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
-    (φ : (derivedPullback g').obj K ⟶ K') : Prop :=
-  ∀ (c : Coordinates g' K K' φ) (z : X') (i : ℤ),
-    IsIso (stalkComparison f f' g g' sq c z i)
 
 end AlgebraicGeometry.SingleComplexBaseChange

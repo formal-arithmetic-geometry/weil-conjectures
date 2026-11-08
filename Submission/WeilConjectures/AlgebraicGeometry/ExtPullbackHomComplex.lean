@@ -10,7 +10,9 @@ public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Topolo
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Submission.WeilConjectures.CategoryTheory.ExtExactFunctorCocycle
-import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.Algebra.Category.Grp.AB
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

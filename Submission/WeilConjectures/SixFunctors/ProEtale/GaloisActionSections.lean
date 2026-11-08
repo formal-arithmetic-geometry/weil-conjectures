@@ -189,11 +189,6 @@ noncomputable def baseChangeTransport {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y) (g : 
     refine MorphismProperty.Over.Hom.ext ?_
     apply pullback.hom_ext <;> simp
 
-/-- For `s ≫ g = g`, `baseChangeTransport` is the action `ProEtale.baseChangeAction`. -/
-lemma baseChangeTransport_self {X Y : Scheme.{u}} (s : Y ⟶ Y) (g : Y ⟶ X) [WeaklyEtale g]
-    (hs : s ≫ g = g) : baseChangeTransport s g hs = baseChangeAction g s hs :=
-  rfl
-
 set_option linter.flexible false in
 -- the components of the comparison are only reached after normalising with `simp`
 /-- The transpose of the composition isomorphism of base changes is the comparison

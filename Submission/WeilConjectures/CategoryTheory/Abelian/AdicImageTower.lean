@@ -86,11 +86,6 @@ of a tower `H`. -/
 noncomputable def adicImageTower : ℕᵒᵖ ⥤ C :=
   H.adicImageTowerArrow ℓ c ⋙ im
 
-/-- The `m`-th term of the `ℓ`-adic image tower is the image of `ψₘ`. -/
-lemma adicImageTower_obj (m : ℕ) :
-    (H.adicImageTower ℓ c).obj (op m) = image (H.adicImageTowerMap ℓ c m) :=
-  rfl
-
 /-- The epimorphism `H_{m+2c} ⟶ G'ₘ` onto the `m`-th term of the `ℓ`-adic image tower. -/
 noncomputable def adicImageTowerπ (m : ℕ) :
     H.obj (op (m + c + c)) ⟶ (H.adicImageTower ℓ c).obj (op m) :=
@@ -165,23 +160,6 @@ section AdicTowerStructure
 
 variable {D : Type*} [Category D] [Abelian D] {G : ℕᵒᵖ ⥤ D} (A : AdicTowerStructure G ℓ)
   (T : D ⥤ C) [T.Additive]
-
-include A in
-/-- `ℓⁿ` kills `T Gₙ` for an `ℓ`-adic tower `G` and an additive functor `T`. -/
-lemma pow_smul_id_eq_zero_of_adicTowerStructure (n : ℕ) :
-    ℓ ^ n • 𝟙 ((G ⋙ T).obj (op n)) = 0 := by
-  rw [Functor.comp_obj, ← T.map_id, ← T.map_nsmul, A.pow_smul_id_eq_zero, T.map_zero]
-
-include A in
-/-- **The cokernel of `G'ₘ ⟶ T G_{m+c}` is killed by `ℓ²ᶜ`** for the `ℓ`-adic image tower of
-`T G`, `G` an `ℓ`-adic tower and `T` an additive functor: `ℓᶜ : T Gₙ ⟶ T Gₙ` factors through
-the transition map `T G_{n+c} ⟶ T Gₙ` by `T ιₙ꜀`. -/
-lemma pow_smul_cokernel_π_adicImageTowerι_eq_zero_of_adicTowerStructure (m : ℕ) :
-    ℓ ^ (c + c) • cokernel.π ((G ⋙ T).adicImageTowerι ℓ c m) = 0 :=
-  (G ⋙ T).pow_smul_cokernel_π_adicImageTowerι_eq_zero ℓ c (fun n ↦ T.map (A.ι n c))
-    (fun n ↦ by
-      rw [Functor.comp_map, ← T.map_comp, A.ι_comp_map, T.map_nsmul, T.map_id]
-      rfl) m
 
 end AdicTowerStructure
 

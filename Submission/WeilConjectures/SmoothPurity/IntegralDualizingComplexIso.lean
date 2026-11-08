@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 public import Submission.WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import Submission.WeilConjectures.EtaleCohomology.TateTwist.FiniteEndomorphisms
 public import Submission.WeilConjectures.EtaleCohomology.TateTwist.Normalized

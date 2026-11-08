@@ -88,10 +88,6 @@ noncomputable def curvePullback : WeilSheaf k₀ l X ⥤ WeilSheaf L l Y where
     (Algebra.Hom.ext ((j)^*ᵃ[l].map_comp _ _)))
 
 
-lemma curvePullback_obj (F : WeilSheaf k₀ l X) :
-    (curvePullback j hj).obj F = ⟨(ProEtaleWeilSheaf.equivariantPullback _ j hj).obj
-      (F.powIsoAlgebra N), F.isAdicConstructibleSheaf_carrier.upperStar j⟩ :=
-  rfl
 @[simp]
 lemma curvePullback_obj_obj_carrier (F : WeilSheaf k₀ l X) :
     ((curvePullback j hj).obj F).obj.carrier = (j)^*ᵃ[l].obj F.obj.carrier :=

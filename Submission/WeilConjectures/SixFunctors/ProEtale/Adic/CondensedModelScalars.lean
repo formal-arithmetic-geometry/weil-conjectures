@@ -158,48 +158,6 @@ namespace AdicSheaf
 
 variable {l X}
 
-/-- The action of a global section `σ` of `forgetAb ℚ̄_ℓ,X` on a module object `N` over it, on
-the sections over `U`: the action of the value of `σ` over `U`. -/
-lemma globalSmul_hom_app (σ : 𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1}) ⟶
-      (weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X))
-    (N : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      ((weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X)))
-    (U : X.ProEtᵒᵖ) (x : N.X.obj.obj U) :
-    (Mod.globalSmul σ N).hom.app U x =
-      abSectionAct N ((ε (sheafToPresheaf (ProEt.topology X) Ab.{u + 1}) ≫ σ.hom).app U
-        (ULift.up 1)) x := by
-  have h : (sheafToPresheaf (ProEt.topology X) Ab.{u + 1}).map (Mod.globalSmul σ N) =
-      (λ_ _).inv ≫ (ε (sheafToPresheaf (ProEt.topology X) Ab.{u + 1}) ≫ σ.hom) ▷ _ ≫
-        Functor.LaxMonoidal.μ (sheafToPresheaf (ProEt.topology X) Ab.{u + 1})
-          ((weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X)) N.X ≫
-          (sheafToPresheaf (ProEt.topology X) Ab.{u + 1}).map (Mod.act N.X) := by
-    rw [Mod.globalSmul, Functor.map_comp, Functor.map_comp,
-      ← Functor.LaxMonoidal.left_unitality_inv, comp_whiskerRight, Category.assoc,
-      Category.assoc, Category.assoc]
-    congr 2
-    exact (Functor.LaxMonoidal.μ_natural_left_assoc _ σ N.X _).symm
-  exact congrArg (fun f ↦ f.app U x) h
-
 end AdicSheaf
-
-/-- **The constants act in the same way in the two models**: for an `ℓ`-adic sheaf `A` on `X`
-and a global section `m` of the underlying abelian sheaf of the corresponding module object
-`E A`, the action of the constant global section `p_X^* c` of `Λ_X` on `m` corresponds, on the
-sections over `X`, to the scalar multiplication by `c` of the old model. -/
-theorem unitHomEval_comp_globalSmul_constRingHom (A : AdicSheaf l X)
-    (m : 𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1}) ⟶
-      ((adicSheafEquivCondensedMod l X).functor.obj A).X) (c : PadicAlgCl l) :
-    Sheaf.unitHomEval (J := ProEt.topology X) (ProEt.mk (𝟙 X))
-        (m ≫ Mod.globalSmul (CondensedRing.constRingHom (Profinite.padicAlgClRingObj l)
-          (Profinite.PadicAlgCl.constRingHom l) X c).hom
-          ((adicSheafEquivCondensedMod l X).functor.obj A)) =
-      (ULift.up c : ULift.{u + 1} (PadicAlgCl l)) •
-        @id (A.X.obj.obj (op (ProEt.mk (𝟙 X))))
-          (Sheaf.unitHomEval (J := ProEt.topology X) (ProEt.mk (𝟙 X)) m) := by
-  refine (Sheaf.unitHomEval_comp (J := ProEt.topology X) _ _ _).trans ?_
-  erw [Mod.globalSmul_comap, AdicSheaf.globalSmul_hom_app]
-  exact (congrArg (fun a ↦ AdicSheaf.abSectionAct _ a _)
-    (unitHomEval_constRingHom_comp_condensedRingObjIsoForgetAb_hom l X c)).trans
-    (AdicSheaf.abSectionAct_forgetAb_obj_constSection A _ _)
 
 end AlgebraicGeometry.ProEtale

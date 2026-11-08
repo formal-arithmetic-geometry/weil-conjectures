@@ -69,11 +69,6 @@ lemma EntryBound.neg {M : Matrix (Fin n) (Fin n) E} {r : ℝ} (hM : EntryBound M
     EntryBound (-M) r :=
   fun i j ↦ by simpa using hM i j
 
-lemma EntryBound.sub {M N : Matrix (Fin n) (Fin n) E} {r : ℝ} (hM : EntryBound M r)
-    (hN : EntryBound N r) : EntryBound (M - N) r := by
-  rw [sub_eq_add_neg]
-  exact hM.add hN.neg
-
 lemma EntryBound.mul {M N : Matrix (Fin n) (Fin n) E} {r s : ℝ} (hM : EntryBound M r)
     (hN : EntryBound N s) (hr : 0 ≤ r) (hs : 0 ≤ s) : EntryBound (M * N) (r * s) := by
   intro i j
@@ -152,13 +147,6 @@ noncomputable def congruenceSubgroup (k : ℕ) : Subgroup (GL (Fin n) E) where
   inv_mem' {A} hA := ⟨hA.2, by simpa using hA.1⟩
 
 variable {E}
-
-lemma mem_congruenceSubgroup {k : ℕ} {A : GL (Fin n) E} :
-    A ∈ congruenceSubgroup E n k ↔
-      EntryBound ((A : Matrix (Fin n) (Fin n) E) - 1) (congruenceRadius l k) ∧
-      EntryBound (((A⁻¹ : GL (Fin n) E) : Matrix (Fin n) (Fin n) E) - 1)
-        (congruenceRadius l k) :=
-  Iff.rfl
 
 lemma congruenceSubgroup_antitone {k k' : ℕ} (h : k ≤ k') :
     congruenceSubgroup E n k' ≤ congruenceSubgroup E n k :=

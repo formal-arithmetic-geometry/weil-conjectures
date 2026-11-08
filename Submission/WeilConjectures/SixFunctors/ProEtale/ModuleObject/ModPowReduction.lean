@@ -82,10 +82,6 @@ noncomputable abbrev modPowTransition :
       condensedRingObj (Profinite.integersModPowRingObj ℓ E n) X :=
   coefficientMap (Profinite.modPowRingObjTransition ℓ E n) X
 
-example : IsMonHom (modPowTransition X ℓ E n) := inferInstance
-
-example : IsMonHom (integersModPowReduction X ℓ E n) := inferInstance
-
 /-- The reductions `𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓⁿ)_X` are compatible with the transition maps. -/
 @[reassoc]
 lemma integersModPowReduction_comp_modPowTransition :

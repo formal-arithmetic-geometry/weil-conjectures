@@ -86,23 +86,6 @@ theorem nonempty_restrict_higherDirectImage_iso_homology {U : T.Opens}
   exact ⟨e₁.symm ≪≫ (higherDirectImage (f' ∣_ V) q).mapIso
     ((Modules.pullbackComp _ _).app ℱ) ≪≫ e₂.symm⟩
 
-omit [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
-  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation] in
-/-- Let `f' : X' ⟶ T'` be the base change of `f` along `g : T' ⟶ T`, and `V` an open of `T'`.
-An isomorphism `E ≅ R (f' ∣_ V)_* ℱ_V` in `D(𝒪_V)`, where `ℱ_V` is the pullback of `ℱ` to
-`f'⁻¹(V)`, gives `(R f'_* ℱ')|_V ≅ E`: restriction to `V` commutes with `R f'_*`
-(`AlgebraicGeometry.Scheme.Modules.derivedPushforwardIsoRestrict`). -/
-noncomputable def restrictDerivedPushforwardIso {T' X' : Scheme.{u}} (g' : X' ⟶ X)
-    (f' : X' ⟶ T') (V : T'.Opens) {E : DerivedCategory V.toScheme.Modules}
-    (e : E ≅ (derivedPushforward (f' ∣_ V)).obj
-      ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback ((f' ⁻¹ᵁ V).ι ≫ g')).obj ℱ))) :
-    (restrictFunctor V.ι).mapDerivedCategory.obj ((derivedPushforward f').obj
-        ((DerivedCategory.singleFunctor _ 0).obj ((Modules.pullback g').obj ℱ))) ≅ E :=
-  (derivedPushforwardIsoRestrict f' ((Modules.pullback g').obj ℱ) V.ι _ _
-      (isPullback_morphismRestrict f' V).flip).symm ≪≫
-    (derivedPushforward (f' ∣_ V)).mapIso
-      ((DerivedCategory.singleFunctor _ 0).mapIso ((Modules.pullbackComp _ _).app ℱ)) ≪≫ e.symm
-
 
 /-- **`R f'_* ℱ'` is locally finite locally free in one degree over `U_{i,r}`.** Let `f' : X' ⟶ T'`
 be the base change of `f` along `g : T' ⟶ T`, and `t'` a point of `T'` mapped into the rank-`r`

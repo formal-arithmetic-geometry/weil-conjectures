@@ -486,117 +486,7 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 noncomputable abbrev derivedLocalIsoSheaf [HasWeakSheafify J (Type (u + 1))] :=
   (presheafToSheaf J (Type (u + 1))).obj (derivedLocalIsoPresheaf J B A D)
 
-omit [EssentiallySmall.{u + 1} C] in
-private theorem pairSection_ext [HasWeakSheafify J (Type (u + 1))]
-    (F G : Sheaf J (Type (u + 1))) (U : C) (x y : (F ⨯ G).obj.obj (op U))
-    (h₁ : (prod.fst : F ⨯ G ⟶ F).hom.app (op U) x =
-      (prod.fst : F ⨯ G ⟶ F).hom.app (op U) y)
-    (h₂ : (prod.snd : F ⨯ G ⟶ G).hom.app (op U) x =
-      (prod.snd : F ⨯ G ⟶ G).hom.app (op U) y) : x = y := by
-  let E := sheafToPresheaf J (Type (u + 1)) ⋙
-    (evaluation Cᵒᵖ (Type (u + 1))).obj (op U)
-  apply (ConcreteCategory.bijective_of_isIso (prodComparison E F G)).injective
-  apply (ConcreteCategory.bijective_of_isIso
-    (Types.binaryProductIso (E.obj F) (E.obj G)).hom).injective
-  apply _root_.Prod.ext
-  · have ht : prodComparison E F G ≫
-        (Types.binaryProductIso (E.obj F) (E.obj G)).hom ≫
-        (↾_root_.Prod.fst : (E.obj F × E.obj G) ⟶ E.obj F) = E.map prod.fst := by
-      rw [Types.binaryProductIso_hom_comp_fst, prodComparison_fst]
-    change (E.map prod.fst) x = (E.map prod.fst) y at h₁
-    simpa only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply] using
-      (ConcreteCategory.congr_hom ht x).trans
-        (h₁.trans (ConcreteCategory.congr_hom ht y).symm)
-  · have ht : prodComparison E F G ≫
-        (Types.binaryProductIso (E.obj F) (E.obj G)).hom ≫
-        (↾_root_.Prod.snd : (E.obj F × E.obj G) ⟶ E.obj G) = E.map prod.snd := by
-      rw [Types.binaryProductIso_hom_comp_snd, prodComparison_snd]
-    change (E.map prod.snd) x = (E.map prod.snd) y at h₂
-    simpa only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply] using
-      (ConcreteCategory.congr_hom ht x).trans
-        (h₂.trans (ConcreteCategory.congr_hom ht y).symm)
-
-private noncomputable def presheafPairSection
-    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
-    (s : P.obj (op U)) (t : Q.obj (op U)) : (P ⨯ Q).obj (op U) :=
-  inv (prodComparison ((evaluation Cᵒᵖ (Type (u + 1))).obj (op U)) P Q)
-    ((Types.binaryProductIso _ _).inv (s, t))
-
-omit [EssentiallySmall.{u + 1} C] in
-private theorem presheafPairSection_fst
-    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
-    (s : P.obj (op U)) (t : Q.obj (op U)) :
-    (prod.fst : P ⨯ Q ⟶ P).app (op U) (presheafPairSection P Q U s t) = s := by
-  unfold presheafPairSection
-  change (((evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.fst) _ = s
-  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_fst,
-    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_fst]
-  rfl
-
-omit [EssentiallySmall.{u + 1} C] in
-private theorem presheafPairSection_snd
-    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
-    (s : P.obj (op U)) (t : Q.obj (op U)) :
-    (prod.snd : P ⨯ Q ⟶ Q).app (op U) (presheafPairSection P Q U s t) = t := by
-  unfold presheafPairSection
-  change (((evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.snd) _ = t
-  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_snd,
-    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_snd]
-  rfl
-
 variable {J B} {A D}
-
-/-- Precomposition and postcomposition commute with restriction of actual derived morphisms.
-
-Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. (blueprint: def-weil-pbc-derived-morphism-presheaves)
-
-Proof: Use naturality of the derived slice-restriction comparison on f and g. Expand the
-conjugations defining local restriction, use preservation of composition by the local functor,
-and cancel the adjacent comparison isomorphisms. The resulting composites on both sides are
-identical. -/
-theorem derivedLocalHomPresheafMap_natural
-    {A' D' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    (f : A' ⟶ A) (g : D ⟶ D') (U V : C) (h : V ⟶ U)
-    (a : (derivedSliceRestriction J B U).obj A ⟶
-      (derivedSliceRestriction J B U).obj D) :
-    (derivedSliceRestriction J B V).map f ≫
-        derivedLocalHomRestriction J B A D h a ≫
-          (derivedSliceRestriction J B V).map g =
-      derivedLocalHomRestriction J B A' D' h
-        ((derivedSliceRestriction J B U).map f ≫ a ≫
-          (derivedSliceRestriction J B U).map g) := by
-  dsimp only [derivedLocalHomRestriction]
-  simp only [Functor.map_comp, Category.assoc]
-  have hf := (derivedSliceMapIso J B h).inv.naturality f
-  have hg := (derivedSliceMapIso J B h).hom.naturality g
-  dsimp only [Functor.comp_map] at hf hg
-  rw [reassoc_of% hf, hg]
-
-/-- The map on local derived Hom presheaves induced by precomposition and postcomposition.
-
-Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. (blueprint: def-weil-pbc-derived-morphism-presheaves) -/
-noncomputable def derivedLocalHomPresheafMap
-    {A' D' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    (f : A' ⟶ A) (g : D ⟶ D') :
-    derivedLocalHomPresheaf J B A D ⟶ derivedLocalHomPresheaf J B A' D' where
-  app U := ↾fun a ↦ (derivedSliceRestriction J B U.unop).map f ≫ a ≫
-    (derivedSliceRestriction J B U.unop).map g
-  naturality := by
-    intro U V h
-    apply ConcreteCategory.hom_ext
-    intro a
-    exact derivedLocalHomPresheafMap_natural f g _ _ h.unop a
-
-/-- Sheafification of the natural map on derived Hom presheaves.
-
-Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. (blueprint: def-weil-pbc-derived-morphism-presheaves) -/
-noncomputable abbrev derivedLocalHomSheafMap [HasWeakSheafify J (Type (u + 1))]
-    {A' D' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    (f : A' ⟶ A) (g : D ⟶ D') :=
-  (presheafToSheaf J (Type (u + 1))).map (derivedLocalHomPresheafMap f g)
 
 /-- The natural inclusion of local derived isomorphisms into local derived morphisms.
 
@@ -606,13 +496,6 @@ noncomputable def derivedLocalIsoToHomPresheaf :
     derivedLocalIsoPresheaf J B A D ⟶ derivedLocalHomPresheaf J B A D where
   app U := ↾fun f ↦ f.hom
   naturality := by intros; rfl
-
-/-- The map from derived Isom to derived Hom after sheafification.
-
-Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. (blueprint: def-weil-pbc-derived-morphism-presheaves) -/
-noncomputable abbrev derivedLocalIsoToHomSheaf [HasWeakSheafify J (Type (u + 1))] :=
-  (presheafToSheaf J (Type (u + 1))).map (derivedLocalIsoToHomPresheaf (A := A) (D := D))
 
 variable (J B)
 
@@ -657,26 +540,5 @@ variable (A D : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)))
 end DerivedLocalFunctor
 
 variable {B' : Type (u + 1)} [CommRing B']
-
-/-- The canonical commutation of restriction of scalars with localization, given by identity maps.
-
-Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. (blueprint: def-weil-pbc-derived-morphism-presheaves) -/
-noncomputable def sliceRestrictScalarsSheafIso (φ : B →+* B') (U : C) :
-    J.overPullback (ModuleCat.{u + 1} B') U ⋙ Sheaf.restrictScalars (J.over U) φ ≅
-      Sheaf.restrictScalars J φ ⋙ J.overPullback (ModuleCat.{u + 1} B) U :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)
-
-/-- The same canonical scalar/restriction commutation on actual derived categories.
-
-Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
-09BE; Pro-etale Cohomology, Tag 0F63. (blueprint: def-weil-pbc-derived-morphism-presheaves) -/
-noncomputable def sliceRestrictScalarsIso (φ : B →+* B') (U : C) :
-    derivedSliceRestriction J B' U ⋙ Sheaf.derivedRestrictScalars (J.over U) φ ≅
-      Sheaf.derivedRestrictScalars J φ ⋙ derivedSliceRestriction J B U :=
-  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (sliceRestrictScalarsSheafIso J B φ U) ≪≫
-        (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end CategoryTheory

@@ -225,12 +225,6 @@ theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
   refine ⟨(GrpObj.lieEquivTangent _).symm q, (GrpObj.lieEquivTangent _).injective ?_⟩
   rw [GrpObj.lieEquivTangent_differential, Equiv.apply_symm_apply, hq, hpx]
 
-/-- Over an algebraically closed field of characteristic zero, the Lie algebra of an algebraic
-group is the Lie algebra of its reduced identity component. (blueprint: `sk-i-cartier`) -/
-noncomputable def lieAlgebraEquivIdentityComponent [IsAlgClosed k] [CharZero k] :
-    GrpObj.Lie (subgroupScheme (identityComponent I)) ≃ₗ⁅k⁆ GrpObj.Lie (subgroupScheme I) :=
-  LieEquiv.ofBijective _ (lieAlgebraMap_identityComponent_bijective I)
-
 /-! #### The tangent space at the identity, in matrices
 
 The points `1 + εX` of `V(I)` over the dual numbers are the linear forms on the cotangent space
@@ -314,12 +308,6 @@ theorem finrank_cotangent_eq_finrank_range_dualCotangentToMatrixₗ :
   rw [LinearMap.finrank_range_of_inj (dualCotangentToMatrixₗ_injective I),
     Subspace.dual_finrank_eq]
 
-/-- The matrix `X` of a tangent vector `1 + εX` of `V(I)`: the differential of `V(I) ⟶ GL_n`
-followed by `Lie(GL_n) = gl_n`. -/
-noncomputable def lieToMatrix : GrpObj.Lie (subgroupScheme I) →ₗ[k] Matrix n n k :=
-  (lieAlgebraEquivMatrix n k).toLinearEquiv.toLinearMap ∘ₗ
-    (GrpObj.differential (subgroupSchemeι I)).toLinearMap
-
 
 end Cartier
 
@@ -346,17 +334,6 @@ noncomputable def standardRepresentation (I : Ideal (CoordinateRing n k)) [I.IsH
   RationalHom.representation (subgroupSchemeι I)
 
 variable [IsAlgClosed k]
-
-/-- The multiplication morphism `Z(G°)° × H° ⟶ G°` of group schemes, for closed subgroups
-`H = V(J) ⊆ G = V(I)` of `GL_n`: the composite of the closed immersions of the two factors into
-`G°` with the multiplication of `G°`. (blueprint: `sk-p-product`) -/
-noncomputable def mulCenterIdentityComponent (h : I ≤ J) :
-    subgroupScheme (identityComponent (center (identityComponent I))) ⊗
-        subgroupScheme (identityComponent J) ⟶
-      subgroupScheme (identityComponent I) :=
-  (subgroupSchemeHom ((le_center _).trans (le_identityComponent _)) ⊗ₘ
-      subgroupSchemeHom (identityComponent_mono I h)) ≫
-    μ[subgroupScheme (identityComponent I)]
 
 end Pair
 

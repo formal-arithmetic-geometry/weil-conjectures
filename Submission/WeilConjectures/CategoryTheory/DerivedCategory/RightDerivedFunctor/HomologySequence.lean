@@ -61,18 +61,6 @@ noncomputable def rightDerivedHomologyδ (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁)
       (homologyFunctor D n₁).obj (F.rightDerivedFunctor.obj ((singleFunctor C 0).obj S.X₁)) :=
   HomologySequence.δ (F.rightDerivedSingleTriangle hS) n₀ n₁ h
 
-lemma rightDerivedHomology_map_comp_eq_zero (n : ℤ) :
-    (homologyFunctor D n).map (F.rightDerivedFunctor.map ((singleFunctor C 0).map S.f)) ≫
-      (homologyFunctor D n).map (F.rightDerivedFunctor.map ((singleFunctor C 0).map S.g)) =
-        0 := by
-  rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, S.zero, Functor.map_zero,
-    Functor.map_zero, Functor.map_zero]
-
-/-- **Exactness at `Hⁿ(RF S₂)`** of the long exact sequence of a short exact sequence. -/
-lemma rightDerivedHomologySequence_exact₂ {S : ShortComplex C} (hS : S.ShortExact) (n : ℤ) :
-    (ShortComplex.mk _ _ (F.rightDerivedHomology_map_comp_eq_zero (S := S) n)).Exact :=
-  HomologySequence.exact₂ _ (F.rightDerivedSingleTriangle_distinguished hS) n
-
 @[reassoc (attr := simp)]
 lemma rightDerivedHomology_map_comp_δ (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) :
     (homologyFunctor D n₀).map (F.rightDerivedFunctor.map ((singleFunctor C 0).map S.g)) ≫

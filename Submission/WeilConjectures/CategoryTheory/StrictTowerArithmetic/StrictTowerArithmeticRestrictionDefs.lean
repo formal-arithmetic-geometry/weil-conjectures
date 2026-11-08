@@ -47,12 +47,6 @@ Source: Stacks Tag 0H9K (blueprint: lem-sp-strict-tower-arithmetic-restriction).
 abbrev complexRestriction (A : Type a) [Category.{b} A] [Abelian A] (e : ℕ) :=
   (restriction A e).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The canonical derived restriction, induced by the exact restriction functor.
-Source: Stacks Tag 0H9K (blueprint: lem-sp-strict-tower-arithmetic-restriction). -/
-noncomputable abbrev derivedRestriction (A : Type a) [Category.{b} A] [Abelian A]
-    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] (e : ℕ) :=
-  (restriction A e).mapDerivedCategory
-
 /-- Coordinate selection on the source product of the Roos differential.
 Source: Stacks Tag 0H9K, map φ′
 (blueprint: lem-sp-strict-tower-arithmetic-restriction). -/
@@ -73,21 +67,6 @@ noncomputable def block {A : Type a} [Category.{b} A] [Abelian A]
   Pi.lift (fun n ↦ ∑ k ∈ Finset.range e,
     Pi.π (fun i : ℕ ↦ X.obj (op i)) (e * (n + 1) - 1 + k) ≫
       X.map (homOfLE (Nat.le_add_right (e * (n + 1) - 1) k)).op)
-
-/-- The existing termwise inverse-limit functor, for the normalization of its derived unit.
-Source: Stacks Tag 0941 (blueprint: lem-sp-strict-tower-arithmetic-restriction). -/
-noncomputable abbrev limitComplex (A : Type a) [Category.{b} A] [Abelian A]
-    [HasLimitsOfShape ℕᵒᵖ A] :=
-  (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (ComplexShape.up ℤ)
-
-/-- Ordinary limit restriction, degree by degree, using the actual limit cone.
-Source: Stacks Tag 0H9K (blueprint: lem-sp-strict-tower-arithmetic-restriction). -/
-noncomputable def limitMap {A : Type a} [Category.{b} A] [Abelian A]
-    [HasLimitsOfShape ℕᵒᵖ A] (e : ℕ) (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
-    (limitComplex A).obj X ⟶ (limitComplex A).obj ((complexRestriction A e).obj X) where
-  f i := limit.pre (X.X i) (index e)
-  comm' i j _ := by
-    exact (limit.map_pre (X.d i j) (index e)).symm
 
 /-- The existing transition differential, applied to the evaluated tower complex.
 Source: Stacks Tags 08TC and 0H9K

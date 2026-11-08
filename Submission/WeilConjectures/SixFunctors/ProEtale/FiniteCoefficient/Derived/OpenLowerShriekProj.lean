@@ -7,7 +7,20 @@ module
 
 public import Submission.WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
-public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Derived
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.KFlat
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Vanishing
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.KFlat
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
 
 set_option autoImplicit true
@@ -241,13 +254,6 @@ noncomputable def derivedTensorOpenImmersionLowerShriekIso
     ((-⊗ᴸ-(X)[A]).obj (D((j)_!open[A]).obj K)).obj L ≅
       D((j)_!open[A]).obj (((-⊗ᴸ-(U)[A]).obj K).obj (L((j)^*[A]).obj L)) :=
   (((derivedOpenImmersionLowerShriekProjectionIso A j).app K).app L).symm
-
-lemma derivedTensorOpenImmersionLowerShriekIso_inv
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A))
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    (derivedTensorOpenImmersionLowerShriekIso A j K L).inv =
-      ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app L :=
-  rfl
 
 end ProEtale
 

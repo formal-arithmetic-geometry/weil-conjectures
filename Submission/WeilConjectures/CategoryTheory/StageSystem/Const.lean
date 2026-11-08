@@ -111,18 +111,6 @@ noncomputable def descFunctor (Φ : ∀ i, C i ⥤ D)
     S.PairCategory ⥤ D :=
   (Morphism.ofCocone Φ ι coh).functor ⋙ constEval
 
-/-- The functor induced by a coherent cocone restricts on the stage `i` to `Φ_i`. -/
-noncomputable def ιCompDescFunctorIso (Φ : ∀ i, C i ⥤ D)
-    (ι : ∀ {i j : I} (h : i ≤ j), S.T h ⋙ Φ j ≅ Φ i)
-    (coh : ∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k) (x : C i),
-      (Φ k).map ((S.assoc h h').hom.app x) ≫ (ι (h.trans h')).hom.app x =
-        (ι h').hom.app ((S.T h).obj x) ≫ (ι h).hom.app x) (i : I) :
-    S.ι i ⋙ descFunctor Φ ι coh ≅ Φ i :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun f ↦ by
-    simp only [Functor.comp_map, Iso.refl_hom, Category.comp_id, Category.id_comp, descFunctor]
-    rw [Morphism.functor_map_ι]
-    rfl)
-
 variable (S) in
 /-- The cocone of categories of the stage inclusions `j_i : C i ⥤ S.PairCategory`, with the
 identifications `j_j ∘ T_{j/i} ≅ j_i`. -/

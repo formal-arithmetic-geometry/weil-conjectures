@@ -79,13 +79,6 @@ end Homology
 variable {R : Type*} [Ring R] {L : ModuleCat R ⥤ C} {G : C ⥤ ModuleCat R}
   [Projective (L.obj (ModuleCat.of R R))]
 
-/-- The element of `G(H⁰(X))` corresponding to a morphism `P[0] ⟶ X` in the derived category,
-where `P = L(R)` for an adjunction `L ⊣ G`. -/
-noncomputable def homologyElementOfHom (adj : L ⊣ G) {X : DerivedCategory C}
-    (φ : (singleFunctor C 0).obj (L.obj (ModuleCat.of R R)) ⟶ X) :
-    G.obj ((homologyFunctor C 0).obj X) :=
-  (adj.homEquiv _ _ (singleFunctorZeroHomEquiv _ X φ)).hom 1
-
 
 section SigmaComparison
 

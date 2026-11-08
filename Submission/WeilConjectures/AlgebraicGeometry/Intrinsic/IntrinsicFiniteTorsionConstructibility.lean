@@ -5,7 +5,19 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Finite.FiniteTorsionConstructibility
+public import Submission.WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import Mathlib.RingTheory.Ideal.Quotient.Index
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleIntrinsic
 
 set_option autoImplicit true

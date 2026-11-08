@@ -122,18 +122,6 @@ lemma adicConstantCondensedStr_hom :
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom :=
   rfl
 
-/-- **The constant Weil sheaf in the condensed model**: `E ℚ̄_ℓ` is the regular module
-`ℚ̲̄_ℓ,X̄` with the transported Weil structure. -/
-noncomputable def toCondensedObjAdicConstantIso :
-    (toCondensed k₀ l X).obj (adicConstant k₀ l X) ≅
-      IsoAlgebra.mk _ (adicConstantCondensedStr k₀ l X) :=
-  IsoAlgebra.isoMk
-    (adicSheafEquivCondensedModUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (by
-    have hmk : (IsoAlgebra.mk _ (adicConstantCondensedStr k₀ l X)).obj.str =
-        (adicConstantCondensedStr k₀ l X).hom := rfl
-    rw [hmk, adicConstantCondensedStr_hom, ← Functor.map_comp_assoc, Iso.hom_inv_id,
-      CategoryTheory.Functor.map_id, Category.id_comp])
-
 /-- **Constant twists of the constant Weil sheaf in the condensed model**: `E (ℚ̄_ℓ ⊗ 𝓑_b)` is
 the regular module `ℚ̲̄_ℓ,X̄` with the transported Weil structure of `ℚ̄_ℓ` multiplied by the
 constant global section `b`. -/
@@ -164,17 +152,6 @@ namespace WeilSheaf
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- **The Tate sheaf `ℚ̄_ℓ(1)` in the condensed model**: `E ℚ̄_ℓ(1)` is the regular module
-`ℚ̲̄_ℓ,X̄` with the transported Weil structure of `ℚ̄_ℓ` multiplied by the cyclotomic unit
-`χ_ℓ(σ)`. -/
-noncomputable def toCondensedObjTateTwistSheafOneIso :
-    (ProEtaleWeilSheaf.toCondensed k₀ l X).obj (tateTwistSheaf k₀ l X 1).obj ≅
-      IsoAlgebra.mk _ (ProEtaleWeilSheaf.adicConstantCondensedStr k₀ l X ≪≫
-        ProEtaleWeilSheaf.regularSmulIso k₀ l X (cyclotomicUnit k₀ l)) :=
-  (ProEtaleWeilSheaf.toCondensed k₀ l X).mapIso
-      (constantTwistObjIso (adicConstant k₀ l X) (cyclotomicUnit k₀ l)) ≪≫
-    ProEtaleWeilSheaf.toCondensedObjConstantTwistAdicConstantIso k₀ l X (cyclotomicUnit k₀ l)
 
 end WeilSheaf
 

@@ -46,11 +46,6 @@ namespace AlgebraicGeometry.Scheme
 
 section Pullback
 
-variable (X : Scheme.{u}) (n : ℕ) in
-/-- The inclusion `μₙ ⟶ 𝔾ₘ` of the sheaf of `n`-th roots of unity. -/
-noncomputable abbrev rootsOfUnitySheafι : X.rootsOfUnitySheaf n ⟶ X.gmSheaf :=
-  kernel.ι (n • 𝟙 X.gmSheaf)
-
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ)
 
 /-- The comparison `g^* 𝔾ₘ ⟶ 𝔾ₘ` commutes with the `n`-th power maps. -/

@@ -384,17 +384,6 @@ noncomputable def etaleReductionUpperShriekIso :
     (TwoSquare.mk _ _ _ _
       (etaleReductionLowerShriekIsoOfCompactification ℓ E n (compactificationOverField f)).inv))
 
-variable (f) in
-lemma etaleReductionUpperShriekIso_hom :
-    have := HasCompactification.of_over f
-    (etaleReductionUpperShriekIso ℓ E n f).hom =
-      mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-        (Etale.rightDerivedUpperShriekAdjunction _ f.left)
-        (TwoSquare.mk _ _ _ _
-          (etaleReductionLowerShriekIsoOfCompactification ℓ E n
-            (compactificationOverField f)).inv) :=
-  rfl
-
 end General
 
 end AlgebraicGeometry.ProEtale.CondensedRing

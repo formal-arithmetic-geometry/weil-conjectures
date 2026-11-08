@@ -5,7 +5,86 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageTensorHom
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Ring
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInverseImageTensorComparisonSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageHomComparison
+import Submission.WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageScalarComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.Limits
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
+import Submission.WeilConjectures.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import Submission.WeilConjectures.CategoryTheory.Sites.LowerShriekCoveringGenerators
+import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Submission.WeilConjectures.CategoryTheory.Sites.LowerShriekCorepresentability
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Submission.WeilConjectures.CategoryTheory.Sites.CoveringRepresentableCoequalizer
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+import Mathlib.CategoryTheory.Yoneda
+import Mathlib.CategoryTheory.Sites.RegularEpi
+import Mathlib.CategoryTheory.Limits.Shapes.KernelPair
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Submission.WeilConjectures.CategoryTheory.InverseMateEquivalence
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+import Submission.WeilConjectures.Mathlib.CategoryTheory.NatIso
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModelRingPresentation
+import Submission.WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Submission.WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAction
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
+import Submission.WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.NumberTheory.Padics.RingHoms
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingPullbackComparison
 public import Submission.WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
@@ -166,44 +245,6 @@ private noncomputable def tensorHomEquiv
     (P := SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} c M)
     (F := H)).trans (tensorPresheafHomEquiv T c M H)
 
-private theorem tensorHomEquiv_apply (T : Scheme.{u})
-    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
-    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))
-    (H : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S))
-    (f : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} φ M ⟶ H)
-    (U : T.ProEtᵒᵖ) (m : M.val.obj U) :
-    (tensorHomEquiv T φ M H f).val.app U m =
-      f.val.app U ((toSheafify (ProEt.topology T)
-        (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1}
-          φ M).presheaf).app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)) := by
-  rfl
-
-private theorem tensorHomEquiv_tmul (T : Scheme.{u})
-    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
-    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1}
-      RingCat.{u + 1})).obj R))
-    (H : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1}
-      RingCat.{u + 1})).obj S))
-    (f : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} φ M ⟶ H)
-    (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
-    f.val.app U ((toSheafify (ProEt.topology T)
-      (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} φ M).presheaf).app U
-        (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)) =
-      s • (@id (H.val.obj U) ((tensorHomEquiv T φ M H f).val.app U m)) := by
-  let k := PresheafOfModules.sheafificationHomEquiv.{u + 1}
-    (𝟙 ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      S).obj) f
-  change k.app U (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m) =
-    s • k.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)
-  let k' : (ModuleCat.extendScalars (φ.hom.app U).hom).obj (M.val.obj U) ⟶
-      H.val.obj U := k.app U
-  have hh := k'.hom.map_smul s
-    ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)
-  rw [ModuleCat.ExtendScalars.smul_tmul, mul_one] at hh
-  exact hh
-
 -- Keep the tensor universal-property inverse folded after establishing its API.
 -- Otherwise later equivalence comparisons unfold its sectionwise tensor construction.
 attribute [local irreducible] restrictionToTensor
@@ -236,43 +277,10 @@ def tateTensor (T : Scheme.{u}) {R A : Type u} [CommRing R] [CommRing A]
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (tateConstantMap T f) M
 
-/-- A pure tensor in the sheaf tensor, using the module sheafification unit.
-Source: Stacks Tag 03EK (blueprint: lem-pur-tate-inverse-limit-base-change). -/
-def tateTmul {T : Scheme.{u}} {R A : Type u} [CommRing R] [CommRing A]
-    (f : R →+* A) (M : tateModules T R) (U : T.ProEt)
-    (a : (proEtaleConstantRing T A).obj.obj (op U)) (x : M.val.obj (op U)) :
-    (tateTensor T f M).val.obj (op U) :=
-  purScalarSection (proEtaleConstantRing T R) (proEtaleConstantRing T A)
-    (tateConstantMap T f) M U a x
-
-/-- Inverse image, transported through the stipulated canonical constant-ring isomorphism.
-Source: Stacks Tags 03D2 and 09A5
-(blueprint: lem-pur-tate-inverse-limit-base-change). -/
-def tatePullback {T T' : Scheme.{u}} (h : T' ⟶ T) (R : Type u) [CommRing R]
-    [IsIso (proEtaleCoefficientInverseImageMap h R)] : tateModules T R ⥤ tateModules T' R :=
-  proEtaleRingModulePullback h (proEtaleConstantRing T R) (proEtaleConstantRing T' R)
-    (asIso (proEtaleCoefficientInverseImageMap h R))
-
-/-- The canonical inverse-image unit on local module sections.
-Source: Stacks Tags 03D2 and 09A5
-(blueprint: lem-pur-tate-inverse-limit-base-change). -/
-def tateUnit {T T' : Scheme.{u}} (h : T' ⟶ T) (R : Type u) [CommRing R]
-    [IsIso (proEtaleCoefficientInverseImageMap h R)] (M : tateModules T R)
-    (U : T.ProEt) (x : M.val.obj (op U)) :
-    ((tatePullback h R).obj M).val.obj (op ((proEtaleBaseChange h).obj U)) :=
-  ((proEtaleRingModuleAdjunction h (proEtaleConstantRing T R) (proEtaleConstantRing T' R)
-    (asIso (proEtaleCoefficientInverseImageMap h R))).unit.app M).val.app (op U) x
-
 private def tensorUnit {T : Scheme.{u}} {R A : Type u} [CommRing R] [CommRing A]
     (a : R →+* A) (M : tateModules T R) :
     M ⟶ (tateRestrict T a).obj (tateTensor T a M) :=
   tensorHomEquiv T (tateConstantMap T a) M (tateTensor T a M) (𝟙 _)
-
-private theorem tensorUnit_apply {T : Scheme.{u}} {R A : Type u}
-    [CommRing R] [CommRing A] (a : R →+* A) (M : tateModules T R)
-    (U : T.ProEt) (x : M.val.obj (op U)) :
-    (tensorUnit a M).val.app (op U) x = tateTmul a M U 1 x := by
-  rfl
 
 attribute [local irreducible] tensorUnit
 
@@ -334,15 +342,6 @@ private def reductionUnit {T : Scheme.{u}} {R Q A : Type u}
           ((congrArg (fun y ↦ (tensorUnit a G).val.app V y)
             (PresheafOfModules.naturality_apply i.inv.val f (p.val.app U x))).trans
             (PresheafOfModules.naturality_apply (tensorUnit a G).val f _)) }
-
-private theorem reductionUnit_apply {T : Scheme.{u}} {R Q A : Type u}
-    [CommRing R] [CommRing Q] [CommRing A] (q : R →+* Q) (a : Q →+* A)
-    (L F : tateModules T R) (G : tateModules T Q)
-    (i : (tateRestrict T q).obj G ≅ F) (p : L ⟶ F)
-    (U : T.ProEt) (x : L.val.obj (op U)) :
-    (reductionUnit q a L F G i p).val.app (op U) x =
-      tateTmul a G U 1 (i.inv.val.app (op U) (p.val.app (op U) x)) := by
-  exact tensorUnit_apply a G U _
 
 attribute [local irreducible] reductionUnit
 

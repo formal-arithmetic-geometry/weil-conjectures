@@ -15,7 +15,33 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImag
 public import Submission.WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Submission.WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Submission.WeilConjectures.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion
-import Submission.WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Submission.WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Submission.WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebra
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.AlgebraicGeometry.AffineScheme
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Submission.WeilConjectures.CategoryTheory.CommAlgebraSheafModule
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Topology.Sheaves.Sheaf
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Mathlib.CategoryTheory.Limits.Preserves.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
 import Submission.WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 set_option autoImplicit true

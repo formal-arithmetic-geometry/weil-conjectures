@@ -8,7 +8,7 @@ module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparisonExtension
+import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import Submission.WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels

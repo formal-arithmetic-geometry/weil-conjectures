@@ -106,7 +106,10 @@ public import Submission.WeilConjectures.SecSmoothPurity.CochainPullbackTensorCo
 public import Submission.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence

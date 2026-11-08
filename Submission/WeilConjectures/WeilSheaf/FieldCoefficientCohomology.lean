@@ -161,21 +161,6 @@ noncomputable def fieldCompactlySupportedCohomology [HasCompactification a] (i :
     _root_.DerivedCategory (FieldSheaf Λ Y) ⥤ ModuleCat.{u + 1} (ULift.{u + 1} Λ) :=
   fieldCompactlySupportedGlobalSections a ⋙ _root_.DerivedCategory.homologyFunctor _ i
 
-variable (Λ) in
-/-- Blueprint `def-weil-ordinary-compact-cohomology`, stages `Λ = 𝒪_E, E`: the cohomology
-`Hⁱ(Y, Λ) = Hⁱ(Y, Λ_Y)` with coefficients in the constant sheaf `Λ_Y` (for `Λ = 𝒪_E` the
-completed coefficient sheaf `𝒪̂_{E,Y} : U ↦ C(U, 𝒪_E)` of Bhatt–Scholze), placed in degree `0`. -/
-noncomputable def fieldConstantCohomology (i : ℤ) : ModuleCat.{u + 1} (ULift.{u + 1} Λ) :=
-  (fieldCohomology a i).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj (FieldSheaf.unit Λ Y))
-
-variable (Λ) in
-/-- Blueprint `def-weil-ordinary-compact-cohomology`, stages `Λ = 𝒪_E, E`: the compactly
-supported cohomology `Hⁱ_c(Y, Λ) = Hⁱ_c(Y, Λ_Y)` with coefficients in the constant sheaf. -/
-noncomputable def fieldConstantCompactlySupportedCohomology [HasCompactification a] (i : ℤ) :
-    ModuleCat.{u + 1} (ULift.{u + 1} Λ) :=
-  (fieldCompactlySupportedCohomology a i).obj
-    ((_root_.DerivedCategory.singleFunctor _ 0).obj (FieldSheaf.unit Λ Y))
-
 section Integral
 
 variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
@@ -187,17 +172,6 @@ coefficient sheaf `𝒪̂_{E,Y} : U ↦ C(U, 𝒪_E)`. -/
 instance _root_.PadicAlgCl.isUltrametricDist_integers :
     IsUltrametricDist (PadicAlgCl.integers l E) :=
   IsUltrametricDist.subtype _
-
-/-- Blueprint `def-weil-ordinary-compact-cohomology`, stage `Λ = 𝒪_E`: the cohomology
-`Hⁱ(Y, 𝒪_E)` and the compactly supported cohomology `Hⁱ_c(Y, 𝒪_E)` are
-`AlgebraicGeometry.ProEtale.fieldConstantCohomology` and
-`AlgebraicGeometry.ProEtale.fieldConstantCompactlySupportedCohomology` for the ring of
-integers `𝒪_E = PadicAlgCl.integers ℓ E`. -/
-noncomputable example [HasCompactification a] (i : ℤ) :
-    ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integers l E)) ×
-      ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl.integers l E)) :=
-  (fieldConstantCohomology (PadicAlgCl.integers l E) a i,
-    fieldConstantCompactlySupportedCohomology (PadicAlgCl.integers l E) a i)
 
 end Integral
 

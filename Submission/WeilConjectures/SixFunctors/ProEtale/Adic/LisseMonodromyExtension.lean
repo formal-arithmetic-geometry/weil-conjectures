@@ -64,10 +64,6 @@ noncomputable def pullbackPathHom (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') :
   map_mul' σ τ := by
     rw [Aut.Aut_mul_def, Aut.Aut_mul_def, pullbackPathIso_trans]
 
-lemma pullbackPathHom_apply (f : Y' ⟶ Y) (y : Spec (.of Ω) ⟶ Y') (σ : Aut (fiber y)) :
-    pullbackPathHom f y σ = pullbackPathIso f σ :=
-  rfl
-
 open PreGaloisCategory in
 /-- The homomorphism `π₁(Y', y) → π₁(Y, y ≫ f)` is continuous: its component at a finite étale
 `Y`-scheme `P` is determined by the component of the source at `P ×_Y Y'`. -/

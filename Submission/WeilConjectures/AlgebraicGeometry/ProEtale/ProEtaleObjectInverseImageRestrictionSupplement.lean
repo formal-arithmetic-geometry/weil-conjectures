@@ -5,7 +5,12 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicFiniteOperations
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
@@ -137,135 +142,5 @@ private noncomputable def restrictionComparison {X : Scheme.{u}} (W : X.ProEt)
       sheafification_isIso := hq
       sheafIso := e.symm
       sheafIso_inv := fun _ ↦ rfl }
-
-private noncomputable def restrictionConstantIso {X : Scheme.{u}} (W : X.ProEt)
-    (A : Type u) [CommRing A] :
-    proEtaleConstantRing W.left A ≅
-      (AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1}
-        W.hom W.prop).obj (proEtaleConstantRing X A) := by
-  let F := MorphismProperty.Over.map (f := W.hom) ⊤ W.prop
-  have : F.IsContinuous (ProEt.topology W.left) (ProEt.topology X) :=
-    ProEt.isContinuous_overMap W.prop
-  have : F.IsCocontinuous (ProEt.topology W.left) (ProEt.topology X) :=
-    ProEt.isCocontinuous_overMap W.prop
-  exact (F.pushforwardContinuousSheafificationCompatibility CommRingCat.{u + 1}
-    (ProEt.topology W.left) (ProEt.topology X)).app
-      ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
-
-private theorem restrictionConstantIso_unit {X : Scheme.{u}} (W : X.ProEt)
-    (A : Type u) [CommRing A] (U : W.left.ProEt) :
-    (toSheafify (ProEt.topology W.left)
-      ((Functor.const W.left.ProEtᵒᵖ).obj
-        (CommRingCat.of (ULift.{u + 1, u} A)))).app (op U) ≫
-      (restrictionConstantIso W A).hom.hom.app (op U) =
-    (toSheafify (ProEt.topology X)
-      ((Functor.const X.ProEtᵒᵖ).obj
-        (CommRingCat.of (ULift.{u + 1, u} A)))).app
-          (op ((MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).obj U)) := by
-  let F := MorphismProperty.Over.map (f := W.hom) ⊤ W.prop
-  have : F.IsContinuous (ProEt.topology W.left) (ProEt.topology X) :=
-    ProEt.isContinuous_overMap W.prop
-  have : F.IsCocontinuous (ProEt.topology W.left) (ProEt.topology X) :=
-    ProEt.isCocontinuous_overMap W.prop
-  exact congrArg (fun f ↦ f.app (op U))
-    (F.toSheafify_pullbackSheafificationCompatibility CommRingCat.{u + 1}
-      (ProEt.topology W.left) (ProEt.topology X)
-      ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
-
-private theorem inverseImageAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
-    ((proEtaleSheafAdjunction (X := X) (Y := Y) f CommRingCat.{u + 1}).unit.app R).hom =
-      (proEtaleBaseChange f).op.lanUnit.app R.obj ≫
-        (proEtaleBaseChange f).op.whiskerLeft
-          (toSheafify (ProEt.topology X) ((proEtaleBaseChange f).op.lan.obj R.obj)) := by
-  change (sheafToPresheaf _ _).map
-    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _).unit.app R) = _
-  rw [Functor.sheafPullbackConstruction.sheafAdjunctionContinuous,
-    Adjunction.map_restrictFullyFaithful_unit_app]
-  simp
-
-private theorem coefficientDirect_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] (U : Y.ProEtᵒᵖ) :
-    (toSheafify (ProEt.topology Y)
-      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))).app U ≫
-      (proEtaleCoefficientDirectImageMap f A).hom.app U =
-    (toSheafify (ProEt.topology X)
-      ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))).app
-        ((proEtaleBaseChange f).op.obj U) := by
-  have h := ((sheafificationAdjunction (ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
-    ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
-      ((proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
-        (proEtaleConstantRing X A))).apply_symm_apply
-      (Functor.whiskerLeft (proEtaleBaseChange f).op
-        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj
-          (CommRingCat.of (ULift.{u + 1, u} A)))))
-  exact congrArg (fun z ↦ z.app U) h
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem coefficient_restriction_counit {X : Scheme.{u}} (W : X.ProEt)
-    (A : Type u) [CommRing A]
-    (e : proEtaleConstantRing W.left A ≅
-      (AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1}
-        W.hom W.prop).obj (proEtaleConstantRing X A))
-    (he : ∀ U : W.left.ProEt,
-      (toSheafify (ProEt.topology W.left)
-        ((Functor.const W.left.ProEtᵒᵖ).obj
-          (CommRingCat.of (ULift.{u + 1, u} A)))).app (op U) ≫ e.hom.hom.app (op U) =
-        (toSheafify (ProEt.topology X)
-          ((Functor.const X.ProEtᵒᵖ).obj
-            (CommRingCat.of (ULift.{u + 1, u} A)))).app
-              (op ((MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).obj U))) :
-    Functor.whiskerRight (NatTrans.op
-      (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ W.hom W.prop trivial).counit)
-        (proEtaleConstantRing X A).obj =
-      (proEtaleCoefficientDirectImageMap W.hom A).hom ≫
-        (proEtaleBaseChange W.hom).op.whiskerLeft e.hom.hom := by
-  let T := (proEtaleSheafDirectImage W.hom CommRingCat.{u + 1}).obj
-    ((AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1}
-      W.hom W.prop).obj (proEtaleConstantRing X A))
-  apply sheafify_hom_ext (ProEt.topology X) _ _ T.property
-  apply NatTrans.ext
-  funext U
-  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  rw [← Category.assoc, coefficientDirect_unit]
-  erw [he]
-  have h := (toSheafify (ProEt.topology X)
-    ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))).naturality
-      ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤
-        W.hom W.prop trivial).counit.app U.unop).op
-  simpa [proEtaleConstantRing, constantSheaf, proEtaleBaseChange] using h.symm
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem coefficient_restriction_unit {X : Scheme.{u}} (W : X.ProEt)
-    (A : Type u) [CommRing A]
-    (e : proEtaleConstantRing W.left A ≅
-      (AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1}
-        W.hom W.prop).obj (proEtaleConstantRing X A))
-    (he : ∀ U : W.left.ProEt,
-      (toSheafify (ProEt.topology W.left)
-        ((Functor.const W.left.ProEtᵒᵖ).obj
-          (CommRingCat.of (ULift.{u + 1, u} A)))).app (op U) ≫ e.hom.hom.app (op U) =
-        (toSheafify (ProEt.topology X)
-          ((Functor.const X.ProEtᵒᵖ).obj
-            (CommRingCat.of (ULift.{u + 1, u} A)))).app
-              (op ((MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).obj U))) :
-    e.hom.hom ≫ (MorphismProperty.Over.map (f := W.hom) ⊤ W.prop).op.whiskerLeft
-      (proEtaleCoefficientDirectImageMap W.hom A).hom ≫
-      Functor.whiskerRight (NatTrans.op
-        (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ W.hom W.prop trivial).unit)
-          (proEtaleConstantRing W.left A).obj = 𝟙 _ := by
-  apply sheafify_hom_ext (ProEt.topology W.left) _ _ (proEtaleConstantRing W.left A).property
-  apply NatTrans.ext
-  funext U
-  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    NatTrans.id_app]
-  rw [← Category.assoc, ← Category.assoc, he]
-  erw [coefficientDirect_unit]
-  have h := (toSheafify (ProEt.topology W.left)
-    ((Functor.const W.left.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))).naturality
-      ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤
-        W.hom W.prop trivial).unit.app U.unop).op
-  simpa [proEtaleConstantRing, constantSheaf, proEtaleBaseChange] using h.symm
 
 end AlgebraicGeometry.Scheme

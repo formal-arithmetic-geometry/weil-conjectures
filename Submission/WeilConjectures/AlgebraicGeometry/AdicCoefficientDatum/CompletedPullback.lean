@@ -85,15 +85,4 @@ def AdicCoefficientDatum.completedPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.derived V ⥤ d.derived U :=
   completedReductionTower V d ⋙ d.towerPull f ⋙ completedRlim U (d.completedRing U)
 
-/-- The canonical ordinary-to-completed comparison: constant-tower unit followed by
-the image of the actual strict quotient augmentation.
-Source: blueprint coherence, proof step 5; completed pullback, comparison paragraph
-(blueprint: def-weil-pbc-completed-pullback). -/
-def AdicCoefficientDatum.ordinaryToCompleted {U V : Scheme.{t}} (g : U ⟶ V)
-    (K : d.derived V) : (d.pull g).obj K ⟶ (d.completedPull g).obj K :=
-  (d.constantRlimAdjunction U).unit.app ((d.pull g).obj K) ≫
-    (completedRlim U (d.completedRing U)).map
-      ((d.derivedConstantPullbackIso g).inv.app K ≫
-        (d.towerPull g).map ((completedReductionAugmentation d V).app K))
-
 end AlgebraicGeometry.Scheme

@@ -61,11 +61,6 @@ variable {X : Scheme.{u}}
 noncomputable def dualUnitIso : (𝟙_ X.Modules)ᵛ ≅ 𝟙_ X.Modules :=
   (λ_ _).symm ≪≫ asIso (dualEvaluation (𝟙_ X.Modules))
 
-/-- The evaluation `M ⊗ M^∨ ⟶ 𝒪_X` is the counit of the tensor-hom adjunction. -/
-lemma dualEvaluation_eq_tensorHomEquiv_symm (M : X.Modules) :
-    dualEvaluation M = (SheafOfModules.tensorHomEquiv M Mᵛ (𝟙_ X.Modules)).symm (𝟙 _) :=
-  rfl
-
 /-- The transpose `s^∨ : M^∨ ⟶ 𝒪_X^∨ ≅ 𝒪_X` of a section `s : 𝒪_X ⟶ M` is
 `λ ↦ λ(s)`, i.e. the evaluation `𝒪_X ⊗ M^∨ ⟶ M ⊗ M^∨ ⟶ 𝒪_X`. -/
 lemma dualMap_comp_dualUnitIso_hom {M : X.Modules} (s : 𝟙_ X.Modules ⟶ M) :

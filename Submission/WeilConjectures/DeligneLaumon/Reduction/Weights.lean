@@ -7,7 +7,14 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Log.Base
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
-public import Submission.WeilConjectures.WeilSheaf.Defs
+public import Submission.WeilConjectures.WeilSheaf.Category
+public import Submission.WeilConjectures.WeilSheaf.Cohomology
+public import Submission.WeilConjectures.WeilSheaf.Constant
+public import Submission.WeilConjectures.WeilSheaf.Dual
+public import Submission.WeilConjectures.WeilSheaf.Fourier
+public import Submission.WeilConjectures.WeilSheaf.LowerShriek
+public import Submission.WeilConjectures.WeilSheaf.OpenImmersion
+public import Submission.WeilConjectures.WeilSheaf.Stalk
 public import Submission.WeilConjectures.WeilSheaf.StalkFunctor
 public import Submission.WeilConjectures.WeilSheaf.Tensor
 public import Submission.WeilConjectures.WeilSheaf.HomologySequence
@@ -127,9 +134,6 @@ namespace WeilSheaf
 
 variable {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} {w w' : ℝ}
 
-theorem IsMixedOfWeightsAtMost.isMixed (h : F.IsMixedOfWeightsAtMost ι w) : F.IsMixed ι :=
-  ⟨w, h⟩
-
 /-- Mixed upper bounds are monotone in the bound (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (hw : w ≤ w') :
     F.IsMixedOfWeightsAtMost ι w' := by
@@ -211,22 +215,6 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
   (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
 
-
-/-- The middle term of a short exact sequence `0 ⟶ G' ⟶ G ⟶ G'' ⟶ 0` of Weil sheaves whose outer
-terms are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtration of
-`G'` with the inverse image of that of `G''` (blueprint: `lem-a1-mixed-direct-summand`, part 2). -/
-theorem IsMixedOfWeightsAtMost.of_shortExact {S : ShortComplex (WeilSheaf k₀ l X)}
-    (hS : S.ShortExact) (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w)
-    (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) : S.X₂.IsMixedOfWeightsAtMost ι w :=
-  .of_exact hS.exact h₁ h₃
-
-/-- A direct summand, more generally a retract, of a Weil sheaf mixed of weights at most `w` is
-mixed of weights at most `w`: it is a Weil subsheaf (blueprint: `lem-a1-mixed-direct-summand`,
-part 3). -/
-theorem IsMixedOfWeightsAtMost.of_retract (h : Retract G F) (hF : F.IsMixedOfWeightsAtMost ι w) :
-    G.IsMixedOfWeightsAtMost ι w :=
-  have : Mono h.i := mono_of_mono_fac h.retract
-  hF.of_mono h.i
 
 /-- A subobject of a Weil sheaf with weights at most `v` has weights at most `v`: its stalks are
 Frobenius-stable subspaces. -/
@@ -384,25 +372,11 @@ theorem IsMixedOfWeightsAtMost.of_distTriang (T : Triangle (WeilComplex k₀ l X
     (h₃ : T.obj₃.IsMixedOfWeightsAtMost ι w) : T.obj₂.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (homologySheaf_exact₂ T b hT) (h₁ b) (h₃ b)
 
-/-- **Retract stability of complex weights.** A direct summand, more generally a retract, of a
-Weil complex mixed of weights at most `w` is mixed of weights at most `w`: its cohomology sheaves
-are retracts of those of the ambient complex. -/
-theorem IsMixedOfWeightsAtMost.of_retract (h : Retract K L) (hL : L.IsMixedOfWeightsAtMost ι w) :
-    K.IsMixedOfWeightsAtMost ι w :=
-  fun b ↦ (hL b).of_retract (h.map (homologySheaf b))
-
 /-- A shift `K[n]` of a Weil complex mixed of weights at most `w` is mixed of weights at most
 `w + n`. -/
 theorem IsMixedOfWeightsAtMost.shift (hK : K.IsMixedOfWeightsAtMost ι w) (n : ℤ) :
     (K⟦n⟧).IsMixedOfWeightsAtMost ι (w + n) := fun a ↦
   ((hK (n + a)).of_iso (homologySheafShiftIso K n a (n + a) rfl).symm).mono_weight
-    (by push_cast; linarith)
-
-/-- A Weil complex `K` is mixed of weights at most `w` as soon as `K[n]` is mixed of weights at
-most `w + n`. -/
-theorem IsMixedOfWeightsAtMost.of_shift {n : ℤ} (hK : (K⟦n⟧).IsMixedOfWeightsAtMost ι (w + n)) :
-    K.IsMixedOfWeightsAtMost ι w := fun a ↦
-  ((hK (a - n)).of_iso (homologySheafShiftIso K n (a - n) a (by lia))).mono_weight
     (by push_cast; linarith)
 
 /-- A Weil sheaf placed in degree `a` is mixed of weights at most `w` as a complex if and only if

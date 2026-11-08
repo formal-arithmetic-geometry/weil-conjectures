@@ -42,21 +42,6 @@ noncomputable def commonFieldFibreIso {X S T : Scheme.{u}} (f : X ⟶ S) (g : T 
     (pullbackLeftPullbackSndIso f (S.fromSpecResidueField s) (k ≫ y)).symm ≪≫
     (pullbackLeftPullbackSndIso (f.fiberToSpecResidueField s) y k).symm
 
-@[reassoc (attr := simp)]
-lemma commonFieldFibreIso_hom_snd {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
-    (t : T) (s : S) {U V : Scheme.{u}} (z : U ⟶ Spec (T.residueField t)) (k : U ⟶ V)
-    (y : V ⟶ Spec (S.residueField s))
-    (heq : (z ≫ T.fromSpecResidueField t) ≫ g = (k ≫ y) ≫ S.fromSpecResidueField s) :
-    (commonFieldFibreIso f g t s z k y heq).hom ≫ pullback.snd _ k = pullback.snd _ z := by
-  have h : (pullbackLeftPullbackSndIso f (S.fromSpecResidueField s) (k ≫ y)).inv ≫
-      pullback.snd (f.fiberToSpecResidueField s) (k ≫ y) = pullback.snd _ _ := by
-    rw [Iso.inv_comp_eq]
-    exact (pullbackLeftPullbackSndIso_hom_snd _ _ _).symm
-  simp only [commonFieldFibreIso, Iso.trans_hom, Iso.symm_hom, Category.assoc,
-    pullbackLeftPullbackSndIso_inv_snd_snd, pullback.congrHom_hom, pullback.lift_snd,
-    Category.comp_id, h, pullbackLeftPullbackSndIso_hom_snd]
-  rfl
-
 /-- A field fibre of a pulled-back family surjects onto a prescribed field fibre, via the
 base-change projection along a surjection `Spec E → Spec K` composed with the comparison
 isomorphism `commonFieldFibreIso`.

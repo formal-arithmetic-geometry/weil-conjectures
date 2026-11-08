@@ -8,7 +8,7 @@ module
 public import Submission.WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import Submission.WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
 public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
-public import Submission.WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import Submission.WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

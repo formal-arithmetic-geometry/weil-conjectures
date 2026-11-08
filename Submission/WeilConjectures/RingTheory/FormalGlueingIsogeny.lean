@@ -14,7 +14,10 @@ import Submission.WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeI
 import Mathlib.RingTheory.Flat.Equalizer
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Submission.WeilConjectures.RingTheory.FormalGlueingMapToAlgebraization
-import Submission.WeilConjectures.RingTheory.FormalGlueingMapFromAlgebraization
+import Submission.WeilConjectures.RingTheory.FormalGlueingEquivalence
+import Submission.WeilConjectures.RingTheory.FormalGlueingData
+import Submission.WeilConjectures.AlgebraicGeometry.FormalGlueingCanonicalMaps
+import Mathlib.RingTheory.Finiteness.Ideal
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

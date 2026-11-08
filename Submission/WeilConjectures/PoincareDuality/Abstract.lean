@@ -208,16 +208,6 @@ projection morphism `pf` followed by the counit `F G ⟶ 𝟭`. -/
 noncomputable def cupProduct (K L : C) : P.obj K ⊗ G.obj L ⟶ P.obj (K ⊗ L) :=
   (pf.app K).app (G.obj L) ≫ P.map (K ◁ adj.counit.app L)
 
-omit [MonoidalClosed C] [MonoidalClosed D] in
-/-- The cup product is natural in its second variable. -/
-@[reassoc]
-lemma cupProduct_natural_right (K : C) {L L' : C} (h : L ⟶ L') :
-    P.obj K ◁ G.map h ≫ cupProduct adj pf K L' = cupProduct adj pf K L ≫ P.map (K ◁ h) := by
-  rw [cupProduct, cupProduct, pf_naturality_right_assoc, Category.assoc, ← P.map_comp,
-    ← P.map_comp, ← MonoidalCategory.whiskerLeft_comp, ← MonoidalCategory.whiskerLeft_comp]
-  congr 3
-  exact adj.counit_naturality h
-
 end CupProduct
 
 section Exchange

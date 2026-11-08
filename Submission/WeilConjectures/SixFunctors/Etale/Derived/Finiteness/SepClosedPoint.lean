@@ -95,14 +95,6 @@ variable {C : Type*} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [HasDerivedCategory.{v} C] [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
-/-- A zero object has Tor amplitude in every interval. -/
-lemma torAmplitudeIn_of_isZero (a b : ℤ) {K : DerivedCategory C} (hK : IsZero K) :
-    torAmplitudeIn C a b K := fun F ↦ by
-  have h : IsZero (K ⊗ (singleFunctor C 0).obj F) :=
-    (tensorRight ((singleFunctor C 0).obj F)).map_isZero hK
-  have h' (i : ℤ) := (homologyFunctor C i).map_isZero h
-  exact ⟨(isGE_iff _ a).2 fun i _ ↦ h' i, (isLE_iff _ b).2 fun i _ ↦ h' i⟩
-
 end
 
 end DerivedCategory

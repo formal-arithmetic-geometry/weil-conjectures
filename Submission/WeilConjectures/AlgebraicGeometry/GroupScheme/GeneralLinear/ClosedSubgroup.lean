@@ -247,13 +247,6 @@ theorem subgroupSchemeHom_comp_subgroupSchemeι :
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
   rfl
 
-/-- The inclusions of closed subgroup schemes compose: `V(K) ⟶ V(J) ⟶ V(I)` is `V(K) ⟶ V(I)`. -/
-@[reassoc (attr := simp)]
-theorem subgroupSchemeHom_comp {K : Ideal (CoordinateRing n k)} [K.IsHopfIdeal k] (h' : J ≤ K) :
-    subgroupSchemeHom h' ≫ subgroupSchemeHom h = subgroupSchemeHom (h.trans h') := by
-  rw [← cancel_mono (subgroupSchemeι I), Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι,
-    subgroupSchemeHom_comp_subgroupSchemeι, subgroupSchemeHom_comp_subgroupSchemeι]
-
 instance : IsClosedImmersion (subgroupSchemeHom h).left :=
   IsClosedImmersion.spec_of_surjective _ (Ideal.Quotient.factor_surjective h)
 

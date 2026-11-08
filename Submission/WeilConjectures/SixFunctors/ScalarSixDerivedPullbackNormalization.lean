@@ -43,14 +43,6 @@ private instance scalarSixRing_comm (Λ : ScalarSixRing.{u}) : IsCommMonObj Λ.X
 private instance scalarSixMap_isMonHom {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') :
     IsMonHom a.hom.hom := a.hom.isMonHom_hom
 
-private def scalarSixScalarAdjunction {Λ Λ' : ScalarSixRing.{u}}
-    (a : Λ ⟶ Λ') (Z : Scheme.{u}) :
-    scalarSixChange a Z ⊣
-      (Mod.comap (D := Sheaf (ProEt.topology Z) Ab.{u + 1})
-        (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Z)).mapDerivedCategory :=
-  Mod.derivedExtendMapDerivedCategoryAdjunction
-    (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Z)
-
 set_option maxHeartbeats 100000 in
 -- Keep the derived adjunction data folded in this component comparison.
 private theorem scalarSixPullHom_isIso_app {Λ Λ' : ScalarSixRing.{u}}

@@ -19,7 +19,12 @@ import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedCompari
 import Submission.WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Submission.WeilConjectures.ConstructibleSheaf.Monoidal
-import Submission.WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
+import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.Topology.KrullDimension
+import Mathlib.AlgebraicGeometry.Artinian
+import Submission.WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

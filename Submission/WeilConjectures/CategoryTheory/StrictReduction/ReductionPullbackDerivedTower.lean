@@ -139,7 +139,12 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Submission.WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
 import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Preadditive
-import all Submission.WeilConjectures.CategoryTheory.Derived.DerivedCoefficientMapDescent
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.ObjectProperty.Basic
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import all Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import all Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
@@ -230,12 +235,6 @@ instance termwise_colimits (F : A ⥤ B) [PreservesFiniteColimits F] :
   preservesFiniteColimits L := preservesColimitsOfShape_of_evaluation _ L (fun n ↦
     inferInstanceAs (PreservesColimitsOfShape L ((evaluation ℕᵒᵖ A).obj n ⋙ F)))
 
-/-- Constant towers commute with actual termwise pullback.
-Source: Stacks 06YY (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
-def constantSquare (F : A ⥤ B) :
-    Functor.const ℕᵒᵖ ⋙ termwise F ≅ F ⋙ Functor.const ℕᵒᵖ :=
-  NatIso.ofComponents (fun M ↦ Functor.constComp ℕᵒᵖ M F)
-
 variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ℕᵒᵖ ⥤ A)]
 
 /-- The universal derived reduction and its augmentation. The counit is part of the
@@ -255,14 +254,6 @@ structure Model (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ 
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (augmentation Q e) (.up ℤ)).app P)
 
 variable [MonoidalCategory B]
-
-/-- The pulled-back coefficient unit, using the normalized pullback unit isomorphism.
-Source: Stacks 03EL (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
-def pulledUnit (F : A ⥤ B) (j : F.obj (𝟙_ A) ≅ 𝟙_ B)
-    (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ A) ⟶ Q) :
-    (Functor.const ℕᵒᵖ).obj (𝟙_ B) ⟶ Q ⋙ F :=
-  (Functor.const ℕᵒᵖ).map j.inv ≫ (Functor.constComp ℕᵒᵖ (𝟙_ A) F).inv ≫
-    Functor.whiskerRight e F
 
 /-- The ordinary comparison as one isomorphism of strict towers, natural in the input.
 Source: Stacks 03EL (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
@@ -287,70 +278,7 @@ variable [HasDerivedCategory.{w'} B] [HasDerivedCategory.{t'} (ℕᵒᵖ ⥤ B)]
 
 variable [MonoidalPreadditive B]
 
-/-- Normalization by the universal reduction counits on every good representative.
-The equation is the conjugation formula, with both exact-localization factors explicit.
-Source: Stacks 06YY and 07A4
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
-def IsNormalized (F : A ⥤ B) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ A) ⟶ Q)
-    (j : F.obj (𝟙_ A) ≅ 𝟙_ B)
-    (goodA : CochainComplex A ℤ → Prop) (goodB : CochainComplex B ℤ → Prop)
-    (MY : Model Q e goodA) (MX : Model (Q ⋙ F) (pulledUnit F j Q e) goodB)
-    (mu : ∀ M N, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N)
-    (hmu : ∀ {M M' N N'} (f : M ⟶ M') (g : N ⟶ N'),
-      F.map (f ⊗ₘ g) ≫ (mu M' N').hom =
-        (mu M N).hom ≫ (F.map f ⊗ₘ F.map g))
-    (tau : MY.B ⋙ (termwise F).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ MX.B) : Prop :=
-  ∀ P, goodA P →
-    (termwise F).mapDerivedCategory.map (MY.counit.app P) ≫
-        (termwise F).mapDerivedCategoryFactors.hom.app
-          (((reduction Q).mapHomologicalComplex (.up ℤ)).obj P) ≫
-        DerivedCategory.Q.map
-          ((NatIso.mapHomologicalComplex (ordinaryComparison F mu hmu Q) (.up ℤ)).hom.app P) =
-      tau.hom.app (DerivedCategory.Q.obj P) ≫
-        MX.B.map (F.mapDerivedCategoryFactors.hom.app P) ≫
-        MX.counit.app ((F.mapHomologicalComplex (.up ℤ)).obj P)
-
 end CategoryTheory.StrictReduction
-
-private noncomputable def cochainRepresentativeWhiskering
-    {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory.{w} A]
-    (good : CochainComplex A ℤ → Prop)
-    (res : ∀ K, ∃ (L : CochainComplex A ℤ) (p : L ⟶ K), good L ∧ QuasiIso p)
-    (E : Type c) [Category.{d} E] :
-    ((Functor.whiskeringLeft _ _ E).obj
-      (ObjectProperty.ι good ⋙ DerivedCategory.Q)).FullyFaithful := by
-  let q := HomotopyCategory.quotient A (.up ℤ)
-  let P : ObjectProperty (CochainComplex A ℤ) := good
-  let S : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ good X.as
-  let f := S.lift (P.ι ⋙ q) (fun X ↦ X.property)
-  have : f.Full := ⟨by
-    intro X Y g
-    obtain ⟨a, ha⟩ := q.map_surjective g.hom
-    refine ⟨ObjectProperty.homMk a, ?_⟩
-    exact ObjectProperty.hom_ext _ ha⟩
-  have : f.EssSurj := ⟨by
-    intro X
-    obtain ⟨Y, hy⟩ := HomotopyCategory.quotient_obj_surjective X.obj
-    refine ⟨⟨Y, ?_⟩, ⟨ObjectProperty.isoMk S (eqToIso hy)⟩⟩
-    change S (q.obj Y)
-    rw [hy]
-    exact X.property⟩
-  have hres : ∀ X : HomotopyCategory A (.up ℤ),
-      ∃ (Y : S.FullSubcategory) (s : Y.obj ⟶ X), HomotopyCategory.quasiIso A (.up ℤ) s := by
-    intro X
-    obtain ⟨L, p, hL, hp⟩ := res X.as
-    exact ⟨⟨q.obj L, hL⟩, q.map p,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff p).2 hp⟩
-  have : (S.ι ⋙ DerivedCategory.Qh).IsLocalization
-      ((HomotopyCategory.quasiIso A (.up ℤ)).inverseImage S.ι) :=
-    CategoryTheory.restriction_localization _ _ S hres
-  let ff := (Localization.fullyFaithfulWhiskeringLeft (S.ι ⋙ DerivedCategory.Qh)
-    ((HomotopyCategory.quasiIso A (.up ℤ)).inverseImage S.ι) E).comp
-      (CategoryTheory.fullyFaithfulWhiskeringOfFullEssSurj f E)
-  exact ff.ofIso ((Functor.whiskeringLeft _ _ E).mapIso
-    (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)))
 
 namespace CategoryTheory.StrictReduction
 
@@ -369,27 +297,9 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}}
 
-/-- Exactly the flat-term K-flat representatives in the statement.
-Source: Stacks 06YS (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
-def flatRepresentatives (R : Sheaf J CommRingCat.{r}) (P : Complex R) : Prop :=
-  P.IsKFlatIndependentCoefficients ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite (P.X n)
-
-private theorem resolves (P : Complex R) :
-    ∃ (L : Complex R) (p : L ⟶ P), flatRepresentatives R L ∧ QuasiIso p := by
-  obtain ⟨L, p, hL, hflat, hp, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) P
-  exact ⟨L, p, ⟨hL, fun n ↦ (exactFunctor _ _).prop_of_iso
-    (SheafOfModules.siteSheafTensorRightIso R (L.X n)).symm (hflat n)⟩, hp⟩
-
 variable [HasDerivedCategory.{dR} (Modules R)]
   [HasDerivedCategory.{dS} (Modules S)]
   [HasDerivedCategory.{dTY} (ℕᵒᵖ ⥤ Modules R)]
   [HasDerivedCategory.{dTX} (ℕᵒᵖ ⥤ Modules S)]
-
-private noncomputable def representativeWhiskering
-    (E : Type a) [Category.{b} E] :
-    ((Functor.whiskeringLeft _ _ E).obj
-      (ObjectProperty.ι (flatRepresentatives R) ⋙ DerivedCategory.Q)).FullyFaithful :=
-  cochainRepresentativeWhiskering (flatRepresentatives R) resolves E
 
 end CategoryTheory.StrictReduction

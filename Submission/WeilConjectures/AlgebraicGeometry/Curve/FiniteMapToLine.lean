@@ -16,9 +16,13 @@ public import Mathlib.RingTheory.RingHom.StandardSmooth
 public import Mathlib.RingTheory.Unramified.Locus
 public import Submission.WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import Submission.WeilConjectures.AlgebraicGeometry.Regular
-public import Submission.WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Localization.Defs
 public import Submission.WeilConjectures.Mathlib.RingTheory.NoetherNormalization
-public import Submission.WeilConjectures.Mathlib.RingTheory.Unramified.Field
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.RingTheory.Unramified.Field
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

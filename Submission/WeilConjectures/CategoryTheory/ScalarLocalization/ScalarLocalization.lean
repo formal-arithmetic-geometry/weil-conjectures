@@ -262,18 +262,5 @@ private theorem map_comp (U : C ⥤ C) [U.Additive] [U.Linear R] :
     rfl
   | add f g hf hg => simp only [map_add, hf, hg]
 
-private theorem map_identity : map R C p (𝟭 C) = 𝟭 (ScalarLocalization R C p) := by
-  refine Functor.ext (F := map R C p (𝟭 C))
-    (G := 𝟭 (ScalarLocalization R C p)) (fun _ ↦ rfl) ?_
-  intro K L f
-  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
-  change mapHom R C p (𝟭 C) _ _ f = f
-  dsimp only [mapHom]
-  induction f using TensorProduct.inductionOn with
-  | tmul a f =>
-    simp only [LinearMap.baseChange_tmul]
-    rfl
-  | add f g hf hg => simp only [map_add, hf, hg]
-
 end ScalarLocalization
 end CategoryTheory

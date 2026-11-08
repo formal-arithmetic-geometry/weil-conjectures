@@ -4,7 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Submission.WeilConjectures.AlgebraicGeometry.Pur.PurInverseImageTensorHomDefinitions
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Ring
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 import all Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
@@ -262,99 +287,7 @@ attribute [local irreducible] proEtaleModuleInverseImage
 
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
   (O O' : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (α : O ⟶ O')
-private noncomputable abbrev imageMap :=
-  (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map α
-private noncomputable abbrev push (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
-  T g R
-
-private noncomputable def restrictionSquare :
-    restriction.{u + 1, u + 1, u} (K := ProEt.topology X)
-        (imageMap g O O' α) ⋙ push g O ≅
-      push g O' ⋙ restriction.{u + 1, u + 1, u} (K := ProEt.topology Y) α := by
-  refine NatIso.ofComponents (fun M ↦ ?_) ?_
-  · refine (SheafOfModules.fullyFaithfulForget _).preimageIso
-      (PresheafOfModules.isoMk (fun V ↦ ?_) ?_)
-    · let P := ((restriction.{u + 1, u + 1, u} (K := ProEt.topology X)
-          (imageMap g O O' α) ⋙ push g O).obj M).val.obj V
-      let Q := ((push g O' ⋙ restriction.{u + 1, u + 1, u}
-          (K := ProEt.topology Y) α).obj M).val.obj V
-      refine
-        { hom := ModuleCat.ofHom (X := P) (Y := Q)
-            { toFun := fun m ↦ m
-              map_add' := fun _ _ ↦ rfl
-              map_smul' := ?_ }
-          inv := ModuleCat.ofHom (X := Q) (Y := P)
-            { toFun := fun m ↦ m
-              map_add' := fun _ _ ↦ rfl
-              map_smul' := ?_ }
-          hom_inv_id := by ext; rfl
-          inv_hom_id := by ext; rfl }
-      · intro r m
-        let m' : M.val.obj ((proEtaleBaseChange g).op.obj V) := m
-        change (imageMap g O O' α).hom.app ((proEtaleBaseChange g).op.obj V)
-            (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app O).hom.app V r) • m' =
-          ((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app O').hom.app V
-            (α.hom.app V r) • m'
-        congr 1
-        exact (congrArg (fun k ↦ k.hom.app V (show O.obj.obj V from r))
-          ((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.naturality α)).symm
-      · intro r m
-        let m' : M.val.obj ((proEtaleBaseChange g).op.obj V) := m
-        change ((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app O').hom.app V
-            (α.hom.app V r) • m' =
-          (imageMap g O O' α).hom.app ((proEtaleBaseChange g).op.obj V)
-            (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app O).hom.app V r) • m'
-        congr 1
-        exact congrArg (fun k ↦ k.hom.app V (show O.obj.obj V from r))
-          ((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.naturality α)
-    · intro V W i
-      ext m
-      rfl
-  · intro M N f
-    ext V m
-    rfl
-
-private noncomputable def scalarIso :
-    tensorFunctor.{u + 1, u + 1, u} (K := ProEt.topology Y) α ⋙
-        proEtaleModuleInverseImage g O' ≅
-      proEtaleModuleInverseImage g O ⋙
-        tensorFunctor.{u + 1, u + 1, u} (K := ProEt.topology X) (imageMap g O O' α) :=
-  ((tensorAdjunction.{u + 1, u + 1, u} (K := ProEt.topology Y) α).comp
-    (canonicalAdjunction g O')).leftAdjointUniq
-    (((canonicalAdjunction g O).comp
-      (tensorAdjunction.{u + 1, u + 1, u} (K := ProEt.topology X)
-        (imageMap g O O' α))).ofNatIsoRight
-      (restrictionSquare g O O' α))
-
-private theorem tensorUnit_section {Z : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}} (c : R ⟶ S)
-    (M : SheafOfModules.{u + 1} (ringSheaf.{u + 1, u + 1, u} R)) (V : Z.ProEt)
-    (m : M.val.obj (op V)) :
-    ((tensorAdjunction.{u + 1, u + 1, u} (K := ProEt.topology Z) c).unit.app M).val.app
-        (op V) m = purScalarSection R S c M V 1 m := by
-  unfold tensorAdjunction
-  rfl
-
 attribute [local irreducible] SheafOfModules.changeOfRingsOfUniverses
-
-private theorem inverseSection_smul
-    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O')) (V : Y.ProEt)
-    (b : O'.obj.obj (op V)) (m : M.val.obj (op V)) :
-    @Eq (ModuleCat.carrier (((proEtaleModuleInverseImage g O').obj M).val.obj
-      (op ((proEtaleBaseChange g).obj V))))
-      (purInverseImageSection g O' M V
-        (@SMul.smul (O'.obj.obj (op V)) (M.val.obj (op V)) inferInstance b m))
-      (@SMul.smul
-        (((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj O').obj.obj
-          (op ((proEtaleBaseChange g).obj V)))
-        (((proEtaleModuleInverseImage g O').obj M).val.obj
-          (op ((proEtaleBaseChange g).obj V))) inferInstance
-        ((((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app O').hom.app
-          (op V)) b) (purInverseImageSection g O' M V m)) := by
-  have h := (((canonicalAdjunction g O').unit.app M).val.app (op V)).hom.map_smul b m
-  rw [canonicalUnit_sections, canonicalUnit_sections] at h
-  exact h
 
 attribute [local semireducible] SheafOfModules.changeOfRingsOfUniverses
   proEtaleModuleInverseImage

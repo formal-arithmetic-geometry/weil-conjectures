@@ -39,9 +39,4 @@ set_option hygiene false in
 local notation "DP(" X ", " A ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
 
-/-- The component of the actual compact-support projection transformation. -/
-noncomputable abbrev projection (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [HasCompactification f] (K : DE(X, A)) (L : DE(Y, A)) :=
-  ((Etale.projectionMap (ModuleCat.{u + 1} A) f).app K).app L
-
 end AlgebraicGeometry.CoefficientChange

@@ -217,12 +217,4 @@ noncomputable def weilCompactSupportCohomologyGeometricFiberWeilIso :
   Functor.isoWhiskerLeft (WeilBoundedConstructible.forget ℓ e.hom)
     (boundedConstructibleLowerShriekGeometricFiberWeilIso ℓ (toPoint X))
 
-/-- The components of `weilCompactSupportCohomologyGeometricFiberWeilIso`: for a Weil object `K`
-on `X`, `p^* RΓ_c(X, K) ≅ Rā_! (p_X^* K)` as condensed Weil objects on `Spec k̄`. -/
-lemma weilCompactSupportCohomologyGeometricFiberWeilIso_app
-    (K : WeilBoundedConstructible ℓ e.hom) :
-    (weilCompactSupportCohomologyGeometricFiberWeilIso ℓ e).app K =
-      (boundedConstructibleLowerShriekGeometricFiberWeilIso ℓ (toPoint X)).app K.carrier :=
-  rfl
-
 end AlgebraicGeometry.ProEtale.CondensedRing

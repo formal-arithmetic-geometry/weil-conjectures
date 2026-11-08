@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
-public import Submission.WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDescent
+public import Mathlib.CategoryTheory.NatIso
+public import Submission.WeilConjectures.CategoryTheory.CommonStage.CoherentPairFunctorDescent
+public import Submission.WeilConjectures.CategoryTheory.StageSystem.Basic
+import Submission.WeilConjectures.CategoryTheory.StageSystem.Functor
 public import Submission.WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleRootsOfUnitySheafSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
@@ -192,24 +195,6 @@ instance coefficientTwistFiniteRank (n : ℕ) :
     (purTwistFiniteOne S ℓ E n).IsFiniteLocallyFreeOfRank 1 :=
   ((pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.2 n).2.1
 
-/-- The finite coefficient twist at quotient exponent n+1.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
-abbrev finiteCoefficientTwist (n : ℕ) (m : ℤ) :
-    SheafOfModules.{u + 1} (integralCoefficientSheaf ℓ E S n) :=
-  coefficientTwistLine S (purTwistFiniteOne S ℓ E n) m
-
-/-- Derived tensor by the finite twisting line.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
-def finiteComplexTwist (n : ℕ) (m : ℤ) :
-    proEtaleDerivedCategory S (Padic.coefficientExtensionRing ℓ E (n + 1)) ⥤
-      proEtaleDerivedCategory S (Padic.coefficientExtensionRing ℓ E (n + 1)) := by
-  letI := (coefficientTwistLine_exact S (purTwistFiniteOne S ℓ E n) m).1
-  letI := (coefficientTwistLine_exact S (purTwistFiniteOne S ℓ E n) m).2.1
-  letI := (coefficientTwistLine_exact S (purTwistFiniteOne S ℓ E n) m).2.2
-  exact (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-    (A := integralCoefficientCommRingSheaf ℓ E S n)
-    (finiteCoefficientTwist ℓ E S n m)).mapDerivedCategory
-
 /-- Tensor by the completed integral line on module sheaves.
 Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
 def integralSheafTwist (m : ℤ) : integralTowerModules ℓ E S ⥤ integralTowerModules ℓ E S :=
@@ -237,64 +222,6 @@ instance integralSheafTwist_finiteColimits (m : ℤ) :
     PreservesFiniteColimits (integralSheafTwist ℓ E S m) :=
   (coefficientTwistLine_exact S
     (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m).2.2
-
-/-- Derived tensor by the completed integral twisting line. Since the line is flat,
-termwise tensor already computes derived tensor for every unbounded complex.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
-def integralComplexTwist (m : ℤ) :
-    completedIntegralDerivedCategory ℓ E S D hℓ ⥤
-      completedIntegralDerivedCategory ℓ E S D hℓ :=
-  (integralSheafTwist ℓ E S m).mapDerivedCategory
-
-/-- The integral twist placed in degree zero.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
-def integralCoefficientTwist (m : ℤ) :
-    completedIntegralDerivedCategory ℓ E S D hℓ :=
-  (DerivedCategory.singleFunctor _ 0).obj
-    (coefficientTwistLine S
-      (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m)
-
-/-- Every integral twist is bounded constructible and derived complete.
-Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
-Proof: trivialize on a primitive-root pro-etale cover. Powers and duals are again
-rank-one lines, and their finite reductions are finite locally constant with common
-support interval [0,0]. The compatible finite reductions recover the completed line,
-so its canonical derived-completeness comparison is invertible. -/
-theorem integralCoefficientTwist_constructible (m : ℤ) :
-    boundedConstructibleDerivedCompleteIntegral D ℓ hℓ E S
-      (integralCoefficientTwist D ℓ hℓ E S m) := by
-  classical
-  let L := coefficientTwistLine S
-    (R := completedIntegralCommRingSheafUnrestricted ℓ E S) (purTwistIntegralModule S ℓ E) m
-  have hL : L.IsFiniteLocallyFreeOfRank 1 := by
-    let hroot : (purTwistIntegralModule S ℓ E).IsFiniteLocallyFreeOfRank 1 :=
-      (pur_twist_sheaf_locally_free.{u, 0} S ℓ E).2.2.1.2.2.1
-    let hsmall : EssentiallySmall.{u + 1} S.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-    have h := @SheafOfModules.OrdinaryLineScalar.signed_power_rank.{u, u + 1}
-      S hsmall (completedIntegralCommRingSheafUnrestricted ℓ E S)
-        (purTwistIntegralModule S ℓ E) hroot m
-    cases m <;> exact h
-  obtain ⟨hred, hcomplete⟩ := completedLine_derived S ℓ E L hL D hℓ
-  refine ⟨hcomplete, 0, 0, le_rfl, ?_⟩
-  intro n
-  let a := completedIntegralCommRingProjectionUnrestricted ℓ E S n
-  let N := SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} a L
-  have hN : N.IsFiniteLocallyFreeOfRank 1 := by
-    let := (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one L).mpr hL
-    exact (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one N).mp
-      (SheafOfModules.scalarExtensionDual_localIsomorphism.{u + 1, u, u + 1}
-        (completedIntegralCommRingSheafUnrestricted ℓ E S)
-        (integralCoefficientCommRingSheaf ℓ E S n) a L).1
-  let := Padic.finite_coefficientExtensionRing ℓ E (n + 1) (Nat.succ_pos n)
-  have hconst := (finiteLocallyFreeLine_models S
-    (Padic.coefficientExtensionRing ℓ E (n + 1)) N hN).2.1
-  obtain ⟨hfin, hc, hs, _⟩ := constructible_single_support S
-    (Padic.coefficientExtensionRing ℓ E (n + 1)) N hconst _ (hred n).some
-  refine ⟨⟨hfin, hc⟩, ?_⟩
-  intro i hi
-  have hi0 : i = 0 := hs hi
-  subst i
-  exact ⟨le_rfl, le_rfl⟩
 
 /-- The coefficient line as a module sheaf, for every integer exponent.
 Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/

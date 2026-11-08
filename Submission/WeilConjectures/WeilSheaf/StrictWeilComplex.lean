@@ -85,16 +85,8 @@ lemma lift_obj_carrier (K : A) : ((lift Φ e).obj K).carrier = Φ.obj K :=
   rfl
 
 @[simp]
-lemma lift_obj_str (K : A) : ((lift Φ e).obj K).str = e.app K :=
-  mk_str _ _
-
-@[simp]
 lemma lift_map_hom_f {K K' : A} (f : K ⟶ K') : ((lift Φ e).map f).hom.f = Φ.map f :=
   rfl
-
-/-- The underlying object of `lift Φ e` is given by `Φ`. -/
-noncomputable def liftCompForgetIso : lift Φ e ⋙ forget F ≅ Φ :=
-  Iso.refl _
 
 end Lift
 
@@ -145,13 +137,6 @@ noncomputable def mapOfNatIsoObjPreimageIso [L.Full] [L.Faithful] (K : IsoAlgebr
       simp [mapOfNatIsoPreimage]
     rw [← str_hom, ← str_hom, h]
     simp))
-
-/-- The essential image of the transport along a fully faithful functor consists of the algebras
-whose underlying object is in the essential image of the functor. -/
-lemma essImage_mapOfNatIso [L.Full] [L.Faithful] (K : IsoAlgebra G) :
-    (mapOfNatIso e).essImage K ↔ L.essImage K.carrier := by
-  refine ⟨fun ⟨K₀, ⟨i⟩⟩ ↦ ⟨K₀.carrier, ⟨(forget G).mapIso i⟩⟩, fun ⟨c, ⟨i⟩⟩ ↦ ?_⟩
-  exact ⟨_, ⟨mapOfNatIsoObjPreimageIso e K c i⟩⟩
 
 end Map
 
@@ -271,13 +256,6 @@ noncomputable def toStrictWeilComplexCompForgetIso :
 lemma toStrictWeilComplex_obj_carrier (K : WeilComplex k₀ l X) :
     (toStrictWeilComplex.obj K).carrier = forget.obj K :=
   rfl
-
-/-- The structure isomorphism of the strict Weil complex of `K` is the derived Frobenius
-`θ_K`. -/
-@[simp]
-lemma toStrictWeilComplex_obj_str (K : WeilComplex k₀ l X) :
-    (toStrictWeilComplex.obj K).str = (frobeniusIso X).app K :=
-  IsoAlgebra.lift_obj_str _ _ _
 
 @[simp]
 lemma toStrictWeilComplex_map_hom_f {K L : WeilComplex k₀ l X} (f : K ⟶ L) :

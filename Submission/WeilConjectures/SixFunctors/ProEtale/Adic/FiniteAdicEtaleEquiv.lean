@@ -59,11 +59,6 @@ namespace CategoryTheory.Sheaf
 variable {C : Type*} [Category C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}]
   [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
 
-/-- The additive equivalence of cohomology groups induced by an isomorphism of sheaves. -/
-noncomputable def H.mapAddEquiv {F G : Sheaf J AddCommGrpCat.{u}} (e : F ≅ G) (n : ℕ) :
-    H F n ≃+ H G n :=
-  Ext.postcompAddEquiv _ e n
-
 end CategoryTheory.Sheaf
 
 namespace AlgebraicGeometry.ProEtale

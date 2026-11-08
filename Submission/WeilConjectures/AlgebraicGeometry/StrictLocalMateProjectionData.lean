@@ -27,39 +27,6 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- The global-sections map of the degree-n homology of the derived strict-local mate.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: def-weil-pbc-strict-local-mate-projection-data). -/
-noncomputable abbrev strictLocalBaseChangeHomologyMap
-    {X S : Scheme.{v}} (f : X ⟶ S)
-    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))
-    (n : ℤ) :
-    (Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology
-      AddCommGrpCat.{v + 1}).obj
-      ((DerivedCategory.Plus.homologyFunctor _ n).obj
-        ((upperStar AddCommGrpCat.{v + 1}
-          (Scheme.strictLocalizationToBase s)).mapDerivedCategoryPlus.obj
-          ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K))) ⟶
-    (Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology
-      AddCommGrpCat.{v + 1}).obj
-      ((DerivedCategory.Plus.homologyFunctor _ n).obj
-        ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1}
-          (pullback.snd f (Scheme.strictLocalizationToBase s))).obj
-          ((upperStar AddCommGrpCat.{v + 1}
-            (pullback.fst f (Scheme.strictLocalizationToBase s))).mapDerivedCategoryPlus.obj
-            K))) :=
-  ((Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology
-    AddCommGrpCat.{v + 1}).map
-    ((DerivedCategory.Plus.homologyFunctor _ n).map
-      ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus
-        (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
-          (pullback.snd f (Scheme.strictLocalizationToBase s))).derivedPlus
-        (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
-          (IsPullback.of_hasPullback f
-            (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-            |>.natTrans.app K)))
-
 /-- Exact strict-local sections and Leray identify the target with limit cohomology.
 Source: Stacks, Tags 03Q9 and 03QO
 (blueprint: def-weil-pbc-strict-local-mate-projection-data). -/

@@ -36,11 +36,6 @@ open Scheme
 variable {X Y Y' Y'' : Scheme.{u}} (g : Y ⟶ X) (g' : Y' ⟶ X) (g'' : Y'' ⟶ X) [WeaklyEtale g]
   [WeaklyEtale g'] [WeaklyEtale g'']
 
-/-- The action restriction along an automorphism is the restriction along it. -/
-lemma galoisActionRestrictionNatTrans_eq_restrictionHom (s : Y ⟶ Y) (hs : s ≫ g = g) :
-    galoisActionRestrictionNatTrans g s hs = restrictionHom g g s hs :=
-  rfl
-
 variable {g g'} in
 lemma restrictionHom_congr {s t : Y' ⟶ Y} (hs : s ≫ g = g') (hst : s = t) :
     restrictionHom g g' s hs = restrictionHom g g' t (hst ▸ hs) := by

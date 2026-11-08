@@ -217,33 +217,6 @@ theorem CategoryTheory.Iso.powSuccStr_symm_trans_hom_eq {C D : Type*} [Category 
       reassoc_of% h]
     exact congrArg (fun s ↦ (ε (e.pow (n + 2)).hom).inv ≫ s) (_root_.pow_succ t (n + 1)).symm
 
-/-- If the carrier of an algebra for the identity functor is isomorphic to the unit, by an
-isomorphism conjugating the structure automorphism to an endomorphism `t` of the unit, then the
-structure automorphism has trace `t`. -/
-lemma CategoryTheory.Endofunctor.IsoAlgebra.traceOrZero_str_hom_eq {C : Type*} [Category C]
-    [MonoidalCategory C] [hC : BraidedCategory C] [Preadditive C] (A : IsoAlgebra (𝟭 C))
-    (ε : 𝟙_ C ≅ A.carrier) (t : End (𝟙_ C)) (h : ε.hom ≫ A.str.hom ≫ ε.inv = t) :
-    traceOrZero A.str.hom = t := by
-  rw [← traceOrZero_conj ε.symm, Iso.symm_inv, Iso.symm_hom, h]
-  let : HasRightDual (𝟙_ C) := ⟨𝟙_ C⟩
-  rw [traceOrZero_eq_trace, trace_tensorUnit]
-
-/-- Let `W : G ≅ E ⋙ G` and `φ : E a ≅ a`, and let `ε : d ≅ G a` conjugate the automorphism
-`G a ≅ G (E a) ≅ G a` given by `W` and `G φ` to the identity. If an automorphism `s` of `a` is
-sent by `G` to the conjugate of `t` by `ε`, then the automorphism given by `W` and `G (φ ≫ s)` is
-conjugated by `ε` to `t`. -/
-lemma CategoryTheory.Iso.hom_comp_app_trans_mapIso_trans_hom_comp_inv_eq {B D : Type*}
-    [Category B] [Category D] {G : B ⥤ D} {E : B ⥤ B} (W : G ⋙ 𝟭 D ≅ E ⋙ G) {a : B} {d : D}
-    (φ : E.obj a ≅ a) (s : a ≅ a) (ε : d ≅ G.obj a) (t : d ⟶ d)
-    (h0 : ε.hom ≫ (W.app a ≪≫ G.mapIso φ).hom ≫ ε.inv = 𝟙 d)
-    (hs : G.map s.hom ≫ ε.inv = ε.inv ≫ t) :
-    ε.hom ≫ (W.app a ≪≫ G.mapIso (φ ≪≫ s)).hom ≫ ε.inv = t := by
-  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
-    Category.assoc] at h0 ⊢
-  rw [hs]
-  simp only [← Category.assoc] at h0 ⊢
-  rw [h0, Category.id_comp]
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -297,72 +270,15 @@ lemma WeilSheaf.pow_scalarUnit (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) :
   rw [Iso.trans_hom, Iso.symm_hom, scalarAut_hom]
   exact powSuccStr_εIso_symm_trans_scalarAut_hom ℓ e c n
 
-/-- The Frobenius on the stalk of the twisted unit Weil sheaf, conjugated by the unit comparison
-`ε_x : Λ ≅ x̄^* Λ`, is the multiplication by `c`. -/
-lemma WeilSheaf.stalkFunctor_obj_scalarUnit_str_hom {Ω : Type u} [Field Ω] [hΩ : IsSepClosed Ω]
-    (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
-    (hx : x ≫ e.hom.left = σ ≫ x) (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom ≫
-      ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj (WeilSheaf.scalarUnit ℓ e c)).str.hom ≫
-        (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv =
-      scalarEndRingHom ℓ (Spec (.of Ω)) c := by
-  have h0 := WeilSheaf.stalkFunctor_obj_unit_str_hom ℓ e σ x hx
-  rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.unit_str] at h0
-  rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.scalarUnit_str]
-  exact Iso.hom_comp_app_trans_mapIso_trans_hom_comp_inv_eq _ _ _ _ _ h0
-    (map_scalarEndRingHom_comp_εIso_inv ℓ x c)
-
-/-- The Frobenius on the stalk of the twisted unit Weil sheaf has trace `c`. The braiding of
-`Mod_{Spec Ω}` is an argument, to be unified with the one of the trace at hand. -/
-lemma WeilSheaf.traceOrZero_stalkFunctor_obj_scalarUnit_str_hom {Ω : Type u} [Field Ω]
-    [hΩ : IsSepClosed Ω] [hB : BraidedCategory (GeometricPointMod ℓ Ω)]
-    (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
-    (hx : x ≫ e.hom.left = σ ≫ x) (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    @Eq (End (𝟙_ (GeometricPointMod ℓ Ω)))
-      (traceOrZero (C := GeometricPointMod ℓ Ω)
-        (IsoAlgebra.str (C := GeometricPointMod ℓ Ω) (F := 𝟭 (GeometricPointMod ℓ Ω))
-          (Functor.obj (D := IsoAlgebra (𝟭 (GeometricPointMod ℓ Ω)))
-            (WeilSheaf.stalkFunctor ℓ e σ x hx) (WeilSheaf.scalarUnit ℓ e c))).hom)
-      (scalarEndRingHom ℓ (Spec (.of Ω)) c) := by
-  refine IsoAlgebra.traceOrZero_str_hom_eq (hC := hB) _
-    (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ ?_
-  exact WeilSheaf.stalkFunctor_obj_scalarUnit_str_hom ℓ e σ x hx c
-
 end ScalarSheaf
 
 section ScalarSheafTrace
 
 variable [Finite k] {X : Over (Spec (.of k))} (e : X ≅ X)
 
-/-- The twisted unit Weil sheaf has trace `c^{n+1}` at every point of degree `n + 1`. -/
-lemma weilSheafStalkTrace_scalarUnit (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ)
-    (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
-    weilSheafStalkTrace ℓ (n + 1) x hx (WeilSheaf.scalarUnit ℓ e c) =
-      scalarEndRingHom ℓ (Spec (.of (AlgebraicClosure k)))
-        ((c : _root_.PadicAlgCl ℓ) ^ (n + 1)) := by
-  rw [weilSheafStalkTrace, WeilSheaf.frobeniusStalk, WeilSheaf.powStalkFunctor,
-    Functor.comp_obj, WeilSheaf.powFunctor_obj, WeilSheaf.pow_scalarUnit,
-    ← Units.val_pow_eq_pow_val]
-  exact WeilSheaf.traceOrZero_stalkFunctor_obj_scalarUnit_str_hom ℓ _ (hΩ := _) (hB := _) _ x hx _
-
 end ScalarSheafTrace
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- The identification `H⁰(A[0]) ≅ A` is natural in `A`. -/
-lemma DerivedCategory.homologyFunctorZeroQhSingleIso_hom_naturality {C : Type*} [Category C]
-    [Abelian C] [HasDerivedCategory C] {A B : C} (f : A ⟶ B) :
-    (homologyFunctor C 0).map (Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
-        ((HomologicalComplex.single C (.up ℤ) 0).map f))) ≫
-      (homologyFunctorZeroQhSingleIso C B).hom =
-      (homologyFunctorZeroQhSingleIso C A).hom ≫ f := by
-  rw [homologyFunctorZeroQhSingleIso_hom, homologyFunctorZeroQhSingleIso_hom,
-    ← Functor.map_comp_assoc, quotientCompQhIso_hom_naturality, Functor.map_comp,
-    Category.assoc, homologyFunctorFactors_hom_naturality_assoc]
-  erw [(HomologicalComplex.homologyFunctorSingleIso C (.up ℤ) 0).hom.naturality f]
-  simp only [Category.assoc]
-  rfl
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -379,12 +295,6 @@ noncomputable def boundedConstructibleScalarAut (c : (_root_.PadicAlgCl ℓ)ˣ) 
   Aut.unitsEndEquivAut _
     (Units.map ((homologyUnitEndRingHom ℓ X).comp (scalarEndRingHom ℓ X.left)).toMonoidHom c)
 
-omit [IsSeparated X.hom] in
-lemma boundedConstructibleScalarAut_hom (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    (boundedConstructibleScalarAut ℓ (X := X) c).hom =
-      homologyUnitEndRingHom ℓ X (scalarEndRingHom ℓ X.left c) :=
-  rfl
-
 variable (e : X ≅ X)
 
 /-- The unit `ℚ̲̄_ℓ,X` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` with its canonical Weil structure twisted by a unit `c`
@@ -398,23 +308,7 @@ noncomputable def weilScalarUnit (c : (_root_.PadicAlgCl ℓ)ˣ) : WeilBoundedCo
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)).symm ≪≫
       boundedConstructibleScalarAut ℓ c)
 
-lemma weilScalarUnit_str (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    (weilScalarUnit ℓ e c).str = (WeilBoundedConstructible.unit ℓ e.hom).str ≪≫
-      boundedConstructibleScalarAut ℓ c := by
-  unfold weilScalarUnit WeilBoundedConstructible.unit
-  rw [IsoAlgebra.mk_str, IsoAlgebra.mk_str]
-
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- If `i ≪≫ G φ` followed by `ψ` is `r`, and `G` sends the automorphism `S` to the conjugate of
-`t` by `ψ`, then `i ≪≫ G (φ ≪≫ S)` followed by `ψ` is `r ≫ t`. -/
-lemma CategoryTheory.Iso.trans_mapIso_trans_hom_comp_eq {B D : Type*} [Category B] [Category D]
-    {G : B ⥤ D} {a a' : B} {d d' : D} (i : d' ≅ G.obj a') (φ : a' ≅ a) (S : a ≅ a)
-    (ψ : G.obj a ≅ d) (r : d' ⟶ d) (t : d ⟶ d) (h : (i ≪≫ G.mapIso φ).hom ≫ ψ.hom = r)
-    (hS : G.map S.hom ≫ ψ.hom = ψ.hom ≫ t) :
-    (i ≪≫ G.mapIso (φ ≪≫ S)).hom ≫ ψ.hom = r ≫ t := by
-  simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc] at h ⊢
-  rw [hS, ← reassoc_of% h]
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -427,22 +321,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 section Trace
 
 variable [Finite k]
-
-/-- The local trace of the twisted Weil unit is the trace of the Frobenius on the stalk of its
-homology sheaf `H⁰`, the other homology sheaves being zero. -/
-lemma weilStalkTraceAlternatingSum_weilScalarUnit_eq_weilSheafStalkTrace
-    (c : (_root_.PadicAlgCl ℓ)ˣ) (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
-    (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
-    weilStalkTraceAlternatingSum ℓ (n + 1) x hx (weilScalarUnit ℓ e c) =
-      weilSheafStalkTrace ℓ (n + 1) x hx ((WeilBoundedConstructible.homologyFunctor ℓ e 0).obj
-        (weilScalarUnit ℓ e c)) := by
-  rw [weilStalkTraceAlternatingSum]
-  refine (finsum_eq_single _ 0 fun j hj ↦ ?_).trans ?_
-  · refine smul_eq_zero_of_right _ (traceOrZero_eq_zero_of_isZero ?_ _)
-    rw [Functor.id_obj, WeilSheaf.frobeniusStalk, WeilSheaf.powStalkFunctor, Functor.comp_obj,
-      WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powFunctor_obj, WeilSheaf.pow_carrier]
-    exact Functor.map_isZero _ (isZero_homologyFunctor_unit_carrier ℓ e hj)
-  · rw [Int.negOnePow_zero, Units.val_one, one_smul]
 
 attribute [local instance] fintypeFrobeniusFixedPoints
 

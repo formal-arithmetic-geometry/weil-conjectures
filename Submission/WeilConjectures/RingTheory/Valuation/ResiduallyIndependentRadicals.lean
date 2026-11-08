@@ -324,13 +324,6 @@ noncomputable def basisProdPow (hθ : ∀ i, θ i ^ p ^ n = algebraMap F Ω (u i
       rw [Submodule.mem_span_range_iff_exists_fun]
       exact ⟨c, Subtype.ext (by simp)⟩)
 
-@[simp]
-lemma basisProdPow_apply (hθ : ∀ i, θ i ^ p ^ n = algebraMap F Ω (u i))
-    (hu : ∀ i, 𝒪.valuation (algebraMap F Ω (u i)) = 1)
-    (h : 𝒪.valuation.ResiduallyPowIndependent F (p ^ n) u) (E : ι → Fin (p ^ n)) :
-    (basisProdPow 𝒪 hθ hu h E : Ω) = ∏ i, θ i ^ (E i : ℕ) := by
-  simp [basisProdPow]
-
 /-- **Degree of `F(θ)`.** -/
 theorem finrank_adjoin_eq (hθ : ∀ i, θ i ^ p ^ n = algebraMap F Ω (u i))
     (hu : ∀ i, 𝒪.valuation (algebraMap F Ω (u i)) = 1)

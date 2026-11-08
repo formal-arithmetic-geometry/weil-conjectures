@@ -404,10 +404,6 @@ lemma mem_range_vertical {w : ↥(pullback M.f M.f)}
 lemma y_comp_graph : M.y ≫ M.graph = M.diagPoint :=
   pullback.hom_ext (by simp [graph, diagPoint, M.y_comp_h]) (by simp [graph, diagPoint])
 
-lemma y_comp_vertical : M.y ≫ M.vertical = M.diagPoint :=
-  pullback.hom_ext (by simp [vertical, diagPoint, reassoc_of% M.y_comp])
-    (by simp [vertical, diagPoint])
-
 lemma y_comp_horizontal : M.y ≫ M.horizontal = M.diagPoint :=
   pullback.hom_ext (by simp [horizontal, diagPoint])
     (by simp [horizontal, diagPoint, reassoc_of% M.y_comp])

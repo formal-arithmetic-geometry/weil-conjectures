@@ -138,18 +138,4 @@ Source: proper base change, definition 1268
 abbrev proEtaleRingDerivedOpenExtension :=
   (proEtaleRingOpenExtension j R S c).mapDerivedCategory
 
-/-- Compact-support image for the chosen quasi-compact open / proper factorization.
-For proper f, Compactification.ofIsProper f is its identity compactification.
-Source: proper base change, definition 1268
-(blueprint: def-weil-pbc-projection-compactification). -/
-def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y}
-    (d : Compactification f) [QuasiCompact d.i]
-    (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1})
-    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ)
-    (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) :
-    DerivedCategory (proEtaleRingModules X RX) ⥤ DerivedCategory (proEtaleRingModules Y RY) :=
-  proEtaleRingDerivedOpenExtension d.i RZ RX cj ⋙ proEtaleRingDerivedDirectImage d.g RY RZ cp
-
 end AlgebraicGeometry.Scheme

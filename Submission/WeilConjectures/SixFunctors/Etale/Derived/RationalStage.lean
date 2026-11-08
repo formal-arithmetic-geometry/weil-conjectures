@@ -124,26 +124,6 @@ noncomputable def boundedConstructibleRationalHomEquiv
         (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L') :=
   Rationalization.tensorHomEquiv _ E L L'
 
-/-- Morphisms: the identification of
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRationalHomEquiv` sends `a ⊗ f` to
-`a • f`. -/
-@[simp]
-lemma boundedConstructibleRationalHomEquiv_tmul
-    {L L' : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E} (a : E)
-    (f : L ⟶ L') :
-    boundedConstructibleRationalHomEquiv l E X L L' (a ⊗ₜ f) =
-      a • (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map f :=
-  Rationalization.tensorHomEquiv_tmul _ E a f
-
-/-- Objects: the rationalization of an object of `Dᵇc(X, 𝒪_E)` is an object of `Dᵇc(X, E)`. -/
-lemma boundedConstructibleRational_obj
-    {L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E}
-    (hL : boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X
-      ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj L)) :
-    boundedConstructibleRational l E X
-      ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L) :=
-  ⟨L, hL, ⟨Iso.refl _⟩⟩
-
 /-- Descent of objects: every object of `Dᵇc(X, E)` is the rationalization of an object of
 `Dᵇc(X, 𝒪_E)` (a lattice). -/
 theorem exists_iso_of_boundedConstructibleRational
@@ -191,14 +171,6 @@ instance isStableUnderRetracts_boundedConstructibleIntegral :
     exact ⟨(_root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).prop_of_retract
       e hc, a, b, fun n ↦ ⟨(boundedConstructible _ X).prop_of_retract (e.map _) (h n).1,
       (torAmplitudeIn _ X a b).prop_of_retract (e.map _) (h n).2⟩⟩
-
-/-- Over a field `A`, if `a ≠ 0` and `a⁻ᴺ • a⁻ᴺ • x = a⁻ᴺ • y`, then `x = aᴺ • y`. -/
-private lemma eq_pow_smul_of_inv_pow_smul {A V : Type*} [Field A] [AddCommGroup V] [Module A V]
-    {a : A} (ha : a ≠ 0) (N : ℕ) {x y : V} (h : a⁻¹ ^ N • a⁻¹ ^ N • x = a⁻¹ ^ N • y) :
-    x = a ^ N • y := by
-  have h' := congrArg (fun z ↦ a ^ N • a ^ N • z) h
-  simp only [smul_smul, ← mul_pow, mul_inv_cancel₀ ha, one_pow] at h'
-  simpa [← mul_assoc, ← mul_pow, mul_inv_cancel₀ ha] using h'
 
 /-- Transport of functors and natural transformations: an `𝒪_E`-linear triangulated functor `F`
 between derived complete integral categories induces an `E`-linear functor `Rationalization.map _ F`

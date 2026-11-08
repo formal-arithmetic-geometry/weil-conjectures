@@ -342,26 +342,6 @@ Finally conjugate m.chain by the two sign maps. Forgetting preserves the integer
 scalar, so the signs cancel on each projection, giving the stated HEq. Conjugate
 m.derived_representative by these same maps; its localization factors are
 unchanged. This gives NativeHomRepresentativeCompatibility for m.derived. -/
-/-- Transport both standard-sign representative systems to row-sign systems.
-The comparison is the supplied derived comparison itself; only its representative
-systems and its chain-level square are conjugated by the sign isomorphisms.
-
-Source: Stacks 0A95 and 08J7; native comparison proof, steps 4 and 6
-(blueprint: lem-sf-weil-native-row-hom-comparison).
--/
-theorem native_row_hom_data
-    (m : TwoInjectiveHomModel (k₀ := k₀) (l := l) (X := X)) :
-    ∃ M : NativeClosedHomModels k₀ l X,
-    ∃ η : M.weilHom ⋙ nativeForget k₀ l X ≅
-      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom,
-      HEq M.weilHom m.hom ∧ HEq M.ordinaryHom m.underlyingHom ∧
-      NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)
-        (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives
-        (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) η := by
-  exact ⟨rowClosedModel k₀ l X m, m.derived, HEq.rfl, HEq.rfl,
-    rowCompatibility k₀ l X m⟩
-
 /- STATEMENT-DISPUTED: the former native_row_hom_eta_eq allowed arbitrary
 representative isomorphisms. Negating the native representative and the derived
 comparison preserves its hypotheses but changes the comparison on a nonzero Hom.

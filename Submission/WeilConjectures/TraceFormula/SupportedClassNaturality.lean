@@ -76,11 +76,6 @@ noncomputable def externalProductMap {M M' : Dᵇc(X.left)⟦Profinite.padicAlgC
 variable {M M' M'' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   {N N' N'' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
-@[simp]
-lemma externalProductMap_id :
-    externalProductMap ℓ (𝟙 M) (𝟙 N) = 𝟙 (externalProduct ℓ M N) := by
-  simp [externalProductMap, externalProduct]
-
 @[reassoc]
 lemma externalProductMap_comp (f : M ⟶ M') (f' : M' ⟶ M'') (g : N ⟶ N') (g' : N' ⟶ N'') :
     externalProductMap ℓ (f ≫ f') (g ≫ g') =
@@ -110,19 +105,6 @@ lemma externalProductMap_exchange (f : M ⟶ M') (g : N ⟶ N') :
 lemma externalProductMap_zero_right (f : M ⟶ M') :
     externalProductMap ℓ f (0 : N ⟶ N') = 0 := by
   simp [externalProductMap, externalProduct]
-
-@[simp]
-lemma externalProductMap_zero_left (g : N ⟶ N') :
-    externalProductMap ℓ (0 : M ⟶ M') g = 0 := by
-  simp [externalProductMap, externalProduct]
-
-lemma externalProductMap_add_right (f : M ⟶ M') (g g' : N ⟶ N') :
-    externalProductMap ℓ f (g + g') = externalProductMap ℓ f g + externalProductMap ℓ f g' := by
-  simp [externalProductMap, externalProduct, MonoidalPreadditive.tensor_add]
-
-lemma externalProductMap_add_left (f f' : M ⟶ M') (g : N ⟶ N') :
-    externalProductMap ℓ (f + f') g = externalProductMap ℓ f g + externalProductMap ℓ f' g := by
-  simp [externalProductMap, externalProduct, MonoidalPreadditive.add_tensor]
 
 variable (X) in
 /-- The external product with a fixed object `N` on `Y`, as a functor
@@ -166,10 +148,6 @@ variable {X : Over (Spec (.of k))}
 noncomputable def verdierDualMap {N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (g : N' ⟶ N) : verdierDual ℓ N ⟶ verdierDual ℓ N' :=
   (pre g).app (dualizingComplex ℓ X)
-
-lemma verdierDualMap_eq {N N' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (g : N' ⟶ N) : verdierDualMap ℓ g = (pre g).app (dualizingComplex ℓ X) :=
-  rfl
 
 end VerdierDual
 

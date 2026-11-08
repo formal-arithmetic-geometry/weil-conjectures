@@ -201,13 +201,6 @@ noncomputable def properLowerStarUpperShriekAdjunction (X : Over (Spec (.of k₁
   (boundedConstructibleUpperShriekAdjunction ℓ (toPoint X)).ofNatIsoLeft
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X))
 
-/-- The counit of `Ra_* ⊣ Ra^!` at the unit is the trace. -/
-lemma properLowerStarUpperShriekAdjunction_counit_app_unit (X : Over (Spec (.of k₁)))
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [IsProper (toPoint X).left] :
-    (properLowerStarUpperShriekAdjunction ℓ X).counit.app (𝟙_ _) = NearbyCyclesModel.trace ℓ X :=
-  rfl
-
 /-- The dualizing complex of `X` is the exceptional inverse image of the unit along the structure
 morphism `toPoint X`. -/
 lemma upperShriek_toPoint_obj_unit (X : Over (Spec (.of k₁))) [LocallyOfFiniteType X.hom]

@@ -6,7 +6,17 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.HomShift
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Identity
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Point
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Orientation
 
 set_option autoImplicit true

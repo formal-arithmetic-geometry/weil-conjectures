@@ -8,7 +8,10 @@ module
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import Submission.WeilConjectures.ConstructibleSheaf.FreeLifting
 public import Submission.WeilConjectures.ConstructibleSheaf.KernelCokernel
-public import Submission.WeilConjectures.ConstructibleSheaf.Presentation
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
+public import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 

@@ -7,7 +7,68 @@ module
 public import Submission.WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import Submission.WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 import Submission.WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
-public import Submission.WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import Submission.WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Ab
+public import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Submission.WeilConjectures.CategoryTheory.SheafTensorStructure
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Submission.WeilConjectures.CategoryTheory.PresheafTensorInternalHom
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Sites.Localization
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Submission.WeilConjectures.SixFunctors.BaseChange.Square
+public import Submission.WeilConjectures.CategoryTheory.CompatibleSquareComponents
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+import Submission.WeilConjectures.CategoryTheory.InverseMateEquivalence
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
+import Submission.WeilConjectures.CategoryTheory.EquivalenceAdjunctionComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Mathlib.Topology.Category.Profinite.EffectiveEpi
+import Submission.WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+import Mathlib.Condensed.TopComparison
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Submission.WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 public import Submission.WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 

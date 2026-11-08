@@ -53,22 +53,6 @@ noncomputable def cartesianChartSourceIso {S X T B : Scheme.{u}}
   inv_hom_id := by
     apply pullback.hom_ext <;> simp
 
-@[reassoc (attr := simp)]
-theorem cartesianChartSourceIso_hom_fst {S X T B : Scheme.{u}}
-    (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
-    (w : g' = a ≫ g) :
-    (cartesianChartSourceIso f g a g' w).hom ≫ pullback.fst f g' =
-      pullback.snd a (pullback.snd f g) ≫ pullback.fst f g := by
-  exact pullback.lift_fst _ _ _
-
-@[reassoc (attr := simp)]
-theorem cartesianChartSourceIso_hom_snd {S X T B : Scheme.{u}}
-    (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
-    (w : g' = a ≫ g) :
-    (cartesianChartSourceIso f g a g' w).hom ≫ pullback.snd f g' =
-      pullback.fst a (pullback.snd f g) := by
-  exact pullback.lift_snd _ _ _
-
 /-- The inverse chart identification preserves its projection to T.
 (blueprint: def-sc-cartesian-chart-source-iso). -/
 @[reassoc (attr := simp)]

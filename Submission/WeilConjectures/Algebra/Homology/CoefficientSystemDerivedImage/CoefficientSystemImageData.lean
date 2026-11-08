@@ -5,7 +5,15 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationDerivedLeftAdjoint
+public import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationModels
+import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationDerivedExtension
+import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationDerivedCore
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientScalarDerivedAdjunction
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.CategoryTheory.Localization.Predicate
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.CategoryTheory.Types.Basic
 public import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
@@ -512,19 +520,6 @@ variable {O ell L V adj}
   {PY : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell)}
   {PX : CoefficientEvaluationDerivedPackage (J := K) (O := O) (ell := ell)}
 
-/-- Detection of isomorphisms in the grouped representation.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev detectsIso (T : CoefficientSystemDerivedImage O ell L V adj S PY PX)
-    {M N : DerivedCategory (CoefficientSystem (J := K) O ell)} :=
-  CoefficientImageDescentData.detectsIso T (M := M) (N := N)
-
-/-- Lower-bound preservation in the grouped representation.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev boundedBelow (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
-  CoefficientImageDescentData.boundedBelow T
-
 /-- Essential-image and normalization descent in the grouped representation.
 Source: Zheng Construction 4.1 and Lemma 4.10
 (blueprint: def-pur-coefficient-system-image-data). -/
@@ -534,37 +529,9 @@ abbrev origin (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
 /-- The original normalized image projection, through the grouped construction data.
 Source: Zheng Construction 4.1 and Lemma 4.10
 (blueprint: def-pur-coefficient-system-image-data). -/
-abbrev system
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
-  T.construction.evaluation.system
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev level
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
-  T.construction.evaluation.level
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev inverseEvaluation
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
-  T.construction.evaluation.inverseEvaluation
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
 abbrev inverseEvaluation_rep
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
   T.construction.evaluation.inverseEvaluation_rep
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev directEvaluation
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) :=
-  T.construction.evaluation.directEvaluation
 
 /-- The original normalized image projection, through the grouped construction data.
 Source: Zheng Construction 4.1 and Lemma 4.10
@@ -611,13 +578,6 @@ abbrev derivedTensor_rep
 /-- The original normalized image projection, through the grouped construction data.
 Source: Zheng Construction 4.1 and Lemma 4.10
 (blueprint: def-pur-coefficient-system-image-data). -/
-abbrev restrictedDirect
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
-  T.construction.scalar.restrictedDirect h
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
 abbrev restrictedDirect_mate
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.restrictedDirect_mate h
@@ -625,30 +585,9 @@ abbrev restrictedDirect_mate
 /-- The original normalized image projection, through the grouped construction data.
 Source: Zheng Construction 4.1 and Lemma 4.10
 (blueprint: def-pur-coefficient-system-image-data). -/
-abbrev restrictedInverse
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
-  T.construction.scalar.restrictedInverse h
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
 abbrev restrictedInverse_mate
     (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
   T.construction.scalar.restrictedInverse_mate h
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev inverseTransition
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
-  T.construction.scalar.inverseTransition h
-
-/-- The original normalized image projection, through the grouped construction data.
-Source: Zheng Construction 4.1 and Lemma 4.10
-(blueprint: def-pur-coefficient-system-image-data). -/
-abbrev directTransition
-    (T : CoefficientSystemDerivedImage O ell L V adj S PY PX) {m n : ℕ} (h : n ≤ m) :=
-  T.construction.scalar.directTransition h
 
 end CoefficientSystemDerivedImage
 

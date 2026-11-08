@@ -96,20 +96,6 @@ lemma linear_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
   haveI := linear_lowerStar Λ φ f
   Functor.linear_rightDerivedFunctor K _
 
-/-- On the derived category, the action of `a : K` on (the image of) a complex `M` of
-`Λ_X`-module objects is the image of the action of the constant global section `p_X^* (φ a)` in
-each degree. -/
-lemma smul_id_Q_obj {X : Scheme.{u}}
-    (M : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) ℤ) (a : K) :
-    letI := modLinear Λ φ X
-    a • 𝟙 (DerivedCategory.Q.obj M) = DerivedCategory.Q.map
-      ((HomologicalComplex.natTransId (Mod.smulNatTrans (constRingHom Λ φ X a).hom)
-        (ComplexShape.up ℤ)).app M) := by
-  let _ := modLinear Λ φ X
-  rw [← DerivedCategory.Q.map_id, ← Functor.map_smul]
-  congr 1
-
 end General
 
 section Basis

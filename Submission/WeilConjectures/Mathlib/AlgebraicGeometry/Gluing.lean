@@ -700,10 +700,6 @@ discrete space. -/
 def Scheme.fiberOpens (f : C(X, M)) (m : M) : X.Opens :=
   ⟨f ⁻¹' {m}, (isOpen_discrete _).preimage f.continuous⟩
 
-@[simp]
-lemma Scheme.mem_fiberOpens (f : C(X, M)) (m : M) (x : X) : x ∈ X.fiberOpens f m ↔ f x = m :=
-  Iff.rfl
-
 lemma Scheme.iSup_fiberOpens (f : C(X, M)) : ⨆ m, X.fiberOpens f m = ⊤ :=
   eq_top_iff.2 fun x _ ↦ TopologicalSpace.Opens.mem_iSup.2 ⟨f x, rfl⟩
 

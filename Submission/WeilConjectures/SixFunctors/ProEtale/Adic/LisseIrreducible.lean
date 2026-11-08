@@ -181,15 +181,6 @@ theorem IsAdicLisseSheaf.isZero_of_adicStalkRank_eq_zero (hM : M.IsEquivalenceAt
     hM.faithful _ _ (ModuleCat.hom_ext (LinearMap.ext fun _ ↦ Subsingleton.elim _ _))
   exact congrArg (·.hom) h'
 
-/-- A monomorphism of lisse sheaves of the same rank is an isomorphism. -/
-theorem isIso_of_adicStalkRank_eq [IsLocallyNoetherian Y] (hM : M.IsEquivalenceAt t)
-    {F G : AdicSheaf l Y} (hF : IsAdicLisseSheaf F) (hG : IsAdicLisseSheaf G) (φ : F ⟶ G)
-    [Mono φ] (h : adicStalkRank t F = adicStalkRank t G) : IsIso φ := by
-  have h0 := (hF.kernel_cokernel hG φ).2.isZero_of_adicStalkRank_eq_zero t hM
-    (by have := adicStalkRank_add t hF hG φ; omega)
-  have : Epi φ := Preadditive.epi_of_isZero_cokernel φ h0
-  exact isIso_of_mono_of_epi φ
-
 /-- An irreducible local system has positive rank. -/
 theorem IsIrreducibleAdicLocalSystem.adicStalkRank_pos (hM : M.IsEquivalenceAt t)
     {S : AdicSheaf l Y} (hS : IsIrreducibleAdicLocalSystem S) : 0 < adicStalkRank t S :=

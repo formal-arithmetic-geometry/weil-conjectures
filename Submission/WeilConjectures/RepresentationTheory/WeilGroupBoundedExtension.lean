@@ -96,12 +96,6 @@ def NormedField.unitBallSubring (k : Type*) [NormedField k] [IsUltrametricDist k
   zero_mem' := by simp
   neg_mem' {x} hx := by simpa using hx
 
-/-- Membership in `NormedField.unitBallSubring`. -/
-theorem NormedField.mem_unitBallSubring {k : Type*} [NormedField k] [IsUltrametricDist k]
-    {x : k} :
-    x ∈ unitBallSubring k ↔ ‖x‖ ≤ 1 :=
-  Iff.rfl
-
 /-- Over an ultrametric normed field, a monic polynomial whose roots have norm at most one
 lifts to the valuation ring. -/
 theorem Polynomial.prod_X_sub_C_mem_lifts_unitBallSubring {k : Type*} [NormedField k]

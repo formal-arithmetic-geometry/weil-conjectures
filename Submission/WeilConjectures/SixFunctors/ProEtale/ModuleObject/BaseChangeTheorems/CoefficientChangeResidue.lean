@@ -11,7 +11,8 @@ public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFl
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChange
-public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChangeOfCommSq
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportBaseChangeIso
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportCoherence
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -48,47 +49,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace CategoryTheory
-
-/-- A nonempty family of isomorphisms from the image of a morphism `y` gives one from the image of
-any morphism equal to `y`. -/
-lemma nonempty_arrowIso_map_of_eq {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
-    {A B : C} {x y : A ⟶ B} (h : x = y) {Z : Arrow D}
-    (e : Nonempty (Arrow.mk (F.map y) ≅ Z)) : Nonempty (Arrow.mk (F.map x) ≅ Z) := by
-  subst h
-  exact e
-
-/-- Isomorphisms of arrows from `F.map x` and from the image under `G` of the target give an
-isomorphism of arrows from `(F ⋙ G).map x`. -/
-lemma nonempty_arrowIso_comp_map_of_nonempty {C D E : Type*} [Category* C] [Category* D]
-    [Category* E] (F : C ⥤ D) (G : D ⥤ E) {A B : C} {x : A ⟶ B} {Y : Arrow D} {Z : Arrow E}
-    (e₁ : Nonempty (Arrow.mk (F.map x) ≅ Y)) (e₂ : Nonempty (G.mapArrow.obj Y ≅ Z)) :
-    Nonempty (Arrow.mk ((F ⋙ G).map x) ≅ Z) := by
-  obtain ⟨a⟩ := e₁
-  obtain ⟨b⟩ := e₂
-  exact ⟨G.mapArrow.mapIso a ≪≫ b⟩
-
-/-- Isomorphisms of arrows from `F.map x` to `y` and from `G.map y` give an isomorphism of
-arrows from `(F ⋙ G).map x`. -/
-lemma nonempty_arrowIso_comp_map_of_nonempty' {C D E : Type*} [Category* C] [Category* D]
-    [Category* E] (F : C ⥤ D) (G : D ⥤ E) {A B : C} {x : A ⟶ B} {A' B' : D} (y : A' ⟶ B')
-    {Z : Arrow E} (e₁ : Nonempty (Arrow.mk (F.map x) ≅ Arrow.mk y))
-    (e₂ : Nonempty (Arrow.mk (G.map y) ≅ Z)) : Nonempty (Arrow.mk ((F ⋙ G).map x) ≅ Z) := by
-  obtain ⟨a⟩ := e₁
-  obtain ⟨b⟩ := e₂
-  exact ⟨G.mapArrow.mapIso a ≪≫ b⟩
-
-/-- A form of `nonempty_arrowIso_comp_map_of_nonempty'` for functors `H = F ⋙ G` and
-`H' = F' ⋙ G'` given up to equality, the target being a component of a natural transformation
-at an object `H'.obj K`. -/
-lemma nonempty_arrowIso_map_of_eq_comp {C D E C' D' E' : Type*} [Category* C] [Category* D]
-    [Category* E] [Category* C'] [Category* D'] [Category* E'] (F : C ⥤ D) (G : D ⥤ E)
-    (H : C ⥤ E) (hH : H = F ⋙ G) (F' : C' ⥤ D') (G' : D' ⥤ E') (H' : C' ⥤ E')
-    (hH' : H' = F' ⋙ G') {S T : E' ⥤ E} (α : S ⟶ T) (K : C') {A B : C} {x : A ⟶ B}
-    {A' B' : D} (y : A' ⟶ B') (e₁ : Nonempty (Arrow.mk (F.map x) ≅ Arrow.mk y))
-    (e₂ : Nonempty (Arrow.mk (G.map y) ≅ Arrow.mk (α.app (G'.obj (F'.obj K))))) :
-    Nonempty (Arrow.mk (H.map x) ≅ Arrow.mk (α.app (H'.obj K))) := by
-  subst hH hH'
-  exact nonempty_arrowIso_comp_map_of_nonempty' F G y e₁ e₂
 
 namespace Adjunction
 

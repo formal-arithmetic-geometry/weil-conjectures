@@ -143,11 +143,4 @@ lemma freeMatrix_freeHomOfMatrix {I J : Type u} [Fintype I] [DecidableEq I] [Fin
     rw [ιFree_freeπ_assoc, ite_eq_right (Ne.symm hi), zero_comp, unitValue_zero]
   · simp
 
-/-- Every morphism of free modules of finite rank is the morphism of its matrix. -/
-@[simp]
-lemma freeHomOfMatrix_freeMatrix {I J : Type u} [Fintype I] [DecidableEq I] [Fintype J]
-    [DecidableEq J] (φ : free (R := Y.ringCatSheaf) I ⟶ free J) :
-    freeHomOfMatrix (freeMatrix φ) = φ :=
-  freeMatrix_injective (freeMatrix_freeHomOfMatrix _)
-
 end AlgebraicGeometry.Scheme.Modules

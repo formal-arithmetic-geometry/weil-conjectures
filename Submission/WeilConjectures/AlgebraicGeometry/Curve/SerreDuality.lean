@@ -22,7 +22,9 @@ public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineS
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
-public import Submission.WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.OrderOfVanishing.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Mathlib.Order.CompletePartialOrder
 
 set_option autoImplicit true

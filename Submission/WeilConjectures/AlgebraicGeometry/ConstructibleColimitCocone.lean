@@ -12,7 +12,13 @@ public import Submission.WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleM
 import Mathlib.CategoryTheory.Generator.Basic
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleSheafGeneration
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleColimitFactorization
-import Submission.WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Submission.WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward
 

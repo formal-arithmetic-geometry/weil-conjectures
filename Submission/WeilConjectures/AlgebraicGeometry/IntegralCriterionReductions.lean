@@ -80,23 +80,6 @@ attribute [local irreducible] upperStarFromPoint
 -- the tip makes it local there.
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- Derived completeness, constructibility of every positive reduction and a common
-finite cohomological interval. The reduction index n denotes the exponent n+1.
-There is no Tor-amplitude condition and no boundedness requirement on K itself.
-The predicate is intrinsic to X and E; the global convention l != p has no role in it.
-Source: Weil blueprint, order 1459, and the final paragraph of
-sk-prop-integral-criterion-reductions
-(blueprint: det-prop-integral-criterion-reductions). -/
-def continuousIntegralConstructible (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) : ObjectProperty (DerivedCategory (AdicCompletion.Modules l E X)) :=
-  fun K ↦ IsDerivedComplete l E X K ∧
-    (∀ n : ℕ, constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1))
-      X ((AdicCompletion.derivedReduction l E X n).obj K)) ∧
-    ∃ r s : ℤ, r ≤ s ∧ ∀ (n : ℕ) (q : ℤ), q < r ∨ s < q →
-      IsZero ((DerivedCategory.homologyFunctor _ q).obj
-        ((AdicCompletion.derivedReduction l E X n).obj K))
-
 private theorem finiteConstantEndomorphism (X : Scheme.{u})
     (h : sfbFiniteConstantSets X ⟶ sfbFiniteConstantSets X) : h = 𝟙 _ := by
   let J := Scheme.ProEt.topology X

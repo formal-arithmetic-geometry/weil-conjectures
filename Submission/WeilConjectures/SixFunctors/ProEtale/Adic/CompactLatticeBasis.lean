@@ -70,10 +70,6 @@ def toSubmodule (Λ : CompactLattice l) : Submodule ℤ_[l] (PadicAlgCl l) where
   __ := Λ.1
   smul_mem' c _ hx := Λ.smul_mem c hx
 
-lemma mem_toSubmodule {Λ : CompactLattice l} {x : PadicAlgCl l} :
-    x ∈ Λ.toSubmodule ↔ x ∈ Λ.1 :=
-  Iff.rfl
-
 /-- A compact lattice is a finitely generated `ℤ_ℓ`-module: it lies in the `ℤ_ℓ`-span of a
 scaled `ℚ_ℓ`-basis of its `ℚ_ℓ`-span, its coordinates being bounded by compactness. -/
 instance (Λ : CompactLattice l) : Module.Finite ℤ_[l] Λ.toSubmodule := by
@@ -146,11 +142,6 @@ lemma sum_coord_smul (Λ : CompactLattice l) (x : Λ.1) :
   rw [Submodule.coe_sum] at h
   simp only [Submodule.coe_smul] at h
   exact h
-
-lemma coord_basis (Λ : CompactLattice l) (i j : Λ.BasisIndex) :
-    Λ.coord i ⟨Λ.basis j, (Λ.basis j).2⟩ = if j = i then 1 else 0 := by
-  classical
-  simp [coord, Module.Basis.equivFun_self]
 
 /-- The coordinates of a compact lattice are continuous: the map `ℤ_ℓ^ι ⟶ Λ` defined by the
 basis is a continuous bijection from a compact space to a Hausdorff space. -/

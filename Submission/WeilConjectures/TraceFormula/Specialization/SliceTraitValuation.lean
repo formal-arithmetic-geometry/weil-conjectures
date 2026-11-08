@@ -45,10 +45,6 @@ noncomputable def valuationSubring : ValuationSubring D.Ω :=
   haveI := D.isAlgebraic_a
   IsDiscreteValuationRing.integralClosureValuationSubring D.R D.Ω
 
-lemma mem_valuationSubring {z : D.Ω} :
-    z ∈ D.valuationSubring ↔ letI := D.a.toAlgebra; _root_.IsIntegral D.R z :=
-  Iff.rfl
-
 lemma a_mem_valuationSubring (r : D.R) : D.a r ∈ D.valuationSubring :=
   letI := D.a.toAlgebra
   haveI : FaithfulSMul D.R D.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D.injective_a

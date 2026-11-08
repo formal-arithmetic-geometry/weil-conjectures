@@ -526,25 +526,6 @@ section ChosenTriangle
 
 variable (f g)
 
-/-- The triangle of compactifications defining the composition isomorphism
-`boundedConstructibleLowerShriekComp_padicAlgCl`: the chosen compactifications `c` of `f` and `c'`
-of `g`, and the composite compactification of `f ≫ g` attached to the chosen compactification `d`
-of `p ≫ j` with cartesian square. -/
-noncomputable def chosenTriangle : AlgebraicGeometry.Compactification.Triangle f.left g.left where
-  cf := compactificationOverField f
-  cg := compactificationOverField g
-  cfg := (compactificationOverField f).overComp (compactificationOverField g)
-    (AlgebraicGeometry.Compactification.exists_isPullback_overG_overI
-      (compactificationOverField f) (compactificationOverField g)).choose
-  q := (AlgebraicGeometry.Compactification.exists_isPullback_overG_overI
-      (compactificationOverField f) (compactificationOverField g)).choose.i
-  p := (AlgebraicGeometry.Compactification.exists_isPullback_overG_overI
-      (compactificationOverField f) (compactificationOverField g)).choose.g
-  i_q := rfl
-  p_g := rfl
-  isPullback := (AlgebraicGeometry.Compactification.exists_isPullback_overG_overI
-      (compactificationOverField f) (compactificationOverField g)).choose_spec.map (Over.forget _)
-
 
 end ChosenTriangle
 

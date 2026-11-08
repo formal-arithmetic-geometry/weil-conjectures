@@ -288,14 +288,6 @@ lemma fieldExtendScalars_map_smul {X : Scheme.{u}} (c : ULift.{u + 1} Λ) (M : F
   exact ((fieldExtendScalarsAdjunction he hc X).unit.naturality _).symm.trans
     (FieldSheaf.smul_comp c _)
 
-omit [IsUltrametricDist Λ] [IsUltrametricDist Λ'] in
-/-- Extension of scalars along `e` turns multiplication by a unit `b` into multiplication by
-`e(b)`. -/
-lemma fieldExtendScalars_map_smulIso_hom {X : Scheme.{u}} (b : Λˣ) (M : FieldSheaf Λ X) :
-    (fieldExtendScalars he hc X).map (FieldSheaf.smulIso b M).hom =
-      (FieldSheaf.smulIso (Units.map (e : Λ →* Λ') b) ((fieldExtendScalars he hc X).obj M)).hom :=
-  fieldExtendScalars_map_smul he hc _ M
-
 end ExtendScalars
 
 section Adic

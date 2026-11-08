@@ -213,15 +213,6 @@ class Scheme.IsTorsionSheafOfPrimes (P : Set ℕ) {Λ : Type (u + 1)} [CommRing 
     (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
     ∃ n : ℕ, 0 < n ∧ (∀ p ∈ n.primeFactors, p ∈ P) ∧ n • x = 0
 
-/-- A `P`-torsion sheaf is in particular a torsion sheaf. This is not an instance: the set `P`
-cannot be recovered from the conclusion. -/
-lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfPrimes (P : Set ℕ) {Λ : Type (u + 1)}
-    [CommRing Λ] {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheafOfPrimes P F] : IsTorsionModuleSheaf F where
-  isTorsion_sheafFiber Ω _ _ s x := by
-    obtain ⟨n, hn, -, hx⟩ := Scheme.IsTorsionSheafOfPrimes.exists_nsmul_eq_zero (P := P) Ω s x
-    exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
-
 /-- A torsion sheaf `F` of `Λ`-modules is the point of a colimit cocone over a filtered diagram
 of sheaves, each of which is killed by some positive integer.
 
@@ -507,12 +498,6 @@ noncomputable def Etale.DerivedCategory.Plus.torsionHomologyOfPrimes (P : Set �
     ((DerivedCategory.Plus.homologyFunctor
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) n).obj K)
 
-/-- `P`-torsion cohomology is in particular torsion cohomology. -/
-lemma Etale.DerivedCategory.Plus.torsionHomologyOfPrimes_le_moduleTorsionHomology (P : Set ℕ) :
-    Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P ≤
-      Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X :=
-  fun _ hK n ↦ have := hK n; .of_isTorsionSheafOfPrimes P _
-
 /-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
 
 The ambient category `D⁺_P-tor(X, Λ)` of bounded below complexes of étale sheaves of
@@ -542,13 +527,6 @@ class Scheme.OrderInvertibleOnSheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
       (x : ↥((pointSmallEtale s).sheafFiber.obj F)) :
     IsUnit ((addOrderOf x : ℕ) : Γ(Y, ⊤))
 
-
-/-- An object of `D+` with cohomologies `OrderInvertibleOnSheaf`. -/
-noncomputable def Etale.DerivedCategory.Plus.orderInvertibleOnHomology
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1})) :=
-  fun K ↦ ∀ n : ℤ, OrderInvertibleOnSheaf f
-    ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology Ab.{u + 1}) n).obj K)
 
 
 end AlgebraicGeometry

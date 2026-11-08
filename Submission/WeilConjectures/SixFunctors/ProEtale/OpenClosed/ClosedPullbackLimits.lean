@@ -74,23 +74,6 @@ noncomputable def closedLiftSpecPullbackIso :
       TensorProduct A (Algebra.ClosedLift A S) (A ⧸ I) →+* S))) ≪≫
     (pullbackSpecIso A (Algebra.ClosedLift A S) (A ⧸ I)).symm
 
-/-- The first projection of `closedLiftSpecPullbackIso` is induced by the reduction map
-`H_A(C̄) ⟶ C̄`. -/
-lemma closedLiftSpecPullbackIso_hom_fst :
-    (closedLiftSpecPullbackIso I S).hom ≫ pullback.fst _ _ =
-      Spec.map (CommRingCat.ofHom (Algebra.ClosedLift.toAlgHom A S :
-        Algebra.ClosedLift A S →+* S)) := by
-  simp only [closedLiftSpecPullbackIso, Iso.trans_hom, asIso_hom, Iso.symm_hom, Category.assoc]
-  erw [pullbackSpecIso_inv_fst]
-  rw [← Spec.map_comp]
-  congr 1
-  ext x
-  simp only [closedLiftTensorEquiv, CommRingCat.hom_comp, CommRingCat.hom_ofHom,
-    RingHom.coe_comp, Function.comp_apply, RingEquiv.coe_toRingHom, RingEquiv.trans_apply,
-    AlgEquiv.coe_toRingEquiv, RingEquiv.ofBijective_apply]
-  erw [Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, one_smul]
-  rfl
-
 /-- The second projection of `closedLiftSpecPullbackIso` is the structure morphism
 `Spec C̄ ⟶ Spec (A ⧸ I)`. -/
 lemma closedLiftSpecPullbackIso_hom_snd :

@@ -114,15 +114,6 @@ noncomputable def sectionsWithSupportδ :
     (op (Scheme.Etale.mk i.openComplement.ι)))
     (Sheaf.shortExactOnInjectives_ΓSupportShortComplex _ A _)
 
-lemma sectionsWithSupportTriangle_obj (K : Plus (Sheaf X.smallEtaleTopology A)) :
-    (sectionsWithSupportTriangle A i).obj K = Triangle.mk
-      ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι X.smallEtaleTopology A
-        (op (Scheme.Etale.mk i.openComplement.ι)))).app K.obj)
-      ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes X.smallEtaleTopology A
-        (op (Scheme.Etale.mk i.openComplement.ι)))).app K.obj)
-      ((sectionsWithSupportδ A i).app K) :=
-  rfl
-
 /-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
 
 The triangle `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]` is distinguished. -/
@@ -191,15 +182,6 @@ noncomputable def sectionsWithSupportδ :
   ShortComplex.rightDerivedδ (S := Sheaf.ΓSupportShortComplex (Scheme.ProEt.topology X) A
     (op (Scheme.ProEt.mk i.openComplement.ι)))
     (Sheaf.shortExactOnInjectives_ΓSupportShortComplex _ A _)
-
-lemma sectionsWithSupportTriangle_obj (K : Plus (Sheaf (Scheme.ProEt.topology X) A)) :
-    (sectionsWithSupportTriangle A i).obj K = Triangle.mk
-      ((Functor.rightDerivedFunctorNatTrans (Sheaf.ΓSupportι (Scheme.ProEt.topology X) A
-        (op (Scheme.ProEt.mk i.openComplement.ι)))).app K.obj)
-      ((Functor.rightDerivedFunctorNatTrans (Sheaf.natTransΓRes (Scheme.ProEt.topology X) A
-        (op (Scheme.ProEt.mk i.openComplement.ι)))).app K.obj)
-      ((sectionsWithSupportδ A i).app K) :=
-  rfl
 
 /-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
 

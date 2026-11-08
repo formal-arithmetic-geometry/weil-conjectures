@@ -51,10 +51,6 @@ noncomputable def baseChangeCompIso : baseChange A A' ⋙ baseChange A' B ≅ ba
           rw [hy, hy']
         | tmul a x => rfl)
 
-lemma baseChangeCompIso_hom_app_tmul (M : ModuleCat.{u} A) (b : B) (a : A') (m : M) :
-    ((baseChangeCompIso A A' B).hom.app M).hom (b ⊗ₜ (a ⊗ₜ m)) = (a • b) ⊗ₜ m :=
-  rfl
-
 /-- Base change in two steps `A ⟶ A' ⟶ B` of a complex of modules is its base change along
 `A ⟶ B`. -/
 noncomputable def mapHomologicalComplexBaseChangeCompIso {ι : Type*} {c : ComplexShape ι}
@@ -64,12 +60,6 @@ noncomputable def mapHomologicalComplexBaseChangeCompIso {ι : Type*} {c : Compl
       ((baseChange A B).mapHomologicalComplex c).obj K :=
   HomologicalComplex.Hom.isoOfComponents (fun i ↦ (baseChangeCompIso A A' B).app (K.X i))
     (fun i j _ ↦ ((baseChangeCompIso A A' B).hom.naturality (K.d i j)).symm)
-
-lemma mapHomologicalComplexBaseChangeCompIso_hom_f_apply {ι : Type*} {c : ComplexShape ι}
-    (K : HomologicalComplex (ModuleCat.{u} A) c) (i : ι) (x : B ⊗[A'] (A' ⊗[A] K.X i)) :
-    ((mapHomologicalComplexBaseChangeCompIso A A' B K).hom.f i).hom x =
-      AlgebraTensorModule.cancelBaseChange A A' B B (K.X i) x :=
-  rfl
 
 end ModuleCat
 

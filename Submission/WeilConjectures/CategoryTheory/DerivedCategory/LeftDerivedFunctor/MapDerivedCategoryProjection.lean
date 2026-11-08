@@ -111,12 +111,6 @@ noncomputable abbrev mapDerivedCategoryProjectionMap (E : DerivedCategory D) :
       (F.mapDerivedCategory ⋙ (curriedTensor (DerivedCategory D)).obj E) ⋙ G :=
   (adj.rightAdjointProjectionMap F.mapDerivedCategoryTensorComparison).app E
 
-lemma mapDerivedCategoryProjectionMap_app (E : DerivedCategory D) (K : DerivedCategory C) :
-    (mapDerivedCategoryProjectionMap adj E).app K =
-      adj.homEquiv _ _ ((F.mapDerivedCategoryTensorComparison.app (G.obj E)).app K ≫
-        adj.counit.app E ▷ F.mapDerivedCategory.obj K) :=
-  rfl
-
 /-- The projection map `G E ⊗ᴸ 𝟙 ⟶ G (E ⊗ᴸ D(F) 𝟙)` is an isomorphism. -/
 lemma isIso_mapDerivedCategoryProjectionMap_app_tensorUnit (E : DerivedCategory D) :
     IsIso ((mapDerivedCategoryProjectionMap adj E).app (𝟙_ _)) := by

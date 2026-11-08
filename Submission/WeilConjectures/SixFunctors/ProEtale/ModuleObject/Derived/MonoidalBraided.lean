@@ -41,15 +41,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- `δ_upperStar_braiding` in terms of the tensorators. -/
-@[reassoc]
-lemma μ_upperStar_braiding
-    (A B : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-    Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ A B ≫ (f)^*⟦Λ⟧.map (β_ A B).hom =
-      (β_ ((f)^*⟦Λ⟧.obj A) ((f)^*⟦Λ⟧.obj B)).hom ≫ Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ B A := by
-  rw [← cancel_epi (Functor.OplaxMonoidal.δ (f)^*⟦Λ⟧ A B), Functor.Monoidal.δ_μ_assoc,
-    δ_upperStar_braiding_assoc, Functor.Monoidal.δ_μ, Category.comp_id]
-
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` commutes with the Koszul
 braidings: it is inverse to the comonoidal comparison (`upperStarTensorComplexHom_δ`), which
 commutes with them

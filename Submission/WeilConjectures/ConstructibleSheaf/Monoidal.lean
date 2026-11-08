@@ -99,14 +99,6 @@ theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFin
       (F := (Etale.upperStar A (S.immersion i)).obj F) Ω t).of_iso
         ((Etale.upperStarCompSheafFiberIso A (S.immersion i) t).app F)
 
-omit [HasSmallSiteSheafify A] in
-/-- A constructible locally constant sheaf is finite locally constant. -/
-theorem IsConstructibleSheaf.isFiniteLocallyConstantSheaf (hF : IsConstructibleSheaf F)
-    (hF' : IsLocallyConstantSheaf F) :
-    IsFiniteLocallyConstantSheaf F where
-  toIsLocallyConstantSheaf := hF'
-  toIsFiniteSheaf := hF.isFiniteSheaf
-
 end General
 
 section Modules

@@ -311,10 +311,6 @@ private noncomputable def repLinearEquivOfIso {k G : Type*} [CommRing k] [Monoid
       rw [e.hom_inv_id]
       rfl)
 
-private theorem repLinearEquivOfIso_apply {k G : Type*} [CommRing k] [Monoid G]
-    {A B : Rep.{u} k G} (e : A ≅ B) (a : A.V) : repLinearEquivOfIso e a = e.hom.hom a :=
-  rfl
-
 variable {W l}
 
 set_option maxHeartbeats 400000 in

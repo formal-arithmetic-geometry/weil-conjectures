@@ -10,7 +10,10 @@ public import Mathlib.FieldTheory.SeparableClosure
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 public import Submission.WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 public import Submission.WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
-public import Submission.WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
+public import Mathlib.CategoryTheory.Sites.LocallyInjective
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
+public import Submission.WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -208,11 +211,6 @@ small pro-étale site of `X`. -/
 noncomputable def genericPointSep : X.ProEt :=
   Scheme.ProEt.mk (genericPointSepHom X)
 
-/-- The underlying scheme of the geometric generic point is `Spec Kˢᵉᵖ`. -/
-lemma genericPointSep_left :
-    (genericPointSep X).left = Spec (.of (SeparableClosure X.functionField)) :=
-  rfl
-
 /-- The structure morphism of the geometric generic point. -/
 lemma genericPointSep_hom : (genericPointSep X).hom = genericPointSepHom X :=
   rfl
@@ -250,44 +248,11 @@ lemma genericPointSepAut_mul
     genericPointSepAut_left, ← Spec.map_comp]
   rfl
 
-/-- Every covering sieve of the geometric generic point contains the identity. -/
-lemma id_mem_genericPointSep {S : Sieve (genericPointSep X)}
-    (hS : S ∈ topology X (genericPointSep X)) : S (𝟙 _) :=
-  id_mem_of_mem_topology_of_isSepClosed (Iso.refl _) hS
-
 end Scheme.ProEt
 
 namespace ProEtale
 
 variable (X : Scheme.{u}) [IsIntegral X]
-
-/-- Taking sections over the geometric generic point preserves epimorphisms of pro-étale sheaves
-with values in a concrete category. -/
-lemma preservesEpimorphisms_sheafSections_genericPointSep
-    {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
-    [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
-    [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A]
-    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [Balanced (Sheaf (Scheme.ProEt.topology X) A)] :
-    ((sheafSections (Scheme.ProEt.topology X) A).obj
-      (op (Scheme.ProEt.genericPointSep X))).PreservesEpimorphisms :=
-  preservesEpimorphisms_sheafSections_of_forall_id_mem
-    fun _ ↦ Scheme.ProEt.id_mem_genericPointSep X
-
-/-- The map from a presheaf with values in a concrete category to its pro-étale sheafification is
-bijective on sections over the geometric generic point. -/
-lemma bijective_toSheafify_app_genericPointSep
-    {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type (u + 1)}
-    [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
-    [HasSheafify (Scheme.ProEt.topology X) A]
-    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
-    [(Scheme.ProEt.topology X).PreservesSheafification (CategoryTheory.forget A)]
-    (G : X.ProEtᵒᵖ ⥤ A) :
-    Function.Bijective ((toSheafify (Scheme.ProEt.topology X) G).app
-      (op (Scheme.ProEt.genericPointSep X))) :=
-  bijective_toSheafify_app_of_forall_id_mem (fun _ ↦ Scheme.ProEt.id_mem_genericPointSep X) G
 
 end ProEtale
 

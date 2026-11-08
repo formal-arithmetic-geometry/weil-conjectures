@@ -6,7 +6,47 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationModels
-import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientTensorOrdinaryCoherence
+import Submission.WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBasic
+import Submission.WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Submission.WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import Submission.WeilConjectures.Algebra.Homology.System.SystemGrothendieck
+import Submission.WeilConjectures.CategoryTheory.Exact.ExactFunctorCoproducts
+import Submission.WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
+import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.CategoryTheory.ShrinkYoneda
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
+import Submission.WeilConjectures.Algebra.Homology.System.SystemSingleDerivedExtension
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.NormalizedLeftExtension
+import Submission.WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
+import Submission.WeilConjectures.Algebra.Homology.System.SystemOrdinarySingleExtension
+import Submission.WeilConjectures.Algebra.Homology.System.SystemEvaluationKFlat
+import Submission.WeilConjectures.Algebra.Homology.System.SystemDerivedTransition
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.Algebra.Homology.System.SystemSingleDerivedEvaluation
+import Submission.WeilConjectures.Algebra.Homology.System.SystemScalarDerivedExtension
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.ExtensionEvaluationComparison
+import Submission.WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
+import Submission.WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Submission.WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationStrictSigma
 
 set_option autoImplicit true
@@ -83,42 +123,5 @@ structure CoefficientEvaluationOrdinaryCoherenceData
       (ComplexShape.up ℤ)).obj P
   tensorAssocComplex_f : ∀ {l m n} (h₁ : m ≤ l) (h₂ : n ≤ m) P i,
     ((tensorAssocComplex h₁ h₂ P).hom).f i = (tensorAssoc h₁ h₂).hom.app (P.X i)
-
-/-- The normalized tensor comparisons and truncation inclusions lift termwise to complexes.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tag 03EK
-(blueprint: lem-pur-coefficient-evaluation-ordinary-coherence).
-Proof: choose the normalized ordinary tensor unit and associator. Transpose the inverse
-below-level comparison to obtain each strict truncation inclusion; its components below
-the smaller index are the associator, and above that index its source is zero. Apply the
-functor on homological complexes to these transformations and isomorphisms. Naturality
-makes them chain maps, and their degree components are the original maps. Compose the
-unit lift with the canonical identity-complex comparison. -/
-theorem coefficientEvaluationOrdinaryCoherence
-    (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
-    [∀ n, (ordinary.extension n).Additive] :
-    Nonempty (CoefficientEvaluationOrdinaryCoherenceData ordinary) := by
-  classical
-  obtain ⟨unit, hu, assoc, ha⟩ :=
-    coefficientTensorOrdinaryCoherence (J := J) (O := O) (ell := ell)
-  obtain ⟨sigma, hs, hz, ht⟩ := coefficientEvaluationStrictSigma ordinary
-    (fun {_ _ _} h₁ h₂ ↦ assoc h₁ h₂) ha
-  exact ⟨{
-    tensorUnit := unit
-    tensorUnit_normalized := hu
-    tensorAssoc := fun h₁ h₂ ↦ assoc h₁ h₂
-    tensorAssoc_normalized := ha
-    strictSigma := fun h ↦ sigma h
-    strictSigma_below := hs
-    strictSigma_above := hz
-    strictSigma_transpose := ht
-    strictSigmaComplex := fun h P ↦ ((sigma h).mapHomologicalComplex (.up ℤ)).app P
-    strictSigmaComplex_f := fun _ _ _ ↦ rfl
-    tensorUnitComplex := fun n P ↦
-      (NatIso.mapHomologicalComplex (unit n) (.up ℤ) ≪≫
-        CategoryTheory.Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app P
-    tensorUnitComplex_f := fun _ _ _ ↦ Category.comp_id _
-    tensorAssocComplex := fun h₁ h₂ P ↦
-      (NatIso.mapHomologicalComplex (assoc h₁ h₂) (.up ℤ)).app P
-    tensorAssocComplex_f := fun _ _ _ _ ↦ rfl }⟩
 
 end SheafOfModules

@@ -10,7 +10,34 @@ public import Submission.WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyCo
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.CategoryTheory.Sites.Over
-public import Submission.WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSupplement
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Ring
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

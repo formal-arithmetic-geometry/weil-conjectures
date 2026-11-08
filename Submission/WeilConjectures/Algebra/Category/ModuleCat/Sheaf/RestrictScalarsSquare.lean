@@ -53,25 +53,4 @@ lemma restrictScalarsSquareIso_hom_app_val_app (M : SheafOfModules.{v} D) (U : C
   rfl
 
 
-/-- Restricting scalars along `β` and then along a section `α` of it is the identity, by the
-identity on sections. -/
-def restrictScalarsCancelIso (α : A ⟶ B) (β : B ⟶ A) (h : α ≫ β = 𝟙 A) :
-    restrictScalars.{v} β ⋙ restrictScalars.{v} α ≅ 𝟭 (SheafOfModules.{v} A) :=
-  NatIso.ofComponents (fun M ↦ (fullyFaithfulForget A).preimageIso
-    (PresheafOfModules.isoMk (fun U ↦
-      (ModuleCat.restrictScalarsComp'App (α.hom.app U).hom (β.hom.app U).hom
-          (RingHom.id (A.obj.obj U))
-          (congrArg RingCat.Hom.hom (NatTrans.congr_app
-            (congrArg (fun k : A ⟶ A ↦ k.hom) h) U)).symm (M.val.obj U)).symm ≪≫
-        (ModuleCat.restrictScalarsId (A.obj.obj U)).app (M.val.obj U))
-      (fun {U V} f ↦ by ext x; rfl)))
-    (fun _ ↦ by ext U x; rfl)
-
-/-- Restriction of scalars along an isomorphism of ring sheaves is an equivalence. -/
-theorem restrictScalars_isEquivalence_of_isIso (f : A ⟶ B) [IsIso f] :
-    (restrictScalars.{v} f).IsEquivalence :=
-  (CategoryTheory.Equivalence.mk (restrictScalars.{v} f) (restrictScalars.{v} (inv f))
-    (restrictScalarsCancelIso (inv f) f (IsIso.inv_hom_id f)).symm
-    (restrictScalarsCancelIso f (inv f) (IsIso.hom_inv_id f))).isEquivalence_functor
-
 end SheafOfModules

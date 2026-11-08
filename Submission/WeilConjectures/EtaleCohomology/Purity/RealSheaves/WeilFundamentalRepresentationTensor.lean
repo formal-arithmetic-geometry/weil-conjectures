@@ -158,22 +158,6 @@ noncomputable def fundamentalRepTensorObjLinHomEquiv (F G : WeilSheaf K l C) (hF
         exact tensorStalkLinearMap_frobStalk M F G hF hG d v
 
 variable (M) in
-lemma fundamentalRepTensorObjLinHomEquiv_apply (F G : WeilSheaf K l C) (hF : F.IsLisse)
-    (hG : G.IsLisse) (z) :
-    fundamentalRepTensorObjLinHomEquiv M D F G hF hG z = tensorStalkLinearMap B F G hF hG z :=
-  rfl
-
-/-- The Weil fundamental representation of `ℱ ⊗ 𝒢` is the representation on
-`Hom((ℱ^∨)_t, 𝒢_t)` induced by those of `ℱ^∨` and `𝒢`
-(`AlgebraicGeometry.WeilGroup.fundamentalRepTensorObjLinHomEquiv`). -/
-theorem nonempty_equiv_fundamentalRep_tensorObj_linHom (F G : WeilSheaf K l C) (hF : F.IsLisse)
-    (hG : G.IsLisse) :
-    Nonempty ((fundamentalRep M D (F.tensorObj G hF) (hF.tensorObj hG)).Equiv
-      (Representation.linHom (fundamentalRep M D (F.dual hF) hF.dual)
-        (fundamentalRep M D G hG))) :=
-  ⟨fundamentalRepTensorObjLinHomEquiv M D F G hF hG⟩
-
-variable (M) in
 /-- The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` of Weil fundamental representations: the
 composite of `(ℱ ⊗ 𝒢)_t ≅ Hom((ℱ^∨)_t, 𝒢_t)` and `ℱ_t ⊗ 𝒢_t ≅ Hom((ℱ^∨)_t, 𝒢_t)`,
 `(ℱ^∨)_t ≅ (ℱ_t)^∨`. -/

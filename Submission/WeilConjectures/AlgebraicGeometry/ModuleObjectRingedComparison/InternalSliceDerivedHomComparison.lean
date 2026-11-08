@@ -203,70 +203,7 @@ def homRestrictionSquare
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (U : X.ProEt)
 
-private theorem cast_ring_apply {A B : CommRingCat.{u + 1}}
-    (e : A = B) (x : A) :
-    (ConcreteCategory.hom (eqToHom e)) x = cast (congrArg CommRingCat.carrier e) x := by
-  cases e
-  rfl
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem sectionRing_over_eq {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u + 1}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    (U : C)
-    [HasSheafify (J.over U) AddCommGrpCat.{u + 1}]
-    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    (R : Sheaf J AddCommGrpCat.{u + 1})
-    [MonObj R] [IsCommMonObj R] :
-    sectionRingSheaf (J.over U)
-      ((J.overPullback AddCommGrpCat.{u + 1} U).obj R) =
-      (sectionRingSheaf J R).over U := by
-  apply ObjectProperty.FullSubcategory.ext
-  refine CategoryTheory.Functor.ext (fun W ↦ ?_) ?_
-  · apply congrArg (fun s : CommRing (R.obj.obj ((Over.forget U).op.obj W)) ↦
-      @CommRingCat.of _ s)
-    refine CommRing.ext ?_ ?_
-    · rfl
-    funext a b
-    have h := Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app
-      (Over.forget U) AddCommGrpCat.{u + 1}
-      (J.over U)
-      J R R W
-    have ht := ConcreteCategory.congr_hom h (a ⊗ₜ[ℤ] b)
-    exact congrArg (fun x ↦ (μ[R]).hom.app ((Over.forget U).op.obj W) x) ht
-  · intro V W f
-    ext x
-    simp only [CommRingCat.comp_apply, cast_ring_apply]
-    rfl
-
 attribute [local irreducible] sliceRingMonObj
-
-private theorem section_equivalence_cast_functor_heq
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    {A : Type*} [Category.{u + 1} A] (R B : Sheaf J CommRingCat.{u + 1}) (e : R = B)
-    (E : A ≌ SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
-    HEq ((Eq.mp (congrArg (fun B ↦ A ≌ SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B)) e) E).functor)
-      E.functor := by
-  subst B
-  rfl
-
-/-- The literal-ring equivalence retains the reconstructed-ring forward functor.
-Source: Stacks 00YV, 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison).
-Proof: equality elimination commutes with projecting the forward functor. -/
-theorem sliceEquivalence_functor_heq :
-    HEq (sliceEquivalence Λ X U).functor
-      (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
-        (sliceRingObject Λ X U)).functor := by
-  unfold sliceEquivalence
-  exact section_equivalence_cast_functor_heq.{u, u + 2}
-    ((Scheme.ProEt.topology X).over U)
-    (sectionRingSheaf.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
-      (sliceRingObject Λ X U))
-    ((ring Λ X).over U) (sliceSectionRing_eq Λ X U)
-    (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
-      (sliceRingObject Λ X U))
 
 attribute [local irreducible] sliceEquivalence
 
@@ -436,14 +373,6 @@ def sliceTotalComparison (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
         ((sliceComplexForward Λ X U).obj P, (sliceComplexForward Λ X U).obj Q) :=
   cast (sliceTotalComparison_type_eq Λ X U P Q).symm
     (sliceRawComplexTensorIso Λ X U P Q)
-
-/-- The explicit equality transport retains the entire fixed raw comparison.
-Source: Stacks 03DH, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison).
-Proof: heterogeneous equality of a value and its cast follows by equality elimination. -/
-theorem sliceTotalComparison_heq (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
-    HEq (sliceTotalComparison Λ X U P Q) (sliceRawComplexTensorIso Λ X U P Q) := by
-  unfold sliceTotalComparison
-  exact cast_heq _ _
 
 set_option backward.isDefEq.respectTransparency true
 

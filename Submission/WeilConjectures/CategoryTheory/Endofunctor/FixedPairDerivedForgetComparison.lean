@@ -8,7 +8,8 @@ module
 public import Submission.WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Submission.WeilConjectures.CategoryTheory.KInjectiveExactSquare.KInjectiveExactSquareComparison
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 set_option autoImplicit true

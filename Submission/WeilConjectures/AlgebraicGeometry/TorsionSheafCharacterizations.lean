@@ -15,8 +15,11 @@ public import Mathlib.GroupTheory.Torsion
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Submission.WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 import Submission.WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
-import Submission.WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Submission.WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Mathlib.Algebra.Homology.Additive
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 set_option autoImplicit true

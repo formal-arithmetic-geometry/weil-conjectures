@@ -41,10 +41,6 @@ noncomputable def stalkFunctor (x : X) : X.Modules ⥤ Ab.{u} :=
   toAb X ⋙ TopCat.Sheaf.forget Ab.{u} X ⋙
     TopCat.Presheaf.stalkFunctor Ab.{u} x
 
-lemma stalkFunctor_obj (x : X) (M : X.Modules) :
-    (stalkFunctor x).obj M = M.presheaf.stalk x :=
-  rfl
-
 instance : (toAb X).Additive :=
   inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).Additive
 

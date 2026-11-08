@@ -135,15 +135,6 @@ theorem multipliable_inv_of_X_pow_dvd_sub_one {β : Type*} {e : β → ℕ} {f :
 
 open ComplexOrder
 
-/-- The power series over `ℂ` with nonnegative real coefficients and constant coefficient `1`. -/
-def nonnegOneSubmonoid : Submonoid ℂ⟦X⟧ where
-  carrier := {G | (∀ n, 0 ≤ coeff n G) ∧ constantCoeff G = 1}
-  mul_mem' {G H} hG hH := by
-    refine ⟨fun n ↦ ?_, by simp [hG.2, hH.2]⟩
-    rw [coeff_mul]
-    exact Finset.sum_nonneg fun p _ ↦ mul_nonneg (hG.1 _) (hH.1 _)
-  one_mem' := ⟨fun n ↦ by rw [coeff_one]; split_ifs <;> simp, by simp⟩
-
 
 end WithPiTopology
 

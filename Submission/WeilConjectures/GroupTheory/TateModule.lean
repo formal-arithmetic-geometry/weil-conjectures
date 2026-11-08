@@ -342,15 +342,6 @@ theorem map_tmul (f : M →+ N) (a : ℚ_[ℓ]) (t : tateModule ℓ M) :
       (a ⊗ₜ[ℤ_[ℓ]] tateModule.map f t : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ N) :=
   rfl
 
-variable (ℓ) in
-/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
-
-The fixed submodule `(V_ℓ M)^s` of an endomorphism `s` of `M` (in the blueprint an
-automorphism), which acts on `V_ℓ M` coordinatewise and on fractions through
-`AddCommGroup.rationalTateModule.map`. -/
-noncomputable def fixedSubmodule (s : M →+ M) : Submodule ℚ_[ℓ] (rationalTateModule ℓ M) :=
-  LinearMap.eqLocus (map s) LinearMap.id
-
 
 variable (ℓ M) in
 /-- Blueprint `prop-av-tate-rank` (group-theoretic content, rational form): if multiplication by

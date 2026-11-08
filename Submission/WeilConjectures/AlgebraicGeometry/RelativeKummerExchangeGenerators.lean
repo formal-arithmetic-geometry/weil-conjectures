@@ -58,20 +58,6 @@ variable (C : Type u') [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
   (M : C)
 
-/-- Leray edge section with general coefficients, using the canonical derived adjunction. -/
-noncomputable def genericEdge {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) (q : ℕ)
-    (x : (DerivedCategory.singleFunctor _ 0).obj
-      ((constantSheaf X.smallEtaleTopology C).obj M) ⟶ K⟦(q : ℤ)⟧) :
-    ((constantSheaf Y.smallEtaleTopology C).obj M) ⟶
-      (DerivedCategory.homologyFunctor _ (q : ℤ)).obj ((R(lowerStar C f)).obj K) :=
-  (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).inv.app _ ≫
-    (DerivedCategory.homologyFunctor _ 0).map
-      ((derivedUpperStarLowerStarAdjunction C f).homEquiv _ _
-        ((genericConstantIso C M f).hom ≫ x) ≫
-        ((R(lowerStar C f)).commShiftIso (q : ℤ)).hom.app K) ≫
-    ((DerivedCategory.homologyFunctor _ 0).shiftIso
-      (q : ℤ) 0 (q : ℤ) (add_zero _)).hom.app _
 end Generic
 
 /-- The existing exact derived inverse image, with its arguments fixed once.

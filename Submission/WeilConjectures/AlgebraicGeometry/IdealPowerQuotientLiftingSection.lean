@@ -16,7 +16,7 @@ import Submission.WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokerne
 import Submission.WeilConjectures.Topology.GlueSheavesOfModules
 import Submission.WeilConjectures.AlgebraicGeometry.IdealPowerEvaluationEventuallyZero
 import Submission.WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Submission.WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import Mathlib.Topology.Sets.OpenCover
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

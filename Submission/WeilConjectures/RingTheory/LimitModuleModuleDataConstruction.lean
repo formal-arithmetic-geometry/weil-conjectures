@@ -5,7 +5,27 @@ Authors: Bin Wu
 -/
 
 module
-public import Submission.WeilConjectures.RingTheory.LimitModuleRingData
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.RingTheory.FiniteType
+import Mathlib.Algebra.Algebra.Shrink
+import Mathlib.RingTheory.Finiteness.Small
+import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.RingTheory.LocalRing.Defs
+import Mathlib.Algebra.Group.Units.Hom
+import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Mathlib.RingTheory.RingHom.EssFiniteType
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.RingTheory.TensorProduct.IsBaseChangeRightExact

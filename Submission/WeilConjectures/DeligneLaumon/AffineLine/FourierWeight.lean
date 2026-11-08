@@ -84,16 +84,6 @@ namespace WeilSheaf
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The trace energy of a Weil sheaf placed in degree `0` is that of the sheaf. -/
-theorem traceEnergy_toComplex (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
-    (toComplex.obj F).traceEnergy ι n = F.traceEnergy ι n := by
-  simp only [WeilComplex.traceEnergy, traceEnergy, WeilComplex.traceFunction_toComplex]
-
-/-- The `L²`-weight of a Weil sheaf placed in degree `0` is that of the sheaf. -/
-theorem l2Weight_toComplex (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
-    (toComplex.obj F).l2Weight ι = F.l2Weight ι := by
-  simp only [WeilComplex.l2Weight, l2Weight, traceEnergy_toComplex]
-
 /-- The trace energy of a Weil sheaf placed in degree `0` and shifted by one is that of the
 sheaf: the shift only changes the sign of the trace function. -/
 theorem traceEnergy_shift_toComplex (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
@@ -208,19 +198,6 @@ theorem isPunctuallyPureOfWeight_add_one_of_isFourierPartner (ι : PadicAlgCl l 
     D'.sheaf.IsPunctuallyPureOfWeight ι (w + 1) := by
   obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT
   rwa [← eq_add_one_of_isFourierPartner ψ ι hψ D D' hD.2.1 hw hFT hv]
-
-/-- If `M` is irreducible, nonexceptional and punctually `ι`-pure of weight `w`, and `ψ` is
-nontrivial, then the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]` with `M'`
-irreducible and punctually `ι`-pure of weight `w + 1`.
-(blueprint: `cor-fd-l2-plancherel-middle-extension`) -/
-theorem exists_isFourierPartner_isPunctuallyPureOfWeight_add_one (ι : PadicAlgCl l →+* ℂ)
-    (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
-    (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
-    ∃ D' : WeilSheaf.LisseOnDenseOpen k₀ l, D'.sheaf.IsIrreducibleLisse ∧
-      D.IsFourierPartner ψ D' ∧ D'.sheaf.IsPunctuallyPureOfWeight ι (w + 1) := by
-  obtain ⟨D', hD', hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D hD hne
-  exact ⟨D', hD', hFT,
-    isPunctuallyPureOfWeight_add_one_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT⟩
 
 -- the nonexceptionality hypothesis is not needed for the bound
 set_option linter.unusedVariables false in

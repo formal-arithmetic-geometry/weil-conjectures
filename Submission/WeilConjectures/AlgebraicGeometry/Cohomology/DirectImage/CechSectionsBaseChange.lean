@@ -123,10 +123,6 @@ noncomputable def cechSectionsBaseChange :
     rw [cechModuleComplexNat_d]
     exact (cechSectionsBaseChangeX_d H ℱ U W hg k x).symm
 
-lemma cechSectionsBaseChange_f_apply (k : ℕ) (x) :
-    (cechSectionsBaseChange H ℱ U W hg).f k x = cechSectionsBaseChangeX H ℱ U W hg k x :=
-  rfl
-
 omit [Algebra Γ(S, ⊤) Γ(T, W)] in
 lemma cech_image_preimage_eq {k : ℕ} (y : Fin (k + 1) → ι) :
     (⨅ l, g' ⁻¹ᵁ U (y l)).ι ''ᵁ (⨅ l, g' ⁻¹ᵁ U (y l)).ι ⁻¹ᵁ (f' ⁻¹ᵁ W) =
@@ -209,17 +205,6 @@ lemma sectionsCechResolutionIso_hom_f_apply' (V : Z.Opens) (k : ℕ)
     (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y) x
   rw [ConcreteCategory.comp_apply] at h
   exact congrArg _ h
-
-/-- The sections of the Čech resolution in explicit cochains. -/
-lemma sectionsCechResolutionIso_hom_f_apply (V : Z.Opens) (k : ℕ)
-    (x : Γ((cechResolution U M).X k, V)) (y : Fin (k + 1) → ι) :
-    (sectionsCechResolutionIso U M V).hom.f k x y =
-      M.presheaf.map (homOfLE (ι_image_preimage_mono (TopCat.Presheaf.iInf_le_piObj U y) V)).op
-        ((Pi.π (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y).app
-          V x) := by
-  rw [sectionsCechResolutionIso_hom_f_apply']
-  exact ConcreteCategory.congr_hom
-    (cechPresheaf_map_app M (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op V) _
 
 /-- The identification of the sections of the Čech resolution with explicit cochains is linear
 over the functions. -/

@@ -181,17 +181,6 @@ noncomputable def verdierDualVerdierDualIso
         (op ((DerivedCategory.coefficientDual A X).obj (op K))) :=
   MonoidalClosed.ihomIhomIsoIhomIhomUnit γ hT K
 
-/-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex (biduality).
-
-Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `θ`, the double-dual map
-`K ⟶ 𝔻_X 𝔻_X K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
-@[reassoc]
-lemma verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (derivedHomToIhomIhomNatTrans A X ω).app K ≫ (verdierDualVerdierDualIso γ hT K).hom =
-      (DerivedCategory.coefficientDualDoubleDual _ X).app K :=
-  MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom γ hT K
-
 include γ hT in
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex (biduality).
 
@@ -211,14 +200,6 @@ noncomputable def verdierDualEquivalenceOfIso :
       ObjectProperty.FullSubcategory
         (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))) :=
   MonoidalClosed.dualizableIhomEquivalence γ hT
-
-/-- The functor of the anti-equivalence `verdierDualEquivalenceOfIso` is `𝔻_X`. -/
-lemma verdierDualEquivalenceOfIso_functor_obj_obj
-    (K : (ObjectProperty.FullSubcategory
-      (IsDualizable (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))))ᵒᵖ) :
-    ((verdierDualEquivalenceOfIso γ hT).functor.obj K).obj =
-      ((RHom(X)[A]).flip.obj ω).obj (op K.unop.obj) :=
-  rfl
 
 section Shift
 
@@ -344,12 +325,6 @@ structure Orientation (f : X ⟶ Y) (d : ℕ) [HasCompactification f] where
 
 variable {Λ}
 
-/-- The twist `Λ_X(d)` of an orientation of relative dimension `d`: the Tate twist
-`tateObject Λ X d`. -/
-noncomputable abbrev Orientation.twist {f : X ⟶ Y} {d : ℕ} [HasCompactification f]
-    (_o : Orientation Λ f d) : DerivedCategoryModule Λ X :=
-  tateObject Λ X d
-
 /-- Blueprint `rem-ptr-sf-orientation-2`: Pointer to the properties of [def-sf-orientation].
 
 The purity isomorphism of an orientation, read in the Tate twist conventions of
@@ -431,15 +406,6 @@ noncomputable def Orientation.verdierDualIso [HasInvertibleExponent Λ X] (o : O
         (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
   verdierDualIsoCoefficientDualTensor o.purity (isInvertible_tateObject_shift Λ X d)
 
-/-- The component of `θ_f` at `K` is `RHom_X(K, γ_f⁻¹)` followed by the twist interchange. -/
-lemma Orientation.verdierDualIso_app [HasInvertibleExponent Λ X] (o : Orientation Λ a d)
-    (K : DerivedCategoryModule Λ X) :
-    o.verdierDualIso.app (op K) =
-      (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso o.purity.symm ≪≫
-        DerivedCategory.derivedHomIsoCoefficientDualTensor K
-          (isInvertible_tateObject_shift Λ X d) :=
-  rfl
-
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex.
 
 Let `a : X ⟶ S` be a structure morphism admitting a compactification, let `o` be an
@@ -494,17 +460,6 @@ noncomputable def Orientation.verdierDualVerdierDualIso [HasInvertibleExponent �
       (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj
         (op ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K))) :=
   Etale.verdierDualVerdierDualIso o.purity (isInvertible_tateObject_shift Λ X d) K
-
-/-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex (biduality).
-
-Under the isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`, the double-dual map
-`K ⟶ 𝔻_{X/S} 𝔻_{X/S} K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
-@[reassoc]
-lemma Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
-    [HasInvertibleExponent Λ X] (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
-    (verdierDualDoubleDual Λ a).app K ≫ (o.verdierDualVerdierDualIso K).hom =
-      (DerivedCategory.coefficientDualDoubleDual _ X).app K :=
-  Etale.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom _ _ K
 
 /-- Blueprint `sk-thm-sf-dual-perfect`: The dual of a perfect complex (biduality).
 

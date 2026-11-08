@@ -100,26 +100,6 @@ def sectionPowerQuotientPresheaf (n : ℕ) : Cᵒᵖ ⥤ CommRingCat.{r} where
   map_id := sectionPowerQuotientMap_id B t n
   map_comp := sectionPowerQuotientMap_comp B t n
 
-/-- Naturality of taking a section's quotient class.
-Source: blueprint, integral criterion reductions; Stacks 00YR
-(blueprint: def-pe-principal-power-ring-quotients).
-Proof: both composites send b to the class of its restriction. -/
-theorem sectionPowerQuotientProjection_naturality (n : ℕ) {U V : Cᵒᵖ} (f : U ⟶ V) :
-    B.obj.map f ≫ CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n V)) =
-      CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n U)) ≫
-        (sectionPowerQuotientPresheaf B t n).map f := by
-  apply CommRingCat.hom_ext
-  apply RingHom.ext
-  intro x
-  rfl
-
-/-- The sectionwise quotient projection.
-Source: blueprint, integral criterion reductions; Stacks 00YR
-(blueprint: def-pe-principal-power-ring-quotients). -/
-def sectionPowerQuotientProjection (n : ℕ) : B.obj ⟶ sectionPowerQuotientPresheaf B t n where
-  app U := CommRingCat.ofHom (Ideal.Quotient.mk (sectionPowerIdeal B t n U))
-  naturality := fun {_ _} f ↦ sectionPowerQuotientProjection_naturality B t n f
-
 variable [HasSheafify J CommRingCat.{r}]
 
 /-- The ring sheaf B/t^nB, obtained by sheafifying the sectionwise quotient rings.
@@ -127,13 +107,6 @@ Source: blueprint, integral criterion reductions, coefficient sequence; Stacks 0
 (blueprint: def-pe-principal-power-ring-quotients). -/
 def principalPowerRingQuotient (n : ℕ) : Sheaf J CommRingCat.{r} :=
   (presheafToSheaf J CommRingCat.{r}).obj (sectionPowerQuotientPresheaf B t n)
-
-/-- The canonical ring-sheaf projection B to B/t^nB.
-Source: blueprint, integral criterion reductions; Stacks 00YR
-(blueprint: def-pe-principal-power-ring-quotients). -/
-def principalPowerRingProjection (n : ℕ) : B ⟶ principalPowerRingQuotient B t n :=
-  ⟨sectionPowerQuotientProjection B t n ≫
-    toSheafify J (sectionPowerQuotientPresheaf B t n)⟩
 
 attribute [irreducible] principalPowerRingQuotient
 

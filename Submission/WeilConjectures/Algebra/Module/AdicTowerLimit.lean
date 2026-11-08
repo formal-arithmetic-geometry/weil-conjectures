@@ -92,13 +92,6 @@ lemma towerMap_towerMap (M : ℕᵒᵖ ⥤ ModuleCat.{v} R) {n k p : ℕ} (h : n
   rw [towerMap, towerMap, towerMap, ← ModuleCat.comp_apply, ← M.map_comp]
   rfl
 
-@[simp]
-lemma towerMap_refl (M : ℕᵒᵖ ⥤ ModuleCat.{v} R) (n : ℕ) (x : M.obj (op n)) :
-    towerMap M (le_refl n) x = x := by
-  have : M.map (homOfLE (le_refl n)).op = 𝟙 _ := M.map_id _
-  rw [towerMap, this]
-  rfl
-
 lemma mem_sectionsSubmodule_iff (M : ℕᵒᵖ ⥤ ModuleCat.{v} R) (x : ∀ n, M.obj n) :
     x ∈ sectionsSubmodule M ↔ ∀ {n k : ℕ} (h : n ≤ k), towerMap M h (x (op k)) = x (op n) := by
   refine ⟨fun hx n k h ↦ hx (homOfLE h).op, fun hx n k f ↦ ?_⟩
@@ -280,12 +273,6 @@ theorem eval_eq_zero_iff (S : AdicTowerSequence ℓ M M') [∀ n, Finite (M.obj 
     x.1 (op m) = 0 ↔ ∃ y : sectionsSubmodule M, ℓ ^ m • y = x :=
   sectionsEval_eq_zero_iff S.a S.towerMap_a S.a_towerMap S.exact_a m x
 
-/-- **The kernel of `lim M'ₙ ⟶ M'ₘ` is `ℓᵐ lim M'ₙ`** for a tower of finite modules. -/
-theorem eval'_eq_zero_iff (S : AdicTowerSequence ℓ M M') [∀ n, Finite (M'.obj n)] (m : ℕ)
-    (x : sectionsSubmodule M') :
-    x.1 (op m) = 0 ↔ ∃ y : sectionsSubmodule M', ℓ ^ m • y = x :=
-  sectionsEval_eq_zero_iff S.a' S.towerMap_a' S.a'_towerMap S.exact_a'_towerMap m x
-
 /-- **The image of `lim Mₙ ⟶ Mₘ` is the kernel of the connecting map `Mₘ ⟶ lim M'ₙ`** for a
 tower of finite modules. -/
 theorem exists_eval_eq_iff (S : AdicTowerSequence ℓ M M') [∀ n, Finite (M.obj n)] (m : ℕ)
@@ -356,11 +343,6 @@ theorem exists_eval_eq_towerMap (S : AdicTowerSequence ℓ M M') [∀ n, Finite 
     ∃ x : sectionsSubmodule M, x.1 (op m) = towerMap M (Nat.le_add_right m c) z := by
   rw [S.exists_eval_eq_iff, S.limδ_towerMap]
   exact hc _ (m + c) ((S.exists_limδ_eq_iff (m + c) _).1 ⟨z, rfl⟩)
-
-/-- `ℓᵐ` kills `M'ₘ`. -/
-lemma pow_smul_eq_zero' (S : AdicTowerSequence ℓ M M') (m : ℕ) (x : M'.obj (op m)) :
-    ℓ ^ m • x = 0 :=
-  pow_smul_eq_zero_of_exact S.a' S.towerMap_a' S.exact_a'_towerMap m x
 
 /-- **`lim Mₙ` is finitely generated** when `R` is `ℓ`-adically precomplete. -/
 theorem module_finite (S : AdicTowerSequence ℓ M M') [∀ n, Finite (M.obj n)]

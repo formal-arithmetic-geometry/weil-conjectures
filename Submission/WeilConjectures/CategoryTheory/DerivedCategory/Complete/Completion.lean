@@ -131,12 +131,6 @@ noncomputable def reflectorOfDistinguishedAdjunction :
     reflectorOfDistinguished S P hP h ⊣ P.ι :=
   Adjunction.adjunctionOfEquivLeft _ _
 
-lemma reflectorOfDistinguishedAdjunction_unit_app (K : C) :
-    (reflectorOfDistinguishedAdjunction S P hP h).unit.app K =
-      reflectorOfDistinguishedι S P h K := by
-  change reflectorOfDistinguishedι S P h K ≫ 𝟙 _ = _
-  rw [comp_id]
-
 end ObjectProperty
 
 end Reflector
@@ -331,16 +325,6 @@ noncomputable def derivedCompletionAdjunction :
   ObjectProperty.reflectorOfDistinguishedAdjunction _ _ _ _
 
 variable {J I}
-
-/-- The unit `K ⟶ K^` of the derived completion sits in a distinguished triangle whose third
-object is one on which the generator of `I` acts invertibly. -/
-lemma exists_distinguished_derivedCompletionAdjunction_unit_app
-    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    ∃ (X : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) (g : _ ⟶ X) (h' : X ⟶ K⟦(1 : ℤ)⟧),
-      Triangle.mk ((derivedCompletionAdjunction J I h).unit.app K) g h' ∈ distTriang _ ∧
-        completionKernel J I h X := by
-  rw [derivedCompletionAdjunction, ObjectProperty.reflectorOfDistinguishedAdjunction_unit_app]
-  exact ObjectProperty.exists_distinguished_reflectorOfDistinguishedι _ _ _ K
 
 /-- The derived completion inverts every morphism `s : K ⟶ K'` sitting in a distinguished
 triangle `K ⟶ K' ⟶ X ⟶ K⟦1⟧` with `X` an object on which some generator `ϖ` of `I` acts

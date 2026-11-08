@@ -161,12 +161,6 @@ noncomputable def projectionIsoApp (f : X ⟶ Y) [HasCompactification f]
         (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
   (projectionIso Λ f K).app L
 
-lemma projectionIsoApp_hom (f : X ⟶ Y) [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (projectionIsoApp Λ f K L).hom = ((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L :=
-  rfl
-
 @[reassoc]
 lemma projectionIsoApp_hom_naturality_left (f : X ⟶ Y) [HasCompactification f]
     {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -438,13 +432,6 @@ noncomputable def relativeKunnethNatIsoOfIsPullback :
       ext L
       exact relativeKunnethIsoOfIsPullback_hom_naturality_left Λ sq h w φ L)
 
-lemma relativeKunnethNatIsoOfIsPullback_app_app
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((relativeKunnethNatIsoOfIsPullback Λ sq h w).app K).app L =
-      relativeKunnethIsoOfIsPullback Λ sq h w K L :=
-  rfl
-
 end Naturality
 
 section FibreProduct
@@ -503,12 +490,6 @@ noncomputable def relativeKunnethNatIso :
   haveI := quasiCompact_pullback_toBase f g
   relativeKunnethNatIsoOfIsPullback Λ (IsPullback.of_hasPullback f g) _
     (pullback.snd_comp_eq_toBase f g)
-
-lemma relativeKunnethNatIso_app_app
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    ((relativeKunnethNatIso Λ f g).app K).app L = relativeKunnethIso Λ f g K L :=
-  rfl
 
 end FibreProduct
 

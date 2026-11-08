@@ -258,26 +258,6 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriekOfC
   exact ⟨(adicSheafDerivedEquivCondensedMod l _).functor.mapIso (i₁ ≪≫ i₂ ≪≫ i₃) ≪≫ i₄ ≪≫ i₅ ≪≫
     i₆ ≪≫ i₇⟩
 
-/-- **The Weil exceptional inverse image lies over the geometric one** (blueprint
-`lem-fix-weil-operations`): for a separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes,
-a right adjoint `R` of `Rf₀!` on Weil complexes and a Weil complex `L` on `Y`, the underlying
-complex of `R L` on `X̄`, in the condensed model, is `Rf̄^!` of the underlying complex of `L`. -/
-theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek
-    {R : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ R)
-    (L : WeilComplex k₀ l Y) :
-    Nonempty ((adicSheafDerivedEquivCondensedMod l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor.obj (forget.obj (R.obj L)) ≅
-      ((CondensedRing.boundedConstructibleUpperShriek l (geometricFiberHom (k₀ := k₀) f)).obj
-        (geometricFiberBoundedConstructibleObj L)).obj) := by
-  obtain ⟨e⟩ :=
-    nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriekOfCompactification f adj L
-  exact ⟨e ≪≫ (ObjectProperty.ι _).mapIso ((conjugateIsoEquiv
-    (CondensedRing.boundedConstructibleUpperShriekOfCompactificationAdjunction l
-      (geometricFiberHomCompactification (k₀ := k₀) f))
-    (CondensedRing.boundedConstructibleUpperShriekAdjunction l (geometricFiberHom (k₀ := k₀) f))
-    (CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl l _
-      (geometricFiberHomCompactification (k₀ := k₀) f))).app _)⟩
-
 end Relative
 
 /-- **The Weil exceptional inverse image lies over the geometric one.** For a right adjoint `R` of

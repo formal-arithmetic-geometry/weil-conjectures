@@ -106,42 +106,6 @@ variable (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include α e
 
-/-- The native Tate encoding turns the shriek universality criterion into the
-usual orientation of the constant Weil complex. -/
-theorem nonempty_shriekRightAdjoint_adicConstant_iso_of_unitBaseChange
-    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ J) :
-    Nonempty (J.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)) ≅
-      ((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
-  obtain ⟨o⟩ := nonempty_shriekRightAdjoint_obj_iso_of_unitBaseChange f d
-    ((finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := X)).obj
-      (CondensedRing.boundedConstructibleTateTwist l
-        (Over.mk (X ↘ Spec (CommRingCat.of k₀))) d (2 * d)))
-    ((finiteBaseNativeDescent (k₀ := k₀) (l := l) (X := Y)).obj
-      (CondensedRing.smoothTraceUnit l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))))
-    ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := X)).app _)
-    ((finiteBaseNativeDescentComparison (k₀ := k₀) (l := l) (X := Y)).app _) adj e
-  exact ⟨J.mapIso (finiteBaseNativeDescentUnitIso (k₀ := k₀) (l := l) (X := Y)).symm ≪≫
-    o ≪≫ finiteBaseNativeDescentTateIso d (2 * d) α ≪≫
-    (shiftFunctor _ (2 * d : ℤ)).mapIso (tateTwistConstantSingleIso d).symm⟩
-
 variable [HasUpperShriek k₀ l f]
-
-/-- The orientation obtained by descent commutes with Frobenius because it is
-already an isomorphism of native Weil complexes. -/
-theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_unitBaseChange :
-    ∃ g : forget.obj ((upperShriek f).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))) ≅
-      forget.obj (((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧),
-      (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app
-          ((upperShriek f).obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))).obj ≫
-          g.hom =
-        (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory.map g.hom ≫
-          (Endofunctor.IsoAlgebra.derivedStrIso _).hom.app (((tateTwist k₀ l X d).obj
-            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧).obj := by
-  obtain ⟨o⟩ := nonempty_shriekRightAdjoint_adicConstant_iso_of_unitBaseChange f d α e
-    (derivedLowerShriekUpperShriekAdjunction f)
-  exact ⟨forget.mapIso o, ((Endofunctor.IsoAlgebra.derivedStrIso _).hom.naturality o.hom.hom).symm⟩
 
 end AlgebraicGeometry.WeilComplex

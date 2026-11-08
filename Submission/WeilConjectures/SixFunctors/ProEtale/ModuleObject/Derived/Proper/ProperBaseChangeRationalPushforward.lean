@@ -45,8 +45,43 @@ public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colim
 public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ChangeOfCoefficients
 
-import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
-import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
+import Submission.WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
+import Submission.WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
+import Mathlib.NumberTheory.Padics.PadicNumbers
+import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+import Mathlib.Analysis.Normed.Algebra.Ultra
+import Mathlib.Topology.Algebra.Valued.NormedValued
+import Mathlib.Topology.Algebra.Ring.Ideal
+import Mathlib.Topology.ContinuousMap.Compact
+import Mathlib.Analysis.Normed.Module.FiniteDimension
+import Mathlib.NumberTheory.Padics.ProperSpace
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
+import Mathlib.CategoryTheory.Functor.OfSequence
+import Mathlib.CategoryTheory.Limits.Types.Filtered
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import Submission.WeilConjectures.ConstructibleSheaf.FreeLifting
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationContinuity
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationHomology
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationMate
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import Submission.WeilConjectures.CategoryTheory.CoefficientPushCopowerCriterion
+import Submission.WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Submission.WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import Submission.WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasis
+import Submission.WeilConjectures.AlgebraicGeometry.CondensedSubfieldBoundedCopowers
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -156,104 +191,11 @@ attribute [local irreducible] rationalCoefficientPushforwardPreservation
 
 attribute [local irreducible] derivedTensor moduleObjectProjectionData
 
-/-- The proposition of `isIso_rationalizationPushHom_boundedBelow`: the component of
-`rationalizationPushHom` at `K` is invertible. A reducible name for exactly this proposition, so
-that the public statement stays small. -/
-abbrev IsIsoRationalizationPushHomApp (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) : Prop :=
-  IsIso ((rationalizationPushHom ℓ E p).app K)
-
-/-- The proposition of `isIso_finiteCoefficientPushHom_boundedBelow`: the component of the
-push comparison for `E ≤ F` at `K` is invertible. A reducible name for exactly this proposition,
-so that the public statement stays small. -/
-abbrev IsIsoFiniteCoefficientPushHomApp (ℓ : ℕ) [Fact ℓ.Prime]
-    {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) {X Y : Scheme.{u}} (p : X ⟶ Y)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X))) : Prop :=
-  IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) p).app K)
-
-/-- The proposition of `isIso_algClCoefficientPushHom_boundedBelow`: the component of the
-push comparison for `E → ℚ̄_ℓ` at `K` is invertible. A reducible name for exactly this
-proposition, so that the public statement stays small. -/
-abbrev IsIsoAlgClCoefficientPushHomApp (ℓ : ℕ) [Fact ℓ.Prime]
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X))) : Prop :=
-  IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p).app K)
-
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (p : X ⟶ Y) [IsProper p.left]
-
-include k in
-/-- Proper pushforward commutes with inverting ell on every bounded-below integral complex.
-Source: blueprint rational proper direct image, clause 1
-(blueprint: det-thm-sfb-proper-base-change-rational).
-
-Proof: properness supplies the qcqs hypotheses of `lem-sfb-localized-direct-image-comparison`,
-`localizedDirectImageComparison_isIso`, which applies to every bounded-below integral complex.
-Unfold `localizedDirectImageComparison`, the proposition name and `rationalizationPushHom`:
-both are the same `derivedPushHom` component of the coefficient inclusion O_E -> E, with
-flatness proofs that agree by proof irrelevance. No comparison map is chosen.
--/
-theorem isIso_rationalizationPushHom_boundedBelow
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)))
-    (_hK : DerivedCategory.TStructure.t.plus K) :
-    IsIsoRationalizationPushHomApp ℓ E p.left K := by
-  have h := localizedDirectImageComparison_isIso ℓ E p.left K _hK
-  unfold localizedDirectImageComparison at h
-  unfold IsIsoRationalizationPushHomApp rationalizationPushHom
-  exact h
-
-include k in
-include k in
-/-- Proper pushforward commutes with extension to finite-subextension-valued condensed Qlbar.
-Source: blueprint rational proper direct image, clause 1
-(blueprint: det-thm-sfb-proper-base-change-rational).
-
-Proof: extract an integer lower bound and install the corresponding `K.IsGE` instance.
-The existing bounded-below Qlbar push comparison
-`isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE` then gives exactly
-the stated component's invertibility. Properness supplies its geometric hypotheses.
--/
-theorem isIso_algClCoefficientPushHom_boundedBelow
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)))
-    (_hK : DerivedCategory.TStructure.t.plus K) :
-    IsIsoAlgClCoefficientPushHomApp ℓ E p.left K := by
-  obtain ⟨N, hN⟩ := _hK
-  let : K.IsGE N := hN
-  exact isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE ℓ p.left E K N
-
-/-- Proper pushforward preserves bounded constructible complexes with rational coefficients.
-Source: blueprint rational proper direct image, clause 2
-(blueprint: det-thm-sfb-proper-base-change-rational).
-
-Proof: the existing general bounded-constructible pushforward theorem applies to
-standing morphisms and both rational coefficient rings. The named preservation wrapper
-selects its finite-subextension or Qlbar case using the bundled coefficient-ring equality.
-Apply this wrapper to the bounded-constructible object ⟨K, _hK⟩; it gives the desired
-predicate for the actual derived pushforward. Properness is an allowed specialization.
--/
-theorem properPushforward_boundedConstructible_rational
-    (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
-    [IsCommMonObj Λ.X]
-    (_hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
-      Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨
-      Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ.X X.left)))
-    (_hK : boundedConstructible (condensedRingObj Λ.X X.left) K) :
-    boundedConstructible (condensedRingObj Λ.X Y.left)
-      ((lowerStar Λ.X p.left).rightDerivedFunctor.obj K) := by
-  exact rationalCoefficientPushforwardPreservation ℓ Λ _hΛ p ⟨K, _hK⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -96,14 +96,6 @@ lemma epi_app_homologyFunctor_obj_of_isZero
     Epi (z.app ((DerivedCategory.homologyFunctor C q).obj K)) :=
   (exact_app_homologyFunctor_map z hT q).epi_f (hq.eq_of_tgt _ _)
 
-/-- If `Hᵠ⁰ K₁ = 0`, the central element `z` acts injectively on `Hᵠ¹ K`, where
-`q₀ + 1 = q₁`. -/
-lemma mono_app_homologyFunctor_obj_of_isZero
-    (hT : Triangle.mk (z.derivedCategory.app K) g h ∈ distTriang _) (q₀ q₁ : ℤ)
-    (hq : q₀ + 1 = q₁) (h₀ : IsZero ((DerivedCategory.homologyFunctor C q₀).obj K₁)) :
-    Mono (z.app ((DerivedCategory.homologyFunctor C q₁).obj K)) :=
-  (exact_δ_app_homologyFunctor z hT q₀ q₁ hq).mono_g (h₀.eq_of_src _ _)
-
 /-- The kernel of the action of `z` on `Hᵠ¹ K` is a quotient of `Hᵠ⁰ K₁`, where `q₀ + 1 = q₁`. -/
 lemma exists_epi_kernel_app_homologyFunctor_obj
     (hT : Triangle.mk (z.derivedCategory.app K) g h ∈ distTriang _) (q₀ q₁ : ℤ)

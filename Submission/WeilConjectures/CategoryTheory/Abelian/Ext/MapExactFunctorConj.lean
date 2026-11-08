@@ -47,10 +47,6 @@ lemma mk₀CompMk₀_mk₀CompMk₀ {X'' X' X Y Y' Y'' : C} {n : ℕ} (a' : X'' 
     mk₀CompMk₀ a' (mk₀CompMk₀ a y b) b' = mk₀CompMk₀ (a' ≫ a) y (b ≫ b') := by
   simp only [mk₀CompMk₀, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, mk₀_comp_mk₀_assoc]
 
-@[simp]
-lemma mk₀CompMk₀_id {X Y : C} {n : ℕ} (y : Ext.{w} X Y n) : mk₀CompMk₀ (𝟙 X) y (𝟙 Y) = y := by
-  simp [mk₀CompMk₀]
-
 lemma mk₀CompMk₀_add {X' X Y Y' : C} {n : ℕ} (a : X' ⟶ X) (y y' : Ext.{w} X Y n)
     (b : Y ⟶ Y') : mk₀CompMk₀ a (y + y') b = mk₀CompMk₀ a y b + mk₀CompMk₀ a y' b := by
   simp [mk₀CompMk₀, add_comp, comp_add]

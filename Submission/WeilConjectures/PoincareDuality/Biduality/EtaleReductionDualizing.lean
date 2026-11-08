@@ -49,30 +49,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
 
-/-- Reduction modulo `ℓⁿ` commutes with the exceptional inverse image along a proper `p`, in the
-form `Rp^! = (Rp_*)^ʳ` (the chosen right adjoint of the pushforward, which enters
-`PadicIntegersRingObj.boundedConstructibleUpperShriekOfCompactification`): it is the
-right adjoint of `Rp_! ≅ Rp_*` (`boundedConstructibleLowerShriekIsoLowerStar_padicIntegers`), and
-the transpose of the canonical comparison `etaleReductionLowerShriekIso` is invertible
-(`isIso_mateEquiv_etaleReductionLowerShriekIso`). -/
-noncomputable def etaleReductionProperUpperShriekIso {Z Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (p : Z ⟶ Y) [IsProper p.left] :
-    haveI := HasCompactification.of_over p
-    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E p).rightAdjoint ⋙
-        etaleReduction ℓ E n Z ≅
-      etaleReduction ℓ E n Y ⋙
-        Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E n) p.left :=
-  haveI := HasCompactification.of_over p
-  haveI := isIso_mateEquiv_etaleReductionLowerShriekIso ℓ E n p
-  Functor.isoWhiskerRight ((Adjunction.ofIsLeftAdjoint _).rightAdjointUniq
-    ((PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p).ofNatIsoLeft
-      (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E p))) _ ≪≫
-    asIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
-      (Etale.rightDerivedUpperShriekAdjunction _ p.left)
-      (TwoSquare.mk _ _ _ _ (etaleReductionLowerShriekIso ℓ E n p).inv))
-
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 

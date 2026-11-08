@@ -76,10 +76,6 @@ noncomputable def lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
     (Polynomial.X ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) : Polynomial ℂ) :
       PowerSeries ℂ)⁻¹
 
-theorem lSeries_eq_tprod (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
-    F.lSeries ι = ∏' x, F.lFactor ι x :=
-  rfl
-
 /-- The coercion of `P(X ^ d)` is the expansion of the coercion of `P`. -/
 theorem _root_.Polynomial.coe_comp_X_pow {R : Type*} [CommRing R] (P : Polynomial R) {d : ℕ}
     (hd : d ≠ 0) :

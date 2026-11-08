@@ -44,25 +44,6 @@ section SpecIso
 
 variable {R A B : Type u} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
 
-/-- An isomorphism of `R`-algebras `A ≃ₐ[R] B` induces an isomorphism `Spec B ≅ Spec A`. -/
-noncomputable def specIsoOfAlgEquiv (ε : A ≃ₐ[R] B) : Spec (.of B) ≅ Spec (.of A) :=
-  Scheme.Spec.mapIso ε.toRingEquiv.toCommRingCatIso.op
-
-/-- The isomorphism `specIsoOfAlgEquiv` is `Spec.map` of the ring isomorphism. -/
-lemma specIsoOfAlgEquiv_hom (ε : A ≃ₐ[R] B) :
-    (specIsoOfAlgEquiv ε).hom = Spec.map (CommRingCat.ofHom ε.toRingHom) :=
-  rfl
-
-/-- The isomorphism `specIsoOfAlgEquiv` is compatible with the structure maps to `Spec R`. -/
-@[reassoc (attr := simp)]
-lemma specIsoOfAlgEquiv_hom_comp (ε : A ≃ₐ[R] B) :
-    (specIsoOfAlgEquiv ε).hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) =
-      Spec.map (CommRingCat.ofHom (algebraMap R B)) := by
-  rw [specIsoOfAlgEquiv_hom, ← Spec.map_comp]
-  congr 1
-  ext x
-  simp
-
 end SpecIso
 
 section Presentation
@@ -93,21 +74,6 @@ lemma isStandardSmoothOfRelativeDimension_mvPolynomial (R : Type u) [CommRing R]
     (by simp [Algebra.Presentation.dimension])
 
 
-/-- The isomorphism `Spec (k₀[X] ⧸ ⊥) ≅ Spec k₀[X]`. -/
-noncomputable def specMvPolynomialQuotientBotIso :
-    Spec (.of (MvPolynomial (Fin 1) k₀ ⧸ (⊥ : Ideal (MvPolynomial (Fin 1) k₀)))) ≅
-      Spec (.of (MvPolynomial (Fin 1) k₀)) :=
-  specIsoOfAlgEquiv (AlgEquiv.quotientBot k₀ _).symm
-
-/-- The isomorphism `specMvPolynomialQuotientBotIso` is compatible with the structure maps. -/
-@[reassoc (attr := simp)]
-lemma specMvPolynomialQuotientBotIso_hom_comp :
-    (specMvPolynomialQuotientBotIso (k₀ := k₀)).hom ≫
-        Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀))) =
-      Spec.map (CommRingCat.ofHom (algebraMap k₀
-        (MvPolynomial (Fin 1) k₀ ⧸ (⊥ : Ideal (MvPolynomial (Fin 1) k₀))))) :=
-  specIsoOfAlgEquiv_hom_comp _
-
 end BaseCases
 
 section Projection
@@ -120,24 +86,6 @@ noncomputable def mvPolynomialQuotientProjectionRingHom
     (I : Ideal (MvPolynomial (Fin (n + 1)) k₀)) :
     MvPolynomial (Fin n) k₀ →+* MvPolynomial (Fin (n + 1)) k₀ ⧸ I :=
   (Ideal.Quotient.mk I).comp (rename Fin.castSucc).toRingHom
-
-/-- The projection `Spec (k₀[X₀, …, Xₙ] ⧸ I) ⟶ Spec k₀[X₀, …, X_{n-1}]` forgetting the last
-coordinate. -/
-noncomputable def mvPolynomialQuotientProjection (I : Ideal (MvPolynomial (Fin (n + 1)) k₀)) :
-    Spec (.of (MvPolynomial (Fin (n + 1)) k₀ ⧸ I)) ⟶ Spec (.of (MvPolynomial (Fin n) k₀)) :=
-  Spec.map (CommRingCat.ofHom (mvPolynomialQuotientProjectionRingHom I))
-
-/-- The projection `mvPolynomialQuotientProjection` commutes with the structure maps to
-`Spec k₀`. -/
-@[reassoc (attr := simp)]
-lemma mvPolynomialQuotientProjection_comp (I : Ideal (MvPolynomial (Fin (n + 1)) k₀)) :
-    mvPolynomialQuotientProjection I ≫
-        Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin n) k₀))) =
-      Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin (n + 1)) k₀ ⧸ I))) := by
-  rw [mvPolynomialQuotientProjection, ← Spec.map_comp]
-  congr 1
-  ext c
-  simp [mvPolynomialQuotientProjectionRingHom, ← Ideal.Quotient.mk_algebraMap]
 
 /-- Evaluation of the first `n` variables of `k₀[X₀, …, Xₙ]` at `a`, sending the last variable
 to the variable of `k₀[X]`. -/
@@ -161,12 +109,6 @@ noncomputable def evalInitIdeal (a : Fin n → k₀) (I : Ideal (MvPolynomial (F
     Ideal (MvPolynomial (Fin 1) k₀) :=
   I.map (evalInitAlgHom a).toRingHom
 
-/-- The image of a constant polynomial in a quotient of a polynomial ring is the image of the
-constant under the algebra map. -/
-lemma _root_.MvPolynomial.quotient_mk_C {R σ : Type*} [CommRing R] (J : Ideal (MvPolynomial σ R))
-    (c : R) : Ideal.Quotient.mk J (C c) = algebraMap R (MvPolynomial σ R ⧸ J) c := by
-  rw [← MvPolynomial.algebraMap_eq, Ideal.Quotient.mk_algebraMap]
-
 /-- The ring map `k₀[X₀, …, Xₙ] ⧸ I →+* k₀[X] ⧸ evalInitIdeal a I` induced by
 `evalInitAlgHom a`. -/
 noncomputable def evalInitQuotientRingHom (a : Fin n → k₀)
@@ -181,14 +123,6 @@ lemma evalInitQuotientRingHom_mk (a : Fin n → k₀) (I : Ideal (MvPolynomial (
     evalInitQuotientRingHom a I (Ideal.Quotient.mk I p) =
       Ideal.Quotient.mk _ (evalInitAlgHom a p) :=
   rfl
-
-/-- `evalInitQuotientRingHom` is a map of `k₀`-algebras. -/
-@[simp]
-lemma evalInitQuotientRingHom_algebraMap (a : Fin n → k₀)
-    (I : Ideal (MvPolynomial (Fin (n + 1)) k₀)) (c : k₀) :
-    evalInitQuotientRingHom a I (algebraMap k₀ _ c) = algebraMap k₀ _ c := by
-  rw [← MvPolynomial.quotient_mk_C, evalInitQuotientRingHom_mk, evalInitAlgHom, aeval_C,
-    MvPolynomial.algebraMap_eq, MvPolynomial.quotient_mk_C]
 
 variable {T : Type*} [CommRing T]
 
@@ -232,14 +166,6 @@ lemma evalInitDesc_mk (I : Ideal (MvPolynomial (Fin (n + 1)) k₀))
     evalInitDesc I φ α β h (Ideal.Quotient.mk _ p) =
       eval₂Hom β (fun _ ↦ α (Ideal.Quotient.mk I (X (Fin.last n)))) p :=
   rfl
-
-/-- `evalInitDesc` restricts to `β` on `k₀`. -/
-@[simp]
-lemma evalInitDesc_algebraMap (I : Ideal (MvPolynomial (Fin (n + 1)) k₀))
-    (φ : MvPolynomial (Fin n) k₀ →ₐ[k₀] k₀) (α : MvPolynomial (Fin (n + 1)) k₀ ⧸ I →+* T)
-    (β : k₀ →+* T) (h : α.comp (mvPolynomialQuotientProjectionRingHom I) = β.comp φ.toRingHom)
-    (c : k₀) : evalInitDesc I φ α β h (algebraMap k₀ _ c) = β c := by
-  rw [← MvPolynomial.quotient_mk_C, evalInitDesc_mk, eval₂Hom_C]
 
 
 end Projection

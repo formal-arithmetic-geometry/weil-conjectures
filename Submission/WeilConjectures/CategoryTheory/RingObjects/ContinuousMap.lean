@@ -79,15 +79,6 @@ noncomputable def continuousMapRingPresheaf : X.ProEtᵒᵖ ⥤ RingCat.{max (u 
   map_id _ := rfl
   map_comp _ _ := rfl
 
-lemma continuousMapRingPresheaf_obj (U : X.ProEtᵒᵖ) :
-    (continuousMapRingPresheaf X T).obj U = RingCat.of (ULift.{u + 1} C(U.unop.left, T)) :=
-  rfl
-
-lemma continuousMapRingPresheaf_map_apply {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
-    (g : ULift.{u + 1} C(U.unop.left, T)) :
-    (continuousMapRingPresheaf X T).map f g = ULift.up (g.down.comp f.unop.left.base.hom) :=
-  rfl
-
 /-- The presheaf of types underlying `continuousMapRingPresheaf X T` is the restriction to the
 small pro-étale site of mathlib's presheaf `U ↦ C(U, T)` on all schemes, lifted by one
 universe. -/
@@ -119,10 +110,6 @@ with the pointwise multiplication. -/
 noncomputable def continuousMapRingSheaf : Sheaf (ProEt.topology X) RingCat.{max (u + 1) w} :=
   ⟨continuousMapRingPresheaf X T, isSheaf_continuousMapRingPresheaf X T⟩
 
-lemma continuousMapRingSheaf_obj :
-    (continuousMapRingSheaf X T).obj = continuousMapRingPresheaf X T :=
-  rfl
-
 variable {T} {T' : Type w} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
   (φ : T →+* T') (hφ : Continuous φ)
 
@@ -135,20 +122,11 @@ noncomputable def continuousMapRingPresheafMap :
       ((φ.compLeftContinuous _ hφ).comp ULift.ringEquiv.toRingHom))
   naturality _ _ _ := rfl
 
-lemma continuousMapRingPresheafMap_app_apply (U : X.ProEtᵒᵖ)
-    (g : ULift.{u + 1} C(U.unop.left, T)) :
-    (continuousMapRingPresheafMap X φ hφ).app U g = ULift.up ((⟨φ, hφ⟩ : C(T, T')).comp g.down) :=
-  rfl
-
 /-- Postcomposition with a continuous ring homomorphism `φ : T →+* T'`, as a morphism of
 sheaves of rings `C(-, T) ⟶ C(-, T')` on `X_proét`. -/
 noncomputable def continuousMapRingSheafMap :
     continuousMapRingSheaf X T ⟶ continuousMapRingSheaf X T' :=
   ⟨continuousMapRingPresheafMap X φ hφ⟩
-
-lemma continuousMapRingSheafMap_hom :
-    (continuousMapRingSheafMap X φ hφ).hom = continuousMapRingPresheafMap X φ hφ :=
-  rfl
 
 end Ring
 

@@ -232,13 +232,6 @@ noncomputable def fieldConstantSheafMul (a : fieldFunctions Λ V) :
        exact congrArg a.1 (by rw [← MorphismProperty.Over.w g.unop]; rfl) }⟩
 
 omit [IsUltrametricDist Λ] in
-lemma fieldConstantSheafMul_app (a : fieldFunctions Λ V) (U : V.ProEtᵒᵖ)
-    (s : (fieldConstantSheaf Λ V).obj.obj U) :
-    (fieldConstantSheafMul a).hom.app U s =
-      ULift.up (fieldMulPullback (T := U.unop.left) s.down U.unop.hom a) :=
-  rfl
-
-omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheafEndFun_mul (a : fieldFunctions Λ V) :
     fieldConstantSheafEndFun (fieldConstantSheafMul a) = a := by
   change 1 * _ = a
@@ -350,10 +343,6 @@ omit [IsUltrametricDist Λ] in
 lemma unitEndFun_comp (ψ ψ' : unit Λ V ⟶ unit Λ V) :
     unitEndFun (ψ ≫ ψ') = unitEndFun ψ * unitEndFun ψ' :=
   fieldConstantSheafEndFun_comp ψ.hom ψ'.hom (unit_hom_linear ψ')
-
-omit [IsUltrametricDist Λ] in
-lemma unitEndFun_id : unitEndFun (𝟙 (unit Λ V)) = 1 :=
-  rfl
 
 omit [IsUltrametricDist Λ] in
 lemma unitEndFun_add (ψ ψ' : unit Λ V ⟶ unit Λ V) :

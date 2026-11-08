@@ -968,20 +968,6 @@ theorem frobeniusWeight_eq_of_isPunctuallyPure_comp {ι : PadicAlgCl l →+* ℂ
 
 end Transfer
 
-/-- **Local eigenvalues are compatible with restriction to an open.** For a restriction
-`W(U₀) → W(C₀)` of Weil groups along `j : U₀ ⟶ C₀`, the local Frobenius eigenvalues of
-`ρ ∘ restrict` at a closed point `x` of `U₀` are those of `ρ` at `j x`: the restriction carries
-the local Frobenius at `x` into the Frobenius conjugacy class at `j x`. This is the first step of
-reducing purity on `C₀` to purity on an affine open subcurve. -/
-theorem localEigenvalues_comp_restrict {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)}
-    [IsCurve pU] {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU}
-    {WC : WeilGroup p} (R : Restriction j WU WC) {l : ℕ} [Fact l.Prime] {V : Type u}
-    [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
-    (ρ : Representation (PadicAlgCl l) WC.carrier V) (x : U.finitePoints) (y : C.finitePoints)
-    (hxy : j.base x.1 = y.1) :
-    WU.localEigenvalues l (ρ.comp R.restrict) x = WC.localEigenvalues l ρ y :=
-  localEigenvalues_comp_of_isConj R.restrict_frobenius ρ x y hxy
-
 /-- **Restriction of a Weil group to an affine open.** Every closed point `y` of a smooth
 geometrically connected curve `C₀` lies in a nonempty affine open `j : U₀ ⟶ C₀`, itself a smooth
 geometrically connected curve, with a Weil group `W(U₀)` and a continuous, surjective,

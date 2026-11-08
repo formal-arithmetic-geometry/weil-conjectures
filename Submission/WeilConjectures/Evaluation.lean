@@ -5,7 +5,12 @@ Authors: Christian Merten
 -/
 module
 
-public import Submission.WeilConjectures.AnalyticAux
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Analysis.CStarAlgebra.Classes
+public import Mathlib.Analysis.Complex.Exponential
+public import Mathlib.Analysis.Normed.Group.Tannery
+public import Mathlib.Analysis.SpecificLimits.Normed
+public import Submission.WeilConjectures.EulerProductAux
 public import Submission.WeilConjectures.EulerProduct
 
 set_option autoImplicit true

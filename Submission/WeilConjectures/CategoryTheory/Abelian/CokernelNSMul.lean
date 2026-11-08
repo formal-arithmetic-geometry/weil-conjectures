@@ -83,13 +83,6 @@ def isColimitOfArrowIso {X Y X' Y' Q : C} {f : X ⟶ Y} {f' : X' ⟶ Y'} (e₁ :
 
 end Limits.CokernelCofork
 
-/-- Being a colimit cofan is stable under reindexing along an equivalence of index types. This
-is `CategoryTheory.Limits.Cofan.isColimitEquivOfEquiv` without its (unused) assumptions that the
-coproducts exist. -/
-def Limits.Cofan.isColimitReindex {α β : Type*} {f : α → C} (ε : β ≃ α) {c : Cofan f}
-    (hc : IsColimit c) : IsColimit (Cofan.mk c.pt fun b ↦ c.inj (ε b) : Cofan (f ∘ ε)) :=
-  IsColimit.whiskerEquivalenceEquiv (Discrete.equivalence ε) hc
-
 section Preadditive
 
 variable [Preadditive C] (n : ℕ)
@@ -99,13 +92,6 @@ variable [Preadditive C] (n : ℕ)
 lemma nsmul_id_comp_eq_comp_nsmul_id {X Y : C} (f : X ⟶ Y) :
     (n • 𝟙 X) ≫ f = f ≫ (n • 𝟙 Y) := by
   rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.id_comp, Category.comp_id]
-
-/-- A cokernel of multiplication by `n` can be transported along an isomorphism. -/
-def Limits.CokernelCofork.isColimitNSMulOfIso {X X' Q : C} (e : X' ≅ X) {π : X ⟶ Q}
-    {w : (n • 𝟙 X) ≫ π = 0} (h : IsColimit (CokernelCofork.ofπ π w)) :
-    IsColimit (CokernelCofork.ofπ (f := n • 𝟙 X') (e.hom ≫ π)
-      (by rw [nsmul_id_comp_eq_comp_nsmul_id_assoc, w, Limits.comp_zero])) :=
-  CokernelCofork.isColimitOfArrowIso e e (nsmul_id_comp_eq_comp_nsmul_id n e.hom) h
 
 variable {D : Type*} [Category* D] [Preadditive D]
 

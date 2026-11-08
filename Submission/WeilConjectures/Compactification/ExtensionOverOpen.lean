@@ -113,15 +113,6 @@ theorem exists_isProper_isPullback_of_isOpenImmersion [CompactSpace Z] [QuasiSep
   exact IsPullback.of_iso_pullback ⟨hs⟩ (asIso l) (pullback.lift_fst _ _ _)
     (pullback.lift_snd _ _ _)
 
-/-- A point of `X` whose image under `f` lies in the image of `g` lifts along the first
-projection of a pullback square of `f` and `g`. -/
-lemma Scheme.Pullback.mem_range_fst_of_isPullback {P X Y Z : Scheme.{u}} {fst : P ⟶ X}
-    {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z} (H : IsPullback fst snd f g) {x : X}
-    (hx : f x ∈ Set.range g) : x ∈ Set.range fst := by
-  obtain ⟨y, hy⟩ := hx
-  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback x y hy.symm
-  exact ⟨H.isoPullback.inv z, by rw [← Scheme.Hom.comp_apply, H.isoPullback_inv_fst, hz]⟩
-
 /-- A morphism of schemes which is both an open and a closed immersion and has dense range is an
 isomorphism. -/
 lemma isIso_of_isOpenImmersion_of_isClosedImmersion {X Y : Scheme.{u}} (l : X ⟶ Y)

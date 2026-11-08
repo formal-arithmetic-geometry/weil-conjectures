@@ -72,7 +72,7 @@ import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
-import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+import Submission.WeilConjectures.ConstructibleSheaf.Defs
 import Submission.WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage

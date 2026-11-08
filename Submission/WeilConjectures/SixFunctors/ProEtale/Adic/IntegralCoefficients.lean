@@ -247,15 +247,6 @@ noncomputable def integralToLocallyFiniteFunctions :
   map_add' _ _ := Subtype.ext <| ContinuousMap.ext fun _ ↦ by simp [integralCoe]
   map_mul' _ _ := Subtype.ext <| ContinuousMap.ext fun _ ↦ by simp [integralCoe]
 
-/-- The inclusion of integral functions into the locally finite functions is injective. -/
-lemma integralToLocallyFiniteFunctions_injective :
-    Function.Injective (integralToLocallyFiniteFunctions l T) := by
-  intro f g h
-  apply ContinuousMap.ext
-  intro t
-  have := congrArg (fun φ : locallyFiniteFunctions l T ↦ (φ : C(T, PadicAlgCl l)) t) h
-  exact PadicInt.ext (by simpa [integralToLocallyFiniteFunctions, integralCoe] using this)
-
 /-- The norm of `ℓ` in `ℚ̄_ℓ` is `ℓ⁻¹`. -/
 lemma norm_natCast_self : ‖(l : PadicAlgCl l)‖ = (l : ℝ)⁻¹ := by
   rw [← map_natCast (algebraMap ℚ_[l] (PadicAlgCl l))]

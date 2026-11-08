@@ -63,24 +63,6 @@ noncomputable abbrev of (A : Type u) [CommRing A] [Algebra k₀ A] [Module.Finit
 
 variable {L : Type u} [Field L]
 
-/-- A finite étale `L`-algebra, for a finite étale field extension `L / k₀`, regarded as a finite
-étale `k₀`-algebra. -/
-noncomputable def restrictScalars (k₀ : Type u) [Field k₀] [Algebra k₀ L] [Module.Finite k₀ L]
-    [Algebra.Etale k₀ L] (B : FiniteEtaleAlgebra L) : FiniteEtaleAlgebra k₀ :=
-  letI : Algebra k₀ B.1 := ((algebraMap L B.1).comp (algebraMap k₀ L)).toAlgebra
-  haveI : IsScalarTower k₀ L B.1 := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  ⟨CommAlgCat.of k₀ B.1, Module.Finite.trans L B.1, Algebra.Etale.comp k₀ L B.1⟩
-
-
-/-- The base change `L ⊗_{k₀} A` of a finite étale `k₀`-algebra `A`, a finite étale
-`L`-algebra. -/
-noncomputable def baseChange [Algebra k₀ L] (A : FiniteEtaleAlgebra k₀) : FiniteEtaleAlgebra L :=
-  of (TensorProduct k₀ L A.1)
-
-/-- The ring homomorphism `a ↦ 1 ⊗ a : A → L ⊗_{k₀} A`. -/
-noncomputable def includeRight [Algebra k₀ L] (A : FiniteEtaleAlgebra k₀) :
-    A.1 →+* (baseChange (L := L) A).1 :=
-  Algebra.TensorProduct.includeRight.toRingHom
 
 end FiniteEtaleAlgebra
 
@@ -176,12 +158,6 @@ lemma constantExtensionLeftMap_fst :
       pullback.fst _ _ ≫ constantExtensionProj p L :=
   pullback.lift_fst _ _ _
 
-@[reassoc (attr := simp)]
-lemma constantExtensionLeftMap_snd :
-    constantExtensionLeftMap p φ hφ ≫ pullback.snd p A.specHom =
-      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom φ) :=
-  pullback.lift_snd _ _ _
-
 /-- The map `y ↦ y ≫ (π ×_φ 1)` from the geometric fibre of `X₀' ×_L Spec B` at `s'` to that of
 `X₀ ×_K Spec A` at `s' ≫ π`. -/
 noncomputable def constantExtensionFiberMap
@@ -192,15 +168,6 @@ noncomputable def constantExtensionFiberMap
     rw [Category.assoc, constantExtensionLeftMap_fst, ← Category.assoc]
     exact congrArg (· ≫ constantExtensionProj p L) (fiber_left_comp s' y))
 
-
-/-- The morphism `X₀' ×_L Spec B ⟶ π^* (X₀ ×_K Spec A)` of finite étale `X₀'`-schemes. -/
-noncomputable def constantExtensionToPullback :
-    constantCover (constantExtensionHom p L) B ⟶
-      (pullback (constantExtensionProj p L)).obj (constantCover p A) :=
-  ObjectProperty.homMk (MorphismProperty.Over.homMk
-    (pullback.lift (constantExtensionLeftMap p φ hφ) (pullback.fst _ _)
-      (constantExtensionLeftMap_fst p φ hφ))
-    (pullback.lift_snd _ _ _))
 
 
 variable [Finite K] [Finite L]
@@ -220,15 +187,6 @@ variable [Finite K] [Finite L] [GeometricallyConnected p] [ConnectedSpace X₀]
 variable (G' : Type u) [Group G'] [∀ P, MulAction G' ((fiber s').obj P)]
   [IsNaturalSMul (fiber s') G']
 
-
-/-- The diagonal point of the geometric fibre at `s'` of `π^* (X₀ ×_K Spec L)`, the point on the
-diagonal section `X₀' ⟶ X₀' ×_{X₀} X₀'`. -/
-noncomputable def diagonalPoint :
-    (fiber s').obj ((pullback (constantExtensionProj p L)).obj
-      (constantCover p (FiniteEtaleAlgebra.of L))) :=
-  fiberMk s' _ (s' ≫ pullback.lift (𝟙 _) (𝟙 _) rfl) (by
-    change (s' ≫ pullback.lift _ _ _) ≫ pullback.snd _ _ = s'
-    simp)
 
 
 end WeilGroup
@@ -252,75 +210,8 @@ section Exact
 variable {K : Type u} [Field K] [Finite K] {X₀ : Scheme.{u}} (p : X₀ ⟶ Spec (.of K))
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X₀)
 
-omit [Finite K] in
-/-- Every finite subset of `K̄` lies in a finite subextension of `K̄ / K`. -/
-lemma FiniteSubfield.exists_forall_mem (T : Finset (AlgebraicClosure K)) :
-    ∃ L : FiniteSubfield K, ∀ x ∈ T, x ∈ L.1 := by
-  classical
-  induction T using Finset.induction_on with
-  | empty => exact ⟨⟨⊥, inferInstance⟩, by simp⟩
-  | insert a T _ ih =>
-    obtain ⟨L, hL⟩ := ih
-    obtain ⟨L', h₁, h₂⟩ := FiniteSubfield.exists_ge L (FiniteSubfield.adjoin a)
-    refine ⟨L', fun x hx ↦ ?_⟩
-    rcases Finset.mem_insert.1 hx with rfl | hx
-    · exact h₂ (FiniteSubfield.mem_adjoin x)
-    · exact h₁ (hL x hx)
-
-/-- There are finite subextensions of `K̄ / K` of arbitrarily large degree. -/
-lemma FiniteSubfield.exists_lt_finrank (N : ℕ) :
-    ∃ L : FiniteSubfield K, N < Module.finrank K L.1 := by
-  obtain ⟨S, hS⟩ := Infinite.exists_subset_card_eq (AlgebraicClosure K) (Nat.card K ^ N + 1)
-  obtain ⟨L, hL⟩ := FiniteSubfield.exists_forall_mem S
-  refine ⟨L, ?_⟩
-  have := L.2
-  have : Finite L.1 := Module.finite_of_finite K
-  have hcard : S.card ≤ Nat.card L.1 := by
-    change S.card ≤ Nat.card (L.1 : Set (AlgebraicClosure K))
-    rw [← Set.ncard_coe_finset, Nat.card_coe_set_eq]
-    exact Set.ncard_le_ncard (fun x hx ↦ hL x hx) (Set.toFinite _)
-  rw [hS, Module.natCard_eq_pow_finrank (K := K) (V := L.1)] at hcard
-  exact (Nat.pow_lt_pow_iff_right Finite.one_lt_card).1 (Nat.lt_of_succ_le hcard)
-
-/-- The geometric Frobenius has infinite order: on the geometric fibre of the constant cover
-attached to a finite field extension of degree `m`, it has order `m`, and there are such
-extensions of every degree. -/
-theorem not_isOfFinOrder_geometricFrobenius : ¬IsOfFinOrder (geometricFrobenius p s) := by
-  intro hfin
-  obtain ⟨d, hd, hpow⟩ := isOfFinOrder_iff_pow_eq_one.1 hfin
-  obtain ⟨L, hL⟩ := FiniteSubfield.exists_lt_finrank (K := K) d
-  have := L.2
-  have : Algebra.Etale K L.1 := L.toFiniteEtaleAlgebra.2.2
-  let : Algebra K Ω := (baseRingHom p s).toAlgebra
-  let φ : L.1 →ₐ[K] Ω := IsSepClosed.lift
-  let z := (fiberConstantCoverEquiv p s (FiniteEtaleAlgebra.of L.1)).symm
-    ⟨φ.toRingHom, φ.comp_algebraMap⟩
-  have hz : (geometricFrobenius p s (FiniteEtaleAlgebra.of L.1) ^ (d : ℤ)) z = z := by
-    rw [zpow_natCast, ← Pi.pow_apply, hpow]
-    rfl
-  have hdvd := dvd_of_geometricFrobenius_zpow_apply p s L.1 z d hz
-  have := Int.le_of_dvd (by exact_mod_cast hd) hdvd
-  omega
-
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [ConnectedSpace X₀] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
-
-/-- Blueprint `rem-ptr-wf-weil-group-1`: Pointer to the properties of `def-wf-weil-group`.
-
-The exact sequence of `lem-wf-weil-group-exact-sequence` for the Weil group of a connected,
-geometrically connected scheme over a finite field: the degree map is surjective, the elements of
-degree zero are those of `π₁(X₀, s)` acting trivially on the constant covers, and every lift of
-the geometric Frobenius has degree one. -/
-theorem exact_weilGroupDeg [GeometricallyConnected p] :
-    Function.Surjective (weilGroupDeg p s G) ∧
-      Function.Injective ((constantCoverAction p s G).kerToWeilGroup (geometricFrobenius p s)) ∧
-      ((constantCoverAction p s G).kerToWeilGroup (geometricFrobenius p s)).range =
-        (weilGroupDeg p s G).ker ∧
-      ∀ w : weilGroup p s G, constantCoverAction p s G (w : G × Multiplicative ℤ).1 =
-        geometricFrobenius p s → weilGroupDeg p s G w = Multiplicative.ofAdd 1 := by
-  obtain ⟨g, hg⟩ := exists_smul_eq_geometricFrobenius p s G
-  refine (constantCoverAction p s G).exact_weilGroupDeg (geometricFrobenius p s)
-    ⟨g, funext fun A ↦ Equiv.ext fun y ↦ hg A y⟩ (not_isOfFinOrder_geometricFrobenius p s)
 
 end Exact
 

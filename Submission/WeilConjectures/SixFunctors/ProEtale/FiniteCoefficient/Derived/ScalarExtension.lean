@@ -382,18 +382,6 @@ section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Extension of scalars commutes with extension by zero along an open immersion `j`:
-`S ⊗_R j_! F ≅ j_! (S ⊗_R F)`. Both sides are left adjoint to the two equal composites of
-restriction of scalars and restriction along `j`, and the isomorphism is the conjugate of the
-identity. -/
-noncomputable def openImmersionLowerShriekCompSheafExtendScalarsIso :
-    (j)_!open[ModuleCat.{u + 1} R] ⋙ sheafExtendScalars (algebraMap R S) X ≅
-      sheafExtendScalars (algebraMap R S) U ⋙ (j)_!open[ModuleCat.{u + 1} S] :=
-  ((conjugateIsoEquiv
-    ((openImmersionLowerShriekAdjunction _ j).comp (sheafExtendScalarsAdjunction _ X))
-    ((sheafExtendScalarsAdjunction _ U).comp (openImmersionLowerShriekAdjunction _ j))).symm
-      (Iso.refl _)).symm
-
 end OpenImmersion
 
 end ScalarExtension

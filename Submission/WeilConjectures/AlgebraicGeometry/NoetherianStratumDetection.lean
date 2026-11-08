@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport

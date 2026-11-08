@@ -71,12 +71,6 @@ variable {X Y S : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
-/-- Closed immersions have a reduction comparison for `Rf_!` and `Rf^!`
-(`exists_etaleReductionLowerShriekIso_of_isClosedImmersion`). -/
-theorem hasEtaleReductionLowerShriekIso_of_isClosedImmersion (f : X ⟶ Y)
-    [IsClosedImmersion f.left] : HasEtaleReductionLowerShriekIso ℓ E n f :=
-  exists_etaleReductionLowerShriekIso_of_isClosedImmersion ℓ E n f
-
 /-- **Reduction comparisons compose**: if `f` and `g` have a reduction comparison for the
 lower and upper shrieks, so does `f ≫ g`. The comparison for `f ≫ g` is the stacked square of
 those for `f` and `g`, transported along the composition isomorphisms
@@ -115,37 +109,5 @@ theorem HasEtaleReductionLowerShriekIso.comp {f : X ⟶ Y} {g : Y ⟶ S}
     (boundedConstructibleLowerShriekComp_padicIntegers ℓ E f g) e' _ _
 
 /-! ### Factorization of proper morphisms -/
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-  [IsSeparated Y.hom] in
-/-- **Graph factorization of a proper morphism**: a proper `f : X ⟶ Y` of separated `k`-schemes of
-finite type is a closed immersion `X ⟶ P ×_k Y` followed by the second projection, for some
-proper `k`-scheme `P`. Take a compactification `X ⟶[j] P ⟶ Spec k` of `X` (Nagata) and the
-graph `(j, f)`: it is proper, its composite with the separated projection to `Y` being `f`, and
-a monomorphism, its composite with the projection to `P` being the open immersion `j`. -/
-theorem exists_isClosedImmersion_comp_overProdSnd (f : X ⟶ Y) [IsProper f.left] :
-    ∃ (P : Over (Spec (.of k))) (_ : IsProper P.hom) (i : X ⟶ overProd P Y),
-      IsClosedImmersion i.left ∧ i ≫ overProdSnd P Y = f := by
-  let c := HasCompactification.compactification X.hom
-  have := c.isProper
-  have := c.isOpenImmersion
-  have hc : c.i ≫ c.g = X.hom := c.comm.symm
-  let i : X ⟶ overProd (Over.mk c.g) Y :=
-    Over.homMk (pullback.lift c.i f.left (by simp [hc]))
-      (by dsimp only [overProd, Over.mk_hom]; rw [pullback.lift_snd_assoc, Over.w])
-  have hi₁ : i.left ≫ pullback.fst c.g Y.hom = c.i := by simp [i]
-  have hi₂ : i.left ≫ pullback.snd c.g Y.hom = f.left := by simp [i]
-  refine ⟨Over.mk c.g, c.isProper, i, ?_, ?_⟩
-  · rw [IsClosedImmersion.iff_isProper_and_mono]
-    have : IsProper (i.left ≫ pullback.snd c.g Y.hom) := by
-      rw [hi₂]
-      infer_instance
-    refine ⟨IsProper.of_comp i.left (pullback.snd c.g Y.hom), ?_⟩
-    have : Mono (i.left ≫ pullback.fst c.g Y.hom) := by
-      rw [hi₁]
-      infer_instance
-    exact mono_of_mono _ (pullback.fst c.g Y.hom)
-  · ext1
-    simpa [overProdSnd] using hi₂
 
 end AlgebraicGeometry.ProEtale.CondensedRing

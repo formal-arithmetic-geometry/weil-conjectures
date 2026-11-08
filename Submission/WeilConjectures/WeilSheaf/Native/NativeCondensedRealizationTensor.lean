@@ -10,7 +10,9 @@ public import Submission.WeilConjectures.WeilSheaf.Native.NativeForgetTotalTenso
 public import Submission.WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 public import Submission.WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.KFlatBifunctorTransport
-public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorRightIsoNaturality
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
+public import Submission.WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
+public import Submission.WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import Submission.WeilConjectures.AlgebraicGeometry.Native.NativeScalarForgettingMonoidal
 import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal

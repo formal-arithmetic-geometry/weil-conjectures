@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Submission.WeilConjectures.AlgebraicGeometry.Adic.AdicLisseModuleSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdjunctionSupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.Topology.Stratification
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import all Submission.WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
@@ -58,103 +58,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem normalizedDerivedAdjunction
-    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    (L : A ⥤ B) (R : B ⥤ A) [L.Additive] [R.Additive]
-    [PreservesFiniteLimits R] [PreservesFiniteColimits R] (adj : L ⊣ R)
-    (P : CochainComplex A ℤ → Prop)
-    (hres : ∀ G : CochainComplex A ℤ, ∃ (K : CochainComplex A ℤ) (s : K ⟶ G),
-      P K ∧ QuasiIso s)
-    (LD : DerivedCategory A ⥤ DerivedCategory B)
-    (ε : DerivedCategory.Qh ⋙ LD ⟶ L.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
-    (hLD : LD.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)))
-    (hε : ∀ K : CochainComplex A ℤ, P K →
-      IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) :
-    ∃! d : LD ⊣ R.mapDerivedCategory,
-      ∀ K : CochainComplex A ℤ, P K →
-        d.unit.app (DerivedCategory.Q.obj K) ≫
-          R.mapDerivedCategory.map
-            (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
-              ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
-              DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
-              (DerivedCategory.quotientCompQhIso _).hom.app
-                ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
-          R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app K) := by
-  have hr (X : HomotopyCategory A (.up ℤ)) :
-      ∃ (K : HomotopyCategory A (.up ℤ)) (s : K ⟶ X),
-        IsIso (ε.app K) ∧ HomotopyCategory.quasiIso A (.up ℤ) s := by
-    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
-    obtain ⟨K, s, hK, hs⟩ := hres G
-    exact ⟨_, (HomotopyCategory.quotient _ _).map s, hε K hK,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
-  obtain ⟨d, hd⟩ := ScalarReductionDerivedProof.derivedAdjunction_of_resolutions
-    L R adj LD ε hLD hr
-  have hn (K : CochainComplex A ℤ) :
-        d.unit.app (DerivedCategory.Q.obj K) ≫
-          R.mapDerivedCategory.map
-            (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
-              ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
-              DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
-              (DerivedCategory.quotientCompQhIso _).hom.app
-                ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
-          R.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj K) =
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj.unit (.up ℤ)).app K) := by
-    have hp := hd ((HomotopyCategory.quotient _ _).obj K)
-    change d.unit.app (DerivedCategory.Qh.obj
-        ((HomotopyCategory.quotient _ _).obj K)) ≫
-      R.mapDerivedCategory.map (ε.app ((HomotopyCategory.quotient _ _).obj K)) ≫
-      R.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj
-        ((L.mapHomologicalComplex (.up ℤ)).obj K)) = _ at hp
-    simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
-      Adjunction.mapHomotopyCategory_unit_app_quotient] at hp
-    simp only [Functor.mapHomotopyCategoryFactors,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at hp ⊢
-    erw [DerivedCategory.Qh.map_id, Category.id_comp]
-    erw [DerivedCategory.Qh.map_id, Category.comp_id] at hp
-    have hp' := congrArg (fun f ↦ f ≫ (DerivedCategory.quotientCompQhIso A).hom.app
-      ((R.mapHomologicalComplex (.up ℤ)).obj ((L.mapHomologicalComplex (.up ℤ)).obj K))) hp
-    simp only [Category.assoc, Iso.inv_hom_id_app] at hp'
-    erw [Category.comp_id] at hp'
-    erw [DerivedCategory.quotientCompQhIso_hom_naturality] at hp'
-    apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app K)).mp
-    simp only [Functor.map_comp, Category.assoc]
-    have hunit := d.unit.naturality ((DerivedCategory.quotientCompQhIso A).hom.app K)
-    simp only [Functor.id_map, Functor.comp_map] at hunit
-    rw [reassoc_of% hunit, ← R.mapDerivedCategory.map_comp_assoc, ← LD.map_comp,
-      Iso.hom_inv_id_app]
-    erw [LD.map_id, R.mapDerivedCategory.map_id, Category.id_comp]
-    exact hp'
-  refine ⟨d, fun K _ ↦ hn K, ?_⟩
-  intro d' hd'
-  have hu (K : CochainComplex A ℤ) (hK : P K) :
-      d'.unit.app (DerivedCategory.Q.obj K) = d.unit.app (DerivedCategory.Q.obj K) := by
-    have : IsIso (ε.app ((HomotopyCategory.quotient _ _).obj K)) := hε K hK
-    apply (cancel_mono (R.mapDerivedCategory.map
-      (LD.map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
-        ε.app ((HomotopyCategory.quotient _ _).obj K) ≫
-        DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
-        (DerivedCategory.quotientCompQhIso _).hom.app
-          ((L.mapHomologicalComplex (.up ℤ)).obj K)) ≫
-      R.mapDerivedCategoryFactors.hom.app
-        ((L.mapHomologicalComplex (.up ℤ)).obj K))).mp
-    simpa only [Category.assoc] using (hd' K hK).trans (hn K).symm
-  apply Adjunction.ext
-  apply Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso A (.up ℤ))
-  intro K
-  obtain ⟨K', s, hK', hs⟩ := hres K
-  have : QuasiIso s := hs
-  apply (cancel_epi (DerivedCategory.Q.map s)).mp
-  change (𝟭 _).map (DerivedCategory.Q.map s) ≫ _ =
-    (𝟭 _).map (DerivedCategory.Q.map s) ≫ _
-  rw [d'.unit.naturality, d.unit.naturality]
-  dsimp only [Functor.comp_map, Functor.id_map]
-  rw [hu K' hK']
 
 variable (X : Scheme.{u})
 

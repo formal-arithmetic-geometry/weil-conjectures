@@ -152,21 +152,5 @@ end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The derived transition before taking cohomology, for arbitrary complexes and a
-coefficient morphism. This is an actual composite of units, comparison, and counit. -/
-noncomputable def abelianDerivedDirectImageTransition {S Y Y' : Scheme.{v}}
-    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
-    (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1}))
-    (t : D+((a)^*[AddCommGrpCat.{v + 1}]).obj K ⟶ K') :
-    R+((h)_*[AddCommGrpCat.{v + 1}]).obj K ⟶
-      R+((h')_*[AddCommGrpCat.{v + 1}]).obj K' :=
-  (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} h).derivedPlus.transitionThrough
-    (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} h').derivedPlus
-    D+((a)^*[AddCommGrpCat.{v + 1}])
-    (eqToIso (congrArg
-      (fun f : Y' ⟶ S => ((f)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlus)
-      w.symm) ≪≫ upperStarPlusComp AddCommGrpCat.{v + 1} a h).hom K K' t
-
 
 end AlgebraicGeometry.Etale

@@ -9,7 +9,8 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import Submission.WeilConjectures.AlgebraicGeometry.Sites.EtaleStructureSheaf
+public import Submission.WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
+public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Submission.WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions

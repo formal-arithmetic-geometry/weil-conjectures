@@ -85,10 +85,6 @@ theorem isTraitModelOver_traitModelOfPoint :
     IsPullback.of_vert_isIso ⟨by simp [traitModelOfPoint]⟩,
     IsPullback.of_vert_isIso ⟨by simp [traitModelOfPoint]⟩⟩
 
-/-- The trait is a model of finite type over itself. -/
-theorem isTraitModel_traitModelOfPoint : (traitModelOfPoint ε).IsTraitModel :=
-  (isTraitModelOver_traitModelOfPoint ε).isTraitModel
-
 variable (F) (ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F))
 
 /-- The trait `S = Spec k'⟦t⟧` as a model of the base point `Spec F` with special fibre
@@ -284,11 +280,6 @@ end NearbyCyclesModel
 section TraitModel
 
 variable (k : Type u) [Field k] (k' : Type u) [Field k'] [Algebra k k']
-
-/-- The trait model of the base point is, definitionally, the trait as a model of the point along
-its identification `ε`. -/
-lemma traitModelOfPoint_traitModel_ε : traitModelOfPoint (traitModel k k').ε = traitModel k k' :=
-  rfl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]

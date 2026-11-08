@@ -100,19 +100,6 @@ instance [TopologicalSpace.NoetherianSpace X] :
     ⟨Functor.commShiftObjIsoOfIso (derivedExtendScalarsToPadicAlgClIsoMapDerivedCategory X ℓ E)
       n K' ≪≫ (shiftFunctor _ n).mapIso e⟩⟩⟩
 
-/-- A complex descending to `E` descends to every finite subextension `H ⊇ E`, through the
-transitivity `T^X_{E,H} ⋙ T^X_{H,Ω} ≅ T^X_{E,Ω}`. -/
-lemma exists_iso_derivedExtendScalarsToPadicAlgCl_obj_of_le {E H : FiniteIntermediateField ℓ}
-    (h : E ≤ H)
-    (K' : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (padicSubfieldRingObj X ℓ E))) (hK' : boundedConstructible _ K') :
-    boundedConstructible _ ((derivedExtendScalarsSubfield X ℓ h).obj K') ∧
-      Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ H).obj
-        ((derivedExtendScalarsSubfield X ℓ h).obj K') ≅
-          (derivedExtendScalarsToPadicAlgCl X ℓ E).obj K') :=
-  ⟨ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K' hK',
-    ⟨(derivedExtendScalarsCompIso X ℓ h).app K'⟩⟩
-
 /-- **The cone step** of blueprint `det-lem-coefficient-finite-descent-objects`: on a
 topologically noetherian scheme, assuming (Hom)-surjectivity `hHom`, if `K' ⟶ K ⟶ K'' ⟶ K'[1]`
 is distinguished in `D(ℚ̄_ℓ,X)` and `K'`, `K''` descend to finite subextensions, then so does

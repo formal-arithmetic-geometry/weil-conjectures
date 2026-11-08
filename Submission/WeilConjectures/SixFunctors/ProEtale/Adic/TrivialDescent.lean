@@ -105,11 +105,6 @@ lemma comps_ofComps {Z : B.ProEt}
     rfl
   · simp
 
-/-- Every column of functions is the components of a section. -/
-lemma comps_surjective {Z : B.ProEt} :
-    Function.Surjective (comps (l := l) (B := B) (n := n) (Z := Z)) :=
-  fun c ↦ ⟨ofComps c, comps_ofComps c⟩
-
 /-- The components of the restriction of a section are the pulled back components. -/
 lemma comps_map {Z Z' : B.ProEt} (k : Z' ⟶ Z)
     (x : (⨁ fun _ : Fin n ↦ unit l B).X.obj.obj (op Z)) :

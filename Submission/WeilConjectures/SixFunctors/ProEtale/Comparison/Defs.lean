@@ -104,8 +104,6 @@ instance : ν_*(X)[A].IsRightAdjoint :=
 instance : ν^*(X)[A].IsLeftAdjoint :=
   (comparisonAdjunction A X).isLeftAdjoint
 
-example : PreservesFiniteLimits ν_*(X)[A] := inferInstance
-
 /-- The comparison functor `ν^*` is left exact. -/
 instance preservesFiniteLimits_comparisonUpperStar : PreservesFiniteLimits ν^*(X)[A] :=
   -- the composite of the inclusion of sheaves into presheaves, the left Kan extension along
@@ -114,8 +112,6 @@ instance preservesFiniteLimits_comparisonUpperStar : PreservesFiniteLimits ν^*(
   inferInstanceAs <| PreservesFiniteLimits <|
     Functor.sheafPullbackConstruction.sheafPullback (toProEt X) A X.smallEtaleTopology
       (ProEt.topology X)
-
-example : PreservesFiniteColimits ν^*(X)[A] := inferInstance
 
 /-- The restriction `ν_*` is additive. -/
 instance additive_comparisonLowerStar : ν_*(X)[A].Additive where

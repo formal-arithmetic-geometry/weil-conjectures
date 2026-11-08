@@ -64,14 +64,6 @@ lemma FixedLocus.liftPoint_ι (F : c.FixedLocus) (y : RationalPoint c.C)
     (hy : y ≫ c.c₁ = y ≫ c.c₂) : F.liftPoint y hy ≫ F.ι = y :=
   Fork.IsLimit.lift_ι F.isLimit
 
-lemma FixedLocus.liftPoint_withCoeff (F : c.FixedLocus)
-    (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek ℓ c.c₁).obj K')
-    (y : RationalPoint c.C) (hy : y ≫ c.c₁ = y ≫ c.c₂) :
-    (F.withCoeff K' u').liftPoint y hy = F.liftPoint y hy :=
-  rfl
-
 variable (c) in
 /-- The trace class of a correspondence whose pulled back coefficient `Lc₂^* K` vanishes is
 zero: the mate of `u` is a map out of the zero object. -/

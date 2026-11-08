@@ -266,18 +266,4 @@ maps into the stages. Source: blueprint order 1222 (blueprint: def-weil-pbc-w-lo
 noncomputable def algebra (A : Type u) [CommRing A] : CommAlgCat.{u} A :=
   colimit (diagram (A := A))
 
-/-- This colimit is ind-Zariski in the principal-localization sense. Use the filtered diagram
-above and its colimit cocone; enumerate each finite set of parts by `Fin n` and transport the
-product along that enumeration. The empty set gives `n = 0`.
-Source: blueprint order 1222 (blueprint: def-weil-pbc-w-localization). -/
-theorem isIndPrincipalZariski : Algebra.IsIndPrincipalZariski A (algebra A) := by
-  classical
-  refine ⟨Index A, inferInstance, inferInstance,
-    ColimitPresentation.colimit (diagram (A := A)), ?_⟩
-  intro i
-  let e := Fintype.equivFin i.parts
-  refine ⟨Fintype.card i.parts, fun j ↦ i.denominator (e.symm j), ?_⟩
-  exact ⟨AlgEquiv.piCongrLeft' A
-    (fun E : i.parts ↦ Localization.Away (i.denominator E)) e⟩
-
 end PrincipalWLocalization

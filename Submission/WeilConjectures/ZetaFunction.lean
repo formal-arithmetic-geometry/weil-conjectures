@@ -98,9 +98,4 @@ and this definition recovers the classical arithmetic zeta function of `X`. -/
 noncomputable def zeta (s : ℂ) : ℂ :=
   ∏' x : X.finitePoints, X.eulerFactor x.1 s
 
-@[simp]
-lemma zeta_of_isEmpty [IsEmpty X] (s : ℂ) : X.zeta s = 1 := by
-  have : IsEmpty X.finitePoints := ⟨fun x ↦ IsEmpty.false x.1⟩
-  rw [zeta, tprod_empty]
-
 end AlgebraicGeometry.Scheme

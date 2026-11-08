@@ -7,7 +7,10 @@ module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Descent
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
-public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack

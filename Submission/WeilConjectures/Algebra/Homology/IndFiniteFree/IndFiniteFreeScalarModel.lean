@@ -192,49 +192,6 @@ def pureTensor {R : Sheaf J CommRingCat.{r}} (M N : Modules R)
       (M.val ⊗ N.val)).app V (x ⊗ₜ[R.obj.obj V] y) |>
     (tensorObjIsoSheafification M N).inv.val.app V
 
-private theorem pureTensor_ext {R : Sheaf J CommRingCat.{r}}
-    {M N P : Modules R} (f g : M ⊗ N ⟶ P)
-    (h : ∀ (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V),
-      f.val.app V (pureTensor M N V x y) = g.val.app V (pureTensor M N V x y)) :
-    f = g := by
-  let adj := PresheafOfModules.sheafificationAdjunction
-    (𝟙 (derivedChangeRingIndependentCoefficients J R).obj)
-  apply (cancel_epi (tensorObjIsoSheafification M N).inv).mp
-  apply (adj.homEquiv (M.val ⊗ N.val) P).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply PresheafOfModules.hom_ext
-  intro V
-  ext t
-  change f.val.app V ((tensorObjIsoSheafification M N).inv.val.app V
-      ((adj.unit.app (M.val ⊗ N.val)).app V t)) =
-    g.val.app V ((tensorObjIsoSheafification M N).inv.val.app V
-      ((adj.unit.app (M.val ⊗ N.val)).app V t))
-  induction t using TensorProduct.inductionOn with
-  | tmul x y => exact h V x y
-  | add t t' ht ht' => simp only [map_add, ht, ht']
-
-variable {R : Sheaf J CommRingCat.{r}} in
-/-- The identification `A ⊗ T ≅ a(A ⊗ T)` is natural in `T`. -/
-private lemma whiskerLeft_tensorObjIsoSheafification_hom (A : Modules R)
-    {T T' : Modules R} (f : T ⟶ T') :
-    A ◁ f ≫ (tensorObjIsoSheafification A T').hom =
-      (tensorObjIsoSheafification A T).hom ≫
-        (PresheafOfModules.sheafification
-          (𝟙 (derivedChangeRingIndependentCoefficients J R).obj)).map (A.val ◁ f.val) := by
-  have h := (PresheafOfModules.sheafificationAdjunction.{r}
-    (𝟙 (derivedChangeRingIndependentCoefficients J R).obj)).counit.naturality f
-  dsimp at h
-  simp only [tensorObjIsoSheafification, Iso.trans_hom, Iso.symm_hom, tensorIso_inv,
-    Iso.app_inv, asIso_inv, Functor.Monoidal.μIso_hom, Category.assoc,
-    ← Functor.LaxMonoidal.μ_natural_right]
-  simp only [← Category.assoc]
-  congr 1
-  rw [← id_tensorHom, ← id_tensorHom, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
-  congr 1
-  simp only [NatIso.isIso_inv_app, IsIso.eq_inv_comp]
-  rw [← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
-  rfl
-
 variable {R : Sheaf J CommRingCat.{r}} in
 /-- The identification `A ⊗ T ≅ a(A ⊗ T)` is natural in `A`. -/
 private lemma whiskerRight_tensorObjIsoSheafification_hom {A A' : Modules R}
@@ -275,62 +232,6 @@ private theorem pureTensor_whiskerRight {R : Sheaf J CommRingCat.{r}}
   have he := congrArg (fun k ↦ k.val.app V
     ((adj.unit.app (M.val ⊗ N.val)).app V (x ⊗ₜ[R.obj.obj V] y))) h
   exact he.trans (congrArg ((tensorObjIsoSheafification M' N).inv.val.app V) hh.symm)
-
-private theorem pureTensor_whiskerLeft {R : Sheaf J CommRingCat.{r}}
-    (M : Modules R) {N N' : Modules R} (f : N ⟶ N')
-    (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :
-    (M ◁ f).val.app V (pureTensor M N V x y) =
-      pureTensor M N' V x (f.val.app V y) := by
-  let adj := PresheafOfModules.sheafificationAdjunction
-    (𝟙 (derivedChangeRingIndependentCoefficients J R).obj)
-  have h : (tensorObjIsoSheafification M N).inv ≫ M ◁ f =
-      (PresheafOfModules.sheafification (𝟙
-        (derivedChangeRingIndependentCoefficients J R).obj)).map (M.val ◁ f.val) ≫
-          (tensorObjIsoSheafification M N').inv := by
-    rw [Iso.inv_comp_eq, ← Category.assoc, ← whiskerLeft_tensorObjIsoSheafification_hom,
-      Category.assoc, Iso.hom_inv_id, Category.comp_id]
-  have hh := congrArg (fun k ↦ k.app V (x ⊗ₜ[R.obj.obj V] y))
-    (adj.unit.naturality (M.val ◁ f.val))
-  have he := congrArg (fun k ↦ k.val.app V
-    ((adj.unit.app (M.val ⊗ N.val)).app V (x ⊗ₜ[R.obj.obj V] y))) h
-  exact he.trans (congrArg ((tensorObjIsoSheafification M N').inv.val.app V) hh.symm)
-
-private theorem tensorLeft_colimit_finiteLimits {R : Sheaf J CommRingCat.{r}}
-    {K : Type r} [SmallCategory K] [HasExactColimitsOfShape K (Modules R)]
-    (F : K ⥤ Modules R) (c : Cocone F) (hc : IsColimit c)
-    (h : ∀ k, PreservesFiniteLimits (tensorLeft (F.obj k))) :
-    PreservesFiniteLimits (tensorLeft c.pt) := by
-  have hcol (M : Modules R) : PreservesColimitsOfSize.{r, r} (tensorRight M) := by
-    have := tensorLeft_preservesColimits_independentCoefficients R M
-    exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
-  have : PreservesColimit F (curriedTensor (Modules R)) :=
-    MonoidalCategory.Limits.preservesColimit_curriedTensor F
-  let e : tensorLeft c.pt ≅ (F ⋙ curriedTensor (Modules R)).flip ⋙ colim :=
-    (curriedTensor (Modules R)).mapIso (hc.coconePointUniqueUpToIso (colimit.isColimit F)) ≪≫
-      preservesColimitIso (curriedTensor (Modules R)) F ≪≫ colimitIsoFlipCompColim _
-  have : PreservesFiniteLimits ((F ⋙ curriedTensor (Modules R)).flip) :=
-    preservesFiniteLimits_of_evaluation _ h
-  have : PreservesFiniteLimits ((F ⋙ curriedTensor (Modules R)).flip ⋙ colim) :=
-    comp_preservesFiniteLimits _ _
-  exact preservesFiniteLimits_of_natIso e.symm
-
-private theorem tensorLeft_finiteFree_finiteLimits {R : Sheaf J CommRingCat.{r}}
-    (M : Modules R) (d : ℕ)
-    (e : M ≅ ∏ᶜ fun _ : Fin d ↦ unit (derivedChangeRingIndependentCoefficients J R)) :
-    PreservesFiniteLimits (tensorLeft M) := by
-  have : HasFiniteBiproducts (Modules R) := Abelian.hasFiniteBiproducts
-  let U : Modules R := unit (derivedChangeRingIndependentCoefficients J R)
-  let F : Discrete (ULift.{r} (Fin d)) ⥤ Modules R :=
-    Discrete.functor (fun _ ↦ U)
-  have : PreservesFiniteLimits (tensorLeft U) :=
-    preservesFiniteLimits_of_natIso (leftUnitorNatIso (Modules R)).symm
-  have : PreservesFiniteLimits (tensorLeft (colimit F)) :=
-    tensorLeft_colimit_finiteLimits F (colimit.cocone F) (colimit.isColimit F)
-      (fun _ ↦ inferInstanceAs (PreservesFiniteLimits (tensorLeft U)))
-  let e' : M ≅ colimit F := e ≪≫
-    (Pi.whiskerEquiv (Equiv.ulift : ULift.{r} (Fin d) ≃ Fin d) (fun _ ↦ Iso.refl U)).symm ≪≫
-      (HasBiproductsOfShape.colimIsoLim.app F).symm
-  exact preservesFiniteLimits_of_natIso ((curriedTensor (Modules R)).mapIso e').symm
 
 section OrdinaryComparison
 
@@ -541,46 +442,6 @@ private theorem extensionPure_naturality
     ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app V
       (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] a))) hh
   exact he.trans (congrArg ((eqToHom (m.obj_eq N).symm).val.app V) hn.symm)
-
-private noncomputable def restrictionComposition
-    {T : Sheaf J CommRingCat.{r}} (ψ : S ⟶ T) (γ : R ⟶ T) (hγ : γ = φ ≫ ψ) :
-    restriction ψ ⋙ restriction φ ≅ restriction γ :=
-  NatIso.ofComponents (fun M ↦ (fullyFaithfulForget _).preimageIso
-    (PresheafOfModules.isoMk (fun V ↦
-      (ModuleCat.restrictScalarsComp'App (φ.hom.app V).hom (ψ.hom.app V).hom
-        (γ.hom.app V).hom (congrArg (fun f ↦ (f.hom.app V).hom) hγ)
-        (M.val.obj V)).symm) (by intros; ext x; rfl)))
-    (by intros; ext V x; rfl)
-
-private noncomputable def ordinaryIso
-    (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) (M : Modules R) :
-    (algebraModules R).obj (Under.mk φ) ⊗ M ≅ (restriction φ).obj (m.E.obj M) :=
-  (exists_extensionTensorComparison φ M).choose ≪≫
-    (restriction φ).mapIso (eqToIso (m.obj_eq M).symm)
-
-private theorem ordinaryIso_pure
-    (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) (M : Modules R)
-    (V : Cᵒᵖ) (s : S.obj.obj V) (a : M.val.obj V) :
-    (ordinaryIso m M).hom.val.app V
-        (pureTensor ((algebraModules R).obj (Under.mk φ)) M V s a) =
-      extensionPure m M V s a := by
-  exact congrArg ((eqToHom (m.obj_eq M).symm).val.app V)
-    ((exists_extensionTensorComparison φ M).choose_spec V s a)
-
-private noncomputable def ordinaryComparison
-    (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) :
-    tensorLeft ((algebraModules R).obj (Under.mk φ)) ≅ m.E ⋙ restriction φ :=
-  NatIso.ofComponents (ordinaryIso m) (by
-    intro M N f
-    apply pureTensor_ext
-    intro V s a
-    change (ordinaryIso m N).hom.val.app V
-        ((((algebraModules R).obj (Under.mk φ)) ◁ f).val.app V
-          (pureTensor _ M V s a)) =
-      (m.E.map f).val.app V
-        ((ordinaryIso m M).hom.val.app V (pureTensor _ M V s a))
-    rw [pureTensor_whiskerLeft, ordinaryIso_pure, ordinaryIso_pure,
-      extensionPure_naturality])
 
 /-- Normalization of the chain comparison on the sheafification-unit images of local
 pure tensors. The coprojections are those of the supplied algebra colimit.

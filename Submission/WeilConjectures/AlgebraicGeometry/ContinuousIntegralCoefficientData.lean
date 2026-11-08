@@ -204,62 +204,7 @@ instance : IsMonHom (integralReductionMap.{u} ℓ E) := by
   dsimp [integralReductionMap]
   infer_instance
 
-/-- Multiplication by ℓ is killed by integral residue reduction.
-Source: Bhatt--Scholze, Section 6.8
-(auxiliary; not a blueprint node). -/
-theorem integralReduction_comp_zero :
-    (ℓ • 𝟙 (integralCoeff.{u} ℓ E)) ≫ integralReductionMap ℓ E = 0 := by
-  ext S x
-  apply ULift.ext
-  apply ContinuousMap.ext
-  intro s
-  change Ideal.Quotient.mk (Ideal.span {(ℓ : continuousIntegers ℓ E)})
-    (ℓ • x.down s) = 0
-  rw [map_nsmul, nsmul_eq_mul]
-  have hℓ : (ℓ : integralResidue ℓ E) = 0 := by
-    apply (Ideal.Quotient.eq_zero_iff_mem).2
-    exact Ideal.subset_span (by simp)
-  rw [hℓ, zero_mul]
 
-/-- The actual coefficient sequence O_E --ℓ--> O_E --> O_E/(ℓ).
-Source: Bhatt--Scholze, Section 6.8
-(auxiliary; not a blueprint node). -/
-noncomputable def integralReductionSequence : ShortComplex
-    (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-  ShortComplex.mk (ℓ • 𝟙 (integralCoeff.{u} ℓ E)) (integralReductionMap ℓ E)
-    (integralReduction_comp_zero ℓ E)
-
-
-/-- The residue quotient as an actual morphism of integral module objects.
-Source: Bhatt--Scholze, Section 6.8
-(auxiliary; not a blueprint node). -/
-noncomputable def integralQuotientLinear : Mod.regular (integralCoeff.{u} ℓ E) ⟶
-    (Mod.comap (integralReductionMap ℓ E)).obj
-      (Mod.regular (Profinite.continuousMapRingObj (integralResidue ℓ E))) :=
-  Mod.homMk (integralReductionMap ℓ E) (by
-    change μ[integralCoeff ℓ E] ≫ integralReductionMap ℓ E =
-      (integralCoeff ℓ E) ◁ integralReductionMap ℓ E ≫
-        (integralReductionMap ℓ E ▷ _) ≫ μ[_]
-    rw [IsMonHom.mul_hom, tensorHom_def']
-    exact Category.assoc _ _ _)
-
-/-- The two-term integral free resolution of the residue coefficient module.
-Source: Bhatt--Scholze, Section 6.8
-(auxiliary; not a blueprint node). -/
-noncomputable def integralModuleReductionSequence : ShortComplex
-    (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (integralCoeff ℓ E)) :=
-  ShortComplex.mk (ℓ • 𝟙 (Mod.regular (integralCoeff ℓ E))) (integralQuotientLinear ℓ E) (by
-    apply (Mod.forget (integralCoeff ℓ E)).map_injective
-    change (ℓ • 𝟙 (integralCoeff ℓ E)) ≫ integralReductionMap ℓ E = 0
-    exact integralReduction_comp_zero ℓ E)
-
-
-/-- The derived category with the finite quotient coefficients.
-Source: Bhatt--Scholze, Section 6.8
-(auxiliary; not a blueprint node). -/
-noncomputable abbrev integralResidueDerived (X : Scheme.{u}) :=
-  DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (condensedRingObj (Profinite.continuousMapRingObj (integralResidue ℓ E)) X))
 
 /-- Derived reduction modulo ℓ over the coefficient ring pulled to X.
 Source: Bhatt--Scholze, Section 6.8

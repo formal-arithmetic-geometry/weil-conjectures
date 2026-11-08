@@ -41,12 +41,6 @@ open CategoryTheory CategoryTheory.Limits
 open WeilConjectures.SemilinearSections (Mod)
 namespace SheafOfModules
 
-private noncomputable abbrev moduleUnderlying
-    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{r}) :=
-  toSheaf ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⋙
-    sheafCompose J (CategoryTheory.forget AddCommGrpCat.{r})
-
 private noncomputable def scalarExtensionPresheaf
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C}
     {R S : Sheaf J CommRingCat.{r}} (c : R ⟶ S) :

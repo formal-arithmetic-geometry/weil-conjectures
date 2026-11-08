@@ -7,10 +7,148 @@ module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.CompletionTriangle.CompletionTriangleComparisonSupplement
 public import Submission.WeilConjectures.Algebra.Homology.KFlatRoos.KFlatRoosRepresentativeInvariance
-public import Submission.WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.ModuleObjectRingedSiteDerivedComparison
+public import Submission.WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionDerivedTensorComparison
+public import Submission.WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionTotalComparison
+public import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
+public import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.CategoryTheory.Generator.Basic
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+public import Submission.WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
+public import Submission.WeilConjectures.Algebra.Homology.HomComplex
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsQuasiIsoOfUniverses
+public import Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsDerivedNaturalityOfUniverses
+public import Submission.WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import Submission.WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalizedOfUniverses
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Submission.WeilConjectures.Algebra.Homology.LocalizedRestrictionAdjunctionOfUniverses
+public import Submission.WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExistsOfUniverses
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Submission.WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsHomotopyNaturalityOfUniverses
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexProjections
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsCanonicalComparisonOfUniverses
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsOfUniverses
+public import Submission.WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsCommOfUniverses
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Submission.WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIsoOfUniverses
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import Submission.WeilConjectures.Algebra.Homology.QuasiIsoOfSectionsOfUniverses
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.Algebra.Homology.Functor
+public import Submission.WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import Submission.WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Ab
+public import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import Submission.WeilConjectures.CategoryTheory.SheafTensor
+public import Submission.WeilConjectures.CategoryTheory.SheafTensorStructure
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Submission.WeilConjectures.CategoryTheory.PresheafTensorInternalHom
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Sites.Localization
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import Submission.WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+public import Submission.WeilConjectures.CategoryTheory.InternalSectionModuleFlat
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import Submission.WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSliceDerivedHomComparison
+import Submission.WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceNormalizedComparisons
+import Submission.WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionTensorLocalization
+import Submission.WeilConjectures.CategoryTheory.ClosedScalarHom.ClosedScalarHomComparison
 public import Submission.WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import Submission.WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Submission.WeilConjectures.SixFunctors.BaseChange.Square
+public import Submission.WeilConjectures.CategoryTheory.CompatibleSquareComponents
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+import Submission.WeilConjectures.CategoryTheory.InverseMateEquivalence
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
+import Submission.WeilConjectures.CategoryTheory.EquivalenceAdjunctionComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Mathlib.Topology.Category.Profinite.EffectiveEpi
+import Submission.WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+import Mathlib.Condensed.TopComparison
+import Submission.WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import Submission.WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 public import Submission.WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
 public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
@@ -220,49 +358,12 @@ def IsIntegral (X : Scheme.{u})
       ∃ ψ : S.completion.obj K ≅ DerivedCategory.Q.obj (AdicCompletion.roos l E X P),
         S.unit.app K ≫ ψ.hom = AdicCompletion.completionMap l E X K P e
 
-/-- A constant scalar, evaluated in the actual section ring after pullback.
-Endomorphisms of the regular point-module are exactly its constant scalars.
-Source: blueprint Locality, finite scalar presentations; Stacks 03EK
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
-def sectionScalarValue (X : Scheme.{u})
-    (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (U : X.ProEtᵒᵖ) :
-    (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U :=
-  (((DerivedNakayama.regularPullbackIso l E X).inv ≫
-    (DerivedNakayama.pullback l E X).map d ≫
-    (DerivedNakayama.regularPullbackIso l E X).hom).hom.hom.app U)
-      (1 : (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U)
-
 /-- Finite biproducts from the existing finite products of section-module sheaves.
 Source: Stacks 03DB (blueprint: lem-sfb-strict-completion-restriction-comparison). -/
 instance sectionFiniteBiproducts (X : Scheme.{u}) :
     HasFiniteBiproducts
       (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X) :=
   HasFiniteBiproducts.of_hasFiniteProducts
-
-/-- Section-module local models use the actual ringed inverse image and cokernels
-of finite matrices whose entries are scalars on the point. Neither local object
-is obtained by applying the section equivalence to an internal local-model isomorphism.
-Source: blueprint Local models and Locality; Stacks 03D7, 03EK
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
-def HasSectionFiniteConstantLocalModel (X : Scheme.{u})
-    (M : ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X) : Prop :=
-  ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
-    ∃ (m n : ℕ) (a : Fin m → Fin n → End (Mod.regular (DerivedNakayama.integerRing l E)))
-      (f : (⨁ fun _ : Fin m ↦ SheafOfModules.unit
-          ((sheafCompose (Scheme.ProEt.topology (𝒰.X i))
-            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-              (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) (𝒰.X i)))) ⟶
-        (⨁ fun _ : Fin n ↦ SheafOfModules.unit
-          ((sheafCompose (Scheme.ProEt.topology (𝒰.X i))
-            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-              (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) (𝒰.X i))))),
-      (∀ (j : Fin m) (k : Fin n) (U : (𝒰.X i).ProEtᵒᵖ)
-        (x : (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E)
-          (𝒰.X i)).obj.obj U),
-        ((biproduct.ι _ j ≫ f ≫ biproduct.π _ k).val.app U) x =
-          sectionScalarValue l E (𝒰.X i) (a j k) U * x) ∧
-      Nonempty ((InternalModuleOperations.upperStar (DerivedNakayama.integerRing l E)
-        (𝒰.f i)).obj M ≅ cokernel f)
 
 open ModuleObjectRingedComparison
 
@@ -368,59 +469,5 @@ structure SectionReductionModelsFor
             ((CochainComplex.singleFunctor _ 0).obj
               (SheafOfModules.KFlatRoos.levelModule.{u + 1, u, u + 1} B ι n))))
           (𝟙 _, DerivedCategory.Q.map q))
-
-/-- The normalized section reduction models at the integral coefficient ring.
-Source: blueprint Locality, steps 4--7; Stacks 03EK, 06YS, 08TC
-(blueprint: def-sfb-strict-completion-restriction-data).
-This is the generic interface specialized to the fixed coefficient ring. -/
-abbrev SectionReductionModels (X : Scheme.{u})
-    (T : Presentation.{u + 2, u + 1, u + 1} (Modules (DerivedNakayama.integerRing l E) X))
-    (H : CoefficientClosedStructure (hom (DerivedNakayama.integerRing l E) X))
-    (HM : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X)
-      (ring (DerivedNakayama.integerRing l E) X) H)
-    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
-    (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B) :=
-  SectionReductionModelsFor X (ring (DerivedNakayama.integerRing l E) X) T H HM B ι
-
-/-- Integral completion on the section-ring side, fixed independently of transport
-of a Presentation by an equivalence. The scalar is the pulled-back uniformizer;
-the coefficient tower, its structure maps and steps are the actual section rings
-and quotient homomorphisms. The reduction models use the existing section derived
-tensor comparison, normalized on K-flats. Completion and its unit are the actual
-augmented tensor Roos construction on every section K-flat representative.
-Source: blueprint Locality and completion Cones paragraph; Stacks 03EK, 06YS, 08TC
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
-def IsSectionIntegral (X : Scheme.{u})
-    (T : Presentation.{u + 2, u + 1, u + 1} (Modules (DerivedNakayama.integerRing l E) X)) :
-    Prop :=
-  ∃ data : PrincipalReduction.PrincipalReductionConeData l E X,
-    data.IsCanonical l E X ∧
-    (∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)
-      (x : M.val.obj U),
-      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x) ∧
-    ∃ (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
-      (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B),
-      (∀ n : ℕ, B.obj (op n) = sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
-        (AdicCompletion.finiteRing l E X n)) ∧
-      (∀ n : ℕ, HEq (ι.app (op n))
-        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
-          (AdicCompletion.quotient l E X n))) ∧
-      (∀ n : ℕ, HEq (B.map (homOfLE (Nat.le_succ n)).op)
-        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
-          (AdicCompletion.transition l E X n))) ∧
-      (∃ (H : CoefficientClosedStructure (hom (DerivedNakayama.integerRing l E) X))
-        (HM : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X)
-          (ring (DerivedNakayama.integerRing l E) X) H),
-        Nonempty (TensorComparison (DerivedNakayama.integerRing l E) X H HM) ∧
-        Nonempty (SectionReductionModels l E X T H HM B ι)) ∧
-      ∀ (K : DerivedCategory (Modules (DerivedNakayama.integerRing l E) X))
-        (P : CochainComplex (Modules (DerivedNakayama.integerRing l E) X) ℤ)
-        (_hP : CochainComplex.IsKFlatIndependentCoefficients
-          (R := ring (DerivedNakayama.integerRing l E) X) P)
-        (e : DerivedCategory.Q.obj P ≅ K),
-        ∃ ψ : T.completion.obj K ≅
-            DerivedCategory.Q.obj (SheafOfModules.KFlatRoos.roos.{u + 1, u, u + 1} B ι P),
-          T.unit.app K ≫ ψ.hom = e.inv ≫
-            DerivedCategory.Q.map (SheafOfModules.KFlatRoos.augmentation.{u + 1, u, u + 1} B ι P)
 
 end AlgebraicGeometry.ProEtale.StrictCompletionRestriction

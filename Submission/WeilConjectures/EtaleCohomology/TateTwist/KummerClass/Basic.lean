@@ -94,14 +94,6 @@ instance (U : (X.Etale)ᵒᵖ) :
     ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj U).Additive where
   map_add {_ _ _ _} := rfl
 
-lemma unitToGmSheaf_mul (u v : Γ(X, ⊤)ˣ) :
-    unitToGmSheaf (u * v) = unitToGmSheaf u + unitToGmSheaf v := by
-  apply ((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
-    terminalIsTerminal).homEquiv _ _).injective
-  rw [unitToGmSheaf, Equiv.apply_symm_apply, zmodToGmSections_zero_mul, Adjunction.homEquiv_unit,
-    Functor.map_add, Preadditive.comp_add, ← Adjunction.homEquiv_unit, ← Adjunction.homEquiv_unit]
-  simp only [unitToGmSheaf, Equiv.apply_symm_apply]
-
 end Scheme
 
 namespace Etale

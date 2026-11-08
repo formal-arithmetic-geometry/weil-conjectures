@@ -82,55 +82,6 @@ private theorem generator_naturality (B : Sheaf J CommRingCat.{w})
   rw [← Category.assoc, generator_lift] at hh
   exact hh
 
-private def identityUnderlying
-    (B : Sheaf J CommRingCat.{w})
-    (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uC, vC, w, w}
-      (𝟭 (Sheaf J (Type w))) B B)
-    (hB : F.ringUnderlying = Iso.refl ((sheafCompose J
-      (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B))
-    (M : SheafOfModules.{w} (ring B)) : M ⟶ F.modules.obj M := by
-  let α := F.moduleUnderlying.inv.app M
-  refine { val :=
-    { app := fun U ↦ ModuleCat.ofHom
-        { toFun := fun x ↦ (α.hom.app U (ULift.up x)).down
-          map_add' := ?_
-          map_smul' := ?_ }
-      naturality := ?_ } }
-  · intro x y
-    let T := (underlyingRaw B).obj M ⊗ (underlyingRaw B).obj M
-    let a : T ⟶ (moduleSets B).obj M :=
-      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.1, naturality := by intros; rfl }⟩
-    let b : T ⟶ (moduleSets B).obj M :=
-      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.2, naturality := by intros; rfl }⟩
-    let t : T ⟶ (moduleSets B).obj M :=
-      ⟨{ app := fun V ↦ ↾fun z ↦ ULift.up
-           (@id (M.val.obj V) z.1 + @id (M.val.obj V) z.2)
-         naturality := by
-           intro U V i
-           ext z
-           exact congrArg ULift.up ((M.val.map i).hom.map_add _ _).symm }⟩
-    exact F.moduleAdd M T a b t (fun _ _ ↦ rfl) U (x, y)
-  · intro a x
-    let R := (sheafCompose J (forget CommRingCat.{w})).obj B
-    let T := R ⊗ (underlyingRaw B).obj M
-    let r : T ⟶ (sheafCompose J
-        (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B :=
-      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.1, naturality := by intros; rfl }⟩
-    let b : T ⟶ (moduleSets B).obj M :=
-      ⟨{ app := fun _ ↦ ↾fun z ↦ ULift.up z.2, naturality := by intros; rfl }⟩
-    let t : T ⟶ (moduleSets B).obj M :=
-      ⟨{ app := fun V ↦ ↾fun z ↦ ULift.up
-           (@id (B.obj.obj V) z.1 • @id (M.val.obj V) z.2)
-         naturality := by
-           intro U V i
-           ext z
-           exact congrArg ULift.up ((M.val.map i).hom.map_smulₛₗ _ _).symm }⟩
-    simpa [α, t, r, b, hB] using F.moduleSMul M T r b t (fun _ _ ↦ rfl) U (a, x)
-  · intro U V i
-    ext x
-    exact congrArg ULift.down (congrArg (fun a ↦ a (ULift.up x))
-      (α.hom.naturality i))
-
 private theorem transportedFreeProperty
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}

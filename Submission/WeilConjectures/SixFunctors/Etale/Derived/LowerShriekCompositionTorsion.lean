@@ -219,13 +219,6 @@ lemma HasSmulInvertibleCones.whiskerRight {𝒞 : Type*} [Category 𝒞] {T T' :
   rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
   infer_instance
 
-lemma HasSmulInvertibleCones.of_isIso {𝒞 : Type*} [Category 𝒞] {T : Scheme.{u}}
-    {F G : 𝒞 ⥤ 𝐃(T, Λ)} (α : F ⟶ G) [IsIso α] : HasSmulInvertibleCones ϖ α := fun K ↦ by
-  obtain ⟨C, b, c, hT⟩ := distinguished_cocone_triangle (α.app K)
-  have hC : IsZero C := (Triangle.isZero₃_iff_isIso₁ _ hT).2
-    (by change IsIso (α.app K); infer_instance)
-  exact ⟨C, b, c, hT, ⟨⟨hC.to_ _, hC.eq_of_src _ _, hC.eq_of_src _ _⟩⟩⟩
-
 /-- The functor `j ↦ Hom(F -, P j)` from `J` to presheaves on `D(X_ét, Λ)`. -/
 noncomputable abbrev homFunctor {J : Type*} [Category J] {X T : Scheme.{u}}
     (P : J ⥤ 𝐃(T, Λ)) (F : 𝐃(X, Λ) ⥤ 𝐃(T, Λ)) :

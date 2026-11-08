@@ -12,7 +12,6 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Geom
 public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 
 import Submission.WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltrationExtension
-import Submission.WeilConjectures.ConstructibleSheaf.LocallyConstantRetractionExtension
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

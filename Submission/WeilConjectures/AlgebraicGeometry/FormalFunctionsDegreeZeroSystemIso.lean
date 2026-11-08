@@ -11,7 +11,10 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Submission.WeilConjectures.AlgebraicGeometry.FormalFibreCohomology
 import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Submission.WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
-import Submission.WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -214,32 +217,4 @@ private theorem levelIso_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (n 
   exact h
 
 -- The unchanged existential statement deliberately has the predicate True.
-set_option linter.unusedVariables false in
-/-- Degree-zero fibre cohomology is naturally the section system for the unit
-module.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OD (degree zero).
-Proof: Identify degree-zero module cohomology with sections using the canonical
-augmentation. Apply sections to the canonical isomorphism from tensor pullback of
-the unit module to the unit module, and restrict scalars to the completed local ring.
-The adjunction characterization of the structure-sheaf map makes the transition
-h-maps commute with these unit isomorphisms. The canonical augmentation square for
-cohomology h-maps then proves compatibility with section pullback. Construct the
-natural transformation with NatTrans.ofOpSequence; its components are isomorphisms,
-so it is a natural isomorphism.
-(blueprint: lem-weil-pbc-formal-functions-degree-zero-system-iso) -/
-theorem formalFunctions_degreeZero_systemIso {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) :
-    ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅
-          formalFibreSectionsSystem f y, True := by
-  let b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ⟶
-      formalFibreSectionsSystem f y :=
-    NatTrans.ofOpSequence (fun n ↦ (levelIso f y n).hom) (by
-      intro n
-      simpa only [formalFibreCohomologySystem, formalFibreSectionsSystem,
-        Functor.ofOpSequence_map_homOfLE_succ] using levelIso_naturality f y n)
-  have : ∀ n, IsIso (b.app n) := by
-    intro n
-    change IsIso (levelIso f y n.unop).hom
-    infer_instance
-  have _hb : IsIso b := NatIso.isIso_of_isIso_app b
-  exact ⟨asIso b, trivial⟩
 end AlgebraicGeometry

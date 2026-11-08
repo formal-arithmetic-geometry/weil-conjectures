@@ -195,10 +195,6 @@ def ofPair (ha : X.basicOpen a = U₀ ⊓ U₁) (hb : X.basicOpen b = U₀ ⊓ U
     · exact le_sup_left
     · exact le_sup_right
 
-lemma ofPair_U_false (ha hb hab hcov) : (ofPair a b ha hb hab hcov).U ⟨false⟩ = U₀ := rfl
-
-lemma ofPair_U_true (ha hb hab hcov) : (ofPair a b ha hb hab hcov).U ⟨true⟩ = U₁ := rfl
-
 end OfPair
 
 /-- **Coordinate covers by affine charts from distinguished affine charts** (Stacks, Tag 09NC).

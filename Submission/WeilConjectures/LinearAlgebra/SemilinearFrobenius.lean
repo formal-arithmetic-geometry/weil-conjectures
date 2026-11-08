@@ -182,11 +182,6 @@ def fixedPointsSubmodule (F : V →ₚ[k, p] V) : Submodule (⊥ : Subfield k) V
     rw [Subfield.smul_def, map_smulₛₗ, _root_.frobenius_def,
       (Subfield.mem_bot_iff_pow_eq_self k p).mp a.2, mem_fixedPoints.mp hv]
 
-@[simp]
-theorem mem_fixedPointsSubmodule {F : V →ₚ[k, p] V} {v : V} :
-    v ∈ fixedPointsSubmodule F ↔ F v = v :=
-  Iff.rfl
-
 /-- The fixed points as an additive subgroup and as a submodule over the prime subfield have the
 same elements. -/
 def fixedPointsEquivSubmodule (F : V →ₚ[k, p] V) : fixedPoints F ≃ fixedPointsSubmodule F :=

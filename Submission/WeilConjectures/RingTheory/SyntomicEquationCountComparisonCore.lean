@@ -9,7 +9,9 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Submission.WeilConjectures.RingTheory.CompleteIntersectionOverField
-import Submission.WeilConjectures.RingTheory.SyntomicPresentationLocalKernel
+import Submission.WeilConjectures.RingTheory.SyntomicFibreKernelGenerators
+import Submission.WeilConjectures.RingTheory.SyntomicLocalKernelIntersection
+import Mathlib.RingTheory.Nakayama
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -59,62 +61,4 @@ private theorem exists_multiplier_of_localized_le
   | smul a x hx ih =>
     simpa only [smul_eq_mul, mul_left_comm s a x] using J.mul_mem_left a ih
 
-/-- Core presentation and localization comparison underlying the syntomic equation-count theorem.
-Source: Stacks Project, Algebra, Tag 00SY, proof of (3) ⇒ (2),
-presentation, Nakayama and flatness steps.
-(blueprint: lem-weil-pbc-syntomic-equation-count-comparison-core).
-The proof constructs a finite polynomial presentation, chooses the conormal generators, and uses
-flatness plus Nakayama to obtain an isomorphism after inverting an element outside the prime. -/
-theorem exists_equationCount_comparison_core
-    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (q : PrimeSpectrum S)
-    (hfp : FinitePresentation R S)
-    (hflat : (Localization.localRingHom (q.asIdeal.comap (algebraMap R S)) q.asIdeal
-      (algebraMap R S) rfl).Flat)
-    (hci : ∃ h : (q.asIdeal.comap (algebraMap R S)).Fiber S,
-      h ∉ (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S))
-        ⟨q, rfl⟩).asIdeal ∧
-      IsGlobalCompleteIntersection (q.asIdeal.comap (algebraMap R S)).ResidueField
-        (Localization.Away h)) :
-    ∃ (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R),
-      let T := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)
-      ∃ (π : T →ₐ[R] S) (u : T),
-        Function.Surjective π ∧ π u ∉ q.asIdeal ∧
-        Function.Bijective
-          (IsLocalization.Away.mapₐ (Localization.Away u) (Localization.Away (π u)) π u) ∧
-        c ≤ n := by
-  obtain ⟨n, φ, hφ, hfg⟩ := hfp.out
-  obtain ⟨c, f, hcn, hJ, hlocal⟩ :=
-    exists_bounded_local_kernel_generators q n φ hφ hfg hflat hci
-  let P := MvPolynomial (Fin n) R
-  let I : Ideal P := RingHom.ker φ.toRingHom
-  let J : Ideal P := Ideal.span (Set.range f)
-  let p : Ideal P := q.asIdeal.comap φ.toRingHom
-  obtain ⟨s, hs, hkill⟩ := exists_multiplier_of_localized_le p.primeCompl
-    (Localization.AtPrime p) I J hfg (le_of_eq hlocal.symm)
-  let T := P ⧸ J
-  let π : T →ₐ[R] S := Ideal.Quotient.liftₐ J φ (fun x hx ↦ hJ hx)
-  let u : T := Ideal.Quotient.mk J s
-  have hπ : ∀ x : P, π (Ideal.Quotient.mk J x) = φ x := by
-    intro x
-    rfl
-  have hsurj : Function.Surjective π := by
-    intro y
-    obtain ⟨x, rfl⟩ := hφ y
-    exact ⟨Ideal.Quotient.mk J x, hπ x⟩
-  refine ⟨n, c, f, π, u, hsurj, ?_, ?_, hcn⟩
-  · exact hs
-  · constructor
-    · change Function.Injective (IsLocalization.Away.map
-        (Localization.Away u) (Localization.Away (π u)) π.toRingHom u)
-      apply (IsLocalization.Away.map_injective_iff
-        (Localization.Away (π u)) π.toRingHom u).mpr
-      intro x hx
-      obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
-      refine ⟨1, ?_⟩
-      rw [pow_one]
-      change Ideal.Quotient.mk J s * Ideal.Quotient.mk J a = 0
-      rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem]
-      exact hkill a hx
-    · exact IsLocalization.Away.mapₐ_surjective_of_surjective u hsurj
 end Algebra

@@ -428,11 +428,6 @@ namespace Etale
 variable {C U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] [IsIntegral C] [Nonempty U]
   {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [IsSepClosed Ω]
 
-/-- The generic geometric point `η : Spec Ω ⟶ U` of a nonempty open `U` of an integral scheme
-`C`, for a separably closed extension `Ω` of the function field of `C`. -/
-noncomputable abbrev genericGeometricPoint : Spec (.of Ω) ⟶ U :=
-  Scheme.FiniteEtale.pointOfAlgebra Ω (Scheme.FiniteEtale.genericPointLift j)
-
 end Etale
 
 end AlgebraicGeometry

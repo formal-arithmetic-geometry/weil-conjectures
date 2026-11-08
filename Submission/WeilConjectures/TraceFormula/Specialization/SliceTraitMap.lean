@@ -232,12 +232,6 @@ noncomputable def sliceTraitOfStrictLocalizationHom :
   ΩMap_comp_ωS :=
     (exists_sliceTraitOfStrictLocalization_map ι c ha₁ halg₁ ha₂ halg₂ hc hb₂).choose_spec.2
 
-/-- The ring map of `sliceTraitOfStrictLocalizationHom` is `sliceTraitMap ι b₂`. -/
-lemma sliceTraitOfStrictLocalizationHom_ψ :
-    (sliceTraitOfStrictLocalizationHom ι hι c ha₁ halg₁ ha₂ halg₂ hc hb₂).ψ =
-      sliceTraitMap ι b₂ :=
-  rfl
-
 /-- The map of closed points of `sliceTraitOfStrictLocalizationHom` is the identity of
 `traitSliceField κ₂`. -/
 lemma sliceTraitOfStrictLocalizationHom_κMap :

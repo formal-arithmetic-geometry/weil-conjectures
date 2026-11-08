@@ -71,11 +71,6 @@ lemma affineSubst_X_zero (a c₀ c₁ : R₀) : affineSubst a c₀ c₁ (X 0) = 
 lemma affineSubst_X_one (a c₀ c₁ : R₀) : affineSubst a c₀ c₁ (X 1) = X 1 + C c₁ := by
   simp [affineSubst]
 
-/-- `affineSubst a c₀ c₁` fixes the constants. -/
-@[simp]
-lemma affineSubst_C (a c₀ c₁ r : R₀) : affineSubst a c₀ c₁ (C r) = C r := by
-  simp [affineSubst]
-
 /-- The inverse affine change of coordinates, as a right inverse. -/
 lemma affineSubst_comp_affineSubst_neg (a c₀ c₁ : R₀) :
     (affineSubst a c₀ c₁).comp (affineSubst (-a) (-c₀ + a * c₁) (-c₁)) = AlgHom.id _ _ := by

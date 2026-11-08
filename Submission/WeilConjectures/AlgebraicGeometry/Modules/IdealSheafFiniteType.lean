@@ -179,10 +179,5 @@ instance epi_toPushforwardSubscheme (J : X.IdealSheafData) : Epi J.toPushforward
     ((TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVW)).op y)
   exact ⟨V, hVW, hxV, z, hz⟩
 
-/-- The short complex `0 ⟶ ℐ ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` of `𝒪_X`-modules attached to an
-ideal sheaf `J`. -/
-noncomputable def shortComplex (J : X.IdealSheafData) : ShortComplex X.Modules :=
-  ShortComplex.mk J.toModulesι J.toPushforwardSubscheme (kernel.condition _)
-
 
 end AlgebraicGeometry.Scheme.IdealSheafData

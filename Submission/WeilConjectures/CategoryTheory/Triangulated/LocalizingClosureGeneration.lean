@@ -125,12 +125,6 @@ def localizingClosureInverseImage : ObjectProperty C₁ :=
   P₁.localizingClosure ⊓ P₂.localizingClosure.inverseImage Φ
 
 omit [Φ.CommShift ℤ] [Φ.IsTriangulated] in
-lemma localizingClosureInverseImage_iff (X : C₁) :
-    localizingClosureInverseImage P₁ P₂ Φ X ↔
-      P₁.localizingClosure X ∧ P₂.localizingClosure (Φ.obj X) :=
-  Iff.rfl
-
-omit [Φ.CommShift ℤ] [Φ.IsTriangulated] in
 instance : (localizingClosureInverseImage P₁ P₂ Φ).IsClosedUnderIsomorphisms where
   of_iso e h := ⟨P₁.localizingClosure.prop_of_iso e h.1,
     P₂.localizingClosure.prop_of_iso (Φ.mapIso e) h.2⟩

@@ -49,19 +49,6 @@ namespace Ideal
 variable {R Ω : Type*} [CommRing R] [Field Ω] [Algebra R Ω]
   (Q : Ideal (integralClosure R Ω)) [Q.IsPrime]
 
-/-- The localization at a prime `Q` of the integral closure of `R` in a field `Ω` maps to `Ω`. -/
-noncomputable def atPrimeToField : Localization.AtPrime Q →+* Ω :=
-  IsLocalization.lift (M := Q.primeCompl) (g := (integralClosure R Ω).val.toRingHom) fun s ↦
-    IsUnit.mk0 _ fun h ↦ s.2 (by
-      have : s.1 = 0 := Subtype.ext h
-      rw [this]
-      exact Q.zero_mem)
-
-@[simp]
-lemma atPrimeToField_algebraMap (b : integralClosure R Ω) :
-    atPrimeToField Q (algebraMap _ (Localization.AtPrime Q) b) = b :=
-  IsLocalization.lift_eq _ _
-
 
 section StrictlyHenselian
 

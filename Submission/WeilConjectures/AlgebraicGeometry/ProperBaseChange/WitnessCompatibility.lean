@@ -864,19 +864,6 @@ noncomputable def pbcFixedScalarExtension {R S : Type (u + 1)} [CommRing R] [Com
       DerivedCategory (Sheaf J (ModuleCat.{u + 1} S)) :=
   (Sheaf.derivedRestrictScalars J φ).leftAdjoint
 
-/-- The canonical composition comparison of derived scalar extensions, obtained by
-conjugating the actual composition identification for restrictions of scalars.
-Source: Stacks 06YY (blueprint: def-weil-pbc-witness-compatibility). -/
-noncomputable def pbcFixedScalarExtensionComp {R S V : Type (u + 1)}
-    [CommRing R] [CommRing S] [CommRing V]
-    (φ : R →+* S) (ψ : S →+* V) (χ : R →+* V) (h : χ = ψ.comp φ) :
-    pbcFixedScalarExtension J φ ⋙ pbcFixedScalarExtension J ψ ≅ pbcFixedScalarExtension J χ :=
-  Adjunction.leftAdjointCompIso
-    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J φ))
-    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J ψ))
-    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J χ))
-    (Sheaf.derivedRestrictScalarsCompIso J h)
-
 variable (T : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S]
 
 private instance comparison_integerColimits (R : Type (u + 1)) [CommRing R] :
@@ -1075,14 +1062,6 @@ noncomputable def pbcWitnessEtaleReduction
     (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     PbcWitnessEtale T d (n + 1) ⥤ PbcWitnessEtale T d n :=
   pbcFixedScalarExtension T.smallEtaleTopology (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))
-
-/-- The bounded constructible input property, transported by the recorded canonical
-coefficient realization. Source: blueprint order 1352
-(blueprint: def-weil-pbc-witness-compatibility). -/
-def pbcWitnessBoundedConstructible (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
-    ObjectProperty (PbcWitnessAmbient T d n) :=
-  fun K ↦ isBoundedConstructibleFiniteCoefficient T (PbcQuotient d n)
-    ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj K)
 
 /-- Reflect the retained origin isomorphism through the canonical realization. This
 uses the published retained-pair definition without defining another notion of origin.

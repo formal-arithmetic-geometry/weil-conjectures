@@ -147,16 +147,6 @@ lemma stalkFrobeniusTrace_congr {x : P ⟶ Z.left} (hx : x ≫ e.hom.left = σ �
   rw [WeilSheaf.pointStalkFunctor_obj_str_hom, WeilSheaf.pointStalkFunctor_obj_str_hom] at h
   exact h.symm
 
-/-- The trace of the stalk Frobenius only depends on the point up to equality. -/
-lemma stalkFrobeniusTrace_congr_point {x x' : P ⟶ Z.left} (h : x = x')
-    (hx : x ≫ e.hom.left = σ ≫ x) (hx' : x' ≫ e.hom.left = σ ≫ x')
-    {M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left)}
-    (φ : (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M ⟶ M) :
-    stalkFrobeniusTrace ℓ τ e hx φ = stalkFrobeniusTrace ℓ τ e hx' φ := by
-  subst h
-  rfl
-
 /-- The structure morphism of the stalk of a Weil sheaf at a geometric point is its stalk
 Frobenius. -/
 lemma WeilSheaf.stalkFunctor_obj_str_hom {Ω : Type u} [Field Ω] [IsSepClosed Ω]
@@ -185,13 +175,6 @@ noncomputable def weilStalkTransport {x x' : P ⟶ X.left} (h : x ≫ eX.hom.lef
       (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj F.carrier :=
   (weilPointComparison ℓ τ eX h).hom.app F.carrier ≫
     (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map F.str.hom
-
-/-- The Frobenius transport at a point fixed by the twisted Frobenius is the Frobenius of the
-stalk. -/
-lemma weilStalkTransport_self {x : P ⟶ X.left} (h : x ≫ eX.hom.left = σ ≫ x)
-    (F : WeilSheaf ℓ eX) :
-    weilStalkTransport ℓ eX τ h F = stalkFrobenius ℓ τ eX h F.str.hom :=
-  rfl
 
 /-- **The Frobenius of the stalk of a pushforward permutes the factors**: for a point `ȳ` with
 `ȳ ≫ e_Y = σ ≫ ȳ` and points `x̄`, `x̄'` over `ȳ` with `x̄ ≫ e_X = σ ≫ x̄'`, the Frobenius of the

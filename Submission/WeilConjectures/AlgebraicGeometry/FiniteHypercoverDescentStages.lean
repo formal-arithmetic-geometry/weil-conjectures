@@ -105,16 +105,6 @@ private theorem truncated_finite (r : ℕ) : Finite (SimplexCategory.Truncated r
   apply ObjectProperty.FullSubcategory.ext
   exact SimplexCategory.ext (congrArg Fin.val hab)
 
-private theorem truncated_terms_finitePresentation
-    {X : Scheme.{w}} [QuasiSeparatedSpace X] {r : ℕ}
-    (U : TruncatedFiniteSplitEtaleHypercover X r)
-    (Δ : (SimplexCategory.Truncated r)ᵒᵖ) :
-    LocallyOfFinitePresentation (U.diagram.obj Δ).hom ∧
-      QuasiCompact (U.diagram.obj Δ).hom ∧ QuasiSeparated (U.diagram.obj Δ).hom := by
-  obtain ⟨hcU, hsU⟩ := truncated_terms_qcqs U Δ
-  dsimp [TruncatedFiniteSplitEtaleHypercover.diagram]
-  exact ⟨inferInstance, inferInstance, inferInstance⟩
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem finite_morphism_equalities_lift

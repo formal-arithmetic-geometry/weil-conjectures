@@ -103,22 +103,6 @@ lemma isIso_ihomComparison_of_isIso_projectionMap (A : C) [IsIso (projectionMap 
   rw [← conjugateEquiv_projectionMap adj A]
   infer_instance
 
-/-- If the projection map of the left adjoint of a monoidal functor `G` is an isomorphism at `A`,
-and the canonical map `[G A, 𝟙] ⊗ G Z ⟶ [G A, G Z]` is an isomorphism (for instance if `G A` is
-dualizable), then `G` sends the canonical map `[A, 𝟙] ⊗ Z ⟶ [A, Z]` to an isomorphism. -/
-lemma isIso_map_ihomUnitTensorToIhom (A Z : C) [IsIso (projectionMap adj A)]
-    [IsIso (ihomUnitTensorToIhom (G.obj A) (G.obj Z))] :
-    IsIso (G.map (ihomUnitTensorToIhom A Z)) := by
-  have := isIso_ihomComparison_of_isIso_projectionMap adj A
-  have h := ihomComparison_ihomUnitTensorToIhom G A Z
-  have h' : IsIso (μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫
-      (ihomComparison G A).natTrans.app Z) := by
-    rw [h]
-    infer_instance
-  have := IsIso.of_isIso_comp_left (μ G _ Z)
-    (G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z)
-  exact IsIso.of_isIso_comp_right _ ((ihomComparison G A).natTrans.app Z)
-
 /-- Conversely, if `G` commutes with internal homs out of `A`, the projection map
 `L (G A ⊗ T) ⟶ A ⊗ L T` of its left adjoint is an isomorphism. -/
 lemma isIso_projectionMap_of_isIso_ihomComparison (A : C)

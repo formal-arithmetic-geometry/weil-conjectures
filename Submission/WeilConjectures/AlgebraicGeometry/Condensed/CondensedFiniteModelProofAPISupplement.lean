@@ -59,7 +59,7 @@ import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
-import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+import Submission.WeilConjectures.ConstructibleSheaf.Defs
 import Submission.WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
@@ -270,18 +270,10 @@ variable {C : Type uC} {D : Type uD} {E : Type uE}
   [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
-private noncomputable abbrev derivedComp (e : F ⋙ G ≅ FG) :
-    F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ FG.mapDerivedCategory :=
-  (mapDerivedCategoryCompIso F G) ≪≫ mapDerivedCategoryNatIso e
-
 end DerivedCompositionAPI
 section TransportAPI
 variable {C D E : Type*} [Category C] [Category D] [Category E]
   {F F' : C ⥤ D} {G G' : D ⥤ E} {FG FG' : C ⥤ E}
-private noncomputable abbrev transportComp (a : F ≅ F') (b : G ≅ G') (c : FG ≅ FG')
-    (e : F' ⋙ G' ≅ FG') : F ⋙ G ≅ FG :=
-  isoWhiskerLeft F b ≪≫ isoWhiskerRight a G' ≪≫ e ≪≫ c.symm
-
 end TransportAPI
 end CategoryTheory.Functor
 
@@ -314,43 +306,6 @@ variable [MonoidalCategory D] [MonoidalPreadditive D]
   [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution D]
 
-private lemma leftComp_transport (G : D ⥤ E) [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    {FG : C ⥤ E} [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
-    (e : F ⋙ G ≅ FG) :
-    (F.leftDerivedFunctorCompIso G).symm ≪≫ (F ⋙ G).leftDerivedFunctorNatIso e =
-      transportComp F.leftDerivedFunctorIsoMapDerivedCategory
-        G.leftDerivedFunctorIsoMapDerivedCategory FG.leftDerivedFunctorIsoMapDerivedCategory
-        (derivedComp e) := by
-  simp [leftDerivedFunctorCompIso, leftDerivedFunctorNatIso, transportComp, derivedComp,
-    Iso.trans_assoc, ← isoWhiskerLeft_symm, ← isoWhiskerRight_symm]
-
-private lemma leftComp_shift (G : D ⥤ E) [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    {FG : C ⥤ E} [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
-    (e : F ⋙ G ≅ FG) :
-    let := CommShift.ofIso F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-    let := CommShift.ofIso G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-    let := CommShift.ofIso FG.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-    NatTrans.CommShift ((F.leftDerivedFunctorCompIso G).symm ≪≫
-      (F ⋙ G).leftDerivedFunctorNatIso e).hom ℤ := by
-  let := CommShift.ofIso F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  let := CommShift.ofIso G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  let := CommShift.ofIso FG.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift F.leftDerivedFunctorIsoMapDerivedCategory.symm.hom ℤ :=
-    CommShift.ofIso_compatibility F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift F.leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
-    NatTrans.CommShift.of_iso_inv F.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift G.leftDerivedFunctorIsoMapDerivedCategory.symm.hom ℤ :=
-    CommShift.ofIso_compatibility G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift G.leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
-    NatTrans.CommShift.of_iso_inv G.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  have : NatTrans.CommShift FG.leftDerivedFunctorIsoMapDerivedCategory.inv ℤ :=
-    CommShift.ofIso_compatibility FG.leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
-  rw [leftComp_transport]
-  dsimp only [transportComp, derivedComp, Iso.trans_hom, Iso.symm_hom,
-    isoWhiskerLeft_hom, isoWhiskerRight_hom]
-  infer_instance
 end LeftTransport
 end CategoryTheory.Functor
 
@@ -359,49 +314,6 @@ open Scheme PadicAlgCl
 variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
   (ℓ : ℕ) [Fact ℓ.Prime]
 
-private lemma bounded_tri_of_serre {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (hker : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : M ⟶ N),
-      IsConstructibleModuleObject R M → IsConstructibleModuleObject R N →
-      IsConstructibleModuleObject R (kernel f) ∧ IsConstructibleModuleObject R (cokernel f))
-    (hext : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
-      S.ShortExact → IsConstructibleModuleObject R S.X₁ →
-      IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
-    (boundedConstructible R).IsTriangulated :=
-  isTriangulated_boundedConstructible_of_serre R hker hext
 -- Build the specific condensed-field triangulated structures from their Serre closure
 -- statements; no arbitrary-coefficient closure assertion is used.
-/-- Bounded constructible complexes over a finite coefficient field form a triangulated
-subcategory.
-
-Source: `Colimit/TwoColimit.lean`, the private `finiteBoundedTriangulated` helper.
-Proof: finite-field constructible modules are closed under kernels, cokernels, and
-extensions by `isConstructibleModuleObject_serre_padicSubfield`. Transport these
-closures across isomorphisms and apply the existing conditional bounded-constructible
-triangulated instance. This extracts the existing proof without adding an obligation.
-(blueprint: lem-weil-pbc-condensed-finite-model-proof-api)
--/
-lemma finiteBoundedTriangulated (E : FiniteIntermediateField ℓ) :
-    (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated := by
-  obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicSubfield X ℓ E
-  exact bounded_tri_of_serre _ hk he
-omit [TopologicalSpace.NoetherianSpace X] in
-private lemma single_bounded_constructible
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (hM : IsConstructibleModuleObject R M) :
-    boundedConstructible R ((DerivedCategory.singleFunctor _ 0).obj M) := by
-  let K := (DerivedCategory.singleFunctor _ 0).obj M
-  have hzero (n : ℤ) (hn : n ≠ 0) :
-      IsZero ((DerivedCategory.homologyFunctor _ n).obj K) := by
-    rcases lt_or_gt_of_ne hn with hn | hn
-    · exact DerivedCategory.isZero_of_isGE _ 0 n hn
-    · exact DerivedCategory.isZero_of_isLE _ 0 n hn
-  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
-  by_cases hn : n = 0
-  · subst n
-    exact constructible_of_iso
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
-  · exact constructible_of_isZero R _ (hzero n hn)
-
 end AlgebraicGeometry.ProEtale

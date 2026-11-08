@@ -185,14 +185,6 @@ noncomputable def continuousMapRingObjMapOfAddMonoidHom (φ : T →+ T') (hφ : 
           map_add' _ _ := ULift.ext (ContinuousMap.ext fun _ ↦ map_add φ _ _) }
      naturality _ _ _ := rfl }⟩
 
-/-- The sections of `continuousMapRingObjMapOfAddMonoidHom φ hφ` are given by postcomposition
-with `φ`. -/
-lemma continuousMapRingObjMapOfAddMonoidHom_app_apply (φ : T →+ T') (hφ : Continuous φ)
-    (S : Profinite.{u}ᵒᵖ) (a : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingObjMapOfAddMonoidHom φ hφ).hom.app S a =
-      ULift.up ((⟨φ, hφ⟩ : C(T, T')).comp a.down) :=
-  rfl
-
 /-- A finite sum of morphisms of condensed abelian groups `C(-, T) ⟶ C(-, T')` is computed
 pointwise on sections. -/
 lemma sum_hom_app_apply_down {J : Type*} [Fintype J]

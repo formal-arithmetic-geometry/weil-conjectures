@@ -182,10 +182,6 @@ theorem EquivTo.trans {X Z : Type*} {Y : Type v} [AddCommGroup X] [Module k X] [
     {τ' : Representation k W Z} (h : EquivTo.{u, v} τ σ) (e : τ.Equiv τ') : EquivTo.{u, v} τ' σ :=
   ⟨h.equiv.trans e⟩
 
-theorem isInvariant_equivTo {X : Type*} [AddCommGroup X] [Module k X]
-    (τ : Representation k W X) : RepProp.IsInvariant (EquivTo.{u, v} τ) :=
-  fun e ⟨f⟩ ↦ ⟨e.symm.trans f⟩
-
 /-- `ρ` *has graded pieces* `P`: there is a finite filtration `0 = F₀ ≤ F₁ ≤ ⋯ ≤ F_m = V` by
 subrepresentations and a bijection `e : Fin m ≃ ι` such that the graded piece `F_{i+1} / F_i`
 satisfies `P (e i)`. So the graded pieces, in a suitable order, satisfy the properties `P i`, each
@@ -220,22 +216,6 @@ theorem of_equiv (h : HasGradedPieces ρ P) (hP : ∀ i, RepProp.IsInvariant (P 
   let O := Subrepresentation.orderIsoMapComap f
   refine ⟨m, fun i ↦ O (F i), e, O.monotone.comp hF, by simp [h0], by simp [hl],
     fun i ↦ hP _ (Subrepresentation.subquotientEquiv f _ _) (hPF i)⟩
-
-/-- A representation is a filtration with one graded piece, itself. -/
-theorem single {P : RepProp.{u, v} k W} (hP : RepProp.IsInvariant P) (h : P ρ) :
-    HasGradedPieces ρ fun _ : Unit ↦ P := by
-  refine ⟨1, ![⊥, ⊤], Equiv.equivPUnit _, fun i j hij ↦ ?_, rfl, rfl, fun i ↦ ?_⟩
-  · fin_cases i <;> fin_cases j <;> simp_all
-  · fin_cases i
-    exact hP (Subrepresentation.topSubquotientBotEquiv ρ).symm h
-
-/-- The zero representation is a filtration without graded pieces. -/
-theorem of_subsingleton [Subsingleton V] {P : PEmpty → RepProp.{u, v} k W} :
-    HasGradedPieces ρ P := by
-  have htop : (⊤ : Subrepresentation ρ) = ⊥ :=
-    Subrepresentation.toSubmodule_injective (Submodule.eq_bot_of_subsingleton)
-  refine ⟨0, fun _ ↦ ⊥, Equiv.equivPEmpty _, fun _ _ _ ↦ le_rfl, rfl, htop.symm, fun i ↦ ?_⟩
-  exact i.elim0
 
 
 /-- **Concatenating filtrations.** Filtrations of a subrepresentation `A` and of the quotient
@@ -412,81 +392,7 @@ open TensorProduct
 variable {k : Type*} [Field k] {W : Type*} [Group W] {V V' : Type*} [AddCommGroup V] [Module k V]
   [AddCommGroup V'] [Module k V'] {ρ : Representation k W V} (σ : Representation k W V')
 
-/-- The subrepresentation `A ⊗ V'` of `V ⊗ V'`, for a subrepresentation `A` of `ρ`. -/
-noncomputable def rTensor (A : Subrepresentation ρ) : Subrepresentation (ρ.tprod σ) :=
-  (A.subtype.rTensor σ).range
-
 variable {σ}
-
-theorem rTensor_mono {A B : Subrepresentation ρ} (h : A ≤ B) : A.rTensor σ ≤ B.rTensor σ := by
-  rintro _ ⟨x, rfl⟩
-  refine ⟨(LinearMap.rTensor V' (Submodule.inclusion h)) x, ?_⟩
-  change (LinearMap.rTensor V' B.toSubmodule.subtype ∘ₗ
-    LinearMap.rTensor V' (Submodule.inclusion h)) x = LinearMap.rTensor V' A.toSubmodule.subtype x
-  rw [← LinearMap.rTensor_comp]
-  rfl
-
-theorem rTensor_bot : (⊥ : Subrepresentation ρ).rTensor σ = ⊥ := by
-  refine eq_bot_iff.2 ?_
-  rintro _ ⟨x, rfl⟩
-  have : Subsingleton ((⊥ : Subrepresentation ρ).toSubmodule ⊗[k] V') := by
-    have : Subsingleton (⊥ : Subrepresentation ρ).toSubmodule :=
-      Submodule.subsingleton_iff_eq_bot.2 rfl
-    infer_instance
-  rw [Subsingleton.elim x 0, map_zero]
-  exact Submodule.zero_mem _
-
-theorem rTensor_top : (⊤ : Subrepresentation ρ).rTensor σ = ⊤ := by
-  refine eq_top_iff.2 fun y _ ↦ ?_
-  obtain ⟨x, rfl⟩ := LinearMap.rTensor_surjective V'
-    (g := (⊤ : Subrepresentation ρ).subtype.toLinearMap) (fun v ↦ ⟨⟨v, Submodule.mem_top⟩, rfl⟩) y
-  exact ⟨x, rfl⟩
-
-/-- **The graded pieces of a tensor product.** For `U ≤ S`, the subquotient
-`(S ⊗ V') / (U ⊗ V')` of `V ⊗ V'` is `(S / U) ⊗ V'`. -/
-noncomputable def rTensorSubquotientEquiv {U S : Subrepresentation ρ} (h : U ≤ S) :
-    ((S.subquotient U).tprod σ).Equiv ((S.rTensor σ).subquotient (U.rTensor σ)) := by
-  let U' : Subrepresentation S.toRepresentation := comap S.subtype U
-  let R : Subrepresentation (S.toRepresentation.tprod σ) := U'.rTensor σ
-  let i := S.subtype.rTensor σ
-  have hi : Function.Injective i :=
-    Module.Flat.rTensor_preserves_injective_linearMap _ S.subtype_injective
-  -- `i` maps `U' ⊗ V'` onto `U ⊗ V'`
-  have hR : map i R = U.rTensor σ := by
-    have : i.toLinearMap ∘ₗ (U'.subtype.rTensor σ).toLinearMap =
-        (U.subtype.rTensor σ).toLinearMap ∘ₗ
-          LinearMap.rTensor V' (Submodule.comapSubtypeEquivOfLe h).toLinearMap := by
-      refine TensorProduct.ext' fun x y ↦ rfl
-    refine toSubmodule_injective ?_
-    change Submodule.map i.toLinearMap (LinearMap.range (U'.subtype.rTensor σ).toLinearMap) =
-      LinearMap.range (U.subtype.rTensor σ).toLinearMap
-    rw [← LinearMap.range_comp, this, LinearMap.range_comp_of_range_eq_top]
-    exact LinearMap.range_eq_top.2 (LinearMap.rTensor_surjective _
-      (Submodule.comapSubtypeEquivOfLe h).surjective)
-  -- `(S ⊗ V') / R ≃ (S ⊗ V') / (U ⊗ V')` inside `V ⊗ V'`
-  let e₁ : ((⊤ : Subrepresentation (S.toRepresentation.tprod σ)).subquotient R).Equiv
-      ((S.rTensor σ).subquotient (U.rTensor σ)) :=
-    subquotientEquivOfIntertwiningMap i (fun x _ ↦ ⟨x, rfl⟩)
-      (fun x _ hx ↦ hR ▸ ⟨x, hx, rfl⟩)
-      (fun x _ hx ↦ by
-        rw [← hR] at hx
-        obtain ⟨y, hy, hyx⟩ := mem_map.1 hx
-        exact hi hyx ▸ hy)
-      fun y hy ↦ by
-        obtain ⟨x, rfl⟩ := hy
-        refine ⟨x, Submodule.mem_top, ?_⟩
-        have h0 : i x - (Representation.IntertwiningMap.rTensor σ S.subtype).toLinearMap x = 0 :=
-          sub_eq_zero.2 rfl
-        rw [h0]
-        exact Submodule.zero_mem _
-  -- `(S / U) ⊗ V' ≃ (S ⊗ V') / R`
-  let e₂ : (U'.quotient.tprod σ).Equiv R.quotient :=
-    .mk (quotientTensorEquiv V' U'.toSubmodule) fun w ↦ by
-      refine TensorProduct.ext' fun x y ↦ ?_
-      induction x using Submodule.Quotient.induction_on with | _ x
-      rfl
-  exact (((quotientComapSubtypeEquiv U S).symm.tprodCongr (.refl σ)).trans e₂).trans
-    ((quotientEquivTopSubquotient R).trans e₁)
 
 end Subrepresentation
 
@@ -498,26 +404,6 @@ namespace HasGradedPieces
 
 variable {V V' : Type v} [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
   {ρ : Representation k W V} {ι : Type*}
-
-/-- Tensoring a filtration with a representation `σ` on the right: if `ρ` has graded pieces
-equivalent to `τ i`, then `ρ ⊗ σ` has graded pieces equivalent to `τ i ⊗ σ`. -/
-theorem tprod_right {X : ι → Type*} [∀ i, AddCommGroup (X i)] [∀ i, Module k (X i)]
-    {τ : ∀ i, Representation k W (X i)} (h : HasGradedPieces ρ fun i ↦ EquivTo (τ i))
-    (σ : Representation k W V') : HasGradedPieces (ρ.tprod σ) fun i ↦ EquivTo ((τ i).tprod σ) := by
-  obtain ⟨m, F, e, hF, h0, hl, hP⟩ := h
-  refine ⟨m, fun i ↦ (F i).rTensor σ, e, fun a b hab ↦ Subrepresentation.rTensor_mono (hF hab),
-    by simp [h0, Subrepresentation.rTensor_bot], by simp [hl, Subrepresentation.rTensor_top],
-    fun i ↦ ?_⟩
-  obtain ⟨f⟩ := hP i
-  exact ⟨(Subrepresentation.rTensorSubquotientEquiv (hF i.castSucc_le_succ)).symm.trans
-    (f.tprodCongr (.refl σ))⟩
-
-/-- Tensoring a filtration with a representation `σ` on the left. -/
-theorem tprod_left {X : ι → Type*} [∀ i, AddCommGroup (X i)] [∀ i, Module k (X i)]
-    {τ : ∀ i, Representation k W (X i)} (h : HasGradedPieces ρ fun i ↦ EquivTo (τ i))
-    (σ : Representation k W V') : HasGradedPieces (σ.tprod ρ) fun i ↦ EquivTo (σ.tprod (τ i)) :=
-  ((h.tprod_right σ).of_equiv (fun _ ↦ isInvariant_equivTo _) (TensorProduct.comm ρ σ)).mono
-    fun _ {_} {_} {_} _ ⟨f⟩ ↦ ⟨f.trans (TensorProduct.comm _ _)⟩
 
 end HasGradedPieces
 

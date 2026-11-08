@@ -145,9 +145,6 @@ noncomputable def functor : S.PairCategory ⥤ S'.PairCategory where
     change mkHom _ _ _ _ = mkHom _ _ _ _ ≫ mkHom _ _ _ _
     rw [mkHom_comp_mkHom, F.mapAt_comp]
 
-lemma functor_obj (X : S.PairCategory) :
-    F.functor.obj X = ⟨X.stage, (F.Φ X.stage).obj X.obj⟩ := rfl
-
 lemma functor_map_mkHom {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n) (hY : Y.stage ≤ n)
     (u : X.toStage hX ⟶ Y.toStage hY) :
     F.functor.map (mkHom n hX hY u) =
@@ -236,27 +233,6 @@ def Hom.comp (τ : Hom F G) (τ' : Hom G H) : Hom F H where
   τ i := τ.τ i ≫ τ'.τ i
   comm h x := by simp [τ'.comm, τ.comm_assoc]
 
-@[simp]
-lemma descNatTrans_id (F : Morphism S S') : descNatTrans (Hom.id F) = 𝟙 _ := by
-  ext X
-  simp [descNatTrans_app]
-  rfl
-
-@[simp]
-lemma descNatTrans_comp (τ : Hom F G) (τ' : Hom G H) :
-    descNatTrans (τ.comp τ') = descNatTrans τ ≫ descNatTrans τ' := by
-  ext X
-  simp [descNatTrans_app]
-
-/-- An isomorphism of descended functors induced by a compatible family of isomorphisms. -/
-@[simps]
-noncomputable def descNatIso (τ : Hom F G) (τ' : Hom G F) (h₁ : τ.comp τ' = Hom.id F)
-    (h₂ : τ'.comp τ = Hom.id G) : F.functor ≅ G.functor where
-  hom := descNatTrans τ
-  inv := descNatTrans τ'
-  hom_inv_id := by rw [← descNatTrans_comp, h₁, descNatTrans_id]
-  inv_hom_id := by rw [← descNatTrans_comp, h₂, descNatTrans_id]
-
 /-- A descended natural transformation whose components at the finite stages are isomorphisms is
 an isomorphism (for instance, the descended exchange transformation is an isomorphism as soon
 as it is one at every finite stage). -/
@@ -265,13 +241,6 @@ lemma isIso_descNatTrans (τ : Hom F G) (hτ : ∀ i, IsIso (τ.τ i)) : IsIso (
     rw [descNatTrans_app]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
-
-/-- A component of a descended natural transformation is an isomorphism as soon as the
-component at its finite stage is. -/
-lemma isIso_descNatTrans_app (τ : Hom F G) (X : S.PairCategory)
-    (hτ : IsIso ((τ.τ X.stage).app X.obj)) : IsIso ((descNatTrans τ).app X) := by
-  rw [descNatTrans_app]
-  infer_instance
 
 end Morphism
 
@@ -322,15 +291,6 @@ lemma comp_β_hom_app (F : Morphism S S') (G : Morphism S' S'') {i j : I} (h : i
       (G.β h).hom.app ((F.Φ i).obj x) ≫ (G.Φ j).map ((F.β h).hom.app x) := by
   simp only [comp_β, Iso.trans_hom, NatTrans.comp_app]
   erw [Category.id_comp, Category.id_comp, Category.comp_id]
-  rfl
-
-@[simp]
-lemma comp_β_inv_app (F : Morphism S S') (G : Morphism S' S'') {i j : I} (h : i ≤ j) (x : C i) :
-    ((F.comp G).β h).inv.app x =
-      (G.Φ j).map ((F.β h).inv.app x) ≫ (G.β h).inv.app ((F.Φ i).obj x) := by
-  rw [← cancel_epi (((F.comp G).β h).hom.app x), Iso.hom_inv_id_app, comp_β_hom_app,
-    Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-  erw [Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
   rfl
 
 variable [IsDirectedOrder I]

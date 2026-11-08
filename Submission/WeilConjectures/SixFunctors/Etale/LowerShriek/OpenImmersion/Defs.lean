@@ -357,11 +357,6 @@ instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
   rw [heq]
   exact comp_preservesFiniteLimits _ _
 
-/-- Together with `Etale.preservesFiniteLimits_openImmersionLowerShriek` this
-makes `j_!` exact. -/
-example : PreservesFiniteColimits (j)_!open[A] :=
-  inferInstance
-
 /-- For an open immersion `j`, the pullback `j^*` of
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` is computed by restriction along the
 localization functor: both are left adjoint to `j_*`. In particular its sections are given

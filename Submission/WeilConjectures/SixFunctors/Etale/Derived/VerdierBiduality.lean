@@ -96,23 +96,6 @@ theorem nonempty_iso_verdierDual_verdierDual [IsAlgClosed k]
   have := isIso_verdierDualDoubleDual_app Λ a hK
   ⟨asIso ((verdierDualDoubleDual Λ a).app K)⟩
 
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over an algebraically closed field `k` and a finite
-coefficient ring `Λ` whose exponent is invertible on `k`, the Verdier dual
-`𝔻_X = RHom(-, ω_X)` restricts to a contravariant anti-equivalence
-`Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`, with quasi-inverse `𝔻_X` itself: `𝔻_X` preserves `Dctf(X, Λ)`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`) and the unit and the counit are
-the double-dual isomorphisms `δ_K : K ≅ 𝔻_X 𝔻_X K`
-(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
-noncomputable def verdierDualEquivalence [IsAlgClosed k] :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ≌
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).liftDualEquivalence
-    (verdierDual Λ a) (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ a hK)
-    (verdierDualDoubleDual Λ a)
-    (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
-
 /-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
 
 Let `X` be separated of finite type over a perfect field `k`, `ω_X = Ra_X^! Λ` and

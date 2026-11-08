@@ -125,12 +125,6 @@ private lemma hcomp_eq_whiskerRight_comp_whiskerLeft {G G' : A ⥤ B} {H H' : B 
   ext; simp
 
 omit [F.HasProperExchange] in
-private lemma hcomp_comp_hcomp {G G' G'' : A ⥤ B} {H H' H'' : B ⥤ C} (α : G ⟶ G')
-    (α' : G' ⟶ G'') (β : H ⟶ H') (β' : H' ⟶ H'') :
-    NatTrans.hcomp α β ≫ NatTrans.hcomp α' β' = NatTrans.hcomp (α ≫ α') (β ≫ β') :=
-  (NatTrans.exchange _ _ _ _).symm
-
-omit [F.HasProperExchange] in
 private lemma hcomp_hcomp_associator {G G' : A ⥤ B} {H H' : B ⥤ C} {K K' : C ⥤ D}
     (α : G ⟶ G') (β : H ⟶ H') (γ : K ⟶ K') :
     NatTrans.hcomp (NatTrans.hcomp α β) γ ≫ (Functor.associator _ _ _).hom =

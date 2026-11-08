@@ -149,11 +149,6 @@ theorem baer_obj_of_injective (I : Sheaf J (ModuleCat.{max w v} Λ)) [Injective 
         rw [toSheafify_sheafifyLift]
         exact idealFreeModuleYonedaHom_app_single 𝔞 U I.obj g ⟨x, hx⟩
 
-/-- **Sections of an injective sheaf of modules are injective modules.** -/
-theorem injective_obj_of_injective (I : Sheaf J (ModuleCat.{max w v} Λ)) [Injective I] (U : C) :
-    Module.Injective Λ (I.obj.obj (op U)) :=
-  (baer_obj_of_injective I U).injective
-
 end Sheaf
 
 end CategoryTheory

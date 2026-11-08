@@ -84,13 +84,6 @@ section Expand
 variable (m : ℕ) (hm : m ≠ 0)
 
 
-/-- `expand m` is injective. -/
-lemma expand_injective : Function.Injective (expand m hm (R := R)) := by
-  intro f g h
-  ext n
-  have := congrArg (coeff (m * n)) h
-  rwa [coeff_expand_mul, coeff_expand_mul] at this
-
 
 end Expand
 

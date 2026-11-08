@@ -166,29 +166,11 @@ estimates; all of them are instances or direct consequences of results of Mathli
 
 variable {X Y Z : Scheme.{u}}
 
-/-- A closed immersion is proper, and so is a closed immersion followed by a proper morphism.
-(blueprint: `lem-weil-pbc-closed-immersion-proper`) -/
-theorem IsProper.of_isClosedImmersion (i : X ⟶ Y) [IsClosedImmersion i] : IsProper i :=
-  inferInstance
-
 
 /-- A proper morphism is a closed map.
 (blueprint: `pqf-lem-proper-closed-map`) -/
 theorem IsProper.isClosedMap (f : X ⟶ Y) [IsProper f] : IsClosedMap f :=
   f.isClosedMap
-
-/-- The image of a proper morphism is closed.
-(blueprint: `lem-weil-pbc-proper-closed-image`) -/
-theorem IsProper.isClosed_range (f : X ⟶ Y) [IsProper f] : IsClosed (Set.range f) :=
-  f.isClosedMap.isClosed_range
-
-/-- If `f : X ⟶ Y` is proper and `g : X ⟶ W` is a morphism over `Y` to a separated `Y`-scheme,
-then `g` is proper.
-(blueprint: `lem-weil-pbc-proper-to-separated`) -/
-theorem IsProper.of_comp_eq {W : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : X ⟶ W) (h : W ⟶ Y)
-    [IsSeparated h] (hgh : g ≫ h = f) : IsProper g := by
-  subst hgh
-  exact IsProper.of_comp g h
 
 /-- The composite of proper morphisms is proper.
 (blueprint: `lem-weil-pbc-proper-composition`) -/
@@ -200,21 +182,6 @@ theorem IsProper.comp (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g] : Is
 theorem IsProper.pullback_snd (f : X ⟶ Y) [IsProper f] {Y' : Scheme.{u}} (g : Y' ⟶ Y) :
     IsProper (pullback.snd f g) :=
   inferInstance
-
-/-- The composite of closed immersions is a closed immersion.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
-theorem IsClosedImmersion.comp' (f : X ⟶ Y) (g : Y ⟶ Z) [IsClosedImmersion f]
-    [IsClosedImmersion g] : IsClosedImmersion (f ≫ g) :=
-  inferInstance
-
-/-- A product over a common base of closed immersions is a closed immersion.
-(blueprint: `lem-weil-pbc-closed-immersion-products`) -/
-theorem IsClosedImmersion.pullback_map {S X' Y' : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S}
-    {f' : X' ⟶ S} {g' : Y' ⟶ S} (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') [IsClosedImmersion i₁]
-    [IsClosedImmersion i₂] (e₁ : f = i₁ ≫ f') (e₂ : g = i₂ ≫ g') :
-    IsClosedImmersion (pullback.map f g f' g' i₁ i₂ (𝟙 _) ((Category.comp_id _).trans e₁)
-      ((Category.comp_id _).trans e₂)) :=
-  MorphismProperty.pullbackMap (P := @IsClosedImmersion) inferInstance inferInstance e₁ e₂
 
 /-- An open immersion is locally of finite type.
 (blueprint: `lem-weil-pbc-closed-immersion-products`) -/

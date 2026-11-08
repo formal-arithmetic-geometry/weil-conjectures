@@ -213,11 +213,6 @@ lemma extAddEquivHomology_comp_smul (c : PadicAlgCl l)
     extAddEquivHomology_extMk I r _ _ ((ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • z)
       (by rw [map_smul, hz]; exact (sectionsAddEquiv_comp_smulNatTrans c f).symm), map_smul]
 
-lemma smulNatTrans_app_adicConstant (c : PadicAlgCl l) :
-    (smulNatTrans k₀ l Y c).app (ProEtaleWeilSheaf.adicConstant k₀ l Y) =
-      adicScalar l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber c :=
-  rfl
-
 variable (k₀ l Y) in
 /-- The structure isomorphisms `Fr^* M ≅ M` of pro-étale Weil sheaves, on the underlying abelian
 sheaves: `(Fr⁻¹)_* M ⟶ M`. -/
@@ -318,27 +313,6 @@ namespace WeilSheaf
 variable [Fact (ringChar k₀ ≠ l)] {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-
-set_option maxHeartbeats 1600000 in
--- the carriers of the homology of global sections are only definitionally equal
-/-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, with its Frobenius.** For an injective
-resolution `I` of the constant Weil sheaf, `Hʳ(Ȳ_proét, ℚ̄_ℓ) ≅ Hʳ(Y ⊗ k̄, ℚ̄_ℓ)`, the geometric
-Frobenius corresponding to the Frobenius `ProEtaleWeilSheaf.extFrobenius I r` induced by the
-Frobenius of the global sections of the terms of `I`. -/
-theorem exists_addEquiv_adicConstantH_cohomology
-    (I : InjectiveResolution (WeilSheaf.adicConstant k₀ l Y).obj) (r : ℕ) :
-    ∃ Θ : Abelian.Ext (ProEtale.constantIntSheaf _)
-        ((ProEtaleWeilSheaf.forgetAb k₀ l Y).obj (WeilSheaf.adicConstant k₀ l Y).obj) r ≃+
-        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).carrier,
-      ∀ x, Θ (ProEtaleWeilSheaf.extFrobenius I r x) =
-        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).frobenius (Θ x) := by
-  obtain ⟨Θ, hΘ⟩ := exists_linearEquiv_cohomology_resolution (WeilSheaf.adicConstant k₀ l Y) I r
-  refine ⟨(ProEtaleWeilSheaf.extAddEquivHomology I r).trans Θ.toAddEquiv.symm, fun x ↦ ?_⟩
-  apply Θ.injective
-  rw [AddEquiv.trans_apply, AddEquiv.trans_apply, hΘ]
-  rw [ProEtaleWeilSheaf.extAddEquivHomology_extFrobenius]
-  erw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
-  rfl
 
 set_option maxHeartbeats 1600000 in
 -- `AdicConstantH` is only definitionally the `Ext` group of the underlying abelian sheaf

@@ -58,12 +58,6 @@ namespace ModuleCat
 
 variable (R : Type u) [CommRing R]
 
-/-- The finite free module `R^k` is a biproduct of `k` copies of `R`. -/
-noncomputable def finsuppIsoBiproduct (k : ℕ) :
-    ModuleCat.of R (Fin k →₀ R) ≅ ⨁ fun _ : Fin k ↦ ModuleCat.of R R :=
-  (Finsupp.linearEquivFunOnFinite R R (Fin k)).toModuleIso ≪≫
-    (ModuleCat.biproductIsoPi fun _ : Fin k ↦ ModuleCat.of R R).symm
-
 end ModuleCat
 
 namespace CategoryTheory
@@ -103,39 +97,6 @@ namespace DerivedCategory
 variable {C : Type u₂} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
   [HasFunctorialFlatResolution C]
-
-/-- The single complex `X[0]` tensored on the left by a complex `L` is `L` tensored termwise by
-`X`, naturally in `X`. -/
-noncomputable def singleCompTensorLeftIso (L : CochainComplex C ℤ) :
-    HomologicalComplex.single C (.up ℤ) 0 ⋙ tensorLeft L ≅ Functor.tensorRightComplex L :=
-  NatIso.ofComponents (fun X ↦ CochainComplex.mapBifunctorSingle₂Iso (curriedTensor C) X L)
-    (fun f ↦ CochainComplex.mapBifunctorSingle₂Iso_hom_naturality₂ (curriedTensor C) f L)
-
-/-- The comparison `Q(L) ⊗ᴸ X[0] ⟶ Q(L ⊗ X)`, natural in `X`: the lax monoidal structure of
-`Qh`, followed by the identification of `L ⊗ X[0]` with `L` tensored termwise by `X`. It is an
-isomorphism at flat objects `X`
-(`DerivedCategory.isIso_tensorSingleToTensorRightComplex_app`). -/
-noncomputable def tensorSingleToTensorRightComplex (L : CochainComplex C ℤ) :
-    singleFunctor C 0 ⋙ (curriedTensor (DerivedCategory C)).obj (Q.obj L) ⟶
-      Functor.tensorRightComplex L ⋙ Q :=
-  Functor.whiskerLeft (singleFunctor C 0)
-      ((curriedTensor _).map ((quotientCompQhIso C).inv.app L)) ≫
-    (Functor.whiskerRight ((singleFunctorIsoCompQ C 0).hom ≫
-      Functor.whiskerLeft (HomologicalComplex.single C (.up ℤ) 0) (quotientCompQhIso C).inv) _ :
-        _ ⟶ (HomologicalComplex.single C (.up ℤ) 0 ⋙ HomotopyCategory.quotient C (.up ℤ)) ⋙
-          Qh ⋙ (curriedTensor _).obj (Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj L))) ≫
-    Functor.whiskerLeft (HomologicalComplex.single C (.up ℤ) 0 ⋙
-      HomotopyCategory.quotient C (.up ℤ))
-        (tensorLeftCounit ((HomotopyCategory.quotient C (.up ℤ)).obj L)) ≫
-    (Functor.whiskerRight (Functor.whiskerLeft (HomologicalComplex.single C (.up ℤ) 0)
-      (Functor.Monoidal.commTensorLeft (HomotopyCategory.quotient C (.up ℤ)) L).hom) Qh :
-        (HomologicalComplex.single C (.up ℤ) 0 ⋙ HomotopyCategory.quotient C (.up ℤ) ⋙
-          tensorLeft ((HomotopyCategory.quotient C (.up ℤ)).obj L)) ⋙ Qh ⟶ _) ≫
-    (Functor.whiskerRight (singleCompTensorLeftIso L).hom
-      (HomotopyCategory.quotient C (.up ℤ) ⋙ Qh) :
-        (HomologicalComplex.single C (.up ℤ) 0 ⋙ tensorLeft L) ⋙
-          HomotopyCategory.quotient C (.up ℤ) ⋙ Qh ⟶ _) ≫
-    Functor.whiskerLeft (Functor.tensorRightComplex L) (quotientCompQhIso C).hom
 
 
 end DerivedCategory

@@ -7,7 +7,8 @@ module
 
 public import Submission.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CommSq
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAdjunction
+public import Submission.WeilConjectures.CategoryTheory.Monoidal.KernelAdjunction
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

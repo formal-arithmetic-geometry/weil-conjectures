@@ -30,24 +30,6 @@ namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
-private def encodingPullbackIso {T U : Scheme.{u}} (f : U ⟶ T)
-    (eT : Encoding A T) (eU : Encoding A U) :
-    CondensedRing.upperStar (coefficient A) f ⋙ (eU.ordinary.trans eU.fixed).functor ≅
-      (eT.ordinary.trans eT.fixed).functor ⋙
-        upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f := by
-  let ET := eT.ordinary.trans eT.fixed
-  let EU := eU.ordinary.trans eU.fixed
-  let R := lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f
-  let i : CondensedRing.lowerStar (coefficient A) f ⋙ ET.functor ≅ EU.functor ⋙ R :=
-    encodingPushforwardNatIso A T U f eT eU
-  let k := Iso.isoCompInverse (H := ET) i ≪≫ Functor.associator _ _ _
-  let kr := Iso.inverseCompIso (G := EU) k
-  let a := ET.toAdjunction.comp
-    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) f)
-  let b := (CondensedRing.upperStarLowerStarAdjunction (coefficient A) f).comp
-    EU.toAdjunction
-  exact (a.leftAdjointUniq (b.ofNatIsoRight kr)).symm
-
 private def encodingDerivedPushforwardIso {T U : Scheme.{u}} (f : U ⟶ T)
     (eT : Encoding A T) (eU : Encoding A U) :
     (CondensedRing.lowerStar (coefficient A) f).rightDerivedFunctor ⋙

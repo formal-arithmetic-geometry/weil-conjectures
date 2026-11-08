@@ -123,7 +123,32 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
-import Submission.WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtension
+import Submission.WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBasic
+import Submission.WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Submission.WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import Submission.WeilConjectures.Algebra.Homology.System.SystemGrothendieck
+import Submission.WeilConjectures.CategoryTheory.Exact.ExactFunctorCoproducts
+import Submission.WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.CategoryTheory.ShrinkYoneda
+import Submission.WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
+import Submission.WeilConjectures.Algebra.Homology.System.SystemSingleDerivedExtension
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.NormalizedLeftExtension
+import Submission.WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
+import Submission.WeilConjectures.Algebra.Homology.System.SystemOrdinarySingleExtension
+import Submission.WeilConjectures.Algebra.Homology.System.SystemEvaluationKFlat
+import Submission.WeilConjectures.Algebra.Homology.System.SystemDerivedTransition
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.Algebra.Homology.System.SystemSingleDerivedEvaluation
+import Submission.WeilConjectures.Algebra.Homology.System.SystemScalarDerivedExtension
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.ExtensionEvaluationComparison
+import Submission.WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
+import Submission.WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.CategoryTheory.Functor.OfSequence
 import Mathlib.CategoryTheory.Abelian.Transfer
 
@@ -584,19 +609,6 @@ theorem coefficientEvaluation_additive (n : ℕ) :
     (coefficientEvaluation (J := J) (O := O) (ell := ell) n).Additive := by
   exact coefficientSystem_abelian_exists.exists.choose_spec n
 attribute [instance] coefficientEvaluation_additive
-/-- Evaluation is exact. Source: Zheng, Construction 4.1, p. 21.
-Proof: kernels and cokernels in the constructed abelian category are componentwise;
-finite biproducts and hence finite limits and colimits are componentwise as well
-(blueprint: lem-pur-coefficient-evaluation-derived-left-adjoint). -/
-theorem coefficientEvaluation_exact (n : ℕ) :
-    PreservesFiniteLimits (coefficientEvaluation (J := J) (O := O) (ell := ell) n) ∧
-      PreservesFiniteColimits (coefficientEvaluation (J := J) (O := O) (ell := ell) n) := by
-  let e := coefficientSystemEquivalence (J := J) (O := O) (ell := ell)
-  constructor
-  · change PreservesFiniteLimits (e.functor ⋙ systemEvaluation _ n)
-    infer_instance
-  · change PreservesFiniteColimits (e.functor ⋙ systemEvaluation _ n)
-    infer_instance
 variable [EssentiallySmall.{w} C]
 variable {R R' : Sheaf J CommRingCat.{w}}
 
@@ -1014,115 +1026,6 @@ end GeneralInterfaces
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-private theorem coefficientScalarPresentation
-    {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S)
-    (D : DerivedChangeOfRingsCochainModel φ) : D.E = siteCoefficientTensor φ := by
-  refine CategoryTheory.Functor.ext D.obj_eq ?_
-  intro M N f
-  exact D.map_eq f
-
-private theorem coefficientScalarAdj_homEquiv
-    {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S)
-    (D : SystemScalarModel φ)
-    (F : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R))
-    (G : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J S))
-    (f : (siteCoefficientTensor φ).obj F ⟶ G) :
-    D.ordinaryAdj.homEquiv F G
-      ((eqToIso (coefficientScalarPresentation φ D.model)).hom.app F ≫ f) =
-        (siteCoefficientTensorAdj φ).homEquiv F G f := by
-  ext U x
-  have hn : SiteCoefficientTensorAdjunctionNormalized φ (siteCoefficientTensorAdj φ) :=
-    (siteCoefficientTensorAdj_exists φ).exists.choose_spec
-  rw [hn]
-  simp only [Adjunction.homEquiv_unit]
-  change f.val.app U
-    (((eqToIso (coefficientScalarPresentation φ D.model)).hom.app F).val.app U
-      ((D.ordinaryAdj.unit.app F).val.app U x)) = _
-  rw [D.unit_normalized]
-  dsimp only [systemModelTmul]
-  simp only [one_smul]
-  congr 1
-  change ((eqToIso (coefficientScalarPresentation φ D.model)).hom.app F).val.app U
-    ((eqToHom (D.model.obj_eq F).symm).val.app U _) = _
-  have he : (eqToIso (coefficientScalarPresentation φ D.model)).hom.app F =
-      eqToHom (D.model.obj_eq F) := by
-    simp only [eqToIso.hom, eqToHom_app]
-  rw [he]
-  change ((eqToHom (D.model.obj_eq F).symm ≫
-    eqToHom (D.model.obj_eq F)).val.app U) _ = _
-  simp only [eqToHom_trans, eqToHom_refl, SheafOfModules.id_val,
-    PresheafOfModules.id_app, ModuleCat.id_apply]
-
-private def coefficientStrictTransition {m n : ℕ} (h : n ≤ m) :
-    coefficientEvaluation (J := J) (O := O) (ell := ell) m ⟶
-      coefficientEvaluation (J := J) (O := O) (ell := ell) n ⋙
-        coefficientRestriction (J := J) O ell h where
-  app M := coefficientIteratedTransition M h
-  naturality M N f := by
-    have hh := (coefficientToStrict.map f).comm h
-    exact hh
-
-omit [EssentiallySmall.{w} C] in
-private theorem coefficientStrictTransition_normalized :
-    CoefficientTransitionsNormalized
-      (J := J) (O := O) (ell := ell) (fun {_ _} h ↦ coefficientStrictTransition h) := by
-  refine ⟨?_, ?_, ?_⟩
-  · intro n M
-    ext U x
-    exact (coefficientToStrict.obj M).identity n U x
-  · intro n M
-    exact coefficientIterated_succ M n
-  · intro l m n h₁ h₂ M
-    ext U x
-    exact (coefficientToStrict.obj M).compose h₂ h₁ U x
-
-private theorem coefficientOrdinaryExtension (n : ℕ) :
-    ∃ (E : coefficientLevelModules (J := J) O ell n ⥤
-        CoefficientSystem (J := J) O ell) (adj : E ⊣ coefficientEvaluation n)
-      (below : ∀ {q : ℕ} (h : q ≤ n), E ⋙ coefficientEvaluation q ≅ coefficientTensor h),
-      (∀ q : ℕ, n < q → ∀ F, IsZero ((coefficientEvaluation q).obj (E.obj F))) ∧
-      (∀ {q : ℕ} (h : q ≤ n) F M (f : E.obj F ⟶ M),
-        (coefficientTensorAdj h).homEquiv F (M.level q)
-          ((below h).inv.app F ≫ (coefficientEvaluation q).map f) =
-            adj.homEquiv F M f ≫ (coefficientStrictTransition h).app M) := by
-  classical
-  let t := (systemLevelLeftExtensionTheory (J := J)).some
-  let B := coefficientRings (J := J) (O := O) (ell := ell)
-  let e := coefficientSystemEquivalence (J := J) (O := O) (ell := ell)
-  let E := (t.single B n).ordinary ⋙ e.inverse
-  let adj : E ⊣ coefficientEvaluation n := (t.single B n).ordinaryAdj.comp
-    e.symm.toAdjunction
-  have hi {q : ℕ} (h : q ≤ n) :
-      systemTensor t.scalar B h = coefficientTensor (J := J) (O := O) (ell := ell) h :=
-    coefficientScalarPresentation _ _
-  let below : ∀ {q : ℕ} (h : q ≤ n), E ⋙ coefficientEvaluation q ≅ coefficientTensor h :=
-    fun h ↦ (t.singleBelow B h) ≪≫ eqToIso (hi h)
-  refine ⟨E, adj, below, ?_, ?_⟩
-  · intro q hq F
-    exact t.singleAbove B q n hq F
-  · intro q h F M f
-    have hf := t.singleTranspose B h F (e.functor.obj M)
-      (e.symm.toAdjunction.homEquiv _ _ f)
-    rw [← coefficientScalarAdj_homEquiv
-      (coefficientQuotientMap (J := J) O ell h) (t.scalar _) F (M.level q)]
-    have hev : (systemEvaluation B q).map
-        (e.symm.toAdjunction.homEquiv _ _ f) = f.app q := by
-      rw [Adjunction.homEquiv_unit]
-      change 𝟙 _ ≫ f.app q = f.app q
-      exact Category.id_comp _
-    rw [hev] at hf
-    have hb : (eqToIso (coefficientScalarPresentation
-        (coefficientQuotientMap (J := J) O ell h) (t.scalar _).model)).hom.app F ≫
-        (below h).inv.app F = (t.singleBelow B h).inv.app F := by
-      dsimp only [below]
-      simp only [Iso.trans_inv, NatTrans.comp_app,
-        Iso.hom_inv_id_app_assoc]
-    rw [← Category.assoc, hb]
-    change _ = (adj.homEquiv F M f) ≫ (e.functor.obj M).transition h
-    dsimp only [adj]
-    rw [Adjunction.comp_homEquiv]
-    exact hf
-
 /-- The strict part of extension from a coefficient level. The transitions are the
 actual iterates, and the Hom formula fixes the below-level comparisons by adjunction.
 Source: Zheng, Construction 4.1, printed p. 21, the formula for `e_n!` and its adjunction
@@ -1144,34 +1047,6 @@ structure CoefficientOrdinaryEvaluationData where
     (coefficientTensorAdj h).homEquiv F (M.level q)
       ((below h).inv.app F ≫ (coefficientEvaluation q).map f) =
         (adj n).homEquiv F M f ≫ (strictTransition h).app M
-
-/-- Strict extension from a single coefficient level exists with its specified tensor
-components and ordinary adjunction.
-Source: Zheng, Construction 4.1, printed p. 21
-(blueprint: lem-pur-coefficient-evaluation-strict-extension).
-Proof: iterate the successor transitions by the functor on the opposite sequence.
-The equivalence with all-transition systems preserves each level and all component maps.
-Use the general strict-system extension, and transport it through this equivalence.
-Its scalar functor equals the prescribed sheafified change of rings on objects and maps.
-Both scalar Hom correspondences send a morphism to its value on the sheafification image
-of `1 tensor x`, so they agree. Transfer the general extension's below-level isomorphisms,
-zero components, and Hom formula across these equalities. The equivalence's unit has
-identity components, so no correction appears in that formula. Finally additivity follows
-from the ordinary adjunction between preadditive categories. The iteration functor fixes
-identity, successor, and composite transitions exactly as required. -/
-theorem coefficientOrdinaryEvaluationExtension :
-    Nonempty (CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell)) := by
-  classical
-  choose E a b ha hb using coefficientOrdinaryExtension (J := J) (O := O) (ell := ell)
-  exact ⟨{
-    strictTransition := fun h ↦ coefficientStrictTransition h
-    transitionsNormalized := coefficientStrictTransition_normalized
-    extension := E
-    extensionAdditive := fun n ↦ (a n).left_adjoint_additive
-    adj := a
-    below := fun h ↦ b _ h
-    above := ha
-    hom_formula := fun h F M f ↦ hb _ h F M f }⟩
 
 variable [∀ n : ℕ, HasDerivedCategory.{d} (coefficientLevelModules (J := J) O ell n)]
   [HasDerivedCategory.{d} (CoefficientSystem (J := J) O ell)]

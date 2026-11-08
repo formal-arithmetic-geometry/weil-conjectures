@@ -6,7 +6,9 @@ Authors: Nailin Guan
 module
 
 public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import Submission.WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs

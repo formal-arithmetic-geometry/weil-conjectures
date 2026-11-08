@@ -91,39 +91,4 @@ local instance : IsSeparated
     (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 
-include eT eU in
-/-- Unit base change, together with the native Tate and unit coordinates, gives
-an isomorphism from the native right adjoint at the unit to the native Tate object. -/
-theorem nonempty_shriekRightAdjoint_obj_iso_of_unitBaseChange
-    [SmoothOfRelativeDimension d f]
-    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ J)
-    (e : (CondensedRing.boundedConstructibleUpperStarOfMap l
-      (X := Over.mk (Y ↘ Spec (CommRingCat.of k₀)))
-      (Y := Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure))
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).obj
-        (CondensedRing.smoothTraceUnit l (Over.mk (Y ↘ Spec (CommRingCat.of k₀)))) ≅
-      CondensedRing.smoothTraceUnit l
-        (Over.mk ((Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure)))
-    [IsIso (CondensedRing.smoothUnitBaseChange l
-      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))
-      (CondensedRing.traceGeometricFiberOverMap
-        (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-          (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)))
-      (CondensedRing.descendedShriekGeometricExchange l
-        (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-          (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))) e.hom)] :
-    Nonempty (J.obj U ≅ T) := by
-  have : SmoothOfRelativeDimension d
-      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)).left :=
-    ‹SmoothOfRelativeDimension d f›
-  have ho := isIso_purityMapOfDescendedSmoothTrace_of_universal f d T U eT eU adj
-    (fun K ↦ CondensedRing.geometricFiberWeilSmoothTrace_weilUniversal_of_unitBaseChange l
-      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)) e d
-      ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)
-      (boundedConstructible_condensedCarrier K))
-  exact ⟨(asIso (purityMapOfDescendedSmoothTrace f d T U eT eU adj)).symm⟩
-
 end AlgebraicGeometry.WeilComplex

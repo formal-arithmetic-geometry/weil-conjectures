@@ -135,20 +135,6 @@ theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
   rw [weilShriekTraceFunction_of_genericallyHolds ℓ (shriekTraceFunctionGenericallyHolds ℓ k) eX eY
     hf ⟨p, hpe⟩ K m y, finsum_eq_sum_of_fintype]
 
-/-- **Curves**: the sheaf–function compatibility holds along a smooth morphism `f` of relative
-dimension one. By compactly supported base change to `ȳ`, it is the trace formula for the smooth
-curve `X_ȳ` over a finite field (blueprint `thm-trf-grothendieck-lefschetz-finite-ring`, the case
-of curves). It is a special case of `weilShriekTraceFunction`, whose proof only uses the relative
-affine line among the curves (`shriekTraceFunctionAt_overProdMap_polyAffineProj`). -/
-theorem shriekTraceFunctionAt_of_smoothOfRelativeDimension_one {X Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
-    [SmoothOfRelativeDimension 1 f.left] (he : ∃ m : ℕ, eX.pow (m + 1) = Iso.refl X) :
-    ShriekTraceFunctionAt ℓ eX eY hf :=
-  weilShriekTraceFunction_of_genericallyHolds ℓ (shriekTraceFunctionGenericallyHolds ℓ k) eX eY hf
-    he
-
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] (e : X ≅ X)
 

@@ -9,7 +9,8 @@ module
 public import Submission.WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 public import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Submission.WeilConjectures.AlgebraicGeometry.KernelTensorPullbackIsoExists
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Submission.WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalFunctorial
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

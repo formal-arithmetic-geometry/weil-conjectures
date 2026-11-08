@@ -217,16 +217,6 @@ lemma isLocallyNoetherian_isIntegrallyClosed_stalk_connectedSpace_of_isOpenImmer
     Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain j hY,
     Scheme.FiniteEtale.connectedSpace_of_isOpenImmersion j⟩
 
-/-- A nonempty open subscheme of a connected regular locally Noetherian scheme is again
-connected, regular and locally Noetherian. -/
-lemma isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion [IsLocallyNoetherian Y]
-    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] :
-    IsLocallyNoetherian Y' ∧ IsRegular Y' ∧ ConnectedSpace Y' := by
-  have := IsRegular.irreducibleSpace Y
-  refine ⟨isLocallyNoetherian_of_isOpenImmersion j,
-    ⟨isRegularLocalRing_stalk_of_etale j fun _ ↦ inferInstance⟩,
-    Scheme.FiniteEtale.connectedSpace_of_isOpenImmersion j⟩
-
 /-- **The fundamental group of a dense open of a normal scheme surjects**, in terms of paths:
 every automorphism of the fibre functor `F_{t ≫ j}` of `Y` is induced by an automorphism of the
 fibre functor `F_t` of the nonempty open `Y'` (blueprint `lem-wf-dense-open-pi1-surjective`,
@@ -259,15 +249,6 @@ lemma exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk [IsLocallyNoetherian
     ← ConcreteCategory.comp_apply ((pullbackFiberIso j t).hom.app P), Iso.hom_inv_id_app,
     ConcreteCategory.id_apply]
   rfl
-
-/-- **The fundamental group of a dense open of a regular scheme surjects**, in terms of paths
-(`AlgebraicGeometry.ProEtale.exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk`, regular
-schemes being normal). -/
-lemma exists_pullbackPathIso_eq_of_isRegular [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
-    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ :=
-  exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j t σ
 
 /-- A nonempty scheme has a geometric point with values in the algebraic closure of a field
 (of the residue field at any point). -/
@@ -312,17 +293,6 @@ theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stal
     ((ModuleCat.mono_iff_injective _).1 ((WeilCoefficients.toModuleCat l).map_mono
       ((stalkFunctor l t).map ((AdicSheaf.forget Y').map i))))
   exact ⟨G.obj, G.property, ⟨(ObjectProperty.ι _).mapIso e⟩⟩
-
-/-- **Lisse subsheaves extend over a dense open** of a connected regular Noetherian scheme:
-regular schemes are normal
-(`IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stalk`). -/
-theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y']
-    {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'}
-    (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
-    ∃ G : AdicSheaf l Y, IsAdicLisseSheaf G ∧ Nonempty ((j)^*ᵃ[l].obj G ≅ G') :=
-  IsAdicLisseSheaf.exists_upperStar_iso_of_mono_of_isIntegrallyClosed_stalk
-    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j hN hG' i
 
 /-- The direct image `j_* G'` of a lisse subsheaf `G'` of the restriction `j^* N` of a lisse
 sheaf `N` to a dense open `j : Y' ⟶ Y` of a connected normal Noetherian scheme is

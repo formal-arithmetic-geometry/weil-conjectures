@@ -57,15 +57,6 @@ noncomputable def upperStarSectionMap (a : S ⟶ T) {b : T ⟶ B} {t : S ⟶ B} 
   (Functor.Monoidal.εIso (a)^*⟦Λ⟧).hom ≫ (a)^*⟦Λ⟧.map w ≫
     (upperStarComp Λ a b).inv.app N ≫ eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj N) h)
 
-/-- The pullback of global sections only depends on the morphism up to equality. -/
-lemma upperStarSectionMap_congr {a a' : S ⟶ T} (e : a = a') {b : T ⟶ B} {t : S ⟶ B}
-    (h : a ≫ b = t) (h' : a' ≫ b = t)
-    (N : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B))
-    (w : 𝟙ₘ ⟶ (b)^*⟦Λ⟧.obj N) :
-    upperStarSectionMap Λ a h N w = upperStarSectionMap Λ a' h' N w := by
-  subst e
-  rfl
-
 /-- The unit comparison of the pullback along a composite: `ε_{a ≫ a'}` is `ε_a`, then
 `a^* ε_{a'}`, then the composition isomorphism. -/
 lemma εIso_hom_comp {R : Scheme.{u}} (a : S ⟶ T) (a' : T ⟶ R) :

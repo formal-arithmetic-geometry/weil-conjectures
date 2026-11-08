@@ -142,18 +142,6 @@ lemma localComparison_unit (V : C)
   (Adjunction.homEquiv_unit _ _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
 
 omit [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U] in
-lemma localComparison_unit_apply (V : C)
-    [(Over.post (X := V) U).IsContinuous (J.over V) (K.over (U.obj V))]
-    [(pushforward.{max u v w} a).IsRightAdjoint]
-    [(pushforward.{max u v w} (locMap a V)).IsRightAdjoint]
-    (L : SheafOfModules.{max u v w} R) (T : Over V) (m : L.val.obj (op T.left)) :
-    (localComparison a V L).val.app (op ((Over.post U).obj T))
-      (((pullbackPushforwardAdjunction (locMap a V)).unit.app (L.over V)).val.app
-        (op T) m) =
-      ((pullbackPushforwardAdjunction a).unit.app L).val.app (op T.left) m :=
-  congrArg (fun f ↦ f.val.app (op T) m) (localComparison_unit a V L)
-
-omit [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U] in
 lemma local_push_map_apply {A B : SheafOfModules.{max u v w} S}
     (f : A ⟶ B) (X : Cᵒᵖ) (x : A.val.obj (op (U.obj X.unop))) :
     (((pushforward a).map f).val.app X).hom x =

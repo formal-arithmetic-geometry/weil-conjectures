@@ -181,31 +181,6 @@ theorem isPerfect_ihom_rightDerivedGlobalSections [QuasiCompact aX]
       (𝟙_ _)).IsPerfect :=
   (isPerfect_rightDerivedGlobalSections Λ aX K hK).ihom_unit
 
-/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the finite
-stage `Λ = A_{E,n}`.
-
-Let `Λ` be a finite ring whose exponent is invertible in the separably closed field `k`, let `X`
-be separated of finite type over `k` (neither proper nor smooth) and `K ∈ Dctf(X, Λ)`. Then the
-four complexes `RΓ(X, K)`, `RΓ_c(X, K)`, `RΓ(X, K)^∨` and `RΓ_c(X, K)^∨` are perfect point
-complexes: bounded complexes of finite projective `Λ`-modules up to quasi-isomorphism. For
-proper `X` the two cases are identified by
-`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsIsoOfIsProper`.
-
-The explicit Tor amplitude `[a, b + 2d]` of the blueprint is not recorded. -/
-theorem isPerfect_globalSections [QuasiCompact aX]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
-      ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect ∧
-      ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
-        (𝟙_ _)).IsPerfect ∧
-      ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
-        (𝟙_ _)).IsPerfect :=
-  ⟨isPerfect_rightDerivedGlobalSections Λ aX K hK,
-    isPerfect_compactlySupportedGlobalSections Λ aX K hK,
-    isPerfect_ihom_rightDerivedGlobalSections Λ aX K hK,
-    isPerfect_ihom_compactlySupportedGlobalSections Λ aX K hK⟩
-
 end Finite
 
 section Integral
@@ -588,51 +563,9 @@ theorem rationalHomology_globalSections [QuasiCompact aX] (hI : I.IsPrincipal)
       hc).tensor_homology E
   · exact (isPerfect_ihom_rightDerivedGlobalSections_integral aX hI K hK).tensor_homology E
 
-/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the integral
-stage `Λ = 𝒪_E`.
-
-In the situation of `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`
-(`Λ` a complete Noetherian domain for a principal ideal `I` with finite residue ring of exponent
-invertible in `k`, and `K ∈ D^b_c(X, Λ)`), the four complexes `RΓ(X, K)`, `RΓ_c(X, K)` and their
-duals are perfect complexes of `Λ`-modules. Here `RΓ_c(X, K)` is the integral compactly supported
-cohomology `RΓ(Spec k, c.pt)`, for `c` a homotopy limit cone of the tower of reductions of the
-étale `Ra_! K`. The field stage `E` is `AlgebraicGeometry.Etale.rationalHomology_globalSections`. -/
-theorem isPerfect_globalSections_integral [QuasiCompact aX]
-    (hI : I.IsPrincipal)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K)
-    (c : Cone (_root_.DerivedCategory.derivedCompletionDiagram (Spec (.of k)).smallEtaleTopology
-      I ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)))
-    (hc : Pretriangulated.IsHomotopyLimit c) :
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj c.pt).IsPerfect ∧
-      ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
-        (𝟙_ _)).IsPerfect ∧
-      ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj c.pt)).obj
-        (𝟙_ _)).IsPerfect :=
-  ⟨isPerfect_rightDerivedGlobalSections_integral aX hI K hK,
-    isPerfect_compactlySupportedGlobalSections_integral aX hI K hK c hc,
-    isPerfect_ihom_rightDerivedGlobalSections_integral aX hI K hK,
-    isPerfect_ihom_compactlySupportedGlobalSections_integral aX hI K hK c hc⟩
-
 end Integral
 
 end Etale
-
-/-- A module over `ULift ℚ̄_ℓ` whose underlying `ℚ̄_ℓ`-vector space is finite dimensional is a
-finite module. -/
-lemma WeilCoefficients.finite_of_finiteDimensional (l : ℕ) [Fact l.Prime]
-    (M : WeilCoefficients.{u} l) [h : FiniteDimensional (PadicAlgCl l) ((toModuleCat l).obj M)] :
-    Module.Finite (ULift.{u + 1} (PadicAlgCl l)) M := by
-  obtain ⟨s, hs⟩ := h.fg_top
-  refine ⟨⟨s, eq_top_iff.2 ?_⟩⟩
-  rintro x -
-  have hx : x ∈ Submodule.span (PadicAlgCl l) (s : Set ((toModuleCat l).obj M)) := hs ▸ trivial
-  induction hx using Submodule.span_induction with
-  | mem y hy => exact Submodule.subset_span hy
-  | zero => exact zero_mem _
-  | add _ _ _ _ h₁ h₂ => exact add_mem h₁ h₂
-  | smul c y _ hy => exact Submodule.smul_mem _ (ULift.up c) hy
 
 namespace ProEtale
 
@@ -650,41 +583,6 @@ instance preservesFiniteColimits_Γ_of_isAlgClosed :
   have h' := (Functor.preservesFiniteColimits_tfae
     (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 1 4
   exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
-
-/-- Over an algebraically closed field `K`: for `M ∈ D^b_c(Spec K, ℚ̄_ℓ)` the derived global
-sections of the underlying complex of sheaves of `ℚ̄_ℓ`-modules form a perfect complex. The
-global sections functor is exact, so `Hⁿ(RΓ(Spec K, M)) = Γ(Spec K, Hⁿ(M))`, which vanishes
-outside the amplitude of `M` and is finite dimensional, `Hⁿ(M)` being constructible
-(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.finiteDimensional_globalSections`). -/
-theorem isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed
-    (M : _root_.DerivedCategory (AdicSheaf l (Spec (.of K))))
-    (hM : DerivedCategory.boundedAdicConstructible l _ M) :
-    ((rightDerivedGlobalSections (WeilCoefficients.{u} l) (Spec (.of K))).obj
-      ((AdicSheaf.forget _).mapDerivedCategory.obj M)).IsPerfect := by
-  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hM
-  have e (n : ℤ) : (_root_.DerivedCategory.homologyFunctor _ n).obj
-      ((rightDerivedGlobalSections (WeilCoefficients.{u} l) (Spec (.of K))).obj
-        ((AdicSheaf.forget _).mapDerivedCategory.obj M)) ≅
-      (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).obj
-        ((_root_.DerivedCategory.homologyFunctor _ n).obj M).X :=
-    (Functor.rightDerivedFunctorHomologyFunctorIso _ n).symm.app _ ≪≫
-      (Sheaf.Γ _ _).mapIso
-        (((AdicSheaf.forget _).mapDerivedCategoryHomologyFunctorIso n).app M).symm
-  rw [_root_.DerivedCategory.isPerfect_iff]
-  refine ⟨⟨a, b, ?_, ?_⟩, fun n ↦ ?_⟩
-  · rw [_root_.DerivedCategory.isGE_iff]
-    intro n hn
-    exact (Functor.map_isZero _ (Functor.map_isZero (AdicSheaf.forget _)
-      ((_root_.DerivedCategory.isGE_iff M a).1 ha n hn))).of_iso (e n)
-  · rw [_root_.DerivedCategory.isLE_iff]
-    intro n hn
-    exact (Functor.map_isZero _ (Functor.map_isZero (AdicSheaf.forget _)
-      ((_root_.DerivedCategory.isLE_iff M b).1 hb n hn))).of_iso (e n)
-  · have := IsAdicConstructibleSheaf.finiteDimensional_globalSections (hc n)
-    have := WeilCoefficients.finite_of_finiteDimensional l
-      ((Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).obj
-        ((_root_.DerivedCategory.homologyFunctor _ n).obj M).X)
-    exact Module.Finite.equiv (e n).toLinearEquiv.symm
 
 end Point
 

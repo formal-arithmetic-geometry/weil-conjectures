@@ -128,18 +128,6 @@ instance isIso_relativeIterateFrobenius [WeaklyEtale v] :
     IsIso (relativeIterateFrobenius hp hX n v) :=
   WeaklyEtale.isIso_of_isUniversalHomeomorphism _
 
-/-- The relative Frobenius is natural in `V`: for a morphism `g : V ⟶ W` over `X`, the square
-formed with the base change of `g` along `F_X` commutes. -/
-@[reassoc]
-lemma relativeIterateFrobenius_naturality {W : Scheme.{u}} (w : W ⟶ X) (g : V ⟶ W)
-    (h : g ≫ w = v) :
-    relativeIterateFrobenius hp hX n v ≫
-        Limits.pullback.map _ _ _ _ g (𝟙 X) (𝟙 X) (by simp [h]) (by simp) =
-      g ≫ relativeIterateFrobenius hp hX n w := by
-  apply Limits.pullback.hom_ext
-  · simpa using (comp_iterateFrobenius hp g _ _ n).symm
-  · simp [h]
-
 end RelativeFrobenius
 
 end AlgebraicGeometry.Scheme

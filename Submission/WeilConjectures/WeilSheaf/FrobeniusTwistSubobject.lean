@@ -214,21 +214,6 @@ theorem stalkSubspace_eq_adicStalkSubspace
     F.stalkSubspace t P = adicStalkSubspace t P :=
   rfl
 
-/-- The stalk of the whole sheaf is the whole stalk. -/
-theorem stalkSubspace_top
-    (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    F.stalkSubspace t ⊤ = ⊤ :=
-  adicStalkSubspace_top t _
-
-/-- If finitely many subsheaves span `F̄`, their stalks span the stalk of `F`: the stalk functor
-is exact. -/
-theorem iSup_stalkSubspace_eq_top
-    (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    {M : ℕ} (Q : Fin M → Subobject F.obj.carrier) (hQ : (Finset.univ : Finset (Fin M)).sup Q = ⊤) :
-    ⨆ n, F.stalkSubspace t (Q n) = ⊤ := by
-  rw [← adicStalkSubspace_top t F.obj.carrier, ← hQ, adicStalkSubspace_finset_sup]
-  simp [stalkSubspace_eq_adicStalkSubspace]
-
 /-- The identification `A_{s ≫ e} ≅ (e^* A)_s ≅ ((e⁻¹)_* A)_s` of geometric stalks of an `ℓ`-adic
 sheaf `A`, for an automorphism `e` of the geometric fiber. -/
 noncomputable def stalkLowerStarInvIso
@@ -442,56 +427,6 @@ lemma globalSectionsTransport_frobeniusPowStr_comm' {s s' : Spec (.of (Algebraic
     F.globalSectionsTransport_frobeniusPowStr_comp' j m hg hs' rfl h₂]
   exact F.globalSectionsTransport_frobeniusPowStr_congr (Nat.add_comm m j) hcomm h₁ h₂
 
-/-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}` (the definition, stated separately so
-that the kernel checks the unfolding in isolation). -/
-private lemma stalkAt_frobenius_eq_linearEquivOfIso
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso
-      ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
-        F.stalkObjFrobeniusPowIso m s) :=
-  rfl
-
-/-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}`, applied to a vector. -/
-private lemma stalkAt_frobenius_apply_eq_toModuleCat_map
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
-    (F.stalkAt s m hs).frobenius x = ((WeilCoefficients.toModuleCat l).map
-      ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
-        F.stalkObjFrobeniusPowIso m s).hom).hom x :=
-  (LinearEquiv.congr_fun (F.stalkAt_frobenius_eq_linearEquivOfIso s m hs) x).trans
-    (WeilCoefficients.linearEquivOfIso_apply_eq_toModuleCat_map _ x)
-
-/-- A morphism of stalks `F_s ⟶ F_{s'}` which is the transport along a square `g ≫ s = s' ≫ Frʲ`
-intertwines the Frobenius relative to `𝔽_{qᵐ}`. -/
-lemma toModuleCat_map_frobenius_stalkAt_of_eq
-    {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {g : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))} {j m : ℕ}
-    (hg : g ≫ s = s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ j).hom)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s')
-    (hcomm : g ≫ (specGeometricFrobenius k₀ ^ m).hom = (specGeometricFrobenius k₀ ^ m).hom ≫ g)
-    (f : F.stalkObj s ⟶ F.stalkObj s')
-    (hf : f = ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j))
-    (v : (F.stalkAt s m hs).carrier) :
-    ((WeilCoefficients.toModuleCat l).map f).hom ((F.stalkAt s m hs).frobenius v) =
-      (F.stalkAt s' m hs').frobenius (((WeilCoefficients.toModuleCat l).map f).hom v) := by
-  have hA : ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
-      F.stalkObjFrobeniusPowIso m s).hom ≫ f = f ≫
-      ((F.stalkObjSpecFrobeniusPowIso m s').symm ≪≫ eqToIso (congrArg F.stalkObj hs'.symm) ≪≫
-        F.stalkObjFrobeniusPowIso m s').hom := by
-    rw [F.stalkAt_frobenius_hom_eq_globalSectionsTransport s m hs,
-      F.stalkAt_frobenius_hom_eq_globalSectionsTransport s' m hs', hf]
-    exact F.globalSectionsTransport_frobeniusPowStr_comm' j m hg hs.symm hs'.symm hcomm
-  have hB := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) hA
-  simp only [Functor.map_comp, ModuleCat.hom_comp] at hB
-  exact (congrArg _ (F.stalkAt_frobenius_apply_eq_toModuleCat_map s m hs v)).trans
-    (hB.trans (F.stalkAt_frobenius_apply_eq_toModuleCat_map s' m hs' _).symm)
-
 /-- The inverse of the reparametrisation `F_{σᵃ ≫ s} ≅ F_s` is the transport along the square
 `σᵃ ≫ s = (σᵃ ≫ s) ≫ Fr⁰` and the `0`-th iterate of the Weil structure. -/
 lemma stalkObjSpecFrobeniusPowIso_inv_eq_globalSectionsTransport (a : ℕ)
@@ -509,58 +444,6 @@ lemma stalkObjSpecFrobeniusPowIso_inv_eq_globalSectionsTransport (a : ℕ)
     ProEtale.upperStarComp_id_right_hom_app,
     ProEtale.upperStarCongr_hom_app_comp_hom_app _ _ _ rfl]
   simp [stalkObjSpecFrobeniusPowIso, ProEtale.upperStarCongr]
-
-/-- The identification `F_{t ≫ Frᵃ} ≅ F_t` induced by `φ_a` intertwines the Frobenius relative to
-`𝔽_{q^N}` at the two geometric points. -/
-theorem stalkObjFrobeniusPowIso_frobenius
-    {t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {N : ℕ} (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-      (specGeometricFrobenius k₀ ^ N).hom ≫ t) (a : ℕ)
-    (ht' : (t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom) ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-        (specGeometricFrobenius k₀ ^ N).hom ≫
-          t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom)
-    (v : (F.stalkAt _ N ht').carrier) :
-    WeilCoefficients.linearEquivOfIso (F.stalkObjFrobeniusPowIso a t)
-        ((F.stalkAt _ N ht').frobenius v) =
-      (F.stalkAt t N ht).frobenius
-        (WeilCoefficients.linearEquivOfIso (F.stalkObjFrobeniusPowIso a t) v) :=
-  (WeilCoefficients.linearEquivOfIso_apply_eq_toModuleCat_map _ _).trans
-    ((F.toModuleCat_map_frobenius_stalkAt_of_eq
-      (s := t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom) (s' := t)
-      (Category.id_comp _) ht' ht (by simp) _
-      (F.stalkObjFrobeniusPowIso_hom_eq_globalSectionsTransport a t (Category.id_comp _)) v).trans
-        (congrArg _ (WeilCoefficients.linearEquivOfIso_apply_eq_toModuleCat_map _ v).symm))
-
-/-- The reparametrisation `F_{σᵃ ≫ t} ≅ F_t` intertwines the Frobenius relative to `𝔽_{q^N}`. -/
-theorem stalkObjSpecFrobeniusPowIso_frobenius
-    {t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
-    {N : ℕ} (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-      (specGeometricFrobenius k₀ ^ N).hom ≫ t) (a : ℕ)
-    (ht' : ((specGeometricFrobenius k₀ ^ a).hom ≫ t) ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-        (specGeometricFrobenius k₀ ^ N).hom ≫ (specGeometricFrobenius k₀ ^ a).hom ≫ t)
-    (v : (F.stalkAt _ N ht').carrier) :
-    WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t)
-        ((F.stalkAt _ N ht').frobenius v) =
-      (F.stalkAt t N ht).frobenius
-        (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t) v) := by
-  have h₀ : (specGeometricFrobenius k₀ ^ a).hom ≫ t = ((specGeometricFrobenius k₀ ^ a).hom ≫ t) ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).hom := by
-    rw [pow_zero]
-    exact (Category.comp_id _).symm
-  have hcomm : (specGeometricFrobenius k₀ ^ a).hom ≫ (specGeometricFrobenius k₀ ^ N).hom =
-      (specGeometricFrobenius k₀ ^ N).hom ≫ (specGeometricFrobenius k₀ ^ a).hom := by
-    rw [CategoryTheory.Aut.pow_hom_comp_pow_hom, CategoryTheory.Aut.pow_hom_comp_pow_hom,
-      Nat.add_comm]
-  have key := F.toModuleCat_map_frobenius_stalkAt_of_eq h₀ ht ht' hcomm _
-    (F.stalkObjSpecFrobeniusPowIso_inv_eq_globalSectionsTransport a t h₀)
-    (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t) v)
-  apply (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t)).symm.injective
-  rw [LinearEquiv.symm_apply_apply]
-  have hv :=
-    (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t)).symm_apply_apply v
-  exact (key.trans (congrArg _ hv)).symm
 
 /-- A subsheaf which is an irreducible local system has a nonzero stalk at every geometric point,
 when the geometric fiber is connected, regular and locally Noetherian. -/

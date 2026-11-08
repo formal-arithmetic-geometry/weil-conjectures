@@ -146,8 +146,4 @@ lemma adicSheafEquivCondensedModTensorUnitIso_hom_hom :
     (adicSheafEquivCondensedModTensorUnitIso l X).hom.hom =
       (condensedRingObjIsoForgetAb l X).inv := rfl
 
-lemma adicSheafEquivCondensedModTensorUnitIso_inv_hom :
-    (adicSheafEquivCondensedModTensorUnitIso l X).inv.hom =
-      (condensedRingObjIsoForgetAb l X).hom := rfl
-
 end AlgebraicGeometry.ProEtale

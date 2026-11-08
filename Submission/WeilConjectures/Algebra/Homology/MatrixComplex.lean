@@ -66,9 +66,6 @@ noncomputable def complex : CochainComplex (ModuleCat.{u} S) ℤ :=
       simp only [ModuleCat.hom_comp, ModuleCat.hom_ofHom, ← Matrix.toLin'_mul, M.d_mul_d,
         map_zero, ModuleCat.hom_zero]
 
-/-- The terms of the complex of a matrix complex. -/
-lemma complex_X (i : ℤ) : M.complex.X i = ModuleCat.of S (Fin (r i) → S) := rfl
-
 /-- The differentials of the complex of a matrix complex. -/
 lemma complex_d (i : ℤ) :
     M.complex.d i (i + 1) = ModuleCat.ofHom (Matrix.toLin' (M.d i)) :=
@@ -174,12 +171,6 @@ lemma toMatrix_comp (g : M.complex ⟶ N.complex) (g' : N.complex ⟶ P.complex)
 /-- The matrices of the identity are identity matrices. -/
 lemma toMatrix_id (i : ℤ) : toMatrix (𝟙 M.complex) i = 1 := by
   rw [toMatrix, HomologicalComplex.id_f, ModuleCat.hom_id, LinearMap.toMatrix'_id]
-
-/-- The matrices of a sum are the sums of the matrices. -/
-lemma toMatrix_add (g g' : M.complex ⟶ N.complex) (i : ℤ) :
-    toMatrix (g + g') i = toMatrix g i + toMatrix g' i := by
-  rw [toMatrix, HomologicalComplex.add_f_apply, ModuleCat.hom_add, map_add]
-  rfl
 
 /-- Chain maps between matrix complexes are determined by their matrices. -/
 lemma toMatrix_injective {g g' : M.complex ⟶ N.complex} (h : ∀ i, toMatrix g i = toMatrix g' i) :

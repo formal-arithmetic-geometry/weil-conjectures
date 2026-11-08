@@ -378,24 +378,6 @@ def ordinaryComplexTensorIsoForSite
         (curriedTensor _) :=
   (Classical.choice (ordinaryTensorIsoForSite_total J R P Q)).iso
 
-/-- The generic total map retains every normalized summand equation.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison).
-Proof: unfold the generic choice and take the summand specification of the
-existence theorem. The choice is made before specializing the site or coefficients. -/
-theorem ordinaryComplexTensorIsoForSite_summand
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ) :
-    ∀ (p q n : ℤ) (h : p + q = n),
-        (sectionModuleFunctor.{u + 1, u + 1, u} J R).map
-          (CochainComplex.ιMapBifunctor P Q (curriedTensor _) p q n h) ≫
-            (ordinaryComplexTensorIsoForSite J R P Q).hom.f n =
-        (ordinaryTensorIsoForSite J R (P.X p) (Q.X q)).hom ≫
-          CochainComplex.ιMapBifunctor
-            (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj P)
-            (((sectionModuleFunctor.{u + 1, u + 1, u} J R).mapHomologicalComplex (.up ℤ)).obj Q)
-            (curriedTensor _) p q n h := by
-  unfold ordinaryComplexTensorIsoForSite
-  exact (Classical.choice (ordinaryTensorIsoForSite_total J R P Q)).summand
-
 end OrdinaryAtSite
 
 end GenericComparisonAPI

@@ -40,7 +40,7 @@ public import Submission.WeilConjectures.ProEtaleCoefficients.ConnectedComponent
 public import Submission.WeilConjectures.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-public import Submission.WeilConjectures.CategoryTheory.Grothendieck.GrothendieckTopos
+public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Restrict

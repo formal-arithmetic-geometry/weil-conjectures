@@ -243,11 +243,6 @@ lemma strIterate_succ (K : IsoAlgebra F) (n : ℕ) :
     K.strIterate (n + 1) = F.mapIso (K.strIterate n) ≪≫ K.str :=
   rfl
 
-@[simp]
-lemma strIterate_one (K : IsoAlgebra F) : K.strIterate 1 = K.str := by
-  ext
-  simp
-
 
 section Map
 
@@ -330,11 +325,6 @@ lemma prod_obj_carrier (KL : IsoAlgebra F₁ × IsoAlgebra F₂) :
     (prod.obj KL).carrier = (KL.1.carrier, KL.2.carrier) :=
   rfl
 
-@[simp]
-lemma prod_obj_str (KL : IsoAlgebra F₁ × IsoAlgebra F₂) :
-    (prod.obj KL).str = KL.1.str.prod KL.2.str :=
-  mk_str _ _
-
 variable {E : Type*} [Category* E] {G : E ⥤ E} (B : C ⥤ D ⥤ E)
 
 /-- Transport of algebras with invertible structure morphism along a bifunctor
@@ -367,27 +357,6 @@ end Map₂
 
 section Op
 
-/-- An algebra with invertible structure morphism `(a, Φ : F a ≅ a)` of `F` gives an algebra
-with invertible structure morphism of `F.op` on `op a`, with structure isomorphism the opposite
-of `Φ⁻¹ : a ≅ F a`. This is the contravariant variable of a transport along a bifunctor such as
-an internal hom: the structure isomorphism enters through its inverse. -/
-noncomputable def opFunctor : (IsoAlgebra F)ᵒᵖ ⥤ IsoAlgebra F.op where
-  obj K := mk (Opposite.op K.unop.carrier) K.unop.str.symm.op
-  map {K K'} φ := ObjectProperty.homMk
-    { f := φ.unop.hom.f.op
-      h := by
-        apply Quiver.Hom.unop_inj
-        have h : F.map φ.unop.hom.f ≫ K.unop.str.hom = K'.unop.str.hom ≫ φ.unop.hom.f :=
-          φ.unop.hom.h
-        change (K'.unop.str.inv ≫ F.map φ.unop.hom.f) = φ.unop.hom.f ≫ K.unop.str.inv
-        rw [Iso.inv_comp_eq, ← Category.assoc, ← h, Category.assoc, Iso.hom_inv_id,
-          Category.comp_id] }
-
-
-@[simp]
-lemma opFunctor_obj_str (K : (IsoAlgebra F)ᵒᵖ) :
-    (opFunctor.obj K).str = K.unop.str.symm.op :=
-  mk_str _ _
 
 end Op
 

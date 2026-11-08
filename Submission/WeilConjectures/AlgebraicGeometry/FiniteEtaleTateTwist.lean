@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Submission.WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 

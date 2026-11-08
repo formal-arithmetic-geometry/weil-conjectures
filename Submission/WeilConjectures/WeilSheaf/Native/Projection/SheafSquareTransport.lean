@@ -47,16 +47,6 @@ lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app
       b.inv.app M.carrier :=
   Endofunctor.IsoAlgebra.isoHComp_forget_symm_hom_app e b.symm M
 
-/-- Whole natural-transformation form of the inverse-spelled forgetting identity. -/
-lemma Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom
-    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
-    {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L)
-    {T : C ⥤ A} {R : A ⥤ B} {V : D ⥤ B} (b : L ⋙ V ≅ T ⋙ R) :
-    (Functor.isoHComp (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso e).symm b.symm).hom =
-      Functor.whiskerLeft (Endofunctor.IsoAlgebra.forget F) b.inv := by
-  ext M
-  exact Endofunctor.IsoAlgebra.isoHComp_forget_symm_inv_hom_app e b M
-
 /-- Rotate an invertible tensor comparison square to the opposite orientation. -/
 lemma tensorSquare_rotate {C : Type*} [Category C] [MonoidalCategory C]
     {W W' X Y A A' B B' : C} (b : W ≅ W') (a : W ≅ X) (u : X ⟶ Y)
@@ -120,26 +110,6 @@ lemma PullTensorInverseSquare.rotate
     PullTensorSquare P U V G TC TD mu nY nZ a M N :=
   tensorSquare_rotate_components P U V G TC TD mu nY nZ a M N
     (Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N)) h
-
-/-- Substitute the six sides of the inverse square before specializing its objects. -/
-lemma PullTensorInverseSquare.of_components
-    (s₀ : G.obj (V.obj M ⊗ V.obj N) ⟶ G.obj (V.obj (TC.obj (M, N))))
-    (s₁ : G.obj (V.obj (TC.obj (M, N))) ⟶ U.obj (P.obj (TC.obj (M, N))))
-    (s₂ : U.obj (P.obj (TC.obj (M, N))) ⟶ U.obj (TD.obj (P.obj M, P.obj N)))
-    (t₀ : G.obj (V.obj M ⊗ V.obj N) ⟶ G.obj (V.obj M) ⊗ G.obj (V.obj N))
-    (t₁ : G.obj (V.obj M) ⊗ G.obj (V.obj N) ⟶ U.obj (P.obj M) ⊗ U.obj (P.obj N))
-    (t₂ : U.obj (P.obj M) ⊗ U.obj (P.obj N) ⟶ U.obj (TD.obj (P.obj M, P.obj N)))
-    (hs₀ : G.map (nY.inv.app (M, N)) = s₀)
-    (hs₁ : a.hom.app (TC.obj (M, N)) = s₁)
-    (hs₂ : U.map (mu.hom.app (M, N)) = s₂)
-    (ht₀ : Functor.OplaxMonoidal.δ G (V.obj M) (V.obj N) = t₀)
-    (ht₁ : a.hom.app M ⊗ₘ a.hom.app N = t₁)
-    (ht₂ : nZ.inv.app (P.obj M, P.obj N) = t₂)
-    (h : s₀ ≫ s₁ ≫ s₂ = t₀ ≫ t₁ ≫ t₂) :
-    PullTensorInverseSquare P U V G TC TD mu nY nZ a M N := by
-  unfold PullTensorInverseSquare
-  rw [hs₀, hs₁, hs₂, ht₀, ht₁, ht₂]
-  exact h
 
 end SquarePredicates
 

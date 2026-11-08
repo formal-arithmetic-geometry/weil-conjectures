@@ -11,7 +11,11 @@ public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
 public import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 public import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
-public import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.RingTheory.Unramified.Finite
+public import Mathlib.RingTheory.Unramified.Field
+public import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleLimitDescentGeneral
 import Mathlib.CategoryTheory.Presentable.Directed
@@ -300,15 +304,6 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
 section Auxiliary
 
 /-! ### Auxiliary lemmas -/
-
-/-- The case of `AlgebraicGeometry.Etale.exists_isNoetherian_upperStar_iso` where `U` is already
-Noetherian: take `U' = U` and `ν = 𝟙 U`. This is the trivial end of the Noetherian approximation;
-the general case needs étale sheaves to descend along a limit `U = lim Uᵢ` (Stacks 01ZA). -/
-theorem Etale.exists_isNoetherian_upperStar_iso_of_isNoetherian {U : Scheme.{u}} [IsNoetherian U]
-    (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C] :
-    ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
-  ⟨U, 𝟙 U, C, inferInstance, inferInstance, ⟨(Etale.upperStarId _ U).app C⟩⟩
 
 /-- **Descent of a constructible sheaf to a Noetherian scheme.** A constructible sheaf of
 `Λ`-modules on a quasi-compact quasi-separated scheme `U`, for `Λ` noetherian, is the pullback

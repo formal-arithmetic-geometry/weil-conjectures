@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
-public import Submission.WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.Algebra.Module.Submodule.Defs
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

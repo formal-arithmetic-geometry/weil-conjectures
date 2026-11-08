@@ -279,9 +279,6 @@ instance [K.IsStableUnderSup] : IsDirected (SCov K X) (· ≤ ·) where
     ⟨⟨U.presieve ⊔ V.presieve, K.sup_mem_coverings U.2 V.2⟩,
       le_sup_left (a := U.1), le_sup_right (a := U.1)⟩
 
-example [K.HasIsos] [K.IsStableUnderSup] : IsCofiltered (SCov K X)ᵒᵖ :=
-  inferInstance
-
 end SCov
 
 variable [∀ (X : C) (U : SCov K X), HasWidePullback _ _ U.zeroHypercover.f]

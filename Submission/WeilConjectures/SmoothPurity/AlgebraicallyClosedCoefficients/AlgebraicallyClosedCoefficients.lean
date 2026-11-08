@@ -123,29 +123,6 @@ section
 universe w₁ v₁ u₁
 variable {I : Type w₁} [Preorder I] [IsDirectedOrder I]
   {C : I → Type u₁} [∀ i, Category.{v₁} (C i)] (S : StageSystem C)
-private theorem stageRepresentatives (A B : S.PairCategory) :
-    (∀ f : A ⟶ B, ∃ n hA hB u, f = StageSystem.PairCategory.mkHom n hA hB u) ∧
-    (∀ (L M : {n : I // A.stage ≤ n ∧ B.stage ≤ n})
-      (f : (S.T L.property.1).obj A.obj ⟶ (S.T L.property.2).obj B.obj)
-      (g : (S.T M.property.1).obj A.obj ⟶ (S.T M.property.2).obj B.obj),
-      StageSystem.PairCategory.mkHom L.val L.property.1 L.property.2 f =
-          StageSystem.PairCategory.mkHom M.val M.property.1 M.property.2 g ↔
-        ∃ (N : {n : I // A.stage ≤ n ∧ B.stage ≤ n}) (hL : L ≤ N) (hM : M ≤ N),
-          S.tr hL f = S.tr hM g) := by
-  constructor
-  · intro f
-    induction f using StageSystem.PairCategory.hom_induction with
-    | h L hA hB f => exact ⟨L, hA, hB, f, rfl⟩
-  · intro L M f g
-    constructor
-    · intro e
-      obtain ⟨N, hL, hM, he⟩ :=
-        (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mp e
-      exact ⟨⟨N, L.property.1.trans hL, L.property.2.trans hL⟩, hL, hM, he⟩
-    · rintro ⟨N, hL, hM, he⟩
-      exact (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).mpr
-        ⟨N.val, hL, hM, he⟩
-
 end
 
 section
@@ -375,15 +352,6 @@ Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficie
 theorem associator_formula (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     associator D l hl Ω Y E L M h k = tensorAssociator D l hl Ω Y E L M h k :=
   (associator_specification D l hl Ω Y E L M h k).exists.choose_spec
-
-/-- The normalized scalar unit, transported through the coefficient identifications.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def unitor (E : Index l Ω) : transition D l hl Ω Y E E le_rfl ≅
-    𝟭 (Stage D l hl Ω Y E) :=
-  eqToIso (congrArg (rationalScalarExtension D l hl
-    (Coefficient.{u} l Ω E) Y (Coefficient.{u} l Ω E))
-    ((coefficientInclusion_laws l Ω).1 E)) ≪≫
-    rationalConstructibleScalarUnit l (Coefficient.{u} l Ω E) Y D hl
 
 /-- The coefficient fields form a directed order by the recorded compositum.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -767,37 +735,6 @@ theorem inclusion_additive (E : Index l Ω) : (inclusion E : Stage D l hl Ω Y E
     inferInstance
   exact additive_transport _ _ _ _ rfl preadditive_eq_native _ h
 
-/-- Every class has a finite representative, and equality is equality at a later stage.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: composita make each common-overfield index nonempty and directed. The normalized
-tensor unit and associator pentagon make transport an actual directed system. Apply
-Mathlib's directed-colimit representation and zero-exactness criteria to the difference
-of two representatives. This gives precisely equality after one further extension. -/
-theorem representatives (A B : Pair D l hl Ω Y) :
-    (∀ f : A ⟶ B, ∃ (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
-      (u : StageHom A B ⟨L, hA, hB⟩), f = ofHom A B L hA hB u) ∧
-    (∀ (L M : Common A B) (f : StageHom A B L) (g : StageHom A B M),
-      ofHom A B L.val L.property.1 L.property.2 f =
-          ofHom A B M.val M.property.1 M.property.2 g ↔
-        ∃ (N : Common A B) (hL : L ≤ N) (hM : M ≤ N),
-          transport A B L N hL f = transport A B M N hM g) := by
-  exact stageRepresentatives (stageSystem D l hl Ω Y) A B
-
-/-- Stagewise object shift, with the coefficient field unchanged.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def shiftPair (n : ℤ) (A : Pair D l hl Ω Y) : Pair D l hl Ω Y :=
-  ⟨A.stage, (shiftFunctor (Stage D l hl Ω Y A.stage) n).obj A.obj⟩
-
-/-- The shifted representative uses the prescribed scalar-extension shift comparison.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def shiftRepresentative (n : ℤ) (A B : Pair D l hl Ω Y)
-    (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
-    (f : StageHom A B ⟨L, hA, hB⟩) :
-    StageHom (shiftPair n A) (shiftPair n B) ⟨L, hA, hB⟩ :=
-  ((stageTransition D l hl Ω Y A.stage L hA).commShiftIso n).hom.app A.obj ≫
-    (shiftFunctor (Stage D l hl Ω Y L) n).map f ≫
-    ((stageTransition D l hl Ω Y B.stage L hB).commShiftIso n).inv.app B.obj
-
 /-- The stagewise shift with the representative formula of shift_exists.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
 noncomputable instance hasShift : HasShift (Pair D l hl Ω Y) ℤ :=
@@ -871,15 +808,6 @@ Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficie
 noncomputable instance inclusion_exact (E : Index l Ω) :
     (inclusion E : Stage D l hl Ω Y E ⥤ _).IsTriangulated :=
   (StageSystem.commonStage_verdier_existsUnique (stageSystem D l hl Ω Y)).exists.choose_spec.2.2 E
-
-/-- The triangle criterion, exposing the finite-field-of-definition clause.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: this is the distinguished-set clause of commonStage_verdier_existsUnique
-for the actual scalar-extension stage system. -/
-theorem distinguished_iff (T : Triangle (Pair D l hl Ω Y)) :
-    T ∈ distTriang (Pair D l hl Ω Y) ↔ Distinguished T := by
-  exact (StageSystem.commonStage_verdier_existsUnique
-    (stageSystem D l hl Ω Y)).exists.choose_spec.1 T
 
 end AlgebraicallyClosedCoefficients
 

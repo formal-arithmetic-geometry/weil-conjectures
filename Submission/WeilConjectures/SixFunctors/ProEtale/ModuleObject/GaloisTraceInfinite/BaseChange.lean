@@ -77,17 +77,6 @@ lemma baseChangeHom_app_left (s : Y' ⟶ Y) (hs : s ≫ g = g') (V : X.ProEt) :
       pullback.map V.hom g' V.hom g (𝟙 _) s (𝟙 _) (by simp) (by simp [hs]) :=
   rfl
 
-@[reassoc (attr := simp)]
-lemma baseChangeHom_app_left_fst (s : Y' ⟶ Y) (hs : s ≫ g = g') (V : X.ProEt) :
-    ((baseChangeHom g g' s hs).app V).left ≫ pullback.fst V.hom g = pullback.fst V.hom g' := by
-  simp
-
-@[reassoc (attr := simp)]
-lemma baseChangeHom_app_left_snd (s : Y' ⟶ Y) (hs : s ≫ g = g') (V : X.ProEt) :
-    ((baseChangeHom g g' s hs).app V).left ≫ pullback.snd V.hom g =
-      pullback.snd V.hom g' ≫ s := by
-  simp
-
 /-- The morphisms of base changes lie over the projections. -/
 @[reassoc (attr := simp)]
 lemma baseChangeHom_comp_baseChangeProj (s : Y' ⟶ Y) (hs : s ≫ g = g') :
@@ -112,11 +101,6 @@ lemma baseChangeHom_id : baseChangeHom g g (𝟙 Y) (by simp) = 𝟙 _ := by
 lemma baseChangeHom_congr {s t : Y' ⟶ Y} (hs : s ≫ g = g') (hst : s = t) :
     baseChangeHom g g' s hs = baseChangeHom g g' t (hst ▸ hs) := by
   subst hst
-  rfl
-
-/-- The action of an automorphism is a morphism of base changes. -/
-lemma baseChangeAction_eq_baseChangeHom (s : Y ⟶ Y) (hs : s ≫ g = g) :
-    baseChangeAction g s hs = baseChangeHom g g s hs :=
   rfl
 
 /-! ### The restriction model -/
@@ -165,13 +149,6 @@ lemma restrictionHom_app_hom (s : Y' ⟶ Y) (hs : s ≫ g = g')
     Functor.whiskerRight_id', NatTrans.id_app, Functor.op_obj, Functor.whiskerRight_app,
     NatTrans.op_app]
   erw [Category.id_comp, Category.comp_id]
-
-lemma restrictionHom_app_hom_app (s : Y' ⟶ Y) (hs : s ≫ g = g')
-    (H : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (V : X.ProEtᵒᵖ) :
-    ((restrictionHom g g' s hs).app H).hom.app V =
-      H.obj.map ((baseChangeHom g g' s hs).app V.unop).op := by
-  rw [restrictionHom_app_hom]
-  rfl
 
 /-- The restriction along `s` is compatible with the units: the projections `V ×_X Y ⟶ V` and
 `V ×_X Y' ⟶ V` are compatible with `s`. -/

@@ -9,7 +9,7 @@ public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetal
 public import Mathlib.CategoryTheory.Limits.Preserves.Limits
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Finite
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
-public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.MorphismProperty
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
@@ -448,12 +448,6 @@ instance isEquivalence_sheafPushforwardContinuous_toProEt {A : Type*} [Category*
     ((toProEt.{u} S).sheafPushforwardContinuous A
       (topology S) (ProEt.topology S)).IsEquivalence :=
   inferInstance
-
-/-- The restriction of sheafs on the pro-étale site to sheaf on the affine pro-étale site. -/
-noncomputable
-def sheafPushforward :
-    Sheaf (ProEt.topology S) A ⥤ Sheaf (AffineProEt.topology S) A :=
-  (toProEt S).sheafPushforwardContinuous _ _ _
 
 lemma _root_.AlgebraicGeometry.Scheme.OpenCover.exists_finite_restrictIndex_mem {X : Scheme.{u}}
     [CompactSpace X] (𝒰 : X.OpenCover) :

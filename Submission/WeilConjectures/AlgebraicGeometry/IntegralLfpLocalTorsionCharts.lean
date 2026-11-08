@@ -118,31 +118,6 @@ private noncomputable def finiteDiagonalCokernelIso
     apply (cancel_epi (cokernel.π (f i))).mp
     simp [a, b, q]
 
-private noncomputable def scalarImageBiprodIso
-    {C : Type*} [Category C] [Abelian C] (n : ℕ) (M T : C)
-    [Mono (n • 𝟙 M)] (hT : n • 𝟙 T = 0) :
-    image (n • 𝟙 (M ⊞ T)) ≅ M := by
-  let q : M ⊞ T ⟶ M := biprod.fst
-  let m : M ⟶ M ⊞ T := (n • 𝟙 M) ≫ biprod.inl
-  have : Epi q := by dsimp only [q]; infer_instance
-  have : Mono m := by dsimp only [m]; infer_instance
-  have : StrongEpi q := strongEpi_of_epi q
-  refine (image.isoStrongEpiMono q m ?_).symm
-  apply biprod.hom_ext <;> apply biprod.hom_ext'
-  · simp [q, m]
-  · simp [q, m]
-  · simp [q, m]
-  · simpa [q, m] using hT.symm
-
-private noncomputable def scalarCokernelBiprodIso
-    {C : Type*} [Category C] [Abelian C] (n : ℕ) (M T : C)
-    (hT : n • 𝟙 T = 0) :
-    cokernel (n • 𝟙 (M ⊞ T)) ≅ cokernel (n • 𝟙 M) ⊞ T := by
-  have he : n • 𝟙 (M ⊞ T) = biprod.map (n • 𝟙 M) (n • 𝟙 T) := by
-    ext <;> simp
-  exact cokernelIsoOfEq he ≪≫ diagonalCokernelIso _ _ ≪≫
-    biprod.mapIso (Iso.refl _) (cokernelIsoOfEq hT ≪≫ cokernelZeroIsoTarget)
-
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -724,18 +699,6 @@ private noncomputable def chartSetPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     infer_instance
   exact (sheafPullbackForgetIso (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)
     (Scheme.proEtaleBaseChange f) (forget Ab.{u + 1})).app M
-
-private noncomputable def chartConstantPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X) :
-    constantSheaf (Scheme.ProEt.topology X) (Type (u + 1)) ⋙
-      Scheme.proEtaleSheafInverseImage f (Type (u + 1)) ≅
-    constantSheaf (Scheme.ProEt.topology Y) (Type (u + 1)) := by
-  let G := Scheme.proEtaleBaseChange f
-  let hT := terminalIsTerminal (C := X.ProEt)
-  exact Functor.isoWhiskerLeft _
-      (Functor.sheafPullbackConstruction.sheafPullbackIso G (Type (u + 1))
-        (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)).symm ≪≫
-    G.constantSheafsheafPullbackIso (Type (u + 1))
-      (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y) hT (hT.isTerminalObj G)
 
 private abbrev ScalarChart {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]

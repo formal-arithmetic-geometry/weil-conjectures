@@ -56,12 +56,6 @@ noncomputable def fieldRingHom : ULift.{u + 1} Λ →+* ULift.{u + 1} Λ' :=
   (ULift.ringEquiv (R := Λ')).symm.toRingHom.comp
     ((e : Λ →+* Λ').comp (ULift.ringEquiv (R := Λ)).toRingHom)
 
-omit [IsUltrametricDist Λ] [IsUltrametricDist Λ'] [FiniteDimensional ℚ_[l] Λ'] in
-/-- The ring maps between the universe lifts compose. -/
-lemma fieldToAdicRingHom_comp_fieldRingHom (e' : Λ' →ₐ[ℚ_[l]] PadicAlgCl l) :
-    (fieldToAdicRingHom.{u} e').comp (fieldRingHom.{u} e) = fieldToAdicRingHom.{u} (e'.comp e) :=
-  rfl
-
 variable {e} (he : Continuous e) (hc : Continuous (algebraMap ℚ_[l] Λ))
 include he
 

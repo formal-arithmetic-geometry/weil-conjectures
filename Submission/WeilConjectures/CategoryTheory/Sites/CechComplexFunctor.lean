@@ -133,20 +133,6 @@ lemma cechAugmentation_d (P : Cᵒᵖ ⥤ A) :
     Preadditive.comp_zsmul, Preadditive.comp_zsmul, cechAugmentation_δ, cechAugmentation_δ]
   simp
 
-lemma cechComplexFunctor_map_f {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) (n : ℕ) :
-    ((cechComplexFunctor U).map φ).f n =
-      Limits.Pi.map (fun i ↦ φ.app (op (((FormalCoproduct.mk _ U).cech.obj (op ⦋n⦌)).obj i))) :=
-  rfl
-
-@[reassoc]
-lemma cechAugmentation_naturality {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) :
-    cechAugmentation U hT P ≫ ((cechComplexFunctor U).map φ).f 0 =
-      φ.app _ ≫ cechAugmentation U hT Q := by
-  refine Pi.hom_ext _ _ fun j ↦ ?_
-  rw [Category.assoc, cechComplexFunctor_map_f]
-  erw [Pi.map_π, Pi.lift_comp_π_assoc, Category.assoc, Pi.lift_comp_π]
-  exact φ.naturality _
-
 lemma map_cechAugmentation_comp (G : A ⥤ B) [G.Additive]
     [∀ J : Type w, PreservesLimitsOfShape (Discrete J) G] (P : Cᵒᵖ ⥤ A) :
     G.map (cechAugmentation U hT P) ≫ (cechComplexFunctorMapIso U G P).hom.f 0 =

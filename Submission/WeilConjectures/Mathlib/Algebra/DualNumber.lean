@@ -67,10 +67,6 @@ theorem scale_one : scale (1 : R) = AlgHom.id R R[ε] := by
   ext <;> simp
 
 
-@[simp]
-theorem fstHom_comp_scale (c : R) : (fstHom R R R).comp (scale c) = fstHom R R R := by
-  ext; simp
-
 section Derivation
 
 variable {K A : Type*} [CommRing K] [CommRing A] [Algebra K A]
@@ -186,84 +182,6 @@ def oneAddEps : R →+ Additive R[ε]ˣ where
 @[simp]
 theorem val_oneAddEps (g : R) : ((Additive.toMul (oneAddEps g) : R[ε]ˣ) : R[ε]) = 1 + inr g :=
   rfl
-
-/-- The `ε`-part `a⁻¹ b` of a unit `a + εb` of `R[ε]`, an additive homomorphism from the
-additively written group of units to `R`: it is a retraction of `DualNumber.oneAddEps`. -/
-def unitsRetract : Additive R[ε]ˣ →+ R where
-  toFun u := (((Additive.toMul u)⁻¹ : R[ε]ˣ) : R[ε]).fst * ((Additive.toMul u : R[ε]ˣ) : R[ε]).snd
-  map_zero' := by simp
-  map_add' u v := by
-    have hu : (((Additive.toMul u)⁻¹ : R[ε]ˣ) : R[ε]).fst *
-        ((Additive.toMul u : R[ε]ˣ) : R[ε]).fst = 1 := by
-      rw [← fst_mul, Units.inv_mul, fst_one]
-    have hv : (((Additive.toMul v)⁻¹ : R[ε]ˣ) : R[ε]).fst *
-        ((Additive.toMul v : R[ε]ˣ) : R[ε]).fst = 1 := by
-      rw [← fst_mul, Units.inv_mul, fst_one]
-    simp only [toMul_add, mul_inv_rev, Units.val_mul, fst_mul, snd_mul]
-    linear_combination
-      (((Additive.toMul u)⁻¹ : R[ε]ˣ) : R[ε]).fst * ((Additive.toMul u : R[ε]ˣ) : R[ε]).snd * hv +
-      (((Additive.toMul v)⁻¹ : R[ε]ˣ) : R[ε]).fst * ((Additive.toMul v : R[ε]ˣ) : R[ε]).snd * hu
-
-theorem unitsRetract_apply (u : Additive R[ε]ˣ) :
-    unitsRetract u =
-      (((Additive.toMul u)⁻¹ : R[ε]ˣ) : R[ε]).fst * ((Additive.toMul u : R[ε]ˣ) : R[ε]).snd :=
-  rfl
-
-@[simp]
-theorem unitsRetract_oneAddEps (g : R) : unitsRetract (oneAddEps g) = g := by
-  change (1 - inr g : R[ε]).fst * (1 + inr g : R[ε]).snd = g
-  simp
-
-/-- The reduction `a + εb ↦ a` of units, as an additive homomorphism. -/
-abbrev unitsFst : Additive R[ε]ˣ →+ Additive Rˣ :=
-  (Units.map (fstHom R R R).toMonoidHom).toAdditive
-
-/-- The inclusion `a ↦ a` of units of `R` into units of `R[ε]`, as an additive homomorphism. -/
-abbrev unitsInl : Additive Rˣ →+ Additive R[ε]ˣ :=
-  (Units.map (inlHom R R).toMonoidHom).toAdditive
-
-@[simp]
-theorem unitsFst_oneAddEps (g : R) : unitsFst (oneAddEps g) = 0 := by
-  refine Additive.toMul.injective (Units.ext ?_)
-  change (1 + inr g : R[ε]).fst = 1
-  simp
-
-@[simp]
-theorem unitsFst_unitsInl (a : Additive Rˣ) : unitsFst (unitsInl a) = a := by
-  refine Additive.toMul.injective (Units.ext ?_)
-  change (inl ((Additive.toMul a : Rˣ) : R) : R[ε]).fst = _
-  simp
-
-@[simp]
-theorem unitsRetract_unitsInl (a : Additive Rˣ) : unitsRetract (unitsInl a) = 0 := by
-  change (((Units.map (inlHom R R).toMonoidHom (Additive.toMul a))⁻¹ : R[ε]ˣ) : R[ε]).fst *
-    (inl ((Additive.toMul a : Rˣ) : R) : R[ε]).snd = 0
-  simp
-
-/-- Every unit `a + εb` of `R[ε]` is `(1 + ε a⁻¹ b) a`. -/
-theorem oneAddEps_unitsRetract_add_unitsInl_unitsFst (u : Additive R[ε]ˣ) :
-    oneAddEps (unitsRetract u) + unitsInl (unitsFst u) = u := by
-  refine Additive.toMul.injective (Units.ext ?_)
-  have hu : (((Additive.toMul u)⁻¹ : R[ε]ˣ) : R[ε]).fst *
-      ((Additive.toMul u : R[ε]ˣ) : R[ε]).fst = 1 := by
-    rw [← fst_mul, Units.inv_mul, fst_one]
-  change (1 + inr (unitsRetract u)) * inl ((Additive.toMul u : R[ε]ˣ) : R[ε]).fst =
-    ((Additive.toMul u : R[ε]ˣ) : R[ε])
-  rw [unitsRetract_apply]
-  ext
-  · simp
-  · simp only [snd_mul, fst_add, fst_one, fst_inr, add_zero, snd_inl, snd_add, snd_one,
-      snd_inr, zero_add, fst_inl]
-    linear_combination ((Additive.toMul u : R[ε]ˣ) : R[ε]).snd * hu
-
-/-- Rescaling the infinitesimal multiplies the `ε`-part of a unit. -/
-theorem unitsRetract_map_scale (c : R) (u : Additive R[ε]ˣ) :
-    unitsRetract ((Units.map (scale c).toMonoidHom).toAdditive u) = c * unitsRetract u := by
-  rw [unitsRetract_apply, unitsRetract_apply]
-  change (scale c (((Additive.toMul u)⁻¹ : R[ε]ˣ) : R[ε])).fst *
-    (scale c ((Additive.toMul u : R[ε]ˣ) : R[ε])).snd = _
-  rw [fst_scale, snd_scale]
-  ring
 
 end Units
 

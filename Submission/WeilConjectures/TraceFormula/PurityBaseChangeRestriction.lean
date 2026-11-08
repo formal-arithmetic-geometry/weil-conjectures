@@ -318,18 +318,4 @@ theorem isIso_upperStar_map_upperShriekBaseChange_iff {f : X ⟶ Y} {g : Y' ⟶ 
   exact isIso_upperStar_map_upperShriekBaseChange_iff_of_isPullback ℓ sq sqo
     (IsPullback.of_hasPullback (o ≫ f) g) (sq.lift_snd _ _ _) L
 
-/-- **The exceptional base change map at the unit and restriction to an open subscheme**
-(`isIso_upperStar_map_upperShriekBaseChange_iff` at `L = ℚ̄_ℓ`). -/
-theorem isIso_upperStar_map_upperShriekBaseChange_unit_iff {f : X ⟶ Y} {g : Y' ⟶ Y}
-    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g) (o : U ⟶ X)
-    [IsOpenImmersion o.left] :
-    IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (sq.lift (pullback.fst (o ≫ f) g ≫ o) (pullback.snd (o ≫ f) g)
-          (by rw [Category.assoc, pullback.condition]))).map
-        (upperShriekBaseChange ℓ sq
-          (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))) ↔
-      IsIso (upperShriekBaseChange ℓ (IsPullback.of_hasPullback (o ≫ f) g)
-        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
-  isIso_upperStar_map_upperShriekBaseChange_iff ℓ sq o _
-
 end AlgebraicGeometry.ProEtale.CondensedRing

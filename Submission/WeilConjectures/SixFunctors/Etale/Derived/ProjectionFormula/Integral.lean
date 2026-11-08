@@ -144,32 +144,6 @@ theorem hasProjectionFormula_of_isIso_reductionModIdeal_map (f : X ⟶ Y) [HasCo
   rw [hI] at hs ht hρ
   exact hasProjectionFormula_of_derivedComplete_of_isIso_reductionModIdeal hϖ f K L hs ht hρ
 
-/-- The quotients `𝒪_E ⧸ 𝔪_Eⁿ` are finite. -/
-lemma finite_quotient_maximalIdealShrink_pow (n : ℕ) :
-    Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ PadicAlgCl.maximalIdealShrink l E ^ n) :=
-  .of_equiv _ (Ideal.quotientEquiv (IsLocalRing.maximalIdeal (PadicAlgCl.integers l E) ^ n) _
-    (PadicAlgCl.shrinkRingEquiv l E)
-    (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow]; rfl)).toEquiv
-
-/-- **The derived completion inverts morphisms whose reduction is an isomorphism.** A morphism
-`u` of `D(X_ét, 𝒪_E)` whose reduction modulo `𝔪_E` is an isomorphism becomes an isomorphism in
-the integral stage `D_comp(X_ét, 𝒪_E)`: its cone `C` has `C ⊗ᴸ (𝒪_E/𝔪_E)_X = 0`, so `ϖ` acts
-invertibly on `C` (`AlgebraicGeometry.Etale.isIso_smul_id_of_isZero_reductionModIdeal`), and the
-derived completion inverts such morphisms. -/
-theorem isIso_completion_map_of_isIso_reductionModIdeal
-    {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌)} (u : M ⟶ N)
-    (hu : IsIso ((reductionModIdeal _ X (PadicAlgCl.maximalIdealShrink l E)).map u)) :
-    IsIso ((DerivedCategoryDerivedCompleteIntegral.completion X.smallEtaleTopology l E).map u) := by
-  obtain ⟨ϖ, hϖ, hI⟩ :=
-    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
-  obtain ⟨C, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle u
-  rw [hI] at hu
-  have hC : IsZero ((reductionModIdeal _ X (Ideal.span {ϖ})).obj C) :=
-    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
-      ((reductionModIdeal _ X (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
-  exact _root_.DerivedCategory.isIso_derivedCompletion_map _ hI hT
-    (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC)
-
 end Etale
 
 end AlgebraicGeometry

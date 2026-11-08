@@ -85,21 +85,6 @@ def isoPresheaf (F G : Sheaf J A) : Cᵒᵖ ⥤ Type _ where
     refine Iso.ext ?_
     exact ConcreteCategory.congr_hom ((sheafHom' F G).map_comp f g) e.hom
 
-/-- The isomorphisms underlying sections of `isoPresheaf`, as a morphism to `sheafHom'`. -/
-@[simps app]
-def isoPresheafToSheafHom' (F G : Sheaf J A) : isoPresheaf F G ⟶ sheafHom' F G where
-  app _ := ↾fun e ↦ e.hom
-
-/-- The restriction of an isomorphism has the restricted underlying morphism. -/
-lemma isoPresheaf_map_hom (F G : Sheaf J A) {X Y : Cᵒᵖ} (f : X ⟶ Y)
-    (e : (isoPresheaf F G).obj X) :
-    ((isoPresheaf F G).map f e).hom = (sheafHom' F G).map f e.hom := rfl
-
-/-- The restriction of an isomorphism has the restricted inverse. -/
-lemma isoPresheaf_map_inv (F G : Sheaf J A) {X Y : Cᵒᵖ} (f : X ⟶ Y)
-    (e : (isoPresheaf F G).obj X) :
-    ((isoPresheaf F G).map f e).inv = (sheafHom' G F).map f e.inv := rfl
-
 /-- Restriction of morphisms between restricted sheaves commutes with composition. -/
 lemma sheafHom'_map_comp (F G H : Sheaf J A) {X Y : Cᵒᵖ} (f : X ⟶ Y)
     (a : (sheafHom' F G).obj X) (b : (sheafHom' G H).obj X) :
@@ -176,12 +161,6 @@ def isoPairSubfunctor (r : F' ⟶ F) (g : G' ⟶ G) :
     have := congrArg ((J.overMapPullback A f.unop).map) hp
     simp only [Functor.map_comp] at this
     exact this
-
-/-- Membership in `isoPairSubfunctor` is the compatibility of the two isomorphisms. -/
-lemma mem_isoPairSubfunctor_iff (r : F' ⟶ F) (g : G' ⟶ G) {X : Cᵒᵖ}
-    (p : (FunctorToTypes.prod (isoPresheaf F' G') (isoPresheaf F G)).obj X) :
-    p ∈ (isoPairSubfunctor r g).obj X ↔ p.1.hom ≫ (J.overPullback A X.unop).map g =
-      (J.overPullback A X.unop).map r ≫ p.2.hom := Iff.rfl
 
 /-- The compatible pairs of isomorphisms form a sheaf. -/
 lemma isSheaf_isoPairSubfunctor (r : F' ⟶ F) (g : G' ⟶ G) :

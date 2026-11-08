@@ -46,9 +46,6 @@ subsets of `X` with `T_k ⊆ S` has length `k < n`. -/
 def DimLT (S : Set X) (n : ℕ) : Prop :=
   ∀ p : LTSeries (IrreducibleCloseds X), (p.last : Set X) ⊆ S → p.length < n
 
-lemma DimLT.mono {S T : Set X} {n : ℕ} (h : DimLT T n) (hST : S ⊆ T) : DimLT S n :=
-  fun p hp ↦ h p (hp.trans hST)
-
 
 lemma DimLT.union {S T : Set X} {n : ℕ} (hS : DimLT S n) (hT : DimLT T n) (hS' : IsClosed S)
     (hT' : IsClosed T) : DimLT (S ∪ T) n := fun p hp ↦ by

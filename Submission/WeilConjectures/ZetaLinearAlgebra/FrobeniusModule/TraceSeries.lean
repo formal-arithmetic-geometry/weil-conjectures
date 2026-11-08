@@ -61,19 +61,6 @@ variable {K : Type v} [Field K]
 noncomputable def traceSeries (M : FrobeniusModule.{u, v} K) : K⟦X⟧ :=
   M.frobeniusEnd.traceSeries
 
-/-- The `n`-th coefficient of the trace series of a Frobenius module is `tr (F ^ n) / n`, and
-`0` for `n = 0`. -/
-theorem coeff_traceSeries (M : FrobeniusModule.{u, v} K) (n : ℕ) :
-    coeff n M.traceSeries =
-      if n = 0 then 0 else LinearMap.trace K M.carrier (M.frobeniusEnd ^ n) / n :=
-  LinearMap.coeff_traceSeries _ n
-
-/-- The trace series of a Frobenius module lies in `T K⟦T⟧`. -/
-@[simp]
-theorem constantCoeff_traceSeries (M : FrobeniusModule.{u, v} K) :
-    constantCoeff M.traceSeries = 0 :=
-  LinearMap.constantCoeff_traceSeries _
-
 /-- The determinant `det (1 - T F ∣ V)` of a Frobenius module has constant coefficient `1`
 (blueprint: `def-zl-frobenius-trace-series`). -/
 @[simp]
@@ -119,12 +106,5 @@ theorem coeff_alternatingTraceSeries (s : Finset ℤ) (M : ℤ → FrobeniusModu
       else (∑ i ∈ s, (i.negOnePow : ℤ) •
         LinearMap.trace K (M i).carrier ((M i).frobeniusEnd ^ n)) / n :=
   LinearMap.coeff_alternatingTraceSeries s _ n
-
-/-- The alternating trace series lies in `T K⟦T⟧`. -/
-@[simp]
-theorem constantCoeff_alternatingTraceSeries (s : Finset ℤ)
-    (M : ℤ → FrobeniusModule.{u, v} K) :
-    constantCoeff (alternatingTraceSeries s M) = 0 :=
-  LinearMap.constantCoeff_alternatingTraceSeries s _
 
 end FrobeniusModule

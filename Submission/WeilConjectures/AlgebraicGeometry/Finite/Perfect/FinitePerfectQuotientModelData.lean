@@ -4,7 +4,76 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicIntrinsicCompletion
+public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicKoszulConstruction
+public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicKoszulCompletion
+public import Submission.WeilConjectures.AlgebraicGeometry.KoszulComplex
+public import Submission.WeilConjectures.AlgebraicGeometry.KoszulDifferential
+public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Submission.WeilConjectures.CategoryTheory.Constant.ConstantModuleKFlat
+import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.CategoryTheory.Limits.Shapes.Countable
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleWeaklyContractibleEvaluationColimitsSupplement
+import Mathlib.CategoryTheory.Sites.CompatibleSheafification
+import Mathlib.CategoryTheory.Limits.Types.Products
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Sites.Abelian
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteDerivedRestriction
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
@@ -74,84 +143,5 @@ instance finitePerfectModelsSliceHasDerived (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt) :
     HasDerivedCategory (SheafOfModules.{t + 1} (R.over U)) :=
   HasDerivedCategory.standard _
-
-/-- Apply the actual constant module functor termwise, with its universe lift.
-Source: Stacks Tags 03CY and 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def finiteModelConstantComplex (X : Scheme.{t}) (B : Type t) [CommRing B]
-    [(koszulConstantFunctor X B).PreservesZeroMorphisms]
-    (P : CochainComplex (ModuleCat.{t} B) ℤ) :=
-  ((ModuleCat.uliftFunctor.{t + 1, t} B ⋙
-    ModuleCat.restrictScalars.{t + 1}
-      (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom ⋙
-    koszulConstantFunctor X B).mapHomologicalComplex (.up ℤ)).obj P
-
-/-- A finite quotient admits perfect constant models in a specified interval on a chart.
-Source: Stacks Tags 094I and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def FinitePerfectModelsOn (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (V : X.Etale)
-    (a b : ℤ) : Prop :=
-  ∃ T : Sieve V, T ∈ X.smallEtaleTopology V ∧
-    ∀ (W : X.Etale) (g : W ⟶ V), T g →
-      ∃ P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ,
-        P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
-        (∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (n + 1)) (P.X i) ∧
-          Module.Finite (A ⧸ d.ideal ^ (n + 1)) (P.X i)) ∧
-        Nonempty
-          (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
-              ((toProEt X).obj W) ((completedAdicQuotientReduction X d n).obj M) ≅
-            ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)
-              ((toProEt X).obj W) ((completedAdicDerivedChange X (φ n)).obj
-                (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))
-
-/-- Etale local finite-projective quotient models with one interval on each chart.
-The covering and the model at a finite level may depend on that level. This property
-asserts no compatible choice of trivializations and no completed realization.
-Source: Stacks Tags 09C2 and 094I
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def HasUniformFinitePerfectModels (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (M : DerivedCategory (CompletedAdicModules X d)) : Prop :=
-  ∃ S : Sieve (⊤_ X.Etale), S ∈ X.smallEtaleTopology (⊤_ X.Etale) ∧
-    ∀ (V : X.Etale) (f : V ⟶ ⊤_ X.Etale), S f →
-      ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ,
-        FinitePerfectModelsOn X d φ M n V a b
-
-/-- Normalization of the finite coefficient identifications on constant sections.
-This fixes their compatibility with the quotient homomorphisms, rather than permitting
-independent identifications at different levels.
-Source: Stacks Tags 093M and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def FinitePerfectModelsNormalized (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n) : Prop :=
-  ∀ (n : ℕ) (U : X.ProEtᵒᵖ) (a : completedAdicQuotient d n),
-    (φ n).hom.app U ((koszulConstantUnit X (A ⧸ d.ideal ^ (n + 1))).app U a) =
-      (AlgebraicGeometry.ProEtale.finiteCoefficientScalarMap X
-        (completedAdicQuotient d n)).app U a
-
-/-- The finite comparisons preserve both quotient transitions and the scalar map.
-Source: Stacks Tags 093M and 09C6
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
-def FinitePerfectModelsCompatible (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n) : Prop :=
-  (∀ n : ℕ,
-    adicConstantMap X (adicQuotientMap d.ideal (n + 2) (n + 1) (Nat.le_succ _)) ≫
-        φ n = φ (n + 1) ≫
-      completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n)) ∧
-  (∀ n : ℕ,
-    completedAdicScalar X d ≫ completedAdicCommProjection X d n =
-      adicConstantMap X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ≫ φ n)
 
 end AlgebraicGeometry.Scheme

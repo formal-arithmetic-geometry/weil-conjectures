@@ -129,16 +129,6 @@ theorem projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar (f : 
   rw [h]
   exact projectionMapOfCompactification_comp_compactificationForgetSupports A _ K L
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula; for proper `f`, the
-projection formula for `Rf_!` holds at `(K, L)` if and only if the direct-image projection
-formula holds there. -/
-theorem hasProjectionFormula_iff_isIso_rightDerivedLowerStarProjectionMap (f : X ⟶ Y)
-    [IsProper f] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    HasProjectionFormula A f K L ↔
-      IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app L) :=
-  isIso_projectionMapOfCompactification_app_app_iff_of_isProper A _ K L
-
 end General
 
 section Torsion

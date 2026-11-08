@@ -195,19 +195,6 @@ theorem rightAcyclic_lowerStar_upperStar_comparisonUpperStar_obj [Algebra.IsAlge
   rightAcyclic_lowerStar_of_isWContractibleRing Λ _ _ fun W R _ e q ↦
     isZero_rightDerived_sectionsFunctor_pullback_upperStar_comparisonUpperStar_obj Λ h W R e F₀ q
 
-/-- Variant of `rightAcyclic_lowerStar_upperStar_comparisonUpperStar_obj` for a pro-étale sheaf
-`F` of étale origin on `G`: `g^* F` is acyclic for `g_*`. -/
-theorem rightAcyclic_lowerStar_upperStar_of_etaleOrigin [Algebra.IsAlgebraic L Ω]
-    {F : Sheaf (ProEt.topology G) (ModuleCat.{u + 1} Λ)}
-    (hF : (comparisonUpperStar (ModuleCat.{u + 1} Λ) G).essImage F) :
-    (ProEtale.lowerStar (ModuleCat.{u + 1} Λ)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).rightAcyclic
-        ((ProEtale.upperStar (ModuleCat.{u + 1} Λ)
-          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).obj F) := by
-  obtain ⟨F₀, ⟨e⟩⟩ := hF
-  exact (ProEtale.lowerStar _ _).rightAcyclic.prop_of_iso ((ProEtale.upperStar _ _).mapIso e)
-    (rightAcyclic_lowerStar_upperStar_comparisonUpperStar_obj Λ h F₀)
-
 end ProEtale
 
 end AlgebraicGeometry

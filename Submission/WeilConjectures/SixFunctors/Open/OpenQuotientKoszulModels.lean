@@ -39,7 +39,28 @@ public import Submission.WeilConjectures.SmoothPurity.IntegralOnSlice.DerivedCom
 public import Submission.WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstruction
 public import Submission.WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletionCompletedSupplement
-public import Submission.WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalization
+public import Submission.WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
+import Submission.WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenOperationModels
+import Submission.WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Localization.Construction
+import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Mathlib.CategoryTheory.Functor.Currying
+import Mathlib.CategoryTheory.Whiskering
+import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Mathlib.CategoryTheory.Localization.Prod
+import Mathlib.Algebra.Homology.BifunctorFlip
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorHomotopy
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -86,17 +107,6 @@ instance (priority := 2300) openDvrEssentiallySmall (T : Scheme.{u}) :
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-
-/-- The two-term complex [R -- t^(n+1) --> R] in degrees -1 and 0.
-Source: Stacks Tag 093M; arithmetic verification in Step 1
-(blueprint: lem-sf-open-quotient-koszul-completeness). -/
-def openDvrResolution (n : ℕ) :
-    CochainComplex (ModuleCat (Padic.coefficientExtensionIntegers l E)) ℤ :=
-  CochainComplex.mappingCone
-    ((CochainComplex.singleFunctor (ModuleCat (Padic.coefficientExtensionIntegers l E)) 0).map
-      (ModuleCat.ofHom ((LinearMap.lsmul (Padic.coefficientExtensionIntegers l E)
-        (Padic.coefficientExtensionIntegers l E))
-          (Padic.coefficientExtensionUniformizer l E ^ (n + 1)))))
 
 /-- The canonical finite and completed coefficient identifications, with their actions.
 All coefficient comparisons are fixed by constant sections and quotient projections.
@@ -333,21 +343,5 @@ structure OpenDvrOpenModel {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] 
     (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)
 
 attribute [instance] OpenDvrOpenModel.additive OpenDvrOpenModel.inverse_additive
-
-/-- Localized extension by zero after the canonical completed coefficient restriction.
-Source: Stacks Tags 03DI and 09BP
-(blueprint: lem-sf-open-quotient-koszul-completeness). -/
-abbrev OpenDvrOpenModel.jShriek {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
-    (O : OpenDvrOpenModel l E j) :
-    DerivedCategory (scalarReductionSource.{u, u} l E U) ⥤
-      DerivedCategory (scalarReductionSource.{u, u} l E X) :=
-  O.modules.mapDerivedCategory.functor ⋙
-    O.extension.ordinary.mapDerivedCategory
-
-/-- Use the already normalized reduction/limit calculus, retaining its actual unit.
-Source: Stacks Tags 07A6 and 0941
-(blueprint: lem-sf-open-quotient-koszul-completeness). -/
-abbrev openDvrSystem (T : Scheme.{u}) : CoefficientDerivedSystemCalculus.{u, u} l E T :=
-  (coefficientDerivedSystemEvaluationCalculus.{u, u} l E T).choose
 
 end WeilConjectures

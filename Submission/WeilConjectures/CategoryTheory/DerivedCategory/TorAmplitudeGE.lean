@@ -139,33 +139,11 @@ def torAmplitudeGE (a : ℤ) : ObjectProperty (DerivedCategory C) :=
 
 variable {C}
 
-lemma torAmplitudeGE_iff (a : ℤ) (M : DerivedCategory C) :
-    torAmplitudeGE C a M ↔ ∀ F : C, (M ⊗ (singleFunctor C 0).obj F).IsGE a :=
-  Iff.rfl
-
-/-- Tor amplitude in `[a, ∞)`, in terms of the vanishing of homology objects. -/
-lemma torAmplitudeGE_iff_forall_isZero (a : ℤ) (M : DerivedCategory C) :
-    torAmplitudeGE C a M ↔ ∀ (F : C) (q : ℤ), q < a →
-      IsZero ((homologyFunctor C q).obj (M ⊗ (singleFunctor C 0).obj F)) :=
-  forall_congr' fun _ ↦ isGE_iff _ a
-
 /-- Tor amplitude is invariant under isomorphism. -/
 instance (a : ℤ) : (torAmplitudeGE C a).IsClosedUnderIsomorphisms where
   of_iso e hM F := by
     have := hM F
     exact TStructure.t.isGE_of_iso (whiskerRightIso e _) a
-
-/-- Shrinking the interval preserves Tor amplitude. -/
-lemma torAmplitudeGE.mono {a a' : ℤ} (ha : a' ≤ a) {M : DerivedCategory C}
-    (hM : torAmplitudeGE C a M) : torAmplitudeGE C a' M :=
-  fun F ↦ by
-    have := hM F
-    exact TStructure.t.isGE_of_ge _ a' a ha
-
-/-- Tor amplitude in `[a, b]` implies Tor amplitude in `[a, ∞)`. -/
-lemma torAmplitudeGE_of_torAmplitudeIn {a b : ℤ} {M : DerivedCategory C}
-    (hM : torAmplitudeIn C a b M) : torAmplitudeGE C a M :=
-  fun F ↦ (hM F).1
 
 /-- An object of Tor amplitude in `[a, ∞)` vanishes in degrees `< a`: test against the unit. -/
 lemma isGE_of_torAmplitudeGE {a : ℤ} {K : DerivedCategory C} (hK : torAmplitudeGE C a K) :
@@ -220,15 +198,6 @@ lemma torAmplitudeGE_iff_exists_kFlat (a : ℤ) (K : DerivedCategory C) :
   refine ⟨exists_iso_Q_obj_kFlat_of_torAmplitudeGE, ?_⟩
   rintro ⟨P, _, -, hPk, ⟨e⟩⟩
   exact (torAmplitudeGE C a).prop_of_iso e (torAmplitudeGE_Q_obj_of_kFlat P a hPk)
-
-/-- If `K` has Tor amplitude in `[a, ∞)` and `N` vanishes below `c`, then `K ⊗ᴸ N` vanishes
-below `a + c`. -/
-lemma isGE_tensor_of_torAmplitudeGE {a : ℤ} {K : DerivedCategory C}
-    (hK : torAmplitudeGE C a K) (N : DerivedCategory C) (c : ℤ) [N.IsGE c] :
-    (K ⊗ N).IsGE (a + c) := by
-  obtain ⟨P, _, -, hPk, ⟨e⟩⟩ := exists_iso_Q_obj_kFlat_of_torAmplitudeGE hK
-  have := isGE_Q_obj_tensor_of_kFlat P hPk a N c
-  exact TStructure.t.isGE_of_iso (whiskerRightIso e N) _
 
 /-- If `N` vanishes below `c` and `K` has Tor amplitude in `[a, ∞)`, then `N ⊗ᴸ K` vanishes
 below `c + a`. -/

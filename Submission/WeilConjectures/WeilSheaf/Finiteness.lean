@@ -15,7 +15,12 @@ public import Submission.WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import Submission.WeilConjectures.WeilSheaf.LowerStar
 public import Submission.WeilConjectures.WeilSheaf.LowerStarPairing
 public import Submission.WeilConjectures.WeilSheaf.CohomologyAdicConstant
-public import Submission.WeilConjectures.WeilSheaf.ProperCohomology
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
+public import Submission.WeilConjectures.WeilSheaf.LowerStarComp
+public import Submission.WeilConjectures.WeilSheaf.OpenImmersion
+public import Submission.WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
+public import Submission.WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import Submission.WeilConjectures.WeilSheaf.StalkPairing
 
 set_option autoImplicit true

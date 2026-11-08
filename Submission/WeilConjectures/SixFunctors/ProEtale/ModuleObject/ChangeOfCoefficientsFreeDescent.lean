@@ -47,12 +47,6 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
-/-- If `x₁ ≫ κ = k ≫ x₂` for isomorphisms `κ` and `k`, then `x₂ ≫ κ⁻¹ = k⁻¹ ≫ x₁`. -/
-lemma comp_inv_eq_inv_comp_of_comp_hom_eq {C : Type*} [Category* C] {A B X Y : C} {x₁ : A ⟶ B}
-    {x₂ : X ⟶ Y} (κ : B ≅ Y) (k : A ≅ X) (h : x₁ ≫ κ.hom = k.hom ≫ x₂) :
-    x₂ ≫ κ.inv = k.inv ≫ x₁ := by
-  rw [Iso.comp_inv_eq, Category.assoc, h, Iso.inv_hom_id_assoc]
-
 /-- The composite `e₁ ≪≫ κ ≪≫ e₂` of isomorphisms intertwines `e₁` and `e₂⁻¹` with `κ`. -/
 lemma hom_comp_eq_trans_hom_comp {C : Type*} [Category* C] {X Y Z W : C} (e₁ : X ≅ Y)
     (κ : Y ≅ Z) (e₂ : Z ≅ W) : e₁.hom ≫ κ.hom = (e₁ ≪≫ κ ≪≫ e₂).hom ≫ e₂.inv := by

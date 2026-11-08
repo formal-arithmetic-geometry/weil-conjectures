@@ -128,41 +128,7 @@ namespace ProEtale
 
 variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- The same restriction arrow in the small pro-etale site.
-Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
-(blueprint: def-pur-support-cohomology). -/
-def supportRestrictionArrow :
-    Scheme.ProEt.mk i.openComplement.ι ⟶ Scheme.ProEt.mk (𝟙 X) :=
-  MorphismProperty.Over.homMk i.openComplement.ι
-    (by change i.openComplement.ι ≫ 𝟙 X = _; simp)
-
 variable (Λ : Type (u + 1)) [CommRing Λ]
-
-/-- Sections with closed support of a pro-etale `Λ`-module sheaf, in particular for each
-finite-torsion coefficient ring `A_{E,n}`. The kernel carries the induced `Λ` action.
-Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
-(blueprint: def-pur-support-cohomology). -/
-noncomputable abbrev supportSections :
-    Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤ ModuleCat.{u + 1} Λ :=
-  Sheaf.supportedSectionsFunctor (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)
-    (supportRestrictionArrow i)
-
-/-- Bounded-below right derived supported sections on the small pro-etale site.
-Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, pro-etale clause
-(blueprint: def-pur-support-cohomology). -/
-noncomputable def derivedSupportSections :
-    DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ⥤
-      DerivedCategory.Plus (ModuleCat.{u + 1} Λ) :=
-  (supportSections i Λ).rightDerivedFunctorPlus
-
-/-- Cohomology of derived supported sections, in every integer degree, with pro-etale
-finite-torsion coefficients. Source: blueprint `sec-smooth-purity/sk-def-purity-conv`
-(blueprint: def-pur-support-cohomology). -/
-noncomputable def supportHypercohomology (q : ℤ)
-    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
-    ModuleCat.{u + 1} Λ :=
-  (DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
-    ((derivedSupportSections i Λ).obj K)
 
 end ProEtale
 end AlgebraicGeometry

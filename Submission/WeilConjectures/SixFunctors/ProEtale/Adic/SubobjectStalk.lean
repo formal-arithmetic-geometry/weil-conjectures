@@ -200,11 +200,6 @@ section Monodromy
 
 variable {M : LisseMonodromy l Y Ω} {t}
 
-/-- The stalk map of a morphism of lisse sheaves is that of the underlying `ℓ`-adic sheaves. -/
-lemma lisseStalkMap_homMk {G H : LisseSheaf l Y} (f : G.obj ⟶ H.obj) :
-    lisseStalkMap t (ObjectProperty.homMk f : G ⟶ H) = adicStalkMap t f :=
-  rfl
-
 /-- **Lisse subsheaves are determined by their stalks.** If the monodromy at `t` is an
 equivalence, a lisse subsheaf `P` of a lisse sheaf `B` on a locally Noetherian scheme is contained
 in a lisse subsheaf `Q` as soon as `P_t ⊆ Q_t`: the composite `P ⟶ B ⟶ B / Q` of lisse sheaves
@@ -301,10 +296,5 @@ lemma linearEquivOfIso_symm {M N : WeilCoefficients.{u} l} (e : M ≅ N) :
   LinearEquiv.ext fun x ↦ (linearEquivOfIso e).injective (by
     rw [LinearEquiv.apply_symm_apply, linearEquivOfIso_apply, linearEquivOfIso_apply]
     exact LinearMap.congr_fun (congrArg ModuleCat.Hom.hom e.inv_hom_id) x)
-
-lemma linearEquivOfIso_apply_eq_toModuleCat_map {M N : WeilCoefficients.{u} l} (e : M ≅ N)
-    (x : (toModuleCat l).obj M) :
-    linearEquivOfIso e x = ((toModuleCat l).map e.hom).hom x :=
-  rfl
 
 end AlgebraicGeometry.WeilCoefficients

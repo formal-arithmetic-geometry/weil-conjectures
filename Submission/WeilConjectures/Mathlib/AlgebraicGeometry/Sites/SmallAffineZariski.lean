@@ -309,14 +309,6 @@ lemma relativeGluingMap_of_forall (P : MorphismProperty Scheme.{u}) [IsZariskiLo
   rw [P.arrow_mk_iso_iff e]
   exact h U
 
-/-- Two opens of a relative spectrum agree if they agree on every chart `Spec F(U)`. -/
-lemma opens_ext {W W' : (relativeGluingData H).glued.Opens}
-    (h : ∀ U, colimit.ι (relativeGluingData H).functor U ⁻¹ᵁ W =
-      colimit.ι (relativeGluingData H).functor U ⁻¹ᵁ W') : W = W' := by
-  ext x
-  obtain ⟨U, y, rfl⟩ := (relativeGluingData H).cover.exists_eq x
-  exact congr(y ∈ $(h U))
-
 end Local
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite

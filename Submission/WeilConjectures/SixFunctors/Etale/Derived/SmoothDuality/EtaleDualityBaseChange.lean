@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIsoUnit
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

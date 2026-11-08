@@ -230,9 +230,6 @@ noncomputable instance : HopfAlgebra k (CoordinateRing n k) :=
   HopfAlgebra.ofAlgHom (antipodeAlgHom n k) (mul_antipodeAlgHom_rTensor_comulAlgHom n k)
     (mul_antipodeAlgHom_lTensor_comulAlgHom n k)
 
-/-- The coordinate ring of `GL_n` is a finitely generated `k`-algebra. -/
-example : Algebra.FiniteType k (CoordinateRing n k) := inferInstance
-
 variable {n k}
 
 /-- Evaluation turns matrix multiplication into the convolution product. -/

@@ -121,13 +121,6 @@ lemma zmodAbSheafOver_hom_ext {m : ℕ} {Y : X.ProEt}
         rw [← NatTrans.naturality_apply, ← map_zsmul, ← hs]
         exact NatTrans.naturality_apply g.hom φ.op s
 
-/-- On global sections, multiplication by `c` is the multiplication by `c`. -/
-lemma zmodAbSheafOverMul_app_mkId {m : ℕ} {Y : X.ProEt} (c : C(Y.left, ZMod m))
-    (x : C(Y.left, ZMod m)) :
-    (zmodAbSheafOverMul c).hom.app (op (Over.mk (𝟙 Y))) (zmodAbSheafOver.mk _ x) =
-      zmodAbSheafOver.mk _ (c * x) :=
-  rfl
-
 /-- Every endomorphism of `(ℤ/m)|_Y` is the multiplication by the image of the section `1`. -/
 lemma eq_zmodAbSheafOverMul {m : ℕ} {Y : X.ProEt}
     (f : zmodAbSheafOver m Y ⟶ zmodAbSheafOver m Y) :

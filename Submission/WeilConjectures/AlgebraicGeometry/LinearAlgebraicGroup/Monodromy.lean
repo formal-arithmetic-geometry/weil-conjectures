@@ -298,10 +298,6 @@ theorem lift_apply_of_mem_ker {u : W} (hu : u ∈ D.deg.ker) : D.lift f T hT u =
   have : (⟨_, D.mul_inv_zpow_mem_ker u⟩ : D.deg.ker) = ⟨u, hu⟩ := Subtype.ext (by simp [h])
   rw [this, h, zpow_zero, mul_one]
 
-@[simp]
-theorem lift_comp_subtype : (D.lift f T hT).comp D.deg.ker.subtype = f :=
-  MonoidHom.ext fun u ↦ D.lift_apply_of_mem_ker f T hT u.2
-
 /-- The extension `lift` sends the degree-one element `γ` to `T`.
 (blueprint: `lem-wf-weil-fundamental-representation`) -/
 @[simp]
@@ -309,16 +305,6 @@ theorem lift_degreeOneElement : D.lift f T hT D.degreeOneElement = T := by
   have : (⟨_, D.mul_inv_zpow_mem_ker D.degreeOneElement⟩ : D.deg.ker) = 1 :=
     Subtype.ext (by simp [D.deg_degreeOneElement])
   rw [lift_apply, this, map_one, one_mul, D.deg_degreeOneElement, toAdd_ofAdd, zpow_one]
-
-/-- The extension `lift` is the only homomorphism `W → M` restricting to `f` and sending `γ` to
-`T`. -/
-theorem eq_lift {ρ : W →* M} (hρ : ρ.comp D.deg.ker.subtype = f)
-    (hργ : ρ D.degreeOneElement = T) : ρ = D.lift f T hT := by
-  ext w
-  have hw : w = (w * (D.degreeOneElement ^ (D.deg w).toAdd)⁻¹) *
-      D.degreeOneElement ^ (D.deg w).toAdd := by group
-  rw [lift_apply, ← hρ, ← hργ, MonoidHom.comp_apply, Subgroup.coe_subtype, ← map_zpow, ← map_mul]
-  exact congrArg ρ hw
 
 /-- **Continuity of the Weil fundamental representation.** If the degree-zero subgroup is open
 in the topological group `W` (the degree map is locally constant) and `f` is continuous, then the
@@ -607,13 +593,6 @@ noncomputable def arithmeticMonodromyExtensionHom : D.ArithmeticMonodromyExtensi
     fun m ↦ by
       ext h : 1
       simp [coe_frobeniusAction_apply, - map_zpow]
-
-@[simp]
-theorem arithmeticMonodromyExtensionHom_inl_mul_inr (h : zeroLocus D.geometricMonodromy k)
-    (m : Multiplicative ℤ) :
-    D.arithmeticMonodromyExtensionHom (SemidirectProduct.inl h * SemidirectProduct.inr m) =
-      h * D.frobenius ^ m.toAdd := by
-  simp [arithmeticMonodromyExtensionHom]
 
 
 /-- The degree component `G^[m] = H × {m}` of the arithmetic monodromy extension: the fibre over

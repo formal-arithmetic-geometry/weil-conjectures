@@ -9,7 +9,20 @@ public import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

@@ -60,12 +60,6 @@ noncomputable def boundedFiniteCohomology :
     fun K ↦ ∀ n : ℤ, Module.Finite Λ ((homologyFunctor (ModuleCat.{u + 1} Λ) n).obj K)
 
 variable {Λ} in
-lemma boundedFiniteCohomology_iff (K : DerivedCategory (ModuleCat.{u + 1} Λ)) :
-    boundedFiniteCohomology Λ K ↔ DerivedCategory.TStructure.t.bounded K ∧
-      ∀ n : ℤ, Module.Finite Λ ((homologyFunctor (ModuleCat.{u + 1} Λ) n).obj K) :=
-  Iff.rfl
-
-variable {Λ} in
 /-- Over a finite ring, `Dᵇ_fin(Λ)` consists of the bounded complexes with finite cohomology. -/
 lemma boundedFiniteCohomology_iff_finite [Finite Λ] (K : DerivedCategory (ModuleCat.{u + 1} Λ)) :
     boundedFiniteCohomology Λ K ↔ DerivedCategory.TStructure.t.bounded K ∧

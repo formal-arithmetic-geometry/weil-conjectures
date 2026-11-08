@@ -20,8 +20,6 @@ Let `R₁` be a henselian discrete valuation ring with separably closed residue 
 fraction field `F₁`, and let `R₁ → R` be a local homomorphism to a discrete valuation ring `R`
 with fraction field `F`, such that a uniformizer `π` of `R₁` is a uniformizer of `R`, and such
 that every element of the residue field `κ` of `R` algebraic over `k` comes from `k`. A typical
-example is the strict henselization of `R₁[x]` at the prime `(π)`.
-
 Then `F₁` is separably closed in `F` (`IsDiscreteValuationRing.mem_range_of_isSeparable`). Indeed,
 let `c ∈ F` be separable over `F₁`, `E = F₁(c)` and `B` the integral closure of `R₁` in `E`, a
 discrete valuation ring with `π = u ϖ ^ e` and `e f = [E : F₁]`, `f` the residue degree. The ring

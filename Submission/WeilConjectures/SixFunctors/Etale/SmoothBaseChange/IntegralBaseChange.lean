@@ -7,8 +7,11 @@ module
 
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting
-public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
+public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.LongExactSequence
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import Submission.WeilConjectures.SixFunctors.Integral.BaseChange
 

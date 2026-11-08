@@ -10,7 +10,12 @@ public import Submission.WeilConjectures.AlgebraicGeometry.FundamentalGroup.Loca
 public import Submission.WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantSections
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyConstantWContractible
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import Submission.WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

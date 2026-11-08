@@ -145,11 +145,6 @@ private theorem restriction_isEquivalence (c : R ≅ S) :
     (SheafOfModules.restrictScalars.{u + 1} c.hom).IsEquivalence :=
   (restrictionEquivalence c).isEquivalence_functor
 
-private theorem restrictionEquivalence_unit (c : R ≅ S)
-    (M : SheafOfModules.{u + 1} S) (U : Cᵒᵖ) (x : M.val.obj U) :
-    ((restrictionEquivalence c).unit.app M).val.app U x = x := by
-  rfl
-
 end RestrictionEquivalence
 
 /-- The landed integralDetailedTransport is an equivalence.
@@ -298,34 +293,5 @@ theorem purCoefficientModel_predicates (W : Scheme.{u})
     · rintro ⟨D, hl, hK⟩
       exact (sfDerivedComplete_iff_legacy l E W D hl _).mpr hK
   exact ⟨hsf.trans hlegacy, hsf⟩
-
-private theorem complete_of_iso (W : Scheme.{u})
-    {K L : DerivedCategory (scalarReductionSource.{u, u} l E W)} (e : K ≅ L)
-    (hK : IsSfDerivedComplete l E W K) : IsSfDerivedComplete l E W L := by
-  unfold IsSfDerivedComplete at hK ⊢
-  apply roos_transport _ _ e
-    (fun n ↦ (sfDerivedReductionRestricted l E W n).mapIso e)
-    (fun n ↦ (sfDerivedReductionUnit l E W n).app K)
-    (fun n ↦ (sfDerivedReductionUnit l E W n).app L) _ _ hK
-  · intro n
-    exact ((sfDerivedReductionTransition l E W n).naturality e.hom).symm
-  · intro n
-    exact ((sfDerivedReductionUnit l E W n).naturality e.hom).symm
-
-/-- Completeness for the forward normalized integral transport.
-Source: Stacks 099N; Bhatt--Scholze, Section 6.5
-(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport).
-Proof: apply the completeness comparison to the transported complex and use the
-counit of the coefficient equivalence. An isomorphism of augmented reduction
-towers transports the defining Roos triangle in either direction. -/
-theorem purDetailedTransport_complete_iff (W : Scheme.{u})
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
-    IsSfDerivedComplete l E W K ↔ PbcIsIntrinsicallyComplete W
-      (pbcIntegralDatum l E) ((integralDetailedTransport W l E).obj K) := by
-  let Φ := purCoefficientModel l E W
-  have h := (purCoefficientModel_predicates l E W (Φ.inverse.obj K)).2
-  let e := Φ.counitIso.app K
-  exact ⟨fun hK ↦ h.mpr (complete_of_iso l E W e.symm hK),
-    fun hK ↦ complete_of_iso l E W e (h.mp hK)⟩
 
 end WeilConjectures

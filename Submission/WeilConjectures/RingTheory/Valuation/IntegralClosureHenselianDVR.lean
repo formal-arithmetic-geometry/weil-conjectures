@@ -275,12 +275,6 @@ lemma map_mem_integralClosureValuationSubring_iff (σ : Ω ≃+* Ω)
     σ z ∈ integralClosureValuationSubring R Ω ↔ z ∈ integralClosureValuationSubring R Ω :=
   isIntegral_algEquiv (AlgEquiv.ofRingEquiv hσ)
 
-lemma comap_integralClosureValuationSubring_ringEquiv (σ : Ω ≃+* Ω)
-    (hσ : ∀ r : R, σ (algebraMap R Ω r) = algebraMap R Ω r) :
-    (integralClosureValuationSubring R Ω).comap (σ : Ω →+* Ω) =
-      integralClosureValuationSubring R Ω :=
-  SetLike.ext fun _ ↦ map_mem_integralClosureValuationSubring_iff σ hσ
-
 /-- **Functoriality.** Let `R → R'` be an injective local homomorphism of henselian DVRs and
 `Ω → Ω'` a compatible field homomorphism. Then the valuation subring of `Ω` attached to `R` is
 the preimage of the one of `Ω'` attached to `R'`. -/

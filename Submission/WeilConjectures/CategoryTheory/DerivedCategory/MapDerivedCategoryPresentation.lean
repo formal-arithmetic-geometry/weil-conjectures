@@ -45,11 +45,6 @@ abbrev DerivedPresentation (Φ : DerivedCategory C ⥤ DerivedCategory D) (F : C
 
 namespace DerivedPresentation
 
-/-- The canonical presentation of the functor induced by an exact functor. -/
-abbrev ofMap (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-    [PreservesFiniteColimits F] : DerivedPresentation F.mapDerivedCategory F :=
-  F.mapDerivedCategoryFactors
-
 /-- The composite of two presentations. -/
 def comp {Φ : DerivedCategory C ⥤ DerivedCategory D} {Ψ : DerivedCategory D ⥤ DerivedCategory
     E}
@@ -85,11 +80,6 @@ lemma comp_hom_app {Φ : DerivedCategory C ⥤ DerivedCategory D}
   rw [Q_map_compIso_hom]
   simp
 
-/-- Transport a presentation along an isomorphism of derived functors. -/
-def ofIso {Φ Φ' : DerivedCategory C ⥤ DerivedCategory D} {F : C ⥤ D} [F.Additive]
-    (p : DerivedPresentation Φ F) (e : Φ ≅ Φ') : DerivedPresentation Φ' F :=
-  isoWhiskerLeft DerivedCategory.Q e.symm ≪≫ p
-
 end DerivedPresentation
 
 open DerivedPresentation
@@ -107,25 +97,6 @@ namespace DerivedRepresents
 variable {Φ Ψ Ξ : DerivedCategory C ⥤ DerivedCategory D} {F G H : C ⥤ D}
   [F.Additive] [G.Additive] [H.Additive]
   {p : DerivedPresentation Φ F} {q : DerivedPresentation Ψ G} {r : DerivedPresentation Ξ H}
-
-lemma app_eq {τ : Φ ⟶ Ψ} {τ₀ : F ⟶ G} (h : DerivedRepresents p q τ τ₀)
-    (K : CochainComplex C ℤ) :
-    τ.app (DerivedCategory.Q.obj K) = p.hom.app K ≫ DerivedCategory.Q.map
-      ((NatTrans.mapHomologicalComplex τ₀ (ComplexShape.up ℤ)).app K) ≫ q.inv.app K := by
-  rw [← reassoc_of% (h K), Iso.hom_inv_id_app]
-  exact (Category.comp_id _).symm
-
-/-- Two derived transformations representing the same ordinary transformation agree on
-images of complexes. -/
-lemma app_eq_app {τ σ : Φ ⟶ Ψ} {τ₀ : F ⟶ G} (h : DerivedRepresents p q τ τ₀)
-    (h' : DerivedRepresents p q σ τ₀) (K : CochainComplex C ℤ) :
-    τ.app (DerivedCategory.Q.obj K) = σ.app (DerivedCategory.Q.obj K) := by
-  rw [h.app_eq, h'.app_eq]
-
-lemma ext' {τ σ : Φ ⟶ Ψ} {τ₀ : F ⟶ G} (h : DerivedRepresents p q τ τ₀)
-    (h' : DerivedRepresents p q σ τ₀) : τ = σ :=
-  Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (app_eq_app h h')
 
 lemma id (p : DerivedPresentation Φ F) : DerivedRepresents p p (𝟙 Φ) (𝟙 F) := by
   intro K
@@ -148,43 +119,11 @@ lemma inv {τ : Φ ≅ Ψ} {τ₀ : F ≅ G} (h : DerivedRepresents p q τ.hom �
     ← NatTrans.mapHomologicalComplex_comp, Iso.hom_inv_id, NatTrans.mapHomologicalComplex_id,
     NatTrans.id_app, DerivedCategory.Q.map_id, Category.comp_id]
 
-lemma congr {τ τ' : Φ ⟶ Ψ} {τ₀ τ₀' : F ⟶ G} (h : DerivedRepresents p q τ τ₀)
-    (e : τ = τ') (e₀ : τ₀ = τ₀') : DerivedRepresents p q τ' τ₀' := by
-  subst e e₀
-  exact h
-
 end DerivedRepresents
 
 section Basic
 
 open DerivedRepresents
-
-lemma derivedRepresents_mapDerivedCategoryNatIso {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
-    DerivedRepresents (ofMap F) (ofMap G) (mapDerivedCategoryNatIso e).hom e.hom :=
-  fun K ↦ mapDerivedCategoryNatIso_fac e K
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-lemma derivedRepresents_mapDerivedCategoryCompIso (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    DerivedRepresents (ofMap (F ⋙ G)) ((ofMap F).comp (ofMap G))
-      (mapDerivedCategoryCompIso F G).inv (𝟙 (F ⋙ G)) := by
-  intro K
-  have h := mapDerivedCategoryCompIso_fac F G K
-  rw [Q_map_compIso_hom] at h
-  erw [Category.comp_id] at h
-  rw [comp_hom_app, NatTrans.mapHomologicalComplex_id]
-  erw [DerivedCategory.Q.map_id, Category.comp_id]
-  exact h
-
-lemma derivedRepresents_ofIso {Φ Φ' : DerivedCategory C ⥤ DerivedCategory D} {F : C ⥤ D}
-    [F.Additive] (p : DerivedPresentation Φ F) (e : Φ ≅ Φ') :
-    DerivedRepresents p (p.ofIso e) e.hom (𝟙 F) := by
-  intro K
-  simp [DerivedPresentation.ofIso]
 
 lemma DerivedRepresents.whiskerLeft {Ρ : DerivedCategory C ⥤ DerivedCategory D}
     {Φ Ψ : DerivedCategory D ⥤ DerivedCategory E} {R : C ⥤ D} {F G : D ⥤ E}
@@ -248,85 +187,6 @@ lemma DerivedRepresents.whiskerRight {Φ Ψ : DerivedCategory C ⥤ DerivedCateg
           erw [hx]
           rw [← he, Category.assoc]
           rfl
-
-lemma derivedRepresents_associator {Φ : DerivedCategory C ⥤ DerivedCategory D}
-    {Ψ : DerivedCategory D ⥤ DerivedCategory E} {Ξ : DerivedCategory E ⥤ DerivedCategory E'}
-    {F : C ⥤ D} {G : D ⥤ E} {H : E ⥤ E'} [F.Additive] [G.Additive] [H.Additive]
-    (p : DerivedPresentation Φ F) (q : DerivedPresentation Ψ G)
-    (r : DerivedPresentation Ξ H) :
-    DerivedRepresents ((p.comp q).comp r) (p.comp (q.comp r))
-      (Functor.associator Φ Ψ Ξ).hom (Functor.associator F G H).hom := by
-  intro K
-  have h : (NatTrans.mapHomologicalComplex (Functor.associator F G H).hom
-      (ComplexShape.up ℤ)).app K = 𝟙 _ := by
-    ext i
-    rfl
-  rw [h]
-  erw [DerivedCategory.Q.map_id, Category.comp_id]
-  simp only [comp_hom_app, Functor.associator_hom_app, Category.id_comp, Functor.comp_map,
-    Functor.map_comp, Category.assoc]
-  rfl
-
-lemma derivedRepresents_associator_inv {Φ : DerivedCategory C ⥤ DerivedCategory D}
-    {Ψ : DerivedCategory D ⥤ DerivedCategory E} {Ξ : DerivedCategory E ⥤ DerivedCategory E'}
-    {F : C ⥤ D} {G : D ⥤ E} {H : E ⥤ E'} [F.Additive] [G.Additive] [H.Additive]
-    (p : DerivedPresentation Φ F) (q : DerivedPresentation Ψ G)
-    (r : DerivedPresentation Ξ H) :
-    DerivedRepresents (p.comp (q.comp r)) ((p.comp q).comp r)
-      (Functor.associator Φ Ψ Ξ).inv (Functor.associator F G H).inv :=
-  DerivedRepresents.inv (τ := Functor.associator Φ Ψ Ξ) (τ₀ := Functor.associator F G H)
-    (derivedRepresents_associator p q r)
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-lemma derivedRepresents_mapDerivedCategoryCompIso_inv (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    DerivedRepresents ((ofMap F).comp (ofMap G)) (ofMap (F ⋙ G))
-      (mapDerivedCategoryCompIso F G).hom (𝟙 (F ⋙ G)) :=
-  DerivedRepresents.inv (τ := (mapDerivedCategoryCompIso F G).symm) (τ₀ := Iso.refl (F ⋙ G))
-    (derivedRepresents_mapDerivedCategoryCompIso F G)
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-lemma derivedRepresents_mapDerivedCategorySquareIso {F₁ : C ⥤ D} {F₂ : D ⥤ E'}
-    {G₁ : C ⥤ E} {G₂ : E ⥤ E'}
-    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-    [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
-    [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
-    (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) :
-    DerivedRepresents ((ofMap F₁).comp (ofMap F₂)) ((ofMap G₁).comp (ofMap G₂))
-      (mapDerivedCategorySquareIso e).hom e.hom :=
-  (((derivedRepresents_mapDerivedCategoryCompIso_inv F₁ F₂).comp
-    (derivedRepresents_mapDerivedCategoryNatIso e)).comp
-    (derivedRepresents_mapDerivedCategoryCompIso G₁ G₂)).congr
-      (by simp [mapDerivedCategorySquareIso]) (by simp)
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-/-- A comparison inverse followed by an induced isomorphism. -/
-lemma derivedRepresents_mapDerivedCategoryCompIso_symm_trans {F₁ : C ⥤ D} {F₂ : D ⥤ E}
-    {G : C ⥤ E}
-    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-    [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    (e : F₁ ⋙ F₂ ≅ G) :
-    DerivedRepresents ((ofMap F₁).comp (ofMap F₂)) (ofMap G)
-      (mapDerivedCategoryCompIso F₁ F₂ ≪≫ mapDerivedCategoryNatIso e).hom e.hom :=
-  ((derivedRepresents_mapDerivedCategoryCompIso_inv F₁ F₂).comp
-    (derivedRepresents_mapDerivedCategoryNatIso e)).congr rfl (by simp)
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-/-- An induced isomorphism followed by a comparison. -/
-lemma derivedRepresents_mapDerivedCategoryNatIso_trans_compIso {F : C ⥤ E}
-    {G₁ : C ⥤ D} {G₂ : D ⥤ E}
-    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
-    [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
-    (e : F ≅ G₁ ⋙ G₂) :
-    DerivedRepresents (ofMap F) ((ofMap G₁).comp (ofMap G₂))
-      (mapDerivedCategoryNatIso e ≪≫ (mapDerivedCategoryCompIso G₁ G₂).symm).hom e.hom :=
-  ((derivedRepresents_mapDerivedCategoryNatIso e).comp
-    (derivedRepresents_mapDerivedCategoryCompIso G₁ G₂)).congr rfl (by simp)
 
 end Basic
 

@@ -59,12 +59,4 @@ def IsAmple (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] : Prop :=
             (⊤ : Submodule (X.presheaf.stalk y)
               ↑(TopCat.Presheaf.stalk (L.tensorPow n).val.presheaf y))
 
-/-- Sanity check: the predicate in `IsAmple` is `nonvanishingLocus` by definition. -/
-example {X : Scheme.{u}} (M : X.Modules) (s : M.val.presheaf.obj (Opposite.op ⊤)) (y : X) :
-    y ∈ nonvanishingLocus M s ↔
-      (TopCat.Presheaf.germ M.val.presheaf ⊤ y trivial) s ∉
-        (IsLocalRing.maximalIdeal (X.presheaf.stalk y)) •
-          (⊤ : Submodule (X.presheaf.stalk y) ↑(TopCat.Presheaf.stalk M.val.presheaf y)) :=
-  Iff.rfl
-
 end AlgebraicGeometry.Scheme.Modules

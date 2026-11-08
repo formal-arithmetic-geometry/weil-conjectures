@@ -6,7 +6,9 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionRingedSite
-public import Submission.WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
+public import Submission.WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import Submission.WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import Submission.WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import Submission.WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -422,125 +424,6 @@ private theorem translation_continuous {T : Scheme.{u}} (g : T ≅ T) :
   exact ⟨Functor.isContinuous_comp AsSmall.down _ _ (Scheme.ProEt.topology T) _,
     Functor.isContinuous_comp _ AsSmall.up _ (Scheme.ProEt.topology T) _⟩
 
-private theorem small_up_continuous {C : Type (u + 1)} [Category.{u} C]
-    (J : GrothendieckTopology C) : AsSmall.up.IsContinuous J
-      (AsSmall.down.inducedTopology J : GrothendieckTopology (AsSmall.{u + 1} C)) := by
-  have : (AsSmall.equiv : C ≌ AsSmall.{u + 1} C).functor.IsDenseSubsite J
-      ((AsSmall.equiv : C ≌ AsSmall.{u + 1} C).inverse.inducedTopology J) := inferInstance
-  exact inferInstanceAs ((AsSmall.equiv : C ≌ AsSmall.{u + 1} C).functor.IsContinuous J
-    ((AsSmall.equiv : C ≌ AsSmall.{u + 1} C).inverse.inducedTopology J))
-
-private theorem postcompose_cocontinuous {T : Scheme.{u}} (g : T ≅ T) :
-    (postcompose g).functor.IsCocontinuous
-      (Scheme.ProEt.topology T) (Scheme.ProEt.topology T) := by
-  let _ := postcompose_continuous g.symm
-  have : (postcompose g).inverse.IsContinuous
-      (Scheme.ProEt.topology T) (Scheme.ProEt.topology T) := postcompose_continuous g.symm
-  exact ((postcompose g).toAdjunction.isCocontinuous_iff_coverPreserving
-      (Scheme.ProEt.topology T) (Scheme.ProEt.topology T)).mpr
-    (CoverPreserving.of_isContinuous _ _ _)
-
-private theorem sectionRingIso
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    (F : C ⥤ C) [F.IsContinuous J J]
-    (A : Mon (Sheaf J Ab.{u + 1})) [IsCommMonObj A.X]
-    (c : A ≅ (F.sheafPushforwardContinuous Ab.{u + 1} J J).mapMon.obj A) :
-    ∃ e : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J A.X ≅
-      (F.sheafPushforwardContinuous CommRingCat.{u + 1} J J).obj
-        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J A.X),
-    ∀ (V : Cᵒᵖ) (x : A.X.obj.obj V), e.hom.hom.app V x = c.hom.hom.hom.app V x := by
-  let _ := Sheaf.monoidalCategory J Ab.{u + 1}
-  let U := sheafToPresheaf J Ab.{u + 1}
-  let W := (Functor.whiskeringLeft _ _ Ab.{u + 1}).obj F.op
-  let S := F.sheafPushforwardContinuous Ab.{u + 1} J J
-  let e := Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
-    F Ab.{u + 1} J J
-  let z : U.mapMon.obj (S.mapMon.obj A) ≅
-      W.mapMon.obj (U.mapMon.obj A) :=
-    (Functor.mapMonCompIso (F := S) (G := U)).symm.app A ≪≫
-      (Functor.mapMonNatIso e).symm.app A ≪≫
-      (Functor.mapMonCompIso (F := U) (G := W)).app A
-  let m : U.mapMon.obj A ⟶ W.mapMon.obj (U.mapMon.obj A) :=
-    U.mapMon.map c.hom ≫ z.hom
-  have hm : m.hom = c.hom.hom.hom := by
-    have hm₀ : m.hom = c.hom.hom.hom ≫ z.hom.hom := rfl
-    rw [hm₀]
-    have hz : z.hom.hom = 𝟙 _ ≫ e.inv.app A.X ≫ 𝟙 _ := rfl
-    rw [hz, Category.id_comp, Category.comp_id]
-    have heh : e.hom.app A.X = 𝟙 _ :=
-      Functor.sheafToPresheafCompWhiskeringLeftIsoPushforward_hom_app
-        F Ab.{u + 1} J J A.X
-    have hh := e.inv_hom_id_app A.X
-    rw [heh, Category.comp_id] at hh
-    rw [hh]
-    exact Category.comp_id c.hom.hom.hom
-  let q := (Monoidal.monFunctorCategoryEquivalence Cᵒᵖ Ab.{u + 1}).functor.map m
-  let φ : InternalAbelianSheafModule.sectionRings.{u + 1, u + 1, u} J A.X ⟶
-      F.op ⋙ InternalAbelianSheafModule.sectionRings.{u + 1, u + 1, u} J A.X :=
-    { app := fun V ↦ ConcreteCategory.ofHom (C := CommRingCat)
-        (InternalAbelianSheafModule.ringHom (q.app V).hom)
-      naturality := fun V V' f ↦ by
-        ext x
-        exact ConcreteCategory.congr_hom (m.hom.naturality f) x }
-  have hφ (V : Cᵒᵖ) : (φ.app V).hom.toAddMonoidHom = (c.hom.hom.hom.app V).hom :=
-    congrArg (fun a ↦ (a.app V).hom) hm
-  let f : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J A.X ⟶
-      (F.sheafPushforwardContinuous CommRingCat.{u + 1} J J).obj
-        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J A.X) := ⟨φ⟩
-  have hφ' (V : Cᵒᵖ) (x : A.X.obj.obj V) : φ.app V x = c.hom.hom.hom.app V x :=
-    congrArg (fun a ↦ a x) (hφ V)
-  have : IsIso φ := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro V
-    apply (ConcreteCategory.isIso_iff_bijective _).mpr
-    have hb := (ConcreteCategory.bijective_of_isIso (c.hom.hom.hom.app V))
-    constructor
-    · intro x y h
-      apply hb.1
-      exact (hφ' V x).symm.trans ((congrArg id h).trans (hφ' V y))
-    · intro y
-      obtain ⟨x, hx⟩ := hb.2 y
-      exact ⟨x, (hφ' V x).trans hx⟩
-  have : IsIso ((sheafToPresheaf J CommRingCat.{u + 1}).map f) :=
-    inferInstanceAs (IsIso φ)
-  have : IsIso f := isIso_of_reflects_iso f (sheafToPresheaf J CommRingCat.{u + 1})
-  exact ⟨asIso f, hφ'⟩
-
-private theorem section_inverse_additive
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    (R : Sheaf J Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
-    (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J R).inverse.Additive :=
-  by
-  let E := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J R
-  have : E.functor.Additive := { map_add := by intros; ext U x; rfl }
-  infer_instance
-
-private theorem small_ambient_additive
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    (S : Sheaf J Ab.{u + 1}) [MonObj S] [IsCommMonObj S] :
-    let _ := small_up_continuous J
-    let R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J S
-    let B := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
-    let K := (AsSmall.down.inducedTopology J : GrothendieckTopology (AsSmall.{u + 1} C))
-    (SheafOfModules.pushforward.{u + 1} (F := AsSmall.up)
-      (R := (AsSmall.down.sheafPushforwardContinuous RingCat K J).obj B) (𝟙 B) ⋙
-      (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
-        J S).inverse).Additive := by
-  let _ := small_up_continuous J
-  let R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J S
-  let B := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
-  let K := (AsSmall.down.inducedTopology J : GrothendieckTopology (AsSmall.{u + 1} C))
-  let E := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J S
-  have : E.inverse.Additive := section_inverse_additive J S
-  let P := SheafOfModules.pushforward.{u + 1} (F := AsSmall.up)
-    (R := (AsSmall.down.sheafPushforwardContinuous RingCat K J).obj B) (𝟙 B)
-  have : P.Additive := { map_add := by intros; ext U x; rfl }
-  exact inferInstanceAs (P ⋙ E.inverse).Additive
-
-private theorem ambient_additive (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
-    (ambientModules T l).Additive :=
-  small_ambient_additive (Scheme.ProEt.topology T) (ProEtale.padicAlgClSheaf T l)
-
 private theorem constructible_of_iso {T : Scheme.{u}} {l : ℕ} [Fact l.Prime]
     {M N : Modules T l} (e : M ≅ N) (h : Constructible T l M) : Constructible T l N := by
   obtain ⟨S, hS⟩ := h
@@ -645,40 +528,5 @@ private theorem preserves_flat {T : Scheme.{u}} {l : ℕ} [Fact l.Prime]
     ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).mpr h₁), fun n ↦ ?_⟩
   exact flat_iso ((HomologicalComplex.eval _ (.up ℤ) n).mapIso c)
     ((flat_comparison _).mp (h₂ n))
-
-private theorem flat_resolution {T : Scheme.{u}} {l : ℕ} [Fact l.Prime]
-    {g : T ≅ T} (D : Realization T l g) (K : CochainComplex (Pairs D) ℤ) :
-    ∃ (L : CochainComplex (Pairs D) ℤ) (f : L ⟶ K),
-      QuasiIso f ∧ KFlat D L ∧ FlatTerms D L ∧
-        QuasiIso (((forget D).mapHomologicalComplex (ComplexShape.up ℤ)).map f) := by
-  let _ := D.continuous
-  let _ := D.inverseContinuous
-  let _ := D.presentation.category
-  let E : TwistedActionRingedSite.Modules D.presentation.coefficient ≌ Pairs D :=
-    D.presentation.modules
-  have : E.functor.Additive := action_additive D
-  have : E.inverse.Additive := inferInstance
-  let Ec := E.mapHomologicalComplex (.up ℤ)
-  obtain ⟨P, p, hP, hflat, hp, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (Ec.inverse.obj K)
-  have : QuasiIso p := hp
-  let f : Ec.functor.obj P ⟶ K := Ec.functor.map p ≫ Ec.counitIso.hom.app K
-  have hq : QuasiIso f := by
-    have : QuasiIso (Ec.functor.map p) :=
-      HomologicalComplex.quasiIso_map_of_preservesHomology p E.functor
-    exact quasiIso_comp _ _
-  refine ⟨Ec.functor.obj P, f, hq, ?_, ?_, ?_⟩
-  · exact kflat_iso ((Ec.unitIso.app P)) hP
-  · intro n
-    let _ := SheafOfModules.isMonoidal_W_independentCoefficients D.presentation.coefficient
-    let _ := SheafOfModules.monoidalCategory D.presentation.coefficient
-    have h : SheafOfModules.IsFlatOnSite (J := D.presentation.topology)
-        (R := D.presentation.coefficient) (P.X n) :=
-      (exactFunctor _ _).prop_of_iso
-        (SheafOfModules.siteSheafTensorRightIso D.presentation.coefficient (P.X n)).symm
-        (hflat n)
-    exact flat_iso ((HomologicalComplex.eval _ (.up ℤ) n).mapIso (Ec.unitIso.app P)) h
-  · have := hq
-    exact HomologicalComplex.quasiIso_map_of_preservesHomology f (forget D)
 
 end WeilConjectures.WeilFrobeniusAction

@@ -55,19 +55,6 @@ lemma add_sectionAct (a b : (adicConstantSheaf l X).obj.obj U) (x : F.X.obj.obj 
     sectionAct F (a + b) x = sectionAct F a x + sectionAct F b x := by
   simp only [sectionAct, TensorProduct.add_tmul, map_add]
 
-lemma sectionAct_zero (a : (adicConstantSheaf l X).obj.obj U) :
-    sectionAct F a 0 = 0 := by
-  simp only [sectionAct, TensorProduct.tmul_zero, map_zero]
-
-lemma zero_sectionAct (x : F.X.obj.obj U) :
-    sectionAct F 0 x = 0 := by
-  simp only [sectionAct, TensorProduct.zero_tmul, map_zero]
-
-lemma sectionAct_smul (c : ULift.{u + 1} (PadicAlgCl l))
-    (a : (adicConstantSheaf l X).obj.obj U) (x : F.X.obj.obj U) :
-    sectionAct F a (c • x) = c • sectionAct F a x := by
-  simp only [sectionAct, TensorProduct.tmul_smul, map_smul]
-
 lemma smul_sectionAct (c : ULift.{u + 1} (PadicAlgCl l))
     (a : (adicConstantSheaf l X).obj.obj U) (x : F.X.obj.obj U) :
     sectionAct F (c • a) x = c • sectionAct F a x := by
@@ -87,16 +74,6 @@ lemma map_sectionAct {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
   rw [sectionAct, ← h1]
   erw [← h2]
   rfl
-
-/-- The action on sections is compatible with morphisms of `ℚ̄_ℓ,X`-modules. -/
-lemma hom_sectionAct {F G : AdicSheaf l X} (φ : F ⟶ G)
-    (a : (adicConstantSheaf l X).obj.obj U) (x : F.X.obj.obj U) :
-    φ.hom.hom.app U (sectionAct F a x) = sectionAct G a (φ.hom.hom.app U x) := by
-  have h := congrArg (fun g ↦ (μ (sheafToPresheaf (Scheme.ProEt.topology X)
-    (WeilCoefficients.{u} l)) (adicConstantSheaf l X) F.X ≫
-      (sheafToPresheaf _ _).map g).app U (a ⊗ₜ x)) (Mod.act_hom φ)
-  simp only [Functor.map_comp, ← μ_natural_right_assoc] at h
-  exact h
 
 end AlgebraicGeometry.ProEtale.AdicSheaf
 
@@ -128,13 +105,6 @@ lemma algebraMap_sectionAct (c : ULift.{u + 1} (PadicAlgCl l)) (x : F.X.obj.obj 
   rw [Functor.obj.η_def, adicConstantSheaf_ε_comp_map_one'] at h
   exact h
 
-/-- The constant function `1` acts trivially. -/
-lemma one_sectionAct (x : F.X.obj.obj U) :
-    sectionAct F (ULift.up 1) x = x := by
-  have h := algebraMap_sectionAct F (ULift.up 1) x
-  rw [map_one] at h
-  exact h.trans (one_smul _ x)
-
 lemma toProEtTop_comp {U V : X.ProEt} (f : V ⟶ U) :
     f ≫ toProEtTop U = toProEtTop V := by
   refine MorphismProperty.Over.Hom.ext ?_
@@ -164,11 +134,6 @@ noncomputable def sectionSheafHom (s : F.X.obj.obj (op (proEtTop X))) :
          F.X.obj.map f (sectionAct F a (restrictTop F s U))
        rw [map_sectionAct, map_restrictTop] }⟩
 
-lemma sectionSheafHom_app (s : F.X.obj.obj (op (proEtTop X))) (U : X.ProEtᵒᵖ)
-    (a : (adicConstantSheaf l X).obj.obj U) :
-    (sectionSheafHom F s).hom.app U a = sectionAct F a (restrictTop F s U) :=
-  rfl
-
 lemma sectionSheafHom_linear (s : F.X.obj.obj (op (proEtTop X))) :
     Mod.act (unit l X).X ≫ sectionSheafHom F s =
       adicConstantSheaf l X ◁ sectionSheafHom F s ≫ Mod.act F.X := by
@@ -187,11 +152,6 @@ lemma sectionSheafHom_linear (s : F.X.obj.obj (op (proEtTop X))) :
 `s` of `F`. -/
 noncomputable def sectionHom (s : F.X.obj.obj (op (proEtTop X))) : unit l X ⟶ F :=
   Mod.homMk (sectionSheafHom F s) (sectionSheafHom_linear F s)
-
-lemma sectionHom_hom_app (s : F.X.obj.obj (op (proEtTop X))) (U : X.ProEtᵒᵖ)
-    (a : (adicConstantSheaf l X).obj.obj U) :
-    (sectionHom F s).hom.hom.app U a = sectionAct F a (restrictTop F s U) :=
-  rfl
 
 lemma sum_sectionAct {ι : Type*} (t : Finset ι) (a : ι → (adicConstantSheaf l X).obj.obj U)
     (x : F.X.obj.obj U) :

@@ -149,14 +149,6 @@ noncomputable def rightDerivedLowerShriekPlus :
 @[inherit_doc rightDerivedLowerShriekPlus]
 scoped notation "R(" f ")_!⟦" Λ "⟧+" => rightDerivedLowerShriekPlus Λ f
 
-omit [IsCommMonObj Λ] in
-lemma rightDerivedLowerShriek_eq :
-    R(f)_!⟦Λ⟧ = Rf_!(HasCompactification.compactification f)⟦Λ⟧ := rfl
-
-omit [IsCommMonObj Λ] in
-lemma rightDerivedLowerShriekPlus_eq :
-    R(f)_!⟦Λ⟧+ = Rf_!(HasCompactification.compactification f)⟦Λ⟧+ := rfl
-
 /-- The bounded below derived lower shriek on module objects is the restriction of the
 unbounded one along the inclusions of the bounded below derived categories. -/
 noncomputable def rightDerivedLowerShriekPlusCompatibility :

@@ -130,13 +130,6 @@ variable {K X}
 
 namespace FrobeniusBasePoint
 
-/-- Base point data exist as soon as the geometric fibre is connected and has a geometric
-point: any two fibre functors of the Galois category of finite étale covers are isomorphic. -/
-theorem nonempty [ConnectedSpace (X ↘ Spec (.of K)).geometricFiber]
-    (t : Spec (.of (AlgebraicClosure K)) ⟶ (X ↘ Spec (.of K)).geometricFiber) :
-    Nonempty (FrobeniusBasePoint K X) :=
-  ⟨⟨t, (PreGaloisCategory.nonempty_iso_of_fiberFunctor _ _).some⟩⟩
-
 variable (B : FrobeniusBasePoint K X)
 
 /-- The transport `g ↦ β ≫ Fr_* g ≫ β⁻¹` of loops at `t` along the Frobenius and the path `β`,
@@ -843,35 +836,6 @@ theorem exists_isBoundedOn_twist_fundamentalRep (hM : M.IsEquivalenceAt B.t)
   have := D.isIrreducible_fundamentalRep M hM hF
   exact exists_isBoundedOn_twist _ D.deg_surjective
     (D.isBoundedOn_fundamentalRep_geometric M hM F hF.1)
-
-/-- **Finite geometric monodromy** (cf. Deligne, Weil II, 1.3.14) in arbitrary dimension: if the
-geometric monodromy group of an irreducible lisse Weil sheaf `ℱ` is finite, then a twist
-`ρ_ℱ ⊗ b^{-deg}` of its Weil fundamental representation has finite image. -/
-theorem exists_finite_range_twist_fundamentalRep (hM : M.IsEquivalenceAt B.t)
-    {F : WeilSheaf K l X} (hF : F.IsIrreducibleLisse)
-    (hfin : (D.fundamentalRep M F hF.1 '' D.deg.ker).Finite) :
-    ∃ b : (PadicAlgCl l)ˣ,
-      (Set.range ((D.fundamentalRep M F hF.1).twist (degreeCharacter D.deg b⁻¹))).Finite := by
-  have : FiniteDimensional (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (F.toLisse hF.1)) :=
-    F.finiteDimensional_stalkObj B.t
-  have := D.isIrreducible_fundamentalRep M hM hF
-  exact exists_finite_range_twist _ D.deg_surjective hfin
-
-/-- **Trivial geometric monodromy** in arbitrary dimension: if the geometric fundamental group
-acts trivially on the stalk of an irreducible lisse Weil sheaf `ℱ`, then `ℱ` has rank one and its
-Weil fundamental representation is a character `b ^ deg`. -/
-theorem finrank_eq_one_and_exists_twist_eq_one_fundamentalRep (hM : M.IsEquivalenceAt B.t)
-    {F : WeilSheaf K l X} (hF : F.IsIrreducibleLisse)
-    (htriv : ∀ g, M.rep B.t (F.toLisse hF.1) g = 1) :
-    Module.finrank (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (F.toLisse hF.1)) = 1 ∧
-      ∃ b : (PadicAlgCl l)ˣ,
-        ∀ w, (D.fundamentalRep M F hF.1).twist (degreeCharacter D.deg b⁻¹) w = 1 := by
-  have : FiniteDimensional (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (F.toLisse hF.1)) :=
-    F.finiteDimensional_stalkObj B.t
-  have := D.isIrreducible_fundamentalRep M hM hF
-  refine finrank_eq_one_and_exists_twist_eq_one _ D.deg_surjective fun i hi ↦ ?_
-  rw [D.fundamentalRep_geometric M F hF.1 ⟨i, hi⟩]
-  exact htriv _
 
 /-- **Deligne, Weil II, 1.3.14**, sheaf-theoretic form in arbitrary dimension: an irreducible
 lisse Weil sheaf `ℱ` on `X₀` is the twist of an irreducible lisse Weil sheaf `ℱ'` with bounded

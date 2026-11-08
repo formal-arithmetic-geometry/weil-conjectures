@@ -403,12 +403,6 @@ private lemma sum_natural {T U : ℕᵒᵖ ⥤ B} (f : T ⟶ U) (φ : ℕ ↪o �
     rw [f.naturality]
     rw [Pi.map_π_assoc]
 
-private lemma choose_comp (T : ℕᵒᵖ ⥤ B) (φ ψ : ℕ ↪o ℕ) :
-    chooseMap T φ ≫ chooseMap (subTower T φ) ψ = chooseMap T (ψ.trans φ) := by
-  apply Pi.hom_ext
-  intro n
-  simp [chooseMap, pr]
-
 private lemma sum_segment (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n l : ℕ) :
     sumMap T φ ≫ segment (subTower T φ) n l =
       segment T (φ n) (φ (n + l) - φ n) := by
@@ -544,18 +538,6 @@ private lemma rho_natural {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
     have hb : roosPmap f ≫ block Y φ =
         block X φ ≫ roosPmap ((restriction A φ).map f) :=
       sum_natural (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f) φ
-    exact squareMap_congr ha hb _ _
-
-private lemma rho_comp (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (φ ψ : ℕ ↪o ℕ) :
-    HEq (rho X φ ≫ rho ((restriction A φ).obj X) ψ) (rho X (ψ.trans φ)) := by
-  with_unfolding_all
-    apply heq_of_eq
-    unfold rho
-    rw [squareMap_comp]
-    have ha : selection X φ ≫ selection ((restriction A φ).obj X) ψ =
-        selection X (ψ.trans φ) := choose_comp X.asFunctor φ ψ
-    have hb : block X φ ≫ block ((restriction A φ).obj X) ψ =
-        block X (ψ.trans φ) := sum_comp X.asFunctor φ ψ
     exact squareMap_congr ha hb _ _
 
 omit [HasCountableProducts A] in

@@ -202,41 +202,4 @@ abbrev ring {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 end AdicModuleSectionComparison
 
-/-- Literal sectionwise restriction along a site object, with the coefficient map specified
-by a ring-sheaf isomorphism. This is Mathlib's module pushforward along the composition
-functor of sites, not a new inverse-image construction.
-Source: Stacks 03DH, 0E8H (blueprint: lem-sf-adic-module-section-data). -/
-noncomputable abbrev adicComparisonRestriction {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
-    (U : X.ProEt) (P : AdicModuleSectionComparison l X)
-    (Q : AdicModuleSectionComparison l U.left)
-    (c : Q.ring ≅ (localizationRestriction RingCat.{u + 1} U.hom U.prop).obj P.ring) :
-    ringedSiteModules.{u + 1} P.ring ⥤ ringedSiteModules.{u + 1} Q.ring :=
-  letI : (MorphismProperty.Over.map (f := U.hom) ⊤ U.prop).IsContinuous
-      (Scheme.ProEt.topology U.left) (Scheme.ProEt.topology X) :=
-    Scheme.ProEt.isContinuous_overMap (V := U.left) (U := X) U.prop
-  SheafOfModules.pushforward.{u + 1}
-    (F := MorphismProperty.Over.map (f := U.hom) ⊤ U.prop)
-    (J := Scheme.ProEt.topology U.left) (K := Scheme.ProEt.topology X)
-    (S := Q.ring) (R := P.ring) c.hom
-
-/-- The actual inverse-image/localization comparison on one section of a native module.
-Source: Stacks 03CE and native `upperStarIsoLocalizationRestriction`
-(blueprint: lem-sf-adic-module-section-data). -/
-noncomputable def adicComparisonPullSection {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
-    (U : X.ProEt) (M : AdicSheaf l X) (V : U.left.ProEtᵒᵖ)
-    (x : ((adicUpperStar l U.hom).obj M).X.obj.obj V) :
-    M.X.obj.obj (op ((MorphismProperty.Over.map (f := U.hom) ⊤ U.prop).obj V.unop)) :=
-  ((upperStarIsoLocalizationRestriction (WeilCoefficients.{u} l) U.hom U.prop).hom.app
-    M.X).hom.app V x
-
-/-- The specified native dual comparison on a site object: pull back the internal Hom,
-then use the canonical pullback of the regular module. Source: native adic Hom and unit
-pullback, Stacks 0E8H (blueprint: lem-sf-adic-module-section-data). -/
-noncomputable def adicComparisonDualSlice {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
-    (U : X.ProEt) (M : AdicSheaf l X) :
-    (adicUpperStar l U.hom).obj ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X)) ⟶
-      (AdicSheaf.ihom ((adicUpperStar l U.hom).obj M)).obj (AdicSheaf.unit l U.left) :=
-  (adicUpperStarIhomIso l U.hom M).hom.app (AdicSheaf.unit l X) ≫
-    (AdicSheaf.ihom ((adicUpperStar l U.hom).obj M)).map (adicUpperStarUnitIso l U.hom).hom
-
 end AlgebraicGeometry.ProEtale

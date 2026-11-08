@@ -154,27 +154,6 @@ lemma ΓSpecIso_hom_appTop_specMap_comp {R S : CommRingCat.{u}} (φ : R ⟶ S) {
 variable (ι : Type u) (k₀ : Type u) [Field k₀] {K L : Type u} [Field K] [Field L] [Algebra k₀ K]
   [Algebra k₀ L]
 
-/-- The identification `𝔸¹(K) ≃ K` is compatible with isomorphisms of the coefficient field. -/
-lemma AffineSpace.fieldPointsEquiv_fieldPointsCongr (σ : K ≃ₐ[k₀] L)
-    (x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints K) :
-    AffineSpace.fieldPointsEquiv k₀ L (Scheme.Hom.fieldPointsCongr _ σ x) =
-      σ (AffineSpace.fieldPointsEquiv k₀ K x) :=
-  ΓSpecIso_hom_appTop_specMap_comp _ x.1 _
-
-omit [Algebra k₀ L] in
-/-- The coordinate of the product `μ(z) = x y` of the coordinates of a point `z` of the affine
-plane. -/
-lemma affinePlane.ΓSpecIso_hom_appTop_mul (z : Spec (CommRingCat.of L) ⟶ affinePlane k₀) :
-    (Scheme.ΓSpecIso (.of L)).hom.hom
-        ((z ≫ affinePlane.mul k₀).appTop (AffineSpace.coord _ PUnit.unit)) =
-      (Scheme.ΓSpecIso (.of L)).hom.hom
-          ((z ≫ affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit)) *
-        (Scheme.ΓSpecIso (.of L)).hom.hom
-          ((z ≫ affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
-  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affinePlane.mul,
-    AffineSpace.homOfVector_appTop_coord, map_mul, map_mul, Scheme.Hom.comp_appTop,
-    Scheme.Hom.comp_appTop, CommRingCat.comp_apply, CommRingCat.comp_apply]
-
 /-- The identification `𝔸^ι(K) ≃ K^ι` is compatible with isomorphisms of the coefficient
 field. -/
 lemma AffineSpace.fieldPointsEquivPi_fieldPointsCongr (σ : K ≃ₐ[k₀] L)
@@ -315,19 +294,6 @@ lemma affinePlane.sndFiber.lift_fst_snd :
       (specOver.algHomEquivFieldPoints k₀ K L φ).1 ≫ y.1 := by
   rw [affinePlane.sndFiber.lift, affinePlane.sndFiber.fst, pullback.lift_fst_assoc]
   exact pullback.lift_snd _ _ _
-
-/-- The product of the coordinates of the point `(x, φ(y))` of the affine plane is `x φ(y)`. -/
-lemma affinePlane.sndFiber.ΓSpecIso_hom_appTop_lift_mul :
-    (Scheme.ΓSpecIso (.of L)).hom.hom
-        ((affinePlane.sndFiber.lift φ x ≫ affinePlane.sndFiber.fst y ≫ affinePlane.mul k₀).appTop
-          (AffineSpace.coord _ PUnit.unit)) =
-      x * φ (AffineSpace.fieldPointsEquiv k₀ K y) := by
-  rw [← Category.assoc, affinePlane.ΓSpecIso_hom_appTop_mul, Category.assoc, Category.assoc,
-    affinePlane.sndFiber.lift_fst_fst, affinePlane.sndFiber.lift_fst_snd,
-    specOver.algHomEquivFieldPoints_apply_coe, ΓSpecIso_hom_appTop_specMap_comp,
-    ← AffineSpace.fieldPointsEquiv_apply, Equiv.apply_symm_apply,
-    ← AffineSpace.fieldPointsEquiv_apply]
-  rfl
 
 lemma affinePlane.sndFiber.lift_over :
     affinePlane.sndFiber.lift φ x ≫ (affinePlane.sndFiber y ↘ Spec (CommRingCat.of k₀)) =

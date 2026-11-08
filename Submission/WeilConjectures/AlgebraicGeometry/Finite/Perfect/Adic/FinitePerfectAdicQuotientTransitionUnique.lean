@@ -5,7 +5,225 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicConstantCohomology
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerData
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicEtaleStalkData
+import Submission.WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedMapPresheaves
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantModel
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.Finiteness.Defs
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantGradedModel
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantExtensionTower
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteConstantExtensionTower
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantConeStep
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteLocallyConstantWeakSerre
+import Mathlib.CategoryTheory.ObjectProperty.Kernels
+import Mathlib.CategoryTheory.ObjectProperty.Extensions
+import Submission.WeilConjectures.CategoryTheory.Site.SiteModuleSheafConstantRingEquivalenceSupplement
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantSerre
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf
+import Submission.WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageSupplement
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionExact
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantLocalLinear
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleHomSurjective
+import Mathlib.CategoryTheory.Sites.SheafHom
+import Mathlib.CategoryTheory.Sites.Subsheaf
+import Submission.WeilConjectures.CategoryTheory.LocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.LocalModuleIso
+import Submission.WeilConjectures.CategoryTheory.ConstantLocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctor
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleUnit
+import Mathlib.Algebra.Module.FinitePresentation
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleOverHom
+import Submission.WeilConjectures.CategoryTheory.FinitePresentationLocalLift
+import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Submission.WeilConjectures.CategoryTheory.Sites.ConstantForget
+import Mathlib.RingTheory.Noetherian.Basic
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeExtensionLocalPresentation
+import Submission.WeilConjectures.CategoryTheory.ConstantFiniteFreeLocalLift
+import Submission.WeilConjectures.CategoryTheory.FiniteSectionsEpiLift
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.Abelian.Exact
+import Submission.WeilConjectures.CategoryTheory.ExtensionCokernelPresentation
+import Mathlib.Algebra.Category.ModuleCat.Kernels
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+import Mathlib.RingTheory.Finiteness.Cardinality
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionMapExact
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.LinearAlgebra.StdBasis
+import Submission.WeilConjectures.AlgebraicGeometry.BoundedTopMorphisms
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.RingTheory.Finiteness.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantComplexDescent
+import Mathlib.Algebra.Category.ModuleCat.Limits
+import Mathlib.Algebra.Homology.Additive
+import Mathlib.Data.Int.Interval
+import Mathlib.CategoryTheory.Category.ULift
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Submission.WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Mathlib.Topology.Connected.Clopen
+import Mathlib.CategoryTheory.Sites.Point.Over
+import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.RingTheory.FiniteConeFreeModel
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.Algebra.Homology.Homotopy
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Free.FiniteFreeEtaleAcyclicHomotopy
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import Submission.WeilConjectures.RingTheory.RingPseudoCoherent
+import Submission.WeilConjectures.RingTheory.FiniteFreeResolution
+import Submission.WeilConjectures.RingTheory.PseudoCoherentOfCohomology
+import Mathlib.Algebra.Homology.Single
+import Submission.WeilConjectures.RingTheory.PseudoCoherentIffAllM
+import Submission.WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
+import Submission.WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
+import Submission.WeilConjectures.CategoryTheory.TruncationTriangle
+import Mathlib.CategoryTheory.Abelian.Projective.Extend
+import Mathlib.LinearAlgebra.Dimension.Free
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.SixFunctors.BaseChange.Pasting
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSliceRestriction
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicEtaleLevelData
+import Submission.WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicFiniteOperations
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLisseOrigin
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Submission.WeilConjectures.ConstructibleSheaf.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFixedModuleLocalConstancy
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModelsFromLisse
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelStalks
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelLocalConstancy
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleOriginFromFiniteModels
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleComparisonLocalization
+import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleEtaleFiniteModels
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModelTypePartition
+import Submission.WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleUniformModelEtaleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
+import Mathlib.CategoryTheory.Sites.CoversTop.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLocallyClassicalContinuity
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleComparisonSections
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Submission.WeilConjectures.CategoryTheory.LanContinuityFromRepresentables
+import Mathlib.CategoryTheory.Limits.Presheaf
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Submission.WeilConjectures.SixFunctors.BaseChange.Square
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.CategoryTheory.Sites.Precoverage.Generates
+import Mathlib.CategoryTheory.Sites.Finite
+import Mathlib.CategoryTheory.Sites.LocalProperties
+import Mathlib.CategoryTheory.Limits.Connected
+import Mathlib.CategoryTheory.Limits.Types.Filtered
+import Mathlib.CategoryTheory.Filtered.Connected
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.Basic.Finite.Prod
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantSheafStalk
+import Mathlib.CategoryTheory.Abelian.RightDerived
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleStalkFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleEncoding
+import Submission.WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+import Submission.WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
+import Submission.WeilConjectures.ConstructibleSheaf.InternalHom
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTransition
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -38,109 +256,9 @@ variable {C : Type u₀} [Category.{v₀} C] {J : GrothendieckTopology C}
   {R₁ R₂ : Sheaf J CommRingCat.{u}} (α : R₁ ⟶ R₂) (M : SheafOfModules.{u} (𝓡 R₁))
   {Y : SheafOfModules.{u} (𝓡 R₂)} (h : Y = changeOfRings α M)
 
-/-- Every section of a change of rings is, locally for a cocontinuous functor, a sheafified
-section of sectionwise change of rings. -/
-theorem changeOfRings_exists_local_presheaf {C' : Type u₁} [Category.{v₁} C']
-    (J' : GrothendieckTopology C') (G : C' ⥤ C) [G.IsCocontinuous J' J] (U : C')
-    (x : Y.val.obj (op (G.obj U))) :
-    ∃ s ∈ J' U, ∀ ⦃V : C'⦄ (i : V ⟶ U), s i →
-      ∃ p : (changeOfRingsPresheaf α M).obj (op (G.obj V)),
-        Y.val.map (G.map i).op x = (eqToHom h.symm).val.app _
-          ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app _ p) := by
-  subst h
-  refine ⟨(Presheaf.imageSieve (toSheafify J (changeOfRingsPresheaf α M).presheaf)
-    x).functorPullback G, G.cover_lift J' J
-      (Presheaf.imageSieve_mem J (toSheafify J (changeOfRingsPresheaf α M).presheaf) x), ?_⟩
-  intro V i hi
-  obtain ⟨p, hp⟩ := hi
-  exact ⟨p, hp.symm⟩
-
-/-- Two additive maps out of a change of rings agree on sheafified sections of sectionwise
-change of rings once they agree on sheafified pure tensors. -/
-theorem changeOfRings_addHom_ext_tmul {T : Type*} [AddCommGroup T] (W : Cᵒᵖ)
-    (F₁ F₂ : Y.val.obj W →+ T)
-    (hF : ∀ (s : R₂.obj.obj W) (m : M.val.obj W),
-      F₁ ((eqToHom h.symm).val.app W ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W
-        (s ⊗ₜ[R₁.obj.obj W,(α.hom.app W).hom] m))) =
-      F₂ ((eqToHom h.symm).val.app W ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W
-        (s ⊗ₜ[R₁.obj.obj W,(α.hom.app W).hom] m))))
-    (p : (changeOfRingsPresheaf α M).obj W) :
-    F₁ ((eqToHom h.symm).val.app W
-        ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W p)) =
-      F₂ ((eqToHom h.symm).val.app W
-        ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W p)) := by
-  subst h
-  change F₁ ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W p) =
-    F₂ ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W p)
-  induction p using TensorProduct.inductionOn with
-  | add x y hx hy => simp only [map_add, hx, hy]
-  | tmul s m => exact hF s m
-
 end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-
-/-- Two morphisms of sheaves of modules agree if every section is locally sent to the same
-section by both. -/
-theorem sheafModuleHom_ext_of_local {C : Type*} [Category C] {J : GrothendieckTopology C}
-    {R : Type*} [Ring R] {S T : Sheaf J (ModuleCat.{t + 1} R)}
-    [J.HasSheafCompose (CategoryTheory.forget (ModuleCat.{t + 1} R))] (f g : S ⟶ T)
-    (h : ∀ (U : Cᵒᵖ) (x : S.obj.obj U), ∃ s ∈ J U.unop, ∀ ⦃V : C⦄ (i : V ⟶ U.unop), s i →
-      f.hom.app (op V) (S.obj.map i.op x) = g.hom.app (op V) (S.obj.map i.op x)) :
-    f = g := by
-  have hs := (isSheaf_iff_isSheaf_of_type J
-      (T.obj ⋙ CategoryTheory.forget (ModuleCat.{t + 1} R))).1
-    ((sheafCompose J (CategoryTheory.forget (ModuleCat.{t + 1} R))).obj T).property
-  apply Sheaf.hom_ext
-  ext U x
-  obtain ⟨s, hsJ, hx⟩ := h U x
-  apply (hs.isSeparated _ hsJ).ext
-  intro V i hi
-  change T.obj.map i.op (f.hom.app U x) = T.obj.map i.op (g.hom.app U x)
-  rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
-    ← f.hom.naturality, ← g.hom.naturality]
-  exact hx i hi
-
-/-- The consecutive arrows of fixed-scalar coordinates normalized on sheafified pure tensors
-are unique.
-Source: Stacks Project, Tags 03CY and 09C6.
-
-Proof: every section of an ordinary scalar extension is locally the sheafification of a finite
-sum of pure tensors. The localization functor of the chart is cocontinuous, so the sections
-over charts are locally of that form within the chart site. Both arrows are additive and
-agree on pure tensors, hence on these local generators; the target is a sheaf. -/
-theorem finitePerfectAdicQuotientTransition_unique
-    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (V : X.Etale) (n : ℕ)
-    (δ δ' : finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1) ⟶
-      finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
-        finitePerfectAdicStepRestrict X d V n)
-    (hδ : FinitePerfectAdicQuotientTransition X d φ V n δ)
-    (hδ' : FinitePerfectAdicQuotientTransition X d φ V n δ') : δ = δ' := by
-  ext N : 2
-  apply sheafModuleHom_ext_of_local
-  intro U x
-  let G := MorphismProperty.Over.map ⊤ (show WeaklyEtale V.hom from inferInstance)
-  let ψ := completedAdicCommProjection X d (n + 1)
-  have : G.IsCocontinuous (ProEt.topology V.left) (ProEt.topology X) :=
-    ProEt.isCocontinuous_overMap (show WeaklyEtale V.hom from inferInstance)
-  obtain ⟨s, hs, hloc⟩ := SheafOfModules.changeOfRings_exists_local_presheaf ψ N
-    ((completedAdicChangeData X ψ).choose_spec.choose N) (ProEt.topology V.left) G U.unop x
-  refine ⟨s, hs, ?_⟩
-  intro V' i hi
-  obtain ⟨p, hp⟩ := hloc i hi
-  let T := ((finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
-    finitePerfectAdicStepRestrict X d V n).obj N).obj.obj (op V')
-  let F₁ : ((completedAdicChangeData X ψ).choose.obj N).val.obj (op (G.obj V')) →+ T :=
-    ((δ.app N).hom.app (op V')).hom.toAddMonoidHom
-  let F₂ : ((completedAdicChangeData X ψ).choose.obj N).val.obj (op (G.obj V')) →+ T :=
-    ((δ'.app N).hom.app (op V')).hom.toAddMonoidHom
-  have key := SheafOfModules.changeOfRings_addHom_ext_tmul ψ N
-    ((completedAdicChangeData X ψ).choose_spec.choose N) (op (G.obj V')) F₁ F₂
-    (fun b m ↦ (hδ N V' b m).trans (hδ' N V' b m).symm) p
-  exact (congrArg F₁ hp).trans (key.trans (congrArg F₂ hp).symm)
 
 end AlgebraicGeometry.Scheme

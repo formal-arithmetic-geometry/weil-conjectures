@@ -9,7 +9,10 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import Submission.WeilConjectures.CategoryTheory.Triangulated.IsoLocusContravariant
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import Submission.WeilConjectures.TraceFormula.KunnethVerdierShift
+public import Submission.WeilConjectures.TraceFormula.KunnethVerdier
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
+public import Submission.WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConstructible
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -109,13 +112,6 @@ lemma homIhomSwap_comp_left (ω : 𝒞) {A A' : 𝒞} (B : 𝒞) (a : A' ⟶ A)
   simp only [homIhomSwap, Equiv.coe_fn_mk]
   rw [uncurry_curry, uncurry_pre_app, uncurry_curry, uncurry_natural_left,
     ← BraidedCategory.braiding_naturality_left_assoc]
-
-lemma homIhomSwap_comp_pre (ω A : 𝒞) {B B' : 𝒞} (b : B' ⟶ B) (f : A ⟶ (ihom B).obj ω) :
-    homIhomSwap ω A B' (f ≫ (pre b).app ω) = b ≫ homIhomSwap ω A B f := by
-  apply uncurry_injective
-  simp only [homIhomSwap, Equiv.coe_fn_mk]
-  rw [uncurry_curry, uncurry_pre_app, uncurry_natural_left, uncurry_curry,
-    BraidedCategory.braiding_naturality_right_assoc]
 
 /-- In a braided category with zero morphisms whose functors `X ⊗ -` preserve zero morphisms,
 `0 ▷ Z = 0`. -/

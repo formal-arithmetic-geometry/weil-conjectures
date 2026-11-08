@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Submission.WeilConjectures.Topology.ConstructibleInConstructible
 

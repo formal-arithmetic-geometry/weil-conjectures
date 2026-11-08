@@ -98,18 +98,4 @@ noncomputable def nativeOfCondensedCarrier
         ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.mapIso
           ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).counitIso.app C)).symm hC)⟩
 
-/-- The realization has the prescribed condensed Weil complex, including its
-Frobenius datum. -/
-noncomputable def nativeOfCondensedCarrierIso
-    (C : DerivedCategory (Endofunctor.IsoAlgebra
-      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)))
-    (hC : boundedConstructible
-      (condensedRingObj (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj C)) :
-    (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj
-      (nativeOfCondensedCarrier C hC).obj ≅ C :=
-  (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).counitIso.app C
-
 end AlgebraicGeometry.WeilComplex

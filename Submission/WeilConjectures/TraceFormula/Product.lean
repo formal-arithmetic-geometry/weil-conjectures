@@ -199,15 +199,6 @@ instance isClosedImmersion_ι : IsClosedImmersion F.ι.left :=
   MorphismProperty.of_isPullback (P := @IsClosedImmersion)
     (F.isPullback.map (Over.forget _)).flip (inferInstanceAs (IsClosedImmersion (diag X).left))
 
-/-- The exceptional composition isomorphism of the fixed square (blueprint
-`prop-trf-fixed-square-cartesian`): `Rd^! ≅ Rc₁^! ⋙ Rι^!`, from `d = ι ≫ c₁`, the only
-unconditional `!`-transport of the two legs in the fixed square. -/
-noncomputable def upperShriekDIso :
-    boundedConstructibleUpperShriek ℓ F.d ≅
-      boundedConstructibleUpperShriek ℓ c.c₁ ⋙
-        boundedConstructibleUpperShriek ℓ F.ι :=
-  boundedConstructibleUpperShriekComp_padicAlgCl ℓ F.ι c.c₁
-
 end FixedLocus
 
 end Correspondence

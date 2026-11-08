@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
@@ -14,7 +13,6 @@ public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniver
 public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
@@ -23,7 +21,14 @@ public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-public import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
+public import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 public import Submission.WeilConjectures.AlgebraicGeometry.DerivedChangeOfRingsModel

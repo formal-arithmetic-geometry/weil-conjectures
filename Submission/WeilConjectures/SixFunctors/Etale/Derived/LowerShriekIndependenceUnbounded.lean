@@ -7,7 +7,14 @@ module
 
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import Submission.WeilConjectures.Compactification.CommonRefinement
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+public import Submission.WeilConjectures.Compactification.RefinementPullback
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import Submission.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek

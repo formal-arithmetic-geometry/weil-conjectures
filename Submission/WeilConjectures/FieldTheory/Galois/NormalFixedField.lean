@@ -35,28 +35,6 @@ open IntermediateField Polynomial
 
 universe u v
 
-/-- **Finitely many finite separable extensions embed into one finite Galois extension.**
-If `L₁, …, Lₙ` are finite separable field extensions of `k`, there is a finite Galois extension
-`M / k` together with `k`-algebra maps `Lᵢ →ₐ[k] M`. We take for `M` the normal closure, inside
-a separable closure of `k`, of the compositum of the images of the `Lᵢ`.
-
-(blueprint: `lem-weil-pbc-finite-galois-receiving-separable-extensions`) -/
-theorem exists_finiteDimensional_isGalois_algHom_of_isSeparable {k : Type u} [Field k] {n : ℕ}
-    (L : Fin n → Type v) [∀ i, Field (L i)] [∀ i, Algebra k (L i)]
-    [∀ i, FiniteDimensional k (L i)] [∀ i, Algebra.IsSeparable k (L i)] :
-    ∃ (M : Type u) (_ : Field M) (_ : Algebra k M), FiniteDimensional k M ∧ IsGalois k M ∧
-      Nonempty (∀ i, L i →ₐ[k] M) := by
-  let Ω := SeparableClosure k
-  let τ : ∀ i, L i →ₐ[k] Ω := fun i => IsSepClosed.lift
-  let E : IntermediateField k Ω := ⨆ i, (τ i).fieldRange
-  have : ∀ i, FiniteDimensional k (τ i).fieldRange := fun i =>
-    LinearEquiv.finiteDimensional (AlgEquiv.ofInjectiveField (τ i)).toLinearEquiv
-  have : FiniteDimensional k E := finiteDimensional_iSup_of_finite
-  refine ⟨normalClosure k E Ω, inferInstance, inferInstance, inferInstance,
-    IsGalois.normalClosure k E Ω, ⟨fun i => ?_⟩⟩
-  exact (τ i).codRestrict (normalClosure k E Ω).toSubalgebra fun x =>
-    le_normalClosure E (le_iSup (fun i => (τ i).fieldRange) i ⟨x, rfl⟩)
-
 variable {F E : Type*} [Field F] [Field E] [Algebra F E]
 
 /-- If `E / F` is normal, the fixed field of `Aut(E/F)` is purely inseparable over `F`. -/

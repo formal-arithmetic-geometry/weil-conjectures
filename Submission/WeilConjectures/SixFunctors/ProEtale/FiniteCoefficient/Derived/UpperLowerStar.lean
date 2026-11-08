@@ -105,25 +105,6 @@ namespace ProEtale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/-- The total right derived functor `Rg_* : D(Z_proét) ⥤ D(Y_proét)` of the pushforward
-`g_*` along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of
-pro-étale sheaves.
-
-It is not a definition of its own: it is the generic `Functor.rightDerivedFunctor`,
-written `R(-)`, applied to the underived pushforward `(g)_*[A]`. -/
-noncomputable example :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
-  R((g)_*[A])
-
-/-- The right derived functor `Rg_* : D⁺(Z_proét) ⥤ D⁺(Y_proét)` of the pushforward `g_*`
-on the *bounded below* derived categories of pro-étale sheaves: the generic
-`Functor.rightDerivedFunctorPlus`, written `R+(-)`, applied to `(g)_*[A]`. -/
-noncomputable example :
-    DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) A) ⥤
-      DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) A) :=
-  R+((g)_*[A])
-
 end ProEtale
 
 end DerivedLowerStar
@@ -184,23 +165,6 @@ resolutions of pro-étale sheaves via `ProEtale.hasFunctorialFlatResolution_shea
 variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
-
-/-- The total left derived functor `Lg^* : D(Y_proét) ⥤ D(Z_proét)` of the pullback `g^*`
-along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of pro-étale
-sheaves, defined via the K-flat left derivability structure: `Lg^*` is computed by
-applying `g^*` to a K-flat resolution.
-
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`,
-written `L(-)`, applied to the underived pullback `(g)^*[A]`.
-
-Since `g^*` is exact, the counit `Lg^* ∘ Q ⟶ Q ∘ g^*` is in fact an isomorphism
-everywhere; the construction via the derivability structure is uniform in the functor
-and applies verbatim once `g^*` is replaced by a non-exact functor (e.g. the pullback
-of sheaves of modules over a varying sheaf of rings). -/
-noncomputable example :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A) :=
-  L((g)^*[A])
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
 derived functor `Lg^*`, computed via K-flat resolutions, is canonically isomorphic to

@@ -185,32 +185,5 @@ structure DerivedModel (S : CoefficientDerivedSystemCalculus l E W)
       DerivedCategory.Q.map ((M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I a) ≫
         systemUnit.app I
 
-/-- The strict cone augmentation is the ordinary-limit lift followed by the existing
-zero-shifted-coordinate Roos inclusion. Thus this is a real chain map by construction.
-Source: Stacks 08TC, 0941 and item proof step 5
-(blueprint: def-trf-completion-unit-models). -/
-def OrdinaryModel.coneAugmentation (M : OrdinaryModel l E W)
-    (Q : CochainComplex (scalarReductionSource l E W) ℤ) :
-    Q ⟶ roosF.obj ((tower l E W).obj ((M.quotient l E W).obj Q)) :=
-  M.augmentation l E W Q ≫ roosι _
-
-/-- The normalized Roos comparison to the simultaneous reduction/limit object.
-Both transports are the recorded localization comparison for exact restriction and
-the universal left-derived comparison on the specified K-flat complex.
-Source: Stacks 09T5, 0941 and item proof steps 3, 6
-(blueprint: def-trf-completion-unit-models). -/
-def DerivedModel.completionComparison
-    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
-    (D : DerivedModel l E W S M) (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (hQ : Q.IsKFlatIndependentCoefficients) (hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite) :
-    DerivedCategory.Q.obj (roosF.obj ((tower l E W).obj ((M.quotient l E W).obj Q))) ≅
-      (coefficientSequenceLimit l E W).obj (S.reduction.obj (DerivedCategory.Q.obj Q)) :=
-  D.roos.app _ ≪≫
-    (coefficientConstantTowerLimit l E W).mapIso
-      ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.app
-        ((M.quotient l E W).obj Q)).symm ≪≫
-    (coefficientSequenceLimit l E W).mapIso
-      (@asIso _ _ _ _ (D.reductionComparison.app Q) (D.reduction_isIso Q hQ hflat)).symm
-
 end CompletionUnit
 end WeilConjectures

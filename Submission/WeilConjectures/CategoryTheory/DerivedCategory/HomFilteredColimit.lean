@@ -404,11 +404,6 @@ def HomCommutesWithFilteredColimits (s : DerivedCategory C) : Prop :=
 
 namespace HomCommutesWithFilteredColimits
 
-/-- Surjectivity is the factorization property `HomFactorsThroughFilteredColimits`. -/
-lemma homFactorsThroughFilteredColimits {s : DerivedCategory C}
-    (hs : HomCommutesWithFilteredColimits.{w} s) : HomFactorsThroughFilteredColimits.{w} s :=
-  fun I _ _ F c hc n f ↦ (hs I F c hc n).1 f
-
 
 /-- Reformulation of `HomCommutesWithFilteredColimits` with `Cocone.IsCoyonedaColimit`. -/
 lemma iff (s : DerivedCategory C) :
@@ -445,18 +440,6 @@ lemma ext₂ (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)
   fun I _ _ F c hc n ↦ IsCoyonedaColimit.of_distTriang_source
     (c := (singleFunctor C n).mapCocone c) T hT (h₁ I F c hc n) (h₃ I F c hc n)
     (h₁.shift 1 I F c hc n) (h₃.shift (-1) I F c hc n)
-
-lemma ext₃ (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)
-    (h₁ : HomCommutesWithFilteredColimits.{w} T.obj₁)
-    (h₂ : HomCommutesWithFilteredColimits.{w} T.obj₂) :
-    HomCommutesWithFilteredColimits.{w} T.obj₃ :=
-  ext₂ T.rotate (rot_of_distTriang _ hT) h₂ (h₁.shift 1)
-
-lemma ext₁ (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)
-    (h₂ : HomCommutesWithFilteredColimits.{w} T.obj₂)
-    (h₃ : HomCommutesWithFilteredColimits.{w} T.obj₃) :
-    HomCommutesWithFilteredColimits.{w} T.obj₁ :=
-  ext₂ T.invRotate (inv_rot_of_distTriang _ hT) (h₃.shift (-1)) h₂
 
 /-- The case of a diagram of objects concentrated in a single degree `m`, with a cocone inducing
 a colimit on `H^m`. -/

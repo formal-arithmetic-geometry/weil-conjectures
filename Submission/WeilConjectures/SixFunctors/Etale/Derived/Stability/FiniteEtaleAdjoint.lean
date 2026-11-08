@@ -53,41 +53,6 @@ instance preservesFiniteLimits_lowerStar_of_isFinite_of_etale :
     (Etale.upperStarLowerStarAdjunction A e).rightAdjoint_preservesLimits
   PreservesLimitsOfSize.preservesFiniteLimits.{0, 0} _
 
-/-- For a finite étale `e`, the exact functor `D(e_*)` is left adjoint to `D(e^*)`, the derived
-version of `AlgebraicGeometry.Etale.lowerStarUpperStarAdjunctionOfIsFinite`. -/
-noncomputable def mapDerivedCategoryLowerStarUpperStarAdjunctionOfIsFinite :
-    D((e)_*[A]) ⊣ D((e)^*[A]) :=
-  (Etale.lowerStarUpperStarAdjunctionOfIsFinite A e).mapDerivedCategoryAdjunction
-
-/-- For a finite étale `e`, the derived compactly supported direct image is the exact direct
-image, `Re_! ≅ Re_* ≅ D(e_*)`: `e` is proper and `e_*` is exact. -/
-noncomputable def rightDerivedLowerShriekIsoMapDerivedCategoryOfIsFiniteOfEtale
-    [HasCompactification e] : R(e)_![A] ≅ D((e)_*[A]) :=
-  rightDerivedLowerShriekIsoRightDerivedLowerStar A e ≪≫
-    (e)_*[A].rightDerivedFunctorIsoMapDerivedCategory
-
-/-- Blueprint `prop-exc-finite-etale-adjoint`: The right adjoint for a finite etale morphism.
-
-For a finite étale `e`, the compactly supported direct image `Re_! ≅ D(e_*)` is left adjoint to
-the pullback `D(e^*)`. -/
-noncomputable def rightDerivedLowerShriekUpperStarAdjunctionOfIsFiniteOfEtale
-    [HasCompactification e] : R(e)_![A] ⊣ D((e)^*[A]) :=
-  (mapDerivedCategoryLowerStarUpperStarAdjunctionOfIsFinite A e).ofNatIsoLeft
-    (rightDerivedLowerShriekIsoMapDerivedCategoryOfIsFiniteOfEtale A e).symm
-
-/-- Blueprint `prop-exc-finite-etale-adjoint`: The right adjoint for a finite etale morphism.
-
-Let `e : V ⟶ X` be finite étale. Then the direct image `e_*` is exact, and on the derived
-categories `Re_! ≅ Re_* ≅ D(e_*)` with `D(e_*) ⊣ D(e^*)`, the pullback being the inverse image. -/
-theorem exact_lowerStar_and_rightDerivedLowerShriek_adjunction_of_isFinite_of_etale
-    [HasCompactification e] :
-    (PreservesFiniteLimits (e)_*[A] ∧ PreservesFiniteColimits (e)_*[A]) ∧
-      Nonempty (R(e)_![A] ≅ R((e)_*[A])) ∧ Nonempty (R((e)_*[A]) ≅ D((e)_*[A])) ∧
-      Nonempty (D((e)_*[A]) ⊣ D((e)^*[A])) :=
-  ⟨⟨inferInstance, inferInstance⟩, ⟨rightDerivedLowerShriekIsoRightDerivedLowerStar A e⟩,
-    ⟨(e)_*[A].rightDerivedFunctorIsoMapDerivedCategory⟩,
-    ⟨mapDerivedCategoryLowerStarUpperStarAdjunctionOfIsFinite A e⟩⟩
-
 end Etale
 
 end AlgebraicGeometry

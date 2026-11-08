@@ -699,14 +699,4 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 attribute [local instance] Compactification.over
 
-/-- The new-model `Rf_!` of `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRightDerivedLowerShriek`
-is the condensed Weil `Rf_!` of
-`AlgebraicGeometry.ProEtale.CondensedRing.weilRightDerivedLowerShriek` for `Λ = ℚ̲̄_ℓ`. -/
-lemma condensedRightDerivedLowerShriek_eq (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-    (c : Compactification f) :
-    condensedRightDerivedLowerShriek k₀ l f c =
-      ProEtale.CondensedRing.weilRightDerivedLowerShriek (Profinite.padicAlgClRingObj l) c
-        (comp_over f _) :=
-  rfl
-
 end AlgebraicGeometry.ProEtaleWeilSheaf

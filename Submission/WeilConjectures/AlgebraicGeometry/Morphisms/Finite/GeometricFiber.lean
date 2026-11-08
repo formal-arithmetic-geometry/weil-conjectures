@@ -273,17 +273,6 @@ lemma baseChangeEquiv_apply_coe (h : IsPullback g' f' f g) (y' : Spec (.of Ω) �
     (x' : f'.GeometricFiber y') : (baseChangeEquiv h y' x').1 = x'.1 ≫ g' :=
   rfl
 
-@[simp]
-lemma baseChangeEquiv_symm_apply_coe_comp (h : IsPullback g' f' f g) (y' : Spec (.of Ω) ⟶ Y')
-    (x : f.GeometricFiber (y' ≫ g)) : ((baseChangeEquiv h y').symm x).1 ≫ g' = x.1 :=
-  h.lift_fst _ _ _
-
-@[simp]
-lemma baseChangeEquiv_symm_apply_coe_comp_snd (h : IsPullback g' f' f g)
-    (y' : Spec (.of Ω) ⟶ Y') (x : f.GeometricFiber (y' ≫ g)) :
-    ((baseChangeEquiv h y').symm x).1 ≫ f' = y' :=
-  ((baseChangeEquiv h y').symm x).2
-
 
 variable (f g)
 
@@ -299,18 +288,6 @@ lemma pullbackEquiv_apply_coe (y' : Spec (.of Ω) ⟶ Y')
     (x' : (pullback.snd f g).GeometricFiber y') :
     (pullbackEquiv f g y' x').1 = x'.1 ≫ pullback.fst f g :=
   rfl
-
-@[simp]
-lemma pullbackEquiv_symm_apply_coe_comp (y' : Spec (.of Ω) ⟶ Y')
-    (x : f.GeometricFiber (y' ≫ g)) :
-    ((pullbackEquiv f g y').symm x).1 ≫ pullback.fst f g = x.1 :=
-  baseChangeEquiv_symm_apply_coe_comp _ _ _
-
-@[simp]
-lemma pullbackEquiv_symm_apply_coe_comp_snd (y' : Spec (.of Ω) ⟶ Y')
-    (x : f.GeometricFiber (y' ≫ g)) :
-    ((pullbackEquiv f g y').symm x).1 ≫ pullback.snd f g = y' :=
-  baseChangeEquiv_symm_apply_coe_comp_snd _ _ _
 
 end GeometricFiber
 

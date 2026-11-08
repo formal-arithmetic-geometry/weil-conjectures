@@ -43,11 +43,6 @@ section PerfectClosure
 
 variable (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L]
 
-/-- The perfect closure of `K` inside `Ω := AlgebraicClosure L` is a perfect field. -/
-theorem perfectField_perfectClosure_algebraicClosure :
-    PerfectField (perfectClosure K (AlgebraicClosure L)) :=
-  inferInstance
-
 /-- For fields `K ⊆ L` and `Ω := AlgebraicClosure L`, the perfect closure of `K` in `Ω` is
 contained (as a subset of `Ω`) in the perfect closure of `L` in `Ω`. -/
 theorem perfectClosure_subset_perfectClosure_algebraicClosure :

@@ -94,17 +94,6 @@ variable {k₀ k' : Type u} [Field k₀] [Field k'] [Finite k₀] [Finite k'] [A
     V ↘ Spec (CommRingCat.of k₀))
   (r : ℕ) (hr : Nat.card k' = Nat.card k₀ ^ r)
 
-/-- Restriction to a component, on Weil sheaves: the pullback of a constructible sheaf is
-constructible. -/
-def componentRestriction : WeilSheaf k₀ l V ⥤ WeilSheaf k' l V :=
-  ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ ProEtaleWeilSheaf.componentRestriction hc r hr)
-    fun G ↦ G.property.upperStar _
-
-/-- Restriction to a component preserves lissity. -/
-theorem IsLisse.componentRestriction {G : WeilSheaf k₀ l V} (hG : G.IsLisse) :
-    ((componentRestriction hc r hr).obj G).IsLisse :=
-  hG.upperStar _
-
 end WeilSheaf
 
 end AlgebraicGeometry

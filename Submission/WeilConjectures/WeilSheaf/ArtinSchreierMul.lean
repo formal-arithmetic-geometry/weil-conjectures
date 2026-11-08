@@ -97,12 +97,6 @@ noncomputable def planeCharacter (ψ : AddChar k₀ (PadicAlgCl l)) (c : planeIn
     AddChar (planeIndex → k₀) (PadicAlgCl l) :=
   ψ.compAddMonoidHom (planeLinearMap c)
 
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-/-- Evaluation of `AlgebraicGeometry.planeCharacter` (blueprint `lem-fd-as-characters`). -/
-lemma planeCharacter_apply (ψ : AddChar k₀ (PadicAlgCl l)) (c a : planeIndex → k₀) :
-    planeCharacter ψ c a = ψ (∑ i, c i * a i) :=
-  rfl
-
 /-- The inclusion `(∑ᵢ cᵢ fᵢ)^* ℒ_ψ ⟶ π_* ℚ̄_ℓ`, pulled back from `ℒ_ψ ⟶ AS_* ℚ̄_ℓ`. -/
 local notation "Φ[" ψ ", " c "]" => ProEtaleWeilSheaf.isotypicPullback
   (artinSchreierPlaneCover.linearCoord_comp_artinSchreierMap f c)

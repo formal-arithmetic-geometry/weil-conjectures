@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.Contraction
 public import Mathlib.LinearAlgebra.Trace
-public import Submission.WeilConjectures.Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.Basis.Prod
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

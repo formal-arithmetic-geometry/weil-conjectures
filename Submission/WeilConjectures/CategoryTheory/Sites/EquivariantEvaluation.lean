@@ -103,10 +103,6 @@ def equivariantFunctions (M : Rep.{w} Λ H) (W : C) : Submodule Λ ((T ⟶ W) �
   zero_mem' h t := by simp
   smul_mem' c s hs h t := by simp [hs h t]
 
-lemma mem_equivariantFunctions {M : Rep.{w} Λ H} {W : C} {s : (T ⟶ W) → M} :
-    s ∈ equivariantFunctions a Λ M W ↔ ∀ h t, s ((a h).unop ≫ t) = M.ρ h (s t) :=
-  Iff.rfl
-
 /-- The presheaf `W ↦ Hom_H(Hom(T, W), M)` of equivariant functions, with restriction given by
 precomposition. -/
 @[simps obj]

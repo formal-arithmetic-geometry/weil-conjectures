@@ -6,7 +6,10 @@ Authors: Bin Wu
 
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.SectionBoundaryExact
+public import Submission.WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Submission.WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Submission.WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

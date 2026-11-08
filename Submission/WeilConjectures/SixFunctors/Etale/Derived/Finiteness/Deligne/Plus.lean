@@ -151,13 +151,6 @@ lemma HasDirectImageBaseChangeOnPlus.of_iso
         (((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.mapIso e))) h₁,
     (NatTrans.isIso_app_iff_of_iso _ e).1 h₂⟩
 
-/-- The property of a complex only depends on its isomorphism class. -/
-lemma hasDirectImageBaseChangeOnPlus_iff_of_iso
-    {K K' : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (e : K ≅ K') :
-    HasDirectImageBaseChangeOnPlus Λ fY j K U ↔ HasDirectImageBaseChangeOnPlus Λ fY j K' U :=
-  ⟨.of_iso e, .of_iso e.symm⟩
-
 /-- The property holds for a zero object. -/
 lemma HasDirectImageBaseChangeOnPlus.of_isZero
     {K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -202,22 +195,6 @@ lemma HasDirectImageBaseChangeOnPlus.of_distTriang₂
     (jT)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙ _root_.DerivedCategory.Plus.ι
   exact ⟨ObjectProperty.ext_of_isTriangulatedClosed₂ _ _ (Φ.map_distinguished _ hTr) c₁ c₃,
     NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ _ hTr i₁ i₃⟩
-
-/-- **Two out of three** for the property: if it holds for the first and the second term of a
-distinguished triangle, it holds for the third. -/
-lemma HasDirectImageBaseChangeOnPlus.of_distTriang₃
-    {Tr : Triangle (_root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} Λ)))} (hTr : Tr ∈ distTriang _)
-    (h₁ : HasDirectImageBaseChangeOnPlus Λ fY j Tr.obj₁ U)
-    (h₂ : HasDirectImageBaseChangeOnPlus Λ fY j Tr.obj₂ U) :
-    HasDirectImageBaseChangeOnPlus Λ fY j Tr.obj₃ U := by
-  intro T _ t ht YT XT g fT g' jT hY sq
-  obtain ⟨c₁, i₁⟩ := h₁ T t ht YT XT g fT g' jT hY sq
-  obtain ⟨c₂, i₂⟩ := h₂ T t ht YT XT g fT g' jT hY sq
-  let Φ := ((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
-    (jT)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙ _root_.DerivedCategory.Plus.ι
-  exact ⟨ObjectProperty.ext_of_isTriangulatedClosed₃ _ _ (Φ.map_distinguished _ hTr) c₁ c₂,
-    NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ _ hTr i₁ i₂⟩
 
 /-- **Two out of three** for the property: if it holds for the second and the third term of a
 distinguished triangle, it holds for the first. -/

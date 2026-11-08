@@ -106,10 +106,6 @@ attribute [instance] fintype_ι fintype_κ
 
 variable (G : S.FiniteAffineGluingPresentation)
 
-lemma basicOpen_g_le (a b : G.ι) (r : G.κ a b) :
-    S.basicOpen (G.g a b r) ≤ S.basicOpen (G.f a b r) :=
-  (G.basicOpen_f a b r).ge
-
 /-- The open cover of `S` by the charts of a finite affine gluing presentation. -/
 noncomputable def openCover : S.OpenCover :=
   S.openCoverOfIsOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
@@ -178,12 +174,6 @@ lemma resLE_mul_basicOpenInv {U : S.Opens} (s : Γ(S, U)) (W : S.Opens)
     rw [← Functor.map_comp]
     rfl
   · rfl
-
-lemma localizationSubring_eq_closure {U : S.Opens} (A : Subring Γ(S, U)) (s : Γ(S, U))
-    (W : S.Opens) (hW : W ≤ S.basicOpen s) :
-    localizationSubring A s W hW = Subring.closure (insert (basicOpenInv s W hW)
-      ((S.resLE (hW.trans (S.basicOpen_le s))).hom '' A)) :=
-  rfl
 
 lemma basicOpenInv_mem_localizationSubring {U : S.Opens} (A : Subring Γ(S, U)) (s : Γ(S, U))
     (W : S.Opens) (hW : W ≤ S.basicOpen s) :
@@ -512,8 +502,6 @@ lemma Stage.A_injective : Function.Injective (Stage.A : G.Stage → _) := by
 /-- Stages are ordered by inclusion of their coefficient subrings. -/
 instance : PartialOrder G.Stage := PartialOrder.lift _ (Stage.A_injective G)
 
-lemma Stage.le_iff {l₁ l₂ : G.Stage} : l₁ ≤ l₂ ↔ ∀ a, l₁.A a ≤ l₂.A a := Iff.rfl
-
 /-- Part of blueprint `lemma-nagata-valid-refinements-directed`: the stages form a
 join-semilattice under inclusion, the join being the componentwise supremum. -/
 instance : SemilatticeSup G.Stage :=
@@ -522,8 +510,6 @@ instance : SemilatticeSup G.Stage :=
     le_sup_left := fun _ _ _ ↦ le_sup_left
     le_sup_right := fun _ _ _ ↦ le_sup_right
     sup_le := fun _ _ _ h h' a ↦ sup_le (h a) (h' a) }
-
-lemma Stage.sup_A (l l' : G.Stage) (a : G.ι) : (l ⊔ l').A a = l.A a ⊔ l'.A a := rfl
 
 /-- Cofinality of the stages: finitely many sections of each chart lie in the coefficient
 subrings of a single stage. The stage is the image of the sections of affine opens of a stage of
@@ -595,13 +581,6 @@ instance : IsDirected G.Stage (· ≤ ·) := ⟨fun l l' ↦ ⟨l ⊔ l', le_sup
 /-- Part of blueprint `lemma-nagata-valid-refinements-directed`: valid stages exist. -/
 instance : Nonempty G.Stage :=
   ⟨(G.exists_stage_superset (fun _ ↦ ∅) fun _ ↦ Set.finite_empty).choose⟩
-
-/-- Cofinality of the valid stages: every section of every chart lies in the coefficient
-subring of some valid stage. -/
-theorem exists_stage_mem (a : G.ι) (x : Γ(S, G.U a)) : ∃ l : G.Stage, x ∈ l.A a := by
-  obtain ⟨l, hl⟩ := G.exists_stage_superset (fun b ↦ Set.range fun h : b = a ↦ h ▸ x)
-    fun b ↦ Set.finite_range _
-  exact ⟨l, hl a ⟨rfl, rfl⟩⟩
 
 end AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
 

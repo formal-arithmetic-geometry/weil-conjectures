@@ -112,32 +112,4 @@ theorem exists_frobeniusClosed_basis (k : Type*) [Field k] [Algebra k E] [IsAlgC
     exact RingHom.mem_range.1 (minpoly.mem_range_of_degree_eq_one k f
       (IsAlgClosed.degree_eq_one_of_irreducible k (minpoly.irreducible hint)))
 
-/-- **Kuhlmann, Lemma 25.** Given a Frobenius-closed basis `1, w i ^ p ^ r` of `E` over `k`, if
-`c₀ + ∑ i ∈ s, c i • w i` is a `p`-th power in `E`, then all `c i` (`i ∈ s`) vanish. -/
-theorem eq_zero_of_add_sum_eq_pow {E : Type*} [Field E] [Algebra k E] (p : ℕ)
-    [Fact p.Prime] [CharP E p] {ι : Type*} {w : ι → E}
-    (hli : LinearIndependent k (fun j : Option (ι × ℕ) ↦ j.elim 1 (fun i ↦ w i.1 ^ p ^ i.2)))
-    (hsp : span k (Set.range (fun j : Option (ι × ℕ) ↦ j.elim 1 (fun i ↦ w i.1 ^ p ^ i.2))) = ⊤)
-    (s : Finset ι) (c : ι → k) (c₀ : k) (z : E)
-    (h : algebraMap k E c₀ + ∑ i ∈ s, c i • w i = z ^ p) : ∀ i ∈ s, c i = 0 := by
-  classical
-  have hp := (Fact.out : p.Prime)
-  let b := Module.Basis.mk hli hsp.ge
-  have hb (j : Option (ι × ℕ)) : b j = j.elim 1 (fun i ↦ w i.1 ^ p ^ i.2) :=
-    Module.Basis.mk_apply _ _ _
-  have hz : z ^ p ∈ span k (b '' {j | ∀ i, j ≠ some (i, 0)}) := by
-    refine pow_mem_span_of_pow_mem (s := Set.range b) (fun x hx ↦ ?_) (b.mem_span z)
-    obtain ⟨_ | ⟨i, r⟩, rfl⟩ := hx
-    · exact subset_span ⟨none, by simp, by simp [hb]⟩
-    · exact subset_span ⟨some (i, r + 1), by simp, by simp [hb, pow_succ, pow_mul]⟩
-  intro i hi
-  have h2 : b.repr (z ^ p) (some (i, 0)) = 0 := by
-    by_contra hne
-    exact b.mem_span_image.1 hz (Finsupp.mem_support_iff.2 hne) i rfl
-  have hw (i : ι) : w i = b (some (i, 0)) := by simp [hb]
-  have h1 : (1 : E) = b none := by simp [hb]
-  rw [← h, Algebra.algebraMap_eq_smul_one, h1] at h2
-  simp_rw [hw] at h2
-  simpa [Finsupp.single_apply, hi] using h2
-
 end FrobeniusClosedBasis

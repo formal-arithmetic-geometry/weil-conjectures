@@ -125,13 +125,6 @@ theorem HasWeightsAtMost.of_functionExact (hfg : Function.Exact f g) {ι : K →
 end Exact
 
 
-/-- The Frobenius module `(M, Fᵐ)`: the same space, with the `m`-th power of the Frobenius. It
-is the Frobenius module of `M` over the constant extension of degree `m` of the base field. -/
-noncomputable def powFrobenius (M : FrobeniusModule.{u, v} K) (m : ℕ) :
-    FrobeniusModule.{u, v} K where
-  carrier := M.carrier
-  frobenius := M.frobenius ^ m
-
 
 /-- A Frobenius module with weights at most `w` whose dual has weights at most `-w` (through an
 isomorphism `N ≃ M^∨`) is pure of weight `w`: the eigenvalues of the Frobenius of `M^∨` are the

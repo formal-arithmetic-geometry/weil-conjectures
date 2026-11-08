@@ -161,49 +161,6 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l
   exact hasWeightsAtMostOver_compactlySupportedCohomology_one_of_iso_upperStar ι D W hW hWtop _
     (IsOpenImmersion.lift_fac _ _ _) G hG ((upperStarCongr (by rfl)).app G ≪≫ e) hw
 
-/-- Let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense open immersion and let `F` be a lisse Weil sheaf on `U₀`,
-punctually `ι`-pure of weight `w` and unramified at infinity. Then `H_c^r(𝔸¹, j_*F)` has
-weights at most `w + r` for every integer `r`. (blueprint: `sk-thm-dl-a1-upper`) -/
-theorem hasWeightsAtMost_compactlySupportedCohomology_directImage (ι : PadicAlgCl l →+* ℂ)
-    (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
-    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (r : ℤ) :
-    (D.directImage.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) := by
-  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
-  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
-    GeometricallyConnected.of_geometricallyIrreducible _
-  rcases lt_trichotomy r 1 with hr | rfl | hr
-  · rcases (by omega : r < 0 ∨ r = 0) with hr | rfl
-    · have : Subsingleton (D.directImage.compactlySupportedCohomology r).carrier :=
-        subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse
-        (Or.inl hr)
-      exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-    · have : Subsingleton (D.directImage.compactlySupportedCohomology 0).carrier :=
-        AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf
-          D.lisse
-      exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-  · exact_mod_cast D.hasWeightsAtMostOver_compactlySupportedCohomology_one ι hinf hw
-  · rcases (by omega : 2 < r ∨ r = 2) with hr | rfl
-    · have : Subsingleton (D.directImage.compactlySupportedCohomology r).carrier :=
-        subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse
-        (Or.inr hr)
-      exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-    · exact_mod_cast
-        (AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two
-          D.j D.sheaf ι D.lisse hw).hasWeightsAtMostOver
-
-/-- In degree zero the compactly supported cohomology of `j_*F` on the line vanishes.
-(blueprint: `sk-thm-dl-a1-upper`) -/
-theorem subsingleton_compactlySupportedCohomology_directImage_zero
-    (D : LisseOnDenseOpen k₀ l) :
-    Subsingleton (D.directImage.compactlySupportedCohomology 0).carrier := by
-  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
-  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
-    GeometricallyConnected.of_geometricallyIrreducible _
-  exact AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf
-    D.lisse
-
 /-- In degree two the compactly supported cohomology of `j_*F` on the line is pure of weight
 `w + 2`, not merely of weights at most `w + 2`. (blueprint: `sk-thm-dl-a1-upper`) -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two

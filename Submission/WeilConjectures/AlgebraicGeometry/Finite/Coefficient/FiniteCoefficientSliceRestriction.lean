@@ -113,31 +113,4 @@ instance finiteCoefficientSliceRestriction_preservesFiniteColimits (X : Scheme.{
     PreservesFiniteColimits (finiteCoefficientSliceRestriction X B R φ V) :=
   (finiteCoefficientSliceRestriction_exact X B R φ V).2.2
 
-/-- Vanishing on the ringed slice implies vanishing in fixed scalar coordinates.
-Source: Stacks Project, Tag 099R
-(blueprint: def-weil-pbc-finite-coefficient-slice-restriction).
-Proof: every object of the chart site has its canonical arrow to the chart;
-evaluation there is evaluation of the zero restricted module sheaf. -/
-theorem finiteCoefficientSliceRestriction_isZero (X : Scheme.{t}) (B : Type t)
-    [CommRing B] (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
-    (φ : adicConstantRing X B ⟶ R) (V : X.Etale)
-    (M : SheafOfModules.{t + 1} ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R))
-    (hz : IsZero ((SheafOfModules.overFunctor.{t + 1} _ ((toProEt X).obj V)).obj M)) :
-    IsZero ((finiteCoefficientSliceRestriction X B R φ V).obj M) := by
-  rw [IsZero.iff_id_eq_zero]
-  apply Sheaf.hom_ext
-  apply NatTrans.ext
-  funext T
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro x
-  let U := (MorphismProperty.Over.map (f := V.hom) ⊤
-    (show WeaklyEtale V.hom from inferInstance)).obj T.unop
-  let p : U ⟶ (toProEt X).obj V := MorphismProperty.Over.homMk T.unop.hom rfl
-  have he := ((SheafOfModules.forget _) ⋙
-    (PresheafOfModules.evaluation _ (op (Over.mk p)))).map_isZero hz
-  have hs := ModuleCat.isZero_iff_subsingleton.mp he
-  exact hs.elim _ _
-
 end AlgebraicGeometry.Scheme

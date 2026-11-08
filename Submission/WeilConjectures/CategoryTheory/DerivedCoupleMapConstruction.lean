@@ -287,35 +287,6 @@ theorem alpha_comm (M : DerivedCoupleMapData D E a f g β hβ hg) (p q : ℤ) :
 
 end DerivedCoupleMapData
 
-/-- The restriction equations determine all three maps uniquely.
-Source: Stacks Project, Lemma 12.21.2 and Remark 12.21.5, Tags 011R and 0AMJ
-(blueprint: lem-sp-derived-map-construction). -/
-theorem derivedCoupleMapData_unique (D E : ℤ → ℤ → C)
-    (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
-    (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))
-    (g : ∀ p q, D p q ⟶ E (p + s) (q - s))
-    (β : ∀ p q, E (p - s - 2) (q + s + 1) ⟶ E p q)
-    (hβ : ∀ p q, β p q ≫ f p q ≫ g (p + 2) (q - 1) = 0)
-    (hg : ∀ p q, g p q ≫ f (p + s) (q - s) = 0)
-    (M N : DerivedCoupleMapData D E a f g β hβ hg) : M = N := by
-  have hf : M.forward = N.forward := by
-    funext p q
-    apply (cancel_epi
-      (cokernel.π (kernel.lift (f p q ≫ g (p + 2) (q - 1)) (β p q) (hβ p q)))).mp
-    apply (cancel_mono (image.ι (a ((p + 2) + 1) ((q - 1) - 1)) ≫
-      eqToHom (show D (((p + 2) + 1) - 1) (((q - 1) - 1) + 1) =
-        D (p + 2) (q - 1) by congr 1 <;> omega))).mp
-    simpa only [Category.assoc] using (M.f_comm p q).trans (N.f_comm p q).symm
-  have hg' : M.backward = N.backward := by
-    funext p q
-    apply (cancel_epi (factorThruImage (a (p + 1) (q - 1)))).mp
-    exact (M.g_comm p q).trans (N.g_comm p q).symm
-  cases M
-  cases N
-  cases hf
-  cases hg'
-  rfl
-
 /-- Construct the induced maps, without asserting exactness of the new triangle.
 Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ
 (blueprint: lem-sp-derived-map-construction).

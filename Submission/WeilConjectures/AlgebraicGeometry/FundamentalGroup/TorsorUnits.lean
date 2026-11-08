@@ -142,15 +142,6 @@ lemma lowerStarGmSheafMap_id : lowerStarGmSheafMap g (𝟙 Z) g (Category.id_com
   refine (congrArg Scheme.Hom.appTop ?_).trans Scheme.Hom.id_appTop
   apply pullback.hom_ext <;> simp
 
-/-- The value of `lowerStarGmSheafMap` on a section, as a function. -/
-lemma lowerStarGmSheafMap_app_val {V : X.Etale}
-    (x : ((Etale.lowerStar AddCommGrpCat.{u + 1} g).obj Z.gmSheaf).obj.obj (op V)) :
-    ((Additive.toMul ((lowerStarGmSheafMap g h g' hh).hom.app (op V) x).down :
-        Γ(pullback V.hom g', ⊤)ˣ) : Γ(pullback V.hom g', ⊤)) =
-      (pullback.map V.hom g' V.hom g (𝟙 _) h (𝟙 _) (by simp) (by simp [hh])).appTop
-        ((Additive.toMul x.down : Γ(pullback V.hom g, ⊤)ˣ) : Γ(pullback V.hom g, ⊤)) :=
-  rfl
-
 
 end Scheme
 

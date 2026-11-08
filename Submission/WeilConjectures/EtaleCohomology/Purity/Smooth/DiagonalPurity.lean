@@ -128,15 +128,6 @@ lemma diagonal_diagonalShear :
       ← appTop_comp_apply, pullback.diagonal_fst, pullback.diagonal_snd, sub_self,
       zeroSection_appTop_coord]
 
-/-- The zero section of `𝔸(n; S)` commutes with reindexing. -/
-@[reassoc (attr := simp)]
-lemma zeroSection_reindex {m : Type u} (f : m → n) :
-    zeroSection n S ≫ reindex f S = zeroSection m S := by
-  refine hom_ext ?_ fun i ↦ ?_
-  · rw [Category.assoc, reindex_over, zeroSection_over, zeroSection_over]
-  · rw [appTop_comp_apply, reindex_appTop_coord, zeroSection_appTop_coord,
-      zeroSection_appTop_coord]
-
 /-- Reindexing along a map between types with a single element is an isomorphism. -/
 instance isIso_reindex_of_unique {m : Type u} [Unique n] [Unique m] (f : m → n) :
     IsIso (reindex f S) := by

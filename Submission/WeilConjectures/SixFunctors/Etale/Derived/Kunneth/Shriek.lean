@@ -13,9 +13,22 @@ public import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pu
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 
@@ -197,60 +210,6 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_kunn
   exact ⟨t ≪≫ (R(_)_![A]).mapIso p ≪≫ ku ≪≫
     ((-⊗ᴸ-(pullback b₁ b₂)[A]).mapIso e₁.symm).app _ ≪≫
     ((-⊗ᴸ-(pullback b₁ b₂)[A]).obj _).mapIso e₂.symm⟩
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a
-finite coefficient ring, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
-`Y₁ ×_S Y₂ ⟶ Yᵢ` and the composition isomorphism `R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase`; both hold for torsion
-coefficients. It is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` over
-`B = Y₁ ×_S Y₂`, transported along `pullback.mapOverBaseIso`. -/
-theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange
-    [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
-    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM₁ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₁ M₁)
-    (hM₂ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₂ M₂)
-    [HasCompactification (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom]
-    [HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
-      (pullback.snd f₂ (pullback.snd b₁ b₂)))]
-    (hcomp : Nonempty (R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ] ≅
-      R((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom)_![ModuleCat.{u + 1} Λ] ⋙
-        R(pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
-          (pullback.snd f₂ (pullback.snd b₁ b₂)))_![ModuleCat.{u + 1} Λ]))
-    (hbc₁ : Nonempty ((L((pullback.fst b₁ b₂)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁) ≅
-      (R(pullback.snd f₁ (pullback.fst b₁ b₂))_![ModuleCat.{u + 1} Λ]).obj
-        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[ModuleCat.{u + 1} Λ])).obj M₁)))
-    (hbc₂ : Nonempty ((L((pullback.snd b₁ b₂)^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂) ≅
-      (R(pullback.snd f₂ (pullback.snd b₁ b₂))_![ModuleCat.{u + 1} Λ]).obj
-        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[ModuleCat.{u + 1} Λ])).obj M₂))) :
-    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
-      externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁)
-        ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂)) := by
-  obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_mapOverBase (ModuleCat.{u + 1} Λ) b₁ b₂ f₁
-    f₂ hcomp (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂)
-  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
-    (ModuleCat.{u + 1} Λ) b₁ b₂ f₁ f₂ M₁ M₂
-  have : QuasiCompact (pullback.snd f₁ (pullback.fst b₁ b₂)) :=
-    MorphismProperty.of_isPullback (P := @QuasiCompact)
-      (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂)) inferInstance
-  have : QuasiCompact (pullback.snd f₂ (pullback.snd b₁ b₂)) :=
-    MorphismProperty.of_isPullback (P := @QuasiCompact)
-      (IsPullback.of_hasPullback f₂ (pullback.snd b₁ b₂)) inferInstance
-  obtain ⟨ku⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ
-    (pullback.snd f₁ (pullback.fst b₁ b₂)) (pullback.snd f₂ (pullback.snd b₁ b₂))
-    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₁ _) hM₁)
-    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₂ _) hM₂)
-  obtain ⟨e₁⟩ := hbc₁
-  obtain ⟨e₂⟩ := hbc₂
-  exact ⟨t ≪≫ (R(_)_![ModuleCat.{u + 1} Λ]).mapIso p ≪≫ ku ≪≫
-    ((-⊗ᴸ-(pullback b₁ b₂)[ModuleCat.{u + 1} Λ]).mapIso e₁.symm).app _ ≪≫
-    ((-⊗ᴸ-(pullback b₁ b₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂.symm⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-def-sf-kv-maps` (i), `def-sf-kv-maps` (i): the `!`-Künneth isomorphism.

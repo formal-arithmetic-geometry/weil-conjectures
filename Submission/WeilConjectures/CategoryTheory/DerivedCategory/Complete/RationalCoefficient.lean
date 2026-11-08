@@ -105,11 +105,6 @@ def DerivedCategoryDerivedCompleteRational : Type _ :=
   Rationalization (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
     (DerivedCategoryDerivedCompleteIntegral J l E)
 
-/-- The `Hom` groups of `D_comp(J, E)` are `E`-vector spaces. -/
-noncomputable example : Linear E (DerivedCategoryDerivedCompleteRational J l E) := inferInstance
-
-example : IsTriangulated (DerivedCategoryDerivedCompleteRational J l E) := inferInstance
-
 /-- The localization functor `D_comp(J, 𝒪_E) ⥤ D_comp(J, E)`. -/
 @[reducible]
 noncomputable def DerivedCategoryDerivedCompleteRational.fromIntegral :

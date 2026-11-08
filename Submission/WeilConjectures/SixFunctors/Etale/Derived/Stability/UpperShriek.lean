@@ -384,20 +384,6 @@ section Functors
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (iii): the restriction
-`Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the derived direct image to the small categories, for a
-separated morphism of finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on
-`Y`. -/
-noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerStar (aX : X ⟶ Spec (.of k))
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
-    [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f]
-    [HasInvertibleExponent Λ Y] :
-    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y :=
-  ObjectProperty.lift _
-    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R((f)_*[ModuleCat.{u + 1} Λ]))
-    fun K ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf K.property
-
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (iv): the restriction
 `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` of the compactly supported direct image to the small
 categories, for a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ`
@@ -410,19 +396,6 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriek (aY : Y ⟶ S
   ObjectProperty.lift _
     (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ⋙ R(f)_![ModuleCat.{u + 1} Λ])
     fun K ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f K.property
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (v): the restriction
-`Rf^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)` of the exceptional inverse image to the small categories, for
-a separated finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ` whose exponent
-is invertible on `Y`. -/
-noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriek (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
-    [HasCompactification f] [QuasiCompact f] :
-    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  ObjectProperty.lift _
-    (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) Y ⋙ R(f)^![Λ])
-    fun K ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f K.property
 
 end Functors
 

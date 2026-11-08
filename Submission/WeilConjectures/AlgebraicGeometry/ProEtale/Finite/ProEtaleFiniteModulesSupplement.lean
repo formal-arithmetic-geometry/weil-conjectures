@@ -17,7 +17,7 @@ public import Submission.WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Submission.WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

@@ -235,14 +235,6 @@ variable {Y : Scheme.{u}} (f₁ : Y ⟶ Spec (.of k₁)) (f₀ : Y ⟶ Spec (.of
 
 variable (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure k₁)
 
-/-- The geometric point of `Ȳ₀ = Y ×_{k₀} k̄₀` obtained from a geometric point `s` of
-`Ȳ₁ = Y ×_{k₁} k̄₁` through `Spec θ : Spec k̄₁ ≅ Spec k̄₀` and `ι : Ȳ₁ ⟶ Ȳ₀`, that is
-`(Spec θ)⁻¹ ≫ s ≫ ι`. -/
-def geometricFiberExtensionPoint
-    (s : Spec (.of (AlgebraicClosure k₁)) ⟶ f₁.geometricFiber) :
-    Spec (.of (AlgebraicClosure k₀)) ⟶ f₀.geometricFiber :=
-  (specAlgHomAlgebraicClosureIso θ).inv ≫ s ≫ geometricFiberExtensionMap f₁ f₀ hf θ
-
 
 variable [Finite k₀]
 

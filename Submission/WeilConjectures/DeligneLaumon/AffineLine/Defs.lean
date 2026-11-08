@@ -8,7 +8,14 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
-public import Submission.WeilConjectures.WeilSheaf.Defs
+public import Submission.WeilConjectures.WeilSheaf.Category
+public import Submission.WeilConjectures.WeilSheaf.Cohomology
+public import Submission.WeilConjectures.WeilSheaf.Constant
+public import Submission.WeilConjectures.WeilSheaf.Dual
+public import Submission.WeilConjectures.WeilSheaf.Fourier
+public import Submission.WeilConjectures.WeilSheaf.LowerShriek
+public import Submission.WeilConjectures.WeilSheaf.OpenImmersion
+public import Submission.WeilConjectures.WeilSheaf.Stalk
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

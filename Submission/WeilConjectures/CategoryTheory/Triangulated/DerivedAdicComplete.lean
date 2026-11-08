@@ -226,22 +226,6 @@ lemma of_distTriang₁₂ {n : ℤ} (T : Triangle C) (hT : T ∈ distTriang C)
   isIso₃_of_isIso₁₂ (powerTriangleOneSubZSMulAdicTowerShift n T)
     (powerTriangle_distinguished T hT) (powerTriangle_distinguished T hT) h₁ h₂
 
-/-- In a distinguished triangle, if the last two objects are derived `n`-adically complete,
-so is the first. -/
-lemma of_distTriang₂₃ {n : ℤ} (T : Triangle C) (hT : T ∈ distTriang C)
-    (h₂ : IsDerivedAdicComplete n T.obj₂) (h₃ : IsDerivedAdicComplete n T.obj₃) :
-    IsDerivedAdicComplete n T.obj₁ :=
-  isIso₁_of_isIso₂₃ (powerTriangleOneSubZSMulAdicTowerShift n T)
-    (powerTriangle_distinguished T hT) (powerTriangle_distinguished T hT) h₂ h₃
-
-/-- In a distinguished triangle, if the first and third objects are derived `n`-adically
-complete, so is the second. -/
-lemma of_distTriang₁₃ {n : ℤ} (T : Triangle C) (hT : T ∈ distTriang C)
-    (h₁ : IsDerivedAdicComplete n T.obj₁) (h₃ : IsDerivedAdicComplete n T.obj₃) :
-    IsDerivedAdicComplete n T.obj₂ :=
-  isIso₂_of_isIso₁₃ (powerTriangleOneSubZSMulAdicTowerShift n T)
-    (powerTriangle_distinguished T hT) (powerTriangle_distinguished T hT) h₁ h₃
-
 end IsDerivedAdicComplete
 
 end Pretriangulated

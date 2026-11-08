@@ -352,25 +352,7 @@ theorem isMonoidal_boundedConstructible :
 set_option linter.overlappingInstances false in
 attribute [instance] isMonoidal_boundedConstructible
 
-/-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
-constructible complexes: the tensor product of the monoidal structure on the
-full subcategory `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of
-`-⊗ᴸ-(X)⟦ℚ̲̄_ℓ⟧` in both variables. -/
-noncomputable def boundedConstructibleTensor :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  curriedTensor _
-
 variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleTensorObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleTensor ℓ X).obj K ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleTensor, derivedTensor]
 
 end TensorHom
 
@@ -412,25 +394,7 @@ theorem isMonoidal_boundedConstructible :
 set_option linter.overlappingInstances false in
 attribute [instance] isMonoidal_boundedConstructible
 
-/-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
-constructible complexes: the tensor product of the monoidal structure on the full
-subcategory `Dᵇc(X)⟦E̲⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of
-`-⊗ᴸ-(X)⟦E̲⟧` in both variables. -/
-noncomputable def boundedConstructibleTensor :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
-  curriedTensor _
-
 variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleTensorObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    (boundedConstructibleTensor ℓ E X).obj K ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Profinite.continuousMapRingObj E⟧).obj K.obj :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleTensor, derivedTensor]
 
 end TensorHom
 
@@ -474,26 +438,7 @@ theorem isMonoidal_boundedConstructible :
 set_option linter.overlappingInstances false in
 attribute [instance] isMonoidal_boundedConstructible
 
-/-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
-constructible complexes: the tensor product of the monoidal structure on the
-full subcategory `Dᵇc(X)⟦𝒪̲_E⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of
-`-⊗ᴸ-(X)⟦𝒪̲_E⟧` in both variables. -/
-noncomputable def boundedConstructibleTensor :
-    Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ
-      E⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ :=
-  curriedTensor _
-
 variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦𝒪̲_E⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleTensorObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (boundedConstructibleTensor ℓ E X).obj K ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧).obj K.obj :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleTensor, derivedTensor]
 
 end TensorHom
 

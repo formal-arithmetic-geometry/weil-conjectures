@@ -83,39 +83,4 @@ lemma rightDerivedLowerStarNativeDerivedTensorIso_hom_app
       (((ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g).rightAdjointProjectionMap
         (ProEtaleWeilSheaf.nativeCurriedPullTensor k₀ l g)).app M.obj).app T.obj := rfl
 
-/-- Under geometric condensed realization, the proper projection isomorphism is the geometric
-projection morphism, with the canonical tensor, pullback, and direct-image comparisons. -/
-lemma map_rightDerivedLowerStarNativeDerivedTensorIso_hom_app
-    (M : WeilComplex k₀ l Z) (T : WeilComplex k₀ l Y) :
-    let adj := ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g
-    let adj' := ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    let α := ProEtaleWeilSheaf.derivedCondensedRealizationUpperStarIso k₀ l g
-    let β := mateEquiv adj adj' α.hom
-    let NC := ProEtaleWeilSheaf.derivedCondensedRealization k₀ l Z
-    let ND := ProEtaleWeilSheaf.derivedCondensedRealization k₀ l Y
-    let mC := ProEtaleWeilSheaf.condensedRealizationCurriedTensor k₀ l Z
-    let mD := ProEtaleWeilSheaf.condensedRealizationCurriedTensor k₀ l Y
-    let RG := (ProEtale.CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))).rightDerivedFunctor
-    let φ' := ProEtale.CondensedRing.leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))
-    ND.map ((rightDerivedLowerStarNativeDerivedTensorIso g).hom.app (M, T)) ≫
-        β.app (((ProEtaleWeilSheaf.nativeCurriedTensor k₀ l Z).obj M.obj).obj
-          ((ProEtaleWeilSheaf.nativeOpenPull k₀ l g).obj T.obj)) ≫
-        RG.map
-          ((mC.hom.app M.obj).app ((ProEtaleWeilSheaf.nativeOpenPull k₀ l g).obj T.obj) ≫
-            ((curriedTensor _).obj (NC.obj M.obj)).map (α.inv.app T.obj)) =
-      (mD.hom.app ((ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor.obj M.obj)).app T.obj ≫
-        ((curriedTensor _).map (β.app M.obj)).app (ND.obj T.obj) ≫
-        ((adj'.rightAdjointProjectionMap φ').app (NC.obj M.obj)).app (ND.obj T.obj) := by
-  simp only [rightDerivedLowerStarNativeDerivedTensorIso_hom_app]
-  exact Adjunction.map_rightAdjointProjectionMap_comp_mateEquiv
-    (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l g)
-    (ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction
-      (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-    (ProEtaleWeilSheaf.comparisonCompatible_derivedCondensedRealization k₀ l g) M.obj T.obj
-
 end AlgebraicGeometry.WeilComplex

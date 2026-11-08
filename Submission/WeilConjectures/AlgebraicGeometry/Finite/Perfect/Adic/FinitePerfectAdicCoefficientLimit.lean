@@ -5,7 +5,159 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicComplexRoos
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerData
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicEtaleStalkData
+import Submission.WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedMapPresheaves
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantModel
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.Finiteness.Defs
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantGradedModel
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantExtensionTower
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteConstantExtensionTower
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantConeStep
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteLocallyConstantWeakSerre
+import Mathlib.CategoryTheory.ObjectProperty.Kernels
+import Mathlib.CategoryTheory.ObjectProperty.Extensions
+import Submission.WeilConjectures.CategoryTheory.Site.SiteModuleSheafConstantRingEquivalenceSupplement
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantSerre
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf
+import Submission.WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageSupplement
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionExact
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantLocalLinear
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleHomSurjective
+import Mathlib.CategoryTheory.Sites.SheafHom
+import Mathlib.CategoryTheory.Sites.Subsheaf
+import Submission.WeilConjectures.CategoryTheory.LocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.LocalModuleIso
+import Submission.WeilConjectures.CategoryTheory.ConstantLocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctor
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleUnit
+import Mathlib.Algebra.Module.FinitePresentation
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleOverHom
+import Submission.WeilConjectures.CategoryTheory.FinitePresentationLocalLift
+import Mathlib.Algebra.Category.ModuleCat.Basic
+import Submission.WeilConjectures.CategoryTheory.Sites.ConstantForget
+import Mathlib.RingTheory.Noetherian.Basic
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeExtensionLocalPresentation
+import Submission.WeilConjectures.CategoryTheory.ConstantFiniteFreeLocalLift
+import Submission.WeilConjectures.CategoryTheory.FiniteSectionsEpiLift
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.Abelian.Exact
+import Submission.WeilConjectures.CategoryTheory.ExtensionCokernelPresentation
+import Mathlib.Algebra.Category.ModuleCat.Kernels
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+import Mathlib.RingTheory.Finiteness.Cardinality
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionMapExact
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.LinearAlgebra.StdBasis
+import Submission.WeilConjectures.AlgebraicGeometry.BoundedTopMorphisms
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.RingTheory.Finiteness.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantComplexDescent
+import Mathlib.Algebra.Category.ModuleCat.Limits
+import Mathlib.Algebra.Homology.Additive
+import Mathlib.Data.Int.Interval
+import Mathlib.CategoryTheory.Category.ULift
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Submission.WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Mathlib.Topology.Connected.Clopen
+import Mathlib.CategoryTheory.Sites.Point.Over
+import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.RingTheory.FiniteConeFreeModel
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.Algebra.Homology.Homotopy
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Free.FiniteFreeEtaleAcyclicHomotopy
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import Submission.WeilConjectures.RingTheory.RingPseudoCoherent
+import Submission.WeilConjectures.RingTheory.FiniteFreeResolution
+import Submission.WeilConjectures.RingTheory.PseudoCoherentOfCohomology
+import Mathlib.Algebra.Homology.Single
+import Submission.WeilConjectures.RingTheory.PseudoCoherentIffAllM
+import Submission.WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
+import Submission.WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
+import Submission.WeilConjectures.CategoryTheory.TruncationTriangle
+import Mathlib.CategoryTheory.Abelian.Projective.Extend
+import Mathlib.LinearAlgebra.Dimension.Free
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.SixFunctors.BaseChange.Pasting
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Submission.WeilConjectures.CategoryTheory.Sites.WeaklyContractible
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicIsomorphismPresentation
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
+import Mathlib.CategoryTheory.CofilteredSystem
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
+public import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSurjectiveTowerDerivedLimitSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Submission.WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
+import Mathlib.CategoryTheory.Limits.Shapes.Countable
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleWeaklyContractibleEvaluationColimitsSupplement
+import Mathlib.CategoryTheory.Sites.CompatibleSheafification
+import Mathlib.CategoryTheory.Limits.Types.Products
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.Algebra.Category.Grp.Limits
 import Mathlib.CategoryTheory.Sites.LocallyBijective
@@ -99,199 +251,6 @@ def finitePerfectAdicCoefficientCone (X : Scheme.{t}) {A : Type t} [CommRing A]
     exact (congrArg (fun f : completedAdicRing X d ⟶
       completedAdicFiniteRing X d n ↦ (f.hom.app U).hom x) h).symm)
 
-/-- The completed coefficient unit is the limit of the actual quotient module diagram.
-
-Source: Stacks Project, Tag 09C6, the coefficient case of the displayed limit calculation.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-
-Proof: forget to module presheaves and evaluate on each site object. Forget the scalar
-module structure to additive groups. The resulting diagram and cone are the additive
-groups of the ring diagram and its defining limit cone, with exactly the same
-projections. These forgetful and evaluation functors preserve limits; scalar
-restriction and evaluation reflect the limit assertions. Thus the coefficient cone
-is a limit in module sheaves. This includes zero rings and empty site objects. -/
-theorem finitePerfectAdicCoefficient_isLimit (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A) : Nonempty (IsLimit (finitePerfectAdicCoefficientCone X d)) := by
-  classical
-  refine ⟨?_⟩
-  apply isLimitOfReflects (SheafOfModules.forget (completedAdicRing X d))
-  apply PresheafOfModules.evaluationJointlyReflectsLimits
-  intro U
-  apply isLimitOfReflects
-    (forget₂ (ModuleCat.{t + 1} ((completedAdicRing X d).obj.obj U)) AddCommGrpCat)
-  let F := finitePerfectAdicCoefficientDiagram X d ⋙
-    SheafOfModules.evaluation (completedAdicRing X d) U ⋙
-      forget₂ _ AddCommGrpCat
-  let E := sheafToPresheaf (ProEt.topology X) RingCat.{t + 1} ⋙
-    (CategoryTheory.evaluation X.ProEtᵒᵖ RingCat.{t + 1}).obj U ⋙
-      forget₂ RingCat AddCommGrpCat
-  let G := completedAdicRingSystem X d ⋙ E
-  let α : F ⟶ G := NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
-    intro n
-    ext x
-    simp only [F, G, E, finitePerfectAdicCoefficientDiagram, completedAdicRingSystem,
-      Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ,
-      Category.id_comp, Category.comp_id]
-    exact coefficientStep_apply X d n U x)
-  have (n : ℕᵒᵖ) : IsIso (α.app n) := inferInstanceAs (IsIso (𝟙 _))
-  have : IsIso α := NatIso.isIso_of_isIso_app α
-  let c := (forget₂ (ModuleCat.{t + 1} ((completedAdicRing X d).obj.obj U))
-    AddCommGrpCat).mapCone
-      ((PresheafOfModules.evaluation (completedAdicRing X d).obj U).mapCone
-        ((SheafOfModules.forget (completedAdicRing X d)).mapCone
-          (finitePerfectAdicCoefficientCone X d)))
-  apply (IsLimit.postcomposeHomEquiv (asIso α) c).toFun
-  exact (isLimitOfPreserves E (limit.isLimit (completedAdicRingSystem X d))).ofIsoLimit
-    (Cone.ext (Iso.refl _) (by
-      intro n
-      ext x
-      rfl))
-
-/-- The actual consecutive coefficient module map is epimorphic.
-
-Source: Stacks Tag 09C6 and Modules on Sites, Tag 03DA.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-Proof: choose a set section of the surjective quotient map. Since both finite rings
-are discrete, the section is continuous; postcomposition lifts each continuous
-coefficient section. Sheafification preserves local surjectivity. The normalized
-module map has the same functions on sections, so its underlying additive sheaf map
-is locally surjective and hence epi. Faithful forgetting reflects epimorphisms. -/
-theorem finitePerfectAdicCoefficientStep_epi (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A) (n : ℕ) : Epi (completedAdicFiniteModuleStep X d n) := by
-  classical
-  let J := ProEt.topology X
-  let q : completedAdicQuotient d (n + 1) →+* completedAdicQuotient d n :=
-    RingHom.ulift (adicQuotientMap d.ideal (n + 2) (n + 1) (Nat.le_succ _))
-  have hq : Function.Surjective q := by
-    intro y
-    obtain ⟨x, hx⟩ := Ideal.Quotient.factor_surjective
-      (Ideal.pow_le_pow_right (Nat.le_succ (n + 1))) y.down
-    exact ⟨ULift.up x, congrArg ULift.up hx⟩
-  choose σ hσ using hq
-  have hp : Presheaf.IsLocallySurjective J (completedAdicFinitePresheafStep X d n) := by
-    apply Presheaf.isLocallySurjective_of_surjective
-    intro U s
-    change C(ConnectedComponents U.unop.left, completedAdicQuotient d n) at s
-    let τ : C(completedAdicQuotient d n, completedAdicQuotient d (n + 1)) :=
-      ⟨σ, continuous_of_discreteTopology⟩
-    refine ⟨τ.comp s, ?_⟩
-    change (⟨q, continuous_of_discreteTopology⟩ :
-      C(completedAdicQuotient d (n + 1), completedAdicQuotient d n)).comp (τ.comp s) = s
-    apply ContinuousMap.ext
-    intro x
-    exact hσ (s x)
-  have hr : Sheaf.IsLocallySurjective (completedAdicFiniteStep X d n) :=
-    (Presheaf.isLocallySurjective_presheafToSheaf_map_iff J
-      (completedAdicFinitePresheafStep X d n)).2 hp
-  let F := SheafOfModules.toSheaf (completedAdicRing X d)
-  let g := F.map (completedAdicFiniteModuleStep X d n)
-  have hg : Sheaf.IsLocallySurjective g := by
-    constructor
-    intro U s
-    have heq : Presheaf.imageSieve g.hom s =
-        Presheaf.imageSieve (completedAdicFiniteStep X d n).hom s := by
-      ext V f
-      change (∃ x, g.hom.app (op V) x = _) ↔
-        ∃ x, (completedAdicFiniteStep X d n).hom.app (op V) x = _
-      simp only [show ∀ x, g.hom.app (op V) x =
-        (completedAdicFiniteStep X d n).hom.app (op V) x from
-          coefficientStep_apply X d n (op V)]
-      rfl
-    rw [heq]
-    exact Presheaf.imageSieve_mem J (completedAdicFiniteStep X d n).hom s
-  have : Epi g := Sheaf.epi_of_isLocallySurjective g
-  exact F.epi_of_epi_map inferInstance
-
-/-- Compatible retracts of the actual finite-free coefficient diagram have their
-specified retract cone as a limit, and its degree-zero localization as a Roos limit.
-
-Source: Stacks Project, Tag 09C6, the finite-projective summand step.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-
-Proof: lift a cone into the finite-free limit after the inclusion, then project to
-its retract. The two compatibility equations and the splitting prove factorization.
-For uniqueness, include into the free limit and use its uniqueness, then project.
-Each transition in the retract diagram is epimorphic: its composite with the split
-epimorphism from the free term is the free transition followed by a split epimorphism.
-Finally apply the epimorphic-complex Roos theorem to the degree-zero complex tower. -/
-theorem finitePerfectAdicRetract_roos (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A) (r : ℕ)
-    (B : ℕᵒᵖ ⥤ CompletedAdicModules X d)
-    (ι : B ⟶ finitePerfectAdicCoefficientDiagram X d ⋙
-      Functor.const (Discrete (Fin r)) ⋙ lim)
-    (π : finitePerfectAdicCoefficientDiagram X d ⋙
-      Functor.const (Discrete (Fin r)) ⋙ lim ⟶ B)
-    (hιπ : ι ≫ π = 𝟙 B) (c : Cone B)
-    (i : c.pt ⟶ (lim (J := Discrete (Fin r))).obj
-      ((Functor.const (Discrete (Fin r))).obj (SheafOfModules.unit (completedAdicRing X d))))
-    (p : (lim (J := Discrete (Fin r))).obj
-      ((Functor.const (Discrete (Fin r))).obj (SheafOfModules.unit (completedAdicRing X d)))
-        ⟶ c.pt)
-    (hip : i ≫ p = 𝟙 c.pt)
-    (hi : ∀ n : ℕᵒᵖ, i ≫
-      (Functor.const (Discrete (Fin r)) ⋙ lim).map
-        ((finitePerfectAdicCoefficientCone X d).π.app n) = c.π.app n ≫ ι.app n)
-    (hp : ∀ n : ℕᵒᵖ, p ≫ c.π.app n =
-      (Functor.const (Discrete (Fin r)) ⋙ lim).map
-        ((finitePerfectAdicCoefficientCone X d).π.app n) ≫ π.app n) :
-    let S := HomologicalComplex.single (CompletedAdicModules X d) (.up ℤ) 0
-    let T := B ⋙ S
-    Nonempty (IsLimit c) ∧ (∀ n : ℕ, Epi (B.map (homOfLE n.le_succ).op)) ∧
-    HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n))) ∧
-    ∀ [HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))],
-      IsDerivedLimit (K := fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))
-        (fun n : ℕ ↦ DerivedCategory.Q.map (T.map (homOfLE n.le_succ).op))
-        (DerivedCategory.Q.obj (S.obj c.pt)) := by
-  classical
-  let : HasLimitsOfShape (Discrete (Fin r)) (CompletedAdicModules X d) := inferInstance
-  have : HasFiniteBiproducts (CompletedAdicModules X d) := Abelian.hasFiniteBiproducts
-  let F : CompletedAdicModules X d ⥤ CompletedAdicModules X d :=
-    Functor.const (Discrete (Fin r)) ⋙ lim
-  let a := F.mapCone (finitePerfectAdicCoefficientCone X d)
-  obtain ⟨hcoef⟩ := finitePerfectAdicCoefficient_isLimit X d
-  let ha : IsLimit a := isLimitOfPreserves F hcoef
-  let hc : IsLimit c :=
-    { lift := fun s ↦ ha.lift { pt := s.pt, π := s.π ≫ ι } ≫ p
-      fac := by
-        intro s n
-        rw [Category.assoc, hp n, ← Category.assoc]
-        change (ha.lift { pt := s.pt, π := s.π ≫ ι } ≫ a.π.app n) ≫
-          π.app n = s.π.app n
-        rw [ha.fac]
-        change (s.π.app n ≫ ι.app n) ≫ π.app n = s.π.app n
-        rw [Category.assoc, show ι.app n ≫ π.app n = 𝟙 _ by
-          simpa only [NatTrans.comp_app, NatTrans.id_app] using congr_app hιπ n,
-          Category.comp_id]
-      uniq := by
-        intro s m hm
-        have hmi : m ≫ i = ha.lift { pt := s.pt, π := s.π ≫ ι } := by
-          apply ha.uniq { pt := s.pt, π := s.π ≫ ι } (m ≫ i)
-          intro n
-          change (m ≫ i) ≫ F.map ((finitePerfectAdicCoefficientCone X d).π.app n) =
-            s.π.app n ≫ ι.app n
-          rw [Category.assoc, hi n, ← Category.assoc, hm n]
-        rw [← hmi, Category.assoc, hip, Category.comp_id] }
-  have hB (n : ℕ) : Epi (B.map (homOfLE n.le_succ).op) := by
-    have (n : ℕᵒᵖ) : IsSplitEpi (π.app n) :=
-      IsSplitEpi.mk' ⟨ι.app n, congr_app hιπ n⟩
-    have := finitePerfectAdicCoefficientStep_epi X d n
-    have : F.PreservesEpimorphisms := by dsimp [F]; infer_instance
-    have : Epi ((finitePerfectAdicCoefficientDiagram X d ⋙ F).map
-        (homOfLE n.le_succ).op) := by
-      simpa only [Functor.comp_map, finitePerfectAdicCoefficientDiagram,
-        Functor.ofOpSequence_map_homOfLE_succ] using
-        (inferInstance : Epi (F.map (completedAdicFiniteModuleStep X d n)))
-    exact epi_of_epi_fac (π.naturality (homOfLE n.le_succ).op).symm
-  refine ⟨⟨hc⟩, hB, ?_⟩
-  let S := HomologicalComplex.single (CompletedAdicModules X d) (.up ℤ) 0
-  apply finitePerfectAdicComplex_roos X d (B ⋙ S) _ (S.mapCone c)
-    (isLimitOfPreserves S hc)
-  intro n j
-  have := hB n
-  change Epi ((HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j).map
-    (S.map (B.map (homOfLE n.le_succ).op)))
-  infer_instance
-
 /-- A compatible finite-free retract of one degree of a coefficient tower and its cone.
 The two cone equations retain the actual coefficient projections.
 Source: Stacks Tag 09C6.
@@ -316,39 +275,5 @@ structure FinitePerfectAdicCoefficientRetract (X : Scheme.{t}) {A : Type t} [Com
   projection_naturality : ∀ n : ℕᵒᵖ, coneProjection ≫ c.π.app n =
     (Functor.const (Discrete (Fin rank)) ⋙ lim).map
       ((finitePerfectAdicCoefficientCone X d).π.app n) ≫ projection.app n
-
-/-- A coefficient complex tower with compatible finite-free retracts in every degree
-has its specified completed cone as its Roos derived limit.
-
-Source: Stacks Project, Tag 09C6, the finite-projective complex inverse-limit calculation.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-
-Proof: in each degree the compatible retract theorem proves that the given cone is
-limiting and the consecutive maps are epimorphic. Evaluation jointly reflects limits
-of complexes, so the original complex cone is limiting. Apply the epimorphic-complex
-Roos theorem. Ranks may vary with the degree, and zero ranks are allowed. The theorem
-requires the actual compatible retracts, rather than merely unrelated levelwise
-finite-projectivity assertions. No boundedness is necessary for this Roos assertion. -/
-theorem finitePerfectAdicProjectiveComplex_roos (X : Scheme.{t}) {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ) (c : Cone T)
-    (h : ∀ j : ℤ, Nonempty (FinitePerfectAdicCoefficientRetract X d
-      (T ⋙ HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j)
-      ((HomologicalComplex.eval (CompletedAdicModules X d) (.up ℤ) j).mapCone c))) :
-    HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n))) ∧
-    ∀ [HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))],
-      IsDerivedLimit (K := fun n : ℕ ↦ DerivedCategory.Q.obj (T.obj (op n)))
-        (fun n : ℕ ↦ DerivedCategory.Q.map (T.map (homOfLE n.le_succ).op))
-        (DerivedCategory.Q.obj c.pt) := by
-  classical
-  let R (j : ℤ) := (h j).some
-  have hj (j : ℤ) := finitePerfectAdicRetract_roos X d (R j).rank _
-    (R j).inclusion (R j).projection (R j).splitting _
-    (R j).coneInclusion (R j).coneProjection (R j).coneSplitting
-    (R j).inclusion_naturality (R j).projection_naturality
-  let hc : IsLimit c := HomologicalComplex.isLimitOfEval T c (fun j ↦ (hj j).1.some)
-  apply finitePerfectAdicComplex_roos X d T _ c hc
-  intro n j
-  exact (hj j).2.1 n
 
 end AlgebraicGeometry.Scheme

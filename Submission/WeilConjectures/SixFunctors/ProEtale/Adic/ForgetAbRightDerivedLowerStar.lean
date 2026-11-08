@@ -326,14 +326,4 @@ lemma IsAdicLisseSheaf.of_isIso_toAb_map {X : Scheme.{u}} {G G' : AdicSheaf l X}
   have := isIso_of_reflects_iso φ (AdicSheaf.toAb l X)
   hG.of_iso (asIso φ)
 
-/-- In negative degrees the cohomology sheaves of `Rf_* F[0]` vanish, hence are lisse: the local
-constancy of `Hⁿ(Rf_* F[0])` is only a question in degrees `n = q : ℕ`, where
-`AlgebraicGeometry.ProEtale.toAbHomologyRightDerivedAdicLowerStarIso` applies. -/
-lemma isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_neg (F : AdicSheaf l X)
-    {n : ℤ} (hn : n < 0) :
-    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
-      ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
-  have := ((f)_*ᵃ[l]).isGE_rightDerivedFunctor_obj_singleFunctor F
-  IsAdicLisseSheaf.of_isZero (DerivedCategory.isZero_of_isGE _ 0 n hn)
-
 end AlgebraicGeometry.ProEtale

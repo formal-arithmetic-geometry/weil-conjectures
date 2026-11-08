@@ -8,7 +8,10 @@ module
 public import Submission.WeilConjectures.ZetaFunction.BettiNumbers
 public import Submission.WeilConjectures.Mathlib.Algebra.Polynomial.RingDivision
 public import Submission.WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
-public import Submission.WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
+public import Submission.WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
+public import Submission.WeilConjectures.Mathlib.Algebra.Polynomial.Splits
+public import Submission.WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
+public import Submission.WeilConjectures.ZetaLinearAlgebra.Fatou
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -59,19 +62,6 @@ theorem abs_eq_of_isRoot (hrh : WeilRiemannHypothesis q d P) (h0 : ∀ i, (P i).
     rwa [Polynomial.map_map, RingHom.ext_int ((Rat.castHom ℂ).comp (Int.castRingHom ℚ))
       (Int.castRingHom ℂ)] at this
   rw [← hrh i _ hz, Complex.norm_ratCast]
-
-/-- Under the Riemann hypothesis, the complex reciprocal roots of `Pᵢ` (the roots of the reversed
-polynomial) have absolute value `q^{i/2}`. -/
-theorem norm_eq_of_mem_roots_reverse (hrh : WeilRiemannHypothesis q d P)
-    (h0 : ∀ i, (P i).coeff 0 = 1) (i : Fin (2 * d + 1)) {y : ℂ}
-    (hy : y ∈ ((P i).reverse.map (Int.castRingHom ℂ)).roots) :
-    ‖y‖ = (q : ℝ) ^ ((i.1 : ℝ) / 2) := by
-  have hne : (P i).map (Int.castRingHom ℂ) ≠ 0 := fun h' ↦ by
-    simpa [h0 i] using congr(Polynomial.coeff $h' 0)
-  rw [← Polynomial.reverse_map (RingHom.injective_int _), Polynomial.mem_roots_reverse_iff hne]
-    at hy
-  have := hrh i _ ((Polynomial.mem_roots hne).2 hy.2)
-  rwa [norm_inv, neg_div, Real.rpow_neg (Nat.cast_nonneg q), inv_inj] at this
 
 /-- Under the Riemann hypothesis, a positive rational `x = q^{-j/2}` is a root of no factor `Pᵢ`
 with `i ≠ j`. -/
@@ -129,25 +119,6 @@ theorem natDegree_eq_finrank_of_isIntegralFrobeniusFactor
       Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).cohomology i).carrier := by
   rw [← natDegree_frobeniusCharpolyRev, ← hP l,
     Polynomial.natDegree_map_eq_of_injective (RingHom.injective_int _)]
-
-/-- Blueprint `def-weil-determinant-constants`: the image in `ℚ̄_ℓ` of the determinant constant
-`D = (-1)^b [T^b] P` of an integral Frobenius factor `P` in degree `i` is the determinant
-`det(F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` of the geometric Frobenius, for every prime `ℓ ≠ p`: the leading
-coefficient of `det(1 - T F)` is `(-1)^{dim} det F`. -/
-theorem map_weilDeterminantConstant_eq_det
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ} {P : Polynomial ℤ}
-    (hP : IsIntegralFrobeniusFactor k₀ X i P) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] :
-    (weilDeterminantConstant P : PadicAlgCl l) =
-      LinearMap.det ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd := by
-  have hlc : (P.leadingCoeff : PadicAlgCl l) =
-      (frobeniusCharpolyRev k₀ l X i).leadingCoeff := by
-    rw [← hP l, Polynomial.leadingCoeff_map_of_injective (RingHom.injective_int _)]
-    rfl
-  rw [weilDeterminantConstant, Int.cast_mul, Int.cast_pow, Int.cast_neg, Int.cast_one,
-    ← Polynomial.leadingCoeff, hlc,
-    leadingCoeff_frobeniusCharpolyRev, natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X hP l,
-    ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg, one_pow, one_mul]
 
 variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]

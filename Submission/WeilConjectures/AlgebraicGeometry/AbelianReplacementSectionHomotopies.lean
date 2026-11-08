@@ -12,7 +12,10 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Submission.WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import Submission.WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore
 import Submission.WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import Submission.WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

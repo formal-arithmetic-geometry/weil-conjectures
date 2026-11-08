@@ -35,13 +35,6 @@ section HomOfSection
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 omit [Finite k₀] in
-/-- The coordinate of the morphism `X ⟶ 𝔸¹` defined by a function `a` is `a`. -/
-@[simp]
-lemma affineLine.homOfSection_appTop_coord (a : Γ(X, ⊤)) :
-    (affineLine.homOfSection k₀ a).appTop (AffineSpace.coord _ PUnit.unit) = a :=
-  AffineSpace.homOfVector_appTop_coord _ _ _
-
-omit [Finite k₀] in
 /-- The composite of a function `a : X ⟶ 𝔸¹` with the scaling `x ↦ c x` is the function `c a`. -/
 lemma affineLine.homOfSection_comp_smul (a : Γ(X, ⊤)) (c : k₀) :
     affineLine.homOfSection k₀ a ≫ affineLine.smul k₀ c =

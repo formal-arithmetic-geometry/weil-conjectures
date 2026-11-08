@@ -95,7 +95,10 @@ import Submission.WeilConjectures.RingTheory.FilteredColimitOfFactorization
 import Submission.WeilConjectures.SecSmoothPurity.CochainInverseComparison
 import Submission.WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
-import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat

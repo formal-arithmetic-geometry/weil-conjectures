@@ -188,10 +188,6 @@ omit [HasSmallSiteSheafify A] in
 lemma rightDerivedLowerShriek_eq : R(f)_![A] =
     Rf_!(HasCompactification.compactification f)[A] := rfl
 
-omit [HasSmallSiteSheafify A] in
-lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
-    Rf_!(HasCompactification.compactification f)[A]+ := rfl
-
 /-- The bounded below derived lower shriek `Rf_! : D⁺(X_ét) ⥤ D⁺(Y_ét)` is the restriction
 of the unbounded `Rf_! : D(X_ét) ⥤ D(Y_ét)` along the inclusions of the bounded below
 derived categories. -/

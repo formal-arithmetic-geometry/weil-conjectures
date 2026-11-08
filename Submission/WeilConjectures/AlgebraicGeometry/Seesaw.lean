@@ -6,7 +6,19 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
-public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.RingTheory.Flat.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MumfordComplex
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.IntegralSections
 
 set_option autoImplicit true

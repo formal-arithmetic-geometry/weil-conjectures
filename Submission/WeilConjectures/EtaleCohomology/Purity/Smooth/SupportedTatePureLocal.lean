@@ -49,18 +49,6 @@ open Scheme
 
 namespace Etale
 
-/-- An object of `D(X_ét, Λ)` vanishes if its derived pullbacks along a jointly surjective
-family vanish. -/
-theorem isZero_of_isZero_leftDerivedUpperStar_of_jointlySurjective (Λ : Type (u + 1))
-    [CommRing Λ] {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
-    (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
-    {M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (h : ∀ i, IsZero ((L((a i)^*[ModuleCat.{u + 1} Λ])).obj M)) : IsZero M := by
-  have : IsIso (0 : M ⟶ 0) := isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ a ha _
-    fun i ↦ isIso_of_source_target_iso_zero _ (h i).isoZero
-      (Functor.map_isZero _ (isZero_zero _)).isoZero
-  exact (isZero_zero _).of_iso (asIso (0 : M ⟶ 0))
-
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Z : Scheme.{u}} [HasTateTwist Λ]
 
 /-- The constant complex `Λ_X` is concentrated in degree `0`. -/

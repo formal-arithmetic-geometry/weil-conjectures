@@ -26,7 +26,10 @@ public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Tensor
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
-public import Submission.WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Submission.WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 public import Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

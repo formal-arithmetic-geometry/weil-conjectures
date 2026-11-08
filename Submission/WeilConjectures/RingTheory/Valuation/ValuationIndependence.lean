@@ -210,15 +210,6 @@ namespace Valuation
 variable {F Γ₀ : Type*} [Field F] [LinearOrderedCommGroupWithZero Γ₀] {v : Valuation F Γ₀}
   {K : Type*} [Field K] [Algebra K F]
 
-/-- Residual independence is invariant under reindexing. -/
-theorem ResiduallyIndependent.comp_equiv {ι ι' : Type*} [Fintype ι] [Fintype ι'] {z : ι → F}
-    (h : v.ResiduallyIndependent K z) (σ : ι' ≃ ι) : v.ResiduallyIndependent K (z ∘ σ) := by
-  intro c hc hlt j
-  have h' := h (c ∘ σ.symm) (fun j => hc _) ?_ (σ j)
-  · simpa using h'
-  · rw [← σ.sum_comp]
-    simpa using hlt
-
 /-- A residually independent family can be extended by any `y` of value `1` which is not
 congruent modulo the maximal ideal to an integral combination of the family. -/
 theorem ResiduallyIndependent.snoc {k : ℕ} {m : Fin k → F} (h : v.ResiduallyIndependent K m)
@@ -487,18 +478,5 @@ theorem exists_basis_residuallyIndependent [IsDomain R] [IsDiscreteValuationRing
   obtain rfl : k = finrank K V := by simpa using (finrank_eq_card_basis e).symm
   have he : (fun j => (e j : F)) = m := funext fun j => by simp [e]
   exact ⟨e, fun j => by simp [e, hm1], he ▸ hm⟩
-
-/-- The basis of `exists_basis_residuallyIndependent` computes valuations: the value of a
-combination is the maximum of the values of the coefficients. -/
-theorem exists_basis_valuation_sum_smul_eq_sup [IsDomain R] [IsDiscreteValuationRing R]
-    [IsAdicComplete (maximalIdeal R) R] [IsFractionRing R K]
-    (hO : ∀ x : K, algebraMap K F x ∈ 𝒪 ↔ x ∈ (algebraMap R K).range)
-    (hval : ∀ y : F, y ≠ 0 → ∃ c : K, 𝒪.valuation y = 𝒪.valuation (algebraMap K F c))
-    (V : Submodule K F) [FiniteDimensional K V] :
-    ∃ e : Basis (Fin (finrank K V)) K V, (∀ j, 𝒪.valuation (e j : F) = 1) ∧
-      ∀ c : Fin (finrank K V) → K, 𝒪.valuation (∑ j, c j • (e j : F)) =
-        Finset.univ.sup fun j => 𝒪.valuation (algebraMap K F (c j)) := by
-  obtain ⟨e, he1, he⟩ := exists_basis_residuallyIndependent hO hval V
-  exact ⟨e, he1, he.map_sum_smul he1⟩
 
 end ValuationSubring

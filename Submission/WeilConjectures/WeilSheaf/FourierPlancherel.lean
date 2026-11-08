@@ -79,11 +79,6 @@ noncomputable def WeilComplex.traceEnergy (ι : PadicAlgCl l →+* ℂ) (K : Wei
   ∑ᶠ x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n),
     ‖ι (K.traceFunction n x)‖ ^ 2
 
-/-- The trace energy is nonnegative, as a sum of squares. -/
-theorem WeilComplex.traceEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
-    (n : ℕ) : 0 ≤ K.traceEnergy ι n :=
-  finsum_nonneg fun _ ↦ sq_nonneg _
-
 /-- Isomorphic Weil complexes have the same trace energy. -/
 theorem WeilComplex.traceEnergy_congr (ι : PadicAlgCl l →+* ℂ) {K L : WeilComplex k₀ l X}
     (e : K ≅ L) (n : ℕ) : K.traceEnergy ι n = L.traceEnergy ι n := by

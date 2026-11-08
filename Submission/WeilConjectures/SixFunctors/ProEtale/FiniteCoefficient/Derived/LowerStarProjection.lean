@@ -7,7 +7,19 @@ module
 
 public import Submission.WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMonoidal
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Derived
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.KFlat
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Vanishing
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.KFlat
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -159,21 +171,6 @@ lemma homEquiv_symm_rightDerivedLowerStarProjectionMap
         ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
           (L((p)^*[A]).obj L) :=
   Adjunction.homEquiv_symm_rightAdjointProjectionMap_app_app _ _ M L
-
-/-- The counit form of
-`AlgebraicGeometry.ProEtale.homEquiv_symm_rightDerivedLowerStarProjectionMap`: applying `Lp^*`
-to the projection map and composing with the counit of `Lp^* ⊣ Rp_*` gives the comparison
-followed by `ε_M ⊗ᴸ 𝟙`. -/
-@[reassoc]
-lemma map_rightDerivedLowerStarProjectionMap_comp_counit
-    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    L((p)^*[A]).map (((rightDerivedLowerStarProjectionMap A p).app M).app L) ≫
-        (derivedUpperStarLowerStarAdjunction A p).counit.app _ =
-      ((leftDerivedUpperStarTensorComparison A p).app (R((p)_*[A]).obj M)).app L ≫
-        ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A p).counit.app M)).app
-          (L((p)^*[A]).obj L) :=
-  Adjunction.map_rightAdjointProjectionMap_app_app_comp_counit _ _ M L
 
 end ProEtale
 

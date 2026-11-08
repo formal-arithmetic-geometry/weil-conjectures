@@ -60,9 +60,6 @@ lemma natCast_eq_zero_integersModPow_iff (n m : ℕ) :
 instance charP_integersModPow (n : ℕ) : CharP (integersModPow ℓ E n) (ℓ ^ n) :=
   ⟨natCast_eq_zero_integersModPow_iff ℓ E n⟩
 
-lemma ringChar_integersModPow (n : ℕ) : ringChar (integersModPow ℓ E n) = ℓ ^ n :=
-  ringChar.eq _ _
-
 end PadicAlgCl
 
 namespace AlgebraicGeometry.ProEtale

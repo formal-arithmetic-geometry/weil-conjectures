@@ -177,12 +177,6 @@ def Family.rep {A B : Diagram.{w, u, v} I} (Φ : Family A B) {X Y : Pair A}
   arrow := (Φ.b r.source_le).hom.app X.2 ≫ (Φ.φ r.stage).map r.arrow ≫
     (Φ.b r.target_le).inv.app Y.2
 
-/-- The identity family, using only canonical unitors.
-Source: sketch 42, pair universal property (blueprint: lem-sbc-coherent-pair-functor-descent). -/
-def Family.identity (A : Diagram.{w, u, v} I) : Family A A where
-  φ i := 𝟭 (A.C i)
-  b h := (A.U h).leftUnitor ≪≫ (A.U h).rightUnitor.symm
-
 /-- Composite comparisons are obtained by whiskering the two given comparisons.
 Source: sketch 42, pair universal property (blueprint: lem-sbc-coherent-pair-functor-descent). -/
 def Family.comp {A B C : Diagram.{w, u, v} I} (Φ : Family A B) (Θ : Family B C) :
@@ -191,14 +185,6 @@ def Family.comp {A B C : Diagram.{w, u, v} I} (Φ : Family A B) (Θ : Family B C
   b h := (Functor.associator _ _ _) ≪≫ Functor.isoWhiskerLeft (Φ.φ _) (Θ.b h) ≪≫
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (Φ.b h) (Θ.φ _) ≪≫
       Functor.associator _ _ _
-
-/-- Compatible transformations are the stage naturality squares with the comparisons.
-Source: sketch 42, pseudocone morphisms (blueprint: lem-sbc-coherent-pair-functor-descent). -/
-def Compatible {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
-    (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) : Prop :=
-  ∀ {i j} (h : i ≤ j) (X : A.C i),
-    (Φ.b h).hom.app X ≫ (η j).app ((A.U h).obj X) =
-      (B.U h).map ((η i).app X) ≫ (Ψ.b h).hom.app X
 
 /-- Characterization of the functor by its formulas on all objects and representatives.
 `HEq` only accommodates the displayed object equality; it imposes equality of the arrows.
@@ -209,13 +195,6 @@ structure IsDescent {A B : Diagram.{w, u, v} I} (RA : PairStructure A) (RB : Pai
   map : ∀ {X Y : RA.Obj} (r : Rep A X Y),
     HEq (F.map (RA.repr r)) (RB.repr (Φ.rep r))
   additive : F.Additive
-
-/-- The component `[E, η_E,K]`, written using the literal identity transition to make its
-source and target types explicit. Source: sketch 42, pseudocone morphisms
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
-def transformationRep {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
-    (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) (X : Pair A) : Rep B (Φ.obj X) (Ψ.obj X) :=
-  ⟨X.1, le_refl _, le_refl _, (B.U (le_refl X.1)).map ((η X.1).app X.2)⟩
 
 -- The independently variable object and Hom universes are bundled in the same maximum.
 set_option linter.checkUnivs false in
@@ -280,17 +259,6 @@ private noncomputable instance canonicalCategory (A : Diagram.{w, u, v} I)
 private noncomputable instance canonicalPreadditive (A : Diagram.{w, u, v} I)
     [IsDirectedOrder I] : Preadditive (Pair A) := pairPreadditive (pairStructure A)
 
-private abbrev compareFunctor (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
-    (pairStructure A).Obj ⥤ (stageSystem A).PairCategory where
-  obj := stageObj
-  map := homEquiv _ _
-  map_id _ := (homEquiv _ _).apply_symm_apply _
-  map_comp _ _ := (homEquiv _ _).apply_symm_apply _
-
-private theorem compare_injective {A : Diagram.{w, u, v} I} [IsDirectedOrder I]
-    {X Y : (pairStructure A).Obj} : Function.Injective ((compareFunctor A).map (X := X) (Y := Y)) :=
-  (homEquiv X Y).injective
-
 private noncomputable abbrev inverseFunctor (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
     (stageSystem A).PairCategory ⥤ (pairStructure A).Obj where
   obj X := ⟨X.stage, X.obj⟩
@@ -315,54 +283,5 @@ private instance inverse_additive (A : Diagram.{w, u, v} I) [IsDirectedOrder I] 
         homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩
           ((homEquiv ⟨X.stage, X.obj⟩ ⟨Y.stage, Y.obj⟩).symm g))
     simp only [Equiv.apply_symm_apply]
-
-private abbrev stageMorphism {A B : Diagram.{w, u, v} I} (Φ : Family A B)
-    (hΦ : Φ.Coherent) : (stageSystem A).Morphism (stageSystem B) where
-  Φ := Φ.φ
-  β := Φ.b
-  coh h h' X := (hΦ.tower h h' X).symm
-
-private noncomputable abbrev descend {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
-    (Φ : Family A B) (hΦ : Φ.Coherent) :
-    (pairStructure A).Obj ⥤ (pairStructure B).Obj where
-  obj := Φ.obj
-  map {X Y} f := (homEquiv (Φ.obj X) (Φ.obj Y)).symm
-    ((stageMorphism Φ hΦ).functor.map (homEquiv X Y f))
-  map_id X := by
-    change (homEquiv (Φ.obj X) (Φ.obj X)).symm ((stageMorphism Φ hΦ).functor.map
-      (homEquiv X X ((homEquiv X X).symm (𝟙 _)))) =
-      (homEquiv (Φ.obj X) (Φ.obj X)).symm (𝟙 _)
-    simp only [Equiv.apply_symm_apply, Functor.map_id]
-    rfl
-  map_comp {X Y Z} f g := by
-    change (homEquiv (Φ.obj X) (Φ.obj Z)).symm ((stageMorphism Φ hΦ).functor.map
-      (homEquiv X Z ((homEquiv X Z).symm (homEquiv X Y f ≫ homEquiv Y Z g)))) =
-      (homEquiv (Φ.obj X) (Φ.obj Z)).symm
-        (homEquiv (Φ.obj X) (Φ.obj Y) ((homEquiv (Φ.obj X) (Φ.obj Y)).symm _) ≫
-        homEquiv (Φ.obj Y) (Φ.obj Z) ((homEquiv (Φ.obj Y) (Φ.obj Z)).symm _))
-    simp only [Equiv.apply_symm_apply, Functor.map_comp]
-
-private def stageTransformation {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
-    (hΦ : Φ.Coherent) (hΨ : Ψ.Coherent) (η : ∀ i, Φ.φ i ⟶ Ψ.φ i)
-    (hη : Compatible η) : (stageMorphism Φ hΦ).Hom (stageMorphism Ψ hΨ) where
-  τ := η
-  comm h X := (hη h X).symm
-
-private noncomputable def transformation {A B : Diagram.{w, u, v} I} [IsDirectedOrder I]
-    {Φ Ψ : Family A B} (hΦ : Φ.Coherent) (hΨ : Ψ.Coherent)
-    (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) (hη : Compatible η) :
-    descend Φ hΦ ⟶ descend Ψ hΨ where
-  app X := (pairStructure B).repr (transformationRep η X)
-  naturality {X Y} f := by
-    apply compare_injective
-    change homEquiv _ _ ((homEquiv _ _).symm
-      (homEquiv _ _ ((descend Φ hΦ).map f) ≫
-        homEquiv _ _ ((pairStructure B).repr (transformationRep η Y)))) =
-      homEquiv _ _ ((homEquiv _ _).symm
-        (homEquiv _ _ ((pairStructure B).repr (transformationRep η X)) ≫
-          homEquiv _ _ ((descend Ψ hΨ).map f)))
-    simp only [Equiv.apply_symm_apply]
-    exact (StageSystem.Morphism.descNatTrans
-      (stageTransformation hΦ hΨ η hη)).naturality (homEquiv X Y f)
 
 end CategoryTheory.CommonStage

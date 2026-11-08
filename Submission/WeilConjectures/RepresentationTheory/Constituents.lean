@@ -66,11 +66,6 @@ noncomputable def subtype (U : Subrepresentation ρ) : U.toRepresentation.Intert
 theorem subtype_injective (U : Subrepresentation ρ) : Function.Injective U.subtype :=
   U.toSubmodule.injective_subtype
 
-theorem exact_subtype_mkQ (U : Subrepresentation ρ) : Function.Exact U.subtype U.mkQ := fun y ↦ by
-  change U.toSubmodule.mkQ y = 0 ↔ _
-  rw [Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
-  exact ⟨fun hy ↦ ⟨⟨y, hy⟩, rfl⟩, by rintro ⟨y, rfl⟩; exact y.2⟩
-
 /-- Every irreducible subquotient `S / U` of `ρ` with `S ≤ F n`, for a chain of
 subrepresentations `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n`, is equivalent to a subquotient of one of the steps
 `F (i + 1) / F i`. -/
@@ -225,12 +220,6 @@ theorem of_exact {V₁ V₂ : Type*} [AddCommGroup V₁] [Module k V₁] [AddCom
     obtain ⟨U', S', h', ⟨e'⟩⟩ := h₁ _ _ (e.isIrreducible_iff.2 hirr)
     exact ⟨U', S', h', ⟨e.symm.trans e'⟩⟩
 
-/-- The constituents of `ρ` are constituents of a subrepresentation `U` or of the quotient
-`V ⧸ U`. -/
-theorem of_subrepresentation (U : Subrepresentation ρ) (h₁ : ConstituentsLE U.toRepresentation τ)
-    (h₂ : ConstituentsLE U.quotient τ) : ConstituentsLE ρ τ :=
-  of_exact U.subtype U.mkQ U.exact_subtype_mkQ h₁ h₂
-
 /-- The zero representation has no constituents. -/
 theorem of_subsingleton [Subsingleton V] (ρ : Representation k W V) (σ : Representation k W V') :
     ConstituentsLE ρ σ := fun U S hirr ↦ by
@@ -283,12 +272,6 @@ theorem tprod_left [FiniteDimensional k V] (h : ConstituentsLE ρ σ) (τ : Repr
     (of_equiv (e₂.rTensor τ)).trans hA
   obtain ⟨U₃, S₃, h₃, ⟨e₃⟩⟩ := hB U₁ S₁ (e₁.isIrreducible_iff.2 hirr)
   exact ⟨U₃, S₃, h₃, ⟨e₁.symm.trans e₃⟩⟩
-
-/-- The symmetric version of `tprod_left`. -/
-theorem tprod_right [FiniteDimensional k V] (h : ConstituentsLE ρ σ) (τ : Representation k W V'') :
-    ConstituentsLE (τ.tprod ρ) (τ.tprod σ) :=
-  ((of_equiv (Representation.TensorProduct.comm τ ρ)).trans (h.tprod_left τ)).trans
-    (of_equiv (Representation.TensorProduct.comm σ τ))
 
 end ConstituentsLE
 

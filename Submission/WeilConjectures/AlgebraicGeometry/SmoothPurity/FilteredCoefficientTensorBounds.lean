@@ -11,7 +11,10 @@ public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOn
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleCoefficientSheaf
-public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.Algebra.Homology.HomologySequence

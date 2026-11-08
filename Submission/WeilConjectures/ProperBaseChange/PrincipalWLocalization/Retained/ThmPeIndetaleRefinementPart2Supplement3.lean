@@ -94,20 +94,6 @@ noncomputable def selector (E : Set (PrimeSpectrum R)) (hE : Topology.IsConstruc
   (colimit.ι (diagram (A := R)) (selectorIndex E hE)).hom
     (fun F ↦ if F.val ⊆ E then 1 else 0)
 
-/-- The selector is idempotent. Proof: each stage coordinate is zero or one, so its square
-is itself; the colimit inclusion preserves multiplication.
-Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
-theorem selector_idempotent (E : Set (PrimeSpectrum R)) (hE : Topology.IsConstructible E) :
-    IsIdempotentElem (selector E hE) := by
-  classical
-  apply IsIdempotentElem.map
-  change (fun F : (selectorIndex E hE).parts ↦
-    if F.val ⊆ E then (1 : Localization.Away ((selectorIndex E hE).denominator F))
-    else 0) * _ = _
-  funext F
-  simp only [Pi.mul_apply]
-  split_ifs <;> simp
-
 /-- Constructible neighbourhoods of `T`, ordered by reverse inclusion.
 Here neighbourhood means a constructible superset, exactly as in the source.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/

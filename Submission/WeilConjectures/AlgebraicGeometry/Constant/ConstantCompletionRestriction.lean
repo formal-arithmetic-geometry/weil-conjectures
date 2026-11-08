@@ -8,7 +8,6 @@ module
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Limits
-public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
@@ -18,7 +17,6 @@ public import Submission.WeilConjectures.CategoryTheory.Flat.FlatRingedIdealComp
 public import Submission.WeilConjectures.CategoryTheory.RingedKoszulSystem
 public import Submission.WeilConjectures.CategoryTheory.RingedExtendedCech
 public import Submission.WeilConjectures.CategoryTheory.RingedSectionLocalization
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
@@ -27,8 +25,6 @@ public import Mathlib.Algebra.Homology.Monoidal
 public import Submission.WeilConjectures.Algebra.Homology.HomComplex
 public import Submission.WeilConjectures.CategoryTheory.RingedCompletionUnit
 public import Submission.WeilConjectures.CategoryTheory.RingedDerivedRestriction
-public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -73,7 +69,6 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Submission.WeilConjectures.AlgebraicGeometry.RingedSiteIdeal
 public import Mathlib.RingTheory.Ideal.Maps
 public import Mathlib.CategoryTheory.Sites.Subsheaf
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.CategoryTheory.Sites.Over
 public import Submission.WeilConjectures.CategoryTheory.LocallyDerivedRingedIdealComplete
@@ -86,11 +81,8 @@ public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Submission.WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Submission.WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
-import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Category.Grp.Limits
 import Mathlib.CategoryTheory.Sites.Whiskering
 import Mathlib.CategoryTheory.Sites.Equivalence
@@ -100,7 +92,6 @@ import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.QuasiIso
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
@@ -165,7 +156,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Submission.WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
 import Submission.WeilConjectures.Algebra.Homology.FlatScalarRestrictionKFlat
@@ -437,7 +427,12 @@ public import Submission.WeilConjectures.Algebra.Homology.LocalizationCech.FlatL
 public import Mathlib.Algebra.Homology.BifunctorHomotopy
 public import Submission.WeilConjectures.AlgebraicGeometry.ConstantExactCoefficientRealization
 public import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-public import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
+public import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Submission.WeilConjectures.AlgebraicGeometry.Constant.ConstantCompletionInverseImageSupplement
 public import Submission.WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ConstantKoszulCoefficientConeComparison

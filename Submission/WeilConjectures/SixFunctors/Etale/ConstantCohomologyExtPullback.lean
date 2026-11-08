@@ -72,26 +72,6 @@ lemma unitShiftAddEquivExt_hom (n : ℕ)
     AddEquiv.apply_symm_apply]
   rfl
 
-private lemma unitShiftAddEquivH_apply [CompactSpace X] [QuasiSeparatedSpace X] (n : ℕ)
-    (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) :
-    unitShiftAddEquivH Λ X n x =
-      ((AddEquiv.mk' ((unitIsoSingleFunctorConstantSheaf Λ X).homCongr
-        ((shiftFunctor _ (n : ℤ)).mapIso (unitIsoSingleFunctorConstantSheaf Λ X))) fun f g ↦ by
-          simp [Iso.homCongr_apply]).trans
-        ((Ext.homAddEquiv (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm.trans <|
-          AddEquiv.ofBijective _ (bijective_mapExtComp_constantIntToRing Λ X _ n))) x :=
-  rfl
-
-/-- `unitShiftAddEquivH` is `unitShiftAddEquivExt` followed by the comparison of `Ext` over `Λ`
-with abelian cohomology. -/
-lemma unitShiftAddEquivH_eq [CompactSpace X] [QuasiSeparatedSpace X] (n : ℕ)
-    (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) :
-    unitShiftAddEquivH Λ X n x = (sheafForget₂ Λ X).mapExtComp
-      (Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ) _ n
-        (unitShiftAddEquivExt Λ X n x) := by
-  rw [unitShiftAddEquivExt_apply, unitShiftAddEquivH_apply, AddEquiv.trans_apply,
-    AddEquiv.trans_apply, AddEquiv.trans_apply, AddEquiv.ofBijective_apply]
-
 variable (g : Z ⟶ X)
 
 /-- The isomorphism `Lg^* Λ_X ≅ Λ_Z` of `AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`,

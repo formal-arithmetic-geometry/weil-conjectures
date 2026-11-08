@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
+public import Submission.WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.FieldTower
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginUpperStar
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerContinuity
 
 set_option autoImplicit true

@@ -142,13 +142,6 @@ lemma CategoryTheory.isSplitMono_app_whiskerLeft_comp_whiskerRight
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   infer_instance
 
-/-- A composite `a ≫ F(b ≫ c)` with `a`, `c` isomorphisms and `b` a split monomorphism is a split
-monomorphism. -/
-lemma CategoryTheory.isSplitMono_comp_map_comp {C D : Type*} [Category C] [Category D] {x : D}
-    {y z w : C} (F : C ⥤ D) (a : x ⟶ F.obj y) (b : y ⟶ z) (c : z ⟶ w) (ha : IsIso a)
-    (hb : IsSplitMono b) (hc : IsIso c) : IsSplitMono (a ≫ F.map (b ≫ c)) :=
-  inferInstance
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -274,24 +267,6 @@ instance isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_isUniversal
   inferInstance
 
 namespace NearbyCyclesModel
-
-/-- **The change of geometric generic fibre up to a universal homeomorphism**: if the morphism
-`g = φ.toCartesian.generic` of geometric generic fibres factors as `g = r ≫ q` with `r` a universal
-homeomorphism and the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at `G = Lε'^* C`, then the
-pullback exchange of `φ.toCartesian` is a split monomorphism at `C`. -/
-theorem Hom.isSplitMono_toCart_pullbackExchange_app_of_factor {X X' Y Y' : Scheme.{u}}
-    {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    (φ : M.Hom N f f')
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    {Z : Scheme.{u}} (r : M.generic ⟶ Z) (q : Z ⟶ φ.cartesianModel.generic)
-    [IsUniversalHomeomorphism r] (hrq : r ≫ q = φ.toCartesian.generic)
-    (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ q).unit.app
-      ((L((φ.cartesianModel.ε)^*⟦Λ⟧)).obj C))) :
-    IsSplitMono ((φ.toCartesian.pullbackExchange Λ).app C) := by
-  refine φ.isSplitMono_toCart_pullbackExchange_app_of_isSplitMono_unit Λ C ?_
-  rw [← hrq]
-  exact isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp Λ r q _
 
 end NearbyCyclesModel
 

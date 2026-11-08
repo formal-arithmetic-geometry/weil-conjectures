@@ -195,10 +195,6 @@ instance : F.rightDerivedFunctor.IsRightDerivedFunctor
   dsimp only [rightDerivedFunctor, rightDerivedFunctorUnit]
   infer_instance
 
-example (K : CochainComplex C ℤ) [K.IsKInjective] :
-    IsIso (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K)) := by
-  infer_instance
-
 open ZeroObject in
 /-- The right derived functor sends zero objects to zero objects: the zero complex is
 K-injective, so the derived functor is computed on it by the additive functor `F`. -/

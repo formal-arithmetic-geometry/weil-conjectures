@@ -160,13 +160,6 @@ lemma exists_isOpen_specializes_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoe
   have := (genericPoint_specializes y').map O.ι.base.hom.continuous
   simpa only [Scheme.Opens.ι_apply] using this
 
-/-- A regular locally Noetherian scheme is locally irreducible: every point has an open
-neighbourhood consisting of specializations of a single point, its local rings being domains
-(`AlgebraicGeometry.exists_isOpen_specializes_of_isDomain_stalk`). -/
-lemma IsRegular.exists_isOpen_specializes (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
-    (x : X) : ∃ (O : Set X) (ξ : X), IsOpen O ∧ x ∈ O ∧ ∀ y ∈ O, ξ ⤳ y :=
-  exists_isOpen_specializes_of_isDomain_stalk X (fun _ ↦ inferInstance) x
-
 /-- **Generic connectedness of pro-étale limits.** Let `h : W ⟶ Y` be a cofiltered limit of
 affine schemes `Dⱼ` over `Y` with locally quasi-finite (e.g. étale) structure maps, and assume
 every point of every `Dⱼ` has an open neighbourhood consisting of specializations of a single
@@ -283,16 +276,6 @@ lemma isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk {
   exact exists_isOpen_specializes_of_isDomain_stalk _ (fun x ↦
     (Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain
       (t.app j ≫ hU.fromSpec) hY x).1) q
-
-/-- The spectrum of an ind-étale algebra over an affine open of a regular locally Noetherian
-scheme `Y` is generically connected over `Y`: regular schemes are normal
-(`AlgebraicGeometry.isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk`). -/
-lemma isGenericallyConnected_SpecMap_comp_fromSpec {Y : Scheme.{u}} [IsLocallyNoetherian Y]
-    [IsRegular Y] {U : Y.Opens} (hU : IsAffineOpen U) {T : CommRingCat.{u}} (ψ : Γ(Y, U) ⟶ T)
-    (hψ : ψ.hom.IndEtale) {η : Y} (hη : ∀ y, η ⤳ y) :
-    IsGenericallyConnected (Spec.map ψ ≫ hU.fromSpec) η :=
-  isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk
-    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) hU ψ hψ hη
 
 /-- **Generically connected covers.** Let `Y` be a normal locally Noetherian scheme, `η` a
 point of `Y` specializing to every point, and `f : V ⟶ Y` weakly étale with `V`

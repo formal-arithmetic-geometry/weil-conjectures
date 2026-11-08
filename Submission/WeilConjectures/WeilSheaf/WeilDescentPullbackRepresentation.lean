@@ -229,13 +229,6 @@ noncomputable def pullbackStalkEquiv {F : WeilSheaf K l X} (hF : F.IsLisse) {H :
         (ObjectProperty.isoMk _ e.symm : LisseSheaf.upperStar l
           (X ↘ Spec (.of K)).geometricFiberProj (⟨H, hH⟩ : LisseSheaf l X) ≅ F.toLisse hF))
 
-lemma pullbackStalkEquiv_apply {F : WeilSheaf K l X} (hF : F.IsLisse) {H : AdicSheaf l X}
-    (hH : IsAdicLisseSheaf H)
-    (e : F.obj.carrier ≅ ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H) (v) :
-    B.pullbackStalkEquiv hF hH e v =
-      ((WeilCoefficients.toModuleCat l).map (B.pullbackStalkHom hF hH e)).hom v :=
-  rfl
-
 /-- **The Weil fundamental representation of a sheaf pulled back from the model** (cf. Deligne,
 Weil II, 1.1.7–1.1.12): if `F ≅ p^* H` with its canonical Weil structure, then under
 `H_{t ≫ p} ≅ F_t` the Weil fundamental representation of `π₁(X, t) ⋊ ℤ` on `F_t` is the

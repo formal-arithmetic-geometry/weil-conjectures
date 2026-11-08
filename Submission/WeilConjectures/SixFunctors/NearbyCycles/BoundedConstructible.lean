@@ -58,13 +58,6 @@ noncomputable def boundedConstructibleNearbyCycles (hM : M.PreservesBoundedConst
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ M.nearbyCycles Λ)
     fun K ↦ hM K.obj K.property
 
-/-- The restricted nearby cycles are compatible with the inclusions. -/
-noncomputable def boundedConstructibleNearbyCyclesCompatibility
-    (hM : M.PreservesBoundedConstructible Λ) :
-    boundedConstructibleNearbyCycles hM ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ M.nearbyCycles Λ :=
-  ObjectProperty.liftCompιIso _ _ _
-
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing

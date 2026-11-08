@@ -38,10 +38,6 @@ variable {C : Type u} [Category.{v} C] (R : Type*) [Semiring R]
   {D : Type w} [Category.{w'} D] [Preadditive D] [Linear R D]
   {J : GrothendieckTopology C} [HasSheafify J D]
 
-example : Linear R (Sheaf J D) := inferInstance
-
-example : (sheafToPresheaf J D).Linear R := inferInstance
-
 instance presheafToSheaf_linear : (presheafToSheaf J D).Linear R :=
   (sheafificationAdjunction J D).left_adjoint_linear
 

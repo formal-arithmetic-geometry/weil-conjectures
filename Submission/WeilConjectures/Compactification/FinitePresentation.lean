@@ -175,12 +175,6 @@ noncomputable def descendedModelHom :
     descendedModel f ⟶ S.noetherianBaseSystem.D.obj (descendedModelStage f) :=
   (exists_descendedModel f).choose_spec.choose_spec.choose
 
-/-- The comparison morphism `X ⟶ Y_λ` exhibiting `f` as the base change of the descended model
-(blueprint: `def-nagata-final-descended-model`). -/
-noncomputable def toDescendedModel : X ⟶ descendedModel f :=
-  (exists_descendedModel f).choose_spec.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec
-    |>.choose
-
 instance : LocallyOfFinitePresentation (descendedModelHom f) :=
   (exists_descendedModel f).choose_spec.choose_spec.choose_spec.choose
 
@@ -190,39 +184,7 @@ instance : QuasiCompact (descendedModelHom f) :=
 instance : IsSeparated (descendedModelHom f) :=
   (exists_descendedModel f).choose_spec.choose_spec.choose_spec.choose_spec.choose_spec.choose
 
-/-- `f` is the base change of the descended model along `S ⟶ S_λ`. -/
-theorem isPullback_descendedModel :
-    IsPullback (toDescendedModel f) f (descendedModelHom f)
-      (S.noetherianBaseSystem.π.app (descendedModelStage f)) :=
-  (exists_descendedModel f).choose_spec.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec
-    |>.choose_spec
 
-/-- The base-change comparison `ε_Y : Y_λ ×_{S_λ} S ⟶ X` of the descended model
-(blueprint: `def-nagata-final-descended-model`). -/
-noncomputable def descendedModelIso :
-    pullback (descendedModelHom f) (S.noetherianBaseSystem.π.app (descendedModelStage f)) ≅ X :=
-  (isPullback_descendedModel f).isoPullback.symm
-
-@[reassoc (attr := simp)]
-lemma descendedModelIso_hom_comp :
-    (descendedModelIso f).hom ≫ f = pullback.snd _ _ := by
-  simp [descendedModelIso]
-
-
-/-- **The selected Noetherian compactification** `C_{Y,λ}` of the descended model, given by the
-recursive Noetherian construction `AlgebraicGeometry.noetherianCompactification`.
-(blueprint: `def-nagata-final-noetherian-compactification`) -/
-noncomputable def descendedModelCompactification : Compactification (descendedModelHom f) :=
-  noetherianCompactification (descendedModelHom f)
-
-
-/-- **The base-changed compactification** `C^fp(X/S)`: the base change of the Noetherian
-compactification of the descended model along `S ⟶ S_λ`, composed with the identification
-`X ≅ Y_λ ×_{S_λ} S`. It is a compactification of `f`; in particular `f` is compactifiable
-(blueprint: `def-nagata-final-basechanged-compactification`,
-`lemma-nagata-final-basechanged-compactification`). -/
-noncomputable def finitePresentationCompactification : Compactification f :=
-  (descendedModelCompactification f).ofIsPullback (isPullback_descendedModel f)
 
 end FinalAssembly
 

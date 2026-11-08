@@ -88,13 +88,6 @@ lemma uncurry_nearbyDualityMap (M : C) :
     uncurry (nearbyDualityMap μ θ M) = μ _ _ ≫ Ψ.map ((ihom.ev M).app ω) ≫ θ :=
   uncurry_curry _
 
-/-- The duality map composed with the evaluation is the defining pairing. -/
-@[reassoc]
-lemma whiskerLeft_nearbyDualityMap_comp_ev (M : C) :
-    Ψ.obj M ◁ nearbyDualityMap μ θ M ≫ (ihom.ev (Ψ.obj M)).app ω' =
-      μ _ _ ≫ Ψ.map ((ihom.ev M).app ω) ≫ θ :=
-  whiskerLeft_curry_ihom_ev_app _ _ _
-
 /-- Precomposition with a map `f : ω'₁ ⟶ ω'₂` of the target dualizing objects. -/
 lemma nearbyDualityMap_comp_ihom_map {ω'₂ : C'} (f : ω' ⟶ ω'₂) (M : C) :
     nearbyDualityMap μ θ M ≫ (ihom (Ψ.obj M)).map f = nearbyDualityMap μ (θ ≫ f) M := by

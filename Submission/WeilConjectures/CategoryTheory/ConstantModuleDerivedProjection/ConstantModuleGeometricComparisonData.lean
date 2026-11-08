@@ -14,7 +14,15 @@ public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDer
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleConstruction
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 public import Submission.WeilConjectures.AlgebraicGeometry.SmoothPurity.SequenceSiteCompletionProjectionSupplement
@@ -110,95 +118,6 @@ structure FixedScalarGeometricAdjunctionOfUniverses
           (@SMul.smul B (N.obj.obj U) inferInstance b
             (((a.homEquiv T _).symm (x ≫ underlying.hom.app N)).hom.app U t))
           (((a.homEquiv T _).symm (y ≫ underlying.hom.app N)).hom.app U t)
-
-private def constantScalar
-    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
-    (B : Type (max u v)) [CommRing B] (b : B) :
-    (constantSheaf J (Type (max u v))).obj PUnit.{max u v + 1} ⟶
-      (sheafCompose J (forget RingCat.{max u v})).obj
-        ((constantSheaf J RingCat.{max u v}).obj (RingCat.of B)) :=
-  (constantSheaf J (Type (max u v))).map (TypeCat.ofHom (fun _ : PUnit.{max u v + 1} ↦ b)) ≫
-    (constantCommuteCompose J (forget RingCat.{max u v})).inv.app (RingCat.of B)
-
-private theorem constantScalar_apply
-    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
-    (B : Type (max u v)) [CommRing B] (b : B) (U : Cᵒᵖ)
-    (t : ((constantSheaf J (Type (max u v))).obj PUnit.{max u v + 1}).obj.obj U) :
-    (constantScalar J B b).hom.app U t =
-      (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of B))).app U b := by
-  let P := (Functor.const Cᵒᵖ).obj PUnit.{max u v + 1}
-  let : IsIso (toSheafify J P) :=
-    isIso_toSheafify J (Presheaf.isSheaf_of_isTerminal J Types.isTerminalPUnit)
-  obtain ⟨x, hx⟩ := ((isIso_iff_bijective _).mp
-    (inferInstance : IsIso ((toSheafify J P).app U))).2 t
-  subst t
-  have hn := congrArg (fun f ↦ f.app U x)
-    (toSheafify_naturality J ((Functor.const Cᵒᵖ).map
-      (TypeCat.ofHom (fun _ : PUnit.{max u v + 1} ↦ b))))
-  change _ = ((constantSheaf J (Type (max u v))).map
-    (TypeCat.ofHom (fun _ : PUnit.{max u v + 1} ↦ b))).hom.app U
-      ((toSheafify J P).app U x) at hn
-  change ((constantCommuteCompose J (forget RingCat.{max u v})).inv.app
-    (RingCat.of B)).hom.app U _ = _
-  have hn' : ((constantSheaf J (Type (max u v))).map
-      (TypeCat.ofHom (fun _ : PUnit.{max u v + 1} ↦ b))).hom.app U
-        ((toSheafify J P).app U x) =
-      (toSheafify J ((Functor.const Cᵒᵖ).obj B)).app U b := hn.symm
-  apply Eq.trans (congrArg
-    (fun z ↦ ((constantCommuteCompose J (forget RingCat.{max u v})).inv.app
-      (RingCat.of B)).hom.app U z) hn')
-  have hf := congrArg (fun f ↦ f.app U b)
-    (sheafComposeIso_hom_fac J (forget RingCat.{max u v})
-      ((Functor.const Cᵒᵖ).obj (RingCat.of B)))
-  have hconst := toSheafify_naturality J
-    ((Functor.compConstIso Cᵒᵖ (forget RingCat.{max u v})).hom.app (RingCat.of B))
-  have hp := congrArg (fun f ↦ f.app U b) hconst
-  dsimp at hp
-  change ((sheafifyComposeIso J (forget RingCat.{max u v})
-    ((Functor.const Cᵒᵖ).obj (RingCat.of B))).hom.app U)
-      ((((presheafToSheaf J (Type (max u v))).map
-        ((Functor.compConstIso Cᵒᵖ (forget RingCat.{max u v})).hom.app
-          (RingCat.of B))).hom.app U)
-            ((toSheafify J ((Functor.const Cᵒᵖ).obj B)).app U b)) = _
-  exact (congrArg (fun z ↦ ((sheafifyComposeIso J (forget RingCat.{max u v})
-    ((Functor.const Cᵒᵖ).obj (RingCat.of B))).hom.app U) z) hp.symm).trans hf
-
-private def toConstantUnit
-    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
-    (T : Sheaf J (Type (max u v))) :
-    T ⟶ (constantSheaf J (Type (max u v))).obj PUnit.{max u v + 1} where
-  hom :=
-    { app := fun U ↦ TypeCat.ofHom (fun _ ↦
-      (toSheafify J ((Functor.const Cᵒᵖ).obj PUnit.{max u v + 1})).app U PUnit.unit)
-      naturality := by
-        intro U V f
-        ext t
-        exact congrArg (fun g ↦ g PUnit.unit)
-          ((toSheafify J ((Functor.const Cᵒᵖ).obj PUnit.{max u v + 1})).naturality f) }
-
-private def scalarAdd
-    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
-    {B : Type (max u v)} [CommRing B] (N : Sheaf J (ModuleCat.{max u v} B))
-    (T : Sheaf J (Type (max u v))) (b : B)
-    (x y : T ⟶ (sheafCompose J (forget (ModuleCat.{max u v} B))).obj N) :
-    T ⟶ (sheafCompose J (forget (ModuleCat.{max u v} B))).obj N where
-  hom :=
-    { app := fun U ↦ TypeCat.ofHom (fun t ↦
-        @Add.add (N.obj.obj U) inferInstance
-          (@SMul.smul B (N.obj.obj U) inferInstance b (x.hom.app U t)) (y.hom.app U t))
-      naturality := by
-        intro U V f
-        ext t
-        change @Add.add (N.obj.obj V) inferInstance
-          (@SMul.smul B (N.obj.obj V) inferInstance b (x.hom.app V (T.obj.map f t)))
-          (y.hom.app V (T.obj.map f t)) = N.obj.map f
-            (@Add.add (N.obj.obj U) inferInstance
-              (@SMul.smul B (N.obj.obj U) inferInstance b (x.hom.app U t)) (y.hom.app U t))
-        erw [map_add, map_smul]
-        congr 1
-        · exact congrArg (fun g ↦ @SMul.smul B (N.obj.obj V) inferInstance b (g t))
-            (x.hom.naturality f)
-        · exact congrArg (fun g ↦ g t) (y.hom.naturality f) }
 
 end CategoryTheory
 
@@ -360,23 +279,5 @@ structure FixedTensorData (d : GeometricData J K A) where
             U t = fixedPure K A (d.pullA.obj M) (d.pullA.obj N) U
         ((d.inverse.map x ≫ underlying.inv.app M).hom.app U t)
         ((d.inverse.map y ≫ underlying.inv.app N).hom.app U t)
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 60000 in
--- Elaborate the dependent tensor and projection comparison squares.
-/-- The tensor part of the scalar comparison, on representatives and all derived inputs.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
-def DerivedTensorIdentification (d : GeometricData J K A) (x : ExactData d)
-    (t : FixedTensorData d) :=
-  { choices : d.pullR.mapDerivedCategory.Monoidal × d.pullR.Monoidal ×
-      d.pullA.mapDerivedCategory.Monoidal //
-    (∀ M N : Modules J A,
-      @Functor.OplaxMonoidal.δ _ _ _ _ _ _ d.pullR
-        choices.2.1.toOplaxMonoidal M N = (d.ringTensor.mu M N).hom) ∧
-    TensorNormalization (Modules J A) (Modules K A) d.pullR choices.2.1 choices.1 ∧
-    TensorNormalization (Fixed J A) (Fixed K A) d.pullA t.monoidal choices.2.2 }
 
 end CategoryTheory.ConstantModuleDerivedProjection

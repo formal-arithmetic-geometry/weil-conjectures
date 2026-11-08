@@ -151,12 +151,6 @@ theorem properUnitClass_comp_of_eq (f : X ⟶ Y) (g : Y ⟶ Z) {h : X ⟶ Z} (w 
 
 end Relative
 
-/-- The unit class of a proper scheme is the relative unit class of its structure map. -/
-lemma unitClass_eq_properUnitClass (X : Over (Spec (.of k))) [QuasiCompact X.hom]
-    [IsProper X.hom] [IsProper (toPoint X).left] :
-    BorelMooreSection.unitClass ℓ X = properUnitClass ℓ (toPoint X) :=
-  rfl
-
 /-- **Unit classes along a proper morphism**: for a proper morphism `r : B ⟶ F` of proper
 `k`-schemes, `[B] = Ra_{F!}([r]) ∘ [F]`, read through `Ra_{B!} ≅ Ra_{F!} Rr_!`. -/
 theorem unitClass_comp_map_properUnitClass {B F : Over (Spec (.of k))} [QuasiCompact B.hom]

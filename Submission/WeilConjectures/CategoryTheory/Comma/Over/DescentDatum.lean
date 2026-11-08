@@ -121,18 +121,6 @@ section Universal
 
 variable [HasPullback (V.hom ≫ p) p]
 
-/-- The universal point for a descent datum on `V`: the first projection
-`V ×_Y X ⟶ V`, a point of `V` over `V ×_Y X ⟶ V ⟶ X`. -/
-noncomputable abbrev universalPoint :
-    Over.mk (pullback.fst (V.hom ≫ p) p ≫ V.hom) ⟶ V :=
-  Over.homMk (pullback.fst (V.hom ≫ p) p) rfl
-
-/-- The morphism `φ : V ×_Y X ⟶ V` over `X` underlying a descent datum on `V`: the transport of
-the universal point. -/
-noncomputable def toHom (D : DescentDatum p V) : Limits.pullback (V.hom ≫ p) p ⟶ V.left :=
-  (D.transport _ (pullback.snd (V.hom ≫ p) p) (by rw [Category.assoc, pullback.condition])
-    universalPoint).left
-
 
 end Universal
 

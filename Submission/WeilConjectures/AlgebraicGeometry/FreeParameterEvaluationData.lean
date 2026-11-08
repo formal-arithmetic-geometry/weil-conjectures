@@ -68,7 +68,10 @@ public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySur
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import Submission.WeilConjectures.SecSmoothPurity.CochainInverseComparison
 public import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
-public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 

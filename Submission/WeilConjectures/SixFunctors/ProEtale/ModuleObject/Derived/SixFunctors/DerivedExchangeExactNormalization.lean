@@ -28,13 +28,15 @@ public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasS
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Submission.WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
 public import Submission.WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.LocalSite
@@ -44,7 +46,8 @@ public import Mathlib.Topology.Constructible
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Submission.WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
+public import Submission.WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
@@ -101,7 +104,12 @@ public import Submission.WeilConjectures.CategoryTheory.ConstantCoefficientScala
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRings
 public import Submission.WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageSupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicFiniteOperations
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict

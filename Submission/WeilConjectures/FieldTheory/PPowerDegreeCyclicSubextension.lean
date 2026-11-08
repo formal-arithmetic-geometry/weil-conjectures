@@ -179,24 +179,4 @@ theorem mem_of_prime_dvd_finrank (S : Set ℕ)
   rw [← map_pow, AlgEquiv.symm_apply_eq]
   exact Subtype.ext hyx
 
-/-- With `S = {p}`: the degree of every finite Galois subextension of `Ω/L` is a power of `p`. -/
-theorem exists_finrank_eq_pow_of_forall_pow_eq {p : ℕ}
-    (hζ : ∀ ℓ, ℓ.Prime → ℓ ≠ p → (primitiveRoots ℓ L).Nonempty)
-    (hpow : ∀ ℓ, ℓ.Prime → ℓ ≠ p → ∀ F : IntermediateField L Ω, FiniteDimensional L F →
-      ∀ x ∈ F, ∃ y ∈ F, y ^ ℓ = x)
-    (N : IntermediateField L Ω) [FiniteDimensional L N] [IsGalois L N] :
-    ∃ k, finrank L N = p ^ k :=
-  ⟨_, Nat.eq_prime_pow_of_unique_prime_dvd finrank_pos.ne' fun hℓ hdvd =>
-    mem_of_prime_dvd_finrank {p} hζ hpow N hℓ hdvd⟩
-
-/-- With `S = ∅`: every finite Galois subextension of `Ω/L` is trivial. -/
-theorem finrank_eq_one_of_forall_pow_eq
-    (hζ : ∀ ℓ, ℓ.Prime → (primitiveRoots ℓ L).Nonempty)
-    (hpow : ∀ ℓ, ℓ.Prime → ∀ F : IntermediateField L Ω, FiniteDimensional L F →
-      ∀ x ∈ F, ∃ y ∈ F, y ^ ℓ = x)
-    (N : IntermediateField L Ω) [FiniteDimensional L N] [IsGalois L N] :
-    finrank L N = 1 :=
-  Nat.eq_one_iff_not_exists_prime_dvd.2 fun _ hℓ hdvd =>
-    mem_of_prime_dvd_finrank ∅ (fun ℓ hℓ _ => hζ ℓ hℓ) (fun ℓ hℓ _ => hpow ℓ hℓ) N hℓ hdvd
-
 end IntermediateField

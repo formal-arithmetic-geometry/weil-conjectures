@@ -90,7 +90,11 @@ public import Submission.WeilConjectures.Algebra.Homology.HomTensorDegreewiseEqu
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import Submission.WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupplement
+public import Submission.WeilConjectures.CategoryTheory.RingedDerivedRestriction
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+public import Submission.WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
 public import Submission.WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
 
 set_option autoImplicit true

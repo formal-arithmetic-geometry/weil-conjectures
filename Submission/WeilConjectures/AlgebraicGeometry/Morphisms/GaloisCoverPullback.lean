@@ -114,9 +114,4 @@ lemma pullback_π : (c.pullback f).π = Limits.pullback.snd c.π f :=
   rfl
 
 
-/-- The square `P ×_Y X ⟶ P`, `P ×_Y X ⟶ X` over `Y` commutes. -/
-@[reassoc]
-lemma pullback_fst_comp_π : pullback.fst c.π f ≫ c.π = (c.pullback f).π ≫ f :=
-  pullback.condition
-
 end AlgebraicGeometry.Scheme.GaloisCover

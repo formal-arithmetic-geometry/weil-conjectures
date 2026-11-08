@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.PolynomialAlgebra
-public import Submission.WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
+public import Mathlib.RingTheory.Polynomial.Quotient
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import Submission.WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
@@ -260,17 +260,6 @@ instance isIso_deformationSpaceToPolynomialSpec_bot :
       exact (inferInstance : IsIso (Spec.map
         ((⊥ : X.IdealSheafData).polynomialToRees.app (Opposite.op U))))
 
-/-- The inclusion `𝒪_X[t, I t⁻¹] ⟶ 𝒪_X[t, t⁻¹]`. -/
-@[simps]
-noncomputable def reesToLaurent : I.reesPresheaf ⟶ X.laurentPresheaf where
-  app U := CommRingCat.ofHom (I.siteIdeal U.unop).extendedReesAlgebra.val.toRingHom
-  naturality U V i := by ext x; rfl
-
-
-/-- The trivialisation of the deformation space over the punctured line:
-`𝔾_{m,X} ⟶ D_I X`. -/
-noncomputable def laurentSpecToDeformationSpace : X.laurentSpec ⟶ I.deformationSpace :=
-  relativeGluingMap _ _ I.reesToLaurent
 
 /-- The ideal `(t)` of the extended Rees algebra. -/
 noncomputable abbrev tIdeal (U : X.AffineZariskiSiteᵒᵖ) : Ideal (I.reesPresheaf.obj U) :=
@@ -335,19 +324,6 @@ noncomputable abbrev quotientSpec : Scheme.{u} :=
 noncomputable abbrev quotientPolynomialAlgebra : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} :=
   I.quotientAlgebra ⋙ CommRingCat.polynomialFunctor
 
-/-- The structure map `𝒪_X ⟶ (𝒪_X / I)[t]`. -/
-noncomputable abbrev toQuotientPolynomialAlgebra :
-    X.affineStructurePresheaf ⟶ I.quotientPolynomialAlgebra :=
-  I.toQuotientAlgebra ≫ I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC
-
-lemma coequifibered_toQuotientPolynomialAlgebra : I.toQuotientPolynomialAlgebra.Coequifibered :=
-  NatTrans.Coequifibered.comp I.coequifibered_toQuotientAlgebra
-    (CommRingCat.coequifibered_polynomialC.whiskerLeft _)
-
-/-- The relative affine line `𝔸¹_{V(I)} = Spec_X (𝒪_X / I)[t]`. -/
-noncomputable abbrev quotientPolynomialSpec : Scheme.{u} :=
-  (relativeGluingData I.coequifibered_toQuotientPolynomialAlgebra).glued
-
 /-- The map `𝒪_X[t, I t⁻¹] ⟶ (𝒪_X / I)[t]`, `t ↦ t`, `x t⁻¹ ↦ 0` for `x ∈ I`. -/
 @[simps]
 noncomputable def reesToQuotientPolynomial : I.reesPresheaf ⟶ I.quotientPolynomialAlgebra where
@@ -358,14 +334,6 @@ noncomputable def reesToQuotientPolynomial : I.reesPresheaf ⟶ I.quotientPolyno
     exact Ideal.extendedReesAlgebraToPolynomial_comp_extendedReesAlgebraMap _ _
       (I.map_siteIdeal i).le _ Ideal.mk_ker.ge _ Ideal.mk_ker.ge _
       (Ideal.quotientMap_comp_mk (le_comap_quotientPresheaf _ I.map_siteIdeal i))
-
-/-- `t ↦ 0`: the restriction of `(𝒪_X / I)[t]` to the zero section. -/
-@[simps]
-noncomputable def quotientPolynomialEvalZero : I.quotientPolynomialAlgebra ⟶ I.quotientAlgebra where
-  app U := CommRingCat.ofHom (Polynomial.evalRingHom 0)
-  naturality U V i := by
-    refine CommRingCat.hom_ext (RingHom.ext fun p ↦ ?_)
-    exact Polynomial.eval_zero_map _ p
 
 
 /-- The projection `⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_X / I` to the degree-zero part. -/
@@ -391,14 +359,6 @@ lemma toNormalConePresheaf_comp_normalConeToQuotient :
   exact (congrArg (Polynomial.eval 0) (Ideal.extendedReesAlgebraToPolynomial_algebraMap
     (I := I.siteIdeal U.unop) _ Ideal.mk_ker.ge x)).trans Polynomial.eval_C
 
-lemma polynomialToRees_comp_reesToQuotientPolynomial :
-    I.polynomialToRees ≫ I.reesToQuotientPolynomial =
-      Functor.whiskerRight I.toQuotientAlgebra CommRingCat.polynomialFunctor := by
-  refine NatTrans.ext (funext fun U ↦ ?_)
-  refine CommRingCat.hom_ext ?_
-  exact Ideal.extendedReesAlgebraToPolynomial_comp_toExtendedReesAlgebra
-    (I := I.siteIdeal U.unop) (Ideal.Quotient.mk _) Ideal.mk_ker.ge
-
 /-! ### The fibres of the deformation space -/
 
 lemma toPolynomialPresheaf_comp_polynomialToLaurent :
@@ -406,25 +366,6 @@ lemma toPolynomialPresheaf_comp_polynomialToLaurent :
       X.toLaurentPresheaf := by
   ext U x
   exact Polynomial.toLaurent_C x
-
-lemma toReesPresheaf_comp_reesToLaurent :
-    I.toReesPresheaf ≫ I.reesToLaurent = X.toLaurentPresheaf := by
-  ext U x
-  exact Ideal.coe_algebraMap_extendedReesAlgebra (I := I.siteIdeal U.unop) x
-
-/-- **The punctured trivialisation.** Over the punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` the deformation
-space is trivial: `D_I X ×_{𝔸¹_X} 𝔾_{m,X} = 𝔾_{m,X}`, since inverting `t` in `𝒪_X[t, I t⁻¹]` gives
-`𝒪_X[t, t⁻¹]`. -/
-theorem isPullback_laurentSpecToDeformationSpace :
-    IsPullback I.laurentSpecToDeformationSpace (𝟙 X.laurentSpec) I.deformationSpaceToPolynomialSpec
-      X.laurentSpecToPolynomialSpec := by
-  have := isPullback_relativeGluingMap X.coequifibered_toPolynomialPresheaf
-    I.coequifibered_toReesPresheaf X.coequifibered_toLaurentPresheaf
-    X.coequifibered_toLaurentPresheaf I.polynomialToRees
-    (X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent) I.reesToLaurent (𝟙 _)
-    toPolynomialPresheaf_comp_polynomialToLaurent I.toReesPresheaf_comp_reesToLaurent
-    fun U ↦ Ideal.isPushout_toExtendedReesAlgebra (I.siteIdeal U)
-  rwa [relativeGluingMap_id] at this
 
 lemma isPushout_polynomialToRees_toQuotientPresheaf (U : X.AffineZariskiSiteᵒᵖ) :
     IsPushout (I.polynomialToRees.app U)
@@ -684,16 +625,6 @@ lemma polynomialSpecZeroSection_comp_polynomialSpecToAffineSpace :
 
 /-! ### The punctured line -/
 
-/-- The coordinate `t` on `Spec_X 𝒪_X[t]`. -/
-noncomputable def polynomialSpecCoord : Γ(X.polynomialSpec, ⊤) :=
-  X.polynomialSpecToAffineSpace.appTop (AffineSpace.coord X 0)
-
-lemma ι_appTop_polynomialSpecCoord (U : X.AffineZariskiSite) :
-    (colimit.ι (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor U).appTop
-      X.polynomialSpecCoord = (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X := by
-  rw [polynomialSpecCoord, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
-    ι_polynomialSpecToAffineSpace, polynomialSpecChart, AffineSpace.homOfVector_appTop_coord]
-
 set_option backward.isDefEq.respectTransparency false in
 instance : IsOpenImmersion X.laurentSpecToPolynomialSpec := by
   refine relativeGluingMap_of_forall _ @IsOpenImmersion _ _
@@ -702,36 +633,11 @@ instance : IsOpenImmersion X.laurentSpecToPolynomialSpec := by
     (algebraMap Γ(X, U.1)[X] Γ(X, U.1)[T;T⁻¹])))
   exact IsOpenImmersion.of_isLocalization (Polynomial.X : Γ(X, U.1)[X])
 
-set_option backward.isDefEq.respectTransparency false in
-/-- The punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` is the locus where the coordinate `t` is invertible. -/
-lemma opensRange_laurentSpecToPolynomialSpec :
-    X.laurentSpecToPolynomialSpec.opensRange =
-      X.polynomialSpec.basicOpen X.polynomialSpecCoord := by
-  refine opens_ext _ fun U ↦ TopologicalSpace.Opens.ext ?_
-  have h := isPullback_ι_relativeGluingMap X.coequifibered_toPolynomialPresheaf
-    X.coequifibered_toLaurentPresheaf _
-    IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent U
-  have e1 := Scheme.range_snd_of_isPullback h
-  have e2 : Set.range (Spec.map (CommRingCat.ofHom
-      (algebraMap Γ(X, U.1)[X] Γ(X, U.1)[T;T⁻¹]))) =
-      (PrimeSpectrum.basicOpen (Polynomial.X : Γ(X, U.1)[X]) : Set (PrimeSpectrum Γ(X, U.1)[X])) :=
-    PrimeSpectrum.localization_away_comap_range _ _
-  have e3 : ((Spec (.of Γ(X, U.1)[X])).basicOpen ((ΓSpecIso (.of Γ(X, U.1)[X])).inv Polynomial.X) :
-      Set (Spec (.of Γ(X, U.1)[X]))) =
-      (PrimeSpectrum.basicOpen (Polynomial.X : Γ(X, U.1)[X]) : Set (PrimeSpectrum Γ(X, U.1)[X])) :=
-    congrArg _ (basicOpen_eq_of_affine _)
-  rw [Scheme.preimage_basicOpen_top, ι_appTop_polynomialSpecCoord]
-  exact e1.symm.trans (e2.trans e3.symm)
-
 /-! ### The relative spectrum of `𝒪_X` -/
 
 lemma coequifibered_id_affineStructurePresheaf :
     NatTrans.Coequifibered (𝟙 X.affineStructurePresheaf) :=
   NatTrans.Coequifibered.of_isIso _
-
-/-- `Spec_X 𝒪_X`, which is `X` itself. -/
-noncomputable abbrev structureSpec : Scheme.{u} :=
-  (relativeGluingData X.coequifibered_id_affineStructurePresheaf).glued
 
 instance : IsIso (relativeGluingData X.coequifibered_id_affineStructurePresheaf).toBase :=
   toBase_of_forall _ (.isomorphisms _) fun _ ↦
@@ -741,46 +647,6 @@ namespace IdealSheafData
 
 variable {X} (I : X.IdealSheafData)
 
-/-- The map `𝒪_X[t] ⟶ (𝒪_X / I)[t]`. -/
-noncomputable abbrev polynomialToQuotientPolynomial :
-    X.polynomialPresheaf ⟶ I.quotientPolynomialAlgebra :=
-  Functor.whiskerRight I.toQuotientAlgebra CommRingCat.polynomialFunctor
-
-/-- The relative affine line of `V(I)` is the base change of the one of `X`:
-`Spec_X (𝒪_X / I)[t] = V(I) ×_X Spec_X 𝒪_X[t]`. -/
-theorem isPullback_quotientPolynomialSpec :
-    IsPullback
-      (relativeGluingMap I.coequifibered_toQuotientAlgebra
-        I.coequifibered_toQuotientPolynomialAlgebra
-        (I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC))
-      (relativeGluingMap X.coequifibered_toPolynomialPresheaf
-        I.coequifibered_toQuotientPolynomialAlgebra I.polynomialToQuotientPolynomial)
-      (relativeGluingData I.coequifibered_toQuotientAlgebra).toBase X.polynomialSpecProj := by
-  have h := isPullback_relativeGluingMap X.coequifibered_id_affineStructurePresheaf
-    I.coequifibered_toQuotientAlgebra X.coequifibered_toPolynomialPresheaf
-    I.coequifibered_toQuotientPolynomialAlgebra I.toQuotientAlgebra X.toPolynomialPresheaf
-    (I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC) I.polynomialToQuotientPolynomial
-    (Category.id_comp _) rfl fun U ↦
-      CommRingCat.coequifibered_polynomialC (I.toQuotientAlgebra.app (.op U))
-  refine h.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _)
-    (asIso (relativeGluingData X.coequifibered_id_affineStructurePresheaf).toBase)
-    (by simp) (by simp) ?_ ?_
-  · simp only [Iso.refl_hom, asIso_hom, Category.id_comp]
-    exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
-  · simp only [Iso.refl_hom, asIso_hom, Category.id_comp]
-    exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
-
-
-/-- The map `𝒪_X[t] / t ⟶ 𝒪_X / I`, `t ↦ 0`. -/
-noncomputable def polynomialZeroToQuotient : X.polynomialZeroPresheaf ⟶ I.quotientAlgebra where
-  app U := CommRingCat.ofHom (Ideal.Quotient.lift _
-    ((Ideal.Quotient.mk (I.siteIdeal U.unop)).comp (Polynomial.evalRingHom 0))
-    fun _ ha ↦ Polynomial.span_X_le_ker_mk_comp_evalRingHom_zero _ ha)
-  naturality U V i := CommRingCat.hom_ext
-    (Polynomial.quotientMap_comp_lift_evalRingHom_zero _ _ _
-      (le_comap_quotientPresheaf _ I.map_siteIdeal i) (by
-        rw [← Ideal.map_le_iff_le_comap, Ideal.map_span, Set.image_singleton]
-        exact le_of_eq (congrArg (fun p ↦ Ideal.span {p}) (Polynomial.map_X _)))).symm
 
 
 lemma toPolynomialZeroPresheaf_comp_polynomialZeroToNormalCone :

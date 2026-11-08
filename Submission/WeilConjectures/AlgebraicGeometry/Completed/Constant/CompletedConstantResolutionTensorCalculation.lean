@@ -17,7 +17,11 @@ import Submission.WeilConjectures.Algebra.Homology.BifunctorSingleComparison
 import Submission.WeilConjectures.Algebra.Homology.FlatScalarRealizationFlat
 import Submission.WeilConjectures.Algebra.Homology.FlatScalarRealization
 import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.CategoryTheory.Sites.LeftExact
 import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
@@ -70,7 +74,10 @@ import Submission.WeilConjectures.Algebra.Homology.RingIsomorphismTensorTranspor
 import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import Submission.WeilConjectures.Mathlib.Algebra.Homology.Monoidal
-import Submission.WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+import Mathlib.Algebra.Homology.Monoidal
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Limits.Shapes.Countable
+import Submission.WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 import Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

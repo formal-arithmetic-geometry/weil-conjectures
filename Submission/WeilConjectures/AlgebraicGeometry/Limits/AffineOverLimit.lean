@@ -305,12 +305,6 @@ noncomputable def ringCocone (i₁ : I) : Cocone (Over.forget i₁ ⋙ ringDiagr
     (colimit.cocone (diagram D p hp))).whisker
     (Over.forget i₁).op
 
-omit [∀ i, IsAffineHom (p i)] in
-/-- The components of `ringCocone` are the colimit inclusions. -/
-lemma ringCocone_ι_app (i₁ : I) (j : (Over i₁)ᵒᵖ) :
-    (ringCocone D p hp U i₁).ι.app j =
-      (colimit.ι (diagram D p hp) (.op j.unop.left)).app (.op U) := rfl
-
 /-- `colim Γ(Dᵢ, pᵢ⁻¹ U)` is the colimit of the rings `Γ(Dᵢ, pᵢ⁻¹ U)` for `i` over `i₀`. -/
 noncomputable def isColimitRingCocone (i₁ : I) : IsColimit (ringCocone D p hp U i₁) :=
   (Functor.Final.isColimitWhiskerEquiv (Over.forget i₁).op _).symm

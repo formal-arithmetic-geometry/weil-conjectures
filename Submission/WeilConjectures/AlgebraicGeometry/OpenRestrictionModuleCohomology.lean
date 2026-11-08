@@ -10,7 +10,9 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 
 public import Submission.WeilConjectures.Topology.OpenModuleCohomology
-import Submission.WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 import Submission.WeilConjectures.Topology.RestrictInjectiveResolution

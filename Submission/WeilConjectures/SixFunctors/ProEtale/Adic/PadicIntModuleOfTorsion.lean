@@ -75,11 +75,6 @@ noncomputable def zmodSMul : of (ULift.{w} (ZMod N)) ⊗ A ⟶ A :=
   ofHom (TensorProduct.liftAddHom (zmodSMulAddHom N h) fun r m n ↦ by
     rw [map_zsmul, AddMonoidHom.smul_apply, map_zsmul])
 
-/-- `AddCommGrpCat.zmodSMul` on pure tensors. -/
-lemma zmodSMul_tmul (z : ULift.{w} (ZMod N)) (a : A) :
-    (zmodSMul N h).hom (z ⊗ₜ[ℤ] a) = zmodSMulAddHom N h z a :=
-  rfl
-
 /-- The unit of `ℤ/N` acts trivially. -/
 lemma one_whiskerRight_zmodSMul :
     η[of (ULift.{w} (ZMod N))] ▷ A ≫ zmodSMul N h = (λ_ A).hom :=
@@ -92,15 +87,6 @@ lemma mul_whiskerRight_zmodSMul :
       (α_ _ _ A).hom ≫ of (ULift.{w} (ZMod N)) ◁ zmodSMul N h ≫ zmodSMul N h :=
   hom_ext_toIntLinearMap (TensorProduct.ext_threefold fun z z' a ↦
     zmodSMulAddHom_mul N h z z' a)
-
-/-- Additive maps between groups killed by `N` commute with the action of `ℤ/N`. -/
-lemma zmodSMul_naturality {B : Ab.{w}} (h' : ∀ b : B, (N : ℤ) • b = 0) (f : A ⟶ B) :
-    zmodSMul N h ≫ f = of (ULift.{w} (ZMod N)) ◁ f ≫ zmodSMul N h' :=
-  hom_ext_toIntLinearMap (TensorProduct.ext' fun (z : ULift.{w} (ZMod N)) (a : A) ↦ by
-    obtain ⟨z⟩ := z
-    obtain ⟨k, rfl⟩ := ZMod.intCast_surjective z
-    exact (congr_arg f.hom (zmodSMulAddHom_intCast N h k a)).trans
-      ((map_zsmul f.hom k a).trans (zmodSMulAddHom_intCast N h' k (f.hom a)).symm))
 
 end AddCommGrpCat
 
@@ -220,12 +206,5 @@ noncomputable def padicIntModTowerOfTorsion (G : ℕᵒᵖ ⥤ Sheaf (ProEt.topo
   map {_ n} f := padicIntModHomOfTorsion (G.map f) (hG n.unop)
   map_id _ := Mod.hom_ext _ _ (G.map_id _)
   map_comp _ _ := Mod.hom_ext _ _ (G.map_comp _ _)
-
-/-- The tower of `ℤ_ℓ,X`-modules `ProEtale.padicIntModTowerOfTorsion G hG` has underlying tower of
-abelian sheaves `G`. -/
-lemma padicIntModTowerOfTorsion_comp_forget (G : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) Ab.{u + 1})
-    (hG : ∀ n : ℕ, ((l ^ n : ℕ) : ℤ) • 𝟙 (G.obj (op n)) = 0) :
-    padicIntModTowerOfTorsion X l G hG ⋙ Mod.forget _ = G :=
-  rfl
 
 end AlgebraicGeometry.ProEtale

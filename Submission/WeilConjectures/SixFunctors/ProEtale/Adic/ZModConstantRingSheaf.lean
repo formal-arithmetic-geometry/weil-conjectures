@@ -60,11 +60,6 @@ noncomputable def zmodConstToContinuousMap :
     ((ContinuousMap.C (α := U.unop.left)).comp ULift.ringEquiv.toRingHom))
   naturality _ _ _ := rfl
 
-/-- The constant functions send `a` to the constant function `a`. -/
-lemma zmodConstToContinuousMap_app_apply (U : X.ProEtᵒᵖ) (a : ULift.{u + 1} (ZMod N)) :
-    (zmodConstToContinuousMap X N).app U a = ULift.up (ContinuousMap.const _ a.down) :=
-  rfl
-
 /-- A continuous function to the discrete ring `ℤ/N` is locally constant: it is constant on its
 open fibres, which form a Zariski cover. -/
 instance : Presheaf.IsLocallySurjective (ProEt.topology X)

@@ -446,11 +446,6 @@ theorem Scheme.Hom.affineSpaceImmersion_spec :
       IsImmersion π.affineSpaceImmersion :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose_spec.choose_spec
 
-@[reassoc (attr := simp)]
-lemma Scheme.Hom.affineSpaceImmersion_over :
-    π.affineSpaceImmersion ≫ 𝔸(ULift.{u} (Fin π.affineSpaceImmersionDim); S) ↘ S = π :=
-  π.affineSpaceImmersion_spec.1
-
 instance Scheme.Hom.isImmersion_affineSpaceImmersion : IsImmersion π.affineSpaceImmersion :=
   π.affineSpaceImmersion_spec.2
 
@@ -548,13 +543,6 @@ lemma neg_comp_neg : neg n S ≫ neg n S = 𝟙 𝔸(n; S) := by
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg,
       neg_appTop_coord, neg_neg]
     simp
-
-@[simp]
-lemma zeroSection_comp_neg : zeroSection n S ≫ neg n S = zeroSection n S := by
-  refine hom_ext ?_ fun i ↦ ?_
-  · rw [Category.assoc, neg_over, zeroSection_over]
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, neg_appTop_coord, map_neg,
-      zeroSection_appTop_coord, neg_zero]
 
 /-- The addition `(x, y) ↦ x + y` of `𝔸(n; S)`, a morphism `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`,
 the group law of the additive group scheme. -/

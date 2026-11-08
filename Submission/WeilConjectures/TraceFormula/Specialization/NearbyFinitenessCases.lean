@@ -102,15 +102,6 @@ lemma traitGenericPoint_preimage_traitGenericOpen :
   exact (map_ne_zero _).2 (IsFractionRing.to_map_ne_zero_of_mem_nonZeroDivisors
     (mem_nonZeroDivisors_of_ne_zero PowerSeries.X_ne_zero))
 
-/-- The closed point of the trait does not lie in its generic fibre `D(t)`. -/
-lemma traitClosedPoint_preimage_traitGenericOpen :
-    traitClosedPoint k' ⁻¹ᵁ traitGenericOpen k' = ⊥ := by
-  rw [traitGenericOpen, Scheme.preimage_basicOpen_top, traitClosedPoint,
-    ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
-  change Scheme.basicOpen _ ((Scheme.ΓSpecIso (.of k')).inv
-    (PowerSeries.constantCoeff PowerSeries.X)) = ⊥
-  rw [PowerSeries.constantCoeff_X, map_zero, Scheme.basicOpen_zero]
-
 variable (k') in
 /-- The generic fibre `𝔸ⁿ_η` of the affine space `𝔸ⁿ_S`, as an open subscheme: the preimage of
 the generic fibre `D(t)` of the trait. -/

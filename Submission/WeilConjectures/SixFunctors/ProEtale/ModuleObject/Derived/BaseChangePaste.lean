@@ -190,11 +190,4 @@ theorem isIso_baseChangeMap_paste_iff (sq₁ : CommSq g' f' f g) (sq₂ : CommSq
   rw [t1, forall_congr' t2]
   exact key
 
-/-- The base change morphism of the outer square of two horizontally pasted squares is invertible
-when those of the two squares are. -/
-theorem isIso_baseChangeMap_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq h' f'' f' h)
-    (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) [IsIso (baseChangeMap Λ sq₁)]
-    [IsIso (baseChangeMap Λ sq₂)] : IsIso (baseChangeMap Λ sq) :=
-  (isIso_baseChangeMap_paste_iff Λ sq₁ sq₂ sq).mpr fun _ ↦ inferInstance
-
 end AlgebraicGeometry.ProEtale.CondensedRing

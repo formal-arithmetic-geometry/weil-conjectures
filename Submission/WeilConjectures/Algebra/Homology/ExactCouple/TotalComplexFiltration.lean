@@ -208,12 +208,6 @@ lemma columnsGEMap_toSingleColumn (p : ℤ) : K.columnsGEMap p ≫ K.toSingleCol
   apply HomologicalComplex.to_single_hom_ext
   exact (K.isZero_columnsGE_X (p + 1) p (by omega)).eq_of_src _ _
 
-/-- The short exact sequence `0 ⟶ K^{≥ p + 1, •} ⟶ K^{≥ p, •} ⟶ K^{p, •} ⟶ 0` of double
-complexes. -/
-noncomputable def columnsShortComplex₂ (p : ℤ) :
-    ShortComplex (HomologicalComplex₂ C (up ℤ) (up ℤ)) :=
-  ShortComplex.mk (K.columnsGEMap p) (K.toSingleColumn p) (K.columnsGEMap_toSingleColumn p)
-
 /-- The short exact sequence `0 ⟶ Tot K^{≥ p + 1, •} ⟶ Tot K^{≥ p, •} ⟶ Tot K^{p, •} ⟶ 0`,
 where `K^{p, •}` is the double complex concentrated in the column `p`. -/
 noncomputable def columnShortComplex (p : ℤ) : ShortComplex (CochainComplex C ℤ) :=
@@ -287,12 +281,6 @@ noncomputable def columnFiltrationPieceIso (p : ℤ) :
 lemma columnFiltrationPieceIso_hom_comp (p : ℤ) :
     (K.columnFiltrationPieceIso p).hom ≫ K.totalιColumnsGE p = (K.columnFiltration.F p).arrow :=
   Subobject.underlyingIso_hom_comp_eq_mk _
-
-/-- The isomorphism `Fᵖ Tot K ≅ Tot K^{≥ p, •}` is compatible with the inclusions. -/
-@[reassoc (attr := simp)]
-lemma columnFiltrationPieceIso_inv_comp (p : ℤ) :
-    (K.columnFiltrationPieceIso p).inv ≫ (K.columnFiltration.F p).arrow = K.totalιColumnsGE p :=
-  Subobject.underlyingIso_arrow _
 
 /-- The isomorphisms `Fᵖ Tot K ≅ Tot K^{≥ p, •}` are compatible with the inclusions
 `Fᵖ⁺¹ ⊆ Fᵖ`. -/

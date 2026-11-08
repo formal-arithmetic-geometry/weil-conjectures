@@ -108,27 +108,6 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (B : SemilinearSections.ScalarData.{c, v, max c v r} g)
   (D : SemilinearSections.ScalarData.{c, v, max c v r} h)
 
-/-- Canonical scalar association, normalized on local tensors and on K-flat complexes.
-It applies in particular on the actual coefficient sequence site.
-Source: integral operations, node proof steps 2 and 7
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
-abbrev CoefficientScalarAssociation :=
-  CoefficientScalarComparisonData (A.model.E ⋙ B.model.E ≅ D.model.E) (A.T ⋙ B.T ≅ D.T)
-    (fun ordinary ↦ ∀ (M : SemilinearSections.Mod.{c, v, max c v r} J R) (U : Cᵒᵖ)
-      (s : S.obj.obj U) (t : T.obj.obj U) (x : M.val.obj U),
-      (ordinary.hom.app M).val.app U
-        (t • SemilinearSections.scalarExtensionSection.{c, v, r} g B (A.model.E.obj M) U
-          (s • SemilinearSections.scalarExtensionSection.{c, v, r} f A M U x)) =
-        (((g.hom.app U) s * t) •
-          SemilinearSections.scalarExtensionSection.{c, v, r} h D M U x))
-    (fun ordinary derived ↦ ∀
-      (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)
-      (_hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P),
-      derived.hom.app (DerivedCategory.Q.obj P) ≫ D.model.ε.app P =
-        B.T.map (A.model.ε.app P) ≫
-          B.model.ε.app ((A.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P))
-
 end ScalarAssociation
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -211,20 +190,6 @@ Source: integral operations, simultaneous coefficient extension
 def coefficientExtensionSystem :
     DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l L W :=
   SE.reduction ⋙ A.scalar.T
-
-/-- The actual comparison: inverse of the completed-limit identification, followed
-by the coherent counit. Associativity and unitors only display its functorial type.
-Source: node proof step 4, φ=a⁻¹e, expressed with C already associated
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
-@[irreducible] def coefficientExtensionCounit
-    (δ : coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W ≅
-      integralScalarExtensionOfUniverses l E L ι W) :
-    integralScalarExtensionOfUniverses l E L ι W ⋙ SL.reduction ⟶
-      coefficientExtensionSystem l E L ι W SE A :=
-  (Functor.isoWhiskerRight δ.symm SL.reduction).hom ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (coefficientExtensionSystem l E L ι W SE A) SL.adjunction.counit ≫
-    (Functor.rightUnitor _).hom
 
 /-- Finite scalar extension preserves zero maps via its own additive structure.
 Source: Stacks 06YY (blueprint: lem-pur-coefficient-extension-reduction-model). -/
@@ -356,91 +321,5 @@ Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-
           (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P.obj) ≫
         DerivedCategory.Q.map
           (coefficientExtensionAssociationChain l E L ι W A n (association n) P.obj)
-
-/-- The completion identification preserves the specified Roos projections.
-Caching this proposition prevents expansion when projecting the model record.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
-@[irreducible] def IsCoefficientExtensionCompletionProjection
-    (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
-      CochainComplex (coefficientSequenceModules l L W) ℤ)
-    (directEvaluation : ∀ n : ℕ,
-      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅
-        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)
-    (model : integralOperationsGoodLocalization l E W ⋙
-      coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q)
-    (completion : coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W ≅
-      integralScalarExtensionOfUniverses l E L ι W) : Prop :=
-  ∀ (P : (integralOperationsGoodComplex l E W).FullSubcategory) (n : ℕ),
-    completion.inv.app (DerivedCategory.Q.obj P.obj) ≫
-        (coefficientSequenceProjection l L W n).app
-          ((coefficientExtensionSystem l E L ι W SE A).obj (DerivedCategory.Q.obj P.obj)) ≫
-        (coefficientFiniteDerivedRestriction l L W n).map
-          ((coefficientSequenceDerivedEvaluation l L W n).map (model.hom.app P) ≫
-            (coefficientSequenceEvaluation l L W n).mapDerivedCategoryFactors.hom.app
-              (direct.obj P) ≫ DerivedCategory.Q.map ((directEvaluation n).hom.app P)) ≫
-        (scalarReductionRestriction l L W n).mapDerivedCategoryFactors.hom.app
-          ((integralScalarFiniteComplex l E L ι W n).obj P.obj) =
-      (integralScalarExtensionComparisonOfUniverses l E L ι W).hom.app P ≫
-        DerivedCategory.Q.map
-          (coefficientExtensionRoosProjection l E L ι W P.obj n)
-
-/-- The representative-normalized coherent counit comparison, with its completion.
-Source: integral operations, node proof steps 4--6
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
-abbrev CoefficientExtensionReductionData :=
-  CoefficientReductionModelData
-    (∀ n : ℕ, scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
-      integralScalarReduction l E L ι W n)
-    ((integralOperationsGoodComplex l E W).FullSubcategory ⥤
-      CochainComplex (coefficientSequenceModules l L W) ℤ)
-    (coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W ≅
-      integralScalarExtensionOfUniverses l E L ι W)
-    (IsCoefficientExtensionAssociation l E L ι W A)
-    (fun direct ↦ ∀ n : ℕ,
-      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅
-        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)
-    (IsCoefficientExtensionStrictTransition l E L ι W)
-    (fun direct ↦ integralOperationsGoodLocalization l E W ⋙
-      coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q)
-    (IsCoefficientExtensionModelEvaluation l E L ι W SE A)
-    (∀ K : DerivedCategory (scalarReductionSource l E W),
-    IsNormalizedCoefficientSequence l L W
-      ((coefficientExtensionSystem l E L ι W SE A).obj K))
-    (IsCoefficientExtensionCompletionProjection l E L ι W SE A)
-    (fun completion ↦ IsIso (coefficientExtensionCounit l E L ι W SE SL A completion))
-
-/-- The natural isomorphism of coherent quotient systems, with its specified counit.
-Source: integral operations, node proof step 4
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
-@[irreducible] def coefficientExtensionReductionIso
-    (d : CoefficientExtensionReductionData l E L ι W SE SL A) :
-    integralScalarExtensionOfUniverses l E L ι W ⋙ SL.reduction ≅
-      coefficientExtensionSystem l E L ι W SE A :=
-  @asIso _ _ _ _ (coefficientExtensionCounit l E L ι W SE SL A d.completion) d.comparison_isIso
-
-/-- The coherent reduction data before the final counit isomorphism.
-Source: integral operations and normalized DVR effectivity
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
-def CoefficientExtensionReductionSkeleton :=
-  CoefficientReductionModelData
-    (∀ n : ℕ, scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
-      integralScalarReduction l E L ι W n)
-    ((integralOperationsGoodComplex l E W).FullSubcategory ⥤
-      CochainComplex (coefficientSequenceModules l L W) ℤ)
-    (coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W ≅
-      integralScalarExtensionOfUniverses l E L ι W)
-    (IsCoefficientExtensionAssociation l E L ι W A)
-    (fun direct ↦ ∀ n : ℕ,
-      direct ⋙ (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅
-        (integralOperationsGoodComplex l E W).ι ⋙ integralScalarFiniteComplex l E L ι W n)
-    (IsCoefficientExtensionStrictTransition l E L ι W)
-    (fun direct ↦ integralOperationsGoodLocalization l E W ⋙
-      coefficientExtensionSystem l E L ι W SE A ≅ direct ⋙ DerivedCategory.Q)
-    (IsCoefficientExtensionModelEvaluation l E L ι W SE A)
-    (∀ K : DerivedCategory (scalarReductionSource l E W),
-      IsNormalizedCoefficientSequence l L W
-        ((coefficientExtensionSystem l E L ι W SE A).obj K))
-    (IsCoefficientExtensionCompletionProjection l E L ι W SE A)
-    (fun _ ↦ True)
 
 end WeilConjectures

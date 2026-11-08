@@ -7,7 +7,8 @@ module
 
 public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 public import Submission.WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntAbSheafPowLocal
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowAutLift
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
 
 set_option autoImplicit true
@@ -249,17 +250,6 @@ instance epi_biprodDesc_one_padicIntAbSheaf (n : ℕ) :
         push_cast
         rfl
   · rfl
-
-omit [Fact l.Prime] in
-/-- The sheaf `(ℤ/ℓⁿ)_X` is killed by `ℓⁿ`. -/
-lemma zsmul_id_zmodPowAbSheafDiagram_obj (n : ℕ) :
-    ((l ^ n : ℕ) : ℤ) • 𝟙 ((zmodPowAbSheafDiagram X l).obj (op n)) = 0 := by
-  ext U s
-  refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
-  calc _ = ((l ^ n : ℕ) : ℤ) • (ULift.down s t) := rfl
-    _ = 0 := by
-      rw [zsmul_eq_mul, Int.cast_natCast, ZMod.natCast_self, zero_mul]
-    _ = _ := rfl
 
 /-- The reduction `ℤ_ℓ,X ⟶ (ℤ/ℓⁿ)_X` of abelian sheaves. -/
 noncomputable abbrev padicIntAbSheafToZModPow (n : ℕ) :

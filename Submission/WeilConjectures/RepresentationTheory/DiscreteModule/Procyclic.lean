@@ -348,12 +348,6 @@ def fixedAddSubgroup (X : DiscreteModule.{w} G) (K : Subgroup G) : AddSubgroup X
   neg_mem' hx k hk := by simp [hx k hk]
 
 omit [IsTopologicalGroup G] [CompactSpace G] [Fact ℓ.Prime] in
-@[simp]
-lemma mem_fixedAddSubgroup {X : DiscreteModule.{w} G} {K : Subgroup G} {x : X.obj.V} :
-    x ∈ fixedAddSubgroup X K ↔ ∀ k ∈ K, (X.obj.ρ k).hom x = x :=
-  Iff.rfl
-
-omit [IsTopologicalGroup G] [CompactSpace G] [Fact ℓ.Prime] in
 lemma ofInjective_symm_apply {A B : Type*} [AddGroup A] [AddGroup B] {φ : A →+ B}
     (hφ : Function.Injective φ) (y : φ.range) : φ ((AddMonoidHom.ofInjective hφ).symm y) = y := by
   conv_rhs => rw [← (AddMonoidHom.ofInjective hφ).apply_symm_apply y]
@@ -481,20 +475,6 @@ lemma forall_ρ_eq {x : X.obj.V} (hxK : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ 
   have := hχ.eq_top_of_le (U := X.obj.stabilizer x) (X.isOpen_stabilizer x) hxK hxτ
   exact (this ▸ Subgroup.mem_top g : g ∈ X.obj.stabilizer x)
 
-/-- `H⁰(G, X)` is the kernel of `τ - 1` on the `ker χ`-invariants. -/
-noncomputable def HZeroAddEquiv : H G X 0 ≃+ (tauSubOne χ τ X).ker :=
-  (H_zero_addEquiv X).trans
-    { toFun x := ⟨⟨x.1, fun k _ ↦ x.2 k⟩, Subtype.ext (by
-        rw [coe_tauSubOne_apply]
-        exact sub_eq_zero.2 (x.2 τ))⟩
-      invFun x := ⟨x.1.1, hχ.forall_ρ_eq X x.1.2 (by
-        have h := congrArg Subtype.val (AddMonoidHom.mem_ker.1 x.2)
-        rw [coe_tauSubOne_apply, ZeroMemClass.coe_zero, sub_eq_zero] at h
-        exact h)⟩
-      left_inv _ := rfl
-      right_inv _ := rfl
-      map_add' _ _ := rfl }
-
 /-- The projection of `coindFixed` to the invariants of `C^sm(G, X) / X`. -/
 noncomputable def coindFixedToInvariants :
     coindFixed χ τ X →+ (invariants G).obj (coker₁ X) :=
@@ -616,19 +596,6 @@ noncomputable abbrev padicIntTauSubOne : M.obj.V →+ M.obj.V :=
 lemma mem_ker_id_iff {k : Multiplicative ℤ_[ℓ]} :
     k ∈ (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker ↔ k = 1 := by
   simp [MonoidHom.mem_ker]
-
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree zero: `H⁰(ℤ_ℓ, M) = ker(τ - 1)`. -/
-noncomputable def HZeroPadicIntAddEquiv :
-    H (Multiplicative ℤ_[ℓ]) M 0 ≃+ (padicIntTauSubOne M).ker :=
-  (H_zero_addEquiv M).trans
-    { toFun x := ⟨x.1, by simp [x.2 (.ofAdd 1)]⟩
-      invFun x := ⟨x.1, (isEllAdicQuotient_id ℓ).forall_ρ_eq M
-        (fun k hk ↦ by rw [mem_ker_id_iff.1 hk, ρ_one_apply])
-        (sub_eq_zero.1 (AddMonoidHom.mem_ker.1 x.2))⟩
-      left_inv _ := rfl
-      right_inv _ := rfl
-      map_add' _ _ := rfl }
 
 /-- The `ker id`-invariants of a discrete `ℤ_ℓ`-module are everything. -/
 noncomputable def fixedAddSubgroupIdAddEquiv :

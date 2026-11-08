@@ -12,7 +12,20 @@ import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.CechCoverRelative
 import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
 import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor
 import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Submission.WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.Algebra.Category.Grp.Adjunctions
+import Mathlib.Algebra.Homology.ShortComplex.Ab
+import Mathlib.Algebra.Category.Grp.Biproducts
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.Algebra.Homology.SingleHomology
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

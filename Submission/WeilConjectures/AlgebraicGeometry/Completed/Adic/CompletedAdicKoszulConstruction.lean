@@ -698,13 +698,4 @@ def completedAdicIntrinsicUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     DerivedCategory.Q.map
       (completedAdicKoszulUnitComplex T d r a (DerivedCategory.Q.objPreimage K))
 
-/-- Derived I-completeness is invertibility of the specified Koszul completion map.
-The generator equation is supplied when this predicate is used for the ideal of d.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
-def IsCompletedAdicDerivedComplete (T : Scheme.{t}) (d : AdicCoefficientDatum A)
-    (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal)
-    (K : DerivedCategory (CompletedAdicModules T d)) : Prop :=
-  IsIso (completedAdicIntrinsicUnit T d r a K)
-
 end AlgebraicGeometry.Scheme

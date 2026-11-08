@@ -154,12 +154,6 @@ noncomputable def WeilComplex.forgetBoundedConstructibleAdic :
   (WeilComplex.objectProperty k₀ l X).liftFullSubcategory _
     (IsoAlgebra.forget _).mapDerivedCategory fun K hK ↦ (WeilComplex.objectProperty_iff K).1 hK
 
-/-- `AlgebraicGeometry.WeilComplex.forgetBoundedConstructibleAdic` followed by the inclusion of
-`Dᵇc(X̄, ℚ̄_ℓ)` is the forgetful functor `AlgebraicGeometry.WeilComplex.forget`. -/
-lemma WeilComplex.forgetBoundedConstructibleAdic_comp_ι :
-    WeilComplex.forgetBoundedConstructibleAdic k₀ l X ⋙ ObjectProperty.ι _ = WeilComplex.forget :=
-  rfl
-
 instance : (WeilComplex.forgetBoundedConstructibleAdic k₀ l X).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
@@ -324,41 +318,6 @@ theorem WeilComplex.existsUnique_distTriang_closedSupportTriangle (K : WeilCompl
     (WeilComplex.fullyFaithfulDerivedLowerStar i)
     (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij)
     (WeilComplex.derivedLowerStar_essImage_of_isZero i j hij) K
-
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), functoriality: for `φ : K ⟶ K'` of
-Weil complexes and distinguished closed-support triangles of `K` and `K'`, the triple
-`(i_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
-theorem WeilComplex.exists_triangleHom_closedSupportTriangle {K K' : WeilComplex k₀ l X}
-    (φ : K ⟶ K') {w w'} (hw : WeilComplex.closedSupportTriangle i j hij K w ∈ distTriang _)
-    (hw' : WeilComplex.closedSupportTriangle i j hij K' w' ∈ distTriang _) :
-    ∃ τ : WeilComplex.closedSupportTriangle i j hij K w ⟶
-        WeilComplex.closedSupportTriangle i j hij K' w',
-      τ.hom₁ = (WeilComplex.derivedLowerStar i).map
-          ((WeilComplex.closedUpperShriek i j hij).map φ) ∧
-        τ.hom₂ = φ ∧
-        τ.hom₃ = (WeilComplex.derivedLowerStar j).map ((WeilComplex.upperStar j).map φ) :=
-  Recollement.exists_triangleHom _ _ (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij)
-    φ hw hw'
-
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), functoriality: a morphism of
-distinguished closed-support triangles of Weil complexes is determined by its middle
-component. -/
-theorem WeilComplex.closedSupportTriangle_hom_ext {K K' : WeilComplex k₀ l X} {w w'}
-    (hw : WeilComplex.closedSupportTriangle i j hij K w ∈ distTriang _)
-    (hw' : WeilComplex.closedSupportTriangle i j hij K' w' ∈ distTriang _)
-    {τ τ' : WeilComplex.closedSupportTriangle i j hij K w ⟶
-      WeilComplex.closedSupportTriangle i j hij K' w'}
-    (h : τ.hom₂ = τ'.hom₂) : τ = τ' :=
-  Recollement.triangleHom_ext _ _ (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij)
-    hw hw' h
-
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): `Ri^! Rj_* G = 0` for Weil
-complexes `G` on `U`, as `Hom(Q, Ri^! Rj_* G) = Hom(i_* Q, Rj_* G) = 0`. -/
-theorem WeilComplex.isZero_closedUpperShriek_obj (G : WeilComplex k₀ l U) :
-    IsZero ((WeilComplex.closedUpperShriek i j hij).obj ((WeilComplex.derivedLowerStar j).obj G)) :=
-  Recollement.isZero_obj_obj (WeilComplex.upperStarDerivedLowerStarAdjunction j)
-    (WeilComplex.closedUpperShriekAdjunction i j hij)
-    (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij) G
 
 /-- Blueprint `prop-sf-localization-all-stages` (Weil clause): the unit `Q ⟶ Ri^! i_* Q` is an
 isomorphism, `i_*` being fully faithful on Weil complexes. -/

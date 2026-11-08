@@ -9,7 +9,13 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSqu
 public import Submission.WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.Ringed.RingedProjectionRestriction
 public import Submission.WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedExtensionZeroBaseChange
+public import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenUnitEvaluation
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
@@ -351,30 +357,6 @@ structure Input (m : Mode) where
   coefficient : R ⟶ ((baseChange m g).sheafPushforwardContinuous CommRingCat.{u + 1}
     (topology m X) (topology m X')).obj S
 
-/-- Convert precisely the inverse-image ring map in the node into its
-adjoint sectionwise form, without assuming the ring map invertible or flat.
-Source: Stacks 03D7; the recorded pro-etale sheaf adjunction
-(blueprint: lem-sf-open-tensor-normalization). -/
-def ordinaryInput {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
-    (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g)
-    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X') CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R ⟶ S) :
-    Input .ordinary where
-  U := U
-  U' := U'
-  X := X
-  X' := X'
-  gU := gU
-  j' := j'
-  j := j
-  g := g
-  square := sq
-  R := R
-  S := S
-  coefficient := (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app R ≫
-    (proEtaleSheafDirectImage g CommRingCat.{u + 1}).map c
-
 /-- The open condition is inherited from the chosen square. Source: Stacks 03S6
 (blueprint: lem-sf-open-tensor-normalization). -/
 instance {m : Mode} (d : Input.{u} m) : IsOpenImmersion d.j := d.j_open
@@ -704,23 +686,6 @@ abbrev finiteInput (A : Type (u + 1)) [CommRing A]
   R := (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of A)
   S := (constantSheaf (ProEt.topology X') CommRingCat.{u + 1}).obj (CommRingCat.of A)
   coefficient := proEtaleConstantDirectImageMap g CommRingCat.{u + 1} (CommRingCat.of A)
-
-/-- The published finite projection arrow in the direction of the node's gamma.
-This is its actual inverse projection map, with explicit endpoints to keep
-elaboration independent of the surrounding realization square.
-Source: Stacks 0GL1 and the recorded finite open projection formula
-(blueprint: lem-sf-open-tensor-normalization). -/
-def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (M : FiniteD A U) (N : FiniteD A X) :
-    (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
-      ((finiteShriek A j).obj M)).obj N) ⟶
-    (finiteShriek A j).obj
-      (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) U).obj M).obj
-        ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj N)) :=
-  letI : IsNoetherianRing A := isNoetherian_of_finite A A
-  ((ProEtale.derivedOpenImmersionLowerShriekProjectionIso
-    (ModuleCat.{u + 1} A) j).inv.app M).app N
 
 /-- The exact-operation comparison is pinned on every complex by the ordinary
 comparison and the published exact localization factorizations. Source: Stacks 015F
@@ -1085,17 +1050,5 @@ structure FiniteComparisonsCore (A : Type (u + 1)) [CommRing A] [Finite A]
     realizeX' realizeU' o.opens.extension' shriek' openPull'
   tensorX_pin : FiniteTensorPin realizeX o.tensorX tensorX
   tensorU_pin : FiniteTensorPin realizeU o.tensorU tensorU
-
-/-- Canonical finite comparisons with the open-immersion instances supplied by
-the chosen square. Source: Stacks 03S6, 0GL1 (blueprint:
-lem-sf-open-tensor-normalization). -/
-abbrev FiniteComparisons (A : Type (u + 1)) [CommRing A] [Finite A]
-    {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
-    {j : U ⟶ X} {g : X' ⟶ X} {sq : OpenImmersionSquare gU j' j g}
-    {t : SiteSquare (finiteInput A gU j' j g sq)}
-    (o : Operations (finiteInput A gU j' j g sq) t) :
-    Type _ := FiniteComparisonsCore (A := A) (U' := U') (U := U) (X' := X')
-      (X := X) (gU := gU) (j' := j') (j := j) (g := g) (sq := sq)
-      (_hj := sq.isOpenImmersion) (_hj' := sq.isOpenImmersion') (t := t) o
 
 end SheafOfModules.OpenTensorNormalization

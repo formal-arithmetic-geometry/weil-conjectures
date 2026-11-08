@@ -280,30 +280,6 @@ local instance : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
 local instance : HasColimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} _
 
-/-- Over a separably closed field `K`, a sheaf `G` on `Spec K` is constant, with value a module
-`M` killed by every integer killing `G`, and `R^q h_* e⁻¹ G = R^q h_* (M_Y)` for
-`e : Y ⟶ Spec K`. -/
-theorem Etale.exists_smul_eq_zero_not_isZero_of_isSepClosed {K : Type u} [Field K]
-    [IsSepClosed K] {X Y : Scheme.{u}} (e : Y ⟶ Spec (.of K)) (h : Y ⟶ X) (q : ℤ) (r : ℕ)
-    (G : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hG : r • 𝟙 G = 0)
-    (hne : ¬ IsZero ((Etale.baseChangeTargetFunctor Λ e h q).obj G)) :
-    ∃ M : ModuleCat.{u + 1} Λ, (∀ m : M, (r : Λ) • m = 0) ∧
-      ¬ IsZero ((Etale.higherDirectImageConstantFunctor Λ h q).obj M) := by
-  let c := constantSheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-  let i : c.obj (c.objPreimage G) ≅ G := c.objObjPreimageIso G
-  have hM : r • 𝟙 (c.objPreimage G) = 0 := c.map_injective (by
-    rw [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id, Functor.map_zero]
-    calc r • 𝟙 (c.obj (c.objPreimage G)) = i.hom ≫ (r • 𝟙 G) ≫ i.inv := by simp
-      _ = 0 := by rw [hG, zero_comp, comp_zero])
-  refine ⟨c.objPreimage G, fun m ↦ ?_, fun hz ↦ hne (hz.of_iso ?_)⟩
-  · have := congr(($hM).hom m)
-    simpa [Nat.cast_smul_eq_nsmul] using this
-  · exact (Etale.baseChangeTargetFunctor Λ e h q).mapIso i.symm ≪≫
-      (Etale.baseChangeTargetFunctorIso Λ e h q).app _ ≪≫
-      (DerivedCategory.Plus.singleFunctor _ 0 ⋙ R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙
-        DerivedCategory.Plus.homologyFunctor _ q).mapIso
-          ((Etale.constantSheafCompUpperStarIso Λ e).app _)
-
 end SepClosed
 
 end AlgebraicGeometry

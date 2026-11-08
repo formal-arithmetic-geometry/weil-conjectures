@@ -166,14 +166,6 @@ def IsLocallyFinitelyGenerated {X : Scheme.{u}}
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i,
     Mod.IsFinitelyGenerated (condensedRingObj Λ (𝒰.X i)) ((𝒰.f i)^*⟦Λ⟧.obj M)
 
-/-- A finitely generated module object is pro-étale locally finitely generated. -/
-lemma IsFinitelyGenerated.isLocallyFinitelyGenerated {X : Scheme.{u}}
-    {M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (hM : Mod.IsFinitelyGenerated (condensedRingObj Λ X) M) :
-    IsLocallyFinitelyGenerated Λ M :=
-  ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _),
-    fun _ ↦ IsFinitelyGenerated.upperStar _ hM⟩
-
 /-- Pro-étale local finite generation is local: if the pullbacks of `M` to the members of a
 pro-étale cover are locally finitely generated, so is `M`. -/
 lemma isLocallyFinitelyGenerated_of_cover {X : Scheme.{u}}
@@ -221,14 +213,6 @@ lemma _root_.AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented.isLocallyFini
     IsLocallyFinitelyGenerated Λ M := by
   obtain ⟨𝒰, h𝒰⟩ := (isLocallyFinitelyPresented_iff M).1 hM
   exact ⟨𝒰, fun i ↦ (h𝒰 i).isFinitelyGenerated⟩
-
-/-- A finitely presented module object is pro-étale locally finitely presented. -/
-lemma IsFinitelyPresented.isLocallyFinitelyPresented {X : Scheme.{u}}
-    {M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (hM : Mod.IsFinitelyPresented (condensedRingObj Λ X) M) :
-    IsLocallyFinitelyPresented (condensedRingObj Λ X) M :=
-  (isLocallyFinitelyPresented_iff M).2 ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _),
-    fun _ ↦ IsFinitelyPresented.upperStar Λ _ hM⟩
 
 /-! ### Local lifting -/
 

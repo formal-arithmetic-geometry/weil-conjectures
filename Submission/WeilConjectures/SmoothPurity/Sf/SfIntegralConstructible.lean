@@ -44,12 +44,4 @@ noncomputable def sfIntegralConstructible (l : ℕ) [Fact l.Prime]
         proEtaleCohomologicalSupport
           ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) ⊆ Set.Icc a b
 
-/-- The full subcategory of bounded constructible derived-complete integral objects.
-Source: Weil blueprint, order 1459
-(blueprint: def-weil-derived-complete-integral-detailed). -/
-noncomputable abbrev sfIntegralConstructibleCategory (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (X : AlgebraicGeometry.Scheme.{u}) :=
-  (sfIntegralConstructible l E X).FullSubcategory
-
 end WeilConjectures

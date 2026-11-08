@@ -93,11 +93,6 @@ noncomputable abbrev galoisLevelProjection (L' : FiniteGaloisIntermediateField L
     (by rw [Category.comp_id, ← Spec.map_comp]; rfl)
 
 omit [IsGalois L Ω] in
-lemma galoisLevelCone_π_app (L' : FiniteGaloisIntermediateField L Ω) :
-    (galoisLevelCone (Ω := Ω) h).π.app (op L') = galoisLevelProjection h L' :=
-  rfl
-
-omit [IsGalois L Ω] in
 @[reassoc (attr := simp)]
 lemma galoisLevelProjection_fst (L' : FiniteGaloisIntermediateField L Ω) :
     galoisLevelProjection h L' ≫ pullback.fst _ _ = pullback.fst _ _ := by

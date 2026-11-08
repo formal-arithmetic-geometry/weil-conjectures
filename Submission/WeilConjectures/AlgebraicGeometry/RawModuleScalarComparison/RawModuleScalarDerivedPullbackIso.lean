@@ -50,22 +50,4 @@ instance forget_preservesFiniteLimits (Λ : Type (u + 1)) [CommRing Λ] (X : Sch
 instance forget_preservesFiniteColimits (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     PreservesFiniteColimits (forget Λ X) := moduleAbelianForget_preservesFiniteColimits Λ X
 
-/-- The scalar pullback comparison has the forgotten module unit as its adjoint.
-Source: Stacks Project, Tags 03D3 and 03D7, the inverse-image adjunction.
-Proof: the canonical comparison is the inverse image of the forgotten module
-unit under the abelian adjunction Hom equivalence. Applying that equivalence
-recovers the module unit by `Equiv.apply_symm_apply`.
-(blueprint: def-sbc-raw-module-scalar-pullback-comparison). -/
-theorem pullback_unit (Λ : Type (u + 1)) [CommRing Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app
-        ((forget Λ Y).obj F) ≫
-      (lowerStar AddCommGrpCat.{u + 1} f).map (pullback Λ f F) =
-      (forget Λ Y).map
-        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app F) := by
-  change (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _
-    ((moduleAbelianUpperStarComparison Λ f).app F) = _
-  exact Equiv.apply_symm_apply _ _
-
 end AlgebraicGeometry.Etale.RawModuleScalarComparison

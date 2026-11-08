@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.TraceFormula.WeilIdentityStructure
+public import Submission.WeilConjectures.TraceFormula.BaseChangeCoherence
+public import Submission.WeilConjectures.TraceFormula.WeilTrace
 public import Submission.WeilConjectures.TraceFormula.WeilIdentityStalk
 
 set_option autoImplicit true
@@ -67,22 +68,6 @@ theorem WeilBoundedConstructible.homologyFunctor_obj_str_hom_of_id_comp
     Functor.mapIso_hom, hK, Functor.map_comp, ← Category.assoc,
     weilHomologyComparison_hom_app_comp_map_boundedConstructibleUpperStarId]
   rfl
-
-/-- Weil sheaves for the identity whose structures are `(𝟙)^* ≅ 𝟭` followed by endomorphisms
-intertwined by an isomorphism of the underlying module objects are isomorphic. -/
-noncomputable def WeilSheaf.isoOfUpperStarIdComp {F G : WeilSheaf ℓ (Iso.refl X)}
-    (βF : F.carrier ⟶ F.carrier) (βG : G.carrier ⟶ G.carrier)
-    (hF : F.str.hom = (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).hom.app F.carrier ≫
-        βF)
-    (hG : G.str.hom = (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).hom.app G.carrier ≫
-        βG)
-    (e : F.carrier ≅ G.carrier) (he : βF ≫ e.hom = e.hom ≫ βG) : F ≅ G :=
-  IsoAlgebra.isoMk e (by
-    have n := (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).hom.naturality e.hom
-    rw [Functor.id_map] at n
-    rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, hF, hG]
-    erw [reassoc_of% n]
-    rw [Category.assoc, he])
 
 /-- A Weil sheaf for the identity whose structure is `(𝟙)^* ≅ 𝟭` followed by an
     endomorphism is

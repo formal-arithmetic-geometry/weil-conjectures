@@ -268,27 +268,5 @@ end CategoryTheory
 
 namespace CategoryTheory
 
-/-- The components of a conjugate `I ⋙ G ≅ A⁻¹ ≫ B ≫ C ≅ G ⋙ J⁻¹` of a composite of
-isomorphisms. -/
-lemma isoWhiskerRight_trans_isoWhiskerLeft_hom_app {𝔐 𝔐' 𝔖 𝔖' : Type*} [Category* 𝔐]
-    [Category* 𝔐'] [Category* 𝔖] [Category* 𝔖'] {L D : 𝔐 ⥤ 𝔐'} {L' D' : 𝔖 ⥤ 𝔖'}
-    {G : 𝔐' ⥤ 𝔖'} {G' : 𝔐 ⥤ 𝔖} {P Q : 𝔐 ⥤ 𝔖'} (I : L ≅ D) (A : P ≅ D ⋙ G) (B : P ≅ Q)
-    (C : Q ≅ G' ⋙ D') (J : L' ≅ D') (M : 𝔐) :
-    (Functor.isoWhiskerRight I G ≪≫ A.symm ≪≫ B ≪≫ C ≪≫
-        Functor.isoWhiskerLeft G' J.symm).hom.app M =
-      G.map (I.hom.app M) ≫ (A.inv ≫ B.hom ≫ C.hom).app M ≫ J.inv.app (G'.obj M) := by
-  simp
-
-
-/-- The components of the composite of a conjugate `I₁ ≫ e ≫ I₂⁻¹` with a conjugate
-`I₂ ≫ c ≫ (I_g⁻¹ ◫ I_f⁻¹)` of a composition isomorphism. -/
-lemma trans_trans_isoWhiskerLeft_hom_app {𝔐₃ 𝔐₂ 𝔐₁ : Type*} [Category* 𝔐₃] [Category* 𝔐₂]
-    [Category* 𝔐₁] {Lfg Dfg Lgf Dgf : 𝔐₃ ⥤ 𝔐₁} {Lg Dg : 𝔐₃ ⥤ 𝔐₂} {Lf Df : 𝔐₂ ⥤ 𝔐₁}
-    (I₁ : Lfg ≅ Dfg) (e : Dfg ≅ Dgf) (I₂ : Lgf ≅ Dgf) (c : Dgf ≅ Dg ⋙ Df) (Ig : Lg ≅ Dg)
-    (If : Lf ≅ Df) (M : 𝔐₃) :
-    ((I₁ ≪≫ e ≪≫ I₂.symm) ≪≫ I₂ ≪≫ c ≪≫ Functor.isoWhiskerRight Ig.symm Df ≪≫
-        Functor.isoWhiskerLeft Lg If.symm).hom.app M =
-      I₁.hom.app M ≫ (e.hom ≫ c.hom).app M ≫ Df.map (Ig.inv.app M) ≫ If.inv.app (Lg.obj M) := by
-  simp
 
 end CategoryTheory

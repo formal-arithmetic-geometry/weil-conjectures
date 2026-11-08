@@ -107,10 +107,6 @@ lemma hasDerivedMonoidalCategory : L.HasDerivedMonoidalCategory W := by
       dsimp
       infer_instance }
 
-noncomputable example : MonoidalCategory D :=
-  have := h.hasDerivedMonoidalCategory
-  inferInstanceAs (MonoidalCategory (DerivedMonoidal L W))
-
 end DerivesMonoidalStructure
 
 end LocalizerMorphism

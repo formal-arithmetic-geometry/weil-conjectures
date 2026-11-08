@@ -31,7 +31,14 @@ public import Submission.WeilConjectures.SixFunctors.Etale.Derived.OpenImmersion
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
 public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import Submission.WeilConjectures.AlgebraicGeometry.DerivedExchangeModuleTermwise
-import Submission.WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Generator.Basic
 import Submission.WeilConjectures.AlgebraicGeometry.OpenExtendedInjectiveProperAcyclic
 import Submission.WeilConjectures.AlgebraicGeometry.UnboundedProperOpenPasting
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate

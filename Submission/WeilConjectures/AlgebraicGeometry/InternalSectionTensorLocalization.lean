@@ -225,27 +225,6 @@ variable
           ((F.mapHomologicalComplex (.up ℤ)).obj P)
           ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
 
-private def ringedSquare
-    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
-      J R))
-    (T : CoefficientTensorModels.{u, u + 1, u, u + 1} J R S)
-    (c : MonoidalCategory.tensor
-          (DerivedCategory A) ⋙
-          F.mapDerivedCategory ≅
-        (F.mapDerivedCategory.prod
-          F.mapDerivedCategory) ⋙ S.tensor) : Prop :=
-  tensorLocalizationSquareHEq DerivedCategory.Q DerivedCategory.Q
-        (F.mapHomologicalComplex (.up ℤ))
-        F.mapDerivedCategory
-        F.mapDerivedCategoryFactors
-        (MonoidalCategory.tensor _) (MonoidalCategory.tensor _) S.tensor
-        (coefficientTotalTensor.{u, u + 1, u} J R)
-        (Functor.LaxMonoidal.μ DerivedCategory.Q)
-        raw
-        (CochainComplex.IsKFlatIndependentCoefficients
-          (J := J) (R := R))
-        (CoefficientTensorModels.iso.{u, u + 1, u, u + 1} J R S T) c
-
 end Ringed
 
 attribute [local implicit_reducible] ringedMonoidal RingedDerivedNative.moduleMonoidal

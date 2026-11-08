@@ -136,32 +136,6 @@ lemma mapFac_hom_naturality (α : F ⟶ G) (X : C) :
       (mapFac M F).hom.app X ≫ (Q M D).map (α.app X) := by
   simp
 
-omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
-  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
-/-- `mapNatTrans` preserves identities. -/
-@[simp]
-lemma mapNatTrans_id : mapNatTrans M (𝟙 F) = 𝟙 (map M F) :=
-  Localization.natTrans_ext (Q M C) (W M C) fun X ↦ by simp
-
-omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
-  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
-/-- `mapNatTrans` preserves composition. -/
-@[reassoc (attr := simp)]
-lemma mapNatTrans_comp (α : F ⟶ G) (β : G ⟶ H) :
-    mapNatTrans M (α ≫ β) = mapNatTrans M α ≫ mapNatTrans M β :=
-  Localization.natTrans_ext (Q M C) (W M C) fun X ↦ by simp
-
-omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
-  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
-/-- The natural isomorphism `map M F ≅ map M G` induced by a natural isomorphism `e : F ≅ G` of
-`R`-linear triangulated functors. -/
-@[simps]
-noncomputable def mapNatIso (e : F ≅ G) : map M F ≅ map M G where
-  hom := mapNatTrans M e.hom
-  inv := mapNatTrans M e.inv
-  hom_inv_id := by rw [← mapNatTrans_comp, e.hom_inv_id, mapNatTrans_id]
-  inv_hom_id := by rw [← mapNatTrans_comp, e.inv_hom_id, mapNatTrans_id]
-
 end NatTrans
 
 section Comp
@@ -175,16 +149,6 @@ noncomputable instance liftingMapComp : Localization.Lifting (Q M C) (W M C) ((F
   ⟨(Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (mapFac M F) _ ≪≫
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft F (mapFac M G) ≪≫
     (Functor.associator _ _ _).symm⟩
-
-/-- The rationalization of a composite is the composite of the rationalizations. -/
-noncomputable def mapComp : map M (F ⋙ G) ≅ map M F ⋙ map M G :=
-  Localization.liftNatIso (Q M C) (W M C) ((F ⋙ G) ⋙ Q M E) ((F ⋙ G) ⋙ Q M E) _ _ (Iso.refl _)
-
-/-- The rationalization of the identity is the identity. -/
-noncomputable def mapId : map M (𝟭 C) ≅ 𝟭 (Rationalization M C) :=
-  letI : Localization.Lifting (Q M C) (W M C) (𝟭 C ⋙ Q M C) (𝟭 (Rationalization M C)) :=
-    ⟨Functor.rightUnitor _ ≪≫ (Functor.leftUnitor _).symm⟩
-  Localization.liftNatIso (Q M C) (W M C) (𝟭 C ⋙ Q M C) (𝟭 C ⋙ Q M C) _ _ (Iso.refl _)
 
 end Comp
 

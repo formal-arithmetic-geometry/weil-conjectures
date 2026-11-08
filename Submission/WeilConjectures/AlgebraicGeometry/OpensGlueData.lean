@@ -163,10 +163,6 @@ noncomputable def ι (i : D.J) : D.U i ⟶ D.glued := D.toGlueData.ι i
 instance (i : D.J) : IsOpenImmersion (D.ι i) :=
   Scheme.GlueData.ι_isOpenImmersion D.toGlueData i
 
-@[reassoc]
-lemma glue_condition (i j : D.J) : D.t i j ≫ (D.V j i).ι ≫ D.ι j = (D.V i j).ι ≫ D.ι i :=
-  D.toGlueData.glue_condition i j
-
 lemma ι_jointly_surjective (x : D.glued) : ∃ (i : D.J) (y : D.U i), D.ι i y = x :=
   D.toGlueData.ι_jointly_surjective x
 
@@ -174,11 +170,6 @@ lemma ι_jointly_surjective (x : D.glued) : ∃ (i : D.J) (y : D.U i), D.ι i y 
 lemma ι_eq_iff {i j : D.J} (x : D.U i) (y : D.U j) :
     D.ι i x = D.ι j y ↔ ∃ z : D.V i j, z.1 = x ∧ (D.t i j z).1 = y :=
   D.toGlueData.ι_eq_iff i j x y
-
-lemma iSup_opensRange_ι : ⨆ i, (D.ι i).opensRange = ⊤ := by
-  refine top_le_iff.mp fun x _ ↦ ?_
-  obtain ⟨i, y, rfl⟩ := D.ι_jointly_surjective x
-  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, y, rfl⟩
 
 lemma preimage_opensRange_ι (i j : D.J) : D.ι i ⁻¹ᵁ (D.ι j).opensRange = D.V i j := by
   ext x
@@ -190,14 +181,6 @@ lemma preimage_opensRange_ι (i j : D.J) : D.ι i ⁻¹ᵁ (D.ι j).opensRange =
   · intro hx
     refine ⟨(D.t i j ⟨x, hx⟩).1, ?_⟩
     exact ((D.ι_eq_iff x _).mpr ⟨⟨x, hx⟩, rfl, rfl⟩).symm
-
-lemma opensRange_ι_inf_opensRange_ι (i j : D.J) :
-    (D.ι i).opensRange ⊓ (D.ι j).opensRange = D.ι i ''ᵁ D.V i j := by
-  rw [← D.preimage_opensRange_ι, Scheme.Hom.image_preimage_eq_opensRange_inf]
-
-lemma opensRange_ι_comp (i j : D.J) :
-    ((D.V i j).ι ≫ D.ι i).opensRange = (D.ι i).opensRange ⊓ (D.ι j).opensRange := by
-  rw [opensRange_ι_inf_opensRange_ι, Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι]
 
 /-- The overlap `V i j` is the fibre product of the charts `U j` and `U i` over the glued scheme. -/
 lemma isPullback (i j : D.J) :
@@ -222,23 +205,6 @@ noncomputable def glueMorphisms {Y : Scheme.{u}} (g : ∀ i, D.U i ⟶ Y)
   Multicoequalizer.desc D.toGlueData.diagram _ g fun ij ↦ (hg ij.1 ij.2).symm.trans
     (Category.assoc _ _ _).symm
 
-@[reassoc (attr := simp)]
-lemma ι_glueMorphisms {Y : Scheme.{u}} (g : ∀ i, D.U i ⟶ Y)
-    (hg : ∀ i j, D.t i j ≫ (D.V j i).ι ≫ g j = (D.V i j).ι ≫ g i) (i : D.J) :
-    D.ι i ≫ D.glueMorphisms g hg = g i :=
-  Multicoequalizer.π_desc _ _ _ _ _
-
-lemma hom_ext {Y : Scheme.{u}} {f₁ f₂ : D.glued ⟶ Y} (h : ∀ i, D.ι i ≫ f₁ = D.ι i ≫ f₂) :
-    f₁ = f₂ :=
-  Multicoequalizer.hom_ext _ _ _ h
-
-/-- Gluing of morphisms is compatible with postcomposition. -/
-lemma glueMorphisms_comp {Y Z : Scheme.{u}} (g : ∀ i, D.U i ⟶ Y)
-    (hg : ∀ i j, D.t i j ≫ (D.V j i).ι ≫ g j = (D.V i j).ι ≫ g i) (h : Y ⟶ Z) :
-    D.glueMorphisms g hg ≫ h = D.glueMorphisms (fun i ↦ g i ≫ h)
-      (fun i j ↦ by simp only [← Category.assoc] at hg ⊢; rw [hg]) :=
-  D.hom_ext fun i ↦ by simp
-
 /-- Finitely many quasi-compact charts glue to a quasi-compact scheme. -/
 instance compactSpace_glued [Finite D.J] [∀ i, CompactSpace (D.U i)] : CompactSpace D.glued := by
   refine ⟨?_⟩
@@ -248,12 +214,6 @@ instance compactSpace_glued [Finite D.J] [∀ i, CompactSpace (D.U i)] : Compact
     exact Set.mem_iUnion.mpr ⟨i, y, rfl⟩
   rw [this]
   exact isCompact_iUnion fun i ↦ isCompact_range (D.ι i).continuous
-
-/-- A property local at the source holds for a morphism out of the glued scheme iff it holds
-on every chart. -/
-lemma iff_forall_ι_comp (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtSource P]
-    {Y : Scheme.{u}} (f : D.glued ⟶ Y) : P f ↔ ∀ i, P (D.ι i ≫ f) :=
-  IsZariskiLocalAtSource.iff_of_openCover (P := P) D.openCover
 
 end OpensGlueData
 

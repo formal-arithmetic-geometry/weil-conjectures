@@ -49,7 +49,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.CategoryTheory.Limits.Final
-import Submission.WeilConjectures.CategoryTheory.K.KInjectiveDerivedMapComputation
+import Submission.WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
 import Submission.WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Submission.WeilConjectures.CategoryTheory.Ringed.RingedStrictTowerHomotopyLimitOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
@@ -196,35 +196,6 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
   coefficientSequenceRestriction
   coefficientSequenceEvaluation coefficientFiniteDerivedExtension scalarReductionExtension
-
-/-- Read a supplied coherent shift structure without file-local instances.
-Source: cochain shift convention, Stacks 0A8D
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
-def purSequenceShiftIso {C : Type c} {D : Type d} [Category.{v} C] [Category.{z} D]
-    [HasShift C ℤ] [HasShift D ℤ] (F : C ⥤ D) (h : F.CommShift ℤ) (r : ℤ) :
-    shiftFunctor C r ⋙ F ≅ F ⋙ shiftFunctor D r :=
-  letI := h
-  F.commShiftIso r
-
-/-- The ordinary unit-shift equation, with explicit functor and shift parameters.
-Source: Stacks 06YY and Mathlib's adjunction shift convention
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
-def purSequenceUnitShiftCompatibility
-    {C : Type c} {D : Type d} [Category.{v} C] [Category.{z} D]
-    [HasShift C ℤ] [HasShift D ℤ] {F : C ⥤ D} {G : D ⥤ C}
-    (adj : F ⊣ G) (hF : F.CommShift ℤ) (hG : G.CommShift ℤ) (r : ℤ) : Prop :=
-  Adjunction.CommShift.CompatibilityUnit adj
-    (purSequenceShiftIso F hF r) (purSequenceShiftIso G hG r)
-
-/-- The ordinary counit-shift equation, with explicit functor and shift parameters.
-Source: Stacks 06YY and Mathlib's adjunction shift convention
-(blueprint: def-pur-sequence-adjoint-resolution-data). -/
-def purSequenceCounitShiftCompatibility
-    {C : Type c} {D : Type d} [Category.{v} C] [Category.{z} D]
-    [HasShift C ℤ] [HasShift D ℤ] {F : C ⥤ D} {G : D ⥤ C}
-    (adj : F ⊣ G) (hF : F.CommShift ℤ) (hG : G.CommShift ℤ) (r : ℤ) : Prop :=
-  Adjunction.CommShift.CompatibilityCounit adj
-    (purSequenceShiftIso F hF r) (purSequenceShiftIso G hG r)
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})

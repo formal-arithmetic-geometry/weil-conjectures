@@ -359,11 +359,6 @@ theorem HasWeightsAtMost.mono {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ 
 def IsReal (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∀ x : X.finitePoints, (F.stalk x).IsReal ι
 
-/-- `F` is `ι`-*realizable* if it is a direct summand of an `ι`-real lisse Weil sheaf
-(Deligne, Weil II, (1.2.13)). (blueprint: `def-wf-iota-real`) -/
-def IsRealizable (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
-  ∃ (G : WeilSheaf k₀ l X) (i : F ⟶ G) (r : G ⟶ F), G.IsLisse ∧ G.IsReal ι ∧ i ≫ r = 𝟙 F
-
 section GlobalSections
 
 /-- The restriction `Γ(X̄, F) ⟶ Γ(Spec k̄, s^* F) = F_s` of global sections to the stalk at a

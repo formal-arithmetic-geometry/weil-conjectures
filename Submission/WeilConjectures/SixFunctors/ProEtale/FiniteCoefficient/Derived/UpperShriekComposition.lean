@@ -399,33 +399,6 @@ noncomputable def HasAmbientExceptionalRightAdjoint.compIso {f : X ⟶ Y} {g : Y
       @Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint :=
   conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction e
 
-/-- Blueprint `sk-lem-sf-mate`, clause (a), units: under the isomorphism
-`HasAmbientExceptionalRightAdjoint.compIso`, the pasted unit `K ⟶ Rf^× Rg^× Rg_! Rf_! K` of
-`Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×` corresponds to the unit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×`. -/
-lemma HasAmbientExceptionalRightAdjoint.unit_comp_compIso_hom_app {f : X ⟶ Y} {g : Y ⟶ Z}
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
-    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
-    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    (hf.adjunction.comp hg.adjunction).unit.app K ≫ (hf.compIso hg hfg e).hom.app _ =
-      hfg.adjunction.unit.app K ≫
-        (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint).map (e.hom.app K) :=
-  unit_conjugateEquiv _ _ e.hom K
-
-/-- Blueprint `sk-lem-sf-mate`, clause (a), counits: under the isomorphism
-`HasAmbientExceptionalRightAdjoint.compIso`, the counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×` corresponds
-to the pasted counit `Rg_! Rf_! Rf^× Rg^× L ⟶ L` of `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
-lemma HasAmbientExceptionalRightAdjoint.map_compIso_hom_app_counit {f : X ⟶ Y} {g : Y ⟶ Z}
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
-    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
-    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
-    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) :
-    (R(f ≫ g)_![A]).map ((hf.compIso hg hfg e).hom.app L) ≫ hfg.adjunction.counit.app L =
-      e.hom.app _ ≫ (hf.adjunction.comp hg.adjunction).counit.app L :=
-  conjugateEquiv_counit _ _ e.hom L
-
 /-- Blueprint `sk-lem-sf-mate`, clause (a): if `f`, `g` and `f ≫ g` carry the ambient exceptional
 right adjoint datum, the ambient right adjoints satisfy `R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` exactly when the
 ambient left adjoints satisfy the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. The forward

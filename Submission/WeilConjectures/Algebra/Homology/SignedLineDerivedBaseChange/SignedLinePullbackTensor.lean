@@ -86,26 +86,12 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{max u v w}]
   (A : Sheaf J CommRingCat.{max u v w})
 
-private theorem site_tensor_map_pure {M M' N : KFlatFixedTensor.Modules A}
-    (f : M ⟶ M') (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :
-    ((siteSheafTensorRight N).map f).val.app V (siteSheafTensorTmul M N V x y) =
-      siteSheafTensorTmul M' N V (f.val.app V x) y := by
-  exact (congrArg (fun q ↦ q.app V (x ⊗ₜ[A.obj.obj V] y))
-    ((PresheafOfModules.sheafificationAdjunction (R :=
-      (sheafCompose J (forget₂ CommRingCat RingCat)).obj A) (𝟙 _)).unit.naturality
-      (siteTensorHom f.val N.val))).symm
-
 private theorem pure_def (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
     (x : M.val.obj V) (y : N.val.obj V) :
     CochainScalarConstruction.pure.{max u v w, u, v} A M N V x y =
       (tensorObjIsoSheafification M N).inv.val.app V
         (((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app
           (M.val ⊗ N.val)).app V (x ⊗ₜ[A.obj.obj V] y)) := rfl
-
-private theorem pure_eq (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
-    (x : M.val.obj V) (y : N.val.obj V) :
-    ScalarHomOrdinary.pure.{u, v, max u v w} A M N V x y =
-      CochainScalarConstruction.pure.{max u v w, u, v} A M N V x y := rfl
 
 private theorem pure_sheaf_apply (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
     (p : ((CochainScalarConstruction.underlying A).obj M ⊗
@@ -126,11 +112,6 @@ private def transport_component (F : AA ⥤ BB) (M L : AA) (N : BB) (X : AA) (Y 
     (jR : M ⊗ L ≅ X) (jS : F.obj M ⊗ N ≅ Y)
     (k : F.obj (M ⊗ L) ≅ F.obj M ⊗ F.obj L) (t : F.obj L ≅ N) : F.obj X ≅ Y :=
   F.mapIso jR.symm ≪≫ k ≪≫ tensorIso (Iso.refl _) t ≪≫ jS
-private theorem transport_component_hom (F : AA ⥤ BB) (M L : AA) (N : BB)
-    (X : AA) (Y : BB) (jR : M ⊗ L ≅ X) (jS : F.obj M ⊗ N ≅ Y)
-    (k : F.obj (M ⊗ L) ≅ F.obj M ⊗ F.obj L) (t : F.obj L ≅ N) :
-    (transport_component F M L N X Y jR jS k t).hom =
-      F.map jR.inv ≫ k.hom ≫ (𝟙 (F.obj M) ⊗ₘ t.hom) ≫ jS.hom := rfl
 attribute [local irreducible] transport_component
 end Abstract
 
@@ -181,20 +162,6 @@ private theorem presentation_unit_section
   exact congrArg (fun q ↦ q.hom.app (U.op.obj V)
     (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
       M V.unop (f.hom.app V s))) (em.app M).hom_inv_id
-
-private theorem pull_section_map
-    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
-      (U.sheafPushforwardContinuous RingCat J K).obj
-        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))
-    {M M' : KFlatFixedTensor.Modules R} (f : M ⟶ M') (V : C)
-    (x : M.val.obj (op V)) :
-    ((pull a).map f).val.app (op (U.obj V))
-      (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a) M V x) =
-    ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a) M' V
-      (f.val.app (op V) x) := by
-  let := module_pushforward_isRightAdjoint_of_universes a
-  exact (congrArg (fun g ↦ g.val.app (op V) x)
-    ((pullbackPushforwardAdjunction a).unit.naturality f)).symm
 
 set_option maxHeartbeats 400000 in
 -- The generalized pairing formula includes three underlying-sheaf comparisons.
@@ -283,103 +250,5 @@ private theorem inverse_tensor_source_unit
   exact (congrArg ((k M L').hom.val.app (op (U.obj V))) hz.symm).trans
     (h.trans (congrArg₂ (CochainScalarConstruction.pure.{max u v w, u, v} S _ _ (op (U.obj V)))
       hx hy))
-
-set_option maxHeartbeats 400000 in
--- The proof compares the algebraic and explicit site tensors through their unit sections.
-/-- Coefficient-identified pullback preserves tensor, with the source-unit normalization.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(blueprint: lem-pur-signed-line-pullback-tensor)
-Proof: construct the algebraic inverse-image lift from its ring and module unit
-presentations. Apply the existing inverse-image tensor comparison. Its generalized
-pairing formula, evaluated on the unit of the product of the two underlying sheaves,
-is the formula on pulled-back pure tensors. Naturality of the module unit identifies
-the three factors. The sheafified tensor comparison transports this result to the
-explicit site tensor; its naturality is tested on pure tensors. Finally tensor with
-the given isomorphism of the second factors. -/
-theorem identified_ring_pullback_tensor
-    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
-    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
-      (U.sheafPushforwardContinuous RingCat J K).obj
-        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))
-    (hcover : CoverPreserving J K U)
-    (rInv : Sheaf J RingCat.{max u v w} ⥤ Sheaf K RingCat.{max u v w})
-    (rAdj : rInv ⊣ U.sheafPushforwardContinuous RingCat J K)
-    (ha : IsIso ((rAdj.homEquiv _ _).symm a))
-    (L : KFlatFixedTensor.Modules R) (N : KFlatFixedTensor.Modules S)
-    (t : (pull a).obj L ≅ N) :
-    ∃ γ : siteSheafTensorRight L ⋙ pull a ≅ pull a ⋙ siteSheafTensorRight N,
-      ∀ (M : KFlatFixedTensor.Modules R) (V : C) (x : M.val.obj (op V))
-        (y : L.val.obj (op V)),
-        (γ.hom.app M).val.app (op (U.obj V))
-          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-            ((siteSheafTensorRight L).obj M) V (siteSheafTensorTmul M L (op V) x y)) =
-          siteSheafTensorTmul ((pull a).obj M) N (op (U.obj V))
-            (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-              M V x)
-            (t.hom.val.app (op (U.obj V))
-              (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-                L V y)) := by
-  let := module_pushforward_isRightAdjoint_of_universes a
-  obtain ⟨hJ, _⟩ := coefficientSheafification.{u, v, max u v w} J
-  obtain ⟨hK, _⟩ := coefficientSheafification.{u, v, max u v w} K
-  let := hJ
-  let := hK
-  obtain ⟨pr, hr, e, he, em, hem⟩ := identified_ring_pullback_presentations a hcover rInv rAdj ha
-  obtain ⟨I, hI, hRI, hMI⟩ := algebraic_pullback_of_presentations a pr hr em hem
-  obtain ⟨k, hk, hkpure⟩ := inverse_tensor_source_unit.{u, v, w} a em hem I hI hMI
-  let jR (M : KFlatFixedTensor.Modules R) :=
-    ScalarHomOrdinary.tensorIsoSite.{u, v, max u v w} R M L
-  let jS (M : KFlatFixedTensor.Modules S) :=
-    ScalarHomOrdinary.tensorIsoSite.{u, v, max u v w} S M N
-  let δ (M : KFlatFixedTensor.Modules R) :
-      (pull a).obj ((siteSheafTensorRight L).obj M) ≅
-        (siteSheafTensorRight N).obj ((pull a).obj M) :=
-    @transport_component _ _ _ _ (monoidalCategory R) (monoidalCategory S)
-      (pull a) M L N _ _ (jR M) (jS ((pull a).obj M)) (k M L) t
-  have hδ (M : KFlatFixedTensor.Modules R) (V : C)
-      (x : M.val.obj (op V)) (y : L.val.obj (op V)) :
-      (δ M).hom.val.app (op (U.obj V))
-        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-          ((siteSheafTensorRight L).obj M) V (siteSheafTensorTmul M L (op V) x y)) =
-      siteSheafTensorTmul ((pull a).obj M) N (op (U.obj V))
-        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a) M V x)
-        (t.hom.val.app (op (U.obj V))
-          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-            L V y)) := by
-    rw [transport_component_hom]
-    change (jS ((pull a).obj M)).hom.val.app (op (U.obj V))
-      (((monoidalCategory S).tensorHom (𝟙 _) t.hom).val.app (op (U.obj V))
-        ((k M L).hom.val.app (op (U.obj V))
-          (((pull a).map (jR M).inv).val.app (op (U.obj V)) _))) = _
-    rw [pull_section_map]
-    change (jS ((pull a).obj M)).hom.val.app (op (U.obj V))
-      (((monoidalCategory S).tensorHom (𝟙 _) t.hom).val.app (op (U.obj V))
-        ((k M L).hom.val.app (op (U.obj V))
-          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-            ((monoidalCategory R).tensorObj M L) V
-            ((ScalarHomOrdinary.tensorIsoSite.{u, v, max u v w} R M L).inv.val.app (op V)
-              (siteSheafTensorTmul M L (op V) x y))))) = _
-    rw [ScalarHomOrdinary.tensorIsoSite_inv_pure]
-    rw [pure_eq]
-    rw [hkpure, CochainScalarConstruction.pure_map]
-    rw [← pure_eq]
-    exact ScalarHomOrdinary.tensorIsoSite_pure.{u, v, max u v w} S _ _ _ _ _
-  let γ : siteSheafTensorRight L ⋙ pull a ≅ pull a ⋙ siteSheafTensorRight N :=
-    NatIso.ofComponents δ (by
-      intro M M' f
-      apply (pullbackPushforwardAdjunction a).homEquiv _ _ |>.injective
-      apply scalarTensor_hom_ext
-      intro V x y
-      change (δ M').hom.val.app (op (U.obj V.unop))
-        (((pull a).map ((siteSheafTensorRight L).map f)).val.app (op (U.obj V.unop))
-          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-            ((siteSheafTensorRight L).obj M) V.unop (siteSheafTensorTmul M L V x y))) =
-        ((siteSheafTensorRight N).map ((pull a).map f)).val.app (op (U.obj V.unop))
-          ((δ M).hom.val.app (op (U.obj V.unop))
-            (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-              ((siteSheafTensorRight L).obj M) V.unop (siteSheafTensorTmul M L V x y)))
-      rw [pull_section_map, site_tensor_map_pure, hδ, hδ, site_tensor_map_pure,
-        pull_section_map])
-  exact ⟨γ, hδ⟩
 
 end SheafOfModules.SignedLineDerivedBaseChange

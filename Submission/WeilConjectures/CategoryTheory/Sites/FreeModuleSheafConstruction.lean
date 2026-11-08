@@ -119,11 +119,4 @@ noncomputable def change {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
   ((PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj)).homEquiv _ _).symm
     (PresheafOfModules.freeObjDesc (e.hom ≫ (generatorRaw B' E').hom))
 
-/-- The simultaneous change map on underlying lifted set sheaves.
-Source: Stacks 04BL (auxiliary; not a blueprint node). -/
-noncomputable def changeSets {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
-    {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
-    (moduleSets B).obj ((free B).obj E) ⟶ (moduleSets B').obj ((free B').obj E') :=
-  (moduleSets B).map (change b e)
-
 end CategoryTheory.SheafFreeModule

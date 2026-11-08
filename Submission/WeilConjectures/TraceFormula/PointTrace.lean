@@ -53,13 +53,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsSepClosed k] [Fa
 
 attribute [local instance] boundedConstructibleBraiding
 
-example : MonoidalPreadditive (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  inferInstance
-
-example (n : ℤ) :
-    (shiftFunctor (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) n).Additive :=
-  inferInstance
-
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

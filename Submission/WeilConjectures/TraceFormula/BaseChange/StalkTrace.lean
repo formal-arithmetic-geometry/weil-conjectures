@@ -229,31 +229,6 @@ variable {X} [IsSepClosed Ω] (e : X ≅ X) (σ : Spec (.of Ω) ≅ Spec (.of Ω
   (hxk : x ≫ X.hom = Spec.map (CommRingCat.ofHom (algebraMap k Ω)))
   (hx : x ≫ e.hom.left = σ.hom ≫ x)
 
-omit [Finite k] [Algebra k Ω] [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)]
-  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- The components of the Frobenius comparison of the stalk. -/
-lemma weilStalkComparison_hom_app' (M) :
-    (weilStalkComparison ℓ e σ.hom x hx).hom.app M =
-      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
-          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) ≫
-        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app M ≫
-        eqToHom (congrArg (fun s : Spec (.of Ω) ⟶ X.left ↦
-          (s)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) hx.symm) ≫
-        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app M :=
-  (congrArg (fun i ↦ i.hom.app M) (weilStalkComparison_eq_trans ℓ e σ x hx)).trans
-    ((isoWhiskerLeft_symm_trans_hom_app_aux ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
-      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom)
-      (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x)
-      (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm)
-      (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left) M).trans
-      (congrArg (fun z ↦
-        (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
-          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) ≫
-        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app M ≫ z ≫
-        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app M)
-        (upperStarEqToIso_hom_app _ hx.symm M)))
-
 /-- `traceOrZero_stalkFunctor_homologyFunctor_eq` for an abstract trivialization `τ` of the
 Galois pullback compatible with the trivialization of the Frobenius pullback. -/
 lemma traceOrZero_galoisFrobenius_eq_aux (L : WeilBoundedConstructible ℓ e.hom) (j : ℤ)

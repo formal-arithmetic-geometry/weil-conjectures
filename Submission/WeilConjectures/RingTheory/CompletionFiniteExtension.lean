@@ -11,10 +11,18 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Submission.WeilConjectures.RingTheory.FiniteAfterCompletion
+import Mathlib.RingTheory.LocalRing.Basic
+import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+import Submission.WeilConjectures.Algebra.ChangeIdealCompletion
+import Mathlib.RingTheory.Artinian.Module
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Mathlib.RingTheory.AdicCompletion.LocalRing
+import Submission.WeilConjectures.RingTheory.FiniteOverCompleteRing
+import Mathlib.RingTheory.AdicCompletion.Completeness
 import Submission.WeilConjectures.RingTheory.CompletionFiniteExtensionDecomposition
 import Submission.WeilConjectures.RingTheory.CompletionFiniteExtensionTensor
-import Submission.WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

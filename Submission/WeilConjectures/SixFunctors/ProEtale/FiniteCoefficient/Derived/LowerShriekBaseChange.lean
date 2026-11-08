@@ -180,55 +180,9 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     ((Functor.associator _ _ _).symm ≪≫
       rightDerivedLowerShriekOfCompactificationBaseChangeIso A sq c).hom
 
-/-- **Derived base change for the extension by zero**, with derived pullbacks: the isomorphism
-`Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*` on the unbounded derived categories of pro-étale sheaves, for a
-cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions. Its inverse is the
-canonical identification `Lḡ'^* j_! ≅ j'_! Lg'^*` of blueprint `def-exchange-projection`. -/
-noncomputable def leftDerivedOpenImmersionLowerShriekBaseChangeIso {U' U Z' Z : Scheme.{u}}
-    {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z} [IsOpenImmersion j]
-    [IsOpenImmersion j'] (hsq : IsPullback g' j' j g'') :
-    L((g')^*[A]) ⋙ D((j')_!open[A]) ≅ D((j)_!open[A]) ⋙ L((g'')^*[A]) :=
-  Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory A g') _ ≪≫
-    derivedOpenImmersionLowerShriekBaseChangeIso A hsq ≪≫
-    Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory A g'').symm
-
-/-- `Ex_!(c)` is an isomorphism if and only if `Ex_*` for the proper part of `c`, whiskered by
-`Dj_!`, is one: the other factors are isomorphisms. -/
-theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_iff
-    (sq : IsPullback g' f' f g) (c : Compactification f) :
-    IsIso (rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq c) ↔
-      IsIso (Functor.whiskerLeft D((c.i)_!open[A])
-        (derivedBaseChangeMap A (c.isPullback_g_ofIsPullback sq).flip.toCommSq)) := by
-  simp only [rightDerivedLowerShriekOfCompactificationBaseChangeMap, isIso_comp_left_iff,
-    isIso_comp_right_iff]
-
-/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed (the
-compact-support exchange `Ex_!` on the pro-étale sites, at finite coefficient stages; blueprint
-`def-exchange-projection`).
-
-The compact-support exchange `Ex_! : Lg^* Rf_! ⟶ Rf'_!(c ×_Y Y') Lg'^*` for the chosen
-compactification `c` of `f`. -/
-noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
-    (sq : IsPullback g' f' f g) :
-    R(f)_![A] ⋙ L((g)^*[A]) ⟶
-      L((g')^*[A]) ⋙ Rf_!((HasCompactification.compactification f).ofIsPullback sq)[A] :=
-  rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq
-    (HasCompactification.compactification f)
-
 end Exchange
 
 section Finite
-
-/-- A component of a composite `a ≫ F ◁ β ≫ b` of natural transformations is an isomorphism as
-soon as the components of `a`, of `β` at `F.obj K` and of `b` are. Stated abstractly so that the
-kernel does not have to unfold the concrete functors when checking instances. -/
-lemma _root_.CategoryTheory.NatTrans.isIso_app_comp_whiskerLeft_comp {C D E : Type*}
-    [Category* C] [Category* D] [Category* E] {F : C ⥤ D} {G H : D ⥤ E} {P Q : C ⥤ E}
-    (a : P ⟶ F ⋙ G) (β : G ⟶ H) (b : F ⋙ H ⟶ Q) (K : C) [IsIso (a.app K)]
-    [IsIso (β.app (F.obj K))] [IsIso (b.app K)] :
-    IsIso ((a ≫ Functor.whiskerLeft F β ≫ b).app K) := by
-  rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerLeft_app]
-  infer_instance
 
 end Finite
 

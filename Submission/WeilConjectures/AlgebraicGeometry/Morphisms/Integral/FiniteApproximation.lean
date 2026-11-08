@@ -813,8 +813,6 @@ lemma exists_fgSub_mem_subAlg [CompactSpace S] [QuasiSeparatedSpace S] (U : S.Af
 kernel of `Spec_S F ⟶ Spec_S (𝒪_S + ε F)`, ordered by reverse inclusion. -/
 abbrev ApproxIndex : Type u := ((dualGluedι H).ker.FGSub)ᵒᵖ
 
-example : IsCofiltered (ApproxIndex H) := inferInstance
-
 lemma coequifibered_approx (j : ApproxIndex H) : (subAlgMap (H := H) j.unop.1).Coequifibered :=
   coequifibered_subAlgMap H j.unop.1 j.unop.2.1
 

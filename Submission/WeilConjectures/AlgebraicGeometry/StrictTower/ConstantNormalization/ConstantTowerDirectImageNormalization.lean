@@ -189,27 +189,6 @@ variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w�
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
-/-- The literal ordinary-square normalization on every K-injective representative.
-The formula includes the exact-localization and derived-resolution comparisons.
-Source: Stacks 070K (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
-def IsDirectImageNormalizedOnKInjectives
-    (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
-    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
-    (Q : D ⥤ U) [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
-    (H : T ⥤ U) [H.Additive]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
-    [P.PreservesKInjectiveComplexes]
-    (e : F ⋙ Q ≅ P ⋙ H)
-    (χ : F.rightDerivedFunctor ⋙ Q.mapDerivedCategory ≅
-      P.mapDerivedCategory ⋙ H.rightDerivedFunctor) : Prop :=
-  ∀ (J : CochainComplex C ℤ) [J.IsKInjective],
-    χ.hom.app (DerivedCategory.Q.obj J) ≫
-        H.rightDerivedFunctor.map (P.mapDerivedCategoryFactors.hom.app J) ≫
-        (H.rightDerivedFunctorObjQIso ((P.mapHomologicalComplex (.up ℤ)).obj J)).hom =
-      Q.mapDerivedCategory.map (F.rightDerivedFunctorObjQIso J).hom ≫
-        Q.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
-        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app J)
-
 /-- The canonical pullback/reduction square at a homotopy representative. The two
 counits and exact-localization factors specify the whole-tower tensor comparison.
 Source: Stacks 06YY, 07A4
@@ -233,195 +212,6 @@ def IsReductionPullAt
       DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso e (.up ℤ)).hom.app K ≫
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)).inv.app K)
-
-private theorem quotient_hom_id {B : Type*} [Category B] [Abelian B]
-    [HasDerivedCategory B] (J : CochainComplex B ℤ) :
-    (DerivedCategory.quotientCompQhIso B).hom.app J = 𝟙 _ := rfl
-
-private theorem quotient_inv_id {B : Type*} [Category B] [Abelian B]
-    [HasDerivedCategory B] (J : CochainComplex B ℤ) :
-    (DerivedCategory.quotientCompQhIso B).inv.app J = 𝟙 _ := rfl
-
-private theorem homotopyFactors_inv_id {B E : Type*} [Category B] [Category E]
-    [Abelian B] [Abelian E] (F : B ⥤ E) [F.Additive] (J : CochainComplex B ℤ) :
-    (F.mapHomotopyCategoryFactors (.up ℤ)).inv.app J = 𝟙 _ := rfl
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem factorsh_hom {B E : Type*} [Category B] [Category E]
-    [Abelian B] [Abelian E] [HasDerivedCategory B] [HasDerivedCategory E]
-    (F : B ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (J : CochainComplex B ℤ) :
-    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj J) =
-      F.mapDerivedCategoryFactors.hom.app J := by
-  simp only [Functor.mapDerivedCategoryFactorsh_hom_app, quotient_hom_id, quotient_inv_id,
-    homotopyFactors_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
-  erw [DerivedCategory.Qh.map_id, Category.comp_id, Category.comp_id]
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem objQIso_inv {B E : Type*} [Category B] [Category E]
-    [Abelian B] [Abelian E] [HasDerivedCategory B] [HasDerivedCategory E]
-    [Abelian.HasKInjectiveResolutions B] (F : B ⥤ E) [F.Additive]
-    (J : CochainComplex B ℤ) [J.IsKInjective] :
-    (F.rightDerivedFunctorObjQIso J).inv =
-      F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj J) := by
-  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_inv, Iso.symm_inv,
-    Functor.mapIso_inv, Iso.app_inv, asIso_hom, Iso.app_hom,
-    quotient_inv_id, quotient_hom_id, CategoryTheory.Functor.map_id,
-    Category.id_comp]
-  erw [Category.comp_id]
-
-private theorem squareComparison_unit
-    (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
-    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
-    (Q : D ⥤ U) [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
-    (H : T ⥤ U) [H.Additive]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
-    [P.PreservesKInjectiveComplexes]
-    (e : F ⋙ Q ≅ P ⋙ H) (K : HomotopyCategory C (.up ℤ)) :
-    Q.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app K) ≫
-        ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).symm ≪≫
-          Functor.rightDerivedFunctorNatIso e ≪≫
-          Functor.rightDerivedFunctorCompIso P H ≪≫
-          Functor.isoWhiskerRight P.rightDerivedFunctorIsoMapDerivedCategory
-            H.rightDerivedFunctor).hom.app (DerivedCategory.Qh.obj K) ≫
-        H.rightDerivedFunctor.map (P.mapDerivedCategoryFactorsh.hom.app K) =
-      Q.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app K) ≫
-        H.rightDerivedFunctorUnit.app ((P.mapHomotopyCategory (.up ℤ)).obj K) := by
-  have hcomp (F : C ⥤ D) [F.Additive] (Q : D ⥤ U) [Q.Additive] :
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)).inv.app K =
-        𝟙 _ := by
-    have h := Iso.hom_inv_id_app
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)) K
-    rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
-    exact h
-  have hcomp' :
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (P ⋙ H)) (.up ℤ)).inv.app K =
-        𝟙 _ := by
-    have h := Iso.hom_inv_id_app
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (P ⋙ H)) (.up ℤ)) K
-    rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
-    exact h
-  have h₁ :
-      Q.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-          Q.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app K) ≫
-          (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).inv.app
-            (DerivedCategory.Qh.obj K) = (F ⋙ Q).rightDerivedFunctorUnit.app K := by
-    have h := Functor.rightDerivedNatTrans_app
-      (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory) (F ⋙ Q).rightDerivedFunctor
-      (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
-      (F ⋙ Q).rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (.up ℤ))
-      (𝟙 _) K
-    simpa [Functor.rightDerivedFunctorCompMapDerivedCategoryIso,
-      Functor.rightDerivedFunctorCompMapDerivedCategoryUnit, hcomp, Category.assoc] using h
-  have h₂ : (F ⋙ Q).rightDerivedFunctorUnit.app K ≫
-      (Functor.rightDerivedFunctorNatIso e).hom.app (DerivedCategory.Qh.obj K) =
-      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app K) ≫
-        (P ⋙ H).rightDerivedFunctorUnit.app K := by
-    simp [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
-  have h₃ : (P ⋙ H).rightDerivedFunctorUnit.app K ≫
-      (Functor.rightDerivedFunctorCompIso P H).hom.app (DerivedCategory.Qh.obj K) =
-      H.rightDerivedFunctorUnit.app ((P.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        H.rightDerivedFunctor.map (P.rightDerivedFunctorUnit.app K) := by
-    simp [Functor.rightDerivedFunctorCompIso, Functor.rightDerivedFunctorCompUnit, hcomp']
-  have h₄ : P.rightDerivedFunctorUnit.app K ≫
-      P.rightDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Qh.obj K) =
-      P.mapDerivedCategoryFactorsh.inv.app K := by
-    exact congr_app P.rightDerivedFunctorIsoMapDerivedCategory_hom_fac K
-  apply (cancel_epi (Q.mapDerivedCategoryFactorsh.inv.app
-    ((F.mapHomotopyCategory (.up ℤ)).obj K))).mp
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.assoc]
-  rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃]
-  simp only [← H.rightDerivedFunctor.map_comp]
-  rw [reassoc_of% h₄]
-  simp
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem squareComparison_normalized
-    (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
-    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
-    (Q : D ⥤ U) [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
-    (H : T ⥤ U) [H.Additive]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
-    [P.PreservesKInjectiveComplexes]
-    (e : F ⋙ Q ≅ P ⋙ H) :
-    IsDirectImageNormalizedOnKInjectives F P Q H e
-      ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).symm ≪≫
-        Functor.rightDerivedFunctorNatIso e ≪≫
-        Functor.rightDerivedFunctorCompIso P H ≪≫
-        Functor.isoWhiskerRight P.rightDerivedFunctorIsoMapDerivedCategory
-          H.rightDerivedFunctor) := by
-  intro J _
-  have h := squareComparison_unit F P Q H e
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj J)
-  apply (cancel_mono
-    (H.rightDerivedFunctorObjQIso ((P.mapHomologicalComplex (.up ℤ)).obj J)).inv).mp
-  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-  apply (cancel_epi (Q.mapDerivedCategory.map (F.rightDerivedFunctorObjQIso J).inv)).mp
-  simp only [← Q.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-  erw [objQIso_inv, objQIso_inv]
-  erw [factorsh_hom, factorsh_hom] at h
-  exact h
-
-omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory U] in
-private theorem homotopy_comp_inv_id (F : C ⥤ D) [F.Additive]
-    (Q : D ⥤ U) [Q.Additive] (K : HomotopyCategory C (.up ℤ)) :
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)).inv.app K =
-      𝟙 _ := by
-  have h := Iso.hom_inv_id_app
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ Q)) (.up ℤ)) K
-  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
-  exact h
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem squareComparison_eq_mate
-    (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
-    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
-    (Q : D ⥤ U) [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
-    (H : T ⥤ U) [H.Additive]
-    (LF : D ⥤ C) [LF.Additive] [PreservesFiniteLimits LF] [PreservesFiniteColimits LF]
-    (LH : U ⥤ T) [LH.Additive] [PreservesFiniteLimits LH] [PreservesFiniteColimits LH]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
-    [P.PreservesKInjectiveComplexes]
-    (a : LF ⊣ F) (b : LH ⊣ H) (s : Q ⋙ LH ≅ LF ⋙ P) (e : F ⋙ Q ≅ P ⋙ H)
-    (he : (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans = e.hom) :
-    ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).symm ≪≫
-      Functor.rightDerivedFunctorNatIso e ≪≫
-      Functor.rightDerivedFunctorCompIso P H ≪≫
-      Functor.isoWhiskerRight P.rightDerivedFunctorIsoMapDerivedCategory
-        H.rightDerivedFunctor).hom =
-    (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      b.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategoryCompIso Q LH ≪≫
-          Functor.mapDerivedCategoryNatIso s ≪≫
-            (Functor.mapDerivedCategoryCompIso LF P).symm).hom)).natTrans := by
-  apply Functor.rightDerived_ext (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory)
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
-    (HomotopyCategory.quasiIso C (.up ℤ))
-  apply NatTrans.ext
-  funext K
-  dsimp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit,
-    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app]
-  simp only [homotopy_comp_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
-  repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
-  apply (cancel_epi (Q.mapDerivedCategoryFactorsh.hom.app
-    ((F.mapHomotopyCategory (.up ℤ)).obj K))).mp
-  simp only [Category.assoc]
-  erw [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app_assoc]
-  apply (cancel_mono (H.rightDerivedFunctor.map
-    (P.mapDerivedCategoryFactorsh.hom.app K))).mp
-  simp only [Category.assoc]
-  rw [squareComparison_unit]
-  have h := _root_.derived_mate_factorsh a b s K
-  rw [he] at h
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app, homotopy_comp_inv_id,
-    Category.comp_id] at h
-  repeat' first | erw [Category.id_comp] at h | erw [Category.comp_id] at h
-  exact h.symm
 
 end GenericNormalization
 
@@ -468,23 +258,6 @@ private theorem comparison_of_resolving
   ext X
   have := hb X.obj X.property
   exact (cancel_mono (b.app X.obj)).mp ((heq X.obj X.property).trans (he X).symm)
-
-private theorem const_mate {B E J : Type*} [Category B] [Category E] [Category J]
-    (L : B ⥤ E) (R : E ⥤ B) (a : L ⊣ R) :
-    (mateEquiv a (a.whiskerRight J)
-      (TwoSquare.mk _ _ _ _ (Functor.compConstIso J L).inv)).natTrans =
-      (Functor.compConstIso J R).hom := by
-  ext M j
-  simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
-    Category.id_comp]
-  erw [Adjunction.whiskerRight_unit_app_app]
-  change a.unit.app (R.obj M) ≫ 𝟙 _ ≫ R.map (𝟙 _) ≫ 𝟙 _ ≫
-    R.map (a.counit.app M) ≫ 𝟙 _ = 𝟙 _
-  simp only [Category.id_comp, Category.comp_id]
-  erw [R.map_id, Category.id_comp]
-  exact a.right_triangle_components M
 
 section ExactTriangle
 universe a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ c₁ c₂ c₃ c₄
@@ -616,31 +389,6 @@ private theorem reductionComparison_on_complexes
     exact hτ' E hE
 
 end ReductionComparison
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem mates_naturality
-    {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
-    {p : B ⥤ C} {r : C ⥤ B} {g : D ⥤ E} {s : E ⥤ D}
-    (a : p ⊣ r) (b : g ⊣ s) {dy ry : B ⥤ D} {dx rx : C ⥤ E}
-    (α : dy ⟶ ry) (β : dx ⟶ rx)
-    (e : dy ⋙ g ⟶ p ⋙ dx) (t : ry ⋙ g ⟶ p ⋙ rx)
-    (h : ∀ N, g.map (α.app N) ≫ t.app N = e.app N ≫ β.app (p.obj N))
-    (M : C) :
-    α.app (r.obj M) ≫ (mateEquiv a b (TwoSquare.mk _ _ _ _ t)).app M =
-      (mateEquiv a b (TwoSquare.mk _ _ _ _ e)).app M ≫ s.map (β.app M) := by
-  simp only [mateEquiv, Equiv.coe_fn_mk, NatTrans.comp_app,
-    Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_hom_app,
-    Category.id_comp]
-  repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
-  change α.app (r.obj M) ≫ b.unit.app (ry.obj (r.obj M)) ≫
-      s.map (t.app (r.obj M)) ≫ s.map (rx.map (a.counit.app M)) =
-    (b.unit.app (dy.obj (r.obj M)) ≫ s.map (e.app (r.obj M)) ≫
-      s.map (dx.map (a.counit.app M))) ≫ s.map (β.app M)
-  rw [← b.unit_naturality_assoc, ← s.map_comp_assoc, h, s.map_comp,
-    Category.assoc, Category.assoc, ← s.map_comp, ← β.naturality, s.map_comp]
-  simp only [Category.assoc]
-  rfl
 
 private theorem unit_hom_ext {B C : Type*} [Category B] [Category C]
     {L : B ⥤ C} {R : C ⥤ B} (a : L ⊣ R) {M : B} {N : C}
@@ -799,10 +547,6 @@ Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normaliza
 abbrev delta (X : Scheme.{u}) :=
   (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).mapDerivedCategory
 
-/-- Ordinary direct image in the same identified constant coefficients.
-Source: Stacks 07A5 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
-abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) := (moduleDirectImage A f).rightDerivedFunctor
-
 /-- Ordinary exact inverse image.
 Source: Stacks 03EK (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (modulePullback A f).mapDerivedCategory
@@ -838,20 +582,6 @@ complex through that adjunction and use K-injectivity to null-homotope it. -/
       left_triangle_components := by intro M; simp
       right_triangle_components := by intro M; ext n; simp }
   exact adj₀.preservesKInjectiveComplexes
-
-/-- The canonical derived direct-image/diagonal isomorphism. Both composition
-comparisons retain their universal derived units; the middle comparison has identity
-components on ordinary modules.
-Source: Stacks 08BJ, 070K
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
-def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    push A f ⋙ delta A Y ≅ delta A X ⋙ R A f :=
-  (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (moduleDirectImage A f)
-    (Functor.const ℕᵒᵖ)).symm ≪≫
-  Functor.rightDerivedFunctorNatIso (Functor.compConstIso ℕᵒᵖ (moduleDirectImage A f)) ≪≫
-  Functor.rightDerivedFunctorCompIso (Functor.const ℕᵒᵖ) (towerDirectImage A f) ≪≫
-  Functor.isoWhiskerRight
-    (Functor.rightDerivedFunctorIsoMapDerivedCategory (Functor.const ℕᵒᵖ)) (R A f)
 
 private theorem scalar_obj (X : Scheme.{u})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
@@ -1611,16 +1341,6 @@ end
 Source: Stacks 07A4 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
 def reductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (reductionPull_existsUnique I f).exists.choose
-
-/-- The projection map h, defined by its counit-tensor adjunction mate. The comparison
-being transposed is the canonical tensor balancing map on the full quotient diagram.
-Its source therefore includes precisely the diagonal identification chi.
-Source: Stacks 0B56 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
-def projection {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    push A f ⋙ reduction I Y ⟶ reduction I X ⋙ R A f :=
-  mateEquiv
-    (proEtaleRingDerivedAdjunction f (coefficients A Y) (coefficients A X)
-      (constantRingIso A f)) (adj A f) (reductionPull I f).hom
 
 section
 attribute [local irreducible] modulePullback reductionModule reduction reductionCounit

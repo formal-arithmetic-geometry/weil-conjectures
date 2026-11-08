@@ -59,22 +59,6 @@ section Preadditive
 
 variable {C : Type*} [Category* C] [Preadditive C]
 
-/-- In a finite coproduct, the identity is the sum of the composites of the projections (through
-the biproduct) with the inclusions. -/
-lemma _root_.CategoryTheory.Limits.sum_isoCoproduct_inv_π_ι {S : Type*} [Fintype S] (B : S → C)
-    [HasBiproduct B] :
-    ∑ x, (biproduct.isoCoproduct B).inv ≫ biproduct.π B x ≫ Sigma.ι B x = 𝟙 (∐ B) := by
-  classical
-  refine Sigma.hom_ext _ _ fun j ↦ ?_
-  have hj (x : S) : Sigma.ι B j ≫ (biproduct.isoCoproduct B).inv ≫ biproduct.π B x ≫
-      Sigma.ι B x = if x = j then Sigma.ι B j else 0 := by
-    split_ifs with h
-    · subst h
-      simp
-    · simp [biproduct.ι_π_ne_assoc _ (Ne.symm h)]
-  rw [comp_sum, comp_id, Finset.sum_congr rfl fun x _ ↦ hj x]
-  simp
-
 /-- Compactness for a family is invariant under isomorphisms of the family. -/
 lemma of_iso {s : C} {J : Type*} {A T : J → C} [HasCoproduct A] [HasCoproduct T]
     (e : ∀ j, A j ≅ T j) (hT : CompactFor s T) : CompactFor s A :=
@@ -365,59 +349,6 @@ def HomFactorsThroughFilteredColimits (s : DerivedCategory C) : Prop :=
     (_ : IsColimit c) (n : ℤ) (f : s ⟶ (singleFunctor C n).obj c.pt),
     ∃ (i : I) (g : s ⟶ (singleFunctor C n).obj (F.obj i)),
       f = g ≫ (singleFunctor C n).map (c.ι.app i)
-
-variable (P) in
-omit [Abelian.HasKInjectiveResolutions C] [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
-  [HasColimitsOfShape (Discrete J) C] [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-ind-heart-ii-vanishing`: if morphisms out of `s` factor through filtered
-colimits, and `Hom(s, B[n])` vanishes for `B` in `P` and `n ≤ N`, it vanishes for `B` a filtered
-colimit of objects of `P` and `n ≤ N`. -/
-lemma eq_zero_of_ind {s : DerivedCategory C} (hcont : HomFactorsThroughFilteredColimits.{w} s)
-    (N : ℤ) (hvan : ∀ B, P B → ∀ n ≤ N, ∀ f : s ⟶ (singleFunctor C n).obj B, f = 0)
-    (B : C) (hB : ObjectProperty.ind.{w} P B) (n : ℤ) (hn : n ≤ N)
-    (f : s ⟶ (singleFunctor C n).obj B) : f = 0 := by
-  obtain ⟨I, _, _, pres, hpres⟩ := hB
-  obtain ⟨i, g, rfl⟩ := hcont I pres.diag (Cocone.mk B pres.ι) pres.isColimit n f
-  rw [hvan _ (hpres i) n hn g, zero_comp]
-
-attribute [local instance] Abelian.hasFiniteBiproducts in
-omit [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [HasColimitsOfShape (Discrete J) C]
-  [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-ind-heart-ii-sums`: if morphisms out of `s` factor through filtered colimits,
-then `Hom(s, -[n])` commutes with direct sums of objects of `C`: a direct sum is the filtered
-colimit of its finite subsums. -/
-lemma compactFor_singleFunctor_of_homFactorsThroughFilteredColimits {s : DerivedCategory C}
-    {J : Type w} [HasColimitsOfShape (Discrete J) C] [HasColimitsOfShape (Finset (Discrete J)) C]
-    (hcont : HomFactorsThroughFilteredColimits.{w} s) (n : ℤ) (B : J → C) :
-    CompactFor s fun j ↦ (singleFunctor C n).obj (B j) := by
-  classical
-  intro f
-  let G := singleFunctor C n
-  let φ := sigmaComparison G B
-  obtain ⟨S, g, hg⟩ := hcont (Finset (Discrete J)) _ _
-    (CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone B) n (f ≫ φ)
-  let B' (x : S) : C := B x.1.as
-  let h (x : S) : s ⟶ G.obj (B x.1.as) := g ≫ G.map ((biproduct.isoCoproduct B').inv ≫
-    biproduct.π B' x)
-  have hψ : (CoproductsFromFiniteFiltered.finiteSubcoproductsCocone B).ι.app S =
-      ∑ x, (biproduct.isoCoproduct B').inv ≫ biproduct.π B' x ≫ Sigma.ι B x.1.as := by
-    refine (id_comp _).symm.trans
-      ((congrArg (· ≫ _) (sum_isoCoproduct_inv_π_ι B').symm).trans ?_)
-    rw [sum_comp]
-    refine Finset.sum_congr rfl fun x _ ↦ ?_
-    simp [B']
-  have hf : f ≫ φ = ∑ x, h x ≫ G.map (Sigma.ι B x.1.as) := by
-    rw [hg, hψ, G.map_sum, comp_sum]
-    refine Finset.sum_congr rfl fun x _ ↦ ?_
-    simp [h]
-  refine ⟨S.image Discrete.as,
-    fun j ↦ if hj : (⟨j⟩ : Discrete J) ∈ S then h ⟨⟨j⟩, hj⟩ else 0, ?_⟩
-  rw [← cancel_mono φ, hf, Finset.sum_image fun x _ y _ hxy ↦ Discrete.ext hxy, sum_comp,
-    ← Finset.sum_coe_sort S]
-  refine Finset.sum_congr rfl fun x _ ↦ ?_
-  have hx : (⟨(x : Discrete J).as⟩ : Discrete J) ∈ S := x.2
-  simp only [dite_eq_left hx, assoc, φ]
-  exact congrArg (h x ≫ ·) (ι_comp_sigmaComparison G B _).symm
 
 end Continuity
 

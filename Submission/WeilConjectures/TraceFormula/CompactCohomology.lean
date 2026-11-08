@@ -168,14 +168,6 @@ lemma weilLowerShriekOfFrobenius_obj_carrier (K : WeilBoundedConstructible ℓ �
       (boundedConstructibleLowerShriek ℓ f).obj K.carrier :=
   rfl
 
-/-- The lower shriek of Weil objects lifts the lower shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the forgetful
-functors. -/
-lemma weilLowerShriekOfFrobenius_comp_forget :
-    weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf ⋙ WeilBoundedConstructible.forget ℓ ΦY =
-      WeilBoundedConstructible.forget ℓ ΦX ⋙
-        boundedConstructibleLowerShriek ℓ f :=
-  rfl
-
 lemma weilLowerShriekOfFrobenius_obj_str (K : WeilBoundedConstructible ℓ ΦX) :
     ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K).str =
       (weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).app K.carrier ≪≫
@@ -403,20 +395,6 @@ lemma globalOperator_eq_frobeniusCompactOperator (K : WeilBoundedConstructible �
     K.globalOperator m = frobeniusCompactOperator ℓ K.str.hom m := by
   rw [globalOperator_eq, iterateStr_hom_eq_frobeniusCoefficientIterate, frobeniusCompactOperator]
 
-/-- The global operator of degree `m` is the `m`-th power of the global operator of degree
-one, `F_{c,m} = F_{c,1}^m` (blueprint `lem-trf-weil-shriek-iterates`). -/
-lemma globalOperator_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
-    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
-    [IsFinite (frobeniusIterate Φ 1).left] [IsUniversalHomeomorphism (frobeniusIterate Φ 1).left] :
-    K.globalOperator m =
-      (show End ((boundedConstructibleLowerShriek ℓ
-          (toPoint X)).obj K.carrier) from K.globalOperator 1) ^ m := by
-  have : IsFinite Φ.left := by
-    rw [← frobeniusIterate_one Φ]
-    infer_instance
-  rw [globalOperator_eq_frobeniusCompactOperator, globalOperator_eq_frobeniusCompactOperator]
-  exact frobeniusCompactOperator_eq_pow ℓ K.str.hom m
-
 /-- **Perfectness of compactly supported cohomology** (blueprint
 `prop-trf-compact-support-perfectness`): for `k` separably closed, `RΓ_c(X, K)` is a perfect
 complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
@@ -424,16 +402,6 @@ theorem nonempty_hasRightDual_compactCohomology [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty (HasRightDual
       ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)) :=
-  nonempty_hasRightDual_point ℓ k _
-
-/-- **Perfectness of the geometric stalks** (blueprint `prop-trf-compact-support-perfectness`,
-clause on derived geometric stalks; section `sec-smooth-purity`): for `k` separably closed,
-the stalk `K_x̄ = Lx^* K` of a bounded constructible complex at a rational point is a perfect
-complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
-theorem nonempty_hasRightDual_stalk [IsSepClosed k]
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (x : RationalPoint X) :
-    Nonempty (HasRightDual
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :=
   nonempty_hasRightDual_point ℓ k _
 
 end WeilBoundedConstructible

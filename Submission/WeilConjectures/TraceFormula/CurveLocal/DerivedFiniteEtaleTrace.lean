@@ -266,15 +266,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {X X' Z Z' : Scheme.{u}} (e : X' ⟶ X) (i : Z ⟶ X) [IsClosedImmersion i]
   (i' : Z' ⟶ X') [IsClosedImmersion i'] (h : i'.openComplement ≤ e ⁻¹ᵁ i.openComplement)
 
-/-- The middle component of the morphism of localization triangles
-`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback` is the pullback
-`RΓ(X, K) ⟶ RΓ(X', e^* K)` of derived global sections. -/
-lemma sectionsWithSupportTrianglePullback_app_hom₂
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    ((sectionsWithSupportTrianglePullback A e i i' h).app K).hom₂ =
-      (Functor.rightDerivedPullback (e)^*[A] (ΓPullback A e)).app K.obj :=
-  rfl
-
 end Pair
 
 end AlgebraicGeometry.Etale
@@ -283,11 +274,6 @@ namespace CategoryTheory.Functor
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] [HasDerivedCategory C]
   [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
-
-lemma rightDerivedFunctorNatTrans_id (F : C ⥤ D) [F.Additive] :
-    rightDerivedFunctorNatTrans (𝟙 F) = 𝟙 _ := by
-  simp only [rightDerivedFunctorNatTrans, NatTrans.mapHomotopyCategory_id,
-    Functor.whiskerRight_id', rightDerivedNatTrans_id]
 
 
 end CategoryTheory.Functor

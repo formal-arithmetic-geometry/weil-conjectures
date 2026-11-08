@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 public import Submission.WeilConjectures.SixFunctors.Finite.Exact
 public import Submission.WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion

@@ -81,9 +81,6 @@ theorem ιMulti_mem_countSpan {j : ℕ} (v : Fin n → V)
 theorem countSpan_succ_le (j : ℕ) : countSpan P n (j + 1) ≤ countSpan P n j :=
   Submodule.span_mono fun _ ⟨v, hv, hx⟩ ↦ ⟨v, (Nat.le_succ j).trans hv, hx⟩
 
-theorem countSpan_anti {i j : ℕ} (h : i ≤ j) : countSpan P n j ≤ countSpan P n i :=
-  Submodule.span_mono fun _ ⟨v, hv, hx⟩ ↦ ⟨v, h.trans hv, hx⟩
-
 theorem countSpan_zero : countSpan P n 0 = ⊤ := by
   refine eq_top_iff.2 ((ιMulti_span (R := k) (n := n) (M := V)).symm.le.trans ?_)
   exact Submodule.span_le.2 fun _ ⟨v, hv⟩ ↦ Submodule.subset_span ⟨v, Nat.zero_le _, hv⟩
@@ -672,18 +669,5 @@ theorem constituentsLE_exteriorPower_semisimplification (n : ℕ) :
     (directSumFiltration_zero _) (fun i ↦ ⟨directSumFiltrationEquiv (fun i ↦ s.factor i) i⟩) n
   exact (exteriorPower_le_of_eq_top s.last_eq n).trans (h.trans
     (exteriorPower_ge_of_eq_top (directSumFiltration_eq_top _) n))
-
-/-- **The exterior powers of a representation and of its semisimplification have the same
-constituents**, the other direction: every constituent of `⋀ⁿ V^ss` is a constituent of `⋀ⁿ V`.
-(blueprint: `lem-mg-filtered-exterior-power`, `lem-mg-filtration-refinement`) -/
-theorem constituentsLE_exteriorPower_semisimplification' (n : ℕ) :
-    ConstituentsLE (s.semisimplification.exteriorPower n) (ρ.exteriorPower n) := by
-  have h := ConstituentsLE.exteriorPower_of_chain
-    (fun i : Fin (s.length + 1) ↦ directSumFiltration (fun i ↦ s.factor i) i) s.series
-    (fun i ↦ directSumFiltration_le_succ _ _) (fun i ↦ (s.covBy i).le)
-    (directSumFiltration_zero _) s.series_zero
-    (fun i ↦ ⟨(directSumFiltrationEquiv (fun i ↦ s.factor i) i).symm⟩) n
-  exact (exteriorPower_le_of_eq_top (directSumFiltration_eq_top _) n).trans (h.trans
-    (exteriorPower_ge_of_eq_top s.last_eq n))
 
 end Representation.CompositionSeries

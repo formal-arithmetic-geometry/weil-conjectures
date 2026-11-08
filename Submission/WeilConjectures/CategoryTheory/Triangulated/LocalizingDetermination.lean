@@ -64,10 +64,6 @@ lemma preservesCoproductsOn_of_preservesColimitsOfShape (F : C ⥤ D)
     F.PreservesCoproductsOn.{w} P :=
   fun _ _ _ hc _ ↦ ⟨isColimitOfPreserves F hc⟩
 
-lemma PreservesCoproductsOn.of_le {F : C ⥤ D} {P Q : ObjectProperty C}
-    (h : F.PreservesCoproductsOn.{w} Q) (hPQ : P ≤ Q) : F.PreservesCoproductsOn.{w} P :=
-  fun _ _ c hc hK ↦ h c hc (fun j ↦ hPQ _ (hK j))
-
 /-- A functor isomorphic to a functor preserving the coproducts of objects of `P` preserves
 them. -/
 lemma PreservesCoproductsOn.of_iso {F G : C ⥤ D} {P : ObjectProperty C}

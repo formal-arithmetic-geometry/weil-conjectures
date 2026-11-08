@@ -197,16 +197,6 @@ noncomputable def supportedEvaluation :
       ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)) ≫
     (dualizingComplexComp ℓ F.d).hom
 
-/-- The adjoint of the supported restriction along `ι`: `Rc^! P ⟶ Rι_* Rd^! LΔ^* P` is the unit
-of `LΔ^* ⊣ RΔ_*` followed by base change in the fixed square. -/
-lemma homEquiv_supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _
-        (F.supportedRestriction P) =
-      (boundedConstructibleUpperShriek ℓ c.support).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).unit.app P) ≫
-        (F.upperShriekLowerStarIso.app _).hom := by
-  rw [supportedRestriction, Equiv.apply_symm_apply]
-
 
 /-- **The supported restriction as a pullback of the support object** (blueprint
 `det-tf-supported-restriction`, (2), second description): the `Rd_! ⊣ Rd^!` adjoint of the
@@ -311,32 +301,6 @@ theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j
     (c.traceClass F).localTerm j = 0 := by
   rw [localTerm_traceClass_eq_integral_supportedRestriction, h, Limits.zero_comp,
     Limits.comp_zero, Limits.comp_zero, BorelMooreSection.integral_zero]
-
-/-- **The local term at a fixed point through the supported restriction** (blueprint
-`det-tf-supported-restriction-local-term`, `sk-lem-tf-curve-supported-pairing`): let
-`y : s ⟶ Fix(c)` be a fixed point that is open and closed in the fixed locus. Then the local
-term `LT_y(u)` is the composite in `End(ℚ̄_ℓ,s)`
-```
-ℚ̄_ℓ,s ≅ (ℚ̄_ℓ,C)_y --[u]_y--> (Rc^! P)_y --(ρ_P)_y--> (Rd^! LΔ^* P)_y --ev_y--> (ω_Fix(c))_y
-  ≅ Ry^! ω_Fix(c) ≅ ω_s ≅ ℚ̄_ℓ,s
-```
-of the stalks at `y` of the supported class, the supported restriction and the evaluation,
-`P = K ⊠ D_X K`. Here `(Rc^! P)_y = RΓ_a(T, P)` and `(Rd^! LΔ^* P)_y = RΓ_y(X, LΔ^* P)`, for the
-strict localization `T` of `X × X` at `(y, y)`, and the last isomorphisms are
-`RΓ_y(X, ω_X) ≅ RΓ(y, ω_y)` followed by `∫_y`. -/
-theorem localTerm_point_traceClass_eq_supportedRestriction (y : point k ⟶ F.F)
-    [IsOpenImmersion y.left] [IsClosedImmersion y.left] :
-    (c.traceClass F).localTerm y =
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ y)).hom ≫
-        (boundedConstructibleUpperStar _ ℓ y).map
-          ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-            (boundedConstructibleUpperStar _ ℓ F.ι).map (c.mate ≫ c.verdierDualityIso.hom)) ≫
-        (boundedConstructibleUpperStar _ ℓ y).map (F.supportedRestriction _) ≫
-        (boundedConstructibleUpperStar _ ℓ y).map F.supportedEvaluation ≫
-        (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ y).inv.app _ ≫
-        (dualizingComplexComp ℓ y).hom ≫ (dualizingComplexPointIso ℓ k).hom := by
-  rw [BorelMooreSection.localTerm_point, restrict_traceClass_eq_supportedRestriction]
-  simp only [Category.assoc]
 
 /-- A morphism of `Dᵇc(F)` whose pullback along `e⁻¹ ≫ j` vanishes, for an isomorphism
 `e : B ≅ B'`, has vanishing pullback along `j`. -/

@@ -121,11 +121,4 @@ instance isIso_rightDerivedLowerStarPlusForget :
       have := (Mod.forget (condensedRingObj Λ X)).injective_obj_of_injective hI
       Functor.rightAcyclic_of_injective _
 
-/-- If `Λ_X` is flat, `(R⁺f_* K)_ab ≅ R⁺f_*(K_ab)` on the bounded below derived categories. -/
-noncomputable def rightDerivedLowerStarPlusForgetIso :
-    R+((f)_*⟦Λ⟧) ⋙ (Mod.forget (condensedRingObj Λ Y)).mapDerivedCategoryPlus ≅
-      (Mod.forget (condensedRingObj Λ X)).mapDerivedCategoryPlus ⋙
-        R+((f)_*[Ab.{u + 1}]) :=
-  asIso (rightDerivedLowerStarPlusForget Λ f)
-
 end AlgebraicGeometry.ProEtale.CondensedRing

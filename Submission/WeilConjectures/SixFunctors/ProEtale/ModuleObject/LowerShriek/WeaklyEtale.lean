@@ -59,12 +59,6 @@ noncomputable def linearWeaklyEtaleLowerShriek :
       Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U) :=
   (ProEtale.weaklyEtaleLowerShriekAdjunction Ab.{u + 1} g).mapModLeft (condensedRingObj Λ U)
 
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of the linear extension by zero is the extension by zero. -/
-lemma linearWeaklyEtaleLowerShriek_comp_forget :
-    linearWeaklyEtaleLowerShriek Λ g ⋙ Mod.forget (condensedRingObj Λ U) =
-      Mod.forget _ ⋙ ProEtale.weaklyEtaleLowerShriek Ab.{u + 1} g := rfl
-
 /-- The linear extension by zero is left adjoint to the transport `mapMod(g^*)` of module
 objects along the strong monoidal `g^*`. -/
 noncomputable def linearWeaklyEtaleLowerShriekAdjunction :
@@ -98,13 +92,6 @@ noncomputable def weaklyEtaleLowerShriek :
     Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V) ⥤
       Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U) :=
   Mod.comap (condensedPullbackHom Λ g) ⋙ linearWeaklyEtaleLowerShriek Λ g
-
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of the extension by zero on module objects is the extension by zero
-of the underlying sheaf. -/
-lemma weaklyEtaleLowerShriek_comp_forget :
-    weaklyEtaleLowerShriek Λ g ⋙ Mod.forget (condensedRingObj Λ U) =
-      Mod.forget (condensedRingObj Λ V) ⋙ ProEtale.weaklyEtaleLowerShriek Ab.{u + 1} g := rfl
 
 instance weaklyEtaleLowerShriek_additive : (weaklyEtaleLowerShriek Λ g).Additive := by
   unfold weaklyEtaleLowerShriek

@@ -8,7 +8,20 @@ module
 public import Submission.WeilConjectures.ConstructibleSheaf.Restriction
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Invertible
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 

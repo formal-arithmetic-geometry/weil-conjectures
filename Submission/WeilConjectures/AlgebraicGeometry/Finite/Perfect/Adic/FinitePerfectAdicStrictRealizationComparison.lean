@@ -6,7 +6,225 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
-public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicConstantCohomology
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerData
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicEtaleStalkData
+import Submission.WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedMapPresheaves
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantModel
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.Finiteness.Defs
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantGradedModel
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantExtensionTower
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteConstantExtensionTower
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantConeStep
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteLocallyConstantWeakSerre
+import Mathlib.CategoryTheory.ObjectProperty.Kernels
+import Mathlib.CategoryTheory.ObjectProperty.Extensions
+import Submission.WeilConjectures.CategoryTheory.Site.SiteModuleSheafConstantRingEquivalenceSupplement
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantSerre
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf
+import Submission.WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageSupplement
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionExact
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantLocalLinear
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleHomSurjective
+import Mathlib.CategoryTheory.Sites.SheafHom
+import Mathlib.CategoryTheory.Sites.Subsheaf
+import Submission.WeilConjectures.CategoryTheory.LocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.LocalModuleIso
+import Submission.WeilConjectures.CategoryTheory.ConstantLocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctor
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleUnit
+import Mathlib.Algebra.Module.FinitePresentation
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleOverHom
+import Submission.WeilConjectures.CategoryTheory.FinitePresentationLocalLift
+import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Submission.WeilConjectures.CategoryTheory.Sites.ConstantForget
+import Mathlib.RingTheory.Noetherian.Basic
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeExtensionLocalPresentation
+import Submission.WeilConjectures.CategoryTheory.ConstantFiniteFreeLocalLift
+import Submission.WeilConjectures.CategoryTheory.FiniteSectionsEpiLift
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.Abelian.Exact
+import Submission.WeilConjectures.CategoryTheory.ExtensionCokernelPresentation
+import Mathlib.Algebra.Category.ModuleCat.Kernels
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+import Mathlib.RingTheory.Finiteness.Cardinality
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionMapExact
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.LinearAlgebra.StdBasis
+import Submission.WeilConjectures.AlgebraicGeometry.BoundedTopMorphisms
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.RingTheory.Finiteness.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantComplexDescent
+import Mathlib.Algebra.Category.ModuleCat.Limits
+import Mathlib.Algebra.Homology.Additive
+import Mathlib.Data.Int.Interval
+import Mathlib.CategoryTheory.Category.ULift
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Submission.WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Mathlib.Topology.Connected.Clopen
+import Mathlib.CategoryTheory.Sites.Point.Over
+import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.RingTheory.FiniteConeFreeModel
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.Algebra.Homology.Homotopy
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Free.FiniteFreeEtaleAcyclicHomotopy
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import Submission.WeilConjectures.RingTheory.RingPseudoCoherent
+import Submission.WeilConjectures.RingTheory.FiniteFreeResolution
+import Submission.WeilConjectures.RingTheory.PseudoCoherentOfCohomology
+import Mathlib.Algebra.Homology.Single
+import Submission.WeilConjectures.RingTheory.PseudoCoherentIffAllM
+import Submission.WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
+import Submission.WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
+import Submission.WeilConjectures.CategoryTheory.TruncationTriangle
+import Mathlib.CategoryTheory.Abelian.Projective.Extend
+import Mathlib.LinearAlgebra.Dimension.Free
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.SixFunctors.BaseChange.Pasting
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientSliceRestriction
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicEtaleLevelData
+import Submission.WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicFiniteOperations
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLisseOrigin
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Submission.WeilConjectures.ConstructibleSheaf.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFixedModuleLocalConstancy
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModelsFromLisse
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelStalks
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelLocalConstancy
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleOriginFromFiniteModels
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleComparisonLocalization
+import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleEtaleFiniteModels
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModelTypePartition
+import Submission.WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleUniformModelEtaleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
+import Mathlib.CategoryTheory.Sites.CoversTop.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleLocallyClassicalContinuity
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleComparisonSections
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Submission.WeilConjectures.CategoryTheory.LanContinuityFromRepresentables
+import Mathlib.CategoryTheory.Limits.Presheaf
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Submission.WeilConjectures.SixFunctors.BaseChange.Square
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.CategoryTheory.Sites.Precoverage.Generates
+import Mathlib.CategoryTheory.Sites.Finite
+import Mathlib.CategoryTheory.Sites.LocalProperties
+import Mathlib.CategoryTheory.Limits.Connected
+import Mathlib.CategoryTheory.Limits.Types.Filtered
+import Mathlib.CategoryTheory.Filtered.Connected
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.Basic.Finite.Prod
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantSheafStalk
+import Mathlib.CategoryTheory.Abelian.RightDerived
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleStalkFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleEncoding
+import Submission.WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+import Submission.WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
+import Submission.WeilConjectures.ConstructibleSheaf.InternalHom
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTransition
 import all Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
 
 set_option autoImplicit true
@@ -30,69 +248,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Inverse image along a pro-etale chart commutes with restriction of fixed scalars.
-Source: Stacks Tag 03DA. -/
-def finitePerfectAdicPullbackRestrictComparison {Y Z : Scheme.{t}} (g : Z ⟶ Y)
-    {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S) :
-    sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q) ⋙
-        ProEtale.upperStar (ModuleCat.{t + 1} R) g ≅
-      ProEtale.upperStar (ModuleCat.{t + 1} S) g ⋙
-        sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q) :=
-  letI := ProEt.isContinuous_overPullback g
-  normalizationPullbackIso (ProEt.topology Y)
-    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) (ProEt.topology Z) q
-
-/-- The inverse-image comparison with coefficient restriction is compatible with the
-identification of inverse image along a weakly etale map with restriction.
-Source: Stacks Tags 00WX and 03DA. -/
-theorem finitePerfectAdic_pullbackRestrict_upperStarIso {Y Z : Scheme.{t}} (g : Z ⟶ Y)
-    (hg : WeaklyEtale g) {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
-    (G : Sheaf (ProEt.topology Y) (ModuleCat.{t + 1} S)) :
-    (finitePerfectAdicPullbackRestrictComparison g q).hom.app G ≫
-      (sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q)).map
-        ((ProEtale.upperStarIsoLocalizationRestriction (ModuleCat.{t + 1} S) g hg).hom.app G) =
-      (ProEtale.upperStarIsoLocalizationRestriction (ModuleCat.{t + 1} R) g hg).hom.app
-        ((sheafCompose (ProEt.topology Y)
-          (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q)).obj G) := by
-  let := ProEt.isContinuous_overPullback g
-  let adjS := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{t + 1} S) g
-  let adjR := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{t + 1} R) g
-  let adjS' := ProEtale.localizationRestrictionLowerStarAdjunction (ModuleCat.{t + 1} S) g hg
-  let adjR' := ProEtale.localizationRestrictionLowerStarAdjunction (ModuleCat.{t + 1} R) g hg
-  let ρY := sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q)
-  let ρZ := sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q)
-  have hμ : ρY.map (adjS.unit.app G) = adjR.unit.app (ρY.obj G) ≫
-      (ProEtale.lowerStar (ModuleCat.{t + 1} R) g).map ((normalizationPullbackMate
-        (ProEt.topology Y) (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g)
-        (ProEt.topology Z) q).app G) := by
-    unfold normalizationPullbackMate
-    exact (Category.comp_id _).symm.trans (unit_mateEquiv_symm
-      (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-        (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) (ModuleCat.{t + 1} S) (ProEt.topology Y)
-        (ProEt.topology Z))
-      (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-        (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) (ModuleCat.{t + 1} R) (ProEt.topology Y)
-        (ProEt.topology Z))
-      (TwoSquare.mk ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).sheafPushforwardContinuous
-          (ModuleCat.{t + 1} S) (ProEt.topology Y) (ProEt.topology Z))
-        (sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q))
-        (sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q))
-        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).sheafPushforwardContinuous
-          (ModuleCat.{t + 1} R) (ProEt.topology Y) (ProEt.topology Z)) (𝟙 _)) G)
-  have hS := Adjunction.homEquiv_leftAdjointUniq_hom_app adjS adjS' G
-  have hR := Adjunction.homEquiv_leftAdjointUniq_hom_app adjR adjR' (ρY.obj G)
-  have hU : ρY.map (adjS'.unit.app G) = adjR'.unit.app (ρY.obj G) := by
-    ext U x
-    rfl
-  apply (adjR.homEquiv _ _).injective
-  change adjR.homEquiv _ _ ((normalizationPullbackMate (ProEt.topology Y)
-      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) (ProEt.topology Z) q).app G ≫
-      ρZ.map ((adjS.leftAdjointUniq adjS').hom.app G)) =
-    adjR.homEquiv _ _ ((adjR.leftAdjointUniq adjR').hom.app (ρY.obj G))
-  rw [hR, Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_unit, ← hμ, ← hU, ← hS,
-    Adjunction.homEquiv_unit, Functor.map_comp]
-  rfl
-
 section Associated
 
 variable {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
@@ -101,39 +256,6 @@ variable {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
   {B : Type (t + 1)} [CommRing B] {R : Sheaf J RingCat.{t + 1}}
   (α : (Functor.const Cᵒᵖ).obj (RingCat.of B) ⟶ R.obj)
   [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
-
-/-- The associated module sheaf of a map, before associated sheafification. -/
-theorem finitePerfectAdicAssociated_map_unit {N N' : Sheaf J (ModuleCat.{t + 1} B)}
-    (h : N ⟶ N') :
-    toSheafify J ((ProEtale.finiteCoefficientModulePresheaf C B).obj
-        ((sheafToPresheaf J _).obj N)).presheaf ≫
-      (PresheafOfModules.toPresheaf _).map ((SheafOfModules.forget _).map
-        ((finitePerfectAdicAssociated α).map h)) =
-      (PresheafOfModules.toPresheaf _).map ((ProEtale.finiteCoefficientModulePresheaf C B).map
-        ((sheafToPresheaf J _).map h)) ≫
-        toSheafify J ((ProEtale.finiteCoefficientModulePresheaf C B).obj
-          ((sheafToPresheaf J _).obj N')).presheaf :=
-  (toSheafify_naturality J _).symm
-
-omit [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] in
-/-- The associated-sheaf scalar comparison is the identity on underlying sheaves, before
-associated sheafification. -/
-theorem finitePerfectAdicAssociatedCoherence_unit {D : Type (t + 1)} [CommRing D]
-    {S : Sheaf J RingCat.{t + 1}} (β : (Functor.const Cᵒᵖ).obj (RingCat.of D) ⟶ S.obj)
-    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
-    [Presheaf.IsLocallyInjective J β] [Presheaf.IsLocallySurjective J β]
-    (q : B →+* D) (p : R ⟶ S)
-    (h : ∀ Z : Cᵒᵖ, α.app Z ≫ p.hom.app Z = RingCat.ofHom q ≫ β.app Z)
-    (N : Sheaf J (ModuleCat.{t + 1} D)) :
-    toSheafify J ((ProEtale.finiteCoefficientModulePresheaf C B).obj ((sheafToPresheaf J _).obj
-        ((sheafCompose J (ModuleCat.restrictScalars.{t + 1} q)).obj N))).presheaf ≫
-      (PresheafOfModules.toPresheaf _).map ((SheafOfModules.forget _).map
-        ((finitePerfectAdicAssociatedCoherence α β q p h).hom.app N)) =
-      toSheafify J ((ProEtale.finiteCoefficientModulePresheaf C D).obj
-        ((sheafToPresheaf J _).obj N)).presheaf := by
-  unfold finitePerfectAdicAssociatedCoherence
-  rw [(finitePerfectAdicAssociated_coherence_existsUnique α β q p h).choose_spec.1 N]
-  exact associatedMap_unit α β q p h N
 
 end Associated
 
@@ -166,16 +288,6 @@ def finitePerfectAdicRealizationModules {Q : Type (t + 1)} [CommRing Q]
     Sheaf (ProEt.topology U.left) (ModuleCat.{t + 1} Q) ⥤ SheafOfModules.{t + 1} (T.over W) :=
   finitePerfectAdicChartSlice X V U W f Q ⋙ finitePerfectAdicAssociated αW ⋙
     SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map π)
-
-/-- The explicit scalar realization is the general one for the canonical constant scalars and
-the limit projection. -/
-theorem finitePerfectAdicScalarModules_eq {A : Type t} [CommRing A]
-    (d : AdicCoefficientDatum A) (n : ℕ) :
-    have := finitePerfectAdicSliceScalar_injective X d W n
-    have := finitePerfectAdicSliceScalar_surjective X d W n
-    finitePerfectAdicScalarModules X d V U W f n =
-      finitePerfectAdicRealizationModules X V U W f (finitePerfectAdicSliceScalar X d W n)
-        (completedAdicProjection X d n) := rfl
 
 /-- The object of the pro-etale site of `X` underlying an object of the slice at `W`, seen
 through the chart. -/
@@ -313,74 +425,7 @@ instance finitePerfectAdicChartAssociated_isIso (M : SheafOfModules.{t + 1} (�
     isIso_of_reflects_iso _ (PresheafOfModules.toPresheaf _)
   exact isIso_of_reflects_iso _ (SheafOfModules.forget _)
 
-/-- The chart comparison is natural in the module sheaf. -/
-theorem finitePerfectAdicChartAssociated_naturality {M M' : SheafOfModules.{t + 1} (𝓡 Rc)}
-    (a : M ⟶ M') :
-    (finitePerfectAdicAssociated αW).map ((finitePerfectAdicChartSlice X V U W f _).map
-        ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B)) U.hom U.prop).map
-          ((finiteCoefficientSliceRestriction X B Rc φ V).map a))) ≫
-        finitePerfectAdicChartAssociated X V U W f Rc φ αW hα M' =
-      finitePerfectAdicChartAssociated X V U W f Rc φ αW hα M ≫
-        (SheafOfModules.overFunctor (𝓡 Rc) W).map a := by
-  have := finitePerfectAdicChartModule_isIso_toSheafify X V U W f Rc φ M
-  apply (SheafOfModules.forget _).map_injective
-  apply (PresheafOfModules.toPresheaf _).map_injective
-  apply (cancel_epi (toSheafify _ _)).1
-  simp only [Functor.map_comp]
-  rw [← Category.assoc, ← Category.assoc, finitePerfectAdicChartAssociated_unit,
-    finitePerfectAdicAssociated_map_unit, Category.assoc, finitePerfectAdicChartAssociated_unit]
-  ext Z x
-  change M'.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op (a.val.app _ x) =
-    a.val.app (op Z.unop.left) (M.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op x)
-  exact (PresheafOfModules.naturality_apply a.val (finitePerfectAdicChartPoint X V U W f Z.unop).op
-    x).symm
-
 variable {T : Sheaf (ProEt.topology X) RingCat.{t + 1}} (π : T ⟶ 𝓡 Rc)
-
-/-- The scalar realization of the fixed-scalar coordinates of a module sheaf on the chart is the
-restriction of the module sheaf to `W`, with scalars restricted along `π`. -/
-def finitePerfectAdicRealizationIsoApp (M : SheafOfModules.{t + 1} (𝓡 Rc)) :
-    (finitePerfectAdicRealizationModules X V U W f αW π).obj
-        ((ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B)) U.hom).obj
-          ((finiteCoefficientSliceRestriction X B Rc φ V).obj M)) ≅
-      (SheafOfModules.overFunctor T W).obj ((SheafOfModules.restrictScalars π).obj M) :=
-  (finitePerfectAdicRealizationModules X V U W f αW π).mapIso
-      ((ProEtale.upperStarIsoLocalizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B))
-        U.hom U.prop).app ((finiteCoefficientSliceRestriction X B Rc φ V).obj M)) ≪≫
-    (SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-      π)).mapIso (asIso (finitePerfectAdicChartAssociated X V U W f Rc φ αW hα M)) ≪≫
-    Iso.refl _
-
-/-- The scalar realization of the fixed-scalar coordinates on the chart is restriction to `W`,
-with scalars restricted along `π`. -/
-def finitePerfectAdicRealizationIso :
-    finiteCoefficientSliceRestriction X B Rc φ V ⋙
-        ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B)) U.hom ⋙
-          finitePerfectAdicRealizationModules X V U W f αW π ≅
-      SheafOfModules.restrictScalars π ⋙ SheafOfModules.overFunctor T W :=
-  NatIso.ofComponents (finitePerfectAdicRealizationIsoApp X V U W f Rc φ αW hα π) (by
-    intro M M' a
-    let Rz := finitePerfectAdicRealizationModules X V U W f αW π
-    let u := ProEtale.upperStarIsoLocalizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B))
-      U.hom U.prop
-    let sR := finiteCoefficientSliceRestriction X B Rc φ V
-    let ρ := SheafOfModules.restrictScalars
-      (((ProEt.topology X).overPullback RingCat.{t + 1} W).map π)
-    have hu := u.hom.naturality (sR.map a)
-    have hs := finitePerfectAdicChartAssociated_naturality X V U W f Rc φ αW hα a
-    change Rz.map ((ProEtale.upperStar _ U.hom).map (sR.map a)) ≫
-        (Rz.map (u.hom.app (sR.obj M')) ≫
-          ρ.map (finitePerfectAdicChartAssociated X V U W f Rc φ αW hα M') ≫ 𝟙 _) =
-      (Rz.map (u.hom.app (sR.obj M)) ≫
-          ρ.map (finitePerfectAdicChartAssociated X V U W f Rc φ αW hα M) ≫ 𝟙 _) ≫
-        (SheafOfModules.overFunctor T W).map ((SheafOfModules.restrictScalars π).map a)
-    rw [← Rz.map_comp_assoc, hu, Rz.map_comp_assoc, Category.assoc]
-    congr 1
-    change ρ.map ((finitePerfectAdicAssociated αW).map
-      ((finitePerfectAdicChartSlice X V U W f _).map
-        ((ProEtale.localizationRestriction _ U.hom U.prop).map (sR.map a)))) ≫ _ = _
-    rw [← ρ.map_comp_assoc, hs, ρ.map_comp_assoc]
-    rfl)
 
 end Realization
 
@@ -436,170 +481,6 @@ variable (X : Scheme.{t}) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
         ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))
   (hδ : ∀ (U' : V.left.ProEt) x, δ.hom.app (op U') x =
     g.val.app (op (finitePerfectAdicChartObject V U')) x)
-
-set_option maxHeartbeats 1600000 in
--- The explicit square compares two presentations of the realization on the slice.
-include hps hαp hcoh hδ in
-/-- The explicit part of the realization square, after replacing inverse image by restriction:
-both composites restrict `g` to `W`. -/
-theorem finitePerfectAdicRealization_square_explicit :
-    (finitePerfectAdicRealizationModules X V U W f αW₁ π₁).map
-        ((ProEtale.localizationRestriction _ U.hom U.prop).map δ) ≫
-      coh.hom.app ((ProEtale.localizationRestriction _ U.hom U.prop).obj
-        ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)) ≫
-      (SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-        π₀)).map (finitePerfectAdicChartAssociated X V U W f Rc₀ φ₀ αW₀ hα₀ M₀) =
-    (SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-        π₁)).map (finitePerfectAdicChartAssociated X V U W f Rc₁ φ₁ αW₁ hα₁ M₁) ≫
-      (SheafOfModules.overFunctor T W).map ((SheafOfModules.restrictScalars π₁).map g ≫
-        (finitePerfectAdicRestrictComp π₁ _ π₀ hπ M₀).hom) := by
-  subst hps
-  have hR := finitePerfectAdicAssociated_map_unit αW₁ ((finitePerfectAdicChartSlice X V U W f _).map
-    ((ProEtale.localizationRestriction _ U.hom U.prop).map δ))
-  have hC := finitePerfectAdicAssociatedCoherence_unit αW₁ αW₀ (RingHom.ulift q)
-    (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map s)) hαp
-    ((finitePerfectAdicChartSlice X V U W f _).obj ((ProEtale.localizationRestriction _ U.hom
-      U.prop).obj ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)))
-  have h₀ := finitePerfectAdicChartAssociated_unit X V U W f Rc₀ φ₀ αW₀ hα₀ M₀
-  have h₁ := finitePerfectAdicChartAssociated_unit X V U W f Rc₁ φ₁ αW₁ hα₁ M₁
-  apply (SheafOfModules.forget _).map_injective
-  apply (PresheafOfModules.toPresheaf _).map_injective
-  apply (cancel_epi (toSheafify _ _)).1
-  simp only [Functor.map_comp]
-  rw [hcoh]
-  erw [reassoc_of% hR]
-  have hC' : toSheafify ((ProEt.topology X).over W)
-      ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₁)).obj
-        ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₁))).obj
-          ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₁)).obj
-            ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₁)) U.hom
-              U.prop).obj
-              ((sheafCompose (ProEt.topology V.left)
-                (ModuleCat.restrictScalars.{t + 1} (RingHom.ulift.{t + 1, t + 1} q))).obj
-                  ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)))))).presheaf ≫
-      (PresheafOfModules.toPresheaf _).map ((SheafOfModules.forget _).map
-        ((finitePerfectAdicAssociatedCoherence αW₁ αW₀ (RingHom.ulift.{t + 1, t + 1} q)
-          (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-            ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map
-              s)) hαp).hom.app
-          ((finitePerfectAdicChartSlice X V U W f _).obj ((ProEtale.localizationRestriction _ U.hom
-            U.prop).obj ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))))) =
-      toSheafify ((ProEt.topology X).over W)
-        ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₀)).obj
-          ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₀))).obj
-            ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₀)).obj
-              ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₀)) U.hom
-                U.prop).obj
-                ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))))).presheaf := hC
-  rw [reassoc_of% hC']
-  have h₀' : toSheafify ((ProEt.topology X).over W)
-      ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₀)).obj
-        ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₀))).obj
-          ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₀)).obj
-            ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₀)) U.hom
-              U.prop).obj ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))))).presheaf ≫
-      (PresheafOfModules.toPresheaf (T.over W).obj).map ((SheafOfModules.forget (T.over W)).map
-        ((SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-          π₀)).map (finitePerfectAdicChartAssociated X V U W f Rc₀ φ₀ αW₀ hα₀ M₀))) =
-      (PresheafOfModules.toPresheaf _).map
-        (finitePerfectAdicChartRestriction X V U W f Rc₀ φ₀ αW₀ hα₀ M₀) := h₀
-  have h₁' : toSheafify ((ProEt.topology X).over W)
-      ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₁)).obj
-        ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₁))).obj
-          ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₁)).obj
-            ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₁)) U.hom
-              U.prop).obj ((finiteCoefficientSliceRestriction X B₁ Rc₁ φ₁ V).obj M₁))))).presheaf ≫
-      (PresheafOfModules.toPresheaf (T.over W).obj).map ((SheafOfModules.forget (T.over W)).map
-        ((SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-          π₁)).map (finitePerfectAdicChartAssociated X V U W f Rc₁ φ₁ αW₁ hα₁ M₁))) =
-      (PresheafOfModules.toPresheaf _).map
-        (finitePerfectAdicChartRestriction X V U W f Rc₁ φ₁ αW₁ hα₁ M₁) := h₁
-  rw [h₀', reassoc_of% h₁']
-  ext Z x
-  change M₀.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op
-      (δ.hom.app (op ((MorphismProperty.Over.map ⊤ U.prop).obj
-        ((MorphismProperty.Over.map ⊤ (finitePerfectAdicChartArrow_weaklyEtale V U W f)).obj
-          ((ProEt.sliceEquiv X W).functor.obj Z.unop)))) x) =
-    g.val.app (op Z.unop.left) (M₁.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op x)
-  rw [hδ]
-  exact (PresheafOfModules.naturality_apply g.val (finitePerfectAdicChartPoint X V U W f Z.unop).op
-    x).symm
-
-set_option maxHeartbeats 1600000 in
--- Unfolding the realization isomorphisms requires unifying two presentations of the slice.
-include hps hαp hcoh hδ in
-/-- The scalar realizations of consecutive fixed-scalar coordinates carry a semilinear map of
-coordinates induced by `g` to the restriction of `g` to `W`, compatibly with the inverse-image
-comparison and the ordinary scalar compositor. -/
-theorem finitePerfectAdicRealization_square :
-    (finitePerfectAdicRealizationModules X V U W f αW₁ π₁).map
-        ((ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B₁)) U.hom).map δ ≫
-          (finitePerfectAdicPullbackRestrictComparison U.hom
-            (RingHom.ulift.{t + 1, t + 1} q)).hom.app
-            ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)) ≫
-      coh.hom.app ((ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B₀)) U.hom).obj
-        ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)) ≫
-      (finitePerfectAdicRealizationIso X V U W f Rc₀ φ₀ αW₀ hα₀ π₀).hom.app M₀ =
-    (finitePerfectAdicRealizationIso X V U W f Rc₁ φ₁ αW₁ hα₁ π₁).hom.app M₁ ≫
-      (SheafOfModules.overFunctor T W).map ((SheafOfModules.restrictScalars π₁).map g ≫
-        (finitePerfectAdicRestrictComp π₁ _ π₀ hπ M₀).hom) := by
-  let u₁ := ProEtale.upperStarIsoLocalizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₁))
-    U.hom U.prop
-  let u₀ := ProEtale.upperStarIsoLocalizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₀))
-    U.hom U.prop
-  let Rz₁ := finitePerfectAdicRealizationModules X V U W f αW₁ π₁
-  let Rz₀ := finitePerfectAdicRealizationModules X V U W f αW₀ π₀
-  let G₀ := (finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀
-  let ρ₁ := SheafOfModules.restrictScalars
-    (((ProEt.topology X).overPullback RingCat.{t + 1} W).map π₁)
-  let ρ₀ := SheafOfModules.restrictScalars
-    (((ProEt.topology X).overPullback RingCat.{t + 1} W).map π₀)
-  have hL1 : (finitePerfectAdicPullbackRestrictComparison U.hom
-      (RingHom.ulift.{t + 1, t + 1} q)).hom.app G₀ ≫
-      (sheafCompose (ProEt.topology U.left)
-        (ModuleCat.restrictScalars.{t + 1} (RingHom.ulift.{t + 1, t + 1} q))).map (u₀.hom.app G₀) =
-      u₁.hom.app ((sheafCompose (ProEt.topology V.left)
-        (ModuleCat.restrictScalars.{t + 1} (RingHom.ulift.{t + 1, t + 1} q))).obj G₀) :=
-    finitePerfectAdic_pullbackRestrict_upperStarIso U.hom U.prop _ G₀
-  have hn := coh.hom.naturality (u₀.hom.app G₀)
-  have hu := u₁.hom.naturality δ
-  have hE := finitePerfectAdicRealization_square_explicit X V U W f q s φ₁ φ₀ αW₁ αW₀ hα₁ hα₀
-    p hps hαp π₁ π₀ hπ coh hcoh g δ hδ
-  change Rz₁.map ((ProEtale.upperStar _ U.hom).map δ ≫
-      (finitePerfectAdicPullbackRestrictComparison U.hom
-            (RingHom.ulift.{t + 1, t + 1} q)).hom.app G₀) ≫
-      coh.hom.app ((ProEtale.upperStar _ U.hom).obj G₀) ≫
-      (Rz₀.map (u₀.hom.app G₀) ≫
-        ρ₀.map (finitePerfectAdicChartAssociated X V U W f Rc₀ φ₀ αW₀ hα₀ M₀) ≫ 𝟙 _) =
-    (Rz₁.map (u₁.hom.app _) ≫
-        ρ₁.map (finitePerfectAdicChartAssociated X V U W f Rc₁ φ₁ αW₁ hα₁ M₁) ≫ 𝟙 _) ≫ _
-  simp only [Category.comp_id, Category.assoc]
-  rw [← reassoc_of% hn, ← Rz₁.map_comp_assoc, Category.assoc, hL1, hu, Rz₁.map_comp_assoc, hE]
-
-include hps hαp hcoh hδ in
-/-- The realization square, composed with identifications of the restrictions of the module
-sheaves and a compatible map between them. -/
-theorem finitePerfectAdicRealization_square_comp {Y₁ Y₀ : SheafOfModules.{t + 1} T}
-    (C₁ : (SheafOfModules.restrictScalars π₁).obj M₁ ≅ Y₁)
-    (C₀ : (SheafOfModules.restrictScalars π₀).obj M₀ ≅ Y₀) (τ : Y₁ ⟶ Y₀)
-    (hC : (SheafOfModules.restrictScalars π₁).map g ≫
-        (finitePerfectAdicRestrictComp π₁ _ π₀ hπ M₀).hom ≫ C₀.hom = C₁.hom ≫ τ) :
-    (finitePerfectAdicRealizationModules X V U W f αW₁ π₁).map
-        ((ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B₁)) U.hom).map δ ≫
-          (finitePerfectAdicPullbackRestrictComparison U.hom
-            (RingHom.ulift.{t + 1, t + 1} q)).hom.app
-            ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)) ≫
-      coh.hom.app ((ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B₀)) U.hom).obj
-        ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)) ≫
-      (finitePerfectAdicRealizationIso X V U W f Rc₀ φ₀ αW₀ hα₀ π₀).hom.app M₀ ≫
-        (SheafOfModules.overFunctor T W).map C₀.hom =
-    ((finitePerfectAdicRealizationIso X V U W f Rc₁ φ₁ αW₁ hα₁ π₁).hom.app M₁ ≫
-        (SheafOfModules.overFunctor T W).map C₁.hom) ≫
-      (SheafOfModules.overFunctor T W).map τ := by
-  have h := finitePerfectAdicRealization_square X V U W f q s φ₁ φ₀ αW₁ αW₀ hα₁ hα₀ p hps hαp
-    π₁ π₀ hπ coh hcoh g δ hδ
-  rw [reassoc_of% h, Category.assoc, ← Functor.map_comp, ← Functor.map_comp, Category.assoc, hC]
 
 end Square
 

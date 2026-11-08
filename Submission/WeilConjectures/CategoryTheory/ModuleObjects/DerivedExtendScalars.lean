@@ -179,15 +179,6 @@ instance preservesKFlatQuasiIso : (extendScalars φ).PreservesKFlatQuasiIso := b
   intro n
   exact (ShortComplex.exact_map_iff_of_faithful _ (forget S)).1 (he n)
 
-open scoped CategoryTheory.Functor in
-/-- The derived extension of scalars `S ⊗ᴸ_R - : D(Mod_R(C)) ⥤ D(Mod_S(C))`, the total left
-derived functor of `S ⊗_R -`, computed on K-flat resolutions.
-
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`, written
-`L(-)`, applied to `Mod.extendScalars φ`. -/
-noncomputable example : DerivedCategory (Mod C R) ⥤ DerivedCategory (Mod C S) :=
-  L(extendScalars φ)
-
 /-- The derived adjunction `S ⊗ᴸ_R - ⊣ R(comap φ)` between the derived extension of scalars
 and the right derived functor of restriction of scalars. -/
 noncomputable def derivedExtendRestrictAdjunction :

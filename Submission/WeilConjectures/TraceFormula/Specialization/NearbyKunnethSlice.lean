@@ -7,7 +7,25 @@ module
 
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
-public import Submission.WeilConjectures.TraceFormula.Specialization.SliceSupport
+public import Submission.WeilConjectures.AlgebraicGeometry.ClosedPointsFiberProduct
+public import Submission.WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import Submission.WeilConjectures.AlgebraicGeometry.AffineLineConstructible
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCover
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
+public import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import Submission.WeilConjectures.ConstructibleSheaf.StalkZeroLocus
+public import Submission.WeilConjectures.Mathlib.Topology.Constructible
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
+public import Submission.WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import Submission.WeilConjectures.TraceFormula.Specialization.TraitSlice
 
 set_option autoImplicit true
@@ -85,12 +103,6 @@ lemma specialCoordinate_map (hM : M.IsTraitModelOver q g) {n : Type u}
     (b : M.total ⟶ 𝔸(n; trait k')) (hb : b ≫ 𝔸(n; trait k') ↘ trait k' = q) :
     specialCoordinate hM b hb ≫ AffineSpace.map n (traitClosedPoint k') = M.i ≫ b :=
   (AffineSpace.isPullback_map (n := n) (traitClosedPoint k')).lift_fst _ _ _
-
-@[reassoc (attr := simp)]
-lemma specialCoordinate_over (hM : M.IsTraitModelOver q g) {n : Type u}
-    (b : M.total ⟶ 𝔸(n; trait k')) (hb : b ≫ 𝔸(n; trait k') ↘ trait k' = q) :
-    specialCoordinate hM b hb ≫ 𝔸(n; Spec (.of k')) ↘ Spec (.of k') = X'.hom :=
-  (AffineSpace.isPullback_map (n := n) (traitClosedPoint k')).lift_snd _ _ _
 
 /-- The inclusion of the special fibre of a model of finite type over the trait is a closed
 immersion: it is a base change of the closed immersion of the closed point of the trait. -/

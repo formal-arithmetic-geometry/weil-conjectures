@@ -158,10 +158,6 @@ lemma isOpen_germEqLocus {V₁ V₂ : X.Etale} (s₁ : F.obj.obj (op V₁)) (s�
   exact ⟨Set.range W.hom, fun _ ⟨w', hw'⟩ ↦ ⟨W, a₁, a₂, w', hw', h⟩,
     W.hom.isOpenMap.isOpen_range, ⟨w, rfl⟩⟩
 
-lemma range_subset_germEqLocus_self {V : X.Etale} (s : F.obj.obj (op V)) :
-    Set.range V.hom ⊆ germEqLocus F s s :=
-  fun _ ⟨w, hw⟩ ↦ ⟨V, 𝟙 V, 𝟙 V, w, hw, rfl⟩
-
 lemma germEqLocus_symm {V₁ V₂ : X.Etale} (s₁ : F.obj.obj (op V₁)) (s₂ : F.obj.obj (op V₂)) :
     germEqLocus F s₁ s₂ ⊆ germEqLocus F s₂ s₁ :=
   fun _ ⟨W, a₁, a₂, w, hw, h⟩ ↦ ⟨W, a₂, a₁, w, hw, h.symm⟩

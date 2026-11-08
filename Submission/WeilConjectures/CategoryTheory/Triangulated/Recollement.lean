@@ -268,17 +268,6 @@ lemma exists_triangleHom (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {K K' : C} (
   · rw [τ.comm₂, hτ]
     exact (adj.unit_naturality φ).symm
 
-omit [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
-include adj' in
-/-- **A morphism of supported localization triangles is determined by its middle component.** -/
-lemma triangleHom_ext (h₀ : ∀ M, IsZero (jUp.obj (i.obj M))) {K K' : C} {w w'}
-    (hw : triangle adj adj' K w ∈ distTriang C) (hw' : triangle adj adj' K' w' ∈ distTriang C)
-    {τ τ' : triangle adj adj' K w ⟶ triangle adj adj' K' w'} (h : τ.hom₂ = τ'.hom₂) :
-    τ = τ' :=
-  have : Subsingleton ((triangle adj adj' K w).obj₁⟦(1 : ℤ)⟧ ⟶ (triangle adj adj' K' w').obj₃) :=
-    subsingleton_hom_shift i jUp adj h₀ _ _ 1
-  triangleHom_ext_of_subsingleton hw hw' h
-
 omit [Preadditive C] [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
   [HasZeroObject U] [Pretriangulated U] [jUp.IsTriangulated] in
 include adj in

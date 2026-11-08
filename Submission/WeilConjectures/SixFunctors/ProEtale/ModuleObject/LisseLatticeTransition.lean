@@ -187,13 +187,6 @@ end RegularIso
 
 section Congr
 
-/-- The inverse of a congruence isomorphism is a congruence isomorphism. -/
-lemma upperStarCongr_inv_app {X Z : Scheme.{u}} {x y : X ⟶ Z} (p : x = y) (q : y = x)
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
-    (upperStarCongr Λ p).inv.app M = (upperStarCongr Λ q).hom.app M := by
-  subst p
-  rfl
-
 /-- The pullback of a congruence isomorphism is a congruence isomorphism. -/
 lemma upperStarComp_inv_app_comp_congr_comp_hom_app {Q X Z : Scheme.{u}} (c : Q ⟶ X)
     {x y : X ⟶ Z} (p : x = y) (p' : c ≫ x = c ≫ y)
@@ -281,21 +274,6 @@ lemma frameTransition_self (a : W ⟶ V) (h : a ≫ f = a ≫ f) :
   rw [upperStarCongr_hom_app_self, Category.id_comp, Iso.inv_hom_id_app_assoc,
     ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
     Iso.inv_hom_id]
-
-/-- Transition morphisms only depend on the morphisms. -/
-lemma frameTransition_congr {a a₁ : W ⟶ V} {b b₁ : W ⟶ V'} (ha : a = a₁) (hb : b = b₁)
-    (h : a ≫ f = b ≫ f') (h₁ : a₁ ≫ f = b₁ ≫ f') :
-    (upperStarFiniteFreeIso Λ a n).inv ≫ (a)^*⟦Λ⟧.map e.hom ≫
-        (upperStarComp Λ a f).inv.app L ≫ (upperStarCongr Λ h).hom.app L ≫
-        (upperStarComp Λ b f').hom.app L ≫ (b)^*⟦Λ⟧.map e'.inv ≫
-        (upperStarFiniteFreeIso Λ b n').hom =
-      (upperStarFiniteFreeIso Λ a₁ n).inv ≫ (a₁)^*⟦Λ⟧.map e.hom ≫
-        (upperStarComp Λ a₁ f).inv.app L ≫ (upperStarCongr Λ h₁).hom.app L ≫
-        (upperStarComp Λ b₁ f').hom.app L ≫ (b₁)^*⟦Λ⟧.map e'.inv ≫
-        (upperStarFiniteFreeIso Λ b₁ n').hom := by
-  subst ha hb
-  obtain rfl : h = h₁ := rfl
-  rfl
 
 /-- The pullback of a trivialisation along a composite. -/
 lemma upperStarFrame_comp {Q : Scheme.{u}} (c : Q ⟶ W) (a : W ⟶ V) :

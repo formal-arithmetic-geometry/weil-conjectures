@@ -114,7 +114,9 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.Algebra.Module.FinitePresentation
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantSheafStalk
-import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
+import Mathlib.CategoryTheory.Abelian.RightDerived
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 set_option autoImplicit true

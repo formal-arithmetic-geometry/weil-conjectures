@@ -87,11 +87,6 @@ noncomputable def geometricFrobeniusPowFixedField (N : ℕ) :
       rw [map_inv₀]
       exact congrArg (·⁻¹) hy)
 
-lemma mem_geometricFrobeniusPowFixedField {N : ℕ} {y : AlgebraicClosure k} :
-    y ∈ geometricFrobeniusPowFixedField k N ↔
-      ((geometricFrobenius k (AlgebraicClosure k)) ^ N) y = y :=
-  Iff.rfl
-
 /-- The field fixed by a positive power of the geometric Frobenius is finite. -/
 lemma finite_geometricFrobeniusPowFixedField {N : ℕ} (hN : N ≠ 0) :
     Finite (geometricFrobeniusPowFixedField k N) := by

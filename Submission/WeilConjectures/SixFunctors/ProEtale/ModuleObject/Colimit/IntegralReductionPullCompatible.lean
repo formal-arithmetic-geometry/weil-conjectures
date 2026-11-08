@@ -90,14 +90,6 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction' :
   isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_compatible ℓ E n d
     (integersModPowPullUnitCompatible ℓ E n d.left) (integersModPowPullδCompatible ℓ E n d.left)
 
-/-- **Reduction modulo `ℓⁿ` commutes with the proper pushforward on bounded constructible
-complexes** (blueprint `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`):
-`Rg_* ⋙ red_Y ⟶ red_Z ⋙ Rg_*` is an isomorphism for a proper morphism `g`. -/
-theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isProper
-    (g : Z ⟶ Y) [IsProper g.left] :
-    IsIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n g) :=
-  isIso_boundedConstructibleLowerStarIntegersModPowReduction' ℓ E n g
-
 end BoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing

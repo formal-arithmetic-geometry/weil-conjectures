@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleOperations

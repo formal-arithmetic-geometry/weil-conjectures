@@ -76,12 +76,6 @@ noncomputable def pullbackSectionAddHom (W : X.Opens) :
   map_zero' := map_zero (((pullbackPushforwardAdjunction g').unit.app ℱ).app W).hom
   map_add' m m' := pullbackSection_add g' (M := ℱ) (U := W) m m'
 
-omit [Algebra Γ(S, ⊤) Γ(T, ⊤)] in
-lemma pullbackSectionAddHom_apply (W : X.Opens) (m : sectionsModule f ℱ W) :
-    pullbackSectionAddHom (f := f) (f' := f') (g' := g') ℱ W m =
-      pullbackSection (M := ℱ) (U := W) g' m :=
-  rfl
-
 include H hg in
 lemma pullbackSectionAddHom_smul (W : X.Opens) (a : Γ(S, ⊤)) (m : sectionsModule f ℱ W) :
     pullbackSectionAddHom (f := f) (f' := f') (g' := g') ℱ W (a • m) =

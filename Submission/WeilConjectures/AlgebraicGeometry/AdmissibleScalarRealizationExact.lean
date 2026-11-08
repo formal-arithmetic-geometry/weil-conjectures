@@ -66,27 +66,6 @@ open FiniteConstantModel
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
-/-- Restrict the actual realized module sheaf to the localized site over `U`.
-Source: Stacks 00Y0, localization, and 093J, constant modules
-(auxiliary; not a blueprint node). -/
-def localizedModel (T : Scheme.{u}) (U : T.ProEt) :=
-  modelFunctor A T ⋙
-    InternalAbelianSheafModule.sectionModuleFunctor (Scheme.ProEt.topology T)
-      (condensedRingObj (Profinite.continuousCoefficientRingObj A) T) ⋙
-    SheafOfModules.overFunctor _ U
-
-/-- Noetherian scalars, additive exact realization on all scalar modules, and the same
-assertion for the actual restricted coefficient sheaf on every localized site.
-Source: Stacks 093J and 093M and the field split-sequence argument
-(auxiliary; not a blueprint node). -/
-def ScalarAssertions (T : Scheme.{u}) : Prop :=
-  IsNoetherianRing A ∧ (modelFunctor A T).Additive ∧
-    PreservesFiniteLimits (modelFunctor A T) ∧
-    PreservesFiniteColimits (modelFunctor A T) ∧
-    ∀ U : T.ProEt, (localizedModel A T U).Additive ∧
-      PreservesFiniteLimits (localizedModel A T U) ∧
-      PreservesFiniteColimits (localizedModel A T U)
-
 /-- The actual completed coefficient assertion: an isomorphism of ring sheaves with the
 positive constant quotient tower, and flatness over constant scalars on all sheaf modules,
 also on every localized site. Here `p` is the specified uniformizer.

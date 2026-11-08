@@ -100,9 +100,6 @@ noncomputable def freeComplex (D : ∀ n : ℤ, Matrix (ι (n + 1)) (ι n) Γ(Y,
 
 variable (D : ∀ n : ℤ, Matrix (ι (n + 1)) (ι n) Γ(Y, ⊤)) (hD : ∀ n, D (n + 1) * D n = 0)
 
-lemma freeComplex_X (n : ℤ) : (freeComplex D hD).X n = free (R := Y.ringCatSheaf) (ι n) :=
-  rfl
-
 lemma freeComplex_d (n : ℤ) : (freeComplex D hD).d n (n + 1) = freeHomOfMatrix (D n) :=
   CochainComplex.of_d (fun n ↦ free (R := Y.ringCatSheaf) (ι n)) (fun n ↦ freeHomOfMatrix (D n)) n
 
@@ -155,11 +152,5 @@ noncomputable def freeComplexHom (K : CochainComplex Y.Modules ℕ)
     rw [Category.assoc, ιFree_freeHomOfSections, Hom.comp_app, ConcreteCategory.comp_apply,
       smulHom_app_apply, homOfGlobalSection_app, presheaf_map_id_apply]
     rw [smul_eq_mul, mul_one, Scheme.presheaf_map_id_apply]
-
-lemma freeComplexHom_f (K : CochainComplex Y.Modules ℕ) (c : ∀ k : ℕ, ι k → Γ(K.X k, ⊤))
-    (hc : ∀ (k : ℕ) (i : ι k), (K.d k (k + 1)).app ⊤ (c k i) =
-      ∑ j : ι ((k : ℤ) + 1), D k j i • c (k + 1) j) (k : ℕ) :
-    (freeComplexHom D hD K c hc).f k = freeHomOfSections (K.X k) (c k) :=
-  rfl
 
 end AlgebraicGeometry.Scheme.Modules

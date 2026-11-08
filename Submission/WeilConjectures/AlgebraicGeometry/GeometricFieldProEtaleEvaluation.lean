@@ -140,18 +140,6 @@ noncomputable def geometricFieldInverseImageComp {X Y Z : Scheme.{u}}
       D (Scheme.ProEt.topology Z) (Scheme.ProEt.topology Y)
       (Scheme.ProEt.topology X)).symm).symm
 
-/-- The identity inverse-image comparison, as the adjunction conjugate of the canonical
-identity direct-image comparison. Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
-noncomputable def geometricFieldInverseImageIdentity (X : Scheme.{u})
-    (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
-    [HasWeakSheafify (Scheme.ProEt.topology X) D] :
-    Scheme.proEtaleSheafInverseImage (𝟙 X) D ≅ 𝟭 _ :=
-  (conjugateIsoEquiv Adjunction.id (Scheme.proEtaleSheafAdjunction (𝟙 X) D)).symm
-    (Functor.sheafPushforwardContinuousId'
-      (MorphismProperty.Over.pullbackId (P := @WeaklyEtale) (Q := ⊤) X)
-      D (Scheme.ProEt.topology X)).symm
-
 /-- Restriction of modules uses the same profinite test objects and the identity scalar
 map, so it is restriction of both the sections and their ring action.
 Source: Bhatt--Scholze, Example 4.2.11

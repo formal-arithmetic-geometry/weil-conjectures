@@ -12,7 +12,20 @@ public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPr
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Pairing
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
@@ -130,40 +143,6 @@ lemma frobeniusOperator_apply {M : DerivedCategoryModule Λ Y}
       (leftDerivedUpperStarUnitIso _ h).inv ≫ (L((h)^*[ModuleCat.{u + 1} Λ])).map x ≫ ψ :=
   rfl
 
-/-- The Frobenius operator of the canonical datum `ε : Lh^* Λ_Y ≅ Λ_Y` fixes the scalars
-`c • 𝟙` of `End(Λ_Y)`. -/
-lemma frobeniusOperator_unit_smul_id (c : Λ) :
-    frobeniusOperator h (leftDerivedUpperStarUnitIso _ h).hom
-      (c • 𝟙 (𝟙_ (DerivedCategoryModule Λ Y))) = c • 𝟙 _ := by
-  rw [frobeniusOperator_apply, Functor.map_smul, CategoryTheory.Functor.map_id, Linear.smul_comp,
-    Linear.comp_smul, Category.id_comp, Iso.inv_hom_id]
-
-/-- If every endomorphism of `Λ_Y` is a scalar, as for `Y` the spectrum of a separably closed
-field, then the Frobenius operator of the canonical datum on `End(Λ_Y) = Λ` is the identity:
-geometric Frobenius acts trivially on the coefficient ring. -/
-lemma frobeniusOperator_unit_eq_self
-    (hY : ∀ v : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ 𝟙_ _, ∃ c : Λ, v = c • 𝟙 _)
-    (v : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ 𝟙_ _) :
-    frobeniusOperator h (leftDerivedUpperStarUnitIso _ h).hom v = v := by
-  obtain ⟨c, rfl⟩ := hY v
-  exact frobeniusOperator_unit_smul_id h c
-
-/-- The Frobenius operator of a shifted datum `ψ[n]` with `n = 0` is that of `ψ`, read
-through `M[n] ≅ M`. -/
-lemma frobeniusOperator_shiftWeilDatum_comp_shiftFunctorZero' {M : DerivedCategoryModule Λ Y}
-    (ψ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) (n : ℤ) (hn : n = 0)
-    (x : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ M⟦n⟧) :
-    frobeniusOperator h (shiftWeilDatum h ψ n) x ≫
-        (shiftFunctorZero' (DerivedCategoryModule Λ Y) n hn).hom.app M =
-      frobeniusOperator h ψ
-        (x ≫ (shiftFunctorZero' (DerivedCategoryModule Λ Y) n hn).hom.app M) := by
-  rw [frobeniusOperator_apply, frobeniusOperator_apply, shiftWeilDatum,
-    Functor.commShiftIso_zero' _ ℤ n hn]
-  have := (shiftFunctorZero' (DerivedCategoryModule Λ Y) n hn).hom.naturality ψ
-  simp only [Functor.id_map] at this
-  simp only [Functor.CommShift.isoZero'_hom_app, Category.assoc, Functor.map_comp, this,
-    Iso.inv_hom_id_app_assoc]
-
 /-- The Frobenius operator of a doubly shifted datum `(ψ[a])[b]` is that of `ψ[c]`,
 `a + b = c`, read through `M[c] ≅ (M[a])[b]`. -/
 lemma frobeniusOperator_shiftWeilDatum_comp_shiftFunctorAdd' {M : DerivedCategoryModule Λ Y}
@@ -207,29 +186,10 @@ variable {h} {M N P : DerivedCategoryModule Λ Y}
   {ψN : (L((h)^*[ModuleCat.{u + 1} Λ])).obj N ⟶ N}
   {ψP : (L((h)^*[ModuleCat.{u + 1} Λ])).obj P ⟶ P}
 
-lemma IsWeilMorphism.of_eq {f f' : M ⟶ N} (hf : IsWeilMorphism h ψM ψN f) (e : f = f') :
-    IsWeilMorphism h ψM ψN f' :=
-  e ▸ hf
-
 lemma IsWeilMorphism.comp {f : M ⟶ N} {f' : N ⟶ P} (hf : IsWeilMorphism h ψM ψN f)
     (hf' : IsWeilMorphism h ψN ψP f') : IsWeilMorphism h ψM ψP (f ≫ f') := by
   unfold IsWeilMorphism at *
   rw [Functor.map_comp, Category.assoc, hf', reassoc_of% hf]
-
-/-- A morphism of Weil objects intertwines the Frobenius operators. -/
-lemma IsWeilMorphism.frobeniusOperator_comp {f : M ⟶ N} (hf : IsWeilMorphism h ψM ψN f)
-    (x : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ M) :
-    frobeniusOperator h ψN (x ≫ f) = frobeniusOperator h ψM x ≫ f := by
-  rw [frobeniusOperator_apply, frobeniusOperator_apply, Functor.map_comp, Category.assoc,
-    hf]
-  simp only [Category.assoc]
-
-/-- A morphism of Weil objects stays one after shifting. -/
-lemma IsWeilMorphism.shift {f : M ⟶ N} (hf : IsWeilMorphism h ψM ψN f) (n : ℤ) :
-    IsWeilMorphism h (shiftWeilDatum h ψM n) (shiftWeilDatum h ψN n) (f⟦n⟧') := by
-  unfold IsWeilMorphism shiftWeilDatum at *
-  rw [← Category.assoc, Functor.commShiftIso_hom_naturality, Category.assoc,
-    ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
 
 lemma IsWeilPairing.comp {A B : DerivedCategoryModule Λ Y}
     {ψA : (L((h)^*[ModuleCat.{u + 1} Λ])).obj A ⟶ A}
@@ -237,17 +197,6 @@ lemma IsWeilPairing.comp {A B : DerivedCategoryModule Λ Y}
     {Q : ((derivedTensor _ Y).obj A).obj B ⟶ M} (hQ : IsWeilPairing h ψA ψB ψM Q)
     {f : M ⟶ N} (hf : IsWeilMorphism h ψM ψN f) : IsWeilPairing h ψA ψB ψN (Q ≫ f) :=
   IsWeilMorphism.comp hQ hf
-
-/-- Shifting the second factor of a Weil pairing: if `Q : A ⊗ᴸ B ⟶ C` is a Weil pairing, then
-so is `A ⊗ᴸ B[n] ≅ (A ⊗ᴸ B)[n] ⟶ C[n]`, for the shifted data. This is the compatibility of
-the tensor isomorphism of `Lh^*` with the shift isomorphisms. -/
-lemma IsWeilPairing.shift_right {A B : DerivedCategoryModule Λ Y}
-    {ψA : (L((h)^*[ModuleCat.{u + 1} Λ])).obj A ⟶ A}
-    {ψB : (L((h)^*[ModuleCat.{u + 1} Λ])).obj B ⟶ B}
-    {Q : ((derivedTensor _ Y).obj A).obj B ⟶ M} (hQ : IsWeilPairing h ψA ψB ψM Q) (n : ℤ) :
-    IsWeilPairing h ψA (shiftWeilDatum h ψB n) (shiftWeilDatum h ψM n)
-      ((((derivedTensor _ Y).obj A).commShiftIso n).hom.app B ≫ Q⟦n⟧') :=
-  leftDerivedUpperStarTensorIso_shift_right_comm _ h ψA ψB ψM Q hQ n
 
 /-- The *degreewise pairing* of a pairing `Q : A ⊗ᴸ B ⟶ C`,
 `Hom(Λ_Y, A[i]) × Hom(Λ_Y, B[j]) ⟶ Hom(Λ_Y, C[i + j])`,
@@ -279,14 +228,6 @@ lemma degreewisePairing_apply {A B C : DerivedCategoryModule Λ Y}
       ((derivedTensor _ Y).flip.obj (𝟙_ _)).map x ≫ ((derivedTensor _ Y).obj (A⟦i⟧)).map y ≫
         (derivedTensorShiftIso _ A B i j).hom ≫ Q⟦i + j⟧' :=
   rfl
-
-/-- The degreewise pairing of a pairing followed by a morphism. -/
-lemma degreewisePairing_comp {A B C : DerivedCategoryModule Λ Y}
-    (Q : ((derivedTensor _ Y).obj A).obj B ⟶ C) {C' : DerivedCategoryModule Λ Y} (f : C ⟶ C')
-    (i j : ℤ) (x : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ A⟦i⟧)
-    (y : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ B⟦j⟧) :
-    degreewisePairing (Q ≫ f) i j x y = degreewisePairing Q i j x y ≫ f⟦i + j⟧' := by
-  simp [degreewisePairing_apply]
 
 /-- **The degreewise pairing of a Weil pairing is Frobenius equivariant**: for a Weil pairing
 `Q : A ⊗ᴸ B ⟶ C`, `x ∈ Hom(Λ_Y, A[i])` and `y ∈ Hom(Λ_Y, B[j])`,
@@ -339,50 +280,6 @@ noncomputable def lowerStarWeilDatum (sq : CommSq g a a h) {M : DerivedCategoryM
 variable {K L : DerivedCategoryModule Λ X}
   {φK : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K}
   {φL : (L((g)^*[ModuleCat.{u + 1} Λ])).obj L ⟶ L}
-
-/-- `Ra_!` carries morphisms of Weil objects to morphisms of Weil objects, by naturality of the
-exchange map. -/
-lemma IsWeilMorphism.rightDerivedLowerShriek_map [QuasiCompact a] (sq : IsPullback g a a h)
-    {f : K ⟶ L} (hf : IsWeilMorphism g φK φL f) :
-    IsWeilMorphism h (lowerShriekWeilDatum sq φK) (lowerShriekWeilDatum sq φL)
-      ((R(a)_![ModuleCat.{u + 1} Λ]).map f) := by
-  have := (rightDerivedLowerShriekBaseChangeMap Λ sq).naturality f
-  simp only [Functor.comp_map] at this
-  unfold IsWeilMorphism lowerShriekWeilDatum at *
-  rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
-
-omit [Finite Λ] [HasCompactification a] in
-/-- `Ra_*` carries morphisms of Weil objects to morphisms of Weil objects, by naturality of the
-exchange map. -/
-lemma IsWeilMorphism.rightDerivedLowerStar_map (sq : CommSq g a a h) {f : K ⟶ L}
-    (hf : IsWeilMorphism g φK φL f) :
-    IsWeilMorphism h (lowerStarWeilDatum sq φK) (lowerStarWeilDatum sq φL)
-      ((R((a)_*[ModuleCat.{u + 1} Λ])).map f) := by
-  have := (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).naturality f
-  simp only [Functor.comp_map] at this
-  unfold IsWeilMorphism lowerStarWeilDatum at *
-  rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
-
-/-- The shift compatibility `(Ra_! K)[n] ≅ Ra_!(K[n])` is a morphism of Weil objects, for the
-data `(Ra_! φ)[n]` and `Ra_!(φ[n])`. This is the compatibility of the exchange map `Ex_!` with
-the shifts. -/
-lemma isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv [QuasiCompact a]
-    (sq : IsPullback g a a h) (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) (n : ℤ) :
-    IsWeilMorphism h (shiftWeilDatum h (lowerShriekWeilDatum sq φ) n)
-      (lowerShriekWeilDatum sq (shiftWeilDatum g φ n))
-      (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.app K) := by
-  have hEx := NatTrans.shift_app_comm (rightDerivedLowerShriekBaseChangeMap (X' := X) (Y' := Y)
-    (g' := g) (f' := a) (f := a) (g := h) Λ sq) n K
-  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at hEx
-  have h' := ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.naturality φ
-  dsimp at h'
-  unfold IsWeilMorphism shiftWeilDatum lowerShriekWeilDatum
-  rw [← cancel_epi ((L((h)^*[ModuleCat.{u + 1} Λ])).map
-    (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).hom.app K))]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hEx, h', Iso.hom_inv_id_app_assoc]
 
 /-- Blueprint `lem-fix-weil-operations` (the cup product part).
 

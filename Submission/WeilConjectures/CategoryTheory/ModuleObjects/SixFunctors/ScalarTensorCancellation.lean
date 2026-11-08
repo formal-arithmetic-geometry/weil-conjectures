@@ -104,127 +104,12 @@ private def cancellationBimodIso (M : Mod C R) {A : Mon C}
   (Bimod.associatorBimod P (Bimod.ofMonHom φ) (toBimodObj R M)).symm ≪≫
     (bimodTensorRight (toBimodObj R M)).mapIso (restrictRightUnitIso φ P)
 
-omit [HasCoequalizers C]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] in
-private lemma restricted_right_action (N : Mod C S) :
-    (restrictRight φ (toBimodObj S N)).actRight =
-      (toBimodObj R ((comap φ).obj N)).actRight := by
-  change N.X ◁ φ ≫ (β_ N.X S).hom ≫ γ[S,N.X] =
-    (β_ N.X R).hom ≫ φ ▷ N.X ≫ γ[S,N.X]
-  rw [braiding_naturality_right_assoc]
-
-set_option backward.isDefEq.respectTransparency false in
-private def restrictedTensorIso (M : Mod C R) (N : Mod C S) :
-    ((restrictRight φ (toBimodObj S N)).tensorBimod (toBimodObj R M)).X ≅
-      ((comap φ).obj N ⊗ M).X where
-  hom := coequalizer.desc (tensorObjπ ((comap φ).obj N) M) (by
-    rw [restricted_right_action]
-    exact tensorObjπ_condition ((comap φ).obj N) M)
-  inv := tensorObjDesc ((comap φ).obj N) M (coequalizer.π _ _) (by
-    change ((β_ N.X R).hom ≫ φ ▷ N.X ≫ γ[S,N.X]) ▷ M.X ≫ _ = _
-    rw [← braiding_naturality_right_assoc]
-    exact coequalizer.condition _ _)
-  hom_inv_id := by
-    apply coequalizer.hom_ext
-    erw [coequalizer.π_desc_assoc, tensorObjπ_tensorObjDesc, Category.comp_id]
-  inv_hom_id := by
-    rw [← cancel_epi (tensorObjπ ((comap φ).obj N) M),
-      tensorObjπ_tensorObjDesc_assoc, coequalizer.π_desc, Category.comp_id]
-
-set_option backward.isDefEq.respectTransparency false in
-private def cancellationIso (M : Mod C R) (N : Mod C S) :
-    (N ⊗ (extendScalars φ).obj M).X ≅ ((comap φ).obj N ⊗ M).X :=
-  (bimodForget (Mon.mk S) (Mon.mk R)).mapIso
-    (cancellationBimodIso φ M (toBimodObj S N)) ≪≫ restrictedTensorIso φ M N
-
-set_option backward.isDefEq.respectTransparency false in
-private lemma cancellationIso_π (M : Mod C R) (N : Mod C S) :
-    N.X ◁ extendπ φ M ≫ tensorObjπ N ((extendScalars φ).obj M) ≫
-        (cancellationIso φ M N).hom =
-      (α_ N.X S M.X).inv ≫ ((β_ N.X S).hom ≫ γ[S,N.X]) ▷ M.X ≫
-        tensorObjπ ((comap φ).obj N) M := by
-  dsimp only [cancellationIso, Iso.trans_hom, Functor.mapIso_hom, bimodForget,
-    cancellationBimodIso, Iso.symm_hom, Bimod.associatorBimod, Bimod.isoOfIso,
-    Bimod.comp_hom', Bimod.AssociatorBimod.inv]
-  simp only [Category.assoc]
-  dsimp only [tensorObjπ]
-  erw [coequalizer.π_desc_assoc]
-  dsimp only [Bimod.AssociatorBimod.invAux]
-  simp only [Category.assoc]
-  slice_lhs 1 3 => erw [id_tensor_π_preserves_coequalizer_inv_desc]
-  dsimp only [bimodTensorRight, Bimod.whiskerRight]
-  simp only [Category.assoc]
-  erw [ι_colimMap_assoc]
-  simp only [parallelPairHom_app_one]
-  rw [← comp_whiskerRight_assoc]
-  dsimp only [restrictRightUnitIso, Bimod.isoOfIso, Bimod.RightUnitorBimod.hom]
-  erw [coequalizer.π_desc]
-  dsimp only [restrictedTensorIso]
-  erw [coequalizer.π_desc]
-  rfl
-
-set_option backward.isDefEq.respectTransparency false in
-private lemma cancellationIso_naturality (M : Mod C R) {N N' : Mod C S} (f : N ⟶ N') :
-    (f ▷ (extendScalars φ).obj M).hom ≫ (cancellationIso φ M N').hom =
-      (cancellationIso φ M N).hom ≫ ((comap φ).map f ▷ M).hom := by
-  apply (cancel_epi (tensorObjπ N ((extendScalars φ).obj M))).1
-  apply (cancel_epi (N.X ◁ extendπ φ M)).1
-  erw [tensorObjπ_whiskerRight_assoc, whisker_exchange_assoc,
-    cancellationIso_π, reassoc_of% cancellationIso_π φ M N,
-    tensorObjπ_whiskerRight, associator_inv_naturality_left_assoc]
-  have hf : f.hom ▷ S ≫ ((β_ N'.X S).hom ≫ γ[S,N'.X]) =
-      ((β_ N.X S).hom ≫ γ[S,N.X]) ≫ f.hom := by
-    rw [braiding_naturality_left_assoc, ← act_hom, Category.assoc]
-  erw [← comp_whiskerRight_assoc, hf, comp_whiskerRight_assoc]
-  rfl
-
-private def cancellationNatIso (M : Mod C R) :
-    MonoidalCategory.tensorRight ((extendScalars φ).obj M) ⋙ forget S ≅
-      comap φ ⋙ MonoidalCategory.tensorRight M ⋙ forget R :=
-  NatIso.ofComponents (cancellationIso φ M) (cancellationIso_naturality φ M)
-
 section Flat
 
 variable [Abelian C]
 
 attribute [local instance] comp_preservesFiniteLimits
   comp_preservesFiniteColimits
-
-/-- Extension of scalars of internal modules preserves flat objects.
-
-Source: Stacks, sites-modules.tex, lemma-flat-change-of-rings; Tag 07A4.
-(blueprint: lem-sfb-internal-extension-preserves-flat).
-
-Proof: the bimodule associator and right unitor identify the underlying object of
-`N ⊗_S (S ⊗_R M)` with that of `Res N ⊗_R M`, naturally in N. Restriction and the
-forgetful functors are exact; forgetful functors reflect limits and colimits. Thus,
-if M is flat, tensoring on the right with its extension is exact. Braiding identifies
-tensoring on the left with tensoring on the right, proving both flatness conditions.
-This also covers the zero algebra and the identity scalar map.
--/
-theorem extendScalars_preservesFlat : (extendScalars φ).PreservesFlat where
-  flat_obj {M} hM := by
-    have := hM.tensorRight.preservesFiniteLimits
-    have := hM.tensorRight.preservesFiniteColimits
-    have : PreservesFiniteLimits
-        (MonoidalCategory.tensorRight ((extendScalars φ).obj M) ⋙ forget S) :=
-      preservesFiniteLimits_of_natIso (cancellationNatIso φ M).symm
-    have : PreservesFiniteColimits
-        (MonoidalCategory.tensorRight ((extendScalars φ).obj M) ⋙ forget S) :=
-      preservesFiniteColimits_of_natIso (cancellationNatIso φ M).symm
-    have : PreservesFiniteLimits (MonoidalCategory.tensorRight ((extendScalars φ).obj M)) :=
-      ⟨fun J _ _ ↦ preservesLimitsOfShape_of_reflects_of_preserves _ (forget S)⟩
-    have : PreservesFiniteColimits (MonoidalCategory.tensorRight ((extendScalars φ).obj M)) :=
-      ⟨fun J _ _ ↦ preservesColimitsOfShape_of_reflects_of_preserves _ (forget S)⟩
-    have : PreservesFiniteLimits (MonoidalCategory.tensorLeft ((extendScalars φ).obj M)) :=
-      preservesFiniteLimits_of_natIso
-        (BraidedCategory.tensorLeftIsoTensorRight ((extendScalars φ).obj M)).symm
-    have : PreservesFiniteColimits (MonoidalCategory.tensorLeft ((extendScalars φ).obj M)) :=
-      preservesFiniteColimits_of_natIso
-        (BraidedCategory.tensorLeftIsoTensorRight ((extendScalars φ).obj M)).symm
-    exact ⟨(exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩,
-      (exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩⟩
 
 end Flat
 

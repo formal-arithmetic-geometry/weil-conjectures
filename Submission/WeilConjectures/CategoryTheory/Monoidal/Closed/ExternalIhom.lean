@@ -45,27 +45,6 @@ open CategoryTheory MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
 
 namespace CategoryTheory
 
-/-- In a symmetric monoidal category, the middle-four interchange commutes with the braidings:
-`tensorμ X₁ X₂ Y₁ Y₂ ≫ β = (β ⊗ β) ≫ tensorμ X₂ X₁ Y₂ Y₁`. -/
-@[reassoc]
-theorem SymmetricCategory.tensorμ_braiding {C : Type*} [Category* C] [MonoidalCategory C]
-    [SymmetricCategory C] (X₁ X₂ Y₁ Y₂ : C) :
-    tensorμ X₁ X₂ Y₁ Y₂ ≫ (β_ (X₁ ⊗ Y₁) (X₂ ⊗ Y₂)).hom =
-      ((β_ X₁ X₂).hom ⊗ₘ (β_ Y₁ Y₂).hom) ≫ tensorμ X₂ X₁ Y₂ Y₁ := by
-  simp [tensorμ, SymmetricCategory.braiding_swap_eq_inv_braiding Y₂ X₁,
-    SymmetricCategory.braiding_swap_eq_inv_braiding Y₁ X₂, tensorHom_def]
-
-/-- In a symmetric monoidal category, braiding the two blocks and interchanging the middle
-factors is interchanging the middle factors and braiding the two pairs:
-`β ≫ tensorμ Y₁ Y₂ X₁ X₂ = tensorμ X₁ X₂ Y₁ Y₂ ≫ (β ⊗ β)`. -/
-@[reassoc]
-theorem SymmetricCategory.braiding_tensorμ {C : Type*} [Category* C] [MonoidalCategory C]
-    [SymmetricCategory C] (X₁ X₂ Y₁ Y₂ : C) :
-    (β_ (X₁ ⊗ X₂) (Y₁ ⊗ Y₂)).hom ≫ tensorμ Y₁ Y₂ X₁ X₂ =
-      tensorμ X₁ X₂ Y₁ Y₂ ≫ ((β_ X₁ Y₁).hom ⊗ₘ (β_ X₂ Y₂).hom) := by
-  simp [tensorμ, SymmetricCategory.braiding_swap_eq_inv_braiding Y₂ X₁,
-    SymmetricCategory.braiding_swap_eq_inv_braiding Y₁ X₂, tensorHom_def]
-
 namespace MonoidalClosed
 
 section External
@@ -261,17 +240,6 @@ section TensorMap
 variable {C C' : Type*} [Category* C] [Category* C'] [MonoidalCategory C] [MonoidalCategory C']
   [BraidedCategory C] [BraidedCategory C'] {F : C ⥤ C'} [F.Braided]
 
-/-- For a braided monoidal functor `F`, the braiding of the first two of three factors commutes
-with the tensor comparisons of `F`. -/
-lemma _root_.CategoryTheory.Functor.whiskerLeft_μ_comp_μ_comp_map_braiding (a b c : C) :
-    F.obj a ◁ μ F b c ≫ μ F a (b ⊗ c) ≫
-        F.map ((α_ a b c).inv ≫ (β_ a b).hom ▷ c ≫ (α_ b a c).hom) =
-      (α_ _ _ _).inv ≫ (β_ (F.obj a) (F.obj b)).hom ▷ F.obj c ≫ (α_ _ _ _).hom ≫
-        F.obj b ◁ μ F a c ≫ μ F b (a ⊗ c) := by
-  rw [F.map_comp, F.map_comp, Functor.LaxMonoidal.associativity_inv_assoc,
-    ← Functor.LaxMonoidal.μ_natural_left_assoc, ← comp_whiskerRight_assoc,
-    Functor.LaxBraided.braided, comp_whiskerRight_assoc, Functor.LaxMonoidal.associativity]
-
 variable {L : C' ⥤ C} {R : C ⥤ C'} (adj : L ⊣ R)
   (π : ∀ (M : C') (N : C), L.obj M ⊗ N ⟶ L.obj (M ⊗ F.obj N)) [∀ M N, IsIso (π M N)]
   (hπ : ∀ {M M' : C'} (φ : M ⟶ M') (N : C),
@@ -282,43 +250,6 @@ variable {L : C' ⥤ C} {R : C ⥤ C'} (adj : L ⊣ R)
     L.map (α_ M (F.obj N) (F.obj N')).hom =
       (α_ _ N N').hom ≫ π M (N ⊗ N') ≫ L.map (M ◁ Functor.OplaxMonoidal.δ F N N'))
 include hπ hπr hassoc
-
-/-- **The tensor map commutes with the middle-four interchange.** For the tensor map
-`τ M N : R M ⊗ F N ⟶ R (M ⊗ N)` of an adjunction with an associative projection formula and a
-braided monoidal `F`,
-`(τ M₁ M₂ ⊗ μ) ≫ τ (M₁ ⊗ M₂) (N₁ ⊗ N₂) ≫ R (tensorμ) = tensorμ ≫ (τ M₁ N₁ ⊗ μ) ≫ τ _ _`. -/
-@[reassoc]
-theorem projectionTensorMap_tensorμ (M₁ M₂ N₁ N₂ : C) :
-    (adj.projectionTensorMap π M₁ M₂ ⊗ₘ μ F N₁ N₂) ≫
-        adj.projectionTensorMap π (M₁ ⊗ M₂) (N₁ ⊗ N₂) ≫ R.map (tensorμ M₁ M₂ N₁ N₂) =
-      tensorμ (R.obj M₁) (F.obj M₂) (F.obj N₁) (F.obj N₂) ≫
-        (adj.projectionTensorMap π M₁ N₁ ⊗ₘ μ F M₂ N₂) ≫
-          adj.projectionTensorMap π (M₁ ⊗ N₁) (M₂ ⊗ N₂) := by
-  have hA (M : C) (N N' : C) : adj.projectionTensorMap π M N ▷ F.obj N' ≫
-      adj.projectionTensorMap π (M ⊗ N) N' =
-        (α_ _ _ _).hom ≫ R.obj M ◁ μ F N N' ≫ adj.projectionTensorMap π M (N ⊗ N') ≫
-          R.map (α_ M N N').inv := by
-    have h := projectionTensorMap_assoc adj π hπ (Functor.OplaxMonoidal.δ F) hassoc M N N'
-    rw [Functor.Monoidal.inv_δ] at h
-    rw [← cancel_mono (R.map (α_ M N N').hom), Category.assoc, Category.assoc, Category.assoc,
-      Category.assoc, ← R.map_comp, Iso.inv_hom_id, R.map_id, Category.comp_id, h]
-  have hμ : tensorμ M₁ M₂ N₁ N₂ = (α_ _ _ _).hom ≫
-      M₁ ◁ ((α_ M₂ N₁ N₂).inv ≫ (β_ M₂ N₁).hom ▷ N₂ ≫ (α_ N₁ M₂ N₂).hom) ≫ (α_ _ _ _).inv := by
-    simp only [tensorμ, MonoidalCategory.whiskerLeft_comp, Category.assoc]
-  have hμ' : tensorμ (R.obj M₁) (F.obj M₂) (F.obj N₁) (F.obj N₂) = (α_ _ _ _).hom ≫
-      R.obj M₁ ◁ ((α_ _ _ _).inv ≫ (β_ (F.obj M₂) (F.obj N₁)).hom ▷ F.obj N₂ ≫
-        (α_ _ _ _).hom) ≫ (α_ _ _ _).inv := by
-    simp only [tensorμ, MonoidalCategory.whiskerLeft_comp, Category.assoc]
-  rw [tensorHom_def', tensorHom_def']
-  simp only [Category.assoc]
-  rw [reassoc_of% (hA M₁ M₂ (N₁ ⊗ N₂)), hA M₁ N₁ (M₂ ⊗ N₂), hμ, hμ']
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← R.map_comp_assoc (α_ M₁ M₂ (N₁ ⊗ N₂)).inv, Iso.inv_hom_id, R.map_id, Category.id_comp,
-    ← projectionTensorMap_naturality_right_assoc adj π hπr,
-    ← associator_inv_naturality_right_assoc, Iso.inv_hom_id_assoc,
-    associator_naturality_right_assoc]
-  simp only [← MonoidalCategory.whiskerLeft_comp_assoc, Category.assoc,
-    Functor.whiskerLeft_μ_comp_μ_comp_map_braiding]
 
 end TensorMap
 
@@ -368,22 +299,6 @@ def ProjectionExchange (δ₁' : ∀ M N : C₁', F₁'.obj (M ⊗ N) ⟶ F₁'.
 variable (hEx : ProjectionExchange π π₁ Ex κ (Functor.OplaxMonoidal.δ F₁')
   (Functor.OplaxMonoidal.δ F₁))
 
-
-omit [SymmetricCategory C₁] [SymmetricCategory C₁'] [SymmetricCategory C] [SymmetricCategory C']
-  [MonoidalClosed C₁] [MonoidalClosed C₁'] [MonoidalClosed C₂] [MonoidalClosed C]
-  [MonoidalClosed C']
-  [F₁.Braided] [F₂.LaxMonoidal] [F₁'.Braided] [F₂'.LaxMonoidal] [G.Braided] in
-include hπ in
-/-- The tensor map is natural in both variables. -/
-@[reassoc]
-lemma projectionTensorMap_map_tensorHom
-    (hπr : ∀ (M : C') {N N' : C} (φ : N ⟶ N'),
-      L.obj M ◁ φ ≫ π M N' = π M N ≫ L.map (M ◁ G.map φ))
-    {M M' N N' : C} (f : M ⟶ M') (g : N ⟶ N') :
-    adj.projectionTensorMap π M N ≫ R.map (f ⊗ₘ g) =
-      (R.map f ⊗ₘ G.map g) ≫ adj.projectionTensorMap π M' N' := by
-  rw [tensorHom_def, R.map_comp, ← projectionTensorMap_naturality_left_assoc adj π hπ,
-    ← projectionTensorMap_naturality_right adj π hπr, tensorHom_def, Category.assoc]
 
 
 end Step

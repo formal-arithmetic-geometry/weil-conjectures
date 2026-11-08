@@ -153,13 +153,6 @@ noncomputable def tangentMap (m : A) (hm : m * m = 0) (hπ : π m = 0) :
     pointsKer G aug₁ →* pointsKer G π :=
   kerMap (DualNumber.liftElem m hm) (aug_comp_liftElem m hm hπ)
 
-theorem kerHom_tangentMap (m : A) (hm : m * m = 0) (hπ : π m = 0) (v : pointsKer G aug₁)
-    (a : stalkOne G) :
-    kerHom (tangentMap m hm hπ v) a =
-      algebraMap k A (counit G a) + algebraMap k A (tangentCoeff v a) * m := by
-  rw [tangentMap, kerHom_kerMap]
-  simp [kerHom_tangent, DualNumber.liftElem_apply]
-
 omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
 theorem liftElem_comp_eq {B : Type u} [CommRing B] [Algebra k B] (ψ : A →ₐ[k] B) (m : A)
     (hm : m * m = 0) (m' : B) (hm' : m' * m' = 0) (h : ψ m = m') :
@@ -557,13 +550,6 @@ theorem commutator_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm 
 
 theorem tangentCoeff_one (a : stalkOne G) : tangentCoeff (1 : pointsKer G aug₁) a = 0 := by
   rw [tangentCoeff, kerHom_one]
-  simp [algebraMap_eq_inl]
-
-/-- The group law on tangent vectors is the addition of the `D_v`. -/
-theorem tangentCoeff_mul (v w : pointsKer G aug₁) (a : stalkOne G) :
-    tangentCoeff (v * w) a = tangentCoeff v a + tangentCoeff w a := by
-  conv_lhs => rw [← tangentMap_inr_one v, ← tangentMap_inr_one w]
-  rw [tangentCoeff, kerHom_tangentMap_mul_tangentMap]
   simp [algebraMap_eq_inl]
 
 

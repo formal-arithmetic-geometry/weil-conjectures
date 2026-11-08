@@ -179,12 +179,6 @@ instance Etale.isIso_upperStar_δ (F G : Sheaf Y.smallEtaleTopology A) :
 noncomputable instance Etale.monoidal_upperStar : (g)^*[A].Monoidal :=
   .ofOplaxMonoidal _
 
-example : (Etale.monoidal_upperStar A g).toOplaxMonoidal = Etale.oplaxMonoidal_upperStar A g :=
-  rfl
-
 end FilteredColimits
-
-/-- For closed `A`, the pullback `g^*` on étale sheaves is strong monoidal. -/
-noncomputable example [MonoidalClosed A] : (g)^*[A].Monoidal := inferInstance
 
 end AlgebraicGeometry

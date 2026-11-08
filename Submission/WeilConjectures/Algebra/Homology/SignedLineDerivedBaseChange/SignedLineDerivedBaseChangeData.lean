@@ -5,7 +5,13 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.Algebra.Homology.Signed.SignedLineScalarPullbackSquare
+public import Submission.WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
+public import Submission.WeilConjectures.Algebra.Homology.Signed.SignedLinePullbackNormalization
+public import Submission.WeilConjectures.Algebra.Homology.Finite.FiniteFreeDualPullback
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.PullbackExistsOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.Signed.SignedLinePullbackExistence
+import Submission.WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocalizationOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.PullbackPairingTransfer
 public import Submission.WeilConjectures.Algebra.Homology.KFlatFixedTensor.KFlatFixedTensorTriangulatedSupplement
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
@@ -157,15 +163,6 @@ def derivedLine (A : Sheaf J CommRingCat.{max u v w})
 
 attribute [local irreducible] derivedLine Functor.mapDerivedCategory
 
-/-- Termwise tensor with a fixed sheaf, with its zero-preservation instance fixed once.
-Source: Stacks 03EK and 06YU
-(blueprint: def-pur-signed-line-derived-action-data). -/
-def complexLine (A : Sheaf J CommRingCat.{max u v w})
-    (L : KFlatFixedTensor.Modules A) :
-    CochainComplex (KFlatFixedTensor.Modules A) ℤ ⥤
-      CochainComplex (KFlatFixedTensor.Modules A) ℤ :=
-  (siteSheafTensorRight L).mapHomologicalComplex (.up ℤ)
-
 /-- The actual total-complex collapse, followed by the existing comparison with site tensor.
 Source: Stacks 06YU (blueprint: def-pur-signed-line-derived-action-data). -/
 def collapse (A : Sheaf J CommRingCat.{max u v w})
@@ -284,42 +281,6 @@ def DerivedAction
 
 attribute [local irreducible] DerivedAction
 
-/-- Canonical ordinary unit, positive associators and evaluations of signed powers.
-Source: Stacks 03EL and 0FNY.
-(blueprint: def-pur-signed-line-ordinary-constraint-data). -/
-def OrdinaryLineConstraints (A : Sheaf J CommRingCat.{max u v w})
-    (P : KFlatFixedTensor.Modules A)
-    (ordinaryUnit : siteSheafTensorRight (signedLinePower.{u, v, w} P 0) ≅ 𝟭 _)
-    (ordinaryProduct : ∀ n : ℕ,
-      siteSheafTensorRight (signedLinePower.{u, v, w} P (.ofNat (n + 1))) ⋙
-        siteSheafTensorRight (signedLinePower.{u, v, w} P 1) ≅
-      siteSheafTensorRight (signedLinePower.{u, v, w} P (.ofNat (n + 2))))
-    (ordinaryEvaluation : ∀ n : ℕ,
-      siteSheafTensorRight (signedLinePower.{u, v, w} P (.negSucc n)) ⋙
-        siteSheafTensorRight (signedLinePower.{u, v, w} P (.ofNat (n + 1))) ⟶ 𝟭 _) : Prop :=
-    (∀ (N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
-      (x : N.val.obj V) (r : A.obj.obj V),
-      (ordinaryUnit.hom.app N).val.app V
-        (siteSheafTensorTmul N (signedLinePower.{u, v, w} P 0) V x r) =
-          @SMul.smul (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.obj V)
-            (N.val.obj V) inferInstance r x) ∧
-    (∀ (n : ℕ) (N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
-      (x : N.val.obj V) (y : (scalarTensorPower A P (n + 1)).val.obj V)
-      (q : P.val.obj V),
-      ((ordinaryProduct n).hom.app N).val.app V
-        (siteSheafTensorTmul _ P V
-          (siteSheafTensorTmul N (scalarTensorPower A P (n + 1)) V x y) q) =
-        siteSheafTensorTmul N (scalarTensorPower A P (n + 2)) V x
-          (siteSheafTensorTmul (scalarTensorPower A P (n + 1)) P V y q)) ∧
-    (∀ (n : ℕ) (N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
-      (x : N.val.obj V) (φ : (signedLinePower.{u, v, w} P (.negSucc n)).val.obj V)
-      (y : (scalarTensorPower A P (n + 1)).val.obj V),
-      ((ordinaryEvaluation n).app N).val.app V
-        (siteSheafTensorTmul _ (scalarTensorPower A P (n + 1)) V
-          (siteSheafTensorTmul N (signedLinePower.{u, v, w} P (.negSucc n)) V x φ) y) =
-        @SMul.smul (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.obj V)
-          (N.val.obj V) inferInstance (φ.app (op (Over.mk (𝟙 V.unop))) y) x)
-
 section GenericLineConstraints
 universe ga gha gd ghd ge ghe
 variable {A₀ : Type ga} [Category.{gha} A₀] [HasZeroMorphisms A₀]
@@ -386,51 +347,6 @@ inductive LocalizedLineFamily
     LocalizedLineFamily d e F eta cr cs
 
 end GenericLineConstraints
-
-/-- Right unit, positive-power associator and negative-positive evaluation constraints.
-The ordinary constraints are specified on all local pure tensors. The derived constraints
-are specified after localization using c; c itself is fixed by representativeIso and
-collapse in DerivedAction. Thus these are the canonical constraints, with no arbitrary
-monoidal structure or map selected. The positive constraint is the associator followed
-by the one-term identification of the next power, and evaluation contracts the last two
-factors. Source: Stacks 03EK, 04TT, 06YU and 07A4
-(blueprint: def-pur-signed-line-derived-action-data). -/
-def DerivedLineConstraints (A : Sheaf J CommRingCat.{max u v w})
-    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules A)]
-    (P : KFlatFixedTensor.Modules A)
-    (c : ∀ d : ℤ, DerivedCategory.Q ⋙ derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P d) ≅
-      complexLine A (signedLinePower.{u, v, w} P d) ⋙
-        DerivedCategory.Q)
-    (rightUnitor : derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P 0) ≅ 𝟭 _)
-    (product : ∀ n : ℕ,
-      derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P (.ofNat (n + 1))) ⋙
-          derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P 1) ≅
-        derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P (.ofNat (n + 2))))
-    (evaluation : ∀ n : ℕ,
-      derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P (.negSucc n)) ⋙
-        derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P (.ofNat (n + 1))) ⟶ 𝟭 _) : Prop :=
-  LocalizedLineConstraints DerivedCategory.Q
-    (fun i ↦ siteSheafTensorRight (signedLinePower.{u, v, w} P i))
-    (fun i ↦ derivedLine.{u, v, w, z} A (signedLinePower.{u, v, w} P i))
-    (OrdinaryLineConstraints A P) c rightUnitor product evaluation
-
-/-- The simultaneous unit, positive-power and evaluation equations for the same eta family
-whose components are fixed in DerivedAction. Source: Stacks 07A4; blueprint Powers and duals
-(blueprint: def-pur-signed-line-derived-action-data). -/
-def DerivedFamilyCoherence
-    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
-    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]
-    (F : KFlatFixedTensor.Modules R ⥤ KFlatFixedTensor.Modules S)
-    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
-    (b : ∀ d : ℤ, DerivedActionData F (signedLinePower.{u, v, w} P d)
-      (signedLinePower.{u, v, w} Q d)) : Prop :=
-  LocalizedLineFamily
-    (fun i ↦ derivedLine.{u, v, w, z} R (signedLinePower.{u, v, w} P i))
-    (fun i ↦ derivedLine.{u, v, w, z} S (signedLinePower.{u, v, w} Q i))
-    F.mapDerivedCategory (fun i ↦ (b i).2.2)
-    (DerivedLineConstraints R P (fun i ↦ (b i).1))
-    (DerivedLineConstraints S Q (fun i ↦ (b i).2.1))
 
 variable
   (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶

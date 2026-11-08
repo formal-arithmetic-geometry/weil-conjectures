@@ -78,11 +78,6 @@ lemma Functor.idSquareIso_hom_app {A B : Type*} [Category* A] [Category* B] (T :
     (Functor.idSquareIso T).hom.app K = 𝟙 _ := by
   simp [Functor.idSquareIso]
 
-@[simp]
-lemma Functor.idSquareIso_inv_app {A B : Type*} [Category* A] [Category* B] (T : A ⥤ B) (K : A) :
-    (Functor.idSquareIso T).inv.app K = 𝟙 _ := by
-  simp [Functor.idSquareIso]
-
 section Compatible
 
 variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']
@@ -125,12 +120,6 @@ lemma isIso_inv {α : F ⟶ G} {α' : F' ⟶ G'} [IsIso α] [IsIso α']
     (h : SquareCompatible ιF ιG α α') :
     SquareCompatible ιG ιF (CategoryTheory.inv α) (CategoryTheory.inv α') :=
   inv (e := asIso α) (e' := asIso α') h
-
-lemma of_eq {ιF₁ ιF₂ : F ⋙ T' ≅ T ⋙ F'} {ιG₁ ιG₂ : G ⋙ T' ≅ T ⋙ G'} {α : F ⟶ G}
-    {α' : F' ⟶ G'} (h : SquareCompatible ιF₁ ιG₁ α α') (hF : ιF₁ = ιF₂) (hG : ιG₁ = ιG₂) :
-    SquareCompatible ιF₂ ιG₂ α α' := by
-  subst hF hG
-  exact h
 
 
 section Whisker

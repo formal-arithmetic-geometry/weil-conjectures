@@ -29,7 +29,15 @@ import Submission.WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 import Submission.WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullbackRepresentativeComputation
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleConstruction
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization
 import Submission.WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 import Submission.WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
@@ -59,7 +67,7 @@ import Submission.WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConst
 import Submission.WeilConjectures.AlgebraicGeometry.StrictConstantTowerOperations
 import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import Submission.WeilConjectures.CategoryTheory.Adjunction.MateCube
-import Submission.WeilConjectures.CategoryTheory.AdjunctionSquareComposition
+import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
@@ -96,7 +104,10 @@ import Submission.WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerSh
 import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareComponent
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
-import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekBaseChangeMate
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
@@ -242,35 +253,10 @@ private structure OpenNormalization
   adj : F ⊣ L
   normalized : LocallyClosedOpenNormalization F L r adj
 
-private theorem openNormalization_nonempty
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (L : D ⥤ C)
-    (r : F ⋙ L ≅ 𝟭 C)
-    (h : ∃ adj : F ⊣ L, LocallyClosedOpenNormalization F L r adj) :
-    Nonempty (OpenNormalization F L r) := ⟨⟨h.choose, h.choose_spec⟩⟩
-
-@[irreducible] private def openNormalization
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (L : D ⥤ C)
-    (r : F ⋙ L ≅ 𝟭 C)
-    (h : ∃ adj : F ⊣ L, LocallyClosedOpenNormalization F L r adj) :
-    OpenNormalization F L r := Classical.choice (openNormalization_nonempty F L r h)
-
 private structure ClosedNormalization
     {C D : Type*} [Category C] [Category D] (F P : C ⥤ D) (L : D ⥤ C)
     (r : F ⋙ L ≅ 𝟭 C) (d : P ⋙ L ⟶ 𝟭 C) where
   iso : F ≅ P
   normalized : LocallyClosedClosedNormalization F P L r d iso
-
-private theorem closedNormalization_nonempty
-    {C D : Type*} [Category C] [Category D] (F P : C ⥤ D) (L : D ⥤ C)
-    (r : F ⋙ L ≅ 𝟭 C) (d : P ⋙ L ⟶ 𝟭 C)
-    (h : ∃ e : F ≅ P, LocallyClosedClosedNormalization F P L r d e) :
-    Nonempty (ClosedNormalization F P L r d) := ⟨⟨h.choose, h.choose_spec⟩⟩
-
-@[irreducible] private def closedNormalization
-    {C D : Type*} [Category C] [Category D] (F P : C ⥤ D) (L : D ⥤ C)
-    (r : F ⋙ L ≅ 𝟭 C) (d : P ⋙ L ⟶ 𝟭 C)
-    (h : ∃ e : F ≅ P, LocallyClosedClosedNormalization F P L r d e) :
-    ClosedNormalization F P L r d :=
-  Classical.choice (closedNormalization_nonempty F P L r d h)
 
 end AlgebraicGeometry.Scheme

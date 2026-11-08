@@ -15,7 +15,18 @@ public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMono
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Duality
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.GeometricBiduality
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 
 set_option autoImplicit true

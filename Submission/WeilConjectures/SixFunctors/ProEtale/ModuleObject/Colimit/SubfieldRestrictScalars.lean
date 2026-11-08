@@ -224,10 +224,6 @@ noncomputable def boundedConstructibleExtendScalarsSubfield :
     Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(X)⟦Profinite.continuousMapRingObj F⟧ :=
   constructibleExtendScalars X ℓ h
 
-lemma boundedConstructibleExtendScalarsSubfield_eq :
-    boundedConstructibleExtendScalarsSubfield X ℓ h = constructibleExtendScalars X ℓ h :=
-  rfl
-
 /-- The extension of scalars on bounded constructible complexes is compatible with the
 inclusions. -/
 noncomputable def boundedConstructibleExtendScalarsSubfieldCompatibility :

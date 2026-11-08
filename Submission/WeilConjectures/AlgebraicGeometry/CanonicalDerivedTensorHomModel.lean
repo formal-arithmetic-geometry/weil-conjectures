@@ -151,43 +151,5 @@ def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
           pullbackTensorModelMap X P L ≫ DerivedCategory.Q.map ψ ≫
             schemeHomResolutionInverse X M)
 
-/-- Naturality and the actual representative evaluation equation characterize the family.
-The chain map ψ is fixed on every total-tensor summand by currying the degree-p
-component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
-P^p tensor L^q. The localization factorization and resolution map fix both targets.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-model). -/
-def IsCanonicalDerivedTensorHomMap (X : Scheme.{uCD})
-    [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
-    (e : ∀ K L M : schemeDerivedCategory X,
-      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M)) : Prop :=
-  letI := SheafOfModules.monoidalCategory X.sheaf
-  letI := schemeDerivedTensorMonoidal X
-  letI := SheafOfModules.symmetricCategory X.sheaf
-  (∀ (K K' L L' M M' : schemeDerivedCategory X)
-      (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')
-      (f : K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).obj (op L, M)),
-    e K' L' M' (a ≫ f ≫
-      (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).map (b.op, c)) =
-      (a ⊗ₘ b) ≫ e K L M f ≫ c) ∧
-  (∀ (P L M : CochainComplex
-      (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ),
-    P.IsKFlatTensor →
-    ∀ φ : P ⟶ homComplex (R := X.sheaf) L
-        ((schemeHomKInjectiveResolution X).obj M),
-      ∃ ψ : pullbackTensorTotal X P L ⟶
-          (schemeHomKInjectiveResolution X).obj M,
-        (∀ (p q n : ℤ) (h : p + q = n) (h' : q + p = n),
-          HomologicalComplex.ιMapBifunctor P L (curriedTensor _) (.up ℤ) p q n h ≫
-            ψ.f n =
-          schemeTensorHomUncurryComponent X P L M φ p q n h') ∧
-        e (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)
-            (DerivedCategory.Q.map φ ≫ (schemeDerivedInternalHomResolutionIso X L M).inv) =
-          pullbackTensorModelMap X P L ≫ DerivedCategory.Q.map ψ ≫
-            schemeHomResolutionInverse X M)
-
 
 end AlgebraicGeometry

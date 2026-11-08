@@ -149,18 +149,6 @@ noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
     (asIso (Functor.whiskerLeft P (rightDerivedComparisonBaseChange A f.left))).symm
   exact e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
-`det-prop-scalar-six-pullback`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with pullback**:
-`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`, by the canonical isomorphism
-`etaleReductionUpperStarIso`. -/
-theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
-    Nonempty (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
-        etaleReduction ℓ E n Z ≅
-      etaleReduction ℓ E n Y ⋙
-        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left)) :=
-  ⟨etaleReductionUpperStarIso ℓ E n f⟩
-
 omit [Fact (ringChar k).Prime] in
 /-- Blueprint `det-prop-scalar-six-tensor-hom`, (1), for the coefficient map
 `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ`

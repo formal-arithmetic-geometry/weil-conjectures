@@ -592,22 +592,6 @@ private abbrev strictInterchange (μ : 𝟭 C ⟶ 𝟭 C)
     f ((chainAction μ).naturality f).symm _ (chainAction_cone μ f).symm
 
 @[reassoc (attr := simp)]
-private theorem strictCone_map_fst (τ : 𝟭 (CochainComplex C ℤ) ⟶ 𝟭 _)
-    {M N : CochainComplex C ℤ} (g : M ⟶ N) (q : ℤ) :
-    ((strictCone τ).map g).f q ≫ (CochainComplex.mappingCone.fst (τ.app N)).1.v
-        q (q + 1) rfl =
-      (CochainComplex.mappingCone.fst (τ.app M)).1.v q (q + 1) rfl ≫ g.f (q + 1) := by
-  exact coneMap_fst _ _ g g (τ.naturality g).symm q
-
-@[reassoc (attr := simp)]
-private theorem strictCone_map_snd (τ : 𝟭 (CochainComplex C ℤ) ⟶ 𝟭 _)
-    {M N : CochainComplex C ℤ} (g : M ⟶ N) (q : ℤ) :
-    ((strictCone τ).map g).f q ≫ (CochainComplex.mappingCone.snd (τ.app N)).v
-        q q (add_zero q) =
-      (CochainComplex.mappingCone.snd (τ.app M)).v q q (add_zero q) ≫ g.f q := by
-  exact coneMap_snd _ _ g g (τ.naturality g).symm q
-
-@[reassoc (attr := simp)]
 private theorem strictInterchange_ca (μ : 𝟭 C ⟶ 𝟭 C)
     {A B : CochainComplex C ℤ} (f : A ⟶ B) (q : ℤ) :
     (strictInterchange μ f).hom.f q ≫

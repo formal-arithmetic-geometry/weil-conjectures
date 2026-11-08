@@ -606,16 +606,6 @@ theorem frameRestriction_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
     frameRestriction Λ F (cartierKummerClass Λ i hP) = kummerBoundaryProduct Λ F.f :=
   frameRestriction_pureFundamentalClass Λ 1 i hP F
 
-/-- The class `c_D` is the unique class with supports in `D` restricting to the Kummer boundary
-class of the local equation on every chart of `D`. -/
-theorem eq_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
-    (γ : constantComplex Λ T ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)))
-    (hγ : ∀ F : i.EtaleFrame 1, frameRestriction Λ F γ = kummerBoundaryProduct Λ F.f) :
-    γ = cartierKummerClass Λ i hP :=
-  (existsUnique_pureFundamentalClass Λ 1 i hP).unique hγ
-    (frameRestriction_pureFundamentalClass Λ 1 i hP)
-
 /-- Blueprint `lem-amb-cartier-kummer-map`, base change: for any `g : T' ⟶ T` along which the
 pulled-back divisor `i' : D' ⟶ T'` is again an effective Cartier divisor satisfying the purity
 hypothesis, the restriction of `c_D` along `g` is `c_{D'}`. -/

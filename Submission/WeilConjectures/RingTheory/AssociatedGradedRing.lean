@@ -330,12 +330,4 @@ theorem associatedGraded_smul (J : Ideal A) (a : A) (n : ℕ)
     DirectSum.of (fun k : ℕ => associatedGradedPiece J k) y.1 y.2)
     (associatedGraded_mk_eq J (0 + n) n (Nat.zero_add n) _ _ rfl)
 
-/-- (blueprint: def-weil-pbc-associated-graded-ring) An ideal of the associated
-graded ring is homogeneous when it contains every homogeneous component of
-each of its elements (Stacks, Algebra, Section 00JM). -/
-def IsHomogeneousAssociatedGraded (J : Ideal A)
-    (b : Ideal (associatedGraded J)) : Prop :=
-  ∀ (x : associatedGraded J) (n : ℕ), x ∈ b →
-    DirectSum.of (fun k : ℕ => associatedGradedPiece J k) n (x n) ∈ b
-
 end Ideal

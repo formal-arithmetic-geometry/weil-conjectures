@@ -188,26 +188,6 @@ private noncomputable def restrictSheafifyIso
 
 attribute [local irreducible] restrictSheafifyIso
 
-@[simp] private theorem restrictSheafifyIso_hom_toSheaf
-    {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) (M : PresheafOfModules.{r} S.obj) :
-    (toSheaf R).map (restrictSheafifyIso α M).hom =
-      𝟙 ((PresheafOfModules.toPresheaf S.obj ⋙
-        presheafToSheaf J AddCommGrpCat).obj M) := by
-  unfold restrictSheafifyIso
-  exact restrictSheafifyHom_toSheaf α M
-
-@[simp] private theorem restrictSheafifyIso_inv_toSheaf
-    {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) (M : PresheafOfModules.{r} S.obj) :
-    (toSheaf R).map (restrictSheafifyIso α M).inv =
-      𝟙 ((PresheafOfModules.toPresheaf S.obj ⋙
-        presheafToSheaf J AddCommGrpCat).obj M) := by
-  have he : (toSheaf R).mapIso (restrictSheafifyIso α M) =
-      Iso.refl ((PresheafOfModules.toPresheaf S.obj ⋙
-        presheafToSheaf J AddCommGrpCat).obj M) := by
-    apply Iso.ext
-    exact restrictSheafifyIso_hom_toSheaf α M
-  exact congrArg Iso.inv he
-
 private noncomputable def swapApp {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
     (M : SheafOfModules.{r} (𝓡 B)) (U : Cᵒᵖ) :
     ((PresheafOfModules.restrictScalars (𝓻 φ).hom).obj
@@ -254,12 +234,6 @@ private noncomputable def swapPresheafIso {B S : Sheaf J CommRingCat.{r}} (φ : 
       rw [swapApp_tmul]
       rfl)
 
-private theorem swapPresheafIso_tmul {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
-    (M : SheafOfModules.{r} (𝓡 B)) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
-    (swapPresheafIso φ M).hom.app U (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m) =
-      m ⊗ₜ[B.obj.obj U] (show (restrictedTensorCoefficient φ).val.obj U from s) :=
-  swapApp_tmul φ M U s m
-
 attribute [local irreducible] swapPresheafIso
 
 private noncomputable def swapSheafIso {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
@@ -269,77 +243,7 @@ private noncomputable def swapSheafIso {B S : Sheaf J CommRingCat.{r}} (φ : B �
   (restrictSheafifyIso (𝓻 φ) (changeOfRingsPresheaf φ M)).symm ≪≫
     (PresheafOfModules.sheafification (𝟙 (𝓡 B).obj)).mapIso (swapPresheafIso φ M)
 
-private noncomputable def changeMap {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
-    {M N : SheafOfModules.{r} (𝓡 B)} (a : M ⟶ N) :
-    changeOfRingsPresheaf φ M ⟶ changeOfRingsPresheaf φ N where
-  app U := (ModuleCat.extendScalars (φ.hom.app U).hom).map (a.val.app U)
-  naturality := changeOfRingsHom_naturality φ M a
-
-private theorem swapSheafIso_toSheaf {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
-    (M : SheafOfModules.{r} (𝓡 B)) :
-    (toSheaf (𝓡 B)).map (swapSheafIso φ M).hom =
-      (presheafToSheaf J AddCommGrpCat).map
-        ((PresheafOfModules.toPresheaf (𝓡 B).obj).map (swapPresheafIso φ M).hom) := by
-  change (toSheaf (𝓡 B)).map
-      ((restrictSheafifyIso (𝓻 φ) (changeOfRingsPresheaf φ M)).inv ≫
-        (PresheafOfModules.sheafification (𝟙 (𝓡 B).obj)).map
-          (swapPresheafIso φ M).hom) = _
-  rw [Functor.map_comp, restrictSheafifyIso_inv_toSheaf]
-  erw [Category.id_comp]
-  rfl
-
 attribute [local irreducible] swapSheafIso
-
-private theorem swapSheafIso_naturality {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
-    {M N : SheafOfModules.{r} (𝓡 B)} (a : M ⟶ N) :
-    (restrictedTensorScalars φ).map (changeOfRingsHom φ M a) ≫
-      (swapSheafIso φ N).hom =
-    (swapSheafIso φ M).hom ≫ (siteSheafTensorRight (restrictedTensorCoefficient φ)).map a := by
-  have hp : (PresheafOfModules.restrictScalars (𝓻 φ).hom).map (changeMap φ a) ≫
-      (swapPresheafIso φ N).hom =
-    (swapPresheafIso φ M).hom ≫ siteTensorHom a.val (restrictedTensorCoefficient φ).val := by
-    apply PresheafOfModules.hom_ext
-    intro U
-    ext x
-    induction x using TensorProduct.inductionOn with
-    | add x y hx hy => simp only [map_add, hx, hy]
-    | tmul s m =>
-      change (swapPresheafIso φ N).hom.app U
-          (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] a.val.app U m) =
-        (siteTensorHom a.val (restrictedTensorCoefficient φ).val).app U
-          ((swapPresheafIso φ M).hom.app U
-            (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m))
-      rw [swapPresheafIso_tmul, swapPresheafIso_tmul]
-      rfl
-  apply (toSheaf (𝓡 B)).map_injective
-  simp only [Functor.map_comp, swapSheafIso_toSheaf]
-  change (presheafToSheaf J AddCommGrpCat).map
-      ((PresheafOfModules.toPresheaf (𝓡 B).obj).map
-        ((PresheafOfModules.restrictScalars (𝓻 φ).hom).map (changeMap φ a))) ≫ _ =
-    _ ≫ (presheafToSheaf J AddCommGrpCat).map
-      ((PresheafOfModules.toPresheaf (𝓡 B).obj).map
-        (siteTensorHom a.val (restrictedTensorCoefficient φ).val))
-  simp only [← Functor.map_comp]
-  rw [hp]
-
-private theorem swapSheafIso_tmul {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
-    (M : SheafOfModules.{r} (𝓡 B)) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
-    (swapSheafIso φ M).hom.val.app U
-      ((CategoryTheory.toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
-        (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m)) =
-      siteSheafTensorTmul M (restrictedTensorCoefficient φ) U m s := by
-  have hn := CategoryTheory.toSheafify_naturality J
-    ((PresheafOfModules.toPresheaf (𝓡 B).obj).map (swapPresheafIso φ M).hom)
-  change ((toSheaf (𝓡 B)).map (swapSheafIso φ M).hom).hom.app U _ = _
-  rw [swapSheafIso_toSheaf]
-  have ht := (CategoryTheory.congr_fun (NatTrans.congr_app hn U)
-    (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m)).symm
-  change _ = (CategoryTheory.toSheafify J
-    (siteTensorPresheaf M.val (restrictedTensorCoefficient φ).val).presheaf).app U
-      ((swapPresheafIso φ M).hom.app U
-        (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m)) at ht
-  rw [swapPresheafIso_tmul] at ht
-  exact ht
 
 
 
@@ -357,19 +261,6 @@ open RestrictedTensorProof
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def ordinarySwapIso {φ : B ⟶ S}
-    (D : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wS} φ) :
-    D.E ⋙ restrictedTensorScalars φ ≅ siteSheafTensorRight (restrictedTensorCoefficient φ) :=
-  NatIso.ofComponents (fun M ↦
-    (restrictedTensorScalars φ).mapIso (eqToIso (D.obj_eq M)) ≪≫ swapSheafIso φ M) (by
-      intro M N a
-      dsimp
-      rw [D.map_eq]
-      simp only [Functor.map_comp, Category.assoc, eqToHom_map,
-        eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-      rw [swapSheafIso_naturality φ a])
 
 variable [HasDerivedCategory.{wT} (ringedSiteModules.{r}
   (derivedChangeRingIndependentCoefficients J T))]

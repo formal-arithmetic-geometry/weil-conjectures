@@ -64,10 +64,6 @@ lemma mem_residueSubfield {S : Subfield Ω} {z : ResidueField 𝒪} :
     z ∈ 𝒪.residueSubfield S ↔ ∃ y : 𝒪, (y : Ω) ∈ S ∧ residue 𝒪 y = z :=
   Iff.rfl
 
-lemma residue_mem_residueSubfield {S : Subfield Ω} {y : 𝒪} (hy : (y : Ω) ∈ S) :
-    residue 𝒪 y ∈ 𝒪.residueSubfield S :=
-  ⟨y, hy, rfl⟩
-
 lemma residueSubfield_mono {S T : Subfield Ω} (h : S ≤ T) :
     𝒪.residueSubfield S ≤ 𝒪.residueSubfield T := by
   rintro _ ⟨y, hy, rfl⟩

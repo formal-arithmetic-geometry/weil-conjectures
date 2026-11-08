@@ -69,12 +69,6 @@ noncomputable def functorOfNatIso {G : D ⥤ D} (P : C ⥤ D) (s : P ⋙ G ≅ P
     { f := P.map φ
       h := s.hom.naturality φ }
 
-/-- The functor `C ⥤ IsoAlgebra G` of `CategoryTheory.Endofunctor.IsoAlgebra.functorOfNatIso`
-composed with the forgetful functor is `P`. -/
-lemma functorOfNatIso_comp_forget {G : D ⥤ D} (P : C ⥤ D) (s : P ⋙ G ≅ P) :
-    functorOfNatIso P s ⋙ forget G = P :=
-  rfl
-
 /-- **Transport of structure isomorphisms along an isomorphism of endofunctors**: for
 `e : G ≅ H`, structure isomorphisms `s : P ⋙ H ≅ P` and `t : P ⋙ G ≅ P` with
 `t = P ◁ e ≪≫ s`, the `H`-algebras `(P c, s_c)` transported along `e` (that is, along
@@ -237,13 +231,6 @@ noncomputable def geometricFiberWeilModelFrobenius :
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀) ⥤
       Endofunctor.IsoAlgebra (upperStar Λ f.geometricFiberFrobenius) :=
   Endofunctor.IsoAlgebra.functorOfNatIso _ (geometricFiberProjUpperStarModelFrobeniusIso Λ f)
-
-/-- The Weil objects of the scheme Frobenius composed with the forgetful functor are the pullback
-along the projection `p : X̄ ⟶ X₀`. -/
-lemma geometricFiberWeilModelFrobenius_comp_forget :
-    geometricFiberWeilModelFrobenius Λ f ⋙ Endofunctor.IsoAlgebra.forget _ =
-      upperStar Λ f.geometricFiberProj :=
-  rfl
 
 /-- The transport of Weil objects for the geometric Galois Frobenius `Fr_X` to Weil objects for
 the scheme Frobenius `Φ` of the geometric fibre, along the identification `Φ^* ≅ Fr_X^*`

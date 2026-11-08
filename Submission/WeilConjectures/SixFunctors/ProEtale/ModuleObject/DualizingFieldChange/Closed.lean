@@ -574,20 +574,6 @@ theorem dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap
   exact (eq_dualizingComplexBaseChange_of_trace ℓ e sqZ h).symm
 
 
-/-- `ProEtale.CondensedRing.dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap`, read
-through the composition isomorphisms `Rf^! ω_X ≅ ω_Z` and `Rf'^! ω_{X'} ≅ ω_{Z'}`:
-`φ_Z ∘ ρ' ⁻¹ = Rf'^!(φ_X) ∘ γ(ω_X) ∘ πZ^*(ρ⁻¹)`. -/
-theorem dualizingComplexBaseChange_comp_upperShriekDualizingComplexIso_inv
-    (sqX : IsPullback πX (toPoint X').left (toPoint X).left πₛ)
-    (sqZ : IsPullback πZ (toPoint Z').left (toPoint Z).left πₛ)
-    (sqf : IsPullback πZ f'.left f.left πX) :
-    dualizingComplexBaseChange ℓ e sqZ ≫ (upperShriekDualizingComplexIso ℓ f').inv =
-      (boundedConstructibleUpperStarOfMap ℓ πZ).map (upperShriekDualizingComplexIso ℓ f).inv ≫
-        (upperShriekBaseChangeOfMap ℓ sqf).app (dualizingComplex ℓ X) ≫
-        (boundedConstructibleUpperShriek ℓ f').map (dualizingComplexBaseChange ℓ e sqX) := by
-  rw [dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap ℓ e sqX sqZ sqf]
-  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-
 end Dualizing
 
 /-! ### Closed immersions of proper schemes -/

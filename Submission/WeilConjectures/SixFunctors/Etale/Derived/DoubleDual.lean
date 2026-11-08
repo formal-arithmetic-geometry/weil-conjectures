@@ -339,14 +339,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `lem-weil-duality-pairing` (auxiliary): the Verdier dual on morphisms is
-`RHom(-, ω_X)`. -/
-lemma verdierDual_map
-    {K K' : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))ᵒᵖ}
-    (f : K ⟶ K') :
-    (verdierDual Λ a).map f = ((RHom(X)[ModuleCat.{u + 1} Λ]).map f).app (dualizingComplex Λ a) :=
-  rfl
-
 /-- The double internal hom `RHom(RHom(-, ω), ω)` into an object `ω` carries a distinguished
 triangle to a triangle whose first two maps are induced by those of the given triangle and which
 is distinguished for a suitable third map: `RHom(-, ω)` is exact

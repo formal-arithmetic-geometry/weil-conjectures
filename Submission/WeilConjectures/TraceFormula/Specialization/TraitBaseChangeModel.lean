@@ -218,12 +218,6 @@ variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
 noncomputable abbrev Hom.baseChangeTotal : pullback bP vP ⟶ pullback bM vM :=
   pullback.map bP vP bM vM φ.total (𝟙 _) κ hκb (by rw [Category.id_comp, hκv])
 
-omit [Algebra k' K] in
-@[reassoc (attr := simp)]
-lemma Hom.baseChangeTotal_snd :
-    φ.baseChangeTotal κ hκb hκv ≫ pullback.snd bM vM = pullback.snd bP vP := by
-  simp
-
 /-- The morphism of special fibres of base changes induced by a morphism of models. -/
 noncomputable def Hom.baseChangeSpecial :
     (baseChangeSpecial bP vP).left ⟶ (baseChangeSpecial bM vM).left :=

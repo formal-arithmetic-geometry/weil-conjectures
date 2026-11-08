@@ -8,7 +8,8 @@ module
 
 public import Submission.WeilConjectures.RingTheory.GRing
 public import Mathlib.FieldTheory.Separable
-import Submission.WeilConjectures.FieldTheory.SeparableTensorPurelyInseparable
+import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Mathlib.FieldTheory.PurelyInseparable.Tower
 import Submission.WeilConjectures.RingTheory.GeometricRegularitySubfields
 import Submission.WeilConjectures.RingTheory.GeometricallyRegularFieldExtension
 import Submission.WeilConjectures.RingTheory.GeometricallyRegularSmoothAscent

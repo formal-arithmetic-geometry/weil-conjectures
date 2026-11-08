@@ -71,24 +71,6 @@ noncomputable def padicSubfieldModLinear (X : Scheme.{u}) :
 
 attribute [scoped instance] padicSubfieldModLinear
 
-/-- The action of `b ∈ F` on a morphism of `F_X`-module objects is the composition with the
-multiplication by the constant global section `b`. -/
-lemma padicSubfield_smul_hom (X : Scheme.{u}) (b : F)
-    {M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)} (f : M ⟶ N) :
-    (b • f).hom = f.hom ≫ Mod.globalSmul (padicSubfieldConstRingHom ℓ F X b).hom N :=
-  Mod.linearOfRingHom_smul_hom _ b f
-
-/-- On the derived category of `F_X`-module objects, the action of `b ∈ F` on (the image of) a
-complex `M` is the image of the multiplication by the constant global section `b` in each
-degree. -/
-lemma padicSubfield_smul_id_Q_obj {X : Scheme.{u}}
-    (M : CochainComplex (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (padicSubfieldRingObj X ℓ F)) ℤ) (b : F) :
-    b • 𝟙 (DerivedCategory.Q.obj M) = DerivedCategory.Q.map
-      ((HomologicalComplex.natTransId (Mod.smulNatTrans (padicSubfieldConstRingHom ℓ F X b).hom)
-        (ComplexShape.up ℤ)).app M) :=
-  smul_id_Q_obj _ (Profinite.continuousMapConstRingHom.{u} F) M b
-
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {Z Y : Over (Spec (.of k))}
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]

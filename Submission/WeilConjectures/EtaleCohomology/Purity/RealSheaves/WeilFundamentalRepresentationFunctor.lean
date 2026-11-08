@@ -132,11 +132,6 @@ noncomputable def fundamentalRepFunctor :
   map_comp f g := Rep.hom_ext (Representation.IntertwiningMap.ext
     (stalkMap_comp f.hom g.hom _ _ _))
 
-lemma fundamentalRepFunctor_map_hom_apply {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y)
-    (v : LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property)) :
-    ((fundamentalRepFunctor M D).map f).hom v = stalkMap f.hom X.property Y.property v :=
-  rfl
-
 /-- The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` of Weil fundamental representations of lisse Weil
 sheaves (`AlgebraicGeometry.WeilGroup.fundamentalRepTensorObjEquiv`). -/
 noncomputable def fundamentalRepTensorEquiv (X Y : LisseWeilSheaf K l C) :
@@ -187,12 +182,6 @@ noncomputable def fundamentalRepTensorIso :
   NatIso.ofComponents (fun X ↦ Rep.mkIso (fundamentalRepTensorEquiv M D X.1 X.2)) fun f ↦
     Rep.hom_ext (Representation.IntertwiningMap.ext (LinearMap.ext fun z ↦
       fundamentalRepTensorEquiv_naturality M D f.1 f.2 z))
-
-lemma fundamentalRepTensorIso_hom_app_hom_apply (X : LisseWeilSheaf K l C × LisseWeilSheaf K l C)
-    (z : LisseMonodromy.StalkSpace B.t
-      ((X.1.obj.tensorObj X.2.obj X.1.property).toLisse (X.1.property.tensorObj X.2.property))) :
-    ((fundamentalRepTensorIso M D).hom.app X).hom z = fundamentalRepTensorEquiv M D X.1 X.2 z :=
-  rfl
 
 /-- The Weil fundamental representation of the constant sheaf `ℚ̄_ℓ` is trivial: the transport
 along loops and the Frobenius `Φ` act trivially on its stalk at the base point. -/

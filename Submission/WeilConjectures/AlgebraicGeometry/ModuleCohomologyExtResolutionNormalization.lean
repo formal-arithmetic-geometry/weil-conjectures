@@ -11,7 +11,10 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 
 public import Submission.WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturalityExtension
-import Submission.WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Submission.WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import Submission.WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula
 

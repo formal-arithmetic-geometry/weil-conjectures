@@ -83,9 +83,11 @@ public import Submission.WeilConjectures.CategoryTheory.LocalCoefficientLocaliza
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import Mathlib.CategoryTheory.Functor.OfSequence
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ElementSiteDescent
+import Submission.WeilConjectures.CategoryTheory.Ringed.Sheaf.RingedSheafSliceConstruction
 import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ContinuousCocontinuousRingedRestriction
-import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ElementModulePresheafExtension
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Category.ModuleCat.Products
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -149,13 +151,6 @@ def presentationRHom {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (PresentationDerived R)ᵒᵖ × PresentationDerived R ⥤ PresentationDerived R :=
   letI := HasDerivedCategory.standard (PresentationModules R)
   derivedInternalHomOfUniverses.{u, u, u, u + 1} J R
-
-/-- The underlying sheaf of sets of a module sheaf.
-Source: Stacks 03CR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
-abbrev presentationForget {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) :=
-  SheafOfModules.toSheaf (localCoefficientRings R) ⋙
-    sheafCompose J (forget AddCommGrpCat.{u})
 
 /-- Multiplication by an actual global ring section on the rank-one module.
 Source: Stacks 0997 (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
@@ -231,48 +226,6 @@ abbrev RingedPresentationFunctor.derived
     {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
     {F : PresentationModules R ⥤ PresentationModules S} (T : RingedPresentationFunctor R S F) :=
   presentationDerivedMap F T.additive T.finiteLimits T.finiteColimits
-
-/-- The commutative restricted ring on the existing element site: `(U,s) ↦ R(U)`.
-This retains exactly the underlying ring of `elementRing`, with no new site construction.
-Source: Stacks 0791 and 04IE (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
-def presentationElementRing {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) (A : Sheaf J (Type u)) :
-    Sheaf (elementTopology A) CommRingCat.{u} :=
-  ⟨(elementProjection A).op ⋙ R.obj,
-    (elementProjection A).op_comp_isSheaf_of_isSheaf _ _ _ R.property⟩
-
-/-- Every map of element sites induced by a sheaf arrow is continuous.
-Source: Stacks 04J4; continuity is the last assertion of element-site descent.
-(blueprint: def-weil-pbc-ringed-presentation-comparison-data). -/
-theorem presentationElementRestriction_continuous
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    {A B : Sheaf J (Type u)} (b : B ⟶ A) :
-    Functor.IsContinuous (elementMap b) (elementTopology B) (elementTopology A) :=
-  (element_site_descent A).2.2.2 B b
-
-private theorem elementRestrictionRelocalization
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (O : Sheaf J RingCat.{u}) {A B : Sheaf J (Type u)} (b : B ⟶ A)
-    (h : Functor.IsContinuous (elementMap b) (elementTopology B) (elementTopology A)) :
-    Nonempty (elementModulePullback.{u, u} O A ⋙
-      elementModulePullbackOver.{u, u} O b h ≅ elementModulePullback.{u, u} O B) := by
-  refine ⟨NatIso.ofComponents (fun M ↦ Iso.refl _) ?_⟩
-  intro M N f
-  ext U x
-  rfl
-
-/-- Successive element restriction evaluates a module at the same underlying site object.
-Source: Stacks 04J4; both composites are sectionwise restriction, so the comparison is
-identity on every section and commutes with every module restriction map.
-(blueprint: def-weil-pbc-ringed-presentation-comparison-data). -/
-theorem presentationElementRestriction_relocalization
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) {A B : Sheaf J (Type u)} (b : B ⟶ A)
-    (h : Functor.IsContinuous (elementMap b) (elementTopology B) (elementTopology A)) :
-    Nonempty (elementModulePullback.{u, u} (localCoefficientRings R) A ⋙
-      elementModulePullbackOver.{u, u} (localCoefficientRings R) b h ≅
-        elementModulePullback.{u, u} (localCoefficientRings R) B) :=
-  elementRestrictionRelocalization (localCoefficientRings R) b h
 
 /-- A module equivalence with the comparisons which are not formal consequences
 of exact equivalence. Source: Stacks 03CR and 08J7.

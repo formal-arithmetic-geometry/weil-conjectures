@@ -161,19 +161,6 @@ instance : FinitaryExtensive (P.CostructuredArrow ⊤ Scheme.Spec S) :=
     (MorphismProperty.CostructuredArrow.toOver P Scheme.Spec S)
 
 
-noncomputable
-def Cover.etaleAffineRefinement (𝒰 : S.Cover (precoverage @Etale)) :
-    S.AffineCover @Etale where
-  I₀ := (𝒰.bind fun j ↦ (𝒰.X j).affineCover.changeProp (fun _ ↦ inferInstance)).I₀
-  X _ := _
-  f := (𝒰.bind fun j => (𝒰.X j).affineCover.changeProp fun _ ↦ inferInstance).f
-  idx := Cover.idx (𝒰.bind fun j => (𝒰.X j).affineCover.changeProp fun _ ↦ inferInstance)
-  covers := Cover.covers (𝒰.bind fun j => (𝒰.X j).affineCover.changeProp fun _ ↦ inferInstance)
-  map_prop j := by
-    simp only [Cover.changeProp]
-    have : Etale (𝒰.f j.fst) := 𝒰.map_prop _
-    infer_instance
-
 namespace AffineEtale
 
 instance : (AffineEtale.Spec S).ReflectsEffectiveEpis :=

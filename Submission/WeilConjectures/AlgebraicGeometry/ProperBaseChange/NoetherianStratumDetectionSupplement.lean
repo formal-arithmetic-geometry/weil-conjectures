@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingInverseImage
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
@@ -52,51 +52,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
-
-private noncomputable def modelSheafEquivalence (X : Scheme.{u})
-    (D : Type*) [Category.{u + 1} D] :
-    Sheaf (proEtaleModelTopology X) D ≌ Sheaf (ProEt.topology X) D :=
-  CategoryTheory.Equivalence.mk
-    ((AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).sheafPushforwardContinuous
-      D (ProEt.topology X) (proEtaleModelTopology X))
-    ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
-      D (proEtaleModelTopology X) (ProEt.topology X))
-    (Iso.refl _) (Iso.refl _)
-
-@[irreducible] private noncomputable def modelAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (D : Type*) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
-    [HasWeakSheafify (ProEt.topology X) D] :
-    (modelSheafEquivalence Y D).functor ⋙ proEtaleSheafInverseImage f D ⋙
-      (modelSheafEquivalence X D).inverse ⊣
-        (proEtaleModelBaseChange f).sheafPushforwardContinuous D
-          (proEtaleModelTopology Y) (proEtaleModelTopology X) :=
-  (proEtaleSheafAdjunction f D).restrictFullyFaithful
-    (modelSheafEquivalence Y D).fullyFaithfulFunctor
-    (modelSheafEquivalence X D).fullyFaithfulFunctor (Iso.refl _) (Iso.refl _)
-
-private theorem modelRingAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf (ProEt.topology Y) RingCat.{u + 1}) :
-    (modelAdjunction f RingCat.{u + 1}).unit.app
-        ((modelSheafEquivalence Y RingCat.{u + 1}).inverse.obj R) =
-      proEtaleRingModelUnit f R := by
-  apply (modelSheafEquivalence Y RingCat.{u + 1}).functor.map_injective
-  rw [modelAdjunction, Adjunction.map_restrictFullyFaithful_unit_app]
-  simp only [Iso.refl_hom, NatTrans.id_app]
-  rfl
-
-private noncomputable def modelAbelianPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (modelSheafEquivalence Y AddCommGrpCat.{u + 1}).inverse ⋙
-      Functor.sheafPullbackConstruction.sheafPullback (proEtaleModelBaseChange f)
-        AddCommGrpCat.{u + 1} (proEtaleModelTopology Y) (proEtaleModelTopology X) ⋙
-      (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor ≅
-        proEtaleSheafInverseImage f AddCommGrpCat.{u + 1} := by
-  let a := modelAdjunction f AddCommGrpCat.{u + 1}
-  let b := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-    (proEtaleModelBaseChange f) AddCommGrpCat.{u + 1}
-      (proEtaleModelTopology Y) (proEtaleModelTopology X)
-  exact Functor.isoWhiskerLeft (modelSheafEquivalence Y AddCommGrpCat.{u + 1}).inverse
-    (Functor.isoWhiskerRight (b.leftAdjointUniq a)
-      (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor)
 
 /-- Abelian sheaves are detected by the chosen pro-etale covers of all strata.
 Source: Stacks, Tags 09AH and 09AB, and finite-stratum induction

@@ -7,9 +7,10 @@ module
 
 public import Submission.WeilConjectures.CategoryTheory.Ringed.Sheaf.RingedSheafSliceConstruction
 public import Submission.WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
-import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ElementSiteDescent
 import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ContinuousCocontinuousRingedRestriction
-import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.ElementModulePresheafExtension
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Category.ModuleCat.Products
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 set_option autoImplicit true
@@ -95,98 +96,6 @@ structure RingedSheafSliceAdjunctionData
         Nonempty (Sheaf (elementTopology B) (Type u) ≌
           CostructuredArrow (𝟭 (Sheaf J (Type u))) B) ∧
         Nonempty (pullback ⋙ localize ≅ elementModulePullback R B)
-
-/-- The category-of-elements site of a sheaf, its ringed localization, and the
-exact extension-by-zero/module-restriction adjunction, including relocalization.
-
-Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction).
-
-Proof.
-1. The element category is small; covering families are those whose underlying families cover,
-   and the site axioms are inherited from the original site (sites.tex 0791, 00VH).
-2. The fibre presheaf `(U,s) ↦ {x ∈ F(U) | p_U x = s}` of `F ⟶ A` is a sheaf; conversely a sheaf
-   `L` on the element site gives the sheafified presheaf of pairs `(s, x)`, `x ∈ L(U,s)`, over `A`.
-   The maps `x ↦ (p x, x)` and evaluation at the fibre are mutually inverse and natural.
-3. The projection `(U,s) ↦ U` is continuous and cocontinuous, so restriction is the inverse image
-   of a morphism of topoi, which under step 2 is `G ↦ (G × A → A)`; this is `j_A`. The ring
-   `R × A → A` has fibre `R(U)`, so `R_A = j_A⁻¹ R` and the structural map is the identity; the
-   module pullback `R_A ⊗_{j_A⁻¹R} j_A⁻¹M = j_A⁻¹M` has sections `M(U)` at `(U,s)`
-   and is left adjoint to the induced module direct image `j_A*`.
-4. The presheaf `u_p L` at `U` is a colimit over triples `(V,t,φ : U → V)`, whose discrete part
-   `(U,s,id)` is final; so it is `⨁_{s ∈ A(U)} L(U,s)` with the stated restrictions. Its module
-   sheafification is `j_{A!}L`, and the sheafification universal property gives `j_{A!} ⊣ j_A^*`.
-5. Kernels are sectionwise, so `j_A^*` preserves kernels and, as a left adjoint, cokernels.
-   `j_{A!}` is right exact as a left adjoint; it preserves injections since a direct sum of
-   injections is injective, abelian sheafification is exact, and the forgetful functor from module
-   sheaves is faithful and preserves kernels (sites-modules.tex 03DJ).
-6. For `B ⟶ A`, objects of the iterated element site are `(U,s,b)` with `b ↦ s`, that is `(U,b)`;
-   arrows and coverings agree, `R × A` restricts to `R × B`, and the composite restriction evaluates
-   at `(U,b)` as `M(U)`, so it is canonically `j_B^*` (sites-modules.tex 04J4). -/
-theorem ringed_sheaf_slice_adjunction
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :
-    Nonempty (RingedSheafSliceAdjunctionData R A) := by
-  obtain ⟨htop, hcocont, ⟨e, ⟨efibre⟩⟩, hmap⟩ := element_site_descent A
-  let := hcocont
-  obtain ⟨f, hinverse, hring, ⟨adj⟩⟩ :=
-    continuous_cocontinuous_ringed_restriction (elementTopology A) J
-      (elementProjection A) R
-  obtain ⟨hpreserves, hsum⟩ := element_module_presheaf_extension R A
-  let := hpreserves
-  obtain ⟨extAdj⟩ := elementModuleExtension_adjunction R A
-  have : (elementModuleExtension R A).IsLeftAdjoint := extAdj.isLeftAdjoint
-  have : (elementModulePullback R A).IsLeftAdjoint := adj.isLeftAdjoint
-  have : (elementModulePullback R A).IsRightAdjoint := extAdj.isRightAdjoint
-  have : PreservesBinaryBiproducts (elementModuleExtension R A) :=
-    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
-  have hleft : PreservesFiniteLimits (elementModuleExtension R A) := by
-    let e := SheafOfModules.pullbackIso (F := elementProjection A) (𝟙 (elementRing R A))
-    have hcomp : PreservesFiniteLimits
-        (SheafOfModules.forget (elementRing R A) ⋙
-          PresheafOfModules.pullback.{u} (F := elementProjection A)
-            (𝟙 (elementRing R A) : elementRing R A ⟶ elementRing R A).hom ⋙
-          PresheafOfModules.sheafification (𝟙 R.obj)) := by
-      change PreservesFiniteLimits
-        (SheafOfModules.forget (elementRing R A) ⋙
-          PresheafOfModules.pullback.{u} (F := elementProjection A)
-            (𝟙 (elementRing R A).obj) ⋙
-          PresheafOfModules.sheafification (𝟙 R.obj))
-      have : PreservesFiniteLimits
-          (PresheafOfModules.pullback.{u} (F := elementProjection A)
-            (𝟙 (elementRing R A).obj) ⋙
-            PresheafOfModules.sheafification (𝟙 R.obj)) :=
-        comp_preservesFiniteLimits _ _
-      exact comp_preservesFiniteLimits _ _
-    exact preservesFiniteLimits_of_natIso e.symm
-  refine ⟨{
-    elementTopology_eq := htop
-    fibreEquivalence := e
-    fibre_iso := efibre
-    sliceRing_formula := rfl
-    localization := f
-    localization_inverse := hinverse
-    localization_ringMap_identity := fun U x ↦ hring (op (op U)) x
-    pullback := elementModulePullback R A
-    pullback_eq := rfl
-    localization_modules := adj
-    pullback_formula := fun _ _ _ ↦ rfl
-    extensionByZero := elementModuleExtension R A
-    extensionByZero_sheafification := ?_
-    moduleAdjunction := extAdj
-    pullback_exact := ⟨inferInstance, inferInstance⟩
-    extensionByZero_exact := ⟨hleft, inferInstance⟩
-    extensionByZero_additive := Functor.additive_of_preservesBinaryBiproducts _
-    relocalization := ?_ }⟩
-  · intro L
-    obtain ⟨esum⟩ := hsum L
-    exact ⟨(SheafOfModules.pullbackIso (F := elementProjection A)
-      (𝟙 (elementRing R A))).app L ≪≫
-        (PresheafOfModules.sheafification (𝟙 R.obj)).mapIso esum⟩
-  · intro B b
-    obtain ⟨_, _, ⟨eB, _⟩, _⟩ := element_site_descent B
-    refine ⟨hmap B b, elementModulePullbackOver R b (hmap B b), rfl, ⟨eB⟩, ?_⟩
-    exact ⟨Iso.refl _⟩
 
 end CategoryTheory
 end

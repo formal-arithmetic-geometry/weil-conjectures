@@ -8,7 +8,15 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField
 public import Submission.WeilConjectures.AlgebraicGeometry.Curve
-public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
+public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.GroupTheory.CosetCover
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.NoetherianSpace
+public import Submission.WeilConjectures.RingTheory.GradedAlgebra.Standard
+public import Submission.WeilConjectures.RingTheory.GradedAlgebra.PowersAlgebra
 import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 set_option autoImplicit true
@@ -64,22 +72,6 @@ variable (k : Type u) [Field k]
 lemma natCard_ulift_fin_two : Nat.card (ULift.{u} (Fin 2)) = 1 + 1 := by
   simp
 
-/-- The `k`-vector space of pairs `(p, q) ∈ k[t] × k[s]` with `p(t) = tᵈ q(1/t)` in
-`k[t, t⁻¹]`: the global sections of the twisting sheaf `𝒪(d)` on `ℙ¹_k`, written through their
-coefficients `p` on `U₀ = Spec k[t]` and `q` on `U₁ = Spec k[s]`, `s = 1/t`, with respect to the
-generating sections `g₀`, `g₁` glued by `g₀ = t⁻ᵈ g₁`. -/
-def twistSectionPairs (d : ℤ) : Submodule k (k[X] × k[X]) :=
-  LinearMap.ker ((toLaurentAlg (R := k)).toLinearMap ∘ₗ LinearMap.fst k k[X] k[X] -
-    LinearMap.mulLeft k (T d : k[T;T⁻¹]) ∘ₗ (invert (R := k)).toLinearMap ∘ₗ
-      (toLaurentAlg (R := k)).toLinearMap ∘ₗ LinearMap.snd k k[X] k[X])
-
-
-/-- For `D ≥ 0`, the coefficients of `p` in degrees `≤ D` of a pair `(p, q)` in
-`twistSectionPairs k D`; they determine the pair (`bijective_twistSectionPairsCoeff`). -/
-def twistSectionPairsCoeff (D : ℕ) : twistSectionPairs k D →ₗ[k] (Fin (D + 1) → k) where
-  toFun x j := x.1.1.coeff j
-  map_add' _ _ := by ext; simp
-  map_smul' _ _ := by ext; simp
 
 
 /-- The exponent vectors of the monomials of degree `D` in the two variables `x₀, x₁` are

@@ -65,24 +65,6 @@ namespace AlgebraicGeometry.ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable (X : Scheme.{u})
 
-/-- The functor `D(ν^*) : D(X_ét) ⥤ D(X_proét)` induced by the exact functor `ν^*`. -/
-noncomputable example :
-    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
-  D(ν^*(X)[A])
-
-/-- The functor `D⁺(ν^*) : D⁺(X_ét) ⥤ D⁺(X_proét)` induced by the exact functor `ν^*`. -/
-noncomputable example :
-    DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) ⥤
-      DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) :=
-  D+(ν^*(X)[A])
-
-/-- The right derived functor `R⁺ν_* : D⁺(X_proét) ⥤ D⁺(X_ét)` of the restriction `ν_*`. -/
-noncomputable example :
-    DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A) ⥤
-      DerivedCategory.Plus (Sheaf X.smallEtaleTopology A) :=
-  R+(ν_*(X)[A])
-
 /-- An object of the derived category of pro-étale sheaves is *bounded below of étale origin*
 if it is isomorphic to `D(ν^*) K'` for a bounded below complex `K'` of étale sheaves. This is the
 class of objects on which the exceptional adjunction of blueprint `sk-prop-sf-existence` (c)

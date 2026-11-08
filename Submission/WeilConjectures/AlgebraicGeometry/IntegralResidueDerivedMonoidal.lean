@@ -122,25 +122,6 @@ section CanonicalPullback
 -- Keep the ordinary module tensor data identical to the presentation interface.
 attribute [local instance 20000] sheafBraidedCategory
 
-/-- A named copy of the existing integral derived monoidal structure.
-This keeps repeated occurrences of the large internal-module instance compact;
-its data are exactly the existing derived monoidal instance. -/
-@[instance_reducible] noncomputable def residueExchangeIntegralDerivedMonoidal (T : Scheme.{u}) :
-    MonoidalCategory (residueExchangeDerived (integralCoeff ℓ E) T) :=
-  inferInstance
-
-/-- The actual derived module pullback with the strong monoidal structure induced
-from an ordinary pullback structure and preservation of flat modules. -/
-@[instance_reducible] noncomputable def residueExchangePullMonoidal
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)
-    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) :
-    (residueExchangeUpperStar (integralCoeff ℓ E) f).Monoidal := by
-  letI := m
-  letI := hFlat
-  unfold residueExchangeUpperStar
-  exact (f)^*⟦integralCoeff ℓ E⟧.residueDerivedMonoidal
-
 end CanonicalPullback
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -201,14 +201,4 @@ noncomputable def comparison :
     have hn := (H.map f).hom.naturality (baseChangeSection i hi x U.unop).op
     rw [← Category.assoc, hu, Category.assoc, ← hn, ← Category.assoc]
 
-/-- The comparison sends each neighbourhood section to its unit pullback.
-Source: Stacks Project, Tag 03Q6, the defining degree-zero pullback map.
-(blueprint: new-local-stalk-sections-comparison-map) -/
-@[reassoc]
-theorem ι_comparison (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (U : (OpenNhds x)ᵒᵖ) :
-    colimit.ι (neighbourhoodDiagram i x F) U ≫ (comparison i hi x H hH).app F =
-      (cocone i hi x H hH F).ι.app U :=
-  colimit.ι_desc _ _
-
 end LocalStalkSections

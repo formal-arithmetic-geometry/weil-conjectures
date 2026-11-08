@@ -196,69 +196,6 @@ def towerDerivedEvaluationTransition
       (NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ A).map t) (.up ℤ))
       DerivedCategory.Q)
 
-/-- The canonical exact-localization identification of evaluation after termwise `F`
-with `F` after evaluation. It is the composite of the canonical composition comparisons;
-its ordinary comparison is the strict evaluation identity. Source: Stacks Project,
-Tag 0A07, diagram-topos proof, and Derived Categories, Tag 015F
-(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization). -/
-def towerDerivedEvaluationInterchange
-    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
-    [Abelian A] [Abelian B]
-    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
-    [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)]
-    (F : B ⥤ A) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (n : ℕᵒᵖ) :
-    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ⋙
-        ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ≅
-      ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
-  Functor.mapDerivedCategoryCompIso
-    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) ((evaluation ℕᵒᵖ A).obj n) ≪≫
-    (Functor.mapDerivedCategoryCompIso ((evaluation ℕᵒᵖ B).obj n) F).symm
-
-private theorem derivedComposition_fac
-    {A : Type uA} {B : Type uB} {C : Type uC}
-    [Category.{vA} A] [Category.{vB} B] [Category.{vC} C]
-    [Abelian A] [Abelian B] [Abelian C]
-    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wC} C]
-    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) ≫
-        G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
-      (F ⋙ G).mapDerivedCategoryFactors.hom.app K := by
-  have h := Functor.mapDerivedCategoryCompIso_fac F G K
-  have hid : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K =
-      𝟙 _ := rfl
-  erw [hid, DerivedCategory.Q.map_id, Category.comp_id] at h
-  exact h
-
-private theorem towerInterchange_fac
-    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
-    [Abelian A] [Abelian B]
-    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
-    [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)]
-    (F : B ⥤ A) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (n : ℕᵒᵖ) (K : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
-    (towerDerivedEvaluationInterchange F n).hom.app (DerivedCategory.Q.obj K) ≫
-        F.mapDerivedCategory.map
-          (((evaluation ℕᵒᵖ B).obj n).mapDerivedCategoryFactors.hom.app K) ≫
-        F.mapDerivedCategoryFactors.hom.app
-          ((((evaluation ℕᵒᵖ B).obj n).mapHomologicalComplex (.up ℤ)).obj K) =
-      ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory.map
-          (((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategoryFactors.hom.app K) ≫
-        ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategoryFactors.hom.app
-          ((((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapHomologicalComplex (.up ℤ)).obj K) := by
-  let FT := (Functor.whiskeringRight ℕᵒᵖ B A).obj F
-  let EA := (evaluation ℕᵒᵖ A).obj n
-  let EB := (evaluation ℕᵒᵖ B).obj n
-  apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso FT EA).inv.app (DerivedCategory.Q.obj K))).mp
-  dsimp only [FT, EA, EB]
-  simp only [towerDerivedEvaluationInterchange, Iso.trans_hom, NatTrans.comp_app,
-    Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
-  exact (derivedComposition_fac EB F K).trans (derivedComposition_fac FT EA K).symm
-
 private theorem towerTransition_fac
     (A : Type uA) [Category.{vA} A] [Abelian A]
     [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)]

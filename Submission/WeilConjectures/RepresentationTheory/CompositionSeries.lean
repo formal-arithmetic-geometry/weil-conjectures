@@ -137,24 +137,6 @@ theorem coe_subquotientOrderIso_apply {S U : Subrepresentation ρ} (h : U ≤ S)
     (subquotientOrderIso h T : Subrepresentation ρ) = ofSubquotient S U T :=
   rfl
 
-theorem ofSubquotient_bot {S U : Subrepresentation ρ} (h : U ≤ S) :
-    ofSubquotient S U ⊥ = U := by
-  ext x
-  refine ⟨?_, fun hx ↦ (mem_ofSubquotient ⟨x, h hx⟩).2 ?_⟩
-  · rintro ⟨y, hy, rfl⟩
-    have hy' := Submodule.mem_comap.1 hy
-    rw [toSubmodule_bot, Submodule.mem_bot] at hy'
-    exact Submodule.mem_comap.1 ((Submodule.Quotient.mk_eq_zero _).1 hy')
-  · have : (Submodule.Quotient.mk ⟨x, h hx⟩ : S.toSubmodule ⧸ U.toSubmodule.comap _) = 0 :=
-      (Submodule.Quotient.mk_eq_zero (U.toSubmodule.comap S.toSubmodule.subtype)).2
-        (Submodule.mem_comap.2 hx)
-    rw [this]
-    exact (⊥ : Subrepresentation (S.subquotient U)).toSubmodule.zero_mem
-
-theorem ofSubquotient_top (S U : Subrepresentation ρ) : ofSubquotient S U ⊤ = S :=
-  le_antisymm (ofSubquotient_le S U ⊤) fun x hx ↦
-    (mem_ofSubquotient ⟨x, hx⟩).2 Submodule.mem_top
-
 end Subrepresentation
 
 namespace Representation
@@ -266,30 +248,6 @@ noncomputable def semisimplification :
 theorem isIrreducible_directSumSummand (i : Fin s.length) :
     (directSumSummand (fun i ↦ s.factor i) i).toRepresentation.IsIrreducible :=
   (directSumSummandEquiv (fun i ↦ s.factor i) i).isIrreducible_iff.1 (s.isIrreducible_factor i)
-
-/-- The semisimplification is the internal direct sum of its summands. -/
-theorem isInternal_semisimplification :
-    DirectSum.IsInternal fun i ↦ (directSumSummand (fun i ↦ s.factor i) i).toSubmodule :=
-  isInternal_directSumSummand _
-
-/-- A composition series of a nonzero representation has positive length. -/
-theorem length_pos [Nontrivial V] : 0 < s.length := by
-  by_contra! h
-  have h0 : s.series 0 = s.series (Fin.last s.length) :=
-    congrArg s.series (Fin.ext (by simp; omega))
-  obtain ⟨x, hx⟩ := exists_ne (0 : V)
-  have hxtop : x ∈ (⊤ : Subrepresentation ρ) := Submodule.mem_top
-  rw [← s.last_eq, RelSeries.last, ← h0, ← RelSeries.head, s.head_eq] at hxtop
-  exact hx ((Submodule.mem_bot k).1 hxtop)
-
-/-- The semisimplification of a nonzero representation is nonzero. -/
-theorem nontrivial_semisimplification [Nontrivial V] :
-    Nontrivial (⨁ (i : Fin s.length), ((s.series i.succ).toSubmodule ⧸
-      (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype)) :=
-  have := (s.isIrreducible_factor ⟨0, s.length_pos⟩).nontrivial
-  (DirectSum.of_injective (β := fun i : Fin s.length ↦ ((s.series i.succ).toSubmodule ⧸
-    (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype))
-    ⟨0, s.length_pos⟩).nontrivial
 
 /-- **The semisimplification does not depend on the composition series**: the
 semisimplifications of two composition series are equivalent (Jordan–Hölder).

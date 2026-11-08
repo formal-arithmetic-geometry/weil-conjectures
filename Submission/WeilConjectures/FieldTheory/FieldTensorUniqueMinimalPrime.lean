@@ -10,9 +10,18 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
-import Submission.WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
-import Submission.WeilConjectures.AlgebraicGeometry.FlatFibresIrreducible
-import Submission.WeilConjectures.RingTheory.TensorFiniteTypeLimit
+import Mathlib.AlgebraicGeometry.Over
+import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+import Mathlib.RingTheory.RingHom.Flat
+import Mathlib.RingTheory.FinitePresentation
+import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import Mathlib.Topology.Irreducible
+import Mathlib.RingTheory.Spectrum.Prime.Chevalley
+import Mathlib.RingTheory.FiniteType
+import Mathlib.RingTheory.Flat.Basic
+import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Submission.WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 import Submission.WeilConjectures.FieldTheory.AlgClosedFiniteTypeTensorDomain
 import Submission.WeilConjectures.FieldTheory.SepClosedTensorReduction

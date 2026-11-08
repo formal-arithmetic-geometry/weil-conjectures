@@ -153,19 +153,6 @@ lemma exists_upperStar_obj_iso_of_coalgebra
 
 variable {k : Type u} [Field k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- Effective descent of module objects along the projection `X̄ ⟶ X₀` of the geometric fibre
-over a finite field: module objects on `X₀` are coalgebras over `p^* p_*` on `X̄`. -/
-lemma isEquivalence_comparison_geometricFiberProj [Finite k] :
-    (Comonad.comparison (upperStarLowerStarAdjunction Λ f.geometricFiberProj)).IsEquivalence :=
-  isEquivalence_comparison_upperStarLowerStarAdjunction _ Λ
-
-/-- Effective descent of module objects along the projection `X₀ ⊗_k K ⟶ X₀` of a finite level
-(more generally of a separable algebraic extension `K / k`). -/
-lemma isEquivalence_comparison_finiteLevelProj (K : Type u) [Field K] [Algebra k K]
-    [Algebra.IsSeparable k K] :
-    (Comonad.comparison (upperStarLowerStarAdjunction Λ (f.finiteLevelProj K))).IsEquivalence :=
-  isEquivalence_comparison_upperStarLowerStarAdjunction _ Λ
-
 end CondensedRing
 
 end AlgebraicGeometry.ProEtale

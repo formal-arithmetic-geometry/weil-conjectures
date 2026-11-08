@@ -107,25 +107,6 @@ namespace Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/-- The total right derived functor `Rg_* : D(Z_ét) ⥤ D(Y_ét)` of the pushforward `g_*`
-along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of étale
-sheaves.
-
-It is not a definition of its own: it is the generic `Functor.rightDerivedFunctor`,
-written `R(-)`, applied to the underived pushforward `(g)_*[A]`. -/
-noncomputable example :
-    DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
-  R((g)_*[A])
-
-/-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on
-the *bounded below* derived categories of étale sheaves: the generic
-`Functor.rightDerivedFunctorPlus`, written `R+(-)`, applied to `(g)_*[A]`. -/
-noncomputable example :
-    DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
-      DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=
-  R+((g)_*[A])
-
 /-- The pushforward `g_*` preserves K-injective complexes, being right adjoint to the exact
 pullback `g^*`. -/
 instance preservesKInjectiveComplexes_lowerStar : ((g)_*[A]).PreservesKInjectiveComplexes :=
@@ -149,20 +130,6 @@ noncomputable def rightDerivedLowerStarCongr {g₁ g₂ : Z ⟶ Y} (h : g₁ = g
 
 @[simp]
 lemma rightDerivedLowerStarCongr_refl : rightDerivedLowerStarCongr A (g₁ := g) rfl = Iso.refl _ :=
-  rfl
-
-@[simp]
-lemma rightDerivedLowerStarCongr_hom_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
-    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    (rightDerivedLowerStarCongr A h).hom.app K = eqToHom (by subst h; rfl) := by
-  subst h
-  rfl
-
-@[simp]
-lemma rightDerivedLowerStarCongr_inv_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
-    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    (rightDerivedLowerStarCongr A h).inv.app K = eqToHom (by subst h; rfl) := by
-  subst h
   rfl
 
 /-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images.
@@ -251,23 +218,6 @@ resolutions of étale sheaves via `Etale.hasFunctorialFlatResolution_sheaf`. -/
 variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace Etale
-
-/-- The total left derived functor `Lg^* : D(Y_ét) ⥤ D(Z_ét)` of the pullback `g^*`
-along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of étale
-sheaves, defined via the K-flat left derivability structure: `Lg^*` is computed by
-applying `g^*` to a K-flat resolution.
-
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`,
-written `L(-)`, applied to the underived pullback `(g)^*[A]`.
-
-Since `g^*` is exact, the counit `Lg^* ∘ Q ⟶ Q ∘ g^*` is in fact an isomorphism
-everywhere; the construction via the derivability structure is uniform in the functor
-and applies verbatim once `g^*` is replaced by a non-exact functor (e.g. the pullback
-of sheaves of modules over a varying sheaf of rings). -/
-noncomputable example :
-    DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
-  L((g)^*[A])
 
 /-- The compatibility of the derived pullback with the levelwise functor: the total left
 derived functor `Lg^*`, computed via K-flat resolutions, is canonically isomorphic to

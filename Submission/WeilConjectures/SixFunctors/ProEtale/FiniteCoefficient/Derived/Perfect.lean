@@ -13,7 +13,18 @@ public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FlatMode
 public import Submission.WeilConjectures.ConstructibleSheaf.Monoidal
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
@@ -729,25 +740,6 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fac
   have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
   exact DerivedCategory.boundedConstructible_derivedDual_of_iso Λ e c
     (Etale.boundedConstructible_derivedHom Λ aX a b 0 0 hK' hKt' hU hUt)
-
-/-- Blueprint `rem-ptr-pod-coefficient-dual-on-x-4`: Pointer to the properties of the coefficient
-dual.
-
-The coefficient dual `K^∨ = RHom(K, Λ_X)` of a perfect complex `K ∈ Dctf(X, Λ)` is again perfect,
-and it lies in `Dctf(X, Λ)`: these are the two clauses of `lem-pod-coefficient-dual-perfect`
-(`AlgebraicGeometry.ProEtale.isDualizable_derivedDual` and
-`AlgebraicGeometry.ProEtale.constructibleFiniteTor_derivedDual`). -/
-theorem isDualizable_derivedDual_and_constructibleFiniteTor {k : Type u} [Field k] {p : ℕ}
-    [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
-    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [HasInvertibleExponent Λ X]
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
-    (hKd : IsDualizable K) :
-    IsDualizable ((derivedDual (ModuleCat.{u + 1} Λ) X).obj (op K)) ∧
-      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-        ((derivedDual (ModuleCat.{u + 1} Λ) X).obj (op K)) :=
-  ⟨isDualizable_derivedDual hKd, constructibleFiniteTor_derivedDual Λ (p := p) aX hK hKd⟩
 
 end ProEtale
 

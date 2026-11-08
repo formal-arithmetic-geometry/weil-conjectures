@@ -279,47 +279,6 @@ theorem isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
-**(a) Rank one.** `𝓗⁰(Ri^! (Λ_X(c)[2c]))` is free of rank one étale-locally: there is an étale
-cover of `Z` on each member of which it becomes the constant sheaf `Λ`. Consequently
-`H⁰(Z, Ri^! Λ_X(c)[2c]) = H^{2c}_Z(X, Λ(c)) = Γ(Z, 𝓗⁰)`, and likewise after étale base
-change. -/
-theorem exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion
-    (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage Z, ∀ a : 𝒰.I₀,
-      Nonempty ((upperStar (ModuleCat.{u + 1} Λ) (𝒰.f a)).obj
-          ((_root_.DerivedCategory.homologyFunctor _ 0).obj
-            ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) ≅
-        (constantSheaf (𝒰.X a).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-          (ModuleCat.of Λ Λ)) := by
-  choose W hzW e using
-    exists_nonempty_iso_upperStar_rightDerivedUpperShriek_of_isRegularImmersion Λ c i aX hZ
-  refine ⟨Scheme.Cover.mkOfCovers (P := @AlgebraicGeometry.Etale) Z
-    (fun z ↦ (i ⁻¹ᵁ W z).toScheme) (fun z ↦ (i ⁻¹ᵁ W z).ι) (fun z ↦ ⟨z, ⟨z, hzW z⟩, rfl⟩),
-    fun z ↦ ⟨?_⟩⟩
-  exact (((i ⁻¹ᵁ W z).ι)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryHomologyFunctorIso 0).app _ ≪≫
-    (_root_.DerivedCategory.homologyFunctor _ 0).mapIso (e z).some ≪≫
-    homologyZeroConstantComplexIso Λ _
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
-**(a) Lisse in degree zero.** `𝓗⁰(Ri^! (Λ_X(c)[2c]))` is a locally constant sheaf on `Z_ét`:
-it is constant on the members of an étale cover of `Z`.
--/
-theorem isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion
-    (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    Scheme.IsLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor _ 0).obj
-      ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) := by
-  obtain ⟨𝒰, h𝒰⟩ :=
-    exists_cover_nonempty_iso_homology_zero_rightDerivedUpperShriek_of_isRegularImmersion Λ c i
-      aX hZ
-  refine ⟨⟨⟨𝒰, fun a ↦ ?_⟩⟩⟩
-  rw [isConstant_over_iff_upperStar]
-  exact Sheaf.isConstant_of_iso _ (h𝒰 a).some
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
 Classes with supports `H^{2c}_Z(X, Λ(c))` are sections of a sheaf: `Ri_! Ri^! (Λ_X(c)[2c])` is a
 sheaf placed in degree zero, since `Ri^! (Λ_X(c)[2c])` is (clause (a)) and `Ri_! = i_*` is exact.
 -/

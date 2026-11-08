@@ -5,8 +5,11 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients

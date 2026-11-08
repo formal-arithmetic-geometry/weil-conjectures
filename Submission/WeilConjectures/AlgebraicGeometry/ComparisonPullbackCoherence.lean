@@ -602,36 +602,6 @@ private theorem comparison_coherent : ComparisonPullbackCoherent D :=
       comparison_square_components_bundled (comparisonSquareData D g' f' f g sq)
         (comparison_square_iso D g' f' f g sq) F⟩
 
-/-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
-sheaves and sheaves of modules over every finite discrete ring.
-Source: blueprint, sec-proper-base-change, sk-thm-properbasechange,
-lem-weil-pbc-comparison-pullback; Stacks, Tags 098T, 099R and 0B65.
-
-Proof: (1) the etale-to-pro-etale inclusion commutes with base change: both composites
-have the same fibre products and arrows. Restriction of sheaves therefore gives
-`lowerStarCompComparisonLowerStarIso`. Scalar actions are the same constant sections,
-so this works in fixed-ring modules as well as sets and abelian groups.
-(2) Compose the inverse-image and comparison adjunctions (`Adjunction.comp`), and
-apply the unit-normalized conjugation bijection (`conjugateIsoEquiv` and
-`unit_conjugateEquiv_symm`). This is exactly `comparisonCoefficientPullbackIso`.
-(3) For identities the right-image map is the identity after the fibre-product identity.
-For composites, both right-image paths restrict along the same associativity map
-`(W ×[Z] Y) ×[Y] X ≅ W ×[Z] X`, preserving the two projections. The composite Hom
-bijections thus coincide; their injectivity proves the identity and composite equations.
-(4) For the chosen Cartesian square, expand each square identification through the
-composition comparisons and the supplied commutativity equation. Both paths on sections
-identify the iterated products with `W ×[Y] X'` preserving both projections. Thus the
-right-image maps agree, and injectivity of the adjunction Hom bijections proves the
-specified square equation. These arguments are the node's four proof steps and retain
-all identity, arbitrary-composite and chosen-square cases. -/
-theorem comparison_pullback_coherent :
-    ComparisonPullbackCoherent (Type (u + 1)) ∧
-      ComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧
-      ∀ (Λ : Type (u + 1)) [Ring Λ],
-        ComparisonPullbackCoherent (ModuleCat.{u + 1} Λ) := by
-  exact ⟨comparison_coherent _, comparison_coherent _, fun Λ _ ↦
-    comparison_coherent (ModuleCat.{u + 1} Λ)⟩
-
 end ProEtale
 end AlgebraicGeometry
 

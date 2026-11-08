@@ -202,10 +202,6 @@ noncomputable def EtaleFrame.inter (hY : IsPullback j₁ j₂ i₁ i₂) (hi : j
   toZ := EtaleFrame.interToZ hY F₁ F₂ _ _ pullback.condition
   isPullback := EtaleFrame.isPullback_interToZ hY hi F₁ F₂ _ _ pullback.condition
 
-lemma EtaleFrame.inter_e (hY : IsPullback j₁ j₂ i₁ i₂) (hi : j₁ ≫ i₁ = i)
-    (F₁ : i₁.EtaleFrame c₁) (F₂ : i₂.EtaleFrame c₂) :
-    (EtaleFrame.inter hY hi F₁ F₂).e = pullback.fst F₁.e F₂.e ≫ F₁.e := rfl
-
 lemma EtaleFrame.inter_f (hY : IsPullback j₁ j₂ i₁ i₂) (hi : j₁ ≫ i₁ = i)
     (F₁ : i₁.EtaleFrame c₁) (F₂ : i₂.EtaleFrame c₂) :
     (EtaleFrame.inter hY hi F₁ F₂).f = Fin.append

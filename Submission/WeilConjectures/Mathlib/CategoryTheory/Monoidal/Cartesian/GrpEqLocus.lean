@@ -101,18 +101,6 @@ instance mono_eqLocusι : Mono (eqLocusι f g) :=
     rw [pullback_snd_eq_eqLocusι_comp, ← Category.assoc, ← Category.assoc]
     exact congrArg (· ≫ f) h)⟩
 
-theorem eqLocusLift_unique {X : C} (a : X ⟶ G) (h : a ≫ f = a ≫ g) (l : X ⟶ eqLocus f g)
-    (hl : l ≫ eqLocusι f g = a) : l = eqLocusLift f g a h :=
-  (cancel_mono (eqLocusι f g)).1 (by rw [hl, eqLocusLift_eqLocusι])
-
-/-- A morphism `a : X ⟶ G` factors through the equalizer of `f` and `g` if and only if
-`a ≫ f = a ≫ g`. -/
-theorem exists_comp_eqLocusι_iff {X : C} (a : X ⟶ G) :
-    (∃ l : X ⟶ eqLocus f g, l ≫ eqLocusι f g = a) ↔ a ≫ f = a ≫ g := by
-  refine ⟨?_, fun h ↦ ⟨eqLocusLift f g a h, eqLocusLift_eqLocusι f g a h⟩⟩
-  rintro ⟨l, rfl⟩
-  rw [Category.assoc, Category.assoc, eqLocusι_comp_eq]
-
 section GroupStructure
 
 variable [GrpObj G] [GrpObj H] [IsMonHom f] [IsMonHom g]

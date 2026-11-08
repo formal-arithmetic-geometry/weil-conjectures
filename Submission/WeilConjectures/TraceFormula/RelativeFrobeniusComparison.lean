@@ -237,17 +237,6 @@ lemma relativePullback_app_eq_unit (r : X ⟶ X') [IsProper r.left] (f' : X' ⟶
     Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_hom,
     Functor.map_comp, Category.assoc, eqToHom_refl, Category.comp_id]
 
-/-- The relative pullback is natural in the coefficient complex. -/
-@[reassoc]
-lemma relativePullback_naturality (r : X ⟶ X') [IsProper r.left] (f' : X' ⟶ Y) (g : X ⟶ Y)
-    (h : r ≫ f' = g) {M M' : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (a : M ⟶ M') :
-    (boundedConstructibleLowerShriek ℓ f').map a ≫
-        (relativePullback ℓ r f' g h).app M' =
-      (relativePullback ℓ r f' g h).app M ≫
-        (boundedConstructibleLowerShriek ℓ g).map
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).map a) :=
-  (relativePullback ℓ r f' g h).naturality a
-
 /-- **Compatibility of the relative pullbacks with composition**: `(r₁ ≫ r₂)^♯` is `r₂^♯`
 followed by `r₁^♯` and the composition isomorphism `Lr₁^* Lr₂^* ≅ L(r₁ ≫ r₂)^*`. -/
 lemma relativePullback_comp_app (r₁ : X ⟶ X') (r₂ : X' ⟶ X'') (f' : X'' ⟶ Y) (g₂ : X' ⟶ Y)

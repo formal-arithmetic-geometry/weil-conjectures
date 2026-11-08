@@ -175,31 +175,6 @@ theorem finite_integersShrinkMap :
   ext x
   simp [integersShrinkMap, RingHom.algebraMap_toAlgebra]
 
-/-- `Shrink 𝒪_{E'}` is a free `Shrink 𝒪_E`-module, being finite and torsion free over the
-principal ideal domain `Shrink 𝒪_E`. -/
-theorem free_integersShrinkMap :
-    letI := (integersShrinkMap.{w, u} l E E').toAlgebra
-    Module.Free (Shrink.{u + 1} (integers l E)) (Shrink.{u + 1} (integers l E')) := by
-  let := (integersShrinkMap.{w, u} l E E').toAlgebra
-  have := finite_integersShrinkMap.{w, u} l E E'
-  have : IsDomain (Shrink.{u + 1} (integers l E)) :=
-    (shrinkRingEquiv.{w, u} l E).symm.toMulEquiv.isDomain _
-  have : IsDomain (Shrink.{u + 1} (integers l E')) :=
-    (shrinkRingEquiv.{w, u} l E').symm.toMulEquiv.isDomain _
-  have : IsPrincipalIdealRing (Shrink.{u + 1} (integers l E)) :=
-    IsPrincipalIdealRing.of_surjective (shrinkRingEquiv l E).toRingHom
-      (shrinkRingEquiv l E).surjective
-  have : Module.IsTorsionFree (Shrink.{u + 1} (integers l E))
-      (Shrink.{u + 1} (integers l E')) := by
-    rw [Module.isTorsionFree_iff_algebraMap_injective, RingHom.algebraMap_toAlgebra]
-    intro x y h
-    apply (shrinkRingEquiv l E).symm.injective
-    apply Subtype.ext
-    apply (algebraMap E E').injective
-    have := congrArg (fun z ↦ (((shrinkRingEquiv l E').symm z : integers l E') : E')) h
-    simpa [integersShrinkMap] using this
-  exact Module.free_of_finite_type_torsion_free'
-
 end Shrink
 
 end PadicAlgCl

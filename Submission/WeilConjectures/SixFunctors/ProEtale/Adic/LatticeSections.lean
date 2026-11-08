@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.CategoryTheory.RingObjects.EllAdic
-public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafColimit
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
 public import Submission.WeilConjectures.LinearAlgebra.FreeModule.TorsionCoordinates
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.FreeSections
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
@@ -155,34 +155,5 @@ theorem nonempty_iso_of_lattice [IsDomain R] [IsPrincipalIdealRing R] [IsTopolog
   have hιd : ι d ≠ 0 := fun h ↦ hd (hιinj (h.trans (map_zero ι).symm))
   have := isIso_ofSections_of_lattice ι hι hιE F ψ hψ hψι b c d hιd hk (hinj b hb) hgen
   exact ⟨asIso (ofSections F fun i ↦ ψ (proEtTop X) (ContinuousMap.const _ (b i)))⟩
-
-omit [FiniteDimensional ℚ_[l] E] in
-/-- **Injectivity on quasi-compact objects**: `(aᵢ) ↦ ∑ aᵢ • sᵢ|_U` is injective for every `U`
-as soon as it is injective on families of functions with values in finite subextensions of
-`ℚ̄_ℓ` over quasi-compact `U`: a locally finite function on `U` is such a function on every
-affine open of `U`. -/
-lemma sectionsLinearMap_injective_of_compactSpace (s : Fin r → F.X.obj.obj (op (proEtTop X)))
-    (h : ∀ (U : X.ProEt) [CompactSpace U.left]
-      (a : Fin r → (adicConstantSheaf l X).obj.obj (op U)),
-      (∀ i, (a i).down.1 ∈ finiteIntermediateFieldValued l U.left) →
-        sectionsLinearMap F s (op U) a = 0 → a = 0) (U : X.ProEtᵒᵖ) :
-    Function.Injective (sectionsLinearMap F s U) := by
-  rw [injective_iff_map_eq_zero]
-  intro a ha
-  funext i
-  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
-  obtain ⟨W, hW, hxW, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.1
-    U.unop.left.isBasis_affineOpens) (show x ∈ (⊤ : U.unop.left.Opens) from trivial)
-  let ιW := overOpensι (P := @WeaklyEtale) (fun _ _ ↦ inferInstance) U.unop W
-  have : CompactSpace (overOpens (P := @WeaklyEtale) (fun _ _ ↦ inferInstance) U.unop W).left :=
-    isCompact_iff_compactSpace.1 hW.isCompact
-  have h0 := h _ (fun i ↦ (adicConstantSheaf l X).obj.map ιW.op (a i))
-    (fun i ↦ mem_finiteIntermediateFieldValued_of_mem_locallyFiniteFunctions
-      ((adicConstantSheaf l X).obj.map ιW.op (a i)).down.2)
-    (by
-      rw [← map_sectionsLinearMap]
-      change F.X.obj.map ιW.op (sectionsLinearMap F s U a) = 0
-      rw [ha, map_zero])
-  exact congrArg (fun b ↦ (b i).down.1 ⟨x, hxW⟩) h0
 
 end AlgebraicGeometry.ProEtale.AdicSheaf

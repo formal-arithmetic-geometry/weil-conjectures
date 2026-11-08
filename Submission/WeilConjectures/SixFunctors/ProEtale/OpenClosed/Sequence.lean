@@ -196,28 +196,6 @@ lemma isZero_upperStar_upperStar_lowerStar (hij : IsCompl (Set.range i.base) (Se
   exact ((upperStarComp _ j' g).app _).symm ≪≫
     eqToIso (by rw [hj]) ≪≫ (upperStarComp _ gU j).app _
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (4) for the closed immersion: for a
-morphism `g : X' ⟶ X` and the base changes `i' : Z' ⟶ X'`, `gZ : Z' ⟶ Z`, `j' : U' ⟶ X'`,
-`gU : U' ⟶ U`, there is a canonical isomorphism `g^* i_* G ≅ i'_* gZ^* G`. Both sides are
-supported on `Z'`, and their restrictions to `Z'` are `gZ^* i^* i_* G ≅ gZ^* G` by the counit
-isomorphism `AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_counit`. The
-corresponding isomorphism `g^* j_! ≅ j'_! gU^*` is
-`AlgebraicGeometry.ProEtale.openImmersionLowerShriekBaseChangeIso`. -/
-noncomputable def upperStarLowerStarClosedBaseChangeIso
-    (hij : IsCompl (Set.range i.base) (Set.range j.base))
-    (hij' : IsCompl (Set.range i'.base) (Set.range j'.base))
-    (hi : i' ≫ g = gZ ≫ i) (hj : j' ≫ g = gU ≫ j)
-    (G : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R)) :
-    (g)^*[ModuleCat.{u + 1} R].obj ((i)_*[ModuleCat.{u + 1} R].obj G) ≅
-      (i')_*[ModuleCat.{u + 1} R].obj ((gZ)^*[ModuleCat.{u + 1} R].obj G) :=
-  have h := isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl i' j' hij' _
-    (isZero_upperStar_upperStar_lowerStar i j g j' gU hij hj G)
-  @asIso _ _ _ _ ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i').unit.app _) h ≪≫
-    (i')_*[ModuleCat.{u + 1} R].mapIso (((upperStarComp _ i' g).app _).symm ≪≫
-      eqToIso (by rw [hi]) ≪≫ (upperStarComp _ gZ i).app _ ≪≫
-      (gZ)^*[ModuleCat.{u + 1} R].mapIso
-        (asIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit.app G)))
-
 omit [IsClosedImmersion i] [QuasiCompact j] [IsClosedImmersion i'] [IsOpenImmersion j']
   [QuasiCompact j'] in
 /-- The pullback along `g` of an extension by zero from `U` vanishes on the preimage `Z'` of the

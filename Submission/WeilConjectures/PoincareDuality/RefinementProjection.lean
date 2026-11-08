@@ -60,25 +60,4 @@ lemma boundedConstructibleOpenImmersionLowerShriekRefinement_app (w : i ≫ h = 
     boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep,
     Adjunction.restrictionComparison, Functor.squareTransport]
 
-omit [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] in
-/-- The triangle comparison `Li₁^* ≅ Lh^* ⋙ Li^*` is compatible with the multiplications of the
-monoidal derived pullbacks. -/
-lemma boundedConstructibleUpperStarTriangleComparison_μ (w : i ≫ h = i₁)
-    (K M : Dᵇc(Z₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i₁) K M ≫
-        (boundedConstructibleUpperStarTriangleComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-            w).hom.app (K ⊗ M) =
-      ((boundedConstructibleUpperStarTriangleComparison (Profinite.padicAlgClRingObj ℓ) ℓ w).hom.app
-          K ⊗ₘ
-          (boundedConstructibleUpperStarTriangleComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-              w).hom.app M) ≫
-        Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h ⋙
-          boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i) K M := by
-  subst w
-  refine Adjunction.μ_comp_hom_app_eq_of_δ _ (fun K M ↦ ?_) K M
-  simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom, eqToIso_refl,
-    Iso.refl_hom, Category.id_comp,
-    Functor.OplaxMonoidal.comp_δ]
-  exact boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ i h K M
-
 end AlgebraicGeometry.ProEtale.CondensedRing

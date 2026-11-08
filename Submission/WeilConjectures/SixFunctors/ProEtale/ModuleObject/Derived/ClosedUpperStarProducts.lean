@@ -73,17 +73,6 @@ theorem preservesLimitsOfShape_leftDerivedUpperStar_of_isCompl
   have := (i)^*⟦Λ⟧.preservesLimitsOfShape_discrete_mapDerivedCategory (β := ℕ)
   preservesLimitsOfShape_of_natIso (leftDerivedUpperStarIsoMapDerivedCategory Λ i).symm
 
-/-- For `X` quasi-compact and quasi-separated and `i : Z ⟶ X` a closed immersion with
-quasi-compact open complement `j`, the derived pullback `Li^*` on module objects over `Λ`
-preserves the countable product of copies of a single object `K`. -/
-theorem preservesLimit_leftDerivedUpperStar_of_isCompl
-    (hij : IsCompl (Set.range i.base) (Set.range j.base))
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :
-    PreservesLimit (Discrete.functor fun _ : ℕ ↦ K) L((i)^*⟦Λ⟧) :=
-  have := preservesLimitsOfShape_leftDerivedUpperStar_of_isCompl Λ i j hij
-  inferInstance
-
 omit [CompactSpace X] [QuasiSeparatedSpace X] in
 /-- On a noetherian scheme, the derived pullback `Li^*` along a closed immersion preserves
 countable products: the open complement of `i` is quasi-compact. -/

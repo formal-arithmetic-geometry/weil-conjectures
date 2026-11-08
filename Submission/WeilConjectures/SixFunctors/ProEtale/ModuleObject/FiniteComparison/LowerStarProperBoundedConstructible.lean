@@ -7,7 +7,22 @@ module
 
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.BoundedConstructibleFinite
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
-public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarEtaleOrigin
+public import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoetherian
 
 set_option autoImplicit true

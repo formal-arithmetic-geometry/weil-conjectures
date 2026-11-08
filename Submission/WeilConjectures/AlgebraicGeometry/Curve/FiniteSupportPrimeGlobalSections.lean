@@ -11,7 +11,12 @@ public import Submission.WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomo
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import Submission.WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import Submission.WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
+import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.Topology.KrullDimension
+import Mathlib.AlgebraicGeometry.Artinian
+import Submission.WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Submission.WeilConjectures.SixFunctors.OpenClosed.Exact

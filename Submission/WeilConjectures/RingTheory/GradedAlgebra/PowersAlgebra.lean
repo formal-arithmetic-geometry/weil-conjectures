@@ -70,9 +70,6 @@ def powersAlgebra : Subalgebra k K[X] where
 
 variable {V}
 
-lemma mem_powersAlgebra {F : K[X]} : F ∈ V.powersAlgebra ↔ ∀ d, F.coeff d ∈ V ^ d :=
-  Iff.rfl
-
 lemma monomial_mem_powersAlgebra {d : ℕ} {c : K} (hc : c ∈ V ^ d) :
     monomial d c ∈ V.powersAlgebra := fun e => by
   rw [coeff_monomial]
@@ -93,10 +90,6 @@ def powersGrading (d : ℕ) : Submodule k V.powersAlgebra where
     rw [SetLike.val_smul, coeff_smul, hF e he, smul_zero]
 
 variable {V}
-
-lemma mem_powersGrading_iff {d : ℕ} {F : V.powersAlgebra} :
-    F ∈ V.powersGrading d ↔ ∀ e, e ≠ d → (F : K[X]).coeff e = 0 :=
-  Iff.rfl
 
 /-- The element `c tᵈ` of `⊕ₙ Vⁿ tⁿ`, for `c ∈ Vᵈ`. -/
 noncomputable def powersMonomial {d : ℕ} (c : K) (hc : c ∈ V ^ d) : V.powersAlgebra :=

@@ -171,12 +171,6 @@ noncomputable abbrev stalkCorrespondence (m : ℕ) (x : RationalPoint X)
   u := (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).hom.app _ ≫
     K.stalkFrobenius m x hx ≫ (boundedConstructibleUpperShriekId ℓ (point k)).inv.app _
 
-/-- The point correspondence is the diagonal correspondence of the local Frobenius. -/
-lemma stalkCorrespondence_eq_ofEnd (m : ℕ) (x : RationalPoint X)
-    (hx : x ≫ frobeniusIterate Φ m = x) :
-    K.stalkCorrespondence m x hx = Correspondence.ofEnd _ (K.stalkFrobenius m x hx) :=
-  rfl
-
 /-- The proper pushforward diagram `(x, x)` from the point correspondence on `s` to the graph
 `(𝟙, Φ_m)` on `X` (blueprint `d-curve-pieces`): a diagram since `x ≫ 𝟙 = 𝟙 ≫ x` and
 `x ≫ Φ_m = 𝟙 ≫ x`. -/
@@ -194,10 +188,6 @@ noncomputable abbrev closedPieceDiagram (m : ℕ) (x : RationalPoint X)
   w₂ := by
     rw [hx]
     exact (Category.id_comp x).symm
-
-lemma closedPieceDiagram_coeff (m : ℕ) (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
-    (K.closedPieceDiagram m x hx).coeff = K.closedPiece x :=
-  rfl
 
 /-- The *closed piece coefficient* `u^Z = [x, x]_! F_{x,m} : LΦ_m^* K^Z ⟶ R(𝟙)^! K^Z` (blueprint
 `d-curve-pieces`): the coefficient pushforward of the local Frobenius along the proper pushforward

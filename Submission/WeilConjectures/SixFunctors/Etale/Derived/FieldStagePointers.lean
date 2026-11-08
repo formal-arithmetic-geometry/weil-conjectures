@@ -129,36 +129,6 @@ instance ProEtale.DerivedCategory.isStableUnderRetracts_boundedConstructibleAdic
       fun n ↦ (ProEtale.adicConstructibleSheaf l X).prop_of_retract
         (e.map (_root_.DerivedCategory.homologyFunctor _ n)) (hc n)⟩
 
-/-- Idempotent completeness of the common-stage category.
-
-The common-stage category `Dᵇc(X, ℚ̄_ℓ)` (in its Bhatt–Scholze model
-`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic`) is idempotent complete. -/
-theorem ProEtale.DerivedCategory.isIdempotentComplete_boundedConstructibleAdic
-    (X : Scheme.{u}) :
-    IsIdempotentComplete (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory :=
-  Idempotents.isIdempotentComplete_iff_isSplit.2 fun K p hp ↦ by
-  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := K.property.1
-  have : _root_.DerivedCategory.TStructure.t.IsLE K.obj (a + ((b - a).toNat : ℕ)) :=
-    _root_.DerivedCategory.TStructure.t.isLE_of_le K.obj b _ (by lia)
-  obtain ⟨Y, i, r, hir, hri⟩ := Triangulated.TStructure.isSplit_of_isGE_of_isLE
-    _root_.DerivedCategory.TStructure.t (b - a).toNat K.obj a p.hom
-    ((ObjectProperty.ι _).congr_map hp)
-  exact ⟨⟨Y, (ProEtale.DerivedCategory.boundedConstructibleAdic l X).prop_of_retract
-    ⟨i, r, hir⟩ K.property⟩, ObjectProperty.homMk i, ObjectProperty.homMk r,
-    by cat_disch, by cat_disch⟩
-
-/-- Pointer to the properties of the common-stage category.
-
-The common-stage category `Dᵇc(X, ℚ̄_ℓ)`, in which no idempotent is adjoined, is nevertheless
-idempotent complete, so that the canonical functor into its Karoubi envelope is an equivalence. -/
-theorem ProEtale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_adic
-    (X : Scheme.{u}) :
-    IsIdempotentComplete (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory ∧
-      (Idempotents.toKaroubi
-        (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory).IsEquivalence :=
-  have := ProEtale.DerivedCategory.isIdempotentComplete_boundedConstructibleAdic l X
-  ⟨this, inferInstance⟩
-
 end AlgebraicClosure
 
 section FieldTorAmplitude
@@ -187,20 +157,6 @@ theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_fiel
   refine ⟨0, 0, Etale.torAmplitudeIn_singleFunctor_zero_of_flat _ G ?_⟩
   exact (Etale.flat_iff_forall_flat_sheafFiber_obj G).2 fun _ ↦
     (ModuleCat.flat_iff_flat _).2 inferInstance
-
-/-- Blueprint `rem-ptr-weil-finite-tor-amplitude-4`: Pointer to the properties of finite Tor
-amplitude.
-
-At a field coefficient `F` the finite-Tor category is the bounded constructible one,
-`Dᵇctf(X, F) = Dᵇc(X, F)`, consistently with the amplitude condition: every bounded constructible
-complex at a field coefficient has finite Tor amplitude (blueprint
-`lem-integral-ctf-equals-bc`). -/
-theorem Etale.DerivedCategory.constructibleFiniteTor_eq_boundedConstructible_of_field :
-    Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) X =
-      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X := by
-  ext K
-  exact ⟨fun h ↦ h.1, fun h ↦
-    ⟨h, Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_field F X h⟩⟩
 
 end FieldTorAmplitude
 

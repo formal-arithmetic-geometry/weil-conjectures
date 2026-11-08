@@ -99,11 +99,4 @@ lemma affineSpaceSliceSpecial_fst :
       pullback.fst _ _ ≫ affineSpaceSlice n i x :=
   pullback.lift_fst _ _ _
 
-/-- The special-fibre slice lies over the map `Spec K ⟶ Spec k'` of the closed points. -/
-@[reassoc (attr := simp)]
-lemma affineSpaceSliceSpecial_snd :
-    affineSpaceSliceSpecial (k' := k') n i x ≫ pullback.snd _ _ =
-      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom (algebraMap k' K)) :=
-  pullback.lift_snd _ _ _
-
 end AlgebraicGeometry

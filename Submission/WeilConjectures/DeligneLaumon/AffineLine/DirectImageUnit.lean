@@ -123,21 +123,6 @@ theorem eq_zero_of_support_finite_lowerStar [IsDominant j] {N : WeilSheaf k₀ l
     (i : G ⟶ (lowerStar j).obj N) : i = 0 :=
   (⟨U, j, N, hN⟩ : LisseOnDenseOpen k₀ l).eq_zero_of_support_finite hG i
 
-omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
-/-- A punctual Weil sheaf `G` on the affine line whose restriction to a dense open
-`j : U₀ ↪ 𝔸¹` is lisse vanishes on `U₀`: the unit `G ⟶ j_* j^* G` is a morphism from a punctual
-sheaf to the direct image of a lisse sheaf, hence zero, and its restriction to `U₀` is
-invertible. -/
-theorem isZero_upperStar_of_isLisse [IsDominant j] {G : WeilSheaf k₀ l (affineLine k₀)}
-    (hG : G.support.Finite) (hGl : ((upperStar j).obj G).IsLisse) :
-    IsZero ((upperStar j).obj G) := by
-  set adj := upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j
-  have h0 : adj.homEquiv _ _ (𝟙 ((upperStar j).obj G)) = adj.homEquiv _ _ 0 := by
-    rw [eq_zero_of_support_finite_lowerStar j hGl hG (adj.homEquiv _ _ _), Adjunction.homEquiv_unit,
-      Functor.map_zero,
-      comp_zero]
-  exact (IsZero.iff_id_eq_zero _).2 ((adj.homEquiv _ _).injective h0)
-
 end DenseOpen
 
 namespace LisseOnDenseOpen

@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GenericFinite
+public import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

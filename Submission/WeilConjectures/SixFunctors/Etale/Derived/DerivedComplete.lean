@@ -9,7 +9,29 @@ public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Complete
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+public import Submission.WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.EssentialImage
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -241,38 +263,6 @@ theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X 
     DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
       ((R((f)_*[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))])).obj K) :=
   derivedComplete_rightDerivedLowerStar _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) f K hK
-
-/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
-
-**`Rf_!` preserves derived completeness at the integral stage, for proper `f`.** For `E` finite
-over `ℚ_ℓ` and a proper `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
-derived-complete objects of `D(X_ét, 𝒪_E)` to derived-complete objects of `D(Y_ét, 𝒪_E)`. For
-non-proper `f` this fails for the naive `Rf_!` (see
-`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`). -/
-theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [IsProper f]
-    (K : 𝐃(X, Shrink.{u + 1} (PadicAlgCl.integers l E)))
-    (hK : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K) :
-    DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
-      ((R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).obj K) :=
-  derivedComplete_rightDerivedLowerShriek _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) f K
-    hK
-
-attribute [-instance] Shrink.instRing in
-/-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
-
-**The dual at the integral stage.** For `E` finite over `ℚ_ℓ` and a scheme `X` on which the
-constant complex `𝒪_E` is derived complete, the coefficient dual `K^∨ = RHom(K, 𝒪_E)` of a
-derived-complete object of `D(X_ét, 𝒪_E)` is derived complete. -/
-theorem derivedCompleteIntegral_coefficientDual {X : Scheme.{u}}
-    (hΛ : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
-      Λ_(X, Shrink.{u + 1} (PadicAlgCl.integers l E)))
-    (K : 𝐃(X, Shrink.{u + 1} (PadicAlgCl.integers l E)))
-    (hK : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K) :
-    DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
-      ((DerivedCategory.coefficientDual
-        (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X).obj (op K)) :=
-  derivedComplete_coefficientDual _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) hΛ K hK
 
 end Integral
 

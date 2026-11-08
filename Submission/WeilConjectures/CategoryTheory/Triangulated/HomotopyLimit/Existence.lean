@@ -196,12 +196,6 @@ the legs (`homotopyLimitMap_π`) and an isomorphism if `a` is (`isIso_homotopyLi
 noncomputable def homotopyLimitMap : homotopyLimit F ⟶ homotopyLimit G :=
   (exists_homotopyLimitTriangle_hom a).choose
 
-/-- The morphism of chosen Milnor triangles induced by a morphism of towers. -/
-noncomputable def homotopyLimitTriangleHom : homotopyLimitTriangle F ⟶ homotopyLimitTriangle G :=
-  Triangle.homMk _ _ (homotopyLimitMap a) (piTowerMap a) (piTowerMap a)
-    (exists_homotopyLimitTriangle_hom a).choose_spec.1 (piTowerMap_comp_sub_piTowerShift a)
-    (exists_homotopyLimitTriangle_hom a).choose_spec.2
-
 @[reassoc (attr := simp)]
 lemma homotopyLimitMap_π (n : ℕ) :
     homotopyLimitMap a ≫ (homotopyLimitCone G).π.app (op n) =

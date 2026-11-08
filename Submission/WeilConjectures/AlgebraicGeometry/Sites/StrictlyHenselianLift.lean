@@ -252,26 +252,6 @@ theorem existsUnique_lift_of_isStrictlyHenselianLocalRing (p : V ⟶ X)
     · rw [Category.assoc, pullback.condition, ← Category.assoc, hσ, Category.id_comp]
     · rw [hℓv, ← Category.assoc, hσy, pullback.lift_fst]
 
-/-- The lift `Spec A ⟶ V` of `a` restricting to a given lift `v : Spec κ ⟶ V` of the closed
-geometric point, for `V` étale over `X`. -/
-noncomputable def henselianLift (p : V ⟶ X) [AlgebraicGeometry.Etale p]
-    (v : Spec (.of (IsLocalRing.ResidueField A)) ⟶ V)
-    (hv : v ≫ p = closedGeometricPoint A ≫ a) : Spec (.of A) ⟶ V :=
-  (existsUnique_lift_of_isStrictlyHenselianLocalRing a p v hv).exists.choose
-
-@[reassoc (attr := simp)]
-lemma henselianLift_comp (p : V ⟶ X) [AlgebraicGeometry.Etale p]
-    (v : Spec (.of (IsLocalRing.ResidueField A)) ⟶ V)
-    (hv : v ≫ p = closedGeometricPoint A ≫ a) : henselianLift a p v hv ≫ p = a :=
-  (existsUnique_lift_of_isStrictlyHenselianLocalRing a p v hv).exists.choose_spec.1
-
-@[reassoc (attr := simp)]
-lemma closedGeometricPoint_henselianLift (p : V ⟶ X) [AlgebraicGeometry.Etale p]
-    (v : Spec (.of (IsLocalRing.ResidueField A)) ⟶ V)
-    (hv : v ≫ p = closedGeometricPoint A ≫ a) :
-    closedGeometricPoint A ≫ henselianLift a p v hv = v :=
-  (existsUnique_lift_of_isStrictlyHenselianLocalRing a p v hv).exists.choose_spec.2
-
 
 end Henselian
 

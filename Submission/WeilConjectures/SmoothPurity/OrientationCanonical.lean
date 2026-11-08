@@ -219,14 +219,4 @@ instance isIso_smoothOrientationOfSmooth [SmoothOfRelativeDimension d f.left] :
   · exact h.choose_spec.1
   · infer_instance
 
-/-- If an isomorphism which is a canonical orientation exists, the orientation
-`smoothOrientationOfSmooth` is canonical. -/
-theorem isCanonicalSmoothOrientation_smoothOrientationOfSmooth
-    [SmoothOfRelativeDimension d f.left]
-    (h : ∃ φ, IsIso φ ∧ IsCanonicalSmoothOrientation ℓ f d φ) :
-    IsCanonicalSmoothOrientation ℓ f d (smoothOrientationOfSmooth ℓ f d) := by
-  classical
-  rw [smoothOrientationOfSmooth, dite_eq_left h]
-  exact h.choose_spec.2
-
 end AlgebraicGeometry.ProEtale.CondensedRing

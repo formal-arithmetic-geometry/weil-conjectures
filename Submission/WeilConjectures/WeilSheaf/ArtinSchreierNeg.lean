@@ -163,18 +163,6 @@ lemma pullbackLeftPullbackSndIso_hom_fst_over {Y Z W : Scheme.{u}} (b : Z ⟶ Y)
         pullback.fst V.hom b :=
   pullbackLeftPullbackSndIso_hom_fst _ _ _
 
-/-- A variant of `AlgebraicGeometry.ProEtale.pullbackLeftPullbackSndIso_inv_fst_fst_over` with an
-identity morphism. -/
-lemma pullbackLeftPullbackSndIso_inv_id_fst_fst_over {X Y Z : Scheme.{u}} (b : Z ⟶ Y)
-    (V : Y.ProEt) (g : X ⟶ Z) :
-    (pullbackLeftPullbackSndIso V.hom b g).inv ≫
-      𝟙 ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj
-          ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ b).obj V)).left ≫
-        pullback.fst ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ b).obj V).hom g ≫
-          pullback.fst V.hom b = pullback.fst _ _ := by
-  erw [Category.id_comp]
-  exact pullbackLeftPullbackSndIso_inv_fst _ _ _
-
 /-- Exchange morphisms of commuting pairs of automorphisms commute. -/
 lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (b : Y ⟶ Y)
     (a' : X ≅ X) (b' : Y ⟶ Y)
@@ -379,11 +367,6 @@ noncomputable def affineLine.geometricNegIso :
     rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_id]
     congr 1
     exact affineLine.smul_neg_one_comp_smul_neg_one k₀
-
-omit [Finite k₀] in
-lemma affineLine.geometricNegIso_inv :
-    (affineLine.geometricNegIso k₀).inv = (affineLine.geometricNegIso k₀).hom :=
-  rfl
 
 /-- The base change of `AS ≫ [-1] = [-1] ≫ AS`. -/
 lemma affineLine.geometricArtinSchreierMap_comp_geometricNegIso :

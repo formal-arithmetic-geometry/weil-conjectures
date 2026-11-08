@@ -155,45 +155,6 @@ universe da db sep
 variable {E : Type a} [Category.{av} E] [Abelian E] [HasDerivedCategory.{da} E]
   {F : Type b} [Category.{bv} F] [Abelian F] [HasDerivedCategory.{db} F]
 
-omit [HasDerivedCategory E] in
-private theorem sectionsDerives (T : E ⥤ F) [T.Additive] :
-    (CochainComplex.KInjectives.localizerMorphism E).Derives
-      (T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) := by
-  intro X Y f hf
-  have : X.obj.IsKInjective := X.property
-  have : Y.obj.IsKInjective := Y.property
-  have : QuasiIso f.hom := hf
-  obtain ⟨e, he⟩ := (CochainComplex.IsKInjective.quasiIso_iff f.hom).mp
-    (inferInstance : QuasiIso f.hom)
-  have : QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f.hom) := by
-    rw [← he]
-    exact (T.mapHomotopyEquiv e).quasiIso_hom
-  change IsIso (DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map f.hom))
-  infer_instance
-
-omit [HasDerivedCategory E] in
-private theorem sectionsTowerGrothendieck
-    [IsGrothendieckAbelian.{sep} E] : IsGrothendieckAbelian.{sep} (ℕᵒᵖ ⥤ E) := by
-  let G := separator E
-  have hG := isSeparator_separator E
-  have hS : ObjectProperty.IsSeparating
-      (.ofObj fun n : ℕᵒᵖ ↦ (evaluationLeftAdjoint E n).obj G) := by
-    intro M N f g hfg
-    apply NatTrans.ext
-    funext n
-    apply hG.def
-    intro a
-    let adj := evaluationAdjunctionRight E n
-    apply (adj.homEquiv G N).symm.injective
-    have h := hfg _ (ObjectProperty.ofObj_apply _ n) ((adj.homEquiv G M).symm a)
-    exact (adj.homEquiv_naturality_right_symm a f).trans
-      (h.trans (adj.homEquiv_naturality_right_symm a g).symm)
-  have : HasSeparator (ℕᵒᵖ ⥤ E) := ⟨_, hS.isSeparator_coproduct⟩
-  have : HasFilteredColimitsOfSize.{sep, sep} (ℕᵒᵖ ⥤ E) := ⟨fun _ _ _ ↦ inferInstance⟩
-  have : AB5OfSize.{sep, sep} (ℕᵒᵖ ⥤ E) := ⟨fun _ _ _ ↦ inferInstance⟩
-  exact { locallySmall := ⟨fun M N ↦ small_of_injective
-    (f := fun f : M ⟶ N ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
-
 end Generic
 
 section GenericScalar
@@ -267,14 +228,6 @@ structure SequenceSectionsComparisons
   scalar : ∀ {R S : Sheaf J CommRingCat.{w}} (f : R ⟶ S),
     (finite S).functor ≅
       (sequenceCoefficientRestriction f).mapDerivedCategory ⋙ (finite R).functor
-
-/-- G is a composite of actual functors on ordinary derived categories.
-Source: Stacks 0941, 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
-def SequenceSectionsComparisons.global
-    {B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} {A : Sheaf J CommRingCat.{w}}
-    {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) :
-    DerivedCategory (StrictRingSystem B) ⥤ DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) :=
-  d.restriction.functor.mapDerivedCategory ⋙ d.tower.functor
 
 -- Keep localization constructions behind their factorization API in the proof.
 attribute [local irreducible] Functor.mapDerivedCategory

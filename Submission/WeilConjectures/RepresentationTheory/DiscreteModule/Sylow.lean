@@ -96,20 +96,6 @@ theorem exists_ne_zero_nsmul_eq_zero_smul_eq_of_isPGroup (ℓ : ℕ) [hℓ : Fac
     exact congrArg Subtype.val this
 
 
-/-- The action of `K` on the quotient of `A` by a `K`-stable subgroup. -/
-@[reducible]
-def distribMulActionQuotient (B : AddSubgroup A) (hB : ∀ k : K, ∀ b ∈ B, k • b ∈ B) :
-    DistribMulAction K (A ⧸ B) where
-  smul k := QuotientAddGroup.map B B (DistribSMul.toAddMonoidHom A k) fun b hb ↦ hB k b hb
-  one_smul q := QuotientAddGroup.induction_on q fun a ↦ by
-    change QuotientAddGroup.mk ((1 : K) • a) = _
-    rw [one_smul]
-  mul_smul k k' q := QuotientAddGroup.induction_on q fun a ↦ by
-    change QuotientAddGroup.mk ((k * k') • a) = QuotientAddGroup.mk (k • k' • a)
-    rw [mul_smul]
-  smul_zero k := map_zero _
-  smul_add k := map_add _
-
 
 end FixedPoints
 

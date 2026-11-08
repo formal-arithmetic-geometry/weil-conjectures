@@ -936,43 +936,6 @@ lemma coeff_toLaurent_mem {D : ℕ} {f : MvPolynomial n A}
 
 variable {a b b' : ℤ}
 
-variable (n A) in
-/-- Multiplication of cochains by a Laurent polynomial `F` of degree `a` whose exponent vectors
-are nonnegative, a map from the cochains of `𝒪(b)` to those of `𝒪(a + b)`. -/
-def monomialCechMulCochain (F : AddMonoidAlgebra A (n → ℤ))
-    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') (p : ℕ) :
-    MonomialCechCochain n A b p →ₗ[A] MonomialCechCochain n A b' p where
-  toFun c σ := ⟨(F * AddMonoidAlgebra.ofCoeff (c σ : (n → ℤ) →₀ A)).coeff, by
-    classical
-    intro e he
-    obtain ⟨e₁, h₁, e₂, h₂, rfl⟩ :=
-      Finset.mem_add.1 (AddMonoidAlgebra.support_coeff_mul_subset _ _ he)
-    obtain ⟨hs₁, hp₁⟩ := hF h₁
-    obtain ⟨hs₂, hp₂⟩ := (c σ).2 h₂
-    refine ⟨?_, fun i hi ↦ add_nonneg (hp₁ i) (hp₂ i hi)⟩
-    simp only [Pi.add_apply, Finset.sum_add_distrib, hs₁, hs₂, h]⟩
-  map_add' x y := MonomialCechCochain.ext_coeff fun σ e ↦ by
-    change (F * AddMonoidAlgebra.ofCoeff ((x σ : (n → ℤ) →₀ A) + (y σ : (n → ℤ) →₀ A))).coeff e =
-      (F * AddMonoidAlgebra.ofCoeff (x σ : (n → ℤ) →₀ A)).coeff e +
-        (F * AddMonoidAlgebra.ofCoeff (y σ : (n → ℤ) →₀ A)).coeff e
-    rw [AddMonoidAlgebra.ofCoeff_add, mul_add, AddMonoidAlgebra.coeff_add, Finsupp.add_apply]
-  map_smul' r x := MonomialCechCochain.ext_coeff fun σ e ↦ by
-    change (F * AddMonoidAlgebra.ofCoeff (r • (x σ : (n → ℤ) →₀ A))).coeff e =
-      r * (F * AddMonoidAlgebra.ofCoeff (x σ : (n → ℤ) →₀ A)).coeff e
-    rw [AddMonoidAlgebra.ofCoeff_smul, mul_smul_comm, AddMonoidAlgebra.coeff_smul_apply,
-      smul_eq_mul]
-
-variable (n A) in
-/-- **Multiplication by a polynomial on the monomial Čech complex**: multiplication by a
-Laurent polynomial `F` of degree `a` with nonnegative exponent vectors, e.g. a global section
-of `𝒪(a)`, is a morphism of monomial Čech complexes from `𝒪(b)` to `𝒪(a + b)`. -/
-def monomialCechMul (F : AddMonoidAlgebra A (n → ℤ))
-    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') :
-    monomialCechComplex n A b ⟶ monomialCechComplex n A b' :=
-  (AlgebraicTopology.alternatingCofaceMapComplex (ModuleCat.{u} A)).map
-    { app k := ModuleCat.ofHom (monomialCechMulCochain n A F hF h k.len)
-      naturality _ _ _ := rfl }
-
 
 variable (n) in
 /-- The strictly negative exponent vector `(-1, …, -1)`, of sum `-(d + 1)`. -/
@@ -1012,20 +975,6 @@ lemma monomialCechPairing_aux {d : ℕ} (hm : m ≤ -(d : ℤ) - 1) :
   rw [Int.toNat_of_nonneg (by omega)]
   ring
 
-variable (n A) in
-/-- **The Serre pairing on the monomial Čech complex**: for `m ≤ -d - 1` and `D = -m - d - 1`,
-a homogeneous polynomial `f` of degree `D`, i.e. a global section of `𝒪(D)`, pairs with a class
-in `Hᵈ(𝒪(m))` to the trace of the product, `⟨f, x⟩ = tr (f · x) ∈ Hᵈ(𝒪(-d-1)) ≅ A`.
-
-(blueprint: `lem-pc-projective-space-serre-pairing`) -/
-def monomialCechPairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1)
-    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
-    (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
-    (monomialCechComplex n A m).homology (p + 1) →ₗ[A] A :=
-  (monomialCechTrace n A hn).toLinearMap ∘ₗ
-    (HomologicalComplex.homologyMap (monomialCechMul n A (toLaurent n A f)
-      (coeff_toLaurent_mem f.2) (monomialCechPairing_aux hm)) (p + 1)).hom
-
 omit [Fintype n] in
 lemma toLaurent_smul (r : A) (f : MvPolynomial n A) :
     toLaurent n A (r • f) = r • toLaurent n A f := by
@@ -1033,19 +982,6 @@ lemma toLaurent_smul (r : A) (f : MvPolynomial n A) :
     r • AddMonoidAlgebra.ofCoeff (Finsupp.mapDomain _ (AddMonoidAlgebra.coeff f))
   rw [AddMonoidAlgebra.coeff_smul, Finsupp.mapDomain_smul, AddMonoidAlgebra.ofCoeff_smul]
 
-
-variable (n A) in
-/-- The coefficient of `x₀⁻¹ ⋯ x_d⁻¹` in the product of a polynomial with a Laurent
-polynomial, as a linear function of the polynomial. -/
-def coeffNegOneMul {D : ℕ} (G : AddMonoidAlgebra A (n → ℤ)) :
-    MvPolynomial.homogeneousSubmodule n A D →ₗ[A] A where
-  toFun f := (toLaurent n A f * G).coeff fun _ ↦ -1
-  map_add' f g := by
-    simp only [Submodule.coe_add, map_add, add_mul, AddMonoidAlgebra.coeff_add,
-      Finsupp.add_apply]
-  map_smul' r f := by
-    simp only [Submodule.coe_smul, toLaurent_smul, smul_mul_assoc,
-      AddMonoidAlgebra.coeff_smul_apply, RingHom.id_apply]
 
 
 end AlgebraicGeometry.ProjectiveSpace

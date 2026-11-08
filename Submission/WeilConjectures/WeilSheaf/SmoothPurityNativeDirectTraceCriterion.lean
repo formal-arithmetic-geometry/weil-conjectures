@@ -54,46 +54,4 @@ noncomputable def directTraceCondensedComparison :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (ProEtaleWeilSheaf.rightDerivedLowerStarCompToCondensedIso k₀ l f)
 
-/-- The adjunct of a native direct-image trace is invertible when its condensed
-carrier is universal on the geometric shifts of every source. -/
-theorem isIso_homEquiv_of_condensed_direct_trace
-    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X}
-    (adj : derivedLowerStar (k₀ := k₀) (l := l) f ⊣ J)
-    {P : WeilComplex k₀ l X} {N : WeilComplex k₀ l Y}
-    (ε : (derivedLowerStar (k₀ := k₀) (l := l) f).obj P ⟶ N)
-    (δ : (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l)
-        f (comp_over f _)).rightDerivedFunctor.obj
-          ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj P.obj) ⟶
-      (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj N.obj)
-    (hε : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.map ε.hom =
-      (directTraceCondensedComparison f).hom.app P ≫ δ)
-    (h : ∀ (K : WeilComplex k₀ l X) (n : ℤ), Function.Bijective fun φ :
-      (shiftFunctor _ n).obj ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
-        ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)) ⟶
-      (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj
-        ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj P.obj) ↦
-        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-          (Scheme.Hom.geometricFiberMap f (comp_over f _))).rightDerivedFunctor.map φ ≫
-        (Endofunctor.IsoAlgebra.derivedForgetCommIso
-          (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso
-            (Profinite.padicAlgClRingObj l) f (comp_over f _))).inv.app
-          ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj P.obj) ≫
-        (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map δ) :
-    IsIso (adj.homEquiv P N ε) := by
-  have := (objectProperty k₀ l X).fullyFaithfulι.full
-  have := (objectProperty k₀ l Y).fullyFaithfulι.full
-  have := (objectProperty k₀ l X).fullyFaithfulι.faithful
-  have := (objectProperty k₀ l Y).fullyFaithfulι.faithful
-  apply Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
-    ((objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor)
-    ((objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor)
-    _ (directTraceCondensedComparison f) ε δ hε
-  intro K
-  exact Endofunctor.IsoAlgebra.bijective_map_comp_rightDerived_of_bounded
-    (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso
-      (Profinite.padicAlgClRingObj l) f (comp_over f _))
-    (CondensedRing.condensed_trace_preservesCoproduct (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap f (comp_over f _))) δ _
-    (boundedConstructible_condensedCarrier K).1 (h K)
-
 end AlgebraicGeometry.WeilComplex

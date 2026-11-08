@@ -97,26 +97,6 @@ open CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
-/-- Let `i : Y ⟶ X` and `f : U ⟶ Y` be morphisms such that the restriction of `M` to `Y`,
-further restricted along `f`, is finitely presented. Then for every open `W ⊆ U`, the pullback
-of `M` along `W ⟶ U ⟶ Y ⟶ X` is finitely presented. -/
-lemma isFinitelyPresented_upperStar_opens_ι_comp {X Y U : Scheme.{u}} (i : Y ⟶ X) (f : U ⟶ Y)
-    (W : U.Opens) (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
-    (h : Mod.IsFinitelyPresented ((ProEtale.upperStar Ab.{u + 1} f).obj
-      ((ProEtale.upperStar Ab.{u + 1} i).obj
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
-      (((ProEtale.upperStar Ab.{u + 1} f).mapMod _).obj
-        (((ProEtale.upperStar Ab.{u + 1} i).mapMod _).obj M))) :
-    Mod.IsFinitelyPresented _
-      ((W.ι ≫ f ≫ i)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) := by
-  have h₁ := isFinitelyPresented_upperStar_of_comap_iso (Profinite.padicIntegersRingObj ℓ E.1)
-    f (condensedPullbackHom _ i) (comapUpperStarObjIso _ i M) h
-  exact (CondensedRing.IsFinitelyPresented.upperStar _ W.ι h₁).of_iso
-    ((W.ι)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.mapIso
-      ((CondensedRing.upperStarComp _ f i).app M).symm ≪≫
-      ((CondensedRing.upperStarComp _ W.ι (f ≫ i)).app M).symm)
-
 /-- The composite `W ⟶ U ⟶ Y ⟶ X` of the inclusion of an affine open, a morphism and a
 morphism from a quasi-compact scheme is quasi-compact. -/
 lemma quasiCompact_opens_ι_comp {X Y U : Scheme.{u}} [IsNoetherian X] (i : Y ⟶ X) (f : U ⟶ Y)

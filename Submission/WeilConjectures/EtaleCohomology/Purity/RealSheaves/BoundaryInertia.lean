@@ -97,13 +97,6 @@ lemma connectedSpace_boundaryOpen (z : C) : ConnectedSpace (boundaryOpen (p := p
       (boundaryOpen (p := p) j z).isOpen (Set.subset_univ _)⟩
   exact isConnected_iff_connectedSpace.1 hirr.isConnected
 
-omit [Finite K] [GeometricallyConnected p] [ConnectedSpace U] [IsCurve pU]
-  [GeometricallyConnected pU] in
-lemma toBoundaryOpen_eq (z : C) :
-    toBoundaryOpen (p := p) j z = toOpen j (boundaryOpen (p := p) j z)
-      (opensRange_le_boundaryOpen j z) :=
-  rfl
-
 variable (p) in
 /-- An affine chart at a boundary point `z`: an affine open `W ∋ z` of `U₀ ∪ {z}` on which `z` is
 the zero locus of a single section `ϖ`, i.e. `W ∖ {z} = D(ϖ)`. -/
@@ -274,22 +267,10 @@ section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
-/-- The decomposition group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of
-the stabiliser of `Q`. -/
-noncomputable def decompositionGroup (Q : Ideal (integralClosure Γ(C, c.W) Ω)) : Subgroup GU :=
-  (MulAction.stabilizer Gal(Ω/C.functionField) Q).map (genericGaloisMap j sU GU)
-
 /-- The inertia group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of the
 subgroup of `Gal(Ω / k(C))` acting trivially on the residue field of `Q`. -/
 noncomputable def inertiaGroup (Q : Ideal (integralClosure Γ(C, c.W) Ω)) : Subgroup GU :=
   (Q.inertia Gal(Ω/C.functionField)).map (genericGaloisMap j sU GU)
-
-omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
-lemma inertiaGroup_le_decompositionGroup (Q : Ideal (integralClosure Γ(C, c.W) Ω)) :
-    inertiaGroup sU GU c Q ≤ decompositionGroup sU GU c Q :=
-  Subgroup.map_mono (Ideal.inertia_le_stabilizer Q)
 
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Inertia acts trivially on the covers extending over `z`**: the inertia group lies in the
@@ -663,22 +644,5 @@ noncomputable def boundaryDatum :
   normalizes_inertia z := map_conj_boundaryInertia j sU GU hj τ GC z
 
 end Datum
-
-omit [Smooth p] [IsIntegral C] in
-/-- A nonempty open `j : U₀ ⟶ C₀` of a smooth geometrically connected curve over a finite field,
-itself geometrically connected, has a boundary datum
-(`AlgebraicGeometry.WeilGroup.boundaryDatum`). -/
-theorem BoundaryDatum.nonempty [SmoothOfRelativeDimension 1 p] (hj : j ≫ p = pU) :
-    ∃ (WU : WeilGroup pU) (WC : WeilGroup p), Nonempty (BoundaryDatum j WU WC) := by
-  have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
-  have := LocallyOfFiniteType.isLocallyNoetherian p
-  have := IsRegular.of_smooth p
-  have : IsIntegral C := IsRegular.isIntegral C
-  obtain ⟨sU⟩ := pU.nonempty_algebraicClosure_point
-  obtain ⟨sC⟩ := p.nonempty_algebraicClosure_point
-  obtain ⟨GU, _, _⟩ := exists_isFundamentalGroup sU
-  obtain ⟨GC, _, _⟩ := exists_isFundamentalGroup sC
-  obtain ⟨τ⟩ := nonempty_iso_of_fiberFunctor (fiber (sU ≫ j)) (fiber sC)
-  exact ⟨_, _, ⟨boundaryDatum j sU GU hj τ GC⟩⟩
 
 end AlgebraicGeometry.WeilGroup

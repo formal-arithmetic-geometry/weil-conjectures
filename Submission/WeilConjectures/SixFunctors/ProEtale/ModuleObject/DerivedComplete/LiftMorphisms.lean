@@ -129,19 +129,6 @@ noncomputable abbrev reductionTransition
         ((Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctor.obj K) :=
   (reductionTransitionNatTrans E n).app K
 
-/-- The canonical transitions are natural. -/
-@[reassoc]
-lemma reductionTransition_naturality
-    {K K' : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))} (f : K ⟶ K') :
-    (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.map
-        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map f) ≫
-      reductionTransition E n K' =
-    reductionTransition E n K ≫
-      (Mod.comap (integersModPowReduction X ℓ E n)).mapDerivedCategory.map
-        ((Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctor.map f) :=
-  (reductionTransitionNatTrans E n).naturality f
-
 /-- The canonical transitions are compatible with the units `K ⟶ Res_n (red_n K)`. -/
 @[reassoc (attr := simp)]
 lemma unit_comp_reductionTransition

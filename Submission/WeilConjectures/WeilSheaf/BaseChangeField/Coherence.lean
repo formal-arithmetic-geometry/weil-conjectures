@@ -187,13 +187,6 @@ lemma adicLowerStarSquareIso_hom_app_hom {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {
     adicLowerStarComp_inv_app_hom, lowerStarFactor_rfl, ← lowerStarComp_trans_lowerStarCongr,
     Category.assoc]
 
-lemma adicLowerStarCongr_hom_app_comp_adicLowerStarComp_inv_app_hom {X Y Z : Scheme.{u}}
-    {x : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (h : x = b ≫ c) (M : AdicSheaf l Z) :
-    ((adicLowerStarCongr l h).hom.app M ≫ (adicLowerStarComp l b c).inv.app M).hom =
-      (lowerStarFactor _ h.symm).inv.app M.X := by
-  rw [Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
-    lowerStarCongr_hom_app_comp_lowerStarComp_inv_app_eq]
-
 /-- Exchange isomorphisms are compatible with composition of the horizontal morphisms. -/
 lemma adicLowerStarSquareIso_comp {Z P : Scheme.{u}} (p : Z ⟶ P) (a₁ a₂ a₃ : Z ⟶ Z)
     (b₁ b₂ b₃ : P ⟶ P) (ha : a₃ = a₂ ≫ a₁) (hb : b₃ = b₂ ≫ b₁)

@@ -339,11 +339,6 @@ noncomputable instance sheafPullbackMonoidal
     (sheafPullback F A J K).Monoidal :=
   .ofOplaxMonoidal _
 
-example [∀ X : Dᵒᵖ, IsSifted (CostructuredArrow F.op X)]
-    [∀ (X : Dᵒᵖ) (M : A), PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorLeft M)] :
-    (sheafPullbackMonoidal F A J K).toOplaxMonoidal = sheafPullbackOplaxMonoidal F A J K :=
-  rfl
-
 end Functor.sheafPullbackConstruction
 
 section PushforwardUnit

@@ -11,8 +11,12 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import Submission.WeilConjectures.AlgebraicGeometry.Curve.Picard
-public import Submission.WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
-public import Submission.WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
+public import Submission.WeilConjectures.AlgebraicGeometry.DualNumbers
+public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Submission.WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import Submission.WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import Submission.WeilConjectures.CategoryTheory.Sites.Torsor
+public import Submission.WeilConjectures.Mathlib.Algebra.DualNumber
 public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import Submission.WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
@@ -1686,24 +1690,6 @@ noncomputable def picardFunctorDegreeIsoOfIsPullback (q : C' ⟶ C)
   overMapOpCompSheafifyIso _ _ ≪≫
     (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso
       (picardSubfunctorDegreeIsoOfIsPullback q h d))
-
-/-- The canonical isomorphism `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, on
-presheaf level: it is induced by `AlgebraicGeometry.picardSubfunctorDegreeIsoOfIsPullback`. -/
-@[reassoc]
-lemma whiskerLeft_toSheafify_picardFunctorDegreeIsoOfIsPullback_hom (q : C' ⟶ C)
-    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
-      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
-    Functor.whiskerLeft (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op
-        (toSheafify (fppfTopology.over (Spec (.of k)))
-          (picardSubfunctorDegree (C ↘ Spec (.of k)) d).toFunctor) ≫
-        (picardFunctorDegreeIsoOfIsPullback q h d).hom =
-      (picardSubfunctorDegreeIsoOfIsPullback q h d).hom ≫
-        toSheafify (fppfTopology.over (Spec (.of K)))
-          (picardSubfunctorDegree (C' ↘ Spec (.of K)) d).toFunctor := by
-  rw [picardFunctorDegreeIsoOfIsPullback, Iso.trans_hom,
-    whiskerLeft_toSheafify_overMapOpCompSheafifyIso_hom_assoc, toSheafify_naturality,
-    Functor.mapIso_hom, Functor.mapIso_hom]
-  rfl
 
 
 end PicardFunctorDegreeBaseChange

@@ -10,8 +10,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Submission.WeilConjectures.AlgebraicGeometry.SmoothRelativeDifferentialsFiniteLocallyFree
-import Submission.WeilConjectures.AlgebraicGeometry.PullbackDualFiniteLocallyFree
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
+import Submission.WeilConjectures.AlgebraicGeometry.DualTensorHomComparison
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -184,11 +187,6 @@ noncomputable def pullbackPresheafHom :
 `𝒪_X(U)` relative to `(f⁻¹𝒪_S)(U)`. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def cotangentPresheaf : X.PresheafOfModules :=
   PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials' f.pullbackPresheafHom
-
-/-- The universal relative derivation `d : 𝒪_X → Ω` into the presheaf of relative differentials. -/
-noncomputable def cotangentPresheafDerivation :
-    f.cotangentPresheaf.Derivation' f.pullbackPresheafHom :=
-  PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation' f.pullbackPresheafHom
 
 /-- The sheaf `Ω¹_{X/S}` of relative differentials of `f : X ⟶ S`: the sheafification of the
 presheaf of relative Kähler differentials. (blueprint: `def-wf-lie-algebra-derivation`) -/

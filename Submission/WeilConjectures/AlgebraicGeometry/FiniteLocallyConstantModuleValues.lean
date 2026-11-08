@@ -12,8 +12,13 @@ import Submission.WeilConjectures.ConstructibleSheaf.Pullback
 import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.RingTheory.Finiteness.Cardinality
-import Submission.WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Submission.WeilConjectures.AlgebraicGeometry.FiniteTypeEtaleModuleStalk
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Sites.Point.Over
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Submission.WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Submission.WeilConjectures.ConstructibleSheaf.Defs
 import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

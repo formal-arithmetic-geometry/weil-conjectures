@@ -9,8 +9,20 @@ public import Submission.WeilConjectures.EtaleCohomology.Purity.Smooth.Cohomolog
 public import Submission.WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalizationUpperShriek
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationIso
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.HomShift
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Identity
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Orientation
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Point
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
@@ -125,25 +137,6 @@ structure IsCohomologicallySmooth {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactif
   isIso_dualizingComplexBaseChangeMap {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
     {g' : X' ⟶ X} (sq : IsPullback g' f' f g) [HasCompactification f'] [QuasiCompact f'] :
     IsIso (dualizingComplexBaseChangeMap Λ sq)
-
-variable {Λ} in
-/-- The tensor formula of a cohomologically smooth morphism: `ω_f ⊗ᴸ Lf^* K ≅ Rf^! K` for
-`K ∈ D^b_{ctf}(Y, Λ)`, by the canonical map. -/
-theorem IsCohomologicallySmooth.nonempty_iso_rightDerivedUpperShriek_obj {X Y : Scheme.{u}}
-    {f : X ⟶ Y} [HasCompactification f] (hf : IsCohomologicallySmooth Λ f)
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        (dualizingComplex Λ f)).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
-      (R(f)^![Λ]).obj K) :=
-  have := hf.isIso_dualizingComplexTensorMap K hK
-  ⟨asIso (dualizingComplexTensorMap Λ f K)⟩
-
-omit [Finite Λ] in
-/-- The unit `Λ_X` of `D(X_ét, Λ)` is invertible. -/
-lemma DerivedCategory.isInvertible_constantComplex (X : Scheme.{u}) :
-    DerivedCategory.isInvertible Λ X (constantComplex Λ X) :=
-  ⟨constantComplex Λ X, ⟨derivedTensorLeftUnitor _ X _⟩, ⟨derivedTensorLeftUnitor _ X _⟩⟩
 
 /-! ### Composition -/
 
@@ -277,23 +270,6 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq
   inferInstance
 
-/-- Blueprint `lem-pur-smb-extraordinary`: Smooth base change for the exceptional inverse image.
-
-The form of `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app`
-as an abstract isomorphism `Lu^* Rf^! K ≅ Rf'^! Lv^* K`, under the same hypotheses (`Y`
-quasi-separated, `f'` quasi-compact). This is the component at `K` of
-`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`. -/
-theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X' Y' : Scheme.{u}}
-    (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
-    [HasInvertibleExponent Λ X] [QuasiSeparatedSpace Y] {v : Y' ⟶ Y} {f' : X' ⟶ Y'}
-    {u : X' ⟶ X} (sq : IsPullback u f' f v) [HasCompactification f'] [QuasiCompact f']
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![Λ]).obj K) ≅
-      (R(f')^![Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
-  exact ⟨e.app K⟩
-
 /-- Blueprint `thm-pur-cohomological-smoothness`: Cohomological smoothness of smooth morphisms.
 
 A smooth morphism `f : X ⟶ Y` of pure relative dimension `d` admitting a compactification, with
@@ -331,18 +307,6 @@ theorem nonempty_iso_dualizingComplex_comp_of_smoothOfRelativeDimension {X Y Z :
     (isInvertible_dualizingComplex Λ (d := e) g)
 
 /-! ### Étale morphisms and étale locality -/
-
-/-- For a separated quasi-compact étale `u : U ⟶ X` admitting a compactification, the
-exceptional inverse image is the pullback, `Ru^! ≅ Lu^*`: this is the étale localization
-`Lu^* R(𝟙 X)^! ≅ Ru^!` of `lem-amb-etale-adjoint-locality`, with `R(𝟙 X)^! ≅ 𝟭`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
-    [IsSeparated u] [QuasiCompact u] [HasCompactification u] :
-    Nonempty (R(u)^![Λ] ≅ L((u)^*[ModuleCat.{u + 1} Λ])) := by
-  obtain ⟨ι⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale Λ u
-    (𝟙 X) u (Category.comp_id u)
-  exact ⟨ι.symm ≪≫
-    Functor.isoWhiskerRight (rightDerivedUpperShriekIdIso Λ X) _ ≪≫
-    Functor.leftUnitor _⟩
 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
 

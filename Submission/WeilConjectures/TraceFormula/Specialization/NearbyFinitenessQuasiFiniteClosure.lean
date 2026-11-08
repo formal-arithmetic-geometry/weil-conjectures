@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedLocalization
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedTriangle
 public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFinite
 
 set_option autoImplicit true

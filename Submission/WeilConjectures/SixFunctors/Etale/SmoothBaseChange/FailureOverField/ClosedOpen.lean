@@ -6,7 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
-public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
+public import Submission.WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.LongExactSequence
 public import Submission.WeilConjectures.SixFunctors.Finite.BaseChange
 public import Submission.WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import Submission.WeilConjectures.SixFunctors.OpenClosed.Supported
@@ -85,16 +86,6 @@ lemma map_unit_comp_mate_app (G : C ⥤ C') (G' : D ⥤ D') (θ : G ⋙ L' ⟶ L
   rw [reassoc_of% h₁, ← R'.map_comp_assoc, h₂, R'.map_comp_assoc, ← R'.map_comp, ← G'.map_comp,
     adj.left_triangle_components, G'.map_id, R'.map_id, Category.comp_id]
 
-/-- The form of `CategoryTheory.Adjunction.map_unit_comp_mate_app` in which the square and the
-counit are grouped under `R'`. -/
-lemma map_unit_comp_unit_app_comp_map (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S')
-    (F : C) :
-    S.map (adj.unit.app F) ≫ adj'.unit.app (S.obj (R.obj (L.obj F))) ≫
-        R'.map (s.app (R.obj (L.obj F)) ≫ S'.map (adj.counit.app (L.obj F))) =
-      adj'.unit.app (S.obj F) ≫ R'.map (s.app F) := by
-  rw [R'.map_comp]
-  exact adj.map_unit_comp_mate_app adj' S S' s F
-
 /-- The mate `S (R N) ⟶ R' (S' N)` of `L' (S (R N)) ≅ S' (L (R N)) ⟶ S' N` is natural in `N`. -/
 lemma unit_app_comp_map_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S')
     {N N' : D} (f : N ⟶ N') :
@@ -144,21 +135,6 @@ lemma mateApp_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ 
     adj.mateApp adj' S S' s N ≫ R'.map (S'.map f) =
       S.map (R.map f) ≫ adj.mateApp adj' S S' s N' :=
   adj.unit_app_comp_map_naturality adj' S S' s f
-
-/-- The image of the unit of `adj`, followed by the mate component, is the unit of `adj'` followed
-by the square:
-```
-S F ---S (η F)---> S (R (L F))
- |                     |
-η' (S F)          mateApp (L F)
- v                     v
-R' (L' (S F)) -R' (s F)-> R' (S' (L F))
-```
--/
-lemma map_unit_comp_mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (F : C) :
-    S.map (adj.unit.app F) ≫ adj.mateApp adj' S S' s (L.obj F) =
-      adj'.unit.app (S.obj F) ≫ R'.map (s.app F) :=
-  adj.map_unit_comp_unit_app_comp_map adj' S S' s F
 
 /-- The mate component precomposed with `S` of a morphism `a : A ⟶ R N` is the map adjoint to
 `L' (S A) ⟶ S' (L A) ⟶ S' N`:
@@ -420,22 +396,6 @@ lemma Etale.singleLowerStarComparison_naturality {T' T₁ : Scheme.{u}} (k : T�
     (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
     (DerivedCategory.Plus.singleFunctor _ 0)
     (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom f
-
-/-- The unit of `k^* ⊣ k_*` placed in degree `0`, followed by the comparison
-`AlgebraicGeometry.Etale.singleLowerStarComparison`, is the unit of the derived adjunction. -/
-lemma Etale.singleFunctor_map_unit_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}}
-    (k : T₁ ⟶ T') (F : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (DerivedCategory.Plus.singleFunctor _ 0).map
-        ((Etale.upperStarLowerStarAdjunction _ k).unit.app F) ≫
-      Etale.singleLowerStarComparison Λ k (((k)^*[ModuleCat.{u + 1} Λ]).obj F) =
-    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
-      R+((k)_*[ModuleCat.{u + 1} Λ]).map
-        ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) :=
-  Adjunction.map_unit_comp_mateApp (Etale.upperStarLowerStarAdjunction _ k)
-    (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k) (DerivedCategory.Plus.singleFunctor _ 0)
-    (DerivedCategory.Plus.singleFunctor _ 0)
-    (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom F
 
 end DerivedUnit
 

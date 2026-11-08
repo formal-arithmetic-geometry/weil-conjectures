@@ -127,7 +127,8 @@ public import Submission.WeilConjectures.WeilSheaf.DerivedHom
 public import Submission.WeilConjectures.WeilSheaf.LowerShriek
 public import Submission.WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionRingedSite
 public import Submission.WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
-public import Submission.WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
+public import Submission.WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import Submission.WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import Submission.WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Submission.WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra

@@ -5,7 +5,14 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.CategoryTheory.Ringed.RingedSectionLocalizationRing
+public import Submission.WeilConjectures.CategoryTheory.RingedSectionLocalization
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Algebra.Category.Ring.Adjunctions
 public import Submission.WeilConjectures.CategoryTheory.RingedSectionLocalizationOfUniverses
 
@@ -75,64 +82,6 @@ variable [HasSheafify J CommRingCat.{u}]
 variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 variable (R : Sheaf J CommRingCat.{u})
 variable (s : (R.obj ⋙ forget CommRingCat).sections)
-
-/-- The localization restrictions preserve identities as ring maps.
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization).
-Proof: both maps extend the identity of R(U); uniqueness of localization lifts applies. -/
-theorem ringedLocalizationRing_map_idOfUniverses (U : Cᵒᵖ) :
-    ringedSectionLocalizationMapOfUniverses R s (𝟙 U) = RingHom.id _ := by
-  apply IsLocalization.ringHom_ext (R := R.obj.obj U) (Submonoid.powers (s.val U))
-  ext r
-  simp [ringedSectionLocalizationMapOfUniverses]
-
-/-- The localization restrictions preserve composites as ring maps.
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization).
-Proof: both composites extend the same restriction of R, by naturality of s;
-uniqueness of localization lifts gives equality. -/
-theorem ringedLocalizationRing_map_compOfUniverses {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
-    ringedSectionLocalizationMapOfUniverses R s (f ≫ g) =
-      (ringedSectionLocalizationMapOfUniverses R s g).comp
-        (ringedSectionLocalizationMapOfUniverses R s f) := by
-  apply IsLocalization.ringHom_ext (R := R.obj.obj U) (Submonoid.powers (s.val U))
-  ext r
-  simp [ringedSectionLocalizationMapOfUniverses, Functor.map_comp]
-
-/-- The actual presheaf of commutative rings U ↦ R(U)[1/s(U)].
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization). -/
-def ringedLocalizationRingPresheafOfUniverses : Cᵒᵖ ⥤ CommRingCat.{u} where
-  obj U := CommRingCat.of (ringedSectionLocalizationCarrierOfUniverses R s U)
-  map f := CommRingCat.ofHom (ringedSectionLocalizationMapOfUniverses R s f)
-  map_id U := congrArg CommRingCat.ofHom (ringedLocalizationRing_map_idOfUniverses R s U)
-  map_comp f g := congrArg CommRingCat.ofHom (ringedLocalizationRing_map_compOfUniverses R s f g)
-
-/-- The section localization algebra maps commute with restrictions.
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization).
-Proof: each localization lift extends exactly the specified restriction map. -/
-theorem ringedLocalizationRing_unit_naturalityOfUniverses {U V : Cᵒᵖ} (f : U ⟶ V) :
-    R.obj.map f ≫
-        CommRingCat.ofHom (algebraMap _ (ringedSectionLocalizationCarrierOfUniverses R s V)) =
-      CommRingCat.ofHom (algebraMap _ (ringedSectionLocalizationCarrierOfUniverses R s U)) ≫
-        (ringedLocalizationRingPresheafOfUniverses R s).map f := by
-  ext r
-  simp [ringedLocalizationRingPresheafOfUniverses, ringedSectionLocalizationMapOfUniverses]
-
-/-- The sectionwise algebra map into localization.
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization). -/
-def ringedLocalizationRingPresheafUnitOfUniverses :
-    R.obj ⟶ ringedLocalizationRingPresheafOfUniverses R s where
-  app U := CommRingCat.ofHom (algebraMap _ (ringedSectionLocalizationCarrierOfUniverses R s U))
-  naturality _ _ f := ringedLocalizationRing_unit_naturalityOfUniverses R s f
-
-/-- Sheafified section localization as a sheaf of commutative rings.
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization). -/
-def ringedLocalizationRingOfUniverses : Sheaf J CommRingCat.{u} :=
-  (presheafToSheaf J CommRingCat.{u}).obj (ringedLocalizationRingPresheafOfUniverses R s)
-
-/-- The canonical map of ring sheaves from R to R[1/s].
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization). -/
-def ringedLocalizationRingUnitOfUniverses : R ⟶ ringedLocalizationRingOfUniverses R s :=
-  ⟨ringedLocalizationRingPresheafUnitOfUniverses R s ≫
-    toSheafify J (ringedLocalizationRingPresheafOfUniverses R s)⟩
 
 section
 
@@ -238,18 +187,6 @@ private lemma map_mul' {X : Cᵒᵖ} {Y : C} (a b : A.obj.obj X) (g : Y ⟶ X.un
   · rw [hh.2.choose_spec, natural η, hq,
       ← Functor.map_comp_apply, ← op_comp]
 
-private lemma mul_app {X : Cᵒᵖ} (p q : P.obj X) :
-    mul η (η.app X p) (η.app X q) = η.app X (p * q) := by
-  simpa using map_mul' η (η.app X p) (η.app X q) (𝟙 X.unop) p q (by simp) (by simp)
-
-private lemma mul_natural {X Y : Cᵒᵖ} (f : X ⟶ Y) (a b : A.obj.obj X) :
-    A.obj.map f (mul η a b) = mul η (A.obj.map f a) (A.obj.map f b) := by
-  apply image_ext η (A.obj.map f a) (A.obj.map f b) 0
-  intro Z g p q r hp hq hr
-  rw [← Functor.map_comp_apply, ← f.op_unop, ← op_comp]
-  rw [map_mul' η a b (g ≫ f.unop) p q (by simpa using hp) (by simpa using hq)]
-  simpa using (map_mul' η (A.obj.map f a) (A.obj.map f b) g p q hp hq).symm
-
 private lemma mul_comm' {X : Cᵒᵖ} (a b : A.obj.obj X) : mul η a b = mul η b a := by
   apply image_ext η a b 0
   intro Y g p q r hp hq hr
@@ -299,166 +236,6 @@ private def ring (X : Cᵒᵖ) : CommRing (A.obj.obj X) where
   zero_mul := zero_mul' η
   mul_zero a := (mul_comm' η a _).trans (zero_mul' η a)
 
-private def ringPresheaf : Cᵒᵖ ⥤ CommRingCat.{u} := by
-  letI (X : Cᵒᵖ) := ring η X
-  exact
-    { obj X := CommRingCat.of (A.obj.obj X)
-      map {X Y} f := CommRingCat.ofHom
-        { toFun := A.obj.map f
-          map_zero' := (A.obj.map f).hom.map_zero
-          map_add' := (A.obj.map f).hom.map_add
-          map_one' := by
-            change A.obj.map f (η.app X (1 : P.obj X)) = η.app Y (1 : P.obj Y)
-            rw [← natural η]
-            exact congrArg (η.app Y) (P.map f).hom.map_one
-          map_mul' := mul_natural η f }
-      map_id X := by ext x; exact ConcreteCategory.congr_hom (A.obj.map_id X) x
-      map_comp f g := by ext x; exact ConcreteCategory.congr_hom (A.obj.map_comp f g) x }
-
-private lemma ring_isSheaf (F : Cᵒᵖ ⥤ CommRingCat.{u})
-    (hF : Presheaf.IsSheaf J
-      (F ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) :
-    Presheaf.IsSheaf J F := by
-  let U := forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat.{u}
-  let B : Sheaf J AddCommGrpCat.{u} := ⟨F ⋙ U, hF⟩
-  intro E X S hS fs hfs
-  let as : Presieve.FamilyOfElements
-      (B.obj ⋙ coyoneda.obj (op (AddCommGrpCat.of E))) S.arrows :=
-    fun Y f hf ↦ AddCommGrpCat.ofHom (fs f hf).hom.toAddMonoidHom
-  have has : as.Compatible := by
-    intro Y₁ Y₂ Z g₁ g₂ f₁ f₂ h₁ h₂ hc
-    exact congrArg (fun (k : E ⟶ F.obj (op Z)) ↦ AddCommGrpCat.ofHom k.hom.toAddMonoidHom)
-      (hfs g₁ g₂ h₁ h₂ hc)
-  obtain ⟨a, ha, hau⟩ := hF (AddCommGrpCat.of E) S hS as has
-  change AddCommGrpCat.of E ⟶ B.obj.obj (op X) at a
-  have hap (Y : C) (f : Y ⟶ X) (hf : S f) (x : E) :
-      F.map f.op (a x) = (show E ⟶ F.obj (op Y) from fs f hf) x :=
-    ConcreteCategory.congr_hom (ha f hf) x
-  have hsep := B.isSeparated X S hS
-  let r : E ⟶ F.obj (op X) := CommRingCat.ofHom
-    { a.hom with
-      map_one' := by
-        apply hsep
-        intro Y f hf
-        change F.map f.op (a 1) = F.map f.op 1
-        rw [hap Y f hf, (F.map f.op).hom.map_one, (fs f hf).hom.map_one]
-      map_mul' := by
-        intro x y
-        apply hsep
-        intro Y f hf
-        change F.map f.op (a (x * y)) = F.map f.op
-          ((show F.obj (op X) from a x) * (show F.obj (op X) from a y))
-        rw [(F.map f.op).hom.map_mul, hap Y f hf,
-          hap Y f hf, hap Y f hf, (fs f hf).hom.map_mul] }
-  refine ⟨r, ?_, ?_⟩
-  · intro Y f hf
-    change r ≫ F.map f.op = fs f hf
-    ext x
-    exact hap Y f hf x
-  · intro r' hr'
-    change E ⟶ F.obj (op X) at r'
-    apply CommRingCat.hom_ext
-    apply RingHom.toAddMonoidHom_injective
-    change (AddCommGrpCat.ofHom r'.hom.toAddMonoidHom).hom = a.hom
-    congr 1
-    apply hau
-    intro Y f hf
-    exact congrArg (fun (k : E ⟶ F.obj (op Y)) ↦
-      AddCommGrpCat.ofHom k.hom.toAddMonoidHom) (hr' f hf)
-
-private def ringSheaf : Sheaf J CommRingCat.{u} :=
-  ⟨ringPresheaf η, ring_isSheaf _ A.property⟩
-
-private def ringUnit : P ⟶ (ringSheaf η).obj := by
-  letI (X : Cᵒᵖ) := ring η X
-  exact
-    { app X := CommRingCat.ofHom
-        { toFun := η.app X
-          map_zero' := (η.app X).hom.map_zero
-          map_add' := (η.app X).hom.map_add
-          map_one' := rfl
-          map_mul' := fun p q ↦ (mul_app η p q).symm }
-      naturality X Y f := by ext x; exact natural η f x }
-
-private lemma lift_mul {B : Sheaf J CommRingCat.{u}}
-    (t : P ⟶ B.obj) (k : A.obj ⟶ B.obj ⋙
-      forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)
-    (hk : η ≫ k = Functor.whiskerRight t
-      (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat))
-    {X : Cᵒᵖ} (a b : A.obj.obj X) :
-    k.app X (mul η a b) =
-      (show B.obj.obj X from k.app X a) * (show B.obj.obj X from k.app X b) := by
-  have hk' (U : Cᵒᵖ) (p : P.obj U) : k.app U (η.app U p) = t.app U p :=
-    ConcreteCategory.congr_hom (congr_app hk U) p
-  apply ((sheafCompose J (forget CommRingCat)).obj B).isSeparated _ _
-    (J.intersection_covering
-    (Presheaf.imageSieve_mem J η a) (Presheaf.imageSieve_mem J η b))
-  rintro Y g ⟨⟨p, hp⟩, ⟨q, hq⟩⟩
-  change B.obj.map g.op (k.app X (mul η a b)) =
-    B.obj.map g.op ((show B.obj.obj X from k.app X a) *
-      (show B.obj.obj X from k.app X b))
-  have hn (z : A.obj.obj X) :
-      B.obj.map g.op (k.app X z) = k.app _ (A.obj.map g.op z) :=
-    (NatTrans.naturality_apply k g.op z).symm
-  rw [hn, map_mul' η a b g p q hp hq, hk', (B.obj.map g.op).hom.map_mul,
-    hn, hn, ← hp, ← hq, hk', hk', (t.app _).hom.map_mul]
-
-private lemma sheafifyRingUnit_locallyBijective
-    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-    [HasSheafify J CommRingCat.{u}]
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (Q : Cᵒᵖ ⥤ CommRingCat.{u}) :
-    Presheaf.IsLocallyInjective J (Functor.whiskerRight (toSheafify J Q)
-      (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) ∧
-    Presheaf.IsLocallySurjective J (Functor.whiskerRight (toSheafify J Q)
-      (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) := by
-  let U := forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat.{u}
-  let A := (presheafToSheaf J AddCommGrpCat.{u}).obj (Q ⋙ U)
-  let η : Q ⋙ U ⟶ A.obj := toSheafify J (Q ⋙ U)
-  have : Presheaf.IsLocallyInjective J η := inferInstance
-  have : Presheaf.IsLocallySurjective J η := inferInstance
-  let T := ringSheaf η
-  let t : Q ⟶ T.obj := ringUnit η
-  let B := (presheafToSheaf J CommRingCat.{u}).obj Q
-  let ι : Q ⟶ B.obj := toSheafify J Q
-  have hB : Presheaf.IsSheaf J (B.obj ⋙ U) :=
-    ((sheafCompose J (forget₂ RingCat.{u} AddCommGrpCat.{u})).obj
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj B)).property
-  let k : A.obj ⟶ B.obj ⋙ U := sheafifyLift J (Functor.whiskerRight ι U) hB
-  have hk : η ≫ k = Functor.whiskerRight ι U := toSheafify_sheafifyLift _ _ _
-  let kR : T.obj ⟶ B.obj :=
-    { app X := @CommRingCat.ofHom (T.obj.obj X) (B.obj.obj X)
-        (T.obj.obj X).commRing (B.obj.obj X).commRing
-        { toFun := k.app X
-          map_zero' := (k.app X).hom.map_zero
-          map_add' := (k.app X).hom.map_add
-          map_one' := by
-            change k.app X (η.app X (1 : Q.obj X)) = (1 : B.obj.obj X)
-            exact (ConcreteCategory.congr_hom (congr_app hk X) (1 : Q.obj X)).trans
-              ((ι.app X).hom.map_one)
-          map_mul' := lift_mul η ι k hk }
-      naturality X Y f := by ext x; exact NatTrans.naturality_apply k f x }
-  have htk : t ≫ kR = ι := by
-    ext X x
-    exact ConcreteCategory.congr_hom (congr_app hk X) x
-  let h : B.obj ⟶ T.obj := sheafifyLift J t T.property
-  have hh : ι ≫ h = t := toSheafify_sheafifyLift _ _ _
-  have hhk : h ≫ kR = 𝟙 B.obj := by
-    apply sheafify_hom_ext J _ _ B.property
-    change ι ≫ (h ≫ kR) = ι ≫ 𝟙 _
-    rw [← Category.assoc, hh, htk, Category.comp_id]
-  let hA : B.obj ⋙ U ⟶ A.obj := Functor.whiskerRight h U
-  have hhA : Functor.whiskerRight ι U ≫ hA = η := by
-    exact congrArg (fun a ↦ Functor.whiskerRight a U) hh
-  have hkhA : k ≫ hA = 𝟙 A.obj := by
-    apply sheafify_hom_ext J _ _ A.property
-    change η ≫ (k ≫ hA) = η ≫ 𝟙 _
-    rw [← Category.assoc, hk, hhA, Category.comp_id]
-  have hhAk : hA ≫ k = 𝟙 (B.obj ⋙ U) := by
-    exact congrArg (fun a ↦ Functor.whiskerRight a U) hhk
-  have : IsIso k := ⟨⟨hA, hkhA, hhAk⟩⟩
-  rw [← hk]
-  constructor <;> infer_instance
-
 variable [HasSheafify J AddCommGrpCat.{u}]
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
 
@@ -493,56 +270,5 @@ private lemma comparison {B : Sheaf J RingCat.{u}}
 end RingedLocalizationComparison
 
 end
-
-/-- The ring-sheaf construction is the original module sheafification, with the
-canonical identification on every local fraction.
-Source: Stacks Tags 0996 and 099E (blueprint: def-weil-pbc-ringed-section-localization).
-Proof: both underlying module sheaves represent restriction-compatible linear
-maps out of the section-localization presheaf. Ring sheafification carries the
-sectionwise scalar action, since multiplication and its identities sheafify.
-The two sheafification universal properties give mutually inverse module maps;
-they agree on every section of the presheaf, giving the displayed normalization. -/
-theorem ringedLocalizationRing_moduleComparisonOfUniverses :
-    ∃ e :
-      (SheafOfModules.restrictScalars
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).map
-          (ringedLocalizationRingUnitOfUniverses R s))).obj
-        (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
-          (ringedLocalizationRingOfUniverses R s))) ≅ ringedSectionLocalizationOfUniverses R s,
-      ∀ (U : Cᵒᵖ) (x : ringedSectionLocalizationCarrierOfUniverses R s U),
-        e.hom.val.app U ((toSheafify J (ringedLocalizationRingPresheafOfUniverses R s)).app U x) =
-          (((PresheafOfModules.sheafificationAdjunction
-            (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app
-              (ringedSectionLocalizationPresheafOfUniverses R s)).app U) x := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.defeqAttrib.useBackward true in
-  classical
-  obtain ⟨hinj, hsurj⟩ :=
-    RingedLocalizationComparison.sheafifyRingUnit_locallyBijective (J := J)
-      (ringedLocalizationRingPresheafOfUniverses R s)
-  have := hinj
-  have := hsurj
-  let P := ringedSectionLocalizationPresheafOfUniverses R s
-  let A := (SheafOfModules.restrictScalars
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).map
-      (ringedLocalizationRingUnitOfUniverses R s))).obj
-        (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
-          (ringedLocalizationRingOfUniverses R s)))
-  let ι := toSheafify J (ringedLocalizationRingPresheafOfUniverses R s)
-  let φ : P ⟶ A.val := PresheafOfModules.homMk
-    (Functor.whiskerRight (toSheafify J (ringedLocalizationRingPresheafOfUniverses R s))
-      (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) (by
-        intro U r x
-        change R.obj.obj U at r
-        change ringedSectionLocalizationCarrierOfUniverses R s U at x
-        change (ι.app U).hom (r • x) = _
-        rw [Algebra.smul_def, (ι.app U).hom.map_mul]
-        rfl)
-  have : PresheafOfModules.IsLocallyInjective J φ := by assumption
-  have : PresheafOfModules.IsLocallySurjective J φ := by assumption
-  obtain ⟨e, he⟩ := RingedLocalizationComparison.comparison P A φ
-  refine ⟨e, ?_⟩
-  intro U x
-  exact DFunLike.congr_fun (congrArg (fun k ↦ (k.app U).hom) he) x
 
 end CategoryTheory

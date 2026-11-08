@@ -90,15 +90,6 @@ theorem trace_symm_pow [IsAlgClosed K] (e : V ≃ₗ[K] V) (n : ℕ) :
 
 end LinearMap
 
-/-- Conjugation by a linear isomorphism commutes with powers. -/
-theorem LinearEquiv.conj_pow {K V W : Type*} [Field K] [AddCommGroup V] [Module K V]
-    [AddCommGroup W] [Module K W] (e : V ≃ₗ[K] W) (f : Module.End K V) (n : ℕ) :
-    e.conj f ^ n = e.conj (f ^ n) := by
-  induction n with
-  | zero => rw [pow_zero, pow_zero, Module.End.one_eq_id, Module.End.one_eq_id, conj_id]
-  | succ n ih =>
-    rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp, conj_comp]
-
 namespace FrobeniusModule
 
 variable {K : Type v} [Field K]

@@ -104,11 +104,6 @@ noncomputable def dualMap {F F' : WeilSheaf k₀ l X} (f : F ⟶ F') (hF : F.IsL
 lemma dualMap_id (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : dualMap (𝟙 F) hF hF = 𝟙 _ :=
   ObjectProperty.hom_ext _ (ProEtaleWeilSheaf.ihomMapLeft_id _ _)
 
-lemma dualMap_comp {F F' F'' : WeilSheaf k₀ l X} (f : F ⟶ F') (f' : F' ⟶ F'') (hF : F.IsLisse)
-    (hF' : F'.IsLisse) (hF'' : F''.IsLisse) :
-    dualMap (f ≫ f') hF hF'' = dualMap f' hF' hF'' ≫ dualMap f hF hF' :=
-  ObjectProperty.hom_ext _ (ProEtaleWeilSheaf.ihomMapLeft_comp _ _ _)
-
 lemma dualMap_comp_hom {F F' F'' : WeilSheaf k₀ l X} (f : F ⟶ F') (f' : F' ⟶ F'')
     (hF : F.IsLisse) (hF' : F'.IsLisse) (hF'' : F''.IsLisse) :
     (dualMap (f ≫ f') hF hF'').hom = (dualMap f' hF' hF'').hom ≫ (dualMap f hF hF').hom :=

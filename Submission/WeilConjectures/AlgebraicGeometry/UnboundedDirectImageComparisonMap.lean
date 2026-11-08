@@ -23,7 +23,13 @@ public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModules
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-public import Submission.WeilConjectures.AlgebraicGeometry.SiteRestrictionInjectives
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Submission.WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
+public import Submission.WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 public import Submission.WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 public import Submission.WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 public import Submission.WeilConjectures.CategoryTheory.ConstantLeftModuleTransport

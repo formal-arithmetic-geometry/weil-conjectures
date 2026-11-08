@@ -224,11 +224,6 @@ variable (B : D) [MonObj B]
 noncomputable def smul (M : C) [ModObj (S.obj B) M] : B ⊗ P.obj M ⟶ P.obj M :=
   (pf.iso B M).inv ≫ P.map γ[S.obj B,M]
 
-@[reassoc]
-lemma iso_hom_smul (M : C) [ModObj (S.obj B) M] :
-    (pf.iso B M).hom ≫ pf.smul B M = P.map γ[S.obj B,M] := by
-  simp [smul]
-
 /-- For an `S B`-module object `M`, `P M` is a `B`-module object through the projection
 formula. -/
 @[instance_reducible]
@@ -278,9 +273,6 @@ noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B where
 lemma mapModLeft_map_hom {M N : Mod C (S.obj B)} (f : M ⟶ N) :
     ((pf.mapModLeft B).map f).hom = P.map f.hom := rfl
 
-
-/-- The linearization of `P` commutes with the forgetful functors. -/
-lemma mapModLeft_comp_forget : pf.mapModLeft B ⋙ Mod.forget B = Mod.forget (S.obj B) ⋙ P := rfl
 
 section Preadditive
 
@@ -487,9 +479,6 @@ variable {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.Monoidal] [adj.HasProjec
 /-- The linearization of the left adjoint `P` of a strong monoidal functor `S` satisfying the
 projection formula. -/
 noncomputable abbrev mapModLeft : Mod C (S.obj B) ⥤ Mod D B := adj.projectionFormula.mapModLeft B
-
-/-- The linearization of `P` commutes with the forgetful functors. -/
-lemma mapModLeft_comp_forget : adj.mapModLeft B ⋙ Mod.forget B = Mod.forget (S.obj B) ⋙ P := rfl
 
 
 variable {B}

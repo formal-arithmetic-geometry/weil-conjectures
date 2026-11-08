@@ -226,12 +226,6 @@ noncomputable def rootsOfUnityTransition (d : ℕ) :
     simp only [Preadditive.comp_nsmul, Category.comp_id, smul_smul]
     exact h)
 
-@[reassoc (attr := simp)]
-lemma rootsOfUnityTransition_ι (d : ℕ) :
-    rootsOfUnityTransition S N d ≫ kernel.ι (N • 𝟙 (gmSheaf S)) =
-      kernel.ι ((N * d) • 𝟙 (gmSheaf S)) ≫ (d • 𝟙 (gmSheaf S)) :=
-  kernel.lift_ι _ _ _
-
 
 /-- The transition map `μ_{N d} ⟶ μ_N` as a morphism of sheaves of `(ℤ/(N d))_S`-modules: every
 morphism of abelian sheaves between sheaves killed by `N d` is `(ℤ/(N d))_S`-linear
@@ -250,10 +244,6 @@ noncomputable def rootsOfUnityTower (ℓ : ℕ) :
     ℕᵒᵖ ⥤ Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
   Functor.ofOpSequence (X := fun r ↦ rootsOfUnitySheaf S (ℓ ^ r))
     fun r ↦ rootsOfUnityTransition S (ℓ ^ r) ℓ
-
-lemma rootsOfUnityTower_obj (ℓ r : ℕ) :
-    (rootsOfUnityTower S ℓ).obj (op r) = rootsOfUnitySheaf S (ℓ ^ r) :=
-  rfl
 
 
 end AlgebraicGeometry.Scheme.ProEt

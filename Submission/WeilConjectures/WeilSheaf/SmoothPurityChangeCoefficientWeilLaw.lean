@@ -50,21 +50,6 @@ lemma purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_c
   simp only [purityModuleFactorIso, geometricFiberProjUpperStarFrobeniusIso] at h ⊢
   exact_mod_proofs h
 
-/-- The Weil structure of `p^* (Ext M)`, expressed through the Weil structure of `p^* M` and
-the (Pull) isomorphisms. -/
-lemma purity_geometricFiberProjUpperStarFrobeniusIso_hom_app_extendScalars_obj
-    (M : Mod (Sheaf (ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀)) :
-    (geometricFiberProjUpperStarFrobeniusIso Λ' f).hom.app
-        ((Mod.extendScalars (coefficientMap a X₀)).obj M) =
-      (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map ((pullIso a f.geometricFiberProj).inv.app M) ≫
-        (pullIso a f.geometricGaloisFrobenius.hom).inv.app ((f.geometricFiberProj)^*⟦Λ⟧.obj M) ≫
-          (Mod.extendScalars (coefficientMap a f.geometricFiber)).map
-            ((geometricFiberProjUpperStarFrobeniusIso Λ f).hom.app M) ≫
-          (pullIso a f.geometricFiberProj).hom.app M := by
-  rw [purity_extendScalars_map_geometricFiberProjUpperStarFrobeniusIso_hom_app_comp_pullIso_hom_app,
-    Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-
 end Transport
 
 section ScalarRelation

@@ -128,14 +128,6 @@ lemma extensionByZero_obj_obj_carrier (F : WeilSheaf k₀ l U) :
   rfl
 
 @[simp]
-lemma extensionByZero_obj_obj_str (F : WeilSheaf k₀ l U) :
-    ((extensionByZero j).obj F).obj.str =
-      (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l j
-          (comp_over j _)).app F.obj.carrier ≪≫
-        (Scheme.Hom.geometricFiberMap j (comp_over j _))_!ᵃ[l].mapIso F.obj.str :=
-  IsoAlgebra.mapOfNatIso_obj_str _ F.obj
-
-@[simp]
 lemma extensionByZero_map_hom_hom_f {F G : WeilSheaf k₀ l U} (α : F ⟶ G) :
     ((extensionByZero j).map α).hom.hom.f =
       (Scheme.Hom.geometricFiberMap j (comp_over j _))_!ᵃ[l].map α.hom.hom.f :=

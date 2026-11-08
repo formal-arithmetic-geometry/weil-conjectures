@@ -130,21 +130,6 @@ def derivedTensorMemo (D : Type dU) [Category.{dV} D] [Abelian D]
 
 attribute [local instance] complexTensorMemo derivedTensorMemo
 
-/-- Koszul symmetry compatibility for a termwise monoidal functor, expressed once
-with abstract coefficient-category structures.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
-def ComplexSymmetryCompatibility
-    (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
-    [Abelian D] [Abelian E]
-    [HasColimitsOfSize.{0, 0} D] [HasColimitsOfSize.{0, 0} E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    [MonoidalClosed D] [MonoidalClosed E]
-    [MonoidalPreadditive D] [MonoidalPreadditive E]
-    [BraidedCategory D] [BraidedCategory E]
-    (G : D ⥤ E) [G.Additive] [G.IsEquivalence] [G.Monoidal] : Prop :=
-  ∃ h : (G.mapHomologicalComplex (.up ℤ)).Braided,
-    h.toMonoidal = (inferInstance : (G.mapHomologicalComplex (.up ℤ)).Monoidal)
-
 /-- The acyclic test and both quasi-isomorphism tests for the termwise image of a
 complex, formulated once over abstract coefficient categories.
 Source: Stacks 06YN and 06YP (auxiliary; not a blueprint node). -/
@@ -388,15 +373,6 @@ The CommRingCat presentation is identified with RingCat by constantCommuteCompos
     e'.isEquivalence_functor
   exact inferInstanceAs
     (SheafOfModules.restrictScalars c.inv ⋙ constantRingModuleRestriction J B).IsEquivalence
-
-/-- Restriction is exact for the two abelian categories.
-Source: Stacks 03CY and 0038 (auxiliary; not a blueprint node).
-Proof: step 1 applies lem-galois-equivalence-preserves-limits to the equivalence and
-its inverse. In particular both preserve kernels and cokernels, hence finite limits
-and finite colimits. -/
-theorem exact : exactFunctor _ _ (restriction J B) := by
-  exact ⟨inferInstanceAs (PreservesFiniteLimits (restriction J B)),
-    inferInstanceAs (PreservesFiniteColimits (restriction J B))⟩
 
 /-- The local pure tensor in the ordinary ringed-site tensor.
 Source: Stacks 0GMW (auxiliary; not a blueprint node). -/

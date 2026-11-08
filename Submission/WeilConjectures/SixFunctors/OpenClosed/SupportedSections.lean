@@ -66,27 +66,6 @@ variable {U Z X : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X)
 instance (M : Sheaf X.smallEtaleTopology A) : Mono ((sectionsWithSupportι A j).app M) := by
   change Mono (kernel.ι _); infer_instance
 
-/-- A morphism `f : N ⟶ M` from a sheaf vanishing on the open part is supported on `Z`: its
-composite with the unit `M ⟶ j_* j^* M` vanishes. -/
-lemma comp_unit_app_eq_zero_of_isZero {N M : Sheaf X.smallEtaleTopology A}
-    (hN : IsZero ((j)^*[A].obj N)) (f : N ⟶ M) :
-    f ≫ (upperStarLowerStarAdjunction A j).unit.app M = 0 := by
-  have h := (upperStarLowerStarAdjunction A j).unit.naturality f
-  dsimp at h
-  rw [h, ((j)_*[A].map_isZero hN).eq_of_tgt ((upperStarLowerStarAdjunction A j).unit.app N) 0,
-    zero_comp]
-
-/-- On a sheaf vanishing on the open part, the inclusion of the supported sections is an
-isomorphism. -/
-lemma isIso_sectionsWithSupportι_app_of_isZero {M : Sheaf X.smallEtaleTopology A}
-    (hM : IsZero ((j)^*[A].obj M)) : IsIso ((sectionsWithSupportι A j).app M) := by
-  have h : (upperStarLowerStarAdjunction A j).unit.app M = 0 := by
-    simpa using comp_unit_app_eq_zero_of_isZero A j hM (𝟙 M)
-  change IsIso (kernel.ι ((upperStarLowerStarAdjunction A j).unit.app M))
-  have : IsSplitEpi (kernel.ι ((upperStarLowerStarAdjunction A j).unit.app M)) :=
-    ⟨⟨kernel.lift _ (𝟙 M) (by rw [h, comp_zero]), by simp⟩⟩
-  exact isIso_of_mono_of_epi _
-
 variable [IsClosedImmersion s] [IsOpenImmersion j]
 
 /-- Blueprint `def-pur-flasque-support`: Supported sections and flasque objects

@@ -193,17 +193,6 @@ abbrev completionUnderlying (R : Sheaf J CommRingCat.{r}) :
   SheafOfModules.toSheaf (ring.{c, v, r} J R) ⋙
     sheafCompose J (forget AddCommGrpCat.{r})
 
-/-- A sheafified pure scalar-extension tensor, in the dependency's actual ordinary model.
-Source: Stacks 03CZ and 06YY
-(blueprint: lem-pur-sequence-site-completion-projection). -/
-def completionScalarSection {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
-    (A : ScalarData.{c, v, r} φ) (M : Mod.{c, v, r} J R) (U : Cᵒᵖ)
-    (a : S.obj.obj U) (x : M.val.obj U) : (A.model.E.obj M).val.obj U :=
-  @SMul.smul ((ring.{c, v, r} J S).obj.obj U) ((A.model.E.obj M).val.obj U)
-    ((A.model.E.obj M).val.obj U).isModule.toSMul a
-      ((eqToHom (C := Mod.{c, v, r} J S) (A.model.obj_eq M).symm).val.app U
-        (extensionUnit.{c, v, r} φ M U x))
-
 /-- The constant/limit geometric morphism with its canonical structural ring map.
 The section equations fix the coordinate-wise adjunction and ring projection.
 No condition on coefficient flatness or transition surjectivity is imposed.

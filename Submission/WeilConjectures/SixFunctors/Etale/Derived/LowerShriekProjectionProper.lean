@@ -145,15 +145,6 @@ theorem isIso_projectionMapOfCompactification_app_app_iff_of_isProper [IsProper 
     exact IsIso.of_isIso_comp_right _ ((compactificationForgetSupports A c).app
       (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)))
 
-/-- **The projection formula for a compactification of the identity**: for any
-compactification `c` of `𝟙 X`, the projection map `PF_c` is an isomorphism, for any
-coefficients. -/
-theorem isIso_projectionMapOfCompactification_id_app_app (c : Compactification (𝟙 X))
-    (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsIso (((projectionMapOfCompactification A c).app K).app L) := by
-  rw [isIso_projectionMapOfCompactification_app_app_iff_of_isProper]
-  exact isIso_rightDerivedLowerStarProjectionMap_id_app_app A X K L
-
 end Etale
 
 end AlgebraicGeometry

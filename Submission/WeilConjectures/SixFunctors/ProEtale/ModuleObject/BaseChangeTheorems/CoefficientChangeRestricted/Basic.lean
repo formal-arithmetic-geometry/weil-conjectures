@@ -43,12 +43,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace CategoryTheory
 
-/-- A functor maps an isomorphism to an isomorphism (with the isomorphism as an explicit
-hypothesis). -/
-lemma isIso_map_of_isIso {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D) {A B : C}
-    {f : A ⟶ B} (h : IsIso f) : IsIso (F.map f) :=
-  inferInstance
-
 /-- If `H (α_A)` is an isomorphism and `A ≅ B`, then so is `H (α_B)`. -/
 lemma isIso_map_app_of_iso {C D E : Type*} [Category* C] [Category* D] [Category* E]
     {F G : C ⥤ D} (α : F ⟶ G) (H : D ⥤ E) {A B : C} (e : A ≅ B) (h : IsIso (H.map (α.app A))) :

@@ -61,7 +61,22 @@ public import Mathlib.CategoryTheory.Category.ULift
 public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Submission.WeilConjectures.AlgebraicGeometry.Integral.IntegralUniformCoefficient
+import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import Mathlib.RingTheory.Ideal.Quotient.Index
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Module.TransferInstance
+import Mathlib.CategoryTheory.Linear.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
+import Mathlib.Algebra.Homology.DerivedCategory.Linear
+import Submission.WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalization
+import Submission.WeilConjectures.NumberTheory.Padics.IntegersLocalizationUniformizer
+import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.KrullDimension
+import Submission.WeilConjectures.AlgebraicGeometry.Standard.StandardQuotientsPerfectSupplement
+import Mathlib.GroupTheory.OrderOfElement
 import Submission.WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletionCompletedSupplement
 
 set_option autoImplicit true

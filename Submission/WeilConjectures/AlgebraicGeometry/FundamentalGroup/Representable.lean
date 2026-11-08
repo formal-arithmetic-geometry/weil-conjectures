@@ -122,9 +122,6 @@ section AffineDescent
 variable (F : Sheaf Y.smallEtaleTopology (Type w)) {B W : Y.Etale} (p : W ⟶ B) {V : Over W}
   (r : ((Over.forget W).op ⋙ F.obj).RepresentableBy V)
 
-lemma over_w (V : Over W) : V.hom.left ≫ W.hom = V.left.hom :=
-  MorphismProperty.Over.w V.hom
-
 lemma w_left {U U' : Y.Etale} (f : U ⟶ U') : f.left ≫ U'.hom = U.hom :=
   MorphismProperty.Over.w f
 
@@ -156,50 +153,6 @@ lemma γC_hom : γC F p r ≫ V.hom = pr₂C p :=
 
 lemma overElt_γC : r.overElt (γC F p r) = r.overElt (pr₁C p) :=
   (r.exists_overElt_eq (pr₂C p) (r.overElt (pr₁C p))).choose_spec.2
-
-lemma γ_v : (γC F p r).left ≫ V.hom.left = pullback.snd (V.hom.left ≫ p.left) p.left :=
-  congr_arg (fun f ↦ f.left) (γC_hom F p r)
-
-/-- The coaction is counital. -/
-lemma d_γ : coactionUnit p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ := by
-  let dC : V.left ⟶ PC p (V := V) :=
-    homMk (coactionUnit p.left V.hom.left) (by
-      change _ ≫ pullback.snd _ _ ≫ W.hom = _
-      rw [pullback.lift_snd_assoc, over_w])
-  have h₁ : dC ≫ pr₁C p = 𝟙 _ := hom_ext (by simp [dC])
-  have h₂ : dC ≫ pr₂C p = V.hom := hom_ext (by simp [dC])
-  have : dC ≫ γC F p r = 𝟙 _ := by
-    refine r.overElt_injective (by rw [Category.assoc, γC_hom, h₂, Category.id_comp]) ?_
-    rw [r.overElt_comp, overElt_γC, ← r.overElt_comp, h₁]
-  exact congr_arg (fun f ↦ f.left) this
-
-/-- The coaction is coassociative. -/
-lemma γ₁_γ : coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r) ≫ (γC F p r).left =
-    coactionForget p.left V.hom.left ≫ (γC F p r).left := by
-  let P₂C : Y.Etale := Etale.mk
-    (pullback.snd (pullback.snd (V.hom.left ≫ p.left) p.left ≫ p.left) p.left ≫ W.hom)
-  let fstC : P₂C ⟶ PC p (V := V) := homMk (pullback.fst _ _) (by
-    change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
-    have := pullback.condition_assoc (f := pullback.snd (V.hom.left ≫ p.left) p.left ≫ p.left)
-      (g := p.left) B.hom
-    simp only [Category.assoc, w_left] at this
-    exact this)
-  let γ₁C : P₂C ⟶ PC p (V := V) := homMk
-    (coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r)) (by
-      change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
-      simp)
-  let π₁C : P₂C ⟶ PC p (V := V) := homMk
-    (coactionForget p.left V.hom.left) (by
-      change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
-      simp)
-  have e₁ : γ₁C ≫ pr₁C p = fstC ≫ γC F p r := hom_ext (by simp [γ₁C, fstC])
-  have e₂ : γ₁C ≫ pr₂C p = π₁C ≫ pr₂C p := hom_ext (by simp [γ₁C, π₁C])
-  have e₃ : π₁C ≫ pr₁C p = fstC ≫ pr₁C p := hom_ext (by simp [π₁C, fstC])
-  have : γ₁C ≫ γC F p r = π₁C ≫ γC F p r := by
-    refine r.overElt_injective (by simp only [Category.assoc, γC_hom, e₂]) ?_
-    rw [r.overElt_comp, r.overElt_comp, overElt_γC, ← r.overElt_comp, ← r.overElt_comp, e₁, e₃,
-      r.overElt_comp, overElt_γC, ← r.overElt_comp]
-  exact congr_arg (fun f ↦ f.left) this
 
 variable {F p r}
 

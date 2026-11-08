@@ -5,12 +5,105 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerBoundarySupplement
-import all Submission.WeilConjectures.AlgebraicGeometry.Supported.SupportedKummerCartierPullback
-import all Submission.WeilConjectures.AlgebraicGeometry.Cartier.CartierPairTensorAddition
+public import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+public import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import Submission.WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import Submission.WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import Submission.WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import Submission.WeilConjectures.AlgebraicGeometry.RawModuleScalarComparison.RawModuleScalarDerivedPullbackIso
+public import Submission.WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison
+public import Submission.WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import Submission.WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import Submission.WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+public import Submission.WeilConjectures.SixFunctors.BaseChange.Square
+public import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+public import Submission.WeilConjectures.AlgebraicGeometry.TensorPullback
+public import Submission.WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
+import Submission.WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.Dual
+import Submission.WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
+import Submission.WeilConjectures.AlgebraicGeometry.DualTensorHomComparison
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import Mathlib.CategoryTheory.Sites.Descent.IsPrestack
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.AffineDescent
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
+import Submission.WeilConjectures.AlgebraicGeometry.Relative.RelativeEtaleCohomology
+import Mathlib.Algebra.Homology.ConcreteCategory
+import Mathlib.Algebra.Category.Grp.Biproducts
+import Mathlib.CategoryTheory.Preadditive.Comma
+import Submission.WeilConjectures.CategoryTheory.Sites.FramedLift.FramedLifts
+import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Submission.WeilConjectures.AlgebraicGeometry.CartierPoleBoundary
+import Submission.WeilConjectures.CategoryTheory.Sites.WithSection.TorsorWithSection
+import Submission.WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Mathlib.CategoryTheory.Whiskering
+import Mathlib.CategoryTheory.Abelian.Injective.Ext
+import Submission.WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
+import Submission.WeilConjectures.CategoryTheory.Sites.RelativeTorsorExtension
+import Submission.WeilConjectures.CategoryTheory.Sites.TorsorExtensionPresentation
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Submission.WeilConjectures.CategoryTheory.Sites.Torsor
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.CategoryTheory.Abelian.Exact
+import Submission.WeilConjectures.CategoryTheory.Sites.EtaleTorsorExtensionPresentationExists
+import Submission.WeilConjectures.CategoryTheory.Sites.ExtensionPresentationShortExact
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.CategoryTheory.YonedaExtension.YonedaExtensionData
+import Mathlib.CategoryTheory.Abelian.Basic
+import Mathlib.Algebra.Homology.ExactSequence
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
+import Submission.WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+import Submission.WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+import Submission.WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedCocycleComparison
+import Submission.WeilConjectures.AlgebraicGeometry.RelativeCone.PurityRelativeCone
+import Submission.WeilConjectures.AlgebraicGeometry.OpenClosedIntegralSections
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import Submission.WeilConjectures.SixFunctors.OpenClosed.Exact
+import Submission.WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Submission.WeilConjectures.SixFunctors.Finite.BaseChange
+import Submission.WeilConjectures.AlgebraicGeometry.CartierComplementFrame
+import Submission.WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
+import Submission.WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
+import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Submission.WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
-import all Submission.WeilConjectures.AlgebraicGeometry.PicardCanonicalBaseChange
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -48,113 +141,5 @@ private theorem comparison_right_unit {C : Type u₁} {D : Type u₂}
   rw [← rightUnitor_naturality, ← id_tensorHom, ← tensorHom_id,
     tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom_assoc]
   simp only [Category.comp_id, Category.id_comp]
-
-private theorem tensor_right_unit {T T' : Scheme.{u}} (v : T' ⟶ T) (J : T.Modules) :
-    (Scheme.Modules.picardTensorObjIso v J (Scheme.Modules.unit T)).inv ≫
-      (Scheme.Modules.tensorPullback v).map (ρ_ J).hom =
-    (𝟙 _ ⊗ₘ (Scheme.Modules.picardTensorUnitIso v).hom) ≫
-      (ρ_ ((Scheme.Modules.tensorPullback v).obj J)).hom := by
-  have h := comparison_right_unit (Scheme.Modules.tensorPullback v)
-    (Scheme.Modules.pullback v) (Scheme.Modules.picardTensorComparison v) J
-  rw [Scheme.Modules.pullback_monoidal_unit_comparison] at h
-  exact h
-
-private theorem right_unit_square {C : Type u₁} {D : Type u₂}
-    [Category.{v₁} C] [Category.{v₂} D] [MonoidalCategory C] [MonoidalCategory D]
-    (F : C ⥤ D) (J : C) (J' : D)
-    (a : F.obj (𝟙_ C) ⟶ 𝟙_ D) (c : F.obj J ⟶ J')
-    (r : J ⟶ 𝟙_ C) (r' : J' ⟶ 𝟙_ D)
-    (p : F.obj J ⊗ F.obj (𝟙_ C) ⟶ F.obj (J ⊗ 𝟙_ C))
-    (hu : p ≫ F.map (ρ_ J).hom = (𝟙 _ ⊗ₘ a) ≫ (ρ_ (F.obj J)).hom)
-    (hc : c ≫ r' = F.map r ≫ a) :
-    (c ⊗ₘ a) ≫ (ρ_ J').hom ≫ r' =
-      p ≫ F.map ((ρ_ J).hom ≫ r) ≫ a := by
-  have hh := congrArg (fun z ↦ z ≫ F.map r ≫ a) hu
-  simp only [Category.assoc] at hh
-  rw [F.map_comp]
-  simp only [Category.assoc]
-  rw [hh]
-  have hca : c ⊗ₘ a = (𝟙 _ ⊗ₘ a) ≫ (c ⊗ₘ 𝟙 _) := by
-    rw [tensorHom_comp_tensorHom]
-    simp only [Category.id_comp, Category.comp_id]
-  rw [hca]
-  simp only [Category.assoc, tensorHom_id, rightUnitor_naturality_assoc, hc]
-
-private theorem iso_conj_map {C : Type u₁} {D : Type u₂}
-    [Category.{v₁} C] [Category.{v₂} D]
-    {F G : C ⥤ D} (e : F ≅ G) {A B : C} (s : A ⟶ B)
-    {X : D} (p : X ⟶ G.obj A) :
-    p ≫ e.inv.app A ≫ F.map s ≫ e.hom.app B = p ≫ G.map s := by
-  rw [← e.inv.naturality_assoc, e.inv_hom_id_app, Category.comp_id]
-
-/-- The dual ideal of a Cartier pair pulls back together with its canonical section.
-Source: Stacks Project, Tag 0C4U; blueprint lem-amb-cartier-kummer-map, the
-trivialized line bundle paragraph (blueprint: lem-asd-cartier-pair-pullback-section).
-Proof: the cartesian square identifies the new ideal with the extended ideal.
-The canonical map from the pulled ideal to the extended ideal is invertible:
-locally both are generated by the pulled regular equation. Its composite with
-the ideal inclusion is the pulled inclusion. Pull back the evaluation pairing
-and transpose this equality. The dual comparison is invertible for line bundles,
-and right unitality identifies the transpose with the canonical divisor section.
-Finally transport tensor pullback to ordinary pullback by its canonical adjoint
-comparison. No flatness is used, and empty schemes cause no exception. -/
-theorem cartierPair_pullback_section {D D' T T' : Scheme.{u}}
-    (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
-    (i' : D' ⟶ T') [IsClosedImmersion i'] (hI' : i'.ker.IsInvertible)
-    (v : T' ⟶ T) (w : D' ⟶ D) (sq : IsPullback w i' i v) :
-    ∃ e : (Scheme.Modules.pullback v).obj (Scheme.Modules.dual i.ker.toModules) ≅
-        Scheme.Modules.dual i'.ker.toModules,
-      (Scheme.Modules.pullback v).map (supportedDivisorSection i) ≫ e.hom =
-        (Scheme.Modules.pullbackObjUnitIso v).hom ≫ supportedDivisorSection i' := by
-  have hker : i'.ker = i.ker.comap v := by
-    rw [← sq.flip.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso,
-      Scheme.IdealSheafData.ker_fst_of_isClosedImmersion]
-  have hcomap : (i.ker.comap v).IsInvertible := hker ▸ hI'
-  have := hI.isInvertible_toModules
-  let F := Scheme.Modules.tensorPullback v
-  let a := (Scheme.Modules.picardTensorUnitIso v).hom
-  have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible i.ker.toModules
-  have ha : Scheme.Modules.tensorPullbackObjUnitToUnit v = a :=
-    (Scheme.IdealSheafData.IsInvertible.tensor_unit_comparison v).symm
-  have hbase := Scheme.IdealSheafData.IsInvertible.exists_tensor_ideal_iso v hI hcomap
-  erw [← hker] at hbase
-  obtain ⟨c, hc₀⟩ := hbase
-  have hc : c.hom ≫ i'.ker.toModulesι = F.map i.ker.toModulesι ≫ a :=
-    hc₀.trans (congrArg (F.map i.ker.toModulesι ≫ ·) ha)
-  have hd : IsIso (Scheme.Modules.picardTensorDualComparison v i.ker.toModules) :=
-    Scheme.picardTensorDualComparison_isIso v i.ker.toModules
-  have hpair : (c.hom ⊗ₘ a) ≫ MonoidalClosed.uncurry (supportedDivisorSection i') =
-      (Scheme.Modules.picardTensorObjIso v i.ker.toModules (Scheme.Modules.unit T)).inv ≫
-        F.map (MonoidalClosed.uncurry (supportedDivisorSection i)) ≫ a := by
-    change (c.hom ⊗ₘ a) ≫ i'.ker.toModules ◁ supportedDivisorSection i' ≫
-        Scheme.Modules.dualEvaluation i'.ker.toModules =
-      _ ≫ F.map (i.ker.toModules ◁ supportedDivisorSection i ≫
-        Scheme.Modules.dualEvaluation i.ker.toModules) ≫ a
-    rw [divisor_section_evaluation, divisor_section_evaluation]
-    exact right_unit_square F i.ker.toModules i'.ker.toModules a c.hom
-      i.ker.toModulesι i'.ker.toModulesι _ (tensor_right_unit v i.ker.toModules) hc
-  let d := asIso (Scheme.Modules.picardTensorDualComparison v i.ker.toModules)
-  let cD := (Scheme.Modules.dualFunctor T').mapIso c.symm.op
-  have hpull := Scheme.Modules.picardTensorDualComparison_uncurry v i.ker.toModules
-    (Scheme.Modules.unit T) (supportedDivisorSection i)
-  have key : F.map (supportedDivisorSection i) ≫ d.hom =
-      (a ≫ supportedDivisorSection i') ≫ cD.inv :=
-    Scheme.Modules.picardTranspose_square c.hom a _ _ (hpair.trans hpull.symm)
-  let bI := d ≪≫ cD
-  have he : F.map (supportedDivisorSection i) ≫ bI.hom =
-      a ≫ supportedDivisorSection i' := by
-    change F.map (supportedDivisorSection i) ≫ d.hom ≫ cD.hom = _
-    rw [← Category.assoc, key]
-    simp only [Category.assoc, cD.inv_hom_id]
-    erw [Category.comp_id]
-  let q := Scheme.Modules.picardTensorComparison v
-  refine ⟨(q.app _).symm ≪≫ bI, ?_⟩
-  change (Scheme.Modules.pullback v).map (supportedDivisorSection i) ≫
-    q.inv.app _ ≫ bI.hom = _
-  erw [q.inv.naturality_assoc, he]
-  dsimp only [a, Scheme.Modules.picardTensorUnitIso, Iso.trans_hom]
-  simp only [← Category.assoc]
-  have hcancel := q.inv_hom_id_app (Scheme.Modules.unit T)
-  erw [hcancel, Category.id_comp]
 
 end AlgebraicGeometry.Etale

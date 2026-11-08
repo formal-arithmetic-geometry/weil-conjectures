@@ -218,21 +218,6 @@ noncomputable def connectedComponentsAlongAdjunction :
   Adjunction.adjunctionOfEquivLeft (connectedComponentsAlongHomEquiv k)
     (connectedComponentsAlongHomEquiv_naturality k)
 
-lemma connectedComponentsAlongAdjunction_homEquiv (V : X.ProEt) (S : Profinite.{u})
-    (f : (connectedComponentsAlong k).obj V ⟶ S) :
-    (connectedComponentsAlongAdjunction k).homEquiv V S f =
-      connectedComponentsAlongHomEquiv k V S f := by
-  rw [connectedComponentsAlongAdjunction, Adjunction.adjunctionOfEquivLeft,
-    Adjunction.mkOfHomEquiv_homEquiv]
-  rfl
-
-lemma homProfiniteToProEtAlongEquiv_homEquiv (V : X.ProEt) (S : Profinite.{u})
-    (f : (connectedComponentsAlong k).obj V ⟶ S) :
-    homProfiniteToProEtAlongEquiv k V S ((connectedComponentsAlongAdjunction k).homEquiv V S f) =
-      schemeConnectedComponentsAdjunction.homEquiv V.left S f := by
-  rw [connectedComponentsAlongAdjunction_homEquiv, connectedComponentsAlongHomEquiv,
-    Equiv.trans_apply, Equiv.apply_symm_apply]
-
 end Along
 
 /-! ### The coefficient sheaf as a sheafified precomposition with `π₀` -/

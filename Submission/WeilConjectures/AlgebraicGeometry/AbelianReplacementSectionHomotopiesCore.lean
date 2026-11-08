@@ -7,7 +7,9 @@ Authors: Bin Wu
 module
 public import Submission.WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import Submission.WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts
-import Submission.WeilConjectures.Algebra.Homology.MappingCylinderSplitFactorization
+import Mathlib.Algebra.Homology.Homotopy
+import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Submission.WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Mathlib.Algebra.Homology.ModelCategory.Injective
 

@@ -166,11 +166,6 @@ lemma boundedConstructibleOpenImmersionLowerShriek_obj_obj (K : Dᵇc(X.left)⟦
       (openImmersionLowerShriek Λ j.left).mapDerivedCategory.obj K.obj :=
   rfl
 
-lemma boundedConstructibleOpenImmersionLowerShriek_map_hom {K L : Dᵇc(X.left)⟦Λ⟧} (φ : K ⟶ L) :
-    ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).map φ).hom =
-      (openImmersionLowerShriek Λ j.left).mapDerivedCategory.map φ.hom :=
-  rfl
-
 /-- On the ambient derived category, the unit of `j_! ⊣ Lj^*` on bounded constructible complexes
 is the unit of the ambient adjunction `D(j_!) ⊣ Lj^*`. -/
 lemma boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_unit_app_hom

@@ -7,8 +7,13 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHomModel
-import Submission.WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHomMapExistence
-import Submission.WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHomMapBijective
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
+import Submission.WeilConjectures.Algebra.Homology.HomComplexProjections
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Submission.WeilConjectures.Algebra.Homology.HomTensorDegreewise
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import Submission.WeilConjectures.AlgebraicGeometry.NormalizedTensorHomCochainComponents
 import Submission.WeilConjectures.Algebra.Homology.KFlatResolution
 import Submission.WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
@@ -33,29 +38,6 @@ noncomputable section
 universe uCD wCD
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
-
-/-- Existence of the canonical tensor-Hom family.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-Proof: resolve both tensor inputs by K-flat complexes and the target by the fixed
-K-injective functor. Curry the Hom-complex components using the sheaf tensor-Hom
-bijection. The Hom differential and total-tensor signs make the displayed ψ a chain
-map. Maps into a K-injective compute derived Hom; localization and the resolution
-map give the displayed equation. Common resolutions show independence of choices,
-and componentwise composition gives naturality in all three variables. -/
-theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
-    [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
-    ∃ e : ∀ K L M : schemeDerivedCategory X,
-      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).obj (op L, M)) ≃ (K ⊗ L ⟶ M),
-      IsCanonicalDerivedTensorHom X e := by
-  classical
-  obtain ⟨t, ht⟩ := exists_canonicalDerivedTensorHomMap X
-  have hb := canonicalDerivedTensorHomMap_bijective X t ht
-  let e := fun K L M ↦ Equiv.ofBijective (t K L M) (hb K L M)
-  refine ⟨e, ?_⟩
-  change IsCanonicalDerivedTensorHomMap X (fun K L M ↦ (e K L M).toFun)
-  exact ht
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -154,15 +136,5 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   have : IsIso (a.hom ⊗ₘ b.hom) := inferInstance
   exact (cancel_epi (a.hom ⊗ₘ b.hom)).1 ((cancel_mono c.inv).1
     (by simpa only [← Category.assoc] using heq))
-
-/-- Canonical family fixed by the representative equation.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). -/
-def schemeDerivedTensorHomEquiv (X : Scheme.{uCD})
-    [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
-    ∀ K L M : schemeDerivedCategory X,
-      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).obj (op L, M)) ≃ (K ⊗ L ⟶ M) :=
-  Classical.choose (exists_canonicalDerivedTensorHom X)
 
 end AlgebraicGeometry

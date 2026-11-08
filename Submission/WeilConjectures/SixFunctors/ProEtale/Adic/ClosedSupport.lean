@@ -196,16 +196,6 @@ theorem AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl
   AdicSheaf.isZero_of_isZero_X (isZero_of_isZero_upperStar_of_isCompl i j hij F.X
     ((AdicSheaf.forget Z).map_isZero hi) ((AdicSheaf.forget U).map_isZero hj))
 
-/-- Blueprint `lem-exc-proetale-closed-essential-image` for `ℓ`-adic sheaves: a sheaf `F` of
-`ℚ̄_ℓ,X`-modules lies in the essential image of `i_*` if and only if `j^* F = 0`. -/
-theorem adicLowerStar_essImage_iff_of_isCompl
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X) :
-    ((i)_*ᵃ[l]).essImage F ↔ IsZero ((j)^*ᵃ[l].obj F) := by
-  refine ⟨fun ⟨G, ⟨e⟩⟩ ↦ (isZero_adicUpperStar_obj_adicLowerStar_obj i j hij.disjoint G).of_iso
-    ((j)^*ᵃ[l].mapIso e.symm), fun hF ↦ ?_⟩
-  have := isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isCompl i j hij F hF
-  exact ⟨_, ⟨(asIso ((adicUpperStarLowerStarAdjunction l i).unit.app F)).symm⟩⟩
-
 /-! ### Derived categories -/
 
 variable (l) in
@@ -254,14 +244,5 @@ lemma isIso_adicDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero
   DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero _
     (isZero_adicUpperStar_obj_adicLowerStar_obj i j hij.disjoint)
     (AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl i j hij) hK
-
-/-- For a closed immersion `i` with quasi-compact open complement `j`, a complex `K` of sheaves of
-`ℚ̄_ℓ,X`-modules with `D(j^*) K = 0` lies in the essential image of `Ri_*`. -/
-lemma rightDerivedFunctor_adicLowerStar_essImage_of_isZero
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) {K : DerivedCategory (AdicSheaf l X)}
-    (hK : IsZero ((j)^*ᵃ[l].mapDerivedCategory.obj K)) :
-    (i)_*ᵃ[l].rightDerivedFunctor.essImage K :=
-  have := isIso_adicDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero i j hij hK
-  ⟨_, ⟨(asIso ((adicDerivedUpperStarLowerStarAdjunction l i).unit.app K)).symm⟩⟩
 
 end AlgebraicGeometry.ProEtale

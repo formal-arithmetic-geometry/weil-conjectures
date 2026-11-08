@@ -101,22 +101,6 @@ lemma twist_map_hom_f (α : F ≅ F) {K K' : IsoAlgebra F} (φ : K ⟶ K') :
     ((twist α).map φ).hom.f = φ.hom.f :=
   rfl
 
-/-- The twist does not change underlying objects. -/
-noncomputable def twistCompForgetIso (α : F ≅ F) : twist α ⋙ forget F ≅ forget F :=
-  Iso.refl _
-
-/-- Twisting by `α` and then by `β` is twisting by `β ≪≫ α`. -/
-noncomputable def twistCompTwistIso (α β : F ≅ F) : twist α ⋙ twist β ≅ twist (β ≪≫ α) :=
-  NatIso.ofComponents (fun K ↦ isoMk (Iso.refl _) (by simp)) fun φ ↦ by
-    ext
-    exact (Category.comp_id _).trans (Category.id_comp _).symm
-
-/-- The twist by the identity is the identity. -/
-noncomputable def twistReflIso : twist (Iso.refl F) ≅ 𝟭 (IsoAlgebra F) :=
-  NatIso.ofComponents (fun K ↦ isoMk (Iso.refl _) (by simp)) fun φ ↦ by
-    ext
-    exact (Category.comp_id _).trans (Category.id_comp _).symm
-
 /-- The twist by an automorphism is an equivalence, with inverse the twist by the inverse
 automorphism. -/
 @[simps functor inverse]

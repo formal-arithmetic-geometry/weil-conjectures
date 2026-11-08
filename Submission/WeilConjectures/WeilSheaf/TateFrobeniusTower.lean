@@ -106,10 +106,6 @@ noncomputable def rootsOfUnityTower : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) Ab.
     (fun n ↦ eqToHom (congrArg (rootsOfUnitySheaf X) (pow_succ' ℓ n)) ≫
       rootsOfUnitySheafPow X (ℓ ^ n) ℓ)
 
-lemma rootsOfUnityTower_obj (n : ℕ) :
-    (rootsOfUnityTower X ℓ).obj (op n) = rootsOfUnitySheaf X (ℓ ^ n) :=
-  rfl
-
 @[simp]
 lemma rootsOfUnityTower_map_succ (n : ℕ) :
     (rootsOfUnityTower X ℓ).map (homOfLE (n.le_add_right 1)).op =
@@ -200,15 +196,6 @@ lemma upperStarRootsOfUnityTowerHom_app (n : ℕᵒᵖ) :
   rfl
 
 variable {k : Type u} [Field k] (f : Y ⟶ Spec (.of k)) [NeZero (ℓ : k)]
-
-include f in
-/-- The pullback of the tower of roots of unity is the tower of roots of unity, for `Y` over a
-field in which `ℓ` is invertible. -/
-lemma isIso_upperStarRootsOfUnityTowerHom : IsIso (upperStarRootsOfUnityTowerHom g ℓ) := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro n
-  have := NeZero.natCast_pow (R := k) ℓ n.unop
-  exact isIso_upperStarRootsOfUnitySheafHom g f (ℓ ^ n.unop)
 
 end Pullback
 

@@ -5,7 +5,20 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
+public import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Submission.WeilConjectures.AlgebraicGeometry.FiniteDiscreteModuleCategories
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import Submission.WeilConjectures.AlgebraicGeometry.ConstantInternalModuleSheafEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
+public import Submission.WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientEncodingData
 public import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import all Submission.WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodedPresentation
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback

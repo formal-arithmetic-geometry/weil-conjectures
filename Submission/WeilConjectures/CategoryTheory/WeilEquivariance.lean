@@ -125,14 +125,6 @@ lemma hom_app_comp_map_rightAdjointExchange_app_comp_counit (d : D) :
         congrArg (e.hom.app (R₁.obj d) ≫ ·) h
     _ = H.map (adj₁.counit.app d) := by simp
 
-/-- The right adjoint exchange is compatible with the units:
-`G η₁ ≫ (exchange)_{L₁ c} = η₂ ≫ R₂ (e⁻¹)`. -/
-@[reassoc]
-lemma map_unit_app_comp_rightAdjointExchange_app (c : C) :
-    G.map (adj₁.unit.app c) ≫ (rightAdjointExchange adj₁ adj₂ e).app (L₁.obj c) =
-      adj₂.unit.app (G.obj c) ≫ R₂.map (e.inv.app c) :=
-  unit_mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv) c
-
 end Mate
 
 section Weil
@@ -182,11 +174,6 @@ noncomputable def dualWeilDatum {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj �
     G.obj ((ihom A).obj ω) ⟶ (ihom A).obj ω :=
   curry (φA.inv ▷ G.obj ((ihom A).obj ω) ≫ LaxMonoidal.μ G A ((ihom A).obj ω) ≫
     G.map ((ihom.ev A).app ω) ≫ φω)
-
-/-- The tensor product `G (A ⊗ B) ≅ G A ⊗ G B ──φ_A ⊗ φ_B──▶ A ⊗ B` of two Weil data. -/
-noncomputable def tensorWeilDatum {A B : C} (φA : G.obj A ⟶ A) (φB : G.obj B ⟶ B) :
-    G.obj (A ⊗ B) ⟶ A ⊗ B :=
-  OplaxMonoidal.δ G A B ≫ φA ▷ G.obj B ≫ A ◁ φB
 
 
 /-- The dual Weil datum is the composite

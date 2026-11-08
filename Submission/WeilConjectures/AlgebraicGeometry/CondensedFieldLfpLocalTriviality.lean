@@ -15,7 +15,7 @@ public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Topology.NoetherianSpace
 
 import Submission.WeilConjectures.AlgebraicGeometry.ProfinitePointPullback

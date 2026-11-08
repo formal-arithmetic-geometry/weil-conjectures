@@ -79,31 +79,4 @@ lemma mateEquiv_app_cube
   rw [h₁, reassoc_of% h₂, ← PX'.map_comp, h₃, PX'.map_comp, reassoc_of% (h (Rf.obj K)),
     reassoc_of% h₅, reassoc_of% h₆, ← Hs.map_comp_assoc, h₇, Hs.map_comp, Category.assoc, h₄]
 
-/-- **Cubes of mates, converse.** If the cube of the mates commutes (the conclusion of
-`CategoryTheory.mateEquiv_app_cube`) at every object, then the cube of 2-cells on the left
-adjoints commutes. -/
-lemma mateEquiv_app_cube_converse
-    (h : ∀ K, αg.app (Rf.obj K) ≫ PY'.map ((mateEquiv af af' σr).app K) ≫
-        (mateEquiv af' bf' αf').app (Hr.obj K) =
-      Gs.map ((mateEquiv af bf αf).app K) ≫ (mateEquiv bf bf' σs).app (PX.obj K) ≫
-        Sf'.map (αg'.app K)) (M : DY) :
-    Mf'.map (αg.app M) ≫ αf'.app (Gr.obj M) ≫ PX'.map (σr.app M) =
-      σs.app (PY.obj M) ≫ Hs.map (αf.app M) ≫ αg'.app (Lf.obj M) := by
-  apply (bf'.homEquiv _ _).injective
-  have h₁ := unit_mateEquiv af' bf' αf' (Gr.obj M)
-  have h₂ := (mateEquiv af' bf' αf').naturality (σr.app M)
-  have h₃ := unit_mateEquiv af af' σr M
-  have h₄ := αg.naturality (af.unit.app M)
-  have h₅ := unit_mateEquiv bf bf' σs (PY.obj M)
-  have h₆ := (mateEquiv bf bf' σs).naturality (αf.app M)
-  have h₇ := unit_mateEquiv af bf αf M
-  have h₈ := bf'.unit.naturality (αg.app M)
-  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map]
-    at h₁ h₂ h₃ h₄ h₅ h₆ h₇ h₈
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
-  dsimp only [Functor.comp_obj]
-  rw [← reassoc_of% h₈, ← reassoc_of% h₁, ← h₂, ← PY'.map_comp_assoc, ← h₃,
-    PY'.map_comp_assoc, ← reassoc_of% h₄, h (Lf.obj M), ← reassoc_of% h₅, ← reassoc_of% h₆,
-    ← Gs.map_comp_assoc (bf.unit.app (PY.obj M)), ← h₇, Gs.map_comp_assoc]
-
 end CategoryTheory

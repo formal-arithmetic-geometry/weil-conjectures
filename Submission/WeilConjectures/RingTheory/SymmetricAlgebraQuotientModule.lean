@@ -8,7 +8,10 @@ module
 
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Submission.WeilConjectures.LinearAlgebra.SymmetricAlgebra.DegreeExact
+import Mathlib.Algebra.DirectSum.Module
+import Mathlib.Algebra.Group.Pointwise.Set.BigOperators
+import Mathlib.LinearAlgebra.TensorAlgebra.Grading
+import Mathlib.LinearAlgebra.Isomorphisms
 import Submission.WeilConjectures.RingTheory.SymmetricAlgebraQuotientModuleKernel
 
 set_option autoImplicit true

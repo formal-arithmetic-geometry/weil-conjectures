@@ -115,21 +115,6 @@ lemma localizingClosure_constructibleFiniteTor_le :
       etaleOriginHomology Λ X :=
   ObjectProperty.localizingClosure_le (constructibleFiniteTor_le_etaleOriginHomology Λ X)
 
-/-- The extension by zero along an open immersion preserves complexes with cohomology sheaves
-of étale origin: `j_!` is exact and `j_! ν^* ≅ ν^* j_!`. -/
-lemma etaleOriginHomology_openImmersionLowerShriek {U : Scheme.{u}} (j : U ⟶ X)
-    [IsOpenImmersion j]
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} Λ))}
-    (hK : etaleOriginHomology Λ U K) :
-    etaleOriginHomology Λ X
-      ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj K) :=
-  fun n ↦ by
-    obtain ⟨G, ⟨e⟩⟩ := hK n
-    exact ⟨(Etale.openImmersionLowerShriek _ j).obj G,
-      ⟨(openImmersionLowerShriekComparisonUpperStarIso _ j).app G ≪≫
-        (ProEtale.openImmersionLowerShriek _ j).mapIso e ≪≫
-        ((ProEtale.openImmersionLowerShriek _ j).mapDerivedCategoryHomologyFunctorIso n).app K⟩⟩
-
 end DerivedCategory
 
 open _root_.DerivedCategory.TStructure (t) in

@@ -9,7 +9,10 @@ module
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Submission.WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Submission.WeilConjectures.RingTheory.KoszulRegularSequence
-import Submission.WeilConjectures.RingTheory.RegularSequenceKoszulRegular
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Mathlib.LinearAlgebra.ExteriorPower.Basic
+import Mathlib.LinearAlgebra.Finsupp.Defs
+import Mathlib.LinearAlgebra.TensorProduct.Prod
 import Submission.WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
 
 set_option autoImplicit true

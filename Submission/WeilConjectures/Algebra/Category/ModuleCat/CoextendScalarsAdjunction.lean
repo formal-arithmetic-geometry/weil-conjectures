@@ -98,10 +98,6 @@ noncomputable def frobeniusUnitElt {M : ModuleCat.{u} R} (m : M) :
   (CoextendScalars.equiv _ M).symm
     (LinearMap.smulRight φ m ∘ₗ (restrictScalarsSelfLinearEquiv R S).toLinearMap)
 
-lemma frobeniusUnitElt_apply {M : ModuleCat.{u} R} (m : M) (s : S) :
-    frobeniusUnitElt φ m s = φ s • m :=
-  rfl
-
 /-- The unit `M ⟶ Hom_R(S, M)`, `m ↦ (s ↦ φ(s) • m)`, of the adjunction between coextension
 and restriction of scalars along a Frobenius extension. -/
 noncomputable def frobeniusUnitApp (M : ModuleCat.{u} R) :

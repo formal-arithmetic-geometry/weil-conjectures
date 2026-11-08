@@ -84,15 +84,6 @@ namespace ProEtale.CondensedRing.NearbyCyclesModel
 
 variable {k : Type u} [Field k] {k' : Type u} [Field k'] [Algebra k k']
 
-/-- The identification `ε` of the geometric generic fibre of a trait model of `X` over the base
-lies over the geometric generic point `Spec Ω ⟶ S ⟶ Spec k`. -/
-lemma IsTraitModelOfBase.ε_hom {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))}
-    {M : NearbyCyclesModel X.left X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (h : M.IsTraitModelOfBase k q g) :
-    M.ε ≫ X.hom = g ≫ traitGenericPoint k' ≫ traitToBase k k' := by
-  obtain ⟨u, -, hu₁, hu₂⟩ := h.exists_openImmersion
-  rw [← hu₁, ← hu₂, Category.assoc, Category.assoc, pullback.condition]
-
 /-- The geometric generic fibre of a model of finite type over the trait is the base change of
 its generic fibre `𝒳 ×_S Spec K` along `Spec Ω ⟶ Spec K`. -/
 lemma IsTraitModelOver.isPullback_traitGenericPointToSpec {X : Scheme.{u}}
@@ -105,18 +96,6 @@ lemma IsTraitModelOver.isPullback_traitGenericPointToSpec {X : Scheme.{u}}
   refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback _ _)
   rw [pullback.lift_fst, traitGenericPointToSpec_traitGenericSpec]
   exact hM.isPullback_j
-
-/-- The inclusion `𝒳_Ω ⟶ 𝒳 ×_S Spec K` of the geometric generic fibre of a model of finite type
-over the trait in its generic fibre is an epimorphism (it is faithfully flat). -/
-lemma IsTraitModelOver.epi_lift_traitGenericPointToSpec {X : Scheme.{u}}
-    {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    Epi (pullback.lift M.j (g ≫ traitGenericPointToSpec k') (by
-        rw [Category.assoc, traitGenericPointToSpec_traitGenericSpec, hM.isPullback_j.w]) :
-        M.generic ⟶ pullback q (traitGenericSpec k')) := by
-  obtain ⟨⟨h₁, h₂⟩, -⟩ := MorphismProperty.of_isPullback hM.isPullback_traitGenericPointToSpec.flip
-    (traitGenericPointToSpec_mem k')
-  exact Flat.epi_of_flat_of_surjective _
 
 /-- **The generic fibre of a trait model over the base.** Let `M` be a trait model of `X` over
 the base whose geometric generic fibre is all of `X ×_k Spec Ω`, and `e : 𝒳 ⟶ X` a factorisation

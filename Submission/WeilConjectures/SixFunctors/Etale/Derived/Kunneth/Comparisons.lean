@@ -13,9 +13,21 @@ public import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pu
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.KrullDimension
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
@@ -156,118 +168,6 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
         (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1}
             Λ])).obj N))).obj
           ((R(pullback.fst a b)^![Λ]).obj M))
-
-omit [HasSmallSiteSheafify A] in
-/-- The external Hom map `β` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an isomorphism
-for **dualizable** `E₁`, `E₂`:
-`RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`. The derived pullbacks are monoidal and
-preserve duals, and internal homs out of dualizable objects are tensor products with the duals
-(`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj`). Over a field, constructible complexes of
-finite Tor amplitude are dualizable only where they are lisse, so this is the lisse case of the
-`externalHom` clause. -/
-theorem nonempty_iso_externalProduct_derivedHom_of_isDualizable [UpperStarPreservesFlat A]
-    {S Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ S) (c₂ : Z₂ ⟶ S)
-    {E₁ N₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)}
-    {E₂ N₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A)}
-    (h₁ : IsDualizable E₁) (h₂ : IsDualizable E₂) :
-    Nonempty (externalProduct A c₁ c₂ ((RHom(Z₁)[A].obj (op E₁)).obj N₁)
-        ((RHom(Z₂)[A].obj (op E₂)).obj N₂) ≅
-      (RHom(pullback c₁ c₂)[A].obj (op (externalProduct A c₁ c₂ E₁ E₂))).obj
-        (externalProduct A c₁ c₂ N₁ N₂)) := by
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z₁.smallEtaleTopology A)
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z₂.smallEtaleTopology A)
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf (pullback c₁ c₂).smallEtaleTopology A)
-  let _ := leftDerivedUpperStarMonoidal A (pullback.fst c₁ c₂)
-  let _ := leftDerivedUpperStarMonoidal A (pullback.snd c₁ c₂)
-  exact nonempty_iso_tensorObj_map_ihom_obj (L((pullback.fst c₁ c₂)^*[A]))
-    (L((pullback.snd c₁ c₂)^*[A])) h₁ h₂
-
-/-- The product `f₁ ×_S f₂` of two open immersions over `S` is an open immersion: it is the
-composite of the base changes `X₁ ×_S f₂` and `f₁ ×_S Y₂`. -/
-lemma isOpenImmersion_mapOverBase {S X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
-    (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [IsOpenImmersion f₁] [IsOpenImmersion f₂] :
-    IsOpenImmersion (pullback.mapOverBase f₁ f₂ b₁ b₂) := by
-  have h : pullbackMapRight (f₁ ≫ b₁) b₂ f₂ ≫ pullbackMapLeft b₁ b₂ f₁ =
-      pullback.mapOverBase f₁ f₂ b₁ b₂ := by
-    apply pullback.hom_ext <;> simp
-  have : IsOpenImmersion (pullbackMapLeft b₁ b₂ f₁) :=
-    MorphismProperty.of_isPullback (P := @IsOpenImmersion)
-      (isPullback_pullbackMapLeft b₁ b₂ f₁) inferInstance
-  have : IsOpenImmersion (pullbackMapRight (f₁ ≫ b₁) b₂ f₂) :=
-    MorphismProperty.of_isPullback (P := @IsOpenImmersion)
-      (isPullback_pullbackMapRight (f₁ ≫ b₁) b₂ f₂) inferInstance
-  rw [← h]
-  infer_instance
-
-/-- The exceptional Künneth map `α` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an
-isomorphism for **open immersions** `f₁`, `f₂` (quasi-compact, finite coefficients):
-`Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^! (N₁ ⊠ N₂)`. For a quasi-compact open immersion the exceptional
-inverse image is the restriction
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`), and `f₁ × f₂` is again
-an open immersion, so this is the compatibility of the external product with pullbacks
-(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp`).
-This is the étale-local case through which the blueprint proof (`prop-trf-exceptional-kunneth`)
-reduces lisse coefficients to constant ones. -/
-theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {S X₁ X₂ Y₁ Y₂ : Scheme.{u}}
-    (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
-    [IsOpenImmersion f₁] [IsOpenImmersion f₂] [QuasiCompact f₁] [QuasiCompact f₂]
-    [HasCompactification f₁] [HasCompactification f₂]
-    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    [QuasiCompact (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    (N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
-        ((R(f₁)^![Λ]).obj N₁) ((R(f₂)^![Λ]).obj N₂) ≅
-      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![Λ]).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := by
-  have := isOpenImmersion_mapOverBase b₁ b₂ f₁ f₂
-  let ψ := pullback.mapOverBase f₁ f₂ b₁ b₂
-  let e (Z W : Scheme.{u}) (j : Z ⟶ W) [IsOpenImmersion j] [QuasiCompact j]
-      [HasCompactification j] :
-      R(j)^![Λ] ≅ L((j)^*[ModuleCat.{u + 1} Λ]) :=
-    rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j ≪≫
-      (leftDerivedUpperStarIsoMapDerivedCategory _ j).symm
-  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp
-    (ModuleCat.{u + 1} Λ) b₁ b₂ (f₁ ≫ b₁) (f₂ ≫ b₂) f₁ f₂ ψ (by simp [ψ]) (by simp [ψ]) N₁ N₂
-  exact ⟨((derivedTensor _ _).mapIso ((L((pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
-      ((e _ _ f₁).app N₁))).app _ ≪≫
-    ((derivedTensor _ _).obj _).mapIso ((L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
-      ((e _ _ f₂).app N₂)) ≪≫ p.symm ≪≫ ((e _ _ ψ).app _).symm⟩
-
-/-- The Künneth–Verdier map `κ` of `AlgebraicGeometry.Etale.HasKunnethComparisons` for a
-**dualizable** `N` reduces to the case `N = Λ_Y`: given `M ⊠ ω_Y ≅ Rp_X^! M`,
-`M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. Indeed `𝔻_Y N = RHom(N, ω_Y) ≅ N^∨ ⊗ ω_Y` and
-`RHom(p_Y^* N, -) ≅ p_Y^* N^∨ ⊗ -` (`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj_right`).
-The remaining case `M ⊠ ω_Y ≅ Rp_X^! M` is the exceptional Künneth map for `𝟙_X × b`, which
-is how the blueprint proof of `thm-trf-kunneth-verdier` uses `prop-trf-exceptional-kunneth`. -/
-theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPreservesFlat
-    (ModuleCat.{u + 1} Λ)]
-    {S : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S) [HasCompactification b]
- [HasCompactification (pullback.fst a b)]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hN :
-        IsDualizable N)
-    (h : Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M (dualizingComplex Λ b) ≅
-      (R(pullback.fst a b)^![Λ]).obj M)) :
-    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) a b M ((verdierDual Λ b).obj (Opposite.op N)) ≅
-      (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj (Opposite.op ((L((pullback.snd a
-          b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![Λ]).obj M)) := by
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} Λ))
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Y.smallEtaleTopology
-      (ModuleCat.{u + 1} Λ))
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf (pullback a b).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-  let _ := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) (pullback.fst a b)
-  let _ := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) (pullback.snd a b)
-  obtain ⟨e⟩ := nonempty_iso_tensorObj_map_ihom_obj_right (L((pullback.fst a b)^*[ModuleCat.{u + 1}
-      Λ]))
-    (L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])) M (dualizingComplex Λ b) hN
-  obtain ⟨h⟩ := h
-  exact ⟨e ≪≫ (ihom ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N)).mapIso h⟩
 
 end Etale
 

@@ -70,15 +70,6 @@ lemma Scheme.Hom.isOpenImmersion_of_comp_eq_id {Y S : Scheme.{u}} (a : Y ⟶ S) 
   rw [← pullback.lift_snd (f := s ≫ a) (g := a) (𝟙 S) s (by simp)]
   infer_instance
 
-/-- A section `s` of a separated morphism `a` is a closed immersion: it is the graph of `s` over
-`a` followed by the isomorphism `pullback (s ≫ a) a ≅ Y`. -/
-lemma Scheme.Hom.isClosedImmersion_of_comp_eq_id {Y S : Scheme.{u}} (a : Y ⟶ S) [IsSeparated a]
-    (s : S ⟶ Y) (hs : s ≫ a = 𝟙 S) : IsClosedImmersion s := by
-  have : IsIso (s ≫ a) := hs ▸ inferInstance
-  have := isClosedImmersion_pullbackLift_of_isSeparated a s
-  rw [← pullback.lift_snd (f := s ≫ a) (g := a) (𝟙 S) s (by simp)]
-  infer_instance
-
 namespace ProEtale
 
 variable (l : ℕ) [Fact l.Prime]

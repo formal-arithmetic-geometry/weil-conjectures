@@ -189,16 +189,6 @@ noncomputable def diagCone : Cone (diagDiagram k ks) where
 lemma diagCone_π_app (K : (FiniteIntermediateField k ks)ᵒᵖ) :
     (diagCone k ks).π.app K = pullback.lift (𝟙 _) (𝟙 _) rfl := rfl
 
-@[reassoc (attr := simp)]
-lemma diagCone_π_app_fst (K : (FiniteIntermediateField k ks)ᵒᵖ) :
-    (diagCone k ks).π.app K ≫ pullback.fst _ _ = 𝟙 _ := by
-  simp
-
-@[reassoc (attr := simp)]
-lemma diagCone_π_app_snd (K : (FiniteIntermediateField k ks)ᵒᵖ) :
-    (diagCone k ks).π.app K ≫ pullback.snd _ _ = 𝟙 _ := by
-  simp
-
 lemma diagCone_fst_eq (s : Cone (diagDiagram k ks)) (K : (FiniteIntermediateField k ks)ᵒᵖ) :
     s.π.app K ≫ pullback.fst _ _ = s.π.app (.op ⊥) ≫ pullback.fst _ _ := by
   rw [← s.w (homOfLE (bot_le (a := K.unop))).op, Category.assoc, diagDiagram_map, diagMap_fst]

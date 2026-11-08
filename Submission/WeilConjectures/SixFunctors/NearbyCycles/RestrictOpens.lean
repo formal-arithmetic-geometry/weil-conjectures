@@ -282,14 +282,6 @@ lemma Hom.restrictOpens_generic_comp_eq {T₁ T₂ : Scheme.{u}} {g₁ : N.gener
     (φ.restrictOpens V).generic ≫ pullback.fst _ _ ≫ g₁ = (pullback.fst _ _ ≫ g₂) ≫ c := by
   simp [hgen]
 
-/-- The compatibility of the special fibres of a morphism of models with maps to `T₁`, `T₂` over
-`d : T₂ ⟶ T₁` restricts to opens. -/
-lemma Hom.restrictOpens_special_comp_eq {T₁ T₂ : Scheme.{u}} {p₁ : Y' ⟶ T₁} {p₂ : X' ⟶ T₂}
-    {d : T₂ ⟶ T₁} (hs : f' ≫ p₁ = p₂ ≫ d) :
-    pullback.map _ _ _ _ f' (φ.total ∣_ V) φ.total φ.comm_i.symm (morphismRestrict_ι _ _).symm ≫
-      pullback.fst _ _ ≫ p₁ = (pullback.fst _ _ ≫ p₂) ≫ d := by
-  simp [hs]
-
 end IsPullback
 
 end NearbyCyclesModel

@@ -79,15 +79,4 @@ noncomputable def freeHomEquiv :
     ext i j : 1
     simp
 
-lemma freeHomEquiv_comp (ψ : (⨁ fun _ : ι ↦ unit l V) ⟶ ⨁ fun _ : κ ↦ unit l V)
-    (ψ' : (⨁ fun _ : κ ↦ unit l V) ⟶ ⨁ fun _ : ν ↦ unit l V) :
-    freeHomEquiv (ψ ≫ ψ') = freeHomEquiv ψ' * freeHomEquiv ψ := by
-  simp only [freeHomEquiv, Equiv.coe_fn_mk, unitMatrix_comp]
-  exact Matrix.map_mul (f := (PadicAlgCl.locallyFiniteFunctionsEquiv l V).toRingHom)
-
-lemma freeHomEquiv_id [DecidableEq ι] :
-    freeHomEquiv (𝟙 (⨁ fun _ : ι ↦ unit l V)) = 1 := by
-  simp only [freeHomEquiv, Equiv.coe_fn_mk, unitMatrix_id]
-  exact Matrix.map_one _ (map_zero _) (map_one _)
-
 end AlgebraicGeometry.ProEtale.AdicSheaf

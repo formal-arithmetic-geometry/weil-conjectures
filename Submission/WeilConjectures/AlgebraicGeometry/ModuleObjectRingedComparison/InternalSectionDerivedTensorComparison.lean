@@ -166,16 +166,6 @@ def totalComparison (P Q : CochainComplex (Internal Λ X) ℤ) :
       ((complexForward Λ X).obj P, (complexForward Λ X).obj Q) :=
   complexTensorIso Λ X P Q
 
-/-- The fixed global total map is the canonical summand-normalized site map.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-derived-tensor-comparison).
-Proof: unfold the two named specializations; both are the same normalized map. -/
-theorem totalComparison_heq (P Q : CochainComplex (Internal Λ X) ℤ) :
-    HEq (totalComparison Λ X P Q)
-      (ordinaryComplexTensorIsoForSite (Scheme.ProEt.topology X)
-        (condensedRingObj Λ X) P Q) := by
-  unfold totalComparison complexTensorIso
-  rfl
-
 /-- Closed structures for the fixed global ringed-site Hom.
 Source: Stacks 08J9 (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
 def GlobalClosedStructureType := CoefficientClosedStructure (hom Λ X)

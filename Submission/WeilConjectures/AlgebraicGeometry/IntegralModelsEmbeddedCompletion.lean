@@ -24,7 +24,7 @@ public import Submission.WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinar
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteDiscreteRestrictionEncoding
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleLocallyFreeModels
-public import Submission.WeilConjectures.AlgebraicGeometry.FiniteSectionCoproductLocalPermutation
+public import Mathlib.AlgebraicGeometry.Limits
 public import Submission.WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import Submission.WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 public import Submission.WeilConjectures.AlgebraicGeometry.LatticeMatrixNeighborhoods
@@ -103,29 +103,6 @@ private theorem smallModulesEquivalence (X : Scheme.{u})
   exact inferInstanceAs
     ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
       (Scheme.ProEt.topology X) R).functor ⋙ e.inverse).IsEquivalence
-
-private def smallRestrictionIso (X : Scheme.{u})
-    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
-    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
-    (f : R ⟶ S) [IsMonHom f] :
-    Mod.comap f ⋙ IntegralModelsStacks.smallModules X R ≅
-      IntegralModelsStacks.smallModules X S ⋙
-        ConstantCompletion.res (IntegralModelsStacks.smallMap X f) := by
-  dsimp only [IntegralModelsStacks.smallModules, IntegralModelsStacks.smallMap]
-  let e := CondensedRing.sectionModuleComapIso X f
-  refine NatIso.ofComponents (fun M ↦ ?_) ?_
-  · refine (SheafOfModules.fullyFaithfulForget _).preimageIso
-      (PresheafOfModules.isoMk (fun U ↦ ?_) ?_)
-    · refine ModuleCat.isoMk (Iso.refl _) ?_
-      intro r
-      ext m
-      exact (((e.hom.app M).val.app (op (AsSmall.down.obj U.unop))).hom.map_smul r m).symm
-    · intro U V g
-      ext m
-      rfl
-  · intro M N g
-    ext U m
-    rfl
 
 attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
   IntegralModelsStacks.smallModules IntegralModelsStacks.smallMap

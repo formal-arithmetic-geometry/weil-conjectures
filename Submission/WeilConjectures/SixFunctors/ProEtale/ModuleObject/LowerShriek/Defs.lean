@@ -108,12 +108,6 @@ noncomputable def linearOpenImmersionLowerShriek :
   (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft
     (condensedRingObj Λ X)
 
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of the linear extension by zero is the extension by zero. -/
-lemma linearOpenImmersionLowerShriek_comp_forget :
-    linearOpenImmersionLowerShriek Λ j ⋙ Mod.forget (condensedRingObj Λ X) =
-      Mod.forget _ ⋙ (j)_!open[Ab.{u + 1}] := rfl
-
 /-- The linear extension by zero is left adjoint to the transport `mapMod(j^*)` of module
 objects along the strong monoidal `j^*`. -/
 noncomputable def linearOpenImmersionLowerShriekAdjunction :
@@ -159,13 +153,6 @@ noncomputable def openImmersionLowerShriek :
 
 @[inherit_doc openImmersionLowerShriek]
 scoped notation "(" j ")_!open⟦" Λ "⟧" => openImmersionLowerShriek Λ j
-
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of the extension by zero on module objects is the extension by zero
-of the underlying sheaf. -/
-lemma openImmersionLowerShriek_comp_forget :
-    (j)_!open⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ X) =
-      Mod.forget (condensedRingObj Λ U) ⋙ (j)_!open[Ab.{u + 1}] := rfl
 
 instance openImmersionLowerShriek_additive : (j)_!open⟦Λ⟧.Additive := by
   unfold openImmersionLowerShriek
@@ -234,12 +221,6 @@ lemma lowerShriek_eq :
     (f)_!⟦Λ⟧ = ((HasCompactification.compactification f).i)_!open⟦Λ⟧ ⋙
       ((HasCompactification.compactification f).g)_*⟦Λ⟧ :=
   rfl
-
-omit [IsCommMonObj Λ] in
-/-- The underlying sheaf of `f_! M` is `f_! M`. -/
-lemma lowerShriek_comp_forget :
-    (f)_!⟦Λ⟧ ⋙ Mod.forget (condensedRingObj Λ Y) =
-      Mod.forget (condensedRingObj Λ X) ⋙ ProEtale.lowerShriek Ab.{u + 1} f := rfl
 
 instance lowerShriek_additive : (f)_!⟦Λ⟧.Additive := by
   rw [lowerShriek_eq]

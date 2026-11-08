@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -13,17 +12,82 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Submission.WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.CoverLifting
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenExtensionProducts
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenClosed
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import Mathlib.CategoryTheory.Monoidal.Ring
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Mathlib.CategoryTheory.Sites.Limits
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
+import Submission.WeilConjectures.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Submission.WeilConjectures.CategoryTheory.Sites.LowerShriekCoveringGenerators
+import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Submission.WeilConjectures.CategoryTheory.Sites.LowerShriekCorepresentability
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Submission.WeilConjectures.CategoryTheory.Sites.CoveringRepresentableCoequalizer
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+import Mathlib.CategoryTheory.Sites.RegularEpi
+import Mathlib.CategoryTheory.Limits.Shapes.KernelPair
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Submission.WeilConjectures.CategoryTheory.InverseMateEquivalence
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+import Submission.WeilConjectures.Mathlib.CategoryTheory.NatIso
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModelRingPresentation
+import Submission.WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Submission.WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAction
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
+import Submission.WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 public import Submission.WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExactIndependent
 public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
@@ -96,7 +160,10 @@ public import Submission.WeilConjectures.Algebra.Homology.TowerEvaluationKInject
 public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.BigOperators.Ring.Finset
 public import Submission.WeilConjectures.Algebra.Homology.RingedOpenScalar.RingedOpenScalarAdjunction
-import Submission.WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Mathlib.CategoryTheory.Localization.Adjunction
 public import Submission.WeilConjectures.CategoryTheory.NormalizedLimitSquare.NormalizedLimitSquareCoherence
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
@@ -271,34 +338,6 @@ def cbcDerivedTowerSquare
 
 end
 
-/-- Unit and counit equations for the scalar/open-extension square.
-Source: Stacks 03DI, the two explicit Hom maps
-(blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
-def CbcAdjunctionCompatible
-    {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
-    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
-    {JS : A ⥤ C} {JR : B ⥤ D} {rU : A ⥤ B} {rT : C ⥤ D}
-    {qS : C ⥤ A} {qR : D ⥤ B}
-    (e : JS ⋙ rT ≅ rU ⋙ JR) (d : rT ⋙ qR ≅ qS ⋙ rU)
-    (adjS : JS ⊣ qS) (adjR : JR ⊣ qR) : Prop :=
-  (∀ N : A, rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) ≫
-    qR.map (e.hom.app N) = adjR.unit.app (rU.obj N)) ∧
-  (∀ Q : C, e.hom.app (qS.obj Q) ≫ JR.map (d.inv.app Q) ≫
-    adjR.counit.app (rT.obj Q) = rT.map (adjS.counit.app Q))
-
-/-- Canonical square on complexes with its composition factors explicit.
-Source: Stacks 03DJ (blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
-def cbcComplexSquare
-    {A : Type uA} [Category.{vA} A] [Preadditive A]
-    {B : Type uB} [Category.{vB} B] [Preadditive B]
-    {C : Type uC} [Category.{vC} C] [Preadditive C]
-    {D : Type uD} [Category.{vD} D] [Preadditive D]
-    (F : A ⥤ B) (G : B ⥤ D) (H : A ⥤ C) (K : C ⥤ D)
-    [F.Additive] [G.Additive] [H.Additive] [K.Additive] (e : F ⋙ G ≅ H ⋙ K) :
-    F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ≅
-      H.mapHomologicalComplex (.up ℤ) ⋙ K.mapHomologicalComplex (.up ℤ) :=
-  NatIso.mapHomologicalComplex e (.up ℤ)
-
 section EquationCalculus
 
 variable {A B C D : Type uA} [Category.{vA} A] [Category.{vA} B]
@@ -308,94 +347,8 @@ variable {A B C D : Type uA} [Category.{vA} A] [Category.{vA} B]
   (e : JS ⋙ rT ≅ rU ⋙ JR) (d : rT ⋙ qR ≅ qS ⋙ rU)
   (adjS : JS ⊣ qS) (adjR : JR ⊣ qR)
 
-private theorem inverseMate_of_unit
-    (hu : ∀ N : A, rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) ≫
-      qR.map (e.hom.app N) = adjR.unit.app (rU.obj N)) :
-    ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv := by
-  ext N
-  apply (adjR.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  change adjR.unit.app (rU.obj N) ≫ qR.map
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) = _
-  have h := unit_mateEquiv_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) N
-  change rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) =
-    adjR.unit.app (rU.obj N) ≫ qR.map
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) at h
-  rw [← h, ← hu N]
-  simp only [Category.assoc]
-  rw [← qR.map_comp, Iso.hom_inv_id_app]
-  erw [qR.map_id]
-  erw [Category.comp_id]
-
-private theorem equations_of_inverseMate
-    (hm : ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv) :
-    CbcAdjunctionCompatible e d adjS adjR := by
-  have hu (N : A) := unit_mateEquiv_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) N
-  have hc (Q : C) := mateEquiv_counit_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) Q
-  constructor
-  · intro N
-    have hu' := hu N
-    change rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) =
-      adjR.unit.app (rU.obj N) ≫ qR.map
-        (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) at hu'
-    rw [hm] at hu'
-    rw [reassoc_of% hu']
-    rw [← qR.map_comp, Iso.inv_hom_id_app]
-    erw [qR.map_id]
-    rw [Category.comp_id]
-  · intro Q
-    have hc' := hc Q
-    change JR.map (d.inv.app Q) ≫ adjR.counit.app (rT.obj Q) =
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app (qS.obj Q)) ≫
-        rT.map (adjS.counit.app Q) at hc'
-    rw [hm] at hc'
-    rw [hc', Iso.hom_inv_id_app_assoc]
-
 variable [Abelian A] [Abelian B] [Abelian C] [Abelian D]
   [JS.Additive] [JR.Additive] [rU.Additive] [rT.Additive] [qS.Additive] [qR.Additive]
-
-private theorem equations_complex (he : CbcAdjunctionCompatible e d adjS adjR) :
-    CbcAdjunctionCompatible
-      (JS := JS.mapHomologicalComplex (.up ℤ))
-      (JR := JR.mapHomologicalComplex (.up ℤ))
-      (rU := rU.mapHomologicalComplex (.up ℤ))
-      (rT := rT.mapHomologicalComplex (.up ℤ))
-      (qS := qS.mapHomologicalComplex (.up ℤ))
-      (qR := qR.mapHomologicalComplex (.up ℤ))
-      (cbcComplexSquare JS rT rU JR e)
-      (cbcComplexSquare rT qR qS rU d)
-      (adjS.mapHomologicalComplex (.up ℤ)) (adjR.mapHomologicalComplex (.up ℤ)) := by
-  unfold cbcComplexSquare
-  constructor
-  · intro N
-    apply HomologicalComplex.Hom.ext
-    funext i
-    exact he.1 (N.X i)
-  · intro Q
-    apply HomologicalComplex.Hom.ext
-    funext i
-    exact he.2 (Q.X i)
-
-omit [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-    [JS.Additive] [JR.Additive] [rU.Additive] [rT.Additive] [qS.Additive] [qR.Additive] in
-private theorem equations_tower (he : CbcAdjunctionCompatible e d adjS adjR) :
-    CbcAdjunctionCompatible
-      (JS := (Functor.whiskeringRight ℕᵒᵖ A C).obj JS)
-      (JR := (Functor.whiskeringRight ℕᵒᵖ B D).obj JR)
-      (rU := (Functor.whiskeringRight ℕᵒᵖ A B).obj rU)
-      (rT := (Functor.whiskeringRight ℕᵒᵖ C D).obj rT)
-      (qS := (Functor.whiskeringRight ℕᵒᵖ C A).obj qS)
-      (qR := (Functor.whiskeringRight ℕᵒᵖ D B).obj qR)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e)
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso d)
-      (adjS.whiskerRight ℕᵒᵖ) (adjR.whiskerRight ℕᵒᵖ) := by
-  constructor
-  · intro N
-    ext n
-    simpa [Adjunction.whiskerRight] using he.1 (N.obj n)
-  · intro Q
-    ext n
-    simpa [Adjunction.whiskerRight] using he.2 (Q.obj n)
 
 variable [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wA} B]
   [HasDerivedCategory.{wA} C] [HasDerivedCategory.{wA} D]
@@ -405,12 +358,6 @@ variable [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wA} B]
   [PreservesFiniteLimits rT] [PreservesFiniteColimits rT]
   [PreservesFiniteLimits qS] [PreservesFiniteColimits qS]
   [PreservesFiniteLimits qR] [PreservesFiniteColimits qR]
-
-private theorem cbcDerivedSquare_symm :
-    cbcDerivedSquare rU JR JS rT e.symm = (cbcDerivedSquare JS rT rU JR e).symm := by
-  apply Iso.ext
-  simp only [cbcDerivedSquare, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv,
-    Functor.mapDerivedCategoryNatIso_symm, Iso.symm_inv, Category.assoc]
 
 end EquationCalculus
 
@@ -426,59 +373,6 @@ section CoherenceHelpers
 universe v w u' v' w' c h r
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-private theorem restriction_identity {C : Type c} [Category.{h} C]
-    {J : GrothendieckTopology C}
-    [HasSheafify J AddCommGrpCat.{max c h r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c h r}]
-    {R S : Sheaf J CommRingCat.{max c h r}} (U : C) (a : R ⟶ S)
-    (M : SheafOfModules.{max c h r} (RingedOpenScalar.rings S)) (V : (Over U)ᵒᵖ)
-    (x : (((RingedOpenScalar.scalars.{c, h, r} a) ⋙
-      localizedSystemRestriction.{c, h, r} R U).obj M).val.obj V) :
-    ((RingedOpenScalar.restrictionIso.{c, h, r} U a).hom.app M).val.app V x = x := by
-  rfl
-
-private theorem exactProducts_of_epi {A : Type u} [Category.{v} A] [Abelian A]
-    [HasCountableProducts A]
-    (he : ∀ (X Y : ℕ → A) (f : ∀ n, X n ⟶ Y n),
-      (∀ n, Epi (f n)) → Epi (Limits.Pi.map f)) : HasExactLimitsOfShape (Discrete ℕ) A := by
-  let : (lim (J := Discrete ℕ) (C := A)).PreservesEpimorphisms := ⟨fun {X Y} f hf ↦ by
-    have : ∀ n : ℕ, Epi (f.app ⟨n⟩) := fun n ↦ inferInstance
-    have : Epi (Limits.Pi.map (fun n : ℕ ↦ f.app ⟨n⟩)) := he _ _ _ this
-    have hmap : lim.map f = (Pi.isoLimit X).inv ≫
-        Limits.Pi.map (fun n : ℕ ↦ f.app ⟨n⟩) ≫ (Pi.isoLimit Y).hom := by
-      apply limit.hom_ext
-      rintro ⟨n⟩
-      simp only [Category.assoc, Pi.isoLimit_hom_π, Limits.Pi.map_π,
-        Pi.isoLimit_inv_π_assoc]
-      exact limMap_π f ⟨n⟩
-    rw [hmap]
-    infer_instance
-  ⟩
-  exact hasExactLimitsOfShape_of_preservesEpi A (Discrete ℕ)
-
-private theorem towerGrothendieck {A : Type u} [Category.{v} A] [Abelian A]
-    [IsGrothendieckAbelian.{v} A] :
-    IsGrothendieckAbelian.{v} (ℕᵒᵖ ⥤ A) := by
-  let G := separator A
-  have hG := isSeparator_separator A
-  have hS : ObjectProperty.IsSeparating
-      (.ofObj fun j : ℕᵒᵖ ↦ (evaluationLeftAdjoint A j).obj G) := by
-    intro F F' f g hfg
-    apply NatTrans.ext
-    funext j
-    apply hG.def
-    intro a
-    let adj := evaluationAdjunctionRight A j
-    apply (adj.homEquiv G F').symm.injective
-    have h := hfg _ (ObjectProperty.ofObj_apply _ j) ((adj.homEquiv G F).symm a)
-    exact (adj.homEquiv_naturality_right_symm a f).trans
-      (h.trans (adj.homEquiv_naturality_right_symm a g).symm)
-  let : HasSeparator (ℕᵒᵖ ⥤ A) := ⟨_, hS.isSeparator_coproduct⟩
-  let : HasFilteredColimitsOfSize.{v, v} (ℕᵒᵖ ⥤ A) := ⟨fun _ _ _ ↦ inferInstance⟩
-  let : AB5OfSize.{v, v} (ℕᵒᵖ ⥤ A) := ⟨fun _ _ _ ↦ inferInstance⟩
-  exact { locallySmall := ⟨fun P Q ↦ small_of_injective
-    (f := fun f : P ⟶ Q ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
-
 section Normalization
 open NormalizedLimitSquare RoosAdjunctionUnit
 variable {A : Type u} [Category.{v} A] [Abelian A] [HasLimits A]
@@ -487,129 +381,11 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [HasLimits A]
   {LA : DerivedCategory.{w} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{w} A}
   {etaA : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LA}
 
-private theorem corner_unit (a : Corner LA etaA)
-    (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
-    etaA.app X ≫ a.theta.hom.app (DerivedCategory.Q.obj X) ≫ a.factors.hom.app X =
-      DerivedCategory.Q.map (roosι X) := by
-  let T := CochainComplex.kInjectiveResolutionFunctor.{v} (ℕᵒᵖ ⥤ A)
-  let q : X ⟶ T.obj X := (CochainComplex.toKInjectiveResolution.{v} (ℕᵒᵖ ⥤ A)).app X
-  have : QuasiIso q := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app _ X).2
-  let theta : DerivedCategory.Q ⋙ LA ≅ roosF ⋙ DerivedCategory.Q :=
-    Functor.isoWhiskerLeft DerivedCategory.Q a.theta ≪≫ a.factors
-  have htheta : LA.map (DerivedCategory.Q.map q) ≫ theta.hom.app (T.obj X) =
-      theta.hom.app X ≫ DerivedCategory.Q.map (roosF.map q) := theta.hom.naturality q
-  have heta : DerivedCategory.Q.map (roosLimitFunctor.map q) ≫ etaA.app (T.obj X) =
-      etaA.app X ≫ LA.map (DerivedCategory.Q.map q) := etaA.naturality q
-  have hq : IsIso (DerivedCategory.Q.map (roosF.map q)) := by
-    have he : DerivedCategory.Q.map (roosF.map q) =
-        theta.inv.app X ≫ LA.map (DerivedCategory.Q.map q) ≫ theta.hom.app (T.obj X) := by
-      rw [htheta, Iso.inv_hom_id_app_assoc]
-    rw [he]
-    infer_instance
-  change etaA.app X ≫ theta.hom.app X = _
-  apply (cancel_mono (DerivedCategory.Q.map (roosF.map q))).mp
-  have hn := a.normalization (T.obj X) (fun _ ↦ inferInstance)
-  change etaA.app (T.obj X) ≫ theta.hom.app (T.obj X) = _ at hn
-  calc
-    _ = etaA.app X ≫ LA.map (DerivedCategory.Q.map q) ≫ theta.hom.app (T.obj X) := by
-      rw [Category.assoc, ← htheta]
-    _ = DerivedCategory.Q.map (roosLimitFunctor.map q) ≫
-        etaA.app (T.obj X) ≫ theta.hom.app (T.obj X) := by
-      simpa only [Category.assoc] using
-        congrArg (fun z ↦ z ≫ theta.hom.app (T.obj X)) heta.symm
-    _ = _ := by
-      rw [hn]
-      exact (DerivedCategory.Q.map_comp _ _).symm.trans
-        ((congrArg DerivedCategory.Q.map (roosι_natural q)).trans
-          (DerivedCategory.Q.map_comp _ _))
-
 variable {B : Type u'} [Category.{v'} B] [Abelian B] [HasLimits B]
   [HasDerivedCategory.{w'} B] [HasDerivedCategory.{w'} (ℕᵒᵖ ⥤ B)]
   {LB : DerivedCategory.{w'} (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory.{w'} B}
   {etaB : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LB}
   (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-
-omit [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-    [IsGrothendieckAbelian.{v} (ℕᵒᵖ ⥤ A)] in
-private theorem inclusion_coordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
-    (roosι X).f (p + 1) ≫ (coordinates X p).hom =
-      biprod.lift ((Limits.Pi.lift (fun n : ℕ ↦ limit.π X.asFunctor (op n))).f (p + 1)) 0 := by
-  dsimp only [coordinates, Iso.trans_hom]
-  rw [← Category.assoc, ← Category.assoc, roosι_χ]
-  apply biprod.hom_ext <;> simp [Category.assoc]
-
-omit [IsGrothendieckAbelian.{v} (ℕᵒᵖ ⥤ A)] in
-private theorem comparison_inclusion (a : Corner LA etaA) (b : Corner LB etaB)
-    (c : Comparison a b F) (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
-    (F.mapHomologicalComplex (.up ℤ)).map (roosι X) ≫ c.kappa.hom.app X =
-      limit.lift _ ((F.mapHomologicalComplex (.up ℤ)).mapCone (limit.cone X.asFunctor)) ≫
-        roosι ((towerComplex F).obj X) := by
-  apply HomologicalComplex.Hom.ext
-  funext i
-  obtain ⟨p, rfl⟩ : ∃ p : ℤ, i = p + 1 := ⟨i - 1, by omega⟩
-  apply (cancel_mono (coordinates ((towerComplex F).obj X) p).hom).mp
-  simp only [HomologicalComplex.comp_f, Category.assoc, Functor.mapHomologicalComplex_map_f]
-  rw [c.coordinate_formula, ← Category.assoc, ← Category.assoc, ← F.map_comp,
-    inclusion_coordinates, Category.assoc, inclusion_coordinates]
-  apply biprod.hom_ext
-  · simp only [Category.assoc]
-    erw [biprod.map_fst]
-    simp only [← Category.assoc, Functor.biprodComparison_fst]
-    rw [← F.map_comp, biprod.lift_fst]
-    simp only [Category.assoc, biprod.lift_fst]
-    apply (cancel_mono (piComparison (HomologicalComplex.eval B (.up ℤ) (p + 1))
-      (fun n : ℕ ↦ ((towerComplex F).obj X).asFunctor.obj (op n)))).mp
-    apply Limits.Pi.hom_ext
-    intro n
-    simp only [Category.assoc, piComparison_comp_π, HomologicalComplex.eval_map]
-    change ((F.mapHomologicalComplex (.up ℤ)).map
-        (Limits.Pi.lift (fun n : ℕ ↦ limit.π X.asFunctor (op n)))).f (p + 1) ≫
-      (piComparison (F.mapHomologicalComplex (.up ℤ))
-        (fun n : ℕ ↦ X.asFunctor.obj (op n))).f (p + 1) ≫
-      (Pi.π (fun n : ℕ ↦ ((towerComplex F).obj X).asFunctor.obj (op n)) n).f
-        (p + 1) = _
-    have hc := congrArg (fun z ↦ z.f (p + 1))
-      (piComparison_comp_π (F.mapHomologicalComplex (.up ℤ))
-        (fun n : ℕ ↦ X.asFunctor.obj (op n)) n)
-    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f] at hc
-    erw [hc]
-    change F.map ((Limits.Pi.lift (fun n : ℕ ↦
-      limit.π X.asFunctor (op n))).f (p + 1)) ≫
-        F.map ((Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n).f (p + 1)) = _
-    rw [← F.map_comp, ← HomologicalComplex.comp_f, Limits.Pi.lift_comp_π]
-    have hb := congrArg (fun z ↦ z.f (p + 1))
-      (limit.lift_π ((F.mapHomologicalComplex (.up ℤ)).mapCone
-        (limit.cone X.asFunctor)) (op n))
-    erw [← HomologicalComplex.comp_f, Limits.Pi.lift_comp_π]
-    exact hb.symm
-  · simp only [Category.assoc]
-    erw [biprod.map_snd]
-    simp only [← Category.assoc, Functor.biprodComparison_snd]
-    rw [← F.map_comp, biprod.lift_snd, F.map_zero, zero_comp]
-    simp only [Category.assoc, biprod.lift_snd, comp_zero]
-
-private theorem comparison_normalized
-    [IsGrothendieckAbelian.{v'} (ℕᵒᵖ ⥤ B)]
-    (a : Corner LA etaA) (b : Corner LB etaB) (c : Comparison a b F) :
-    CbcLimitNormalized F LA LB etaA etaB c.lambda := by
-  constructor
-  intro X
-  let Y := (towerComplex F).obj X
-  let beta := limit.lift _ ((F.mapHomologicalComplex (.up ℤ)).mapCone
-    (limit.cone X.asFunctor))
-  apply (cancel_mono (b.theta.hom.app (DerivedCategory.Q.obj Y) ≫ b.factors.hom.app Y)).mp
-  simp only [Category.assoc]
-  erw [reassoc_of% (b.theta.hom.naturality ((towerFactors F).hom.app X))]
-  rw [c.conjugation]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  dsimp only [Y]
-  erw [← c.descent X]
-  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, corner_unit]
-  simp only [Category.assoc]
-  rw [corner_unit a X]
-  rw [reassoc_of% (F.mapDerivedCategoryFactors.hom.naturality (roosι X))]
-  rw [← DerivedCategory.Q.map_comp, comparison_inclusion F a b c X,
-    DerivedCategory.Q.map_comp]
 
 end Normalization
 end CoherenceHelpers
@@ -678,16 +454,6 @@ attribute [local irreducible] Functor.mapDerivedCategoryNatIso cbcDerivedSquare
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
 attribute [local instance] cbcAbLocallyBijective
-private theorem ambient_exact (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
-    HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u + 1}
-      (proEtaleModuleCoefficients R)) := by
-  let : Abelian (ringedSiteModules.{u + 1} (proEtaleModuleCoefficients R)) :=
-    RingedOpenScalar.ambientAbelian.{u + 1, u, 0} _
-  apply CategoryTheory.exactProducts_of_epi
-  intro X Y f hf
-  exact (ProEt.countableProducts_exact.{u, 0, 0} T R).2.2 ℕ X Y f hf
-
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 

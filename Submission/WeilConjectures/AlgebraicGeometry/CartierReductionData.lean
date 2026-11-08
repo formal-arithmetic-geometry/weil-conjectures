@@ -33,7 +33,13 @@ import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleUnitsComparison
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Submission.WeilConjectures.AlgebraicGeometry.ScalarUnitExt
 import Submission.WeilConjectures.AlgebraicGeometry.ScalarUnitExtComparison
-import Submission.WeilConjectures.AlgebraicGeometry.SiteRestrictionInjectives
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
+import Submission.WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 import Submission.WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Submission.WeilConjectures.CategoryTheory.ConstantLeftModuleTransport

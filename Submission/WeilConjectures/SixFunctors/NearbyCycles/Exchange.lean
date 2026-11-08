@@ -238,16 +238,6 @@ private lemma unit_comp_mateEquiv_aux' {DY DX DY' DX' : Type*} [Category DY] [Ca
   subst hχ
   exact unit_comp_mateEquiv_aux adjf adjf' α σN σM uf' uf ha
 
-private lemma unit_mateEquiv_aux {DY DX DY' DX' : Type*} [Category DY] [Category DX]
-    [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
-    {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
-    (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) (K : DY) :
-    ΨN.map (adjf.unit.app K) ≫ χ.app (Ff.obj K) =
-      adjf'.unit.app (ΨN.obj K) ≫ Rf'.map (α.app K) := by
-  subst hχ
-  exact unit_mateEquiv adjf adjf' α K
-
 private lemma mateEquiv_counit_aux {DY DX DY' DX' : Type*} [Category DY] [Category DX]
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
@@ -324,12 +314,6 @@ namespace NearbyCyclesModel
 
 variable {X X' Y Y' : Scheme.{u}}
 
-/-- Nearby cycles preserve zero objects. -/
-lemma isZero_nearbyCycles_obj (M : NearbyCyclesModel X X')
-    {E : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}
-    (hE : IsZero E) : IsZero ((M.nearbyCycles Λ).obj E) :=
-  Functor.map_isZero (L((M.ε)^*⟦Λ⟧) ⋙ R((M.j)_*⟦Λ⟧) ⋙ L((M.i)^*⟦Λ⟧)) hE
-
 /-- The *specialization unit* `σ : Λ_{X'} ⟶ Ψ(Λ_X)` of a model: the restriction
 `Li^* (Λ ⟶ Rj_* Lj^* Λ)` to the special fibre of the unit of `Lj^* ⊣ Rj_*`, combined with the
 unit comparisons `Λ_{X'} ≅ Li^* Λ` and `Lj^* Λ ≅ Λ ≅ Lε^* Λ`. -/
@@ -401,19 +385,6 @@ noncomputable def pushforwardExchange :
     R((f)_*⟦Λ⟧) ⋙ N.nearbyCycles Λ ⟶ M.nearbyCycles Λ ⋙ R((f')_*⟦Λ⟧) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ)).natTrans
-
-/-- The pushforward exchange is the mate of the pullback exchange: compatibility with the units
-of `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
-lemma map_unit_app_comp_pushforwardExchange_app
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) :
-    (N.nearbyCycles Λ).map ((derivedUpperStarLowerStarAdjunction Λ f).unit.app K) ≫
-        (φ.pushforwardExchange Λ).app (L((f)^*⟦Λ⟧).obj K) =
-      (derivedUpperStarLowerStarAdjunction Λ f').unit.app ((N.nearbyCycles Λ).obj K) ≫
-        R((f')_*⟦Λ⟧).map ((φ.pullbackExchange Λ).app K) :=
-  unit_mateEquiv_aux (derivedUpperStarLowerStarAdjunction Λ f)
-    (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
-    rfl K
 
 /-- The pushforward exchange is the mate of the pullback exchange: compatibility with the counits
 of `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
@@ -492,14 +463,6 @@ lemma unit_comp_map_unit_comp_pushforwardExchange_app :
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
     rfl (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
     (φ.map_unit_comp_pullbackExchange_app Λ)
-
-/-- If the pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is invertible at `K` and `Lf^* K`
-vanishes, then so does `Lf'^* Ψ_N K`. -/
-lemma isZero_upperStar_nearbyCycles_obj
-    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))}
-    [IsIso ((φ.pullbackExchange Λ).app K)] (hK : IsZero ((L((f)^*⟦Λ⟧)).obj K)) :
-    IsZero ((L((f')^*⟦Λ⟧)).obj ((N.nearbyCycles Λ).obj K)) :=
-  (M.isZero_nearbyCycles_obj Λ hK).of_iso (asIso ((φ.pullbackExchange Λ).app K))
 
 end Hom
 

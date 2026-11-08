@@ -29,33 +29,6 @@ open CategoryTheory.Limits
 namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- The four representative squares specify a map on quotient pages.
-Source: Stacks Project, Tag 012K, Lemma 12.24.4.
-(blueprint: lem-sp-filtered-quotient-page-maps). -/
-def FilteredQuotientPageMapProperty
-    (U V : ObjectProperty.FullSubcategory
-      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (r : ℤ)
-    (DU : FilteredComplexPageDifferential U.obj.obj U.obj.filtration r)
-    (DV : FilteredComplexPageDifferential V.obj.obj V.obj.filtration r)
-    (m : DU.page ⟶ DV.page) : Prop :=
-  ∀ (p q : ℤ)
-    (s : ∀ a : ℤ, (U.obj.filtration.step a : CochainComplex C ℤ) ⟶
-      (V.obj.filtration.step a : CochainComplex C ℤ))
-    (g : U.obj.filtration.gradedPiece p ⟶ V.obj.filtration.gradedPiece p)
-    (kz : (U.obj.filtration.complexCycles p (p + q) r : C) ⟶
-      (V.obj.filtration.complexCycles p (p + q) r : C))
-    (k : filteredComplexPageObject U.obj.obj U.obj.filtration r (p, q) ⟶
-        filteredComplexPageObject V.obj.obj V.obj.filtration r (p, q))
-    (hs : ∀ i : ℤ, s i ≫ (V.obj.filtration.step i).arrow =
-      (U.obj.filtration.step i).arrow ≫ t.hom.hom)
-    (hg : U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ g =
-        s p ≫ V.obj.filtration.complexQuotientπ p (p + 1) (by omega))
-    (hkz : kz ≫ (V.obj.filtration.complexCycles p (p + q) r).arrow =
-      (U.obj.filtration.complexCycles p (p + q) r).arrow ≫ g.f (p + q))
-    (hk : filteredComplexPageπ U.obj.obj U.obj.filtration r (p, q) ≫ k =
-        kz ≫ filteredComplexPageπ V.obj.obj V.obj.filtration r (p, q)),
-    m.f (p, q) = k
-
 private theorem subobject_preserves_pullback
     {X Y X' Y' : C} (f : X ⟶ Y) (g : X' ⟶ Y')
     (a : X ⟶ X') (b : Y ⟶ Y') (h : f ≫ b = a ≫ g)

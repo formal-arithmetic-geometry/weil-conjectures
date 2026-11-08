@@ -240,14 +240,6 @@ theorem mem_dualAnnihilator {U : Subrepresentation ρ} {f : Module.Dual k V} :
   Submodule.mem_dualAnnihilator f
 
 
-@[simp]
-theorem dualAnnihilator_bot : (⊥ : Subrepresentation ρ).dualAnnihilator = ⊤ :=
-  toSubmodule_injective Submodule.dualAnnihilator_bot
-
-@[simp]
-theorem dualAnnihilator_top : (⊤ : Subrepresentation ρ).dualAnnihilator = ⊥ :=
-  toSubmodule_injective Submodule.dualAnnihilator_top
-
 /-- For `U ≤ S`, a linear form on `V` vanishing on `U` induces a linear form on the subquotient
 `S / U`. -/
 noncomputable def dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
@@ -590,14 +582,6 @@ theorem map_bot (f : ρ.IntertwiningMap σ) : map f ⊥ = ⊥ :=
 
 theorem comap_top (f : ρ.IntertwiningMap σ) : comap f ⊤ = ⊤ :=
   toSubmodule_injective (Submodule.comap_top _)
-
-theorem map_mono (f : ρ.IntertwiningMap σ) {S T : Subrepresentation ρ} (h : S ≤ T) :
-    map f S ≤ map f T :=
-  fun _ ⟨x, hx, hxy⟩ ↦ ⟨x, h hx, hxy⟩
-
-theorem comap_mono (f : ρ.IntertwiningMap σ) {S T : Subrepresentation σ} (h : S ≤ T) :
-    comap f S ≤ comap f T :=
-  fun _ hx ↦ h hx
 
 end IntertwiningMap
 

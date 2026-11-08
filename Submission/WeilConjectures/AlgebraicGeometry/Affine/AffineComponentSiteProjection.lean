@@ -29,7 +29,7 @@ public import Submission.WeilConjectures.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.Limits
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-public import Submission.WeilConjectures.CategoryTheory.Grothendieck.GrothendieckTopos
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Submission.WeilConjectures.RingTheory.ProEtale.WContractible

@@ -8,7 +8,8 @@ module
 public import Mathlib.Algebra.BigOperators.Intervals
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
-public import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitHomology
+public import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitMilnor
+public import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 public import Submission.WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 
 set_option autoImplicit true

@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.CategoryTheory.SixFunctors.ModuleObjects
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Submission.WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 

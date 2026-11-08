@@ -16,7 +16,6 @@ public import Submission.WeilConjectures.CategoryTheory.SheafTensorStructure
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import Submission.WeilConjectures.CategoryTheory.PresheafTensorInternalHom
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
@@ -30,9 +29,7 @@ public import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctor
 public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import Submission.WeilConjectures.Mathlib.Algebra.Homology.Monoidal
@@ -45,19 +42,24 @@ public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
-public import Submission.WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
-public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Submission.WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 public import Submission.WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
-public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Sites.LeftExact
-public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-public import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
+public import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 public import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
@@ -117,7 +119,6 @@ import all Submission.WeilConjectures.CategoryTheory.GeometricModuleTransport
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import all Submission.WeilConjectures.Algebra.Homology.RingIsomorphismTensorTransport
 import all Submission.WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryTensorComparisonSupplement
-import all Submission.WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
 import all Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
 import all Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import all Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -156,7 +157,6 @@ import all Submission.WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import all Submission.WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
 import all Submission.WeilConjectures.CategoryTheory.Monoidal.BraidedLocalizationSquare
 import all Submission.WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
-import Submission.WeilConjectures.CategoryTheory.Normalized.NormalizedBraidedLocalization
 import all Submission.WeilConjectures.Algebra.Homology.ExactMonoidalEquivalenceTotalKFlat
 import all Submission.WeilConjectures.CategoryTheory.CountableTensorStructures.CountableTensorStructuresSupplement
 import all Submission.WeilConjectures.Algebra.Homology.AdditiveTotalTensorConeComparison
@@ -201,146 +201,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory.ConstantScalarRestriction
 
-private theorem flat_equivalence {D : Type dU} {E : Type u}
-    [Category.{dV} D] [Category.{v} E] [MonoidalCategory D] [MonoidalCategory E]
-    (F : D ⥤ E) [F.Monoidal] [F.IsEquivalence] (M : D) :
-    ObjectProperty.flat M ↔ ObjectProperty.flat (F.obj M) := by
-  let : F.PreservesFlat := F.preservesFlat_of_isEquivalence
-  let : F.asEquivalence.functor.Monoidal := inferInstanceAs F.Monoidal
-  let : F.inv.Monoidal := F.asEquivalence.inverseMonoidal
-  let : F.inv.PreservesFlat := F.inv.preservesFlat_of_isEquivalence
-  refine ⟨Functor.PreservesFlat.flat_obj, fun h ↦ ?_⟩
-  exact ObjectProperty.prop_of_iso _ (F.asEquivalence.unitIso.app M).symm
-    (Functor.PreservesFlat.flat_obj (F := F.inv) h)
-
-private theorem flatResolutionTransport
-    {D : Type*} {E : Type*} [Category* D] [Category* E]
-    [Abelian D] [Abelian E] [MonoidalCategory D] [MonoidalCategory E]
-    (F : D ⥤ E) [F.Additive] [F.Monoidal] [F.IsEquivalence]
-    [Abelian.HasFunctorialFlatResolution D] :
-    Abelian.HasFunctorialFlatResolution E := by
-  let e := F.asEquivalence
-  obtain ⟨L⟩ := (inferInstance : Abelian.HasFunctorialFlatResolution D)
-  refine ⟨{
-    F := ObjectProperty.lift _ (e.inverse ⋙ L.F ⋙ ObjectProperty.flat.ι ⋙ F)
-      (fun X ↦ (flat_equivalence F _).mp (L.F.obj (e.inverse.obj X)).property)
-    π := ?_
-    epi_π_app := ?_ }⟩
-  · exact { app X := F.map (L.π.app (e.inverse.obj X)) ≫ e.counitIso.hom.app X
-            naturality X Y f := by
-              change F.map (L.F.map (e.inverse.map f)).hom ≫
-                F.map (L.π.app (e.inverse.obj Y)) ≫ e.counitIso.hom.app Y =
-                  (F.map (L.π.app (e.inverse.obj X)) ≫ e.counitIso.hom.app X) ≫ f
-              have hn := L.π.naturality (e.inverse.map f)
-              change (L.F.map (e.inverse.map f)).hom ≫ L.π.app (e.inverse.obj Y) =
-                L.π.app (e.inverse.obj X) ≫ e.inverse.map f at hn
-              rw [← F.map_comp_assoc, hn, F.map_comp, Category.assoc]
-              simpa only [e, Functor.asEquivalence, Functor.comp_map,
-                Functor.id_map, Category.assoc] using
-                congrArg (F.map (L.π.app (e.inverse.obj X)) ≫ ·)
-                  (e.counitIso.hom.naturality f) }
-  · intro X
-    change Epi (F.map (L.π.app (e.inverse.obj X)) ≫ e.counitIso.hom.app X)
-    infer_instance
-
 attribute [local instance] complexTensorMemo derivedTensorMemo
-
-/-- The canonical localization tensor square on every pair of K-flat representatives.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
-def derivedTensorCompatibility
-    (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
-    [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
-    [IsGrothendieckAbelian.{v} E]
-    [HasColimitsOfSize.{0, 0} D] [HasColimitsOfSize.{0, 0} E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    [MonoidalClosed D] [MonoidalClosed E]
-    [MonoidalPreadditive D] [MonoidalPreadditive E]
-    [BraidedCategory D] [BraidedCategory E]
-    [Abelian.HasFunctorialFlatResolution D] [Abelian.HasFunctorialFlatResolution E]
-    [HasDerivedCategory.{wR} D] [HasDerivedCategory.{wB} E]
-    (G : D ⥤ E) [G.Additive] [G.IsEquivalence] [G.Monoidal]
-    (κ : CochainComplex D ℤ → Prop)
-    (monoidal : G.mapDerivedCategory.Monoidal) : Prop :=
-  ∀ (P Q : CochainComplex D ℤ), κ P → κ Q →
-    @Functor.OplaxMonoidal.δ _ _ _ _ _ _ G.mapDerivedCategory
-        monoidal.toOplaxMonoidal (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≫
-      (G.mapDerivedCategoryFactors.hom.app P ⊗ₘ G.mapDerivedCategoryFactors.hom.app Q) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((G.mapHomologicalComplex (.up ℤ)).obj P)
-        ((G.mapHomologicalComplex (.up ℤ)).obj Q) =
-    G.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
-      G.mapDerivedCategoryFactors.hom.app (P ⊗ Q) ≫
-      DerivedCategory.Q.map (Functor.mapCochainComplexμIso G P Q).inv
-
-/-- Compatibility of the derived tensor comparison with the canonical Koszul braiding.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
-def derivedSymmetryCompatibility
-    (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
-    [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
-    [IsGrothendieckAbelian.{v} E]
-    [HasColimitsOfSize.{0, 0} D] [HasColimitsOfSize.{0, 0} E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    [MonoidalClosed D] [MonoidalClosed E]
-    [MonoidalPreadditive D] [MonoidalPreadditive E]
-    [BraidedCategory D] [BraidedCategory E]
-    [Abelian.HasFunctorialFlatResolution D] [Abelian.HasFunctorialFlatResolution E]
-    [HasDerivedCategory.{wR} D] [HasDerivedCategory.{wB} E]
-    (G : D ⥤ E) [G.Additive] [G.IsEquivalence]
-    (monoidal : G.mapDerivedCategory.Monoidal) : Prop :=
-  ∀ (X Y : DerivedCategory D),
-    G.mapDerivedCategory.map
-        (DerivedMonoidal.braiding' (DerivedCategory.Qh (C := D))
-          (HomotopyCategory.quasiIso D (.up ℤ)) X Y).hom ≫
-        @Functor.OplaxMonoidal.δ _ _ _ _ _ _ G.mapDerivedCategory
-          monoidal.toOplaxMonoidal Y X =
-      @Functor.OplaxMonoidal.δ _ _ _ _ _ _ G.mapDerivedCategory
-          monoidal.toOplaxMonoidal X Y ≫
-        (DerivedMonoidal.braiding' (DerivedCategory.Qh (C := E))
-          (HomotopyCategory.quasiIso E (.up ℤ))
-          (G.mapDerivedCategory.obj X) (G.mapDerivedCategory.obj Y)).hom
-
-/-- The degree-zero regular-unit normalization of the derived tensor comparison.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
-def derivedUnitCompatibility
-    (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
-    [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
-    [IsGrothendieckAbelian.{v} E]
-    [HasColimitsOfSize.{0, 0} D] [HasColimitsOfSize.{0, 0} E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    [MonoidalClosed D] [MonoidalClosed E]
-    [MonoidalPreadditive D] [MonoidalPreadditive E]
-    [BraidedCategory D] [BraidedCategory E]
-    [Abelian.HasFunctorialFlatResolution D] [Abelian.HasFunctorialFlatResolution E]
-    [HasDerivedCategory.{wR} D] [HasDerivedCategory.{wB} E]
-    (G : D ⥤ E) [G.Additive] [G.IsEquivalence] [G.Monoidal]
-    (monoidal : G.mapDerivedCategory.Monoidal) : Prop :=
-  @Functor.LaxMonoidal.ε _ _ _ _ _ _ G.mapDerivedCategory
-        monoidal.toLaxMonoidal ≫
-      G.mapDerivedCategory.map (Functor.LaxMonoidal.ε DerivedCategory.Q) ≫
-      G.mapDerivedCategoryFactors.hom.app (𝟙_ _) =
-    Functor.LaxMonoidal.ε DerivedCategory.Q ≫
-      DerivedCategory.Q.map (Functor.LaxMonoidal.ε (G.mapHomologicalComplex (.up ℤ)))
-
-/-- The monoidal structure and its specified tensor, symmetry and unit laws.
-The subtype stores the same comparison data using the existing logical constructors.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
-def DerivedComparisonData
-    (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
-    [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
-    [IsGrothendieckAbelian.{v} E]
-    [HasColimitsOfSize.{0, 0} D] [HasColimitsOfSize.{0, 0} E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    [MonoidalClosed D] [MonoidalClosed E]
-    [MonoidalPreadditive D] [MonoidalPreadditive E]
-    [BraidedCategory D] [BraidedCategory E]
-    [Abelian.HasFunctorialFlatResolution D] [Abelian.HasFunctorialFlatResolution E]
-    [HasDerivedCategory.{wR} D] [HasDerivedCategory.{wB} E]
-    (G : D ⥤ E) [G.Additive] [G.IsEquivalence] [G.Monoidal]
-    (κ : CochainComplex D ℤ → Prop) :=
-  { monoidal : G.mapDerivedCategory.Monoidal //
-    derivedTensorCompatibility D E G κ monoidal ∧
-    derivedSymmetryCompatibility D E G monoidal ∧
-    derivedUnitCompatibility D E G monoidal }
 
 section DerivedComparisonProof
 
@@ -358,50 +219,10 @@ variable {D : Type uD} [Category.{vD} D] [Abelian D] [IsGrothendieckAbelian.{vD}
   [Abelian.HasFunctorialFlatResolution E] [HasDerivedCategory.{wE} E]
   [HasColimitsOfSize.{0, 0} E]
 
-private theorem nativeTensorIso (P Q : CochainComplex D ℤ)
-    (hQ : Q.IsKFlatForTotalTensor) : IsIso (μ DerivedCategory.Q P Q) := by
-  have : IsIso (μ DerivedCategory.Qh
-      ((HomotopyCategory.quotient D (.up ℤ)).obj P)
-      ((HomotopyCategory.quotient D (.up ℤ)).obj Q)) :=
-    DerivedMonoidal.isIso_counit_app_app_of_kFlat_right DerivedCategory.Qh
-      (HomotopyCategory.quasiIso D (.up ℤ)) _ _
-      ((HomotopyCategory.kFlat_quotient_obj_iff Q).2 hQ)
-  change IsIso ((_ ⊗ₘ _) ≫
-    (μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
-  infer_instance
-
 end DerivedComparisonProof
 
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (B : Type (max u v)) [CommRing B]
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-private def restrictCancelIso {R S : Sheaf J RingCat.{max u v}}
-    (α : R ⟶ S) (β : S ⟶ R) (h : α ≫ β = 𝟙 R) :
-    SheafOfModules.restrictScalars β ⋙ SheafOfModules.restrictScalars α ≅
-      𝟭 (SheafOfModules.{max u v} R) := by
-  have hU (U : Cᵒᵖ) : (β.hom.app U).hom.comp (α.hom.app U).hom =
-      RingHom.id (R.obj.obj U) :=
-    congrArg RingCat.Hom.hom (congr_app (congrArg (fun k : R ⟶ R ↦ k.hom) h) U)
-  refine NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget R).preimageIso
-    (PresheafOfModules.isoMk (fun U ↦
-      (ModuleCat.restrictScalarsComp'App (α.hom.app U).hom (β.hom.app U).hom
-        (RingHom.id (R.obj.obj U)) (hU U).symm (M.val.obj U)).symm ≪≫
-      (ModuleCat.restrictScalarsId (R.obj.obj U)).app (M.val.obj U)) ?_)) ?_
-  · intro U V f
-    ext x
-    rfl
-  · intro M N f
-    ext U x
-    rfl
-
-set_option warn.classDefReducibility false in
-private def monoidalKeepingLax
-    {D E : Type*} [Category* D] [Category* E]
-    [MonoidalCategory D] [MonoidalCategory E]
-    (F : D ⥤ E) [F.LaxMonoidal] [IsIso (Functor.LaxMonoidal.ε F)]
-    [∀ X Y, IsIso (Functor.LaxMonoidal.μ F X Y)] : F.Monoidal :=
-  { (Functor.Monoidal.ofLaxMonoidal F) with toLaxMonoidal := inferInstance }
 
 section OrdinaryProof
 set_option warn.classDefReducibility false
@@ -411,9 +232,6 @@ private def scalarUnit :
   toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of B)) ≫
     ((constantCommuteCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).inv.app
       (CommRingCat.of B)).hom
-
-private def scalarMap (U : Cᵒᵖ) : B →+* (ring J B).obj.obj U :=
-  ((scalarUnit J B).app U).hom
 
 attribute [local irreducible] ring
 
@@ -493,14 +311,6 @@ private def rawLaxGeneric
 
 attribute [local instance] rawLaxGeneric
 
-private def rawTensorGeneric
-    (R : Cᵒᵖ ⥤ CommRingCat.{max u v})
-    (ι : (Functor.const Cᵒᵖ).obj (RingCat.of B) ⟶ R ⋙ forget₂ CommRingCat RingCat)
-    (M N : PresheafOfModules.{max u v} (R ⋙ forget₂ CommRingCat RingCat)) :
-    (rawRestrictionGeneric B R ι).obj M ⊗ (rawRestrictionGeneric B R ι).obj N ⟶
-      (rawRestrictionGeneric B R ι).obj (M ⊗ N) :=
-  Functor.LaxMonoidal.μ (rawRestrictionGeneric B R ι) M N
-
 end GenericRaw
 
 private def rawRestriction :
@@ -508,49 +318,11 @@ private def rawRestriction :
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj ⥤
       Cᵒᵖ ⥤ ModuleCat.{max u v} B := rawRestrictionGeneric B (ring J B).obj (scalarUnit J B)
 
-private def rawTensor
-    (M N : PresheafOfModules.{max u v}
-      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj) :
-    (rawRestriction J B).obj M ⊗ (rawRestriction J B).obj N ⟶
-      (rawRestriction J B).obj (M ⊗ N) :=
-   rawTensorGeneric B (ring J B).obj (scalarUnit J B) M N
-
 @[instance_reducible]
 private def rawLax : (rawRestriction J B).LaxMonoidal :=
   rawLaxGeneric B (ring J B).obj (scalarUnit J B)
 
 attribute [local instance] rawLax
-
-private abbrev moduleInclusion : Modules J B ⥤
-    PresheafOfModules.{max u v}
-      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj :=
-  SheafOfModules.forget _ ⋙ PresheafOfModules.restrictScalars (𝟙 _)
-
-set_option backward.isDefEq.respectTransparency true in
-private def restrictionPresheafIso :
-    moduleInclusion J B ⋙ rawRestriction J B ≅
-      restriction J B ⋙ sheafToPresheaf J (ModuleCat.{max u v} B) :=
-  NatIso.ofComponents (fun M ↦
-    { hom :=
-        { app X := ModuleCat.ofHom
-            (X := ((moduleInclusion J B ⋙ rawRestriction J B).obj M).obj X)
-            (Y := ((restriction J B ⋙ sheafToPresheaf J
-              (ModuleCat.{max u v} B)).obj M).obj X)
-            { toFun := fun x ↦ x
-              map_add' := fun _ _ ↦ rfl
-              map_smul' := fun _ _ ↦ rfl }
-          naturality _ _ _ := by ext x; rfl }
-      inv :=
-        { app X := ModuleCat.ofHom
-            (X := ((restriction J B ⋙ sheafToPresheaf J
-              (ModuleCat.{max u v} B)).obj M).obj X)
-            (Y := ((moduleInclusion J B ⋙ rawRestriction J B).obj M).obj X)
-            { toFun := fun x ↦ x
-              map_add' := fun _ _ ↦ rfl
-              map_smul' := fun _ _ ↦ rfl }
-          naturality _ _ _ := by ext x; rfl }
-      hom_inv_id := by ext X x; rfl
-      inv_hom_id := by ext X x; rfl }) (fun _ ↦ by ext X x; rfl)
 
 private theorem scalarUnit_surjective : Presheaf.IsLocallySurjective J (scalarUnit J B) := by
   unfold scalarUnit
@@ -559,175 +331,9 @@ private theorem scalarUnit_surjective : Presheaf.IsLocallySurjective J (scalarUn
 
 attribute [local instance] scalarUnit_surjective
 
-set_option backward.isDefEq.respectTransparency false in
-private theorem pairing_smul_left (M N H : Modules J B)
-    (b : ∀ X : Cᵒᵖ, ((restriction J B).obj M).obj.obj X →ₗ[B]
-      ((restriction J B).obj N).obj.obj X →ₗ[B] ((restriction J B).obj H).obj.obj X)
-    (hb : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : M.val.obj X) (y : N.val.obj X),
-      b Y (M.val.map f x) (N.val.map f y) = H.val.map f (b X x y))
-    (X : Cᵒᵖ) (r : (ring J B).obj.obj X) (x : M.val.obj X) (y : N.val.obj X) :
-    b X (r • x) y = r • (show H.val.obj X from b X x y) := by
-  apply H.isSheaf.isSeparated _ (Presheaf.imageSieve (scalarUnit J B) r)
-    (Presheaf.imageSieve_mem J (scalarUnit J B) r)
-  rintro Y f ⟨a, ha⟩
-  change H.val.map f.op (b X (r • x) y) = H.val.map f.op (r • (show H.val.obj X from b X x y))
-  rw [← hb, H.val.map_smul, M.val.map_smul, ← ha, ← hb]
-  exact congrArg (fun k ↦ k (N.val.map f.op y))
-    ((b (Opposite.op Y)).map_smul a (M.val.map f.op x))
-
-set_option backward.isDefEq.respectTransparency false in
-private def upgradePairing (M N H : Modules J B)
-    (b : ∀ X : Cᵒᵖ, ((restriction J B).obj M).obj.obj X →ₗ[B]
-      ((restriction J B).obj N).obj.obj X →ₗ[B] ((restriction J B).obj H).obj.obj X)
-    (hb : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : M.val.obj X) (y : N.val.obj X),
-      b Y (M.val.map f x) (N.val.map f y) = H.val.map f (b X x y))
-    (X : Cᵒᵖ) : M.val.obj X →ₗ[(ring J B).obj.obj X]
-      N.val.obj X →ₗ[(ring J B).obj.obj X] H.val.obj X where
-  toFun x :=
-    { toFun := b X x
-      map_add' := (b X x).map_add
-      map_smul' := fun r y ↦ by
-        let b' := fun Y ↦ (b Y).flip
-        exact pairing_smul_left J B N M H b' (fun f y x ↦ hb f x y) X r y x }
-  map_add' := fun x x' ↦ by ext y; exact congrArg (fun k ↦ k y) ((b X).map_add x x')
-  map_smul' := fun r x ↦ by ext y; exact pairing_smul_left J B M N H b hb X r x y
-
-set_option backward.isDefEq.respectTransparency false in
-private def ringTensorLift (M N H : Modules J B)
-    (b : ∀ X : Cᵒᵖ, M.val.obj X →ₗ[(ring J B).obj.obj X]
-      N.val.obj X →ₗ[(ring J B).obj.obj X] H.val.obj X)
-    (hb : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : M.val.obj X) (y : N.val.obj X),
-      b Y (M.val.map f x) (N.val.map f y) = H.val.map f (b X x y)) :
-    M ⊗ N ⟶ H :=
-  (SheafOfModules.CochainScalarConstruction.cochain_tensor_bilinear_universal
-    (ring J B) M N H b hb).choose
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem ringTensorLift_pure (M N H : Modules J B)
-    (b : ∀ X : Cᵒᵖ, M.val.obj X →ₗ[(ring J B).obj.obj X]
-      N.val.obj X →ₗ[(ring J B).obj.obj X] H.val.obj X)
-    (hb : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : M.val.obj X) (y : N.val.obj X),
-      b Y (M.val.map f x) (N.val.map f y) = H.val.map f (b X x y))
-    (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
-    (ringTensorLift J B M N H b hb).val.app U (ringPure J B M N U x y) = b U x y :=
-  (SheafOfModules.CochainScalarConstruction.cochain_tensor_bilinear_universal
-    (ring J B) M N H b hb).choose_spec.1 U x y
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem ringTensor_ext (M N H : Modules J B) (f g : M ⊗ N ⟶ H)
-    (h : ∀ (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U),
-      f.val.app U (ringPure J B M N U x y) =
-        g.val.app U (ringPure J B M N U x y)) : f = g := by
-  apply SheafOfModules.CochainScalarConstruction.pure_hom_ext (ring J B) M N H
-  exact h
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option backward.isDefEq.respectTransparency false in
-private theorem fixedTensor_ext (M N H : Fixed J B) (f g : M ⊗ N ⟶ H)
-    (h : ∀ (U : Cᵒᵖ) (x : M.obj.obj U) (y : N.obj.obj U),
-      f.hom.app U (fixedPure J B M N U x y) =
-        g.hom.app U (fixedPure J B M N U x y)) : f = g := by
-  apply (cancel_epi (sfbSheafTensor_comparison J M N).inv).mp
-  apply ((sheafificationAdjunction J (ModuleCat.{max u v} B)).homEquiv (M.obj ⊗ N.obj) H).injective
-  apply NatTrans.ext
-  funext U
-  apply ModuleCat.MonoidalCategory.tensor_ext
-  intro x y
-  exact h U x y
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem monoidalMate
-    {X A D : Type*} [Category* X] [Category* A] [Category* D]
-    [MonoidalCategory X] [MonoidalCategory A] [MonoidalCategory D]
-    (H : X ⥤ A) (G : X ⥤ D) (a : A ⥤ D) (j : D ⥤ A)
-    [H.LaxMonoidal] [a.Monoidal] [j.LaxMonoidal]
-    (adj : a ⊣ j) [adj.IsMonoidal] [j.Full] [j.Faithful]
-    (i : H ≅ G ⋙ j) :
-    let e := Functor.isoWhiskerRight i a ≪≫ Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft G (asIso adj.counit) ≪≫ G.rightUnitor
-    letI : G.LaxMonoidal := Functor.LaxMonoidal.transport e
-    NatTrans.IsMonoidal i.hom := by
-  dsimp only
-  let e := Functor.isoWhiskerRight i a ≪≫ Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft G (asIso adj.counit) ≪≫ G.rightUnitor
-  let : G.LaxMonoidal := Functor.LaxMonoidal.transport e
-  have := Functor.LaxMonoidal.natTransIsMonoidal_of_transport e
-  let τ : H ⟶ G ⋙ j :=
-    H.rightUnitor.inv ≫ Functor.whiskerLeft H adj.unit ≫
-      (Functor.associator H a j).inv ≫ Functor.whiskerRight e.hom j
-  have ht : NatTrans.IsMonoidal τ := by dsimp [τ]; infer_instance
-  have he : τ = i.hom := by
-    apply NatTrans.ext
-    funext M
-    dsimp [τ, e]
-    simp only [Category.id_comp, Category.comp_id, j.map_comp]
-    erw [← Category.assoc, adj.unit_naturality]
-    erw [Category.assoc, adj.right_triangle_components, Category.comp_id]
-  exact he ▸ ht
-
-set_option backward.isDefEq.respectTransparency true in
-private theorem restrictionPresheafIso_apply (M : Modules J B) (U : Cᵒᵖ)
-    (x : ((moduleInclusion J B ⋙ rawRestriction J B).obj M).obj U) :
-    ((restrictionPresheafIso J B).hom.app M).app U x = x := by rfl
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem rawRestriction_map_apply
-    {M N : PresheafOfModules.{max u v}
-      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj}
-    (f : M ⟶ N) (U : Cᵒᵖ) (x : M.obj U) :
-    ((rawRestriction J B).map f).app U x = f.app U x := by rfl
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem rawTensor_pure
-    (M N : PresheafOfModules.{max u v}
-      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B)).obj)
-    (U : Cᵒᵖ) (x : M.obj U) (y : N.obj U) :
-    (rawTensor J B M N).app U (x ⊗ₜ[B] y) = x ⊗ₜ[(ring J B).obj.obj U] y := by
-  exact @ModuleCat.restrictScalars_μ_tmul B ((ring J B).obj.obj U) _ _
-    (scalarMap J B U) (M.obj U) (N.obj U) x y
-
-private theorem isoTensor_pure (M N : Modules J B) (U : Cᵒᵖ)
-    (x : M.val.obj U) (y : N.val.obj U) : (((restrictionPresheafIso J B).hom.app M).app U ⊗ₘ
-      ((restrictionPresheafIso J B).hom.app N).app U) (x ⊗ₜ[B] y) =
-        (show ((restriction J B).obj M).obj.obj U from x) ⊗ₜ[B]
-          (show ((restriction J B).obj N).obj.obj U from y) := by
-  rfl
-
-set_option backward.isDefEq.respectTransparency true in
-private theorem restrictionTensor_ext (M N H : Modules J B)
-    (f g : (restriction J B).obj (M ⊗ N) ⟶ (restriction J B).obj H)
-    (h : ∀ (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U),
-      f.hom.app U (ringPure J B M N U x y) =
-        g.hom.app U (ringPure J B M N U x y)) : f = g := by
-  let F := restriction J B
-  have hh : F.preimage f = F.preimage g := by
-    apply ringTensor_ext J B M N H
-    intro U x y
-    change (F.map (F.preimage f)).hom.app U (ringPure J B M N U x y) =
-      (F.map (F.preimage g)).hom.app U (ringPure J B M N U x y)
-    simpa only [F.map_preimage] using h U x y
-  simpa only [F.map_preimage] using congrArg F.map hh
-
 attribute [local semireducible] ring
 
 end OrdinaryProof
 variable [HasDerivedCategory.{wR} (Modules J B)] [HasDerivedCategory.{wB} (Fixed J B)]
-
-/-- The induced equivalence of ordinary unbounded derived categories.
-Source: Stacks 015F and 05RT (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
-def onDerived : DerivedCategory (Modules J B) ⥤ DerivedCategory (Fixed J B) :=
-  (restriction J B).mapDerivedCategory
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The normalized coherent comparison on ordinary unbounded K-flat derived tensors.
-The monoidal structures here are the existing K-flat derived localization structures.
-Source: Stacks 06YS, 0G7D, 06YT and 06YU
-(blueprint: lem-sfb-constant-scalar-restriction-tensor).
-The tensor square specifies the comparison on every pair of K-flat representatives,
-using precisely `Functor.mapCochainComplexμIso` and the canonical localization maps.
-The unit square fixes its normalization at the regular unit complex. -/
-abbrev DerivedComparison :=
-  DerivedComparisonData (Modules J B) (Fixed J B) (restriction J B)
-    (fun P ↦ P.IsKFlatIndependentCoefficients)
 
 end CategoryTheory.ConstantScalarRestriction

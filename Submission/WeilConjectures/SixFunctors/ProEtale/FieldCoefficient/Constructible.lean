@@ -324,10 +324,6 @@ def fieldConstructibleSheaf :
     ObjectProperty (FieldSheaf Λ X) :=
   fun F ↦ IsFieldConstructibleSheaf F
 
-lemma fieldConstructibleSheaf_iff (F : FieldSheaf Λ X) :
-    fieldConstructibleSheaf Λ X F ↔ IsFieldConstructibleSheaf F :=
-  Iff.rfl
-
 instance : (fieldConstructibleSheaf Λ X).IsClosedUnderIsomorphisms where
   of_iso e hF := IsFieldConstructibleSheaf.of_iso e hF
 

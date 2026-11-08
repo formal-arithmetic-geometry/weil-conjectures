@@ -71,13 +71,6 @@ def HasConstructibleDirectImageBaseChangeOn {S X Y : Scheme.{u}} (fY : Y ⟶ S) 
 
 variable {Λ}
 
-/-- The property is inherited by every smaller subset of the base. -/
-lemma HasConstructibleDirectImageBaseChangeOn.mono {S X Y : Scheme.{u}} {fY : Y ⟶ S}
-    {j : X ⟶ Y} {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {U V : Set S}
-    (h : HasConstructibleDirectImageBaseChangeOn Λ fY j F U) (hVU : V ⊆ U) :
-    HasConstructibleDirectImageBaseChangeOn Λ fY j F V :=
-  fun T _ t ht ↦ h T t (ht.trans hVU)
-
 end Etale
 
 end AlgebraicGeometry

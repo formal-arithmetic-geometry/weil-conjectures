@@ -221,19 +221,6 @@ section Counit
 variable {A A' B B' : Type*} [Category A] [Category A'] [Category B] [Category B']
   {L : A ⥤ A'} {R : A' ⥤ A} {M : B ⥤ B'} {S : B' ⥤ B} {rA : B ⥤ A} {rA' : B' ⥤ A'}
 
-/-- If the comparison `σ` of right adjoints is the mate of the comparison `τ` of left adjoints,
-then the comparisons are compatible with the counits. -/
-lemma map_hom_app_comp_counit_of_mateEquiv (adj : L ⊣ R) (bdj : M ⊣ S)
-    (τ : rA ⋙ L ≅ M ⋙ rA') (σ : rA' ⋙ R ≅ S ⋙ rA) (h : mateEquiv bdj adj τ.hom = σ.inv)
-    (N : B') :
-    L.map (σ.hom.app N) ≫ τ.hom.app (S.obj N) ≫ rA'.map (bdj.counit.app N) =
-      adj.counit.app (rA'.obj N) := by
-  have := mateEquiv_counit bdj adj τ.hom N
-  rw [h] at this
-  simp only [Functor.comp_obj] at this
-  rw [← this, ← L.map_comp_assoc, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
-
 end Counit
 
 section Conjugate
@@ -244,45 +231,6 @@ variable {A₁ A₂ A₃ B₁ B₂ B₃ : Type*} [Category A₁] [Category A₂]
   {M₁ : B₂ ⥤ B₁} {S₁ : B₁ ⥤ B₂} {M₂ : B₃ ⥤ B₂} {S₂ : B₂ ⥤ B₃} {M : B₃ ⥤ B₁} {S : B₁ ⥤ B₃}
   {r₁ : B₁ ⥤ A₁} {r₂ : B₂ ⥤ A₂} {r₃ : B₃ ⥤ A₃}
 
-/-- **Conjugates and restriction functors.** Let `L ⊣ R`, `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and their
-primed versions `M ⊣ S`, `M₁ ⊣ S₁`, `M₂ ⊣ S₂` be related by restriction functors `r` through
-comparisons `τ` of the left adjoints and `σ` of the right adjoints, each `σ` being the mate of
-the corresponding `τ`. If the morphisms `L ⟶ L₂ ⋙ L₁` and `M ⟶ M₂ ⋙ M₁` are compatible with the
-comparisons, so are their conjugates `R₁ ⋙ R₂ ⟶ R` and `S₁ ⋙ S₂ ⟶ S`. -/
-lemma conjugateEquiv_comp_restrict (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (a : L ⊣ R) (b₁ : M₁ ⊣ S₁)
-    (b₂ : M₂ ⊣ S₂) (b : M ⊣ S) (τ₁ : r₂ ⋙ L₁ ≅ M₁ ⋙ r₁) (σ₁ : r₁ ⋙ R₁ ≅ S₁ ⋙ r₂)
-    (τ₂ : r₃ ⋙ L₂ ≅ M₂ ⋙ r₂) (σ₂ : r₂ ⋙ R₂ ≅ S₂ ⋙ r₃) (τ : r₃ ⋙ L ≅ M ⋙ r₁)
-    (σ : r₁ ⋙ R ≅ S ⋙ r₃) (h₁ : mateEquiv b₁ a₁ τ₁.hom = σ₁.inv)
-    (h₂ : mateEquiv b₂ a₂ τ₂.hom = σ₂.inv) (h : mateEquiv b a τ.hom = σ.inv)
-    (eL : L ⟶ L₂ ⋙ L₁) (eM : M ⟶ M₂ ⋙ M₁)
-    (he : ∀ N, τ.hom.app N ≫ r₁.map (eM.app N) =
-      eL.app (r₃.obj N) ≫ L₁.map (τ₂.hom.app N) ≫ τ₁.hom.app (M₂.obj N)) (X : B₁) :
-    R₂.map (σ₁.hom.app X) ≫ σ₂.hom.app (S₁.obj X) ≫
-        r₃.map ((conjugateEquiv (b₂.comp b₁) b eM).app X) =
-      (conjugateEquiv (a₂.comp a₁) a eL).app (r₁.obj X) ≫ σ.hom.app X := by
-  rw [← cancel_mono (σ.inv.app X)]
-  simp only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj, Category.comp_id]
-  apply (a.homEquiv _ _).symm.injective
-  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
-  have k₁ := map_hom_app_comp_counit_of_mateEquiv a₁ b₁ τ₁ σ₁ h₁ X
-  have k₂ := map_hom_app_comp_counit_of_mateEquiv a₂ b₂ τ₂ σ₂ h₂ (S₁.obj X)
-  have k := mateEquiv_counit b a τ.hom X
-  rw [h] at k
-  have c := conjugateEquiv_counit (b₂.comp b₁) b eM X
-  have c' := conjugateEquiv_counit (a₂.comp a₁) a eL (r₁.obj X)
-  have n₁ := τ.hom.naturality ((conjugateEquiv (b₂.comp b₁) b eM).app X)
-  have n₂ := eL.naturality (R₂.map (σ₁.hom.app X) ≫ σ₂.hom.app (S₁.obj X))
-  have n₃ := τ₁.hom.naturality (b₂.counit.app (S₁.obj X))
-  have n₄ := a₂.counit.naturality (σ₁.hom.app X)
-  have e₀ := he (S₂.obj (S₁.obj X))
-  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map,
-    comp_counit_app] at k₁ k₂ k c c' n₁ n₂ n₃ n₄ e₀
-  rw [k, reassoc_of% n₁, ← r₁.map_comp, c, r₁.map_comp, reassoc_of% e₀, c', ← L.map_comp_assoc,
-    reassoc_of% n₂, Functor.map_comp, ← L₁.map_comp_assoc, r₁.map_comp, ← reassoc_of% n₃,
-    ← L₁.map_comp_assoc]
-  simp only [Category.assoc]
-  rw [k₂, n₄, L₁.map_comp, Category.assoc, k₁]
-
 end Conjugate
 section Comparison
 
@@ -291,63 +239,6 @@ variable {AX Ac Ad AY BX Bc Bd BY : Type*} [Category AX] [Category Ac] [Category
   {Jc : AX ⥤ Ac} {Jd : AX ⥤ Ad} {Q : Ad ⥤ Ac} {Rq : Ac ⥤ Ad} {Rdg : Ad ⥤ AY} {Rcg : Ac ⥤ AY}
   {Jc' : BX ⥤ Bc} {Jd' : BX ⥤ Bd} {Q' : Bd ⥤ Bc} {Rq' : Bc ⥤ Bd} {Rdg' : Bd ⥤ BY}
   {Rcg' : Bc ⥤ BY} {rX : BX ⥤ AX} {rc : Bc ⥤ Ac} {rd : Bd ⥤ Ad} {rY : BY ⥤ AY}
-
-/-- **Comparison maps along a refinement and restriction functors.** The composite
-`Jd ⋙ Rdg ⟶ Jd ⋙ Q ⋙ Rq ⋙ Rdg ≅ Jc ⋙ Rq ⋙ Rdg ≅ Jc ⋙ Rcg` of the unit of `Q ⊣ Rq`, the inverse
-of an isomorphism `bc : Jc ≅ Jd ⋙ Q` and an isomorphism `comp : Rq ⋙ Rdg ≅ Rcg` is compatible
-with comparisons along restriction functors as soon as `bc` and `comp` are, and the comparison
-`σq` of `Rq` is the mate of the comparison `τq` of `Q`. -/
-lemma comparison_restrict (adj : Q ⊣ Rq) (adj' : Q' ⊣ Rq') (bc : Jc ≅ Jd ⋙ Q)
-    (bc' : Jc' ≅ Jd' ⋙ Q') (comp : Rq ⋙ Rdg ≅ Rcg) (comp' : Rq' ⋙ Rdg' ≅ Rcg')
-    (ιc : rX ⋙ Jc ≅ Jc' ⋙ rc) (ιd : rX ⋙ Jd ≅ Jd' ⋙ rd) (τq : rd ⋙ Q ≅ Q' ⋙ rc)
-    (σq : rc ⋙ Rq ≅ Rq' ⋙ rd) (σdg : rd ⋙ Rdg ≅ Rdg' ⋙ rY) (σcg : rc ⋙ Rcg ≅ Rcg' ⋙ rY)
-    (hq : mateEquiv adj' adj τq.hom = σq.inv)
-    (hbc : ∀ K, ιc.hom.app K ≫ rc.map (bc'.hom.app K) =
-      bc.hom.app (rX.obj K) ≫ Q.map (ιd.hom.app K) ≫ τq.hom.app (Jd'.obj K))
-    (hcomp : ∀ M, Rdg.map (σq.hom.app M) ≫ σdg.hom.app (Rq'.obj M) ≫ rY.map (comp'.hom.app M) =
-      comp.hom.app (rc.obj M) ≫ σcg.hom.app M) (K : BX) :
-    (Rdg.map (ιd.hom.app K) ≫ σdg.hom.app (Jd'.obj K)) ≫
-        rY.map ((Functor.whiskerRight (Functor.whiskerLeft Jd' adj'.unit) Rdg' ≫
-          Functor.whiskerRight bc'.inv (Rq' ⋙ Rdg') ≫
-          Functor.whiskerLeft Jc' comp'.hom).app K) =
-      (Functor.whiskerRight (Functor.whiskerLeft Jd adj.unit) Rdg ≫
-          Functor.whiskerRight bc.inv (Rq ⋙ Rdg) ≫ Functor.whiskerLeft Jc comp.hom).app
-          (rX.obj K) ≫ Rcg.map (ιc.hom.app K) ≫ σcg.hom.app (Jc'.obj K) := by
-  have hu (c : Bd) : rd.map (adj'.unit.app c) =
-      adj.unit.app (rd.obj c) ≫ Rq.map (τq.hom.app c) ≫ σq.hom.app (Q'.obj c) := by
-    have := unit_mateEquiv adj' adj τq.hom c
-    rw [hq] at this
-    simp only [Functor.comp_obj, Functor.id_obj] at this
-    rw [← reassoc_of% this]
-    simp
-  have hbc' : Q.map (ιd.hom.app K) ≫ τq.hom.app (Jd'.obj K) ≫ rc.map (bc'.inv.app K) =
-      bc.inv.app (rX.obj K) ≫ ιc.hom.app K := by
-    rw [← cancel_epi (bc.hom.app (rX.obj K)), ← reassoc_of% (hbc K)]
-    simp [← Functor.map_comp]
-  have n₁ := σdg.hom.naturality (adj'.unit.app (Jd'.obj K) ≫ Rq'.map (bc'.inv.app K))
-  have n₂ := σq.hom.naturality (bc'.inv.app K)
-  have n₃ := adj.unit.naturality (ιd.hom.app K)
-  have n₄ := comp.hom.naturality (ιc.hom.app K)
-  have h₅ := hcomp (Jc'.obj K)
-  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at n₁ n₂ n₃ n₄
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc]
-  calc Rdg.map (ιd.hom.app K) ≫ σdg.hom.app (Jd'.obj K) ≫
-        rY.map (Rdg'.map (adj'.unit.app (Jd'.obj K))) ≫
-        rY.map (Rdg'.map (Rq'.map (bc'.inv.app K))) ≫ rY.map (comp'.hom.app (Jc'.obj K))
-      = Rdg.map (adj.unit.app (Jd.obj (rX.obj K)) ≫ Rq.map (Q.map (ιd.hom.app K) ≫
-          τq.hom.app (Jd'.obj K) ≫ rc.map (bc'.inv.app K)) ≫ σq.hom.app (Jc'.obj K)) ≫
-          σdg.hom.app (Rq'.obj (Jc'.obj K)) ≫ rY.map (comp'.hom.app (Jc'.obj K)) := by
-        have n₂' := Rdg.congr_map n₂
-        have n₃' := Rdg.congr_map n₃
-        simp only [Functor.map_comp, Category.assoc] at n₁ n₂' n₃' ⊢
-        rw [← reassoc_of% n₁, hu]
-        simp only [Functor.map_comp, Category.assoc]
-        rw [reassoc_of% n₃', reassoc_of% n₂']
-    _ = _ := by
-        rw [hbc']
-        simp only [Functor.map_comp, Category.assoc]
-        rw [h₅, reassoc_of% n₄]
 
 end Comparison
 

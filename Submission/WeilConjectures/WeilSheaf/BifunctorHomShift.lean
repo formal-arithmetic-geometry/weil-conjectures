@@ -54,12 +54,6 @@ macro "sign_tac" : tactic => `(tactic| (
   ring_nf
   simp [parity_simps]))
 
-lemma bifunctorHomShiftSign_succ (a p : ℤ) :
-    bifunctorHomShiftSign a (p + 1) = a.negOnePow * bifunctorHomShiftSign a p := by
-  rw [bifunctorHomShiftSign, bifunctorHomShiftSign, ← Int.negOnePow_add]
-  congr 1
-  ring
-
 lemma bifunctorHomShiftSign_add (a b p : ℤ) :
     bifunctorHomShiftSign (a + b) p =
       bifunctorHomShiftSign b p * bifunctorHomShiftSign a (p + b) := by

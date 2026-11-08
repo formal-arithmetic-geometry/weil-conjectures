@@ -380,13 +380,6 @@ noncomputable def padicToLocallyFiniteFunctions (T : Type*) [TopologicalSpace T]
   map_zero' := Subtype.ext (ContinuousMap.ext fun _ ↦ by simp)
   map_add' _ _ := Subtype.ext (ContinuousMap.ext fun _ ↦ by simp)
 
-/-- The values of the inclusion `C(T, ℚ_ℓ) → ℚ̄_ℓ,T`. -/
-lemma padicToLocallyFiniteFunctions_apply {T : Type*} [TopologicalSpace T] (q : C(T, ℚ_[l]))
-    (t : T) :
-    (padicToLocallyFiniteFunctions T q : C(T, PadicAlgCl l)) t =
-      algebraMap ℚ_[l] (PadicAlgCl l) (q t) :=
-  rfl
-
 /-- The abelian sheaf underlying `ℚ̄_ℓ,X`. -/
 noncomputable abbrev adicAbSheaf : Sheaf (ProEt.topology X) Ab.{u + 1} :=
   (weilCoefficientsForgetAb l X).obj (adicConstantSheaf l X)

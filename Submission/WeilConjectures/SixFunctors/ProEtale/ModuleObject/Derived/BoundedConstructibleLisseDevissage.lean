@@ -9,7 +9,9 @@ public import Submission.WeilConjectures.ConstructibleSheaf.Refinement
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleDevissage
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
-public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedLocalization
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedTriangle
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

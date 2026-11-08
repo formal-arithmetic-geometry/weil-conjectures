@@ -12,7 +12,13 @@ public import Submission.WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Submission.WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedAlgebraData
 import Submission.WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedDegreeData
-import Submission.WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedKernelSquareZero
+import Submission.WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.RingTheory.Ideal.Maps
+import Mathlib.Topology.Sheaves.CommRingCat
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -115,56 +121,6 @@ structure TensorGradedPresentationCore {X Z : Scheme.{u}} (j : Z ⟶ X)
   c_projection : ∀ d : ℕ, c d ≫ q d = 𝟙 _
   k_projection : ∀ d : ℕ, k d ≫ (degree d).τ₁ = 𝟙 _
   k_orthogonal : ∀ a d : ℕ, a ≠ d → k a ≫ (degree d).τ₁ = 0
-
-/-- Assemble the canonical kernel data of a graded algebra quotient. -/
-private def tensorGradedCore {X Z : Scheme.{u}} (j : Z ⟶ X)
-    [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L)
-    (D : TensorGradedDegreeData j L A)
-    (hsq : ∀ (U : X.Opens) (a b : A.B.right.obj.obj (op U)),
-      A.p.right.hom.app (op U) a = 0 → A.p.right.hom.app (op U) b = 0 → a * b = 0) :
-    TensorGradedPresentationCore j L where
-  B := A.B
-  C := A.C
-  p := A.p
-  I := kernel (tensorGradedAlgebraMap A.p)
-  i := kernel.ι (tensorGradedAlgebraMap A.p)
-  hw := kernel.condition (tensorGradedAlgebraMap A.p)
-  shortExact := D.shortExact
-  squareZero := hsq
-  b := A.b
-  c := A.c
-  k := D.k
-  degree := D.degree
-  q := D.q
-  degree_quotient := D.degree_quotient
-  k_colimit := D.k_colimit
-  b_quotient := A.b_quotient
-  k_inclusion := D.k_inclusion
-  c_projection := D.c_projection
-  k_projection := D.k_projection
-  k_orthogonal := D.k_orthogonal
-
-theorem tensorGradedPresentation_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
-    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) :
-    Nonempty (TensorGradedPresentation j L) := by
-  obtain ⟨A⟩ := tensorGradedAlgebraData_exists j L
-  obtain ⟨D⟩ := tensorGradedDegreeData_exists j L A
-  let T := tensorGradedCore j L A D (tensorGradedKernel_squareZero j L A hI)
-  have m : ∀ (U : X.Opens) (a d : ℕ) (s : Γ(L.tensorPow a, U))
-      (t : Γ(L.tensorPow d, U)),
-      tensorGradedAlgebraSection T.B U ((T.b a).app U s) *
-        tensorGradedAlgebraSection T.B U ((T.b d).app U t) =
-        tensorGradedAlgebraSection T.B U
-          ((T.b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t))) :=
-    A.b_multiply
-  exact ⟨{
-    B := T.B, C := T.C, p := T.p, I := T.I, i := T.i, hw := T.hw,
-    shortExact := T.shortExact, squareZero := T.squareZero, b := T.b, c := T.c,
-    k := T.k, degree := T.degree, q := T.q, degree_quotient := T.degree_quotient,
-    k_colimit := T.k_colimit, b_quotient := T.b_quotient,
-    k_inclusion := T.k_inclusion, c_projection := T.c_projection,
-    k_projection := T.k_projection, k_orthogonal := T.k_orthogonal,
-    b_multiply := m }⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

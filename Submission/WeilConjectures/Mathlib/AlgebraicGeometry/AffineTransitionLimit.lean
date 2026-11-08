@@ -1958,8 +1958,6 @@ algebras. -/
 noncomputable def specCone (E : ExtensionData.{u}) : Cone E.specDiagram :=
   Scheme.Spec.mapCone (Limits.coneOfCoconeLeftOp E.algCocone)
 
-lemma specCone_pt (E : ExtensionData.{u}) : E.specCone.pt = Spec Γ(E.X, E.V) := rfl
-
 lemma specCone_π_app (E : ExtensionData.{u}) (T : E.Stage) :
     E.specCone.π.app T = Spec.map T.φ := rfl
 
@@ -2796,14 +2794,6 @@ variable (D c) in
 /-- (Implementation) The property that `g : X ⟶ lim Dⱼ` is the base change of a scheme of
 finite presentation over one of the stages. -/
 def DescendsToStage {X : Scheme.{u}} (g : X ⟶ c.pt) : Prop := ∃ k, DescendsAt D c k g
-
-omit [IsCofiltered I] in
-lemma DescendsAt.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
-    (H : DescendsAt D c k g) : DescendsAt D c k' g := by
-  obtain ⟨Y, p, h, hp, hcpt, hqs, hsq⟩ := H
-  have := hp; have := hcpt; have := hqs
-  exact ⟨pullback p (D.map f), pullback.snd _ _, isPullbackLift D c f hsq, inferInstance,
-    inferInstance, inferInstance, isPullback_isPullbackLift f hsq⟩
 
 omit [IsCofiltered I] in
 lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X ⟶ c.pt}
@@ -4585,27 +4575,6 @@ theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (
     f.exists_isClosedImmersion_locallyOfFinitePresentation
   have := hq; have := hqc; have := hqs; have := hi
   exact ⟨.ofIsClosedImmersion q i hcomp⟩
-
-/-- The interface consumed by the descent of a separated morphism of finite presentation to a
-finite stage (Stacks Project Tag 01ZQ): all the instance arguments of
-`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated` are provided
-by the fields of a finite presentation approximation. -/
-example {X S : Scheme.{u}} {f : X ⟶ S} (F : f.FinitePresentationApproximation)
-    {X' : Scheme.{u}} (g : X' ⟶ X) [LocallyOfFinitePresentation g] [QuasiCompact g]
-    [IsSeparated g] :
-    ∃ (i : F.I) (Y : Scheme.{u}) (p : Y ⟶ F.D.obj i) (_ : LocallyOfFinitePresentation p)
-      (_ : QuasiCompact p) (_ : IsSeparated p) (h : X' ⟶ Y),
-      IsPullback h g p ((Cone.mk X F.π).π.app i) :=
-  Scheme.exists_isPullback_of_finitePresentation_of_isSeparated F.isLimit g
-
-/-- The interface consumed by the descent of separatedness over a fixed base to a finite stage
-(Stacks Project Tag 01ZH): the structure morphisms of a finite presentation approximation form
-the natural transformation `t` required by
-`AlgebraicGeometry.Scheme.exists_isSeparated_app_of_isLimit`. -/
-example {X S : Scheme.{u}} {f : X ⟶ S} (F : f.FinitePresentationApproximation) (i₀ : F.I)
-    [IsSeparated ((Cone.mk X F.π).π.app i₀ ≫ F.p.app i₀)] :
-    ∃ j : F.I, ∀ {i : F.I} (_ : i ⟶ j), IsSeparated (F.p.app i) :=
-  Scheme.exists_isSeparated_app_of_isLimit F.isLimit F.p i₀
 
 /-- **The separated finite presentation envelope of a morphism of finite type** (Stacks Project
 Tag 01ZJ): a separated morphism `f : X ⟶ S` locally of finite type between quasi-compact

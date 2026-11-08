@@ -186,13 +186,6 @@ noncomputable def Scheme.FiniteEtale.toSheaf (Y : Scheme.{u}) :
     Y.FiniteEtale ⥤ Sheaf Y.smallEtaleTopology (Type u) :=
   ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.yoneda
 
-/-- A finite étale `Y`-scheme is determined by the étale sheaf of sets it represents: the small
-étale topology is subcanonical, so `AlgebraicGeometry.Scheme.FiniteEtale.toSheaf` is fully
-faithful. -/
-noncomputable def Scheme.FiniteEtale.fullyFaithfulToSheaf (Y : Scheme.{u}) :
-    (Scheme.FiniteEtale.toSheaf Y).FullyFaithful :=
-  (ObjectProperty.fullyFaithfulι _).comp Y.smallEtaleTopology.yonedaFullyFaithful
-
 /-- The stalk at a geometric point `s` of the sheaf represented by a finite étale `Y`-scheme `P`
 is the geometric fibre of `P` at `s`. This is the compatibility of
 `AlgebraicGeometry.Scheme.FiniteEtale.toSheaf` with the stalk functor, which makes the triangle

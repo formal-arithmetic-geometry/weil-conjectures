@@ -294,29 +294,6 @@ theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (Padic
   continuous_toMatrix b i j := by
     simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
 
-/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
-
-Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
-continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
-matrix coefficients by a fixed polynomial expression. -/
-theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
-    [FiniteDimensional (PadicAlgCl l) V]
-    (ρ : Representation (PadicAlgCl l) W.carrier V) :
-    W.IsLisse l ρ ↔ ∃ (n : ℕ) (b : Module.Basis (Fin n) (PadicAlgCl l) V), ∀ i j,
-      Continuous fun g : W.geometric ↦ LinearMap.toMatrix b b (ρ g) i j := by
-  refine ⟨fun h ↦ ⟨_, Module.finBasis (PadicAlgCl l) V, h.continuous_toMatrix _⟩, ?_⟩
-  rintro ⟨n, b, hb⟩
-  refine IsLisse.of_continuous_apply fun φ v ↦ ?_
-  have key (g : W.geometric) : φ (ρ g v) =
-      ∑ i, φ (b i) * ∑ j, LinearMap.toMatrix b b (ρ g) i j * b.repr v j := by
-    conv_lhs => rw [← b.sum_repr (ρ g v)]
-    simp only [map_sum, map_smul, smul_eq_mul, ← LinearMap.toMatrix_mulVec_repr b b,
-      Matrix.mulVec, dotProduct]
-    exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
-  simp_rw [key]
-  exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
-    continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
-
 /-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
 Blueprint `def-wf-constant-weil-twist`: Constant Weil twist.
 

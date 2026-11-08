@@ -122,17 +122,6 @@ lemma Etale.isIso_restrictCoextendScalarsAdj_counit_app_of_nsmul_eq_zero {X : Sc
     NatIso.isIso_of_isIso_app _
   exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
 
-/-- **Base change property along a change of coefficient rings.** If `f` satisfies the base
-change property with `Λ`-coefficients, then also with `Λ'`-coefficients for every ring
-homomorphism `φ : Λ →+* Λ'`: restriction of scalars along `φ` reflects isomorphisms, preserves
-torsion cohomology, and carries the derived base change map over `Λ'` to the one over `Λ`. -/
-theorem Etale.HasTorsionBaseChange.of_ringHom {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (hf : Etale.HasTorsionBaseChange Λ f) :
-    Etale.HasTorsionBaseChange Λ' f := by
-  intro Y' X' g f' g' sq K hK
-  rw [← Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff φ sq.toCommSq K]
-  exact hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars φ K hK)
-
 /-- **Base change property for a quotient coefficient ring.** If `f` satisfies the base change
 property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients: restriction of scalars
 along `Λ ⟶ Λ ⧸ NΛ` is conservative, sends complexes of `Λ ⧸ NΛ`-modules to complexes with
@@ -186,21 +175,5 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
       Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf Λ sq hprime F q)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ g f K n q hq)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' K n q hq) K hK
-
-/-- **Injective acyclicity implies the base change property.** If a proper morphism
-`f : X ⟶ Y` has injective acyclicity with `Λ ⧸ pΛ`-coefficients for every prime `p`, then it
-satisfies the base change property with `Λ`-coefficients: for the torsion rings `Λ ⧸ pΛ` this is
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to `Λ`
-is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`, `IA_r(f)` for every prime `r` implies
-`PBC(f)`) -/
-@[stacks 0A4B]
-theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [IsProper f]
-    (hf : ∀ p : ℕ, p.Prime → Etale.HasInjectiveAcyclicity (Λ ⧸ Ideal.span {(p : Λ)}) f) :
-    Etale.HasTorsionBaseChange Λ f :=
-  Etale.hasTorsionBaseChange_of_forall_prime Λ f fun p hp ↦
-    (Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity _
-      (isAddTorsion_quotient_span_natCast Λ hp.pos) f).2 (hf p hp)
 
 end AlgebraicGeometry

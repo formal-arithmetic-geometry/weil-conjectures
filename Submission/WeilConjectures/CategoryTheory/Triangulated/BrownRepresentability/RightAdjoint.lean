@@ -297,17 +297,6 @@ instance preservesColimitsOfShape_localizingClosureLift (J : Type v)
     (localizingClosureLiftCompιIso P₁ P₂ Φ hΦ).symm
   preservesColimitsOfShape_of_reflects_of_preserves _ P₂.localizingClosure.ι
 
-/-- Blueprint `det-sf-existence-brown` (1), on localizing closures: if `P₁` compactly generates
-its localizing closure and the restriction of the triangulated functor `Φ` to `Loc(P₁)`
-preserves coproducts, then the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` is a left adjoint
-(Brown representability). -/
-theorem isLeftAdjoint_localizingClosureLift [HasCoproducts.{v} C₁] [Φ.IsTriangulated]
-    (hP₁ : P₁.CompactlyGeneratesLocalizingClosure)
-    [∀ J : Type v, PreservesColimitsOfShape (Discrete J) (P₁.localizingClosure.ι ⋙ Φ)] :
-    (localizingClosureLift P₁ P₂ Φ hΦ).IsLeftAdjoint := by
-  obtain ⟨ι, S, hS, -⟩ := hP₁.exists_compactGenerators
-  exact Functor.isLeftAdjoint_of_compactGenerators hS _
-
 /-- Blueprint `det-sf-existence-direct-sums`, on localizing closures: if `P₁` and `P₂`
 compactly generate their localizing closures and `Φ` maps `P₁` into `P₂`, then every right
 adjoint of the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` preserves coproducts. -/

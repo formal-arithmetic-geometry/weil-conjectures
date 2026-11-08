@@ -33,12 +33,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-/-- The morphism of presheaves of `Γ(X, ⊤)`-modules underlying a morphism of sheaves of
-modules. -/
-noncomputable def presheafModuleCatMap {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶ 𝒢) :
-    ℱ.presheafModuleCat ⟶ 𝒢.presheafModuleCat :=
-  (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val
-
 
 /-- If all nonempty finite intersections of a family of opens are affine, so are the
 intersections `U (y 0) ⊓ ⋯ ⊓ U (y k)`. -/
@@ -98,21 +92,6 @@ noncomputable def cechComplexHomologyLinearEquivH {ι : Type u} (U : ι → X.Op
       (cechComplexHomologyAddEquiv_smul U ℱ q r x)).trans ?_
     exact h.trans (H.smul_eq_map ℱ q r _).symm
 
-
-/-- **Leray's theorem, linearly over a ring mapping to the global sections.** For a ring
-homomorphism `φ : A →+* Γ(X, ⊤)` (e.g. `Γ(S, 𝒪_S) → Γ(X, 𝒪_X)` for `X` over `S = Spec A`),
-`cechComplexHomologyLinearEquivH` is `A`-linear after restricting scalars along `φ`.
-
-(blueprint: `det-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
-noncomputable def cechComplexHomologyRestrictScalarsLinearEquivH {A : Type u} [CommRing A]
-    (φ : A →+* Γ(X, ⊤)) {ι : Type u} (U : ι → X.Opens)
-    (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
-    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    (ModuleCat.restrictScalars φ).obj
-        (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) ≃ₗ[A]
-      (ModuleCat.restrictScalars φ).obj (ModuleCat.of Γ(X, ⊤) (ℱ.H q)) :=
-  { (cechComplexHomologyLinearEquivH U hU hU' ℱ q).toAddEquiv with
-    map_smul' a x := (cechComplexHomologyLinearEquivH U hU hU' ℱ q).map_smul (φ a) x }
 
 
 end AlgebraicGeometry.Scheme.Modules

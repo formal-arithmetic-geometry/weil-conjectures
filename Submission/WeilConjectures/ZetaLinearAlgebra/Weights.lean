@@ -123,12 +123,6 @@ theorem IsPureOfWeight.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsPureOf
   rintro rfl
   simpa using hP.1
 
-/-- A polynomial that is mixed of some weight is nonzero: its constant coefficient is `1`. -/
-theorem IsMixedOfWeightLE.ne_zero {q w : ℕ} {P : Polynomial ℂ} (hP : P.IsMixedOfWeightLE q w) :
-    P ≠ 0 := by
-  rintro rfl
-  simpa using hP.1
-
 
 /-- Polynomials that are pure of distinct weights have no common root. -/
 theorem IsPureOfWeight.disjoint_roots {q v w : ℕ} (hq : 1 < q) {P Q : Polynomial ℂ}

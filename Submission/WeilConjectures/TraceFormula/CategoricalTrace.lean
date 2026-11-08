@@ -108,10 +108,6 @@ exact pairing between `V` and `Vᘁ`. -/
 noncomputable def categoricalTrace {V : C} [HasRightDual V] (T : V ⟶ V) : End (𝟙_ C) :=
   MonoidalCategory.trace T
 
-lemma categoricalTrace_eq_trace {V : C} [HasRightDual V] (T : V ⟶ V) :
-    categoricalTrace T = ExactPairing.trace V Vᘁ T :=
-  rfl
-
 /-- The categorical trace does not depend on the choice of the right dual. -/
 theorem categoricalTrace_congr {V : C} (h h' : HasRightDual V) (T : V ⟶ V) :
     @categoricalTrace _ _ _ _ _ h T = @categoricalTrace _ _ _ _ _ h' T :=

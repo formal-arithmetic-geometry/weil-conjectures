@@ -127,27 +127,6 @@ section Sectionwise
 universe v w
 variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
   [HasSheafify J Ab.{u + 1}]
-private theorem shortExact_of_sectionwise
-    (S : ShortComplex (Sheaf J Ab.{u + 1}))
-    (hS : ∀ T : Cᵒᵖ,
-      ((S.map (sheafToPresheaf J Ab)).map ((evaluation Cᵒᵖ Ab).obj T)).ShortExact) :
-    S.ShortExact := by
-  let F := sheafToPresheaf J Ab.{u + 1}
-  have hk : IsLimit (KernelFork.ofι (S.map F).f (S.map F).zero) :=
-    evaluationJointlyReflectsLimits _ fun T ↦
-      by
-        have := (hS T).mono_f
-        exact (KernelFork.isLimitMapConeEquiv ..).2 (hS T).exact.fIsKernel
-  have hk' : IsLimit (KernelFork.ofι S.f S.zero) :=
-    isLimitOfReflects F ((KernelFork.isLimitMapConeEquiv ..).2 hk)
-  have : Mono S.f := mono_of_isLimit_fork hk'
-  have : ∀ T, Epi (((S.map F).g).app T) := fun T ↦ (hS T).epi_g
-  have : Epi ((S.map F).g) := NatTrans.epi_of_epi_app _
-  have hEpi : Epi (F.map S.g) := by
-    change Epi ((S.map F).g)
-    infer_instance
-  have : Epi S.g := Functor.epi_of_epi_map F hEpi
-  exact ⟨S.exact_of_f_is_kernel hk'⟩
 end Sectionwise
 
 section QuotientTools
@@ -257,18 +236,6 @@ private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
       Padic.coefficientExtensionUniformizer l E * f.down x := by
   rfl
 
-private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
-  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
-  have hm : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
-    h.2.2.2.2.2.2.2.2.2.1
-  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
-      Set (Padic.coefficientExtensionIntegers l E)) =
-        Padic.coefficientExtensionMaximalIdeal l E :=
-    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  intro h0
-  apply hm
-  rw [← hgen, h0, Ideal.span_singleton_eq_bot]
-
 private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (s : S.unop) :
     (((uniformizerEnd l E ^ n).hom.hom.app S) f).down s =
@@ -304,73 +271,5 @@ private theorem reduction_zero (n : ℕ) :
     rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow]
     exact Ideal.mem_span_singleton_self _
   rw [h, zero_mul]
-
-private theorem pointResolution (n : ℕ) :
-    (ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
-      (reduction_zero l E n)).ShortExact := by
-  let S := ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
-    (reduction_zero l E n)
-  have hs : (S.map (Mod.forget _)).ShortExact := by
-    apply shortExact_of_sectionwise
-    intro T
-    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-    let := quotientDiscrete l E n
-    let S' := ((S.map (Mod.forget _)).map
-      (sheafToPresheaf (coherentTopology Profinite.{u}) Ab)).map
-        ((evaluation Profinite.{u}ᵒᵖ Ab).obj T)
-    have hf : Function.Injective S'.f := by
-      intro f g h
-      apply ULift.ext
-      apply ContinuousMap.ext
-      intro t
-      have h' := congrArg (fun f ↦ f.down t) h
-      change (((uniformizerEnd l E ^ n).hom.hom.app T) f).down t =
-        (((uniformizerEnd l E ^ n).hom.hom.app T) g).down t at h'
-      rw [uniformizerPower_apply, uniformizerPower_apply] at h'
-      exact mul_left_cancel₀ (pow_ne_zero n (uniformizer_ne_zero l E)) h'
-    have hg : Function.Surjective S'.g := by
-      intro f
-      let lift : Padic.coefficientExtensionRing l E n →
-          Padic.coefficientExtensionIntegers l E :=
-        Function.surjInv Ideal.Quotient.mk_surjective
-      refine ⟨ULift.up ⟨lift ∘ f.down, continuous_of_discreteTopology.comp f.down.continuous⟩, ?_⟩
-      apply ULift.ext
-      apply ContinuousMap.ext
-      intro t
-      exact Function.surjInv_eq Ideal.Quotient.mk_surjective _
-    have he : S'.Exact := by
-      apply S'.ab_exact_iff.mpr
-      intro f hf
-      have hdiv : ∀ t : T.unop, (f.down t : E) ∈ Set.range
-          (fun a : Padic.coefficientExtensionIntegers l E ↦
-            (Padic.coefficientExtensionUniformizer l E : E) ^ n * (a : E)) := by
-        intro t
-        have hft := congrArg (fun f ↦ f.down t) hf
-        change Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n) (f.down t) = 0 at hft
-        rw [Ideal.Quotient.eq_zero_iff_mem, Padic.coefficientExtensionIdeal,
-          Ideal.span_singleton_pow, Ideal.mem_span_singleton] at hft
-        obtain ⟨a, ha⟩ := hft
-        refine ⟨a, ?_⟩
-        have ha' := congrArg
-          (fun x : Padic.coefficientExtensionIntegers l E ↦ (x : E)) ha.symm
-        simpa using ha'
-      obtain ⟨g, hg, hgf, _⟩ := (Padic.continuous_uniformizer_division l E n).2
-        f.down f.down.continuous hdiv
-      refine ⟨ULift.up ⟨g, hg⟩, ?_⟩
-      apply ULift.ext
-      apply ContinuousMap.ext
-      intro t
-      change (((uniformizerEnd l E ^ n).hom.hom.app T)
-        (ULift.up (⟨g, hg⟩ : C(T.unop, Padic.coefficientExtensionIntegers l E)))).down t = _
-      rw [uniformizerPower_apply]
-      exact Subtype.ext (by simpa using hgf t)
-    have : Mono S'.f := (AddCommGrpCat.mono_iff_injective _).mpr hf
-    have : Epi S'.g := (AddCommGrpCat.epi_iff_surjective _).mpr hg
-    exact ⟨he⟩
-  have := hs.mono_f
-  have := hs.epi_g
-  have : Mono S.f := Functor.mono_of_mono_map (Mod.forget _) hs.mono_f
-  have : Epi S.g := Functor.epi_of_epi_map (Mod.forget _) hs.epi_g
-  exact ⟨(S.exact_map_iff_of_faithful (Mod.forget _)).mp hs.exact⟩
 
 end AlgebraicGeometry.ProEtale.DerivedNakayama

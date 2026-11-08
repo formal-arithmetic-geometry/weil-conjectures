@@ -194,7 +194,10 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Submission.WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import Submission.WeilConjectures.CategoryTheory.GeometricMorphism.GeometricInverseImageExactSupplement
 import all Submission.WeilConjectures.Algebra.Homology.Ringed.RingedTopoiDerivedPullbackIndependentSupplement
-import all Submission.WeilConjectures.CategoryTheory.SixFunctors.CokernelAdjointExchange
+import Mathlib.CategoryTheory.Shift.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import Submission.WeilConjectures.AlgebraicGeometry.RingedTopoiInverseImageTensorComparison
 import Submission.WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
@@ -313,13 +316,6 @@ abbrev inverseRing (I : InverseImage L A B) :
       (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj A) ≅
       (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj B :=
   I.ringUnderlying
-
-/-- The existing underlying-module identification of the inverse-image presentation.
-Source: Stacks 03D2
-(blueprint: lem-sfb-kflat-scalar-comparison-normalization). -/
-abbrev inverseUnderlying (I : InverseImage L A B) :
-    inverseModules I ⋙ underlying B ≅ underlying A ⋙ L :=
-  I.moduleUnderlying
 
 end InverseImageAliases
 

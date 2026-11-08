@@ -150,21 +150,6 @@ include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection
 
-The symmetric statement: `ω_{p₂} ≅ Lp₁^* ω_f`. -/
-theorem nonempty_iso_dualizingComplex_pullbackSnd [QuasiSeparatedSpace Y] [QuasiCompact f] :
-    Nonempty (dualizingComplex Λ (pullback.snd f f) ≅
-      (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ])).obj
-        (dualizingComplex Λ f)) := by
-  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f
-    (IsPullback.of_hasPullback f f)
-  obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) f
-  exact ⟨(rightDerivedUpperShriek _ (pullback.snd f f)).mapIso ι.symm ≪≫ (e.app (𝟙_ _)).symm⟩
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
-projection
-
 The section invariant of the diagonal `Δ : X ⟶ X ×_Y X`, a closed section of `p₁`, is the
 dualizing complex of `f`: since `Δ ≫ p₂ = 𝟙 X`,
 

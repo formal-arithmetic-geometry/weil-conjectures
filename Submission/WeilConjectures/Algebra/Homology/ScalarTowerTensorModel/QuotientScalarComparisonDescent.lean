@@ -79,7 +79,14 @@ import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.CompatibleCoefficientTower
+import Mathlib.CategoryTheory.Linear.LinearFunctor
+import Mathlib.CategoryTheory.Linear.FunctorCategory
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.Algebra.Category.Grp.Abelian
+import Submission.WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.Basic

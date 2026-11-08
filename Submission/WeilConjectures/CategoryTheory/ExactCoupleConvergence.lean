@@ -216,11 +216,6 @@ def IsComplete (X : BigradedExactCouple C 0) : Prop :=
   ∀ (p q : ℤ) (S : Subobject (X.D p q)),
     (∀ r : ℕ, S ≤ imageSubobject (X.incomingAlphaIter r p q)) → S = ⊥
 
-/-- Boundedness requires finite support on each total-degree diagonal of the initial page.
-Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
-def IsBounded (X : BigradedExactCouple C 0) : Prop :=
-  ∀ n : ℤ, Set.Finite {pq : ℤ × ℤ | pq.1 + pq.2 = n ∧ ¬ IsZero (X.E pq.1 pq.2)}
-
 /-- The limiting cycles and boundaries, when their greatest lower and least upper bounds
 exist. Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
 structure LimitSubobjects (X : BigradedExactCouple C 0) where

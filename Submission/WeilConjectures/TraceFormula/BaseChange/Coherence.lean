@@ -304,14 +304,6 @@ lemma eqToHom_comp_galois_comp_eqToHom_heq_aux {W c : E X} (hc : W = c) (ψ : (V
   obtain rfl := eq_of_heq hψ
   simp
 
-lemma galoisFrobeniusAux_eq :
-    galoisFrobeniusAux U V cV H h g σ xb hgal τ K φ =
-      τ.inv.app ((V xb).obj ((H X).obj K)) ≫ (cV σ xb).inv.app ((H X).obj K) ≫
-        eqToHom (congrArg (fun s ↦ (V s).obj ((H X).obj K)) hgal.symm) ≫
-        (cV xb g).hom.app ((H X).obj K) ≫
-        (V xb).map ((h g).hom.app K ≫ (H X).map φ) :=
-  rfl
-
 /-- The identification `H (U x' U π K) ≅ H (U x̄ K) ≅ V x̄ H K`. -/
 def homologyBaseChangeIsoAux :
     (H P).obj ((U x').obj ((U π).obj K)) ≅ (V xb).obj ((H X).obj K) :=
@@ -386,17 +378,6 @@ theorem galoisFrobeniusAux_eq_conj :
         (homologyBaseChangeIsoAux U cU V H h x' π xb hxb K).hom := by
   rw [homology_modelFrobenius_comp_eq_aux U cU assocU V cV assocV H h hcomp x' Φ π g F σ xb hxb
     hfix hΦ hgal hσF κD κE hκ τ hτ K φ, Iso.inv_hom_id_assoc]
-
-/-- The structure isomorphism of the image of an algebra under two successive transports
-`IsoAlgebra.mapOfNatIso`. -/
-lemma mapOfNatIso_obj_mapOfNatIso_obj_str_hom_aux {C₀ D₀ E₀ : Type*} [Category C₀]
-    [Category D₀] [Category E₀] {F₀ : C₀ ⥤ C₀} {G₀ : D₀ ⥤ D₀} {T₀ : E₀ ⥤ E₀} {L₁ : C₀ ⥤ D₀}
-    {L₂ : D₀ ⥤ E₀} (b : L₁ ⋙ G₀ ≅ F₀ ⋙ L₁) (c : L₂ ⋙ T₀ ≅ G₀ ⋙ L₂)
-    (A : Endofunctor.IsoAlgebra F₀) :
-    ((Endofunctor.IsoAlgebra.mapOfNatIso c).obj
-        ((Endofunctor.IsoAlgebra.mapOfNatIso b).obj A)).str.hom =
-      c.hom.app (L₁.obj A.carrier) ≫ L₂.map (b.hom.app A.carrier ≫ L₁.map A.str.hom) := by
-  simp
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

@@ -295,41 +295,4 @@ lemma kunnethVerdierMap_naturality_left {M M' : Dᵇc(X.left)⟦Profinite.padicA
         (ihom _).map ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).map φ) := by
   exact curry_naturality_aux _ _ _ (kunnethVerdierPairing_naturality ℓ φ N)
 
-/-- The objects `M` for which the Künneth–Verdier map `κ_{M,N}` is an isomorphism are closed under
-isomorphisms (the first closure property of the dévissage in `M` of `thm-trf-kunneth-verdier`). -/
-lemma isIso_kunnethVerdierMap_of_iso {M M' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (e : M ≅ M') (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    [IsIso (kunnethVerdierMap ℓ M' N)] : IsIso (kunnethVerdierMap ℓ M N) := by
-  have h := kunnethVerdierMap_naturality_left ℓ e.hom N
-  rw [(IsIso.eq_comp_inv _).mpr h.symm]
-  infer_instance
-
-/-- The double-dual morphism is natural, for any braiding. -/
-private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]
-    [MonoidalClosed 𝒞] {_ : BraidedCategory 𝒞} (ω : 𝒞) {M M' : 𝒞} (f : M ⟶ M') :
-    f ≫ Verdier.bidualityMap ω M' = Verdier.bidualityMap ω M ≫ (pre ((pre f).app ω)).app ω :=
-  toIhomIhom_naturality ω f
-
-/-- **Verdier biduality for the dualizing complex** (blueprint `thm-trf-verdier-biduality`): for
-bounded constructible `M` on `Y`, the double-dual morphism `M ⟶ D_Y D_Y M`, the transpose of the
-evaluation `D_Y M ⊗ M ⟶ M ⊗ D_Y M ⟶ ω_Y`, is an isomorphism. It is the constructible biduality
-theorem (`isIso_verdierBiduality`, blueprint `det-pd-biduality-coefficients`). -/
-noncomputable def verdierBidualityIso (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    M ≅ verdierDual ℓ (verdierDual ℓ M) :=
-  haveI := isIso_verdierBiduality ℓ M
-  asIso (verdierBiduality ℓ M)
-
-lemma verdierBidualityIso_hom (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (verdierBidualityIso ℓ M).hom = verdierBiduality ℓ M :=
-  rfl
-
-/-- The biduality isomorphism is natural (blueprint `thm-trf-verdier-biduality`). -/
-@[reassoc]
-lemma verdierBidualityIso_hom_naturality {M M' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (f : M ⟶ M') :
-    f ≫ (verdierBidualityIso ℓ M').hom =
-      (verdierBidualityIso ℓ M).hom ≫
-        (pre ((pre f).app (dualizingComplex' ℓ Y))).app (dualizingComplex' ℓ Y) :=
-  bidualityMap_naturality _ f
-
 end AlgebraicGeometry.ProEtale.CondensedRing

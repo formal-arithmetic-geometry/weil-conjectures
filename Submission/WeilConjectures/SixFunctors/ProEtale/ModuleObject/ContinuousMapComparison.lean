@@ -167,12 +167,6 @@ noncomputable def continuousMapRingSheafToLowerStar :
               (profiniteToProEt.map f.unop)).left.base x))
         rw [profiniteTestObjectProj_naturality] }
 
-lemma continuousMapRingSheafToLowerStar_hom_app_apply (S : Profinite.{u}ᵒᵖ)
-    (g : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingSheafToLowerStar X T).hom.app S g =
-      ULift.up (g.down.comp (profiniteTestObjectProj X S.unop)) :=
-  rfl
-
 /-- The adjunction `p_X^* ⊣ p_{X*}`, the composite of `p^* ⊣ p_*` and `π_X^* ⊣ π_{X*}`. -/
 noncomputable abbrev upperStarFromPointAdjunction :
     upperStarFromPoint X ⊣ (toSpecZ X)_*[Ab.{u + 1}] ⋙ pointLowerStar :=
@@ -262,14 +256,6 @@ lemma coefficient_lowerStarComp_inv_app_hom_app {R S T : Scheme.{u}} (h₁ : T �
     ((lowerStarComp Ab.{u + 1} h₁ h₂).inv.app G).hom.app (op V) =
       G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).inv.app V).op := by
   simp [lowerStarComp]
-
-/-- Base change along `g` of a morphism `f : V' ⟶ V` of the pro-étale site of `X` is compatible
-with the first projections. -/
-@[reassoc]
-lemma overPullback_map_left_fst {V V' : X.ProEt} (f : V' ⟶ V) :
-    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map f).left ≫ pullback.fst V.hom g =
-      pullback.fst V'.hom g ≫ f.left := by
-  rw [MorphismProperty.Over.pullback_map_left, pullback.lift_fst]
 
 /-- **A criterion for the compatibility of morphisms out of `p^* Λ` with pullback.** Let
 `ψ : π_X^* F ⟶ C` and `ψ' : π_{X'}^* F ⟶ C'` for a sheaf `F` on `Spec ℤ`, and `b : C ⟶ g_* C'`.

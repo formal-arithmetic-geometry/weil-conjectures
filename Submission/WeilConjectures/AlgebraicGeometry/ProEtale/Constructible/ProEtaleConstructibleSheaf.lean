@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory

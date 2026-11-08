@@ -86,17 +86,6 @@ theorem isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_counit_app
       (by rw [hij]; exact disjoint_compl_left) _).isoZero
   · exact (hF.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory A i).app F).symm).isoZero
 
-/-- `F` is isomorphic to the extension by zero `j_! j^* F` of its restriction to `W` as soon as
-`Li^* F = 0` for a closed immersion `i` with range the complement of that of `j`. -/
-lemma nonempty_iso_openImmersionLowerShriek_obj_of_isZero
-    {Y : Scheme.{u}} (i : Y ⟶ Z) [IsClosedImmersion i]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (F : DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (hF : IsZero ((L((i)^*[A])).obj F)) :
-    Nonempty (F ≅ D((j)_!open[A]).obj (D((j)^*[A]).obj F)) :=
-  have := isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_counit_app A j i hij F hF
-  ⟨(asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app F)).symm⟩
-
 end Criterion
 
 section Points
@@ -183,20 +172,6 @@ theorem isIso_counit_app_openComplement_hH
         (externalProduct (ModuleCat.{u + 1} Λ) M.f M.f L K))) :=
   isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_counit_app _ _ M.hH
     M.range_hH_eq_compl_range_ι _ (M.isZero_leftDerivedUpperStar_hH_obj L K hK)
-
-/-- Blueprint `det-tf-restriction-zero-localization`, item (i): if `Ly^* K = 0`, then
-`P = Lτ^*(L ⊠ K)` is isomorphic to the extension by zero of its restriction to `T ∖ H`. -/
-theorem nonempty_iso_openImmersionLowerShriek_openComplement_hH
-    (L K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : IsZero ((L((M.y)^*[ModuleCat.{u + 1} Λ])).obj K)) :
-    Nonempty ((L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) M.f M.f L K) ≅
-      D((M.hH.openComplement.ι)_!open[ModuleCat.{u + 1} Λ]).obj
-        (D((M.hH.openComplement.ι)^*[ModuleCat.{u + 1} Λ]).obj
-          ((L((M.τ)^*[ModuleCat.{u + 1} Λ])).obj
-            (externalProduct (ModuleCat.{u + 1} Λ) M.f M.f L K)))) :=
-  nonempty_iso_openImmersionLowerShriek_obj_of_isZero _ _ M.hH M.range_hH_eq_compl_range_ι _
-    (M.isZero_leftDerivedUpperStar_hH_obj L K hK)
 
 end CurveLocalModel
 

@@ -113,26 +113,6 @@ variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C} (
   (δ : (((Functor.whiskeringLeft₂ C).obj G).obj G').obj T ⟶
     (Functor.postcompose₂.obj G).obj T')
 
-/-- The comparison `δ : G X ⊗ G' M ⟶ G (X ⊗ M)` for a fixed `M`, as a natural transformation
-of functors of `X`. -/
-@[simps]
-def comparisonFlipApp' (M : D) : G ⋙ T.flip.obj (G'.obj M) ⟶ T'.flip.obj M ⋙ G where
-  app X := (δ.app X).app M
-  naturality X X' f := by
-    have := NatTrans.congr_app (δ.naturality f) M
-    dsimp at this ⊢
-    exact this
-
-/-- The projection map `F (K ⊗ G' M) ⟶ F K ⊗ M` for a fixed `M`, as a natural transformation of
-functors of `K`. -/
-@[simps]
-noncomputable def projectionMapFlipApp (M : D) : T.flip.obj (G'.obj M) ⋙ F ⟶ F ⋙ T'.flip.obj M where
-  app K := ((adj.projectionMap G' T T' δ).app K).app M
-  naturality K K' f := by
-    have := NatTrans.congr_app ((adj.projectionMap G' T T' δ).naturality f) M
-    dsimp at this ⊢
-    exact this
-
 
 variable (A : Type*) [AddMonoid A] [HasShift C A] [HasShift D A] [F.CommShift A] [G.CommShift A]
   [adj.CommShift A] [∀ M : D, (T.flip.obj (G'.obj M)).CommShift A]

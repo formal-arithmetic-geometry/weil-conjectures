@@ -310,29 +310,5 @@ noncomputable def elementModulePullbackOver {C : Type u} [SmallCategory C]
     ringedSiteModules (elementRing R A) ⥤ ringedSiteModules (elementRing R B) :=
   SheafOfModules.pushforward (F := elementMap b) (𝟙 (elementRing R B))
 
-/-- The canonical module extension functor along the element projection.
-
-Source: Stacks Project, Modules on Sites, Tag 04IE
-(blueprint: lem-weil-pbc-element-module-extension-adjunction). -/
-noncomputable def elementModuleExtension
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :
-    ringedSiteModules (elementRing R A) ⥤ ringedSiteModules R :=
-  SheafOfModules.pullback (F := elementProjection A) (𝟙 (elementRing R A))
-
-/-- The canonical module extension is left adjoint to restriction.
-
-Source: Stacks Project, Modules on Sites, Tag 04IE
-(blueprint: lem-weil-pbc-element-module-extension-adjunction).
-Proof: apply Mathlib's continuous-site module pullback/pushforward adjunction to the
-identity map of the restricted ring. Both sites and the module fibres have universe u,
-so the presheaf adjoint existence and sheafification instances apply. -/
-theorem elementModuleExtension_adjunction
-    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :
-    Nonempty (elementModuleExtension R A ⊣ elementModulePullback R A) :=
-  ⟨SheafOfModules.pullbackPushforwardAdjunction (F := elementProjection A)
-    (𝟙 (elementRing R A))⟩
-
 end CategoryTheory
 end

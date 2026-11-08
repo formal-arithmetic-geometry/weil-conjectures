@@ -356,20 +356,6 @@ namespace PairCategory
 
 variable {S}
 
-@[reassoc]
-lemma mkHom_comp_mkHom_assoc' {X Y Z W : S.PairCategory} {n : I} {hX : X.stage ≤ n}
-    {hY : Y.stage ≤ n} {hZ : Z.stage ≤ n} (u : X.toStage hX ⟶ Y.toStage hY)
-    (v : Y.toStage hY ⟶ Z.toStage hZ) (g : Z ⟶ W) :
-    mkHom n hX hY u ≫ mkHom n hY hZ v ≫ g = mkHom n hX hZ (u ≫ v) ≫ g := by
-  rw [← Category.assoc, mkHom_comp_mkHom]
-
-
-/-- Equality of morphisms of the pair category, tested at a common stage. -/
-lemma hom_ext_iff {X Y : S.PairCategory} {n : I} {hX : X.stage ≤ n} {hY : Y.stage ≤ n}
-    (u u' : X.toStage hX ⟶ Y.toStage hY) :
-    (mkHom n hX hY u : X ⟶ Y) = mkHom n hX hY u' ↔
-      ∃ (p : I) (h : n ≤ p), (S.T h).map u = (S.T h).map u' :=
-  mkHom_eq_mkHom_iff u u'
 
 /-- Two morphisms of the pair category can be represented at a common stage above any given
 stage. -/
@@ -431,11 +417,6 @@ lemma mkHom_eq_isoToStage {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n) (h
   rw [← mkHom_tr (le_rfl : n ≤ n) u]
   rfl
 
-lemma ι_map_eq_isoToStage {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n)
-    (hY : Y.stage ≤ n) (u : X.toStage hX ⟶ Y.toStage hY) :
-    (S.ι n).map u = (S.isoToStage X hX).inv ≫ mkHom n hX hY u ≫ (S.isoToStage Y hY).hom := by
-  simp [mkHom_eq_isoToStage hX hY u]
-
 variable (S) in
 /-- The identification `j_j ∘ T_{j/i} ≅ j_i` (the isomorphisms `(E, K) ≅ (F, T_{F/E} K)`). -/
 noncomputable def transIso {i j : I} (h : i ≤ j) : S.T h ⋙ S.ι j ≅ S.ι i :=
@@ -450,28 +431,6 @@ lemma transIso_hom_app {i j : I} (h : i ≤ j) (x : C i) :
 
 lemma transIso_inv_app {i j : I} (h : i ≤ j) (x : C i) :
     (S.transIso h).inv.app x = (S.isoToStage ⟨i, x⟩ h).hom := rfl
-
-lemma transIso_hom_app_eq {i j : I} (h : i ≤ j) (x : C i) :
-    (S.transIso h).hom.app x =
-      mkHom (X := ⟨j, (S.T h).obj x⟩) (Y := ⟨i, x⟩) j le_rfl h ((S.assoc h le_rfl).hom.app x) :=
-  rfl
-
-lemma eqToHom_mk {i : I} {x y : C i} (h : (⟨i, x⟩ : S.PairCategory) = ⟨i, y⟩) :
-    eqToHom h = (S.ι i).map (eqToHom (eq_of_heq (PairCategory.mk.inj h).2)) := by
-  obtain rfl := eq_of_heq (PairCategory.mk.inj h).2
-  simp only [eqToHom_refl, Functor.map_id]; rfl
-
-/-- A morphism `j_n x ⟶ j_n y` represented at a stage `p ≥ n`, transported along the
-identifications `j_n ≅ j_p ∘ T`, is the image of its representative. -/
-lemma transIso_hom_app_mkHom_transIso_inv_app {n p : I} (h : n ≤ p) {x y : C n}
-    (hX : ((S.ι n).obj x).stage ≤ p) (hY : ((S.ι n).obj y).stage ≤ p)
-    (u : (S.T h).obj x ⟶ (S.T h).obj y) :
-    (S.transIso h).hom.app x ≫ mkHom (X := (S.ι n).obj x) (Y := (S.ι n).obj y) p hX hY u ≫
-      (S.transIso h).inv.app y = (S.ι p).map u := by
-  rw [mkHom_eq_isoToStage, transIso_hom_app, transIso_inv_app]
-  simp only [Category.assoc]
-  erw [Iso.inv_hom_id_assoc, Iso.inv_hom_id]
-  exact Category.comp_id _
 
 variable (S) in
 /-- The stage `ℚ̄_ℓ`: in the filtered 2-colimit of a stage

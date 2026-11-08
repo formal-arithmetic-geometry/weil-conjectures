@@ -343,10 +343,6 @@ noncomputable instance Karoubi.pretriangulated : Pretriangulated (Karoubi C) whe
   rotate_distinguished_triangle := Karoubi.rotate_distinguished_triangle
   complete_distinguished_triangle_morphism := Karoubi.complete_distinguished_triangle_morphism
 
-lemma Karoubi.mem_distTriang_iff (T : Triangle (Karoubi C)) :
-    T ∈ distTriang (Karoubi C) ↔ ∃ (T' : Triangle C) (_ : T' ∈ distTriang C),
-      Nonempty (Retract T ((toKaroubi C).mapTriangle.obj T')) := Iff.rfl
-
 /-- The inclusion of a pretriangulated category into its Karoubi envelope is a triangulated functor.
 -/
 instance toKaroubi.isTriangulated : (toKaroubi C).IsTriangulated where

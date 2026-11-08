@@ -158,16 +158,6 @@ structure TraceSpecialization where
       βc.app _ ≫ (boundedConstructibleUpperShriek ℓ c'.support).map
           (χΔ.app M) ≫ (F'.upperShriekLowerStarIso.app (ΨX.obj M)).hom
 
-variable {c'} in
-/-- The exceptional pullback `Rc'^! (K' ⊠ D K')` of the universal kernel along the support of
-`c'` vanishes as soon as the ordinary pullback `Lc₂'^* K'` does: by external duality
-(`verdierDualityIso`) it is `RHom(Lc₂'^* K', Rc₁'^! K')`. -/
-lemma isZero_upperShriek_externalProduct_of_isZero
-    (h : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c'.c₂).obj K')) :
-    IsZero ((boundedConstructibleUpperShriek ℓ c'.support).obj
-      (externalProduct ℓ K' (verdierDual ℓ K'))) :=
-  (isZero_ihom_obj_of_isZero h _).of_iso c'.verdierDualityIso.symm
-
 namespace TraceSpecialization
 
 variable {c F c' F'} (T : c.TraceSpecialization F c' F')

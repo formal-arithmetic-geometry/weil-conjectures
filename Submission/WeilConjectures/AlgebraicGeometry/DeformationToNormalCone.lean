@@ -138,59 +138,6 @@ instance [IsClosedImmersion s] : IsClosedImmersion s.normalConeZeroSection := by
   exact IsClosedImmersion.of_comp _
     (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase
 
-/-- `𝔸¹_B ⟶ 𝔸¹_{V(I_s)} = Spec_V (𝒪_V / I_s)[t]`, the affine line over `B ≅ V(I_s)`. -/
-noncomputable def affineSpaceToQuotientPolynomialSpec :
-    𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker.quotientPolynomialSpec :=
-  s.ker.isPullback_quotientPolynomialSpec.lift
-    ((𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s.toQuotientSpec)
-    (AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace) (by
-      rw [Category.assoc, toQuotientSpec_toBase, Category.assoc,
-        ← polynomialSpecToAffineSpace_over, IsIso.inv_hom_id_assoc, AffineSpace.map_over])
-
-@[reassoc (attr := simp)]
-lemma affineSpaceToQuotientPolynomialSpec_toQuotientSpec :
-    s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap
-      s.ker.coequifibered_toQuotientAlgebra s.ker.coequifibered_toQuotientPolynomialAlgebra
-      (s.ker.quotientAlgebra.whiskerLeft CommRingCat.polynomialC) =
-      (𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s.toQuotientSpec :=
-  IsPullback.lift_fst _ _ _ _
-
-@[reassoc (attr := simp)]
-lemma affineSpaceToQuotientPolynomialSpec_toPolynomialSpec :
-    s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap
-      V.coequifibered_toPolynomialPresheaf s.ker.coequifibered_toQuotientPolynomialAlgebra
-      s.ker.polynomialToQuotientPolynomial =
-      AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace :=
-  IsPullback.lift_snd _ _ _ _
-
-/-- The section `s̃ : 𝔸¹_B ⟶ D_s V` of `g̃`: on the extended Rees algebra it is
-`𝒪_V[t, I t⁻¹] ⟶ (𝒪_V / I)[t]`, `t ↦ t`, `x t⁻¹ ↦ 0`. -/
-noncomputable def deformationSpaceSection : 𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker.deformationSpace :=
-  s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap s.ker.coequifibered_toReesPresheaf
-    s.ker.coequifibered_toQuotientPolynomialAlgebra s.ker.reesToQuotientPolynomial
-
-
-@[reassoc (attr := simp)]
-lemma deformationSpaceSection_toPolynomialSpec :
-    s.deformationSpaceSection ≫ s.ker.deformationSpaceToPolynomialSpec =
-      AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace := by
-  rw [deformationSpaceSection, IdealSheafData.deformationSpaceToPolynomialSpec, Category.assoc,
-    ← relativeGluingMap_comp, s.ker.polynomialToRees_comp_reesToQuotientPolynomial,
-    affineSpaceToQuotientPolynomialSpec_toPolynomialSpec]
-
-@[reassoc (attr := simp)]
-lemma deformationSpaceSection_toBase :
-    s.deformationSpaceSection ≫ s.ker.deformationSpaceProj =
-      (𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s := by
-  change _ ≫ (relativeGluingData s.ker.coequifibered_toReesPresheaf).toBase = _
-  rw [← relativeGluingMap_toBase V.coequifibered_toPolynomialPresheaf
-    s.ker.coequifibered_toReesPresheaf s.ker.polynomialToRees
-    s.ker.toPolynomialPresheaf_comp_polynomialToRees,
-    ← IdealSheafData.deformationSpaceToPolynomialSpec,
-    deformationSpaceSection_toPolynomialSpec_assoc,
-    show (relativeGluingData V.coequifibered_toPolynomialPresheaf).toBase =
-      V.polynomialSpecToAffineSpace ≫ _ from V.polynomialSpecToAffineSpace_over.symm,
-    IsIso.inv_hom_id_assoc, AffineSpace.map_over]
 
 
 /-! #### The fibre over `t = 0` -/
@@ -253,81 +200,8 @@ lemma coe_puncturedLine (B : Scheme.{u}) : (puncturedLine B : Set 𝔸(ULift.{u}
   simp only [SetLike.mem_coe, not_forall, not_not]
   exact ⟨fun h ↦ ⟨0, h⟩, fun ⟨i, h⟩ ↦ by rwa [Subsingleton.elim i 0] at h⟩
 
-lemma preimage_puncturedLine :
-    (V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g) ⁻¹ᵁ puncturedLine B =
-      V.laurentSpecToPolynomialSpec.opensRange := by
-  rw [opensRange_laurentSpecToPolynomialSpec, Scheme.preimage_basicOpen_top,
-    Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord]
-  rfl
-
-/-- The punctured line of `Spec_V 𝒪_V[t]` maps to the one of `𝔸¹_B`. -/
-noncomputable def laurentSpecToPuncturedLine : V.laurentSpec ⟶ puncturedLine B :=
-  IsOpenImmersion.lift (puncturedLine B).ι (V.laurentSpecToPolynomialSpec ≫
-    V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g) (by
-      rw [Scheme.Opens.range_ι, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
-        Set.image_subset_iff, ← Scheme.Hom.coe_opensRange, ← preimage_puncturedLine]
-      rfl)
-
-lemma isPullback_laurentSpecToPuncturedLine :
-    IsPullback V.laurentSpecToPolynomialSpec (laurentSpecToPuncturedLine g)
-      (V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g)
-      (puncturedLine B).ι :=
-  (IsOpenImmersion.isPullback _ _ _ _ (IsOpenImmersion.lift_fac _ _ _).symm
-    (by rw [Scheme.Opens.opensRange_ι]; exact preimage_puncturedLine g)).flip
-
-/-- The punctured line of `Spec_V 𝒪_V[t]` is `V ×_B 𝔾_{m,B}`. -/
-lemma isPullback_laurentSpec :
-    IsPullback (V.laurentSpecToPolynomialSpec ≫ V.polynomialSpecProj)
-      (laurentSpecToPuncturedLine g) g ((puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) :=
-  (isPullback_laurentSpecToPuncturedLine g).paste_horiz (isPullback_polynomialSpecProj g)
-
-/-- The punctured trivialisation `κ° : V ×_B 𝔾_{m,B} ⟶ D_s V`. -/
-noncomputable def deformationSpaceGeneric :
-    pullback g ((puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) ⟶ s.ker.deformationSpace :=
-  (isPullback_laurentSpec g).isoPullback.inv ≫ s.ker.laurentSpecToDeformationSpace
-
-lemma isPullback_laurentSpecToDeformationSpace :
-    IsPullback s.ker.laurentSpecToDeformationSpace (laurentSpecToPuncturedLine g)
-      (deformationSpaceProj g s) (puncturedLine B).ι := by
-  exact s.ker.isPullback_laurentSpecToDeformationSpace.paste_vert
-    (isPullback_laurentSpecToPuncturedLine g)
-
-
-@[reassoc (attr := simp)]
-lemma deformationSpaceGeneric_toBase :
-    deformationSpaceGeneric g s ≫ s.ker.deformationSpaceProj = pullback.fst _ _ := by
-  rw [deformationSpaceGeneric, Category.assoc, IdealSheafData.laurentSpecToDeformationSpace,
-    relativeGluingMap_toBase _ _ _ s.ker.toReesPresheaf_comp_reesToLaurent,
-    ← relativeGluingMap_toBase V.coequifibered_toPolynomialPresheaf _ _
-      IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
-  exact (isPullback_laurentSpec g).isoPullback_inv_fst
 
 /-! #### The fibre over `t = 1` -/
-
-/-- The unit section `B ⟶ 𝔸¹_B` lands in the punctured line. -/
-noncomputable def oneSectionToPuncturedLine (B : Scheme.{u}) : B ⟶ puncturedLine B :=
-  IsOpenImmersion.lift (puncturedLine B).ι (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) (by
-    rw [Scheme.Opens.range_ι]
-    rintro _ ⟨y, rfl⟩
-    change y ∈ AffineSpace.oneSection _ B ⁻¹ᵁ puncturedLine B
-    rw [Scheme.preimage_basicOpen_top, AffineSpace.oneSection, AffineSpace.homOfVector_appTop_coord]
-    simp)
-
-@[reassoc (attr := simp)]
-lemma oneSectionToPuncturedLine_ι (B : Scheme.{u}) :
-    oneSectionToPuncturedLine B ≫ (puncturedLine B).ι = AffineSpace.oneSection _ B :=
-  IsOpenImmersion.lift_fac _ _ _
-
-@[reassoc (attr := simp)]
-lemma oneSectionToPuncturedLine_ι_over (B : Scheme.{u}) :
-    oneSectionToPuncturedLine B ≫ (puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B = 𝟙 B := by
-  rw [oneSectionToPuncturedLine_ι_assoc, AffineSpace.oneSection_comp_over]
-
-/-- The inclusion `ι₁ : V ⟶ D_s V` of the fibre over `t = 1`. -/
-noncomputable def deformationSpaceOneFibre : V ⟶ s.ker.deformationSpace :=
-  pullback.lift (𝟙 V) (g ≫ oneSectionToPuncturedLine B) (by
-    rw [Category.assoc, oneSectionToPuncturedLine_ι_over, Category.id_comp,
-      Category.comp_id]) ≫ deformationSpaceGeneric g s
 
 
 end Construction

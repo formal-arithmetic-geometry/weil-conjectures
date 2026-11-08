@@ -166,20 +166,6 @@ theorem finsum_trace_compactlySupportedCohomology_spec_eq_traceFunction
   rw [finsum_trace_compactlySupportedCohomology_spec,
     traceFunction_toComplex_spec_eq_trace_globalSections G m hm y]
 
-/-- **The Grothendieck–Lefschetz trace formula for Weil sheaves on `Spec k₀`**, in the shape of
-the general formula: for `m ≠ 0`,
-`∑ᵢ (-1)ⁱ Tr(Fᵐ | H_c^i(Spec k̄, G)) = ∑_{y ∈ Spec k₀(𝔽_{qᵐ})} t_{G,m}(y)`. -/
-theorem finsum_trace_compactlySupportedCohomology_spec_eq_finsum_traceFunction
-    (G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) {m : ℕ} (hm : m ≠ 0) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-      (((toComplex.obj G).compactlySupportedCohomology i).frobenius.toLinearMap ^ m) =
-      ∑ᶠ y : (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).fieldPoints
-          (FiniteField.galoisExtension k₀ m),
-        (toComplex.obj G).traceFunction m y := by
-  refine .trans ?_ (finsum_unique _).symm
-  exact finsum_trace_compactlySupportedCohomology_spec_eq_traceFunction G m
-    (Nat.one_le_iff_ne_zero.2 hm) default
-
 end WeilSheaf
 
 end AlgebraicGeometry

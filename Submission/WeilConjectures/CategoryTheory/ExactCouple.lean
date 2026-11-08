@@ -260,17 +260,5 @@ noncomputable def pageCouple (X : BigradedExactCouple C 0) :
   | 0 => X
   | n + 1 => (pageCouple X n).derived
 
-/-- The `E_r` term for `r ≥ 2`, with `E₂ = E`.
-Source: Stacks Project, Tag 011S (blueprint: def-sp-exact-couple). -/
-noncomputable def page (X : BigradedExactCouple C 0) (r : ℕ) (p q : ℤ) : C :=
-  (X.pageCouple (r - 2)).E p q
-
-/-- The differential on page `r` has bidegree `(r,1-r)` when `r ≥ 2`.
-Source: Stacks Project, Tags 011S and 0AMJ (blueprint: def-sp-exact-couple). -/
-noncomputable def pageDifferential (X : BigradedExactCouple C 0) (r : ℕ)
-    (p q : ℤ) : X.page r p q ⟶
-      X.page r (p + 2 + ((r - 2 : ℕ) : ℤ)) (q - 1 - ((r - 2 : ℕ) : ℤ)) :=
-  (X.pageCouple (r - 2)).d p q
-
 end BigradedExactCouple
 end CategoryTheory

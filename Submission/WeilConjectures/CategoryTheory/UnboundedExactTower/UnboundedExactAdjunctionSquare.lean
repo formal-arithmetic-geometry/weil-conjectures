@@ -60,81 +60,7 @@ instance moduleResolutions
   letI := SheafOfModules.isGrothendieckAbelian R
   inferInstance
 
-private def evaluationZeroConstAdjunction
-    (A : Type uA) [Category.{vA} A] :
-    (evaluation ℕᵒᵖ A).obj (op 0) ⊣ Functor.const ℕᵒᵖ :=
-  Adjunction.mkOfUnitCounit {
-    unit := {
-      app := fun T ↦ {
-        app := fun n ↦ T.map (homOfLE (Nat.zero_le n.unop)).op
-        naturality := by
-          intro n m t
-          change T.map t ≫ T.map _ = T.map _ ≫ 𝟙 _
-          rw [Category.comp_id, ← T.map_comp]
-          congr 1 }
-      naturality := by
-        intro T U t
-        ext n
-        exact (t.naturality (homOfLE (Nat.zero_le n.unop)).op).symm }
-    counit := { app := fun X ↦ 𝟙 X }
-    left_triangle := by
-      ext T
-      dsimp
-      simp
-    right_triangle := by
-      ext X n
-      dsimp
-      simp }
 
-
-private theorem isIso_of_kinjective_components
-    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
-    [Abelian.HasKInjectiveResolutions A]
-    {E : Type*} [Category E] {V W : DerivedCategory A ⥤ E} (α : V ⟶ W)
-    (h : ∀ (I : CochainComplex A ℤ), I.IsKInjective →
-      IsIso (α.app (DerivedCategory.Q.obj I))) : IsIso α := by
-  have : ∀ X, IsIso (α.app X) := by
-    intro X
-    obtain ⟨I, hI, i, _, hi⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective
-      (DerivedCategory.Q.objPreimage X)
-    have := hi
-    have := h I hI
-    let e : X ≅ DerivedCategory.Q.obj I :=
-      (DerivedCategory.Q.objObjPreimageIso X).symm ≪≫ asIso (DerivedCategory.Q.map i)
-    have ht : IsIso (V.map e.hom ≫ α.app (DerivedCategory.Q.obj I)) := inferInstance
-    rw [α.naturality] at ht
-    exact (isIso_comp_right_iff _ _).mp ht
-  exact NatIso.isIso_of_isIso_app α
-
-private theorem mate_homEquiv
-    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
-    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ H} {R₂ : H ⥤ E}
-    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) {V : C ⥤ E} {W : D ⥤ H}
-    (α : TwoSquare V L₁ L₂ W) (M : C) (N : D) (t : L₁.obj M ⟶ N) :
-    b.homEquiv _ _ (α.app M ≫ W.map t) =
-      V.map (a.homEquiv M N t) ≫ (mateEquiv a b α).app N := by
-  rw [a.homEquiv_unit, b.homEquiv_unit, V.map_comp, Category.assoc]
-  rw [show V.map (R₁.map t) ≫ (mateEquiv a b α).app N =
-    (mateEquiv a b α).app (L₁.obj M) ≫ R₂.map (W.map t) from
-    (mateEquiv a b α).naturality t]
-  rw [← Category.assoc, unit_mateEquiv]
-  simp only [R₂.map_comp, Category.assoc]
-  rfl
-
-
-private theorem derivedNatIso_refl
-    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
-    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
-    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
-    Functor.mapDerivedCategoryNatIso (Iso.refl F) = Iso.refl F.mapDerivedCategory := by
-  apply Iso.ext
-  apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso A (.up ℤ))
-  intro I
-  apply (cancel_mono (F.mapDerivedCategoryFactors.hom.app I)).1
-  erw [Functor.mapDerivedCategoryNatIso_fac]
-  change F.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map (𝟙 _) =
-    𝟙 _ ≫ F.mapDerivedCategoryFactors.hom.app I
-  simp
 
 section Comparisons
 
@@ -144,44 +70,9 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)]
   (F : B ⥤ A) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
-/-- The descended constant/inverse-image identity, using the ordinary identity-component
-comparison `compConstIso`. Source: Stacks 015F, 0DVC
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
-def constantInterchange :
-    (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙
-        ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ≅
-      F.mapDerivedCategory ⋙ (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory :=
-  Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)
-    ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) ≪≫
-    Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm
-
 variable {F} {G : A ⥤ B} [G.Additive]
   [Abelian.HasKInjectiveResolutions A]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
-
-/-- The constant comparison is the mate of the canonical descended inverse-image
-comparison. Its invertibility and representative normalization are conclusions below.
-Source: Stacks 07A7, 0DVC
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
-def constantComparison (a : F ⊣ G) :
-    G.rightDerivedFunctor ⋙ (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⟶
-      (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory ⋙
-        ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor :=
-  (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-    (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (constantInterchange F).hom)).natTrans
-
-/-- The evaluation comparison is the mate of the inverse of the canonical descended
-termwise/evaluation identity. Source: Stacks 07A7, 0DVC
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
-def evaluationComparison (a : F ⊣ G) (n : ℕᵒᵖ) :
-    ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor ⋙
-        ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ⟶
-      ((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory ⋙ G.rightDerivedFunctor :=
-  (mateEquiv (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-    a.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (towerDerivedEvaluationInterchange F n).inv)).natTrans
 
 /-- The canonical cochain-level unit of the existing total right derived functor.
 It is obtained from its homotopy-level unit using the quotient factorization isomorphisms.
@@ -193,13 +84,6 @@ def cochainUnit (G : A ⥤ B) [G.Additive] (I : CochainComplex A ℤ) :
     DerivedCategory.Qh.map ((G.mapHomotopyCategoryFactors (.up ℤ)).inv.app I) ≫
     G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient A (.up ℤ)).obj I) ≫
     G.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).hom.app I)
-
-omit [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
-  [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] in
-private theorem cochainUnit_isIso (I : CochainComplex A ℤ) [I.IsKInjective] :
-    IsIso (cochainUnit G I) := by
-  unfold cochainUnit
-  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -285,18 +169,6 @@ private theorem localizedSquare_fac (θ : g ⋙ F' ≅ F ⋙ h)
   erw [← hc']
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
-/-- The termwise inverse-image comparison, with component θ at each level.
-Source: Stacks 07A7, termwise diagram application
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
-def towerSquare (θ : g ⋙ F' ≅ F ⋙ h) :
-    (Functor.whiskeringRight ℕᵒᵖ B B').obj g ⋙
-        (Functor.whiskeringRight ℕᵒᵖ B' A').obj F' ≅
-      (Functor.whiskeringRight ℕᵒᵖ B A).obj F ⋙
-        (Functor.whiskeringRight ℕᵒᵖ A A').obj h :=
-  NatIso.ofComponents (fun T => Functor.isoWhiskerLeft T θ) (fun {T U} t => by
-    ext n
-    exact θ.hom.naturality (t.app n))
-
 
 variable {F F' g h} {G : A ⥤ B} {G' : A' ⥤ B'} [G.Additive] [G'.Additive]
   [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions A']
@@ -374,43 +246,6 @@ theorem localized_mate_cochain_normalization (a : F ⊣ G) (a' : F' ⊣ G')
         cochainUnit G' ((h.mapHomologicalComplex (.up ℤ)).obj I) := by
   exact localized_mate_cochain a a' θ I
 
-/-- Equality of the actual ordinary and tower square mates after constants and evaluation.
-Neither equality requires the mate to be invertible or derived evaluation to be faithful.
-Source: Stacks 07A7 and the explicit counit-transpose calculation
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
-def SquareCompatible (a : F ⊣ G) (a' : F' ⊣ G') (θ : g ⋙ F' ≅ F ⋙ h) : Prop :=
-  (∀ K : DerivedCategory A,
-    (constantInterchange g).inv.app (G.rightDerivedFunctor.obj K) ≫
-      ((Functor.whiskeringRight ℕᵒᵖ B B').obj g).mapDerivedCategory.map
-        ((constantComparison a).app K) ≫
-      (mateEquiv (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-        (a'.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ (localizedSquare _ _ _ _ (towerSquare F F' g h θ)).hom)).app
-          ((Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory.obj K) =
-    (Functor.const ℕᵒᵖ : B' ⥤ _).mapDerivedCategory.map
-        ((mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-          a'.mapDerivedCategoryRightDerivedAdjunction
-          (TwoSquare.mk _ _ _ _ (localizedSquare F F' g h θ).hom)).app K) ≫
-      (constantComparison a').app (h.mapDerivedCategory.obj K) ≫
-      ((Functor.whiskeringRight ℕᵒᵖ A' B').obj G').rightDerivedFunctor.map
-        ((constantInterchange h).inv.app K)) ∧
-  (∀ (n : ℕᵒᵖ) (K : DerivedCategory (ℕᵒᵖ ⥤ A)),
-    ((evaluation ℕᵒᵖ B').obj n).mapDerivedCategory.map
-        ((mateEquiv (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-          (a'.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
-          (TwoSquare.mk _ _ _ _
-            (localizedSquare _ _ _ _ (towerSquare F F' g h θ)).hom)).app K) ≫
-      (evaluationComparison a' n).app
-        (((Functor.whiskeringRight ℕᵒᵖ A A').obj h).mapDerivedCategory.obj K) ≫
-      G'.rightDerivedFunctor.map ((towerDerivedEvaluationInterchange h n).hom.app K) =
-    (towerDerivedEvaluationInterchange g n).hom.app
-        (((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor.obj K) ≫
-      g.mapDerivedCategory.map ((evaluationComparison a n).app K) ≫
-      (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-        a'.mapDerivedCategoryRightDerivedAdjunction
-        (TwoSquare.mk _ _ _ _ (localizedSquare F F' g h θ).hom)).app
-          (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory.obj K))
-
 end Square
 
 section ComparisonProofs
@@ -424,65 +259,6 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
 
 
-omit [Abelian.HasKInjectiveResolutions A]
-  [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] in
-private theorem evaluation_localizedSquare (n : ℕᵒᵖ) :
-    localizedSquare ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) F
-      ((evaluation ℕᵒᵖ B).obj n) ((evaluation ℕᵒᵖ A).obj n) (Iso.refl _) =
-      (towerDerivedEvaluationInterchange F n).symm := by
-  unfold localizedSquare towerDerivedEvaluationInterchange
-  rw [derivedNatIso_refl]
-  ext X
-  simp
-
-omit [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
-  [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] in
-private theorem evaluation_mate (a : F ⊣ G) (n : ℕᵒᵖ) :
-    (mateEquiv (a.whiskerRight ℕᵒᵖ) a
-      (TwoSquare.mk ((evaluation ℕᵒᵖ B).obj n)
-        ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) F ((evaluation ℕᵒᵖ A).obj n)
-        (𝟙 (((evaluation ℕᵒᵖ B).obj n) ⋙ F)))).natTrans =
-      𝟙 (((evaluation ℕᵒᵖ A).obj n) ⋙ G) := by
-  ext T
-  simp [mateEquiv]
-
-private theorem evaluation_normalization (a : F ⊣ G) (n : ℕᵒᵖ)
-    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
-    ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategoryFactors.inv.app
-          ((((Functor.whiskeringRight ℕᵒᵖ A B).obj G).mapHomologicalComplex (.up ℤ)).obj I) ≫
-        ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory.map
-          (cochainUnit ((Functor.whiskeringRight ℕᵒᵖ A B).obj G) I) ≫
-        (evaluationComparison a n).app (DerivedCategory.Q.obj I) ≫
-        G.rightDerivedFunctor.map
-          (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategoryFactors.hom.app I) =
-      cochainUnit G ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj I) := by
-  have ht := localized_mate_cochain (a.whiskerRight ℕᵒᵖ) a
-    (g := (evaluation ℕᵒᵖ B).obj n) (h := (evaluation ℕᵒᵖ A).obj n) (Iso.refl _) I
-  rw [evaluation_localizedSquare] at ht
-  erw [evaluation_mate] at ht
-  have hid : (NatTrans.mapHomologicalComplex
-      (𝟙 (((evaluation ℕᵒᵖ A).obj n) ⋙ G)) (.up ℤ)).app I = 𝟙 _ := by
-    ext k
-    rfl
-  erw [hid, Functor.map_id, Category.id_comp] at ht
-  exact ht
-
-
-private theorem evaluation_isIso (a : F ⊣ G) (n : ℕᵒᵖ) :
-    IsIso (evaluationComparison a n) := by
-  apply isIso_of_kinjective_components
-  intro I hI
-  have := hI
-  have : CochainComplex.IsKInjective
-      ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj I) :=
-    tower_evaluation_isKInjective A I n
-  have := cochainUnit_isIso (G := (Functor.whiskeringRight ℕᵒᵖ A B).obj G) I
-  have hs := cochainUnit_isIso (G := G)
-    ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex (.up ℤ)).obj I)
-  rw [← evaluation_normalization a n I] at hs
-  simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using hs
 
 end ComparisonProofs
 

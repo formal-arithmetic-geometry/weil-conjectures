@@ -26,8 +26,11 @@ import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEval
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Submission.WeilConjectures.RingTheory.StrictHenselizationTriples
-import Submission.WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
-import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Submission.WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselization
+import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
+import Submission.WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationRingResidue
 import Submission.WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
@@ -117,25 +120,6 @@ no arbitrary witness or sheafification isomorphism supplies its data. -/
         (upperStar AddCommGrpCat.{v + 1}
           (Scheme.strictHenselizationStructuralMap s)) n).app L)
 
-/-- The forward map is the uniquely specified restriction followed by exact homology.
-Source: Stacks Project, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-small-model-cohomology-germs).
-Proof: unfold the construction; the forward map of `asIso r` is `r`. -/
-theorem smallModel_strictLocalCohomologySourceIso_hom {S : Scheme.{v}}
-    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
-    (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
-    (n : ℤ) :
-    (smallModel_strictLocalCohomologySourceIso s L n).hom =
-      Classical.choose ((strictLocalSectionCone s).existsUnique_restriction
-        ((DerivedCategory.Plus.homologyFunctor _ n).obj L)) ≫
-      (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
-        AddCommGrpCat.{v + 1}).map
-        (((upperStar AddCommGrpCat.{v + 1}
-          (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlusHomologyFunctorIso
-            n).hom.app L) := by
-  unfold smallModel_strictLocalCohomologySourceIso
-  rfl
-
 /-- Canonical source legs: a presheaf germ, the canonical map to the cohomology-sheaf
 stalk, and the unique strict-local germ restriction transported through exact inverse image.
 Source: Stacks, Tags 03Q8 and 03Q9
@@ -172,33 +156,5 @@ noncomputable def smallModel_strictLocalCohomologySourceLegs {S : Scheme.{v}}
         (fun q : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine q.1.left)
     exact (Scheme.pointSmallEtale s).presheafFiberCocone
       (strictLocalCohomologyPresheaf L n) |>.w (N.map a.unop).op
-
-set_option backward.isDefEq.respectTransparency false in
-/-- A source leg is the homology section restricted along its fixed cone section.
-Source: Stacks Project, Tag 03Q9, restriction from pointed neighbourhoods
-(blueprint: def-weil-pbc-small-model-cohomology-germs).
-Proof: naturality moves the homology comparison across the presheaf germ. The defining
-equation of the unique section-cone restriction then gives the asserted section map. -/
-theorem smallModel_strictLocalCohomologySourceLegs_app {S : Scheme.{v}}
-    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
-    (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
-    (n : ℤ) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
-    (smallModel_strictLocalCohomologySourceLegs s K n).app (op i) =
-      (strictLocalCohomologyGermMap K n).app (op ((strictLocalNeighbourhoods s).obj i)) ≫
-        (strictLocalSectionCone s).restriction
-          ((DerivedCategory.Plus.homologyFunctor _ n).obj K) i ≫
-        (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
-          AddCommGrpCat.{v + 1}).map
-          (((upperStar AddCommGrpCat.{v + 1}
-            (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlusHomologyFunctorIso
-              n).hom.app K) := by
-  classical
-  dsimp only [smallModel_strictLocalCohomologySourceLegs]
-  rw [smallModel_strictLocalCohomologySourceIso_hom]
-  erw [(Scheme.pointSmallEtale s).toPresheafFiber_naturality_assoc]
-  have hr := (Classical.choose_spec ((strictLocalSectionCone s).existsUnique_restriction
-    ((DerivedCategory.Plus.homologyFunctor _ n).obj K))).1 i
-  change _ ≫ (_ ≫ Classical.choose _) ≫ _ = _
-  erw [hr]
 
 end AlgebraicGeometry.Etale

@@ -5,7 +5,137 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStalkModels
+public import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerData
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicEtaleStalkData
+import Submission.WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedMapPresheaves
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantModel
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.Finiteness.Defs
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.SiteBoundedConstantGradedModel
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantExtensionTower
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteConstantExtensionTower
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantConeStep
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteLocallyConstantWeakSerre
+import Mathlib.CategoryTheory.ObjectProperty.Kernels
+import Mathlib.CategoryTheory.ObjectProperty.Extensions
+import Submission.WeilConjectures.CategoryTheory.Site.SiteModuleSheafConstantRingEquivalenceSupplement
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantSerre
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf
+import Submission.WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageSupplement
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionExact
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeConstantLocalLinear
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleHomSurjective
+import Mathlib.CategoryTheory.Sites.SheafHom
+import Mathlib.CategoryTheory.Sites.Subsheaf
+import Submission.WeilConjectures.CategoryTheory.LocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.LocalModuleIso
+import Submission.WeilConjectures.CategoryTheory.ConstantLocalModuleHom
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctor
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleUnit
+import Mathlib.Algebra.Module.FinitePresentation
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleOverHom
+import Submission.WeilConjectures.CategoryTheory.FinitePresentationLocalLift
+import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Submission.WeilConjectures.CategoryTheory.Sites.ConstantForget
+import Mathlib.RingTheory.Noetherian.Basic
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeExtensionLocalPresentation
+import Submission.WeilConjectures.CategoryTheory.ConstantFiniteFreeLocalLift
+import Submission.WeilConjectures.CategoryTheory.FiniteSectionsEpiLift
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.Abelian.Exact
+import Submission.WeilConjectures.CategoryTheory.ExtensionCokernelPresentation
+import Mathlib.Algebra.Category.ModuleCat.Kernels
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+import Mathlib.RingTheory.Finiteness.Cardinality
+import Submission.WeilConjectures.CategoryTheory.FiniteTypeRestrictionMapExact
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.LinearAlgebra.StdBasis
+import Submission.WeilConjectures.AlgebraicGeometry.BoundedTopMorphisms
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.RingTheory.Finiteness.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.SiteFiniteConstantComplexDescent
+import Mathlib.Algebra.Category.ModuleCat.Limits
+import Mathlib.Algebra.Homology.Additive
+import Mathlib.Data.Int.Interval
+import Mathlib.CategoryTheory.Category.ULift
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Submission.WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Mathlib.Topology.Connected.Clopen
+import Mathlib.CategoryTheory.Sites.Point.Over
+import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.RingTheory.FiniteConeFreeModel
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Mathlib.Algebra.Homology.Homotopy
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.Free.FiniteFreeEtaleAcyclicHomotopy
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import Submission.WeilConjectures.RingTheory.RingPseudoCoherent
+import Submission.WeilConjectures.RingTheory.FiniteFreeResolution
+import Submission.WeilConjectures.RingTheory.PseudoCoherentOfCohomology
+import Mathlib.Algebra.Homology.Single
+import Submission.WeilConjectures.RingTheory.PseudoCoherentIffAllM
+import Submission.WeilConjectures.RingTheory.MPseudoCoherentVanishingBase
+import Submission.WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
+import Submission.WeilConjectures.CategoryTheory.TruncationTriangle
+import Mathlib.CategoryTheory.Abelian.Projective.Extend
+import Mathlib.LinearAlgebra.Dimension.Free
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.SixFunctors.BaseChange.Pasting
 public import Submission.WeilConjectures.AlgebraicGeometry.Source.SourceIsomorphismNormalizedPresheafEvaluation
 import Submission.WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicActualNormalization
 
@@ -144,28 +274,6 @@ structure FinitePerfectAdicIsomorphismPresentation
     (model U W f (n + 1)).hom ≫
       (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op
 
-private theorem conjugate_normalization_square
-    {CR CS D : Type*} [Category CR] [Category CS] [Category D]
-    (H : CS ⥤ CR) (F : CR ⥤ D) (G : CS ⥤ D) (α : H ⋙ F ≅ G)
-    {C K : CR} {C' K' : CS} (dC : C ⟶ H.obj C') (dK : K ⟶ H.obj K')
-    {A A' B B' : D} (a : A ⟶ A') (b : B ⟶ B')
-    (actual : F.obj K ≅ A) (actual' : G.obj K' ≅ A')
-    (model : F.obj C ≅ B) (model' : G.obj C' ≅ B')
-    (ha : F.map dK ≫ α.hom.app K' ≫ actual'.hom = actual.hom ≫ a)
-    (hb : F.map dC ≫ α.hom.app C' ≫ model'.hom = model.hom ≫ b)
-    (e : C ≅ K) (e' : C' ≅ K')
-    (he : e.hom ≫ dK = dC ≫ H.map e'.hom) :
-    b ≫ (model'.symm ≪≫ G.mapIso e' ≪≫ actual').hom =
-      (model.symm ≪≫ F.mapIso e ≪≫ actual).hom ≫ a := by
-  apply (cancel_epi model.hom).mp
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
-    Iso.hom_inv_id_assoc]
-  rw [← Category.assoc model.hom b, ← hb]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← α.hom.naturality_assoc e'.hom]
-  change F.map dC ≫ F.map (H.map e'.hom) ≫ α.hom.app K' ≫ actual'.hom = _
-  rw [← F.map_comp_assoc, ← he, F.map_comp, Category.assoc, ha]
-
 /-- Apply the scalar-forgetting realization and the two specified level comparisons.
 Source: Stacks Tag 09C6.
 (blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
@@ -181,103 +289,5 @@ def FinitePerfectAdicIsomorphismPresentation.transport
       (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).obj
         (op n) :=
   (D.model U W f n).symm ≪≫ (D.realization U W f n).mapIso e ≪≫ D.actual U W f n
-
-/-- The two normalization identities transport a raw square to the actual diagrams.
-Source: Stacks Tag 09C6; naturality of the coefficient comparison.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
-theorem FinitePerfectAdicIsomorphismPresentation.transport_square
-    {X : Scheme.{t}} {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
-    {M : DerivedCategory (CompletedAdicModules X d)} {V : X.Etale}
-    {T : FinitePerfectAdicAlgebraTower d}
-    (D : FinitePerfectAdicIsomorphismPresentation X d M V T)
-    (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ)
-    (e : (localProEtaleComparison U.hom
-        (finitePerfectAdicIsomorphismRing d (n + 1))).obj (D.C (n + 1)) ≅
-      (localProEtaleComparison U.hom
-        (finitePerfectAdicIsomorphismRing d (n + 1))).obj (D.K (n + 1)))
-    (e' : (localProEtaleComparison U.hom (finitePerfectAdicIsomorphismRing d n)).obj (D.C n) ≅
-      (localProEtaleComparison U.hom (finitePerfectAdicIsomorphismRing d n)).obj (D.K n))
-    (he : e.hom ≫ localProEtaleNormalization U.hom
-        (finitePerfectAdicIsomorphismQuotient d n) (D.dK n) =
-      localProEtaleNormalization U.hom (finitePerfectAdicIsomorphismQuotient d n) (D.dC n) ≫
-        (normalizationRestrict (ProEt.topology U.left)
-          (finitePerfectAdicIsomorphismQuotient d n)).map e'.hom) :
-    (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op ≫
-        (D.transport U W f n e').hom =
-      (D.transport U W f (n + 1) e).hom ≫
-        (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).map
-          (homOfLE (Nat.le_succ n)).op := by
-  exact conjugate_normalization_square _ _ _ (D.scalar U W f n) _ _ _ _
-    (D.actual U W f (n + 1)) (D.actual U W f n)
-    (D.model U W f (n + 1)) (D.model U W f n)
-    (D.actual_normalized U W f n) (D.model_normalized U W f n) e e' he
-
-/-- Descend finite-level models and construct their etale normalization presheaf maps.
-This supplies no pro-etale sheaf-section evaluation or evaluated reduction square.
-
-Source: Stacks Project, Tag 09C6, finite quotient descent and normalized algebraic levels;
-Tag 09BV, Isom presheaves; Tag 06YY, universal normalization arrows.
-(blueprint: lem-weil-pbc-finite-perfect-adic-isomorphism-presentation).
-
-Proof: descend the finite quotient complexes restricted to V by finite-ring derived
-comparison. Lift the supplied perfect algebraic levels to the coefficient universe and
-apply the exact constant functor to obtain C; use the descended quotient levels for K.
-Separate local markings identify K with C on covering sieves. The perfect levels over
-finite rings are bounded with finite cohomology; their exact constant realizations and
-local identifications give boundedness and lisse cohomology for C and K. Every geometric
-point lifts to each covering sieve, whose marking gives a local Isom section and hence
-an inhabited stalk of its sheafification. Descend the actual consecutive quotient maps
-by full faithfulness. The algebraic normalization and balancing of the strict derived
-quotient tower make both consecutive arrows universal for scalar restriction. On each
-etale slice, extend an isomorphism by scalars and conjugate by these two universal arrows.
-Uniqueness of universal factorizations makes this construction natural in the slice and
-proves the generator normalization square; this gives p. For transport, compare the
-pulled descended K with the actual finite quotient, and the pulled constant C with the
-realization of the supplied algebraic level. Forget quotient scalars, conjugate by these
-comparisons, and apply exact slice restriction along W to U. The coefficient compatibility
-of φ gives the two normalization identities relating these realized arrows to the
-specified strict tower and model transitions. Naturality of the coefficient comparison
-then proves transport_square separately, rather than assuming it in the presentation.
-There is no inverse limit or simultaneous marking choice. The zero ring and empty chart
-use the same constructions. -/
-theorem finitePerfectAdic_isomorphism_presentation
-    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
-    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
-      completedAdicFiniteCommRing X d n)
-    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
-    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
-    (T : FinitePerfectAdicAlgebraTower d)
-    (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))
-    (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :
-    Nonempty (FinitePerfectAdicIsomorphismPresentation X d M V T) := by
-  classical
-  obtain ⟨E⟩ := finitePerfectAdic_actual_normalization X d φ hφ hcompat M V T hperfect hmark
-  have h (n : ℕ) := etaleUniversalNormalization_presheaf V.left
-    (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
-    (finitePerfectAdicEtaleConstant V.left T (n + 1)) (E.K (n + 1))
-    (finitePerfectAdicEtaleConstant V.left T n) (E.K n)
-    (finitePerfectAdicEtaleConstantTransition V.left T n) (E.dK n)
-    (finitePerfectAdicEtaleConstant_normalization V.left T n) (E.universalK n)
-  choose p hp using h
-  exact ⟨{
-    C := finitePerfectAdicEtaleConstant V.left T
-    K := E.K
-    boundedC := fun n ↦ (finitePerfectAdicEtaleConstant_cohomology
-      V.left T n (hperfect n)).1
-    lisseC := fun n ↦ (finitePerfectAdicEtaleConstant_cohomology
-      V.left T n (hperfect n)).2
-    boundedK := E.boundedK
-    lisseK := E.lisseK
-    stalk := E.stalk
-    dC := finitePerfectAdicEtaleConstantTransition V.left T
-    dK := E.dK
-    p := p
-    normalized := hp
-    realization := E.realization
-    scalar := E.scalar
-    actual := E.actual
-    model := E.model
-    actual_normalized := E.actual_normalized
-    model_normalized := E.model_normalized }⟩
 
 end AlgebraicGeometry.Scheme

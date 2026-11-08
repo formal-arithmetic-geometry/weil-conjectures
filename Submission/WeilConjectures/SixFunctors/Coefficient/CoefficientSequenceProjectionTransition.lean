@@ -237,16 +237,6 @@ private theorem transitionAb_fac (M : coefficientSequenceModules l E W) {m n : �
       SheafOfModules.restrictScalars.{u} (f ≫ g) := normalizedDVRRestrictionCompIso f g
   e₀ ≪≫ eqToIso (congrArg (fun z ↦ SheafOfModules.restrictScalars.{u} z) e)
 
-private theorem restrictCompIso_inv_underlying
-    {C : Type*} [Category C] {J : GrothendieckTopology C}
-    {R S T : Sheaf J RingCat} (f : R ⟶ S) (g : S ⟶ T) (h : R ⟶ T)
-    (e : f ≫ g = h) (M : SheafOfModules.{u} T) (U : Cᵒᵖ) :
-    ((SheafOfModules.toSheaf R).map ((restrictCompIso f g h e).inv.app M)).hom.app U =
-      𝟙 (M.val.presheaf.obj U) := by
-  cases e
-  unfold restrictCompIso normalizedDVRRestrictionCompIso
-  rfl
-
 
 private theorem restrictedUnderlying_heq
     {C : Type*} [Category C] {J : GrothendieckTopology C}

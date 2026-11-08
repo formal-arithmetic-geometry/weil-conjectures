@@ -260,15 +260,6 @@ theorem hasEigenvalue_dual_iff [FiniteDimensional k V] {g : G} {α : k} :
 
 variable {ρ} {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k G V'}
 
-/-- Equivalent representations have equivalent contragredients. -/
-noncomputable def Equiv.dualCongr (e : ρ.Equiv σ) : ρ.dual.Equiv σ.dual :=
-  .mk e.toLinearEquiv.symm.dualMap fun w ↦ by
-    refine LinearMap.ext fun f ↦ LinearMap.ext fun x ↦ ?_
-    simp only [LinearEquiv.coe_coe, LinearEquiv.dualMap_apply, dual_apply,
-      Module.Dual.transpose_apply, LinearMap.comp_apply]
-    congr 1
-    exact (e.symm.apply_apply w⁻¹ x).symm
-
 end Dual
 
 end Representation

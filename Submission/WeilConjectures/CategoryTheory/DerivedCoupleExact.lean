@@ -8,8 +8,7 @@ module
 
 public import Submission.WeilConjectures.CategoryTheory.ExactCouple
 import Submission.WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities
-import Submission.WeilConjectures.CategoryTheory.DerivedCoupleMapUniqueness
-import Submission.WeilConjectures.CategoryTheory.DerivedCoupleBoundaryVanishes
+import Submission.WeilConjectures.CategoryTheory.DerivedCoupleMapConstruction
 import Submission.WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 set_option autoImplicit true
@@ -32,82 +31,6 @@ universe u v
 open CategoryTheory.Limits
 
 namespace CategoryTheory.BigradedExactCouple
-
-/-- Kernel and image identities, and unique induced exact maps, for a type-`s` couple.
-Source: Stacks Project, Tags 011R and 0AMJ (blueprint: lem-sp-derived-couple-exact).
-
-Proof (steps 0--10 of the node). Work with generalized elements `T ⟶ Y`, allowing
-precomposition with epimorphic refinements, as in `lem-sp-abelian-refinements`.
-Membership in kernels means annihilation; membership in images means lifting after
-an epimorphic refinement. Membership descends along epimorphisms because a subobject
-in an abelian category is the kernel of its cokernel. These tests determine subobjects.
-The three complex relations give `d d = g f g f = 0`. Consequently boundaries are cycles,
-and the projection from cycles to their quotient is the cokernel of the lifted incoming
-boundary. The kernel test gives `ker d = f⁻¹(ker g) = f⁻¹(im alpha)`.
-The refined image test gives `im d = g(im f) = g(ker alpha)`.
-Restrict `alpha` to its image; the inclusion is mono, so this restriction is unique.
-The cycle restriction of `f` lands in `im alpha` by the kernel identity and kills
-boundaries by `f g = 0`, so it descends uniquely through the cycle quotient.
-The map `g` lands in cycles by `g f g = 0`. Composing with the quotient kills
-`ker alpha = im f`, so it descends uniquely through the image epimorphism of `alpha`.
-For exactness between `f'` and `alpha'`, lift an element killed by `alpha'` along `f`
-after refinement; its lift is a cycle because the image of `alpha` is killed by `g`.
-For exactness between `g'` and `f'`, lift to cycles along the quotient, then lift along
-`g` using `ker f = im g`; the image under the image epimorphism of `alpha` is a `g'`-lift.
-For exactness between `alpha'` and `g'`, lift along the image epimorphism of `alpha`.
-If its `g`-image is a boundary, subtract an `f`-lift of that boundary after refinement.
-The difference is killed by `g`, hence lifts along `alpha`; projecting this lift to
-`im alpha` gives the required `alpha'`-preimage. The three complex identities follow
-from the defining commutative equations, cancellation of mono inclusions and epi
-projections, and the original complex identities. These chases use only the abelian
-category axioms and `lem-sp-abelian-refinements`, not an embedding theorem. -/
-theorem derived_couple_exact {C : Type u} [Category.{v} C] [Abelian C]
-    {s : ℕ} (X : BigradedExactCouple C s) :
-    (∀ p q : ℤ,
-      let a : X.D (p + 3) (q - 2) ⟶ X.D (p + 2) (q - 1) :=
-        X.alpha (p + 3) (q - 2) ≫ eqToHom (by congr 1 <;> omega)
-      kernelSubobject (X.d p q) =
-          (Subobject.pullback (X.f p q)).obj (kernelSubobject (X.g (p + 2) (q - 1))) ∧
-      kernelSubobject (X.d p q) =
-          (Subobject.pullback (X.f p q)).obj (imageSubobject a) ∧
-      kernelSubobject (X.g (p + 2) (q - 1)) = imageSubobject a ∧
-      imageSubobject (X.d p q) =
-          imageSubobject ((imageSubobject (X.f p q)).arrow ≫ X.g (p + 2) (q - 1)) ∧
-      imageSubobject (X.d p q) =
-          imageSubobject
-            ((kernelSubobject (X.alpha (p + 2) (q - 1))).arrow ≫
-              X.g (p + 2) (q - 1)) ∧
-      imageSubobject (X.f p q) = kernelSubobject (X.alpha (p + 2) (q - 1)) ∧
-      imageSubobject (kernel.ι (X.d p q) ≫ X.f p q) ≤ imageSubobject a) ∧
-    (∀ p q : ℤ,
-      X.gToCycles p q ≫ kernel.ι (X.d (p + s) (q - s)) = X.g p q) ∧
-    (∀ p q : ℤ, X.d p q ≫ X.d (p + 2 + s) (q - 1 - s) = 0) ∧
-    (∀ p q : ℤ,
-      kernel.ι (factorThruImage (X.alpha (p + 1) (q - 1))) ≫
-        X.gToCycles (p + 1) (q - 1) ≫
-          X.derivedEProjection ((p + 1) + s) ((q - 1) - s) = 0) ∧
-    (∃ M : DerivedMaps X,
-      (∀ (p q : ℤ) (a : X.derivedD p q ⟶ X.derivedD (p - 1) (q + 1)),
-        a ≫ X.derivedDInclusion (p - 1) (q + 1) = X.derivedDInclusion p q ≫ X.alpha p q →
-          a = M.alpha p q) ∧
-      (∀ (p q : ℤ) (b : X.derivedE p q ⟶ X.derivedD (p + 2) (q - 1)),
-        X.derivedEProjection p q ≫ b ≫ X.derivedDInclusion (p + 2) (q - 1) =
-            kernel.ι (X.d p q) ≫ X.f p q →
-          b = M.f p q) ∧
-      (∀ (p q : ℤ) (c : X.derivedD p q ⟶ X.derivedE (p + (s + 1)) (q - (s + 1))),
-        factorThruImage (X.alpha (p + 1) (q - 1)) ≫ c =
-            X.gToCycles (p + 1) (q - 1) ≫
-              X.derivedEProjection ((p + 1) + s) ((q - 1) - s) ≫
-                eqToHom (by congr 1 <;> omega) →
-          c = M.g p q))  := by
-  have hk := derived_couple_kernel_identities X
-  obtain ⟨M, hM⟩ := derived_couple_map_uniqueness X
-  refine ⟨hk, ?_, ?_, ?_, ⟨M, hM.1, hM.2.1, hM.2.2⟩⟩
-  · intro p q
-    simp [gToCycles]
-  · intro p q
-    exact X.d_comp_d p q
-  · exact derived_couple_boundary_vanishes X
 
 
 private noncomputable def iterInclusion {C : Type u} [Category.{v} C] [Abelian C]

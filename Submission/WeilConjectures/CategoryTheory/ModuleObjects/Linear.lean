@@ -187,13 +187,6 @@ lemma linearOfRingHom_smul_id (φ : K →+* Γ R) (a : K) (M : Mod C R) :
     a • 𝟙 M = (smulNatTrans (φ a).hom).app M :=
   Mod.hom_ext _ _ ((linearOfRingHom_smul_hom φ a (𝟙 M)).trans (Category.id_comp _))
 
-variable (R) in
-/-- The category of module objects over a commutative algebra object `R` is linear over the
-global sections of `R`. -/
-@[instance_reducible]
-noncomputable def linearGlobalSections : Linear (Γ R) (Mod C R) :=
-  linearOfRingHom (RingHom.id _)
-
 /-- A functor `F : Mod C R ⥤ Mod D S` of categories of module objects over commutative algebra
 objects, `K`-linear for `K →+* Γ R` and `K →+* Γ S`, is `K`-linear as soon as it sends the action
 of `φ a` to the action of `ψ a`. -/

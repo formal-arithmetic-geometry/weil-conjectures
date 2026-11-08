@@ -136,21 +136,6 @@ noncomputable def mapOfNatIsoPowSuccIsoOfIsPullback (hf : IsPullback eX.hom f f 
     exact (powSuccStr_hom_eq_of_isPullback eX eY hf P compP Q compQ H h hcomp A.str _
       rfl n).symm)
 
-/-- The underlying morphism of `mapOfNatIsoPowSuccIsoOfIsPullback` is the identity. -/
-lemma mapOfNatIsoPowSuccIsoOfIsPullback_hom_hom_f (hf : IsPullback eX.hom f f eY.hom)
-    (P : (X ⟶ X) → D ⥤ D) (compP : ∀ g g' : X ⟶ X, P (g ≫ g') ≅ P g' ⋙ P g)
-    (Q : (Y ⟶ Y) → E ⥤ E) (compQ : ∀ g g' : Y ⟶ Y, Q (g ≫ g') ≅ Q g' ⋙ Q g) (H : D ⥤ E)
-    (h : ∀ {gX : X ⟶ X} {gY : Y ⟶ Y}, IsPullback gX f f gY → (H ⋙ Q gY ≅ P gX ⋙ H))
-    (hcomp : ∀ {gX gX' : X ⟶ X} {gY gY' : Y ⟶ Y} (s : IsPullback gX f f gY)
-      (s' : IsPullback gX' f f gY') (a : D),
-      (h (s.paste_horiz s')).hom.app a ≫ H.map ((compP gX gX').hom.app a) =
-        (compQ gY gY').hom.app (H.obj a) ≫ (Q gY).map ((h s').hom.app a) ≫
-          (h s).hom.app ((P gX').obj a))
-    (A : IsoAlgebra (P eX.hom)) (n : ℕ) :
-    (mapOfNatIsoPowSuccIsoOfIsPullback eX eY hf P compP Q compQ H h hcomp A n).hom.hom.f =
-      𝟙 (H.obj A.carrier) :=
-  rfl
-
 end Iso
 
 end CategoryTheory
@@ -208,12 +193,5 @@ noncomputable def weilLowerShriekPowSuccIso (K : WeilBoundedConstructible ℓ eX
       asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ s))
     (fun s s' K ↦ boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz_comp ℓ s s' K)
     K n
-
-/-- The underlying morphism of `weilLowerShriekPowSuccIso` is the identity of `Rf_! K`. -/
-@[simp]
-lemma weilLowerShriekPowSuccIso_hom_hom_f (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) :
-    (weilLowerShriekPowSuccIso ℓ hf K n).hom.hom.f =
-      𝟙 ((boundedConstructibleLowerShriek ℓ f).obj K.carrier) :=
-  Iso.mapOfNatIsoPowSuccIsoOfIsPullback_hom_hom_f _ _ _ _ _ _ _ _ _ _ K n
 
 end AlgebraicGeometry.ProEtale.CondensedRing

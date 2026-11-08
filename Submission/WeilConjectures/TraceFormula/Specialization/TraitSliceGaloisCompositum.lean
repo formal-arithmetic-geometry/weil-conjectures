@@ -140,15 +140,6 @@ noncomputable def traitGenericTensorResidueEquiv (htr : Algebra.trdeg k' K ≤ 1
     (((traitGenericTensorLift k' K).quotientKerEquivRange).trans
       (RingEquiv.subringCongr (range_traitGenericTensorLift k' K)))
 
-/-- The nilradical of `Ω ⊗_F F_K` is a maximal ideal. -/
-theorem isMaximal_nilradical_traitGenericField_tensorProduct (htr : Algebra.trdeg k' K ≤ 1) :
-    letI := (traitLaurentFieldMap k' K).toAlgebra
-    (nilradical (traitGenericField k' ⊗[FractionRing (PowerSeries k')]
-      FractionRing (PowerSeries K))).IsMaximal := by
-  let := (traitLaurentFieldMap k' K).toAlgebra
-  rw [Ideal.Quotient.maximal_ideal_iff_isField_quotient]
-  exact (traitGenericTensorResidueEquiv htr).toMulEquiv.isField (Field.toIsField _)
-
 variable (k' K) in
 /-- The compositum `F_K·F^sep = F_K(F^sep)` inside `Ω_K`. -/
 noncomputable def traitGenericSepCompositum :

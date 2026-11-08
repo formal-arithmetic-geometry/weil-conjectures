@@ -46,11 +46,6 @@ def valuationFiltration {J : Type*} (v : J → Valuation E ℤᵐ⁰)
     · rw [Algebra.smul_def, map_mul, hv1 j c hc, one_mul]
       exact hf j
 
-theorem mem_valuationFiltration {J : Type*} {v : J → Valuation E ℤᵐ⁰}
-    {hv1 : ∀ j (c : k), c ≠ 0 → v j (algebraMap k E c) = 1} {n : ℕ} {f : E} :
-    f ∈ valuationFiltration v hv1 n ↔ ∀ j, v j f ≤ WithZero.exp (n : ℤ) :=
-  Iff.rfl
-
 /-- If only finitely many valuations of a family have a pole at `f`, the pole orders of `f`
 are bounded. -/
 theorem exists_bound_of_finite {J : Type*} (v : J → Valuation E ℤᵐ⁰) (f : E)

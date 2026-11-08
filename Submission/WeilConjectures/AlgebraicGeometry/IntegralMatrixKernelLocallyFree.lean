@@ -25,13 +25,6 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-private abbrev LocalFree {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop :=
-  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-    Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj R)
-      (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).obj M)
-
 private theorem localFree_of_free {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}

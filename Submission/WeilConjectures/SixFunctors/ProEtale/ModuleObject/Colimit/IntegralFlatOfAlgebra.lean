@@ -59,14 +59,6 @@ instance :
     ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (padicIntegersCondensedRingToPadicSubfieldCondensedRing.{u} ℓ E)))
 
-lemma padicIntegersRingObjToSubfieldRingObj_hom_app_apply (S : Profinite.{u}ᵒᵖ) :
-    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-    ∀ a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E),
-      (padicIntegersRingObjToSubfieldRingObj ℓ E).hom.app S a =
-        ULift.up ((⟨Subtype.val, continuous_subtype_val⟩ :
-          C(PadicAlgCl.integers ℓ E, E)).comp a.down) :=
-  fun _ ↦ rfl
-
 /-- The map `c_k = ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲`, where `φ` is the inclusion. -/
 noncomputable def padicIntegersRingObjToSubfieldRingObjInvPow (k : ℕ) :
     letI := PadicAlgCl.normedFieldOfAlgebra ℓ E

@@ -10,7 +10,7 @@ public import Submission.WeilConjectures.SixFunctors.BaseChange.Square
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Submission.WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleUnitSectionRestriction
 import Submission.WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import Submission.WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison

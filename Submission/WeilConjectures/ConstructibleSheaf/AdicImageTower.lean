@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.ConstructibleSheaf.UniformMittagLeffler
+public import Submission.WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import Submission.WeilConjectures.ConstructibleSheaf.StalkCardinality
+public import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+public import Mathlib.Topology.NoetherianSpace
 public import Submission.WeilConjectures.CategoryTheory.Abelian.AdicImageTower
 
 set_option autoImplicit true
@@ -210,72 +213,7 @@ theorem exists_linearEquiv_sheafFiber [IsDomain Λ] [IsDiscreteValuationRing Λ]
   H.exists_linearEquiv_map_adicImageTower ℓ c _ (hH.exists_eval_eq s) (hH.eval_eq_zero_iff s)
     hℓ hℓ' (hH.pow_smul_eq_zero s)
 
-include hH in
-/-- **The rank of the `ℓ`-adic image tower is locally constant**, hence constant on a connected
-scheme: over a discrete valuation ring `Λ` in which `ℓ` is a nonzero nonunit, if the `Hₙ` are
-finite locally constant and the limits of the towers of stalks are finitely generated, there is
-`r` such that every stalk of every `G'ₘ` is isomorphic to `(Λ / ℓᵐ)ʳ`. -/
-theorem exists_forall_linearEquiv_sheafFiber [IsDomain Λ] [IsDiscreteValuationRing Λ]
-    [ConnectedSpace X] (hℓ : (ℓ : Λ) ≠ 0) (hℓ' : ¬IsUnit (ℓ : Λ))
-    [∀ n : ℕ, IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (H.obj (op n))]
-    (hfin : ∀ x : X, Module.Finite Λ (ModuleCat.sectionsSubmodule
-      (H ⋙ (pointSmallEtale (X.algClosurePoint x)).sheafFiber))) :
-    ∃ r : ℕ, ∀ (m : ℕ) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
-      Nonempty ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ) |>.obj
-        ((H.adicImageTower ℓ c).obj (op m)) ≃ₗ[Λ] (Fin r → Λ ⧸ Ideal.span {(ℓ : Λ) ^ m})) := by
-  choose r hr using fun x : X ↦
-    have := hfin x
-    hH.exists_linearEquiv_sheafFiber hℓ hℓ' (X.algClosurePoint x)
-  have hI : Ideal.span {(ℓ : Λ) ^ 1} ≠ ⊤ := by
-    rwa [pow_one, Ne, Ideal.span_singleton_eq_top]
-  have : Nontrivial (Λ ⧸ Ideal.span {(ℓ : Λ) ^ 1}) := Ideal.Quotient.nontrivial_iff.2 hI
-  -- the rank is determined by the stalk of `G'₁`
-  have hrank {a b : ℕ} (e : (Fin a → Λ ⧸ Ideal.span {(ℓ : Λ) ^ 1}) ≃ₗ[Λ]
-      (Fin b → Λ ⧸ Ideal.span {(ℓ : Λ) ^ 1})) : a = b := by
-    have := (e.extendScalarsOfSurjective (S := Λ ⧸ Ideal.span {(ℓ : Λ) ^ 1})
-      Ideal.Quotient.mk_surjective).finrank_eq
-    rwa [Module.finrank_fin_fun, Module.finrank_fin_fun] at this
-  have hloc : IsLocallyConstant r := (IsLocallyConstant.iff_exists_open r).2 fun x ↦ by
-    obtain ⟨U, hU, hxU, N, hN⟩ :=
-      exists_isOpen_nonempty_sheafFiber_iso ((H.adicImageTower ℓ c).obj (op 1)) x
-    refine ⟨U, hU, hxU, fun y hy ↦ ?_⟩
-    obtain ⟨ex⟩ := hN _ (X.algClosurePoint x) (by rwa [algClosurePoint_base])
-    obtain ⟨ey⟩ := hN _ (X.algClosurePoint y) (by rwa [algClosurePoint_base])
-    obtain ⟨fx⟩ := hr x 1
-    obtain ⟨fy⟩ := hr y 1
-    exact hrank (fy.symm ≪≫ₗ (ey ≪≫ ex.symm).toLinearEquiv ≪≫ₗ fx)
-  obtain ⟨x₀⟩ := (inferInstance : Nonempty X)
-  refine ⟨r x₀, fun m Ω _ _ s ↦ ?_⟩
-  let x := s.base (IsLocalRing.closedPoint Ω)
-  obtain ⟨e⟩ := nonempty_sheafFiber_iso_of_isLocallyConstantSheaf
-    ((H.adicImageTower ℓ c).obj (op m)) s (X.algClosurePoint x) (by rw [algClosurePoint_base])
-  obtain ⟨f⟩ := hr x m
-  rw [hloc.apply_eq_of_preconnectedSpace x x₀] at f
-  exact ⟨e.toLinearEquiv ≪≫ₗ f⟩
-
 end IsArtinReesTower
-
-/-- **A locally constant sheaf with all stalks isomorphic to `M` is étale locally isomorphic to
-the constant sheaf `M`**: on the nonempty members of a trivialising cover, the value of the
-constant sheaf is a stalk. -/
-theorem exists_cover_nonempty_iso_constantSheaf
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf F]
-    (M : ModuleCat.{u + 1} Λ)
-    (hM : ∀ x : X, Nonempty ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F ≅ M)) :
-    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,
-      Nonempty (((𝒰.f i)^*[ModuleCat.{u + 1} Λ]).obj F ≅
-        (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
-  obtain ⟨⟨𝒰, hc⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
-  refine ⟨𝒰.nonemptyMembers, fun i ↦ ?_⟩
-  have : Etale (𝒰.f i.1) := 𝒰.map_prop i.1
-  obtain ⟨N, ⟨e⟩⟩ := ((isConstant_over_iff_upperStar _ (𝒰.etalePrecoverageToEtale i.1) F).1
-    (hc i.1)).mem_essImage
-  obtain ⟨v⟩ := i.2
-  obtain ⟨eN⟩ := nonempty_sheafFiber_iso_of_iso F (𝒰.f i.1) e.symm
-    (X.algClosurePoint ((𝒰.f i.1).base v)) (by rw [algClosurePoint_base]; exact ⟨v, rfl⟩)
-  obtain ⟨eM⟩ := hM ((𝒰.f i.1).base v)
-  exact ⟨e.symm ≪≫ (constantSheaf _ _).mapIso (eN.symm ≪≫ eM)⟩
 
 
 end AlgebraicGeometry.Etale

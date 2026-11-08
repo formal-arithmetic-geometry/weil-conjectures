@@ -382,54 +382,6 @@ theorem isTraitModelOfGenericBase_genericSliceModel
   exact ⟨⟨hB.1, hB.2, hB.3, hB.4, hB.5⟩, w, inferInstance, pullback.lift_snd _ _ _,
     by rw [hw]; rfl⟩
 
-/-- The base `X₂` of the generic slice of a model of finite type over the trait is locally of
-finite type over `Frac K⟦t⟧`. -/
-lemma IsTraitModelOver.locallyOfFiniteType_genericSliceBase
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    LocallyOfFiniteType (genericSliceBase x hb).hom := by
-  have := hM.locallyOfFiniteType
-  have : LocallyOfFiniteType (coordinateBaseChange b hb (traitGenericSpec k') ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k')))) := by
-    rw [coordinateBaseChange_over]
-    infer_instance
-  have := locallyOfFiniteType_of_comp (coordinateBaseChange b hb (traitGenericSpec k'))
-    (𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k'))))
-  exact inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-
-/-- The base `X₂` of the generic slice of a model of finite type over the trait is quasi-compact
-over `Frac K⟦t⟧`. -/
-lemma IsTraitModelOver.quasiCompact_genericSliceBase
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    QuasiCompact (genericSliceBase x hb).hom := by
-  have := hM.quasiCompact
-  have : QuasiCompact (coordinateBaseChange b hb (traitGenericSpec k') ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k')))) := by
-    rw [coordinateBaseChange_over]
-    infer_instance
-  have := QuasiCompact.of_comp (coordinateBaseChange b hb (traitGenericSpec k'))
-    (𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k'))))
-  exact inferInstanceAs (QuasiCompact (pullback.snd _ _))
-
-/-- The base `X₂` of the generic slice of a model of finite type over the trait is separated
-over `Frac K⟦t⟧`. -/
-lemma IsTraitModelOver.isSeparated_genericSliceBase
-    {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g) :
-    IsSeparated (genericSliceBase x hb).hom := by
-  have := hM.isSeparated
-  have : IsSeparated (coordinateBaseChange b hb (traitGenericSpec k') ≫
-      𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k')))) := by
-    rw [coordinateBaseChange_over]
-    infer_instance
-  have := IsSeparated.of_comp (coordinateBaseChange b hb (traitGenericSpec k'))
-    (𝔸(ULift.{u} (Fin 1); Spec (.of (FractionRing (PowerSeries k')))) ↘
-        Spec (.of (FractionRing (PowerSeries k'))))
-  exact inferInstanceAs (IsSeparated (pullback.snd _ _))
-
 /-- **The base of the generic slice maps to the base of `M`**: if `M` is a trait model of `X₁`
 over the generic base `(F, X₁)` along `ι`, there is a morphism `X₂ ⟶ X₁`, lying over
 `Spec Frac K⟦t⟧ ⟶ η ⟶ Spec F`, through which the identification `ε` of the generic slice model

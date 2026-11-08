@@ -119,13 +119,6 @@ noncomputable def rightDerivedUpperShriek :
 scoped notation "R(" f ")^![" A "]" =>
   rightDerivedUpperShriek A f
 
-lemma rightDerivedUpperShriek_obj (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y)
-    (ModuleCat.{u + 1} Λ))) :
-    (R(f)^![Λ]).obj L =
-      D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((Etale.rightDerivedUpperShriek Λ f).obj
-          (R(ν_*(Y)[ModuleCat.{u + 1} Λ]).obj L)) :=
-  rfl
-
 /-- Transport of the exceptional inverse image along an equality of morphisms:
 `Rf^! ≅ Rg^!` for `f = g`. -/
 noncomputable def rightDerivedUpperShriekCongr {f g : X ⟶ Y} (h : f = g)
@@ -194,12 +187,6 @@ noncomputable def rightDerivedUpperShriekPlus :
 @[inherit_doc rightDerivedUpperShriekPlus]
 scoped notation "R(" f ")^![" A "]+" =>
   rightDerivedUpperShriekPlus A f
-
-/-- The bounded below `R(f)^![Λ]+` is compatible with the inclusions of the bounded below
-derived categories, by construction. -/
-noncomputable def rightDerivedUpperShriekPlusCompatibility :
-    R(f)^![Λ]+ ⋙ DerivedCategory.Plus.ι ≅ DerivedCategory.Plus.ι ⋙ R(f)^![Λ] :=
-  ObjectProperty.liftCompιIso _ _ _
 
 end BoundedBelow
 
@@ -359,14 +346,6 @@ lemma rightDerivedUpperShriekHomEquiv_symm_apply
       (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
           rightDerivedUpperShriekCounit f L hL :=
   rfl
-
-/-- The counit is the image of the identity under the exceptional adjunction. -/
-lemma rightDerivedUpperShriekHomEquiv_symm_id
-    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
-    (hL : DerivedCategory.TStructure.t.plus L) :
-    (rightDerivedUpperShriekHomEquiv f (plusEtaleOrigin_rightDerivedUpperShriek_obj f hL) hL).symm
-        (𝟙 _) = rightDerivedUpperShriekCounit f L hL := by
-  simp
 
 /-- Naturality of the exceptional adjunction in the source. -/
 lemma rightDerivedUpperShriekHomEquiv_naturality_left_symm

@@ -7,7 +7,23 @@ module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 public import Submission.WeilConjectures.CategoryTheory.Projection.ProjectionFormulaBaseChangeNaturality
-public import Submission.WeilConjectures.AlgebraicGeometry.Finite.FiniteLevelProEtaleBaseChange
+public import Submission.WeilConjectures.AlgebraicGeometry.Ringed.RingedEtaleOriginWitness
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAmbientRingedExchange
+public import Submission.WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseImageSupplement
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumCompletedSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginWitness
+import Submission.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
+import Mathlib.CategoryTheory.Abelian.RightDerived
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 public import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullback
 import Submission.WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerDirectImageSupplement
 
@@ -305,23 +321,5 @@ private structure ExchangeInvertible (Λ : Type (u + 1)) [CommRing Λ] [Finite �
     IsIso ((proEtaleAmbientRingedExchange sq (finiteOriginFunctionRing X Λ)
       (finiteOriginFunctionRing Y Λ)
       (finiteOriginFunctionRing X' Λ) (finiteOriginFunctionRing Y' Λ) c_f c_g c_g' c_f' hc).app M)
-
-private theorem levelConstantComparison_eq (T : Scheme.{u}) (n : ℕ) :
-    pbcLevelConstantComparison T d n =
-      finiteOriginConstantIso T (A ⧸ d.ideal ^ (n + 1)) := by
-  apply (pbcLevelConstantComparison_exists T d n).unique
-  · exact (pbcLevelConstantComparison_exists T d n).exists.choose_spec
-  · intro U b
-    have h := toSheafify_naturality (ProEt.topology T)
-      (AdicCoefficients.constants T (A ⧸ d.ideal ^ (n + 1)))
-    have hU := congrArg (fun t ↦ t.app U) h
-    exact (congrArg (fun t ↦ t b) hU).symm
-
-private theorem finiteRingIso_eq {U V : Scheme.{u}} (h : U ⟶ V) (n : ℕ) :
-    d.finiteRingIso h n = finiteCoefficientRingIso (A ⧸ d.ideal ^ (n + 1)) h := by
-  apply Iso.ext
-  simp only [AdicCoefficientDatum.finiteRingIso, finiteCoefficientRingIso,
-    levelConstantComparison_eq]
-  rfl
 
 end AlgebraicGeometry.Scheme

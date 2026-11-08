@@ -52,14 +52,6 @@ lemma affineLine.translationIso_comp_artinSchreierMap (c : k₀) :
       affineLine.artinSchreierMap k₀ :=
   affineLine.translation_comp_artinSchreierMap k₀ c
 
-omit [Finite k₀] in
-/-- Translation by `c + d` is translation by `c` followed by translation by `d`
-(blueprint `lem-fd-as-characters`). -/
-lemma affineLine.translationIso_add (c d : k₀) :
-    (affineLine.translationIso k₀ (c + d)).hom =
-      (affineLine.translationIso k₀ c).hom ≫ (affineLine.translationIso k₀ d).hom :=
-  affineLine.translation_add k₀ c d
-
 /-- The Artin–Schreier map is a split `k₀`-torsor under the translations
 (blueprint `lem-fd-as-characters`). -/
 lemma affineLine.isTorsorSplit_artinSchreierMap :

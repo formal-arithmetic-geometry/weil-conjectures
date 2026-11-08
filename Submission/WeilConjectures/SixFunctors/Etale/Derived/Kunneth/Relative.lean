@@ -13,7 +13,9 @@ public import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pu
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
@@ -187,83 +189,6 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
     (IsPullback.of_hasPullback b c).flip (isPullback_mapOverBaseRight_fst b c f) Q M
   have := isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q
   exact ⟨asIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q)⟩
-
-/-- Blueprint `lem-trf-ordinary-kunneth`: Ordinary Kunneth for a general morphism.
-
-The detailed form of `sk-lem-sf-kunneth-star`, at a finite coefficient ring `A` whose exponent
-is invertible in `k` (such as `A_{E,n}`): for a morphism `f : X ⟶ Y` of separated finite-type
-`k`-schemes, an auxiliary separated finite-type `k`-scheme `Z`, `L ∈ Dctf(X, A)` and
-`Q ∈ Dctf(Z, A)`, the canonical comparison `Rf_* L ⊠ Q ⟶ R(f × id_Z)_* (L ⊠ Q)`
-(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarMap`) is an isomorphism. It is the
-composite of the base-change map along `Y ×_k Z ⟶ Y`, an isomorphism by `lem-kun-0f1n`
-(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`), and of the projection map of
-`R(f × id_Z)_*`. -/
-theorem isIso_externalProductRightDerivedLowerStarMap_of_finite (Λ : Type (u + 1)) [CommRing Λ]
-    [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Z : Scheme.{u}}
-    (b : Y ⟶ Spec (.of k)) (c : Z ⟶ Spec (.of k)) (f : X ⟶ Y)
-    [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
-    [IsSeparated c] [LocallyOfFiniteType c] [QuasiCompact c]
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L)
-    (_hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
-    IsIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q) := by
-  have := isIso_tensorBaseChangeMap Λ c b (f ≫ b) (pullback.snd b c) (pullback.fst b c)
-    (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) f rfl
-    (IsPullback.of_hasPullback b c).flip (isPullback_mapOverBaseRight_fst b c f) Q L
-  exact isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q
-
-omit [HasSmallSiteSheafify A] in
-/-- The assembly step of the ordinary Künneth formula with an identity factor for a morphism
-`p : X ⟶ Y` with base change `p' = p × 𝟙_Z : X ×_S Z ⟶ Y ×_S Z`: base change along the
-projection `Y ×_S Z ⟶ Y` and the projection formula for `p'` give
-`Rp_* M ⊠ Q ≅ Rp'_* (M ⊠ Q)`. -/
-theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso [UpperStarPreservesFlat A]
-    {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (e : (L((pullback.fst b c)^*[A])).obj ((R((p)_*[A])).obj M) ≅
-      (R((pullback.mapOverBaseRight p b c)_*[A])).obj
-        ((L((pullback.fst (p ≫ b) c)^*[A])).obj M))
-    (hpf : IsIso (((rightDerivedLowerStarProjectionMap A (pullback.mapOverBaseRight p b c)).app
-      ((L((pullback.fst (p ≫ b) c)^*[A])).obj M)).app ((L((pullback.snd b c)^*[A])).obj Q))) :
-    Nonempty (externalProduct A b c ((R((p)_*[A])).obj M) Q ≅
-      (R((pullback.mapOverBaseRight p b c)_*[A])).obj (externalProduct A (p ≫ b) c M Q)) := by
-  let e' : (L((pullback.mapOverBaseRight p b c)^*[A])).obj ((L((pullback.snd b c)^*[A])).obj Q) ≅
-      (L((pullback.snd (p ≫ b) c)^*[A])).obj Q :=
-    ((leftDerivedUpperStarComp A (pullback.mapOverBaseRight p b c) (pullback.snd b c)
-      (pullback.snd (p ≫ b) c) (by simp)).app Q).symm
-  exact ⟨((derivedTensor A _).mapIso e).app _ ≪≫ asIso (((rightDerivedLowerStarProjectionMap A
-    (pullback.mapOverBaseRight p b c)).app ((L((pullback.fst (p ≫ b) c)^*[A])).obj M)).app
-      ((L((pullback.snd b c)^*[A])).obj Q)) ≪≫
-    (R((pullback.mapOverBaseRight p b c)_*[A])).mapIso (((derivedTensor A _).obj _).mapIso e')⟩
-
-/-- The ordinary Künneth formula with an identity factor `sk-lem-sf-kunneth-star` for a
-*proper* morphism `p : X ⟶ Y` and a finite coefficient ring: `Rp_* M ⊠ Q ≅ R(p × 𝟙_Z)_* (M ⊠ Q)`
-for all `M` and `Q`, by proper base change
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`) and the
-projection formula for the proper morphism `p × 𝟙_Z`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`). For a
-compactification `f = g ∘ j` of a general `f` this handles the proper factor `g`; the open
-factor `j` is the non-formal part of
-`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`. -/
-theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_isProper (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y) [IsProper p]
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
-        ((R((p)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
-      (R((pullback.mapOverBaseRight p b c)_*[ModuleCat.{u + 1} Λ])).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) (p ≫ b) c M Q)) := by
-  have sq : IsPullback (pullback.fst (p ≫ b) c) (pullback.mapOverBaseRight p b c) p
-      (pullback.fst b c) := isPullback_pullbackMapLeft b c p
-  have : IsProper (pullback.mapOverBaseRight p b c) :=
-    MorphismProperty.of_isPullback (P := @IsProper) sq inferInstance
-  have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
-  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ (pullback.mapOverBaseRight p b c)
-  exact nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso (ModuleCat.{u + 1} Λ) b c p M Q
-    ((asIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)).app M) inferInstance
 
 omit [HasSmallSiteSheafify A] in
 /-- The assembly step of the relative product theorem `sk-thm-sf-kunneth-relative`: with

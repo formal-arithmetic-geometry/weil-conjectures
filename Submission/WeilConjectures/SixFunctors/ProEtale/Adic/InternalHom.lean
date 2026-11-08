@@ -56,9 +56,6 @@ noncomputable abbrev adicUpperStarRingIso : adicConstantSheaf l V ⟶
   inv (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).homEquiv _ _).symm
     (adicConstantSheafToLowerStar l g))
 
-lemma adicUpperStar_eq : (g)^*ᵃ[l] = (g)^*[WeilCoefficients.{u} l].mapMod _ ⋙
-    Mod.comap (adicUpperStarRingIso g) := rfl
-
 variable (l) in
 /-- **The pullback along a weakly étale morphism commutes with `𝓗om_{ℚ̄_ℓ}`**:
 `g^* 𝓗om(M, N) ≅ 𝓗om(g^* M, g^* N)`, naturally in `N`. -/

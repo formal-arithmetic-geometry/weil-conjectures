@@ -98,38 +98,12 @@ noncomputable def awayToFractionRing (S : Subalgebra K B) {g : S} (hg : g ≠ 0)
   IsLocalization.liftAlgHom (isUnit_algebraMap_fractionRing_powers S hg)
 
 
-/-- `S_g → Frac B` is compatible with the inclusion `S ⊆ B ⊆ Frac B`. -/
-@[simp]
-theorem awayToFractionRing_algebraMap (S : Subalgebra K B) {g : S} (hg : g ≠ 0) (a : S) :
-    awayToFractionRing S hg (algebraMap S (Localization.Away g) a) =
-      algebraMap B (FractionRing B) a := by
-  rw [awayToFractionRing, IsLocalization.coe_liftAlgHom, IsLocalization.lift_eq]
-  rfl
-
-theorem awayToFractionRing_injective (S : Subalgebra K B) {g : S} (hg : g ≠ 0) :
-    Function.Injective (awayToFractionRing S hg) := by
-  rw [awayToFractionRing, IsLocalization.coe_liftAlgHom, IsLocalization.lift_injective_iff]
-  intro x y
-  rw [(IsLocalization.injective (Localization.Away g)
-    (powers_le_nonZeroDivisors_of_noZeroDivisors hg)).eq_iff]
-  simp [(IsFractionRing.injective B (FractionRing B)).eq_iff]
-
 /-- The copy of `S_g` inside `Frac B`, for a subalgebra `S` of a domain `B` and a nonzero
 `g ∈ S`: the image of `awayToFractionRing`. -/
 noncomputable def localizationSubalgebra (S : Subalgebra K B) {g : S} (hg : g ≠ 0) :
     Subalgebra K (FractionRing B) :=
   (awayToFractionRing S hg).range
 
-/-- `localizationSubalgebra S hg` is isomorphic to `S_g`. -/
-noncomputable def localizationSubalgebraEquiv (S : Subalgebra K B) {g : S} (hg : g ≠ 0) :
-    Localization.Away g ≃ₐ[K] localizationSubalgebra S hg :=
-  AlgEquiv.ofInjective _ (awayToFractionRing_injective S hg)
-
-
-/-- The set of subalgebras `(B_i)_g ⊆ Frac B`, for `B_i` in a set `F` of subalgebras of `B` and
-`g ∈ B_i` nonzero. -/
-def localizationSubalgebras (F : Set (Subalgebra K B)) : Set (Subalgebra K (FractionRing B)) :=
-  {T | ∃ S ∈ F, ∃ (g : S) (hg : g ≠ 0), T = localizationSubalgebra S hg}
 
 
 end Localization

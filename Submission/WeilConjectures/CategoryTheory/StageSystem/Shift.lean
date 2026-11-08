@@ -70,16 +70,6 @@ noncomputable def shiftZeroHom : Morphism.Hom (S.shiftMorphism A 0) (Morphism.id
     simp only [Functor.commShiftIso_zero, Functor.CommShift.isoZero_hom_app, Category.assoc,
       Functor.id_obj, Iso.inv_hom_id_app]
 
-/-- The inverse of `shiftZeroHom`. -/
-@[simps]
-noncomputable def shiftZeroInvHom : Morphism.Hom (Morphism.id S) (S.shiftMorphism A 0) where
-  τ i := (shiftFunctorZero (C i) A).inv
-  comm h x := by
-    simp only [Morphism.id_β_hom_app]
-    simp only [Functor.commShiftIso_zero, Functor.CommShift.isoZero_hom_app,
-      ← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
-    exact (Category.id_comp _).symm
-
 /-- The shift by `a + b` is the composite of the shifts, as a compatible family of natural
 transformations. -/
 @[simps]
@@ -90,16 +80,6 @@ noncomputable def shiftAddHom (a b : A) :
   comm h x := by
     simp only [Morphism.comp_β_hom_app]
     simp [Functor.commShiftIso_add]
-
-/-- The inverse of `shiftAddHom`. -/
-@[simps]
-noncomputable def shiftAddInvHom (a b : A) :
-    Morphism.Hom ((S.shiftMorphism A a).comp (S.shiftMorphism A b)) (S.shiftMorphism A (a + b))
-    where
-  τ i := (shiftFunctorAdd (C i) a b).inv
-  comm h x := by
-    simp only [Morphism.comp_β_hom_app]
-    simp [Functor.commShiftIso_add, ← Functor.map_comp_assoc]
 
 variable [IsDirectedOrder I]
 
@@ -163,9 +143,6 @@ noncomputable instance hasShift : HasShift S.PairCategory A :=
 
 variable {S A}
 
-lemma shiftFunctor_eq (a : A) :
-    shiftFunctor S.PairCategory a = (S.shiftMorphism A a).functor := rfl
-
 @[simp]
 lemma shiftFunctor_obj (a : A) (X : S.PairCategory) :
     (shiftFunctor S.PairCategory a).obj X = ⟨X.stage, (shiftFunctor (C X.stage) a).obj X.obj⟩ :=
@@ -178,28 +155,6 @@ lemma shiftFunctor_map_mkHom (a : A) {X Y : S.PairCategory} {n : I} (hX : X.stag
         (Y := (shiftFunctor S.PairCategory a).obj Y) n hX hY
         (((S.T hX).commShiftIso a).hom.app X.obj ≫ (shiftFunctor (C n) a).map u ≫
           ((S.T hY).commShiftIso a).inv.app Y.obj) := rfl
-
-@[simp]
-lemma shiftFunctor_map_ι (a : A) {i : I} {x y : C i} (f : x ⟶ y) :
-    (shiftFunctor S.PairCategory a).map ((S.ι i).map f) =
-      (S.ι i).map ((shiftFunctor (C i) a).map f) :=
-  Morphism.functor_map_ι _ f
-
-lemma shiftFunctorZero_hom_app (X : S.PairCategory) :
-    (shiftFunctorZero S.PairCategory A).hom.app X =
-      (S.ι X.stage).map ((shiftFunctorZero (C X.stage) A).hom.app X.obj) := rfl
-
-lemma shiftFunctorZero_inv_app (X : S.PairCategory) :
-    (shiftFunctorZero S.PairCategory A).inv.app X =
-      (S.ι X.stage).map ((shiftFunctorZero (C X.stage) A).inv.app X.obj) := rfl
-
-lemma shiftFunctorAdd_hom_app (a b : A) (X : S.PairCategory) :
-    (shiftFunctorAdd S.PairCategory a b).hom.app X =
-      (S.ι X.stage).map ((shiftFunctorAdd (C X.stage) a b).hom.app X.obj) := rfl
-
-lemma shiftFunctorAdd_inv_app (a b : A) (X : S.PairCategory) :
-    (shiftFunctorAdd S.PairCategory a b).inv.app X =
-      (S.ι X.stage).map ((shiftFunctorAdd (C X.stage) a b).inv.app X.obj) := rfl
 
 lemma shiftFunctorZero_inv_app_ι {i : I} (x : C i) :
     (shiftFunctorZero S.PairCategory A).inv.app ((S.ι i).obj x) =

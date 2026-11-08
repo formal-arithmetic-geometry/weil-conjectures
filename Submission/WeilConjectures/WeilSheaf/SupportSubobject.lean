@@ -41,15 +41,4 @@ theorem support_subset_of_mono {F G : WeilSheaf k₀ l X} (f : F ⟶ G) [Mono f]
       (X ↘ Spec (CommRingCat.of k₀)) x)).carrier := hx
   exact (injective_stalkAtMap _ _ _ f).nontrivial
 
-/-- A Weil sheaf with empty support vanishes: a nonzero Weil sheaf has a nonzero stalk at some
-closed point (`AlgebraicGeometry.WeilSheaf.exists_nontrivial_stalk_of_not_isZero`). -/
-theorem isZero_of_support_eq_empty {F : WeilSheaf k₀ l X} (hF : F.support = ∅) : IsZero F := by
-  by_contra h
-  obtain ⟨x, hx⟩ := F.exists_nontrivial_stalk_of_not_isZero h
-  exact (Set.eq_empty_iff_forall_notMem.1 hF) x hx
-
-/-- A Weil sheaf vanishes if and only if its support is empty. -/
-theorem isZero_iff_support_eq_empty {F : WeilSheaf k₀ l X} : IsZero F ↔ F.support = ∅ :=
-  ⟨support_eq_empty_of_isZero, isZero_of_support_eq_empty⟩
-
 end AlgebraicGeometry.WeilSheaf

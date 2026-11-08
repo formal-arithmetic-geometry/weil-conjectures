@@ -120,35 +120,6 @@ namespace DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-omit [Finite Λ] in
-/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
-comparison, clause (i).
-
-If a complex `K'` of étale `Λ`-sheaves has Tor amplitude in `[a, b]`, then `ν^* K'` has Tor
-amplitude in `[a, b]` on the pro-étale site: a flat model of `K'` in degrees `[a, b]` is carried
-by the exact functor `ν^*` to a flat model of `ν^* K'`, as `ν^*` preserves flat sheaves
-(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). The blueprint's hypotheses that
-`K'` be bounded constructible and that the exponent of `Λ` be invertible on `X` are not
-needed. -/
-theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
-    {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K') :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
-  _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj _ hKt
-
-omit [Finite Λ] in
-/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
-comparison, clause (i).
-
-The derived comparison pullback `ν^*` carries `Dctf(X_ét, Λ)` into `Dctf(X_proét, Λ)`. -/
-theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
-    {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK' : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K') :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
-  have ⟨hbc, a, b, hKt⟩ := hK'
-  ⟨boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hbc, a, b,
-    torAmplitudeIn_mapDerivedCategory Λ hKt⟩
-
 variable {Λ} in
 omit [Finite Λ] in
 /-- Blueprint `lem-exc-comparison-tor-interval`: Site comparison preserves and detects Tor

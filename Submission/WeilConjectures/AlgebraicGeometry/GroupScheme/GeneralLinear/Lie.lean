@@ -9,7 +9,22 @@ public import Mathlib.Algebra.Lie.Matrix
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
-public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import Mathlib.Algebra.Lie.Subalgebra
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Differential
+public import Submission.WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Kernel
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.LocalPoints
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.RelativePoints
+public import Submission.WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Submission.WeilConjectures.Mathlib.Algebra.DualNumber
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
@@ -343,13 +358,6 @@ theorem points_apply (r : RationalHom G m) [IsMonHom r] {R : Type u} [CommRing R
   rfl
 
 
-variable (m) in
-/-- The matrix coefficient `g ↦ l(g w)` of `GL_m`, for a linear form `l` and a vector `w` on
-`k^m`, as a function on `GL_m`: `∑ᵢⱼ l(eᵢ) wⱼ xᵢⱼ`. -/
-noncomputable def matrixCoefficient (l : Module.Dual k (m → k)) (w : m → k) :
-    CoordinateRing m k :=
-  ∑ i, ∑ j, (l (Pi.single i 1) * w j) • coord m k i j
-
 
 end RationalHom
 
@@ -368,10 +376,6 @@ homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def differential (r : RationalHom G m) [IsMonHom r] :
     GrpObj.Lie G →ₗ⁅k⁆ Matrix m m k :=
   (lieAlgebraEquivMatrix m k).toLieHom.comp (GrpObj.differential r)
-
-theorem differential_apply (r : RationalHom G m) [IsMonHom r] (x : GrpObj.Lie G) :
-    r.differential x = lieAlgebraEquivMatrix m k (GrpObj.differential r x) :=
-  rfl
 
 
 end RationalHom

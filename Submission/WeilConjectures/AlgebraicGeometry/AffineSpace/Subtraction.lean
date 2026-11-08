@@ -124,16 +124,6 @@ lemma prodNeg_prodNeg : prodNeg n S ≫ prodNeg n S = 𝟙 _ := by
 
 instance : IsIso (prodNeg n S) := ⟨prodNeg n S, prodNeg_prodNeg n S, prodNeg_prodNeg n S⟩
 
-/-- Adding `-y` is subtracting `y`: `(1 × ι) ≫ add = sub`. -/
-@[reassoc (attr := simp)]
-lemma prodNeg_add : prodNeg n S ≫ add n S = sub n S := by
-  refine hom_ext ?_ fun i ↦ ?_
-  · simp
-  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, add_appTop_coord, map_add,
-      ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
-      ← Scheme.Hom.comp_appTop, prodNeg_fst, prodNeg_snd, Scheme.Hom.comp_appTop,
-      CommRingCat.comp_apply, neg_appTop_coord, map_neg, sub_appTop_coord, sub_eq_add_neg]
-
 
 section Triple
 

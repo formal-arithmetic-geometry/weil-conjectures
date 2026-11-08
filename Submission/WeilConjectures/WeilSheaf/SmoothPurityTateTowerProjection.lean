@@ -64,22 +64,4 @@ lemma upperStarLimitFreeTowerIso_hom_comp_π (n : ℕ) :
 variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
-/-- The same projection equation after coefficient extension. In particular it applies
-to the finite quotients used to define the integral Tate reductions. -/
-@[reassoc]
-lemma upperStarExtendScalarsLimitFreeTowerIso_hom_comp_map_π (n : ℕ) :
-    (upperStarExtendScalarsLimitFreeTowerIso Λ g t t' e a he hK).hom ≫
-        (Mod.extendScalars (coefficientMap a X')).map (limit.π 𝒯' (op n)) =
-      (CondensedRing.upperStar Λ' g).map
-          ((Mod.extendScalars (coefficientMap a X)).map (limit.π 𝒯 (op n))) ≫
-        (CondensedRing.pullIso a g).inv.app ((𝒯).obj (op n)) ≫
-        (Mod.extendScalars (coefficientMap a X')).map
-          (upperStarFreeTowerIsoApp Λ g e n).hom := by
-  have hn := (CondensedRing.pullIso a g).inv.naturality (limit.π 𝒯 (op n))
-  dsimp only [Functor.comp_map] at hn
-  simp only [upperStarExtendScalarsLimitFreeTowerIso, Iso.trans_hom, Iso.symm_hom,
-    Iso.app_inv, Functor.mapIso_hom, Category.assoc]
-  rw [← Functor.map_comp, upperStarLimitFreeTowerIso_hom_comp_π,
-    Functor.map_comp, ← Category.assoc, ← hn, Category.assoc]
-
 end AlgebraicGeometry.ProEtale

@@ -58,14 +58,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
 
-/-- On the ambient derived category, the unit comparison of the derived pullback on bounded
-constructible complexes is the inverse of `ProEtale.CondensedRing.leftDerivedUpperStarUnitIso`. -/
-lemma boundedConstructibleUpperStar_εIso_hom_hom :
-    (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        f)).hom.hom =
-      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f.left).inv :=
-  rfl
-
 /-- On the ambient derived category, the unit of `Lf^* ⊣ Rf_*` on bounded constructible complexes
 is the unit of `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction`. -/
 lemma boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom (K :
@@ -178,33 +170,6 @@ lemma boundedConstructiblePullbackExchange_eq_liftExchange :
         (fun K ↦
           boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K) :=
   rfl
-
-/-- The components of `NearbyCyclesModel.liftExchange` of any transformation
-`α : Ψ_N ⋙ Lf'^* ⟶ Lf^* ⋙ Ψ_M`, viewed as a transformation between the restricted functors. -/
-private lemma liftExchange_pullback_app_hom_aux (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (α : N.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙ L((f'.left)^*⟦Profinite.padicAlgClRingObj
-        ℓ⟧) ⟶ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ M.nearbyCycles
-            (Profinite.padicAlgClRingObj ℓ)) :
-    ((liftExchange α (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property)
-        (fun K ↦
-          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
-        (fun K ↦
-          boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K) :
-      boundedConstructibleNearbyCycles hN ⋙ boundedConstructibleUpperStar
-          (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
-            boundedConstructibleNearbyCycles hM).app K).hom =
-      α.app K.obj :=
-  liftExchange_app_hom _ _ _ _ _ K
-
-/-- The components of the restricted pullback exchange are those of the ambient one. -/
-@[simp]
-lemma boundedConstructiblePullbackExchange_app_hom (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    :
-    ((φ.boundedConstructiblePullbackExchange ℓ hM hN).app K).hom =
-      (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app K.obj := by
-  rw [boundedConstructiblePullbackExchange_eq_liftExchange]
-  exact liftExchange_pullback_app_hom_aux ℓ hM hN K _
 
 /-! ### The unit identity -/
 

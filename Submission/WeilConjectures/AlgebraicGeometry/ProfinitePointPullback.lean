@@ -473,12 +473,6 @@ theorem profinite_point_pullback_module_comparison
     exact moduleIdentity_forget Λ X ((CondensedRing.upperStar Λ f).obj M)
 
 
-private lemma eqToIso_congr_symm
-    {A B : Type*} [Category B] (F : A → B) {a b : A} (w : a = b) :
-    eqToIso (congrArg F w.symm) = (eqToIso (congrArg F w)).symm := by
-  cases w
-  rfl
-
 section ModuleMates
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -529,25 +523,6 @@ theorem profinitePoint_isMonoidal_upperStarId (X : Scheme.{u}) :
     isMonoidal_upperStarLowerStarAdjunction _ _
   exact isMonoidal_conjugateEquiv_symm _ _ (lowerStarId Ab.{u + 1} X).inv
 
-/-- The canonical ring-object composition comparison, obtained by lifting the abelian or
-linear comparison through the existing functor on algebraic structures or localization.
-Source: RefactorInstruction, eq:triangle and thm:alpha; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointRingComp
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (upperStar Ab.{u + 1} (f ≫ g)).mapMon ≅ (upperStar Ab.{u + 1} g).mapMon ⋙ (upperStar Ab.{u +
-      1} f).mapMon :=
-  Functor.mapMonNatIso (upperStarComp Ab.{u + 1} f g) ≪≫ Functor.mapMonCompIso
-
-/-- The canonical ring-object identity comparison, using the existing lift of the
-ordinary inverse-image identity and its normalization on the identity functor.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointRingIdentity
-    (X : Scheme.{u}) :
-    (upperStar Ab.{u + 1} (𝟙 X)).mapMon ≅ 𝟭 (Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})) :=
-  Functor.mapMonNatIso (upperStarId Ab.{u + 1} X) ≪≫ Functor.mapMonIdIso
-
 
 end AlgebraicGeometry.ProEtale
 
@@ -584,55 +559,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open scoped CategoryTheory.Obj
 
-/-- The canonical termwise derived composition comparison, obtained by lifting the abelian or
-linear comparison through the existing functor on algebraic structures or localization.
-Source: RefactorInstruction, eq:triangle and thm:alpha; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointAbelianDerivedComp
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (upperStar Ab.{u + 1} (f ≫ g)).mapDerivedCategory ≅
-      (upperStar Ab.{u + 1} g).mapDerivedCategory ⋙ (upperStar Ab.{u + 1} f).mapDerivedCategory :=
-  Functor.mapDerivedCategoryNatIso (upperStarComp Ab.{u + 1} f g) ≪≫
-    (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)).symm
-
-/-- The canonical termwise derived identity comparison, using the existing lift of the
-ordinary inverse-image identity and its normalization on the identity functor.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointAbelianDerivedIdentity
-    (X : Scheme.{u}) :
-    (upperStar Ab.{u + 1} (𝟙 X)).mapDerivedCategory ≅ 𝟭 (DerivedCategory (Sheaf
-      (Scheme.ProEt.topology X) Ab.{u + 1})) :=
-  Functor.mapDerivedCategoryNatIso (upperStarId Ab.{u + 1} X) ≪≫ Functor.mapDerivedCategoryIdIso _
-
-
-/-- The canonical termwise derived composition comparison, obtained by lifting the abelian or
-linear comparison through the existing functor on algebraic structures or localization.
-Source: RefactorInstruction, eq:triangle and thm:alpha; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointModuleDerivedComp
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    (CondensedRing.upperStar Λ (f ≫ g)).mapDerivedCategory ≅
-      (CondensedRing.upperStar Λ g).mapDerivedCategory ⋙ (CondensedRing.upperStar Λ
-        f).mapDerivedCategory :=
-  Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-      (CondensedRing.upperStar Λ f)).symm
-
-/-- The canonical termwise derived identity comparison, using the existing lift of the
-ordinary inverse-image identity and its normalization on the identity functor.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointModuleDerivedIdentity
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    (X : Scheme.{u}) :
-    (CondensedRing.upperStar Λ (𝟙 X)).mapDerivedCategory ≅ 𝟭 (DerivedCategory (Mod (Sheaf
-      (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
-  Functor.mapDerivedCategoryNatIso (profinitePointModuleIdentity Λ X) ≪≫
-      Functor.mapDerivedCategoryIdIso _
 
 
 /-- The geometric set inverse image for an arbitrary scheme is the point inverse image
@@ -642,40 +568,6 @@ Source: RefactorInstruction, prop:pX and eq:triangle
 noncomputable abbrev profinitePointSetSchemeInverseImage (X : Scheme.{u}) :=
   profinitePointSetInverseImage.{u} ⋙
     Scheme.proEtaleSheafInverseImage (toSpecZ X) (Type (u + 1))
-
-/-- Set inverse-image composition, conjugate to the canonical direct-image comparison.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tag 03CB
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointSetComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    Scheme.proEtaleSheafInverseImage (f ≫ g) (Type (u + 1)) ≅
-      Scheme.proEtaleSheafInverseImage g (Type (u + 1)) ⋙
-        Scheme.proEtaleSheafInverseImage f (Type (u + 1)) :=
-  ((conjugateIsoEquiv (Scheme.proEtaleSheafAdjunction (f ≫ g) (Type (u + 1)))
-      ((Scheme.proEtaleSheafAdjunction g (Type (u + 1))).comp
-        (Scheme.proEtaleSheafAdjunction f (Type (u + 1))))).symm
-    (lowerStarComp (Type (u + 1)) f g).symm).symm
-
-/-- Set inverse-image identity, conjugate to the canonical direct-image identity.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tag 03CB
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointSetIdentity (X : Scheme.{u}) :
-    Scheme.proEtaleSheafInverseImage (𝟙 X) (Type (u + 1)) ≅ 𝟭 _ :=
-  (conjugateIsoEquiv Adjunction.id
-    (Scheme.proEtaleSheafAdjunction (𝟙 X) (Type (u + 1)))).symm
-      (lowerStarId (Type (u + 1)) X).symm
-
-/-- The set-level point comparison is composition followed by the structure-map equality.
-Source: RefactorInstruction, Section 5, eq:triangle
-(auxiliary; not a blueprint node). -/
-noncomputable def profinitePointSetSchemeComp {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    profinitePointSetSchemeInverseImage Y ⋙
-        Scheme.proEtaleSheafInverseImage f (Type (u + 1)) ≅
-      profinitePointSetSchemeInverseImage X :=
-  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft profinitePointSetInverseImage
-    ((profinitePointSetComp f (toSpecZ Y)).symm ≪≫
-      eqToIso (congrArg
-        (fun k : X ⟶ specZ ↦ Scheme.proEtaleSheafInverseImage k (Type (u + 1)))
-        (comp_toSpecZ f)))
 
 
 end AlgebraicGeometry.ProEtale

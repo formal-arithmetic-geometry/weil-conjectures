@@ -38,8 +38,4 @@ noncomputable def zmodAddEquivRootsOfUnity (h : IsPrimitiveRoot ζ n) :
     ZMod n ≃+ Additive (rootsOfUnity n R) :=
   h.zmodEquivZPowers.trans (MulEquiv.subgroupCongr h.zpowers_eq).toAdditive
 
-lemma zmodAddEquivRootsOfUnity_natCast (h : IsPrimitiveRoot ζ n) (a : ℕ) :
-    ((Additive.toMul (h.zmodAddEquivRootsOfUnity a) : rootsOfUnity n R) : Rˣ) = ζ ^ a := by
-  simp [zmodAddEquivRootsOfUnity, zmodEquivZPowers_apply_coe_nat]
-
 end IsPrimitiveRoot

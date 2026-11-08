@@ -5,13 +5,158 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.StrictTower.FiniteOpenBaseChangeNormalized
+public import Submission.WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOpenExtension
+import Submission.WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficientTransport
+import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import Submission.WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 public import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicFiniteOperations
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingMap
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteCoefficientDirectImage
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdjunctionSupplement
+import Mathlib.Algebra.Category.Ring.Limits
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageAction
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Submission.WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
+import Submission.WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import Mathlib.CategoryTheory.Monoidal.Ring
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsComplex
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInverseImageTensorComparisonSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Mathlib.Algebra.Category.Grp.Colimits
+import Submission.WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
+import Submission.WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Mathlib.Algebra.Homology.Additive
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import Submission.WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Submission.WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import Submission.WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Submission.WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+import Mathlib.Algebra.Homology.Localization
+import Mathlib.CategoryTheory.Whiskering
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import Submission.WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbackSquare
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -37,65 +182,6 @@ local notation "PB" => Scheme.proEtaleConstantRingDerivedPullback
 local notation "AD" => Scheme.proEtaleRingDerivedOpenAdjunction
 local notation "CC" => Scheme.proEtaleConstantRingComparison
 local notation "OE" => Scheme.proEtaleRingDerivedOpenExtension
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem mateCube
-    {C₀ C₁ C₂ C₃ D₀ D₁ D₂ D₃ : Type*}
-    [Category C₀] [Category C₁] [Category C₂] [Category C₃]
-    [Category D₀] [Category D₁] [Category D₂] [Category D₃]
-    {S₀ : C₀ ⥤ D₀} {R₀ : D₀ ⥤ C₀} {S₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁}
-    {S₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂} {S₃ : C₃ ⥤ D₃} {R₃ : D₃ ⥤ C₃}
-    (a₀ : S₀ ⊣ R₀) (a₁ : S₁ ⊣ R₁) (a₂ : S₂ ⊣ R₂) (a₃ : S₃ ⊣ R₃)
-    {J : C₀ ⥤ C₁} {H : C₁ ⥤ C₃} {G : C₀ ⥤ C₂} {I : C₂ ⥤ C₃}
-    {J' : D₀ ⥤ D₁} {H' : D₁ ⥤ D₃} {G' : D₀ ⥤ D₂} {I' : D₂ ⥤ D₃}
-    (qJ : R₀ ⋙ J ⟶ J' ⋙ R₁) (qH : R₁ ⋙ H ⟶ H' ⋙ R₃)
-    (qG : R₀ ⋙ G ⟶ G' ⋙ R₂) (qI : R₂ ⋙ I ⟶ I' ⋙ R₃)
-    (c : J ⋙ H ⟶ G ⋙ I) (d : J' ⋙ H' ⟶ G' ⋙ I')
-    (hc : ∀ M, c.app (R₀.obj M) ≫ I.map (qG.app M) ≫ qI.app (G'.obj M) =
-      H.map (qJ.app M) ≫ qH.app (J'.obj M) ≫ R₃.map (d.app M))
-    (N : C₀) :
-    S₃.map (c.app N) ≫
-        ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI)).app (G.obj N) ≫
-        I'.map (((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG)).app N) =
-      ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).app (J.obj N) ≫
-        H'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).app N) ≫
-        d.app (S₀.obj N) := by
-  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).natTrans
-  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).natTrans
-  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG)).natTrans
-  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI)).natTrans
-  have hj (K : C₀) : J.map (a₀.unit.app K) ≫ qJ.app (S₀.obj K) =
-      a₁.unit.app (J.obj K) ≫ R₁.map (lJ.app K) :=
-    unit_mateEquiv_symm a₀ a₁ (TwoSquare.mk _ _ _ _ qJ) K
-  have hh (K : C₁) : H.map (a₁.unit.app K) ≫ qH.app (S₁.obj K) =
-      a₃.unit.app (H.obj K) ≫ R₃.map (lH.app K) :=
-    unit_mateEquiv_symm a₁ a₃ (TwoSquare.mk _ _ _ _ qH) K
-  have hg (K : C₀) : G.map (a₀.unit.app K) ≫ qG.app (S₀.obj K) =
-      a₂.unit.app (G.obj K) ≫ R₂.map (lG.app K) :=
-    unit_mateEquiv_symm a₀ a₂ (TwoSquare.mk _ _ _ _ qG) K
-  have hi (K : C₂) : I.map (a₂.unit.app K) ≫ qI.app (S₂.obj K) =
-      a₃.unit.app (I.obj K) ≫ R₃.map (lI.app K) :=
-    unit_mateEquiv_symm a₂ a₃ (TwoSquare.mk _ _ _ _ qI) K
-  change S₃.map (c.app N) ≫ lI.app (G.obj N) ≫ I'.map (lG.app N) =
-    lH.app (J.obj N) ≫ H'.map (lJ.app N) ≫ d.app (S₀.obj N)
-  apply (a₃.homEquiv _ _).injective
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Functor.comp_obj]
-  have hn := a₃.unit.naturality (c.app N)
-  dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hn
-  rw [← reassoc_of% hn, ← reassoc_of% (hi (G.obj N))]
-  have hq := qI.naturality (lG.app N)
-  dsimp only [Functor.comp_map, Functor.comp_obj] at hq
-  rw [← hq, ← I.map_comp_assoc, ← hg, I.map_comp]
-  have hcn := c.naturality (a₀.unit.app N)
-  dsimp only [Functor.comp_map, Functor.comp_obj] at hcn
-  simp only [Category.assoc, Functor.id_obj] at hcn ⊢
-  rw [← reassoc_of% hcn, hc]
-  rw [← reassoc_of% (hh (J.obj N))]
-  have hqn := qH.naturality (lJ.app N)
-  dsimp only [Functor.comp_map, Functor.comp_obj] at hqn
-  rw [← reassoc_of% hqn, ← H.map_comp_assoc, hj]
-  simp only [Functor.map_comp, Category.assoc]
 
 
 end AlgebraicGeometry.ProEtale

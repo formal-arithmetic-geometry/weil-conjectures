@@ -81,19 +81,6 @@ lemma isIso_pre_app_of_isIso {A B : C} (f : B ⟶ A) [IsIso f] (Z : C) : IsIso (
     NatTrans.id_app], by rw [← NatTrans.comp_app, ← pre_map, IsIso.hom_inv_id, pre_id,
     NatTrans.id_app]⟩
 
-/-- If the duality map at the unit of a lax monoidal functor with invertible unit map is
-invertible, so is the dualizing map. -/
-lemma isIso_of_isIso_nearbyDualityMap_unit (F : C ⥤ C') [F.LaxMonoidal]
-    [IsIso (Functor.LaxMonoidal.ε F)] {ω : C} {ω' : C'} (θ : F.obj ω ⟶ ω')
-    (h : IsIso (nearbyDualityMap (fun A B ↦ Functor.LaxMonoidal.μ F A B) θ (𝟙_ C))) :
-    IsIso θ := by
-  have := isIso_pre_app_of_isIso (Functor.LaxMonoidal.ε F) ω'
-  have e := map_unitNatIso_hom_app_comp_nearbyDualityMap_comp_pre F θ
-  have : IsIso (θ ≫ unitNatIso.hom.app ω') := by
-    rw [← e]
-    infer_instance
-  exact IsIso.of_isIso_comp_right θ (unitNatIso.hom.app ω')
-
 /-- For a functor `G` and a lax monoidal functor `F` with invertible unit map, if `G` inverts the
 duality map at the unit, it inverts the dualizing map. -/
 lemma isIso_map_of_isIso_map_nearbyDualityMap_unit {D : Type*} [Category* D] (G : C' ⥤ D)

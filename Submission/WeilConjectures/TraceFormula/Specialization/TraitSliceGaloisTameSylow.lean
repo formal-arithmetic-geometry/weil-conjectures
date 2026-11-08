@@ -265,13 +265,4 @@ theorem isPGroup_traitGenericSepCompositum_of_dvd {p : ℕ} (hp : p.Prime)
   obtain ⟨ρ, hρ, hγρ⟩ := PowerSeries.exists_pow_eq_X_and_mem_adjoin hγ hdK
   exact adjoin_simple_le_iff.2 (mem_traitGenericSepCompositum_of_pow_eq hd hρ) hγρ
 
-/-- `AlgebraicGeometry.isPGroup_traitGenericSepCompositum_of_dvd` for `p` the characteristic of
-`k'`: `Gal(F_K^sep / F_K·F^sep)` is a pro-`p` group. -/
-theorem isPGroup_traitGenericSepCompositum_of_charP {p : ℕ} (hp : p.Prime) [CharP k' p]
-    (M : IntermediateField (traitGenericSepCompositum k' K) (traitGenericField K))
-    [FiniteDimensional (traitGenericSepCompositum k' K) M]
-    [IsGalois (traitGenericSepCompositum k' K) M] :
-    IsPGroup p Gal(M/traitGenericSepCompositum k' K) :=
-  isPGroup_traitGenericSepCompositum_of_dvd hp (fun n hn ↦ (CharP.cast_eq_zero_iff k' p n).1 hn) M
-
 end AlgebraicGeometry

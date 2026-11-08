@@ -75,12 +75,6 @@ lemma fourierTransformPi_eq_sum_compTrace (ψ : AddChar K R) (f : (ι → L) →
     fourierTransformPi ψ f y = ∑ x, f x * ψ.compTrace L (∑ i, x i * y i) :=
   rfl
 
-/-- The classical Fourier transform on `L^ι` commutes with negation. -/
-lemma fourierTransformPi_neg (ψ : AddChar K R) (f : (ι → L) → R) :
-    fourierTransformPi ψ (fun x ↦ -f x) = fun y ↦ -fourierTransformPi ψ f y := by
-  ext y
-  simp [fourierTransformPi]
-
 /-- The classical Fourier transform on `L^ι` is linear over the constants. -/
 lemma fourierTransformPi_const_mul (ψ : AddChar K R) (c : R) (f : (ι → L) → R) (y : ι → L) :
     fourierTransformPi ψ (fun x ↦ c * f x) y = c * fourierTransformPi ψ f y := by
@@ -94,17 +88,6 @@ for `ι` with one element (`FiniteField.fourierTransformPi_unique`).
 (sketch blueprint: `def-fd-trace-function`) -/
 noncomputable def fourierTransform (ψ : AddChar K R) (f : L → R) (y : L) : R :=
   ∑ x, f x * ψ (Algebra.trace K L (x * y))
-
-lemma fourierTransform_eq_sum_compTrace (ψ : AddChar K R) (f : L → R) (y : L) :
-    fourierTransform ψ f y = ∑ x, f x * ψ.compTrace L (x * y) :=
-  rfl
-
-/-- The classical Fourier transform is additive in the function; in particular it commutes with
-negation. -/
-lemma fourierTransform_neg (ψ : AddChar K R) (f : L → R) :
-    fourierTransform ψ (fun x ↦ -f x) = fun y ↦ -fourierTransform ψ f y := by
-  ext y
-  simp [fourierTransform, Finset.sum_neg_distrib]
 
 omit [Field L] [Fintype ι] [DecidableEq ι] in
 /-- A sum over the vectors `L^ι`, for `ι` with one element, is a sum over `L`. -/

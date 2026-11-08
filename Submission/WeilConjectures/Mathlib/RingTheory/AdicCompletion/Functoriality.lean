@@ -73,20 +73,3 @@ lemma Module.Finite.of_isHausdorff_span_singleton (ϖ : R) [IsPrecomplete (Ideal
   have hsurj : Function.Surjective f :=
     surjective_of_mkQ_comp_surjective (I := Ideal.span {ϖ}) (hf ▸ hg)
   exact Module.Finite.of_surjective f hsurj
-
-/-- **Precompleteness transfers along ring isomorphisms** for principal ideals: if `R` is
-`ϖ`-adically precomplete and `e : R ≃+* S`, then `S` is `e ϖ`-adically precomplete. -/
-lemma IsPrecomplete.of_ringEquiv {S : Type*} [CommRing S] (e : R ≃+* S) (ϖ : R)
-    [IsPrecomplete (Ideal.span {ϖ}) R] : IsPrecomplete (Ideal.span {e ϖ}) S where
-  prec' f hf := by
-    have key (a b : R) (n : ℕ) : a ≡ b [SMOD ((Ideal.span {ϖ}) ^ n • ⊤ : Submodule R R)] ↔
-        e a ≡ e b [SMOD ((Ideal.span {e ϖ}) ^ n • ⊤ : Submodule S S)] := by
-      rw [SModEq.sub_mem, SModEq.sub_mem, ← map_sub,
-        Submodule.mem_span_singleton_pow_smul_top_iff,
-        Submodule.mem_span_singleton_pow_smul_top_iff]
-      refine ⟨fun ⟨y, hy⟩ ↦ ⟨e y, ?_⟩, fun ⟨y, hy⟩ ↦ ⟨e.symm y, e.injective ?_⟩⟩
-      · rw [smul_eq_mul, ← map_pow, ← map_mul, ← smul_eq_mul, hy]
-      · rw [smul_eq_mul, map_mul, map_pow, e.apply_symm_apply, ← smul_eq_mul, hy]
-    obtain ⟨L, hL⟩ := IsPrecomplete.prec' (I := Ideal.span {ϖ}) (fun n ↦ e.symm (f n))
-      fun {m n} h ↦ (key _ _ m).2 (by simpa using hf h)
-    exact ⟨e L, fun n ↦ by simpa using (key _ _ n).1 (hL n)⟩

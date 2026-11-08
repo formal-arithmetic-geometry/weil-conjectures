@@ -15,7 +15,9 @@ public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Singl
 public import Submission.WeilConjectures.ConstructibleSheaf.FilteredColimit
 public import Submission.WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import Submission.WeilConjectures.ConstructibleSheaf.Monoidal
-public import Submission.WeilConjectures.ConstructibleSheaf.FiniteDirectImageKunneth
+public import Submission.WeilConjectures.ConstructibleSheaf.FiniteDerived
+public import Submission.WeilConjectures.ConstructibleSheaf.FiniteConstantModel
+public import Submission.WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 

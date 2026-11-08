@@ -9,7 +9,9 @@ public import Submission.WeilConjectures.SixFunctors.Etale.Derived.CoefficientsS
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion

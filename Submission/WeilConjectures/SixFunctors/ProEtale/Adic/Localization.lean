@@ -158,16 +158,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {Z U X : Scheme.{u}} (s : X ⟶ 
   (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
-/-- The direct image `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion, built from the
-finiteness theorem, is the functor
-`AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedLowerStar` built without it: both are
-the restriction of `Ri_*`. -/
-noncomputable def ProEtale.boundedConstructibleAdicRightDerivedLowerStarIsoClosedLowerStar :
-    haveI := LocallyOfFiniteType.isLocallyNoetherian s
-    ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) s hk i ≅
-      ProEtale.boundedConstructibleAdicClosedLowerStar l i :=
-  Iso.refl _
-
 /-- The direct image `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion is fully
 faithful, phrased with the direct image built from the finiteness theorem. The same statement
 for `AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedLowerStar`, which does not use the
@@ -274,40 +264,6 @@ theorem ProEtale.existsUnique_distTriang_boundedConstructibleAdicClosedSupportTr
     (ProEtale.fullyFaithfulBoundedConstructibleAdicRightDerivedLowerStar s hk i)
     (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
     (ProEtale.boundedConstructibleAdicRightDerivedLowerStar_essImage_of_isZero s hk i j hij) K
-
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the stage `ℚ̄_ℓ`, functoriality:
-for `φ : K ⟶ K'` in `Dᵇc(X, ℚ̄_ℓ)` and distinguished closed-support triangles of `K` and `K'`, the
-triple `(i_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
-theorem ProEtale.exists_triangleHom_boundedConstructibleAdicClosedSupportTriangle
-    {K K' : (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory}
-    (φ : K ⟶ K') {w w'}
-    (hw : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K w ∈ distTriang _)
-    (hw' : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K' w' ∈
-      distTriang _) :
-    ∃ τ : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K w ⟶
-        ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K' w',
-      τ.hom₁ = (ProEtale.boundedConstructibleAdicRightDerivedLowerStar s hk i).map
-          ((ProEtale.boundedConstructibleAdicClosedUpperShriek s hk i j hij).map φ) ∧
-        τ.hom₂ = φ ∧
-        τ.hom₃ = (ProEtale.boundedConstructibleAdicRightDerivedLowerStar s hk j).map
-          ((ProEtale.boundedConstructibleAdicUpperStar l j).map φ) :=
-  Recollement.exists_triangleHom _ _
-    (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
-    φ hw hw'
-
-/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the stage `ℚ̄_ℓ`, functoriality: a
-morphism of distinguished closed-support triangles is determined by its middle component. -/
-theorem ProEtale.boundedConstructibleAdicClosedSupportTriangle_hom_ext
-    {K K' : (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory} {w w'}
-    (hw : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K w ∈ distTriang _)
-    (hw' : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K' w' ∈
-      distTriang _)
-    {τ τ' : ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K w ⟶
-      ProEtale.boundedConstructibleAdicClosedSupportTriangle s hk i j hij K' w'}
-    (h : τ.hom₂ = τ'.hom₂) : τ = τ' :=
-  Recollement.triangleHom_ext _ _
-    (ProEtale.isZero_boundedConstructibleAdicUpperStar_obj_rightDerivedLowerStar_obj s hk i j hij)
-    hw hw' h
 
 /-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the stage `ℚ̄_ℓ`: `Ri^! Rj_* G = 0`
 for `G ∈ Dᵇc(U, ℚ̄_ℓ)`, as `Hom(Q, Ri^! Rj_* G) = Hom(i_* Q, Rj_* G) = 0`. -/

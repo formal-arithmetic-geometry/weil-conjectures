@@ -62,26 +62,6 @@ theorem lift_ι_comp_commShiftIso_hom_app_hom_heq {C' : Type*} [Category* C'] [H
     eqToHom_map, Category.assoc]
   exact (eqToHom_comp_heq _ _).trans (comp_eqToHom_heq _ _)
 
-/-- A lifted functor whose shift comparisons are the ambient ones commutes with the
-identity comparison to the ambient functor. -/
-theorem liftCompιIso_hom_commShift_of_heq {D : Type*} [Category* D] [HasShift D ℤ]
-    (P : ObjectProperty D) [P.IsStableUnderShift ℤ] {C : Type*} [Category* C] [HasShift C ℤ]
-    (G : C ⥤ D) (hG : ∀ X, P (G.obj X)) [G.CommShift ℤ] {_ : (P.lift G hG).CommShift ℤ}
-    (hs : ∀ X (n : ℤ),
-      (((P.lift G hG).commShiftIso n).hom.app X).hom ≍ (G.commShiftIso n).hom.app X) :
-    NatTrans.CommShift (P.liftCompιIso G hG).hom ℤ := by
-  constructor
-  intro n
-  ext X
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.commShiftIso_comp_hom_app, ObjectProperty.liftCompιIso, Iso.refl_hom,
-    NatTrans.id_app, ObjectProperty.ι_map]
-  apply eq_of_heq
-  exact (comp_heq_of_heq_id _ _ rfl (heq_of_eq ((shiftFunctor D n).map_id _))).trans
-    ((comp_heq_of_heq_id _ _ (P.obj_shift_eq n _)
-    ((heq_of_eq (P.ι_commShiftIso_hom_app n _)).trans (eqToHom_heq_id_cod _ _ _))).trans
-      ((hs X n).trans (heq_of_eq (Category.id_comp _)).symm))
-
 end ObjectProperty
 
 end CategoryTheory

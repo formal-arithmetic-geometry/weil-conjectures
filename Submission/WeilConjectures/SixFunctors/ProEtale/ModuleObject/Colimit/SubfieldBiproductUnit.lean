@@ -8,7 +8,12 @@ module
 public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsBiproductUnit
 public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsBasis
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
-public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.MateBiproduct
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteCondensed

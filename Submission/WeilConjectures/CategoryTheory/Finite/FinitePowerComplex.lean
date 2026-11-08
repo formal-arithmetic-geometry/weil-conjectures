@@ -89,51 +89,6 @@ end
 section
 variable [Abelian A]
 
-def finitePowerComplexMap (d : ℕ) (P : CochainComplex A ℤ) :
-    ((finitePowerFunctor d).mapHomologicalComplex (.up ℤ)).obj P ⟶
-      ∏ᶜ fun _ : Fin d ↦ P :=
-  Pi.lift (fun i ↦
-    { f := fun k ↦ Pi.π (fun _ : Fin d ↦ P.X k) i
-      comm' := by intro k l h; simp [finitePowerFunctor] })
-
-/-- Mapping a complex by the finite power functor is the finite power of the complex.
-
-Source: Stacks Project, Tag 03DB, finite-product interchange.
-(blueprint: lem-pur-finite-power-complex).
-
-Proof: the coordinate projections define a chain map. In every degree its composite
-with the product comparison for evaluation is the identity, by product extensionality.
-Evaluation preserves products, hence that comparison and the chain map in every degree
-are isomorphisms. A chain map whose components are isomorphisms is an isomorphism. -/
-def finitePowerComplexIso (d : ℕ) (P : CochainComplex A ℤ) :
-    ((finitePowerFunctor d).mapHomologicalComplex (.up ℤ)).obj P ≅
-      ∏ᶜ fun _ : Fin d ↦ P := by
-  have (k : ℤ) : IsIso ((finitePowerComplexMap d P).f k) := by
-    have h : (finitePowerComplexMap d P).f k ≫
-        piComparison (HomologicalComplex.eval A (.up ℤ) k) (fun _ : Fin d ↦ P) = 𝟙 _ := by
-      apply Pi.hom_ext
-      intro i
-      simp only [Category.assoc, piComparison_comp_π, Category.id_comp]
-      change ((finitePowerComplexMap d P) ≫ Pi.π (fun _ : Fin d ↦ P) i).f k = _
-      rw [finitePowerComplexMap, Pi.lift_comp_π]
-      rfl
-    have : IsIso ((finitePowerComplexMap d P).f k ≫
-        piComparison (HomologicalComplex.eval A (.up ℤ) k) (fun _ : Fin d ↦ P)) := by
-      rw [h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _
-      (piComparison (HomologicalComplex.eval A (.up ℤ) k) (fun _ : Fin d ↦ P))
-  have := HomologicalComplex.Hom.isIso_of_components (finitePowerComplexMap d P)
-  exact asIso (finitePowerComplexMap d P)
-
-@[reassoc (attr := simp)]
-theorem finitePowerComplexIso_projection (d : ℕ) (P : CochainComplex A ℤ)
-    (i : Fin d) (k : ℤ) :
-    ((finitePowerComplexIso d P).hom ≫ Pi.π (fun _ : Fin d ↦ P) i).f k =
-      Pi.π (fun _ : Fin d ↦ P.X k) i := by
-  change (finitePowerComplexMap d P ≫ _).f k = _
-  rw [finitePowerComplexMap, Pi.lift_comp_π]
-
 end
 
 end CategoryTheory

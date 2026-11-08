@@ -66,15 +66,6 @@ lemma padicIntegersRingObjMulLeft_hom_app_apply (ϖ : PadicAlgCl.integers ℓ E)
   fun _ ↦ rfl
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
-lemma padicIntegersRingObjToResidueField_hom_app_apply (S : Profinite.{u}ᵒᵖ) :
-    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-    ∀ a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E),
-      (padicIntegersRingObjToResidueField ℓ E).hom.app S a =
-        ULift.up ((⟨PadicAlgCl.integersResidue ℓ E, PadicAlgCl.continuous_integersResidue ℓ E⟩ :
-          C(PadicAlgCl.integers ℓ E, PadicAlgCl.integersResidueField ℓ E)).comp a.down) :=
-  fun _ ↦ rfl
-
-omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- An element of the maximal ideal vanishes in `𝔽_E`: the multiplication by `ϖ ∈ 𝔪_E` on `𝒪̲_E`
 followed by the residue map is zero. -/
 lemma padicIntegersRingObjMulLeft_comp_residueField (ϖ : PadicAlgCl.integers ℓ E)

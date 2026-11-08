@@ -47,12 +47,6 @@ noncomputable def globalSectionOfHom
     (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj N :=
   (ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map f).hom (1 : ULift (PadicAlgCl l))
 
-variable (Z) in
-/-- The sections over the terminal object `Z` of the pro-étale site. -/
-noncomputable abbrev terminalSections :
-    Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l) ⥤ WeilCoefficients.{u} l :=
-  (sheafSections _ _).obj (op (Scheme.ProEt.mk (𝟙 Z)))
-
 lemma globalSectionOfHom_eq {N : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)}
     (f : 𝟙_ (Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)) ⟶ N) :
     globalSectionOfHom f =

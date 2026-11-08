@@ -71,8 +71,6 @@ instance isProper (r : Refinement c d) : IsProper r.hom :=
   have : IsProper (r.hom ≫ d.g) := by rw [r.hom_g]; exact c.isProper
   .of_comp r.hom d.g
 
-example (r : Refinement c d) : IsProper r.hom := inferInstance
-
 /-- The identity morphism of the ambient scheme is a refinement of a compactification by
 itself. -/
 @[simps]

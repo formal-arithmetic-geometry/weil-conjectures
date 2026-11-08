@@ -62,9 +62,6 @@ variable {S : Scheme.{u}} (N : S.NoetherianApproximation)
 def proj (k : N.I) : S ⟶ N.D.obj k :=
   N.π.app k
 
-lemma proj_eq (k : N.I) : N.proj k = N.π.app k :=
-  rfl
-
 @[reassoc (attr := simp)]
 lemma proj_comp_map {j k : N.I} (g : j ⟶ k) : N.proj j ≫ N.D.map g = N.proj k :=
   (Cone.mk S N.π).w g

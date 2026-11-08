@@ -253,22 +253,8 @@ noncomputable def kummerCover (hf : IsUnit f) (hr : IsUnit (r : Γ(X, U))) : X.P
 
 variable (hf : IsUnit f) (hr : IsUnit (r : Γ(X, U)))
 
-lemma kummerCover_left : (kummerCover hU f r hf hr).left = Spec (ProEtale.kummerRing f r) :=
-  rfl
-
 lemma kummerCover_hom : (kummerCover hU f r hf hr).hom = kummerCoverHom hU f r :=
   rfl
-
-/-- The image of the Kummer cover `Spec Γ(X, U)[f^{1/r^∞}] ⟶ X` is `U`. -/
-lemma range_kummerCoverHom (hr : IsUnit (r : Γ(X, U))) :
-    Set.range (kummerCoverHom hU f r) = U := by
-  have := ProEtale.surjective_SpecMap_kummerRing f r hr
-  ext x
-  rw [kummerCoverHom, ← hU.range_fromSpec]
-  refine ⟨fun ⟨y, hy⟩ ↦ ⟨_, hy⟩, fun ⟨y, hy⟩ ↦ ?_⟩
-  obtain ⟨z, rfl⟩ := (Spec.map (CommRingCat.ofHom
-    (algebraMap Γ(X, U) (ProEtale.kummerRing f r)))).surjective y
-  exact ⟨z, hy⟩
 
 end KummerCover
 

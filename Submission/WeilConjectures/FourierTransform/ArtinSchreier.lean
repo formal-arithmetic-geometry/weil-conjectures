@@ -313,12 +313,6 @@ theorem exists_eq_artinSchreierTranslation_of_comp_artinSchreierMap (g : 𝔸¹[
   obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation (𝟙 _) g (by rw [hg, Category.id_comp])
   exact ⟨a, ha.trans (Category.id_comp _)⟩
 
-@[deprecated (since := "2026-10-08")]
-alias exists_comp_artinSchreierMap_eq := AffineSpace.exists_comp_artinSchreierMap_eq
-
-@[deprecated (since := "2026-10-08")]
-alias surjective_artinSchreierMap := AffineSpace.surjective_artinSchreierMap
-
 /-- The Artin–Schreier map `AS_q` is étale, `q` vanishing in `k`. -/
 lemma etale_artinSchreierMap : Etale AS[k] :=
   AffineSpace.etale_artinSchreierMap PUnit (Spec (.of k)) (by
@@ -1417,20 +1411,6 @@ theorem nonempty_iso_artinSchreierSheafOf_neg_inv (Ψ : AddChar k Λ) (f : Γ(X,
   exact ⟨(upperStarComp _ _ _ _ h).app (artinSchreierSheaf Ψ) ≪≫
     (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f)^*[ModuleCat Λ].mapIso e⟩
 
-/-- **The affine-line Artin–Schreier covering.** The Artin–Schreier sheaf of the coordinate
-function `x` of `𝔸¹_k` is `ℒ_Ψ` itself: the Artin–Schreier covering of `x` is
-`AS_q : 𝔸¹_k ⟶ 𝔸¹_k`, `y ↦ y ^ q - y`, on which `k` acts by the translations `y ↦ y + a`, since
-the function `x : 𝔸¹_k ⟶ 𝔸¹_k` is the identity.
-(blueprint: `lem-fd-as-cover-affine-line`) -/
-def artinSchreierSheafOfCoordIso (Ψ : AddChar k Λ) :
-    artinSchreierSheafOf 𝔸¹[k] Ψ (AffineSpace.coord _ PUnit.unit) ≅ artinSchreierSheaf Ψ :=
-  eqToIso (by
-    rw [artinSchreierSheafOf, show (AffineSpace.homOfVector (𝔸¹[k] ↘ Spec (.of k))
-        fun _ ↦ AffineSpace.coord (Spec (.of k)) PUnit.unit) = 𝟙 _ from
-      AffineSpace.hom_ext (by simp) fun _ ↦ by simp]
-    rfl) ≪≫
-    (upperStarId (ModuleCat Λ) 𝔸¹[k]).app _
-
 open AddChar in
 /-- For a primitive character `Ψ`, the normalised character sums over `k` detect zero:
 `q⁻¹ ∑_a Ψ(a c) = 1` if `c = 0` and `0` otherwise. -/
@@ -1504,22 +1484,6 @@ noncomputable def artinSchreierPushforwardIsoBiproduct [IsDomain Λ] (Ψ : AddCh
             ite_eq_right hb, zero_comp] })
     (isBilimitOfTotal _ ((Finset.sum_congr rfl fun b _ ↦ image.fac _).trans
       (sum_artinSchreierIdempotent_mulShift hΨ)))
-
-attribute [local instance] Abelian.hasFiniteBiproducts in
-@[reassoc (attr := simp)]
-lemma artinSchreierPushforwardIsoBiproduct_hom_π [IsDomain Λ] (Ψ : AddChar k Λ)
-    (hΨ : Ψ.IsPrimitive) (b : k) :
-    (artinSchreierPushforwardIsoBiproduct Ψ hΨ).hom ≫ biproduct.π _ b =
-      factorThruImage (artinSchreierIdempotent (Ψ.mulShift b)) :=
-  biproduct.lift_π _ _
-
-attribute [local instance] Abelian.hasFiniteBiproducts in
-@[reassoc (attr := simp)]
-lemma ι_artinSchreierPushforwardIsoBiproduct_inv [IsDomain Λ] (Ψ : AddChar k Λ)
-    (hΨ : Ψ.IsPrimitive) (b : k) :
-    biproduct.ι _ b ≫ (artinSchreierPushforwardIsoBiproduct Ψ hΨ).inv =
-      image.ι (artinSchreierIdempotent (Ψ.mulShift b)) :=
-  biproduct.ι_desc _ _
 
 end Properties
 

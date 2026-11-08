@@ -262,28 +262,6 @@ private theorem scalarExtensionIso_unit (φ : R ⟶ S) (d : ℕ)
 
 end SheafComparison
 
-private theorem scalarExtensionIso_tmul (φ : R ⟶ S) (d : ℕ)
-    (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
-      (restrictScalars (𝓻 φ)).obj (unit (𝓡 S)))
-    (M : SheafOfModules.{u} (𝓡 R)) (V : Cᵒᵖ)
-    (s : S.obj.obj V) (m : M.val.obj V) (i : Fin d) :
-    ((scalarExtensionIso φ d e M).hom ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V
-      ((toSheafify J (changeOfRingsPresheaf.{v, u, u} φ M).presheaf).app V
-        (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)) =
-      ((e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val.app V s) • m := by
-  have h := congrArg (PresheafOfModules.toPresheaf (𝓡 R).obj).map
-    (scalarExtensionIso_unit φ d e M)
-  rw [Functor.map_comp] at h
-  change (PresheafOfModules.toPresheaf (𝓡 S).obj).map (tensorUnit φ M) ≫
-    (PresheafOfModules.toPresheaf (𝓡 R).obj).map
-      (scalarExtensionIso φ d e M).hom.val = _ at h
-  rw [tensorUnit, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app] at h
-  have hx := congrArg (fun f ↦ f.app V
-    (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)) h
-  refine (congrArg ((Pi.π (fun _ : Fin d ↦ M) i).val.app V) hx).trans ?_
-  unfold scalarExtensionPresheafIso
-  exact scalarExtensionApp_tmul φ d e M V s m i
-
 private def scalarChangeMap (φ : R ⟶ S) {M N : SheafOfModules.{u} (𝓡 R)}
     (f : M ⟶ N) : changeOfRingsPresheaf.{v, u, u} φ M ⟶
       changeOfRingsPresheaf.{v, u, u} φ N where

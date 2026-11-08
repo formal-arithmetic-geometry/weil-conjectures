@@ -251,32 +251,6 @@ theorem constantLimitUnit_normalization
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     IsIso.hom_inv_id_assoc, Category.comp_id]
 
-/-- The constant-tower limit unit exhibits the right derived inverse limit.
-Source: Stacks 0941, 07A6. -/
-theorem constantLimitUnit_isRightDerived :
-    (coefficientConstantTowerLimit l E W).IsRightDerivedFunctor
-      (constantLimitUnit l E W)
-      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ scalarReductionSource l E W) (.up ℤ)) := by
-  let A := ℕᵒᵖ ⥤ scalarReductionSource l E W
-  let F : A ⥤ scalarReductionSource l E W := lim
-  let e := Functor.isoWhiskerRight (termwiseLimitComparison l E W) DerivedCategory.Q
-  have h : (CochainComplex.KInjectives.localizerMorphism A).Derives
-      (roosLimitFunctor ⋙ DerivedCategory.Q) :=
-    (MorphismProperty.IsInvertedBy.iff_of_iso _
-      (Functor.isoWhiskerLeft (CochainComplex.KInjectives.localizerMorphism A).functor e)).mp
-        (CategoryTheory.derives F)
-  apply h.isRightDerivedFunctor_of_isIso (constantLimitUnit l E W)
-  intro I
-  have : I.obj.IsKInjective := I.property
-  have hn := constantLimitUnit_normalization l E W I.obj
-  have : IsIso ((constantLimitUnit l E W).app I.obj ≫
-      (F.rightDerivedFunctorObjQIso I.obj).hom) := by
-    rw [hn]
-    infer_instance
-  change IsIso ((constantLimitUnit l E W).app I.obj)
-  exact IsIso.of_isIso_comp_right ((constantLimitUnit l E W).app I.obj)
-    (F.rightDerivedFunctorObjQIso I.obj).hom
-
 /-! ### The system limit unit -/
 
 

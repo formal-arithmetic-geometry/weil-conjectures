@@ -180,13 +180,6 @@ lemma liftedSum_erase (d : ι × ℕ →₀ Ω) (j : ι × ℕ) :
   conv_lhs => rw [← Finsupp.erase_add_single j d]
   rw [liftedSum_add, liftedSum_single]
 
-/-- The value of a lifted sum is at most the largest value of its coefficients. -/
-lemma valuation_liftedSum_le (hw1 : ∀ i, v (w i) = 1) (d : ι × ℕ →₀ Ω) {γ : Γ₀}
-    (hd : ∀ j, v (d j) ≤ γ) : v (liftedSum p w d) ≤ γ := by
-  refine v.map_sum_le fun j _ ↦ ?_
-  rw [map_mul, map_pow, hw1, one_pow, mul_one]
-  exact hd j
-
 end Stage2
 
 section Stage2Step

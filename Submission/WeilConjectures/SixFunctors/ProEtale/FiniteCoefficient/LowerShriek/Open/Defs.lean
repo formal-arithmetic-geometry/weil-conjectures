@@ -354,11 +354,6 @@ instance ProEtale.preservesFiniteLimits_openImmersionLowerShriek :
   rw [heq]
   exact comp_preservesFiniteLimits _ _
 
-/-- Together with `ProEtale.preservesFiniteLimits_openImmersionLowerShriek` this
-makes `j_!` exact. -/
-example : PreservesFiniteColimits (j)_!open[A] :=
-  inferInstance
-
 /-- For an open immersion `j`, the pullback `j^*` of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is computed by
 restriction along

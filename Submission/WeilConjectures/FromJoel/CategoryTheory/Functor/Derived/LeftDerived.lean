@@ -253,8 +253,6 @@ instance [IsIso α] : LF.IsLeftDerivedFunctor α W where
         dsimp [Localization.Lifting.iso, lifting]
         simpa using NatTrans.congr_app φ.w X)⟩⟩
 
-example (G : D ⥤ H) : G.IsLeftDerivedFunctor (𝟙 (L ⋙ G)) W := inferInstance
-
 instance (G : D ⥤ H) : (L ⋙ G).HasLeftDerivedFunctor W :=
   HasLeftDerivedFunctor.mk' G (𝟙 _)
 

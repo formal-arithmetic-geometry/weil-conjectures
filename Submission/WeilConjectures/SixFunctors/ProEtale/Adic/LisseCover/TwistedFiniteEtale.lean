@@ -207,20 +207,6 @@ theorem exists_finite_invariant_subset_of_isIntegrallyClosed_stalk [IsLocallyNoe
   exact exists_finite_invariant_subset_of_comp f j hj hsub hc (fun w s' ↦
     exists_finite_invariant_subset_of_isGenericallyConnected (j ≫ f) hη hQ hc.restrict w s') v s
 
-/-- **The components of a locally constant sheaf of sets on a regular scheme are finite**: the
-case of a connected regular Noetherian scheme `Y` of
-`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`, regular schemes
-being normal (`AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`). -/
-theorem exists_finite_invariant_subset [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
-    [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
-    (v : V) (s : S) :
-    ∃ T : V → Set S, (∀ v, (T v).Finite) ∧ IsLocallyConstant T ∧
-      (∀ z, T ((pullback.fst f f).base z) = c z '' T ((pullback.snd f f).base z)) ∧
-        s ∈ T v :=
-  exists_finite_invariant_subset_of_isIntegrallyClosed_stalk
-    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) f hc v s
-
 /-- **Locally constant sheaves of sets on a geometrically unibranch scheme are unions of finite
 étale ones** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10, with Lemma
 7.3.9), in cocycle form. Let `Y` be a connected normal (hence geometrically unibranch)
@@ -357,21 +343,6 @@ theorem exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk [IsLocal
   · simp only
     rw [hσ'a, ← Scheme.Hom.comp_apply, pullback.lift_fst]
     exact ha
-
-/-- **Locally constant sheaves of sets on a regular scheme are unions of finite étale ones**:
-the case of a connected regular Noetherian scheme `Y` of
-`AlgebraicGeometry.exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk`, regular
-schemes being normal (`AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`). -/
-theorem exists_isTwistedSection_finiteEtale [IsLocallyNoetherian Y] [CompactSpace Y]
-    [IsRegular Y] [ConnectedSpace Y] (f : V ⟶ Y) [WeaklyEtale f] [Surjective f]
-    [QuasiCompact f] {S : Type*} {c : ↥(pullback f f) → S → S} (hc : IsDescentCocycle f c)
-    {K : Type u} [Field K] [IsAlgClosed K] (v : Spec (.of K) ⟶ V) (s : S) :
-    ∃ (P : Scheme.{u}) (p : P ⟶ Y) (_ : IsFinite p) (_ : Etale p) (σ : ↥(pullback f p) → S)
-      (p' : Spec (.of K) ⟶ P) (h : v ≫ f = p' ≫ p),
-      IsTwistedSection f c p σ ∧
-        σ ((pullback.lift v p' h).base (IsLocalRing.closedPoint K)) = s :=
-  exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk
-    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) f hc v s
 
 /-- The points of the fibre of a finite coproduct of finite étale schemes come from the
 summands. -/

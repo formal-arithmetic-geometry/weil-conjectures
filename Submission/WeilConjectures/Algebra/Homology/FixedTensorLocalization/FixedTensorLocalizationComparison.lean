@@ -102,17 +102,6 @@ abbrev Homotopy := HomotopyCategory (Modules R) (.up ℤ)
 (blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
 abbrev quotient := HomotopyCategory.quotient (Modules R) (.up ℤ)
 
-/-- The direct-sum total tensor with its canonical signs. Source: Stacks, Tag 06YM
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev totalTensor :=
-  let _ (I : Type r) : Limits.HasColimitsOfShape (Discrete I)
-      (PresheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
-    PresheafOfModules.hasColimitsOfShape _ _
-  show CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ ⥤
-    CochainComplex (Modules R) ℤ from
-  (@curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)).map₂CochainComplex
-
 variable [HasDerivedCategory.{w} (Modules R)]
 
 /-- The chosen-universe derived category. Source: Stacks, Tag 06YU
@@ -122,11 +111,5 @@ abbrev Derived := DerivedCategory (Modules R)
 /-- Homotopy localization. Source: Stacks, Tag 06YU
 (blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
 abbrev Q := DerivedCategory.Qh (C := Modules R)
-
-/-- The resolving full subcategory selected by the published descent theorem.
-Source: Stacks, Tags 06YS and 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
-abbrev resolving : ObjectProperty (Homotopy R) :=
-  (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose
 
 end SheafOfModules.FixedTensorLocalization

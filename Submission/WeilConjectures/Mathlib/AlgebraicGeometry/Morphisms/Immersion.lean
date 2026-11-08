@@ -84,11 +84,6 @@ lemma isIso_of_nonempty {K : Type u} [Field K] {Z : Scheme.{u}}
   have : IsIso g₁ := isIso_of_isClosedImmersion_of_surjective g₁
   infer_instance
 
-/-- A scheme immersed into a noetherian space is noetherian. -/
-lemma noetherianSpace {D X : Scheme.{u}} (i : D ⟶ X) [IsImmersion i]
-    [TopologicalSpace.NoetherianSpace X] : TopologicalSpace.NoetherianSpace D :=
-  i.isEmbedding.isInducing.noetherianSpace
-
 end IsImmersion
 
 variable {ι : Type*} {S : Scheme.{u}} (Y : ι → Over S) [HasProduct Y] (T : Over S)

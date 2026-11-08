@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.AbelianCounitCocycleCalculation
-import Submission.WeilConjectures.AlgebraicGeometry.AbelianResolutionComparisonEvaluation
+import Submission.WeilConjectures.AlgebraicGeometry.AbelianCounitCocycleDefinitions
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

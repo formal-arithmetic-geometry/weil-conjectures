@@ -65,16 +65,6 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} {X Y : Scheme.{u}}
 
-lemma projectionMapApp_eq (Λ' : Type (u + 1)) [CommRing Λ'] (f : X ⟶ Y)
-    [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
-    projectionMapApp Λ' f K L = ((projectionMap (ModuleCat.{u + 1} Λ') f).app K).app L :=
-  rfl
-
-lemma hasProjectionFormula_iff_isIso_projectionMapApp (Λ' : Type (u + 1)) [CommRing Λ']
-    (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X, Λ')) (L : 𝐃(Y, Λ')) :
-    HasProjectionFormula (ModuleCat.{u + 1} Λ') f K L ↔ IsIso (projectionMapApp Λ' f K L) :=
-  Iff.rfl
-
 /-- The finite-level projection formula (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`)
 for `AlgebraicGeometry.Etale.projectionMapApp`. -/
 instance isIso_projectionMapApp_of_finite (Λ' : Type (u + 1)) [CommRing Λ'] [Finite Λ']

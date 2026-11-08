@@ -73,27 +73,11 @@ private def reconstructionRestrictId
         (fun U ↦ (ModuleCat.restrictScalarsId (R.obj.obj U)).app (M.val.obj U))
         (fun {U V} f ↦ by ext x; rfl))) (fun _ ↦ by ext U x; rfl)
 
-private def reconstructionPresentationBackEquiv (D : AdicCoefficientDatum A) :
-    adicDatumModules T (intrinsicPresentationDatum D) ≌ pbcModules T (pbcAdicCompletion T D) :=
-  CategoryTheory.Equivalence.mk (intrinsicPresentationModulesBack T D)
-    (intrinsicPresentationModules T D)
-    ((pbcRestrictComp (pbcCompletedComparison T D).hom (pbcCompletedComparison T D).inv
-        (𝟙 _) (pbcCompletedComparison T D).hom_inv_id ≪≫
-      reconstructionRestrictId T _).symm)
-    (intrinsicPresentationRoundTrip T D).symm
-
 private theorem reconstructionUnit_section
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (M : pbcModules T R) (U : T.ProEtᵒᵖ) (x : M.val.obj U) :
     ((pbcScalarAdjunction φ).unit.app M).val.app U x = pbcTensorSection φ M U 1 x :=
   (pbcScalarAdjunction_exists φ).exists.choose_spec M U x
-
-private theorem reconstructionComp_section
-    {R S R' : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
-    (φ : R ⟶ S) (ψ : S ⟶ R') (χ : R ⟶ R') (h : φ ≫ ψ = χ)
-    (M : pbcModules T R') (U : T.ProEtᵒᵖ) (x : M.val.obj U) :
-    ((pbcRestrictComp φ ψ χ h).hom.app M).val.app U x = x :=
-  (pbcRestrictComp_exists φ ψ χ h).exists.choose_spec M U x
 
 private def productTransport
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D)

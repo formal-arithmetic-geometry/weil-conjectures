@@ -477,25 +477,6 @@ namespace BorelMooreSection
 variable {B E : Over (Spec (.of k))} [QuasiCompact B.hom] [LocallyOfFiniteType E.hom]
   [QuasiCompact E.hom] [IsSeparated E.hom]
 
-/-- **The local term at a point component** (blueprint `lem-trf-local-term-point`,
-`rem-ptr-trf-local-term-9`): along an open and closed immersion `j : s ⟶ E` of the base point,
-the local term of `α` is its restriction `j^* α : ℚ̄_ℓ,s ⟶ ω_s`, read as an element of
-`End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
-theorem localTerm_point (j : point k ⟶ E) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
-    (α : BorelMooreSection ℓ E) :
-    α.localTerm j = α.restrict j ≫ (dualizingComplexPointIso ℓ k).hom :=
-  integral_point _
-
-/-- **The local term at a point component** (blueprint `lem-trf-local-term-point`): for an open
-and closed subscheme `j : B ⟶ E` with an isomorphism `e : B ≅ s` over `s`, the local term of
-`α` is the restriction `j^* α`, transported to the base point along `e` and read as an element
-of `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
-theorem localTerm_eq_of_iso [IsProper B.hom] (j : B ⟶ E) [IsOpenImmersion j.left]
-    [IsClosedImmersion j.left] (e : B ≅ point k) [IsProper e.hom.left]
-    (α : BorelMooreSection ℓ E) :
-    α.localTerm j = pushforward e.hom (α.restrict j) ≫ (dualizingComplexPointIso ℓ k).hom := by
-  rw [← integral_point, integral_pushforward, localTerm]
-
 end BorelMooreSection
 
 
@@ -505,18 +486,6 @@ namespace BorelMooreSection
 
 variable {T B X : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
   [IsSeparated B.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-- The pushforward of a Borel–Moore section along an open and closed immersion `j : B ⟶ X` is
-fixed by the idempotent `e_B` of `B`. -/
-lemma pushforward_comp_clopenIdempotent (j : B ⟶ X) [IsOpenImmersion j.left] [IsProper j.left]
-    (γ : BorelMooreSection ℓ B) :
-    pushforward j γ ≫ (clopenIdempotent ℓ j).app (dualizingComplex' ℓ X) =
-      pushforward j γ := by
-  rw [clopenIdempotent_app, pushforward]
-  simp only [Category.assoc]
-  rw [reassoc_of% (Adjunction.clopenCounit_comp_clopenSection _ _ _ _ _
-    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen ℓ j)
-    (dualizingComplex' ℓ X))]
 
 /-- The restriction to an open and closed subscheme `j : B ⟶ X` of the pushforward along `j` of
 a Borel–Moore section of `B` is the section itself. -/
@@ -545,21 +514,6 @@ namespace BorelMooreSection
 
 variable {T B X : Over (Spec (.of k))} [QuasiCompact T.hom] [QuasiCompact B.hom]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-- **The local term of a pushforward** (blueprint `thm-trf-frobenius-local-term`, Step 3): for an
-open and closed subscheme `j : B ⟶ X`, proper over `s`, and a proper morphism `h : T ⟶ X` from a
-scheme proper over `s` with image in `B`, the local term along `B` of the Borel–Moore pushforward
-`h_* γ` is `∫_T γ`. -/
-theorem localTerm_pushforward [IsProper T.hom] [IsProper B.hom] (j : B ⟶ X)
-    [IsOpenImmersion j.left] [IsClosedImmersion j.left] (h : T ⟶ X) [IsProper h.left]
-    (hh : Set.range h.left.base ⊆ Set.range j.left.base) (γ : BorelMooreSection ℓ T) :
-    (pushforward h γ).localTerm j = γ.integral := by
-  obtain ⟨e, rfl⟩ : ∃ e : T ⟶ B, e ≫ j = h :=
-    ⟨Over.homMk (IsOpenImmersion.lift j.left h.left hh) (by
-      rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac, Over.w h]),
-      Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)⟩
-  have : IsProper e.left := IsProper.of_comp e.left j.left
-  rw [← pushforward_comp, localTerm, restrict_pushforward_self, integral_pushforward]
 
 end BorelMooreSection
 

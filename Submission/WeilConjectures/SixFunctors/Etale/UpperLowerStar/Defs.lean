@@ -283,9 +283,6 @@ instance Etale.preservesFiniteLimits_upperStar
   unfold Etale.upperStar Functor.sheafPullbackConstruction.sheafPullback
   infer_instance
 
-/-- The pullback `g^*` on étale sheaves is right exact, being a left adjoint. -/
-example : PreservesFiniteColimits (g)^*[A] := inferInstance
-
 /-- The pullback `g^*` on étale sheaves is additive, being a left adjoint. -/
 instance Etale.additive_upperStar : (g)^*[A].Additive :=
   (Etale.upperStarLowerStarAdjunction A g).left_adjoint_additive

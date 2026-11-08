@@ -120,9 +120,6 @@ lemma mul_def (L L' : Y.Pic) : L * L' =
     ofIsInvertible ((fromSkeleton Y.Modules).obj L.val ⊗ (fromSkeleton Y.Modules).obj L'.val) :=
   rfl
 
-lemma inv_def (L : Y.Pic) : L⁻¹ = ofIsInvertible ((fromSkeleton Y.Modules).obj L.val)ᵛ :=
-  rfl
-
 
 /-- The representative of `L * L'` is the tensor product of the representatives. -/
 noncomputable def mulIso (L L' : Y.Pic) :

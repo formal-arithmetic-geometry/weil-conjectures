@@ -91,18 +91,6 @@ noncomputable def derivedPlusFormalism : CompactSupportFormalism where
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- The compactly supported direct image of the formalism `derivedPlusFormalism A` along a
-compactification `c` is `Rf_!(c)[A]+`. -/
-lemma derivedPlusFormalism_shriek (c : Compactification f) :
-    (derivedPlusFormalism A).shriek c = Rf_!(c)[A]+ :=
-  rfl
-
-/-- The compactly supported direct image of the formalism `derivedPlusFormalism A` along a
-morphism admitting a compactification is `R(f)_![A]+`. -/
-lemma derivedPlusFormalism_lowerShriek [HasCompactification f] :
-    (derivedPlusFormalism A).lowerShriek f = R(f)_![A]+ :=
-  rfl
-
 
 section Torsion
 

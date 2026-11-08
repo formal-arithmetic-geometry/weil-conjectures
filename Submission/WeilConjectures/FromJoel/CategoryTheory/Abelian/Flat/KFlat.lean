@@ -433,7 +433,4 @@ instance [HasFunctorialFlatResolution A] :
   exact Λ.reduced.homotopyCategory_kFlat_isLeftDerivabilityStructure
     ObjectProperty.flat.essImage_ι_le
 
-noncomputable example [HasFunctorialFlatResolution A] [HasDerivedCategory A] :
-    MonoidalCategory (DerivedCategory A) := inferInstance
-
 end CategoryTheory.Abelian

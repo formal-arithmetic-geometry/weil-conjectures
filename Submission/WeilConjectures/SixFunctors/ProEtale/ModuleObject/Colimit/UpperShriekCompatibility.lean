@@ -182,15 +182,6 @@ noncomputable def boundedConstructibleUpperShriekToPadicAlgCl :
     (boundedConstructibleUpperShriekAdjunction ℓ f)
     (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv
 
-/-- The exchange for `f^!` as the mate of a two-square. -/
-lemma boundedConstructibleUpperShriekToPadicAlgCl_eq_mateEquiv :
-    boundedConstructibleUpperShriekToPadicAlgCl ℓ E f =
-      (mateEquiv (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
-        (boundedConstructibleUpperShriekAdjunction ℓ f)
-        (TwoSquare.mk _ _ _ _
-          (boundedConstructibleLowerShriekToPadicAlgClIso ℓ E f).inv)).natTrans :=
-  rfl
-
 /-- The exchange for `f^!` is an isomorphism as soon as the exchange for the proper part of the
 chosen compactification is one. -/
 lemma isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso

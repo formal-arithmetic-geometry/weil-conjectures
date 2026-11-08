@@ -67,10 +67,6 @@ noncomputable def monoidalCategory (A : Mon C) : MonoidalCategory (Bimod A A) :=
 
 attribute [local instance] monoidalCategory
 
-lemma tensorObj_eq {A : Mon C} (P Q : Bimod A A) : P ⊗ Q = P.tensorBimod Q := rfl
-
-lemma tensorUnit_eq {A : Mon C} : 𝟙_ (Bimod A A) = regular A := rfl
-
 lemma whiskerLeft_eq {A : Mon C} (P : Bimod A A) {Q Q' : Bimod A A} (f : Q ⟶ Q') :
     P ◁ f = whiskerLeft P f := rfl
 

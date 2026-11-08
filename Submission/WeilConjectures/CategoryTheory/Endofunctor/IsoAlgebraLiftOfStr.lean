@@ -60,10 +60,6 @@ lemma liftOfStr_obj_carrier (K : IsoAlgebra F) :
   rfl
 
 @[simp]
-lemma liftOfStr_obj_str (K : IsoAlgebra F) : ((liftOfStr G φ hφ).obj K).str = φ K :=
-  mk_str _ _
-
-@[simp]
 lemma liftOfStr_map_hom_f {K K' : IsoAlgebra F} (f : K ⟶ K') :
     ((liftOfStr G φ hφ).map f).hom.f = f.hom.f :=
   rfl
@@ -76,10 +72,6 @@ variable {D : Type u'} [Category.{v'} D] {G' : D ⥤ D} {L : C ⥤ D} (e : L ⋙
 lemma liftOfStr_comp_mapOfNatIso_obj_str (K : IsoAlgebra F) :
     ((liftOfStr G φ hφ ⋙ mapOfNatIso e).obj K).str = e.app K.carrier ≪≫ L.mapIso (φ K) := by
   ext
-  rfl
-
-lemma liftOfStr_comp_mapOfNatIso_map_hom_f {K K' : IsoAlgebra F} (f : K ⟶ K') :
-    ((liftOfStr G φ hφ ⋙ mapOfNatIso e).map f).hom.f = L.map f.hom.f :=
   rfl
 
 end Map

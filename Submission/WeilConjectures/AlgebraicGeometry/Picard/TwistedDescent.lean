@@ -5,7 +5,11 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import Submission.WeilConjectures.AlgebraicGeometry.Descent
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
+public import Submission.WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

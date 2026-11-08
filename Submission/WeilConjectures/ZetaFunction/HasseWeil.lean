@@ -10,7 +10,23 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Curve
 public import Submission.WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import Submission.WeilConjectures.Statement
 public import Submission.WeilConjectures.ZetaFunction.BettiSymmetry
-public import Submission.WeilConjectures.ZetaFunction.CurveZeta
+public import Mathlib.FieldTheory.Finite.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
+public import Submission.WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import Submission.WeilConjectures.ZetaSeries
+public import Submission.WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
+public import Submission.WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
+public import Submission.WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import Submission.WeilConjectures.AlgebraicGeometry.Curve.Picard
+public import Submission.WeilConjectures.ClosedPoints
+public import Submission.WeilConjectures.EulerProduct
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.RingTheory.PowerSeries.WellKnown
+public import Mathlib.Analysis.Complex.Norm
+public import Mathlib.Tactic.LinearCombination
+public import Submission.WeilConjectures.ZetaFunction.WeilFactorization
 public import Submission.WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 set_option autoImplicit true

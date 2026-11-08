@@ -45,12 +45,6 @@ structure FiniteEtaleTraceSplitting {X Y : Scheme.{u}} (f : Y ⟶ X) (T : X.Etal
   openImmersion : ∀ j, IsOpenImmersion (i j)
   closedImmersion : ∀ j, IsClosedImmersion (i j)
 
-/-- The presieve of arrows with split domain; membership records no chosen splitting.
-Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
-(blueprint: def-weil-pbc-finite-etale-trace-splitting-data) -/
-def finiteEtaleTraceSplitPresieve {X Y : Scheme.{u}} (f : Y ⟶ X) (W : X.Etale) :
-    Presieve W := fun {T} _ ↦ Nonempty (FiniteEtaleTraceSplitting f T)
-
 /-- The section of the pullback associated to a sheet.
 Source: Stacks Project, Section 03SH, paragraph after Definition 03SE.
 (blueprint: def-weil-pbc-finite-etale-trace-splitting-data) -/

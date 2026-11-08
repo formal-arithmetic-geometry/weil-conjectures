@@ -151,19 +151,6 @@ theorem Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs {X S S' X' : Scheme.
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
   Etale.isIso_baseChangeHomologyMap_of_smooth Λ g f v f' sq q F
 
-/-- Blueprint `sk-rem-rest`: the isomorphism `g⁻¹ R^q f_* F ≅ R^q f'_* v⁻¹ F` of the classical
-form of the smooth base change theorem
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs`). -/
-noncomputable def Etale.smoothBaseChangeHomologyIso {X S S' X' : Scheme.{u}}
-    (f : X ⟶ S) (g : S' ⟶ S) (v : X' ⟶ X) (f' : X' ⟶ S') [Smooth g] [QuasiCompact f]
-    [QuasiSeparated f] (sq : IsPullback v f' f g) (q : ℤ)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheafOfInvertibleOrder S F] :
-    (Etale.baseChangeSourceFunctor Λ g f q).obj F ≅
-      (Etale.baseChangeTargetFunctor Λ v f' q).obj F :=
-  have := Etale.isIso_baseChangeHomologyMap_of_smooth_of_qcqs Λ f g v f' sq q F
-  asIso (Etale.baseChangeHomologyMap Λ sq q F)
-
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
 /-- The derived base-change map is an isomorphism at a sheaf `F` placed in degree `0` if and only
@@ -223,26 +210,6 @@ lemma Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app 
   DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
     (fun K n _ _ hq ↦ Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ K n hq)
     K n
-
-/-- Blueprint `sbc-lem-bounded-below-truncation-criterion`, after pullback: the map
-`Hⁿ(p^* Rg_* τ_{≤ n} K) ⟶ Hⁿ(p^* Rg_* K)` is an isomorphism. -/
-lemma Etale.isIso_homologyFunctor_map_baseChangeSource_map_truncLEι_app (p : X ⟶ S) (g : T ⟶ S)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
-    IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map
-      ((R+((g)_*[ModuleCat.{u + 1} Λ]) ⋙ D+((p)^*[ModuleCat.{u + 1} Λ])).map
-        ((t.truncLEι n).app K))) :=
-  DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
-    (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ p g K n q hq) K n
-
-/-- Blueprint `sbc-lem-bounded-below-truncation-criterion`, for `h_*`: the map
-`Hⁿ(Rh_* e^* τ_{≤ n} K) ⟶ Hⁿ(Rh_* e^* K)` is an isomorphism. -/
-lemma Etale.isIso_homologyFunctor_map_baseChangeTarget_map_truncLEι_app (e : Y ⟶ T) (h : Y ⟶ X)
-    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
-    IsIso ((DerivedCategory.Plus.homologyFunctor _ n).map
-      ((D+((e)^*[ModuleCat.{u + 1} Λ]) ⋙ R+((h)_*[ModuleCat.{u + 1} Λ])).map
-        ((t.truncLEι n).app K))) :=
-  DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app _
-    (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ e h K n q hq) K n
 
 /-- Blueprint `sbc-lem-finite-range-comparison`: let `K ∈ D⁺(T_ét)` have cohomology sheaves
 concentrated in `[a, b]`. If the comparison of the two hypercohomology spectral sequences is an

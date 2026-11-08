@@ -26,7 +26,9 @@ public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Tensor
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
-import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedClosedCounit
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison
 import Submission.WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
@@ -95,53 +97,6 @@ open AlgebraicGeometry.ProEtaleTensorComparison
 
 namespace AlgebraicGeometry.ProEtaleClosedProjection
 
-/-- The actual module adjunction is uniquely characterized by its constructed unit
-on every section. This fixes adjunction data, rather than choosing an arbitrary
-adjunction between the functors.
-Source: Stacks, Tags 03D2, 03D3 and 09AA; the canonical adjunct in the statement
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection).
-Proof: transport the existing pullbackPushforwardAdjunction on the AsSmall model
-back along the explicit module equivalences. The right-adjoint comparison is the
-sectionwise identity. Evaluation of the transported unit gives inverseSection,
-since the model equivalences are inverse on sections and their comparison units
-are identities. For uniqueness, two units satisfying this equation agree by
-sectionwise extensionality of module morphisms and natural transformations.
-An adjunction is determined by its unit: the Hom equivalence sends f to the unit
-followed by the right-adjoint image of f, so equal units give equal Hom equivalences,
-and their inverses and counits agree. -/
-theorem adjunction_exists {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
-    ∃! ai : inverse i R ⊣ proEtaleRingedDirectImage i R,
-      ∀ (F : Modules R) (V : X.ProEt) (s : F.val.obj (op V)),
-        (ai.unit.app F).val.app (op V) s = inverseSection i F V s := by
-  refine ⟨AlgebraicGeometry.Scheme.canonicalAdjunction i R, ?_, ?_⟩
-  · intro F V s
-    exact AlgebraicGeometry.Scheme.canonicalUnit_sections i R F (op V) s
-  · intro ai hai
-    apply Adjunction.ext
-    ext F V s
-    exact (hai F V.unop s).trans
-      (AlgebraicGeometry.Scheme.canonicalUnit_sections i R F V s).symm
-
-/-- The canonical module adjunction, selected from the unique unit-normalized
-characterization. Its data are determined by the actual inverse-image section map.
-Source: Stacks, Tags 03D2, 03D3 and 09AA; the canonical adjunct in the statement
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection). -/
-noncomputable def adjunction {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
-    inverse i R ⊣ proEtaleRingedDirectImage i R :=
-  Classical.choose (adjunction_exists i R)
-
-/-- The projection map is the specified adjunct of the normalized tensor comparison
-followed by the counit on the first factor. No isomorphism or arbitrary map is chosen.
-Source: Stacks, Tags 03EL and 09AA; the adjunct formula in the statement
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection). -/
-noncomputable def projection {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X)
-    (M : Modules (inverseRing i R)) (F : Modules R) :
-    tensor ((proEtaleRingedDirectImage i R).obj M) F ⟶
-      (proEtaleRingedDirectImage i R).obj (tensor M ((inverse i R).obj F)) :=
-  ((adjunction i R).homEquiv _ _)
-    (comparison i R ((proEtaleRingedDirectImage i R).obj M) F ≫
-      tensorMap ((adjunction i R).counit.app M) (𝟙 ((inverse i R).obj F)))
-
 /-- The ring sheaf B regarded as an R-module through the given ring morphism.
 Source: Stacks, Section 03EK; the coefficient clause
 (blueprint: lem-weil-pbc-proetale-closed-underived-projection). -/
@@ -163,18 +118,6 @@ private noncomputable def regularInverseIso {X Z : Scheme.{u}} (i : Z ⟶ X)
   exact (proEtaleModuleFromModel _).mapIso
     (asIso (SheafOfModules.pullbackObjUnitToUnit (proEtaleModelRingUnit i B)))
 
-private theorem regularInverseIso_sections {X Z : Scheme.{u}} (i : Z ⟶ X)
-    (B : Rings X) (V : X.ProEt) (b : B.obj.obj (op V)) :
-    (regularInverseIso i B).hom.val.app (op ((proEtaleBaseChange i).obj V))
-        (inverseSection i (SheafOfModules.unit (proEtaleModuleCoefficients B)) V b) =
-      ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app B).hom.app (op V) b := by
-  let φ := proEtaleModelRingUnit i B
-  have h := ((SheafOfModules.pullbackPushforwardAdjunction φ).homEquiv _ _).apply_symm_apply
-    (SheafOfModules.unitToPushforwardObjUnit φ)
-  have h' := congrArg (fun k ↦ k.val.app (op (AsSmall.up.obj V)) b) h
-  change _ = _ at h'
-  exact h'
-
 attribute [local irreducible] regularInverseIso proEtaleModuleInverseImage
   inverseSection scalarIdentification
 
@@ -185,28 +128,6 @@ private noncomputable def coefficientInverseIso {X Z : Scheme.{u}} (i : Z ⟶ X)
         (SheafOfModules.unit (proEtaleModuleCoefficients (inverseRing i B))) :=
   scalarIdentification i a (SheafOfModules.unit (proEtaleModuleCoefficients B)) ≪≫
     (restrict (inverseRingMap i a)).mapIso (regularInverseIso i B)
-
-private theorem coefficientInverseIso_sections {X Z : Scheme.{u}} (i : Z ⟶ X)
-    {R B : Rings X} (a : R ⟶ B) (V : X.ProEt) (b : B.obj.obj (op V)) :
-    (coefficientInverseIso i a).hom.val.app (op ((proEtaleBaseChange i).obj V))
-        (inverseSection i (coefficientModule a) V b) =
-      ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app B).hom.app (op V) b := by
-  have h : (scalarIdentification i a
-      (SheafOfModules.unit (proEtaleModuleCoefficients B))).hom.val.app
-        (op ((proEtaleBaseChange i).obj V))
-        (inverseSection i (coefficientModule a) V b) =
-      inverseSection i (SheafOfModules.unit (proEtaleModuleCoefficients B)) V b := by
-    unfold scalarIdentification
-    exact (Classical.choose_spec
-      (scalarIdentification_exists i a (SheafOfModules.unit
-        (proEtaleModuleCoefficients B)))).1 V b
-  unfold coefficientInverseIso
-  change (regularInverseIso i B).hom.val.app (op ((proEtaleBaseChange i).obj V))
-    ((scalarIdentification i a (SheafOfModules.unit (proEtaleModuleCoefficients B))).hom.val.app
-      (op ((proEtaleBaseChange i).obj V))
-      (inverseSection i (coefficientModule a) V b)) = _
-  exact (congrArg ((regularInverseIso i B).hom.val.app
-    (op ((proEtaleBaseChange i).obj V))) h).trans (regularInverseIso_sections i B V b)
 
 attribute [local irreducible] coefficientInverseIso
 
@@ -274,67 +195,5 @@ private noncomputable def tensorIso {X : Scheme.{u}} {R : Rings X}
   inv := tensorMap e.inv f.inv
   hom_inv_id := by rw [← tensorMap_comp, e.hom_inv_id, f.hom_inv_id, tensorMap_id]
   inv_hom_id := by rw [← tensorMap_comp, e.inv_hom_id, f.inv_hom_id, tensorMap_id]
-
-private theorem tensorCounit_isIso {X Z : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (R : Rings X) (M : Modules (inverseRing i R))
-    (F : Modules R) :
-    IsIso (tensorMap ((adjunction i R).counit.app M) (𝟙 ((inverse i R).obj F))) := by
-  have := proEtale_ringed_closed_counit i R (adjunction i R) M
-  unfold tensorMap
-  rw [tensorSecond_id, Category.comp_id]
-  infer_instance
-
-private theorem projection_natural {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X)
-    (M M' : Modules (inverseRing i R)) (F F' : Modules R)
-    (a : M ⟶ M') (b : F ⟶ F') :
-    tensorMap ((proEtaleRingedDirectImage i R).map a) b ≫ projection i R M' F' =
-      projection i R M F ≫
-        (proEtaleRingedDirectImage i R).map (tensorMap a ((inverse i R).map b)) := by
-  unfold projection
-  rw [← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_right]
-  congr 1
-  have hn := (inverseImage_tensor_comparison (𝟙 Z) i R
-    ((proEtaleRingedDirectImage i R).obj M) F).2.2.1
-    ((proEtaleRingedDirectImage i R).obj M') F'
-    ((proEtaleRingedDirectImage i R).map a) b
-  rw [← Category.assoc, hn]
-  simp only [Category.assoc, ← tensorMap_comp, Category.comp_id, Category.id_comp]
-  congr 2
-  exact (adjunction i R).counit.naturality a
-
-private theorem projection_isIso {X Z : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
-    (hU : Set.range U.hom = (Set.range i)ᶜ) (R : Rings X)
-    (M : Modules (inverseRing i R)) (F : Modules R) : IsIso (projection i R M F) := by
-  obtain ⟨_, _, ai, aj, hc, _, hz, _, _, _, _, _, hs, _⟩ :=
-    proEtale_ringed_open_closed i U hU R
-  let H := tensor ((proEtaleRingedDirectImage i R).obj M) F
-  obtain ⟨e, _, _⟩ := SheafOfModules.exists_localizedSiteTensorRestriction.{u + 1, u, u + 1, u + 1}
-    (ProEt.topology X) R U
-  have hres : IsZero ((SheafOfModules.overFunctor (proEtaleModuleCoefficients R) U).obj H) :=
-    ((SheafOfModules.siteSheafTensorRight (A := R.over U) (F.over U)).map_isZero
-      (hz M)).of_iso (e _ _)
-  have : (proEtaleRingedExtensionByZero U R).IsLeftAdjoint := aj.isLeftAdjoint
-  have hleft := (proEtaleRingedExtensionByZero U R).map_isZero hres
-  let T := ComposableArrows.mk₂ (aj.counit.app H) (ai.unit.app H)
-  have hT : T.Exact := (hs H).2.2
-  have he := (T.exact₂_iff hT.toIsComplex).1 hT
-  have : Mono (ai.unit.app H) := he.mono_g (hleft.eq_of_src _ _)
-  have : Epi (ai.unit.app H) := (hs H).2.1
-  have : IsIso (ai.unit.app H) := isIso_of_mono_of_epi _
-  have : IsIso ai.counit := by
-    have := hc
-    exact NatIso.isIso_of_isIso_app _
-  have : (proEtaleRingedDirectImage i R).Full := ai.fullyFaithfulROfIsIsoCounit.full
-  have : (proEtaleRingedDirectImage i R).Faithful := ai.fullyFaithfulROfIsIsoCounit.faithful
-  have : IsIso ((adjunction i R).unit.app H) :=
-    (adjunction i R).isIso_unit_app_iff_mem_essImage.2
-      ⟨(inverse i R).obj H, ⟨(asIso (ai.unit.app H)).symm⟩⟩
-  have := (inverseImage_tensor_comparison (𝟙 Z) i R
-    ((proEtaleRingedDirectImage i R).obj M) F).1
-  have := tensorCounit_isIso i R M F
-  change IsIso (((adjunction i R).homEquiv _ _) _)
-  rw [Adjunction.homEquiv_unit]
-  infer_instance
 
 end AlgebraicGeometry.ProEtaleClosedProjection

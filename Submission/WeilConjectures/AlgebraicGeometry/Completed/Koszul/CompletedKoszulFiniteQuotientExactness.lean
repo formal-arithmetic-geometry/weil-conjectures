@@ -7,7 +7,13 @@ module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulFiniteQuotientComparison
 import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
+import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification

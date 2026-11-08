@@ -6,7 +6,11 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
+public import Submission.WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import all Submission.WeilConjectures.Algebra.Homology.ProperBaseChange.KFlatResolutionGeneral
@@ -48,7 +52,11 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
-import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicTensorComparison
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExtensionByZero
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ProEtaleSheafificationTensorComparison
 import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 import Submission.WeilConjectures.ConstructibleSheaf.Monoidal
 
@@ -157,12 +165,6 @@ private theorem line_constant_models (S : Scheme.{u}) (A : Type u) [CommRing A]
       (SheafOfModules.overMap R g).mapIso e ≪≫ SheafOfModules.overMapUnitIso (R := R) g
   exact ⟨e' ≪≫ (constant_unit_over S A (V i)).some⟩
 
-private theorem line_locally_constant (S : Scheme.{u}) (A : Type u) [CommRing A]
-    (L : proEtaleRingModules S (proEtaleConstantRing S A))
-    [L.IsFiniteLocallyFreeOfRank 1] : IsLocallyConstantProEtaleModuleSheaf S A L := by
-  obtain ⟨I, U, f, hf, h⟩ := line_constant_models S A L
-  exact ⟨I, U, f, hf, fun i ↦ ⟨_, h i⟩⟩
-
 private theorem line_finite_models (S : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (L : proEtaleRingModules S (proEtaleConstantRing S A))
     [L.IsFiniteLocallyFreeOfRank 1] :
@@ -215,243 +217,5 @@ private theorem line_finite_models (S : Scheme.{u}) (A : Type u) [CommRing A] [F
     (ProEtale.upperStarIsoLocalizationRestriction
       (ModuleCat.{u + 1} B) (U i).hom (U i).prop).app F ≪≫
     r.symm ≪≫ D.functor.mapIso e ≪≫ c⟩⟩
-
-private noncomputable def realization_restriction_iso
-    (S : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
-    (F : Sheaf (ProEt.topology S) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
-    F ≅ (proEtaleModuleRestriction S A).obj ((sfIntrinsicModuleEquivalence S A).functor.obj F) := by
-  let P := (ProEtale.finiteCoefficientModulePresheaf S.ProEt (ULift.{u + 1} A)).obj F.obj
-  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
-    (ProEtale.finiteCoefficientIntrinsicScalarMap S A)
-  let η : F ⟶ (proEtaleModuleRestriction S A).obj
-      ((sfIntrinsicModuleEquivalence S A).functor.obj F) :=
-    ⟨{ app U := (adj.unit.app P).app U
-       naturality _ _ f := by
-         ext x
-         exact ConcreteCategory.congr_hom ((adj.unit.app P).naturality f) x }⟩
-  have : IsIso η := by
-    have : IsIso (adj.unit.app P) := by
-      rw [← isIso_iff_of_reflects_iso _ (PresheafOfModules.toPresheaf _)]
-      change IsIso (toSheafify (ProEt.topology S) P.presheaf)
-      exact isIso_toSheafify (ProEt.topology S)
-        ((sheafCompose (ProEt.topology S)
-          (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} A))
-            AddCommGrpCat.{u + 1})).obj F).property
-    have hη (U : S.ProEtᵒᵖ) : IsIso (η.hom.app U) := by
-      have : IsIso ((PresheafOfModules.toPresheaf _).map (adj.unit.app P)) := inferInstance
-      have : IsIso (((PresheafOfModules.toPresheaf _).map (adj.unit.app P)).app U) :=
-        inferInstance
-      rw [← isIso_iff_of_reflects_iso _
-        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} A)) AddCommGrpCat.{u + 1})]
-      change IsIso (((PresheafOfModules.toPresheaf _).map (adj.unit.app P)).app U)
-      infer_instance
-    rw [← isIso_iff_of_reflects_iso _ (sheafToPresheaf _ _)]
-    change IsIso η.hom
-    rw [NatTrans.isIso_iff_isIso_app]
-    exact hη
-  exact asIso η
-
-private theorem fixed_constructible_tensor (S : Scheme.{u}) (A : Type u)
-    [CommRing A] [Finite A]
-    (M N : Sheaf (ProEt.topology S) (ModuleCat.{u + 1} (ULift.{u + 1} A)))
-    (hM : ProEtale.IsConstructible (ULift.{u + 1} A) M)
-    (hN : ProEtale.IsConstructible (ULift.{u + 1} A) N) :
-    ProEtale.IsConstructible (ULift.{u + 1} A) (M ⊗ N) := by
-  obtain ⟨M', hM', ⟨eM⟩⟩ :=
-    ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj _ hM
-  obtain ⟨N', hN', ⟨eN⟩⟩ :=
-    ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj _ hN
-  let V := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) S
-  exact ProEtale.isConstructible_of_iso
-    ((Functor.Monoidal.μIso V M' N').symm ≪≫ tensorIso eM eN)
-    (by
-      let := hM'.tensorObj hN'
-      exact ProEtale.isConstructible_comparisonUpperStar_obj (M' ⊗ N'))
-
-private theorem finite_line_constructible (S : Scheme.{u}) (A : Type u)
-    [CommRing A] [Finite A]
-    (L : proEtaleRingModules S (proEtaleConstantRing S A))
-    [L.IsFiniteLocallyFreeOfRank 1]
-    (M : proEtaleRingModules S (proEtaleConstantRing S A))
-    (hM : IsConstructibleProEtaleModuleSheaf S A M) :
-    IsConstructibleProEtaleModuleSheaf S A
-      ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L).obj M) := by
-  let R := proEtaleConstantRing S A
-  let := SheafOfModules.isMonoidal_W_independentCoefficients R
-  let := SheafOfModules.monoidalCategory R
-  let E := sfIntrinsicModuleEquivalence S A
-  let C := proEtaleModuleRestriction S A
-  let FM := E.inverse.obj M
-  let FL := E.inverse.obj L
-  let eM : FM ≅ C.obj M := realization_restriction_iso S A FM ≪≫
-    C.mapIso (E.counitIso.app M)
-  let eL : FL ≅ C.obj L := realization_restriction_iso S A FL ≪≫
-    C.mapIso (E.counitIso.app L)
-  have hFM : ProEtale.IsConstructible (ULift.{u + 1} A) FM :=
-    ProEtale.isConstructible_of_iso eM.symm
-      ((proEtaleModuleRestriction_constructible_iff S A M).mp hM)
-  have hFL : ProEtale.IsConstructible (ULift.{u + 1} A) FL := by
-    refine ProEtale.isConstructible_of_iso eL.symm ⟨Stratification.trivial S, fun _ ↦ ?_⟩
-    exact ProEtale.isFiniteLocallyConstant_of_iso
-      ((ProEtale.upperStarId _ S).app _).symm (line_finite_models S A L)
-  have ht := fixed_constructible_tensor S A FM FL hFM hFL
-  obtain ⟨q⟩ := AlgebraicGeometry.proEtale_intrinsic_tensorRight_comparison S A FL
-  let e : (SheafOfModules.siteSheafTensorRight (A := R) L).obj M ≅
-      E.functor.obj (FM ⊗ FL) :=
-    (SheafOfModules.siteSheafTensorRightIso R L).app M ≪≫
-      tensorIso (E.counitIso.app M).symm (E.counitIso.app L).symm ≪≫
-      ((SheafOfModules.siteSheafTensorRightIso R (E.functor.obj FL)).app
-        (E.functor.obj FM)).symm ≪≫ q.app FM
-  apply (proEtaleModuleRestriction_constructible_iff S A _).mpr
-  exact ProEtale.isConstructible_of_iso (C.mapIso e).symm
-    (ProEtale.isConstructible_of_iso (realization_restriction_iso S A (FM ⊗ FL)) ht)
-
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem finite_line_tor (S : Scheme.{u}) (A : Type u) [CommRing A]
-    (L : proEtaleRingModules S (proEtaleConstantRing S A))
-    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-      (A := proEtaleConstantRing S A) L).Additive]
-    [PreservesFiniteLimits
-      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L)]
-    [PreservesFiniteColimits
-      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L)]
-    (K : proEtaleDerivedCategory S A) (a b : ℤ)
-    (hK : HasProEtaleTorAmplitude S A K a b) :
-    HasProEtaleTorAmplitude S A
-      ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L).mapDerivedCategory.obj K) a b := by
-  classical
-  have hab := hK.1
-  let R := proEtaleConstantRing S A
-  let C := proEtaleRingModules S R
-  let := SheafOfModules.monoidalCategory R
-  let := SheafOfModules.symmetricCategory R
-  let := SheafOfModules.monoidalClosed_kfg (R := R)
-  have := SheafOfModules.monoidalPreadditive_kfg R
-  have := SheafOfModules.isGrothendieckAbelian_kfg R
-  have := SheafOfModules.hasFunctorialFlatResolution_kfg R
-  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} C
-  let (X₁ X₂ : GradedObject ℤ C) : X₁.HasTensor X₂ := inferInstance
-  let := HasDerivedCategory.standard C
-  have := DerivedCategory.hasDerivedMonoidalCategory C
-  let : MonoidalCategory (DerivedCategory C) :=
-    DerivedCategory.instMonoidalCategory C
-  have hk (P : CochainComplex C ℤ)
-      (hP : CochainComplex.IsAcyclicTensorKFlat (R := R) P) :
-      (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by
-    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
-      HomotopyCategory.kFlat_iff_preserves_acyclic]
-    intro N hN
-    obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
-    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
-    have hright : HomotopyCategory.subcategoryAcyclic C
-        (MonoidalCategory.tensorObj ((HomotopyCategory.quotient C (.up ℤ)).obj N)
-          ((HomotopyCategory.quotient C (.up ℤ)).obj P)) := by
-      exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 (hP N hN)
-    exact ⟨(HomotopyCategory.subcategoryAcyclic C).prop_of_iso (β_ _ _) hright, hright⟩
-  have heq (K : DerivedCategory C) (L P : CochainComplex C ℤ) (e : DerivedCategory.Q.obj L ≅ K)
-      (f : P ⟶ L) (hf : QuasiIso f)
-      (hP : CochainComplex.IsAcyclicTensorKFlat (R := R) P) (M : C) :
-      Nonempty (MonoidalCategory.tensorObj K ((DerivedCategory.singleFunctor C 0).obj M) ≅
-        derivedTensor S A L ((HomologicalComplex.single C (.up ℤ) 0).obj M) P f hf hP) := by
-    have : IsIso (DerivedCategory.Q.map f) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso C f).2 hf
-    exact ⟨(MonoidalCategory.tensorIso (e.symm ≪≫ (asIso (DerivedCategory.Q.map f)).symm)
-        ((DerivedCategory.singleFunctorIsoCompQ C 0).app M)) ≪≫
-      DerivedCategory.QObjTensorQObjIsoOfKFlatLeft P _ (hk P hP)⟩
-  have hamp (K : DerivedCategory C) : HasProEtaleTorAmplitude S A K a b ↔
-      DerivedCategory.torAmplitudeIn C a b K := by
-    constructor
-    · intro h M
-      have : (DerivedCategory.Q (C := C)).EssSurj :=
-        Localization.essSurj _ (HomologicalComplex.quasiIso _ (.up ℤ))
-      let L := (DerivedCategory.Q (C := C)).objPreimage K
-      let e := (DerivedCategory.Q (C := C)).objObjPreimageIso K
-      obtain ⟨P, f, hP, _, hf, _⟩ := CochainComplex.exists_isKFlatResolutionGeneral L
-      obtain ⟨eq⟩ := heq K L P e f hf hP M
-      rw [DerivedCategory.homologyConcentratedIn_iff]
-      refine ⟨(DerivedCategory.isGE_iff _ a).2 ?_, (DerivedCategory.isLE_iff _ b).2 ?_⟩
-      · intro i hi
-        exact (h.2 L P ⟨e⟩ f hf hP M i (.inl hi)).of_iso
-          ((DerivedCategory.homologyFunctor C i).mapIso eq)
-      · intro i hi
-        exact (h.2 L P ⟨e⟩ f hf hP M i (.inr hi)).of_iso
-          ((DerivedCategory.homologyFunctor C i).mapIso eq)
-    · intro h
-      refine ⟨hab, ?_⟩
-      rintro L P ⟨e⟩ f hf hP M i hi
-      obtain ⟨eq⟩ := heq K L P e f hf hP M
-      have hz : IsZero ((DerivedCategory.homologyFunctor C i).obj
-          (MonoidalCategory.tensorObj K ((DerivedCategory.singleFunctor C 0).obj M))) := by
-        obtain ⟨hge, hle⟩ := (DerivedCategory.homologyConcentratedIn_iff _ _ _).1 (h M)
-        rcases hi with hi | hi
-        · exact (DerivedCategory.isGE_iff _ a).1 hge i hi
-        · exact (DerivedCategory.isLE_iff _ b).1 hle i hi
-      exact hz.of_iso ((DerivedCategory.homologyFunctor C i).mapIso eq.symm)
-  let F := SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R) L
-  have hL : PreservesFiniteLimits (MonoidalCategory.tensorRight L) :=
-    preservesFiniteLimits_of_natIso (SheafOfModules.siteSheafTensorRightIso R L)
-  let := hL
-  let : F.PreservesFlat :=
-    { flat_obj := fun {M} hM ↦ by
-        let : PreservesFiniteLimits (tensorRight M) := hM.2.1
-        let : PreservesFiniteLimits (tensorRight M ⋙ tensorRight L) :=
-          comp_preservesFiniteLimits _ _
-        have : PreservesFiniteLimits (MonoidalCategory.tensorRight (M ⊗ L)) :=
-          preservesFiniteLimits_of_natIso (MonoidalCategory.tensorRightTensor M L).symm
-        have hML : ObjectProperty.flat (M ⊗ L) :=
-          (ObjectProperty.flat_iff_preservesFiniteLimits _).2
-            (preservesFiniteLimits_of_natIso
-              (BraidedCategory.tensorLeftIsoTensorRight _).symm)
-        exact ObjectProperty.flat.prop_of_iso
-          ((SheafOfModules.siteSheafTensorRightIso R L).app M).symm hML }
-  exact (hamp _).2 (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj F ((hamp K).1 hK))
-
-/-- Exact tensor by a rank-one sheaf preserves constructible sheaves and every Tor interval.
-Source: blueprint prop-weil-twist-preserves, proof steps 4--5
-(blueprint: lem-weil-finite-line-tensor-conditions).
-
-Proof: a rank-one trivialization over the constant coefficient ring is a constant
-rank-one module model; hence the line is locally constant. Pull a trivializing cover
-back to each member of a constructible stratification and refine its locally constant
-models. The tensor then has model M tensor A, canonically isomorphic to M. Thus it
-has the same finite stalks and the same finite partition, including on the empty scheme.
-For Tor amplitude choose flat-term K-flat models P for K and Q for a test module M.
-Tensor by the line is exact, so it preserves acyclic complexes and the vanishing of
-cohomology in each degree. Associativity and symmetry identify
-(P tensor L) tensor Q with (P tensor Q) tensor L. Tensor by L preserves the direct
-sums in total tensor, being a left adjoint. The complex P tensor L is still K-flat
-and has flat terms: its tensor with an acyclic complex is an exact line twist of
-an acyclic tensor. Consequently this rebracketing computes both derived tensors.
-Apply the assumed Tor interval of K to M, then exact line tensor; the same ordered
-interval works for all module sheaves M, with no constructibility assumption on M. -/
-theorem finiteLineTensor_conditions (S : Scheme.{u}) (A : Type u)
-    [CommRing A] [Finite A]
-    (L : proEtaleRingModules S (proEtaleConstantRing S A))
-    [L.IsFiniteLocallyFreeOfRank 1]
-    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-      (A := proEtaleConstantRing S A) L).Additive]
-    [PreservesFiniteLimits
-      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L)]
-    [PreservesFiniteColimits
-      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L)] :
-    IsLocallyConstantProEtaleModuleSheaf S A L ∧
-      (∀ M : proEtaleRingModules S (proEtaleConstantRing S A),
-        IsConstructibleProEtaleModuleSheaf S A M →
-        IsConstructibleProEtaleModuleSheaf S A
-          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L).obj M)) ∧
-      ∀ (K : proEtaleDerivedCategory S A) (a b : ℤ),
-        HasProEtaleTorAmplitude S A K a b →
-        HasProEtaleTorAmplitude S A
-          ((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
-        (A := proEtaleConstantRing S A) L).mapDerivedCategory.obj K) a b := by
-  refine ⟨line_locally_constant S A L, finite_line_constructible S A L, ?_⟩
-  exact fun K a b hK ↦ finite_line_tor S A L K a b hK
 
 end WeilConjectures

@@ -8,7 +8,7 @@ module
 
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
-public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.Single
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
 

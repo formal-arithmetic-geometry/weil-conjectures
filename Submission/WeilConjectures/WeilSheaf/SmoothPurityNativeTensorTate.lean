@@ -115,12 +115,4 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- The native tensor by a Tate sheaf agrees with the existing Tate twist functor. -/
-noncomputable def nativeConstructibleTensorTateIso (d : ℤ) :
-    Prod.sectR (WeilSheaf.toComplex.obj (WeilSheaf.tateTwistSheaf k₀ l X d)) _ ⋙
-      nativeConstructibleTensor k₀ l X ≅ tateTwist k₀ l X d :=
-  ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
-    (Functor.isoWhiskerLeft (objectProperty k₀ l X).ι
-      (ProEtaleWeilSheaf.nativeDerivedTensorTateIso d) ≪≫ (tateTwistCompιIso d).symm)
-
 end AlgebraicGeometry.WeilComplex

@@ -7,7 +7,7 @@ module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Frobenius
 public import Submission.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
-public import Submission.WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
+public import Mathlib.FieldTheory.Finite.Polynomial
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

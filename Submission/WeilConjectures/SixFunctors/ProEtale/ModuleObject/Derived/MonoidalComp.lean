@@ -95,20 +95,6 @@ lemma leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit
   Functor.leftDerivedFunctorFactorIso_hom_app_comp_counit (upperStarComp Λ f g) K
 
 set_option maxHeartbeats 1000000 in
--- the derived pullbacks of module objects are unfolded to the derived functors of exact functors
-/-- The inverse form of `leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit`. -/
-@[reassoc]
-lemma leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit
-    (K : HomotopyCategory
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) (.up ℤ)) :
-    (leftDerivedUpperStarComp Λ f g).inv.app (Qh.obj K) ≫
-        (f ≫ g)^*⟦Λ⟧.leftDerivedFunctorCounit.app K ≫
-        Qh.map ((NatTrans.mapHomotopyCategory (upperStarComp Λ f g).hom (.up ℤ)).app K) =
-      L((f)^*⟦Λ⟧).map ((g)^*⟦Λ⟧.leftDerivedFunctorCounit.app K) ≫
-        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (((g)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj K) := by
-  rw [← leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit, Iso.inv_hom_id_app_assoc]
-
-set_option maxHeartbeats 1000000 in
 -- the lax monoidal structure of the localization functor is unfolded
 variable {f} in
 lemma leftDerivedUpperStarTensorLeftCounit_app_app {W : Scheme.{u}} (h : W ⟶ Y)

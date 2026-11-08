@@ -353,17 +353,6 @@ lemma comparison_app_toLowerStar_app
       (openImmersionLowerShriekToLowerStarPlus Λ D.j₂).app K :=
   D.comparisonApp_toLowerStar Λ K
 
-/-- `α_u` is the only natural transformation satisfying `comparison_toLowerStar`. -/
-lemma eq_comparison (α : D+((D.j₂)_!open[ModuleCat.{u + 1} Λ]) ⟶
-      D+((D.j₁)_!open[ModuleCat.{u + 1} Λ]) ⋙
-        ((D.u)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus)
-    (h : α ≫ D.toLowerStar Λ = openImmersionLowerShriekToLowerStarPlus Λ D.j₂) :
-    α = D.comparison Λ := by
-  ext K : 2
-  apply D.comparison_ext Λ
-  rw [comparison_app_toLowerStar_app]
-  exact NatTrans.congr_app h K
-
 /-- The restriction isomorphism `θ_{u,K} : j₂^* Ru_* j₁! K ≅ K`: `j₂^*` of
 `Ru_* (ι_{j₁})` (modulo `Ru_* Rj₁_* ≅ Rj₂_*`), followed by the counit `j₂^* Rj₂_* K ≅ K`. -/
 noncomputable def restrictionIso :

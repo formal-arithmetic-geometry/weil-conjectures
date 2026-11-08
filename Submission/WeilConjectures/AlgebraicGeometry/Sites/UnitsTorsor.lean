@@ -216,12 +216,6 @@ instance (U : X.Opensᵒᵖ) :
     Module (X.ringCatSheaf.obj.obj U) ((unitsTorsorPresheaf T).obj U) :=
   inferInstanceAs (Module Γ(X, U.unop) (unitsTorsorSections T U.unop))
 
-lemma unitsTorsorPresheaf_map_apply {U U' : X.Opensᵒᵖ} (i : U ⟶ U')
-    (f : unitsTorsorSections T U.unop) {V : X.Opens} (j : V ⟶ U'.unop)
-    (t : T.sheaf.obj.obj (op V)) :
-    ((unitsTorsorPresheaf T).map i f).1 V j t = f.1 V (j ≫ i.unop) t :=
-  rfl
-
 lemma unitsTorsorPresheaf_map_smul {U U' : X.Opensᵒᵖ} (i : U ⟶ U')
     (a : X.ringCatSheaf.obj.obj U) (f : (unitsTorsorPresheaf T).obj U) :
     (unitsTorsorPresheaf T).map i (a • f) =
@@ -419,15 +413,6 @@ noncomputable def ofUnitsTorsorMap (φ : T.sheaf ⟶ T'.sheaf)
           map_add' _ _ := rfl }
       naturality _ _ _ := rfl }
     fun _ _ _ ↦ rfl⟩
-
-lemma ofUnitsTorsorMap_apply (φ : T.sheaf ⟶ T'.sheaf)
-    (hφ : ∀ U g t, φ.hom.app U (T.vadd U g t) = T'.vadd U g (φ.hom.app U t)) {U V : X.Opens}
-    (f : Γ(ofUnitsTorsor T', U)) (i : V ⟶ U) (t : T.sheaf.obj.obj (op V)) :
-    (show unitsTorsorSections T U from (ofUnitsTorsorMap φ hφ).app U f).1 V i t =
-      (show unitsTorsorSections T' U from f).1 V i (φ.hom.app _ t) := by
-  unfold ofUnitsTorsorMap
-  dsimp [Hom.app, Hom.mapPresheaf]
-  rfl
 
 lemma ofUnitsTorsorMap_id :
     ofUnitsTorsorMap (𝟙 T.sheaf) (fun _ _ _ ↦ rfl) = 𝟙 (ofUnitsTorsor T) := by
@@ -641,12 +626,5 @@ lemma picEquivQuotientTorsorUnitsSheaf_symm_mk (T : Sheaf.Torsor X.unitsSheaf) :
       Pic.mk (ofUnitsTorsor T) := by
   rw [Equiv.symm_apply_eq, picEquivQuotientTorsorUnitsSheaf_apply, Pic.torsorClass_mk]
   exact _root_.Quotient.sound (equiv_generatorsTorsor_ofUnitsTorsor (T := T))
-
-/-- Invertible modules up to isomorphism are in bijection with `𝒪_Xˣ`-torsors up to
-isomorphism; the bijection is `AlgebraicGeometry.Scheme.picEquivQuotientTorsorUnitsSheaf`.
-(blueprint: `lem-sc-line-bundle-torsor`, Zariski part) -/
-theorem nonempty_pic_equiv_quotient_torsor_unitsSheaf (X : Scheme.{u}) :
-    Nonempty (X.Pic ≃ _root_.Quotient (Sheaf.Torsor.setoid (G := X.unitsSheaf))) :=
-  ⟨X.picEquivQuotientTorsorUnitsSheaf⟩
 
 end AlgebraicGeometry.Scheme

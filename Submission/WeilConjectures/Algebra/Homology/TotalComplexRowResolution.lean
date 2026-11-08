@@ -72,11 +72,6 @@ lemma ιTotal_totalπ_of_ne_left (p' q' n : ℕ) (h : p' + q' = n) (p q : ℕ) (
     K.ιTotal (ComplexShape.up ℕ) p' q' n h ≫ K.totalπ n p q = 0 := by
   rw [ιTotal_totalπ, dite_eq_right (fun h ↦ hp h.1)]
 
-@[reassoc]
-lemma ιTotal_totalπ_of_ne_right (p' q' n : ℕ) (h : p' + q' = n) (p q : ℕ) (hq : q' ≠ q) :
-    K.ιTotal (ComplexShape.up ℕ) p' q' n h ≫ K.totalπ n p q = 0 := by
-  rw [ιTotal_totalπ, dite_eq_right (fun h ↦ hq h.2)]
-
 lemma totalπ_eq_zero (n p q : ℕ) (h : p + q ≠ n) : K.totalπ n p q = 0 := by
   ext p' q' h'
   rw [comp_zero, ιTotal_totalπ, dite_eq_right]

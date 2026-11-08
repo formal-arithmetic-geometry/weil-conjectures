@@ -6,7 +6,11 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
-public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 

@@ -61,12 +61,4 @@ variable [WeaklyEtale g] {K : Type u} [Field K] (f : U ⟶ Spec (.of K)) (l : �
   {ζ : ℕ → K} (hζ : ∀ n, IsPrimitiveRoot (ζ n) (l ^ n))
   (hζ' : ∀ n, ζ (n + 1) ^ l = ζ n)
 
-/-- The root trivialization with only rational coefficient modules in its result. -/
-noncomputable def purityRationalTateTrivialization :
-    (g)^*⟦Profinite.padicAlgClRingObj l⟧.obj (tateTwistOne X l) ≅
-      (g)^*⟦Profinite.padicAlgClRingObj l⟧.obj (𝟙_ _) :=
-  purityChangeCoefficientTrivialization (Profinite.continuousMapRingObj ℤ_[l])
-    (Profinite.padicIntRingObjToPadicAlgCl l) g (tateModule X l)
-    (upperStarMapModTateModuleIsoUnit g f l hζ hζ' ≪≫ (g)^*[Ab.{u + 1}].mapModUnitIso)
-
 end AlgebraicGeometry.ProEtale

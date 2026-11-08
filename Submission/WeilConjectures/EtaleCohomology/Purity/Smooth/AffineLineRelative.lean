@@ -225,14 +225,6 @@ theorem isIso_of_isSplitMono_of_iso {X : Scheme.{u}}
     hinj.bijective_of_nat_card_le (Nat.card_congr eF).le
   exact (LinearEquiv.ofBijective (Φ.map φ).hom hbij).toModuleIso.isIso_hom
 
-/-- The geometric stalks of the constant sheaf `Λ` are finite when `Λ` is. -/
-lemma finite_sheafFiber_homology_constantComplex [Finite Λ] {X : Scheme.{u}} (x : X) :
-    Finite ↑(((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
-      ((_root_.DerivedCategory.homologyFunctor _ 0).obj (constantComplex Λ X))) :=
-  Finite.of_equiv _ ((X.uliftPointSmallEtale x).sheafFiber.mapIso
-    (homologyZeroConstantComplexIso Λ X) ≪≫
-      (X.uliftPointSmallEtale x).sheafFiberConstantSheafIso _).toLinearEquiv.toEquiv.symm
-
 /-- A split monomorphism `φ : M ⟶ K` in `D(X_ét, Λ)` out of a complex `M` concentrated in degree
 zero is an isomorphism if `K ≅ M` and the geometric stalks of `H⁰(M)` are finite. -/
 theorem isIso_of_isSplitMono_of_iso_of_homology {X : Scheme.{u}}

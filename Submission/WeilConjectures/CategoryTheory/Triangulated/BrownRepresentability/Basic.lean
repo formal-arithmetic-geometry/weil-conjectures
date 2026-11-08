@@ -61,12 +61,6 @@ section Helpers
 
 variable [Preadditive C] (H : Cᵒᵖ ⥤ AddCommGrpCat.{v})
 
-/-- `H(0) = 0` for an additive functor `H : Cᵒᵖ ⥤ Ab`. -/
-@[simp]
-lemma map_zero_apply [H.Additive] {A B : C} (y : H.obj (op B)) : H.map (0 : A ⟶ B).op y = 0 := by
-  rw [op_zero, H.map_zero]
-  rfl
-
 omit [Preadditive C] in
 /-- `H(𝟙) = 𝟙` on elements. -/
 @[simp]

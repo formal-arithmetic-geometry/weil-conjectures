@@ -528,30 +528,6 @@ noncomputable def adicSectionModuleEquivalence (l : ℕ) [Fact l.Prime] (X : Sch
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (comparisonRing l X)) :=
   (comparisonModuleFunctor l X).asEquivalence
 
-/-- The section module of the native regular module is the ordinary regular sheaf module.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification.
-(blueprint: lem-sf-adic-section-module-equivalence). -/
-noncomputable def comparisonUnitIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    (comparisonModuleFunctor l X).obj (AdicSheaf.unit l X) ≅
-      SheafOfModules.unit ((sheafCompose (Scheme.ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (comparisonRing l X)) := by
-  let e : ((comparisonModuleFunctor l X).obj (AdicSheaf.unit l X)).val ≅
-      (SheafOfModules.unit ((sheafCompose (Scheme.ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (comparisonRing l X))).val :=
-    PresheafOfModules.isoMk (fun V ↦ ModuleCat.isoMk (Iso.refl _) (by
-      intro r
-      ext m
-      change ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l V.unop.left) at r m
-      have h := congr_app (adicConstantSheaf_μ_comp_map_mul' (l := l) X) V
-      have hh := ConcreteCategory.congr_hom h
-        (r ⊗ₜ[ULift.{u + 1} (PadicAlgCl l)] m)
-      exact hh.symm)) (by intro V W f; ext m; rfl)
-  exact
-    { hom := ⟨e.hom⟩
-      inv := ⟨e.inv⟩
-      hom_inv_id := SheafOfModules.hom_ext e.hom_inv_id
-      inv_hom_id := SheafOfModules.hom_ext e.inv_hom_id }
-
 -- Pin the native colimit instance before the functor appears in its dependent type.
 /-- Native adic modules have coproducts in the required index universe.
 Source: Stacks 03CV and 0GMW; the explicit native action and sheafification.
@@ -564,18 +540,6 @@ noncomputable instance comparisonNativeCoproducts (l : ℕ) [Fact l.Prime]
   exact HasColimitsOfSize.has_colimits_of_shape (Discrete I)
 
 attribute [local irreducible] comparisonModuleFunctor
-
-/-- The section equivalence identifies a coordinate sum of native units with the free module sheaf.
-Source: Stacks 03CV and 0GMW; the explicit native action and sheafification.
-(blueprint: lem-sf-adic-section-module-equivalence). -/
-noncomputable def comparisonFreeIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
-    (I : Type (u + 1)) :
-    (comparisonModuleFunctor l X).obj (∐ (fun (_ : I) ↦ AdicSheaf.unit l X)) ≅
-      SheafOfModules.free (R := (sheafCompose (Scheme.ProEt.topology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (comparisonRing l X)) I := by
-  exact PreservesCoproduct.iso (comparisonModuleFunctor l X)
-    (fun (_ : I) ↦ AdicSheaf.unit l X) ≪≫
-      Sigma.mapIso (fun (_ : I) ↦ comparisonUnitIso l X)
 
 
 end AlgebraicGeometry.ProEtale

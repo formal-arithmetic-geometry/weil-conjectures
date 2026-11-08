@@ -228,25 +228,4 @@ noncomputable def f (K : CochainComplex.Plus A) (p q : ℤ) :
 end Derived
 end TruncationCouple
 
-/-- The truncation couple is the displayed pair of bigraded objects with the
-three maps induced by the truncation triangles. The lower cohomological bound
-is recorded even though the construction of the maps does not depend on it.
-The bidegrees agree with the type-zero `BigradedExactCouple` convention;
-exactness is reserved for lem-sp-truncation-couple-exact.
-Source: blueprint order 520 (blueprint: def-sp-truncation-couple). -/
-noncomputable def truncationCouple
-    {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
-    {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
-    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
-    (K : CochainComplex.Plus A) (a : ℤ)
-    (ha : ∀ q : ℤ, q < a → IsZero (K.obj.homology q)) :
-    Σ D : ℤ → ℤ → B, Σ E : ℤ → ℤ → B,
-      (∀ p q, D p q ⟶ D (p - 1) (q + 1)) ×
-      (∀ p q, E p q ⟶ D (p + 2) (q - 1)) × (∀ p q, D p q ⟶ E p q) :=
-  letI := HasDerivedCategory.standard A
-  letI := HasDerivedCategory.standard B
-  let _ := ha
-  ⟨TruncationCouple.D F K, TruncationCouple.E F K,
-    TruncationCouple.alpha F K, TruncationCouple.f F K, TruncationCouple.g F K⟩
-
 end CategoryTheory

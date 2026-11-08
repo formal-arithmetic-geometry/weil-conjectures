@@ -89,21 +89,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   [HasWeakSheafify J AddCommGrpCat.{r}] {R : Sheaf J RingCat.{r}}
 
-private theorem moduleSheafification_unit_naturality
-    {P Q : PresheafOfModules.{r} R.obj} (f : P ⟶ Q) :
-    (PresheafOfModules.sheafificationAdjunction.{r} (𝟙 R.obj)).unit.app P ≫
-        ((PresheafOfModules.sheafification.{r} (𝟙 R.obj)).map f).val =
-      f ≫ (PresheafOfModules.sheafificationAdjunction.{r} (𝟙 R.obj)).unit.app Q := by
-  exact ((PresheafOfModules.sheafificationAdjunction.{r}
-    (𝟙 R.obj)).unit.naturality f).symm
-
-private theorem moduleSheafification_hom_ext
-    (P : PresheafOfModules.{r} R.obj) (A : SheafOfModules.{r} R)
-    {f g : (PresheafOfModules.sheafification.{r} (𝟙 R.obj)).obj P ⟶ A}
-    (h : (PresheafOfModules.sheafificationAdjunction.{r} (𝟙 R.obj)).unit.app P ≫ f.val =
-      (PresheafOfModules.sheafificationAdjunction.{r} (𝟙 R.obj)).unit.app P ≫ g.val) : f = g := by
-  exact (PresheafOfModules.sheafificationHomEquiv.{r} (𝟙 R.obj)).injective h
-
 end SheafificationAPI
 
 section
@@ -196,45 +181,6 @@ private def leftTensorPresheaf
     intro x y
     rfl
 
-private def leftTensorSheaf
-    (N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :
-    SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) ⥤
-      SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B) :=
-  forget _ ⋙ leftTensorPresheaf N.val ⋙ PresheafOfModules.sheafification.{r} (𝟙 _)
-
-private def leftTensorSheafMap
-    {N N' : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)}
-    (f : N ⟶ N') : leftTensorSheaf N ⟶ leftTensorSheaf N' where
-  app M := (siteSheafTensorRight M).map f
-  naturality {_M _M'} g := (siteSheafTensorSecondMap_naturality f g).symm
-
-private theorem leftTensorSheafMap_comp
-    {N N' N'' : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)}
-    (f : N ⟶ N') (g : N' ⟶ N'') :
-    leftTensorSheafMap (f ≫ g) = leftTensorSheafMap f ≫ leftTensorSheafMap g := by
-  apply NatTrans.ext
-  funext M
-  exact (siteSheafTensorRight M).map_comp f g
-
-private theorem leftTensorSheafMap_zero
-    (N N' : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :
-    leftTensorSheafMap (0 : N ⟶ N') = 0 := by
-  apply NatTrans.ext
-  funext M
-  exact (siteSheafTensorRight M).map_zero N N'
-
-private theorem tensorMap_tmul
-    {N N' : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)}
-    (f : N ⟶ N')
-    (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
-    (U : Cᵒᵖ) (y : N.val.obj U) (x : M.val.obj U) :
-    ((siteSheafTensorRight M).map f).val.app U (siteSheafTensorTmul N M U y x) =
-      siteSheafTensorTmul N' M U (f.val.app U y) x := by
-  exact congrArg (fun k ↦ (k.app U) (y ⊗ₜ[B.obj.obj U] x))
-    (moduleSheafification_unit_naturality
-      (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj B)
-      (siteTensorHom f.val M.val))
-
 end LeftTensorAuxiliary
 
 section RestrictedTensorAuxiliary
@@ -287,36 +233,6 @@ private def restrictedTensorPresheafIso {R S : Sheaf J CommRingCat.{r}}
       change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =
         changeOfRingsMap φ M f (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)
       exact (Classical.choose_spec (exists_changeOfRingsMap φ M f) s m).symm
-
-omit [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
-private theorem sheafificationComparison {R : Sheaf J RingCat.{r}}
-    (P : PresheafOfModules.{r} R.obj) (A : SheafOfModules.{r} R)
-    (φ : P ⟶ A.val)
-    [hinj : PresheafOfModules.IsLocallyInjective J φ]
-    [hsurj : PresheafOfModules.IsLocallySurjective J φ] :
-    ∃ e : (PresheafOfModules.sheafification.{r} (𝟙 R.obj)).obj P ≅ A,
-      (PresheafOfModules.sheafificationAdjunction.{r} (𝟙 R.obj)).unit.app P ≫
-        e.hom.val = φ := by
-  let S := (PresheafOfModules.sheafification.{r} (𝟙 R.obj)).obj P
-  let η : P ⟶ S.val := (PresheafOfModules.sheafificationAdjunction.{r} (𝟙 R.obj)).unit.app P
-  let g : S ⟶ A := (PresheafOfModules.sheafificationHomEquiv.{r} (𝟙 R.obj)).symm φ
-  have hg : η ≫ g.val = φ := by
-    exact (PresheafOfModules.sheafificationHomEquiv.{r} (𝟙 R.obj)).apply_symm_apply φ
-  let f : A ⟶ S := ⟨(PresheafOfModules.homEquivOfIsLocallyBijective
-    (f := φ) S.isSheaf).symm η⟩
-  have hf : φ ≫ f.val = η := by
-    exact (PresheafOfModules.homEquivOfIsLocallyBijective
-      (f := φ) S.isSheaf).apply_symm_apply η
-  have hfg : f ≫ g = 𝟙 A := by
-    apply (SheafOfModules.fullyFaithfulForget _).map_injective
-    apply (PresheafOfModules.homEquivOfIsLocallyBijective (f := φ) A.isSheaf).injective
-    change φ ≫ (f.val ≫ g.val) = φ ≫ 𝟙 A.val
-    rw [← Category.assoc, hf, hg, Category.comp_id]
-  have hgf : g ≫ f = 𝟙 S := by
-    apply moduleSheafification_hom_ext P S
-    change η ≫ (g.val ≫ f.val) = η ≫ 𝟙 S.val
-    rw [← Category.assoc, hg, hf, Category.comp_id]
-  exact ⟨⟨g, f, hgf, hfg⟩, hg⟩
 
 end RestrictedTensorAuxiliary
 
@@ -419,81 +335,6 @@ private instance tensorExtensionUnit_surjective {R S : Sheaf J CommRingCat.{r}}
       (toSheafify J (changeOfRingsPresheaf a M).presheaf) := inferInstance
   infer_instance
 
-private theorem exists_extensionTensorIso {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)
-    (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
-    ∃ e : (leftTensorSheaf
-      ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj
-        (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S)))).obj M ≅
-      (ordinaryExtension a ⋙
-        restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj M,
-      (PresheafOfModules.sheafificationAdjunction.{r}
-        (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app _ ≫
-          e.hom.val = (tensorExtensionUnit a).app M := by
-  exact sheafificationComparison
-    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-    _ _ ((tensorExtensionUnit a).app M)
-    (hinj := tensorExtensionUnit_injective a M)
-    (hsurj := tensorExtensionUnit_surjective a M)
-
-private def extensionTensorIso {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)
-    (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
-    (leftTensorSheaf
-      ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj
-        (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S)))).obj M ≅
-      (ordinaryExtension a ⋙
-        restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj M :=
-  (exists_extensionTensorIso a M).choose
-
-private theorem extensionTensorIso_unit {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)
-    (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
-    (PresheafOfModules.sheafificationAdjunction.{r}
-      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app _ ≫
-        (extensionTensorIso a M).hom.val = (tensorExtensionUnit a).app M :=
-  (exists_extensionTensorIso a M).choose_spec
-
-private def tensorExtensionIso {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
-    leftTensorSheaf
-        ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj
-          (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) ≅
-      ordinaryExtension a ⋙
-        restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a) :=
-  NatIso.ofComponents (extensionTensorIso a) (by
-    intro M N f
-    let adj := PresheafOfModules.sheafificationAdjunction.{r}
-      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
-    let N₀ := (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj
-      (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
-    let T := leftTensorPresheaf (B := R) N₀.val
-    apply moduleSheafification_hom_ext
-      (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (T.obj M.val) _
-    have hη : adj.unit.app (T.obj M.val) ≫ (leftTensorSheaf N₀ |>.map f).val =
-        T.map f.val ≫ adj.unit.app (T.obj N.val) :=
-      moduleSheafification_unit_naturality
-        (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (T.map f.val)
-    change adj.unit.app (T.obj M.val) ≫
-        (leftTensorSheaf N₀ |>.map f).val ≫ (extensionTensorIso a N).hom.val =
-      adj.unit.app (T.obj M.val) ≫ (extensionTensorIso a M).hom.val ≫
-        ((ordinaryExtension a ⋙
-          restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).map f).val
-    have hM := extensionTensorIso_unit a M
-    have hN := extensionTensorIso_unit a N
-    change adj.unit.app (T.obj M.val) ≫ (extensionTensorIso a M).hom.val = _ at hM
-    change adj.unit.app (T.obj N.val) ≫ (extensionTensorIso a N).hom.val = _ at hN
-    rw [← Category.assoc, hη, Category.assoc, hN, ← Category.assoc, hM]
-    exact (tensorExtensionUnit a).naturality f)
-
-private theorem extensionTensorIso_tmul {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)
-    (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-    (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
-    ((extensionTensorIso a M).hom.val.app U)
-      (siteSheafTensorTmul
-        ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj
-          (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M U s x) =
-      (toSheafify J (changeOfRingsPresheaf a M).presheaf).app U
-        (s ⊗ₜ[R.obj.obj U, (a.hom.app U).hom] x) := by
-  exact congrArg (fun k ↦ (k.app U)
-    (s ⊗ₜ[R.obj.obj U] x)) (extensionTensorIso_unit a M)
-
 variable [EssentiallySmall.{r} C]
 
 variable [HasSheafify J AddCommGrpCat.{r}]
@@ -507,65 +348,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 -- This is the general-ring version of systemScalarRestriction_exact. Both composites
 -- with toSheaf retain the same underlying abelian sheaf and every morphism.
-private theorem restriction_exact {R S : Sheaf J RingCat.{r}} (a : R ⟶ S) :
-    PreservesFiniteLimits (restrictScalars.{r} a) ∧
-      PreservesFiniteColimits (restrictScalars.{r} a) := by
-  let F := restrictScalars.{r} a
-  have : PreservesFiniteLimits (F ⋙ toSheaf R) := by
-    change PreservesFiniteLimits (toSheaf S)
-    infer_instance
-  have : PreservesFiniteColimits (F ⋙ toSheaf R) := by
-    change PreservesFiniteColimits (toSheaf S)
-    infer_instance
-  exact ⟨preservesFiniteLimits_of_reflects_of_preserves F (toSheaf R),
-    preservesFiniteColimits_of_reflects_of_preserves F (toSheaf R)⟩
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
-private theorem restriction_faithful {R S : Sheaf J RingCat.{r}} (a : R ⟶ S) :
-    (restrictScalars.{r} a).Faithful := by
-  let F := restrictScalars.{r} a
-  have : (F ⋙ toSheaf R).Faithful := by
-    change (toSheaf S).Faithful
-    infer_instance
-  exact Functor.Faithful.of_comp F (toSheaf R)
-
-private def liftRestrictedHom {R S : Sheaf J RingCat.{r}} (a : R ⟶ S)
-    [Presheaf.IsLocallySurjective J a.hom] {M N : SheafOfModules.{r} S}
-    (f : (restrictScalars a).obj M ⟶ (restrictScalars a).obj N) : M ⟶ N :=
-  ⟨(PresheafOfModules.restrictHomEquivOfIsLocallySurjective a.hom N.isSheaf).symm f.val⟩
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
-private theorem restrict_liftRestrictedHom {R S : Sheaf J RingCat.{r}} (a : R ⟶ S)
-    [Presheaf.IsLocallySurjective J a.hom] {M N : SheafOfModules.{r} S}
-    (f : (restrictScalars a).obj M ⟶ (restrictScalars a).obj N) :
-    (restrictScalars a).map (liftRestrictedHom a f) = f := by
-  rfl
-
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
-private theorem restriction_full {R S : Sheaf J RingCat.{r}} (a : R ⟶ S)
-    [Presheaf.IsLocallySurjective J a.hom] : (restrictScalars.{r} a).Full where
-  map_surjective f := ⟨liftRestrictedHom a f, restrict_liftRestrictedHom a f⟩
-
-private def restrictionComp {R S T : Sheaf J RingCat.{r}}
-    (a : R ⟶ S) (b : S ⟶ T) (c : R ⟶ T) (h : a ≫ b = c) :
-    restrictScalars.{r} b ⋙ restrictScalars a ≅ restrictScalars c := by
-  have hU (U : Cᵒᵖ) : (b.hom.app U).hom.comp (a.hom.app U).hom =
-      (c.hom.app U).hom :=
-    congrArg RingCat.Hom.hom (congr_app (congrArg (fun k ↦ k.hom) h) U)
-  refine NatIso.ofComponents (fun M ↦ (fullyFaithfulForget _).preimageIso
-    (PresheafOfModules.isoMk (fun U ↦
-      (ModuleCat.restrictScalarsComp'App (a.hom.app U).hom (b.hom.app U).hom
-        (c.hom.app U).hom (hU U).symm (M.val.obj U)).symm) ?_)) ?_
-  · intro U V f
-    ext x
-    rfl
-  · intro M N f
-    ext U x
-    rfl
-
 end ExactRestrictionAuxiliary
 
 section EndpointModelAuxiliary
@@ -587,29 +369,6 @@ variable {A : Type*} [Category A] [Abelian A]
   (P : CochainComplex A ℤ)
 
 end CochainAuxiliary
-
-private theorem lift_shortExact
-    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
-    (F : A ⥤ D) [F.Additive] [F.Full] [F.Faithful]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    {X₁ X₂ X₃ : A} (a : F.obj X₁ ⟶ F.obj X₂) (b : F.obj X₂ ⟶ F.obj X₃)
-    (hab : a ≫ b = 0) (hS : (ShortComplex.mk a b hab).ShortExact) :
-    ∃ (α : X₁ ⟶ X₂) (β : X₂ ⟶ X₃) (hαβ : α ≫ β = 0),
-      (ShortComplex.mk α β hαβ).ShortExact ∧ F.map α = a ∧ F.map β = b := by
-  let α := F.preimage a
-  let β := F.preimage b
-  have hαβ : α ≫ β = 0 := by
-    apply F.map_injective
-    simpa only [α, β, Functor.map_comp, Functor.map_preimage, Functor.map_zero] using hab
-  let S := ShortComplex.mk α β hαβ
-  have hSF : (S.map F).ShortExact := by
-    change (ShortComplex.mk (F.map α) (F.map β) _).ShortExact
-    simpa only [α, β, Functor.map_preimage] using hS
-  have hSA : S.ShortExact := by
-    exact { exact := (S.exact_map_iff_of_faithful F).1 hSF.exact
-            mono_f := F.mono_of_mono_map hSF.mono_f
-            epi_g := F.epi_of_epi_map hSF.epi_g }
-  exact ⟨α, β, hαβ, hSA, F.map_preimage a, F.map_preimage b⟩
 
 section FlatTensorAssembly
 

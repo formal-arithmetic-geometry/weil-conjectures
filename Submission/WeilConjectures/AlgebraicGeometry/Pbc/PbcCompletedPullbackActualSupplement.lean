@@ -55,7 +55,195 @@ import Submission.WeilConjectures.CategoryTheory.Ringed.RingedInternalHomExactRe
 import Submission.WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedTensorReflector
 import Submission.WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedCechComparison
 import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullback
-import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
+import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourArrows
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackInterface
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantCoefficientEquivalence
+import Submission.WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+import Mathlib.Algebra.Homology.Localization
+import Submission.WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
+import Submission.WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
+import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
+import Mathlib.CategoryTheory.MorphismProperty.Comma
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.CategoryTheory.Limits.Cones
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
+import Submission.WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
+import Submission.WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+import Submission.WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+import Submission.WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenScalarLimitCoherence
+import Submission.WeilConjectures.CategoryTheory.NormalizedLimitSquare.NormalizedLimitSquareCoherence
+import Submission.WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
+import Submission.WeilConjectures.CategoryTheory.Strict.StrictRoosShiftLocalization
+import Submission.WeilConjectures.AlgebraicGeometry.ExactProductFunctorStrictLimit
+import Submission.WeilConjectures.CategoryTheory.StrictRoosComparison
+import Submission.WeilConjectures.CategoryTheory.Ringed.RingedStrictTowerHomotopyLimitOfUniverses
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Submission.WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
+import Submission.WeilConjectures.CategoryTheory.StrictRoosDerivation
+import Submission.WeilConjectures.CategoryTheory.StrictRoosModel
+import Mathlib.CategoryTheory.Whiskering
+import Mathlib.Algebra.Homology.Functor
+import Mathlib.CategoryTheory.Limits.Shapes.Countable
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Submission.WeilConjectures.Algebra.Homology.RoosComplex
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Submission.WeilConjectures.CategoryTheory.SiteCoveringAxioms
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Submission.WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.CategoryTheory.Yoneda
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.CategoryTheory.Generator.Basic
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Submission.WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
+import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+import Mathlib.CategoryTheory.Adjunction.Evaluation
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.CategoryTheory.StrictRoosNormalization
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
+import Mathlib.Basic.Denumerable
+import Submission.WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosChainMaps
+import Submission.WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
+import Submission.WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Submission.WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibility
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.StrictReduction.ReductionPullbackDerivedTower
+import Submission.WeilConjectures.AlgebraicGeometry.DerivedScalarMate.ScalarMateRestrictionCounitRoute
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInverseImageTensorComparisonSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Mathlib.Algebra.Category.Grp.Colimits
+import Submission.WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
+import Submission.WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.Algebra.Homology.HomologicalComplex
+import Mathlib.Algebra.Homology.Additive
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import Submission.WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Submission.WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import Submission.WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Submission.WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Submission.WeilConjectures.AlgebraicGeometry.ProperBaseChange.NoetherianStratumDetectionSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
+import Submission.WeilConjectures.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import Submission.WeilConjectures.CategoryTheory.Sites.LowerShriekCoveringGenerators
+import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Submission.WeilConjectures.CategoryTheory.Sites.LowerShriekCorepresentability
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Submission.WeilConjectures.CategoryTheory.Sites.CoveringRepresentableCoequalizer
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+import Mathlib.CategoryTheory.Sites.RegularEpi
+import Mathlib.CategoryTheory.Limits.Shapes.KernelPair
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Submission.WeilConjectures.CategoryTheory.InverseMateEquivalence
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+import Submission.WeilConjectures.Mathlib.CategoryTheory.NatIso
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
+import Submission.WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import Submission.WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import Submission.WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+import Submission.WeilConjectures.CategoryTheory.SmoothBaseChange.TowerDerivedEvaluationNormalization
+import Submission.WeilConjectures.CategoryTheory.DirectImageRoosNormalization.DirectImageRoosNormalization
 import Submission.WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 import Submission.WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
@@ -233,81 +421,6 @@ abbrev pbcActualModulePush := completedModuleDirectImage g d
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
 abbrev pbcActualModulePull := completedModulePullback g d
 
-attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
-  coefficientProEtaleModelUp_isContinuous in
-/-- The ordinary tensor-unit section uses the actual model-site inverse-image unit.
-Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
-def pbcActualModuleUnitSection (M : pbcModules Y (pbcAdicCompletion Y d))
-    (U : Y.ProEt) (x : M.val.obj (op U)) :
-    ((pbcActualModulePush g d).obj ((pbcActualModulePull g d).obj M)).val.obj (op U) :=
-  reductionTensorSection X (completedCoefficientMap g d)
-    ((proEtaleModuleInverseImage g (pbcAdicCompletion Y d)).obj M)
-    (op ((proEtaleBaseChange g).obj U)) 1
-    (((SheafOfModules.pullbackPushforwardAdjunction.{u + 1} (proEtaleModelRingUnit g
-      (pbcAdicCompletion Y d))).unit.app
-        ((proEtaleModuleToModel ((adicLisseForget Y).obj (pbcAdicCompletion Y d))).obj M)).val.app
-          (op (AsSmall.up.obj U)) x)
-
-/-- The published pullback and direct image have the uniquely normalized tensor adjunction.
-Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: on the small model apply the ordinary module inverse-image adjunction,
-then the tensor-restriction adjunction of the completed coefficient map.
-Transport along the sectionwise model equivalences. Its unit is the model unit
-followed by 1 tensor x, exactly as displayed. These local tensor generators fix
-the Hom transpose and hence the adjunction uniquely. -/
-theorem pbcActualModuleAdjunction_exists :
-    ∃! adj : pbcActualModulePull g d ⊣ pbcActualModulePush g d,
-      ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt) (x : M.val.obj (op U)),
-        (adj.unit.app M).val.app (op U) x = pbcActualModuleUnitSection g d M U x := by
-  let : (proEtaleModelBaseChange g).IsContinuous
-      (proEtaleModelTopology Y) (proEtaleModelTopology X) :=
-    proEtaleModelBaseChange_isContinuous g
-  let : (AsSmall.up : Y.ProEt ⥤ proEtaleSiteModel Y).IsContinuous
-      (ProEt.topology Y) (proEtaleModelTopology Y) := proEtaleModelUp_isContinuous Y
-  let : (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsContinuous
-      (ProEt.topology X) (proEtaleModelTopology X) := proEtaleModelUp_isContinuous X
-  let R := pbcAdicCompletion Y d
-  let φ := completedCoefficientMap g d
-  obtain ⟨adjS, hadjS⟩ :=
-    SheafOfModules.ScalarReductionProof.tensorAdjunction_of_identifications φ
-      (reductionChange X φ) (reductionChangeExistence X φ).choose_spec.choose
-      (reductionChangeExistence X φ).choose_spec.choose_spec.choose
-  let adj := (canonicalAdjunction g R).comp adjS
-  let e : SheafOfModules.restrictScalars ((sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ) ⋙
-      AlgebraicGeometry.Scheme.T g R ≅
-      pbcActualModulePush g d := by
-    refine NatIso.ofComponents (fun M ↦ ?_) ?_
-    · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
-      exact PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; rfl)
-    · intro M N a
-      apply SheafOfModules.hom_ext
-      apply PresheafOfModules.hom_ext
-      intro U
-      rfl
-  let a : pbcActualModulePull g d ⊣ pbcActualModulePush g d := adj.ofNatIsoRight e
-  have ha : ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt)
-      (x : M.val.obj (op U)),
-      (a.unit.app M).val.app (op U) x = pbcActualModuleUnitSection g d M U x := by
-    intro M U x
-    change ((adjS.unit.app ((proEtaleModuleInverseImage g R).obj M)).val.app
-      (op ((proEtaleBaseChange g).obj U))
-        (((canonicalAdjunction g R).unit.app M).val.app (op U) x)) = _
-    rw [canonicalUnit_sections, hadjS]
-    rfl
-  refine ⟨a, ha, ?_⟩
-  intro a' ha'
-  apply Adjunction.ext
-  apply NatTrans.ext
-  funext M
-  apply SheafOfModules.hom_ext
-  ext U x
-  exact (ha' M U.unop x).trans (ha M U.unop x).symm
-
-/-- The actual module adjunction, with the inverse-image tensor unit retained.
-Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
-def pbcActualModuleAdjunction := (pbcActualModuleAdjunction_exists g d).exists.choose
-
 /-- Pullback and pushforward are additive.
 Source: 03D7 (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
 Proof: sectionwise direct image preserves sums of maps. Sheafified inverse image
@@ -333,18 +446,6 @@ abbrev pbcActualDerivedPull := completedOrdinaryPullback g d
 /-- The published universal ordinary-pullback counit.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
 abbrev pbcActualPullCounit := completedOrdinaryPullbackCounit g d
-
-/-- Its computation on cochain representatives retains the universal counit.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
-def pbcActualPullComplexCounit (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
-    (pbcActualDerivedPull g d).obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj (((pbcActualModulePull g d).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (pbcActualDerivedPull g d).map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
-    (pbcActualPullCounit g d).app ((HomotopyCategory.quotient _ _).obj P) ≫
-    DerivedCategory.Qh.map
-      (((pbcActualModulePull g d).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
-    (DerivedCategory.quotientCompQhIso _).hom.app
-      (((pbcActualModulePull g d).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Ordinary derived direct image, computed using K-injectives in all modules.
 Source: 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
@@ -487,16 +588,6 @@ invertible. This gives the stated universal right derived pair. -/
     ((pbcActualModulePush g d).rightDerivedFunctorUnit.app
       ((HomotopyCategory.quotient _ _).obj I)) ≫ 𝟙 _)
   infer_instance
-
-/-- The derived adjunction obtained from the actual module adjunction and its
-universal derived counit/unit. Source: Stacks Tag 099N
-(blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
-def pbcActualDerivedAdjunction :
-    pbcActualDerivedPull g d ⊣ pbcActualDerivedPush g d :=
-  (pbcActualModuleAdjunction g d).mapHomotopyCategory (.up ℤ) |>.derived
-      (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
-      (HomotopyCategory.quasiIso (pbcModules X (pbcAdicCompletion X d)) (.up ℤ))
-      (pbcActualPullCounit g d) (pbcActualPushUnit g d)
 
 set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
@@ -875,20 +966,6 @@ Source: 099N (2),(5) (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -
 def pbcActualCompletedPull : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   pbcActualDerivedPull g d ⋙ pbcActualCompletion d X
 
-/-- The comparison is the actual completion unit after ordinary derived pullback.
-Source: 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
-def pbcActualCompletedPullUnit : pbcActualDerivedPull g d ⟶ pbcActualCompletedPull g d :=
-  whiskerLeft (pbcActualDerivedPull g d) (pbcActualCompletionUnit d X)
-
-/-- The completion reflection lands in the actual intrinsic complete predicate.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: its left adjoint has values in that full subcategory by construction.
-Composing with the inclusion retains the same membership witness. -/
-theorem pbcActualCompletedPull_isComplete (K : PbcCompletedDerived Y d) :
-    PbcIsIntrinsicallyComplete X d ((pbcActualCompletedPull g d).obj K) := by
-  exact ((ObjectProperty.ι (PbcIsIntrinsicallyComplete X d)).leftAdjoint.obj
-    ((pbcActualDerivedPull g d).obj K)).property
-
 private theorem actualReflection (S : Scheme.{u})
     (M N : PbcCompletedDerived S d) (hN : PbcIsIntrinsicallyComplete S d N) :
     Function.Bijective (fun f : (pbcActualCompletion d S).obj M ⟶ N ↦
@@ -898,13 +975,6 @@ private theorem actualReflection (S : Scheme.{u})
   let e := (ObjectProperty.fullyFaithfulι P).homEquiv.symm.trans
     (adj.homEquiv M ⟨N, hN⟩)
   exact e.bijective
-
-private theorem actualCompletion_unit_iso (S : Scheme.{u})
-    (M : PbcCompletedDerived S d) (hM : PbcIsIntrinsicallyComplete S d M) :
-    IsIso ((pbcActualCompletionUnit d S).app M) := by
-  let P : ObjectProperty (PbcCompletedDerived S d) := PbcIsIntrinsicallyComplete S d
-  exact (Adjunction.ofIsRightAdjoint P.ι).isIso_unit_app_iff_mem_essImage.mpr
-    ⟨⟨M, hM⟩, ⟨Iso.refl _⟩⟩
 
 private theorem actualCompletion_complete (S : Scheme.{u}) (M : PbcCompletedDerived S d) :
     PbcIsIntrinsicallyComplete S d ((pbcActualCompletion d S).obj M) :=
@@ -1031,108 +1101,5 @@ Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
 instance pbcActualCompletedPullShift : (pbcActualCompletedPull g d).CommShift ℤ :=
   inferInstanceAs ((pbcActualDerivedPull g d ⋙ pbcActualCompletion d X).CommShift ℤ)
 
-private theorem actualPush_eq_datum : pbcActualDerivedPush g d = d.push g := by
-  have hc : completedCoefficientMap g d = (d.integralRingIso g).hom := by
-    apply limit.hom_ext
-    intro n
-    change completedCoefficientMap g d ≫ d.projection X n.unop =
-      (d.integralRingIso g).hom ≫ d.projection X n.unop
-    calc
-      _ = completedCoefficientComponent g d n.unop := limit.lift_π _ n
-      _ = _ := by
-        rw [d.projection_comm]
-        rfl
-  have hm : completedModuleDirectImage g d =
-      proEtaleRingModuleDirectImage g (d.completedRing Y) (d.completedRing X)
-        (d.integralRingIso g) := by
-    unfold completedModuleDirectImage proEtaleRingModuleDirectImage
-    unfold completedCoefficientDirectImageMap proEtaleRingDirectImageMap
-    rw [hc]
-    rfl
-  change (completedModuleDirectImage g d).rightDerivedFunctor = _
-  cases hm
-  rfl
-
 -- Use the published perfect-projection tower mate and its completion-unit equation.
-private theorem quotientDirectComparison :
-    ∃ e : d.push g ⋙ (completedReductionTower Y d ⋙ completedRlim Y (d.completedRing Y)) ≅
-        (completedReductionTower X d ⋙ completedRlim X (d.completedRing X)) ⋙ d.push g,
-      ∀ M, d.completionUnit Y ((d.push g).obj M) ≫ e.hom.app M =
-        (d.push g).map (d.completionUnit X M) := by
-  let τ : d.push g ⋙ completedReductionTower Y d ⟶
-      completedReductionTower X d ⋙ d.towerPush g :=
-    { app := d.towerProjection g
-      naturality := fun {_ _} f ↦ (d.towerProjection_properties g _).2.1 _ f }
-  have : IsIso τ := NatIso.isIso_of_isIso_app τ
-  let e := (associator (d.push g) (completedReductionTower Y d)
-      (completedRlim Y (d.completedRing Y))).symm ≪≫
-    Functor.isoWhiskerRight (asIso τ) (completedRlim Y (d.completedRing Y)) ≪≫
-    associator (completedReductionTower X d) (d.towerPush g)
-      (completedRlim Y (d.completedRing Y)) ≪≫
-    Functor.isoWhiskerLeft (completedReductionTower X d) (d.directImageRlimIso g).symm ≪≫
-    (associator (completedReductionTower X d) (completedRlim X (d.completedRing X))
-      (d.push g)).symm
-  refine ⟨e, ?_⟩
-  intro M
-  change d.completionUnit Y ((d.push g).obj M) ≫
-    (𝟙 _ ≫ (completedRlim Y (d.completedRing Y)).map (d.towerProjection g M) ≫
-      𝟙 _ ≫ (d.directImageRlimIso g).inv.app ((completedReductionTower X d).obj M) ≫
-      𝟙 _) = _
-  simp only [Category.id_comp, Category.comp_id, ← Category.assoc]
-  rw [(d.towerProjection_properties g M).2.2]
-  simp
-
-/-- Direct image commutes with completion with the specified completion unit.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: direct image commutes with derived inverse limits. Apply its perfect
-projection arrows to the finite free Koszul coefficient complexes and their
-strict transitions. Their derived inverse limit is the completion comparison.
-It preserves the augmentation and is invertible. Completeness of derived direct
-image of a complete object gives uniqueness from the reflection property. -/
-theorem pbcActualDirectCompletionIso_exists :
-    ∃! e : pbcActualDerivedPush g d ⋙ pbcActualCompletion d Y ≅
-        pbcActualCompletion d X ⋙ pbcActualDerivedPush g d,
-      ∀ K : PbcCompletedDerived X d,
-        (pbcActualCompletionUnit d Y).app ((pbcActualDerivedPush g d).obj K) ≫
-            e.hom.app K =
-          (pbcActualDerivedPush g d).map ((pbcActualCompletionUnit d X).app K) := by
-  classical
-  rw [actualPush_eq_datum g d]
-  let G := d.push g
-  let FX := pbcActualCompletion d X
-  let FY := pbcActualCompletion d Y
-  let ηX := pbcActualCompletionUnit d X
-  let ηY := pbcActualCompletionUnit d Y
-  obtain ⟨cX, hcX⟩ := actualCompletion_quotient d X
-  obtain ⟨cY, hcY⟩ := actualCompletion_quotient d Y
-  obtain ⟨δ, hδ⟩ := quotientDirectComparison g d
-  let e : G ⋙ FY ≅ FX ⋙ G :=
-    Functor.isoWhiskerLeft G cY ≪≫ δ ≪≫ Functor.isoWhiskerRight cX.symm G
-  have he (M : PbcCompletedDerived X d) :
-      ηY.app (G.obj M) ≫ e.hom.app M = G.map (ηX.app M) := by
-    change ηY.app (G.obj M) ≫
-      (cY.hom.app (G.obj M) ≫ δ.hom.app M ≫ G.map (cX.inv.app M)) = _
-    rw [← Category.assoc, hcY, ← Category.assoc, hδ, ← G.map_comp, ← hcX]
-    rw [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
-  have hG (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) :
-      PbcIsIntrinsicallyComplete Y d (G.obj M) := by
-    have : IsIso (ηX.app M) := actualCompletion_unit_iso d X M hM
-    have : IsIso (ηY.app (G.obj M) ≫ e.hom.app M) := by
-      rw [he]
-      infer_instance
-    have : IsIso (ηY.app (G.obj M)) := IsIso.of_isIso_comp_right _ (e.hom.app M)
-    exact (actualComplete_iso Y d (asIso (ηY.app (G.obj M)))).mpr
-      (actualCompletion_complete d Y _)
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  ext M
-  apply (actualReflection d Y (G.obj M) (G.obj (FX.obj M))
-    (hG (FX.obj M) (actualCompletion_complete d X M))).injective
-  exact (he' M).trans (he M).symm
-
-/-- The completion comparison uniquely fixed by the quotient augmentation.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
-def pbcActualDirectCompletionIso := (pbcActualDirectCompletionIso_exists g d).exists.choose
-
 end AlgebraicGeometry.Scheme

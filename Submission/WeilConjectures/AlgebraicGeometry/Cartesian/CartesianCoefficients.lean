@@ -5,14 +5,216 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
+public import Mathlib.AlgebraicGeometry.Sites.ElladicCohomology
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import Submission.WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Ab
+public import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientData
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Topology.Category.Profinite.AsLimit
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtalePointPullback
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
+public import Submission.WeilConjectures.CategoryTheory.SheafTensor
+public import Submission.WeilConjectures.CategoryTheory.SheafTensorStructure
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Submission.WeilConjectures.CategoryTheory.PresheafTensorInternalHom
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Sites.Localization
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import Submission.WeilConjectures.Topology.ContinuousMapCondensedRing
+public import Submission.WeilConjectures.NumberTheory.Padics.IntegersProfiniteTower
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import Submission.WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import Mathlib.RingTheory.Ideal.Quotient.Index
+public import Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.Algebra.Ring.Pi
+public import Mathlib.Topology.Homeomorph.Defs
+public import Mathlib.Topology.Connected.TotallyDisconnected
+public import Mathlib.Topology.Compactness.Compact
+public import Submission.WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
+public import Mathlib.Topology.Bases
+public import Mathlib.Topology.MetricSpace.Pseudo.Defs
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Topology.Homeomorph.Lemmas
+public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.NumberTheory.Padics.PadicNumbers
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrCore
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.Topology.Algebra.Valued.LocallyCompact
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+public import Submission.WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
+public import Submission.WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
+public import Submission.WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
+public import Submission.WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
+public import Submission.WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Topology.Category.Profinite.CofilteredLimit
+public import Submission.WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import Submission.WeilConjectures.AlgebraicGeometry.ProfiniteLocallyConstantAdjunction
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleFiniteConstantRepresentable
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.FintypeCat
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Submission.WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Submission.WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Limits.Presheaf
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralRingComparison
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleIntegralPointRingMap
+public import Submission.WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Monoidal.Mon
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicIntegersInvertEll
+public import Submission.WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Mathlib.CategoryTheory.Localization.Construction
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Functor.Currying
+public import Mathlib.CategoryTheory.Whiskering
+public import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Localization.Prod
+public import Mathlib.Algebra.Homology.BifunctorFlip
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorHomotopy
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwistConstructionsSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.Tate.TateTwistFiniteLocallyFree
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
+import Submission.WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
+import Submission.WeilConjectures.NumberTheory.Padics.IntegersModPow
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientRealizations
+import Submission.WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
+import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+import Mathlib.Topology.Algebra.Valued.NormedValued
+import Mathlib.Topology.Algebra.Ring.Ideal
+import Mathlib.Topology.ContinuousMap.Compact
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+import Mathlib.CategoryTheory.Abelian.ShortExact
+import Submission.WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import Mathlib.Topology.NoetherianSpace
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
+import Submission.WeilConjectures.Topology.SpectralSpace.ConnectedComponent
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleSheafificationWcontractibleSections
+import Submission.WeilConjectures.AlgebraicGeometry.PointLanAffineEvaluation
+import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
+import Mathlib.Algebra.Category.Ring.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.PointLanFiniteProducts
+import Submission.WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Submission.WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
+import Submission.WeilConjectures.AlgebraicGeometry.IntegralScalarContractive
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import Submission.WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
+import Submission.WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Submission.WeilConjectures.CategoryTheory.SiteModuleSliceSheafification
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Topology.Sheaves.Abelian
+import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
+import Submission.WeilConjectures.SmoothPurity.Coefficient.CoefficientTwistsDetailed
+import Submission.WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Submission.WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
 public import Mathlib.Topology.Category.Profinite.EffectiveEpi
 public import Submission.WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import Mathlib.Condensed.TopComparison
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-public import Submission.WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientsFiniteFree
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+public import Submission.WeilConjectures.NumberTheory.Padics.IntegersFinite
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+public import Mathlib.CategoryTheory.Monoidal.Mod
+import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+import Mathlib.Topology.Algebra.Module.FiniteDimension
+import Mathlib.RingTheory.Localization.Module
+import Mathlib.CategoryTheory.Preadditive.Basic
+import Mathlib.CategoryTheory.Monoidal.Category
+import Mathlib.CategoryTheory.Monoidal.Functor
+import Submission.WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Free
+import Submission.WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
+import Submission.WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedSubfieldBasis
+import Submission.WeilConjectures.NumberTheory.Padics.IntegersAlgebra
+import Mathlib.RingTheory.Valuation.LocalSubring
 public import Submission.WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
 
 set_option autoImplicit true
@@ -46,97 +248,6 @@ open scoped CategoryTheory.Obj CategoryTheory.MonObj
 namespace AlgebraicGeometry.ProEtale
 
 variable {X Y : Scheme.{u}}
-
-/-- The inverse-image lift with action transported through the inverse of alpha_f.
-Its underlying objects and arrows are literally those of abelian inverse image.
-Source: blueprint final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def cartesianCoefficientLift
-    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) :=
-  (upperStar AddCommGrpCat.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
-    Mod.comap (inv (condensedPullbackHom Λ f))
-
-/-- The canonical comparison: extension along alpha is restriction along its inverse.
-This is the uniqueness-of-left-adjoints comparison of the published scalar adjunctions.
-Source: blueprint final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def cartesianCoefficientPullbackIso
-    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) :
-    CondensedRing.upperStar Λ f ≅ cartesianCoefficientLift Λ f :=
-  Functor.isoWhiskerLeft
-    ((upperStar AddCommGrpCat.{u + 1} f).mapMod (condensedRingObj Λ Y))
-    (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
-
-/-- The untwisted assertions for one specified condensed coefficient ring.
-The first conjunct concerns the canonical ring-object morphism, whose ring structure
-is recorded by isMonHom_condensedPullbackHom; the lift comparison is the actual
-cartesianCoefficientPullbackIso above. The last equality retains the whole underlying
-functor, on objects and morphisms.
-Source: blueprint (1) and final paragraph (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def CartesianCoefficientProperty
-    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) : Prop :=
-  IsIso (condensedPullbackHom Λ f) ∧
-    PreservesFiniteLimits (CondensedRing.upperStar Λ f) ∧
-    PreservesFiniteColimits (CondensedRing.upperStar Λ f) ∧
-    cartesianCoefficientLift Λ f ⋙ Mod.forget (condensedRingObj Λ X) =
-      Mod.forget (condensedRingObj Λ Y) ⋙ upperStar AddCommGrpCat.{u + 1} f
-
-/-- Finite coefficients have the discrete topology, fixed here rather than supplied
-as an extra hypothesis. This is the recorded continuous-function condensed ring.
-Source: blueprint coefficient list (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-abbrev cartesianFinitePointRing (A : Type u) [CommRing A] :
-    Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} :=
-  letI : TopologicalSpace A := ⊥
-  letI : DiscreteTopology A := discreteTopology_bot A
-  Profinite.continuousCoefficientRingObj A
-
-/-- Exactly the admissible untwisted coefficient list. Z_ell and Q_ell are included
-explicitly, in addition to all finite intermediate extensions and their integer rings.
-Qbar is the finite-subextension-valued condensed ring, not all continuous functions.
-Source: blueprint (1) (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def CartesianUntwistedAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) : Prop :=
-  (∀ (A : Type u) [CommRing A] [Finite A],
-    CartesianCoefficientProperty (cartesianFinitePointRing A) f) ∧
-  CartesianCoefficientProperty (Profinite.continuousMapRingObj (PadicInt ℓ)) f ∧
-  CartesianCoefficientProperty (Profinite.continuousMapRingObj (Padic ℓ)) f ∧
-  (∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
-    CartesianCoefficientProperty (Profinite.padicIntegersRingObj ℓ E.1) f ∧
-    CartesianCoefficientProperty (Profinite.continuousMapRingObj E.1) f) ∧
-  CartesianCoefficientProperty (Profinite.padicAlgClRingObj ℓ) f
-
-/-- The normalized finite signed comparisons over the recorded constant coefficient map.
-The first-line formula fixes the map on root tensors; the second clause retains all
-Kummer identifications. Every signed comparison includes zero, tensor and evaluation
-normalizations, and is an isomorphism of coefficient modules in every degree.
-Source: blueprint finite coefficients and powers and duals paragraphs
-(blueprint: sk-prop-sfb-cartesian-coefficients). -/
-@[irreducible] def CartesianFiniteTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
-    [∀ x : X, Invertible (ℓ : X.residueField x)]
-    [∀ y : Y, Invertible (ℓ : Y.residueField y)] : Prop :=
-  ∀ (A : Type u) [CommRing A] [Finite A],
-    ∃ β : ∀ (r : ℕ) (a : ZMod (ℓ ^ (r + 1)) →+* (ULift.{u + 1} A)),
-      SpSignedComparison f (Scheme.tateFiniteCoefficient Y (ULift.{u + 1} A))
-        (Scheme.tateFiniteCoefficient X (ULift.{u + 1} A))
-        (StrictTower.constantRingIso (ULift.{u + 1} A) f)
-        (Scheme.tateFiniteLine Y ℓ (ULift.{u + 1} A) r a)
-        (Scheme.tateFiniteLine X ℓ (ULift.{u + 1} A) r a),
-      (∀ (r : ℕ) (a : ZMod (ℓ ^ (r + 1)) →+* (ULift.{u + 1} A)) (V : Y.ProEt)
-        (b : (Scheme.tateFiniteCoefficient Y (ULift.{u + 1} A)).obj.obj (op V))
-        (z : (Scheme.proEtaleRootsOfUnitySheaf Y (ℓ ^ (r + 1))).obj.obj (op V)),
-        (((Scheme.proEtaleRingModuleAdjunction f _ _ _).homEquiv _ _)
-          ((β r a).signed 1).hom).val.app (op V)
-            (Scheme.tateFiniteTensor Y ℓ (ULift.{u + 1} A) r a V b z) =
-          Scheme.tateFiniteTensor X ℓ (ULift.{u + 1} A) r a ((Scheme.proEtaleBaseChange f).obj V)
-            ((Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1}
-              (CommRingCat.of (ULift.{u + 1} A))).hom.app (op V) b)
-            ((Scheme.proEtaleRootsOfUnityDirectImageMap f (ℓ ^ (r + 1))).hom.app
-              (op V) z)) ∧
-      (∀ (r n : ℕ) (h : r ≤ n) (a : ZMod (ℓ ^ (r + 1)) →+* (ULift.{u + 1} A)),
-        (Scheme.proEtaleRingModulePullback f _ _ _).map
-          (spFiniteKummer Y ℓ (ULift.{u + 1} A) r n h a) ≫ ((β r a).signed 1).hom =
-        ((β n (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ h))
-          (ZMod (ℓ ^ (r + 1)))))).signed 1).hom ≫ spFiniteKummer X ℓ (ULift.{u + 1} A) r n h a)
 
 /-- The normalized integral, rational and algebraic-closure signed comparisons.
 Integral maps are fixed by all finite projections through spIntegralComparison;
@@ -191,52 +302,5 @@ structure CartesianAdicComparison (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
         Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ n) (ℓ ^ m)
           (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)
           (pow_dvd_pow ℓ h))
-
-/-- Existence of the normalized adic signed comparison data.
-Source: blueprint twists (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def CartesianAdicTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y)
-    [∀ x : X, Invertible (ℓ : X.residueField x)]
-    [∀ y : Y, Invertible (ℓ : Y.residueField y)] : Prop :=
-  Nonempty (CartesianAdicComparison ℓ f)
-
-/-- The canonical normalized comparisons of roots and every signed coefficient twist.
-The finite comparisons cover every finite coefficient ring annihilated by an ell power:
-its unital quotient map is the input a. The adic comparisons use the recorded internal
-and sectionwise encodings and their same coefficient map alpha_f.
-Source: blueprint (1), twists (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def CartesianTwistAssertions (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) : Prop :=
-  ∀ (hX : ∀ x : X, Invertible (ℓ : X.residueField x))
-    (hY : ∀ y : Y, Invertible (ℓ : Y.residueField y)),
-    letI := hX
-    letI := hY
-    (∀ n : ℕ, IsIso (Scheme.proEtaleRootsOfUnityInverseImageMap f (ℓ ^ n))) ∧
-    CartesianFiniteTwistAssertions ℓ f ∧ CartesianAdicTwistAssertions ℓ f
-
-/-- Finite-free means isomorphic to a finite sum of copies of the regular module.
-Both scalar restrictions are the coefficient maps induced by the given inclusion.
-Source: blueprint (2) (blueprint: sk-prop-sfb-cartesian-coefficients). -/
-def CartesianFiniteFreeAssertions (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Prop :=
-  ∀ (E F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F),
-    (∃ n : ℕ, Nonempty
-      (Mod.finiteFree (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) n ≅
-        (Mod.comap (coefficientMap (finiteCoefficientIntegersPointMap ℓ h) X)).obj
-          (Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ F.1) X)))) ∧
-    ∃ n : ℕ, Nonempty
-      (Mod.finiteFree (padicSubfieldRingObj X ℓ E) n ≅
-        (Mod.comap (padicSubfieldRingObjMap X ℓ h)).obj
-          (Mod.regular (padicSubfieldRingObj X ℓ F)))
-
-private theorem cartesianCoefficientProperty_proof
-    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (f : X ⟶ Y) :
-    CartesianCoefficientProperty Λ f := by
-  exact ⟨inferInstance, inferInstance, inferInstance, rfl⟩
-
-private theorem cartesianFiniteFreeAssertions_proof (ℓ : ℕ) [Fact ℓ.Prime] :
-    CartesianFiniteFreeAssertions ℓ X := by
-  intro E F h
-  obtain ⟨⟨b⟩, hb, _⟩ := cartesianCoefficients_finiteFree ℓ h
-  obtain ⟨e₀, e₁, _⟩ := hb b
-  exact ⟨⟨_, ⟨e₀ X⟩⟩, ⟨_, ⟨e₁ X⟩⟩⟩
 
 end AlgebraicGeometry.ProEtale

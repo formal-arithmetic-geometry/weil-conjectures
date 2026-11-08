@@ -78,10 +78,6 @@ abbrev fieldFunctions : Subalgebra Λ C(T, Λ) := ⊤
 
 variable {Λ T}
 
-/-- Every continuous function is a section of `Λ_X`. -/
-lemma mem_fieldFunctions (f : C(T, Λ)) : f ∈ fieldFunctions Λ T :=
-  Algebra.mem_top
-
 /-- The constant functions are sections of `Λ_X`. -/
 lemma const_mem_fieldFunctions (c : Λ) :
     ContinuousMap.const T c ∈ fieldFunctions Λ T :=
@@ -129,19 +125,7 @@ namespace FieldCoefficients
 
 variable (Λ : Type) [NormedCommRing Λ]
 
-/-- The underlying `Λ`-vector space of a module over `ULift Λ`, by restriction of scalars
-along `Λ ≃ ULift Λ`. -/
-noncomputable abbrev toModuleCat :
-    FieldCoefficients.{u} Λ ⥤ ModuleCat.{u + 1} Λ :=
-  ModuleCat.restrictScalars (ULift.ringEquiv (R := Λ)).symm.toRingHom
-
 variable {Λ}
-
-/-- An isomorphism of modules over `ULift Λ` as a `Λ`-linear isomorphism of the
-underlying `Λ`-vector spaces. -/
-noncomputable def linearEquivOfIso {M N : FieldCoefficients.{u} Λ} (e : M ≅ N) :
-    (toModuleCat Λ).obj M ≃ₗ[Λ] (toModuleCat Λ).obj N :=
-  ((toModuleCat Λ).mapIso e).toLinearEquiv
 
 /-- A `Λ`-linear map, lifted to a `ULift Λ`-linear map of the universe lifts. -/
 noncomputable def uliftLinearMap {M N : Type*} [AddCommGroup M] [Module Λ M]
@@ -220,12 +204,6 @@ noncomputable def fieldConstantSheaf (X : Scheme.{u}) :
     ⟨fieldFunctionsPresheaf Λ, .of_le Scheme.proetaleTopology_le_fpqcTopology <|
       isSheaf_fpqcTopology_fieldFunctionsPresheaf Λ⟩
 
-/-- The sections of `Λ_X` over `U` are the continuous functions on `U`. -/
-lemma fieldConstantSheaf_obj_obj (X : Scheme.{u}) (U : X.ProEt) :
-    (fieldConstantSheaf Λ X).obj.obj (op U) =
-      (fieldFunctionsPresheaf Λ).obj (op U.left) :=
-  rfl
-
 /-- The pushforward of the constant sheaf along an isomorphism `e : X ≅ Y` is the
 constant sheaf: its sections over `V → Y` are the continuous functions on
 `V ×_Y X`, which the canonical isomorphism `V ×_Y X ≅ V` identifies with those on `V`. -/
@@ -235,31 +213,6 @@ noncomputable def fieldConstantSheafLowerStarIso {X Y : Scheme.{u}} (e : X ≅ Y
   (fullyFaithfulSheafToPresheaf _ _).preimageIso (show _ ≅ _ from
     (Functor.isoWhiskerRight (NatIso.op (overPullbackForgetIso e.hom))
       (fieldFunctionsPresheaf Λ)).symm)
-
-/-- The restriction maps of `Λ_X` are the pullbacks of functions along the underlying
-morphisms of schemes. -/
-lemma fieldConstantSheaf_obj_map {X : Scheme.{u}} {U V : X.ProEtᵒᵖ} (f : U ⟶ V) :
-    (fieldConstantSheaf Λ X).obj.map f = (fieldFunctionsPresheaf Λ).map f.unop.left.op :=
-  rfl
-
-lemma fieldConstantSheafLowerStarIso_inv_hom_app {X Y : Scheme.{u}} (e : X ≅ Y)
-    (V : Y.ProEtᵒᵖ) :
-    (fieldConstantSheafLowerStarIso Λ e).inv.hom.app V =
-      (fieldFunctionsPresheaf Λ).map (pullback.fst V.unop.hom e.hom).op :=
-  rfl
-
-lemma fieldConstantSheafLowerStarIso_hom_hom_app {X Y : Scheme.{u}} (e : X ≅ Y)
-    (V : Y.ProEtᵒᵖ) :
-    (fieldConstantSheafLowerStarIso Λ e).hom.hom.app V =
-      (fieldFunctionsPresheaf Λ).map
-        (pullback.lift (𝟙 V.unop.left) (V.unop.hom ≫ e.inv) (by simp)).op := by
-  rw [← cancel_mono ((fieldConstantSheafLowerStarIso Λ e).inv.hom.app V), ← NatTrans.comp_app,
-    ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id,
-    fieldConstantSheafLowerStarIso_inv_hom_app, ← Functor.map_comp, ← op_comp,
-    show pullback.fst _ _ ≫ pullback.lift _ _ _ = 𝟙 _ from
-      pullback.hom_ext (by simp) (by simp [pullback.condition_assoc]), op_id,
-    (fieldFunctionsPresheaf Λ).map_id]
-  rfl
 
 /-- The constant sheaf on a nonempty scheme is nonzero: the constant function `1` is a
 nonzero global section. -/

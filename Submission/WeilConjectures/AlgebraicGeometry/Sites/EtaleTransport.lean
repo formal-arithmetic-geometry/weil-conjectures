@@ -199,12 +199,6 @@ noncomputable def restrict (P : Torsor G) : Torsor ((etaleRestriction f).obj G) 
     exact hg
 
 
-/-- The sections of the restriction of a torsor over `U` are its sections over the
-localization of `U`. -/
-def restrictSheafEquiv (P : Torsor G) (U : X.Etaleᵒᵖ) :
-    (P.restrict f).sheaf.obj.obj U ≃ P.sheaf.obj.obj (op ((etaleLocalization f).obj U.unop)) :=
-  Equiv.refl _
-
 
 /-- Restriction preserves isomorphism of torsors. -/
 lemma restrict_equiv {P P' : Torsor G} (h : P ≈ P') :

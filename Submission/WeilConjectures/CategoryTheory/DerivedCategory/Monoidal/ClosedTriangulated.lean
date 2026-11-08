@@ -107,11 +107,6 @@ lemma internalHomPre_f_π (n p q : ℤ) (h : p + n = q) :
   rw [ιTensorObj_internalHomEquiv_symm_f, HomologicalComplex.id_f, id_comp, ← curry_pre_app,
     curry_uncurry]
 
-@[simp]
-lemma internalHomPre_id : internalHomPre (𝟙 P) Y = 𝟙 _ := by
-  ext n p q h
-  simp
-
 @[reassoc]
 lemma internalHomPre_comp : internalHomPre (f ≫ g) Y = internalHomPre g Y ≫ internalHomPre f Y := by
   ext n p q h
@@ -129,17 +124,6 @@ noncomputable def internalHomShortComplex (S : ShortComplex (CochainComplex C �
     ShortComplex (CochainComplex C ℤ) :=
   ShortComplex.mk (internalHomPre S.g Y) (internalHomPre S.f Y) (by
     rw [← internalHomPre_comp, S.zero, internalHomPre_zero])
-
-omit [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
-@[reassoc (attr := simp)]
-lemma lift_internalHomπ {Z : C} {Q : CochainComplex C ℤ} {n : ℤ}
-    (φ : ∀ T : HomComplex.Triplet n, Z ⟶ (ihom (Q.X T.p)).obj (Y.X T.q)) (p q : ℤ)
-    (h : p + n = q) :
-    Pi.lift φ ≫ internalHomπ Q Y n p q h = φ ⟨p, q, h⟩ :=
-  Pi.lift_comp_π _ _
 
 omit [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]

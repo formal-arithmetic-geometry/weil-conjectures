@@ -130,88 +130,6 @@ section Orthogonal
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 include hϖ
 
-/-- The reductions modulo `ϖⁿ` of an object on which `ϖ` acts invertibly vanish: the reduction is
-the cone of the multiplication by `ϖⁿ`. -/
-lemma isZero_reductionModIdeal_of_smulInvertible (n : ℕ) (K : 𝐃(X, Λ))
-    (hK : _root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ K) :
-    IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj K) := by
-  let F := (derivedTensor (ModuleCat.{u + 1} Λ) X).obj K
-  let T := _root_.DerivedCategory.quotPowTriangle X.smallEtaleTopology hϖ rfl n
-  have hT : F.mapTriangle.obj T ∈ distTriang _ :=
-    F.map_distinguished _ (_root_.DerivedCategory.quotPowTriangle_distinguished _ hϖ rfl n)
-  have hmor : (F.mapTriangle.obj T).mor₁ = ϖ ^ n • 𝟙 (F.obj T.obj₁) := by
-    change F.map T.mor₁ = _
-    rw [_root_.DerivedCategory.quotPowTriangle_mor₁, Functor.map_smul,
-      CategoryTheory.Functor.map_id]
-  let u : F.obj T.obj₁ ≅ K := derivedTensorSingleUnitIso K
-  have h₁ : IsIso (F.mapTriangle.obj T).mor₁ := by
-    rw [hmor]
-    have : ϖ ^ n • 𝟙 (F.obj T.obj₁) = u.hom ≫ (ϖ ^ n • 𝟙 K) ≫ u.inv := by
-      rw [Linear.smul_comp, Category.id_comp, Linear.comp_smul, Iso.hom_inv_id]
-    rw [this]
-    have := hK.pow n
-    infer_instance
-  exact (Triangle.isZero₃_iff_isIso₁ _ hT).2 h₁
-
-/-- A morphism whose reduction modulo a nonzerodivisor `ϖ` is an isomorphism induces bijections
-on morphisms into every object receiving no nonzero map from an object on which `ϖ` acts
-invertibly (for instance a derived complete object). -/
-lemma bijective_comp_of_isIso_reductionModIdeal {S T W : 𝐃(X, Λ)} (u : S ⟶ T)
-    (hu : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ})).map u))
-    (hW : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal W) :
-    Function.Bijective (fun a : T ⟶ W ↦ u ≫ a) := by
-  obtain ⟨C, g, h, hT⟩ := distinguished_cocone_triangle u
-  have hC : IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ})).obj C) :=
-    (Triangle.isZero₃_iff_isIso₁ _
-      ((reductionModIdeal Λ X (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
-  exact ObjectProperty.bijective_comp_of_distinguished hT
-    (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC) hW
-
-/-- Tensoring a morphism whose reduction modulo `ϖ` is an isomorphism with any object gives a
-morphism inducing bijections on morphisms into every object receiving no nonzero map from an
-object on which `ϖ` acts invertibly. -/
-lemma bijective_derivedTensor_map_comp_of_isIso_reductionModIdeal {S T W : 𝐃(X, Λ)}
-    (u : S ⟶ T) (hu : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ})).map u))
-    (hW : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal W)
-    (K : 𝐃(X, Λ)) :
-    Function.Bijective (fun a : ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj T ⟶ W ↦
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map u ≫ a) := by
-  obtain ⟨C, g, h, hT⟩ := distinguished_cocone_triangle u
-  have hC : IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ})).obj C) :=
-    (Triangle.isZero₃_iff_isIso₁ _
-      ((reductionModIdeal Λ X (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
-  have hϖC : IsIso (ϖ • 𝟙 C) := isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC
-  let F := (derivedTensor (ModuleCat.{u + 1} Λ) X).obj K
-  have hFC : _root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ (F.obj C) := by
-    change IsIso (ϖ • 𝟙 _)
-    rw [← F.map_id, ← Functor.map_smul]
-    infer_instance
-  exact ObjectProperty.bijective_comp_of_distinguished (F.map_distinguished _ hT) hFC hW
-
-omit hϖ in
-/-- The point of a homotopy limit of a tower of objects killed by powers of `ϖ` receives no
-nonzero map from an object on which `ϖ` acts invertibly. -/
-lemma rightOrthogonal_smulInvertible_of_isHomotopyLimit {F : ℕᵒᵖ ⥤ 𝐃(X, Λ)}
-    (hF : ∀ n : ℕ, ∃ m : ℕ, ϖ ^ m • 𝟙 (F.obj (op n)) = 0) {c : Cone F}
-    (hc : IsHomotopyLimit c) :
-    (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal c.pt :=
-  fun Z f hZ ↦ hc.hom_ext_zero
-    (fun n g ↦ (hF n).elim fun _ hm ↦ hZ.hom_eq_zero hm g)
-    (fun n g ↦ (hF n).elim fun _ hm ↦ (ObjectProperty.le_shift _ 1 Z hZ).hom_eq_zero hm g) f
-
-omit hϖ in
-/-- The point of a homotopy limit of the image of the tower `n ↦ Λ ⧸ Iⁿ` under a `Λ`-linear
-functor receives no nonzero map from an object on which `ϖ ∈ I` acts invertibly. -/
-lemma rightOrthogonal_smulInvertible_of_isHomotopyLimit_quotPowFunctor {S : Scheme.{u}}
-    {I : Ideal Λ} (hϖI : ϖ ∈ I) (G : 𝐃(S, Λ) ⥤ 𝐃(X, Λ)) [G.Additive] [G.Linear Λ]
-    {c : Cone (_root_.DerivedCategory.quotPowFunctor S.smallEtaleTopology I ⋙ G)}
-    (hc : IsHomotopyLimit c) :
-    (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal c.pt :=
-  rightOrthogonal_smulInvertible_of_isHomotopyLimit (fun n ↦ ⟨n, by
-    change ϖ ^ n • 𝟙 (G.obj _) = 0
-    rw [← G.map_id, ← Functor.map_smul,
-      _root_.DerivedCategory.smul_id_quotPowFunctor_obj _ hϖI n, G.map_zero]⟩) hc
-
 end Orthogonal
 
 /-! ### Closure properties of `Dᵇc(X, Λ)` -/
@@ -345,26 +263,6 @@ section DerivedLimit
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
 
-/-- The exceptional inverse image `Rf^!` commutes with derived limits of reductions: for a
-derived complete `L ∈ D(Y_ét, Λ)` and a homotopy limit cone `c` of the tower
-`n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, there is an isomorphism `Rf^! L ≅ c.pt` compatible with the legs.
-Indeed `Rf^!` is a triangulated right adjoint, so it carries the Milnor triangle exhibiting
-`L = R lim_n L ⊗ᴸ Λ ⧸ Iⁿ` to a Milnor triangle. -/
-theorem exists_iso_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
-    (hL : DerivedCategory.derivedComplete Y.smallEtaleTopology I L)
-    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint)} (hc : Pretriangulated.IsHomotopyLimit c) :
-    ∃ e : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj L ≅ c.pt, ∀ n : ℕ,
-      e.hom ≫ c.π.app (op n) = (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.map
-        ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n)) := by
-  let adj := Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])
-  have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.IsTriangulated :=
-    adj.isTriangulated_rightAdjoint
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.Additive := adj.right_adjoint_additive
-  exact (hL.map (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint).exists_iso hc
-
 end DerivedLimit
 
 /-! ### The integral exceptional adjoint -/
@@ -375,34 +273,6 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
   (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [IsAlgClosed k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
-
-include hϖ hI in
-omit [IsDomain Λ] [IsNoetherianRing Λ] [IsAlgClosed k] in
-/-- The reductions of the integral exceptional adjoint: `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`. -/
-theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShriek {X Y : Scheme.{u}}
-    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
-    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
-    [HasCompactification aX] [HasCompactification aY]
-    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    (f : X ⟶ Y) (_hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
-    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
-    (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
-    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint)} (hc : Pretriangulated.IsHomotopyLimit c) :
-    ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
-        (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.obj
-          ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
-  let adj := Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])
-  have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.IsTriangulated :=
-    adj.isTriangulated_rightAdjoint
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint.Additive := adj.right_adjoint_additive
-  obtain ⟨e, -⟩ := (hL.1.map (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint).exists_iso hc
-  intro n
-  subst hI
-  obtain ⟨e'⟩ :=
-    nonempty_iso_map_reductionModIdeal (R(f)_![ModuleCat.{u + 1} Λ]).rightAdjoint hϖ n L
-  exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
 
 
 end Constructible

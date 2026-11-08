@@ -73,11 +73,6 @@ noncomputable def continuousMapRingObjMulLeft (t : T) :
           map_add' a b := congrArg ULift.up (mul_add _ a.down b.down) }
      naturality _ _ _ := rfl }⟩
 
-lemma continuousMapRingObjMulLeft_app_apply (t : T) (S : Profinite.{u}ᵒᵖ)
-    (a : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingObjMulLeft T t).hom.app S a = ULift.up (ContinuousMap.const _ t * a.down) :=
-  rfl
-
 lemma continuousMapRingObjMulLeft_one :
     continuousMapRingObjMulLeft.{u} T 1 = 𝟙 _ := by
   ext S a

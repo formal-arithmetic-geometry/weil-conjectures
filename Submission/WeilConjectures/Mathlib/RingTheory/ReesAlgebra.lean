@@ -92,12 +92,6 @@ lemma C_mem_extendedReesAlgebra (x : R) :
   rw [LaurentPolynomial.C_eq_algebraMap]
   exact Subalgebra.algebraMap_mem _ x
 
-@[simp]
-lemma coe_algebraMap_extendedReesAlgebra (x : R) :
-    ((algebraMap R I.extendedReesAlgebra x : I.extendedReesAlgebra) : R[T;T⁻¹]) =
-      LaurentPolynomial.C x :=
-  (LaurentPolynomial.C_eq_algebraMap x).symm
-
 lemma T_natCast_mem_extendedReesAlgebra (n : ℕ) :
     (T n : R[T;T⁻¹]) ∈ I.extendedReesAlgebra := by
   rw [show (n : ℤ) = n * 1 by simp, ← T_pow]
@@ -353,20 +347,6 @@ lemma extendedReesAlgebraMap_comp_toExtendedReesAlgebra {S : Type*} [CommRing S]
       LaurentPolynomial.mapRingHom_C])
   · simp
 
-/-- The square `R[t] ⟶ R[t, I t⁻¹] ⟶ R[t, t⁻¹]` exhibits `R[t, t⁻¹]` as the localization of the
-extended Rees algebra at `t`, base changed from `R[t] ⟶ R[t, t⁻¹]`. -/
-theorem isPushout_toExtendedReesAlgebra {R : Type u} [CommRing R] (I : Ideal R) :
-    CategoryTheory.IsPushout (CommRingCat.ofHom I.toExtendedReesAlgebra)
-      (CommRingCat.ofHom (algebraMap R[X] R[T;T⁻¹]))
-      (CommRingCat.ofHom (algebraMap I.extendedReesAlgebra R[T;T⁻¹]))
-      (CommRingCat.ofHom (RingHom.id R[T;T⁻¹])) := by
-  have : IsLocalization ((Submonoid.powers (X : R[X])).map I.toExtendedReesAlgebra)
-      R[T;T⁻¹] := by
-    rw [Submonoid.map_powers, toExtendedReesAlgebra_X]
-    infer_instance
-  exact CommRingCat.isPushout_of_isLocalization _ _
-    (by ext p : 2 <;> simp) (.powers X)
-
 end Polynomial
 
 section ToPolynomial
@@ -414,19 +394,6 @@ lemma toLaurent_extendedReesAlgebraToPolynomial (φ : R →+* S) (h : I ≤ Ring
   simp only [extendedReesAlgebraToPolynomial, RingHom.coe_comp, Function.comp_apply]
   exact congrArg Subtype.val ((RingEquiv.ofLeftInverse
     (f := toLaurent (R := S)) leftInverse_trunc_toLaurent).apply_symm_apply _)
-
-lemma extendedReesAlgebraToPolynomial_comp_toExtendedReesAlgebra (φ : R →+* S)
-    (h : I ≤ RingHom.ker φ) :
-    (I.extendedReesAlgebraToPolynomial φ h).comp I.toExtendedReesAlgebra =
-      Polynomial.mapRingHom φ := by
-  refine RingHom.ext fun p ↦ ?_
-  apply toLaurent_injective
-  simp only [RingHom.comp_apply, toLaurent_extendedReesAlgebraToPolynomial,
-    coe_toExtendedReesAlgebra, coe_mapRingHom]
-  induction p using Polynomial.induction_on' with
-  | add p q hp hq => simp only [map_add, Polynomial.map_add, hp, hq]
-  | monomial n a =>
-    simp [← C_mul_X_pow_eq_monomial]
 
 @[simp]
 lemma extendedReesAlgebraToPolynomial_T (φ : R →+* S) (h : I ≤ RingHom.ker φ) :

@@ -165,9 +165,6 @@ noncomputable def rightDerivedUpperShriek :
 scoped notation "R(" f ")^![" Λ "]" =>
   rightDerivedUpperShriek Λ f
 
-lemma rightDerivedUpperShriek_eq : R(f)^![Λ] =
-    Rf^!(HasCompactification.compactification f)[Λ] := rfl
-
 end Unbounded
 
 section Adjunction

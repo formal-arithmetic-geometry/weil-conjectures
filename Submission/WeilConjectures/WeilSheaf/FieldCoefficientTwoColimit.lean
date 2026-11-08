@@ -227,14 +227,6 @@ abbrev WeilComplexTwoColimit (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (FieldWeilComplex.stageSystem (l := l) k₀ X).PairCategory
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: `D^b_{c,W}(X, ℚ̄_ℓ)` is the filtered `2`-colimit of the
-`E`-stages: with the stage inclusions `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)`, it satisfies
-`CategoryTheory.CategoryCocone.IsFilteredTwoColimit` (every object and every morphism is defined
-at a finite stage, and equalities of morphisms hold at a finite stage). -/
-theorem WeilComplexTwoColimit.isFilteredTwoColimit :
-    (FieldWeilComplex.stageSystem (l := l) k₀ X).cocone.IsFilteredTwoColimit :=
-  StageSystem.cocone_isFilteredTwoColimit _
-
 variable [Fact (ringChar k₀ ≠ l)]
 
 /-- The functors `ℚ̄_ℓ ⊗_E -` to the `ℚ̄_ℓ`-stage are compatible with the associativity
@@ -264,12 +256,6 @@ noncomputable def WeilComplexTwoColimit.toWeilComplex :
   StageSystem.descFunctor (fun E ↦ FieldWeilComplex.toWeilComplex k₀ X E.1)
     (fun h ↦ (FieldWeilComplex.cocone k₀ X).iso h)
     (fun h h' K ↦ FieldWeilComplex.cocone_iso_coherence k₀ X h h' K)
-
-/-- The comparison functor restricts on the stage `E` to `ℚ̄_ℓ ⊗_E -`. -/
-noncomputable def WeilComplexTwoColimit.ιCompToWeilComplexIso (E : FiniteIntermediateField l) :
-    (FieldWeilComplex.stageSystem k₀ X).ι E ⋙ WeilComplexTwoColimit.toWeilComplex k₀ X ≅
-      FieldWeilComplex.toWeilComplex k₀ X E.1 :=
-  StageSystem.ιCompDescFunctorIso _ _ _ E
 
 end TwoColimit
 

@@ -175,14 +175,6 @@ lemma zsmul_id_comparisonUpperStarAb_obj_eq_zero
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- **The pro-étale `ℤ_ℓ,X`-module of an étale sheaf killed by `ℓⁿ`**: the abelian sheaf
-underlying `ν^* G`, with its `ℤ_ℓ,X`-module structure `ProEtale.padicIntModOfTorsion`. -/
-noncomputable def comparisonPadicIntMod (n : ℕ)
-    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hG : ((l ^ n : ℕ) : ℤ) • 𝟙 G = 0) :
-    Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntAbSheaf X l) :=
-  padicIntModOfTorsion X l n ((comparisonUpperStarAb Λ X).obj G)
-    (zsmul_id_comparisonUpperStarAb_obj_eq_zero hG)
-
 /-- **The pro-étale tower of `ℤ_ℓ,X`-modules of an étale tower** `(Gₙ)` of sheaves of
 `Λ`-modules with `ℓⁿ Gₙ = 0`: the tower `ν^* Gₙ`, with the `ℤ_ℓ,X`-module structures of
 `ProEtale.padicIntModOfTorsion`. -/
@@ -192,22 +184,6 @@ noncomputable def comparisonPadicIntModTower
     ℕᵒᵖ ⥤ Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntAbSheaf X l) :=
   padicIntModTowerOfTorsion X l (G ⋙ comparisonUpperStarAb Λ X)
     fun n ↦ zsmul_id_comparisonUpperStarAb_obj_eq_zero (hG n)
-
-/-- The underlying tower of abelian sheaves of `ProEtale.comparisonPadicIntModTower G hG` is
-`ν^* Gₙ`. -/
-lemma comparisonPadicIntModTower_comp_forget
-    (G : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hG : ∀ n : ℕ, ((l ^ n : ℕ) : ℤ) • 𝟙 (G.obj (op n)) = 0) :
-    comparisonPadicIntModTower X l G hG ⋙ Mod.forget _ = G ⋙ comparisonUpperStarAb Λ X :=
-  rfl
-
-omit [Fact l.Prime] in
-/-- The towers of an `ℓ`-adic tower structure are killed levelwise: `ℓⁿ Gₙ = 0`. -/
-lemma zsmul_id_eq_zero_of_adicTowerStructure
-    {G : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (A : AdicTowerStructure G l)
-    (n : ℕ) : ((l ^ n : ℕ) : ℤ) • 𝟙 (G.obj (op n)) = 0 := by
-  rw [natCast_zsmul]
-  exact A.pow_smul_id_eq_zero n
 
 /-- **Transitions which are cokernels of `ℓⁿ` are preserved**: if the transitions
 `Gₙ₊₁ ⟶ Gₙ` of the étale tower are cokernels of `ℓⁿ`, so are those of the pro-étale tower of
@@ -246,16 +222,6 @@ noncomputable def comparisonPadicIntModTowerMap
     exact ((comparisonUpperStarAb Λ X).map_comp _ _).symm.trans
       (((comparisonUpperStarAb Λ X).congr_map (φ.naturality f)).trans
         ((comparisonUpperStarAb Λ X).map_comp _ _)))
-
-variable {X l} in
-/-- The components of `ProEtale.comparisonPadicIntModTowerMap φ` are `ν^*` of those of `φ`. -/
-lemma comparisonPadicIntModTowerMap_app_hom
-    {G H : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    {hG : ∀ n : ℕ, ((l ^ n : ℕ) : ℤ) • 𝟙 (G.obj (op n)) = 0}
-    {hH : ∀ n : ℕ, ((l ^ n : ℕ) : ℤ) • 𝟙 (H.obj (op n)) = 0} (φ : G ⟶ H) (n : ℕᵒᵖ) :
-    ((comparisonPadicIntModTowerMap (hG := hG) (hH := hH) φ).app n).hom =
-      (comparisonUpperStarAb Λ X).map (φ.app n) :=
-  rfl
 
 variable {X l} in
 /-- **Kernels killed by `k` are preserved**: if the components of a morphism of étale towers

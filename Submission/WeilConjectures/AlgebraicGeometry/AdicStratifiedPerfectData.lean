@@ -29,7 +29,6 @@ public import Submission.WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 public import Submission.WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import Submission.WeilConjectures.ConstructibleSheaf.Defs
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients

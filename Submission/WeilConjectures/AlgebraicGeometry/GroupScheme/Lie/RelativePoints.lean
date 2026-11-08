@@ -52,24 +52,6 @@ open scoped MonObj
 
 namespace AlgebraicGeometry
 
-/-- Rescaling the infinitesimal commutes with the thickening of a morphism. -/
-@[reassoc]
-theorem Scheme.Hom.dualNumbers_comp_dualNumbersScale {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (c : Γ(Y, ⊤)) :
-    f.dualNumbers ≫ Y.dualNumbersScale c = X.dualNumbersScale (f.appTop c) ≫ f.dualNumbers := by
-  refine Scheme.Hom.ext rfl fun U ↦ ?_
-  ext a : 2
-  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
-  erw [eqToHom_refl, Category.comp_id]
-  change DualNumber.mapRingHom (f.app U).hom
-      (DualNumber.scale (Y.presheaf.map (homOfLE le_top : U ⟶ ⊤).op c) a) =
-    DualNumber.scale (X.presheaf.map (homOfLE le_top : f ⁻¹ᵁ U ⟶ ⊤).op (f.appTop c))
-      (DualNumber.mapRingHom (f.app U).hom a)
-  rw [← DualNumber.scale_mapRingHom]
-  congr 2
-  rw [Scheme.Hom.appTop, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, f.naturality]
-  rfl
-
 /-! ### The thickening of a scheme over a base -/
 
 section OverDualNumbers
@@ -140,30 +122,8 @@ theorem overDualNumbersι_comp_proj : overDualNumbersι X ≫ overDualNumbersPro
   simp
 
 @[reassoc (attr := simp)]
-theorem overDualNumbersMap_comp_proj {Y : Over S} (φ : X ⟶ Y) :
-    overDualNumbersMap φ ≫ overDualNumbersProj Y = overDualNumbersProj X ≫ φ := by
-  ext1
-  simp
-
-@[reassoc (attr := simp)]
 theorem overDualNumbersι_comp_map {Y : Over S} (φ : X ⟶ Y) :
     overDualNumbersι X ≫ overDualNumbersMap φ = φ ≫ overDualNumbersι Y := by
-  ext1
-  simp
-
-@[simp]
-theorem overDualNumbersMap_id : overDualNumbersMap (𝟙 X) = 𝟙 _ := by
-  ext1
-  simp [Scheme.Hom.dualNumbers_id]
-
-theorem overDualNumbersMap_comp {Y Z : Over S} (φ : X ⟶ Y) (ψ : Y ⟶ Z) :
-    overDualNumbersMap (φ ≫ ψ) = overDualNumbersMap φ ≫ overDualNumbersMap ψ := by
-  ext1
-  simp [Scheme.Hom.dualNumbers_comp]
-
-@[reassoc (attr := simp)]
-theorem overDualNumbersScale_comp_proj (c : Γ(X.left, ⊤)) :
-    overDualNumbersScale X c ≫ overDualNumbersProj X = overDualNumbersProj X := by
   ext1
   simp
 
@@ -172,57 +132,6 @@ theorem overDualNumbersι_comp_scale (c : Γ(X.left, ⊤)) :
     overDualNumbersι X ≫ overDualNumbersScale X c = overDualNumbersι X := by
   ext1
   simp
-
-@[simp]
-theorem overDualNumbersScale_one : overDualNumbersScale X 1 = 𝟙 _ := by
-  ext1
-  simp
-
-theorem overDualNumbersScale_mul (c d : Γ(X.left, ⊤)) :
-    overDualNumbersScale X (c * d) = overDualNumbersScale X c ≫ overDualNumbersScale X d := by
-  ext1
-  simp [Scheme.dualNumbersScale_mul]
-
-@[reassoc]
-theorem overDualNumbersMap_comp_scale {Y : Over S} (φ : X ⟶ Y) (c : Γ(Y.left, ⊤)) :
-    overDualNumbersMap φ ≫ overDualNumbersScale Y c =
-      overDualNumbersScale X (φ.left.appTop c) ≫ overDualNumbersMap φ := by
-  ext1
-  simp [Scheme.Hom.dualNumbers_comp_dualNumbersScale]
-
-@[reassoc (attr := simp)]
-theorem overDualNumbersFold_comp_proj :
-    overDualNumbersFold X ≫ overDualNumbersProj (overDualNumbers X) = 𝟙 _ := by
-  ext1
-  simp
-
-@[reassoc (attr := simp)]
-theorem overDualNumbersFold_comp_map_proj :
-    overDualNumbersFold X ≫ overDualNumbersMap (overDualNumbersProj X) = 𝟙 _ := by
-  ext1
-  simp
-
-/-- Setting `δ = 0` and then forgetting `ε`: `X[ε] ⟶ X[ε][δ] ⟶ X[δ]` factors through `X`. -/
-@[reassoc]
-theorem overDualNumbersι_comp_map_proj :
-    overDualNumbersι (overDualNumbers X) ≫ overDualNumbersMap (overDualNumbersProj X) =
-      overDualNumbersProj X ≫ overDualNumbersι X := by
-  ext1
-  simp
-
-/-- Setting `ε = 0` and then forgetting `δ`: `X[δ] ⟶ X[ε][δ] ⟶ X[ε]` factors through `X`. -/
-@[reassoc]
-theorem overDualNumbersMap_ι_comp_proj :
-    overDualNumbersMap (overDualNumbersι X) ≫ overDualNumbersProj (overDualNumbers X) =
-      overDualNumbersProj X ≫ overDualNumbersι X := by
-  ext1
-  simp
-
-@[reassoc (attr := simp)]
-theorem overDualNumbersMap_ι_comp_map_proj :
-    overDualNumbersMap (overDualNumbersι X) ≫ overDualNumbersMap (overDualNumbersProj X) =
-      𝟙 _ := by
-  rw [← overDualNumbersMap_comp, overDualNumbersι_comp_proj, overDualNumbersMap_id]
 
 end OverDualNumbers
 
@@ -262,13 +171,6 @@ theorem coe_infPointsAtMap {Y : Over S} (φ : Y ⟶ X) (v : infPointsAt G X) :
     (infPointsAtMap φ v : overDualNumbers Y ⟶ G) = overDualNumbersMap φ ≫ v.1 :=
   rfl
 
-theorem infPointsAtMap_id (v : infPointsAt G X) : infPointsAtMap (𝟙 X) v = v :=
-  Subtype.ext (by simp)
-
-theorem infPointsAtMap_comp {Y Z : Over S} (φ : Z ⟶ Y) (ψ : Y ⟶ X) (v : infPointsAt G X) :
-    infPointsAtMap (φ ≫ ψ) v = infPointsAtMap φ (infPointsAtMap ψ v) :=
-  Subtype.ext (by simp [overDualNumbersMap_comp])
-
 variable (X) in
 /-- The rescaling `v ↦ v(cε)` of infinitesimal points by a global function `c` of `X`. -/
 noncomputable def infPointsAtScale (c : Γ(X.left, ⊤)) : infPointsAt G X →* infPointsAt G X :=
@@ -281,19 +183,6 @@ noncomputable def infPointsAtScale (c : Γ(X.left, ⊤)) : infPointsAt G X →* 
 theorem coe_infPointsAtScale (c : Γ(X.left, ⊤)) (v : infPointsAt G X) :
     (infPointsAtScale X c v : overDualNumbers X ⟶ G) = overDualNumbersScale X c ≫ v.1 :=
   rfl
-
-theorem infPointsAtScale_one (v : infPointsAt G X) : infPointsAtScale X 1 v = v :=
-  Subtype.ext (by simp)
-
-theorem infPointsAtScale_mul (c d : Γ(X.left, ⊤)) (v : infPointsAt G X) :
-    infPointsAtScale X (c * d) v = infPointsAtScale X c (infPointsAtScale X d v) :=
-  Subtype.ext (by simp [overDualNumbersScale_mul])
-
-theorem infPointsAtMap_infPointsAtScale {Y : Over S} (φ : Y ⟶ X) (c : Γ(X.left, ⊤))
-    (v : infPointsAt G X) :
-    infPointsAtMap φ (infPointsAtScale X c v) =
-      infPointsAtScale Y (φ.left.appTop c) (infPointsAtMap φ v) :=
-  Subtype.ext (by simp [overDualNumbersMap_comp_scale_assoc])
 
 /-- The conjugation `v ↦ x v x⁻¹` of infinitesimal points with values in `X` by an `X`-point `x`
 of `G`, pulled back to `X[ε]`. This is the adjoint action of `x` on `Lie(G) ⊗ Γ(X, 𝒪_X)`.
@@ -311,26 +200,6 @@ theorem coe_infPointsAtConj (x : X ⟶ G) (v : infPointsAt G X) :
       (overDualNumbersProj X ≫ x) * v.1 * (overDualNumbersProj X ≫ x)⁻¹ :=
   rfl
 
-theorem infPointsAtConj_one (v : infPointsAt G X) : infPointsAtConj (1 : X ⟶ G) v = v :=
-  Subtype.ext (by simp)
-
-theorem infPointsAtConj_mul (x y : X ⟶ G) (v : infPointsAt G X) :
-    infPointsAtConj (x * y) v = infPointsAtConj x (infPointsAtConj y v) :=
-  Subtype.ext (by simp only [coe_infPointsAtConj, MonObj.comp_mul]; group)
-
-theorem infPointsAtConj_infPointsAtScale (x : X ⟶ G) (c : Γ(X.left, ⊤)) (v : infPointsAt G X) :
-    infPointsAtConj x (infPointsAtScale X c v) = infPointsAtScale X c (infPointsAtConj x v) :=
-  Subtype.ext (by
-    simp only [coe_infPointsAtConj, coe_infPointsAtScale, MonObj.comp_mul, GrpObj.comp_inv,
-      overDualNumbersScale_comp_proj_assoc])
-
-theorem infPointsAtMap_infPointsAtConj {Y : Over S} (φ : Y ⟶ X) (x : X ⟶ G)
-    (v : infPointsAt G X) :
-    infPointsAtMap φ (infPointsAtConj x v) = infPointsAtConj (φ ≫ x) (infPointsAtMap φ v) :=
-  Subtype.ext (by
-    simp only [coe_infPointsAtConj, coe_infPointsAtMap, MonObj.comp_mul, GrpObj.comp_inv,
-      overDualNumbersMap_comp_proj_assoc])
-
 end InfPointsAt
 
 /-! ### Tangent vectors as infinitesimal points with values in a scheme -/
@@ -338,15 +207,6 @@ end InfPointsAt
 section LieAt
 
 variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
-
-/-- The `k`-algebra structure `k → Γ(X, 𝒪_X)` of a scheme `X` over `k`. -/
-noncomputable def overΓAlgebraMap (X : Over (Spec (.of k))) : k →+* Γ(X.left, ⊤) :=
-  ((Scheme.ΓSpecIso (.of k)).inv ≫ X.hom.appTop).hom
-
-theorem appTop_overΓAlgebraMap {X Y : Over (Spec (.of k))} (φ : Y ⟶ X) (c : k) :
-    φ.left.appTop (overΓAlgebraMap X c) = overΓAlgebraMap Y c := by
-  simp only [overΓAlgebraMap, ← Over.w φ, Scheme.Hom.comp_appTop, CommRingCat.hom_comp,
-    RingHom.comp_apply]
 
 /-- The map `X[ε] ⟶ (Spec k)[ε] ≅ Spec k[ε]` over `k` of a scheme `X` over `k`. -/
 noncomputable def overDualNumbersToSpec (X : Over (Spec (.of k))) :
@@ -356,30 +216,12 @@ noncomputable def overDualNumbersToSpec (X : Over (Spec (.of k))) :
       (Scheme.dualNumbersToSpec_comp_specMap (.of k))).trans
         (Scheme.Hom.dualNumbers_comp_proj X.hom)))
 
-@[reassoc]
-theorem overDualNumbersMap_comp_toSpec {X Y : Over (Spec (.of k))} (φ : Y ⟶ X) :
-    overDualNumbersMap φ ≫ overDualNumbersToSpec X = overDualNumbersToSpec Y := by
-  ext1
-  simp only [overDualNumbersToSpec, Over.comp_left, overDualNumbersMap_left, Over.homMk_left]
-  rw [← Category.assoc, ← Scheme.Hom.dualNumbers_comp, Over.w φ]
-
 theorem overDualNumbersι_comp_toSpec (X : Over (Spec (.of k))) :
     overDualNumbersι X ≫ overDualNumbersToSpec X =
       CartesianMonoidalCategory.toUnit X ≫ Scheme.dualNumbersιOver (Spec (.of k)) ≫
         dualNumbersToSpecOver := by
   ext1
   simp [overDualNumbersToSpec, dualNumbersToSpecOver, Over.toUnit_left]
-
-@[reassoc]
-theorem overDualNumbersScale_comp_toSpec (X : Over (Spec (.of k))) (c : k) :
-    overDualNumbersScale X (overΓAlgebraMap X c) ≫ overDualNumbersToSpec X =
-      overDualNumbersToSpec X ≫
-        (Spec.map (CommRingCat.ofHom (DualNumber.scale c).toRingHom)).asOver (Spec (.of k)) := by
-  ext1
-  have h := Scheme.Hom.dualNumbers_comp_dualNumbersScale_assoc X.hom
-    ((Scheme.ΓSpecIso (.of k)).inv c) (Scheme.dualNumbersToSpec (.of k))
-  rw [Scheme.dualNumbersScale_comp_dualNumbersToSpec] at h
-  exact h.symm
 
 variable (X : Over (Spec (.of k)))
 
@@ -399,40 +241,6 @@ noncomputable def lieAt (y : Lie G) : infPointsAt G X :=
 theorem coe_lieAt (y : Lie G) :
     (lieAt X y : overDualNumbers X ⟶ G) = overDualNumbersToSpec X ≫ tangentPoint y :=
   rfl
-
-theorem tangentPoint_add (y z : Lie G) : tangentPoint (y + z) = tangentPoint y * tangentPoint z :=
-  congrArg Subtype.val (lieEquivTangent_add y z)
-
-theorem tangentPoint_smul (c : k) (y : Lie G) :
-    tangentPoint (c • y) =
-      (Spec.map (CommRingCat.ofHom (DualNumber.scale c).toRingHom)).asOver (Spec (.of k)) ≫
-        tangentPoint y := by
-  have e : DualNumber.liftElem (R := k) (inr c) (inr_mul_self c) = DualNumber.scale c := by
-    ext <;> simp [DualNumber.liftElem_apply, algebraMap_eq_inl]
-  have h := congrArg Subtype.val (lieEquivTangent_smul c y)
-  change tangentPoint (c • y) = points.map G (DualNumber.liftElem (R := k) (inr c)
-    (inr_mul_self c)) (tangentPoint y) at h
-  rw [h, e]
-  rfl
-
-theorem lieAt_add (y z : Lie G) : lieAt X (y + z) = lieAt X y * lieAt X z :=
-  Subtype.ext (by rw [coe_lieAt, tangentPoint_add, MonObj.comp_mul]; rfl)
-
-theorem lieAt_smul (c : k) (y : Lie G) :
-    lieAt X (c • y) = infPointsAtScale X (overΓAlgebraMap X c) (lieAt X y) :=
-  Subtype.ext (by
-    rw [coe_lieAt, tangentPoint_smul, coe_infPointsAtScale, coe_lieAt,
-      overDualNumbersScale_comp_toSpec_assoc])
-
-theorem lieAt_zero : lieAt X (0 : Lie G) = 1 := by
-  have h := lieAt_add X (0 : Lie G) 0
-  rw [add_zero] at h
-  exact left_eq_mul.mp h
-
-theorem infPointsAtMap_lieAt {Y : Over (Spec (.of k))} (φ : Y ⟶ X) (y : Lie G) :
-    infPointsAtMap φ (lieAt X y) = lieAt Y y :=
-  Subtype.ext (by
-    rw [coe_infPointsAtMap, coe_lieAt, coe_lieAt, overDualNumbersMap_comp_toSpec_assoc])
 
 end LieAt
 

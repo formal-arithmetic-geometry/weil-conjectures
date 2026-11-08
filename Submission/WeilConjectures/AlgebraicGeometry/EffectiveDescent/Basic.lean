@@ -114,8 +114,4 @@ namespace CategoryTheory.Over
 
 variable {C : Type u} [Category.{v} C] {X : C}
 
-/-- The morphism `g : (S, g ≫ f) ⟶ (T, f)` of objects over `X`. -/
-abbrev homMkComp {S T : C} {f : T ⟶ X} (g : S ⟶ T) : Over.mk (g ≫ f) ⟶ Over.mk f :=
-  Over.homMk g
-
 end CategoryTheory.Over

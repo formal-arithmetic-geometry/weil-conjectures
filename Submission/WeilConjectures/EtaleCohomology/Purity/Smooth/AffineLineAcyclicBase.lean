@@ -150,31 +150,6 @@ theorem isIso_unit_app_singleFunctor_iff {X S : Scheme.{u}} (π : X ⟶ S)
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F) 0 q hq).isoZero
         ((hT q).2 (h q hq)).isoZero
 
-/-- The degree-`0` higher direct image `R⁰π_* G` is the direct image `π_* G`. -/
-noncomputable def higherDirectImageZeroIso {X S : Scheme.{u}} (π : X ⟶ S)
-    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    higherDirectImage Λ π 0 G ≅ (π)_*[ModuleCat.{u + 1} Λ].obj G :=
-  (DerivedCategory.homologyFunctor _ 0).mapIso
-      (((π)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj G)) ≪≫
-    ((π)_*[ModuleCat.{u + 1} Λ]).singleFunctorCompRightDerivedFunctorCompHomologyFunctorZeroIso.app
-      G
-
-/-- If the unit `F ⟶ Rπ_* π^* F` is an isomorphism at a sheaf `F` placed in degree `0`, then
-`F ≅ π_* π^* F`. -/
-theorem nonempty_iso_lowerStar_upperStar_of_isIso_unit_app {X S : Scheme.{u}} (π : X ⟶ S)
-    (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (h : IsIso ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) π).unit.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) :
-    Nonempty (F ≅ (π)_*[ModuleCat.{u + 1} Λ].obj ((π)^*[ModuleCat.{u + 1} Λ].obj F)) :=
-  ⟨((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).app F).symm ≪≫
-    (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
-      (asIso ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) π).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ≪≫
-    (DerivedCategory.Plus.homologyFunctor _ 0).mapIso (R+((π)_*[ModuleCat.{u + 1} Λ]).mapIso
-      ((((π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F)) ≪≫
-    higherDirectImageZeroIso Λ π _⟩
-
 /-- **The unit form of the derived base change map.** For a commutative square
 `g' ≫ f = f' ≫ g`, the pullback along `g` of the unit `K ⟶ Rf_* f^* K` followed by the base
 change map at `f^* K` is the unit `g^* K ⟶ Rf'_* f'^* g^* K` followed by the pullback

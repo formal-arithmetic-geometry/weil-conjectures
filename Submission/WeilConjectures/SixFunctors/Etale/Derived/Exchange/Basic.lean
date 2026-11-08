@@ -137,14 +137,6 @@ noncomputable def baseChangeArrowIsoUnboundedExchange (sq : CommSq g' f' f g)
       rw [ι_map_baseChange_app]
       simp [← Functor.map_comp])
 
-/-- The unbounded exchange morphism is an isomorphism at a bounded below object `K` if and only
-if the bounded below exchange morphism `AlgebraicGeometry.Etale.baseChange` is one at `K`. -/
-lemma isIso_unboundedExchange_ι_obj_iff (sq : CommSq g' f' f g)
-    (K : Plus (Sheaf X.smallEtaleTopology A)) :
-    IsIso (unboundedExchange A sq (Plus.ι.obj K)) ↔ IsIso ((Etale.baseChange A sq).app K) := by
-  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
-  exact isIso_derivedBaseChangeMap_app_ι_obj_iff A sq K
-
 end Etale
 
 section Cohomology
@@ -177,16 +169,6 @@ noncomputable def Etale.homologyArrowIsoBaseChangeHomologyMap (sq : IsPullback e
   ((homologyFunctor _ q).mapArrow.mapIso
     (Etale.baseChangeArrowIsoUnboundedExchange _ sq.toCommSq
       ((Plus.singleFunctor _ 0).obj F))).symm
-
-/-- The degree-`q` base change map at `F` is an isomorphism if and only if the exchange morphism
-of `AlgebraicGeometry.Etale.unboundedExchange` at `F` is an isomorphism on `q`-th cohomology
-sheaves. -/
-lemma Etale.isIso_baseChangeHomologyMap_iff_isIso_homology_unboundedExchange
-    (sq : IsPullback e h g p) (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) ↔
-      IsIso ((homologyFunctor _ q).map (Etale.unboundedExchange _ sq.toCommSq
-        (Plus.ι.obj ((Plus.singleFunctor _ 0).obj F)))) :=
-  (Arrow.isIso_iff_isIso_of_isIso (Etale.homologyArrowIsoBaseChangeHomologyMap Λ sq q F).hom).symm
 
 /-- Blueprint `lem-kun-unbounded-exchange-agrees`, for sheaves: in degree `0` the exchange
 morphism of `AlgebraicGeometry.Etale.unboundedExchange` at a sheaf `F` placed in degree `0` is,

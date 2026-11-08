@@ -127,15 +127,6 @@ theorem of_isPullback (hj : HasDivisorComplementDirectImages ℓ j i) [IsClosedI
     obtain ⟨e'⟩ := nonempty_iso_upperStar_lowerStar_constantZModModule i p ℓ
     exact ⟨e.symm ≪≫ (p)^*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].mapIso e₁ ≪≫ e'⟩
 
-/-- The higher direct images of the complement of a divisor only depend on the pushforward of
-`ℤ/ℓ` along the divisor. -/
-theorem of_iso_lowerStar (hj : HasDivisorComplementDirectImages ℓ j i) {D' : Scheme.{u}}
-    {i' : D' ⟶ X}
-    (e : (i)_*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].obj (constantZModModule D ℓ) ≅
-      (i')_*[ModuleCat.{u + 1} (ZModCoeff.{u} ℓ)].obj (constantZModModule D' ℓ)) :
-    HasDivisorComplementDirectImages ℓ j i' :=
-  ⟨hj.1, hj.2.1, hj.2.2.map (· ≪≫ e)⟩
-
 end HasDivisorComplementDirectImages
 
 end AlgebraicGeometry.Etale

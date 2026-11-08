@@ -119,11 +119,4 @@ lemma isIso_ofSections_of_injective (hinj : ∀ U, Function.Injective (sectionsL
     isIso_of_mono_of_epi (ofSections F s).hom
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
-/-- The maps `(aᵢ) ↦ ∑ aᵢ • sᵢ|_U` are compatible with restriction. -/
-lemma map_sectionsLinearMap {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
-    (a : Fin r → (adicConstantSheaf l X).obj.obj U) :
-    F.X.obj.map f (sectionsLinearMap F s U a) =
-      sectionsLinearMap F s V (fun i ↦ (adicConstantSheaf l X).obj.map f (a i)) := by
-  simp only [sectionsLinearMap_apply, map_sum, map_sectionAct, map_restrictTop]
-
 end AlgebraicGeometry.ProEtale.AdicSheaf

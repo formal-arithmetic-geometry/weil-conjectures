@@ -167,17 +167,6 @@ noncomputable def quotSpanSingletonResolutionComplex : ChainComplex (ModuleCat.{
   ChainComplex.of _ (quotSpanSingletonResolutionD x) fun n ↦ by
     simp [quotSpanSingletonResolutionD]
 
-lemma quotSpanSingletonResolutionComplex_d_one_zero :
-    (quotSpanSingletonResolutionComplex x).d 1 0 =
-      ofHom (x • LinearMap.id : R →ₗ[R] R) :=
-  (ChainComplex.of_d (quotSpanSingletonResolutionX (R := R)) (quotSpanSingletonResolutionD x)
-    0).trans rfl
-
-lemma quotSpanSingletonResolutionComplex_d_succ_succ (n : ℕ) :
-    (quotSpanSingletonResolutionComplex x).d (n + 2) (n + 1) = 0 :=
-  (ChainComplex.of_d (quotSpanSingletonResolutionX (R := R)) (quotSpanSingletonResolutionD x)
-    (n + 1)).trans rfl
-
 lemma isZero_quotSpanSingletonResolutionComplex_X (n : ℕ) :
     IsZero ((quotSpanSingletonResolutionComplex x).X (n + 2)) :=
   isZero_zero (ModuleCat.{u} R)
@@ -188,119 +177,9 @@ instance (n : ℕ) : Projective ((quotSpanSingletonResolutionComplex x).X n) := 
   | 1 => exact inferInstanceAs (Projective (ModuleCat.of R R))
   | n + 2 => exact (isZero_quotSpanSingletonResolutionComplex_X x n).projective
 
-/-- The augmentation `R ⟶ R/(x)` of the resolution `0 ⟶ R ⟶[x] R`. -/
-noncomputable def quotSpanSingletonResolutionπ :
-    quotSpanSingletonResolutionComplex x ⟶
-      (ChainComplex.single₀ (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ Ideal.span {x})) :=
-  ((quotSpanSingletonResolutionComplex x).toSingle₀Equiv _).symm
-    ⟨ofHom (Ideal.span {x}).mkQ, by
-      rw [quotSpanSingletonResolutionComplex_d_one_zero]
-      refine hom_ext (LinearMap.ext fun (r : R) ↦ ?_)
-      change Submodule.Quotient.mk (x • r) = (0 : R ⧸ Ideal.span {x})
-      rw [Submodule.Quotient.mk_eq_zero, smul_eq_mul]
-      exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self x)⟩
-
-lemma quotSpanSingletonResolutionπ_f_zero :
-    (quotSpanSingletonResolutionπ x).f 0 = ofHom (Ideal.span {x}).mkQ :=
-  rfl
-
 variable {x}
 
-lemma quasiIso_quotSpanSingletonResolutionπ (hx : x ∈ nonZeroDivisors R) :
-    QuasiIso (quotSpanSingletonResolutionπ x) where
-  quasiIsoAt m := by
-    match m with
-    | 0 =>
-      rw [ChainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros' _ rfl rfl rfl]
-      refine ⟨?_, ?_⟩
-      · rw [ShortComplex.moduleCat_exact_iff_range_eq_ker]
-        change LinearMap.range ((quotSpanSingletonResolutionComplex x).d 1 0).hom =
-          LinearMap.ker ((quotSpanSingletonResolutionπ x).f 0).hom
-        rw [quotSpanSingletonResolutionComplex_d_one_zero, quotSpanSingletonResolutionπ_f_zero,
-          hom_ofHom, hom_ofHom, Submodule.ker_mkQ]
-        ext (r : R)
-        change (∃ y : R, x • y = r) ↔ r ∈ Ideal.span {x}
-        rw [Ideal.mem_span_singleton']
-        simp only [smul_eq_mul, mul_comm]
-      · rw [ModuleCat.epi_iff_surjective]
-        exact Submodule.mkQ_surjective _
-    | m + 1 =>
-      rw [quasiIsoAt_iff_exactAt' (hL := ChainComplex.exactAt_succ_single_obj ..),
-        HomologicalComplex.exactAt_iff' _ (m + 2) (m + 1) m (by simp) (by simp)]
-      match m with
-      | 0 =>
-        rw [ShortComplex.moduleCat_exact_iff_range_eq_ker]
-        change LinearMap.range ((quotSpanSingletonResolutionComplex x).d 2 1).hom =
-          LinearMap.ker ((quotSpanSingletonResolutionComplex x).d 1 0).hom
-        rw [quotSpanSingletonResolutionComplex_d_succ_succ,
-          quotSpanSingletonResolutionComplex_d_one_zero, hom_ofHom, hom_zero]
-        refine (LinearMap.ker_eq_bot.2 fun (r : R) (s : R) h ↦ ?_).trans
-          LinearMap.range_zero.symm |>.symm
-        change x * r = x * s at h
-        rw [← sub_eq_zero, ← mul_sub] at h
-        exact sub_eq_zero.1 ((mem_nonZeroDivisors_iff.1 hx).1 _ h)
-      | m + 1 =>
-        exact ShortComplex.exact_of_isZero_X₂ _
-          (isZero_quotSpanSingletonResolutionComplex_X x m)
-
-/-- The projective resolution `0 ⟶ R ⟶[x] R ⟶ R/(x)` of `R/(x)`, for a nonzerodivisor `x`. -/
-noncomputable def quotSpanSingletonProjectiveResolution (hx : x ∈ nonZeroDivisors R) :
-    ProjectiveResolution (ModuleCat.of R (R ⧸ Ideal.span {x})) where
-  complex := quotSpanSingletonResolutionComplex x
-  π := quotSpanSingletonResolutionπ x
-  quasiIso := quasiIso_quotSpanSingletonResolutionπ hx
-
-/-- The kernel of `M ⊗ (x : R ⟶ R)` is the `x`-torsion of `M`. -/
-noncomputable def kerLTensorSmulEquiv (M : Type u) [AddCommGroup M] [Module R M] (x : R) :
-    LinearMap.ker ((x • LinearMap.id : R →ₗ[R] R).lTensor M) ≃ₗ[R]
-      Submodule.torsionBy R M x :=
-  LinearEquiv.ofSubmodules (TensorProduct.rid R M) _ _ (by
-    ext m
-    rw [Submodule.map_equiv_eq_comap_symm, Submodule.mem_comap, LinearMap.mem_ker,
-      Submodule.mem_torsionBy_iff]
-    have h : ∀ t : M ⊗[R] R, (x • LinearMap.id : R →ₗ[R] R).lTensor M t = x • t := by
-      intro t
-      rw [LinearMap.lTensor_smul, LinearMap.lTensor_id]
-      rfl
-    rw [LinearEquiv.coe_coe, h, ← map_smul, LinearEquiv.map_eq_zero_iff])
-
 variable [Small.{u} R]
-
-/-- `Tor₁^R(M, R/(x))` is the `x`-torsion `M[x]` of `M`, for a nonzerodivisor `x`: it is the
-first homology of `M ⊗ (0 ⟶ R ⟶[x] R)`. -/
-noncomputable def torOneQuotSpanSingletonIso (hx : x ∈ nonZeroDivisors R) (M : ModuleCat.{u} R) :
-    ((Tor (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ Ideal.span {x})) ≅
-      ModuleCat.of R (Submodule.torsionBy R M x) :=
-  let K := (((tensoringLeft (ModuleCat.{u} R)).obj M).mapHomologicalComplex _).obj
-    (quotSpanSingletonResolutionComplex x)
-  have hK : K.d 2 1 = 0 := by
-    change M ◁ (quotSpanSingletonResolutionComplex x).d 2 1 = 0
-    rw [quotSpanSingletonResolutionComplex_d_succ_succ, MonoidalPreadditive.whiskerLeft_zero]
-  (quotSpanSingletonProjectiveResolution hx).isoLeftDerivedObj _ 1 ≪≫
-    (K.isoHomologyπ 2 1 (by simp) hK).symm ≪≫ K.cyclesIsoSc' 2 1 0 (by simp) (by simp) ≪≫
-    (K.sc' 2 1 0).moduleCatCyclesIso ≪≫
-    (LinearEquiv.toModuleIso (LinearEquiv.ofEq _ _ (by
-      change LinearMap.ker (M ◁ (quotSpanSingletonResolutionComplex x).d 1 0).hom = _
-      rw [quotSpanSingletonResolutionComplex_d_one_zero, hom_whiskerLeft, hom_ofHom]) ≪≫ₗ
-      kerLTensorSmulEquiv M x))
-
-omit [Small.{u} R] in
-/-- The `x`-torsion of a flat module vanishes, for a nonzerodivisor `x`. -/
-lemma isZero_torsionBy_of_flat (hx : x ∈ nonZeroDivisors R) (M : ModuleCat.{u} R)
-    (hM : Module.Flat R M) : IsZero (ModuleCat.of R (Submodule.torsionBy R M x)) := by
-  have := hM
-  have h := (isSMulRegular_iff_torsionBy_eq_bot M x).1
-    (Module.Flat.isSMulRegular_of_nonZeroDivisors hx)
-  have : Subsingleton (Submodule.torsionBy R M x) := by
-    rw [h]
-    infer_instance
-  exact ModuleCat.isZero_of_subsingleton _
-
-/-- `Tor₁^R(M, R/(x))` vanishes for a flat module `M` and a nonzerodivisor `x`. -/
-lemma isZero_torOneQuotSpanSingleton_of_flat (hx : x ∈ nonZeroDivisors R) (M : ModuleCat.{u} R)
-    (hM : Module.Flat R M) :
-    IsZero (((Tor (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ Ideal.span {x}))) :=
-  (isZero_torsionBy_of_flat hx M hM).of_iso (torOneQuotSpanSingletonIso hx M)
 
 end Tor
 

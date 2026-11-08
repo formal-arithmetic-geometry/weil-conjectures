@@ -97,48 +97,10 @@ lemma ProEtaleWeilSheaf.smulEnd_hom_f (b : PadicAlgCl l) (A : ProEtaleWeilSheaf 
     (ProEtaleWeilSheaf.smulEnd b A).hom.f = ProEtale.AdicSheaf.smul (ULift.up b) A.carrier :=
   rfl
 
-/-- Scalar multiplication commutes with morphisms (blueprint `lem-fd-as-characters`). -/
-lemma ProEtaleWeilSheaf.smulEnd_comp (b : PadicAlgCl l) {A B : ProEtaleWeilSheaf k₀ l X}
-    (f : A ⟶ B) : ProEtaleWeilSheaf.smulEnd b A ≫ f = f ≫ ProEtaleWeilSheaf.smulEnd b B :=
-  ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_comp _ _))
-
-/-- Scalar multiplication is multiplicative in the scalar
-(blueprint `lem-fd-as-characters`). -/
-lemma ProEtaleWeilSheaf.smulEnd_smulEnd (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
-    ProEtaleWeilSheaf.smulEnd b A ≫ ProEtaleWeilSheaf.smulEnd c A =
-      ProEtaleWeilSheaf.smulEnd (c * b) A :=
-  ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_smul _ _ _))
-
 /-- Scalar multiplication by `1` is the identity (blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.smulEnd_one (A : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf.smulEnd 1 A = 𝟙 A :=
   ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (ProEtale.AdicSheaf.smul_one _))
-
-/-- Scalar multiplication is additive in the scalar (blueprint `lem-fd-as-characters`). -/
-lemma ProEtaleWeilSheaf.smulEnd_add (b c : PadicAlgCl l) (A : ProEtaleWeilSheaf k₀ l X) :
-    ProEtaleWeilSheaf.smulEnd (b + c) A =
-      ProEtaleWeilSheaf.smulEnd b A + ProEtaleWeilSheaf.smulEnd c A :=
-  ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (Mod.hom_ext _ _ (by
-    change (ULift.up (b + c) : ULift.{u + 1} (PadicAlgCl l)) • 𝟙 _ =
-      (ULift.up b : ULift.{u + 1} (PadicAlgCl l)) • 𝟙 _ +
-        (ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • 𝟙 _
-    rw [← add_smul]
-    rfl)))
-
-/-- A sum of scalar multiplications is the scalar multiplication by the sum
-(blueprint `lem-fd-as-characters`). -/
-lemma ProEtaleWeilSheaf.sum_smulEnd {ι : Type*} (s : Finset ι) (b : ι → PadicAlgCl l)
-    (A : ProEtaleWeilSheaf k₀ l X) :
-    ∑ i ∈ s, ProEtaleWeilSheaf.smulEnd (b i) A = ProEtaleWeilSheaf.smulEnd (∑ i ∈ s, b i) A := by
-  classical
-  induction s using Finset.induction_on with
-  | empty =>
-    rw [Finset.sum_empty, Finset.sum_empty]
-    exact ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext (Mod.hom_ext _ _ (by
-      change 0 = (ULift.up 0 : ULift.{u + 1} (PadicAlgCl l)) • 𝟙 _
-      rw [show (ULift.up 0 : ULift.{u + 1} (PadicAlgCl l)) = 0 from rfl, zero_smul])))
-  | insert a s ha ih =>
-    rw [Finset.sum_insert ha, Finset.sum_insert ha, ih, ProEtaleWeilSheaf.smulEnd_add]
 
 end Scalar
 
@@ -270,26 +232,6 @@ noncomputable def ProEtaleWeilSheaf.torsorIdempotent (χ : AddChar G (PadicAlgCl
   letI := Fintype.ofFinite G
   ∑ g : G, ProEtaleWeilSheaf.smulEnd ((Nat.card G : PadicAlgCl l)⁻¹ * χ (-g)) _ ≫
     ProEtaleWeilSheaf.torsorTranslation π τ hτ g
-
-/-- A morphism on which `G` acts through `χ` is fixed by the projector `e_χ`. -/
-lemma ProEtaleWeilSheaf.comp_torsorIdempotent (χ : AddChar G (PadicAlgCl l))
-    (hG : (Nat.card G : PadicAlgCl l) ≠ 0) {M : ProEtaleWeilSheaf k₀ l Z}
-    (φ : M ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
-    (hφ : ∀ g, φ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =
-      ProEtaleWeilSheaf.smulEnd (χ g) M ≫ φ) :
-    φ ≫ ProEtaleWeilSheaf.torsorIdempotent π τ hτ χ = φ := by
-  let := Fintype.ofFinite G
-  rw [ProEtaleWeilSheaf.torsorIdempotent, Preadditive.comp_sum]
-  have (g : G) : φ ≫ ProEtaleWeilSheaf.smulEnd ((Nat.card G : PadicAlgCl l)⁻¹ * χ (-g)) _ ≫
-      ProEtaleWeilSheaf.torsorTranslation π τ hτ g =
-      ProEtaleWeilSheaf.smulEnd ((Nat.card G : PadicAlgCl l)⁻¹) M ≫ φ := by
-    rw [← Category.assoc, ← ProEtaleWeilSheaf.smulEnd_comp, Category.assoc, hφ,
-      ← Category.assoc, ProEtaleWeilSheaf.smulEnd_smulEnd, mul_left_comm,
-      ← AddChar.map_add_eq_mul, add_neg_cancel, AddChar.map_zero_eq_one, mul_one]
-  simp_rw [this]
-  rw [← Preadditive.sum_comp, ProEtaleWeilSheaf.sum_smulEnd, Finset.sum_const, Finset.card_univ,
-    ← Nat.card_eq_fintype_card, nsmul_eq_mul, mul_inv_cancel₀ hG,
-    ProEtaleWeilSheaf.smulEnd_one, Category.id_comp]
 
 /-- The Weil structure of `π_* ℚ̄_ℓ` is compatible with the product of functions. -/
 @[reassoc]

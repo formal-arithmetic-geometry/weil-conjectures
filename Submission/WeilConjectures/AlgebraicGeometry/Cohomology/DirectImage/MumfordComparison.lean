@@ -186,10 +186,6 @@ noncomputable def mumfordSectionsHom :
     cechSectionsBaseChange H ℱ U W hg ≫
       (sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ) (f' ⁻¹ᵁ W)).inv
 
-lemma mumfordSectionsHom_f_apply (k : ℕ) (x) :
-    (mumfordSectionsHom (R := R) H ℱ U W hg).f k x = mumfordSectionsMap H ℱ U W hg k x :=
-  rfl
-
 /-- `mumfordSectionsMap` commutes with the differentials. -/
 lemma mumfordSectionsMap_d (k : ℕ)
     (x : Γ(T, W) ⊗[R] (R ⊗[Γ(S, ⊤)] (∀ y : Fin (k + 1) → ι, sectionsModule f ℱ (⨅ l, U (y l))))) :
@@ -310,11 +306,6 @@ noncomputable def freeSectionsTensorHom (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) 
     ext x
     exact (freeSectionsTensorEquiv_d P b τ W hτ (i := k) (j := ((k + 1 : ℕ) : ℤ))
       (by push_cast; rfl) x).symm
-
-lemma freeSectionsTensorHom_f_apply (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) [Algebra R Γ(Z, W)]
-    (hτ : algebraMap R Γ(Z, W) = (Z.presheaf.map (homOfLE le_top).op).hom.comp τ) (k : ℕ) (x) :
-    (freeSectionsTensorHom P b τ W hτ).f k x = freeSectionsTensorEquiv P b W k x :=
-  rfl
 
 instance (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) [Algebra R Γ(Z, W)]
     (hτ : algebraMap R Γ(Z, W) = (Z.presheaf.map (homOfLE le_top).op).hom.comp τ) :

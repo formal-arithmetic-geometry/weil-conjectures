@@ -67,13 +67,6 @@ def frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l Y) : (m : ℕ) →
       (adicLowerStarComp l _ _).symm.app _ ≪≫
       (WeilSheaf.frobeniusPullback k₀ l Y).mapIso (K.frobeniusPowIso m) ≪≫ K.str
 
-lemma _root_.AlgebraicGeometry.WeilSheaf.frobeniusPowIso_eq [Fact (ringChar k₀ ≠ l)]
-    (F : WeilSheaf k₀ l Y) (m : ℕ) : F.frobeniusPowIso m = F.obj.frobeniusPowIso m := by
-  induction m with
-  | zero => rfl
-  | succ m ih =>
-    rw [WeilSheaf.frobeniusPowIso, frobeniusPowIso, ih]
-
 /-- The iterated Weil structures are natural. -/
 @[reassoc]
 lemma frobeniusPowIso_hom_naturality {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') (m : ℕ) :
@@ -109,21 +102,6 @@ def powFunctor (r : ℕ) :
     ProEtaleWeilSheaf k₀ l Y ⥤ IsoAlgebra (frobeniusPowPullback k₀ l Y r) :=
   IsoAlgebra.liftOfStr _ (fun K : ProEtaleWeilSheaf k₀ l Y ↦ K.frobeniusPowIso r) fun φ ↦
     frobeniusPowIso_hom_naturality φ r
-
-@[simp]
-lemma powFunctor_obj_carrier (r : ℕ) (K : ProEtaleWeilSheaf k₀ l Y) :
-    ((powFunctor k₀ l Y r).obj K).carrier = K.carrier :=
-  IsoAlgebra.liftOfStr_obj_carrier _ _ _ K
-
-@[simp]
-lemma powFunctor_obj_str (r : ℕ) (K : ProEtaleWeilSheaf k₀ l Y) :
-    ((powFunctor k₀ l Y r).obj K).str = K.frobeniusPowIso r :=
-  IsoAlgebra.liftOfStr_obj_str _ _ _ K
-
-@[simp]
-lemma powFunctor_map_hom_f (r : ℕ) {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') :
-    ((powFunctor k₀ l Y r).map φ).hom.f = φ.hom.f :=
-  IsoAlgebra.liftOfStr_map_hom_f _ _ _ φ
 
 instance (r : ℕ) : (powFunctor k₀ l Y r).Additive :=
   IsoAlgebra.additive_liftOfStr _ _ _
@@ -166,11 +144,6 @@ def transport : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀' l Y' :=
 lemma transport_obj_carrier (K : ProEtaleWeilSheaf k₀ l Y) :
     ((transport θ r hθ).obj K).carrier = (θ.hom)_*ᵃ[l].obj K.carrier :=
   rfl
-
-@[simp]
-lemma transport_map_hom_f {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') :
-    ((transport θ r hθ).map φ).hom.f = (θ.hom)_*ᵃ[l].map φ.hom.f :=
-  IsoAlgebra.liftOfStr_comp_mapOfNatIso_map_hom_f _ _ _ (transportCommIso θ r hθ) φ
 
 lemma transport_obj_str (K : ProEtaleWeilSheaf k₀ l Y) :
     ((transport θ r hθ).obj K).str =

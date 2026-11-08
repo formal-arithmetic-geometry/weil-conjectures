@@ -42,10 +42,6 @@ variable {R : Type (u + 1)} [CommRing R]
   (P : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} R))) [P.IsTriangulated]
   [P.IsClosedUnderIsomorphisms]
 
-/-- Modules whose image in degree `0` satisfy `P`. -/
-private abbrev singleProp : ObjectProperty (ModuleCat.{u + 1} R) :=
-  fun M ↦ P ((singleFunctor (ModuleCat.{u + 1} R) 0).obj M)
-
 
 variable [IsDomain R] [IsPrincipalIdealRing R]
 

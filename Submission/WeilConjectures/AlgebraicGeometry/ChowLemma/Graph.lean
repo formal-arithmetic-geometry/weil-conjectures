@@ -140,10 +140,6 @@ lemma tuple_ambientπ (i : ι) : tuple M ≫ ambientπ M i = toProjectiveSpace M
   rw [tuple, ambientπ, ← Over.comp_left, Pi.lift_comp_π]
   rfl
 
-@[reassoc (attr := simp)]
-lemma tuple_over : tuple M ≫ (ambient M).hom = (⨅ i, U i).ι ≫ f :=
-  Over.w _
-
 /-- **The tuple morphism is an immersion**, since already one of its components is. -/
 instance isImmersion_tuple [Nonempty ι] : IsImmersion (tuple M) := by
   obtain ⟨i⟩ := ‹Nonempty ι›
@@ -193,10 +189,6 @@ noncomputable def over : ChowGraph M ⟶ S := emb M ≫ (ambient M).hom
 `∏_S ℙ(Mᵢ.n; S)`, which is proper over `S`. -/
 instance isProper_over : IsProper (over M) := by
   unfold over; infer_instance
-
-@[reassoc (attr := simp)]
-lemma toGraph_over : toGraph M ≫ over M = (⨅ i, U i).ι ≫ f := by
-  rw [over, toGraph_emb_assoc, tuple_over]
 
 instance noetherianSpace_iInf [NoetherianSpace X] : NoetherianSpace ↑(⨅ i, U i) :=
   inferInstanceAs (NoetherianSpace ((⨅ i, U i : X.Opens) : Set X))

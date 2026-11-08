@@ -78,20 +78,6 @@ lemma mapDerivedCategoryUpperStarDerivedTensorIso_assoc
     ← associator_naturality_left_assoc, Functor.LaxMonoidal.associativity_inv_assoc,
     Iso.hom_inv_id_assoc]
 
-/-- The projection map `Rp_* M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^* L)` is compatible with the associators. -/
-lemma rightDerivedLowerStarProjectionMap_assoc {Y Z : Scheme.{u}}
-    (p : Z ⟶ Y) (M : DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarOplaxMonoidal A p
-    ((rightDerivedLowerStarProjectionMap A p).app M).app (L ⊗ L') ≫
-        R((p)_*[A]).map (M ◁ Functor.OplaxMonoidal.δ L((p)^*[A]) L L') ≫
-          R((p)_*[A]).map (α_ M (L((p)^*[A]).obj L) (L((p)^*[A]).obj L')).inv =
-      (α_ (R((p)_*[A]).obj M) L L').inv ≫
-        (((rightDerivedLowerStarProjectionMap A p).app M).app L ▷ L') ≫
-          ((rightDerivedLowerStarProjectionMap A p).app (M ⊗ L((p)^*[A]).obj L)).app L' :=
-  letI := leftDerivedUpperStarOplaxMonoidal A p
-  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_assoc M L L'
-
 /-- The projection map `j_!(K ⊗ᴸ Lj^*M) ⟶ j_!K ⊗ᴸ M` of an open immersion is compatible with the
 associators. -/
 lemma derivedOpenImmersionLowerShriekProjectionMap_assoc

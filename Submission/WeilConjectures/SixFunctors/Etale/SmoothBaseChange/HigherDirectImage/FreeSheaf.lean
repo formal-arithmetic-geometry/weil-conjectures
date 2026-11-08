@@ -201,19 +201,6 @@ end Restriction
 noncomputable abbrev Etale.finalObject (Z : Scheme.{u}) : Z.Etale :=
   MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))
 
-/-- The canonical section of the free sheaf `Λ[V]` over `V`, corresponding to `𝟙 Λ[V]`. -/
-noncomputable def Etale.freeSheafGenerator {T : Scheme.{u}} (V : T.Etale) :
-    ((Etale.freeSheaf Λ T).obj V).obj.obj (op V) :=
-  Etale.freeSheafHomEquiv Λ V _ (𝟙 _)
-
-/-- The free sheaf generator is natural: its restriction along `a : V' ⟶ V` is the image of the
-generator of `Λ[V']` under `Λ[a]`. -/
-lemma Etale.freeSheaf_map_freeSheafGenerator {T : Scheme.{u}} {V V' : T.Etale} (a : V' ⟶ V) :
-    ((Etale.freeSheaf Λ T).map a).hom.app (op V') (Etale.freeSheafGenerator Λ V') =
-      ((Etale.freeSheaf Λ T).obj V).obj.map a.op (Etale.freeSheafGenerator Λ V) := by
-  rw [Etale.freeSheafGenerator, Etale.freeSheafGenerator, ← Etale.freeSheafHomEquiv_comp,
-    ← Etale.freeSheafHomEquiv_map, Category.id_comp, Category.comp_id]
-
 /-- The final object `𝟙 Z` of the small étale site of `Z` is terminal. -/
 noncomputable def Etale.isTerminalFinalObject (Z : Scheme.{u}) :
     IsTerminal (Etale.finalObject Z) :=
@@ -622,20 +609,6 @@ variable {Y V : Scheme.{u}} (v : V ⟶ Y) (hv : Etale v)
 
 
 
-/-- An exact functor commutes with degree-zero single objects and shifts.
-This is the composition of its single-object and shift comparison isomorphisms. -/
-noncomputable def Etale.exactSingleShiftIso
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (q : ℤ) :
-    DerivedCategory.Plus.singleFunctor C 0 ⋙ shiftFunctor _ q ⋙ F.mapDerivedCategoryPlus ≅
-      F ⋙ DerivedCategory.Plus.singleFunctor D 0 ⋙ shiftFunctor _ q :=
-  Functor.isoWhiskerLeft _ (F.mapDerivedCategoryPlus.commShiftIso q) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (F.mapDerivedCategoryPlusSingleFunctor 0) (shiftFunctor _ q) ≪≫
-    Functor.associator _ _ _
-
 /-- A named copy of pullback used to share its derived-shift comparison instances. -/
 noncomputable def Etale.upperStarForShift :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
@@ -646,57 +619,12 @@ instance Etale.additive_upperStarForShift : (Etale.upperStarForShift Λ v).Addit
   dsimp [Etale.upperStarForShift]
   infer_instance
 
-/-- Pullback, in its named presentation, preserves finite limits. -/
-theorem Etale.preservesFiniteLimits_upperStarForShift :
-    PreservesFiniteLimits (Etale.upperStarForShift Λ v) := by
-  dsimp [Etale.upperStarForShift]
-  infer_instance
-
 instance Etale.preservesFiniteColimits_upperStarForShift :
     PreservesFiniteColimits (Etale.upperStarForShift Λ v) := by
   dsimp [Etale.upperStarForShift]
   infer_instance
 
 
-
-/-- Transport the additive Hom equivalence of an adjunction across two isomorphisms. -/
-noncomputable def Etale.adjunctionHomAddEquivOfIso
-    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] (adj : L ⊣ R)
-    {M : C} {N A : D} {B : C} (i₁ : L.obj M ≅ A) (i₂ : R.obj N ≅ B) :
-    (A ⟶ N) ≃+ (M ⟶ B) :=
-  AddEquiv.mk'
-    { toFun f := adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom
-      invFun g := i₁.inv ≫ (adj.homEquiv _ _).symm (g ≫ i₂.inv)
-      left_inv f := by simp
-      right_inv g := by simp }
-    (fun f g ↦ by simp)
-
-lemma Etale.adjunctionHomAddEquivOfIso_apply
-    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] (adj : L ⊣ R)
-    {M : C} {N A : D} {B : C} (i₁ : L.obj M ≅ A) (i₂ : R.obj N ≅ B) (f : A ⟶ N) :
-    Etale.adjunctionHomAddEquivOfIso adj i₁ i₂ f =
-      adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom := rfl
-
-/-- The transported additive Hom equivalence is natural in its target argument. -/
-noncomputable def Etale.adjunctionHomNatIso
-    {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category E]
-    [Preadditive C] [Preadditive D]
-    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] (adj : L ⊣ R)
-    {M : C} {A : D} (i₁ : L.obj M ≅ A) (S : E ⥤ D) (T : E ⥤ C)
-    (e : S ⋙ R ≅ T) :
-    S ⋙ preadditiveCoyoneda.obj (op A) ≅ T ⋙ preadditiveCoyoneda.obj (op M) :=
-  NatIso.ofComponents
-    (fun N ↦ (Etale.adjunctionHomAddEquivOfIso adj i₁ (e.app N)).toAddCommGrpIso)
-    (fun {N N'} g ↦ by
-      ext f
-      change Etale.adjunctionHomAddEquivOfIso adj i₁ (e.app N') (f ≫ S.map g) =
-        Etale.adjunctionHomAddEquivOfIso adj i₁ (e.app N) f ≫ T.map g
-      rw [Etale.adjunctionHomAddEquivOfIso_apply, Etale.adjunctionHomAddEquivOfIso_apply,
-        ← Category.assoc, Adjunction.homEquiv_naturality_right, Category.assoc, Category.assoc]
-      congr 1
-      exact e.hom.naturality g)
 
 
 

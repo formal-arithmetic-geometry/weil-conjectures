@@ -5,7 +5,26 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.WeilSheaf.AffineLineBundle
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import Submission.WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import Submission.WeilConjectures.WeilSheaf.HomotopyInvariance.Lisse
+public import Submission.WeilConjectures.WeilSheaf.HomotopyInvariance.Basic
+public import Submission.WeilConjectures.WeilSheaf.LowerShriek
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.OfBijectiveCounit
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
+public import Mathlib.Algebra.Homology.Localization
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+public import Submission.WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
+public import Submission.WeilConjectures.CategoryTheory.ExactDerivedAdjunction
+public import Submission.WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunction
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleExtendScalarsBaseChange
+public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 public import Submission.WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import Submission.WeilConjectures.WeilSheaf.Localization
 public import Submission.WeilConjectures.WeilSheaf.LowerShriekOperations

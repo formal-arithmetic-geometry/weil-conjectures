@@ -57,17 +57,5 @@ def comp (a : GeometricMorphism E F) (b : GeometricMorphism F G) :
     have := b.leftExact
     exact comp_preservesFiniteLimits _ _
 
-/-- The inverse-image mate of a 2-morphism, whose defining direction is on direct images.
-Source: ILO XI §1.3 (auxiliary; not a blueprint node). -/
-noncomputable def inverseMate {a b : GeometricMorphism E F} (t : a.direct ⟶ b.direct) :
-    b.inverse ⟶ a.inverse :=
-  (conjugateEquiv a.adj b.adj).symm t
-
-/-- The inverse-image isomorphism corresponding to a direct-image isomorphism.
-Source: ILO XI §1.4 (auxiliary; not a blueprint node). -/
-noncomputable def inverseIso {a b : GeometricMorphism E F} (t : a.direct ≅ b.direct) :
-    b.inverse ≅ a.inverse :=
-  (conjugateIsoEquiv a.adj b.adj).symm t
-
 end GeometricMorphism
 end CategoryTheory

@@ -11,7 +11,10 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 public import Submission.WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Submission.WeilConjectures.AlgebraicGeometry.FlatModulePullbackExact
-public import Submission.WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Submission.WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.AlgebraicGeometry.Pullbacks
 

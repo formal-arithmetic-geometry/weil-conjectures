@@ -73,10 +73,4 @@ lemma weilSheafLowerStar_obj_str (F : WeilSheaf ℓ eX) :
         (f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧.mapIso F.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ F
 
-/-- `weilSheafLowerStar` as a transport of algebras. -/
-lemma weilSheafLowerStar_eq :
-    weilSheafLowerStar ℓ eX eY hf =
-      IsoAlgebra.mapOfNatIso (weilSheafLowerStarComparison ℓ eX eY hf) :=
-  rfl
-
 end AlgebraicGeometry.ProEtale.CondensedRing

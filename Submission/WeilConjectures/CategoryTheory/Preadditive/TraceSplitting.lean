@@ -74,11 +74,6 @@ variable {u t d}
 lemma comp_normalizedTrace (h : u ≫ t = d • 𝟙 G) : u ≫ normalizedTrace t d = 𝟙 G := by
   rw [normalizedTrace, ← assoc, h, IsIso.hom_inv_id]
 
-/-- A morphism admitting a trace `t` with `u ≫ t = d • 𝟙 G`, `d` invertible on `G`, is a split
-monomorphism. -/
-lemma isSplitMono_of_comp_eq_nsmul (h : u ≫ t = d • 𝟙 G) : IsSplitMono u :=
-  IsSplitMono.mk' ⟨normalizedTrace t d, comp_normalizedTrace h⟩
-
 variable (d) in
 /-- Multiplication by `d` on the inverse of multiplication by `d` is the identity. -/
 lemma nsmul_inv_nsmul_id : d • inv (d • 𝟙 G) = 𝟙 G := by
@@ -105,13 +100,6 @@ lemma nsmul_normalizedTrace_comp_eq_sum {ι : Type*} [Fintype ι] (ρ : ι → (
     (ht : t ≫ u = ∑ i, ρ i) :
     d • (normalizedTrace t d ≫ u) = ∑ i, ρ i := by
   rw [← Preadditive.nsmul_comp, nsmul_normalizedTrace, ht]
-
-/-- **Galois averaging**, the splitting: if `u` is a monomorphism fixed by the `d` endomorphisms
-`ρ i` and `t ≫ u = ∑ i, ρ i`, the normalized trace is a retraction of `u`. -/
-lemma comp_normalizedTrace_of_comp_eq_sum [Mono u] {ι : Type*} [Fintype ι] (ρ : ι → (T ⟶ T))
-    (hd : Fintype.card ι = d) (hρ : ∀ i, u ≫ ρ i = u) (ht : t ≫ u = ∑ i, ρ i) :
-    u ≫ normalizedTrace t d = 𝟙 G :=
-  comp_normalizedTrace (hd ▸ comp_eq_nsmul_of_comp_eq_sum ρ hρ ht)
 
 end Normalized
 
@@ -141,26 +129,6 @@ transition maps glue to a morphism `c.pt ⟶ G`. -/
 noncomputable def descNormalizedTrace (hc : IsColimit c) (r : ∀ j, F.obj j ⟶ G)
     (hr : ∀ ⦃i j : J⦄ (f : i ⟶ j), F.map f ≫ r j = r i) : c.pt ⟶ G :=
   hc.desc ⟨G, { app j := r j, naturality i j f := by simp [hr f] }⟩
-
-@[reassoc (attr := simp)]
-lemma ι_descNormalizedTrace (hc : IsColimit c) (r : ∀ j, F.obj j ⟶ G)
-    (hr : ∀ ⦃i j : J⦄ (f : i ⟶ j), F.map f ≫ r j = r i) (j : J) :
-    c.ι.app j ≫ descNormalizedTrace hc r hr = r j :=
-  hc.fac _ j
-
-/-- The glued morphism of `CategoryTheory.Limits.descNormalizedTrace` is a retraction of the limit
-unit `u = u j ≫ c.ι.app j` when the `r j` are retractions of the `u j`. -/
-lemma comp_descNormalizedTrace (hc : IsColimit c) (r : ∀ j, F.obj j ⟶ G)
-    (hr : ∀ ⦃i j : J⦄ (f : i ⟶ j), F.map f ≫ r j = r i) (u : G ⟶ c.pt) (j : J)
-    (uj : G ⟶ F.obj j) (hu : uj ≫ c.ι.app j = u) (hj : uj ≫ r j = 𝟙 G) :
-    u ≫ descNormalizedTrace hc r hr = 𝟙 G := by
-  rw [← hu, assoc, ι_descNormalizedTrace, hj]
-
-/-- **Pro-`p` trace splitting in the colimit case**: the limit unit is a split monomorphism. -/
-lemma isSplitMono_of_isColimit (hc : IsColimit c) (r : ∀ j, F.obj j ⟶ G)
-    (hr : ∀ ⦃i j : J⦄ (f : i ⟶ j), F.map f ≫ r j = r i) (u : G ⟶ c.pt) (j : J)
-    (uj : G ⟶ F.obj j) (hu : uj ≫ c.ι.app j = u) (hj : uj ≫ r j = 𝟙 G) : IsSplitMono u :=
-  IsSplitMono.mk' ⟨_, comp_descNormalizedTrace hc r hr u j uj hu hj⟩
 
 end Limits
 

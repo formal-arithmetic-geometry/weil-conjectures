@@ -199,37 +199,6 @@ lemma kunnethMap_eq (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c :
   rw [reassoc_of% hn]
   simp only [Functor.map_comp, Functor.id_obj]
 
-/-- Blueprint `lem-kun-kunneth-map-natural`: the Künneth map is natural in both variables. -/
-@[reassoc]
-lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
-    (hp : p ≫ f = c) (hq : q ≫ g = c)
-    {E E' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (φ : E ⟶ E') (ψ : K ⟶ K') :
-    ((-⊗ᴸ-(S)[A]).map (R((f)_*[A]).map φ)).app _ ≫
-        ((-⊗ᴸ-(S)[A]).obj _).map (R((g)_*[A]).map ψ) ≫ kunnethMap A p q f g c hp hq E' K' =
-      kunnethMap A p q f g c hp hq E K ≫ R((c)_*[A]).map
-        (((-⊗ᴸ-(W)[A]).map (L((p)^*[A]).map φ)).app _ ≫
-          ((-⊗ᴸ-(W)[A]).obj _).map (L((q)^*[A]).map ψ)) := by
-  have h₁ : ((-⊗ᴸ-(S)[A]).map (R((f)_*[A]).map φ)).app (R((g)_*[A]).obj K) ≫
-      ((rightDerivedLowerStarProjectionMap A f).app E').app (R((g)_*[A]).obj K) =
-      ((rightDerivedLowerStarProjectionMap A f).app E).app (R((g)_*[A]).obj K) ≫
-        R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map φ).app (L((f)^*[A]).obj (R((g)_*[A]).obj K))) :=
-    NatTrans.congr_app ((rightDerivedLowerStarProjectionMap A f).naturality φ) _
-  have h₂ : ((-⊗ᴸ-(S)[A]).obj (R((f)_*[A]).obj E')).map (R((g)_*[A]).map ψ) ≫
-      ((rightDerivedLowerStarProjectionMap A f).app E').app (R((g)_*[A]).obj K') =
-      ((rightDerivedLowerStarProjectionMap A f).app E').app (R((g)_*[A]).obj K) ≫
-        R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).obj E').map (L((f)^*[A]).map (R((g)_*[A]).map ψ))) :=
-    ((rightDerivedLowerStarProjectionMap A f).app E').naturality _
-  have h₃ := (rightDerivedLowerStarCompIsoOfComp A p f c hp).hom.naturality
-    (((-⊗ᴸ-(W)[A]).map (L((p)^*[A]).map φ)).app _ ≫
-      ((-⊗ᴸ-(W)[A]).obj _).map (L((q)^*[A]).map ψ))
-  simp only [Functor.comp_map] at h₃
-  rw [kunnethMap_eq, kunnethMap_eq, reassoc_of% h₂, reassoc_of% h₁]
-  simp only [Category.assoc]
-  rw [← h₃,
-    ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
-    Category.assoc, tensorBaseChangeMap_naturality, Functor.map_comp_assoc]
-
 end Maps
 
 section MonoidalEquivalence
@@ -522,30 +491,6 @@ theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
   ⟨((constantSheafEquivalenceOfIsSepClosed Λ).mapDerivedCategory.counitIso.app C).symm ≪≫
     (constantFunctor Λ _).mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app C).symm⟩
 
-/-- Blueprint `lem-kun-03qu-global-generation` (for sheaves of `Λ`-modules): over a separably
-closed field `k`, every étale sheaf of `Λ`-modules on `Spec k` is globally generated. -/
-theorem isGloballyGenerated_of_isSepClosed
-    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsGloballyGenerated Λ (Spec (.of k)) F := by
-  let adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-    (isTerminalEtaleTerminal (Spec (.of k)))
-  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-    (op (etaleTerminal (Spec (.of k))))
-  have : Γ.IsEquivalence := isEquivalence_sheafSections_etalePoint Λ
-  refine Γ.epi_of_epi_map ?_
-  rw [ModuleCat.epi_iff_surjective]
-  intro s
-  refine ⟨(adj.unit.app (ModuleCat.of Λ Λ) ≫ Γ.map (Sigma.ι
-    (fun _ : F.obj.obj (op (etaleTerminal (Spec (.of k)))) ↦ (constantSheaf
-      (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) s))
-      (1 : Λ), ?_⟩
-  have h := adj.homEquiv_unit (ModuleCat.of Λ Λ) F
-    ((adj.homEquiv _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s)))
-  rw [Equiv.apply_symm_apply] at h
-  rw [← ConcreteCategory.comp_apply, Category.assoc, ← Γ.map_comp,
-    globalSectionsEvaluation, Sigma.ι_comp_desc, ← h]
-  simp only [ModuleCat.hom_ofHom]
-  exact one_smul Λ s
 /-- Over a separably closed field `k`, the derived global sections
 `RΓ(Spec k, -) : D((Spec k)_ét, Λ) ⥤ D(Λ)` are compatible with the derived tensor products:
 `RΓ(Spec k, C ⊗ᴸ C') ≅ RΓ(Spec k, C) ⊗ᴸ RΓ(Spec k, C')`. -/
@@ -677,26 +622,6 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
   isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ aX
     (hasFiniteCohomologicalDimension_of_isSepClosed Λ (fun x ↦ isOfFinAddOrder_of_finite x) aX)
     E C
-
-omit [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
-separably closed field `k`: the tensor product with a constant complex (`lem-kun-0f12`), read
-in `D(Λ)` through `RΓ(Spec k, -)`. -/
-theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar
-    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ≅
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
-          ((L((aX)^*[ModuleCat.{u + 1} Λ])).obj C))) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed Λ
-    ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj E) C
-  exact ⟨whiskerRightIso
-      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app E).symm _ ≪≫ e.symm ≪≫
-    (rightDerivedGlobalSections _ (Spec (.of k))).mapIso
-      (asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) aX).app E).app C)) ≪≫
-    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app _⟩
 
 end Kunneth
 

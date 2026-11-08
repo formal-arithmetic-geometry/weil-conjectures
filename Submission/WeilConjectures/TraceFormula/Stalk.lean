@@ -112,13 +112,6 @@ lemma weilStalk_obj_frobenius_hom (x : RationalPoint X) (hx : x ≫ Φ = x)
         ((weilStalk ℓ Φ x hx).obj K).str.hom :=
   WeilBoundedConstructible.frobenius_hom _
 
-/-- The stalk functor lifts the derived pullback `Lx^*` along the forgetful functors. -/
-lemma weilStalk_comp_forget (x : RationalPoint X) (hx : x ≫ Φ = x) :
-    weilStalk ℓ Φ x hx ⋙ WeilBoundedConstructible.forget ℓ (𝟙 (point k)) =
-      WeilBoundedConstructible.forget ℓ Φ ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x :=
-  rfl
-
 end Stalk
 
 /-! ### The local Frobenius -/

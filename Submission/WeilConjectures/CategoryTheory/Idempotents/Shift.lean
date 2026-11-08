@@ -90,25 +90,6 @@ lemma Karoubi.shiftFunctor_obj_p (P : Karoubi C) (a : A) :
 lemma Karoubi.shiftFunctor_map_f {P Q : Karoubi C} (f : P ⟶ Q) (a : A) :
     ((shiftFunctor (Karoubi C) a).map f).f = f.f⟦a⟧' := rfl
 
-lemma Karoubi.η_shift_app_f (P : Karoubi C) :
-    ((Functor.OplaxMonoidal.η (shiftMonoidalFunctor (Karoubi C) A)).app P).f =
-      (Functor.OplaxMonoidal.η (shiftMonoidalFunctor C A)).app P.X ≫ P.p := by
-  change ((Functor.OplaxMonoidal.η (shiftMonoidalFunctor C A ⋙ functorExtension₂ C C)).app P).f = _
-  rw [Functor.OplaxMonoidal.comp_η]
-  simp
-
-lemma Karoubi.δ_shift_app_f (a b : A) (P : Karoubi C) :
-    ((Functor.OplaxMonoidal.δ (shiftMonoidalFunctor (Karoubi C) A) ⟨a⟩ ⟨b⟩).app P).f =
-      (Functor.OplaxMonoidal.δ (shiftMonoidalFunctor C A) ⟨a⟩ ⟨b⟩).app P.X ≫ (P.p⟦a⟧')⟦b⟧' := by
-  change ((Functor.OplaxMonoidal.δ (shiftMonoidalFunctor C A ⋙ functorExtension₂ C C)
-    ⟨a⟩ ⟨b⟩).app P).f = _
-  rw [Functor.OplaxMonoidal.comp_δ]
-  simp only [Functor.comp_obj, endofunctorMonoidalCategory_tensorObj_obj, NatTrans.comp_app,
-    Karoubi.comp_f, functorExtension₂_map_app_f, endofunctorMonoidalCategory_tensorObj_map,
-    functorExtension₂_δ_app_f, assoc]
-  rw [← Functor.map_comp, ← Functor.map_comp, P.idem]
-  rfl
-
 lemma Karoubi.ε_shift_app_f (P : Karoubi C) :
     ((Functor.LaxMonoidal.ε (shiftMonoidalFunctor (Karoubi C) A)).app P).f =
       P.p ≫ (Functor.LaxMonoidal.ε (shiftMonoidalFunctor C A)).app P.X := by
@@ -130,22 +111,10 @@ lemma Karoubi.μ_shift_app_f (a b : A) (P : Karoubi C) :
   rfl
 
 @[simp]
-lemma Karoubi.shiftFunctorZero_hom_app_f (P : Karoubi C) :
-    ((shiftFunctorZero (Karoubi C) A).hom.app P).f =
-      (shiftFunctorZero C A).hom.app P.X ≫ P.p := by
-  simp [shiftFunctorZero, Functor.Monoidal.εIso, Karoubi.η_shift_app_f]
-
-@[simp]
 lemma Karoubi.shiftFunctorZero_inv_app_f (P : Karoubi C) :
     ((shiftFunctorZero (Karoubi C) A).inv.app P).f =
       P.p ≫ (shiftFunctorZero C A).inv.app P.X := by
   simp [shiftFunctorZero, Functor.Monoidal.εIso, Karoubi.ε_shift_app_f]
-
-@[simp]
-lemma Karoubi.shiftFunctorAdd_hom_app_f (a b : A) (P : Karoubi C) :
-    ((shiftFunctorAdd (Karoubi C) a b).hom.app P).f =
-      (shiftFunctorAdd C a b).hom.app P.X ≫ (P.p⟦a⟧')⟦b⟧' := by
-  simp [shiftFunctorAdd, Functor.Monoidal.μIso, Karoubi.δ_shift_app_f]
 
 @[simp]
 lemma Karoubi.shiftFunctorAdd_inv_app_f (a b : A) (P : Karoubi C) :

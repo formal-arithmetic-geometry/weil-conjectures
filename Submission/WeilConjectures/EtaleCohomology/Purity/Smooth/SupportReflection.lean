@@ -163,17 +163,6 @@ lemma IsSupportReflection.of_comp_iso {γ : K ⟶ T} (θ : T ≅ T')
   rwa [Iso.symm_hom, Category.assoc, Iso.hom_inv_id, Category.comp_id] at this
 
 omit [Finite Λ] in
-/-- An isomorphism followed by a reflection is a reflection. -/
-lemma IsSupportReflection.iso_comp {γ : K ⟶ T} (hγ : IsSupportReflection i γ) (σ : K' ⟶ K)
-    [IsIso σ] : IsSupportReflection i (σ ≫ γ) := by
-  intro S hS
-  have : (fun f : T ⟶ S ↦ (σ ≫ γ) ≫ f) = (fun g ↦ σ ≫ g) ∘ (fun f ↦ γ ≫ f) := by
-    funext f
-    simp only [Function.comp_apply, Category.assoc]
-  rw [this]
-  exact (bijective_comp_left_of_isIso σ).comp (hγ S hS)
-
-omit [Finite Λ] in
 /-- **Two reflections differ by an isomorphism.** If `γ` and `γ ≫ a` are reflections into the
 objects supported on `Z` and the targets of `γ` and `a` are supported on `Z`, then `a` is an
 isomorphism. -/

@@ -292,20 +292,6 @@ namespace CategoryTheory.Functor
 
 variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
 
-/-- Naturality of a whiskered natural transformation, at a morphism into an object in the
-image of the whiskering functor. -/
-@[reassoc]
-lemma map_comp_whiskerLeft_app {F H : C ⥤ D} (α : F ⟶ H) (G : B ⥤ C) {X : C} {Q : B}
-    (f : X ⟶ G.obj Q) : F.map f ≫ (whiskerLeft G α).app Q = α.app X ≫ H.map f :=
-  α.naturality f
-
-/-- `map_comp_whiskerLeft_app` for a morphism into the image of a composite functor. -/
-@[reassoc]
-lemma map_comp_whiskerLeft_app_comp_obj {F H : C ⥤ D} (α : F ⟶ H) (P : A ⥤ B) (G : B ⥤ C)
-    {X : C} {N : A} (f : X ⟶ (P ⋙ G).obj N) :
-    F.map f ≫ (whiskerLeft G α).app (P.obj N) = α.app X ≫ H.map f :=
-  α.naturality f
-
 /-- Naturality of a natural transformation `α : F ⟶ H` at a morphism `f : R (Q N) ⟶ G (P N)`,
 with both components written as whiskerings. -/
 @[reassoc]

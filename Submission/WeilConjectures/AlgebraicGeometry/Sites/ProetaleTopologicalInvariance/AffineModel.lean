@@ -77,20 +77,6 @@ noncomputable def ofAlgebraMap (f : D₁ →ₐ[Γ(S, U)] D₂) : ofAlgebra hU D
 lemma ofAlgebraMap_left (f : D₁ →ₐ[Γ(S, U)] D₂) :
     (ofAlgebraMap hU f).left = Spec.map (CommRingCat.ofHom f.toRingHom) := rfl
 
-@[simp]
-lemma ofAlgebraMap_id : ofAlgebraMap hU (AlgHom.id Γ(S, U) D₁) = 𝟙 _ := by
-  apply MorphismProperty.Over.Hom.ext
-  simp
-  rfl
-
-@[simp]
-lemma ofAlgebraMap_comp (f : D₁ →ₐ[Γ(S, U)] D₂) (g : D₂ →ₐ[Γ(S, U)] D₃) :
-    ofAlgebraMap hU (g.comp f) = ofAlgebraMap hU g ≫ ofAlgebraMap hU f := by
-  apply MorphismProperty.Over.Hom.ext
-  rw [MorphismProperty.Comma.comp_left, ofAlgebraMap_left, ofAlgebraMap_left, ofAlgebraMap_left,
-    ← Spec.map_comp]
-  rfl
-
 /-- Morphisms of affine models are exactly algebra maps. -/
 lemma ofAlgebraMap_bijective :
     Function.Bijective (ofAlgebraMap hU : (D₁ →ₐ[Γ(S, U)] D₂) → _) := by

@@ -102,15 +102,6 @@ noncomputable def leftDerivedUpperStarDerivedTensorRightIso (f : X ⟶ Y)
   derivedTensorRightCompLeftDerivedUpperStarIso A f NY ≪≫
     Functor.isoWhiskerLeft L((f)^*[A]) ((derivedTensorRightFunctor A X).mapIso a)
 
-lemma leftDerivedUpperStarDerivedTensorRightIso_hom_app (f : X ⟶ Y)
-    {NY : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    {NX : DerivedCategory (Sheaf X.smallEtaleTopology A)} (a : L((f)^*[A]).obj NY ≅ NX)
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (leftDerivedUpperStarDerivedTensorRightIso A f a).hom.app L =
-      ((leftDerivedUpperStarTensorComparison A f).app L).app NY ≫
-        L((f)^*[A]).obj L ◁ a.hom :=
-  rfl
-
 /-- For `a : Lg^*N_Y ⟶ N_Z`, the comparison `Rg_*M ⊗ᴸ N_Y ⟶ Rg_*(M ⊗ᴸ N_Z)`, natural in `M`: the
 projection map of `Rg_*` at `(M, N_Y)` followed by `Rg_*(M ◁ a)`. -/
 noncomputable def rightDerivedLowerStarDerivedTensorRightMap {Z : Scheme.{u}} (g : Z ⟶ Y)
@@ -154,14 +145,6 @@ noncomputable def rightDerivedLowerShriekDerivedTensorRightMap
   naturality _ _ φ := Adjunction.projectionMap_comp_map_whiskerLeft_naturality
     (fun K L ↦ ((projectionMapOfCompactification A c).app K).app L) a
     (fun φ L ↦ NatTrans.congr_app ((projectionMapOfCompactification A c).naturality φ) L) φ
-
-lemma rightDerivedLowerShriekDerivedTensorRightMap_app
-    {NY : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
-    {NX : DerivedCategory (Sheaf X.smallEtaleTopology A)} (a : L((f)^*[A]).obj NY ⟶ NX)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    (rightDerivedLowerShriekDerivedTensorRightMap A c a).app K =
-      ((projectionMapOfCompactification A c).app K).app NY ≫ Rf_!(c)[A].map (K ◁ a) :=
-  rfl
 
 /-- **The reduction square of the projection map, for a general coefficient object.** For
 `a : Lf^*N_Y ≅ N_X`, `K` on `X` and `L` on `Y`, the square

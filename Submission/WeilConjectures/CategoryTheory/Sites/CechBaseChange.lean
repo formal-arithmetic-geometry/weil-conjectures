@@ -167,11 +167,6 @@ variable {C : Type w} [Category.{v} C] {V : C} [HasFiniteProducts (Over V)] {ι 
 
 section Criterion
 
-lemma bcD_zero (a : ι) (Q : (Over V)ᵒᵖ ⥤ AddCommGrpCat.{s}) (k : ℕ) :
-    bcD U a Q k 0 = 0 := by
-  funext y
-  simp [bcD]
-
 lemma bcD_add (a : ι) (Q : (Over V)ᵒᵖ ⥤ AddCommGrpCat.{s}) (k : ℕ)
     (x x' : ∀ y : Fin (k + 1) → ι, Q.obj (op (bcNerveObj U a y))) :
     bcD U a Q k (x + x') = bcD U a Q k x + bcD U a Q k x' := by

@@ -216,17 +216,6 @@ Source: Stacks Tag 03EK (blueprint: lem-pe-kflat-roos-representative-invariance)
 def tensorUnit {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :=
   (tensorUnit_existsUnique ι).exists.choose
 
-set_option linter.unusedSectionVars false in
-private theorem tensorSecondMap_tmul
-    (M N N' : Modules R) (g : N ⟶ N') (U : Cᵒᵖ)
-    (x : M.val.obj U) (y : N.val.obj U) :
-    (siteSheafTensorSecondMap M g).val.app U (siteSheafTensorTmul M N U x y) =
-      siteSheafTensorTmul M N' U x (g.val.app U y) := by
-  let adj := PresheafOfModules.sheafificationAdjunction
-    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)
-  have h := adj.unit.naturality (siteTensorSecondMap M.val g.val)
-  exact (congrArg (fun f ↦ f.app U (x ⊗ₜ[R.obj.obj U] y)) h).symm
-
 variable (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r})
   (ι : (Functor.const ℕᵒᵖ).obj R ⟶ B)
 
@@ -258,26 +247,6 @@ Source: Stacks Tag 03EK (blueprint: lem-pe-kflat-roos-representative-invariance)
 def transition (P : CochainComplex (Modules R) ℤ) (n : ℕ) :
     (level B ι (n + 1)).obj P ⟶ (level B ι n).obj P :=
   (NatTrans.mapHomologicalComplex (siteSheafTensorRightMap (levelMap B ι n)) (.up ℤ)).app P
-
-private theorem tensorUnit_levelMap (n : ℕ) :
-    tensorUnit (ι.app (op (n + 1))) ≫ siteSheafTensorRightMap (levelMap B ι n) =
-      tensorUnit (ι.app (op n)) := by
-  ext M U p
-  change (siteSheafTensorSecondMap M (levelMap B ι n)).val.app U
-      ((tensorUnit (ι.app (op (n + 1)))).app M |>.val.app U p) =
-    ((tensorUnit (ι.app (op n))).app M).val.app U p
-  dsimp only [tensorUnit, levelModule]
-  rw [(tensorUnit_existsUnique (ι.app (op (n + 1)))).exists.choose_spec,
-    (tensorUnit_existsUnique (ι.app (op n))).exists.choose_spec,
-    tensorSecondMap_tmul]
-  have hm := (algebraModuleMap_existsUnique
-    (ι.app (op (n + 1))) (ι.app (op n))
-    (B.map (homOfLE (Nat.le_succ n)).op) (structure_compatible B ι n)).exists.choose_spec
-  change siteSheafTensorTmul M (levelModule B ι n) U p
-      ((levelMap B ι n).val.app U (1 : (B.obj (op (n + 1))).obj.obj U)) = _
-  congr 1
-  exact (hm U (1 : (B.obj (op (n + 1))).obj.obj U)).trans
-    (map_one ((B.map (homOfLE (Nat.le_succ n)).op).hom.app U).hom)
 
 variable [HasCountableProducts (Modules R)]
 
@@ -332,118 +301,6 @@ theorem roosD_sq (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
 Source: Stacks Tag 08TC (blueprint: lem-pe-kflat-roos-representative-invariance). -/
 def roos (P : CochainComplex (Modules R) ℤ) : CochainComplex (Modules R) ℤ :=
   CochainComplex.of (roosX B ι P) (roosD B ι P) (roosD_sq B ι P)
-
-/-- The product of the tensor units in degree i.
-Source: Stacks Tag 03EK (blueprint: lem-pe-kflat-roos-representative-invariance). -/
-def unitProduct (P : CochainComplex (Modules R) ℤ) : P ⟶ product B ι P :=
-  Pi.lift (fun n =>
-    (NatTrans.mapHomologicalComplex (tensorUnit (ι.app (op n))) (.up ℤ)).app P)
-
-set_option linter.unusedSectionVars false in
-private theorem unitProduct_oneSubShift (P : CochainComplex (Modules R) ℤ) :
-    unitProduct B ι P ≫ oneSubShift B ι P = 0 := by
-  apply Pi.hom_ext
-  intro n
-  have hunit :
-      (NatTrans.mapHomologicalComplex (tensorUnit (ι.app (op (n + 1)))) (.up ℤ)).app P ≫
-          transition B ι P n =
-        (NatTrans.mapHomologicalComplex (tensorUnit (ι.app (op n))) (.up ℤ)).app P := by
-    ext j : 1
-    exact congrArg (fun η ↦ η.app (P.X j)) (tensorUnit_levelMap B ι n)
-  simp [unitProduct, oneSubShift, Category.assoc, Preadditive.comp_sub, hunit]
-
-/-- The augmentation (unit,0) commutes with differentials.
-Source: Stacks Tags 03EK and 08TC
-(blueprint: lem-pe-kflat-roos-representative-invariance).
-Proof: tensor units commute with d. The algebra transitions preserve 1, so
-(1-s) composed with the product unit is zero, giving the second coordinate. -/
-theorem augmentation_comm (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
-    biprod.lift ((unitProduct B ι P).f i) 0 ≫ (roos B ι P).d i (i + 1) =
-      P.d i (i + 1) ≫ biprod.lift ((unitProduct B ι P).f (i + 1)) 0 := by
-  have hunit (j : ℤ) := congrArg (fun f ↦ HomologicalComplex.Hom.f f j)
-    (unitProduct_oneSubShift B ι P)
-  dsimp only [HomologicalComplex.comp_f, HomologicalComplex.zero_f] at hunit
-  simp only [roos, CochainComplex.of_d]
-  apply biprod.hom_ext
-  · simp [roosD, Category.assoc]
-  · simp [roosD, Category.assoc, hunit]
-
-/-- The actual augmentation p to ((p tensor 1)_n,0).
-Source: Stacks Tags 03EK and 08TC
-(blueprint: lem-pe-kflat-roos-representative-invariance). -/
-def augmentation (P : CochainComplex (Modules R) ℤ) : P ⟶ roos B ι P :=
-  CochainComplex.ofHom (fun i => biprod.lift ((unitProduct B ι P).f i) 0)
-    (augmentation_comm B ι P)
-
-/-- The product of a tensor B_n over all levels.
-Source: Stacks Tag 03EK (blueprint: lem-pe-kflat-roos-representative-invariance). -/
-def productMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
-    product B ι P ⟶ product B ι P' :=
-  Limits.Pi.map (fun n => (level B ι n).map a)
-
-set_option linter.unusedSectionVars false in
-private theorem productMap_oneSubShift {P P' : CochainComplex (Modules R) ℤ}
-    (a : P ⟶ P') :
-    productMap B ι a ≫ oneSubShift B ι P' =
-      oneSubShift B ι P ≫ productMap B ι a := by
-  apply Pi.hom_ext
-  intro n
-  have ht := (NatTrans.mapHomologicalComplex
-    (siteSheafTensorRightMap (levelMap B ι n)) (.up ℤ)).naturality a
-  change (level B ι (n + 1)).map a ≫ transition B ι P' n =
-    transition B ι P n ≫ (level B ι n).map a at ht
-  simp [productMap, oneSubShift, Category.assoc, Preadditive.comp_sub,
-    Preadditive.sub_comp, ht]
-
-/-- The diagonal product map commutes with the specified differential.
-Source: Stacks Tags 03EK and 08TC
-(blueprint: lem-pe-kflat-roos-representative-invariance).
-Proof: tensor naturality makes a tensor B_n commute with transition maps. Thus
-its product commutes with 1-s as well as d; multiply the two-by-two matrices. -/
-theorem roosMap_comm {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') (i : ℤ) :
-    biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)) ≫
-        (roos B ι P').d i (i + 1) =
-      (roos B ι P).d i (i + 1) ≫
-        biprod.map ((productMap B ι a).f (i + 1)) ((productMap B ι a).f ((i + 1) - 1)) := by
-  have hs (j : ℤ) := congrArg (fun f ↦ HomologicalComplex.Hom.f f j)
-    (productMap_oneSubShift B ι a)
-  dsimp only [HomologicalComplex.comp_f] at hs
-  simp only [roos, CochainComplex.of_d]
-  apply biprod.hom_ext
-  · simp +instances [roosD, roosX, Category.assoc]
-  · simp +instances only [roosX, roosD, add_sub_cancel_right, eqToHom_naturality,
-      Category.assoc, biprod.lift_snd, Preadditive.comp_sub, biprod.map_fst_assoc,
-      eqToHom_naturality_assoc, biprod.map_snd_assoc, HomologicalComplex.Hom.comm,
-      biprod.map_snd, biprod.lift_snd_assoc, Preadditive.sub_comp, sub_left_inj]
-    rw [hs (i + 1 - 1)]
-
-/-- L(a) applies the product of a tensor B_n to both coordinates.
-Source: Stacks Tags 03EK and 08TC
-(blueprint: lem-pe-kflat-roos-representative-invariance). -/
-def roosMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
-    roos B ι P ⟶ roos B ι P' :=
-  CochainComplex.ofHom
-    (fun i => biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)))
-    (roosMap_comm B ι a)
-
-private theorem augmentation_naturality {P P' : CochainComplex (Modules R) ℤ}
-    (a : P ⟶ P') :
-    augmentation B ι P ≫ roosMap B ι a = a ≫ augmentation B ι P' := by
-  ext i : 1
-  change biprod.lift ((unitProduct B ι P).f i) 0 ≫
-    biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)) =
-      a.f i ≫ biprod.lift ((unitProduct B ι P').f i) 0
-  apply biprod.hom_ext
-  · simp only [Category.assoc, biprod.map_fst, biprod.lift_fst_assoc, biprod.lift_fst]
-    have h : unitProduct B ι P ≫ productMap B ι a = a ≫ unitProduct B ι P' := by
-      apply Pi.hom_ext
-      intro n
-      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc,
-        Pi.lift_comp_π]
-      exact ((NatTrans.mapHomologicalComplex
-        (tensorUnit (ι.app (op n))) (.up ℤ)).naturality a).symm
-    exact congrArg (fun f ↦ f.f i) h
-  · simp
 
 -- Elaborating the tensor square and single-complex comparison needs extra heartbeats.
 end SheafOfModules.KFlatRoos

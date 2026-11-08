@@ -200,17 +200,6 @@ noncomputable def WeilComplex.tateTwistShiftCompTateTwistShiftIso (m n a b : ℤ
       (shiftFunctorCompIsoId (WeilComplex k₀ l X) a b hab) ≪≫
     Functor.rightUnitor _ ≪≫ WeilComplex.tateTwistCompTateTwistIso m n hmn
 
-variable (k₀ l X) in
-/-- For `m + n = 0` and `a + b = 0`, the twist-shifts `K ↦ K(m)[a]` and `K ↦ K(n)[b]` are inverse
-autoequivalences of the Weil complexes. -/
-noncomputable def WeilComplex.tateTwistShiftEquiv (m n a b : ℤ) (hmn : m + n = 0)
-    (hab : a + b = 0) : WeilComplex k₀ l X ≌ WeilComplex k₀ l X :=
-  CategoryTheory.Equivalence.mk
-    (WeilComplex.tateTwist k₀ l X m ⋙ shiftFunctor (WeilComplex k₀ l X) a)
-    (WeilComplex.tateTwist k₀ l X n ⋙ shiftFunctor (WeilComplex k₀ l X) b)
-    (WeilComplex.tateTwistShiftCompTateTwistShiftIso k₀ l X m n a b hmn hab).symm
-    (WeilComplex.tateTwistShiftCompTateTwistShiftIso k₀ l X n m b a (by omega) (by omega))
-
 end TensorLisse
 
 attribute [local instance] Compactification.over

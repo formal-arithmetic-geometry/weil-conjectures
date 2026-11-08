@@ -6,7 +6,62 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
-public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicIntrinsicCompletion
+public import Submission.WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicKoszulConstruction
+public import Submission.WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicKoszulCompletion
+public import Submission.WeilConjectures.AlgebraicGeometry.KoszulComplex
+public import Submission.WeilConjectures.AlgebraicGeometry.KoszulDifferential
+public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+public import Submission.WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Submission.WeilConjectures.CategoryTheory.Constant.ConstantModuleKFlat
+import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import Mathlib.CategoryTheory.Localization.Predicate
@@ -341,16 +396,6 @@ def reconstructionReductionComplexCounit (P : CochainComplex (CompletedAdicModul
       DerivedCategory.Q.obj
         (((completedAdicOrdinaryTower T d).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) :=
   (completedAdicReductionData T d).complexCounit P
-
-/-- The strict reduction counit is invertible on every unbounded K-flat model.
-Source: Stacks Tags 06XN and 06YY (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: the K-flat computation clause of completedAdicReduction_exists makes its
-homotopy counit invertible. The other factors are localization isomorphisms. -/
-theorem reconstructionTowerCounit_isIso
-    (P : CochainComplex (CompletedAdicModules T d) ℤ)
-    (hP : CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d) P) :
-    IsIso (reconstructionReductionComplexCounit T d P) := by
-  exact (completedAdicReductionData T d).complexCounit_isIso P hP
 
 /-- The quotient completion unit on one K-flat representative at every tower level.
 Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/

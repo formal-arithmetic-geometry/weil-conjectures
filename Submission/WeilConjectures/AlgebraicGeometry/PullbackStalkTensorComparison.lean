@@ -11,7 +11,6 @@ public import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohom
 
 public import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import Submission.WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import Submission.WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelExtension
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.CategoryTheory.Monoidal.Tor
@@ -127,59 +126,6 @@ noncomputable def tensorToStalk (z : ↥(Limits.pullback f g)) :
   (Algebra.TensorProduct.lift (leftStalkHom f g z) (rightStalkHom f g z)
     (fun _ _ ↦ Commute.all _ _)).toRingHom
 
-/-- The pure-tensor formula for the explicit comparison. Source: Stacks, Tag 08IB.
-Proof: the tensor-product lift is defined on pure tensors by multiplication.
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-theorem tensorToStalk_tmul (z : ↥(Limits.pullback f g)) (a : A f g z) (b : B f g z) :
-    tensorToStalk f g z (a ⊗ₜ[R f g z] b) =
-      ((pullback.fst f g).stalkMap z).hom a * ((pullback.snd f g).stalkMap z).hom b := by
-  rfl
-
-/-- The explicit comparison has the two prescribed restrictions.
-Source: Stacks, Tags 01JX and 08IB.
-Proof: evaluate the lift on a tensor with one factor equal to one, and apply
-preservation of one by the corresponding projection stalk map.
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-theorem tensorToStalk_spec (z : ↥(Limits.pullback f g)) :
-    (tensorToStalk f g z).comp
-        (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
-      ((pullback.fst f g).stalkMap z).hom ∧
-    (tensorToStalk f g z).comp Algebra.TensorProduct.includeRight.toRingHom =
-      ((pullback.snd f g).stalkMap z).hom := by
-  constructor
-  · ext a
-    simp [tensorToStalk, leftStalkHom, rightStalkHom]
-  · ext b
-    simp [tensorToStalk, leftStalkHom, rightStalkHom]
-
-/-- The restrictions uniquely characterize the explicit comparison.
-Source: Stacks, Tag 08IB.
-Proof: tensor-product ring homomorphisms agreeing on both inclusions agree on
-pure tensors, hence on all tensors by additivity.
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-theorem tensorToStalk_unique (z : ↥(Limits.pullback f g))
-    (φ : A f g z ⊗[R f g z] B f g z →+* C f g z)
-    (hleft : φ.comp (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
-      ((pullback.fst f g).stalkMap z).hom)
-    (hright : φ.comp Algebra.TensorProduct.includeRight.toRingHom =
-      ((pullback.snd f g).stalkMap z).hom) : φ = tensorToStalk f g z := by
-  apply Algebra.TensorProduct.ringHom_ext
-  · exact hleft.trans (tensorToStalk_spec f g z).1.symm
-  · exact hright.trans (tensorToStalk_spec f g z).2.symm
-
-/-- The tensor-to-stalk ring map exists with the two prescribed restrictions.
-Source: Stacks, Tag 01JX and Tag 08IB.
-Proof: use the explicit tensor-product lift. On the left inclusion its formula
-is p(a)q(1)=p(a); on the right inclusion it is p(1)q(b)=q(b).
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-theorem exists_tensorToStalk (z : ↥(Limits.pullback f g)) :
-    ∃ φ : A f g z ⊗[R f g z] B f g z →+* C f g z,
-      φ.comp (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
-        ((pullback.fst f g).stalkMap z).hom ∧
-      φ.comp Algebra.TensorProduct.includeRight.toRingHom =
-        ((pullback.snd f g).stalkMap z).hom := by
-  exact ⟨tensorToStalk f g z, tensorToStalk_spec f g z⟩
-
 /-- The pullback stalk is an algebra over the tensor of the two original stalks.
 Source: Stacks, Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
 noncomputable abbrev tensorAlgebra (z : ↥(Limits.pullback f g)) :
@@ -187,82 +133,6 @@ noncomputable abbrev tensorAlgebra (z : ↥(Limits.pullback f g)) :
   (tensorToStalk f g z).toAlgebra
 
 attribute [local instance] tensorAlgebra
-
-/-- Stalkwise Tor independence includes every pair over the same base point,
-not merely a selected family of points in the pullback. The transport identifies
-O_{S,f(x)} with O_{S,g(t)}. Source: Stacks, Tag 08IB
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-noncomputable def IsTorIndependent : Prop :=
-  ∀ (x : X) (t : T) (h : f x = g t),
-    letI := (f.stalkMap x).hom.toAlgebra
-    letI := ((S.presheaf.stalkCongr (.of_eq h)).hom ≫ g.stalkMap t).hom.toAlgebra
-    ∀ i : ℕ, 0 < i →
-      IsZero (((CategoryTheory.Tor' (ModuleCat.{u} (S.presheaf.stalk (f x))) i).obj
-        (ModuleCat.of (S.presheaf.stalk (f x)) (X.presheaf.stalk x))).obj
-          (ModuleCat.of (S.presheaf.stalk (f x)) (T.presheaf.stalk t)))
-
-/-- A representative's stalk complex. Source: Stacks, Tag 0098
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-noncomputable abbrev stalkComplex (z : ↥(Limits.pullback f g))
-    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :=
-  ((RingedSpace.moduleStalkFunctor X.toRingedSpace
-      ((pullback.fst f g) z)).mapHomologicalComplex (.up ℤ)).obj K
-
-/-- The existing algebraic model applied to a representative's stalk.
-Source: Stacks, Tags 08IB and 06Y6
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-noncomputable def cohomologyModel (z : ↥(Limits.pullback f g))
-    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :=
-  letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g z))
-  letI := HasDerivedCategory.standard (ModuleCat.{u} (B f g z))
-  ModuleCat.baseDerivedTensorCohomologyModel (R f g z) (A f g z) (B f g z)
-    (stalkComplex f g z K) (C f g z)
-
-/-- Ordinary scalar extension of a representative's stalk along the canonical
-A -> A tensor-over-R B -> C map. Source: Stacks, Tag 08IB
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-noncomputable def stalkTensorComplex (z : ↥(Limits.pullback f g))
-    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
-    CochainComplex (ModuleCat.{u} (C f g z)) ℤ :=
-  ((ModuleCat.extendScalars ((tensorToStalk f g z).comp
-    (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)))).mapHomologicalComplex
-      (.up ℤ)).obj
-    (((RingedSpace.moduleStalkFunctor X.toRingedSpace
-      ((pullback.fst f g) z)).mapHomologicalComplex (.up ℤ)).obj K)
-
-/-- Invertibility of the canonical stalk comparison, in K-flat coordinates.
-For every K-flat representative K of P, use its stalk Q, the existing derived
-cohomology model T_i = H^i(Q tensor-derived-over-R B), and its specified comparison
-c_i : C tensor-over-(A tensor-over-R B) T_i -> H^i(Q tensor-over-A C).
-The target is identified with the stalk of H^i(Lg_X^*P). Requiring an identification
-and invertibility after EVERY such identification is precisely invertibility of
-c_i under the canonical identification: postcomposition by an isomorphism neither
-creates nor destroys invertibility. This does not quantify over arbitrary maps
-out of T_i; c_i is fixed by the equations of BaseDerivedTensorCohomologyModel.
-K-flat representatives exist, so the universal quantification is not vacuous.
-Source: Stacks, Tags 08IB, 0098 and 06YJ
-(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-noncomputable def IsComparisonIso
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-    [HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings (Limits.pullback f g).toRingedSpace))]
-    (P : schemeDerivedCategory X) (z : ↥(Limits.pullback f g)) : Prop :=
-  letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g z))
-  letI := HasDerivedCategory.standard (ModuleCat.{u} (B f g z))
-  ∀ K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-    K.IsKFlatTensor → Nonempty (DerivedCategory.Q.obj K ≅ P) →
-    ∀ i : ℤ,
-      Nonempty
-        ((stalkTensorComplex f g z K).homology i ≅
-          (RingedSpace.moduleStalkFunctor (Limits.pullback f g).toRingedSpace z).obj
-            ((DerivedCategory.homologyFunctor _ i).obj
-              ((derivedPullback (pullback.fst f g)).obj P))) ∧
-      ∀ e :
-        (stalkTensorComplex f g z K).homology i ≅
-          (RingedSpace.moduleStalkFunctor (Limits.pullback f g).toRingedSpace z).obj
-            ((DerivedCategory.homologyFunctor _ i).obj
-              ((derivedPullback (pullback.fst f g)).obj P)),
-        IsIso ((cohomologyModel f g z K).localizedComparison i ≫ e.hom)
 
 end AlgebraicGeometry.PullbackStalkTensor
 

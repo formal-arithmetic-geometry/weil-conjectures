@@ -174,10 +174,6 @@ noncomputable abbrev fourierTriangle (D : LisseOnDenseOpen k₀ l) :
     Triangle (WeilComplex k₀ l (affineLine k₀)) :=
   (fourierTransform ψ).mapTriangle.obj D.boundaryTriangle
 
-lemma boundaryTriangle_obj₂ (D : LisseOnDenseOpen k₀ l) :
-    D.boundaryTriangle.obj₂ = D.shiftedExtensionByZero :=
-  rfl
-
 lemma fourierTriangle_obj₂ (D : LisseOnDenseOpen k₀ l) :
     (fourierTriangle (ψ := ψ) D).obj₂ = (fourierTransform ψ).obj D.shiftedExtensionByZero :=
   rfl
@@ -375,16 +371,6 @@ theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
     (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse := by
   obtain ⟨B', hB', ⟨eB⟩⟩ := D.exists_isLisse_iso_fourierTransform_boundarySheaf ψ
   exact hB'.of_iso (WeilSheaf.toShiftedComplex.preimageIso (c.isoBoundary.symm ≪≫ eB)).symm
-
-/-- The correction sheaf `B'` has weights at most `w` when `M` is punctually `ι`-pure of weight
-`w`: semicontinuity of weights at the boundary points, together with the weight zero of the
-Artin–Schreier kernel
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_of_iso_fourierTransform`).
-(blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`) -/
-theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
-    {D D' : LisseOnDenseOpen k₀ l} (c : FourierCorrection ψ D D') {w : ℝ}
-    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w :=
-  D.hasWeightsAtMost_of_iso_fourierTransform ψ hw.hasWeightsAtMost c.isoBoundary
 
 end WeilSheaf.LisseOnDenseOpen
 

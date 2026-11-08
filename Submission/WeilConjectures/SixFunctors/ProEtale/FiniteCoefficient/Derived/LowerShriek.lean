@@ -176,12 +176,6 @@ noncomputable def rightDerivedLowerShriekPlus :
 scoped notation "R(" f ")_![" A "]+" =>
   rightDerivedLowerShriekPlus A f
 
-lemma rightDerivedLowerShriek_eq : R(f)_![A] =
-    Rf_!(HasCompactification.compactification f)[A] := rfl
-
-lemma rightDerivedLowerShriekPlus_eq : R(f)_![A]+ =
-    Rf_!(HasCompactification.compactification f)[A]+ := rfl
-
 /-- The bounded below derived lower shriek `Rf_! : D⁺(X_proét) ⥤ D⁺(Y_proét)` is the
 restriction of the unbounded `Rf_! : D(X_proét) ⥤ D(Y_proét)` along the inclusions of the
 bounded below derived categories. -/

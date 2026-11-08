@@ -8,7 +8,7 @@ public import Submission.WeilConjectures.WeilSheaf.SmoothPurityTatePullbackFacto
 public import Submission.WeilConjectures.WeilSheaf.SmoothPurityRationalRootLaw
 public import Submission.WeilConjectures.WeilSheaf.SmoothPurityFrobeniusFactorAlias
 public import Submission.WeilConjectures.WeilSheaf.SmoothPurityCyclotomicField
-public import Submission.WeilConjectures.WeilSheaf.SmoothPurityScalarIsoTransport
+public import Mathlib.CategoryTheory.Preadditive.Basic
 import Submission.WeilConjectures.Tactic.ExactModProofs
 
 set_option autoImplicit true
@@ -41,10 +41,6 @@ local instance : NeZero (ℓ : k) := ⟨by
   exact Fact.out⟩
 local instance : NeZero (ℓ : AlgebraicClosure k) :=
   WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
-
-/-- Pullback from the finite-base model. -/
-noncomputable def purityScalarBasePull :=
-  CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricFiberProj
 
 /-- Frobenius pullback in the scalar interface. -/
 noncomputable def purityScalarFrobeniusPull :=

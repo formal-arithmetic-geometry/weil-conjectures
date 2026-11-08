@@ -43,12 +43,6 @@ attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
 
-/-- Constant coefficients on the small pro-etale site, in the sheaf-value universe.
-Source: strict normalization, paragraph 2; Stacks 00YV
-(auxiliary; not a blueprint node). -/
-abbrev exchangeConstantRing (T : Scheme.{t}) (A : Type (t + 1)) [CommRing A] :=
-  adicLisseConstantRing T A
-
 /-- Inverse image preserves the specific constant-section comparison for every ring.
 Source: Stacks 00VC, 07A7; strict normalization, paragraph 2
 (auxiliary; not a blueprint node).
@@ -95,16 +89,6 @@ theorem exchangeConstantComparison_isIso {U V : Scheme.{t}} (f : U ⟶ V)
     rfl
   rw [he]
   infer_instance
-
-/-- The constant coefficient identification, fixed by the constant-section map.
-Source: strict normalization, paragraph 2; Stacks 00VC
-(auxiliary; not a blueprint node). -/
-def exchangeConstantIso {U V : Scheme.{t}} (f : U ⟶ V)
-    (A : Type (t + 1)) [CommRing A] :
-    (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj (exchangeConstantRing V A) ≅
-      exchangeConstantRing U A :=
-  @asIso _ _ _ _ ((proEtaleConstantComparison f).app (CommRingCat.of A))
-    (exchangeConstantComparison_isIso f A)
 
 variable {U V : Scheme.{t}} (f : U ⟶ V)
   (R : Sheaf (ProEt.topology V) CommRingCat.{t + 1})

@@ -157,14 +157,6 @@ noncomputable def derivedTensorRightCompLeftDerivedUpperStarIso
 
 end
 
-/-- Tensoring with a complex pulled back along `g : Z ⟶ Y`, as a functor of the complex
-downstairs: `N ↦ (K ↦ K ⊗ᴸ g^* N)`. -/
-noncomputable def derivedTensorRightPullback :
-    DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
-      DerivedCategory (Sheaf Z.smallEtaleTopology A) ⥤
-        DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
-  D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
-
 /-- The canonical identification `Lg^* Λ_Y ≅ Λ_Z` of the units, the unit comparison asked for
 in the TODO above.
 
@@ -328,16 +320,6 @@ noncomputable def leftDerivedUpperStarMonoidal : L((g)^*[A]).Monoidal :=
   (Functor.CoreMonoidal.ofOplaxMonoidal _).toMonoidal
 
 end Monoidal
-
-/-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
-products. This is the monoidality of derived pullback in blueprint
-`def-weil-derived-pullback-tensor-hom` (within `det-def-sf-operations`).
-
-The monoidal structure is `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, whose
-tensor comparison is `leftDerivedUpperStarTensorIso`. -/
-theorem nonempty_monoidal_leftDerivedUpperStar [Etale.UpperStarPreservesFlat A] :
-    Nonempty (L((g)^*[A])).Monoidal :=
-  ⟨leftDerivedUpperStarMonoidal A g⟩
 
 end Etale
 

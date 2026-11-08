@@ -171,21 +171,6 @@ noncomputable def shiftMkCore : ShiftMkCore (Algebra F) A where
 noncomputable instance hasShift : HasShift (Algebra F) A :=
   hasShiftMk _ _ (shiftMkCore A F)
 
-@[simp]
-lemma shiftFunctor_eq (a : A) :
-    CategoryTheory.shiftFunctor (Algebra F) a = shiftFunctor A F a :=
-  ShiftMkCore.shiftFunctor_eq _ a
-
-@[simp]
-lemma shiftFunctorZero_eq :
-    CategoryTheory.shiftFunctorZero (Algebra F) A = shiftFunctorZero A F :=
-  ShiftMkCore.shiftFunctorZero_eq _
-
-@[simp]
-lemma shiftFunctorAdd_eq (m n : A) :
-    CategoryTheory.shiftFunctorAdd (Algebra F) m n = shiftFunctorAdd A F m n :=
-  ShiftMkCore.shiftFunctorAdd_eq _ _ _
-
 variable {A F}
 
 @[simp]

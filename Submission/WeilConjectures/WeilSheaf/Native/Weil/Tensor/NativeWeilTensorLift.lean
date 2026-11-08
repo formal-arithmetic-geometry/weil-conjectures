@@ -6,7 +6,79 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
-public import Submission.WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTransposition
+public import Submission.WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForgetTwoInjectiveHom
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Submission.WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedTensorHomModelSupplement
+public import Submission.WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTranspositionData
+import Submission.WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorDescent
+import Submission.WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceRepresentativeEvaluation
+import Submission.WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import Submission.WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
+import Submission.WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
+import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Submission.WeilConjectures.Algebra.Homology.HomComplex
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Submission.WeilConjectures.Algebra.Homology.HomTensorDegreewiseIso
+import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Submission.WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.CategoryTheory.AdjunctionRingOperations
+import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
+import Mathlib.CategoryTheory.Adjunction.Basic
+import Submission.WeilConjectures.CategoryTheory.GeometricModuleConstruction
+import Submission.WeilConjectures.CategoryTheory.RingedToposRingData
+import Submission.WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import Submission.WeilConjectures.CategoryTheory.GeometricModuleTransport
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Submission.WeilConjectures.Algebra.Homology.InternalHom
+import Submission.WeilConjectures.Algebra.Homology.HomComplexComponents
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+import Submission.WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
+import Submission.WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
+import Submission.WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
+import Submission.WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetChainUncurry
+import Submission.WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceEvaluationCoherence
+import Submission.WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceEvaluationTranspose
 public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 import Submission.WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorAdjoints
 import Submission.WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorCoherence

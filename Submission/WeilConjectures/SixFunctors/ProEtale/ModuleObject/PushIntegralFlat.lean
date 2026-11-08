@@ -121,25 +121,6 @@ theorem preservesFiniteLimits_tensorLeft_continuousMapRingObj_of_finiteDimension
   have := preservesMonomorphisms_tensorLeft_continuousMapComparison X E
   exact preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
 
-/-- For a subfield `E` of `ℚ̄_ℓ`, `𝒪_{E,X} = p_X^* 𝒪̲_E` is flat over `ℤ`. -/
-theorem preservesFiniteLimits_tensorLeft_padicIntegersRingObj_of_algebra (E : Type) [Field E]
-    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
-    (X : Scheme.{u}) :
-    PreservesFiniteLimits
-      (tensorLeft (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  let : NormedAlgebra ℚ_[ℓ] E :=
-    { norm_smul_le c x := by
-        change ‖algebraMap E (PadicAlgCl ℓ) (c • x)‖ ≤
-          ‖c‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
-        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
-          PadicAlgCl.norm_extends] }
-  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
-  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[ℓ] E).injective
-  have : IsAddTorsionFree E := inferInstance
-  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X (PadicAlgCl.integers ℓ E)
-  exact preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
-
 end CondensedRing
 
 end AlgebraicGeometry.ProEtale

@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.WeilSheaf.TraceSeries
+public import Submission.WeilConjectures.WeilSheaf.Cohomology
+public import Submission.WeilConjectures.WeilSheaf.Constant
+public import Submission.WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries
 public import Submission.WeilConjectures.ZetaFunction.TraceFormula
 public import Submission.WeilConjectures.ZetaLinearAlgebra.TraceDatum
 

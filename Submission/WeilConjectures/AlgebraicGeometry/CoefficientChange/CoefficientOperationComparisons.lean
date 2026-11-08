@@ -42,18 +42,8 @@ set_option hygiene false in
 local notation "DP(" X ", " A ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
 
-/-- The fixed left adjoint of derived coefficient restriction on the small étale site. -/
-noncomputable abbrev etaleExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) (X : Scheme.{u}) : DE(X, A) ⥤ DE(X, B) :=
-  ProEtale.pbcFixedScalarExtension X.smallEtaleTopology φ
-
 /-- The principal quotient coefficient map. -/
 abbrev quotient (A : Type (u + 1)) [CommRing A] (a : A) (n : ℕ) :=
   Ideal.Quotient.mk (Ideal.span {a} ^ n)
-
-/-- Compact support for a specified compactification, with generic coefficient instances. -/
-noncomputable abbrev proCompact (A : Type (u + 1)) [CommRing A]
-    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : DP(X, A) ⥤ DP(Y, A) :=
-  ProEtale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
 
 end AlgebraicGeometry.CoefficientChange

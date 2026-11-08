@@ -11,7 +11,8 @@ public import Submission.WeilConjectures.EulerProductAux
 public import Submission.WeilConjectures.Mathlib.Algebra.Polynomial.Splits
 public import Submission.WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import Submission.WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
-public import Submission.WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
+public import Mathlib.RingTheory.PowerSeries.Log
+public import Mathlib.Tactic.LinearCombination
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -263,15 +264,6 @@ theorem coeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     rw [PowerSeries.coeff_smul, coeff_traceSeries, ite_eq_right hn, zsmul_eq_mul, zsmul_eq_mul,
       div_eq_mul_inv, mul_assoc]
-
-omit [∀ i, FiniteDimensional K (W i)] in
-/-- The alternating trace series has no constant term: it lies in `T K⟦T⟧` (blueprint:
-`def-zl-frobenius-trace-series`). -/
-@[simp]
-theorem constantCoeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) :
-    PowerSeries.constantCoeff (alternatingTraceSeries s F) = 0 := by
-  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_alternatingTraceSeries,
-    ite_eq_left rfl]
 
 /-- The alternating determinant
 

@@ -5,7 +5,23 @@ Authors: Christian Merten
 -/
 module
 
-public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy
+public import Mathlib.RingTheory.MvPolynomial.Localization
+public import Submission.WeilConjectures.Blowup.Affine.Functoriality
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.AffineSpace
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.ChartPreimage
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.Closedness
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.CommonDenominator
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.Coordinates
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.Gluing
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.GraphClosedness
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.Lift
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffine
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffineHom
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.Slope
+public import Submission.WeilConjectures.Blowup.EliminationOfIndeterminacy.ZeroLocus
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import Submission.WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import Submission.WeilConjectures.Mathlib.Topology.Constructions
 

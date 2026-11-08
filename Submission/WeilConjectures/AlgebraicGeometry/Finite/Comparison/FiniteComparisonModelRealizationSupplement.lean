@@ -6,21 +6,25 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
-public import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
-public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LocalSite
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Topology.Constructible
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Submission.WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
+public import Submission.WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
@@ -85,7 +89,12 @@ public import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleProEtale
 public import Submission.WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
-public import Submission.WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicFiniteOperations
+public import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantDerivedDirectImage
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import Submission.WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
 import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
@@ -100,11 +109,9 @@ import Mathlib.Algebra.Category.Ring.Adjunctions
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonData
 import Submission.WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
-import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
 import Submission.WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
-import Submission.WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 import Mathlib.CategoryTheory.Sites.LocalSite
@@ -114,7 +121,6 @@ import Mathlib.Topology.Constructible
 import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Submission.WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
@@ -174,7 +180,6 @@ import Submission.WeilConjectures.CategoryTheory.ConstantCoefficientScalarExtens
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRings
 import Submission.WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPackageSupplement
-import Submission.WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 import Submission.WeilConjectures.CategoryTheory.ModuleInverseImageUnitComparison
 import Submission.WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
 import Mathlib.CategoryTheory.Sites.Pullback
@@ -242,25 +247,6 @@ private def ringRestriction : ConstantCompletion.Mod (ConstantCompletion.constan
     SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of A)) :=
   SheafOfModules.restrictScalars (coefficientRingIso J A).inv
 
-private theorem ringRestriction_equivalence : (ringRestriction J A).IsEquivalence := by
-  let eC : C ≌ C := Equivalence.refl
-  let : eC.functor.IsContinuous J J := inferInstanceAs (Functor.IsContinuous (𝟭 C) J J)
-  let : eC.inverse.IsContinuous J J := inferInstanceAs (Functor.IsContinuous (𝟭 C) J J)
-  let c := (coefficientRingIso J A).symm
-  let e := SheafOfModules.pushforwardPushforwardEquivalence.{u}
-    (J := J) (K := J) eC c.hom c.inv
-    (by
-      ext U x
-      dsimp [eC, Equivalence.refl]
-      simp only [Functor.map_id]
-      exact congrArg (fun f ↦ f.hom.app U x) c.inv_hom_id.symm)
-    (by
-      ext U x
-      dsimp [eC, Equivalence.refl]
-      simp only [Functor.map_id]
-      exact congrArg (fun f ↦ f.hom.app U x) c.hom_inv_id)
-  exact e.isEquivalence_functor
-
 private theorem coefficientRingIso_unit :
     SheafOfModules.constantCoefficientUnit J A ≫ (coefficientRingIso J A).hom.hom =
       toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of A)) := by
@@ -287,20 +273,6 @@ private theorem restriction_smul (M : ConstantCompletion.Mod (ConstantCompletion
       (SheafOfModules.constantCoefficientUnit J A).app V a • x
   erw [← h]
   exact congrArg (fun b ↦ b • x) (ConcreteCategory.congr_hom hi _)
-
-private def restrictionIso :
-    ringRestriction J A ⋙ constantRingModuleRestriction J A ≅ coefficientModelFixedScalars J A := by
-  refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _
-    (NatIso.ofComponents (fun V ↦ ?_) ?_)) ?_
-  · exact ModuleCat.isoMk (Iso.refl _) (fun a ↦ by
-      ext x
-      exact (restriction_smul J A M V a x).symm)
-  · intro V W f
-    ext x
-    rfl
-  · intro M N f
-    ext V x
-    rfl
 
 end ConstantScalars
 end CategoryTheory

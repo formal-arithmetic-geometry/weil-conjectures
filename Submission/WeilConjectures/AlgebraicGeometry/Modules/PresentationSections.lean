@@ -51,18 +51,6 @@ lemma pullbackΓ_smul_appTop (g : Y ⟶ X) (M : X.Modules) (r : Γ(X, ⊤)) (m :
   rw [pullbackΓ_apply, pullbackΓ_apply]
   exact Hom.app_smul _ r m
 
-/-- The pullback of a linear combination of global sections is the linear combination of the
-pullbacks, with coefficients pulled back along `g.appTop`. -/
-lemma pullbackΓ_linearCombination (g : Y ⟶ X) (M : X.Modules) {G : Type*} (v : G → Γ(M, ⊤))
-    (a : G →₀ Γ(X, ⊤)) :
-    pullbackΓ g M (Finsupp.linearCombination Γ(X, ⊤) v a) =
-      Finsupp.linearCombination Γ(Y, ⊤) (fun i ↦ pullbackΓ g M (v i))
-        (Finsupp.mapRange g.appTop.hom (map_zero _) a) := by
-  induction a using Finsupp.induction_linear with
-  | zero => simp
-  | add a b ha hb => rw [Finsupp.mapRange_add (map_add _), map_add, map_add, map_add, ha, hb]
-  | single i r => simp [pullbackΓ_smul_appTop]
-
 /-- **Presentations of the global sections of a pullback, affine case.** If `s` presents the
 global sections of a quasi-coherent module `N` on an affine scheme `Z` by relations `ρ`, and
 `g : Y ⟶ Z` is a morphism from an affine scheme, then the pullbacks of the generators present the
@@ -91,13 +79,6 @@ theorem exists_isPresentation_pullbackΓ [IsAffine Y] [IsAffine Z] (g : Y ⟶ Z)
 
 variable [IsAffine Y] {M N : Y.Modules} [M.IsQuasicoherent]
   {ρ : Relations.{w₀, w₁} Γ(Y, ⊤)} {s : ρ.Solution Γ(M, ⊤)}
-
-omit [IsAffine Y] [M.IsQuasicoherent] in
-/-- A morphism `M ⟶ N`, on global sections, is a solution of the relations presenting
-`Γ(M, ⊤)`. -/
-lemma postcomp_appₗ_var (φ : M ⟶ N) (i : ρ.G) :
-    (s.postcomp (Hom.appₗ φ ⊤)).var i = φ.app ⊤ (s.var i) :=
-  rfl
 
 /-- Morphisms out of a quasi-coherent module on an affine scheme whose global sections are
 presented by `s` agree if they agree on the generators `s.var i`. -/

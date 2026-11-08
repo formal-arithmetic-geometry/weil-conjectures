@@ -10,7 +10,21 @@ public import Submission.WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTr
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
-public import Submission.WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Ab
+public import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Submission.WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import Submission.WeilConjectures.ConstructibleSheaf.Pullback
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import Submission.WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
@@ -73,23 +87,6 @@ functors `D((h)^*⟦Λ⟧)` since the pullback on module objects is exact.
 
 @[expose] public section
 
-open CategoryTheory in
-private lemma triple_app {C D : Type*} [Category C] [Category D]
-    {F G H I : C ⥤ D} (p : F ≅ G) (r : F ≅ H) (q : H ≅ I) (K : C) :
-    (p.symm ≪≫ r ≪≫ q).app K = (p.app K).symm ≪≫ r.app K ≪≫ q.app K := rfl
-
-open CategoryTheory in
-/-- The adjunct formula `Adjunction.squareExchange_map_counit`, for a transformation `β` known to
-be equal to the square exchange. Applying it to an equation `β = Adjunction.squareExchange ...`
-keeps the kernel from unfolding the six functors `β` is built from. -/
-lemma CategoryTheory.Adjunction.squareExchange_map_counit_of_eq {C D C' D' : Type*} [Category C]
-    [Category D] [Category C'] [Category D'] {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
-    (a : L ⊣ R) (b : L' ⊣ R') (G : C ⥤ C') (H : D ⥤ D') (θ : G ⋙ L' ≅ L ⋙ H)
-    {β : R ⋙ G ⟶ H ⋙ R'} (h : β = Adjunction.squareExchange a b G H θ) (N : D) :
-    L'.map (β.app N) ≫ b.counit.app (H.obj N) = θ.hom.app (R.obj N) ≫ H.map (a.counit.app N) := by
-  subst h
-  exact Adjunction.squareExchange_map_counit a b G H θ N
-
 universe u
 
 open scoped CategoryTheory.Obj
@@ -125,18 +122,6 @@ noncomputable def boundedConstructiblePullbackSquareComparison (sq : CommSq g' f
       boundedConstructibleUpperStar Λ ℓ f ⋙ boundedConstructibleUpperStar Λ ℓ g' :=
   (boundedConstructibleUpperStarComp Λ ℓ f' g).symm ≪≫
     eqToIso (by simp only [sq.w]) ≪≫ boundedConstructibleUpperStarComp Λ ℓ g' f
-
-/-- Component of the pullback-square comparison, before taking its forward map. -/
-lemma boundedConstructiblePullbackSquareComparison_app (sq : CommSq g' f' f g)
-    (K : ProEtale.BoundedConstructible (condensedRingObj Λ Y.left)) :
-    (boundedConstructiblePullbackSquareComparison Λ ℓ sq).app K =
-      ((boundedConstructibleUpperStarComp Λ ℓ f' g).app K).symm ≪≫
-        (eqToIso (by simp only [sq.w]) :
-          boundedConstructibleUpperStar Λ ℓ (f' ≫ g) ≅
-            boundedConstructibleUpperStar Λ ℓ (g' ≫ f)).app K ≪≫
-        (boundedConstructibleUpperStarComp Λ ℓ g' f).app K := by
-  exact triple_app (boundedConstructibleUpperStarComp Λ ℓ f' g)
-    (eqToIso (by simp only [sq.w])) (boundedConstructibleUpperStarComp Λ ℓ g' f) K
 
 end PullbackComparison
 
@@ -216,33 +201,6 @@ noncomputable irreducible_def boundedConstructibleBaseChange (sq : CommSq g' f' 
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g' ⋙
         boundedConstructibleLowerStar ℓ f' :=
   boundedConstructibleBaseChangeImpl ℓ sq
-
-variable {f g f' g'} in
-/-- The adjunct presentation is the specified unit--square--counit exchange map. -/
-theorem boundedConstructibleBaseChange_eq_unit_square_counit (sq : CommSq g' f' f g) :
-    boundedConstructibleBaseChange ℓ sq =
-      boundedConstructibleBaseChangeUnitStep ℓ f g f' ≫
-        (boundedConstructibleBaseChangeSquareStep ℓ sq).hom ≫
-          boundedConstructibleBaseChangeCounitStep ℓ f f' g' :=
-  boundedConstructibleBaseChange_def ℓ sq
-
-variable {f g f' g'} in
-/-- The restricted exchange is the canonical adjunct presentation. -/
-theorem boundedConstructibleBaseChange_eq_squareExchange (sq : CommSq g' f' f g) :
-    boundedConstructibleBaseChange ℓ sq =
-      Adjunction.squareExchange
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
-        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
-        (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq) := by
-  refine (boundedConstructibleBaseChange_eq_unit_square_counit ℓ sq).trans ?_
-  exact (Adjunction.squareExchange_eq_unit_square_counit
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g')
-    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)).symm
 
 -- Match the restricted functors without expanding their derived implementations.
 attribute [local irreducible] boundedConstructibleUpperStar boundedConstructibleLowerStar
@@ -346,20 +304,6 @@ noncomputable irreducible_def boundedConstructibleBaseChange (sq : CommSq g' f' 
       boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g' ⋙
         boundedConstructibleLowerStar ℓ E f' :=
   boundedConstructibleBaseChangeImpl ℓ E sq
-
-variable {f g f' g'} in
-/-- The base-change morphism `BC_sq` is the canonical adjunct presentation
-`Adjunction.squareExchange` of the pullback comparison `θ_sq` (`E`-coefficient). -/
-theorem boundedConstructibleBaseChange_eq_squareExchange (sq : CommSq g' f' f g) :
-    boundedConstructibleBaseChange ℓ E sq =
-      Adjunction.squareExchange
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f)
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
-        (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g)
-        (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g')
-        (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ sq) :=
-  (boundedConstructibleBaseChange_def ℓ E sq).trans
-    (Adjunction.squareExchange_eq_unit_square_counit _ _ _ _ _).symm
 
 variable {f g f' g'} in
 /-- The base-change morphism `BC_sq` is the exchange morphism

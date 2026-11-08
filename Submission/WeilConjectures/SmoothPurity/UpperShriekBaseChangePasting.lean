@@ -161,33 +161,6 @@ theorem isIso_upperShriekBaseChange_paste_horiz (sq₁ : IsPullback g'₁ f₁ f
   rw [upperShriekBaseChange_paste_horiz ℓ sq₁ sq₂ L]
   infer_instance
 
-/-- **Cancellation of base changes on the left**: if `Rf₂^!` commutes with base change along `g₁`
-at `Lg₂^* L` and `Rf^!` commutes with base change along `g₁ ≫ g₂` at `L`, then `Lg'₁^*` inverts
-the exceptional base change map of `g₂` at `L`. -/
-theorem isIso_upperStar_map_upperShriekBaseChange_of_paste_horiz
-    (sq₁ : IsPullback g'₁ f₁ f₂ g₁) (sq₂ : IsPullback g'₂ f₂ f g₂)
-    (L : Dᵇc(Y₃.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    [IsIso (upperShriekBaseChange ℓ sq₁
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g₂).obj L))]
-    (h : IsIso (upperShriekBaseChange ℓ (sq₁.paste_horiz sq₂) L)) :
-    IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'₁).map
-      (upperShriekBaseChange ℓ sq₂ L)) := by
-  rwa [upperShriekBaseChange_paste_horiz ℓ sq₁ sq₂ L, isIso_comp_left_iff,
-    isIso_comp_right_iff] at h
-
-/-- **Cancellation of base changes on the right**: if `Lg'₁^*` inverts the exceptional base change
-map of `g₂` at `L` and `Rf^!` commutes with base change along `g₁ ≫ g₂` at `L`, then `Rf₂^!`
-commutes with base change along `g₁` at `Lg₂^* L`. -/
-theorem isIso_upperShriekBaseChange_of_paste_horiz (sq₁ : IsPullback g'₁ f₁ f₂ g₁)
-    (sq₂ : IsPullback g'₂ f₂ f g₂) (L : Dᵇc(Y₃.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    [IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g'₁).map
-      (upperShriekBaseChange ℓ sq₂ L))]
-    (h : IsIso (upperShriekBaseChange ℓ (sq₁.paste_horiz sq₂) L)) :
-    IsIso (upperShriekBaseChange ℓ sq₁
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g₂).obj L)) := by
-  rwa [upperShriekBaseChange_paste_horiz ℓ sq₁ sq₂ L, isIso_comp_left_iff, isIso_comp_left_iff,
-    isIso_comp_right_iff] at h
-
 end Pasting
 
 section Invariance
@@ -244,45 +217,6 @@ theorem isIso_upperShriekBaseChange_iff_of_isPullback_of_eq {f₁ f₂ : X ⟶ Y
     IsIso (upperShriekBaseChange ℓ sq₁ L) ↔ IsIso (upperShriekBaseChange ℓ sq₂ L) := by
   subst hf
   exact isIso_upperShriekBaseChange_iff_of_isPullback ℓ sq₁ sq₂ L
-
-/-- **Smooth base change for `Rf^!` along an immersion**: for a cartesian square
-`g' ≫ f = f' ≫ g` with `f` smooth and `g` an immersion, the exceptional base change map
-`Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an isomorphism. The immersion is a closed immersion into an open
-subscheme `W` of `Y` (`Scheme.Hom.liftCoborder`), and the base change map along it is pasted from
-those along the open immersion `W ⟶ Y` (`isIso_upperShriekBaseChange_of_isOpenImmersion_right`)
-and along the closed immersion
-(`isIso_upperShriekBaseChange_of_smooth_of_isClosedImmersion`). -/
-theorem isIso_upperShriekBaseChange_of_isImmersion {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-    (sq : IsPullback g' f' f g) [Smooth f.left] [IsImmersion g.left]
-    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (upperShriekBaseChange ℓ sq L) := by
-  let j := overRestrictι Y g.left.coborderRange
-  let i : Y' ⟶ overRestrict Y g.left.coborderRange :=
-    Over.homMk g.left.liftCoborder (by
-      simp only [Over.mk_hom, ← Category.assoc, Scheme.Hom.liftCoborder_ι]
-      exact Over.w g)
-  have hij : i ≫ j = g := by
-    ext1
-    exact g.left.liftCoborder_ι
-  have sq₂ := IsPullback.of_hasPullback f j
-  let g'₁ : X' ⟶ pullback f j :=
-    pullback.lift g' (f' ≫ i) (by rw [sq.w, Category.assoc, hij])
-  have sq₁ : IsPullback g'₁ f' (pullback.snd f j) i := by
-    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) sq₂
-    rw [pullback.lift_fst, hij]
-    exact sq
-  have : Smooth (pullback.snd f j).left := by
-    have hsq₂ := sq₂.map (Over.forget _)
-    simp only [Over.forget_map] at hsq₂
-    exact MorphismProperty.of_isPullback hsq₂ inferInstance
-  have : IsClosedImmersion i.left :=
-    inferInstanceAs (IsClosedImmersion g.left.liftCoborder)
-  have := isIso_upperShriekBaseChange_of_isOpenImmersion_right ℓ sq₂ L
-  have := isIso_upperShriekBaseChange_of_smooth_of_isClosedImmersion ℓ sq₁
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L)
-  have := isIso_upperShriekBaseChange_paste_horiz ℓ sq₁ sq₂ L
-  exact (isIso_upperShriekBaseChange_iff_of_eq ℓ (sq₁.paste_horiz sq₂) sq
-    (pullback.lift_fst _ _ _) hij L).1 this
 
 end Invariance
 

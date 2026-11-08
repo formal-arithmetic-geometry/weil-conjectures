@@ -8,8 +8,17 @@ module
 public import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
 import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Submission.WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
-import Submission.WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroExact
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.Topology.Sheaves.Functors
+import Mathlib.Topology.Sheaves.Abelian
+import Mathlib.Topology.Sheaves.SheafCondition.Sites
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.CategoryTheory.Sites.Abelian
+import Submission.WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

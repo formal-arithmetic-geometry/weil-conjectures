@@ -341,18 +341,6 @@ variable {C' : Type w} [Category.{v} C'] {C : Type w} [Category.{v} C] {F : C' �
   [∀ j, PreservesFiniteProducts (Over.post F (X := pV.diag.obj j))]
   (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
 
-/-- The map from the Čech cochains of `F.op ⋙ P` for the stage `αⱼ` to the Čech cochains of
-`P` for the limit morphism, induced by the projections `limitNerveLeg`. -/
-noncomputable def stageCochainMap (j : J) (k : ℕ) :
-    CechCochain (stageFamily h j) (F.op ⋙ P) k →+ CechCochain (limitFamily h) P k :=
-  AddMonoidHom.pi fun y ↦ (P.map (limitNerveLeg h j y).op).hom.comp (Pi.evalAddMonoidHom _ y)
-
-
-/-- The transition map between the Čech cochains of `F.op ⋙ P` for two stages. -/
-noncomputable def stageTransitionCochainMap {i j : J} (g : i ⟶ j) (k : ℕ) :
-    CechCochain (stageFamily h j) (F.op ⋙ P) k →+ CechCochain (stageFamily h i) (F.op ⋙ P) k :=
-  AddMonoidHom.pi fun y ↦
-    (P.map (F.map (stageNerveMap h g y)).op).hom.comp (Pi.evalAddMonoidHom _ y)
 
 
 variable [IsCofiltered J]

@@ -77,13 +77,6 @@ noncomputable def smulEnd (P : C) (n : ℕ) : A →+* AddMonoid.End (Ext P F n) 
 noncomputable instance (P : C) (n : ℕ) : Module A (WithAction ρ P n) :=
   Module.compHom (Ext P F n) (smulEnd ρ P n)
 
-/-- The identification of `WithAction ρ P n` with `Ext P F n`. -/
-noncomputable def toExt {P : C} {n : ℕ} : WithAction ρ P n ≃+ Ext P F n := AddEquiv.refl _
-
-lemma toExt_smul {P : C} {n : ℕ} (a : A) (x : WithAction ρ P n) :
-    toExt ρ (a • x) = (toExt ρ x).comp (mk₀ (ρ a)) (add_zero n) :=
-  rfl
-
 end WithAction
 
 end Action

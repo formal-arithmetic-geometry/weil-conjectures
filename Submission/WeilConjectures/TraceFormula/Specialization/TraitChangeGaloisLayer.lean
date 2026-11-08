@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Submission.WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
+public import Submission.WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.FieldTower
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginUpperStar
 public import Submission.WeilConjectures.SixFunctors.NearbyCycles.CartesianModelUnit
 public import Submission.WeilConjectures.TraceFormula.Specialization.TraitTensorCompositum
 
@@ -207,12 +209,6 @@ theorem traitChangeInsepMap_comp_traitChangeGaloisMap_comp
     φ.traitChangeInsepMap Ω q g q₁ g₁ hN hq hM hg ≫ φ.traitChangeGaloisMap Ω q q₁ g₁ hN hq ≫
       φ.traitChangeThickening Ω q q₁ g₁ hN hq = φ.toCartesian.generic := by
   simp [traitChangeInsepMap, traitChangeGaloisMap, traitChangeThickening]
-
-/-- The Galois part `q` is the base change of `Spec L^sep ⟶ Spec L` along `Z₂ ⟶ Spec L`. -/
-theorem isPullback_traitChangeGaloisMap :
-    IsPullback (φ.traitChangeGaloisMap Ω q q₁ g₁ hN hq) (pullback.snd _ _)
-      (φ.traitChangeResidue Ω q q₁ g₁ hN hq) (traitTensorCompositumGalois R Ω₁ Ω) :=
-  IsPullback.of_hasPullback _ _
 
 /-- The thickening `r₂` is a universal homeomorphism when `T` is a single point. -/
 instance [Subsingleton (PrimeSpectrum (Ω₁ ⊗[R₁] R))] :

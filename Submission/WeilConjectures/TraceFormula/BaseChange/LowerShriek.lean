@@ -18,7 +18,7 @@ public import Submission.WeilConjectures.TraceFormula.BaseChange.WeilObject
 public import Submission.WeilConjectures.TraceFormula.BaseChangeCoherence
 public import Submission.WeilConjectures.TraceFormula.CompactCohomology
 public import Submission.WeilConjectures.TraceFormula.HomologyWeilLowerStar
-public import Submission.WeilConjectures.TraceFormula.RelativeFrobenius
+public import Submission.WeilConjectures.TraceFormula.Frobenius
 public import Submission.WeilConjectures.TraceFormula.RelativeFrobeniusProper
 
 set_option autoImplicit true

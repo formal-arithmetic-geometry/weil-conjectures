@@ -8,7 +8,12 @@ public import Submission.WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
 public import Submission.WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
 public import Submission.WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange
 public import Submission.WeilConjectures.AlgebraicGeometry.ProperSupportSheafComposition
-public import Submission.WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison
+public import Submission.WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import Submission.WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import Submission.WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import Submission.WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import Submission.WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 public import Submission.WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 public import Submission.WeilConjectures.Compactification.Refinement
@@ -30,7 +35,15 @@ import Submission.WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
 import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Submission.WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleConstruction
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Submission.WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import Submission.WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Submission.WeilConjectures.AlgebraicGeometry.OpenExtensionProperSupportRange
@@ -60,9 +73,15 @@ import Submission.WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExa
 import Submission.WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
 import Submission.WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-import Submission.WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusAdjunction
+import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
+import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
+import Submission.WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 import Submission.WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
-import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
@@ -96,32 +115,6 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   canonicalEtaleCompactSupportComparison derivedEtaleLowerShriekUpperStarAdjunction
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso
   unboundedEtaleCompactSupportBaseChange exactEtaleSumExchange
-
-/-- The specified compact-support-to-sum identification for the chosen compactification.
-Source: Stacks Tags 0F4L, 0F7J, and the blueprint Step 1
-(auxiliary; not a blueprint node). -/
-noncomputable def etaleSumSupportIso
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
-    [HasCompactification e] :
-    rightDerivedLowerShriek (ModuleCat.{u + 1} A) e ≅
-      (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory :=
-  (rightDerivedLowerShriekIso A (HasCompactification.compactification e)).symm ≪≫
-    canonicalEtaleCompactSupportComparison A e (HasCompactification.compactification e)
-
-/-- The normalization rho is the adjunction conjugate of the inverse specified comparison.
-Source: blueprint Step 1; Stacks Tags 0037 and 03S6
-(auxiliary; not a blueprint node). -/
-noncomputable def etaleSumRightAdjointIso
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
-    [HasCompactification e]
-    (G : DerivedCategoryModule A X ⥤ DerivedCategoryModule A U)
-    (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A) e ⊣ G) :
-    G ≅ (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory :=
-  conjugateIsoEquiv adj
-    (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance)
-    (etaleSumSupportIso A e).symm
 
 /-- The canonical pullback identification of the coefficient unit, in the exact derived model.
 Source: blueprint Step 1, pullback-unit identification

@@ -82,10 +82,6 @@ def isRefinementHomotopic {U V : FiniteSplitEtaleHypercover X}
   Relation.EqvGen (fun a b : U.Refinement V ↦ Nonempty (SimplicialObject.Homotopy a b)) f g
 
 /-- def-weil-pbc-finite-split-hypercover. -/
-def RefinementClasses (U V : FiniteSplitEtaleHypercover X) :=
-  Quot (fun a b : U.Refinement V ↦ Nonempty (SimplicialObject.Homotopy a b))
-
-/-- def-weil-pbc-finite-split-hypercover. -/
 def truncation (U : FiniteSplitEtaleHypercover X) (r : ℕ) :=
   ((SimplicialObject.truncation r).obj U.simplicial,
     fun n : Fin (r + 1) ↦

@@ -12,7 +12,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Submission.WeilConjectures.RingTheory.LocalTensorQuotientPowerBound
 import Submission.WeilConjectures.RingTheory.LocalTensorQuotientBaseIdealDetection
-import Submission.WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

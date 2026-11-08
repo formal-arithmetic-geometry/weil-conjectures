@@ -159,15 +159,6 @@ private structure LiftedConstantTransition where
       ((directCoefficientIso α β (RingHom.ulift q) p h).hom.app
         ((finitePerfectAdicScalarModelLift D).obj N)).val.app Z x
 
-private lemma liftedConstantTransition_forget
-    (z : LiftedConstantTransition q α β p h a c) (N : ModuleCat.{t} D) :
-    (SheafOfModules.toSheaf T).map (z.iso.hom.app N) =
-      (SheafOfModules.toSheaf R).map
-        ((directCoefficientIso α β (RingHom.ulift q) p h).hom.app
-          ((finitePerfectAdicScalarModelLift D).obj N)) := by
-  ext Z x
-  exact z.coefficient N Z x
-
 private def liftedConstantTransition : LiftedConstantTransition q α β p h a c where
   iso := liftedProjectedIso q α β p h a c hw
   unit := liftedProjectedIso_unit q α β p h a c hw
@@ -217,11 +208,5 @@ private def finiteTransition
     (finiteProjection_step X d n)
 
 attribute [local irreducible] finiteTransition
-
-private def directFiniteStep
-    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
-    ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc d.ideal (n + 1)) ⋙
-        directFinite X d (n + 1) ≅ directFinite X d n := by
-  exact (finiteTransition X d n).iso
 
 end AlgebraicGeometry.Scheme

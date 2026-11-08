@@ -37,15 +37,6 @@ def lisseTowerNormalizedScalarSquare {X Z : Scheme.{u}} (g : Z ⟶ X)
     LisseTowerScalarSquare g d n :=
   (lisseTower_scalar_restriction g d n).exists.choose
 
-/-- The chosen square has the section normalization, independent of any tower.
-Source: Stacks Tags 03CY and 03DA
-(blueprint: lem-weil-pbc-lisse-tower-pulled-scalar).
-Proof: the square is the witness of the unique normalized-square theorem. -/
-theorem lisseTowerNormalizedScalarSquare_sections {X Z : Scheme.{u}} (g : Z ⟶ X)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
-    LisseTowerScalarSquareSections g d n (lisseTowerNormalizedScalarSquare g d n) :=
-  (lisseTower_scalar_restriction g d n).exists.choose_spec.1
-
 /-- Localize the fixed-realization square without an etale comparison functor.
 Source: Stacks Tags 03DA and 05RU
 (blueprint: lem-weil-pbc-lisse-tower-pulled-scalar). -/

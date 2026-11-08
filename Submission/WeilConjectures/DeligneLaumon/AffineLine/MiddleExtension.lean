@@ -110,14 +110,6 @@ theorem isFourierNonexceptional_of_isNonexceptional (hD : D.sheaf.IsIrreducibleL
   ⟨fun hc ↦ h 0 (D.hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant ψ hD.2.1 hc),
     fun a ha ↦ h a ha.2⟩
 
-/-- **For geometrically irreducible sheaves the two notions coincide.** If `M_k̄` is
-irreducible, its only geometric constituent is `M_k̄` itself, so a constituent `ℒ_{ψ(a x)}|_U`
-would be isomorphic to `M_k̄`. (blueprint: `lem-a1-constituent-nonexceptional-comparison`) -/
-theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
-    (hirr : D.sheaf.IsGeometricallyIrreducible) :
-    D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
-  ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
-
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
 `a ≠ 0`: on the punctured disc at `∞` the sheaf becomes constant, so such a constituent would be
 a subquotient of a constant sheaf there, while the inertia group at `∞` acts on `ℒ_{ψ(a x)}`

@@ -406,27 +406,6 @@ variable {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- The direct image with compact support `Rf₀!` of Weil complexes is computed by any
-factorization `f = i ≫ g` of `f` into an open immersion `i` followed by a proper morphism `g`
-of `k₀`-schemes: `Rf₀! ≅ Rg_* ∘ i_!` (`prop-functor-package`, clause 2). -/
-theorem WeilComplex.nonempty_derivedLowerShriek_comp_ι_iso [hZ : Z.Over (Spec (CommRingCat.of k₀))]
-    (i : X ⟶ Z) (g : Z ⟶ Y) [IsOpenImmersion i] [IsProper g]
-    [i.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
-    (h : f = i ≫ g) :
-    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ⋙ (WeilComplex.objectProperty k₀ l Y).ι ≅
-      (WeilComplex.objectProperty k₀ l X).ι ⋙
-        (ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory ⋙
-          (ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor) := by
-  let c : Compactification f := ⟨Z, g, i, h, inferInstance, inferInstance⟩
-  have e : hZ = Compactification.over (k₀ := k₀) c := by
-    have hg := comp_over g (Spec (CommRingCat.of k₀))
-    revert hg
-    cases hZ
-    intro hg
-    exact congrArg OverClass.ofHom hg.symm
-  subst e
-  exact ⟨WeilComplex.derivedLowerShriekCompιIso k₀ l c⟩
-
 end Flexible
 
 section OpenImmersion
@@ -460,30 +439,9 @@ instance WeilComplex.isIso_extensionByZeroUpperStarAdjunction_unit :
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The direct image with compact support along an open immersion is the extension by zero**
-(`prop-functor-package`, clause 2, for the compactification `U ⟶[j] X ⟶[𝟙] X`):
-`Rj₀! ≅ j_!` on Weil complexes. -/
-theorem WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero :
-    Nonempty (WeilComplex.derivedLowerShriek k₀ l j ≅ WeilComplex.extensionByZero j) := by
-  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := j) j
-    (𝟙 X) (Category.comp_id j).symm
-  exact ⟨((WeilComplex.objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
-    (e ≪≫ Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
-      (ProEtaleWeilSheaf.rightDerivedLowerStarIdIso k₀ l X) ≪≫ Functor.rightUnitor _) ≪≫
-      (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm)⟩
-
 end OpenImmersion
 
 section BaseChange
-
-variable (k₀ l) in
-/-- Pullbacks of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
-noncomputable def ProEtaleWeilSheaf.upperStarCongr {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y}
-    [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
-    ProEtaleWeilSheaf.upperStar k₀ l φ ≅ ProEtaleWeilSheaf.upperStar k₀ l φ' := by
-  subst h
-  exact Iso.refl _
 
 end BaseChange
 

@@ -148,19 +148,9 @@ section Simp
 
 variable {a₁ b₁}
 
-lemma sliceTraitOfStrictLocalization_R :
-    (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).R =
-      strictHenselization (sliceTraitPoint b₁) :=
-  rfl
-
 lemma sliceTraitOfStrictLocalization_toAffineLine :
     (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).toAffineLine =
       strictLocalizationToBase (sliceTraitPoint b₁) :=
-  rfl
-
-lemma sliceTraitOfStrictLocalization_φ :
-    (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).φ =
-      sliceTraitStructureMap b₁ :=
   rfl
 
 lemma sliceTraitOfStrictLocalization_b :

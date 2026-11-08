@@ -124,38 +124,6 @@ structure HasIndConstructibleExtBound : Prop where
     CompactFor ((DerivedCategory.singleFunctor _ 0).obj M)
       fun j ↦ (DerivedCategory.singleFunctor _ n).obj (B j)
 
-/-- Blueprint `sk-lem-uniform-constructible-ext`: for a constructible sheaf `C` there is `d` with
-`Ext^q(C, B) = Hom(C, B[q]) = 0` for `q > d` and all constructible `B`. -/
-def HasUniformConstructibleExtBound : Prop :=
-  ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) A) R, IsConstructibleModuleObject R M →
-    ∃ N : ℤ, ∀ B, IsConstructibleModuleObject R B → ∀ n ≤ N,
-      ∀ f : (DerivedCategory.singleFunctor _ 0).obj M ⟶
-        (DerivedCategory.singleFunctor _ n).obj B,
-        f = 0
-
-/-- Blueprint `sk-lem-constructible-ext-continuity` (1) (surjectivity, for filtered diagrams of
-sheaves in degree `0`): for a constructible sheaf `C`, every morphism `C ⟶ B[n]` to a filtered
-colimit `B = colim Bᵢ` of sheaves of `R`-modules factors through some `Bᵢ[n]`. -/
-def HasConstructibleExtContinuity : Prop :=
-  ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) A) R, IsConstructibleModuleObject R M →
-    DerivedCategory.HomFactorsThroughFilteredColimits.{u + 1}
-      ((DerivedCategory.singleFunctor _ 0).obj M)
-
-variable {R} in
-/-- Blueprint `sk-cor-ind-heart-ii` from `sk-lem-constructible-ext-continuity` and
-`sk-lem-uniform-constructible-ext`: an ind-constructible sheaf is a filtered colimit of
-constructible ones, and a direct sum is the filtered colimit of its finite subsums
-(`det-ind-heart-ii-vanishing`, `det-ind-heart-ii-sums`). -/
-lemma HasIndConstructibleExtBound.of_continuity (h₁ : HasConstructibleExtContinuity R)
-    (h₂ : HasUniformConstructibleExtBound R) : HasIndConstructibleExtBound R where
-  exists_eq_zero M hM := by
-    obtain ⟨N, hN⟩ := h₂ M hM
-    exact ⟨N, DerivedCategory.eq_zero_of_ind _ (h₁ M hM) N hN⟩
-  compactFor M hM n J B _ :=
-    have : HasColimitsOfSize.{u + 1, u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) A) R) :=
-      IsGrothendieckAbelian.hasColimits _
-    DerivedCategory.compactFor_singleFunctor_of_homFactorsThroughFilteredColimits (h₁ M hM) n B
-
 /-- The zero module object is ind-constructible. -/
 instance : (IsIndConstructibleModuleObject R).ContainsZero where
   exists_zero := ⟨0, isZero_zero _,

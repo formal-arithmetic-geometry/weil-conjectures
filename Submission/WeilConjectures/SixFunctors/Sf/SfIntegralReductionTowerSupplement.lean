@@ -131,24 +131,6 @@ private theorem kanRightAdjointIso
   ext X
   simp
 
-private theorem mappedCompositeEq
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {A B C' : C} (a : A ⟶ B) (b : B ⟶ C') (c : A ⟶ C')
-    (h : a ≫ b = c) : F.map a ≫ F.map b = F.map c :=
-  (F.map_comp a b).symm.trans (congrArg F.map h)
-
-private theorem unitCompatibilityOfComparisons
-    {C : Type*} [Category C] {K A B U V : C}
-    (a : K ⟶ A) (b : K ⟶ B) (t : A ⟶ B)
-    (c : A ⟶ U) (d : B ⟶ V) [Mono d]
-    (v : K ⟶ U) (w : K ⟶ V) (s : U ⟶ V)
-    (ht : t ≫ d = c ≫ s) (ha : a ≫ c = v) (hb : b ≫ d = w)
-    (hv : v ≫ s = w) : a ≫ t = b := by
-  apply (cancel_mono d).1
-  calc
-    (a ≫ t) ≫ d = (a ≫ c) ≫ s := by rw [Category.assoc, ht, Category.assoc]
-    _ = b ≫ d := by rw [ha, hv, hb]
-
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{u})
 
@@ -285,33 +267,6 @@ noncomputable def sfDerivedReductionUnit (n : ℕ) :
     𝟭 (DerivedCategory (scalarReductionSource.{u, u} l E X)) ⟶
       sfDerivedReductionRestricted l E X n :=
   (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose.unit
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-private theorem sfUnitComparison (n : ℕ)
-    (P : CochainComplex (scalarReductionSource.{u, u} l E X) ℤ)
-    (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (J := AlgebraicGeometry.Scheme.ProEt.topology X)
-      (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E X) P) :
-    (sfDerivedReductionUnit l E X n).app (DerivedCategory.Q.obj P) ≫
-        sfReductionRepresentativeComparison l E X n P =
-      (DerivedCategory.Q (C := scalarReductionSource.{u, u} l E X)).map
-        (((scalarReductionExtension_adjunction.{u, u} l E X n).choose.mapHomologicalComplex
-          (.up ℤ)).unit.app P) := by
-  have h := (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose_spec P hP
-  have hu := Adjunction.mapHomotopyCategory_unit_app_quotient (.up ℤ)
-    (scalarReductionExtension_adjunction.{u, u} l E X n).choose P
-  have hq : (DerivedCategory.Qh (C := scalarReductionSource.{u, u} l E X)).map
-      (((scalarReductionExtension_adjunction.{u, u} l E X n).choose.mapHomotopyCategory
-        (.up ℤ)).unit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      (DerivedCategory.Q (C := scalarReductionSource.{u, u} l E X)).map
-        (((scalarReductionExtension_adjunction.{u, u} l E X n).choose.mapHomologicalComplex
-          (.up ℤ)).unit.app P) :=
-    congrArg (DerivedCategory.Qh (C := scalarReductionSource.{u, u} l E X)).map hu
-  dsimp only [sfDerivedReductionUnit, sfReductionRepresentativeComparison]
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    exact h.trans hq
 
 private noncomputable def sfComparison (n : ℕ) :
     DerivedCategory.Qh ⋙ sfDerivedReductionRestricted l E X n ⟶
@@ -480,102 +435,5 @@ noncomputable def sfDerivedReductionTransition (n : ℕ) :
 
 attribute [local irreducible] sfDerivedReductionTransition
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem sfOrdinaryUnit_step (n : ℕ) :
-    (scalarReductionExtension_adjunction.{u, u} l E X (n + 1)).choose.unit ≫
-        sfReductionTransition l E X n =
-      (scalarReductionExtension_adjunction.{u, u} l E X n).choose.unit := by
-  have hu (k : ℕ) (M : scalarReductionSource.{u, u} l E X)
-      (U : X.ProEtᵒᵖ) (x : M.val.obj U) :
-      (((scalarReductionExtension_adjunction.{u, u} l E X k).choose.unit.app M).val.app U) x =
-        sfReductionTensor l E X k M U 1 x := by
-    exact (scalarReductionExtension_adjunction.{u, u} l E X k).choose_spec M U x
-  ext M U x
-  change ((sfReductionTransition l E X n).app M).val.app U
-      (((scalarReductionExtension_adjunction.{u, u} l E X (n + 1)).choose.unit.app M).val.app U x) =
-    _
-  have ht : ((sfReductionTransition l E X n).app M).val.app U
-      (sfReductionTensor l E X (n + 1) M U 1 x) =
-        sfReductionTensor l E X n M U 1 x := by
-    simpa only [sfReductionTransition, map_one] using
-      (sfReductionTransition_existsUnique l E X n).exists.choose_spec M U 1 x
-  exact (congrArg (((sfReductionTransition l E X n).app M).val.app U)
-    (hu (n + 1) M U x)).trans (ht.trans (hu n M U x).symm)
-
 attribute [local irreducible] sfReductionRepresentativeComparison sfDerivedReductionUnit
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem sfDerivedUnit_step (n : ℕ) :
-    sfDerivedReductionUnit l E X (n + 1) ≫ sfDerivedReductionTransition l E X n =
-      sfDerivedReductionUnit l E X n := by
-  apply sfDerived_natTrans_ext l E X
-  intro P hP
-  have := sfComparison_isIso l E X n P hP
-  have ht := (sfDerivedReductionTransition_existsUnique l E X n).exists.choose_spec P
-    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mp hP)
-  have ht' : (sfDerivedReductionTransition l E X n).app (DerivedCategory.Q.obj P) ≫
-      sfReductionRepresentativeComparison l E X n P =
-      sfReductionRepresentativeComparison l E X (n + 1) P ≫
-        (DerivedCategory.Q (C := scalarReductionSource.{u, u} l E X)).map
-        ((NatTrans.mapHomologicalComplex (sfReductionTransition l E X n) (.up ℤ)).app P) := by
-    simpa only [sfDerivedReductionTransition] using ht
-  apply unitCompatibilityOfComparisons
-    ((sfDerivedReductionUnit l E X (n + 1)).app (DerivedCategory.Q.obj P))
-    ((sfDerivedReductionUnit l E X n).app (DerivedCategory.Q.obj P))
-    ((sfDerivedReductionTransition l E X n).app (DerivedCategory.Q.obj P))
-    (sfReductionRepresentativeComparison l E X (n + 1) P)
-    (sfReductionRepresentativeComparison l E X n P) _ _ _ ht'
-    (sfUnitComparison l E X (n + 1) P hP) (sfUnitComparison l E X n P hP)
-  apply mappedCompositeEq
-  apply HomologicalComplex.Hom.ext
-  funext i
-  exact NatTrans.congr_app (sfOrdinaryUnit_step l E X n) (P.X i)
-
-/-- The canonical derived reduction tower at all positive coefficient levels.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-weil-integral-reduction-tower). -/
-noncomputable def sfIntegralReductionTower
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
-    ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource.{u, u} l E X) :=
-  Functor.ofOpSequence (X := fun n ↦ (sfDerivedReductionRestricted l E X n).obj K)
-    (fun n ↦ (sfDerivedReductionTransition l E X n).app K)
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- The reduction units form a cone over the actual derived quotient transitions.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower).
-Proof: on a K-flat representative, the tensor/restriction adjunction unit is the
-sheafified map x ↦ 1 tensor x. The quotient transition sends 1 tensor x to
-1 tensor x. Thus adjacent transitions commute with the units on representatives,
-and hence after localization. Every arrow in the opposite natural-number category
-is a composite of consecutive arrows, so induction gives the displayed equation. -/
-theorem sfIntegralReductionUnit_naturality
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
-    (i j : ℕᵒᵖ) (g : i ⟶ j) :
-    ((Functor.const ℕᵒᵖ).obj K).map g ≫
-        (sfDerivedReductionUnit l E X j.unop).app K =
-      (sfDerivedReductionUnit l E X i.unop).app K ≫
-        (sfIntegralReductionTower l E X K).map g := by
-  let α : (Functor.const ℕᵒᵖ).obj K ⟶ sfIntegralReductionTower l E X K :=
-    NatTrans.ofOpSequence (fun n ↦ (sfDerivedReductionUnit l E X n).app K) (by
-      intro n
-      simpa only [sfIntegralReductionTower, Functor.const_obj_map,
-        Functor.ofOpSequence_map_homOfLE_succ, Functor.const_obj_obj,
-        Category.id_comp, NatTrans.comp_app] using
-        (NatTrans.congr_app (sfDerivedUnit_step l E X n) K).symm)
-  exact α.naturality g
-
-/-- The reduction tower together with its canonical compatible maps from K.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tag 06YL
-(blueprint: def-weil-integral-reduction-tower). -/
-noncomputable def sfIntegralReductionCone
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
-    Cone (sfIntegralReductionTower l E X K) where
-  pt := K
-  π :=
-    { app := fun n ↦ (sfDerivedReductionUnit l E X n.unop).app K
-      naturality := sfIntegralReductionUnit_naturality l E X K }
-
 end WeilConjectures

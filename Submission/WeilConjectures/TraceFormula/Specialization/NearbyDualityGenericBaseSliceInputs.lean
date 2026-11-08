@@ -7,7 +7,35 @@ module
 
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import Submission.WeilConjectures.SixFunctors.NearbyCycles.AutActionTensor
-public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBase
+public import Submission.WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
+public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
+public import Submission.WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
+public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
+public import Submission.WeilConjectures.AlgebraicGeometry.AffineSpaceClosedPoints
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
+public import Submission.WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
+public import Submission.WeilConjectures.TraceFormula.Specialization.TraitProduct
+import Submission.WeilConjectures.AlgebraicGeometry.ClosedPointsFiberProduct
+import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Submission.WeilConjectures.AlgebraicGeometry.AffineLineConstructible
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCover
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
+import Submission.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import Submission.WeilConjectures.ConstructibleSheaf.StalkZeroLocus
+import Submission.WeilConjectures.Mathlib.Topology.Constructible
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
+import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
+import Submission.WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
+import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
+public import Submission.WeilConjectures.TraceFormula.Specialization.NearbyDualizingGenericBase
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -311,21 +339,6 @@ noncomputable def genericSliceDualityMap
   Verdier.nearbyDualityMap (boundedConstructibleTensorMap
     ((isTraitModelOfGenericBase_genericSliceModel x hb
       h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ))) θ A
-
-omit [IsSepClosed k'] in
-/-- The uncurried duality map of the slice is the pairing `θ ∘ Ψ_{M''}(ev) ∘ μ_{M''}`. -/
-lemma uncurry_genericSliceDualityMap
-    (θ : (genericSliceNearbyCycles x ℓ h hb).obj
-        ((genericSliceUpperStar x ℓ h hb).obj (dualizingComplex ℓ X₁)) ⟶
-      (sliceSpecialUpperStar x ℓ h hb).obj (dualizingComplex ℓ X'))
-    (A : Dᵇc((genericSliceBase x hb).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    uncurry (genericSliceDualityMap x ℓ h hb θ A) =
-      boundedConstructibleTensorMap
-          ((isTraitModelOfGenericBase_genericSliceModel x hb
-            h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ)) _ _ ≫
-        (genericSliceNearbyCycles x ℓ h hb).map
-          ((ihom.ev A).app ((genericSliceUpperStar x ℓ h hb).obj (dualizingComplex ℓ X₁))) ≫ θ :=
-  Verdier.uncurry_nearbyDualityMap _ _ _
 
 omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
   [Fact (ringChar (FractionRing (PowerSeries K))).Prime] [IsSeparated (genericSliceBase x hb).hom]

@@ -224,17 +224,6 @@ tensor–hom adjunction (blueprint `def-trf-trace-class-source`). -/
 noncomputable def mate : 𝟙_ _ ⟶ c.traceClassSource :=
   curry' c.u
 
-/-- The mate construction identifies coefficient maps `Lc₂^* K ⟶ Rc₁^! K` with sections of the
-trace-class source (blueprint `def-trf-trace-class-source`). -/
-noncomputable def mateEquiv :
-    ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K ⟶
-        (boundedConstructibleUpperShriek ℓ c.c₁).obj K) ≃
-      (𝟙_ _ ⟶ c.traceClassSource) :=
-  curryHomEquiv'
-
-lemma mateEquiv_apply_u : c.mateEquiv c.u = c.mate :=
-  rfl
-
 /-- The **exceptional internal hom exchange** for the support map (blueprint
 `lem-trf-exceptional-internal-hom-exchange`): for `M, N` on `X ⨯ X`,
 `RHom(Lc^* M, Rc^! N) ≅ Rc^! RHom(M, N)`, built from the derived projection formula for `c`
@@ -306,14 +295,6 @@ noncomputable def upperShriekLowerStarIso :
       (boundedConstructibleUpperShriekAdjunction ℓ F.d))
     F.lowerShriekBaseChangeIso.symm
 
-/-- **Pullback along the ordinary leg in the fixed square** (blueprint
-`thm-trf-fixed-point-base-change`, (1)): `Lι^* Lc₂^* K ≅ Ld^* K`, from `ι ≫ c₂ = d`. -/
-noncomputable def upperStarC₂Iso (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ F.ι).obj ((boundedConstructibleUpperStar _ ℓ c.c₂).obj K) ≅
-      (boundedConstructibleUpperStar _ ℓ F.d).obj K :=
-  ((boundedConstructibleUpperStarComp _ ℓ F.ι c.c₂).app K).symm ≪≫
-    eqToIso (by rw [F.ι_c₂])
-
 end FixedLocus
 
 /-- The *trace morphism from external duality* `𝔱 : 𝓗_c(K) ⟶ Rι_* ω_Fix(c)` (blueprint
@@ -340,16 +321,6 @@ noncomputable def traceClass (F : c.FixedLocus) : BorelMooreSection ℓ F.F :=
   (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
       (c.mate ≫ c.traceMap F)
-
-/-- **The trace class is unconditionally defined** (blueprint
-`prop-trf-trace-class-unconditional`): it is the image of the mate of `u` under the
-`ℚ̄_ℓ`-linear map `Hom(ℚ̄_ℓ,C, 𝓗_c(K)) ⟶ Hom(ℚ̄_ℓ,Fix(c), ω_Fix(c))` induced by the trace
-morphism, defined for every coefficient map `u`. -/
-lemma traceClass_eq (F : c.FixedLocus) :
-    c.traceClass F = (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
-      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ F.ι).homEquiv _ _).symm
-        (c.mateEquiv c.u ≫ c.traceMap F) :=
-  rfl
 
 end
 

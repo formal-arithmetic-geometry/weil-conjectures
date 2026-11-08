@@ -5,7 +5,16 @@ Authors: Christian Merten
 -/
 module
 
-public import Submission.WeilConjectures.Blowup.FiniteDegree
+public import Submission.WeilConjectures.Blowup.FiniteDegree.Algebra
+public import Submission.WeilConjectures.Blowup.FiniteDegree.ChartIdeal
+public import Submission.WeilConjectures.Blowup.FiniteDegree.ChartProbe
+public import Submission.WeilConjectures.Blowup.FiniteDegree.Generation
+public import Submission.WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
+public import Submission.WeilConjectures.Blowup.FiniteDegree.Main
+public import Submission.WeilConjectures.Blowup.FiniteDegree.UniformNumerator
+public import Submission.WeilConjectures.Blowup.Proper
+public import Submission.WeilConjectures.Compactification.StrictTransform
+public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 

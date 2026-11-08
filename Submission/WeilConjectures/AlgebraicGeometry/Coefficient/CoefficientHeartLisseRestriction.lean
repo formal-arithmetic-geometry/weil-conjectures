@@ -93,7 +93,7 @@ import all Submission.WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContracti
 import all Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import all Mathlib.Analysis.Normed.Module.FiniteDimension
 import all Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
-import all Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+import Submission.WeilConjectures.ConstructibleSheaf.Defs
 import all Submission.WeilConjectures.AlgebraicGeometry.CondensedFieldPresentationCorank
 import all Submission.WeilConjectures.AlgebraicGeometry.CondensedFieldPresentationMatrix
 import all Mathlib.LinearAlgebra.Matrix.Rank

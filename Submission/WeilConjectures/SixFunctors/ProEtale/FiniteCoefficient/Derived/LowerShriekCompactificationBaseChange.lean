@@ -116,19 +116,6 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChange
       R((c'.g)_*[A]) ≫
     (Functor.associator _ _ _).hom
 
-/-- The components of
-`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChange`:
-the derived base change map at `(c.i)_! K`, followed by `R(c'.g)_*` of the base change
-isomorphism of the extension by zero. -/
-lemma rightDerivedLowerShriekOfCompactificationBaseChange_app
-    (hi : IsPullback g' c'.i c.i gZ) (hg : CommSq gZ c'.g c.g g)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    (rightDerivedLowerShriekOfCompactificationBaseChange A c c' hi hg).app K =
-      (derivedBaseChangeMap A hg).app (D((c.i)_!open[A]).obj K) ≫
-        R((c'.g)_*[A]).map
-          ((leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso A hi).hom.app K) := by
-  simp [rightDerivedLowerShriekOfCompactificationBaseChange]
-
 end Compactification
 
 end AlgebraicGeometry.ProEtale

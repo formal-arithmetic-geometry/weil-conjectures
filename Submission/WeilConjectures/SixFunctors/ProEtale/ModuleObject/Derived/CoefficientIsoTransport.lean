@@ -114,29 +114,6 @@ lemma preservesFiniteLimits_extendScalars_coefficientMap_of_isIso (a : Λ ⟶ Λ
     PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X)) :=
   preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv _).symm
 
-omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
-/-- Restriction of scalars along an isomorphism of coefficient rings preserves and reflects
-constructibility. -/
-theorem isConstructibleModuleObject_comap_coefficientMap_iff (e : Λ ≅ Λ') [IsMonHom e.hom]
-    {X : Scheme.{u}}
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X)) :
-    IsConstructibleModuleObject (condensedRingObj Λ X)
-        ((Mod.comap (coefficientMap e.hom X)).obj M) ↔
-      IsConstructibleModuleObject (condensedRingObj Λ' X) M :=
-  isConstructibleModuleObject_comap_iff _ M
-
-omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
-/-- Restriction of scalars along an isomorphism of coefficient rings preserves and reflects
-bounded constructible complexes. -/
-theorem boundedConstructible_mapDerivedCategory_comap_coefficientMap_iff (e : Λ ≅ Λ')
-    [IsMonHom e.hom] {X : Scheme.{u}}
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ' X))) :
-    boundedConstructible (condensedRingObj Λ X)
-        ((Mod.comap (coefficientMap e.hom X)).mapDerivedCategory.obj K) ↔
-      boundedConstructible (condensedRingObj Λ' X) K :=
-  boundedConstructible_mapDerivedCategory_comap_iff _ K
-
 omit [IsCommMonObj Λ] in
 /-- Transport of the finiteness of `Rp_*` along an isomorphism of coefficient rings. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_iso (e : Λ ≅ Λ') [IsMonHom e.hom]

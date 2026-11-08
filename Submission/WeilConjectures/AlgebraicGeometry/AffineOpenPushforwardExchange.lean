@@ -96,49 +96,4 @@ private theorem exchange_vertical
   rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
   congr 2
 
-/-- Ordinary exchange is invertible on a quasi-coherent affine-open direct image.
-Source: Stacks Project, Tag 02KG; the affine-intersection argument of
-`lem-pc-affine-alternating-cech-pinned-mate`.
-(blueprint: lem-pc-s3-affine-open-pushforward-exchange).
-Proof: Write j for W.ι and form its pullback j' along p = pullback.fst f g.
-Since X is separated over the affine scheme Spec A, X is separated and j is affine.
-The composite j ≫ f is affine because both its source and target are affine.
-The restriction G|W is quasi-coherent. The square for j and p and the outer square
-for j ≫ f and g are cartesian, so affinePushforward_baseChange makes their exchange
-maps invertible. Vertical pasting of ordinary exchange, proved by transposing under
-the tensor-pullback adjunction for g, expresses the outer map (up to pushforward
-composition isomorphisms) as the exchange for f on j_*G|W followed by f'_* of
-exchange for j. Pushforward preserves the latter isomorphism. Cancel it and the
-composition isomorphisms to obtain the assertion. This uses no derived category,
-complex, finite-product identification, or localization. -/
-theorem affineOpen_pushforward_exchange
-    {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
-    [IsSeparated f] (g : Spec B ⟶ Spec A)
-    (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G]
-    (W : X.Opens) (hW : IsAffineOpen W) :
-    IsIso (Scheme.Modules.moduleBaseChangeMap f (pullback.snd f g) g
-      (pullback.fst f g) pullback.condition
-      ((Scheme.Modules.pushforward W.ι).obj (G.restrict W.ι))) := by
-  let : IsAffine W := hW
-  let : IsAffineHom (W.ι ≫ f) := inferInstance
-  let : IsAffineHom W.ι := IsAffineHom.of_comp W.ι f
-  let p := pullback.fst f g
-  let f' := pullback.snd f g
-  let q := pullback.fst W.ι p
-  let j' := pullback.snd W.ι p
-  have sj : IsPullback q j' W.ι p := IsPullback.of_hasPullback W.ι p
-  have sf : IsPullback p f' f g := IsPullback.of_hasPullback f g
-  have so := sj.paste_vert sf
-  let F := G.restrict W.ι
-  have : F.IsQuasicoherent := inferInstance
-  have := Scheme.Modules.affinePushforward_baseChange_isIso W.ι j' p q sj F
-  have := Scheme.Modules.affinePushforward_baseChange_isIso (W.ι ≫ f) (j' ≫ f') g q so F
-  have he := exchange_vertical W.ι f j' f' q p g sj.w sf.w so.w F
-  have hi : IsIso ((Scheme.Modules.tensorPullback g).map
-      ((Scheme.Modules.pushforwardComp W.ι f).hom.app F) ≫
-      Scheme.Modules.moduleBaseChangeMap (W.ι ≫ f) (j' ≫ f') g q so.w F) := inferInstance
-  rw [he] at hi
-  have := hi
-  exact (isIso_comp_right_iff _ _).mp hi
-
 end AlgebraicGeometry

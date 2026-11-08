@@ -125,10 +125,6 @@ noncomputable instance comp (F : Cx ⥤ Cs) (G : Cs ⥤ Ct) [ShiftLift ι F ιs]
     Functor.associator _ _ _
 
 
-/-- The lift of a composite is the composite of the lifts. -/
-lemma comp_lift (F : Cx ⥤ Cs) (G : Cs ⥤ Ct) [ShiftLift ι F ιs] [ShiftLift ιs G ιt] :
-    lift ι (F ⋙ G) = lift ι F ⋙ lift ιs G := rfl
-
 /-- The comparison isomorphism of the identity functor has identity components. -/
 @[simp]
 lemma id_e_hom_app (c : Cx) : (e ι (𝟭 Cx)).hom.app c = 𝟙 _ := by

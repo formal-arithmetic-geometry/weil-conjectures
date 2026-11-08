@@ -175,14 +175,4 @@ theorem isMittagLefflerTower_comp_comparisonUpperStar_of_isFiniteLocallyConstant
   have := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Y).isLeftAdjoint
   (isMittagLefflerTower_of_isFiniteLocallyConstantSheaf s G).map _
 
-omit [IsSepClosed Ω] in
-/-- **Towers of finite locally constant sheaves on a connected nonempty scheme are
-Mittag-Leffler** (finite coefficient ring), the geometric point being the algebraic closure of a
-residue field. -/
-theorem isMittagLefflerTower_of_isFiniteLocallyConstantSheaf_of_nonempty [Nonempty Y]
-    (G : ℕᵒᵖ ⥤ Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [∀ n : ℕ, IsFiniteLocallyConstantSheaf (G.obj (op n))] : IsMittagLefflerTower G :=
-  isMittagLefflerTower_of_isFiniteLocallyConstantSheaf
-    (Y.algClosurePoint (Classical.arbitrary Y)) G
-
 end AlgebraicGeometry.Scheme

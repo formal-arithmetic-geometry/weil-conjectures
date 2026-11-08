@@ -13,7 +13,13 @@ import Submission.WeilConjectures.AlgebraicGeometry.StrictHenselizationRestricti
 import Submission.WeilConjectures.AlgebraicGeometry.StrictLocalCohomologyGerms
 import Submission.WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionData
 import Submission.WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
-import Submission.WeilConjectures.AlgebraicGeometry.SiteRestrictionInjectives
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Submission.WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
+import Submission.WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves

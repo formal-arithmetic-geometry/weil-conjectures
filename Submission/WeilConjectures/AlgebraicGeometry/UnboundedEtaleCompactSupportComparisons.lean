@@ -16,7 +16,10 @@ public import Submission.WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShr
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+public import Submission.WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import Submission.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
+public import Submission.WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.Proper

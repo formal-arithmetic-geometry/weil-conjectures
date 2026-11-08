@@ -156,14 +156,6 @@ lemma galoisLayerAction_mul (σ τ : Ω ≃ₐ[L] Ω)
       N.galoisLayerAction Λ h Ω τ C ≫ N.galoisLayerAction Λ h Ω σ C :=
   N.galoisLayerAut_autAction_mul h Ω Λ σ τ C
 
-/-- The Galois action is by automorphisms. -/
-@[reassoc (attr := simp)]
-lemma galoisLayerAction_inv_comp (σ : Ω ≃ₐ[L] Ω)
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :
-    N.galoisLayerAction Λ h Ω σ C ≫ N.galoisLayerAction Λ h Ω σ⁻¹ C = 𝟙 _ := by
-  rw [← galoisLayerAction_mul, inv_mul_cancel, galoisLayerAction_one]
-
 /-- **The exchange of the projection lands in the invariants**: the pullback exchange
 `α : L(𝟙)^* Ψ_N C ⟶ Ψ_{N_Ω} (L(𝟙)^* C)` of the projection `N_Ω ⟶ N` followed by the action of
 any `σ ∈ Aut(Ω/L)` is `α`. -/

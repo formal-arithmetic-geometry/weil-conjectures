@@ -9,7 +9,8 @@ public import Submission.WeilConjectures.AlgebraicGeometry.FieldBaseChangeSectio
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import Submission.WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import Submission.WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

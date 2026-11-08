@@ -5,7 +5,18 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupplement
+public import Submission.WeilConjectures.CategoryTheory.RingedDerivedRestriction
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+public import Submission.WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Sites.LocalProperties

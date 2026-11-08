@@ -57,21 +57,4 @@ theorem isDualizable_boundedConstructibleTateTwist (d : ℤ) :
     ((boundedConstructible _).fullyFaithfulι.preimageIso ?_)
   exact ((shiftFunctorZero _ ℤ).app (tateTwistDerived X.left ℓ d)).symm
 
-variable (X) in
-/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` is the shift of `ℚ̄_ℓ,X(d)` in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
-noncomputable def boundedConstructibleTateTwistShiftIso (d n : ℤ) :
-    boundedConstructibleTateTwist ℓ X d n ≅
-      (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) n).obj
-        (boundedConstructibleTateTwist ℓ X d 0) :=
-  (boundedConstructible _).fullyFaithfulι.preimageIso
-    ((shiftFunctor _ n).mapIso ((shiftFunctorZero _ ℤ).app _).symm ≪≫
-      (((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
-        |>.commShiftIso n).app (boundedConstructibleTateTwist ℓ X d 0)).symm)
-
-/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` is dualizable. -/
-theorem isDualizable_boundedConstructibleTateTwist_shift (d n : ℤ) :
-    IsDualizable (boundedConstructibleTateTwist ℓ X d n) :=
-  (IsDualizable.shift ℓ (isDualizable_boundedConstructibleTateTwist ℓ X d) n).of_iso
-    (boundedConstructibleTateTwistShiftIso ℓ X d n).symm
-
 end AlgebraicGeometry.ProEtale.CondensedRing

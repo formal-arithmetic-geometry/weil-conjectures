@@ -18,7 +18,11 @@ import Submission.WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Secti
 import Submission.WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Submission.WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import Submission.WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Submission.WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+import Mathlib.AlgebraicGeometry.Restrict
+import Submission.WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

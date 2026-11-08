@@ -108,20 +108,6 @@ private lemma coefficientCountableCoproducts (R : Type (u + 1)) [CommRing R] :
 
 attribute [local instance] coefficientCountableCoproducts
 
-private lemma scalar_preservesKFlatQuasiIso :
-    (extendScalars J φ).PreservesKFlatQuasiIso := by
-  let : Algebra A B := φ.toAlgebra
-  have := reflectsIsomorphisms_restrictScalars J φ
-  exact ⟨fun hK hL f _ => CochainComplex.quasiIso_map_of_iso_tensorRight _ _
-    (extendScalarsCompRestrictScalarsIso J A B) f hK hL⟩
-
-@[irreducible] private noncomputable def scalarDerivedAdjunction :
-    have := scalar_preservesKFlatQuasiIso J φ
-    (extendScalars J φ).leftDerivedFunctor ⊣ derivedRestrictScalars J φ :=
-  have := scalar_preservesKFlatQuasiIso J φ
-  (extendScalarsAdjunction J φ).derivedAdjunction.ofNatIsoRight
-    (restrictScalars J φ).rightDerivedFunctorIsoMapDerivedCategory
-
 end CategoryTheory.Sheaf
 
 end
@@ -597,62 +583,6 @@ open CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
  -- Use the generic commutative coefficient ring instance in proof constructions.
 attribute [local instance 2000] CommRing.toRing
-
-private lemma coefficientUnit
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C)
-    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
-    {S : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
-      DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    (ad : S ⊣ Sheaf.derivedRestrictScalars J φ)
-    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) :
-    Sheaf.IsDerivedBaseChange (ad.unit.app K) := by
-  intro N
-  convert (ad.homEquiv K N).bijective using 1
-  funext g
-  exact (ad.homEquiv_unit K N g).symm
-
-private lemma coefficientIso
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C)
-    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
-    {S : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
-      DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    (ad : S ⊣ Sheaf.derivedRestrictScalars J φ)
-    {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))}
-    {K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    {η : K ⟶ (Sheaf.derivedRestrictScalars J φ).obj K'}
-    (hη : Sheaf.IsDerivedBaseChange η) : Nonempty (S.obj K ≅ K') := by
-  have := (coefficientUnit J φ ad K).isIso hη ((ad.homEquiv K K').symm η)
-    ((ad.homEquiv_unit K K' _).symm.trans ((ad.homEquiv K K').apply_symm_apply η))
-  exact ⟨asIso ((ad.homEquiv K K').symm η)⟩
-
-private lemma coefficientArrow
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C)
-    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
-    {S : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
-      DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
-    (ad : S ⊣ Sheaf.derivedRestrictScalars J φ)
-    {K L : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))} (a : K ⟶ L)
-    {K' L' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))} (b : K' ⟶ L')
-    (e : Nonempty (Arrow.mk (S.map a) ≅ Arrow.mk b)) :
-    ∃ (θ₁ : K ⟶ (Sheaf.derivedRestrictScalars J φ).obj K')
-      (θ₂ : L ⟶ (Sheaf.derivedRestrictScalars J φ).obj L'),
-      Sheaf.IsDerivedBaseChange θ₁ ∧ Sheaf.IsDerivedBaseChange θ₂ ∧
-      θ₁ ≫ (Sheaf.derivedRestrictScalars J φ).map b = a ≫ θ₂ := by
-  obtain ⟨e⟩ := e
-  let l : S.obj K ≅ K' := Arrow.leftFunc.mapIso e
-  let r : S.obj L ≅ L' := Arrow.rightFunc.mapIso e
-  let R := Sheaf.derivedRestrictScalars J φ
-  refine ⟨ad.unit.app K ≫ R.map l.hom, ad.unit.app L ≫ R.map r.hom,
-    (coefficientUnit J φ ad K).comp_map_iso l,
-    (coefficientUnit J φ ad L).comp_map_iso r, ?_⟩
-  have he : l.hom ≫ b = S.map a ≫ r.hom := e.hom.w
-  have hu : ad.unit.app K ≫ R.map (S.map a) = a ≫ ad.unit.app L := by
-    simpa only [Functor.id_map, Functor.comp_map] using (ad.unit.naturality a).symm
-  rw [Category.assoc, ← R.map_comp, he, R.map_comp, ← Category.assoc, hu,
-    Category.assoc]
 
 
 namespace Etale

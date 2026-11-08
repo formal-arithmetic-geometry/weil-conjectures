@@ -136,16 +136,6 @@ variable {k : Type u} [Field k] [Finite k] {s₀ X₀ Y₀ X Y : Scheme.{u}}
   {ΦY : Y ⟶ Y} {f₀ : X₀ ⟶ Y₀} {f : X ⟶ Y}
 
 
-/-- For the base change `Φ_Y = F_Y ×_k 𝟙` of the `#k`-power Frobenius `F_Y` of a scheme over a
-finite field `k`, the square `Φ_Y ^ m ≫ p_Y = p_Y ≫ F_Y ^ m` is cartesian
-(blueprint: `d-relative-frob`). -/
-theorem isPullback_frobenius_pow_of_isFrobenius (hY : IsPullback pY aY gY σ)
-    (hFY : FY.IsFrobenius (Nat.card k)) (hΦYa : ΦY ≫ aY = aY) (hΦY : ΦY ≫ pY = pY ≫ FY)
-    (m : ℕ) : IsPullback (End.asHom (End.of ΦY ^ m)) pY pY (End.asHom (End.of FY ^ m)) := by
-  refine IsPullback.of_right ?_ (End.asHom_pow_comp_eq_comp_asHom_pow hΦY m) hY.flip
-  rw [End.asHom_pow_comp_of_comp_eq hΦYa m, End.asHom_pow_comp_of_comp_eq (hFY.comp_eq gY) m]
-  exact hY.flip
-
 
 end Model
 
@@ -230,22 +220,6 @@ lemma relativeFrobenius_left_snd_left (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶
     (h : ΦX ≫ f = f ≫ ΦY) :
     (relativeFrobenius f ΦX ΦY h).left ≫ (pullback.snd ΦY f).left = ΦX.left := by
   rw [← Over.comp_left, relativeFrobenius_snd]
-
-/-- `r ∘ f' = f` on underlying schemes (blueprint: `sk-d-relative-frob`). -/
-@[reassoc (attr := simp)]
-lemma relativeFrobenius_left_fst_left (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶ Y)
-    (h : ΦX ≫ f = f ≫ ΦY) :
-    (relativeFrobenius f ΦX ΦY h).left ≫ (pullback.fst ΦY f).left = f.left := by
-  rw [← Over.comp_left, relativeFrobenius_fst]
-
-/-- Under the identification of `(Y ×_{Φ_Y, Y, f} X).left` with the fibre product of the
-underlying schemes, the underlying morphism of the relative Frobenius in `Over S` is the
-relative Frobenius of the underlying schemes (blueprint: `d-relative-frob`). -/
-lemma relativeFrobenius_left_comp_isoPullback_hom (f : X ⟶ Y) (ΦX : X ⟶ X) (ΦY : Y ⟶ Y)
-    (h : ΦX ≫ f = f ≫ ΦY) :
-    (relativeFrobenius f ΦX ΦY h).left ≫ (isPullback_left_pullback f ΦY).isoPullback.hom =
-      relativeFrobenius f.left ΦX.left ΦY.left (by rw [← Over.comp_left, h, Over.comp_left]) := by
-  apply pullback.hom_ext <;> simp
 
 /-- The relative Frobenius of finite endomorphisms is finite on underlying schemes
 (blueprint: `sk-i-relative-frob`, `i-relative-frob`). -/

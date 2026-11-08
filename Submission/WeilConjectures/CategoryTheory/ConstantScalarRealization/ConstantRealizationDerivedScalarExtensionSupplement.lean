@@ -6,7 +6,17 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-public import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
+public import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
@@ -28,7 +38,6 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -72,7 +81,12 @@ public import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import Submission.WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
-public import Submission.WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Submission.WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Limits
@@ -131,7 +145,6 @@ import Submission.WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Sheafifica
 import all Submission.WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import Submission.WeilConjectures.CategoryTheory.ConstantModuleFlat
 import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-import Submission.WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite

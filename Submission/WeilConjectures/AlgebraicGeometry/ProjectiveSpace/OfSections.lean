@@ -125,21 +125,6 @@ lemma iSup_standardOpen (n : Type u) (S : Scheme.{u}) : ⨆ i, standardOpen n S 
   Scheme.Hom.iSup_preimage_eq_top _ <| Proj.iSup_basicOpen_eq_top _ _
     (toIdeal_irrelevant_homogeneousSubmodule n (ULift.{u} ℤ)).le
 
-/-- A morphism into the standard open `D₊(Tᵢ)` of `ℙ(n; S)` is determined by its composites
-with the structure morphism to `S` and with the map to the standard open `D₊(Tᵢ)` of the
-integral model `ℙⁿ_ℤ`. -/
-@[ext 1100]
-lemma standardOpen_hom_ext {T : Scheme.{u}} {i : n} {f₁ f₂ : T ⟶ (standardOpen n S i).toScheme}
-    (h₁ : f₁ ≫ (standardOpen n S i).ι ≫ ℙ(n; S) ↘ S =
-      f₂ ≫ (standardOpen n S i).ι ≫ ℙ(n; S) ↘ S)
-    (h₂ : f₁ ≫ (toProjInt n S).resLE _ (standardOpen n S i) le_rfl =
-      f₂ ≫ (toProjInt n S).resLE _ (standardOpen n S i) le_rfl) : f₁ = f₂ := by
-  rw [← cancel_mono (standardOpen n S i).ι]
-  refine hom_ext n S ?_ ?_
-  · simpa using h₁
-  · simpa using congrArg (· ≫ (Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ))
-      (MvPolynomial.X i)).ι) h₂
-
 /-- The preimage of the standard open `D₊(Tᵢ)` under `homOfSections g s hs` is the basic open
 where the section `s i` does not vanish. -/
 lemma homOfSections_preimage_standardOpen (i : n) :

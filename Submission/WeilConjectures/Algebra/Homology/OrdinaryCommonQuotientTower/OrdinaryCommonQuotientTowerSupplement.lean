@@ -5,7 +5,13 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.Algebra.Homology.CommonQuotientTowerPresentation.CommonQuotientTowerPresentationSupplement
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.RingTheory.Ideal.Maps
+public import Submission.WeilConjectures.AlgebraicGeometry.CommonQuotientTowerPresentation
 public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
@@ -213,191 +219,6 @@ variable {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
 
 private def K (U : Cᵒᵖ) : Ideal (R.obj.obj U) := RingHom.ker (q.hom.app U).hom
 
-omit [EssentiallySmall.{r} C]
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
-private theorem K_map {U V : Cᵒᵖ} (f : U ⟶ V) (a : R.obj.obj U)
-    (ha : a ∈ K q U) : R.obj.map f a ∈ K q V := by
-  change (q.hom.app V).hom (R.obj.map f a) = 0
-  have h := CategoryTheory.congr_fun (q.hom.naturality f) a
-  change (q.hom.app V).hom (R.obj.map f a) = S.obj.map f ((q.hom.app U).hom a) at h
-  rw [h]
-  change (q.hom.app U).hom a = 0 at ha
-  rw [ha, map_zero]
-
-private def quotientMap {U V : Cᵒᵖ} (f : U ⟶ V) :
-    ModuleCat.of (R.obj.obj U) (R.obj.obj U ⧸ K q U) ⟶
-      (ModuleCat.restrictScalars (R.obj.map f).hom).obj
-        (ModuleCat.of (R.obj.obj V) (R.obj.obj V ⧸ K q V)) := by
-  let g : R.obj.obj U →ₛₗ[(R.obj.map f).hom] R.obj.obj V :=
-    { toFun := R.obj.map f
-      map_add' := map_add (R.obj.map f).hom
-      map_smul' := fun a b ↦ map_mul (R.obj.map f).hom a b }
-  let h := (K q U).mapQ (K q V) g (fun a ha ↦ K_map q f a ha)
-  exact ModuleCat.ofHom
-    (X := ModuleCat.of (R.obj.obj U) (R.obj.obj U ⧸ K q U))
-    (Y := (ModuleCat.restrictScalars (R.obj.map f).hom).obj
-      (ModuleCat.of (R.obj.obj V) (R.obj.obj V ⧸ K q V)))
-    { toFun := h
-      map_add' := h.map_add
-      map_smul' := fun a b ↦ h.map_smulₛₗ a b }
-
-private def quotientPresheaf :
-    PresheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R).obj where
-  obj U := ModuleCat.of (R.obj.obj U) (R.obj.obj U ⧸ K q U)
-  map f := quotientMap q f
-  map_id U := by
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro x
-    induction x using Submodule.Quotient.induction_on with
-    | _ x =>
-      change Submodule.Quotient.mk (R.obj.map (𝟙 U) x) = Submodule.Quotient.mk x
-      exact congrArg Submodule.Quotient.mk
-        (CategoryTheory.congr_fun (R.obj.map_id U) x)
-  map_comp {U V W} f g := by
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro x
-    induction x using Submodule.Quotient.induction_on with
-    | _ x =>
-      change Submodule.Quotient.mk (R.obj.map (f ≫ g) x) =
-        Submodule.Quotient.mk (R.obj.map g (R.obj.map f x))
-      rw [Functor.map_comp]
-      rfl
-
-private def quotientToScalar : quotientPresheaf q ⟶
-    ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map q)).obj
-      (unit (derivedChangeRingIndependentCoefficients J S))).val where
-  app U := ModuleCat.ofHom
-    (X := (quotientPresheaf q).obj U)
-    (Y := (((restrictScalars
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).map q)).obj
-        (unit (derivedChangeRingIndependentCoefficients J S))).val.obj U))
-    { toFun := RingHom.kerLift (q.hom.app U).hom
-      map_add' := (RingHom.kerLift (q.hom.app U).hom).map_add
-      map_smul' := by
-        intro a x
-        induction x using Submodule.Quotient.induction_on with
-        | _ x =>
-          change (q.hom.app U).hom (a * x) =
-            (q.hom.app U).hom a * (q.hom.app U).hom x
-          exact map_mul _ _ _ }
-  naturality {U V} f := by
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro x
-    induction x using Submodule.Quotient.induction_on with
-    | _ x =>
-      change (q.hom.app V).hom (R.obj.map f x) = S.obj.map f ((q.hom.app U).hom x)
-      exact CategoryTheory.congr_fun (q.hom.naturality f) x
-
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
-private theorem quotientToScalar_locallyInjective :
-    PresheafOfModules.IsLocallyInjective J (quotientToScalar q) :=
-  Presheaf.isLocallyInjective_of_injective J _ (fun U ↦ RingHom.kerLift_injective (q.hom.app U).hom)
-
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
-private theorem quotientToScalar_locallySurjective
-    (hq : Presheaf.IsLocallySurjective J q.hom) :
-    PresheafOfModules.IsLocallySurjective J (quotientToScalar q) := by
-  constructor
-  intro U s
-  apply J.superset_covering ?_ (Presheaf.imageSieve_mem J q.hom s)
-  rintro V f ⟨r, hr⟩
-  exact ⟨Submodule.Quotient.mk r, hr⟩
-
-omit [EssentiallySmall.{r} C] in
-private theorem tensor_quotientToScalar_locallyInjective
-    (hq : Presheaf.IsLocallySurjective J q.hom)
-    (M : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)) :
-    PresheafOfModules.IsLocallyInjective J (siteTensorHom (quotientToScalar q) M.val) := by
-  have hI : PresheafOfModules.IsLocallyInjective J (quotientToScalar q) :=
-    quotientToScalar_locallyInjective q
-  have hS : PresheafOfModules.IsLocallySurjective J (quotientToScalar q) :=
-    quotientToScalar_locallySurjective q hq
-  let A := derivedChangeRingIndependentCoefficients J R
-  let f := siteTensorHom (quotientToScalar q) M.val
-  have : IsIso ((PresheafOfModules.sheafification (R := A) (𝟙 A.obj)).map f) :=
-    @PresheafOfModules.sheafification_tensorHom_isIso C _ J R.obj
-      (quotientPresheaf q) _ M.val (quotientToScalar q) hI hS A.property _ _
-  have : IsIso ((presheafToSheaf J AddCommGrpCat).map
-      ((PresheafOfModules.toPresheaf A.obj).map f)) :=
-    inferInstanceAs (IsIso ((toSheaf A).map
-      ((PresheafOfModules.sheafification (R := A) (𝟙 A.obj)).map f)))
-  exact ((J.W_iff _).mpr this).isLocallyInjective
-
-private theorem kernel_forward
-    (hq : Presheaf.IsLocallySurjective J q.hom)
-    (M : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R))
-    (U : Cᵒᵖ) (x : M.val.obj U)
-    (hx : (toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-      ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U,(q.hom.app U).hom] x) = 0) :
-    Sieve.generate (fun (V : C) (f : V ⟶ U.unop) ↦
-      M.val.map f.op x ∈ Submodule.span (R.obj.obj (op V))
-        {y | ∃ j ∈ K q (op V), ∃ p : M.val.obj (op V), y = j • p}) ∈ J U.unop := by
-  let A := derivedChangeRingIndependentCoefficients J R
-  let Q := quotientPresheaf q
-  let B := ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map q)).obj
-    (unit (derivedChangeRingIndependentCoefficients J S))).val
-  let f := siteTensorHom (quotientToScalar q) M.val
-  let e : siteTensorPresheaf B M.val ≅
-      (PresheafOfModules.restrictScalars
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).map q).hom).obj
-          (changeOfRingsPresheaf q M) :=
-    (siteTensorRightIso R M.val).app B ≪≫ (presheafTensorIso q M).symm
-  let ψ := (PresheafOfModules.toPresheaf A.obj).map f ≫
-    (PresheafOfModules.toPresheaf A.obj).map e.hom ≫
-      toSheafify J (changeOfRingsPresheaf q M).presheaf
-  have hLI : Presheaf.IsLocallyInjective J ((PresheafOfModules.toPresheaf A.obj).map f) :=
-    tensor_quotientToScalar_locallyInjective q hq M
-  have : Presheaf.IsLocallyInjective J ψ := by
-    dsimp only [ψ]
-    have hE : Presheaf.IsLocallyInjective J
-        ((PresheafOfModules.toPresheaf A.obj).map e.hom) := inferInstance
-    have hθ : Presheaf.IsLocallyInjective J
-        (toSheafify J (changeOfRingsPresheaf q M).presheaf) :=
-      (J.W_toSheafify (changeOfRingsPresheaf q M).presheaf).isLocallyInjective
-    exact @Presheaf.isLocallyInjective_comp _ _ _ _ _ _ _ _ J _ _ _ _ _ hLI
-      (@Presheaf.isLocallyInjective_comp _ _ _ _ _ _ _ _ J _ _ _ _ _ hE hθ)
-  let z : (siteTensorPresheaf Q M.val).obj U :=
-    (1 : R.obj.obj U ⧸ K q U) ⊗ₜ[R.obj.obj U] x
-  have hzero : ψ.app U z = ψ.app U 0 := by
-    rw [map_zero]
-    change (toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-      ((RingHom.kerLift (q.hom.app U).hom 1)
-        ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x) = 0
-    rw [map_one]
-    exact hx
-  apply J.superset_covering ?_ (Presheaf.equalizerSieve_mem J ψ z 0 hzero)
-  intro V g hg
-  apply Sieve.le_generate
-  change (siteTensorPresheaf Q M.val).map g.op z =
-    (siteTensorPresheaf Q M.val).map g.op 0 at hg
-  rw [map_zero] at hg
-  change (quotientMap q g.op (1 : R.obj.obj U ⧸ K q U)) ⊗ₜ[R.obj.obj (op V)]
-    M.val.restrictₛₗ g.op x = 0 at hg
-  have h1 : quotientMap q g.op (1 : R.obj.obj U ⧸ K q U) =
-      (1 : R.obj.obj (op V) ⧸ K q (op V)) := by
-    change Submodule.Quotient.mk (R.obj.map g.op 1) = Submodule.Quotient.mk 1
-    rw [map_one]
-  rw [h1] at hg
-  have hquot := congrArg
-    (TensorProduct.quotTensorEquivQuotSMul (M.val.obj (op V)) (K q (op V))) hg
-  rw [TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul, map_zero] at hquot
-  have hmem : M.val.restrictₛₗ g.op x ∈ K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) :=
-    (Submodule.Quotient.mk_eq_zero _).mp hquot
-  have hle : K q (op V) • (⊤ : Submodule _ (M.val.obj (op V))) ≤
-      Submodule.span (R.obj.obj (op V))
-        {y | ∃ j ∈ K q (op V), ∃ p : M.val.obj (op V), y = j • p} := by
-    rw [← Submodule.span_univ, ← (K q (op V)).span_eq, Submodule.span_smul_span]
-    apply Submodule.span_le.mpr
-    rintro y ⟨j, hj, p, _, rfl⟩
-    exact Submodule.subset_span ⟨j, Ideal.subset_span hj, p, rfl⟩
-  exact hle hmem
-
 end QuotientKernel
 
 omit [EssentiallySmall.{r} C] in
@@ -458,17 +279,6 @@ private theorem quotientUnit_epi
   have : Sheaf.IsLocallySurjective ((toSheaf _).map u) := hlocal
   have : Epi ((toSheaf _).map u) := Sheaf.epi_of_isLocallySurjective _
   exact (toSheaf _).epi_of_epi_map inferInstance
-
-omit [EssentiallySmall.{r} C] in
-/-- The actual quotient unit has the prescribed section formula.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ordinary-common-quotient-tower). -/
-theorem commonQuotientUnit_sections
-    {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R)
-    (U : Cᵒᵖ) (x : M.val.obj U) :
-    (commonQuotientUnit q M).val.app U x =
-      (toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U,(q.hom.app U).hom] x) := by
-  rfl
 
 section RingPushout
 
@@ -874,23 +684,6 @@ private theorem ordinaryComparison
   rw [hFi, hp]
   exact hGi
 
-omit [EssentiallySmall.{r} C] in
-private theorem tensorSection_smul
-    {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) (U : Cᵒᵖ)
-    (s : S.obj.obj U) (x : M.val.obj U) :
-    (toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-      (s ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x) =
-      s • (show (changeOfRings q M).val.obj U from
-        (commonQuotientUnit q M).val.app U x) := by
-  let η := (PresheafOfModules.sheafificationAdjunction
-    (R := derivedChangeRingIndependentCoefficients J S) (𝟙 _)).unit.app
-      (changeOfRingsPresheaf q M)
-  change η.app U (s ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x) =
-    s • (η.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x))
-  rw [← (η.app U).hom.map_smul]
-  congr 1
-  rw [ModuleCat.ExtendScalars.smul_tmul (f := (q.hom.app U).hom), mul_one]
-
 private noncomputable def rawTransition
     {R S T : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (t : S ⟶ T) :
     CoefficientOrdinaryProof.tensorFunctor q ⋙ Res q ⟶
@@ -921,78 +714,7 @@ private noncomputable def rawTransition
         exact v.naturality g }
   exact Functor.whiskerRight f (Res q) ≫ (Functor.isoWhiskerLeft L' i).hom
 
-private theorem rawTransition_unit
-    {R S T : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (t : S ⟶ T)
-    (M : Mod R) (U : Cᵒᵖ) (x : M.val.obj U) :
-    ((rawTransition q t).app M).val.app U ((commonQuotientUnit q M).val.app U x) =
-      (commonQuotientUnit (q ≫ t) M).val.app U x := by
-  let H := (Res t).obj (changeOfRings (q ≫ t) M)
-  let v : M ⟶ (Res q).obj H := commonQuotientUnit (q ≫ t) M ≫
-    (SuccessiveDerivedQuotient.resComp q t).inv.app (changeOfRings (q ≫ t) M)
-  have h := congrArg (fun f : M ⟶ (Res q).obj H ↦ f.val.app U x)
-    ((CoefficientOrdinaryProof.tensorHomEquiv q M H).apply_symm_apply v)
-  exact h
-
-private theorem rawTransition_sections
-    {R S T : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (t : S ⟶ T)
-    (M : Mod R) (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
-    ((rawTransition q t).app M).val.app U
-      ((toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-        (s ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x)) =
-      (toSheafify J (changeOfRingsPresheaf (q ≫ t) M).presheaf).app U
-        (t.hom.app U s ⊗ₜ[R.obj.obj U, ((q ≫ t).hom.app U).hom] x) := by
-  let H := (Res t).obj (changeOfRings (q ≫ t) M)
-  let v : M ⟶ (Res q).obj H := commonQuotientUnit (q ≫ t) M ≫
-    (SuccessiveDerivedQuotient.resComp q t).inv.app (changeOfRings (q ≫ t) M)
-  let f := (CoefficientOrdinaryProof.tensorHomEquiv q M H).symm v
-  have hf : f.val.app U
-      ((commonQuotientUnit q M).val.app U x) =
-        (commonQuotientUnit (q ≫ t) M).val.app U x := rawTransition_unit q t M U x
-  change f.val.app U _ = _
-  rw [tensorSection_smul, (f.val.app U).hom.map_smul]
-  change t.hom.app U s • (show (changeOfRings (q ≫ t) M).val.obj U from
-    f.val.app U ((commonQuotientUnit q M).val.app U x)) = _
-  rw [hf, tensorSection_smul]
-
 attribute [local irreducible] rawTransition
-
-private theorem modelTransition
-    {R S T : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (q' : R ⟶ T) (t : S ⟶ T)
-    (h : q ≫ t = q')
-    [HasDerivedCategory.{wR} (Mod R)] [HasDerivedCategory.{wS} (Mod S)]
-    [HasDerivedCategory.{wB} (Mod T)]
-    (F : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} q)
-    (G : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wB} q') :
-    ∃ δ : F.E ⋙ Res q ⟶ G.E ⋙ Res q',
-      ∀ (M : Mod R) (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U),
-        (δ.app M).val.app U
-          ((eqToHom (F.obj_eq M).symm).val.app U
-            ((toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-              (s ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x))) =
-        (eqToHom (G.obj_eq M).symm).val.app U
-          ((toSheafify J (changeOfRingsPresheaf q' M).presheaf).app U
-            (t.hom.app U s ⊗ₜ[R.obj.obj U, (q'.hom.app U).hom] x)) := by
-  subst q'
-  let iF := ordinaryModelIso q F.E (CoefficientOrdinaryProof.tensorFunctor q)
-    F.obj_eq (fun _ ↦ rfl) (fun f ↦ F.map_eq f) (fun f ↦ by simp; rfl)
-  let iG := ordinaryModelIso (q ≫ t) G.E
-    (CoefficientOrdinaryProof.tensorFunctor (q ≫ t))
-    G.obj_eq (fun _ ↦ rfl) (fun f ↦ G.map_eq f) (fun f ↦ by simp; rfl)
-  refine ⟨(Functor.isoWhiskerRight iF (Res q)).hom ≫ rawTransition q t ≫
-    (Functor.isoWhiskerRight iG (Res (q ≫ t))).inv, ?_⟩
-  intro M U s x
-  let z := (toSheafify J (changeOfRingsPresheaf q M).presheaf).app U
-    (s ⊗ₜ[R.obj.obj U, (q.hom.app U).hom] x)
-  have hc : eqToHom (F.obj_eq M).symm ≫ iF.hom.app M = 𝟙 _ := by
-    change eqToHom (F.obj_eq M).symm ≫ eqToHom (F.obj_eq M) = _
-    simp
-  have hcz := congrArg (fun k ↦ k.val.app U z) hc
-  change (iF.hom.app M).val.app U ((eqToHom (F.obj_eq M).symm).val.app U z) = z
-    at hcz
-  change (iG.inv.app M).val.app U ((rawTransition q t).app M |>.val.app U
-    ((iF.hom.app M).val.app U ((eqToHom (F.obj_eq M).symm).val.app U z))) = _
-  rw [hcz, rawTransition_sections]
-  rfl
 
 end RingPushout
 
@@ -1017,26 +739,6 @@ theorem OrdinaryCommonQuotientTower.unit_sections
           ((1 : (D.S.obj (op n)).obj.obj U)
             ⊗ₜ[R.obj.obj U, ((D.projection n).hom.app U).hom] x)) := by
   rfl
-
-/-- The pure-section transition formula forces compatibility of quotient units.
-Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
-Proof: evaluate the transition on 1 tensor x. Ring transitions preserve 1,
-so the result is exactly the unit at the next level. Equality on sections proves
-componentwise equality and therefore equality of natural transformations. -/
-theorem OrdinaryCommonQuotientTower.unit_transition
-    (O : OrdinaryCommonQuotientTower D a b) (n : ℕ) :
-    O.unit (n + 1) ≫ O.transition n = O.unit n := by
-  apply NatTrans.ext
-  funext M
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.hom_ext
-  ext x
-  change ((O.transition n).app M).val.app U
-    (((O.unit (n + 1)).app M).val.app U x) = ((O.unit n).app M).val.app U x
-  rw [O.unit_sections, O.transition_sections, O.unit_sections, map_one]
 
 /-- The normalized quotient unit is epi using local scalar lifts and tensor generation.
 Source: Stacks 03EK

@@ -302,63 +302,7 @@ end ScalarTotal
 
 universe a b d e f g
 
-private theorem strictTowerComparison
-    {A : Type a} [Category.{b} A] {B : Type d} [Category.{e} B]
-    {C : Type f} [Category.{g} C] (L : A ⥤ B)
-    (F : ℕ → B ⥤ C) (t : ∀ n, F (n + 1) ⟶ F n)
-    (G : ℕ → A ⥤ C) (s : ∀ n, G (n + 1) ⟶ G n)
-    (c : ∀ n, L ⋙ F n ≅ G n)
-    (hc : ∀ n, Functor.whiskerLeft L (t n) ≫ (c n).hom =
-      (c (n + 1)).hom ≫ s n) :
-    Nonempty (L ⋙ (Functor.ofOpSequence t).flip ≅ (Functor.ofOpSequence s).flip) := by
-  let α (P : A) : (L ⋙ (Functor.ofOpSequence t).flip).obj P ⟶
-      (Functor.ofOpSequence s).flip.obj P :=
-    NatTrans.ofOpSequence (fun n ↦ (c n).hom.app P) (by
-      intro n
-      have hh := congrArg (fun φ ↦ NatTrans.app φ P) (hc n)
-      simpa only [Functor.comp_obj, Functor.flip_obj_map,
-        Functor.ofOpSequence_map_homOfLE_succ, NatTrans.comp_app,
-        Functor.whiskerLeft_app] using hh)
-  have hα (P : A) : IsIso (α P) := by
-    have hn (n : ℕᵒᵖ) : IsIso ((α P).app n) := by
-      change IsIso ((c n.unop).hom.app P)
-      infer_instance
-    exact NatIso.isIso_of_isIso_app _
-  refine ⟨NatIso.ofComponents (fun P ↦ @asIso _ _ _ _ (α P) (hα P)) ?_⟩
-  intro P Q φ
-  apply NatTrans.ext
-  funext n
-  exact (c n.unop).hom.naturality φ
-
 universe h i j k
-
-private theorem restrictedTowerComparison
-    {A : Type a} [Category.{b} A] {B : Type d} [Category.{e} B]
-    {C : Type f} [Category.{g} C]
-    {D : ℕ → Type h} [∀ n, Category.{i} (D n)]
-    {E' : ℕ → Type j} [∀ n, Category.{k} (E' n)]
-    (L : A ⥤ B) (F : ∀ n, B ⥤ D n)
-    (K : ∀ n, A ⥤ E' n) (M : ∀ n, E' n ⥤ D n) (R : ∀ n, D n ⥤ C)
-    (t : ∀ n, F (n + 1) ⋙ R (n + 1) ⟶ F n ⋙ R n)
-    (s : ∀ n, K (n + 1) ⋙ M (n + 1) ⋙ R (n + 1) ⟶ K n ⋙ M n ⋙ R n)
-    (b : ∀ n, L ⋙ F n ≅ K n ⋙ M n)
-    (hb : ∀ n, Functor.whiskerLeft L (t n) ≫
-      (Functor.isoWhiskerRight (b n) (R n)).hom =
-      (Functor.isoWhiskerRight (b (n + 1)) (R (n + 1))).hom ≫ s n) :
-    Nonempty (L ⋙ (Functor.ofOpSequence (X := fun n ↦ F n ⋙ R n) t).flip ≅
-      (Functor.ofOpSequence (X := fun n ↦ K n ⋙ M n ⋙ R n) s).flip) := by
-  let c n : L ⋙ (F n ⋙ R n) ≅ K n ⋙ M n ⋙ R n :=
-    (Functor.associator L (F n) (R n)).symm ≪≫
-      Functor.isoWhiskerRight (b n) (R n) ≪≫ Functor.associator (K n) (M n) (R n)
-  apply strictTowerComparison L (fun n ↦ F n ⋙ R n) t
-    (fun n ↦ K n ⋙ M n ⋙ R n) s c
-  intro n
-  apply NatTrans.ext
-  funext P
-  have hh := congrArg (fun φ ↦ NatTrans.app φ P) (hb n)
-  simpa only [c, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id] using hh
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   SheafOfModules.changeOfRings PresheafOfModules.sheafification
@@ -396,42 +340,5 @@ private theorem finiteTensorComparison (n : ℕ) :
   exact hb P Q p q (p + q) rfl V x y
 
 attribute [local irreducible] coefficientTotalTensor
-
-/-- Scalar extension of the ordinary total tensor identifies its strict quotient
- tower with the tower of the two separately reduced total tensors.
-Source: Stacks 03EL, 06YM, 06YY; Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-pur-integral-tensor-reduction-tower-comparison).
-Proof: in bidegree (p,q) send s tensor (x tensor y) to
-(s tensor x) tensor (1 tensor y). The inverse multiplies the two scalar factors.
-The balanced tensor identities give inverse linear maps. Sheafify and sum over
-p+q=k; these maps commute with each signed differential summand. They are natural
-in chain maps. Consecutive quotient maps send each scalar to its reduction, so
-both routes send s tensor (x tensor y) to (rho(s) tensor x) tensor (1 tensor y).
-Pure tensors, sheafification and the total coproduct determine the equality.
-Thus the level isomorphisms give the asserted natural isomorphism of strict towers. -/
-theorem integralTensorReductionTowerComparison :
-    Nonempty (coefficientTotalTensor.{u, t + 1, t}
-      (AlgebraicGeometry.Scheme.ProEt.topology X)
-      (completedIntegralCommRingSheafUnrestricted l E X) ⋙
-        (Functor.ofOpSequence
-          (X := fun n ↦ unrestrictedIntegralComplexFunctor l E X n)
-          (unrestrictedIntegralTransition l E X)).flip ≅
-      integralOperationsTensorTowerFunctor l E X) := by
-  have h (n : ℕ) := finiteTensorComparison l E X n
-  let b n := (h n).choose
-  have hb (n : ℕ) (P Q : CochainComplex (integralTowerModules l E X) ℤ)
-      (p q : ℤ) (V : X.ProEtᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :=
-    (h n).choose_spec P Q p q V x y
-  have hc (n : ℕ) := integralTensorTransitionCompatibility l E X b hb n
-  exact restrictedTowerComparison
-    (coefficientTotalTensor.{u, t + 1, t} (AlgebraicGeometry.Scheme.ProEt.topology X)
-      (completedIntegralCommRingSheafUnrestricted l E X))
-    (fun n ↦ unrestrictedIntegralFiniteComplex l E X n)
-    (fun n ↦ (unrestrictedIntegralFiniteComplex l E X n).prod
-      (unrestrictedIntegralFiniteComplex l E X n))
-    (fun n ↦ Functor.uncurry.obj ((MonoidalCategory.curriedTensor
-      (integralOperationsFiniteModules l E X n)).map₂CochainComplex))
-    (fun n ↦ integralOperationsRestrict l E X n)
-    (unrestrictedIntegralTransition l E X) (integralOperationsTensorTransition l E X) b hc
 
 end WeilConjectures

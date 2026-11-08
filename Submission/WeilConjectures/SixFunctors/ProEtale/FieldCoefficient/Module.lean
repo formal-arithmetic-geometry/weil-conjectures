@@ -151,23 +151,8 @@ noncomputable def fieldUpperStarLowerStarAdjunction : (g)^*ᶠ[Λ] ⊣ (g)_*ᶠ[
   (upperStarLowerStarAdjunction (FieldCoefficients.{u} Λ) g).modAdjunction _
 
 omit [IsUltrametricDist Λ] in
-/-- The underlying sheaf of `g_* M` is the pushforward of the underlying sheaf of `M`. -/
-lemma fieldLowerStar_obj_X (M : FieldSheaf Λ Z) :
-    ((g)_*ᶠ[Λ].obj M).X = (g)_*[FieldCoefficients.{u} Λ].obj M.X :=
-  rfl
-
-/-- The underlying sheaf of `g^* M` is the pullback of the underlying sheaf of `M`. -/
-lemma fieldUpperStar_obj_X (M : FieldSheaf Λ Y) :
-    ((g)^*ᶠ[Λ].obj M).X = (g)^*[FieldCoefficients.{u} Λ].obj M.X :=
-  rfl
-
-omit [IsUltrametricDist Λ] in
 lemma fieldLowerStar_map_hom {M N : FieldSheaf Λ Z} (f : M ⟶ N) :
     ((g)_*ᶠ[Λ].map f).hom = (g)_*[FieldCoefficients.{u} Λ].map f.hom :=
-  rfl
-
-lemma fieldUpperStar_map_hom {M N : FieldSheaf Λ Y} (f : M ⟶ N) :
-    ((g)^*ᶠ[Λ].map f).hom = (g)^*[FieldCoefficients.{u} Λ].map f.hom :=
   rfl
 
 instance : ((g)_*ᶠ[Λ]).Additive :=
@@ -294,20 +279,6 @@ noncomputable def fieldLowerStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g
     fun f ↦ Mod.hom_ext _ _ ((lowerStarCongr (FieldCoefficients.{u} Λ) h).hom.naturality f.hom)
 
 omit [IsUltrametricDist Λ] in
-lemma fieldLowerStarCongr_hom_app_hom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
-    (M : FieldSheaf Λ Z) :
-    ((fieldLowerStarCongr Λ h).hom.app M).hom =
-      (lowerStarCongr (FieldCoefficients.{u} Λ) h).hom.app M.X :=
-  rfl
-
-omit [IsUltrametricDist Λ] in
-lemma fieldLowerStarComp_hom_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-    (M : FieldSheaf Λ T) :
-    ((fieldLowerStarComp Λ h₁ h₂).hom.app M).hom =
-      (lowerStarComp (FieldCoefficients.{u} Λ) h₁ h₂).hom.app M.X :=
-  rfl
-
-omit [IsUltrametricDist Λ] in
 lemma fieldLowerStarComp_inv_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
     (M : FieldSheaf Λ T) :
     ((fieldLowerStarComp Λ h₁ h₂).inv.app M).hom =
@@ -342,38 +313,6 @@ noncomputable def fieldUpperStarCompIso {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ 
     {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d) :
     (b)^*ᶠ[Λ] ⋙ (a)^*ᶠ[Λ] ≅ (d)^*ᶠ[Λ] ⋙ (c)^*ᶠ[Λ] :=
   (fieldUpperStarComp Λ a b).symm ≪≫ fieldUpperStarCongr Λ h ≪≫ fieldUpperStarComp Λ c d
-
-variable (Λ) in
-/-- The congruence isomorphism of pullbacks is conjugate to that of pushforwards. -/
-lemma conjugateEquiv_fieldUpperStarCongr_inv {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g') :
-    conjugateEquiv (fieldUpperStarLowerStarAdjunction Λ g) (fieldUpperStarLowerStarAdjunction Λ g')
-      (fieldUpperStarCongr Λ h).inv = (fieldLowerStarCongr Λ h).hom := by
-  subst h
-  refine NatTrans.ext (funext fun M ↦ Mod.hom_ext _ _ ?_)
-  simp [fieldUpperStarCongr, fieldLowerStarCongr_hom_app_hom]
-  rfl
-
-variable (Λ) in
-/-- The inverse of the composition isomorphism of pullbacks is conjugate to that of
-pushforwards. -/
-lemma conjugateEquiv_fieldUpperStarComp_inv {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
-    conjugateEquiv (fieldUpperStarLowerStarAdjunction Λ (h₁ ≫ h₂))
-      ((fieldUpperStarLowerStarAdjunction Λ h₂).comp (fieldUpperStarLowerStarAdjunction Λ h₁))
-      (fieldUpperStarComp Λ h₁ h₂).inv = (fieldLowerStarComp Λ h₁ h₂).inv :=
-  congrArg Iso.hom ((conjugateIsoEquiv _ _).apply_symm_apply (fieldLowerStarComp Λ h₁ h₂).symm)
-
-variable (Λ) in
-/-- The composition isomorphism of pullbacks is conjugate to that of pushforwards. -/
-lemma conjugateEquiv_fieldUpperStarComp_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
-    conjugateEquiv ((fieldUpperStarLowerStarAdjunction Λ h₂).comp
-        (fieldUpperStarLowerStarAdjunction Λ h₁))
-      (fieldUpperStarLowerStarAdjunction Λ (h₁ ≫ h₂)) (fieldUpperStarComp Λ h₁ h₂).hom =
-        (fieldLowerStarComp Λ h₁ h₂).hom := by
-  have := conjugateEquiv_comm (fieldUpperStarLowerStarAdjunction Λ (h₁ ≫ h₂))
-    ((fieldUpperStarLowerStarAdjunction Λ h₂).comp (fieldUpperStarLowerStarAdjunction Λ h₁))
-    (α := (fieldUpperStarComp Λ h₁ h₂).inv) (β := (fieldUpperStarComp Λ h₁ h₂).hom) (by simp)
-  rw [conjugateEquiv_fieldUpperStarComp_inv] at this
-  rw [← cancel_epi (fieldLowerStarComp Λ h₁ h₂).inv, this, Iso.inv_hom_id]
 
 variable (Λ) in
 /-- **The pullback of the constant sheaf is the constant sheaf**, as sheaves
@@ -441,11 +380,5 @@ lemma smul_smul (c d : ULift.{u + 1} Λ) (M : FieldSheaf Λ X) :
 omit [IsUltrametricDist Λ] in
 lemma smul_one (M : FieldSheaf Λ X) : smul 1 M = 𝟙 M :=
   Mod.hom_ext _ _ (by simp)
-
-omit [IsUltrametricDist Λ] in
-/-- The pushforward commutes with multiplication by a scalar. -/
-lemma fieldLowerStar_map_smul {Z : Scheme.{u}} (g : X ⟶ Z) (c : ULift.{u + 1} Λ)
-    (M : FieldSheaf Λ X) : (g)_*ᶠ[Λ].map (smul c M) = smul c ((g)_*ᶠ[Λ].obj M) :=
-  Mod.hom_ext _ _ (by ext : 3; rfl)
 
 end AlgebraicGeometry.ProEtale.FieldSheaf

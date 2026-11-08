@@ -64,10 +64,6 @@ noncomputable def continuousMapRestrictRingHom (V : X.ProEtᵒᵖ) :
   ULift.ringEquiv.symm.toRingHom.comp
     (ContinuousMap.compRightAlgHom ℤ T V.unop.hom.base.hom).toRingHom
 
-lemma continuousMapRestrictRingHom_apply (V : X.ProEtᵒᵖ) (f : C(X, T)) :
-    continuousMapRestrictRingHom X T V f = ULift.up (f.comp V.unop.hom.base.hom) :=
-  rfl
-
 lemma continuousMapRestrictRingHom_naturality {V V' : X.ProEtᵒᵖ} (k : V ⟶ V') (f : C(X, T)) :
     (continuousMapRingSheaf.{0} X T).obj.map k (continuousMapRestrictRingHom X T V f) =
       continuousMapRestrictRingHom X T V' f := by

@@ -94,29 +94,6 @@ instance [IsLocallyNoetherian Y] : (finiteLowerStar l f).IsTriangulated := by
   exact inferInstanceAs (ObjectProperty.IsTriangulated (ObjectProperty.inverseImage _
     (f)_*ᵃ[l].rightDerivedFunctor))
 
-/-- **Two out of three for the finiteness theorem**: in a short exact sequence of `ℓ`-adic
-sheaves on a scheme over a locally noetherian base, if the outer terms have bounded
-constructible derived pushforward then so has the middle one. -/
-lemma finiteLowerStar_X₂_of_shortExact [IsLocallyNoetherian Y] {S : ShortComplex (AdicSheaf l X)}
-    (hS : S.ShortExact) (h₁ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₁))
-    (h₃ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₃)) :
-    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₂) :=
-  (finiteLowerStar l f).ext_of_isTriangulatedClosed₂ _ hS.singleTriangle_distinguished h₁ h₃
-
-/-- **Two out of three for the finiteness theorem**, kernel form. -/
-lemma finiteLowerStar_X₁_of_shortExact [IsLocallyNoetherian Y] {S : ShortComplex (AdicSheaf l X)}
-    (hS : S.ShortExact) (h₂ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₂))
-    (h₃ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₃)) :
-    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₁) :=
-  (finiteLowerStar l f).ext_of_isTriangulatedClosed₁ _ hS.singleTriangle_distinguished h₂ h₃
-
-/-- **Two out of three for the finiteness theorem**, cokernel form. -/
-lemma finiteLowerStar_X₃_of_shortExact [IsLocallyNoetherian Y] {S : ShortComplex (AdicSheaf l X)}
-    (hS : S.ShortExact) (h₁ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₁))
-    (h₂ : finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₂)) :
-    finiteLowerStar l f ((DerivedCategory.singleFunctor _ 0).obj S.X₃) :=
-  (finiteLowerStar l f).ext_of_isTriangulatedClosed₃ _ hS.singleTriangle_distinguished h₁ h₂
-
 /-- The finiteness theorem extends from constructible sheaves to bounded complexes with
 constructible cohomology sheaves (dévissage along the truncation triangles). -/
 lemma finiteLowerStar_of_bounded [IsLocallyNoetherian Y]

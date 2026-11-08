@@ -109,19 +109,7 @@ noncomputable def fieldExtAut (σ : Ω ≃ₐ[K'] Ω) : fieldExtObj Ω k ⟶ fie
     change _ ≫ specFieldMap K' Ω ≫ k = specFieldMap K' Ω ≫ k
     rw [← Category.assoc, specMap_algEquiv_comp_specFieldMap])
 
-lemma fieldExtAut_comp_fieldExtHom (σ : Ω ≃ₐ[K'] Ω) :
-    fieldExtAut k σ ≫ fieldExtHom Ω k = fieldExtHom Ω k :=
-  MorphismProperty.Over.Hom.ext (specMap_algEquiv_comp_specFieldMap σ)
-
 variable {l : ℕ} [Fact l.Prime] {F : AdicSheaf l Y}
-
-/-- The restriction of a section over `Spec K'` to `Spec Ω` is `Gal(Ω / K')`-invariant. -/
-lemma map_fieldExtAut_map_fieldExtHom (σ : Ω ≃ₐ[K'] Ω)
-    (s : ToType (F.X.obj.obj (op (ProEt.mk k)))) :
-    F.X.obj.map (fieldExtAut k σ).op (F.X.obj.map (fieldExtHom Ω k).op s) =
-      F.X.obj.map (fieldExtHom Ω k).op s := by
-  rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
-    fieldExtAut_comp_fieldExtHom]
 
 /-- **Restriction to `Spec Ω` is injective** on sections of a lisse sheaf over `Spec K'`. -/
 theorem IsAdicLisseSheaf.injective_map_fieldExtHom (hF : IsAdicLisseSheaf F) :

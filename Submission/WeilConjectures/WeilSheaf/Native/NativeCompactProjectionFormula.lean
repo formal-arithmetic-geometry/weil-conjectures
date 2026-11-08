@@ -204,21 +204,6 @@ structure NativeProjectionTensorComparison where
     ((ProEtale.adicUpperStarTensorLeftIso l
       (Scheme.Hom.geometricFiberMap p (comp_over p _)) N.carrier).hom.app M.carrier)
 
-/-- The proper projection mate of the actual derived counit and balanced comparison.
-No invertibility is included in this definition.
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1, second Hom
-bijection (blueprint: lem-sf-derived-weil-compact-projection-formula). -/
-def nativeProjectionProperMate (C : NativeProjectionTensorComparison k₀ l p)
-    (A : DerivedCategory (ProEtaleWeilSheaf k₀ l Z))
-    (T : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
-    (nativeDerivedTensor k₀ l Y).obj ((lowerStar k₀ l p).rightDerivedFunctor.obj A, T) ⟶
-      (lowerStar k₀ l p).rightDerivedFunctor.obj
-        ((nativeDerivedTensor k₀ l Z).obj (A, (nativeOpenPull k₀ l p).obj T)) :=
-  (derivedUpperStarLowerStarAdjunction k₀ l p).homEquiv _ _
-    (C.mu.hom.app ((lowerStar k₀ l p).rightDerivedFunctor.obj A, T) ≫
-      (nativeDerivedTensor k₀ l Z).map
-        (Prod.mkHom ((derivedUpperStarLowerStarAdjunction k₀ l p).counit.app A) (𝟙 _)))
-
 end ProEtaleWeilSheaf
 
 namespace WeilComplex

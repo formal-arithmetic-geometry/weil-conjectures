@@ -10,7 +10,10 @@ public import Submission.WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsio
 public import Submission.WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import Submission.WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import Submission.WeilConjectures.GroupTheory.TateModule
-public import Submission.WeilConjectures.NumberTheory.TateModule
+public import Mathlib.Algebra.Group.Equiv.Defs
+public import Mathlib.Algebra.Group.TypeTags.Basic
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Data.Set.Finite.Basic
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -84,15 +87,6 @@ structure SemilinearGrpHom {S : Scheme.{u}} (e : S ⟶ S) (A B : Over S) [GrpObj
 namespace SemilinearGrpHom
 
 variable {S : Scheme.{u}} {e : S ⟶ S} {A B : Over S} [GrpObj A] [GrpObj B]
-
-/-- A homomorphism of group schemes over `S` is semilinear over the identity of `S`. -/
-@[simps]
-def ofIsMonHom (f : A ⟶ B) [IsMonHom f] : SemilinearGrpHom (𝟙 S) A B where
-  hom := f.left
-  w := by simp
-  mul_comp := by
-    rw [← Over.comp_left, IsMonHom.mul_hom, Over.comp_left]
-    congr 1
 
 /-- The action of a semilinear homomorphism `φ : A ⟶ B` over `e` on `X`-valued points, twisted
 by an endomorphism `t` of `X` lying over a section of `e` in the sense that
@@ -282,11 +276,6 @@ noncomputable def tateModuleMap (f : A ⟶ B) [IsMonHom f] :
     tateModule ℓ A →ₗ[ℤ_[ℓ]] tateModule ℓ B :=
   AddCommGroup.tateModule.map (IsMonHom.monoidHom f _).toAdditive
 
-
-@[simp]
-theorem tateModuleMap_id : tateModuleMap (ℓ := ℓ) (𝟙 A) = LinearMap.id :=
-  LinearMap.ext fun t ↦ Subtype.ext <| funext fun n ↦ congr_arg Additive.ofMul <|
-    Category.comp_id ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul
 
 
 /-- Blueprint `def-wf-abelian-tate-module`: the action of homomorphisms on rational Tate modules.

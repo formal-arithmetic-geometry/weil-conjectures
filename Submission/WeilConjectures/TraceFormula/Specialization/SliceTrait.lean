@@ -105,24 +105,6 @@ attribute [instance] commRing isDomain isDiscreteValuationRing isStrictlyHenseli
 variable {R₁ : Type u} [CommRing R₁] [IsLocalRing R₁] {Ω₁ : Type u} [Field Ω₁] {a₁ : R₁ →+* Ω₁}
   {κ₁ : Type u} [Field κ₁] {b₁ : R₁ →+* κ₁} (D : SliceTrait a₁ b₁)
 
-/-- The geometric generic point of `S'` lies over that of `S₁`. -/
-@[reassoc]
-lemma spec_a_comp_toAffineLine :
-    Spec.map (CommRingCat.ofHom D.a) ≫ D.toAffineLine ≫
-        𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁) =
-      Spec.map (CommRingCat.ofHom D.ωS) ≫ Spec.map (CommRingCat.ofHom a₁) := by
-  rw [← D.spec_φ, ← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
-    ← CommRingCat.ofHom_comp, D.ωS_comp]
-
-/-- The closed point of `S'` lies over that of `S₁`. -/
-@[reassoc]
-lemma spec_b_comp_toAffineLine :
-    Spec.map (CommRingCat.ofHom D.b) ≫ D.toAffineLine ≫
-        𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁) =
-      Spec.map (CommRingCat.ofHom D.κS) ≫ Spec.map (CommRingCat.ofHom b₁) := by
-  rw [← D.spec_φ, ← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
-    ← CommRingCat.ofHom_comp, D.κS_comp]
-
 end SliceTrait
 
 end AlgebraicGeometry

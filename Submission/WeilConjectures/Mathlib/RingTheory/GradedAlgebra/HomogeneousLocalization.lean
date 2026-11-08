@@ -406,13 +406,6 @@ noncomputable def degreePart.powDivPowEquiv {m : ℤ} (k l : ℕ) (h : (d : ℤ)
       (degreePart.coe_powDivPow_mul_coe_powDivPow hf hfx k l h) 0).trans
     (LinearEquiv.ofEq _ _ (by rw [zero_add]))
 
-@[simp]
-lemma degreePart.powDivPowEquiv_apply {m : ℤ} (k l : ℕ) (h : (d : ℤ) * (k - l) = m)
-    (p : HomogeneousLocalization 𝒜 x) :
-    degreePart.powDivPowEquiv hf hfx k l h p = p • degreePart.powDivPow hf hfx k l h := by
-  ext
-  simp [degreePart.powDivPowEquiv, Algebra.smul_def]
-
 
 end PowDivPow
 
@@ -437,38 +430,7 @@ def Away.congr {x y : A} (h : x = y) : Away 𝒜 x ≃+* Away 𝒜 y := by
 lemma Away.congr_rfl {x : A} : Away.congr 𝒜 (rfl : x = x) = RingEquiv.refl _ :=
   rfl
 
-@[simp]
-lemma Away.congr_symm {x y : A} (h : x = y) :
-    (Away.congr 𝒜 h).symm = Away.congr 𝒜 h.symm := by
-  subst h
-  rfl
 
-@[simp]
-lemma Away.congr_trans {x y z : A} (h : x = y) (h' : y = z) :
-    (Away.congr 𝒜 h).trans (Away.congr 𝒜 h') = Away.congr 𝒜 (h.trans h') := by
-  subst h h'
-  rfl
-
-
-/-- The canonical identification of the overlap rings of the charts `D₊(f)` and `D₊(g)`
-computed from either side: `Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f)`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
-def Away.overlapEquiv (f g : A) : Away 𝒜 (f * g) ≃+* Away 𝒜 (g * f) :=
-  Away.congr 𝒜 (mul_comm f g)
-
-
-/-- The overlap equivalence of a chart with itself is the identity.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
-@[simp]
-lemma Away.overlapEquiv_self (f : A) : Away.overlapEquiv 𝒜 f f = RingEquiv.refl _ :=
-  Away.congr_rfl 𝒜
-
-/-- The overlap equivalences are inverse under exchanging `f` and `g`.
-(blueprint: `lemma-nagata-proj-chart-ring-cocycle`) -/
-@[simp]
-lemma Away.overlapEquiv_symm (f g : A) :
-    (Away.overlapEquiv 𝒜 f g).symm = Away.overlapEquiv 𝒜 g f :=
-  Away.congr_symm 𝒜 _
 
 
 end ChartCocycle

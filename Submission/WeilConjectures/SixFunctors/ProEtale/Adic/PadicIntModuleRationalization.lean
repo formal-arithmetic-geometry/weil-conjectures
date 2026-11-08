@@ -355,16 +355,6 @@ instance preservesFiniteColimits_adicSheafExtendScalars_comp_toAb :
   dsimp only [AdicSheaf.toAb]
   infer_instance
 
-/-- **Reduction of the rationalization formula to free modules**: the rationalization comparison
-is an isomorphism as soon as it is one on the free `ℤ_ℓ,X`-modules `ℤ_ℓ,X ⊗ Z`, both sides being
-right exact in `M`. -/
-theorem isIso_rationalizationComparison_of_free
-    (h : ∀ Z : Sheaf (ProEt.topology X) Ab.{u + 1},
-      IsIso ((rationalizationComparison l X).app ((Mod.free (padicIntAbSheaf X l)).obj Z))) :
-    IsIso (rationalizationComparison l X) := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  exact Mod.isIso_app_of_isIso_app_free _ _ h
-
 end Model
 
 /-! ### Extension of scalars commutes with the pushforward -/
@@ -497,35 +487,6 @@ section RightDerived
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
   [IsIso (rationalizationComparison l X)] [IsIso (rationalizationComparison l Y)]
-
-/-- **`ℚ̄_ℓ ⊗ Hᵠ(Rf_* M[0]) ≅ Hᵠ(Rf_* (ℚ̄_ℓ ⊗ M)[0])`** for `f` quasi-compact and
-quasi-separated, granting the rationalization formula on `X` and on `Y`: an isomorphism of
-`ℓ`-adic sheaves, the left hand side computed for `ℤ_ℓ`-modules. -/
-noncomputable def adicSheafExtendScalarsHomologyRightDerivedIsoOfRationalization
-    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntAbSheaf X l)) (q : ℕ) :
-    (adicSheafExtendScalars Y l).obj ((DerivedCategory.homologyFunctor _ q).obj
-        ((padicIntModPushforward l f).rightDerivedFunctor.obj
-          ((DerivedCategory.singleFunctor _ 0).obj M))) ≅
-      (DerivedCategory.homologyFunctor _ q).obj ((f)_*ᵃ[l].rightDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor _ 0).obj ((adicSheafExtendScalars X l).obj M))) :=
-  have := preservesFiniteLimits_adicSheafExtendScalars l X
-  have := preservesFiniteLimits_adicSheafExtendScalars l Y
-  have := isIso_adicSheafExtendScalarsPushforwardComparison l f
-  adicSheafExtendScalarsHomologyRightDerivedIso l f
-    (fun I _ ↦ rightAcyclic_lowerStar_toAb_adicSheafExtendScalars_obj l X f I) M q
-
-/-- **Lisse direct images from the integral ones** for `f` quasi-compact and quasi-separated,
-granting the rationalization formula on `X` and on `Y`: if `ℚ̄_ℓ ⊗ Hᵠ(Rf_* M[0])` is lisse, the
-right hand side computed for `ℤ_ℓ`-modules, then so is `Hᵠ(Rf_* (ℚ̄_ℓ ⊗ M)[0])`. -/
-theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_rationalization
-    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntAbSheaf X l)) (q : ℕ)
-    (hM : IsAdicLisseSheaf ((adicSheafExtendScalars Y l).obj
-      ((DerivedCategory.homologyFunctor _ q).obj
-        ((padicIntModPushforward l f).rightDerivedFunctor.obj
-          ((DerivedCategory.singleFunctor _ 0).obj M))))) :
-    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ q).obj ((f)_*ᵃ[l].rightDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor _ 0).obj ((adicSheafExtendScalars X l).obj M)))) :=
-  hM.of_iso (adicSheafExtendScalarsHomologyRightDerivedIsoOfRationalization l f M q)
 
 end RightDerived
 

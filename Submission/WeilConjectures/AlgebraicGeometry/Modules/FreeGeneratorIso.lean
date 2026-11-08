@@ -90,13 +90,6 @@ lemma isoOfIsFreeGenerator_hom_app (i : ι) :
   have h := isoOfIsFreeGenerator_hom_app_smul hU he hf hc i le_rfl 1
   rwa [one_smul, one_smul, presheaf_map_id_apply, presheaf_map_id_apply] at h
 
-/-- **The inverse of `isoOfIsFreeGenerator` sends `f i` to `e i`.** -/
-lemma isoOfIsFreeGenerator_inv_app (i : ι) :
-    (isoOfIsFreeGenerator hU he hf hc).inv.app (U i) (f i) = e i := by
-  rw [← isoOfIsFreeGenerator_hom_app hU he hf hc i, ← ConcreteCategory.comp_apply,
-    ← Hom.comp_app, Iso.hom_inv_id, Hom.id_app]
-  rfl
-
 section Tensor
 
 open MonoidalCategory

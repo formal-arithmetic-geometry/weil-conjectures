@@ -247,16 +247,6 @@ lemma lowerShriekComp_hom_app_comp_map_eqToHom {u u' : A ⟶ B} (h : u = u') (z 
   simp
 
 @[reassoc]
-lemma lowerShriek_map_eqToHom_comp_lowerShriekComp_inv_app {u u' : A ⟶ B} (h : u = u')
-    (z : B ⟶ C) (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleLowerShriek ℓ z).map (eqToHom (congrArg
-        (fun s ↦ (boundedConstructibleLowerShriek ℓ s).obj M) h)) ≫
-            (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u' z).inv.app M =
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ u z).inv.app M ≫ eqToHom (by rw [h]) := by
-  subst h
-  simp
-
-@[reassoc]
 lemma eqToHom_comp_lowerShriekComp_inv_app {r r' : B ⟶ C} (h : r = r') (a : A ⟶ B)
     (M : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     eqToHom (by rw [h]) ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ a r').inv.app M =

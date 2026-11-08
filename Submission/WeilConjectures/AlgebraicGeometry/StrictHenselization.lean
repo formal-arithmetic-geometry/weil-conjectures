@@ -196,21 +196,4 @@ theorem strictHenselization_properties
   · exact ⟨isLimitOfPreserves Scheme.Spec
       (colimit.isColimit (strictHenselizationAffineDiagram s)).op⟩
 
-/-- Independence of the representative category, via the canonical colimit map.
-Here `e` describes a replacement of the chosen representative category and `w`
-identifies its coordinate-ring diagram with the transported chosen diagram.
-Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
-henselization (blueprint: def-weil-pbc-strict-henselization-limit).
-The equivalence-colimit isomorphism has coprojection formula
-`ι k ≫ iso.hom = D.map (e.unit.app k) ≫ w.inv.app _ ≫ ι _`
-(`HasColimit.ι_isoOfEquivalence_hom`), so this is the canonical comparison.
-It is an isomorphism by the equivalence-colimit lemma cited in the node. -/
-noncomputable def strictHenselizationRepresentativeIso
-    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (s : Spec (.of Ω) ⟶ S) {J : Type u} [SmallCategory J]
-    (e : J ≌ (SmallModel.{u} (strictHenselizationNeighbourhoods s))ᵒᵖ)
-    (D : J ⥤ CommRingCat.{u}) (w : e.functor ⋙ strictHenselizationAffineDiagram s ≅ D) :
-    colimit D ≅ strictHenselizationRing s :=
-  HasColimit.isoOfEquivalence e w
-
 end AlgebraicGeometry.Scheme

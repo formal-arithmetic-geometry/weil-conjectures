@@ -44,64 +44,6 @@ namespace CochainComplex
 variable {C : Type*} [Category* C] [Abelian C] {Z : C} {K L : CochainComplex C ℕ}
   (ι : (single₀ C).obj Z ⟶ K) [QuasiIso ι] [∀ n, Injective (L.X n)]
 
-/-- An auxiliary definition for `CochainComplex.homotopyZeroOfQuasiIso`. -/
-noncomputable def homotopyZeroOfQuasiIsoZero (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
-    K.X 1 ⟶ L.X 0 :=
-  (exact₀_of_quasiIso_single₀ ι).descToInjective (φ.f 0) comm
-
-@[reassoc (attr := simp)]
-lemma comp_homotopyZeroOfQuasiIsoZero (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
-    K.d 0 1 ≫ homotopyZeroOfQuasiIsoZero ι φ comm = φ.f 0 :=
-  (exact₀_of_quasiIso_single₀ ι).comp_descToInjective _ _
-
-/-- An auxiliary definition for `CochainComplex.homotopyZeroOfQuasiIso`. -/
-noncomputable def homotopyZeroOfQuasiIsoOne (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
-    K.X 2 ⟶ L.X 1 :=
-  (exact_succ_of_quasiIso_single₀ ι 0).descToInjective
-    (φ.f 1 - homotopyZeroOfQuasiIsoZero ι φ comm ≫ L.d 0 1)
-    (by rw [Preadditive.comp_sub, comp_homotopyZeroOfQuasiIsoZero_assoc, φ.comm, sub_self])
-
-@[reassoc (attr := simp)]
-lemma comp_homotopyZeroOfQuasiIsoOne (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
-    K.d 1 2 ≫ homotopyZeroOfQuasiIsoOne ι φ comm =
-      φ.f 1 - homotopyZeroOfQuasiIsoZero ι φ comm ≫ L.d 0 1 :=
-  (exact_succ_of_quasiIso_single₀ ι 0).comp_descToInjective _ _
-
-/-- An auxiliary definition for `CochainComplex.homotopyZeroOfQuasiIso`. -/
-noncomputable def homotopyZeroOfQuasiIsoSucc (φ : K ⟶ L) (n : ℕ) (g : K.X (n + 1) ⟶ L.X n)
-    (g' : K.X (n + 2) ⟶ L.X (n + 1))
-    (w : φ.f (n + 1) = K.d (n + 1) (n + 2) ≫ g' + g ≫ L.d n (n + 1)) :
-    K.X (n + 3) ⟶ L.X (n + 2) :=
-  (exact_succ_of_quasiIso_single₀ ι (n + 1)).descToInjective (φ.f (n + 2) - g' ≫ L.d _ _) (by
-    dsimp
-    rw [Preadditive.comp_sub, ← HomologicalComplex.Hom.comm, w, Preadditive.add_comp,
-      Category.assoc, Category.assoc, HomologicalComplex.d_comp_d, comp_zero, add_zero,
-      sub_self])
-
-@[reassoc (attr := simp)]
-lemma comp_homotopyZeroOfQuasiIsoSucc (φ : K ⟶ L) (n : ℕ) (g : K.X (n + 1) ⟶ L.X n)
-    (g' : K.X (n + 2) ⟶ L.X (n + 1))
-    (w : φ.f (n + 1) = K.d (n + 1) (n + 2) ≫ g' + g ≫ L.d n (n + 1)) :
-    K.d (n + 2) (n + 3) ≫ homotopyZeroOfQuasiIsoSucc ι φ n g g' w =
-      φ.f (n + 2) - g' ≫ L.d _ _ :=
-  (exact_succ_of_quasiIso_single₀ ι (n + 1)).comp_descToInjective _ _
-
-/-- A morphism from a resolution `ι : single₀ Z ⟶ K` to a complex of injective objects which
-vanishes on `Z` is homotopic to zero. This generalises `InjectiveResolution.descHomotopyZero`,
-where the source is an injective resolution and the target is exact. -/
-noncomputable def homotopyZeroOfQuasiIso (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
-    Homotopy φ 0 :=
-  Homotopy.mkCoinductive _ (homotopyZeroOfQuasiIsoZero ι φ comm) (by simp)
-    (homotopyZeroOfQuasiIsoOne ι φ comm) (by simp) (fun n ⟨g, g', w⟩ ↦
-      ⟨homotopyZeroOfQuasiIsoSucc ι φ n g g' (by simp only [w, add_comm]), by simp⟩)
-
-/-- Two morphisms from a resolution `ι : single₀ Z ⟶ K` to a complex of injective objects which
-agree on `Z` are homotopic. -/
-noncomputable def homotopyOfQuasiIso (φ ψ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = ι.f 0 ≫ ψ.f 0) :
-    Homotopy φ ψ :=
-  Homotopy.equivSubZero.symm
-    (homotopyZeroOfQuasiIso ι (φ - ψ) (by simp [Preadditive.comp_sub, comm]))
-
 end CochainComplex
 
 namespace AlgebraicGeometry.Scheme.Modules
@@ -258,11 +200,6 @@ noncomputable def cechResolutionι (ℱ : X.Modules) :
     (CochainComplex.single₀ X.Modules).obj ℱ ⟶ cechResolution U ℱ :=
   (CochainComplex.fromSingle₀Equiv _ _).symm
     ⟨cechResolutionAugmentation U ℱ, cechResolutionAugmentation_d U ℱ⟩
-
-@[simp]
-lemma cechResolutionι_f_zero (ℱ : X.Modules) :
-    (cechResolutionι U ℱ).f 0 = cechResolutionAugmentation U ℱ := by
-  simp [cechResolutionι, CochainComplex.fromSingle₀Equiv]
 
 end Complex
 
@@ -592,17 +529,6 @@ noncomputable def higherDirectImageIsoCechResolution [IsAffine S] [IsSeparated f
   have := quasiIso_cechResolutionι U ℱ hU'
   (pushforward f).rightDerivedObjIsoOfResolution (cechResolutionι U ℱ)
     (rightAcyclic_cechResolution_X f U hU ℱ) q
-
-/-- The augmentation of the Čech complex is natural in the module. -/
-@[reassoc]
-lemma cechResolutionAugmentation_naturality {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶ 𝒢) :
-    cechResolutionAugmentation U ℱ ≫ ((cechResolutionFunctor U).map φ).f 0 =
-      φ ≫ cechResolutionAugmentation U 𝒢 := by
-  rw [cechResolutionAugmentation, cechResolutionAugmentation, Category.assoc]
-  erw [cechAugmentation_naturality]
-  rw [← Category.assoc, ← Category.assoc]
-  congr 1
-  exact ((restrictAdjunction (⊤ : X.Opens).ι).unit.naturality φ).symm
 
 
 end Acyclic

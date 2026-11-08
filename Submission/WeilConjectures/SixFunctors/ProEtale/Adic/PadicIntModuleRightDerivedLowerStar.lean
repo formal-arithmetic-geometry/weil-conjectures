@@ -411,20 +411,4 @@ noncomputable def adicSheafExtendScalarsHomologyRightDerivedComparison
             ((adicSheafExtendScalarsRestrictAdjunction X l).unit.app M))) ≫
       (restrictPadicIntHomologyRightDerivedAdicLowerStarIso l f _ q).inv)
 
-/-- **Lisse direct images from the integral comparison**: if `ℚ̄_ℓ ⊗ Hᵠ(Rf_* M[0])` is lisse, the
-right hand side computed for `ℤ_ℓ`-modules, and the comparison
-`ℚ̄_ℓ ⊗ Hᵠ(Rf_* M[0]) ⟶ Hᵠ(Rf_* (ℚ̄_ℓ ⊗ M)[0])` is an isomorphism of underlying abelian sheaves,
-then `Hᵠ(Rf_* (ℚ̄_ℓ ⊗ M)[0])` is lisse. -/
-theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_adicSheafExtendScalars
-    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntAbSheaf X l)) (q : ℕ)
-    (hM : IsAdicLisseSheaf ((adicSheafExtendScalars Y l).obj
-      ((DerivedCategory.homologyFunctor _ q).obj
-        ((padicIntModPushforward l f).rightDerivedFunctor.obj
-          ((DerivedCategory.singleFunctor _ 0).obj M)))))
-    [IsIso ((AdicSheaf.toAb l Y).map
-      (adicSheafExtendScalarsHomologyRightDerivedComparison l f M q))] :
-    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ q).obj ((f)_*ᵃ[l].rightDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor _ 0).obj ((adicSheafExtendScalars X l).obj M)))) :=
-  hM.of_isIso_toAb_map l (adicSheafExtendScalarsHomologyRightDerivedComparison l f M q)
-
 end AlgebraicGeometry.ProEtale

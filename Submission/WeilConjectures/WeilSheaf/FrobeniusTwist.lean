@@ -115,15 +115,6 @@ theorem exists_tateTwistSheaf_iso_constantTwist (m : ℤ) :
       Nonempty (tateTwistSheaf k₀ l X m ≅ (adicConstant k₀ l X).constantTwist c) :=
   ⟨cyclotomicUnit k₀ l ^ m, cyclotomicUnit_zpow_eq m, ⟨tateTwistSheafIso k₀ l X m⟩⟩
 
-/-- Blueprint `def-weil-frobenius-coefficient-twists`: Frobenius on coefficient twists
-
-In particular geometric Frobenius acts on `ℚ̄_ℓ(-d)` by multiplication by `q^d`, for
-`d ∈ ℤ_{≥ 0}`. -/
-theorem exists_tateTwistSheaf_neg_iso_constantTwist (d : ℕ) :
-    ∃ c : (PadicAlgCl l)ˣ, (c : PadicAlgCl l) = (Nat.card k₀ : PadicAlgCl l) ^ d ∧
-      Nonempty (tateTwistSheaf k₀ l X (-d) ≅ (adicConstant k₀ l X).constantTwist c) := by
-  simpa using exists_tateTwistSheaf_iso_constantTwist k₀ l X (-d)
-
 end WeilSheaf
 
 end AlgebraicGeometry

@@ -7,7 +7,8 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
-public import Submission.WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.CoverLifting
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
@@ -209,97 +210,6 @@ private theorem fullAffineEtale_oneHypercover_dense (S : Scheme.{u}) :
     infer_instance
   exact Functor.IsOneHypercoverDense.of_hasPullbacks (fullAffineEtale_image_cover S)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem smallEtale_cover_of_surjective (S : Scheme.{u})
-    {I : Type u} (V : I → S.Etale) (U : S.Etale) (f : ∀ i, V i ⟶ U)
-    (h : ∀ x : U.left, ∃ i y, (f i).left y = x) :
-    Presieve.ofArrows V f ∈ S.smallEtalePretopology U := by
-  change ((Presieve.ofArrows V f).map (MorphismProperty.Over.forget
-    (@AlgebraicGeometry.Etale) ⊤ S)).map (Over.forget S) ∈
-      Scheme.precoverage (@AlgebraicGeometry.Etale) U.left
-  rw [Presieve.map_ofArrows, Presieve.map_ofArrows, Scheme.ofArrows_mem_precoverage_iff]
-  refine ⟨h, fun i ↦ ?_⟩
-  change AlgebraicGeometry.Etale (f i).left
-  infer_instance
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks 04HR, 021E and Sites 03A0. Proof: finite affine refinements identify
-the source topology with the induced topology. The dense-subsite comparison gives
-cocontinuity. Cover preservation follows from joint surjectivity, and affine pullbacks
-are preserved. Faithfulness gives local equality on identity covers; fullness gives
-local lifts on identity covers. Small affine image covers, reindexed by ULift, give
-the final covering condition.
-(blueprint: lem-weil-pbc-affine-etale-special_cocontinuity) -/
-theorem fullAffineEtale_special_cocontinuity (S : Scheme.{u}) :
-    (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings
-      (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage := by
-  have hd := fullAffineEtale_dense_subsite S
-  have := fullAffineEtale_preservesPullbacks S
-  have : (fullAffineEtaleInclusion S).Full :=
-    inferInstanceAs (ObjectProperty.ι (fun U : S.Etale => IsAffine U.left)).Full
-  have : (fullAffineEtaleInclusion S).Faithful :=
-    inferInstanceAs (ObjectProperty.ι (fun U : S.Etale => IsAffine U.left)).Faithful
-  have htop : S.smallEtalePretopology.toPrecoverage.toGrothendieck =
-      S.smallEtaleTopology := by
-    change S.smallEtalePretopology.toCoverage.toPrecoverage.toGrothendieck = _
-    rw [Coverage.toGrothendieck_toPrecoverage, Pretopology.toGrothendieck_toCoverage]
-    exact (S.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology
-      (P := @AlgebraicGeometry.Etale) le_rfl).symm
-  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
-  · change (fullAffineEtaleInclusion S).IsCocontinuous
-      (fullAffineEtaleTopology S) S.smallEtalePretopology.toPrecoverage.toGrothendieck
-    rw [htop]
-    infer_instance
-  · intro U R hR
-    obtain ⟨n, V, f, rfl, hf, hsurj⟩ := hR
-    rw [Presieve.map_ofArrows]
-    have hh := smallEtale_cover_of_surjective S
-      (fun i : ULift.{u} (Fin n) => (V i.down).obj) U.obj
-      (fun i => (f i.down).hom) (by
-        intro x
-        obtain ⟨i, y, hy⟩ := hsurj x
-        exact ⟨⟨i⟩, y, hy⟩)
-    have heq : Presieve.ofArrows (fun i : ULift.{u} (Fin n) => (V i.down).obj)
-        (fun i => (f i.down).hom) = Presieve.ofArrows (fun i => (V i).obj)
-        (fun i => (f i).hom) :=
-      Presieve.ofArrows_comp_eq_of_surjective (fun i => (f i).hom)
-        (a := ULift.down) (fun i => ⟨⟨i⟩, rfl⟩)
-    exact (congrArg (· ∈ S.smallEtalePretopology U.obj) heq).mp hh
-  · intro X Y Z R hR f g hf
-    infer_instance
-  · intro X Y a b hab
-    have heq : a = b := (fullAffineEtaleInclusion S).map_injective hab
-    obtain ⟨J, hJ⟩ := fullAffineEtalePrecoverage_isPretopology S
-    refine ⟨Presieve.singleton (𝟙 X), ?_, ?_⟩
-    · rw [← hJ]
-      exact J.has_isos _
-    · intro Z f hf
-      rw [heq]
-  · intro X Y c
-    obtain ⟨J, hJ⟩ := fullAffineEtalePrecoverage_isPretopology S
-    refine ⟨Presieve.singleton (𝟙 X), ?_, ?_⟩
-    · rw [← hJ]
-      exact J.has_isos _
-    · intro Z f hf
-      exact ⟨f ≫ (fullAffineEtaleInclusion S).preimage c, by simp⟩
-  · intro V
-    obtain ⟨I, U, f, hf⟩ := fullAffineEtale_image_cover S V
-    have hsurj : ∀ x : V.left, ∃ i y, (f i).left y = x := by
-      have h := (Scheme.ofArrows_mem_smallEtaleTopology_iff f).mp hf
-      intro x
-      have hx : x ∈ ⋃ i, Set.range (f i).left := by rw [h]; trivial
-      simpa only [Set.mem_iUnion, Set.mem_range] using hx
-    refine ⟨ULift.{u + 1} I, (fun i => U i.down), (fun i => f i.down), ?_⟩
-    have heq : Presieve.ofArrows
-        (fun i : ULift.{u + 1} I => (fullAffineEtaleInclusion S).obj (U i.down))
-        (fun i => f i.down) = Presieve.ofArrows _ f :=
-      Presieve.ofArrows_comp_eq_of_surjective f (a := ULift.down)
-        (fun i => ⟨⟨i⟩, rfl⟩)
-    exact (congrArg (· ∈ S.smallEtalePretopology V) heq).mpr
-      (smallEtale_cover_of_surjective S _ _ _ hsurj)
-
 /-- Source: Stacks 04HR. Proof: the full inclusion is a dense subsite for the finite
 affine topology, by finite affine refinement. Small affine image covers make it
 one-hypercover dense in universe u. Apply Mathlib
@@ -313,32 +223,6 @@ theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
   exact Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
 
 
-private noncomputable def affineEtaleFreeSectionsEquiv
-    {C : Type (u + 1)} [Category.{u} C] (U : C) (F : Cᵒᵖ ⥤ AddCommGrpCat.{u}) :
-    (yoneda.obj U ⋙ AddCommGrpCat.free ⟶ F) ≃+ F.obj (op U) where
-  toEquiv := ((AddCommGrpCat.adj.whiskerRight Cᵒᵖ).homEquiv _ _).trans yonedaEquiv
-  map_add' a b := by
-    change ((AddCommGrpCat.adj.whiskerRight Cᵒᵖ).homEquiv _ _ (a + b)).app
-      (op U) (𝟙 U) = _
-    simp only [Adjunction.homEquiv_apply, NatTrans.comp_app,
-      Adjunction.whiskerRight_unit_app_app]
-    rfl
-
-private noncomputable def affineEtaleSectionsEquiv
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u}] (U : C) (F : Sheaf J AddCommGrpCat.{u}) :
-    ((presheafToSheaf J AddCommGrpCat.{u}).obj
-      (yoneda.obj U ⋙ AddCommGrpCat.free) ⟶ F) ≃+ F.obj.obj (op U) :=
-  ((sheafificationAdjunction J AddCommGrpCat.{u}).homAddEquiv _ F).trans
-    (affineEtaleFreeSectionsEquiv U F.obj)
-
-
-private noncomputable def affineEtaleHZeroSectionsEquiv
-    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{w} (Sheaf J AddCommGrpCat.{u})]
-    (U : C) (F : Sheaf J AddCommGrpCat.{u}) :
-    Sheaf.H'.{w} F 0 U ≃+ F.obj.obj (op U) :=
-  Ext.addEquiv₀.trans (affineEtaleSectionsEquiv J U F)
 
 
 end AlgebraicGeometry.Scheme

@@ -73,17 +73,6 @@ noncomputable def isoPointOfRangeEq (h : Set.range j.left.base = Set.range g.lef
           rw [Category.assoc, hg]; rfl
       _ = B.hom := by rw [IsOpenImmersion.isoOfRangeEq_hom_fac, Over.w j])
 
-@[reassoc (attr := simp)]
-lemma isoPointOfRangeEq_hom_comp (h : Set.range j.left.base = Set.range g.left.base) :
-    (isoPointOfRangeEq j g h).hom ≫ g = j := by
-  ext1
-  exact IsOpenImmersion.isoOfRangeEq_hom_fac j.left g.left h
-
-@[reassoc (attr := simp)]
-lemma isoPointOfRangeEq_inv_comp (h : Set.range j.left.base = Set.range g.left.base) :
-    (isoPointOfRangeEq j g h).inv ≫ j = g := by
-  rw [Iso.inv_comp_eq, isoPointOfRangeEq_hom_comp]
-
 end OpenPoint
 
 /-- The underlying set of a rational point is a single point. -/
@@ -196,19 +185,6 @@ of the graph correspondence `(𝟙, Φ_m)` of the model Frobenius, `m ≥ 1`, th
 noncomputable def FixedLocus.isoSigmaPoint (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus)
     (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m) : F.F ≅ sigmaPoint k (FixedPoint Φ m) :=
   IsLimit.conePointUniqueUpToIso F.isLimit (hΦ.nonempty_isLimit_fixedPointsFork hm).some
-
-@[reassoc (attr := simp)]
-lemma FixedLocus.isoSigmaPoint_hom_fixedPointsι
-    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (hΦ : IsModelFrobenius Φ f₀ p)
-    (hm : 1 ≤ m) : (F.isoSigmaPoint hΦ hm).hom ≫ fixedPointsι Φ m = F.ι :=
-  IsLimit.conePointUniqueUpToIso_hom_comp _ _ WalkingParallelPair.zero
-
-/-- **The Frobenius fixed scheme** (blueprint `sk-lem-tf-fixed-points`): the fixed locus of
-`(𝟙, Φ_m)`, `m ≥ 1`, is isomorphic to `∐_{x ∈ X(k)^{Φ_m}} Spec k`. -/
-theorem FixedLocus.nonempty_iso_sigmaPoint (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus)
-    (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m) :
-    Nonempty (F.F ≅ sigmaPoint k (FixedPoint Φ m)) :=
-  ⟨F.isoSigmaPoint hΦ hm⟩
 
 /-- **The Frobenius fixed scheme** (blueprint `sk-lem-tf-fixed-points`):
 `Fix(Φ_m) ≅ ∐_{x ∈ X₀(𝔽_{q^m})} Spec k`, the disjoint union indexed by the `k`-points of `X₀`

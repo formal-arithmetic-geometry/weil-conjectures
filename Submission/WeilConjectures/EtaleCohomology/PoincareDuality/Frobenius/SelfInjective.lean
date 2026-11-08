@@ -6,7 +6,32 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.Algebra.Homology.DerivedCategory.HomToInjective
-public import Submission.WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectness
+public import Submission.WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
+public import Submission.WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
+public import Submission.WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
+public import Submission.WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.NumberTheory.Padics.Complex
+public import Submission.WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import Submission.WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
+public import Submission.WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
+public import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
+public import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

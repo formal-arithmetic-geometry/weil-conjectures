@@ -164,7 +164,7 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Submission.WeilConjectures.ConstructibleSheaf.Refinement
 import Submission.WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Submission.WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
+import Submission.WeilConjectures.ConstructibleSheaf.Defs
 import Submission.WeilConjectures.AlgebraicGeometry.CondensedFieldRankDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.Topology.LocallyConstant.Basic
@@ -286,58 +286,6 @@ instance isTriangulated_boundedConstructible_unitBallRingObj
     (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
-
-set_option linter.unusedVariables false in
-/-- For a noetherian scheme, bounded constructible complexes are triangulated for each
-allowed coefficient ring: a finite extension field, its ring of integers, the algebraic closure,
-or a finite discrete ring killed by a power of the fixed prime. The ring objects carry their
-canonical commutative ring-object structures.
-
-Proof: each of the four clauses is one of the instances above, found by typeclass inference.
-Each instance is the weak-Serre argument of the blueprint proof:
-the constructible modules (`IsConstructibleModuleObject`) contain `0`, are stable under
-isomorphisms, and are closed under kernels, cokernels and extensions, so by Stacks 06UQ
-(lem-sbc-cohomology-in-weak-serre-subcategory) the bounded complexes with constructible
-cohomology form a triangulated subcategory.
-1. `E̲`, `𝒪̲_E`, `ℚ̲̄_ℓ`: the instances `isTriangulated_boundedConstructible_continuousMapRingObj`,
-   `_padicIntegersRingObj`, `_padicAlgClRingObj`
-   (lem-sfb-bounded-constructible-triangulated-finiteness), with the closures from
-   lem-weil-pbc-condensed-constructible-serre and lem-weil-pbc-integral-constructible-serre.
-2. `T̲`: the instance `isTriangulated_boundedConstructible_finiteDiscreteRingObj`, with kernels by
-   lem-sfb-finite-discrete-internal-constructible-kernels and cokernels and extensions by
-   lem-weil-pbc-constructible-cokernels-extensions; the hypothesis `ℓ ^ n T = 0` is not needed.
-(blueprint: prop-sfb-bounded-constructible-triangulated) -/
-theorem isTriangulated_boundedConstructible
-    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
-    (∀ (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
-      [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-      [Algebra E (PadicAlgCl ℓ)] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)],
-      (boundedConstructible
-        (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)).IsTriangulated) ∧
-    (∀ (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E]
-      [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
-      [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E],
-      (boundedConstructible
-        (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)).IsTriangulated) ∧
-    (∀ (ℓ : ℕ) [Fact ℓ.Prime],
-      (boundedConstructible
-        (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)).IsTriangulated) ∧
-    (∀ (ℓ : ℕ) [Fact ℓ.Prime] (T : Type) [CommRing T] [TopologicalSpace T]
-      [IsTopologicalRing T] [DiscreteTopology T] [Finite T]
-      (hT : ∃ n : ℕ, ∀ t : T, (ℓ : T) ^ n * t = 0),
-      (boundedConstructible
-        (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)).IsTriangulated) := by
-  constructor
-  · intro ℓ instℓ E _ _ _ _ _
-    infer_instance
-  constructor
-  · intro ℓ instℓ E _ _ _ _ _
-    infer_instance
-  constructor
-  · intro ℓ instℓ
-    infer_instance
-  · intro ℓ instℓ T _ _ _ _ _ _
-    infer_instance
 
 
 end AlgebraicGeometry.ProEtale

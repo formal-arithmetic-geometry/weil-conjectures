@@ -168,18 +168,6 @@ noncomputable def rightTriangle : d.functor ⟶ d.functor :=
     (Functor.associator d.functor (R(f)_![ModuleCat.{u + 1} Λ]) d.functor).inv ≫
     Functor.whiskerRight d.counit d.functor
 
-/-- The components of the first triangular composite: `ε_{Rf_! A} ∘ Rf_! η_A`. -/
-lemma leftTriangle_app (A : DerivedCategoryModule Λ X) :
-    d.leftTriangle.app A =
-      (R(f)_![ModuleCat.{u + 1} Λ]).map (d.unit.app A) ≫
-        d.counit.app ((R(f)_![ModuleCat.{u + 1} Λ]).obj A) := by
-  simp [leftTriangle]
-
-/-- The components of the second triangular composite: `G_L ε_K ∘ η_{G_L K}`. -/
-lemma rightTriangle_app (K : DerivedCategoryModule Λ Y) :
-    d.rightTriangle.app K = d.unit.app (d.functor.obj K) ≫ d.functor.map (d.counit.app K) := by
-  simp [rightTriangle]
-
 variable (hl : d.leftTriangle = 𝟙 _) (hr : d.rightTriangle = 𝟙 _)
 
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion

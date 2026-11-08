@@ -358,63 +358,6 @@ section RelativeNoether
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The conclusion of blueprint `thm-zl-relative-noether` over a subset `Z` of the target `Y`: there
-are finite partitions of `Z` and of `f ⁻¹ Z` into reduced locally closed subschemes such that every
-source piece maps into a target piece `T` through a finite morphism to an iterated relative affine
-line over `T`. -/
-def Scheme.Hom.HasNoetherPartitionOver (Z : Set Y) : Prop :=
-  ∃ (ιT : Type) (_ : Finite ιT) (T : ιT → Scheme.{u}) (j : ∀ b, T b ⟶ Y),
-    (∀ b, IsImmersion (j b) ∧ IsReduced (T b) ∧ Set.range (j b) ⊆ Z) ∧
-    (∀ y ∈ Z, ∃! b, y ∈ Set.range (j b)) ∧
-  ∃ (ιS : Type) (_ : Finite ιS) (S : ιS → Scheme.{u}) (i : ∀ a, S a ⟶ X),
-    (∀ a, IsImmersion (i a) ∧ IsReduced (S a) ∧ Set.range (i a) ⊆ f ⁻¹' Z) ∧
-    (∀ x ∈ f ⁻¹' Z, ∃! a, x ∈ Set.range (i a)) ∧
-  ∃ (σ : ιS → ιT) (d : ιS → ℕ) (ν : ∀ a, S a ⟶ iteratedAffineLine (T (σ a)) (d a)),
-    ∀ a, IsFinite (ν a) ∧ ν a ≫ iteratedAffineLineProj _ _ ≫ j (σ a) = i a ≫ f
-
-
-/-- Partitions over disjoint subsets combine to a partition over their union. -/
-lemma Scheme.Hom.HasNoetherPartitionOver.union {Z₁ Z₂ : Set Y} (h : Disjoint Z₁ Z₂)
-    (h₁ : f.HasNoetherPartitionOver Z₁) (h₂ : f.HasNoetherPartitionOver Z₂) :
-    f.HasNoetherPartitionOver (Z₁ ∪ Z₂) := by
-  obtain ⟨ιT₁, _, T₁, j₁, hj₁, hu₁, ιS₁, _, S₁, i₁, hi₁, hv₁, σ₁, d₁, ν₁, hν₁⟩ := h₁
-  obtain ⟨ιT₂, _, T₂, j₂, hj₂, hu₂, ιS₂, _, S₂, i₂, hi₂, hv₂, σ₂, d₂, ν₂, hν₂⟩ := h₂
-  have hX : Disjoint (f ⁻¹' Z₁) (f ⁻¹' Z₂) := h.preimage f
-  refine ⟨ιT₁ ⊕ ιT₂, inferInstance, Sum.elim T₁ T₂, fun | .inl b => j₁ b | .inr b => j₂ b,
-    ?_, ?_, ιS₁ ⊕ ιS₂, inferInstance, Sum.elim S₁ S₂, fun | .inl a => i₁ a | .inr a => i₂ a,
-    ?_, ?_, Sum.map σ₁ σ₂, Sum.elim d₁ d₂, fun | .inl a => ν₁ a | .inr a => ν₂ a, ?_⟩
-  · rintro (b | b)
-    · exact ⟨(hj₁ b).1, (hj₁ b).2.1, (hj₁ b).2.2.trans Set.subset_union_left⟩
-    · exact ⟨(hj₂ b).1, (hj₂ b).2.1, (hj₂ b).2.2.trans Set.subset_union_right⟩
-  · rintro y (hy | hy)
-    · obtain ⟨b, hb, hb'⟩ := hu₁ y hy
-      refine ⟨.inl b, hb, ?_⟩
-      rintro (c | c) hc
-      · exact congrArg _ (hb' c hc)
-      · exact (h.ne_of_mem hy ((hj₂ c).2.2 hc) rfl).elim
-    · obtain ⟨b, hb, hb'⟩ := hu₂ y hy
-      refine ⟨.inr b, hb, ?_⟩
-      rintro (c | c) hc
-      · exact (h.ne_of_mem ((hj₁ c).2.2 hc) hy rfl).elim
-      · exact congrArg _ (hb' c hc)
-  · rintro (a | a)
-    · exact ⟨(hi₁ a).1, (hi₁ a).2.1, (hi₁ a).2.2.trans (Set.preimage_mono Set.subset_union_left)⟩
-    · exact ⟨(hi₂ a).1, (hi₂ a).2.1,
-        (hi₂ a).2.2.trans (Set.preimage_mono Set.subset_union_right)⟩
-  · rintro x (hx | hx)
-    · obtain ⟨b, hb, hb'⟩ := hv₁ x hx
-      refine ⟨.inl b, hb, ?_⟩
-      rintro (c | c) hc
-      · exact congrArg _ (hb' c hc)
-      · exact (hX.ne_of_mem hx ((hi₂ c).2.2 hc) rfl).elim
-    · obtain ⟨b, hb, hb'⟩ := hv₂ x hx
-      refine ⟨.inr b, hb, ?_⟩
-      rintro (c | c) hc
-      · exact (hX.ne_of_mem ((hi₁ c).2.2 hc) hx rfl).elim
-      · exact congrArg _ (hb' c hc)
-  · rintro (a | a)
-    · exact hν₁ a
-    · exact hν₂ a
 
 
 end RelativeNoether

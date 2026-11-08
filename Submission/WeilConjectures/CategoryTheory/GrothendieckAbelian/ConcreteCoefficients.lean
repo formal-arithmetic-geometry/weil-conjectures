@@ -64,8 +64,4 @@ instance (priority := low) HasSmallSiteSheafify.of_concreteCategory (A : Type u'
 
 variable (Λ : Type (u + 1)) [Ring Λ]
 
-example : HasSmallSiteSheafify (ModuleCat.{u + 1} Λ) := inferInstance
-
-example : HasSmallSiteSheafify AddCommGrpCat.{u + 1} := inferInstance
-
 end CategoryTheory

@@ -433,18 +433,6 @@ lemma Etale.toPresheafFiber_sheafFiberToLowerStar (t : Scheme.Hom.GeometricFiber
           ((f)_*[A].obj G).obj :=
   (Scheme.pointSmallEtale t.1).toPresheafFiber_presheafFiberDesc _ _ U x
 
-omit [IsSeparated f] in
-/-- The point `(u, t')` of `U ×_Y X` attached to a geometric point `u` of `U` over `t` and a
-geometric point `t'` of `X` over `y`. -/
-lemma Etale.basePt_fiberMapPoint (t t' : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
-    (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
-    Scheme.Hom.basePt f (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x)) t' =
-      pullback.lift x.left t'.1 (by
-        have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
-        change x.left ≫ U.hom ≫ f = _
-        rw [← Category.assoc, hx, t.2, t'.2]) :=
-  rfl
-
 omit [HasSmallSiteSheafify A] in
 /-- Restricting the germ of the extension by zero of a section back to `t` gives the germ of
 the section. -/
@@ -769,21 +757,6 @@ lemma Etale.bijective_lowerStarUnit_comp_map_of_concrete
     ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun ψ ↦ ⟨inv (Etale.etaleLowerShriekToLowerStar A f G) ≫ ψ,
       IsIso.hom_inv_id_assoc _ _⟩⟩
 
-
-omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f] [IsFinite f] in
-lemma Etale.sheafCompose_preadditiveCoyoneda_map_hom_app_apply {Z : Scheme.{u}}
-    {P Q : Sheaf Z.smallEtaleTopology A} (ψ : P ⟶ Q) {a : A} (U : Z.Etaleᵒᵖ)
-    (x : a ⟶ P.obj.obj U) :
-    (((sheafCompose _ (preadditiveCoyoneda.obj (op a))).map ψ).hom.app U).hom x =
-      x ≫ ψ.hom.app U :=
-  rfl
-
-omit [IsGrothendieckAbelian.{u + 1} A] [AlgebraicGeometry.Etale f] [IsSeparated f] [IsFinite f] in
-lemma Etale.sheafCompose_map_preadditiveCoyoneda_map_app_hom_app_apply {Z : Scheme.{u}}
-    (P : Sheaf Z.smallEtaleTopology A) {a a' : A} (g : a ⟶ a') (U : Z.Etaleᵒᵖ)
-    (x : a' ⟶ P.obj.obj U) :
-    (((sheafCompose_map _ (preadditiveCoyoneda.map g.op)).app P).hom.app U).hom x = g ≫ x :=
-  rfl
 
 omit [IsGrothendieckAbelian.{u + 1} A] in
 /-- **Extension by zero off the graphs is the unit of an adjunction `f_* ⊣ f^*`** for a finite

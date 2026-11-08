@@ -41,12 +41,6 @@ abbrev semiRepresentablePoints {X : Scheme.{u}} (T : X.Etale)
   (FormalCoproduct.incl X.Etale).obj T ⟶ L
 
 /-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
-def semiRepresentablePointsMap {X : Scheme.{u}} (T : X.Etale)
-    {L L' : FormalCoproduct.{w} X.Etale} (f : L ⟶ L') :
-    semiRepresentablePoints T L → semiRepresentablePoints T L' :=
-  fun t => t ≫ f
-
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
 def IsSemiRepresentableCovering {X : Scheme.{u}}
     {U V : FormalCoproduct.{w} X.Etale} (f : U ⟶ V) : Prop :=
   ∀ j : V.I,

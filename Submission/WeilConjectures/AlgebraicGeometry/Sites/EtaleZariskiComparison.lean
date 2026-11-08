@@ -8,7 +8,8 @@ module
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
 public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Submission.WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
-public import Submission.WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Submission.WeilConjectures.Topology.Sheaves.GrothendieckVanishing
 public import Submission.WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
 

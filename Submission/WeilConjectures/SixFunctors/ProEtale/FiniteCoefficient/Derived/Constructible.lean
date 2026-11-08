@@ -166,13 +166,6 @@ noncomputable def DerivedCategoryBoundedConstructible.ι :
 @[inherit_doc DerivedCategoryBoundedConstructible]
 scoped notation "Dᵇc_proét(" X ", " A ")" => ProEtale.DerivedCategoryBoundedConstructible A X
 
-/-- Blueprint `sk-def-sf-categories`: the inclusion of the small category `Dᵇc_proét(X, A)` into
-the ambient bounded derived category `Dᵇ(X_proét, A)`. -/
-noncomputable def DerivedCategoryBoundedConstructible.toBounded :
-    DerivedCategoryBoundedConstructible A X ⥤
-      _root_.DerivedCategory.Bounded (Sheaf (Scheme.ProEt.topology X) A) :=
-  ObjectProperty.ιOfLE fun _ hK ↦ DerivedCategory.boundedConstructible.bounded hK
-
 /-- Blueprint `def-weil-constructible-intervals`: Constructible cohomological intervals.
 
 Membership in `D_c^[a, b](X, A)` as an object property of `D(X_proét)`: bounded
@@ -181,13 +174,6 @@ constructible with homology concentrated in `[a, b]` (blueprint
 noncomputable def DerivedCategory.constructibleIn (a b : ℤ) :
     ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   DerivedCategory.boundedConstructible A X ⊓ _root_.DerivedCategory.homologyConcentratedIn a b
-
-lemma DerivedCategory.constructibleIn_iff (a b : ℤ)
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    DerivedCategory.constructibleIn A X a b K ↔
-      DerivedCategory.boundedConstructible A X K ∧
-        _root_.DerivedCategory.homologyConcentratedIn a b K :=
-  Iff.rfl
 
 /-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
 
@@ -204,11 +190,6 @@ noncomputable def DerivedCategoryConstructibleIn.ι (a b : ℤ) :
     DerivedCategoryConstructibleIn A X a b ⥤
       _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   (DerivedCategory.constructibleIn A X a b).ι
-
-/-- The inclusion `D_c^[a, b](X, A) ⊆ Dᵇc_proét(X, A)`. -/
-noncomputable def DerivedCategoryConstructibleIn.toBoundedConstructible (a b : ℤ) :
-    DerivedCategoryConstructibleIn A X a b ⥤ DerivedCategoryBoundedConstructible A X :=
-  ObjectProperty.ιOfLE inf_le_left
 
 end ProEtale
 

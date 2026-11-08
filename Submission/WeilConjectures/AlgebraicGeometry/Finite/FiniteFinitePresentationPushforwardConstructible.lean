@@ -12,11 +12,70 @@ public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Submission.WeilConjectures.ConstructibleSheaf.Pullback
 import Submission.WeilConjectures.SixFunctors.Finite.BaseChange
-import Submission.WeilConjectures.AlgebraicGeometry.QuasiFinite.QuasiFiniteAffineEtaleThickeningDecomposition
+import Submission.WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
+import Submission.WeilConjectures.AlgebraicGeometry.Thickening
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Submission.WeilConjectures.AlgebraicGeometry.NoetherianApproximation
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteStrata
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Submission.WeilConjectures.ConstructibleSheaf.Refinement
+import Mathlib.RingTheory.Spectrum.Prime.RingHom
+import Submission.WeilConjectures.AlgebraicGeometry.NoetherNormalization
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Mathlib.AlgebraicGeometry.Limits
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.RingTheory.FinitePresentation
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.CategoryTheory.Category.Preorder
+import Mathlib.RingTheory.FiniteType
+import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import Mathlib.Topology.KrullDimension
+import Submission.WeilConjectures.Mathlib.Topology.KrullDimension
+import Submission.WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Mathlib.AlgebraicGeometry.Fiber
+import Submission.WeilConjectures.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.Topology.Defs.Filter
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Submission.WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
+import Submission.WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Mathlib.RingTheory.AdjoinRoot
+import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+import Submission.WeilConjectures.ProperBaseChange.MonicTensorPresentation.MonicTensorPresentation
+import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Mathlib.LinearAlgebra.FreeModule.Basic
+import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+import Mathlib.AlgebraicGeometry.Morphisms.Flat
+import Submission.WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Submission.WeilConjectures.AlgebraicGeometry.Finite.Etale.FiniteEtalePushforwardConstructible
-import Submission.WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleModuleSurjectiveDescent
-import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import Submission.WeilConjectures.SixFunctors.BaseChange.Etale
+import Submission.WeilConjectures.ConstructibleSheaf.OpenClosed
+import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Submission.WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
+import Submission.WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Submission.WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSurjectivePullback
+import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Submission.WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -38,16 +97,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-private theorem constructible_pullback
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsConstructibleEtaleModuleSheaf F) :
-    IsConstructibleEtaleModuleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj F) := by
-  have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
-  exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
-    (IsConstructibleSheaf.upperStar f F)
-
 private theorem constructible_of_iso
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
@@ -55,99 +104,5 @@ private theorem constructible_of_iso
   have := (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
   exact (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
     (IsConstructibleSheaf.of_iso e)
-
-private theorem constructible_finite_affine
-    {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : X ⟶ Y) [IsFinite f]
-    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsConstructibleEtaleModuleSheaf F) :
-    IsConstructibleEtaleModuleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F) := by
-  have := (IsFinite.locallyQuasiFinite_and_quasiCompact f).1
-  have hqf : Scheme.Hom.IsQuasiFinite f :=
-    ⟨inferInstance, inferInstance, fun x ↦ isOpen_discrete _⟩
-  obtain ⟨Y', hY', a, ha, Z, i, hi, hefin, heet⟩ :=
-    exists_affine_surjective_finite_etale_thickening_of_isQuasiFinite f hqf
-      ⟨inferInstance, inferInstance, inferInstance⟩
-  have := hY'
-  have := ha
-  have := hi.1
-  have := hi.2
-  have := hefin
-  have := heet
-  have : IsAffine (Limits.pullback f a) := isAffine_of_isAffineHom (Limits.pullback.snd f a)
-  have : IsAffine Z := isAffine_of_isAffineHom i
-  let F' := (Etale.upperStar (ModuleCat.{u + 1} Λ) (Limits.pullback.fst f a)).obj F
-  let H := (Etale.upperStar (ModuleCat.{u + 1} Λ) i).obj F'
-  have hH : IsConstructibleEtaleModuleSheaf H :=
-    constructible_pullback i F' (constructible_pullback (Limits.pullback.fst f a) F hF)
-  have heH := isConstructibleEtaleModuleSheaf_lowerStar_of_finite_etale
-    (i ≫ Limits.pullback.snd f a) H hH
-  have : (Etale.upperStar (ModuleCat.{u + 1} Λ) i).IsEquivalence :=
-    Etale.isEquivalence_upperStar_of_thickening (ModuleCat.{u + 1} Λ) i hi.2.surj
-  -- Topological invariance makes the adjunction unit invertible for module sheaves.
-  let unitIso : F' ≅ (Etale.lowerStar (ModuleCat.{u + 1} Λ) i).obj H :=
-    asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app F')
-  let compIso := (Etale.lowerStar (ModuleCat.{u + 1} Λ) (Limits.pullback.snd f a)).mapIso
-    unitIso ≪≫ (Etale.lowerStarComp (ModuleCat.{u + 1} Λ) i (Limits.pullback.snd f a)).app H
-  have hf' := constructible_of_iso compIso.symm heH
-  -- The finite exchange isomorphism has source a^*(f_*F).
-  have hsq := IsPullback.of_hasPullback f a
-  have := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ) hsq
-  have hbc := constructible_of_iso
-    (asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) hsq.toCommSq).app F)).symm hf'
-  exact isConstructibleEtaleModuleSheaf_of_surjective_pullback a _ hbc
-
-/-- Finite finitely presented pushforward preserves constructible module sheaves on qcqs
-schemes over a finite commutative coefficient ring.
-
-Source: Stacks Project, Etale Cohomology, Tag 095R,
-lemma-finite-pushforward-constructible, finite-ring and qcqs specialization
-(blueprint: lem-weil-pbc-finite-fp-pushforward-constructible).
-
-Proof:
-1. Choose a surjection a : Y₀ → Y with affine source, using Mathlib's finite
-   affine-cover construction for a quasi-compact scheme. Its base change f₀ is
-   finite with affine source. Pullback preserves constructibility by the comparison
-   theorem and prop-constructible-pullback. Finite exchange and surjective descent
-   reduce the original assertion to that for f₀. Work henceforth with X,Y affine.
-2. Apply pqf-lem-finite-qf and
-   lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition to obtain an
-   affine surjection a : Y' → Y and a surjective closed immersion i : Z → X'
-   for X' = X ×_Y Y', such that e : Z → Y' is finite etale.
-   By lem-weil-pbc-finite-morphism-permanence, X' is affine and finite over Y';
-   Z is affine as a closed subscheme. No flatness of a is needed.
-3. Pull back F to F' on X' and then to H on Z. Both are constructible by
-   prop-constructible-pullback and the module-sheaf comparison, with unchanged
-   constant coefficient ring (def-weil-pbc-inverse-image).
-4. By sbc-lem-thickening-etale-site, i induces an equivalence of etale topoi.
-   It preserves constant rings and products, hence module objects and their
-   morphisms, and identifies F' with i_*H through the adjunction unit.
-   The sectionwise composition isomorphism identifies f'_*F' with e_*H.
-5. Apply lem-weil-pbc-finite-etale-pushforward-constructible to e and H.
-   Transport constructibility to f'_*F' by lemma-constructible-iso-invariance
-   and lem-weil-pbc-constructible-etale-module-sheaf-comparison.
-6. Finite exchange identifies a^*(f_*F) with f'_*F'. Apply
-   lem-weil-pbc-constructible-module-surjective-descent to the affine surjection a.
-   The affine-cover reduction from step 1 finishes the original qcqs case. -/
-theorem isConstructibleEtaleModuleSheaf_lowerStar_of_finite_finitePresentation
-    {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) [IsFinite f]
-    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsConstructibleEtaleModuleSheaf F) :
-    IsConstructibleEtaleModuleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F) := by
-  obtain ⟨R, a, ha⟩ := (compactSpace_iff_exists (X := Y)).mp inferInstance
-  have : Surjective a := ⟨ha⟩
-  have : IsAffine (Limits.pullback f a) := isAffine_of_isAffineHom (Limits.pullback.snd f a)
-  have hF' := constructible_pullback (Limits.pullback.fst f a) F hF
-  have hpush := constructible_finite_affine (Limits.pullback.snd f a) _ hF'
-  -- The finite exchange isomorphism has source a^*(f_*F).
-  have hsq := IsPullback.of_hasPullback f a
-  have := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ) hsq
-  have hbc := constructible_of_iso
-    (asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) hsq.toCommSq).app F)).symm hpush
-  exact isConstructibleEtaleModuleSheaf_of_surjective_pullback a _ hbc
 
 end AlgebraicGeometry.Scheme

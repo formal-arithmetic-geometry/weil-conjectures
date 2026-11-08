@@ -6,7 +6,15 @@ Authors: Bin Wu
 module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Submission.WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleConstruction
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Submission.WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate

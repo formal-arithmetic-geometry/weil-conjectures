@@ -10,7 +10,8 @@ public import Submission.WeilConjectures.WeilSheaf.DerivedHom
 public import Submission.WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import Submission.WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedTensorHomModelSupplement
 public import Submission.WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
-public import Submission.WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
+public import Submission.WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import Submission.WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Submission.WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses

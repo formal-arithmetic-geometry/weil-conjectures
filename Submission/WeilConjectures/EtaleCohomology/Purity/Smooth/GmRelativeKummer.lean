@@ -201,11 +201,6 @@ section RankOne
 
 variable (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [HasInvertibleExponent Λ (Spec (.of Ω))]
 
-/-- Post-composition with an isomorphism, as an additive equivalence of hom groups. -/
-noncomputable def postcompAddEquiv {C : Type*} [Category C] [Preadditive C] {A B B' : C}
-    (e : B ≅ B') : (A ⟶ B) ≃+ (A ⟶ B') :=
-  AddEquiv.mk ((Iso.refl A).homCongr e) (fun f g ↦ by simp [Iso.homCongr])
-
 /-- The zero locus `V(t)` of the coordinate of `𝔸¹_S` is connected when `S` is: it is isomorphic
 to `S` through the zero section. -/
 lemma connectedSpace_zeroLocusSubscheme_coord (S : Scheme.{u}) [ConnectedSpace S] :
@@ -260,74 +255,6 @@ theorem supportCohomologyAffineLineLinearEquiv_kummerBoundary :
           (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) = 1 := by
   simp [supportCohomologyAffineLineLinearEquiv, LinearEquiv.symm_apply_eq, Linear.homCongr_apply]
 
-/-- Blueprint `thm-pur-rank-one-local-calculation`: Rank-one local calculation
-
-Let `Ω` be an algebraically closed field (the residue field of a geometric point), `Λ` a finite
-ring whose exponent is invertible in `Ω`, `Z = V(t) ⊂ 𝔸¹_Ω` the origin and
-`Λ(1) = μₙ ⊗ Λ`. The cohomology with supports `H^q_Z(𝔸¹_Ω, Λ(1))`
-(`AlgebraicGeometry.Etale.derivedSupportCohomology`) vanishes for `q ≠ 2`, and the `Λ`-linear
-isomorphism `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Λ` of
-`AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv` sends the boundary `∂κ(t)` of
-the Kummer class of the coordinate to `1`; equivalently, `c ↦ c • ∂κ(t)` is a bijection
-`Λ ≅ H²_Z(𝔸¹_Ω, Λ(1))`, i.e. `∂κ(t)` is a free generator. Here `∂κ(t)` is read in `H²_Z` through
-`H²_Z(𝔸¹_Ω, Λ(1)) ≅ Hom(Λ_Z, Ri^!(Λ(1)[2]))` (`AlgebraicGeometry.Etale.supportCohomologyAddEquiv`)
-as its adjoint `Λ_Z ⟶ Ri^!(Λ(1)[2])`. The proof is the global orientation over `Y = Spec Ω`
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`): it
-identifies `Ri^!(Λ(1)[2])` with `Λ_Z`, and `Z ≅ Spec Ω` has cohomology `Λ` in degree zero only. -/
-theorem rankOne_supportCohomology_affineLine :
-    (∀ q : ℤ, q ≠ 2 → Subsingleton ((derivedSupportCohomology (ModuleCat.{u + 1} Λ)
-      (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
-        {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)}) q).obj
-          (tateObject Λ 𝔸(ULift.{u} (Fin 1); Spec (.of Ω)) 1))) ∧
-    supportCohomologyAffineLineLinearEquiv Λ Ω ((supportCohomologyAddEquiv Λ _ _ 2).symm
-      (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
-        {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)})
-        (shiftSupportedClass Λ _ 2
-          (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) = 1 ∧
-    Function.Bijective (fun c : Λ ↦ c • (supportCohomologyAddEquiv Λ _ _ 2).symm
-      (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); Spec (.of Ω)).zeroLocusSubschemeι
-        {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)})
-        (shiftSupportedClass Λ _ 2
-          (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) := by
-  let X := 𝔸(ULift.{u} (Fin 1); Spec (.of Ω))
-  let t : Γ(X, ⊤) := AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)
-  let ι := X.zeroLocusSubschemeι {t}
-  let Z := X.zeroLocusSubscheme {t}
-  let L := tateObject Λ X 1
-  let φ := supportedClassMap Λ ι (shiftSupportedClass Λ _ 2
-    (kummerBoundary Λ t))
-  have hφ : IsIso φ := isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed Λ
-    (k := Ω) (𝟙 (Spec (.of Ω)))
-  let eZ := AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) (Spec (.of Ω))
-    (s := {t}) Set.range_unique
-  have : Projective (𝟙_ (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-    projective_unit_of_iso Λ eZ.symm
-  refine ⟨fun q hq ↦ ?_, supportCohomologyAffineLineLinearEquiv_kummerBoundary Λ Ω, ?_⟩
-  · -- `Ri^!(Λ(1)[q]) ≅ Λ_Z[q - 2]`, and `Hom(Λ_Z, Λ_Z[n]) = 0` for `n ≠ 0`
-    let I : (R(ι)^![Λ]).obj (L⟦q⟧) ≅ (constantComplex Λ Z)⟦q - 2⟧ :=
-      (R(ι)^![Λ]).mapIso ((shiftFunctorAdd' _ 2 (q - 2) q (by ring)).app L) ≪≫
-        ((R(ι)^![Λ]).commShiftIso (q - 2)).app (L⟦(2 : ℤ)⟧) ≪≫
-        (shiftFunctor _ (q - 2)).mapIso (asIso φ).symm
-    let u := constantComplexIsoSingleFunctor Λ Z
-    have hz : IsZero ((_root_.DerivedCategory.homologyFunctor _ 0).obj
-        ((constantComplex Λ Z)⟦q - 2⟧)) :=
-      (isZero_homology_constantComplex Λ Z (q - 2) (by omega)).of_iso
-        (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso (q - 2) 0 (q - 2)
-          (by ring)).app _)
-    have : Subsingleton (constantComplex Λ Z ⟶ (constantComplex Λ Z)⟦q - 2⟧) := by
-      refine ⟨fun a b ↦ ?_⟩
-      have h := (_root_.DerivedCategory.homSingleEquivOfProjective
-        (𝟙_ (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) 0
-          ((constantComplex Λ Z)⟦q - 2⟧)).injective (a₁ := u.inv ≫ a) (a₂ := u.inv ≫ b)
-          (hz.eq_of_tgt _ _)
-      simpa using congrArg (fun f ↦ u.hom ≫ f) h
-    exact ((supportCohomologyAddEquiv Λ ι L q).trans
-      (postcompAddEquiv I)).toEquiv.subsingleton
-  · convert (supportCohomologyAffineLineLinearEquiv Λ Ω).symm.bijective using 1
-    funext c
-    rw [LinearEquiv.eq_symm_apply, map_smul,
-      supportCohomologyAffineLineLinearEquiv_kummerBoundary, smul_eq_mul, mul_one]
-
 end RankOne
 
 section Gysin
@@ -360,80 +287,6 @@ noncomputable def supportCohomologyLinearEquivΓHomologyZero :
           (shiftSupportedClass Λ _ 2
             (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0)))))).symm ≪≫
           constantComplexIsoSingleFunctor Λ _))
-
-include aY in
-@[simp]
-lemma supportCohomologyLinearEquivΓHomologyZero_apply
-    (x : (derivedSupportCohomology (ModuleCat.{u + 1} Λ)
-      (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)}) 2).obj
-        (tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)) :
-    supportCohomologyLinearEquivΓHomologyZero Λ aY x =
-      homConstantComplexLinearMapΓHomologyZero Λ _ (supportCohomologyAddEquiv Λ _ _ 2 x) := by
-  unfold supportCohomologyLinearEquivΓHomologyZero
-  rw [LinearEquiv.trans_apply]
-  simp only [LinearEquiv.ofBijective_apply, supportCohomologyLinearEquiv_apply]
-
-include aY in
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section
-
-Let `s : Z = V(t) ⟶ 𝔸¹_Y` be the zero section (`Z ≅ Y`) and `R = Rs^!(Λ(1)[2])`. Then:
-
-1. `R` lies in `D^b_{ctf}(Z, Λ)`, is concentrated in degree zero, and its cohomology sheaf `H⁰(R)`
-   is the constant sheaf `Λ` (lisse of rank one, generated by the boundary of `κ(t)`); indeed
-   `R ≅ Λ_Z` through the adjoint of `∂κ(t)`
-   (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`);
-2. `Γ(Z, H⁰(R)) ≅ H²_Z(𝔸¹_Y, Λ(1))` through
-   `AlgebraicGeometry.Etale.supportCohomologyLinearEquivΓHomologyZero`, and this isomorphism sends
-   the boundary `∂κ(t)` of the Kummer class of `t`, read in `H²_Z(𝔸¹_Y, Λ(1))` through
-   `H²_Z(𝔸¹_Y, Λ(1)) ≅ Hom(Λ_Z, R)` (`AlgebraicGeometry.Etale.supportCohomologyAddEquiv`) as the
-   morphism `supportedClassMap (∂κ(t)) : Λ_Z ⟶ R`, to the global section of `H⁰(R)` determined
-   by `supportedClassMap (∂κ(t))`: the image of `1` under
-   `H⁰(supportedClassMap (∂κ(t))) : Λ = H⁰(Λ_Z) ⟶ H⁰(R)`. -/
-theorem gysin_structure_zeroSection :
-    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ)
-        (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme {AffineSpace.coord Y (ULift.up 0)})
-        ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
-          ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) ∧
-      (∀ n : ℤ, n ≠ 0 → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
-        ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
-          ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)))) ∧
-      Nonempty ((_root_.DerivedCategory.homologyFunctor _ 0).obj
-        ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
-          {AffineSpace.coord Y (ULift.up 0)})^![Λ]).obj
-          ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) ≅
-        (constantSheaf _ (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) ∧
-      supportCohomologyLinearEquivΓHomologyZero Λ aY ((supportCohomologyAddEquiv Λ _ _ 2).symm
-          (supportedClassMap Λ
-            (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
-            (shiftSupportedClass Λ _ 2
-              (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0)))))) =
-        ((constantSheafΓAdj _ (ModuleCat.{u + 1} Λ)).homEquiv _ _
-          ((homologyZeroConstantComplexIso Λ _).inv ≫
-            (_root_.DerivedCategory.homologyFunctor _ 0).map (supportedClassMap Λ
-              (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
-              (shiftSupportedClass Λ _ 2
-                (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))))).hom 1 := by
-  let X := 𝔸(ULift.{u} (Fin 1); Y)
-  let t : Γ(X, ⊤) := AffineSpace.coord Y (ULift.up 0)
-  let ι := X.zeroLocusSubschemeι {t}
-  let Z := X.zeroLocusSubscheme {t}
-  let L := tateObject Λ X 1
-  let φ := supportedClassMap Λ ι (shiftSupportedClass Λ _ 2
-    (kummerBoundary Λ t))
-  have hφ : IsIso φ := isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed Λ aY
-  let H := _root_.DerivedCategory.homologyFunctor (Sheaf Z.smallEtaleTopology
-    (ModuleCat.{u + 1} Λ))
-  let P := (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)
-  let eH : (H 0).obj ((R(ι)^![Λ]).obj (L⟦(2 : ℤ)⟧)) ≅ P :=
-    (H 0).mapIso (asIso φ).symm ≪≫ homologyZeroConstantComplexIso Λ Z
-  refine ⟨constructibleFiniteTor_of_iso Λ (asIso φ) (constructibleFiniteTor_constantComplex Λ Z),
-    fun n hn ↦ (isZero_homology_constantComplex Λ Z n hn).of_iso ((H n).mapIso (asIso φ).symm),
-    ⟨eH⟩, ?_⟩
-  simp only [supportCohomologyLinearEquivΓHomologyZero_apply, AddEquiv.apply_symm_apply,
-    homConstantComplexLinearMapΓHomologyZero_apply]
 
 end Gysin
 

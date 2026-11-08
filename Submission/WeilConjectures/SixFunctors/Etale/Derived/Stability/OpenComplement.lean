@@ -76,12 +76,6 @@ def OpenComplementBound {V T : Scheme.{u}} (j : V ⟶ T) (c : ℕ) : Prop :=
     ∀ (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsConstructibleSheaf F →
       ∀ q : ℤ, IsConstructibleSheaf (higherDirectImage Λ j q F)
 
-variable {Λ} in
-/-- The open-complement condition is monotone in its constant. -/
-lemma OpenComplementBound.mono {V T : Scheme.{u}} {j : V ⟶ T} {c c' : ℕ} (hcc' : c ≤ c')
-    (h : OpenComplementBound Λ j c) : OpenComplementBound Λ j c' :=
-  ⟨fun M q hq ↦ h.1 M q (by omega), h.2⟩
-
 /-- Blueprint `thm-pur-open-complement-unconditional`: The open-complement condition is
 unconditional and uniform in the coefficient ring.
 

@@ -224,13 +224,6 @@ def PreZeroHypercover.RelativeLimitPresentation.onePullbacks {J : Type*} [Catego
   hp₂ {i j} k := (pres.pres₀ j).isLimit.hom_ext (by simp)
   w k := by ext; simp [pullback.condition]
 
-noncomputable
-def PreZeroHypercover.RelativeLimitPresentation.preOneHypercoverOnePullbacksIso
-    {I : Type*} [Category* I] {X : D}
-    {E : PreZeroHypercover.{w} X} (pres : E.RelativeLimitPresentation F I) (a : I) :
-    pres.onePullbacks.preOneHypercover a ≅ (pres.preZeroHypercover a).toPreOneHypercover :=
-  Iso.refl _
-
 @[simp]
 lemma GrothendieckTopology.toGrothendieck_toPrecoverage {C : Type*} [Category* C]
     (J : GrothendieckTopology C) :

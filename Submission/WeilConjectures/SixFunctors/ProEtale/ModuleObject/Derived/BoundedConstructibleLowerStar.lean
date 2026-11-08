@@ -446,12 +446,6 @@ noncomputable def boundedConstructibleLowerShriek :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f)
 
-/-- The defining equation of `boundedConstructibleLowerShriek` (`ℚ̄_ℓ`-coefficient). -/
-lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek ℓ f =
-      boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f) :=
-  rfl
-
 /-- The derived lower shriek on bounded constructible complexes is the restriction of the
 derived lower shriek `R(f)_!⟦ℚ̲̄_ℓ⟧` on the ambient derived categories. -/
 noncomputable def boundedConstructibleLowerShriekCompatibility :
@@ -516,12 +510,6 @@ attached to the compactification `compactificationOverField f` chosen by Nagata'
 noncomputable def boundedConstructibleLowerShriek :
     Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
   boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
-
-/-- The defining equation of `boundedConstructibleLowerShriek` (`E`-coefficient). -/
-lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek ℓ E f =
-      boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f) :=
-  rfl
 
 /-- The derived lower shriek on bounded constructible complexes is the restriction of the
 derived lower shriek `R(f)_!⟦E̲⟧` on the ambient derived categories. -/
@@ -593,12 +581,6 @@ noncomputable def boundedConstructibleLowerShriek :
       E⟧ :=
   boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
 
-/-- The defining equation of `boundedConstructibleLowerShriek` (`𝒪_E`-coefficient). -/
-lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek ℓ E f =
-      boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f) :=
-  rfl
-
 /-- The derived lower shriek on bounded constructible complexes is the restriction of the
 derived lower shriek `R(f)_!⟦𝒪̲_E⟧` on the ambient derived categories. -/
 noncomputable def boundedConstructibleLowerShriekCompatibility :
@@ -640,41 +622,7 @@ theorem isMonoidalClosed_boundedConstructible :
 set_option linter.overlappingInstances false in
 attribute [instance] isMonoidalClosed_boundedConstructible
 
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ᵒᵖ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
-constructible complexes: the internal hom of the monoidal closed structure on
-the full subcategory `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the
-restriction of `RHom(X)⟦ℚ̲̄_ℓ⟧` in both variables. -/
-noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  MonoidalClosed.internalHom
-
 variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleHom ℓ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧).obj (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
-
-/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
-the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
--/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
-    boundedConstructibleTensor ℓ X ⊣₂ boundedConstructibleHom ℓ X :=
-  MonoidalClosed.internalHomAdjunction₂
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
-structure on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleTensor ℓ X).obj K ⊣ (boundedConstructibleHom ℓ X).obj (op K) :=
-  (boundedConstructibleTensorHomAdjunction₂ ℓ).adj K
 
 
 end TensorHom
@@ -707,42 +655,7 @@ theorem isMonoidalClosed_boundedConstructible :
 set_option linter.overlappingInstances false in
 attribute [instance] isMonoidalClosed_boundedConstructible
 
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦E̲⟧ᵒᵖ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
-constructible complexes: the internal hom of the monoidal closed structure on the
-full subcategory `Dᵇc(X)⟦E̲⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction
-of `RHom(X)⟦E̲⟧` in both variables. -/
-noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)ᵒᵖ ⥤
-      Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤
-        Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
-  MonoidalClosed.internalHom
-
 variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    (boundedConstructibleHom ℓ E X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.continuousMapRingObj E⟧).obj
-        (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
-
-/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
-the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦E̲⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
-    boundedConstructibleTensor ℓ E X ⊣₂ boundedConstructibleHom ℓ E X :=
-  MonoidalClosed.internalHomAdjunction₂
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
-structure on `Dᵇc(X)⟦E̲⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    (boundedConstructibleTensor ℓ E X).obj K ⊣ (boundedConstructibleHom ℓ E X).obj (op K) :=
-  (boundedConstructibleTensorHomAdjunction₂ ℓ E).adj K
 
 
 end TensorHom
@@ -777,43 +690,7 @@ theorem isMonoidalClosed_boundedConstructible :
 set_option linter.overlappingInstances false in
 attribute [instance] isMonoidalClosed_boundedConstructible
 
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦𝒪̲_E⟧ᵒᵖ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
-constructible complexes: the internal hom of the monoidal closed structure on
-the full subcategory `Dᵇc(X)⟦𝒪̲_E⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the
-restriction of `RHom(X)⟦𝒪̲_E⟧` in both variables. -/
-noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj
-      ℓ E⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ :=
-  MonoidalClosed.internalHom
-
 variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦𝒪̲_E⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (boundedConstructibleHom ℓ E X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧).obj
-        (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
-
-/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
-the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦𝒪̲_E⟧`.
--/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
-    boundedConstructibleTensor ℓ E X ⊣₂ boundedConstructibleHom ℓ E X :=
-  MonoidalClosed.internalHomAdjunction₂
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦𝒪̲_E⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
-structure on `Dᵇc(X)⟦𝒪̲_E⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (boundedConstructibleTensor ℓ E X).obj K ⊣ (boundedConstructibleHom ℓ E X).obj (op K) :=
-  (boundedConstructibleTensorHomAdjunction₂ ℓ E).adj K
 
 
 end TensorHom

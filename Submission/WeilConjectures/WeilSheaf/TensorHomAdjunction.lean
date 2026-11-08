@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Submission.WeilConjectures.WeilSheaf.Fourier
-public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Symmetric
+public import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import Submission.WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import Submission.WeilConjectures.WeilSheaf.StalkTensor
@@ -69,13 +69,6 @@ noncomputable def homMk {P Q : ProEtaleWeilSheaf k₀ l X} (f : P.carrier ⟶ Q.
 lemma homMk_hom_f {P Q : ProEtaleWeilSheaf k₀ l X} (f : P.carrier ⟶ Q.carrier)
     (h : (Fr).map f.hom ≫ Q.str.hom.hom = P.str.hom.hom ≫ f.hom) : (homMk f h).hom.f = f :=
   rfl
-
-/-- A morphism of pro-étale Weil sheaves intertwines the Weil structures on underlying sheaves of
-`ℚ̄_ℓ`-modules. -/
-@[reassoc]
-lemma map_hom_comp_str_hom {P Q : ProEtaleWeilSheaf k₀ l X} (f : P ⟶ Q) :
-    (Fr).map f.hom.f.hom ≫ Q.str.hom.hom = P.str.hom.hom ≫ f.hom.f.hom :=
-  congrArg Mod.Hom.hom f.hom.h
 
 /-- The Weil structure of a pro-étale Weil sheaf is invertible on underlying sheaves. -/
 instance isIso_str_hom_hom (P : ProEtaleWeilSheaf k₀ l X) : IsIso P.str.hom.hom :=

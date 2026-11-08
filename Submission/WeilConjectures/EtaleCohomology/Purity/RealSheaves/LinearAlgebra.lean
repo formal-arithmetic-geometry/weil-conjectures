@@ -136,56 +136,6 @@ def IsMixedFrobeniusModule [IsAlgClosed E] (F : V ≃ₗ[E] V) (w : ℝ) : Prop 
 
 variable {ι q}
 
-/-- A pure Frobenius module of weight `w` is mixed of weights at most `w`, with the filtration
-`0 ⊆ V`. -/
-theorem IsPureFrobeniusModule.isMixedFrobeniusModule [IsAlgClosed E] {F : V ≃ₗ[E] V} {w : ℝ}
-    (h : IsPureFrobeniusModule ι q F w) : IsMixedFrobeniusModule ι q F w := by
-  refine ⟨1, fun i ↦ if i = 0 then ⊥ else ⊤, fun _ ↦ w, rfl, rfl, fun i hi ↦ ?_, fun i v hv ↦ ?_,
-    fun i hi ↦ ⟨le_rfl, fun α v _ hv0 hFv ↦ h α ?_⟩⟩
-  · obtain rfl : i = 0 := by omega
-    exact bot_le
-  · dsimp only at hv ⊢
-    split_ifs at hv ⊢ with hi
-    · rw [(Submodule.mem_bot E).1 hv, map_zero]
-      exact zero_mem _
-    · exact Submodule.mem_top
-  · obtain rfl : i = 0 := by omega
-    simp only [ite_true] at hv0 hFv
-    refine Module.End.hasEigenvalue_of_hasEigenvector (x := v) ⟨?_, hv0⟩
-    rw [Module.End.mem_eigenspace_iff]
-    exact sub_eq_zero.1 ((Submodule.mem_bot E).1 hFv)
-
-/-- Being mixed of weights at most `w` is monotone in `w`. -/
-theorem IsMixedFrobeniusModule.mono [IsAlgClosed E] {F : V ≃ₗ[E] V} {w w' : ℝ}
-    (h : IsMixedFrobeniusModule ι q F w) (hw : w ≤ w') : IsMixedFrobeniusModule ι q F w' := by
-  obtain ⟨m, Fil, wt, h0, hm, hle, hF, hw'⟩ := h
-  exact ⟨m, Fil, wt, h0, hm, hle, hF, fun i hi ↦ ⟨(hw' i hi).1.trans hw, (hw' i hi).2⟩⟩
-
-/-- Every eigenvalue `α` of an `ι`-mixed Frobenius module of weights at most `w` satisfies
-`|ι α| ≤ q ^ (w / 2)`, for `q ≥ 1`: an eigenvector lies in a first step `V_r` of the
-filtration, and then `α` is an eigenvalue on `V_r / V_{r-1}`. -/
-theorem IsMixedFrobeniusModule.norm_le [IsAlgClosed E] (hq : 1 ≤ q) {F : V ≃ₗ[E] V} {w : ℝ}
-    (h : IsMixedFrobeniusModule ι q F w) {α : E}
-    (hα : Module.End.HasEigenvalue (F : Module.End E V) α) :
-    ‖ι α‖ ≤ (q : ℝ) ^ (w / 2) := by
-  classical
-  obtain ⟨m, Fil, wt, h0, hm, hle, -, hw⟩ := h
-  obtain ⟨v, hv, hv0⟩ := hα.exists_hasEigenvector
-  rw [Module.End.mem_eigenspace_iff] at hv
-  have hex : ∃ i, v ∈ Fil i := ⟨m, hm ▸ Submodule.mem_top⟩
-  let i := Nat.find hex
-  have hi : v ∈ Fil i := Nat.find_spec hex
-  have hi0 : i ≠ 0 := fun h ↦ hv0 ((Submodule.mem_bot E).1 (h0 ▸ h ▸ hi))
-  obtain ⟨j, hj⟩ : ∃ j, i = j + 1 := Nat.exists_eq_succ_of_ne_zero hi0
-  have hvj : v ∉ Fil j := Nat.find_min hex (by omega)
-  have hjm : j < m := by
-    have : i ≤ m := Nat.find_min' hex (hm ▸ Submodule.mem_top)
-    omega
-  have hwt := (hw j hjm).2 α v (hj ▸ hi) hvj (by rw [LinearEquiv.coe_coe] at hv; simp [hv])
-  rw [IsOfWeight] at hwt
-  rw [hwt]
-  exact Real.rpow_le_rpow_of_exponent_le (by exact_mod_cast hq) (by linarith [(hw j hjm).1])
-
 end FrobeniusModule
 
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
@@ -229,16 +179,6 @@ section Real
 variable {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V] {ρ : Representation (PadicAlgCl l) W.carrier V}
   (ι : PadicAlgCl l →+* ℂ)
-
-/-- Blueprint `p-real-operations`: Local Frobenius polynomials.
-
-The local polynomial of a Weil representation at a closed point `x` is
-`P_x(ρ, T) = det (1 - T ρ(F_x) ∣ V)`, the reverse characteristic polynomial of the local
-Frobenius element; by `AlgebraicGeometry.WeilGroup.localPolynomial_eq_charpolyRev_of_isConj`
-the same holds for every element of the Frobenius conjugacy class of `x`. -/
-theorem localPolynomial_eq_charpolyRev (x : C.finitePoints) :
-    W.localPolynomial l ρ x = (ρ (W.frobenius x)).charpolyRev :=
-  rfl
 
 /-- Blueprint `lem-rp-exterior-reality`: Reality of exterior powers.
 

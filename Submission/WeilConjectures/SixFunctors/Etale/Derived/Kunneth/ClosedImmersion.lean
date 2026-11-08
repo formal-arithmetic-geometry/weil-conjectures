@@ -176,28 +176,6 @@ lemma isIso_leftDerivedUpperStar_map_externalProductMap (f : X ⟶ B) (g : Y ⟶
   infer_instance
 
 /-- The external product is compatible with pullback along a morphism
-`ψ : Z ×_B W ⟶ X ×_B Y` compatible with `i : Z ⟶ X` and `j : W ⟶ Y`:
-`Lψ^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`. -/
-theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp (f : X ⟶ B) (g : Y ⟶ B)
-    (f' : Z ⟶ B) (g' : W ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) (ψ : pullback f' g' ⟶ pullback f g)
-    (h₁ : ψ ≫ pullback.fst f g = pullback.fst f' g' ≫ i)
-    (h₂ : ψ ≫ pullback.snd f g = pullback.snd f' g' ≫ j)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    Nonempty ((L((ψ)^*[A])).obj (externalProduct A f g K L) ≅
-      externalProduct A f' g' ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) := by
-  let pb₁ : (L((ψ)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
-      (L((pullback.fst f' g')^*[A])).obj ((L((i)^*[A])).obj K) :=
-    ((leftDerivedUpperStarComp A ψ (pullback.fst _ _)).app K).symm ≪≫
-      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.fst _ _) h₁).app K
-  let pb₂ : (L((ψ)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
-      (L((pullback.snd f' g')^*[A])).obj ((L((j)^*[A])).obj L) :=
-    ((leftDerivedUpperStarComp A ψ (pullback.snd _ _)).app L).symm ≪≫
-      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.snd _ _) h₂).app L
-  exact ⟨leftDerivedUpperStarTensorIso A ψ _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
-    ((derivedTensor A _).obj _).mapIso pb₂⟩
-
-/-- The external product is compatible with pullback along a morphism
 `ψ : Z ×_B Y ⟶ X ×_B Y` compatible with `i : Z ⟶ X` and the identity of `Y`:
 `Lψ^* (K ⊠ L) ≅ Li^* K ⊠ L`. -/
 theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_left (f : X ⟶ B) (g : Y ⟶ B)
@@ -215,27 +193,6 @@ theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_left (f : X �
   let pb₂ : (L((ψ)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
       (L((pullback.snd f' g)^*[A])).obj L :=
     ((leftDerivedUpperStarComp A ψ (pullback.snd f g) (pullback.snd f' g) h₂.symm).app L).symm
-  exact ⟨leftDerivedUpperStarTensorIso A ψ _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
-    ((derivedTensor A _).obj _).mapIso pb₂⟩
-
-/-- The external product is compatible with pullback along a morphism
-`ψ : X ×_B W ⟶ X ×_B Y` compatible with the identity of `X` and `j : W ⟶ Y`:
-`Lψ^* (K ⊠ L) ≅ K ⊠ Lj^* L`. -/
-theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_right (f : X ⟶ B) (g : Y ⟶ B)
-    (g' : W ⟶ B) (j : W ⟶ Y) (ψ : pullback f g' ⟶ pullback f g)
-    (h₁ : ψ ≫ pullback.fst f g = pullback.fst f g')
-    (h₂ : ψ ≫ pullback.snd f g = pullback.snd f g' ≫ j)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    Nonempty ((L((ψ)^*[A])).obj (externalProduct A f g K L) ≅
-      externalProduct A f g' K ((L((j)^*[A])).obj L)) := by
-  let pb₁ : (L((ψ)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
-      (L((pullback.fst f g')^*[A])).obj K :=
-    ((leftDerivedUpperStarComp A ψ (pullback.fst f g) (pullback.fst f g') h₁.symm).app K).symm
-  let pb₂ : (L((ψ)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
-      (L((pullback.snd f g')^*[A])).obj ((L((j)^*[A])).obj L) :=
-    ((leftDerivedUpperStarComp A ψ (pullback.snd _ _)).app L).symm ≪≫
-      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.snd _ _) h₂).app L
   exact ⟨leftDerivedUpperStarTensorIso A ψ _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
     ((derivedTensor A _).obj _).mapIso pb₂⟩
 

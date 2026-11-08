@@ -68,12 +68,6 @@ noncomputable def rootsOfUnityFunctor : CommRingCat.{u} ⥤ Ab.{u + 1} where
     ext
     rfl
 
-lemma rootsOfUnityFunctor_map_apply_val {R S : CommRingCat.{u}} (f : R ⟶ S)
-    (x : (rootsOfUnityFunctor n).obj R) :
-    (((rootsOfUnityFunctor n).map f x).down.toMul : Sˣ).val =
-      f.hom (x.down.toMul : Rˣ).val :=
-  rfl
-
 /-- The `m`-th power map `μ_{m n}(R) ⟶ μ_n(R)`, as a monoid homomorphism. -/
 def rootsOfUnityPowHom (m : ℕ) (R : Type*) [CommMonoid R] :
     rootsOfUnity (m * n) R →* rootsOfUnity n R where

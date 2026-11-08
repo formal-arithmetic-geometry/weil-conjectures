@@ -99,31 +99,6 @@ lemma frobenius_closedPiece_aux {CX CZ D : Type*} [Category CX] [Category CZ] [C
   rw [← Functor.map_comp_assoc aZ (c₁.inv.app K) (c₁.hom.app K), Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
 
-/-- The inverse of `a⁻¹ ≫ (G = H) ≫ b` at an object. -/
-lemma iso_symm_trans_eqToIso_trans_inv_app {C D : Type*} [Category C] [Category D]
-    {F G H I : C ⥤ D} (a : F ≅ G) (h : F = H) (b : H ≅ I) (K : C) :
-    (a.symm ≪≫ eqToIso h ≪≫ b).inv.app K =
-      b.inv.app K ≫ eqToHom (congrArg (fun T ↦ T.obj K) h.symm) ≫ a.hom.app K := by
-  subst h
-  simp
-
-/-- `comp_eq_comp_conj_of_comp_eq` for the component of a natural isomorphism. -/
-lemma comp_eq_comp_conj_of_comp_eq_app {B C D : Type*} [Category B] [Category C] [Category D]
-    {F₁ : B ⥤ C} {F₂ : C ⥤ D} {G : B ⥤ D} (γ : F₁ ⋙ F₂ ≅ G) (M : B) {a : D} (x : a ⟶ a)
-    (y : a ⟶ F₂.obj (F₁.obj M)) (z : G.obj M ⟶ G.obj M)
-    (h : x ≫ y ≫ γ.hom.app M = (y ≫ γ.hom.app M) ≫ z) :
-    x ≫ y = y ≫ γ.hom.app M ≫ z ≫ γ.inv.app M := by
-  rw [← cancel_mono (γ.hom.app M)]
-  simpa using h
-
-/-- An endomorphism commuting with `y ≫ g` for an isomorphism `g` commutes with `y` and the
-conjugate along `g`. -/
-lemma comp_eq_comp_conj_of_comp_eq {D : Type*} [Category D] {a b c : D} (x : a ⟶ a) (y : a ⟶ b)
-    (g : b ≅ c) (z : c ⟶ c) (h : x ≫ y ≫ g.hom = (y ≫ g.hom) ≫ z) :
-    x ≫ y = y ≫ g.hom ≫ z ≫ g.inv := by
-  rw [← cancel_mono g.hom]
-  simpa using h
-
 section Frobenius
 
 variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

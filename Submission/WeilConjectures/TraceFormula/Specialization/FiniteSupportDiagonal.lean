@@ -175,10 +175,6 @@ noncomputable abbrev fibreSquareSnd : fibreSquare f ⟶ Z :=
   Over.homMk (pullback.snd f.left f.left) (by
     simp only [Over.mk_left, Over.mk_hom, ← Over.w f, pullback.condition_assoc])
 
-/-- The diagonal `Z ⟶ Z ×_B Z`. -/
-noncomputable abbrev fibreSquareDiagonal : Z ⟶ fibreSquare f :=
-  Over.homMk (pullback.diagonal f.left) (by simp)
-
 instance [IsFinite f.left] [LocallyOfFiniteType Z.hom] :
     LocallyOfFiniteType (fibreSquare f).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.fst f.left f.left ≫ Z.hom))

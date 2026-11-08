@@ -80,36 +80,6 @@ noncomputable def sheafExtendScalarsCompUpperStarIso :
 
 variable (X)
 
-/-- Extension of étale sheaves of modules along `φ`. -/
-noncomputable def etaleSheafExtendScalars :
-    Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) ⥤
-      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S) :=
-  Sheaf.composeAndSheafify _ (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-
-/-- Extension of étale sheaves of modules is left adjoint to restriction of scalars. -/
-noncomputable def etaleSheafExtendScalarsAdjunction :
-    etaleSheafExtendScalars φ X ⊣
-      sheafCompose X.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} φ) :=
-  Sheaf.adjunction _ (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-
-/-- Restriction of scalars commutes with the comparison restriction `ν_*`. -/
-noncomputable def comparisonLowerStarCompSheafComposeRestrictScalarsIso :
-    ν_*(X)[ModuleCat.{u + 1} S] ⋙
-        sheafCompose X.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} φ) ≅
-      sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ) ⋙
-        ν_*(X)[ModuleCat.{u + 1} R] :=
-  Iso.refl _
-
-/-- Extension of scalars commutes with the comparison `ν^*`:
-`ν^*(S ⊗_R F) ≅ S ⊗_R ν^* F`. -/
-noncomputable def etaleSheafExtendScalarsCompComparisonUpperStarIso :
-    etaleSheafExtendScalars φ X ⋙ ν^*(X)[ModuleCat.{u + 1} S] ≅
-      ν^*(X)[ModuleCat.{u + 1} R] ⋙ sheafExtendScalars φ X :=
-  (conjugateIsoEquiv
-    ((comparisonAdjunction _ X).comp (sheafExtendScalarsAdjunction φ X))
-    ((etaleSheafExtendScalarsAdjunction φ X).comp (comparisonAdjunction _ X))).symm
-    (comparisonLowerStarCompSheafComposeRestrictScalarsIso φ X).symm
-
 variable {φ} in
 /-- Extension of scalars along a flat ring morphism is exact on pro-étale sheaves: it is the
 sheafification of the levelwise extension of scalars, which is left exact for flat `φ`. -/

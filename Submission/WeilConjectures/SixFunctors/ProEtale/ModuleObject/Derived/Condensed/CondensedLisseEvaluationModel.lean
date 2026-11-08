@@ -5,10 +5,31 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.Condensed.CondensedScalarRealization
+public import Submission.WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
+public import Submission.WeilConjectures.CategoryTheory.RingObjects.Ab
+public import Submission.WeilConjectures.CategoryTheory.Sites.MonObj
+public import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import Submission.WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
+public import Submission.WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Submission.WeilConjectures.AlgebraicGeometry.ZetaWeil.ComponentRelativeProfiniteSite
 public import Submission.WeilConjectures.Topology.ProfiniteCondensedRing
-public import Submission.WeilConjectures.CategoryTheory.RingDerivedScalarExtension.RingDerivedScalarExtension
+public import Mathlib.Algebra.Ring.Defs
+public import Mathlib.Algebra.Ring.Hom.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Submission.WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
 public import Submission.WeilConjectures.AlgebraicGeometry.DerivedChangeOfRingsModel
 public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Submission.WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
@@ -156,62 +177,12 @@ Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
 def G (U : C) : D J O ⥤ DerivedCategory (ModuleCat.{u + 1} (A J O U)) :=
   (sections J O U).rightDerivedFunctor
 
-/-- The full subcategory of dualizable objects, using both triangle identities.
-Source: HRS Definition 3.3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
-def lisse : ObjectProperty (D J O) := fun K ↦ IsDualizable K
-
-/-- The full subcategory defined by bounded finite projective representatives.
-Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
-def perfect (U : C) : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} (A J O U))) :=
-  fun Q ↦ DerivedCategory.IsPerfectRingComplex Q
-
-/-- Preservation of the ordinary Koszul braiding by the strong monoidal realization.
-Source: HRS (3.1) (blueprint: def-zl-condensed-lisse-evaluation-model). -/
-def strongSymmetric (U : C) (hU : IsTerminal U) : Prop :=
-  letI := DerivedCategory.braidedCategory' (ModuleCat.{u + 1} (A J O U))
-  letI := DerivedCategory.braidedCategory' (Mod (Sheaf J Ab.{u + 1}) O)
-  Nonempty (F J O U hU).Braided
-
-/-- The complete evaluation claim on the fixed canonical functors. Exact means
-triangulated; it imposes no t-exactness. Both natural identifications specify the
-restriction of F and its inverse G on the two actual full subcategories.
-Source: HRS Lemma 4.1(1)--(2)
-(blueprint: def-zl-condensed-lisse-evaluation-model). -/
-def Statement (U : C) (hU : IsTerminal U) : Prop :=
-  Nonempty (F J O U hU).FullyFaithful ∧
-  (∃ (_ : (F J O U hU).CommShift ℤ), (F J O U hU).IsTriangulated) ∧
-  strongSymmetric J O U hU ∧
-  ∃ e : (perfect J O U).FullSubcategory ≌ (lisse J O).FullSubcategory,
-    Nonempty (e.functor ⋙ (lisse J O).ι ≅ (perfect J O U).ι ⋙ F J O U hU) ∧
-    Nonempty (e.inverse ⋙ (perfect J O U).ι ≅ (lisse J O).ι ⋙ G J O U)
-
 end AlgebraicGeometry.ProEtale.CondensedRing.Evaluation
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
-
-/-- Pull a point scalar to the affine terminal object using the monoidal inverse image.
-This is a construction on the underlying abelian sheaves, not a chosen ring homomorphism.
-Source: HRS (3.1)--(3.2), Remark 3.2
-(blueprint: def-zl-condensed-lisse-evaluation-model). -/
-def affineScalarSection (T : Scheme.{u}) (r : condensedScalarRing Λ) :
-    Evaluation.A (Scheme.ProEt.topology T) (condensedRingObj Λ T)
-      (Scheme.ProEt.mk (𝟙 T)) :=
-  let rmap : 𝟙_ Ab.{u + 1} ⟶ Λ.obj.obj (op (⊤_ Profinite.{u})) :=
-    AddCommGrpCat.ofHom
-      (((AddMonoidHom.mulRight r).comp (Int.castAddHom (condensedScalarRing Λ))).comp
-        AddEquiv.ulift.toAddMonoidHom)
-  let s : 𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶ Λ :=
-    ((constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
-      terminalIsTerminal).homEquiv (𝟙_ Ab.{u + 1}) Λ).symm rmap
-  let t : 𝟙_ (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) ⟶ condensedRingObj Λ T :=
-    Functor.LaxMonoidal.ε (upperStarFromPoint T) ≫ (upperStarFromPoint T).map s
-  (t.hom.app (op (Scheme.ProEt.mk (𝟙 T))))
-    ((toSheafify (Scheme.ProEt.topology T)
-      ((Functor.const T.ProEtᵒᵖ).obj (𝟙_ Ab.{u + 1}))).app
-        (op (Scheme.ProEt.mk (𝟙 T))) (ULift.up 1))
 
 /-- Restriction to the genuine profinite slice site, with finite jointly surjective covers.
 Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/

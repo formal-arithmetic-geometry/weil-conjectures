@@ -74,21 +74,6 @@ abbrev condensedRealizationPullComplexIso :=
           (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀))))))
         (.up ℤ)).symm
 
-omit [Fact (ringChar k₀ ≠ l)] in
-@[simp]
-lemma condensedRealizationPullComplexIso_hom_app_f
-    (P : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) (n : ℤ) :
-    Functor.ProjectionComplexSquareComponent (upperStar k₀ l g)
-      (condensedRealization k₀ l Z) (condensedRealization k₀ l Y)
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (condensedRealizationUpperStarIso k₀ l g) P n := by
-  exact_mod_proofs Functor.projection_complex_square_hom_app_f
-    (upperStar k₀ l g) (condensedRealization k₀ l Z) (condensedRealization k₀ l Y)
-    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-      (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-    (condensedRealizationUpperStarIso k₀ l g) P n
-
 /-- The square of total tensor comparisons, formed over abstract functors. -/
 def TotalPullTensorSquare
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l Y) ℤ) : Prop :=

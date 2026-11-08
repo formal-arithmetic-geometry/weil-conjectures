@@ -91,37 +91,6 @@ variable {C' : Type (u + 1)} [Category.{u} C'] [EssentiallySmall.{u + 1} C']
     DerivedCategory (Sheaf J' (ModuleCat.{u + 1} R'))) [Φ.CommShift ℤ] [Φ.IsTriangulated]
   (hΦ : ∀ X, idealInvertible J I X → idealInvertible J' I' (Φ.obj X))
 
-include hΦ in
-/-- A triangulated functor `Φ` carrying the objects on which `I` acts invertibly to objects on
-which `I'` acts invertibly is inverted, after completion, at the unit `K ⟶ K^`. -/
-lemma isIso_derivedCompletion_map_map_unit_app
-    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    IsIso ((derivedCompletion J' I' h').map
-      (Φ.map ((derivedCompletionAdjunction J I h).unit.app K))) := by
-  obtain ⟨X, g, h₃, hT, hX⟩ := exists_distinguished_derivedCompletionAdjunction_unit_app h K
-  have hX' := hΦ X ((idealInvertible_iff h.choose_spec.2 X).2 hX)
-  exact isIso_derivedCompletion_map h' h'.choose_spec.2 (Φ.map_distinguished _ hT)
-    ((idealInvertible_iff h'.choose_spec.2 _).1 hX')
-
-/-- For a triangulated functor `Φ` carrying the objects on which `I` acts invertibly to objects
-on which `I'` acts invertibly, completing `Φ` after completing its argument is completing `Φ`:
-`(Φ (K^))^ ≅ (Φ K)^`, through the unit `K ⟶ K^`. -/
-noncomputable def derivedCompletionCompIso :
-    derivedCompletion J I h ⋙ (derivedComplete J I).ι ⋙ Φ ⋙ derivedCompletion J' I' h' ≅
-      Φ ⋙ derivedCompletion J' I' h' :=
-  have : IsIso (Functor.whiskerRight (derivedCompletionAdjunction J I h).unit
-      (Φ ⋙ derivedCompletion J' I' h')) := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    exact isIso_derivedCompletion_map_map_unit_app I h I' h' Φ hΦ
-  (asIso (Functor.whiskerRight (derivedCompletionAdjunction J I h).unit
-    (Φ ⋙ derivedCompletion J' I' h'))).symm
-
-lemma derivedCompletionCompIso_inv_app (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    (derivedCompletionCompIso I h I' h' Φ hΦ).inv.app K =
-      (derivedCompletion J' I' h').map
-        (Φ.map ((derivedCompletionAdjunction J I h).unit.app K)) :=
-  rfl
-
 end CompIso
 
 end DerivedCategory

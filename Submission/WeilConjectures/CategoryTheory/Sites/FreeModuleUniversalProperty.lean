@@ -70,20 +70,6 @@ def extendGenerators (E : Sheaf J (Type w))
     (PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj))).homEquiv E.obj M).symm
       a.hom
 
-/-- The actual abelian-presheaf sheafification unit for the free presheaf.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
-def freeModuleUnit (E : Sheaf J (Type w)) :
-    (PresheafOfModules.freeObj (R := (ring B).obj) E.obj).presheaf ⟶
-      ((free B).obj E).val.presheaf :=
-  letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
-  letI : ∀ U : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
-        AddCommGrpCat.{w} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
-  letI := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
-    J (A := AddCommGrpCat.{w})
-  toSheafify J (PresheafOfModules.freeObj (R := (ring B).obj) E.obj).presheaf
-
 private def freeHomEquivRaw (E : Sheaf J (Type w))
     (M : SheafOfModules.{w} (ring B)) :
     ((free B).obj E ⟶ M) ≃ (E.obj ⟶ ((underlyingRaw B).obj M).obj) :=

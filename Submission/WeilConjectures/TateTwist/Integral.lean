@@ -166,13 +166,6 @@ noncomputable def integralTateTwist :
   | (d : ℕ) => integralTateTwistNat X ℓ E d
   | .negSucc d => (ihom (integralTateTwistNat X ℓ E (d + 1))).obj (𝟙_ _)
 
-lemma integralTateTwist_natCast (d : ℕ) :
-    integralTateTwist X ℓ E d = integralTateTwistNat X ℓ E d := rfl
-
-lemma integralTateTwist_negSucc (d : ℕ) :
-    integralTateTwist X ℓ E (.negSucc d) =
-      (ihom (integralTateTwistNat X ℓ E (d + 1))).obj (𝟙_ _) := rfl
-
 /-! ### Comparison with `ℚ̄_ℓ(d)` -/
 
 variable [FiniteDimensional ℚ_[ℓ] E]

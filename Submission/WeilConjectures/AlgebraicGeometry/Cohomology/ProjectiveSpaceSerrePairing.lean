@@ -571,23 +571,6 @@ def twistHZeroLinearEquiv [Nonempty n] (D : ℕ) :
     (homogeneousSubmoduleLinearEquivTwist A D).symm
 
 
-variable (A) in
-/-- **The monomial basis of the top cohomology of `𝒪(m)`**: with `d + 1` homogeneous
-coordinates ordered by `E : Fin (d + 1) ≃ n`, `Hᵈ(ℙ(n; Spec A), 𝒪(m))` is free on the strictly
-negative exponent vectors `e` of sum `m`, the basis vector of `e` being the class of the Čech
-cocycle `xᵉ` on `U_{E 0} ∩ ⋯ ∩ U_{E d}` (for `d = 0` this requires `m < 0`). It is the
-monomial basis of the monomial Čech complex transported along the canonical Leray isomorphism
-`twistHLinearEquivMonomialCechHomology`; the ordering `E` only fixes the signs.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
-def twistHTopBasis {d : ℕ} (hn : Fintype.card n = d + 1) (E : Fin (d + 1) ≃ n) {m : ℤ}
-    (hm : d ≠ 0 ∨ m < 0) :
-    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
-    Module.Basis (negativeExponents n m) A ((twist n (Spec (.of A)) m).H d) :=
-  letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
-  .ofRepr (twistHLinearEquivMonomialCechHomology A m d ≪≫ₗ
-    monomialCechComplexHomologyTopLinearEquiv n A m hn E hm)
-
 
 end Canonical
 

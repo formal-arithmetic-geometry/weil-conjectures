@@ -6,7 +6,20 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerPulledScalar
-import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizationBase
+import Submission.WeilConjectures.CategoryTheory.Constant.ConstantScalarGeometricAdjunctions
+import Submission.WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction
+import Submission.WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseImageSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdjunctionSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientScalarComparison
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation
+import Mathlib.CategoryTheory.Sites.Localization
+import Mathlib.CategoryTheory.Sites.Adjunction
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Submission.WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.CoefficientSheafificationIso
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleTensorCompositionUnit
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -141,155 +154,5 @@ structure LisseTowerLocalizationComparisons
         (H n).map ((base n).hom.app C') =
       (H (n + 1)).map ((base (n + 1)).hom.app C) ≫
         lisseTowerProjectedArrow (W.hom ≫ g) d n t
-
-private theorem normalizedScalar_unique {X Z : Scheme.{u}} (t : Z ⟶ X)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
-    (c : LisseTowerScalarSquare t d n) (hc : LisseTowerScalarSquareSections t d n c) :
-    c = lisseTowerNormalizedScalarSquare t d n := by
-  have hn := lisseTowerNormalizedScalarSquare_sections t d n
-  unfold LisseTowerScalarSquareSections lisseTowerScalarSquareNormalized at hc hn
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  apply (SheafOfModules.toSheaf _).map_injective
-  have h := congrArg (fun z ↦ z.app M) (hc.trans hn.symm)
-  dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app] at h
-  exact (cancel_mono _).mp h
-
-private theorem etaleScalar_factor {X Z : Scheme.{u}} (t : Z ⟶ X)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
-    (c : LisseTowerScalarSquare t d n) :
-    lisseTowerEtaleScalarIso t d n c =
-      (Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight
-          (localIsomorphismComparisonCoefficients (lisseTowerEtaleQuotient d n))
-          (lisseTowerFixedRealization t d (n + 1)) ≪≫
-        Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft _ (lisseTowerFixedScalarIso t d n c) ≪≫
-        (Functor.associator _ _ _).symm := by
-  unfold lisseTowerEtaleScalarIso lisseTowerFixedScalarIso pbcDerivedRestrict
-  rfl
-
-private theorem localization_source {X Z S T : Scheme.{u}}
-    (t : Z ⟶ X) (s : T ⟶ X) (a : T ⟶ S) (b : S ⟶ Z)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
-    (c : LisseTowerScalarSquare t d n) (hc : LisseTowerScalarSquareSections t d n c)
-    (C : DerivedCategory
-      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1)))))
-    (C' : DerivedCategory
-      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))
-    (δ : C ⟶ (normalizationRestrict Z.smallEtaleTopology
-      (lisseTowerEtaleQuotient d n)).obj C') :
-    let L (j : ℕ) := (ProEtale.upperStar
-      (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) a).mapDerivedCategory ⋙
-        lisseTowerFixedRealization s d j
-    let H (j : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection s d j)
-    (H (n + 1)).map ((L (n + 1)).map
-        (localProEtaleNormalization b (lisseTowerEtaleQuotient d n) δ)) ≫
-        (lisseTowerPulledScalarIso s a d n).hom.app
-          ((localProEtaleComparison b (lisseTowerEtaleRing d n)).obj C') ≫
-        (H n).map ((lisseTowerLocalizationLevel t s a b d n).hom.app C') =
-      (H (n + 1)).map ((lisseTowerLocalizationLevel t s a b d (n + 1)).hom.app C) ≫
-        (lisseTowerLocalizationPull t s a b d (n + 1) ⋙ H (n + 1)).map
-          ((lisseTowerEtaleRealization t d (n + 1)).map δ ≫
-            (lisseTowerEtaleScalarIso t d n c).hom.app C') ≫
-        (lisseTowerLocalizationScalar t s a b d n).hom.app
-          ((lisseTowerEtaleRealization t d n).obj C') := by
-  rw [normalizedScalar_unique t d n c hc, etaleScalar_factor]
-  have h := LisseTowerLocalizationTransport.realizationScalar_comm
-    (lisseTowerFixedRealization t d n) (lisseTowerFixedRealization t d (n + 1))
-    (lisseTowerLocalizationFixed s a b d n) (lisseTowerLocalizationFixed s a b d (n + 1))
-    (pbcDerivedRestrict (constantAdicFiniteProjection s d n))
-    (pbcDerivedRestrict (constantAdicFiniteProjection s d (n + 1)))
-    (normalizationRestrict (ProEt.topology Z) (lisseTowerEtaleQuotient d n))
-    (pbcDerivedRestrict ((adicTowerInverseImage t).map
-      (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n))))
-    (lisseTowerFixedScalarIso t d n (lisseTowerNormalizedScalarSquare t d n))
-    (lisseTowerLocalizationFixedScalar s a b d n)
-    ((ProEtale.comparisonUpperStar
-      (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1))) Z).mapDerivedCategory.map δ ≫
-        (localIsomorphismComparisonCoefficients (lisseTowerEtaleQuotient d n)).hom.app C')
-  simpa only [lisseTowerLocalizationFixed, lisseTowerLocalizationLevel,
-    lisseTowerLocalizationFixedLevel, lisseTowerLocalizationScalar,
-    lisseTowerLocalizationPull, lisseTowerLocalizationFixedScalar,
-    localProEtaleNormalization, localProEtaleComparisonCoefficients,
-    id_eq, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_map,
-    Functor.comp_obj, Functor.map_comp, Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.assoc] using h
-
-/-- Inverse image admits simultaneous functor comparisons compatible with finite
-scalar restriction. This asserts the two faces of the coefficient cube before
-applying any descended transition equation or level marking.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03D3 (sheafification
-and inverse image of modules), and Cohomology on Sites, Tag 0D6D (composition).
-(blueprint: lem-weil-pbc-lisse-tower-localization-comparisons).
-
-Proof: put a = f.left followed by V.hom. The equation f.w and associativity identify
-its composite with U.hom followed by g with W.hom followed by g. At level n take
-exact module inverse image along a, transporting the resulting coefficient ring by
-the canonical inverse-image compositor and this equality. This is pull n. The
-canonical sheafification/inverse-image comparison, with the etale/pro-etale comparison
-compositor, gives level n. The module inverse-image compositor gives base n.
-Restrict along the actual inverse images of the finite quotient maps. The exact
-coefficient mate, followed by the restriction compositor for the finite projections,
-gives scalar n. All these comparisons are induced on the underlying abelian sheaves
-by the canonical inverse-image compositors. The section normalization of c and of
-lisseTowerNormalizedScalarSquare identifies their two scalar faces. Forgetting module
-actions is faithful, so the source cube commutes on sheaves. Exact localization,
-naturality at delta, and mapDerivedCategoryCompIso give source. For target use the
-same inverse-image composition cube on an arbitrary semilinear arrow t: naturality
-of base moves its arrow, and the coefficient mate identifies its restricted images.
-After the finite projection restriction compositor this is constantAdicRestrictedStep
-for an adic transition, and lisseTowerProjectedArrow in general, proving target.
-No choice of a marking is involved. Zero modules and
-empty sites satisfy the same identities of natural transformations.
--/
-theorem lisseTower_localization_comparisons
-    (X Y : Scheme.{u}) (g : Y ⟶ X)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-    (U : Y.ProEt) (V : U.left.ProEt) (W : Y.ProEt)
-    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) :
-    Nonempty (LisseTowerLocalizationComparisons X Y g d U V W f) := by
-  have hf : f.left ≫ (V.hom ≫ U.hom) = W.hom := f.w
-  have hf' : f.left ≫ V.hom ≫ (U.hom ≫ g) = W.hom ≫ g := by
-    simpa only [Category.assoc] using congrArg (fun z : W.left ⟶ Y ↦ z ≫ g) hf
-  obtain ⟨e, he⟩ := lisseTower_localization_base (U.hom ≫ g) (W.hom ≫ g)
-    f.left V.hom hf' d
-  refine ⟨{
-    pull := lisseTowerLocalizationPull (U.hom ≫ g) (W.hom ≫ g) f.left V.hom d
-    level := lisseTowerLocalizationLevel (U.hom ≫ g) (W.hom ≫ g) f.left V.hom d
-    base := e
-    scalar := lisseTowerLocalizationScalar (U.hom ≫ g) (W.hom ≫ g) f.left V.hom d
-    source := localization_source (U.hom ≫ g) (W.hom ≫ g) f.left V.hom d
-    target := ?_ }⟩
-  intro n C C' δ
-  let P (j : ℕ) := adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op j))
-  let P' (j : ℕ) := adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op j))
-  let T (j : ℕ) := lisseTowerLocalizationPull (U.hom ≫ g) (W.hom ≫ g) f.left V.hom d j
-  let H (j : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d j)
-  have hn := congrArg (H (n + 1)).map ((e (n + 1)).hom.naturality δ)
-  simp only [Functor.comp_map, Functor.map_comp] at hn
-  unfold lisseTowerProjectedArrow lisseTowerInverseImageArrow
-  change (T (n + 1) ⋙ H (n + 1)).map
-      ((P (n + 1)).map δ ≫ (lisseTowerInverseImageScalar (U.hom ≫ g) d n).hom.app C') ≫
-      (lisseTowerLocalizationScalar (U.hom ≫ g) (W.hom ≫ g) f.left V.hom d n).hom.app
-        ((P n).obj C') ≫ (H n).map ((e n).hom.app C') = _
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rw [he n C']
-  simp only [← Category.assoc]
-  simp only [Functor.comp_map]
-  erw [hn]
-  simp only [Category.assoc]
-  change _ = (H (n + 1)).map ((e (n + 1)).hom.app C) ≫
-    ((H (n + 1)).map ((P' (n + 1)).map δ ≫
-      (lisseTowerInverseImageScalar (W.hom ≫ g) d n).hom.app C') ≫ _)
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rfl
 
 end AlgebraicGeometry.Scheme

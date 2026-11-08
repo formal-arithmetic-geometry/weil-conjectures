@@ -265,9 +265,6 @@ instance ProEtale.preservesFiniteLimits_upperStar
   unfold ProEtale.upperStar Functor.sheafPullbackConstruction.sheafPullback
   infer_instance
 
-/-- The pullback `g^*` on pro-étale sheaves is right exact, being a left adjoint. -/
-example : PreservesFiniteColimits (g)^*[A] := inferInstance
-
 /-- The pullback `g^*` on pro-étale sheaves is additive, being a left adjoint. -/
 instance ProEtale.additive_upperStar : (g)^*[A].Additive :=
   (ProEtale.upperStarLowerStarAdjunction A g).left_adjoint_additive

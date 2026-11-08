@@ -44,10 +44,6 @@ noncomputable def uliftFunctor : Rep.{w} k G ⥤ Rep.{max w w'} k G where
   map_comp _ _ :=
     Rep.hom_ext (Representation.IntertwiningMap.ext (LinearMap.ext fun _ ↦ rfl))
 
-lemma uliftFunctor_map_hom_apply {X Y : Rep.{w} k G} (f : X ⟶ Y) (x : ULift.{w'} X.V) :
-    ((uliftFunctor.{w, w'} k G).map f).hom x = ULift.up (f.hom x.down) :=
-  rfl
-
 /-- The tensor product of representations, as a bifunctor. -/
 noncomputable def tprodFunctor :
     Rep.{max v w} k G × Rep.{max v w} k G ⥤ Rep.{max v w} k G where
@@ -56,11 +52,6 @@ noncomputable def tprodFunctor :
   map_id _ := Rep.hom_ext (Representation.IntertwiningMap.ext (TensorProduct.ext' fun _ _ ↦ rfl))
   map_comp _ _ :=
     Rep.hom_ext (Representation.IntertwiningMap.ext (TensorProduct.ext' fun _ _ ↦ rfl))
-
-lemma tprodFunctor_map_hom_tmul {X Y : Rep.{max v w} k G × Rep.{max v w} k G} (f : X ⟶ Y)
-    (x : X.1.V) (y : X.2.V) :
-    ((tprodFunctor.{w} k G).map f).hom (x ⊗ₜ y) = f.1.hom x ⊗ₜ f.2.hom y :=
-  rfl
 
 end Rep
 

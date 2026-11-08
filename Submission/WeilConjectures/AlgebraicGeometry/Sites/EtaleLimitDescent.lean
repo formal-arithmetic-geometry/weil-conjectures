@@ -437,17 +437,6 @@ section OverBase
 variable [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]
   {R : Scheme.{u}} (π : D ⟶ (Functor.const J).obj R)
 
-/-- (Implementation) The structure morphism to `R` of the base change of the diagram along a
-morphism `q : E ⟶ Dₖ`. -/
-@[simps]
-noncomputable def baseChangeDiagramToBase {k : J} {E : Scheme.{u}} (q : E ⟶ D.obj k) :
-    baseChangeDiagram D q ⟶ (Functor.const (Over k)).obj R where
-  app j := pullback.snd q (D.map j.hom) ≫ π.app j.left
-  naturality {j j'} g := by
-    have h := π.naturality g.left
-    simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id] at h ⊢
-    rw [baseChangeDiagram_map_snd_assoc, h]
-
 
 end OverBase
 

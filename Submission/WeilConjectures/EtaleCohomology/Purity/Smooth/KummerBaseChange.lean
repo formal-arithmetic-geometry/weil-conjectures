@@ -331,11 +331,6 @@ noncomputable def constantComplexEndPullback {X S : Scheme.{u}} (f : X ⟶ S)
   (leftDerivedUpperStarConstantComplexIso Λ f).inv ≫ (L((f)^*[ModuleCat.{u + 1} Λ])).map h ≫
     (leftDerivedUpperStarConstantComplexIso Λ f).hom
 
-@[simp]
-lemma constantComplexEndPullback_id {X S : Scheme.{u}} (f : X ⟶ S) :
-    constantComplexEndPullback Λ f (𝟙 _) = 𝟙 _ := by
-  simp [constantComplexEndPullback]
-
 /-- The pullback of endomorphisms of the constant complexes is compatible with composition:
 `f^♯ (g^♯ h) = (f ≫ g)^♯ h`. -/
 lemma constantComplexEndPullback_constantComplexEndPullback {X Y S : Scheme.{u}} (f : X ⟶ Y)

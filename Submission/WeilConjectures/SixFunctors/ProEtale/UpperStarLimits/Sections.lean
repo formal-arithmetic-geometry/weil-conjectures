@@ -119,9 +119,6 @@ noncomputable def hullHom : V ⟶ (MorphismProperty.Over.pullback @WeaklyEtale �
   MorphismProperty.Over.homMk (pullback.lift ψ V.hom (by rw [hψ.1])) (pullback.lift_snd _ _ _)
     trivial
 
-lemma hullHom_left : (hullHom g hψ).left = pullback.lift ψ V.hom (by rw [hψ.1]) :=
-  rfl
-
 /-- The underlying morphism of `hullHom` followed by the base change of `t : W₀ ⟶ W`. -/
 lemma hullHom_comp_map_left {W : Y.ProEt} (t : W₀ ⟶ W) :
     (hullHom g hψ ≫ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map t).left =

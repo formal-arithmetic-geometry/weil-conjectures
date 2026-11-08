@@ -4,12 +4,139 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Submission.WeilConjectures.CategoryTheory.Diagram.DiagramRingRestrictionPushforward
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Whiskering
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Adjunction.Evaluation
+public import Submission.WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Submission.WeilConjectures.CategoryTheory.ProperBaseChange.RestrictionRingedToposModuleDirectImageSupplement
+import Submission.WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Submission.WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Submission.WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Submission.WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import Submission.WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Submission.WeilConjectures.Algebra.Homology.KFlatResolution
+import Submission.WeilConjectures.CategoryTheory.RingedToposKFlatPullback
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Submission.WeilConjectures.CategoryTheory.GeometricModuleConstruction
+import Submission.WeilConjectures.CategoryTheory.RingedToposRingData
+import Submission.WeilConjectures.CategoryTheory.AdjunctionRingOperations
+import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
+import Mathlib.CategoryTheory.Adjunction.Basic
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import Submission.WeilConjectures.CategoryTheory.GeometricModuleTransport
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Submission.WeilConjectures.CategoryTheory.GeometricRingTransport
+import Submission.WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import Submission.WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
+import Submission.WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import Submission.WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import Submission.WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Submission.WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import Submission.WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.Algebra.Homology.HomologicalComplex
+import Mathlib.Algebra.Homology.Additive
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import Submission.WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import Submission.WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Submission.WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Submission.WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import Submission.WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import Submission.WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import Submission.WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Submission.WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import Submission.WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Submission.WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import all Submission.WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.ExactSquareDerivedCounit
-import all Submission.WeilConjectures.CategoryTheory.Diagram.DiagramRingRestrictionPushforward
+import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Submission.WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 import all Submission.WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjunctionSquare
 
 set_option autoImplicit true
@@ -44,171 +171,6 @@ variable {A B Ap Bp : Type (u + 1)}
   [F.Additive] [G.Additive] [x.Additive] [y.Additive]
   [PreservesFiniteLimits x] [PreservesFiniteColimits x]
   [PreservesFiniteLimits y] [PreservesFiniteColimits y]
-private def canonicalUnit (F : A ⥤ B) [F.Additive] :
-    F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
-      DerivedCategory.Q.{w} ⋙ F.rightDerivedFunctor where
-  app I := F.rightDerivedFunctorUnitQ I
-  naturality _ _ f := F.rightDerivedFunctorUnitQ_naturality f
-private theorem canonicalUnit_derived (F : A ⥤ B) [F.Additive] :
-    F.rightDerivedFunctor.IsRightDerivedFunctor (canonicalUnit F)
-      (HomologicalComplex.quasiIso A (.up ℤ)) := by
-  apply (derives F).isRightDerivedFunctor_of_isIso
-  intro I
-  have : I.obj.IsKInjective := I.property
-  change IsIso (F.rightDerivedFunctorUnitQ I.obj)
-  rw [F.rightDerivedFunctorUnitQ_eq]
-  infer_instance
-private theorem square_exists (c : F ⋙ y ≅ x ⋙ G)
-    (hacyc : ∀ I : CochainComplex A ℤ, I.IsKInjective →
-      IsIso (G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj I))) :
-    ∃ b : F.rightDerivedFunctor ⋙ y.mapDerivedCategory ≅
-        x.mapDerivedCategory ⋙ G.rightDerivedFunctor,
-      ∀ M : CochainComplex A ℤ,
-        y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ M) ≫
-          b.hom.app (DerivedCategory.Q.obj M) ≫
-          G.rightDerivedFunctor.map (x.mapDerivedCategoryFactors.hom.app M) =
-        y.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app M) ≫
-          G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj M) := by
-  obtain ⟨b, hb, -⟩ := derivedCoefficientComparison F G x y
-    x.mapDerivedCategory y.mapDerivedCategory
-    x.mapDerivedCategoryFactors y.mapDerivedCategoryFactors
-    F.rightDerivedFunctor G.rightDerivedFunctor (canonicalUnit F) (canonicalUnit G)
-    (fun I hI ↦ by
-      have := hI
-      change IsIso (F.rightDerivedFunctorUnitQ I)
-      rw [F.rightDerivedFunctorUnitQ_eq]
-      infer_instance) hacyc c
-  refine ⟨b, ?_⟩
-  intro M
-  have h := congrArg (fun z ↦
-    y.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
-      z ≫ G.rightDerivedFunctor.map (x.mapDerivedCategoryFactors.hom.app M)) (hb M)
-  simp only [canonicalUnit, Category.assoc, Iso.hom_inv_id_app_assoc,
-    ← G.rightDerivedFunctor.map_comp, Iso.inv_hom_id_app,
-    ] at h
-  erw [Functor.map_id] at h
-  erw [Category.comp_id] at h
-  exact h
-private theorem square_unit_iso_iff (c : F ⋙ y ≅ x ⋙ G)
-    (b : F.rightDerivedFunctor ⋙ y.mapDerivedCategory ≅
-      x.mapDerivedCategory ⋙ G.rightDerivedFunctor)
-    (hb : ∀ M : CochainComplex A ℤ,
-      y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ M) ≫
-        b.hom.app (DerivedCategory.Q.obj M) ≫
-        G.rightDerivedFunctor.map (x.mapDerivedCategoryFactors.hom.app M) =
-      y.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app M) ≫
-        G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj M))
-    (M : CochainComplex A ℤ) :
-    IsIso (y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ M)) ↔
-      IsIso (G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj M)) := by
-  have : IsIso (DerivedCategory.Q.map
-      ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app M)) :=
-    inferInstanceAs (IsIso (DerivedCategory.Q.map
-      ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app M)))
-  have h := iff_of_eq (congrArg IsIso (hb M))
-  simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using h
-private theorem acyclic_for_canonical
-    (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
-    (eta : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
-      DerivedCategory.Q ⋙ RF)
-    [RF.IsRightDerivedFunctor eta (HomologicalComplex.quasiIso A (.up ℤ))]
-    (M : CochainComplex A ℤ) [IsIso (eta.app M)] :
-    IsIso (F.rightDerivedFunctorUnitQ M) := by
-  let := canonicalUnit_derived F
-  let e := Functor.rightDerivedUnique RF F.rightDerivedFunctor eta (canonicalUnit F)
-    (HomologicalComplex.quasiIso A (.up ℤ))
-  have h : eta.app M ≫ e.hom.app (DerivedCategory.Q.obj M) =
-      F.rightDerivedFunctorUnitQ M := by
-    simpa only [e, Functor.rightDerivedUnique, Functor.rightDerivedNatIso,
-      Iso.refl, NatTrans.id_app, Category.id_comp, canonicalUnit] using
-      Functor.rightDerivedNatTrans_app RF F.rightDerivedFunctor eta (canonicalUnit F)
-        (HomologicalComplex.quasiIso A (.up ℤ)) (Iso.refl _).hom M
-  rw [← h]
-  infer_instance
-private theorem canonical_counit (L : B ⥤ A) [L.Additive]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (adj : L ⊣ F) (I : CochainComplex A ℤ) :
-    L.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ I) ≫
-        adj.mapDerivedCategoryRightDerivedAdjunction.counit.app (DerivedCategory.Q.obj I) =
-      L.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj I) ≫
-        DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).counit.app I) := by
-  have h := UnboundedExactTower.cochain_counit adj I
-  simp only [UnboundedExactTower.cochainUnit, Functor.mapHomotopyCategoryFactors,
-    Quotient.lift.isLift_inv] at h
-  erw [Functor.map_id] at h
-  erw [Category.id_comp] at h
-  exact h
-private theorem square_unique (c : F ⋙ y ≅ x ⋙ G)
-    (b b' : F.rightDerivedFunctor ⋙ y.mapDerivedCategory ≅
-      x.mapDerivedCategory ⋙ G.rightDerivedFunctor)
-    (hb : ∀ M : CochainComplex A ℤ,
-      y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ M) ≫
-        b.hom.app (DerivedCategory.Q.obj M) ≫
-        G.rightDerivedFunctor.map (x.mapDerivedCategoryFactors.hom.app M) =
-      y.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app M) ≫
-        G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj M))
-    (hb' : ∀ M : CochainComplex A ℤ,
-      y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ M) ≫
-        b'.hom.app (DerivedCategory.Q.obj M) ≫
-        G.rightDerivedFunctor.map (x.mapDerivedCategoryFactors.hom.app M) =
-      y.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app M) ≫
-        G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj M)) : b = b' := by
-  apply Iso.ext
-  apply NatTrans.ext
-  funext N
-  obtain ⟨I, hI, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective N
-  have := hI
-  have : IsIso (F.rightDerivedFunctorUnitQ I) := by
-    rw [F.rightDerivedFunctorUnitQ_eq]
-    infer_instance
-  have h : b.hom.app (DerivedCategory.Q.obj I) = b'.hom.app (DerivedCategory.Q.obj I) := by
-    apply (cancel_epi (y.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ I))).mp
-    apply (cancel_mono
-      (G.rightDerivedFunctor.map (x.mapDerivedCategoryFactors.hom.app I))).mp
-    simpa only [Category.assoc] using (hb I).trans (hb' I).symm
-  apply (cancel_mono ((x.mapDerivedCategory ⋙ G.rightDerivedFunctor).map e.hom)).mp
-  rw [← b.hom.naturality e.hom, ← b'.hom.naturality e.hom, h]
-private theorem coefficient_canonical_acyclic
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
-    {K : GrothendieckTopology C} {L : GrothendieckTopology D}
-    (R S : Sheaf K RingCat.{u}) (T : Sheaf L RingCat.{u})
-    (hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)
-    (hS : ∀ (U : Cᵒᵖ) (a b : S.obj.obj U), a * b = b * a)
-    (hT : ∀ (U : Dᵒᵖ) (a b : T.obj.obj U), a * b = b * a)
-    (a : R ⟶ S) (f : RingedToposMorphism R T)
-    [HasDerivedCategory.{w} (ringedSiteModules.{u} R)]
-    [HasDerivedCategory.{w} (ringedSiteModules.{u} S)]
-    [HasDerivedCategory.{w} (ringedSiteModules.{u} T)]
-    (I : CochainComplex (ringedSiteModules.{u} S) ℤ) [I.IsKInjective] :
-    IsIso (f.modules.rightDerivedFunctorUnitQ
-      (((SheafOfModules.restrictScalars.{u} a).mapHomologicalComplex (.up ℤ)).obj I)) := by
-  obtain ⟨RF, eta, hRF, -, hI⟩ := coefficientAcyclicDerived R S T hR hS hT a f
-  let := hRF
-  have := hI I inferInstance
-  exact acyclic_for_canonical f.modules RF eta _
-private theorem cochain_hom_formula (L : B ⥤ A) [L.Additive]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    (adj : L ⊣ F) (M : CochainComplex B ℤ) (I : CochainComplex A ℤ)
-    (f : (L.mapHomologicalComplex (.up ℤ)).obj M ⟶ I) :
-    adj.mapDerivedCategoryRightDerivedAdjunction.homEquiv
-      (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj I)
-      (L.mapDerivedCategoryFactors.hom.app M ≫ DerivedCategory.Q.map f) =
-        DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫
-          F.rightDerivedFunctorUnitQ I := by
-  apply (adj.mapDerivedCategoryRightDerivedAdjunction.homEquiv _ _).symm.injective
-  rw [Equiv.symm_apply_apply]
-  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
-  rw [canonical_counit F L adj I]
-  rw [reassoc_of% L.mapDerivedCategoryFactors_hom_naturality
-    (((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I) f)]
-  rw [← DerivedCategory.Q.map_comp]
-  congr 2
-  simpa only [Adjunction.homEquiv_counit] using
-    (((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I).symm_apply_apply f).symm
 omit [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions Ap] in
 private theorem squareFactors
     (Fp : Bp ⥤ Ap) (F : B ⥤ A) (r : Ap ⥤ A) (s : Bp ⥤ B)
@@ -455,72 +417,5 @@ private theorem normalized_cube
       Functor.whiskerRight_app, Category.assoc] using hc M)
   simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc] using (congrArg (fun q ↦ q.app N) h).symm
-private theorem normalized_transition
-    {Ak Bk : Type (u + 1)} [Category.{u} Ak] [Category.{u} Bk]
-    [Abelian Ak] [Abelian Bk] [HasDerivedCategory.{w} Ak] [HasDerivedCategory.{w} Bk]
-    [Abelian.HasKInjectiveResolutions Ak]
-    (K : Ak ⥤ Bk) (xk : A ⥤ Ak) (yk : B ⥤ Bk) (tx : Ak ⥤ Ap) (ty : Bk ⥤ Bp)
-    [K.Additive] [xk.Additive] [yk.Additive] [tx.Additive] [ty.Additive]
-    [PreservesFiniteLimits xk] [PreservesFiniteColimits xk]
-    [PreservesFiniteLimits yk] [PreservesFiniteColimits yk]
-    [PreservesFiniteLimits tx] [PreservesFiniteColimits tx]
-    [PreservesFiniteLimits ty] [PreservesFiniteColimits ty]
-    (c : F ⋙ y ≅ x ⋙ G) (ck : F ⋙ yk ≅ xk ⋙ K) (ca : K ⋙ ty ≅ tx ⋙ G)
-    (b : F.rightDerivedFunctor ⋙ y.mapDerivedCategory ≅
-      x.mapDerivedCategory ⋙ G.rightDerivedFunctor)
-    (bk : F.rightDerivedFunctor ⋙ yk.mapDerivedCategory ≅
-      xk.mapDerivedCategory ⋙ K.rightDerivedFunctor)
-    (ba : K.rightDerivedFunctor ⋙ ty.mapDerivedCategory ≅
-      tx.mapDerivedCategory ⋙ G.rightDerivedFunctor)
-    (hb : unitNormalized F G x y x.mapDerivedCategory y.mapDerivedCategory
-      x.mapDerivedCategoryFactors y.mapDerivedCategoryFactors c.hom b.hom)
-    (hbk : unitNormalized F K xk yk xk.mapDerivedCategory yk.mapDerivedCategory
-      xk.mapDerivedCategoryFactors yk.mapDerivedCategoryFactors ck.hom bk.hom)
-    (hba : unitNormalized K G tx ty tx.mapDerivedCategory ty.mapDerivedCategory
-      tx.mapDerivedCategoryFactors ty.mapDerivedCategoryFactors ca.hom ba.hom)
-    (a : x ⟶ xk ⋙ tx) (d : y ⟶ yk ⋙ ty)
-    (ad : x.mapDerivedCategory ⟶ xk.mapDerivedCategory ⋙ tx.mapDerivedCategory)
-    (dd : y.mapDerivedCategory ⟶ yk.mapDerivedCategory ⋙ ty.mapDerivedCategory)
-    (ha : ∀ I : CochainComplex A ℤ,
-      ad.app (DerivedCategory.Q.obj I) ≫ tx.mapDerivedCategory.map
-          (xk.mapDerivedCategoryFactors.hom.app I) ≫
-        tx.mapDerivedCategoryFactors.hom.app ((xk.mapHomologicalComplex (.up ℤ)).obj I) =
-      x.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex a (.up ℤ)).app I))
-    (hd : ∀ I : CochainComplex B ℤ,
-      dd.app (DerivedCategory.Q.obj I) ≫ ty.mapDerivedCategory.map
-          (yk.mapDerivedCategoryFactors.hom.app I) ≫
-        ty.mapDerivedCategoryFactors.hom.app ((yk.mapHomologicalComplex (.up ℤ)).obj I) =
-      y.mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex d (.up ℤ)).app I))
-    (hc : ∀ M : A, d.app (F.obj M) ≫ ty.map (ck.hom.app M) ≫ ca.hom.app (xk.obj M) =
-      c.hom.app M ≫ G.map (a.app M))
-    (N : DerivedCategory.{w} A) :
-    dd.app (F.rightDerivedFunctor.obj N) ≫ ty.mapDerivedCategory.map (bk.hom.app N) ≫
-        ba.hom.app (xk.mapDerivedCategory.obj N) =
-      b.hom.app N ≫ G.rightDerivedFunctor.map (ad.app N) := by
-  let xf := Functor.isoWhiskerRight xk.mapDerivedCategoryFactors tx.mapDerivedCategory ≪≫
-    Functor.isoWhiskerLeft (xk.mapHomologicalComplex (.up ℤ)) tx.mapDerivedCategoryFactors
-  let yf := Functor.isoWhiskerRight yk.mapDerivedCategoryFactors ty.mapDerivedCategory ≪≫
-    Functor.isoWhiskerLeft (yk.mapHomologicalComplex (.up ℤ)) ty.mapDerivedCategoryFactors
-  have h := normalized_naturality F G x y (xk ⋙ tx) (yk ⋙ ty)
-    x.mapDerivedCategory (xk.mapDerivedCategory ⋙ tx.mapDerivedCategory)
-    y.mapDerivedCategory (yk.mapDerivedCategory ⋙ ty.mapDerivedCategory)
-    x.mapDerivedCategoryFactors xf y.mapDerivedCategoryFactors yf c.hom
-    (Functor.whiskerRight ck.hom ty ≫ Functor.whiskerLeft xk ca.hom) b.hom
-    (Functor.whiskerRight bk.hom ty.mapDerivedCategory ≫
-      Functor.whiskerLeft xk.mapDerivedCategory ba.hom) hb
-    (normalized_comp F K xk yk G tx ty ck ca bk ba hbk hba)
-    a d ad dd
-    (fun I ↦ by simpa only [xf, Iso.trans_hom, NatTrans.comp_app,
-      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using ha I)
-    (fun I ↦ by simpa only [yf, Iso.trans_hom, NatTrans.comp_app,
-      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using hd I)
-    (fun M ↦ by simpa only [NatTrans.comp_app, Functor.whiskerLeft_app,
-      Functor.whiskerRight_app, Category.assoc] using hc M)
-  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Category.assoc] using congrArg (fun q ↦ q.app N) h
 end
 end CategoryTheory.ExactDerivedSquare

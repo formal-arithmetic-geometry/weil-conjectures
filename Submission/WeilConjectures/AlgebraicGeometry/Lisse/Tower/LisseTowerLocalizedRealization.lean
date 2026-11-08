@@ -6,8 +6,14 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRestriction
-import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedConstants
-import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedActual
+import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerPulledScalar
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation
+import Mathlib.CategoryTheory.Sites.Localization
+import Mathlib.CategoryTheory.Sites.Adjunction
+import Submission.WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Submission.WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.CoefficientSheafificationIso
+import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizationComparisons
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -106,66 +112,5 @@ structure LisseTowerLocalizedComparisons
           ((normalizationConstant U.left.smallEtaleTopology).obj E')) ≫ (c n E').hom =
       (c (n + 1) E).hom ≫
         (constantAdicFiniteRealization (W.hom ≫ g) d).map (lisseTowerAlgebraArrow d n k)
-
-/-- Pullback transports an already descended semilinear tower and its coefficient
-square to the explicit realization on V and W. The assertion has no universality,
-lissity, stalk or boundedness conclusion, and does not construct a transition.
-
-Source: Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J.
-(blueprint: lem-weil-pbc-lisse-tower-localized-realization).
-
-Proof: fixed module sheafification commutes with inverse image, by its adjunction
-and the constant-section coefficient map. Localize this natural comparison and paste
-it with the comparison pullback isomorphism and the inverse-image compositor for
-f.left, V.hom and U.hom. The equality f.w identifies their composite with W.hom.
-Applied to the supplied e_n, this gives actual. Applied to constants it gives model,
-naturally in the algebraic complex E. Restriction to completion coefficients in two
-successive ways gives scalar; the equality of the underlying maps follows from the
-consecutive quotient relation and the section normalization of c_n. Pull back the
-supplied descent equation, use naturality of these comparisons, and paste the scalar
-restriction compositors. This gives actual_normalized, with the actual restricted
-step of M. For a constant arrow k, the same section calculation commutes with k and
-is the identity on each constant section. Exact localization replaces composition
-by the specified mapDerivedCategoryCompIso and restrictScalarsComp' compositors,
-yielding lisseTowerAlgebraArrow. The section-normalized comparison defining
-constantAdicQuotientRightIso then gives exactly model_normalized. Since these
-comparisons are constructed from inverse image of the supplied e_n, no new choice of
-comparisons on V or W is used. All identities hold on the zero object and empty bases. -/
-theorem lisseTower_localized_realization
-    (X Y : Scheme.{u}) (g : Y ⟶ X)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)
-    (U : Y.ProEt)
-    (D : ∀ n : ℕ, DerivedCategory
-      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))
-    (c : ∀ n : ℕ, LisseTowerScalarSquare (U.hom ≫ g) d n)
-    (hc : ∀ n : ℕ, LisseTowerScalarSquareSections (U.hom ≫ g) d n (c n))
-    (δ : ∀ n : ℕ, D (n + 1) ⟶
-      (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj
-        (D n))
-    (e : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d n).obj (D n) ≅
-      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n))
-    (hδ : ∀ n : ℕ,
-      (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map (δ n) ≫
-          (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫
-          (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map
-            (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =
-        (e (n + 1)).hom ≫
-          adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)) :
-    Nonempty (LisseTowerLocalizedComparisons X Y g d M U D δ) := by
-  classical
-  have hmodel := fun (V : U.left.ProEt) (W : Y.ProEt)
-    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) ↦
-      lisseTower_localized_constants (W.hom ≫ g) V.hom f.left d
-  have hactual := fun (V : U.left.ProEt) (W : Y.ProEt)
-    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) ↦
-      lisseTower_localized_actual X Y g d M U V W f D c hc δ e hδ
-  choose model hmodel using hmodel
-  choose actual hactual using hactual
-  exact ⟨{
-    model := model
-    actual := actual
-    scalar := fun V W f n ↦ lisseTowerPulledScalarIso (W.hom ≫ g) f.left d n
-    actual_normalized := hactual
-    model_normalized := hmodel }⟩
 
 end AlgebraicGeometry.Scheme

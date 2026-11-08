@@ -94,15 +94,4 @@ noncomputable def fieldLowerStarCompIhomIso (g : X ⟶ X) [IsIso g] (M : FieldSh
   Mod.mapModComapCompIhomIso (fieldConstantSheafToLowerStar Λ g)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) M
 
-variable (Λ) in
-/-- The pushforward of sheaves of `Λ`-modules along an automorphism commutes with the
-tensor product: `g_* (P ⊗ M) ≅ g_* P ⊗ g_* M`. -/
-noncomputable def fieldLowerStarTensorLeftIso (g : X ⟶ X) [IsIso g] (M : FieldSheaf Λ X) :
-    Mod.tensorLeft M ⋙ (g)_*ᶠ[Λ] ≅ (g)_*ᶠ[Λ] ⋙ Mod.tensorLeft ((g)_*ᶠ[Λ].obj M) :=
-  haveI : (Mod.mapModComap (G := (g)_*[FieldCoefficients.{u} Λ])
-      (fieldConstantSheafToLowerStar Λ g)).IsEquivalence :=
-    isEquivalence_fieldLowerStar Λ g
-  Mod.tensorLeftCompMapModComapIso (fieldConstantSheafToLowerStar Λ g)
-    (fun _ _ ↦ Functor.LaxBraided.braided _ _) M
-
 end AlgebraicGeometry.ProEtale

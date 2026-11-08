@@ -62,11 +62,6 @@ noncomputable def ProEtaleWeilSheaf.adicConstant : ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mk (AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
 
-lemma ProEtaleWeilSheaf.adicConstant_carrier :
-    (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier =
-      AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  rfl
-
 end
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

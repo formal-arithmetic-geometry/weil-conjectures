@@ -185,8 +185,6 @@ instance : (IsDiscreteModule.{max u w} (G := G)).IsClosedUnderFiniteProducts whe
     · rw [Subgroup.coe_iInf]
       exact isOpen_iInter_of_finite fun j ↦ p.prop_diag_obj j _⟩
 
-noncomputable example : Abelian (DiscreteModule.{w} G) := inferInstance
-
 variable (G) in
 /-- The forgetful functor from discrete `G`-modules to abelian groups. -/
 abbrev forget₂Ab : DiscreteModule.{w} G ⥤ AddCommGrpCat.{max u w} :=
@@ -202,11 +200,8 @@ instance : PreservesFiniteColimits (IsDiscreteModule.{max u w} (G := G)).ι :=
   have := (IsDiscreteModule.{max u w} (G := G)).preservesCokernels_ι
   Functor.preservesFiniteColimits_of_preservesCokernels _
 
-example : (forget₂Ab.{w} G).Additive := inferInstance
 instance : PreservesFiniteLimits (forget₂Ab.{w} G) := comp_preservesFiniteLimits _ _
 instance : PreservesFiniteColimits (forget₂Ab.{w} G) := comp_preservesFiniteColimits _ _
-example : (forget₂Ab.{w} G).Faithful := inferInstance
-
 variable (G) in
 /-- The abelian group `A` with the trivial action of `G`, as a discrete `G`-module. -/
 def trivial (A : AddCommGrpCat.{max u w}) : DiscreteModule.{w} G :=

@@ -200,10 +200,6 @@ noncomputable def sum (T : Finset (CompactOpenLattice E n)) (hT : T.Nonempty) :
       obtain ⟨L, hL⟩ := hT
       exact AddSubgroup.isOpen_mono (Finset.le_sup (f := (·.1)) hL) L.2.2⟩
 
-lemma le_sum {T : Finset (CompactOpenLattice E n)} (hT : T.Nonempty) {L : CompactOpenLattice E n}
-    (hL : L ∈ T) : L.1 ≤ (sum T hT).1 :=
-  Finset.le_sup (f := (·.1)) hL
-
 open scoped Classical in
 /-- The sum of lattices is compatible with the action. -/
 lemma smul_sum (g : GL (Fin n) E) (T : Finset (CompactOpenLattice E n)) (hT : T.Nonempty) :

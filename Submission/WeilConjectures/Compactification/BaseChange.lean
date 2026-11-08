@@ -141,12 +141,6 @@ lemma ofIsPullback_i_fst (hsq : IsPullback h u p t) (c : Compactification p) :
     (c.ofIsPullback hsq).i ≫ pullback.fst c.g t = h ≫ c.i :=
   pullback.lift_fst _ _ _
 
-/-- The open immersion of `c.ofIsPullback hsq` followed by the projection to `S` is `u`. -/
-@[reassoc (attr := simp)]
-lemma ofIsPullback_i_snd (hsq : IsPullback h u p t) (c : Compactification p) :
-    (c.ofIsPullback hsq).i ≫ pullback.snd c.g t = u :=
-  pullback.lift_snd _ _ _
-
 /-- The scheme of `c.ofIsPullback hsq` is noetherian as soon as the fibre product `c.Z ×_T S`
 is: the two are the same scheme. -/
 instance noetherianSpace_ofIsPullback_Z (hsq : IsPullback h u p t) (c : Compactification p)

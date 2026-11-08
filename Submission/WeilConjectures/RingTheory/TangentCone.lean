@@ -66,12 +66,6 @@ def TangentConesMeetAtOrigin (I J : Ideal R) : Prop :=
 
 variable {R}
 
-theorem TangentConesMeetAtOrigin.mono {I J I' J' : Ideal R} (h : TangentConesMeetAtOrigin R I J)
-    (hI : I ≤ I') (hJ : J ≤ J') : TangentConesMeetAtOrigin R I' J' := by
-  obtain ⟨n, hn⟩ := h
-  refine ⟨n, fun N hN => (hn N hN).trans ?_⟩
-  gcongr
-
 theorem TangentConesMeetAtOrigin.symm {I J : Ideal R} (h : TangentConesMeetAtOrigin R I J) :
     TangentConesMeetAtOrigin R J I := by
   obtain ⟨n, hn⟩ := h

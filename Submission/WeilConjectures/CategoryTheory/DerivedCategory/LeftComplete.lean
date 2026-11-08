@@ -140,10 +140,6 @@ noncomputable def truncGECone (K : DerivedCategory C) : Cone (truncGETower K) wh
         dsimp [truncGETower]
         rw [id_comp, t.π_natTransTruncGEOfLE_app] }
 
-lemma truncGETower_obj (K : DerivedCategory C) (n : ℕ) :
-    (truncGETower K).obj (op n) = (t.truncGE (-(n : ℤ))).obj K :=
-  rfl
-
 instance (K : DerivedCategory C) (n : ℕ) : ((truncGETower K).obj (op n)).IsGE (-(n : ℤ)) :=
   inferInstanceAs (t.IsGE ((t.truncGE (-(n : ℤ))).obj K) _)
 

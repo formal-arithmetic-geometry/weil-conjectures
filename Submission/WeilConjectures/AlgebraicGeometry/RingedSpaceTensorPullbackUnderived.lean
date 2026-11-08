@@ -312,49 +312,6 @@ private theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g �
         (eval M N a V m).symm)
 
 
-/-- The concrete inverse image followed by tensor change of rings is an additive
-left adjoint to module direct image.
-
-Source: Stacks Project, Sheaves, Tags 008A and 008Y.
-(blueprint: lem-pc-ringed-space-tensor-pullback-underived)
-
-Proof: take the inverse-image module Hom equivalence of Tag 008Y and compose
-it with the extension/restriction-of-scalars equivalence of Tag 008A along the
-adjoint structure map. The right composite is direct image with the scalar
-structure through g-sharp: the adjunction triangle identity for the ring sheaves
-identifies the composite ring map with g-sharp. The natural Hom equivalences
-define the functor on objects and maps. On maps it is precisely inverse image
-followed by the sheafification of the sectionwise map id tensor a, by naturality
-of both equivalences. The inverse-image functor on abelian sheaves and the
-sectionwise tensor functor are additive, as is sheafification, so their composite
-is additive. This proves the prescribed object and morphism formulas and the
-underived adjunction. -/
-theorem exists_tensorModulePullback
-    {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
-    ∃ (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))
-      (h : ∀ M : SheafOfModules.{u} (moduleRings Y),
-        P.obj M = SheafOfModules.changeOfRings.{u, u, u}
-          (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)
-          (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M))
-      (_ : ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N),
-        P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}
-          (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)
-          (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)
-          (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) ≫
-          eqToHom (h N).symm)
-      (_ : P.Additive),
-      Nonempty (P ⊣ moduleDirectImage g) := by
-  obtain ⟨adj⟩ := nonempty_tensorPullbackAdjunction g
-  let := adj.isLeftAdjoint
-  have ha : (tensorPullback g).Additive := by
-    let := CategoryTheory.Limits.preservesBinaryBiproducts_of_preservesBinaryCoproducts
-      (tensorPullback g)
-    exact Functor.additive_of_preservesBinaryBiproducts _
-  refine ⟨tensorPullback g, fun _ ↦ rfl, ?_, ha, ⟨adj⟩⟩
-  intro M N a
-  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
-  rfl
-
 end
 
 end AlgebraicGeometry.RingedSpace

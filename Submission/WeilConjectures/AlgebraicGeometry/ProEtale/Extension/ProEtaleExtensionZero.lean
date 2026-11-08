@@ -67,14 +67,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The degreewise extension of the recorded `j_!`: terms are `j_!(K.X n)` and
-its differentials are `j_!(K.d n m)`, including for unbounded complexes.
-Source: blueprint lemma, last proof paragraph; Stacks Project, Tags 03DJ and 09AE
-(blueprint: lem-cbc-proetale-extension-zero). -/
-abbrev openExtensionCochain (A : Type (u + 1)) [CommRing A]
-    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
-  (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)
-
 /-- Scalar restriction on fixed-module-valued sheaves is additive, section by section.
 Source: Stacks Project, Tag 03CY, and `def-pc-sheaf-restrict-scalars`
 (blueprint: lem-cbc-proetale-extension-zero). -/

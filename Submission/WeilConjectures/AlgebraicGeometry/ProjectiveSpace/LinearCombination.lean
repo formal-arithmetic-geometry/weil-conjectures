@@ -106,10 +106,6 @@ variable {S Z : Scheme.{u}} {g : Z ⟶ S} {L : Z.Modules} {m n : Type u} [Fintyp
   (hεχ : ∀ l, εχ.app _ (pullbackSection χ (twistOneSection n S l)) =
     L.presheaf.map (homOfLE (le_top : χ ⁻¹ᵁ ⊤ ≤ ⊤)).op (v l))
 
-/-- The linear form `∑_r c_{lr} T_r`, divided by `T_q`, as a function on `D₊(T_q)`. -/
-def linearRatio (q : m) (l : n) : Γ(ℙ(m; S), standardOpen m S q) :=
-  ∑ r, (ℙ(m; S) ↘ S).appLE ⊤ (standardOpen m S q) le_top (c l r) * coordRatio m S q r
-
 
 variable {c} (hψ : ψ ≫ ℙ(m; S) ↘ S = g) (hv : ∀ l, v l = ∑ r, g.appTop (c l r) • u r)
 include hεψ hεχ hψ hv

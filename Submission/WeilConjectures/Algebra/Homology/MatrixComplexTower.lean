@@ -168,11 +168,6 @@ noncomputable def towerCone : Cone (towerFunctor hρ M hM) where
   π := NatTrans.ofOpSequence (fun n ↦ M'.reduction (π n) (M n) (hM' n)) fun n ↦ by
     exact (Category.id_comp _).trans (reduction_comp_towerFunctor_map hρ hM M' hM' n).symm
 
-/-- The legs of `MatrixComplex.towerCone` are the reductions. -/
-lemma towerCone_π_app (n : ℕ) :
-    (towerCone hρ hM M' hM').π.app (op n) = M'.reduction (π n) (M n) (hM' n) :=
-  rfl
-
 variable (hcomplete : ∀ x : ∀ n, A n, (∀ n, ρ n (x (n + 1)) = x n) → ∃ r : R, ∀ n, π n r = x n)
   (hsep : ∀ r : R, (∀ n, π n r = 0) → r = 0)
 

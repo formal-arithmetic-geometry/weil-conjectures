@@ -5,10 +5,11 @@ Authors: Bin Wu
 -/
 module
 
-public import Submission.WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.AdjoinRootCover
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.RingTheory.Etale.StandardEtale
-import Submission.WeilConjectures.Mathlib.RingTheory.AdjoinRoot
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -64,52 +65,5 @@ lemma Algebra.etale_adjoinRoot_of_isUnit_derivative {R : Type u} [CommRing R] {Q
   exact Algebra.Etale.of_equiv e
 
 variable (S P)
-
-/-- `adjoinRootCover S P` is finite for monic `P`. -/
-lemma isFinite_adjoinRootCover (hP : P.Monic) : IsFinite (adjoinRootCover S P).hom := by
-  have : Module.Finite Γ(S, ⊤) (AdjoinRoot P) := hP.finite_adjoinRoot
-  have : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) (AdjoinRoot P)))) := by
-    rw [IsFinite.SpecMap_iff]
-    exact RingHom.finite_algebraMap.mpr inferInstance
-  exact MorphismProperty.pullback_fst (P := @IsFinite) _ _ this
-
-/-- `adjoinRootCover S P` is étale when `P` is monic and `P'` is a unit modulo `P`. -/
-lemma etale_adjoinRootCover (hP : P.Monic) (hd : IsUnit (AdjoinRoot.mk P (derivative P))) :
-    Etale (adjoinRootCover S P).hom := by
-  have := Algebra.etale_adjoinRoot_of_isUnit_derivative hP hd
-  have : Etale (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) (AdjoinRoot P)))) := by
-    rw [HasRingHomProperty.Spec_iff (P := @Etale)]
-    exact RingHom.etale_algebraMap.mpr inferInstance
-  exact MorphismProperty.pullback_fst (P := @Etale) _ _ this
-
-/-- `adjoinRootCover S P` is finite locally free of degree `deg P` for monic `P`. -/
-lemma isFiniteLocallyFreeOfDegree_adjoinRootCover (hP : P.Monic) :
-    (adjoinRootCover S P).hom.IsFiniteLocallyFreeOfDegree P.natDegree := by
-  have : Module.Finite Γ(S, ⊤) (AdjoinRoot P) := hP.finite_adjoinRoot
-  have : Module.Free Γ(S, ⊤) (AdjoinRoot P) := hP.free_adjoinRoot
-  have : Algebra.FinitePresentation Γ(S, ⊤) (AdjoinRoot P) :=
-    Algebra.FinitePresentation.quotient (A := Γ(S, ⊤)[X]) (Submodule.fg_span (by simp))
-  have := isFinite_adjoinRootCover S P hP
-  have : Flat (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) (AdjoinRoot P)))) := by
-    rw [HasRingHomProperty.Spec_iff (P := @Flat)]
-    exact RingHom.flat_algebraMap_iff.mpr inferInstance
-  have : LocallyOfFinitePresentation
-      (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) (AdjoinRoot P)))) := by
-    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFinitePresentation)]
-    exact RingHom.finitePresentation_algebraMap.mpr inferInstance
-  have : Flat (adjoinRootCover S P).hom :=
-    MorphismProperty.pullback_fst (P := @Flat) _ _ inferInstance
-  have : LocallyOfFinitePresentation (adjoinRootCover S P).hom :=
-    MorphismProperty.pullback_fst (P := @LocallyOfFinitePresentation) _ _ inferInstance
-  refine { fiberDegree_eq := fun x ↦ ?_ }
-  have : IsFinite (pullback.fst S.toSpecΓ
-      (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) (AdjoinRoot P))))) :=
-    isFinite_adjoinRootCover S P hP
-  have : Nontrivial Γ(S, ⊤) := (S.presheaf.Γgerm x).hom.domain_nontrivial
-  refine (Scheme.Hom.fiberDegree_of_isPullback
-    (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) (AdjoinRoot P))))
-    (IsPullback.of_hasPullback _ _).flip x).trans ?_
-  rw [Scheme.Hom.fiberDegree_SpecMap, Ideal.fiberDegree, Module.finrank_baseChange,
-    (AdjoinRoot.powerBasis' hP).finrank, AdjoinRoot.powerBasis'_dim]
 
 end AlgebraicGeometry

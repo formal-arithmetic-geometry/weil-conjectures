@@ -169,7 +169,9 @@ public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoid
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import Submission.WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-public import Submission.WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import Submission.WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import Submission.WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import Submission.WeilConjectures.AlgebraicGeometry.ProperTorsionProjectionFormula
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -203,7 +205,11 @@ public import Submission.WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectio
 public import Submission.WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-public import Submission.WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.SectionProjectionUnitSupplement
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
+public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Submission.WeilConjectures.CategoryTheory.Monoidal.UnitComparison
+public import Submission.WeilConjectures.CategoryTheory.SectionProjectionUnit
 public import Submission.WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence

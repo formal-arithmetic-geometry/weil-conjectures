@@ -5,7 +5,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Submission.WeilConjectures.WeilSheaf.SmoothPurityNativeTrace
-public import Submission.WeilConjectures.WeilSheaf.SmoothPurityDescendedShriekUniversality
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation
+public import Submission.WeilConjectures.WeilSheaf.SmoothPurityProperTraceCoordinates
+public import Submission.WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedAdjunction
+public import Submission.WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraDerivedRightAdjointFree
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.OfBijectiveCounit
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory
+public import Submission.WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
+public import Submission.WeilConjectures.WeilSheaf.CondensedModelBaseChange
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.ExchangeConjugate
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Submission.WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
+public import Submission.WeilConjectures.WeilSheaf.SmoothPurityDescendedProperUniversality
+public import Submission.WeilConjectures.SmoothPurity.Defs
+public import Submission.WeilConjectures.WeilSheaf.CondensedModelBoundedConstructible
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false
@@ -54,27 +67,6 @@ local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :
 local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
-/-- The condensed compact-support comparison in the coordinates of the descended trace. -/
-noncomputable def shriekTraceCondensedComparison :
-    derivedLowerShriek k₀ l f ⋙ (objectProperty k₀ l Y).ι ⋙
-        (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor ≅
-      (objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor ⋙
-        CondensedRing.weilRightDerivedLowerShriek
-          (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
-          (Profinite.padicAlgClRingObj l)
-          (CondensedRing.compactificationOverField
-            (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-              (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)))
-          (comp_over f _) :=
-  derivedLowerShriekCompToCondensedIso k₀ l f ≪≫
-    Functor.isoWhiskerLeft (objectProperty k₀ l X).ι
-      (Functor.isoWhiskerLeft (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor
-        (eqToIso (condensedShriekForTrace_eq f)))
-
-lemma shriekTraceCondensedComparison_hom_app (T : WeilComplex k₀ l X) :
-    (shriekTraceCondensedComparison f).hom.app T = (condensedShriekForTraceIso f T).hom := by
-  simp [shriekTraceCondensedComparison, condensedShriekForTraceIso]
-
 variable (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
   (eT : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj T.obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
@@ -84,45 +76,5 @@ variable (d : ℕ) (T : WeilComplex k₀ l X) (U : WeilComplex k₀ l Y)
   (eU : (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor.obj U.obj ≅
     (CondensedRing.geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
       (Y ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj (𝟙_ _))
-
-/-- Full faithfulness transfers universality of the descended Weil trace to the
-adjoint transpose of its native lift. -/
-theorem isIso_purityMapOfDescendedSmoothTrace_of_universal
-    {J : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ J)
-    (h : ∀ K : WeilComplex k₀ l X,
-      (CondensedRing.weilRightDerivedLowerShriek
-        (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
-        (Profinite.padicAlgClRingObj l)
-        (CondensedRing.compactificationOverField
-          (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-            (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)))
-        (comp_over f _)).TraceUniversalAt
-        ((ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor.obj K.obj)
-        (CondensedRing.geometricFiberWeilSmoothTrace l
-          (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-            (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)) d)) :
-    IsIso (purityMapOfDescendedSmoothTrace f d T U eT eU adj) := by
-  have := (objectProperty k₀ l X).fullyFaithfulι.full
-  have := (objectProperty k₀ l X).fullyFaithfulι.faithful
-  have := (objectProperty k₀ l Y).fullyFaithfulι.full
-  have := (objectProperty k₀ l Y).fullyFaithfulι.faithful
-  let L := CondensedRing.weilRightDerivedLowerShriek
-    (s := X ↘ Spec (CommRingCat.of k₀)) (t := Y ↘ Spec (CommRingCat.of k₀))
-    (Profinite.padicAlgClRingObj l)
-    (CondensedRing.compactificationOverField
-      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _))) (comp_over f _)
-  have he := Adjunction.isIso_homEquiv_of_fullyFaithful_trace adj
-    ((objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l X).functor)
-    ((objectProperty k₀ l Y).ι ⋙ (ProEtaleWeilSheaf.derivedEquivCondensed k₀ l Y).functor)
-    L (shriekTraceCondensedComparison f) (traceOfDescendedSmoothTrace f d T U eT eU)
-    (L.map eT.hom ≫ CondensedRing.geometricFiberWeilSmoothTrace l
-      (Over.homMk (U := Over.mk (X ↘ Spec (CommRingCat.of k₀)))
-        (V := Over.mk (Y ↘ Spec (CommRingCat.of k₀))) f (comp_over f _)) d ≫ eU.inv)
-    (by
-      rw [shriekTraceCondensedComparison_hom_app]
-      exact map_traceOfDescendedSmoothTrace f d T U eT eU)
-    (fun K ↦ Functor.bijective_map_comp_iso_trace L eT eU.symm _ (h K))
-  exact he
 
 end AlgebraicGeometry.WeilComplex

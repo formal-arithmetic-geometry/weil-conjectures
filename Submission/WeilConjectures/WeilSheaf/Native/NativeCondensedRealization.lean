@@ -43,12 +43,6 @@ noncomputable abbrev condensedRealization :=
   Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ⋙
     (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor
 
-example : (condensedRealization k₀ l X).Additive := inferInstance
-
-example : PreservesFiniteLimits (condensedRealization k₀ l X) := inferInstance
-
-example : PreservesFiniteColimits (condensedRealization k₀ l X) := inferInstance
-
 /-- The condensed realization on derived categories. -/
 noncomputable abbrev derivedCondensedRealization :=
   (condensedRealization k₀ l X).mapDerivedCategory

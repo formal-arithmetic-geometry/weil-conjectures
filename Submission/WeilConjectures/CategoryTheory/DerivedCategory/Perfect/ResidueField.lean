@@ -10,7 +10,8 @@ public import Mathlib.RingTheory.HopkinsLevitzki
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.SimpleModule.Basic
-public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Perfect.LocalRing
+public import Mathlib.RingTheory.LocalRing.Module
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
 set_option autoImplicit true
 set_option relaxedAutoImplicit false

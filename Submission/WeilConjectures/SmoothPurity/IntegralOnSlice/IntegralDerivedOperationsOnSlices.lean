@@ -1126,12 +1126,6 @@ def duality : RingedSiteDualityModel.{t + 1, t, u, (max u (t + 1)) + 1}
     (topology X U) (ring l E X U) :=
   Classical.choice (ringedSiteDualityMaps_exists (topology X U) (ring l E X U))
 
-/-- Completed tensor as quotient completion of ordinary derived tensor. The balanced
-finite-level identity identifies this with the recorded two-reduction construction.
-Source: Bhatt--Scholze, Definition 3.4.10 (blueprint: def-pur-integral-derived-operations). -/
-def completedTensor : (D l E X U) × (D l E X U) ⥤ D l E X U :=
-  (duality l E X U).closed.tensor ⋙ completion l E X U
-
 attribute [local irreducible] duality SheafOfModules.monoidalCategory
   HasDerivedCategory.standard constantSheaf
   completedIntegralCoefficientSheafUnrestricted
@@ -1148,88 +1142,6 @@ private theorem globalTower_eq :
   have hh : transition l E X none = unrestrictedIntegralTransition l E X := funext h
   delta tower
   rw [hh]
-
-private theorem totalTensorGood
-    (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :
-    Good l E X none
-      ((coefficientTotalTensor.{u, t + 1, t} (topology X none)
-        (ring l E X none)).obj (P.obj, Q.obj)) := by
-  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
-  have h := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
-    (ring l E X none) P.obj Q.obj P.property.1 Q.property.1 P.property.2 Q.property.2
-  exact ⟨h.1, h.2.1⟩
-
-private def totalTensorOnGood :
-    (integralOperationsGoodComplex l E X).FullSubcategory ×
-      (integralOperationsGoodComplex l E X).FullSubcategory ⥤
-        (Good l E X none).FullSubcategory :=
-  ObjectProperty.lift _
-    (((integralOperationsGoodComplex l E X).ι.prod
-      (integralOperationsGoodComplex l E X).ι) ⋙
-        coefficientTotalTensor.{u, t + 1, t} (topology X none) (ring l E X none))
-    (fun P ↦ totalTensorGood l E X P.1 P.2)
-
-private theorem tensorCompletionOnGood :
-    Nonempty (((integralOperationsGoodLocalization l E X).prod
-      (integralOperationsGoodLocalization l E X)) ⋙ completedTensor l E X none ≅
-        totalTensorOnGood l E X ⋙ roosGood l E X none) := by
-  let H : (integralOperationsGoodComplex l E X).FullSubcategory ⥤
-      ObjectProperty.FullSubcategory
-        (CochainComplex.IsKFlatIndependentCoefficients
-          (J := topology X none) (R := ring l E X none) :
-            ObjectProperty (Cx l E X none)) :=
-    ObjectProperty.lift _ (integralOperationsGoodComplex l E X).ι
-      (fun P ↦ P.property.1)
-  let c := Functor.isoWhiskerLeft (H.prod H) (duality l E X none).models.comparison
-  have c' : ((integralOperationsGoodLocalization l E X).prod
-      (integralOperationsGoodLocalization l E X)) ⋙ (duality l E X none).closed.tensor ≅
-        totalTensorOnGood l E X ⋙ qGood l E X none := c.symm
-  let e := Functor.isoWhiskerRight c' (completion l E X none)
-  let d := Functor.isoWhiskerLeft (totalTensorOnGood l E X)
-    (completionComparison l E X none)
-  exact ⟨e ≪≫ d⟩
-
-/-- The global specialization computes precisely the recorded finite-tensor Roos model,
-so this extension does not introduce a different global tensor product.
-Source: Bhatt--Scholze, Definition 3.4.10; Stacks 06YY
-(blueprint: def-pur-integral-derived-operations).
-Proof: for flat-term K-flat P,Q, their ordinary tensor is K-flat with flat terms.
-Apply completionComparison to that tensor and the ordinary tensor comparison of
-RingedSiteDualityModel.models. At each finite level reassociate balanced tensors:
-(p tensor a) tensor (q tensor b) maps to (p tensor q) tensor ab, and its inverse
-sends (p tensor q) tensor a to (p tensor 1) tensor (q tensor a). Both maps preserve
-the total differential and every quotient transition. Their strict tower isomorphism
-gives a Roos isomorphism, natural in P,Q. Compose with the representative comparisons.
-The target is exactly integralOperationsTensorOnGood, not an arbitrary derived model. -/
-theorem completedTensor_global_comparison :
-    Nonempty (((integralOperationsGoodLocalization l E X).prod
-      (integralOperationsGoodLocalization l E X)) ⋙ completedTensor l E X none ≅
-        integralOperationsTensorOnGood l E X) := by
-  obtain ⟨a⟩ := tensorCompletionOnGood l E X
-  obtain ⟨b⟩ := integralTensorReductionTowerComparison l E X
-  let H := (integralOperationsGoodComplex l E X).ι.prod
-    (integralOperationsGoodComplex l E X).ι
-  let T := coefficientTotalTensor.{u, t + 1, t} (topology X none) (ring l E X none)
-  let R := integralOperationsRoosFunctor (A := Mod l E X none)
-  let Q := DerivedCategory.Q (C := Mod l E X none)
-  let W := tower l E X none
-  let V := integralOperationsTensorTowerFunctor l E X
-  have e : totalTensorOnGood l E X ⋙ (Good l E X none).ι ≅ H ⋙ T :=
-    (Good l E X none).liftCompιIso (H ⋙ T) (fun P ↦ totalTensorGood l E X P.1 P.2)
-  have b' : T ⋙ W ≅ V := by
-    dsimp only [T, W, V]
-    rw [globalTower_eq]
-    exact b
-  refine ⟨a ≪≫ ?_⟩
-  exact (Functor.associator (totalTensorOnGood l E X)
-      (Good l E X none).ι (roos l E X none ⋙ Q)).symm ≪≫
-    Functor.isoWhiskerRight e (roos l E X none ⋙ Q) ≪≫
-    Functor.isoWhiskerLeft (H ⋙ T) (Functor.associator W R Q) ≪≫
-    (Functor.associator (H ⋙ T) W (R ⋙ Q)).symm ≪≫
-    Functor.isoWhiskerRight (Functor.associator H T W) (R ⋙ Q) ≪≫
-    Functor.isoWhiskerRight (Functor.isoWhiskerLeft H b') (R ⋙ Q) ≪≫
-    Functor.associator H V (R ⋙ Q) ≪≫
-    Functor.isoWhiskerLeft H (Functor.associator V R Q).symm
 
 end IntegralOnSlice
 end WeilConjectures

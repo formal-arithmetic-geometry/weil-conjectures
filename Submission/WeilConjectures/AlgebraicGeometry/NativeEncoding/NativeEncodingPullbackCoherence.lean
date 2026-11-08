@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 
 public import Submission.WeilConjectures.AlgebraicGeometry.NativeEncoding.NativeAdicEncodingCore
-import Submission.WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunctionComparisonSupplement
+import Mathlib.CategoryTheory.Adjunction.Mates
+import Submission.WeilConjectures.CategoryTheory.InverseMateEquivalence
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
+import Submission.WeilConjectures.CategoryTheory.EquivalenceAdjunctionComparison
 import Submission.WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
 set_option autoImplicit true

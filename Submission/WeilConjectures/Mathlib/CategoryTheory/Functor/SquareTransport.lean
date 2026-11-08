@@ -57,11 +57,6 @@ lemma squareTransport_hom_app :
   simp [squareTransport]
 
 @[simp]
-lemma squareTransport_inv_app :
-    (squareTransport R R' θ).inv.app K = R'.map (θ.inv.app (R.obj K)) := by
-  simp [squareTransport]
-
-@[simp]
 lemma squareTransport_app :
     (squareTransport R R' θ).app K = R'.mapIso (θ.app (R.obj K)) := by
   ext

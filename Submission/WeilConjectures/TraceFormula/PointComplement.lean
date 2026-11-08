@@ -153,18 +153,6 @@ noncomputable def preimagePointComplRestrict (g : Y ⟶ X) (x : RationalPoint X)
     rw [morphismRestrict_ι_assoc, Over.w g]
     rfl)
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
-/-- The restriction of `g` to the preimage of the complement of a point is a base change of
-`g`. -/
-lemma isPullback_preimagePointComplRestrict (g : Y ⟶ X) (x : RationalPoint X) :
-    IsPullback (preimagePointComplRestrict g x) (preimagePointComplι g x) (pointComplι x) g := by
-  have w : preimagePointComplRestrict g x ≫ pointComplι x = preimagePointComplι g x ≫ g := by
-    ext1
-    exact morphismRestrict_ι _ _
-  exact IsPullback.of_map (Over.forget _) w (isPullback_morphismRestrict g.left (pointComplOpens x))
-
 /-- The inclusion `g⁻¹(X ∖ {x}) ⟶ g'⁻¹(X ∖ {x})` of preimages. -/
 noncomputable def preimagePointComplHomOfLE {g g' : Y ⟶ X} {x : RationalPoint X}
     (hle : g.left ⁻¹ᵁ pointComplOpens x ≤ g'.left ⁻¹ᵁ pointComplOpens x) :
@@ -173,16 +161,6 @@ noncomputable def preimagePointComplHomOfLE {g g' : Y ⟶ X} {x : RationalPoint 
     change _ ≫ (g'.left ⁻¹ᵁ pointComplOpens x).ι ≫ Y.hom = _
     rw [Scheme.homOfLE_ι_assoc]
     rfl)
-
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
-@[reassoc (attr := simp)]
-lemma preimagePointComplHomOfLE_ι {g g' : Y ⟶ X} {x : RationalPoint X}
-    (hle : g.left ⁻¹ᵁ pointComplOpens x ≤ g'.left ⁻¹ᵁ pointComplOpens x) :
-    preimagePointComplHomOfLE hle ≫ preimagePointComplι g' x = preimagePointComplι g x := by
-  ext1
-  exact Scheme.homOfLE_ι _ hle
 
 instance {g g' : Y ⟶ X} {x : RationalPoint X}
     (hle : g.left ⁻¹ᵁ pointComplOpens x ≤ g'.left ⁻¹ᵁ pointComplOpens x) :

@@ -121,31 +121,4 @@ Source: blueprint completed pullback (blueprint: def-weil-pbc-exact-pullback-int
 abbrev AdicCoefficientDatum.towerPull {U V : Scheme.{t}} (f : U ⟶ V) :=
   (d.towerModulePull f).mapDerivedCategory
 
-/-- Constant towers commute with actual ordinary pullback, with identity components.
-Source: blueprint direct image and limits (blueprint: def-weil-pbc-exact-pullback-interface). -/
-def AdicCoefficientDatum.constantPullbackIso {U V : Scheme.{t}} (f : U ⟶ V) :
-    d.constantTower V ⋙ d.towerModulePull f ≅
-      proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
-        (d.integralRingIso f) ⋙ d.constantTower U :=
-  NatIso.ofComponents
-    (fun M ↦ NatIso.ofComponents
-      (fun n ↦ Iso.refl
-        (((d.towerModulePull f).obj ((d.constantTower V).obj M)).obj n))
-      (fun _ ↦ by
-        ext n
-        simp [AdicCoefficientDatum.constantTower, AdicCoefficientDatum.towerModulePull]))
-    (fun _ ↦ by
-      ext n
-      simp [AdicCoefficientDatum.constantTower, AdicCoefficientDatum.towerModulePull])
-
-/-- The exact derived constant/pullback comparison, induced from identity components.
-Source: blueprint direct image and limits (blueprint: def-weil-pbc-exact-pullback-interface). -/
-def AdicCoefficientDatum.derivedConstantPullbackIso {U V : Scheme.{t}} (f : U ⟶ V) :
-    d.derivedConstantTower V ⋙ d.towerPull f ≅ d.pull f ⋙ d.derivedConstantTower U :=
-  Functor.mapDerivedCategoryCompIso (d.constantTower V) (d.towerModulePull f) ≪≫
-    Functor.mapDerivedCategoryNatIso (d.constantPullbackIso f) ≪≫
-      (Functor.mapDerivedCategoryCompIso
-        (proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
-          (d.integralRingIso f)) (d.constantTower U)).symm
-
 end AlgebraicGeometry.Scheme

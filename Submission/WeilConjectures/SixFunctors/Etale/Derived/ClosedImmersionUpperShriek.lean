@@ -91,11 +91,6 @@ noncomputable def sectionsWithSupportι : sectionsWithSupport A j ⟶ 𝟭 _ whe
   app N := kernel.ι _
   naturality _ _ φ := by simp [sectionsWithSupport]
 
-@[reassoc (attr := simp)]
-lemma sectionsWithSupportι_app_comp_unit_app (N : Sheaf X.smallEtaleTopology A) :
-    (sectionsWithSupportι A j).app N ≫ (upperStarLowerStarAdjunction A j).unit.app N = 0 :=
-  kernel.condition _
-
 /-- The sheaf `Γ_Z N` restricts to zero along the open immersion `j`: `j^*` is exact and `j^*` of
 the unit `N ⟶ j_* j^* N` is an isomorphism, a section of the invertible counit. -/
 lemma isZero_upperStar_sectionsWithSupport [IsOpenImmersion j] (N : Sheaf X.smallEtaleTopology A) :
@@ -247,14 +242,6 @@ noncomputable def derivedLowerStarClosedUpperShriekAdjunction
       (closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor :=
   ((lowerStarClosedUpperShriekAdjunction _ i j hij).mapDerivedCategoryRightDerivedAdjunction
     ).ofNatIsoLeft ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctorIsoMapDerivedCategory.symm
-
-/-- The direct image `Ri_*` along a closed immersion is a left adjoint on the unbounded derived
-categories of étale sheaves of modules
-(`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`). -/
-lemma isLeftAdjoint_rightDerivedFunctor_lowerStar_of_isClosedImmersion
-    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
-    ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctor.IsLeftAdjoint :=
-  (derivedLowerStarClosedUpperShriekAdjunction i j hij).isLeftAdjoint
 
 end Derived
 

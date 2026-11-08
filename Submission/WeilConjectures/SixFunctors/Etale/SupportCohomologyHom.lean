@@ -148,16 +148,6 @@ noncomputable def sectionsWithSupportCompΓIso :
       erw [← Functor.map_comp, ← Functor.map_comp,
         ← (sectionsWithSupportι A i.openComplement.ι).naturality f])
 
-@[reassoc (attr := simp)]
-lemma sectionsWithSupportCompΓIso_hom_app_comp (M : Sheaf X.smallEtaleTopology A) :
-    (sectionsWithSupportCompΓIso A i).hom.app M ≫
-        (Sheaf.ΓSupportι X.smallEtaleTopology A _).app M =
-      (Sheaf.Γ X.smallEtaleTopology A).map ((sectionsWithSupportι A _).app M) := by
-  have h := (isLimitΓMapSectionsWithSupportι A i.openComplement.ι M).conePointUniqueUpToIso_hom_comp
-    (isLimitSectionsWithSupport A i M) WalkingParallelPair.zero
-  simp only [KernelFork.ofι, Fork.ofι_π_app] at h
-  exact h
-
 /-- `Γ_Z(X, M) ≅ Γ(Z, i^! M)`: the sections with support in `Z` are the global sections of the
 exceptional inverse image `i^! M` (`AlgebraicGeometry.Etale.closedUpperShriek`), through
 `Γ(Z, i^! M) ≅ Γ(X, i_* i^! M) ≅ Γ(X, 𝒢_Z M)`. -/

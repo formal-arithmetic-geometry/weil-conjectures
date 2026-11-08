@@ -41,8 +41,6 @@ variable (C : Type*) [Category C] [Preadditive C] [MonoidalCategory C] [HasZeroO
   [∀ (X₁ X₂ X₃ : GradedObject I C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject I C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃] [DecidableEq I]
 
-noncomputable example : MonoidalCategory (HomologicalComplex C c) := inferInstance
-
 namespace MonoidalCategory
 
 variable [∀ (K₁ K₂ : HomologicalComplex C c), HasMapBifunctor K₁ K₂ (curriedTensor C) c]

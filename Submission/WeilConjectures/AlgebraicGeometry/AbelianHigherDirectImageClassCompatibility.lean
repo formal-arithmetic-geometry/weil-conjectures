@@ -8,8 +8,8 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 
-public import Submission.WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
-import Submission.WeilConjectures.AlgebraicGeometry.AbelianPullbackSingleComposition
+public import Submission.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+import Submission.WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 import Submission.WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 
 set_option autoImplicit true
@@ -55,43 +55,6 @@ namespace AlgebraicGeometry.Etale
 noncomputable abbrev abelianComparisonFree (S : Scheme.{v}) :=
   uliftYoneda.{v + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
     presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}
-
-/-- Shift compatibility identifies zeroth homology of the shifted direct image with
-its degree-p homology. Both factors are the specified canonical comparisons. -/
-noncomputable def abelianComparisonShift {S Y : Scheme.{v}} (h : Y ⟶ S) (p : ℕ)
-    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
-    (DerivedCategory.Plus.homologyFunctor _ 0).obj
-        (R+((h)_*[AddCommGrpCat.{v + 1}]).obj
-          (((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧)) ≅
-      (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
-        (R+((h)_*[AddCommGrpCat.{v + 1}]).obj
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) :=
-  (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
-      ((R+((h)_*[AddCommGrpCat.{v + 1}]).commShiftIso (p : ℤ)).app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≪≫
-    ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso (p : ℤ) 0 (p : ℤ)
-      (add_zero (p : ℤ))).app _
-
-/-- Send a raw class to a section by derived adjunction, zeroth homology, shift
-comparison, and evaluation at the identity generator. This constructs the map;
-it makes no choice from the mere existence of an isomorphism. -/
-noncomputable def abelianHigherDirectImageClass {S Y : Scheme.{v}} (h : Y ⟶ S)
-    (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale)
-    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj
-      (((h)^*[AddCommGrpCat.{v + 1}]).obj ((abelianComparisonFree S).obj U)) ⟶
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧) :
-    ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
-      (R+((h)_*[AddCommGrpCat.{v + 1}]).obj
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).obj.obj (op U) :=
-  (((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _ ≫
-      (DerivedCategory.Plus.homologyFunctor _ 0).map
-        ((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} h).derivedPlus.homEquiv _ _
-          ((((h)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
-            ((abelianComparisonFree S).obj U) ≫ z)) ≫
-      (abelianComparisonShift h p F).hom).hom.app (op U)).hom
-    (((toSheafify S.smallEtaleTopology
-      (uliftYoneda.{v + 1}.obj U ⋙ AddCommGrpCat.free)).app (op U)).hom
-        (FreeAbelianGroup.of (ULift.up (𝟙 U))))
 
 
 end AlgebraicGeometry.Etale

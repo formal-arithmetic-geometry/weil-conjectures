@@ -8,7 +8,10 @@ public import Submission.WeilConjectures.AlgebraicGeometry.IntegralConstantModel
 public import Submission.WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all Submission.WeilConjectures.AlgebraicGeometry.IntegralConstantModelHeartClosure
 import Submission.WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueReductionComparison
-import Submission.WeilConjectures.AlgebraicGeometry.DiscreteFieldTorAmplitude
+import Submission.WeilConjectures.AlgebraicGeometry.DiscreteCoefficientModel
+import Submission.WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ConstantFieldFlat
+import Submission.WeilConjectures.AlgebraicGeometry.IntegralResidueModelComparison
 import Submission.WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 import Submission.WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
@@ -129,51 +132,5 @@ theorem internal_residue_stacks_comparison
     exact (DerivedCategory.exists_homologyConcentratedIn_iff_bounded L).mp
       ⟨a, b, DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hab⟩
   · exact fun h ↦ ⟨h.1.2, h.2⟩
-
-/-- The first residue ring `𝒪_E/ϖ_E` is a field: `ϖ_E` generates the maximal ideal. -/
-@[implicit_reducible]
-noncomputable def coefficientExtensionRingOneField (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
-    Field (Padic.coefficientExtensionRing l E 1) :=
-  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
-  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
-      Set (Padic.coefficientExtensionIntegers l E)) =
-        Padic.coefficientExtensionMaximalIdeal l E :=
-    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  have : (Padic.coefficientExtensionIdeal l E 1).IsMaximal := by
-    rw [Padic.coefficientExtensionIdeal, pow_one, hgen]
-    exact h.2.2.2.2.1
-  Ideal.Quotient.field _
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.integralCoefficientAbLocallyBijective
-  WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
-/-- A bounded constructible complex over the first residue ring `𝒪_E/ϖ_E` has finite Tor
-amplitude. Hence the finite Tor clause in (2) of `sk-prop-integral-criterion` holds
-automatically, `𝒪_E/ϖ_E` being a field.
-Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 0651 and 08FC
-(auxiliary; not a blueprint node).
-
-Proof: transport along the coefficient isomorphism of
-`internal_first_residue_reduction_comparison` to the pulled-back discrete residue field, where
-every bounded complex has finite Tor amplitude by `finiteTorAmplitude_of_discreteField`;
-restriction of scalars along an isomorphism preserves and reflects Tor amplitude. -/
-theorem finiteTorAmplitude_of_constantModelBoundedConstructible_residue
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) [IsNoetherian X]
-    {L : AdicCompletion.FiniteDerived l E X 0}
-    (hL : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X L) :
-    _root_.DerivedCategory.finiteTorAmplitude _ L := by
-  obtain ⟨e, -⟩ := internal_first_residue_reduction_comparison l E X
-  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap e.inv.hom X)
-  have : IsIso e.inv.hom := inferInstanceAs (IsIso ((Mon.forget _).map e.inv))
-  have : F.IsEquivalence := (Mod.comapEquivalenceOfIsIso _).isEquivalence_functor
-  have : F.PreservesFlat := Functor.preservesFlat_of_isEquivalence F
-  let := coefficientExtensionRingOneField l E
-  obtain ⟨a, b, h⟩ := IntegralModelsStacks.finiteTorAmplitude_of_discreteField X
-    (Padic.coefficientExtensionRing l E 1) (F.bounded_mapDerivedCategory_obj hL.1)
-  exact ⟨a, b, (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff F a b L).mp h⟩
 
 end AlgebraicGeometry.ProEtale

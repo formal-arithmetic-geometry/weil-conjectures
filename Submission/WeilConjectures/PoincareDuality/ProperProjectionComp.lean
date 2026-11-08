@@ -42,12 +42,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-lemma δ_leftDerivedUpperStar {W V : Scheme.{u}} (h : W ⟶ V)
-    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
-      (condensedRingObj Λ V))) :
-    δ L((h)^*⟦Λ⟧) K M = ((leftDerivedUpperStarTensor Λ h).app K).app M :=
-  rfl
-
 set_option maxHeartbeats 2000000 in
 -- unfolding the comultiplication of the derived pullback built from `leftDerivedUpperStarTensor`
 /-- The composition isomorphism of the derived pullbacks is compatible with the comultiplications,
@@ -83,32 +77,6 @@ lemma properProjectionMorphism_comp
 section Open
 
 variable {U V : Scheme.{u}} (i : U ⟶ V) (i' : V ⟶ X) [IsOpenImmersion i] [IsOpenImmersion i']
-
-set_option maxHeartbeats 2000000 in
--- instantiating the abstract statement in the derived categories of module objects
-/-- **The open projection comparison of a composite** (blueprint `prop-sf-pf-coherence`,
-composition clause, for the extensions by zero along open immersions). -/
-lemma openImmersionProjectionComparison_comp
-    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
-    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :
-    openImmersionProjectionComparison Λ (i ≫ i') M N =
-      ((conjugateIsoEquiv
-          (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (i ≫ i'))
-          ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i).comp
-            (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i'))).symm
-          (leftDerivedUpperStarComp Λ i i')).inv.app _ ≫
-        (D((i')_!open⟦Λ⟧)).map ((D((i)_!open⟦Λ⟧)).map
-          (M ◁ (leftDerivedUpperStarComp Λ i i').hom.app N)) ≫
-        (D((i')_!open⟦Λ⟧)).map (openImmersionProjectionComparison Λ i M ((L((i')^*⟦Λ⟧)).obj N)) ≫
-        openImmersionProjectionComparison Λ i' ((D((i)_!open⟦Λ⟧)).obj M) N ≫
-        ((conjugateIsoEquiv
-          (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ (i ≫ i'))
-          ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i).comp
-            (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i'))).symm
-          (leftDerivedUpperStarComp Λ i i')).hom.app M ▷ N :=
-  Adjunction.projectionComparison_eq_of_iso_comp _ _ _ (leftDerivedUpperStarComp Λ i i')
-    (leftDerivedUpperStarComp_δ Λ i i') M N
 
 end Open
 

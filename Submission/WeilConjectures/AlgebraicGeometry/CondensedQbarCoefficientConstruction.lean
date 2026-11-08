@@ -391,37 +391,6 @@ noncomputable def boundedComp {T T' : Type u} [TopologicalSpace T] [TopologicalS
         obtain ⟨E, hE, ha⟩ := a.property
         exact ⟨E, hE, fun x ↦ ha (g x)⟩))
 
-/-- Bounded continuous functions descend uniquely to the actual component quotient.
-The quotient is surjective, so the same finite extension bounds the descended function.
-This includes the empty space.
-Source: RefactorInstruction, Section 4, coefficient realization on the component quotient
-(auxiliary; not a blueprint node). -/
-noncomputable def boundedComponentsIso (ℓ : ℕ) [Fact ℓ.Prime]
-    (T : Type u) [TopologicalSpace T] :
-    PadicAlgCl.finiteIntermediateFieldValued ℓ (ConnectedComponents T) ≃+*
-      PadicAlgCl.finiteIntermediateFieldValued ℓ T := by
-  let q : C(T, ConnectedComponents T) := ⟨ConnectedComponents.mk,
-    ConnectedComponents.continuous_coe⟩
-  refine RingEquiv.ofBijective (boundedComp ℓ q) ⟨?_, ?_⟩
-  · intro a b h
-    apply Subtype.ext
-    ext t
-    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe t
-    exact congrArg (fun c ↦ c.1 x) h
-  · intro a
-    let b : C(ConnectedComponents T, PadicAlgCl ℓ) :=
-      ⟨a.1.continuous.connectedComponentsLift, a.1.continuous.connectedComponentsLift_continuous⟩
-    have hb : b ∈ PadicAlgCl.finiteIntermediateFieldValued ℓ (ConnectedComponents T) := by
-      obtain ⟨E, hE, ha⟩ := a.property
-      refine ⟨E, hE, ?_⟩
-      intro t
-      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe t
-      exact (Continuous.connectedComponentsLift_apply_coe a.1.continuous x) ▸ ha x
-    refine ⟨⟨b, hb⟩, ?_⟩
-    apply Subtype.ext
-    ext x
-    exact Continuous.connectedComponentsLift_apply_coe a.1.continuous x
-
 /-- Restriction of a bounded function to a small pro-etale object.
 Source: RefactorInstruction, Section 4, coefficient realization
 (auxiliary; not a blueprint node). -/

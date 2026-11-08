@@ -114,10 +114,6 @@ def IsCurvePerverseLE (n : ℤ) (K : WeilComplex k₀ l X) : Prop :=
   (∀ a : ℤ, n < a → IsZero ((homologySheaf a).obj K)) ∧
     (WeilSheaf.support ((homologySheaf n).obj K)).Finite
 
-theorem isCurvePerverseUpper_iff_isCurvePerverseLE_zero (K : WeilComplex k₀ l X) :
-    K.IsCurvePerverseUpper ↔ K.IsCurvePerverseLE 0 :=
-  Iff.rfl
-
 /-- Curve perversity is invariant under isomorphism: the cohomology sheaves of isomorphic
 complexes are isomorphic, hence have the same support. -/
 instance : ObjectProperty.IsClosedUnderIsomorphisms

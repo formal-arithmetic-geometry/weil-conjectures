@@ -106,21 +106,5 @@ lemma Presieve.IsDisjointFamily.exists_iso (hf : Presieve.IsDisjointFamily f J)
     · exact Functor.map_id _ _
   exact ⟨⟨φ, ψ, h₁, h₂⟩, hφ⟩
 
-/-- The sections of a presheaf of types over a category with a terminal object `T` are
-determined by their value at `T`. -/
-lemma Functor.sections_ext_of_isTerminal {P : Cᵒᵖ ⥤ Type*} {T : C} (hT : IsTerminal T)
-    {s t : P.sections} (h : s.1 (op T) = t.1 (op T)) : s = t := by
-  refine Subtype.ext (funext fun Y ↦ ?_)
-  rw [← s.2 (hT.from Y.unop).op, ← t.2 (hT.from Y.unop).op, h]
-
-/-- The section of a presheaf of types over a category with a terminal object `T` extending
-an element of `P(T)`. -/
-def Functor.sectionOfIsTerminal {P : Cᵒᵖ ⥤ Type*} {T : C} (hT : IsTerminal T)
-    (x : P.obj (op T)) : P.sections :=
-  ⟨fun Y ↦ P.map (hT.from Y.unop).op x, fun {Y Y'} g ↦ by
-    dsimp only
-    rw [← Functor.map_comp_apply, show (hT.from Y.unop).op ≫ g = (hT.from Y'.unop).op from
-      Quiver.Hom.unop_inj (hT.hom_ext _ _)]⟩
-
 
 end CategoryTheory

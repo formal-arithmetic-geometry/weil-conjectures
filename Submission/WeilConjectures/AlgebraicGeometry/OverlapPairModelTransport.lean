@@ -36,13 +36,6 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The tensor and abstract pullbacks are canonically identified by their adjunctions.
-Source: Stacks Project, Tag 0096.
-(blueprint: lem-pc-overlap-pair-model-transport). -/
-abbrev overlapTensorComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
-    Scheme.Modules.tensorPullback p ≅ Scheme.Modules.pullback p :=
-  overlapAdjunctionComparison p
-
 variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
   (c : Cone (R.op ⋙ Scheme.Spec)) {i : I} {Xi : Scheme.{u}}
   (f : Xi ⟶ Spec (R.obj i)) {j : I} (hij : i ≤ j)

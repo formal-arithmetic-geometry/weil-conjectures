@@ -17,7 +17,15 @@ import Submission.WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparis
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Submission.WeilConjectures.AlgebraicGeometry.FreeCechComplexExact
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
+import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
+import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+import Mathlib.LinearAlgebra.DFinsupp
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import Submission.WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 

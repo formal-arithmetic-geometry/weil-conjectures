@@ -221,19 +221,4 @@ theorem Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed {k K
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- **Sections are invariant under extension of an algebraically closed base field.** Let `k`
-be an algebraically closed field, `K/k` a field extension and `p : X ⟶ Spec k` quasi-compact
-and quasi-separated. For every étale sheaf `F` of `Λ`-modules on `X`, pullback along the
-projection `X ×_k K ⟶ X` is an isomorphism `Γ(X, F) ≅ Γ(X ×_k K, F|)`. This is a variant of
-Stacks 0A3I, which is stated for separably closed fields; here `k` is assumed algebraically
-closed and `K` is arbitrary. -/
-@[stacks 0A3I]
-theorem Etale.isIso_globalSectionsUpperStarMap_of_isAlgClosed {k K : Type u} [Field k] [Field K]
-    [Algebra k K] [IsAlgClosed k] {X : Scheme.{u}} (p : X ⟶ Spec (.of k)) [QuasiCompact p]
-    [QuasiSeparated p] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ)
-      (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k K)))) F) :=
-  (isIso_globalSectionsUpperStarMap_iff_forget₂ Λ _ F).2
-    (isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed p _)
-
 end AlgebraicGeometry

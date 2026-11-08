@@ -10,7 +10,13 @@ public import Submission.WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Geom
 public import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 import Submission.WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceExists
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Mathlib.Algebra.Category.Grp.AB
+import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceSplitting
+import Mathlib.AlgebraicGeometry.Limits
+import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Mathlib.AlgebraicGeometry.Sites.Etale
 import Submission.WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
 import Submission.WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

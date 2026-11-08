@@ -207,14 +207,6 @@ noncomputable abbrev centralizerι : centralizer g ⟶ G :=
 instance : IsClosedImmersion (centralizerι g).left :=
   isClosedImmersion_eqLocusι _ _
 
-/-- The `X`-points of the centralizer of `g` are the `X`-points of `G` commuting with `g`. -/
-theorem exists_comp_centralizerι_iff {X : Over (Spec (.of k))} (x : X ⟶ G) :
-    (∃ l : X ⟶ centralizer g, l ≫ centralizerι g = x) ↔
-      (toUnit X ≫ g) * x = x * (toUnit X ≫ g) := by
-  rw [GrpObj.exists_comp_eqLocusι_iff, comp_conjBy, Category.comp_id,
-    show toUnit X ≫ g⁻¹ = (toUnit X ≫ g)⁻¹ by rw [Hom.inv_def, Hom.inv_def, Category.assoc],
-    mul_inv_eq_iff_eq_mul]
-
 /-- **The Lie algebra of a centralizer.** The Lie algebra of the centralizer `C_G(g)` of a
 rational point `g` is the subspace of `Lie(G)` fixed by the adjoint action `d(c_g)` of `g`.
 (blueprint: `sk-p-comparison`) -/

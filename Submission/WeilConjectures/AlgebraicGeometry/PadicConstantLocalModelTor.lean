@@ -83,19 +83,6 @@ private noncomputable def ringFreeCoordinates
     (ModuleCat.biproductIsoPi (fun _ : Fin n ↦ F.obj R)).toLinearEquiv).trans
       (LinearEquiv.piCongrRight fun _ ↦ e)
 
-private noncomputable def continuousScalarEquiv
-    (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] :
-    ULift.{u + 1} A ≃+* ULift.{u + 1} C(Profinite.of PUnit.{u + 1}, A) where
-  toFun a := ULift.up (ContinuousMap.const _ a.down)
-  invFun f := ULift.up (f.down PUnit.unit)
-  left_inv _ := rfl
-  right_inv f := by
-    apply ULift.ext
-    ext x
-    exact congrArg f.down (Subsingleton.elim PUnit.unit x)
-  map_mul' _ _ := rfl
-  map_add' _ _ := rfl
-
 section CounitScalar
 
 variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
@@ -103,26 +90,6 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalC
   [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory D]
   {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]
   (S : D) [MonObj S] [IsCommMonObj (F.obj (G.obj S))]
-
-/-- Extending constant scalar modules along the counit is left adjoint to sections.
-Source: blueprint local boundary duality, Step 5, scalar extension adjunction.
-Proof: compose the module lift of the monoidal adjunction with extension/restriction
-of scalars. The resulting restriction is along the unit followed by the image of
-its counit; the right triangle identity identifies this with restriction along the
-identity. This also applies to the zero algebra and the zero module.
-(blueprint: lem-a1-condensed-point-scalar-adjunction) -/
-def counitScalarAdjunction :
-    F.mapMod (G.obj S) ⋙ Mod.extendScalars (adj.counitAlgHom S) ⊣ G.mapMod S := by
-  let a := (adj.mapModAdjunction (G.obj S)).comp
-    (Mod.extendRestrictAdjunction (adj.counitAlgHom S))
-  refine a.ofNatIsoRight ?_
-  exact (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (G.mapModComapIso (adj.counitAlgHom S)) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (G.mapMod S)
-      ((Mod.comapComp (adj.unitAlgHom (G.obj S)) (G.map (adj.counitAlgHom S))).symm ≪≫
-        Mod.comapCongr (adj.right_triangle_components S) ≪≫ Mod.comapId (G.obj S)) ≪≫
-    Functor.rightUnitor (G.mapMod S)
 
 end CounitScalar
 
@@ -244,13 +211,6 @@ section PointAdjunction
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (k : Type u) [Field k] [IsSepClosed k]
-
-/-- The scalar module sections transported along the geometric-point equivalence.
-Source: blueprint local boundary duality, Step 5, sections adjunction
-(blueprint: lem-a1-condensed-point-scalar-adjunction). -/
-def pointInternalScalarSections :=
-  (((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence).inverse ⋙
-    scalarSections.mapMod Λ
 
 
 end PointAdjunction

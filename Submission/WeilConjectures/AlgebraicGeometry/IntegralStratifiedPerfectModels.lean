@@ -14,7 +14,37 @@ public import Submission.WeilConjectures.Algebra.Homology.BoundedFlatIndependent
 public import Submission.WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIndependentCoefficients
 public import Submission.WeilConjectures.Algebra.Homology.ExactProductsRoosComparison
 public import Submission.WeilConjectures.Algebra.Homology.FilteredFreeKProjective
-public import Submission.WeilConjectures.Algebra.Homology.FlatOpcyclesTorCriterion
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Mathlib.CategoryTheory.Monoidal.Tor
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.RingTheory.Flat.Basic
+import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Mathlib.RingTheory.Flat.Tensor
+import Mathlib.Algebra.Homology.HomologicalBicomplex
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.Algebra.Category.ModuleCat.Basic
+import Mathlib.Algebra.DirectSum.Module
+import Mathlib.LinearAlgebra.Quotient.Basic
+import Submission.WeilConjectures.Algebra.Homology.TensorBicomplex
+import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
+import Mathlib.CategoryTheory.Abelian.Projective.Resolution
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+import Submission.WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
+import Mathlib.Algebra.Homology.Bifunctor
+import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
+import Mathlib.Algebra.Category.ModuleCat.Colimits
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Abelian.Images
+import Mathlib.CategoryTheory.Abelian.Exact
+import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+import Submission.WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import Submission.WeilConjectures.Algebra.Homology.FlatTermKFlatFunctor
 public import Submission.WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 public import Submission.WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
@@ -29,8 +59,19 @@ public import Submission.WeilConjectures.AlgebraicGeometry.ConstantDerivedNormal
 public import Submission.WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
 public import Submission.WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 public import Submission.WeilConjectures.AlgebraicGeometry.DerivedPullbackRepresentativeComputation
-public import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-public import Submission.WeilConjectures.AlgebraicGeometry.FiniteFreeConstantLocalLift
+public import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Submission.WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleConstruction
+import Submission.WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Submission.WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Submission.WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Submission.WeilConjectures.ConstructibleSheaf.Defs
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Submission.WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Submission.WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 public import Submission.WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
 public import Submission.WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
@@ -76,7 +117,10 @@ public import Submission.WeilConjectures.SecSmoothPurity.CochainComparisonMonoid
 public import Submission.WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 public import Submission.WeilConjectures.SecSmoothPurity.ModuleTensorMonoidalEquations
 public import Submission.WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
-public import Submission.WeilConjectures.SixFunctors.ProEtale.Adic.DerivedLowerStarDerivedLimit
+public import Submission.WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import Submission.WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Submission.WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 public import Submission.WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
 public import Submission.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology
@@ -194,51 +238,6 @@ instance integralConstantModule_additive (T : Scheme.{u}) {A : Type (u + 1)} [Co
     (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive :=
   letI := (integralConstantModule_exact T d).1
   Functor.additive_of_preserves_binary_products _
-
-/-- The derived realization P ↦ A_T ⊗^L_A P, obtained by localizing the exact
-ordinary constant-module realization. On bounded finite projective complexes this
-is its termwise tensor realization.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(auxiliary; not a blueprint node). -/
-def integralConstantDerived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) : completedConstantDerived (ModuleCat.{u + 1} A) ⥤
-      DerivedCategory (pbcModules T (pbcAdicCompletion T d)) :=
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  letI := (integralConstantModule_exact T d).1
-  letI := (integralConstantModule_exact T d).2
-  (integralConstantModule T d).mapDerivedCategory
-
-/-- Restrict a derived object first to a stratum and then to a covering site object.
-The slice coefficient sheaf is the restriction of the actual inverse-image ring.
-Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 0997 and 0998
-(auxiliary; not a blueprint node). -/
-def integralLocalDerived {T S : Scheme.{u}} (g : S ⟶ T)
-    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
-    (K : DerivedCategory (pbcModules T R)) :
-    completedConstantDerived (SheafOfModules.{u + 1}
-      (((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)).over U)) :=
-  ringedSiteDerivedRestrictionOfUniverses
-    ((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)) U
-    ((adicTowerPullback g R).obj K)
-
-/-- Condition (ii): finite strata, on each a pro-etale covering sieve, and on each
-cover member an actual perfect A-complex whose completed realization is K there.
-IsPerfectRingComplex is the recorded bounded finite-projective notion.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(auxiliary; not a blueprint node). -/
-def IsIntegralStratifiedPerfect (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) : Prop :=
-  ∃ s : Stratification T, ∀ i : Fin s.n,
-    ∃ V : Sieve (⊤_ (s.domain i).ProEt),
-      V ∈ ProEt.topology (s.domain i) (⊤_ (s.domain i).ProEt) ∧
-        ∀ (U : (s.domain i).ProEt) (f : U ⟶ ⊤_ (s.domain i).ProEt), V f →
-          ∃ P : completedConstantDerived (ModuleCat.{u + 1} A),
-            @DerivedCategory.IsPerfectRingComplex A _
-              (HasDerivedCategory.standard (ModuleCat.{u + 1} A)) P ∧
-              Nonempty (integralLocalDerived (s.immersion i) (pbcAdicCompletion T d) U K ≅
-                integralLocalDerived (s.immersion i) (pbcAdicCompletion T d) U
-                  ((integralConstantDerived T d).obj P))
 
 /-- The constructible integral sheaf condition: finite strata and locally the ordinary
 completed realization of a finitely presented A-module, including the zero module.

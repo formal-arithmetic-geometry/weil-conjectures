@@ -278,23 +278,6 @@ theorem nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantShea
   exact ⟨a.trans (sheafHAddEquivOfIso
     (sheafComposeForget₂UpperStarConstantSheafIso ℓ (pullback.fst f (S.algClosurePoint s))) r)⟩
 
-/-- The cardinality form of
-`AlgebraicGeometry.Etale.nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf`:
-`|(Rʳf_*(ℤ/ℓ))_{s̄}| = |Hʳ(X_{s̄}, ℤ/ℓ)|` for `f` proper. -/
-theorem natCard_sheafFiber_homology_rightDerivedLowerStar_constantSheaf
-    {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (ℓ : ℕ) [NeZero ℓ] (s : S) (r : ℕ) :
-    Nat.card (((pointSmallEtale (S.algClosurePoint s)).sheafFiber
-        (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
-        ((_root_.DerivedCategory.homologyFunctor _ (r : ℤ)).obj
-          ((R((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj
-              ((constantSheaf X.smallEtaleTopology
-                (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
-                  (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))))) =
-      Nat.card (Sheaf.H ((Limits.pullback f (S.geometricPointAt s)).constantZMod ℓ) r) :=
-  have ⟨a⟩ := nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf f ℓ s r
-  Nat.card_congr a.toEquiv
-
 /-- **Constructibility of proper direct images from the geometric fibres.** Let `S` be
 Noetherian, `f : X ⟶ S` proper and `r : ℤ`. Suppose that the groups `Hʳ(X_{s̄}, ℤ/ℓ)` of the
 geometric fibres `X_{s̄} = X ×_S Spec κ(s)‾` are finite, and that for every `n ≥ 1` the set of

@@ -95,13 +95,6 @@ noncomputable def toBase (x : PointedEtaleNeighborhood s) : x ⟶ base s :=
     obtain @⟨X, x⟩ := x
     exact CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w x))
 
-/-- The pointed étale neighbourhood `(S, s)` is terminal. -/
-noncomputable def isTerminalBase : IsTerminal (base s) :=
-  IsTerminal.ofUniqueHom (toBase s) fun x f ↦ by
-    apply Functor.Elements.hom_ext
-    apply MorphismProperty.Over.Hom.ext
-    exact f.hom.w.trans (Category.comp_id _)
-
 /-- Every pointed étale neighbourhood `(V, v)` is refined by the spectrum of a ring with an
 étale morphism to `S`: take an affine open of `V` containing the image of `v`. -/
 lemma exists_precomp_hom (d : PointedEtaleNeighborhood s) :

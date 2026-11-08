@@ -63,9 +63,6 @@ noncomputable abbrev fieldUpperStarRingIso : fieldConstantSheaf Λ V ⟶
   inv (((upperStarLowerStarAdjunction (FieldCoefficients.{u} Λ) g).homEquiv _ _).symm
     (fieldConstantSheafToLowerStar Λ g))
 
-lemma fieldUpperStar_eq : (g)^*ᶠ[Λ] = (g)^*[FieldCoefficients.{u} Λ].mapMod _ ⋙
-    Mod.comap (fieldUpperStarRingIso g) := rfl
-
 variable (Λ) in
 /-- **The pullback along a weakly étale morphism commutes with `𝓗om_{Λ}`**:
 `g^* 𝓗om(M, N) ≅ 𝓗om(g^* M, g^* N)`, naturally in `N`. -/
