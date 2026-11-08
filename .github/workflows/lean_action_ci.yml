@@ -59,8 +59,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
           UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+          # How many self-hosted runners carry the big-server label (repository variable, default 1).
+          # A PR build goes to big-server while fewer jobs than this use it, and each build gets an
+          # equal share of the machine's 64 threads.
+          SLOTS: ${{ vars.BIG_SERVER_SLOTS || '1' }}
         run: |
           set -uo pipefail
+          case "$SLOTS" in ""|*[!0-9]*|0) SLOTS=1;; esac
           big='["self-hosted","big-server"]'; gh='"ubuntu-latest"'
           if [ "$FORK" = true ]; then
             choice=gh why="pull request from a fork"
@@ -83,11 +88,11 @@ jobs:
               done
             done
             if [ "$ok" != true ]; then choice=big why="status query failed; preferring big-server"
-            elif [ "$n" -eq 0 ]; then choice=big why="big-server free"
-            else choice=gh why="big-server busy ($n job(s) on it)"; fi
+            elif [ "$n" -lt "$SLOTS" ]; then choice=big why="big-server has a free slot ($n of $SLOTS in use)"
+            else choice=gh why="big-server busy ($n job(s) on $SLOTS slot(s))"; fi
           fi
           if [ "$choice" = big ]; then
-            { echo "runner=$big"; echo "threads=64"; echo "hosted=false"; } >> "$GITHUB_OUTPUT"
+            { echo "runner=$big"; echo "threads=$((64 / SLOTS))"; echo "hosted=false"; } >> "$GITHUB_OUTPUT"
           else
             { echo "runner=$gh"; echo "threads=2"; echo "hosted=true"; } >> "$GITHUB_OUTPUT"
           fi
@@ -182,12 +187,20 @@ jobs:
       # bulk-restored module's outputs into the cache again (~23 GB of copies; 17 min on
       # big-server), which `-o` needs and nothing else does. Off, it only checks the restored
       # traces: on kuafu 128 s, nothing compiled.
+      # A self-hosted runner whose host is not the 64-thread default (e.g. a 16-vCPU build
+      # server, or one of two runners sharing a machine) sets WEIL_CI_THREADS in its runner `.env`
+      # file; that value then overrides pick-runner's share.
       - name: Build
         env:
           LEAN_NUM_THREADS: ${{ needs.pick-runner.outputs.threads }}
+          HOSTED: ${{ needs.pick-runner.outputs.hosted }}
           LAKE_NO_CACHE: "true"
           UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         run: |
+          if [ "$HOSTED" != true ]; then
+            case "${WEIL_CI_THREADS:-}" in ""|*[!0-9]*|0) ;; *) export LEAN_NUM_THREADS=$WEIL_CI_THREADS;; esac
+          fi
+          echo "LEAN_NUM_THREADS=$LEAN_NUM_THREADS"
           if [ "$UPLOAD" = true ]; then
             lake build --wfail -o "$RUNNER_TEMP/lake-map.jsonl"
           else
