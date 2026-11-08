@@ -400,6 +400,7 @@ private theorem common_component_eq
 
 end Naturality
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Common finite coefficient fields transport the four comparison equations
 of the normalized projection. No projection invertibility is asserted here.
 Source: thm-sf-pf-field.proof.md, Compatibility and the common finite coefficient
