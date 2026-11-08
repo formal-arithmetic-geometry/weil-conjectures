@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 public import WeilConjectures.CategoryTheory.Sites.SmoothPurity.SupportLongExact
 public import WeilConjectures.Algebra.Homology.SmoothPurity.ClosedSupportHom
@@ -1188,7 +1190,7 @@ private theorem normalizationRHom
           exact hf⟩
         psi (DerivedCategory.Plus.Q.obj I) a
           ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{u + 1} a).map
-            (V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj I))
+            (V.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient _).obj I))
             ((DerivedCategory.Plus.homologyFunctorObjQIso
               (V.mapCochainComplexPlus.obj I) a).inv (VI.homologyπ a y))) =
           ShiftedHom.map (Cocycle.equivHomShift.symm
@@ -1210,19 +1212,16 @@ private theorem normalizationRHom
   have hr := hroof I r I.2 hi a f hf
   have hei : (DerivedCategory.Plus.ι (C := D)).preimageIso
       (X := DerivedCategory.Plus.Q.obj I) (Y := DerivedCategory.Plus.Q.obj I)
-      ((DerivedCategory.quotientCompQhIso _).symm.app I.obj ≪≫
+      ((DerivedCategory.Plus.QCompιIso D).app I ≪≫
         asIso (DerivedCategory.Q.map (𝟙 I.obj)) ≪≫
-        (DerivedCategory.quotientCompQhIso _).app I.obj) = Iso.refl _ := by
+        (DerivedCategory.Plus.QCompιIso D).symm.app I) = Iso.refl _ := by
     apply Iso.ext
     apply DerivedCategory.Plus.ι.map_injective
     change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = 𝟙 _
     rw [Functor.map_preimage]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, asIso_hom]
-    erw [show (DerivedCategory.quotientCompQhIso
-      (D)).inv.app I.obj = 𝟙 _ from
-        CategoryTheory.Quotient.lift.isLift_inv _ _ _ I.obj]
-    erw [Category.id_comp, DerivedCategory.Q.map_id, Category.id_comp]
-    rfl
+    simp [DerivedCategory.Plus.QCompιIso_hom_app,
+      DerivedCategory.Plus.QCompιIso_inv_app]
   dsimp only [r] at hr
   rw [hei] at hr
   simp only [Iso.refl_inv] at hr
@@ -1237,8 +1236,25 @@ private theorem normalizationRHom
     CategoryTheory.Quotient.lift.isLift_hom _ _ _ I.obj
   rw [hq]
   erw [(shiftFunctor (DerivedCategory D) a).map_id]
+  have hunit : (preadditiveCoyoneda.obj (op B)).rightDerivedFunctorPlusUnit.app I =
+      (preadditiveCoyoneda.obj (op B)).rightDerivedFunctorPlusUnith.app
+        ((HomotopyCategory.Plus.quotient _).obj I) := by
+    have hs : (DerivedCategory.Plus.quotientCompQhIso AddCommGrpCat.{u + 1}).inv.app
+        ((preadditiveCoyoneda.obj (op B)).mapCochainComplexPlus.obj I) = 𝟙 _ := by
+      apply DerivedCategory.Plus.ι.map_injective
+      exact CategoryTheory.Quotient.lift.isLift_inv _ _ _ _
+    have ht : (DerivedCategory.Plus.quotientCompQhIso D).hom.app I = 𝟙 _ := by
+      apply DerivedCategory.Plus.ι.map_injective
+      exact CategoryTheory.Quotient.lift.isLift_hom _ _ _ _
+    rw [Functor.rightDerivedFunctorPlusUnit_app, hs, ht]
+    simp only [Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv,
+      NatTrans.id_app]
+    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.id_comp, Category.comp_id]
+  rw [hunit] at hr
   simpa only [Functor.rightDerivedComplexWithResolution,
-      Functor.mapCochainComplexPlus] using! hr
+      Functor.mapCochainComplexPlus, DerivedCategory.Plus.QCompιIso_inv_app,
+      CategoryTheory.Functor.map_id] using! hr
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1252,7 +1268,7 @@ private theorem normalizationDerivedComparison
     let G : ModuleCat.{u + 1} A ⥤ AddCommGrpCat.{u + 1} := forget₂ _ _
     let HM (a : ℤ) := DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) a ⋙ G
     let RS (a : ℤ) := S.rightDerivedFunctorPlus ⋙ HM a
-    let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnit (HM a) ≫
+    let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnith (HM a) ≫
       (Functor.associator _ _ _).hom
     ∃ chi : ∀ (F : DerivedCategory.Plus D) (a : ℤ), (RS a).obj F ≃+
         ((DerivedCategory.singleFunctor D 0).obj B ⟶ F.obj⟦a⟧),
@@ -1283,9 +1299,9 @@ private theorem normalizationDerivedComparison
   let HM (a : ℤ) := DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) a ⋙ G
   let RS (a : ℤ) := S.rightDerivedFunctorPlus ⋙ HM a
   let RV (a : ℤ) := V.rightDerivedFunctorPlus ⋙ H a
-  let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnit (HM a) ≫
+  let αS (a : ℤ) := Functor.whiskerRight S.rightDerivedFunctorPlusUnith (HM a) ≫
     (Functor.associator _ _ _).hom
-  let αV (a : ℤ) := Functor.whiskerRight V.rightDerivedFunctorPlusUnit (H a) ≫
+  let αV (a : ℤ) := Functor.whiskerRight V.rightDerivedFunctorPlusUnith (H a) ≫
     (Functor.associator _ _ _).hom
   let baseIso (a : ℤ) := normalizationBaseIso A S V theta a
   let eH (a : ℤ) : RS a ≅ RV a :=
@@ -1337,7 +1353,7 @@ private theorem normalizationDerivedComparison
           (G.map (DerivedCategory.Plus.homologyFunctorObjQIso
             (S.mapCochainComplexPlus.obj I) a).inv (SI.homologyπ a x)))) =
         (H a).map (V.rightDerivedFunctorPlus.map eI.inv)
-          ((H a).map (V.rightDerivedFunctorPlusUnit.app
+          ((H a).map (V.rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient _).obj I))
             ((DerivedCategory.Plus.homologyFunctorObjQIso
               (V.mapCochainComplexPlus.obj I) a).inv (VI.homologyπ a y))) := by
@@ -1393,8 +1409,19 @@ private theorem normalizationChi
     rw [hq]
     erw [(shiftFunctor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) a).map_id,
       Category.id_comp]
+    have hs : (DerivedCategory.Plus.quotientCompQhIso (ModuleCat.{u + 1} A)).inv.app
+        ((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj
+          I) = 𝟙 _ := by
+      apply DerivedCategory.Plus.ι.map_injective
+      exact CategoryTheory.Quotient.lift.isLift_inv _ _ _ _
+    have ht : (DerivedCategory.Plus.quotientCompQhIso
+        (Sheaf J (ModuleCat.{u + 1} A))).hom.app I = 𝟙 _ := by
+      apply DerivedCategory.Plus.ι.map_injective
+      exact CategoryTheory.Quotient.lift.isLift_hom _ _ _ _
     simpa only [Sheaf.supportSequenceModelIso, Iso.trans_hom, Iso.symm_hom,
-      Iso.symm_inv, Functor.mapIso_hom, asIso_hom, Iso.app_hom] using! hr
+      Iso.symm_inv, Functor.mapIso_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
+      Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
+      CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] using! hr
   · intro f' hf'
     apply (theta.app (I.obj.X a)).addCommGroupIsoToAddEquiv.injective
     exact hf'.1.trans hfθ.symm

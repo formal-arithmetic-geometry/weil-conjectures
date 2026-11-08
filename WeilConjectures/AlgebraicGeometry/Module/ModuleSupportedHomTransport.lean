@@ -58,14 +58,14 @@ private theorem normalizedSupportTransport_eq :
 
 private theorem normalizedSupportTransport_fac
     (I : CochainComplex.Plus C) :
-    S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I) ≫
+    S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I) ≫
         (normalizedSupportTransport L S S' tau).app (DerivedCategory.Plus.Q.obj I) =
       DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus tau).app
         ((HomotopyCategory.Plus.quotient C).obj I)) ≫
       DerivedCategory.Plus.Qh.map
         ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L ⋙ S'))).inv.app
           ((HomotopyCategory.Plus.quotient C).obj I)) ≫
-      S'.rightDerivedFunctorPlusUnit.app
+      S'.rightDerivedFunctorPlusUnith.app
         (L.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient C).obj I)) ≫
       S'.rightDerivedFunctorPlus.map
         (L.mapDerivedCategoryPlusFactorsh.inv.app
@@ -80,7 +80,7 @@ private theorem normalizedSupportTransport_fac
   dsimp only [NatTrans.comp_app, Functor.rightUnitor_inv_app,
     Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.id_comp]
   have hr := (mapDerivedCategoryPlusIdIso E).inv.naturality
-    (S.rightDerivedFunctorPlusUnit.app M)
+    (S.rightDerivedFunctorPlusUnith.app M)
   simp only [Functor.id_map] at hr
   simp only [Category.id_comp]
   erw [reassoc_of% hr, h]
@@ -126,17 +126,17 @@ private theorem normalizedSupportChainMap_f
 private theorem normalizedSupportTransport_model
     (I : CochainComplex.Plus C) (J : CochainComplex.Plus D)
     (e : L.mapCochainComplexPlus.obj I ⟶ J) :
-    S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I) ≫
+    S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I) ≫
         (normalizedSupportTransport L S S' tau).app (DerivedCategory.Plus.Q.obj I) ≫
         S'.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app
           ((HomotopyCategory.Plus.quotient C).obj I)) ≫
         S'.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map e) =
       DerivedCategory.Plus.Q.map (normalizedSupportChainMap L S S' tau I J e.hom) ≫
-        S'.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient D).obj J) := by
+        S'.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient D).obj J) := by
   rw [reassoc_of% normalizedSupportTransport_fac L S S' tau I]
   simp only [← S'.rightDerivedFunctorPlus.map_comp]
   erw [Iso.inv_hom_id_app_assoc]
-  have hn := S'.rightDerivedFunctorPlusUnit.naturality
+  have hn := S'.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient D).map e)
   simp only [Functor.comp_map] at hn
   erw [← hn]
@@ -166,7 +166,7 @@ private theorem normalizedSupportTransport_homology
     (e : L.mapCochainComplexPlus.obj I ⟶ J) (a : ℤ) :
     (DerivedCategory.Plus.homologyFunctorObjQIso (S.mapCochainComplexPlus.obj I) a).inv ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
-          (S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)) ≫
+          (S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I)) ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
           ((normalizedSupportTransport L S S' tau).app (DerivedCategory.Plus.Q.obj I)) ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
@@ -178,7 +178,7 @@ private theorem normalizedSupportTransport_homology
           (normalizedSupportChainMap L S S' tau I J e.hom).hom a ≫
         (DerivedCategory.Plus.homologyFunctorObjQIso (S'.mapCochainComplexPlus.obj J) a).inv ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
-          (S'.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient D).obj J)) := by
+          (S'.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient D).obj J)) := by
   let H := DerivedCategory.Plus.homologyFunctor E a
   let c := normalizedSupportChainMap L S S' tau I J e.hom
   have hn := DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality c a
@@ -201,7 +201,7 @@ private theorem normalizedSupportTransport_homology_comp
     (e : L.mapCochainComplexPlus.obj I ⟶ J) (a : ℤ) :
     ((DerivedCategory.Plus.homologyFunctorObjQIso (S.mapCochainComplexPlus.obj I) a).inv ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
-          (S.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I))) ≫
+          (S.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj I))) ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
           ((normalizedSupportTransport L S S' tau).app (DerivedCategory.Plus.Q.obj I)) ≫
         (DerivedCategory.Plus.homologyFunctor E a).map
@@ -212,7 +212,7 @@ private theorem normalizedSupportTransport_homology_comp
           (normalizedSupportChainMap L S S' tau I J e.hom).hom a ≫
         ((DerivedCategory.Plus.homologyFunctorObjQIso (S'.mapCochainComplexPlus.obj J) a).inv ≫
           (DerivedCategory.Plus.homologyFunctor E a).map
-            (S'.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient D).obj J))) := by
+            (S'.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient D).obj J))) := by
   rw [S'.rightDerivedFunctorPlus.map_comp,
     (DerivedCategory.Plus.homologyFunctor E a).map_comp]
   simpa only [Category.assoc] using normalizedSupportTransport_homology L S S' tau I J e a
@@ -282,11 +282,21 @@ private theorem supportHomModelIso_refl_hom
       ((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj I)
         a).inv ≫
       (DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) a).map
-        ((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).rightDerivedFunctorPlusUnit.app
+        ((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).rightDerivedFunctorPlusUnith.app
           ((HomotopyCategory.Plus.quotient _).obj I)) := by
+  have hs : (DerivedCategory.Plus.quotientCompQhIso (ModuleCat.{u + 1} A)).inv.app
+      ((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).mapCochainComplexPlus.obj
+        I) = 𝟙 _ := by
+    apply DerivedCategory.Plus.ι.map_injective
+    exact CategoryTheory.Quotient.lift.isLift_inv _ _ _ _
+  have ht : (DerivedCategory.Plus.quotientCompQhIso
+      (Sheaf J (ModuleCat.{u + 1} A))).hom.app I = 𝟙 _ := by
+    apply DerivedCategory.Plus.ι.map_injective
+    exact CategoryTheory.Quotient.lift.isLift_hom _ _ _ _
   simp only [Sheaf.supportSequenceModelIso, Iso.trans_hom, Iso.symm_hom,
-    Functor.mapIso_hom, Iso.refl_hom, asIso_hom]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    Functor.mapIso_hom, Iso.refl_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
+    Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
 end
 private theorem supportHomExactCocycle_numerator
