@@ -13,6 +13,9 @@ on:
       threads:
         description: "LEAN_NUM_THREADS for the build and the documentation"
         default: "10"
+      deploy_run_id:
+        description: "Only deploy the github-pages artifact of this earlier docs run, building nothing"
+        default: ""
 
 permissions:
   contents: read
@@ -28,6 +31,7 @@ env:
 
 jobs:
   docs:
+    if: ${{ !inputs.deploy_run_id }}
     # Our own runner on fuxi (16 vCPU, 40 GiB): it has a C compiler, which doc-gen4's
     # dependencies need and big-server lacks. Self-hosted jobs may run for days, not 6 h.
     runs-on: [self-hosted, fuxi]
@@ -195,5 +199,45 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # With `deploy_run_id`: publish what an earlier docs run built, without building anything.
+  # `deploy-pages` deploys only an artifact of its own run, so that run's artifact is fetched
+  # and handed on.
+  deploy-earlier:
+    if: ${{ inputs.deploy_run_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Fetch the artifact of run ${{ inputs.deploy_run_id }}
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          run-id: ${{ inputs.deploy_run_id }}
+          github-token: ${{ github.token }}
+          path: pages
+
+      - name: What it holds
+        run: |
+          ls -la pages
+          tar -tf pages/artifact.tar | wc -l | sed 's/^/files: /'
+
+      - name: Hand it on as this run's Pages artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: pages/artifact.tar
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+
       - id: deployment
         uses: actions/deploy-pages@v4
