@@ -476,7 +476,7 @@ private theorem AEUnbounded_eq_triangle (M : Etale.DerivedCategoryModule R X) :
           (ModuleCat.{u + 1} R) a b).symm).hom.app M)
   dsimp only [Functor.comp_map] at hn
   simpa only [Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc,
-    Functor.mapDerivedCategoryNatIso_symm, Iso.symm_hom,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.symm_hom, Iso.symm_inv,
     Etale.rightDerivedLowerStar] using
     congrArg (fun t ↦ (Etale.lowerStar (ModuleCat.{u + 1} R) q).rightDerivedFunctor.map
       ((Etale.openImmersionLowerShriekLowerStarExchange
