@@ -90,6 +90,7 @@ attribute [local reducible] closureRing ProEtale.constructibleExtendScalars
   GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
   GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
   GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
+attribute [local instance 5000] GeneralAlgebraicallyClosedCoefficients.stageCategory
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
