@@ -62,9 +62,9 @@ def pure {T : Scheme.{u}} (c : Chern l E T)
   SheafOfModules.siteSheafTensorTmul M (lineModule l E c) U x y
 
 private local instance coefficientSectionSMul {T : Scheme.{u}}
-    (M : Systems T (Arings l E T)) (U : (ℕ × T.ProEt)ᵒᵖ) :
-    SMul ((coefficient T (Arings l E T)).val.obj U) (M.val.obj U) :=
-  inferInstanceAs (SMul ((systemRing l E T).obj.obj U) (M.val.obj U))
+    (c : Chern l E T) (U : (ℕ × T.ProEt)ᵒᵖ) :
+    SMul ((coefficient T (Arings l E T)).val.obj U) ((lineModule l E c).val.obj U) :=
+  inferInstanceAs (SMul ((systemRing l E T).obj.obj U) ((lineModule l E c).val.obj U))
 
 /-- Line twisting is the actual tensor/Hom equivalence. The coevaluation and
  evaluation are fixed on local sections, including their signs. Neither an arbitrary
