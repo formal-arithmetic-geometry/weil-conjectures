@@ -30,7 +30,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 2000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 set_option synthInstance.maxSize 4096 in
 /-- Every right adjoint to exact closed direct image preserves uniformly

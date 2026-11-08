@@ -53,7 +53,7 @@ namespace PrimeSpectrum
 section Compatible
 
 local instance : PreservesFilteredColimitsOfSize.{0, 0} (forget CommRingCat.{u}) :=
-  preservesFilteredColimitsOfSize_of_univLE.{u, u} (forget CommRingCat.{u})
+  instPreservesFilteredColimitsOfSizeCommRingCatForgetRingHomCarrier_weilConjectures.{u}
 
 variable (G : ℕ ⥤ CommRingCat.{u}) (q : ∀ n, PrimeSpectrum (G.obj n))
   (hq : ∀ n, comap (G.map (homOfLE n.le_succ)).hom (q (n + 1)) = q n)
