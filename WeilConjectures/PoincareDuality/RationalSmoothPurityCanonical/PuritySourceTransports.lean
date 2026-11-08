@@ -382,6 +382,10 @@ open AlgebraicallyClosedCoefficients GeneralAlgebraicallyClosedCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
+-- Match the transported field and module structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- The shifted coefficient line as a literal pair at the least finite stage.
 This is the canonical stage presentation of the existing Qbar Tate line and its shift.
 Source: rational purity proof Step 2, common-stage presentation

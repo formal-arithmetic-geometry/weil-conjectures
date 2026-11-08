@@ -365,11 +365,11 @@ private theorem square_precompose
         Functor.mapDerivedCategorySquareIso α := by
   have he := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft U e
   apply Iso.ext
-  apply (cancel_epi (Functor.mapDerivedCategoryCompIso U V).hom).mp
+  apply (cancel_epi (Functor.mapDerivedCategoryCompIso U V).inv).mp
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso_trans, Category.assoc,
-    Iso.hom_inv_id_assoc, Functor.isoWhiskerLeft_hom]
-  rw [← reassoc_of% he, Iso.hom_inv_id_assoc]
+    Iso.inv_hom_id_assoc, Functor.isoWhiskerLeft_hom]
+  rw [← reassoc_of% he, Iso.inv_hom_id_assoc]
 
 private theorem square_postcompose_right
     (U : A ⥤ B) (V : B ⥤ D) (E E' : A ⥤ C) (F : C ⥤ D)
