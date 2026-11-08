@@ -22,7 +22,6 @@ set_option backward.defeqAttrib.useBackward true
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.rightAdditive

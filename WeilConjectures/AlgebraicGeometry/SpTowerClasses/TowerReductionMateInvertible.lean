@@ -27,7 +27,7 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard DerivedCategory.singleFunctors
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
 
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   CategoryTheory.Functor.ofOpSequence CategoryTheory.Functor.ofSequence
   CategoryTheory.PowerTransition.functor CategoryTheory.PowerTransition.obj
   AlgebraicGeometry.ProEtale.spCoefficientCommRings
