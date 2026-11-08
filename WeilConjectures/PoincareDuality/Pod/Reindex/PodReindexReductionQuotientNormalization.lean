@@ -38,7 +38,7 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 attribute [local implicit_reducible] integralOperationsRoos integralOperationsRoosFunctor
   roosF roosConeFunctor podRestrictedTower
-  CategoryTheory.Functor.mapHomologicalComplex podOrdinaryReindex
+  podOrdinaryReindex
   completedIntegralCommRingSheafUnrestricted CategoryTheory.sheafCompose
   isoSectionwiseModuleInverseImage integralComparisonSequencePullback
   integralComparisonSequenceDirectImage integralComparisonDerivedSequencePullback

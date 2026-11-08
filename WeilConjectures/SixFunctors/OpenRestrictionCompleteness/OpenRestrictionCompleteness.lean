@@ -344,7 +344,7 @@ theorem openRestrictionComplete
     ((HomologicalComplex.quasiIso _ (.up ℤ)).inverseImage
       (IntegralOnSlice.Good l E U none).ι)
   let P := q.objPreimage ((star l E j o).obj H)
-  let eP : DerivedCategory.Q.obj P.obj ≅ (star l E j o).obj H :=
+  let eP : q.obj P ≅ (star l E j o).obj H :=
     q.objObjPreimageIso _
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hprime⟩

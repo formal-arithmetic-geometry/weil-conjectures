@@ -16,7 +16,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace WeilConjectures
 attribute [local implicit_reducible] integralOperationsRoos
-  Functor.mapHomologicalComplex CochainComplex.mappingCocone integralOperationsRoosFunctor
+  CochainComplex.mappingCocone integralOperationsRoosFunctor
 
 /-- Tower-map composition transports through the normalized additive Roos maps.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941

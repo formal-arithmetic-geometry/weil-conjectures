@@ -48,7 +48,6 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   ProEtale.VaryingRing.coefficientTransition RingHom.ulift
   SemilinearSections.moduleAbelian SemilinearSections.hasDerived coefficientSequenceHasDerived
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  Functor.mapHomologicalComplex
   SemilinearSections.systemRing SemilinearSections.ringPresheaf SemilinearSections.rings
   SemilinearSections.evaluation SheafOfModules.pushforward SheafOfModules.restrictScalars
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀

@@ -142,7 +142,7 @@ set_option backward.defeqAttrib.useBackward true
 open scoped MonoidalCategory
 attribute [local instance 100000] coefficientSiteSmall coefficientRingSheafify
   coefficientAbSheafify coefficientAbLocallyBijective
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   Functor.map₂HomologicalComplex pbcDerivedRestrict
 attribute [local irreducible] scalarTensor scalarOrdinaryTensor scalarTensorTotal
   tensorComposition pbcComplexCounit pbcDerivedScalarAdjunction pbcScalarAdjunction

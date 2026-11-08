@@ -437,7 +437,7 @@ private theorem exactProEtaleAdjunction_eq (A : Type u) [CommRing A]
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
 
 /-- The normalized coefficient square preserves the intrinsic derived counit, before
 any restriction to the specified finite constructible operations. -/

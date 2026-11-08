@@ -45,7 +45,7 @@ attribute [local implicit_reducible] pullbackTensorReferencePullback
   coefficientSequenceLimit coefficientConstantTowerLimit coefficientConstantTowerEvaluation
   pullbackTensorConstantLimit pullbackTensorRestrictedTower pullbackTensorTowerQ
   unrestrictedIntegralReductionFunctor integralCoefficientSheaf integralCoefficientCommRingSheaf
-  Functor.mapHomologicalComplex HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  HomologicalComplex.complexOfFunctorsToFunctorToComplex
   HomologicalComplex.asFunctor
 open Opposite
 attribute [local instance] scalarReductionExtensionAdditive
