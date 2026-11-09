@@ -227,7 +227,7 @@ private theorem single_comparison_square
         (R.mapDerivedCategorySingleFunctor 0).inv.app N) ≫
           R.mapDerivedCategory.map ((DerivedCategory.singleFunctor D 0).map m) := by
   dsimp only [Iso.trans_hom, NatTrans.comp_app]
-  simp only [Category.assoc]
+  simp only [Category.assoc, Iso.symm_hom]
   rw [right_comparison_single]
   have hn := (R.mapDerivedCategorySingleFunctor 0).inv.naturality m
   dsimp only [Functor.comp_map] at hn
