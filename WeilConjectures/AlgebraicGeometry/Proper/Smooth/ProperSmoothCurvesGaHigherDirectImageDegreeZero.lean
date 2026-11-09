@@ -45,8 +45,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-local instance (X : Scheme.{u}) : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=
-  SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+attribute [local instance]
+  instIsQuasicoherentOpensCarrierCarrierCommRingCatUnitRingCatSheaf_weilConjectures
 
 namespace Scheme.Modules
 
@@ -248,7 +248,7 @@ theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux
               ((DerivedCategory.singleFunctor _ 0).map (C.gaArtinSchreier p hpC))) ≫ e.hom =
           e.hom ≫ (sheafCompose S.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).map
             (F - 𝟙 _) := by
-  have := GeometricallyReduced.of_smooth f
+  have := Smooth.geometricallyReduced f
   have hf (V : S.Etale) : Function.Bijective (pullback.fst V.hom f).appTop :=
     bijective_appTop_pullback_fst_of_proper_flat f (fun _ ↦ inferInstance)
       (fun _ ↦ inferInstance) V.hom

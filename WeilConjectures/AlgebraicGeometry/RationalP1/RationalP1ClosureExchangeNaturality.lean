@@ -46,7 +46,6 @@ attribute [local irreducible] derivedPullIso derivedPushHom derivedComapLowerSta
   firstProjection square upperStarFromPoint pullback limit
   DerivedCategory.monoidalClosed Mod.monoidalClosed CondensedRing.upperStar
 
-set_option maxHeartbeats 600000 in
 -- Identify the native coefficient presentation without unfolding derived resolutions.
 /-- Extending coefficients commutes with the base-change operation on an arbitrary
 adjunct from the coefficient unit to the direct image of the shifted root line.

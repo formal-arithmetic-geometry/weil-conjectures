@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+public import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackMatesIsIso
 import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # Tensor compatibility of the universal pullback counit
@@ -32,17 +33,13 @@ attribute [local instance] SheafOfModules.isGrothendieckAbelian
 attribute [local instance] pullbackDescentModuleTensor moduleSymmetric modulePreadditive
   moduleClosed moduleGrothendieck moduleResolutions moduleDerivedMonoidal pullbackDescentQLax
 
-/-- Cache the small colimits used to elaborate total tensor complexes.
-Source: Stacks, Tag 079U (blueprint: lem-pc-tensor-counit-coordinate-equation). -/
-local instance tensorCounit_smallColimits (S : Scheme.{u}) :
-    HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings S.toRingedSpace)) :=
-  hasColimitsOfSizeShrink.{0, 0, u, u} _
+attribute [local instance] Scheme.Modules.globalPullbackMatesColimits
 
 /-- Use the cached small-colimit structure directly for each diagram.
 Source: Stacks, Tag 079U (blueprint: lem-pc-tensor-counit-coordinate-equation). -/
 local instance tensorCounit_colimit (S : Scheme.{u}) (J : Type) [Category.{0} J]
     (F : J ⥤ SheafOfModules.{u} (moduleRings S.toRingedSpace)) : HasColimit F :=
-  ((tensorCounit_smallColimits S).has_colimits_of_shape J).has_colimit F
+  ((Scheme.Modules.globalPullbackMatesColimits S).has_colimits_of_shape J).has_colimit F
 
 /-- Tensor total complexes have their defining coproducts.
 Source: Stacks, Tag 079U (blueprint: lem-pc-tensor-counit-coordinate-equation). -/

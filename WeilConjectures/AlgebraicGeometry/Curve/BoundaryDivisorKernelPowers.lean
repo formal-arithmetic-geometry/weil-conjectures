@@ -62,7 +62,7 @@ theorem boundary_divisor_kernel_powers
   classical
   have := c.isOpenImmersion
   have := c.isProper
-  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.connectedSpace (f := c.g)
   have : IsRegular c.Z := IsRegular.of_smooth c.g
   have : SmoothOfRelativeDimension 1 c.g :=
     (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mpr

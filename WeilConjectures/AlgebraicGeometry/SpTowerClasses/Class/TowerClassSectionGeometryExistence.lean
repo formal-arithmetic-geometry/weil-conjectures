@@ -276,7 +276,6 @@ private theorem unitModel_transport
   subst A'
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.trans_refl] using hu
 
-set_option maxHeartbeats 1000000 in
 -- The geometry records require many dependent category and instance checks.
 /-- Choose geometry before constructing any coefficient-unit comparison.
 Source: Stacks 03D2, 03D7; Zheng Construction 4.1 and Lemma 4.10; blueprint

@@ -74,7 +74,7 @@ def perfectHomOpenModuleMate {S Y T : Scheme.{u}}
     (schemeOpenModuleAdjunction Y B)).symm
       (TwoSquare.mk _ _ _ _ (perfectHomOpenModuleComposition s B r).hom)).natTrans
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Sectionwise evaluation unfolds the module-restriction adjunction and comparisons.
 /-- The ordinary open-square mate is the sectionwise direct-image/restriction identity.
 Source: Stacks Project, Cohomology, Tag 08FE, proof of

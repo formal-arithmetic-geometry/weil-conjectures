@@ -102,7 +102,6 @@ private noncomputable def pullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] proEtaleRingModuleAdjunction
 
-set_option maxHeartbeats 1000000 in
 -- The pointwise kernel functor's identity proof needs more unfolding heartbeats.
 private noncomputable def pointwiseKernel
     {C D : Type*} [Category* C] [Category* D] [Abelian D]

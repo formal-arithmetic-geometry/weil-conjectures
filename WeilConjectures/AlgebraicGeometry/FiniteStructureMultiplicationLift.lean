@@ -117,7 +117,7 @@ theorem finite_structure_multiplication_lift
             (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U x
         ∀ (x y : Γ(G, U)),
           a (μ.app U (tmulSection x y)) = a x * a y) := by
-  obtain ⟨μ, hμ⟩ := finite_structure_product_exists A I X f i hi hp c hc
+  obtain ⟨μ, hμ⟩ := finite_structure_product_exists_core A I X f i hi hp c hc
     Yn fnY gn hcart hw G hG hproper ψ hψ
   obtain ⟨hsquare, hcube⟩ := finite_structure_tensor_tests_faithful A I X f i hi hp
     Yn fnY G hG hproper ψ

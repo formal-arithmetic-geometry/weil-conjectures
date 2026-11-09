@@ -136,7 +136,7 @@ private theorem square_unitQ {X S Z T : Scheme.{u}}
   | rfl
   | (erw [Category.id_comp]; rfl)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
 private theorem sections_unit {X S : Scheme.{u}} (f : X ⟶ S)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
@@ -253,8 +253,6 @@ private def cochainLocalSectionUnitAt (S : Scheme.{u}) (q : ℤ) (V : S.Opens)
   ((((F.mapHomologicalComplex (.up ℤ)).obj K).sc q).mapHomologyIso E).hom ≫
     ((cochainLocalSectionUnit S q).app K).app (op V)
 
-set_option maxHeartbeats 800000 in
--- Elaborating the comparison carriers requires the larger heartbeat budget.
 private theorem sections_unitAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (V : S.Opens)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
@@ -349,7 +347,7 @@ private theorem inverseOpen_unit {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
   convert (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.naturality
     ((F.mapHomologicalComplex (.up ℤ)).map b) using 1 <;> rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Elaborating the comparison carriers requires the larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
@@ -535,7 +533,7 @@ private theorem injectiveComparison_transport {Z T : Scheme.{u}} (k : Z ⟶ T)
   subst U
   simp only [eqToHom_refl, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The final calculation elaborates several derived and cochain comparison carriers.
 private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)

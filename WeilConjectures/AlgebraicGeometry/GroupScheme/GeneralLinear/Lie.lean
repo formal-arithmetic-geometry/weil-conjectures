@@ -215,7 +215,7 @@ theorem coe_homMulEquiv_inv {A : Type u} [CommRing A] (g : GL n A) (N : Matrix n
       = ((g⁻¹ : GL n A) : Matrix n n A) * ((g : Matrix n n A) * (1 - N)) := by rw [h, mul_one]
     _ = 1 - N := by rw [← mul_assoc, Units.inv_mul, one_mul]
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- the matrix computation over `k[ε, δ]` unfolds several dual-number layers
 open scoped commutatorElement in
 theorem tangentMatrix_tangentBracket (p q : GrpObj.pointsKer 𝔾𝕃(n; k) GrpObj.aug₁) :

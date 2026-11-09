@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
 -- Derived restriction transport elaborates across several chosen localizations.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in

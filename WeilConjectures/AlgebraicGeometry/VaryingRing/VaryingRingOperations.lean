@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOpenExtension
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
@@ -714,7 +715,6 @@ private theorem moduleEvalP_specialized {X Y : Scheme.{u}} (f : X ‚ü∂ Y) (n : ‚Ñ
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 -- Elaborating the section-carrier normalization unfolds both continuous module functors.
 /-- Ordinary pushforward evaluation is identity on every section carrier.
 Source: Zheng 4.1 (blueprint: def-sp-varying-ring-operations).

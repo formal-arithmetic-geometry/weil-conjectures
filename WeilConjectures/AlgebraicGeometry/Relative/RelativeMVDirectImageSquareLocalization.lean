@@ -39,7 +39,6 @@ private theorem square_paste {C : Type*} [Category C]
 
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
 
-set_option maxHeartbeats 800000 in
 -- Comparing the composite pushforward objects requires extra elaboration.
 private theorem normalized_unit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
     (J : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
@@ -55,7 +54,7 @@ private theorem normalized_unit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
 attribute [local irreducible] schemeNormalizedDirectImageCompIso
 
 set_option linter.all false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 private theorem general_square_unit
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -93,7 +92,6 @@ private theorem general_square_unit
     _ _ _ _ _ _ _ hc₁ hc₂ hd' he
 
 set_option linter.all false in
-set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private lemma localization_unit_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -115,7 +113,6 @@ private lemma localization_unit_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
   simp only [Category.id_comp, Category.comp_id]
 
 set_option linter.all false in
-set_option maxHeartbeats 1000000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Localization of an ordinary direct-image square gives the square mate of

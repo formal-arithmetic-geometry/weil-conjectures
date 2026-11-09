@@ -296,7 +296,7 @@ theorem affineOpen_representing_cover_descent
   have : CompactSpace (Scheme.Etale.mk (𝟙 c.pt)).left :=
     inferInstanceAs (CompactSpace c.pt)
   obtain ⟨n, T, t, hmem, hT, ht⟩ :=
-    Scheme.exists_finite_affine_of_mem_smallEtaleTopology hz
+    (AlgebraicGeometry.Etale.exists_affine_refinement _) hz
   have hfactor (q : Fin n) : ∃ (i : I) (f : T q ⟶ Z i), t q = f ≫ z i :=
     Sieve.ofArrows.exists (hmem q)
   choose r f hf using hfactor

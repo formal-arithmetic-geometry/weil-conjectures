@@ -35,7 +35,7 @@ private instance moduleToSheaf_additive (Y : Scheme.{u}) :
     (SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace)).Additive where
   map_add := by intros; rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Exact restriction comparisons involve several nested localized module categories.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in

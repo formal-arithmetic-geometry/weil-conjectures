@@ -395,7 +395,6 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundTrip
 attribute [local irreducible] completedCechModulesEquiv
 
-set_option maxHeartbeats 400000 in
 -- Checking the fixed coefficient and site presentations needs extra elaboration steps.
 /-- The published exterior product fiber is the tensor-dual Roos fiber, with its unit.
 

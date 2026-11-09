@@ -1174,7 +1174,6 @@ private theorem adjoint_braiding
         (@BraidedCategory.braiding _ _ _ _ (F.obj M) (F.obj N)).hom :=
   (a.leftAdjointOplaxMonoidal_δ_braiding M N).symm
 
-set_option maxHeartbeats 30000 in
 -- Keep specialization of the two sheaf tensor structures explicit.
 private theorem comparisonTensor_symmetry
     (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})

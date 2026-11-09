@@ -292,7 +292,7 @@ private theorem pulled_chart_coefficient_composition
     (affineLinearCoefficientDescent A N hA t W
       (affineTracePullbackInvertible N j hS) d)
     ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).symm.app L) hgeom
-    (vectorIntegrationBaseCoefficientPullback_comp A N hA t k V.ι j ha hS
+    (orderedTateCoefficientComposition A N hA t k V.ι j ha hS
       (affineTracePullbackInvertible N V.ι hS) d)
   exact h
 

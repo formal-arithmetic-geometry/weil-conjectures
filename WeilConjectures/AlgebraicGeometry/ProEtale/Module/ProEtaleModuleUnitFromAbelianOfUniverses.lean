@@ -191,7 +191,6 @@ private noncomputable def modelModuleEquivalence (Z : Scheme.{t})
     (by ext : 2; exact R.obj.map_id _)
     (by ext : 2; exact R.obj.map_id _)
 
-set_option maxHeartbeats 1000000 in
 -- Comparing the module adjunctions expands the coefficient-sized site transports.
 /-- An invertible inverse-image coefficient map transfers sectionwise bijectivity
 of the actual abelian unit to the actual module unit, for independent universes.

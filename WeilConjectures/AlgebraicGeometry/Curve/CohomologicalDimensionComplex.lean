@@ -89,7 +89,7 @@ not needed for it.
 theorem IsConnectedCurve.subsingleton_sheafH_of_two_lt_of_smooth (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : F.IsTorsion) (q : ℕ) (hq : 2 < q) : Subsingleton (Sheaf.H F q) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C

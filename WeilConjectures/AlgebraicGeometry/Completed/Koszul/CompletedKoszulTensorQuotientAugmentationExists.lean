@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulTensorQuotientAugmentationData
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulUnitZeroIso
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientProjection
@@ -25,13 +26,9 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme
 
-local instance augmentationAbSheafify (Y : Scheme.{t}) :
-    HasSheafify (ProEt.topology Y) AddCommGrpCat.{t + 1} :=
-  WeilConjectures.integralCoefficientAbSheafify.{t, 0} Y
+attribute [local instance] WeilConjectures.sfAbSheafify
 
-local instance augmentationAbLocallyBijective (Y : Scheme.{t}) :
-    (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} Y
+attribute [local instance] WeilConjectures.sfAbBijective
 
 local instance augmentationRingSheafify (Y : Scheme.{t}) :
     HasSheafify (ProEt.topology Y) CommRingCat.{t + 1} :=

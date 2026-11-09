@@ -110,7 +110,6 @@ noncomputable def heightOneSpectrum (hz : z ∉ Set.range j.base) :
     HeightOneSpectrum Γ(C, c.W) :=
   ⟨c.ideal, inferInstance, c.ideal_ne_bot hz⟩
 
-set_option maxHeartbeats 400000 in
 -- the localization instances at the stalk are slow
 omit [IsAlgClosed k] [ConnectedSpace U] in
 /-- The `m`-adic valuation at the boundary point of a nonzero rational function `f` is
@@ -209,7 +208,6 @@ theorem dvd_ord_of_forall_inertia (hz : z ∉ Set.range j.base)
   rw [heightOneSpectrum, hb, WithZero.exp_inj] at h
   exact ⟨-b, by linarith⟩
 
-set_option maxHeartbeats 400000 in
 -- the localization instances at the stalk are slow
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow

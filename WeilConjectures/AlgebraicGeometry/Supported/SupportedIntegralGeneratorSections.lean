@@ -17,7 +17,7 @@ Source: the source normalization in the diagonal tower construction, step (3).
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
-  AlgebraicGeometry.cartierProAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
+  WeilConjectures.sfAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
   AlgebraicGeometry.cartierProModuleSheafify
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

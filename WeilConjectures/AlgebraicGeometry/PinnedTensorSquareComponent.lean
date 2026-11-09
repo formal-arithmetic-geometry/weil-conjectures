@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorCompariso
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.AlgebraicGeometry.PinnedStalkTensor
-import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareLeftSummand
+public import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareLeftSummand
 import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareRightSummand
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
@@ -40,13 +40,8 @@ local instance pinnedTensorSquareComponentInstance2 (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   modulePreadditive Y
 
-local instance pinnedTensorSquareComponentInstance3
-    (Y : Scheme.{u}) : (curriedTensor Y.Modules).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf
-
-local instance pinnedTensorSquareComponentInstance4 (Y : Scheme.{u}) (M : Y.Modules) :
-    ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
+attribute [local instance] pinnedTensorSquareLeftSummandInstance3
+  pinnedTensorSquareLeftSummandInstance4
 
 /-- Degreewise component equation for the explicitly constructed pinned stalk tensor coordinates.
 

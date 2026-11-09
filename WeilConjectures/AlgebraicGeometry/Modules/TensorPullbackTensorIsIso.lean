@@ -33,7 +33,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
 -- The stalk tensor transports involve several nested sheaf and scalar-change functors.
 /-- A comparison carrying pulled-back pure tensors to tensors of pulled-back sections
 is an isomorphism. No naturality of the comparison is assumed.

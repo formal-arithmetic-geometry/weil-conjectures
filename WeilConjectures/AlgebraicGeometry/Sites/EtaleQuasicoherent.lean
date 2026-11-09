@@ -61,7 +61,7 @@ noncomputable def etaleRestrict (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) :
   map_zero' := by simp
   map_add' φ ψ := by simp [Preadditive.add_comp, Preadditive.comp_add]
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 700000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 lemma etaleRestrict_eq (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) (φ : EtaleSections F V) :
@@ -69,7 +69,6 @@ lemma etaleRestrict_eq (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) (φ : Etale
   (modulesPseudofunctor_pullHom_eq_pullbackCompOfEq (M₁ := unit X) (M₂ := F) φ g.left W.hom
     W.hom (MorphismProperty.Over.w g) (MorphismProperty.Over.w g)).symm
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 lemma etaleRestrict_id (F : X.Modules) (V : X.Etale) (φ : EtaleSections F V) :
@@ -79,7 +78,6 @@ lemma etaleRestrict_id (F : X.Modules) (V : X.Etale) (φ : EtaleSections F V) :
       Functor.map_id_apply (F := TypeCat.Fun) (carrier := id) (etaleHom (X := X) (unitObj X) F)
         (op V) φ)
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 lemma etaleRestrict_comp (F : X.Modules) {V W T : X.Etale} (g : W ⟶ V) (f : T ⟶ W)
@@ -114,7 +112,6 @@ lemma etalePresheaf_map_apply (F : X.Modules) {V W : X.Etale} (g : W ⟶ V)
     ((etalePresheaf F).map g.op φ).down = etaleRestrict F g φ.down :=
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Descent for quasi-coherent modules**: for a quasi-coherent `𝒪_X`-module `F`, the presheaf

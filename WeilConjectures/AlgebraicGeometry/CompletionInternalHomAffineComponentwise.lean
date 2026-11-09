@@ -32,7 +32,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Two nested tensor inductions elaborate the sheaf scalar actions at each quotient.
 /-- Construct completed evaluation and identify its individual quotient components.
 This does not identify equality with an arbitrary compatible family of morphisms and

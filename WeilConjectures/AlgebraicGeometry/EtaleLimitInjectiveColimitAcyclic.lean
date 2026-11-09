@@ -168,7 +168,7 @@ theorem etale_limit_injective_colimit_acyclic
       ∃ (M : Type (u + 1)) (W : M → c.pt.Etale) (g : ∀ m : M, W m ⟶ U),
         Cov U M W g ∧ ∀ m : M, ∃ (k : K) (t : W m ⟶ V k), t ≫ f k = g m := by
     let := hU.1
-    obtain ⟨m, W, g, hR, hW, hg⟩ := Scheme.exists_finite_affine_of_mem_smallEtaleTopology hf
+    obtain ⟨m, W, g, hR, hW, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hf
     refine ⟨ULift.{u + 1} (Fin m), fun l ↦ W l.down, fun l ↦ g l.down,
       ⟨inferInstance, hU, ?_, ?_⟩, ?_⟩
     · intro l

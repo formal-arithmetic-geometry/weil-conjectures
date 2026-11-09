@@ -124,7 +124,7 @@ set_option backward.isDefEq.respectTransparency.types false
 universe t uC vC uD vD
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] cbcAbLocallyBijective
+attribute [local instance] WeilConjectures.sfAbBijective
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)

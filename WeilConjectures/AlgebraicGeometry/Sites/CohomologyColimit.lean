@@ -16,6 +16,7 @@ public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.ConstructibleSheaf.FreeLifting
 
 /-!
 # Étale cohomology of a direct sum on a quasi-compact quasi-separated scheme
@@ -71,19 +72,8 @@ schemes. -/
 lemma exists_finite_affine_of_mem_smallEtaleTopology {W : X.Etale} [CompactSpace W.left]
     {R : Sieve W} (hR : R ∈ X.smallEtaleTopology W) :
     ∃ (n : ℕ) (U : Fin n → X.Etale) (g : ∀ a, U a ⟶ W), (∀ a, R (g a)) ∧
-      (∀ a, IsAffine (U a).left) ∧ ⋃ a, Set.range (g a).left = Set.univ := by
-  obtain ⟨𝒰, h𝒰, p, hle⟩ := (mem_smallGrothendieckTopology _ _).1 hR
-  have : QuasiCompactCover 𝒰.toPreZeroHypercover :=
-    QuasiCompactCover.of_isOpenMap fun j ↦ (𝒰.f j).isOpenMap
-  obtain ⟨n, f, V, hV, hcov⟩ := QuasiCompactCover.exists_isAffineOpen_of_isCompact
-    𝒰.toPreZeroHypercover (U := ⊤) isCompact_univ
-  refine ⟨n, fun a ↦ Etale.ofOpens ((𝒰.X (f a)).asOverProp _ (p (f a))) (V a),
-    fun a ↦ Etale.ofOpensι _ _ ≫ (𝒰.f (f a)).asOverProp _,
-    fun a ↦ R.downward_closed (hle _ _ (Presieve.ofArrows.mk (f a))) _, fun a ↦ hV a, ?_⟩
-  refine Set.eq_univ_of_forall fun x ↦ ?_
-  have hx : x ∈ ⋃ i, 𝒰.f (f i) '' (V i) := by rw [hcov]; trivial
-  obtain ⟨a, y, hy, rfl⟩ := Set.mem_iUnion.1 hx
-  exact Set.mem_iUnion.2 ⟨a, ⟨y, hy⟩, rfl⟩
+      (∀ a, IsAffine (U a).left) ∧ ⋃ a, Set.range (g a).left = Set.univ :=
+  AlgebraicGeometry.Etale.exists_affine_refinement.{u} R hR
 
 /-- A jointly surjective family of morphisms of étale `X`-schemes is a covering family for
 every abelian étale sheaf. -/
@@ -166,7 +156,7 @@ theorem subsingleton_H_one_of_isColimit_cofan [CompactSpace X] [QuasiSeparatedSp
   have := (Sheaf.isLocallySurjective_iff_epi' (A := AddCommGrpCat.{u + 1}) π).2 inferInstance
   -- Step 1: `q` lifts on finitely many affine étale `X`-schemes covering `X`
   have : CompactSpace T.left := ‹CompactSpace X›
-  obtain ⟨n, U, g, hR, hU, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology
+  obtain ⟨n, U, g, hR, hU, hcov⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _)
     (Presheaf.imageSieve_mem X.smallEtaleTopology π.hom (U := op T) q)
   choose e he using hR
   -- Step 2: the differences on the overlaps are sections of `c.pt`
@@ -192,7 +182,7 @@ theorem subsingleton_H_one_of_isColimit_cofan [CompactSpace X] [QuasiSeparatedSp
       ∀ k, ∃ x : ∀ i, (F i).obj.obj (op (V k)),
         c.pt.obj.map (h k).op (γ a b) = ∑ i ∈ S, (c.inj i).hom.app _ (x i) := by
     obtain ⟨R, hR, hsum⟩ := exists_mem_forall_eq_sum_of_isColimit_cofan hc (γ a b)
-    obtain ⟨m, V, h, hRh, -, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+    obtain ⟨m, V, h, hRh, -, hcov⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
     choose S x hx using fun k ↦ hsum (h k) (hRh k)
     refine ⟨Finset.univ.biUnion S, m, V, h, hcov, fun k ↦
       ⟨fun i ↦ if i ∈ S k then x k i else 0, ?_⟩⟩
@@ -321,7 +311,7 @@ lemma exists_cofanFinsetDesc_app_eq (hc : IsColimit c) {W : X.Etale} [CompactSpa
       (cofanFinsetDesc c S).hom.app (op W) y = s := by
   classical
   obtain ⟨R, hR, hsum⟩ := exists_mem_forall_eq_sum_of_isColimit_cofan hc s
-  obtain ⟨n, U, g, hRg, -, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+  obtain ⟨n, U, g, hRg, -, hcov⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   choose S x hx using fun a ↦ hsum (g a) (hRg a)
   let S₀ : Finset ι := Finset.univ.biUnion S
   have hS (a : Fin n) : S a ⊆ S₀ := Finset.subset_biUnion_of_mem S (Finset.mem_univ a)
@@ -456,7 +446,7 @@ theorem subsingleton_H_succ_of_isColimit_cofan_of_injective [CompactSpace X]
         (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (cechNerveObj U y).left) ∧ (∀ a, R (U a).hom) ∧
         Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology V := by
     obtain ⟨_, _⟩ := hV
-    obtain ⟨n, U, g, hRg, hU, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+    obtain ⟨n, U, g, hRg, hU, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
     refine ⟨n, fun a ↦ Over.mk (g a), fun k y ↦ ?_, hRg,
       (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
     refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_

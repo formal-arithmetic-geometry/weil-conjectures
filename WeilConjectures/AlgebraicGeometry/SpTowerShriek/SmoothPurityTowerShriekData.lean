@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTowersAbelian
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 public import WeilConjectures.SixFunctors.Finite.FiniteTorAmplitude

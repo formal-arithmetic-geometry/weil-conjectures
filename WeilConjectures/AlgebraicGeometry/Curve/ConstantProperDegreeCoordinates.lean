@@ -42,8 +42,8 @@ private theorem proper_compactification_genus_aux
   have : IsProper c.g := c.isProper
   have : IsProper (c.i ≫ c.g) := c.comm ▸ inferInstance
   have : IsProper c.i := .of_comp c.i c.g
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
-  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace' c.g
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
+  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace (f := c.g)
   have hrange : Set.range c.i.base = Set.univ :=
     IsClopen.eq_univ ⟨c.i.isClosedMap.isClosed_range, c.i.isOpenEmbedding.isOpen_range⟩
       (Set.range_nonempty c.i.base)
@@ -90,7 +90,7 @@ private theorem proper_kummer_degree_coordinates_aux
           (f.picDegree L.toMul : ZMod n) := by
   classical
   let : C.Over (Spec (.of k)) := ⟨f⟩
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C

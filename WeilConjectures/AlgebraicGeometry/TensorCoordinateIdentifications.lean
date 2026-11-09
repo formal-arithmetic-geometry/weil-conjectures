@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
+public import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareLeftSummand
 
 import WeilConjectures.Algebra.Homology.KFlatTensorProduct
 import WeilConjectures.Algebra.Homology.KFlatPullback
@@ -39,13 +40,8 @@ local instance tensorCoordinateIdentificationsInstance2 (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   modulePreadditive Y
 
-local instance tensorCoordinateIdentificationsInstance3
-    (Y : Scheme.{u}) : (curriedTensor Y.Modules).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf
-
-local instance tensorCoordinateIdentificationsInstance4 (Y : Scheme.{u}) (M : Y.Modules) :
-    ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
+attribute [local instance] pinnedTensorSquareLeftSummandInstance3
+  pinnedTensorSquareLeftSummandInstance4
 
 private theorem counit_isIso
     [∀ Y : Scheme.{u},

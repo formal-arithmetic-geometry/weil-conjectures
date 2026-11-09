@@ -77,7 +77,7 @@ theorem exists_opens_split_of_rank_add_eq {ι₀ ι₁ ι₂ : Type*} [Fintype �
     (X.fromSpecResidueField y) x A _).1 le_rfl
   obtain ⟨f₂, f₁, h₂⟩ := (Modules.le_rank_map_appTop_iff (Modules.isField_Γ_Spec_residueField y)
     (X.fromSpecResidueField y) x B _).1 le_rfl
-  rw [Modules.fromSpecResidueField_base_apply] at h₁ h₂
+  rw [Scheme.fromSpecResidueField_apply] at h₁ h₂
   refine ⟨X.basicOpen (A.submatrix e₁ e₀).det ⊓ X.basicOpen (B.submatrix f₂ f₁).det, ⟨h₁, h₂⟩,
     fun g hg ↦ ?_⟩
   have u₁ : IsUnit ((A.map g.appTop).submatrix e₁ e₀).det := by
@@ -256,8 +256,8 @@ lemma RankCondition.of_map {Y : Scheme.{u}} (f : X ⟶ Y) {C : ∀ n m : ℤ, Ma
     rw [← Modules.map_appTop_comp]
     refine Modules.rank_map_appTop_eq_of_base_eq (Modules.isField_Γ_Spec_residueField _)
       (Modules.isField_Γ_Spec_residueField _) _ _ p' p ?_ _
-    rw [Modules.fromSpecResidueField_base_apply, Hom.comp_apply,
-      Modules.fromSpecResidueField_base_apply]
+    rw [Scheme.fromSpecResidueField_apply, Hom.comp_apply,
+      Scheme.fromSpecResidueField_apply]
   rw [e, e]
 
 end Complex
@@ -291,7 +291,7 @@ theorem rankCondition_of_homology {X : Scheme.{u}} {x : X} (hx : ∀ W : X.Opens
   have hψ (s : Γ(X, ⊤)) (hs : (X.fromSpecResidueField x).appTop.hom s ≠ 0) : IsUnit s := by
     have := (Hom.appTop_ne_zero_iff_mem_basicOpen (isField_Γ_Spec_residueField x)
       (X.fromSpecResidueField x) s pt).1 hs
-    rw [fromSpecResidueField_base_apply] at this
+    rw [Scheme.fromSpecResidueField_apply] at this
     exact isUnit_of_le_basicOpen (hx _ this).ge
   obtain ⟨D, hD, ha, hb⟩ := exists_freeMatrix_of_homology_iso e hx i φ
   exact Matrix.rank_map_add_rank_map_add_eq_of_exact (X.fromSpecResidueField x).appTop.hom

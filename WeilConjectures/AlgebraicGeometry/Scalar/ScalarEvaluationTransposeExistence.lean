@@ -226,7 +226,6 @@ structure ScalarEvaluationData
       ((L n).adjunction.homEquiv _ _)
         ((evaluation n).inv.app M ≫ (e.{c, v, max c v r} J F σ n).map f)
 
-set_option maxHeartbeats 800000 in
 -- Matching the normalized mate equations compares several large derived-functor types.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Existence of the level evaluation comparison normalized by the restriction mate.

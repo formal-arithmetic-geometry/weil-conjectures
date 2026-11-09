@@ -29,7 +29,6 @@ local instance TensorResolutionChartComponents_localInst4 (X : Scheme.{u}) (M : 
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The chart augmentation has the supplied degree-zero augmentation. -/
 theorem tensorResolutionChartAugmentation_f_zero {Y : Scheme.{u}}
@@ -62,7 +61,6 @@ theorem tensorResolutionChartAugmentation_f_zero {Y : Scheme.{u}}
   rw [reassoc_of% tensorResolutionTildeAugmentation_f_zero]
   erw [Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The sheafified extension agrees with the original semilinear map in its degrees. -/
 theorem tensorResolutionSemilinearComplexMap_extend_f
@@ -88,7 +86,6 @@ theorem tensorResolutionSemilinearComplexMap_extend_f
     CategoryTheory.Functor.map_id]
   exact (Category.comp_id _).symm
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- A map out of an affine associated module is detected by its prescribed sections. -/
 theorem tensorResolutionChartModel_naturality_from {Y : Scheme.{u}} (M : Y.Modules)
@@ -140,7 +137,6 @@ theorem tensorResolutionChartModel_naturality_from {Y : Scheme.{u}} (M : Y.Modul
     LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
   exact (hg m).symm
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Inverse-degree normalization for the sheafified semilinear extension. -/
 theorem tensorResolutionSemilinearComplexMap_extend_inv_f
@@ -163,7 +159,6 @@ theorem tensorResolutionSemilinearComplexMap_extend_inv_f
   congr 1
   simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The chart coefficient comparison is natural in its literal single complex. -/
 theorem tensorResolutionChartCoefficient_naturality {Y : Scheme.{u}} (N : Y.Modules)

@@ -74,7 +74,6 @@ instance isIso_presheafHomPullback (M : modulesPseudofunctor.obj (.mk (op Y))) (
   rw [presheafHomPullback]
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the pseudofunctor of modules are slow
 /-- `AlgebraicGeometry.Scheme.Modules.presheafHomPullback` is natural in the étale
 `Y`-scheme `V`. -/
@@ -124,7 +123,6 @@ noncomputable def etaleIsoTorsorPullback (M : modulesPseudofunctor.obj (.mk (op 
   etaleIsoTorsorMk _ (presheafHomPullback g M V.unop (etaleIsoTorsorVal M (U := V) x))
     inferInstance
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- `AlgebraicGeometry.Scheme.Modules.etaleIsoTorsorPullback` is natural in `V`. -/
 lemma etaleIsoTorsorPullback_naturality (M : modulesPseudofunctor.obj (.mk (op Y)))
@@ -139,7 +137,6 @@ lemma etaleIsoTorsorPullback_naturality (M : modulesPseudofunctor.obj (.mk (op Y
   apply etaleIsoTorsorVal_injective
   exact presheafHomPullback_naturality g M f.unop (etaleIsoTorsorVal M (U := U) x)
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- `AlgebraicGeometry.Scheme.Modules.etaleIsoTorsorPullback` is equivariant along
 `𝔾ₘ ⟶ g_* 𝔾ₘ`. -/
@@ -154,7 +151,6 @@ lemma etaleIsoTorsorPullback_vadd (M : modulesPseudofunctor.obj (.mk (op Y)))
   apply etaleIsoTorsorVal_injective
   exact presheafHomPullback_smulMor g M V.unop (etaleIsoTorsorVal M (U := V) x) _
 
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- **Pullback of `Isom(𝒪, M)`.** The class in `H¹(X, 𝔾ₘ)` of the torsor `Isom(𝒪_X, g^* M)` is
 the image under the pullback map `H¹(Y, 𝔾ₘ) ⟶ H¹(X, 𝔾ₘ)` of the class of `Isom(𝒪_Y, M)`. -/

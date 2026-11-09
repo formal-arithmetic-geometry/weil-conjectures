@@ -177,7 +177,7 @@ theorem exact_of_exact_sectionsAb (S : ShortComplex X.Modules)
   rw [ShortComplex.ab_exact_iff] at hW
   obtain ⟨t, ht⟩ := hW (S.X₂.presheaf.map (homOfLE (hWV'.trans i₁.le)).op s) (by
     change S.g.app W (S.X₂.presheaf.map (homOfLE (hWV'.trans i₁.le)).op s) = 0
-    rw [Hom.app_presheaf_map_apply, show S.X₃.presheaf.map (homOfLE (hWV'.trans i₁.le)).op =
+    rw [Hom.app_presheaf_map, show S.X₃.presheaf.map (homOfLE (hWV'.trans i₁.le)).op =
       S.X₃.presheaf.map i₁.op ≫ S.X₃.presheaf.map (homOfLE hWV').op by
         rw [← Functor.map_comp]; rfl, ConcreteCategory.comp_apply, e, map_zero])
   refine ⟨S.X₁.presheaf.germ W x hxW t, ?_⟩

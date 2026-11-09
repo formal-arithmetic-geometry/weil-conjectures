@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareLeftSummand
 import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareCompatibility
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
@@ -38,13 +39,8 @@ local instance tensorPullbackStalkSquareInstance2 (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   modulePreadditive Y
 
-local instance tensorPullbackStalkSquareInstance3
-    (Y : Scheme.{u}) : (curriedTensor Y.Modules).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf
-
-local instance tensorPullbackStalkSquareInstance4 (Y : Scheme.{u}) (M : Y.Modules) :
-    ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
+attribute [local instance] pinnedTensorSquareLeftSummandInstance3
+  pinnedTensorSquareLeftSummandInstance4
 
 -- Elaborating the scalar-extension and stalk tensor constructions needs more heartbeats.
 /-- Stalk compatibility of a specified tensor pullback chain map.

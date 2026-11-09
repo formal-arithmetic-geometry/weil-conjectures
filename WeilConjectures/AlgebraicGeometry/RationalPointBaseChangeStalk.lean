@@ -87,8 +87,8 @@ theorem Scheme.rational_point_base_change_stalk
   let : IsRegular X' := IsRegular.of_smooth s'
   let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian s
   let : IsLocallyNoetherian X' := LocallyOfFiniteType.isLocallyNoetherian s'
-  let : ConnectedSpace X := IsConnectedCurve.connectedSpace' s
-  let : ConnectedSpace X' := IsConnectedCurve.connectedSpace' s'
+  let : ConnectedSpace X := IsConnectedCurve.connectedSpace (f := s)
+  let : ConnectedSpace X' := IsConnectedCurve.connectedSpace (f := s')
   let : IsIntegral X := IsRegular.isIntegral X
   let : IsIntegral X' := IsRegular.isIntegral X'
   let : SmoothOfRelativeDimension 1 s :=

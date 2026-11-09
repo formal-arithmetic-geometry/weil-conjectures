@@ -85,7 +85,6 @@ private theorem zero_constructible (X : Scheme.{u})
   rw [IsConstantModelConstructible, ite_eq_left hX]
   exact ⟨oneStratum X, fun _ ↦ model_zero Λ (𝟙 X)⟩
 
-set_option maxHeartbeats 800000 in
 -- The homology comparison elaborates through the internal module category.
 /-- The coefficient sheaf in degree zero has a finite constant model.
 Source: rational projective-line unit/counit proof step 5, rank-one scalar model

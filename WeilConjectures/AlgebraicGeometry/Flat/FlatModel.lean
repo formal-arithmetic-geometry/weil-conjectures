@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
@@ -192,9 +193,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
 -- Request the shared locally-bijective instance at the coefficient universe used here.
-local instance sf_locallyBijective (X : Scheme.{u}) :
-    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  inferInstance
+attribute [local instance] WeilConjectures.sfAbBijective
 
 /-- The etale closure generators `Rg_*j_!L`: the closed direct image is exact, so the
 ordinary sheaf in degree zero is its derived value. The equation on `j` fixes the open

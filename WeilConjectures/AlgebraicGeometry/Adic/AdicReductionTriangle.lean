@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
@@ -183,11 +184,9 @@ open SheafOfModules MonoidalCategory
 open scoped ChangeOfRings
 variable (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
   {S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
-local instance : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-local instance : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
-local instance : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
+attribute [local instance] WeilConjectures.sfAbSheafify
+attribute [local instance] WeilConjectures.sfAbBijective
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 

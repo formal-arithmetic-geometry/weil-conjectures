@@ -125,7 +125,6 @@ private theorem restriction_hom_eq {B Y Y' : Scheme.{u}}
 
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 600000 in
 -- Comparing the two canonical section functors requires substantial type reduction.
 private theorem shift_iso_hom {B Y : Scheme.{u}} (h : Y ⟶ B) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -140,7 +139,7 @@ private theorem shift_iso_hom {B Y : Scheme.{u}} (h : Y ⟶ B) (q : ℤ)
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- Comparing the two canonical section functors requires substantial type reduction.
 set_option maxRecDepth 2048 in
 private theorem raw_pullback_homology {B Y Y' : Scheme.{u}}

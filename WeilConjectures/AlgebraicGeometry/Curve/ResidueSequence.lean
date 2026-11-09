@@ -97,7 +97,7 @@ lemma genericValue_smul {U : X.Opens} (h : genericPoint X ∈ U) (a : Γ(X, U)) 
 lemma genericValue_res {U U' : X.Opens} (i : U' ≤ U) (h : genericPoint X ∈ U')
     (s : Γ(M, U)) :
     genericValue φ h (M.presheaf.map (homOfLE i).op s) = genericValue φ (i h) s := by
-  simp only [genericValue, Hom.app_presheaf_map_apply]
+  simp only [genericValue, Hom.app_presheaf_map]
   rfl
 
 variable (k) in
@@ -481,8 +481,8 @@ theorem shortExact_residue : (residueShortComplex k φ).ShortExact := by
           ext a
           apply hφ
           change φ.app _ (l _ _) = φ.app _ (M.presheaf.map (homOfLE i.unop.le).op (l _ _))
-          rw [Hom.app_presheaf_map_apply, hl, hl]
-          exact Hom.app_presheaf_map_apply g (homOfLE i.unop.le) a }
+          rw [Hom.app_presheaf_map, hl, hl]
+          exact Hom.app_presheaf_map g (homOfLE i.unop.le) a }
     refine ⟨⟨PresheafOfModules.homMk l' fun U r a ↦ hφ _ ?_⟩, ?_⟩
     · erw [Hom.app_smul, hl, hl]
       exact Hom.app_smul g r a

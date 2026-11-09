@@ -144,7 +144,6 @@ private theorem rightComparison_isIso
 
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the canonical derived mate and its two localized coefficient models.
 /-- The derived comparison package exists for every base package.
 Source: Stacks Project, Cohomology on Sites, Tags 08FI and 0FN5.

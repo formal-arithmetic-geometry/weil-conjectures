@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityNormalizedTowers
 public import WeilConjectures.AlgebraicGeometry.SmoothPurity.EllCoefficientFiber
 public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructible
@@ -93,7 +94,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 
 namespace AlgebraicGeometry.ProEtale
-
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})

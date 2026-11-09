@@ -66,7 +66,7 @@ theorem resolutionSection_canonical_transfer
       (openResolutionSectionTransfer g I.cocomplex J.cocomplex α W) q x) =
       openCohomologyPullback g W G q (cX.openEquiv W q x)) := by
   constructor
-  · exact resolutionSection_canonical_transfer_global g G I J α hα cX cY
+  · exact resolutionSection_canonical_transfer_global_pointwise g G I J α hα cX cY
   · exact resolutionSection_canonical_transfer_open g G I J α hα cX cY
 
 end AlgebraicGeometry.Etale

@@ -118,7 +118,7 @@ instance isStrictlyHenselianLocalRing_atPrime_of_fact [Fact (IsAffineOpen W)] [Q
     IsStrictlyHenselianLocalRing (Localization.AtPrime Q) :=
   isStrictlyHenselianLocalRing_atPrime_of_isAffineOpen Fact.out Q
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- the elaboration of the integral closure and localization instances is slow
 include hϖ hWU m in
 /-- **A point of an integral cover fixed by inertia extends to an étale neighbourhood.** Let `Z`
