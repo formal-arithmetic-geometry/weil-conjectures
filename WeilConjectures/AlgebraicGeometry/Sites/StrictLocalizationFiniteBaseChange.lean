@@ -167,7 +167,7 @@ theorem isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback [IsFi
       Spec.map (strictHenselizationEval s') ≫ strictLocalizationToPullback g s' ≫
         P.isoSpec.hom :=
     Spec.map_preimage _
-  have := isStrictlyHenselianLocalRing_strictHenselization' (s' ≫ g)
+  have := isStrictlyHenselianLocalRing_strictHenselization (s' ≫ g)
   obtain ⟨e, he, heq, hsh⟩ := IsStrictlyHenselianLocalRing.exists_isIdempotentElem_quotient
     (strictHenselization (s' ≫ g)) Γ(P, ⊤) (RingHom.ker ψ.hom)
   let I := Ideal.span {1 - e}

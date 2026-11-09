@@ -180,7 +180,7 @@ lemma exists_finite_ofArrows_mem_smallEtaleTopology {W : X.Etale} [CompactSpace 
     (R : Sieve W) (hR : R ∈ X.smallEtaleTopology W) :
     ∃ (n : ℕ) (U : Fin n → Over W), (∀ a, R (U a).hom) ∧
       Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology W := by
-  obtain ⟨n, U, g, hRg, -, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+  obtain ⟨n, U, g, hRg, -, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   exact ⟨n, fun a ↦ Over.mk (g a), hRg, (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
 
 /-- The quasi-compact quasi-separated étale `X`-schemes satisfy the hypothesis of the Čech
@@ -195,7 +195,7 @@ lemma exists_finite_cechNerve_qcqs (V : X.Etale)
         QuasiSeparatedSpace (cechNerveObj U y).left.left) ∧ (∀ a, R (U a).hom) ∧
       Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology V := by
   obtain ⟨_, _⟩ := hV
-  obtain ⟨n, U, g, hRg, hU, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+  obtain ⟨n, U, g, hRg, hU, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   refine ⟨n, fun a ↦ Over.mk (g a), fun k y ↦ ?_, hRg,
     (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
   refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_

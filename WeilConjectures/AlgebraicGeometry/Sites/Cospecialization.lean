@@ -109,10 +109,6 @@ namespace AlgebraicGeometry.Scheme
 
 variable {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S)
 
-/-- The underlying morphism of a morphism of étale `S`-schemes is étale. -/
-lemma etale_left_of_hom_etale {X Y : S.Etale} (f : X ⟶ Y) : Etale f.left :=
-  MorphismProperty.of_postcomp @Etale f.left Y.hom Y.prop (by simp [X.prop])
-
 /-- The legs of `strictLocalizationConeAll s` are morphisms over `S`. -/
 @[reassoc (attr := simp)]
 lemma strictLocalizationConeAll_π_app_hom (x : PointedEtaleNeighborhood s) :
@@ -144,7 +140,7 @@ lemma exists_strictLocalizationCone_π_app_base_eq (c : AffinePointedEtaleNeighb
   obtain ⟨P, hP, hPq⟩ := CommRingCat.exists_isPrime_comap_eq_of_isColimit
     (colimit.isColimit (strictHenselizationDiagram s)) (k₀ := op c) q.asIdeal (fun d g ↦ by
       let φ := (affineNeighborhoodDiagram s).map g.unop
-      have : Etale φ := etale_left_of_hom_etale g.unop.hom.1
+      have : Etale φ := instEtaleLeftDiscretePUnit g.unop.hom.1
       have hφ := PointedEtaleNeighborhood.hom_left_base s g.unop.hom
       rw [← hφ] at hw
       obtain ⟨w', -, hw'⟩ := Flat.generalizingMap φ hw
@@ -172,7 +168,7 @@ theorem exists_strictLocalizationConeAll_π_app_base_eq (x : PointedEtaleNeighbo
     {w : x.1.left} (hw : w ⤳ x.2.left.base (IsLocalRing.closedPoint Ω)) :
     ∃ p : strictLocalization s, ((strictLocalizationConeAll s).π.app x).base p = w := by
   obtain ⟨c, ⟨f⟩⟩ := AffinePointedEtaleNeighborhood.exists_hom s x
-  have : Etale f.1.left := etale_left_of_hom_etale f.1
+  have : Etale f.1.left := instEtaleLeftDiscretePUnit f.1
   rw [← PointedEtaleNeighborhood.hom_left_base s f] at hw
   obtain ⟨w', hw', rfl⟩ := Flat.generalizingMap f.1.left hw
   obtain ⟨p, hp⟩ := exists_strictLocalizationCone_π_app_base_eq s c hw'

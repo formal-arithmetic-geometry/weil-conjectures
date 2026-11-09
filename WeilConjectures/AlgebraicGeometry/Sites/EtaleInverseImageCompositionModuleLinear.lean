@@ -24,7 +24,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 800000 in
 -- The dependent core application exceeds the default heartbeat limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse

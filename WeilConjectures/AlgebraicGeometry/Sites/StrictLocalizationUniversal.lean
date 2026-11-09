@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationMap
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianLift
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 
 /-!
 # The universal property of the strict localization
@@ -123,8 +124,7 @@ lemma spec_map_strictHenselizationEval_apply (x : Spec (.of Ω)) :
 /-- The strict henselization is a strictly henselian local ring. -/
 lemma isStrictlyHenselianLocalRing_strictHenselization' :
     IsStrictlyHenselianLocalRing (strictHenselization s) :=
-  (isStrictlyHenselianLocalRing_iff_henselianLocalRing_and_isSepClosed _).2
-    ⟨henselianLocalRing_strictHenselization s, isSepClosed_residueField_strictHenselization s⟩
+  isStrictlyHenselianLocalRing_strictHenselization.{u} s
 
 variable {B : Type u} [CommRing B]
 

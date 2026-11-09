@@ -77,7 +77,7 @@ theorem etale_section_colimit_finite_zero_cover
   obtain ⟨S, hS, hzero⟩ :=
     etale_section_colimit_local_zero_sieve X Λ U I G c hc i s hs
   obtain ⟨n, V, q, hq, _, hcover⟩ :=
-    Scheme.exists_finite_affine_of_mem_smallEtaleTopology hS
+    (AlgebraicGeometry.Etale.exists_affine_refinement _) hS
   let K := ULift.{w} (Fin n)
   let V' (k : K) := V k.down
   let q' (k : K) : V' k ⟶ U := q k.down
