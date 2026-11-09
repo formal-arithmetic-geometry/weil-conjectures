@@ -51,9 +51,9 @@ def cyclicCompletedUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (diagonalForget l (diagonalSurface Y)).mapDerivedCategory ≅
       eW.F.mapDerivedCategory ⋙ (Mod.forget _).mapDerivedCategory :=
   (Functor.mapDerivedCategoryCompIso (diagonalCompletedRestriction l (diagonalSurface Y))
-    (diagonalForget l (diagonalSurface Y))).symm ≪≫
+    (diagonalForget l (diagonalSurface Y))) ≪≫
     Functor.mapDerivedCategoryNatIso eW.underlying.symm ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The underlying cyclic evaluation is the derived scalar quotient followed by
 forgetting its finite action. Source: exact-functor composition and finite realization
@@ -68,8 +68,8 @@ def cyclicEvaluationUnderlying (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : �
   let H := diagonalFiniteToPadic l n (diagonalSurface Y)
   let U := diagonalForget l (diagonalSurface Y)
   let f := Functor.isoWhiskerLeft p.eW.F.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso H U).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso p.eW.F (H ⋙ U)).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H U) ≪≫
+    (Functor.mapDerivedCategoryCompIso p.eW.F (H ⋙ U)) ≪≫
     Functor.mapDerivedCategoryNatIso (cyclicFiniteUnderlying l Y n p)
   unfold cyclicEvaluationFunctor cyclicFiniteEvaluationFunctor
   exact Functor.isoWhiskerLeft
@@ -100,7 +100,7 @@ def scalarUnderlyingUnit
   exact Functor.whiskerRight adj.unit U.mapDerivedCategory ≫
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (derivedScalars a X)
-      ((Functor.mapDerivedCategoryCompIso R U).symm ≪≫ r).hom
+      ((Functor.mapDerivedCategoryCompIso R U) ≪≫ r).hom
 
 /-- The scalar adjunction unit transported through the specified realizations.
 Every component is constructed independently of a quotient model or limit cone.
