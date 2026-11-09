@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteMo
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicRealizationTensorComplex
+import WeilConjectures.AlgebraicGeometry.ProEtale.Supported.ProEtaleSupportedExteriorProduct
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.Additive
@@ -139,15 +140,7 @@ private theorem intrinsicDerivedTensor_obj
        _root_.DerivedCategory.Q.obj (CochainComplex.mapBifunctor P W (curriedTensor _))) :=
   rfl
 
-local instance resolutionGenericSheafColimits
-    (B : Type w) [Category.{u + 1} B] [Abelian B]
-    [IsGrothendieckAbelian.{u + 1} B] (T : Scheme.{u}) :
-    HasColimitsOfSize.{0, 0} (Sheaf (Scheme.ProEt.topology T) B) := by
-  let : IsGrothendieckAbelian.{u + 1} (Sheaf (Scheme.ProEt.topology T) B) :=
-    GrothendieckTopology.isGrothendieckAbelian_sheaf_proEtTopology B T
-  let : HasColimitsOfSize.{u + 1, u + 1} (Sheaf (Scheme.ProEt.topology T) B) :=
-    IsGrothendieckAbelian.hasColimits _
-  exact hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
+attribute [local instance] supportedSheaf_smallColimitsGeneric
 
 local instance resolutionGenericSheafTensorTotal
     (B : Type w) [Category.{u + 1} B] [Abelian B]
@@ -157,7 +150,7 @@ local instance resolutionGenericSheafTensorTotal
     HomologicalComplex.HasMapBifunctor V W (curriedTensor _) (.up ℤ) :=
   fun _ ↦ @HasColimitsOfShape.has_colimit _ _ _ _
     (@HasColimitsOfSize.has_colimits_of_shape _ _
-      (resolutionGenericSheafColimits B T) _ _) _
+      (supportedSheaf_smallColimitsGeneric B T) _ _) _
 
 private theorem intrinsicResolutionHomologyAux
     (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})
