@@ -19145,6 +19145,7 @@ public import WeilConjectures.RingTheory.ExtendedReesAlgebraGraded
 public import WeilConjectures.RingTheory.ExtendedReesAlgebraPow
 public import WeilConjectures.RingTheory.Extension.JacobiZariskiBaseChange
 public import WeilConjectures.RingTheory.Extension.NaiveCotangentHomotopy
+public import WeilConjectures.RingTheory.ExteriorPairingDualBasis
 public import WeilConjectures.RingTheory.FGFractionFieldSubmoduleLatticePresentation
 public import WeilConjectures.RingTheory.FactorsThroughLocalization
 public import WeilConjectures.RingTheory.FactorsThroughSmooth
