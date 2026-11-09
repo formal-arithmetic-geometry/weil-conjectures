@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientMaps
+public import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLocalRankOneIso
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
