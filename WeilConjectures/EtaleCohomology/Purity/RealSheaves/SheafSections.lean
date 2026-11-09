@@ -19,7 +19,7 @@ subcurve. The global sections `H⁰(Ū, j^* F)` of the restriction of `F` to `Ū
 invariants `V ^ {π₁(U)}` of the geometric fundamental group of `U`, acting through the
 restriction `W(U₀) → W(C₀)` of Weil groups, compatibly with the Frobenius
 (`AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`,
-blueprint `p-real-sections`).
+blueprint `lemma-degree-zero-top-cohomology--1`).
 
 The sheaf-theoretic input is that `F ≅ j_* j^* F` for a lisse `F`
 (`AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app`), so that
@@ -121,7 +121,8 @@ theorem Restriction.apply_restrict_frobeniusLift (R : Restriction j WU W) {V : T
 
 variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [j.IsOver (Spec (.of K))]
 
-/-- Blueprint `p-real-sections` (subsection `p-real-sections`): Global sections as invariants.
+/-- Blueprint `lemma-degree-zero-top-cohomology--1` (subsection
+`lemma-degree-zero-top-cohomology--1`): Global sections as invariants.
 
 Let `e` be an equivalence between lisse Weil sheaves on `C₀` and lisse representations of
 `W(C₀)` which identifies the global sections `H⁰(C̄, F)` with the invariants `V ^ {π₁(C)}`,

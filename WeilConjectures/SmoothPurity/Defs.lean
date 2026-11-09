@@ -46,17 +46,17 @@ twists need not be recorded.
 ## The orientation and its normalizations
 
 The orientation `γ_f : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation`, blueprint `sk-thm-purity-transport`,
-used in `def-pur-smooth-trace`) is a `@[no_expose]` definition. Up to the normalization along
-open immersions described below, it is the canonical orientation
-(`AlgebraicGeometry.ProEtale.CondensedRing.IsCanonicalSmoothOrientation`): the extension of
-scalars to `ℚ̄_ℓ` of the integral morphism `ℤ_ℓ,X(d)[2d] ⟶ Rf^! ℤ_ℓ,Y` lifting the finite
-orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]`, `Λ = ℤ ⧸ ℓⁿ`, of the diagonal argument
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation`, blueprint
+`theorem-smooth-purity-all-admissible-coefficients`, used in `definition-trace-map`) is a
+`@[no_expose]` definition. Up to the normalization along open immersions described below, it is the
+canonical orientation (`AlgebraicGeometry.ProEtale.CondensedRing.IsCanonicalSmoothOrientation`): the
+extension of scalars to `ℚ̄_ℓ` of the integral morphism `ℤ_ℓ,X(d)[2d] ⟶ Rf^! ℤ_ℓ,Y` lifting the
+finite orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]`, `Λ = ℤ ⧸ ℓⁿ`, of the diagonal argument
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`), when an isomorphism with this property
 is known to exist. The lift always exists mathematically (SGA 4, Exposé XVIII: the finite
 orientations are compatible under change of coefficients, blueprint
-`det-sp-purity-coefficient-change`) and is unique, but its existence is not formalized; when it is
-not available, `γ_f` is a non-canonical isomorphism
+`proposition-compatibility-purity-change-coefficients`) and is unique, but its existence is not
+formalized; when it is not available, `γ_f` is a non-canonical isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.nonempty_iso_tateTwist_upperShriekUnit`). In all cases
 `γ_f` is an isomorphism (`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothOrientation`). The
 trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
@@ -70,13 +70,13 @@ proper). For an open immersion `j` in relative dimension zero the purity isomorp
 canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_zero_of_isOpenImmersion`).
 
-The orientation is normalized along open immersions of the target (`sk-prop-sp-composition`):
-`f` factors as a surjective smooth morphism `g : X ⟶ U` followed by the open immersion of its
-image, and the factorization is chosen once for all the morphisms `f ≫ j`, `j` an open immersion
-(`AlgebraicGeometry.smoothImageFactor`); `γ_f` is the orientation of `g` (the canonical
-identification if `g` is an open immersion, and otherwise the canonical orientation if known to
-exist, or a non-canonical one) transported along the canonical comparison
-`Rg^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`. The comparisons satisfy a cocycle condition
+The orientation is normalized along open immersions of the target
+(`proposition-compatibility-purity-composition`): `f` factors as a surjective smooth morphism
+`g : X ⟶ U` followed by the open immersion of its image, and the factorization is chosen once for
+all the morphisms `f ≫ j`, `j` an open immersion (`AlgebraicGeometry.smoothImageFactor`); `γ_f` is
+the orientation of `g` (the canonical identification if `g` is an open immersion, and otherwise the
+canonical orientation if known to exist, or a non-canonical one) transported along the canonical
+comparison `Rg^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`. The comparisons satisfy a cocycle condition
 (`ProEtale.CondensedRing.boundedConstructibleUpperShriekUnitCompIso_padicAlgCl_comp`),
 and the purity isomorphism is compatible with composition with an open immersion `j` on the
 target, through the composition isomorphism `R(f ≫ j)^! ≅ Rj^! ⋙ Rf^!`
@@ -112,9 +112,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
 omit [SmoothOfRelativeDimension d f.left] in
-/-- Blueprint `sk-thm-purity-transport`, étale case: the **orientation of an open immersion** `j`
-(relative dimension zero), `ℚ̄_ℓ,X(0)[0] ⟶ Rj^! ℚ̄_ℓ,Y`: the canonical identification
-`ℚ̄_ℓ(0)[0] ≅ ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ Rj^! ℚ̄_ℓ` (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`). -/
+/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`, étale case: the **orientation of
+an open immersion** `j` (relative dimension zero), `ℚ̄_ℓ,X(0)[0] ⟶ Rj^! ℚ̄_ℓ,Y`: the canonical
+identification `ℚ̄_ℓ(0)[0] ≅ ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ Rj^! ℚ̄_ℓ`
+(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`). -/
 noncomputable def openImmersionOrientation (j : X ⟶ Y) [IsOpenImmersion j.left] :
     boundedConstructibleTateTwist ℓ X ((0 : ℕ) : ℤ) (2 * ((0 : ℕ) : ℤ)) ⟶
       (boundedConstructibleUpperShriek ℓ j).obj
@@ -296,7 +297,8 @@ lemma smoothOrientationOfImageFactor_congr {p p' : Σ U : Over (Spec (.of k)), X
   rfl
 
 omit [SmoothOfRelativeDimension d f.left] in
-/-- Blueprint `sk-thm-purity-transport` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in `def-pur-smooth-trace`): the
+/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in
+`definition-trace-map`): the
 **orientation** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension
 `d`, the datum the smooth trace is built from. It is normalized along open immersions: `f`
 factors as a surjective morphism `g : X ⟶ U` smooth of pure relative dimension `d` followed by
@@ -305,17 +307,17 @@ an open immersion `ι : U ⟶ Y`, and the factorization `(U, g)` is chosen
 The orientation of `f` is the orientation `smoothOrientationBase` of `g` transported along
 `Rg^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ` (`smoothOrientationOfFactor`). The orientation of `g` is the canonical
 identification `openImmersionOrientation` when `g` is an open immersion (relative dimension zero,
-the normalization of `sk-thm-purity-transport`), and otherwise `smoothOrientationOfSmooth`: the
-canonical orientation (`IsCanonicalSmoothOrientation`, the extension of scalars of the integral
-lift of the finite orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]` of the diagonal argument) when an
-isomorphism with this property is known to exist, and otherwise a non-canonical isomorphism
-(`nonempty_iso_tateTwist_upperShriekUnit`). The canonical orientation always exists
-mathematically (SGA 4, Exposé XVIII: the finite orientations are compatible under change of
-coefficients, blueprint `det-sp-purity-coefficient-change`), but the existence of the compatible
-lift is not formalised. It is an isomorphism (`isIso_smoothOrientation`).
-The signature does not carry `[SmoothOfRelativeDimension d f.left]`: for `f` not smooth of pure
-relative dimension `d` there is no image factorization and the value is `0`; the datum is
-meaningful only for `f` smooth of pure relative dimension `d`. -/
+the normalization of `theorem-smooth-purity-all-admissible-coefficients`), and otherwise
+`smoothOrientationOfSmooth`: the canonical orientation (`IsCanonicalSmoothOrientation`, the
+extension of scalars of the integral lift of the finite orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]` of the
+diagonal argument) when an isomorphism with this property is known to exist, and otherwise a
+non-canonical isomorphism (`nonempty_iso_tateTwist_upperShriekUnit`). The canonical orientation
+always exists mathematically (SGA 4, Exposé XVIII: the finite orientations are compatible under
+change of coefficients, blueprint `proposition-compatibility-purity-change-coefficients`), but the
+existence of the compatible lift is not formalised. It is an isomorphism
+(`isIso_smoothOrientation`). The signature does not carry `[SmoothOfRelativeDimension d f.left]`:
+for `f` not smooth of pure relative dimension `d` there is no image factorization and the value is
+`0`; the datum is meaningful only for `f` smooth of pure relative dimension `d`. -/
 @[no_expose]
 noncomputable def smoothOrientation :
     boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
@@ -387,7 +389,7 @@ instance isIso_smoothOrientation [SmoothOfRelativeDimension d f.left] :
   rw [smoothOrientation, dite_eq_left (isSmoothImageFactor_smoothImageFactor f d)]
   infer_instance
 
-/-- Blueprint `def-pur-smooth-trace` (`sk-def-sp-trace`): the **trace map**
+/-- Blueprint `definition-trace-map` (`definition-trace-map`): the **trace map**
 `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`
 (SGA 4, Exposé XVIII, Théorème 2.9): the composite
 `Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ Rf_! Rf^! ℚ̄_ℓ,Y ⟶ ℚ̄_ℓ,Y` of `Rf_!` of the orientation `γ_f`
@@ -402,7 +404,7 @@ noncomputable def smoothTrace :
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- The smooth trace is the counit transpose of the orientation: `Tr^sm_f = Tr_f ∘ Rf_!(γ_f)`.
-Source: def-pur-smooth-trace. -/
+Source: definition-trace-map. -/
 theorem smoothTrace_eq :
     smoothTrace ℓ f d =
       (boundedConstructibleLowerShriek ℓ f).map (smoothOrientation ℓ f d) ≫
@@ -420,7 +422,7 @@ noncomputable def smoothPurityMap :
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- The purity map is the orientation: the adjunct of `Tr_f ∘ Rf_!(γ_f)` is `γ_f`.
-Source: def-pur-smooth-trace (the purity map is recovered from the smooth trace). -/
+Source: definition-trace-map (the purity map is recovered from the smooth trace). -/
 theorem smoothPurityMap_eq_smoothOrientation :
     smoothPurityMap ℓ f d = smoothOrientation ℓ f d := by
   change (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d) = _
@@ -434,7 +436,7 @@ theorem smoothPurityMap_eq_smoothOrientation :
 -- instance-implicit section variables, even under `include`. The elaborated signature has it
 -- once; the linter also counts the section variable in scope.
 set_option linter.overlappingInstances false in
-/-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
+/-- Blueprint `theorem-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
 adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism, for `f` smooth of
 relative dimension `d`. -/
 instance isIso_smoothPurityMap [SmoothOfRelativeDimension d f.left] :
@@ -453,9 +455,9 @@ noncomputable def smoothPurityIso :
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   (ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ f d)).symm
 
-/-- Blueprint `sk-thm-purity-transport`, étale case: **normalization of purity in relative
-dimension zero**: for an open immersion `j`, the purity isomorphism `Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is
-the canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
+/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`, étale case: **normalization of
+purity in relative dimension zero**: for an open immersion `j`, the purity isomorphism
+`Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is the canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
 (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`); equivalently, the trace of `j` is the
 counit `Rj_! Rj^! ℚ̄_ℓ ⟶ ℚ̄_ℓ` read through it. -/
 theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j.left] :
@@ -475,11 +477,12 @@ theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j
   ext1
   simp [Functor.FullyFaithful.preimageIso]
 
-/-- Blueprint `sk-prop-sp-composition`, case of an open immersion: **compatibility of purity
-with composition with an open immersion**: for `f` smooth of pure relative dimension `d` and an
-open immersion `j` on its target, the purity isomorphism of `f ≫ j` is that of `f` precomposed with
-`R(f ≫ j)^! ℚ̄_ℓ ≅ Rf^! Rj^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`, the composition isomorphism of the exceptional
-inverse images followed by purity for `j` (`boundedConstructibleUpperShriekUnitIso_padicAlgCl`). -/
+/-- Blueprint `proposition-compatibility-purity-composition`, case of an open
+immersion: **compatibility of purity with composition with an open immersion**: for `f` smooth of
+pure relative dimension `d` and an open immersion `j` on its target, the purity isomorphism of
+`f ≫ j` is that of `f` precomposed with `R(f ≫ j)^! ℚ̄_ℓ ≅ Rf^! Rj^! ℚ̄_ℓ ≅ Rf^! ℚ̄_ℓ`, the
+composition isomorphism of the exceptional inverse images followed by purity for `j`
+(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`). -/
 theorem smoothPurityIso_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]
     [QuasiCompact Z.hom] [IsSeparated Z.hom] (j : Y ⟶ Z) [IsOpenImmersion j.left]
     [SmoothOfRelativeDimension d (f ≫ j).left] :

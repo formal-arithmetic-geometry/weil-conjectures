@@ -30,7 +30,8 @@ trace, the value `ψ(Tr(a x))` of the trace function
 - `AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`: at a closed point `x`
   the local Frobenius of `ℒ_{ψ(a x)}` is multiplication by `ψ(c)` for some `c ∈ k₀` which does
   not depend on `ψ`.
-- `AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier` (blueprint: `lem-fd-as-purity`):
+- `AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier` (blueprint:
+`lemma-artin-schreier-character-sheaf--7`):
   `ℒ_{ψ(a x)}` is punctually `ι`-pure of weight zero.
 - `AlgebraicGeometry.isPunctuallyPureOfWeight_fourierKernel`: so is the Fourier kernel.
 -/
@@ -209,7 +210,7 @@ lemma AddChar.norm_map_apply_eq_one {K : Type*} [Field K] [Finite K] {R : Type*}
 line is punctually `ι`-pure of weight zero: at every closed point its local Frobenius is
 multiplication by a value of `ψ`, a root of unity
 (`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`).
-(blueprint: `lem-fd-as-purity`) -/
+(blueprint: `lemma-artin-schreier-character-sheaf--7`) -/
 theorem isPunctuallyPureOfWeight_artinSchreier (ι : PadicAlgCl l →+* ℂ)
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     (artinSchreier ψ a).IsPunctuallyPureOfWeight ι 0 := by

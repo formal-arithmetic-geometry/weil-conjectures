@@ -56,7 +56,7 @@ square commute. The internal inverse-image comparison and
 lem-sfb-kflat-scalar-comparison-normalization identify its balanced map on generators.
 6. The ordinary map is the inverse of the specified pullIso: its transpose is
 comapLowerStarIso, since units insert 1 and counits multiply. Uniqueness in
-lem-weil-pbc-conjugate-iso-unit-equation identifies this particular conjugate.
+situation-conventions identifies this particular conjugate.
 7. Ringed pullback preserves flat-term K-flat complexes, including coefficient change
 without flatness. Descend the balanced comparison and use step 6. Naturality and
 cancellation as in step 4 give PullNormalized on all homotopy complexes.

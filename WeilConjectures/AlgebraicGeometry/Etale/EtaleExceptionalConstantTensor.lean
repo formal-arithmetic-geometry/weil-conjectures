@@ -627,10 +627,10 @@ Proof (the complete ten-step proof of the DAG node):
    and its additive exponent is invertible since $\ell\ne p$. It gives $F(H)\in D^{[0,2d]}$, for
    arbitrary $H$, with no constructibility assumption.
 
-   Uses: lem-amb-etale-adjoint-locality, lem-sf-exact-functor-derived-triangulated, prop-weil-pbc-
+   Uses: lemma-affine-space-etale-localization--4, situation-conventions, prop-weil-pbc-
    kinjective-resolutions-exist, lem-pc-right-derived-functor-triangulated, lem-amb-proper-
    coproducts, lem-weil-pbc-module-sheaves-enough-injectives, lem-weil-pbc-dplus-injective-
-   representative, lem-dg-compact-support-amplitude.
+   representative, theorem-results-from-etale-theory--5.
 
 3. Let $K\in D^{\le a}$. Replace it by a complex with zero terms in degrees $>a$, using good
    truncation. Its brutal lower subcomplexes $B_m=\sigma_{\ge a-m}K$, $m\ge0$, form an increasing
@@ -645,9 +645,10 @@ Proof (the complete ten-step proof of the DAG node):
    convergence assertion for an unbounded spectral sequence is needed. Together with step 2, on
    bounded intervals this gives $F(D^{[r,s]})\subset D^{[r,s+2d]}$.
 
-   Uses: def-sbc-standard-tstructure-derived-category, def-kun-truncations, lem-kun-complex-
-   colimit-hocolim, lem-kun-functor-preserves-hocolim, lem-weil-pbc-module-sheaves-grothendieck-
-   abelian, lem-kun-grothendieck-derived-coproducts.
+   Uses: def-sbc-standard-tstructure-derived-category,
+   proposition-open-direct-image-preserves-finite, lem-kun-complex- colimit-hocolim,
+   lem-kun-functor-preserves-hocolim, lem-weil-pbc-module-sheaves-grothendieck- abelian,
+   lem-kun-grothendieck-derived-coproducts.
 
 4. For any $L\in D(Y_{\mathrm{et}},C)$ and $K\in D(X_{\mathrm{et}},C)$ compose the proper
    projection isomorphism and the open-immersion tensor isomorphism: $$L\otimes^L Rp_{f,*}j_!K\
@@ -661,7 +662,7 @@ Proof (the complete ten-step proof of the DAG node):
    tensor map. In particular taking $L=V_Y$ proves the first displayed isomorphism in the
    statement. We retain the stronger formula for arbitrary $L$ for use in the next step.
 
-   Uses: lem-amb-proper-coproducts-projection, lem-pur-etale-open-derived-tensor, prop-weil-pbc-
+   Uses: lemma-cohomology-projective-line-trace, lem-pur-etale-open-derived-tensor, prop-weil-pbc-
    inverse-image-modules-exact, def-weil-pbc-constant-sheaf.
 
 5. Apply the compact-generation lemma to $X$ and $Y$; its hypotheses require finite type over the
@@ -679,7 +680,7 @@ Proof (the complete ten-step proof of the DAG node):
    follows from the compact-generation lemma. This argument allows nonregular finite rings $C$; no
    assertion that every finite $C$-module is perfect is used.
 
-   Uses: lem-pur-etale-finite-ring-compact-generators, sbc-thm-finiteness-finite-type, def-kun-
+   Uses: lem-pur-etale-finite-ring-compact-generators, theorem-results-from-etale-theory, def-kun-
    truncations, thm-constructible-serre.
 
 6. The adjunction $F\dashv G$ is the fixed one in the item. The test family $(E_s[n])$ consists of
@@ -691,8 +692,8 @@ Proof (the complete ten-step proof of the DAG node):
    \operatorname{Hom}(FE_s[n],\bigoplus_iM_i),$$ by adjunction and compactness of $FE_s[n]$.
    Detection makes the comparison an isomorphism.
 
-   Uses: thm-amb-etale-exceptional-adjoint, lem-pur-etale-finite-ring-compact-generators, lem-sc-
-   compact-tests-right-adjoint-coproducts.
+   Uses: theorem-existence-exceptional-inverse-image--1,
+   lem-pur-etale-finite-ring-compact-generators, lem-sc- compact-tests-right-adjoint-coproducts.
 
 7. Equip $G$ with the unique shift structure compatible with the exact functor $F$ and its fixed
    adjunction. The adjunction-shift theorem supplies it, with the counit equation
@@ -707,8 +708,8 @@ Proof (the complete ten-step proof of the DAG node):
 
    Uses: lem-weil-pbc-adjunction-shift-compatibility-unique, lem-sf-triangulated-right-adjoint,
    lem-weil-pbc-site-r-module-presheaf-sheafification-exact, lem-sf-exact-functor-derived-
-   triangulated, lem-kun-grothendieck-derived-coproducts, lem-kun-derived-tensor-triangulated,
-   lem-kun-derived-tensor-direct-sums.
+   triangulated, lem-kun-grothendieck-derived-coproducts,
+   proposition-open-direct-image-preserves-finite, proposition-open-direct-image-preserves-finite.
 
 8. The projection isomorphism of step 4 is natural, unital and compatible with shifts in the
    coefficient variable $L$. For the proper factor this is the ringed-topos projection-mate
@@ -741,8 +742,8 @@ Proof (the complete ten-step proof of the DAG node):
    with $\epsilon_M$. The adjunction triangle identity says the transpose of $1_{GM}$ is
    $\epsilon_M$; hence $\alpha_{C,M}=1_{GM}$.
 
-   Uses: thm-amb-etale-exceptional-adjoint, lem-weil-pbc-adjunction-shift-compatibility-unique,
-   lem-kun-tensor-unit.
+   Uses: theorem-existence-exceptional-inverse-image--1,
+   lem-weil-pbc-adjunction-shift-compatibility-unique, lem-kun-tensor-unit.
 
 10. Fix $M$ and let $\mathcal L_M$ consist of the coefficient complexes $V$ for which
    $\alpha_{V,M}$ is invertible. It contains $C$ by step 9. Exactness of both functors and the
@@ -760,9 +761,9 @@ Proof (the complete ten-step proof of the DAG node):
    never to infer equality of transformations from their values on generators, and asserts no
    tensor formula for $G$ with a nonconstant sheaf complex.
 
-   Uses: lem-sf-generating-class-determination, lem-pc-derived-module-free-generation, lem-amb-
-   proper-coproducts-projection, lem-pur-etale-open-derived-tensor, thm-amb-etale-exceptional-
-   adjoint.
+   Uses: lemma-checking-isomorphisms-constructible-complexes--1,
+   lem-pc-derived-module-free-generation, lem-amb- proper-coproducts-projection,
+   lem-pur-etale-open-derived-tensor, thm-amb-etale-exceptional- adjoint.
 -/
 theorem exceptionalConstantTensor
     (k : Type u) [Field k] [IsAlgClosed k] (p ell : ℕ) [Fact p.Prime] [Fact ell.Prime]

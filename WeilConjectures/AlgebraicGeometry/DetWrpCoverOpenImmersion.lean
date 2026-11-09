@@ -21,11 +21,11 @@ The generic fibre of `Y₁ ⟶ X` is a single finite separable field extension o
 function field of `X`; the resulting normalization is finite over `X`, and `Y₁`
 embeds in it as an open subscheme.
 
-Source: blueprint lemma `det-wrp-cover-open-immersion`
+Source: blueprint lemma `lemma-geometric-coverings-normal-scheme--1`
 (literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-lattices/sk-lem-wrp-normal-geometric-cover/
 det-wrp-cover-open-immersion.md and its `.proof.md`), with Stacks Project Tags
-035B, 0AVK, 05K0 and 0AB1 (blueprint: det-wrp-cover-open-immersion).
+035B, 0AVK, 05K0 and 0AB1 (blueprint: lemma-geometric-coverings-normal-scheme--1).
 -/
 
 @[expose] public section
@@ -43,13 +43,13 @@ open Scheme
 /-- An étale connected component over a connected normal finite-type scheme is open in its
 finite generic normalization.
 
-Source: blueprint lemma `det-wrp-cover-open-immersion`
+Source: blueprint lemma `lemma-geometric-coverings-normal-scheme--1`
 (literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-lattices/sk-lem-wrp-normal-geometric-cover/
 det-wrp-cover-open-immersion.proof.md, both paragraphs, and
 sk-lem-wrp-normal-geometric-cover.proof.md, second and third paragraphs);
 Stacks Project Tags 035B, 0AVK, 05K0 and 0AB1
-(blueprint: det-wrp-cover-open-immersion).
+(blueprint: lemma-geometric-coverings-normal-scheme--1).
 
 Proof (the six steps of the node):
 1. `X` is finite type over a field, hence Noetherian
@@ -58,8 +58,9 @@ Proof (the six steps of the node):
    nonempty connectedness leaves one, so `X` is integral.
 2. Affine étale charts `Spec B ⟶ Spec A ⊆ X` of `Y₁` are Noetherian
    (`pqf-lem-affine-open-locnoeth`, `lem-weil-pbc-finite-type-algebra-noetherian`,
-   `lem-weil-pbc-finite-type-over-noetherian`); `lem-fin-etale-normal-components` gives
-   every point of `Y₁` a normal integral open neighbourhood (no quasi-compactness of `Y₁`).
+   `lem-weil-pbc-finite-type-over-noetherian`);
+   `proposition-proper-direct-image-finite-coefficients` gives every point of `Y₁` a normal integral
+   open neighbourhood (no quasi-compactness of `Y₁`).
 3. Hence `Y₁` is normal and reduced, its irreducible components are disjoint and open,
    and connectedness leaves one: `Y₁` is integral.
 4. The image of `p` is nonempty open (`lem-weil-pbc-etale-morphism-open-map`), so the

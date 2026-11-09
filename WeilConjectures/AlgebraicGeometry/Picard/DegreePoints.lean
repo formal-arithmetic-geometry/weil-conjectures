@@ -20,9 +20,9 @@ functor are the invertible modules of degree `d` on `X`. For `d = 0` this is
 
 - `AlgebraicGeometry.exists_picardDegree_equiv_picardFunctorDegree`: the bijection between the
   classes of degree `d` in `Pic X` and `Pic^d_{X/k}(k)` (blueprint
-  `thm-sc-theorem-of-the-base`).
+  `theorem-picard-scheme-jacobian-over-separably`).
 - `AlgebraicGeometry.theorem_of_the_base`: all clauses of the theorem of the base bundled in one
-  statement (blueprint `thm-sc-theorem-of-the-base`).
+  statement (blueprint `theorem-picard-scheme-jacobian-over-separably`).
 -/
 
 @[expose] public section
@@ -44,7 +44,7 @@ bijection onto `Pic^d_{X/k}(k)`. By the split exact sequence with `T = Spec k` a
 `Pic (Spec k) = 0`, `Pic_{X/k}(k) = Pic X`, and the sections of `Pic^d_{X/k}` are the sections of
 `Pic_{X/k}` of degree `d` (`AlgebraicGeometry.exists_picardFunctorDegreeι_app_eq`).
 
-(blueprint: `thm-sc-theorem-of-the-base`, the `k`-points of `Pic^d_{C/k}`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably`, the `k`-points of `Pic^d_{C/k}`) -/
 theorem exists_picardDegree_equiv_picardFunctorDegree [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (d : ℤ) :
@@ -133,7 +133,7 @@ This bundles `AlgebraicGeometry.isRepresentable_picardFunctor`,
 `AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree` and
 `AlgebraicGeometry.exists_picardDegree_equiv_picardFunctorDegree`.
 
-(blueprint: `thm-sc-theorem-of-the-base`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably`) -/
 theorem theorem_of_the_base [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] :

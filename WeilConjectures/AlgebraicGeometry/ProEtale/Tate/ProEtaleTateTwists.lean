@@ -130,7 +130,7 @@ import WeilConjectures.AlgebraicGeometry.Sp.SpQbarRootBasis
 
 /-! # Common local bases for the constructed Tate twists
 
-Source: the common-root calculation in blueprint `sk-def-sp-tate-twist`.
+Source: the common-root calculation in blueprint `definition-tate-twists`.
 The coefficient objects and their normalized transitions are publicly re-exported
 from `ProEtaleTateTwistConstructions`; no construction is changed.
 -/
@@ -157,7 +157,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 set_option backward.isDefEq.respectTransparency false in
 /-- A single pro-etale covering carries compatible root generators and trivializes
 all the constructed integral, rational and algebraic-closure coefficient lines.
-Source: blueprint common-cover and slice-site paragraphs (blueprint: sk-def-sp-tate-twist).
+Source: blueprint common-cover and slice-site paragraphs (blueprint: definition-tate-twists).
 Proof: take the compatible-root cover from clause 1 of the recorded local-freeness
 theorem. The displayed root-module isomorphisms have its normalized generator formula.
 For each E and each positive quotient, tensor this formula with B_E,n; the same
@@ -219,14 +219,14 @@ theorem spTwists_commonCover
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed integral, rational and sheafified-colimit lines are locally free
 of rank one over their respective pulled-back condensed coefficient rings.
-Source: blueprint local-generator paragraph (blueprint: sk-def-sp-tate-twist).
-Proof: use clauses 1 and 2 of det-def-sp-tate-twist-locally-free to choose one
+Source: blueprint local-generator paragraph (blueprint: definition-tate-twists).
+Proof: use clauses 1 and 2 of definition-tate-twists to choose one
 pro-etale cover and compatible root generators. At each positive quotient level,
 a maps to a tensor zeta_n is a free rank-one trivialization. They commute with
 root powers and coefficient reduction. On the slice site, take their sectionwise
 inverse limits. The cofinal ell-power form of the integral coefficient comparison
 identifies the coefficient limit with O_E,X; if ell=v*pi^e then the indices e*n
-are cofinal. Extend scalars to E_X using det-prop-sfb-qlbar-colimit-x-invert-ell.
+are cofinal. Extend scalars to E_X using lemma-comparison-completed-coefficients--2.
 The same zeta_n work for every E, so these maps commute with all finite-extension
 transitions. Their sheafified colimit is the unit over Qbar_X, since p_X^* preserves
 the finite-subextension coefficient colimit. Limits and sheafification restrict to

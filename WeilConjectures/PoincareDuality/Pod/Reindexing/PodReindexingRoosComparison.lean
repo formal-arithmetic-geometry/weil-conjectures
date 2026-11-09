@@ -164,7 +164,7 @@ theorem podReindexingRoosNaturality (F : A ⥤ B) [F.Additive]
 
 /-- The projection-normalized Roos map of an additive product-preserving equivalence
 is an isomorphism on arbitrary strict towers.
-Source: Stacks 0941, blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: Stacks 0941, blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-reindexing-roos-comparison).
 
 Proof: use scalarRoosMap, which is uniquely specified by both cocone coordinates

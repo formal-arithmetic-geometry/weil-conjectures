@@ -10,7 +10,7 @@ import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationMo
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -107,7 +107,7 @@ private theorem identity_restriction_section (W : Scheme.{u})
       (M.val.congr_map_apply hpair x)
 
 /-- The restricted-system identity agrees with the ordinary degreewise relabelling.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03D6 and 0941 (blueprint: lem-pod-identity-restricted-tower).
 
 Proof: on each restricted section generator, RestrictedGenerators and the unit

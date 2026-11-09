@@ -42,8 +42,8 @@ and the linear differentials form a set. Isomorphic complexes give isomorphic de
 objects, yielding a set of representatives on `W`.
 2. For `W = U ∪ V`, with `U` quasi-compact and `V` affine, assume sets of perfect
 representatives on `U`, `V`, and `U ∩ V`. Restrictions remain perfect by
-`def-pc-perfect-complex`. The quasi-compact opens of a qcqs scheme meet the hypotheses
-of `lem-pc-derived-mayer-vietoris-triangle`: its other two terms are the direct sum
+`lemma-coherent-base-change-invertible-sheaves--1`. The quasi-compact opens of a qcqs scheme meet
+the hypotheses of `lem-pc-derived-mayer-vietoris-triangle`: its other two terms are the direct sum
 of the derived direct images from `U` and `V`, and the derived direct image from `U ∩ V`.
 Choose representatives of the three restrictions and transport the second triangle map
 along their isomorphisms. For each triple the possible maps form a set. The original

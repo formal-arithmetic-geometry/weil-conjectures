@@ -48,7 +48,7 @@ carries injective resolutions to injective resolutions, and its unit identifies 
 global-section complexes.
 (4) `lem-weil-pbc-inverse-image-composition` gives the identity and composition
 isomorphisms, compatibly with the adjunction units. Clause 4 of
-`lem-weil-pbc-cohomology-pullback-functorial` gives the displayed cohomology equations.
+`proposition-cohomology-p-1-over-henselian--1` gives the displayed cohomology equations.
 (5) `lem-weil-pbc-universal-homeomorphism-base-change` makes the base-changed morphism
 a universal homeomorphism. Applying the composition isomorphisms to the two
 factorizations of the cartesian square gives the inverse-image square. Inserting the

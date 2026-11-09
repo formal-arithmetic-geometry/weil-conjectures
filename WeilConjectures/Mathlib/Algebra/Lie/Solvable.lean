@@ -28,7 +28,7 @@ The blueprint subsection `det-d-lie` consists of definitions and facts already i
 * `def-wf-semisimple-lie-algebra`: `LieAlgebra.HasTrivialRadical`;
 * `def-wf-lie-radical-centre`: `LieAlgebra.radical`, `LieAlgebra.center`, and
   `LieAlgebra.HasCentralRadical`; the Killing form is `killingForm`;
-* `lem-wf-sum-of-solvable-ideals`: `LieAlgebra.isSolvableAdd`.
+* `proposition-lie-algebras-faithful-semisimple-representation--1`: `LieAlgebra.isSolvableAdd`.
 
 `LieAlgebra.map_radical` implements `rem-ptr-wf-lie-radical-centre-3`.
 -/

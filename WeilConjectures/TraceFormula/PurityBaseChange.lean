@@ -26,8 +26,9 @@ of separated `k`-schemes of finite type, the pullback along `g'` of the purity m
 `Lg'^* Rf^! K ⟶ Rf'^! Lg^* K`, is the purity map `γ_{f', Lg^* K}` precomposed with the exceptional
 base change map at the unit `Lg'^* Rf^! ℚ̄_ℓ ⟶ Rf'^! ℚ̄_ℓ`
 (`ProEtale.CondensedRing.map_upperShriekUnitTensorMap_comp_upperShriekBaseChange`; blueprint
-`sk-prop-cohsm`, compatibility of (G11) with (G12), and `det-sp-purity-bc-factors` (2)). This is a
-formal consequence of the compatibility of the projection formula with base change
+`proposition-exceptional-inverse-image-smooth-morphism`, compatibility of (G11) with (G12), and
+`proposition-compatibility-purity-base-change` (2)). This is a formal consequence of the
+compatibility of the projection formula with base change
 (`ProEtale.CondensedRing.pfBaseChange_boundedConstructibleExceptionalProjection`).
 
 Consequently, if the purity maps of `f` and `f'` are isomorphisms and the exceptional base change
@@ -60,11 +61,12 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **The purity map is compatible with base change** (blueprint `sk-prop-cohsm`, compatibility of
-(G11) with (G12); `det-sp-purity-bc-factors` (2)): for a cartesian square, the pullback along `g'`
-of the purity map `γ_{f,K}` followed by the exceptional base change map is the tensor structure
-of `Lg'^*`, the pullback comparison `Lg'^* Lf^* ≅ Lf'^* Lg^*`, the exceptional base change map at
-the unit (followed by `Lg^* ℚ̄_ℓ ≅ ℚ̄_ℓ`), and the purity map `γ_{f', Lg^* K}`. -/
+/-- **The purity map is compatible with base change** (blueprint
+`proposition-exceptional-inverse-image-smooth-morphism`, compatibility of (G11) with (G12);
+`proposition-compatibility-purity-base-change` (2)): for a cartesian square, the pullback along `g'`
+of the purity map `γ_{f,K}` followed by the exceptional base change map is the tensor structure of
+`Lg'^*`, the pullback comparison `Lg'^* Lf^* ≅ Lf'^* Lg^*`, the exceptional base change map at the
+unit (followed by `Lg^* ℚ̄_ℓ ≅ ℚ̄_ℓ`), and the purity map `γ_{f', Lg^* K}`. -/
 theorem map_upperShriekUnitTensorMap_comp_upperShriekBaseChange (sq : IsPullback g' f' f g)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
@@ -102,10 +104,11 @@ theorem map_upperShriekUnitTensorMap_comp_upperShriekBaseChange (sq : IsPullback
     (upperShriekBaseChange ℓ sq (𝟙_ _)) (Equiv.symm_apply_apply _ _)
   h
 
-/-- **Base change of `Rf^!` from base change at the unit** (blueprint `sk-prop-sp-purity-bc`,
-"tensor map" step, `det-sp-purity-bc-factors` (2)): if the purity maps `γ_{f,K}` and
-`γ_{f', Lg^* K}` are isomorphisms and the exceptional base change map is an isomorphism at the
-unit, then the exceptional base change map `Lg'^* Rf^! K ⟶ Rf'^! Lg^* K` is an isomorphism. -/
+/-- **Base change of `Rf^!` from base change at the unit** (blueprint
+`proposition-compatibility-purity-base-change`, "tensor map" step,
+`proposition-compatibility-purity-base-change` (2)): if the purity maps `γ_{f,K}` and
+`γ_{f', Lg^* K}` are isomorphisms and the exceptional base change map is an isomorphism at the unit,
+then the exceptional base change map `Lg'^* Rf^! K ⟶ Rf'^! Lg^* K` is an isomorphism. -/
 theorem isIso_upperShriekBaseChange_of_isIso_unit (sq : IsPullback g' f' f g)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     [IsIso (upperShriekUnitTensorMap ℓ f K)]

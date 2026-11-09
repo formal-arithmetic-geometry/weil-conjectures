@@ -34,7 +34,7 @@ RΓ(Y, N) ──▶ N_s̄
 
 whose right arrow, the specialization map, is an isomorphism because the cohomology sheaves of
 `N` are locally constant on the strictly local scheme `Y_(s̄)`, which lies over `Y - z`. Hence the
-upper arrow is zero (blueprint `sk-lem-tf-transverse-boundary`, last step).
+upper arrow is zero (blueprint `lemma-cohomology-near-two-transverse-divisors`, last step).
 
 ## Main statements
 
@@ -136,11 +136,12 @@ theorem rightDerivedGlobalSections_map_unit_eq_zero_of_apply_eq {Y : Scheme.{u}}
   · exact isIso_rightDerivedGlobalSections_map_unit_of_isIso _ a _ fun n ↦
       isIso_globalSectionsUpperStarMap_of_isSepClosed a _
 
-/-- **Vanishing of restriction maps by generization** (blueprint `sk-lem-tf-transverse-boundary`,
-the generization square): let `Y` be an irreducible scheme, `z` a closed point of `Y` and
-`N ∈ D(Y_ét, Λ)` such that `N_z̄ = 0` for the geometric points `z̄` over `z` and the restriction
-of `N` to `Y - z` has locally constant cohomology sheaves. Then for every geometric point `s̄`
-of `Y` not over `z`, the restriction map `RΓ(Y, N) ⟶ N_s̄` is zero. -/
+/-- **Vanishing of restriction maps by generization** (blueprint
+`lemma-cohomology-near-two-transverse-divisors`, the generization square): let `Y` be an irreducible
+scheme, `z` a closed point of `Y` and `N ∈ D(Y_ét, Λ)` such that `N_z̄ = 0` for the geometric points
+`z̄` over `z` and the restriction of `N` to `Y - z` has locally constant cohomology sheaves. Then
+for every geometric point `s̄` of `Y` not over `z`, the restriction map `RΓ(Y, N) ⟶ N_s̄` is
+zero. -/
 theorem derivedGlobalSectionsRestriction_eq_zero_of_isZero_of_isLocallyConstant
     {Y : Scheme.{u}} [IrreducibleSpace Y] (z : Y) (hz : IsClosed ({z} : Set Y))
     (N : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

@@ -657,7 +657,7 @@ along its inverse; constants represented by integers act by integer multiples. T
 constant class of `N` is zero, so `N` kills every section of the inverse image. The
 unique constant `Z/N` action on torsion sheaves is therefore this transported action.
 An additive root comparison is linear for these actions by
-`lem-pur-torsion-sheaf-constant-module`.
+`definition-tate-twists`.
 Substitution of `c(a)` gives semilinearity for every local scalar, including nonconstant
 ones. (3) Use `lem-weil-proetale-isomorphism-inverse-image`: for an isomorphism the
 distinguished comma object `(u,id)` computes inverse

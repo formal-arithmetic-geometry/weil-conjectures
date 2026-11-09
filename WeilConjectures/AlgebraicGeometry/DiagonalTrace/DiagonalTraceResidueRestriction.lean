@@ -241,7 +241,7 @@ private theorem restrictionFunctor_exact :
 /-- Restriction from the finite integral coefficients to discrete p-adic scalars.
 
 Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-finite scalar restriction, and `det-sp-coefficient-towers-abelian`.
+finite scalar restriction, and `prose-09-21`.
 (blueprint: lem-sfb-diagonal-trace-residue-restriction).
 
 Proof: at level n, restrict the finite coefficient action along the ring map

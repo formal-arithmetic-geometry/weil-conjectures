@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-formal-closed-support,
 det-lem-formal-closed-support-derived.md, clauses (1)--(3); Stacks Project, Tag 079P
-(blueprint: det-lem-formal-closed-support-derived).
+(blueprint: lemma-sections-support-closed-subscheme).
 -/
 
 @[expose] public noncomputable section
@@ -141,35 +141,35 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- Derived adjunction, global RHom, injective-unit surjectivity, and the natural support
 triangle and fibre formula, using exactly the kernel functor of the sheaf-support node.
-Source: blueprint main-20261015, det-lem-formal-closed-support-derived, clauses (1)--(3)
-(blueprint: det-lem-formal-closed-support-derived).
+Source: blueprint main-20261015, lemma-sections-support-closed-subscheme, clauses (1)--(3)
+(blueprint: lemma-sections-support-closed-subscheme).
 
 Proof plan:
 1. Finite type over the standing field gives a finite cover by Noetherian affine charts
-   (lem-wf-affine-noetherian-components). Every open is quasi-compact, hence j is
+   (lemma-sections-support-closed-subscheme). Every open is quasi-compact, hence j is
    quasi-compact and X is quasi-separated. These are consequences, not extra hypotheses.
-2. The sheaf adjunction and exact i_* are det-lem-formal-closed-support-sheaves.
+2. The sheaf adjunction and exact i_* are lemma-sections-support-closed-subscheme--1.
    The exact-left-adjoint derived adjunction is adj.mapDerivedCategoryRightDerivedAdjunction.
    On a K-injective I the total right derived functor is computed by H(I), via
-   Functor.rightDerivedFunctorObjQIso. The universal pair of def-sfb-right-derived-functor
+   Functor.rightDerivedFunctorObjQIso. The universal pair of lemma-sections-support-closed-subscheme
    agrees with this pair by its unit-compatible uniqueness. Apply the sheaf adjunction
    componentwise to the Hom complexes: naturality intertwines their two differentials.
    Both I and H(I) are K-injective, giving the displayed global RHom isomorphism.
-3. Clause (3) of det-lem-formal-closed-support-adjunction gives the epimorphic open unit
+3. Clause (3) of lemma-sections-support-closed-subscheme gives the epimorphic open unit
    on injectives, after the canonical coefficient-transport comparison. Equivalently,
    extend j_!j^*I -> I along the monomorphism j_!j^*I -> j_*j^*I by injectivity;
    open full faithfulness makes the extension a section of the unit.
-4. Ring-sheaf modules are Grothendieck; lem-pur-kinjective-degreewise-existence resolves
+4. Ring-sheaf modules are Grothendieck; lemma-sections-support-closed-subscheme resolves
    every unbounded complex by a K-injective complex with injective terms. Exact j_! is
    left adjoint to j^*, so j^* preserves K-injectives. The kernel identification and
    step 3 give a natural degreewise short exact sequence i_*H(I) -> I -> j_*j^*I.
-5. Apply lem-weil-pbc-complex-ses-triangle. Exact i_* computes its derived action.
+5. Apply lemma-sections-support-closed-subscheme. Exact i_* computes its derived action.
    The termwise homotopy adjunction and the Hom bijection into K-injectives show that
    its second arrow is precisely the derived unit. Chain maps between resolutions
    represent all derived morphisms; additive functors preserve homotopies. Therefore
    the connecting arrows descend to the natural transformation delta in the statement.
 6. Rotate the distinguished triangle and compare it with the cone triangle of this
-   unit. TR3 and lem-sf-triangle-morphism-iso identify i_*RH(K) with its shifted cone.
+   unit. TR3 and lemma-sections-support-closed-subscheme identify i_*RH(K) with its shifted cone.
    Apply exact i^* and its counit i^*i_* = id, giving the fibre formula. This uses the
    actual unit on I, not a functorial cone chosen in an arbitrary triangulated category.
 

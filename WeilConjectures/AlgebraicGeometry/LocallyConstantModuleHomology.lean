@@ -12,8 +12,8 @@ import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Homology of locally constant module-valued cochains
 
-Source: blueprint `sk-prop-integral-local-structure`, Compatible isomorphisms,
-identification of constant quotient cohomology and its sections.
+Source: blueprint `proposition-local-structure-integral-constructible-complexes`, Compatible
+isomorphisms, identification of constant quotient cohomology and its sections.
 -/
 
 @[expose] public noncomputable section

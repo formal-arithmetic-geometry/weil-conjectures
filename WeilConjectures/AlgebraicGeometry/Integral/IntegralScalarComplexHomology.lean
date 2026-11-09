@@ -23,7 +23,7 @@ import Mathlib.LinearAlgebra.FreeModule.PID
 
 /-! # Finite presentations of scalar-complex cohomology
 
-Source: current blueprint sk-prop-integral-criterion, (3) implies (1).
+Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1).
 -/
 
 @[expose] public noncomputable section
@@ -102,7 +102,7 @@ private theorem continuous_kernel_free
 
 /-- A complex of finite free continuous modules over a scalar PID has finitely
 presented cohomology. This includes torsion cohomology and rank-zero terms.
-Source: current blueprint sk-prop-integral-criterion, (3) implies (1)
+Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1)
 (blueprint: lem-sfb-integral-scalar-complex-homology).
 
 Proof: maps of finite free continuous modules are scalar matrices. Realize the

@@ -36,7 +36,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- An affine étale presentation with an affine vertex in the pro-étale site.
 The universal property is taken in all schemes over `X`, not just in the site.
 Source: current blueprint, continuity-map detail, clause 1
-(blueprint: det-pe-classical-definition-continuity-map). -/
+(blueprint: definition-classical-pro-etale-sheaves--1). -/
 structure AffinePresentation (X : Scheme.{u}) (I : Type (u + 1))
     [SmallCategory I] [IsCofiltered I] where
   diagram : I ⥤ X.ProEt
@@ -65,7 +65,7 @@ def sectionCocone {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
 
 /-- The canonical map out of the chosen colimit, retaining the presentation.
 Source: current blueprint, continuity-map detail, clause 2; Stacks, Categories, Tag 002F
-(blueprint: det-pe-classical-definition-continuity-map). -/
+(blueprint: definition-classical-pro-etale-sheaves--1). -/
 noncomputable def continuityMap {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
     [IsCofiltered I] (P : AffinePresentation X I)
     {C : Type uC} [Category.{vC} C] (F : X.ProEtᵒᵖ ⥤ C)
@@ -93,7 +93,7 @@ theorem continuityMap_natural {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory
 
 /-- A set sheaf is classical when every affine presentation gives a bijective map.
 Source: current blueprint, continuity-map detail, clause 3
-(blueprint: det-pe-classical-definition-continuity-map). -/
+(blueprint: definition-classical-pro-etale-sheaves--1). -/
 def IsClassical {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) : Prop :=
   ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]

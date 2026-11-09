@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 
 For an open immersion `j : U ⟶ X`, the extension by zero `j_!` of étale sheaves of `Λ`-modules
 and of abelian groups are compatible with the forgetful functor from `Λ`-modules to abelian
-groups (blueprint `det-tf-transverse-corner-vanishing`, forgetting `Λ`).
+groups (blueprint `lemma-cohomology-near-two-transverse-divisors--1`, forgetting `Λ`).
 
 ## Main definitions
 

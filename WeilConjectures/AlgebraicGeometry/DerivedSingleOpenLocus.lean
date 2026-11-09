@@ -50,8 +50,8 @@ private theorem isZero_restrict_union {T : Scheme.{u}} (M : T.Modules)
 /-- A connective derived object locally concentrated in one finite locally free degree
 on a set of points is a flat single object on an open neighbourhood of that set.
 
-Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph; the first
-step of lem-pc-derived-pullback-single-cohomology.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, cohomology-sheaf gluing
+paragraph; the first step of lem-pc-derived-pullback-single-cohomology.
 (blueprint: lem-pc-derived-single-open-locus).
 
 Proof: take W to be the union of all opens satisfying the local hypothesis. Every point

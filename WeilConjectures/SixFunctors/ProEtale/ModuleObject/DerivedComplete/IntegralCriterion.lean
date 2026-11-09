@@ -14,12 +14,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstru
 # The integral constructibility criterion
 
 Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E`, uniformizer `ϖ` and
-residue field `𝔽_E`, and `X` a noetherian scheme. Blueprint `sk-prop-integral-criterion` (section
-`sec-proetale-coefficients`) characterizes the bounded constructible `𝒪_E`-complexes on
-`X_proét`: a complex `K` is bounded constructible if and only if it is derived complete and its
-first derived reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is a bounded constructible complex of
-`𝔽_E`-sheaves (Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11; Stacks,
-Tag 09C7).
+residue field `𝔽_E`, and `X` a noetherian scheme. Blueprint
+`proposition-integral-constructibility-criterion` (section `chap-The-pro-etale-site`) characterizes
+the bounded constructible `𝒪_E`-complexes on `X_proét`: a complex `K` is bounded constructible if
+and only if it is derived complete and its first derived reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is
+a bounded constructible complex of `𝔽_E`-sheaves (Bhatt–Scholze, *The pro-étale topology for
+schemes*, Proposition 6.8.11; Stacks, Tag 09C7).
 
 The implication (1) ⇒ (2) is proved:
 `ProEtale.derivedCompleteIntegers_of_boundedConstructible` and
@@ -349,10 +349,10 @@ lemma boundedConstructible_of_derivedCompleteIntegers_of_amplitude [IsNoetherian
     · exact isConstructibleModuleObject_of_isZero _ (hK₀ i hi)
   | succ m ih => exact boundedConstructible_of_derivedCompleteIntegers_succ m ih K b hK h₁ hb
 
-/-- Blueprint `sk-prop-integral-criterion` (section `sec-proetale-coefficients`), implication
-(2) ⇒ (1): on a noetherian scheme `X`, a derived complete complex `K` of `𝒪_{E,X}`-module
-objects whose first derived reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` lies in `Dᵇc(X, 𝔽_E)` is
-bounded constructible (Bhatt–Scholze, Proposition 6.8.11). -/
+/-- Blueprint `proposition-integral-constructibility-criterion` (section `chap-The-pro-etale-site`),
+implication (2) ⇒ (1): on a noetherian scheme `X`, a derived complete complex `K` of
+`𝒪_{E,X}`-module objects whose first derived reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` lies in
+`Dᵇc(X, 𝔽_E)` is bounded constructible (Bhatt–Scholze, Proposition 6.8.11). -/
 theorem boundedConstructible_of_derivedCompleteIntegers {X : Scheme.{u}} [IsNoetherian X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}

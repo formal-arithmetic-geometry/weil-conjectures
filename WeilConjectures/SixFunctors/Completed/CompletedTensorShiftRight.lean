@@ -32,7 +32,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 /-! # Right shifts of the completed integral tensor
 
 Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4), and the last sentence
-of the main-20261015 blueprint proof of `lem-sf-twist-interchange`;
+of the main-20261015 blueprint proof of `theorem-poincare-duality--2`;
 Stacks Project, Tags 011G, 012Z, 014E and 08TC
 (blueprint: lem-sf-completed-tensor-shift-right).
 

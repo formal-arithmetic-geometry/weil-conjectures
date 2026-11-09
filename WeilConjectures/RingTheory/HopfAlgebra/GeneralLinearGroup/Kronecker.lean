@@ -24,7 +24,7 @@ square of the generic matrix.
 ## Blueprint
 
 `Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_kroneckerHom` is part of
-`sk-i-restriction`.
+`lemma-restriction-normal-subgroup`.
 -/
 
 @[expose] public section
@@ -35,7 +35,7 @@ variable {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [Field k]
 
 /-- The Kronecker square `g ↦ g ⊗ₖ g : GL n k →* GL (n × n) k` is given by polynomials: there is
 an algebra map `φ` of coordinate rings with `evalAlgHom (g ⊗ₖ g) = evalAlgHom g ∘ φ`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem exists_algHom_comp_eq_evalAlgHom_kroneckerHom :
     ∃ φ : CoordinateRing (n × n) k →ₐ[k] CoordinateRing n k,
       ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (kroneckerHom (g, g)) := by

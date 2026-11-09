@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyKFlatResolution
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
+def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
 
 The supported exterior product κ is the unique morphism normalized on K-flat representatives
 and injective support resolutions by `IsResolutionSupportedExteriorProduct`.
@@ -35,7 +35,7 @@ section Derived
 
 /-- The direct supported-section pairing has a unique derived extension with its
 K-flat/injective-resolution normalization. Source: the nested blueprint unit cited
-above (blueprint: def-pur-supported-exterior-product).
+above (blueprint: proposition-purity-vector-bundles).
 Proof: choose K-flat representatives of the two inputs, resolve supported sections by
 injectives, and totalize the ordinary pairing. The kernel vanishing on the two pulled-back
 complements makes its target the product-support complex. The usual resolution comparison
@@ -89,7 +89,7 @@ of pullback and tensor of supported sections, normalized on K-flat representativ
 and injective support resolutions. Source: literature/blueprint/latest/blueprint/
 part-duality-trace-formula/sec-smooth-purity/sec-the-trace-map-of-affine-space/
 sk-prop-an/def-pur-supported-exterior-product.md
-(blueprint: def-pur-supported-exterior-product). -/
+(blueprint: proposition-purity-vector-bundles). -/
 noncomputable def resolutionSupportedExteriorProduct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (k : Type u) [Field k] [IsAlgClosed k]
@@ -109,7 +109,7 @@ noncomputable def resolutionSupportedExteriorProduct
   (existsUnique_resolutionSupportedExteriorProduct A k f g i j K L hF).exists.choose
 
 /-- The representative characterization of κ. Source: the nested blueprint unit cited
-above (blueprint: def-pur-supported-exterior-product).
+above (blueprint: proposition-purity-vector-bundles).
 Proof: take the normalized element of the unique-existence theorem used in the definition. -/
 theorem resolutionSupportedExteriorProduct_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -128,7 +128,7 @@ theorem resolutionSupportedExteriorProduct_normalization
 
 /-- Forgetting the output support after κ is the ordinary exterior product after
 forgetting both input supports. Source: the nested blueprint unit cited above
-(blueprint: def-pur-supported-exterior-product).
+(blueprint: proposition-purity-vector-bundles).
 Proof: the ordinary kernel lift followed by its inclusion is the pullback and tensor
 of sections. The same equality holds on every bidegree of the signed total complexes.
 Apply the K-flat tensor localization and the injective-resolution units to this identity.

@@ -15,7 +15,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionF
 
 Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ`. This file deduces proper base change and the
 proper projection formula for bounded constructible `E`-complexes from the integral statements
-(blueprint `det-thm-sfb-proper-base-change-rational` (3), for `Λ = E`):
+(blueprint `proposition-proper-direct-image-constructible-complexes` (3), for `Λ = E`):
 
 * `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicSubfield_of_isProper`: for a cartesian
   square `g' ≫ p = p' ≫ g` with `p` proper over noetherian bases over fields in which `ℓ` is
@@ -99,12 +99,12 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- **The projection formula for `E`** (blueprint `det-thm-sfb-proper-base-change-rational` (3),
-for `Λ = E`): for a proper `p : X ⟶ Y` and bounded constructible `E`-complexes `K` on `X` and
-`M` on `Y`, the projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. The
-complexes have integral models `E ⊗ᴸ_{𝒪_E} K₀` and `E ⊗ᴸ_{𝒪_E} M₀`
-(`exists_derivedExtendScalars_iso_integralModel`), at which the projection map is invertible
-since the integral one is at `(K₀, M₀)`
+/-- **The projection formula for `E`** (blueprint
+`proposition-proper-direct-image-constructible-complexes` (3), for `Λ = E`): for a proper
+`p : X ⟶ Y` and bounded constructible `E`-complexes `K` on `X` and `M` on `Y`, the projection map
+`Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. The complexes have integral models
+`E ⊗ᴸ_{𝒪_E} K₀` and `E ⊗ᴸ_{𝒪_E} M₀` (`exists_derivedExtendScalars_iso_integralModel`), at which the
+projection map is invertible since the integral one is at `(K₀, M₀)`
 (`isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible`,
 `isIso_projectionMap_app_app_padicSubfield_of_padicIntegers`). -/
 theorem isIso_projectionMap_continuousMapRingObj_of_boundedConstructible

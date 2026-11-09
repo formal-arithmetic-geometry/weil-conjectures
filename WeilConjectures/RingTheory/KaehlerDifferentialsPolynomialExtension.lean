@@ -20,7 +20,7 @@ import Mathlib.LinearAlgebra.StdBasis
 # Kähler differentials of a polynomial algebra over an algebra
 
 Source: Stacks Project, Algebra, Tags 00RS, 00RV and 00RX
-(blueprint: lem-weil-pbc-kahler-differentials-polynomial-extension).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -37,7 +37,7 @@ namespace KaehlerDifferential
 its finite free rank consequence. Source: Stacks Project, Algebra, Tags 00RS
 (`lemma-exact-sequence-differentials`), 00RV (`lemma-differentials-base-change`), and
 00RX (`lemma-differentials-polynomial-ring`)
-(blueprint: lem-weil-pbc-kahler-differentials-polynomial-extension).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof:
 Write `B = A[z₁, …, zₑ]`, `u = mapBaseChange R A B`, and `v = map R A B B`.

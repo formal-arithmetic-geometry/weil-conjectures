@@ -76,7 +76,7 @@ Lemma Tag 07EC for the bound on the lifted map.
 (blueprint: lem-weil-pbc-field-cohen-power-series-formally-smooth)
 
 Proof:
-1. Unpack def-weil-pbc-formally-smooth-adic: every ring is uniquely a `ℤ`-algebra,
+1. Unpack theorem-finite-etale-covers-proper-henselian--2: every ring is uniquely a `ℤ`-algebra,
    and its `ℤ`-algebra maps are precisely ring maps (def-weil-pbc-algebra-hom-quotient).
 2. In the Cohen case, apply clause (2) of
    lem-weil-pbc-power-series-cohen-formally-smooth-adic to the square-zero test datum,
@@ -90,7 +90,7 @@ Proof:
    it is in particular a ring homomorphism over `ℤ`.
 5. If `g` kills `m ^ r`, every lift sends `m ^ r` into `J`. Since
    `m ^ (2 * r) = m ^ r * m ^ r`, it sends this ideal into `J ^ 2 = 0`.
-   This also supplies continuity, as in def-weil-pbc-formally-smooth-adic. -/
+   This also supplies continuity, as in theorem-finite-etale-covers-proper-henselian--2. -/
 theorem field_cohen_power_series_formally_smooth
     {Λ : Type u} [CommRing Λ] (n : ℕ) (m : Ideal (MvPowerSeries (Fin n) Λ))
     (hΛ : (IsField Λ ∧ CharZero Λ ∧

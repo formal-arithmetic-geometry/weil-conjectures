@@ -61,12 +61,12 @@ Source: Stacks Project, Tag 09M4, spectral sequence in the proof
 
 Proof (the three steps of the node):
 1. On affine opens, represent `P` by a bounded strictly perfect complex `Q`
-   (def-pc-perfect-complex). Its terms are flat (def-pc-flat-sheaf-modules), so it is
-   K-flat (lem-pc-bounded-above-flat-kflat, def-pc-kflat-complex). Restriction commutes
-   with tensor and preserves K-flatness, using exact extension by zero for the latter.
-   Hence `P ⊗ᴸ L` is represented locally by the total tensor of `Q` with a representative
-   of `L` (def-pc-tensor-complex-sheaves). The Tor-amplitude hypothesis gives
-   `H^p(Q ⊗ H^q(L)) = 0` whenever `p` is outside `[a,b]`.
+   (lemma-coherent-base-change-invertible-sheaves--1). Its terms are flat
+   (def-pc-flat-sheaf-modules), so it is K-flat (lem-pc-bounded-above-flat-kflat,
+   def-pc-kflat-complex). Restriction commutes with tensor and preserves K-flatness, using exact
+   extension by zero for the latter. Hence `P ⊗ᴸ L` is represented locally by the total tensor of
+   `Q` with a representative of `L` (def-pc-tensor-complex-sheaves). The Tor-amplitude hypothesis
+   gives `H^p(Q ⊗ H^q(L)) = 0` whenever `p` is outside `[a,b]`.
 2. Filter the total tensor by `Q`-degree. The filtration is finite since `Q` is bounded.
    The filtered-complex spectral sequence (thm-sp-spectral-object-yields) has
    `E₁^{p,q} = Q^p ⊗ H^q(L)` by flatness, and its differential comes from `Q`, giving

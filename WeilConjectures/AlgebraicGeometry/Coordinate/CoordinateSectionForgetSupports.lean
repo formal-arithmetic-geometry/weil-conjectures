@@ -18,7 +18,7 @@ import all WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
 
 /-! Compactification-level compositor and forget-supports calculation.
-Source: blueprint latest, rank-one proof of cor-pur-affine-space-zero-section-purity;
+Source: blueprint latest, rank-one proof of proposition-purity-vector-bundles;
 compatible-tower calculation as in the first triangle of thm-amb-p1-adjunction.proof.md.
 (blueprint: lem-pur-coordinate-section-forget-supports)
 -/

@@ -51,7 +51,7 @@ Source: Stacks Project, Tag 008A (blueprint: lem-pc-module-change-of-rings-adjun
 Proof: (1) Apply the sectionwise tensor adjunction and compatibility with restrictions
 (`lem-pc-presheaf-change-of-rings-adjunction`, Tag 006R) to obtain the natural presheaf
 hom bijection. The right-hand homs are sheaf homs since both modules are sheaves
-(`def-weil-sheaf-of-modules-category`). (2) Apply the sheafification universal property
+(`situation-conventions`). (2) Apply the sheafification universal property
 (`def-weil-presheaf-modules-sheafification`, Tag 0089) to the presheaf of tensors
 (`def-pur-sheaf-tensor-product`). Since the target is a sheaf, precomposition with the
 sheafification unit is a bijection. (3) Compose these natural bijections. They send `u`

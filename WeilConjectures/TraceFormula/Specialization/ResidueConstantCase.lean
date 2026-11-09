@@ -20,7 +20,7 @@ the coordinate back to a uniformizer of the discrete valuation ring `𝒪_{X,ζ}
 field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`, the restricted specialization `Le^* Ψ_X(j_! 𝔽_E)`
 vanishes near `ζ`
 (`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer`).
-This is blueprint `det-sp-generic-divisor-constant` with coefficients `𝔽_E`.
+This is blueprint `lemma-vanishing-generic-points-principal-divisor` with coefficients `𝔽_E`.
 
 The proof is that of the `ℚ̄_ℓ` case (`GenericDivisorConstantCase.lean`), with coefficients in a
 finite ring `T` killed by `ℓ`:
@@ -131,7 +131,7 @@ variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k'] {X X' : 
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
 
 /-- **Proper exchange for the defect, with finite coefficients** (blueprint
-`det-sp-defect-proper-smooth`, proper case): for `f : X' ⟶ X` proper and a complex `L'` of étale
+`lemma-base-change-cone-x-z`, proper case): for `f : X' ⟶ X` proper and a complex `L'` of étale
 origin on `X'`, `C_{X,Z}(Rf_* L') ≅ Rf_{Z*} C_{X',Z'}(L')`. The pushforward exchanges of the
 deformations of `f` and `f_Z` are invertible by the proper exchange of nearby cycles with finite
 coefficients, and the base change morphisms of the squares of the centres and of the zero sections
@@ -186,7 +186,7 @@ theorem nonempty_specializationDefect_lowerStar_iso_finiteCoefficient (f : X' �
 variable (X) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
 
 /-- **The defect kills complexes of étale origin supported on the centre, with finite
-coefficients** (blueprint `det-sp-defect-closed-vanishing`): `C_{X,Z}(Ri_* M) = 0` for `M` of
+coefficients** (blueprint `lemma-base-change-cone-x-z`): `C_{X,Z}(Ri_* M) = 0` for `M` of
 étale origin on `Z`, by the proper exchange for the closed immersion `i` and the vanishing of the
 defect of the zero ideal. -/
 theorem isZero_specializationDefect_lowerStar_centreι_finiteCoefficient
@@ -203,7 +203,7 @@ theorem isZero_specializationDefect_lowerStar_centreι_finiteCoefficient
     (I.comap (centreι X I).left) (IdealSheafData.comap_subschemeι I) M)).of_iso e
 
 /-- **The defect is unchanged by extension by zero from the complement, with finite
-coefficients** (blueprint `det-sp-defect-closed-vanishing`, last assertion): for the open
+coefficients** (blueprint `lemma-base-change-cone-x-z`, last assertion): for the open
 immersion `j : U ⟶ X` of the complement of the centre and `L` of étale origin,
 `C_{X,Z}(j_! Lj^* L) ≅ C_{X,Z}(L)`. Apply `nonempty_specializationDefect_iso_of_distTriang` to the
 open–closed triangle `j_! Lj^* L ⟶ L ⟶ Ri_* Li^* L`: `Li^* j_! = 0`, and the defect of
@@ -385,8 +385,8 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_of_smooth_finiteCoefficient
       Profinite.continuousMapRingObj.{u} T⟧)).mapIso (e₁ ≪≫ e₂)))
 
 /-- **The constant case of generic vanishing along a divisor, with finite coefficients**
-(blueprint `det-sp-generic-divisor-constant`, for a finite coefficient ring `T` killed by
-`ℓ ≠ char k'`): let `X` be normal, `Z = V(h)` for a nonzero global function `h`,
+(blueprint `lemma-vanishing-generic-points-principal-divisor`, for a finite coefficient ring `T`
+killed by `ℓ ≠ char k'`): let `X` be normal, `Z = V(h)` for a nonzero global function `h`,
 `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of `Z`, and `f₀ : W₀ ⟶ 𝔸¹_k` smooth on a
 neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of `𝒪_{X,ζ}`. Then
 `Le^* Ψ_X(j_! T̲)` vanishes near `ζ`. -/
@@ -418,11 +418,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`** (blueprint
-`det-sp-generic-divisor-constant`): let `X` be normal, `Z = V(h)` for a nonzero global function
-`h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of `Z`, and `f₀ : W₀ ⟶ 𝔸¹_k` smooth on a
-neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of the discrete valuation ring
-`𝒪_{X,ζ}`. Then, for the residue field `𝔽_E` of a finite extension `E` of `ℚ_ℓ`, the restricted
-specialization `Le^* Ψ_X(j_! 𝔽_E)` vanishes near `ζ`. -/
+`lemma-vanishing-generic-points-principal-divisor`): let `X` be normal, `Z = V(h)` for a nonzero
+global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of `Z`, and
+`f₀ : W₀ ⟶ 𝔸¹_k` smooth on a neighbourhood `W₀` of `ζ` such that `f₀^* x` is a uniformizer of the
+discrete valuation ring `𝒪_{X,ζ}`. Then, for the residue field `𝔽_E` of a finite extension `E` of
+`ℚ_ℓ`, the restricted specialization `Le^* Ψ_X(j_! 𝔽_E)` vanishes near `ζ`. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0)
     {I : X.left.IdealSheafData} (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))

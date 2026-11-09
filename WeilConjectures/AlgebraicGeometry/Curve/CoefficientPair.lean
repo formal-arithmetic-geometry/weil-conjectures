@@ -19,7 +19,7 @@ consists of a curve `C` over `k` (separated of finite type of dimension at most 
 ## Main definitions
 
 - `AlgebraicGeometry.CurveCoefficientPair`: a curve coefficient pair
-  (blueprint: `def-weil-pbc-curve-setting`).
+  (blueprint: `theorem-cohomology-curves`).
 - `AlgebraicGeometry.CurveCoefficientPair.IsConstructible`: the sheaf `F` of a curve
   coefficient pair is constructible, i.e. `AlgebraicGeometry.Scheme.IsConstructibleSheaf F`
   (blueprint: `def-weil-pbc-constructible-torsion`).
@@ -35,7 +35,7 @@ namespace AlgebraicGeometry
 
 /-- A *curve coefficient pair* over an algebraically closed field `k`: a curve `C` over `k`
 together with a torsion abelian sheaf `F` on the small étale site of `C`.
-(blueprint: `def-weil-pbc-curve-setting`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 structure CurveCoefficientPair (k : Type u) [Field k] [IsAlgClosed k] where
   /-- The underlying scheme of the curve. -/
   C : Scheme.{u}

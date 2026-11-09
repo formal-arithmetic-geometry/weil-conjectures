@@ -53,7 +53,7 @@ private theorem descendIso {A B C : Type*} [Category* A] [Category* B] [Category
 
 /-- Construct the limit comparison by descending the full strict Roos map.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 0941. STATEMENT-DISPUTED (old statement, repaired): the assertion for an
 arbitrary raw limit map was false: its sign
 could be changed independently. Here that map is replaced by the descent of the

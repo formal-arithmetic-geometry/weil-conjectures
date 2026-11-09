@@ -16,7 +16,7 @@ Let `ρ` be a nonzero lisse Weil sheaf on a smooth geometrically connected curve
 rank-counted list of determinant weights `L` (`AlgebraicGeometry.WeilGroup.rankDetWeightMultiset`:
 the determinant weight `γ_a` of every composition factor `A_a` repeated `dim A_a` times). This file
 proves that the determinant weights of the constituents of the exterior power `⋀^r ρ` are exactly
-the sums of `r` entries of `L` (blueprint `cor-mg-det-weight-exterior`).
+the sums of `r` entries of `L` (blueprint `proposition-determinant-weights-tensor-operations--2`).
 
 The proof is by induction on the rank. For irreducible `ρ` it is the semisimple case
 `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`. Otherwise `ρ` has a
@@ -26,12 +26,12 @@ two-factor tensor rule (`Representation.exists_detWeight_eq_add_of_subquotient_t
 converse) and the additivity `L(ρ) = L(A) + L(ρ / A)`
 (`AlgebraicGeometry.WeilGroup.rankDetWeightMultiset_eq_add`) reduce the claim to `A` and `ρ / A`.
 The finite geometric determinant hypotheses of the tensor rule hold by rank-one purity
-(`lem-rp-determinant-weights-agree`).
+(`corollary-determinant-weights--1`).
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`: the determinant weights of
-  the constituents of `⋀^r ρ` (blueprint `cor-mg-det-weight-exterior`).
+  the constituents of `⋀^r ρ` (blueprint `proposition-determinant-weights-tensor-operations--2`).
 -/
 
 @[expose] public section
@@ -282,7 +282,8 @@ theorem detWeight_subquotient_exteriorPower_aux (n : ℕ) {V : Type u} [AddCommG
     fun T hT hcard ↦ exists_detWeight_eq_sum_of_subrepresentation ι hρ A
       (fun j ↦ (ihA j).2) (fun j ↦ (ihQ j).2) hT hcard⟩
 
-/-- Blueprint `cor-mg-det-weight-exterior`: Determinant weights of an exterior power.
+/-- Blueprint `proposition-determinant-weights-tensor-operations--2`: Determinant weights of an
+exterior power.
 
 Let `ρ` be a nonzero lisse Weil sheaf, with composition factors `A_a` of rank `d_a` and
 determinant weights `γ_a`, and let `L` be its rank-counted list of determinant weights
@@ -296,9 +297,10 @@ of `γ` in `T`), with `∑ T = ∑ n_γ γ`. In these terms:
 * conversely, for every sub-multiset `T ≤ L` with `r` elements, some constituent of `⋀^r ρ` has
   determinant weight `∑ T`.
 
-The finite geometric determinant hypotheses of `prop-ag-det-weight-exterior` hold by rank-one
-purity (`lem-rp-determinant-weights-agree`); the geometric semisimplicity assumed in the
-blueprint is not needed. -/
+The finite geometric determinant hypotheses of
+`proposition-determinant-weights-tensor-operations--2` hold by rank-one purity
+(`corollary-determinant-weights--1`); the geometric semisimplicity assumed in the blueprint is not
+needed. -/
 theorem detWeight_subquotient_exteriorPower [Nontrivial V] (hρ : W.IsLisse l ρ) (r : ℕ) :
     (∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
       ∃ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l ρ ι ∧ Multiset.card T = r ∧

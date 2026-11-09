@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackRed
 import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackFiniteMate
 
 /-! Split result for the finite reduction of completed pullback.
-(blueprint: lemma-weil-pbc-completed-pullback-reduction).
+(blueprint: definition-completed-inverse-image).
 -/
 
 @[expose] public noncomputable section

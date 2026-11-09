@@ -25,7 +25,7 @@ connected (Stacks, Algebra, Lemma 10.48.4).
   closed, `A` has no nontrivial idempotents and `L` is a `k`-domain, then `A ⊗[k] L` has no
   nontrivial idempotents.
 - `IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable`: an algebraic extension of a
-  separably closed field is purely inseparable (blueprint `lem-pc-kbar-pure-insep`).
+  separably closed field is purely inseparable (blueprint `lemma-representability-picard-functor`).
 - `isPurelyInseparable_iff_exists_algebraMap_eq_pow`: `E / F` is purely inseparable iff every
   `α ∈ E` has `α ^ (q ^ n) ∈ F` for some `n` (blueprint `def-pc-field-tower`).
 -/
@@ -157,7 +157,7 @@ separably closed of exponential characteristic `p` and `K / k` algebraic (for in
 `K = k̄`). Every `α ∈ K` has a power `α ^ p ^ n` which is separable over `k` (it even lies in
 `k`), hence `K / k` is purely inseparable.
 
-(blueprint: `lem-pc-kbar-pure-insep`) -/
+(blueprint: `lemma-representability-picard-functor`) -/
 theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed k] (p : ℕ)
     [ExpChar k p] (K : Type v) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] :
     (∀ α : K, ∃ n : ℕ, IsSeparable k (α ^ p ^ n)) ∧ IsPurelyInseparable k K := by

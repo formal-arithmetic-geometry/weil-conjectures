@@ -46,7 +46,7 @@ import WeilConjectures.SixFunctors.Integral.IntegralOperationsPreserveConstructi
 /-! # Pullback of finite-Tor complexes and the actual coefficient units
 
 Source: main-20261015, sec-six-functors-basics/sk-def-purity-conv,
-def-pur-section-invariant, the expression Ls* Rg! Lambda_B and its Picard assertion;
+lemma-section-normal-bundle--1, the expression Ls* Rg! Lambda_B and its Picard assertion;
 Bhatt--Scholze, Lemma 6.5.9(5); Stacks Tag 099N(5).
 (blueprint: lem-pur-all-stage-ctf-pullback-unit).
 
@@ -170,10 +170,10 @@ are rationalUnit and commonUnit above, obtained from the reexported
 ConstantGeometricStalkUnit.integralUnit by localization and the same-stage inclusion.
 The exact finite unit is ConstantGeometricStalkUnit.finiteUnit.
 
-Source: main-20261015, def-pur-section-invariant; Bhatt--Scholze, 6.5.9(5), Stacks 099N(5)
+Source: main-20261015, lemma-section-normal-bundle--1; Bhatt--Scholze, 6.5.9(5), Stacks 099N(5)
 (blueprint: lem-pur-all-stage-ctf-pullback-unit).
 Proof:
-1. Apply lem-sf-pullback-tor-amplitude at every positive finite exponent. Its hypotheses
+1. Apply proposition-six-operations-dctf--1 at every positive finite exponent. Its hypotheses
 are finite type and separatedness of f, and finite type of X and Y over k. Transport
 from its tensor-pullback coordinates by the canonical unit-preserving comparison to
 finiteDerivedPullback. The unchanged interval witnesses the finite-Tor restriction.

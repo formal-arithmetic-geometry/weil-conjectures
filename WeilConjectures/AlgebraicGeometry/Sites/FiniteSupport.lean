@@ -40,7 +40,7 @@ open CategoryTheory Abelian Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lem-kun-cd-sep-closed-point`: **Cohomology of a geometric point.**
+/-- Blueprint `lemma-cohomological-dimension-base-field--1`: **Cohomology of a geometric point.**
 
 Over a separably closed field `k` every abelian étale sheaf on `Spec k` has no cohomology in
 positive degrees, the constant sheaf `ℤ` being projective

@@ -329,8 +329,8 @@ private theorem representative_acyclic (F : A ⥤ B) [F.Additive]
 set_option linter.unusedVariables false in
 
 /-- The degree-zero second-page identification, with an object placed in degree q.
-This is exactly the shift and ordinary-derived comparison in thm-sp-truncation-e2,
-followed by the inverse of the degree-zero augmentation.
+This is exactly the shift and ordinary-derived comparison in
+lemma-uniform-bound-proper-direct-image--1, followed by the inverse of the degree-zero augmentation.
 Source: Stacks Tags 05TD and 0D7U (blueprint: lem-fd-acyclic-heart-edge). -/
 noncomputable def acyclicHeartSingleIso (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] (X : A) (q : ℤ) :
@@ -362,7 +362,7 @@ isomorphism. The left side precomposes with c_q, the derived truncation inclusio
 The right side is the map g of the truncation couple, with its bridge isomorphisms
 cancelled, followed by the second-page degree-zero comparison. Thus this condition
 specifies the quotient/Theta edge, rather than an unspecified isomorphism.
-Source: Stacks Tag 0D7U and thm-sp-truncation-e2, part 6
+Source: Stacks Tag 0D7U and lemma-uniform-bound-proper-direct-image--1, part 6
 (blueprint: lem-fd-acyclic-heart-edge). -/
 def IsAcyclicHeartEdge (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
     (edge : F.AcyclicHeartEdgeFamily) : Prop :=
@@ -448,7 +448,7 @@ private noncomputable def truncProjectionNatTrans (q : ℤ) :
 
 omit [IsGrothendieckAbelian.{v₂} B] in
 /-- Descent of `K ↦ H^q(RF(τ_{≤q}K))` along `Q`, with the truncation inclusion `c` and
-the projection `g` to `F(H^q)` (lem-weil-pbc-truncation-descends). -/
+the projection `g` to `F(H^q)` (theorem-pbc-injective-acyclicity). -/
 private theorem descent_data (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (q : ℤ) :
     ∃ (T : DerivedCategory A ⥤ B)
       (c : T ⟶ F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q)
@@ -526,7 +526,7 @@ Proof:
    the inclusion at q invertible, and the inclusion at q-1 is zero in degree q.
    This gives the two filtration-image identities.
 4. Descend K |-> H^q(RF(Q(tau_le_q K))) along Q. The inclusion descends to
-   c : T -> H^q RF, and the projection of lem-weil-pbc-truncation-descends with
+   c : T -> H^q RF, and the projection of theorem-pbc-injective-acyclicity with
    the single-object comparison descends to g : T -> F H^q. Every bounded-below
    object has a bounded-below representative, so c is invertible and, under
    acyclicity, so is g. The edge is c^{-1} followed by g; its normalization

@@ -44,9 +44,9 @@ Proof (the seven steps of the node):
    open to its inclusion and an inclusion to the corresponding morphism over `X`.
    Identities and composition are those of inclusions.
 2. The top open is terminal, and intersections are pullbacks in the poset of opens
-   (`def-sc-zariski-site`).
+   (`lemma-uniform-bounds-pro-etale-affines`).
 3. The identity of `X` is terminal in the small étale site, and its pullbacks are
-   scheme pullbacks (`lem-weil-pbc-etale-base-change-finite-limits`). Intersections
+   scheme pullbacks (`situation-conventions`). Intersections
    compute these pullbacks by `lem-weil-pbc-open-preimage-fibre-product`; uniqueness
    of limits gives the canonical comparison isomorphisms.
 4. A jointly surjective open family remains jointly surjective and étale. Together
@@ -54,11 +54,11 @@ Proof (the seven steps of the node):
 5. Precomposition sends sheaves to sheaves
    (`lem-weil-pbc-site-continuous-pushforward-sheaf`). Sheafified presheaf pullback
    is its left adjoint (`lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`),
-   hence preserves colimits (`lem-weil-pbc-left-adjoint-preserves-colimits`).
+   hence preserves colimits (`situation-conventions`).
 6. The inclusion of sheaves preserves finite limits
    (`lem-weil-pbc-site-sheaf-sets-limits-sectionwise`); presheaf pullback does too,
-   by steps 2 and 3 (`lem-weil-pbc-presheaf-pullback-sets-left-exact`), as does
-   sheafification (`lem-weil-pbc-sheafification-sets-exact`). Their composite is
+   by steps 2 and 3 (`situation-conventions`), as does
+   sheafification (`situation-conventions`). Their composite is
    the left adjoint, so it preserves finite limits.
 7. This exact left adjoint and sectionwise precomposition give the required
    morphism of sites, inverse image, direct image and adjunction

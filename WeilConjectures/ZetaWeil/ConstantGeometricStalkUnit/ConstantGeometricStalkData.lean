@@ -12,8 +12,8 @@ import all WeilConjectures.SmoothPurity.Point.PointSectionsScalarExtension
 
 /-! # Constructions for constant geometric coefficient stalks
 
-Source: the constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion
-steps 2--8 (blueprint: def-zl-constant-geometric-stalk-constructions).
+Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
+expansion steps 2--8 (blueprint: def-zl-constant-geometric-stalk-constructions).
 
 The existing section, pullback, iteration and scalar-comparison constructions are
 re-exported through their original module without changing their definitions.

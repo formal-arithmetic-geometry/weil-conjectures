@@ -17,18 +17,18 @@ Let `P` be a property of objects of a pretriangulated category `C` whose `Hom`-t
 
 * If `C` has coproducts indexed by `Type v`, then `Loc(P)` is idempotent complete
   (`CategoryTheory.ObjectProperty.isIdempotentComplete_localizingClosure`, blueprint
-  `det-brown-hypotheses-ambient`).
+  `lemma-hypotheses-brown-representability`).
 * If `P` is stable under shifts, the objects of `P` detect zero objects of `Loc(P)`
   (`CategoryTheory.ObjectProperty.isZero_of_forall_eq_zero_localizingClosure`, blueprint
-  `det-brown-hypotheses-generation`): the objects `M` with `Hom(M, Y⟦n⟧) = 0` for all `n` form
-  a localizing subcategory.
+  `lemma-hypotheses-brown-representability`): the objects `M` with `Hom(M, Y⟦n⟧) = 0` for all `n`
+  form a localizing subcategory.
 * So, for `P` stable under shifts, `P` compactly generates `Loc(P)` as soon as it is essentially
   small and its objects are compact in `Loc(P)`
   (`CategoryTheory.ObjectProperty.CompactlyGeneratesLocalizingClosure.of_isStableUnderShift`).
 * A triangulated functor `Φ : C₁ ⥤ C₂` mapping `P₁` into `Loc(P₂)`, whose restriction to
   `Loc(P₁)` preserves coproducts, maps `Loc(P₁)` into `Loc(P₂)`
   (`CategoryTheory.ObjectProperty.localizingClosure_obj_of_le`, the argument of blueprint
-  `sk-prop-proper-image-localizing`).
+  `proposition-proper-direct-image-extension-zero`).
 -/
 
 @[expose] public section
@@ -44,8 +44,8 @@ section
 variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] (P : ObjectProperty C)
 
-/-- Blueprint `det-brown-hypotheses-ambient`: the localizing closure of a property of objects of
-a pretriangulated category with coproducts is idempotent complete. -/
+/-- Blueprint `lemma-hypotheses-brown-representability`: the localizing closure of a property of
+objects of a pretriangulated category with coproducts is idempotent complete. -/
 theorem isIdempotentComplete_localizingClosure [HasCoproducts.{v} C] :
     IsIdempotentComplete P.localizingClosure.FullSubcategory :=
   Pretriangulated.isIdempotentComplete_of_hasCoproducts
@@ -71,9 +71,9 @@ instance isLocalizing_leftOrthogonal (Q : ObjectProperty C) [Q.IsStableUnderShif
 
 variable {P}
 
-/-- Blueprint `det-brown-hypotheses-generation`: if `P` is stable under shifts, an object `Y` of
-`Loc(P)` without nonzero morphisms from the objects of `P` is zero. Indeed the objects `M` with
-`Hom(M, Y⟦n⟧) = 0` for all `n` form a localizing subcategory containing `P`, hence `Y`. -/
+/-- Blueprint `lemma-hypotheses-brown-representability`: if `P` is stable under shifts, an object
+`Y` of `Loc(P)` without nonzero morphisms from the objects of `P` is zero. Indeed the objects `M`
+with `Hom(M, Y⟦n⟧) = 0` for all `n` form a localizing subcategory containing `P`, hence `Y`. -/
 theorem isZero_of_forall_eq_zero_localizingClosure [P.IsStableUnderShift ℤ]
     (Y : P.localizingClosure.FullSubcategory)
     (hY : ∀ X : P.localizingClosure.FullSubcategory, P X.obj → ∀ f : X ⟶ Y, f = 0) :
@@ -94,7 +94,7 @@ theorem isZero_of_forall_eq_zero_localizingClosure [P.IsStableUnderShift ℤ]
 
 /-- If `P` is stable under shifts, then `P` compactly generates its localizing closure as soon as
 it has a small set of isomorphism representatives and its objects are compact in `Loc(P)`
-(blueprint `sk-lem-brown-hypotheses`). -/
+(blueprint `lemma-hypotheses-brown-representability`). -/
 theorem CompactlyGeneratesLocalizingClosure.of_isStableUnderShift [P.IsStableUnderShift ℤ]
     (hsmall : ∃ (ι : Type v) (S : ι → C), (∀ i, P (S i)) ∧ ∀ X, P X → ∃ i, Nonempty (S i ≅ X))
     (hcompact : ∀ X : P.localizingClosure.FullSubcategory, P X.obj →
@@ -160,8 +160,8 @@ instance isLocalizing_localizingClosureInverseImage
     exact ⟨hX, P₂.localizingClosure.prop_of_isColimit
       (isColimitOfPreserves (P₁.localizingClosure.ι ⋙ Φ) hc) fun j ↦ (h.prop_diag_obj j).2⟩⟩
 
-/-- The argument of blueprint `sk-prop-proper-image-localizing` (its detailed node
-`det-proper-image-localizing-principle`): let `Φ : C₁ ⥤ C₂` be a
+/-- The argument of blueprint `proposition-proper-direct-image-extension-zero` (its detailed node
+`proposition-proper-direct-image-extension-zero`): let `Φ : C₁ ⥤ C₂` be a
 triangulated functor mapping `P₁` into `Loc(P₂)`, whose restriction to `Loc(P₁)` preserves
 coproducts. Then `Φ` maps `Loc(P₁)` into `Loc(P₂)`. -/
 theorem localizingClosure_obj_of_le

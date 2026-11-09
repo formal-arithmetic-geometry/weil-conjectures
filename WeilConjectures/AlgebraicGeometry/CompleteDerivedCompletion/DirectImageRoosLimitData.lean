@@ -246,14 +246,14 @@ private theorem transition_fac (T : Scheme.{u}) (n : ℕ) (J : CochainComplex (T
   simp [transition, towerDerivedEvaluationTransition, Localization.liftNatTrans_app, hm, hn]
 
 /-- The Milnor (Roos) triangle of a derived tower, with the level projections as first map.
-Source: Stacks Tags 0941 and 08TC; proof (1) of prop-weil-pbc-direct-image-limits.
+Source: Stacks Tags 0941 and 08TC; proof (1) of proposition-proper-base-change-complete-integral--1.
 Proof: represent `M` by a K-injective tower complex `J`. The ordinary limit cone of `J`
 gives a distinguished Roos triangle in the derived category, by exactness of countable
 products of pro-étale module sheaves. The invertible derived unit identifies its first
 object with `rlim M`, and the evaluation factorizations identify its other objects with
 the levels of `M`; the limit projections become the level projections, and the strict
 transitions become the derived transitions. Transport the triangle along these
-isomorphisms. (blueprint: prop-weil-pbc-direct-image-limits) -/
+isomorphisms. (blueprint: proposition-proper-base-change-complete-integral--1) -/
 theorem roos_triangle (T : Scheme.{u})
     [HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E T))] (M : DTow l E T) :
     ∃ δ, IsDerivedLimitTriangle (fun n : ℕ ↦ (transition l E T n).app M) _
@@ -515,16 +515,16 @@ end ProjectionSquare
 
 /-- Roos triangles, product comparison and the projection compatibility for direct image,
 with the levelwise evaluation isomorphisms: assertion (1) of
-prop-weil-pbc-direct-image-limits, with its Milnor-cone description.
+proposition-proper-base-change-complete-integral--1, with its Milnor-cone description.
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/
 prop-weil-pbc-direct-image-limits.proof.md, proof (1); Stacks Tag 0A07.
 (blueprint: prop-weil-pbc-direct-image-limits-roos-data)
 
 Proof. The tower direct image is the derived functor of `f_*` applied levelwise, so by
-assertions (3) and (4) of det-pbc-complete-derived-completion its evaluation at level `n`
-is canonically `Rf_*` of the evaluation at `n`: this is `pushEvaluationMap`, invertible
+assertions (3) and (4) of proposition-proper-base-change-complete-integral its evaluation at level
+`n` is canonically `Rf_*` of the evaluation at `n`: this is `pushEvaluationMap`, invertible
 for every `n`. Products of sheaves of modules on the pro-étale site are exact
-(det-pe-products-exact), so both derived categories have countable products, computed
+(proposition-exact-products--1), so both derived categories have countable products, computed
 termwise. For a tower `M` the derived limit `rlim M` is the right adjoint of the constant
 tower, and its counit at level `n` is `levelProjection`; by def-weil-derived-limit the
 derived limit sits in the Milnor (Roos) triangle

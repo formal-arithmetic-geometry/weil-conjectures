@@ -107,7 +107,7 @@ import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
 
 /-! # Coherent transport of strict quotient systems
 
-Source: def-pur-section-invariant, finite-clopen expansion, steps 2--3 and 5;
+Source: lemma-section-normal-bundle--1, finite-clopen expansion, steps 2--3 and 5;
 Stacks 03D7, 03EK, 015F, 06YY and 07A6
 (blueprint: lem-pur-ring-iso-quotient-system-transport).
 
@@ -294,7 +294,7 @@ structure ReductionComparisonData
 
 /-- The actual strict reduction, with its sheafified pure tensors, all horizontal
 maps and the universal derived reduction into the ordinary derived system category.
-Source: Stacks 03EK, 06YY; sequence-site refinement of def-pur-section-invariant
+Source: Stacks 03EK, 06YY; sequence-site refinement of lemma-section-normal-bundle--1
 (blueprint: lem-pur-ring-iso-quotient-system-transport). -/
 def ReductionConditions (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J))
@@ -332,7 +332,7 @@ def ReductionConditions (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
 
 /-- The actual strict reduction, with its sheafified pure tensors, all horizontal
 maps and the universal derived reduction into the ordinary derived system category.
-Source: Stacks 03EK, 06YY; sequence-site refinement of def-pur-section-invariant
+Source: Stacks 03EK, 06YY; sequence-site refinement of lemma-section-normal-bundle--1
 (blueprint: lem-pur-ring-iso-quotient-system-transport). -/
 abbrev Reduction (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J)) :=

@@ -12,34 +12,34 @@ public import WeilConjectures.Compactification.IdealSheafPower
 # Separation data for boundary pieces
 
 This file records, as standalone declarations, the auxiliary nodes of the blueprint
-subsection "Separating boundary closures" (`sk-lem-nagata-sketch-boundary`) whose content is
+subsection "Separating boundary closures" (`lemma-separation-closures--1`) whose content is
 used inline in `AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.separationPreparationCenter`: the center of the
-  Tag 080P preparation (blueprint: `lemma-nagata-separate-closed-data-exists`);
+  Tag 080P preparation (blueprint: `lemma-separation-closures--1`);
 - `AlgebraicGeometry.Scheme.IdealSheafData.separationPreparationBlowupSubscheme`: the
   `U_Z`-admissible blow-up `Bl_C(Z) → Z` of that preparation;
 - `AlgebraicGeometry.separationPreparationBlowup`: the blow-up of `X` along the composite
-  center `C ↪ Z ↪ X` (blueprint: `def-nagata-separate-closed-subschemes`, second paragraph);
+  center `C ↪ Z ↪ X` (blueprint: `lemma-separation-closures--1`, second paragraph);
 - `AlgebraicGeometry.Scheme.IdealSheafData.constructibleClosedExtension`: the ideal
   `Ext_{X,U}(J_U(T))` of a constructible closed subset `T ⊆ U`;
 - `AlgebraicGeometry.constructibleSeparationBlowup`: the constructible-boundary separation
-  blow-up `CSepBl_U(T₁, T₂)` (blueprint: `def-nagata-separate-constructible-closed`).
+  blow-up `CSepBl_U(T₁, T₂)` (blueprint: `lemma-separation-closures--1`).
 
 ## Main results
 
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_pow_eq_bot_of_support_eq_top`: a
   finite-type nil ideal sheaf on a quasi-compact scheme is nilpotent (blueprint:
-  `lemma-nagata-finite-type-nil-ideal-nilpotent`);
+  `lemma-separation-closures--1`);
 - `AlgebraicGeometry.range_strictTransformMap_eq_closure`: the underlying set of the strict
   transform of a closed subscheme is the closure of the inverse image of its part over `U`;
 - `AlgebraicGeometry.exists_separationPreparation`: the Tag 080P preparation (blueprint:
-  `lemma-nagata-separate-closed-data-exists`);
+  `lemma-separation-closures--1`);
 - `AlgebraicGeometry.disjoint_closure_preimage_constructibleSeparationBlowup`: the closures of
   the inverse images of `T₁`, `T₂` in `CSepBl_U(T₁, T₂)` are disjoint (blueprint:
-  `lemma-nagata-separate-constructible-closed`).
+  `lemma-separation-closures--1`).
 -/
 
 @[expose] public section
@@ -59,7 +59,7 @@ namespace Scheme.IdealSheafData
 variable {X : Scheme.{u}}
 
 /-- **A finite type nil ideal sheaf is uniformly nilpotent** (blueprint:
-`lemma-nagata-finite-type-nil-ideal-nilpotent`): on a quasi-compact scheme, a finite-type
+`lemma-separation-closures--1`): on a quasi-compact scheme, a finite-type
 quasi-coherent ideal sheaf with `V(I) = X` has a nonzero power equal to `0`. This is the case
 `A = 0` of `Scheme.IdealSheafData.exists_pow_le`, whose proof is the chart-wise argument of the
 blueprint (finitely generated ideals inside the nilradical are nilpotent, and a finite affine
@@ -155,7 +155,7 @@ variable {X : Scheme.{u}} {U : X.Opens}
 
 open Scheme.IdealSheafData in
 /-- **The boundary of `Z = V(I₁ I₂)` over `U` splits into two pieces** (part of blueprint:
-`lemma-nagata-separate-closed-data-exists`): if `V(I₁) ∩ V(I₂) ∩ U = ∅`, the open
+`lemma-separation-closures--1`): if `V(I₁) ∩ V(I₂) ∩ U = ∅`, the open
 `U_Z = Z ×_X U` of `Z` is the disjoint union of the traces `Pᵢ = Zᵢ ×_X U` of the closed
 subschemes `Zᵢ = V(Iᵢ) ↪ Z`. Both traces are closed in `U_Z`, hence open and closed. -/
 theorem disjoint_range_inclusion_inter_preimage_and_subset
@@ -177,7 +177,7 @@ theorem disjoint_range_inclusion_inter_preimage_and_subset
 
 open Scheme.IdealSheafData in
 /-- **Preparation data for separating two closed boundaries** (Stacks Project Tag 080P;
-blueprint: `lemma-nagata-separate-closed-data-exists`).
+blueprint: `lemma-separation-closures--1`).
 
 Let `X` be qcqs and let `Zᵢ = V(Iᵢ)` be closed subschemes cut out by finite-type ideals (i.e.
 finite-presentation closed immersions) with `Z₁ ∩ Z₂ ∩ U = ∅`; put `Z = V(I₁ I₂)`, with the
@@ -237,7 +237,7 @@ theorem exists_separationPreparation [CompactSpace X] [QuasiSeparatedSpace X]
   exact key
 
 /-- The center ideal of the Tag 080P preparation (blueprint:
-`lemma-nagata-separate-closed-data-exists`, `def-nagata-separate-closed-subschemes`), chosen
+`lemma-separation-closures--1`), chosen
 from `exists_separationPreparation`: a finite-type ideal `K ⊇ I₁ I₂` on `X` with
 `V(K) ∩ U = ∅`, so that `C = V(K 𝒪_Z) ↪ Z = V(I₁ I₂)` is the center of the preparation and
 `V(K)` is the composite center `C ↪ Z ↪ X`. -/
@@ -269,7 +269,7 @@ lemma Scheme.IdealSheafData.separationPreparationCenter_spec [CompactSpace X]
   (exists_separationPreparation I₁ I₂ h₁ h₂ hdisj).choose_spec
 
 /-- The `U_Z`-admissible blow-up `Bl_C(Z) → Z` of the Tag 080P preparation, for
-`Z = V(I₁ I₂)` and `U_Z = Z ×_X U` (blueprint: `lemma-nagata-separate-closed-data-exists`).
+`Z = V(I₁ I₂)` and `U_Z = Z ×_X U` (blueprint: `lemma-separation-closures--1`).
 The strict transforms of `Z₁` and `Z₂` in it are disjoint
 (`Scheme.IdealSheafData.separationPreparationCenter_spec`). -/
 def Scheme.IdealSheafData.separationPreparationBlowupSubscheme [CompactSpace X]
@@ -283,7 +283,7 @@ def Scheme.IdealSheafData.separationPreparationBlowupSubscheme [CompactSpace X]
     rw [coe_support_comap]
     exact (separationPreparationCenter_spec I₁ I₂ h₁ h₂ hdisj).2.2.1.preimage _
 
-/-- **The Tag 080P separation blow-up** (blueprint: `def-nagata-separate-closed-subschemes`,
+/-- **The Tag 080P separation blow-up** (blueprint: `lemma-separation-closures--1`,
 second paragraph): for `X` qcqs and finite-presentation closed subschemes `Zᵢ = V(Iᵢ)` with
 `Z₁ ∩ Z₂ ∩ U = ∅`, the `U`-admissible blow-up of `X` along the composite center
 `C ↪ Z ↪ X`, where `C ↪ Z = V(I₁ I₂)` is the center of the Tag 080P preparation
@@ -308,7 +308,7 @@ variable {X : Scheme.{u}} {U : X.Opens}
 
 /-- The finite-type ideal `Ext_{X,U}(J_U(T))` on `X` attached to a constructible closed subset
 `T` of a quasi-compact open `U` of a qcqs scheme (the ideals `𝓘ᵢ` of blueprint
-`def-nagata-separate-constructible-closed`): `J_U(T)` is the chosen finite-type ideal on `U`
+`lemma-separation-closures--1`): `J_U(T)` is the chosen finite-type ideal on `U`
 with vanishing set `T` (`Scheme.exists_finiteType_ideal_coe_support_eq_compl`, Stacks Tag
 01PH), and `Ext_{X,U}` is the chosen finite-type extension to `X`
 (`Scheme.IdealSheafData.exists_finiteType_comap_eq`, Stacks Tag 01PF). -/
@@ -356,7 +356,7 @@ lemma Scheme.IdealSheafData.disjoint_support_constructibleClosedExtension [Compa
     (hpre₂ ▸ Set.mem_preimage.mpr hx2)
 
 /-- **The constructible-boundary separation blow-up** `CSepBl_U(T₁, T₂)` (blueprint:
-`def-nagata-separate-constructible-closed`): the closed-boundary separation blow-up
+`lemma-separation-closures--1`): the closed-boundary separation blow-up
 `SepBl_U(Z₁, Z₂)` (`separationBlowup`) of the closed subschemes `Zᵢ = V(𝓘ᵢ)` cut out by the
 extended ideals `𝓘ᵢ = Ext_{X,U}(J_U(Tᵢ))`
 (`Scheme.IdealSheafData.constructibleClosedExtension`). -/
@@ -372,7 +372,7 @@ def constructibleSeparationBlowup [CompactSpace X] [QuasiSeparatedSpace X]
       hdisj)
 
 /-- **Properties of constructible-boundary separation**, for the explicit construction
-(blueprint: `lemma-nagata-separate-constructible-closed`): the closures of the inverse
+(blueprint: `lemma-separation-closures--1`): the closures of the inverse
 images of `T₁` and `T₂` in `CSepBl_U(T₁, T₂)` are disjoint. The closure of the inverse image
 of `Tᵢ` lies in the strict transform of `V(𝓘ᵢ)`, and these strict transforms are disjoint
 (`disjoint_range_strictTransformMap_sup`). -/

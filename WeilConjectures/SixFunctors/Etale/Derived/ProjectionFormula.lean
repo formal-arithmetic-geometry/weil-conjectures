@@ -51,7 +51,7 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
 - `AlgebraicGeometry.Etale.hasProjectionFormula_id`,
   `AlgebraicGeometry.Etale.hasProjectionFormula_comp`,
   `AlgebraicGeometry.Etale.hasProjectionFormulaOfCompactification_iff`
-  (`sk-prop-sf-pf-coherence`) : the coherence of the projection formula.
+  (`proposition-composition-base-change-rf-shriek--1`) : the coherence of the projection formula.
 
 ## Implementation notes
 
@@ -64,26 +64,28 @@ the projection formula for the open immersion `i`. The projection formula is the
 structure on `A` (with `forget A` reflecting isomorphisms, preserving filtered colimits and
 sheaves); these hold for `A = ModuleCat Λ`.
 
-The statements of `sk-prop-sf-pf-coherence` below are still objectwise: the identity case,
-the composition law and the independence of the compactification. The blueprint node also
-asks for identities between natural transformations — naturality in `f`, the associativity
+The statements of `proposition-composition-base-change-rf-shriek--1` below are still objectwise: the
+identity case, the composition law and the independence of the compactification. The blueprint node
+also asks for identities between natural transformations — naturality in `f`, the associativity
 pentagon, agreement with the direct-image projection formula for proper `f` through
 `Rf_! ≅ Rf_*`, and compatibility with finite reduction, scalar extension and the pro-étale
 realization. These need comparison isomorphisms for `Rf_!` (composition, change of
 compactification) that are not constructed yet, and are not stated.
 
-The projection formula at the integral stage `𝒪_E` (`sk-thm-sf-pf-adic`) is in
-`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
-The projection formula at the rational stage `E` and at the finite stages `E'` of `ℚ̄_ℓ`, for
-rationalizations of integral objects (`AlgebraicGeometry.Etale.hasProjectionFormula_field`,
-`sk-thm-sf-pf-field`), is in `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`.
-On the étale site with the discrete field `F` as coefficients the projection formula does not
-hold for every bounded constructible `L`: for `L = y_* F` the skyscraper at the closed point `y`
-of the spectrum `Y` of a strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular proper
-curve with nodal special fibre `X_y` and `K = F_X`, the projection map is the restriction
-`RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of characteristic zero, `H¹(X, F) = 0` since `X` is normal, while
-`H¹(X_y, F) = F`. For a dualizable `L`, however, the projection formula is formal and holds for
-any coefficients (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`).
+The projection formula at the integral stage `𝒪_E`
+(`lemma-projection-formula-integral-coefficients`) is in
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`. The projection formula at
+the rational stage `E` and at the finite stages `E'` of `ℚ̄_ℓ`, for rationalizations of integral
+objects (`AlgebraicGeometry.Etale.hasProjectionFormula_field`,
+`proposition-projection-formula-rational-coefficients`), is in
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`. On the étale site with the
+discrete field `F` as coefficients the projection formula does not hold for every bounded
+constructible `L`: for `L = y_* F` the skyscraper at the closed point `y` of the spectrum `Y` of a
+strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular proper curve with nodal special
+fibre `X_y` and `K = F_X`, the projection map is the restriction `RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of
+characteristic zero, `H¹(X, F) = 0` since `X` is normal, while `H¹(X_y, F) = F`. For a dualizable
+`L`, however, the projection formula is formal and holds for any coefficients
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`).
 
 -/
 
@@ -235,7 +237,7 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
-/-- Blueprint `lem-amb-proper-coproducts-projection`: The proper projection formula on the
+/-- Blueprint `lemma-cohomology-projective-line-trace`: The proper projection formula on the
 ambient category.
 
 **The projection formula for a proper direct image at finite coefficients, unbounded.**
@@ -256,8 +258,9 @@ by unbounded proper base change, it becomes `RΓ(Z_ȳ, M) ⊗ᴸ N ≅ RΓ(Z_ȳ,
 
 This is the case of a finite, hence additively torsion, ring of
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_isProper`
-(`lem-kun-0f0g`), proved there at the geometric points of `Y` through the compatibility of the
-projection map with base change and unbounded proper base change.
+(`proposition-proper-direct-image-constructible-complexes--9`), proved there at the geometric points
+of `Y` through the compatibility of the projection map with base change and unbounded proper base
+change.
 
 The blueprint node is stated for `g` of finite type between Noetherian schemes, with the tensor
 factors in the other order; neither hypothesis is used by the argument above. -/
@@ -407,7 +410,8 @@ lemma isIso_rightDerivedLowerStarProjectionMap_app_app_of_section {X Z : Scheme.
         asIso ((derivedOpenImmersionLowerShriekToLowerStar A i).app _))
   exact adj.isIso_rightAdjointProjectionMap_app_app_of_comp _ adj' M L
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula.
 
 The identity case: the projection formula holds for `f = 𝟙 X`.
 
@@ -429,7 +433,8 @@ section TorsionCoherence
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}}
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula.
 
 Compatibility of the projection formula with the composition law: if the formula holds for
 `f` at `K` and `Lg^* M`, and for `g` at `Rf_! K` and `M`, then it holds for `f ≫ g` at `K`
@@ -448,7 +453,8 @@ theorem hasProjectionFormula_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
     HasProjectionFormula (ModuleCat.{u + 1} Λ) (f ≫ g) K M :=
   hasProjectionFormula_of_finite Λ (f ≫ g) K M
 
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula.
 
 Independence of the compactification, for torsion coefficients: the formula computed with an
 arbitrary compactification `c` of `f` holds if and only if it holds for the chosen one, i.e. for

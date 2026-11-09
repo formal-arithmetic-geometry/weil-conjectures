@@ -25,8 +25,8 @@ public import WeilConjectures.TraceFormula.Correspondence
 
 # From finite coefficients to `ℚ̄_ℓ`: an integral vanishing criterion
 
-Blueprint `sk-lem-tf-curve-restriction-zero` is proved on the classical étale models with finite
-`ℓ`-primary coefficients
+Blueprint `lemma-vanishing-local-term-zero-stalk` is proved on the classical étale models with
+finite `ℓ`-primary coefficients
 (`AlgebraicGeometry.Etale.CurveLocalModel.sectionsWithSupportRestriction_eq_zero`,
 packaged for all models and coefficient rings as
 `AlgebraicGeometry.Etale.CurveLocalModel.restrictionZero`). Its last step, as in the blueprint
@@ -46,8 +46,9 @@ transports this vanishing to the `ℚ̄_ℓ`-coefficient pro-étale supported re
 
 That the stalk of `ρ_P` at a Frobenius fixed point has such an integral model, on the strictly
 local model at the fixed point (`Correspondence.frobeniusLocalModel`), needs the comparison
-theorems of the six-functor formalism (`sk-prop-scalar-six`, `sk-thm-sf-package`,
-`sk-prop-sf-comparison`) for the condensed coefficients, which are not formalized yet.
+theorems of the six-functor formalism (`proposition-six-operations-change-coefficients`,
+`sk-thm-sf-package`, `theorem-bounded-below-cohomology-comparison`) for the condensed coefficients,
+which are not formalized yet.
 
 -/
 
@@ -64,8 +65,8 @@ namespace AlgebraicGeometry.Etale.CurveLocalModel
 variable (k : Type u) [Field k] [IsAlgClosed k] (ℓ : ℕ)
 
 /-- **The supported restriction is zero for Frobenius, for all models and coefficient rings**
-(blueprint `sk-lem-tf-curve-restriction-zero`): for every strictly local model of a smooth curve
-over `k`, every finite commutative `ℓ`-primary ring `Λ`, all `L, K ∈ D^b_{ctf}(X, Λ)` with
+(blueprint `lemma-vanishing-local-term-zero-stalk`): for every strictly local model of a smooth
+curve over `k`, every finite commutative `ℓ`-primary ring `Λ`, all `L, K ∈ D^b_{ctf}(X, Λ)` with
 `K_ȳ = 0` and `P = (L ⊠ K)|_T`, the supported restriction `ρ_{a,b}` is zero. -/
 def RestrictionZero : Prop :=
   ∀ (M : CurveLocalModel k) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ],
@@ -83,7 +84,7 @@ def RestrictionZero : Prop :=
 variable {k ℓ}
 
 /-- `RestrictionZero` holds for every prime `ℓ` invertible in `k` (blueprint
-`sk-lem-tf-curve-restriction-zero`). -/
+`lemma-vanishing-local-term-zero-stalk`). -/
 theorem restrictionZero [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) : RestrictionZero k ℓ :=
   fun M _ _ _ hΛ L K hL hK hKy P eP ↦
     M.sectionsWithSupportRestriction_eq_zero ℓ hℓ hΛ L K hL hK hKy P eP

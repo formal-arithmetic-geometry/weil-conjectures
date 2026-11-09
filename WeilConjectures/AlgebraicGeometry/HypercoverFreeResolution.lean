@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-!
 # Blueprint statements
 
-lem-weil-pbc-hypercover-free-resolution.
+corollary-cohomology-pro-etale-affine.
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.SplitEtaleHypercover
 
-/-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
+/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
 theorem freeAbelian_augmentation_quasiIso
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) :
@@ -42,7 +42,7 @@ theorem freeAbelian_augmentation_quasiIso
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
   sorry
 
-/-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
+/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
 theorem injective_abelian_section_cohomology
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X)
@@ -60,7 +60,7 @@ theorem injective_abelian_section_cohomology
           (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
   sorry
 
-/-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
+/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
 theorem freeModule_augmentation_quasiIso
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R] :
@@ -73,7 +73,7 @@ theorem freeModule_augmentation_quasiIso
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
   sorry
 
-/-- Blueprint: lem-weil-pbc-hypercover-free-resolution. -/
+/-- Blueprint: corollary-cohomology-pro-etale-affine. -/
 theorem injective_module_section_cohomology
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R]

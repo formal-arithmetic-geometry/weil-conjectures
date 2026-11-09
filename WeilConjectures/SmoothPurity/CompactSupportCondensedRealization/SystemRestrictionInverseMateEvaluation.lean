@@ -251,8 +251,8 @@ private theorem res_section_type_general
 
 -- Elaborate the six normalized section maps and their adjunction mate cube together.
 /-- The inverse mate of normalized scalar restriction commutes with geometric pullback
-at every coefficient level. Source: blueprint sk-thm-purity-transport, Step 10;
-Stacks 03EK. (blueprint: lem-pur-system-restriction-inverse-mate-evaluation).
+at every coefficient level. Source: blueprint theorem-smooth-purity-all-admissible-coefficients,
+Step 10; Stacks 03EK. (blueprint: lem-pur-system-restriction-inverse-mate-evaluation).
 Proof: the six sectionwise identity comparisons form a commuting direct-image cube.
 Taking mates gives the inverse-image cube. The canonical evaluation comparisons and
 fixed-ring scalar pullback comparison are invertible, so cancellation proves the claim. -/

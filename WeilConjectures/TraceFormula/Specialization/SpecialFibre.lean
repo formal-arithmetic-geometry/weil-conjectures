@@ -22,7 +22,7 @@ correspondence* (`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialL
 `ProEtale.CondensedRing.Correspondence.IsContractingAt.specialLeg₂`). The contraction condition
 forces `γ₂` to land set-theoretically in the zero section `x ⊗ k'` of `N_x X ⊗ k'`
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.range_specialLeg₂_subset`, blueprint
-`det-tf-cone-zero-sections` (2)).
+`lemma-normal-cones-contracting-ideals` (2)).
 
 -/
 
@@ -62,9 +62,10 @@ noncomputable abbrev specialLeg₂ :
     deformationSpecialFibre c.C y.left.ker k' ⟶ deformationSpecialFibre X (y ≫ c.c₁).left.ker k' :=
   deformationSpecialFibreMap c.c₂ hc.ker_map_le_c₂ k'
 
-/-- **The contracting leg lands in the zero section** (blueprint `det-tf-cone-zero-sections` (2)):
-the special leg `γ₂` maps the special fibre of the deformation of `C` set-theoretically into the
-zero section of the special fibre `N_x X ⊗ k'` of the deformation of `X`. -/
+/-- **The contracting leg lands in the zero section** (blueprint
+`lemma-normal-cones-contracting-ideals` (2)): the special leg `γ₂` maps the special fibre of the
+deformation of `C` set-theoretically into the zero section of the special fibre `N_x X ⊗ k'` of the
+deformation of `X`. -/
 theorem range_specialLeg₂_subset :
     Set.range (hc.specialLeg₂ k').left ⊆
       Set.range (deformationSpecialFibreZeroSection X (y ≫ c.c₁).left.ker k').left := by

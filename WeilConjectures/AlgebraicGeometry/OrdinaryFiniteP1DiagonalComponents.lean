@@ -19,7 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
 
 Canonical constructions: (auxiliary; not a blueprint node).
 
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart Cartier calculation;
+Source: blueprint lemma-class-diagonal-projective-line, standard-chart Cartier calculation;
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 -/
 
@@ -159,7 +159,7 @@ def ordinaryFiniteChartTransport (A : Type (u + 1)) [CommRing A]
 
 /-- Direct-image transport from either product projection to the standard P1 projection.
 This is the comparison preceding the trace in arbitraryBaseFiniteP1DiagonalTrace.
-Source: blueprint lem-amb-p1-diagonal-integrals, identification of each projection.
+Source: blueprint lemma-class-diagonal-projective-line, identification of each projection.
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def ordinaryFiniteP1DiagonalChartMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -257,7 +257,7 @@ attribute [local semireducible] ordinaryFiniteSupportedRealization
   ordinaryFiniteP1Unit ordinaryFiniteP1ChernPushforward ordinaryFiniteP1DiagonalSupportedMap
 
 /-- The diagonal component formula with the base hyperplane Chern arrow specified.
-Source: blueprint lem-amb-p1-diagonal-integrals, Chern additivity and adjunct steps.
+Source: blueprint lemma-class-diagonal-projective-line, Chern additivity and adjunct steps.
 (blueprint: lem-amb-p1-diagonal-chern-fixed-base)
 
 Proof: the supported Chern equation identifies the unsupported diagonal class with
@@ -381,7 +381,7 @@ theorem ordinaryFiniteP1_diagonal_kummer_component_formula_fixed (N : ℕ) (hN :
           (ordinaryFiniteUnitPullback A r).hom c)))
 
 /-- The supported diagonal boundary has the base and relative hyperplane components.
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart proof;
+Source: blueprint lemma-class-diagonal-projective-line, standard-chart proof;
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 (blueprint: lem-sp-finite-p1-diagonal-kummer-component-formula)
 

@@ -38,7 +38,7 @@ Proof:
    (`def-weil-pbc-algebra-hom-quotient`).
 3. Given a square-zero ideal `J` of an `R`-algebra `D` and an algebra map
    `g : S^ → D/J` killing `(n S^) ^ k`, with `k` positive, restrict along `iota`.
-   The map `g_0 = g ∘ iota` kills `n^k` (`def-weil-pbc-formally-smooth-adic`).
+   The map `g_0 = g ∘ iota` kills `n^k` (`theorem-finite-etale-covers-proper-henselian--2`).
 4. Formal smoothness of `S` provides a lift `f_0 : S → D` of `g_0`.
 5. Since `f_0(n^k)` lies in `J` and `J^2 = 0`, `f_0` kills `n^(2k)`; this is the
    argument of Stacks Tag 07EC(1) using `def-weil-pbc-algebra-hom-quotient`.

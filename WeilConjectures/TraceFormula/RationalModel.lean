@@ -20,12 +20,12 @@ endomorphism (the `k`-linear Frobenius of a model over a finite field in the app
 `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E`, and write
 `K ↦ K_E = E ⊗ᴸ_{𝒪_E} K` for the derived extension of scalars
 `ProEtale.boundedConstructibleExtendScalars` from bounded constructible `𝒪_E`-complexes to bounded
-constructible `E`-complexes. This file proves blueprint `sk-lem-tf-rational-model`: for every
-bounded constructible `E`-complex `K_E` and every *Frobenius correspondence*
-`ψ : LΦ^* K_E ⟶ K_E` there are an integral model `K₀` of `K_E`, an integer `N ≥ 0` and an integral
-Frobenius correspondence `θ : LΦ^* K₀ ⟶ K₀` with `ℓ^N ψ = θ ⊗ E`
-(`ProEtale.CondensedRing.exists_integralModel_frobeniusCorrespondence`). The iterates then satisfy
-`ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m`
+constructible `E`-complexes. This file proves blueprint
+`lemma-integral-models-rational-frobenius-correspondences`: for every bounded constructible
+`E`-complex `K_E` and every *Frobenius correspondence* `ψ : LΦ^* K_E ⟶ K_E` there are an integral
+model `K₀` of `K_E`, an integer `N ≥ 0` and an integral Frobenius correspondence `θ : LΦ^* K₀ ⟶ K₀`
+with `ℓ^N ψ = θ ⊗ E` (`ProEtale.CondensedRing.exists_integralModel_frobeniusCorrespondence`). The
+iterates then satisfy `ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m`
 (`ProEtale.CondensedRing.pow_smul_frobeniusCoefficientIterate_eq`), and so do their stalks
 (`ProEtale.CondensedRing.pow_smul_upperStar_map_frobeniusCoefficientIterate_eq`): this is the
 second identity of part (1) of the blueprint lemma; the first one, for the operators `T_{c_m}`,
@@ -42,17 +42,18 @@ ring.
 ## Implementation notes
 
 The main statement uses the canonical coefficient comparison `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*`
-(`boundedConstructibleUpperStarExtendScalarsIso`, blueprint `sk-prop-scalar-six`, available since
-`E_X` is flat over `𝒪_{E,X}`). The statements on iterates and stalks hold for every comparison
-`σ` for `Φ`; the comparisons for the iterates `Φ_m` are assembled from `σ` and the composition
-isomorphisms of the inverse image.
+(`boundedConstructibleUpperStarExtendScalarsIso`, blueprint
+`proposition-six-operations-change-coefficients`, available since `E_X` is flat over `𝒪_{E,X}`). The
+statements on iterates and stalks hold for every comparison `σ` for `Φ`; the comparisons for the
+iterates `Φ_m` are assembled from `σ` and the composition isomorphisms of the inverse image.
 
 The blueprint statement uses the uniformizer `π_E` and writes `ψ_E = π_E^{-N}(θ ⊗ E)`; here the
 denominator is a power of `ℓ = π_E^e · u`, `u` a unit of `𝒪_E`, which is equivalent and keeps the
 statement inside the `ℤ`-linear structure of the derived categories. The identity for the
-operators `T_{c_m}` of blueprint `sk-d-weil` needs the compactly supported operators with `E`- and
-`𝒪_E`-coefficients, which the library defines for `ℚ̄_ℓ` only; it follows from the iterate
-identity by `𝒪_E`-linearity of `RΓ_c` once these operators are defined.
+operators `T_{c_m}` of blueprint `definition-frobenius-correspondences-their-operators` needs the
+compactly supported operators with `E`- and `𝒪_E`-coefficients, which the library defines for `ℚ̄_ℓ`
+only; it follows from the iterate identity by `𝒪_E`-linearity of `RΓ_c` once these operators are
+defined.
 
 -/
 
@@ -206,13 +207,13 @@ lemma extendScalarsUpperStarIterateSuccIso_inv_app
           ((upperStarIterateSuccIso ℓ 𝒪 Φ m).inv.app K₀) := by
   simp [extendScalarsUpperStarIterateSuccIso]
 
-/-- **The iterates of a rational model** (blueprint `sk-lem-tf-rational-model`, (1), the step
-before taking stalks; the identity for the operators `T_{c_m}` is not formalized): if
-`ℓ^N ψ = θ ⊗ E` for a Frobenius correspondence `ψ : LΦ^* K ⟶ K` and an integral Frobenius
-correspondence `θ : LΦ^* K₀ ⟶ K₀`, read through `e : (K₀)_E ≅ K` and a comparison `σ`, then
-`ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m`, read through `e` and the comparison
-`extendScalarsUpperStarIterateIso σ m` for `Φ_m`: the inverse image is additive, so the iterate
-of `ℓ^N ψ` is `ℓ^{N m} ψ_m`. -/
+/-- **The iterates of a rational model** (blueprint
+`lemma-integral-models-rational-frobenius-correspondences`, (1), the step before taking stalks; the
+identity for the operators `T_{c_m}` is not formalized): if `ℓ^N ψ = θ ⊗ E` for a Frobenius
+correspondence `ψ : LΦ^* K ⟶ K` and an integral Frobenius correspondence `θ : LΦ^* K₀ ⟶ K₀`, read
+through `e : (K₀)_E ≅ K` and a comparison `σ`, then `ℓ^{N m} ψ_m = θ_m ⊗ E` for every `m`, read
+through `e` and the comparison `extendScalarsUpperStarIterateIso σ m` for `Φ_m`: the inverse image
+is additive, so the iterate of `ℓ^N ψ` is `ℓ^{N m} ψ_m`. -/
 theorem pow_smul_frobeniusCoefficientIterate_eq
     (σ : boundedConstructibleUpperStar 𝒪 ℓ Φ ⋙ boundedConstructibleExtendScalars X.left ℓ E ≅
       boundedConstructibleExtendScalars X.left ℓ E ⋙ boundedConstructibleUpperStar 𝔼 ℓ Φ)
@@ -261,12 +262,12 @@ theorem pow_smul_frobeniusCoefficientIterate_eq
     simp only [Functor.map_comp, assoc, Iso.hom_inv_id_map_assoc, h₁, ← reassoc_of% h₂,
       reassoc_of% h₃]
 
-/-- **The stalks of the iterates of a rational model** (blueprint `sk-lem-tf-rational-model`,
-(1), second identity only; the identity for the operators `T_{c_m}` is not formalized,
-see the module docstring): under the hypotheses of `pow_smul_frobeniusCoefficientIterate_eq`,
-for every morphism `y : T ⟶ X` (a geometric point in the blueprint) with a coefficient comparison
-`σ_y` for `Ly^*`, `ℓ^{N m} (ψ_m)_y = (θ_m)_y ⊗ E`, read through `e`, the comparison for `Φ_m`
-and `σ_y`. -/
+/-- **The stalks of the iterates of a rational model** (blueprint
+`lemma-integral-models-rational-frobenius-correspondences`, (1), second identity only; the identity
+for the operators `T_{c_m}` is not formalized, see the module docstring): under the hypotheses of
+`pow_smul_frobeniusCoefficientIterate_eq`, for every morphism `y : T ⟶ X` (a geometric point in the
+blueprint) with a coefficient comparison `σ_y` for `Ly^*`, `ℓ^{N m} (ψ_m)_y = (θ_m)_y ⊗ E`, read
+through `e`, the comparison for `Φ_m` and `σ_y`. -/
 theorem pow_smul_upperStar_map_frobeniusCoefficientIterate_eq
     (σ : boundedConstructibleUpperStar 𝒪 ℓ Φ ⋙ boundedConstructibleExtendScalars X.left ℓ E ≅
       boundedConstructibleExtendScalars X.left ℓ E ⋙ boundedConstructibleUpperStar 𝔼 ℓ Φ)
@@ -297,19 +298,19 @@ theorem pow_smul_upperStar_map_frobeniusCoefficientIterate_eq
     Functor.map_comp, assoc, ← reassoc_of% h₁, Iso.inv_hom_id_app_assoc]
 
 /-- **Integral models for rational Frobenius correspondences** (blueprint
-`sk-lem-tf-rational-model`): for every bounded constructible
+`lemma-integral-models-rational-frobenius-correspondences`): for every bounded constructible
 `E`-complex `K` and every morphism `ψ : LΦ^* K ⟶ K` there are a bounded constructible
 `𝒪_E`-complex `K₀`, an isomorphism `e : (K₀)_E ≅ K`, an integer `N ≥ 0` and a Frobenius
 correspondence `θ : LΦ^* K₀ ⟶ K₀` such that `ℓ^N ψ = θ ⊗ E`, read through `e` and the canonical
 comparison `LΦ^* ⋙ (-)_E ≅ (-)_E ⋙ LΦ^*` (`boundedConstructibleUpperStarExtendScalarsIso`,
-blueprint `sk-prop-scalar-six`, which holds since `E_X` is flat over `𝒪_{E,X}`).
-The iterates and their stalks then satisfy `ℓ^{N m} ψ_m = θ_m ⊗ E`, the second identity of
-part (1) of the blueprint lemma; its first identity, for the operators `T_{c_m}`, is not
+blueprint `proposition-six-operations-change-coefficients`, which holds since `E_X` is flat over
+`𝒪_{E,X}`). The iterates and their stalks then satisfy `ℓ^{N m} ψ_m = θ_m ⊗ E`, the second identity
+of part (1) of the blueprint lemma; its first identity, for the operators `T_{c_m}`, is not
 formalized (`pow_smul_frobeniusCoefficientIterate_eq`,
 `pow_smul_upperStar_map_frobeniusCoefficientIterate_eq`).
 
 The integral model `K₀` exists since `(-)_E` is a localization functor (blueprint
-`sk-thm-sfb-rationalization-comparison`), and the comparison identifies `LΦ^* K` with
+`proposition-inverting-ell`), and the comparison identifies `LΦ^* K` with
 `(LΦ^* K₀)_E`; the localized `Hom` description then writes `ψ` as `ℓ^{-N} (θ ⊗ E)`. -/
 theorem exists_integralModel_frobeniusCorrespondence
     (K : Dᵇc(X.left)⟦𝔼⟧) (ψ : (boundedConstructibleUpperStar 𝔼 ℓ Φ).obj K ⟶ K) :

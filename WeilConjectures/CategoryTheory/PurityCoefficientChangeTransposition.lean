@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Transposition of the purity and smooth-trace coefficient equations
 
-Source: the opening paragraph of the proof of det-sp-purity-coefficient-change.
+Source: the opening paragraph of the proof of proposition-compatibility-purity-change-coefficients.
 -/
 
 @[expose] public section
@@ -65,8 +65,9 @@ theorem purityCoefficientChange_iff_trace
 
 /-- A source comparison satisfying the purity square is the conjugate of the
 exceptional comparison. Source: the transposition calculation in the proof of
-`det-sp-purity-coefficient-change` (blueprint: lem-pur-coefficient-trace-transposition).
-Multiply the square on the right by the inverse target purity isomorphism. -/
+`proposition-compatibility-purity-change-coefficients` (blueprint:
+lem-pur-coefficient-trace-transposition). Multiply the square on the right by the inverse target
+purity isomorphism. -/
 theorem purityCoefficientChange_source_eq
     (γ : J ≅ G) (γ' : J' ≅ G') (β : G ⋙ S ⟶ T ⋙ G') (K : D)
     (a : S.obj (J.obj K) ⟶ J'.obj (T.obj K))
@@ -75,10 +76,10 @@ theorem purityCoefficientChange_source_eq
   rw [← Category.assoc, h, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
 
 /-- Naturality of a source comparison follows from its purity squares.
-Source: the naturality calculation in the proof of `det-sp-purity-coefficient-change`
-(blueprint: lem-pur-coefficient-trace-transposition).
-The preceding conjugation formula identifies the component family with the composite
-of three natural transformations. Apply naturality of that composite. -/
+Source: the naturality calculation in the proof of
+`proposition-compatibility-purity-change-coefficients` (blueprint:
+lem-pur-coefficient-trace-transposition). The preceding conjugation formula identifies the component
+family with the composite of three natural transformations. Apply naturality of that composite. -/
 theorem purityCoefficientChange_source_natural
     (γ : J ≅ G) (γ' : J' ≅ G') (β : G ⋙ S ⟶ T ⋙ G')
     (a : ∀ K : D, S.obj (J.obj K) ⟶ J'.obj (T.obj K))
@@ -92,9 +93,10 @@ theorem purityCoefficientChange_source_natural
   simpa only [ha, Functor.comp_map] using α.naturality v
 
 /-- The source comparison is invertible whenever the exceptional comparison is.
-Source: the conjugation calculation in the proof of `det-sp-purity-coefficient-change`
-(blueprint: lem-pur-coefficient-trace-transposition).
-Use the preceding formula and closure of isomorphisms under functors and composition. -/
+Source: the conjugation calculation in the proof of
+`proposition-compatibility-purity-change-coefficients` (blueprint:
+lem-pur-coefficient-trace-transposition). Use the preceding formula and closure of isomorphisms
+under functors and composition. -/
 theorem purityCoefficientChange_source_isIso
     (γ : J ≅ G) (γ' : J' ≅ G') (β : G ⋙ S ⟶ T ⋙ G') (K : D)
     (a : S.obj (J.obj K) ⟶ J'.obj (T.obj K)) [IsIso (β.app K)]

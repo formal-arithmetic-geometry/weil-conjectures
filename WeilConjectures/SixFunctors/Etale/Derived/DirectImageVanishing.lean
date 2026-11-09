@@ -25,7 +25,7 @@ Let `k` be a separably closed field, `f : X ⟶ Y` a morphism of finite type bet
 locally of finite type, with `dim X ≤ d`, and `Λ` a finite ring. Then `R^q f_* M = 0` for every
 `q > 2d` and every étale sheaf `M` of `Λ`-modules on `X`
 (`AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`, blueprint
-`lem-sf-etale-direct-image-vanishing`).
+`theorem-results-from-etale-theory--4`).
 
 The proof follows the blueprint. The sheaf `R^q f_* M` is the sheafification of the presheaf
 `W ↦ H^q(W ×_Y X, M|)` on `Y_ét`
@@ -34,8 +34,8 @@ so it suffices that these groups vanish for affine `W`. Then `W ×_Y X` is a `k`
 type, étale over `X`, hence of dimension at most `d`, and its torsion cohomological dimension is
 at most `2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`, blueprint
 `sk-prop-sf-finiteness`, the case `c = 0` of the bound `cd_tor(X) ≤ 2d + c` of
-`thm-sc-finite-type-torsion-cd`). That bound is stated for abelian sheaves; it is transported to
-sheaves of `Λ`-modules by dimension shifting
+`lemma-uniform-bounds-pro-etale-affines`). That bound is stated for abelian sheaves; it is
+transported to sheaves of `Λ`-modules by dimension shifting
 (`AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`), using that the
 underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
 (`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
@@ -43,7 +43,7 @@ underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.HasUniformDirectImageVanishingLE`: the bound `UDV(f, Λ; N)` of
-  blueprint `def-sf-uniform-direct-image-vanishing`.
+  blueprint `definition-cohomological-dimension--2`.
 
 ## Main statements
 
@@ -51,7 +51,7 @@ underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
   sheaf of `Λ`-modules over an étale `X`-scheme `V` vanishes in a degree where the abelian
   cohomology of its underlying abelian sheaf restricted to `V` does.
 - `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`: blueprint
-  `lem-sf-etale-direct-image-vanishing`.
+  `theorem-results-from-etale-theory--4`.
 -/
 
 @[expose] public section
@@ -66,7 +66,7 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `def-sf-uniform-direct-image-vanishing`: Uniform vanishing of the higher direct
+/-- Blueprint `definition-cohomological-dimension--2`: Uniform vanishing of the higher direct
 images.
 
 `UDV(f, Λ; N)` holds if the higher direct images of `f` on the small étale sites vanish above
@@ -95,7 +95,7 @@ theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H [Finite Λ] {X : Sche
   Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic V F n
     (fun I _ m ↦ Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ I m) hF
 
-/-- Blueprint `lem-sf-etale-direct-image-vanishing`: Vanishing of the higher direct images above
+/-- Blueprint `theorem-results-from-etale-theory--4`: Vanishing of the higher direct images above
 the dimension.
 
 Let `k` be a separably closed field, `f : X ⟶ Y` a morphism of finite type between `k`-schemes

@@ -14,8 +14,8 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 Let `k₀` be a finite field, `X` a quasi-compact `k₀`-scheme locally of finite type, `i : Z ⟶ X`
 a closed immersion and `j : U ⟶ X` the complementary quasi-compact open immersion, both over
-`k₀`. This file proves the Weil clause of blueprint `prop-sf-localization-all-stages`, at the
-coefficient stage `Λ = ℚ̄_ℓ`: on Weil complexes (`AlgebraicGeometry.WeilComplex`),
+`k₀`. This file proves the Weil clause of blueprint `lemma-local-cohomology-right-adjoint--2`, at
+the coefficient stage `Λ = ℚ̄_ℓ`: on Weil complexes (`AlgebraicGeometry.WeilComplex`),
 
 1. `i_*` has a right adjoint `Ri^!`
    (`AlgebraicGeometry.WeilComplex.closedUpperShriekAdjunction`);
@@ -94,8 +94,9 @@ lemma ProEtaleWeilSheaf.isZero_upperStar_obj_lowerStar_obj
     (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij).disjoint M.carrier)
 
 omit [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j] in
-/-- Blueprint `lem-exc-open-closed-detection` for pro-étale Weil sheaves: for complementary `i`
-and `j`, a pro-étale Weil sheaf `F` with `i^* F = 0` and `j^* F = 0` is zero. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` for pro-étale Weil sheaves:
+for complementary `i` and `j`, a pro-étale Weil sheaf `F` with `i^* F = 0` and `j^* F = 0` is
+zero. -/
 lemma ProEtaleWeilSheaf.isZero_of_isZero_upperStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : ProEtaleWeilSheaf k₀ l X)
     (hi : IsZero ((ProEtaleWeilSheaf.upperStar k₀ l i).obj F))
@@ -106,9 +107,10 @@ lemma ProEtaleWeilSheaf.isZero_of_isZero_upperStar_of_isCompl
 
 omit [Fact (ringChar k₀ ≠ l)] in
 include j in
-/-- Blueprint `lem-exc-proetale-closed-exact` for pro-étale Weil sheaves: for complementary `i`
-and `j`, the pushforward `i_*` of pro-étale Weil sheaves is exact, as it is on the underlying
-sheaves (`AlgebraicGeometry.ProEtale.preservesFiniteColimits_adicLowerStar_of_isCompl`). -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--4` for pro-étale Weil
+sheaves: for complementary `i` and `j`, the pushforward `i_*` of pro-étale Weil sheaves is exact, as
+it is on the underlying sheaves
+(`AlgebraicGeometry.ProEtale.preservesFiniteColimits_adicLowerStar_of_isCompl`). -/
 lemma ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
     PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l i) :=
@@ -185,8 +187,8 @@ variable [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): the adjunction `φ^* ⊣ Rφ_*` of
-Weil complexes, the restriction of
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): the adjunction `φ^* ⊣ Rφ_*`
+of Weil complexes, the restriction of
 `AlgebraicGeometry.ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction`. -/
 noncomputable def WeilComplex.upperStarDerivedLowerStarAdjunction :
     WeilComplex.upperStar (k₀ := k₀) (l := l) φ ⊣ WeilComplex.derivedLowerStar φ :=
@@ -261,7 +263,7 @@ lemma WeilComplex.derivedLowerStar_essImage_of_isZero (K : WeilComplex k₀ l X)
     ((ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l i).unit.app K.obj) hiso).symm⟩⟩
 
 include hij in
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), the vanishing:
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause), the vanishing:
 `Hom(i_* Q[m], Rj_* G) = 0` for Weil complexes `Q` on `Z` and `G` on `U`. -/
 lemma WeilComplex.subsingleton_hom_shift (Q : WeilComplex k₀ l Z) (G : WeilComplex k₀ l U)
     (m : ℤ) :
@@ -282,15 +284,15 @@ lemma WeilComplex.isLeftAdjoint_derivedLowerStar :
     (WeilComplex.derivedLowerStar_essImage_of_isZero i j hij)
 
 include i j hij in
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): the exceptional inverse image
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): the exceptional inverse image
 `Ri^!` of Weil complexes along a closed immersion `i`, the right adjoint of `i_*`
 (`AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerStar`). -/
 noncomputable def WeilComplex.closedUpperShriek : WeilComplex k₀ l X ⥤ WeilComplex k₀ l Z :=
   have := WeilComplex.isLeftAdjoint_derivedLowerStar (k₀ := k₀) (l := l) i j hij
   (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i).rightAdjoint
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): the direct image `i_*` of Weil
-complexes along a closed immersion has the right adjoint `Ri^!`. It is constructed by the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): the direct image `i_*` of
+Weil complexes along a closed immersion has the right adjoint `Ri^!`. It is constructed by the
 recollement argument: the fibre of the unit `K ⟶ Rj_* j^* K` is killed by `j^*`, hence is `i_*`
 of a Weil complex on `Z`, and it represents `Hom(i_* -, K)` since `Hom(i_* Q[m], Rj_* G) = 0`. -/
 noncomputable def WeilComplex.closedUpperShriekAdjunction :
@@ -308,8 +310,8 @@ noncomputable abbrev WeilComplex.closedSupportTriangle (K : WeilComplex k₀ l X
   Recollement.triangle (WeilComplex.upperStarDerivedLowerStarAdjunction j)
     (WeilComplex.closedUpperShriekAdjunction i j hij) K w
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): for a Weil complex `K`, the counit
-`i_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a distinguished triangle
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): for a Weil complex `K`, the
+counit `i_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a distinguished triangle
 `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` of Weil complexes, and its third arrow is unique,
 as `Hom(i_* Q[m], Rj_* G) = 0` (`AlgebraicGeometry.WeilComplex.subsingleton_hom_shift`). -/
 theorem WeilComplex.existsUnique_distTriang_closedSupportTriangle (K : WeilComplex k₀ l X) :
@@ -320,9 +322,9 @@ theorem WeilComplex.existsUnique_distTriang_closedSupportTriangle (K : WeilCompl
     (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij)
     (WeilComplex.derivedLowerStar_essImage_of_isZero i j hij) K
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), functoriality: for `φ : K ⟶ K'` of
-Weil complexes and distinguished closed-support triangles of `K` and `K'`, the triple
-`(i_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause), functoriality: for
+`φ : K ⟶ K'` of Weil complexes and distinguished closed-support triangles of `K` and `K'`, the
+triple `(i_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
 theorem WeilComplex.exists_triangleHom_closedSupportTriangle {K K' : WeilComplex k₀ l X}
     (φ : K ⟶ K') {w w'} (hw : WeilComplex.closedSupportTriangle i j hij K w ∈ distTriang _)
     (hw' : WeilComplex.closedSupportTriangle i j hij K' w' ∈ distTriang _) :
@@ -335,7 +337,7 @@ theorem WeilComplex.exists_triangleHom_closedSupportTriangle {K K' : WeilComplex
   Recollement.exists_triangleHom _ _ (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij)
     φ hw hw'
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), functoriality: a morphism of
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause), functoriality: a morphism of
 distinguished closed-support triangles of Weil complexes is determined by its middle
 component. -/
 theorem WeilComplex.closedSupportTriangle_hom_ext {K K' : WeilComplex k₀ l X} {w w'}
@@ -347,7 +349,7 @@ theorem WeilComplex.closedSupportTriangle_hom_ext {K K' : WeilComplex k₀ l X} 
   Recollement.triangleHom_ext _ _ (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij)
     hw hw' h
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): `Ri^! Rj_* G = 0` for Weil
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): `Ri^! Rj_* G = 0` for Weil
 complexes `G` on `U`, as `Hom(Q, Ri^! Rj_* G) = Hom(i_* Q, Rj_* G) = 0`. -/
 theorem WeilComplex.isZero_closedUpperShriek_obj (G : WeilComplex k₀ l U) :
     IsZero ((WeilComplex.closedUpperShriek i j hij).obj ((WeilComplex.derivedLowerStar j).obj G)) :=
@@ -355,8 +357,8 @@ theorem WeilComplex.isZero_closedUpperShriek_obj (G : WeilComplex k₀ l U) :
     (WeilComplex.closedUpperShriekAdjunction i j hij)
     (WeilComplex.isZero_upperStar_obj_derivedLowerStar_obj i j hij) G
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause): the unit `Q ⟶ Ri^! i_* Q` is an
-isomorphism, `i_*` being fully faithful on Weil complexes. -/
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): the unit `Q ⟶ Ri^! i_* Q` is
+an isomorphism, `i_*` being fully faithful on Weil complexes. -/
 instance WeilComplex.isIso_closedUpperShriekAdjunction_unit :
     IsIso (WeilComplex.closedUpperShriekAdjunction (k₀ := k₀) (l := l) i j hij).unit :=
   have := (WeilComplex.fullyFaithfulDerivedLowerStar (k₀ := k₀) (l := l) i).full
@@ -365,8 +367,8 @@ instance WeilComplex.isIso_closedUpperShriekAdjunction_unit :
 
 section Equivariance
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), equivariance of the closed-support
-triangle: forgetting the Weil structures carries the closed-support triangle
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause), equivariance of the
+closed-support triangle: forgetting the Weil structures carries the closed-support triangle
 `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` of a Weil complex `K` to the closed-support triangle
 `ī_* Rī^! K̄ ⟶ K̄ ⟶ Rj̄_* j̄^* K̄ ⟶` in `Dᵇc(X̄, ℚ̄_ℓ)` of its underlying complex `K̄`, along
 the base changes `ī`, `j̄` of `i`, `j` to the geometric fibers, by an isomorphism of triangles
@@ -414,8 +416,8 @@ theorem WeilComplex.exists_iso_mapTriangle_closedSupportTriangle (K : WeilComple
       ((WeilComplex.upperStar j).obj K), ⟨ObjectProperty.isoMk _
       (eJ.app ((WeilComplex.upperStar j).obj K)).symm⟩⟩
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), the Weil structure of `Ri^!`: the
-underlying complex of `Ri^! K` is `Rī^!` of the underlying complex of `K`, along the base change
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause), the Weil structure of `Ri^!`:
+the underlying complex of `Ri^! K` is `Rī^!` of the underlying complex of `K`, along the base change
 `ī` of `i` to the geometric fibers. The isomorphism is induced by the first component of the
 isomorphism of closed-support triangles
 (`AlgebraicGeometry.WeilComplex.exists_iso_mapTriangle_closedSupportTriangle`), `ī_*` being fully
@@ -454,8 +456,8 @@ theorem WeilComplex.nonempty_forget_closedUpperShriek_obj_iso (K : WeilComplex k
     (Scheme.Hom.geometricFiberMap i (comp_over i _))).preimageIso
     (α ≪≫ Triangle.π₁.mapIso e)⟩
 
-/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), the Weil structure of `Ri^!` and
-the equivariance of `i_* ⊣ Ri^!`: forgetting the Weil structures commutes with `Ri^!`, and the
+/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause), the Weil structure of `Ri^!`
+and the equivariance of `i_* ⊣ Ri^!`: forgetting the Weil structures commutes with `Ri^!`, and the
 counit of `i_* ⊣ Ri^!` is carried to the counit of `ī_* ⊣ Rī^!` on `Dᵇc(X̄, ℚ̄_ℓ)`, along the base
 change `ī` of `i` to the geometric fibers. Here `eI` identifies the underlying complex of
 `i_* Q` with `ī_*` of that of `Q`

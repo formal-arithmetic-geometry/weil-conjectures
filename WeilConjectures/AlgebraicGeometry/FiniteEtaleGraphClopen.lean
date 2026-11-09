@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 
 Source: Mathlib AlgebraicGeometry Restrict.isoOpensRange and OpenImmersion.isoOfRangeEq;
 corrected finite-étale lifting blueprint steps 2–3.
-(blueprint: lem-weil-pbc-finite-etale-graph-clopen)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 
 @[expose] public section
@@ -25,7 +25,7 @@ namespace AlgebraicGeometry
 
 /-- Morphisms to a finite étale scheme correspond to clopen graphs of degree one.
 Source: corrected blueprint finite-étale lifting, steps 2–3; Stacks Tags 024T and 01KT.
-(blueprint: lem-weil-pbc-finite-etale-graph-clopen)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof: Associate to a morphism its graph, a section of the second projection.
 The projection is finite étale. Its section is étale by cancellation, a monomorphism

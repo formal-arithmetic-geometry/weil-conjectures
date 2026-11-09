@@ -55,7 +55,7 @@ lemma isIso_upperShriekUnitTensorMap_diagonal_upperShriek_unit :
   isIso_upperShriekUnitTensorMap_of_isDualizable ℓ _
     (isDualizable_upperShriek_unit_of_smoothOfRelativeDimension ℓ (pullback.fst f f) d)
 
-/-- Blueprint `thm-pur-diagonal-dualizing-object` (`ℚ̄_ℓ`-coefficients): **the orientation
+/-- Blueprint `proposition-relative-dualizing-complex--1` (`ℚ̄_ℓ`-coefficients): **the orientation
 `ℚ̄_ℓ,X(d)[2d] ≅ ω_f` from the fundamental class of the diagonal**, given the invertibility of the
 base change map `Lp₂^* ω_f ⟶ ω_{p₁}`. -/
 noncomputable def tateTwistIsoUpperShriekUnitOfDiagonal

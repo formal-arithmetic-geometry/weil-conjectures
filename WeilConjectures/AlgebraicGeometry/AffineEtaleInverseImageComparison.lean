@@ -40,15 +40,15 @@ Proof:
    (lem-weil-pbc-affine-etale-site-base-change), hence is continuous.
 2. Restriction is an equivalence (lem-weil-pbc-affine-etale-site-topos). Full and affine
    direct images agree after restriction, since both evaluate at the same base change
-   (lem-weil-pbc-etale-base-change-continuous, def-weil-pbc-sites-and-cohomology).
+   (situation-conventions, def-weil-pbc-sites-and-cohomology).
    Transport the inverse-image adjunction across these equivalences. Uniqueness of left
-   adjoints gives e, with its unit equation (lem-weil-pbc-conjugate-iso-unit-equation).
+   adjoints gives e, with its unit equation (situation-conventions).
    Finite-limit preservation transfers from the full-site inverse image.
 3. Evaluate the unit equation on each affine object. For composites, pullback pasting
    (def-pc-fibre-product) gives gamma. Both routes preserve the iterated units by
    lem-weil-pbc-sets-etale-inverse-image-composition-units and
    lem-weil-pbc-site-morphism-composition. Uniqueness of the unit-compatible adjoint
-   comparison (lem-weil-pbc-conjugate-iso-unit-equation) makes the two routes equal. -/
+   comparison (situation-conventions) makes the two routes equal. -/
 theorem exists_affineEtale_inverseImage_comparison :
     ∃ (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

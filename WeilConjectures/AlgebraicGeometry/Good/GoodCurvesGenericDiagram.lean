@@ -111,8 +111,9 @@ T_i\to\operatorname{Spec}A$, whose generic fibre is the chosen diagram. Every ob
 presentation over the affine base and hence qcqs. Every arrow is locally of finite presentation:
 on affine charts apply the cited theorem on finite presentation over a finite-type intermediate
 algebra.
-Inputs: lem-weil-pbc-localization-colimit-principal-localizations, lem-weil-pbc-limit-affine-
-transition, thm-pd-spreading-out, lem-weil-pbc-finite-presentation-over-finite-type-algebra.
+Inputs: theorem-finite-etale-covers-proper-henselian--2, lem-weil-pbc-limit-affine-
+transition, proposition-jacobian-over-ground-field--1,
+lem-weil-pbc-finite-presentation-over-finite-type-algebra.
 
 6. Over the generic field $\nu$ is finite and surjective: it is the normalization of the
 reduction followed by the surjective closed immersion of the reduction. Use the existing

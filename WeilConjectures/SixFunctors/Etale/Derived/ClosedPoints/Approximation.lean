@@ -15,7 +15,7 @@ Let `X` be locally of finite type over a field and `F` an étale sheaf of `Λ`-m
 whose stalks vanish at the non-closed points. For a finite set `S` of closed points let
 `F_S ⊆ F` be the subsheaf of sections supported on `S`. These subsheaves form a filtered
 diagram indexed by the finite sets of closed points, and `F` is its colimit (blueprint
-`lem-kun-cp-approximation`).
+`lemma-sheaves-finite-support-finite-morphisms--1`).
 
 ## Main definitions
 
@@ -25,7 +25,8 @@ diagram indexed by the finite sets of closed points, and `F` is its colimit (blu
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isColimitSupportedSectionsCocone` (`lem-kun-cp-approximation`).
+- `AlgebraicGeometry.Etale.isColimitSupportedSectionsCocone`
+(`lemma-sheaves-finite-support-finite-morphisms--1`).
 -/
 
 @[expose] public section
@@ -141,13 +142,14 @@ end
 
 attribute [local instance] IsFiltered.isConnected
 
-/-- Blueprint `lem-kun-cp-approximation`: **approximation of a sheaf supported at closed
-points.** Let `X` be locally of finite type over a field and `F` an étale sheaf of `Λ`-modules
-on `X` whose stalks vanish at the non-closed points. Then `F` is the filtered colimit of its
-subsheaves `F_S` of sections supported on finite sets `S` of closed points, and each `F_S`
+/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1`: **approximation of a sheaf
+supported at closed points.** Let `X` be locally of finite type over a field and `F` an étale sheaf
+of `Λ`-modules on `X` whose stalks vanish at the non-closed points. Then `F` is the filtered colimit
+of its subsheaves `F_S` of sections supported on finite sets `S` of closed points, and each `F_S`
 vanishes off `S` (`AlgebraicGeometry.Etale.isZero_upperStar_supportedSections`), so it is the
 pushforward of a sheaf on the closed subscheme `S`
-(`AlgebraicGeometry.Etale.mem_essImage_lowerStar_iff_isZero_sheafFiber`, `lem-kun-04ca`).
+(`AlgebraicGeometry.Etale.mem_essImage_lowerStar_iff_isZero_sheafFiber`,
+`proposition-extension-zero-restriction-closed-subscheme--5`).
 
 The blueprint uses the finitely generated subsheaves of `F` instead; the `F_S` play the same
 role. The comparison `colim F_S ⟶ F` is a monomorphism, filtered colimits being exact, and an

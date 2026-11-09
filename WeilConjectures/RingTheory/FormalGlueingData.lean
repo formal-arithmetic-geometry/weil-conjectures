@@ -15,7 +15,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 # Formal glueing data for modules
 
 Source: Stacks Project, More on Algebra, Remark 05EL, items (1) and (2)
-(blueprint: def-weil-pbc-formal-glueing-data).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -33,17 +33,17 @@ variable {R : Type u} {S : Type v} [CommRing R] [CommRing S]
 
 /-- Restriction of scalars along a ring homomorphism: Mathlib's
 `ModuleCat.restrictScalars`. Source: Stacks, Remark 05EL
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 abbrev restrict (φ : R →+* S) (M : ModuleCat.{w} S) : ModuleCat.{w} R :=
   (ModuleCat.restrictScalars φ).obj M
 
 /-- Localization of an `R`-module at one element. Source: Stacks, Remark 05EL
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 abbrev localize (f : R) (M : ModuleCat.{w} R) : ModuleCat.{max u w} R :=
   ModuleCat.of R (LocalizedModule.Away f M)
 
 /-- Scalar extension, in Mathlib's factor order `S ⊗[R] M`. Source: Stacks,
-Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+Remark 05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 abbrev extend (φ : R →+* S) (M : ModuleCat.{w} R) : ModuleCat.{max v w} S :=
   letI : Algebra R S := φ.toAlgebra
   ModuleCat.of S (S ⊗[R] M)
@@ -85,7 +85,7 @@ The module axioms follow on fractions from the corresponding axioms on `M`;
 every localized element is a fraction [def-weil-pbc-module-localization-away].
 Source: Stacks, Remark 05EL; canonical maps, clause (1)
 (blueprint: lem-weil-pbc-formal-glueing-canonical-maps);
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem exists_localized_s_module (φ : R →+* S) (f : R) (M : ModuleCat.{w} S) :
     ∃ sm : Module S (localize f (restrict φ M)),
       ∀ (s : S) (m : M) (t : Submonoid.powers f),
@@ -107,14 +107,14 @@ theorem exists_localized_s_module (φ : R →+* S) (f : R) (M : ModuleCat.{w} S)
   exact IsLocalizedModule.map_LocalizedModules _ (act s) m t
 
 /-- The canonical `S`-module structure from the localized multiplication maps.
-Source: Stacks, Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+Source: Stacks, Remark 05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 @[instance_reducible] noncomputable def localizedSModule
     (φ : R →+* S) (f : R) (M : ModuleCat.{w} S) :
     Module S (localize f (restrict φ M)) :=
   (exists_localized_s_module φ f M).choose
 
 /-- Localization of a linear map. Source: Stacks, Remark 05EL and Mathlib's
-`IsLocalizedModule.map` (blueprint: def-weil-pbc-formal-glueing-data). -/
+`IsLocalizedModule.map` (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 noncomputable def localMap (f : R) {M : ModuleCat.{w₁} R}
     {N : ModuleCat.{w₂} R} (h : M →ₗ[R] N) :
     localize f M →ₗ[R] localize f N :=
@@ -127,7 +127,7 @@ private theorem localMap_mk (f : R) {M : ModuleCat.{w₁} R}
   IsLocalizedModule.map_LocalizedModules _ h m t
 
 /-- Restrict an `S`-linear map to the underlying `R`-modules. Source: Stacks,
-Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+Remark 05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 def restrictMap (φ : R →+* S) {M : ModuleCat.{w₁} S}
     {N : ModuleCat.{w₂} S} (h : M →ₗ[S] N) :
     restrict φ M →ₗ[R] restrict φ N :=
@@ -136,7 +136,7 @@ def restrictMap (φ : R →+* S) {M : ModuleCat.{w₁} S}
     map_smul' := fun r x => h.map_smul (φ r) x }
 
 /-- Tensoring an `R`-linear map with `S`. Source: Stacks, Remark 05EL
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 noncomputable def extendMap (φ : R →+* S) {M : ModuleCat.{w₁} R}
     {N : ModuleCat.{w₂} R}
     (h : M →ₗ[R] N) : extend φ M →ₗ[S] extend φ N :=
@@ -180,7 +180,7 @@ property show that agreement on `M` determines the map. On fractions, division
 by `f` and `g` gives `(m/f^a)/g^b ↦ (m/g^b)/f^a`.
 Source: Stacks, Remark 05EL, canonical maps, clause (2)
 (blueprint: lem-weil-pbc-formal-glueing-canonical-maps);
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem exists_swap (f g : R) (M : ModuleCat.{w} R) :
     ∃! h : localize g (localize f M) →ₗ[R] localize f (localize g M),
       ∀ m : M,
@@ -209,7 +209,7 @@ theorem exists_swap (f g : R) (M : ModuleCat.{w} R) :
     exact hh m
 
 /-- The canonical interchange of two localizations. Source: Stacks, Remark
-05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 noncomputable def swap (f g : R) (M : ModuleCat.{w} R) :
     localize g (localize f M) →ₗ[R] localize f (localize g M) :=
   (exists_swap f g M).exists.choose
@@ -225,7 +225,7 @@ localization at `f`. This proves the displayed equation and uniqueness, and
 gives `(s ⊗ m)/f^e ↦ s ⊗ (m/f^e)` on pure-tensor fractions.
 Source: Stacks, Remark 05EL, canonical maps, clause (3)
 (blueprint: lem-weil-pbc-formal-glueing-canonical-maps);
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem exists_compare (φ : R →+* S) (f : R) (M : ModuleCat.{w} R) :
     ∃! h : localize f (restrict φ (extend φ M)) →ₗ[R]
         restrict φ (extend φ (localize f M)),
@@ -245,7 +245,7 @@ theorem exists_compare (φ : R →+* S) (f : R) (M : ModuleCat.{w} R) :
   exact (LocalizedModule.lift_unique _ a hf h hh).symm
 
 /-- The canonical comparison `(M ⊗ S)_f → M_f ⊗ S`. Source: Stacks,
-Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+Remark 05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 noncomputable def compare (φ : R →+* S) (f : R) (M : ModuleCat.{w} R) :
     localize f (restrict φ (extend φ M)) →ₗ[R]
       restrict φ (extend φ (localize f M)) :=
@@ -273,7 +273,7 @@ is a finite sum of pure tensors, and every localized element is a fraction;
 additivity therefore extends the equality to every element.
 Source: Stacks, Remark 05EL,
 canonical maps, clause (3) (blueprint: lem-weil-pbc-formal-glueing-canonical-maps);
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem compare_smul (φ : R →+* S) (f : R) (M : ModuleCat.{w} R)
     (s : S) (x : localize f (restrict φ (extend φ M))) :
     compare φ f M ((localizedSModule φ f (extend φ M)).smul s x) =
@@ -309,7 +309,7 @@ actions. Write the element as `m/t` using
 [def-weil-pbc-module-localization] and the localized action. They agree because
 `h` is S-linear. Source: Stacks, Remark 05EL, canonical maps, clause (1)
 (blueprint: lem-weil-pbc-formal-glueing-canonical-maps);
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem localMap_smul (φ : R →+* S) (f : R) {M N : ModuleCat.{w} S}
     (h : M →ₗ[S] N) (s : S) (x : localize f (restrict φ M)) :
     localMap f (restrictMap φ h) ((localizedSModule φ f M).smul s x) =
@@ -323,12 +323,12 @@ theorem localMap_smul (φ : R →+* S) (f : R) {M N : ModuleCat.{w} S}
     rw [h.map_smul]
 
 /-- A module over `R_f`, regarded as an `R`-module. Source: Stacks,
-Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+Remark 05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 abbrev piece (f : R) (M : ModuleCat.{w} (Localization.Away f)) : ModuleCat.{w} R :=
   restrict (algebraMap R (Localization.Away f)) M
 
 /-- The base change of an `R`-linear map, viewed as an `R`-linear map.
-Source: Stacks, Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
+Source: Stacks, Remark 05EL (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 noncomputable def extendMapR (φ : R →+* S) {M N : ModuleCat.{w} R}
     (h : M →ₗ[R] N) : restrict φ (extend φ M) →ₗ[R] restrict φ (extend φ N) :=
   restrictMap φ (extendMap φ h)
@@ -336,7 +336,7 @@ noncomputable def extendMapR (φ : R →+* S) {M N : ModuleCat.{w} R}
 /-- An object of the formal glueing category. The first equation identifies
 the two paths from `(M'_fi)_fj` to `(M_j)_fi ⊗ S`; the second is the threefold
 cocycle equation. Source: Stacks, Remark 05EL, item (1)
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 structure Data (φ : R →+* S) {t : ℕ} (f : Fin t → R) where
   M' : ModuleCat.{w} S
   M : ∀ i : Fin t, ModuleCat.{w} (Localization.Away (f i))
@@ -366,7 +366,7 @@ structure Data (φ : R →+* S) {t : ℕ} (f : Fin t → R) where
 
 /-- A morphism of formal glueing data is a family of compatible linear maps.
 Source: Stacks, Remark 05EL, item (2)
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 structure Hom {t : ℕ} {φ : R →+* S} {f : Fin t → R}
     (X Y : Data φ f) where
   prime : X.M' →ₗ[S] Y.M'
@@ -412,7 +412,7 @@ and base change preserve identities [def-weil-pbc-module-localization],
 [def-weil-module-base-change]. Replace each localized or base-changed identity
 by the identity; both sides of each equation then equal the same structural
 map. Source: Stacks, Remark 05EL, item (2)
-(blueprint: def-weil-pbc-formal-glueing-data). -/
+(blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem id_compat {t : ℕ} {φ : R →+* S} {f : Fin t → R}
     (X : Data φ f) :
     (∀ i : Fin t,
@@ -443,7 +443,7 @@ localization of `v.prime.comp u.prime`, apply `v.prime_compat`, then
 equation expand the localization of each composite chart map, apply
 `v.chart_compat` then `u.chart_compat`, and combine the localized chart maps.
 Source: Stacks, Remark
-05EL, item (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
+05EL, item (2) (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem comp_compat {t : ℕ} {φ : R →+* S} {f : Fin t → R}
     {X Y Z : Data φ f} (u : Hom X Y) (v : Hom Y Z) :
     (∀ i : Fin t,
@@ -468,7 +468,7 @@ theorem comp_compat {t : ℕ} {φ : R →+* S} {f : Fin t → R}
       u.chart_compat, ← LinearMap.comp_assoc, ← localMap_comp]
 
 /-- The identity morphism has identity maps in every component. Source:
-Stacks, Remark 05EL, item (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
+Stacks, Remark 05EL, item (2) (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 def idHom {t : ℕ} {φ : R →+* S} {f : Fin t → R} (X : Data φ f) : Hom X X where
   prime := LinearMap.id
   chart := fun _ => LinearMap.id
@@ -476,7 +476,7 @@ def idHom {t : ℕ} {φ : R →+* S} {f : Fin t → R} (X : Data φ f) : Hom X X
   chart_compat := (id_compat X).2
 
 /-- Composition of morphisms is componentwise. Source: Stacks, Remark 05EL,
-item (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
+item (2) (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 def compHom {t : ℕ} {φ : R →+* S} {f : Fin t → R}
     {X Y Z : Data φ f} (u : Hom X Y) (v : Hom Y Z) : Hom X Z where
   prime := v.prime.comp u.prime
@@ -491,7 +491,7 @@ For associativity, these components are equal by associativity of linear-map
 composition. Equality of the components gives equality of the `Hom`
 structures, since their remaining fields are propositions.
 Source: Stacks, Remark 05EL,
-item (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
+item (2) (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 theorem category_laws {t : ℕ} {φ : R →+* S} {f : Fin t → R} :
     (∀ {X Y : Data.{u, v, w} φ f} (u : Hom X Y), compHom (idHom X) u = u) ∧
     (∀ {X Y : Data.{u, v, w} φ f} (u : Hom X Y), compHom u (idHom Y) = u) ∧
@@ -509,7 +509,7 @@ theorem category_laws {t : ℕ} {φ : R →+* S} {f : Fin t → R} :
     rfl
 
 /-- The category `Glue(R → S, (f_i))`. Source: Stacks, Remark 05EL,
-items (1) and (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
+items (1) and (2) (blueprint: theorem-finite-etale-covers-proper-henselian--2). -/
 instance {t : ℕ} (φ : R →+* S) (f : Fin t → R) :
     CategoryTheory.Category.{w} (Data.{u, v, w} φ f) where
   Hom := fun X Y => Hom X Y

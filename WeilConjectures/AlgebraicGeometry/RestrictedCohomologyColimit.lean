@@ -48,7 +48,7 @@ Proof:
    `lem-weil-pbc-filtered-category-directed-cofinal` explains the resulting
    reindexed colimit cocone. The index remains in universe u+1.
    Here is the filtered-cohomology argument at that size, following the proof
-   of `lem-weil-pbc-cohomology-filtered-colimit`. Work on qcqs etale objects,
+   of `lemma-finiteness-small-etale-topoi--2`. Work on qcqs etale objects,
    where every cover admits a finite qcqs refinement and its finite fibre
    products are qcqs. Sections commute with the directed colimit: local
    representatives and their finitely many matching equalities can all be

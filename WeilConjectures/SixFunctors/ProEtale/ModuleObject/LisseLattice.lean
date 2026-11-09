@@ -16,7 +16,7 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` with rin
 a connected regular Noetherian scheme. Every lisse (locally free) `E_S`-module `L` has a lattice:
 there is a locally free `𝒪_{E,S}`-module `L₀` with `E_S ⊗_{𝒪_{E,S}} L₀ ≅ L`
 (`AlgebraicGeometry.ProEtale.exists_isLocallyFree_padicIntegers_extendScalars_iso`, blueprint
-`sk-lem-stratified-lattice`, first stage).
+`lemma-lattices-after-finite-stratification`, first stage).
 
 The proof:
 
@@ -61,7 +61,7 @@ lemma isZero_mod_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
   exact hX.eq_of_src _ _
 
 /-- **Lisse `E`-sheaves on connected regular Noetherian schemes have lattices** (blueprint
-`sk-lem-stratified-lattice`, first stage). See the module docstring. -/
+`lemma-lattices-after-finite-stratification`, first stage). See the module docstring. -/
 theorem exists_isLocallyFree_padicIntegers_extendScalars_iso {S : Scheme.{u}} [IsNoetherian S]
     [IsRegular S] [ConnectedSpace S]
     (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})

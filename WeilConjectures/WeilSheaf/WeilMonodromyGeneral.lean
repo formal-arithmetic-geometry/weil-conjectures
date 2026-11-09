@@ -228,7 +228,7 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
   (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K) (B : FrobeniusBasePoint K X)
 
 /-- The Frobenius `Φ : ℱ_t ≅ ℱ_t` of the Weil fundamental representation
-(`def-wf-fundamental-representation`): the transport `ℱ_t ≅ ℱ_{t ≫ Fr}` along the path `β`, the
+(`situation-weil`): the transport `ℱ_t ≅ ℱ_{t ≫ Fr}` along the path `β`, the
 identification `ℱ_{t ≫ Fr} = (Fr^* ℱ)_t`, and the stalk at `t` of the Weil structure
 `Fr^* ℱ ≅ ℱ`. -/
 noncomputable def frobStalkIso (F : WeilSheaf K l X) (hF : F.IsLisse) :
@@ -501,7 +501,7 @@ theorem frobUnit_conj (F : WeilSheaf K l X) (hF : F.IsLisse) (u : W)
   rw [LinearEquiv.symm_apply_apply, D.geomEquiv_symm_conj hu, frobStalk_rep]
 
 /-- **The Weil fundamental representation** of a lisse Weil sheaf on `X₀` of arbitrary dimension
-(`def-wf-fundamental-representation`): the representation `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of `W` on
+(`situation-weil`): the representation `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of `W` on
 the stalk `ℱ_t`, extending the geometric fundamental representation by the Frobenius `Φ` of the
 Weil structure. -/
 noncomputable def fundamentalRep (F : WeilSheaf K l X) (hF : F.IsLisse) :
@@ -608,7 +608,7 @@ theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {F G : LisseWeilSheaf K 
 
 /-- **Essential surjectivity of the Weil fundamental representation**: every finite-dimensional
 representation of `W` which is continuous on the geometric part `π₁(X, t)` is the Weil
-fundamental representation of a lisse Weil sheaf (`prop-wf-weil-sheaf-representation-equivalence`,
+fundamental representation of a lisse Weil sheaf (`definition-weil-representation--1`,
 Frobenius descent). -/
 theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type (u + 1))
     [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
@@ -938,7 +938,7 @@ def isContinuousRep : ObjectProperty (Rep.{u} (PadicAlgCl l) W) :=
   fun V ↦ FiniteDimensional (PadicAlgCl l) V.V ∧ V.ρ.IsContinuousOn D.geomHom
 
 /-- **The lisse sheaf–representation equivalence** on a scheme `X₀` of arbitrary dimension
-(`prop-wf-weil-sheaf-representation-equivalence`): if the monodromy at `t` is an equivalence,
+(`definition-weil-representation--1`): if the monodromy at `t` is an equivalence,
 the Weil fundamental representation is an equivalence between lisse Weil sheaves on `X₀` and
 finite-dimensional representations of `W` continuous on `π₁(X, t)`, under which every lisse Weil
 sheaf goes to a representation isomorphic to its Weil fundamental representation. -/

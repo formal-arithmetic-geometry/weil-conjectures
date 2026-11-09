@@ -348,7 +348,7 @@ end StandardEtalePair
 the derivative `nXⁿ⁻¹` of `Xⁿ - t` being invertible modulo `Xⁿ - t`.
 
 This is the unramifiedness step of the proof of exactness of the Kummer sequence
-(blueprint: `lem-sc-kummer-exact`). -/
+(blueprint: `proposition-smooth-proper-curves-torsion-prime`). -/
 theorem AdjoinRoot.etale_X_pow_sub_C {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : IsUnit (n : R))
     (ht : IsUnit t) : Algebra.Etale R (AdjoinRoot (X ^ n - C t)) :=
   Algebra.Etale.of_equiv (StandardEtalePair.ofXPowSubCRingEquiv hn₀ hn ht)

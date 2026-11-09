@@ -42,8 +42,8 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperExceptionalOpenBaseChange
 /-!
 # Exceptional base change along an arbitrary open immersion
 
-Source: Weil blueprint, order 1815, sk-prop-sf-existence
-(blueprint: cor-exc-base-change-open-immersion-general).
+Source: Weil blueprint, order 1815, theorem-existence-exceptional-inverse-image
+(blueprint: proposition-composition-open-restriction-compactifications-f--5).
 The ambient assertion and the independent coefficient-class assertion are separate.
 The former uses the given ordinary unbounded adjunctions. The latter uses only the
 specified transported etale exceptional functor. No quasi-compactness of the open
@@ -68,7 +68,8 @@ open Scheme
 
 /-- The exact open extension-by-zero comparison in the two recorded presentations.
 It cancels the unit of the specified realization equivalence.
-Source: blueprint order 1815 (blueprint: cor-exc-base-change-open-immersion-general). -/
+Source: blueprint order 1815 (blueprint:
+proposition-composition-open-restriction-compactifications-f--5). -/
 noncomputable def sfIntrinsicOpenExtensionComparison (A : Type u) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (sfIntrinsicModuleEquivalence U A).functor ⋙ sfIntrinsicExtensionByZero j A ≅
@@ -80,7 +81,8 @@ noncomputable def sfIntrinsicOpenExtensionComparison (A : Type u) [CommRing A] [
 
 /-- Canonical realization of the compact-support candidate, fixed on constant sections
 and on K-injective representatives by sfIntrinsicDerivedDirectImageComparison.
-Source: blueprint order 1815 (blueprint: cor-exc-base-change-open-immersion-general). -/
+Source: blueprint order 1815 (blueprint:
+proposition-composition-open-restriction-compactifications-f--5). -/
 noncomputable def sfIntrinsicCompactSupportComparison (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfAmbientCompactSupportCandidate A c ≅

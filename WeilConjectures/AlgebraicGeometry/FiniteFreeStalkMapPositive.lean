@@ -88,7 +88,7 @@ private lemma free_comparison_intertwines {X Z : Scheme.{u}}
 
 set_option maxRecDepth 2048 in
 /-- Positive-rank finite-free stalk maps admit local representatives.
-Source: lem-pc-perfect-locus, finite matrix calculation, expanded in
+Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix calculation, expanded in
 lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2.
 Proof: Restrict first to the top open V and identify the restricted standard
 free sheaves with standard free sheaves on V. Transport t by these free

@@ -47,7 +47,7 @@ private theorem square_zero_global_kernel {Y Z : Scheme.{u}} (f : Z ⟶ Y)
     using hprod
 
 /-- The kernel ideal of the relative restriction map is square-zero.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-square-zero-relative-section-kernel-ideal)
 
 Proof: On affine charts the kernel is the quotient ideal `I/J`; its product is

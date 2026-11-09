@@ -197,7 +197,7 @@ exists by lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact; the indices
 the natural numbers.
 
 3. The map C → G is an isomorphism on stalks: prop-weil-pbc-geometric-stalks-exact identifies
-stalks of G[n] with kernels and lem-kun-stalks-commute-colimits identifies stalks of C with their
+stalks of G[n] with kernels and definition-torsion-sheaves--3 identifies stalks of C with their
 colimit. The hypothesis supplies surjectivity. Represent a colimit element by a kernel element
 using lem-weil-pbc-filtered-colimit-modules-elementwise over the integers; if it maps to zero,
 the representative is zero by the subgroup inclusion. Thus the stalk map is bijective. Apply
@@ -214,9 +214,9 @@ functor by def-weil-pbc-sites-and-cohomology, and its degree functors are additi
 lem-weil-pbc-right-derived-universal-delta-functor. Hence n kills H^q(Z, G[n]); the
 inclusion-induced group homomorphism shows that n kills the represented class in H^q(Z, G).
 
-6. Use sbc-lem-higher-direct-image-presheaf and lem-weil-pbc-sheafification-geometric-stalk to
+6. Use proposition-base-change-larger-algebraically-closed and definition-torsion-sheaves--3 to
 express the target stalk as the filtered colimit of cohomology over pointed etale neighbourhoods.
-The index is filtered by lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered. Use
+The index is filtered by definition-torsion-sheaves--3. Use
 lem-weil-pbc-filtered-colimit-modules-elementwise to represent the chosen stalk element on a
 neighbourhood; lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink refines it to an affine one
 without changing the stalk class. Work in a common universe, or a small equivalent index

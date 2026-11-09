@@ -47,13 +47,13 @@ Let `k` be separably closed, `Λ` a finite field whose characteristic `ℓ` is i
 (so `ℓ ≠ p`: the `p`-primary case in characteristic `p` is excluded), `a : X ⟶ Spec k` smooth of
 relative dimension `d` with a Tate orientation `γ`, and `K ∈ D^b_{ctf}(X, Λ)` perfect. Then:
 
-1. global duality `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)` holds (`sk-thm-sf-global-duality`,
+1. global duality `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)` holds (`theorem-global-verdier-duality`,
    `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`);
 2. the duality isomorphism `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨` of the identification holds
-   (`sk-thm-sf-identification`,
+   (`theorem-poincare-duality--7`,
    `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`);
 3. its degreewise consequence over the field `Λ`, `H^{2d-i}(X, K^∨(d)) ≅ H^i_c(X, K)^∨` with
-   both sides finite-dimensional, holds (`sk-thm-derived-duality`,
+   both sides finite-dimensional, holds (`corollary-degreewise-duality-over-fields`,
    `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality`). -/
 theorem globalDuality_and_identification_and_degreewiseDuality [HasInvertibleExponent Λ X]
     [SmoothOfRelativeDimension d a] (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
@@ -80,13 +80,13 @@ Let `k` be separably closed, `Λ` a finite field whose characteristic `ℓ` is i
 (so `ℓ ≠ p`: the `p`-primary case in characteristic `p` is excluded), `γ` a Tate orientation of
 `a : X ⟶ Spec k` of relative dimension `d`, and `K ∈ D^b_{ctf}(X, Λ)` perfect. Then:
 
-1. global duality `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)` holds (`thm-sf-global-duality`,
+1. global duality `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)` holds (`theorem-global-verdier-duality`,
    `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`);
 2. the derived Poincaré pairing `β_K : RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` is perfect
-   (`thm-sf-identification`,
+   (`theorem-poincare-duality--7`,
    `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`);
 3. its degreewise consequence over the field `Λ`, `H^{2d-i}(X, K^∨(d)) ≅ H^i_c(X, K)^∨` with
-   both sides finite-dimensional, holds (`thm-pod-degreewise-perfectness-over-a-field`, at the
+   both sides finite-dimensional, holds (`corollary-degreewise-duality-over-fields--1`, at the
    étale field stage of a finite field, in non-canonical form,
    `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality`). -/
 theorem globalDuality_and_isPerfectPairing_and_degreewiseDuality [HasInvertibleExponent Λ X]

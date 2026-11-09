@@ -64,7 +64,7 @@ their integer rings, and the finite-subextension condensed algebraic closure, up
 isomorphism of ring objects. The separate rational and integral ground-field clauses
 include Q_ell and Z_ell explicitly.
 
-Source: blueprint main-20261015, sk-def-localizing-closure, coefficient list, with the
+Source: blueprint main-20261015, definition-localizing-subcategory, coefficient list, with the
 algebraic-closure convention of sk-def-sfb-qlbar-condensed. This item-owned specialization
 is not the dependency's interface: it omits the all-continuous-map algebraic-closure case
 of `IsLocalizingAdmissibleCoefficient`, as the item statement requires
@@ -347,17 +347,19 @@ Proof plan (the six steps of this DAG node):
    lem-weil-pbc-exact-functor-complex-cohomology. Extend the finite constant-model
    stratification by the zero model on the complement, using
    lem-sf-open-extension-zero-constant-model-constructible. These models are locally
-   finitely presented by det-def-sfb-constructible-local-model, so both bounded
+   finitely presented by definition-constructible-sheaves--1, so both bounded
    constructibility conventions apply (sk-def-sfb-bounded-constructible and
-   sk-def-sfb-constructible). The projection formula of
+   definition-constructible-sheaves). The projection formula of
    lem-sfb-open-immersion-derived-tensor-projection and exact pullback from
-   sk-prop-sfb-cartesian-coefficients preserve the Tor interval under j_!.
-4. For finite ell-primary coefficients, det-thm-sfb-proper-base-change-finite, clause
+   lemma-inverse-image-coefficient-sheaves preserve the Tor interval under j_!.
+4. For finite ell-primary coefficients, proposition-proper-direct-image-constructible-complexes,
+clause
    (2), identifies c^* Rr_* j_! A with R(r_Z)_* a^* j_! A.
-5. For integer rings use det-thm-sfb-proper-base-change-integral, clause (3); for finite
+5. For integer rings use proposition-proper-direct-image-constructible-complexes, clause (3); for
+finite
    fields and the finite-subextension condensed algebraic closure use
-   det-thm-sfb-proper-base-change-rational, clause (3). The ground field and its integer
-   ring are the degree-one cases. This exhausts sk-def-localizing-closure.
+   proposition-proper-direct-image-constructible-complexes, clause (3). The ground field and its
+   integer ring are the degree-one cases. This exhausts definition-localizing-subcategory.
 6. Substitute step 2. The adjunction of sk-def-sfb-module-derived-pushpull makes the
    right derived pushforward preserve the terminal, hence zero, object. Thus the
    object on the boundary vanishes. No comparison map or localizing extension is asserted. -/

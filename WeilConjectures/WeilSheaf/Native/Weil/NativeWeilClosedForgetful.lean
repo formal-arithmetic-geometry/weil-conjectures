@@ -25,7 +25,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 commutes with cohomology, restricts to bounded constructible objects, and preserves
 the closed symmetric derived tensor, evaluation, and transposed evaluation.
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom/evaluation/transposition;
+Source: prose-10-20, internal-Hom/evaluation/transposition;
 native refinement in the eight-step DAG proof
 (blueprint: lem-sf-weil-native-closed-forgetful).
 

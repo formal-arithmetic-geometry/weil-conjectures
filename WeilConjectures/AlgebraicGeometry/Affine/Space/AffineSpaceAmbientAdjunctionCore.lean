@@ -428,7 +428,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
 
 /-! A compactification-specific form of the affine-space ambient adjunction.
 
-Source: blueprint `cor-amb-affine-space-adjunction`.
+Source: blueprint `lemma-affine-space-etale-localization--1`.
 (blueprint: cor-amb-affine-space-adjunction-compactification-core).
 
 This is the geometric core: the compact-support functor attached to an explicitly chosen
@@ -450,8 +450,8 @@ namespace AlgebraicGeometry.Etale
 /-- Compactification-specific affine-space ambient adjunction.
 
 Proof source: the affine-line/projective-line induction in
-`cor-amb-affine-space-adjunction`, with the standard projective compactification supplied by
-`Compactification.ofIsImmersionAffineSpace`. The induction composes the normalized
+`lemma-affine-space-etale-localization--1`, with the standard projective compactification supplied
+by `Compactification.ofIsImmersionAffineSpace`. The induction composes the normalized
 projective-line adjunction along the coordinate tower, identifies the resulting right functor
 with the explicit finite Tate-twist pullback and even shift, and transports along the chosen
 compactification comparison. This theorem is a strict sub-result of the compactification-

@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 # Integral compact support on the ordinary localizing category
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-brown,
-sk-prop-int-brown-construction (blueprint: det-prop-int-brown-construction).
+sk-prop-int-brown-construction (blueprint: proposition-construction-independence-rf-shriek).
 
 The auxiliary names package the actual module-object functors and their adjunction
 mates. The generators use finite constant scalar models, and all coproducts are
@@ -71,52 +71,52 @@ attribute [local instance 6000] integralCoefficientMonObj
 
 /-- The existing unbounded category, abbreviated solely to display the comparison maps.
 Source: blueprint sk-prop-int-brown-construction, coefficient convention
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev Ambient (X : Scheme.{u}) :=
   DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
 /-- The actual total derived inverse image of module objects.
 Source: blueprint sk-prop-int-brown-construction, base-change clause
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) : Ambient Λ Y ⥤ Ambient Λ X :=
   moduleDerivedPullback Λ f
 
 /-- The actual total right-derived direct image of module objects.
 Source: blueprint sk-prop-int-brown-construction, displayed composite
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) : Ambient Λ X ⥤ Ambient Λ Y :=
   moduleDerivedPushforward Λ f
 
 /-- Exact, termwise extension by zero.
 Source: blueprint sk-prop-int-brown-construction, displayed composite
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev extend {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     Ambient Λ X ⥤ Ambient Λ Y :=
   (openImmersionLowerShriek Λ j).mapDerivedCategory
 
 /-- The existing compactification composite, with no new choice of compactification.
 Source: blueprint sk-prop-int-brown-construction, displayed formula
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev image {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     Ambient Λ X ⥤ Ambient Λ Y :=
   rightDerivedLowerShriekOfCompactification Λ c
 
 /-- The recorded finite-constant-model bounded constructible generators.
-Source: blueprint sk-prop-int-brown-construction and sk-def-sfb-constructible
-(blueprint: det-prop-int-brown-construction). -/
+Source: blueprint sk-prop-int-brown-construction and definition-constructible-sheaves
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev generators (X : Scheme.{u}) : ObjectProperty (Ambient Λ X) :=
   constantModelBoundedConstructible Λ X
 
 /-- Loc of Dbc, formed by the recorded ordinary localizing-closure operation.
 Source: blueprint sk-prop-int-brown-construction, first paragraph
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def localizing (X : Scheme.{u}) : ObjectProperty (Ambient Λ X) :=
   CategoryTheory.localizingClosure (generators Λ X)
 
 /-- The open adjunction with the actual total derived pullback, transported along
 its canonical identification with the levelwise pullback.
 Source: blueprint sk-prop-int-brown-construction, comparison construction
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def openAdjunction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     extend Λ j ⊣ pull Λ j :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).ofNatIsoRight
@@ -124,7 +124,7 @@ def openAdjunction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
 
 /-- The pullback-square comparison, using the given equality of scheme morphisms.
 Source: blueprint sk-prop-int-brown-construction, base-change clause
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def pullSquare {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X}
     (sq : CommSq u' f' f v) :
@@ -136,7 +136,7 @@ def pullSquare {X Y X' Y' : Scheme.{u}}
 /-- The proper direct-image exchange: unit, square transport, then counit.
 This definition makes sense before asserting that the map is invertible.
 Source: blueprint sk-prop-int-brown-construction, proof final paragraph
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def pushExchange {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X}
     (sq : CommSq u' f' f v) :
@@ -149,7 +149,7 @@ def pushExchange {X Y X' Y' : Scheme.{u}}
 
 /-- The open exchange in its mate direction, again before asserting invertibility.
 Source: blueprint sk-prop-int-brown-construction, proof final paragraph
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def openExchange {X Z X' Z' : Scheme.{u}}
     {j : X ⟶ Z} {w : Z' ⟶ Z} {j' : X' ⟶ Z'} {u' : X' ⟶ X}
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : CommSq u' j' j w) :
@@ -164,7 +164,7 @@ def openExchange {X Z X' Z' : Scheme.{u}}
 /-- Canonical composition of total derived pushforwards, conjugate to pullback
 composition under the recorded derived adjunctions.
 Source: blueprint sk-prop-int-brown-construction, compactification comparisons
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def pushComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     push Λ f ⋙ push Λ g ≅ push Λ (f ≫ g) :=
   conjugateIsoEquiv
@@ -176,7 +176,7 @@ def pushComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
 /-- The restriction map which normalizes a proper-open refinement comparison.
 It uses pullback composition followed by the actual proper adjunction counit.
 Source: blueprint sk-prop-int-brown-construction, comparison proof
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def refinementRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d) (K : Ambient Λ X) :
     (pull Λ d.i).obj ((push Λ r.hom).obj ((extend Λ c.i).obj K)) ⟶
@@ -189,7 +189,7 @@ def refinementRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- The normalized refinement comparison, once its proper-open isomorphism is given.
 The latter will be required to satisfy the open-adjunction normalization in the theorem.
 Source: blueprint sk-prop-int-brown-construction, comparison proof
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def refinementIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d) (K : Ambient Λ X)
     (e : (extend Λ d.i).obj K ≅ (push Λ r.hom).obj ((extend Λ c.i).obj K)) :
@@ -218,7 +218,7 @@ def baseChangeData {X Y X' Y' : Scheme.{u}}
 /-- The compact-support base-change map: proper exchange followed by inverse open
 exchange, with the latter inverse specified by an `IsIso` proof, never chosen freely.
 Source: blueprint sk-prop-int-brown-construction, last paragraph
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def baseChange {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X}
     (c : Compactification f) (sq : IsPullback u' f' f v)
@@ -248,28 +248,28 @@ variable (k : Type u) [Field k]
 /-- The full category of the standing separated finite-type k-schemes. Bundling over
 Spec k ensures that every morphism is a k-morphism, with no extra condition on it.
 Source: blueprint sk-def-sfb-dc-setting, used in sk-prop-int-brown-construction
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev Spaces :=
   ObjectProperty.FullSubcategory (fun X : Over (Spec (.of k)) =>
     IsSeparated X.hom ∧ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom)
 
 /-- Quasi-compact compactifications, precisely the recorded Nagata datum.
 Source: blueprint sk-prop-int-brown-construction, second paragraph
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev Compactifications {X Y : Spaces k} (f : X ⟶ Y) :=
   Compactification.QuasiCompactObjects f.hom.left
 
 /-- The source inclusion followed by the actual compactification composite. The
 codomain is displayed in the ambient category; preservation below is what restricts it.
 Source: blueprint sk-prop-int-brown-construction, displayed functor
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev candidate {X Y : Spaces k} {f : X ⟶ Y} (c : Compactifications k f) :=
   (localizing Λ X.obj.left).ι ⋙ image Λ c.obj
 
 /-- Pull back the specified compactification. Quasi-compactness of its open immersion
 is transported by the recorded pullback square, rather than assumed afresh.
 Source: blueprint sk-prop-int-brown-construction, base-change clause
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 def baseCompactification {X Y X' Y' : Spaces k}
     {f : X ⟶ Y} {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u' : X' ⟶ X}
     (c : Compactifications k f)
@@ -284,7 +284,7 @@ triangles with all three vertices in Loc. Coproduct preservation means preservin
 ordinary ambient coproduct cocone on objects in Loc, in the indexing universe of the
 recorded localizing closure. The last clause is preservation of the specified Dbc.
 Source: blueprint sk-prop-int-brown-construction, displayed functor and next sentence
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 structure Preservation : Prop where
   maps_localizing : ∀ {X Y : Spaces k} {f : X ⟶ Y} (c : Compactifications k f)
     (K : Ambient Λ X.obj.left), localizing Λ X.obj.left K →
@@ -306,7 +306,7 @@ structure Preservation : Prop where
 
 /-- Natural comparison maps on Loc for all pairs of compactifications.
 Source: blueprint sk-prop-int-brown-construction, independence clause
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev Comparisons :=
   ∀ {X Y : Spaces k} (f : X ⟶ Y) (c d : Compactifications k f),
     candidate Λ k c ≅ candidate Λ k d
@@ -314,7 +314,7 @@ abbrev Comparisons :=
 /-- Natural composition isomorphisms, for any choices for f, g and gf. Compatibility
 with the compactification comparisons is required in `Coherence`.
 Source: blueprint sk-prop-int-brown-construction, composition clause
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 abbrev Compositions :=
   ∀ {X Y Z : Spaces k} (f : X ⟶ Y) (g : Y ⟶ Z)
     (c : Compactifications k f) (d : Compactifications k g)
@@ -331,7 +331,7 @@ categories. Preservation of generators and of pullback, recorded in `constructib
 therefore restricts these very same maps and equations to Dbc.
 
 Source: blueprint sk-prop-int-brown-construction, last three sentences
-(blueprint: det-prop-int-brown-construction). -/
+(blueprint: proposition-construction-independence-rf-shriek). -/
 structure Coherence (h : Preservation Λ k) (φ : Comparisons Λ k)
     (μ : Compositions Λ k) : Prop where
   identity : ∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),

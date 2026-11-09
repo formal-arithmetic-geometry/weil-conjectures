@@ -24,7 +24,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 /-! # The finite rank-one Kummer residue
 
 Source: Milne, Lectures on Etale Cohomology, Sections 9, 14 and 16;
-(blueprint: thm-pur-rank-one-local-calculation).
+(blueprint: example-closed-support).
 -/
 
 @[expose] public noncomputable section

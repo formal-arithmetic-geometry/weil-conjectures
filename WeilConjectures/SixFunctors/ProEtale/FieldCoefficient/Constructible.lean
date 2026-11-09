@@ -23,7 +23,7 @@ with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
 `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
 
 Let `X` be a scheme. Following Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8) and
-the blueprint (`def-weil-finite-torsion-constructibility`), a
+the blueprint (`definition-constructible-sheaves`), a
 sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
 
 - *lisse* (`AlgebraicGeometry.ProEtale.IsFieldLisseSheaf`) if it is pro-étale locally a finite
@@ -118,7 +118,7 @@ lemma IsFieldLisseSheaf.of_isZero {F : FieldSheaf Λ X}
 /-- A sheaf of `Λ`-modules on the small pro-étale site of `X` is *stratified lisse* if `X` is
 the disjoint union of finitely many locally closed constructible subschemes `Z_k`, given by
 immersions `i_k : Z_k ⟶ X` whose images are constructible subsets partitioning `X`, such that
-each restriction `i_k^* F` is lisse (`def-weil-finite-torsion-constructibility`). -/
+each restriction `i_k^* F` is lisse (`definition-constructible-sheaves`). -/
 def IsFieldStratifiedLisseSheaf (F : FieldSheaf Λ X) :
     Prop :=
   ∃ (ι : Type) (_ : Finite ι) (Z : ι → Scheme.{u}) (i : (k : ι) → Z k ⟶ X),

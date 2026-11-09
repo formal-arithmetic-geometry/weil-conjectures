@@ -163,7 +163,7 @@ private def unionDisjoint {X : Scheme.{u}}
 /-- The reducible Noetherian induction step only uses partitions on proper closed subsets;
 it does not require the generic-lissity hypothesis.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 2.
+Source: blueprint `lemma-detection-proper-direct-image--1`, step 2.
 (blueprint: lem-weil-pbc-etale-lisse-partition-reducible).
 
 Proof: The nonempty closed subset T has finitely many irreducible components, by

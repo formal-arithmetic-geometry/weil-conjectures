@@ -540,7 +540,7 @@ quasi-coherent ideal sheaves of finite type which agree on the overlap `U ∩ W 
 there is a quasi-coherent ideal sheaf on `X`, of finite type on `U ∪ W`, restricting to `I_U` on
 `U` and to `I_W` on `W`. It is the intersection of the maximal quasi-coherent extensions of
 `I_U` and `I_W`, whose restrictions are computed by flat base change of scheme-theoretic images.
-(blueprint: `lemma-nagata-glue-finite-type-ideals`) -/
+(blueprint: `lemma-products-composites-u-admissible-blow--3`) -/
 theorem exists_ofFiniteTypeOn_sup_comap_eq {U W : X.Opens} (hU : IsCompact (U : Set X))
     (hW : IsCompact (W : Set X)) {IU : U.toScheme.IdealSheafData}
     {IW : W.toScheme.IdealSheafData} (hIU : IU.ofFiniteType) (hIW : IW.ofFiniteType)

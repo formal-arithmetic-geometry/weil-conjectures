@@ -27,7 +27,7 @@ geometric Frobenius of `k̄` acts on roots of unity. The local Frobenius of the 
 ## Blueprint
 
 `AlgebraicGeometry.WeilSheaf.stalk_frobenius_tateTwistSheaf` implements
-`lem-wf-tate-twist-frobenius`.
+`proposition-weights-under-usual-operations--13`.
 -/
 
 @[expose] public section
@@ -72,7 +72,7 @@ theorem stalkAt_frobenius_tateTwistSheaf (m : ℤ)
 
 /-- **Frobenius on the stalk of a twist.** For every `m ∈ ℤ` and every closed point `x`, the
 geometric Frobenius of the stalk of `ℚ̄_ℓ(m)` at `x` is multiplication by `Q_x⁻ᵐ`, where
-`Q_x = #κ(x)`. (blueprint: `lem-wf-tate-twist-frobenius`) -/
+`Q_x = #κ(x)`. (blueprint: `proposition-weights-under-usual-operations--13`) -/
 theorem stalk_frobenius_tateTwistSheaf (m : ℤ) (x : X.finitePoints)
     (v : ((tateTwistSheaf k₀ l X m).stalk x).carrier) :
     ((tateTwistSheaf k₀ l X m).stalk x).frobenius v =

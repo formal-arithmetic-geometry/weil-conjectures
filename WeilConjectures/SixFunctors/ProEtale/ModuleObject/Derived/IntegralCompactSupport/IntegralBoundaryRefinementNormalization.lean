@@ -422,7 +422,7 @@ private theorem total_restriction {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- The proper-open refinement map on Loc is invertible and its normalization transports
 from the exact open adjunction to the total-derived open adjunction.
 
-Source: blueprint det-sf-comp-coherence-refinement, clauses (1)--(3), and
+Source: blueprint proposition-construction-independence-rf-shriek--7, clauses (1)--(3), and
 lem-sfb-total-derived-normalized-comparisons, inverse-component step.
 (blueprint: lem-sfb-boundary-refinement-total-normalization).
 

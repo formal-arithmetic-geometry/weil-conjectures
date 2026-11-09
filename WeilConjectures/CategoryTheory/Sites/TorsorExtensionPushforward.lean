@@ -228,8 +228,8 @@ its inverse image and p(e)=1. First projection therefore identifies these lifts 
 sections of the original fibre over the inverse-image open. These bijections commute with
 restriction. They commute with translation because the kernel inclusion has first
 projection equal to the pushed-forward inclusion. Consequently they form the canonical
-isomorphism of torsors asserted in the statement (`def-sc-gm-torsor`, `def-sc-zariski-site`
-and `def-sc-topological-abelian-cohomology`). -/
+isomorphism of torsors asserted in the statement (`lemma-cohomology-multiplicative-group--3`,
+`lemma-uniform-bounds-pro-etale-affines` and `def-sc-topological-abelian-cohomology`). -/
 theorem closedImmersion_extension_fibre_pushforward
     (Z X : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
     (F E : Z.carrier.Sheaf AddCommGrpCat.{u})

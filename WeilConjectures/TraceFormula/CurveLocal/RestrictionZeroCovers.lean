@@ -16,9 +16,9 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverProper
 
 # Prime-to-`ℓ` covers separating the graph and the diagonal
 
-This file states the covering step of the proof of blueprint `sk-lem-tf-curve-restriction-zero`
-(`det-tf-restriction-zero-covers`, together with the identification of
-`det-tf-restriction-zero-localization` (i) pulled back to the cover).
+This file states the covering step of the proof of blueprint `lemma-vanishing-local-term-zero-stalk`
+(`lemma-tangent-cones-on-cover`, together with the identification of
+`lemma-vanishing-local-term-zero-stalk--1` (i) pulled back to the cover).
 
 In the strictly local model `T` of a `CurveLocalModel` (with the graph `G`, the diagonal `B`, the
 vertical axis `V` and the horizontal axis `H = X × {y}`), let `L, K ∈ D^b_{ctf}(X, Λ)` with
@@ -35,15 +35,15 @@ the reduced inverse images:
    `H'` outside the origin.
 
 Since `K_ȳ = 0`, `K = j_{Y!} Q`, and `P` restricted to `T ∖ (G ∪ V)` is the extension by zero of
-`(N ⊠ Q)|_{T ∖ (G ∪ V ∪ H)}` (`det-tf-restriction-zero-localization` (i)); its pullback to
+`(N ⊠ Q)|_{T ∖ (G ∪ V ∪ H)}` (`lemma-vanishing-local-term-zero-stalk--1` (i)); its pullback to
 `T' ∖ (G' ∪ V')` is the extension by zero of `E' = (N' ⊠ Q')|_{T' ∖ (G' ∪ V' ∪ H')}`, whose
 cohomology sheaves have finite `ℓ`-group monodromy by (i). The statement
 `AlgebraicGeometry.Etale.CurveLocalModel.exists_restrictionZeroCover` records exactly the data
-used in the proof of `sk-lem-tf-curve-restriction-zero`: the strictly local smooth surface `T'`
+used in the proof of `lemma-vanishing-local-term-zero-stalk`: the strictly local smooth surface `T'`
 with the curves `D' = G' ∪ V'`, `H'`, `B'` satisfying the hypotheses of
-`sk-lem-tf-blowup-restriction`, the finite étale map `B' ∖ y' ⟶ B ∖ y` of degree prime to `ℓ`
-compatible with the punctured diagonals, and the identification of the pullback of `P` to
-`T' ∖ D'` with `i'_! E'`.
+`lemma-vanishing-restrictions-after-blowing-up--1`, the finite étale map `B' ∖ y' ⟶ B ∖ y` of degree
+prime to `ℓ` compatible with the punctured diagonals, and the identification of the pullback of `P`
+to `T' ∖ D'` with `i'_! E'`.
 
 -/
 
@@ -62,8 +62,8 @@ open Scheme
 variable {k : Type u} [Field k] [IsAlgClosed k] (M : CurveLocalModel k)
 
 omit [IsAlgClosed k] in
-/-- **Flat constructible models** (blueprint `sk-lem-sf-flat-model`, used in
-`det-tf-restriction-zero-covers` (i)): an object of `D^b_{ctf}(X, Λ)` is represented by a bounded
+/-- **Flat constructible models** (blueprint `lemma-flat-models-generators`, used in
+`lemma-tangent-cones-on-cover` (i)): an object of `D^b_{ctf}(X, Λ)` is represented by a bounded
 complex of flat constructible sheaves. -/
 theorem exists_flatConstructibleModel {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (K : DerivedCategory (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -75,7 +75,7 @@ theorem exists_flatConstructibleModel {Λ : Type (u + 1)} [CommRing Λ] [Finite 
   have : CompactSpace M.X := QuasiCompact.compactSpace_of_compactSpace M.f
   exact DerivedCategory.exists_flatConstructibleModel_of_locallyOfFiniteType M.f K hK
 
-/-- **Existence of the cover datum** (blueprint `det-tf-restriction-zero-covers` (i), first
+/-- **Existence of the cover datum** (blueprint `lemma-tangent-cones-on-cover` (i), first
 half): for bounded complexes `PL`, `PK` of flat constructible sheaves on `X` there is a cover
 datum: the terms are lisse on a punctured neighbourhood of `y`, a finite étale Galois cover
 trivializes them, its `ℓ`-Sylow quotient has degree prime to `ℓ`, and in its normalization `C` one
@@ -87,8 +87,8 @@ theorem exists_coverDatum (ℓ : ℕ) [Fact ℓ.Prime] {Λ : Type (u + 1)} [Comm
     Nonempty (M.CoverDatum ℓ PL PK) :=
   M.nonempty_coverDatum ℓ PL PK hPL hPK hcL hcK
 
-/-- **The covers from a cover datum** (blueprint `det-tf-restriction-zero-covers` (ii), (iii)
-and the pulled back identification of `det-tf-restriction-zero-localization` (i)): from a cover
+/-- **The covers from a cover datum** (blueprint `lemma-tangent-cones-on-cover` (ii), (iii)
+and the pulled back identification of `lemma-vanishing-local-term-zero-stalk--1` (i)): from a cover
 datum `p : C ⟶ X`, `c`, `e`, take `T'` the strict localization of `C ×_k C` at `(c, c)`, the
 reduced inverse images `D' = G' ∪ V'`, `H'`, `B'` of the curves, the finite étale map
 `B' ∖ y' ⟶ B ∖ y` of degree `e²`, and `E'` the restriction of `N ⊠ Q` to `T' ∖ (D' ∪ H')`. -/
@@ -176,14 +176,14 @@ theorem exists_restrictionZeroCover_of_coverDatum (ℓ : ℕ) [Fact ℓ.Prime]
     D.openComplement_dD'_le, πU, hfin, het, D.e ^ 2, hdeg, he, hsq, E', hE', hiso⟩
 
 /-- **Prime-to-`ℓ` covers separating the graph and the diagonal** (blueprint
-`det-tf-restriction-zero-covers`, with the identification of
-`det-tf-restriction-zero-localization` (i) pulled back to the cover). Let `ℓ` be a prime
+`lemma-tangent-cones-on-cover`, with the identification of
+`lemma-vanishing-local-term-zero-stalk--1` (i) pulled back to the cover). Let `ℓ` be a prime
 invertible in `k`, `Λ` a finite commutative `ℓ`-primary ring, `L, K ∈ D^b_{ctf}(X, Λ)` with
 `K_ȳ = 0`, `P = (L ⊠ K)|_T` on the strictly local model `T`, and `ψ : B ∖ Y ⟶ T ∖ (G ∪ V)` the
 inclusion of the punctured diagonal. Then there are: the strict localization `T'` of a smooth
 surface `S'` at a `k`-point, a morphism `π : T' ⟶ T`, closed curves `D' = G' ∪ V'`, `H'`, `B'` of
-`T'` satisfying the hypotheses of `sk-lem-tf-blowup-restriction` (`H'` regular, `D'`, `B'`
-reduced curves, `C_t D' ∩ C_t B' = {0}`, `C_t D' ∩ T_t H' = {0}`), with
+`T'` satisfying the hypotheses of `lemma-vanishing-restrictions-after-blowing-up--1` (`H'` regular,
+`D'`, `B'` reduced curves, `C_t D' ∩ C_t B' = {0}`, `C_t D' ∩ T_t H' = {0}`), with
 `T' ∖ D' ⊆ π⁻¹(T ∖ (G ∪ V))`, a finite étale map `B' ∖ y' ⟶ B ∖ Y` all of whose geometric
 fibres have `d` points (`d` prime to `ℓ`) compatible with `ψ`, and a bounded complex `E'` on
 `T' ∖ (D' ∪ H')` with finite locally constant cohomology and finite `ℓ`-group monodromy whose

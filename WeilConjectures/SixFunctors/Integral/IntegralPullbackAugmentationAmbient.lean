@@ -64,7 +64,7 @@ under the canonical comparison of ordinary module inverse images. No completenes
 or flatness assumption on the complex is involved.
 
 Source: Stacks Project, Tags 03EL, 06YY and 0941; the normalization conventions of
-`def-sf-orientation`, arbitrary scheme pullback.
+`theorem-smooth-purity-all-admissible-coefficients`, arbitrary scheme pullback.
 (blueprint: lem-sf-integral-pullback-augmentation-ambient)
 
 Proof: The projection characterizations of `sfCompletedCoefficientMap` and

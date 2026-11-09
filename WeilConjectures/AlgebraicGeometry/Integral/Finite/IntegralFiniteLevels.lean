@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteTowerBoun
 /-! # Bounds for the finite reductions
 
 Source: blueprint latest, sec-proetale-coefficients/sk-lem-integral-finite-levels,
-statement (last paragraph) (blueprint: sk-lem-integral-finite-levels).
+statement (last paragraph) (blueprint: lemma-bounds-finite-reductions).
 -/
 
 @[expose] public noncomputable section
@@ -81,22 +81,22 @@ private theorem expandIntegralStrata
 /-- Bounds and constructibility for all finite reductions of a complete integral complex.
 
 Source: blueprint latest, sec-proetale-coefficients/sk-lem-integral-finite-levels,
-statement (last paragraph) (blueprint: sk-lem-integral-finite-levels).
+statement (last paragraph) (blueprint: lemma-bounds-finite-reductions).
 
 Proof, following the node and the current blueprint, in the native internal coefficient
 presentation:
 
-1. `lem-pe-integral-finite-constructibility` (from the residue reduction, by induction along
+1. `lemma-bounds-finite-reductions` (from the residue reduction, by induction along
    the quotient-linear uniformizer filtration triangles) gives bounded constructibility of
    every finite reduction and, on every specified stratum, finite constant local models of
    all cohomology sheaves of every reduction.
-2. For each n, `lem-pe-integral-finite-residue-normalization` identifies the derived residue
+2. For each n, `lemma-bounds-finite-reductions` identifies the derived residue
    extension of the n-th reduction with the first reduction; transport the given vanishing
    outside [a,b] through it and apply the finite-coefficient residue Tor criterion
-   `lem-pe-integral-finite-residue-tor` to get Tor amplitude in [a,b].
-3. `lem-pe-integral-finite-reduction-range` (Nakayama triangles and the long exact sequence)
+   `lemma-bounds-finite-reductions` to get Tor amplitude in [a,b].
+3. `lemma-bounds-finite-reductions` (Nakayama triangles and the long exact sequence)
    puts every integral level in [a,b] and makes the top cohomology transitions epic;
-   `lem-pe-integral-finite-tower-bounds` (completeness, the Roos limit triangle and
+   `lemma-bounds-finite-reductions` (completeness, the Roos limit triangle and
    repleteness) then puts K in [a,b], including the vanishing in degree b+1.
 -/
 theorem integral_finite_levels

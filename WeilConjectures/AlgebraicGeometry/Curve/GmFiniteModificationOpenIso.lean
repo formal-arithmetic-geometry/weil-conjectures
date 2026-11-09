@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 /-! # Units comparison on the isomorphism locus of a finite morphism
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 2 (normalization).
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization).
 (blueprint: lem-sc-gm-finite-modification-open-iso)
 -/
 
@@ -25,7 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- For a finite morphism which is an isomorphism over an open, the comparison from units
 to the direct image of units is an isomorphism after restriction to that open.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 2 (normalization),
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization),
 the assertion that the units cokernel vanishes on the isomorphism locus.
 (blueprint: lem-sc-gm-finite-modification-open-iso)
 

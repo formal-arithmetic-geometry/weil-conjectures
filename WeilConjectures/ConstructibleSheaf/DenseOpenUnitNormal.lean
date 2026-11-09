@@ -17,7 +17,7 @@ local rings of étale `X`-schemes are then integrally closed domains as well
 an open immersion `j : U ⟶ X` with dense image and a locally constant sheaf `G` on `X`, the unit
 `G ⟶ j_* j^* G` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_unit_upperStarLowerStarAdjunction_of_isDomain_stalk`).
-This is part (3) of the blueprint lemma `lem-wf-dense-open-pi1-surjective`, at a finite
+This is part (3) of the blueprint lemma `theorem-purity-real-sheaves-curves`, at a finite
 coefficient level.
 
 ## Main statements
@@ -49,7 +49,7 @@ lemma isDomain_stalk_left_of_isIntegrallyClosed_stalk
     (W : X.Etale) (w : W.left) : IsDomain (W.left.presheaf.stalk w) :=
   (Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain W.hom hX w).1
 
-/-- Blueprint `lem-wf-dense-open-pi1-surjective`, part (3), at a finite coefficient level:
+/-- Blueprint `theorem-purity-real-sheaves-curves`, part (3), at a finite coefficient level:
 **locally constant sheaves on a normal scheme extend uniquely over a dense open.** For a locally
 noetherian scheme `X` whose local rings are integrally closed domains, an open immersion
 `j : U ⟶ X` with dense image and a locally constant sheaf `G` of modules on the small étale site

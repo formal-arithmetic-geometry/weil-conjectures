@@ -17,8 +17,8 @@ compatible with automorphisms of the four corners, the compact-support base-chan
 same local traces
 (`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar_weilLowerShriek`).
 Its compatibility with the Frobenius structures is the pasting law of `Ex_!` (blueprint
-`fix-lem-exchanges`, item (2)) applied to the rectangles formed by the square and the Frobenius
-squares, in the two possible orders
+`proposition-composition-base-change-rf-shriek`, item (2)) applied to the rectangles formed by the
+square and the Frobenius squares, in the two possible orders
 (`ProEtale.CondensedRing.weilUpperStarLowerShriekIso_comm`). The transport of the isomorphism to
 Weil objects is the general `CategoryTheory.Endofunctor.IsoAlgebra.compMapOfNatIsoIsoOfIso`.
 -/

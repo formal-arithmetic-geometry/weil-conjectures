@@ -604,7 +604,7 @@ finitely many models. The finite-stratum detection lemma detects vanishing outsi
 Completeness also follows from step 1.
 Uses: lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-pbc-constant-module-section-
 properties, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-pbc-constant-completion-
-equivalence, lem-weil-pbc-noetherian-stratum-detection, def-weil-pbc-proetale-site.
+equivalence, lem-weil-pbc-noetherian-stratum-detection, definition-small-pro-etale-site--1.
 
 3. Assume (i). The uniform tower definition gives local complexes in a fixed term interval
 [d_0,d_1], and every cohomology sheaf of K_1 is finite lisse on its finite stratification. Uniform
@@ -636,10 +636,10 @@ general finite-ring bounded complex is perfect; the residue field is essential h
 Uses: def-weil-pbc-bounded-constructible-complete, def-weil-pbc-bounded-constructible-tower, prop-
 weil-pbc-site-comparison-finite-level, lem-weil-pbc-finite-ring-constructible-derived-origin, lem-
 weil-pbc-finite-ring-derived-local-constancy, lem-weil-l-adic-extension-integers-dvr, lem-weil-
-pbc-residue-lisse-perfect-lift, lem-weil-pbc-comparison-pullback, lem-weil-l-adic-extension-
-complete, lem-weil-l-adic-extension-absolute-value, lem-weil-pbc-completed-constant-sheaf-
-reduction, lem-weil-pbc-noetherian-stratum-detection, def-weil-pbc-etale-constructible-sheaf, thm-
-weil-pbc-site-comparison.
+pbc-residue-lisse-perfect-lift, proposition-comparison-etale-derived-category--5,
+lem-weil-l-adic-extension- complete, lem-weil-l-adic-extension-absolute-value,
+lem-weil-pbc-completed-constant-sheaf- reduction, lem-weil-pbc-noetherian-stratum-detection,
+def-weil-pbc-etale-constructible-sheaf, thm- weil-pbc-site-comparison.
 
 4. Assume (ii). Steps 1 and 2 give intrinsic completeness and a common cohomological interval for
 all reductions K_n. Their restrictions to the given strata are constant perfect
@@ -657,8 +657,8 @@ equalities after pullback into equalities of the lifted maps. These are compatib
 witnesses as required, not unrelated levelwise origins. All conditions of (i) hold.
 Uses: def-weil-pbc-adic-coefficient-datum, lem-weil-pbc-normalized-constructible-local-
 effectivity, lem-weil-pbc-finite-ring-constructible-derived-origin, lem-weil-pbc-ringed-topoi-
-derived-tensor-pullback, prop-weil-pbc-site-comparison-finite-level, thm-weil-pbc-site-comparison,
-def-weil-pbc-bounded-constructible-complete.
+derived-tensor-pullback, prop-weil-pbc-site-comparison-finite-level,
+theorem-bounded-below-cohomology-comparison, def-weil-pbc-bounded-constructible-complete.
 
 5. Assume (ii). On a perfect local model P, flatness over the constant A-sheaf identifies \mathcal
 H^q(A_U\otimes_A P) with A_U\otimes_A H^q(P). The kernels of the differentials in the finite-
@@ -845,8 +845,8 @@ categories is used.
 Uses: def-weil-derived-complete-integral-detailed, def-weil-derived-complete, def-weil-finite-
 torsion-constructibility, def-weil-pbc-bounded-constructible-complete, lem-weil-pbc-constant-
 completion-equivalence, lem-weil-pbc-ringed-koszul-completion-reflector, lem-weil-pbc-normalized-
-constructible-local-effectivity, thm-weil-pbc-site-comparison, lem-weil-pbc-ringed-topoi-derived-
-tensor-pullback, prop-weil-pbc-site-comparison-finite-level. -/
+constructible-local-effectivity, theorem-bounded-below-cohomology-comparison,
+lem-weil-pbc-ringed-topoi-derived- tensor-pullback, prop-weil-pbc-site-comparison-finite-level. -/
 theorem integralStratifiedPerfectDetailed
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

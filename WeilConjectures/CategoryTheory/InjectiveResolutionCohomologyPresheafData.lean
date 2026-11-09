@@ -303,7 +303,7 @@ private noncomputable def homologyObjEquiv [HasExt.{w} A] (X : A) (q : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Ext is computed by the Hom complex of any injective resolution, naturally in the
-first variable. Source: blueprint det-thm-picard-cech, Step 2.
+first variable. Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2.
 
 Proof: Extend the resolution from natural to integer degrees by zero. The from-single
 additive equivalence identifies the Hom complex from thedegree-zero single complex

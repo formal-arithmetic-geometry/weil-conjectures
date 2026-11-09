@@ -48,7 +48,7 @@ place of `t` are proved in `WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace
 - `AlgebraicGeometry.Scheme.exists_trace_perfect_cupPairing`: the same perfect pairing in the
   cup-product form `H¹(ℱ) ⊗ H⁰(ℱᵛ ⊗ ω) → H¹(ℱ ⊗ ℱᵛ ⊗ ω) → H¹(ω) → k` of the blueprint.
 
-(blueprint: `det-thm-picard-duality`, `thm-sc-serre-duality-curve`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -89,7 +89,7 @@ The form `t` is the image of `𝟙 ω` under the natural isomorphism `Hom(-, ω)
 `nonempty_dual_H_one_iso`. For `X` integral, the statement for the residue trace of the blueprint
 is `bijective_dualPairing_residueTrace` (file `Curve/ResidueTrace`).
 
-(blueprint: `det-thm-picard-duality`, `thm-sc-serre-duality-curve`, case `q = n = 1`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, case `q = n = 1`) -/
 theorem exists_trace_bijective_dualPairing :
     ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
       ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →
@@ -134,7 +134,7 @@ is perfect: both `H⁰(X, Hom(ℱ, ω)) → H¹(X, ℱ)^∨` (the case `q = 1` o
 this is the cup-product / evaluation / trace pairing of the blueprint. For `X` integral, the
 statement for the residue trace is `bijective_dualPairingH_residueTrace`.
 
-(blueprint: `det-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem exists_trace_bijective_dualPairingH :
     ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
       ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →
@@ -170,7 +170,7 @@ both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and `H¹(X, ℱ) → H⁰(X, �
 (`Modules.cupPairing_eq`). For `X` integral, the statement for the residue trace of the
 blueprint is `serreDuality_residueTrace` (file `Curve/ResidueTrace`).
 
-(blueprint: `det-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem exists_trace_perfect_cupPairing :
     ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
       ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →

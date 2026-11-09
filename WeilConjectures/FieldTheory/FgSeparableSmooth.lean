@@ -17,7 +17,7 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 # Finitely generated separable extensions and smooth subalgebras
 
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
-(blueprint: lem-kun-fg-separable-smooth).
+(blueprint: corollary-open-direct-image-over-field--2).
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ the filtered colimit of its finitely generated smooth `K`-subalgebras, with
 the transition maps given by inclusions.  The directed family and its union
 are rendered by `Directed (· ≤ ·) A` and `∀ x, ∃ i, x ∈ A i`, respectively.
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
-(blueprint: lem-kun-fg-separable-smooth). First choose a smooth `K`-subalgebra
+(blueprint: corollary-open-direct-image-over-field--2). First choose a smooth `K`-subalgebra
 `B` of `L` whose fraction field is `L`, using the separability hypothesis.
 For each nonzero `f` in `B`, identify `B[1/f]` with the principal localization
 of `B`; it remains smooth and is finitely generated over `K`. The family of

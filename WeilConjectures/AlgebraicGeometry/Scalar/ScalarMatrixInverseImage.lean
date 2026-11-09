@@ -175,7 +175,7 @@ Proof in words (the six steps of the node proof):
 1. Naturality of `upperStarFromPointComp` at multiplication by a scalar, together with
    the transported unit and multiplication of the coefficient ring, identifies the
    inverse images of the canonical scalar endomorphisms. This uses the scalar maps of
-   `det-def-sfb-constructible-local-model`, rather than arbitrary coefficient sections.
+   `definition-constructible-sheaves--1`, rather than arbitrary coefficient sections.
 2. Transport identifies the inverse image of the regular module with the regular module
    over the inverse-image ring. The mixed-bimodule right unitor identifies its extension
    along α_h with Λ_V, by b ⊗ x ↦ b α_h(x), with inverse b ↦ b ⊗ 1.

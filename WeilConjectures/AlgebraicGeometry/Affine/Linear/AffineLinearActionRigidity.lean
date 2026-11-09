@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- An endomorphism of the universal affine trace object is the identity if its
 pullback to the identity-matrix section is the identity.
-Source: blueprint lem-amb-linear-trace-invariance, proof paragraphs 1 and 2
+Source: blueprint proposition-purity-vector-bundles, proof paragraphs 1 and 2
 (blueprint: lem-amb-affine-linear-action-rigidity).
 
 Proof: choose the normalized data supplied by the affine-space top-trace existence

@@ -262,7 +262,7 @@ orientation from extension after inverse image to inverse image after extension.
 The actual finite pullbacks include the canonical inverse-image coefficient isomorphisms.
 Linearity extends the formula to all scalars; the Kan-extension generators and sheafification
 fix the comparison on every section.
-Source: Stacks 03EL; det-prop-scalar-six-pullback (1), ordinary comparison of
+Source: Stacks 03EL; proposition-six-operations-change-coefficients (1), ordinary comparison of
 lem-sfb-kflat-scalar-comparison-normalization
 (blueprint: def-pur-strict-quotient-expressions). -/
 def ScalarPullbackIdentification {V W : Scheme.{t}} (g : V ⟶ W)
@@ -286,7 +286,7 @@ def ScalarPullbackIdentification {V W : Scheme.{t}} (g : V ⟶ W)
 /-- The pullback adjunct is inverse image of the factor adjunct under the canonical
 scalar-change comparison. This is the pinned ordinary chain-isomorphism formulation;
 AdjointModel localizes these very adjuncts through the canonical K-flat counits.
-Source: Stacks 03EL, 07A6; det-prop-scalar-six-pullback (1) and
+Source: Stacks 03EL, 07A6; proposition-six-operations-change-coefficients (1) and
 lem-sfb-kflat-scalar-comparison-normalization
 (blueprint: def-pur-strict-quotient-expressions). -/
 def PullbackAdjointEquation {V W : Scheme.{t}} (g : V ⟶ W) (K : Complex l E W)

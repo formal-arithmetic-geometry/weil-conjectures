@@ -21,7 +21,7 @@ is isomorphic to that of `j_! ℚ̄_ℓ`. Then the defect `C_{W, Z ∩ W}(L|_W)`
 (`ProEtale.CondensedRing.isZero_specializationDefect_upperStar_of_smooth`): by the smooth exchange
 for the open immersion `W ⟶ X`, the defect does not see the difference between `j_! ℚ̄_ℓ` and
 `ℚ̄_ℓ`, and `C_{W, Z ∩ W}(ℚ̄_ℓ) = 0` by the smooth exchange along `f` and the thick origin
-(blueprint `det-sp-generic-divisor-constant`).
+(blueprint `lemma-vanishing-generic-points-principal-divisor`).
 
 Consequently, for an extension by zero `j_! N` which is constant on `W ∖ Z`, the restricted
 specialization `Le^* Ψ_X(j_! N)` vanishes near `ζ`
@@ -310,10 +310,10 @@ theorem nonempty_upperStar_lowerShriek_iso_unit_of_subset_range [IsReduced X.lef
 
 /-- **The codimension-one core for constant coefficients near a smooth multiple divisor** (route
 (i) of `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range`, blueprint
-`det-sp-generic-divisor-constant`): the hypotheses of the core with `X` reduced, `M ≅ ℚ̄_ℓ`, and
-an open neighbourhood `W ⊆ V` of `ζ` with a smooth `f : W ⟶ 𝔸¹_k` such that `Z ∩ W = f⁻¹ V(x^m)`,
-`m ≥ 1`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`: `j_! N` and `j_! ℚ̄_ℓ` agree on `W`
-(`nonempty_upperStar_lowerShriek_iso_unit_of_subset_range`), and the constant case is
+`lemma-vanishing-generic-points-principal-divisor`): the hypotheses of the core with `X` reduced,
+`M ≅ ℚ̄_ℓ`, and an open neighbourhood `W ⊆ V` of `ζ` with a smooth `f : W ⟶ 𝔸¹_k` such that
+`Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`: `j_! N` and `j_! ℚ̄_ℓ`
+agree on `W` (`nonempty_upperStar_lowerShriek_iso_unit_of_subset_range`), and the constant case is
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_smooth`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range_of_unit
     (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
@@ -345,9 +345,9 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range_of_unit
 
 /-- **The codimension-one core for constant coefficients near a smooth uniformizer** (route (i)
 of `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range`, blueprint
-`det-sp-generic-divisor-constant`): the hypotheses of the core with `M ≅ ℚ̄_ℓ`, together with an
-open neighbourhood `W₀ ⊆ V` of `ζ` and a smooth `f₀ : W₀ ⟶ 𝔸¹_k` such that `f₀^* x` is a
-uniformizer of the discrete valuation ring `𝒪_{X,ζ}`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`.
+`lemma-vanishing-generic-points-principal-divisor`): the hypotheses of the core with `M ≅ ℚ̄_ℓ`,
+together with an open neighbourhood `W₀ ⊆ V` of `ζ` and a smooth `f₀ : W₀ ⟶ 𝔸¹_k` such that `f₀^* x`
+is a uniformizer of the discrete valuation ring `𝒪_{X,ζ}`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`.
 Indeed, on a smaller neighbourhood `W` of `ζ`, `h = (unit) · (f₀^* x)^m` with `m ≥ 1`
 (`Scheme.exists_span_eq_span_pow_of_irreducible_germ`), so `Z ∩ W = f⁻¹ V(x^m)` for the
 restriction `f` of `f₀` to `W`, and

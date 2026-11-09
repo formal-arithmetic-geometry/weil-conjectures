@@ -21,7 +21,7 @@ endomorphisms `aₙ`, `bₙ`, `cₙ` commuting with the maps. Then
 `∑ₙ (-1)ⁿ (tr bₙ - tr aₙ - tr cₙ) = 0`
 (`LinearMap.finsum_negOnePow_smul_trace_sub_trace_sub_trace_eq_zero`). This is the linear algebra
 behind the additivity of the categorical trace along distinguished triangles over a field
-(blueprint `prop-trf-trace-formal-laws`, items (2) and (4)).
+(blueprint `proposition-properties-trace`, items (2) and (4)).
 
 The proof splits each term along the kernels and images: with `xₙ = tr(aₙ | im fₙ)`,
 `yₙ = tr(bₙ | im gₙ)` and `zₙ = tr(cₙ₊₁ | im δₙ₊₁)` one has `tr aₙ = zₙ + xₙ`,

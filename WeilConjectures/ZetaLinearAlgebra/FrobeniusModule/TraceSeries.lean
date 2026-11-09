@@ -52,7 +52,8 @@ namespace FrobeniusModule
 variable {K : Type v} [Field K]
 
 /-- The *trace series* `tr_F(T) = ∑_{n ≥ 1} tr (F ^ n ∣ V) T ^ n / n` of a Frobenius module
-`(V, F)` (blueprint: `def-zl-frobenius-trace-series`, `sk-def-frobmod`). -/
+`(V, F)` (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`,
+`lemma-logarithm-determinant`). -/
 noncomputable def traceSeries (M : FrobeniusModule.{u, v} K) : K⟦X⟧ :=
   M.frobeniusEnd.traceSeries
 
@@ -70,20 +71,20 @@ theorem constantCoeff_traceSeries (M : FrobeniusModule.{u, v} K) :
   LinearMap.constantCoeff_traceSeries _
 
 /-- The determinant `det (1 - T F ∣ V)` of a Frobenius module has constant coefficient `1`
-(blueprint: `def-zl-frobenius-trace-series`). -/
+(blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
 @[simp]
 theorem coeff_zero_localPolynomial (M : FrobeniusModule.{u, v} K) :
     M.localPolynomial.coeff 0 = 1 :=
   LinearMap.coeff_zero_charpolyRev _
 
 /-- The determinant `det (1 - T F ∣ V)` of a Frobenius module has degree `dim V`, since its
-Frobenius is invertible (blueprint: `def-zl-frobenius-trace-series`). -/
+Frobenius is invertible (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
 theorem natDegree_localPolynomial (M : FrobeniusModule.{u, v} K) :
     M.localPolynomial.natDegree = Module.finrank K M.carrier :=
   LinearMap.natDegree_charpolyRev (LinearEquiv.isUnit_det' M.frobenius)
 
 /-- The leading coefficient of the determinant `det (1 - T F ∣ V)` of a Frobenius module is
-`(-1) ^ dim V * det F` (blueprint: `def-zl-frobenius-trace-series`). -/
+`(-1) ^ dim V * det F` (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
 theorem leadingCoeff_localPolynomial (M : FrobeniusModule.{u, v} K) :
     M.localPolynomial.leadingCoeff =
       (-1) ^ Module.finrank K M.carrier * LinearMap.det M.frobeniusEnd :=
@@ -104,8 +105,8 @@ theorem leadingCoeff_localPolynomial_ne_zero (M : FrobeniusModule.{u, v} K) :
 of a finite graded family `(V_i, F_i)_{i ∈ s}` of Frobenius modules, indexed by a finite set
 `s` of integers. For the cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth proper `k₀`-scheme of pure
 dimension `d` with its global geometric Frobenius, and `s = {0, …, 2d}`, this is the alternating
-trace series of the blueprint (blueprint: `def-zl-frobenius-trace-series`,
-`sk-def-frobmod`). -/
+trace series of the blueprint (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`,
+`lemma-logarithm-determinant`). -/
 noncomputable def alternatingTraceSeries (s : Finset ℤ) (M : ℤ → FrobeniusModule.{u, v} K) :
     K⟦X⟧ :=
   LinearMap.alternatingTraceSeries s fun i ↦ (M i).frobeniusEnd
@@ -119,7 +120,7 @@ theorem alternatingTraceSeries_eq_sum (s : Finset ℤ) (M : ℤ → FrobeniusMod
 
 /-- The `n`-th coefficient of the alternating trace series is
 `(∑_{i ∈ s} (-1) ^ i tr (F_i ^ n ∣ V_i)) / n`, and `0` for `n = 0` (blueprint:
-`def-zl-frobenius-trace-series`). -/
+`theorem-weil-conjectures-smooth-proper-schemes--7`). -/
 theorem coeff_alternatingTraceSeries (s : Finset ℤ) (M : ℤ → FrobeniusModule.{u, v} K)
     (n : ℕ) :
     coeff n (alternatingTraceSeries s M) =

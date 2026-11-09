@@ -76,7 +76,7 @@ geometric generic point: immersions induce isomorphisms on residue fields at
 points in their images, so the point lifts through the residue-field point of the
 stratum. The natural isomorphism `lemma-openclosed-stalk-upperstar` identifies
 the abelian restriction's stalk with the original stalk. The inverse-image/forget
-comparison of `lem-weil-pbc-etale-inverse-image-algebraic-structures` identifies its
+comparison of `situation-conventions` identifies its
 underlying set sheaf with the set restriction given by stratification. Forgetting
 also commutes with stalks by `Point.sheafFiberCompIso`. Thus finite local constancy
 of that set restriction gives finiteness of the original abelian stalk's underlying set.

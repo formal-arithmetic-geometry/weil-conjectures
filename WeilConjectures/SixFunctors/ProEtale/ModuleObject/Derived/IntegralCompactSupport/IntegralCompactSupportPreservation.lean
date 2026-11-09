@@ -87,7 +87,7 @@ private theorem preservation_of_equal_generators
       (congrFun (ht X.obj.left).2.2.1 K).mpr hK
     exact (h.2.2.2 K hctf).1
 
-/-- Source: blueprint det-prop-int-brown-construction steps 2, 3 and 6.
+/-- Source: blueprint proposition-construction-independence-rf-shriek steps 2, 3 and 6.
 (blueprint: lem-sfb-total-derived-preservation).
 
 Proof: Each standing scheme is quasi-compact and quasi-separated, since its structure

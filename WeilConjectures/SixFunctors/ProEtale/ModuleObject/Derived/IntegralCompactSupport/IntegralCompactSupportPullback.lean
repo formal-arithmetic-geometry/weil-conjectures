@@ -33,7 +33,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 variable (k : Type u) [Field k]
-/-- Source: blueprint det-prop-int-brown-construction steps 2, 3 and 6.
+/-- Source: blueprint proposition-construction-independence-rf-shriek steps 2, 3 and 6.
 (blueprint: lem-sfb-total-derived-pullback).
 
 Proof: Standing schemes are qcqs. Specialize localizingClosure_ctf_equals_bc to O_E

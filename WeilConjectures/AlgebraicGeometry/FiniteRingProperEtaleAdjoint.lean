@@ -16,9 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # Proper étale pushforward with finite ring coefficients
 
-Source: latest blueprint, sec-six-functors-basics, sk-prop-sf-existence, order 2549;
-Stacks Project, Tags 0F0D and 0F5Y
-(blueprint: thm-sfb-finite-proper-pushforward-left-adjoint).
+Source: latest blueprint, chap-Construction-of-f, theorem-existence-exceptional-inverse-image, order
+2549; Stacks Project, Tags 0F0D and 0F5Y
+(blueprint: theorem-existence-exceptional-inverse-image--1).
 
 The coefficient ring need not be commutative. The recorded upstream instance requires
 `CommRing`, so it cannot supply the noncommutative instances of this node.
@@ -52,7 +52,7 @@ private theorem finiteRing_brown
 /-- Proper pushforward on unbounded derived categories of étale sheaves of modules over
 any finite ring has a right adjoint.
 Source: latest blueprint, order 2549, Stacks Tags 0F0D and 0F5Y
-(blueprint: thm-sfb-finite-proper-pushforward-left-adjoint).
+(blueprint: theorem-existence-exceptional-inverse-image--1).
 
 Proof plan:
 1. A finite ring is killed by a positive integer. Exact conservative coefficient forgetting,

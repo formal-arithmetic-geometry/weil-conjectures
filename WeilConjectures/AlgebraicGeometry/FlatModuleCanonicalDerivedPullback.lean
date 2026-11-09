@@ -30,7 +30,7 @@ flat over its own scheme is invertible. The affine-local IsFlatOver predicate at
 identity expresses intrinsic flatness, independently of any family morphism.
 
 Source: Stacks Project, Tags 06YD and 06YJ;
-`lem-pc-flat-complex-derived-pullback`, Steps 1--2.
+`lemma-coherent-base-change-invertible-sheaves--2`, Steps 1--2.
 (blueprint: lem-pc-flat-module-canonical-derived-pullback).
 
 Proof: On an affine open, intrinsic flatness says that the section module is flat

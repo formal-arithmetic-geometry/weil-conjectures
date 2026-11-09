@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 For a finite coefficient ring `Λ`, a compactifiable morphism `g : V ⟶ B` and a section `s` of
 `g`, the *pro-étale section invariant* is `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` on the small
-pro-étale site of `B` (blueprint `def-pur-section-invariant`). No hypothesis on the base or on the
-coefficients beyond finiteness is needed for the definition.
+pro-étale site of `B` (blueprint `lemma-section-normal-bundle--1`). No hypothesis on the base or on
+the coefficients beyond finiteness is needed for the definition.
 
 The pro-étale exceptional inverse image is `Rg^! = ν_V^* ∘ g^× ∘ Rν_{B,*}`, so the pro-étale
 section invariant is, canonically, the comparison pullback `ν_B^*` of the étale one
@@ -48,7 +48,7 @@ namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `def-pur-section-invariant`: the section invariant
+/-- Blueprint `lemma-section-normal-bundle--1`: the section invariant
 `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` on the small pro-étale site of `B`, for a finite coefficient
 ring `Λ`, a compactifiable `g : V ⟶ B` and `s : B ⟶ V`. Its geometric properties concern closed
 sections of smooth morphisms; the definition makes sense for any `s`. -/
@@ -78,7 +78,7 @@ section BaseChange
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
   [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- Blueprint `lem-pur-dnc-section-geometry` (1): *base change of pro-étale section invariants.*
+/-- Blueprint `prose-09-12` (1): *base change of pro-étale section invariants.*
 In a cartesian square `g' ≫ f = f' ≫ g` whose base change map of étale dualizing complexes is
 invertible (for instance `f` smooth,
 `AlgebraicGeometry.Etale.isIso_dualizingComplexBaseChangeMap_of_smoothOfRelativeDimension`), and

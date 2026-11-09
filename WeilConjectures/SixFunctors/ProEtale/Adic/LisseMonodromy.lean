@@ -22,10 +22,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 Let `Y` be a connected scheme, `Ω` a field with algebraic closure `Ω̄` and
 `ℚ̄_ℓ = PadicAlgCl ℓ`. For a geometric point `y : Spec Ω̄ ⟶ Y` write `F_y` both for the
 fibre functor on finite étale `Y`-schemes and for the stalk functor `G ↦ Γ(Spec Ω̄, y^* G)`
-on lisse `ℓ`-adic sheaves on `Y_proét`. By `cor-galois-lisse-representations` (for
+on lisse `ℓ`-adic sheaves on `Y_proét`. By `proposition-lattices-representations-normal-scheme` (for
 `Λ = ℚ̄_ℓ`), the stalk functor at a geometric point `t` identifies lisse `ℚ̄_ℓ`-sheaves with the
 continuous finite-dimensional `ℚ̄_ℓ`-representations of `π₁(Y, t) = Aut F_t`, as an exact tensor
-equivalence compatible with base change; and `def-wf-fundamental-representation` transports
+equivalence compatible with base change; and `situation-weil` transports
 stalks along paths, i.e. isomorphisms of fibre functors `F_y ≅ F_z`.
 
 This file packages these facts as a *monodromy* of lisse sheaves
@@ -38,12 +38,13 @@ isomorphism `mono τ` from the stalk functor at `y` to the stalk functor at `z`,
   (`mono_reparam`);
 * it is compatible with pullback along an endomorphism `f` of `Y`: the path `F_{y ≫ f} ≅ F_{z ≫ f}`
   induced by `τ` acts on `Γ(Spec Ω̄, (y ≫ f)^* G) = Γ(Spec Ω̄, y^* f^* G)` as `τ` acts on the
-  stalks of `f^* G` (`mono_upperStar`, the compatibility of `cor-galois-lisse-representations`
-  with base change);
+  stalks of `f^* G` (`mono_upperStar`, the compatibility of
+  `proposition-lattices-representations-normal-scheme` with base change);
 * global sections restrict to flat sections (`mono_globalSections`);
 * it preserves the evaluation pairing `[G, H]_y × G_y → H_y` of internal homs of lisse sheaves
-  (`mono_evaluationPairing`, the tensor compatibility of `cor-galois-lisse-representations`
-  applied to `[G, H] ⊗ G → H`; for `H = ℚ̄_ℓ` this is the pairing of the dual).
+  (`mono_evaluationPairing`, the tensor compatibility of
+  `proposition-lattices-representations-normal-scheme` applied to `[G, H] ⊗ G → H`; for `H = ℚ̄_ℓ`
+  this is the pairing of the dual).
 
 At a base point `t`, the automorphisms of `F_t` act on the stalk `G_t`
 (`AlgebraicGeometry.ProEtale.LisseMonodromy.rep`), and
@@ -119,9 +120,9 @@ variable (Y Ω)
 
 /-- **The monodromy of lisse sheaves** on `Y`: the transport of stalks of lisse `ℓ`-adic sheaves
 along paths between geometric points with values in `Ω̄`, in the sense of
-`def-wf-fundamental-representation` ("the usual transport of the stalk"), with the
-compatibilities of `cor-galois-lisse-representations` (functoriality, base change, tensor
-products), see the module docstring. -/
+`situation-weil` ("the usual transport of the stalk"), with the
+compatibilities of `proposition-lattices-representations-normal-scheme` (functoriality, base change,
+tensor products), see the module docstring. -/
 structure LisseMonodromy where
   /-- The transport `F_y ≅ F_z` of stalks of lisse sheaves along a path `τ : F_y ≅ F_z`. -/
   mono {y z : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (τ : fiber y ≅ fiber z) :
@@ -199,9 +200,9 @@ lemma rep_apply (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y
   rfl
 
 /-- The monodromy at the base point `t` is an equivalence onto continuous finite-dimensional
-representations (`cor-galois-lisse-representations` for `Λ = ℚ̄_ℓ`): the representations
-`AlgebraicGeometry.ProEtale.LisseMonodromy.rep` are continuous, the stalk functor at `t` is
-faithful and full onto `π₁(Y, t)`-equivariant maps, and every continuous finite-dimensional
+representations (`proposition-lattices-representations-normal-scheme` for `Λ = ℚ̄_ℓ`): the
+representations `AlgebraicGeometry.ProEtale.LisseMonodromy.rep` are continuous, the stalk functor at
+`t` is faithful and full onto `π₁(Y, t)`-equivariant maps, and every continuous finite-dimensional
 representation of `π₁(Y, t)` is the monodromy representation of a lisse sheaf. -/
 structure IsEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Prop where
   /-- The monodromy representations are continuous. -/

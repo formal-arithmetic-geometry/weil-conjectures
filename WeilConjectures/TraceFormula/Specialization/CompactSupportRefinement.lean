@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 # The compact-support exchange of an open immersion along a proper refinement
 
-Blueprint `det-nearby-exchange-maps` defines `ν_f = χ_p⁻¹ ∘ Rp_{s*}(ν_h)` through a compactification
+Blueprint `prose-E-15` defines `ν_f = χ_p⁻¹ ∘ Rp_{s*}(ν_h)` through a compactification
 `f = p ∘ h`, and shows that it does not depend on the compactification: two compactifications
 have a common proper refinement `q`, with `h = q ∘ h''`, and the key step is that `ν_h` agrees with
 `χ_q⁻¹ ∘ Rq_{s*}(ν_{h''})` under the proper base change identification `h_! ≅ Rq_* h''_!`.
@@ -44,7 +44,7 @@ variable {A B E A' B' E' : Type*} [Category A] [Category B] [Category E] [Catego
   {Rq' : E' ⥤ B'}
 
 /-- **The compact-support exchange of an open immersion along a proper refinement** (blueprint
-`det-nearby-exchange-maps`, independence of the compactification, key step). -/
+`prose-E-15`, independence of the compactification, key step). -/
 theorem compactSupportExchange_refinement (adjh : Dh ⊣ Lh) (adje : De ⊣ Le) (adjq : Lq ⊣ Rq)
     (adjh' : Dh' ⊣ Lh') (adje' : De' ⊣ Le') (adjq' : Lq' ⊣ Rq')
     (c : Lh ≅ Lq ⋙ Le) (c' : Lh' ≅ Lq' ⋙ Le')

@@ -11,7 +11,7 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRealizedScalarTranspos
 
 /-! # The transpose of the realized compact-support scalar map
 
-Source: lem-fix-operation-reduction, compact-support and final paragraphs.
+Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
 -/
 
 @[expose] public noncomputable section

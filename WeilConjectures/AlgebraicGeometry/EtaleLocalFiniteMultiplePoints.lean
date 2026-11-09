@@ -48,7 +48,7 @@ Proof plan:
    points are isolated by `lem-weil-pbc-isolated-fibre-point-base-change`.
 5. Apply `lem-weil-pbc-etale-local-finite-multiple-points-elementary` to those points.
    Identify the iterated pullback by `lem-weil-pbc-cartesian-square-pasting`, and compose
-   the etale maps using `lem-weil-pbc-etale-composition-cancellation`.
+   the etale maps using `definition-torsion-sheaves--3`.
 6. The elementary neighborhood preserves the base residue field and the listed point
    residue fields. Thus the finite purely inseparable extensions persist. The listed
    points are distinct since their intermediate images are distinct. Every point over

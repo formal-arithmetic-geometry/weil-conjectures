@@ -23,15 +23,15 @@ invariant under the geometric Frobenius.
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`
-  (`thm-pod-degreewise-perfectness-over-a-field`, with the Frobenius invariance of
-  `thm-pod-equivariance-of-the-twisted-pairing`).
+  (`corollary-degreewise-duality-over-fields--1`, with the Frobenius invariance of
+  `theorem-poincare-duality-frobenius--3`).
 
 ## Implementation notes
 
 The statement is existential, as for constant coefficients
 (`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`): Weil
 complexes have no derived tensor product or orientation yet, so the derived Poincaré pairing of
-`def-pod-derived-poincare-pairing` cannot be written down. The pairing is instead the evaluation
+`theorem-poincare-duality--6` cannot be written down. The pairing is instead the evaluation
 pairing of the Frobenius-equivariant isomorphism `H^j(X₀ ⊗ k̄, F^∨(d)) ≅ H_c^i(X₀ ⊗ k̄, F)^∨`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_dual_compactlySupportedCohomology`),
 read off from the Verdier duality of Weil complexes.
@@ -52,8 +52,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **Degreewise Poincaré duality for a lisse Weil sheaf** (blueprint
-`thm-pod-degreewise-perfectness-over-a-field` for `K = F` perfect over `ℚ̄_ℓ,X`, with the Frobenius
-invariance `thm-pod-equivariance-of-the-twisted-pairing`): for `X₀` smooth, separated, of finite
+`corollary-degreewise-duality-over-fields--1` for `K = F` perfect over `ℚ̄_ℓ,X`, with the Frobenius
+invariance `theorem-poincare-duality-frobenius--3`): for `X₀` smooth, separated, of finite
 type and pure dimension `d` over `k₀` and `F` a lisse Weil sheaf on `X₀`, the degreewise
 Poincaré pairings `H_c^i(X₀ ⊗ k̄, F) × H^j(X₀ ⊗ k̄, F^∨(d)) ⟶ ℚ̄_ℓ`, `i + j = 2d`, are perfect and
 invariant under the geometric Frobenius. Here `F^∨(d)` is the constant twist of the coefficient

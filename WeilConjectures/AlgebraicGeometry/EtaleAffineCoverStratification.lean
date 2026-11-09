@@ -207,7 +207,7 @@ Proof:
    affine base: use affine-morphism permanence, separated cancellation, qcqs permanence,
    and etale composition (`lem-weil-pbc-affine-morphism-permanence`,
    `lem-weil-pbc-separated-cancellation`, `lem-weil-pbc-qcqs-morphism-permanence`,
-   `lem-weil-pbc-proper-fp-permanence`, `lem-weil-pbc-etale-composition-cancellation`).
+   `lem-weil-pbc-proper-fp-permanence`, `definition-torsion-sheaves--3`).
 2. Apply `lem-weil-pbc-etale-separated-stratified-finite` to each chart and overlap.
 3. Take a common refinement (`lemma-constructible-common-refinement`); its images are
    finite intersections of constructible locally closed sets, and finite etaleness

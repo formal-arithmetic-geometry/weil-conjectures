@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-! # Rigidity of the cochain tensor model
 
 Source: Stacks Project, Tags 013H, 06YS, 06YT and 06YU; blueprint
-`def-wf-tensor-product`, first sentence
+`prose-03-02`, first sentence
 (auxiliary; not a blueprint node).
 
 The helpers expose the given homotopy model and its comparisons, then write the four
@@ -251,7 +251,7 @@ private theorem normalized_iso_unique
 
 /-- The canonical cochain tensor comparison, its normalized uniqueness, and full faithfulness
 of restriction along the product of the cochain representative localizations.
-Source: Stacks 013H, 06YS, 06YT, 06YU; blueprint `def-wf-tensor-product`, first sentence
+Source: Stacks 013H, 06YS, 06YT, 06YU; blueprint `prose-03-02`, first sentence
 (auxiliary; not a blueprint node).
 
 Proof:

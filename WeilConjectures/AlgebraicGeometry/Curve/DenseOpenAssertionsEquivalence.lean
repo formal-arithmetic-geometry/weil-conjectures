@@ -33,7 +33,7 @@ eight assertions, which only see the underlying abelian sheaf, hold for it by th
 of `F`: this is the unconditional form of `AlgebraicGeometry.IsCurve.dense_open_assertions`.
 
 Source: Stacks Project, Theorem 03SC and Lemma 0GJA (blueprint: `app:curve-package`,
-`sk-lem-curve-dense-open`).
+`lemma-removing-finitely-many-points`).
 -/
 
 @[expose] public section
@@ -144,7 +144,7 @@ coefficient pair over `k` with `F` constructible and `j : U ⟶ C` an open immer
 torsion of `F` is needed; and the statement holds for every open `U`, in particular for every
 dense open.
 
-Source: Stacks Project, Lemma 0GJA (blueprint: `sk-lem-curve-dense-open`).
+Source: Stacks Project, Lemma 0GJA (blueprint: `lemma-removing-finitely-many-points`).
 
 Proof: both sides hold by
 `AlgebraicGeometry.CurveCoefficientPair.assertions_of_constructible`; for `j_! j^* F`, which is

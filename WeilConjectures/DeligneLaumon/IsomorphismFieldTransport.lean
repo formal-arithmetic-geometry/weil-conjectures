@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-! # Exact isomorphism transport at integral and field coefficient stages
 
 Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, sentence 1, through lem-fix-weil-operations,
+prop-weil-operations.proof.md, sentence 1, through prose-10-20,
 first paragraph (blueprint: lem-pod-isomorphism-field-transport).
 
 All functors, coefficient maps, scalar comparisons and quotient Hom constructors
@@ -87,7 +87,7 @@ private theorem transport_scalarLaw
 /-- Exact inverse transport through the completed integral, raw rational and common-stage
 categories, with both normalized inverse comparisons and their scalar equations.
 Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md sentence 1 through lem-fix-weil-operations paragraph 1
+prop-weil-operations.proof.md sentence 1 through prose-10-20 paragraph 1
 (blueprint: lem-pod-isomorphism-field-transport).
 
 Proof: the finite-field cardinality gives characteristic p on k₀. Since l is a

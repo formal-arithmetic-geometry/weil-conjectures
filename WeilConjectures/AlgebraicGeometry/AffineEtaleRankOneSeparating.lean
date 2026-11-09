@@ -14,7 +14,7 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 # Affine rank-one extensions separate etale module sheaves
 
 Source: Stacks Project, Tags 03EW and 04HR
-(blueprint: lem-weil-pbc-affine-etale-rank-one-separating).
+(blueprint: lemma-finiteness-small-etale-topoi--1).
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ objects form a separating family. This needs neither finite coefficients nor a q
 
 Source: Stacks Project, Modules on Sites, Tag 03EW, proof of (3), and Topologies,
 Tag 04HR (affine etale objects are cover-dense)
-(blueprint: lem-weil-pbc-affine-etale-rank-one-separating).
+(blueprint: lemma-finiteness-small-etale-topoi--1).
 
 Proof: suppose two module-sheaf maps agree after composition with every map from
 one of these extensions. The extension-by-zero/pullback adjunction identifies maps

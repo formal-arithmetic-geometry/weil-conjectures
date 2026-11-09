@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 
 Let `Λ` be a finite coefficient ring (the stage `A = A_{E,n}`), `J` an ideal of `Λ` (so that
 `B = Λ ⧸ J`, for instance `A_{E,m} = A_{E,n} ⧸ ϖ_E^m`, `m ≤ n`) and `f : X ⟶ Y` a morphism admitting
-a compactification. Blueprint `lem-fix-compact-support-coefficient-change` asserts that the
+a compactification. Blueprint `lemma-sp-reduction--1` asserts that the
 canonical coefficient comparison
 
 `(Rf_! K) ⊗ᴸ_A B ⟶ Rf_!(K ⊗ᴸ_A B)`
@@ -61,7 +61,7 @@ noncomputable abbrev constantQuotient (Y : Scheme.{u}) :
   (_root_.DerivedCategory.singleFunctor _ 0).obj
     ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ (Λ ⧸ J)))
 
-/-- Blueprint `lem-fix-compact-support-coefficient-change`: Change of finite coefficients for
+/-- Blueprint `lemma-sp-reduction--1`: Change of finite coefficients for
 compact support, the comparison map.
 
 For a finite coefficient ring `A = Λ` and `B = Λ ⧸ J`, the canonical coefficient comparison
@@ -73,7 +73,7 @@ theorem hasProjectionFormula_constantQuotient_of_finite
     HasProjectionFormula (ModuleCat.{u + 1} Λ) f K (constantQuotient Λ J Y) :=
   hasProjectionFormula_of_finite Λ f K _
 
-/-- Blueprint `lem-fix-compact-support-coefficient-change`: Change of finite coefficients for
+/-- Blueprint `lemma-sp-reduction--1`: Change of finite coefficients for
 compact support.
 
 Let `Λ` be a finite coefficient ring (`A = A_{E,n}`), `J` an ideal of `Λ` (`B = A_{E,m}`,

@@ -143,7 +143,7 @@ Source: Stacks Project, Morphisms, Lemma 0H88; EGA I, Proposition 9.6.1
 Proof, following the six steps of the node:
 1. Forgetting algebra scalars preserves direct sums and exact sequences, since both
 module categories have exact forgetful functors to abelian sheaves preserving colimits
-(`lem-weil-pbc-module-sheaves-colimits-forgetful`).
+(`situation-conventions`).
 2. On an affine open `U = Spec R`, put `B = A(U)`. The tilde-Gamma adjunction identifies
 the underlying module of each direct sum of copies of `A|U` with the tilde of the
 corresponding direct sum of copies of `B`. Thus these sums are quasi-coherent, using
@@ -157,7 +157,7 @@ Its restricted `R`-action agrees with the structure-sheaf action. Present `M` by
 `B`-modules, taking all elements as generators and all kernel elements as relations.
 5. Define the maps between direct sums of `A|U` and `G|U` from these sections. They are
 `A|U`-linear by compatibility of the action with restriction
-(`def-weil-sheaf-of-modules-category`).
+(`situation-conventions`).
 6. Under the tilde-Gamma identifications the maps are the tildes of the free presentation.
 The tilde functor preserves cokernels and direct sums, so the sequence is exact as a
 structure-sheaf sequence, hence also as an algebra-module sequence by step 1. These

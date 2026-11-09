@@ -15,7 +15,8 @@ public import WeilConjectures.TraceFormula.PurityCompatibility
 
 For separated `k`-schemes of finite type `X`, `Y` and bounded constructible `M` on `X`, `N` on
 `Y`, the Künneth–Verdier map `κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism
-(`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, blueprint `thm-trf-kunneth-verdier`).
+(`ProEtale.CondensedRing.isIso_kunnethVerdierMap`, blueprint
+`lemma-external-duality-trace-morphism--1`).
 
 ## Proof
 
@@ -158,8 +159,8 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- **The Künneth–Verdier isomorphism** (blueprint `thm-trf-kunneth-verdier`): for bounded
-constructible `M` on `X` and `N` on `Y`, the Künneth–Verdier map
+/-- **The Künneth–Verdier isomorphism** (blueprint `lemma-external-duality-trace-morphism--1`): for
+bounded constructible `M` on `X` and `N` on `Y`, the Künneth–Verdier map
 `κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` is an isomorphism. -/
 instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

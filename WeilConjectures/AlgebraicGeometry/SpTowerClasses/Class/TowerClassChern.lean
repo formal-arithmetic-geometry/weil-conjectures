@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassC
 
 /-! # Chern for canonical tower classes
 
-Source: blueprint main-20261015, sec-smooth-purity,
+Source: blueprint main-20261015, chap-Smooth-purity,
 `sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-chern).
 -/
 
@@ -130,7 +130,7 @@ def lineComparison {T : Scheme.{u}} (c : Chern l E T) :
 
 /-- The inverse line is the internal sheaf Hom into the actual coefficient unit
 on the same ringed sequence site, not an unspecified inverse object.
-Source: classes preamble, sk-def-sp-tate-twist negative powers
+Source: classes preamble, definition-tate-twists negative powers
 (blueprint: def-sp-tower-class-chern). -/
 def inverseLineModule {T : Scheme.{u}} (c : Chern l E T) : Systems T (Arings l E T) :=
   SheafOfModules.homObj (R := SemilinearSections.systemRing.{u + 1, u, u + 1}

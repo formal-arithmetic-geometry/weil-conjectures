@@ -86,7 +86,7 @@ lemma fourierTransformPi_const_mul (ψ : AddChar K R) (c : R) (f : (ι → L) �
 induced by an additive character `ψ` of a subfield `K`. For `L = 𝔽_{qⁿ}` over `K = 𝔽_q` this
 is the transform with respect to the character `ψₙ` of `𝔽_{qⁿ}`. It is the transform on `L^ι`
 for `ι` with one element (`FiniteField.fourierTransformPi_unique`).
-(sketch blueprint: `def-fd-trace-function`) -/
+(sketch blueprint: `definition-trace-function`) -/
 noncomputable def fourierTransform (ψ : AddChar K R) (f : L → R) (y : L) : R :=
   ∑ x, f x * ψ (Algebra.trace K L (x * y))
 
@@ -121,7 +121,7 @@ variable [FiniteDimensional K L] [Algebra.IsSeparable K L] [IsDomain R]
 /-- **Additive orthogonality on `L^ι`.** For a nontrivial additive character `ψ` of `K`,
 `∑_{y ∈ L^ι} ψ_L(⟨x - x', y⟩) = #L ^ #ι` if `x = x'` and `0` otherwise: the sum is the product
 over `ι` of the orthogonality relations on `L`.
-(blueprint: `lem-fd-additive-orthogonality`; sketch blueprint: `lem-fd-additive-orthogonality`) -/
+(blueprint: `corollary-plancherel--1`; sketch blueprint: `corollary-plancherel--1`) -/
 theorem sum_compTrace_sum_sub_mul [DecidableEq L] {ψ : AddChar K R} (hψ : ψ ≠ 1) (x x' : ι → L) :
     ∑ y : ι → L, ψ.compTrace L (∑ i, (x i - x' i) * y i) =
       if x = x' then (Fintype.card L : R) ^ Fintype.card ι else 0 := by
@@ -192,7 +192,7 @@ lemma conj_ringHom_compTrace [Finite K] (j : R →+* ℂ) (ψ : AddChar K R) (t 
 /-- **Classical Plancherel identity on `L^ι`.** For a nontrivial additive character `ψ` of a
 finite field `K`, a finite extension `L / K` and a ring homomorphism `j : R →+* ℂ`,
 `∑_y |j f̂(y)|² = #L ^ #ι ∑_x |j f(x)|²`.
-(sketch blueprint: `sk-cor-plancherel`, proof) -/
+(sketch blueprint: `corollary-plancherel`, proof) -/
 theorem sum_norm_sq_fourierTransformPi [Finite K] (j : R →+* ℂ) {ψ : AddChar K R} (hψ : ψ ≠ 1)
     (f : (ι → L) → R) :
     ∑ y, ‖j (fourierTransformPi ψ f y)‖ ^ 2 =
@@ -231,7 +231,7 @@ theorem sum_norm_sq_fourierTransformPi [Finite K] (j : R →+* ℂ) {ψ : AddCha
 `K`, a finite extension `L / K` and a ring homomorphism `ι : R →+* ℂ`,
 `∑_y |ι f̂(y)|² = #L ∑_x |ι f(x)|²`. It is the case `ι = Unit` of
 `FiniteField.sum_norm_sq_fourierTransformPi`.
-(sketch blueprint: `sk-cor-plancherel`, proof) -/
+(sketch blueprint: `corollary-plancherel`, proof) -/
 theorem sum_norm_sq_fourierTransform [Finite K] (ι : R →+* ℂ) {ψ : AddChar K R} (hψ : ψ ≠ 1)
     (f : L → R) :
     ∑ y, ‖ι (fourierTransform ψ f y)‖ ^ 2 = Fintype.card L * ∑ x, ‖ι (f x)‖ ^ 2 := by

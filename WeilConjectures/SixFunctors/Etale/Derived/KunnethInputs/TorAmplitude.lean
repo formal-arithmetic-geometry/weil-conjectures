@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 # Tor amplitude and K-flat models of étale complexes
 
 This file records the homological-algebra inputs of the ordinary Künneth formula
-(blueprint subsection `sk-prop-sf-kunneth-ordinary`) about Tor amplitude and K-flat complexes
-of étale sheaves, for a monoidal Grothendieck abelian coefficient category `A` with functorial
-flat resolutions (for instance `A = ModuleCat Λ`, the `Λ_T`-modules of the blueprint).
+(blueprint subsection `proposition-ordinary-external-kunneth--1`) about Tor amplitude and K-flat
+complexes of étale sheaves, for a monoidal Grothendieck abelian coefficient category `A` with
+functorial flat resolutions (for instance `A = ModuleCat Λ`, the `Λ_T`-modules of the blueprint).
 
 ## Main definitions and results
 

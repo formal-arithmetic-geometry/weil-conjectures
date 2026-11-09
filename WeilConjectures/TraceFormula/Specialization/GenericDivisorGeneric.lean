@@ -25,7 +25,7 @@ specialization (`ProEtale.CondensedRing.specializationDefect`), a complex on the
 `N_⊥ Z ≅ Z ⊗ k'` of the constant family of `Z`. The defect *vanishes generically* on `Z` if its
 restriction to the inverse image of some dense open `U ⊆ Z` is zero
 (`ProEtale.CondensedRing.genericallyVanishingDefect`); this is the conclusion of blueprint
-`det-sp-generic-divisor`.
+`lemma-vanishing-generic-points-principal-divisor--1`.
 
 This file shows that the complexes with generically vanishing defect form a triangulated
 subcategory, stable under retracts
@@ -241,9 +241,10 @@ theorem genericallyVanishingDefect_of_lisseGenerator
   exact (ObjectProperty.triangEnvelope_le_iff (Q := Q) _).mpr (fun N hN ↦ h N hN) _
     (triangEnvelope_lisseGenerator ℓ X L)
 
-/-- **Reduction of blueprint `det-sp-generic-divisor` to the lisse generators**: if the defect
-`C_{X,Z}` vanishes generically on the lisse generators `Rg_! Rj_! L` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, then for
-every bounded constructible `L` there is a dense open `U ⊆ Z` over which `C_{X,Z}(L)` vanishes. -/
+/-- **Reduction of blueprint `lemma-vanishing-generic-points-principal-divisor--1` to the lisse
+generators**: if the defect `C_{X,Z}` vanishes generically on the lisse generators `Rg_! Rj_! L` of
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, then for every bounded constructible `L` there is a dense open `U ⊆ Z` over which
+`C_{X,Z}(L)` vanishes. -/
 theorem exists_dense_isZero_specializationDefect_of_lisseGenerator
     (h : ∀ N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧, lisseGenerator ℓ X N →
       genericallyVanishingDefect X I k' (Profinite.padicAlgClRingObj ℓ) N.obj)

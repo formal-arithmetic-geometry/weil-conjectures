@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 
 Source: the nonzero-support argument of
 `lem-exc-coproduct-preservation-universe-extension`, applied to the definition of a
-localizing subcategory in `sk-def-localizing-closure`
+localizing subcategory in `definition-localizing-subcategory`
 (blueprint: lem-sfb-localizing-subcategory-universe).
 -/
 
@@ -88,7 +88,7 @@ private theorem closed_coproducts_of_locallySmall
 small implies closure under all existing coproducts in the object universe.
 
 Source: the idempotent-endomorphism proof of
-`lem-exc-coproduct-preservation-universe-extension` and `sk-def-localizing-closure`
+`lem-exc-coproduct-preservation-universe-extension` and `definition-localizing-subcategory`
 (blueprint: lem-sfb-localizing-subcategory-universe).
 
 Proof: for an existing coproduct, the projection onto a nonzero summand followed by its

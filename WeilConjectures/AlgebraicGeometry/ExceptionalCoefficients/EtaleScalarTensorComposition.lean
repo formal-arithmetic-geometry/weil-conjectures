@@ -625,8 +625,8 @@ private theorem scalar_comp_tensor_kFlat
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints in
 /-- The published scalar tensor comparison respects the fixed scalar compositor.
-Source: blueprint thm-coef-finite-hom, successive coefficient paragraph; Stacks 07A4, 0D6D
-(blueprint: lem-coef-etale-scalar-tensor-composition).
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive coefficient paragraph;
+Stacks 07A4, 0D6D (blueprint: lem-coef-etale-scalar-tensor-composition).
 
 Proof: choose flat-term K-flat complexes P,Q representing U,V. Ordinary scalar extension
 preserves their flatness and K-flatness, including for nonflat ring maps. The compositor

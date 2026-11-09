@@ -113,15 +113,15 @@ squares and the equations for `πZ` identify every composite to `X`. Use the uni
 counits and composition isomorphisms of def-weil-pbc-inverse-image,
 def-weil-pbc-direct-image and lem-weil-pbc-inverse-image-composition. Exchange is the
 adjoint of the square comparison followed by inverse image of the counit. Fix
-resolutions and use lem-weil-pbc-cohomology-pullback-functorial to identify all choices.
-2. By lem-weil-pbc-adjunct-counit-identity and naturality of cohomological pullback,
+resolutions and use proposition-cohomology-p-1-over-henselian--1 to identify all choices.
+2. By situation-conventions and naturality of cohomological pullback,
 exchange followed by the edge map is pullback followed by cohomology of its adjunct.
 3. Naturality and composition of cohomological pullback reduce the required equality
 to the equality of sheaf morphisms from `(fZ')^* B` to `(iY')^* π^* G`.
 4. The counit for `π ≫ f` composed with inverse image of `f_* η_π` is inverse image
 of the counit for `f`, after the composition comparison. This follows from the unit
 formula of lem-weil-pbc-inverse-image-composition, naturality of the unit, and the
-triangle identity of lem-weil-pbc-adjunct-counit-identity.
+triangle identity of situation-conventions.
 5. Expand the adjunct for the second square and move the unit morphism through the
 composition isomorphisms by naturality; apply step 4.
 6. Expand the adjunct for the first square and move its counit through the comparison

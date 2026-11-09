@@ -53,7 +53,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 open _root_.DerivedCategory
 
 /-- The truncation `τ_{<b}K` of a Weil complex is a Weil complex (blueprint:
-`lem-zl-relative-curve-punctual`, auxiliary). -/
+`theorem-pure-lisse-sheaves-over-relative--1`, auxiliary). -/
 theorem objectProperty_truncLT (K : WeilComplex k₀ l X) (b : ℤ) :
     WeilComplex.objectProperty k₀ l X ((TStructure.t.truncLT b).obj K.obj) := by
   obtain ⟨⟨a, ha⟩, -⟩ := K.property.1
@@ -69,7 +69,7 @@ theorem objectProperty_truncLT (K : WeilComplex k₀ l X) (b : ℤ) :
     exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero (isZero_of_isLE _ (b - 1) _ (by lia))
 
 /-- A Weil complex concentrated in degree `b` is a Weil sheaf placed in degree `b`, namely its
-`b`-th cohomology sheaf (blueprint: `lem-zl-relative-curve-punctual`, auxiliary). -/
+`b`-th cohomology sheaf (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`, auxiliary). -/
 theorem exists_iso_singleComplex (Z : WeilComplex k₀ l X) (b : ℤ) [Z.obj.IsGE b]
     [Z.obj.IsLE b] : ∃ G : WeilSheaf k₀ l X, Nonempty (Z ≅ singleComplex b G) ∧
       Nonempty ((homologyFunctor _ b).obj Z.obj ≅ G.obj) := by
@@ -82,7 +82,7 @@ theorem exists_iso_singleComplex (Z : WeilComplex k₀ l X) (b : ℤ) [Z.obj.IsG
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The truncation triangle `τ_{<b}K ⟶ K ⟶ Z ⟶` of a Weil complex, as a distinguished
-triangle of Weil complexes (blueprint: `lem-zl-relative-curve-punctual`, auxiliary). -/
+triangle of Weil complexes (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`, auxiliary). -/
 theorem exists_distTriang_truncLT (K : WeilComplex k₀ l X) (b : ℤ) :
     ∃ (A Z : WeilComplex k₀ l X) (f : A ⟶ K) (g : K ⟶ Z) (h : Z ⟶ A⟦(1 : ℤ)⟧),
       Triangle.mk f g h ∈ distTriang (WeilComplex k₀ l X) ∧ A.obj.IsLE (b - 1) ∧
@@ -109,7 +109,8 @@ omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- A functor between Weil complexes commuting with shifts which carries Weil sheaves, placed in
 degree zero, to complexes concentrated in degree zero carries a Weil sheaf placed in degree `b`
-to a complex concentrated in degree `b` (blueprint: `lem-zl-relative-curve-punctual`). -/
+to a complex concentrated in degree `b` (blueprint:
+`theorem-pure-lisse-sheaves-over-relative--1`). -/
 theorem isGE_and_isLE_map_singleComplex
     (hΦ : ∀ (G : WeilSheaf k₀ l X) (n : ℤ), n ≠ 0 →
       IsZero ((homologySheaf n).obj (Φ.obj (WeilSheaf.toComplex.obj G))))
@@ -132,7 +133,8 @@ variable [Φ.IsTriangulated]
 
 /-- A triangulated functor between Weil complexes which carries Weil sheaves, placed in degree
 zero, to complexes concentrated in degree zero carries complexes concentrated in `[a, a + n - 1]`
-to complexes concentrated in `[a, a + n - 1]` (blueprint: `lem-zl-relative-curve-punctual`). -/
+to complexes concentrated in `[a, a + n - 1]` (blueprint:
+`theorem-pure-lisse-sheaves-over-relative--1`). -/
 theorem isGE_and_isLE_map_of_length
     (hΦ : ∀ (G : WeilSheaf k₀ l X) (n : ℤ), n ≠ 0 →
       IsZero ((homologySheaf n).obj (Φ.obj (WeilSheaf.toComplex.obj G)))) (n : ℕ) :
@@ -172,7 +174,7 @@ theorem isGE_and_isLE_map_of_length
 
 /-- A triangulated functor between Weil complexes which carries Weil sheaves, placed in degree
 zero, to complexes concentrated in degree zero preserves complexes concentrated in degrees
-`≥ a` (blueprint: `lem-zl-relative-curve-punctual`). -/
+`≥ a` (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
 theorem isGE_map
     (hΦ : ∀ (G : WeilSheaf k₀ l X) (n : ℤ), n ≠ 0 →
       IsZero ((homologySheaf n).obj (Φ.obj (WeilSheaf.toComplex.obj G))))
@@ -184,7 +186,7 @@ theorem isGE_map
 
 /-- A triangulated functor between Weil complexes which carries Weil sheaves, placed in degree
 zero, to complexes concentrated in degree zero preserves complexes concentrated in degrees
-`≤ c` (blueprint: `lem-zl-relative-curve-punctual`). -/
+`≤ c` (blueprint: `theorem-pure-lisse-sheaves-over-relative--1`). -/
 theorem isLE_map
     (hΦ : ∀ (G : WeilSheaf k₀ l X) (n : ℤ), n ≠ 0 →
       IsZero ((homologySheaf n).obj (Φ.obj (WeilSheaf.toComplex.obj G))))
@@ -202,7 +204,7 @@ theorem isLE_map
 /-- **A t-exact functor commutes with the cohomology sheaves.** A triangulated functor `Φ`
 between Weil complexes which carries Weil sheaves, placed in degree zero, to complexes
 concentrated in degree zero satisfies `𝓗ⁱ(Φ K) ≅ 𝓗⁰(Φ 𝓗ⁱ(K))` (blueprint:
-`lem-zl-relative-curve-punctual`). -/
+`theorem-pure-lisse-sheaves-over-relative--1`). -/
 theorem nonempty_homologySheaf_map_iso
     (hΦ : ∀ (G : WeilSheaf k₀ l X) (n : ℤ), n ≠ 0 →
       IsZero ((homologySheaf n).obj (Φ.obj (WeilSheaf.toComplex.obj G))))
@@ -269,7 +271,7 @@ variable {X Y X' T : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- **Compactly supported cohomology of a fibre over a quasi-finite base.** For a cartesian square
 `X' = X ×_Y T` of `k₀`-schemes with `f : X ⟶ Y` separated of finite type and `T` quasi-finite over
 `k₀`, `H_c^0(T, t^* Rⁱf₀!F) ≅ H_c^i(X', g^*F)` as Frobenius modules (blueprint:
-`lem-zl-relative-curve-punctual`, the identification of the stalks of `Rⁱh₀!F` with the
+`theorem-pure-lisse-sheaves-over-relative--1`, the identification of the stalks of `Rⁱh₀!F` with the
 compactly supported cohomology of the fibres by compact support base change). -/
 theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_fiber
     (hH : IsPullback g f' f t) (F : WeilSheaf k₀ l X) (i : ℕ) :

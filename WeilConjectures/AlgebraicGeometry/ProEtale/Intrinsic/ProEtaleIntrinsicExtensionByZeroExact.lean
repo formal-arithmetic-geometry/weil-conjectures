@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 # Exactness of extension by zero in intrinsic coefficients
 
 Source: Weil blueprint, order 1492; Stacks Project, Tags 03DI and 03DJ
-(blueprint: lem-weil-extension-by-zero-exact).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--7).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Extension by zero is additive and preserves finite limits and colimits.
 Source: blueprint order 1492; Stacks, Tags 03DI and 03DJ
-(blueprint: lem-weil-extension-by-zero-exact).
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--7).
 
 Proof: unfold the intrinsic extension as the composite of the inverse canonical
 coefficient realization, fixed-coefficient extension by zero, and the ambient canonical
@@ -50,14 +50,14 @@ theorem sfIntrinsicExtensionByZero_exact {U X : Scheme.{u}} (j : U ⟶ X)
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity from the exactness assertion. Source: Stacks, Tag 03DJ
-(blueprint: lem-weil-extension-by-zero-exact). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--7). -/
 noncomputable instance sfIntrinsicExtensionByZero_additive {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicExtensionByZero j A).Additive :=
   (sfIntrinsicExtensionByZero_exact j A).1
 
 /-- Left exactness from the exactness assertion. Source: Stacks, Tag 03DJ
-(blueprint: lem-weil-extension-by-zero-exact). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--7). -/
 noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteLimits
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :
@@ -65,7 +65,7 @@ noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteLimits
   (sfIntrinsicExtensionByZero_exact j A).2.1
 
 /-- Right exactness from the exactness assertion. Source: Stacks, Tag 03DJ
-(blueprint: lem-weil-extension-by-zero-exact). -/
+(blueprint: proposition-extension-zero-restriction-closed-subscheme--7). -/
 noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteColimits
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :

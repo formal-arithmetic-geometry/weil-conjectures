@@ -13,7 +13,7 @@ import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorChainSquare
 import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorModel
 
 /-! # Composition of the intrinsic finite scalar tensorators
-Source: blueprint thm-coef-finite-hom, successive quotient paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotient paragraph
 (blueprint: lem-coef-finite-hom-intrinsic-tensor-composition).
 -/
 
@@ -317,8 +317,8 @@ private theorem intrinsic_representatives (n : ℕ) (Y : normalizedDVRDerived l 
 end Representatives
 
 /-- The normalized tensorators commute with the prescribed scalar associator.
-Source: blueprint thm-coef-finite-hom, proof of the successive-quotient tensor square
-(blueprint: lem-coef-finite-hom-intrinsic-tensor-composition).
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof of the successive-quotient tensor
+square (blueprint: lem-coef-finite-hom-intrinsic-tensor-composition).
 
 Proof: the quotient calculus supplies normalized ordinary and derived adjunctions.
 Extend its unit equation from K-flat representatives to every complex by naturality

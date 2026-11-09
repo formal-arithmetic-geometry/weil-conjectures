@@ -52,7 +52,7 @@ import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorC
 
 /-! # Coherence of integral twisting and scalar extension
 
-Source: blueprint `prop-weil-twist-preserves`, final integral/common-stage paragraph,
+Source: blueprint `definition-tate-twists--10`, final integral/common-stage paragraph,
 and `lem-weil-scalar-extension-composition`, integral associativity paragraph
 (blueprint: lem-weil-integral-twist-scalar-coherence).
 -/

@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 # A localization as a filtered colimit of principal localizations
 
 Source: Stacks Project, Algebra, Lemma 10.9.9, Tag 00CR, specialized to the ring itself
-(blueprint: lem-weil-pbc-localization-colimit-principal-localizations).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CommRingCat
 
 /-- Stacks Project, Algebra, Tag 00CR, in the ring case.
-(blueprint: lem-weil-pbc-localization-colimit-principal-localizations).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 The divisibility preorder on `S` is directed, and hence filtered. The maps between the
 principal localizations are specified on every fraction, for every choice of the factor `h`.
 The functor and its chosen colimit `colimit F` are identified with these rings and maps by

@@ -27,7 +27,7 @@ Fix(c) ──ι──▶ C
 ```
 with `d = ι ≫ c₁ = ι ≫ c₂`, which is cartesian
 (`ProEtale.CondensedRing.Correspondence.FixedLocus.isPullback`, blueprint
-`prop-trf-fixed-square-cartesian`).
+`definition-correspondence--3`).
 
 -/
 
@@ -137,8 +137,8 @@ namespace Correspondence
 variable (c : Correspondence ℓ K)
 
 /-- The *support map* `c = (c₁, c₂) : C ⟶ X ⨯ X` of an endocorrespondence (blueprint
-`sk-d-corr`): its first component is the exceptional leg `c₁`, its second the ordinary leg
-`c₂`. -/
+`definition-correspondence`): its first component is the exceptional leg `c₁`, its second the
+ordinary leg `c₂`. -/
 noncomputable def support : c.C ⟶ X ⨯ X :=
   prod.lift c.c₁ c.c₂
 
@@ -167,7 +167,7 @@ lemma ι_c₂ : F.ι ≫ c.c₂ = F.d :=
 lemma ι_support : F.ι ≫ c.support = F.d ≫ diag X := by
   apply prod.hom_ext <;> simp [ι_c₁, ι_c₂]
 
-/-- **The fixed square is cartesian** (blueprint `prop-trf-fixed-square-cartesian`): the fixed
+/-- **The fixed square is cartesian** (blueprint `definition-correspondence--3`): the fixed
 locus `Fix(c)` is the fibre product `C ×_{X ⨯ X} X` of the support map `c : C ⟶ X ⨯ X` and the
 diagonal `Δ_X`, with projections `ι : Fix(c) ⟶ C` and `d : Fix(c) ⟶ X`. -/
 theorem isPullback : IsPullback F.ι F.d c.support (diag X) := by
@@ -195,7 +195,7 @@ instance isClosedImmersion_ι : IsClosedImmersion F.ι.left :=
     (F.isPullback.map (Over.forget _)).flip (inferInstanceAs (IsClosedImmersion (diag X).left))
 
 /-- The exceptional composition isomorphism of the fixed square (blueprint
-`prop-trf-fixed-square-cartesian`): `Rd^! ≅ Rc₁^! ⋙ Rι^!`, from `d = ι ≫ c₁`, the only
+`definition-correspondence--3`): `Rd^! ≅ Rc₁^! ⋙ Rι^!`, from `d = ι ≫ c₁`, the only
 unconditional `!`-transport of the two legs in the fixed square. -/
 noncomputable def upperShriekDIso :
     boundedConstructibleUpperShriek ℓ F.d ≅

@@ -13,7 +13,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 # Presheaf of locally constant maps
 
 Source: Stacks Project, Sheaves, Example 6.4 and Definition 6.5 (Tag 006W)
-(blueprint: def-weil-pbc-locally-constant-maps-presheaf).
+(blueprint: theorem-gabber-affine-proper-base-change).
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ namespace TopCat
 
 /-- The presheaf assigning to each open the locally constant maps into `R`.
 Source: Stacks Project, Sheaves, Example 6.4 (Tag 006W)
-(blueprint: def-weil-pbc-locally-constant-maps-presheaf). -/
+(blueprint: theorem-gabber-affine-proper-base-change). -/
 def locallyConstantMapsPresheaf (X : TopCat.{u}) (R : Type v) :
     X.Presheaf (Type (max u v)) where
   obj := fun V ↦ LocallyConstant {x : X // x ∈ unop V} R

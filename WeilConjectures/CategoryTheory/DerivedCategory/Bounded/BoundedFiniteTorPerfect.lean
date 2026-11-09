@@ -39,7 +39,7 @@ import WeilConjectures.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 /-! # Bounded finite Tor amplitude implies perfect
 
 Source: Stacks Project, Tags 0658, 066E, 00NZ
-(blueprint: lem-weil-bounded-finite-tor-perfect).
+(blueprint: lemma-perfect-complexes-geometric-point).
 -/
 
 @[expose] public section
@@ -55,7 +55,7 @@ bounded finite-projective model in exactly that interval; over a local ring the
 model can be chosen finite free.
 
 Source: Stacks Project, Tags 0658, 066E, 00NZ
-(blueprint: lem-weil-bounded-finite-tor-perfect).
+(blueprint: lemma-perfect-complexes-geometric-point).
 Proof:
 1. The cycles of `K` are finite by `lem-weil-pbc-noetherian-submodule-finite`;
    their quotient cohomology is finite. Boundedness gives an upper cohomological

@@ -24,8 +24,8 @@ direct images of `v^* K` along `v` and along `v ≫ j`, and the direct image of 
 `i ≫ j`, are bounded constructible and commute with base change, and `i^* Δ` is bounded
 constructible, then the direct image of `K` along `j` is bounded constructible and commutes with
 base change (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_distTriang_unit`). This is
-the third step of the proof of `thm-fin-deligne-generic-open`, once the second step has been
-applied to `v` and to `v ≫ j` and the induction hypothesis to `i ≫ j`.
+the third step of the proof of `theorem-generic-constructibility-base-change-rj`, once the second
+step has been applied to `v` and to `v ≫ j` and the induction hypothesis to `i ≫ j`.
 -/
 
 @[expose] public section

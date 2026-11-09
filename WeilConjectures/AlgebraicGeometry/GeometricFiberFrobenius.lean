@@ -106,7 +106,7 @@ theorem isOfCharacteristic_geometricFiber : f.geometricFiber.IsOfCharacteristic 
 
 variable [Finite k]
 
-/-- Blueprint `def-trf-scheme-frobenius`: the `q`-power scheme Frobenius `Φ₀ : X₀ ⟶ X₀` of a
+/-- Blueprint `sec-Weil-complexes`: the `q`-power scheme Frobenius `Φ₀ : X₀ ⟶ X₀` of a
 scheme over the finite field `k = 𝔽_q`, that is its absolute `q`-power Frobenius
 (`s ↦ s ^ q` on sections, the identity on points). It is a morphism over `k`
 (`AlgebraicGeometry.Scheme.Hom.modelFrobenius_comp`). -/
@@ -131,7 +131,7 @@ theorem comp_modelFrobenius {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} (φ 
     φ ≫ g.modelFrobenius = f.modelFrobenius ≫ φ :=
   comp_iterateFrobenius _ _ _ _ _
 
-/-- Blueprint `def-pur-scheme-geometric-frobenius` (see also `def-trf-scheme-frobenius`): the
+/-- Blueprint `sec-Weil-complexes` (see also `sec-Weil-complexes`): the
 scheme Frobenius `Φ_X = Φ₀ × 𝟙 : X ⟶ X` of the geometric fibre `X = X₀ ×_{Spec k} Spec k̄`, the
 base change to `k̄` of the `q`-power Frobenius `Φ₀` of `X₀`. It is a morphism over `k̄`; on an
 affine chart it is `a ⊗ b ↦ a ^ q ⊗ b`. -/
@@ -168,7 +168,7 @@ theorem geometricGaloisFrobenius_inv_comp_geometricFiberToAlgebraicClosure :
     Iso.hom_inv_id, Category.comp_id]
 
 variable {f} in
-/-- Blueprint `def-pur-scheme-geometric-frobenius`: the base change `f = φ × 𝟙` of a morphism
+/-- Blueprint `sec-Weil-complexes`: the base change `f = φ × 𝟙` of a morphism
 `φ : X₀ ⟶ Y₀` over `k` commutes with the scheme Frobenii, `f ≫ Φ_Y = Φ_X ≫ f`. -/
 @[reassoc]
 theorem geometricFiberMap_comp_geometricFiberFrobenius {Y₀ : Scheme.{u}}
@@ -231,7 +231,7 @@ namespace Scheme.Hom
 
 variable {k} {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- Blueprint `prop-trf-frobenius-factorization` (case `m = 1`): the absolute `q`-power
+/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (case `m = 1`): the absolute `q`-power
 Frobenius of the geometric fibre `X = X₀ ×_{Spec k} Spec k̄` factors as
 `Fr_X^{(q)} = Φ ≫ g_σ`, where `Φ` is the scheme Frobenius and `g_σ = g_γ⁻¹ = 𝟙 × Spec σ` the
 arithmetic Galois automorphism, `σ : z ↦ z ^ q`. -/
@@ -248,7 +248,7 @@ theorem iterateFrobenius_geometricFiber_eq (hp : (ringChar k).Prime)
       geometricGaloisFrobenius_inv_comp_geometricFiberToAlgebraicClosure,
       geometricFiberFrobenius_comp_geometricFiberToAlgebraicClosure_assoc]
 
-/-- Blueprint `prop-trf-frobenius-factorization` (case `m = 1`): the absolute `q`-power
+/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (case `m = 1`): the absolute `q`-power
 Frobenius of the geometric fibre factors as `Fr_X^{(q)} = g_σ ≫ Φ`, where `g_σ = g_γ⁻¹`. -/
 theorem iterateFrobenius_geometricFiber_eq' (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) :
@@ -256,9 +256,9 @@ theorem iterateFrobenius_geometricFiber_eq' (hp : (ringChar k).Prime)
       f.geometricGaloisFrobenius.asIso.inv ≫ f.geometricFiberFrobenius := by
   rw [iterateFrobenius_geometricFiber_eq, geometricFiberFrobenius_comp_geometricGaloisFrobenius_inv]
 
-/-- Blueprint `prop-trf-frobenius-factorization`: for every `m`, the absolute `q ^ m`-power
-Frobenius of the geometric fibre factors as `Fr_X^{(q ^ m)} = Φᵐ ≫ g_σᵐ`, where `Φ` is the
-scheme Frobenius and `g_σ = g_γ⁻¹`. -/
+/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1`: for every `m`, the absolute
+`q ^ m`-power Frobenius of the geometric fibre factors as `Fr_X^{(q ^ m)} = Φᵐ ≫ g_σᵐ`, where `Φ` is
+the scheme Frobenius and `g_σ = g_γ⁻¹`. -/
 theorem iterateFrobenius_geometricFiber_mul_eq (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) (m : ℕ) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k * m) =
@@ -273,8 +273,8 @@ theorem iterateFrobenius_geometricFiber_mul_eq (hp : (ringChar k).Prime)
       End.mul_asHom, pow_succ, Aut.mul_asIso, Iso.trans_inv]
     simp only [Category.assoc, geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv_assoc]
 
-/-- Blueprint `prop-trf-frobenius-factorization`: for every `m`, the absolute `q ^ m`-power
-Frobenius of the geometric fibre factors as `Fr_X^{(q ^ m)} = g_σᵐ ≫ Φᵐ`, where
+/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1`: for every `m`, the absolute
+`q ^ m`-power Frobenius of the geometric fibre factors as `Fr_X^{(q ^ m)} = g_σᵐ ≫ Φᵐ`, where
 `g_σ = g_γ⁻¹`. -/
 theorem iterateFrobenius_geometricFiber_mul_eq' (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) (m : ℕ) :

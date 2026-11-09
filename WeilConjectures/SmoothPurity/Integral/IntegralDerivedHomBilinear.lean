@@ -78,7 +78,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Constant-scalar bilinearity of integral derived internal Hom
 
 Source: Stacks Project, Section 08J7 and Lemma 0A95; the rational internal-Hom
-paragraph of blueprint `def-weil-derived-pullback-tensor-hom`.
+paragraph of blueprint `prose-03-02`.
 -/
 
 @[expose] public section
@@ -149,7 +149,7 @@ private theorem closedHom_bilinear
 /-- The ambient integral internal-Hom action is bilinear for the published constant
 valuation-ring action. The first arrow is contravariant; the second is covariant.
 Source: Stacks Project, Section 08J7 and Lemma 0A95; blueprint
-`def-weil-derived-pullback-tensor-hom`, rational internal-Hom paragraph.
+`prose-03-02`, rational internal-Hom paragraph.
 (blueprint: lem-sf-integral-derived-hom-bilinear).
 
 Proof: compute the second input with a K-injective resolution. On the sheaf Hom

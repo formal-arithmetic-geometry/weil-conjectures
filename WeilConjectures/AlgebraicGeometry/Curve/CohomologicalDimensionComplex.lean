@@ -54,11 +54,11 @@ namespace AlgebraicGeometry
 
 variable {k : Type u} [Field k] {C : Scheme.{u}}
 
-/-- Blueprint `def-weil-pbc-curve-setting`: **curve coefficient pairs.** Let `k` be an
+/-- Blueprint `theorem-cohomology-curves`: **curve coefficient pairs.** Let `k` be an
 algebraically closed field and `f : C ⟶ Spec k` a curve, that is, a separated morphism of
 finite type with `dim C ≤ 1` (`AlgebraicGeometry.IsCurve`). A pair `(C, F)` of such a curve
 and a torsion abelian étale sheaf `F` on `C` is a *curve coefficient pair*.
-(blueprint: `def-weil-pbc-curve-setting`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 structure IsCurveCoefficientPair (f : C ⟶ Spec (.of k))
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop where
   /-- The base field is algebraically closed. -/
@@ -79,13 +79,13 @@ lemma IsCurveCoefficientPair.subsingleton_sheafH {f : C ⟶ Spec (.of k)}
 
 variable [IsAlgClosed k]
 
-/-- Blueprint `lem-sc-cohomological-dimension`: **cohomological dimension of a smooth curve.**
+/-- Blueprint `theorem-cohomology-curves--1`: **cohomological dimension of a smooth curve.**
 For a smooth separated connected curve `C` over an algebraically closed field and any torsion
 étale sheaf `F` on `C`, `Hᵠ(C, F) = 0` for `q > 2`. A smooth connected curve is integral, and
 the argument at the generic point of
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral` applies; smoothness is
 not needed for it.
-(blueprint: `lem-sc-cohomological-dimension`) -/
+(blueprint: `theorem-cohomology-curves--1`) -/
 theorem IsConnectedCurve.subsingleton_sheafH_of_two_lt_of_smooth (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : F.IsTorsion) (q : ℕ) (hq : 2 < q) : Subsingleton (Sheaf.H F q) := by
@@ -107,7 +107,7 @@ The proof is by induction on the amplitude of `K`, using the truncation triangle
 `τ_{< b} K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶` of the canonical t-structure and the sheaf case
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`; this replaces the
 hypercohomology spectral sequence of the blueprint proof.
-(blueprint: `lem-sc-arbitrary-curve-cd`) -/
+(blueprint: `theorem-cohomology-curves`) -/
 theorem IsCurve.subsingleton_shiftedHom_of_isGE_of_isLE (f : C ⟶ Spec (.of k)) [IsCurve f]
     [HasDerivedCategory.{w} (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (K : DerivedCategory (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b : ℤ)

@@ -22,7 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.md
 and its proof
-(blueprint: det-ind-heart-ii-sums).
+(blueprint: corollary-ind-heart-b--2).
 
 The Noetherian scope is the accepted correction recorded in the node's stage-1 report.
 Both coefficient choices are condensed rings pulled back to the small pro-etale site.
@@ -49,7 +49,7 @@ coprojection. Bijectivity is equivalent to its being an isomorphism of abelian g
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.md
 and its proof
-(blueprint: det-ind-heart-ii-sums).
+(blueprint: corollary-ind-heart-b--2).
 
 Proof: first the degree-zero embedding, the shift, and additive Hom from C preserve
 finite sums, including the empty sum. Express the ambient sum as the filtered colimit

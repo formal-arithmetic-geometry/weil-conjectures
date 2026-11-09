@@ -129,7 +129,7 @@ Source: Stacks Tag 099N(2), with the explicit calculation using Tags 0037, 0DV0 
 Proof plan:
 1. Expand the reflected Hom bijection as the reflector precomposition followed by the ambient
    Hom bijection. Its unit is the ambient unit followed by `R(k)`.
-2. Apply lem-weil-pbc-conjugate-iso-unit-equation to the reflected composite adjunction
+2. Apply situation-conventions to the reflected composite adjunction
    (def-weil-pbc-composite-adjunction). The double reflected transpose of the compositor is
    the reflected unit followed by the restricted right compositor.
 3. Naturality of the ambient `12` unit at `k₀₁,M` shows that the ordinary double transpose

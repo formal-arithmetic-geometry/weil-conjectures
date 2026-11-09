@@ -51,14 +51,14 @@ Proof in words:
    derived adjunction D(j_!) ⊣ D(j^*), so the open-extension functor is a left
    adjoint (lem-weil-pbc-extension-by-zero-adjunction,
    lem-weil-pbc-extension-by-zero-exact,
-   prop-weil-pbc-inverse-image-modules-exact).
+   situation-conventions).
 2. Proper derived direct image for finite coefficients is a left adjoint by
    lem-etale-proper-derived-direct-image-adjoint. Compose these two left adjoints
    to obtain a right adjoint for the supplied-compactification functor.
 3. The proper finite-coefficient projection map is invertible by
    lem-etale-proper-projection-formula-finite. The canonical compactification map
    is this component followed by mapped open tensor and inverse-image composition
-   isomorphisms (def-kun-projection-formula-map,
+   isomorphisms (definition-projection-formula-map--1,
    lem-pur-etale-open-derived-tensor, lem-weil-pbc-inverse-image-composition).
    Therefore each of its components is invertible.
 4. For any selected right adjoint G, specialize the projection isomorphism to

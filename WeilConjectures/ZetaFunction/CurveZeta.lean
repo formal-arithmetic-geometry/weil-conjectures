@@ -26,8 +26,8 @@ where the number of classes is `h = #Pic⁰(C)` if `n` lies in the subgroup `δ 
 line bundles and `0` otherwise. With the Riemann hypothesis for the middle factor `P₁` of a Weil
 factorization `Z = P₁ / ((1 - T) (1 - q T))` this forces `deg P₁ = 2 g`
 (`AlgebraicGeometry.IsWeilFactorization.natDegree_eq_two_mul_of_coeff`). This is
-F. K. Schmidt's argument; it gives Step 4 of the blueprint proof of `cor-zl-hasse-bound`,
-`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`, without `ℓ`-adic cohomology.
+F. K. Schmidt's argument; it gives Step 4 of the blueprint proof of
+`corollary-point-count-estimates--2`, `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`, without `ℓ`-adic cohomology.
 
 ## Main statements
 

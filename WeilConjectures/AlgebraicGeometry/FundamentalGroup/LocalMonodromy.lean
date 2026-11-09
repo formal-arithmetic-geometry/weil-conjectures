@@ -22,7 +22,7 @@ monodromy on the kernel of `π₁(U) → π₁(V)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.natCast_sub_one_mul_monodromy_eq_zero`).
 
 For the geometric fibre of a curve over `𝔽_q` and a power `E = Φ ^ m` of the geometric Frobenius
-fixing `z`, `Q = q ^ m`; this is the input of blueprint `lem-wf-open-curve-residue-sequence`
+fixing `z`, `Q = q ^ m`; this is the input of blueprint `proposition-no-fixed-class-degree-one--1`
 used for the Frobenius-fixed systems of torsors: the residues of a Frobenius-fixed torsor lie in
 `ℤ / N (-1)`, on which `Φ ^ m` acts as `Q`.
 -/

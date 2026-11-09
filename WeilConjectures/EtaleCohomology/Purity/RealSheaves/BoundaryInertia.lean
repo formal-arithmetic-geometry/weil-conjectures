@@ -42,7 +42,7 @@ A lift in `D_z` of the inverse arithmetic Frobenius of `κ(z)` restricts to a Fr
 `z` in `π₁(C₀)`
 (`BoundaryChart.exists_mem_stabilizer_isFrobeniusElement_restrictionMap`).
 Together with the density of the Weil group in `π₁(U₀)`, this builds the boundary datum of
-`d-real-boundary` (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
+`lemma-boundary-stalk--1` (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
 -/
 
 @[expose] public section
@@ -635,7 +635,7 @@ theorem ker_restrictionHom_eq_boundaryInertia :
   obtain rfl : w' = w := Subtype.ext (Prod.ext hw' (hw'deg.trans hdeg.symm))
   exact hw'M
 
-/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia.
 
 **The boundary datum of an open subcurve**: the restriction of Weil groups
 `AlgebraicGeometry.WeilGroup.restrictionOfPath`, with the inertia group at a boundary point `z`

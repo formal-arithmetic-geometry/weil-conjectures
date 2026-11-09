@@ -101,7 +101,7 @@ variable (k : Type u) [Field k] [X.Over (Spec (.of k))]
 `a ∪ b ∈ H^q(X, F ⊗ G)` is the image of `a` under `H^q` of the morphism `F ⟶ F ⊗ G`,
 `s ↦ s ⊗ b`. It is `k`-bilinear and natural in `F` and `G` (`cupH0_naturality`).
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def cupH0 (F G : X.Modules) (q : ℕ) : F.H q →ₗ[k] G.H 0 →ₗ[k] (F ⊗ G).H q :=
   LinearMap.mk₂ k (fun a b ↦ H.map (tensorSectionHom F (homOfHZero b)) q a)
     (fun a a' b ↦ map_add _ a a')
@@ -130,7 +130,7 @@ variable (F ω : X.Modules)
 /-- **The evaluation** `ev : F ⊗ (Fᵛ ⊗ ω) ⟶ ω`, `s ⊗ (φ ⊗ w) ↦ φ(s) w`: the morphism
 `Fᵛ ⊗ ω ⟶ Hom(F, ω)` (`dualTensorHom`) followed by the evaluation of the internal hom.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def evalTensor : F ⊗ (Fᵛ ⊗ ω) ⟶ ω :=
   F ◁ dualTensorHom F ω ≫ (ihom.ev F).app ω
 
@@ -186,7 +186,7 @@ variable (t : Module.Dual k (ω.H 1))
 `(b, a) ↦ t(H¹(ev)(a ∪ b))`: cup product `H¹(F) ⊗ H⁰(Fᵛ ⊗ ω) → H¹(F ⊗ Fᵛ ⊗ ω)`, evaluation
 `H¹(F ⊗ Fᵛ ⊗ ω) → H¹(ω)` and the linear form `t : H¹(ω) → k`.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 def cupPairing (F : X.Modules) : (Fᵛ ⊗ ω).H 0 →ₗ[k] Module.Dual k (F.H 1) :=
   (cupH0 k F (Fᵛ ⊗ ω) 1).flip.compr₂ (t ∘ₗ H.mapLinearMap k (evalTensor F ω) 1)
 
@@ -199,7 +199,7 @@ lemma cupPairing_apply (b : (Fᵛ ⊗ ω).H 0) (a : F.H 1) :
 morphism `F ⟶ ω` corresponding to `b` under `H⁰(Fᵛ ⊗ ω) ⟶ H⁰(Hom(F, ω)) = Hom(F, ω)`
 (`dualTensorHom`, an isomorphism `dualTensorHomIso` for invertible `ω`; `homObjHZeroAddEquiv`).
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma H_map_evalTensor_cupH0 {q : ℕ} (a : F.H q) (b : (Fᵛ ⊗ ω).H 0) :
     H.map (evalTensor F ω) q (cupH0 k F (Fᵛ ⊗ ω) q a b) =
       H.map (homObjHZeroAddEquiv F ω (H.map (dualTensorHom F ω) 0 b)) q a := by
@@ -220,7 +220,7 @@ lemma H_map_evalTensor_cupH0 {q : ℕ} (a : F.H q) (b : (Fᵛ ⊗ ω).H 0) :
 `t ∘ H¹(ev) ∘ ∪` is `dualPairingH t F`, i.e. `(b, a) ↦ t(H¹(φ_b)(a))` for the morphism
 `φ_b : F ⟶ ω` corresponding to `b`.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma cupPairing_eq (F : X.Modules) :
     cupPairing t F = dualPairingH t F ∘ₗ H.mapLinearMap k (dualTensorHom F ω) 0 := by
   refine LinearMap.ext fun b ↦ LinearMap.ext fun a ↦ ?_

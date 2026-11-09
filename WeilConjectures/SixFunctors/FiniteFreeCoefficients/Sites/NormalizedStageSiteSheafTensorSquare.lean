@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 
 Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
 scalar/site specialization and pure-tensor reassociation in the latest blueprint
-lem-coef-finite-free-extension, paragraph 3.
+lemma-change-coefficients-exceptional-inverse-image--3, paragraph 3.
 (blueprint: lem-sf-normalized-stage-site-sheaf-tensor-square)
 -/
 
@@ -55,7 +55,7 @@ local instance etaleScalarOplax {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
 scalar/site specialization and pure-tensor reassociation in the latest blueprint
-lem-coef-finite-free-extension, paragraph 3.
+lemma-change-coefficients-exceptional-inverse-image--3, paragraph 3.
 (blueprint: lem-sf-normalized-stage-site-sheaf-tensor-square)
 
 Proof:

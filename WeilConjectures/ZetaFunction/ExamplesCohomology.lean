@@ -16,7 +16,7 @@ compactly supported cohomology `H_cⁱ(C₀ ⊗ k̄, ℚ̄_ℓ)` vanishes outsid
 with the Grothendieck–Lefschetz trace formula this determines it from the point counts when they
 are as simple as those of `𝔸¹` and `𝔾_m`:
 
-* `H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish (blueprint `ex-weil-affine-line`);
+* `H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish (blueprint `prose-12-31`);
 * `H_c¹(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, `H_c²(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish
   (blueprint `ex-weil-multiplicative-group`).
 
@@ -30,7 +30,7 @@ embedding `ι`, those of `det(1 - T F | H_c¹)` at most `q^{1/2}`, and the trace
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant_of_curve`,
   `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant`:
   vanishing and purity for a smooth geometrically connected affine curve.
-- `AlgebraicGeometry.compactlySupportedCohomology_affineLine`: `ex-weil-affine-line`.
+- `AlgebraicGeometry.compactlySupportedCohomology_affineLine`: `prose-12-31`.
 - `AlgebraicGeometry.compactlySupportedCohomology_multiplicativeGroup`:
   `ex-weil-multiplicative-group`.
 -/
@@ -276,7 +276,7 @@ open WeilSheaf
 variable (k : Type u) [Field k] [Finite k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)]
 
 open _root_.Polynomial in
-/-- Blueprint `ex-weil-affine-line` (compactly supported cohomology of the affine line):
+/-- Blueprint `prose-12-31` (compactly supported cohomology of the affine line):
 `H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` is a line on which the geometric Frobenius acts by `q`, and all
 other `H_cⁱ(𝔸¹ ⊗ k̄, ℚ̄_ℓ)` vanish. With the trace formula this recovers `#𝔸¹(𝔽_{qⁿ}) = qⁿ` and
 `Z(𝔸¹, T) = (1 - qT)⁻¹` (`AlgebraicGeometry.pointCount_affineLine`,

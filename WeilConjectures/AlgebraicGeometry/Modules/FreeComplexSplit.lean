@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 /-!
 # Free cohomology of complexes of free modules with split differentials
 
-This is the linear algebra behind Grauert's theorem (blueprint `thm-pc-semicontinuity-base-change`,
+This is the linear algebra behind Grauert's theorem (blueprint `lemma-triviality-fibres--2`,
 part (3)).
 
 * On a reduced scheme, a matrix of functions whose rank is at most `ρ` at every point of an open

@@ -14,13 +14,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 For every scheme `S` on which the exponent of `Λ` is invertible, the canonical base change maps
 `Lg'^* Rp^! ⟶ Rp'^! Lg^*` of the projections `ℙ¹_S ⟶ S` and `𝔸¹_S ⟶ S` are isomorphisms, for
 every cartesian square with quasi-compact base change admitting a compactification (the
-elementary case (a) of the proof of blueprint `prop-asd-smooth-base-change`).
+elementary case (a) of the proof of blueprint
+`proposition-exceptional-inverse-image-smooth-morphism--6`).
 
 The projective-line case is the formal consequence
 `AlgebraicGeometry.Etale.projectiveLineBaseChange_of_adjunction` of the compatibility of the
 projective-line adjunction with base change
 (`AlgebraicGeometry.Etale.projectiveLineAdjunctionBaseChange_of_isNormalized`, blueprint
-`det-sp-p1-adjunction`), applied to the normalized Tate twist `μ_n ⊗ Λ`
+`proposition-adjunction-projective-line`), applied to the normalized Tate twist `μ_n ⊗ Λ`
 (`AlgebraicGeometry.Etale.hasKummerClass`): the base change map does not depend on a twist. The
 affine line is the standard chart of `ℙ¹_S`
 (`AlgebraicGeometry.Etale.affineLineBaseChange_of_projectiveLineBaseChange`).
@@ -56,8 +57,8 @@ theorem projectiveLineBaseChange : ProjectiveLineBaseChange Λ := by
     (projectiveLineAdjunctionBaseChange_of_isNormalized Λ)
 
 /-- **Base change for the affine-line projections**, the elementary case (a) of the proof of
-blueprint `prop-asd-smooth-base-change`: the projection `𝔸¹_S ⟶ S` is the standard chart
-`𝔸¹_S ⟶ ℙ¹_S`, a quasi-compact open immersion, followed by `ℙ¹_S ⟶ S`. -/
+blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`: the projection `𝔸¹_S ⟶ S` is
+the standard chart `𝔸¹_S ⟶ ℙ¹_S`, a quasi-compact open immersion, followed by `ℙ¹_S ⟶ S`. -/
 theorem affineLineBaseChange : AffineLineBaseChange Λ :=
   affineLineBaseChange_of_projectiveLineBaseChange (projectiveLineBaseChange Λ)
 

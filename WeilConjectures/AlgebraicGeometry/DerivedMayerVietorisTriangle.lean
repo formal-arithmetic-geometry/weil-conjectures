@@ -79,7 +79,7 @@ Proof:
 1. Choose a K-injective resolution with injective terms
    (prop-pur-kinjective-resolutions-exist). Its restrictions remain K-injective
    (lem-sc-derived-k-injective-restrict-open), and compute the derived direct images
-   (def-pc-derived-direct-image).
+   (lemma-coherent-base-change-invertible-sheaves).
 2. The sheaf gluing axiom gives exactness at the first two terms of the sectionwise
    sequence. Injectivity gives surjectivity of the difference of restriction maps
    (lem-sc-ringed-space-injective-restriction-surjective). This holds in every degree.

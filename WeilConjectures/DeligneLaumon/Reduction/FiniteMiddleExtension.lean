@@ -25,7 +25,7 @@ Let `C` be a smooth affine curve over `k₀`, not necessarily geometrically conn
 `f : C ⟶ 𝔸¹_{k₀}` be a finite morphism over `k₀` and `E` a lisse Weil sheaf on `C`. By generic
 lissity `f_* E` is lisse on a dense open `j : V ⟶ 𝔸¹`. The preimage `f⁻¹V` is dense in `C`
 because `C` has no isolated points, so `E ≅ j'_* j'^* E` for the inclusion `j' : f⁻¹V ⟶ C`
-(blueprint: `lem-a1-lisse-middle-extension`), and with `f' : f⁻¹V ⟶ V` the restriction of `f`,
+(blueprint: `lemma-boundary-stalk--2`), and with `f' : f⁻¹V ⟶ V` the restriction of `f`,
 
 `f_* E ≅ f_* j'_* j'^* E ≅ (f ∘ j')_* j'^* E = (j ∘ f')_* j'^* E ≅ j_* f'_* j'^* E`.
 
@@ -158,7 +158,7 @@ a lisse Weil sheaf on `C`. There are a dense open `V ⊆ 𝔸¹` and a lisse Wei
 `f_* E ≅ j_* H` for the inclusion `j : V ⟶ 𝔸¹`; if `E` is punctually `ι`-pure of weight `w`, then
 so is `H`. Here `V` is a lisse locus of `f_* E`, and `H = f'_* j'^* E` for the restriction
 `f' : f⁻¹V ⟶ V` of `f` and the inclusion `j' : f⁻¹V ⟶ C`, using `E ≅ j'_* j'^* E`
-(blueprint: `lem-a1-lisse-middle-extension`). -/
+(blueprint: `lemma-boundary-stalk--2`). -/
 theorem exists_lowerStar_iso_directImage_of_isFinite {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

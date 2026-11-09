@@ -50,8 +50,8 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 /-!
 # Perfect complexes over the integral coefficient tower
 
-Source: Weil conjectures blueprint, `sk-lem-integral-scalar-towers`, statement (1), (2)
-(blueprint: sk-lem-integral-scalar-towers).
+Source: Weil conjectures blueprint, `lemma-perfect-complexes-over-oe`, statement (1), (2)
+(blueprint: lemma-perfect-complexes-over-oe).
 
 Positive levels are indexed by `n : ℕ`, with level `n` meaning exponent `n + 1`.
 The isomorphisms of (1) are expressed by their adjoint universal arrows. For a bounded
@@ -69,16 +69,16 @@ namespace Padic
 
 /-- The ordinary quotient complex by a power of a scalar, constructed as a cokernel.
 Cokernels of complexes of modules are computed degreewise, so this is the termwise quotient.
-Source: blueprint `sk-lem-integral-scalar-towers`, statement (2)
-(blueprint: sk-lem-integral-scalar-towers). -/
+Source: blueprint `lemma-perfect-complexes-over-oe`, statement (2)
+(blueprint: lemma-perfect-complexes-over-oe). -/
 def scalarQuotient {A : Type u} [CommRing A]
     (t : A) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℕ) :
     CochainComplex (ModuleCat.{u} A) ℤ :=
   cokernel (t ^ n • 𝟙 Q)
 
 /-- The actual quotient transition, induced by the identity on the integral complex.
-Source: blueprint `sk-lem-integral-scalar-towers`, statement (2)
-(blueprint: sk-lem-integral-scalar-towers). -/
+Source: blueprint `lemma-perfect-complexes-over-oe`, statement (2)
+(blueprint: lemma-perfect-complexes-over-oe). -/
 def scalarQuotientTransition {A : Type u} [CommRing A]
     (t : A) (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (m n : ℕ) (h : n ≤ m) : scalarQuotient t Q m ⟶ scalarQuotient t Q n :=
@@ -88,7 +88,7 @@ def scalarQuotientTransition {A : Type u} [CommRing A]
 
 /-- Precomposition by an isomorphism preserves universal arrows.
 Source: the scalar adjunction used in blueprint proof (1)
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem universal_precomp_iso
     {C D : Type*} [Category* C] [Category* D] (F : D ⥤ C)
     {X X' : C} {Y : D} (e : X' ≅ X) (η : X ⟶ F.obj Y)
@@ -101,7 +101,7 @@ private theorem universal_precomp_iso
 
 /-- Changing the represented target by an isomorphism preserves its universal arrow.
 Source: the scalar adjunction used in blueprint proof (1)
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem universal_postcomp_iso
     {C D : Type*} [Category* C] [Category* D] (F : D ⥤ C)
     {X : C} {Y Y' : D} (η : X ⟶ F.obj Y) (e : Y ≅ Y')
@@ -114,7 +114,7 @@ private theorem universal_postcomp_iso
 
 /-- A comparison of universal arrows is an isomorphism.
 Source: blueprint proof (1), uniqueness of derived scalar extension
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem universal_comparison_isIso
     {C D : Type*} [Category* C] [Category* D] (F : D ⥤ C)
     {X : C} {Y Y' : D} (η : X ⟶ F.obj Y) (η' : X ⟶ F.obj Y')
@@ -134,7 +134,7 @@ private theorem universal_comparison_isIso
 /-- Minimal finite free matrix representatives, with an independent localization universe.
 Source: `MatrixComplex.exists_iso_Q_obj_of_isPerfect`; the same proof uses the recorded
 minimal-complex theorem and the actual perfectness witness.
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem minimal_matrix_model {S : Type u} [CommRing S] [IsLocalRing S]
     [HasDerivedCategory.{v} (ModuleCat.{u} S)]
     {K : DerivedCategory (ModuleCat.{u} S)} (hK : DerivedCategory.IsPerfectRingComplex K) :
@@ -165,7 +165,7 @@ private theorem minimal_matrix_model {S : Type u} [CommRing S] [IsLocalRing S]
 /-- Derived isomorphisms between minimal matrix models have invertible chain representatives.
 Source: `MatrixComplex.exists_isIso_Q_map_eq`, using K-projective representatives and
 `CochainComplex.isIso_of_quasiIso_of_isMinimal` without identifying universes.
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem minimal_matrix_comparison {S : Type u} [CommRing S] [IsLocalRing S]
     [HasDerivedCategory.{v} (ModuleCat.{u} S)] {r r' : ℤ → ℕ}
     {M : MatrixComplex r S} {N : MatrixComplex r' S}
@@ -182,7 +182,7 @@ private theorem minimal_matrix_comparison {S : Type u} [CommRing S] [IsLocalRing
 /-- Ordinary reduction of bounded free matrix complexes computes derived reduction.
 Source: `MatrixComplex.isDerivedBaseChange_reduction`; `ReductionDatum.bijective_comp_map`
 allows the localization universe to be independent of the coefficient universe.
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem matrix_reduction_universal {S S' : Type u} [CommRing S] [CommRing S']
     [HasDerivedCategory.{v} (ModuleCat.{u} S)]
     [HasDerivedCategory.{v} (ModuleCat.{u} S')] {r : ℤ → ℕ}
@@ -215,7 +215,7 @@ private theorem matrix_reduction_universal {S S' : Type u} [CommRing S] [CommRin
 
 /-- Internal record of a chosen minimal matrix model of one tower level.
 Source: blueprint proof (1), minimal finite free representatives
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private structure ScalarLevelModel {A : ℕ → Type u} [∀ n, CommRing (A n)]
     [∀ n, HasDerivedCategory.{v} (ModuleCat.{u} (A n))]
     (M : ∀ n, DerivedCategory (ModuleCat.{u} (A n))) (r : ℤ → ℕ) (n : ℕ)
@@ -226,7 +226,7 @@ private structure ScalarLevelModel {A : ℕ → Type u} [∀ n, CommRing (A n)]
 
 /-- Adjacent matrix models whose actual reduction represents the specified transition.
 Source: blueprint proof (1), changing bases at successive levels
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private def ScalarLevelModel.IsSucc {A : ℕ → Type u} [∀ n, CommRing (A n)]
     [∀ n, IsLocalRing (A n)] [∀ n, HasDerivedCategory.{v} (ModuleCat.{u} (A n))]
     {M : ∀ n, DerivedCategory (ModuleCat.{u} (A n))}
@@ -242,7 +242,7 @@ private def ScalarLevelModel.IsSucc {A : ℕ → Type u} [∀ n, CommRing (A n)]
 /-- Extend a matrix model by lifting an invertible comparison and conjugating.
 Source: `ModuleCat.NormalizedPerfectTower.LevelModel.exists_isSucc`; its matrix argument
 works unchanged with the universe-general universal arrows above.
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem scalar_level_succ {R : Type u} [CommRing R]
     {A : ℕ → Type u} [∀ n, CommRing (A n)] [∀ n, IsLocalRing (A n)]
     [∀ n, HasDerivedCategory.{v} (ModuleCat.{u} (A n))]
@@ -287,7 +287,7 @@ private theorem scalar_level_succ {R : Type u} [CommRing R]
 
 /-- The canonical associativity comparison for the derived restriction functors.
 Source: `ModuleCat.derivedRestrictScalarsCompIso`, with independent localization universe
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private def scalarRestrictionCompIso {R S T : Type u} [CommRing R] [CommRing S] [CommRing T]
     [HasDerivedCategory.{v} (ModuleCat.{u} R)] [HasDerivedCategory.{v} (ModuleCat.{u} S)]
     [HasDerivedCategory.{v} (ModuleCat.{u} T)] {f : R →+* S} {g : S →+* T} {gf : R →+* T}
@@ -300,7 +300,7 @@ private def scalarRestrictionCompIso {R S T : Type u} [CommRing R] [CommRing S] 
 
 /-- The restriction comparison identifies the two images of an actual composite chain map.
 Source: `ModuleCat.Q_map_restrictScalars_comp`, with independent localization universe
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem scalar_restriction_comp {R S T : Type u} [CommRing R] [CommRing S]
     [CommRing T] [HasDerivedCategory.{v} (ModuleCat.{u} R)]
     [HasDerivedCategory.{v} (ModuleCat.{u} S)] [HasDerivedCategory.{v} (ModuleCat.{u} T)]
@@ -348,7 +348,7 @@ private theorem scalar_restriction_comp {R S T : Type u} [CommRing R] [CommRing 
 /-- Reconstruct the bounded free model by strictifying finite levels and taking matrix limits.
 Source: blueprint proof (1), implemented with the adopted minimal-matrix and tower-limit APIs.
 All intermediate choices have proved existence; the integral differential is constructed entrywise.
-(blueprint: sk-lem-integral-scalar-towers). -/
+(blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem scalar_tower_from_complete {R : Type u} [CommRing R]
     {A : ℕ → Type u} [∀ n, CommRing (A n)] [∀ n, IsLocalRing (A n)]
     [HasDerivedCategory.{v} (ModuleCat.{u} R)]
@@ -428,8 +428,8 @@ represented by one bounded finite free integral complex. The maps in the conclus
 universal arrows for the derived reductions, and the displayed equation is their compatibility
 with the given transition maps.
 
-Source: current blueprint, `sk-lem-integral-scalar-towers`, statement and proof (1)
-(blueprint: sk-lem-integral-scalar-towers).
+Source: current blueprint, `lemma-perfect-complexes-over-oe`, statement and proof (1)
+(blueprint: lemma-perfect-complexes-over-oe).
 
 Proof: choose minimal finite free representatives over the local quotient rings. Their
 reductions are homotopy equivalent; reducing a homotopy equivalence modulo the maximal ideal
@@ -519,7 +519,7 @@ end Coefficients
 
 /-- Scalar multiplication on homology, via the linear short-complex homology functor.
 Source: Mathlib `ShortComplex.homologyMap_smul`; the scalar action used in blueprint
-`sk-lem-integral-scalar-towers`, proof (2) (blueprint: sk-lem-integral-scalar-towers). -/
+`lemma-perfect-complexes-over-oe`, proof (2) (blueprint: lemma-perfect-complexes-over-oe). -/
 private theorem homologyMap_scalar_id {R : Type u} [CommRing R]
     (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ) (r : R) :
     HomologicalComplex.homologyMap (r • 𝟙 C) i = r • 𝟙 (C.homology i) := by
@@ -530,8 +530,8 @@ private theorem homologyMap_scalar_id {R : Type u} [CommRing R]
 /-- The images in cohomology of a bounded finite free integral complex stabilize at a
 uniform torsion rate for the actual quotient transitions.
 
-Source: current blueprint, `sk-lem-integral-scalar-towers`, statement and proof (2)
-(blueprint: sk-lem-integral-scalar-towers).
+Source: current blueprint, `lemma-perfect-complexes-over-oe`, statement and proof (2)
+(blueprint: lemma-perfect-complexes-over-oe).
 
 Proof: the regular quotient exact sequence identifies the quotient cohomology with integral
 cohomology and the next cohomology's uniformizer torsion. The transition on the latter is

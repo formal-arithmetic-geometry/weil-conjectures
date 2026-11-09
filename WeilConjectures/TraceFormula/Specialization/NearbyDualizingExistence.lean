@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingOpen
 The dualizing maps `θ_N` of the trait models over the base
 (`NearbyCyclesModel.IsTraitModelOfBase.dualizingMap`) form a family
 `NearbyCyclesModel.NearbyDualizingData` (`NearbyCyclesModel.nonempty_nearbyDualizingData`,
-blueprint `det-nearby-exchange-maps`).
+blueprint `prose-E-15`).
 
 -/
 
@@ -35,10 +35,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).
   [Fact (ringChar k' ≠ ℓ)] [Algebra k k']
 
 
-/-- **The dualizing maps of nearby cycles over the trait** (blueprint `det-nearby-exchange-maps`
+/-- **The dualizing maps of nearby cycles over the trait** (blueprint `prose-E-15`
 (4)–(5) and its independence of the compactification, with the composition law
-`θ_V = f_s^! θ_W ∘ β_f(ω_W)` of `sk-lem-tf-nearby-mate-coherences` (4); proved there from the
-pullback and proper exchanges of `det-sp-nearby-cycles-exchanges` and Nagata's compactification
+`θ_V = f_s^! θ_W ∘ β_f(ω_W)` of `sec-Base-change-for-nearby-cycles` (4); proved there from the
+pullback and proper exchanges of `prose-E-03` and Nagata's compactification
 theorem). The dualizing maps `θ_M = β_a(ℚ̄_ℓ) : Ψ_M ω_X ⟶ ω_{X'}` of the trait models over the base,
 read through the specialization unit of the trait and `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`, form a family
 `NearbyCyclesModel.NearbyDualizingData`:

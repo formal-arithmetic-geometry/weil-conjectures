@@ -22,8 +22,8 @@ public import WeilConjectures.SixFunctors.Integral.Exact
 /-!
 # The cycle class of an effective Cartier divisor via Kummer boundaries
 
-Blueprint `lem-amb-cartier-kummer-map`. Let `i : D ⟶ T` be an effective Cartier divisor, that is
-a regular closed immersion of codimension one (`AlgebraicGeometry.IsRegularImmersion 1 i`): near
+Blueprint `lemma-cycle-class-cartier-divisor`. Let `i : D ⟶ T` be an effective Cartier divisor, that
+is a regular closed immersion of codimension one (`AlgebraicGeometry.IsRegularImmersion 1 i`): near
 every point, `D` is cut out by one non-zero-divisor `f`. On such a chart the Kummer boundary
 `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` (`AlgebraicGeometry.Etale.kummerBoundary`) is a class supported on
 `D ∩ U`, and changing `f` by a unit does not change it
@@ -569,7 +569,7 @@ attribute [local instance] HasInvertibleExponent.opens
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] {T D : Scheme.{u}}
   [HasInvertibleExponent Λ T] (i : D ⟶ T) [IsRegularImmersion 1 i]
 
-/-- Blueprint `lem-amb-cartier-kummer-map`: A Cartier divisor gives a supported Kummer map
+/-- Blueprint `lemma-cycle-class-cartier-divisor`: A Cartier divisor gives a supported Kummer map
 
 The *class of an effective Cartier divisor* `i : D ⟶ T` (a regular closed immersion of
 codimension one), `c_D ∈ H²_D(T, Λ(1)) = Hom(Λ_T, Ri_! Ri^! (Λ_T(1)[2]))`: the Kummer boundaries
@@ -582,7 +582,7 @@ noncomputable def cartierKummerClass (hP : SupportedTatePure Λ 1 i) :
       ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)) :=
   pureFundamentalClass Λ 1 i hP
 
-/-- Blueprint `lem-amb-cartier-kummer-map`: A Cartier divisor gives a supported Kummer map
+/-- Blueprint `lemma-cycle-class-cartier-divisor`: A Cartier divisor gives a supported Kummer map
 
 The *supported Kummer map* `Λ_D ⟶ Ri^! (Λ_T(1)[2])` of an effective Cartier divisor
 `i : D ⟶ T`, the adjoint (`AlgebraicGeometry.Etale.supportedClassMap`) of its class
@@ -592,10 +592,10 @@ noncomputable def cartierKummerMap (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ D ⟶ (R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧) :=
   supportedClassMap Λ i (cartierKummerClass Λ i hP)
 
-/-- Blueprint `lem-amb-cartier-kummer-map`, local description: on every chart `(e : U ⟶ T, f)`
-of `D`, an étale `e` with a function `f` on `U` cutting out `D ×_T U`, the class `c_D` restricts
-to the Kummer boundary class `∂κ(f) ∪ 1` of `f` (`AlgebraicGeometry.Etale.kummerBoundaryProduct`
-of the one-element tuple). -/
+/-- Blueprint `lemma-cycle-class-cartier-divisor`, local description: on every chart
+`(e : U ⟶ T, f)` of `D`, an étale `e` with a function `f` on `U` cutting out `D ×_T U`, the class
+`c_D` restricts to the Kummer boundary class `∂κ(f) ∪ 1` of `f`
+(`AlgebraicGeometry.Etale.kummerBoundaryProduct` of the one-element tuple). -/
 theorem frameRestriction_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
     (F : i.EtaleFrame 1) :
     frameRestriction Λ F (cartierKummerClass Λ i hP) = kummerBoundaryProduct Λ F.f :=
@@ -611,7 +611,7 @@ theorem eq_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
   (existsUnique_pureFundamentalClass Λ 1 i hP).unique hγ
     (frameRestriction_pureFundamentalClass Λ 1 i hP)
 
-/-- Blueprint `lem-amb-cartier-kummer-map`, base change: for any `g : T' ⟶ T` along which the
+/-- Blueprint `lemma-cycle-class-cartier-divisor`, base change: for any `g : T' ⟶ T` along which the
 pulled-back divisor `i' : D' ⟶ T'` is again an effective Cartier divisor satisfying the purity
 hypothesis, the restriction of `c_D` along `g` is `c_{D'}`. -/
 theorem restrictSupportedClass_cartierKummerClass (hP : SupportedTatePure Λ 1 i)

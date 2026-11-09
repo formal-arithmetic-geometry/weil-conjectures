@@ -144,8 +144,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The signed dual tensor of a bounded finite-free complex is bounded finite free.
 
-Source: current blueprint, `sk-prop-integral-local-structure`, Compatible isomorphisms,
-paragraph beginning These Hom groups can be infinite.
+Source: current blueprint, `proposition-local-structure-integral-constructible-complexes`,
+Compatible isomorphisms, paragraph beginning These Hom groups can be infinite.
 (blueprint: lem-pe-internal-perfect-dual-tensor-finite).
 
 Proof: evaluation on the unique potentially nonzero target degree identifies the degree-r

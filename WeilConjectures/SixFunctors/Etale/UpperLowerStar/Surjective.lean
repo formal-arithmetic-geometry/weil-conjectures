@@ -67,7 +67,7 @@ theorem Etale.faithful_upperStar_of_surjective (hπ : Function.Surjective π.bas
 
 /-- The unit `F ⟶ π_* π^* F` of the adjunction `π^* ⊣ π_*` is a monomorphism when `π` is
 surjective, `π^*` being faithful by `AlgebraicGeometry.Etale.faithful_upperStar_of_surjective`.
-This is the first step of the proof of blueprint `sbc-lem-bc-integral-surjective`. -/
+This is the first step of the proof of blueprint `lemma-integral-changes-source-base--1`. -/
 theorem Etale.mono_unit_app_of_surjective (hπ : Function.Surjective π.base)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Mono ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).unit.app F) :=

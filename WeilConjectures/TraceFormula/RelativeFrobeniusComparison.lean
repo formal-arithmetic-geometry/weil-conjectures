@@ -15,10 +15,11 @@ Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type. For end
 `a_X, a_Y` with `a_X ≫ f = f ≫ a_Y`, a cartesian square `p_a ≫ f = f'_a ≫ a_Y` and a relative
 Frobenius `r_a` with `r_a ≫ p_a = a_X`, `r_a ≫ f'_a = f`, a finite universal homeomorphism, the
 Frobenius comparison `θ_a : Rf_! ⋙ La_Y^* ≅ La_X^* ⋙ Rf_!` is
-`ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison` (blueprint `sk-d-weil-push`). This
-file proves that these comparisons compose (blueprint `sk-i-relative-frob` (1) and
-`lem-trf-weil-shriek-iterates` (1)): for a second such pair `b_X, b_Y` and a relative Frobenius
-for the composites `a ≫ b`,
+`ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison` (blueprint
+`lemma-comparison-via-relative-frobenius--2`). This file proves that these comparisons compose
+(blueprint `lemma-comparison-via-relative-frobenius` (1) and
+`lemma-comparison-via-relative-frobenius--2` (1)): for a second such pair `b_X, b_Y` and a relative
+Frobenius for the composites `a ≫ b`,
 ```
 θ_{a ≫ b} = θ_a(Lb_X^* -) ∘ La_Y^*(θ_b)
 ```
@@ -44,11 +45,11 @@ relative Frobenius (`ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison_h
 - `ProEtale.CondensedRing.weilLowerShriekFrobeniusComparison_comp`: the composition law of the
   Frobenius comparisons.
 
-The proof follows blueprint `lem-trf-weil-shriek-iterates`, Step 2: the square defining the
-relative Frobenius of `a` is the vertical pasting of the square of `r_b` along the projection
-`q : X'_{a ≫ b} ⟶ X'_b` and of the square of `f'_b` along `a_Y`; the latter pastes horizontally
-with the square of `b` to the square of `a ≫ b`. The exchange of the `r_b`-square is the
-direct-image exchange, which carries the unit of `r_b` to the unit of its base change
+The proof follows blueprint `lemma-comparison-via-relative-frobenius--2`, Step 2: the square
+defining the relative Frobenius of `a` is the vertical pasting of the square of `r_b` along the
+projection `q : X'_{a ≫ b} ⟶ X'_b` and of the square of `f'_b` along `a_Y`; the latter pastes
+horizontally with the square of `b` to the square of `a ≫ b`. The exchange of the `r_b`-square is
+the direct-image exchange, which carries the unit of `r_b` to the unit of its base change
 `t : X'_a ⟶ X'_{a ≫ b}`, and `r_{a ≫ b} = r_a ≫ t`.
 
 -/
@@ -189,8 +190,8 @@ Rf'_! M ⟶ Rf'_! Rr_* Lr^* M ≅ Rf'_! Rr_! Lr^* M ≅ R(r ≫ f')_! Lr^* M = R
 ```
 of the unit of `Lr^* ⊣ Rr_*`, the identification `Rr_! ≅ Rr_*` and the composition isomorphism
 of the lower shriek. It is the middle part of the Frobenius comparison of the lower shriek
-(blueprint `sk-d-weil-push`); for `f'` the structure morphism of `X'` it is the pullback
-`ProEtale.CondensedRing.compactPullback` on compactly supported cohomology. -/
+(blueprint `lemma-comparison-via-relative-frobenius--2`); for `f'` the structure morphism of `X'` it
+is the pullback `ProEtale.CondensedRing.compactPullback` on compactly supported cohomology. -/
 noncomputable def relativePullback (r : X ⟶ X') [IsProper r.left] (f' : X' ⟶ Y) (g : X ⟶ Y)
     (h : r ≫ f' = g) :
     boundedConstructibleLowerShriek ℓ f' ⟶
@@ -303,10 +304,11 @@ variable {X X'a X'b X'ab Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
 
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the rewriting slow
-/-- **Base change of the relative pullback** (blueprint `lem-trf-weil-shriek-iterates`, Step 2):
-for cartesian squares `p ≫ r = t ≫ q` (with `r` and `t` proper) and `q ≫ f'' = f' ≫ a`, the
-exchange `Ex_!` of the pasted rectangle carries `La^*(r^♯)` to `t^♯` composed with the exchange
-of the lower square and the pullback comparison of the upper one. -/
+/-- **Base change of the relative pullback** (blueprint
+`lemma-comparison-via-relative-frobenius--2`, Step 2): for cartesian squares `p ≫ r = t ≫ q` (with
+`r` and `t` proper) and `q ≫ f'' = f' ≫ a`, the exchange `Ex_!` of the pasted rectangle carries
+`La^*(r^♯)` to `t^♯` composed with the exchange of the lower square and the pullback comparison of
+the upper one. -/
 lemma map_relativePullback_app_comp_baseChange_app {p : X'a ⟶ X} {t : X'a ⟶ X'ab} {r : X ⟶ X'b}
     {q : X'ab ⟶ X'b} {f' : X'ab ⟶ Y} {f'' : X'b ⟶ Y} {a : Y ⟶ Y} [IsProper r.left]
     [IsProper t.left] (hT : IsPullback p t r q) (hQ : IsPullback q f' f'' a)
@@ -490,10 +492,11 @@ variable {X Y X'a X'b X'ab : Over (Spec (.of k))}
 
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the rewriting slow
-/-- **The composition law of the Frobenius comparisons** (blueprint `sk-i-relative-frob` (1),
-`lem-trf-weil-shriek-iterates` (1)): for two pairs of endomorphisms `a_X, a_Y` and `b_X, b_Y`
-compatible with `f`, with relative Frobenii `r_a`, `r_b`, `r_{ab}` (finite universal
-homeomorphisms) for `a`, `b` and the composites `a_X ≫ b_X`, `a_Y ≫ b_Y`,
+/-- **The composition law of the Frobenius comparisons** (blueprint
+`lemma-comparison-via-relative-frobenius` (1), `lemma-comparison-via-relative-frobenius--2` (1)):
+for two pairs of endomorphisms `a_X, a_Y` and `b_X, b_Y` compatible with `f`, with relative Frobenii
+`r_a`, `r_b`, `r_{ab}` (finite universal homeomorphisms) for `a`, `b` and the composites
+`a_X ≫ b_X`, `a_Y ≫ b_Y`,
 ```
 θ_{a ≫ b} = Rf_!(L(a_X ≫ b_X)^* ≅ La_X^* Lb_X^*) ∘ θ_a(Lb_X^* -) ∘ La_Y^*(θ_b)
               ∘ (L(a_Y ≫ b_Y)^* ≅ La_Y^* Lb_Y^*).

@@ -65,7 +65,7 @@ cohomology for a cartesian square with affine bases `S = Spec A` and `T = Spec B
 
 For `T = Spec κ(t)` this is the base change map `φ^q(t) : R^q f_* ℱ ⊗ κ(t) ⟶ H^q(X_t, ℱ_t)`.
 
-(blueprint: `thm-pc-semicontinuity-base-change`, part (1)) -/
+(blueprint: `lemma-triviality-fibres--2`, part (1)) -/
 noncomputable def cechBaseChangeMap (q : ℤ) :
     Γ(T, ⊤) ⊗[Γ(S, ⊤)] (cechModuleComplex f ℱ U).homology q →ₗ[Γ(T, ⊤)]
       (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i)).homology q :=
@@ -238,7 +238,7 @@ opens. Let `g : Spec K ⟶ S` be a field point, through a point `s = g x`. If th
 `h^q` takes the same value at all generisations of `s` as at `s`, then the base change map
 `Γ(Spec K, ⊤) ⊗[A] H^q(Č(U, ℱ)) ⟶ H^q(Č(g'⁻¹ U, g'^* ℱ))` is bijective.
 
-(blueprint: `thm-pc-semicontinuity-base-change`, part (3), `det-thm-picard-semicon`) -/
+(blueprint: `lemma-triviality-fibres--2`, part (3), `lemma-triviality-fibres--2`) -/
 theorem bijective_cechBaseChangeMap_of_forall_specializes [IsReduced S]
     [IsNoetherianRing Γ(S, ⊤)]
     [LocallyOfFinitePresentation f] [Nonempty ι] (hℱ : ℱ.IsFlatOver f) (K : Type u) [Field K]

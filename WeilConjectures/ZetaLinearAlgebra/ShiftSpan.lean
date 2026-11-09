@@ -74,7 +74,7 @@ lemma iterate_seqShift_apply (m : ℕ) (a : ℕ → R) (n : ℕ) :
   | succ m ih => rw [Function.iterate_succ_apply, ih, seqShift_apply, ← add_assoc]
 
 /-- The *shift span* of a sequence `a : ℕ → R`: the `R`-span of all its iterated left shifts
-`(a (n + m))ₙ`, `m ≥ 0` (blueprint `det-def-roots`). -/
+`(a (n + m))ₙ`, `m ≥ 0` (blueprint `definition-reciprocal-root`). -/
 def shiftSpan (a : ℕ → R) : Submodule R (ℕ → R) :=
   Submodule.span R (Set.range fun m : ℕ => (⇑(seqShift R))^[m] a)
 

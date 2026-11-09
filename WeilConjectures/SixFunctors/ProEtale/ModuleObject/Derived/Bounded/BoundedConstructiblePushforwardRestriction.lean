@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 /-!
 # Restricted pushforward under its preservation hypothesis
 
-Source: the blueprint, `sec-six-functors-basics`, restriction paragraph of
+Source: the blueprint, `chap-Construction-of-f`, restriction paragraph of
 `sk-def-sfb-dc-restricted-functors` (blueprint: sk-def-sfb-dc-restricted-functors).
 
 The imported module supplies all the restricted operations and their structural maps for

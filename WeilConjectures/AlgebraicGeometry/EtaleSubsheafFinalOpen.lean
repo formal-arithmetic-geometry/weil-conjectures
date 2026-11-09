@@ -57,7 +57,7 @@ Proof:
 2. A section over `U` implies its image is contained in `W`. Conversely, when `U` factors
    through `W`, pull back the étale objects used in the union to cover `U`. Their sections
    restrict to sections on this cover. They agree on overlaps by subsingletonness, and
-   glue uniquely by the sheaf condition (def-weil-pbc-etale-sheaf-of-sets). Thus the section
+   glue uniquely by the sheaf condition (situation-conventions). Thus the section
    set is a singleton precisely for morphisms factoring through `W`, and empty otherwise.
 3. Testing the factorization property on the open immersions of two candidate opens gives
    both inclusions, proving uniqueness. A geometric stalk is nonempty precisely when some

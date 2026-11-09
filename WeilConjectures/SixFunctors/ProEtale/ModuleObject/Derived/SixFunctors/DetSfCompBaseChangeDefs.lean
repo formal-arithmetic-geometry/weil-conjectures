@@ -16,9 +16,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 /-!
 # Specified compact-support base-change maps
 
-Source: blueprint det-sf-comp-composition-base-change, definitions used in clauses (1)--(3).
-These are the existing constructions, separated so refinement pasting can use their exact maps.
-(blueprint: def-sfb-compact-support-base-change-maps).
+Source: blueprint proposition-composition-base-change-rf-shriek--4, definitions used in clauses
+(1)--(3). These are the existing constructions, separated so refinement pasting can use their exact
+maps. (blueprint: def-sfb-compact-support-base-change-maps).
 -/
 
 @[expose] public section
@@ -64,7 +64,7 @@ open AlgebraicGeometry Scheme
 
 /-- The module-object derived pullback used in the base-change statement.
 Source: the module-object six-functor definitions
-(blueprint: det-sf-comp-composition-base-change). -/
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable abbrev detSfDerivedPullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {A B : Scheme.{u}} (h : A ⟶ B) :
@@ -76,7 +76,7 @@ noncomputable abbrev detSfDerivedPullback
 
 /-- The derived lower-shriek functor attached to a compactification.
 Source: the module-object six-functor definitions
-(blueprint: det-sf-comp-composition-base-change). -/
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable abbrev detSfCompactSupport
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {A B : Scheme.{u}} {h : A ⟶ B}
@@ -88,7 +88,7 @@ noncomputable abbrev detSfCompactSupport
   rightDerivedLowerShriekOfCompactification Λ d
 
 /-- The specified Cartesian realization of the literal proper pullback square.
-Source: blueprint det-sf-comp-composition-base-change, proper exchange.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proper exchange.
 (blueprint: def-sfb-compact-support-base-change-maps). -/
 def detSfProperBaseChangeSquare
     {Z Y Y' : Scheme.{u}} (p : Z ⟶ Y) (v : Y' ⟶ Y) :
@@ -101,8 +101,8 @@ def detSfProperBaseChangeSquare
 /-- The published ambient base-change mate for the literal proper pullback square.
 This abbreviation only supplies the identity identification with the chosen fibre product;
 it makes no new choice of exchange map. Source: blueprint
- det-sf-comp-composition-base-change, proof step 4
-(blueprint: det-sf-comp-composition-base-change). -/
+ proposition-composition-base-change-rf-shriek--4, proof step 4
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable abbrev detSfProperBaseChangeMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -112,10 +112,10 @@ noncomputable abbrev detSfProperBaseChangeMap
   condensedAmbientExchange Λ (detSfProperBaseChangeSquare p v)
 
 /-- The canonical open exchange arrow, in the inverse direction to clause (1).
-Source: blueprint det-sf-comp-composition-base-change, proof steps 1--2. Insert the open
-unit, transport the pullback square, and contract the base-changed open counit. Thus an
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 1--2. Insert the
+open unit, transport the pullback square, and contract the base-changed open counit. Thus an
 isomorphism whose inverse equals this arrow has a specified normalization
-(blueprint: det-sf-comp-composition-base-change). -/
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 def detSfOpenBaseChangeMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -144,8 +144,8 @@ def detSfOpenBaseChangeMap
 
 /-- Regard a compactification of a quasi-compact morphism as an object of the published
 boundary-refinement category. Its open is quasi-compact by the existing factorization lemma.
-Source: blueprint det-sf-comp-composition-base-change, proof step 5
-(blueprint: det-sf-comp-composition-base-change). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof step 5
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 def detSfBoundaryCompactification
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f) :
     Compactification.BoundaryCompactification f :=
@@ -155,9 +155,9 @@ def detSfBoundaryCompactification
 coherence theorem, evaluated on the existing compactification objects. The theorem determines
 this family uniquely by its equation against every common dense refinement; identity and
 cocycle laws alone would not determine it. No comparison on the whole unbounded category is
-chosen. Source: blueprint det-sf-comp-coherence-cocycle and
- det-sf-comp-composition-base-change, proof steps 5 and 8
-(blueprint: det-sf-comp-composition-base-change). -/
+chosen. Source: blueprint proposition-construction-independence-rf-shriek and
+ proposition-composition-base-change-rf-shriek--4, proof steps 5 and 8
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def detSfCanonicalCompactificationComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
@@ -195,7 +195,7 @@ attribute [local irreducible] derivedOpenImmersionLowerShriekUpperStarAdjunction
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Package the specified map with its component properties.
-Source: blueprint det-sf-comp-composition-base-change, displayed beta.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, displayed beta.
 (blueprint: def-sfb-compact-support-base-change-maps). -/
 noncomputable def detSfCompactSupportExchangeData
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -218,8 +218,8 @@ noncomputable def detSfCompactSupportExchangeData
 
 /-- The specified compact-support exchange composite: the published proper-base-change mate
 followed by `Rp'_*` applied to the normalized open/base-change comparison.
-Source: blueprint det-sf-comp-composition-base-change, clause (2) and proof steps 3--4
-(blueprint: det-sf-comp-composition-base-change). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--4, clause (2) and proof steps 3--4
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def detSfCompactSupportBaseChangeComposite
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

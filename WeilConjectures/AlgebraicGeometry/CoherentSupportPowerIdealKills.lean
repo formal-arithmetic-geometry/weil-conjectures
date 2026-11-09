@@ -50,7 +50,7 @@ Proof:
 4. Vanishing is equivalent to vanishing of these modules on every member of the cover:
    use lem-weil-pbc-module-restriction-open-immersion-colimits and the counit and
    zero preservation of lem-weil-pbc-affine-tilde-gamma-adjunction, then the sheaf
-   property (def-weil-sheaf-of-modules-category).
+   property (situation-conventions).
 5. On each affine, support is V(Ann M), by lem-weil-pbc-finite-type-module-support-closed
    and lem-weil-pbc-finite-module-support-annihilator. The ideal zero set is V(I), by
    lem-weil-pbc-quasi-coherent-ideal-zero-set-affine. Thus the global containment is

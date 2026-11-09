@@ -17,7 +17,8 @@ The finite-ring derived comparison identifies the intrinsic bounded constructibi
 predicate with bounded constructible complexes in fixed-scalar coordinates. This proof
 uses no compact-support coefficient comparison or normalized coefficient system.
 Source: Stacks, Tag 09AL, and the finite-domain step of the current blueprint proof
-of `lem-coef-finite-closed-shriek` (blueprint: lem-coef-finite-closed-realization-domain).
+of `lemma-change-coefficients-exceptional-inverse-image--1` (blueprint:
+lem-coef-finite-closed-realization-domain).
 -/
 
 @[expose] public noncomputable section

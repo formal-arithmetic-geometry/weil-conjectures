@@ -59,9 +59,9 @@ Proof in words:
    becomes one after localization, identifying the function with its constant value.
    Composing with the quotient's local-ring identification gives exactly the induced
    map `C_p → D_q` (def-weil-pbc-localization-at-prime).
-7. Apply lem-weil-pbc-local-rings-ind-zariski to the map identifying local rings with
+7. Apply theorem-pro-etale-refinements-weakly-etale to the map identifying local rings with
    w-local target. This supplies the finite-products-of-principal-localizations
-   presentation of def-weil-pbc-ind-etale-algebra, which is also ind-etale.
+   presentation of definition-ind-etale-pro-etale-weakly, which is also ind-etale.
 8. If `u` is surjective, lift the component of any point `x` to `t`; the graph point
    `(x,t)` lifts `x`. This includes the empty-spectrum case. -/
 theorem exists_profinite_component_ring_pullback (C : Type u) [CommRing C] [IsWLocalRing C] :

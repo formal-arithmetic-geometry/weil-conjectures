@@ -39,10 +39,11 @@ One takes `H = x ↦ [1 : P(x)]`, where `P` is a monic irreducible polynomial wh
 `U`, so that `H` sends these closed points of `U` to `∞`
 (`AlgebraicGeometry.affineLine.exists_isFinite_polynomialMap_etale`).
 
-This replaces the homography `τ` with `τ(s) = ∞` of the proof of `lem-a1-unramified-at-infinity`
-(blueprint: `lem-a1-unramified-at-infinity`, subsection `sk-thm-dl-a1-upper`), and needs no
-constant field extension: instead of a rational point `s` sent isomorphically to `∞`, a closed
-point of `U` is sent to `∞` by a finite map which is étale near `∞`. -/
+This replaces the homography `τ` with `τ(s) = ∞` of the proof of
+`lemma-finite-extension-base-field-moving` (blueprint: `lemma-finite-extension-base-field-moving`,
+subsection `theorem-weight-bound-affine-line`), and needs no constant field extension: instead of a
+rational point `s` sent isomorphically to `∞`, a closed point of `U` is sent to `∞` by a finite map
+which is étale near `∞`. -/
 theorem exists_toProjectiveLine_isFinite_etale_near_infinity {k : Type u} [Field k] [Finite k]
     {U : Scheme.{u}} [U.Over (Spec (.of k))] [Nonempty U] (j : U ⟶ affineLine k)
     [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :

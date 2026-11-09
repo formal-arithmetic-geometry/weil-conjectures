@@ -50,9 +50,9 @@ Proof (the six steps of the node):
    satisfying the unit equation; its naturality induces maps on stalks
    (lem-weil-pbc-sets-inverse-image-stalk).
 2. The étale unit is the identity-indexed colimit coprojection followed by
-   sheafification (lem-weil-pbc-presheaf-pullback-sets-left-exact). Restrictions
+   sheafification (situation-conventions). Restrictions
    compose the indexing morphism, and base change preserves finite limits, so the
-   index categories are filtered (lem-weil-pbc-etale-base-change-finite-limits).
+   index categories are filtered (situation-conventions).
 3. Equality of two pulled-back sections near a point becomes local equality in
    the presheaf inverse image (lem-weil-pbc-site-sheafification-sections-local).
    Pick a covering point above it. Filtered-colimit equality gives an étale
@@ -60,9 +60,9 @@ Proof (the six steps of the node):
    (lem-weil-pbc-filtered-colimit-sets-elementwise). Its image is an open
    neighbourhood (lem-weil-pbc-etale-morphism-open-map); factor through this image
    (lem-weil-pbc-morphism-factors-through-open-subscheme). The surjective étale
-   map to the image is a cover (lem-weil-pbc-etale-composition-cancellation,
+   map to the image is a cover (definition-torsion-sheaves--3,
    lem-weil-pbc-open-immersion-etale, def-weil-pbc-etale-site). The sheaf axiom
-   makes the sections equal there (def-weil-pbc-etale-sheaf-of-sets and
+   makes the sections equal there (situation-conventions and
    lem-weil-pbc-open-immersion-monomorphism).
 4. Represent two inverse-image germs by sections on one common neighbourhood,
    using lem-weil-pbc-sets-inverse-image-stalk. Equality of their images gives

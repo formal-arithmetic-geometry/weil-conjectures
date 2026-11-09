@@ -20,7 +20,8 @@ on `S`. If every higher direct image `Rᵠf_* 𝔽_ℓ` of the constant sheaf `�
 invertible on `S`, is constructible, then so is every higher direct image `Rᵠf_* M` of the
 constant sheaf with value a finite `Λ`-module `M`
 (`Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod`).
-This is the dévissage step of the blueprint proof of `cor-fin-projective-curve-finite-group`.
+This is the dévissage step of the blueprint proof of
+`proposition-proper-direct-image-finite-coefficients`.
 
 The proof first changes the coefficients from `Λ` to `ℤ/N`, `N` the characteristic of `Λ`, by
 restriction of scalars: it commutes with constant sheaves, with the derived direct image and
@@ -298,7 +299,7 @@ theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod {X S : Sc
   exact (isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff ψ f _ q).2 (h ℓ hℓN q)
 
 /-- **Dévissage of the coefficients for constant direct images.** This is the dévissage step of
-the blueprint proof of `cor-fin-projective-curve-finite-group`.
+the blueprint proof of `proposition-proper-direct-image-finite-coefficients`.
 
 Let `f : X ⟶ S` be a morphism of schemes and `Λ` a finite ring whose exponent is invertible on
 `S`. Suppose that for every prime `ℓ` invertible on `S` every higher direct image `Rᵠf_* 𝔽_ℓ`

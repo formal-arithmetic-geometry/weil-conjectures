@@ -18,8 +18,8 @@ is induced by `c(N) → red(N)` and the direct image of this augmentation
 
 The reduction/direct-image comparison `h` is written as the adjunction mate of the
 canonical pullback/reduction comparison `pullReduction`. This is verbatim the body of
-`pushReductionMap` of `prop-weil-pbc-direct-image-limits`. That node's proof uses the
-present lemma, so this module does not import its module.
+`pushReductionMap` of `proposition-proper-base-change-complete-integral--1`. That node's proof uses
+the present lemma, so this module does not import its module.
 -/
 
 @[expose] public noncomputable section

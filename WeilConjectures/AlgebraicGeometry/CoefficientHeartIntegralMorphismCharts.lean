@@ -262,7 +262,7 @@ Source: latest blueprint,
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/`
 `sk-lem-coefficient-heart.proof.md`, proof (1),
 "First let Lambda = E", through the construction of h = pi^m f.
-This is a step of the proof of `sk-lem-coefficient-heart`
+This is a step of the proof of `lemma-constructible-sheaves`
 (auxiliary; not a blueprint node).
 
 Proof in words: at each point of `X`, take a connected affine etale neighbourhood, which is

@@ -12,7 +12,7 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRealizedScalarTranspos
 
 /-! # A step of normalized compact-support scalar comparison
 
-Source: lem-fix-operation-reduction, compact-support and final paragraphs.
+Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
 -/
 
 @[expose] public noncomputable section

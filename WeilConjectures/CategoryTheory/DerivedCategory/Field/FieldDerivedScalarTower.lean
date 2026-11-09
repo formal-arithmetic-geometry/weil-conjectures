@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-! # Canonical derived scalar-extension comparisons
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: lem-weil-derived-field-scalar-extension-tower).
 
 ## Main definitions and statements

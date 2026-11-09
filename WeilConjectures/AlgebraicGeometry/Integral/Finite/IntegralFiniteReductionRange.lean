@@ -12,7 +12,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Common bounds and top epimorphisms for integral reductions
 
-Source: blueprint latest, sk-lem-integral-finite-levels, first and third proof paragraphs.
+Source: blueprint latest, lemma-bounds-finite-reductions, first and third proof paragraphs.
 -/
 
 @[expose] public noncomputable section
@@ -62,7 +62,7 @@ private theorem tensorComparison :
 /-- Every canonical finite reduction has the residue cohomological interval, and its top
 cohomology transition is epic.
 
-Source: blueprint latest, sk-lem-integral-finite-levels, coefficient filtration and Milnor
+Source: blueprint latest, lemma-bounds-finite-reductions, coefficient filtration and Milnor
 paragraphs (blueprint: lem-pe-integral-finite-reduction-range).
 
 Proof: identify tensor with the finite coefficient module with restricted derived scalar

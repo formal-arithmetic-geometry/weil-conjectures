@@ -549,21 +549,24 @@ import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedFactorComparisons
 For a smooth morphism `f : X ⟶ Y` of relative dimension `d` admitting a compactification, over a
 quasi-separated base `Y`, with the exponent of `Λ` invertible on `X`, the canonical base change
 map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of a cartesian square with quasi-compact `f'` admitting a
-compactification is an isomorphism (blueprint `prop-asd-smooth-base-change`).
+compactification is an isomorphism (blueprint
+`proposition-exceptional-inverse-image-smooth-morphism--6`).
 
 The proof reduces, through the étale-local normal form of a smooth morphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine`), to the
 étale case (`AlgebraicGeometry.Etale.etaleBaseChange`) and to the affine-line case
 (`AlgebraicGeometry.Etale.affineLineBaseChange`), which comes from the projective-line adjunction
 and gives the base change compatibility of the affine-space adjunction
-(`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`, blueprint `sk-lem-geo-affine-local`).
+(`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`, blueprint
+`lemma-affine-space-etale-localization`).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange` (`sk-lem-geo-affine-local`)
+- `AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`
+(`lemma-affine-space-etale-localization`)
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`
-  (`prop-asd-smooth-base-change`).
+  (`proposition-exceptional-inverse-image-smooth-morphism--6`).
 
 ## Implementation notes
 
@@ -640,7 +643,8 @@ private theorem affineSpaceBaseChangeModel (d : ℕ) (S : Scheme.{u})
         isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq'')
       (fun _ _ _ _ _ sq'' _ _ ↦ affineLineBaseChangeModel Λ _ sq'')
 
-/-- Blueprint `sk-lem-geo-affine-local`: Affine space and étale localization, clause 1.
+/-- Blueprint `lemma-affine-space-etale-localization`: Affine space and étale localization, clause
+1.
 
 "For the projection `a : 𝔸^d_S ⟶ S`, the right adjoint `a^!` of
 `Ra_! : D((𝔸^d_S)_proét, Λ) ⥤ D(S_proét, Λ)` is `a^*(d)[2d]`, with unit and counit compatible
@@ -649,7 +653,7 @@ with base change."
 Both parts are formalised, for every scheme `S` on which the exponent of `Λ` is invertible:
 
 * `a^! = a^*(d)[2d]`: the functor `La^* ⋙ (-)(d)[2d]` is right adjoint to `Ra_!` (as in
-  `cor-amb-affine-space-adjunction`,
+  `lemma-affine-space-etale-localization--1`,
   `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`), for any
   normalized Tate twist;
 * compatibility of the unit and counit of `Ra_! ⊣ Ra^!` with base change: for every cartesian
@@ -658,7 +662,7 @@ Both parts are formalised, for every scheme `S` on which the exponent of `Λ` is
   of the compact-support exchange, so it records exactly how the unit and counit transform
   under base change.
 
-Clause 2 of the node is `lem-amb-etale-adjoint-locality`
+Clause 2 of the node is `lemma-affine-space-etale-localization--4`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale`).
 -/
 theorem affineSpaceAdjunction_baseChange (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
@@ -677,7 +681,8 @@ variable {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X]
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Blueprint `prop-asd-smooth-base-change`: Arbitrary base change for smooth ambient duality.
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`: Arbitrary base change for
+smooth ambient duality.
 
 Let `f : X ⟶ Y` be smooth of relative dimension `d` and admit a compactification, with the
 exponent of `Λ` invertible on `X`, and let `g : Y' ⟶ Y` be arbitrary, with base change
@@ -704,7 +709,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
   isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine Λ (affineLineBaseChange Λ) f d sq
 
 include d in
-/-- Blueprint `prop-asd-smooth-base-change`: Arbitrary base change for smooth ambient duality.
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`: Arbitrary base change for
+smooth ambient duality.
 
 Let `f : X ⟶ Y` and the cartesian square be as in
 `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,

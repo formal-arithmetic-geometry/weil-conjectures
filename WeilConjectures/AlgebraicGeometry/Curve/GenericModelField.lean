@@ -30,7 +30,8 @@ Over a perfect field such a datum is given by the normalizations of the irreduci
 of `X_red` (`AlgebraicGeometry.isGenericCurveModelData_of_perfectField`); over an arbitrary field
 it exists after a finite purely inseparable extension
 (`AlgebraicGeometry.exists_isPurelyInseparable_isGenericCurveModelData`), by descent from the
-perfect closure. These are the generic-fibre steps of `lem-fin-generic-curve-model`.
+perfect closure. These are the generic-fibre steps of
+`proposition-proper-direct-image-finite-coefficients`.
 -/
 
 @[expose] public section
@@ -139,7 +140,7 @@ lemma exists_smoothOfRelativeDimension_fromNormalization {k : Type u} [Field k]
 
 /-- **The generic curve model over a perfect field.** A scheme of finite type and of dimension at
 most one over a perfect field `E` has a generic curve model datum: the normalizations of the
-irreducible components of `X_red` (smooth since `E` is perfect, `lem-sc-normalized-curve-smooth`),
+irreducible components of `X_red` (smooth since `E` is perfect, `lemma-proper-smooth-model--1`),
 which are isomorphisms over a dense open; a dense open of a curve has finite complement. -/
 theorem isGenericCurveModelData_of_perfectField {E : Type u} [Field E] [PerfectField E]
     {X : Scheme.{u}} (g : X ⟶ Spec (.of E)) [LocallyOfFiniteType g] [QuasiCompact g]

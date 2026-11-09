@@ -41,7 +41,7 @@ and `i` is the closed immersion `Proj S ⟶ ℙ(n; Spec k)` given by linear form
 (`AlgebraicGeometry.Proj.linearProjection`) which generate `S`. Thus
 `k[x_j]_{j ∈ n} ⟶ S`, `x_j ↦ l_j`, is a surjection of graded `k`-algebras, `S ≅ k[x_j] / I` for
 its kernel `I`, a homogeneous prime ideal since `S` is a domain, and `i` identifies `X` with
-`Proj (k[x_j] / I)` (blueprint: `lem-pc-projective-coordinate-model`). -/
+`Proj (k[x_j] / I)` (blueprint: `theorem-riemann-roch-coherent-serre-duality`). -/
 theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X] (i : X ⟶ ℙ(n; Spec (.of k)))
     [IsClosedImmersion i] [i.IsOver (Spec (.of k))] :
@@ -119,7 +119,7 @@ infinite field and `X` is an integral closed subscheme of `ℙ(n; Spec k)` of di
 then there is a finite morphism `X ⟶ ℙ¹_k` over `k`. Writing `X ≅ Proj S` with `S` a
 standard graded domain, it is the linear projection `π_{l₀,l₁}` for linear forms
 `l₀, l₁ ∈ S₁` without common zero
-(blueprint: `lem-pc-projective-curve-finite-projection`). -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`). -/
 theorem exists_isFinite_toProjectiveLine {k : Type u} [Field k] [Infinite k] {n : Type u}
     [Finite n] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]

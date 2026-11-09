@@ -10,7 +10,7 @@ public import WeilConjectures.Compactification.BaseChange
 
 /-! # The proper/open comparison before changing compactifications
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 (blueprint: def-asd-open-support-pullback-model)
 -/
 
@@ -23,8 +23,9 @@ namespace AlgebraicGeometry.Etale
 
 /-- The comparison for the literal pullback of one compactification. This is the
 proper/open and open-composition part of `openSupportCompactificationIso`, with no
-initial graph comparison. Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
-(blueprint: def-asd-open-support-pullback-model) -/
+initial graph comparison. Source: blueprint
+`proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i). (blueprint:
+def-asd-open-support-pullback-model) -/
 def openSupportPullbackIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y U V : Scheme.{u}} {f : X ⟶ Y}

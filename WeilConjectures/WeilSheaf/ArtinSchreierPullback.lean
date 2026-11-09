@@ -19,7 +19,7 @@ Weil sheaf (`AlgebraicGeometry.WeilSheaf.upperStarArtinSchreierMapImageIso`): th
 morphism is the geometric trivialisation of `ĀS^* ℒ_ψ`. Hence the pullback of `ℒ_ψ` along any
 `φ` with `φ ≫ AS = φ` is constant; in particular `ℒ_{ψ(0 x)} ≅ ℚ̄_ℓ`
 (`AlgebraicGeometry.nonempty_artinSchreier_zero_iso_adicConstant`, blueprint
-`lem-fd-as-characters`).
+`lemma-artin-schreier-character-sheaf`).
 
 ## Implementation notes
 
@@ -198,17 +198,17 @@ instance : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ) := by
     infer_instance
   exact WeilSheaf.isIso_of_isIso_hom_hom_f _
 
-/-- Blueprint `lem-fd-as-characters`: the pullback of `ℒ_ψ` along the Artin–Schreier map is the
-constant Weil sheaf, `AS^* ℒ_ψ ≅ ℚ̄_ℓ`. -/
+/-- Blueprint `lemma-artin-schreier-character-sheaf`: the pullback of `ℒ_ψ` along the Artin–Schreier
+map is the constant Weil sheaf, `AS^* ℒ_ψ ≅ ℚ̄_ℓ`. -/
 noncomputable def WeilSheaf.upperStarArtinSchreierMapImageIso :
     (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).obj
         (image (WeilSheaf.artinSchreierIdempotent ψ)) ≅
       WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
   asIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ)
 
-/-- Blueprint `lem-fd-as-characters`: if `AS^* L ≅ ℚ̄_ℓ` (e.g. `L = ℒ_ψ`), the pullback of `L`
-along a morphism `φ : X ⟶ 𝔸¹` with `AS ∘ φ = φ` is constant, `φ^* L ≅ φ^* AS^* L ≅ φ^* ℚ̄_ℓ ≅
-ℚ̄_ℓ`. -/
+/-- Blueprint `lemma-artin-schreier-character-sheaf`: if `AS^* L ≅ ℚ̄_ℓ` (e.g. `L = ℒ_ψ`), the
+pullback of `L` along a morphism `φ : X ⟶ 𝔸¹` with `AS ∘ φ = φ` is constant,
+`φ^* L ≅ φ^* AS^* L ≅ φ^* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
 theorem WeilSheaf.nonempty_iso_upperStar_of_comp_artinSchreierMap {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ affineLine k₀)
     [φ.IsOver (Spec (CommRingCat.of k₀))] (h : φ ≫ affineLine.artinSchreierMap k₀ = φ)
@@ -239,7 +239,7 @@ theorem WeilSheaf.nonempty_iso_upperStar_upperStar_of_comp_artinSchreierMap {X Y
 
 end Trivialization
 
-/-- Blueprint `lem-fd-as-characters` (the case `f = 0`): `ℒ_{ψ(0 x)} ≅ ℚ̄_ℓ`, as
+/-- Blueprint `lemma-artin-schreier-character-sheaf` (the case `f = 0`): `ℒ_{ψ(0 x)} ≅ ℚ̄_ℓ`, as
 `AS ∘ [0] = [0]`. -/
 theorem nonempty_artinSchreier_zero_iso_adicConstant (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) := by

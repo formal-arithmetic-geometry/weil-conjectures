@@ -21,7 +21,7 @@ the agent expansion of the local-lifting and finite-cover arguments
 (blueprint: lem-trf-topos-finite-cover-calculus).
 
 The site and all section and index sets lie in the common containing universe
-`max u v w`, following `def-weil-size-convention`. Covering sieves express local
+`max u v w`, following `prose-01-10`. Covering sieves express local
 lifting independently of the choice of a precoverage presenting the topology.
 -/
 

@@ -12,8 +12,8 @@ import Mathlib.CategoryTheory.Simple
 
 /-! # Finite filtrations from an additive faithful natural-number rank
 
-Source: sk-p-real-purity, the actual composition-filtration step, and Weil II (1.1.6).
-This is the elementary categorical induction behind that step, separated from the
+Source: theorem-purity-real-sheaves-curves--1, the actual composition-filtration step, and Weil II
+(1.1.6). This is the elementary categorical induction behind that step, separated from the
 construction of the geometric fibre (blueprint: lem-rp-finite-lisse-filtration-of-rank).
 -/
 
@@ -28,7 +28,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- A rank usable for the composition-filtration argument on a full class of lisse objects.
 The values are natural numbers; additivity refers to ambient cokernels.
-Source: sk-p-real-purity, first and final proof paragraphs
+Source: theorem-purity-real-sheaves-curves--1, first and final proof paragraphs
 (blueprint: lem-rp-finite-lisse-filtration-of-rank). -/
 structure LisseRankData (P : ObjectProperty C) where
   rank : C → ℕ
@@ -42,7 +42,7 @@ structure LisseRankData (P : ObjectProperty C) where
     rank Y = rank X + rank (Limits.cokernel f)
 
 /-- Simplicity tested only on the indicated full class of lisse objects.
-Source: sk-p-real-purity, actual composition-filtration clause
+Source: theorem-purity-real-sheaves-curves--1, actual composition-filtration clause
 (blueprint: lem-rp-finite-lisse-filtration-of-rank). -/
 def IsSimpleIn (P : ObjectProperty C) : ObjectProperty C := fun X ↦
   P X ∧ ¬ IsZero X ∧ ∀ (Y : C) (f : Y ⟶ X), P Y → Mono f → IsZero Y ∨ IsIso f
@@ -62,7 +62,7 @@ instance (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms] :
       infer_instance
 
 /-- An additive rank that detects zero gives a finite filtration by simple lisse quotients.
-Source: sk-p-real-purity, composition-filtration step
+Source: theorem-purity-real-sheaves-curves--1, composition-filtration step
 (blueprint: lem-rp-finite-lisse-filtration-of-rank).
 
 Proof: induct on rank. For a nonzero object choose a proper lisse subobject of maximal
@@ -136,7 +136,7 @@ theorem filtrationClosure_isSimpleIn_of_rank
     exact hT0 (R.detects_zero _ hT (by omega))
 
 /-- A concrete chain version of the rank-induction theorem, retaining lissity at every
-stage. Source: sk-p-real-purity, final composition-filtration paragraph
+stage. Source: theorem-purity-real-sheaves-curves--1, final composition-filtration paragraph
 (blueprint: lem-rp-finite-lisse-filtration-of-rank).
 
 Proof: extract a finite chain from filtration closure. Induct along the chain to prove
@@ -161,7 +161,7 @@ theorem exists_filtration_isSimpleIn_of_rank
 
 omit [Abelian C] in
 /-- Every stage of a finite monomorphism chain embeds in its terminal object.
-Source: sk-p-real-purity, actual composition filtration
+Source: theorem-purity-real-sheaves-curves--1, actual composition filtration
 (blueprint: lem-rp-finite-lisse-filtration-of-rank).
 
 Proof: descend from the last stage, composing the next embedding with the next

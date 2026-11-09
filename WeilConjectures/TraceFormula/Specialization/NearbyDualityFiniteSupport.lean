@@ -18,7 +18,7 @@ For a trait model `M` over the base, the cone of the duality map `δ_{M,K}` is s
 finitely many closed points of the special fibre
 (`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap`), provided that `δ` becomes an
 isomorphism on the special fibre of the generic slice of every coordinate of the restrictions of
-the total space to opens (the generic-slice step of blueprint `det-tf-nearby-duality-slice`, taken
+the total space to opens (the generic-slice step of blueprint `lemma-nearby-duality-slice--1`, taken
 as a hypothesis): around every point of the special fibre, the coordinates of a local chart of the
 total space detect closed points, and the cone vanishes over the generic point of each coordinate
 line (`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`).
@@ -159,10 +159,10 @@ end OpenRestriction
 
 -- the triangles of the duality map live on large derived categories
 /-- **Finite support of the cone of the duality map, from the generic slices** (blueprint
-`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if, for every open `V` of the
-total space and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the duality map of
-`M|_V` becomes an isomorphism on the special fibre of the generic slice of `b` (`hslice`, the
-generic-slice step of blueprint `det-tf-nearby-duality-slice`), then the duality map `δ_{M,K}` is
+`proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"): if, for every open `V`
+of the total space and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the duality map
+of `M|_V` becomes an isomorphism on the special fibre of the generic slice of `b` (`hslice`, the
+generic-slice step of blueprint `lemma-nearby-duality-slice--1`), then the duality map `δ_{M,K}` is
 an isomorphism away from finitely many closed points of the special fibre. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
     (h : M.IsTraitModelOfBase k q g)
@@ -248,10 +248,10 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     exact isZero_leftDerivedUpperStar_of_factorization (Profinite.padicAlgClRingObj ℓ) _ _
       (exists_comp_sliceSpecialMap (traitSliceCoord k') hRM (hcoord a)) _ hz
 
-/-- **The base case of the finite-support step** (blueprint `sk-prop-tf-nearby-duality-foundation`,
-"This also supplies the base case `n = 0`"): if the special fibre `X'` has finitely many points,
-the duality map is an isomorphism away from all of them, which are closed (`X'` is a finite
-Jacobson space, hence discrete). -/
+/-- **The base case of the finite-support step** (blueprint
+`proposition-nearby-cycles-commute-verdier-duality`, "This also supplies the base case `n = 0`"): if
+the special fibre `X'` has finitely many points, the duality map is an isomorphism away from all of
+them, which are closed (`X'` is a finite Jacobson space, hence discrete). -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_finite
     (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g) [Finite X'.left]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

@@ -65,7 +65,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 `M : J ⥤ C`, then `F.mapCocone c` is a colimit cocone of `M ⋙ F`; this is
 `Adjunction.leftAdjoint_preservesColimits`. In particular the canonical morphism
 `colimit (M ⋙ F) ⟶ F (colimit M)` is an isomorphism (`preservesColimitIso`).
-(blueprint: `lem-weil-pbc-left-adjoint-preserves-colimits`) -/
+(blueprint: `situation-conventions`) -/
 theorem nonempty_isColimit_mapCocone (adj : F ⊣ G) {J : Type u₃} [Category.{v₃} J]
     {M : J ⥤ C} {c : Cocone M} (hc : IsColimit c) : Nonempty (IsColimit (F.mapCocone c)) := by
   have := adj.leftAdjoint_preservesColimits
@@ -75,7 +75,7 @@ theorem nonempty_isColimit_mapCocone (adj : F ⊣ G) {J : Type u₃} [Category.{
 `M : J ⥤ D`, then `G.mapCone c` is a limit cone of `M ⋙ G`
 (`Adjunction.rightAdjoint_preservesLimits`). In particular `G` sends a terminal object to a
 terminal object, and the comparison morphism `G (Y ⨯ Y') ⟶ G Y ⨯ G Y'` is an isomorphism.
-(blueprint: `lem-weil-pbc-right-adjoint-preserves-limits`) -/
+(blueprint: `situation-conventions`) -/
 theorem nonempty_isLimit_mapCone (adj : F ⊣ G) {J : Type u₃} [Category.{v₃} J]
     {M : J ⥤ D} {c : Cone M} (hc : IsLimit c) :
     Nonempty (IsLimit (G.mapCone c)) ∧

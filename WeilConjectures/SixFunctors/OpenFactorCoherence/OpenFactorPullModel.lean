@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.Constructible.ConstructibleTensorCompl
 
 /-! # Normalized comparison of pullback and quotient completion
 
-Source: blueprint main-20261015, sk-prop-sf-pf-coherence, base-change paragraph;
-Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, base-change
+paragraph; Bhatt--Scholze, Definition 3.4.10 and Lemmas 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1
 (blueprint: def-sf-pull-completion-comparison).
 
 The record Pull retains the strict quotient-tower realization of the published operations.

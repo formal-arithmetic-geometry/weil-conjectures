@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Coherence of the shifted finite Tate line
 
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph. The
+Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph. The
 positive-case degree-zero and shift calculations reuse proved private helpers
 from FiniteP1TwistedUnitBaseChange; the final square also covers N = 0.
 -/

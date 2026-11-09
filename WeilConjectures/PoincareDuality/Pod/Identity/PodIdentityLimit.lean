@@ -12,7 +12,7 @@ import WeilConjectures.PoincareDuality.Pod.Identity.PodIdentityDerivedFactors
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL, 07A4 and 0941.
 -/
 
@@ -114,7 +114,7 @@ private theorem restricted_roos_identity
     (hf (podRestrictedTower l E C)) (hs (podRestrictedTower l E C))
 
 /-- Identity compatibility for the derived total-limit comparison.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-identity-limit).
 
 Proof: use the proved strict restricted-tower identity and both Roos coordinates.

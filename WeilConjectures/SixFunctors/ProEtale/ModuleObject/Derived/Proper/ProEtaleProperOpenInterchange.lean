@@ -168,8 +168,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 # Proper direct image and open extension by zero
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-comp-composition,
-det-sf-comp-composition-interchange, clauses (1)--(3); Stacks Tag 09AH
-(blueprint: det-sf-comp-composition-interchange).
+proposition-composition-base-change-rf-shriek--1, clauses (1)--(3); Stacks Tag 09AH
+(blueprint: proposition-composition-base-change-rf-shriek--1).
 
 The auxiliary maps are constructed from the existing coefficient pullback comparisons and
 derived adjunctions. The normalization equation uses the two open units, so it expresses
@@ -325,8 +325,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [IsOpenImmersion i] (c : Compactification.BoundaryCompactification (p ≫ i))
 
 /-- The canonical pullback comparison of the compactification square, applied termwise.
-Source: blueprint det-sf-comp-composition-interchange, proof (2), square restriction
-(blueprint: det-sf-comp-composition-interchange). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--1, proof (2), square restriction
+(blueprint: proposition-composition-base-change-rf-shriek--1). -/
 noncomputable def compositionInterchangePullback :
     (upperStar Λ i).mapDerivedCategory ⋙ (upperStar Λ p).mapDerivedCategory ≅
       (upperStar Λ c.obj.obj.g).mapDerivedCategory ⋙
@@ -340,8 +340,8 @@ noncomputable def compositionInterchangePullback :
 
 /-- The restriction comparison `i^* Rr_* B → Rp_* j'^* B`, the adjoint mate of the
 canonical pullback square. This construction is defined before proving the square cartesian.
-Source: blueprint det-sf-comp-composition-interchange, proof (2), Hom calculation
-(blueprint: det-sf-comp-composition-interchange). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--1, proof (2), Hom calculation
+(blueprint: proposition-composition-base-change-rf-shriek--1). -/
 noncomputable def compositionInterchangeRestriction
     (B : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology c.obj.obj.Z) Ab.{u + 1})
       (condensedRingObj Λ c.obj.obj.Z))) :
@@ -359,8 +359,8 @@ noncomputable def compositionInterchangeRestriction
 /-- An interchange arrow restricts to the identity precisely when its open adjoint,
 followed by the canonical restriction comparison, is `Rp_*` of the source open unit.
 Both units are the units of the existing exact open derived adjunctions.
-Source: blueprint det-sf-comp-composition-interchange, clause (2), proof (2)
-(blueprint: det-sf-comp-composition-interchange). -/
+Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (2), proof (2)
+(blueprint: proposition-composition-base-change-rf-shriek--1). -/
 def compositionInterchangeIsNormalized
     (A : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -673,8 +673,8 @@ private theorem properOpenInterchange_localizing
 /-- Proper/open interchange in the standing scheme setting, for all admissible coefficients.
 The coefficient disjunction lists the finite discrete rings killed by an ell power, Z_ell,
 Q_ell, integers and fields of finite subextensions, and the finite-subextension condensed Qbar.
-Source: blueprint main-20261015, det-sf-comp-composition-interchange, clauses (1)--(3)
-(blueprint: det-sf-comp-composition-interchange).
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, clauses (1)--(3)
+(blueprint: proposition-composition-base-change-rf-shriek--1).
 
 Proof plan:
 1. In V = r^{-1}(Y), X is open and dense. Its map to V is proper, since X is proper
@@ -682,9 +682,9 @@ Proof plan:
    Its image is closed, hence all of V. The surjective open immersion identifies the
    open subschemes and the commuting compactification triangle identifies r with p.
 2. Cartesian coefficients make pullback exact. Apply the open base-change isomorphism
-   of det-sf-open-closed-sequence-ring-sheaf termwise and use exact-functor-derived-
-   factorization. Termwise-adjunction-homotopy and adjunction-localization descend the
-   open adjunctions, with invertible open units. Combine these with module-derived-
+   of proposition-extension-zero-restriction-closed-subscheme termwise and use
+   exact-functor-derived- factorization. Termwise-adjunction-homotopy and adjunction-localization
+   descend the open adjunctions, with invertible open units. Combine these with module-derived-
    pushpull. The natural Hom calculation identifies i^* Rr_* B with Rp_* j'^* B.
    For B = j'_! A, both open units are invertible, so the identity under this
    identification determines exactly one arrow. This is the displayed normalization.

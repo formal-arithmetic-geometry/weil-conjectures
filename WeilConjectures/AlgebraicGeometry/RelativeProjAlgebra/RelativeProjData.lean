@@ -20,7 +20,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 /-! # Relative Proj construction data
 
 Source: blueprint, Nagata compactification, sketch data, Relative Proj, order 12
-(blueprint: def-nagata-relative-proj); Stacks Project, Constructions, Tag 01LH.
+(blueprint: definition-admissible-blow-up--1); Stacks Project, Constructions, Tag 01LH.
 
 The input records the underlying quasi-coherent algebra and its homogeneous sheaves,
 with the direct-sum identification and its multiplication and unit equations. On affine
@@ -45,7 +45,7 @@ namespace AlgebraicGeometry
 /-- A quasi-coherent commutative graded algebra sheaf, including the identification of
 its underlying module with the sheaf direct sum of its homogeneous pieces.
 The last two equations say that this identification respects the given graded algebra.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 structure RelativeProjAlgebra (X : Scheme.{u}) where
   algebra : QuasiCoherentAlgebra X
   piece : ℕ → X.Modules
@@ -68,24 +68,24 @@ namespace RelativeProjAlgebra
 variable {X : Scheme.{u}} (A : RelativeProjAlgebra X)
 
 /-- The actual section ring of the input algebra on an affine open, not a chosen model.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 abbrev sections (V : X.affineOpens) : CommRingCat.{u} :=
   A.algebra.obj.right.obj.obj (op V.1)
 
 /-- The homogeneous section subgroup is the image of the homogeneous-sheaf inclusion.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def sectionGrade (V : X.affineOpens) (n : ℕ) : AddSubgroup (A.sections V) :=
   (((Sigma.ι A.piece n ≫ A.decomposition.hom).val.app (op V.1)).hom.toAddMonoidHom).range
 
 /-- The degree-zero unit belongs to the degree-zero subgroup.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1).
 Proof: apply `unit_eq` to 1 and use that the algebra structure map preserves 1. -/
 theorem sectionGrade_one (V : X.affineOpens) : 1 ∈ A.sectionGrade V 0 := by
   refine ⟨A.graded.unit.val.app (op V.1) (1 : Γ(X, V.1)), ?_⟩
   simpa using A.unit_eq V.1 1
 
 /-- Homogeneous multiplication adds degrees.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1).
 Proof: lift both elements to their homogeneous sheaves and apply `mul_eq`. -/
 theorem sectionGrade_mul (V : X.affineOpens) (m n : ℕ)
     (a b : A.sections V) (ha : a ∈ A.sectionGrade V m) (hb : b ∈ A.sectionGrade V n) :
@@ -227,7 +227,7 @@ private theorem finite_sections (V : X.affineOpens) (s : A.sections V) :
     (locally_finite_sections A) V.1 V.2.isCompact s
 
 /-- On an affine open the homogeneous section subgroups are an internal direct sum.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1).
 Proof: the coproduct projections, transported through `decomposition`, are mutually
 orthogonal and act identically on the corresponding homogeneous images. Sections of the
 coproduct are locally finite sums, since sheafification of the presheaf coproduct maps
@@ -272,7 +272,7 @@ theorem sectionGrade_internal (V : X.affineOpens) :
 
 /-- The induced grading on the section ring. The decomposition is the unique inverse of
 the bijective recomposition map, not data selected from an unrestricted existence claim.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 noncomputable instance sectionGradedRing (V : X.affineOpens) :
     GradedRing (A.sectionGrade V) where
   toDecomposition := (A.sectionGrade_internal V).chooseDecomposition
@@ -280,7 +280,7 @@ noncomputable instance sectionGradedRing (V : X.affineOpens) :
   mul_mem := A.sectionGrade_mul V
 
 /-- Restriction of the algebra sheaf preserves every homogeneous subgroup.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1).
 Proof: the maps from the homogeneous sheaves to the total algebra are sheaf morphisms;
 their naturality carries an element in the image to the image of its restriction. -/
 theorem restriction_mem {V W : X.affineOpens} (h : W ≤ V) (n : ℕ)
@@ -292,14 +292,14 @@ theorem restriction_mem {V W : X.affineOpens} (h : W ≤ V) (n : ℕ)
     ((Sigma.ι A.piece n ≫ A.decomposition.hom).val.naturality (homOfLE (X := X.Opens) h).op)
 
 /-- The graded section restriction homomorphism.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def restriction {V W : X.affineOpens} (h : W ≤ V) :
     A.sectionGrade V →+*ᵍ A.sectionGrade W where
   toRingHom := (A.algebra.obj.right.obj.map (homOfLE h).op).hom
   map_mem := fun {n} {a} ha ↦ A.restriction_mem h n a ha
 
 /-- Affine restriction extends the irrelevant ideal to the irrelevant ideal.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1).
 Proof: quasi-coherent affine base change for the total module writes every section on W
 as the image of a tensor over sections on V. Project to a fixed positive degree using the
 sheaf coproduct projection. Naturality makes this commute with restriction, and linearity
@@ -344,14 +344,14 @@ theorem irrelevant_le {V W : X.affineOpens} (h : W ≤ V) :
   simpa only [htb, homogeneousProjection_eq A n W b hb] using hm t
 
 /-- The structural unit of the section algebra has degree zero.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1).
 Proof: `unit_eq` exhibits its image as the inclusion of a section of the zeroth piece. -/
 theorem unit_mem (V : X.affineOpens) (r : Γ(X, V.1)) :
     (A.algebra.obj.hom.hom.app (op V.1)).hom r ∈ A.sectionGrade V 0 := by
   exact ⟨A.graded.unit.val.app (op V.1) r, A.unit_eq V.1 r⟩
 
 /-- The base-ring homomorphism into degree zero; it need not be an isomorphism.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def unitZero (V : X.affineOpens) : Γ(X, V.1) →+* A.sectionGrade V 0 where
   toFun r := ⟨(A.algebra.obj.hom.hom.app (op V.1)).hom r, A.unit_mem V r⟩
   map_zero' := Subtype.ext (map_zero _)
@@ -360,19 +360,19 @@ def unitZero (V : X.affineOpens) : Γ(X, V.1) →+* A.sectionGrade V 0 where
   map_mul' r s := Subtype.ext (map_mul _ r s)
 
 /-- The local model on an affine open is Proj of its graded section ring.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def localProj (V : X.affineOpens) : Scheme.{u} := Proj (A.sectionGrade V)
 
 /-- The local structural map is the degree-zero Proj map followed by the spectrum map
 of the unit into degree zero and the canonical affine identification.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def localBase (V : X.affineOpens) : A.localProj V ⟶ V.1.toScheme :=
   Proj.toSpecZero (A.sectionGrade V) ≫ Spec.map (CommRingCat.ofHom (A.unitZero V)) ≫
     V.2.isoSpec.inv
 
 /-- The local transition is precisely the Proj map of section restriction. Its standard
 chart maps are the degree-zero homogeneous localization maps in Mathlib's `Proj.map`.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def localTransition {V W : X.affineOpens} (h : W ≤ V) :
     A.localProj W ⟶ A.localProj V :=
   Proj.map (A.restriction h) (A.irrelevant_le h)
@@ -388,7 +388,7 @@ the restriction-induced overlap maps. The glued scheme and morphism are `gluing.
 and `gluing.toBase`. `restrictionIso` and its equations are the universal affine
 restriction identifications and their compatibility. No existence is assumed or asserted.
 Source: blueprint, Relative Proj, order 12; Stacks, Tag 01LH
-(blueprint: def-nagata-relative-proj). -/
+(blueprint: definition-admissible-blow-up--1). -/
 structure RelativeProjData {X : Scheme.{u}} (A : RelativeProjAlgebra X) where
   gluing : Scheme.Cover.RelativeGluingData X.directedAffineCover
   localIso : ∀ V : X.affineOpens, gluing.functor.obj V ≅ A.localProj V
@@ -415,11 +415,11 @@ namespace RelativeProjData
 variable {X : Scheme.{u}} {A : RelativeProjAlgebra X} (D : RelativeProjData A)
 
 /-- The relative Proj scheme obtained by the specified relative scheme gluing.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def proj : Scheme.{u} := D.gluing.glued
 
 /-- The structural morphism of the specified relative Proj.
-Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
+Source: blueprint, Relative Proj, order 12 (blueprint: definition-admissible-blow-up--1). -/
 def π : D.proj ⟶ X := D.gluing.toBase
 
 end RelativeProjData

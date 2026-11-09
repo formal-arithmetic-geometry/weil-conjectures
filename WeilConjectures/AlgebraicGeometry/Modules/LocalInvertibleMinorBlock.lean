@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockIso
 
 /-! # Local free decompositions with an invertible pivot block
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), choosing a nonvanishing minor.
+Source: `lemma-triviality-fibres--2`, proof (3), choosing a nonvanishing minor.
 (blueprint: lem-pc-local-invertible-minor-block)
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A specified minor nonvanishing at a point gives local bases with an invertible
 leading block. No reducedness or rank bound at other points is required.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), pivot-minor step in the
+Source: `lemma-triviality-fibres--2`, proof (3), pivot-minor step in the
 normal-form claim. (blueprint: lem-pc-local-invertible-minor-block)
 
 Proof: Set A = freeMatrix (eM.inv ≫ φ ≫ eN.hom). Near j(z), the determinant

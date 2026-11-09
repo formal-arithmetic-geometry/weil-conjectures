@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHense
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
+def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
 
 The pullback and tensor of supported sections, its totalization, the comparison with the
 derived exterior product and the support units are natural in the cochain complexes. We

@@ -29,7 +29,7 @@ Source: Stacks Project, Lemma 0038(1) and the proof of Lemma 0A4B.
 
 First, `upperStarLowerStarAdjunction AddCommGrpCat f` identifies inverse image with the
 left adjoint of direct image (`def-weil-pbc-inverse-image`, Definition 03Q0).
-Second, apply `lem-weil-pbc-left-adjoint-preserves-colimits` (Lemma 0038(1)) to this
+Second, apply `situation-conventions` (Lemma 0038(1)) to this
 adjunction and any diagram F. The image of its colimit cocone is a colimit cocone.
 The canonical map from the chosen colimit of the image diagram to the image of the
 chosen colimit is induced by the images of the coprojections

@@ -24,12 +24,12 @@ monoidal closed `C₁`, `C₂`. Write `A ⊠ B = P A ⊗ Q B`. The *external Hom
 ```
 (`CategoryTheory.externalHomPairing`) is the middle-four interchange, the monoidal structures of
 `P` and `Q` and the two evaluations; its transpose is the external Hom map `β` of blueprint
-`def-sf-kv-maps` (iii).
+`lemma-external-duality-trace-morphism` (iii).
 
 For `E₁ = 𝟙` the pairing reduces, through `M ≅ RHom(𝟙, M)` and `𝟙 ⊠ N ≅ Q N`, to the braiding
 followed by the evaluation in the second factor
 (`CategoryTheory.externalHomPairing_unit`). This is how the Künneth–Verdier map
-`κ = RHom(1, α) ∘ β` of blueprint `def-sf-kv-maps` (iv) unfolds.
+`κ = RHom(1, α) ∘ β` of blueprint `lemma-external-duality-trace-morphism` (iv) unfolds.
 
 -/
 
@@ -54,7 +54,8 @@ noncomputable def externalHomPairing (E₁ L₁ : C₁) (E₂ L₂ : C₂) :
     (P.map ((ihom.ev E₁).app L₁) ⊗ₘ Q.map ((ihom.ev E₂).app L₂))
 
 /-- The *external Hom map* `β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)`
-(blueprint `def-sf-kv-maps` (iii)), the transpose of the external Hom pairing. -/
+(blueprint `lemma-external-duality-trace-morphism` (iii)), the transpose of the external Hom
+pairing. -/
 noncomputable def externalHomMap [MonoidalClosed C] (E₁ L₁ : C₁) (E₂ L₂ : C₂) :
     P.obj ((ihom E₁).obj L₁) ⊗ Q.obj ((ihom E₂).obj L₂) ⟶
       (ihom (P.obj E₁ ⊗ Q.obj E₂)).obj (P.obj L₁ ⊗ Q.obj L₂) :=
@@ -104,10 +105,10 @@ lemma externalHomPairing_unit (M : C₁) (N W : C₂) :
     leftUnitor_inv_whiskerRight_tensorμ_leftUnitor_assoc, MonoidalCategory.whiskerLeft_comp]
 
 /-- **The Künneth–Verdier map is `RHom(1, α) ∘ β`** (abstract form of blueprint
-`def-sf-kv-maps` (iv)): the transpose of the braiding, the monoidal structure of `Q`, the
-evaluation `N ⊗ RHom(N, W) ⟶ W` and a map `a : P M ⊗ Q W ⟶ Z` is, through `M ≅ RHom(𝟙, M)`
-and `Q N ≅ 𝟙 ⊠ N`, the external Hom map for `(𝟙, M)` and `(N, W)` followed by `RHom(1, a)`; that
-is, the following diagram commutes, where `κ` is the transpose of
+`lemma-external-duality-trace-morphism` (iv)): the transpose of the braiding, the monoidal structure
+of `Q`, the evaluation `N ⊗ RHom(N, W) ⟶ W` and a map `a : P M ⊗ Q W ⟶ Z` is, through
+`M ≅ RHom(𝟙, M)` and `Q N ≅ 𝟙 ⊠ N`, the external Hom map for `(𝟙, M)` and `(N, W)` followed by
+`RHom(1, a)`; that is, the following diagram commutes, where `κ` is the transpose of
 `Q N ⊗ (P M ⊗ Q RHom(N, W)) ⟶ P M ⊗ Q W ⟶ Z` as in `externalHomPairing_unit`:
 ```
 P M ⊗ Q RHom(N, W) ───────────── κ ─────────────▶ RHom(Q N, Z)

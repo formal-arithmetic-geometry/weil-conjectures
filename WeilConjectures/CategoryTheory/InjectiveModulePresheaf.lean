@@ -36,7 +36,7 @@ Proof:
    (lem-weil-pbc-ringed-site-module-sheafification-exact), so it preserves monomorphisms.
 2. Apply `Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms`
    (lem-sp-right-adjoint-preserves-injectives) to this adjunction. Since `I` is injective
-   (def-sp-injective-resolutions) in the sheaf category (def-weil-sheaf-of-modules-category),
+   (def-sp-injective-resolutions) in the sheaf category (situation-conventions),
    its underlying presheaf is injective. The right adjoint for the identity ring map is
    the inclusion followed by identity restriction of scalars, canonically the inclusion.
 -/

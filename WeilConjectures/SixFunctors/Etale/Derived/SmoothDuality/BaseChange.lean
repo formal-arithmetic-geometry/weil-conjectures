@@ -10,9 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 /-!
 # Base change for smooth duality reduces to the dualizing complex
 
-The last step of the proof of blueprint `prop-asd-smooth-base-change`: the base change map of the
-exceptional inverse image respects the tensor isomorphisms of `thm-asd-smooth-tensor`. For a
-cartesian square
+The last step of the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`:
+the base change map of the exceptional inverse image respects the tensor isomorphisms of
+`proposition-exceptional-inverse-image-smooth-morphism`. For a cartesian square
 
 ```
   X' --g'--> X

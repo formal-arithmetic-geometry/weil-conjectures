@@ -17,9 +17,9 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstr
 
 # Properties of the surface `T'` of a cover datum
 
-The properties (ii), (iii) of blueprint `det-tf-restriction-zero-covers` for the surface `T'` of a
-cover datum, in the form used by `sk-lem-tf-blowup-restriction`, together with the pulled back
-identification of `det-tf-restriction-zero-localization` (i):
+The properties (ii), (iii) of blueprint `lemma-tangent-cones-on-cover` for the surface `T'` of a
+cover datum, in the form used by `lemma-vanishing-restrictions-after-blowing-up--1`, together with
+the pulled back identification of `lemma-vanishing-local-term-zero-stalk--1` (i):
 
 * the curves `D'`, `H'`, `B'` pass through the closed point, `H'` is regular and `D'`, `B'` are
   reduced curves;
@@ -50,21 +50,21 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {M : CurveLocalModel k} {ℓ : �
   (D : M.CoverDatum ℓ PL PK)
 
 /-- The curves `D'`, `H'`, `B'` pass through the closed point of `T'`
-(blueprint `det-tf-restriction-zero-covers`). -/
+(blueprint `lemma-tangent-cones-on-cover`). -/
 theorem nonempty_curves : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' :=
   D.nonempty_curves'
 
 /-- The curve `H'` is regular: its ring is a discrete valuation ring (blueprint
-`det-tf-restriction-zero-covers` (ii): `H'` is the axis `η = 0` of `T'`). -/
+`lemma-tangent-cones-on-cover` (ii): `H'` is the axis `η = 0` of `T'`). -/
 theorem isDiscreteValuationRing_H' :
     ∃ _ : IsDomain Γ(D.H', ⊤), IsDiscreteValuationRing Γ(D.H', ⊤) :=
   D.isDiscreteValuationRing_H''
 
-/-- The curves `D'` and `B'` have dimension one (blueprint `det-tf-restriction-zero-covers`). -/
+/-- The curves `D'` and `B'` have dimension one (blueprint `lemma-tangent-cones-on-cover`). -/
 theorem ringKrullDim_D'_B' : ringKrullDim Γ(D.D', ⊤) = 1 ∧ ringKrullDim Γ(D.B', ⊤) = 1 :=
   D.ringKrullDim_D'_B''
 
-/-- **Tangent cones** (blueprint `det-tf-restriction-zero-covers` (iii)): the tangent cone of
+/-- **Tangent cones** (blueprint `lemma-tangent-cones-on-cover` (iii)): the tangent cone of
 `G' ∪ V'` meets neither that of `B'` nor that of `H'` outside the origin. -/
 theorem tangentConesMeetAtOrigin :
     IsLocalRing.TangentConesMeetAtOrigin (strictHenselization D.s') (specIdeal D.dD')
@@ -73,7 +73,7 @@ theorem tangentConesMeetAtOrigin :
         (specIdeal D.dH') :=
   D.tangentConesMeetAtOrigin_specIdeal
 
-/-- **The punctured diagonal** (blueprint `det-tf-restriction-zero-covers` (ii)): `B' ∖ y'` is
+/-- **The punctured diagonal** (blueprint `lemma-tangent-cones-on-cover` (ii)): `B' ∖ y'` is
 finite étale of degree `e²` over `B ∖ y`, compatibly with the inclusions into `T' ∖ D'` and
 `T ∖ (G ∪ V)`. -/
 theorem exists_puncturedDiagonal_finite_etale :
@@ -87,8 +87,8 @@ theorem exists_puncturedDiagonal_finite_etale :
           D.dD'.openComplement.ι ≫ D.π :=
   D.exists_puncturedDiagonal_finite_etale'
 
-/-- **The complex `E'`** (blueprint `det-tf-restriction-zero-covers` (i) and
-`det-tf-restriction-zero-localization` (i)): for `L ≅ PL`, `K ≅ PK` with `K_ȳ = 0` and
+/-- **The complex `E'`** (blueprint `lemma-tangent-cones-on-cover` (i) and
+`lemma-vanishing-local-term-zero-stalk--1` (i)): for `L ≅ PL`, `K ≅ PK` with `K_ȳ = 0` and
 `P = (L ⊠ K)|_T`, the pullback of `P` to `T' ∖ D'` is the extension by zero of a bounded complex
 `E'` on `T' ∖ (D' ∪ H')` whose cohomology sheaves are trivialized by a finite étale Galois cover
 with group a finite `ℓ`-group, with finite values. -/

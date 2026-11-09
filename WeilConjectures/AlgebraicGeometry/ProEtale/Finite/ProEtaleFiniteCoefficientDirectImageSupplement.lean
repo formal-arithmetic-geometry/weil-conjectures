@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfDirectImageCTFNonproper
 
 Source: Weil conjectures blueprint,
 `literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/`
-`cor-sf-direct-image-ctf-proetale.md` (blueprint: cor-sf-direct-image-ctf-proetale).
+`cor-sf-direct-image-ctf-proetale.md` (blueprint: proposition-six-operations-dctf--2).
 -/
 
 @[expose] public section
@@ -38,15 +38,15 @@ bounded constructibility and the specified Tor interval are preserved by the can
 finite-coefficient pro-étale derived direct image, with the source-dimension shift.
 
 Source: Weil conjectures blueprint, `sec-six-functors/sk-cor-sf-direct-image-ctf`,
-node order 2195 (blueprint: cor-sf-direct-image-ctf-proetale).
+node order 2195 (blueprint: proposition-six-operations-dctf--2).
 
 Proof plan:
-1. Apply `lem-sf-proetale-constructible-origin` to intrinsic bounded constructibility,
+1. Apply `theorem-comparison-constructible-sheaves` to intrinsic bounded constructibility,
 obtaining a bounded constructible étale complex `K'` and `K ≅ ν_X^* K'`. In particular
 `K'` is bounded below; the derived comparison, not only the sheaf comparison, is used.
 2. The coefficient prime is invertible over `D.k` since `l ≠ D.p`. Apply clause (ii)
 of `lem-sf-comparison-tor-amplitude` to reflect exactly the interval `[a,b]` to `K'`.
-3. Apply `cor-sf-direct-image-ctf-nonproper` to `f` and `K'`. Its hypotheses are finite
+3. Apply `proposition-six-operations-dctf--2` to `f` and `K'`. Its hypotheses are finite
 type over `D.k`, separated finite type of `f`, the source dimension bound, and the
 constructibility and interval already checked. Thus `L = Rf_{Et,*} K'` is bounded
 constructible of Tor amplitude `[a,b+2d]`.
@@ -54,7 +54,7 @@ constructible of Tor amplitude `[a,b+2d]`.
 by separatedness (`def-weil-proper-morphism`), hence proper by clause (c) of
 `lem-weil-pbc-proper-fp-permanence`, hence finite type and quasi-compact.
 Thus `f` is also quasi-separated (`def-weil-quasi-separated-morphism`).
-5. Apply `prop-weil-pbc-comparison-direct-image` to the bounded-below `K'` and the
+5. Apply `theorem-comparison-direct-images--1` to the bounded-below `K'` and the
 quasi-compact quasi-separated `f`. Combine its isomorphism with `Rf_*` of the origin
 isomorphism to obtain `Rf_{Proet,*} K ≅ ν_Y^* L`.
 6. Clause (i) of `lem-sf-comparison-tor-amplitude` makes `ν_Y^* L` intrinsically

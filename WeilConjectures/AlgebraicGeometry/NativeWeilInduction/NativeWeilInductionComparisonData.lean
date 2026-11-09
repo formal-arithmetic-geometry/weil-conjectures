@@ -43,7 +43,7 @@ variable {C : Type u} {D : Type v} [Category.{w} C] [Category.{w} D]
   [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
 
 /-- Localize the actual termwise identity underlying an exact lifted functor.
-Source: blueprint `lem-fix-weil-operations`, first paragraph, and exact localization.
+Source: blueprint `prose-10-20`, first paragraph, and exact localization.
 (blueprint: def-sf-native-weil-induction-comparison-data) -/
 def exactForgetComparison (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     [P.IsEquivalence] [Q.IsEquivalence] (L : C ⥤ D) [L.Additive]
@@ -58,7 +58,7 @@ def exactForgetComparison (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Derive the native exchange using exact Frobenius equivalences and the specified
-right-derived units. Source: blueprint `lem-fix-weil-operations`, first paragraph.
+right-derived units. Source: blueprint `prose-10-20`, first paragraph.
 (blueprint: def-sf-native-weil-induction-comparison-data) -/
 def rightExchange (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     [P.IsEquivalence] [Q.IsEquivalence] [Abelian.HasKInjectiveResolutions C]
@@ -206,7 +206,7 @@ def comparison :
           Functor.associator _ _ _
 
 /-- The native first Frobenius exchange, derived from the actual proper and open
-sheaf exchanges. Source: blueprint `lem-fix-weil-operations`, first two paragraphs
+sheaf exchanges. Source: blueprint `prose-10-20`, first two paragraphs
 (blueprint: def-sf-native-weil-induction-comparison-data). -/
 def exchange :
     ordinaryImage k₀ l f c ⋙ frobenius k₀ l Y ≅

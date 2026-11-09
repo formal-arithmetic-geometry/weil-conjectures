@@ -39,10 +39,10 @@ Proof, following the node's five steps:
    eta_f applied to eta_g, evaluated on the inverse image under g of the original open.
 3. Equality of sheaf morphisms is sectionwise equality. Thus the displayed condition
    is precisely R(c) composed with the composite unit equals the unit for f followed by g.
-4. Apply lem-weil-pbc-conjugate-iso-unit-equation to the two adjunctions and the
+4. Apply situation-conventions to the two adjunctions and the
    pushforward composition isomorphism. This gives a natural isomorphism satisfying
    the unit equation, hence the displayed section equation.
-5. For any competing morphism at a fixed sheaf, lem-weil-pbc-adjunct-counit-identity
+5. For any competing morphism at a fixed sheaf, situation-conventions
    for the composite adjunction recovers it from the same unit equation as counit
    composed with the inverse image of that equation's right-hand side. Therefore
    it equals the comparison component, even without any naturality assumption. -/

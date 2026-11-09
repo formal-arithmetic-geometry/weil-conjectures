@@ -37,7 +37,7 @@ Proof:
    (`lem-weil-pbc-affine-etale-essentially-small-cover`). The extensions by zero of the
    constant rank-one module sheaves form a separating family: their coproduct is a
    separator (`lem-weil-pbc-module-sheaves-grothendieck-abelian`). Small coproducts exist
-   by `lem-weil-pbc-module-sheaves-colimits-forgetful`.
+   by `situation-conventions`.
 2. Index summands by pairs consisting of an object of this covering family and a map
    from its extension by zero to `F`. The map from their coproduct to `F` is epic by
    `lem-weil-pbc-separating-family-epi-coproduct` (Stacks 03EW(3)).

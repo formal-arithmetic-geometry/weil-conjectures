@@ -369,7 +369,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Strict quotient towers and the completed-adjunction mate
 
-Source: smooth-purity blueprint, `fix-lem-exchanges`, Proof Step 4;
+Source: smooth-purity blueprint, `proposition-composition-base-change-rf-shriek`, Proof Step 4;
 Stacks Project, Tags 099M, 099N, 0E48 and 0941
 (blueprint: lem-sp-completion-mate-comparison).
 
@@ -1103,7 +1103,7 @@ def Morphism.directLimitIso {V U : Site.{u}} (f : Morphism V U)
     ((V.deltaAdjunction A).comp (f.towerAdjunction A)) (f.constantPullIso A)
 
 /-- The finite quotient ring and its original coefficient action.
-Source: smooth-purity blueprint, fix-lem-exchanges Step 4
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Step 4
 (blueprint: lem-sp-completion-mate-comparison). -/
 abbrev quotientRing (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :=
   A ⧸ I ^ (n + 1)
@@ -1733,7 +1733,7 @@ def projectionComparison {f : Morphism Y X} {g : Morphism Y Y'}
     (g.towerPull A).map (f.towerProjection A I K)
 
 /-- Each positive quotient is perfect as an A-complex: bounded finite projectives.
-Source: smooth-purity blueprint, fix-lem-exchanges Step 4
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Step 4
 (blueprint: lem-sp-completion-mate-comparison). -/
 def PerfectQuotients (A : Type u) [CommRing A] (I : Ideal A) : Prop :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} A)
@@ -2441,8 +2441,8 @@ def comparisonT {h : Morphism X X'} {k : Morphism Y' X'}
 /-- The whole-diagram mate comparison, including invertibility and the two finite
 coefficient normalization clauses.
 
-Source: smooth-purity blueprint, fix-lem-exchanges Proof Step 4; ingredient sources
-Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Proof Step 4;
+ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
 (blueprint: lem-sp-completion-mate-comparison).
 
 Proof, following the ten steps of the DAG node:

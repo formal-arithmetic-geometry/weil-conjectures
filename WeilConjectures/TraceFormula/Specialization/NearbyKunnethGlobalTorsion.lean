@@ -63,7 +63,7 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- **The proper exchange for the structure morphism, with finite coefficients** (blueprint
-`det-sp-nearby-cycles-exchanges` (2); SGA 7 XIII (2.1.7.1)): for a model `M` of finite type over
+`prose-E-03` (2); SGA 7 XIII (2.1.7.1)): for a model `M` of finite type over
 the trait `Spec k'⟦t⟧` along a proper `q`, the pushforward exchange
 `χ : Ψ_S Rg_* K ⟶ R(q_s)_* Ψ_M K` of the structure morphism `(q, g) : M ⟶ S` is an isomorphism at
 every complex `K` on the geometric generic fibre bounded below of étale origin. -/
@@ -220,9 +220,9 @@ local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResi
 
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula with coefficients `𝔽_E`** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, equation (4)): let `P` be the product over the henselian
-trait `Spec k'⟦t⟧`, `k'` separably closed with `ℓ ≠ char k'`, of models `M`, `N` of finite type
-along proper structure morphisms, with projections compatible with the structure morphisms to
+`proposition-external-kunneth-formula-nearby-cycles`, equation (4)): let `P` be the product over the
+henselian trait `Spec k'⟦t⟧`, `k'` separably closed with `ℓ ≠ char k'`, of models `M`, `N` of finite
+type along proper structure morphisms, with projections compatible with the structure morphisms to
 `Spec Ω`. For bounded constructible complexes `A`, `B` of module objects over `𝔽̲_E`, the direct
 image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the point `Spec k'` is an
 isomorphism. The inputs of `isIso_lowerStar_kunnethMap_finiteCoefficient` are the ordinary

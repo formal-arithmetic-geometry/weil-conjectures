@@ -26,11 +26,11 @@ to `Dᵇc` through `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchang
 
 The proof compares `χ_a` with the proper exchange of the model `M` of its geometric generic fibre
 over the trait as a model of `Spec Ω` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`,
-invertible by blueprint `det-sp-nearby-cycles-exchanges` (2),
+invertible by blueprint `prose-E-03` (2),
 `NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app`): by the square
 law of the pullback exchanges, the two differ by `Ψ_S` of the base change morphism
 `Lε^* Ra_* ⟶ Rg_* Lε^*` of the cartesian square of generic fibres, which is invertible by proper
-base change (blueprint `sk-thm-sfb-proper-base-change`,
+base change (blueprint `proposition-proper-direct-image-constructible-complexes`,
 `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), and
 by pullback exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
 
@@ -153,7 +153,7 @@ its geometric generic fibre is all of `X ×_k Spec Ω`, the proper exchange
 every bounded constructible `K` (for proper `X`). By the square law
 `NearbyCyclesModel.pushforwardExchange_square_aux`, it agrees, up to invertible pullback
 exchanges along identities and base change along identities, with the proper exchange of the
-model of the geometric generic fibre (blueprint `det-sp-nearby-cycles-exchanges` (2)) composed
+model of the geometric generic fibre (blueprint `prose-E-03` (2)) composed
 with `Ψ_S` of the proper base change morphism of the square of generic fibres. -/
 theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]

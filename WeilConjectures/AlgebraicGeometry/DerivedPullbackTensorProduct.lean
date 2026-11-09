@@ -53,22 +53,22 @@ There is no derived tensor bifunctor on `D(𝒪_X)`, so the statement is made on
 representatives: every `K, L ∈ D(𝒪_S)` are `Q(P), Q(N)` with `P, N` K-flat
 (lem-pc-kflat-resolution), and then `K ⊗^L L = Q(Tot(P ⊗ N))`. The functor `F` is the
 recorded termwise module pullback `Scheme.Modules.tensorPullback g` and `ε` is the
-left-derived counit of `derivedPullback g` (the form of def-pc-derived-pullback and
-lem-pc-flat-complex-derived-pullback); `Lg^*K = Q(g^*P)` and `Lg^*L = Q(g^*N)` through `ε`,
-and `g^*P` is K-flat (lem-pc-kflat-pullback-preservation), so
+left-derived counit of `derivedPullback g` (the form of
+lemma-coherent-base-change-invertible-sheaves--2 and
+lemma-coherent-base-change-invertible-sheaves--2); `Lg^*K = Q(g^*P)` and `Lg^*L = Q(g^*N)` through
+`ε`, and `g^*P` is K-flat (lem-pc-kflat-pullback-preservation), so
 `Lg^*K ⊗^L Lg^*L = Q(Tot(g^*P ⊗ g^*N))`. The complex isomorphism
-`φ P N : g^*Tot(P ⊗ N) ≅ Tot(g^*P ⊗ g^*N)` is the canonical one: on each summand
-`P^p ⊗ N^q` it is the module pullback tensor isomorphism of
-lem-weil-pbc-module-pullback-tensor, and it is natural in `P` and `N`. The canonical map
-`Lg^*(Q(Tot(P ⊗ N))) ⟶ Q(Tot(g^*P ⊗ g^*N))`, the counit followed by `Q(φ P N)`, is an
-isomorphism; naturality of `ε` and of `φ` gives naturality in `K` and `L`.
+`φ P N : g^*Tot(P ⊗ N) ≅ Tot(g^*P ⊗ g^*N)` is the canonical one: on each summand `P^p ⊗ N^q` it is
+the module pullback tensor isomorphism of lem-weil-pbc-module-pullback-tensor, and it is natural in
+`P` and `N`. The canonical map `Lg^*(Q(Tot(P ⊗ N))) ⟶ Q(Tot(g^*P ⊗ g^*N))`, the counit followed by
+`Q(φ P N)`, is an isomorphism; naturality of `ε` and of `φ` gives naturality in `K` and `L`.
 
 Proof (the node's two steps):
 1. Choose K-flat resolutions of both arguments using `lem-pc-kflat-resolution`. Their
    pullbacks are K-flat by `lem-pc-kflat-pullback-preservation`; the tensor total complex is
    K-flat by `lem-pc-kflat-tensor-product`, so these complexes represent the three derived
-   tensors via `def-pc-derived-pullback` and `def-pc-tensor-complex-sheaves`; in particular
-   the counit `ε` is invertible at `Tot(P ⊗ N)`.
+   tensors via `lemma-coherent-base-change-invertible-sheaves--2` and
+   `def-pc-tensor-complex-sheaves`; in particular the counit `ε` is invertible at `Tot(P ⊗ N)`.
 2. The module pullback tensor isomorphisms of `lem-weil-pbc-module-pullback-tensor`,
    degreewise and natural in both factors, form an isomorphism of total complexes `φ`.
    Passing to the derived categories gives the displayed comparison and its naturality. -/

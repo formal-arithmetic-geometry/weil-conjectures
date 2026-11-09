@@ -19,7 +19,7 @@ an open commutes with the higher direct images, by étale base change for the de
 image (`AlgebraicGeometry.Etale.upperStarHomologyRightDerivedLowerStarIso`), and
 constructibility is local on open covers
 (`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_iSup_eq_top`). This is the target
-localisation of the blueprint proof of `lem-finrepair-projective-from-line`.
+localisation of the blueprint proof of `proposition-proper-direct-image-finite-coefficients`.
 -/
 
 @[expose] public section

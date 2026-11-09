@@ -212,7 +212,7 @@ Proof (the five steps of the node):
 1. Transport finite generation through the given `A`-linear isomorphism, reducing to
    `M = f_* F` (`lem-weil-pbc-affine-module-correspondence`). An epimorphism from a
    finite free module means every section is locally a linear combination of its
-   basis images (`def-weil-sheaf-of-modules-category`,
+   basis images (`situation-conventions`,
    `def-weil-pbc-module-finite-type-presentation`). Generation restricts to smaller
    opens. Affine opens form a basis, and their inverse images are affine.
 2. On an affine open `V` of `X`, set `B = O_U(f⁻¹ V)`. A finite family generating

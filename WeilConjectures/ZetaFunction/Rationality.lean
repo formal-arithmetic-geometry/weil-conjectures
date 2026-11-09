@@ -14,7 +14,7 @@ public import WeilConjectures.ZetaLinearAlgebra.Rationality
 
 Let `X₀` be a scheme of finite type over the finite field `k₀ = 𝔽_q`. Then its zeta series
 `Z(X₀, T)` is a rational function: `B(T) Z(X₀, T) = A(T)` for integer polynomials `A, B` with
-`B(0) = 1` (blueprint `det-thm-rationality`).
+`B(0) = 1` (blueprint `corollary-point-counting-zeta-function--7`).
 
 For `X₀` separated, the Grothendieck–Lefschetz trace formula with compact supports
 (`AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology`) writes
@@ -36,11 +36,11 @@ rationality propagates to `W ∪ U`.
 - `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq_of_isSeparated`: rationality of the
   zeta series in the separated case, via the trace formula.
 - `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq`: rationality of the zeta series of
-  a scheme of finite type over a finite field (`det-thm-rationality`).
+  a scheme of finite type over a finite field (`corollary-point-counting-zeta-function--7`).
 - `AlgebraicGeometry.Scheme.Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat`
-  (`prop-rational-descent`) and
+  (`corollary-point-counting-zeta-function--7`) and
   `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries_and_exists_rat_mul_eq`
-  (`prop-weil-zeta-integral-rational`).
+  (`prose-19-06`).
 -/
 
 @[expose] public section
@@ -257,9 +257,9 @@ theorem Hom.exists_int_mul_zetaSeries_eq_of_isSeparated {Y : Scheme.{u}}
           exact ⟨⟨(i - a₀).toNat, by omega⟩, by simp; omega⟩ }
   exact Hom.zetaSeries_rational_of_traceDatum g D fun n ↦ rfl
 
-/-- Blueprint `det-thm-rationality` (rationality of the zeta series): for a scheme `X₀` of finite
-type (quasi-compact and locally of finite type) over a finite field `k`, there are integer
-polynomials `A, B` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`.
+/-- Blueprint `corollary-point-counting-zeta-function--7` (rationality of the zeta series): for a
+scheme `X₀` of finite type (quasi-compact and locally of finite type) over a finite field `k`, there
+are integer polynomials `A, B` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`.
 
 The separated case is `Hom.exists_int_mul_zetaSeries_eq_of_isSeparated`; in general `X₀` is a
 finite union of affine opens, and the zeta series is multiplicative for the inclusion-exclusion
@@ -301,9 +301,9 @@ theorem Hom.exists_int_mul_zetaSeries_eq {X : Scheme.{u}} (f : X ⟶ Spec (.of k
   rw [htop, Hom.zetaSeries_congr _ f fun n _ ↦ f.pointCount_top_ι_comp n] at h
   exact h
 
-/-- Blueprint `prop-rational-descent` (rational descent of the zeta series): the zeta series
-`Z(X₀, T) = ∑ zₙ Tⁿ` of a scheme `X₀` of finite type over a finite field has a Hankel matrix of
-finite rank over `ℚ`, i.e. the span of the shifts of its coefficient sequence is
+/-- Blueprint `corollary-point-counting-zeta-function--7` (rational descent of the zeta series): the
+zeta series `Z(X₀, T) = ∑ zₙ Tⁿ` of a scheme `X₀` of finite type over a finite field has a Hankel
+matrix of finite rank over `ℚ`, i.e. the span of the shifts of its coefficient sequence is
 finite-dimensional, and `Z(X₀, T) ∈ ℚ(T)`, i.e. `B(T) Z(X₀, T) = A(T)` for rational polynomials
 with `B(0) = 1`.
 
@@ -321,12 +321,12 @@ theorem Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat {X : Scheme.{u
     exact ⟨A.map (Int.castRingHom ℚ), B.map (Int.castRingHom ℚ), by simp [hB], hAB⟩
   exact ⟨(PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan _).1 h, h⟩
 
-/-- Blueprint `prop-weil-zeta-integral-rational` (the zeta series is integral and rational): the
+/-- Blueprint `prose-19-06` (the zeta series is integral and rational): the
 zeta series of a scheme `X₀` of finite type over a finite field lies in
 `(1 + T ℤ⟦T⟧) ∩ ℚ(T)`.
 
-The blueprint states this in the situation of `prop-rational-descent` (`X₀` smooth, proper and
-geometrically connected); it holds for any `X₀` of finite type. -/
+The blueprint states this in the situation of `corollary-point-counting-zeta-function--7` (`X₀`
+smooth, proper and geometrically connected); it holds for any `X₀` of finite type. -/
 theorem Hom.exists_int_zetaSeries_and_exists_rat_mul_eq {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
     (∃ Z : PowerSeries ℤ, PowerSeries.constantCoeff Z = 1 ∧
