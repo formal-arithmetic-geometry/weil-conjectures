@@ -193,7 +193,7 @@ private theorem closedAdjoint
   let _ := hleft
   exact ⟨hclosed, H₀, ⟨ash⟩⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The derived adjunction and diagram instances need a larger elaboration budget.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
@@ -263,6 +263,11 @@ theorem condensed_local_piece_costalk_model
   classical
   let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
   let B := Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasExactColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I B := inferInstance
+  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
+  have : HasColimitsOfShape I (CochainComplex B ℤ) := inferInstance
   obtain ⟨hclosed, H₀, ⟨ash⟩⟩ := closedAdjoint T Λ i
   let _ := hclosed
   have := ash.right_adjoint_additive
