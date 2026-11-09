@@ -43,7 +43,6 @@ open DiagonalCoefficients
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The canonical conjugate section comparison. Source: blueprint unit/counit clause 2
 (blueprint: def-sfb-projective-diagonal-composition). -/
@@ -57,7 +56,6 @@ def pushSectionIso (Y : Scheme.{u}) :
     (pullSectionIso Λ Y (secondProjection Y) (pullback.diagonal_snd _))
 
 set_option linter.unusedSectionVars false in
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Closed direct image on internal modules is exact. Source: blueprint unit/counit,
 proof steps 6 and 8 (blueprint: def-sfb-projective-diagonal-composition).
@@ -102,7 +100,6 @@ theorem diagonalPush_preservesFiniteColimits (Y : Scheme.{u}) :
 
 attribute [instance] diagonalPush_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The actual single-degree comparison for the supported coefficient unit. Source:
 blueprint clause 2 (blueprint: def-sfb-projective-diagonal-composition). -/

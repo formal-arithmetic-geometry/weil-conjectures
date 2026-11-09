@@ -241,7 +241,6 @@ private def refinementRestriction
       exact (Category.assoc _ _ _).symm }
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 private theorem refinementRestriction_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {T₁ T₂ X : Scheme.{u}} (v : T₁ ⟶ T₂) [IsProper v]
