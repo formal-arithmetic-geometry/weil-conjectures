@@ -240,6 +240,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
+set_option backward.isDefEq.respectTransparency false in
 omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
 /-- Ordinary completed-to-native scalar mates respect finite completed coefficient change.
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 07A6, pasting of scalar mates.
