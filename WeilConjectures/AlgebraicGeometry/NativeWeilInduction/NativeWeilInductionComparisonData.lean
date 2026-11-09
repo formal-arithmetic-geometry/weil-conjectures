@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.CategoryTheory.Endofunctor.FreeDerivedWeilResolution
 public import WeilConjectures.AlgebraicGeometry.Native.NativeAdicCompactSupportSums
