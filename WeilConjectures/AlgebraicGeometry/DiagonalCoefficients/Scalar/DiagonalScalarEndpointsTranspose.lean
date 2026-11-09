@@ -150,7 +150,7 @@ theorem scalarRealizedEndpoints_transpose
     (((ScalarCompatibility.compositeAdjunction s t).comp
       (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
         (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse
-          (ScalarCompatibility.compositeRestriction s t)).symm).homEquiv _ _
+          (ScalarCompatibility.compositeRestriction s t))).homEquiv _ _
       (e.F.mapDerivedCategory.map
           ((derivedScalars b (diagonalSurface Y)).map s.lineW.iso.hom ≫ t.lineW.iso.hom) ≫
         (e.F.mapDerivedCategorySingleFunctor 0).hom.app _ ≫
@@ -228,7 +228,7 @@ theorem scalarRealizedAdjunction_commShift
     (((ScalarCompatibility.compositeAdjunction s t).comp
       (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
         (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse
-          (ScalarCompatibility.compositeRestriction s t)).symm).CommShift ℤ := by
+          (ScalarCompatibility.compositeRestriction s t))).CommShift ℤ := by
   let : (ScalarCompatibility.scalarAdjunction a (diagonalSurface Y)).CommShift ℤ :=
     scalarAdjunction_commShift _ _
   let : (ScalarCompatibility.scalarAdjunction b (diagonalSurface Y)).CommShift ℤ :=
@@ -244,6 +244,6 @@ theorem scalarRealizedAdjunction_commShift
       (UniformizerSquareData.finiteAdjunction e) using 1
   exact rightIso_commShift _
     (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse
-      (ScalarCompatibility.compositeRestriction s t)).symm hcomp
+      (ScalarCompatibility.compositeRestriction s t)) hcomp
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

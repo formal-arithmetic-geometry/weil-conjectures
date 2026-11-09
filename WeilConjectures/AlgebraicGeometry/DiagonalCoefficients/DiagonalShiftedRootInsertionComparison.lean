@@ -73,7 +73,7 @@ theorem shiftedRootInsertion_comparison
     (f : M ⟶ Q.obj N) (g : M ⟶ R.obj L) (h : L ⟶ H.obj N)
     (hh : f ≫ s.hom.app N = g ≫ R.map h) :
     shiftedRootInsertion Q f ≫
-      (Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso H R).hom.app
+      (Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso H R).symm).hom.app
         (((DerivedCategory.singleFunctor E 0).obj N)⟦(2 : ℤ)⟧) ≫
       R.mapDerivedCategory.map
         ((H.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app _ ≫
@@ -81,7 +81,7 @@ theorem shiftedRootInsertion_comparison
     shiftedRootInsertion R g ≫
       R.mapDerivedCategory.map (((DerivedCategory.singleFunctor D 0).map h)⟦(2 : ℤ)⟧') := by
   let σ := (Functor.mapDerivedCategoryNatIso s ≪≫
-    Functor.mapDerivedCategoryCompIso H R).hom
+    (Functor.mapDerivedCategoryCompIso H R).symm).hom
   have hz :
       ((DerivedCategory.singleFunctor C 0).map f ≫
           (Q.mapDerivedCategorySingleFunctor 0).inv.app N) ≫ σ.app _ ≫
@@ -92,7 +92,7 @@ theorem shiftedRootInsertion_comparison
     apply (cancel_mono ((R.mapDerivedCategorySingleFunctor 0).hom.app (H.obj N))).mp
     simp only [Category.assoc]
     dsimp only [σ, Iso.trans_hom, NatTrans.comp_app]
-    simp only [Category.assoc]
+    simp only [Category.assoc, Iso.symm_hom]
     rw [Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor H R Q s N]
     simp only [Iso.inv_hom_id_app_assoc]
     rw [← (DerivedCategory.singleFunctor C 0).map_comp, hh,
