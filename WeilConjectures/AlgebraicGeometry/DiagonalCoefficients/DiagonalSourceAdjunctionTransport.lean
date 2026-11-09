@@ -89,13 +89,13 @@ private theorem equivalence_counit_single (e : C ≌ D)
     (e.functor.mapDerivedCategory.map ((e.inverse.mapDerivedCategorySingleFunctor 0).hom.app N))]
   simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  change (Functor.mapDerivedCategoryCompIso e.inverse e.functor).inv.app _ ≫
+  change (Functor.mapDerivedCategoryCompIso e.inverse e.functor).hom.app _ ≫
       (Functor.mapDerivedCategoryNatIso e.counitIso).hom.app _ ≫
         (Functor.mapDerivedCategoryIdIso D).hom.app _ = _
   rw [SheafExactDegreeZero.derived_id_single,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor e.inverse e.functor N]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem equivalence_homEquiv_single (e : C ≌ D)
     [e.functor.Additive] [e.inverse.Additive] (M : C) (N : D)
@@ -138,19 +138,19 @@ private theorem composite_homEquiv_single
       (R.mapDerivedCategorySingleFunctor 0).inv.app N)
     (hg : b.homEquiv _ _ g = (DerivedCategory.singleFunctor D 0).map w ≫
       (S.mapDerivedCategorySingleFunctor 0).inv.app P) :
-    ((a.comp b).ofNatIsoRight (Functor.mapDerivedCategoryCompIso S R).symm).homEquiv _ _
+    ((a.comp b).ofNatIsoRight (Functor.mapDerivedCategoryCompIso S R)).homEquiv _ _
         (G.map f ≫ g) =
       (DerivedCategory.singleFunctor C 0).map (v ≫ R.map w) ≫
         ((S ⋙ R).mapDerivedCategorySingleFunctor 0).inv.app P := by
   rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv]
   change a.homEquiv _ _ (b.homEquiv _ _ (G.map f ≫ g)) ≫
-    (Functor.mapDerivedCategoryCompIso S R).inv.app _ = _
+    (Functor.mapDerivedCategoryCompIso S R).hom.app _ = _
   rw [Adjunction.homEquiv_naturality_left, hg,
     Adjunction.homEquiv_naturality_right, hf]
   rw [← cancel_mono (((S ⋙ R).mapDerivedCategorySingleFunctor 0).hom.app P)]
   simp only [Category.assoc, Iso.inv_hom_id_app, Functor.map_comp]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor S R P]
-  simp only [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
+  simp only [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [Category.comp_id, Category.comp_id]
   have hn := (R.mapDerivedCategorySingleFunctor 0).inv.naturality w
@@ -176,7 +176,7 @@ theorem finite_homEquiv_single
     (hf : a.homEquiv _ _ f = (DerivedCategory.singleFunctor C 0).map v ≫
       (R.mapDerivedCategorySingleFunctor 0).inv.app N) :
     ((a.comp e.mapDerivedCategory.toAdjunction).ofNatIsoRight
-        (Functor.mapDerivedCategoryCompIso e.inverse R).symm).homEquiv _ _
+        (Functor.mapDerivedCategoryCompIso e.inverse R)).homEquiv _ _
         (e.functor.mapDerivedCategory.map f ≫
           (e.functor.mapDerivedCategorySingleFunctor 0).hom.app N ≫
             (DerivedCategory.singleFunctor K 0).map g) =
@@ -196,7 +196,7 @@ private theorem right_comparison_single
     (R'.mapDerivedCategorySingleFunctor 0).inv.app P ≫
         (Functor.mapDerivedCategoryNatIso s).hom.app
           ((DerivedCategory.singleFunctor K 0).obj P) ≫
-        (Functor.mapDerivedCategoryCompIso H R).hom.app
+        (Functor.mapDerivedCategoryCompIso H R).inv.app
           ((DerivedCategory.singleFunctor K 0).obj P) ≫
         R.mapDerivedCategory.map ((H.mapDerivedCategorySingleFunctor 0).hom.app P) =
       (DerivedCategory.singleFunctor C 0).map (s.hom.app P) ≫
@@ -220,14 +220,14 @@ private theorem single_comparison_square
     ((DerivedCategory.singleFunctor C 0).map v ≫
       (R'.mapDerivedCategorySingleFunctor 0).inv.app P) ≫
         (Functor.mapDerivedCategoryNatIso s ≪≫
-          Functor.mapDerivedCategoryCompIso H R).hom.app
+          (Functor.mapDerivedCategoryCompIso H R).symm).hom.app
             ((DerivedCategory.singleFunctor K 0).obj P) ≫
         R.mapDerivedCategory.map ((H.mapDerivedCategorySingleFunctor 0).hom.app P) =
       ((DerivedCategory.singleFunctor C 0).map w ≫
         (R.mapDerivedCategorySingleFunctor 0).inv.app N) ≫
           R.mapDerivedCategory.map ((DerivedCategory.singleFunctor D 0).map m) := by
   dsimp only [Iso.trans_hom, NatTrans.comp_app]
-  simp only [Category.assoc]
+  simp only [Category.assoc, Iso.symm_hom]
   rw [right_comparison_single]
   have hn := (R.mapDerivedCategorySingleFunctor 0).inv.naturality m
   dsimp only [Functor.comp_map] at hn
@@ -307,7 +307,7 @@ private theorem realized_iso_transpose
     (P : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
     (c : e.F.obj N ≅ P) :
     ((a.comp (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
-      (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse H).symm).homEquiv _ _
+      (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse H)).homEquiv _ _
         (finiteSourceIso e d c).hom =
       (DerivedCategory.singleFunctor C 0).map
           (v ≫ H.map (e.F.asEquivalence.toAdjunction.homEquiv _ _ c.hom)) ≫
