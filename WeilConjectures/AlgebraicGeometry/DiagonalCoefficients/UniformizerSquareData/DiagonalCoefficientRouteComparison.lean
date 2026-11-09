@@ -131,7 +131,7 @@ attribute [local semireducible] UniformizerSquareData.cyclicEndpoints
   ((scalarAdjunction (cyclicMap l n) (diagonalSurface Y)).comp
     (finiteAdjunction q.cyclic.eW)).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso q.cyclic.eW.F.asEquivalence.inverse
-        (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y)))).symm
+        (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y))))
 
 /-- The successive composite adjunction with its exact right functor collected. -/
 @[irreducible] def quotientAdjunction :
@@ -139,7 +139,7 @@ attribute [local semireducible] UniformizerSquareData.cyclicEndpoints
   ((ScalarCompatibility.compositeAdjunction q.route.first q.route.second).comp
     (finiteAdjunction q.eW)).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
-        (ScalarCompatibility.compositeRestriction q.route.first q.route.second)).symm
+        (ScalarCompatibility.compositeRestriction q.route.first q.route.second))
 
 /-- The derived mate of the ordinary restriction comparison. This is a construction
 from actual adjunctions, independent of the diagonal arrow and both endpoint tests. -/
@@ -147,7 +147,7 @@ from actual adjunctions, independent of the diagonal arrow and both endpoint tes
     q.cyclicFunctor ⟶ q.quotientFunctor ⋙ q.restriction.mapDerivedCategory :=
   restrictionMate q.cyclicAdjunction q.quotientAdjunction q.restriction.mapDerivedCategory
     (Functor.mapDerivedCategoryNatIso s ≪≫
-      Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight)
+      (Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).symm)
 
 end UniformizerSquareData
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
