@@ -33,7 +33,8 @@ theorem level_succ_le {P Q : Complex R} (F : DecreasingFiltration P)
       Sigma.ι (fun p : ℤ ↦ (F.F p : Complex R) ⊗ (G.F (r - p) : Complex R)) p ≫
       factorThruImageSubobject _) ?_
   refine Sigma.hom_ext _ _ fun p ↦ ?_
-  simp only [level, Category.assoc, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc, imageSubobject_arrow_comp]
+  simp only [level, Category.assoc, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc,
+    imageSubobject_arrow_comp]
   rw [← id_tensorHom, tensorHom_comp_tensorHom, Category.id_comp, Subobject.ofLE_arrow]
 
 /-- The image-sum subobjects form a decreasing filtration of the total tensor.

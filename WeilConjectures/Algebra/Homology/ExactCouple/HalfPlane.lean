@@ -93,7 +93,8 @@ lemma αPow_succ' (N : ℕ) (k j i : κ) (h : k + a = j) :
       rw [X.αPow_zero k (j - a) (eq_sub_of_add_eq h), X.αPow_zero j j rfl,
         eqToHom_comp_α _ (eq_sub_of_add_eq h),
         eqToHom_refl, Category.comp_id]
-    · rw [αPow, dite_eq_right (fun h' ↦ hi (by rw [← h, h', sub_add_cancel])), αPow, dite_eq_right hi,
+    · rw [αPow, dite_eq_right (fun h' ↦ hi (by rw [← h, h', sub_add_cancel])), αPow,
+        dite_eq_right hi,
         zero_comp, comp_zero]
   | succ N ih =>
     rw [X.αPow_succ (N + 1) k i, ih (i - a), Category.assoc, ← X.αPow_succ N j i]

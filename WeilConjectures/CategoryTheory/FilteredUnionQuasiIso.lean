@@ -226,7 +226,8 @@ theorem filteredUnion_quasiIso {R : Type u} [CommRing R]
     refine union_quasiIso
       (fun m ↦ ((P m).filtration.F p : CochainComplex (ModuleCat.{v} R) ℤ))
       (fun m ↦ WeilFilteredObject.restriction (inc m) p) _ _
-      (fun m ↦ WeilFilteredObject.restriction (f m) p) (fun m ↦ WeilFilteredObject.restriction (j m) p)
+      (fun m ↦ WeilFilteredObject.restriction (f m) p)
+      (fun m ↦ WeilFilteredObject.restriction (j m) p)
       _ (fun m ↦ ?_) (fun m ↦ ?_) (fun m ↦ ?_) (hunionStep p) (hzeroStep p)
       (fun m ↦ hkillStep m p)
     · have := hj m

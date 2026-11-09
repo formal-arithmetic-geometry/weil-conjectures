@@ -262,7 +262,8 @@ lemma Refinement.stageZero_liftSieve_mem (hU : U.IsHypercover J)
   rintro T'' g' ⟨l, hl⟩
   refine ⟨pullback.lift (g' ≫ g ≫ Pi.lift x) l ?_, fun i ↦ ?_⟩
   · refine U.matching_hom_ext fun i ↦ ?_
-    simp only [Category.assoc, matchingLift_π, Pi.lift_comp_π_assoc, toMatching_π, reassoc_of% hl, hy]
+    simp only [Category.assoc, matchingLift_π, Pi.lift_comp_π_assoc, toMatching_π,
+      reassoc_of% hl, hy]
   · refine (pullback.lift_fst_assoc _ _ _ _).trans ?_
     exact (Category.assoc _ _ _).trans ((congrArg (g' ≫ ·) ((Category.assoc _ _ _).trans
       (congrArg (g ≫ ·) (Pi.lift_comp_π x i)))).trans (Category.assoc _ _ _).symm)

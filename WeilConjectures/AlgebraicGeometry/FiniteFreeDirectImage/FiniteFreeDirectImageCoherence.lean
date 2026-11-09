@@ -250,7 +250,8 @@ theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `comparison_isIso_app_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `comparison_isIso_app_private` (used by `import all` importers;
+linter.privateModule). -/
 alias comparison_isIso_app := comparison_isIso_app_private
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

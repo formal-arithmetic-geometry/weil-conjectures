@@ -48,7 +48,8 @@ def internalPerfectScalarModel (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
     DerivedCategory (AdicCompletion.Modules l E W) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  letI : (FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W).Additive := by
+  letI : (FiniteConstantModel.modelFunctor
+      (Padic.coefficientExtensionIntegers l E) W).Additive := by
     have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
       (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
     exact (AdmissibleScalarRealization.pid_scalar_assertions

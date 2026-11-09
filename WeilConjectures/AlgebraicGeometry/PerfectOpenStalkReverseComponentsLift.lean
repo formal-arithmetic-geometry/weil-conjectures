@@ -134,7 +134,8 @@ theorem exists_perfect_open_stalk_reverse_components_lift
           ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
             (homOfLE hVU)).map_isZero hz)
         have hh : h i j = 0 := hz'.eq_of_tgt _ _
-        simp only [k', dite_eq_left hi, dite_eq_right hj, Functor.map_zero, hh, zero_comp, comp_zero]
+        simp only [k', dite_eq_left hi, dite_eq_right hj, Functor.map_zero, hh, zero_comp,
+          comp_zero]
     · have hz := hbound i (by omega)
       have hz' := (openModuleStalkFunctor X V ⟨x, hxV⟩).map_isZero
         ((SheafOfModules.overMap (moduleRings X.toRingedSpace)

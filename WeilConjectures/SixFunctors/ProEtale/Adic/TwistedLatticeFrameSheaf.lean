@@ -204,7 +204,8 @@ lemma sum_frameEvalHom_frameExtHom (k : ℕ) :
     ∑ i, frameEvalHom k i ≫ frameExtHom hγ k i = 𝟙 ((frameTower f γ).obj (op k)) := by
   refine frameEvalHom_ext fun j ↦ ?_
   simp only [Preadditive.sum_comp, Category.assoc, frameEvalHom_frameExtHom, Category.id_comp]
-  rw [Finset.sum_eq_single j (fun b _ hb ↦ by rw [ite_eq_right hb, comp_zero]) (by simp), ite_eq_left rfl,
+  rw [Finset.sum_eq_single j (fun b _ hb ↦ by rw [ite_eq_right hb, comp_zero]) (by simp),
+    ite_eq_left rfl,
     Category.comp_id]
 
 /-- The restriction to `V` of the pro-étale tower, at level `k`, as a direct sum of copies of

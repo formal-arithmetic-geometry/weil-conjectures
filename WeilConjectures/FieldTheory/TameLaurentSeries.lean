@@ -179,7 +179,8 @@ theorem irreducible_X_pow_sub_C_X_of_ne_zero {N : ℕ} (hN : N ≠ 0) :
       rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C, ite_eq_right hn.ne]
       split_ifs <;> simp)
     (by
-      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C, ite_eq_right (Ne.symm hN),
+      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C,
+        ite_eq_right (Ne.symm hN),
         ite_eq_left rfl, zero_sub,
         Ideal.span_singleton_pow, Ideal.mem_span_singleton, dvd_neg]
       intro h

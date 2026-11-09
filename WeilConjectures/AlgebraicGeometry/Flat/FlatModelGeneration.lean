@@ -404,7 +404,8 @@ private theorem flatModel_etale_ordered_filtration
         ext x
         simp only [T, Set.mem_iUnion, Set.mem_empty_iff_false, iff_false, not_exists]
         intro k
-        simp only [ite_eq_right (by omega : ¬r.val ≤ k.val), Set.mem_empty_iff_false, not_false_eq_true]
+        simp only [ite_eq_right (by omega : ¬r.val ≤ k.val), Set.mem_empty_iff_false,
+          not_false_eq_true]
       rw [he]
       exact isClosed_empty
   let U (r : Fin (str.n + 1)) : X.Opens := ⟨(T r)ᶜ, (hT r).isOpen_compl⟩

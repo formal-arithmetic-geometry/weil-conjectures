@@ -223,7 +223,8 @@ theorem Divisor.degree_pullback_single
     refine hx ?_
     rw [hF]
     dsimp only
-    rw [finsum_eq_dif, dite_eq_right fun (h : π x = y) ↦ hxc (π.isClosed_singleton_of_apply (h ▸ hyc))]
+    rw [finsum_eq_dif,
+      dite_eq_right fun (h : π x = y) ↦ hxc (π.isClosed_singleton_of_apply (h ▸ hyc))]
   have hC : ∑ᶠ x ∈ closedPoints X, F x = ∑ᶠ x, F x := finsum_congr fun x ↦ by
     by_cases hx : x ∈ closedPoints X
     · rw [finsum_eq_if, ite_eq_left hx]

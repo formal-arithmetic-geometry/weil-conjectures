@@ -555,7 +555,8 @@ private theorem principalPositiveRoos (T : Scheme.{u})
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
       Preadditive.sub_comp,
-      Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, hs, sub_self, zero_comp]
+      Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, hs, sub_self,
+      zero_comp]
   obtain ⟨b, hb, hu⟩ := strictPrincipalLevels l E T P
   apply AdicCompletion.quotientTowerComparison μ (fun n ↦ X.obj (op n)) t u hz
     (fun n ↦ (b n).inv) (fun _ ↦ inferInstance)

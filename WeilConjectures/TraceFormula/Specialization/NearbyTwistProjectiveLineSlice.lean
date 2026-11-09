@@ -281,7 +281,8 @@ theorem nonempty_tateTwistDerived_one_iso_zero {K : Type u} [Field K] [IsSepClos
         (tateModule X ℓ) (upperStarMapModTateModuleIsoUnit (𝟙 X) f ℓ hζ hζ')
   let e₂ : tateTwist X ℓ ((1 : ℕ) : ℤ) ≅ 𝟙_ _ :=
     (λ_ (tateTwistOne X ℓ) ≪≫ e₁ : 𝟙_ _ ⊗ tateTwistOne X ℓ ≅ 𝟙_ _)
-  exact ⟨(DerivedCategory.singleFunctor _ 0).mapIso e₂ ≪≫ DerivedCategory.singleFunctorObjUnitIso _ ≪≫
+  exact ⟨(DerivedCategory.singleFunctor _ 0).mapIso e₂ ≪≫
+    DerivedCategory.singleFunctorObjUnitIso _ ≪≫
     (tateTwistDerivedZeroIso ℓ X).symm⟩
 
 variable (K : Type u) [Field K]

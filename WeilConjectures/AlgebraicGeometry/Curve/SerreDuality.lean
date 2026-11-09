@@ -755,7 +755,8 @@ theorem maximalIdeal_stalk_eq_span_germ_of_isOpenImmersion {Y : Scheme.{u}} {R :
     (χ : Spec R ⟶ Y) [IsOpenImmersion χ] (w : Spec R) (a : R)
     (hw : w.asIdeal = Ideal.span {a}) :
     maximalIdeal (Y.presheaf.stalk (χ w)) = Ideal.span
-      {Y.presheaf.germ (χ ''ᵁ ⊤) (χ w) ⟨w, trivial, rfl⟩ ((χ.appIso ⊤).inv ((Scheme.ΓSpecIso R).inv a))} := by
+      {Y.presheaf.germ (χ ''ᵁ ⊤) (χ w) ⟨w, trivial, rfl⟩
+        ((χ.appIso ⊤).inv ((Scheme.ΓSpecIso R).inv a))} := by
   have : w.asIdeal.IsPrime := PrimeSpectrum.isPrime w
   let e : Y.presheaf.stalk (χ w) ≃+* Localization.AtPrime w.asIdeal :=
     (asIso (χ.stalkMap w) ≪≫ Spec.stalkIso R w).commRingCatIsoToRingEquiv

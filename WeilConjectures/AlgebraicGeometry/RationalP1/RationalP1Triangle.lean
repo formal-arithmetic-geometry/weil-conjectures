@@ -299,7 +299,8 @@ theorem rationalP1_triangle
         (exceptional l c k p hpl Y).map ((unitCounit l c k p hpl Y family).2.app K)).hom =
       diagonalIntegralAction (coefficient l c).X Y (line l c) (diagram l c Y family) 1
         ((exceptional l c k p hpl Y).obj K).obj := by
-    simpa only [diagonalIntegralAction, diagonalIntegral, ite_eq_right (by decide : (1 : Fin 2) ≠ 0),
+    simpa only [diagonalIntegralAction, diagonalIntegral,
+      ite_eq_right (by decide : (1 : Fin 2) ≠ 0),
       Category.assoc] using h₂ K
   have hi₁ (M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y)) :
       (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map

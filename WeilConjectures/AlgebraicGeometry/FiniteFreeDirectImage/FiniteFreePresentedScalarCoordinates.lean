@@ -22,7 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-local instance (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+local instance unitSMul_presentedScalarCoordinates (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (M : proEtaleRingModules X R) (V : X.ProEtᵒᵖ) :
     SMul ((SheafOfModules.unit ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)).val.obj V) (M.val.obj V) :=

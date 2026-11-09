@@ -396,7 +396,8 @@ private theorem localizedArrow_iso_hom
     [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : F ⋙ G ≅ H ⋙ K) :
     localizedArrow F G H K e.hom =
       (Functor.mapDerivedCategoryCompIso F G ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso H K).symm).hom := by
+        Functor.mapDerivedCategoryNatIso e ≪≫
+        (Functor.mapDerivedCategoryCompIso H K).symm).hom := by
   simp only [localizedArrow, Iso.trans_hom, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso, Localization.liftNatIso_hom,
     NatIso.mapHomologicalComplex, Functor.isoWhiskerRight_hom]
@@ -414,7 +415,8 @@ private theorem localizedArrow_iso_inv
     [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : H ⋙ K ≅ F ⋙ G) :
     localizedArrow F G H K e.inv =
       (Functor.mapDerivedCategoryCompIso H K ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).inv := by
+        Functor.mapDerivedCategoryNatIso e ≪≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).inv := by
   simp only [localizedArrow, Iso.trans_inv, Iso.symm_inv,
     Functor.mapDerivedCategoryNatIso, Localization.liftNatIso_inv,
     NatIso.mapHomologicalComplex, Functor.isoWhiskerRight_inv, Category.assoc]

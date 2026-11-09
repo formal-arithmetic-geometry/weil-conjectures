@@ -62,7 +62,8 @@ private lemma seqDelta_injective (T : Module.End R M) : Function.Injective (seqD
     have := Finset.le_max' q.support (k + 1) (Finsupp.mem_support_iff.mpr h)
     omega
   have hh := DFunLike.congr_fun hq (k + 1)
-  exact hk (by simpa [seqDelta, Finsupp.mapDomain_apply_of_injective Nat.succ_injective, hk'] using hh)
+  exact hk (by simpa [seqDelta, Finsupp.mapDomain_apply_of_injective Nat.succ_injective,
+    hk'] using hh)
 private lemma seqDelta_correction (T : Module.End R M) (q : ℕ →₀ M) :
     ∃ p, seqDelta T p = q - Finsupp.single 0 (seqEval T q) := by
   classical

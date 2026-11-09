@@ -818,13 +818,15 @@ private theorem localize_scalar_cube
     (br : Qf.mapDerivedCategory ⋙ Df.mapDerivedCategory ≅
       C₀f.mapDerivedCategory ⋙ Q₁f.mapDerivedCategory)
     (hai : (Functor.mapDerivedCategoryCompIso If Hf ≪≫
-      Functor.mapDerivedCategoryNatIso bi0 ≪≫ (Functor.mapDerivedCategoryCompIso C₀f I₁f).symm) = ai)
+      Functor.mapDerivedCategoryNatIso bi0 ≪≫
+      (Functor.mapDerivedCategoryCompIso C₀f I₁f).symm) = ai)
     (hak : (Functor.mapDerivedCategoryCompIso Kf Af ≪≫
       Functor.mapDerivedCategoryNatIso bk0 ≪≫ (Functor.mapDerivedCategoryCompIso Df K₁f).symm) = ak)
     (hbp : (Functor.mapDerivedCategoryCompIso Pf Af ≪≫
       Functor.mapDerivedCategoryNatIso gp0 ≪≫ (Functor.mapDerivedCategoryCompIso Hf P₁f).symm) = bp)
     (hbr : (Functor.mapDerivedCategoryCompIso Qf Df ≪≫
-      Functor.mapDerivedCategoryNatIso gr0 ≪≫ (Functor.mapDerivedCategoryCompIso C₀f Q₁f).symm) = br)
+      Functor.mapDerivedCategoryNatIso gr0 ≪≫
+      (Functor.mapDerivedCategoryCompIso C₀f Q₁f).symm) = br)
     (d0 : If.mapDerivedCategory ⋙ Pf.mapDerivedCategory ⟶
       Qf.mapDerivedCategory ⋙ Kf.mapDerivedCategory)
     (d1 : I₁f.mapDerivedCategory ⋙ P₁f.mapDerivedCategory ⟶

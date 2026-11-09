@@ -58,7 +58,8 @@ private lemma compIso_hom_eq_conjugate (e : F ⋙ G ≅ H) (eL : L ≅ L₂ ⋙ 
       conjugateEquiv (adj₂.mapDerivedCategoryRightDerivedAdjunction.comp
           adj₁.mapDerivedCategoryRightDerivedAdjunction)
         adj.mapDerivedCategoryRightDerivedAdjunction
-        (Functor.mapDerivedCategoryNatIso eL ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm).hom := by
+        (Functor.mapDerivedCategoryNatIso eL ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom := by
   apply (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).rightDerived_ext
     (Functor.rightDerivedFunctorCompUnit F G) (HomotopyCategory.quasiIso C (.up ℤ))
   ext X

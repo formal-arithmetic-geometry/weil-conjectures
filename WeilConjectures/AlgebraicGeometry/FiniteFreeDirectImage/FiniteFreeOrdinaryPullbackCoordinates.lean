@@ -253,8 +253,7 @@ private theorem presentedTensor_hom_ext_private (X : Scheme.{u}) (s : ScalarMode
   | tmul b m => exact h V b m
   | add x y hx hy => simp_all
 
-attribute [local instance]
-  instSMulCarrierCarrierObjOppositeProEtRingCatObjFunctorIsSheafTopologySheafCommRingCatSheafComposeForget₂RingHomCarrierObjValUnit_weilConjectures
+attribute [local instance] unitSMul_presentedScalarCoordinates
 
 set_option maxHeartbeats 400000 in
 -- Elaborating the projected square expands both scalar and geometric adjunctions.
@@ -384,7 +383,8 @@ theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `presentedTensor_hom_ext_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `presentedTensor_hom_ext_private` (used by `import all` importers;
+linter.privateModule). -/
 alias presentedTensor_hom_ext := presentedTensor_hom_ext_private
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

@@ -193,7 +193,8 @@ theorem IsHypercover.coneSieve_mem (hU : U.IsHypercover J) :
       if hσ : ∃ y : W'' ⟶ U.obj (0 + 1), ∀ i, y ≫ U.δ 0 i = g' ≫ x σ i then
         some hσ.choose else none
     refine ⟨g' ≫ v, Function.update (fun _ _ ↦ none) 0 k, fun σ hσ ↦ ?_⟩
-    refine ⟨(hy σ hσ).choose, by simp only [Function.update_self, k, dite_eq_left (hy σ hσ)], ?_, ?_⟩
+    refine ⟨(hy σ hσ).choose,
+      by simp only [Function.update_self, k, dite_eq_left (hy σ hσ)], ?_, ?_⟩
     · simpa [x] using (hy σ hσ).choose_spec 1
     · simpa [x] using (hy σ hσ).choose_spec 0
   | m + 1, W, A => by

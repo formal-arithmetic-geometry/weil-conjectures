@@ -143,7 +143,8 @@ theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
-/-- Public export of the private `mate_columns_private` (used by `import all` importers; linter.privateModule). -/
+/-- Public export of the private `mate_columns_private` (used by `import all` importers;
+linter.privateModule). -/
 alias mate_columns := mate_columns_private
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

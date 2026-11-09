@@ -38,7 +38,8 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
--- v4.35 tree: this override is still needed here (green in bumpF builds up to 81, timeout without it in build83);
+-- v4.35 tree: this override is still needed here (green in bumpF builds up to 81, timeout without
+-- it in build83);
 -- master removed it on the pre-bump tree.
 set_option maxHeartbeats 600000 in
 set_option synthInstance.maxHeartbeats 200000 in

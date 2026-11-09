@@ -249,7 +249,8 @@ theorem not_isZero_groupCohomology_finsupp [Nontrivial k] (ι : Type u) [Infinit
   by_cases hij : i = j
   · subst hij; simp
   · classical
-    rw [Finsupp.single_apply, ite_eq_right (fun h ↦ hij (Fin.ext (f.injective h).symm)), ite_eq_right hij]
+    rw [Finsupp.single_apply, ite_eq_right (fun h ↦ hij (Fin.ext (f.injective h).symm)),
+      ite_eq_right hij]
     simp
 
 /-- The differential of inhomogeneous cochains is precomposition with the differential of the bar
@@ -303,7 +304,8 @@ theorem exists_ext_ne_zero_finsupp.{w} [Nontrivial k] (ι : Type u) [Infinite ι
   by_cases hij : i = j
   · subst hij; simp
   · classical
-    rw [Finsupp.single_apply, ite_eq_right (fun h ↦ hij (Fin.ext (f.injective h).symm)), ite_eq_right hij]
+    rw [Finsupp.single_apply, ite_eq_right (fun h ↦ hij (Fin.ext (f.injective h).symm)),
+      ite_eq_right hij]
     simp
 
 end groupCohomology
