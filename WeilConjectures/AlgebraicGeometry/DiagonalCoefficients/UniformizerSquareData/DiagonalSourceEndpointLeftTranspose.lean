@@ -76,7 +76,7 @@ theorem source_endpoint_left_transpose
       q.extendQuotientTranspose s q.quotientTranspose := by
   constructed_exact
     (let i := Functor.mapDerivedCategoryNatIso s ≪≫
-      Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight
+      (Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).symm
      mate_endpoint_transpose q.cyclicAdjunction q.quotientAdjunction
        q.restriction.mapDerivedCategory i
        q.quotientSource.hom _
