@@ -87,9 +87,6 @@ private def single_counit
       DerivedCategory.Q ≫
     Functor.whiskerLeft E₀ (DerivedCategory.singleFunctorIsoCompQ B 0).inv
 
--- the `simp` call in the `i = 0` case is followed by `erw` steps on its result (linter.flexible);
--- the `simp only` set suggested by the linter does not close the goal on v4.35.
-set_option linter.flexible false in
 private theorem counit_square_single
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -134,9 +131,15 @@ private theorem counit_square_single
     ext i : 1
     by_cases hi : i = 0
     · subst i
-      simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
-        HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
-        HomologicalComplex.single_map_f_self]
+      simp only [Functor.comp_obj, Functor.mapHomologicalComplex_obj_X,
+        Functor.mapHomologicalComplexCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+        Category.assoc, HomologicalComplex.comp_f, NatIso.mapHomologicalComplex_hom_app_f,
+        NatIso.mapHomologicalComplex_inv_app_f, Iso.refl_inv, NatTrans.id_app,
+        Functor.mapHomologicalComplex_map_f,
+        HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
+        HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
+        Iso.refl_hom, CategoryTheory.Functor.map_id, Category.id_comp,
+        HomologicalComplex.single_map_f_self, K, a, p, eX, eY, q]
       erw [EX.map_id, Q.map_id]
       repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
     · simp [p, eX, eY, q, hi,
