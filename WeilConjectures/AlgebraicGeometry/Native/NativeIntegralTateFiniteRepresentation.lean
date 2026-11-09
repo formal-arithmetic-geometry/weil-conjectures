@@ -51,8 +51,6 @@ Source: the Integral twist paragraph of the current blueprint proof of
 `sk-prop-sfb-cartesian-coefficients-twists`.
 -/
 
--- After pruning, this module only keeps private declarations.
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 
