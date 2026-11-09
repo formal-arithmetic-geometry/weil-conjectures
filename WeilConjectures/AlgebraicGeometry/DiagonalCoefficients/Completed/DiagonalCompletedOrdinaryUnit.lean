@@ -48,8 +48,9 @@ private theorem constantRingAb_isMonHom (X : Scheme.{u}) (A : CommRingCat.{u + 1
     (Sheaf.sheafifyRingPresheafIso J S).hom
   have hf : @IsMonHom _ _ _ _ _
       ((constantSheaf J Ab.{u + 1}).monObjObj (AddCommGrpCat.of A)) _ f := by
+    have hc : IsMonHom f := by dsimp only [f]; infer_instance
     rw [constantSheafRingMonObj]
-    infer_instance
+    exact IsMonHom.of_eq f rfl rfl
   have he : f = (sfbConstantRingAbIso X A).inv := by
     apply (cancel_mono (sfbConstantRingAbIso X A).hom).mp
     rw [Iso.inv_hom_id]
