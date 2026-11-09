@@ -871,8 +871,6 @@ private lemma fcTransport
 
 attribute [local irreducible] hOpen hPullbackIso singleAlpha
 
-set_option maxHeartbeats 600000 in
--- The final categorical transport has a larger finite kernel-checking allowance.
 /-- Coefficient realization preserves the clopen alpha before taking proper mates.
 Source: Stacks Project, proetale.tex Tags 099R and 09AF, sites-modules.tex Tag 03DA,
 and sites-cohomology.tex Tag 07A7; steps 1--2

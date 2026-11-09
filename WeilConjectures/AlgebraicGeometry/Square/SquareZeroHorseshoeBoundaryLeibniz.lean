@@ -75,7 +75,7 @@ private theorem common_lifts (X : Scheme.{u})
     rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The boundary comparison elaborates several derived-category transports.
 private theorem snake_boundary_eq_triangle (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
