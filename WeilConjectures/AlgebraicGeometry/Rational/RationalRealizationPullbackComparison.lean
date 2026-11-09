@@ -461,7 +461,6 @@ structure RationalRealizationPullbackComparison (g : X ⟶ Y)
       (rationalPullDerived l E g rationalCoefficient).map
           (eqToHom (sY.objects K)) = ordinaryComparison.hom.app K.obj
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the nested restrictions unfolds the concrete sheaf module presentations.
 omit [Fact l.Prime] in
 set_option backward.isDefEq.respectTransparency true in
