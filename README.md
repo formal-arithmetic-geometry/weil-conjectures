@@ -25,23 +25,24 @@ integer polynomials:
   [Comparator](https://github.com/leanprover/comparator) challenge in
   [`Comparator/`](Comparator) (see `Comparator/config.json`).
 
-The development branches also contain the verbatim statement of the
+[`WeilConjectures/LeanEval/WeilConjectures.lean`](WeilConjectures/LeanEval/WeilConjectures.lean)
+contains the verbatim statement of the
 [lean-eval](https://github.com/leanprover/lean-eval) problem `weil_conjectures`,
 derived from the main theorem.
 
 ## Status
 
-`master` contains the reviewed statements and the reviewed part of the library. The
-complete development lives on the integration branch `slopmaster2`. The main theorems are proved without `sorry` on
-`slopmaster2` (commit `91ebbc09a7`); `#print axioms` shows only `propext`,
-`Classical.choice` and `Quot.sound`, independently verified. See
+The main theorems are proved without `sorry`. The Lean code on `master` is commit `91ebbc09a7`
+ported to Lean v4.35.0-rc3 with every statement unchanged; `91ebbc09a7` was independently built
+(from the shared build cache) and audited:
+`#print axioms` shows only `propext`, `Classical.choice` and `Quot.sound`. See
 [`formalization.yaml`](formalization.yaml) for the details of the process, the review
 status and the sources.
 
 ## Building
 
 ```bash
-git clone --recurse-submodules https://github.com/formal-arithmetic-geometry/weil-conjectures
+git clone https://github.com/formal-arithmetic-geometry/weil-conjectures
 cd weil-conjectures
 lake exe cache get
 lake build
