@@ -194,6 +194,7 @@ private theorem closedAdjoint
   exact ⟨hclosed, H₀, ⟨ash⟩⟩
 
 set_option maxHeartbeats 400000 in
+set_option diagnostics true in
 -- The derived adjunction and diagram instances need a larger elaboration budget.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
