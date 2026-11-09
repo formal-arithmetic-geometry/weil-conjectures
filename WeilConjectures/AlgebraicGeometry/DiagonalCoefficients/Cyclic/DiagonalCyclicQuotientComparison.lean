@@ -287,7 +287,8 @@ private theorem cyclicMap_shortExact (l n : ℕ) [Fact l.Prime] (W : Scheme.{u})
     apply (AddCommGrpCat.mono_iff_injective _).2
     intro a b hab
     apply ULift.ext
-    ext t
+    apply ContinuousMap.ext
+    intro t
     have h := congrArg (fun z : ULift.{u + 1} C(V.unop, ℤ_[l]) ↦ z.down t) hab
     apply mul_left_cancel₀
       (pow_ne_zero (n + 1) (PadicInt.irreducible_p (p := l)).ne_zero)
@@ -678,8 +679,13 @@ private theorem scalarCone_extension_comparison
     obtain ⟨P, p, hp, hf, hk⟩ := CochainComplex.exists_quasiIso_flat_kFlat K
     exact ⟨P, p, ⟨hf, hk⟩, hp⟩
   have hα (P : CochainComplex A ℤ) (hP : good P) : IsIso (α.app P) := by
-    have : IsIso (a.app P) :=
+    have : IsIso ((Mod.extendScalars φ).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient A (.up ℤ)).obj P)) :=
       (Mod.extendScalars φ).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP.2
+    have : IsIso (a.app P) := by
+      dsimp only [a, Mod.KFlatScalarTower.computationCounit, NatTrans.comp_app,
+        Functor.whiskerRight_app, Functor.whiskerLeft_app]
+      infer_instance
     dsimp only [α, NatTrans.comp_app, Functor.associator_inv_app,
       Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
     simp only [Category.id_comp]
@@ -911,7 +917,7 @@ theorem diagonalCyclicQuotient_comparison
           (completedDiscreteRealizationIso l W eW)
           (completedDiscreteUnderlying l W eW) eW.underlying.symm
           (completedDiscreteUnderlying_normalization l W eW) X)
-    simpa only [dh, V, Category.assoc] using
+    simpa only [dh, V, Iso.symm_hom, Category.assoc] using
       (underlying_glue (hi := hc) (hh := htX') (hn := hgn) (hf := hh))
   refine ⟨a.symm, fun X ↦ ?_⟩
   change (cyclicEvaluationAugmentation l Y n eW p).app X ≫
