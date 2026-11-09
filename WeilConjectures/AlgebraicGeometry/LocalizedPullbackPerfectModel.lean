@@ -95,7 +95,7 @@ private theorem ordinaryPullback_Q_iso {T X : Scheme.{u}} (g : T ⟶ X)
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex η (.up ℤ)).app P)⟩
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The comparison elaborates several equivalences of module and derived categories,
 -- with independent localization universes and nondefinitionally equal composite functors.
 /-- A specified local strictly perfect model computes derived pullback on its inverse-image

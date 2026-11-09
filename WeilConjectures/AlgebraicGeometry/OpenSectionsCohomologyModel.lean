@@ -255,7 +255,6 @@ private theorem over_preservesKInjective (X : RingedSpace.{u})
 set_option linter.unusedSectionVars false in
 -- Inline the standard module-derived category to match the comparison map's data.
 set_option linter.style.haveILetI false in
-set_option maxHeartbeats 300000 in
 -- The normalized comparison checks several concrete functor identifications.
 /-- The open-sections comparison is normalized on every ordinary complex class.
 Source: Stacks Project, Tags 08BS and 079V.

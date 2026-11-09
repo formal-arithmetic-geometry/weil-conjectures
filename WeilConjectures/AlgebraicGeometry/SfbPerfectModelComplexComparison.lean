@@ -22,7 +22,6 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 
--- `torsionCompletionSheafify` (free coefficient universe) gets stuck on `{u + 1}` searches.
 attribute [-instance] AlgebraicGeometry.Scheme.torsionCompletionSheafify
 
 open scoped ChangeOfRings

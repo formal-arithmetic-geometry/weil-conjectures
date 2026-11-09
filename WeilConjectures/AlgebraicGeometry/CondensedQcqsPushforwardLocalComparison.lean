@@ -112,7 +112,6 @@ private theorem comparison_isIso_of_total
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The proof compares explicit composed cocones in internal module categories.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for internal module objects needs a larger search budget.

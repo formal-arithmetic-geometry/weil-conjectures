@@ -1714,7 +1714,7 @@ theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricall
     {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [GeometricallyConnected f] :
     GeometricallyIntegral f :=
   have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected f
-  have := GeometricallyReduced.of_smooth f
+  have := Smooth.geometricallyReduced f
   .of_geometricallyReduced_of_geometricallyIrreducible f
 
 /-- **Geometric integrality.** A smooth connected scheme `X` over a separably closed field `k`,

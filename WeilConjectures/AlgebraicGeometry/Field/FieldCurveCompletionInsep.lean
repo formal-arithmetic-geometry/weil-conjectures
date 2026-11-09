@@ -176,13 +176,13 @@ private theorem constant_field_model
   have hb : B ↘ Spec (.of k) = b := rfl
   have : IsProper (B ↘ Spec (.of k)) := by rw [hb]; infer_instance
   have : GeometricallyReduced (B ↘ Spec (.of k)) := by
-    rw [hb]; exact GeometricallyReduced.of_smooth b
+    rw [hb]; exact Smooth.geometricallyReduced b
   have hA : IsField Γ(B, ⊤) := Scheme.isField_globalSections_of_universallyClosed (k := k)
   let L := Γ(B, ⊤)
   let : Field L := hA.toField
   let : Algebra k L := (Scheme.globalSectionsRingHom k (X := B)).toAlgebra
   have : Module.Finite k L := Scheme.finite_globalSectionsRingHom_of_isProper
-  have : GeometricallyReduced b := GeometricallyReduced.of_smooth b
+  have : GeometricallyReduced b := Smooth.geometricallyReduced b
   have hsep : Algebra.IsSeparable k L := separable_of_finite_separableExtension k L
     (proper_geometricallyReduced_globalSections_isSeparable k B hA)
   let := hsep

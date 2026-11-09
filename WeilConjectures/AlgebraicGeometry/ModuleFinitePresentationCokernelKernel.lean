@@ -163,7 +163,7 @@ private theorem finiteType_equivOverInverse {X : RingedSpace.{u}} (U : Topologic
   exact finiteType_pushforward_leftAdjoint U.overEquivalence.functor _
     (U.sheafOfModulesEquivOverInverseUnit (moduleRings X))
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 700000 in
 -- Transport through the slice-site equivalence expands several nested module functors.
 set_option synthInstance.maxHeartbeats 200000 in
 set_option backward.isDefEq.respectTransparency false in
