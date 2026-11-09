@@ -52,7 +52,6 @@ Source: the Integral twist paragraph of the current blueprint proof of
 -/
 
 -- After pruning, this module only keeps private declarations.
-set_option linter.privateModule false
 
 @[expose] public noncomputable section
 set_option autoImplicit false
