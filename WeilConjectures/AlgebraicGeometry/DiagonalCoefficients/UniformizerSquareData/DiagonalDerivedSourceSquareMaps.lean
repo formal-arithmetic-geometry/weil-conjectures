@@ -65,7 +65,7 @@ def sourceSquareHomType
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) : Type (u + 1) :=
   typeOf% (q.quotientTranspose ≫
     (Functor.mapDerivedCategoryNatIso s ≪≫
-      Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).hom.app _ ≫
+      (Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).symm).hom.app _ ≫
     q.cyclicRight.mapDerivedCategory.map
       ((q.restriction.mapDerivedCategorySingleFunctor 0).hom.app _))
 
@@ -75,7 +75,7 @@ def sourceSquareHomType
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (f : q.quotientTransposeType) : q.sourceSquareHomType s :=
   f ≫ (Functor.mapDerivedCategoryNatIso s ≪≫
-    Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).hom.app _ ≫
+    (Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).symm).hom.app _ ≫
     q.cyclicRight.mapDerivedCategory.map
       ((q.restriction.mapDerivedCategorySingleFunctor 0).hom.app _)
 
