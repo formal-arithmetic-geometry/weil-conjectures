@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernMaps
+public import Mathlib.CategoryTheory.Sites.LocalProperties
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernQSplittingExists
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLocalRankOneIso
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
