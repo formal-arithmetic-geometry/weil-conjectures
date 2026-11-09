@@ -38,7 +38,7 @@ private theorem derived_comp_unit
         F.mapDerivedCategory ≪≫ F.mapDerivedCategory.leftUnitor := by
   subst c
   apply Iso.ext
-  simp only [Iso.trans_hom, Iso.symm_hom]
+  simp only [Iso.trans_hom]
   rw [Functor.mapDerivedCategoryNatIso_trans]
   have hu : (Functor.mapDerivedCategoryNatIso F.leftUnitor).hom = 𝟙 _ := by
     exact Functor.mapDerivedCategoryNatIso_refl

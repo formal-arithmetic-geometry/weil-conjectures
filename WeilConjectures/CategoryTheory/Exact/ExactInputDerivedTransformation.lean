@@ -273,7 +273,7 @@ private theorem complex_fac
     ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) ht
   simp only [Category.assoc] at ht'
   erw [← Functor.map_comp] at ht'
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at ht'
+  simp only [Category.assoc, Iso.inv_hom_id_app] at ht'
   erw [Category.comp_id] at ht'
   dsimp only [complex_unit, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
   rw [Category.assoc, Category.assoc, τ.naturality_assoc, Functor.comp_map,

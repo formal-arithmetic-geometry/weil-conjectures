@@ -40,7 +40,7 @@ private theorem single_composition
       (HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) 0).hom.app (F.obj N) ≫
       (CochainComplex.singleFunctor C 0).map (c.hom.app N) := by
   apply HomologicalComplex.to_single_hom_ext
-  simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+  simp [CochainComplex.singleFunctor,
     HomologicalComplex.singleMapHomologicalComplex,
     HomologicalComplex.single, Functor.mapHomologicalComplexCompIso,
     NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex,

@@ -241,7 +241,7 @@ private theorem supportHomResolutionIso_id
   change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
   rw [Functor.map_preimage]
   simp [DerivedCategory.Plus.QCompιIso_hom_app,
-    DerivedCategory.Plus.QCompιIso_inv_app] <;> rfl
+    DerivedCategory.Plus.QCompιIso_inv_app]; rfl
 private theorem supportHomNormalization_injective
     (N : SupportedHomCocycleNormalization J A hT j B rho)
     (I : CochainComplex.Plus (Sheaf J (ModuleCat.{u + 1} A)))
@@ -296,7 +296,7 @@ private theorem supportHomModelIso_refl_hom
   simp only [Sheaf.supportSequenceModelIso, Iso.trans_hom, Iso.symm_hom,
     Functor.mapIso_hom, Iso.refl_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
     Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.id_comp]
   repeat first
     | erw [CategoryTheory.Functor.map_id]
     | erw [Category.id_comp]
@@ -336,13 +336,13 @@ private theorem supportHomExactCocycle_numerator
           (zero_add a) (a + 1) rfl hgf) := by
     apply HomologicalComplex.from_single_hom_ext
     dsimp [ShiftedHom.map]
-    simp only [singleFunctor, singleFunctors, Functor.comp_obj, shiftFunctor_obj_X',
+    simp only [singleFunctor, Functor.comp_obj,
       HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
       HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
       Category.id_comp, Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents_inv_app,
       ↓reduceDIte, eqToHom_refl, Cocycle.equivHomShift_symm_apply,
-      Functor.mapHomologicalComplex_map_f, Cocycle.homOf_f, Cocycle.rightShift_coe,
+      Cocycle.homOf_f, Cocycle.rightShift_coe,
       Cocycle.fromSingleMk_coe, zero_add, Cochain.rightShift_v, Cochain.fromSingleMk_v,
       shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq, eqToIso.inv, Functor.map_comp,
       Category.comp_id, Category.assoc, eqToHom_naturality]

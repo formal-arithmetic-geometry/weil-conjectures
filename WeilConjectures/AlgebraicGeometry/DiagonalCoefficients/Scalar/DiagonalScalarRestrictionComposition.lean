@@ -178,7 +178,7 @@ private lemma exactComp_hom_fac (R : A ⥤ B) (S : B ⥤ C) (T : A ⥤ C)
       S.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
         S.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex r.hom (.up ℤ)).app K) := by
-  simp only [exactComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [exactComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   erw [Functor.mapDerivedCategoryNatIso_fac]
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso R S).inv.app
     (DerivedCategory.Q.obj K))).1

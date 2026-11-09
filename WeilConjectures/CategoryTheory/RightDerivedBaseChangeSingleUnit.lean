@@ -112,7 +112,7 @@ private theorem single_comparison {D E : Type*} [Category* D] [Category* E]
       (F.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 X).hom := by
   apply DerivedCategory.Plus.ι.map_injective
   simp only [mapHomotopyCategoryPlusSingleFunctorQhObjIso, Functor.preimageIso_hom,
-    Functor.map_preimage, Functor.mapIso_hom]
+    Functor.map_preimage]
   change DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι E).map
     (homotopySingleIso F X).hom) = _
   simp only [homotopySingleIso, Functor.preimageIso_hom, Functor.map_preimage,
@@ -139,7 +139,7 @@ private theorem single_naturality (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
       (DerivedCategory.Plus.singleFunctor C' 0).map (e.app Y) := by
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_hom, Functor.map_preimage, Functor.mapIso_hom]
+    Functor.preimageIso_hom, Functor.map_preimage]
   simp only [Iso.trans_hom, Iso.app_hom, DerivedCategory.quotientCompQhIso,
     HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom]
   erw [Category.id_comp, Category.id_comp]
@@ -182,7 +182,7 @@ private theorem single_naturality (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
     simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
       Functor.mapHomologicalComplex_map_f,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self]
     dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
     simp only [Functor.map_id, Category.id_comp]

@@ -63,7 +63,7 @@ lemma derivedStrIso_hom_app_singleFunctor_obj (K : IsoAlgebra F) :
   have h1 := Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor (strNatIso F) K
   have h2 := Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor (forget F) F K
   simp only [strNatIso_hom_app] at h1
-  simp only [derivedStrIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [derivedStrIso, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [h1, ← h2]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl

@@ -1179,7 +1179,7 @@ private theorem pbcDerivedRestriction_leftUnit (h : E ≤ F) :
     (pbcRestrict ψ) ρ) X
   have hu := congr_app (Functor.mapDerivedCategoryCompIso_comp_id (pbcRestrict ψ)) X
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hn hu
-  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.rightUnitor_hom_app]
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)
@@ -1226,7 +1226,7 @@ private theorem pbcDerivedRestriction_rightUnit (h : E ≤ F) :
     ρ (pbcRestrict φ)) X
   have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp (pbcRestrict φ)) X
   simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hn hu
-  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom,
     NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     Functor.leftUnitor_hom_app, CategoryTheory.Functor.map_comp]
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)

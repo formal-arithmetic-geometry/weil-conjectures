@@ -543,10 +543,10 @@ private theorem constantPullback_derived_unit_of_unit
     (f)^*[A]
     (constantSheaf X.smallEtaleTopology A)
     e (𝟙_ _)
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app] at hc
+  simp only [Iso.trans_hom, NatTrans.comp_app] at hc
   simp only [Iso.trans_hom,
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Iso.symm_hom, supportConstantUnitIso_hom, Functor.map_comp, Category.assoc]
+    supportConstantUnitIso_hom, Functor.map_comp, Category.assoc]
   rw [reassoc_of% hc]
   erw [← (leftDerivedUpperStarIsoMapDerivedCategory A f).hom.naturality_assoc]
   congr 1

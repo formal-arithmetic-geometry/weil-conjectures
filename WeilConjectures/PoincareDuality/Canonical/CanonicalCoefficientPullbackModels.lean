@@ -215,14 +215,14 @@ private theorem coefficientFiniteKappa_triangle {X Y : Scheme.{u}}
     simp only [I, c, sX, sY, N, M, coefficientFiniteInverseIso, Iso.trans_inv,
       HomologicalComplex.comp_f, Functor.mapIso_inv,
       Iso.symm_inv, asIso_hom, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self,
+      HomologicalComplex.single_map_f_self,
       Iso.app_inv, HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
       Category.assoc, Iso.inv_hom_id_assoc]
   have he : e.hom.f 0 ≫ sX.hom =
       P.map sY.hom ≫ (finitePullbackRegularIso l E g n).hom := by
     simp only [P, e, sX, sY, N, M, coefficientFinitePullIso, Iso.trans_hom,
       HomologicalComplex.comp_f, Functor.mapIso_hom,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
       Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]

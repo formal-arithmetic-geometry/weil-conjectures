@@ -57,7 +57,7 @@ private theorem single_counit
   erw [Adjunction.mapHomotopyCategory_counit_app_quotient,
     Functor.mapDerivedCategoryFactorsh_hom_app]
   simp only [Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_inv, Functor.map_preimage, Functor.mapIso_inv,
+    Functor.preimageIso_inv, Functor.map_preimage,
     Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
     Category.assoc]
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
@@ -91,8 +91,8 @@ private theorem single_counit
   intro n
   by_cases hn : n = 0
   · subst n
-    simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
-      CochainComplex.shiftFunctor_obj_X', Functor.id_obj, Functor.mapCochainComplexSingleFunctor,
+    simp only [CochainComplex.singleFunctor, Functor.comp_obj,
+      Functor.id_obj, Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
       HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
@@ -106,7 +106,7 @@ private theorem single_counit
       (L.map (𝟙 (R.obj J)) ≫ 𝟙 _) ≫ adj.counit.app J ≫ 𝟙 _
     simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   · simp [Functor.mapCochainComplexSingleFunctor,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_ne,
       HomologicalComplex.singleMapHomologicalComplex_inv_app_ne, hn]
 

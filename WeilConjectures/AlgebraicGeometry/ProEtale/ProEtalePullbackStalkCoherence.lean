@@ -651,7 +651,7 @@ private theorem descend_square
   have hw := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F r) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hw
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app K)).mp
-  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom,
     NatTrans.comp_app, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
   rw [hd, ← hw]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]

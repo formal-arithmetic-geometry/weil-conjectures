@@ -77,7 +77,7 @@ private lemma exact_comp_hom_fac (e : F ⋙ G ≅ H)
       G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
       DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app K) := by
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  simp only [exact_comp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [exact_comp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   erw [Functor.mapDerivedCategoryNatIso_fach]
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj P))).1

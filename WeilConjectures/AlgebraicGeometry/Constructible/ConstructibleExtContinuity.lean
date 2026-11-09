@@ -169,7 +169,7 @@ private theorem continuity_stratum_locus
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj R)]
-    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
+    (_hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
       R = Profinite.padicAlgClCondensedRing ℓ ∨ R = Profinite.padicIntegersCondensedRing ℓ E)
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]

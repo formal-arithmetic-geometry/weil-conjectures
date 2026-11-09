@@ -85,7 +85,7 @@ private theorem derived_unitInv_factors (R : C ≌ D)
     (R.functor.mapDerivedCategoryFactors.hom.app K)
   dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at hn
   convert hn using 1 <;>
-    simp only [Equivalence.mapDerivedCategory, Equivalence.mk, Iso.trans_hom, Iso.symm_hom,
+    simp only [Equivalence.mapDerivedCategory, Equivalence.mk, Iso.trans_hom,
       NatTrans.comp_app, Functor.comp_obj, Functor.id_obj, Category.assoc]
 end
 

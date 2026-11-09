@@ -539,7 +539,7 @@ private lemma derivedComp_assoc (a : F ⋙ G ≅ FG) (b : FG ⋙ H ≅ FGH)
   have hassoc := congr_app (mapDerivedCategoryCompIso_assoc F G H) K
   have hm' := congr_app hm K
   simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app] at ha hc hassoc hm'
-  simp only [derivedComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [derivedComp, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app,
     Functor.map_comp, Category.assoc]
   rw [← cancel_epi (H.mapDerivedCategory.map ((mapDerivedCategoryCompIso F G).inv.app K))]
@@ -617,7 +617,7 @@ private lemma derivedComp_id_comp (e : A ≅ 𝟭 C) (a : A ⋙ F ≅ F)
   have hn := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight e F) K
   have hu := congr_app (mapDerivedCategoryCompIso_id_comp F) K
   simp only [NatTrans.comp_app, whiskerRight_app, NatTrans.id_app] at hn hu
-  simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [derivedComp, derivedUnit, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, map_comp, leftUnitor_hom_app,
     mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
   rw [← cancel_epi ((mapDerivedCategoryCompIso A F).inv.app K),
@@ -637,7 +637,7 @@ private lemma derivedComp_comp_id (e : B ≅ 𝟭 D) (a : F ⋙ B ≅ F)
   have hn := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
   have hu := congr_app (mapDerivedCategoryCompIso_comp_id F) K
   simp only [NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app] at hn hu
-  simp only [derivedComp, derivedUnit, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [derivedComp, derivedUnit, Iso.trans_hom, NatTrans.comp_app,
     isoWhiskerLeft_hom, whiskerLeft_app, rightUnitor_hom_app,
     mapDerivedCategoryNatIso_trans, he, Category.comp_id, Category.assoc]
   rw [← cancel_epi ((mapDerivedCategoryCompIso F B).inv.app K),

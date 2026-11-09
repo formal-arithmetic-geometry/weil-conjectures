@@ -109,7 +109,7 @@ private theorem mapCochainComplexSingleFunctor_naturality {C D : Type*} [Categor
   by_cases hi : i = 0
   · subst hi
     simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self]
+      HomologicalComplex.single_map_f_self]
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_tgt _ _
 
 private theorem finite_chain_model {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :

@@ -131,9 +131,8 @@ private theorem counit_square_single
     ext i : 1
     by_cases hi : i = 0
     · subst i
-      simp [a, K, p, eX, eY, q, Functor.mapHomologicalComplexCompIso,
-        HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
-        HomologicalComplex.single_map_f_self]
+      simp only [Functor.comp_obj, Functor.mapHomologicalComplex_obj_X, HomologicalComplex.comp_f,
+        Functor.mapHomologicalComplex_map_f]
       erw [EX.map_id, Q.map_id]
       repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
     · simp [p, eX, eY, q, hi,

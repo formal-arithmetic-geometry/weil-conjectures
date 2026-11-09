@@ -142,7 +142,7 @@ private theorem derived_left_unit
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, hL, Functor.comp_obj,
     Functor.id_obj, Category.comp_id,
-    Functor.mapDerivedCategoryCompNatIso, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.mapDerivedCategoryCompNatIso, Functor.isoWhiskerRight_hom,
     Functor.leftUnitor_hom_app, Functor.whiskerRight_app, CategoryTheory.Functor.map_comp]
   rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso I F).inv.app K),
     Iso.inv_hom_id_app_assoc]
@@ -173,7 +173,7 @@ private theorem derived_right_unit
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, hL, Functor.comp_obj,
     Functor.id_obj, Category.comp_id,
-    Functor.mapDerivedCategoryCompNatIso, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.mapDerivedCategoryCompNatIso, Functor.isoWhiskerLeft_hom,
     Functor.rightUnitor_hom_app, Functor.whiskerLeft_app]
   rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F I).inv.app K),
     Iso.inv_hom_id_app_assoc]

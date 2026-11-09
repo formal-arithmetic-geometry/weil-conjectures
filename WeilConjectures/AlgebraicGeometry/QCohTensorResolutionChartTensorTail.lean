@@ -103,7 +103,7 @@ theorem tensorResolutionChartTensor_tail {Y : Scheme.{u}}
           (Scheme.Modules.restrictFunctor U.2.fromSpec).map
             (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv := by
     dsimp [eN]
-    simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [CochainComplex.singleFunctor,
       HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
       HomologicalComplex.single_map_f_self, Category.assoc]
   rw [tensorHom_def]

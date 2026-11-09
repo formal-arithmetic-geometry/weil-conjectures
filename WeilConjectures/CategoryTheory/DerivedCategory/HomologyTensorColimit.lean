@@ -144,7 +144,7 @@ noncomputable def tensorLeftMapTriangle (Δ : Triangle (DerivedCategory C)) :
     letI := Functor.CommShift₂.commShift_map (G := curriedTensor (DerivedCategory C)) (h := .int) f
     (NatTrans.mapTriangle ((curriedTensor (DerivedCategory C)).map f)).app Δ
   map_id Y := by
-    ext <;> simp <;> rfl
+    ext <;> simp
   map_comp f g := by
     ext <;> simp
 

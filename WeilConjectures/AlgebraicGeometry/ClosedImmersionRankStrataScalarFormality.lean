@@ -131,8 +131,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
     have hiso : IsIso ((DerivedCategory.homologyFunctor C n).map
         (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) ≫
           (DerivedCategory.homologyFunctor C n).map a) := by
-      rw [← Functor.map_comp, he]
-      assumption
+      rwa [← Functor.map_comp, he]
     exact IsIso.of_isIso_comp_left
       ((DerivedCategory.homologyFunctor C n).map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)))
       ((DerivedCategory.homologyFunctor C n).map a))
@@ -145,8 +144,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
     have hiso : IsIso ((DerivedCategory.homologyFunctor C n).map
         (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) ≫
           (DerivedCategory.homologyFunctor C n).map g) := by
-      rw [← Functor.map_comp, he]
-      assumption
+      rwa [← Functor.map_comp, he]
     exact IsIso.of_isIso_comp_left
       ((DerivedCategory.homologyFunctor C n).map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)))
       ((DerivedCategory.homologyFunctor C n).map g))

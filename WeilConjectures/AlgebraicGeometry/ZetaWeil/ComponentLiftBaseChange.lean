@@ -324,12 +324,8 @@ private theorem over_pullbackComp_left {C : Type*} [Category* C] [HasPullbacks C
     ((Over.pullbackComp g f).hom.app E).left ≫
       pullback.fst (pullback.snd E.hom f) g ≫ pullback.fst E.hom f =
         pullback.fst E.hom (g ≫ f) := by
-  have h := congrArg (fun k ↦ k.left)
-    (conjugateEquiv_counit (Over.mapPullbackAdj (g ≫ f))
-      ((Over.mapPullbackAdj g).comp (Over.mapPullbackAdj f))
-      (Over.mapComp g f).symm.hom E)
   simpa [Over.pullbackComp, conjugateIsoEquiv, Adjunction.comp_counit_app,
-    Over.mapPullbackAdj_counit_app, Category.assoc] using h
+    Over.mapPullbackAdj_counit_app, Category.assoc]
 
 private noncomputable def componentIdentity (X : Scheme.{u}) [IsAffine X]
     (E : Over (affineComponentSpace X)) :

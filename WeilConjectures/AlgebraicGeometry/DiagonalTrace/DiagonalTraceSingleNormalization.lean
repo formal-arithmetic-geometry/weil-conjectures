@@ -127,7 +127,7 @@ private theorem exactSquare_single
     by_cases hi : i = 0
     · subst i
       simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-        CochainComplex.singleFunctors, HomologicalComplex.singleObjXSelf,
+        HomologicalComplex.singleObjXSelf,
         HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.single, P]
     · exact (V.map_isZero
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (F.obj M) i hi)).eq_of_src _ _
@@ -188,7 +188,7 @@ private theorem adjunct_single
     by_cases hi : i = 0
     · subst i
       simp [P, t, Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-        CochainComplex.singleFunctors, HomologicalComplex.singleObjXSelf,
+        HomologicalComplex.singleObjXSelf,
         HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.single, Adjunction.homEquiv_unit]
     · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M i hi).eq_of_src _ _
   have hu := cochain_unit_normalization a P
@@ -374,7 +374,7 @@ private theorem limitSquare_single
     by_cases hi : i = 0
     · subst i
       simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-        CochainComplex.singleFunctors, HomologicalComplex.singleObjXSelf,
+        HomologicalComplex.singleObjXSelf,
         HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.single, P, FT, hA, hB]
     · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (F.obj (limit H))
         i hi).eq_of_src _ _

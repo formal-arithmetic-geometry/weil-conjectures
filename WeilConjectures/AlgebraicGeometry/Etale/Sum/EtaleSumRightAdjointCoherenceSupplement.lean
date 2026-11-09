@@ -382,7 +382,7 @@ theorem etaleSumRightAdjoint_comp
   rw [hc] at h
   simp only [etaleSumRightAdjointIso, support_iso_chosen,
     etaleSumRightAdjointCompIso]
-  convert h using 1 <;> rfl
+  convert h using 1
 
 /-- The identity normalization uses the canonical identity comparison.
 Source: blueprint Step 1; Stacks Tag 0F7K
@@ -450,7 +450,7 @@ theorem etaleSumRightAdjoint_baseChange
         (constantComplex A X) := by
     simp only [etaleSumRightAdjointIso, support_iso_chosen]
     unfold EtaleSupportExchange.rightAdjointIso at h
-    convert h using 1 <;> rfl
+    convert h using 1
   rw [baseChange_eq]
   simp only [etaleSumRightAdjointUnitIso, Iso.trans_hom, Iso.app_hom,
     Functor.map_comp, Category.assoc]

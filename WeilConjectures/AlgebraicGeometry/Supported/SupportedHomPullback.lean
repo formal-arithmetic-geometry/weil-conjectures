@@ -411,7 +411,7 @@ set_option backward.isDefEq.respectTransparency.types false in
         change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
         rw [Functor.map_preimage]
         simp [DerivedCategory.Plus.QCompιIso_hom_app,
-          DerivedCategory.Plus.QCompιIso_inv_app] <;> rfl
+          DerivedCategory.Plus.QCompιIso_inv_app]; rfl
       let G := shiftFunctor (DerivedCategory (Sheaf S.topology (ModuleCat.{u + 1} A))) a
       let r : S.derivedHom (DerivedCategory.Plus.Q.obj I) a :=
         supportedHomLocalizedCocycle I.obj a f hf

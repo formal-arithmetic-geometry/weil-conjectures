@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
 import all Mathlib.Algebra.Homology.Localization
 
+set_option linter.privateModule false
+
 /-! # The derived tensor counit on complex objects
 
 The general derived tensor counit equation is written on complex representatives,

@@ -130,8 +130,8 @@ theorem exact_derivedAdjunction_single_counit {T : A ⥤ B} {H : B ⥤ A}
     intro n
     by_cases hn : n = 0
     · subst n
-      simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
-        CochainComplex.shiftFunctor_obj_X', Functor.id_obj, Functor.mapCochainComplexSingleFunctor,
+      simp only [CochainComplex.singleFunctor, Functor.comp_obj,
+        Functor.id_obj, Functor.mapCochainComplexSingleFunctor,
         HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
         HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
         HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
@@ -141,7 +141,7 @@ theorem exact_derivedAdjunction_single_counit {T : A ⥤ B} {H : B ⥤ A}
         Functor.map_id, HomologicalComplex.single_map_f_self]
       erw [Category.id_comp]
     · simp [Functor.mapCochainComplexSingleFunctor,
-        CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+        CochainComplex.singleFunctor,
         HomologicalComplex.singleMapHomologicalComplex_hom_app_ne,
         HomologicalComplex.singleMapHomologicalComplex_inv_app_ne, hn]
   have hfac := (adj.mapHomotopyCategory (ComplexShape.up ℤ)).derivedε_fac_app

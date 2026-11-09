@@ -63,6 +63,8 @@ private theorem pbcDerivedScalarAdjunction_commShift {T : Scheme.{u}}
     (PurCompactSupport.scalarCommShift_existsUnique φ).exists.choose_spec
   exact PurCompactSupport.restrictionScalarAdjunction_shift φ
 
+omit [IsCommMonObj (abRing l X)] [(sections l X).Additive] [PreservesFiniteLimits (sections l X)]
+  [PreservesFiniteColimits (sections l X)] in
 /-- The derived balancing isomorphism commutes with the scalar shifts. -/
 private theorem integralTensorBalancing_commShift (C : CoefficientSystem l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :

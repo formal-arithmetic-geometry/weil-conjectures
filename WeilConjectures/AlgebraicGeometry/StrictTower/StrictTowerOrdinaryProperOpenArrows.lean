@@ -354,7 +354,7 @@ private theorem compNat_fac
       H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_fac]
   rw [← Category.assoc]
   have ht := Functor.mapDerivedCategoryCompIso_hom_app_factors F H K
@@ -490,6 +490,7 @@ omit [Abelian A] [Abelian D] [Abelian E]
 private abbrev tw {C D : Type*} [Category C] [Category D] (f : C ⥤ D) :=
   (Functor.whiskeringRight ℕᵒᵖ C D).obj f
 
+omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem whisker_exact_comp_fac
     [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]
     [hE : HasDerivedCategory (ℕᵒᵖ ⥤ E)]
@@ -900,6 +901,7 @@ private theorem assoc_paste
     Category.id_comp]
   rw [b.map_id, Category.id_comp]
 
+omit [HasDerivedCategory A] [HasDerivedCategory D] [HasDerivedCategory E] in
 private theorem module_localization_paste
     {C T : Type*} [Category C] [Category T] [aC : Abelian C] [aT : Abelian T]
     [hA : HasDerivedCategory (ℕᵒᵖ ⥤ A)] [hD : HasDerivedCategory (ℕᵒᵖ ⥤ D)]

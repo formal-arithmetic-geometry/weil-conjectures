@@ -230,7 +230,7 @@ private theorem exact_underlying_single
       (DerivedCategory.singleFunctor C 0).map (U.map i) =
     (V.mapDerivedCategorySingleFunctor 0).hom.app M ≫
       (DerivedCategory.singleFunctor C 0).map (e.inv.app M ≫ U.map i) := by
-  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
   rw [reassoc_of% Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor E U M]
   rw [← Functor.mapDerivedCategoryNatIso_symm]
   rw [reassoc_of% Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor e.symm M]
@@ -274,7 +274,7 @@ private theorem two_exact_underlying_single
       (F.mapDerivedCategory.map ((E.mapDerivedCategorySingleFunctor 0).hom.app M) ≫ ·)
       ((F.mapDerivedCategorySingleFunctor 0).hom.naturality i)
   rw [hi]
-  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+  simp only [Iso.trans_inv, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
   have hu := (U.mapDerivedCategorySingleFunctor 0).hom.naturality (F.map i)
   dsimp only [Functor.comp_map] at hu

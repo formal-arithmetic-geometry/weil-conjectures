@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDe
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
+set_option linter.privateModule false
+
 /-! # Complex and homotopy localization tensor maps
 
 The strict monoidal homotopy quotient and its identity-component comparison with

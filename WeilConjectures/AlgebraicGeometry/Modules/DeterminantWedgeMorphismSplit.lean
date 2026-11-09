@@ -99,7 +99,7 @@ private theorem tensor_section_map {X : Scheme.{v}} {M N : X.Modules}
 
 private theorem tensor_section_induction {X : Scheme.{v}} (M N : X.Modules)
     (P : ∀ U : X.Opens, (M ⊗ N).val.obj (op U) → Prop)
-    (hzero : ∀ U, P U 0)
+    (_hzero : ∀ U, P U 0)
     (hadd : ∀ U x y, P U x → P U y → P U (x + y))
     (htmul : ∀ U x y, P U (tmulSection x y))
     (hlocal : ∀ U x (S : Sieve U), S ∈ Opens.grothendieckTopology X U →

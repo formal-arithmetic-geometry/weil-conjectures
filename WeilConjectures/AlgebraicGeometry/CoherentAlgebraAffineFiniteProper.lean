@@ -42,6 +42,7 @@ local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
 -- it in build83);
 -- master removed it on the pre-bump tree.
 set_option maxHeartbeats 600000 in
+-- needed on the v4.35 toolchain: the elaboration exceeds the default heartbeat budget
 set_option synthInstance.maxHeartbeats 200000 in
 -- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in

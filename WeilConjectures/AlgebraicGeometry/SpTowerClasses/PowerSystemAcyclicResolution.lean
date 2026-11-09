@@ -250,8 +250,7 @@ private def pointwise_change_iso
   refine Cone.ext (Iso.refl _) ?_
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
-  simp only [Comma.mapRightIso_functor_obj_hom, Functor.const_obj_obj, Iso.symm_hom,
-    Functor.map_comp, Category.id_comp]
+  simp only [Functor.map_comp, Category.id_comp]
   change ((L.map X.hom ≫ L.map (i.inv.app X.right)) ≫ α.app X.right) ≫
       j.hom.app X.right = _
   exact (Category.assoc _ _ _).trans (Category.assoc _ _ _)

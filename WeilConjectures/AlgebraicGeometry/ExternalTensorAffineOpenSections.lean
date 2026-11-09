@@ -121,7 +121,7 @@ private theorem scalarMap_appLE {T : Scheme.{w}} (a : T ⟶ X) (B : T.Opens)
   have hp : (a.app A).hom (scalarMap f A r) = scalarMap (a ≫ f) (a ⁻¹ᵁ A) r := by
     simp only [scalarMap, RingHom.comp_apply, Scheme.Hom.comp_appTop,
       CommRingCat.hom_comp]
-    convert hn using 1 <;> rfl
+    convert hn using 1; rfl
   rw [hp]
   simp only [scalarMap, RingHom.comp_apply]
   rw [← CommRingCat.comp_apply, ← T.presheaf.map_comp]

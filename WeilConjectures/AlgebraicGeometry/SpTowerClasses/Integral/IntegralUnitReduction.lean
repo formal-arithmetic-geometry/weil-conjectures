@@ -93,7 +93,7 @@ private theorem single_transpose
   by_cases hi : i = 0
   · subst i
     simp only [Adjunction.homEquiv_unit, Functor.mapCochainComplexSingleFunctor,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       Adjunction.mapHomologicalComplex, HomologicalComplex.singleMapHomologicalComplex,
       HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
       HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.comp_f,

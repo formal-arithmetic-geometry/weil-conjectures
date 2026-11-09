@@ -46,8 +46,7 @@ private lemma derived_inverse_triangle
   have h := Functor.mapDerivedCategoryCompNatIso_cocycle
     e.unitIso.symm (Iso.refl e.functor) e.counitIso (Iso.refl e.functor)
     (fun X ↦ by simpa using (e.counit_app_functor X).symm) Y
-  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, NatTrans.comp_app,
-    Iso.symm_hom] at h
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, NatTrans.comp_app] at h
   have hl := congr_app (Functor.mapDerivedCategoryCompIso_id_comp e.functor) Y
   have hr := congr_app (Functor.mapDerivedCategoryCompIso_comp_id e.functor) Y
   simp only [NatTrans.comp_app, NatTrans.id_app, Functor.whiskerRight_app,

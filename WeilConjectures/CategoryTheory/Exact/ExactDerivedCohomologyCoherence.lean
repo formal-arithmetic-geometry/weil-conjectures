@@ -175,7 +175,7 @@ theorem exactDerivedCohomologyCoherence
   have hk := congr_app hcomp K
   simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app] at hk
   rw [← Category.assoc, ← hk]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
     Category.assoc]
   rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
   exact (mapDerivedCategoryHomologyFunctorIso_hom_app_naturality eta a K).symm

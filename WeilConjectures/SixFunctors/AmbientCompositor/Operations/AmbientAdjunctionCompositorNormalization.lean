@@ -395,7 +395,7 @@ private theorem pComp_eq (o : Operations.{u}) {X Y Z : Scheme.{u}}
       (Functor.mapDerivedCategoryCompIso (o.pull g) (o.pull f)).symm := by
   apply Iso.ext
   simp only [pComp, Operations.d, Iso.symm_hom, Iso.trans_inv,
-    Iso.symm_inv, Iso.trans_hom, mapDerived_symm_inv]
+    Iso.trans_hom, mapDerived_symm_inv]
 
 private structure PullCoherence (o : Operations.{u}) : Prop where
   assoc : ∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),

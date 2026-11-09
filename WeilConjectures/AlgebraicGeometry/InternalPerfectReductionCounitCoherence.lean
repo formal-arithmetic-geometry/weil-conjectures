@@ -155,7 +155,7 @@ private theorem reductionComp_counit_chain (W : Scheme.{u})
     let ψ := AdicCompletion.transition l E W n
     let χ := AdicCompletion.quotient l E W n
     let α₀ := (Mod.extendScalarsComp φ ψ).symm ≪≫
-      eqToIso (by congr 1 <;> exact AdicCompletion.quotient_transition l E W n)
+      eqToIso (by congr 1; exact AdicCompletion.quotient_transition l E W n)
     (AdicCompletion.reductionComp l E W n).hom.app (DerivedCategory.Q.obj I) ≫
         (Mod.extendScalars χ).leftDerivedFunctorCounit.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj I) =

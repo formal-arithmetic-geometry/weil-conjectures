@@ -163,7 +163,7 @@ theorem constantRankExterior_derived_iso {X : Scheme.{u}}
       intro i j hij
       have hj : i + 1 = j := hij
       subst j
-      simp [S, K, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      simp [S, K, CochainComplex.singleFunctor,
         locallyRankedExteriorComplex, HomologicalComplex.single_obj_d])
   exact ⟨DerivedCategory.Q.mapIso c ≪≫
     ((DerivedCategory.singleFunctorIsoCompQ C (d : ℤ)).app F).symm ≪≫

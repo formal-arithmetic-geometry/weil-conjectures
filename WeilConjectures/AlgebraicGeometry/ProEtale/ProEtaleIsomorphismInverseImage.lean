@@ -150,7 +150,7 @@ theorem existsUnique_proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
       Functor.whiskerRight_app, conjugateEquiv_symm_apply_app, NatTrans.id_app,
       CategoryTheory.Functor.map_id, Category.id_comp, ObjectProperty.ι_map,
       ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-      Functor.sheafPushforwardContinuous_map_hom_app, Functor.associator_inv_app, NatTrans.op_app,
+      Functor.sheafPushforwardContinuous_map_hom_app, Functor.associator_inv_app,
       MorphismProperty.Over.mapPullbackAdj_unit_app, Functor.leftUnitor_hom_app, Category.comp_id,
       proEtaleIsoCommaArrow, e, a, b]
     erw [Category.id_comp]
@@ -166,7 +166,7 @@ theorem existsUnique_proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
         Iso.refl_hom, Functor.whiskerRight_app, conjugateEquiv_symm_apply_app, NatTrans.id_app,
         CategoryTheory.Functor.map_id, Category.id_comp, ObjectProperty.ι_map,
         ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-        Functor.sheafPushforwardContinuous_map_hom_app, Functor.associator_inv_app, NatTrans.op_app,
+        Functor.sheafPushforwardContinuous_map_hom_app, Functor.associator_inv_app,
         Functor.leftUnitor_hom_app, Category.comp_id, e, a, b]
       erw [Category.id_comp])
 

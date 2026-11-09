@@ -826,7 +826,7 @@ private theorem finiteSingleRegularIso_one (Y : Scheme.{u}) (n : ℕ) (U : Y.Pro
     simp only [finiteSingleRegularIso, Iso.trans_hom, Functor.mapIso_hom,
       HomologicalComplex.comp_f, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Category.assoc, Iso.inv_hom_id_assoc]
   rw [hf]
   change ((HomologicalComplex.singleObjXSelf (.up ℤ) 0
@@ -935,7 +935,7 @@ private theorem pullbackLevelRegularIso_one {X Y : Scheme.{u}}
     simp only [pullbackLevelRegularIso, Iso.trans_hom, Functor.mapIso_hom,
       Functor.mapHomologicalComplex_map_f, HomologicalComplex.comp_f, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Functor.map_comp, Category.assoc]
     dsimp only [R, F, a]
     simp only [← Category.assoc, ← CategoryTheory.Functor.map_comp]

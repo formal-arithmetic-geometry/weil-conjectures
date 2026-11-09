@@ -203,7 +203,7 @@ private theorem square_localization
   simp only [proEtalePastingDerivedSquare, proEtalePastingOrdinarySquare,
     composition_localization, Functor.mapDerivedCategorySquareIso,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
   rw [localized_transport e A]
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits

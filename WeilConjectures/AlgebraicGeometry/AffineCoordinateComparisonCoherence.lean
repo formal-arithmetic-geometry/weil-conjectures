@@ -136,11 +136,11 @@ theorem exists_affineCoordinateComparisonFamily :
   constructor
   · simpa only [hδ a b φ p hp M N hM hN true,
       hδ b c ψ q hq _ _ _ _ true,
-      hδ a c χ r hs M N hM hN true, cond_true] using
+      hδ a c χ r hs M N hM hN true, Bool.cond_true] using
       affineCoordinateChartObjectComparison_cocycle a b c φ ψ χ hc p q r hr hp hq hs M hM
   · simpa only [hδ a b φ p hp M N hM hN false,
       hδ b c ψ q hq _ _ _ _ false,
-      hδ a c χ r hs M N hM hN false, cond_false] using
+      hδ a c χ r hs M N hM hN false, Bool.cond_false] using
       affineCoordinateChartObjectComparison_cocycle a b c φ ψ χ hc p q r hr hp hq hs N hN
 
 
@@ -216,9 +216,9 @@ theorem exists_affineCoordinateComparisonTransportFamily :
   constructor
   · apply affineComparisonTransportTriangle_of_comp
     simpa only [NatIso.trans_app, Iso.trans_assoc, Functor.comp_obj,
-      inducedFunctor_obj, cond_true, cond_false] using hh.1
+      inducedFunctor_obj, Bool.cond_true, Bool.cond_false] using hh.1
   · apply affineComparisonTransportTriangle_of_comp
     simpa only [NatIso.trans_app, Iso.trans_assoc, Functor.comp_obj,
-      inducedFunctor_obj, cond_true, cond_false] using hh.2
+      inducedFunctor_obj, Bool.cond_true, Bool.cond_false] using hh.2
 
 end AlgebraicGeometry

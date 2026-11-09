@@ -204,7 +204,7 @@ theorem exactCompactificationUnit_composition
       Functor.mapDerivedCategoryNatIso σ)
   ext K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Iso.trans_hom, Iso.symm_hom]
+    Iso.trans_hom]
   rw [hα, hγ]
   simp only [NatTrans.comp_app, Functor.map_comp, Category.assoc]
   simp only [unboundedEtaleLowerShriekCompIso, Iso.trans_hom,

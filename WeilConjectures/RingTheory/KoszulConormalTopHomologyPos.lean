@@ -9,6 +9,7 @@ module
 public import WeilConjectures.RingTheory.KoszulConormalComparison
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Determinant
+import WeilConjectures.RingTheory.ExteriorPairingDualBasis
 
 /-! Positive-rank top homology comparison.
 
@@ -90,7 +91,7 @@ private theorem complement_pairing (A : Type u) [CommRing A] (n : ℕ)
   · subst j
     simp only [ite_true]
     simpa [b, Function.comp_def, Fin.succAboveOrderEmb] using
-      exteriorPower.pairingDual_apply_apply_eq_one b b.coord
+      WeilConjectures.ExteriorPower.pairingDual_apply_apply_eq_one b b.coord
         (by intro i; simp) (by intro i j h; simp [h]) n i.succAboveOrderEmb
   · rw [ite_eq_right hij]
     have he : i.succAboveOrderEmb ≠ j.succAboveOrderEmb := by
@@ -99,7 +100,7 @@ private theorem complement_pairing (A : Type u) [CommRing A] (n : ℕ)
       apply Fin.succAbove_left_injective
       exact congrArg (fun e : Fin n ↪o Fin (n + 1) ↦ (e : Fin n → Fin (n + 1))) h
     simpa [b, Function.comp_def, Fin.succAboveOrderEmb] using
-      exteriorPower.pairingDual_apply_apply_eq_one_zero b b.coord
+      WeilConjectures.ExteriorPower.pairingDual_apply_apply_eq_one_zero b b.coord
         (by intro i j h; simp [h]) n i.succAboveOrderEmb j.succAboveOrderEmb he
 
 /-- The incoming boundaries are exactly the top functionals whose value on the ordered
@@ -223,7 +224,7 @@ private theorem top_pairing_bijective {R M : Type u} [CommRing R] [AddCommGroup 
   have hpair : exteriorPower.pairingDual R M r (B s)
       (exteriorPower.ιMulti R r b) = 1 := by
     rw [hBs]
-    simpa using exteriorPower.pairingDual_apply_apply_eq_one
+    simpa using WeilConjectures.ExteriorPower.pairingDual_apply_apply_eq_one
       b b.dualBasis (by intro i; simp) (by intro i j h; simp [h]) r
       ((OrderIso.refl (Fin r)).toOrderEmbedding)
   have hspan (z : ⋀[R]^r (Module.Dual R M)) : z = B.repr z s • B s := by

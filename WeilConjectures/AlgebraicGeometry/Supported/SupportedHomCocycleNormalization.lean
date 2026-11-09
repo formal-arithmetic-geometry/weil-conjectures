@@ -1224,7 +1224,7 @@ private theorem normalizationRHom
     rw [Functor.map_preimage]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, asIso_hom]
     simp [DerivedCategory.Plus.QCompιIso_hom_app,
-      DerivedCategory.Plus.QCompιIso_inv_app] <;> rfl
+      DerivedCategory.Plus.QCompιIso_inv_app]; rfl
   dsimp only [r] at hr
   rw [hei] at hr
   simp only [Iso.refl_inv] at hr
@@ -1421,9 +1421,9 @@ private theorem normalizationChi
       apply DerivedCategory.Plus.ι.map_injective
       exact CategoryTheory.Quotient.lift.isLift_hom _ _ _ _
     simp only [Sheaf.supportSequenceModelIso, Iso.trans_hom, Iso.symm_hom,
-      Iso.symm_inv, Functor.mapIso_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
+      Functor.mapIso_hom, asIso_hom, Iso.app_hom, Iso.app_inv, hs, ht,
       Functor.quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
-      CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+      Category.id_comp]
     repeat first
       | erw [CategoryTheory.Functor.map_id]
       | erw [Category.id_comp]

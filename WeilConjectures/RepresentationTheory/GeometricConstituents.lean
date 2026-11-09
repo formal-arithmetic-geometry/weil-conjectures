@@ -375,7 +375,7 @@ theorem exists_pos_forall_isIrreducible_comp_inclusion [IsAlgClosed k] [FiniteDi
     have := hW.nontrivial
     exact Submodule.nontrivial_iff_ne_bot.1 this congr(($h).toSubmodule)
   have : IsAtomic (Subrepresentation (ρ.comp N.subtype)) :=
-    isAtomic_of_orderBot_wellFounded_lt wellFounded_lt
+    inferInstance
   obtain ⟨S, hS', hSW⟩ := (eq_bot_or_exists_atom_le W').resolve_left hW'
   obtain ⟨e⟩ := hS S hS'
   exact Subrepresentation.isIrreducible_comp_inclusion_of_equiv_translate hW hS' hSW e

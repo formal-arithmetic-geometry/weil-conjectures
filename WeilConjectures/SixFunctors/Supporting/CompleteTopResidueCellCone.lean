@@ -406,14 +406,14 @@ private theorem topCellSplitPresentationIso_inclusion (k : Type u) [Field k]
   dsimp only [topCellSplitInclusion, topCellSplitPresentationIso, Iso.trans_hom,
     Iso.symm_hom]
   -- Direct inference gets stuck on a universe constraint (via `AddCommGrpCat` colimits).
-  haveI : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex (sfResidueModules X k) ℤ) :=
+  have : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex (sfResidueModules X k) ℤ) :=
     (fun (C : Type _) [Category C] [Abelian C] ↦
       (inferInstance : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex C ℤ))) _
   rw [Sigma.ι_mapIso_hom_assoc]
   rw [topCell_interval_ι]
   apply HomologicalComplex.from_single_hom_ext
   simp [sfSplitCell, HomologicalComplex.mkHomFromSingle_f,
-    CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self]
 
 private def topCellConeIso {C : Type v} [Category.{w} C] [Abelian C]

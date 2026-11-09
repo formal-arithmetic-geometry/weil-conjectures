@@ -528,7 +528,7 @@ private theorem system_open_cell_localized
       (SemilinearProperOpen.J_eq.{u} C τ b).symm)
     (SemilinearProperOpen.J_eq.{u} C τ (j ≫ b)).symm (system_open_comp_localized C τ j b)
   simp only [VaryingRing.moduleJCongr, SemilinearProperOpen.jCongr,
-    eqToIso_refl, Iso.refl_hom, Category.comp_id, Iso.trans_hom, Iso.symm_hom,
+    eqToIso_refl, Iso.refl_hom, Category.comp_id, Iso.trans_hom,
     Functor.mapDerivedCategoryNatIso, Localization.liftNatIso,
     Functor.isoWhiskerRight_hom, NatIso.mapHomologicalComplex, localize] at hn ⊢
   convert hn using 1; rfl

@@ -127,7 +127,7 @@ theorem diagonalReduction_single_square
     by_cases hi : i = 0
     · subst i
       simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-        CochainComplex.singleFunctors, HomologicalComplex.singleObjXSelf,
+        HomologicalComplex.singleObjXSelf,
         HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.single, P]
     · exact (V.map_isZero (K.ordinary.E.map_isZero
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M i hi))).eq_of_src _ _

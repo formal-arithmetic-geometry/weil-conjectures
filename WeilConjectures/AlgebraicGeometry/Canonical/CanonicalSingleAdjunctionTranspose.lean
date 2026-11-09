@@ -41,7 +41,7 @@ private theorem single_complex_transpose
   funext i
   by_cases hi : i = 0
   · subst i
-    simp [Adjunction.homEquiv_apply, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [Adjunction.homEquiv_apply, CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self,
       Category.assoc]
   · apply (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 N i hi).eq_of_src

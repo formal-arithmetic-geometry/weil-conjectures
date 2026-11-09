@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalComplexLocalizationTensorComparison
 
+set_option linter.privateModule false
+
 /-! # The scalar complex comparison is the derived counit
 
 The canonical complex scalar comparison agrees with the total left derived

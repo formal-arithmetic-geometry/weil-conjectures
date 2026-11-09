@@ -199,7 +199,7 @@ private theorem stalkPullbackLevelRegularIso_one {X Y : Scheme.{u}}
     simp only [stalkPullbackLevelRegularIso, Iso.trans_hom, Functor.mapIso_hom,
       Functor.mapHomologicalComplex_map_f, HomologicalComplex.comp_f, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Functor.map_comp, Category.assoc]
     dsimp only [R, F, a]
     simp only [← Category.assoc, ← CategoryTheory.Functor.map_comp]
