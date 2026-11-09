@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContin
 
 @[expose] public section
 
-universe u
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
@@ -71,8 +71,9 @@ theorem rightDerivedObjQIso_naturality
 /-- Transfer derived continuity to a bounded injective cocone in abstract abelian categories,
 so the cocone calculation does not repeatedly unfold concrete sheaf and module structures. -/
 private theorem injectiveContinuity_of_derived
-    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
+    {A B : Type*} [Category.{v} A] [Category.{w} B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{v} A] [HasDerivedCategory.{w} B]
+    [Abelian.HasKInjectiveResolutions A]
     {I : Type*} [Category I] [IsFiltered I]
     [HasColimitsOfShape I A] [HasColimitsOfShape I B] [HasExactColimitsOfShape I B]
     (H : A ⥤ B) [H.Additive] (J : I ⥤ CochainComplex A ℤ) (c : Cocone J) (a : ℤ)
