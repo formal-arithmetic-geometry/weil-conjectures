@@ -97,9 +97,9 @@ private theorem exactSquare_single
       (DerivedCategory.singleFunctor D 0).map (s.hom.app M) := by
   dsimp only [Functor.mapDerivedCategorySquareIso]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U P).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U P).inv.app
     ((DerivedCategory.singleFunctor A 0).obj M))).mp
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   erw [reassoc_of% (Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor U P M)]
