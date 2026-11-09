@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import WeilConjectures.Algebra.Homology.FunctorialBoundedInjectiveResolution
 import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
-import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
+import all WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-! # A compatible strict costalk model for the Hom cocone of a locally closed piece -/
@@ -194,7 +194,6 @@ private theorem closedAdjoint
   exact ⟨hclosed, H₀, ⟨ash⟩⟩
 
 set_option maxHeartbeats 400000 in
-set_option diagnostics true in
 -- The derived adjunction and diagram instances need a larger elaboration budget.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimits require a larger typeclass search budget.
@@ -288,21 +287,7 @@ theorem condensed_local_piece_costalk_model
                apply ObjectProperty.hom_ext
                exact (colimit.w N f).trans (Category.comp_id _).symm } }
   have : IsGrothendieckAbelian.{u + 1} A := Mod.isGrothendieckAbelian _
-  let S := CochainComplex.singleFunctor A 0
-  let E₀ := HomologicalComplex.eval A (ComplexShape.up ℤ) 0
-  let R₀ := CochainComplex.kInjectiveResolutionFunctor.{u + 1} A
-  let ηR := CochainComplex.toKInjectiveResolution.{u + 1} A
-  let J₀ := S ⋙ R₀ ⋙ E₀
-  let η : 𝟭 A ⟶ J₀ :=
-    (HomologicalComplex.singleCompEvalIsoSelf A (ComplexShape.up ℤ) 0).inv ≫
-      Functor.whiskerLeft S (Functor.whiskerRight ηR E₀)
-  have hη (M : A) : Mono (η.app M) := by
-    have := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} A
-      (S.obj M)).1
-    dsimp [η]
-    infer_instance
-  have hJ₀ (M : A) : Injective (J₀.obj M) :=
-    CochainComplex.injective_kInjectiveResolutionFunctor_obj_X (S.obj M) 0
+  obtain ⟨J₀, η, hη, hJ₀⟩ := CondensedRing.functorialInjectiveEmbeddings (C := A)
   obtain ⟨R, α, hα, hRi, hRb⟩ :=
     CochainComplex.exists_functorial_bounded_injective_resolution J₀ η hη hJ₀
   let J := Np ⋙ R ⋙ CochainComplex.Plus.ι A
