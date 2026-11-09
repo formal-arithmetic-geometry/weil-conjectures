@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
 import all Mathlib.Algebra.Homology.Localization
 
-set_option linter.privateModule false
-
 /-! # The derived tensor counit on complex objects
 
 The general derived tensor counit equation is written on complex representatives,
@@ -54,7 +52,7 @@ category sends a quotient complex to the quotient of its prolongation. The
 homotopy oplax tensor map is the quotient of the complex oplax tensor map.
 These identifications give exactly the displayed complex formula.
 (blueprint: lem-sfb-coefficient-scalar-tensor-homotopy-complex). -/
-private theorem coefficientScalarTensor_homotopyComplex (Z : Scheme.{u})
+private theorem coefficientScalarTensor_homotopyComplex_private (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     let := internalScalarMonoidal a Z
     let F := Mod.extendScalars (coefficientMap a Z)
@@ -75,5 +73,9 @@ private theorem coefficientScalarTensor_homotopyComplex (Z : Scheme.{u})
     (Mod.extendScalars (coefficientMap a Z))
     ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
     ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)).symm
+
+/-- Public export of the private `coefficientScalarTensor_homotopyComplex_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coefficientScalarTensor_homotopyComplex := coefficientScalarTensor_homotopyComplex_private
 
 end AlgebraicGeometry.ProEtale.CondensedRing
