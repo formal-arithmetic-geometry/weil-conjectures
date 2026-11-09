@@ -71,7 +71,6 @@ private theorem combine_component_comparisons
   obtain ⟨c, d, hc⟩ := h₃
   exact ⟨a, c, b, d, ha, transport c d hc⟩
 
-set_option maxHeartbeats 100000 in
 -- The component API keeps proof elaboration within this bound.
 -- The two open-vertex types contain fixed complex and derived functor comparisons.
 /-- The open and diagonal components of a normalized resolved row roof are the

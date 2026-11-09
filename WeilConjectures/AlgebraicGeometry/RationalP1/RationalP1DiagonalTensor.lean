@@ -48,7 +48,6 @@ open DiagonalCoefficients CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The actual canonical self-square. Source: blueprint clause 2
 (blueprint: def-sfb-internal-diagonal-tensor-comparison). -/
@@ -77,7 +76,6 @@ def sectionTensorMap {X S : Scheme.{u}} (g : X ⟶ S) (p : S ⟶ X)
   projectionMap Λ g _ _ ≫ (moduleObjectDerivedPushforward Λ g).map
     (tensorHom (s.hom.app M) e.hom ≫ (ρ_ M).hom)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The closed projection mate, followed by the section comparison and coefficient unitor.
 Source: blueprint unit/counit clause 1
@@ -186,7 +184,6 @@ private theorem sectionTensorMap_isIso {Z U X : Scheme.{u}}
   unfold sectionTensorMap
   infer_instance
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The diagonal tensor map is invertible on every unbounded internal module.
 Source: blueprint unit/counit clause 1
@@ -211,7 +208,6 @@ theorem diagonalTensorMap_isIso (Y : Scheme.{u})
     (pullSectionIso Λ Y (firstProjection Y) (pullback.diagonal_fst _))
     (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The inverse canonical diagonal comparison in the source's orientation.
 Source: blueprint unit/counit clause 1
@@ -225,7 +221,6 @@ def diagonalTensorIso (Y : Scheme.{u}) (M : DerivedCategory (Modules Λ (Project
   haveI := diagonalTensorMap_isIso Λ Y M
   (asIso (diagonalTensorMap Λ Y M)).symm
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the native braidings compares the fixed module-site instances.
 attribute [-instance] internalMonoidal in
 private theorem trace_projection_naturality {X S : Scheme.{u}} (g : X ⟶ S)

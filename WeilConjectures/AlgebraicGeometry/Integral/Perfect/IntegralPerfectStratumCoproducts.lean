@@ -34,7 +34,6 @@ universe u c v r w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace CategoryTheory
 
-set_option maxHeartbeats 2000000 in
 -- The duality comparison elaborates the chosen closed and symmetric tensor structures.
 private theorem perfectHom_preservesColimits
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -77,7 +76,6 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 2000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- Internal Hom from one locally perfect support piece commutes with uniformly
 bounded-below derived coproducts. The support is one closed subscheme of one open subscheme.

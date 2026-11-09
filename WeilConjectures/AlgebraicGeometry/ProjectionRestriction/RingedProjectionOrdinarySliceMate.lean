@@ -23,7 +23,6 @@ open CategoryTheory AlgebraicGeometry Opposite
 
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
-set_option maxHeartbeats 800000 in
 -- Compare the canonical mate with localization through its composite module adjunctions.
 private theorem localizedInverseMate_isIso
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]

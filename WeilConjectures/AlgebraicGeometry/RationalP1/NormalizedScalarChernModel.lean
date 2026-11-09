@@ -40,7 +40,6 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] derivedScalars moduleObjectDerivedPullback
   moduleObjectDerivedPushforward Mod.regular
 
-set_option maxHeartbeats 600000 in
 -- Compare the full universal-unit normalizations before cancelling the derived models.
 private theorem normalized_restriction_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
