@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerReconstructionData
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 import WeilConjectures.Algebra.Homology.LinearScalarCone.LinearScalarConeExactProducts
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAdjoint
@@ -29,7 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (D : SpCoefficientTowersAbelian l E T)
 
 local instance : HasSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{u, u} T
+  AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify T
 
 attribute [local instance] WeilConjectures.sfAbSheafify
 

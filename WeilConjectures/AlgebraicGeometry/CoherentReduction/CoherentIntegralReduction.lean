@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 public import WeilConjectures.AlgebraicGeometry.Semilinear.ConstantCoefficientSystem
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.SectionActionInternal
 public import WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
@@ -45,15 +46,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CoherentReduction
 
 attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
-
-/-- The sequence site has the same coefficient-size bound.
-Source: Zheng, Construction 4.1, coefficient system site
-(blueprint: def-sfb-coherent-integral-reduction). -/
-local instance sequenceSmall (X : Scheme.{u}) :
-    EssentiallySmall.{u + 1} (ℕ × X.ProEt) :=
-  @essentiallySmall_of_small_of_locallySmall.{u + 1, u, u + 1} (ℕ × X.ProEt) _ inferInstance
-    (@locallySmall_of_univLE.{u + 1, u, u + 1} (ℕ × X.ProEt) _
-      (@univLE_of_max.{u, u + 1} UnivLE.self))
 
 /-- Continuous functions on profinite tests, with pointwise commutative ring operations.
 Source: Bhatt--Scholze, Definition 6.5.1
@@ -525,19 +517,13 @@ residue field. Induction on the positive exponent makes the entire quotient
 finite. Ramified extensions are included: the exponent is multiplied by their
 ramification index, not replaced by n+1.
 -/
-theorem quotient_finite (n : ℕ) : Finite (Etale.FiniteProperQuotient.Ring l E n) := by
+@[instance] theorem quotient_finite (n : ℕ) : Finite (Etale.FiniteProperQuotient.Ring l E n) := by
   obtain ⟨k, hk⟩ := exists_span_pow_eq_coefficientExtensionIdeal l E (n + 1)
   exact @Finite.of_surjective _ _
     (Padic.finite_coefficientExtensionRing l E (k + 1) (Nat.le_add_left 1 k))
     ((Ideal.quotEquivOfEq hk.symm) ∘
       Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ k)))
     ((Ideal.quotEquivOfEq hk.symm).surjective.comp (Ideal.Quotient.factor_surjective _))
-
-/-- Finiteness for the actual positive ell-power quotients.
-Source: finite torsion coefficients
-(blueprint: def-sfb-coherent-integral-reduction). -/
-instance quotientFinite (n : ℕ) : Finite (Etale.FiniteProperQuotient.Ring l E n) :=
-  quotient_finite l E n
 
 /-- Positive ell-power quotients of the spectral ring of integers are continuous
 with their discrete topology.
