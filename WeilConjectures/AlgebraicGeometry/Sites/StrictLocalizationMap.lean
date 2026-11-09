@@ -75,7 +75,7 @@ noncomputable def pullback :
     apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
     apply pullback.hom_ext <;>
-      simp only [Functor.id_obj, Functor.const_obj_obj, Functor.Elements.id_hom, Etale.id_left,
+      simp only [Functor.id_obj, Functor.const_obj_obj, Functor.Elements.id_hom, Etale.id_left_eq,
         pullback.map_id, MorphismProperty.Over.homMk_hom, Over.homMk_left] <;>
       exact Category.id_comp _
   map_comp f g := by
