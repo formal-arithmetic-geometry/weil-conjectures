@@ -662,8 +662,7 @@ private theorem derive_chain
     Iso.symm_hom, Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom,
     Iso.trans_inv, NatTrans.comp_app, Category.assoc, Iso.symm_inv] at h ⊢
   rw [reassoc_of% h]
-  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
-    Iso.inv_hom_id_app]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc]
   rw [← Functor.map_comp_assoc]
   simp only [Category.assoc, Iso.hom_inv_id_app,
     Iso.inv_hom_id_app_assoc]

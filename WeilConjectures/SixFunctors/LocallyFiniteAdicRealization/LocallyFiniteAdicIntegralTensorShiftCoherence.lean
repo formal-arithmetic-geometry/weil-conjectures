@@ -63,8 +63,9 @@ private theorem pbcDerivedScalarAdjunction_commShift {T : Scheme.{u}}
     (PurCompactSupport.scalarCommShift_existsUnique φ).exists.choose_spec
   exact PurCompactSupport.restrictionScalarAdjunction_shift φ
 
-omit [IsCommMonObj (abRing l X)] [(sections l X).Additive] [PreservesFiniteLimits (sections l X)]
-  [PreservesFiniteColimits (sections l X)] in
+-- the section instances are needed to elaborate the proof (omitting them breaks instance synthesis)
+-- although the final term does not mention them (linter.unusedSectionVars).
+set_option linter.unusedSectionVars false in
 /-- The derived balancing isomorphism commutes with the scalar shifts. -/
 private theorem integralTensorBalancing_commShift (C : CoefficientSystem l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
