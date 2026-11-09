@@ -32,7 +32,7 @@ open WeilConjectures.SemilinearSections
 
 namespace AlgebraicGeometry.ProEtale.CoherentReduction
 
-attribute [local instance] proEtSmall sequenceSmall
+attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures sequenceSmall
 
 /-- Proof alias of the existing exactness-reflection criteria for scalar restriction.
 The underlying abelian sheaf is unchanged; no new exactness theorem is postulated.

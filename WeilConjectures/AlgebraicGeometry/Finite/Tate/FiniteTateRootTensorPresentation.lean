@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescentDefinitions
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
@@ -25,17 +26,12 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry WeilConject
 namespace AlgebraicGeometry.Scheme
 
 -- Pin the existing coefficient-size instances to avoid an unconstrained maximum universe.
-local instance (T : Scheme.{u}) :
-    HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
-  integralCoefficientAbSheafify.{u, u} T
+attribute [local instance] WeilConjectures.sfAbSheafify
 local instance (T : Scheme.{u}) :
     HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
   integralCoefficientRingSheafify.{u, u} T
-local instance (T : Scheme.{u}) :
-    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  integralCoefficientAbLocallyBijective.{u, u} T
-local instance (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
-  integralOperationsSiteSmall.{u, u} T
+attribute [local instance] WeilConjectures.sfAbBijective
+attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
