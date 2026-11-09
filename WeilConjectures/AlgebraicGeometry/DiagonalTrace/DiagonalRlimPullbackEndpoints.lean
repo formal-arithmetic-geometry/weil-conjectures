@@ -123,11 +123,11 @@ def diagonalRlimPullbackEvaluation (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (
       ((evaluation ℕᵒᵖ (DiagonalMod l X)).obj (op n)).mapDerivedCategory ≅
     ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n)).mapDerivedCategory ⋙
       (diagonalRlimPull l f).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (diagonalRlimTowerPull l f)
-    ((evaluation ℕᵒᵖ (DiagonalMod l X)).obj (op n))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (diagonalRlimTowerPull l f)
+    ((evaluation ℕᵒᵖ (DiagonalMod l X)).obj (op n)) ≪≫
   Functor.mapDerivedCategoryNatIso (eqToIso rfl) ≪≫
-  Functor.mapDerivedCategoryCompIso
-    ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n)) (diagonalRlimPull l f)
+  (Functor.mapDerivedCategoryCompIso
+    ((evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n)) (diagonalRlimPull l f)).symm
 
 /-- The mate uses the canonical identity-on-components constant-tower interchange.
 Source: blueprint coefficient proof (3)
@@ -169,12 +169,12 @@ def diagonalRlimPulledScalarConeMap (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
         ((DerivedCategory.singleFunctor (Systems S (Arings l (ULift.{u} (Padic l)) S))
           0).obj N) :=
   (Functor.mapDerivedCategoryCompIso (diagonalCompletedRestriction l S)
-    (diagonalRlimPull l f)).inv.app _ ≫
+    (diagonalRlimPull l f)).hom.app _ ≫
   exactConeComparison (diagonalCompletedRestriction l S ⋙ diagonalRlimPull l f)
     (r.F ⋙ diagonalRlimTowerPull l f) LX M N
     (diagonalRlimPulledCone l f _ _ π) ≫
   LX.R.map ((Functor.mapDerivedCategoryCompIso r.F
-    (diagonalRlimTowerPull l f)).hom.app _)
+    (diagonalRlimTowerPull l f)).inv.app _)
 
 /-- Canonical localization of an exact scalar/pullback square.
 Source: blueprint coefficient proof (3), exact restriction squares
@@ -194,8 +194,8 @@ def diagonalRlimExactSquare
     (s : U ⋙ F ≅ G ⋙ V) :
     U.mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       G.mapDerivedCategory ⋙ V.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso G V
+  Functor.mapDerivedCategoryCompIso U F ≪≫
+    Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso G V).symm
 
 /-- Localize the varying scalar square using its recorded exact inverse image.
 Source: blueprint coefficient proof (3), varying scalar restriction
