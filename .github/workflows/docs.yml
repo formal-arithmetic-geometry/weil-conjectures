@@ -1,0 +1,138 @@
+name: Docs (doc-gen4)
+
+# Test of building the doc-gen4 documentation (on the self-hosted big-server runner), so that it can
+# be served from GitHub Pages and the blueprint can link Lean names to it. This run only
+# builds and measures: the artifact is uploaded in the Pages format but not deployed.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/docs.yml"
+      - "docbuild/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.repository }}-docs-${{ github.ref }}
+  cancel-in-progress: true
+
+# The project's build comes from the public Lake cache, exactly as in lean_action_ci.yml.
+env:
+  LAKE_CACHE_ENDPOINT: https://cache.fuxi.merten.dev/lake-cache
+  LAKE_CACHE_REPO: formal-arithmetic-geometry/weil-conjectures
+
+jobs:
+  docs:
+    # big-server (Bin Wu's 256-core machine): a 2-thread GitHub-hosted runner did not finish the
+    # documentation within the 6 h job limit.
+    runs-on: [self-hosted, big-server]
+    timeout-minutes: 355
+    steps:
+      # History, so that `lake cache get` can look for cached revisions behind HEAD.
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 50
+
+      # elan, the toolchain and the Mathlib cache.
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+          lint: false
+          use-github-cache: false
+
+      # As in lean_action_ci.yml: the build of HEAD's nearest uploaded ancestor, every archive
+      # up front, with the toolchain's own `lake` and ELAN_TOOLCHAIN unset so that the revision
+      # scope matches the cluster's uploaders.
+      - name: Fetch the project's build from the Lake cache
+        run: |
+          set -euo pipefail
+          config="$RUNNER_TEMP/lake-config.toml"
+          cat > "$config" <<TOML
+          cache.defaultService = "fuxi"
+
+          [[cache.service]]
+          name = "fuxi"
+          kind = "s3"
+          artifactEndpoint = "$LAKE_CACHE_ENDPOINT/a"
+          revisionEndpoint = "$LAKE_CACHE_ENDPOINT/r"
+          TOML
+          {
+            echo "LAKE_CONFIG=$config"
+            echo "LAKE_CACHE_DIR=$GITHUB_WORKSPACE/.lake/cache"
+            echo "LAKE_ARTIFACT_CACHE=true"
+            echo "LAKE_RESTORE_ARTIFACTS=true"
+          } >> "$GITHUB_ENV"
+          export LAKE_CONFIG="$config" LAKE_CACHE_DIR="$GITHUB_WORKSPACE/.lake/cache"
+          env -u ELAN_TOOLCHAIN "$(elan which lake)" cache get \
+            --repo "$LAKE_CACHE_REPO" --max-revs 30
+
+      - name: Restore the cached build in bulk
+        run: python3 scripts/ci/bulk_unpack_cache.py .
+
+      # Should compile next to nothing; how much it does compile is part of the test.
+      - name: Build the project
+        env:
+          LEAN_NUM_THREADS: "48"
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
+        run: |
+          set -o pipefail
+          start=$(date +%s)
+          lake build WeilConjectures 2>&1 | tee "$RUNNER_TEMP/build.log" | grep -E "error|✖" | head -50 || true
+          echo "compiled: $(grep -cE '✔ \[[0-9]+/[0-9]+\] Built ' "$RUNNER_TEMP/build.log") modules in $(( $(date +%s) - start ))s"
+          tail -1 "$RUNNER_TEMP/build.log"
+          find .lake/build -name '*.setup.json' -delete
+          df -h /
+
+      # As for Mathlib's docs: a package requiring doc-gen4 and this repository, with the
+      # dependencies (Mathlib and its cached oleans) moved over rather than fetched again.
+      # doc-gen4 wants the documented repository to be a git checkout with a remote, which
+      # the checkout above is.
+      - name: Set up the docs package
+        working-directory: docbuild
+        run: |
+          set -euo pipefail
+          cp ../lean-toolchain .
+          mkdir -p .lake
+          mv ../.lake/packages .lake/packages
+          lake update
+          git -C .. status --short | head -5
+
+      - name: Build doc-gen4
+        working-directory: docbuild
+        env:
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
+        run: lake build doc-gen4
+
+      - name: Generate the documentation
+        working-directory: docbuild
+        env:
+          LAKE_NO_CACHE: "true"
+          LAKE_ARTIFACT_CACHE: "false"
+          LEAN_NUM_THREADS: "48"
+          DOCGEN_SRC: github
+        run: |
+          set -o pipefail
+          start=$(date +%s)
+          # Progress: every 250th finished job, and every failure, with the time since the start.
+          lake build WeilConjectures:docs 2>&1 | tee "$RUNNER_TEMP/docs.log" \
+            | perl -ne 'BEGIN { $| = 1; $s = time } if (/✖|error/) { print; next } if (/\[(\d+)\/\d+\]/ && $1 % 250 == 0) { printf "%5ds %s", time - $s, $_ }' || true
+          echo "jobs by kind: $(grep -oE "Built [A-Za-z]+" "$RUNNER_TEMP/docs.log" | sort | uniq -c | sort -rn | head -5 | tr "\n" " ")"
+          echo "docs built in $(( $(date +%s) - start ))s"
+          tail -1 "$RUNNER_TEMP/docs.log"
+
+      - name: Measure the documentation
+        working-directory: docbuild/.lake/build/doc
+        run: |
+          du -sh .
+          echo "files: $(find . -type f | wc -l), html: $(find . -name '*.html' | wc -l)"
+          du -sh -- */ 2>/dev/null | sort -h | tail -12
+          df -h /
+
+      - name: Upload (Pages format, not deployed)
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docbuild/.lake/build/doc
