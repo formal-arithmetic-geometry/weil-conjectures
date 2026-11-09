@@ -31,15 +31,20 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [Finite k]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (f : X ⟶ point k) [IsProper f.left]
 
-local instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
+local instance instFactPrimeRingCharAlgebraicClosure_smoothPurityProperPointTrace
+    : Fact (ringChar (AlgebraicClosure k)).Prime :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-local instance : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
+local instance instFactNeNatRingCharAlgebraicClosure_smoothPurityProperPointTrace
+    : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
-local instance : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_smoothPurityProperPointTrace
+    : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_smoothPurityProperPointTrace
+    : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_smoothPurityProperPointTrace
+    : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 local instance : LocallyOfFiniteType
     (Over.mk (point k).hom.geometricFiberToAlgebraicClosure).hom :=

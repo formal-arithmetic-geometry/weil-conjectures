@@ -157,7 +157,8 @@ end CategoryTheory.Mod.ResidueOrdinary
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local instance 20000] sheafBraidedCategory
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueOrdinaryMonoidal
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 @[instance_reducible] private noncomputable def ordinary_braided

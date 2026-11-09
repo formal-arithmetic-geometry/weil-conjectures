@@ -98,7 +98,8 @@ private theorem complexHomologyColimit
   change PreservesColimitsOfShape I (H ⋙ ShortComplex.homologyFunctor _)
   infer_instance
 
-local instance (X : Scheme.{u}) (I : Type u) :
+local instance instHasColimitsOfShape_derivedAmbientDirectSumsHomology
+    (X : Scheme.{u}) (I : Type u) :
     HasColimitsOfShape (Discrete I)
       (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := by
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)

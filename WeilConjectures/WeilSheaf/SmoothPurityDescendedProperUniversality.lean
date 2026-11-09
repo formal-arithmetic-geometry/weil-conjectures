@@ -95,9 +95,11 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [Finite k]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left]
 
-local instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
+local instance instFactPrimeRingCharAlgebraicClosure_smoothPurityDescendedProperUniversality
+    : Fact (ringChar (AlgebraicClosure k)).Prime :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-local instance : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
+local instance instFactNeNatRingCharAlgebraicClosure_smoothPurityDescendedProperUniversality
+    : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
 
 /-- The geometric fibre of an arrow, viewed over the algebraic closure. -/
@@ -107,17 +109,23 @@ noncomputable abbrev traceGeometricFiberOverMap :
   Over.homMk (Scheme.Hom.geometricFiberMap f.left (Over.w f)) (by
     simp [Scheme.Hom.geometricFiberToAlgebraicClosure, Scheme.Hom.geometricFiberMap])
 
-local instance : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityDescendedProperUniversality
+    : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityDescendedProperUniversality
+    : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityDescendedProperUniversality
+    : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
-local instance : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityDescendedProperUniversality_2
+    : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityDescendedProperUniversality_2
+    : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityDescendedProperUniversality_2
+    : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 local instance : IsProper (traceGeometricFiberOverMap f).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)

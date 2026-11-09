@@ -38,7 +38,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_trace : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 /-- For the braiding `DerivedCategory.braidedCategory'` of the derived tensor product, the lax
 monoidal structure of `Qh : K(A) ⥤ D(A)` is compatible with the Koszul braiding of the homotopy

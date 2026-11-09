@@ -48,36 +48,44 @@ local instance : (objectProperty k₀ l X).ι.Faithful :=
 local instance : (objectProperty k₀ l Y).ι.Faithful :=
   (objectProperty k₀ l Y).fullyFaithfulι.faithful
 
-local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instFactPrimeRingChar_smoothPurityNativeProperTrace
+    : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeProperTrace_3
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeProperTrace_3
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeProperTrace_3
+    : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
-local instance : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeProperTrace_4
+    : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeProperTrace_4
+    : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeProperTrace_4
+    : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
-local instance : LocallyOfFiniteType
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeProperTrace : LocallyOfFiniteType
     (Over.mk (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
-local instance : QuasiCompact
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeProperTrace : QuasiCompact
     (Over.mk (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
-local instance : IsSeparated
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeProperTrace : IsSeparated
     (Over.mk (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
-local instance : LocallyOfFiniteType
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeProperTrace_2
+    : LocallyOfFiniteType
     (Over.mk (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (Limits.pullback.snd _ _))
-local instance : QuasiCompact
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeProperTrace_2 : QuasiCompact
     (Over.mk (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
-local instance : IsSeparated
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeProperTrace_2 : IsSeparated
     (Over.mk (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (Limits.pullback.snd _ _))
 

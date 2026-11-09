@@ -24,7 +24,8 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueTensorGeometry
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 private def rightTensorComparison {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.OplaxMonoidal] (B : C) :

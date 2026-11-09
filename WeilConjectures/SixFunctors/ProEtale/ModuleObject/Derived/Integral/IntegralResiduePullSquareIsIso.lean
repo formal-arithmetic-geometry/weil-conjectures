@@ -18,7 +18,8 @@ universe u v
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResiduePullSquareIsIso
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 private theorem exists_flat_colimit_model
     {C : Type*} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]

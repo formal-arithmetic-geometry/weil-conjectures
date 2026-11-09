@@ -17,12 +17,14 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
-local instance (W : Scheme.{u}) : EssentiallySmall.{u + 1} W.ProEt :=
+local instance instEssentiallySmallProEt_derivedCompleteFiniteReductionDetection
+    (W : Scheme.{u}) : EssentiallySmall.{u + 1} W.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
-local instance (W : Scheme.{u}) :
+local instance instHasSheafifyProEt_derivedCompleteFiniteReductionDetection (W : Scheme.{u}) :
     HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, 0} W
-local instance (W : Scheme.{u}) :
+local instance instWEqualsLocallyBijective_derivedCompleteFiniteReductionDetection
+    (W : Scheme.{u}) :
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, 0} W
 set_option backward.isDefEq.respectTransparency true

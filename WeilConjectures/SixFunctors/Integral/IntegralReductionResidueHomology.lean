@@ -537,10 +537,12 @@ private theorem integralProjection_first
 
 attribute [-instance] integralCoefficientAbSheafify
   integralCoefficientAbLocallyBijective
-local instance (X : AlgebraicGeometry.Scheme.{u}) :
+local instance instHasSheafifyProEt_integralReductionResidueHomology
+    (X : AlgebraicGeometry.Scheme.{u}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} X
-local instance (X : AlgebraicGeometry.Scheme.{u}) :
+local instance instWEqualsLocallyBijective_integralReductionResidueHomology
+    (X : AlgebraicGeometry.Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
       AddCommGrpCat.{u + 1} := integralCoefficientAbLocallyBijective.{u, u} X
 

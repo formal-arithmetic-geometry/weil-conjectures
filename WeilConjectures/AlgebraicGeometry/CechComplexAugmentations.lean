@@ -25,7 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-local instance (R : Type v) [Ring R] (J : Type w) [Small.{v} J] :
+local instance instHasLimitsOfShape_cechComplexAugmentations
+    (R : Type v) [Ring R] (J : Type w) [Small.{v} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{v} R) :=
   ModuleCat.hasLimitsOfShape
 

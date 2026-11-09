@@ -33,7 +33,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
-local instance : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+local instance instHasLeftKanExtension_affineModuleTensorCounitFactor
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
     (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
   have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
   exact Functor.HasLeftKanExtension.mk _

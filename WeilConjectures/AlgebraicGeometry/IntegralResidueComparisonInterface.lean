@@ -21,7 +21,8 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_algebraicGeometryIntegralResidueComparisonInterface
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

@@ -27,22 +27,30 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [Finite k]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
-local instance : Fact (ringChar (AlgebraicClosure k)).Prime :=
+local instance instFactPrimeRingCharAlgebraicClosure_smoothPurityDescendedUnitBaseChange
+    : Fact (ringChar (AlgebraicClosure k)).Prime :=
   ⟨Algebra.ringChar_eq k (AlgebraicClosure k) ▸ Fact.out⟩
-local instance : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
+local instance instFactNeNatRingCharAlgebraicClosure_smoothPurityDescendedUnitBaseChange
+    : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
 
-local instance : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityDescendedUnitBaseChange
+    : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityDescendedUnitBaseChange
+    : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityDescendedUnitBaseChange
+    : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
-local instance : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityDescendedUnitBaseChange_2
+    : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-local instance : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityDescendedUnitBaseChange_2
+    : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-local instance : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityDescendedUnitBaseChange_2
+    : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 
 /-- The bounded exchange obtained from the geometric fiber of the chosen compactification. -/

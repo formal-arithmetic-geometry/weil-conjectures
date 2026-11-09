@@ -22,7 +22,8 @@ Only the scalar mate and the ordinary balanced tensor comparison occur below.
 universe v u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueScalarCounitModel
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 private theorem tensorPresentation_app_port
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]

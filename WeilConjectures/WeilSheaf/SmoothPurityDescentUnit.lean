@@ -128,9 +128,11 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_smoothPurityDescentUnit
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_smoothPurityDescentUnit
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
 /-- Native descent of the finite-base tensor unit is the constant Weil complex. -/
 noncomputable def finiteBaseNativeDescentUnitIso :

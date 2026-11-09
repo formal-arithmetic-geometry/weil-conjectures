@@ -36,7 +36,8 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-local instance {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
+local instance instAdditiveModuleCatExtendScalars_affineOpenPseudoCoherentLocalizationPoint
+    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
     (ModuleCat.extendScalars.{u, u, u} f).Additive :=
   (ModuleCat.extendRestrictScalarsAdj.{u} f).left_adjoint_additive
 

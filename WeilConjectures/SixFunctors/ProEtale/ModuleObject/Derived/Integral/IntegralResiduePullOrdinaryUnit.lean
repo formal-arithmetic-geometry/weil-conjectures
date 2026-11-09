@@ -58,7 +58,8 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralIntegralResiduePullOrdinaryUnit
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 attribute [local irreducible] Mod.extendScalarsIsoComapInv
 private theorem extendSquare_forget
     {C : Type*} [Category C] [MonoidalCategory C]

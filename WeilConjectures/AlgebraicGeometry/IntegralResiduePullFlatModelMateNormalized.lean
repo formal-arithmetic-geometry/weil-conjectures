@@ -20,7 +20,8 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 open CategoryTheory.Functor
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_agIntegralResiduePullFlatModelMateNormalized
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 -- Private counit and mate calculations retained from the former flat-model proof.
 section ProofCalculations

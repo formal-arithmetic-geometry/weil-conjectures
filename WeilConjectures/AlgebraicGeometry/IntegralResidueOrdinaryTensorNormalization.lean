@@ -21,7 +21,8 @@ set_option autoImplicit false
 universe v u u'
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueOrdinaryTensorNormalization
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace CategoryTheory
 variable {C : Type u} [Category.{v + 1} C] [Abelian C]

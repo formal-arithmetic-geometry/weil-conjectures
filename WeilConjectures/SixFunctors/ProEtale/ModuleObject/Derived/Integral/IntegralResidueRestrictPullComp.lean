@@ -19,7 +19,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueRestrictPullComp
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
   Functor.leftDerivedFunctorIsoMapDerivedCategory

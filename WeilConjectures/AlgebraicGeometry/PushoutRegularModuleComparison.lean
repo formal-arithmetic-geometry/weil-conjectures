@@ -160,7 +160,8 @@ private abbrev extensionTensor {T : TopCat.{u}} {A B : T.Sheaf CommRingCat.{u}}
     (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t M).obj W :=
   z ⊗ₜ[A.obj.obj W, (t.hom.app W).hom] m
 
-local instance : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+local instance instHasLeftKanExtension_pushoutRegularModuleComparison
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
     (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
   have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
   exact Functor.HasLeftKanExtension.mk _

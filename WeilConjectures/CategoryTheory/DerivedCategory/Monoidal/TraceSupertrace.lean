@@ -75,7 +75,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_traceSupertrace
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 variable (A) in
 /-- The endomorphisms of the unit of `A`, placed in degree `0`, as endomorphisms of the unit of

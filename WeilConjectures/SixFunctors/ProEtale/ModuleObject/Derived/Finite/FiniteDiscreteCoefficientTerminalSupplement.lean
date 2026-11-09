@@ -17,7 +17,8 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteCoefficientTerminalSupplement
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 section UnitComparison
 open Opposite

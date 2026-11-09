@@ -36,18 +36,22 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance instFactPrimeRingChar_smoothPurityNativeDualizingDescent
+    : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
 local instance : (boundedConstructible (condensedRingObj
     (Profinite.padicAlgClRingObj l) (Spec (CommRingCat.of k₀)))).IsMonoidal :=
   CondensedRing.isMonoidal_boundedConstructible l (CondensedRing.point k₀)
 noncomputable local instance : MonoidalCategory (BoundedConstructible
     (condensedRingObj (Profinite.padicAlgClRingObj l) (Spec (CommRingCat.of k₀)))) :=
   ObjectProperty.fullMonoidalSubcategory _
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_smoothPurityNativeDualizingDescent
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_smoothPurityNativeDualizingDescent
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_smoothPurityNativeDualizingDescent
+    : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
 
 /-- Open restriction of a descended finite-base dualizing object is the descended

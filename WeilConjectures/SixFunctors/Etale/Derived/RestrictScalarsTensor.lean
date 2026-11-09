@@ -109,19 +109,22 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance instEssentiallySmallEtale_restrictScalarsTensor
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
 /-- Sheaves of modules on the small étale site have countable coproducts. Instance search times
 out on this. -/
-local instance (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
+local instance instHasCountableCoproductsSheaf_restrictScalarsTensor
+    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     HasCountableCoproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   ⟨fun _ _ ↦ (inferInstance : HasColimitsOfSize.{0, 0} (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))).has_colimits_of_shape _⟩
 
-local instance {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') :
+local instance instIsLeftAdjointModuleCatExtendScalars_restrictScalarsTensor
+    {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') :
     (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).IsLeftAdjoint :=
   (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).isLeftAdjoint
 

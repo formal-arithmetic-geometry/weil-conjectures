@@ -49,7 +49,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 universe u v
 
-local instance (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
+local instance instHasLimitsOfShape_moduleCechComparison
+    (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 

@@ -26,7 +26,8 @@ set_option hygiene false in
 local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
 
-local instance (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}) :
+local instance instHasLeftKanExtension_affinePushoutRingSectionDelta
+    (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}) :
     (Opens.map f.base).op.HasLeftKanExtension F :=
   Functor.HasLeftKanExtension.mk _
     (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)

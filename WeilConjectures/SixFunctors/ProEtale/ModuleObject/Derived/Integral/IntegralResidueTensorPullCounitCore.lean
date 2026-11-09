@@ -94,7 +94,8 @@ private theorem tensorPullCounit_fac_port (F : C ⥤ D) [F.Additive]
     ((F.mapHomotopyCategory (.up ℤ)).obj P)]
 
 end GenericNormalization
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralIntegralResidueTensorPullCounitCore
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 

@@ -49,7 +49,8 @@ variable [F.IsLeftAdjoint] [F.Monoidal]
 
 end CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueTensorModel
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

@@ -32,7 +32,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_traceShiftUnit
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 variable (A) in
 /-- The termwise right duals of the complex `𝟙` concentrated in degree `m`: the unit in degree

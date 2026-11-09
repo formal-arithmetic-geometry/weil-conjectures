@@ -75,7 +75,8 @@ private theorem extension_projection
   rw [h, whiskerLeft_comp_assoc, Mod.whiskerLeft_extendUnitHom_smul']
   rw [MonoidalCategory.tensorHom_def, Category.assoc]
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueOrdinaryTensorSquare
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] upperStarLowerStarAdjunction comapUpperStarIso
   comapLowerStarIso profinitePointModuleForgetPullbackIso

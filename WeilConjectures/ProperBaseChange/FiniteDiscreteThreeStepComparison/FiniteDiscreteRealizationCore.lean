@@ -33,7 +33,8 @@ open CategoryTheory Limits
 attribute [local instance 10000] CategoryTheory.CategoryStruct.toQuiver
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteRealizationCore
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 /-- Four isomorphisms identifying the three consecutive arrows in two diagrams. -/
 structure FiniteDiscreteThreeStepComparison {C : Type*} [Category C]

@@ -22,7 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 
-local instance (R : Type u) [Ring R] (J : Type*) [Small.{u} J] :
+local instance instHasLimitsOfShape_cechHorseshoeLiftClass
+    (R : Type u) [Ring R] (J : Type*) [Small.{u} J] :
     HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
   ModuleCat.hasLimitsOfShape
 
