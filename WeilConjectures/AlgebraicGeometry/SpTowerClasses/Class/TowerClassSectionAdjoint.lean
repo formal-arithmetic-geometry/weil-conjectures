@@ -29,6 +29,7 @@ attribute [local irreducible] lineModule
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option maxHeartbeats 800000 in
 -- Comparing the two section carriers traverses the fixed direct-image construction.
 /-- Sectionwise ordinary adjunction with its explicit target carrier.
 
