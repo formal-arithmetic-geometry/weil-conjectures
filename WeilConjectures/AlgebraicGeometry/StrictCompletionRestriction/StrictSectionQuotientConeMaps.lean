@@ -465,7 +465,6 @@ private theorem scalarSection_pow (X : Scheme.{u})
       simp only [pow_succ, End.mul_def, NatTrans.comp_app, Functor.map_comp, ih]
       exact congrArg (fun h ↦ h ≫ _) (hb M)
 
-set_option maxHeartbeats 400000 in
 -- Instantiate the abstract transport with the actual coefficient quotient.
 private theorem quotientConeMap (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1}

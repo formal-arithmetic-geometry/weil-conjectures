@@ -72,7 +72,7 @@ private theorem exteriorGermMap_wedge {X : Scheme.{v}} (M : X.Modules)
         (fun i ↦ M.presheaf.germ U x hx (a i)) := by
   exact exteriorPower.alternatingMapLinearEquiv_apply_ιMulti _ a
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The section-ring scalar action must be identified across exterior restrictions.
 set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorGermMap_res {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
@@ -128,7 +128,6 @@ private theorem commonGerms {X : Scheme.{v}} (M : X.Modules) (x : X)
     · simp only [Fin.snoc_castSucc]
       exact (M.presheaf.germ_res_apply (homOfLE hVU) x hxV (s j)).trans (hs j)
 
-set_option maxHeartbeats 800000 in
 -- Exterior powers over section rings and stalk rings require scalar-action transports.
 set_option backward.isDefEq.respectTransparency false in
 /-- The sectionwise exterior power has the expected stalk comparison.

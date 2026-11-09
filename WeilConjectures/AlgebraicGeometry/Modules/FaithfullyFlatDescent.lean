@@ -185,7 +185,7 @@ lemma pullback_hom_ext_of {f : Spec (.of B) ⟶ Spec (.of A)} {M : (Spec (.of A)
     rw [this, he, Hom.app_smul_of, Hom.app_smul_of, h]
   | add x y hx hy => simp only [map_add, hx, hy]
 
-set_option maxHeartbeats 1000000 in -- sections of pullbacks along `Spec.map`s are slow
+set_option maxHeartbeats 900000 in -- sections of pullbacks along `Spec.map`s are slow
 open Pseudofunctor in
 /-- **Descent of morphisms along a faithfully flat map of affine schemes** (abstract version):
 for `f : Spec B ⟶ Spec A` with `A → B` faithfully flat, `f^*` is fully faithful on
@@ -285,7 +285,6 @@ theorem bijective_toDescentData_map_of [Module.FaithfullyFlat A B]
     refine pullback_hom_ext_of eM heM fun m ↦ ?_
     rw [pullbackΓ_naturality, hχ, hg]
 
-set_option maxHeartbeats 1000000 in -- sections of pullbacks along `Spec.map`s are slow
 /-- **Descent of morphisms along a faithfully flat map of affine schemes**: for `A → B`
 faithfully flat, pulling back along `Spec B ⟶ Spec A` is fully faithful on quasi-coherent
 modules relative to descent data. -/

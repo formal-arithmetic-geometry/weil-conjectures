@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 public import Mathlib.Topology.Sheaves.Abelian
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-!
 # Exactness of complexes of `𝒪_X`-modules can be checked on stalks
@@ -39,9 +40,6 @@ noncomputable def stalkFunctor (x : X) : X.Modules ⥤ Ab.{u} :=
 lemma stalkFunctor_obj (x : X) (M : X.Modules) :
     (stalkFunctor x).obj M = M.presheaf.stalk x :=
   rfl
-
-instance : (toAb X).Additive :=
-  inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).Additive
 
 instance : (toAb X).Faithful :=
   inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).Faithful

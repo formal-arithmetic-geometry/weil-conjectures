@@ -122,7 +122,6 @@ private def pullbackUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [local irreducible] pointScalar pullbackUnit
 
-set_option maxHeartbeats 800000 in
 -- Kernel conversion compares the sheaf monoidal instances at the coefficient square.
 omit [IsCommMonObj Λ] in
 private theorem coefficient_scalar_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
