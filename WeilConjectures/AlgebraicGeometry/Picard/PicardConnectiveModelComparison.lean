@@ -58,7 +58,6 @@ private noncomputable def localizationEquiv {C : Type*} [Category C] [Abelian C]
   AddEquiv.ofBijective DerivedCategory.Q.mapAddHom
     (DerivedCategory.connective_single_hom_bijective M P hneg)
 
-set_option maxHeartbeats 800000 in
 -- Comparing termwise tensor models unfolds several layers of sheaf functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
 import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
 import all WeilConjectures.RingTheory.KoszulProjectiveResolution
@@ -28,9 +29,7 @@ attribute [local instance] WeilConjectures.sfAbSheafify
 
 attribute [local instance] WeilConjectures.sfAbBijective
 
-local instance projectionRingSheafify (Y : Scheme.{t}) :
-    HasSheafify (ProEt.topology Y) CommRingCat.{t + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{t, 0} Y
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
 

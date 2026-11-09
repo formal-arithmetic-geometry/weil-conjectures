@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.DiscreteCoefficientModel
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsCompletedSectionRing
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 import all WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
@@ -28,12 +29,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- The explicit universe instance for ordinary coefficient comparisons.
-Source: coefficient-site sheafification
-(auxiliary; not a blueprint node). -/
-local instance projectionCommRingSheafify (X : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{u, u} X
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 /-- The explicit universe instance for ordinary coefficient comparisons.
 Source: coefficient-site sheafification
@@ -229,7 +225,7 @@ private theorem canonicalAbelianMap_scalar_natural
     letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     FiniteDiscreteOrdinary.canonicalAbelianMap B X ≫ (upperStarFromPoint X).map g =
       (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).map
         (AddCommGrpCat.ofHom.{u + 1} f) ≫ FiniteDiscreteOrdinary.canonicalAbelianMap C X := by
@@ -280,7 +276,7 @@ private theorem canonicalRingMap_scalar_natural
     letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     FiniteDiscreteOrdinary.canonicalRingMap B X ≫
         InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
           ((upperStarFromPoint X).map g) =
@@ -291,7 +287,7 @@ private theorem canonicalRingMap_scalar_natural
   letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let J := Scheme.ProEt.topology X
   let ηB := toSheafify J ((Functor.const X.ProEtᵒᵖ).obj
     (CommRingCat.of.{u + 1} (ULift.{u + 1} B)))
@@ -403,7 +399,7 @@ theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]
     letI : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     letI : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let B := Padic.coefficientExtensionIntegers l E
     let C := Padic.coefficientExtensionRing l E (n + 1)

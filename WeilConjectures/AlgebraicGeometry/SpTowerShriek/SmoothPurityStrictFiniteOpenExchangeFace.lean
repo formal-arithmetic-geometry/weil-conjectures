@@ -30,7 +30,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 -- Produce explicit checked congruences for definitional instance diamonds.
 -- Each reduction is recorded as a separate reflexivity theorem; the final
 -- proof uses these equations, so the kernel never reduces the complete word.
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -38,14 +37,12 @@ private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``heq_of_eq ty.getAppFn.constLevels!)
     (ty.getAppArgs.push h)
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionSymm (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, β, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``HEq.symm ty.getAppFn.constLevels!) #[α, β, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -54,14 +51,12 @@ private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``HEq.trans ty.getAppFn.constLevels!)
     #[α, β, γ, a, b, c, h, k]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionToEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, _, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``eq_of_heq ty.getAppFn.constLevels!) #[α, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let α ← Lean.Meta.inferType a
@@ -72,7 +67,6 @@ private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr :=
     (zetaDelta := true) (kind? := `_finiteReduction)
   conversionOfEq h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta partial def conversionCongruence
     (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
@@ -223,7 +217,6 @@ private meta partial def conversionCongruence
   cache.modify fun m => m.insert (a, b) h
   return h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit :=
   Lean.Elab.Tactic.withMainContext do
@@ -240,7 +233,6 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
     Lean.Elab.Tactic.closeMainGoal `exact result
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem conjugate_open_unit
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -260,7 +252,6 @@ private theorem conjugate_open_unit
   simp only [Equivalence.funInvIdAssoc_inv_app, Equivalence.unit, Category.assoc,
     Functor.comp_map, Functor.comp_obj, Functor.id_obj]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem ordinary_open_unit
     (A : Type u) [CommRing A] [Finite A]
@@ -290,25 +281,21 @@ private theorem ordinary_open_unit
       (openSquarePullbackModel A j) N
 
 -- Exact adjunction normalization, proved directly from localization unit formulas.
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem quotient_hom_id {B : Type*} [Category B] [Abelian B]
     [HasDerivedCategory B] (J : CochainComplex B ℤ) :
     (DerivedCategory.quotientCompQhIso B).hom.app J = 𝟙 _ := rfl
 
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem quotient_inv_id {B : Type*} [Category B] [Abelian B]
     [HasDerivedCategory B] (J : CochainComplex B ℤ) :
     (DerivedCategory.quotientCompQhIso B).inv.app J = 𝟙 _ := rfl
 
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem homotopyFactors_inv_id {B E : Type*} [Category B] [Category E]
     [Abelian B] [Abelian E] (F : B ⥤ E) [F.Additive] (J : CochainComplex B ℤ) :
     (F.mapHomotopyCategoryFactors (.up ℤ)).inv.app J = 𝟙 _ := rfl
 
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem factorsh_hom {B E : Type*} [Category B] [Category E]
     [Abelian B] [Abelian E] [HasDerivedCategory B] [HasDerivedCategory E]
@@ -320,7 +307,6 @@ private theorem factorsh_hom {B E : Type*} [Category B] [Category E]
     homotopyFactors_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
   erw [DerivedCategory.Qh.map_id, Category.comp_id, Category.comp_id]
 
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem map_iso_word
     {A B : Type*} [Category A] [Category B] (F : A ⥤ B)
@@ -329,7 +315,6 @@ private theorem map_iso_word
   rw [← F.map_comp_assoc, e.inv_hom_id, F.map_id, Category.id_comp,
     d.inv_hom_id, Category.comp_id]
 
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem exact_adjunction_eq
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
@@ -394,7 +379,6 @@ private theorem exact_adjunction_eq
       simp only [Functor.comp_obj] at hh
       convert hh using 1)
 
-set_option maxHeartbeats 2000000 in
 -- Localization comparison is checked within this declaration.
 private theorem fixed_open_exact_adjunction
     (A : Type u) [CommRing A] {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
@@ -426,7 +410,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option linter.style.haveILetI false in
 -- Inline the local instances to keep the derived comparison expressions small.
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem strict_finite_open_unit (b : Base l E)
     {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] (n : ℕ)
@@ -479,7 +462,6 @@ private theorem strict_finite_open_unit (b : Base l E)
   erw [Category.comp_id]
   exact ht
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem invert_face {C : Type*} [Category C] {A B D E F G : C}
     (a : A ≅ B) (b : B ≅ D) (c : D ≅ G)
@@ -489,7 +471,6 @@ private theorem invert_face {C : Type*} [Category C] {A B D E F G : C}
   have he : a ≪≫ b ≪≫ c = d ≪≫ e ≪≫ f := Iso.ext h
   simpa only [Iso.trans_inv, Category.assoc] using congrArg Iso.inv he
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem rotate_face {C : Type*} [Category C] {A B D E F G : C}
     (a : A ≅ B) (b : B ≅ D) (c : D ≅ G)
@@ -501,7 +482,6 @@ private theorem rotate_face {C : Type*} [Category C] {A B D E F G : C}
   rw [h]
   simp only [Iso.hom_inv_id_assoc]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem native_open_unit_mate (A : Type u) [CommRing A]
     {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
@@ -538,7 +518,7 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 400000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}
@@ -589,7 +569,6 @@ private theorem inverse_pull_square (b : Base l E)
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
         exactByConversion h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_scalar_from_comparisons
     {C C' D D' E E' F F' : Type*}
@@ -622,7 +601,7 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
     (o : Operations l E b) (levels : ComparisonLevels l E b o)
@@ -696,7 +675,6 @@ private theorem open_exchange_inverse (b : Base l E)
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
 Source: blueprint operations proof (2), finite open exchange face.

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+public import WeilConjectures.SmoothPurity.Compact.CompactSupportReductionTowerData
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
@@ -36,14 +37,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 open Scheme
-
-/-- Finiteness of every positive coefficient level, using the recorded finiteness theorem.
-Writing the level as n+1 covers exactly the positive integers.
-Source: blueprint sk-def-sf-operations (vi) (blueprint: def-weil-exceptional-inverse-image). -/
-noncomputable instance sfPositiveCoefficient_finite (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
-    Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
-  Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
 
 /-- The ordinary derived support candidate attached to a specified compactification.
 Source: blueprint, sk-def-sf-operations (vi)

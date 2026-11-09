@@ -82,7 +82,7 @@ public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibi
 public import WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence
 public import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportProetale
-import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
+public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
 import all WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 import all WeilConjectures.CategoryTheory.Strict.StrictRoosShiftLocalization
 import all WeilConjectures.CategoryTheory.NormalizedLimitSquare.NormalizedLimitSquareCoherence
@@ -192,22 +192,6 @@ attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
 attribute [local instance 2000] reductionModulesHasDerivedCategory reductionTowerHasDerivedCategory
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-
-/-- Pointwise preservation transferred to the finite-limit class.
-Source: Mathlib functor-category limits
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
-instance cbcRealizationWhiskerLimits {C : Type uC} {D : Type uD} [Category.{vC} C]
-    [Category.{vD} D] [HasFiniteLimits C] (F : C ⥤ D) [PreservesFiniteLimits F] :
-    PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F) where
-  preservesFiniteLimits _ _ _ := inferInstance
-
-/-- Pointwise preservation transferred to the finite-colimit class.
-Source: Mathlib functor-category colimits
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
-instance cbcRealizationWhiskerColimits {C : Type uC} {D : Type uD} [Category.{vC} C]
-    [Category.{vD} D] [HasFiniteColimits C] (F : C ⥤ D) [PreservesFiniteColimits F] :
-    PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F) where
-  preservesFiniteColimits _ _ _ := inferInstance
 
 /-- Constant-tower/Rlim adjunction for an arbitrary coefficient sheaf.
 Source: Stacks 079P (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/

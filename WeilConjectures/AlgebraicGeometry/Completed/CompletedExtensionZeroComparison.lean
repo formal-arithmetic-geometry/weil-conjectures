@@ -1038,7 +1038,7 @@ private def openSliceAdjunction {U T : Scheme.{t}}
     exact ringAdj_second e φ ψ H₁.symm
   exact SheafOfModules.pushforwardPushforwardAdj e.toAdjunction φ ψ H₁ H₂
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1000000 in
 -- Unfolding the concrete composite adjunction and its generator formula needs more heartbeats.
 open Classical in
 /-- The extension/restriction adjunction is fixed by the direct-sum generator formula.
@@ -1391,7 +1391,6 @@ private theorem rightCompletedSquare :
   erw [hou]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Elaborating all four completed scalar-restriction functors needs a larger budget.
 /-- The right-adjoint exchange is uniquely fixed by restriction along the canonical
 cartesian comparison of pro-etale objects, with its actual completed scalar action.

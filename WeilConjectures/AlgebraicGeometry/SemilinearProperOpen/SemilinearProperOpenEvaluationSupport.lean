@@ -148,7 +148,6 @@ private theorem eval_constant_diagram_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 400000 in
 -- The uniqueness proof compares the section carriers of both composite functors.
 /-- Direct image and evaluation commute by the identity on component sections.
 Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7
@@ -477,7 +476,6 @@ attribute [local irreducible] SheafOfModules.OpenTensorNormalization.exactDerive
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 600000 in
 -- Normalize the chosen adjoints before comparing the exact derived composition squares.
 private theorem eval_derived_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : Modules C τ X ⥤ Modules C τ Y) [F.IsRightAdjoint] [F.Additive]
@@ -540,7 +538,6 @@ private theorem eval_derived_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 600000 in
 -- Identify the normalized ordinary square before taking the two exact open mates.
 private theorem eval_open_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
     (F : VaryingRing.Modules C τ X ⥤ VaryingRing.Modules C τ Y) [F.IsRightAdjoint] [F.Additive]
