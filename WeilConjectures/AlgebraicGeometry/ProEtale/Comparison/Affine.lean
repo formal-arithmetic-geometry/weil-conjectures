@@ -551,7 +551,6 @@ lemma exists_left_base_preimage {P X Y Z : S.AffineProEt} {fst : P ⟶ X} {snd :
       _ = (pullback.snd f.left g.left).base z := by rw [hL.isoPullback_inv_snd]
       _ = y := hz₂
 
-set_option maxHeartbeats 1600000 in
 -- The arrow-refinement construction elaborates many large pullback presentations.
 variable {S} in
 /-- Given a finite jointly surjective family `f i : V i ⟶ X` in the affine pro-étale site,
@@ -1142,7 +1141,6 @@ instance : PreservesLimitsOfShape WalkingCospan (AffineEtale.toAffineProEt S) :=
       (AffineEtale.Spec S ⋙ Etale.forget S ⋙ CategoryTheory.Over.forget S)
   preservesLimitsOfShape_of_reflects_of_preserves _ (toScheme S)
 
-set_option maxHeartbeats 1600000 in
 -- The arrow-refinement construction elaborates many large pullback presentations.
 set_option backward.defeqAttrib.useBackward true in
 lemma singleton_inf_le_relativelyPresentable :

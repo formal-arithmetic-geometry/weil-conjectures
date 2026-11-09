@@ -67,6 +67,6 @@ theorem proEtaleProjectionMateExact :
         NatTrans.CommShift τ ℤ ∧
         IsIso (τ.app ((DerivedCategory.singleFunctor (proEtaleRingModules Y R) 0).obj
           (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)
-            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))) := by
-  exact proEtaleProjectionMateData f R S c a b E
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))) :=
+  proEtaleProjectionMateData.{u} f R S c a b E
 end AlgebraicGeometry.Scheme
