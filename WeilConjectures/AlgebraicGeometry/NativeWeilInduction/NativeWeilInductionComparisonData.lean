@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.CategoryTheory.Endofunctor.FreeDerivedWeilResolution
 public import WeilConjectures.AlgebraicGeometry.Native.NativeAdicCompactSupportSums
@@ -51,9 +53,9 @@ def exactForgetComparison (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     (IsoAlgebra.mapOfNatIso e).mapDerivedCategory ⋙
         (IsoAlgebra.forget Q).mapDerivedCategory ≅
       (IsoAlgebra.forget P).mapDerivedCategory ⋙ L.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (IsoAlgebra.mapOfNatIsoCompForgetIso e) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Derive the native exchange using exact Frobenius equivalences and the specified
 right-derived units. Source: blueprint `lem-fix-weil-operations`, first paragraph.
@@ -107,7 +109,7 @@ theorem exactForgetNormalization_proof
   erw [h, Category.comp_id]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_factors
     (IsoAlgebra.mapOfNatIso e) (IsoAlgebra.forget Q) K]
-  simp only [Iso.inv_hom_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
 
 end ExactComparisons
 
@@ -135,7 +137,7 @@ Source: native framework and proof step 6 of the ordinary-derived comparison
 (blueprint: def-sf-native-weil-induction-comparison-data). -/
 def structureIso (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :
     forget k₀ l T ⋙ frobenius k₀ l T ≅ forget k₀ l T :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (IsoAlgebra.strNatIso (WeilSheaf.frobeniusPullback k₀ l T))
 
@@ -215,11 +217,11 @@ def exchange :
         l c.g (comp_over c.g (Spec (.of k₀))))) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso
             l c.i (comp_over c.i (Spec (.of k₀)))) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm) _ ≪≫
     Functor.associator _ _ _
 
 /-- Structural clauses for each of the three native hearts and its derived forgetful
