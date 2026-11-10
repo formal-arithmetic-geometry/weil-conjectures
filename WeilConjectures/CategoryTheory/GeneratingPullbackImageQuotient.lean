@@ -62,7 +62,7 @@ private theorem ideal_unit_endomorphism
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (δ : End (SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) :
-    ∃ a : M ⟶ M, a ≫ j = j ≫ δ := by
+    ∃ a : M ⟶ M, a ≫ j = j ≫ (δ).asHom := by
   let s := (SheafOfModules.unit
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).unitHomEquiv δ
   let a : M ⟶ M := ⟨PresheafOfModules.sectionsSMul M.val ⟨s.val, s.property⟩⟩

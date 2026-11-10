@@ -9,6 +9,7 @@ module
 public import WeilConjectures.RingTheory.SerreConditions
 import Mathlib.RingTheory.LocalProperties.Reduced
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Serre's criterion for reducedness

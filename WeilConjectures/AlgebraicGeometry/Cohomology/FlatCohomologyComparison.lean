@@ -197,7 +197,7 @@ Source: the source library's `smulHom` identities and functoriality of `toSheaf`
 (blueprint: def-pc-flat-cohomology-comparison) -/
 def scalarRep (M : X.Modules) :
     Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
-  toFun a := (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
+  toFun a := .of ((SheafOfModules.toSheaf X.ringCatSheaf)).map (M.smulHom a)
   map_one' := by
     change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom 1) = 𝟙 _
     rw [smulHom_one]
@@ -303,7 +303,7 @@ def cohomologyComparisonLinear
       G.obj ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))))
     {F : Sheaf J AddCommGrpCat.{u}} {F' : Sheaf K AddCommGrpCat.{u}}
     (φ : G.obj F ⟶ F') (ρ : R →+* End F) (τ : R →+* End F')
-    (h : ∀ a, G.map (ρ a) ≫ φ = φ ≫ τ a) (q : ℕ) :
+    (h : ∀ a, G.map (ρ a) ≫ φ = φ ≫ (τ a).asHom) (q : ℕ) :
     letI := cohomologyModule F ρ q
     letI := cohomologyModule F' τ q
     F.H q →ₗ[R] F'.H q := by

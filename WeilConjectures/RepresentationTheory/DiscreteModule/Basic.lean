@@ -285,7 +285,7 @@ variable (G) in
 def coind₁Action (A : AddCommGrpCat.{max u w}) : Action AddCommGrpCat.{max u w} G where
   V := AddCommGrpCat.of (smoothFunctions G A)
   ρ :=
-    { toFun g := AddCommGrpCat.ofHom (translate g)
+    { toFun g := .of <| AddCommGrpCat.ofHom (translate g)
       map_one' := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
         simp [End.one_def])
       map_mul' a b := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by

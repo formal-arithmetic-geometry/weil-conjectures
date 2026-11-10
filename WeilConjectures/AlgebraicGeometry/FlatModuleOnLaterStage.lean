@@ -43,8 +43,8 @@ private theorem flatOver_restrict
   convert hh using 1 <;> try rfl
   ext r m
   change (M.smul ((e.appIso U.1).inv.hom
-    (((e ≫ b).appLE V.1 U.1 hU).hom r))).hom m =
-      (M.smul ((b.appLE V.1 U'.1 hU').hom r)).hom m
+    (((e ≫ b).appLE V.1 U.1 hU).hom r))).asHom.hom m =
+      (M.smul ((b.appLE V.1 U'.1 hU').hom r)).asHom.hom m
   have he : U.1 ≤ e ⁻¹ᵁ U'.1 := (e.preimage_image_eq U.1).ge
   have hcomp := e.appLE_comp_appLE b V.1 U'.1 U.1 hU' he
   have hring : (e ≫ b).appLE V.1 U.1 hU ≫ (e.appIso U.1).inv =

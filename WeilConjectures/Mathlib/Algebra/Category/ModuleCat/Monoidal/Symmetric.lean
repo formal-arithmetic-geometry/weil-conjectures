@@ -100,7 +100,7 @@ noncomputable def hasRightDualOfFree (M : ModuleCat.{u} R) [Module.Free R M]
 braiding of `ModuleCat R` and any right dual of `M`, is the trace `LinearMap.trace R M f`. -/
 theorem trace_eq_algebraMap_linearMapTrace {M : ModuleCat.{u} R} [HasRightDual M]
     [Module.Free R M] [Module.Finite R M] (f : M ⟶ M) :
-    trace f = algebraMap R (End (𝟙_ (ModuleCat.{u} R))) (LinearMap.trace R M f.hom) := by
+    trace f = (algebraMap R (End (𝟙_ (ModuleCat.{u} R))) (LinearMap.trace R M f.hom)).asHom := by
   classical
   let b := Module.Free.chooseBasis R M
   let := exactPairingOfBasis M b

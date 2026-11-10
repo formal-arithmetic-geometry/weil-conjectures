@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 @[expose] public section
 

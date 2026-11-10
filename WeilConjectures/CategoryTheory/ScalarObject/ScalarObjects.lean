@@ -44,7 +44,7 @@ variable {R : Type r} [Ring R] {C : Type u} [Category.{v} C] [Preadditive C]
 (blueprint: lem-exc-scalar-objects-equivalence) -/
 structure Hom (M N : ScalarObject R C) where
   hom : M.X ⟶ N.X
-  comm : ∀ a : R, M.ρ a ≫ hom = hom ≫ N.ρ a
+  comm : ∀ a : R, M.ρ a ≫ hom = hom ≫ (N.ρ a).asHom
 
 @[ext] theorem hom_ext {M N : ScalarObject R C} {f g : Hom M N}
     (h : f.hom = g.hom) : f = g := by cases f; cases g; cases h; rfl
@@ -104,16 +104,16 @@ noncomputable def mapFullyFaithful (F : C ⥤ D) [F.Additive]
 Source: Stacks Project, Tag 04JQ.
 (blueprint: lem-exc-scalar-objects-equivalence) -/
 def conjugate (X Y : D) (i : X ≅ Y) : End Y →+* End X where
-  toFun a := i.hom ≫ a ≫ i.inv
+  toFun a := .of (i.hom) ≫ (a).asHom ≫ i.inv
   map_one' := by simp
   map_mul' a b := by
     change i.hom ≫ (b ≫ a) ≫ i.inv =
-      (i.hom ≫ b ≫ i.inv) ≫ (i.hom ≫ a ≫ i.inv)
+      (i.hom ≫ b ≫ i.inv) ≫ (i.hom ≫ (a).asHom ≫ i.inv)
     simp [Category.assoc]
   map_zero' := by simp
   map_add' a b := by
     exact ((Preadditive.leftComp X i.hom).comp
-      (Preadditive.rightComp Y i.inv)).map_add a b
+      (Preadditive.rightComp Y i.inv)).map_add (a b).asHom
 
 /-- Scalar operations lift uniquely through a fully faithful additive functor.
 Source: Stacks Project, Tag 04JQ.

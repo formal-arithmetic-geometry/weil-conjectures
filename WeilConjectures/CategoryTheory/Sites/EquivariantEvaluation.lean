@@ -60,7 +60,7 @@ variable {C : Type u} [Category.{v} C] {T : C} {H : Type*} [Group H] (a : H →*
   (Λ : Type w') [CommRing Λ]
 
 lemma End.unop_map_mul (g h : H) :
-    MulOpposite.unop (a (g * h)) = (a g).unop ≫ (a h).unop := by
+    MulOpposite.unop (a (g * h)) = .of ((a g)).unop ≫ (a h).unop := by
   rw [map_mul, MulOpposite.unop_mul, End.mul_def]
 
 namespace Presheaf
@@ -99,7 +99,7 @@ def equivariantFunctions (M : Rep.{w} Λ H) (W : C) : Submodule Λ ((T ⟶ W) �
   smul_mem' c s hs h t := by simp [hs h t]
 
 lemma mem_equivariantFunctions {M : Rep.{w} Λ H} {W : C} {s : (T ⟶ W) → M} :
-    s ∈ equivariantFunctions a Λ M W ↔ ∀ h t, s ((a h).unop ≫ t) = M.ρ h (s t) :=
+    s ∈ equivariantFunctions a Λ M W ↔ ∀ h t, s (((a h)).asHom.unop ≫ t) = M.ρ h (s t) :=
   Iff.rfl
 
 /-- The presheaf `W ↦ Hom_H(Hom(T, W), M)` of equivariant functions, with restriction given by
@@ -314,7 +314,7 @@ sheaf of equivariant functions sends epimorphisms to locally surjective morphism
 equivariant function on a free `H`-set lifts along a surjection. -/
 lemma isLocallySurjective_coevaluationRep_map (hT : ∀ ⦃S : Sieve T⦄, S ∈ J T → S (𝟙 T))
     (hfree : ∀ W : C, ∃ S ∈ J W, ∀ ⦃W' : C⦄ (f : W' ⟶ W), S f →
-      ∀ (h : H) (t : T ⟶ W'), (a h).unop ≫ t = t → h = 1)
+      ∀ (h : H) (t : T ⟶ W'), ((a h)).asHom.unop ≫ t = t → h = 1)
     {M N : Rep.{max u v} Λ H} (π : M ⟶ N) [Epi π] :
     Sheaf.IsLocallySurjective ((coevaluationRep a Λ hT).map π) := by
   refine ⟨fun {W} s ↦ ?_⟩
@@ -336,7 +336,7 @@ exact. -/
 lemma preservesFiniteColimits_coevaluationRep [HasSheafify J (ModuleCat.{max u v} Λ)]
     (hT : ∀ ⦃S : Sieve T⦄, S ∈ J T → S (𝟙 T))
     (hfree : ∀ W : C, ∃ S ∈ J W, ∀ ⦃W' : C⦄ (f : W' ⟶ W), S f →
-      ∀ (h : H) (t : T ⟶ W'), (a h).unop ≫ t = t → h = 1) :
+      ∀ (h : H) (t : T ⟶ W'), ((a h)).asHom.unop ≫ t = t → h = 1) :
     PreservesFiniteColimits (coevaluationRep a Λ hT) := by
   have : (coevaluationRep a Λ hT).PreservesEpimorphisms :=
     ⟨fun π _ ↦ have := isLocallySurjective_coevaluationRep_map hT hfree π

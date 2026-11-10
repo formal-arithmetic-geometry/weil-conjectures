@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Filtered.Connected
 public import Mathlib.CategoryTheory.Filtered.Final
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Pointed étale neighbourhoods and the strict henselization

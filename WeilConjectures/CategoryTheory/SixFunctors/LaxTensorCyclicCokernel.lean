@@ -55,7 +55,7 @@ theorem laxTensorCyclicCokernel
     (hD : IsColimit (CokernelCofork.ofπ (Functor.LaxMonoidal.ε F ≫ F.map r) zD))
     (hs : ∀ M : C,
       F.map ((ρ_ M).inv ≫ (M ◁ dC) ≫ (ρ_ M).hom) =
-        (ρ_ (F.obj M)).inv ≫ (F.obj M ◁ dD) ≫ (ρ_ (F.obj M)).hom)
+        (ρ_ (F.obj M)).inv ≫ (F.obj M ◁ (dD).asHom) ≫ (ρ_ (F.obj M)).hom)
     (M : C) : IsIso (Functor.LaxMonoidal.μ F M N) := by
   let H : C ⥤ D := tensorLeft M ⋙ F
   let c := (CokernelCofork.ofπ r zC).map H

@@ -65,7 +65,7 @@ private def sourceScalar (U : C) (b : B.obj.obj (op U)) :
 private def coefficientHomSmul (U : C) (b : B.obj.obj (op U))
     (f : (PresheafOfModules.restrictOver R.obj U).obj ((scalarRestriction φ).obj M).val ⟶
       (PresheafOfModules.restrictOver R.obj U).obj N.val) :=
-  sourceScalar φ M U b ≫ f
+  (sourceScalar φ M U b).asHom ≫ f
 
 set_option backward.isDefEq.respectTransparency false in
 @[instance_reducible]

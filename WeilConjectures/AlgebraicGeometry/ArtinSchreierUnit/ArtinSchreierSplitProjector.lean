@@ -47,7 +47,7 @@ variable (χ : AddChar G R)
 
 /-- Translation of functions on the trivial G-torsor. -/
 def splitTranslation (c : G) : End (∏ᶜ fun _ : G ↦ U) :=
-  Pi.lift (fun d ↦ Pi.π (fun _ : G ↦ U) (d + c))
+  .of (Pi.lift (fun d ↦ Pi.π (fun _ : G ↦ U) (d + c)))
 
 /-- The actual finite averaging endomorphism in a linear category. -/
 def splitProjector : End (∏ᶜ fun _ : G ↦ U) :=
@@ -68,7 +68,7 @@ omit [Fintype G] in
   simp
 
 theorem splitProjector_π (d : G) :
-    splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) d =
+    (splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) d =
       ∑ c : G, (Ring.inverse (Fintype.card G : R) * χ (-c)) •
         Pi.π (fun _ : G ↦ U) (d + c) := by
   unfold splitProjector
@@ -83,7 +83,7 @@ theorem splitProjector_π (d : G) :
 
 theorem splitProjector_eigen (d : G) :
     splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) d =
-      χ d • (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) := by
+      χ d • ((splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0) := by
   rw [splitProjector_π, splitProjector_π, Finset.smul_sum]
   apply Fintype.sum_equiv (Equiv.addLeft d)
   intro c
@@ -98,7 +98,7 @@ theorem splitProjector_eigen (d : G) :
 
 theorem splitCharacterVector_projector
     (hq : IsUnit (Fintype.card G : R)) :
-    splitCharacterVector U χ ≫ splitProjector U χ = splitCharacterVector U χ := by
+    splitCharacterVector U χ ≫ (splitProjector U χ).asHom = splitCharacterVector U χ := by
   apply Pi.hom_ext
   intro d
   simp only [Category.assoc, splitProjector_π, Preadditive.comp_sum,
@@ -117,7 +117,7 @@ theorem splitCharacterVector_projector
 /-- The averaging endomorphism factors through its value at zero. -/
 theorem splitProjector_factor :
     (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫ splitCharacterVector U χ =
-      splitProjector U χ := by
+      (splitProjector U χ).asHom := by
   apply Pi.hom_ext
   intro d
   rw [Category.assoc, splitCharacterVector_π, Linear.comp_smul, Category.comp_id]
@@ -125,7 +125,7 @@ theorem splitProjector_factor :
 
 /-- The finite average is idempotent when the group order is invertible. -/
 theorem splitProjector_idempotent (hq : IsUnit (Fintype.card G : R)) :
-    splitProjector U χ ≫ splitProjector U χ = splitProjector U χ := by
+    splitProjector U χ ≫ splitProjector U χ = (splitProjector U χ).asHom := by
   calc
     _ = (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫
         splitCharacterVector U χ ≫ splitProjector U χ := by
@@ -141,7 +141,7 @@ def actionProjector (M : C) (σ : G → End M) (χ : AddChar G R) : End M :=
 /-- Reindexing the finite average gives its character eigenrelation. -/
 theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (b : G) :
-    actionProjector M σ χ ≫ σ b = χ b • actionProjector M σ χ := by
+    actionProjector M σ χ ≫ σ b = (χ b • actionProjector M σ χ).asHom := by
   unfold actionProjector
   rw [Preadditive.sum_comp, Finset.smul_sum]
   apply Fintype.sum_equiv (Equiv.addRight b)
@@ -165,7 +165,7 @@ theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
 /-- Averaging is idempotent whenever the group order is invertible. -/
 theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (hq : IsUnit (Fintype.card G : R)) :
-    actionProjector M σ χ ≫ actionProjector M σ χ = actionProjector M σ χ := by
+    actionProjector M σ χ ≫ actionProjector M σ χ = (actionProjector M σ χ).asHom := by
   conv_lhs => arg 2; rw [actionProjector]
   rw [Preadditive.comp_sum]
   have ht (c : G) : actionProjector M σ χ ≫
@@ -191,7 +191,7 @@ The section is the actual character vector, rather than a chosen existence witne
 Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, first paragraph,
 root evaluation (blueprint: lem-wft-as-split-character-projector). -/
 def splitProjectorImageIso (hq : IsUnit (Fintype.card G : R)) :
-    image (splitProjector U χ) ≅ U := by
+    image ((splitProjector U χ)).asHom ≅ U := by
   let r := splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0
   let j := splitCharacterVector U χ
   have hjr : j ≫ r = 𝟙 U := by
@@ -207,7 +207,7 @@ def splitProjectorImageIso (hq : IsUnit (Fintype.card G : R)) :
 /-- This image isomorphism is evaluation at zero, with the specified image inclusion. -/
 theorem splitProjectorImageIso_hom (hq : IsUnit (Fintype.card G : R)) :
     (splitProjectorImageIso U χ hq).hom =
-      image.ι (splitProjector U χ) ≫ Pi.π (fun _ : G ↦ U) 0 := by
+      image.ι ((splitProjector U χ)).asHom ≫ Pi.π (fun _ : G ↦ U) 0 := by
   let r := splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0
   let j := splitCharacterVector U χ
   have hjr : j ≫ r = 𝟙 U := by
@@ -225,14 +225,14 @@ theorem splitProjectorImageIso_hom (hq : IsUnit (Fintype.card G : R)) :
 
 /-- The inverse image comparison is the explicit character vector. -/
 theorem splitProjectorImageIso_inv (hq : IsUnit (Fintype.card G : R)) :
-    (splitProjectorImageIso U χ hq).inv ≫ image.ι (splitProjector U χ) =
+    (splitProjectorImageIso U χ hq).inv ≫ image.ι ((splitProjector U χ)).asHom =
       splitCharacterVector U χ := by
   simp only [splitProjectorImageIso, Iso.symm_inv,
     image.isoStrongEpiMono_hom_comp_ι]
 
 /-- Evaluation at zero on the actual image is an isomorphism. -/
 theorem splitProjectorImageEvaluation_isIso (hq : IsUnit (Fintype.card G : R)) :
-    IsIso (image.ι (splitProjector U χ) ≫ Pi.π (fun _ : G ↦ U) 0) := by
+    IsIso (image.ι ((splitProjector U χ)).asHom ≫ Pi.π (fun _ : G ↦ U) 0) := by
   rw [← splitProjectorImageIso_hom U χ hq]
   infer_instance
 

@@ -119,8 +119,8 @@ is an isomorphism on `K`, then `K` is zero. -/
 lemma isZero_of_isIso_zsmul_id {n : ℤ} {K : C} [HasProduct (fun _ : ℕ ↦ K)]
     (hK : IsDerivedAdicComplete n K) (hn : IsIso (n • 𝟙 K)) : IsZero K := by
   have : IsIso (𝟙 _ - n • adicTowerShift K) := hK
-  let u : End K := inv (n • 𝟙 K)
-  have hu : n • u = 𝟙 K := by
+  let u : End K := .of (inv (n • 𝟙 K))
+  have hu : n • u = .of (𝟙 K) := by
     rw [← IsIso.hom_inv_id (n • 𝟙 K), zsmul_comp, id_comp]
   have hι : (Pi.lift fun i ↦ u ^ i) ≫ (𝟙 _ - n • adicTowerShift K) =
       0 ≫ (𝟙 _ - n • adicTowerShift K) := by

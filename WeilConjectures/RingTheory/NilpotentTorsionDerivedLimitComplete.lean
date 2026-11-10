@@ -58,8 +58,8 @@ theorem isDerivedComplete_of_isDerivedLimit_of_nilpotent
     obtain ⟨e, _, he⟩ := h a ha n
     obtain ⟨p, δ, hT⟩ := hT
     let K : ℕ → DerivedCategory (ModuleCat.{v} A) := fun _ ↦ L n
-    let s : End (∏ᶜ K) := towerProductShift (K := K) (fun _ ↦ a • 𝟙 (L n))
-    have hs (r j : ℕ) : (s ^ r) ≫ Pi.π K j = (a ^ r) • Pi.π K (j + r) := by
+    let s : End (∏ᶜ K) := .of (towerProductShift (K := K) (fun _ ↦ a • 𝟙 (L n)))
+    have hs (r j : ℕ) : ((s ^ r).asHom) ≫ Pi.π K j = (a ^ r) • Pi.π K (j + r) := by
       induction r generalizing j with
       | zero => simp
       | succ r ih =>

@@ -48,14 +48,14 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
   let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
     (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
   let τ : E ⟶ E := {
-    app := fun M ↦ (M.obj (op ⊤)).smul t
+    app := fun M ↦ ((M.obj (op ⊤))).asHom.smul t
     naturality := fun M N q ↦ by
       ext z
       exact ((q.app (op ⊤)).hom.map_smul t z).symm }
   let cA := (A.sc p).mapHomologyIso U
   let cB := (B.sc p).mapHomologyIso E
   have hscalar : (A.sc p).mapNatTrans
-      (ModuleCat.smulNatTrans (Z.ringCatSheaf.obj.obj (op ⊤)) (h.appTop.hom t)) =
+      ((ModuleCat.smulNatTrans (Z.ringCatSheaf.obj.obj (op ⊤)) (h.appTop.hom t))).asHom =
       (B.sc p).mapNatTrans τ := by
     ext m <;> rfl
   have hm := congrArg (fun q ↦ ShortComplex.homologyMap q) hscalar

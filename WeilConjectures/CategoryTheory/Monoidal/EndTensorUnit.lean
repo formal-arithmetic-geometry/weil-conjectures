@@ -47,7 +47,7 @@ instance instCommRingEndTensorUnit : CommRing (End (𝟙_ C)) where
 
 /-- If every nonzero endomorphism of the monoidal unit is invertible and `𝟙_ C` is not a zero
 object, then `End (𝟙_ C)` is a field. -/
-theorem isField_end_tensorUnit (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIso t)
+theorem isField_end_tensorUnit (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIso (t).asHom)
     (h₁ : (1 : End (𝟙_ C)) ≠ 0) : IsField (End (𝟙_ C)) where
   exists_pair_ne := ⟨0, 1, h₁.symm⟩
   mul_comm := mul_comm

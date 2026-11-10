@@ -183,7 +183,7 @@ private theorem extend_on_basicOpen {X S : Scheme.{u}} (g : X ⟶ S)
     have hsmul : ((N.restrict W.ι).smul (W.ι.appTop f ^ m)).asHom.hom (β i) =
         (W.ι.appIso ⊤).inv (W.ι.appTop f ^ m) • (β i : Γ(N, W.ι ''ᵁ ⊤)) := rfl
     change N.presheaf.map (homOfLE le_top).op (v' i) =
-      ((N.restrict W.ι).smul (W.ι.appTop f ^ m)).hom (β i)
+      ((N.restrict W.ι).smul (W.ι.appTop f ^ m)).asHom.hom (β i)
     rw [hsmul, map_pow, hres]
     exact hi
   rw [h, ← hc]

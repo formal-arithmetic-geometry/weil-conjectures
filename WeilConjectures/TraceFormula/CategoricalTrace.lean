@@ -86,7 +86,7 @@ a perfect pairing between `V` and `W`. For the pairing between `V` and a right d
 (`CategoryTheory.MonoidalCategory.trace_eq_of_exactPairing`); here the pairing is given by the
 object `W` rather than by a `HasRightDual` instance. -/
 def trace (V W : C) [ExactPairing V W] (T : V ⟶ V) : End (𝟙_ C) :=
-  η_ V W ≫ T ▷ W ≫ (β_ V W).hom ≫ ε_ V W
+  .of (η_ V W) ≫ T ▷ W ≫ (β_ V W).hom ≫ ε_ V W
 
 /-- The trace does not depend on the choice of the perfect pairing. -/
 theorem trace_eq (V W W' : C) [ExactPairing V W] [ExactPairing V W'] (T : V ⟶ V) :
@@ -101,7 +101,7 @@ end ExactPairing
 trace `CategoryTheory.MonoidalCategory.trace` of `T`, that is the trace of `T` with respect to the
 exact pairing between `V` and `Vᘁ`. -/
 noncomputable def categoricalTrace {V : C} [HasRightDual V] (T : V ⟶ V) : End (𝟙_ C) :=
-  MonoidalCategory.trace T
+  .of (MonoidalCategory.trace T)
 
 lemma categoricalTrace_eq_trace {V : C} [HasRightDual V] (T : V ⟶ V) :
     categoricalTrace T = ExactPairing.trace V Vᘁ T :=
@@ -160,7 +160,7 @@ theorem traceOrZero_eq_categoricalTrace {V : C} [d : HasRightDual V] (T : V ⟶ 
 
 /-- For any right dual of `V`, `traceOrZero` is the trace computed with that dual. -/
 theorem traceOrZero_eq_trace {V : C} [HasRightDual V] (T : V ⟶ V) :
-    traceOrZero T = trace T :=
+    traceOrZero T = .of (trace T :=)
   traceOrZero_eq_categoricalTrace T
 
 /-- `traceOrZero` is invariant under conjugation by an isomorphism. -/

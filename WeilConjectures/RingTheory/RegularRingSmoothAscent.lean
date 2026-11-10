@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Smooth.Flat
 import WeilConjectures.RingTheory.RegularityRkGoesUp
 import WeilConjectures.RingTheory.SmoothFibreRegularLocal
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Regularity ascends along smooth ring maps

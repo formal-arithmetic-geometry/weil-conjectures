@@ -46,7 +46,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (Φ : Point.
 
 /-- The endomorphism of the point `Φ` given by the action of `σ` on its fibre functor. -/
 def actHom (σ : G) : Φ ⟶ Φ :=
-  ⟨act σ⟩
+  ⟨(act σ).asHom⟩
 
 /-- The action of `σ` on the fibre of a presheaf: `[X, x, t] ↦ [X, σ • x, t]`. -/
 noncomputable def presheafFiberAct (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) :

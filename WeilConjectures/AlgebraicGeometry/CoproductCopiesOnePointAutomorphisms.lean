@@ -96,7 +96,7 @@ theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty
     rw [hρ, hρ, Equiv.symm_apply_apply] at hh
     exact hh
   · intro q
-    let a : Aut C := Over.isoMk (Sigma.reindex q G) (by
+    let a : Aut C := .of (Over.isoMk (Sigma.reindex q G) (by)
       change (Sigma.reindex q G).hom ≫ π = π
       apply Sigma.hom_ext
       intro i

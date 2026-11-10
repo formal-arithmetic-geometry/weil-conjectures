@@ -68,7 +68,7 @@ theorem large_hom_solutionSetCondition
   let rel : J → (G ⟶ P) := fun j =>
     match j with
     | .inl (a, b) => i (a + b) - i a - i b
-    | .inr (r, a) => i (r • a) - r.unop ≫ i a
+    | .inr (r, a) => i (r • a) - (r.unop).asHom ≫ i a
   let d : (∐ fun _ : J => G) ⟶ P := Sigma.desc rel
   let Q := cokernel d
   let q : P ⟶ Q := cokernel.π d

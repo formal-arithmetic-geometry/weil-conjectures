@@ -134,8 +134,8 @@ private theorem sequenceDifference_nilpotent
     (l : ℕ) (M : A) (e : ℕ) (he : l ^ e • 𝟙 M = 0) :
     IsIso ((sequenceDifference A l).app M) := by
   let s : End (∏ᶜ fun _ : ℕ ↦ M) :=
-    l • Pi.lift (fun n : ℕ ↦ Pi.π (fun _ : ℕ ↦ M) (n + 1))
-  have hs (r j : ℕ) : (s ^ r) ≫ Pi.π (fun _ : ℕ ↦ M) j =
+    .of (l • Pi.lift (fun n : ℕ ↦ Pi.π (fun _ : ℕ ↦ M) (n + 1)))
+  have hs (r j : ℕ) : ((s ^ r).asHom) ≫ Pi.π (fun _ : ℕ ↦ M) j =
       l ^ r • Pi.π (fun _ : ℕ ↦ M) (j + r) := by
     induction r generalizing j with
     | zero => simp

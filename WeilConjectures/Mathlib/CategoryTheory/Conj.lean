@@ -32,7 +32,7 @@ def Iso.conjRingEquiv {X Y : C} (α : X ≅ Y) : End X ≃+* End Y where
 
 @[simp]
 lemma Iso.conjRingEquiv_apply {X Y : C} (α : X ≅ Y) (f : End X) :
-    α.conjRingEquiv f = α.inv ≫ f ≫ α.hom :=
+    α.conjRingEquiv f = α.inv ≫ (f).asHom ≫ α.hom :=
   rfl
 
 /-- An additive functor induces a ring homomorphism `End X →+* End (F.obj X)`. -/

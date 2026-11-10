@@ -88,7 +88,7 @@ lemma isIso_pow_nsmul_id {Y : C} (n : ℕ) [IsIso (n • 𝟙 Y)] (k : ℕ) : Is
 /-- If `t` is a right inverse of multiplication by `n` on `Y`, then multiplying `f ≫ t ^ k` by
 `n ^ k` gives back `f`. -/
 lemma eq_pow_nsmul_comp_pow {Y Z : C} (n : ℕ) (t : End Y) (ht : (n • 𝟙 Y) ≫ t = 𝟙 Y) (k : ℕ)
-    (f : Z ⟶ Y) : f = n ^ k • (f ≫ t ^ k) := by
+    (f : Z ⟶ Y) : f = n ^ k • (f ≫ (t ^ k).asHom) := by
   induction k generalizing f with
   | zero => rw [pow_zero, one_smul, pow_zero, End.one_def, Category.comp_id]
   | succ k ih =>

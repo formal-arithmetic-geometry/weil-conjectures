@@ -32,7 +32,7 @@ attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
 
 private theorem restriction_smul {A B : Scheme.{u}} (G : A.Modules) (H : B.Modules)
     (r : Γ(G, ⊤) ⟶ Γ(H, ⊤)) (σ : Γ(A, ⊤) →+* Γ(B, ⊤))
-    (hr : ∀ a, G.smul a ≫ r = r ≫ H.smul (σ a))
+    (hr : ∀ a, G.smul a ≫ r = r ≫ (H.smul (σ a)).asHom)
     (a : Γ(A, ⊤)) (m : Γ(G, ⊤)) : r (a • m) = σ a • r m := by
   exact congrArg (fun φ ↦ φ.hom m) (hr a)
 
@@ -75,7 +75,7 @@ private theorem comp_over_pinned_apply {X : Scheme.{u}} (F : X.Modules)
 private theorem smul_pinned {A B : Scheme.{u}} (G : A.Modules) (H : B.Modules)
     (r : Γ(G, ⊤) ⟶ Γ(H, ⊤)) (σ : Γ(A, ⊤) →+* Γ(B, ⊤))
     (hr : ∀ a, G.smul a ≫ r = r ≫ H.smul (σ a)) (a : Γ(A, ⊤)) :
-    G.smul a ≫ pinnedValue r = pinnedValue r ≫ H.smul (σ a) := by
+    G.smul a ≫ pinnedValue r = pinnedValue r ≫ (H.smul (σ a)).asHom := by
   exact (congrArg (fun r ↦ G.smul a ≫ r) (seal_eq r)).trans
     ((hr a).trans (congrArg (fun r ↦ r ≫ H.smul (σ a)) (seal_eq r).symm))
 

@@ -54,7 +54,7 @@ theorem balancedAction_affine_open
     (M : X.Modules) (_hM : M.IsQuasicoherent)
     (rho : B →+* End M)
     (hscalar : ∀ a : A, rho (algebraMap A B a) =
-      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))
+      .of (M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a)))
     (U : X.affineOpens) :
     let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
     let Y := pullback f g

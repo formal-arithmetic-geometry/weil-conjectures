@@ -34,7 +34,7 @@ def fiberTopology (A : Type w) : TopologicalSpace (Aut A) :=
 Source: Stacks Project, equation (58.3.0.1) (blueprint: lem-galois-aut-profinite). -/
 def evaluation {C : Type u} [Category.{v} C] (F : C ⥤ Type w) :
     Aut F →* ∀ X : C, Aut (F.obj X) :=
-  MonoidHom.mk' (fun σ X => σ.asIso.app X) (fun _ _ => rfl)
+  MonoidHom.mk' (fun σ X => .of (σ.asIso.app X)) (fun _ _ => rfl)
 
 /-- The topology induced by evaluation into the product of pointwise permutation groups.
 Source: Stacks Project, Tag 0BMR (blueprint: lem-galois-aut-profinite). -/

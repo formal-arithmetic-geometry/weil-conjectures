@@ -209,7 +209,7 @@ private theorem rawOpenIso_scalar {X T : Scheme.{u}}
   have hφ : J.ι.f 0 ≫ φ.f 0 = scalarHom G b ≫ J.ι.f 0 :=
     scalarHom_naturality (J.ι.f 0) b
   let τ : E ⟶ E := {
-    app := fun M ↦ (M.obj (op V)).smul rV
+    app := fun M ↦ ((M.obj (op V))).asHom.smul rV
     naturality := fun M N g ↦ by
       ext x
       exact ((g.app (op V)).hom.map_smul rV x).symm }

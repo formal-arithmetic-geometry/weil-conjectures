@@ -36,7 +36,7 @@ variable [Preadditive C] [MonoidalPreadditive C] [BraidedCategory C] [IsCommMonO
 /-- The multiplication by a global section `s : 𝟙 ⟶ R` of a commutative algebra object `R`, as
 an endomorphism `R ⟶ R` of the regular module: a ring homomorphism. -/
 def regularEndRingHom : Γ R →+* End (regular R) where
-  toFun s := regularLift (regular R) s.hom
+  toFun s := .of (regularLift (regular R) s.hom)
   map_one' := regular_hom_ext (by
     rw [one_comp_regularLift_regular, Γ.one_hom, End.one_def, Mod.id_hom']
     exact (Category.comp_id _).symm)
@@ -55,7 +55,7 @@ def regularEndRingHom : Γ R →+* End (regular R) where
 
 @[simp]
 lemma regularEndRingHom_apply (s : Γ R) :
-    regularEndRingHom s = regularLift (regular R) s.hom :=
+    regularEndRingHom s = .of (regularLift (regular R) s.hom :=)
   rfl
 
 end CategoryTheory.Mod

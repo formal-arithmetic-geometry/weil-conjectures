@@ -96,7 +96,7 @@ theorem finite_moduleStalk_of_isFiniteType (X : Scheme.{u}) (F : X.Modules)
             (F.smul ((U.ι.appIso (V ⊓ W)).inv r')).asHom.hom m' at ha
           have happ : U.ι.appIso (V ⊓ W) = Iso.refl _ := Scheme.ofRestrict_appIso _ _ _
           rw [happ] at ha
-          change (N.smul r').hom m' = (F.smul r').hom m' at ha
+          change (N.smul r').asHom.hom m' = (F.smul r').asHom.hom m' at ha
           exact ha
         · rfl }
   apply Module.Finite.of_surjective ℓ

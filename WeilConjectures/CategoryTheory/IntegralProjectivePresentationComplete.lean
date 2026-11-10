@@ -47,9 +47,9 @@ theorem exists_cokernel_limit_of_continuous_end
   let y (k : ℕ) := Projective.factorThru (x k) (cokernel.π A)
   have hy (k : ℕ) : y k ≫ cokernel.π A = x k := Projective.factorThru_comp _ _
   let t : Matrix (Fin n) (Fin m) C(S, R) := fun i j ↦
-    e.symm (biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i)
+    e.symm .of ((biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i))
   let b (k : ℕ) : Fin n → C(S, R) := fun i ↦
-    e.symm (y k ≫ biproduct.π (fun _ ↦ P) i)
+    e.symm .of ((y k ≫ biproduct.π (fun _ ↦ P) i))
   have hsum {p : ℕ} {Y Z : C} (f : Y ⟶ ⨁ fun _ : Fin p ↦ P)
       (g : (⨁ fun _ : Fin p ↦ P) ⟶ Z) :
       f ≫ g = ∑ a, (f ≫ biproduct.π (fun _ ↦ P) a) ≫
@@ -58,8 +58,8 @@ theorem exists_cokernel_limit_of_continuous_end
     rw [Preadditive.sum_comp, Preadditive.comp_sum]
     simp only [Category.assoc]
   have happ (z : P ⟶ ⨁ fun _ : Fin m ↦ P) (i : Fin n) :
-      e (∑ j, t i j * e.symm (z ≫ biproduct.π (fun _ ↦ P) j)) =
-        z ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
+      e (∑ j, t i j * e.symm .of ((z ≫ biproduct.π (fun _ ↦ P) j))) =
+        .of (z) ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
     rw [map_sum, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
     apply Finset.sum_congr rfl
     intro j _
@@ -87,23 +87,23 @@ theorem exists_cokernel_limit_of_continuous_end
       (ShortComplex.cokernelSequence_exact A).liftFromProjective _ hz
     have hza : z ≫ A = y l - y k - r ^ (k + 1) • c :=
       (ShortComplex.cokernelSequence_exact A).liftFromProjective_comp _ hz
-    refine ⟨fun j ↦ e.symm (z ≫ biproduct.π (fun _ ↦ P) j),
-      fun i ↦ e.symm (c ≫ biproduct.π (fun _ ↦ P) i), fun i ↦ ?_⟩
+    refine ⟨fun j ↦ e.symm .of ((z ≫ biproduct.π (fun _ ↦ P) j)),
+      fun i ↦ e.symm .of ((c ≫ biproduct.π (fun _ ↦ P) i)), fun i ↦ ?_⟩
     apply e.injective
     rw [map_add, map_add, show (r : R) ^ (k + 1) •
-      e.symm (c ≫ biproduct.π (fun _ ↦ P) i) =
-      r ^ (k + 1) • e.symm (c ≫ biproduct.π (fun _ ↦ P) i) by
+      e.symm .of ((c ≫ biproduct.π (fun _ ↦ P) i)) =
+      r ^ (k + 1) • e.symm .of ((c ≫ biproduct.π (fun _ ↦ P) i)) by
         rw [← Nat.cast_pow, Nat.cast_smul_eq_nsmul], map_nsmul, happ,
       ← Category.assoc, hza, Preadditive.sub_comp, Preadditive.sub_comp,
       Preadditive.nsmul_comp]
     simp only [b, RingEquiv.apply_symm_apply]
     abel
   obtain ⟨v, hv⟩ := ContinuousMap.exists_matrix_limit_of_compatible t b (r : R) hb
-  let z : P ⟶ ⨁ fun _ : Fin n ↦ P := biproduct.lift fun i ↦ e (v i)
+  let z : P ⟶ ⨁ fun _ : Fin n ↦ P := biproduct.lift fun i ↦ (e (v i)).asHom
   refine ⟨z ≫ cokernel.π A, fun k ↦ ?_⟩
   obtain ⟨a, c, hac⟩ := hv k
-  let za : P ⟶ ⨁ fun _ : Fin m ↦ P := biproduct.lift fun j ↦ e (a j)
-  let zc : P ⟶ ⨁ fun _ : Fin n ↦ P := biproduct.lift fun i ↦ e (c i)
+  let za : P ⟶ ⨁ fun _ : Fin m ↦ P := biproduct.lift fun j ↦ (e (a j)).asHom
+  let zc : P ⟶ ⨁ fun _ : Fin n ↦ P := biproduct.lift fun i ↦ (e (c i)).asHom
   have he : z = y k + za ≫ A + r ^ (k + 1) • zc := by
     apply biproduct.hom_ext
     intro i

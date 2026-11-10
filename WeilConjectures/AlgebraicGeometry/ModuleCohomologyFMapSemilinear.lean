@@ -27,7 +27,7 @@ private theorem homology_scalar_comm
       ShortComplex.homologyMap f ≫ (B.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).hom =
     (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap f ≫ (B.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).hom ≫
-        B.homology.smul s := by
+        (B.homology.smul s).asHom := by
   have h := congrArg (fun g : A.map (forget₂ _ AddCommGrpCat.{u}) ⟶
     B.map (forget₂ _ AddCommGrpCat.{u}) ↦ ShortComplex.homologyMap g) hf
   rw [ShortComplex.homologyMap_comp, ShortComplex.homologyMap_comp,

@@ -47,7 +47,7 @@ endomorphism rings of the units: for the derived extension of scalars along a ho
 coefficient rings `ρ : A → B`, this is `ρ` itself. -/
 noncomputable def unitEndRingHom [Preadditive C] [Preadditive D] [F.Additive] :
     End (𝟙_ C) →+* End (𝟙_ D) where
-  toFun t := ε F ≫ F.map t ≫ η F
+  toFun t := .of (ε F) ≫ F.map (t).asHom ≫ η F
   map_one' := by
     rw [End.one_asHom, End.one_asHom, F.map_id, id_comp, Monoidal.ε_η]
   map_mul' s t := by
@@ -58,7 +58,7 @@ noncomputable def unitEndRingHom [Preadditive C] [Preadditive D] [F.Additive] :
     rw [F.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
 lemma unitEndRingHom_apply [Preadditive C] [Preadditive D] [F.Additive] (t : End (𝟙_ C)) :
-    F.unitEndRingHom t = ε F ≫ F.map t ≫ η F :=
+    F.unitEndRingHom t = .of (ε F) ≫ F.map (t).asHom ≫ η F :=
   rfl
 
 /-- **Scalar-extension law of the trace** (blueprint `prop-trf-trace-formal-laws`, item (3)):
@@ -67,7 +67,7 @@ if an isomorphism `e : F X ≅ X'` intertwines `F f` with an endomorphism `f'` o
 theorem trace_eq_unitEndRingHom_trace [Preadditive C] [Preadditive D] [F.Additive] {X : C}
     {X' : D} [HasRightDual X] [HasRightDual (F.obj X)] [HasRightDual X'] (f : X ⟶ X)
     (f' : X' ⟶ X') (e : F.obj X ≅ X') (h : F.map f ≫ e.hom = e.hom ≫ f') :
-    trace f' = F.unitEndRingHom (trace f) := by
+    trace f' = F.unitEndRingHom .of ((trace f)) := by
   rw [unitEndRingHom_apply, ← trace_map, trace_eq_of_iso e _ _ h]
 
 end Functor

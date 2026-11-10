@@ -80,7 +80,7 @@ private theorem uliftPiHom_apply {I : Type} {M N : Type u}
 
 private theorem semilinearOfSmulHom {A B : Scheme.{u}} (G : A.Modules) (H : B.Modules)
     (r : Γ(G, ⊤) ⟶ Γ(H, ⊤)) (σ : Γ(A, ⊤) →+* Γ(B, ⊤))
-    (hr : ∀ a, G.smul a ≫ r = r ≫ H.smul (σ a)) :
+    (hr : ∀ a, G.smul a ≫ r = r ≫ (H.smul (σ a)).asHom) :
     ∀ (a : Γ(A, ⊤)) (m : Γ(G, ⊤)), r (a • m) = σ a • r m := by
   intro a m
   exact congrArg (fun φ ↦ φ.hom m) (hr a)
@@ -89,7 +89,7 @@ private theorem existsSectionsHom (X : Scheme.{u})
     (U W V : X.Etale) (g : W ⟶ U) (h : V ⟶ U) (n : ℕ)
     (p : Fin (n + 1) → (V ⟶ W)) (hp : ∀ k, p k ≫ g = h)
     (G : U.left.Modules) (H : V.left.Modules) (r : Γ(G, ⊤) ⟶ Γ(H, ⊤))
-    (hr : ∀ (a : Γ(U.left, ⊤)), G.smul a ≫ r = r ≫ H.smul (h.left.appTop a)) :
+    (hr : ∀ (a : Γ(U.left, ⊤)), G.smul a ≫ r = r ≫ (H.smul (h.left.appTop a)).asHom) :
     letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
     ∃ c : (Γ(G, ⊤) ⊗[Γ(U.left, ⊤)]
         (⨂[Γ(U.left, ⊤)] _ : Fin (n + 1), Γ(W.left, ⊤))) →+ Γ(H, ⊤),
@@ -113,7 +113,7 @@ private theorem specialization (X : Scheme.{u}) (F : X.Modules)
       Γ((Modules.tensorPullback V.hom).obj F, ⊤))
     (hr : ∀ (a : Γ(U.left, ⊤)),
       ((Modules.tensorPullback U.hom).obj F).smul a ≫ r =
-        r ≫ ((Modules.tensorPullback V.hom).obj F).smul (h.left.appTop a)) :
+        r ≫ (((Modules.tensorPullback V.hom).obj F)).asHom.smul (h.left.appTop a)) :
     letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
     ∃ c : (Γ((Modules.tensorPullback U.hom).obj F, ⊤) ⊗[Γ(U.left, ⊤)]
         (⨂[Γ(U.left, ⊤)] _ : Fin (n + 1), Γ(W.left, ⊤))) →+

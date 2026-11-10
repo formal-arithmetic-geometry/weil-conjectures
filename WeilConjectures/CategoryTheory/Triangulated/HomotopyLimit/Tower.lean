@@ -126,7 +126,7 @@ omit [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunc
 /-- The `k`-th power of the transition endomorphism `t` of `∏ₙ Fₙ` has components
 `∏ Fₙ ⟶ Fₙ₊ₖ ⟶ Fₙ`. -/
 lemma towerShift_pow_proj (k n : ℕ) :
-    (End.of (towerShift hP) ^ k) ≫ P.proj n =
+    ((End.of (towerShift hP) ^ k).asHom) ≫ P.proj n =
       P.proj (n + k) ≫ F.map (homOfLE (Nat.le_add_right n k)).op := by
   induction k generalizing n with
   | zero =>
@@ -331,7 +331,7 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
   have hℓ : Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) ≫ towerShift hP =
       Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := lift_comp_towerShift hP c
   have hℓpow : ∀ j : ℕ, Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) ≫
-      (End.of (towerShift hP) ^ j) = Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := by
+      ((End.of (towerShift hP) ^ j).asHom) = Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := by
     intro j
     induction j with
     | zero => rw [pow_zero, End.one_def, comp_id]

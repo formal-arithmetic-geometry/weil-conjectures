@@ -45,7 +45,7 @@ namespace CategoryTheory
 of `X` is invertible. -/
 lemma isIso_of_ne_zero_of_surjective {C : Type u} [Category.{v} C] [Preadditive C] {X : C}
     {K : Type*} [Field K] (φ : K →+* End X) (hφ : Function.Surjective φ) (t : End X)
-    (ht : t ≠ 0) : IsIso t := by
+    (ht : t ≠ 0) : IsIso (t).asHom := by
   obtain ⟨a, rfl⟩ := hφ t
   have ha : a ≠ 0 := by
     rintro rfl
@@ -57,7 +57,7 @@ endomorphism of `X` is invertible, so is every nonzero endomorphism of `Y`. -/
 lemma Functor.isIso_of_ne_zero_end {C : Type*} [Category* C] {D : Type*} [Category* D]
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Full]
     [F.PreservesZeroMorphisms] {X : C} {Y : D} (e : F.obj X ≅ Y)
-    (h : ∀ t : End X, t ≠ 0 → IsIso t) (t : End Y) (ht : t ≠ 0) : IsIso t := by
+    (h : ∀ t : End X, t ≠ 0 → IsIso t) (t : End Y) (ht : t ≠ 0) : IsIso (t).asHom := by
   obtain ⟨s, hs⟩ := F.map_surjective (e.hom ≫ t ≫ e.inv)
   have hs' : t = e.inv ≫ F.map s ≫ e.hom := by
     simp [hs]
@@ -211,7 +211,7 @@ variable [HasFiniteBiproducts C] [HasBinaryBiproducts C] [HasCokernels C] {U : C
 
 /-- The cokernel of a morphism `U ⟶ Uⁿ` is a finite power of `U`, if every nonzero endomorphism
 of `U` is invertible. -/
-theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 → IsIso t) {n : ℕ}
+theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 → IsIso (t).asHom) {n : ℕ}
     {X : C} (eX : X ≅ ⨁ fun _ : Fin n ↦ U) (g : U ⟶ X) :
     ∃ k : ℕ, Nonempty (cokernel g ≅ ⨁ fun _ : Fin k ↦ U) := by
   induction n generalizing X with
@@ -237,7 +237,7 @@ theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 →
 /-- **Cokernels of morphisms between finite powers.** If every nonzero endomorphism of `U` is
 invertible, the cokernel of a morphism `Uᵐ ⟶ Uⁿ` between finite biproducts of copies of `U` is
 again a finite biproduct of copies of `U`. -/
-theorem exists_iso_biproduct_cokernel (hU : ∀ t : End U, t ≠ 0 → IsIso t) {m n : ℕ} {X Y : C}
+theorem exists_iso_biproduct_cokernel (hU : ∀ t : End U, t ≠ 0 → IsIso (t).asHom) {m n : ℕ} {X Y : C}
     (eY : Y ≅ ⨁ fun _ : Fin m ↦ U) (eX : X ≅ ⨁ fun _ : Fin n ↦ U) (f : Y ⟶ X) :
     ∃ k : ℕ, Nonempty (cokernel f ≅ ⨁ fun _ : Fin k ↦ U) := by
   induction m generalizing n X Y with

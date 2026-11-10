@@ -53,7 +53,7 @@ theorem splitLineCoordinate_isIso
     {A A' B K : C} (a : A' ⟶ K) (b : B ⟶ K) [IsIso (biprod.desc a b)]
     (t : K ⟶ B) (ha : a ≫ t = 0) (hb : b ≫ t = 𝟙 B)
     (k : A ⟶ K) [IsSplitMono k] (hk : k ≫ t = 0) (i : A ≅ A')
-    (hline : ∀ q : End A', IsSplitMono q → IsIso q) :
+    (hline : ∀ q : End A', IsSplitMono q → IsIso (q).asHom) :
     IsIso (k ≫ inv (biprod.desc a b) ≫ biprod.fst) := by
   let d := k ≫ inv (biprod.desc a b) ≫ biprod.fst
   have hd : k = d ≫ a := by

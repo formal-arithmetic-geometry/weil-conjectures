@@ -102,7 +102,7 @@ Source: blueprint lem-kernel-condensed-projector-descent. -/
 theorem unit_image_regular_isIso (e : End (G.obj (Mod.regular S)))
     [IsIso (F.map (image.ι e) ≫ adj.counit.app (Mod.regular S))]
     (h : ε G ≫ e = ε G) :
-    IsIso (ε G ≫ factorThruImage e) := by
+    IsIso (ε G ≫ factorThruImage (e).asHom) := by
   rw [← isIso_iff_of_reflects_iso _ F]
   have : IsIso (F.map (ε G ≫ factorThruImage e) ≫
       F.map (image.ι e) ≫ adj.counit.app (Mod.regular S)) := by

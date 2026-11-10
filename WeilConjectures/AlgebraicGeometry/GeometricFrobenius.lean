@@ -373,7 +373,7 @@ closure of a finite field `k`, the image under `Spec` of the ring isomorphism
 formalism are built from this single automorphism. -/
 def specGeometricFrobenius : Aut (Spec (.of (AlgebraicClosure k))) :=
   letI := Fintype.ofFinite k
-  Scheme.Spec.mapIso
+  .of <| Scheme.Spec.mapIso
     (geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)).toRingEquiv.toCommRingCatIso.op
 
 /-- The underlying morphism of the automorphism `σ` of `Spec k̄` is the image under `Spec`
@@ -456,7 +456,7 @@ morphism `a_X` only up to `σ`
 (`geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure`). It is not the
 relative `#k`-power Frobenius of `X` over `k̄`, see the module implementation notes. -/
 def geometricGaloisFrobenius : Aut f.geometricFiber :=
-  asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
+  .of <| asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
     (Scheme.specAlgebraicClosure k).hom (𝟙 X₀) (specGeometricFrobenius k).asIso.hom
     (𝟙 (Spec (.of k))) (by simp) (by simp))
 

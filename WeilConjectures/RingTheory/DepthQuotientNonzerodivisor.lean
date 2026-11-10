@@ -12,6 +12,8 @@ import WeilConjectures.RingTheory.DepthQuotSMulTop
 import WeilConjectures.RingTheory.DepthOverQuotientRing
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Cohen–Macaulay quotients by a nonzerodivisor

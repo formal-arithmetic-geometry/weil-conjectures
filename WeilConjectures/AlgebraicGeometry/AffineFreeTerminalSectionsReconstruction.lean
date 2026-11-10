@@ -41,10 +41,10 @@ private theorem overChartSectionsIso (W : Scheme.{v}) (U : W.Opens)
     ext x
     change ((M.val.obj (.op (Over.mk (𝟙 U)))).smul r).asHom.hom
       (M.val.presheaf.map a.hom.op x) = M.val.presheaf.map a.hom.op _
-    change ((M.val.obj (.op (Over.mk (𝟙 U)))).smul r).hom
+    change ((M.val.obj (.op (Over.mk (𝟙 U)))).smul r).asHom.hom
       (M.val.presheaf.map a.hom.op x) = M.val.presheaf.map a.hom.op
         (((M.val.obj (.op V)).smul
-          (hU.isoSpec.hom.appTop ((ΓSpecIso Γ(W, U)).inv r))).hom x)
+          (hU.isoSpec.hom.appTop ((ΓSpecIso Γ(W, U)).inv r))).asHom.hom x)
     rw [hU.isoSpec_hom_appTop]
     simp only [CommRingCat.comp_apply, Iso.inv_hom_id_apply]
     have hm := M.val.map_smul a.hom.op (U.topIso.inv r) x

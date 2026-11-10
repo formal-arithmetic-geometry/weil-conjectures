@@ -131,7 +131,7 @@ theorem isGalois_iff_pretransitive_and_card {C : Type u₁} [Category.{u₂} C] 
     rw [← hg, ← hg', ← FintypeCat.comp_apply, ← F.map_comp]
     change F.map (g.asIso.hom ≫ (g' * g⁻¹).asIso.hom) x = F.map g'.asIso.hom x
     congr 2
-    simp [Aut.Aut_mul_def, Aut.Aut_inv_def]
+    simp [Aut.mul_asIso, Aut.inv_asIso]
 
 end Pre
 

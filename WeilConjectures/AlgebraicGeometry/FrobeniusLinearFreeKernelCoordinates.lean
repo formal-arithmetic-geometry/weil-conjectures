@@ -124,7 +124,7 @@ private theorem frobenius_expansion
 semilinear for the module structures. -/
 private theorem semilinear_of_smul_comp {X Y : Scheme.{u}} {M : X.Modules} {N : Y.Modules}
     (f : Y ⟶ X) (ρ : Γ(M, ⊤) ⟶ Γ(N, ⊤))
-    (h : ∀ c, M.smul c ≫ ρ = ρ ≫ N.smul (f.appTop c)) (c : Γ(X, ⊤)) (x : Γ(M, ⊤)) :
+    (h : ∀ c, M.smul c ≫ ρ = ρ ≫ (N.smul (f.appTop c)).asHom) (c : Γ(X, ⊤)) (x : Γ(M, ⊤)) :
     ρ (c • x) = f.appTop c • ρ x := by
   rw [← Modules.smul_apply, ← Modules.smul_apply, ← ConcreteCategory.comp_apply, h,
     ConcreteCategory.comp_apply]
@@ -138,7 +138,7 @@ private theorem coord_restriction_natural_aux {S : Scheme.{u}} (E : S.Modules) (
     (hcomp : ∀ {U W W' : S.Etale} (h : W' ⟶ W) (g : W ⟶ U), ρ (h ≫ g) = ρ g ≫ ρ h)
     (hsmul : ∀ {U W : S.Etale} (g : W ⟶ U) (c : Γ(U.left, ⊤)),
       ((Modules.tensorPullback U.hom).obj E).smul c ≫ ρ g =
-        ρ g ≫ ((Modules.tensorPullback W.hom).obj E).smul (g.left.appTop c))
+        ρ g ≫ (((Modules.tensorPullback W.hom).obj E)).asHom.smul (g.left.appTop c))
     (e : ∀ (W : S.Etale), (W ⟶ etaleSelf S) →
       Γ((Modules.tensorPullback W.hom).obj E, ⊤) ≃ₗ[Γ(W.left, ⊤)]
         (Fin n → Γ(W.left, ⊤)))
@@ -176,7 +176,7 @@ private theorem coord_restriction_natural {S : Scheme.{u}} (E : S.Modules) [E.Is
     (hcomp : ∀ {U W W' : S.Etale} (h : W' ⟶ W) (g : W ⟶ U), ρ (h ≫ g) = ρ g ≫ ρ h)
     (hsmul : ∀ {U W : S.Etale} (g : W ⟶ U) (c : Γ(U.left, ⊤)),
       ((Modules.tensorPullback U.hom).obj E).smul c ≫ ρ g =
-        ρ g ≫ ((Modules.tensorPullback W.hom).obj E).smul (g.left.appTop c))
+        ρ g ≫ (((Modules.tensorPullback W.hom).obj E)).asHom.smul (g.left.appTop c))
     (e : ∀ (W : S.Etale), (W ⟶ etaleSelf S) →
       Γ((Modules.tensorPullback W.hom).obj E, ⊤) ≃ₗ[Γ(W.left, ⊤)]
         (Fin n → Γ(W.left, ⊤)))
@@ -221,8 +221,8 @@ private theorem exists_frobenius_matrix_aux {S : Scheme.{u}} (E : S.Modules) [E.
     (hFnat : ∀ {U W : S.Etale} (g : W ⟶ U), ρ g ≫ Fapp W = Fapp U ≫ ρ g)
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
-      Fapp U ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom (Fapp U e))
+      Fapp U ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom (Fapp U e))
     (e : ∀ (W : S.Etale),
       Γ((Modules.tensorPullback W.hom).obj E, ⊤) ≃ₗ[Γ(W.left, ⊤)]
         (Fin n → Γ(W.left, ⊤)))
@@ -315,8 +315,8 @@ theorem exists_frobenius_linear_free_kernel_coordinates
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e))
     (n : ℕ) (α : E ≅
       SheafOfModules.free (R := S.ringCatSheaf) (ULift.{u} (Fin n))) :
