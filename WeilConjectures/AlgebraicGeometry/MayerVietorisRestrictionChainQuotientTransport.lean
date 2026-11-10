@@ -66,48 +66,62 @@ theorem schemeMV_restriction_chain_quotient_transport
         (LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I)) := by
   let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
   let LY := schemeOpenRestriction Y W
-  #count_heartbeats have hxi : LX.mapDerivedCategoryFactorsh.inv.app
-      ((HomotopyCategory.quotient _ _).obj I) ≫
-      LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) =
-      (DerivedCategory.quotientCompQhIso _).hom.app
-          ((LX.mapHomologicalComplex (.up ℤ)).obj I) ≫
-        LX.mapDerivedCategoryFactors.inv.app I := by
-    apply (cancel_epi (LX.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ _).obj I))).1
-    rw [Iso.hom_inv_id_app_assoc, LX.mapDerivedCategoryFactorsh_hom_app]
-    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-      Category.assoc]
-    erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
-      Iso.hom_inv_id_app, Category.comp_id]
-  #count_heartbeats have hy := LY.mapDerivedCategoryFactorsh_hom_app
-    (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
-      (ComplexShape.up ℤ)).obj I)
-  #count_heartbeats have hr : (schemeMVHomotopyOpenRestriction h W).hom.app
-      ((HomotopyCategory.quotient _ _).obj I) =
-      (HomotopyCategory.quotient _ _).map
+  #count_heartbeats
+    have hxi : LX.mapDerivedCategoryFactorsh.inv.app
+        ((HomotopyCategory.quotient _ _).obj I) ≫
+        LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) =
+        (DerivedCategory.quotientCompQhIso _).hom.app
+            ((LX.mapHomologicalComplex (.up ℤ)).obj I) ≫
+          LX.mapDerivedCategoryFactors.inv.app I := by
+      apply (cancel_epi (LX.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient _ _).obj I))).1
+      rw [Iso.hom_inv_id_app_assoc, LX.mapDerivedCategoryFactorsh_hom_app]
+      simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+        Category.assoc]
+      erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
+        Iso.hom_inv_id_app, Category.comp_id]
+  #count_heartbeats
+    have hy := LY.mapDerivedCategoryFactorsh_hom_app
+      (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I)
+  #count_heartbeats
+    have hr : (schemeMVHomotopyOpenRestriction h W).hom.app
+        ((HomotopyCategory.quotient _ _).obj I) =
+        (HomotopyCategory.quotient _ _).map
+          ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
+            (.up ℤ)).app I) := by
+      simp only [schemeMVHomotopyOpenRestriction, Iso.trans_hom, NatTrans.comp_app,
+        Iso.symm_hom]
+      change (HomotopyCategory.quotient _ _).map
         ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
-          (.up ℤ)).app I) := by
-    simp only [schemeMVHomotopyOpenRestriction, Iso.trans_hom, NatTrans.comp_app,
-      Iso.symm_hom]
-    change (HomotopyCategory.quotient _ _).map
-      ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
-        (.up ℤ)).app I) ≫ (HomotopyCategory.quotient _ _).map (𝟙 _) = _
-    rw [CategoryTheory.Functor.map_id, Category.comp_id]
-  #count_heartbeats dsimp only
-  #count_heartbeats unfold schemeMVRestrictionLocalizationChain
-  #count_heartbeats simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Category.assoc]
-  #count_heartbeats erw [hy, hr]
-  #count_heartbeats simp only [Functor.comp_obj, Category.assoc, Functor.mapHomotopyCategoryFactors,
-    Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  #count_heartbeats erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-  #count_heartbeats simp only [← Functor.map_comp]
-  #count_heartbeats erw [hxi]
-  #count_heartbeats simp only [Functor.map_comp]
-  #count_heartbeats erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  #count_heartbeats rfl
+          (.up ℤ)).app I) ≫ (HomotopyCategory.quotient _ _).map (𝟙 _) = _
+      rw [CategoryTheory.Functor.map_id, Category.comp_id]
+  #count_heartbeats
+    dsimp only
+  #count_heartbeats
+    unfold schemeMVRestrictionLocalizationChain
+  #count_heartbeats
+    simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+      Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Category.assoc]
+  #count_heartbeats
+    erw [hy, hr]
+  #count_heartbeats
+    simp only [Functor.comp_obj, Category.assoc, Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  #count_heartbeats
+    erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+  #count_heartbeats
+    simp only [← Functor.map_comp]
+  #count_heartbeats
+    erw [hxi]
+  #count_heartbeats
+    simp only [Functor.map_comp]
+  #count_heartbeats
+    erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  #count_heartbeats
+    rfl
 
 end AlgebraicGeometry
