@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
-import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Basic
 @[expose] public section
 set_option autoImplicit false
 universe u v w

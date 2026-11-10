@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Flat
 public import Mathlib.RingTheory.Unramified.LocalRing
 public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.Field
 
 /-!
 # Regular local rings are domains

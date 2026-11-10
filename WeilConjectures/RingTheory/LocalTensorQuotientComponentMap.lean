@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 
 import Mathlib.RingTheory.LocalProperties.Basic
 import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 @[expose] public section
 

@@ -8,7 +8,7 @@ module
 public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.FieldTheory.PrimitiveElement
 public import Mathlib.Order.Interval.Finset.Defs
-import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # The lattice of finite Galois subextensions of a Galois extension

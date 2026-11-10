@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
-import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # The Brown right adjoint of a coproduct-preserving triangulated functor

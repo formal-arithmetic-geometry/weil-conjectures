@@ -8,7 +8,7 @@ module
 
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.Ideal.IdempotentFG
+public import Mathlib.RingTheory.Ideal.IdempotentFG
 
 /-!
 # Core splitting for an étale section

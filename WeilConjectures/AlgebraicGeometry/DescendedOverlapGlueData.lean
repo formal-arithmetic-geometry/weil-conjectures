@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
-import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
+public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 
 /-!
 # Descended overlap transitions before gluing

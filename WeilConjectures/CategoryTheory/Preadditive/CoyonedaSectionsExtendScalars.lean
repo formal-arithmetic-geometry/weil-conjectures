@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.NumberTheory.NumberField.House
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.NumberTheory.NumberField.House
 
 /-!
 # Sections over an object commute with extension of scalars

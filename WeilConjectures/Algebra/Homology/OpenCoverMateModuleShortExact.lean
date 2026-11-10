@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Algebra.Homology.OpenCoverMateModuleShortExactCore
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The module-level open-cover sequence with its canonical mate maps
 

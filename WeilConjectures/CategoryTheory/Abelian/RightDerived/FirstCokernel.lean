@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
 public import WeilConjectures.CategoryTheory.Abelian.CokernelNSMul
-import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # The first right derived functor as a cokernel

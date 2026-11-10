@@ -9,7 +9,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.Double
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Refinements
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.CategoryTheory.Abelian.Refinements
 
 /-!
 # Homology of double complexes

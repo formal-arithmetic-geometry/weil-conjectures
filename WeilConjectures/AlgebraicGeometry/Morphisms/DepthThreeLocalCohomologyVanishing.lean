@@ -10,7 +10,7 @@ public import WeilConjectures.RingTheory.Depth
 public import Mathlib.Algebra.Homology.LocalCohomology
 import Mathlib.RingTheory.Depth.Rees
 import Mathlib.CategoryTheory.Abelian.Projective.Ext
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # DepthThreeLocalCohomologyVanishing
 

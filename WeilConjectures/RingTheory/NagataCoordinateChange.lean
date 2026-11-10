@@ -9,8 +9,8 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.NoetherNormalization
 public import Mathlib.RingTheory.RingHom.Finite
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Algebra.MvPolynomial.Monad
-import Mathlib.Data.List.Indexes
+public import Mathlib.Algebra.MvPolynomial.Monad
+public import Mathlib.Data.List.Indexes
 
 /-!
 # Nagata's change of coordinates

@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Refinements
 public import Mathlib.Algebra.Homology.QuasiIso
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.CategoryTheory.Abelian.Refinements
 
 /-!
 # First quadrant double complexes whose rows are resolutions

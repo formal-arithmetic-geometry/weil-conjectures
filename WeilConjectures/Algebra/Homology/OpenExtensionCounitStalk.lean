@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Sheafify
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Stalks of the open-extension counit
 

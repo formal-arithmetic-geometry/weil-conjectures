@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.SixFunctors.SchemeRefinementTreeEncoding
-import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Constructing finite pullback refinement trees

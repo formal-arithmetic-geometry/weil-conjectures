@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
-import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Rationalizing a left adjoint

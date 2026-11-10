@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Comparing `Ext` along an exact functor sending injectives to acyclic objects

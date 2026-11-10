@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Creates
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Algebras of an endofunctor with invertible structure morphism, and limits of algebras

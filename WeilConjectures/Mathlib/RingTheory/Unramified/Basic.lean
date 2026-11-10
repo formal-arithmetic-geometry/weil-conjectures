@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Unramified.Basic
-import Mathlib.RingTheory.Ideal.IdempotentFG
+public import Mathlib.RingTheory.Ideal.IdempotentFG
 
 /-!
 # Sections of unramified algebras

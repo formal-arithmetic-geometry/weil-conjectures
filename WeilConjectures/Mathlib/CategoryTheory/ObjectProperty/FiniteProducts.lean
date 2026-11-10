@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Closure under finite products of an inverse image

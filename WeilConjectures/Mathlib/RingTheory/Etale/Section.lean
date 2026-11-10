@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Idempotents
 public import Mathlib.RingTheory.Unramified.Basic
-import Mathlib.RingTheory.Ideal.IdempotentFG
+public import Mathlib.RingTheory.Ideal.IdempotentFG
 
 /-!
 # Étale algebras with a section

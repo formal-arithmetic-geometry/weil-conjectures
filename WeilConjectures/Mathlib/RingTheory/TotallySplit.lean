@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Etale.Descent
 public import Mathlib.RingTheory.Finiteness.Descent
 public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
-import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.RingTheory.TensorProduct.Pi
 
 /-!
 # Fixed points of finite étale algebras

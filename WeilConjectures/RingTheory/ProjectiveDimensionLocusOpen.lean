@@ -9,7 +9,7 @@ module
 public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Openness of a fixed projective-dimension bound
 
