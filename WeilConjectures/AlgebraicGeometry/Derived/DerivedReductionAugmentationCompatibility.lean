@@ -210,9 +210,9 @@ private theorem exactSquare_fac
     [PreservesFiniteLimits CX] [PreservesFiniteColimits CX]
     [PreservesFiniteLimits CY] [PreservesFiniteColimits CY]
     (e : CX ⋙ G ≅ F ⋙ CY) (P : CochainComplex B ℤ) :
-    ((Functor.mapDerivedCategoryCompIso CX G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso CX G ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso F CY).hom.app (DerivedCategory.Q.obj P) ≫
+          (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
         CY.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         CY.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -232,10 +232,10 @@ private theorem exactSquare_fac
   have hc2 : (Functor.mapHomologicalComplexCompIso (Iso.refl (CX ⋙ G))
       (.up ℤ)).hom.app P = 𝟙 _ := rfl
   erw [hc2, DerivedCategory.Q.map_id, Category.comp_id] at h2
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso CX G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso CX G).inv.app
     (DerivedCategory.Q.obj P))).1
   dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   erw [h1, Functor.mapDerivedCategoryNatIso_fac]
   erw [← h2]
   simp only [Category.assoc]
