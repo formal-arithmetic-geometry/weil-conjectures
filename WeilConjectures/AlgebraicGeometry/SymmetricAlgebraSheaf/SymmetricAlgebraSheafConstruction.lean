@@ -17,7 +17,6 @@ Source: Stacks Project, Modules, Lemma 01CG (lemma-local-tensor-algebra).
 
 @[expose] public section
 
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 set_option autoImplicit false
 

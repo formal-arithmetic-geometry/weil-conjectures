@@ -17,7 +17,6 @@ Source: Stacks Project, Tags 0626, 0663, 0913 and 099H
 
 @[expose] public section
 
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 set_option autoImplicit false
 

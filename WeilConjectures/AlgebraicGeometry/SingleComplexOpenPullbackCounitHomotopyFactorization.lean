@@ -32,8 +32,6 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false
 
 section
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 
 /-- Lift a commuting square of additive functors to their homotopy categories. -/
 noncomputable def mapHomotopySquare

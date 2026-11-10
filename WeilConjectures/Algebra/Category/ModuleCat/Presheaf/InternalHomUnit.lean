@@ -18,7 +18,6 @@ The internal hom is additive in its first variable (`PresheafOfModules.homObjMap
 
 @[expose] public section
 
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 universe v v₁ u₁ u
 
@@ -89,6 +88,7 @@ noncomputable instance instModuleHomObjSections {M N : PresheafOfModules.{u} (R 
       ((restrictOver R X.unop).obj M ⟶ (restrictOver R X.unop).obj N) :=
   inferInstanceAs (Module (R.obj (op X.unop)) _)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- The sections of `homObj R N` over `X` are the sections of `N` over `X`. -/
 noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅ N.obj X :=
     { hom := ModuleCat.ofHom
@@ -138,10 +138,12 @@ noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅
         exact homObjUnitInvApp_app_one N n }
 
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 lemma homObjUnitIsoApp_hom_apply (X : Cᵒᵖ) (φ : (homObj (unit _) N).obj X) :
     (homObjUnitIsoApp N X).hom φ = φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj X) :=
   rfl
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- **The internal hom out of the unit.** `homObj R N ≅ N`: a morphism `R|_U ⟶ N|_U` is
 determined by the image of `1`. -/
 noncomputable def homObjUnitIso : homObj (unit _) N ≅ N :=

@@ -20,7 +20,6 @@ set_option linter.privateModule false
 
 @[expose] public section
 
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 
 set_option autoImplicit false
 

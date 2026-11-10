@@ -31,7 +31,6 @@ namespace CategoryTheory.ConstantModuleScalar
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option backward.isDefEq.respectTransparency.instanceSearchTypes false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Sections of a finite sum of morphisms of sheaves of modules. -/
@@ -390,6 +389,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] (J : Grothendiec
   [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   (A B : CommRingCat.{r}) [Algebra A B]
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 omit [EssentiallySmall.{r} C] in
 /-- Restriction on the sectionwise change of rings, on pure tensors. -/
 theorem changeOfRingsPresheaf_map_tmul (M : modules (constantRing J A)) {U V : Cᵒᵖ}
@@ -400,6 +400,7 @@ theorem changeOfRingsPresheaf_map_tmul (M : modules (constantRing J A)) {U V : C
         ((constAlgebraMap J A B).hom.app V).hom] M.val.map f m :=
   Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap (constAlgebraMap J A B) M f) s m
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Sectionwise contraction with a coordinate functional: `s ⊗ m ↦ q(s) m`. -/
 def coordTensorApp (q : B →ₗ[A] A) (M : modules (constantRing J A)) (U : Cᵒᵖ) :
     ((PresheafOfModules.restrictScalars
@@ -424,6 +425,7 @@ def coordTensorApp (q : B →ₗ[A] A) (M : modules (constantRing J A)) (U : C�
         | add x y hx hy =>
           rw [smul_add, _root_.map_add, _root_.map_add, hx, hy, smul_add] }
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 theorem coordTensorApp_tmul (q : B →ₗ[A] A) (M : modules (constantRing J A)) (U : Cᵒᵖ)
     (s : (constantRing J B).obj.obj U) (m : M.val.obj U) :
     coordTensorApp J A B q M U
@@ -432,6 +434,7 @@ theorem coordTensorApp_tmul (q : B →ₗ[A] A) (M : modules (constantRing J A))
   change TensorProduct.lift _ _ = _
   exact TensorProduct.lift.tmul _ _
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Contraction with a coordinate functional, as a morphism of presheaves of modules. -/
 def coordTensor (q : B →ₗ[A] A) (M : modules (constantRing J A)) :
     (PresheafOfModules.restrictScalars
@@ -462,6 +465,7 @@ def proj (q : B →ₗ[A] A) (M : modules (constantRing J A)) :
       (SheafOfModules.changeOfRings (constAlgebraMap J A B) M) ⟶ M :=
   restrictSheafifyLift _ _ (coordTensor J A B q M)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 theorem proj_apply (q : B →ₗ[A] A) (M : modules (constantRing J A)) (U : Cᵒᵖ)
     (s : (constantRing J B).obj.obj U) (m : M.val.obj U) :
     (proj J A B q M).val.app U ((toSheafify J
@@ -618,6 +622,7 @@ theorem changeOfRingsHom_apply {M N : modules (constantRing J A)} (f : M ⟶ N) 
       ((ModuleCat.extendScalars ((constAlgebraMap J A B).hom.app U).hom).map (f.val.app U) t) :=
   sheafification_map_apply J _ U t
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 theorem proj_extendScalars_map (q : B →ₗ[A] A) {M N : modules (constantRing J A)}
     (f : M ⟶ N) (U : Cᵒᵖ)
     (t : (SheafOfModules.changeOfRingsPresheaf (constAlgebraMap J A B) M).obj U) :
