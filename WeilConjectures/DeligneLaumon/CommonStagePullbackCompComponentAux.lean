@@ -8,7 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompData
-import all WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
+import WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
 import all Mathlib.Logic.Small.Defs
 
 /-! # Common-stage pullback composition: rational naturality
@@ -21,8 +21,8 @@ compositor on localized representatives.
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -30,38 +30,6 @@ open scoped TensorProduct
 namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
-
-/-- A transported comparison whose implementation stays behind an opaque boundary. -/
-private irreducible_def commonStageTransportComparison
-    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
-    (p : A ⥤ B) (q : C ⥤ D)
-    (SA TA : A ⥤ C) (SB TB : B ⥤ D) (eA : TA = SA) (eB : TB = SB)
-    (ρ : p ⋙ SB ≅ SA ⋙ q) (Q : A) :
-    TB.obj (p.obj Q) ≅ q.obj (TA.obj Q) :=
-  (eqToIso eB).app (p.obj Q) ≪≫ ρ.app Q ≪≫ q.mapIso ((eqToIso eA).app Q).symm
-
-/-- Transport a compositor using the named comparisons, before specializing the categories. -/
-private theorem commonStageTransportCompositor
-    {AX AY AZ BX BY BZ : Type*} [Category* AX] [Category* AY] [Category* AZ]
-    [Category* BX] [Category* BY] [Category* BZ]
-    (pEg : AZ ⥤ AY) (pEf : AY ⥤ AX) (pEfg : AZ ⥤ AX)
-    (pLg : BZ ⥤ BY) (pLf : BY ⥤ BX) (pLfg : BZ ⥤ BX)
-    (SX TX : AX ⥤ BX) (SY TY : AY ⥤ BY) (SZ TZ : AZ ⥤ BZ)
-    (eX : TX = SX) (eY : TY = SY) (eZ : TZ = SZ)
-    (ρf : pEf ⋙ SX ≅ SY ⋙ pLf) (ρg : pEg ⋙ SY ≅ SZ ⋙ pLg)
-    (ρfg : pEfg ⋙ SX ≅ SZ ⋙ pLfg)
-    (Q : AZ) (wE : pEfg.obj Q ≅ pEf.obj (pEg.obj Q))
-    (wL : ∀ Q' : BZ, pLfg.obj Q' ≅ pLf.obj (pLg.obj Q'))
-    (R : SX.map wE.hom ≫ ρf.hom.app (pEg.obj Q) ≫ pLf.map (ρg.hom.app Q) =
-      ρfg.hom.app Q ≫ (wL (SZ.obj Q)).hom) :
-    TX.map wE.hom =
-      (commonStageTransportComparison pEfg pLfg SZ TZ SX TX eZ eX ρfg Q).hom ≫
-        (wL (TZ.obj Q)).hom ≫
-        pLf.map (commonStageTransportComparison pEg pLg SZ TZ SY TY eZ eY ρg Q).inv ≫
-        (commonStageTransportComparison pEf pLf SY TY SX TX eY eX ρf (pEg.obj Q)).inv := by
-  simpa only [commonStageTransportComparison_def] using
-    compositor_transport pEg pEf pEfg pLg pLf pLfg SX SY SZ TX TY TZ
-      eX eY eZ ρf ρg ρfg Q wE wL R
 
 attribute [local irreducible] commonStagePullbackCompComponent
   commonStageDerivedPullback constructibleIntegralPullback
@@ -113,9 +81,9 @@ private theorem rational_naturality
     (ρJ : (rationalDerivedPullback l E (f ≫ g)).obj J ≅
       (rationalDerivedPullback l E f).obj ((rationalDerivedPullback l E g).obj J))
     (hK : HEq ρK.hom ((sfRationalConstructibleLocalization l E X).map
-      ((integralPullbackCompositor l E f g).hom.app K.obj)))
+      (((integralPullbackComposition l E).choose f g).hom.app K.obj)))
     (hJ : HEq ρJ.hom ((sfRationalConstructibleLocalization l E X).map
-      ((integralPullbackCompositor l E f g).hom.app J.obj)))
+      (((integralPullbackComposition l E).choose f g).hom.app J.obj)))
     (v : K ⟶ J) :
     ρK.hom ≫ (rationalDerivedPullback l E f).map
         ((rationalDerivedPullback l E g).map v) =
@@ -153,7 +121,8 @@ private theorem rational_naturality
       ⟨(constructibleIntegralPullback l E f).obj
         ((constructibleIntegralPullback l E g).obj M.obj)⟩ := by
     rw [obj, obj]
-  induction v using TensorProduct.inductionOn with
+  induction v using TensorProduct.induction_on with
+  | zero => simp
   | tmul c a =>
     have hm := (normalization_map_heq (rationalDerivedPullback l E f)
       (obj g K) (obj g J)
@@ -170,13 +139,13 @@ private theorem rational_naturality
     change ScalarLocalization.composition _ _ _ _ _ _
         (c ⊗ₜ (constructibleIntegralPullback l E f).map
           ((constructibleIntegralPullback l E g).map a))
-        (1 ⊗ₜ (integralPullbackCompositor l E f g).hom.app K.obj) =
+        (1 ⊗ₜ ((integralPullbackComposition l E).choose f g).hom.app K.obj) =
       ScalarLocalization.composition _ _ _ _ _ _
-        (1 ⊗ₜ (integralPullbackCompositor l E f g).hom.app J.obj)
+        (1 ⊗ₜ ((integralPullbackComposition l E).choose f g).hom.app J.obj)
         (c ⊗ₜ (constructibleIntegralPullback l E (f ≫ g)).map a)
     simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
     exact congrArg (fun b ↦ c ⊗ₜ b)
-      ((integralPullbackCompositor l E f g).hom.naturality a).symm
+      (((integralPullbackComposition l E).choose f g).hom.naturality a).symm
   | add a b ha hb =>
     change _ ≫ (rationalDerivedPullback l E f).map
         ((rationalDerivedPullback l E g).map (a + b : K ⟶ J)) =
@@ -214,8 +183,8 @@ theorem commonStagePullbackRationalComposition_naturality
       HEq (commonStagePullbackRationalComposition l Ω f g L M hM).hom
         ((sfRationalConstructibleLocalization l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X).map
-          ((integralPullbackCompositor l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g).hom.app
+          (((integralPullbackComposition l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)).choose f g).hom.app
             (M.toStage hM).obj)) := by
     unfold commonStagePullbackRationalComposition
     have ha := (rationalDerivedPullback_existsUnique l

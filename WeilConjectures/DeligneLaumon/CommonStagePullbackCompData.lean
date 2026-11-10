@@ -14,8 +14,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -53,8 +53,8 @@ def commonStagePullbackCompComponent {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
   eqToIso (commonStagePullbackIntegralObject l Ω (f ≫ g) P) ≪≫
     (GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).mapIso
       ((sfRationalConstructibleLocalization l _ X).mapIso
-        ((integralPullbackCompositor l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g).app
+        (((integralPullbackComposition l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)).choose f g).app
             P.obj.obj)) ≪≫
     (eqToIso ((congrArg (commonStageDerivedPullback l Ω f).obj
       (commonStagePullbackIntegralObject l Ω g P)).trans
@@ -117,8 +117,8 @@ theorem commonStagePullbackCompComponent_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
     HEq (commonStagePullbackCompComponent l Ω f g P).hom
       ((GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).map
         ((sfRationalConstructibleLocalization l _ X).map
-          ((integralPullbackCompositor l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g).hom.app
+          (((integralPullbackComposition l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)).choose f g).hom.app
               P.obj.obj))) := by
   unfold commonStagePullbackCompComponent
   apply (conj_eqToHom_iff_heq _ _ (commonStagePullbackIntegralObject l Ω (f ≫ g) P)
@@ -156,8 +156,8 @@ def commonStagePullbackRationalComposition
         (M.toStage hM)) ≪≫
     (sfRationalConstructibleLocalization l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X).mapIso
-      ((integralPullbackCompositor l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g).app
+      (((integralPullbackComposition l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)).choose f g).app
           (M.toStage hM).obj) ≪≫
     (eqToIso ((congrArg
       (rationalDerivedPullback l

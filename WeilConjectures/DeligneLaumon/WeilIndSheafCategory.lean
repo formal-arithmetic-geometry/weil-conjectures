@@ -53,7 +53,7 @@ normalized by the existing integral pullback composition and the Yoneda Kan unit
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
 universe u v
@@ -182,7 +182,6 @@ theorem zlPullComp_existsUnique {X Y Z : Scheme.{u}}
       comp_eqToHom_heq_iff, heq_eqToHom_comp_iff]
     dsimp only [zlIntegralPullComp]
     change HEq (commonStagePullbackCompComponent l Ω f g ⟨L, ⟨K⟩⟩).hom _
-    rw [← integralPullbackCompositor_eq_choose]
     exact commonStagePullbackCompComponent_heq.{u, v} l Ω f g ⟨L, ⟨K⟩⟩
   refine ⟨e, he, ?_⟩
   intro a ha
