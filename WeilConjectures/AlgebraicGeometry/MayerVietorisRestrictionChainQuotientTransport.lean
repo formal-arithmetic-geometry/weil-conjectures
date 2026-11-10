@@ -18,14 +18,14 @@ Source: Stacks Project, Tags 08FE and 08BV.
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Pretriangulated
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
-set_option maxHeartbeats 1200000 in
--- The explicit quotient transports exhausted 800000 heartbeats at whnf (34s on v4.35).
+set_option maxHeartbeats 800000 in
+-- The quotient transports fit the original budget when elaboration respects transparency.
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
 Source: Stacks Project, Tags 08FE and 079V.
 Proof: Expand the chain and the transported direct-image unit. Substitute
