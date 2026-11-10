@@ -125,7 +125,7 @@ theorem ordinaryFiniteP1_diagonal_integral (hN : 0 < N) [Finite A]
       ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
         (ProjectiveLine S ↘ S)).appTop.hom)
   let hI := projectiveLine_diagonal_ker_isInvertible S
-  obtain ⟨κ, hκ, _⟩ := ordinary_supported_kummer_uniqueBoundary
+  obtain ⟨κ, hκ, _⟩ := supported_cartier_boundary_existsUnique
     (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N hN A hA hW
     (pullback.diagonal (ProjectiveLine S ↘ S)) hI
   refine ⟨hI, κ, hκ, ?_⟩

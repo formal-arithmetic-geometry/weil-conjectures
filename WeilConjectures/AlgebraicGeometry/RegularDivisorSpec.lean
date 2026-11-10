@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.RegularDivisor
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
@@ -22,7 +23,7 @@ at a single point if `S/(a, b)` is a field.
   divisor.
 - `AlgebraicGeometry.meetTransverselyAt_specMap_quotient`: `V(a)` and `V(b)` meet transversely at
   the point `V(a, b)` when `S/(a, b)` is a field.
-- `AlgebraicGeometry.range_specMap_quotient`: the image of `Spec (S/I) ⟶ Spec S` is `V(I)`.
+- `AlgebraicGeometry.Etale.range_specMap_quotientMk`: the image of `Spec (S/I) ⟶ Spec S` is `V(I)`.
 -/
 
 @[expose] public section
@@ -39,13 +40,6 @@ variable {S : Type u} [CommRing S]
 lemma isRegular_spec [IsRegularRing S] : IsRegular (Spec (.of S)) :=
   ⟨fun z ↦ IsRegularLocalRing.of_ringEquiv
     (Spec.stalkIso (.of S) z).commRingCatIsoToRingEquiv.symm⟩
-
-/-- The image of the closed immersion `Spec (S/I) ⟶ Spec S` is the zero locus of `I`. -/
-lemma range_specMap_quotient (I : Ideal S) :
-    Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) =
-      PrimeSpectrum.zeroLocus (I : Set S) := by
-  have := range_comap_of_surjective _ _ (Ideal.Quotient.mk_surjective (I := I))
-  rwa [Ideal.mk_ker] at this
 
 /-- For a non-zero-divisor `a ∈ S` with `S/(a)` regular, `Spec (S/(a)) ⟶ Spec S` is a regular
 divisor. -/
@@ -117,7 +111,7 @@ lemma meetTransverselyAt_specMap_quotient {a b : S} (hab : IsField (S ⧸ Ideal.
     Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor hJ)),
     isPullback_SpecMap_of_isPushout _ _ _ _ (isPushout_quotient_factor hI hJ hspan.le), ?_⟩
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, Ideal.Quotient.factor_comp_mk,
-    range_specMap_quotient]
+    Etale.range_specMap_quotientMk]
   have hmax : (Ideal.span {a, b}).IsMaximal := Ideal.Quotient.maximal_of_isField _ hab
   ext p
   simp only [Set.mem_singleton_iff, PrimeSpectrum.mem_zeroLocus, SetLike.coe_subset_coe]

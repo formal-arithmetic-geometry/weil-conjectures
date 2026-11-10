@@ -39,7 +39,7 @@ lemma finite_sections_top_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (.of K)) 
     letI := ((Scheme.ΓSpecIso (.of K)).inv ≫ g.appLE ⊤ ⊤ le_top).hom.toAlgebra
     Module.Finite K Γ(Z, ⊤) := by
   have hfin := (HasAffineProperty.iff_of_isAffine (P := @IsFinite) (f := g)).mp inferInstance
-  rw [Scheme.Hom.appLE_top_top_fiberDegree]
+  rw [Scheme.Hom.appLE_top_top]
   have h2 : RingHom.Finite ((Scheme.ΓSpecIso (.of K)).inv ≫ g.appTop).hom := by
     rw [CommRingCat.hom_comp]
     exact hfin.2.comp (RingHom.Finite.of_surjective _
@@ -73,7 +73,7 @@ lemma Scheme.Hom.finrankΓ_pos_of_isFinite {Z : Scheme.{u}} (g : Z ⟶ Spec (.of
   let _ := g.ΓAlgebra
   have : Module.Finite K Γ(Z, ⊤) := by
     have := finite_sections_top_of_isFinite g
-    rwa [Scheme.Hom.appLE_top_top_fiberDegree] at this
+    rwa [Scheme.Hom.appLE_top_top] at this
   have : Nonempty (⊤ : Z.Opens) := ⟨⟨Classical.arbitrary Z, trivial⟩⟩
   exact Module.finrank_pos
 

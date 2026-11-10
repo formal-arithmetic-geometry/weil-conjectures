@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representable
+public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
@@ -120,9 +121,6 @@ namespace Etale
 
 variable {Y : Scheme.{u}} {S : Type u}
 
-instance (W : Scheme.{u}) (S : Type u) : AlgebraicGeometry.Etale (Sigma.desc fun _ : S ↦ 𝟙 W) :=
-  IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
-
 /-- The trivial cover `∐_{s ∈ S} W ⟶ W` of an étale `Y`-scheme `W`, as an object over `W` in
 the small étale site of `Y`. -/
 noncomputable def trivialOver (S : Type u) (W : Y.Etale) : Over W :=
@@ -153,9 +151,9 @@ noncomputable def trivialOverHomEquiv {W : Y.Etale} (Z : Over W) :
   toFun t := sigmaIndex t.left.left
   invFun c := Over.homMk (homMk (sigmaLift Z.hom.left c) (by
     change _ ≫ Sigma.desc (fun _ : S ↦ 𝟙 W.left) ≫ W.hom = _
-    rw [sigmaLift_desc_assoc, w_left])) (hom_ext (by simp))
+    rw [sigmaLift_desc_assoc, w_left])) (EtaleTorsor.etaleHom_ext (by simp))
   left_inv t := by
-    refine Over.OverMorphism.ext (hom_ext ?_)
+    refine Over.OverMorphism.ext (EtaleTorsor.etaleHom_ext ?_)
     exact sigmaLift_sigmaIndex _ (congr_arg (fun f ↦ f.left) (Over.w t))
   right_inv c := sigmaIndex_sigmaLift _ c
 

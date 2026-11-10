@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open AlgebraicGeometry.ArtinSchreierTrace
 
-set_option maxHeartbeats 5000000 in
 -- The four-way categorical tensor transport needs extra elaboration heartbeats.
 /-- Tensor inverse and inverse-character identifications.
 

@@ -110,7 +110,7 @@ theorem vectorIntegrationCartesianPrefix_baseChange
   have hnat := (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sqW.toCommSq).inv.naturality
     (vectorIntegrationBaseCoefficientPullback A N hA t f hS d).hom
   simp only [Functor.comp_map] at hnat
-  have hb := vectorIntegrationBaseCoefficientPullback_comp A N hA t j f (j ≫ f) rfl hS
+  have hb := orderedTateCoefficientComposition A N hA t j f (j ≫ f) rfl hS
     (affineTracePullbackInvertible N f hS) d
   have hc :
       (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) q v).hom.app K ≫

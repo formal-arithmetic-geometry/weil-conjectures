@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
@@ -685,16 +687,14 @@ variable [WeaklyEtale j] [WeaklyEtale j']
 local instance : (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g' ⋙
     MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ j')).IsContinuous
       (Scheme.ProEt.topology U) (Scheme.ProEt.topology Z') :=
-  have := Scheme.ProEt.isContinuous_overPullback g'
-  have := Scheme.ProEt.isContinuous_overMap (inferInstance : @WeaklyEtale _ _ j')
-  Functor.isContinuous_comp _ _ _ (Scheme.ProEt.topology U') _
+ instIsContinuousOverSchemeWeaklyEtaleTopMorphismPropertyCompPullbackMapTopology_weilConjectures.{t}
+    (g' := g') (j' := j')
 
 local instance : (MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ j) ⋙
     MorphismProperty.Over.pullback @WeaklyEtale ⊤ g'').IsContinuous
       (Scheme.ProEt.topology U) (Scheme.ProEt.topology Z') :=
-  have := Scheme.ProEt.isContinuous_overPullback g''
-  have := Scheme.ProEt.isContinuous_overMap (inferInstance : @WeaklyEtale _ _ j)
-  Functor.isContinuous_comp _ _ _ (Scheme.ProEt.topology Z) _
+ instIsContinuousOverSchemeWeaklyEtaleTopMorphismPropertyCompMapPullbackTopology_weilConjectures.{t}
+    (j := j) (g'' := g'')
 
 /-- The base change map `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` on pro-étale sheaves, with the pullbacks
 along the weakly étale morphisms `j` and `j'` computed as restrictions along the localization

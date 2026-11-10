@@ -37,7 +37,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 -- Produce explicit checked congruences for definitional instance diamonds.
 -- Each reduction is recorded as a separate reflexivity theorem; the final
 -- proof uses these equations, so the kernel never reduces the complete word.
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -45,14 +44,12 @@ private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``heq_of_eq ty.getAppFn.constLevels!)
     (ty.getAppArgs.push h)
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionSymm (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, β, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``HEq.symm ty.getAppFn.constLevels!) #[α, β, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -61,14 +58,12 @@ private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``HEq.trans ty.getAppFn.constLevels!)
     #[α, β, γ, a, b, c, h, k]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionToEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, _, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``eq_of_heq ty.getAppFn.constLevels!) #[α, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let α ← Lean.Meta.inferType a
@@ -79,7 +74,6 @@ private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr :=
     (zetaDelta := true) (kind? := `_finiteReduction)
   conversionOfEq h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta partial def conversionCongruence
     (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
@@ -211,7 +205,6 @@ private meta partial def conversionCongruence
   cache.modify fun m => m.insert (a, b) h
   return h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit :=
   Lean.Elab.Tactic.withMainContext do
@@ -228,7 +221,6 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
     Lean.Elab.Tactic.closeMainGoal `exact result
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem coordinates_mate
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -245,7 +237,6 @@ private theorem coordinates_mate
   rw [mateEquiv_counit]
   exact (coordinates.counit N).symm
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem coordinates_cube_maps
     {A B C D A' B' C' D' : Type*}
@@ -282,7 +273,6 @@ private theorem coordinates_cube_maps
     (NatTrans.congr_app (coordinates_mate coordinatesF pF hF) E)
     (NatTrans.congr_app (coordinates_mate coordinatesK pK hK) (H.obj E))
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem coordinates_cube_from_coordinates
     {A B C D A' B' C' D' : Type*}
@@ -315,7 +305,6 @@ private theorem coordinates_cube_from_coordinates
     e (mateEquiv adj' adjK' (TwoSquare.mk G' F' K' H' θ')).natTrans he rfl hc E
     coordinatesF coordinatesK hF hK
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem native_base_change_mate (A : Type u) [CommRing A]
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -333,7 +322,7 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.

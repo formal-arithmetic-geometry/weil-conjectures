@@ -156,8 +156,6 @@ private theorem unionTriangles_transport
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
--- Elaborating the six literal derived vertices requires a larger heartbeat budget.
 /-- The relative Mayer--Vietoris diagram for a relatively flat module has invertible
 middle and overlap components. This supplies only the triangle diagram; it does
 not assert invertibility of the union comparison or a factorization at a chosen

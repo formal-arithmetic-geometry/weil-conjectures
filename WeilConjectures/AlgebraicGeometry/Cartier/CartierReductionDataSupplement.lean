@@ -219,7 +219,7 @@ namespace AlgebraicGeometry
 end AlgebraicGeometry
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
-  AlgebraicGeometry.cartierProAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
+  WeilConjectures.sfAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
   AlgebraicGeometry.cartierProModuleSheafify
 
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbHasExt

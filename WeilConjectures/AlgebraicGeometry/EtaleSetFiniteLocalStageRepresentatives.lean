@@ -51,7 +51,7 @@ private theorem finite_representatives
   have hR : R ∈ T.smallEtaleTopology W :=
     Presheaf.imageSieve_mem T.smallEtaleTopology θ t
   obtain ⟨n, V, a, ha, hV, hcover⟩ :=
-    Scheme.exists_finite_affine_of_mem_smallEtaleTopology hR
+    (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   have hrep (q : Fin n) : ∃ (U : S.Etale) (b : V q ⟶ B.obj U)
       (z : G.obj.obj (op U)),
       ((Scheme.etaleSetPullback g).obj G).obj.map (a q).op t =

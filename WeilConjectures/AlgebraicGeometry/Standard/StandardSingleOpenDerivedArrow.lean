@@ -55,7 +55,6 @@ section
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1}
   (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-set_option maxHeartbeats 1600000 in
 -- Naturality compares the derived adjunctions and composition isomorphisms.
 private theorem pinnedBaseChange_naturality
     {X S X' S' : Scheme.{u}}
@@ -185,7 +184,6 @@ private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
   simpa only [Category.assoc] using
     congrArg (fun t ↦ ε.app ((HomotopyCategory.singleFunctor _ 0).obj M) ≫ t) hq
 
-set_option maxHeartbeats 1000000 in
 -- The coefficient transports compare dependent derived-category witnesses.
 /-- The derived arrow square before taking homology or stalks.
 

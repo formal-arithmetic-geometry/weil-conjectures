@@ -89,7 +89,7 @@ private theorem iso_of_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.{u} X)
         congr 1)
   exact ⟨eF.symm ≪≫ eG⟩
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Localized equivalences and dependent chart transports require more elaboration heartbeats.
 /-- A linear equivalence preserving numerator degrees compares sheaves given by charts.
 Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U;

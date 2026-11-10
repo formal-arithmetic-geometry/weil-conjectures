@@ -58,7 +58,6 @@ def ordinaryAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (h : g.pull.obj M ⟶ N) : M ⟶ g.push.obj N :=
   (g.ordinaryAdjunction.homEquiv M N) h
 
-set_option maxHeartbeats 800000 in
 -- Evaluating the fixed tower adjunction unfolds both section realizations.
 /-- Evaluate the normalized ordinary adjoint as a map of finite module sheaves.
 Source: classes (3)--(4), tower adjunction (blueprint: def-sp-tower-class-pullback). -/
@@ -69,7 +68,6 @@ def evaluatedAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
   (SpTowerShriek.ev l E Y n).map (ordinaryAdjoint l E g h) ≫
     (g.ordinaryPushEvaluation n).hom.app N
 
-set_option maxHeartbeats 800000 in
 -- The two canonical finite sheaf realizations share their section carrier.
 /-- The canonical ordinary adjoint evaluated on one finite chart. The dependency's
 pushforward realization retains exactly these section carriers.
@@ -81,7 +79,6 @@ def adjointSection {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (x : ((SpTowerShriek.ev l E Y n).obj M).val.obj U) :=
   (evaluatedAdjoint l E g h n).val.app U x
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the fixed section formula through both finite Tate-line comparisons.
 /-- Pullback of the actual Tate line. Its ordinary adjoint is fixed on all finite
 pure tensors by the quotient-ring map and the root restriction above.

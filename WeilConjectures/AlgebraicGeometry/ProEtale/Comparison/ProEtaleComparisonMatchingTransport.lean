@@ -146,7 +146,6 @@ private lemma tr_eq {R S T : Scheme.{u}} (e : S ⟶ R)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 600000 in
 -- The overlap equation has several nested inverse-image functors and dependent equality casts.
 /-- Source: Stacks Project, Tag 0GLZ, first proof paragraph; Sites, Tags 03CB and 03CC.
 (blueprint: lem-cbc-comparison-matching-transport).

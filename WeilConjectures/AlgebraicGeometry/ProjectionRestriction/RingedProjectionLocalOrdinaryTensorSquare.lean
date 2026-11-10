@@ -82,7 +82,7 @@ private theorem square_unit_sections
 attribute [local irreducible] SheafOfModules.monoidalCategory
   localOrdinaryPullbackSquare Operation.moduleAdjunction
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- The four section formulas involve the global and slice module adjunction presentations.
 /-- The ordinary inverse mate commutes with the two pullback and two restriction
 comparisons on module sheaves, without derived categories or resolving complexes.

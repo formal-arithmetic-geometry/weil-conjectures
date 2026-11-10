@@ -44,12 +44,12 @@ noncomputable def openHom {U U' : Y.Opens} (h : U ≤ U') : openObj U ⟶ openOb
 @[simp] lemma openHom_left {U U' : Y.Opens} (h : U ≤ U') : (openHom h).left = Y.homOfLE h := rfl
 
 lemma openHom_refl (U : Y.Opens) : openHom (le_refl U) = 𝟙 _ :=
-  hom_ext (by simp; rfl)
+  EtaleTorsor.etaleHom_ext (by simp; rfl)
 
 @[reassoc]
 lemma openHom_comp {U U' U'' : Y.Opens} (h : U ≤ U') (h' : U' ≤ U'') :
     openHom h ≫ openHom h' = openHom (h.trans h') :=
-  hom_ext (by simp)
+  EtaleTorsor.etaleHom_ext (by simp)
 
 section BasisCover
 
@@ -135,10 +135,10 @@ noncomputable def gluingFunctor : 𝔅 ⥤ Scheme.{u} where
   obj U := (X U).left.left
   map h := (τ F X r (leOfHom h)).left
   map_id U := by
-    rw [← id_left]
+    rw [← id_left_eq]
     exact congr_arg (fun f ↦ f.left) (τ_refl (F := F) (X := X) (r := r) U)
   map_comp h h' := by
-    rw [← comp_left]
+    rw [← comp_left_eq]
     exact congr_arg (fun f ↦ f.left)
       (τ_comp (F := F) (X := X) (r := r) (leOfHom h) (leOfHom h')).symm
 
@@ -174,25 +174,25 @@ lemma gluingNatTrans_equifibered : (gluingNatTrans F X r).Equifibered := by
     rw [pullback.lift_snd_assoc]
     exact w_left (X U).hom)
   obtain ⟨d, hd₁, hd₂⟩ := (r U).exists_overElt_eq QO.hom ((r U').overElt fstC)
-  have hc₁ : c ≫ fstC = τ F X r (leOfHom h) := hom_ext (by simp [c, fstC])
-  have hc₂ : c ≫ QO.hom = (X U).hom := hom_ext (by simp [c, QO])
+  have hc₁ : c ≫ fstC = τ F X r (leOfHom h) := EtaleTorsor.etaleHom_ext (by simp [c, fstC])
+  have hc₂ : c ≫ QO.hom = (X U).hom := EtaleTorsor.etaleHom_ext (by simp [c, QO])
   have hcd : c ≫ d = 𝟙 _ := (r U).overElt_injective
     (by rw [Category.assoc, hd₁, hc₂, Category.id_comp])
     (by rw [(r U).overElt_comp, hd₂, ← (r U').overElt_comp, hc₁, overElt_τ])
   have hdτ : d ≫ τ F X r (leOfHom h) = fstC := (r U').overElt_injective
     (by
       rw [Category.assoc, τ_hom, reassoc_of% hd₁]
-      exact hom_ext (by simp [QO, fstC, pullback.condition]))
+      exact EtaleTorsor.etaleHom_ext (by simp [QO, fstC, pullback.condition]))
     (by rw [overElt_comp_τ, hd₂])
   have hdc : d ≫ c = 𝟙 _ := by
-    refine hom_ext (pullback.hom_ext ?_ ?_)
+    refine EtaleTorsor.etaleHom_ext (pullback.hom_ext ?_ ?_)
     · have := congr_arg (fun f ↦ f.left) hdτ
       simpa [c, fstC] using this
     · have := congr_arg (fun f ↦ f.left) hd₁
       simpa [c, QO] using this
   refine IsPullback.of_iso_pullback ⟨hτ⟩ ⟨c.left, d.left, ?_, ?_⟩ (by simp [c]) (by simp [c])
-  · rw [← comp_left, hcd, id_left]
-  · rw [← comp_left, hdc, id_left]
+  · rw [← comp_left_eq, hcd, id_left_eq]
+  · rw [← comp_left_eq, hdc, id_left_eq]
     rfl
 
 /-- The relative gluing datum of the `X_U` over the directed affine open cover of `Y`. -/
@@ -274,9 +274,9 @@ lemma exists_glue (T : Y.Etale) (s : F.obj.obj (op T)) :
     let transC : TU T i ⟶ TU T j :=
       homMk (pullback.map _ _ _ _ (𝟙 _) (Y.homOfLE (leOfHom hij)) (𝟙 _) (by simp) (by simp))
         (by simp)
-    have hfst : transC ≫ TUfst T j = TUfst T i := hom_ext (by simp [transC])
+    have hfst : transC ≫ TUfst T j = TUfst T i := EtaleTorsor.etaleHom_ext (by simp [transC])
     have hsnd : transC ≫ TUsnd T j = TUsnd T i ≫ openHom (show i.1 ≤ j.1 from leOfHom hij) :=
-      hom_ext (by simp [transC])
+      EtaleTorsor.etaleHom_ext (by simp [transC])
     have e : transC ≫ a j = a i ≫ τ F X r (leOfHom hij) := by
       refine (r j).overElt_injective ?_ ?_
       · rw [Category.assoc, ha₁, Category.assoc, τ_hom, reassoc_of% ha₁, hsnd]
@@ -319,7 +319,7 @@ lemma glueLeft_toBase (T : Y.Etale) (s : F.obj.obj (op T)) :
   obtain ⟨a, ha₁, ha₂⟩ := (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s)
   rw [reassoc_of% fst_glueLeft T s U a ha₁ ha₂, Cover.RelativeGluingData.ι_toBase]
   have := congr_arg (fun f ↦ f.left) ha₁
-  simp only [comp_left, TUsnd_left] at this
+  simp only [comp_left_eq, TUsnd_left] at this
   change a.left ≫ (X U).hom.left ≫ U.1.ι = _
   rw [reassoc_of% this, ← pullback.condition]
 
@@ -341,21 +341,21 @@ noncomputable def glue (T : Y.Etale) (s : F.obj.obj (op T)) : T ⟶ XG F X r :=
 
 lemma glue_naturality {T T' : Y.Etale} (h : T' ⟶ T) (s : F.obj.obj (op T)) :
     glue F X r T' (F.obj.map h.op s) = h ≫ glue F X r T s := by
-  refine hom_ext (hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_)
+  refine EtaleTorsor.etaleHom_ext (hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_)
   obtain ⟨a, ha₁, ha₂⟩ := (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s)
   let hU : TU T' U ⟶ TU T U := homMk (pullback.map _ _ _ _ h.left (𝟙 _) (𝟙 _)
     (by rw [Category.comp_id, w_left]) (by simp)) (by
       change _ ≫ pullback.fst _ _ ≫ T.hom = pullback.fst _ _ ≫ T'.hom
       rw [pullback.lift_fst_assoc, Category.assoc, w_left])
-  have h₁ : hU ≫ TUsnd T U = TUsnd T' U := hom_ext (by simp [hU])
-  have h₂ : hU ≫ TUfst T U = TUfst T' U ≫ h := hom_ext (by simp [hU])
+  have h₁ : hU ≫ TUsnd T U = TUsnd T' U := EtaleTorsor.etaleHom_ext (by simp [hU])
+  have h₂ : hU ≫ TUfst T U = TUfst T' U ≫ h := EtaleTorsor.etaleHom_ext (by simp [hU])
   have h₂' : hU.left ≫ pullback.fst (structMap T) U.1.ι =
       pullback.fst (structMap T') U.1.ι ≫ h.left := by
     simpa using congr_arg (fun f ↦ f.left) h₂
-  rw [glue_left, comp_left, glue_left, fst_glueLeft T' _ U (hU ≫ a)
+  rw [glue_left, comp_left_eq, glue_left, fst_glueLeft T' _ U (hU ≫ a)
     (by rw [Category.assoc, ha₁, h₁])
     (by rw [(r U).overElt_comp, ha₂, ← Functor.map_comp_apply, ← op_comp, h₂, op_comp,
-      Functor.map_comp_apply]), ← reassoc_of% h₂', fst_glueLeft T s U a ha₁ ha₂, comp_left,
+      Functor.map_comp_apply]), ← reassoc_of% h₂', fst_glueLeft T s U a ha₁ ha₂, comp_left_eq,
     Category.assoc]
 
 lemma glue_injective (T : Y.Etale) : Function.Injective (glue F X r T) := by
@@ -368,7 +368,7 @@ lemma glue_injective (T : Y.Etale) : Function.Injective (glue F X r T) := by
       a'.left ≫ colimit.ι (gluingData F X r).functor U := by
     rw [← fst_glueLeft T s U a ha₁ ha₂, ← fst_glueLeft T s' U a' ha'₁ ha'₂, ← glue_left,
       ← glue_left, hss']
-  have : a = a' := hom_ext ((cancel_mono _).1 e)
+  have : a = a' := EtaleTorsor.etaleHom_ext ((cancel_mono _).1 e)
   subst this
   exact ha₂.symm.trans ha'₂
 
@@ -382,7 +382,8 @@ lemma exists_lift (T : Y.Etale) (U : 𝔅) (φ : T.left ⟶ (gluingData F X r).g
       (pullback.fst (structMap T) U.1.ι ≫ φ) ≫ (gluingData F X r).toBase := by
     rw [Category.assoc, hφ]
     exact pullback.condition.symm
-  refine ⟨homMk (hpb.lift _ _ hw) ?_, hom_ext (hpb.lift_fst _ _ _), hpb.lift_snd _ _ _⟩
+  refine ⟨homMk (hpb.lift _ _ hw) ?_, EtaleTorsor.etaleHom_ext (hpb.lift_fst _ _ _),
+    hpb.lift_snd _ _ _⟩
   rw [← w_left (X U).hom]
   change hpb.lift _ _ hw ≫ (gluingData F X r).natTrans.app U ≫ U.1.ι = _
   rw [hpb.lift_fst_assoc]
@@ -421,16 +422,16 @@ lemma glue_surjective (T : Y.Etale) : Function.Surjective (glue F X r T) := by
         have hc (V : 𝔅) (hUV : U ≤ V) (g : Z ⟶ TU T V)
             (hg : g ≫ TUfst T V = ψ) : TUfst Z U ≫ g ≫ b V = c ≫ τ F X r hUV := by
           have hpb := (gluingData F X r).isPullback_natTrans_ι_toBase V
-          refine hom_ext (hpb.hom_ext ?_ ?_)
+          refine EtaleTorsor.etaleHom_ext (hpb.hom_ext ?_ ?_)
           · rw [← cancel_mono ((basisCover 𝔅).f V)]
             have e₁ := congr_arg (fun f ↦ f.left) (τ_hom (F := F) (X := X) (r := r) hUV)
             have e₂ := congr_arg (fun f ↦ f.left) (hb₁ V)
             have e₃ := congr_arg (fun f ↦ f.left) hc₁
             have e₄ := congr_arg (fun f ↦ f.left) hg
-            simp only [comp_left, openHom_left, TUsnd_left, TUfst_left] at e₁ e₂ e₃ e₄
+            simp only [comp_left_eq, openHom_left, TUsnd_left, TUfst_left] at e₁ e₂ e₃ e₄
             change (TUfst Z U ≫ g ≫ b V).left ≫ (X V).hom.left ≫ V.1.ι =
               (c ≫ τ F X r hUV).left ≫ (X V).hom.left ≫ V.1.ι
-            simp only [comp_left, Category.assoc, TUfst_left]
+            simp only [comp_left_eq, Category.assoc, TUfst_left]
             have e₅ : g.left ≫ pullback.fst (structMap T) V.1.ι ≫ T.hom = Z.hom := by
               rw [reassoc_of% e₄]
               exact w_left ψ
@@ -446,10 +447,10 @@ lemma glue_surjective (T : Y.Etale) : Function.Surjective (glue F X r T) := by
               _ = c.left ≫ (τ F X r hUV).left ≫ (X V).hom.left ≫ V.1.ι := by
                 rw [reassoc_of% e₁, Scheme.homOfLE_ι, reassoc_of% e₃]
           · have e₅ := congr_arg (fun f ↦ f.left) hg
-            simp only [comp_left, TUfst_left] at e₅
+            simp only [comp_left_eq, TUfst_left] at e₅
             change (TUfst Z U ≫ g ≫ b V).left ≫ colimit.ι (gluingData F X r).functor V =
               (c ≫ τ F X r hUV).left ≫ colimit.ι (gluingData F X r).functor V
-            simp only [comp_left, Category.assoc, TUfst_left]
+            simp only [comp_left_eq, Category.assoc, TUfst_left]
             rw [hb₂, reassoc_of% e₅]
             change _ = c.left ≫ (gluingData F X r).functor.map (homOfLE hUV) ≫
               colimit.ι (gluingData F X r).functor V
@@ -457,7 +458,7 @@ lemma glue_surjective (T : Y.Etale) : Function.Surjective (glue F X r T) := by
         rw [← (r i).overElt_comp, ← (r j).overElt_comp, ← Category.assoc, ← Category.assoc,
           Category.assoc (TUfst Z U) gi, hc i hUi gi rfl, Category.assoc (TUfst Z U) gj,
           hc j hUj gj hij.symm, overElt_comp_τ, overElt_comp_τ])
-  refine ⟨s, hom_ext (hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_)⟩
+  refine ⟨s, EtaleTorsor.etaleHom_ext (hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_)⟩
   rw [glue_left, fst_glueLeft T s U (b U) (hb₁ U) (hs U).symm, hb₂]
 
 end Representation

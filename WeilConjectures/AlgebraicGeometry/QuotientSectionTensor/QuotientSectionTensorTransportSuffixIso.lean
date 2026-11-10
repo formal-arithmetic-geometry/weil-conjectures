@@ -58,7 +58,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 1600000 in
 -- Check the scalar counits and tensor localization factors separately.
 /-- The section scalar tensor comparison's final map is invertible on flat-term
 K-flat representatives.

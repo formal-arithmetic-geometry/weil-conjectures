@@ -112,7 +112,6 @@ lemma gmSheaf_eq_add {Z : X.Etale} (a b c : X.gmSheaf.obj.obj (op Z))
     c = a + b :=
   ULift.ext _ _ (Additive.toMul.injective (Units.ext (h.trans (Units.val_mul _ _).symm)))
 
-set_option maxHeartbeats 4000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **`L ↦ [Isom(𝒪, L)]` is additive.** The class of the `𝔾ₘ`-torsor `Isom(𝒪, L₁ ⊗ L₂)` is the sum

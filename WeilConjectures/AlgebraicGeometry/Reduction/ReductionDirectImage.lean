@@ -82,7 +82,6 @@ private theorem bounded_iff_finite_support
     · by_contra hz
       exact (not_lt_of_ge (hb hz)) hi
 
-set_option maxHeartbeats 18000 in
 -- Diagnose elaboration without unfolding large derived-functor constructions indefinitely.
 private theorem scalarMateRestriction_reflectsIso
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (Y : Scheme.{u}) :

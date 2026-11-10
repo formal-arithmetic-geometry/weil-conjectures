@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingPullbackFixed
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoefficientOperationEncoding
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingPullbackFixed
@@ -106,22 +107,6 @@ instance heart_isEquivalence (e : Mon.mk R ≅ Mon.mk (coefficient A))
   rw [heart_eq]
   infer_instance
 
-/-- Normalization makes the scalar actions on the two sectionwise direct images equal.
-Source: Stacks 03D3 and coefficient-map naturality
-(blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
-theorem sectionHeartPush_smul (T U : Scheme.{u}) (f : U ⟶ T)
-    (eT : Encoding A T) (eU : Encoding A U) (M : Internal A U)
-    (V : T.ProEtᵒᵖ) (a : ULift.{u + 1} A)
-    (m : M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V)) :
-    (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
-      (ModuleCat.smul (((sectionEncoding A T eT.ringIso ⋙ fixedRestriction A T).obj
-      ((CondensedRing.lowerStar (coefficient A) f).obj M)).obj.obj V) a).hom m) =
-    (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
-      (ModuleCat.smul (((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).obj
-      ((sectionEncoding A U eU.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V) a).hom m) := by
-  exact AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.sectionPushforward_smul
-    A T U f eT eU M V a m
-
 /-- The identity on sections, as an isomorphism of fixed-scalar sheaves.
 Source: Stacks 03D3 and normalized section-action reconstruction
 (blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
@@ -142,7 +127,7 @@ def sectionHeartPushIso (T U : Scheme.{u}) (f : U ⟶ T)
         left_inv := fun _ ↦ rfl
         right_inv := fun _ ↦ rfl
         map_add' := fun _ _ ↦ rfl
-        map_smul' := sectionHeartPush_smul A T U f eT eU M V }).toModuleIso
+        map_smul' := sectionPushforward_smul A T U f eT eU M V }).toModuleIso
   · intro V V' g
     ext m
     rfl

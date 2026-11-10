@@ -157,7 +157,7 @@ private theorem push_congr_forget {S X : RingedVertex.{u}}
 attribute [local irreducible] RingedMap.pullComp
   exchangeModuleComposition
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 800000 in
 -- Comparing underlying direct images requires reducing several module structures.
 private theorem push_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)
@@ -233,7 +233,6 @@ private theorem adjoint_compositor_associativity
   simpa only [conjugateIsoEquiv_associator, conjugateIsoEquiv_isoWhiskerRight,
     conjugateIsoEquiv_isoWhiskerLeft, Iso.trans_assoc] using hc
 
-set_option maxHeartbeats 2000000 in
 -- The concrete conjugation involves large module functor and adjunction types.
 private theorem pull_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)

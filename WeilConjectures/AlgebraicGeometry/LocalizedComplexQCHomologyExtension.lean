@@ -54,7 +54,7 @@ private theorem qc_overEquiv_inverse (X : Scheme.{u}) (U : X.Opens)
     (U.overEquivalence.functor) _
     (U.sheafOfModulesEquivOverInverseUnit X.ringCatSheaf)
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Transport through the localized-site equivalence requires substantial reduction.
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
 

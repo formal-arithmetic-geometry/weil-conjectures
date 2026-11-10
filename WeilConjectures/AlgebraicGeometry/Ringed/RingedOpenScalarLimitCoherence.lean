@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -667,11 +668,7 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Existing locally bijective description at the same coefficient universe.
-Source: Stacks 03CY (blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
-instance cbcAbLocallyBijective (T : Scheme.{u}) :
-    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+attribute [local instance] WeilConjectures.sfAbBijective
 
 variable {T : Scheme.{u}} (U : T.ProEt)
   {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S)
@@ -696,7 +693,7 @@ attribute [local irreducible] Functor.mapDerivedCategoryNatIso Functor.mapDerive
 
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
-attribute [local instance] cbcAbLocallyBijective
+attribute [local instance] WeilConjectures.sfAbBijective
 private theorem ambient_exact (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u + 1}

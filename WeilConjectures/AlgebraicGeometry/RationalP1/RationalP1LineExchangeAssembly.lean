@@ -218,7 +218,6 @@ private theorem ordinary_adjunct_coefficient_square
 
 end OrdinaryModuleSquare
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the dependent module categories and their canonical derived comparisons.
 private theorem pull_single_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -256,7 +255,6 @@ private theorem pull_single_adjunct
   unfold singlePushComparison
   coefficient_finish h
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the canonical single-complex scalar and geometric adjunctions.
 private theorem unshifted_endpoint_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -380,7 +378,6 @@ private theorem shift_endpoint_square
   rw [h']
   rw [← reassoc_of% (U.commShiftIso_hom_naturality e n)]
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the dependent module categories and their canonical derived comparisons.
 private theorem scalar_pull_shift
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -460,7 +457,6 @@ private theorem option_shifted_line_square
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
   coefficient_finish h
 
-set_option maxHeartbeats 2000000 in
 -- Identify the native exchange wrappers with the fixed coefficient functors.
 private theorem option_exchange_paste
     (l : ℕ) [Fact l.Prime] (c c' : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -501,7 +497,7 @@ end ProofHelpers
 set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1700000 in
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
 This is the line-only substep of the rational P1 closure naturality proof; it has

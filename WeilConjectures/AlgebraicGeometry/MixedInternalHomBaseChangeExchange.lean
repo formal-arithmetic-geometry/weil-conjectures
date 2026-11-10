@@ -81,7 +81,7 @@ private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
       schemeDerivedCategory T := derivedInternalHom (Opens.grothendieckTopology T) T.sheaf
   let adj := schemeHomPullbackAdjunction h
   let E : schemeDerivedCategory T := H.obj (op P, Q)
-  have hc := (Classical.choose_spec (exists_mixedHomDirectImageComparison h))
+  have hc := (Classical.choose_spec (exists_schemeHomDirectImageComparison h))
     P Q ((schemeDerivedDirectImage h).obj E) (𝟙 _)
   simp only [Category.id_comp] at hc
   dsimp only [mixedHomDirectImageComparison]
@@ -120,7 +120,7 @@ private theorem evaluation_formula (S : Scheme.{u})
   erw [hid] at hn
   simpa only [Category.comp_id] using hn
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1200000 in
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
 /-- The exchange identity before applying global sections.
 Here `p` is the pullback of evaluation transposed by the fixed tensor-Hom bijection.

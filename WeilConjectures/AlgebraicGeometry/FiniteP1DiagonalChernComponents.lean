@@ -61,7 +61,7 @@ lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 Proof: the short relative-Cartier argument of diagonalImmersion_cartier proves the
 diagonal ideal invertible over any base
 using the relative Cartier criterion for a section of the smooth projective-line
-projection. ordinary_supported_kummer_uniqueBoundary gives its actual uniquely
+projection. supported_cartier_boundary_existsUnique gives its actual uniquely
 normalized supported boundary. Apply ordinaryFiniteP1_diagonal_kummer_component_formula
 to this boundary and the supplied relative hyperplane class. This gives the two
 components before any splitting or trace is chosen. -/
@@ -91,7 +91,7 @@ theorem ordinaryFiniteP1_diagonal_chern_components (N : ℕ) (hN : 0 < N)
               ordinaryFiniteP1ChernPushforward A N hA (ProjectiveLine S) c  := by
   let hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible :=
     finiteP1_diagonal_cartier S
-  obtain ⟨κ, hκ, _⟩ := ordinary_supported_kummer_uniqueBoundary
+  obtain ⟨κ, hκ, _⟩ := supported_cartier_boundary_existsUnique
     (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N hN A hA hW
     (pullback.diagonal (ProjectiveLine S ↘ S)) hI
   exact ⟨hI, κ, hκ,

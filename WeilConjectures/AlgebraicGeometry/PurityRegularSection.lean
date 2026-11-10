@@ -126,7 +126,6 @@ theorem sectionOver_map (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) :
         ObjectProperty.homMk (liftToBase M φ) :=
   (antiEquivalence S).functor.map_preimage _
 
-set_option maxHeartbeats 1000000 in -- unfolding the anti-equivalence is slow
 theorem sectionOfForm_appLE (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) (U : S.Opens) :
     (algebraIso S d M).hom.right.hom.app (op U) ≫
       (sectionOfForm M d φ).appLE ((π S d M) ⁻¹ᵁ U) U
@@ -147,7 +146,6 @@ theorem sectionOfForm_appLE (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) (U :
     (op U) ≫ _ = _
   rw [hn, ← Category.assoc, hc, Category.id_comp]
 
-set_option maxHeartbeats 1000000 in -- unfolding the anti-equivalence is slow
 theorem sectionOfForm_affineChart (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf)
     (U : S.affineOpens) :
     (sectionOfForm M d φ).resLE ((π S d M) ⁻¹ᵁ U.1) U.1
@@ -172,7 +170,6 @@ theorem sectionOfForm_affineChart (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf
   rfl
 
 
-set_option maxHeartbeats 1000000 in -- unfolding the anti-equivalence is slow
 /-- The section of the vector bundle attached to a linear form `φ : M → O_S`, characterized
 on affine charts by `SymmetricAlgebra.lift φ`. -/
 theorem sectionOfForm_existsUnique (φ : M ⟶ SheafOfModules.unit S.ringCatSheaf) :
@@ -452,7 +449,6 @@ theorem _root_.SymmetricAlgebra.lift_comp_eq_algebraMapInv_comp_iff {R A N : Typ
     | add a b ha hb => simp_all
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in -- unfolding the bundle is slow
 /-- A map `h` satisfies `h ≫ σ_s = h ≫ 0` iff, on every affine open of the base, the ring map
 `Γ(U) → Γ(h⁻¹U)` induced by `h` kills all evaluations of `s`. -/
 theorem regularSection_comp_eq_zeroSection_iff (F : T.Modules) (r : ℕ)

@@ -150,7 +150,7 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
           d (C.kummerδ₁ n (Scheme.isUnit_natCast_of_ne_zero f hn)
             (Scheme.Pic.toCohomologicalPicardGroup C L)) = (f.picDegree L : ZMod n)) ∧
       ∀ q : ℕ, 2 < q → Subsingleton (Sheaf.H (C.rootsOfUnitySheaf n) q) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have hn' := Scheme.isUnit_natCast_of_ne_zero f hn
   have hn0 : 0 < n := Nat.pos_of_ne_zero (by rintro rfl; exact hn Nat.cast_zero)
   have : NeZero n := ⟨hn0.ne'⟩
@@ -371,7 +371,7 @@ theorem exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian (f : C ⟶ Spec (.
           Scheme.Pic.toCohomologicalPicardGroup C
             (ψ.symm (Additive.toMul (E x : Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)))) := by
   let : C.Over (Spec (.of k)) := ⟨f⟩
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
     IsConnectedCurve.smoothOfRelativeDimension_one f
   have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›

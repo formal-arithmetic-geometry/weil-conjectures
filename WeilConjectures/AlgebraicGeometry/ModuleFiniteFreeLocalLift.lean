@@ -113,7 +113,7 @@ private theorem local_section_lift
   obtain ⟨g, hg⟩ := hf
   exact ⟨U, leOfHom f, hxU, g, hg⟩
 
-set_option maxHeartbeats 500000 in
+set_option maxHeartbeats 400000 in
 -- Comparing the two restrictions of a free sheaf unfolds slice-site module functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem finite_free_lift

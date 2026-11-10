@@ -43,7 +43,6 @@ attribute [local irreducible] schemeOpenModuleAdjunction schemeOpenModuleImageRe
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-set_option maxHeartbeats 600000 in
 -- The row-map equations unfold the three restriction-image complex functors.
 private noncomputable def mv_row_map (X : Scheme.{u}) (U V : X.Opens)
     {I J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}

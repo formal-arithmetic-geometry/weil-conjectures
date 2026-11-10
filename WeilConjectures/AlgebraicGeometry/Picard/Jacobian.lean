@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
+public import WeilConjectures.AlgebraicGeometry.GaloisFieldCover
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
@@ -2120,11 +2121,6 @@ lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
 
 omit [Field k] in
-lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]
-    [FiniteDimensional k K] : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
-  IsFinite.SpecMap_iff _ |>.mpr (RingHom.finite_algebraMap.mpr inferInstance)
-
-omit [Field k] in
 lemma flat_specMap_algebraMap (k K : Type u) [Field k] [CommRing K] [Algebra k K] :
     Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
   Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
@@ -2169,7 +2165,7 @@ theorem isSheafFor_picardFunctor_singleton (C : Scheme.{u}) [C.Over (Spec (.of k
   let : Algebra k K' := (f.residueFieldAlgebraMap x).toAlgebra
   have : Module.Finite k K' := f.finite_residueField_of_isClosed x hx
   set g' := Spec.map (CommRingCat.ofHom (algebraMap k K'))
-  have := isFinite_specMap_algebraMap k K'
+  have := instIsFiniteSpecMapAlgebraMap k K'
   have := flat_specMap_algebraMap k K'
   have := locallyOfFinitePresentation_specMap_algebraMap k K'
   have := surjective_specMap_algebraMap k K'
@@ -2984,7 +2980,7 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   obtain ⟨K, _, _, JK, q', hq', rK, -⟩ :=
     exists_intermediateField_representableBy C Js (rJs.ofIso e.symm)
   have hJK := exists_isAffineOpen_superset_of_isPullback C Js (rJs.ofIso e.symm) K JK q' hq'
-  have := isFinite_specMap_algebraMap k K
+  have := instIsFiniteSpecMapAlgebraMap k K
   have := flat_specMap_algebraMap k K
   have := locallyOfFinitePresentation_specMap_algebraMap k K
   have := surjective_specMap_algebraMap k K

@@ -71,7 +71,7 @@ private theorem paste_output_computation {𝒞 : Type*} [Category 𝒞]
 
 -- Preserve the existing binder names for the three inputs unused by this output-side proof.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 900000 in
 -- Elaborating the derived comparison components requires the cached module structures.
 /--
 The algebraic paste after the three normalization equations have been supplied.

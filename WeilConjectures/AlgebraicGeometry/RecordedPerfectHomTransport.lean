@@ -154,7 +154,6 @@ private theorem recordedTrTo_refl
   simp only [recordedTrTo, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the fixed composition isomorphisms reduces their universal properties.
 omit [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
@@ -202,7 +201,6 @@ private theorem recordedHomMap_trTo {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Ove
     Iso.trans_hom,
     Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- Reducing the fixed comparison construction exposes the conjugation formula.
 /-- Conjugated Hom transport composes along successive base-change maps.
 Source: Stacks Project, Tags 0D5S and 09RE

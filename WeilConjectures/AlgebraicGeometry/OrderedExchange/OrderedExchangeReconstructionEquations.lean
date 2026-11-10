@@ -88,20 +88,6 @@ theorem phi_eq_completedPullResIso : phi d u = completedPullResIso d u :=
   (phi_existsUnique d u).unique (phi_existsUnique d u).exists.choose_spec
     (completedPullResIso_unit d u)
 
-/-- Restriction commutes with the two direct-image/derived-limit comparisons.
-Source: Stacks 0A07, 0E48 (blueprint: lem-weil-pbc-ordered-reconstruction-equations).
-Proof: all five maps are adjunction mates of exact descents of ordinary identity-component
-squares. Transposing along the constant-diagram and tower-pullback adjunctions reduces the
-equation to a cube of such squares, which commutes on complexes. -/
-theorem lambda_directImageRlimIso (Z : DerivedCategory (d.towers U)) :
-    (res d V).map ((d.directImageRlimIso u).hom.app Z) ≫
-        (lambda d V).hom.app ((d.towerPush u).obj Z) ≫
-        (rlim (A := A) V).map ((exchangeResPush d u).hom.app Z) =
-      (chi d u).hom.app ((completedRlim U (d.completedRing U)).obj Z) ≫
-        (push (A := A) u).map ((lambda d U).hom.app Z) ≫
-        (directLimitIso (A := A) u).hom.app ((exchangeTowerRes d U).obj Z) :=
-  lambda_directImageRlimIso_aux d u Z
-
 end Helpers
 
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -183,7 +169,7 @@ theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
       (iotaT (f' := f') (g' := g') d K hK).hom ≫
         (T (f' := f') (g' := g') d ((res d X).obj K)).hom := by
   have h2 := lambda_rhoPull (g' := g') d K hK
-  have hR := lambda_directImageRlimIso d f'
+  have hR := lambda_directImageRlimIso_aux d f'
     ((d.towerPull g').obj ((completedReductionTower X d).obj K))
   simp only [targetA, delta, iotaT, T, exchangeCornerD, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, NatTrans.comp_app, Functor.associator_hom_app,

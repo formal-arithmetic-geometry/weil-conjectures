@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.Localization.Integral
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
+public import WeilConjectures.RingTheory.ConstantField
 
 /-!
 # Commutative algebra for the affine Artin vanishing theorem
@@ -50,10 +51,6 @@ section Henselian
 
 variable (k : Type u) (R : Type v) [Field k] [CommRing R] [IsDomain R] [Algebra k R]
 
-/-- In a domain `R` containing a field `k`, the integral closure of `k` is a field. -/
-theorem isField_integralClosure : IsField (integralClosure k R) :=
-  isField_of_isIntegral_of_isField' (Field.toIsField k)
-
 /-- Let `R` be a henselian local domain with separably closed residue field, containing a field
 `k`. Then `R` contains a separably closed field `F ⊇ k`, namely the integral closure of `k` in
 `R`: a separable irreducible polynomial over it has a simple root in the residue field, which
@@ -63,7 +60,7 @@ theorem exists_isSepClosed_of_henselianLocalRing [HenselianLocalRing R]
     ∃ (F : Type v) (_ : Field F) (_ : IsSepClosed F) (_ : Algebra k F) (_ : Algebra F R),
       IsScalarTower k F R := by
   let F := integralClosure k R
-  let : Field F := (isField_integralClosure k R).toField
+  let : Field F := (Algebra.TensorProduct.isField_integralClosure (k := k) (A := R)).toField
   refine ⟨F, inferInstance, ?_, inferInstance, inferInstance, inferInstance⟩
   refine IsSepClosed.of_exists_root _ fun p hmon hirr hsep ↦ ?_
   let ι : F →+* R := algebraMap F R

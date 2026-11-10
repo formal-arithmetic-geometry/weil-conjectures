@@ -65,7 +65,6 @@ set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 set_option Elab.async false
 
-set_option maxHeartbeats 30000 in
 -- The presentation uses free representables over two different site universes.
 private noncomputable def operationRepCorepresentable
     {C₀ : Type c} {D₀ : Type d} [Category.{v} C₀] [Category.{w} D₀]
@@ -86,7 +85,6 @@ private noncomputable def operationRepCorepresentable
     erw [Equiv.apply_symm_apply]
     rfl
 
-set_option maxHeartbeats 30000 in
 -- The dependent sheaf and module functors require explicit comparison reductions.
 private theorem operationPushRightAdjoint
     {C₀ : Type c} {D₀ : Type d} [Category.{v} C₀] [Category.{w} D₀]

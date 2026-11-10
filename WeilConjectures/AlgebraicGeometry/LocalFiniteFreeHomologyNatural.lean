@@ -36,7 +36,7 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
   DerivedCategory.homologyFunctor Functor.mapHomologicalComplex
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The functor-level comparisons require more elaboration steps than objectwise comparisons.
 /-- A bounded finite free resolution on an open computes restricted Ext
 naturally in every coefficient sheaf.

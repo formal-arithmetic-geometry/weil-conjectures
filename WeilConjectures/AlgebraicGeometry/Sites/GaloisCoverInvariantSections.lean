@@ -54,12 +54,12 @@ lemma smulEtale_left (g : G) : (c.smulEtale g).left = c.smul g :=
 /-- The unit of `G` acts trivially on the total space of a Galois cover, as an object of the
 small étale site (blueprint `det-tf-transverse-corner-vanishing`). -/
 lemma smulEtale_one : c.smulEtale 1 = 𝟙 _ :=
-  Etale.hom_ext c.one_smul
+  EtaleTorsor.etaleHom_ext c.one_smul
 
 /-- The action of `G` on the total space of a Galois cover, as an object of the small étale
 site, is a left action (blueprint `det-tf-transverse-corner-vanishing`). -/
 lemma smulEtale_mul (g h : G) : c.smulEtale (g * h) = c.smulEtale h ≫ c.smulEtale g :=
-  Etale.hom_ext (c.mul_smul g h)
+  EtaleTorsor.etaleHom_ext (c.mul_smul g h)
 
 /-- The graph `(g • -, id) : P ⟶ P ×_V P` of the action of `g` on a Galois cover
 (blueprint `det-tf-transverse-corner-vanishing`). -/
@@ -165,9 +165,9 @@ theorem exists_map_eq_of_forall_smul {E : V.Etaleᵒᵖ ⥤ Type w}
     rfl
   let sg : Zg g ⟶ c.etaleObj := MorphismProperty.Over.homMk _ hw
   have h₁ : ιg g ≫ p₁ = sg ≫ c.smulEtale g :=
-    Etale.hom_ext (pullback_fst_comp_eq_snd_comp_smul h g)
+    EtaleTorsor.etaleHom_ext (pullback_fst_comp_eq_snd_comp_smul h g)
   have h₂ : ιg g ≫ p₂ = sg :=
-    Etale.hom_ext (pullback_fst_comp_eq_snd h g)
+    EtaleTorsor.etaleHom_ext (pullback_fst_comp_eq_snd h g)
   rw [← Functor.map_comp_apply, ← op_comp, h₁, ← Functor.map_comp_apply, ← op_comp, h₂,
     op_comp, Functor.map_comp_apply, hx]
 

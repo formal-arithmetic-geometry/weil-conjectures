@@ -23,7 +23,7 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The two exact sheafification comparisons use different homology functors.
 /-- The ordinary abelian sheafification class sends cycles to their module cohomology
 classes through the canonical kernel comparison.

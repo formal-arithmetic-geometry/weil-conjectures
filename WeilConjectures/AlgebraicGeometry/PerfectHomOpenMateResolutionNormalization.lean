@@ -237,7 +237,7 @@ set_option linter.all false in
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Comparing fixed derived adjunctions requires extra instance conversion.
 /-- On K-injective representatives the derived sectionwise comparison satisfies
 the counit equation for the fixed pullback-composition comparison and canonical adjunctions.

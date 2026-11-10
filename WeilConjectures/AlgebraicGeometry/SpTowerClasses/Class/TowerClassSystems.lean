@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerShriekLevels
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystem
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
@@ -35,16 +36,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The sequence site has the same object bound as the small pro-etale site.
-Source: inverse-system topos (blueprint: def-sp-tower-class-systems). -/
-instance sequenceSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} (ℕ × T.ProEt) :=
-  essentiallySmallSelf.{0} _
-
-/-- Fix the coefficient-universe sheafification witness explicitly.
-Source: small-site size convention (blueprint: def-sp-tower-class-systems). -/
-instance (priority := 4000) ringSheafify (T : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u} T
+attribute [local instance 4000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 /-- Towers of abelian sheaves. Source: classes (1) (blueprint: def-sp-tower-class-systems). -/
 abbrev Ab (T : Scheme.{u}) := ℕᵒᵖ ⥤ DiagonalAb T

@@ -48,7 +48,6 @@ noncomputable def tensorResolutionChartModel {Y : Scheme.{u}} (M : Y.Modules)
   exact (tilde.functor (.of (Γ(Y, U.1) : Type u))).mapIso e.toModuleIso ≪≫
     asIso (M.restrict U.2.fromSpec).fromTildeΓ
 
-set_option maxHeartbeats 800000 in
 -- Tensor-coordinate comparisons require substantial definitional reduction.
 /-- Exact open restriction commutes with ordinary tensor homology. -/
 noncomputable def tensorResolutionRestrictHomologyIso {X Y : Scheme.{u}}
@@ -75,7 +74,6 @@ noncomputable def tensorResolutionRestrictHomologyIso {X Y : Scheme.{u}}
   exact ((E.sc i).mapHomologyIso R).symm ≪≫
     (HomologicalComplex.homologyFunctor X.Modules (.up ℤ) i).mapIso (c ≪≫ t)
 
-set_option maxHeartbeats 800000 in
 -- Tensor-coordinate comparisons require substantial definitional reduction.
 /-- Ordinary tensor-resolution homology has the asserted coordinates on each affine chart. -/
 theorem exists_tensorResolutionChartCoordinates

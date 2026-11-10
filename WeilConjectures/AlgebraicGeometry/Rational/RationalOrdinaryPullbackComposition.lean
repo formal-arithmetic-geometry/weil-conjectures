@@ -232,7 +232,6 @@ private def ordinaryRightIso {S T : Scheme.{u}} (f : S ⟶ T)
       (proEtaleSheafDirectImage f RingCat.{u + 1}).map ((adicLisseForget S).map c))
     (congrArg ((adicLisseForget T).map) hh)
 
-set_option maxHeartbeats 4000000 in
 -- Nested chart conversions arise in the explicit tensor-section normalization.
 attribute [local irreducible] rationalCoefficientSheaf in
 /-- Ordinary rational coefficient composition and the normalized module and derived compositor.

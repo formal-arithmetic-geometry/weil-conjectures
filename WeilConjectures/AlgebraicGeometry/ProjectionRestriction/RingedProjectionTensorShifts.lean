@@ -376,7 +376,6 @@ private theorem representative_square (o : Operation F R S)
   erw [Category.comp_id] at hh
   exact hh
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the representative diagram involves many large composite functor expressions.
 private theorem fixedFirst_resolving (o : Operation F R S)
     (a : TensorModel R) (b : TensorModel S) [sa : TensorShifts a] [sb : TensorShifts b]
@@ -475,7 +474,6 @@ private theorem fixedFirst_resolving (o : Operation F R S)
   exact NatTrans.CommShift.of_whiskerLeft τ q
     (fun X ↦ ⟨q.objPreimage X, (q.objObjPreimageIso X).inv, inferInstance⟩)
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the representative diagram involves many large composite functor expressions.
 private theorem fixedSecond_resolving (o : Operation F R S)
     (a : TensorModel R) (b : TensorModel S) [sa : TensorShifts a] [sb : TensorShifts b]

@@ -47,7 +47,7 @@ private theorem unionEquation_factor
 
 set_option linter.unusedVariables false in
 -- Preserve the original names of the nondependent forall proof binders.
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The literal local comparison vertices require a larger elaboration budget.
 /-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and
 counit data for a bounded flat union complex (Stacks, Tag 0DJ9).

@@ -360,8 +360,6 @@ private theorem double_map_parameters {R T : Type u} [CommRing R] [CommRing T]
     DualNumber.mapRingHom (DualNumber.mapRingHom f) (inr 1) = inr 1 := by
   constructor <;> ext <;> simp
 
-set_option maxHeartbeats 800000 in
--- Iterated dual-number section types require additional definitional equality checks.
 omit [GrpObj G] in
 private theorem double_parameters
     (F : G.left.dualNumbers.dualNumbers ⟶ G.left.dualNumbers.dualNumbers)

@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
@@ -111,26 +113,15 @@ variable {S : Scheme.{u}}
 /-- **Repleteness for abelian sheaves on the affine pro-étale site**: the projection
 `lim Fₙ ⟶ F₀` of a tower of epimorphisms of abelian sheaves is an epimorphism. -/
 lemma AffineProEt.epiπAppZeroOfEpi_addCommGrpCat :
-    EpiπAppZeroOfEpi (Sheaf (AffineProEt.topology S) AddCommGrpCat.{u + 1}) := by
-  intro F c hc hF
-  have h {M N : Sheaf (AffineProEt.topology S) AddCommGrpCat.{u + 1}} (φ : M ⟶ N) :
-      Sheaf.IsLocallySurjective φ ↔ Epi φ :=
-    Sheaf.isLocallySurjective_iff_epi' _ φ
-  simp_rw [← h] at hF ⊢
-  exact AffineProEt.isLocallySurjective_π_app_zero_of_isLocallySurjective_map hc hF
+    EpiπAppZeroOfEpi (Sheaf (AffineProEt.topology S) AddCommGrpCat.{u + 1}) :=
+  AffineProEt.epi_π_app_zero_of_epi_addCommGrpCat.{u} (S := S)
 
 /-- **Repleteness for abelian sheaves on the pro-étale site** (Bhatt–Scholze, Proposition
 4.2.8): the projection `lim Fₙ ⟶ F₀` of a tower of epimorphisms of abelian sheaves is an
 epimorphism. -/
 lemma ProEt.epiπAppZeroOfEpi_addCommGrpCat :
-    EpiπAppZeroOfEpi (Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1}) := by
-  intro F c hc hF
-  let e := (AffineProEt.toProEt S).sheafPushforwardContinuous AddCommGrpCat.{u + 1}
-    (AffineProEt.topology S) (ProEt.topology S)
-  have : HasLimitsOfSize.{u, u + 1} AddCommGrpCat.{u + 1} := inferInstance
-  apply e.epi_of_epi_map
-  exact AffineProEt.epiπAppZeroOfEpi_addCommGrpCat (F := F ⋙ e) (isLimitOfPreserves e hc)
-    fun n ↦ e.map_epi _
+    EpiπAppZeroOfEpi (Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1}) :=
+  ProEt.epi_π_app_zero_of_epi_addCommGrpCat.{u} (S := S)
 
 end AlgebraicGeometry.Scheme
 

@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
 
 /-!
 # Naturality of Kummer classes and restriction of constant sections
@@ -34,23 +35,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Restricting the section `gmSection u` of `𝔾ₘ` over the terminal object of `X_ét` to the
-terminal object `X` itself gives back the unit `u`. -/
-lemma gmSheaf_map_terminalFrom_gmSection (X : Scheme.{u}) (u : Γ(X, ⊤)ˣ) :
-    X.gmSheaf.obj.map (terminalIsTerminal.from
-        (MorphismProperty.Over.mk ⊤ (𝟙 X) (inferInstance : Etale (𝟙 X)))).op (gmSection u) =
-      AddEquiv.ulift.symm (Additive.ofMul u) := by
-  apply ULift.ext
-  apply Additive.toMul.injective
-  apply Units.ext
-  let g : (MorphismProperty.Over.mk ⊤ (𝟙 X) (inferInstance : Etale (𝟙 X)) : X.Etale) ⟶
-    ⊤_ X.Etale := terminalIsTerminal.from _
-  have hw : g.left ≫ (⊤_ X.Etale).hom = 𝟙 X := by simp
-  refine (X.gmPresheaf_map_apply g _).trans ?_
-  change g.left.appTop ((⊤_ X.Etale).hom.appTop (u : Γ(X, ⊤))) = (u : Γ(X, ⊤))
-  erw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, hw]
-  rfl
-
 /-- The Kummer boundary `δ₀(u)` is the connecting homomorphism `H⁰(X, 𝔾ₘ) ⟶ H¹(X, μₙ)` applied
 to the class of the section `gmSection u` of `𝔾ₘ` over the terminal object of `X_ét`. -/
 lemma kummerδ₀_eq_δSucc (X : Scheme.{u}) (n : ℕ) (hn : IsUnit (n : Γ(X, ⊤))) (a : Γ(X, ⊤)ˣ) :
@@ -64,7 +48,7 @@ lemma kummerδ₀_eq_δSucc (X : Scheme.{u}) (n : ℕ) (hn : IsUnit (n : Γ(X, �
     (X.kummerSequence_shortExact n hn) (gmSection a))
   exact (congrArg (Sheaf.H.δ (X.kummerSequence_shortExact n hn)
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X))
-      (gmSheaf_map_terminalFrom_gmSection X a)).symm
+      (gmSheaf_map_gmSection X a)).symm
 
 /-- For a connected scheme `X`, the constant étale sheaf functor is bijective on morphisms:
 `φ ↦ constantSheaf.map φ` is a bijection from `A ⟶ M` to `A_X ⟶ M_X`. -/

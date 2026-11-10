@@ -128,7 +128,6 @@ private theorem total_comparison_naturality
 attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients
   SheafOfModules.IsFlatOnSite
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the whiskered diagram without unfolding derived tensor structures.
 -- STATEMENT-DISPUTED (old signature): an arbitrary barB need not satisfy the counit
 -- equation. The repaired statement requires its tensor-section conjugation square.

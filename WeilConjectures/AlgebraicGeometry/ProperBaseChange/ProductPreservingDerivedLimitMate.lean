@@ -91,7 +91,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-attribute [local instance] cbcAbLocallyBijective
+attribute [local instance] WeilConjectures.sfAbBijective
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
 

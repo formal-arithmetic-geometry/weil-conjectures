@@ -57,17 +57,18 @@ noncomputable def homEquivOfIsPullbackSigma
     (h : IsPullback fst (Sigma.desc fun _ ↦ 𝟙 U.left) X.hom U.hom) (Z : Over U) :
     (Z.left ⟶ X) ≃ (Z ⟶ trivialOver S U) where
   toFun φ := Over.homMk (homMk (h.lift φ.left Z.hom.left (by rw [w_left, w_left]))
-      ((h.lift_snd_assoc _ _ _ U.hom).trans (w_left Z.hom))) (hom_ext (h.lift_snd _ _ _))
+      ((h.lift_snd_assoc _ _ _ U.hom).trans (w_left Z.hom)))
+        (EtaleTorsor.etaleHom_ext (h.lift_snd _ _ _))
   invFun t := t.left ≫ homMk fst h.w
-  left_inv φ := hom_ext (by simp)
-  right_inv t := Over.OverMorphism.ext (hom_ext (h.hom_ext (by simp)
+  left_inv φ := EtaleTorsor.etaleHom_ext (by simp)
+  right_inv t := Over.OverMorphism.ext (EtaleTorsor.etaleHom_ext (h.hom_ext (by simp)
     ((h.lift_snd _ _ _).trans (congr_arg (fun f ↦ f.left) (Over.w t)).symm)))
 
 lemma homEquivOfIsPullbackSigma_comp
     (h : IsPullback fst (Sigma.desc fun _ ↦ 𝟙 U.left) X.hom U.hom) {Z Z' : Over U} (f : Z' ⟶ Z)
     (φ : Z.left ⟶ X) :
     homEquivOfIsPullbackSigma h Z' (f.left ≫ φ) = f ≫ homEquivOfIsPullbackSigma h Z φ :=
-  (homEquivOfIsPullbackSigma h Z').symm.injective (hom_ext (by
+  (homEquivOfIsPullbackSigma h Z').symm.injective (EtaleTorsor.etaleHom_ext (by
     simp [homEquivOfIsPullbackSigma]))
 
 /-- If `X ×_Y U` is a trivial cover of `U`, the sheaf `U' ↦ Hom_Y(U', X)` is constant over

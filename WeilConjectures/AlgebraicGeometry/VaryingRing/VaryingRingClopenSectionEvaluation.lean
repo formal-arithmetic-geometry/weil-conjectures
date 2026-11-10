@@ -40,7 +40,6 @@ attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor ordinaryRealization moduleEvalG moduleGComp
   StrictTower.moduleGComp ordinaryOpenEvaluation
 
-set_option maxHeartbeats 2000000 in
 -- Adjunction pasting elaborates several chosen adjoints and their comparison cells.
 private theorem moduleOpen_composition (n : ℕ) {U V X : Scheme.{u}}
     (i : U ⟶ V) (j : V ⟶ X) [IsOpenImmersion i] [IsOpenImmersion j] :
@@ -70,7 +69,6 @@ private theorem moduleOpen_composition (n : ℕ) {U V X : Scheme.{u}}
     (moduleEvalG R φ (i ≫ j) n) (moduleGComp R φ i j)
     (StrictTower.moduleGComp (R n) i j) hp
 
-set_option maxHeartbeats 2000000 in
 -- The comparison types contain several chosen adjoints.
 private theorem moduleOpen_tail (n : ℕ) {U V X : Scheme.{u}}
     (s : U ⟶ V) (b : V ⟶ X) (k : U ⟶ X)
@@ -150,7 +148,6 @@ private def singleSection (B : Type (u + 1)) [CommRing B]
         (eqToIso (congrArg (StrictTower.modulePullback B) (pullback.lift_snd k r h))).hom)
       (StrictTower.moduleJ B k)
 
-set_option maxHeartbeats 2000000 in
 -- Elaborate the six comparison cells without unfolding their chosen adjoints.
 private theorem moduleSection_comparison (n : ℕ) {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)

@@ -484,7 +484,7 @@ instance : (derivedIdeal I).IsHopfIdeal k :=
 
 set_option synthInstance.maxHeartbeats 400000 in
 -- the group structure on points of the quotient scheme makes instance search slow
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 900000 in
 -- the factorisation through `Spec Γ(X)` and the commutator computation are slow to elaborate
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 

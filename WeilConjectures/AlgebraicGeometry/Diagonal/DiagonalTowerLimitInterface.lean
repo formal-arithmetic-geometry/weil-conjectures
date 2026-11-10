@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInterface
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 public import WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
 public import WeilConjectures.CategoryTheory.RingedSiteModules
@@ -109,13 +110,7 @@ local instance (priority := 3000) diagonalHasLimit
     {A : Type a} [Category.{v} A] [h : HasLimitsOfShape ℕᵒᵖ A] (H : ℕᵒᵖ ⥤ A) :
     HasLimit H := h.has_limit H
 
-/-- The existing commutative-ring sheafification at the fixed coefficient universe.
-Naming this specialization avoids an unresolved maximum in instance synthesis.
-Source: blueprint completed coefficient convention, clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-instance (priority := 2200) diagonalCompletedRingSheafify (X : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{u, u} X
+attribute [local instance 2200] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 /-- Additivity of this specific limit functor, from its binary-product preservation.
 Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
@@ -218,9 +213,9 @@ theorem diagonalCompletedCoefficient_naturality (ℓ : ℕ) [Fact ℓ.Prime]
       (Scheme.purTwistZlTower X ℓ).map g =
         diagonalCompletedCoefficientComponent ℓ f a.unop := by
   let : HasWeakSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    (diagonalCompletedRingSheafify X).isRightAdjoint
+    (AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X).isRightAdjoint
   let : HasWeakSheafify (Scheme.ProEt.topology Y) CommRingCat.{u + 1} :=
-    (diagonalCompletedRingSheafify Y).isRightAdjoint
+    (AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify Y).isRightAdjoint
   let F := Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}
   let e : Scheme.purTwistZlTower Y ℓ ⋙ F ⟶ Scheme.purTwistZlTower X ℓ :=
     NatTrans.ofOpSequence

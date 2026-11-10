@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import Mathlib.RingTheory.Flat.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
@@ -37,11 +38,6 @@ open CategoryTheory Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
-
-instance (M : X.Modules) : (tensorLeft M).Additive :=
-  have : PreservesBinaryBiproducts (tensorLeft M) :=
-    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
-  Functor.additive_of_preservesBinaryBiproducts _
 
 instance (M : X.Modules) : (tensorRight M).Additive :=
   Functor.additive_of_iso (BraidedCategory.tensorLeftIsoTensorRight M)

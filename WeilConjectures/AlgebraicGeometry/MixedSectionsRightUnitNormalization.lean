@@ -23,7 +23,6 @@ set_option synthInstance.maxSize 2048
 universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
-set_option maxHeartbeats 800000 in
 -- Scalar restriction expands exact-functor localization instances.
 private theorem scalar_factor
     [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
@@ -104,7 +103,7 @@ private theorem mixed_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   simpa only [mixedGlobalSectionsDirectImageIso, CategoryTheory.Functor.map_id,
     Category.id_comp] using hc
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The statement expands sheaf, scalar, and localization instances.
 /-- The right path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation

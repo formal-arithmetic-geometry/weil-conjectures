@@ -160,7 +160,6 @@ private def normalizedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (VaryingRing.eval.{u} C τ Y n) (StrictTower.modulePullback.{u} (C n) f)
       (VaryingRing.moduleEvalG.{u} C τ f n))
 
-set_option maxHeartbeats 800000 in
 -- Comparing chosen ordinary adjoints requires additional normalization.
 attribute [local irreducible] VaryingRing.alpha StrictTower.alpha
 

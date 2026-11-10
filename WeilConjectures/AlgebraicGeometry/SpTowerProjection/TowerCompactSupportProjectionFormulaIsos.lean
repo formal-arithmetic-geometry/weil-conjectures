@@ -84,7 +84,6 @@ private theorem hom_function_heq {R : Type*} [Ring R]
   cases hfg
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the two concrete ring-presheaf presentations requires unfolding their objects.
 private theorem evaluation_restrictions (b : SpTowerShriek.Base l E)
     (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
@@ -121,7 +120,6 @@ private theorem evaluation_restrictions (b : SpTowerShriek.Base l E)
     (((spCoefficientRing l E T n).obj).map f).hom).obj
     (eq_of_heq ((b.sections T M n V).trans (D.sections M n V).symm))
 
-set_option maxHeartbeats 2000000 in
 -- Evaluation changes scalar actions but leaves these underlying section functions intact.
 private theorem evaluation_maps (b : SpTowerShriek.Base l E)
     (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
@@ -233,7 +231,7 @@ attribute [local irreducible] HasProEtaleTorAmplitude ProEtale.projectionMapOfCo
   CategoryTheory.Functor.leftDerivedFunctor ProEtale.upperStar
 attribute [local instance 100000] SheafOfModules.instAbelian
 attribute [local instance 2000] CommRing.toRing isNoetherian_of_finite
-attribute [local instance 10000] finiteProjection_groupW finiteProjection_groupSheafify
+attribute [local instance 10000] WeilConjectures.sfAbBijective WeilConjectures.sfAbSheafify
   finiteProjection_moduleSheafify finiteProjection_sheafGroth finiteProjection_functorLimits
   finiteProjection_functorColimits finiteProjection_inverseAdditive finiteProjection_inverseLimits
   finiteProjection_inverseColimits finiteProjection_moduleGroth finiteProjection_modulePreadditive

@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.style.haveILetI false in
 -- Inline the localization witnesses as in the dependent statement, avoiding costly conversion.
-set_option maxHeartbeats 400000 in
 -- Specializing the two comparisons over dependent localizations needs this limit.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in

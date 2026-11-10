@@ -103,7 +103,6 @@ private def native_sheaf_symmetric (Z : Scheme.{u}) :
   { sheafSymmetricCategory Z with toBraidedCategory := sheafBraidedCategory Ab Z }
 attribute [local instance 20001] native_sheaf_symmetric
 
-set_option maxHeartbeats 800000 in
 -- The native braidings compare the fixed module-site instances.
 attribute [-instance] internalMonoidal in
 private theorem trace_projection_coefficient_naturality

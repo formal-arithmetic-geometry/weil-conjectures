@@ -58,7 +58,7 @@ theorem Scheme.exists_jacobian_addEquiv_prod :
     GeometricallyConnected.of_connectedSpace_of_isSepClosed _
   have : GeometricallyIrreducible (C ↘ Spec (.of k)) :=
     GeometricallyIrreducible.of_smooth_of_geometricallyConnected _
-  have : GeometricallyReduced (C ↘ Spec (.of k)) := GeometricallyReduced.of_smooth _
+  have : GeometricallyReduced (C ↘ Spec (.of k)) := Smooth.geometricallyReduced _
   have : GeometricallyIntegral (C ↘ Spec (.of k)) :=
     GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible _
   obtain ⟨J, _, e, hP, hS, hG, he, ⟨ψ⟩⟩ := exists_jacobian (k := k) (X := C)

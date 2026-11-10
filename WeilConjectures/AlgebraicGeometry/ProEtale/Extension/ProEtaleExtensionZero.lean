@@ -75,9 +75,9 @@ Source: Stacks Project, Tag 03CY, and `def-pc-sheaf-restrict-scalars`
 (blueprint: lem-cbc-proetale-extension-zero). -/
 instance openExtensionScalarRestriction_additive {A B : Type (u + 1)}
     [CommRing A] [CommRing B] (φ : A →+* B) (X : Scheme.{u}) :
-    (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)).Additive := by
-  dsimp only [sheafCompose]
-  infer_instance
+    (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)).Additive :=
+  sheafCompose_additive.{u, u + 1, u + 1, u + 1, u + 2, u + 2}
+    (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)
 
 /-- The identity-on-sections scalar square, transposed along the two recorded
 extension/restriction adjunctions. This is the canonical map

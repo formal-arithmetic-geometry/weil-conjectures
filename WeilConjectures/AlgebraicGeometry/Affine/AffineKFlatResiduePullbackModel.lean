@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.ResidueField
@@ -37,10 +38,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry.Scheme
-
-instance extensionScalars_additive {R S : Type u} [CommRing R] [CommRing S]
-    (r : R →+* S) : (ModuleCat.extendScalars.{u, u, u} r).Additive := by
-  exact (ModuleCat.extendRestrictScalarsAdj r).left_adjoint_additive
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 

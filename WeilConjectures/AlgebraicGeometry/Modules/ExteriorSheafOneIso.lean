@@ -16,7 +16,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
 -- Naturality elaborates restrictions across the scheme and ring-sheaf module interfaces.
 /-- The first exterior sheaf is canonically isomorphic to the original sheaf.
 Source: Stacks Project, Tag 0BRT, degree-one specialization; Mathlib

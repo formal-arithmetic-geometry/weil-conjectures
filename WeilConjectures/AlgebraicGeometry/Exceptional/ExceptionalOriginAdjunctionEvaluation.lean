@@ -27,7 +27,7 @@ namespace AlgebraicGeometry
 private instance (priority := 20000) cachedProSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance 20000] exceptionalTransportProEtaleCommRingSheafify
-  exceptionalTransportProEtaleAddCommGrpSheafify exceptionalTransportProEtaleAddCommGrpLocal
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
   exceptionalTransportProEtaleTypeSheafify exceptionalTransportProEtaleRingCompose
   exceptionalTransportProEtaleRingSetCompose exceptionalTransportProEtaleAddCommGrpSetCompose
   strictEtaleRingCompose strictEtaleRingSetCompose strictEtaleAddCommGrpSetCompose

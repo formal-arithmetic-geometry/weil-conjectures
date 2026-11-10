@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Exact finite residue restriction -/
 
@@ -49,9 +50,7 @@ private abbrev τ (n : ℕ) := (A l T).map (homOfLE (Nat.le_succ n)).op
 private abbrev P := SemilinearSections.ringPresheaf.{u + 1, u, u + 1}
   (J T) (B l T) (τ l T)
 
-local instance (priority := 20000) :
-    HasSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
-  integralCoefficientRingSheafify.{u, u} T
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
 attribute [local irreducible] Padic Padic.coefficientExtensionIntegers
 

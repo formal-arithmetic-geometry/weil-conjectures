@@ -33,7 +33,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 1600000 in
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- Fixed affine-model residue naturality data for a finite family.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.

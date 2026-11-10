@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.RelativePoints
+public import WeilConjectures.AlgebraicGeometry.SmoothUniformizer
 
 /-!
 # Infinitesimal points with values in a scheme form a free module
@@ -54,13 +55,6 @@ section LiftRingHom
 
 variable {Y Y' Z : Scheme.{u}} {A : CommRingCat.{u}}
 
-/-- A morphism to an affine scheme `Spec A` is `Spec` of its ring homomorphism on global
-sections. -/
-theorem Scheme.toSpecΓ_comp_specMap_ΓSpecIso_inv_comp_appTop (w : Y ⟶ Spec A) :
-    Y.toSpecΓ ≫ Spec.map ((Scheme.ΓSpecIso A).inv ≫ w.appTop) = w := by
-  rw [Spec.map_comp, ← Category.assoc, ← Scheme.toSpecΓ_naturality, Category.assoc,
-    toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id]
-
 theorem Scheme.ΓSpecIso_inv_comp_specMap_appTop {B : CommRingCat.{u}} (ψ : A ⟶ B) :
     (Scheme.ΓSpecIso A).inv ≫ (Spec.map ψ).appTop = ψ ≫ (Scheme.ΓSpecIso B).inv := by
   rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv, Scheme.ΓSpecIso_naturality]
@@ -81,7 +75,7 @@ noncomputable def IsOpenImmersion.liftRingHom (y : Y ⟶ Z) (h : Set.range y ⊆
 theorem IsOpenImmersion.toSpecΓ_comp_liftRingHom (y : Y ⟶ Z) (h : Set.range y ⊆ Set.range j) :
     Y.toSpecΓ ≫ Spec.map (IsOpenImmersion.liftRingHom j y h) ≫ j = y := by
   rw [IsOpenImmersion.liftRingHom, ← Category.assoc,
-    Scheme.toSpecΓ_comp_specMap_ΓSpecIso_inv_comp_appTop, IsOpenImmersion.lift_fac]
+    Scheme.toSpecΓ_SpecMap_ΓSpecIso_inv_appTop, IsOpenImmersion.lift_fac]
 
 theorem IsOpenImmersion.liftRingHom_congr {y y' : Y ⟶ Z} (e : y = y')
     (h : Set.range y ⊆ Set.range j) (h' : Set.range y' ⊆ Set.range j) :

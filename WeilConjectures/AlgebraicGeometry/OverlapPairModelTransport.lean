@@ -389,7 +389,7 @@ private theorem overlap_model_restrictions_compose
         (overlapIteratedComparison U q p t h N M e) a b φ := by
   dsimp only
   intro τa τb sa sb hτa hτb hsa hsb α θ hθ hα φ hφ
-  apply overlap_conjugate_restriction U q p t h N M e a b ν ha hb hνa hνb
+  apply overlap_conjugate_restriction_explicit U q p t h N M e a b ν ha hb hνa hνb
     z hza hzb _ _ τa τb θ hθ φ
   exact overlap_stage_model_restriction U q p t h N a b q₀ p₀ t₀ h₀ r₀a r₀b d ha hb
     hka hkb ka kb hla hlb hda hdb z hza hzb hz τa τb sa sb hτa hτb hsa hsb

@@ -192,7 +192,6 @@ private theorem globalSectionsUpperStarMap_eval {T Y : Scheme.{v}} (m : T ⟶ Y)
   erw [← Sheaf.ΓRes_map FV a.op]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Nested pullback pasting comparisons need additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

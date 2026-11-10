@@ -53,7 +53,6 @@ private theorem singleAugmentation_quasiIso
       (HomologicalComplex.ExactAt.of_isZero
         (HomologicalComplex.isZero_single_obj_X _ _ _ (n + 1) (by omega)))).mpr (hpos n)
 
-set_option maxHeartbeats 800000 in
 -- Transport through two module equivalences needs explicit sectionwise type comparison.
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmented alternating section row of an injective internal module is exact.

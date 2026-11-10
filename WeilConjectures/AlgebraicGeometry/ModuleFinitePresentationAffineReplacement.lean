@@ -168,7 +168,7 @@ private theorem fp_free_slice {X : Scheme.{u}} (U : X.Opens) (n : ℕ) :
       ⟨inferInstanceAs (Finite PEmpty.{u + 1})⟩⟩
   exact P.isFinitePresentation
 
-set_option maxHeartbeats 900000 in
+set_option maxHeartbeats 600000 in
 -- Slice equivalences and iterated restriction comparisons require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Replace a quasi-coherent module on an affine open by a finitely presented module,

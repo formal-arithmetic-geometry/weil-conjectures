@@ -73,7 +73,6 @@ noncomputable def tensorResolutionMapExtendIso
   cases e.r i <;> cases e.r j <;>
     simp [eX, HomologicalComplex.extend.d]
 
-set_option maxHeartbeats 800000 in
 -- Sheaf totalization introduces large inferred coproduct and module structures.
 /-- The nonpositive cochain model of an ordinary projective resolution is K-flat. -/
 theorem tensorResolution_isKFlat (A : Type u) [CommRing A]
@@ -162,7 +161,6 @@ noncomputable def tensorResolutionTildeTensorRightIso (A : Type u) [CommRing A]
     congr 1
     exact (congr($(tilde.toOpen_map_app (R := .of A) f ⊤) m)).symm)
 
-set_option maxHeartbeats 800000 in
 -- Exact homology and total tensor carry large inferred module-category instances.
 /-- The affine total-tensor homology is the associated sheaf of ordinary resolution
 homology. Both the extension and the exact-tilde homology comparisons are canonical. -/
@@ -206,7 +204,6 @@ noncomputable def tensorResolutionTildeAugmentation (A : Type u) [CommRing A]
     ((HomologicalComplex.singleMapHomologicalComplex (tilde.functor (.of A))
       (.up ℤ) 0).app M).hom
 
-set_option maxHeartbeats 800000 in
 -- Resolving the exact-tilde functor through the scheme module synonym needs this budget.
 instance tensorResolutionTildeAugmentation_quasiIso (A : Type u) [CommRing A]
     (M : ModuleCat.{u} A) (P : ProjectiveResolution M) :
@@ -215,7 +212,6 @@ instance tensorResolutionTildeAugmentation_quasiIso (A : Type u) [CommRing A]
   unfold tensorResolutionTildeAugmentation
   infer_instance
 
-set_option maxHeartbeats 800000 in
 -- The tensor representatives and localization comparisons unfold large instances.
 /-- On a spectrum, any supplied K-flat resolution of tilde M computes the ordinary
 projective-resolution tensor homology. -/

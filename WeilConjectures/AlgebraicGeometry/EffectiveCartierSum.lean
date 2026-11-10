@@ -202,7 +202,7 @@ lemma Scheme.Hom.finrankΓ_eq_finrank_appLE {Z : Scheme.{u}} {R : CommRingCat.{u
     (g : Z ⟶ Spec R) : g.finrankΓ =
       letI := ((Scheme.ΓSpecIso R).inv ≫ g.appLE ⊤ ⊤ le_top).hom.toAlgebra
       Module.finrank R Γ(Z, ⊤) := by
-  rw [Scheme.Hom.appLE_top_top_fiberDegree]
+  rw [Scheme.Hom.appLE_top_top]
   rfl
 
 /-- **Additivity of the degree over a field.** Let `Y` be a scheme over a field `K` and let

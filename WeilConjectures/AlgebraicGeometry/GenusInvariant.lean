@@ -119,7 +119,7 @@ theorem genus_jacobian_invariant
             ⟨L, hL⟩)).left := by
   let b := Spec.map (CommRingCat.ofHom (algebraMap k K))
   let fK := pullback.snd f b
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   have : GeometricallyConnected f :=
     GeometricallyConnected.of_connectedSpace_of_isSepClosed f
   have : GeometricallyIrreducible f :=

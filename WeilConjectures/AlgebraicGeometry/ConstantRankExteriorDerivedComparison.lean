@@ -27,7 +27,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
 -- Naturality compares exterior maps across the scheme and ring-sheaf module interfaces.
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in

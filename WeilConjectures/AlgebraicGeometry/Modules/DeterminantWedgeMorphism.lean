@@ -63,6 +63,6 @@ theorem determinant_wedgeMorphism_exists {X : Scheme.{v}} (S : ShortComplex X.Mo
           wedge (M := S.X₂) (r := r₂) (U := U)
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
   apply determinant_wedgeMorphism_of_local_data S hS r₁ r₂ r₃ hr
-  exact determinant_wedgeMorphism_local_data S hS r₁ r₂ r₃ hr
+  exact determinant_wedgeMorphism_local_data_at S hS r₁ r₂ r₃ hr
 
 end AlgebraicGeometry.Scheme.Modules

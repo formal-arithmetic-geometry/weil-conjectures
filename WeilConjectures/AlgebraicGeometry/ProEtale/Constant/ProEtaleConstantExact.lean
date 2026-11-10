@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficientTransport
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingMap
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteCoefficientDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -91,7 +93,7 @@ variable {U V : Scheme.{u}} (f : U ⟶ V) (Λ : Type (u + 1))
 Source: blueprint order 1235 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
 noncomputable instance finiteCoefficientInverseImageMap_invertible :
     IsIso (finiteCoefficientInverseImageMap f Λ) :=
-  finiteCoefficientInverseImageMap_isIso f Λ
+  finiteCoefficientInverseImageMap_isIso.{u} f Λ
 
 /-- The inverse-image coefficient ring on the original small site.
 Source: Stacks Tag 03D2 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
@@ -162,17 +164,8 @@ plus construction, its unit, and the resulting sheafification equivalences to th
 ring-valued counterparts. This changes no ring data or constant sections. -/
 theorem finiteCoefficientCommRing_preservesSheafification (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).PreservesSheafification
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
-  constructor
-  intro P Q g hg
-  change (Scheme.ProEt.topology T).W
-    (Functor.whiskerRight g (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
-  have hi : Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) g := hg.isLocallyInjective
-  have hs : Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) g := hg.isLocallySurjective
-  apply ((Scheme.ProEt.topology T).W_iff_isLocallyBijective _).mpr
-  constructor
-  · exact ⟨fun x y h ↦ Presheaf.equalizerSieve_mem (Scheme.ProEt.topology T) g x y h⟩
-  · exact ⟨fun x ↦ Presheaf.imageSieve_mem (Scheme.ProEt.topology T) g x⟩
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
+  StrictTower.constantRingForget_preservesSheafification.{u} T
 
 attribute [instance] finiteCoefficientCommRing_preservesSheafification
 

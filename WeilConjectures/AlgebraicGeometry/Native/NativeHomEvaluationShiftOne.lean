@@ -187,7 +187,6 @@ private lemma localize_evaluation_shift
   simp only [Functor.map_comp, Category.assoc]
   erw [(shiftFunctor D (-1 : ℤ)).map_id, Category.id_comp]
 
-set_option maxHeartbeats 2000000 in
 -- Matching Q with quotient followed by Qh unfolds the localization instance data.
 private lemma evaluation_shift_localization
     {C : Type d} [Category.{u + 1} C] [Abelian C]
@@ -330,7 +329,6 @@ private lemma nativeHom_evaluation_shift_one_model
   rw [Int.negOnePow_add, Int.negOnePow_neg, Int.negOnePow_one,
     mul_neg, mul_one, Units.neg_smul, neg_neg]
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the fixed evaluation maps unfolds their localization and internal Hom data.
 /-- The evaluation comparison respects the specified signed source shift in degree one.
 Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, Hom-complex signs and evaluation.

@@ -53,7 +53,6 @@ private theorem rationalP1_counitComponent_factor
   unfold counitComponent counitProjectionPart
   simp only [whiskerLeft_comp, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed geometric coefficient and derived interfaces folded during elaboration.
 /-- Transport the terminal trace functional after normalizing the ambient counit.
 This core equation has source Rq_*Rp₂*(p₁*M tensor T_W), rather than Rq_*M, and contains

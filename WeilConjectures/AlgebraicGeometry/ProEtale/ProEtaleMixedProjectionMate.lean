@@ -114,7 +114,6 @@ private theorem acyclic_of_quasiIso_preservation
   exact fun i ↦ (exactAt_iff_of_quasiIsoAt
     (U.map (0 : (0 : CochainComplex M ℤ) ⟶ Z)) i).1 (htzero i)
 
-set_option maxHeartbeats 200000 in
 -- The tensor representatives involve several nested localization comparisons.
 private theorem flat_resolution_functor
     (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
@@ -256,7 +255,6 @@ attribute [local irreducible] proEtaleCanonicalTensorComparison
 
 attribute [local irreducible] SheafOfModules.monoidalCategory proEtaleMixedTensor
 
-set_option maxHeartbeats 200000 in
 -- Naturality of the uniquely specified tensor comparisons.
 private theorem mixed_naturality
     (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

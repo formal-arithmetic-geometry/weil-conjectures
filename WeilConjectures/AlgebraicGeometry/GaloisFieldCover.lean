@@ -96,8 +96,9 @@ variable (F L : Type u) [Field F] [Field L] [Algebra F L]
 noncomputable def specGaloisAction (σ : L ≃ₐ[F] L) : Spec (.of L) ⟶ Spec (.of L) :=
   Spec.map (CommRingCat.ofHom (σ : L →+* L))
 
-/-- `Spec L ⟶ Spec F` is finite for a finite field extension `L/F` (the instance form of
-`AlgebraicGeometry.isFinite_specMap_algebraMap`). -/
+/-- `Spec L ⟶ Spec F` is finite for a finite field extension `L/F` (instance form; the former
+lemma `AlgebraicGeometry.isFinite_specMap_algebraMap` of `Picard/Jacobian.lean` was a duplicate
+of it). -/
 instance instIsFiniteSpecMapAlgebraMap [FiniteDimensional F L] :
     IsFinite (Spec.map (CommRingCat.ofHom (algebraMap F L))) :=
   (IsFinite.SpecMap_iff _).2 (RingHom.finite_algebraMap.2 inferInstance)

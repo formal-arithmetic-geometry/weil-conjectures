@@ -119,7 +119,6 @@ private theorem trTo_refl {X Y Z : Scheme.{u}} (f : X ⟶ Y) (p : Y ⟶ Z)
   simp only [trTo, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the fixed composition isomorphisms reduces their universal properties.
 private theorem trTo_assoc {W X Y Z : Scheme.{u}} (h : W ⟶ X) (f : X ⟶ Y)
     (p : Y ⟶ Z) (q : X ⟶ Z) (r : W ⟶ Z) (eq : f ≫ p = q) (er : h ≫ q = r)

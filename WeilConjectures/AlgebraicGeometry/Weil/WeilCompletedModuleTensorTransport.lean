@@ -23,7 +23,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 800000 in
 -- Comparing the localized tensor expressions requires extra elaboration heartbeats.
 private theorem pushforward_tensor_isIso
     {C : Type c} [Category.{v} C] [EssentiallySmall.{w} C]

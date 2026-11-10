@@ -196,7 +196,7 @@ theorem Scheme.smooth_connected_curve_local_rings
               algebraMap (C.presheaf.stalk P) C.functionField r = (g : C.functionField)) ↔
             0 ≤ Multiplicative.toAdd (v g))) := by
   classical
-  let := IsConnectedCurve.connectedSpace' f
+  let := IsConnectedCurve.connectedSpace (f := f)
   let := LocallyOfFiniteType.isLocallyNoetherian f
   let := QuasiCompact.compactSpace_of_compactSpace f
   let := IsRegular.of_smooth f

@@ -55,7 +55,6 @@ noncomputable def structureDerivedImageCohomologyTargetEquiv
       Sheaf.H (structureSheafAb Y) 1 :=
   (affineLerayTargetEquiv q j hj).trans (structureModuleAbelianEquiv Y)
 
-set_option maxHeartbeats 1600000 in
 -- Composing the module and abelian comparisons requires large category transports.
 /-- The affine-base Leray comparisons `structureDerivedImageCohomologyEquiv q` and
 `structureDerivedImageCohomologyTargetEquiv q j hj` for structure modules respect a map

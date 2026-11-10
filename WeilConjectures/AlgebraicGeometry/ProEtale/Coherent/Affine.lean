@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.LimitsOver
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.AlgebraicGeometry.Limits
@@ -148,9 +150,6 @@ instance IsZariskiLocalAtSource.isClosedUnderColimitsOfShape_discrete_commaObj
 
 variable [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] [P.IsMultiplicative]
 
-instance : HasFiniteCoproducts (P.CostructuredArrow ⊤ Scheme.Spec S) where
-  out _ := inferInstance
-
 instance : FinitaryExtensive (P.CostructuredArrow ⊤ Scheme.Spec S) :=
   CategoryTheory.finitaryExtensive_of_preserves_and_reflects_isomorphism
     (MorphismProperty.CostructuredArrow.toOver P Scheme.Spec S)
@@ -179,9 +178,6 @@ instance effectiveEpi_of_surjective {S : Scheme} {X Y : S.AffineEtale} (f : X �
   apply (AffineEtale.Spec S).effectiveEpi_of_map
   have : Surjective ((AffineEtale.Spec S).map f).left := ‹_›
   infer_instance
-
-instance : HasPullbacks S.AffineEtale :=
-  inferInstanceAs <| HasPullbacks (MorphismProperty.CostructuredArrow _ _ _ _)
 
 -- Question: What are the effective epimorphisms of `AffineEtale S`?
 

@@ -99,7 +99,6 @@ private theorem derivedSection_eq (Y : Scheme.{u})
     derivedSection Λ Y f h = pullSectionIso Λ Y f h := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Match the two condensed-module single comparisons without unfolding their constructions.
 private theorem section_single_pull (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)
@@ -118,7 +117,6 @@ private theorem section_single_pull (Y : Scheme.{u})
   exact projective_pull_section_single Λ Y f h M
 
 set_option synthInstance.maxSize 4096 in
-set_option maxHeartbeats 800000 in
 -- Elaborating the condensed-module derived comparisons needs a larger budget.
 private theorem single_counit {X S : Scheme.{u}} (f : X ⟶ S)
     (M : Modules Λ X) :
@@ -153,7 +151,6 @@ private theorem adjunct_comparison
   rw [he]
 
 set_option synthInstance.maxSize 4096 in
-set_option maxHeartbeats 800000 in
 -- Elaborating the condensed-module derived comparisons needs a larger budget.
 private theorem single_adjunct {X S : Scheme.{u}} (f : X ⟶ S)
     (M : Modules Λ S) (N : Modules Λ X)
@@ -226,7 +223,6 @@ private theorem section_comparison
 set_option synthInstance.maxSize 4096 in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 400000 in
 -- Elaborating the condensed-module derived comparisons needs a larger budget.
 /-- Single-complex derived section compatibility.
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/

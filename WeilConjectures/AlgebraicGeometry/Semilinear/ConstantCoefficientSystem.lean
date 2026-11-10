@@ -136,7 +136,7 @@ theorem evaluation_ring_app (n : ℕ) (U : Cᵒᵖ) :
   rw [ObjectProperty.eqToHom_hom, eqToHom_app]
   rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- The membership checks of the restriction maps unfold the evaluation functors.
 /-- A system is determined by its evaluations together with its transitions. -/
 theorem system_ext {X Y : Systems.{c, v, r} J B τ}

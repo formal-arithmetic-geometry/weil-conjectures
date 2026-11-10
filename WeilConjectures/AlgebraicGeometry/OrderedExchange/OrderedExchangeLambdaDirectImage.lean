@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Restriction commutes with the direct-image/derived-limit comparisons
 
-All five comparisons in `lambda_directImageRlimIso` are adjunction mates of exact descents of
+All five comparisons in `lambda_directImageRlimIso_aux` are adjunction mates of exact descents of
 ordinary identity-component squares. Transposing along the constant-diagram and tower-pullback
 adjunctions reduces the equation to a cube of such squares, which is checked on complexes.
 -/
@@ -312,7 +312,7 @@ local notation "αU" => (Functor.mapDerivedCategorySquareIso (ordinaryScalarDiag
 local notation "βR" => (Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d u).symm).hom
 
 set_option linter.flexible false in
-/-- The cube of exact-descent squares underlying `lambda_directImageRlimIso`. -/
+/-- The cube of exact-descent squares underlying `lambda_directImageRlimIso_aux`. -/
 theorem restriction_cube (P : d.derived V) :
     (exchangeConstantPull (A := A) u).map ((αV).app P) ≫
         (βR).app ((d.derivedConstantTower V).obj P) ≫

@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
+public import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
 public import WeilConjectures.CategoryTheory.LocallyDerivedRingedIdealComplete
 
@@ -102,14 +103,13 @@ def torsionCompletionIdealInclusion (X : Scheme.{t}) {A : Type u}
     torsionCompletionIdeal X I ⟶ SheafOfModules.unit (torsionCompletionModuleRing X A) :=
   kernel.ι (torsionCompletionQuotientMap X I)
 
-/-- Sheafification of abelian coefficients on the coefficient-sized small model.
-This invokes the general small-site theorem, avoiding successor-universe inference.
-Source: Stacks Tags 03DA, 099Q
-(auxiliary; not a blueprint node). -/
+/-- Sheafification of abelian coefficients on the coefficient-sized small model, at the pinned
+universes `(t, u)`: the global instance form of `coefficientModelAdditiveSheafify` kept at its
+former priority. Source: Stacks Tags 03DA, 099Q (auxiliary; not a blueprint node). -/
 instance (priority := 20000) torsionCompletionSheafify (X : Scheme.{t}) :
     HasSheafify (coefficientProEtaleModelTopology.{t, u} X)
       AddCommGrpCat.{max u (t + 1)} :=
-  GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
+  coefficientModelAdditiveSheafify.{t, u} X
 
 /-- The same abelian sheafification on each slice of the unchanged model site.
 Source: Stacks Tags 03DA, 03DJ, 099Q

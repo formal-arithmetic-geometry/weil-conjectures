@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+import WeilConjectures.SmoothPurity.PurityFiniteSetting.ConstructibleExceptionalInverseImage
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleUnitLerayChainFormula
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedPullbackIdentity
@@ -62,7 +64,7 @@ construction. Source: blueprint def-pur-conventions, A = O_E/(varpi^n)
 (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
 instance purityGlobalEvaluation_finiteRing (P : WeilConjectures.PurityFiniteSetting.{u}) :
     Finite P.Ring :=
-  Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
+  WeilConjectures.PurityFiniteSetting.ringFinite.{u} P
 
 /-- The published terminal-object comparison, written for the actual finite direct image.
 Source: Stacks Tag 0D6H (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/

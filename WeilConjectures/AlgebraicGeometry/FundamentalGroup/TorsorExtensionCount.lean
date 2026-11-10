@@ -132,7 +132,7 @@ lemma card_sheafH_two_pushforwardMu {m : ℕ} [NeZero m] (hm : (m : k) ≠ 0)
     GeometricallyConnected.of_isSepClosed t.P
   have : GeometricallyIrreducible (t.P ↘ Spec (.of k)) :=
     GeometricallyIrreducible.of_smooth_of_geometricallyConnected _
-  have : GeometricallyReduced (t.P ↘ Spec (.of k)) := GeometricallyReduced.of_smooth _
+  have : GeometricallyReduced (t.P ↘ Spec (.of k)) := Smooth.geometricallyReduced _
   have : GeometricallyIntegral (t.P ↘ Spec (.of k)) :=
     .of_geometricallyReduced_of_geometricallyIrreducible _
   obtain ⟨e⟩ := card_sheafH_two_rootsOfUnitySheaf (k := k) (X := t.P) m hm

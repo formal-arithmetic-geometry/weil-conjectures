@@ -58,8 +58,6 @@ private lemma infinity_chart {S X : Scheme.{u}} (g : X ⟶ S) :
   rw [infinity_sections, comp_homOfSections, homOfSections_preimage_standardOpen]
   simp
 
-set_option maxHeartbeats 1000000 in
--- Comparing scheme morphisms across the projective-line charts needs extra elaboration.
 private lemma infinity_ideal (S : Scheme.{u}) [IsNoetherian S] (i : ULift.{u} (Fin 2))
     (U : (ProjectiveLine S).affineOpens)
     (hi : U.1 ≤ standardOpen (ULift.{u} (Fin 2)) S i) :

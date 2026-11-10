@@ -34,7 +34,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 -- The public existential dual witness is intentionally independent of the tensor witness.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 100000 in
 -- Compare the chosen Hom bifunctors without unfolding their existence proofs.
 /-- Compatible comparisons for ordinary Hom, its dual and ordinary evaluation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ; Mathlib `Modules.overEquiv`.

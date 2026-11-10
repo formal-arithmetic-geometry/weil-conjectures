@@ -72,7 +72,7 @@ theorem pic_zero_jacobian_point_comparison
         toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k')))) ≫ e x := by
   classical
   let : X.Over (Spec (.of k)) := ⟨f⟩
-  have : ConnectedSpace X := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace X := IsConnectedCurve.connectedSpace (f := f)
   have : GeometricallyConnected f :=
     GeometricallyConnected.of_connectedSpace_of_isSepClosed f
   have : GeometricallyIrreducible f :=

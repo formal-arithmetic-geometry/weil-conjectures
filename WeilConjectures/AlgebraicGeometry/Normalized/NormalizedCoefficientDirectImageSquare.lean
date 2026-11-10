@@ -89,8 +89,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCate
   proEtaleRingRestrictionDirectImage proEtaleRingRestrictionDerivedDirectImage
   pbcDerivedRestrictComp
 
-set_option maxHeartbeats 400000 in
--- The derived cube has large dependent functor types; allow their elaboration to complete.
 /-- Changing the two coefficient presentations preserves the normalized restriction /
 direct-image square. This theorem involves only exact scalar restrictions and right
 derived direct images; it involves neither scalar extension nor its mate.

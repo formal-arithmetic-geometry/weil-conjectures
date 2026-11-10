@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearScalarOrdinaryComparison
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
@@ -151,13 +152,7 @@ def scalarA {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Functor.mapDerivedCategoryNatIso (D.a j) ≪≫
       Functor.mapDerivedCategoryCompIso (D.rho U) (StrictTower.towerJ B j)
 
-/-- The existing locally bijective criterion at the specified coefficient universe.
-This specialization prevents elaboration from introducing a spurious size parameter.
-Source: Stacks 03DA (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
-instance scalarLocallyBijective (X : Scheme.{u}) :
-    (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  WeilConjectures.SemilinearSections.locallyBijective.{u + 1, u, u + 1}
-    (Scheme.ProEt.topology X)
+attribute [local instance] WeilConjectures.sfAbBijective
 
 /-- The evaluation identification is the localization of the given identity on sections.
 Source: Stacks 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/

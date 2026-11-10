@@ -119,7 +119,7 @@ lemma exists_cover_lift {V : X.Etale} [CompactSpace V.left]
       ∃ w' : G.obj.obj (op W), (φ.hom.app _).hom w' = (Q.obj.map π.op).hom w := by
   have hφ : Sheaf.IsLocallySurjective φ := (Sheaf.isLocallySurjective_iff_epi' (φ := φ)).2 ‹_›
   obtain ⟨n, U, g, hg, hU, hcov⟩ :=
-    exists_finite_affine_of_mem_smallEtaleTopology (hφ.imageSieve_mem w)
+    (AlgebraicGeometry.Etale.exists_affine_refinement _) (hφ.imageSieve_mem w)
   choose t ht using hg
   have : Etale (Sigma.desc fun a ↦ (U a).hom) :=
     IsZariskiLocalAtSource.sigmaDesc (P := @AlgebraicGeometry.Etale) fun a ↦ (U a).prop

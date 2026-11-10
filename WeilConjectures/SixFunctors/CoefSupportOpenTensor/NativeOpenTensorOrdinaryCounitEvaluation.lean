@@ -184,7 +184,8 @@ theorem nativeOpenTensor_ordinary_counit_evaluation_isIso
     (coefficientSequenceTopology (ProEt.topology Z))
     (coefficientSequenceCommRingSheaf l E Z)
     ((ProEtale.VaryingRing.extension R φ j).obj M) N
-  let : EssentiallySmall.{u + 1} Z.ProEt := ProEtale.VaryingRing.siteSmall Z
+  let : EssentiallySmall.{u + 1} Z.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures Z
   let := abelianSheafify.{u + 1, u, u + 1} (ProEt.topology Z)
   let := locallyBijective.{u + 1, u, u + 1} (ProEt.topology Z)
   let RZ := ProEtale.StrictTower.coefficients (R n) Z

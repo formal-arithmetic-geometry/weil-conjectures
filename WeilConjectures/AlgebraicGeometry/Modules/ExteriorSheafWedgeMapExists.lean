@@ -52,7 +52,7 @@ private theorem wedgeMul_wedge {R M : Type v} [CommRing R] [AddCommGroup M]
   apply Subtype.ext
   exact ExteriorAlgebra.ιMulti_mul_ιMulti a c
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Comparing the scheme and ring-sheaf scalar structures requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Wedge the image of the first tuple with the second tuple, without choosing quotient lifts.

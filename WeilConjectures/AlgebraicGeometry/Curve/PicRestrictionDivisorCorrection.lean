@@ -63,8 +63,8 @@ theorem Scheme.Hom.pic_restriction_divisor_correction
   have : Smooth c.g := SmoothOfRelativeDimension.smooth 1 c.g
   let : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
   let : IsNoetherian c.Z := isNoetherian_of_locallyOfFiniteType c.g
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
-  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace' c.g
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
+  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace (f := c.g)
   have : IsRegular C := IsRegular.of_smooth f
   have : IsRegular c.Z := IsRegular.of_smooth c.g
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C

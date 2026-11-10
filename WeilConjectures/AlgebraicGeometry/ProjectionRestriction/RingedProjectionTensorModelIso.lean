@@ -91,7 +91,7 @@ private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
   unfold SheafOfModules.KFlatFixedTensor.representativeIso
   rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Compare the two normalized representative interfaces without unfolding their tensor data.
 /-- A tensor model is naturally identified with the published derived tensor, with
 its specified representative comparison.

@@ -27,7 +27,7 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 600000 in
 -- Elaborating the fixed derived-adjunction choices requires additional heartbeats.
 /-- Naturality in the object of the canonical derived base-change map.
 Source: Stacks Project, cohomology.tex, Remark 08HY.

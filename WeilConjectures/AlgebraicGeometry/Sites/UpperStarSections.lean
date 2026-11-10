@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
@@ -44,10 +45,6 @@ namespace AlgebraicGeometry
 namespace Etale
 
 variable {R T : Scheme.{u}} (t : T ⟶ R)
-
-@[simp]
-lemma etale_id_left {X : Scheme.{u}} (V : X.Etale) : (𝟙 V : V ⟶ V).left = 𝟙 V.left :=
-  rfl
 
 @[reassoc (attr := simp)]
 lemma etale_comp_left {X : Scheme.{u}} {V₁ V₂ V₃ : X.Etale} (a : V₁ ⟶ V₂) (b : V₂ ⟶ V₃) :

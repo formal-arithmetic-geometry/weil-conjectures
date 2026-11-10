@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCupResolutionData
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackMatesIsIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
@@ -39,9 +40,7 @@ variable {X : Scheme.{u}}
 @[instance_reducible] local instance cupRealizationSymmetricCategory :
     SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.sheaf
-local instance cupRealizationHasColimitsOfSize :
-    HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-  hasColimitsOfSizeShrink.{0, 0, u} _
+attribute [local instance] globalPullbackMatesColimits
 local instance cupRealizationMonoidalPreadditive :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.sheaf).1

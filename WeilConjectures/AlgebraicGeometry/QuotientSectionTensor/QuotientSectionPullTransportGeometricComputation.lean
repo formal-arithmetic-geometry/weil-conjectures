@@ -71,7 +71,6 @@ private theorem native_localization_hom (T : Scheme.{u})
       (ModuleRingedComparison.sectionLocalizationComparison Λ T P).hom := by
   rfl
 
-set_option maxHeartbeats 300000 in
 -- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
 /-- The fixed geometric comparison commutes with the two localization computation maps.
 Source: Stacks 0D6D and 07A6, the geometric computation step of normalized section transport.

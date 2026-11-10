@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationFunctoriality
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Category
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 
 /-!
 # Geometric points under an extension of separably closed fields
@@ -31,12 +32,6 @@ the geometric points `c` and `ρ ≫ c` of the small étale site of `Y` are isom
 universe u
 
 open CategoryTheory Limits Opposite
-
-/-- A separably closed field is a strictly henselian local ring. -/
-instance (priority := 100) IsSepClosed.isStrictlyHenselianLocalRing (κ : Type*) [Field κ]
-    [IsSepClosed κ] : IsStrictlyHenselianLocalRing κ :=
-  ⟨IsSepClosed.of_ringEquiv (RingEquiv.ofBijective (IsLocalRing.residue κ)
-    ⟨(IsLocalRing.residue κ).injective, IsLocalRing.residue_surjective⟩)⟩
 
 namespace AlgebraicGeometry.Scheme
 

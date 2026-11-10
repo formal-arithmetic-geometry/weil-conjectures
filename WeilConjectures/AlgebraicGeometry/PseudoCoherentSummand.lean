@@ -106,7 +106,7 @@ private theorem summand_affine_finiteFree_model (S : Scheme.{u}) (U : S.Opens)
 
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Affine-site functor comparisons and local model witnesses require extra elaboration budget.
 /-- If a pseudo-coherent object of `D(𝒪_X)` is isomorphic to a binary biproduct,
 both summands are pseudo-coherent. Source: Stacks Project, Cohomology of Sheaves,

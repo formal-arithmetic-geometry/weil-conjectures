@@ -219,7 +219,7 @@ private def cancelScalarTransport {X : Scheme.{u}}
     ext x
     rfl
 
-set_option maxHeartbeats 1200000 in
+set_option maxHeartbeats 1000000 in
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A] :
@@ -295,7 +295,6 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
               (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)).map f))) m).symm)).symm
   exact ⟨eM, he⟩
 
-set_option maxHeartbeats 1200000 in
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- The specified identity comparison equals the canonical coefficient map, is linear

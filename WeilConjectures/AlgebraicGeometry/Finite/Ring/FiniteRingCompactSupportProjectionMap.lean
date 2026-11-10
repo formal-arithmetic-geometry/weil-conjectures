@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -52,14 +53,6 @@ in its users, and comparing the derived tensor expressions can exceed the compil
 All statements below are existing instances; no additional hypotheses or data are introduced.
 Source: the imported Mathlib and fixed-coefficient instances
 (blueprint: def-sp-finite-ring-compact-support-projection-map). -/
-
-/-- Atomic instance proof for the canonical coefficient transport. -/
-theorem finiteProjection_groupW {X : Scheme.{u}} :
-    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := inferInstance
-
-/-- Atomic instance proof for the canonical coefficient transport. -/
-theorem finiteProjection_groupSheafify {X : Scheme.{u}} :
-    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} := inferInstance
 
 /-- Atomic instance proof for the canonical coefficient transport. -/
 theorem finiteProjection_moduleSheafify (R : Type u) [CommRing R] {X : Scheme.{u}} :
@@ -113,7 +106,7 @@ theorem finiteProjection_upperFlat (R : Type u) [CommRing R] [Finite R] :
     ProEtale.UpperStarPreservesFlat
       (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) := inferInstance
 
-attribute [local instance 10000] finiteProjection_groupW finiteProjection_groupSheafify
+attribute [local instance 10000] WeilConjectures.sfAbBijective WeilConjectures.sfAbSheafify
   finiteProjection_moduleSheafify finiteProjection_sheafGroth finiteProjection_functorLimits
   finiteProjection_functorColimits finiteProjection_inverseAdditive finiteProjection_inverseLimits
   finiteProjection_inverseColimits finiteProjection_moduleGroth finiteProjection_modulePreadditive

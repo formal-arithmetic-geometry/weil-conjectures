@@ -36,10 +36,10 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
   Scheme.proEtaleModuleInverseImage Scheme.integralConstantModule
 
 open MonoidalCategory
-attribute [local instance] IntegralModelsStacks.projectionCommRingSheafify
+attribute [local instance] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
   Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures
   IntegralModelsStacks.projectionAbLocallyBijective
-  IntegralModelsStacks.projectionSiteSmall
+  WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 private def liftedRegularIso (A : Type u) [CommRing A] :
     (FiniteConstantModel.scalarModules A).obj (ModuleCat.of A (ULift.{u + 1} A)) ≅
@@ -155,11 +155,12 @@ private theorem pulledRegularIso_coefficient (l : ℕ) [Fact l.Prime]
         (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) ⟶
       ModuleCat.of (Padic.coefficientExtensionIntegers l E)
         (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))) :
-    let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
+    let : EssentiallySmall.{u + 1} X.ProEt :=
+      WeilConjectures.instEssentiallySmallProEt_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      IntegralModelsStacks.projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let A : Type u := Padic.coefficientExtensionIntegers l E
     let L := continuousScalarFunctor A ⋙
@@ -169,11 +170,12 @@ private theorem pulledRegularIso_coefficient (l : ℕ) [Fact l.Prime]
       (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).map
         ((FiniteConstantModel.scalarModules A).map f).hom ≫
           FiniteDiscreteOrdinary.canonicalAbelianMap.{u} A X := by
-  let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
+  let : EssentiallySmall.{u + 1} X.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    IntegralModelsStacks.projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A : Type u := Padic.coefficientExtensionIntegers l E
   let P := upperStarFromPoint X
@@ -211,11 +213,12 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 private theorem pulledRegularIso_scalar_one (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) (a : Padic.coefficientExtensionIntegers l E) (U : X.ProEtᵒᵖ) :
-    let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
+    let : EssentiallySmall.{u + 1} X.ProEt :=
+      WeilConjectures.instEssentiallySmallProEt_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      IntegralModelsStacks.projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let A : Type u := Padic.coefficientExtensionIntegers l E
     let L := continuousScalarFunctor A ⋙
@@ -227,11 +230,12 @@ private theorem pulledRegularIso_scalar_one (l : ℕ) [Fact l.Prime]
         ((toSheafify (Scheme.ProEt.topology X)
           ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app U
             (ULift.up a)) := by
-  let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
+  let : EssentiallySmall.{u + 1} X.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    IntegralModelsStacks.projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A : Type u := Padic.coefficientExtensionIntegers l E
   let J : GrothendieckTopology X.ProEt := Scheme.ProEt.topology X
@@ -540,11 +544,12 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) :
-    let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
+    let : EssentiallySmall.{u + 1} X.ProEt :=
+      WeilConjectures.instEssentiallySmallProEt_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
       Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
     let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-      IntegralModelsStacks.projectionCommRingSheafify X
+      AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     let dd : Scheme.ProEtaleAdicCoefficientDatum (Scheme.PbcIntegralRing l E) :=
       { toCompleteCoefficientDatum := (Scheme.pbcIntegralDatum l E).toCompleteCoefficientDatum
@@ -553,11 +558,12 @@ private theorem coefficientRingCompatibility (l : ℕ) [Fact l.Prime]
         (integralSectionRingIso l E X).hom ≫ (WeilConjectures.purCoefficientIso l E X).inv =
       Scheme.adicDatumScalar X dd ≫ (Scheme.pbcCompletedComparison X
         (Scheme.pbcIntegralDatum l E)).hom := by
-  let : EssentiallySmall.{u + 1} X.ProEt := IntegralModelsStacks.projectionSiteSmall X
+  let : EssentiallySmall.{u + 1} X.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
     Scheme.ProEt.instHasSheafifyTopologyAb_weilConjectures X
   let : HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-    IntegralModelsStacks.projectionCommRingSheafify X
+    AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify X
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A : Type u := Padic.coefficientExtensionIntegers l E
   let J : GrothendieckTopology X.ProEt := Scheme.ProEt.topology X

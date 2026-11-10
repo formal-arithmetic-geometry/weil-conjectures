@@ -328,7 +328,7 @@ theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
     (p : U ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] :
     ∃ c : Compactification p, IsConnectedCurve c.g ∧ Smooth c.g ∧ (Set.range c.i.base)ᶜ.Finite ∧
       ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z) := by
-  have := IsConnectedCurve.connectedSpace' p
+  have := IsConnectedCurve.connectedSpace (f := p)
   have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian p
   have : IsRegular U := IsRegular.of_smooth p
   have : IrreducibleSpace U := IsRegular.irreducibleSpace U
@@ -349,7 +349,7 @@ theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
 /-- A smooth connected curve is smooth of relative dimension one. -/
 lemma IsConnectedCurve.smoothOfRelativeDimension_one {C : Scheme.{u}} (f : C ⟶ Spec (.of K))
     [IsConnectedCurve f] [Smooth f] : SmoothOfRelativeDimension 1 f := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C
@@ -365,7 +365,7 @@ theorem IsConnectedCurve.isAffine_of_ne_top [IsAlgClosed K] {C : Scheme.{u}}
     (p : C ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] [IsProper p] (V : C.Opens)
     (hV : V ≠ ⊤) : IsAffine V := by
   classical
-  have := IsConnectedCurve.connectedSpace' p
+  have := IsConnectedCurve.connectedSpace (f := p)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
   have : IsRegular C := IsRegular.of_smooth p
   have : IrreducibleSpace C := IsRegular.irreducibleSpace C

@@ -128,7 +128,7 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
       (sectionCohomologyTheta L p)).app (op V)) hr
   simpa only [Category.assoc] using hr'.symm
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The naturality square compares the scheme and ringed-space section interfaces.
 /-- Restricting a global class and applying the restricted-resolution class map
 computes the restriction of its classical Leray edge. This concerns a single morphism,

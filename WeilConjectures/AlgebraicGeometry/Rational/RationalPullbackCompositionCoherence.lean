@@ -92,7 +92,7 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- Tensor-generator coordinates unfold nested inverse-image and scalar-extension sections.
 /-- The composition equation with all specified ordinary, completed and raw maps.
 The module formula uses generators on base-changed charts; sheafification and balancing

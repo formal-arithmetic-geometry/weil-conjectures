@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Mathlib.RingTheory.Jacobson.Artinian
 public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexSplit
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
@@ -290,11 +291,6 @@ lemma exists_isRegularPrincipal_map_tensorProduct_of_isInvertible_comap_fiberι 
   exact this.exists_isRegularPrincipal_map_localizationAway
     (ideal_top_comap_specMap_ofHom_fromSpec J U _) P
 
-/-- The sections of `Spec κ(s)` form a field. -/
-lemma isField_residueField_sections (s : S) : IsField Γ(Spec (S.residueField s), ⊤) :=
-  MulEquiv.isField (Field.toIsField (S.residueField s))
-    (Scheme.ΓSpecIso (S.residueField s)).commRingCatIsoToRingEquiv.toMulEquiv
-
 /-- In the situation of `exists_isRegularPrincipal_map_tensorProduct_of_isInvertible_comap_fiberι`,
 the kernel of `Γ(S, W) → Γ(Spec κ(s), ⊤)` is the prime of `s`, i.e. the contraction of the
 prime of any point of `U` over `s`. -/
@@ -303,7 +299,7 @@ lemma ker_appLE_fromSpecResidueField (π : X ⟶ S) (s : S) {W : S.Opens} (hW : 
     (hUW : U ≤ π ⁻¹ᵁ W) (q : Spec Γ(X, U)) (hq : π (hU.fromSpec q) = s) :
     RingHom.ker ((S.fromSpecResidueField s).appLE W ⊤ hsW).hom =
       q.asIdeal.comap (π.appLE W U hUW).hom := by
-  let := (isField_residueField_sections s).toField
+  let := (Modules.isField_Γ_Spec_residueField s).toField
   let pt : Spec Γ(Spec (S.residueField s), ⊤) := ⟨⊥, Ideal.isPrime_bot⟩
   have e₁ : hW.fromSpec (Spec.map ((S.fromSpecResidueField s).appLE W ⊤ hsW) pt) = s := by
     rw [← Scheme.Hom.comp_apply, IsAffineOpen.SpecMap_appLE_fromSpec _ hW (isAffineOpen_top _),
@@ -587,7 +583,7 @@ theorem isInvertible_of_locallyQuasiFinite_of_flat (π : X ⟶ S) [SmoothOfRelat
       ⟨U, hU⟩ hUW
   have := q.isPrime
   obtain ⟨g, hgq, hg⟩ := Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber
-    (isField_residueField_sections _) (J.subschemeι.app U).hom
+    (Modules.isField_Γ_Spec_residueField _) (J.subschemeι.app U).hom
     (J.subschemeι_app_surjective ⟨U, hU⟩)
     (flat_app_subschemeι_comp_appLE hflat ⟨W, hW⟩ ⟨U, hU⟩ hUW)
     (finitePresentation_app_subschemeι_comp_appLE hlfp ⟨W, hW⟩ ⟨U, hU⟩ hUW) q.asIdeal
@@ -638,7 +634,7 @@ theorem IsLocallyPrincipal.isInvertible_and_flat (π : X ⟶ S) [Flat π]
       HasRingHomProperty.appLE (P := @LocallyOfFinitePresentation) π inferInstance ⟨W, hW⟩ U hUW
     have := q.isPrime
     obtain ⟨g, hgq, hg⟩ := Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber
-      (isField_residueField_sections _) (J.ideal U) hJU q.asIdeal
+      (Modules.isField_Γ_Spec_residueField _) (J.ideal U) hJU q.asIdeal
       (ker_appLE_fromSpecResidueField π _ hW hsW' hU hUW q (by rw [hq]))
       (exists_isRegularPrincipal_map_tensorProduct_of_isInvertible_comap_fiberι π _ (hfib _)
         hW hsW' U hUW)

@@ -65,8 +65,6 @@ lemma exists_d_eq_iCycles_of_homologyπ_eq_zero (C : CochainComplex AddCommGrpCa
     cyclesIsoSc'_hom_iCycles] at h
   exact h
 
-lemma embeddingUpNat_f (q : ℕ) : ComplexShape.embeddingUpNat.f q = (q : ℤ) := rfl
-
 lemma embeddingUpNat_f_succ (q : ℕ) : ComplexShape.embeddingUpNat.f (q + 1) = (q : ℤ) + 1 := by
   simp
 
@@ -99,7 +97,7 @@ lemma torsorSignedA_apply (q : ℕ) (x : (relativeSectionComplex T U I).X ((q : 
   rfl
 
 lemma torsorSignedB_apply (q : ℕ) (x : (relativeSectionComplex T U I).X ((q : ℤ) + 1)) :
-    torsorSignedB T U I q x = -(openXIso T U I q (embeddingUpNat_f q)).hom
+    torsorSignedB T U I q x = -(openXIso T U I q (ComplexShape.embeddingUpNat_f q)).hom
       (ShiftedCone.snd (relativeSectionRestriction T U I) ((q : ℤ) + 1) q rfl x) :=
   rfl
 
@@ -159,7 +157,8 @@ theorem TorsorSignedRepresents.unique {q : ℕ}
       (globalXIso T I (q + 1) (embeddingUpNat_f_succ q)).hom).1
     rw [torsorSignedA_apply] at ha ha'
     exact ha.trans ha'.symm
-  · apply (ConcreteCategory.bijective_of_isIso (openXIso T U I q (embeddingUpNat_f q)).hom).1
+  · apply (ConcreteCategory.bijective_of_isIso
+      (openXIso T U I q (ComplexShape.embeddingUpNat_f q)).hom).1
     rw [torsorSignedB_apply] at hb hb'
     exact neg_injective (hb.trans hb'.symm)
 
@@ -205,7 +204,7 @@ theorem exists_torsorSignedRepresents (q : ℕ)
   let r := relativeSectionRestriction T U I
   let v : (relativeSectionComplex T U I).X ((q : ℤ) + 1) := ShiftedCone.mk r ((q : ℤ) + 1) q rfl
     ((globalXIso T I (q + 1) (embeddingUpNat_f_succ q)).inv a)
-    (-(openXIso T U I q (embeddingUpNat_f q)).inv b)
+    (-(openXIso T U I q (ComplexShape.embeddingUpNat_f q)).inv b)
   have hd : (relativeSectionComplex T U I).d ((q : ℤ) + 1) ((q : ℤ) + 1 + 1) v = 0 := by
     apply ShiftedCone.ext r (rfl : (q : ℤ) + 1 + 1 = (q : ℤ) + 1 + 1)
     · rw [relativeSectionComplex_d_fst T U I _ _ q rfl rfl, ShiftedCone.fst_mk,
@@ -214,7 +213,7 @@ theorem exists_torsorSignedRepresents (q : ℕ)
       simp
     · rw [relativeSectionComplex_d_snd T U I _ _ q rfl rfl, ShiftedCone.fst_mk,
         ShiftedCone.snd_mk, relativeSectionRestriction_f_apply T U I (embeddingUpNat_f_succ q),
-        relativeSections_d_apply T I U (i := q) (j := q + 1) (embeddingUpNat_f q)
+        relativeSections_d_apply T I U (i := q) (j := q + 1) (ComplexShape.embeddingUpNat_f q)
           (embeddingUpNat_f_succ q),
         Iso.inv_hom_id_apply, map_neg, Iso.inv_hom_id_apply, hb, map_neg, map_neg]
       simp
@@ -254,17 +253,17 @@ theorem torsorSignedRepresents_boundary (q : ℕ)
   let r := relativeSectionRestriction T U I
   let K := relativeSectionComplex T U I
   let y : K.X (q : ℤ) := ShiftedCone.mk r (q : ℤ) ((q : ℤ) - 1) (by omega)
-    ((globalXIso T I q (embeddingUpNat_f q)).inv c) 0
+    ((globalXIso T I q (ComplexShape.embeddingUpNat_f q)).inv c) 0
   have hi : K.iCycles ((q : ℤ) + 1) (K.toCycles (q : ℤ) ((q : ℤ) + 1) y) =
       K.d (q : ℤ) ((q : ℤ) + 1) y :=
     ConcreteCategory.congr_hom (K.toCycles_i _ _) y
   refine ⟨K.toCycles (q : ℤ) ((q : ℤ) + 1) y, ?_, ?_, ?_⟩
   · rw [torsorSignedA_apply, hi, relativeSectionComplex_d_fst T U I _ _ ((q : ℤ) - 1) (by omega)
-      rfl, ShiftedCone.fst_mk, relativeSections_d_hom_apply T I _ (embeddingUpNat_f q)
+      rfl, ShiftedCone.fst_mk, relativeSections_d_hom_apply T I _ (ComplexShape.embeddingUpNat_f q)
       (embeddingUpNat_f_succ q), Iso.inv_hom_id_apply]
   · rw [torsorSignedB_apply, hi, relativeSectionComplex_d_snd T U I _ _ ((q : ℤ) - 1)
       (by omega) rfl, ShiftedCone.fst_mk, ShiftedCone.snd_mk, map_zero, add_zero, map_neg,
-      neg_neg, relativeSectionRestriction_f_hom_apply T U I (embeddingUpNat_f q),
+      neg_neg, relativeSectionRestriction_f_hom_apply T U I (ComplexShape.embeddingUpNat_f q),
       Iso.inv_hom_id_apply]
   · exact ConcreteCategory.congr_hom (K.toCycles_comp_homologyπ _ _) y
 
@@ -307,8 +306,9 @@ theorem TorsorSignedRepresents.exists_of_zero {q : ℕ}
     (ShiftedCone.snd r (q : ℤ) ((q : ℤ) - 1) (by omega) y)
   let c' := ShiftedCone.fst r (q : ℤ) ((q : ℤ) - 1) (by omega) y +
     (relativeSections (Scheme.Etale.mk (𝟙 T)) I).d ((q : ℤ) - 1) q e
-  refine ⟨(globalXIso T I q (embeddingUpNat_f q)).hom c', ?_, ?_⟩
-  · rw [← relativeSections_d_hom_apply T I _ (embeddingUpNat_f q) (embeddingUpNat_f_succ q),
+  refine ⟨(globalXIso T I q (ComplexShape.embeddingUpNat_f q)).hom c', ?_, ?_⟩
+  · rw [← relativeSections_d_hom_apply T I _ (ComplexShape.embeddingUpNat_f q)
+      (embeddingUpNat_f_succ q),
       ← ha, torsorSignedA_apply, ← hy, relativeSectionComplex_d_fst T U I _ _ ((q : ℤ) - 1)
       (by omega) rfl]
     have hdd : (relativeSections (Scheme.Etale.mk (𝟙 T)) I).d q ((q : ℤ) + 1)
@@ -317,7 +317,7 @@ theorem TorsorSignedRepresents.exists_of_zero {q : ℕ}
       rfl
     simp only [c', map_add, hdd, add_zero]
     rfl
-  · rw [← relativeSectionRestriction_f_hom_apply T U I (embeddingUpNat_f q), ← hb,
+  · rw [← relativeSectionRestriction_f_hom_apply T U I (ComplexShape.embeddingUpNat_f q), ← hb,
       torsorSignedB_apply, ← hy, relativeSectionComplex_d_snd T U I _ _ ((q : ℤ) - 1)
       (by omega) rfl, map_neg, neg_neg]
     congr 1
@@ -367,7 +367,7 @@ theorem TorsorSignedRepresents.map {q : ℕ}
     erw [extendMap_apply α (embeddingUpNat_f_succ q), Iso.inv_hom_id_apply]
     rfl
   · rw [hi, torsorSignedB_apply, ← hb, torsorSignedB_apply, ShiftedCone.fiberMap_snd_apply]
-    erw [extendMap_apply β (embeddingUpNat_f q), Iso.inv_hom_id_apply, map_neg]
+    erw [extendMap_apply β (ComplexShape.embeddingUpNat_f q), Iso.inv_hom_id_apply, map_neg]
     rfl
 
 end RepresentativeMaps
@@ -455,9 +455,10 @@ theorem TorsorSignedRepresents.connecting
         (globalXIso T S.X₃ (q + 1) (embeddingUpNat_f_succ q)).hom).1
       rw [relativeSectionMap_fst_apply S.g rfl (embeddingUpNat_f_succ q), ShiftedCone.fst_mk,
         Iso.inv_hom_id_apply, hb, ← ha, torsorSignedA_apply]
-    · apply (ConcreteCategory.bijective_of_isIso (openXIso T U S.X₃ q (embeddingUpNat_f q)).hom).1
-      rw [relativeSectionMap_snd_apply S.g rfl (embeddingUpNat_f q), ShiftedCone.snd_mk,
-        map_zero, map_zero]
+    · apply (ConcreteCategory.bijective_of_isIso
+        (openXIso T U S.X₃ q (ComplexShape.embeddingUpNat_f q)).hom).1
+      rw [relativeSectionMap_snd_apply S.g rfl (ComplexShape.embeddingUpNat_f q),
+        ShiftedCone.snd_mk, map_zero, map_zero]
       rw [torsorSignedB_apply, neg_eq_zero] at hb0
       exact hb0.symm
   have hv₁ : (relativeSectionMap T U S.f).f ((q : ℤ) + 1 + 1) v₁ =

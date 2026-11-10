@@ -50,7 +50,6 @@ private theorem restrict_eq_of_le (X : Scheme.{u}) {Z W T : X.Opens}
     (SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE hTW)).map k) heq
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Compare component maps of iterated restrictions before assembling chain-map equality.
 /-- Stalk equality of two endomorphisms of a restricted strictly perfect complex
 holds on a smaller neighbourhood.

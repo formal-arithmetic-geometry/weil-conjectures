@@ -134,7 +134,6 @@ private theorem restriction_path
   congr 1
   exact Subsingleton.elim _ _
 
-set_option maxHeartbeats 1000000 in
 -- Taking mates expands a six-functor square.
 private theorem coefficient_square
     {X X' A A' B B' : Scheme.{v}} (u : X' ⟶ X)

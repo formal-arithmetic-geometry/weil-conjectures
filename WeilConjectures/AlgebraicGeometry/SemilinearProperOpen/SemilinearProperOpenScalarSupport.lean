@@ -62,7 +62,6 @@ abbrev levelRestriction (X : Scheme.{u}) (n : ℕ) :=
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 400000 in
 -- Constructing the entire scalar-restriction functor requires sectionwise transports.
 /-- Termwise scalar restriction to ordinary constant-B towers, uniquely characterized
 on objects, transitions, and morphisms. Source: Stacks 03CZ; Zheng 4.1

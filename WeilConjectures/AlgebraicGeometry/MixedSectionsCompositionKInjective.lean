@@ -30,7 +30,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-set_option maxHeartbeats 800000 in
 -- Checking the canonical comparisons expands sheaf and derived-functor instances.
 /-- Composition coherence computed on a K-injective complex.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W.

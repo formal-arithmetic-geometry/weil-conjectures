@@ -177,7 +177,6 @@ private theorem tensor_single_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [local irreducible] Scheme.picardTermwiseSingleMap Scheme.picardTermwiseCounit
   Scheme.Modules.canonicalSinglePullbackMap
 
-set_option maxHeartbeats 600000 in
 -- The selected derived counit has a large dependent type.
 private theorem tensor_single_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {M N : Y.Modules} (a : M ⟶ N) :
