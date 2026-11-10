@@ -14,6 +14,8 @@ public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Geometry.RingedSpace.Basic
 import WeilConjectures.Algebra.Homology.OpenHomTriangleRealization
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Mayer--Vietoris sequence for derived Hom
 

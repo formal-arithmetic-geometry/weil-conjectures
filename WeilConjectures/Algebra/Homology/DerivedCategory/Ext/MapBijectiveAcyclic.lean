@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.Algebra.FiveLemma
 
 /-!
 # Comparing `Ext` along an exact functor sending injectives to acyclic objects

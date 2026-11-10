@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct
 public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Cones
 
 /-!
 # FilteredColimitCommutesProduct
@@ -115,7 +116,7 @@ type-correct after unfolding these definitions, which blocks `simp`/`rw` unifica
 Making them locally reducible restores the pre-4.32 behavior for the proofs below. -/
 set_option allowUnsafeReducibility true in
 attribute [local reducible] Functor.const Functor.pi Functor.comp Pi.functor
-  Functor.mapCocone Cocones.functoriality coconePointwiseProduct
+  Functor.mapCocone Cocone.functoriality coconePointwiseProduct
 
 lemma IsIPCOfShape.of_preservesFilteredColimitsOfSize {D : Type*} [Category* D] (F : C ⥤ D)
     {ι : Type*} [HasProductsOfShape ι D] [IsIPCOfShape.{w} ι D] [HasProductsOfShape ι C]
