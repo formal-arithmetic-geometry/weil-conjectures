@@ -44,11 +44,6 @@ private lemma coefficientValue_eq
   unfold coefficientValue condensedFieldContinuousCoefficientMap
   rfl
 
-@[irreducible] private noncomputable def coefficientValue
-    (E : Type u) [NormedField E] (X : Scheme.{u}) (x : X)
-    (g : coeff E X ⟶ coeff E X) : E :=
-  condensedFieldContinuousCoefficientMap E X g x
-
 
 @[irreducible] private noncomputable def ringScalar
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
