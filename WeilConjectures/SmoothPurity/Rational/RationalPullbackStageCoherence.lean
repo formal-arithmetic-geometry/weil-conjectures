@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDesce
 import WeilConjectures.SmoothPurity.Rational.RationalPullbackScalarTower
 import all WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
 import all Mathlib.Logic.Small.Defs
-import Mathlib.Util.CountHeartbeats
 
 /-! # Pullback comparisons on the normalized coefficient stages
 
@@ -161,8 +160,6 @@ private theorem scalar_tower_nat
   simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] using
     scalar_tower_with_endpoint l E L M ι j κ e f K
 
-set_option maxHeartbeats 400000 in
--- the stage coherence below unfolds several nested comparison isomorphisms
 private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -180,7 +177,8 @@ private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
         (associator l Ω X E L M h k).hom ≫
       (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
         (Coefficient.{u} l Ω M) (coefficientInclusion l Ω E M (h.trans k)) f).hom := by
-  rw [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
+  -- Simplify the associators without rechecking the whole transported equality as a rewrite motive.
+  simp only [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
     GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω X E L M h k]
   delta GeneralAlgebraicallyClosedCoefficients.normalizedAssociator transition
   exact scalar_tower_nat l
