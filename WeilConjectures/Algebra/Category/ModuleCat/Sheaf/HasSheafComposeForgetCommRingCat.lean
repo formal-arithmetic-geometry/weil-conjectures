@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Geometry.RingedSpace.Basic
+import Mathlib.Algebra.Category.Ring.Limits
 
 /-! # Composing sheaves of commutative rings with the forgetful functor to rings
 
