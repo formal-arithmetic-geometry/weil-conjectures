@@ -223,7 +223,8 @@ theorem rationalPullbackScalarComparison_commShift
     @NatTrans.CommShift _ _ _ _ _ _ (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
         (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f).hom ℤ _ _ _
       (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _ _ tY)
-      (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _ tX _) := by
+      (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _ tX _) :=
+    set_option backward.isDefEq.respectTransparency true in by
   let A := constructibleIntegralPullback l (Coefficient.{u} l Ω E) f
   let B := constructibleIntegralPullback l (Coefficient.{u} l Ω L) f
   let Ar := rationalDerivedPullback l (Coefficient.{u} l Ω E) f
@@ -279,14 +280,18 @@ theorem rationalPullbackScalarComparison_commShift
   let eTX := NatIso.ofObjEqOfMapHEq (F := Q X ⋙ T X) (G := S X ⋙ QL X) (oT X) (mT X)
   let eTY := NatIso.ofObjEqOfMapHEq (F := Q Y ⋙ T Y) (G := S Y ⋙ QL Y) (oT Y) (mT Y)
   have : NatTrans.CommShift eA.hom ℤ :=
-    rationalOfObjEqOfMapHEq_commShift l _ _ X Y A Ar oA mA (fun J ↦ nE ((Q X).obj J))
+    rationalOfObjEqOfMapHEq_commShift l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω E)
+      X Y A Ar oA mA (fun J ↦ nE ((Q X).obj J))
   have : NatTrans.CommShift eB.hom ℤ :=
-    rationalOfObjEqOfMapHEq_commShift l _ _ X Y B Br oB mB (fun J ↦ nL ((QL X).obj J))
+    rationalOfObjEqOfMapHEq_commShift l (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω L)
+      X Y B Br oB mB (fun J ↦ nL ((QL X).obj J))
   have : NatTrans.CommShift eTX.hom ℤ :=
-    rationalOfObjEqOfMapHEq_commShift l _ _ X X (S X) (T X) (oT X) (mT X)
+    rationalOfObjEqOfMapHEq_commShift l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
+      X X (S X) (T X) (oT X) (mT X)
       (fun J ↦ ntX ((Q X).obj J))
   have : NatTrans.CommShift eTY.hom ℤ :=
-    rationalOfObjEqOfMapHEq_commShift l _ _ Y Y (S Y) (T Y) (oT Y) (mT Y)
+    rationalOfObjEqOfMapHEq_commShift l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
+      Y Y (S Y) (T Y) (oT Y) (mT Y)
       (fun J ↦ ntY ((Q Y).obj J))
   let β := rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
     (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f
