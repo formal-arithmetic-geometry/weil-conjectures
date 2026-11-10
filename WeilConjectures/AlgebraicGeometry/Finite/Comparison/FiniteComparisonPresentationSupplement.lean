@@ -875,10 +875,16 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
   let S := constantSheaf J (ModuleCat.{max c h} R)
   have : H.IsEquivalence :=
     ConstantInternalModuleSheafEncoding.sheafEncodingIsEquivalence J R (internalToModule R) rfl
+  have : H.Full :=
+    ConstantInternalModuleSheafEncoding.sheafEncodingFull J R (internalToModule R) rfl
+  have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full H
   have : HasFiniteLimits (Mod (Sheaf J Ab.{max c h})
       (Sheaf.sheafifyRingPresheaf J ((Functor.const Cᵒᵖ).obj (RingCat.of R)))) := inferInstance
+  have : HasBinaryProducts (Mod (Sheaf J Ab.{max c h})
+      (Sheaf.sheafifyRingPresheaf J ((Functor.const Cᵒᵖ).obj (RingCat.of R)))) :=
+    HasFiniteLimits.out _
   have : H.Additive := Functor.additive_of_preserves_binary_products H
-  have : S.Additive := Functor.additive_of_preserves_binary_products S
+  have : S.Additive := inferInstance
   trace "constant presentation: instances established"
   let rr : (internalToModule R).obj (Mod.regular (AddCommGrpCat.of R)) ≅ ModuleCat.of R R :=
     ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext x; rfl)
