@@ -75,7 +75,7 @@ lemma exists_twistedSubmoduleMap_eq_of_exact (hinj : Function.Injective φ)
   let g : M₂ → M₁ := fun m ↦ if h : ψ m = 0 then (hex m h).choose else 0
   have hg (x : ↥(pullback f π)) : φ (g (σ.1 x)) = σ.1 x := by
     have h0 : ψ (σ.1 x) = 0 := congrFun (congrArg Subtype.val hσ) x
-    simp only [g, dif_pos h0]
+    simp only [g, dite_eq_left h0]
     exact (hex _ h0).choose_spec
   have hσ' := (mem_twistedSubmodule f c₂).1 σ.2
   refine ⟨⟨g ∘ σ.1, hσ'.1.comp g, fun w ↦ hinj ?_⟩, Subtype.ext (funext hg)⟩

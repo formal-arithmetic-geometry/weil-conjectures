@@ -37,6 +37,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphTensor
 import WeilConjectures.CategoryTheory.Right.RightDerivedSingleH0
@@ -149,6 +151,7 @@ private theorem supportSheafIso
     have hu : IsIso (H.map (R.rightDerivedFunctorUnit.app
         ((HomotopyCategory.singleFunctor _ 0).obj (O.obj M)))) := by
       rw [Functor.singleRightDerivedUnit_app, H.map_comp] at hu₀
+      simp only [cast_eq] at hu₀
       exact IsIso.of_isIso_comp_left
         (H.map (DerivedCategory.Q.map
           ((HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0).inv.app

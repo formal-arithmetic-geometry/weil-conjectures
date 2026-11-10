@@ -112,12 +112,22 @@ private theorem comparisonSection_tmul
     ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (t.hom.app W).hom] m) = _
   rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
 
+section
+
+local instance localInst_SheafTensorPushoutCancellation_1
+    (M : SheafOfModules.{u} (𝓡 D)) {U V : (Opens T)ᵒᵖ} (i : U ⟶ V) :
+    Module (D.obj.obj V)
+      ((ModuleCat.restrictScalars ((𝓡 D).obj.map i).hom).obj (M.val.obj V)) :=
+  inferInstanceAs (Module (D.obj.obj V) (M.val.obj V))
+
 private theorem tensorRestriction_tmul (r : D ⟶ C) (M : SheafOfModules.{u} (𝓡 D))
     {U V : (Opens T)ᵒᵖ} (i : U ⟶ V) (c : C.obj.obj U) (m : M.val.obj U) :
     changeOfRingsMap.{u, u, u} r M i
       (c ⊗ₜ[D.obj.obj U, (r.hom.app U).hom] m) =
       C.obj.map i c ⊗ₜ[D.obj.obj V, (r.hom.app V).hom] M.val.map i m :=
   Classical.choose_spec (exists_changeOfRingsMap.{u, u, u} r M i) c m
+
+end
 
 private def comparisonSeed (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t : A ⟶ B)
     (h : r ≫ b = s ≫ t) (M : SheafOfModules.{u} (𝓡 A)) :

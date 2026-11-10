@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
+public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExtensionByZeroExact
@@ -144,12 +145,12 @@ square termwise. Source: Stacks 00YV and 03DI
         (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅
       (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙
         (sfIntrinsicDerivedEquivalence Z A).functor :=
-  (mapDerivedCategoryCompIso _ _).symm ≪≫
+  mapDerivedCategoryCompIso _ _ ≪≫
     mapDerivedCategoryNatIso
       ((sfIntrinsicModuleEquivalence U A).funInvIdAssoc
         (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
           (sfIntrinsicModuleEquivalence Z A).functor)) ≪≫
-    mapDerivedCategoryCompIso _ _
+    (mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact, uncompleted comparison in fixed coefficients.
 Source: Stacks 099T (blueprint: lem-sp-supported-etale-tensor-origin). -/

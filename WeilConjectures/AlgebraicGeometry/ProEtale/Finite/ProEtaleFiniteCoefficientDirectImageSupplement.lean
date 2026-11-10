@@ -166,7 +166,7 @@ theorem finiteCoefficientDirectImage_boundedConstructible_torAmplitude
   let Cp := fun T : Scheme.{u} ↦ finiteCoefficientIntrinsicDerivedComparison T B
   let eC (T : Scheme.{u}) (J : Etale.DerivedCategoryModule A T) :
       (Cp T).obj J ≅ (R T).mapDerivedCategory.obj ((ν T).mapDerivedCategory.obj J) :=
-    (Functor.mapDerivedCategoryCompIso (ν T) (R T)).app J
+    (Functor.mapDerivedCategoryCompIso (ν T) (R T)).symm.app J
   let J : DerivedCategory.Plus (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
     ⟨K', hPlus⟩
   let := isIso_comparisonDirectImagePlus A f.left

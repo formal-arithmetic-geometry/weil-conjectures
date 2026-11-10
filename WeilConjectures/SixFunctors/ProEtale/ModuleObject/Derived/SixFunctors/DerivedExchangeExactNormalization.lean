@@ -215,7 +215,7 @@ private theorem pullbackComp_shift {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶
   have e : (leftDerivedUpperStarComp Λ f g).hom =
       (leftDerivedUpperStarIsoMapDerivedCategory Λ (f ≫ g)).hom ≫
         (Functor.mapDerivedCategoryNatIso (upperStarComp Λ f g)).hom ≫
-        (Functor.mapDerivedCategoryCompIso (upperStar Λ g) (upperStar Λ f)).hom ≫
+        (Functor.mapDerivedCategoryCompIso (upperStar Λ g) (upperStar Λ f)).inv ≫
         Functor.whiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ g).inv
           (upperStar Λ f).mapDerivedCategory ≫
         Functor.whiskerLeft (moduleObjectDerivedPullback Λ g)

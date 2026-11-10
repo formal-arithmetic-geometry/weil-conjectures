@@ -7,8 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.Sites.RingedSitePoint
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import WeilConjectures.Algebra.Homology.RingedSitePointTensor
 import WeilConjectures.Algebra.Homology.RingedSitePointExact
 import WeilConjectures.Algebra.Homology.RingedSitePointFinitePresentationRetract

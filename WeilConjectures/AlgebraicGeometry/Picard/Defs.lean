@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.Over
@@ -85,6 +86,10 @@ namespace AlgebraicGeometry
 open Scheme
 
 variable {X S : Scheme.{u}}
+
+local instance (Y : Scheme.{u}) :
+    SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf) :=
+  SheafOfModules.instIsInvertibleUnit.{u, u, u}
 
 /-- The base change to `T` of a section `σ` of `f : X ⟶ S`, as a section
 `σ_T : T ⟶ X ×[S] T` of the projection `X_T ⟶ T`. -/

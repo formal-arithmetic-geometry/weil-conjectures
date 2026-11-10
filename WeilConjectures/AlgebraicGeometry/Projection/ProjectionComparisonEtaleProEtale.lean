@@ -91,10 +91,10 @@ private lemma map_plus_comp_inv
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     (K : DerivedCategory.Plus C) :
     DerivedCategory.Plus.ι.map ((Functor.mapDerivedCategoryPlusCompIso F G).inv.app K) =
-      (Functor.mapDerivedCategoryCompIso F G).inv.app K.obj := by
+      (Functor.mapDerivedCategoryCompIso F G).hom.app K.obj := by
   exact congrArg Iso.inv (show DerivedCategory.Plus.ι.mapIso
     ((Functor.mapDerivedCategoryPlusCompIso F G).app K) =
-      (Functor.mapDerivedCategoryCompIso F G).app K.obj from
+      ((Functor.mapDerivedCategoryCompIso F G).symm).app K.obj from
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app F G K))
 
 private lemma included_pullback (A : Type (u + 1)) [CommRing A]

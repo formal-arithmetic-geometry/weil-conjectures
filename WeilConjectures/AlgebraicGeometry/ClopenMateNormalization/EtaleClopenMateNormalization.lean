@@ -130,7 +130,6 @@ set_option autoImplicit false
 
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
-  CategoryTheory.Functor.rightDerivedFunctorPlus
 
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -165,11 +164,11 @@ composition comparisons. Source: Stacks Tags 015F and 070K
 @[no_expose, irreducible] def clopenLocalizedSquare (σ : G ⋙ L' ⟶ L ⋙ G') :
     G.mapDerivedCategory ⋙ L'.mapDerivedCategory ⟶
       L.mapDerivedCategory ⋙ G'.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso G L').inv ≫
+  (Functor.mapDerivedCategoryCompIso G L').hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso C₂ (.up ℤ)) _ _ _ _
       (Functor.whiskerRight (NatTrans.mapHomologicalComplex σ (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso L G').hom
+    (Functor.mapDerivedCategoryCompIso L G').inv
 
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃] in
 private theorem clopenLocalizedSquare_fac (σ : G ⋙ L' ⟶ L ⋙ G')
@@ -192,7 +191,7 @@ private theorem clopenLocalizedSquare_fac (σ : G ⋙ L' ⟶ L ⋙ G')
     Functor.whiskerRight_app, Category.assoc]
   change _ ≫ ((G ⋙ L').mapDerivedCategoryFactors.hom.app K ≫ _) = _
   erw [← reassoc_of% h₁]
-  simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃] in
 private theorem clopenLocalizedSquare_fach (σ : G ⋙ L' ⟶ L ⋙ G')
@@ -327,7 +326,7 @@ private theorem mate_ambient (adj : L ⊣ R) (adj' : L' ⊣ R')
   have hab : a = b := by
     apply Functor.rightDerived_ext
       (R.rightDerivedFunctorPlus ⋙ (DerivedCategory.Plus.ι ⋙ G.mapDerivedCategory))
-      (Functor.whiskerRight R.rightDerivedFunctorPlusUnit
+      (Functor.whiskerRight R.rightDerivedFunctorPlusUnith
           (DerivedCategory.Plus.ι ⋙ G.mapDerivedCategory) ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso C₁)
     apply NatTrans.ext
@@ -347,7 +346,7 @@ private theorem mate_ambient (adj : L ⊣ R) (adj' : L' ⊣ R')
       (derivedComplexUnitCompatibility (C := C₁) (D := C₂)).2.2.2 R K]
     erw [hu]
     change DerivedCategory.Plus.ι.map
-        (G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K)) ≫
+        (G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K)) ≫
       DerivedCategory.Plus.ι.map (gammaPlus.app (DerivedCategory.Plus.Qh.obj K)) ≫ _ = _
     rw [← DerivedCategory.Plus.ι.map_comp_assoc, hp]
     simp only [DerivedCategory.Plus.ι.map_comp, Category.assoc]
@@ -390,15 +389,15 @@ private theorem plus_mate_eq (adj : L ⊣ R) (adj' : L' ⊣ R')
       G'.mapDerivedCategoryPlus ⋙ R'.rightDerivedFunctorPlus)
     (hδ : (mateEquiv adj adj' σ).natTrans = δ)
     (hγ : ∀ K : HomotopyCategory.Plus C₁,
-      G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+      G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
           γ.app (DerivedCategory.Plus.Qh.obj K) =
         G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
           DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus δ).app K) ≫
-          R'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj K) ≫
+          R'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj K) ≫
           R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K)) :
     (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans = γ := by
   apply Functor.rightDerived_ext (R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus)
-    (Functor.whiskerRight R.rightDerivedFunctorPlusUnit G.mapDerivedCategoryPlus ≫
+    (Functor.whiskerRight R.rightDerivedFunctorPlusUnith G.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso C₁)
   apply NatTrans.ext
   funext K

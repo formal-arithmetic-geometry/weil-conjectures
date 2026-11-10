@@ -9,7 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.Grp.AB
@@ -19,6 +21,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 import WeilConjectures.AlgebraicGeometry.TruncationDerivedLimit
 import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
 import WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine-basis lower truncation tower inputs
 Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/
@@ -38,7 +41,7 @@ private theorem map_product_lift
     G.map (Pi.lift p) ≫ e.hom = Pi.lift (fun n => G.map (p n)) := by
   apply Pi.hom_ext
   intro n
-  rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_π, Pi.lift_π]
+  rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_comp_π, Pi.lift_comp_π]
 
 private theorem transport_roos_triangle
     {C : Type wC} [Category.{wA} C] [HasZeroObject C] [HasShift C ℤ]
@@ -60,7 +63,7 @@ private theorem transport_roos_triangle
     intro n
     simp only [Category.assoc, b, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, Category.id_comp,
-      Pi.lift_π, Pi.mapIso_hom_π, Pi.mapIso_hom_π_assoc, Pi.lift_π_assoc]
+      Pi.lift_comp_π, Pi.mapIso_hom_π, Pi.mapIso_hom_π_assoc, Pi.lift_comp_π_assoc]
     simp only [← Category.assoc]
     rw [Category.assoc (Pi.π _ (n + 1)), hf]
     simp only [Category.assoc]
@@ -72,7 +75,7 @@ private theorem transport_roos_triangle
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, b, Pi.mapIso_hom_π, Pi.lift_π_assoc, Pi.lift_π]
+    simp only [Category.assoc, b, Pi.mapIso_hom_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     rw [hp, Iso.inv_hom_id_assoc]
   · change towerTransitionEndomorphism g ≫ b.inv = b.inv ≫ towerTransitionEndomorphism f
     apply (cancel_mono b.hom).1

@@ -17,6 +17,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
@@ -343,7 +344,6 @@ private def tensorCounit (F : C) :
       (curriedTensor C) F).hom.naturality a]
     erw [DerivedCategory.Q.map_comp]
     simp only [Functor.comp_map, Category.assoc]
-    rfl
 
 private theorem tensorCounit_isIso (F : C) (P : CochainComplex C ℤ)
     (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :

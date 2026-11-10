@@ -82,7 +82,7 @@ theorem krullAkizukiNoetherian
   · subst I
     exact Submodule.fg_bot
   obtain ⟨a, ha, ha0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hI
-  have hcomap := I.comap_ne_bot_of_algebraic_mem (R := R) ha0 ha
+  have hcomap := I.under_ne_bot_of_algebraic_mem (R := R) ha0 ha
     (Algebra.IsAlgebraic.isAlgebraic (R := R) a)
   obtain ⟨x, hxI, hx⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hcomap
   let J : Ideal D := Ideal.span {algebraMap R D x}

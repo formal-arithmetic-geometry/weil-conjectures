@@ -87,6 +87,7 @@ private theorem restrictComparison {C D : Type*} [Category C] [Category D]
   refine ⟨e', ⟨?_⟩⟩
   exact Functor.isoWhiskerLeft i he
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Comparison preserves and reflects the exact Tor interval for bounded constructible
 complexes over a discrete Noetherian ring and restricts to the finite-Tor equivalence.
 The first natural isomorphism characterizes the derived comparison by its action on all

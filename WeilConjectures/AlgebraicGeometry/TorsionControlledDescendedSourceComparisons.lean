@@ -7,10 +7,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import all WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.CompatibleQuotientFormalComparisons
 import WeilConjectures.Topology.GlueSheavesOfModules
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 

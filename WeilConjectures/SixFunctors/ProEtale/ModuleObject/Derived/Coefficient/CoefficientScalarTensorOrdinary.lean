@@ -124,12 +124,10 @@ private theorem scalar_tensor_ext (Z : Scheme.{u})
   rw [← Functor.LaxMonoidal.μ_natural_right_assoc,
     ← Functor.LaxMonoidal.μ_natural_right_assoc]
   ext V t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp only [map_add, ht, ht']
   | tmul s t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [TensorProduct.tmul_zero, map_zero]
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
     | tmul x y => exact h V s x y
 

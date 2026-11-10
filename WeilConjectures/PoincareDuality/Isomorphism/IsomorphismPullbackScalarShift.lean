@@ -15,7 +15,7 @@ import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismPullbackScalarInte
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.ProEtale
@@ -248,7 +248,7 @@ theorem isomorphismPullbackScalarShift
       (coefficientInclusion l Ω E L h) J J' f 1
     simp only [T, Q, QL, S, GeneralAlgebraicallyClosedCoefficients.integralTransition,
       sfRationalConstructibleLocalization, ScalarLocalization.localization, map_one] at hh ⊢
-    convert hh using 1; rfl
+    convert hh using 1
   have mB (J J' : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω L) Y)
       (f : J ⟶ J') : HEq (Br.map ((QL Y).map f)) ((QL X).map (B.map f)) := by
     simp only [Br, B, QL, sfRationalConstructibleLocalization, ScalarLocalization.localization]

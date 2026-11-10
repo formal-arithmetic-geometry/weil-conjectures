@@ -137,7 +137,7 @@ private theorem ordinaryPull_assoc {X Y Z T : Scheme.{u}}
     eqToIso.inv, eqToIso.hom] using hi.symm
 
 attribute [local irreducible] Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryFactors
 
 private theorem derived_comp_eq
@@ -158,7 +158,7 @@ private theorem derived_comp_eq
             ((F.mapHomologicalComplex (.up ℤ)).obj P) =
         H.mapDerivedCategoryFactors.hom.app P ≫
           DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P)) :
-    d = Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G := by
+    d = Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm := by
   apply Iso.ext
   apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso _ _)
   intro P
@@ -166,7 +166,7 @@ private theorem derived_comp_eq
     (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj P))).1
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hd]
   have hc := Functor.mapDerivedCategoryCompIso_fac F G P
   have hi : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
@@ -179,8 +179,8 @@ private theorem derived_comp_eq
 
 private theorem pullComp_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     c.pullComp f g = Functor.mapDerivedCategoryNatIso (c.ordinaryPull f g) ≪≫
-      Functor.mapDerivedCategoryCompIso (pullbackTensorSequenceInverse l E g)
-        (pullbackTensorSequenceInverse l E f) := by
+      (Functor.mapDerivedCategoryCompIso (pullbackTensorSequenceInverse l E g)
+        (pullbackTensorSequenceInverse l E f)).symm := by
   exact derived_comp_eq (pullbackTensorSequenceInverse l E g)
     (pullbackTensorSequenceInverse l E f) (pullbackTensorSequenceInverse l E (f ≫ g))
     (c.ordinaryPull f g) (c.pullComp f g) (c.pullComp_model f g)
@@ -221,7 +221,8 @@ theorem integralSystemCompositorAssociativity {X Y Z T : Scheme.{u}}
   apply Iso.ext
   apply NatTrans.ext
   funext M
-  simpa only [pullComp_eq, pull, pullbackTensorSequenceDerived, Iso.trans_hom, NatTrans.comp_app,
+  simpa only [pullComp_eq, pull, pullbackTensorSequenceDerived, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc,
     Functor.map_comp] using congr_app hh M

@@ -39,18 +39,25 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
 
-local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instFactPrimeRingChar_smoothPurityNativeDescentPullback
+    : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeDescentPullback
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeDescentPullback
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeDescentPullback
+    : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
-local instance : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instLocallyOfFiniteType_weilSheafSmoothPurityNativeDescentPullback_2
+    : LocallyOfFiniteType (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_weilSheafSmoothPurityNativeDescentPullback_2
+    : QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_weilSheafSmoothPurityNativeDescentPullback_2
+    : IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (Y ↘ Spec (CommRingCat.of k₀)))
 
 /-- The finite-base constructible pullback, with the base structures explicit. -/

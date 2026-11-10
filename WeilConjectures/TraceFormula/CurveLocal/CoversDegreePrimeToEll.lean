@@ -94,7 +94,7 @@ theorem exists_monic_isEisensteinAt_separable (e : ℕ) (he : 1 ≤ e) :
       rw [hg, natDegree_add_eq_left_of_degree_lt (by rwa [degree_X_pow]), natDegree_X_pow]
     have hcoeff : ∀ n, n < e → g.coeff n = (if n = 1 then t else 0) - (if n = 0 then t else 0) :=
       fun n hn ↦ by
-        rw [hg, coeff_add, coeff_sub, coeff_X_pow, if_neg hn.ne, coeff_C_mul_X, coeff_C,
+        rw [hg, coeff_add, coeff_sub, coeff_X_pow, ite_eq_right hn.ne, coeff_C_mul_X, coeff_C,
           zero_add]
     have hE : g.IsEisensteinAt (maximalIdeal R) := by
       refine ⟨?_, ?_, ?_⟩
@@ -111,7 +111,7 @@ theorem exists_monic_isEisensteinAt_separable (e : ℕ) (he : 1 ≤ e) :
     have h0 := congrArg (fun q ↦ q.coeff 0) h
     simp only [coeff_derivative, coeff_map, coeff_zero] at h0
     rw [hcoeff 1 he2] at h0
-    simp only [if_true, one_ne_zero, if_false, sub_zero, Nat.cast_zero, zero_add,
+    simp only [ite_true, one_ne_zero, ite_false, sub_zero, Nat.cast_zero, zero_add,
       mul_one] at h0
     exact ht0 h0
 

@@ -144,9 +144,9 @@ private noncomputable def derivedCoefficientComparisonPullbackIso
     finiteCoefficientDerivedComparison Y k ⋙ finiteCoefficientDerivedPullback Y k f ≅
       (Etale.upperStar (ModuleCat.{u + 1} k) f).mapDerivedCategory ⋙
         finiteCoefficientDerivedComparison X k :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (coefficientComparisonPullbackIso f k) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private noncomputable def comparisonConstantComplexIso
     (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] [Finite k]
@@ -160,7 +160,7 @@ private noncomputable def comparisonConstantComplexIso
         (DerivedCategory.Q.obj
           (((constantSheaf (Scheme.ProEt.topology X)
             (ModuleCat.{u + 1} k)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) :=
-  (Functor.mapDerivedCategoryCompIso _ _).app _ ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _).symm.app _ ≪≫
     (finiteCoefficientRealization X k).mapDerivedCategory.mapIso
       ((comparisonUpperStar (ModuleCat.{u + 1} k) X).mapDerivedCategoryFactors.app _ ≪≫
         DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso
@@ -288,7 +288,7 @@ theorem finite_field_stratified_perfect_models
           (ComplexShape.up ℤ)).obj P) :=
     (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A (𝒰.f j)
       (S.immersion i))).app L ≪≫
-      (Functor.mapDerivedCategoryCompIso _ _).app L ≪≫ emodel
+      (Functor.mapDerivedCategoryCompIso _ _).symm.app L ≪≫ emodel
   refine ⟨P, a, b, hge, hle, hfin, ?_, ⟨e⟩, ?_⟩
   · exact ⟨P, a, b, hge, hle, fun q ↦ ⟨inferInstance, hfin q⟩, ⟨Iso.refl _⟩⟩
   · exact ⟨(derivedCoefficientComparisonPullbackIso (𝒰.f j ≫ S.immersion i) k).app L ≪≫

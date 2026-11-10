@@ -124,6 +124,7 @@ lemma mapHomotopyCategoryTensorComparison_δNatTrans [F.OplaxMonoidal] :
       OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F :=
   rfl
 
+
 instance [IsIso δ] : IsIso (F.mapHomotopyCategoryTensorComparison δ) := by
   have (X Y : C) : IsIso ((δ.app X).app Y) := inferInstance
   have (K L : CochainComplex C ℤ) : IsIso ((((postcompose₂.obj
@@ -154,7 +155,6 @@ lemma mapBifunctorComparison_naturality_of_tensorComparison {F F' : C ⥤ D} [F.
   simp only [mapBifunctorComparisonApp]
   erw [reassoc_of% (hτ (K.X i₁) (L.X i₂))]
   simp [tensorHom_def]
-  rfl
 
 omit [MonoidalClosed C] [BraidedCategory C] [MonoidalClosed D] [BraidedCategory D]
   [MonoidalClosed E] [BraidedCategory E] in
@@ -401,9 +401,11 @@ lemma leftDerivedTensorComparisonOfNatTrans_comp :
   erw [c]
   have cF := leftDerivedTensorComparisonOfNatTrans_app_app_comp_tensorHom F δF X₁ X₂
   have nG := G.leftDerivedFunctorCounit.naturality
+    (X := (F.mapHomotopyCategory _).obj (X₁ ⊗ X₂))
+    (Y := (F.mapHomotopyCategory _).obj X₁ ⊗ (F.mapHomotopyCategory _).obj X₂)
     (((F.mapHomotopyCategoryTensorComparison δF).app X₁).app X₂)
   have ne := (F.leftDerivedFunctorCompIso G).hom.naturality (μ Qh X₁ X₂)
-  dsimp at nG ne
+  dsimp only [Functor.comp_obj, Functor.comp_map] at nG ne
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, cF,
     Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
     ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,

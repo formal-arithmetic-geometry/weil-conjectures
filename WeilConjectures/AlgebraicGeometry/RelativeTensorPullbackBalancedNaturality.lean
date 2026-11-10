@@ -94,7 +94,9 @@ private def balancedPairing (α : R ⟶ B)
         ((show M.val.obj W from m) ⊗ₜ[B.obj.obj W]
           (balancedUnit α N).app W ((α.hom.app W r) •
             ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W, (α.hom.app W).hom] n))) = _
-      rw [map_smul, TensorProduct.tmul_smul, map_smul]
+      rw [map_smul, TensorProduct.tmul_smul (R := B.obj.obj W) (R' := B.obj.obj W)
+        (M := M.val.obj W)
+        (N := (changeOfRings.{u, u, u} α N).val.obj W), map_smul]
       rfl)
 
 private theorem balancedPairing_natural (α : R ⟶ B)

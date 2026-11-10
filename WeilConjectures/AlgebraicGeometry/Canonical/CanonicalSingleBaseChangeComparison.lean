@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import WeilConjectures.AlgebraicGeometry.HomotopySingleBaseChangeComparison
 
@@ -128,6 +130,7 @@ theorem canonicalSingleBaseChangeComparison
             (((Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq
               (pullbackPushforwardAdjunction p)).hom.app M)) ≫
       canonicalSingleDirectImageMap f' ((pullback p).obj M) := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let C_X := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let C_S := SheafOfModules.{u} (moduleRings S.toRingedSpace)
   let C_X' := SheafOfModules.{u} (moduleRings X'.toRingedSpace)
@@ -221,6 +224,10 @@ theorem canonicalSingleBaseChangeComparison
     (ε_g.app ((HomotopyCategory.singleFunctor C_S 0).obj (F.obj M)))
     c (t_g.app (F.obj M)) k d
     (v.app ((HomotopyCategory.singleFunctor C_X' 0).obj ((pullback p).obj M))) hh
-  exact hf
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  with_unfolding_all
+    simpa only [canonicalSingleDirectImageMap, canonicalSinglePullbackMap, cast_eq,
+      Category.assoc] using! hf
 
 end AlgebraicGeometry.Scheme.Modules

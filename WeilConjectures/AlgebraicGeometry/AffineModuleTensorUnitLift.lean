@@ -57,9 +57,14 @@ local notation "r₀" => tensorPullbackRingMap f
 set_option hygiene false in
 local notation "t₀" => (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
 set_option hygiene false in
-local notation "e₀" =>
-  ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-    (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
+local notation "e₀" => (by
+  have : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+      (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+    have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+    exact Functor.HasLeftKanExtension.mk _
+      (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+  exact ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A))
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 set_option hygiene false in

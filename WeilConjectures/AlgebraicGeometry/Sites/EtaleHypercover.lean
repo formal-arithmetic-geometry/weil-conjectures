@@ -129,7 +129,7 @@ lemma exists_cover_lift {V : X.Etale} [CompactSpace V.left]
   let π : W ⟶ V := MorphismProperty.Over.homMk (Sigma.desc fun a ↦ (g a).left)
     (Sigma.hom_ext _ _ fun a ↦ by simp [W])
   have hιπ (a : Fin n) : ι a ≫ π = g a :=
-    MorphismProperty.Over.Hom.ext (Sigma.ι_desc _ a)
+    MorphismProperty.Over.Hom.ext (Sigma.ι_comp_desc _ a)
   have hιcov : ⋃ a, Set.range (ι a).left = Set.univ := by
     refine Set.eq_univ_of_forall fun x ↦ ?_
     obtain ⟨y, hy⟩ := (sigmaOpenCover fun a ↦ (U a).left).covers x
@@ -188,9 +188,9 @@ theorem IsQcqsHypercover.exists_refinement_lift [CompactSpace X] [QuasiSeparated
         X.smallEtaleTopology (U.obj k) := by
     by_cases h : k = p
     · subst h
-      rw [show fam k = ⟨Wp, πp ≫ eqToHom rfl⟩ from dif_pos rfl]
+      rw [show fam k = ⟨Wp, πp ≫ eqToHom rfl⟩ from dite_eq_left rfl]
       simpa using ⟨hWp, hcov⟩
-    · rw [show fam k = ⟨U.obj k, 𝟙 _⟩ from dif_neg h]
+    · rw [show fam k = ⟨U.obj k, 𝟙 _⟩ from dite_eq_right h]
       refine ⟨⟨hU.compactSpace k, hU.quasiSeparatedSpace k⟩, ?_⟩
       refine (X.smallEtaleTopology).superset_covering (fun _ g _ ↦ ?_)
         ((X.smallEtaleTopology).top_mem _)
@@ -211,7 +211,7 @@ theorem IsQcqsHypercover.exists_refinement_lift [CompactSpace X] [QuasiSeparated
     refine ⟨(G.obj.map ρ.op).hom w', ?_⟩
     rw [← hρ, eqToHom_refl, Category.comp_id, NatTrans.naturality_apply φ.hom, hw', op_comp,
       Functor.map_comp, ConcreteCategory.comp_apply]
-  exact key _ (dif_pos rfl) _ (SemiSimplicialObject.refinementToW_π _ _ _ p)
+  exact key _ (dite_eq_left rfl) _ (SemiSimplicialObject.refinementToW_π _ _ _ p)
 
 /-- **Étale cohomology is computed by qcqs hypercovers**: every class is the class of a cocycle
 on a qcqs hypercover. (blueprint `thm-weil-pbc-hypercover-cohomology`) -/

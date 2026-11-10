@@ -125,7 +125,7 @@ private theorem tupleProductLift_projection (p : ℕ) (t : Fin (p + 1) → ι) (
     (a : ∀ k, Z ⟶ U (t k))
     (ha : ∀ k, a k ≫ π (t k) = a 0 ≫ π (t 0)) (k : Fin (p + 1)) :
     tupleProductLift X U π p t Z a ha ≫ tupleProjection X U π p t k = a k := by
-  exact congrArg (fun f ↦ f.left) (Pi.lift_π (fun k ↦ Over.homMk (U := Over.mk (a 0 ≫ π (t 0)))
+  exact congrArg (fun f ↦ f.left) (Pi.lift_comp_π (fun k ↦ Over.homMk (U := Over.mk (a 0 ≫ π (t 0)))
     (V := Over.mk (π (t k))) (a k) (ha k)) k)
 
 private theorem tupleProduct_hom_ext {p : ℕ} {t : Fin (p + 1) → ι} {Z : C}
@@ -157,7 +157,7 @@ private theorem tupleIndexMap_projection {p q : ℕ} (t : Fin (p + 1) → ι)
     tupleIndexMap X U π t α ≫ tupleProjection X U π q (t ∘ α) k =
       tupleProjection X U π p t (α k) := by
   exact congrArg (fun f ↦ f.left)
-    (Pi.lift_π (fun k ↦ Pi.π (fun k ↦ Over.mk (π (t k))) (α k)) k)
+    (Pi.lift_comp_π (fun k ↦ Pi.π (fun k ↦ Over.mk (π (t k))) (α k)) k)
 
 private abbrev TupleBasis (p : ℕ) (Z : Cᵒᵖ) :=
   Σ t : Fin (p + 1) → ι, Z.unop ⟶ (tupleProduct X U π p t).left

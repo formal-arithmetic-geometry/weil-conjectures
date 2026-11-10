@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Global Hom tensor comparison normalized to the original derived counit
 
@@ -86,6 +88,7 @@ private theorem originalCounitTensorEquation
   rw [← δ.hom.naturality_assoc, reassoc_of% hU,
     tensorHom_comp_tensorHom_assoc, hA, hB]
   exact hcoord
+
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -308,11 +311,11 @@ def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
             (curriedTensor
               (SheafOfModules.{u} (moduleRings T.toRingedSpace))) (.up ℤ) p q n h) ∧
       (derivedPullback g).map (pullbackTensorModelMap X P N) ≫
-          ((schemeHomPullbackCounitData g).counit).app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N)) ≫
+          cast (by rfl) (((schemeHomPullbackCounitData g).counit).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N))) ≫
           DerivedCategory.Q.map φ.hom =
         τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) ≫
-          (((schemeHomPullbackCounitData g).counit).app
+          cast (by rfl) (((schemeHomPullbackCounitData g).counit).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             ((schemeHomPullbackCounitData g).counit).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
@@ -356,11 +359,12 @@ theorem schemeHomOriginalTensorPullbackIso_originalCounit {X Y : Scheme.{u}} (f 
       ((Classical.choose (exists_mixedHomTensorPullbackIso f)).hom.app
         (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N))
       (pullbackTensorModelMap Y P N) _ _ _ _ _ _ _ _ hU hA hB hc
-    simpa only [schemeHomOriginalTensorPullbackIso, Iso.trans_hom, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-      Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
-      NatIso.prod_hom, NatTrans.prod_app_fst, NatTrans.prod_app_snd,
-      tensor_obj, tensor_map, Category.assoc] using he
+    convert he using 1 <;>
+      simp only [schemeHomOriginalTensorPullbackIso, Iso.trans_hom, NatTrans.comp_app,
+        Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
+        NatIso.prod_hom, NatTrans.prod_app_fst, NatTrans.prod_app_snd,
+        tensor_obj, tensor_map, Category.assoc] <;> rfl
   · intro A A' B B' a b
     exact (schemeHomOriginalTensorPullbackIso f).hom.naturality
       (X := (A, B)) (Y := (A', B')) (a, b)

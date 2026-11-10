@@ -193,16 +193,14 @@ theorem finitePresentation_map_directedColimit
   let μ (i : J) : D i →ₗ[S] TensorProduct S R N := (α i).toLinearMap.rTensor N
   have dc {i j k : J} (hij : i ≤ j) (hjk : j ≤ k) (x : D i) :
       d hjk (d hij x) = d (hij.trans hjk) x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a n =>
       simp only [d]
       exact congrArg (fun a ↦ TensorProduct.tmul S a n)
         (ConcreteCategory.congr_hom (F.map_comp (homOfLE hij) (homOfLE hjk)) a).symm
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   have hc {i j : J} (hij : i ≤ j) (x : D i) : μ j (d hij x) = μ i x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a n =>
       simp only [d, μ]
       exact congrArg (fun a ↦ TensorProduct.tmul S a n)
@@ -239,8 +237,7 @@ theorem finitePresentation_map_directedColimit
   have heμ (x : D i) :
       (e i N).hom (μ i x) = TensorProduct.tmul (A i) (1 : R) x := by
     change (e i N).hom.hom (μ i x) = _
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero, TensorProduct.tmul_zero]
+    induction x using TensorProduct.inductionOn with
     | tmul b n =>
       rw [show μ i (TensorProduct.tmul S b n) = (α i b) • (TensorProduct.tmul S (1 : R) n) by
         change TensorProduct.tmul S (α i b) n = _

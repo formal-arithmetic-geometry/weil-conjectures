@@ -68,7 +68,7 @@ noncomputable def isInitialTautologicalElement : IsInitial (tautologicalElement 
       apply Over.OverMorphism.ext
       simp [pointSmallEtale, Etale.forget]⟩)
     (fun Y m ↦ by
-      refine CategoryOfElements.ext _ _ _ ?_
+      refine Functor.Elements.hom_ext ?_
       apply MorphismProperty.Over.Hom.ext
       have := congrArg CommaMorphism.left m.2
       simpa [pointSmallEtale, Etale.forget] using this)

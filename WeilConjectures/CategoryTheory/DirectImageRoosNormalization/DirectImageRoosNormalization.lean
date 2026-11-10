@@ -577,7 +577,7 @@ private theorem ordinary_product_square {G : A ⥤ B} [G.Additive]
         (Pi.π (fun k : ℕ ↦ I.asFunctor.obj (op k)) n) :=
     piComparison_comp_π _ _ n
   rw [Category.assoc, h, ← Functor.map_comp]
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   ext p
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     NatTrans.mapHomologicalComplex_app_f]

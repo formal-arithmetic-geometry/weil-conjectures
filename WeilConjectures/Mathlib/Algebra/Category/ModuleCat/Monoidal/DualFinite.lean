@@ -43,8 +43,7 @@ theorem finite_of_exactPairing (M N : ModuleCat.{u} R) [ExactPairing M N] :
       ((M ◁ ε_ M N) ((α_ M N M).hom (z ⊗ₜ m)) : (M : Type u) ⊗[R] R) =
         LinearMap.lTensor M ψ z := by
     intro z
-    induction z with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul x n => rfl
     | add x z hx hz => simp only [TensorProduct.add_tmul, map_add, hx, hz]
   have h₂ := congr(($(ExactPairing.evaluation_coevaluation M N)).hom ((1 : R) ⊗ₜ[R] m))
@@ -56,8 +55,7 @@ theorem finite_of_exactPairing (M N : ModuleCat.{u} R) [ExactPairing M N] :
     simp
   rw [← h₃, hy]
   clear hy h₃ h₂
-  induction y with
-  | zero => simp
+  induction y using TensorProduct.inductionOn with
   | tmul x n =>
     simp only [φ, LinearMap.comp_apply, LinearMap.rTensor_tmul, LinearMap.lTensor_tmul]
     exact J.smul_mem _ x.2

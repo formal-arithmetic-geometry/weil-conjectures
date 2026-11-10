@@ -147,4 +147,5 @@ lemma bifunctorRHomSelfAdjunction_unit {E : BifunctorEvaluation H}
     (bifunctorRHomSelfAdjunction hI hE).unit = bifunctorRHomBidual E hI :=
   rfl
 
+
 end DerivedCategory

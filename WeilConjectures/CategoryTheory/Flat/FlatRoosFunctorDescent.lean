@@ -206,7 +206,7 @@ local instance (priority := 10000000) commRingSheafCompose
     J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := by
   infer_instance
 
-private theorem flat_representative_localization
+private theorem flat_representative_localization_private
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
     [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
@@ -229,6 +229,10 @@ private theorem flat_representative_localization
     Φ.isLocalizedEquivalence_of_functorial_left_resolutions
       (ρ := T) π (fun X ↦ hπ X) rfl
   exact LocalizerMorphism.IsLocalizedEquivalence.isLocalization Φ DerivedCategory.Q
+
+/-- Public export of the private `flat_representative_localization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias flat_representative_localization := flat_representative_localization_private
 
 private theorem projection_transport
     {E : Type*} [Category* E] {X Y L U V : E}

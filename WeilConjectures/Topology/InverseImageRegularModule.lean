@@ -52,6 +52,11 @@ private def inverseRegularAbIso :
   exact (presheafToSheaf J AddCommGrpCat.{u} ⋙ sheafToPresheaf J AddCommGrpCat.{u}).mapIso
     i.symm ≪≫ sheafifyComposeIso J forgetAb (L.lan.obj R.obj)
 
+private instance (D : Type (u + 1)) [Category.{u} D] [HasColimits.{u} D] :
+    ∀ (A : (Opens Y)ᵒᵖ ⥤ D), (Opens.map f).op.HasLeftKanExtension A :=
+  fun A ↦ Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f).op A)
+
 private theorem inverseImageUnit_hom (D : Type (u + 1)) [Category.{u} D]
     [HasColimits.{u} D] [HasWeakSheafify (Opens.grothendieckTopology X) D]
     (A : Y.Sheaf D) :

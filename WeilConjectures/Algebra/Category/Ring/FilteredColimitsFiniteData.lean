@@ -117,4 +117,5 @@ lemma aeval_map_eq_of_aeval_eq {σ : Type*} {j k : J} (f : j ⟶ k) (y : σ → 
     MvPolynomial.aeval (fun a ↦ F.map f (y a)) P = MvPolynomial.aeval (fun a ↦ F.map f (y a)) Q :=
   by rw [aeval_comp_hom, aeval_comp_hom, h]
 
+
 end CommRingCat

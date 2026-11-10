@@ -87,6 +87,7 @@ lemma cechCochainCompAddEquiv_apply (k : ℕ) (c : CechCochain U (G.op ⋙ P) k)
     cechCochainCompAddEquiv G U P k c y = P.map (cechNerveObjPostIso G U y).inv.left.op (c y) :=
   rfl
 
+
 /-- The isomorphism between the Čech cosimplicial abelian group of `U` with values in
 `G.op ⋙ P` and that of the image family `fun i ↦ (Over.post G).obj (U i)` with values in
 `P`. -/

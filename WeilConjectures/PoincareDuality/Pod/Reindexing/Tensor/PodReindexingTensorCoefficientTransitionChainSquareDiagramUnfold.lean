@@ -48,13 +48,13 @@ attribute [local irreducible] integralCompletedTensor integralOrdinaryScalar
   completedIntegralCommRingSheafUnrestricted coefficientTotalTensor SheafOfModules.monoidalCategory
 attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
-  integralOperationsRoosFunctor integralOperationsTensorOnGood Functor.mapHomologicalComplex
+  integralOperationsRoosFunctor integralOperationsTensorOnGood
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   integralOperationsCommHasDerivedCategory
   podTensorScalarGoodFunctor podTensorScalarGoodComparison podTensorReindexGoodComparison
-    podTensorGoodConstructibleLocalization
+  podTensorGoodConstructibleLocalization
   podTensorGoodConstructible podTensorMixedTensorIso podTensorGoodCoefficientTransition
-    podTensorTensorReindexDerivedChain
+  podTensorTensorReindexDerivedChain
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
 attribute [local irreducible] integralOperationsTensorTowerFunctor
@@ -192,10 +192,10 @@ theorem podTensorDiagramDerivedTransition_app_source
       _hcore).hom.app ((podTensorDiagramSourceRepresentative l E g D _hD T _hT L ι D' _hD' T'
         _hT' S _hcore).obj P) =
       (((isoReductionIntegralInverse l E g).mapDerivedCategoryCompIso
-          (integralOrdinaryScalar l E L ι X)).symm ≪≫
+          (integralOrdinaryScalar l E L ι X)) ≪≫
         mapDerivedCategoryNatIso S.ordinary ≪≫
-        (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryCompIso
-          (isoReductionIntegralInverse l L g)).hom.app
+        ((integralOrdinaryScalar l E L ι Y).mapDerivedCategoryCompIso
+          (isoReductionIntegralInverse l L g)).symm).hom.app
           (DerivedCategory.Q.obj
             ((integralOperationsTensorComplexFunctor l E Y).obj (P.1.obj.obj, P.2.obj.obj))) :=
   rfl

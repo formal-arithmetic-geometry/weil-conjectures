@@ -117,7 +117,9 @@ private theorem finiteScalarMap_stalk
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).isLeftAdjoint
   apply (isColimitOfPreserves E
     (p.isColimitPresheafFiberCocone ((lowerStar (ModuleCat.{u + 1} R) i).obj F).obj)).hom_ext
-  rintro ⟨⟨U, z⟩⟩
+  intro j
+  let U := j.unop.1
+  let z := j.unop.2
   change E.map (p.toPresheafFiber U z _) ≫ _ =
     E.map (p.toPresheafFiber U z _) ≫
       E.map (stalkRestrict (ModuleCat.{u + 1} R) i y t F) ≫
@@ -126,9 +128,9 @@ private theorem finiteScalarMap_stalk
     ((lowerStar (ModuleCat.{u + 1} R) i).obj F) U z)]
   erw [reassoc_of% (p.toPresheafFiber_naturality (finiteScalarMap φ i F).hom U z)]
   erw [toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} A) i y t
-    ((scalar φ D).obj F) ⟨U, z⟩]
+    ((scalar φ D).obj F) (p.fiber.elementsMk U z)]
   erw [← E.map_comp_assoc,
-    toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} R) i y t F ⟨U, z⟩]
+    toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} R) i y t F (p.fiber.elementsMk U z)]
   erw [scalarStalkIso_germ]
   erw [← Category.assoc, finiteScalarMap_sections]
 
@@ -151,10 +153,10 @@ private theorem finiteScalarMap_isIso_stalk
             (stalkIsoPi (ModuleCat.{u + 1} A) i y ((scalar φ D).obj F)).hom = e.hom := by
     apply Pi.hom_ext
     intro t
-    simp only [e, Category.assoc, stalkIsoPi_hom, Pi.lift_π, Iso.trans_hom,
+    simp only [e, Category.assoc, stalkIsoPi_hom, Pi.lift_comp_π, Iso.trans_hom,
       Functor.mapIso_hom, Pi.mapIso_hom_π, PreservesProduct.iso_hom,
       piComparison_comp_π_assoc]
-    rw [← E.map_comp_assoc, Pi.lift_π]
+    rw [← E.map_comp_assoc, Pi.lift_comp_π]
     exact finiteScalarMap_stalk φ i F y t
   have : IsIso
       ((scalarStalkIso φ y ((lowerStar (ModuleCat.{u + 1} R) i).obj F)).hom ≫

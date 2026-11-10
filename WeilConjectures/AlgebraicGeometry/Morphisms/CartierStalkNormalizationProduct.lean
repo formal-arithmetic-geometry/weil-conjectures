@@ -109,7 +109,7 @@ theorem cartier_stalk_normalization_product
           Spec.map (CommRingCat.ofHom (algebraMap K (E i)))) ≫
             Spec.map (CommRingCat.ofHom (algebraMap R K)) := by
       ext i
-      simp only [Sigma.ι_desc, Sigma.ι_desc_assoc, ← Spec.map_comp]
+      simp only [Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc, ← Spec.map_comp]
       rfl
     rw [hmap]
     rw [Iso.trans_hom, Category.assoc, ← Category.assoc eF.hom, heF]
@@ -166,7 +166,7 @@ theorem cartier_stalk_normalization_product
     rw [← he]
     change _ = Sigma.ι (fun i ↦ Spec (C i)) i ≫ e.inv ≫ e.hom ≫
       Sigma.desc (fun i ↦ Spec.map (CommRingCat.ofHom (algebraMap R (A i))))
-    simp only [Iso.inv_hom_id_assoc, Sigma.ι_desc]
+    simp only [Iso.inv_hom_id_assoc, Sigma.ι_comp_desc]
   have hfin : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap R (A i)))) :=
     hmap.symm ▸ hm
   exact RingHom.finite_algebraMap.mp ((IsFinite.SpecMap_iff _).mp hfin)

@@ -88,11 +88,15 @@ private lemma copowerTensorIso_hom {I : Type v} (M : Mod C R) [HasCoproduct (fun
     (e : (∐ fun _ : I ↦ regular R) ≅ (comap φ).obj (regular S)) :
     (copowerTensorIso φ M e).hom =
       Sigma.desc (fun i ↦ (λ_ M).inv ≫ ((Sigma.ι _ i ≫ e.hom) ▷ M)) := by
+  have : HasColimitsOfShape (Discrete I) C :=
+    (IsGrothendieckAbelian.hasColimits C).has_colimits_of_shape _
+  have : HasColimitsOfShape (Discrete I) (Mod C R) :=
+    hasColimitsOfShape_of_hasColimitsOfShape_createsColimitsOfShape (forget R)
   apply Sigma.hom_ext
   intro i
-  simp only [copowerTensorIso, Iso.trans_hom, Sigma.ι_desc,
+  simp only [copowerTensorIso, Iso.trans_hom, Sigma.ι_comp_desc,
     asIso_hom, Functor.mapIso_hom]
-  rw [HasColimit.isoOfNatIso_ι_hom_assoc]
+  rw [HasColimit.ι_isoOfNatIso_hom_assoc]
   change (λ_ M).inv ≫ Sigma.ι (fun _ : I ↦ (tensorRight M).obj (regular R)) i ≫
     sigmaComparison (tensorRight M) (fun _ : I ↦ regular R) ≫
       (tensorRight M).map e.hom = _
@@ -107,6 +111,10 @@ private lemma isIso_copowerAdjUnitDesc {I : Type v} (M : Mod C R) [HasCoproduct 
       (extendRestrictAdjunction φ).unit.app M ≫ (comap φ).map
         (qbar_scalarEndo (S := S) (η[R] ≫ (Sigma.ι _ i ≫ e.hom).hom)
           ((extendScalars φ).obj M))) := by
+  have : HasColimitsOfShape (Discrete I) C :=
+    (IsGrothendieckAbelian.hasColimits C).has_colimits_of_shape _
+  have : HasColimitsOfShape (Discrete I) (Mod C R) :=
+    hasColimitsOfShape_of_hasColimitsOfShape_createsColimitsOfShape (forget R)
   have hu : (extendRestrictAdjunction φ).unit.app M = extendUnit φ M := by
     change extendUnit φ M ≫ (comap φ).map (𝟙 _) = _
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
@@ -118,7 +126,7 @@ private lemma isIso_copowerAdjUnitDesc {I : Type v} (M : Mod C R) [HasCoproduct 
     rw [copowerTensorIso_hom]
     apply Sigma.hom_ext
     intro i
-    simp only [Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
     dsimp only [t]
     rw [Category.assoc]
     exact extendUnit_qbar_scalarEndo_tensor φ (Sigma.ι (fun _ : I ↦ regular R) i ≫ e.hom) M

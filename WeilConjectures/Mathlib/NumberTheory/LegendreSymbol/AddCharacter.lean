@@ -93,6 +93,7 @@ theorem compTrace_compTrace [IsScalarTower K L M] [Module.Free K L] [Module.Fini
   ext x
   simp [Algebra.trace_trace]
 
+
 end CompTrace
 
 section Orthogonality
@@ -109,6 +110,7 @@ theorem sum_const_mul_eq_ite {A : Type*} [AddGroup A] [Fintype A] [IsDomain R]
   split_ifs with h
   · rw [sum_eq_card_of_eq_one h]
   · rw [sum_eq_zero_of_ne_one h, mul_zero]
+
 
 /-- **Additive orthogonality over `L`.** For a nontrivial additive character `ψ` of `K`, a
 finite separable extension `L / K` with `L` finite and the induced character

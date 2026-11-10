@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPuritySingleComparisonSquare
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Passing a comparison from homotopy categories to cochain complexes -/
 
@@ -28,7 +29,7 @@ noncomputable def purityCochainComparisonOfHomotopy
     whiskerLeft (F.mapHomologicalComplex (.up ℤ)) (DerivedCategory.quotientCompQhIso D).hom
 
 /-- On a complex, all the quotient comparisons are identity maps. -/
-lemma purityCochainComparisonOfHomotopy_app
+private lemma purityCochainComparisonOfHomotopy_app
     (F : C ⥤ D) [F.Additive] (LF : DerivedCategory C ⥤ DerivedCategory D)
     (η : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     (K : CochainComplex C ℤ) :

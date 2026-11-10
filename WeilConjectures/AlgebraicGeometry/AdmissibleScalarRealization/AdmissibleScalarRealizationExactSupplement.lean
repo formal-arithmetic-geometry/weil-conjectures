@@ -171,6 +171,7 @@ import all Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import all Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
+import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
 
 /-!
 # Exact scalar realization for admissible continuous coefficients
@@ -404,24 +405,10 @@ private local instance constantFunctions_locallySurjective [Finite A] [DiscreteT
     intro x
     exact x.property.symm
 
-private local instance constantFunctions_locallyInjective :
-    Presheaf.IsLocallyInjective (coherentTopology Profinite.{u}) (constantFunctions A) where
-  equalizerSieve_mem {S} a b h := by
-    by_cases hab : a = b
-    · subst b
-      exact (coherentTopology Profinite).superset_covering
-        (fun _ _ _ ↦ rfl) ((coherentTopology Profinite).top_mem _)
-    · have : IsEmpty S.unop := ⟨fun x ↦ hab (ULift.ext a b (congrArg
-        (fun t : ULift.{u + 1} C(S.unop, A) ↦ t.down x) h))⟩
-      let U : PEmpty → Profinite.{u} := PEmpty.elim
-      let incl : ∀ i, U i ⟶ S.unop := fun i ↦ i.elim
-      have hι : EffectiveEpiFamily U incl :=
-        Profinite.effectiveEpiFamily_of_jointly_surjective U incl (fun x ↦ isEmptyElim x)
-      exact coherentTopology.mem_sieves_of_hasEffectiveEpiFamily _
-        ⟨PEmpty, inferInstance, U, incl, hι, fun i ↦ i.elim⟩
-
 private theorem finite_scalar_iso [Finite A] [DiscreteTopology A] :
     IsIso (scalarToContinuous A) := by
+  have : Presheaf.IsLocallyInjective (coherentTopology Profinite.{u})
+      (constantFunctions A) := constantFunctions_locallyInjective A
   let J := coherentTopology Profinite.{u}
   have hφ : J.W (A := Ab.{u + 1}) (constantFunctions A) :=
     J.W_of_isLocallyBijective (constantFunctions A)

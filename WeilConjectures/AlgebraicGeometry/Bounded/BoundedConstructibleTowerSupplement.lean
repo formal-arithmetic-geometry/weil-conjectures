@@ -107,17 +107,23 @@ private theorem normalizedDerivedAdjunction
         ((L.mapHomologicalComplex (.up ℤ)).obj K)) = _ at hp
     simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
       Adjunction.mapHomotopyCategory_unit_app_quotient] at hp
-    dsimp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      Functor.mapHomotopyCategoryFactors, Functor.map_id,
-      Category.id_comp, Category.comp_id] at hp ⊢
-    erw [LD.map_id, DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp]
-    erw [R.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id, Category.comp_id,
-      Category.comp_id] at hp
-    erw [Category.comp_id]
-    erw [Category.id_comp] at hp
-    exact hp
+    simp only [Functor.mapHomotopyCategoryFactors,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at hp ⊢
+    erw [DerivedCategory.Qh.map_id, Category.id_comp]
+    erw [DerivedCategory.Qh.map_id, Category.comp_id] at hp
+    have hp' := congrArg (fun f ↦ f ≫ (DerivedCategory.quotientCompQhIso A).hom.app
+      ((R.mapHomologicalComplex (.up ℤ)).obj ((L.mapHomologicalComplex (.up ℤ)).obj K))) hp
+    simp only [Category.assoc, Iso.inv_hom_id_app] at hp'
+    erw [Category.comp_id] at hp'
+    erw [DerivedCategory.quotientCompQhIso_hom_naturality] at hp'
+    apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app K)).mp
+    simp only [Functor.map_comp, Category.assoc]
+    have hunit := d.unit.naturality ((DerivedCategory.quotientCompQhIso A).hom.app K)
+    simp only [Functor.id_map, Functor.comp_map] at hunit
+    rw [reassoc_of% hunit, ← R.mapDerivedCategory.map_comp_assoc, ← LD.map_comp,
+      Iso.hom_inv_id_app]
+    erw [LD.map_id, R.mapDerivedCategory.map_id, Category.id_comp]
+    exact hp'
   refine ⟨d, fun K _ ↦ hn K, ?_⟩
   intro d' hd'
   have hu (K : CochainComplex A ℤ) (hK : P K) :
@@ -162,7 +168,7 @@ include h in
 Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower). -/
 def pbcDerivedRestrictComp : pbcDerivedRestrict ψ ⋙ pbcDerivedRestrict φ ≅
     pbcDerivedRestrict χ :=
-  (Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ) ≪≫
     Functor.mapDerivedCategoryNatIso (pbcRestrictComp φ ψ χ h)
 
 /-- The reduction transition is the adjunct of the direct scalar-extension unit.

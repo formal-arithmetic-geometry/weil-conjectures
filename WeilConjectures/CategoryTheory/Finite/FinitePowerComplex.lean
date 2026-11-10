@@ -110,7 +110,7 @@ def finitePowerComplexIso (d : ℕ) (P : CochainComplex A ℤ) :
       intro i
       simp only [Category.assoc, piComparison_comp_π, Category.id_comp]
       change ((finitePowerComplexMap d P) ≫ Pi.π (fun _ : Fin d ↦ P) i).f k = _
-      rw [finitePowerComplexMap, Pi.lift_π]
+      rw [finitePowerComplexMap, Pi.lift_comp_π]
       rfl
     have : IsIso ((finitePowerComplexMap d P).f k ≫
         piComparison (HomologicalComplex.eval A (.up ℤ) k) (fun _ : Fin d ↦ P)) := by
@@ -127,7 +127,7 @@ theorem finitePowerComplexIso_projection (d : ℕ) (P : CochainComplex A ℤ)
     ((finitePowerComplexIso d P).hom ≫ Pi.π (fun _ : Fin d ↦ P) i).f k =
       Pi.π (fun _ : Fin d ↦ P.X k) i := by
   change (finitePowerComplexMap d P ≫ _).f k = _
-  rw [finitePowerComplexMap, Pi.lift_π]
+  rw [finitePowerComplexMap, Pi.lift_comp_π]
 
 end
 

@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
@@ -27,9 +30,7 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 set_option maxHeartbeats 1500000 in
 -- The quotient comparison normalization unfolds several derived-category factors.
@@ -70,12 +71,14 @@ theorem affineSpectrum_counit_square
     let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
       (.up ℤ)).obj P
     (derivedPullback X'.isoSpec.inv).map
-        (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
+        (cast (by rfl)
+          (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
+          DerivedCategory.Q.obj Pg ⟶ (derivedPullback g').obj (DerivedCategory.Q.obj P)) ≫
       (affineSpectrumDerivedPullbackIso g').inv.app (DerivedCategory.Q.obj P) =
     (isoPullbackComplexCounitIso X'.isoSpec.inv).hom.app Pg ≫
       DerivedCategory.Q.map (affineSpectrumTensorComplexIso g' P).inv ≫
-      inv ((counit (Spec.map g'.appTop)).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P0)) ≫
+      cast (by rfl) (inv ((counit (Spec.map g'.appTop)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P0))) ≫
       (derivedPullback (Spec.map g'.appTop)).map
         ((isoPullbackComplexCounitIso X.isoSpec.inv).inv.app P) := by
   have _hFlat := hP

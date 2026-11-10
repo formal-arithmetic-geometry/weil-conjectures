@@ -114,11 +114,11 @@ private theorem localized_kernel_eq
     · rintro ⟨j, hj, rfl⟩
       refine ⟨(u j * t j) ^ e, ⟨j, hj, rfl⟩, ?_⟩
       have hne : j ≠ i := by intro h; subst j; omega
-      simp only [g, f, if_neg hne, if_pos hj, map_pow]
+      simp only [g, f, ite_eq_right hne, ite_eq_left hj, map_pow]
     · rintro ⟨z, ⟨j, hj, rfl⟩, rfl⟩
       refine ⟨j, hj, ?_⟩
       have hne : j ≠ i := by intro h; subst j; omega
-      simp only [g, f, if_neg hne, if_pos hj, map_pow]
+      simp only [g, f, ite_eq_right hne, ite_eq_left hj, map_pow]
   have hreg : IsSMulRegular (A ⧸ J) (algebraMap Λ A (u i * l)) := by
     have h := hpowers.toIsWeaklyRegular.regular_mod_prev i.val (by simp)
     rw [hJ, Ideal.smul_eq_mul, Ideal.mul_top] at h

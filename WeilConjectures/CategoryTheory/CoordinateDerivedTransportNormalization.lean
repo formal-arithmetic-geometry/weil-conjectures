@@ -214,7 +214,7 @@ theorem coordinateExact_single_unit
   erw [Iso.inv_hom_id_app]
   simp only [Category.assoc]
   change ((L.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 X).inv ≫
-    L.rightDerivedFunctorPlusUnit.app _ ≫ L.rightDerivedFunctorPlus.map
+    L.rightDerivedFunctorPlusUnith.app _ ≫ L.rightDerivedFunctorPlus.map
       (singleTransport C X).hom) ≫ _ ≫ _ = _
   rw [singleTransport_hom, Functor.map_id]
   erw [Category.comp_id]

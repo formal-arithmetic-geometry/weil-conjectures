@@ -825,14 +825,14 @@ theorem unboundedProperOpenInterchange (A : Type (u + 1)) [CommRing A] [Finite A
         (Γ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂)).hom.app K =
           (Functor.mapDerivedCategoryNatIso
               (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
               (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫
             D((j)_!open[ModuleCat.{u + 1} A]).map ((Γ k r p i sq₁).hom.app K) ≫
             (Γ l p q j sq₂).hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫
             R((q)_*[ModuleCat.{u + 1} A]).map
               ((Functor.mapDerivedCategoryNatIso
                   (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
-                Functor.mapDerivedCategoryCompIso _ _).inv.app K)) ∧
+                (Functor.mapDerivedCategoryCompIso _ _).symm).inv.app K)) ∧
       (∀ {U V : Scheme.{u}} [IsNoetherian U] [IsNoetherian V]
         (k : U ⟶ V) [IsOpenImmersion k] (K : DerivedCategoryModule A U),
         (Γ k (𝟙 U) (𝟙 V) k ⟨by simp⟩).hom.app K =

@@ -102,7 +102,7 @@ theorem liftToPlusObjLimitObj'_fac {K : Type s} [SmallCategory K] [HasLimitsOfSh
   rw [Category.assoc, Category.assoc, ← Iso.eq_inv_comp, Iso.inv_comp_eq, Iso.inv_comp_eq]
   refine colimit.hom_ext (fun j => ?_)
   dsimp [plusMap]
-  simp only [HasColimit.isoOfNatIso_ι_hom_assoc, ι_colimMap]
+  simp only [HasColimit.ι_isoOfNatIso_hom_assoc, ι_colimMap]
   dsimp [IsLimit.conePointUniqueUpToIso, HasLimit.isoOfNatIso, IsLimit.map]
   rw [limit.lift_π]
   dsimp

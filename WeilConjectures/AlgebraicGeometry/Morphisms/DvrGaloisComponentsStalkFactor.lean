@@ -148,7 +148,7 @@ theorem dvr_galois_components_stalk_factor
     congr 1
     apply Sigma.hom_ext
     intro i
-    simp only [Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
     rw [← Spec.map_comp]
     rfl
   have hcharts :=

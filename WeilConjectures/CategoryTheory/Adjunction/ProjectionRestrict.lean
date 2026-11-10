@@ -127,6 +127,7 @@ lemma ι_map_exceptionalProjection_restrictFullyFaithful (K : PX.FullSubcategory
   change I.map (PX.ι.map (K ◁ _)) = _
   rw [ObjectProperty.ι_map, ObjectProperty.whiskerLeft_hom, ← ObjectProperty.ι_map, hεB]
 
+
 end Exceptional
 
 end CategoryTheory.Adjunction

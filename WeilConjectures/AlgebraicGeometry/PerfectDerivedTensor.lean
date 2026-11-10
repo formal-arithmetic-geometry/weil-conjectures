@@ -134,8 +134,8 @@ private theorem strictlyPerfect_totalTensor (X : Scheme.{uT}) (U : X.Opens)
       dsimp only [forwardMap, backMap]
       rw [← Category.assoc, HomologicalComplex.ι_mapBifunctorDesc]
       by_cases hp : p ∈ Finset.Icc a b
-      · simp only [dif_pos hp, biproduct.ι_desc, Category.comp_id]
-      · rw [dif_neg hp, zero_comp]
+      · simp only [dite_eq_left hp, biproduct.ι_desc, Category.comp_id]
+      · rw [dite_eq_right hp, zero_comp]
         have hz : IsZero (A.X p ⊗ B.X q) :=
           (tensorRight (B.X q)).map_isZero (hAb p (by
             simp only [Finset.mem_Icc, not_and_or, not_le] at hp

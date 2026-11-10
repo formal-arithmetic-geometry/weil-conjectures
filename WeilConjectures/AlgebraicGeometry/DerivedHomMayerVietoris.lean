@@ -108,7 +108,7 @@ def derivedOpenHomRestriction (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U
   let B := SheafOfModules.overMap.{u} (moduleRings X) i
   letI : PreservesFiniteLimits (A ⋙ B) := comp_preservesFiniteLimits A B
   letI : PreservesFiniteColimits (A ⋙ B) := comp_preservesFiniteColimits A B
-  let e := (Functor.mapDerivedCategoryCompIso A B).symm ≪≫
+  let e := Functor.mapDerivedCategoryCompIso A B ≪≫
     Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u} (moduleRings X) i)
   e.inv.app E ≫ (SheafOfModules.overMap.{u} (moduleRings X) i).mapDerivedCategory.map f ≫
     e.hom.app F

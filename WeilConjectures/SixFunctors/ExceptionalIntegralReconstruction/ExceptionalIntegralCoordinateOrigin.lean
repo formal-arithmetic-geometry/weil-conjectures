@@ -133,7 +133,7 @@ theorem exceptionalIntegralCoordinateOrigin (W : Scheme.{u})
       ((coefficientSequenceDerivedEvaluation l E W n).obj M) :=
     R.mapDerivedCategory.unitIso.app (V.mapDerivedCategory.obj L.obj) ≪≫
       R.inverse.mapDerivedCategory.mapIso
-        ((Functor.mapDerivedCategoryCompIso V R.functor).symm.app L.obj ≪≫ eL)
+        ((Functor.mapDerivedCategoryCompIso V R.functor).app L.obj ≪≫ eL)
   let T := integralExceptionalEtaleRealization l E W n
   let : T.asEquivalence.functor.Additive :=
     inferInstanceAs (integralExceptionalEtaleRealization l E W n).Additive

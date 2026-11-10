@@ -66,7 +66,7 @@ theorem exists_depth_eq_ext_degree {R : Type u} [CommRing R] [IsNoetherianRing R
   have hdef : depth (R := R) M = sSup {n : ℕ∞ | ∃ rs : List R,
       RingTheory.Sequence.IsRegular M rs ∧ (∀ r ∈ rs, r ∈ maximalIdeal R) ∧
         n = (rs.length : ℕ∞)} := by
-    simp only [depth, Ideal.depth, if_neg hm]
+    simp only [depth, Ideal.depth, ite_eq_right hm]
   have hfinite : depth (R := R) M ≠ ⊤ := by
     intro heq
     have hbound := (depth_le_supportDim (R := R) M).trans

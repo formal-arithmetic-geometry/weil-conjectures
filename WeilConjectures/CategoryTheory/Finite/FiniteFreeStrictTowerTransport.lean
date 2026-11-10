@@ -237,9 +237,9 @@ private theorem towerProductComparison_middle
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift, Functor.map_sub,
     Functor.map_id, Preadditive.sub_comp, Category.id_comp, Preadditive.comp_sub,
-    Category.comp_id, Category.assoc, Limits.Pi.map_π, Pi.lift_π,
+    Category.comp_id, Category.assoc, Limits.Pi.map_π, Pi.lift_comp_π,
     piComparison_comp_π_assoc]
-  rw [← G.map_comp_assoc, Pi.lift_π]
+  rw [← G.map_comp_assoc, Pi.lift_comp_π]
   rw [G.map_comp, Category.assoc]
   simp only [Limits.Pi.map_π_assoc, piComparison_comp_π_assoc]
   congr 1
@@ -767,9 +767,9 @@ private theorem ordinaryTowerComparison_inclusion
           (fun n : ℕ ↦ X.asFunctor.obj (op n)) := by
   apply Pi.hom_ext
   intro n
-  rw [Category.assoc, strictTowerLimitInclusion, Limits.Pi.lift_π, Category.assoc]
+  rw [Category.assoc, strictTowerLimitInclusion, Limits.Pi.lift_comp_π, Category.assoc]
   erw [piComparison_comp_π]
-  rw [← Functor.map_comp, strictTowerLimitInclusion, Limits.Pi.lift_π]
+  rw [← Functor.map_comp, strictTowerLimitInclusion, Limits.Pi.lift_comp_π]
   ext k
   exact preservesLimitIso_hom_π F (X.X k) (op n)
 
@@ -1211,7 +1211,7 @@ private noncomputable def tensorFreePowerIso
       ((biproduct.isoCoproduct (fun _ : I ↦ R)).inv ≫
         biproduct.π _ j ≫ e.hom) ▷ M ≫ (λ_ M).hom := by
     simp only [i, Iso.trans_hom, Category.assoc, biproduct.isoProduct_hom,
-      Pi.lift_π, biproduct.mapIso_hom, biproduct.map_π, Functor.mapBiproduct_hom,
+      Pi.lift_comp_π, biproduct.mapIso_hom, biproduct.map_π, Functor.mapBiproduct_hom,
       Functor.mapIso_hom, Iso.symm_hom, whiskerRightIso_hom,
       comp_whiskerRight]
     erw [biproduct.lift_π_assoc]
@@ -1334,6 +1334,9 @@ private theorem scalarFiniteCoordinates
   classical
   obtain ⟨d, ⟨e⟩⟩ := hfree
   obtain ⟨i⟩ := restrictedScalarTensorIso a D
+  have (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J O).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let j := e.symm ≪≫ Sigma.reindex (Equiv.ulift : ULift.{r} (Fin d) ≃ Fin d)
     (fun _ ↦ unit (derivedChangeRingIndependentCoefficients J O))
   exact ⟨d, ⟨i ≪≫ (tensoringLeft _).mapIso j ≪≫
@@ -1386,6 +1389,9 @@ private theorem scalarFiniteExact
     (derivedChangeRingIndependentCoefficients J O) ⥤ _) ⋙ lim
   let : PreservesLimitsOfSize.{0, 0} P := inferInstance
   let : PreservesFiniteColimits P := by
+    have (I : Type r) : HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+        (derivedChangeRingIndependentCoefficients J O).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
     let : PreservesFiniteColimits (Functor.const (Discrete (Fin d)) ⋙
         (colim : (Discrete (Fin d) ⥤ ringedSiteModules.{r}
           (derivedChangeRingIndependentCoefficients J O)) ⥤ _)) := inferInstance

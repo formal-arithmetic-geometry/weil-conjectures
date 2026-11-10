@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.AlgebraicGeometry.AffineModuleComplexRepresentative
 import WeilConjectures.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint
@@ -34,6 +35,11 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+local instance instAdditiveModuleCatExtendScalars_affineOpenLocalizedModel
+    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
+    (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+  (ModuleCat.extendRestrictScalarsAdj.{u} f).left_adjoint_additive
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent derived object on an affine scheme, pseudo-coherent on a
@@ -117,7 +123,8 @@ theorem exists_affine_open_localized_model
           ((@Functor.mapHomologicalComplex ℤ _ _ _ _ _ _
             (tilde.functor (X.presheaf.obj (.op ⊤)))
             ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M) := by
-      apply HomologicalComplex.Hom.isoOfComponents (fun i ↦ t.app (M.X i))
+      exact HomologicalComplex.Hom.isoOfComponents (fun i ↦ t.app (M.X i))
+        (fun i j _ ↦ (t.hom.naturality (M.d i j)).symm)
     have eTM : DerivedCategory.Q.obj
         ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≅ E'.obj :=
       DerivedCategory.Q.mapIso c ≪≫ eM.symm

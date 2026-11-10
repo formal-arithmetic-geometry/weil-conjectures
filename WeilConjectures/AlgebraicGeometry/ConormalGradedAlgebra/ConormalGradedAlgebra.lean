@@ -453,9 +453,9 @@ private theorem affineData_augmentation (A : AffineData i) :
     · subst n
       change d.val.app (op (i ⁻¹ᵁ U)) (representative i 0 U a) =
         if (0 : ℕ) = 0 then i.app U a else 0
-      rw [if_pos rfl]
+      rw [ite_eq_left rfl]
       exact hd U a
-    · simp only [k, dif_neg hn, if_neg hn]
+    · simp only [k, dite_eq_right hn, ite_eq_right hn]
       rfl
   have hone (U : X.affineOpens) : q (i ⁻¹ᵁ U.1) 1 = 1 := by
     have h := A.constants U.1 (1 : Γ(X, U.1))
@@ -485,9 +485,9 @@ private theorem affineData_augmentation (A : AffineData i) :
                 (show Γ(X, U.1) from a) * (show Γ(X, U.1) from b) := hc
             rw [hc']
             exact (i.app U.1).hom.map_mul _ _
-          · simp only [Nat.zero_add, if_neg hn, mul_zero]
+          · simp only [Nat.zero_add, ite_eq_right hn, mul_zero]
         · have hmn : m + n ≠ 0 := by omega
-          simp only [if_neg hm, if_neg hmn, zero_mul]
+          simp only [ite_eq_right hm, ite_eq_right hmn, zero_mul]
       · intro b c hb hc
         exact addHom_mul_add (q (i ⁻¹ᵁ U.1)) _ b c hb hc
     · intro a c ha hc b

@@ -55,8 +55,7 @@ theorem annihilator_element_flat_base_change {R : Type u} {S : Type v}
     change r * x = 0 ↔ r ∈ (Submodule.span R ({x} : Set R)).annihilator
     rw [Submodule.mem_annihilator_span_singleton, smul_eq_mul]
   have he (t : TensorProduct R R S) : e (f.rTensor S t) = e t * φ x := by
-    induction t with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul r s =>
       change φ (r * x) * s = (φ r * s) * φ x
       simp [mul_comm, mul_left_comm]
@@ -75,8 +74,7 @@ theorem annihilator_element_flat_base_change {R : Type u} {S : Type v}
     have hm : e (I.subtype.rTensor S t) ∈
         Ideal.map φ (Module.annihilator R (Ideal.span ({x} : Set R))) := by
       clear ht
-      induction t with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul r z =>
         have hr : (r : R) ∈ Module.annihilator R (Ideal.span ({x} : Set R)) :=
           hI ▸ r.property

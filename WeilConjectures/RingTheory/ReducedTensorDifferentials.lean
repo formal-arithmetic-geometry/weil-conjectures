@@ -220,8 +220,7 @@ theorem reduced_tensor_differentials
     rfl
   have hder : eDer = dD := by
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul s b =>
       have ht : s ⊗ₜ[A] b = (s ⊗ₜ[A] (1 : B)) * (1 ⊗ₜ[A] b) := by simp
       rw [ht, Derivation.leibniz, Derivation.leibniz, heB, heS]

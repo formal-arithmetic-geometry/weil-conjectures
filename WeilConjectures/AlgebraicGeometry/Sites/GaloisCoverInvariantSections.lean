@@ -69,7 +69,7 @@ noncomputable def graph (g : G) : c.P ⟶ pullback c.π c.π :=
 lemma graph_eq (g : G) :
     c.graph g = Sigma.ι (fun _ : G ↦ c.P) g ≫ Sigma.desc fun g : G ↦
       pullback.lift (f := c.π) (g := c.π) (c.smul g) (𝟙 c.P) (by simp [c.smul_π]) :=
-  (Sigma.ι_desc _ _).symm
+  (Sigma.ι_comp_desc _ _).symm
 
 instance isOpenImmersion_graph (g : G) : IsOpenImmersion (c.graph g) := by
   have := c.isIso_sigmaDesc

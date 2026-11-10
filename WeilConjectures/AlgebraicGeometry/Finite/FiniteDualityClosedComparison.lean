@@ -281,7 +281,7 @@ private theorem closedComparisonAlpha_isIso
         (fun n ↦ ProEtale.isZero_upperStar_lowerStar_of_disjoint C i j hij.disjoint
           ((DerivedCategory.homologyFunctor _ n).obj P))).of_iso
           (((ProEtale.lowerStar C i).mapDerivedCategoryCompIso
-            (ProEtale.upperStar C j)).symm.app P)
+            (ProEtale.upperStar C j)).app P)
     exact hz'.of_iso (JP.mapIso
       ((ProEtale.lowerStar C i).rightDerivedFunctorIsoMapDerivedCategory.app P))
   have hkill (N : DerivedCategory (Sheaf (Scheme.ProEt.topology U) C)) :

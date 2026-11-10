@@ -31,8 +31,8 @@ prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures

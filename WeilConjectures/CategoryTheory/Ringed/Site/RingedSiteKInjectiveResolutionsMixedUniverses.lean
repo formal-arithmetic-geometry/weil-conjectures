@@ -139,6 +139,7 @@ private noncomputable def liftedExtensionDesc
     induction x.down using DirectSum.induction_on with
     | zero => simp
     | of φ t =>
+      change R.obj.obj V at t
       change M.map a ((DirectSum.toModule (R.obj.obj V) (V.unop ⟶ U) (M.obj V)
         (fun ψ ↦ LinearMap.toSpanSingleton _ _ (M.map ψ.op m)))
           (DirectSum.lof (R.obj.obj V) (V.unop ⟶ U)
@@ -146,14 +147,14 @@ private noncomputable def liftedExtensionDesc
       rw [DirectSum.toModule_lof]
       dsimp [extensionByZeroPresheafRestrictAdd]
       erw [DirectSum.toAddMonoid_of]
-      change M.map a (t • M.map φ.op m) =
+      change M.map a (t • (M.map φ.op m : M.obj V)) =
         (DirectSum.toModule (R.obj.obj W) (W.unop ⟶ U) (M.obj W)
           (fun ψ ↦ LinearMap.toSpanSingleton _ _ (M.map ψ.op m)))
           (DirectSum.lof (R.obj.obj W) (W.unop ⟶ U)
             (fun _ ↦ R.obj.obj W) (a.unop ≫ φ) (R.obj.map a t))
       rw [DirectSum.toModule_lof]
-      change M.map a (t • M.map φ.op m) =
-        R.obj.map a t • M.map (a.unop ≫ φ).op m
+      change M.map a (t • (M.map φ.op m : M.obj V)) =
+        R.obj.map a t • (M.map (a.unop ≫ φ).op m : M.obj W)
       rw [M.map_smul, ← M.map_comp_apply]
       rfl
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy

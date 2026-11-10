@@ -280,7 +280,7 @@ theorem milnor (X : Scheme.{t})
         · intro n
           change ev.map (Pi.lift (fun n : ℕ ↦ Pi.π F (n + 1) ≫ t n)) ≫
               ev.map (Pi.π F n) = ev.map (Pi.π F (n + 1)) ≫ ev.map (t n)
-          rw [← ev.map_comp, ← ev.map_comp, Pi.lift_π]
+          rw [← ev.map_comp, ← ev.map_comp, Pi.lift_comp_π]
         · exact ModuleCat.mittagLeffler_of_isMittagLeffler (hML W hW hw)
       exact ((S.map ev).exact_iff_epi (by simp [S])).2 he
     exact (isZero_cokernel_of_epi (towerTransitionEndomorphism (K := F) t)).of_iso (e₁ M)

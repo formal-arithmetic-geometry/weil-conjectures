@@ -44,7 +44,7 @@ open QuotientChange IntegralQuotient
 open ModuleRingedComparison
 
 attribute [local semireducible] QuotientChange.L
-attribute [local implicit_reducible] QuotientChange.L CategoryTheory.Functor.asEquivalence
+attribute [local implicit_reducible] QuotientChange.L
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

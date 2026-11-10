@@ -72,7 +72,7 @@ lemma isAddTorsion_uliftIntegersModPow (l : ℕ) [Fact l.Prime] (E : Type) [Fiel
   intro x
   refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨l ^ n, pow_pos (Fact.out : l.Prime).pos n, ?_⟩
   obtain ⟨y, hy⟩ := integersModPowMk_surjective l E n x.down
-  refine ULift.ext _ _ ?_
+  refine ULift.ext ?_
   change (l ^ n) • x.down = 0
   rw [← hy, nsmul_eq_mul, ← map_natCast (integersModPowMk l E n), ← map_mul]
   exact Ideal.Quotient.eq_zero_iff_mem.2

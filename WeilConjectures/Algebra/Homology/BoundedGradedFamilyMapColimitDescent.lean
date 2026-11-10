@@ -91,7 +91,7 @@ theorem exists_bounded_graded_maps_of_directed_colimit
     else 0
   refine ⟨j.val, j.property, d, e', ?_, ?_⟩
   · intro m n h
-    exact dif_neg h
+    exact dite_eq_right h
   · intro m n
     by_cases h : m + 1 = n
     · subst n
@@ -100,7 +100,7 @@ theorem exists_bounded_graded_maps_of_directed_colimit
       have hh' := congrArg (fun z => (c.app (M m)).inv ≫ z ≫ (e (m + 1)).hom) hh
       simpa [d, e', Category.assoc] using hh'.symm
     · dsimp [d]
-      rw [dif_neg h, hδ m n h, E.map_zero]
+      rw [dite_eq_right h, hδ m n h, E.map_zero]
       simp
 
 end ModuleCat

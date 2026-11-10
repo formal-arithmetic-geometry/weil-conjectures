@@ -604,7 +604,7 @@ theorem isIso_sheafFiber_map_image_ι_comp_stalkRestrict (Ψ : AddChar k Λ)
     have h1 : u ≫ (Scheme.pointSmallEtale y).sheafFiber.map ι = 0 := by
       rw [← cancel_mono (Pi.lift ρ), zero_comp]
       refine Pi.hom_ext _ _ fun t ↦ ?_
-      rw [Category.assoc, Pi.lift_π, zero_comp]
+      rw [Category.assoc, Pi.lift_comp_π, zero_comp]
       obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation s.1 t.1 (by rw [s.2, t.2])
       obtain ⟨θ, hθ⟩ := exists_sheafFiber_map_artinSchreierTranslationAction_comp_stalkRestrict
         (Λ := Λ) y (-a) t s (by rw [ha, Category.assoc, ← artinSchreierTranslation_add,
@@ -627,9 +627,9 @@ theorem isIso_sheafFiber_map_image_ι_comp_stalkRestrict (Ψ : AddChar k Λ)
         (ModuleCat.{u + 1} Λ))) ⟶ (Scheme.pointSmallEtale y).sheafFiber.obj 𝒫[Λ, k] :=
       Pi.lift (fun t ↦ if h : t = s then eqToHom (by rw [h]) else 0) ≫ inv (Pi.lift ρ)
     have hj (t) : j ≫ ρ t = if h : t = s then eqToHom (by rw [h]) else 0 := by
-      have : inv (Pi.lift ρ) ≫ ρ t = Pi.π _ t := by rw [IsIso.inv_comp_eq, Pi.lift_π]
+      have : inv (Pi.lift ρ) ≫ ρ t = Pi.π _ t := by rw [IsIso.inv_comp_eq, Pi.lift_comp_π]
       simp only [j, Category.assoc]
-      rw [this, Pi.lift_π]
+      rw [this, Pi.lift_comp_π]
     refine ⟨⟨(Fintype.card k : Λ) • (j ≫ (Scheme.pointSmallEtale y).sheafFiber.map r), ?_⟩⟩
     rw [Linear.smul_comp, Category.assoc,
       ← Category.assoc ((Scheme.pointSmallEtale y).sheafFiber.map r),
@@ -639,7 +639,7 @@ theorem isIso_sheafFiber_map_image_ι_comp_stalkRestrict (Ψ : AddChar k Λ)
     rw [Finset.sum_eq_single (0 : k)]
     · rw [artinSchreierTranslationAction_zero, CategoryTheory.Functor.map_id, Category.id_comp]
       erw [hj s]
-      rw [dif_pos rfl, eqToHom_refl, neg_zero, AddChar.map_zero_eq_one, mul_one, smul_smul,
+      rw [dite_eq_left rfl, eqToHom_refl, neg_zero, AddChar.map_zero_eq_one, mul_one, smul_smul,
         mul_invOf_self, one_smul]
     · intro a _ ha
       obtain ⟨θ, hθ⟩ := exists_sheafFiber_map_artinSchreierTranslationAction_comp_stalkRestrict
@@ -649,7 +649,7 @@ theorem isIso_sheafFiber_map_image_ι_comp_stalkRestrict (Ψ : AddChar k Λ)
           rw [Category.assoc, artinSchreierTranslation_comp_artinSchreierMap, s.2]⟩ :
             Scheme.Hom.GeometricFiber AS[k] y) ≠ s := fun h ↦
         ha (eq_zero_of_comp_artinSchreierTranslation_eq s.1 a (congrArg Subtype.val h))
-      erw [hθ, ← Category.assoc, hj, dif_neg hne]
+      erw [hθ, ← Category.assoc, hj, dite_eq_right hne]
       rw [zero_comp, smul_zero]
     · intro h
       exact absurd (Finset.mem_univ _) h
@@ -1468,7 +1468,7 @@ lemma sum_artinSchreierIdempotent_mulShift [IsDomain Λ] {Ψ : AddChar k Λ}
   have h (a : k) : ∑ b : k, ⅟(Fintype.card k : Λ) * Ψ (b * -a) =
       if a = 0 then 1 else 0 := by
     rw [sum_invOf_card_mul_apply_mul hΨ, neg_eq_zero]
-  simp only [h, ite_smul, one_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  simp only [h, ite_smul, one_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, ite_true,
     artinSchreierTranslationAction_zero]
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
@@ -1496,7 +1496,7 @@ noncomputable def artinSchreierPushforwardIsoBiproduct [IsDomain Λ] (Ψ : AddCh
           exact image_ι_comp_factorThruImage_artinSchreierIdempotent _
         · rw [← cancel_mono (image.ι (artinSchreierIdempotent (Ψ.mulShift b'))),
             Category.assoc, image.fac, image_ι_artinSchreierIdempotent_mulShift_comp hΨ,
-            if_neg hb, zero_comp] })
+            ite_eq_right hb, zero_comp] })
     (isBilimitOfTotal _ ((Finset.sum_congr rfl fun b _ ↦ image.fac _).trans
       (sum_artinSchreierIdempotent_mulShift hΨ)))
 

@@ -125,7 +125,8 @@ private theorem completedUnit_eq
       𝟙 _ := rfl
   simp only [completedDirectImageComplexUnit, proEtaleRingDirectImageDerivedUnit,
     h]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
 
 private theorem finiteUnit_eq (n : ℕ)
     (C : CochainComplex (proEtaleRingModules X (d.finiteRing X n)) ℤ) :
@@ -136,7 +137,8 @@ private theorem finiteUnit_eq (n : ℕ)
       (.up ℤ)).inv.app C) = 𝟙 _ := rfl
   simp only [completedFiniteDirectImageComplexUnit, proEtaleRingDirectImageDerivedUnit,
     h]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

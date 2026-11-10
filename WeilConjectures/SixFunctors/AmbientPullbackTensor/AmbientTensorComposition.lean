@@ -79,8 +79,11 @@ private theorem generator_one_id {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option �
     (M : Modules ell E Y s) (U : Site Y s) (m : M.val.obj (op U)) :
     generator ell E f s M U ((base f s).obj U) (𝟙 _) m 1 =
       ((adjunction ell E f s).unit.app M).val.app (op U) m := by
-  simp only [generator, one_smul, op_id, PresheafOfModules.map_id]
-  rfl
+  simp only [generator, op_id, PresheafOfModules.map_id]
+  exact one_smul
+    ((ring (topology X s) (coefficients ell E X s)).obj.obj (op ((base f s).obj U)))
+    (show ((pull ell E f s).obj M).val.obj (op ((base f s).obj U)) from
+      ((adjunction ell E f s).unit.app M).val.app (op U) m)
 
 private theorem generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     {M N : Modules ell E Y s} (a : M ⟶ N) (U : Site Y s) (V : Site X s)
@@ -88,9 +91,12 @@ private theorem generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (r : (coefficients ell E X s).obj.obj (op V)) :
     ((pull ell E f s).map a).val.app (op V) (generator ell E f s M U V q m r) =
       generator ell E f s N U V q (a.val.app (op U) m) r := by
-  dsimp only [generator]
-  rw [map_smul]
-  congr 1
+  change (ring (topology X s) (coefficients ell E X s)).obj.obj (op V) at r
+  refine ((((pull ell E f s).map a).val.app (op V)).hom.map_smul r
+    (show ((pull ell E f s).obj M).val.obj (op V) from
+      ((pull ell E f s).obj M).val.map q.op
+        (((adjunction ell E f s).unit.app M).val.app (op U) m))).trans ?_
+  apply congrArg (fun z : ((pull ell E f s).obj N).val.obj (op V) ↦ r • z)
   have hn := congrArg (fun z ↦ z.val.app (op U) m)
     ((adjunction ell E f s).unit.naturality a)
   have hq := PresheafOfModules.naturality_apply ((pull ell E f s).map a).val q.op
@@ -125,6 +131,23 @@ private theorem ordinary_composition {X Y Z : Scheme.{t}}
             ((comp ell E f g s).hom.app N) =
         (comp ell E f g s).hom.app (tensor ell E Z s M N) ≫
           (Kh.model.ordinary M N).hom) := by
+  have generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
+      {M N : Modules ell E Y s} (a : M ⟶ N) (U : Site Y s) (V : Site X s)
+      (q : V ⟶ (base f s).obj U) (m : M.val.obj (op U))
+      (r : (coefficients ell E X s).obj.obj (op V)) :
+      ((pull ell E f s).map a).val.app (op V) (generator ell E f s M U V q m r) =
+        generator ell E f s N U V q (a.val.app (op U) m) r := by
+    change (ring (topology X s) (coefficients ell E X s)).obj.obj (op V) at r
+    refine ((((pull ell E f s).map a).val.app (op V)).hom.map_smul r
+      (show ((pull ell E f s).obj M).val.obj (op V) from
+        ((pull ell E f s).obj M).val.map q.op
+          (((adjunction ell E f s).unit.app M).val.app (op U) m))).trans ?_
+    apply congrArg (fun z : ((pull ell E f s).obj N).val.obj (op V) ↦ r • z)
+    have hn := congrArg (fun z ↦ z.val.app (op U) m)
+      ((adjunction ell E f s).unit.naturality a)
+    have hq := PresheafOfModules.naturality_apply ((pull ell E f s).map a).val q.op
+      (((adjunction ell E f s).unit.app M).val.app (op U) m)
+    exact hq.trans (congrArg (fun z ↦ ((pull ell E f s).obj N).val.map q.op z) hn.symm)
   intro M N
   apply (((adjunction ell E g s).comp (adjunction ell E f s)).homEquiv _ _).injective
   apply SheafOfModules.CochainScalarConstruction.pure_hom_ext

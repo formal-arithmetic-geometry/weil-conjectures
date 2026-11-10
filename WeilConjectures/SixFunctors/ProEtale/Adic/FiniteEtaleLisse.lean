@@ -130,7 +130,7 @@ theorem IsAdicLisseSheaf.lowerStar_sigmaDesc_id {S : Type u} [Finite S] {W : Sch
     (IsAdicLisseSheaf.pi fun s ↦ ?_)
   have e (M : AdicSheaf l W) :
       (Sigma.ι (fun _ : S ↦ W) s ≫ Sigma.desc fun _ ↦ 𝟙 W)_*ᵃ[l].obj M ≅ M :=
-    (adicLowerStarCongr l (Sigma.ι_desc (fun _ : S ↦ 𝟙 W) s)).app M ≪≫
+    (adicLowerStarCongr l (Sigma.ι_comp_desc (fun _ : S ↦ 𝟙 W) s)).app M ≪≫
       (adicLowerStarId l W).app M
   exact (hG.upperStar _).of_iso (e _).symm
 

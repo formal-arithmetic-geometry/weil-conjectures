@@ -101,7 +101,7 @@ theorem finite_product_principal_open
         rw [hpre i]
         exact x.property
       change q i x.val ∈ V at hm
-      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
       exact hm
     · intro hz
       obtain ⟨w, hw⟩ := E.hom.homeomorph.surjective z
@@ -118,7 +118,7 @@ theorem finite_product_principal_open
         change q i x ∈ V
         rwa [hx]
       refine ⟨Sigma.ι (fun i ↦ (U i).toScheme) i ⟨x, hxU⟩, ?_⟩
-      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
       exact hx
   let e := IsOpenImmersion.isoOfRangeEq (Sigma.desc a) V.ι
     (hrange.trans (Scheme.Opens.range_ι V).symm)
@@ -126,7 +126,7 @@ theorem finite_product_principal_open
   rw [← Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac]
   apply Sigma.hom_ext
   intro i
-  simp only [Sigma.ι_desc_assoc, Sigma.ι_desc, a, Category.assoc]
+  simp only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc, a, Category.assoc]
   congr 1
   dsimp only [q]
   rw [← Spec.map_comp]

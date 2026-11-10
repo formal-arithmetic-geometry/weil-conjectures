@@ -62,7 +62,7 @@ noncomputable def perfectHomTriangleRowFunctor (Z : Scheme.{u})
     rw [← L.map_comp, ← L.map_comp, ← Functor.map_comp, ← Functor.map_comp, φ.comm₂]
   · change L.map _ ≫ L.map _ = L.map _ ≫ L.map _
     rw [← L.map_comp, ← L.map_comp]
-    exact congrArg L.map (F.homologySequenceδ_naturality T T' φ (-1) 0 (by decide)).symm
+    exact congrArg L.map (F.homologySequenceδ_naturality φ (-1) 0 (by decide)).symm
   · change L.map _ ≫ L.map _ = L.map _ ≫ L.map _
     rw [← L.map_comp, ← L.map_comp, ← Functor.map_comp, ← Functor.map_comp, φ.comm₁]
   · change L.map _ ≫ L.map _ = L.map _ ≫ L.map _

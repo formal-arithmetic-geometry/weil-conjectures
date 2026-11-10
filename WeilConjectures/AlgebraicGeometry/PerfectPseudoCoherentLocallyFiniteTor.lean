@@ -77,7 +77,7 @@ private theorem open_model_iso (X : Scheme.{uP}) (U : X.Opens)
     Functor.leftDerivedUnique T.mapDerivedCategory (derivedPullback U.ι) ε
       T.mapDerivedCategoryFactorsh.hom W
   exact ⟨i.app E ≪≫ (Functor.mapDerivedCategoryNatIso θ).symm.app E ≪≫
-    (Functor.mapDerivedCategoryCompIso R A).app E ≪≫ A.mapDerivedCategory.mapIso e ≪≫
+    (Functor.mapDerivedCategoryCompIso R A).symm.app E ≪≫ A.mapDerivedCategory.mapIso e ≪≫
       A.mapDerivedCategoryFactors.app K⟩
 
 open CategoryTheory.Limits MonoidalCategory in

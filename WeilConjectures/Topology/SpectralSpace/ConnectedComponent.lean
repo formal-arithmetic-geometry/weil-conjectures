@@ -101,17 +101,22 @@ theorem sInter_isClopen_and_mem_eq_connectedComponent {x : X} :
   have : Nonempty {U // IsClopen U ∧ x ∈ U} := ⟨⟨⊤, by simp [isClopen_univ]⟩⟩
   obtain ⟨W, hxW, hW, hUVW⟩ : ∃ W : Set X, x ∈ W ∧ IsClopen W ∧ U ∩ V ∩ W = ∅ := by
     obtain ⟨W, hW⟩ := IsCompact.elim_directed_family_closed
-      (IsCompact.inter_of_isOpen hUc hVc hU hV) _ (·.2.1.1) hUVS
+      (IsCompact.inter_of_isOpen hUc hVc hU hV)
+      (fun W : {U : Set X // IsClopen U ∧ x ∈ U} ↦ (W : Set X)) (·.2.1.1)
+      (Set.disjoint_iff_inter_eq_empty.mpr hUVS)
       fun i j ↦ ⟨⟨i.1 ∩ j.1, i.2.1.inter j.2.1, i.2.2, j.2.2⟩, by simp⟩
-    use W, W.2.2, W.2.1
+    exact ⟨W, W.2.2, W.2.1, Set.disjoint_iff_inter_eq_empty.mp hW⟩
   obtain ⟨W', hxW', hW', hW'UV⟩ : ∃ W' : Set X, x ∈ W' ∧ IsClopen W' ∧ W' ⊆ U ∪ V := by
     have : (U ∪ V)ᶜ ∩ S = ∅ := by
       rwa [← Set.sdiff_eq_compl_inter, Set.sdiff_eq_empty]
     obtain ⟨W', hW'⟩ := IsCompact.elim_directed_family_closed
-      ((hU.union hV).isClosed_compl.isCompact) _ (·.2.1.1) this
+      ((hU.union hV).isClosed_compl.isCompact)
+      (fun W : {U : Set X // IsClopen U ∧ x ∈ U} ↦ (W : Set X)) (·.2.1.1)
+      (Set.disjoint_iff_inter_eq_empty.mpr this)
       fun i j ↦ ⟨⟨i.1 ∩ j.1, i.2.1.inter j.2.1, i.2.2, j.2.2⟩, by simp⟩
     use W', W'.2.2, W'.2.1
-    rwa [← Set.sdiff_eq_empty, Set.sdiff_eq_compl_inter]
+    simpa only [← Set.sdiff_eq_compl_inter, Set.sdiff_eq_empty] using
+      Set.disjoint_iff_inter_eq_empty.mp hW'
   set WW := W ∩ W'
   have hUWW : IsClopen (U ∩ WW) := by
     refine ⟨?_, hU.inter (hW.2.inter hW'.2)⟩
@@ -253,6 +258,7 @@ theorem ConnectedComponents.spectralSpace_of_isPullback {Y T : Type u} [Topologi
     {f : C(Y, X)} {g : C(Y, T)} {i : C(T, ConnectedComponents X)}
     (pb : IsPullback (ofHom g) (ofHom f) (ofHom i) (ofHom ⟨mk, continuous_coe⟩)) :
     SpectralSpace Y := pb.spectralSpace
+
 
 omit [SpectralSpace X] in
 /-- The first projection of a pullback along the connected components map is surjective. -/

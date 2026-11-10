@@ -48,6 +48,7 @@ lemma objectPropertyColimitOfShape_leftResolution_obj
     P.colimitsOfShape ℤ ((leftResolution L).obj K) :=
   ⟨objectPropertyColimitOfShapeLeftResolutionObj L P hP K⟩
 
+
 variable {L} (α : L ⟶ Minus.ι _)
 
 noncomputable def leftResolutionπ :

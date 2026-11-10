@@ -337,10 +337,8 @@ import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
-import all WeilConjectures.AlgebraicGeometry.CondensedLocalPieceHomContinuity
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructiblePiece
 import all Mathlib.Algebra.Homology.HomologicalComplexLimits
-import all WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
 import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
@@ -360,14 +358,11 @@ import all WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grothen
 import all WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeTensorExact
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 import all Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import all WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
-import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import all WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import all WeilConjectures.AlgebraicGeometry.IntegralLfpHomContinuity
 import all WeilConjectures.AlgebraicGeometry.IntegralLfpLocallyFreeResolution
 import all WeilConjectures.AlgebraicGeometry.IntegralLfpEventualFreeImage
 import all WeilConjectures.AlgebraicGeometry.ModuleObjectFreeGenerators
@@ -416,7 +411,7 @@ import all Mathlib.CategoryTheory.Sites.LocalProperties
 import all Mathlib.CategoryTheory.Limits.Connected
 import all Mathlib.CategoryTheory.Filtered.Connected
 import all Mathlib.CategoryTheory.Filtered.Final
-import all Mathlib.Data.Finite.Prod
+import all Mathlib.Basic.Finite.Prod
 import all WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import all WeilConjectures.AlgebraicGeometry.LisseLatticeClassSheaf
 import all WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
@@ -452,7 +447,8 @@ import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import all Mathlib.Analysis.Normed.Field.WithAbs
 import all Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import all Mathlib.GroupTheory.Coset.Defs
-import all Mathlib.Topology.Algebra.Module.Equiv
+import all Mathlib.Topology.Algebra.Module.Equiv.Basic
+import all Mathlib.Topology.Algebra.Module.Equiv.Pi
 import all Mathlib.Topology.CompactOpen
 import all Mathlib.LinearAlgebra.Basis.Defs
 import all WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal

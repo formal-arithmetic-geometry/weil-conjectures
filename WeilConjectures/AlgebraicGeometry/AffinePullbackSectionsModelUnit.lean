@@ -36,7 +36,7 @@ private theorem cancel_model_comparisons
     f ≫ F.map (d ≫ e.inv) = s.hom ≫ m := by
   have h' := congrArg (fun k ↦ s.hom ≫ k ≫ F.map e.inv) h
   simpa only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_assoc,
-    Iso.map_hom_inv_id, Category.comp_id] using h'
+    Iso.hom_inv_id_map, Category.comp_id] using h'
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

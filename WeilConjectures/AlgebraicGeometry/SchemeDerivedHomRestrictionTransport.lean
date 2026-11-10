@@ -43,7 +43,7 @@ private lemma comp_fac
     (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) =
@@ -52,7 +52,6 @@ private lemma comp_fac
       (ComplexShape.up ℤ)).hom.app K = 𝟙 _ := by
     ext n
     simp
-    rfl
   simpa [h] using mapDerivedCategoryCompIso_fac F G K
 
 open CategoryTheory.Functor in
@@ -66,7 +65,7 @@ private lemma comp_hom_Q
     (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K ≫
       G.mapDerivedCategoryFactors.inv.app
         ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
@@ -89,13 +88,13 @@ private lemma comp_inv_Q
     (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex C ℤ) :
-    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) =
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
       (F ⋙ G).mapDerivedCategoryFactors.inv.app K := by
-  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K))]
-  simp only [Iso.hom_inv_id_app]
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K))]
+  simp only [Iso.inv_hom_id_app]
   rw [reassoc_of% (comp_fac F G K)]
   simp
 
@@ -144,12 +143,12 @@ private lemma pasting
     (κ : e ⋙ S ≅ T ⋙ v) (γ : A ⋙ T ≅ B) :
     let α := associator A e S ≪≫ isoWhiskerLeft A κ ≪≫
       (associator A T v).symm ≪≫ isoWhiskerRight γ v
-    let k := (mapDerivedCategoryCompIso e S).symm ≪≫ mapDerivedCategoryNatIso κ ≪≫
-      mapDerivedCategoryCompIso T v
-    let d := (mapDerivedCategoryCompIso A T).symm ≪≫ mapDerivedCategoryNatIso γ
-    (mapDerivedCategoryCompIso (A ⋙ e) S).inv ≫
-      (mapDerivedCategoryNatIso α).hom ≫ (mapDerivedCategoryCompIso B v).hom =
-    whiskerRight (mapDerivedCategoryCompIso A e).hom S.mapDerivedCategory ≫
+    let k := mapDerivedCategoryCompIso e S ≪≫ mapDerivedCategoryNatIso κ ≪≫
+      (mapDerivedCategoryCompIso T v).symm
+    let d := mapDerivedCategoryCompIso A T ≪≫ mapDerivedCategoryNatIso γ
+    (mapDerivedCategoryCompIso (A ⋙ e) S).hom ≫
+      (mapDerivedCategoryNatIso α).hom ≫ (mapDerivedCategoryCompIso B v).inv =
+    whiskerRight (mapDerivedCategoryCompIso A e).inv S.mapDerivedCategory ≫
       whiskerLeft A.mapDerivedCategory k.hom ≫ whiskerRight d.hom v.mapDerivedCategory := by
   dsimp only
   refine Localization.natTrans_ext DerivedCategory.Q
@@ -157,8 +156,8 @@ private lemma pasting
   simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app]
   rw [comp_inv_Q, nat_hom_Q, comp_hom_Q, comp_hom_Q]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-  let k := (mapDerivedCategoryCompIso e S).symm ≪≫ mapDerivedCategoryNatIso κ ≪≫
-    mapDerivedCategoryCompIso T v
+  let k := mapDerivedCategoryCompIso e S ≪≫ mapDerivedCategoryNatIso κ ≪≫
+    (mapDerivedCategoryCompIso T v).symm
   have hn := k.hom.naturality (A.mapDerivedCategoryFactors.inv.app K)
   simp only [CategoryTheory.Functor.comp_map] at hn
   simp only [Functor.map_comp, Category.assoc]
@@ -216,10 +215,10 @@ private lemma transport
     (κ : e ⋙ S ≅ T ⋙ v) (γ : A ⋙ T ≅ B) (F G : DerivedCategory C) :
     let α := associator A e S ≪≫ isoWhiskerLeft A κ ≪≫
       (associator A T v).symm ≪≫ isoWhiskerRight γ v
-    let αD := (mapDerivedCategoryCompIso (A ⋙ e) S).symm ≪≫ mapDerivedCategoryNatIso α
-    let qU := mapDerivedCategoryCompIso A e
-    let qW := mapDerivedCategoryCompIso B v
-    let d := (mapDerivedCategoryCompIso A T).symm ≪≫ mapDerivedCategoryNatIso γ
+    let αD := mapDerivedCategoryCompIso (A ⋙ e) S ≪≫ mapDerivedCategoryNatIso α
+    let qU := (mapDerivedCategoryCompIso A e).symm
+    let qW := (mapDerivedCategoryCompIso B v).symm
+    let d := mapDerivedCategoryCompIso A T ≪≫ mapDerivedCategoryNatIso γ
     ∀ (a : (A ⋙ e).mapDerivedCategory.obj F ⟶ (A ⋙ e).mapDerivedCategory.obj G),
       αD.inv.app F ≫ S.mapDerivedCategory.map a ≫ αD.hom.app G =
         qW.hom.app F ≫ v.mapDerivedCategory.map
@@ -227,13 +226,13 @@ private lemma transport
             (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app G)) ≫
             d.hom.app G) ≫ qW.inv.app G := by
   intro α αD qU qW d a
-  let k := (mapDerivedCategoryCompIso e S).symm ≪≫ mapDerivedCategoryNatIso κ ≪≫
-    mapDerivedCategoryCompIso T v
+  let k := mapDerivedCategoryCompIso e S ≪≫ mapDerivedCategoryNatIso κ ≪≫
+    (mapDerivedCategoryCompIso T v).symm
   have hc (Z : DerivedCategory C) :
       αD.hom.app Z ≫ qW.hom.app Z =
         S.mapDerivedCategory.map (qU.hom.app Z) ≫ k.hom.app (A.mapDerivedCategory.obj Z) ≫
           v.mapDerivedCategory.map (d.hom.app Z) := by
-    simpa only [αD, k, d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    simpa only [α, αD, qU, qW, k, d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       whiskerRight_app, whiskerLeft_app, Category.assoc] using
       congr_app (pasting A e S T v B κ γ) Z
   let b := e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app G)
@@ -264,6 +263,9 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
+-- v4.35 tree: this override is still needed here (green in bumpF build81, whnf timeout without it in build82);
+-- master removed it on the pre-bump tree.
+set_option maxHeartbeats 1600000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
@@ -317,7 +319,7 @@ theorem scheme_derived_hom_restriction_transport
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))
             (D := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))
-            (Scheme.Modules.overEquiv W))).symm ≪≫
+            (Scheme.Modules.overEquiv W))) ≪≫
         Functor.mapDerivedCategoryNatIso
           (Functor.associator _ _ _ ≪≫
           Functor.isoWhiskerLeft
@@ -340,10 +342,10 @@ theorem scheme_derived_hom_restriction_transport
       (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))
       (D := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))
       (Scheme.Modules.overEquiv W)
-    let qU := Functor.mapDerivedCategoryCompIso
-      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) e
-    let qW := Functor.mapDerivedCategoryCompIso
-      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W) eW
+    let qU := (Functor.mapDerivedCategoryCompIso
+      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) e).symm
+    let qW := (Functor.mapDerivedCategoryCompIso
+      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W) eW).symm
     ∀ (a : R_U.obj F ⟶ R_U.obj E),
       eU.inv.app F ≫ S_U.map a ≫ eU.hom.app E =
         qW.hom.app F ≫ eW.mapDerivedCategory.map

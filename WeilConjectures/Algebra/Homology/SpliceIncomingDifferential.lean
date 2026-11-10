@@ -128,7 +128,7 @@ theorem exists_spliceIncomingDifferential
   · intro i hi
     have hik : i ≠ k := by omega
     dsimp only [f, CochainComplex.ofHom, φ]
-    rw [dif_neg hik]
+    rw [dite_eq_right hik]
     infer_instance
   · ext i
     by_cases hi : i = k
@@ -143,7 +143,7 @@ theorem exists_spliceIncomingDifferential
     have : IsIso (q.f i) := hqi
     have hik : i ≠ k := by omega
     dsimp only [q', CochainComplex.ofHom, ψ]
-    rw [dif_neg hik]
+    rw [dite_eq_right hik]
     infer_instance
   · have h₁ : k + 1 ≠ k := by omega
     have h₂ : k + 1 + 1 ≠ k := by omega

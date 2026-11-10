@@ -512,7 +512,7 @@ private theorem projection_coordinates (n : ℕ) (V : Y.ProEt)
       (scalarReductionRestriction l L Y n).map (finiteZeroIso l L Y n).hom =
         projectionModule l L Y n := by
     simp [projectionComplex, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self,
+      HomologicalComplex.single_map_f_self,
       Category.assoc, ← Functor.map_comp]
   change (((regularZeroIso l L Y).inv ≫ (projectionComplex l L Y n).f 0 ≫
     (scalarReductionRestriction l L Y n).map (finiteZeroIso l L Y n).hom).val.app (op V)) s = _
@@ -538,7 +538,7 @@ private theorem tower_roos_triangle
   let b := towerTransitionEndomorphism
     (K := fun n : ℕ ↦ F.obj (op n)) (integralOperationsTowerStep F)
   obtain ⟨hz, ⟨hk⟩⟩ := tower_kernel F c hc _ (productIsProduct _)
-    i b (by intro n; exact Pi.lift_π _ n)
+    i b (by intro n; exact Pi.lift_comp_π _ n)
     ((towerTransitionEndomorphism_eq_iff _ _).mp rfl)
   have hm : Mono i := mono_of_isLimit_fork hk
   have hb : Epi b := HomologicalComplex.epi_of_epi_f b
@@ -593,8 +593,8 @@ private theorem localized_roos_triangle
       Pi.lift (fun n : ℕ ↦ Q.map (c.π.app (op n))) := by
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, he, ← Q.map_comp, Pi.lift_π]
-    exact (Pi.lift_π (fun n : ℕ ↦ Q.map (c.π.app (op n))) n).symm
+    simp only [Category.assoc, he, ← Q.map_comp, Pi.lift_comp_π]
+    exact (Pi.lift_comp_π (fun n : ℕ ↦ Q.map (c.π.app (op n))) n).symm
   refine ⟨hprod, e.inv ≫ δ, ?_⟩
   apply Pretriangulated.isomorphic_distinguished _ hδ _
   refine Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm ?_ ?_ ?_
@@ -828,12 +828,12 @@ theorem regular_scalar_unit_quasi_isomorphism (D : FiniteFieldDatum.{d}) (_hl : 
   obtain ⟨hz, ⟨hk⟩⟩ := tower_kernel
     (B := CochainComplex (integralTowerModules l L Y) ℤ) F (Cone.mk _ π) hc
     (Fan.mk (product l E L ι Y) (Pi.π (fun n : ℕ ↦ F.obj (op n))))
-    (productIsProduct _) i b (by intro n; exact Pi.lift_π _ n)
+    (productIsProduct _) i b (by intro n; exact Pi.lift_comp_π _ n)
     ((towerTransitionEndomorphism_eq_iff _ _).mp rfl)
   have hei : i = inclusion l E L ι Y η := by
     apply Pi.hom_ext
     intro n
-    exact (Pi.lift_π _ n).trans (hπ n)
+    exact (Pi.lift_comp_π _ n).trans (hπ n)
   have hb : b = boundary l E Y L ι := rfl
   have hz' : inclusion l E L ι Y η ≫ boundary l E Y L ι = 0 := by
     rw [← hei, ← hb]

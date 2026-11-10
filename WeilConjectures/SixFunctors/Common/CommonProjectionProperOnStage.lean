@@ -131,6 +131,7 @@ end
 
 end CommonProjectionProperTransport
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The proper equation on two models included from one finite field.
 Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient-field
 paragraph, and fix-prop-projection-formula.proof.md, final coherence sentence.

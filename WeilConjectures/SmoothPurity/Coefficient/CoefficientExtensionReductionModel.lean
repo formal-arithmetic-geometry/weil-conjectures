@@ -174,7 +174,7 @@ private theorem normalizedSequence_counit_isIso
         (normalizedDVRResCompleted l L W D hlp k).map (e k).inv ≫
         (T.evaluationIso k).inv)) ≫ Pi.π _ n ≫ (T.evaluationIso n).hom) =
       q ≫ (e n).inv := by
-    simp only [Pi.lift_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    simp only [Pi.lift_comp_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
     exact adj.homEquiv_naturality_right_symm _ _
   have : IsIso (q ≫ (e n).inv) := by
     rw [← heq]

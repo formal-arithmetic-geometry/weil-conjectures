@@ -142,8 +142,8 @@ theorem isZero_upperStar_infinity_rightDerived_lowerStar_affineChart_of_le {K : 
   -- the cohomological dimension bound for `R[1/x]`
   have hd : ringKrullDim P = (c + 1 : ℕ) := by
     change ringKrullDim (MvPolynomial PUnit.{u + 1} A) = _
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing,
-      MvPolynomial.ringKrullDim_of_isNoetherianRing,
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
+      MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
       ringKrullDim_eq_zero_of_field]
     simp
   have hpre (r : A) : (Spec.preimage s').hom (MvPolynomial.C r) = (Spec.preimage s).hom r := by

@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.SupportedOpenPushforward
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
@@ -16,6 +17,7 @@ import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extension of a supported perfect object from an affine open
 
@@ -104,7 +106,7 @@ theorem supported_open_extension
         Functor.isoWhiskerRight er e.functor ≪≫ Functor.leftUnitor e.functor) ≪≫
       e.counitIso
   let lrD : L.mapDerivedCategory ⋙ (schemeOpenRestriction X O).mapDerivedCategory ≅
-      𝟭 _ := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      𝟭 _ := Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso lr ≪≫ Functor.mapDerivedCategoryIdIso _
   have hff := adjD.fullyFaithfulLOfCompIsoId lrD
   let : L.mapDerivedCategory.Full := hff.full

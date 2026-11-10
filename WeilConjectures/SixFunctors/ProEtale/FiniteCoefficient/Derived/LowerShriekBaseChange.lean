@@ -90,9 +90,9 @@ lemma plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek {U X : Scheme.
   obtain ⟨L, ⟨n, hn⟩, ⟨e⟩⟩ := hK
   refine ⟨D(Etale.openImmersionLowerShriek A j).obj L,
     ⟨n, (Etale.openImmersionLowerShriek A j).isGE_mapDerivedCategory_obj L n⟩,
-    ⟨((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    ⟨(Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekComparisonUpperStarIso A j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).app L ≪≫ D((j)_!open[A]).mapIso e⟩⟩
+      (Functor.mapDerivedCategoryCompIso _ _).symm).app L ≪≫ D((j)_!open[A]).mapIso e⟩⟩
 
 end EtaleOrigin
 

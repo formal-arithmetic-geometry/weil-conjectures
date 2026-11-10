@@ -188,13 +188,17 @@ private theorem section_induction {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoh
     (hadd : ∀ x y, P x → P y → P (x + y))
     (hgen : ∀ (r : Γ(X, U)) (a : sections F (op W)),
       P (r • restriction F (homOfLE hUW).op a)) : ∀ x, P x := by
+  classical
   let : Algebra Γ(X, W) Γ(X, U) :=
     (X.presheaf.map (homOfLE hUW).op).hom.toAlgebra
   obtain ⟨e, he⟩ := exists_sectionTensorEquiv F hU hW hUW
   intro x
+  by_cases hx : x = 0
+  · subst x
+    exact hzero
+  clear hx
   obtain ⟨t, rfl⟩ := e.surjective x
-  induction t using TensorProduct.induction_on with
-  | zero => simpa only [map_zero] using hzero
+  induction t using TensorProduct.inductionOn with
   | tmul r a => rw [he]; exact hgen r a
   | add t t' ht ht' => rw [_root_.map_add]; exact hadd _ _ ht ht'
 

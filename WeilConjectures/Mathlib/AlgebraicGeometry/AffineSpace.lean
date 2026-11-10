@@ -649,6 +649,7 @@ lemma iteratedAffineLine_zero (S : Scheme.{u}) : iteratedAffineLine S 0 = S := r
 lemma iteratedAffineLine_succ (S : Scheme.{u}) (r : ℕ) :
     iteratedAffineLine S (r + 1) = 𝔸(PUnit.{u + 1}; iteratedAffineLine S r) := rfl
 
+
 @[simp]
 lemma iteratedAffineLineProj_zero (S : Scheme.{u}) : iteratedAffineLineProj S 0 = 𝟙 S := rfl
 
@@ -711,6 +712,7 @@ lemma Scheme.Hom.toIteratedAffineLine_succ {r : ℕ} (t : Fin (r + 1) → Γ(X, 
     g.toIteratedAffineLine t =
       AffineSpace.homOfVector (g.toIteratedAffineLine (Fin.tail t)) fun _ ↦ t 0 :=
   rfl
+
 
 lemma Scheme.Hom.toIteratedAffineLine_comp_over {r : ℕ} (t : Fin (r + 1) → Γ(X, ⊤)) :
     g.toIteratedAffineLine t ≫
@@ -1122,7 +1124,7 @@ lemma topologicalKrullDim_affineSpace_of_isAffine {S : Scheme.{u}} [IsAffine S]
     topologicalKrullDim (PrimeSpectrum Γ(S, ⊤)) + _
   rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
     PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
-    MvPolynomial.ringKrullDim_of_isNoetherianRing]
+    MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite]
 
 open CategoryTheory in
 instance {S T : Scheme.{u}} (n : Type u) (f : S ⟶ T) [IsIso f] : IsIso (AffineSpace.map n f) :=
@@ -1169,5 +1171,6 @@ lemma surjective_eval₂Hom_appTop_coord {n : Type u} {R : CommRingCat.{u}} {Z :
   rw [eval₂Hom_appTop_coord, RingHom.coe_comp]
   exact (IsClosedImmersion.isAffine_surjective_of_isAffine i).2.comp
     (bijective_eval₂Hom_coord R).2
+
 
 end AlgebraicGeometry.AffineSpace

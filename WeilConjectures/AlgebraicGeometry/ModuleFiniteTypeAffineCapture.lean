@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite-type capture on a compact open inside an affine open
 
@@ -29,6 +30,18 @@ private theorem quasiCoherent_slice_image {X : Scheme.{u}} (U : X.Opens)
     {F G : SheafOfModules.{u} (X.ringCatSheaf.over U)}
     [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) :
     (Abelian.image φ).IsQuasicoherent := by
+  have (V : Over U) :
+      HasSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : Over U) :
+      (((Opens.grothendieckTopology X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
+  have (V : U.toScheme.Opens) :
+      HasSheafify ((Opens.grothendieckTopology U.carrier).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : U.toScheme.Opens) :
+      ((Opens.grothendieckTopology U.carrier).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   have := U.instIsDenseSubsiteSubtypeMemOverGrothendieckTopologyOverInverseOverEquivalence
   have (V : U.toScheme.Opens) :
       (Over.post U.overEquivalence.inverse).IsContinuous
@@ -68,6 +81,15 @@ private theorem finiteType_image_free_slice (X : Scheme.{u}) (U : X.Opens) (n : 
     {G : SheafOfModules.{u} (X.ringCatSheaf.over U)}
     (φ : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n)) ⟶ G) :
     (Abelian.image φ).IsFiniteType := by
+  have hs (V : Over U) :
+      HasSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have (V : Over U) :
+      HasWeakSheafify (((Opens.grothendieckTopology X).over U).over V) AddCommGrpCat.{u} :=
+    (hs V).isRightAdjoint
+  have (V : Over U) :
+      (((Opens.grothendieckTopology X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let g := (SheafOfModules.free.generatingSections
     (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n))).ofEpi (Abelian.factorThruImage φ)
   let q := g.localGeneratorsData
@@ -117,7 +139,16 @@ theorem exists_finiteType_affine_capture
   have hft := finiteType_image_free_slice X V.1 n φ
   refine ⟨Abelian.image φ, hqc, hft, Abelian.image.ι φ, inferInstance, ?_⟩
   have : Epi (T.map φ) := hφ
-  have : Mono (T.map (Abelian.image.ι φ)) := inferInstance
+  have : T.PreservesMonomorphisms := by
+    let B := (overEquiv K).functor
+    have : Limits.PreservesLimitsOfSize.{u, u} (T ⋙ B) :=
+      Limits.preservesLimits_of_natIso (overMapCompOverEquiv (homOfLE hKV)).symm
+    have : Limits.ReflectsLimitsOfSize.{u, u} B :=
+      Limits.reflectsLimits_of_reflectsIsomorphisms
+    have : Limits.PreservesLimitsOfSize.{u, u} T :=
+      Limits.preservesLimits_of_reflects_of_preserves _ B
+    exact preservesMonomorphisms_of_preservesLimitsOfShape T
+  have : Mono (T.map (Abelian.image.ι φ)) := T.map_mono _
   have : Epi (T.map (Abelian.image.ι φ)) :=
     epi_of_epi_fac (by rw [← T.map_comp, Abelian.image.fac])
   exact isIso_of_mono_of_epi _

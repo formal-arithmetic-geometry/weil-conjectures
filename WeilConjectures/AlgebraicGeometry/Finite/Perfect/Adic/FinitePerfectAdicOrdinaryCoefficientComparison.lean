@@ -429,8 +429,7 @@ private def liftTensorComparison (A : Type t) [CommRing A] :
     apply LinearMap.ext
     intro x
     rcases x with ⟨x⟩
-    induction x using TensorProduct.induction_on with
-    | zero => exact map_zero _ |>.trans (map_zero _).symm
+    induction x using TensorProduct.inductionOn with
     | tmul x y => rfl
     | add x y hx hy =>
       have ha : (ULift.up (x + y) : ULift.{t + 1} _) = ULift.up x + ULift.up y := rfl

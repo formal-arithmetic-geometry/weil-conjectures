@@ -196,6 +196,7 @@ lemma quotient_map_map_comp {M : CochainComplex C ℤ} (T : M.KInjectiveResoluti
   refine (((R.mapHomotopy S φ).symm.compRight _).trans ?_)
   exact Homotopy.ofEq (Category.assoc _ _ _)
 
+
 end Functoriality
 
 section RightDerived
@@ -266,6 +267,7 @@ lemma rightDerivedIso_hom : (R.rightDerivedIso R' v).hom = R.rightDerivedMap R' 
   refine quotient_map_mapHomologicalComplex_map v _ _ (HomotopyCategory.eq_of_homotopy _ _ ?_)
   exact (R.homotopyEquivUnique R' _ ((R.mapHomotopy R' (𝟙 K)).trans
     (Homotopy.ofEq (Category.id_comp _)))).symm
+
 
 end RightDerived
 

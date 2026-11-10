@@ -495,7 +495,7 @@ private theorem roos_compatible
     (cocone_fst_zero (scalarRoosBoundary C) f hf)
   simp only [scalarRoosBoundary, towerTransitionEndomorphism, towerProductShift,
     Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Category.assoc,
-    Pi.lift_π, zero_comp, sub_eq_zero] at h
+    Pi.lift_comp_π, zero_comp, sub_eq_zero] at h
   simpa only [scalarRoosBoundary, towerTransitionEndomorphism, towerProductShift,
     Category.assoc] using h.symm
 
@@ -510,7 +510,7 @@ private theorem roos_boundary_zero
   have hb := (towerTransitionEndomorphism_eq_iff
     (integralOperationsTowerStep C) (scalarRoosBoundary C)).mp rfl n
   rw [Category.assoc, hb, Preadditive.comp_sub, ← Category.assoc,
-    Pi.lift_π, Pi.lift_π, ha n, sub_self, zero_comp]
+    Pi.lift_comp_π, Pi.lift_comp_π, ha n, sub_self, zero_comp]
 
 end ScalarRoosLiftProof
 
@@ -641,7 +641,7 @@ theorem scalarModelRoosZeroLift_core
   · intro n i U s t x y hxy
     have hp : h ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C'.asFunctor) ≫
         Pi.π (fun m : ℕ ↦ C'.asFunctor.obj (op m)) n = c n := by
-      rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst, Pi.lift_π]
+      rw [← Category.assoc, CochainComplex.mappingCocone.lift_fst, Pi.lift_comp_π]
     change ((h ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C'.asFunctor) ≫
       Pi.π (fun m : ℕ ↦ C'.asFunctor.obj (op m)) n).f i).val.app U _ = _
     rw [hp]

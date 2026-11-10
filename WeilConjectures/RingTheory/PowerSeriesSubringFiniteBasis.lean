@@ -66,8 +66,8 @@ theorem powerSeriesSubringFiniteBasis
     (S : Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
     (hS : ∀ f, f ∈ S ↔
       ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),
-        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ ∧
-        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
+        MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ∈ kJ ∧
+        (MvPowerSeries.coeff a (AddMonoidAlgebra.coeff f g) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :
     ∃ (d : ℕ) (b : Module.Basis (Fin d) S
       (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) (i : Fin d), b i = 1 := by

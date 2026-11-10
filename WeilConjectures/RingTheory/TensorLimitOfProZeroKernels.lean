@@ -37,8 +37,7 @@ private theorem tensor_square
     [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
     (f : P →ₗ[A] Q) (g : M →ₗ[A] N) (x : TensorProduct A P M) :
     f.rTensor N (g.lTensor P x) = g.lTensor Q (f.rTensor M x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul p m => rfl
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -81,8 +80,7 @@ private theorem freeTensorEquiv_naturality
     (f : M →ₗ[A] N) (x : TensorProduct A (Fin d → A) M) (i : Fin d) :
     freeTensorEquiv A d N (f.lTensor (Fin d → A) x) i =
       f (freeTensorEquiv A d M x i) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul p m => simp [freeTensorEquiv]
   | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]
 

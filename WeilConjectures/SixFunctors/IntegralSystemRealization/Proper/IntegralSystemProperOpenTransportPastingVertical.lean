@@ -213,7 +213,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] CanonicalBridge.push CanonicalBridge.shriek Compositors.pushComp
   Functor.leftAdjoint Functor.mapDerivedCategory Functor.rightDerivedFunctor constantSheaf
   HasDerivedCategory.standard DerivedCategory.Q Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryFactors
+  Functor.mapDerivedCategoryFactors
   ProEtale.SemilinearProperOpen.R ProEtale.SemilinearProperOpen.J
   ProEtale.SemilinearProperOpen.sComp ProEtale.SemilinearProperOpen.gamma
 

@@ -36,7 +36,7 @@ theorem ideal_coefficients_monomial_map
     (g : Fin i → R) :
     ∃ Φ : MvPolynomial (Fin r) R →ₗ[R]
           Π₀ E : Fin r →₀ ℕ, R ⧸ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}),
-        (∀ q E, Φ q E = Ideal.Quotient.mk _ (coeff E q)) ∧
+        (∀ q E, Φ q E = Ideal.Quotient.mk _ (AddMonoidAlgebra.coeff q E)) ∧
         Function.Surjective Φ ∧
         LinearMap.ker Φ = Submodule.restrictScalars R
           (Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j))) ∧
@@ -55,7 +55,7 @@ theorem ideal_coefficients_monomial_map
     DFinsupp.mapRange.linearMap fun E => (I E).mkQ
   let Φ : MvPolynomial (Fin r) R →ₗ[R] Π₀ E, R ⧸ I E := F.comp c.toLinearMap
   have hcoeff (q : MvPolynomial (Fin r) R) (E : Fin r →₀ ℕ) :
-      Φ q E = Ideal.Quotient.mk (I E) (coeff E q) := by
+      Φ q E = Ideal.Quotient.mk (I E) (AddMonoidAlgebra.coeff q E) := by
     rfl
   have hF : Function.Surjective F := by
     exact (DFinsupp.mapRange_surjective _ (fun E => (I E).mkQ.map_zero)).2

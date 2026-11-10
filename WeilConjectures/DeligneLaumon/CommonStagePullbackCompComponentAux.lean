@@ -21,8 +21,8 @@ compositor on localized representatives.
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -121,8 +121,7 @@ private theorem rational_naturality
       ⟨(constructibleIntegralPullback l E f).obj
         ((constructibleIntegralPullback l E g).obj M.obj)⟩ := by
     rw [obj, obj]
-  induction v using TensorProduct.induction_on with
-  | zero => simp
+  induction v using TensorProduct.inductionOn with
   | tmul c a =>
     have hm := (normalization_map_heq (rationalDerivedPullback l E f)
       (obj g K) (obj g J)

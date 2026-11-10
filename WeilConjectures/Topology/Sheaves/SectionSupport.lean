@@ -47,6 +47,7 @@ lemma DimLT.mono {S T : Set X} {n : ℕ} (h : DimLT T n) (hST : S ⊆ T) : DimLT
 lemma dimLT_empty (n : ℕ) : DimLT (∅ : Set X) n := fun p hp ↦
   absurd (Set.subset_empty_iff.1 hp) p.last.isIrreducible.nonempty.ne_empty
 
+
 lemma DimLT.union {S T : Set X} {n : ℕ} (hS : DimLT S n) (hT : DimLT T n) (hS' : IsClosed S)
     (hT' : IsClosed T) : DimLT (S ∪ T) n := fun p hp ↦ by
   rcases isPreirreducible_iff_isClosed_union_isClosed.1 p.last.isIrreducible.isPreirreducible

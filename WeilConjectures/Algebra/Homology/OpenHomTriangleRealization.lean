@@ -59,7 +59,7 @@ def openHomRestriction {S : Type u} [TopologicalSpace S]
   let B := overMap.{u} R i
   letI : PreservesFiniteLimits (A ⋙ B) := comp_preservesFiniteLimits A B
   letI : PreservesFiniteColimits (A ⋙ B) := comp_preservesFiniteColimits A B
-  let e := (Functor.mapDerivedCategoryCompIso A B).symm ≪≫
+  let e := Functor.mapDerivedCategoryCompIso A B ≪≫
     Functor.mapDerivedCategoryNatIso (overFunctorMap.{u} R i)
   e.inv.app E ≫ (overMap.{u} R i).mapDerivedCategory.map f ≫ e.hom.app F
 

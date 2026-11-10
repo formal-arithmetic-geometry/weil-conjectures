@@ -83,10 +83,10 @@ private theorem representativeArrow (X : RingedTensorCorner.{u, w})
       (SheafOfModules.KFlatFixedTensor.representativeIso X.ring P Q
         hp.1 hq.1 hp.2 hq.2).hom := by
   unfold SheafOfModules.cochainTensorRepresentativeArrow
-  change (𝟙 _) ≫ _ ≫ _ ≫
-    (SheafOfModules.siteDerivedTensorIndependentCoefficients X.topology X.ring).map (𝟙 _) = _
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
-  unfold SheafOfModules.KFlatFixedTensor.representativeIso
+    SheafOfModules.KFlatFixedTensor.representativeIso
+  simp only [id_eq, SheafOfModules.KFlatFixedTensor.TensorPresentation.representativeIso,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom,
+    Functor.mapIso_hom, Functor.mapIso_inv, Iso.prod_hom, Category.assoc]
   rfl
 
 end SheafOfModules.ProjectionCoherence

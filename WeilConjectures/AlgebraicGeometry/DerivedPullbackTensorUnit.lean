@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
@@ -145,10 +147,10 @@ theorem derivedPullback_tensor_unit {T X : Scheme.{uModel}} (g : T ⟶ X)
           CochainComplex.IsKFlatTensor (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
-              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
-                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+              cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+                (CochainComplex.mapBifunctor P N (curriedTensor _)))) ≫
               DerivedCategory.Q.map (φ P N).hom =
-            (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
+            cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
               Functor.LaxMonoidal.μ DerivedCategory.Q
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)

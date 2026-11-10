@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -39,7 +41,10 @@ def affineExactTildeDerived (B : Type u) [CommRing B]
     DerivedCategory.{wM} (ModuleCat.{u} B) ⥤
       schemeDerivedCategory.{u, w} (Spec (.of B)) := by
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
@@ -66,7 +71,10 @@ def affineTildeDerivedTensorSourceIso (i : ℤ) :
             (((ModuleCat.restrictScalars (algebraMap R A)).mapHomologicalComplex
               (.up ℤ)).obj M))))) := by
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
@@ -136,7 +144,10 @@ def affineTildeDerivedTensorToPushforward
       (DerivedCategory.Q.obj (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj
         (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M))) := by
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
@@ -153,7 +164,10 @@ private theorem affineTildeDerivedTensorToPushforward_factor
     (hψ : (algebraMap (A ⊗[R] B) D).comp
       Algebra.TensorProduct.includeRight.toRingHom = ψ) :
     let T := affinePushforwardTilde B
-    let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let : T.Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of B) f g
     let : T.PreservesHomology := tilde_preservesHomology B
     let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
     let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
@@ -238,7 +252,10 @@ theorem exists_affineTildeDerivedTensorMate
     (HomotopyCategory.quotient _ (.up ℤ)).obj
     (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
@@ -272,6 +289,6 @@ theorem exists_affineTildeDerivedTensorMate
   have hresult := hsource.trans (by simpa only [Category.assoc] using hexchange)
   have : IsIso ((schemeDerivedDirectImage f').map c) := inferInstance
   apply (cancel_mono ((schemeDerivedDirectImage f').map c)).mp
-  simpa only [σ, Category.assoc, hr] using hresult
+  simpa only [σ, cast_eq, Category.assoc, hr] using hresult
 
 end AlgebraicGeometry

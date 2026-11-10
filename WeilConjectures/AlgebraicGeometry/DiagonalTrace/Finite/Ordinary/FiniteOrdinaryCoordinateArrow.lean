@@ -42,7 +42,7 @@ def finiteOrdinaryCoordinateArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧) :
     finiteKummerUnit l E T n ⟶ finiteKummerLine l E T n :=
   finiteOrdinarySuccessiveCoordinateArrow l E n T
     (finiteOrdinaryUnitCoordinate l E n T c) (finiteOrdinaryLineCoordinate l E n T c) a

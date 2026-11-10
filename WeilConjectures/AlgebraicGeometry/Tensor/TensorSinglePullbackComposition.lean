@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import WeilConjectures.AlgebraicGeometry.TensorCoefficientComparison
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSinglePullbackComposition
 import WeilConjectures.AlgebraicGeometry.TensorCoefficientPullbackComposition
 
@@ -140,11 +142,9 @@ private theorem single_naturality {A B : Scheme.{v}} (a : B ⟶ A)
     Q.map (H.map (s.hom.app M)) ≫ SB.map ((Scheme.Modules.tensorPullback a).map f) at hs
   have ht := congrArg (fun k ↦ SB.map k) (t.hom.naturality f)
   simp only [Functor.map_comp] at ht
-  change (derivedPullback a).map (SA.map f) ≫
-      (ε.app (HA.obj N) ≫ Q.map (H.map (s.hom.app N)) ≫ SB.map (t.hom.app N)) =
-    (ε.app (HA.obj M) ≫ Q.map (H.map (s.hom.app M)) ≫ SB.map (t.hom.app M)) ≫
-      SB.map ((Scheme.Modules.pullback a).map f)
-  exact naturality_three
+  simpa only [canonicalSinglePullbackMap, cast_eq, Category.assoc,
+    ε, t, Q, H, s, SA, SB, HA, T, Scheme.Modules, Scheme.ringCatSheaf,
+    moduleRings] using naturality_three
     ((derivedPullback a).map (SA.map f)) (Q.map (T.map (HA.map f)))
     (SB.map ((Scheme.Modules.tensorPullback a).map f))
     (SB.map ((Scheme.Modules.pullback a).map f))

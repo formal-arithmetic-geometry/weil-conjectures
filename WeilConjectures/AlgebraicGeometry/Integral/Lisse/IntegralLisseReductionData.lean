@@ -123,8 +123,6 @@ def integralLisseScalar (M : ringedSiteModules.{u + 1} (integralLisseRing l E X)
              (mul_comm _ _) }
      naturality := fun {U V} f ↦ by
        ext x
-       change lisseIntegerConstantSized l E X V a • M.val.map f x =
-         M.val.map f (lisseIntegerConstantSized l E X U a • x)
        exact (M.val.map_smul f (lisseIntegerConstantSized l E X U a) x).symm }⟩
 
 /-- Quotient by a scalar, specified by its sheaf cokernel universal property.

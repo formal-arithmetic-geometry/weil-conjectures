@@ -151,10 +151,10 @@ noncomputable def finiteCoefficientDerivedEquivalenceLeftDerivedUpperStarIso {W 
   (leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso g T).app K ≪≫
     L(ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) g).mapIso e ≪≫
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} T)) g).app _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm.app F' ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).app F' ≪≫
     (Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarUpperStarIso (ModuleCat.{u + 1} (ULift.{u + 1} T)) g)).app F' ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app F'
+    (Functor.mapDerivedCategoryCompIso _ _).symm.app F'
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] [CharP T ℓ]
 

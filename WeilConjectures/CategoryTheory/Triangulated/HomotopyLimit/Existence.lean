@@ -140,10 +140,10 @@ lemma exists_lift_homotopyLimitCone (s : Cone F) :
     Pi.hom_ext _ _ fun n ↦ by
       have h := s.w (homOfLE (n.le_add_right 1)).op
       rw [zero_comp, Category.assoc, Preadditive.sub_comp, Category.id_comp, piTowerShift_π,
-        Preadditive.comp_sub, Pi.lift_π, Pi.lift_π_assoc, h, sub_self]
+        Preadditive.comp_sub, Pi.lift_comp_π, Pi.lift_comp_π_assoc, h, sub_self]
   obtain ⟨φ, hφ⟩ := Triangle.coyoneda_exact₂ _ (homotopyLimitTriangle_distinguished F) _ hf
   have hφ' : φ ≫ homotopyLimitι F = Pi.lift fun n ↦ s.π.app (op n) := hφ.symm
-  exact ⟨φ, fun n ↦ by rw [homotopyLimitCone_π_app, ← Category.assoc, hφ', Pi.lift_π]⟩
+  exact ⟨φ, fun n ↦ by rw [homotopyLimitCone_π_app, ← Category.assoc, hφ', Pi.lift_comp_π]⟩
 
 /-- A (non-canonical) lift `s.pt ⟶ R lim F` of a cone over a tower into the chosen homotopy
 limit, compatible with the legs (`homotopyLimitLift_π`). -/
@@ -212,6 +212,7 @@ lemma isIso_homotopyLimitMap [∀ n : ℕ, IsIso (a.app (op n))] : IsIso (homoto
     Pi.hom_ext _ _ fun n ↦ by simp, Pi.hom_ext _ _ fun n ↦ by simp⟩
   isIso₁_of_isIso₂₃ (homotopyLimitTriangleHom a) (homotopyLimitTriangle_distinguished F)
     (homotopyLimitTriangle_distinguished G) this this
+
 
 end Map
 

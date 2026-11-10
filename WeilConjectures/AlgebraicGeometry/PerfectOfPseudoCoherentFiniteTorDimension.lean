@@ -46,7 +46,7 @@ private theorem affine_free_iso (S : Scheme.{uP}) (U : S.Opens)
     (U.sheafOfModulesEquivOverInverseUnit S.ringCatSheaf).symm).symm
   exact ⟨G.mapIso (F.mapIso (tildeFinsupp (R := R) (ULift.{uP} (Fin m))) ≪≫ eF) ≪≫ eG⟩
 
-private theorem affine_finiteFree_model (S : Scheme.{uP}) (U : S.Opens)
+private theorem affine_finiteFree_model_private (S : Scheme.{uP}) (U : S.Opens)
     (hU : IsAffineOpen U)
     (P : CochainComplex
       (SheafOfModules.{uP} ((moduleRings S.toRingedSpace).over U)) ℤ)
@@ -108,8 +108,12 @@ private theorem affine_finiteFree_model (S : Scheme.{uP}) (U : S.Opens)
   rw [F.map_id, F.map_zero]
   exact ((ei i).isZero_iff.mpr (hb i hi)).eq_of_src _ _
 
+/-- Public export of the private `affine_finiteFree_model_private`
+(used by `import all` importers; linter.privateModule). -/
+alias affine_finiteFree_model := affine_finiteFree_model_private
+
 set_option backward.isDefEq.respectTransparency false in
-private theorem affine_projective_strictlyPerfect (S : Scheme.{uP}) (U : S.Opens)
+private theorem affine_projective_strictlyPerfect_private (S : Scheme.{uP}) (U : S.Opens)
     (hU : IsAffineOpen U)
     (P : CochainComplex (ModuleCat.{uP} (S.presheaf.obj (.op U))) ℤ)
     (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → Limits.IsZero (P.X n))
@@ -197,9 +201,9 @@ theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
     (Functor.mapDerivedCategoryNatIso
       (SheafOfModules.overFunctorMap.{uP}
         (moduleRings S.toRingedSpace) (homOfLE hVU))).symm.app K ≪≫
-      (Functor.mapDerivedCategoryCompIso G F).app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).symm.app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
         F.mapDerivedCategoryFactors.app P
-  obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model S V hV PV hbV hfV
+  obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model_private S V hV PV hbV hfV
   let R := S.presheaf.obj (.op V)
   let : HasDerivedCategory (ModuleCat.{uP} R) := HasDerivedCategory.standard _
   have hMpc : DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj M) :=
@@ -211,7 +215,14 @@ theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP})
       (DerivedCategory.Q.obj M) hMpc hMtor
   let T := (affinePerfectSheafification S V hV).mapHomologicalComplex (.up ℤ)
   obtain ⟨D, _, ⟨c⟩⟩ := affine_localized_derived_sheafification S V hV
-  refine ⟨V, hxV, T.obj E, affine_projective_strictlyPerfect S V hV E hEb hEf hEp, ?_⟩
+  refine ⟨V, hxV, T.obj E, affine_projective_strictlyPerfect_private S V hV E hEb hEf hEp, ?_⟩
   exact ⟨eKM ≪≫ (c.app M).symm ≪≫ D.mapIso eE.symm ≪≫ c.app E⟩
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+/-- Public export of the private `affine_projective_strictlyPerfect_private` (used by `import all`
+importers; linter.privateModule). -/
+alias affine_projective_strictlyPerfect := affine_projective_strictlyPerfect_private
 
 end AlgebraicGeometry.Scheme

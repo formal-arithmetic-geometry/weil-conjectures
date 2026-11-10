@@ -59,8 +59,7 @@ private noncomputable def tensorPresentation :
     intro V W i
     apply ModuleCat.hom_ext
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [_root_.map_add, hz, hz']
     | tmul s x =>
       change changeOfRingsMap φ M i (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] x) =
@@ -410,7 +409,6 @@ private theorem complexBasis_zero (n : ℕ) :
   simp only [complexBasis, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
     HomologicalComplex.comp_f, HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
     CochainComplex.singleFunctor]
-  dsimp only [CochainComplex.singleFunctors]
   rw [HomologicalComplex.single_map_f_self]
   simp only [Category.assoc, finiteZero, Iso.inv_hom_id, Category.comp_id,
     Iso.inv_hom_id_assoc]

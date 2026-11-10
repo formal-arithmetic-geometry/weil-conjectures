@@ -25,6 +25,12 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
+noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h : V ≤ W) :
+    HSMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
+        (F.val.obj (op V))) (F.val.obj (op V)) where
+  hSMul := @SMul.smul Γ(X, V) Γ(F, V) inferInstance
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem basicOpen_le_surjective_stalk {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

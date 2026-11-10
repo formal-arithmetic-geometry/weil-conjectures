@@ -160,7 +160,7 @@ theorem weil_geometric_hom_constructibility
   letI : F.Faithful := Functor.Faithful.of_comp F
     (ProEtale.nativeOrdinaryPresentation ℓ X).functor
   let H := U ⋙ F
-  let e := U.mapDerivedCategoryCompIso F
+  let e := (U.mapDerivedCategoryCompIso F).symm
   have hPred := ProEtale.adicConstructibilityPredicateComparison ℓ X Λ
     (.algebraicClosure)
   have hIso : ∀ {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

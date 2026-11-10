@@ -139,7 +139,7 @@ theorem existsUnique_strictHenselizationStalkRestriction
   let hc : IsColimit c :=
     (Functor.Final.isColimitWhiskerEquiv N.op _).symm
       ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone F.obj)
-  let d : Cocone (N.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).op ⋙
+  let d : Cocone (N.op ⋙ (Functor.Elements.π (Scheme.pointSmallEtale s).fiber).op ⋙
       F.obj) :=
     { pt := (Sheaf.Γ (Scheme.strictLocalization s).smallEtaleTopology
         AddCommGrpCat.{v + 1}).obj
@@ -150,7 +150,7 @@ theorem existsUnique_strictHenselizationStalkRestriction
                intro i j a
                dsimp
                simp only [Category.comp_id]
-               let t := (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).map
+               let t := (Functor.Elements.π (Scheme.pointSmallEtale s).fiber).map
                  (N.map a.unop)
                -- Compare the two pullback projections, using naturality of the limit legs.
                have ht : strictHenselizationNeighbourhoodSection s j.unop ≫
@@ -166,12 +166,12 @@ theorem existsUnique_strictHenselizationStalkRestriction
                    simp only [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc]
                    erw [pullback.lift_fst]
                    have : IsAffine
-                       ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).obj
+                       ((Functor.Elements.π (Scheme.pointSmallEtale s).fiber).obj
                          (N.obj j.unop)).left := by
                      change IsAffine (Spec _)
                      infer_instance
                    have : IsAffine
-                       ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).obj
+                       ((Functor.Elements.π (Scheme.pointSmallEtale s).fiber).obj
                          (N.obj i.unop)).left := by
                      change IsAffine (Spec _)
                      infer_instance

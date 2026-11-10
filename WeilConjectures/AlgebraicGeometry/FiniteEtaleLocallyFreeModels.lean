@@ -93,6 +93,7 @@ private theorem exists_cover_pullback_property
       ∀ s : D.I₀, Q (D.X s) (D.f s) :=
   ⟨C.pullback₁ f, hQ⟩
 
+
 private theorem locFree_product
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {I : Type v} [Finite I]
@@ -276,7 +277,7 @@ private theorem localProductComparison
   refine ⟨ε, ?_⟩
   intro P j
   dsimp only [ε, asIso_hom]
-  simp only [q, Pi.lift_π]
+  simp only [q, Pi.lift_comp_π]
   exact sheetUnit (upperStarLowerStarAdjunction Λ p) (a j) P
 
 private theorem locFree_push_of_comparison

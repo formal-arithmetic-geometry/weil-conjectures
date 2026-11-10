@@ -191,7 +191,7 @@ lemma basicOpen_coeff_eq {L : X.Modules} [SheafOfModules.IsInvertible.{u, u, u} 
     X.basicOpen (he.coeff (s.app V.1 (unitSectionsEquiv _ 1))) =
       V.1 ⊓ (Hom.zeroLocus s).support.compl := by
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   ext x
   have key (hx : x ∈ V.1) : x ∈ (Hom.zeroLocus s).support ↔
       x ∉ X.basicOpen (he.coeff (s.app V.1 (unitSectionsEquiv _ 1))) := by

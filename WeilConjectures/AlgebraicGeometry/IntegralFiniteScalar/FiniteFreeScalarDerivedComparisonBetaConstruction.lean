@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFiniteScalarModelDefinitions
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFlatScalarTowerRealizationSupplement
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDerivedComparisonAugmentation
 
@@ -212,7 +214,9 @@ private lemma betaTotalIso_summand {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
 private lemma betaScalarCounit_eq {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (Z : Scheme.{u}) (C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Z) ℤ) :
     scalarCounit a Z C = (Mod.KFlatScalarTower.computationCounit (betaMap a Z)).app C := by
-  exact cochainCounit_eq (Mod.extendScalars (betaMap a Z)) C
+  simp [scalarCounit, Mod.KFlatScalarTower.computationCounit,
+    Functor.mapHomotopyCategoryFactors_hom_app, scalarSixChange, scalarSixAdjunctionLeft,
+    betaMap, HomotopyCategory.quotient_obj_as]
 
 private def betaScalarCounit {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u}) :
     DerivedCategory.Q ⋙ scalarSixChange a Z ⟶

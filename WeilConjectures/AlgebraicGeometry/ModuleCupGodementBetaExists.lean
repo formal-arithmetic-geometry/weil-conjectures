@@ -115,7 +115,7 @@ private lemma map_eval_sections (X : Scheme.{u}) {H H' : X.Modules} (f : H ⟶ H
       f.stalkLinearMap x ((proj X H x).app U s ⟨hx⟩) := by
   have hp : moduleCup_godementMap X f ≫ proj X H' x =
       toSkyscraper (f.stalkLinearMap x ∘ₗ eval X H x) := by
-    simp only [moduleCup_godementMap, proj, CategoryTheory.Limits.Pi.lift_π, comp_toSkyscraper,
+    simp only [moduleCup_godementMap, proj, CategoryTheory.Limits.Pi.lift_comp_π, comp_toSkyscraper,
       eval, LinearMap.comp_assoc]
   change ((moduleCup_godementMap X f ≫ proj X H' x).app U s) ⟨hx⟩ = _
   rw [hp, toSkyscraper_app_apply, LinearMap.comp_apply, eval_germ]
@@ -200,7 +200,7 @@ private lemma coordinates_unit (X : Scheme.{u})
         CategoryTheory.Limits.Pi.π (fun y : X ↦ skyscraper y (L.presheaf.stalk y)) x =
       toSkyscraper (LinearMap.id : L.presheaf.stalk x →ₗ[X.presheaf.stalk x]
         L.presheaf.stalk x) := by
-    simp only [moduleCup_godementUnit, CategoryTheory.Limits.Pi.lift_π]
+    simp only [moduleCup_godementUnit, CategoryTheory.Limits.Pi.lift_comp_π]
   have heval (L : X.Modules) (a : Γ(L, V.unop)) :
       (CategoryTheory.Limits.Pi.π (fun y : X ↦ skyscraper y (L.presheaf.stalk y)) x).app V.unop
         ((moduleCup_godementUnit X L).app V.unop a) ⟨hx⟩ =
@@ -228,8 +228,8 @@ private lemma multiply_eval_sections (X : Scheme.{u}) (H : X.Modules)
       eval X H x ((proj X (moduleCup_godementObject X H) x).app U s ⟨hx⟩) := by
   have hp : moduleCup_godementMultiply X H ≫ proj X H x =
       toSkyscraper (eval X H x ∘ₗ eval X (moduleCup_godementObject X H) x) := by
-    simp only [moduleCup_godementMultiply, proj, CategoryTheory.Limits.Pi.lift_π, comp_toSkyscraper,
-      eval, LinearMap.comp_assoc]
+    simp only [moduleCup_godementMultiply, proj, CategoryTheory.Limits.Pi.lift_comp_π,
+      comp_toSkyscraper, eval, LinearMap.comp_assoc]
   change ((moduleCup_godementMultiply X H ≫ proj X H x).app U s) ⟨hx⟩ = _
   rw [hp, toSkyscraper_app_apply, LinearMap.comp_apply, eval_germ]
 

@@ -204,8 +204,7 @@ private theorem pureTensor_ext {R : Sheaf J CommRingCat.{r}}
       ((adj.unit.app (M.val ⊗ N.val)).app V t)) =
     g.val.app V ((tensorObjIsoSheafification M N).inv.val.app V
       ((adj.unit.app (M.val ⊗ N.val)).app V t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact h V x y
   | add t t' ht ht' => simp only [map_add, ht, ht']
 
@@ -300,7 +299,7 @@ private theorem tensorLeft_colimit_finiteLimits {R : Sheaf J CommRingCat.{r}}
     have := tensorLeft_preservesColimits_independentCoefficients R M
     exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
   have : PreservesColimit F (curriedTensor (Modules R)) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor F
+    MonoidalCategory.Limits.preservesColimit_curriedTensor F
   let e : tensorLeft c.pt ≅ (F ⋙ curriedTensor (Modules R)).flip ⋙ colim :=
     (curriedTensor (Modules R)).mapIso (hc.coconePointUniqueUpToIso (colimit.isColimit F)) ≪≫
       preservesColimitIso (curriedTensor (Modules R)) F ≪≫ colimitIsoFlipCompColim _
@@ -351,10 +350,13 @@ private def restrictedTensorPresheafIso (φ : R ⟶ S)
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
+      let : Module (R.obj.obj W)
+          ((ModuleCat.restrictScalars
+            (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+              (M.val.obj W)) := inferInstanceAs (Module (R.obj.obj W) (M.val.obj W))
       change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =
         changeOfRingsMap φ M f (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)
       exact (Classical.choose_spec (exists_changeOfRingsMap φ M f) s m).symm

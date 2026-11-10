@@ -56,7 +56,7 @@ theorem irreducible_open_complement_dimension
       ((p.map f hf).snoc full (hproper _))).trans hdim
     have h' : ((p.length + 1 : ℕ) : WithBot ℕ∞) ≤ (d : WithBot ℕ∞) := by
       simpa using h
-    exact_mod_cast h'
+    exact ENat.natCast_le_natCast.mp (WithBot.coe_le_coe.mp h')
   cases d with
   | zero =>
     left
@@ -72,4 +72,4 @@ theorem irreducible_open_complement_dimension
     apply iSup_le
     intro p
     have h := Nat.le_of_succ_le_succ (hchain p)
-    exact_mod_cast h
+    exact WithBot.coe_le_coe.mpr (ENat.natCast_le_natCast.mpr h)

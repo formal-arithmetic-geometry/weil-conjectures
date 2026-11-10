@@ -65,11 +65,9 @@ def transportAdjunction {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
         intro X X' Y f g
         change (e X Y).symm (composition R C p _ _ _ g f) =
           composition R D p _ _ _ ((e X' Y).symm g) (transportHom R p F _ _ f)
-        induction f using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction f using TensorProduct.inductionOn with
         | tmul a f =>
-          induction g using TensorProduct.induction_on with
-          | zero => simp only [map_zero, LinearMap.zero_apply]
+          induction g using TensorProduct.inductionOn with
           | tmul b g =>
             change (e X Y).symm (composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
             simp only [composition_tmul, e]
@@ -83,11 +81,9 @@ def transportAdjunction {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
         intro X Y Y' g h
         change e X Y' (composition R D p _ _ _ h g) =
           composition R C p _ _ _ (transportHom R p G _ _ h) (e X Y g)
-        induction g using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction g using TensorProduct.inductionOn with
         | tmul a g =>
-          induction h using TensorProduct.induction_on with
-          | zero => simp only [map_zero, LinearMap.zero_apply]
+          induction h using TensorProduct.inductionOn with
           | tmul b h =>
             change e X Y' (composition R D p _ _ _ (b ⊗ₜ[R] h) (a ⊗ₜ[R] g)) = _
             simp only [composition_tmul, e]

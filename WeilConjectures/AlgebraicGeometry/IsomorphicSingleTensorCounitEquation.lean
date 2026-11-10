@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 
 module
+
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitTransport
 import WeilConjectures.AlgebraicGeometry.PinnedPullbackCompositionShifts
 /-! # Counit equation for canonical transport
@@ -206,10 +209,12 @@ private theorem pinned_single_comp
         simpa only [Category.assoc] using congrArg
           (fun k ↦ (derivedPullback f).map (ε_g.app E) ≫
             k ≫ Q_X.map r_f ≫ Q_X.map p) hn.symm
-  simpa only [pinnedSingleTensorCounit, pinnedPullbackCounit, r_f, r_g, r_fg, p, E, C,
-    eps, ε_f, ε_g, tensorCounit, Q_X, Q_Y, Q_Z, DerivedCategory.singleFunctor,
-    DerivedCategory.singleFunctors, SingleFunctors.postcomp, Functor.map_comp,
-    Functor.comp_map, Functor.comp_obj, Category.assoc] using h
+  with_unfolding_all
+    simp only [pinnedSingleTensorCounit, cast_eq, pinnedPullbackCounit, r_f, r_g, r_fg,
+      p, E, C, eps, ε_f, ε_g, tensorCounit, Q_X, Q_Y, Q_Z, DerivedCategory.singleFunctor,
+      DerivedCategory.singleFunctors, SingleFunctors.postcomp, Functor.map_comp,
+      Functor.comp_map, Functor.comp_obj, Category.assoc] at h ⊢
+    exact h
 private theorem transport_eq
     {C D : Type*} [Category C] [Category D]
     {L : C ⥤ D} {R : D ⥤ C} (a : L ⊣ R)

@@ -89,7 +89,7 @@ private lemma flat_finite_coproduct
   have (i : I) : PreservesFiniteLimits (MonoidalCategory.tensorLeft (F i)) := (hF i).1.1
   rw [ObjectProperty.flat_iff_preservesFiniteLimits]
   have : PreservesColimit (Discrete.functor F) (MonoidalCategory.curriedTensor D) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   have e : MonoidalCategory.tensorLeft (∐ F) ≅
       (Discrete.functor F ⋙ MonoidalCategory.curriedTensor D).flip ⋙ colim :=
     preservesColimitIso (MonoidalCategory.curriedTensor D) (Discrete.functor F) ≪≫

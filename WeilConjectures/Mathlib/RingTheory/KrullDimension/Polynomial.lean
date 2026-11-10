@@ -40,7 +40,8 @@ theorem ringKrullDim_ne_top_of_finiteType (k A : Type*) [Field k] [CommRing A] [
     [Algebra.FiniteType k A] : ringKrullDim A ≠ ⊤ := by
   obtain ⟨n, f, hf⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.1 ‹Algebra.FiniteType k A›
   refine ne_top_of_le_ne_top ?_ (ringKrullDim_le_of_surjective f.toRingHom hf)
-  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field, zero_add]
+  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
+    ringKrullDim_eq_zero_of_field, zero_add]
   intro h
   cases h
 
@@ -105,7 +106,8 @@ theorem MvPolynomial.height_eq_of_isMaximal {k : Type*} [Field k] :
     ∀ (n : ℕ) (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal], M.height = n
   | 0, M, _ => by
     have h := height_le_ringKrullDim_of_ne_top (IsMaximal.ne_top ‹M.IsMaximal›)
-    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field] at h
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
+      ringKrullDim_eq_zero_of_field] at h
     simp only [Nat.card_eq_fintype_card, Fintype.card_fin, Nat.cast_zero, add_zero] at h
     exact_mod_cast le_antisymm (by exact_mod_cast h) zero_le
   | n + 1, M, _ => by
@@ -127,3 +129,4 @@ theorem MvPolynomial.ringKrullDim_localization_atPrime_of_isMaximal {k : Type*} 
     ringKrullDim (Localization.AtPrime M) = n := by
   rw [IsLocalization.AtPrime.ringKrullDim_eq_height M, MvPolynomial.height_eq_of_isMaximal n M]
   rfl
+

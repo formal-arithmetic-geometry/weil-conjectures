@@ -38,7 +38,7 @@ private theorem finite_germ_representatives
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   let Φ := pointSmallEtale s
   choose U a σ hσ using fun i ↦ Φ.toPresheafFiber_jointly_surjective (z i)
-  let X : I → Φ.fiber.Elements := fun i ↦ ⟨U i, a i⟩
+  let X : I → Φ.fiber.Elements := fun i ↦ Φ.fiber.elementsMk (U i) (a i)
   let O : Finset Φ.fiber.Elements := (Set.finite_range X).toFinset
   obtain ⟨W, hW⟩ := IsCofiltered.inf_objs_exists O
   let f : ∀ i, W ⟶ X i := fun i ↦ (hW (by simp [O])).some

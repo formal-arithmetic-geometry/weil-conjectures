@@ -147,13 +147,13 @@ theorem exactCompactificationUnit_identity
       C (HasCompactification.compactification (𝟙 X))
   let j : D ≅ 𝟭 (DerivedCategoryModule A X) :=
     Functor.mapDerivedCategoryNatIso i ≪≫ Functor.mapDerivedCategoryIdIso _
-  have hm : (Functor.mapDerivedCategoryCompIso F F).inv ≫
+  have hm : (Functor.mapDerivedCategoryCompIso F F).hom ≫
       (Functor.mapDerivedCategoryNatIso σ).hom = Functor.whiskerLeft D j.hom := by
     have hn := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F i
-    change (Functor.mapDerivedCategoryCompIso F F).inv ≫
+    change (Functor.mapDerivedCategoryCompIso F F).hom ≫
       (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft F i)).hom = _
-    rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F F).hom,
-      Iso.hom_inv_id_assoc]
+    rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F F).inv,
+      Iso.inv_hom_id_assoc]
     dsimp only [j, Iso.trans_hom]
     rw [Functor.whiskerLeft_comp, ← Category.assoc, ← hn, Category.assoc,
       Functor.mapDerivedCategoryCompIso_comp_id]

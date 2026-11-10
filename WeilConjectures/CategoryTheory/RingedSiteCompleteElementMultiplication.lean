@@ -141,7 +141,7 @@ private theorem localization_flat
     change PreservesFiniteLimits (tensorLeft (𝟙_ A))
     exact preservesFiniteLimits_of_natIso (leftUnitorNatIso A).symm
   have : PreservesColimit D (curriedTensor A) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   let e : tensorLeft (colimit D) ≅ (D ⋙ curriedTensor A).flip ⋙ colim :=
     preservesColimitIso (curriedTensor A) D ≪≫ colimitIsoFlipCompColim _
   have : PreservesFiniteLimits ((D ⋙ curriedTensor A).flip) :=
@@ -190,6 +190,10 @@ theorem ringedSite_completeElement_mul
   let : MonoidalPreadditive A := tensor_monoidalPreadditive
   let Q : CochainComplex A ℤ ⥤ DerivedCategory A := DerivedCategory.Q
   let N := ringedSiteDerivedRestriction O U K
+  let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) _ _
+      (inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over U))))) :=
+    inferInstanceAs (Category.{w} (DerivedCategory (SheafOfModules.{u} (O.over U))))
   let P := Q.objPreimage N
   let I := (CochainComplex.kInjectiveResolutionFunctor.{u} A).obj P
   let η := (CochainComplex.toKInjectiveResolution.{u} A).app P

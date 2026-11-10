@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Defs
 
 /-!
@@ -61,13 +63,13 @@ lemma whiskerLeft_lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso
         (Etale.lowerStarComp _ g (𝟙 Y) g (Category.comp_id g).symm)).hom =
       𝟙 _ := by
   refine Functor.rightDerived_ext (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus)
-    (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit)
+    (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith)
     (HomotopyCategory.Plus.quasiIso _) _ _ _ ?_
   ext K : 2
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app,
     Functor.comp_obj]
   have hnat := (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) Y).inv.naturality
-    (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app K)
+    (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app K)
   simp only [Functor.id_map, Functor.id_obj] at hnat
   have hfac := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac
     ((g)_*[ModuleCat.{u + 1} Λ]) ((𝟙 Y)_*[ModuleCat.{u + 1} Λ])

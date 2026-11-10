@@ -43,14 +43,13 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 
 attribute [local irreducible] upperStar lowerStar squareUpperStarIso
   openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit Functor.rightDerivedFunctorUnitQ
   Functor.rightDerivedFunctorObjQIso
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem natTrans_eq_of_kinjective
     {C : Type v} {T : Type vT} [Category.{w} C] [Category.{wT} T] [Abelian C]
@@ -162,9 +161,9 @@ variable {X Y Y' Z : Type v} [Category.{w} X] [Category.{w} Y]
   (t : F ⋙ J ≅ F' ⋙ J')
 
 private lemma exactComparison_factors (M : CochainComplex X ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F J).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F J ≪≫
         Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso F' J').hom.app (DerivedCategory.Q.obj M) ≫
+        (Functor.mapDerivedCategoryCompIso F' J').symm).hom.app (DerivedCategory.Q.obj M) ≫
       D(J').map (F'.mapDerivedCategoryFactors.hom.app M) ≫
       J'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj M) =
     D(J).map (F.mapDerivedCategoryFactors.hom.app M) ≫
@@ -174,15 +173,15 @@ private lemma exactComparison_factors (M : CochainComplex X ℤ) :
   erw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac,
     ← Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  erw [Category.assoc, Iso.inv_hom_id_app_assoc]
+  erw [Category.assoc, Iso.hom_inv_id_app_assoc]
   erw [Category.assoc]
 
 private lemma exactComparison_inv_factors (M : CochainComplex X ℤ) :
     J'.mapDerivedCategoryFactors.inv.app ((F'.mapHomologicalComplex (.up ℤ)).obj M) ≫
       D(J').map (F'.mapDerivedCategoryFactors.inv.app M) ≫
-      ((Functor.mapDerivedCategoryCompIso F J).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F J ≪≫
         Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso F' J').inv.app (DerivedCategory.Q.obj M) =
+        (Functor.mapDerivedCategoryCompIso F' J').symm).inv.app (DerivedCategory.Q.obj M) =
     DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t.inv (.up ℤ)).app M) ≫
       J.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj M) ≫
       D(J).map (F.mapDerivedCategoryFactors.inv.app M) := by
@@ -192,9 +191,9 @@ private lemma exactComparison_inv_factors (M : CochainComplex X ℤ) :
     J'.mapDerivedCategoryFactors.app ((F'.mapHomologicalComplex (.up ℤ)).obj M)
   let r : (F ⋙ J).mapHomologicalComplex (.up ℤ) ≅
       (F' ⋙ J').mapHomologicalComplex (.up ℤ) := NatIso.mapHomologicalComplex t _
-  have hi : (((Functor.mapDerivedCategoryCompIso F J).symm ≪≫
+  have hi : ((Functor.mapDerivedCategoryCompIso F J ≪≫
       Functor.mapDerivedCategoryNatIso t ≪≫
-      Functor.mapDerivedCategoryCompIso F' J').app (DerivedCategory.Q.obj M)) ≪≫ A' =
+      (Functor.mapDerivedCategoryCompIso F' J').symm).app (DerivedCategory.Q.obj M)) ≪≫ A' =
       A ≪≫ DerivedCategory.Q.mapIso (r.app M) := by
     apply Iso.ext
     simpa only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
@@ -281,17 +280,17 @@ private theorem derived_cube
       c.inv.app (G.obj F) ≫ Q₀.map (a.app F) ≫ e₀.app (U.obj F))
     (K : DerivedCategory B) :
     D(V').map (de.app K) ≫ db.app (D(P).obj K) ≫
-        R(H₀).map (((Functor.mapDerivedCategoryCompIso U P₀).symm ≪≫
+        R(H₀).map ((Functor.mapDerivedCategoryCompIso U P₀ ≪≫
           Functor.mapDerivedCategoryNatIso d ≪≫
-          Functor.mapDerivedCategoryCompIso P U').inv.app K) =
-      ((Functor.mapDerivedCategoryCompIso V Q₀).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso P U').symm).inv.app K) =
+      (Functor.mapDerivedCategoryCompIso V Q₀ ≪≫
         Functor.mapDerivedCategoryNatIso c ≪≫
-        Functor.mapDerivedCategoryCompIso Q V').inv.app (R(G).obj K) ≫
+        (Functor.mapDerivedCategoryCompIso Q V').symm).inv.app (R(G).obj K) ≫
         D(Q₀).map (da.app K) ≫ de₀.app (D(U).obj K) := by
-  generalize hdc : ((Functor.mapDerivedCategoryCompIso V Q₀).symm ≪≫
-    Functor.mapDerivedCategoryNatIso c ≪≫ Functor.mapDerivedCategoryCompIso Q V') = dc
-  generalize hdd : ((Functor.mapDerivedCategoryCompIso U P₀).symm ≪≫
-    Functor.mapDerivedCategoryNatIso d ≪≫ Functor.mapDerivedCategoryCompIso P U') = dd
+  generalize hdc : (Functor.mapDerivedCategoryCompIso V Q₀ ≪≫
+    Functor.mapDerivedCategoryNatIso c ≪≫ (Functor.mapDerivedCategoryCompIso Q V').symm) = dc
+  generalize hdd : (Functor.mapDerivedCategoryCompIso U P₀ ≪≫
+    Functor.mapDerivedCategoryNatIso d ≪≫ (Functor.mapDerivedCategoryCompIso P U').symm) = dd
   let α : R(G) ⋙ (D(Q) ⋙ D(V')) ⟶ (D(U) ⋙ D(P₀)) ⋙ R(H₀) :=
     Functor.whiskerRight (de) D(V') ≫
     Functor.whiskerLeft D(P) (db) ≫
@@ -587,13 +586,13 @@ private theorem derived_open_comparison
     {g' : X' ⟶ X} {j' : X' ⟶ Y'} {j : X ⟶ Y} {g : Y' ⟶ Y}
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback g' j' j g) :
     mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) sq =
-      (Functor.mapDerivedCategoryCompIso (g')^*[ModuleCat.{u + 1} A]
-        (j')_!open[ModuleCat.{u + 1} A]).symm ≪≫
+      Functor.mapDerivedCategoryCompIso (g')^*[ModuleCat.{u + 1} A]
+        (j')_!open[ModuleCat.{u + 1} A] ≪≫
       Functor.mapDerivedCategoryNatIso
         (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap
           (ModuleCat.{u + 1} A) sq)) ≪≫
-      Functor.mapDerivedCategoryCompIso (j)_!open[ModuleCat.{u + 1} A]
-        (g)^*[ModuleCat.{u + 1} A] := by
+      (Functor.mapDerivedCategoryCompIso (j)_!open[ModuleCat.{u + 1} A]
+        (g)^*[ModuleCat.{u + 1} A]).symm := by
   rfl
 
 -- Elaborating the specialization compares the eight sheaf categories of the cube.

@@ -52,7 +52,7 @@ noncomputable def closedLiftTensorEquiv :
 lemma closedLiftTensorEquiv_one_tmul (r : A ⧸ I) :
     closedLiftTensorEquiv I S (1 ⊗ₜ r) = algebraMap (A ⧸ I) S r := by
   obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective r
-  simp only [closedLiftTensorEquiv, RingEquiv.trans_apply, AlgEquiv.coe_ringEquiv,
+  simp only [closedLiftTensorEquiv, RingEquiv.trans_apply, AlgEquiv.coe_toRingEquiv,
     Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, Algebra.smul_def, mul_one,
     RingEquiv.ofBijective_apply]
   change Algebra.ClosedLift.toAlgHom A S (algebraMap A _ r) = _
@@ -82,7 +82,7 @@ lemma closedLiftSpecPullbackIso_hom_fst :
   ext x
   simp only [closedLiftTensorEquiv, CommRingCat.hom_comp, CommRingCat.hom_ofHom,
     RingHom.coe_comp, Function.comp_apply, RingEquiv.coe_toRingHom, RingEquiv.trans_apply,
-    AlgEquiv.coe_ringEquiv, RingEquiv.ofBijective_apply]
+    AlgEquiv.coe_toRingEquiv, RingEquiv.ofBijective_apply]
   erw [Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, one_smul]
   rfl
 

@@ -25,14 +25,16 @@ set_option autoImplicit false
 set_option linter.unusedVariables false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u v r s u₁ v₁ u₂ v₂
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open scoped TensorProduct
-local instance (priority := 5000) (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
+local instance (priority := 5000)
+    instEssentiallySmallProEt_automorphismConstructibleStageEquivalence
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective

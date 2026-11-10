@@ -220,14 +220,14 @@ def CoefficientScalarSectionRealization (Z : Scheme.{u}) : Prop :=
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z)
       (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)
       (coefficientSectionScalarMap a Z),
-  (q = (Functor.mapDerivedCategoryCompIso (Mod.comap (coefficientMap a Z))
-      (ModuleRingedComparison.equivalence R Z).functor).symm ≪≫
+  (q = Functor.mapDerivedCategoryCompIso (Mod.comap (coefficientMap a Z))
+      (ModuleRingedComparison.equivalence R Z).functor ≪≫
     Functor.mapDerivedCategoryNatIso r ≪≫
-    Functor.mapDerivedCategoryCompIso (ModuleRingedComparison.equivalence S Z).functor
+    (Functor.mapDerivedCategoryCompIso (ModuleRingedComparison.equivalence S Z).functor
       (SheafOfModules.scalarRestriction.{u + 1, u, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z)
       (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)
-      (coefficientSectionScalarMap a Z))) ∧
+      (coefficientSectionScalarMap a Z))).symm) ∧
   (∀ (P : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ),
     CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z)

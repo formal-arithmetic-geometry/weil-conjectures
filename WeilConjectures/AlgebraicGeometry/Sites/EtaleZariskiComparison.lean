@@ -114,6 +114,7 @@ lemma mem_zariskiSpaceOpens {V : TopologicalSpace.Opens X.zariskiSpace} {x : X} 
     x ∈ zariskiSpaceOpens V ↔ ULift.up x ∈ V :=
   Iff.rfl
 
+
 /-- The correspondence between opens of `X.zariskiSpace` and of `X` is monotone. -/
 lemma zariskiSpaceOpens_mono {V W : TopologicalSpace.Opens X.zariskiSpace} (h : V ≤ W) :
     zariskiSpaceOpens V ≤ zariskiSpaceOpens W :=

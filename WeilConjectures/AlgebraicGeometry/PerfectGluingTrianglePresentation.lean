@@ -64,7 +64,7 @@ private theorem compare (W : Y.Opens)
       SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) := Scheme.Modules.overEquiv W
   let : eqv.functor.Additive := Functor.additive_of_preserves_binary_products _
   let ed := eqv.mapDerivedCategory
-  let comp := Functor.mapDerivedCategoryCompIso L eqv.functor
+  let comp := (Functor.mapDerivedCategoryCompIso L eqv.functor).symm
   let adj := (ascheme.comp ed.symm.toAdjunction).ofNatIsoLeft
     ((Functor.isoWhiskerRight comp ed.inverse) ≪≫ Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft L.mapDerivedCategory ed.unitIso.symm ≪≫ Functor.rightUnitor _)

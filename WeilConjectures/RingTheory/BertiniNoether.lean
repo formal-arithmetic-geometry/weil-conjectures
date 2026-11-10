@@ -5,7 +5,15 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
+public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.MvPolynomial.Localization
+public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
+public import Mathlib.Tactic
+public import Mathlib.Algebra.MvPolynomial.Basic
 
 /-!
 # The Bertini–Noether theorem
@@ -67,7 +75,7 @@ private noncomputable def factorIdeal (P : MvPolynomial (Fin n) A) (d : ℕ) :
 variable {A}
 
 private lemma coeff_generic (b : Bool) (m : Fin n →₀ ℕ) :
-    coeff m (generic A n d b) =
+    AddMonoidAlgebra.coeff (generic A n d b) m =
       if h : ∃ e ∈ lowMonos n d, mono e = m then X (b, h.choose) else 0 := by
   classical
   simp only [generic, coeff_sum, coeff_monomial]
@@ -76,7 +84,7 @@ private lemma coeff_generic (b : Bool) (m : Fin n →₀ ℕ) :
     rw [Finset.sum_eq_single h.choose]
     · simp [hm]
     · intro e _ hne
-      rw [if_neg]
+      rw [ite_eq_right]
       intro h'
       exact hne (mono_injective (h'.trans hm.symm))
     · intro hn
@@ -104,11 +112,12 @@ private lemma map_generic_mul_eq (P : MvPolynomial (Fin n) A)
     map ψ (generic A n d false) * map ψ (generic A n d true) = map (ψ.comp C) P := by
   have h : map ψ (generic A n d false * generic A n d true - map C P) = 0 := by
     ext m
-    rw [coeff_map, coeff_zero]
-    by_cases hm : coeff m (generic A n d false * generic A n d true - map C P) = 0
+    rw [coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply]
+    by_cases hm :
+        AddMonoidAlgebra.coeff (generic A n d false * generic A n d true - map C P) m = 0
     · rw [hm, map_zero]
     · exact hψ (Ideal.subset_span (coeff_mem_coeffs m hm))
-  rwa [map_sub, map_mul, map_map, sub_eq_zero] at h
+  rwa [RingHom.map_sub, RingHom.map_mul, map_map, sub_eq_zero] at h
 
 /-- A factorization gives a point of the coefficient scheme. -/
 private lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
@@ -118,7 +127,7 @@ private lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
       ψ.comp C = φ ∧ factorIdeal A P d ≤ RingHom.ker ψ := by
   classical
   set ψ : MvPolynomial (Bool × (Fin n → Fin d)) A →+* E :=
-    eval₂Hom φ fun x ↦ coeff (mono x.2) (if x.1 then G else F) with hψdef
+    eval₂Hom φ fun x ↦ AddMonoidAlgebra.coeff (if x.1 then G else F) (mono x.2) with hψdef
   have key (b : Bool) (H : MvPolynomial (Fin n) E) (hH : totalDegree H < d)
       (hb : H = if b then G else F) : map ψ (generic A n d b) = H := by
     ext m
@@ -141,10 +150,10 @@ private lemma exists_hom_of_mul_eq (P : MvPolynomial (Fin n) A) (φ : A →+* E)
   rw [factorIdeal, Ideal.span_le]
   intro c hc
   obtain ⟨m, -, rfl⟩ := mem_coeffs_iff.mp (Finset.mem_coe.mp hc)
-  rw [SetLike.mem_coe, RingHom.mem_ker, ← coeff_map, map_sub, map_mul,
+  rw [SetLike.mem_coe, RingHom.mem_ker, ← coeff_map, RingHom.map_sub, RingHom.map_mul,
     key false F hF (by simp), key true G hG (by simp), map_map]
   have : ψ.comp C = φ := by ext; simp [ψ]
-  rw [this, hFG, sub_self, coeff_zero]
+  rw [this, hFG, sub_self, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply]
 
 
 /-- A constructible subset of `Spec R` (`R` a domain) not containing the generic point is
@@ -213,7 +222,7 @@ private lemma totalDegree_pos_of_irreducible {σ L : Type*} [Field L] {Q : MvPol
   rw [Nat.pos_iff_ne_zero]
   intro h
   rw [totalDegree_eq_zero_iff_eq_C.mp h] at hQ
-  by_cases hr : coeff 0 Q = 0
+  by_cases hr : AddMonoidAlgebra.coeff Q 0 = 0
   · rw [hr, map_zero] at hQ
     exact hQ.ne_zero rfl
   · exact hQ.not_isUnit ((isUnit_iff_eq_C_of_isReduced).mpr
@@ -330,7 +339,8 @@ theorem bertini_noether [IsDomain A] (P : MvPolynomial (Fin n) A)
     rintro rfl
     exact hP.ne_zero (map_zero _)
   obtain ⟨m₀, hm₀, hm₀d⟩ := Finset.exists_mem_eq_sup P.support hP0 fun s ↦ s.sum fun _ e ↦ e
-  refine ⟨a₀ * coeff m₀ P, mul_ne_zero ha₀ (mem_support_iff.mp hm₀), fun {k} _ φ hφ ↦ ?_⟩
+  refine ⟨a₀ * AddMonoidAlgebra.coeff P m₀, mul_ne_zero ha₀ (mem_support_iff.mp hm₀),
+    fun {k} _ φ hφ ↦ ?_⟩
   rw [map_mul] at hφ
   have hdeg : totalDegree (map φ P) = d := by
     refine le_antisymm (totalDegree_map_le φ P) ?_

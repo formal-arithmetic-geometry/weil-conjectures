@@ -176,11 +176,12 @@ theorem irreducible_X_pow_sub_C_X_of_ne_zero {N : ℕ} (hN : N ≠ 0) :
     exact X_irreducible.not_isUnit
   have hE := hmon.isEisensteinAt_of_mem_of_notMem hP (fun {n} hn ↦ by
       rw [hdeg] at hn
-      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C, if_neg hn.ne]
+      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C, ite_eq_right hn.ne]
       split_ifs <;> simp)
     (by
-      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C, if_neg (Ne.symm hN),
-        if_pos rfl, zero_sub,
+      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, Polynomial.coeff_C,
+        ite_eq_right (Ne.symm hN),
+        ite_eq_left rfl, zero_sub,
         Ideal.span_singleton_pow, Ideal.mem_span_singleton, dvd_neg]
       intro h
       have := (pow_dvd_pow_iff (X_ne_zero (R := K)) X_irreducible.not_isUnit (n := 2) (m := 1)).1

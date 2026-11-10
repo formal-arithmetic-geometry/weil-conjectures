@@ -205,7 +205,7 @@ private theorem finiteStratification_of_constructible
     (M : supportModules Λ X) (hM : IsConstantModelConstructible Λ X M) :
     IsFiniteConstantStratified Λ X M := by
   classical
-  simpa only [IsConstantModelConstructible, if_pos hX] using hM
+  simpa only [IsConstantModelConstructible, ite_eq_left hX] using hM
 
 private theorem finiteStratifications_family
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

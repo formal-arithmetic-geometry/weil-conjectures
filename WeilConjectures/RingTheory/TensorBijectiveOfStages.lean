@@ -64,8 +64,7 @@ lemma exists_eq_stageTensorMap [Nonempty ι] (hx : algebraMap R L x ≠ 0)
     (hdir : ∀ i j, ∃ k, O i ≤ O k ∧ O j ≤ O k)
     (hexh : ∀ c : L, ∃ (i : ι) (n : ℕ), algebraMap R L x ^ n * c ∈ O i) (t : L ⊗[R] A) :
     ∃ (i : ι) (n : ℕ) (τ : O i ⊗[R] A), stageTensorMap x O i n τ = t := by
-  induction t using TensorProduct.induction_on with
-  | zero => exact ⟨Classical.arbitrary ι, 0, 0, map_zero _⟩
+  induction t using TensorProduct.inductionOn with
   | tmul c a =>
     obtain ⟨i, n, hc⟩ := hexh c
     refine ⟨i, n, ⟨_, hc⟩ ⊗ₜ a, ?_⟩

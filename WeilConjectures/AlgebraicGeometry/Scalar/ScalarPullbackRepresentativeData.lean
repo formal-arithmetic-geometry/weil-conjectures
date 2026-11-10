@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalar
 public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Logic.Small.Defs
+
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Logic.Small.Defs
 
 /-!
 # Specified scalar/pullback representative data
@@ -89,10 +94,14 @@ def scalarGeometricRepresentative
     L(upperStar (ModuleCat.{u + 1} A) f).obj (_root_.DerivedCategory.Q.obj P) ⟶
       _root_.DerivedCategory.Q.obj
         (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit.app
+  L(upperStar (ModuleCat.{u + 1} A) f).map
+      ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
     _root_.DerivedCategory.Qh.map
-      (((upperStar (ModuleCat.{u + 1} A) f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P)
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+    (DerivedCategory.quotientCompQhIso _).hom.app
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The exact geometric representative through the canonical derived comparison.
 Source: Stacks 07A4 (blueprint: def-pur-scalar-pullback-representative-data).
@@ -105,11 +114,18 @@ private theorem scalarGeometricRepresentative_eq
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).hom.app
         (DerivedCategory.Q.obj P) ≫
       (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategoryFactors.hom.app P := by
-  exact representative_eq (upperStar (ModuleCat.{u + 1} A) f)
+  have h := representative_eq (upperStar (ModuleCat.{u + 1} A) f)
     L(upperStar (ModuleCat.{u + 1} A) f)
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
     (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorCounit
     (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac P
+  have hq : (DerivedCategory.quotientCompQhIso _).inv.app P = 𝟙 _ := rfl
+  have hq' : (DerivedCategory.quotientCompQhIso _).hom.app
+      (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
+  dsimp only [scalarGeometricRepresentative]
+  rw [hq, hq']
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  exact h
 
 private theorem scalarGeometricRepresentative_exact
     (A : Type (u + 1)) [CommRing A] {T X : Scheme.{u}} (f : T ⟶ X)
@@ -164,11 +180,11 @@ private theorem square_cochain_fac {A B B' E : Type*} [Category A] [Category B] 
   have hF' : F₂.mapDerivedCategoryFactors.inv.app
         ((F₁.mapHomologicalComplex (.up ℤ)).obj X) ≫
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.inv.app X) ≫
-      (mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Q.obj X) =
+      (mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj X) =
         (F₁ ⋙ F₂).mapDerivedCategoryFactors.inv.app X := by
     apply (cancel_mono ((F₁ ⋙ F₂).mapDerivedCategoryFactors.hom.app X)).1
     simp only [Category.assoc, Iso.inv_hom_id_app]
-    erw [← hF, Iso.inv_hom_id_app_assoc]
+    erw [← hF, Iso.hom_inv_id_app_assoc]
     simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_app]
     erw [F₂.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app]
     rfl
@@ -183,7 +199,7 @@ section ExactRepresentativeAPI
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.leftDerivedFunctorCounit Functor.rightDerivedFunctorUnit
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem exactSquareRepresentative
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]

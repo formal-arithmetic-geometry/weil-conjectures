@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.CategoryTheory.Sites.Equivalence
@@ -52,7 +53,7 @@ private theorem asSmall_generate_pullback
       Sieve.generate (R.functorPullback (AsSmall.down : AsSmall.{0} C ⥤ C)) := by
   apply le_antisymm _ (Sieve.generate_functorPullback_le _ _)
   rintro Y f ⟨Z, a, b, hb, hab⟩
-  exact ⟨AsSmall.up.obj Z, ⟨a⟩, ⟨b⟩, hb, ULift.ext _ _ hab⟩
+  exact ⟨AsSmall.up.obj Z, ⟨a⟩, ⟨b⟩, hb, ULift.ext hab⟩
 
 private theorem asSmall_lift_cover
     {C : Type u} [Category.{v} C] (J : Precoverage C) {X : C} {S : Sieve X}
@@ -93,7 +94,7 @@ private theorem asSmall_lower_cover
         exact ⟨ULift.down Z, b.down, c.down, ⟨hc⟩, congrArg ULift.down hbc⟩
       · rintro ⟨Z, b, c, hc, hbc⟩
         refine ⟨AsSmall.up.obj Z, ⟨b⟩, ⟨c⟩, (asSmall_map_iff R c).mp hc, ?_⟩
-        exact ULift.ext _ _ hbc
+        exact ULift.ext hbc
     rw [heq]
     exact J.generate_mem_toGrothendieck hR
   | top X => exact J.toGrothendieck.top_mem _
@@ -119,7 +120,7 @@ private theorem asSmall_dense
       have hh := S.downward_closed ha (show AsSmall.up.obj Y ⟶ Z from ⟨b⟩)
       change S (show AsSmall.up.obj Y ⟶ X from ⟨f⟩)
       have he : (show AsSmall.up.obj Y ⟶ Z from ⟨b⟩) ≫ a = ⟨f⟩ :=
-        ULift.ext _ _ hab.symm
+        ULift.ext hab.symm
       exact he ▸ hh
     · intro hf
       exact ⟨AsSmall.up.obj Y, ⟨f⟩, 𝟙 _, hf, by simp⟩
@@ -155,7 +156,7 @@ private theorem asSmall_site
       apply (asSmall_map_iff _ f).mpr
       refine ⟨AsSmall.up.obj Z, ⟨a⟩, ⟨b⟩, (asSmall_map_iff R b).mp ha,
         (asSmall_map_iff _ a).mp hb, ?_⟩
-      exact ULift.ext _ _ hab
+      exact ULift.ext hab
   · intro I X U a ha Y b
     obtain ⟨P, p, q, hp, hP⟩ := hJ.2.2 I (ULift.down X) (fun i ↦ ULift.down (U i))
       (fun i ↦ (a i).down) (by simpa only [Precoverage.mem_comap_iff, Presieve.map_ofArrows,
@@ -282,8 +283,8 @@ private theorem over_site
       rfl)
     refine ⟨V, p', q', ?_, ?_⟩
     · intro i
-      apply IsPullback.of_map_of_faithful (Over.forget B)
-      exact hp i
+      exact IsPullback.of_map_of_faithful (Over.forget B)
+        (f := p' i) (g := q' i) (h := b) (i := a i) (hp i)
     · simpa [V, p'] using hP
 
 private theorem over_topology
@@ -350,7 +351,7 @@ private theorem finitarySite_large_enoughPoints
     · simpa [K, d, AsSmall.up, AsSmall.down] using hg
     · intro a
       obtain ⟨q, hq⟩ := hq a
-      exact ⟨⟨q⟩, ULift.ext _ _ hq⟩
+      exact ⟨⟨q⟩, ULift.ext hq⟩
   obtain ⟨ι, p, hp⟩ := finitarySite_enoughPoints.{max u v, 0, w} K (asSmall_site J hJ) hfin
   have : (AsSmall.equiv : C ≌ D).inverse.IsDenseSubsite
       K.toGrothendieck J.toGrothendieck := by

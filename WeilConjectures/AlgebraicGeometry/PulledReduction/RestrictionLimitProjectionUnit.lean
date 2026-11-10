@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionComparisonData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
@@ -24,7 +26,7 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
 private theorem normalized_mate
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -158,6 +160,10 @@ private theorem constantUnit_eq (T : Scheme.{t}) :
   apply (completedConstantRlimUnit_exists d T).unique
     (completedConstantRlimUnit_exists d T).exists.choose_spec
   intro P
+  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   exact derivedUnit_complex (d.constantTower T)
     (completedTowerLimit T (d.completedRing T)) constLimAdj P
 

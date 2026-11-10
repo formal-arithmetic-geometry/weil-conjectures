@@ -61,7 +61,7 @@ lemma Scheme.Hom.eq_of_specializes_of_apply_eq_of_isIntegralHom (f : X ⟶ Y) [I
     by_contra hne
     have hlt : P.asIdeal < P'.asIdeal :=
       lt_of_le_of_ne hle fun h ↦ hne (PrimeSpectrum.ext h)
-    have := Ideal.IsIntegral.comap_lt_comap (R := Γ(V, ⊤)) hlt
+    have := Ideal.IsIntegral.under_lt_under (R := Γ(V, ⊤)) hlt
     exact this.ne (congrArg PrimeSpectrum.asIdeal hcomap)
   exact (f ⁻¹ᵁ V).toScheme.isoSpec.hom.homeomorph.injective hPeq
 

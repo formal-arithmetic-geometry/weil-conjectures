@@ -361,7 +361,7 @@ noncomputable def openSiteReturnIso (X : Scheme.{u}) (U : X.Opens) :
   let e : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Scheme.Modules.overEquiv U
   exact Functor.isoWhiskerRight
-      (Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ e.mapDerivedCategory.unitIso.symm ≪≫
     Functor.rightUnitor _
@@ -382,7 +382,7 @@ theorem openSiteOverlapIso_exists (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
     let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
     let siteU := openSiteReturnIso X U
     let siteW := openSiteReturnIso X W
-    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τ : RU ⋙ SP ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let σ := schemeDerivedOpenRestrictionCompIso X i
@@ -441,7 +441,7 @@ theorem openSiteReturn_overlap_triangle (X : Scheme.{u}) {W U : X.Opens}
     let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
     let siteU := openSiteReturnIso X U
     let siteW := openSiteReturnIso X W
-    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τ : RU ⋙ SP ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let σ := schemeDerivedOpenRestrictionCompIso X i
@@ -464,7 +464,7 @@ theorem openSiteReturn_overlap_triangle_app (X : Scheme.{u}) {W U : X.Opens}
     let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
     let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
     let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
-    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τ : RU ⋙ SP ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     SP.map ((openSiteReturnIso X U).hom.app E) ≫ τ.hom.app E =
@@ -490,7 +490,7 @@ theorem openSiteReturn_overlap_triangle_inv_app (X : Scheme.{u}) {W U : X.Opens}
     let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
     let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
     let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
-    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τ : RU ⋙ SP ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
     let σ := schemeDerivedOpenRestrictionCompIso X i

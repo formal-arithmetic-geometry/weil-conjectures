@@ -166,9 +166,10 @@ theorem exists_residueField_map_atPrimeMap_eq
     ∃ (σ : Gal(Ω/K)) (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q),
       ∀ x, IsLocalRing.ResidueField.map (atPrimeMap Q σ hσ) x = φ x := by
   let e : (integralClosure R Ω ⧸ Q) ≃+* IsLocalRing.ResidueField (Localization.AtPrime Q) :=
-    IsLocalization.AtPrime.equivQuotMaximalIdeal Q (Localization.AtPrime Q)
+    (IsLocalization.AtPrime.equivQuotMaximalIdeal Q (Localization.AtPrime Q)).toRingEquiv
   have he (b : integralClosure R Ω) :
-      e (Ideal.Quotient.mk Q b) = IsLocalRing.residue _ (algebraMap _ _ b) := rfl
+      e (Ideal.Quotient.mk Q b) = IsLocalRing.residue _ (algebraMap _ _ b) :=
+    IsLocalization.AtPrime.equivQuotMaximalIdeal_apply_mk Q (Localization.AtPrime Q) b
   let ψ₀ : (integralClosure R Ω ⧸ Q) ≃+* (integralClosure R Ω ⧸ Q) := (e.trans φ).trans e.symm
   have hψ₀ (x : R ⧸ P) : ψ₀ (algebraMap (R ⧸ P) _ x) = algebraMap (R ⧸ P) _ x := by
     obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x

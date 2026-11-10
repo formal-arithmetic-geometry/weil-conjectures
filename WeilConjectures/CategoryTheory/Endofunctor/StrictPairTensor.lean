@@ -172,4 +172,5 @@ theorem tensorRightScalarIso_nonempty (B : C ⥤ D) (c : B ⋙ Q ≅ P ⋙ B)
   let := hc
   exact ⟨tensorRightScalarIso B c τ σ b hb⟩
 
+
 end CategoryTheory.Endofunctor.IsoAlgebra

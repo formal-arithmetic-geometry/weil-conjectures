@@ -35,8 +35,8 @@ private theorem composition_localization {V W Z : Scheme.{t}} (h : Z ⟶ W) (k :
     (ch : (proEtaleSheafInverseImage h CommRingCat.{t + 1}).obj RW ≅ RZ) :
     proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch =
       Functor.mapDerivedCategoryNatIso (exchangeModuleComposition h k RV RW RZ ck ch) ≪≫
-        Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
-          (proEtaleRingModulePullback h RW RZ ch) := by
+        (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+          (proEtaleRingModulePullback h RW RZ ch)).symm := by
   let a := exchangeModuleComposition h k RV RW RZ ck ch
   let ak := proEtaleRingModuleAdjunction k RV RW ck
   let ah := proEtaleRingModuleAdjunction h RW RZ ch
@@ -54,8 +54,8 @@ private theorem composition_localization {V W Z : Scheme.{t}} (h : Z ⟶ W) (k :
   simp only [eqToIso_refl, Iso.refl_trans] at H
   change proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch =
     Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointCompIso ak ah ac e).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
-        (proEtaleRingModulePullback h RW RZ ch) at H
+      (Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)
+        (proEtaleRingModulePullback h RW RZ ch)).symm at H
   rw [he] at H
   exact H
 
@@ -93,7 +93,7 @@ theorem StrictTowerRingedSquare.ambientSquare_localization
   apply Iso.ext
   simp only [Functor.mapDerivedCategorySquareIso, StrictTowerRingedSquare.exchangeModuleSquare,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
   have ht := localization_transport r.RY r.RX' r.exchangeCoefficients_eq
   rw [ht]
 

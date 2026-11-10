@@ -293,6 +293,7 @@ theorem inverseFreeModule_identity
     exact hp
   rw [← ha, hid, Functor.map_id]
 
+
 variable {H : Type uH} [Category.{vH} H] [EssentiallySmall.{w} H]
   {T : GrothendieckTopology H}
 

@@ -59,7 +59,7 @@ private theorem presentationEpi_epi {R : Cᵒᵖ ⥤ RingCat.{max u v w}}
     Sigma.ι (fun x : (Σ X : Cᵒᵖ, M.obj X) ↦ freeRep R x.1.unop) ⟨X, m⟩
   refine ⟨ι.app X (ModuleCat.freeMk (ULift.up (𝟙 X.unop))), ?_⟩
   have h := congrArg (fun f ↦ repEquiv f)
-    (Sigma.ι_desc (fun x : (Σ X : Cᵒᵖ, M.obj X) ↦ repEquiv.symm x.2) ⟨X, m⟩)
+    (Sigma.ι_comp_desc (fun x : (Σ X : Cᵒᵖ, M.obj X) ↦ repEquiv.symm x.2) ⟨X, m⟩)
   exact h.trans (repEquiv.apply_symm_apply m)
 
 private noncomputable def presentationMap {R : Cᵒᵖ ⥤ RingCat.{max u v w}}

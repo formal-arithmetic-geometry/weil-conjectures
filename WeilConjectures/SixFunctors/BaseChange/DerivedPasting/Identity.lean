@@ -104,9 +104,9 @@ lemma Etale.derivedBaseChangeMapPlus_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f 
     NatTrans.mapHomotopyCategoryPlus_whiskerLeft_app,
     NatTrans.mapHomotopyCategoryPlus_whiskerRight_app, Functor.map_comp]
   have n₁ := (Etale.upperStarIdDerivedPlus A Y).hom.naturality
-    ((f)_*[A].rightDerivedFunctorPlusUnit.app K)
+    ((f)_*[A].rightDerivedFunctorPlusUnith.app K)
   have e₁ := Etale.upperStarIdDerivedPlus_hom_app A Y ((f)_*[A].mapHomotopyCategoryPlus.obj K)
-  have n₂ := (f)_*[A].rightDerivedFunctorPlusUnit.naturality
+  have n₂ := (f)_*[A].rightDerivedFunctorPlusUnith.naturality
     ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarId A X).inv).app K)
   have e₂ : DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarId A X).inv).app K) ≫

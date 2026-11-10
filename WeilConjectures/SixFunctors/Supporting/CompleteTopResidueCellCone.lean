@@ -371,12 +371,16 @@ private def topCellSplitPresentationIso (k : Type u) [Field k]
   let e (q : Set.Icc a b) : sfResidueFree X k (r q.val) ≅ P.X q.val :=
     eqToIso (by
       dsimp [P, sfResidueSplit, sfSplitComplex]
-      rw [if_pos (show a ≤ q.val ∧ q.val ≤ b from q.property)])
+      rw [ite_eq_left (show a ≤ q.val ∧ q.val ≤ b from q.property)])
   have hd (p q : ℤ) : P.d p q = 0 := rfl
   have hs (q : ℤ) (hq : ¬ (a ≤ q ∧ q ≤ b)) : IsZero (P.X q) := by
     dsimp [P, sfResidueSplit, sfSplitComplex]
-    rw [if_neg hq]
+    rw [ite_eq_right hq]
     exact isZero_zero _
+  -- Direct inference gets stuck on a universe constraint (via `AddCommGrpCat` colimits).
+  haveI : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex (sfResidueModules X k) ℤ) :=
+    (fun (C : Type _) [Category C] [Abelian C] ↦
+      (inferInstance : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex C ℤ))) _
   exact Sigma.mapIso (fun q : Set.Icc a b ↦
     (CochainComplex.singleFunctor _ q.val).mapIso (e q)) ≪≫
       (zeroDifferentialIntervalIso P a b hd hs).symm
@@ -401,11 +405,15 @@ private theorem topCellSplitPresentationIso_inclusion (k : Type u) [Field k]
   classical
   dsimp only [topCellSplitInclusion, topCellSplitPresentationIso, Iso.trans_hom,
     Iso.symm_hom]
+  -- Direct inference gets stuck on a universe constraint (via `AddCommGrpCat` colimits).
+  have : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex (sfResidueModules X k) ℤ) :=
+    (fun (C : Type _) [Category C] [Abelian C] ↦
+      (inferInstance : HasColimitsOfShape (Discrete (Set.Icc a b)) (CochainComplex C ℤ))) _
   rw [Sigma.ι_mapIso_hom_assoc]
   rw [topCell_interval_ι]
   apply HomologicalComplex.from_single_hom_ext
   simp [sfSplitCell, HomologicalComplex.mkHomFromSingle_f,
-    CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self]
 
 private def topCellConeIso {C : Type v} [Category.{w} C] [Abelian C]

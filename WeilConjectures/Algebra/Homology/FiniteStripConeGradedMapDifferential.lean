@@ -89,7 +89,7 @@ private theorem nextTarget_factors
         if p + 1 ≤ m - k then imageSubobject
           (K.ιTotalOrZero (ComplexShape.up ℤ) k (m - k) m ≫
             (CochainComplex.mappingCone.inr b).f m) else ⊥) hi)
-      rw [heq, if_pos hj])
+      rw [heq, ite_eq_left hj])
     simpa using imageSubobject_factors_comp_self
       (K.ιTotalOrZero (ComplexShape.up ℤ) i j m ≫
         (CochainComplex.mappingCone.inr b).f m) (𝟙 _)
@@ -120,7 +120,7 @@ private theorem nextSource_factors
   apply Subobject.factors_of_le _ (show imageSubobject
     ((CochainComplex.mappingCone.inl b).v (m + 1) m (by omega)) ≤
       F.complexStep (p + 1) m by
-    rw [hsteps, if_pos (by omega)]
+    rw [hsteps, ite_eq_left (by omega)]
     exact le_sup_left)
   simpa using imageSubobject_factors_comp_self
     ((CochainComplex.mappingCone.inl b).v (m + 1) m (by omega)) (𝟙 _)
@@ -296,8 +296,8 @@ private theorem rowSource_defect_factors
           finiteStripRowInclusion K A b f p (n + 1)) := by
   by_cases hn : n + 1 = p
   · rw [rowInl_inclusion_assoc]
-    simp only [finiteStripRowInclusion, finiteStripSourceInclusion, dif_pos hn,
-      dif_neg (show ¬ (n + 1 + 1 = p) by omega)]
+    simp only [finiteStripRowInclusion, finiteStripSourceInclusion, dite_eq_left hn,
+      dite_eq_right (show ¬ (n + 1 + 1 = p) by omega)]
     simp only [Category.assoc]
     exact sourceBlock_defect_factors K r A a b hb f hf F hsteps p n (n - p)
       (n + 1 - p) hn (by omega) (by omega)

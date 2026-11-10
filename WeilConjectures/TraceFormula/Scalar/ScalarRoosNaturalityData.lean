@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
@@ -147,8 +149,9 @@ private def completedCounitNat
         completedScalarCounit l L F j X D =
       completedScalarCounit l L F j X C ≫
         DerivedCategory.Q.map ((completedOrdinaryScalarComplex l L F j X).map f)
-    simpa only [completedScalarCounit, completedOrdinaryScalarComplex] using
-      homotopyCounit_naturality
+    dsimp only [completedScalarCounit, completedOrdinaryScalarComplex]
+    with_unfolding_all
+      exact homotopyCounit_naturality
         (completedOrdinaryScalarExtension.{u, u} l L F j X)
         (completedDerivedScalarExtension.{u, u} l L F j X)
         ((completedScalarChangeData.{u, u} l L F j X).choose_spec.choose_spec.choose_spec

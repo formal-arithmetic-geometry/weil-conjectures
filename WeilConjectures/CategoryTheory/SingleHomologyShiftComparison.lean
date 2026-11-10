@@ -40,14 +40,13 @@ private theorem cochain_comparison (Y : C) (n : ℤ) :
     HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom]
   simp only [HomologicalComplex.singleObjCyclesSelfIso_hom]
   erw [ShortComplex.cyclesMap_i_assoc, HomologicalComplex.cyclesMap_i_assoc]
-  simp only [CochainComplex.singleFunctors, CochainComplex.shiftShortComplexFunctorIso,
+  simp only [CochainComplex.shiftShortComplexFunctorIso,
     CochainComplex.shiftShortComplexFunctor', CochainComplex.shiftEval,
     HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
     CategoryTheory.Functor.comp_obj, CochainComplex.shiftFunctor_obj_X']
   dsimp [HomologicalComplex.XIsoOfEq]
   erw [Category.comp_id, eqToHom_trans]
-  · rfl
-  all_goals simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors]
+  · simp
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -108,7 +107,6 @@ private theorem derived_comparison (Y : C) (n : ℤ) :
   simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
   rw [cochain_comparison]
-  rfl
 
 
 set_option backward.isDefEq.respectTransparency false in

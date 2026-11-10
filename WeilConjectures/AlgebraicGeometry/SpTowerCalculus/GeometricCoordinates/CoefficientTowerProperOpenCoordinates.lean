@@ -251,10 +251,10 @@ def graphSupportCoordinates (b : SpTowerShriek.Base l E)
       Functor.rightDerivedFunctorNatIso (graphForward l E b o g _ _ (g.push c.g)) ≪≫
       Functor.mapDerivedCategoryCompRightDerivedFunctorIso _ _) ≪≫
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (graphForward l E b o g _ _ (graphOpenCoordinates l E b o g c.i)) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm) _ ≪≫
     Functor.associator _ _ _
 
 end AlgebraicGeometry.ProEtale.SpTowerCalculus.GeometricCoordinates

@@ -295,7 +295,7 @@ private def scalarRestrictionCompIso {R S T : Type u} [CommRing R] [CommRing S] 
     (ModuleCat.restrictScalars.{u} g).mapDerivedCategory ⋙
       (ModuleCat.restrictScalars.{u} f).mapDerivedCategory ≅
         (ModuleCat.restrictScalars.{u} gf).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp' f g gf hgf).symm
 
 /-- The restriction comparison identifies the two images of an actual composite chain map.
@@ -324,12 +324,12 @@ private theorem scalar_restriction_comp {R S T : Type u} [CommRing R] [CommRing 
         (ModuleCat.restrictScalars.{u} f).mapDerivedCategoryFactors.hom.app
           (((ModuleCat.restrictScalars.{u} g).mapHomologicalComplex _).obj L) ≫
         DerivedCategory.Q.map (ModuleCat.restrictScalarsCompComplexMap hgf L) := by
-    simp only [scalarRestrictionCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    simp only [scalarRestrictionCompIso, Iso.trans_hom, NatTrans.comp_app,
       Category.assoc]
     rw [Functor.mapDerivedCategoryNatIso_fac,
       ← Functor.mapDerivedCategoryCompIso_fac (ModuleCat.restrictScalars g)
         (ModuleCat.restrictScalars f) L]
-    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
+    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
     have h₂ : (Functor.mapHomologicalComplexCompIso
         (Iso.refl (ModuleCat.restrictScalars.{u} g ⋙ ModuleCat.restrictScalars.{u} f))
           (.up ℤ)).hom.app L ≫
@@ -464,7 +464,7 @@ theorem integral_scalar_tower_lift
             (Ideal.Quotient.mk
               (coefficientExtensionIdeal l E (n + 1 + 1)))).mapDerivedCategory.map
             (f n) ≫
-          ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _ ≪≫
             Functor.mapDerivedCategoryNatIso
               (ModuleCat.restrictScalarsComp'
                 (Ideal.Quotient.mk (coefficientExtensionIdeal l E (n + 1 + 1)))

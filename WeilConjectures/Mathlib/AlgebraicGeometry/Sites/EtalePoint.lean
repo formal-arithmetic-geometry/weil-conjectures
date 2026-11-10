@@ -97,6 +97,10 @@ universe u' u
 
 open CategoryTheory Limits Opposite
 
+/-- Compatibility projection for the underlying morphism of an element morphism. -/
+alias CategoryTheory.Functor.Elements.Hom.val :=
+  CategoryTheory.Functor.Elements.Hom.hom
+
 namespace AlgebraicGeometry.Scheme
 
 section Ulift
@@ -278,7 +282,7 @@ noncomputable def pointSmallEtaleElementsBaseChange :
 @[simp]
 lemma pointSmallEtaleElementsBaseChange_obj_fst
     (c : (pointSmallEtale (s ≫ f)).fiber.Elements) :
-    ((pointSmallEtaleElementsBaseChange f s).obj c).fst = f.Etale.obj c.fst :=
+    ((pointSmallEtaleElementsBaseChange f s).obj c).obj = f.Etale.obj c.obj :=
   rfl
 
 @[simp]
@@ -299,9 +303,10 @@ Elements (pointSmallEtale (s ≫ f)).fiber --- base change ---> Elements (pointS
 commutes, on the nose. -/
 lemma pointSmallEtaleElementsBaseChange_comp_π :
     pointSmallEtaleElementsBaseChange f s ⋙
-        CategoryOfElements.π (pointSmallEtale s).fiber =
-      CategoryOfElements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
+        Functor.Elements.π (pointSmallEtale s).fiber =
+      Functor.Elements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
   rfl
+
 
 end BaseChange
 
@@ -317,7 +322,7 @@ of `CategoryTheory.Functor.initial_of_exists_of_isCofiltered`, and its content i
 private theorem exists_hom_pointSmallEtaleElementsBaseChange
     (d : (pointSmallEtale s).fiber.Elements) :
     ∃ c, Nonempty ((pointSmallEtaleElementsBaseChange i s).obj c ⟶ d) := by
-  obtain ⟨W, w⟩ := d
+  obtain @⟨W, w⟩ := d
   -- lift `W` locally along `i` to an étale `X`-scheme `q : V ⟶ X`, in a way compatible with
   -- the marked point `w` of `W`
   obtain ⟨V, q, hq, g, hg, t, ht⟩ :=
@@ -328,8 +333,9 @@ private theorem exists_hom_pointSmallEtaleElementsBaseChange
     exact CategoryTheory.Over.w w
   have hv : (t ≫ pullback.fst q i) ≫ q = s ≫ i := by
     rw [Category.assoc, pullback.condition, ← Category.assoc, hts]
-  refine ⟨⟨Scheme.Etale.mk q, CategoryTheory.Over.homMk (t ≫ pullback.fst q i) hv⟩,
-    ⟨CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk g hg) ?_⟩⟩
+  refine ⟨Functor.elementsMk _ (Scheme.Etale.mk q)
+      (CategoryTheory.Over.homMk (t ≫ pullback.fst q i) hv),
+    ⟨Functor.Elements.homMk (MorphismProperty.Over.homMk g hg) ?_⟩⟩
   -- the marked point of `V ×_X Z` is `t`, since its two components are those of `t`
   have hp : ((pointSmallEtaleFiberEtaleIso i s).inv.app (Scheme.Etale.mk q)
       (CategoryTheory.Over.homMk (t ≫ pullback.fst q i) hv)).left = t := by
@@ -359,28 +365,29 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
     ∃ (c' : (pointSmallEtale (s ≫ i)).fiber.Elements) (τ : c' ⟶ c),
       (pointSmallEtaleElementsBaseChange i s).map τ ≫ σ =
         (pointSmallEtaleElementsBaseChange i s).map τ ≫ σ' := by
-  obtain ⟨V, v⟩ := c
-  obtain ⟨W, w⟩ := d
+  obtain @⟨V, v⟩ := c
+  obtain @⟨W, w⟩ := d
   -- `p` is the marked point of `V ×_X Z`; both `σ` and `σ'` send it to the marked point of `W`
   set p : Spec (.of Ω) ⟶ pullback V.hom i :=
     ((pointSmallEtaleFiberEtaleIso i s).inv.app V v).left
-  have key : ∀ τ : (pointSmallEtaleElementsBaseChange i s).obj ⟨V, v⟩ ⟶ ⟨W, w⟩,
-      p ≫ τ.val.left = w.left := fun τ ↦ congrArg CategoryTheory.Over.Hom.left τ.property
-  have hab : σ.val.left ≫ W.hom = σ'.val.left ≫ W.hom := by
+  have key : ∀ τ : (pointSmallEtaleElementsBaseChange i s).obj (Functor.elementsMk _ V v) ⟶
+      Functor.elementsMk _ W w,
+      p ≫ τ.hom.left = w.left := fun τ ↦ congrArg CategoryTheory.Over.Hom.left τ.map_val
+  have hab : σ.hom.left ≫ W.hom = σ'.hom.left ≫ W.hom := by
     rw [CategoryTheory.Over.w, CategoryTheory.Over.w]
-  have hpab : p ≫ σ.val.left = p ≫ σ'.val.left := by rw [key σ, key σ']
+  have hpab : p ≫ σ.hom.left = p ≫ σ'.hom.left := by rw [key σ, key σ']
   have hvfst : p ≫ pullback.fst V.hom i = v.left :=
     pointSmallEtaleFiberEtaleIso_inv_app_left_fst i s V v
   -- the agreement locus of `σ` and `σ'` is the trace of an open `V₀` of `V`
   obtain ⟨S, hS, hSU⟩ :=
     (pullback.fst V.hom i).isClosedEmbedding.isInducing.isOpen_iff.1
-      (FormallyUnramified.eqLocus W.hom σ.val.left σ'.val.left hab).2
+      (FormallyUnramified.eqLocus W.hom σ.hom.left σ'.hom.left hab).2
   set V₀ : V.left.Opens := ⟨S, hS⟩
   -- `V₀` contains the marked point of `V`, which is the image of `p`
   have hVrange : Set.range v.left.base ⊆ Set.range V₀.ι.base := by
     rw [Scheme.Opens.range_ι]
     rintro _ ⟨x, rfl⟩
-    have hx := FormallyUnramified.range_subset_eqLocus W.hom σ.val.left σ'.val.left hab p hpab
+    have hx := FormallyUnramified.range_subset_eqLocus W.hom σ.hom.left σ'.hom.left hab p hpab
       (Set.mem_range_self x)
     have hx' : (pullback.fst V.hom i).base (p.base x) ∈ S := by
       rwa [← Set.mem_preimage, hSU]
@@ -393,15 +400,16 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
   have hmfst : (i.Etale.map θ).left ≫ pullback.fst V.hom i =
       pullback.fst (Scheme.Etale.mk (V₀.ι ≫ V.hom)).hom i ≫ V₀.ι := by
     simp [Scheme.Hom.Etale, hθ]
-  refine ⟨⟨Scheme.Etale.mk (V₀.ι ≫ V.hom), CategoryTheory.Over.homMk v₀ ?_⟩,
-    CategoryOfElements.homMk _ _ θ ?_, ?_⟩
+  refine ⟨Functor.elementsMk _ (Scheme.Etale.mk (V₀.ι ≫ V.hom))
+      (CategoryTheory.Over.homMk v₀ ?_),
+    Functor.Elements.homMk θ ?_, ?_⟩
   · change v₀ ≫ V₀.ι ≫ V.hom = s ≫ i
     rw [← Category.assoc, hv₀ι]
     exact CategoryTheory.Over.w v
   · exact CategoryTheory.Over.OverMorphism.ext hv₀ι
   · -- `V₀ ×_X Z` lands in the agreement locus, so `σ` and `σ'` agree on it
     have hmr : Set.range (i.Etale.map θ).left.base ⊆
-        Set.range (FormallyUnramified.eqLocus W.hom σ.val.left σ'.val.left hab).ι.base := by
+        Set.range (FormallyUnramified.eqLocus W.hom σ.hom.left σ'.hom.left hab).ι.base := by
       rw [Scheme.Opens.range_ι]
       rintro _ ⟨x, rfl⟩
       have h₁ : (pullback.fst V.hom i) ((i.Etale.map θ).left x) =
@@ -412,10 +420,10 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
         rw [h₁]
         exact (Scheme.Opens.range_ι V₀).subset (Set.mem_range_self _)
       rwa [hSU] at hmem
-    refine Subtype.ext (MorphismProperty.Over.Hom.ext ?_)
-    change (i.Etale.map θ).left ≫ σ.val.left = (i.Etale.map θ).left ≫ σ'.val.left
+    refine Functor.Elements.hom_ext (MorphismProperty.Over.Hom.ext ?_)
+    change (i.Etale.map θ).left ≫ σ.hom.left = (i.Etale.map θ).left ≫ σ'.hom.left
     rw [← IsOpenImmersion.lift_fac
-      (FormallyUnramified.eqLocus W.hom σ.val.left σ'.val.left hab).ι _ hmr,
+      (FormallyUnramified.eqLocus W.hom σ.hom.left σ'.hom.left hab).ι _ hmr,
       Category.assoc, Category.assoc, FormallyUnramified.eqLocus_ι_comp_eq]
 
 /-- Blueprint `lemma-openclosed-stalk-lowerstar`, first assertion: **Base change along a closed

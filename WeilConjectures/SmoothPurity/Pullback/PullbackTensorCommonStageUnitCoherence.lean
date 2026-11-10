@@ -161,10 +161,7 @@ private theorem left_rational_naturality {M N : sfRationalConstructibleCategory 
     (pullbackTensorRationalLeftUnitor l E X N)
     (by unfold pullbackTensorRationalLeftUnitor; rfl)
   change T.map (Prod.mkHom (𝟙 U) f) ≫ _ = _
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    rw [hb]
-    simp
+  induction f using TensorProduct.inductionOn with
   | tmul c f =>
     have hm : HEq (T.map (Prod.mkHom
         (𝟙 U) (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] f)))
@@ -307,6 +304,8 @@ private theorem withSource_hom {C : Type*} [Category* C] {A A' B : C}
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The prescribed common-stage comparison preserves the coefficient-ring unit uniquely.
 
 Source: Stacks 07A4 and 0941, and the coefficient descent in the parent unit-coherence proof.

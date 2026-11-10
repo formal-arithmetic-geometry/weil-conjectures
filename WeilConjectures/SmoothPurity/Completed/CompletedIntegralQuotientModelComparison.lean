@@ -139,10 +139,13 @@ private noncomputable def restrictedTensorPresheafIso (φ : R ⟶ S)
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s m =>
+      let : Module (R.obj.obj W)
+          ((ModuleCat.restrictScalars
+            (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+              (M.val.obj W)) := inferInstanceAs (Module (R.obj.obj W) (M.val.obj W))
       change S.obj.map f s ⊗ₜ[R.obj.obj W, (φ.hom.app W).hom] M.val.map f m =
         changeOfRingsMap φ M f (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)
       exact (Classical.choose_spec (exists_changeOfRingsMap φ M f) s m).symm
@@ -616,7 +619,7 @@ private theorem quotientProduct_π_degree
     (PrincipalQuotientCompletion.quotientProduct R t₀ P).f i ≫
       (Pi.π (fun m ↦ ((PrincipalQuotientCompletion.quotientTower R t₀).obj P).asFunctor.obj
         (op m)) n).f i = (PrincipalQuotientCompletion.quotientMap R t₀ P n).f i :=
-  congrArg (fun f ↦ f.f i) (Pi.lift_π (PrincipalQuotientCompletion.quotientMap R t₀ P) n)
+  congrArg (fun f ↦ f.f i) (Pi.lift_comp_π (PrincipalQuotientCompletion.quotientMap R t₀ P) n)
 
 private theorem extension_ext (φ : R ⟶ S)
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -752,7 +755,7 @@ private theorem roosSnd_f {A : Type*} [Category A] [Abelian A]
           biprod.snd := by
     obtain rfl := (ComplexShape.up ℤ).next_eq' hq
     dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-    rw [dif_pos hq]
+    rw [dite_eq_left hq]
   simp [roosχ, CochainComplex.mappingCocone.snd,
     CochainComplex.HomComplex.Cochain.leftShift_v, CochainComplex.mappingCone.snd,
     show Int.negOnePow 2 = 1 by rfl, hs p (p + 1) rfl]

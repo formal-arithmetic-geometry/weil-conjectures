@@ -42,7 +42,7 @@ private theorem fraction_mem_shifted
   refine ⟨m * n, a, ⟨f ^ m, ⟨m, rfl⟩⟩, ?_, ?_, hz⟩
   · have hj : 0 ≤ j + (m * n : ℕ) := by omega
     have he : (j + (m * n : ℕ)).toNat = i := by omega
-    simpa only [Set.mem_ofPred_eq, if_pos hj, he] using ha
+    simpa only [Set.mem_ofPred_eq, ite_eq_left hj, he] using ha
   · simpa using SetLike.pow_mem_graded m hf
 
 private theorem exists_fraction_section_map
@@ -105,11 +105,11 @@ private theorem exists_fraction_section_map
         · apply Submodule.subset_span
           refine ⟨m, (j + (m * n : ℕ)).toNat, a, ?_, ?_, ?_⟩
           · simpa only [Nat.cast_mul] using Int.toNat_of_nonneg hj
-          · simpa only [Set.mem_ofPred_eq, if_pos hj] using ha
+          · simpa only [Set.mem_ofPred_eq, ite_eq_left hj] using ha
           · change Localization.mk a _ = Localization.mk a den
             congr 1
             exact Subtype.ext hm
-        · have ha0 : a = 0 := by simpa only [Set.mem_ofPred_eq, if_neg hj] using ha
+        · have ha0 : a = 0 := by simpa only [Set.mem_ofPred_eq, ite_eq_right hj] using ha
           rw [ha0, LocalizedModule.zero_mk]
           exact Submodule.zero_mem _
       · have hz0 : z = 0 := by
@@ -180,8 +180,7 @@ private theorem tensor_coefficient_presentation
       obtain ⟨x, hx⟩ := ih (c • t)
       exact ⟨x, by rw [hx, TensorProduct.smul_tmul, TensorProduct.tmul_smul]⟩
   intro w
-  induction w using TensorProduct.induction_on with
-  | zero => exact ⟨0, map_zero q⟩
+  induction w using TensorProduct.inductionOn with
   | tmul t d => exact ht d t
   | add x y hx hy =>
     obtain ⟨z, rfl⟩ := hx

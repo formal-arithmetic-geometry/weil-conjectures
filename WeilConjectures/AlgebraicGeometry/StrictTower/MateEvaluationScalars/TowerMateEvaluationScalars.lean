@@ -92,8 +92,8 @@ private theorem exactNat_iso (e : F ≅ G) :
 
 private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] :
-    exactNat (Functor.whiskerRight t K) ≫ (Functor.mapDerivedCategoryCompIso G K).hom =
-      (Functor.mapDerivedCategoryCompIso F K).hom ≫
+    exactNat (Functor.whiskerRight t K) ≫ (Functor.mapDerivedCategoryCompIso G K).inv =
+      (Functor.mapDerivedCategoryCompIso F K).inv ≫
         Functor.whiskerRight (exactNat t) K.mapDerivedCategory := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso C (.up ℤ)) (fun L ↦ ?_)
@@ -108,8 +108,8 @@ private theorem exactNat_whiskerRight (t : F ⟶ G) (K : D ⥤ H)
 
 private theorem exactNat_whiskerLeft (K : H ⥤ C)
     [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K] (t : F ⟶ G) :
-    exactNat (Functor.whiskerLeft K t) ≫ (Functor.mapDerivedCategoryCompIso K G).hom =
-      (Functor.mapDerivedCategoryCompIso K F).hom ≫
+    exactNat (Functor.whiskerLeft K t) ≫ (Functor.mapDerivedCategoryCompIso K G).inv =
+      (Functor.mapDerivedCategoryCompIso K F).inv ≫
         Functor.whiskerLeft K.mapDerivedCategory (exactNat t) := by
   refine Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso H (.up ℤ)) (fun L ↦ ?_)
@@ -145,9 +145,9 @@ private theorem exactNat_square
   have hR := exactNat_whiskerRight t v
   have hL := exactNat_whiskerLeft u t'
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F v).hom]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← reassoc_of% hR, Iso.hom_inv_id_assoc, reassoc_of% hm, hL]
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F v).inv]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← reassoc_of% hR, Iso.inv_hom_id_assoc, reassoc_of% hm, hL]
 
 private theorem exactNat_unique (t : F ⟶ G) (δ : F.mapDerivedCategory ⟶ G.mapDerivedCategory)
     (h : ClopenProjectorDescent F G t δ) : δ = exactNat t := by
@@ -173,10 +173,10 @@ private theorem evalD_trans (t : F ⟶ G) (n : ℕ) :
       Functor.whiskerLeft (E C n) t := rfl
   rw [he] at h₁
   dsimp only [evalD, Iso.trans_hom, Iso.symm_hom]
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W F) (E D n)).hom]
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso (W F) (E D n)).inv]
   simp only [Category.assoc]
-  rw [← reassoc_of% h₁, Iso.hom_inv_id_assoc]
-  rw [Iso.hom_inv_id_assoc]
+  rw [← reassoc_of% h₁, Iso.inv_hom_id_assoc]
+  rw [Iso.inv_hom_id_assoc]
   exact h₂
 
 private def exactSquare
@@ -190,8 +190,8 @@ private def exactSquare
     (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) :
     F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫ exactNat t ≫
-    (Functor.mapDerivedCategoryCompIso G₁ G₂).hom
+  (Functor.mapDerivedCategoryCompIso F₁ F₂).hom ≫ exactNat t ≫
+    (Functor.mapDerivedCategoryCompIso G₁ G₂).inv
 
 private theorem evalD_square_trans
     {A A' : Type*} [Category A] [Category A'] [Abelian A] [Abelian A']
@@ -222,11 +222,11 @@ private theorem evalD_square_trans
   dsimp only [exactSquare, NatTrans.comp_app] at *
   simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app] at hF hG he
   rw [← cancel_epi ((E D n).mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso (W F₁) (W F₂)).hom.app M))]
+    ((Functor.mapDerivedCategoryCompIso (W F₁) (W F₂)).inv.app M))]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp, hG, reassoc_of% he, reassoc_of% hF]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
 
 omit [HasDerivedCategory (ℕᵒᵖ ⥤ C)] [HasDerivedCategory (ℕᵒᵖ ⥤ D)] in
 private theorem exactSquare_unique
@@ -241,14 +241,14 @@ private theorem exactSquare_unique
     (a : F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory)
     (h : ClopenProjectorDescent (F₁ ⋙ F₂) (G₁ ⋙ G₂) t
-      ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom ≫ a ≫
-        (Functor.mapDerivedCategoryCompIso G₁ G₂).inv)) :
+      ((Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫ a ≫
+        (Functor.mapDerivedCategoryCompIso G₁ G₂).hom)) :
     a = exactSquare F₁ F₂ G₁ G₂ t := by
   have he := exactNat_unique t _ h
-  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F₁ F₂).hom,
-    ← cancel_mono (Functor.mapDerivedCategoryCompIso G₁ G₂).inv]
-  simpa only [exactSquare, Category.assoc, Iso.hom_inv_id_assoc,
-    Iso.hom_inv_id, Category.comp_id] using he
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso F₁ F₂).inv,
+    ← cancel_mono (Functor.mapDerivedCategoryCompIso G₁ G₂).hom]
+  simpa only [exactSquare, Category.assoc, Iso.inv_hom_id_assoc,
+    Iso.inv_hom_id, Category.comp_id] using he
 
 end ExactTransformations
 
@@ -342,21 +342,21 @@ private theorem exactSquare_scalar
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_refl,
     Category.id_comp] at ha hb
   rw [← cancel_epi (u₃.mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso G K).hom.app M))]
+    ((Functor.mapDerivedCategoryCompIso G K).inv.app M))]
   simp only [exactSquare, NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Category.assoc, Iso.symm_hom] at ha hb
   dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hd
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc] at hd ⊢
   rw [hb, reassoc_of% hd]
   have he := congrArg (fun z ↦ z ≫
-    (Functor.mapDerivedCategoryCompIso G' K').inv.app
+    (Functor.mapDerivedCategoryCompIso G' K').hom.app
       (u₀.mapDerivedCategory.obj M) ≫
     (exactNat t').app (u₀.mapDerivedCategory.obj M) ≫
-    (Functor.mapDerivedCategoryCompIso F' H').hom.app
+    (Functor.mapDerivedCategoryCompIso F' H').inv.app
       (u₀.mapDerivedCategory.obj M)) ha
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc] at he
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc] at he
   exact he.symm
 
 end ExactScalarDescent
@@ -409,7 +409,7 @@ def singleDerivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper f] [IsProper p]
     (h : k ≫ p = f ≫ i) : j B i ⋙ g B p ⟶ g B f ⋙ j B k :=
-  (Functor.mapDerivedCategoryCompIso _ _).inv ≫
+  (Functor.mapDerivedCategoryCompIso _ _).hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso (Modules B S) (.up ℤ))
       ((moduleJ B i ⋙ modulePullback B p).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
@@ -418,7 +418,7 @@ def singleDerivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (f : V ⟶ S)
       (modulePullback B f ⋙ moduleJ B k).mapDerivedCategory
       (Functor.whiskerRight
         (NatTrans.mapHomologicalComplex (singleAlpha B k f p i h) (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso _ _).hom
+    (Functor.mapDerivedCategoryCompIso _ _).inv
 
 /-- The single-level proper mate of the same clopen projector.
 Source: Stacks 07A7 (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
@@ -666,9 +666,9 @@ def scalarJModule (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImme
 Source: Stacks 03DI, 03DJ, 015F (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
 def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     j Λ f ⋙ Res φ X ≅ Res φ U ⋙ j B f :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (scalarJModule φ f) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar comparisons preserve the specified ordinary open unit and counit.

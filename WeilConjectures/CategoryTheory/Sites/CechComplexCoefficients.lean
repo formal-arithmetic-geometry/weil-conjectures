@@ -70,6 +70,7 @@ lemma overCechComplex_obj_X (k : ℕ) : ((overCechComplex U₀).obj P).X k =
     P.obj (op (cechNerveObj (fun _ : Fin 1 ↦ U₀) (fun _ : Fin (k + 1) ↦ 0)).left) :=
   rfl
 
+
 /-- The Čech differential is the alternating sum of the restrictions along the faces. -/
 lemma overCechComplex_obj_d (k : ℕ) : ((overCechComplex U₀).obj P).d k (k + 1) =
     ∑ i : Fin (k + 2), (-1 : ℤ) ^ (i : ℕ) • P.map

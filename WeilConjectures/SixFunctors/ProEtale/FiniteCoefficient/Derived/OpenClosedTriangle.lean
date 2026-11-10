@@ -51,7 +51,7 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_mapDerivedCategory_openImmersionLow
   (Functor.isZero_mapDerivedCategory_obj ((j)_!open[ModuleCat.{u + 1} R] ⋙
     (i)^*[ModuleCat.{u + 1} R]) N fun _ ↦ isZero_upperStar_openImmersionLowerShriek _ j i
       (Set.disjoint_iff_inter_eq_empty.1 hij.symm) _).of_iso
-    ((((j)_!open[ModuleCat.{u + 1} R]).mapDerivedCategoryCompIso _).symm.app N)
+    ((((j)_!open[ModuleCat.{u + 1} R]).mapDerivedCategoryCompIso _).app N)
 
 variable [QuasiCompact j] [PreservesFiniteColimits ((i)_*[ModuleCat.{u + 1} R])]
 

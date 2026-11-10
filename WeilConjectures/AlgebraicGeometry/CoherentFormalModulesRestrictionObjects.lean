@@ -7,11 +7,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Termwise restriction of coherent formal modules
 

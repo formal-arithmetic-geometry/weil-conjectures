@@ -205,8 +205,8 @@ theorem positivePullback_unit_square
   erw [(tX.equivalence.functor.mapDerivedCategorySingleFunctor 0).hom.naturality_assoc
     q.iso.hom]
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso
-    tY.equivalence.functor g.pull).hom.app (unit Y (Arings l E Y)))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+    tY.equivalence.functor g.pull).inv.app (unit Y (Arings l E Y)))).mp
+  simp only [Iso.inv_hom_id_app_assoc]
   dsimp only [SpTowerShriek.pull, Twisting.T]
   have hcomp₁ := Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
     tY.equivalence.functor g.pull (coefficient Y (Arings l E Y))

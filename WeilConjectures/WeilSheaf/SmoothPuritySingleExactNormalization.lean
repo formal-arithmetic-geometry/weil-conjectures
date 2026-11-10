@@ -52,7 +52,6 @@ lemma puritySingleComparison_app_eq_exact (P : C) :
     whiskerRight_app, associator_hom_app, whiskerLeft_app, associator_inv_app,
     NatIso.cancel_natIso_hom_left]
   erw [Functor.map_id, Category.id_comp]
-  rfl
 
 
 /-- On a flat object, the two canonical identifications for an exact functor coincide. -/

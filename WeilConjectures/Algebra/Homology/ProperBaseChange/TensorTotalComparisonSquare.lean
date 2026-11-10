@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
-  CategoryTheory.Functor.map₂HomologicalComplex
+attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
 open CategoryTheory CategoryTheory.Limits
 
 namespace HomologicalComplex

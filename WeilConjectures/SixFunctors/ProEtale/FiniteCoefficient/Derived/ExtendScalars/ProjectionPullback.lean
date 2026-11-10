@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
@@ -79,14 +81,16 @@ private lemma NatTrans.mapHomotopyCategory_transpose_square (p : T ⋙ E ⟶ E) 
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp, Category.comp_id,
-    NatTrans.mapHomotopyCategory, HomotopyCategory.quotient_obj_as,
+    NatTrans.mapHomotopyCategory]
+  erw [Quotient.natTransLift_app, Quotient.natTransLift_app, Quotient.natTransLift_app,
+    Quotient.natTransLift_app]
+  simp only [Functor.comp_obj, Functor.whiskerRight_app, Category.id_comp,
     Functor.mapHomotopyCategory_map]
   simp only [← Functor.map_comp]
   congr 1
   refine HomologicalComplex.hom_ext _ _ (fun n ↦ ?_)
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.id_f]
-  erw [Category.id_comp]
+    NatTrans.mapHomologicalComplex_app_f]
   exact h (K.X n)
 
 end ProjectionTransposeUpperStar

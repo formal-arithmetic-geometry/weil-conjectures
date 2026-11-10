@@ -100,7 +100,12 @@ private theorem supported_hom_colimit
     (SheafOfModules.isQuasicoherent
       (moduleRings (Spec (.of A)).toRingedSpace)).prop_of_iso
       ((DerivedCategory.homologyFunctorFactors S n).app K).symm (hK n)⟩
-  let GU := (Localization.uniq QwU QsU (HomologicalComplex.quasiIso T (.up ℤ))).functor
+  let eU := Localization.uniq QwU QsU (HomologicalComplex.quasiIso T (.up ℤ))
+  let GU := eU.functor
+  let : PreservesLimit (Functor.empty _) GU :=
+    eU.symm.toAdjunction.rightAdjoint_preservesLimits.preservesLimitsOfShape.preservesLimit
+  let : GU.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_preserves_terminal_object
   have hzCs : IsZero (QsU.obj C) := (GU.map_isZero hzCw).of_iso
     ((Localization.compUniqFunctor QwU QsU
       (HomologicalComplex.quasiIso T (.up ℤ))).app C).symm

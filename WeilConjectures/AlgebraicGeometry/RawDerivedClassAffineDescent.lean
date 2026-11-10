@@ -29,6 +29,10 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance rawDerivedClassAffineDescentHasShift (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
 attribute [local irreducible] restrictedOverCohomologyMap
   cartesianDerivedImageMap cartesianChartCohomologyLift cartesianChartCohomologyIso
   upperStar upperStarCompDerivedPlus rawFixedDerivedComparison
@@ -179,7 +183,7 @@ theorem exists_rawDerivedClass_affine_descent
         simp [A, P, M, Over.post, rawAffineRestrictedMap, pullback.map,
           pullbackSymmetry_hom_comp_snd_assoc, Category.assoc])
     have : IsConnected (Over j.left) := IsCofiltered.isConnected _
-    have : PreservesLimitsOfShape (Over j.left) P := by dsimp [P]; infer_instance
+    have : PreservesLimitsOfShape (Over j.left) P := by dsimp only [P]; infer_instance
     have hh := isLimitOfPreserves P (isLimitOfReflects (Over.forget _) hcA)
     apply ((IsLimit.postcomposeHomEquiv eM (P.mapCone cA)).symm hh).ofIsoLimit
     refine Cone.ext (pullbackSymmetry (cE.π.app j.left) W.hom) ?_

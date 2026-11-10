@@ -205,6 +205,6 @@ theorem roosPrefix_transition_surjective (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrp
   intro x
   refine ⟨fun i ↦ if h : i.val < n + s then x ⟨i.val, h⟩ else 0, ?_⟩
   funext i
-  exact dif_pos i.isLt
+  exact dite_eq_left i.isLt
 
 end CategoryTheory

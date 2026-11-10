@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.CategoryTheory.Sites.LocalProperties
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientDiagrams
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRootBasis
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLocalRankOneIso

@@ -33,5 +33,6 @@ theorem ringKrullDim_tensorProduct_le_of_surjective {R A B : Type*} [CommRing R]
   have hg : Function.Surjective g :=
     (Algebra.FiniteType.baseChangeAux_surj B hf).comp (AlgEquiv.surjective _)
   refine (ringKrullDim_le_of_surjective g.toRingHom hg).trans ?_
-  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field, zero_add]
+  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_field,
+    zero_add]
   simp

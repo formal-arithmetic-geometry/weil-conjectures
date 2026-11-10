@@ -66,7 +66,7 @@ lemma isPushout_quotient {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R) :
     rfl
   · ext r
     simp only [e, Iso.refl_hom, Category.id_comp, RingEquiv.toCommRingCatIso_hom, hom_comp,
-      hom_ofHom, RingHom.comp_apply, Ideal.quotientMap_mk, AlgEquiv.coe_ringEquiv,
+      hom_ofHom, RingHom.comp_apply, Ideal.quotientMap_mk, AlgEquiv.coe_toRingEquiv,
       RingEquiv.coe_toRingHom, AlgHom.toRingHom_eq_coe]
     exact (Algebra.TensorProduct.tmul_one_eq_one_tmul r).symm
   · ext r
@@ -162,8 +162,7 @@ lemma IsPushout.closure_range_union_eq_top {R A B P : CommRingCat.{u}} {f : R �
       ⊤ := by
     rw [eq_top_iff]
     rintro x -
-    induction x using TensorProduct.induction_on with
-    | zero => exact zero_mem _
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       rw [← mul_one a, ← one_mul b, ← Algebra.TensorProduct.tmul_mul_tmul]
       exact mul_mem (Subring.subset_closure (Or.inl ⟨a, rfl⟩))

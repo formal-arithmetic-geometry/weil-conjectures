@@ -334,7 +334,7 @@ private def restrictionCoordinatesIso [IsIso φ] (W : X.Etale)
     (O.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K)).symm ≪≫
       O.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)
   exact E.mapDerivedCategory.mapIso e.symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso O E).app K).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso O E).app K ≪≫
       (Functor.mapDerivedCategoryNatIso (sliceCoordinatesSquare X B R φ W)).app K
 
 private def globalScalarIso :
@@ -431,7 +431,7 @@ private theorem constantModelIso [IsIso φ]
       constantSheaf (ProEt.topology W.left) (ModuleCat.{t + 1} (ULift.{t + 1} B)) :=
     Functor.isoWhiskerRight (koszulConstantScalarIso X B) S ≪≫
       constantLocalizationIso X B W
-  exact ⟨(Functor.mapDerivedCategoryCompIso U (H ⋙ S)).app _ ≪≫
+  exact ⟨((Functor.mapDerivedCategoryCompIso U (H ⋙ S)).app _).symm ≪≫
     (H ⋙ S).mapDerivedCategory.mapIso
       ((eUnit.app (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))).symm) ≪≫
     (H ⋙ S).mapDerivedCategoryFactors.app (finiteModelConstantComplex X B P) ≪≫

@@ -25,6 +25,11 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+local instance localInst_ModuleCechBetaAffineQuasiIso_1
+    (R : Type u) [Ring R] (J : Type u) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
+
 /-- The augmentation from the Cech complex of a quasi-coherent module into the total
 Cech complex of an injective resolution is a quasi-isomorphism when every finite
 intersection is affine. No covering hypothesis is needed for this augmentation.

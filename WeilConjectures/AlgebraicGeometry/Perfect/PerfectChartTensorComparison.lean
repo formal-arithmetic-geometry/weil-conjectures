@@ -244,7 +244,7 @@ private theorem chartDerivedEquivalence {X : Scheme.{u}} (U : X.ProEt)
   have : PreservesFiniteColimits V := (ringedOverFunctor_exactGeneral _ U).2.2
   let e' := Functor.isoWhiskerRight (identityScalarPullIso U.hom R) q.functor ≪≫ e
   exact ⟨q.mapDerivedCategory,
-    ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso e'⟩⟩
+    ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫ Functor.mapDerivedCategoryNatIso e'⟩⟩
 
 private def scalarPullIso {X Y : Scheme.{u}} (g : Y ⟶ X)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) :

@@ -84,7 +84,7 @@ def artinSchreierSheafTorsorIso (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S, �
       (((Scheme.Etale.forgetFullyFaithful S).homEquiv).trans Equiv.ulift.symm)))
     (fun g ↦ by
       ext x
-      exact ULift.ext _ _ ((Scheme.Etale.forget S).map_comp _ _))
+      exact ULift.ext ((Scheme.Etale.forget S).map_comp _ _))
 
 lemma artinSchreierSheafTorsorIso_hom_app (hP : P = X ^ p - X - C f)
     (hchar : (p : Γ(S, ⊤)) = 0) (U : S.Etaleᵒᵖ)

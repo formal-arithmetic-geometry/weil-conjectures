@@ -15,6 +15,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Localization.Construction
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Functor.Currying
@@ -804,6 +806,10 @@ theorem shift_kFlat
     (A : CochainComplex (Modules R) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients A) (n : ℤ) :
     CochainComplex.IsKFlatIndependentCoefficients (A⟦n⟧) := by
+  have (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R

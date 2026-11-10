@@ -65,16 +65,16 @@ lemma ιTotal_totalπ_self (p q n : ℕ) (h : p + q = n) :
 @[reassoc]
 lemma ιTotal_totalπ_of_ne_left (p' q' n : ℕ) (h : p' + q' = n) (p q : ℕ) (hp : p' ≠ p) :
     K.ιTotal (ComplexShape.up ℕ) p' q' n h ≫ K.totalπ n p q = 0 := by
-  rw [ιTotal_totalπ, dif_neg (fun h ↦ hp h.1)]
+  rw [ιTotal_totalπ, dite_eq_right (fun h ↦ hp h.1)]
 
 @[reassoc]
 lemma ιTotal_totalπ_of_ne_right (p' q' n : ℕ) (h : p' + q' = n) (p q : ℕ) (hq : q' ≠ q) :
     K.ιTotal (ComplexShape.up ℕ) p' q' n h ≫ K.totalπ n p q = 0 := by
-  rw [ιTotal_totalπ, dif_neg (fun h ↦ hq h.2)]
+  rw [ιTotal_totalπ, dite_eq_right (fun h ↦ hq h.2)]
 
 lemma totalπ_eq_zero (n p q : ℕ) (h : p + q ≠ n) : K.totalπ n p q = 0 := by
   ext p' q' h'
-  rw [comp_zero, ιTotal_totalπ, dif_neg]
+  rw [comp_zero, ιTotal_totalπ, dite_eq_right]
   rintro ⟨rfl, rfl⟩
   exact h h'
 
@@ -156,6 +156,7 @@ lemma d_totalπ_zero_zero (n : ℕ) :
     (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) 0 0 = 0 := by
   rw [totalπ_eq_zero _ _ _ _ (by omega), comp_zero]
 
+
 section Staircase
 
 /-- A morphism to the total complex in degree `m` all of whose components in the columns
@@ -221,13 +222,13 @@ lemma exists_vanishesFrom_step {A : C} {m k : ℕ} (hk : k ≤ m)
   refine ⟨A', π, hπ, z ≫ K.ιTotal (ComplexShape.up ℕ) k (m - k) m
     (by rw [π_up_nat]; omega), fun p q hp ↦ ?_⟩
   rw [sub_comp, Category.assoc, Category.assoc, Category.assoc, ιTotal_d_totalπ,
-    dif_neg (show ¬ (k = p ∧ m - k + 1 = q) by omega)]
+    dite_eq_right (show ¬ (k = p ∧ m - k + 1 = q) by omega)]
   simp only [comp_zero, smul_zero, add_zero]
   by_cases hp' : p = k + 1 ∧ m - k = q
   · obtain ⟨rfl, rfl⟩ := hp'
-    rw [dif_pos ⟨rfl, rfl⟩, hz]
+    rw [dite_eq_left ⟨rfl, rfl⟩, hz]
     simp
-  · rw [dif_neg (fun h ↦ hp' ⟨h.1.symm, h.2⟩), comp_zero, comp_zero, sub_zero]
+  · rw [dite_eq_right (fun h ↦ hp' ⟨h.1.symm, h.2⟩), comp_zero, comp_zero, sub_zero]
     by_cases hp'' : p = k + 1
     · subst hp''
       rw [totalπ_eq_zero _ _ _ _ (by omega), comp_zero, comp_zero]

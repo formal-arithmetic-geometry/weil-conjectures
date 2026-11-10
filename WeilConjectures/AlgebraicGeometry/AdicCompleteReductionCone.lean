@@ -27,6 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 /-- A complete object has the quotient homotopy-limit cone, with its actual adjunction units.
 Source: Stacks Project, Algebraization Tag 099M; Cohomology on Sites Tags 0940 and 0941;
 proetale.tex, Tag 09C6, passage from the reductions to the complete object.

@@ -93,7 +93,7 @@ private lemma cech_d_π {C : Type (u + 1)} [Category.{u} C]
   intro l _
   rw [Preadditive.zsmul_comp]
   congr 1
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   rfl
 
 private noncomputable def categoricalTransition {i j : I} (a : i ⟶ j) :
@@ -104,13 +104,13 @@ private noncomputable def categoricalTransition {i j : I} (a : i ⟶ j) :
   intro k
   apply Pi.hom_ext
   intro y
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   erw [cech_d_π, cech_d_π_assoc]
   rw [Preadditive.sum_comp, Preadditive.comp_sum]
   apply Finset.sum_congr rfl
   intro l _
   simp only [Preadditive.zsmul_comp, Preadditive.comp_zsmul, Category.assoc]
-  erw [Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc]
   simp only [Category.assoc, ← J.obj.map_comp, ← op_comp]
   rw [S.trans_face]
 
@@ -123,7 +123,7 @@ private noncomputable def categoricalDiagram : Iᵒᵖ ⥤ CochainComplex A ℕ 
     intro y
     change Fin (k + 1) → Fin n at y
     dsimp only [categoricalTransition]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     simp only [unop_id, S.trans_id, op_id, J.obj.map_id, Category.comp_id,
       HomologicalComplex.id_f, Category.id_comp]
     rfl
@@ -134,7 +134,7 @@ private noncomputable def categoricalDiagram : Iᵒᵖ ⥤ CochainComplex A ℕ 
     change Fin (k + 1) → Fin n at y
     dsimp only [categoricalTransition, HomologicalComplex.comp_f]
     simp only [Category.assoc]
-    erw [Pi.lift_π, Pi.lift_π, Pi.lift_π_assoc]
+    erw [Pi.lift_comp_π, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
     simp only [unop_comp, S.trans_comp, op_comp, J.obj.map_comp, Category.assoc]
 
 private noncomputable def categoricalToOriginal (i : I) :
@@ -148,13 +148,13 @@ private noncomputable def categoricalToOriginal (i : I) :
   intro k
   apply Pi.hom_ext
   intro y
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   erw [cech_d_π, cech_d_π_assoc]
   rw [Preadditive.sum_comp, Preadditive.comp_sum]
   apply Finset.sum_congr rfl
   intro l _
   simp only [Preadditive.zsmul_comp, Preadditive.comp_zsmul, Category.assoc]
-  erw [Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc]
   simp only [Category.assoc]
   congr 2
   rw [← F.map_comp, ← op_comp, S.π_face, op_comp, F.map_comp]
@@ -180,7 +180,7 @@ private noncomputable def categoricalCocone : Cocone (categoricalDiagram S J) wh
     change Fin (k + 1) → Fin n at y
     dsimp only [categoricalTransition, categoricalToOriginal, HomologicalComplex.comp_f]
     simp only [Category.assoc]
-    erw [Pi.lift_π, Pi.lift_π, Pi.lift_π_assoc]
+    erw [Pi.lift_comp_π, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
     let F := ((comparisonUpperStar A Y).obj J).obj
     let η := ((comparisonAdjunction A Y).unit.app J).hom
     have hη := η.naturality (S.trans a.unop k y).op
@@ -237,7 +237,7 @@ private noncomputable def categoricalDegreeProjection (k : ℕ) (y : Fin (k + 1)
   naturality i j a := by
     change (categoricalTransition S J a.unop).f k ≫ _ = _
     dsimp only [categoricalTransition]
-    erw [Pi.lift_π]
+    erw [Pi.lift_comp_π]
     rfl
 
 private theorem categoricalDegreeIsColimit [IsCofiltered I]
@@ -264,7 +264,7 @@ private theorem categoricalDegreeIsColimit [IsCofiltered I]
   change (categoricalToOriginal S J i.unop).f k ≫ Pi.π _ y = _
   dsimp only [categoricalToOriginal, categoricalDegreeProjection,
     categoricalSectionCocone]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   rfl
 
 /-- Exactness at a positive degree passes to a degreewise filtered colimit.

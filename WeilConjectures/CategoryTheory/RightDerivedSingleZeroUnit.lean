@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
@@ -35,8 +37,8 @@ noncomputable def rightDerivedSingleUnit (F : C ⥤ D) [F.Additive] (M : C) :
     (DerivedCategory.singleFunctor D 0).obj (F.obj M) ⟶
       F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) :=
   DerivedCategory.Q.map ((F.mapCochainComplexSingleFunctor 0).inv.app M) ≫
-    F.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M))
+    cast (by rfl) (F.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj ((CochainComplex.singleFunctor C 0).obj M)))
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -60,7 +62,7 @@ private theorem unit_zero_comparison {C D : Type*}
   have hu : F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M) ≫
       (F.rightDerivedFunctorPlusCompatibility.app
         ((DerivedCategory.Plus.singleFunctor C 0).obj M)).inv =
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.singleFunctor C 0).obj M)) := by
     apply (Iso.comp_inv_eq _).2
     have h := (Functor.rightDerivedNatTrans_app
@@ -117,9 +119,15 @@ private theorem unit_zero_comparison {C D : Type*}
     dsimp only [DerivedCategory.Plus.homologyFunctor,
       CategoryTheory.Functor.comp_map]
     rw [CategoryTheory.Functor.map_preimage]
+    have hq (K : CochainComplex D ℤ) :
+        (DerivedCategory.quotientCompQhIso D).inv.app K = 𝟙 _ := by
+      rfl
     change _ = (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj M)).inv ≫
       (DerivedCategory.homologyFunctorFactors D 0).inv.app _ ≫
-      (DerivedCategory.homologyFunctor D 0).map (DerivedCategory.Q.map t.inv)
+      (DerivedCategory.homologyFunctor D 0).map
+        (DerivedCategory.Q.map t.inv ≫ (DerivedCategory.quotientCompQhIso D).inv.app T)
+    rw [hq]
+    erw [Category.comp_id]
     have hn := (DerivedCategory.homologyFunctorFactors D 0).inv.naturality t.inv
     dsimp only [CategoryTheory.Functor.comp_map] at hn
     exact congrArg (_ ≫ ·) hn
@@ -177,7 +185,5 @@ theorem rightDerivedSingleUnit_zero (F : C ⥤ D) [F.Additive]
     whiskerRight_id', isoWhiskerLeft_hom, Category.id_comp, NatTrans.comp_app, comp_obj,
     id_obj, associator_hom_app, whiskerLeft_app,
     HomologicalComplex.homologyFunctorSingleIso_hom_app]
-  erw [Category.id_comp]
-  rfl
 
 end CategoryTheory.Functor

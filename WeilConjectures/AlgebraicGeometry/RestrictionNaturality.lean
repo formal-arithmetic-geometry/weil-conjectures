@@ -183,6 +183,9 @@ private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   obtain ⟨e, hl, hb⟩ := target_comparison h φ b C C'
   let ΓX := RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
   let ΓY := RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
+  have : ΓY.Additive := by
+    dsimp only [ΓY, RingedSpace.globalSectionsFunctor, SheafOfModules.evaluation]
+    infer_instance
   let HX := ΓX.mapHomologicalComplex (ComplexShape.up ℕ)
   let HY := ΓY.mapHomologicalComplex (ComplexShape.up ℕ)
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p

@@ -243,11 +243,11 @@ theorem finite_algebra_is_product_local_rings
   have : q₁.LiesOver (IsLocalRing.maximalIdeal R) := by
     constructor
     exact (IsLocalRing.eq_maximalIdeal
-      (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q₁)).symm
+      (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R) q₁)).symm
   have : q₂.LiesOver (IsLocalRing.maximalIdeal R) := by
     constructor
     exact (IsLocalRing.eq_maximalIdeal
-      (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q₂)).symm
+      (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R) q₂)).symm
   induction i using Fin.lastCases with
   | last => exact False.elim (h₁ (hlast q₁))
   | cast i => exact hunique i q₁ q₂ h₁ h₂

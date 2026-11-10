@@ -190,7 +190,7 @@ private theorem augmentation_tests
     have H := congrArg
       (fun k ↦ Sigma.ι (fun t : J ↦ F.obj t.val.1) ⟨⟨W, a⟩, ha, hw, hs⟩ ≫ k) h
     simpa only [closedLiftGeneratorAugmentation, Arrow.mk_hom, Category.assoc,
-      Sigma.ι_desc_assoc] using H
+      Sigma.ι_comp_desc_assoc] using H
   have H := congrArg (ProEtale.freeSheafHomEquiv (ULift.{u + 1, u} A) W N) hfg
   simpa only [ProEtale.freeSheafHomEquiv_comp, a, Equiv.apply_symm_apply] using H
 
@@ -325,7 +325,7 @@ theorem closedLiftGeneratorPresentation
         refine ⟨Sigma.desc g, ?_⟩
         apply Sigma.hom_ext
         intro t
-        simpa only [Sigma.ι_desc_assoc] using hg t
+        simpa only [Sigma.ι_comp_desc_assoc] using hg t
     have hs : Function.Bijective
         (fun f : (closedLiftGeneratorAugmentation A z M).left ⟶ N ↦ f ≫ a.unit.app N) :=
       hsum

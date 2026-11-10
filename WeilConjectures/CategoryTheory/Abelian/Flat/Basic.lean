@@ -82,7 +82,7 @@ lemma flat_coproduct {I : Type u} (f : I → A) (hf : ∀ i, flat (f i)) :
     (flat_iff_preservesFiniteLimits (f i)).1 (hf i)
   rw [flat_iff_preservesFiniteLimits]
   have : PreservesColimit (Discrete.functor f) (curriedTensor A) :=
-    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+    MonoidalCategory.Limits.preservesColimit_curriedTensor _
   have e : tensorLeft (∐ f) ≅ (Discrete.functor f ⋙ curriedTensor A).flip ⋙ colim :=
     preservesColimitIso (curriedTensor A) (Discrete.functor f) ≪≫ colimitIsoFlipCompColim _
   have : PreservesFiniteLimits ((Discrete.functor f ⋙ curriedTensor A).flip) :=

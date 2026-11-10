@@ -32,22 +32,22 @@ open Limits
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-namespace FilteredObject
+namespace WeilFilteredObject
 
 /-- The map induced by a filtered morphism on its `p`-th filtration steps.
 Source: Stacks Project, Homology, Definition 0121 (3) and the diagram in Lemma 0127.
 The factorization is unique because the target subobject inclusion is monic.
 (blueprint: lem-sp-finite-filtration-induction) -/
-noncomputable def restrictionSteps {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+noncomputable def restrictionSteps {A B : WeilFilteredObject C} (f : Hom A B) (p : ℤ) :
     (A.filtration.step p : C) ⟶ (B.filtration.step p : C) :=
   Classical.choose (f.preserves p)
 
-private theorem restriction_arrow {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+private theorem restriction_arrow {A B : WeilFilteredObject C} (f : Hom A B) (p : ℤ) :
     restrictionSteps f p ≫ (B.filtration.step p).arrow =
       (A.filtration.step p).arrow ≫ f.hom :=
   Classical.choose_spec (f.preserves p)
 
-private theorem restriction_naturality {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+private theorem restriction_naturality {A B : WeilFilteredObject C} (f : Hom A B) (p : ℤ) :
     Subobject.ofLE (A.filtration.step (p + 1)) (A.filtration.step p)
         (A.filtration.antitone_step (by omega)) ≫ restrictionSteps f p =
       restrictionSteps f (p + 1) ≫ Subobject.ofLE (B.filtration.step (p + 1))
@@ -69,7 +69,7 @@ source inclusion into the target inclusion, which the target cokernel kills.
 Apply the universal property of the source cokernel to obtain `g` and its equation.
 The filtration steps and graded pieces are those of `def-sp-filtration`.
 (blueprint: lem-sp-finite-filtration-induction). -/
-theorem exists_gradedMap_steps (A B : FilteredObject C) (f : Hom A B) (p : ℤ) :
+theorem exists_gradedMap_steps (A B : WeilFilteredObject C) (f : Hom A B) (p : ℤ) :
     ∃ g : A.filtration.gradedPiece p ⟶ B.filtration.gradedPiece p,
       cokernel.π (Subobject.ofLE (A.filtration.step (p + 1))
         (A.filtration.step p) (A.filtration.antitone_step (by omega))) ≫ g =
@@ -90,11 +90,11 @@ Source: Stacks Project, Homology, the paragraph defining `gr` before Lemma 05SP
 and the commutative diagram in Lemma 0127. This is the unique map commuting with
 the cokernel projections, chosen from `exists_gradedMap`.
 (blueprint: lem-sp-finite-filtration-induction) -/
-noncomputable def gradedMapSteps {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+noncomputable def gradedMapSteps {A B : WeilFilteredObject C} (f : Hom A B) (p : ℤ) :
     A.filtration.gradedPiece p ⟶ B.filtration.gradedPiece p :=
   Classical.choose (exists_gradedMap_steps A B f p)
 
-private theorem restriction_isIso_of_succ {A B : FilteredObject C} (f : Hom A B)
+private theorem restriction_isIso_of_succ {A B : WeilFilteredObject C} (f : Hom A B)
     (p : ℤ) (hsucc : IsIso (restrictionSteps f (p + 1)))
     (hgr : IsIso (gradedMapSteps f p)) : IsIso (restrictionSteps f p) := by
   let iA := Subobject.ofLE (A.filtration.step (p + 1)) (A.filtration.step p)
@@ -144,7 +144,7 @@ Proof:
    with these isomorphisms. Therefore `f.hom` is an isomorphism. All restrictions
    being isomorphisms says `f(F^p A) = F^p B`, so the map is strict as asserted.
 (blueprint: lem-sp-finite-filtration-induction) -/
-theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : Hom A B)
+theorem finite_filtration_induction_steps (A B : WeilFilteredObject C) (f : Hom A B)
     (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite)
     (hgraded : ∀ p : ℤ, IsIso (gradedMapSteps f p)) :
     IsIso f.hom ∧ ∀ p : ℤ, IsIso (restrictionSteps f p) := by
@@ -200,6 +200,6 @@ theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : Hom A B)
     infer_instance
   · exact hall
 
-end FilteredObject
+end WeilFilteredObject
 
 end CategoryTheory

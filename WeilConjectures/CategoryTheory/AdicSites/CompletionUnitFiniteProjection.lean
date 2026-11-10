@@ -36,7 +36,7 @@ private instance ordinaryLimit_additive (S : Site.{u}) (A : Type u) [CommRing A]
 
 private abbrev diagonal (S : Site.{u}) (A : Type u) [CommRing A] (n : ℕ) :
     S.delta A ⋙ S.evaluate A n ≅ 𝟭 (S.derived A) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)) ≪≫
     Functor.mapDerivedCategoryIdIso (S.modules A)
@@ -105,7 +105,7 @@ private theorem derived_id_factors (S : Site.{u}) (A : Type u) [CommRing A]
 private theorem diagonal_factors (S : Site.{u}) (A : Type u) [CommRing A]
     (P : CochainComplex (S.modules A) ℤ) (n : ℕ) :
     (show S.delta A ⋙ S.evaluate A n ≅ 𝟭 (S.derived A) from
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)) ≪≫
         Functor.mapDerivedCategoryIdIso (S.modules A)).inv.app

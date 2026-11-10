@@ -97,7 +97,7 @@ replace transposition after upperStarComp by two successive transpositions, foll
 by lowerStarComp.hom at the target factor. Adjunction naturality in the source moves
 the transition for f through the transpose for g. Naturality in the target moves
 both inverse direct-image comparisons through the transpose for f. The projection
-formula Pi.lift_π removes the intervening product lift. The resulting expression
+formula Pi.lift_comp_π removes the intervening product lift. The resulting expression
 starts with the projection indexed by f composed with g composed with the outgoing
 arrow. The inverse associativity equation obtained from lowerStarComp_assoc' equates
 the two orders of inverse comparisons, and cancellation of lowerStarComp.hom with
@@ -158,7 +158,7 @@ theorem etale_coefficient_product_composition_component
       ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map f.op)).homEquiv _ _).symm
         q := by
     dsimp only [a, p, q]
-    exact Pi.lift_π _ (⟨l, g ≫ h⟩ : Σ l : I, j ⟶ l)
+    exact Pi.lift_comp_π _ (⟨l, g ≫ h⟩ : Σ l : I, j ⟶ l)
   have ht := component_transpose
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map f.op))
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map g.op))

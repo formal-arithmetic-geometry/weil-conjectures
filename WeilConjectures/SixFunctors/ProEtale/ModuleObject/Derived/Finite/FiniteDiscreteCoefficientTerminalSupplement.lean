@@ -17,7 +17,8 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteCoefficientTerminalSupplement
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 section UnitComparison
 open Opposite
@@ -52,7 +53,7 @@ private theorem constantPullback_unit {W : C} (hW : IsTerminal W)
   simpa [constantPullbackMonoidalIso, constantSheafAdj, Adjunction.comp_unit_app,
     pushforwardSectionsIso, precomposeEvaluationIso, hi] using h.symm
 
-private theorem constantPullback_unit_map {W : C} (hW : IsTerminal W)
+private theorem constantPullback_unit_map_private {W : C} (hW : IsTerminal W)
     (hFW : IsTerminal (F.obj W)) (M : A) (G : Sheaf J A)
     (a : (constantSheaf J A).obj M ⟶ G) :
     ((sheafificationAdjunction K A).unit.app ((Functor.const Dᵒᵖ).obj M) ≫
@@ -74,10 +75,18 @@ private theorem constantPullback_unit_map {W : C} (hW : IsTerminal W)
     ((sheafificationAdjunction J A).unit.app ((Functor.const Cᵒᵖ).obj M)).app (op W) ≫ k)
       hn.symm
 
-private theorem constant_naturality {P : Cᵒᵖ ⥤ A} {M : A}
+/-- Public export of the private `constantPullback_unit_map_private`
+(used by `import all` importers; linter.privateModule). -/
+alias constantPullback_unit_map := constantPullback_unit_map_private
+
+private theorem constant_naturality_private {P : Cᵒᵖ ⥤ A} {M : A}
     (q : (Functor.const Cᵒᵖ).obj M ⟶ P) {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     q.app X ≫ P.map f = q.app Y := by
   simpa using (q.naturality f).symm
+
+/-- Public export of the private `constant_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
+alias constant_naturality := constant_naturality_private
 
 private theorem coefficient_comp {M X Y Z Y' Z' : A}
     (q0 : M ⟶ X) (uT : X ⟶ Y) (uU : X ⟶ Y') (η : Y ⟶ Z)
@@ -106,9 +115,9 @@ private theorem constant_lowerStarComp (M : Ab.{u + 1}) (T U : Scheme.{u}) (j : 
       (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj W))) := by
   rw [eqToHom_lowerStar_app_hom_app Ab.{u + 1} (comp_toSpecZ j).symm,
     lowerStarComp_inv_app_hom_app]
-  have hn₁ := constant_naturality q
+  have hn₁ := constant_naturality_private q
     (((MorphismProperty.Over.pullbackCongr (comp_toSpecZ j)).hom.app W).op)
-  have hn₂ := constant_naturality q
+  have hn₂ := constant_naturality_private q
     (((MorphismProperty.Over.pullbackComp j (toSpecZ T)).inv.app W).op)
   exact (congrArg (fun f ↦ f ≫ H.obj.map
     (((MorphismProperty.Over.pullbackComp j (toSpecZ T)).inv.app W).op)) hn₁).trans hn₂
@@ -193,7 +202,7 @@ private theorem constantScheme_pushforward (M : Ab.{u + 1})
           (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).obj W)) =
         q0 ≫ ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)).unit.app
           (pointUpperStar.obj R)).hom.app (Opposite.op W) := by
-    have hu := constantPullback_unit_map (A := Ab.{u + 1})
+    have hu := constantPullback_unit_map_private (A := Ab.{u + 1})
       (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X))
       (ProEt.topology specZ.{u}) (ProEt.topology X)
       (proEtIsTerminal W) (proEtIsTerminal

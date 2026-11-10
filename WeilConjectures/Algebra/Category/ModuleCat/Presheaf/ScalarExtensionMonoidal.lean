@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
@@ -67,6 +67,14 @@ private def sectionExtension : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCa
   map_comp f g := by
     ext1 X
     exact (ModuleCat.extendScalars (coeff φ X)).map_comp _ _
+
+local instance localInst_ScalarExtensionMonoidal_1
+    {M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat.{u} RingCat.{u})}
+    {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R.obj Y)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
+        (M.obj Y)) :=
+  inferInstanceAs (Module (R.obj Y) (M.obj Y))
 
 private theorem sectionExtension_map_tmul
     (M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat.{u} RingCat.{u}))
@@ -169,8 +177,7 @@ private def sectionTensorIso
   intro X Y f
   apply ModuleCat.ExtendScalars.hom_ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [TensorProduct.tmul_zero, map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
   | tmul m n =>
     change Functor.OplaxMonoidal.δ (ModuleCat.extendScalars (coeff φ Y))

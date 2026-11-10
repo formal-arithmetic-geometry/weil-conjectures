@@ -82,7 +82,7 @@ theorem field_torsor_galois_components
         Spec.map (CommRingCat.ofHom (algebraMap K (∀ i, L i))) =
         Sigma.desc (fun i ↦ Spec.map (CommRingCat.ofHom (algebraMap K (L i)))) := by
       ext i
-      simp only [ι_sigmaSpec_assoc, Sigma.ι_desc, ← Spec.map_comp]
+      simp only [ι_sigmaSpec_assoc, Sigma.ι_comp_desc, ← Spec.map_comp]
       rfl
     rw [← hσ]
     dsimp [e₀]
@@ -113,9 +113,9 @@ theorem field_torsor_galois_components
     ext i
     change _ = Sigma.ι ((fun i ↦ Spec (R i)) ∘ f) i ≫ _
     rw [Sigma.ι_reindex_hom_assoc]
-    exact (Sigma.ι_desc (fun i ↦
+    exact (Sigma.ι_comp_desc (fun i ↦
       Spec.map (CommRingCat.ofHom (algebraMap K (E i)))) i).trans
-        (Sigma.ι_desc (fun i ↦
+        (Sigma.ι_comp_desc (fun i ↦
           Spec.map (CommRingCat.ofHom (algebraMap K (L i)))) (f i)).symm
   refine ⟨Fintype.card I, E, hE, aE, ?_, e, he⟩
   intro i

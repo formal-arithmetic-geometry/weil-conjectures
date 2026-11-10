@@ -289,8 +289,7 @@ lemma e₂_tmul (hD : ∀ j, (D.obj j).IsQuasicoherent) (j k : J) (b : B j) (m :
 /-- `e₂` is semilinear along `ι j k`. -/
 lemma e₂_smul (hD : ∀ j, (D.obj j).IsQuasicoherent) (j k : J) (b : B j)
     (t : B j ⊗[A] Γ(D.obj k, ⊤)) : S.e₂ hD j k (b • t) = S.ι j k b • S.e₂ hD j k t := by
-  induction t using TensorProduct.induction_on with
-  | zero => rw [smul_zero, map_zero, smul_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul b' m => rw [smul_tmul', smul_eq_mul, e₂_tmul, e₂_tmul, map_mul, mul_smul]
   | add x y hx hy => rw [smul_add, map_add, map_add, hx, hy, smul_add]
 
@@ -329,8 +328,7 @@ lemma θ_unit (hD : ∀ j, (D.obj j).IsQuasicoherent) (j : J) (x : Γ(D.obj j, �
   rw [h1]
   rw [← S.e₂_θ hD]
   generalize S.θ hD j j x = t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul b n =>
     rw [e₂_tmul, S.δ_smul, S.hμ, Hom.app_smul_of, pullbackCompOfEq_hom_app_pullbackΓ,
       LinearMap.liftBaseChange_tmul, LinearMap.id_apply, S.u_smul]
@@ -383,8 +381,7 @@ lemma θ_cocycle (hD : ∀ j, (D.obj j).IsQuasicoherent) (j k l : J) (x : Γ(D.o
       E₃ ((TensorProduct.mk A (B k) Γ(D.obj l, ⊤) 1).lTensor (B j) t) =
         Hom.app (pullbackCompOfEq (S.π₁₃ j k l) (S.p₂ j l) (S.r₃ j k l) (S.hπ₁₃₂ j k l)
           (D.obj l)).hom ⊤ (pullbackΓ (S.π₁₃ j k l) _ (S.e₂ hD j l t)) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul b n =>
       rw [LinearMap.lTensor_tmul, TensorProduct.mk_apply, hE₃, map_one, one_smul, e₂_tmul,
         S.π₁₃_smul, S.hσ₁₃, Hom.app_smul_of, pullbackCompOfEq_hom_app_pullbackΓ]
@@ -393,8 +390,7 @@ lemma θ_cocycle (hD : ∀ j, (D.obj j).IsQuasicoherent) (j k l : J) (x : Γ(D.o
       E₃ (b ⊗ₜ s) = S.ρ₁ j k l b •
         Hom.app (pullbackCompOfEq (S.π₂₃ j k l) (S.p₂ k l) (S.r₃ j k l) (S.hπ₂₃₂ j k l)
           (D.obj l)).hom ⊤ (pullbackΓ (S.π₂₃ j k l) _ (S.e₂ hD k l s)) := by
-    induction s using TensorProduct.induction_on with
-    | zero => simp only [tmul_zero, map_zero, smul_zero]
+    induction s using TensorProduct.inductionOn with
     | tmul b' n =>
       rw [hE₃, e₂_tmul, S.π₂₃_smul, S.hσ₂₃, Hom.app_smul_of, pullbackCompOfEq_hom_app_pullbackΓ]
     | add x y hx hy => simp only [tmul_add, map_add, hx, hy, smul_add]
@@ -404,8 +400,7 @@ lemma θ_cocycle (hD : ∀ j, (D.obj j).IsQuasicoherent) (j k l : J) (x : Γ(D.o
           (pullback (S.r₂ j k l)).obj (D.obj k) ⟶ (pullback (S.r₃ j k l)).obj (D.obj l)) ⊤
           (Hom.app (pullbackCompOfEq (S.π₁₂ j k l) (S.p₂ j k) (S.r₂ j k l) (S.hπ₁₂₂ j k l)
             (D.obj k)).hom ⊤ (pullbackΓ (S.π₁₂ j k l) _ (S.e₂ hD j k t))) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul b n =>
       rw [LinearMap.lTensor_tmul, LinearMap.restrictScalars_apply, hL1, S.e₂_θ, ← h23 n,
         e₂_tmul, S.π₁₂_smul, S.hσ₁₂, Hom.app_smul_of, pullbackCompOfEq_hom_app_pullbackΓ,

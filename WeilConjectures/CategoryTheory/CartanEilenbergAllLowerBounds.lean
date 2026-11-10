@@ -93,13 +93,13 @@ private theorem supported_object_rows
   have hdimage (p : ℤ) (hp : IsZero (image (K.d (p - 1) p))) :
       IsZero (ID p).cocomplex := by
     dsimp [ID]
-    rw [dif_pos hp]
+    rw [dite_eq_left hp]
     exact Functor.map_isZero (CochainComplex.single₀ B) hp
   have hdneg (p : ℤ) (hp : IsZero (K.X (p - 1))) : IsZero (ID p).cocomplex :=
     hdimage p (hd p hp)
   have hhneg (p : ℤ) (hp : IsZero (K.X p)) : IsZero (IH p).cocomplex := by
     dsimp [IH]
-    rw [dif_pos (hh p hp)]
+    rw [dite_eq_left (hh p hp)]
     exact Functor.map_isZero (CochainComplex.single₀ B) (hh p hp)
   have hs (p : ℤ) := InjectiveResolution.exists_horseshoe_prescribed_resolutions
     (T p) (hT p) (ID p) (IH p)

@@ -113,7 +113,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleConstantRingComparison
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategory
 
 /-- The ordinary compositor with the published unit-section normalization.
@@ -162,7 +162,7 @@ private theorem composition_localization
     {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (k : Y ⟶ X) (A : Type u) [CommRing A] :
     proEtaleConstantRingPullbackComposition h k A =
       (Functor.mapDerivedCategoryCompIso (proEtaleConstantRingPullback A k)
-        (proEtaleConstantRingPullback A h)).symm ≪≫
+        (proEtaleConstantRingPullback A h)) ≪≫
         Functor.mapDerivedCategoryNatIso (proEtalePastingOrdinaryComposition h k A) := by
   let a := Classical.choose (proEtaleConstantRingPullbackComposition_ordinary h k A)
   have ha := (Classical.choose_spec
@@ -172,7 +172,7 @@ private theorem composition_localization
     apply Iso.ext
     exact Functor.mapDerivedCategoryNatIso_symm a
   apply Iso.ext_inv
-  rw [Iso.trans_inv, Iso.symm_inv, hs, Iso.symm_inv]
+  rw [Iso.trans_inv, hs, Iso.symm_inv]
   exact (congrArg Iso.hom ha).symm
 
 private theorem localized_transport
@@ -203,7 +203,7 @@ private theorem square_localization
   simp only [proEtalePastingDerivedSquare, proEtalePastingOrdinarySquare,
     composition_localization, Functor.mapDerivedCategorySquareIso,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
   rw [localized_transport e A]
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedCompositi
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization
-import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation
+import all WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictedCounitCancellation
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedSourceCounitTriangle
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedTargetCounitTriangle
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedTensorComparisonCoherence
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedTensorCounitTransport
+import all WeilConjectures.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
 
 /-! # The open pullback square evaluated on a direct-image representative
 
@@ -25,6 +30,48 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false
+
+section
+
+/-- Lift a commuting square of additive functors to their homotopy categories. -/
+noncomputable def mapHomotopySquare
+    {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
+    [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
+    {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
+    [F.Additive] [G.Additive] [R.Additive] [J.Additive]
+    (e : F ⋙ G ≅ R ⋙ J) :
+    F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ) ≅
+      R.mapHomotopyCategory (.up ℤ) ⋙ J.mapHomotopyCategory (.up ℤ) :=
+  Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+    (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm
+
+private theorem targetHomotopyComparison
+    {C D E : Type*} [Category C] [Preadditive C] [Category D] [Preadditive D]
+    [Category E] [Preadditive E]
+    {F : C ⥤ D} {G R : D ⥤ E} {H : C ⥤ E}
+    [F.Additive] [G.Additive] [R.Additive] [H.Additive]
+    (e : G ≅ R) (a : F ⋙ G ≅ H) (P : HomotopyCategory C (.up ℤ)) :
+    (Functor.mapHomotopyCategoryCompIso a (.up ℤ)).hom.app P ≫
+        (Functor.mapHomotopyCategoryCompIso
+          (Functor.isoWhiskerLeft F e.symm ≪≫ a) (.up ℤ)).inv.app P =
+      (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app
+        ((F.mapHomotopyCategory (.up ℤ)).obj P) := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  change (HomotopyCategory.quotient E (.up ℤ)).map
+      ((Functor.mapHomologicalComplexCompIso a (.up ℤ)).hom.app K) ≫
+    (HomotopyCategory.quotient E (.up ℤ)).map
+      ((Functor.mapHomologicalComplexCompIso
+        (Functor.isoWhiskerLeft F e.symm ≪≫ a) (.up ℤ)).inv.app K) =
+    (HomotopyCategory.quotient E (.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app
+        ((F.mapHomologicalComplex (.up ℤ)).obj K))
+  rw [← Functor.map_comp]
+  congr 1
+  ext n
+  simp [Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
+    NatTrans.mapHomologicalComplex]
+
+end
 
 /-- Derived compatibility before the sectionwise mate identity.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.

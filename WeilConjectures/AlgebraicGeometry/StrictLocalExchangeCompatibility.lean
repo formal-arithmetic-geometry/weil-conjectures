@@ -56,6 +56,7 @@ private theorem module_inverseImage_stalk_germ
   rw [← Category.assoc, ← huU]
   rfl
 
+
 set_option maxRecDepth 2048 in
 /-- Any linear map with the strict-local representative formula intertwines exchange
 with restriction to a pointed fibre. This is a compatibility result, with no qcqs,

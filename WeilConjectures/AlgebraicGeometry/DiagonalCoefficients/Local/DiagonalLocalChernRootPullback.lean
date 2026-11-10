@@ -411,9 +411,9 @@ private theorem exactSquare_single
       (DerivedCategory.singleFunctor D 0).map (s.hom.app M) := by
   unfold Functor.mapDerivedCategorySquareIso
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U P).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U P).inv.app
     ((DerivedCategory.singleFunctor A 0).obj M))).mp
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   erw [reassoc_of% (Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor U P M)]
@@ -537,12 +537,9 @@ private theorem exactConeComparison_transport_associated
     (π' : (Functor.const ℕᵒᵖ).obj (U'.obj M') ⟶ V'.obj N')
     (hπ : (P.mapCone (Cone.mk _ π)).π ≫ t.hom.app N ≫ V'.map n =
       (Functor.const ℕᵒᵖ).map (s.hom.app M ≫ U'.map m) ≫ π')
-    (hβ : P.mapDerivedCategory.map (diagonalTraceConeMap L (V.obj N) (Cone.mk _ π)) ≫
-      β.app ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj (V.obj N)) ≫
-      L'.R.map ((Functor.mapDerivedCategorySingleFunctor
-        ((Functor.whiskeringRight ℕᵒᵖ B D).obj P) 0).hom.app (V.obj N)) =
-      (P.mapDerivedCategorySingleFunctor 0).hom.app (U.obj M) ≫
-      diagonalTraceConeMap L' _ (P.mapCone (Cone.mk _ π))) :
+    -- Packaged, so that the kernel matches `LocalChernPullbackData.cone` by its arguments
+    -- instead of unfolding the two presentations of the strict systems.
+    (hβ : LocalChernConeMate P L L' β) :
     (Functor.mapDerivedCategorySquareIso s).inv.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
       P.mapDerivedCategory.map (exactConeComparison U V L M N π) ≫
@@ -559,7 +556,8 @@ private theorem exactConeComparison_transport_associated
     U'.mapDerivedCategory.map ((H.mapDerivedCategorySingleFunctor 0).hom.app M ≫
       (DerivedCategory.singleFunctor C 0).map m) ≫
       exactConeComparison U' V' L' M' N' π' := by
-  have ht := exactConeComparison_transport U H U' P V G V' s t L L' β m n π π' hπ hβ
+  have ht := exactConeComparison_transport U H U' P V G V' s t L L' β m n π π' hπ
+    (hβ _ (Cone.mk _ π))
   simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc] using ht
@@ -633,7 +631,7 @@ private theorem horizontal_root_unshifted (l : ℕ) [Fact l.Prime]
         NatTrans.comp_app, Functor.compConstIso, NatIso.ofComponents_hom_app,
         Iso.refl_hom, Functor.whiskerRight_app, Functor.const_map_app,
         Category.id_comp] using hπ.symm)
-    (d.cone _ (Cone.mk _ p.coefficientsX.lineProjection))
+    d.cone
   simpa only [LocalChernPullbackData.completedSquare,
     LocalChernPullbackData.comparison, Coefficients.lineMap,
     diagonalRealizationPullSingle, line_derivedIso_eq, Iso.trans_hom,

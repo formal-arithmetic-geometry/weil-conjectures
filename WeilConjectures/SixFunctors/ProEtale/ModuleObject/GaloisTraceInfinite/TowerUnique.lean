@@ -210,22 +210,31 @@ lemma scal_comm (i : D.ι) {n m : ℤ}
 lemma scal_comp_nsmul_of_ne (i : D.ι) (hi : i ≠ D.i₀) (n : ℤ) :
     D.scal i n ≫ (Fintype.card (D.A i) • 𝟙 _) = 𝟙 _ := by
   have := D.card i ((infFunctor Λ ginf).obj (K.X n))
-  rw [scal, if_neg hi]
+  rw [scal, ite_eq_right hi]
   exact IsIso.inv_hom_id _
 
 /-- The coproduct `∐ᵢ M∞` of complexes, computed termwise. -/
 noncomputable def cofan : Cofan (fun _ : D.ι ↦ M∞) :=
+  let mkCofan {C : Type (u + 2)} [Category.{u + 1} C] [HasZeroMorphisms C]
+      [HasColimitsOfShape (Discrete D.ι) C] (N : CochainComplex C ℤ) :
+      Cofan (fun _ : D.ι ↦ N) :=
+    HomologicalComplex.coconeOfHasColimitEval (Discrete.functor fun _ : D.ι ↦ N)
   haveI : HasColimitsOfShape (Discrete D.ι)
       (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
     inferInstance
-  HomologicalComplex.coconeOfHasColimitEval (Discrete.functor fun _ : D.ι ↦ M∞)
+  mkCofan M∞
 
 /-- The cofan `MoebiusDecomposition.cofan` is a coproduct. -/
 noncomputable def isColimitCofan : IsColimit D.cofan :=
+  let mkIsColimit {C : Type (u + 2)} [Category.{u + 1} C] [HasZeroMorphisms C]
+      [HasColimitsOfShape (Discrete D.ι) C] (N : CochainComplex C ℤ) :
+      IsColimit (HomologicalComplex.coconeOfHasColimitEval
+        (Discrete.functor fun _ : D.ι ↦ N)) :=
+    HomologicalComplex.isColimitCoconeOfHasColimitEval _
   haveI : HasColimitsOfShape (Discrete D.ι)
       (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
     inferInstance
-  HomologicalComplex.isColimitCoconeOfHasColimitEval _
+  mkIsColimit M∞
 
 /-- The section `M∞ ⟶ ∐ᵢ M∞` with components `|Aᵢ|⁻¹ eᵢ` (`i ≠ i₀`) and `e_{i₀}`. -/
 noncomputable def sigmaSection : M∞ ⟶ D.cofan.pt where
@@ -260,7 +269,7 @@ lemma component_i₀_f (act : ∀ i, D.A i → (M∞ ⟶ M∞)) (n : ℤ) :
     (D.component act D.i₀).f n =
       T.trace Λ (K.X n) hd (hc n) ≫ (infUnit Λ ginf).app (K.X n) := by
   unfold component
-  rw [if_pos rfl, HomologicalComplex.comp_f,
+  rw [ite_eq_left rfl, HomologicalComplex.comp_f,
     Adjunction.mapHomologicalComplex_unit_app_f]
   rfl
 
@@ -268,7 +277,7 @@ lemma component_i₀_f (act : ∀ i, D.A i → (M∞ ⟶ M∞)) (n : ℤ) :
 lemma component_of_ne (act : ∀ i, D.A i → (M∞ ⟶ M∞)) (i : D.ι) (hi : i ≠ D.i₀) :
     D.component act i = Fintype.card (D.A i) • 𝟙 M∞ - ∑ a, act i a := by
   unfold component
-  rw [if_neg hi]
+  rw [ite_eq_right hi]
 
 /-- The component `eᵢ` on the `n`-th term of `M∞`. -/
 noncomputable def eF (i : D.ι) (n : ℤ) : (M∞).X n ⟶ (M∞).X n := D.e i n
@@ -311,7 +320,7 @@ lemma e_comp_scal_comp_component_f (act : ∀ i, D.A i → (M∞ ⟶ M∞))
     D.e i n ≫ D.scal i n ≫ (D.component act i).f n = D.e i n := by
   by_cases hi : i = D.i₀
   · subst hi
-    rw [component_i₀_f, scal, if_pos rfl, id_comp, D.e_i₀, assoc,
+    rw [component_i₀_f, scal, ite_eq_left rfl, id_comp, D.e_i₀, assoc,
       ← assoc ((infUnit Λ ginf).app (K.X n)), T.unit_comp_trace]
     erw [id_comp]
   · exact D.eF_comp_sF_comp_component_f act hact i hi n
@@ -355,7 +364,7 @@ lemma eq_of_comp_eq (act : ∀ i, D.A i → (M∞ ⟶ M∞))
     fun i ↦ ?_
   rw [inj_comp_sigmaRetraction]
   by_cases hi : i = D.i₀
-  · rw [component, if_pos hi]
+  · rw [component, ite_eq_left hi]
     exact hu
   · rw [component_of_ne D act i hi]
     exact (map_nsmul_id_sub_sum_comp_eq_zero DerivedCategory.Q (act i) δ₁ (hδ₁ i)).trans

@@ -64,7 +64,7 @@ private theorem orbit_section_reconstruction {Y S T V : Scheme.{u}} [ConnectedSp
     IsOpenImmersion.lift_fac _ _ _
   have hlk : l = k := by
     have he := congrArg (fun a ↦ a ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T)) hl
-    simpa only [f, Category.assoc, Sigma.ι_desc, Category.comp_id, hδ,
+    simpa only [f, Category.assoc, Sigma.ι_comp_desc, Category.comp_id, hδ,
       pullback.lift_snd] using he
   dsimp only [fixedSplitSection]
   have he := congrArg (fun a ↦ a ≫ δ.inv ≫ pullback.fst p t) hl
@@ -341,7 +341,7 @@ theorem affine_torsor_component_image_orbit
               pullback.snd b v ≫ k from pullback.lift_snd _ _ _,
             ← Category.assoc, show l z ≫ pullback.snd b v = 𝟙 V from
               pullback.lift_snd _ _ _, Category.id_comp]
-          simp only [Category.assoc, hi, Sigma.ι_desc, Category.comp_id]
+          simp only [Category.assoc, hi, Sigma.ι_comp_desc, Category.comp_id]
       rw [← Category.assoc, heq]
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     have hh := congrArg (fun c ↦ (m ≫ δ.hom) c) he
@@ -516,6 +516,7 @@ theorem affine_torsor_component_image_orbit_backward
   intro f _ hbase hsection y a
   exact (affine_torsor_component_image_orbit R H g ι C G ρ hρone hρmul hne
     p j hj hEt hrot d T t k hk δ hδ x K hK f hbase hsection y a).mpr
+
 
 
 

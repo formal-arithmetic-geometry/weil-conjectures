@@ -79,12 +79,12 @@ variable {A₀ B₁ B₂ C₀ : Type*}
 private def derivedSquare (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) :
     F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
       G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫
+  (Functor.mapDerivedCategoryCompIso F₁ F₂).hom ≫
     Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso A₀ (.up ℤ)) _ _
       (F₁ ⋙ F₂).mapDerivedCategory (G₁ ⋙ G₂).mapDerivedCategory
       (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso G₁ G₂).hom
+    (Functor.mapDerivedCategoryCompIso G₁ G₂).inv
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem derivedSquare_fac (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂)
@@ -102,28 +102,28 @@ private theorem derivedSquare_fac (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂)
   change _ ≫ (_ ≫ _ ≫ (G₁ ⋙ G₂).mapDerivedCategoryFactors.inv.app K) ≫
       (G₁ ⋙ G₂).mapDerivedCategoryFactors.hom.app K = _
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  change (Functor.mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Q.obj K) ≫
+  change (Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj K) ≫
     (F₁ ⋙ F₂).mapDerivedCategoryFactors.hom.app K ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t (.up ℤ)).app K) = _
   rw [← hF]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
 
 variable (F₀ : A₀ ⥤ C₀) [F₀.Additive]
   [PreservesFiniteLimits F₀] [PreservesFiniteColimits F₀]
 
 private theorem derivedTriangle_fac (e : F₀ ≅ F₁ ⋙ F₂) (K : CochainComplex A₀ ℤ) :
     (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).hom.app (DerivedCategory.Q.obj K) ≫
         F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
         F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) =
       F₀.mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  dsimp only [Iso.trans_hom, NatTrans.comp_app]
+  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
 
 private theorem derivedComp_fac (e : F₁ ⋙ F₂ ≅ F₀) (K : CochainComplex A₀ ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F₁ F₂).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F₁ F₂ ≪≫
         Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj K) ≫
         F₀.mapDerivedCategoryFactors.hom.app K =
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
@@ -132,12 +132,12 @@ private theorem derivedComp_fac (e : F₁ ⋙ F₂ ≅ F₀) (K : CochainComplex
   dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac,
     ← Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ K]
-  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
 
 end DerivedMaps
 
 section PastingTransparency
-attribute [local irreducible] derivedSquare Functor.mapDerivedCategoryCompIso
+attribute [local irreducible] derivedSquare
   Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategory DerivedCategory.Q
 
 section DerivedPasting
@@ -168,14 +168,16 @@ private theorem derivedSquare_vertical
     (ht : ∀ X, ep.hom.app (J₂.obj X) ≫ P₁.map (t₂.app X) ≫ t₁.app (R₂.obj X) =
       t.app X ≫ J₀.map (er.hom.app X)) (N : DerivedCategory E₀) :
     (Functor.mapDerivedCategoryNatIso ep ≪≫
-        Functor.mapDerivedCategoryCompIso P₂ P₁).hom.app (J₂.mapDerivedCategory.obj N) ≫
+        (Functor.mapDerivedCategoryCompIso P₂ P₁).symm).hom.app (J₂.mapDerivedCategory.obj N) ≫
         P₁.mapDerivedCategory.map ((derivedSquare J₂ P₂ R₂ J₁ t₂).app N) ≫
         (derivedSquare J₁ P₁ R₁ J₀ t₁).app (R₂.mapDerivedCategory.obj N) =
       (derivedSquare J₂ P R J₀ t).app N ≫ J₀.mapDerivedCategory.map
         ((Functor.mapDerivedCategoryNatIso er ≪≫
-          Functor.mapDerivedCategoryCompIso R₂ R₁).hom.app N) := by
-  let ep' := Functor.mapDerivedCategoryNatIso ep ≪≫ Functor.mapDerivedCategoryCompIso P₂ P₁
-  let er' := Functor.mapDerivedCategoryNatIso er ≪≫ Functor.mapDerivedCategoryCompIso R₂ R₁
+          (Functor.mapDerivedCategoryCompIso R₂ R₁).symm).hom.app N) := by
+  let ep' := Functor.mapDerivedCategoryNatIso ep ≪≫
+    (Functor.mapDerivedCategoryCompIso P₂ P₁).symm
+  let er' := Functor.mapDerivedCategoryNatIso er ≪≫
+    (Functor.mapDerivedCategoryCompIso R₂ R₁).symm
   let a₁ := derivedSquare J₁ P₁ R₁ J₀ t₁
   let a₂ := derivedSquare J₂ P₂ R₂ J₁ t₂
   let a := derivedSquare J₂ P R J₀ t
@@ -277,16 +279,16 @@ private theorem derivedSquare_horizontal
     (ht : ∀ X, Q.map (ei.hom.app X) ≫ t.app X =
       t₂.app (I.obj X) ≫ L.map (t₁.app X) ≫ ek.hom.app (R.obj X))
     (N : DerivedCategory C₀) :
-    Q.mapDerivedCategory.map (((Functor.mapDerivedCategoryCompIso I J).symm ≪≫
+    Q.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso I J ≪≫
       Functor.mapDerivedCategoryNatIso ei).hom.app N) ≫
         (derivedSquare I' Q R K' t).app N =
       (derivedSquare J Q P L t₂).app (I.mapDerivedCategory.obj N) ≫
         L.mapDerivedCategory.map ((derivedSquare I P R K t₁).app N) ≫
-        ((Functor.mapDerivedCategoryCompIso K L).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso K L ≪≫
           Functor.mapDerivedCategoryNatIso ek).hom.app (R.mapDerivedCategory.obj N) := by
-  let ei' := (Functor.mapDerivedCategoryCompIso I J).symm ≪≫
+  let ei' := Functor.mapDerivedCategoryCompIso I J ≪≫
     Functor.mapDerivedCategoryNatIso ei
-  let ek' := (Functor.mapDerivedCategoryCompIso K L).symm ≪≫
+  let ek' := Functor.mapDerivedCategoryCompIso K L ≪≫
     Functor.mapDerivedCategoryNatIso ek
   let a₁ := derivedSquare I P R K t₁
   let a₂ := derivedSquare J Q P L t₂

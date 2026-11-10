@@ -55,8 +55,7 @@ private lemma tensorRightModule_comm :
   let := tensorRightModule (R := R) (B := B) (M := M) (N := N)
   constructor
   intro a b t
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul m n => simp only [tensorRightModule_tmul, smul_tmul']
   | add x y hx hy => simp [hx, hy]
 
@@ -147,22 +146,19 @@ private noncomputable def balancedForward
     { toFun := fun x ↦
         { toFun := fun n ↦ balancedForwardAux hA n x
           map_zero' := by
-            induction x using TensorProduct.induction_on with
-            | zero => simp
+            induction x using TensorProduct.inductionOn with
             | tmul c m => simp
             | add x y hx hy => simp [hx, hy]
           map_add' := by
             intro n n'
-            induction x using TensorProduct.induction_on with
-            | zero => simp
+            induction x using TensorProduct.inductionOn with
             | tmul c m => simp [tmul_add]
             | add x y hx hy => simp [hx, hy, add_add_add_comm] }
       map_zero' := by ext; simp
       map_add' := by intros; ext; simp } ?_
   intro b x n
   change balancedForwardAux hA n (b • x) = balancedForwardAux hA (b • n) x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul c m =>
     simp only [smul_tmul', balancedForwardAux_tmul]
     exact right_balance hB b c m n
@@ -212,15 +208,13 @@ private noncomputable def balancedReverse
     { toFun := balancedReverseAux
       map_zero' := by
         ext x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul m n => simp
         | add x y hx hy => simp [hx, hy]
       map_add' := by
         intro c c'
         ext x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul m n => simp [add_tmul]
         | add x y hx hy => simp [hx, hy, add_add_add_comm] } ?_
   intro d c q
@@ -228,25 +222,21 @@ private noncomputable def balancedReverse
   have hzero : balancedReverseAux (R := R) (A := A) (B := B) (M := M) (N := N) (0 : C) =
       (0 : M ⊗[R] N →+ (C ⊗[A] M) ⊗[B] N) := by
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul m n => simp
     | add x y hx hy => simp [hx, hy]
   have hadd (c c' : C) :
       balancedReverseAux (R := R) (A := A) (B := B) (M := M) (N := N) (c + c') =
       balancedReverseAux c + balancedReverseAux c' := by
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul m n => simp [add_tmul]
     | add x y hx hy => simp [hx, hy, add_add_add_comm]
-  induction d using TensorProduct.induction_on with
-  | zero => simp [hzero]
+  induction d using TensorProduct.inductionOn with
   | add d e hd he =>
     rw [add_smul, hadd, AddMonoidHom.add_apply, hd, he, add_smul, map_add]
   | tmul a b =>
-    induction q using TensorProduct.induction_on with
-    | zero => simp
+    induction q using TensorProduct.inductionOn with
     | add q q' hq hq' => simp [hq, hq']
     | tmul m n =>
       have hd : algebraMap (A ⊗[R] B) C (a ⊗ₜ[R] b) =
@@ -289,21 +279,17 @@ private noncomputable def balancedEquiv
       invFun := balancedReverse hA hB
       map_add' := map_add _
       left_inv := fun x ↦ by
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp [hx, hy]
         | tmul q n =>
-          induction q using TensorProduct.induction_on with
-          | zero => simp
+          induction q using TensorProduct.inductionOn with
           | tmul c m => simp
           | add x y hx hy => simp [add_tmul, hx, hy]
       right_inv := fun x ↦ by
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp [hx, hy]
         | tmul c q =>
-          induction q using TensorProduct.induction_on with
-          | zero => simp
+          induction q using TensorProduct.inductionOn with
           | tmul m n => simp
           | add x y hx hy => simp [tmul_add, hx, hy] }
 
@@ -323,12 +309,10 @@ private noncomputable def mixedTensorMap (f : N →ₗ[B] N') :
   intro d q
   change (f.restrictScalars R).lTensor M (d • q) =
     d • ((f.restrictScalars R).lTensor M q)
-  induction d using TensorProduct.induction_on with
-  | zero => simp
+  induction d using TensorProduct.inductionOn with
   | add d d' hd hd' => rw [add_smul, map_add, hd, hd', add_smul]
   | tmul a b =>
-    induction q using TensorProduct.induction_on with
-    | zero => simp
+    induction q using TensorProduct.inductionOn with
     | add q q' hq hq' => simp [hq, hq']
     | tmul m n => simp only [mixedTensorModule_tmul, LinearMap.lTensor_tmul,
         LinearMap.restrictScalars_apply, map_smul]
@@ -346,12 +330,10 @@ private lemma balanced_naturality
       (mixedTensorMap f).lTensor C (balancedForward hA hB x) := by
   let := mixedTensorModule (R := R) (A := A) (B := B) (M := M) (N := N)
   let := mixedTensorModule (R := R) (A := A) (B := B) (M := M) (N := N')
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp [hx, hy]
   | tmul q n =>
-    induction q using TensorProduct.induction_on with
-    | zero => simp
+    induction q using TensorProduct.inductionOn with
     | add q q' hq hq' =>
       simp only [add_tmul, map_add]
       rw [hq, hq']

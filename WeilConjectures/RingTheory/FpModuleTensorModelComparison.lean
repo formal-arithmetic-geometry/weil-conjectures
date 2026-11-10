@@ -102,6 +102,8 @@ theorem exists_eventually_tensor_model_equiv
         Nonempty (((F.obj j : Type v) ⊗[F.obj i] A) ⊗[P] L ≃ₗ[
           (F.obj j : Type v) ⊗[F.obj i] A] ((F.obj j : Type v) ⊗[F.obj i] A) ⊗[A] M) := by
   classical
+  let : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra
+  let : Algebra P ((c.pt : Type v) ⊗[F.obj i] A) := aP
   obtain ⟨k, hik, q, hqC, hq, aPk, -, hmodel⟩ :=
     exists_tensor_model_algebra_tail F c hc f P Q aP e he
   obtain ⟨j₀, hkj₀, hmodules⟩ :=

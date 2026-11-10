@@ -152,13 +152,14 @@ the underived base change map `g^* f_* K ⟶ f'_* g'^* K` followed by the unit
 `f'_* g'^* K ⟶ R⁺f'_* (g'^* K)` is one. -/
 lemma isIso_derivedBaseChangeMapPlus_app_Qh_obj_iff (sq : CommSq g' f' f g)
     (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A))
-    [IsIso ((f)_*[A].rightDerivedFunctorPlusUnit.app K)] :
+    [IsIso ((f)_*[A].rightDerivedFunctorPlusUnith.app K)] :
     IsIso ((derivedBaseChangeMapPlus A sq).app (DerivedCategory.Plus.Qh.obj K)) ↔
       IsIso (DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap A sq)).app K) ≫
-        (f')_*[A].rightDerivedFunctorPlusUnit.app (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) := by
+        (f')_*[A].rightDerivedFunctorPlusUnith.app
+          (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) := by
   rw [← isIso_comp_left_iff (((g)^*[A]).mapDerivedCategoryPlus.map
-    ((f)_*[A].rightDerivedFunctorPlusUnit.app K)), derivedBaseChangeMapPlus_fac_app,
+    ((f)_*[A].rightDerivedFunctorPlusUnith.app K)), derivedBaseChangeMapPlus_fac_app,
     isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff]
 
 end Generic
@@ -183,11 +184,11 @@ theorem isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff
     (h : ∀ K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A₁),
       IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
             (baseChangeMap A₂ sq)).app (R.mapHomotopyCategoryPlus.obj K)) ≫
-          (f')_*[A₂].rightDerivedFunctorPlusUnit.app
+          (f')_*[A₂].rightDerivedFunctorPlusUnith.app
             (((g')^*[A₂]).mapHomotopyCategoryPlus.obj (R.mapHomotopyCategoryPlus.obj K))) ↔
         IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
             (baseChangeMap A₁ sq)).app K) ≫
-          (f')_*[A₁].rightDerivedFunctorPlusUnit.app
+          (f')_*[A₁].rightDerivedFunctorPlusUnith.app
             (((g')^*[A₁]).mapHomotopyCategoryPlus.obj K)))
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A₁)) :
     IsIso ((derivedBaseChangeMapPlus A₂ sq).app (R.mapDerivedCategoryPlus.obj K)) ↔
@@ -214,14 +215,14 @@ theorem isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff
             (R.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient C).obj T')) from
         R.mapDerivedCategoryPlusFactorsh.app ((HomotopyCategory.Plus.quotient C).obj T'))]
   set K' := (HomotopyCategory.Plus.quotient C).obj T'
-  have : IsIso (((f)_*[A₁]).rightDerivedFunctorPlusUnit.app K') :=
+  have : IsIso (((f)_*[A₁]).rightDerivedFunctorPlusUnith.app K') :=
     ((f)_*[A₁]).isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic T'
       fun n ↦ have : Injective (T'.obj.X n) := (T.obj.X n).2
         Functor.rightAcyclic_of_injective _
   let LT : CochainComplex.Plus (Sheaf X.smallEtaleTopology A₂) :=
     ⟨(R.mapHomotopyCategoryPlus.obj K').obj.as,
       (HomotopyCategory.plus_quotient_obj_iff _).1 (R.mapHomotopyCategoryPlus.obj K').property⟩
-  have : IsIso (((f)_*[A₂]).rightDerivedFunctorPlusUnit.app (R.mapHomotopyCategoryPlus.obj K')) :=
+  have : IsIso (((f)_*[A₂]).rightDerivedFunctorPlusUnith.app (R.mapHomotopyCategoryPlus.obj K')) :=
     ((f)_*[A₂]).isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic LT
       fun n ↦ have : Injective (T'.obj.X n) := (T.obj.X n).2
         hR (T'.obj.X n)
@@ -274,11 +275,11 @@ comparison `res(R⁺f_* M) ≅ R⁺f_*(res M)`, is the unit over `Λ` at `res M`
 lemma restrictScalars_map_rightDerivedFunctorPlusUnit_app (f : X ⟶ Y)
     (M : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
     (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategoryPlus.map
-        (((f)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlusUnit.app M) ≫
+        (((f)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlusUnith.app M) ≫
       (rightDerivedLowerStarRestrictScalars φ f).app (DerivedCategory.Plus.Qh.obj M) =
     (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.hom.app
         (((f)_*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj M) ≫
-      ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.app
         ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj M) ≫
       ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
         ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.inv.app

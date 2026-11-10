@@ -87,10 +87,10 @@ theorem isPerfect_compactlySupportedGlobalSections_adic
       ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K) ≅
       (ProEtale.AdicSheaf.forget c.Z).mapDerivedCategory.obj
         ((c.i)_!ᵃ[l].mapDerivedCategory.obj K) :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm.app K ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
       (Functor.mapDerivedCategoryNatIso
         (asIso (adicOpenImmersionLowerShriekComparison l c.i))).app K ≪≫
-      (Functor.mapDerivedCategoryCompIso _ _).app K
+      (Functor.mapDerivedCategoryCompIso _ _).symm.app K
   exact (isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed l _ hM).of_iso
     ((rightDerivedGlobalSections _ _).mapIso
       (((mapDerivedCategoryForgetCompRightDerivedLowerStarIso l c.g).app _).symm ≪≫

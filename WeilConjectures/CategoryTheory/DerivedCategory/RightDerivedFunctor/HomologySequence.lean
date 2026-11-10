@@ -99,7 +99,7 @@ lemma rightDerivedHomologyδ_naturality {S₁ S₂ : ShortComplex C} (h₁ : S�
         F.rightDerivedHomologyδ h₂ n₀ n₁ h =
       F.rightDerivedHomologyδ h₁ n₀ n₁ h ≫
         (homologyFunctor D n₁).map (F.rightDerivedFunctor.map ((singleFunctor C 0).map φ.τ₁)) :=
-  (homologyFunctor D 0).homologySequenceδ_naturality _ _
+  (homologyFunctor D 0).homologySequenceδ_naturality
     (F.rightDerivedFunctor.mapTriangle.map (ShortComplex.ShortExact.singleTriangle.map h₁ h₂ φ))
     n₀ n₁ h
 

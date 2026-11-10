@@ -71,7 +71,7 @@ private theorem ideal_unit_endomorphism
   let : CommRing ((SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).val.obj W) :=
     inferInstanceAs (CommRing (R.obj.obj W))
-  change j.val.app W (s.val W • x) = δ.val.app W (j.val.app W x)
+  change j.val.app W ((show R.obj.obj W from s.val W) • x) = δ.val.app W (j.val.app W x)
   rw [map_smul]
   change (δ.val.app W (1 : R.obj.obj W) : R.obj.obj W) *
     (j.val.app W x : R.obj.obj W) = (δ.val.app W (j.val.app W x) : R.obj.obj W)

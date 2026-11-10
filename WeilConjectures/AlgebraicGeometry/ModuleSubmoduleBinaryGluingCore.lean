@@ -74,8 +74,10 @@ instance binarySubmoduleInclusion_mono (X : Scheme.{u}) (W V : X.Opens)
       (homOfLE (show V ≤ W ⊔ V from le_sup_right))).IsRightAdjoint :=
     (binarySubmoduleAdjunction X W V).isRightAdjoint
   have : Mono (binarySubmoduleMap X W V H Q ι) := by
-    dsimp [binarySubmoduleMap]
-    infer_instance
+    exact Functor.map_mono
+      (SheafOfModules.overPullback (moduleRings X.toRingedSpace)
+        (homOfLE (show V ≤ W ⊔ V from le_sup_right)))
+      (ι ≫ (binarySubmoduleRestrictionIso X W V H).inv)
   exact inferInstanceAs (Mono (pullback.fst _ _))
 
 end AlgebraicGeometry.Scheme.Modules

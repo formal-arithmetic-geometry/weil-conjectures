@@ -124,7 +124,7 @@ private instance continuousConstants_injective (X : Scheme.{u}) (A : Type) [Comm
         ((Scheme.ProEt.topology X).top_mem _)
     · have : IsEmpty U.unop.left := ⟨fun x ↦ hab (by
         have hh := congrArg (fun f : ULift.{u + 1} C(U.unop.left, A) ↦ f.down x) h
-        exact ULift.ext _ _ (ULift.ext _ _ hh))⟩
+        exact ULift.ext (ULift.ext hh))⟩
       exact Scheme.ProEt.mem_topology_of_openImmersion _
         (fun _ : PEmpty.{u + 1} ↦ 𝟙 U.unop.left) (fun x ↦ isEmptyElim x) fun i ↦ i.elim
 
@@ -137,7 +137,7 @@ private instance continuousConstants_surjective (X : Scheme.{u}) (A : Type) [Com
     refine Scheme.ProEt.mem_topology_of_openImmersion _ j
       (fun x ↦ ⟨⟨s x⟩, ⟨x, rfl⟩, ?_⟩) fun a ↦ ?_
     · exact Scheme.Opens.ι_apply _ _
-    · refine ⟨ULift.up a, ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)⟩
+    · refine ⟨ULift.up a, ULift.ext (ContinuousMap.ext fun x ↦ ?_)⟩
       exact x.2.symm
 
 private theorem fixedScalars_equivalence (X : Scheme.{u}) (A : Type) [CommRing A]

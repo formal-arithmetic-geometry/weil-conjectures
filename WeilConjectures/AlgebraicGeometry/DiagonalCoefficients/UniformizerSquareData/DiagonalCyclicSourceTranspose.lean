@@ -61,7 +61,7 @@ private theorem realized_endpoint_transpose
     (((UniformizerSquareData.scalarAdjunction a X).comp
         (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
           (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse
-            (Mod.comap (coefficientMap a X))).symm).homEquiv _ _
+            (Mod.comap (coefficientMap a X)))).homEquiv _ _
         (finiteSourceIso e d.iso g).hom =
       (DerivedCategory.singleFunctor _ 0).map
           (d.semilinear.hom ≫ (Mod.comap (coefficientMap a X)).map

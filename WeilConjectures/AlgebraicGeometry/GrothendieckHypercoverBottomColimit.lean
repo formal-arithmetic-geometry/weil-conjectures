@@ -82,15 +82,15 @@ private lemma staircase_step
   intro p q hp
   rw [sub_comp, Category.assoc, Category.assoc, Category.assoc,
     HomologicalComplex₂.ιTotal_d_totalπ,
-    dif_neg (show ¬ (k = p ∧ m - k + 1 = q) by omega)]
+    dite_eq_right (show ¬ (k = p ∧ m - k + 1 = q) by omega)]
   simp only [comp_zero, smul_zero, add_zero]
   by_cases hp' : p = k + 1 ∧ m - k = q
   · obtain ⟨rfl, rfl⟩ := hp'
-    rw [dif_pos ⟨rfl, rfl⟩]
+    rw [dite_eq_left ⟨rfl, rfl⟩]
     simp only [HomologicalComplex₂.XXIsoOfEq, eqToIso_refl, Iso.refl_hom,
       Category.comp_id]
     rw [totalπ_naturality, ← Category.assoc, ← hz, sub_self]
-  · rw [dif_neg (fun h ↦ hp' ⟨h.1.symm, h.2⟩), comp_zero, comp_zero, sub_zero]
+  · rw [dite_eq_right (fun h ↦ hp' ⟨h.1.symm, h.2⟩), comp_zero, comp_zero, sub_zero]
     by_cases hp'' : p = k + 1
     · subst hp''
       rw [HomologicalComplex₂.totalπ_eq_zero _ _ _ _ (by omega), comp_zero, comp_zero]

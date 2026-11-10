@@ -5,7 +5,11 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFiniteMateComparison
 

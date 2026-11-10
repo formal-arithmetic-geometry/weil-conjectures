@@ -266,6 +266,7 @@ theorem ihom_map_apply {M N P : Ab.{u}} (f : N ⟶ P) (g : M ⟶ N) :
     ((ihom M).map f).hom g = g ≫ f :=
   rfl
 
+
 @[simp]
 theorem monoidalClosed_curry {M N P : Ab.{u}} (f : M ⊗ N ⟶ P) (m : M) (n : N) :
     ((MonoidalClosed.curry f).hom n).hom m = f.hom (m ⊗ₜ[ℤ] n) :=
@@ -314,6 +315,7 @@ lemma ringMonObj_one_apply (n : ULift.{u} ℤ) :
 lemma ringMonObj_mul_tmul (a b : R) :
     (μ[of R] : of (R ⊗[ℤ] R) ⟶ of R).hom (a ⊗ₜ[ℤ] b) = a * b :=
   rfl
+
 
 variable {R} {S : Type u} [Ring S]
 

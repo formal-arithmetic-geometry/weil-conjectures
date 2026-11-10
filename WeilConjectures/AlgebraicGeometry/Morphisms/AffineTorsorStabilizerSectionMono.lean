@@ -58,7 +58,7 @@ private theorem split_section_reconstruction {Y S T V : Scheme.{u}} [ConnectedSp
     IsOpenImmersion.lift_fac _ _ _
   have hlk : l = k := by
     have he := congrArg (fun a ↦ a ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T)) hl
-    simpa only [f, Category.assoc, Sigma.ι_desc, Category.comp_id, hδ,
+    simpa only [f, Category.assoc, Sigma.ι_comp_desc, Category.comp_id, hδ,
       pullback.lift_snd] using he
   dsimp only [fixedSplitSection]
   have he := congrArg (fun a ↦ a ≫ δ.inv ≫ pullback.fst p t) hl
@@ -78,7 +78,7 @@ private theorem split_label_injective_at {Y S T V : Scheme.{u}}
       a ≫ k ≫ Sigma.ι (fun _ : Fin d ↦ T) j ≫ δ.inv := by
     apply pullback.hom_ext
     · exact h
-    · simp only [Category.assoc, hi, Sigma.ι_desc, Category.comp_id]
+    · simp only [Category.assoc, hi, Sigma.ι_comp_desc, Category.comp_id]
   have he' := congrArg (fun m ↦ m ≫ δ.hom) he
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at he'
   have hp := congrArg (fun m : Spec (.of Ω) ⟶ ∐ (fun _ : Fin d ↦ T) ↦ m default) he'

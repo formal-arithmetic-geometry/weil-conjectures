@@ -59,6 +59,7 @@ private theorem model_square
   rw [eq_of_heq h]
   simp [Functor.map_comp, Category.assoc]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The finite-stage tensor model identification is natural in both inputs.
 Source: thm-sf-pf-field.proof.md, Compatibility
 (blueprint: lem-sf-common-stage-inclusion-tensor-model-naturality).
@@ -113,6 +114,7 @@ namespace WeilConjectures
 open GeneralAlgebraicallyClosedCoefficients
 open AlgebraicallyClosedCoefficients (Index Coefficient)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The finite-stage inclusion tensorator, natural in both arguments.
 Source: thm-sf-pf-field.proof.md, Compatibility
 (blueprint: lem-sf-common-stage-inclusion-tensor-model-naturality). -/

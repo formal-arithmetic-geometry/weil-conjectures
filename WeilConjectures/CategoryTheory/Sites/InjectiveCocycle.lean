@@ -45,7 +45,6 @@ noncomputable def free : Cᵒᵖ ⥤ AddCommGrpCat.{max w v} where
     refine AddCommGrpCat.ext fun x ↦ ?_
     change Finsupp.mapDomain _ x = x
     convert Finsupp.mapDomain_id (v := x) using 2
-    funext g
     simp
   map_comp {Z Z' Z''} h h' := by
     refine AddCommGrpCat.ext fun x ↦ ?_
@@ -79,7 +78,6 @@ noncomputable def augKer : Cᵒᵖ ⥤ AddCommGrpCat.{max w v} where
     refine AddCommGrpCat.ext fun x ↦ Subtype.ext ?_
     change Finsupp.mapDomain _ x.1 = x.1
     convert Finsupp.mapDomain_id (v := x.1) using 2
-    funext g
     simp
   map_comp {Z Z' Z''} h h' := by
     refine AddCommGrpCat.ext fun x ↦ Subtype.ext ?_
@@ -130,7 +128,7 @@ noncomputable def ψApp (Z : C) : (aug X Z).ker →+ P.obj (op Z) :=
 lemma ψApp_apply (hcoc : ∀ (Z : C) (g₁ g₂ g₃ : Z ⟶ X), c Z g₁ g₂ + c Z g₂ g₃ = c Z g₁ g₃)
     {Z : C} (g₀ : Z ⟶ X) (x : (aug X Z).ker) : ψApp c Z x = σ c g₀ x.1 := by
   have h : Nonempty (Z ⟶ X) := ⟨g₀⟩
-  rw [ψApp, dif_pos h, AddMonoidHom.comp_apply, AddSubgroup.coe_subtype, ← sub_eq_zero,
+  rw [ψApp, dite_eq_left h, AddMonoidHom.comp_apply, AddSubgroup.coe_subtype, ← sub_eq_zero,
     σ_sub c hcoc, x.2, zero_smul]
 
 /-- The morphism of presheaves `augKer X ⟶ P` induced by the cocycle `c`. -/

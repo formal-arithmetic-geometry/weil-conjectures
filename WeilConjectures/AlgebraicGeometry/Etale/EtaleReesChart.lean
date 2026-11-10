@@ -167,8 +167,7 @@ theorem etale_rees_chart
     have hmap : (etaleReesTensorMap A R d).toLinearMap = h.equiv.toLinearMap := by
       apply LinearMap.ext
       intro x
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul r z =>
         change etaleReesTensorMap A R d (r ⊗ₜ z) = h.equiv (r ⊗ₜ z)
         rw [IsBaseChange.equiv_tmul]

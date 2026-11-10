@@ -25,6 +25,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.ProperBaseChange.PseudoCoherentNormalizedAlgebraTowerSupplement
 import WeilConjectures.CategoryTheory.Finite.FiniteMittagLeffler
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 import Mathlib.Algebra.Category.ModuleCat.Limits
@@ -58,7 +59,7 @@ private theorem map_roos {C D : Type*} [Category C] [Category D]
   apply Pi.hom_ext
   intro n
   simp only [Category.assoc, piComparison_comp_π, towerTransitionEndomorphism,
-    towerProductShift, Preadditive.sub_comp, Category.id_comp, Pi.lift_π,
+    towerProductShift, Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π,
     Preadditive.comp_sub, ← F.map_comp, F.map_sub]
   congr 1
   rw [← Category.assoc, piComparison_comp_π]
@@ -165,7 +166,7 @@ private theorem exists_pseudoCoherent_normalizedTower
       (Functor.mapDerivedCategoryCompIso
         (ModuleCat.restrictScalars.{r} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-        (ModuleCat.restrictScalars.{r} (Ideal.Quotient.mk (J ^ (n + 2))))).inv.app (K n) ≫
+        (ModuleCat.restrictScalars.{r} (Ideal.Quotient.mk (J ^ (n + 2))))).hom.app (K n) ≫
       (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{r}
         (Ideal.Quotient.mk (J ^ (n + 2)))
         (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))
@@ -376,22 +377,57 @@ theorem lisse_tower_algebraic_derived_presentation
     (Functor.mapDerivedCategoryCompIso
       (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.factor
         (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-      (R (n + 1))).inv.app (K n) ≫
+      (R (n + 1))).hom.app (K n) ≫
     (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}
       (Ideal.Quotient.mk (J ^ (n + 2)))
       (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))
       (Ideal.Quotient.mk (J ^ (n + 1)))
       (Ideal.Quotient.factor_comp_mk _).symm)).inv.app (K n)
-  obtain ⟨E, hpseudo, hvan, hred⟩ := exists_pseudoCoherent_normalizedTower
-    J K t hnorm s (fun _ ↦ rfl) a b
-      (fun n q hq ↦ hbK n q (hbounded n q hq)) hfK
+  let D := Functor.ofOpSequence (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s
+  let : HasLimits (ModuleCat.{u + 1} C) := ModuleCat.hasLimits'
+  let : HasCountableProducts (ModuleCat.{u + 1} C) :=
+    ⟨fun _ _ ↦ ModuleCat.hasLimitsOfShape⟩
+  let : AB4StarOfSize.{0} (ModuleCat.{u + 1} C) :=
+    AB4StarOfSize_shrink.{0, u + 1} _
+  let : HasCountableProducts (DerivedCategory (ModuleCat.{u + 1} C)) :=
+    derivedCategory_hasCountableProducts (ModuleCat.{u + 1} C)
+  obtain ⟨E, p, δ, hE⟩ := Pretriangulated.distinguished_cocone_triangle₁
+    (towerTransitionEndomorphism (K := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s)
+  have hT : IsDerivedLimitTriangle
+      (K := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s E p δ := hE
+  have hrec := DerivedCategory.pseudoCoherent_normalizedAlgebraTower.{u + 1, 0, u + 1}
+    J K t hnorm s
+    (fun _ ↦ rfl) E p δ hT ⟨b, fun i hi ↦ hbK 0 i (hbounded 0 i (Or.inr hi))⟩ (hfK 0)
+  have hfin : ∀ (n : ℕᵒᵖ) (i : ℤ),
+      Finite ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} C) i).obj (D.obj n)) := by
+    intro n i
+    have : Module.Finite (C ⧸ J ^ (n.unop + 1))
+        ((DerivedCategory.homologyFunctor
+          (ModuleCat.{u + 1} (C ⧸ J ^ (n.unop + 1))) i).obj (K n.unop)) := hfK n.unop i
+    have : Finite ((DerivedCategory.homologyFunctor
+        (ModuleCat.{u + 1} (C ⧸ J ^ (n.unop + 1))) i).obj (K n.unop)) :=
+      Module.finite_of_finite (C ⧸ J ^ (n.unop + 1))
+    let e := ((R n.unop).mapDerivedCategoryHomologyFunctorIso i).app (K n.unop)
+    change Finite ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} C) i).obj
+      ((R n.unop).mapDerivedCategory.obj (K n.unop)))
+    exact Finite.of_equiv ((DerivedCategory.homologyFunctor
+      (ModuleCat.{u + 1} (C ⧸ J ^ (n.unop + 1))) i).obj (K n.unop)) e.toLinearEquiv.toEquiv
+  have hvan : ∀ (n : ℕᵒᵖ) (i : ℤ), (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} C) i).obj (D.obj n)) := by
+    intro n i hi
+    exact (R n.unop).isZero_homologyFunctor_mapDerivedCategory_obj
+      (hbK n.unop i (hbounded n.unop i hi))
+  have hDT : IsDerivedLimitTriangle
+      (fun n ↦ D.map (homOfLE (Nat.le_succ n)).op) E p δ := by
+    simpa only [D, Functor.ofOpSequence_map_homOfLE_succ] using hT
+  have hEvan := module_derivedLimit_interval D E p δ hDT a b hfin hvan
   have (n : ℕ) : (R n).mapDerivedCategory.IsRightAdjoint :=
     ModuleCat.derivedRestrictScalars_isRightAdjoint.{u + 1, 0}
       (Ideal.Quotient.mk (J ^ (n + 1)))
   let L (n : ℕ) := (R n).mapDerivedCategory.leftAdjoint
   let adj (n : ℕ) : L n ⊣ (R n).mapDerivedCategory := Adjunction.ofIsRightAdjoint _
-  obtain ⟨e, he⟩ := hred L adj
-  refine ⟨E, hpseudo, hvan, ?_⟩
+  obtain ⟨e, _, he, _, _⟩ := hrec.2 L adj
+  refine ⟨E, hrec.1, hEvan, ?_⟩
   exact fun φ hφ β hβ hc hlim hcolim ↦
     hrealize E L adj e he φ hφ β hβ hc hlim hcolim
 

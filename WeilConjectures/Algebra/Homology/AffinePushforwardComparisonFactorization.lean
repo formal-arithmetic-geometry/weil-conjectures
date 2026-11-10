@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Naturality of the ordinary affine comparison on cohomology -/
 
@@ -64,17 +66,20 @@ theorem affinePushforwardComparison_factorization
           (((affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex
               (.up ℤ)).obj C)).inv ≫
-        (DerivedCategory.homologyFunctor
-          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
-          ((RingedSpace.moduleDirectImage
-            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))) := by
+        (cast (by rfl)
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
+            ((RingedSpace.moduleDirectImage
+              (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj
+                (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))))) := by
   let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
   let G := affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage
     (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom
-  let : (affinePushforwardTilde B).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde B).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits (affinePushforwardTilde B) :=
     Functor.preservesFiniteLimits_of_preservesHomology _

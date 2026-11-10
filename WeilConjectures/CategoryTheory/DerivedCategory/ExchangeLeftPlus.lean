@@ -62,9 +62,9 @@ lemma ι_map_mapDerivedCategoryPlusCompIso_inv_app (F : C ⥤ D) (G : D ⥤ E) [
     [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (X : DerivedCategory.Plus C) :
     DerivedCategory.Plus.ι.map ((mapDerivedCategoryPlusCompIso F G).inv.app X) =
-      (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Plus.ι.obj X) := by
-  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Plus.ι.obj X)),
-    Iso.hom_inv_id_app, ← ι_map_mapDerivedCategoryPlusCompIso_hom_app, ← Functor.map_comp,
+      (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Plus.ι.obj X) := by
+  rw [← cancel_epi ((mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Plus.ι.obj X)),
+    Iso.inv_hom_id_app, ← ι_map_mapDerivedCategoryPlusCompIso_hom_app, ← Functor.map_comp,
     Iso.hom_inv_id_app, Functor.map_id]
   rfl
 

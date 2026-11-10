@@ -162,6 +162,7 @@ noncomputable def columnFiltration : DecreasingFiltration (K.total (up ℤ)) whe
 lemma columnFiltration_F (p : ℤ) :
     K.columnFiltration.F p = Subobject.mk (K.totalιColumnsGE p) := rfl
 
+
 /-! ### The graded pieces of the column filtration -/
 
 omit [K.HasTotal (up ℤ)] in
@@ -221,6 +222,7 @@ noncomputable def columnShortComplex (p : ℤ) : ShortComplex (CochainComplex C 
 /-- The first morphism of `HomologicalComplex₂.columnShortComplex`. -/
 lemma columnShortComplex_f (p : ℤ) :
     (K.columnShortComplex p).f = total.map (K.columnsGEMap p) (up ℤ) := rfl
+
 
 /-- The second morphism of `HomologicalComplex₂.columnShortComplex`. -/
 lemma columnShortComplex_g (p : ℤ) :
@@ -335,6 +337,7 @@ lemma columnFiltrationSesHom_τ₁ (p : ℤ) :
 /-- The second component of `HomologicalComplex₂.columnFiltrationSesHom`. -/
 lemma columnFiltrationSesHom_τ₂ (p : ℤ) :
     (K.columnFiltrationSesHom p).τ₂ = (K.columnFiltrationPieceIso p).hom := rfl
+
 
 /-- The third component of `HomologicalComplex₂.columnFiltrationSesHom`. -/
 @[reassoc (attr := simp)]

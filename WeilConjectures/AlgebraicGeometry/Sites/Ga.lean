@@ -103,6 +103,7 @@ lemma gaPresheaf_map_apply {U V : X.Etale} (g : V ⟶ U) (x : X.gaPresheaf.obj (
     (X.gaPresheaf.map g.op x).down = g.left.appTop x.down :=
   rfl
 
+
 /-! ### The Čech complexes of `𝔾ₐ` on affine families -/
 
 section Cech
@@ -131,6 +132,7 @@ lemma overΓMap_apply {W W' : Over V} (f : W ⟶ W') (s : OverΓ W') :
     overΓMap f s = f.left.left.appTop s :=
   rfl
 
+
 lemma overΓMap_comp {W W' W'' : Over V} (f : W ⟶ W') (g : W' ⟶ W'') (s : OverΓ W'') :
     overΓMap (f ≫ g) s = overΓMap f (overΓMap g s) := by
   change (f.left.left ≫ g.left.left).appTop s = _
@@ -140,6 +142,7 @@ lemma overΓMap_comp {W W' W'' : Over V} (f : W ⟶ W') (g : W' ⟶ W'') (s : Ov
 lemma overΓMap_eq_of_eq {W W' : Over V} {f g : W ⟶ W'} (h : f.left.left = g.left.left)
     (s : OverΓ W') : overΓMap f s = overΓMap g s := by
   rw [overΓMap_apply, overΓMap_apply, h]
+
 
 variable (V) in
 /-- The presheaf `W ↦ Γ(W, 𝒪)` of `Γ(V, 𝒪)`-modules on `Over V`. -/
@@ -158,6 +161,7 @@ lemma gaModulePresheaf_map_apply {W W' : Over V} (f : W ⟶ W')
     (s : (gaModulePresheaf V).obj (op W')) :
     (gaModulePresheaf V).map f.op s = overΓMap f s :=
   rfl
+
 
 /-- The sections of `𝔾ₐ` over `W` are the module `Γ(W, 𝒪)`. -/
 noncomputable def gaPresheafAddEquiv (W : Over V) :
@@ -210,8 +214,7 @@ lemma bijective_gaBaseChange (W T : Over V) [IsAffine V.left] [IsAffine W.left.l
   let e := h.tensorEquiv rfl rfl
   have he : ∀ t : OverΓ W ⊗[Γ(V.left, ⊤)] OverΓ T, gaBaseChange W T t = e t := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul s b =>
       rw [gaBaseChange_tmul]
       exact (h.tensorEquiv_tmul rfl rfl s b).symm

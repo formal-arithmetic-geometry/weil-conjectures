@@ -73,7 +73,7 @@ theorem forall_coeff_charpolyRev_mem_iff [CharZero K] (F : Module.End K V) (S : 
     · rw [pow_zero, LinearMap.trace_one]
       exact natCast_mem S _
     · have h := hN (m + 1)
-      rw [Finset.sum_range_succ, if_neg (Nat.succ_ne_zero m), Nat.sub_self,
+      rw [Finset.sum_range_succ, ite_eq_right (Nat.succ_ne_zero m), Nat.sub_self,
         coeff_zero_charpolyRev, mul_one] at h
       have hrest : ∑ k ∈ Finset.range (m + 1),
           (if k = 0 then 0 else LinearMap.trace K V (F ^ k)) * F.charpolyRev.coeff (m + 1 - k) ∈

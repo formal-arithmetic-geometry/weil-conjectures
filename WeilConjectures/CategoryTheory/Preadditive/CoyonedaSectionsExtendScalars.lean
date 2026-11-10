@@ -74,6 +74,7 @@ lemma coyonedaSectionsMap_app_apply {M : C₁} (m : (coyonedaSections c₁).obj 
     (coyonedaSectionsMap f c₁ c₂ H e hH).app M m = e.inv ≫ H.map m :=
   rfl
 
+
 /-- The comparison `B ⊗_A Hom(X₁, M) ⟶ Hom(X₂, H M)`, `b ⊗ m ↦ b • (e⁻¹ ≫ H m)`: the map adjoint
 to `coyonedaSectionsMap`. -/
 noncomputable def coyonedaSectionsExtendScalarsComparison :
@@ -106,8 +107,7 @@ lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
     (1 : B) ⊗ₜ[A, f] (𝟙 X₁ : (coyonedaSections c₁).obj X₁)
   have hgen (z : (ModuleCat.extendScalars f).obj ((coyonedaSections c₁).obj X₁)) :
       ∃ b : B, z = b • one := by
-    induction z using TensorProduct.induction_on with
-    | zero => exact ⟨0, (zero_smul _ _).symm⟩
+    induction z using TensorProduct.inductionOn with
     | tmul b m =>
       obtain ⟨a, ha⟩ := hc₁ m
       let i : (coyonedaSections c₁).obj X₁ := 𝟙 X₁

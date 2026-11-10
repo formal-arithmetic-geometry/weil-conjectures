@@ -114,7 +114,7 @@ noncomputable def biproductFinSuccIso {n : ℕ} (f : Fin (n + 1) → C) [HasBipr
           by_cases h : j = i
           · subst h
             simp
-          · rw [dif_neg h, dif_neg ((Fin.succ_injective _).ne h)]
+          · rw [dite_eq_right h, dite_eq_right ((Fin.succ_injective _).ne h)]
       rw [biprod.lift_desc, Preadditive.comp_add, biproduct.ι_π_ne_assoc _ (Fin.succ_ne_zero j),
         zero_comp, zero_add, reassoc_of% this, biproduct.ι_desc]
   inv_hom_id := by
@@ -138,7 +138,7 @@ noncomputable def biproductFinSuccIso {n : ℕ} (f : Fin (n + 1) → C) [HasBipr
         by_cases h : i = k
         · subst h
           simp
-        · rw [dif_neg h, dif_neg ((Fin.succ_injective _).ne h)]
+        · rw [dite_eq_right h, dite_eq_right ((Fin.succ_injective _).ne h)]
 
 /-- A biproduct indexed by `Fin 0` is zero. -/
 lemma isZero_biproduct_fin_zero (f : Fin 0 → C) [HasBiproduct f] : IsZero (⨁ f) := by

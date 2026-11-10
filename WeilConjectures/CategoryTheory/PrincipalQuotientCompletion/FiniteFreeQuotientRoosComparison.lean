@@ -93,6 +93,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasDerivedCategory.{wS}
     (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J S))]
 
+local instance (T : Sheaf J CommRingCat.{r}) (I : Type r) :
+    HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J T).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 /-- Cochain data for scalar extension of principal quotient towers. No derived
 completion functor occurs here. Naturality is required for all cochain maps.
 Source: the balanced quotient calculation and additive cone construction in steps
@@ -349,7 +354,7 @@ private theorem single_tensor_quotient_component
     koszulTensorFunctor, Functor.flip_obj_map, Functor.map₂HomologicalComplex_map_app,
     CochainComplex.mapBifunctorSingle₁Iso_inv_f, Category.assoc]
   erw [HomologicalComplex.ι_mapBifunctorMap]
-  simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+  simp only [CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self,
     HomologicalComplex.id_f, curriedTensor_map_app, ← comp_whiskerRight_assoc,
     Iso.inv_hom_id_assoc]
@@ -641,7 +646,7 @@ private theorem arithmeticBlock
     CofinalRoos.block X (arithmeticEmbedding e he) = block e X.asFunctor := by
   apply Pi.hom_ext
   intro n
-  simp only [CofinalRoos.block, block, Pi.lift_π]
+  simp only [CofinalRoos.block, block, Pi.lift_comp_π]
   have hn : 1 ≤ e * (n + 1) := by nlinarith
   have hd : e * (n + 1 + 1) - 1 - (e * (n + 1) - 1) = e := by
     rw [Nat.mul_add, Nat.mul_one]
@@ -650,7 +655,7 @@ private theorem arithmeticBlock
     _) = _
   rw [hd]
   dsimp only [arithmeticEmbedding, OrderEmbedding.ofStrictMono]
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   rfl
 
 private theorem arithmeticRoos

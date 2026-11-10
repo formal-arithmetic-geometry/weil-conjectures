@@ -92,22 +92,19 @@ theorem exists_eq_rTensor_sub_and_eq_lTensor_sub
   have hπY₁dY (M : Type u) [AddCommGroup M] [Module k M] (t : M ⊗[k] CY₀) (p : β × β) :
       πY₁ M (dY.lTensor M t) p =
         (gr p.1 p.2).lTensor M (πY₀ M t p.2) - (gl p.1 p.2).lTensor M (πY₀ M t p.1) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]; abel
     | tmul m g => simp [πY₁, πY₀, dY, tmul_sub, CY₁, CY₀, piRight_apply, piRightHom_tmul]
   have hπY₀r {M M' : Type u} [AddCommGroup M] [Module k M] [AddCommGroup M'] [Module k M']
       (φ : M →ₗ[k] M') (t : M ⊗[k] CY₀) (b : β) :
       πY₀ M' (φ.rTensor CY₀ t) b = φ.rTensor _ (πY₀ M t b) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]
     | tmul m g => simp [πY₀, CY₀, piRight_apply, piRightHom_tmul]
   have hπY₁r {M M' : Type u} [AddCommGroup M] [Module k M] [AddCommGroup M'] [Module k M']
       (φ : M →ₗ[k] M') (t : M ⊗[k] CY₁) (p : β × β) :
       πY₁ M' (φ.rTensor CY₁ t) p = φ.rTensor _ (πY₁ M t p) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]
     | tmul m g => simp [πY₁, CY₁, piRight_apply, piRightHom_tmul]
   -- the vertical and horizontal parts as tensors with `CY₁` and `CY₀`
@@ -130,8 +127,7 @@ theorem exists_eq_rTensor_sub_and_eq_lTensor_sub
       piLeft k CY₁ (fun p : α × α ↦ F₁ p.1 p.2) (dX.rTensor CY₁ t) p =
         (fr p.1 p.2).rTensor _ (piLeft k CY₁ F₀ t p.2) -
           (fl p.1 p.2).rTensor _ (piLeft k CY₁ F₀ t p.1) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]; abel
     | tmul f c => simp [dX, CX₁, CX₀, sub_tmul, LinearMap.pi_apply]
   have hW : ∀ a, π.lTensor _ (V a) = 0 := by

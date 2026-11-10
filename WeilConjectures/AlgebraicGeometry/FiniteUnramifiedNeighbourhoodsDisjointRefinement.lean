@@ -129,7 +129,7 @@ theorem exists_disjoint_closed_immersion_refinement
       intro a b
       by_cases hab : a = b
       · simp [D, hab]
-      · simp only [D, if_neg hab]
+      · simp only [D, ite_eq_right hab]
         exact huZ a b hab
   have hBA (a : I) : B ≤ A a := inf_le_left.trans (iInf_le A a)
   have hBD (a b : I) : B ≤ D a b :=

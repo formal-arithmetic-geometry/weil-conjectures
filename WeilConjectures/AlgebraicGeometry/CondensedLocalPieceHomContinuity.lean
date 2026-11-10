@@ -32,6 +32,23 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+noncomputable local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
+local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ) : HasColimit N := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfShape I C := inferInstance
+  have (n : ℤ) : HasColimit (N ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
+
 private theorem comparison_isIso_of_compatible_iso
     {A : Type*} [Category A] {I : Type*} [Category I]
     {D E : I ⥤ A} [HasColimitsOfShape I A]
@@ -122,10 +139,6 @@ private theorem locally_closed_generators_continuity
     T Λ i j P N hN (hlocal U P hP)
   exact homColimitProperty_of_iso (I := I) (N ⋙ DerivedCategory.Q)
     (DerivedCategory.Q.mapCocone (colimit.cocone N)) eK hp
-
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
 
 section
 

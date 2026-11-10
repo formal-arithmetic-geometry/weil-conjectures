@@ -30,8 +30,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback DerivedCategory.Qh
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom Scheme.Modules.instCategory
   Scheme.Modules.instAbelian HomotopyCategory DerivedCategory
-  Functor.mapHomologicalComplex Functor.mapHomotopyCategory HomotopyCategory.quotient
-  HomologicalComplexUpToQuasiIso.Qh
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

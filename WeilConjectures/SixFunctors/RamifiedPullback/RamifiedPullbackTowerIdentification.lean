@@ -38,13 +38,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 private theorem ramification_exists :
     ∃ e : ℕ, 1 ≤ e ∧
-      Ideal.span ({integralScalarIntegerInclusion l E L ι
-        (Padic.coefficientExtensionUniformizer l E)} :
+      Ideal.span
+        ({integralScalarIntegerInclusion l E L ι (Padic.coefficientExtensionUniformizer l E)} :
           Set (Padic.coefficientExtensionIntegers l L)) =
         Ideal.span {Padic.coefficientExtensionUniformizer l L ^ e} ∧
       ∀ k : ℕ, 1 ≤ k →
-        Ideal.span ({integralScalarIntegerInclusion l E L ι
-          (Padic.coefficientExtensionUniformizer l E)} :
+        Ideal.span
+          ({integralScalarIntegerInclusion l E L ι (Padic.coefficientExtensionUniformizer l E)} :
             Set (Padic.coefficientExtensionIntegers l L)) =
           Ideal.span {Padic.coefficientExtensionUniformizer l L ^ k} → k = e := by
   let R := Padic.coefficientExtensionIntegers l E
@@ -99,8 +99,8 @@ private theorem ramification_exists :
     ((pow_dvd_pow_iff hvi.ne_zero hvi.not_isUnit).mp ha.symm.dvd)
 
 private theorem ramified_kernel (e n : ℕ)
-    (he : Ideal.span ({integralScalarIntegerInclusion l E L ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (he : Ideal.span
+      ({integralScalarIntegerInclusion l E L ι (Padic.coefficientExtensionUniformizer l E)} :
         Set (Padic.coefficientExtensionIntegers l L)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l L ^ e})
     (hexp : index e n + 1 = e * (n + 1))
@@ -119,8 +119,8 @@ private theorem ramified_kernel (e n : ℕ)
   exact Ideal.mem_map_of_mem f hx
 
 private def ramifiedQuotient (e n : ℕ)
-    (he : Ideal.span ({integralScalarIntegerInclusion l E L ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (he : Ideal.span
+      ({integralScalarIntegerInclusion l E L ι (Padic.coefficientExtensionUniformizer l E)} :
         Set (Padic.coefficientExtensionIntegers l L)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l L ^ e})
     (hexp : index e n + 1 = e * (n + 1)) :

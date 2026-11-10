@@ -26,20 +26,20 @@ open Limits
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- lem-sp-finite-filtration-induction. -/
-structure FilteredObject (C : Type u) [Category.{v} C] [Abelian C] where
+structure WeilFilteredObject (C : Type u) [Category.{v} C] [Abelian C] where
   obj : C
   filtration : DecreasingFiltration obj
 
-namespace FilteredObject
+namespace WeilFilteredObject
 
 /-- lem-sp-finite-filtration-induction. -/
-structure Hom (A B : FilteredObject C) where
+structure Hom (A B : WeilFilteredObject C) where
   hom : A.obj ⟶ B.obj
   preserves : ∀ i : ℤ, ∃ lift : (A.filtration.F i : C) ⟶
     (B.filtration.F i : C),
     lift ≫ (B.filtration.F i).arrow = (A.filtration.F i).arrow ≫ hom
 
-end FilteredObject
+end WeilFilteredObject
 
 namespace DecreasingFiltration
 

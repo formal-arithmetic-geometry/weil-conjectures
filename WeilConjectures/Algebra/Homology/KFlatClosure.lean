@@ -90,6 +90,7 @@ theorem isKFlat_coproduct_nat
   intro i
   exact (hsum i).of_iso e.symm
 
+
 /-- (blueprint: lem-pc-kflat-cone-direct-sum) Stacks, Cohomology on Sites, Lemma 07A3:
 the mapping cone of a morphism of K-flat complexes of sheaves of `R`-modules is K-flat.
 

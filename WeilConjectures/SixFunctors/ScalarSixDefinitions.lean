@@ -105,7 +105,7 @@ def scalarSixPullComp (Λ : ScalarSixRing.{u}) {X Y W : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ W) :
     scalarSixPull Λ (f ≫ g) ≅ scalarSixPull Λ g ⋙ scalarSixPull Λ f :=
   Functor.mapDerivedCategoryNatIso (upperStarComp Λ.X f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The tensor associator, fixed as the conjugate of transitivity of exact restriction.
 On K-flat representatives its formula is c tensor (b tensor m) to cb tensor m.
@@ -124,7 +124,7 @@ def scalarSixTower {Λ Λ' Λ'' : ScalarSixRing.{u}}
         (Mod.comapCongr (coefficientMap_comp (Λ := Λ.X) (Λ' := Λ'.X) (Λ'' := Λ''.X)
           a.hom.hom b.hom.hom X)) ≪≫
       Functor.mapDerivedCategoryNatIso (Mod.comapComp _ _ ) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
 
 /-- The fixed section-ring model of a condensed coefficient object.
 Source: blueprint proof step 1 (blueprint: det-prop-scalar-six-pullback). -/
@@ -254,9 +254,9 @@ def scalarSixPullSection (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     scalarSixPull Λ f ⋙ scalarSixForward Λ X ≅ scalarSixForward Λ Y ⋙
       (proEtaleRingModulePullback f (scalarSixSectionRing Λ Y)
         (scalarSixSectionRing Λ X) (G.coefficient Λ f)).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (G.pull Λ f) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Clause (1), with its canonical normalization, and the inverse-image square of (3).
 All coefficient maps are allowed, including non-flat maps.
@@ -370,13 +370,13 @@ def scalarSixOpenIso (O : ScalarSixOpenComparison E G k) (Λ : ScalarSixRing.{u}
   letI := E.finiteColimits (scalarSixImmersion G Λ j)
   let d : D(openImmersionLowerShriek Λ.X j.left) ⋙ scalarSixForward Λ X.left ≅
       scalarSixForward Λ S.left ⋙ E.derived (scalarSixImmersion G Λ j) :=
-    (Functor.mapDerivedCategoryCompIso
+    Functor.mapDerivedCategoryCompIso
       (openImmersionLowerShriek Λ.X j.left)
-      (ModuleRingedComparison.equivalence Λ.X X.left).functor).symm ≪≫
+      (ModuleRingedComparison.equivalence Λ.X X.left).functor ≪≫
         Functor.mapDerivedCategoryNatIso (O.comparison Λ j) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (ModuleRingedComparison.equivalence Λ.X S.left).functor
-            (E.extension (scalarSixImmersion G Λ j))
+            (E.extension (scalarSixImmersion G Λ j))).symm
   scalarSixTransportOpen (scalarSixEquivalence Λ S.left) (scalarSixEquivalence Λ X.left)
     D(openImmersionLowerShriek Λ.X j.left) (E.derived (scalarSixImmersion G Λ j)) d
 

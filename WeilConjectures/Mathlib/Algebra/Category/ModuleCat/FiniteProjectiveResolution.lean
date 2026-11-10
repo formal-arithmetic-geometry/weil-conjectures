@@ -53,7 +53,7 @@ def pres (Z : ModuleCat.{u} R) : ProjectivePresentation Z :=
 /-- The projective object of `pres Z` is finitely generated if `Z` is. -/
 lemma pres_finite (Z : ModuleCat.{u} R) [h : Module.Finite R Z] :
     Module.Finite R (pres Z).p := by
-  rw [pres, dif_pos h]
+  rw [pres, dite_eq_left h]
   dsimp
   infer_instance
 

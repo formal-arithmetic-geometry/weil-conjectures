@@ -219,6 +219,7 @@ private noncomputable def derivedLineIso
   exact asIso ((reduceCounit l E X n).app _) ≪≫
     DerivedCategory.Q.mapIso (lineComplexIso l E X L b m n)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private noncomputable def derivedIso
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (b : PowerComparisons l E X L) (m : ℤ) (n : ℕ) :
@@ -284,6 +285,7 @@ private theorem representative_pasting
 set_option maxHeartbeats 1600000 in
 -- Normalize the specified scalar and tensor model transports in the representative square.
 attribute [local irreducible] SheafOfModules.monoidalCategory in
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem representative_formula
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (b : PowerComparisons l E X L) (m : ℤ)
@@ -512,7 +514,7 @@ private theorem conjugate_square
     F.map (a.hom ≫ e.hom) ≫ (F.map e.inv ≫ t ≫ G.map d.hom) =
       s ≫ G.map (b.hom ≫ d.hom) := by
   simp only [Functor.map_comp, Category.assoc]
-  rw [Iso.map_hom_inv_id_assoc]
+  rw [Iso.hom_inv_id_map_assoc]
   exact (Category.assoc _ _ _).symm.trans
     ((congrArg (fun z ↦ z ≫ G.map d.hom) h.symm).trans (Category.assoc _ _ _))
 

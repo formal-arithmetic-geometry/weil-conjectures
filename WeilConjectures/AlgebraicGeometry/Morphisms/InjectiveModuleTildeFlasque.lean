@@ -179,7 +179,7 @@ theorem injective_tilde_isFlasque
     apply TopCat.Presheaf.IsSheaf.section_ext
       (modulesSpecToSheaf.obj (tilde (R := .of R) M)).2
     intro x hx
-    obtain ⟨a, haJ, hax⟩ := SetLike.not_le_iff_exists.mp (hJ x hx)
+    obtain ⟨a, haJ, hax⟩ := IsConcreteLE.not_le_iff_exists.mp (hJ x hx)
     let V : (Spec (.of R)).Opens := U ⊓ PrimeSpectrum.basicOpen a
     refine ⟨V, inf_le_left, ⟨hx, hax⟩, ?_⟩
     apply (tilde (R := .of R) M).isSMulRegular_of_le_basicOpen

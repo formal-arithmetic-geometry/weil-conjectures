@@ -39,14 +39,14 @@ noncomputable def multiequalizerFunctorIso :
       rcases j with I | I
       · simp only [Functor.whiskeringLeft_obj_obj, Functor.comp_obj,
           MulticospanIndex.multicospan_obj_left, lim_obj, Category.assoc,
-          HasLimit.isoOfNatIso_hom_π, multicospanComp_hom_app, Functor.id_obj, Iso.refl_hom,
+          HasLimit.isoOfNatIso_hom_π, multicospanComp_hom_app, Iso.refl_hom,
           multiequalizerFunctor_map_ι_assoc, Functor.comp_map, Functor.whiskeringLeft_obj_map,
           lim_map, limMap_π, Functor.whiskerLeft_app, HasLimit.isoOfNatIso_hom_π_assoc]
         exact (congrArg (_ ≫ ·) (Category.comp_id _)).trans
           (congrArg (_ ≫ ·) (Category.id_comp _)).symm
       · simp only [Functor.whiskeringLeft_obj_obj, Functor.comp_obj,
           MulticospanIndex.multicospan_obj_right, lim_obj, Category.assoc,
-          HasLimit.isoOfNatIso_hom_π, multicospanComp_hom_app, Functor.id_obj, Iso.refl_hom,
+          HasLimit.isoOfNatIso_hom_π, multicospanComp_hom_app, Iso.refl_hom,
           Functor.comp_map, Functor.whiskeringLeft_obj_map, lim_map, limMap_π,
           Functor.whiskerLeft_app, HasLimit.isoOfNatIso_hom_π_assoc]
         refine ((congrArg (_ ≫ ·) (Category.comp_id _)).trans ?_).trans

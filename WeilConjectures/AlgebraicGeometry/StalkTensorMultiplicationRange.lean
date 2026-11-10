@@ -76,8 +76,8 @@ theorem stalk_tensor_multiplication_range {X : Scheme.{u}} {J : X.Modules}
       (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx r,
       ← TopCat.Presheaf.germ_res_apply F.val.presheaf
       (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx t]
-    let r' := O.val.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r
-    let t' := F.val.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op t
+    let r' : Γ(X, U ⊓ V) := O.val.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r
+    let t' : Γ(F, U ⊓ V) := F.val.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op t
     let P := O.val ⊗ F.val
     let θ := (PresheafOfModules.sheafificationAdjunction
       (𝟙 X.ringCatSheaf.obj)).unit.app P ≫
@@ -129,8 +129,7 @@ theorem stalk_tensor_multiplication_range {X : Scheme.{u}} {J : X.Modules}
       ConcreteCategory.congr_hom (Φ J F).hom_inv_id z
     rw [← hz]
     generalize (Φ J F).hom z = q
-    induction q using TensorProduct.induction_on with
-    | zero => simp
+    induction q using TensorProduct.inductionOn with
     | tmul a b =>
       rw [hmul]
       exact Submodule.smul_mem_smul ⟨a, rfl⟩ (Submodule.mem_top : b ∈ ⊤)

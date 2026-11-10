@@ -304,6 +304,7 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ideal_of_comap_ι_
   have h2 := Ideal.comap_mono (f := (O.ι.appLE W.1 (O.ι ⁻¹ᵁ W.1) le_rfl).hom) h'
   rwa [Ideal.comap_map_of_bijective _ hbij, Ideal.comap_map_of_bijective _ hbij] at h2
 
+
 end FiniteDegreeBlowup
 
 /-- **The affine blow-up of a finitely generated ideal is quasi-compact**: the charts at

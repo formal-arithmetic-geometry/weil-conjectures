@@ -199,6 +199,7 @@ lemma restrict_vadd (P : Torsor G) (U : X.Etaleᵒᵖ) (a : G.obj.obj
       P.vadd (op ((etaleLocalization f).obj U.unop)) a x :=
   rfl
 
+
 /-- The sections of the restriction of a torsor over `U` are its sections over the
 localization of `U`. -/
 def restrictSheafEquiv (P : Torsor G) (U : X.Etaleᵒᵖ) :
@@ -216,6 +217,7 @@ lemma restrictSheafEquiv_vadd (P : Torsor G) (U : X.Etaleᵒᵖ)
     P.restrictSheafEquiv f U ((P.restrict f).vadd U a x) =
       P.vadd (op ((etaleLocalization f).obj U.unop)) a (P.restrictSheafEquiv f U x) :=
   rfl
+
 
 /-- Restriction preserves isomorphism of torsors. -/
 lemma restrict_equiv {P P' : Torsor G} (h : P ≈ P') :

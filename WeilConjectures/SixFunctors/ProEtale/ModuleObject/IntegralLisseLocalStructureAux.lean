@@ -455,7 +455,7 @@ lemma map_continuousMapRingObjMulLeft_comp_chartComparison (X : Scheme.{u}) (t :
   rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
   simp only [chartComparison, adj, Equiv.apply_symm_apply]
   ext S f
-  exact ULift.ext _ _ (ContinuousMap.ext fun _ ↦ mul_comm _ _)
+  exact ULift.ext (ContinuousMap.ext fun _ ↦ mul_comm _ _)
 
 /-- In the continuous coefficient realization, the multiplication by the constant global section
 `t` is the multiplication by the constant function `t`. -/

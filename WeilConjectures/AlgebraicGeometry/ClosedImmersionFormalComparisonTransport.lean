@@ -9,10 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionFormalKernelAnnihilation
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Transport of a formal comparison through a closed immersion
 

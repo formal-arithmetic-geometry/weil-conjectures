@@ -82,6 +82,12 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
     Nonempty (DerivedCategory.Q.obj P ≅ K) := by
   classical
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  have : HasColimitsOfShape (Discrete (ULift.{u} ℤ)) C := inferInstance
+  have : HasColimitsOfShape (Discrete (ULift.{u} ℤ)) (CochainComplex C ℤ) := by
+    refine ⟨fun F ↦ ?_⟩
+    have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+      HasColimitsOfShape.has_colimit _
+    exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
   let L (n : ULift.{u} ℤ) : CochainComplex C ℤ :=
     (HomologicalComplex.single C (ComplexShape.up ℤ) n.down).obj (P.X n.down)
   let j (n : ULift.{u} ℤ) : L n ⟶ P := HomologicalComplex.mkHomFromSingle (𝟙 (P.X n.down))
@@ -102,7 +108,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
         (ComplexShape.up ℤ) m.down (P.X m.down) n (by
           intro e
           apply hm
-          exact ULift.ext _ _ e.symm)).of_iso
+          exact ULift.ext e.symm)).of_iso
           ((DerivedCategory.homologyFunctorFactors C n).app (L m))
     have := coprojection_isIso_of_other_zero
       (fun m ↦ H.obj (DerivedCategory.Q.obj (L m))) ⟨n⟩ hzero
@@ -125,8 +131,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
     have hiso : IsIso ((DerivedCategory.homologyFunctor C n).map
         (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) ≫
           (DerivedCategory.homologyFunctor C n).map a) := by
-      rw [← Functor.map_comp, he]
-      assumption
+      rwa [← Functor.map_comp, he]
     exact IsIso.of_isIso_comp_left
       ((DerivedCategory.homologyFunctor C n).map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)))
       ((DerivedCategory.homologyFunctor C n).map a))
@@ -139,8 +144,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
     have hiso : IsIso ((DerivedCategory.homologyFunctor C n).map
         (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) ≫
           (DerivedCategory.homologyFunctor C n).map g) := by
-      rw [← Functor.map_comp, he]
-      assumption
+      rwa [← Functor.map_comp, he]
     exact IsIso.of_isIso_comp_left
       ((DerivedCategory.homologyFunctor C n).map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)))
       ((DerivedCategory.homologyFunctor C n).map g))

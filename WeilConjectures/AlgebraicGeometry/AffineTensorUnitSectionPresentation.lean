@@ -41,6 +41,13 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 
+local instance instHasLeftKanExtension_affineTensorUnitSectionPresentation
+    : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+    (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+  have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+  exact Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+
 set_option hygiene false in
 local notation "𝓙" T => Opens.grothendieckTopology T
 set_option hygiene false in
@@ -104,14 +111,12 @@ private theorem scalar_tensor_presentation
   have hτ (z : C ⊗[D] N) : τ (p z) = a z := by simp [τ]
   have hτα (c : C) (m : M) : τ (α c • m) = c • τ m := by
     obtain ⟨z, rfl⟩ := p.surjective m
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul d n => rw [hpα, hτ, hτ, ha, ha, mul_smul]
     | add x y hx hy => simp only [map_add, smul_add, hx, hy]
   have hτδ (c : C) (m : M) : τ (δ c • m) = c • τ m := by
     obtain ⟨z, rfl⟩ := p.surjective m
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul d n => rw [hpδ, hτ, hτ, ha, ha, smul_comm]
     | add x y hx hy => simp only [map_add, smul_add, hx, hy]
   have hτE (r : E) (m : M) : τ (r • m) = ε r • τ m := by
@@ -136,8 +141,7 @@ private theorem scalar_tensor_presentation
   have hn (z : C ⊗[D] N) : L ((1 : C) ⊗ₜ[E] p z) = a z := by
     rw [hL, one_smul, hτ]
   have hp (c : C) (z : C ⊗[D] N) : α c • p z = p (c • z) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul d n => simpa only [TensorProduct.smul_tmul', smul_eq_mul] using hpα c d n
     | add x y hx hy => simp only [map_add, smul_add, hx, hy]
   have ht (c : C) (z : C ⊗[D] N) :
@@ -155,8 +159,7 @@ private theorem scalar_tensor_presentation
   let K := Submodule.span D
     {z | ∃ (c : C) (n : N), z = c ⊗ₜ[D] n - (1 : C) ⊗ₜ[D] (c • n)}
   have hnormal (z : C ⊗[D] N) : z - (1 : C) ⊗ₜ[D] a z ∈ K := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul c n => exact Submodule.subset_span ⟨c, n, rfl⟩
     | add x y hx hy =>
       simpa only [map_add, TensorProduct.tmul_add, add_sub_add_comm] using K.add_mem hx hy
@@ -164,8 +167,7 @@ private theorem scalar_tensor_presentation
   · intro y
     obtain ⟨z, rfl⟩ := e.surjective y
     have hz : ∃ x, q x = e z := by
-      induction z using TensorProduct.induction_on with
-      | zero => exact ⟨0, by simp⟩
+      induction z using TensorProduct.inductionOn with
       | tmul c m =>
         refine ⟨c • p.symm m, ?_⟩
         rw [hq, ← ht, p.apply_symm_apply]

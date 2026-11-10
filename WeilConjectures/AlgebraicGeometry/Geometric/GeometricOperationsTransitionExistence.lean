@@ -219,9 +219,9 @@ private theorem pull_transition
     (G.pullEvaluation m).hom.app M ≫
       (G.inverseImage m).modules.mapDerivedCategory.map
         ((derivedTransition.{c, v, max c v r} J B τ h).app M) ≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso _ _) ≪≫
         Functor.mapDerivedCategoryNatIso (G.restrictionPullback h) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom.app
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
         ((e.{c, v, max c v r} J B τ n).obj M) := by
   rw [G.pullEvaluation_model n, G.pullEvaluation_model m]
   exact localize_transition G.pull
@@ -262,9 +262,9 @@ theorem semilinearGeometryTransitionExistence (systems : Data.{c, v, r} J B τ)
   intro m n h M
   exact scalar_transition (systems.scalar h).adjunction (G.target.scalar h).adjunction
     (G.coefficientPullback h)
-    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso _ _) ≪≫
       Functor.mapDerivedCategoryNatIso (G.restrictionPullback h) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     (G.coefficientPullback_transpose h)
     ((G.pullEvaluation m).hom.app M) ((G.pullEvaluation n).hom.app M)
     ((derivedTransition.{c, v, max c v r} J B τ h).app M)

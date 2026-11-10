@@ -698,8 +698,8 @@ private theorem localized_identity_square
     NatTrans.id_app] at hl hr hul hur
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso B F).hom.app M)).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso B F).inv.app M)).mp
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% hl, ← reassoc_of% hr, hur, hul]
   have he := congr_app (congrArg Iso.hom (congrArg
     (fun e ↦ Functor.mapDerivedCategoryNatIso e) hθ)) M

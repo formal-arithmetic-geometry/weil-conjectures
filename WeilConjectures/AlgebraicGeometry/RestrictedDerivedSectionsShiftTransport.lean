@@ -40,8 +40,8 @@ private theorem restriction_commShift {S Y Y' : Scheme.{v}}
   dsimp only [derivedRestrictionIso, Iso.trans_hom, Iso.symm_hom]
   have : NatTrans.CommShift
       (Functor.mapDerivedCategoryCompIso
-        (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h))
-        (upperStar AddCommGrpCat.{v + 1} (rawAffineRestrictedMap a h h' w U))).inv ℤ :=
+        (upperStar AddCommGrpCat.{v + 1} a)
+        (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h'))).inv ℤ :=
     NatTrans.CommShift.of_iso_inv _ ℤ
   infer_instance
 

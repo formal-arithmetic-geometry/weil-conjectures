@@ -113,7 +113,7 @@ private theorem roosUnit_natural (W : Scheme.{u})
     intro n
     dsimp only [pullbackTensorRoosAugmentation]
     simp only [Category.assoc, Limits.Pi.map_π]
-    erw [Limits.Pi.lift_π, Limits.Pi.lift_π_assoc]
+    erw [Limits.Pi.lift_comp_π, Limits.Pi.lift_comp_π_assoc]
     exact (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).naturality f
   · intro i
     erw [HomologicalComplex.comp_f, Category.assoc]
@@ -126,15 +126,13 @@ private theorem roosUnit_natural (W : Scheme.{u})
 private theorem unitQ_eq (W : Scheme.{u})
     (C : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
     (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnitQ C =
-      (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj C) := by
-  have h₁ : (DerivedCategory.quotientCompQhIso (integralTowerModules l E W)).inv.app
-      (((pullbackTensorConstantLimit l E W).mapHomologicalComplex (.up ℤ)).obj C) = 𝟙 _ :=
-    rfl
-  have h₂ : (DerivedCategory.quotientCompQhIso
-      (ℕᵒᵖ ⥤ integralTowerModules l E W)).hom.app C = 𝟙 _ := rfl
-  dsimp only [Functor.rightDerivedFunctorUnitQ]
-  erw [h₁, h₂, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+      (DerivedCategory.quotientCompQhIso (integralTowerModules l E W)).inv.app
+          (((pullbackTensorConstantLimit l E W).mapHomologicalComplex (.up ℤ)).obj C) ≫
+        (pullbackTensorConstantLimit l E W).rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj C) ≫
+        (pullbackTensorConstantLimit l E W).rightDerivedFunctor.map
+          ((DerivedCategory.quotientCompQhIso (ℕᵒᵖ ⥤ integralTowerModules l E W)).hom.app C) :=
+  rfl
 
 private theorem towerLimitUnit_roos (W : Scheme.{u})
     (C : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :

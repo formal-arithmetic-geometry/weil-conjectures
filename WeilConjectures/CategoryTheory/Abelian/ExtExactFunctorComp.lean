@@ -40,7 +40,6 @@ private lemma singleComparison_hom {A B : Type*} [Category A] [Category B] [Abel
     Functor.associator_inv_app, DerivedCategory.Q_obj_single_obj,
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
   erw [Category.id_comp]
-  rfl
 /-- Exact functors respect composition after transport by a natural isomorphism.
 Source: Stacks Project, derived.tex, Tag 015F (lemma-right-derived-exact-functor:
 every complex computes an exact functor), and Mathlib Ext.Map's definition through
@@ -75,7 +74,8 @@ theorem exactFunctorCompositionComparison
     let := comp_preservesFiniteLimits F G
     let := comp_preservesFiniteColimits F G
     have hc (A : C) :
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+        (Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) ≫
           G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app A) ≫
           (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj A) =
@@ -83,7 +83,7 @@ theorem exactFunctorCompositionComparison
           (DerivedCategory.singleFunctor E 0).map (e.hom.app A) := by
       rw [singleComparison_hom F, singleComparison_hom G, singleComparison_hom H,
         Functor.map_comp]
-      simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+      simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
       simp only [← DerivedCategory.Q_obj_single_obj] at *
       erw [G.mapDerivedCategoryFactors.hom.naturality_assoc]
       have hf := Functor.mapDerivedCategoryCompIso_fac F G
@@ -102,7 +102,6 @@ theorem exactFunctorCompositionComparison
         by_cases hi : i = 0
         · subst i
           simp [HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.single]
-          rfl
         · simp [HomologicalComplex.singleMapHomologicalComplex, hi]
       simp only [Functor.comp_map]
       rw [← DerivedCategory.Q.map_comp, hm, DerivedCategory.Q.map_comp]
@@ -124,12 +123,14 @@ theorem exactFunctorCompositionComparison
     ext
     simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom]
     have : NatTrans.CommShift
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom ℤ := by
+        (Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F G).symm).hom ℤ := by
       dsimp only [Iso.trans_hom]
       infer_instance
     have hi (A : C) :
         (H.mapDerivedCategorySingleFunctor 0).inv.app A ≫
-          (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+          (Functor.mapDerivedCategoryNatIso e ≪≫
+            (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
             ((DerivedCategory.singleFunctor C 0).obj A) =
         (DerivedCategory.singleFunctor E 0).map (e.hom.app A) ≫
           (G.mapDerivedCategorySingleFunctor 0).inv.app (F.obj A) ≫
@@ -144,7 +145,7 @@ theorem exactFunctorCompositionComparison
       simp only [Category.id_comp, Iso.inv_hom_id_app]
       erw [Category.comp_id]
     have h := ShiftedHom.map_naturality x.hom
-      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom
+      (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom
     simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀,
       ShiftedHom.map, Functor.map_comp, Category.assoc] at h ⊢
     have hh := congrArg (fun t ↦ (H.mapDerivedCategorySingleFunctor 0).inv.app X ≫ t ≫

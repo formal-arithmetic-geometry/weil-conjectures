@@ -70,7 +70,6 @@ theorem singleFunctorObjTensorIso_hom_eq
   rw [← DerivedCategory.quotientCompQhIso_hom_naturality]
   simp only [Category.id_comp, Functor.comp_map]
   erw [Category.comp_id]
-  rfl
 
 variable {C : Type v} [Category.{u + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

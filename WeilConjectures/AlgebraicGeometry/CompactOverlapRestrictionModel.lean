@@ -107,7 +107,7 @@ theorem exists_compact_overlap_restriction_model
       (Modules.restrictFunctorComp s.hom U.ι).symm ≪≫
       Modules.restrictFunctorCongr f.isoOpensRange_hom_ι ≪≫ theta.symm
   refine ⟨U, hU, hD, e, ⟨?_⟩⟩
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso rho
 
 end AlgebraicGeometry.Scheme

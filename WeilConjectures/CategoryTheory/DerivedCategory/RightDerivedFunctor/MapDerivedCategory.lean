@@ -164,7 +164,7 @@ noncomputable def rightDerivedFunctorCompIsoOfExact (F : C ⥤ D) (G : D ⥤ E)
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ G.rightDerivedFunctor :=
-  (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory ≪≫ mapDerivedCategoryCompIso F G ≪≫
+  (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory ≪≫ (mapDerivedCategoryCompIso F G).symm ≪≫
     isoWhiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.symm G.mapDerivedCategory ≪≫
     isoWhiskerLeft F.rightDerivedFunctor G.rightDerivedFunctorIsoMapDerivedCategory.symm
 

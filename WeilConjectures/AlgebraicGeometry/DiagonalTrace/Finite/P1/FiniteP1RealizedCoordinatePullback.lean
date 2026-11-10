@@ -245,15 +245,15 @@ theorem finiteP1_realized_coordinate_pullback (n : ℕ)
     (c : SpTowerP1.CoefficientCoordinates l E n X hX)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) (ProjectiveLine S) ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S))⟦(2 : ℤ)⟧) :
+        (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S))⟦(2 : ℤ)⟧) :
     @Eq (finiteKummerUnit l E X n ⟶ finiteKummerLine l E X n)
       (finiteP1CoordinateImage l E n e hS c a)
       (finiteP1LocalCoordinateImage l E n X c
         (Etale.ordinaryFiniteLinePullbackMap (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n))
+          (ULift.ext (coefficient_annihilates l E n))
           (Etale.projectiveLineTraceTransport (l ^ (n + 1))
             (pow_pos (Fact.out : l.Prime).pos _) (FiniteRing l E n)
-            (ULift.ext _ _ (coefficient_annihilates l E n))) e.hom
+            (ULift.ext (coefficient_annihilates l E n))) e.hom
           (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
             (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) a)) := by
   exact realized_normalized_arrow (A := finiteKummerUnit l E X n)
@@ -264,7 +264,7 @@ theorem finiteP1_realized_coordinate_pullback (n : ℕ)
     (geoP1UnitPullback (FiniteRing l E n) e.hom)
     (geoP1TwistPullback (FiniteRing l E n) (l ^ (n + 1))
       (pow_pos (Fact.out : l.Prime).pos _)
-      (ULift.ext _ _ (coefficient_annihilates l E n)) e.hom
+      (ULift.ext (coefficient_annihilates l E n)) e.hom
       (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
         (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) 1 2)
     (((DerivedCategory.singleFunctor _ 0).mapIso c.unit).symm)
@@ -276,15 +276,15 @@ theorem finiteP1_realized_coordinate_pullback (n : ℕ)
     ((geoP1Pullback (FiniteRing l E n) e.hom).map
       ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map a))
     (Etale.ordinaryFiniteLinePullbackMap (FiniteRing l E n) (l ^ (n + 1))
-      (ULift.ext _ _ (coefficient_annihilates l E n))
+      (ULift.ext (coefficient_annihilates l E n))
       (Etale.projectiveLineTraceTransport (l ^ (n + 1))
         (pow_pos (Fact.out : l.Prime).pos _) (FiniteRing l E n)
-        (ULift.ext _ _ (coefficient_annihilates l E n))) e.hom
+        (ULift.ext (coefficient_annihilates l E n))) e.hom
       (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
         (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) a)
     (finiteOrdinaryPullback_comparison (FiniteRing l E n) (l ^ (n + 1))
       (pow_pos (Fact.out : l.Prime).pos _)
-      (ULift.ext _ _ (coefficient_annihilates l E n)) e.hom
+      (ULift.ext (coefficient_annihilates l E n)) e.hom
       (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
         (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) a)
 

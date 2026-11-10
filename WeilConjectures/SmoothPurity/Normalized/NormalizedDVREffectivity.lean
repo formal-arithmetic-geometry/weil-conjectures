@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Normalized.NormalizedDVRTower
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Derived.DerivedComplete
 public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRRoosFiniteReduction
@@ -106,7 +108,7 @@ private theorem adjacentRoosProjection
     Pretriangulated.comp_distTriang_mor_zero₁₂ _ hc
   have hn := congrArg (fun a ↦ a ≫ Pi.π K n) hz
   simp only [towerTransitionEndomorphism, Preadditive.comp_sub, Category.comp_id,
-    Preadditive.sub_comp, Category.assoc, towerProductShift, Pi.lift_π,
+    Preadditive.sub_comp, Category.assoc, towerProductShift, Pi.lift_comp_π,
     zero_comp] at hn
   exact (sub_eq_zero.mp hn).symm
 
@@ -243,7 +245,7 @@ private theorem roosTransport
   · change Pi.lift q ≫ A.inv = 𝟙 M ≫ p
     apply Pi.hom_ext
     intro n
-    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_π_assoc,
+    simp only [A, Category.assoc, Limits.Pi.map_π, Pi.lift_comp_π_assoc,
       Category.id_comp]
     apply (cancel_mono (a n).hom).1
     simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using (hp n).symm
@@ -309,7 +311,29 @@ private theorem normalizedDVRKFlatUnit (n : ℕ)
     exact ((integralTowerMaps_existUnique l E X D hl P).exists.choose_spec.1 n i U x).trans
       (unrestrictedTowerUnit_condition l E X P n i U x).symm
   have h' := h.trans hq
+  have hf := (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh_hom_app
+    (unrestrictedTowerFiniteComplex l E X n P)
+  change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
+      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = _ at hf
+  have h' := (congrArg (fun k ↦
+    (derivedScalarExtensionRestrictionAdjunction l E X n).choose.unit.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      (scalarReductionDerivedRestriction l E X n).map
+        ((scalarReductionCounit l E X n).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ k) hf).symm.trans h'
   unfold normalizedDVRKFlatComparison normalizedDVRIntegralAdjunction
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv] at h' ⊢
+  erw [(scalarReductionDerivedExtension l E X n).map_id, DerivedCategory.Qh.map_id,
+    Category.id_comp, Category.comp_id]
+  conv at h' =>
+    lhs
+    rhs
+    rhs
+    erw [(scalarReductionDerivedRestriction l E X n).map_id,
+      DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id]
   dsimp only [DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.Qh,
     Functor.mapHomotopyCategory, CategoryTheory.Quotient.lift, Functor.comp_obj] at h' ⊢
   exact h'.trans (congrArg DerivedCategory.Q.map hg.symm)

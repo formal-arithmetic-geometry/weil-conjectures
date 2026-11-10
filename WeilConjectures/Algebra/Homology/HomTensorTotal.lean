@@ -89,7 +89,6 @@ theorem homComplex_tensorTotal_iso :
   apply HomologicalComplex.hom_ext
   intro n
   dsimp [e]
-  simp only [HomologicalComplex.Hom.isoOfComponents_hom_f]
   exact homTensorDegreewiseMap_natural R K K' L L' M M' f g h n
 
 end CategoryTheory

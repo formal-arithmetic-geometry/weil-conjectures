@@ -43,7 +43,7 @@ private instance singletonLevelAdditive (n m : ℕ) :
   by_cases h : m = n
   · subst m; simpa [singletonLevel] using
       (inferInstance : (𝟭 (strictEtaleLevel T O ell n)).Additive)
-  · simpa only [singletonLevel, dif_neg h] using
+  · simpa only [singletonLevel, dite_eq_right h] using
       (inferInstance : (0 : strictEtaleLevel T O ell n ⥤ strictEtaleLevel T O ell m).Additive)
 
 private def singleton (n : ℕ) :
@@ -73,7 +73,7 @@ private def singletonOther (n m : ℕ) (h : m ≠ n) :
     singleton O ell T n ⋙ coefficientEvaluation.{u + 1, u, u + 1} (J := T.smallEtaleTopology)
       (O := O) (ell := ell) m ≅ 0 := by
   change singletonLevel O ell T n m ≅ 0
-  exact eqToIso (by simp only [singletonLevel, dif_neg h])
+  exact eqToIso (by simp only [singletonLevel, dite_eq_right h])
 
 private instance singletonAdditive (n : ℕ) : (singleton O ell T n).Additive where
   map_add {N N'} f g := by
@@ -181,8 +181,8 @@ theorem exceptionalEvaluationSingleton (PE : StrictEtaleEvaluation T O ell)
   have := hN
   refine ⟨F.mapDerivedCategory.obj N, F.isGE_mapDerivedCategory_obj N a, ?_, ?_⟩
   · let e := isoWhiskerLeft F.mapDerivedCategory (evaluationIso O ell T PE n) ≪≫
-      (mapDerivedCategoryCompIso F (coefficientEvaluation
-        (J := T.smallEtaleTopology) (O := O) (ell := ell) n)).symm ≪≫
+      mapDerivedCategoryCompIso F (coefficientEvaluation
+        (J := T.smallEtaleTopology) (O := O) (ell := ell) n) ≪≫
       mapDerivedCategoryNatIso (singletonEvaluation O ell T n) ≪≫
       mapDerivedCategoryIdIso (strictEtaleLevel T O ell n)
     exact ⟨e.app N⟩
@@ -190,7 +190,7 @@ theorem exceptionalEvaluationSingleton (PE : StrictEtaleEvaluation T O ell)
     let E := coefficientEvaluation.{u + 1, u, u + 1}
       (J := T.smallEtaleTopology) (O := O) (ell := ell) m
     let e := isoWhiskerLeft F.mapDerivedCategory (evaluationIso O ell T PE m) ≪≫
-      (mapDerivedCategoryCompIso F E).symm
+      mapDerivedCategoryCompIso F E
     have hz : IsZero ((F ⋙ E).mapDerivedCategory.obj N) :=
       (F ⋙ E).isZero_mapDerivedCategory_obj N (fun q ↦
         (Functor.isZero_iff _ |>.mp (isZero_zero _) _).of_iso

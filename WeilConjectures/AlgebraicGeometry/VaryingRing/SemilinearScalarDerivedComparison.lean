@@ -134,9 +134,9 @@ abbrev scalarRho (X : Scheme.{u}) : Derived R φ X ⥤ StrictTower.Derived B X :
 Source: Stacks 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
 def scalarB {X Y : Scheme.{u}} (f : X ⟶ Y) :
     G R φ f ⋙ scalarRho D X ≅ scalarRho D Y ⋙ StrictTower.G B f :=
-  (Functor.mapDerivedCategoryCompIso (pull R φ f) (D.rho X)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (pull R φ f) (D.rho X) ≪≫
     Functor.mapDerivedCategoryNatIso (D.b f) ≪≫
-      Functor.mapDerivedCategoryCompIso (D.rho Y) (StrictTower.towerPullback B f)
+      (Functor.mapDerivedCategoryCompIso (D.rho Y) (StrictTower.towerPullback B f)).symm
 
 /-- The specified unit--inverse-b--counit mate, with no choice of a direct-image map.
 Source: Stacks 07A6 (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
@@ -148,9 +148,9 @@ def scalarD {X Y : Scheme.{u}} (f : X ⟶ Y) :
 Source: Stacks 03DI, 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
 def scalarA {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J R φ j ⋙ scalarRho D X ≅ scalarRho D U ⋙ StrictTower.J B j :=
-  (Functor.mapDerivedCategoryCompIso (extension R φ j) (D.rho X)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (extension R φ j) (D.rho X) ≪≫
     Functor.mapDerivedCategoryNatIso (D.a j) ≪≫
-      Functor.mapDerivedCategoryCompIso (D.rho U) (StrictTower.towerJ B j)
+      (Functor.mapDerivedCategoryCompIso (D.rho U) (StrictTower.towerJ B j)).symm
 
 attribute [local instance] WeilConjectures.sfAbBijective
 
@@ -160,14 +160,14 @@ def scalarLevel (X : Scheme.{u}) (n : ℕ) :
     scalarRho D X ⋙ StrictTower.ev B X n ≅
       ev R φ X n ⋙
         resD.{u + 1, u, u + 1} (ordinaryScalarMap R B ψ X n) :=
-  (Functor.mapDerivedCategoryCompIso (D.rho X)
-    ((evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (D.rho X)
+    ((evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n)) ≪≫
     Functor.mapDerivedCategoryNatIso
       (F := D.rho X ⋙ (evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n))
       (G := eval R φ X n ⋙
         res.{u + 1, u, u + 1} (ordinaryScalarMap R B ψ X n)) (D.level X n) ≪≫
-      Functor.mapDerivedCategoryCompIso (eval R φ X n)
-        (res.{u + 1, u, u + 1} (ordinaryScalarMap R B ψ X n))
+      (Functor.mapDerivedCategoryCompIso (eval R φ X n)
+        (res.{u + 1, u, u + 1} (ordinaryScalarMap R B ψ X n))).symm
 
 /-- The level direct-image comparison is precisely the recorded normalized ring-change
 comparison. Source: Stacks 0D6E (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
@@ -410,7 +410,6 @@ private theorem scalarLevelD_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 section LocalizedInverseCube
 
 attribute [local irreducible] Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -615,7 +614,7 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] StrictTower.modulePullback Functor.leftAdjoint
 
 attribute [local instance] StrictTower.clopenTowerAbelian
-attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryCompIso
+attribute [local irreducible] Functor.mapDerivedCategory
   Functor.mapDerivedCategoryFactors StrictTower.alpha
 
 private theorem localized_of_descent
@@ -633,14 +632,14 @@ private theorem localized_of_descent
     (d : f.mapDerivedCategory ⋙ g.mapDerivedCategory ⟶
       h.mapDerivedCategory ⋙ k.mapDerivedCategory)
     (ht : StrictTower.ClopenProjectorDescent (f ⋙ g) (h ⋙ k) t
-      ((Functor.mapDerivedCategoryCompIso f g).hom ≫ d ≫
-        (Functor.mapDerivedCategoryCompIso h k).inv)) : localizedArrow f g h k t = d := by
+      ((Functor.mapDerivedCategoryCompIso f g).inv ≫ d ≫
+        (Functor.mapDerivedCategoryCompIso h k).hom)) : localizedArrow f g h k t = d := by
   have he : Localization.liftNatTrans DerivedCategory.Q
       (HomologicalComplex.quasiIso A (.up ℤ)) _ _
       (f ⋙ g).mapDerivedCategory (h ⋙ k).mapDerivedCategory
       (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q) =
-      (Functor.mapDerivedCategoryCompIso f g).hom ≫ d ≫
-        (Functor.mapDerivedCategoryCompIso h k).inv := by
+      (Functor.mapDerivedCategoryCompIso f g).inv ≫ d ≫
+        (Functor.mapDerivedCategoryCompIso h k).hom := by
     apply Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso A (.up ℤ))
     intro K
@@ -650,7 +649,7 @@ private theorem localized_of_descent
       Localization.Lifting.iso, Iso.inv_hom_id_app, Category.comp_id]
   unfold localizedArrow
   rw [he]
-  simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
 private theorem scalarTowerAlpha_localized {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
@@ -723,7 +722,7 @@ private theorem scalarOpenAdj_eq {U X : Scheme.{u}} (j : U ⟶ X)
   rfl
 
 attribute [local irreducible] StrictTower.jAdj jAdj
-  scalarA scalarB Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  scalarA scalarB Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategory
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -756,7 +755,7 @@ private theorem scalarA_leftMate {U X : Scheme.{u}} (j : U ⟶ X)
 end OpenMate
 
 attribute [local irreducible] scalarA scalarB
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   localizedArrow alpha StrictTower.alpha Functor.mapDerivedCategory
 
 private theorem scalarA_eq {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -818,14 +817,16 @@ private theorem localize_scalar_cube
       Hf.mapDerivedCategory ⋙ P₁f.mapDerivedCategory)
     (br : Qf.mapDerivedCategory ⋙ Df.mapDerivedCategory ≅
       C₀f.mapDerivedCategory ⋙ Q₁f.mapDerivedCategory)
-    (hai : ((Functor.mapDerivedCategoryCompIso If Hf).symm ≪≫
-      Functor.mapDerivedCategoryNatIso bi0 ≪≫ Functor.mapDerivedCategoryCompIso C₀f I₁f) = ai)
-    (hak : ((Functor.mapDerivedCategoryCompIso Kf Af).symm ≪≫
-      Functor.mapDerivedCategoryNatIso bk0 ≪≫ Functor.mapDerivedCategoryCompIso Df K₁f) = ak)
-    (hbp : ((Functor.mapDerivedCategoryCompIso Pf Af).symm ≪≫
-      Functor.mapDerivedCategoryNatIso gp0 ≪≫ Functor.mapDerivedCategoryCompIso Hf P₁f) = bp)
-    (hbr : ((Functor.mapDerivedCategoryCompIso Qf Df).symm ≪≫
-      Functor.mapDerivedCategoryNatIso gr0 ≪≫ Functor.mapDerivedCategoryCompIso C₀f Q₁f) = br)
+    (hai : (Functor.mapDerivedCategoryCompIso If Hf ≪≫
+      Functor.mapDerivedCategoryNatIso bi0 ≪≫
+      (Functor.mapDerivedCategoryCompIso C₀f I₁f).symm) = ai)
+    (hak : (Functor.mapDerivedCategoryCompIso Kf Af ≪≫
+      Functor.mapDerivedCategoryNatIso bk0 ≪≫ (Functor.mapDerivedCategoryCompIso Df K₁f).symm) = ak)
+    (hbp : (Functor.mapDerivedCategoryCompIso Pf Af ≪≫
+      Functor.mapDerivedCategoryNatIso gp0 ≪≫ (Functor.mapDerivedCategoryCompIso Hf P₁f).symm) = bp)
+    (hbr : (Functor.mapDerivedCategoryCompIso Qf Df ≪≫
+      Functor.mapDerivedCategoryNatIso gr0 ≪≫
+      (Functor.mapDerivedCategoryCompIso C₀f Q₁f).symm) = br)
     (d0 : If.mapDerivedCategory ⋙ Pf.mapDerivedCategory ⟶
       Qf.mapDerivedCategory ⋙ Kf.mapDerivedCategory)
     (d1 : I₁f.mapDerivedCategory ⋙ P₁f.mapDerivedCategory ⟶

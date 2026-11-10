@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleIsomorphismInverseImage
@@ -585,12 +587,12 @@ theorem pbcIsoAmbientPullback_preserves_origins
     let c :
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Q) Y).mapDerivedCategory ⋙
           U.mapDerivedCategory ≅ V.mapDerivedCategory ⋙ F.mapDerivedCategory :=
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Q) f) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
     let a : G.mapDerivedCategory.obj L ≅ R.mapDerivedCategory.obj (M n) :=
-      (Functor.mapDerivedCategoryCompIso F R).app L ≪≫
+      (Functor.mapDerivedCategoryCompIso F R).symm.app L ≪≫
         R.mapDerivedCategory.mapIso
           (c.symm.app (P.origin n).L.obj ≪≫ U.mapDerivedCategory.mapIso (P.alpha n))
     have hG : DerivedCategory.TStructure.t.plus (G.mapDerivedCategory.obj L) := by
@@ -610,8 +612,8 @@ theorem pbcIsoAmbientPullback_preserves_origins
     (WeilConjectures.finitePullbackCoordinates f d n).choose
   let c : U.mapDerivedCategory ⋙ pbcDerivedFunctionRealization X d n ≅
       pbcDerivedFunctionRealization Y d n ⋙ F.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-      Functor.mapDerivedCategoryNatIso j ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+      Functor.mapDerivedCategoryNatIso j ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let h : d.pull f ≅ H := (pullbackDatumOrdinaryTransport f d).symm ≪≫ e
   have hF : F.mapDerivedCategory = d.finitePull f n := by
     apply congrArg (fun c ↦ (proEtaleRingModulePullback f

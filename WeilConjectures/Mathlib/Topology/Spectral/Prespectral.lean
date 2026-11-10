@@ -88,7 +88,7 @@ theorem Homeomorph.prespectralSpace {X Y : Type*} [TopologicalSpace X] [Topologi
     [PrespectralSpace X] (f : X ≃ₜ Y) : PrespectralSpace Y := by
   have hbasis : TopologicalSpace.IsTopologicalBasis
       (Set.preimage f.symm '' { U : Set X | IsOpen U ∧ IsCompact U }) :=
-    PrespectralSpace.isTopologicalBasis.isInducing f.symm.isInducing
+    f.symm.isInducing.isTopologicalBasis PrespectralSpace.isTopologicalBasis
   apply PrespectralSpace.of_isTopologicalBasis hbasis
   intro U hU
   simp only [Set.mem_image, Set.mem_ofPred_eq] at hU

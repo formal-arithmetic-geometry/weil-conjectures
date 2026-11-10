@@ -145,7 +145,7 @@ theorem IsPureFrobeniusModule.isMixedFrobeniusModule [IsAlgClosed E] {F : V ≃�
       exact zero_mem _
     · exact Submodule.mem_top
   · obtain rfl : i = 0 := by omega
-    simp only [if_true] at hv0 hFv
+    simp only [ite_true] at hv0 hFv
     refine Module.End.hasEigenvalue_of_hasEigenvector (x := v) ⟨?_, hv0⟩
     rw [Module.End.mem_eigenspace_iff]
     exact sub_eq_zero.1 ((Submodule.mem_bot E).1 hFv)

@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
@@ -199,7 +201,7 @@ private theorem tensorCast_smul
   convert (η.app V).hom.map_smul b
     ((1 : T.obj.obj V) ⊗ₜ[B.obj.obj V,(c.hom.app V).hom] x) using 1
   congr 1
-  rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+  rw [ModuleCat.ExtendScalars.smul_tmul (c.hom.app V).hom, mul_one]
 
 private theorem localTensorSection_smul
     {T : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (c : B ⟶ T)
@@ -228,8 +230,7 @@ private theorem tensorCast_ext
   apply Sheaf.hom_ext
   apply sheafify_hom_ext (ProEt.topology Y) _ _ N.isSheaf
   ext V z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul b x => exact h V b x
   | add z w hz hw =>
     simpa only [map_add] using congrArg₂ (· + ·) hz hw
@@ -857,8 +858,8 @@ Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tow
 def uniformConstantEvaluation (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (n : ℕ) :
     (uniformConstantTower X R).mapDerivedCategory ⋙ pbcTowerEvaluation X R n ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso (uniformConstantTower X R)
-    ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X R)).obj (op n))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (uniformConstantTower X R)
+    ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X R)).obj (op n)) ≪≫
       Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- The canonical derived-limit projection, evaluated from the adjunction counit.
@@ -960,14 +961,14 @@ def uniformPullEvaluation (n : ℕ) :
     uniformTowerPull g d ⋙ pbcTowerEvaluation Y (uniformLocalRing g d) n ≅
       pbcTowerEvaluation X (pbcAdicCompletion X d) n ⋙
         adicTowerPullback g (pbcAdicCompletion X d) :=
-  (Functor.mapDerivedCategoryCompIso (uniformModuleTowerPull g d)
-    ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (uniformLocalRing g d))).obj (op n))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (uniformModuleTowerPull g d)
+    ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (uniformLocalRing g d))).obj (op n)) ≪≫
     Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       ((CategoryTheory.evaluation ℕᵒᵖ
         (pbcModules X (pbcAdicCompletion X d))).obj (op n))
       (proEtaleRingModulePullback g (pbcAdicCompletion X d)
-        (uniformLocalRing g d) (Iso.refl _))
+        (uniformLocalRing g d) (Iso.refl _))).symm
 
 /-- The canonical strict reduction tower of a local complex.
 Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/

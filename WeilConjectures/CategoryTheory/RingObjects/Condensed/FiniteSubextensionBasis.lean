@@ -41,9 +41,9 @@ noncomputable def continuousMapRingObjAddMap (g : T →+ T') (hg : Continuous g)
     continuousMapRingObj.{u} T ⟶ continuousMapRingObj T' :=
   ⟨{ app _ := AddCommGrpCat.ofHom
         { toFun a := ULift.up ⟨fun s ↦ g (a.down s), hg.comp a.down.continuous⟩
-          map_zero' := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_zero g)
+          map_zero' := ULift.ext (ContinuousMap.ext fun _ ↦ map_zero g)
           map_add' a b :=
-            ULift.ext _ _ (ContinuousMap.ext fun s ↦ map_add g (a.down s) (b.down s)) }
+            ULift.ext (ContinuousMap.ext fun s ↦ map_add g (a.down s) (b.down s)) }
      naturality _ _ _ := rfl }⟩
 
 open _root_.PadicAlgCl
@@ -87,7 +87,7 @@ lemma exists_isIso_biproductDesc_padicSubfieldRingObjMap_mulLeft :
     have h₁ := (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙
       (evaluation _ _).obj S).map_sum (fun j ↦ c j ≫ padicSubfieldRingObjMap ℓ hF ≫
         continuousMapRingObjMulLeft F (b j)) Finset.univ
-    refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
     let ev : (continuousMapRingObj.{u} F).obj.obj S →+ F :=
       { toFun y := (show ULift.{u + 1} C(S.unop, F) from y).down s
         map_zero' := rfl

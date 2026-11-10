@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 public import WeilConjectures.AlgebraicGeometry.MixedRepForward.FiniteCoefficientInstances
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitTransport
@@ -126,10 +128,11 @@ theorem forward_transport_general
     derivedTensorLeftDerivedUpperStarCounit_app_app] at h
   dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂,
     Functor.whiskeringLeft, Functor.whiskeringRight, Functor.comp_obj] at h
-  simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
-    mapH_quotient, quotient_tensor, cochain_tensor_obj,
-    Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
-    Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc] using h
+  with_unfolding_all
+    simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
+      mapH_quotient, quotient_tensor, cochain_tensor_obj,
+      Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
+      Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc, cast_eq] using h
 
 end MixedRepForward
 end AlgebraicGeometry.ProEtale

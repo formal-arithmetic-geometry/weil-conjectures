@@ -353,7 +353,7 @@ private lemma ring_isSheaf (F : Cᵒᵖ ⥤ CommRingCat.{u})
   · intro r' hr'
     change E ⟶ F.obj (op X) at r'
     apply CommRingCat.hom_ext
-    apply RingHom.coe_addMonoidHom_injective
+    apply RingHom.toAddMonoidHom_injective
     change (AddCommGrpCat.ofHom r'.hom.toAddMonoidHom).hom = a.hom
     congr 1
     apply hau

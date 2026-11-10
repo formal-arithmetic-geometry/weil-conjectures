@@ -109,21 +109,21 @@ theorem exists_finite_projective_graded_model_of_directed_colimit
       simp only [s, Finset.mem_Icc] at *
       omega
     dsimp [M]
-    rw [dif_neg hs]
+    rw [dite_eq_right hs]
     exact isZero_of_subsingleton _
   · intro n
     by_cases hn : n ∈ s
-    · rw [show M n = _ from dif_pos hn]
+    · rw [show M n = _ from dite_eq_left hn]
       let := hNfinite n
       exact finite_extendScalars (F.map (homOfLE (hij n hn))).hom (N n)
-    · rw [show M n = _ from dif_neg hn]
+    · rw [show M n = _ from dite_eq_right hn]
       infer_instance
   · intro n
     by_cases hn : n ∈ s
-    · rw [show M n = _ from dif_pos hn]
+    · rw [show M n = _ from dite_eq_left hn]
       let := hNprojective n
       exact projective_extendScalars (F.map (homOfLE (hij n hn))).hom (N n)
-    · rw [show M n = _ from dif_neg hn]
+    · rw [show M n = _ from dite_eq_right hn]
       infer_instance
   · intro n
     dsimp [M]

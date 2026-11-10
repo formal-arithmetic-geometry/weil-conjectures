@@ -211,7 +211,7 @@ lemma mapDerivedCategorySquareIso_hom_app_Q_obj (α : N_D ⋙ F' ≅ F ⋙ N_C)
   erw [hi', CategoryTheory.Functor.map_id, Category.comp_id] at hc'
   erw [hc, mapDerivedCategoryNatIso_fac]
   erw [← hc']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 variable [MonoidalCategory D'] [MonoidalPreadditive D'] [HasCountableCoproducts D']
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D'), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
@@ -285,7 +285,7 @@ lemma whiskerLeft_Q_leftDerivedFunctorSquareIso_hom (α : N_D ⋙ F' ≅ F ⋙ N
       whiskerLeft _ (DerivedCategory.quotientCompQhIso C').hom ≫
       whiskerRight (mapHomologicalComplexCompIso α (.up ℤ)).hom DerivedCategory.Q ≫
       (F ⋙ N_C).mapDerivedCategoryFactors.inv ≫
-      whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F N_C).hom := by
+      whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F N_C).inv := by
   ext P
   have h₁ := leftDerivedFunctorSquareIso_hom_app_Q_obj α P
   have h₂ := mapDerivedCategoryCompIso_fac F N_C P
@@ -343,7 +343,7 @@ lemma mapDerivedCategorySquareIso_hom_app_Qh_obj_factorsh
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
   erw [← hc]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  rw [Iso.hom_inv_id_app_assoc]
 
 section
 
@@ -532,7 +532,8 @@ theorem isIso_derivedBaseChange_app (adj : L ⊣ R) (adj' : L' ⊣ R') (e : G �
   obtain ⟨K₀, ⟨eK⟩⟩ : ∃ K₀ : CochainComplex C₁ ℤ, Nonempty (DerivedCategory.Q.obj K₀ ≅ M) :=
     ⟨_, ⟨DerivedCategory.Q.objObjPreimageIso M⟩⟩
   obtain ⟨I, _, i, _, _⟩ := HasKInjectiveResolutions.exists_isKInjective K₀
-  rw [NatTrans.isIso_app_iff_of_iso _ (eK.symm ≪≫ asIso (DerivedCategory.Q.map i) :
+  rw [NatTrans.isIso_app_iff_of_iso _ (eK.symm ≪≫ asIso (DerivedCategory.Q.map i) ≪≫
+    ((DerivedCategory.quotientCompQhIso C₁).app I).symm :
     M ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I))]
   have : IsIso (R'.rightDerivedFunctorUnit.app ((G'.mapHomotopyCategory (.up ℤ)).obj
       ((HomotopyCategory.quotient _ _).obj I))) :=

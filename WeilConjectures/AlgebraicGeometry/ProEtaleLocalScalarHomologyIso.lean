@@ -215,8 +215,7 @@ private theorem tensorOverIso
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [_root_.map_zero]
+      induction z using TensorProduct.inductionOn with
       | add z t hz ht => simp only [_root_.map_add, hz, ht]
       | tmul b m =>
         exact ((SheafOfModules.exists_changeOfRingsMap φ M

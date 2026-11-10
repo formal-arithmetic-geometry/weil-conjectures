@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSinglePullbackComposition
+import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposition
 
 /-! # Pullback composition compatibility on single modules
 
@@ -34,37 +37,43 @@ private theorem singlePullback_naturality
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
   set_option backward.defeqAttrib.useBackward true in
-    let := canonicalTensorPullbackAdditive f
-    let ε := (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) f
-    let t := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (pullbackPushforwardAdjunction f)
-    let q := HomotopyCategory.quotient
+    let := Scheme.Modules.canonicalTensorPullbackAdditive f
+    let ε := (Classical.choose (Classical.choose_spec
+      exists_derivedPullbackComposition.{u, w})) f
+    let t := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
+      (Scheme.Modules.pullbackPushforwardAdjunction f)
+    let Q := DerivedCategory.Qh.{w}
+      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    let H := HomotopyCategory.quotient
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)
-    let s := HomologicalComplex.singleMapHomologicalComplex (tensorPullback f)
-      (ComplexShape.up ℤ) 0
-    have hε := ε.naturality ((HomotopyCategory.singleFunctor _ 0).map a)
-    have hs := congrArg (fun k ↦ DerivedCategory.Qh.{w}.map (q.map k)) (s.hom.naturality a)
-    have ht := congrArg (fun k ↦ (DerivedCategory.singleFunctor.{w}
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map k)
-      (t.hom.naturality a)
-    dsimp only [Functor.comp_map] at hε hs ht
-    dsimp only [canonicalSinglePullbackMap]
-    simp only [DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
-      HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-      SingleFunctors.postcomp, Functor.comp_map] at hε hs ht ⊢
-    simp only [Functor.map_comp] at hs ht
-    simp only [Category.assoc]
-    rw [← Category.assoc]
-    rw [hε]
-    simp only [Category.assoc, CochainComplex.singleFunctors]
-    have hs' := congrArg (fun k ↦ ε.app
-      ((HomotopyCategory.singleFunctor _ 0).obj M) ≫ k ≫
-        (DerivedCategory.singleFunctor _ 0).map (t.hom.app N)) hs
-    have ht' := congrArg (fun k ↦ ε.app
-      ((HomotopyCategory.singleFunctor _ 0).obj M) ≫
-        DerivedCategory.Qh.map (q.map (s.hom.app M)) ≫ k) ht
-    simp only [Category.assoc] at hs' ht'
-    exact hs'.trans ht'
+    let s := HomologicalComplex.singleMapHomologicalComplex
+      (W₁ := SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+      (W₂ := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (Scheme.Modules.tensorPullback f) (ComplexShape.up ℤ) 0
+    let SA := DerivedCategory.singleFunctor.{w}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+    let SB := DerivedCategory.singleFunctor.{w}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0
+    let HA := HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+    let T := (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ)
+    have he := ε.naturality (HA.map a)
+    change (AlgebraicGeometry.derivedPullback f).map (SA.map a) ≫ ε.app (HA.obj N) =
+      ε.app (HA.obj M) ≫ Q.map (T.map (HA.map a)) at he
+    have hs := congrArg (fun k ↦ Q.map (H.map k)) (s.hom.naturality a)
+    simp only [Functor.map_comp, Functor.comp_map] at hs
+    change Q.map (T.map (HA.map a)) ≫ Q.map (H.map (s.hom.app N)) =
+      Q.map (H.map (s.hom.app M)) ≫ SB.map ((Scheme.Modules.tensorPullback f).map a) at hs
+    have ht := congrArg (fun k ↦ SB.map k) (t.hom.naturality a)
+    simp only [Functor.map_comp] at ht
+    simpa only [canonicalSinglePullbackMap, cast_eq, Category.assoc,
+      ε, t, Q, H, s, SA, SB, HA, T, Scheme.Modules, Scheme.ringCatSheaf,
+      moduleRings] using AlgebraicGeometry.naturality_three
+      ((AlgebraicGeometry.derivedPullback f).map (SA.map a)) (Q.map (T.map (HA.map a)))
+      (SB.map ((Scheme.Modules.tensorPullback f).map a))
+      (SB.map ((Scheme.Modules.pullback f).map a))
+      (ε.app (HA.obj M)) (Q.map (H.map (s.hom.app M))) (SB.map (t.hom.app M))
+      (ε.app (HA.obj N)) (Q.map (H.map (s.hom.app N))) (SB.map (t.hom.app N)) he hs ht
 
 private theorem singlePullback_congr
     {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) (N : Y.Modules) :

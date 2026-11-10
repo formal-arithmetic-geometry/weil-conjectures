@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private theorem inverse_exchange
     {C D : Type*} [Category* C] [Category* D]

@@ -101,7 +101,7 @@ lemma sub_C_constantCoeff_mem_mvPolynomialOrigin {d : ℕ} (p : MvPolynomial (Fi
   have hm0 : m = 0 := Finsupp.ext fun i ↦ h i (Set.mem_univ i)
   subst hm0
   rw [MvPolynomial.mem_support_iff, MvPolynomial.coeff_sub, MvPolynomial.coeff_C,
-    if_pos rfl, ← MvPolynomial.constantCoeff_eq, sub_self] at hm
+    ite_eq_left rfl, ← MvPolynomial.constantCoeff_eq, sub_self] at hm
   exact hm rfl
 
 /-- **Étale coordinates adapted to a section.** Let `f : C ⟶ A` have a retraction `σ`, and let

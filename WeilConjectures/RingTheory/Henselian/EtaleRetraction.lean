@@ -59,7 +59,7 @@ in `R`.
 theorem comap_eq_maximalIdeal_of_finite {B : Type v} [CommRing B] [Algebra R B]
     [Module.Finite R B] (n : Ideal B) [n.IsMaximal] :
     n.comap (algebraMap R B) = maximalIdeal R :=
-  have := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R) n
+  have := Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R) n
   IsLocalRing.eq_maximalIdeal this
 
 /-- **Finite algebras over a local ring: `𝔪B` lies in the Jacobson radical.** If `B` is a
@@ -497,7 +497,7 @@ theorem forall_existsUnique_isIdempotentElem_iff_forall_exists_isRoot :
         ∃! e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e) ↔
     ∀ f : R[X], f.Monic → ∀ a₀ : ResidueField R, aeval a₀ f = 0 →
       aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀ := by
-  refine ⟨fun H ↦ ((HenselianLocalRing.TFAE R).out 0 1).mp
+  refine ⟨fun H ↦ ((HenselianLocalRing.TFAE R).out 1 2).mp
     (henselianLocalRing_of_forall_exists_isIdempotentElem fun B _ _ _ e he ↦ (H B e he).exists),
     fun H B _ _ _ e he ↦ ?_⟩
   obtain ⟨r, B', _, _, _, ⟨ψ⟩⟩ := exists_algEquiv_pi_isLocalRing_of_forall_exists_algHom
@@ -526,7 +526,7 @@ theorem existsUnique_algHom_comap_maximalIdeal_eq [HenselianLocalRing R]
       hq.symm)) :
     ∃! σ : S →ₐ[R] R, (maximalIdeal R).comap σ = q :=
   IsLocalRing.existsUnique_algHom_comap_maximalIdeal_eq_of_forall_exists_isRoot
-    (((HenselianLocalRing.TFAE R).out 0 1).mp ‹HenselianLocalRing R›) q hq hκ
+    (((HenselianLocalRing.TFAE R).out 1 2).mp ‹HenselianLocalRing R›) q hq hκ
 
 /-- **Existence of étale retractions over a henselian local ring**: the existence half of
 `HenselianLocalRing.existsUnique_algHom_comap_maximalIdeal_eq`.
@@ -550,7 +550,7 @@ theorem iff_forall_existsUnique_isIdempotentElem [IsLocalRing R] :
         (e : B ⧸ (maximalIdeal R).map (algebraMap R B)), IsIdempotentElem e →
           ∃! e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e := by
   rw [IsLocalRing.forall_existsUnique_isIdempotentElem_iff_forall_exists_isRoot]
-  exact (HenselianLocalRing.TFAE R).out 0 1
+  exact (HenselianLocalRing.TFAE R).out 1 2
 
 end HenselianLocalRing
 

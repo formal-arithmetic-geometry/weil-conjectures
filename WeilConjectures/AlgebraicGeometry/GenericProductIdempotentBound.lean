@@ -118,12 +118,10 @@ theorem exists_generic_product_idempotent_bound
     have hqw : q w = z := by simp [q, Ideal.Quotient.mkₐ_eq_mk, hw]
     rw [← hqw]
     clear hw hqw
-    induction w using TensorProduct.induction_on with
-    | zero => simp
+    induction w using TensorProduct.inductionOn with
     | add x y hx hy => simpa using (Submodule.span K' (Set.range g)).add_mem hx hy
     | tmul x c =>
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy =>
         simpa only [TensorProduct.add_tmul, map_add] using
           (Submodule.span K' (Set.range g)).add_mem hx hy

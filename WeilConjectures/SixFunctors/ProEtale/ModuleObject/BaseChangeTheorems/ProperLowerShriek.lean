@@ -102,8 +102,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationOfIsProperIso
 /-- The isomorphism `Rf_! ≅ Rf_*` on bounded constructible `ℚ̄_ℓ`-sheaves for a proper `f`: by
 independence of the compactification, `Rf_!` is `Rf_!^c` for the trivial compactification
 `c = (X ⟶[𝟙] X ⟶[f] Y)`, which is `Rf_*`. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl :
+noncomputable irreducible_def boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl :
     boundedConstructibleLowerShriek ℓ f ≅
       boundedConstructibleLowerStar ℓ f :=
   boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
@@ -116,8 +115,7 @@ lemma boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq :
       boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
           (compactificationOverField f) (.ofIsProper f.left) ≪≫
         boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ f := by
-  unfold boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl
-  rfl
+  rw [boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_def]
 
 end Proper
 

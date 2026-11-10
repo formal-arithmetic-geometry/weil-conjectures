@@ -58,11 +58,11 @@ theorem finiteScalarNormalizedRootRoute_eq (n : ℕ)
     @Eq (FiniteScalarBoundaryArrow l E n T)
       (finiteScalarNormalizedCohomologyRoute l E n T c
         (Sheaf.H.map (Etale.ordinaryFiniteRootMap (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n)) T) 2 x))
+          (ULift.ext (coefficient_annihilates l E n)) T) 2 x))
       (finiteScalarNormalizedRootRoute l E n T x) := by
   exact finiteCohomologyMap_normalization T
     (Etale.ordinaryFiniteRootMap (FiniteRing l E n) (l ^ (n + 1))
-      (ULift.ext _ _ (coefficient_annihilates l E n)) T)
+      (ULift.ext (coefficient_annihilates l E n)) T)
     (finiteScalarLineCoordinate l E n T c)
     (cartierRootsComparison T (l ^ (n + 1))) (finiteRootMap l E T n)
     (finiteScalarLineCoordinate_root l E n T c) x

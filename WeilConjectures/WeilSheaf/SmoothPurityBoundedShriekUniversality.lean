@@ -41,7 +41,6 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   (e : (boundedConstructibleUpperStarOfMap l πY).obj (𝟙_ _) ≅ 𝟙_ _)
   (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
-set_option linter.style.longLine false in
 /-- Removing the unit identification from a trace does not affect universality. -/
 theorem baseChangedSmoothTrace_without_unit_universal
     [IsIso (smoothUnitBaseChange l f f'

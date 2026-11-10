@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso
 public import WeilConjectures.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
@@ -43,10 +45,10 @@ theorem comparisonIntoPullback_comp_counit
     (i : ℤ) :
     comparisonIntoPullback f f' g g' sq z P hcP i ≫
       (comparisonStalkCohomology X' z i).map
-        ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
+        (cast (by rfl) ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) =
       comparisonIntoTensorPullback f f' g g' sq z P i := by
   have := hcP
-  simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc,
+  simp only [comparisonIntoPullback, comparisonIntoTensorPullback, cast_eq, Category.assoc,
     ← Functor.map_comp, IsIso.inv_hom_id]
   simp
 

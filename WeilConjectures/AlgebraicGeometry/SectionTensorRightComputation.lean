@@ -99,11 +99,10 @@ def sectionTensorRightLocalization (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u}
 attribute [local irreducible] sectionTensorRightComparison sectionTensorRightLocalization
   ModuleRingedComparison.ordinaryTensorComparison ModuleRingedComparison.totalComparison
   ModuleRingedComparison.localizedTotalComparison
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
 
 attribute [local implicit_reducible] singleTensor
   CategoryTheory.Functor.mapCochainComplexSingleFunctor
-  ModuleRingedComparison.totalTensor CochainComplex.singleFunctors
+  ModuleRingedComparison.totalTensor
   CategoryTheory.Functor.map₂HomologicalComplex
   ModuleRingedComparison.sectionLocalizationComparison
 
@@ -159,7 +158,7 @@ private theorem singleSquareOfSummands
     HomologicalComplex.id_f, CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp,
     singleMapHomologicalComplex_hom_app_self]
   erw [← CategoryTheory.Functor.map_comp_assoc]
-  rw [Iso.map_inv_hom_id_assoc]
+  rw [Iso.inv_hom_id_map_assoc]
   rfl
 
 -- Only the single nonzero right degree is needed in the total comparison.

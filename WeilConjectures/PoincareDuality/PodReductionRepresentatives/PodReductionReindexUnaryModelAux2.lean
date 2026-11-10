@@ -48,7 +48,6 @@ theorem mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} {_ : Category C₁} 
   have : (NatIso.mapHomologicalComplex (Iso.refl F) (.up ℤ)).hom.app K = 𝟙 _ := by
     ext i
     simp
-    rfl
   simp [this]
 
 
@@ -69,7 +68,6 @@ theorem reductionFactorOfIso_mapDerived {C₁ C₂ : Type*} {_ : Category C₁} 
   have : (NatIso.mapHomologicalComplex (Iso.refl F₁) (.up ℤ)).hom.app K = 𝟙 _ := by
     ext i
     simp
-    rfl
   simp [reductionFactorOfIso_hom, this]
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

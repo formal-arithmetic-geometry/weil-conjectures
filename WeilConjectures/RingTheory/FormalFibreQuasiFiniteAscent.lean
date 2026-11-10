@@ -97,7 +97,7 @@ theorem isRegular_formalFiber_of_isQuasiFiniteAtPrime
   have : q'.LiesOver q := ⟨rfl⟩
   let : Algebra (Localization.AtPrime q) (Localization.AtPrime q') :=
     Localization.AtPrime.algebraOfLiesOver q q'
-  have : Localization.AtPrime.IsLiesOverAlgebra q q' := inferInstance
+  have : IsScalarTower R (Localization.AtPrime q) (Localization.AtPrime q') := inferInstance
   have hc := Algebra.completion_at_quasiFiniteAtPrime R R' ⟨p', inferInstance⟩ hq
   dsimp only [PrimeSpectrum.comap] at hc
   obtain ⟨ψ, _, B, hB, β, φ, hφ, e, he⟩ := hc

@@ -68,6 +68,7 @@ lemma homEquiv_symm_projectionTensorMap (M N : D) :
       inv (π (R.obj M) N) ≫ adj.counit.app M ▷ N :=
   Equiv.symm_apply_apply _ _
 
+
 /-- The transpose of the tensor map along `L ⊣ R`. -/
 @[reassoc]
 lemma map_projectionTensorMap_comp_counit (M N : D) :

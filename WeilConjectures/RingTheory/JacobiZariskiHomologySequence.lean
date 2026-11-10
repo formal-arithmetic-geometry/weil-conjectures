@@ -69,7 +69,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
     constructor
     · intro hx
       obtain ⟨y, hy⟩ := (hdp x.down).mp (congrArg ULift.down hx)
-      exact ⟨⟨y⟩, ULift.ext _ _ hy⟩
+      exact ⟨⟨y⟩, congrArg ULift.up hy⟩
     · rintro ⟨y, hy⟩
       apply ULift.ext
       exact (hdp x.down).mpr ⟨y.down, congrArg ULift.down hy⟩
@@ -109,8 +109,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
       ((_root_.TensorProduct.congr (LinearEquiv.refl B' C') k).restrictScalars B)
   have hd (x : C ⊗[B] N₁) :
       d'.baseChange C' (e₁ x) = e₂ (d.baseChange C x) := by
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul c n => rfl
     | add x y hx hy => simp [hx, hy]
   let eT : (d.baseChange C).ker ≃ₗ[B] (d'.baseChange C').ker :=
@@ -127,8 +126,7 @@ private theorem lifted_kernel.{b, c, n₁, n₀, h}
   have hc (x : C ⊗[B] d.ker) : eT (d.tensorKer C C x) = d'.tensorKer C' C' (eK x) := by
     apply Subtype.ext
     change e₁ _ = _
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul c n => rfl
     | add x y hx hy => simpa only [map_add, Submodule.coe_add] using congrArg₂ (· + ·) hx hy
   constructor
@@ -218,7 +216,7 @@ theorem jacobiZariski_homology_sequence
       (∀ (g : Q.ker) (h : H1Cotangent B C),
         Q.h1Cotangentι h = Extension.Cotangent.mk g →
         δ h = ∑ α ∈ g.val.support,
-          (α.prod (fun c n ↦ c ^ n)) ⊗ₜ[B] D A B (MvPolynomial.coeff α g.val)) ∧
+          (α.prod (fun c n ↦ c ^ n)) ⊗ₜ[B] D A B (AddMonoidAlgebra.coeff g.val α)) ∧
       Function.Exact u v ∧ Function.Exact v δ ∧ Function.Exact δ w ∧
       Function.Exact w z ∧ Function.Surjective z ∧
       ((IsZero (((Tor' (ModuleCat (ULift.{max u v w} B)) 1).obj

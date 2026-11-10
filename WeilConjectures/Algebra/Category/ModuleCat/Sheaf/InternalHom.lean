@@ -112,7 +112,7 @@ lemma mem_presheafHomLinearSubfunctor_obj_of_isSeparated
   exact (hnat (r • m)).trans <|
     (congrArg β (M.map_smul h.op r m)).trans <|
     hβ.trans <|
-    (congrArg (R.map h.op r • ·) (hnat m).symm).trans <|
+    (congrArg (fun y : N.obj (op Z) ↦ R.map h.op r • y) (hnat m).symm).trans <|
     (N.map_smul h.op r _).symm
 
 variable {M N} in

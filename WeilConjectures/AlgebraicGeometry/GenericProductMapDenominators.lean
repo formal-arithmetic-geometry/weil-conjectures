@@ -155,11 +155,9 @@ theorem exists_generic_product_map_denominators
       rw [ht, map_smul]
       exact S.smul_mem _ (hg b)
     have hp (w : T) : p w ∈ S := by
-      induction w using TensorProduct.induction_on with
-      | zero => simp
+      induction w using TensorProduct.inductionOn with
       | tmul q t =>
-        induction q using TensorProduct.induction_on with
-        | zero => simp
+        induction q using TensorProduct.inductionOn with
         | tmul k b => exact hpure k b t
         | add q₁ q₂ h₁ h₂ =>
           simpa only [TensorProduct.add_tmul, map_add] using S.add_mem h₁ h₂

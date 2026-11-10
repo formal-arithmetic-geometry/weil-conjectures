@@ -121,7 +121,7 @@ noncomputable def powerShift (A : C) :
 @[reassoc (attr := simp)]
 lemma powerShift_π (A : C) (n : ℕ) :
     z.powerShift A ≫ Pi.π _ n = Pi.π _ (n + 1) ≫ z.app A :=
-  Pi.lift_π _ _
+  Pi.lift_comp_π _ _
 
 variable [Preadditive C]
 

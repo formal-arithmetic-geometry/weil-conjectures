@@ -90,7 +90,8 @@ theorem surjective_structureSheafMap_stalk_of_proper_flat_fiber
   let OX := SheafOfModules.unit X.ringCatSheaf
   let E := (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj OX)
-  have : SheafOfModules.IsInvertible.{u, u, u} OX := inferInstance
+  have : SheafOfModules.IsInvertible.{u, u, u} OX :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} OX := inferInstance
   have : OX.IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation OX

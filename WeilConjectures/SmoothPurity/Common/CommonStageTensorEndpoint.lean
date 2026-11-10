@@ -62,6 +62,10 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalPullbackScalarComparison rationalTensorScalarComparison
   commonStagePullbackComparison commonStageTensorComparison operationStageTransitionIso
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- The normalized tensor comparison followed by input associators is the pair endpoint.
 
 Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
@@ -94,7 +98,9 @@ theorem commonStageTensor_endpoint
       (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage)) W)
     (rationalDerivedTensor l (Coefficient.{u} l Ω L) W)
     (operationStageTransitionIso l Ω W _ L h)
-    (rationalTensorScalarComparison l _ _ (coefficientInclusion l Ω _ L h) W)
+    (rationalTensorScalarComparison l
+      (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage))
+      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω _ L h) W)
     (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1)
     (Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2)
     (((stageSystem l Ω W).assoc

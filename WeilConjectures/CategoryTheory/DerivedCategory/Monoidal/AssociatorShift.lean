@@ -114,6 +114,42 @@ lemma commShift_associatorNatTrans₃_of_iso {X Y X' Y' : D} (eX : X ≅ X') (eY
   rw [this]
   infer_instance
 
+/-- Prove shift coherence with abstract structures, avoiding reduction of the derived tensor. -/
+private lemma commShiftIso_assoc_aux (K L M : D) (b c : ℤ)
+    [NatTrans.CommShift (associatorNatTrans₂ D K (M⟦c⟧)) ℤ]
+    [NatTrans.CommShift (associatorNatTrans₃ D K L) ℤ] :
+    (((curriedTensor D).obj K).commShiftIso b).hom.app L ▷ M⟦c⟧ ≫
+      (((curriedTensor D).flip.obj (M⟦c⟧)).commShiftIso b).hom.app (K ⊗ L) ≫
+      ((((curriedTensor D).obj (K ⊗ L)).commShiftIso c).hom.app M ≫
+        (α_ K L M).hom⟦c⟧')⟦b⟧' =
+    (α_ K (L⟦b⟧) (M⟦c⟧)).hom ≫ K ◁ ((((curriedTensor D).flip.obj (M⟦c⟧)).commShiftIso b).app L ≪≫
+        (shiftFunctor D b).mapIso ((((curriedTensor D).obj L).commShiftIso c).app M) ≪≫
+        (shiftFunctorAdd' D c b (b + c) (add_comm c b)).symm.app _).hom ≫
+      (((curriedTensor D).obj K).commShiftIso (b + c)).hom.app (L ⊗ M) ≫
+      (shiftFunctorAdd' D c b (b + c) (add_comm c b)).hom.app (K ⊗ (L ⊗ M)) := by
+  have h₂ := NatTrans.shift_app_comm (associatorNatTrans₂ D K (M⟦c⟧)) b L
+  have h₃ := NatTrans.shift_app_comm (associatorNatTrans₃ D K L) c M
+  simp only [Functor.commShiftIso_comp_hom_app, associatorNatTrans₂_app,
+    associatorNatTrans₃_app, Functor.comp_obj, Functor.flip_obj_map, curriedTensor_map_app,
+    curriedTensor_obj_map, curriedTensor_obj_obj, Functor.flip_obj_obj, assoc] at h₂ h₃
+  rw [h₃, Functor.map_comp, Functor.map_comp, reassoc_of% h₂]
+  rw [Functor.commShiftIso_add' ((curriedTensor D).obj K)
+    (show c + b = b + c from add_comm c b)]
+  simp only [Functor.CommShift.isoAdd'_hom_app, Iso.trans_hom,
+    Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, curriedTensor_obj_map, assoc,
+    MonoidalCategory.whiskerLeft_comp]
+  congr 2
+  rw [← MonoidalCategory.whiskerLeft_comp_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
+    assoc]
+  erw [Iso.inv_hom_id_app]
+  erw [comp_id]
+  erw [Iso.inv_hom_id_app]
+  erw [comp_id]
+  have := ((curriedTensor D).obj K).commShiftIso_hom_naturality_assoc
+    ((((curriedTensor D).obj L).commShiftIso c).hom.app M) b
+    (((((curriedTensor D).obj K).commShiftIso c).hom.app (L ⊗ M))⟦b⟧')
+  exact this.symm
+
 end Shift
 
 end CategoryTheory.MonoidalCategory
@@ -393,28 +429,7 @@ lemma shiftTensorShiftIso_assoc_aux (K L M : DerivedCategory C) (b c : ℤ) :
     (α_ K (L⟦b⟧) (M⟦c⟧)).hom ≫ K ◁ (shiftTensorShiftIso C L M b c).hom ≫
       (((curriedTensor (DerivedCategory C)).obj K).commShiftIso (b + c)).hom.app (L ⊗ M) ≫
       (shiftFunctorAdd' (DerivedCategory C) c b (b + c) (add_comm c b)).hom.app (K ⊗ (L ⊗ M)) := by
-  have h₂ := NatTrans.shift_app_comm (associatorNatTrans₂ (DerivedCategory C) K (M⟦c⟧)) b L
-  have h₃ := NatTrans.shift_app_comm (associatorNatTrans₃ (DerivedCategory C) K L) c M
-  simp only [Functor.commShiftIso_comp_hom_app, associatorNatTrans₂_app,
-    associatorNatTrans₃_app, Functor.comp_obj, Functor.flip_obj_map, curriedTensor_map_app,
-    curriedTensor_obj_map, curriedTensor_obj_obj, Functor.flip_obj_obj, assoc] at h₂ h₃
-  rw [h₃, Functor.map_comp, Functor.map_comp, reassoc_of% h₂]
-  rw [Functor.commShiftIso_add' ((curriedTensor (DerivedCategory C)).obj K)
-    (show c + b = b + c from add_comm c b)]
-  simp only [shiftTensorShiftIso, Functor.CommShift.isoAdd'_hom_app, Iso.trans_hom,
-    Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, curriedTensor_obj_map, assoc,
-    MonoidalCategory.whiskerLeft_comp]
-  congr 2
-  rw [← MonoidalCategory.whiskerLeft_comp_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
-    assoc]
-  erw [Iso.inv_hom_id_app]
-  erw [comp_id]
-  erw [Iso.inv_hom_id_app]
-  erw [comp_id]
-  have := ((curriedTensor (DerivedCategory C)).obj K).commShiftIso_hom_naturality_assoc
-    ((((curriedTensor (DerivedCategory C)).obj L).commShiftIso c).hom.app M) b
-    (((((curriedTensor (DerivedCategory C)).obj K).commShiftIso c).hom.app (L ⊗ M))⟦b⟧')
-  exact this.symm
+  exact commShiftIso_assoc_aux K L M b c
 
 omit [IsGrothendieckAbelian C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]

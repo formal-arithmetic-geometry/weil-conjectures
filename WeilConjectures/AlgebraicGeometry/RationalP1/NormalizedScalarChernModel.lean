@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernMaps
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteScalarSquares
@@ -79,7 +81,7 @@ private theorem normalized_restriction_square
     ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactors.hom.app K)
   dsimp only [Functor.comp_obj] at hn
   rw [← hn, reassoc_of% (s.normalization K)]
-  erw [Category.assoc, he]
+  erw [he]
   erw [← Functor.map_comp_assoc, he']
   simpa only [derivedComapLowerStarIso, derived_square] using
     (canonicalSquare_normalization (CondensedRing.lowerStar Λ' f) (CondensedRing.lowerStar Λ f)

@@ -234,7 +234,7 @@ private def integralConstantDerivedPullIso {A : Type (u + 1)} [CommRing A]
   let := (integralConstantModule_exact Y d).2
   let := (integralConstantModule_exact X d).1
   let := (integralConstantModule_exact X d).2
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (integralConstantPullIso d f)
 
 end AlgebraicGeometry.Scheme
@@ -359,7 +359,7 @@ private def derivedPullbackScalarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   let H := proEtaleRingModulePullback f R
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _)
   let ei : F ⋙ G ≅ H := pullbackScalarIso f R S c ≪≫ (rawPullbackIso f R).symm
-  exact (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso F G ≪≫
     Functor.mapDerivedCategoryNatIso ei
 
 end AlgebraicGeometry.Scheme
@@ -377,45 +377,6 @@ private instance localScalar_additive {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) {X Y : Scheme.{u}} (g : X ⟶ Y) (V : X.ProEt) :
     (localScalar d g V).functor.Additive := inferInstanceAs
       (SheafOfModules.restrictScalars _).Additive
-
-private def normalizedLocalIso {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) {X Y : Scheme.{u}} (g : X ⟶ Y) (V : X.ProEt)
-    (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) :
-    integralLocalDerived g (pbcAdicCompletion Y d) V K ≅
-      (localScalar d g V).functor.mapDerivedCategory.obj
-        ((SheafOfModules.localizedSystemRestriction.{u + 1, u, u + 1}
-          (pbcAdicCompletion X d) V).mapDerivedCategory.obj ((d.pull g).obj K)) := by
-  let c := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso (d.integralRingIso g)
-  let E := proEtaleScalarEquivalence X c
-  let e := scalarEquivalence ((ProEt.topology X).over V)
-    (((ProEt.topology X).overPullback RingCat.{u + 1} V).mapIso c)
-  let F := SheafOfModules.localizedSystemRestriction.{u + 1, u, u + 1}
-    ((adicTowerInverseImage g).obj (pbcAdicCompletion Y d)) V
-  let H := SheafOfModules.localizedSystemRestriction.{u + 1, u, u + 1}
-    (pbcAdicCompletion X d) V
-  have : E.functor.Additive := inferInstanceAs
-    (SheafOfModules.restrictScalars c.hom).Additive
-  have : e.functor.Additive := inferInstanceAs
-    (SheafOfModules.restrictScalars
-      (((ProEt.topology X).overPullback RingCat.{u + 1} V).mapIso c).hom).Additive
-  let s : E.functor ⋙ F ≅ H ⋙ e.functor := scalarOverIso c V
-  let ds := (Functor.mapDerivedCategoryCompIso E.functor F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫
-    Functor.mapDerivedCategoryCompIso H e.functor
-  let p : proEtaleRingDerivedPullback g (pbcAdicCompletion Y d)
-      (pbcAdicCompletion X d) (d.integralRingIso g) ⋙ E.functor.mapDerivedCategory ≅
-        adicTowerPullback g (pbcAdicCompletion Y d) :=
-    derivedPullbackScalarIso g (pbcAdicCompletion Y d)
-    (pbcAdicCompletion X d) (d.integralRingIso g)
-  let L := (proEtaleRingDerivedPullback g (pbcAdicCompletion Y d)
-    (pbcAdicCompletion X d) (d.integralRingIso g)).obj K
-  let t : F.mapDerivedCategory.obj (E.functor.mapDerivedCategory.obj L) ≅
-      e.functor.mapDerivedCategory.obj (H.mapDerivedCategory.obj L) := ds.app L
-  let r : F.mapDerivedCategory.obj ((adicTowerPullback g (pbcAdicCompletion Y d)).obj K) ≅
-      F.mapDerivedCategory.obj (E.functor.mapDerivedCategory.obj L) :=
-    F.mapDerivedCategory.mapIso (p.app K).symm
-  exact (sliceDerivedIso _ V _).symm ≪≫ r ≪≫ t
 
 end AlgebraicGeometry.Scheme
 

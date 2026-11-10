@@ -72,10 +72,7 @@ private theorem extension_over_hom_ext
     g.val.app (op V) ((changeOfRingsOfUniverses α N).val.map i.left.op z)
   rw [← ht]
   clear ht
-  induction t using TensorProduct.induction_on with
-  | zero =>
-    erw [(η.app (op V)).hom.map_zero, (f.val.app (op V)).hom.map_zero,
-      (g.val.app (op V)).hom.map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' =>
     erw [(η.app (op V)).hom.map_add, (f.val.app (op V)).hom.map_add,
       (g.val.app (op V)).hom.map_add, ht, ht']
@@ -117,6 +114,11 @@ private theorem localDual_basis {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ) :
     (localDual N e).app W (localBasis N e W) = (1 : R.obj.obj (op W.unop.left)) := by
   exact congrArg (fun f ↦ f.val.app W (1 : R.obj.obj (op W.unop.left))) e.inv_hom_id
+
+private noncomputable local instance {U : C} (W : (Over U)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj U).obj (𝒪 R).val).obj W)
+      (N.val.obj (op W.unop.left)) :=
+  inferInstanceAs (SMul (R.obj.obj (op W.unop.left)) (N.val.obj (op W.unop.left)))
 
 private theorem localBasis_coordinates {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ)
@@ -198,6 +200,15 @@ private noncomputable def extendedBasisIso {U : C}
       (scalarExtensionSection α N (op W.unop.left) s (localBasis N e W)) = s
     rw [extendedCoordinateMap_tmul, localDual_basis, map_one, one_mul]
 
+private noncomputable local instance {U : C} (W : (Over U)ᵒᵖ) :
+    SMul (((PresheafOfModules.restrictOver R.obj W.unop.left).obj (𝒪 R).val).obj
+        (op (Over.mk (𝟙 W.unop.left))))
+      ((ModuleCat.restrictScalars
+          (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map W.unop.hom.op).hom).obj
+        ((homObj N (𝒪 R)).val.obj (op W.unop.left))) :=
+  inferInstanceAs (SMul (R.obj.obj (op W.unop.left))
+    ((homObj N (𝒪 R)).val.obj (op W.unop.left)))
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem localDual_coordinates {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ)
@@ -224,7 +235,7 @@ private theorem localDual_coordinates {U : C}
     (φ.app (op (Over.mk (𝟙 W.unop.left))) (localBasis N e W)) *
       (show R.obj.obj (op V.unop.left) from (localDual N e).app Z x)
   conv_lhs => rw [← hx]
-  rw [map_smul, hp]
+  rw [(φ.app V).hom.map_smul, hp]
   dsimp only [Functor.comp_obj, Functor.op_obj] at *
   change (show R.obj.obj (op V.unop.left) from (localDual N e).app Z x) *
       R.obj.map V.unop.hom.op
@@ -359,7 +370,7 @@ private theorem dual_inverse_forward {U : C}
       (t * α.hom.app (op V.unop.left) ((localDual N e).app Z x)) •
         scalarExtensionSection α N (op V.unop.left) 1 (localBasis N e Z) := by
     rw [scalarExtensionSection_smul, mul_one, ← scalarExtensionSection_base_smul,
-      localBasis_coordinates]
+      localBasis_coordinates N e Z x]
   rw [hx, map_smul]
   erw [hp]
   change _ * t * α.hom.app (op V.unop.left) ((localDual N e).app Z x) =

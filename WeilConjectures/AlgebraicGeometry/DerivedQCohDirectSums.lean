@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Mathlib.CategoryTheory.Limits.FullSubcategory
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 
@@ -50,6 +51,7 @@ theorem derivedQCohDirectSums (X : Scheme.{u})
   let (I : Type u) :
       (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) :=
     schemeDerivedQCohClosedUnderCoproducts X I
-  infer_instance
+  intro I
+  exact hasColimitsOfShape_of_closedUnderColimits (Discrete I) (schemeDerivedQCohProperty X)
 
 end AlgebraicGeometry

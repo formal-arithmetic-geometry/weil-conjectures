@@ -61,7 +61,7 @@ instance {U : X.Etaleᵒᵖ} (x : (etaleIsoTorsor L).sheaf.obj.obj U) :
 
 lemma etaleIsoTorsorVal_injective {U : X.Etaleᵒᵖ} :
     Function.Injective (etaleIsoTorsorVal L (U := U)) :=
-  fun _ _ h ↦ ULift.ext _ _ (Subtype.ext h)
+  fun _ _ h ↦ ULift.ext (Subtype.ext h)
 
 /-- The section of `Isom(𝒪, L)` given by an isomorphism `V^* 𝒪 ≅ V^* L`. -/
 def etaleIsoTorsorMk {U : X.Etaleᵒᵖ}

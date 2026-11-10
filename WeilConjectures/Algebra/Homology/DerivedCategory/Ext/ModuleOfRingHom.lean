@@ -56,6 +56,7 @@ lemma moduleOfRingHom_smul_def {X Y : C} (φ : R →+* End Y) (n : ℕ) (r : R) 
     r • x = x.comp (mk₀ (φ r)) (add_zero n) :=
   rfl
 
+
 /-- The action of a natural number is the `ℕ`-multiple. -/
 lemma smul_natCast_eq_nsmul {X Y : C} (φ : R →+* End Y) (n : ℕ) (k : ℕ) (x : Ext X Y n) :
     letI := moduleOfRingHom (X := X) φ n
@@ -84,5 +85,6 @@ lemma postcompLinearMap_apply {X Y Y' : C} (φ : R →+* End Y) (φ' : R →+* E
     (g : Y ⟶ Y') (hg : ∀ r, φ r ≫ g = g ≫ φ' r) (n : ℕ) (x : Ext X Y n) :
     postcompLinearMap (X := X) φ φ' g hg n x = x.comp (mk₀ g) (add_zero n) :=
   rfl
+
 
 end CategoryTheory.Abelian.Ext

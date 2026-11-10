@@ -75,7 +75,7 @@ theorem podReindexDerivedPastingMaps
     (hdg : dg = G.mapDerivedCategoryFactors.hom.app KF ≫ DerivedCategory.Q.map cg)
     (hdc : dc = H.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map cc)
     (hK :
-      (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+      (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
           (DerivedCategory.Q.obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -88,7 +88,7 @@ theorem podReindexDerivedPastingMaps
           (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).symm).hom.app K)
         cf cg cc d) :
     PodCompositionEquation G.mapDerivedCategory
-      ((Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+      ((Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         (DerivedCategory.Q.obj K)) df dg dc (DerivedCategory.Q.map d) := by
   unfold PodCompositionEquation at hc ⊢
   rw [hdf, hdg, hdc]

@@ -107,7 +107,7 @@ lemma sigmaLift_sigmaIndex {g : Z ⟶ W} (φ : Z ⟶ ∐ fun _ : S ↦ W)
   have hk : k ≫ Sigma.ι (fun _ : S ↦ W) s = V.ι ≫ φ := IsOpenImmersion.lift_fac _ _ _
   have : V.ι ≫ g = k := by
     calc V.ι ≫ g = (V.ι ≫ φ) ≫ Sigma.desc (fun _ : S ↦ 𝟙 W) := by rw [Category.assoc, hφ]
-      _ = k := by rw [← hk, Category.assoc, Sigma.ι_desc, Category.comp_id]
+      _ = k := by rw [← hk, Category.assoc, Sigma.ι_comp_desc, Category.comp_id]
   rw [← Category.assoc, this, hk]
 
 lemma comp_sigmaLift {Z' : Scheme.{u}} (h : Z' ⟶ Z) (g : Z ⟶ W) (c : C(Z, S)) :

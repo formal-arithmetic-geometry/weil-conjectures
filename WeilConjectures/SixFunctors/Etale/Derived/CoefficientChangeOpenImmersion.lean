@@ -94,10 +94,10 @@ lemma mapDerivedCategorySquareIso_hom_app_comp_of_comm (αP : r₀ ⋙ p ≅ P �
       simp) K
   have e₁ : (Functor.mapDerivedCategoryTriangleIso (Iso.refl (p ⋙ q))).hom.app
       (r₀.mapDerivedCategory.obj K) =
-      (Functor.mapDerivedCategoryCompIso p q).hom.app (r₀.mapDerivedCategory.obj K) := by
+      (Functor.mapDerivedCategoryCompIso p q).inv.app (r₀.mapDerivedCategory.obj K) := by
     simp [Functor.mapDerivedCategoryNatIso_refl]
   have e₂ : (Functor.mapDerivedCategorySquareIso b).hom.app (r₀.mapDerivedCategory.obj K) =
-      (Functor.mapDerivedCategoryCompIso p q).inv.app (r₀.mapDerivedCategory.obj K) ≫
+      (Functor.mapDerivedCategoryCompIso p q).hom.app (r₀.mapDerivedCategory.obj K) ≫
         (Functor.mapDerivedCategoryTriangleIso b).hom.app (r₀.mapDerivedCategory.obj K) := by
     simp
   have e₃ : (Functor.mapDerivedCategoryTriangleIso β.symm).hom.app K ≫
@@ -105,8 +105,8 @@ lemma mapDerivedCategorySquareIso_hom_app_comp_of_comm (αP : r₀ ⋙ p ≅ P �
       (Functor.mapDerivedCategoryTriangleIso (Iso.refl (S ⋙ T))).hom.app K := by
     simp [Functor.mapDerivedCategoryNatIso_symm, Functor.mapDerivedCategoryNatIso_refl]
   rw [e₁] at h₁
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso p q).hom.app (r₀.mapDerivedCategory.obj K)),
-    e₂, Category.assoc, Iso.hom_inv_id_app_assoc, ← h₂, ← reassoc_of% h₁, ← Functor.map_comp,
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso p q).inv.app (r₀.mapDerivedCategory.obj K)),
+    e₂, Category.assoc, Iso.inv_hom_id_app_assoc, ← h₂, ← reassoc_of% h₁, ← Functor.map_comp,
     e₃]
 
 end DerivedPasting

@@ -98,6 +98,17 @@ private theorem complexHomologyColimit
   change PreservesColimitsOfShape I (H ⋙ ShortComplex.homologyFunctor _)
   infer_instance
 
+local instance instHasColimitsOfShape_derivedAmbientDirectSumsHomology
+    (X : Scheme.{u}) (I : Type u) :
+    HasColimitsOfShape (Discrete I)
+      (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  have : HasColimitsOfShape (Discrete I) C := inferInstance
+  refine ⟨fun F ↦ ?_⟩
+  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
+
 /-- Cohomology of a termwise coproduct is the coproduct of the cohomologies, with the
 canonical map induced by the coprojections.
 Source: Stacks Project, Derived Categories of Schemes, proof of Lemma 08DT.

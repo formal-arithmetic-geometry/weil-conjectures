@@ -188,7 +188,7 @@ noncomputable def perfectOverlapApexObjectIso
   let cart := perfectOverlapStageEquivalence g p' p q h U V
   change cart.functor.obj (e.functor.mapDerivedCategory.obj (R.mapDerivedCategory.obj E)) ≅ _
   exact cart.functor.mapIso
-      ((Functor.mapDerivedCategoryCompIso R e.functor).symm.app E ≪≫
+      ((Functor.mapDerivedCategoryCompIso R e.functor).app E ≪≫
         (schemeDerivedOpenRestrictionCompIso X (homOfLE hW')).symm.app E ≪≫
         SU.mapIso φ.symm) ≪≫
     (perfectOverlapStageObjectIso g p' p q h U V L hWL).app A

@@ -61,7 +61,7 @@ private theorem etaleAdditiveCech_beta_horizontal
         ULift.up (TopCat.Presheaf.cechComplexFunctorπ U P k y a) := by
     change ((j k ≫ TopCat.Presheaf.cechComplexFunctorπ U Q k y).hom) (ULift.up a) = _
     rw [show j k ≫ TopCat.Presheaf.cechComplexFunctorπ U Q k y = _ from
-      Limits.Pi.lift_π _ y]
+      Limits.Pi.lift_comp_π _ y]
     rfl
   have hc (k : ℕ) (a : C.X k) :
       (H.d k (k + 1)).hom ((j k).hom (ULift.up a)) =
@@ -129,10 +129,10 @@ private theorem etaleAdditiveCech_beta_horizontal
       j n ≫ f.f n ≫ TopCat.Presheaf.cechComplexFunctorπ U _ n y
     rw [TopCat.Presheaf.cechComplexFunctor_map_f_π]
     rw [show b ≫ TopCat.Presheaf.cechComplexFunctorπ U _ n y = _ from
-      Limits.Pi.lift_π _ y, ← Category.assoc]
+      Limits.Pi.lift_comp_π _ y, ← Category.assoc]
     change _ = (j n ≫ TopCat.Presheaf.cechComplexFunctorπ U Q n y) ≫ τ.app _
     rw [show j n ≫ TopCat.Presheaf.cechComplexFunctorπ U Q n y = _ from
-      Limits.Pi.lift_π _ y]
+      Limits.Pi.lift_comp_π _ y]
     apply AddCommGrpCat.ext
     intro a
     rfl
@@ -209,7 +209,7 @@ private theorem etaleAdditiveCech_beta_vertical
           Limits.Pi.π _ y = _
     rw [Limits.Pi.map_π, ← Category.assoc]
     dsimp only [b]
-    rw [Limits.Pi.lift_π, Limits.zero_comp]
+    rw [Limits.Pi.lift_comp_π, Limits.zero_comp]
     apply AddCommGrpCat.ext
     intro a
     let W := op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))

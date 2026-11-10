@@ -55,7 +55,7 @@ noncomputable def coefficientExtensionIntegers (l : ℕ) [Fact l.Prime] (E : Typ
   mul_mem' {a b} ha hb := by
     change coefficientExtensionAbsoluteValue l E (a * b) ≤ 1
     rw [map_mul]
-    exact mul_le_one₀ ha (AbsoluteValue.nonneg _ b) hb
+    exact (mul_le_of_le_one_left (AbsoluteValue.nonneg _ b) ha).trans hb
   one_mem' := by simp
   add_mem' {a b} ha hb :=
     (isNonarchimedean_spectralNorm (K := ℚ_[l]) (L := E) a b).trans (max_le ha hb)
@@ -90,6 +90,7 @@ theorem coefficientExtensionIntegers_eq_choose (l : ℕ) [Fact l.Prime] (E : Typ
   Subring.ext fun x ↦ (mem_coefficientExtensionIntegers l E x).trans
     ((extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
       (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x).symm
+
 
 /-- The conclusion of `extension_integers_dvr` for the spectral absolute value, stated for
 the closed unit ball `coefficientExtensionIntegers l E` itself.

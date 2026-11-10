@@ -106,8 +106,7 @@ private theorem supported_kernel_scalar_annihilation_affine
   change A (c K hK ss) • c G inferInstance tt = 0
   change ∀ (x : Γ(K, V.1)) (b : Γ(S, U.1)),
     A (c K hK (x ⊗ₜ b)) = b * (j.appLE V.1 U.1 hUV).hom (i.app V.1 x) at hi
-  induction ss using TensorProduct.induction_on with
-  | zero => simp only [map_zero, zero_smul]
+  induction ss using TensorProduct.inductionOn with
   | add s s' hs hs' => simp only [map_add, add_smul, hs, hs', add_zero]
   | tmul x b =>
     rw [hi, mul_smul]
@@ -117,8 +116,7 @@ private theorem supported_kernel_scalar_annihilation_affine
     change r • c G inferInstance tt = 0
     rw [← LinearMap.map_smul]
     change c G inferInstance (r • tt) = 0
-    induction tt using TensorProduct.induction_on with
-    | zero => simp only [smul_zero, map_zero]
+    induction tt using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [smul_add, map_add, hz, hz', add_zero]
     | tmul y d =>
       rw [TensorProduct.smul_tmul', hkill V.1 _ (ha x) y, TensorProduct.zero_tmul, map_zero]

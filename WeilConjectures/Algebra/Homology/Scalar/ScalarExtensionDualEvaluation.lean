@@ -67,8 +67,7 @@ theorem scalarDual_section_ext {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
   clear ht
   have hη : φ.app (op (Over.mk (i ≫ W.unop.hom))) (η.app (op V) t) =
       ψ.app (op (Over.mk (i ≫ W.unop.hom))) (η.app (op V) t) := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add t t' ht ht' => simp only [map_add, ht, ht']
     | tmul a x => exact h (op (Over.mk (i ≫ W.unop.hom))) a x
   exact hη
@@ -90,8 +89,7 @@ noncomputable def scalarDualRawSection {R S : Sheaf J CommRingCat.{u}} (α : R �
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul s x =>
       change S.obj.obj (op W.unop.left) at s

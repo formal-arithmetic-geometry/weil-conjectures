@@ -143,4 +143,5 @@ theorem exists_truncated_refinement
   obtain ⟨V, ⟨f⟩⟩ := exists_finite_split_replacement K hK'
   exact ⟨V, ⟨(SimplicialObject.truncation r).map f⟩⟩
 
+
 end AlgebraicGeometry.FiniteSplitEtaleHypercover

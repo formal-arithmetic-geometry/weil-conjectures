@@ -68,8 +68,7 @@ variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F
 attribute [local irreducible] integralOrdinaryScalarComp scalarPullbackLevel scalarPullbackTower
   integralOperationsLevelPullback unrestrictedIntegralReductionFunctor
   AlgebraicGeometry.Scheme.coefficientProEtaleModulePullback Functor.leftAdjoint
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-  integralOperationsPullbackLevel integralOperationsRestrict
+attribute [local implicit_reducible] integralOperationsPullbackLevel integralOperationsRestrict
   integralCoefficientSheaf integralCoefficientCommRingSheaf
 
 private theorem pullbackTower_component {X Y : AlgebraicGeometry.Scheme.{u}}

@@ -44,10 +44,7 @@ private theorem flat_tensor_right_unit_iff
   have : IsScalarTower A T D := by
     apply IsScalarTower.of_algebraMap_smul
     intro a d
-    induction d using TensorProduct.induction_on with
-    | zero =>
-      change (algebraMap A T a) • (0 : D) = algebraMap A D a * 0
-      simp
+    induction d using TensorProduct.inductionOn with
     | tmul t r =>
       rw [TensorProduct.smul_tmul']
       change (algebraMap A T a * t) ⊗ₜ[A] r =

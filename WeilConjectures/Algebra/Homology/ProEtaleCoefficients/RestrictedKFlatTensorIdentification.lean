@@ -218,8 +218,7 @@ private noncomputable def swapApp {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
       map_add' := fun _ _ ↦ rfl
       map_smul' := by
         intro b x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
   exact (e.trans (TensorProduct.comm _ _ _)).toModuleIso
@@ -238,8 +237,7 @@ private noncomputable def swapPresheafIso {B S : Sheaf J CommRingCat.{r}} (φ : 
   PresheafOfModules.isoMk (swapApp φ M) (by
     intro U V i
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       change (swapApp φ M V).hom (changeOfRingsMap φ M i
@@ -298,8 +296,7 @@ private theorem swapSheafIso_naturality {B S : Sheaf J CommRingCat.{r}} (φ : B 
     apply PresheafOfModules.hom_ext
     intro U
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s m =>
       change (swapPresheafIso φ N).hom.app U

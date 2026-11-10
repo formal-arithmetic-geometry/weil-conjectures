@@ -70,10 +70,10 @@ noncomputable def openDerivedAdditiveStalkIso
   exact Functor.isoWhiskerLeft R.mapDerivedCategory
       (Functor.isoWhiskerLeft L₀.mapDerivedCategory
         (Functor.mapDerivedCategoryHomologyFunctorIso F₀ i) ≪≫
-        Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso L₀ F₀).symm H) ≪≫
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)).symm H ≪≫
+        Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso L₀ F₀) H) ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso R (L₀ ⋙ F₀)) H ≪≫
     Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso α) H ≪≫
-    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso L F) H ≪≫
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso L F).symm H ≪≫
     Functor.isoWhiskerLeft L.mapDerivedCategory
       (Functor.mapDerivedCategoryHomologyFunctorIso F i).symm
 

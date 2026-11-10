@@ -81,7 +81,7 @@ theorem D_eq_zero_iff_exists_pow_of_perfectField
       (adjoin_pow_eq_range p (ZMod p) K).trans (adjoin_pow_eq_range p k K).symm
     let e : (IntermediateField.adjoin (ZMod p) (Set.range (fun x : K ↦ x ^ p))) ≃+*
         (IntermediateField.adjoin k (Set.range (fun x : K ↦ x ^ p))) :=
-      { Equiv.setCongr (congrArg (fun S : Subfield K ↦ (S : Set K)) hfields) with
+      { Set.equivOfEq (congrArg (fun S : Subfield K ↦ (S : Set K)) hfields) with
         map_mul' := fun _ _ ↦ rfl
         map_add' := fun _ _ ↦ rfl }
     let b' := b.mapCoeffs e (fun _ _ ↦ rfl)

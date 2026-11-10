@@ -51,8 +51,7 @@ theorem range_powLiftBaseChange :
       ((I.map (algebraMap A B)) ^ n).restrictScalars B := by
   apply le_antisymm
   · rintro _ ⟨z, rfl⟩
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul b x =>
       simp only [LinearMap.liftBaseChange_tmul, LinearMap.coe_comp, Function.comp_apply,
         Submodule.coe_subtype, Algebra.linearMap_apply, smul_eq_mul,
@@ -79,8 +78,7 @@ theorem injective_powLiftBaseChange_of_flat [Module.Flat A B] :
   have e : ∀ x, powLiftBaseChange (B := B) I n x =
       Algebra.TensorProduct.rid A B B ((I ^ n).subtype.lTensor B x) := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b y => simp [Algebra.smul_def, mul_comm]
     | add x y hx hy => simp only [map_add, hx, hy]
   intro x y hxy

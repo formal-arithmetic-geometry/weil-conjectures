@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.ZetaWeil.ConstantGeometricStalkUnit.CoefficientPullbackUnitCoordinates
 import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure

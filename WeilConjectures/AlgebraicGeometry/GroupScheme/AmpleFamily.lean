@@ -112,7 +112,7 @@ noncomputable def GrpObj.sigmaIdentityComponentIso :
       rw [GrpObj.range_identityComponentTranslate]
       rfl
     exact ⟨Sigma.ι (fun _ : ConnectedComponents G.left ↦ (GrpObj.identityComponent G).left)
-      (.mk y) x, by rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, hx]⟩⟩
+      (.mk y) x, by rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, hx]⟩⟩
   have : IsIso (Sigma.desc (GrpObj.identityComponentTranslate G)) :=
     (isIso_iff_isOpenImmersion_and_surjective _).mpr ⟨inferInstance, inferInstance⟩
   asIso (Sigma.desc (GrpObj.identityComponentTranslate G))

@@ -112,6 +112,6 @@ theorem finiteSupportCover (R : Type (u + 1)) [Ring R]
     · left
       intro x hx
       apply hKO
-      exact Set.mem_iUnion.mpr ⟨i, by simpa only [K, if_neg hz] using hx⟩
+      exact Set.mem_iUnion.mpr ⟨i, by simpa only [K, ite_eq_right hz] using hx⟩
 
 end AlgebraicGeometry.Scheme.ProEt

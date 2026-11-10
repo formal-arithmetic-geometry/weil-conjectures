@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineTildeDerivedTensorMate
 import WeilConjectures.Algebra.Homology.AffineTildePushforwardHomologyFactorization
 import WeilConjectures.Algebra.Homology.AffineTildeCoefficientPushforwardHomologyCoordinates
@@ -225,12 +227,17 @@ theorem affineTildeDerivedTensorToPushforward_homology
       T.map s ≫ T.map ((ModuleCat.restrictScalars ψ).map z₀) ≫
         affineTildePushforwardCohomologyMap D B ψ Cg i := by
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology
-  let : (affinePushforwardTilde D).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde D).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of D) f g
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))
   let : P.Additive := inferInstance
   let : (affinePushforwardTilde D ⋙ P).PreservesZeroMorphisms :=

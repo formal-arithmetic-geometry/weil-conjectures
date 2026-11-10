@@ -147,7 +147,7 @@ private noncomputable def familyYonedaIso (C : Type (u + 1)) [Category.{u} C] :
   intro Q R f
   apply Sigma.hom_ext
   intro i
-  simp only [FormalCoproduct.uliftYoneda, eval_obj_map, Sigma.ι_desc_assoc,
+  simp only [FormalCoproduct.uliftYoneda, eval_obj_map, Sigma.ι_comp_desc_assoc,
     Category.assoc, Function.comp_def]
   rw [hb R, ← Category.assoc, hb Q]
   ext U g
@@ -612,7 +612,7 @@ theorem exists_affine_hypercover_geometry
       apply Sigma.hom_ext
       intro i
       simp only [Functor.comp_map, F, R, GeometryRealization.sheafRealization,
-        FormalCoproduct.eval_obj_map, Sigma.ι_desc_assoc,
+        FormalCoproduct.eval_obj_map, Sigma.ι_comp_desc_assoc,
         Function.comp_def, Category.assoc, familyMap]
       rw [hb m]
       rw [← Category.assoc, hb n]

@@ -64,8 +64,8 @@ noncomputable def freeSectionsEquivOpens (W : Y.Opens) (I : Type u) [Fintype I]
     ext j
     dsimp only
     rw [map_sum, Finset.sum_eq_single j (fun i _ hi ↦ ?_) (by simp)]
-    · rw [freeπ_app_ιFree_app_opens, if_pos rfl]
-    · rw [freeπ_app_ιFree_app_opens, if_neg hi]
+    · rw [freeπ_app_ιFree_app_opens, ite_eq_left rfl]
+    · rw [freeπ_app_ιFree_app_opens, ite_eq_right hi]
 
 /-- An endomorphism of `𝒪_Y` multiplies sections over `W` by the restriction of its value at
 `1`. -/

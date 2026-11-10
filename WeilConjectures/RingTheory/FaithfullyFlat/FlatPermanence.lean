@@ -42,12 +42,10 @@ theorem of_flat_of_faithfullyFlat_module (R S M : Type*) [CommRing R] [CommRing 
       (AlgebraTensorModule.cancelBaseChange R S S M P).symm ∘
         LinearMap.lTensor M f ∘ AlgebraTensorModule.cancelBaseChange R S S M N := by
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp_all
     | tmul m y =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | add y z hy hz => simp_all [TensorProduct.tmul_add]
       | tmul s n =>
         apply (AlgebraTensorModule.cancelBaseChange R S S M P).injective

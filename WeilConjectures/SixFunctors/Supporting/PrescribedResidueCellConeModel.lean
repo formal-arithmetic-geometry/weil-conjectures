@@ -323,7 +323,7 @@ private def sfLowerInclusion (T : Scheme.{u}) (k : Type v) [Field k]
     sfResidueSplit T k a (b - 1) rank ⟶ sfResidueSplit T k a b rank where
   f q := if hq : a ≤ q ∧ q ≤ b - 1 then eqToHom (by
     dsimp [sfResidueSplit, sfSplitComplex]
-    rw [if_pos hq, if_pos (show a ≤ q ∧ q ≤ b by omega)]) else 0
+    rw [ite_eq_left hq, ite_eq_left (show a ≤ q ∧ q ≤ b by omega)]) else 0
   comm' _ _ _ := by simp [sfResidueSplit, sfSplitComplex]
 
 private def sfLowerProjection (T : Scheme.{u}) (k : Type v) [Field k]
@@ -331,14 +331,14 @@ private def sfLowerProjection (T : Scheme.{u}) (k : Type v) [Field k]
     sfResidueSplit T k a b rank ⟶ sfResidueSplit T k a (b - 1) rank where
   f q := if hq : a ≤ q ∧ q ≤ b - 1 then eqToHom (by
     dsimp [sfResidueSplit, sfSplitComplex]
-    rw [if_pos hq, if_pos (show a ≤ q ∧ q ≤ b by omega)]) else 0
+    rw [ite_eq_left hq, ite_eq_left (show a ≤ q ∧ q ≤ b by omega)]) else 0
   comm' _ _ _ := by simp [sfResidueSplit, sfSplitComplex]
 
 private def sfTopProjection (T : Scheme.{u}) (k : Type v) [Field k]
     (a b : ℤ) (hab : a ≤ b) (rank : ℤ → ℕ) :
     sfResidueSplit T k a b rank ⟶ sfResidueCell T k b (rank b) :=
   HomologicalComplex.mkHomToSingle
-    (eqToHom (by dsimp [sfResidueSplit, sfSplitComplex]; rw [if_pos ⟨hab, le_rfl⟩]))
+    (eqToHom (by dsimp [sfResidueSplit, sfSplitComplex]; rw [ite_eq_left ⟨hab, le_rfl⟩]))
     (fun _ _ ↦ by simp [sfResidueSplit, sfSplitComplex])
 
 private theorem sfConeDecomposition (T : Scheme.{u}) (k : Type v) [Field k]
@@ -353,7 +353,6 @@ private theorem sfConeDecomposition (T : Scheme.{u}) (k : Type v) [Field k]
     apply HomologicalComplex.from_single_hom_ext
     simp [i, p, sfSplitCell, sfTopProjection,
       HomologicalComplex.mkHomFromSingle_f, HomologicalComplex.mkHomToSingle_f]
-    rfl
   have hjr : j ≫ r = 𝟙 _ := by
     apply HomologicalComplex.hom_ext
     intro q
@@ -362,7 +361,7 @@ private theorem sfConeDecomposition (T : Scheme.{u}) (k : Type v) [Field k]
     · simp
     · have hz : IsZero ((sfResidueSplit T k a (b - 1) rank).X q) := by
         dsimp [sfResidueSplit, sfSplitComplex]
-        rw [if_neg hq]
+        rw [ite_eq_right hq]
         exact isZero_zero _
       exact hz.eq_of_src _ _
   have hir : i ≫ r = 0 := by
@@ -390,7 +389,7 @@ private theorem sfConeDecomposition (T : Scheme.{u}) (k : Type v) [Field k]
       · simp
       · have hz' : IsZero ((sfResidueSplit T k a b rank).X q) := by
           dsimp [sfResidueSplit, sfSplitComplex]
-          rw [if_neg (show ¬ (a ≤ q ∧ q ≤ b) by omega)]
+          rw [ite_eq_right (show ¬ (a ≤ q ∧ q ≤ b) by omega)]
           exact isZero_zero _
         exact hz'.eq_of_src _ _
   exact ⟨splitInclusionConeIso i j p r hip hjr hir hjp hsum ≪≫ biprod.isoCoprod _ _⟩
@@ -467,7 +466,7 @@ private theorem sfIdentityContraction (T : Scheme.{u}) (k : Type v) [Field k]
         (CochainComplex.mappingCone.inl f).v p q hpq := by
     dsimp [h, CochainComplex.mappingCone.homotopyToZeroOfId,
       CochainComplex.mappingCone.descHomotopy, CochainComplex.HomComplex.Cochain.equivHomotopy]
-    rw [dif_pos hpq]
+    rw [dite_eq_left hpq]
     simp only [CochainComplex.mappingCone.descCochain,
       CochainComplex.HomComplex.Cochain.comp_zero, zero_add]
     exact CochainComplex.HomComplex.Cochain.comp_v
@@ -511,7 +510,7 @@ private theorem sfSplitIsZero (T : Scheme.{u}) (k : Type v) [Field k]
   intro q
   have hz : IsZero ((sfResidueSplit T k a b rank).X q) := by
     dsimp [sfResidueSplit, sfSplitComplex]
-    rw [if_neg (show ¬ (a ≤ q ∧ q ≤ b) by omega)]
+    rw [ite_eq_right (show ¬ (a ≤ q ∧ q ≤ b) by omega)]
     exact isZero_zero _
   exact hz.eq_of_src _ _
 
@@ -536,13 +535,13 @@ private def zeroDifferentialIntervalIso {B : Type c} [Category.{h} B] [Abelian B
       by_cases hn : n = q.as.val
       · subst n
         dsimp only [j, CochainComplex.singleFunctor]
-        rw [dif_pos (show a ≤ q.as.val ∧ q.as.val ≤ b from q.as.property),
+        rw [dite_eq_left (show a ≤ q.as.val ∧ q.as.val ≤ b from q.as.property),
           HomologicalComplex.mkHomFromSingle_f]
         simp
       · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn).eq_of_src _ _
     · intro s f hf
       by_cases hn : a ≤ n ∧ n ≤ b
-      · rw [dif_pos hn]
+      · rw [dite_eq_left hn]
         have hh := hf ⟨⟨n, hn⟩⟩
         change (j ⟨n, hn⟩).f n ≫ f = _ at hh
         dsimp only [j] at hh
@@ -593,7 +592,7 @@ private theorem sfRestrictedSupport (T : Scheme.{u}) (k : Type v) [Field k]
   let F := SheafOfModules.overFunctor.{max (u + 1) v} R U
   have hz : IsZero ((sfResidueSplit T k a b rank).X q) := by
     dsimp [sfResidueSplit, sfSplitComplex]
-    rw [if_neg hq]
+    rw [ite_eq_right hq]
     exact isZero_zero _
   exact F.map_isZero hz
 
@@ -604,7 +603,7 @@ private def sfRestrictedTermIso (T : Scheme.{u}) (k : Type v) [Field k]
         SheafOfModules.unit ((sfSplitRings (sfResidueCoefficients T k)).over U) := by
   let F := SheafOfModules.overFunctor.{max (u + 1) v}
     (sfSplitRings (sfResidueCoefficients T k)) U
-  exact F.mapIso (eqToIso (by dsimp [sfResidueSplit, sfSplitComplex]; rw [if_pos hq])) ≪≫
+  exact F.mapIso (eqToIso (by dsimp [sfResidueSplit, sfSplitComplex]; rw [ite_eq_left hq])) ≪≫
     sfRestrictedFreeIso T k U (rank q)
 
 private theorem sfRestrictedKFlat (T : Scheme.{u}) (k : Type v) [Field k]
@@ -861,13 +860,13 @@ theorem sf_prescribed_residue_cell_cone_model
       exact hz.of_iso ((DerivedCategory.homologyFunctor _ q).mapIso (eTest F))
   · intro q hq
     let eX : (sfResidueSplit T k a (b - 1) rank).X q ≅ sfResidueFree T k (rank q) :=
-      eqToIso (by dsimp [sfResidueSplit, sfSplitComplex]; rw [if_pos (by omega)])
+      eqToIso (by dsimp [sfResidueSplit, sfSplitComplex]; rw [ite_eq_left (by omega)])
     exact ⟨eX.symm ≪≫ (sfSplitDerivedHomologyIso T k a (b - 1) rank q).symm ≪≫
       ((DerivedCategory.homologyFunctor _ q).mapIso (eC ≪≫ eW)).symm⟩
   · intro q hq
     have hz : IsZero ((sfResidueSplit T k a (b - 1) rank).X q) := by
       dsimp [sfResidueSplit, sfSplitComplex]
-      rw [if_neg (show ¬ (a ≤ q ∧ q ≤ b - 1) by omega)]
+      rw [ite_eq_right (show ¬ (a ≤ q ∧ q ≤ b - 1) by omega)]
       exact isZero_zero _
     exact hz.of_iso (((DerivedCategory.homologyFunctor _ q).mapIso (eC ≪≫ eW)) ≪≫
       sfSplitDerivedHomologyIso T k a (b - 1) rank q)

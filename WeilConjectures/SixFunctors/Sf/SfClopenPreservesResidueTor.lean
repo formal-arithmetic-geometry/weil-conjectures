@@ -321,8 +321,8 @@ private theorem clopenFinite_preservesTor
       (integralCoefficientSheaf l E U.toScheme 0) (d.finite 0)
   let nD : G.mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       B.mapDerivedCategory ⋙ H.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso G F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso n ≪≫ Functor.mapDerivedCategoryCompIso B H
+    Functor.mapDerivedCategoryCompIso G F ≪≫
+    Functor.mapDerivedCategoryNatIso n ≪≫ (Functor.mapDerivedCategoryCompIso B H).symm
   have ht := torAmplitude_cocontinuousEquivalence (R.over W) (S.over V) f c
     (hAdd := inferInstanceAs (F.Additive)) (hEquiv := inferInstanceAs (F.IsEquivalence))
     (G.mapDerivedCategory.obj X)

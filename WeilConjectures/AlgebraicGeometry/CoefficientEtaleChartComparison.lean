@@ -299,12 +299,12 @@ theorem coefficient_etale_chart_comparison
       dconst.obj (DerivedCategory.Q.obj M) :=
     (Functor.mapDerivedCategorySquareIso eres).app (dC.obj (DerivedCategory.Q.obj M)) ≪≫
       Rp.mapDerivedCategory.mapIso
-        (((Functor.mapDerivedCategoryCompIso C H).app (DerivedCategory.Q.obj M)).symm ≪≫
+        (((Functor.mapDerivedCategoryCompIso C H).app (DerivedCategory.Q.obj M)) ≪≫
           (Functor.mapDerivedCategoryNatIso (fixedConstantIso T B)).app
             (DerivedCategory.Q.obj M)) ≪≫
       ((Functor.mapDerivedCategoryCompIso
         (constantSheaf T (ModuleCat.{max v (u + 1)} B)) Rp).app
-          (DerivedCategory.Q.obj M)).symm ≪≫
+          (DerivedCategory.Q.obj M)) ≪≫
       (Functor.mapDerivedCategoryNatIso
         (T.overPullbackConstantSheafIso (ModuleCat.{max v (u + 1)} B) V)).app
           (DerivedCategory.Q.obj M)
@@ -321,7 +321,7 @@ theorem coefficient_etale_chart_comparison
         (ModuleCat.{max v (u + 1)} B)).mapDerivedCategoryFactors).app M).symm ≪≫
       ((Functor.mapDerivedCategoryCompIso
         (constantSheaf (J.over W) (ModuleCat.{max v (u + 1)} B)) L).app
-          (DerivedCategory.Q.obj M)).symm ≪≫
+          (DerivedCategory.Q.obj M)) ≪≫
       (Functor.mapDerivedCategoryNatIso econst).app (DerivedCategory.Q.obj M)
   exact ⟨(Functor.FullyFaithful.ofFullyFaithful dE).preimageIso (eleft ≪≫ eright.symm)⟩
 

@@ -140,8 +140,7 @@ theorem leftDerived_defined_pointwiseKan_bridge
           rw [hz i, StructuredArrow.w f]
         rw [hleg j a ha]
         dsimp [leg, a]
-        simp only [Functor.map_comp, Category.assoc, Category.id_comp]
-        rfl }
+        simp only [Functor.map_comp, Category.assoc, Category.id_comp] }
   have hden (s : W.Over ⊤ X) :
       π.app (StructuredArrow.mk (Localization.isoOfHom Q W s.hom s.prop).inv) =
         u.app s := by

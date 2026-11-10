@@ -229,8 +229,8 @@ noncomputable def frobeniusIso :
         (FieldWeilSheaf.frobeniusPullback k₀ Λ X).mapDerivedCategory ≅
       forget (X := X) :=
   Functor.isoWhiskerLeft (ObjectProperty.ι _)
-    ((Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
-        (FieldWeilSheaf.frobeniusPullback k₀ Λ X)).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
+        (FieldWeilSheaf.frobeniusPullback k₀ Λ X) ≪≫
       Functor.mapDerivedCategoryNatIso (IsoAlgebra.forgetCompIso _))
 
 end FieldWeilComplex

@@ -37,7 +37,7 @@ theorem scalarMap_pullback
     (a.naturality (homOfLE (le_top (a := U))).op)
   simp only [scalarMap, RingHom.comp_apply, Scheme.Hom.comp_appTop,
     CommRingCat.hom_comp]
-  convert hn using 1 <;> rfl
+  convert hn using 1; rfl
 
 /-- The pullback adjunction unit on sections, with the scalar actions restricted to k.
 Source: Stacks Project, Tags 0096 and 0BED. -/

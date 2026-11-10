@@ -50,7 +50,7 @@ private noncomputable def map_finiteSupport_fan
       · change m ≫ t.proj i = _
         have hmi := hm ⟨i, hi⟩
         change m ≫ t.proj i = c.proj ⟨i, hi⟩ at hmi
-        simpa only [Fan.mk_π_app, dif_pos hi] using hmi
+        simpa only [Fan.mk_π_app, dite_eq_left hi] using hmi
       · exact (hz i hi).eq_of_tgt _ _
   have hFt' : IsLimit (Fan.mk (F.obj t.pt) (fun i : s ↦ F.map (t.proj i))) :=
     (Fan.isLimitMapConeEquiv F _ t') (isLimitOfPreserves F ht')
@@ -117,7 +117,7 @@ private theorem finiteFreeHom_preservesHomology
     (hA : ∃ r : ℕ, Nonempty (A ≅ SheafOfModules.free (ULift.{u} (Fin r)))) :
     ((SheafOfModules.homFunctor R).obj (op A)).PreservesHomology := by
   let F := (SheafOfModules.homFunctor R).obj (op A)
-  apply ((Functor.exact_tfae F).out 0 2).1
+  apply ((Functor.exact_tfae F).out 1 3).1
   intro T hT
   obtain ⟨r, ⟨e⟩⟩ := hA
   obtain ⟨hz, h, _⟩ := SheafOfModules.finiteFreeInternalHomExact r A e T hT

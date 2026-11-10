@@ -191,11 +191,11 @@ theorem finiteCoefficient_derived_constant_coordinates
       AlgebraicGeometry.ProEtale.constantSheafCompUpperStarIso D W.hom
   let J := (finitePerfectAdicDerivedConstant X B).obj F
   refine ⟨?_⟩
-  exact (Functor.mapDerivedCategoryCompIso S (E ⋙ L)).app
+  exact (Functor.mapDerivedCategoryCompIso S (E ⋙ L)).symm.app
       ((completedAdicDerivedChange X ψ).obj J) ≪≫
     (E ⋙ L).mapDerivedCategory.mapIso ((derivedScalarCancellation X ψ).app J) ≪≫
-    (E ⋙ L).mapDerivedCategory.mapIso ((Functor.mapDerivedCategoryCompIso A C).app F) ≪≫
-    ((Functor.mapDerivedCategoryCompIso C (E ⋙ L)).app (A.mapDerivedCategory.obj F)).symm ≪≫
+    (E ⋙ L).mapDerivedCategory.mapIso ((Functor.mapDerivedCategoryCompIso A C).symm.app F) ≪≫
+    (Functor.mapDerivedCategoryCompIso C (E ⋙ L)).app (A.mapDerivedCategory.obj F) ≪≫
     (Functor.mapDerivedCategoryNatIso c).app (A.mapDerivedCategory.obj F)
 
 end AlgebraicGeometry.Scheme

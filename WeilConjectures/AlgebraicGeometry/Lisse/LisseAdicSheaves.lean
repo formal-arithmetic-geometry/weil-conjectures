@@ -162,24 +162,19 @@ private theorem tensorComposition_exists {R A : Type*} [CommRing R] [CommRing A]
   obtain ⟨c, ct⟩ := tensorComposition_candidate_exists (R := R) (A := A) C
   refine ⟨c, ct, ?_, ?_, ?_⟩
   · intro F G f
-    induction f using TensorProduct.induction_on with
-    | zero => exact map_zero _
+    induction f using TensorProduct.inductionOn with
     | tmul a f => rw [ct, one_mul, Category.id_comp]
     | add f g hf hg => rw [map_add, hf, hg]
   · intro F G f
-    induction f using TensorProduct.induction_on with
-    | zero => rw [map_zero, LinearMap.zero_apply]
+    induction f using TensorProduct.inductionOn with
     | tmul a f => rw [ct, mul_one, Category.comp_id]
     | add f g hf hg => rw [map_add, LinearMap.add_apply, hf, hg]
   · intro F G H K f g h
-    induction f using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply]
+    induction f using TensorProduct.inductionOn with
     | tmul a f =>
-      induction g using TensorProduct.induction_on with
-      | zero => simp only [map_zero, LinearMap.zero_apply]
+      induction g using TensorProduct.inductionOn with
       | tmul b g =>
-        induction h using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction h using TensorProduct.inductionOn with
         | tmul d h => rw [ct, ct, ct, ct, mul_assoc, Category.assoc]
         | add h k hh hk => simp only [map_add, hh, hk]
       | add g h hg hh =>
@@ -200,8 +195,7 @@ private theorem tensor_transition_kernel {R : Type*} [CommRing R]
     apply le_antisymm
     · apply sup_le
       · rintro _ ⟨z, rfl⟩
-        induction z using TensorProduct.induction_on with
-        | zero => simpa only [map_zero] using (I • (⊤ : Submodule R (TensorProduct R M N))).zero_mem
+        induction z using TensorProduct.inductionOn with
         | tmul x y =>
           change TensorProduct.tmul R x y.val ∈ I • ⊤
           have hy : y.val ∈ I • (⊤ : Submodule R N) := by
@@ -217,8 +211,7 @@ private theorem tensor_transition_kernel {R : Type*} [CommRing R]
           rw [map_add]
           exact Submodule.add_mem _ hx hy
       · rintro _ ⟨z, rfl⟩
-        induction z using TensorProduct.induction_on with
-        | zero => simpa only [map_zero] using (I • (⊤ : Submodule R (TensorProduct R M N))).zero_mem
+        induction z using TensorProduct.inductionOn with
         | tmul x y =>
           change TensorProduct.tmul R x.val y ∈ I • ⊤
           have hx : x.val ∈ I • (⊤ : Submodule R M) := by
@@ -236,8 +229,7 @@ private theorem tensor_transition_kernel {R : Type*} [CommRing R]
     · apply Submodule.smul_le.mpr
       intro a ha z hz
       clear hz
-      induction z using TensorProduct.induction_on with
-      | zero => rw [smul_zero]; exact Submodule.zero_mem _
+      induction z using TensorProduct.inductionOn with
       | tmul x y =>
         refine (le_sup_right : (LinearMap.rTensor N f.ker.subtype).range ≤ _) ?_
         refine ⟨TensorProduct.tmul R ⟨a • x, ?_⟩ y, ?_⟩
@@ -942,8 +934,7 @@ private theorem quotientTensor_kernel {R S M N : Type*} [CommRing R] [CommRing S
       have hleft : (LinearMap.lTensor (S ⧸ J) v.ker.subtype).range ≤
           (I • (⊤ : Submodule S ((S ⧸ J) ⊗[R] M))).restrictScalars R := by
         rintro _ ⟨x, rfl⟩
-        induction x using TensorProduct.induction_on with
-        | zero => rw [map_zero]; exact Submodule.zero_mem _
+        induction x using TensorProduct.inductionOn with
         | tmul x y =>
           change x ⊗ₜ[R] y.val ∈ I • (⊤ : Submodule S ((S ⧸ J) ⊗[R] M))
           have hy : y.val ∈ K • (⊤ : Submodule R M) := by rw [← hk]; exact y.property
@@ -962,8 +953,7 @@ private theorem quotientTensor_kernel {R S M N : Type*} [CommRing R] [CommRing S
       have hright : (LinearMap.rTensor M qR.ker.subtype).range ≤
           (I • (⊤ : Submodule S ((S ⧸ J) ⊗[R] M))).restrictScalars R := by
         rintro _ ⟨x, rfl⟩
-        induction x using TensorProduct.induction_on with
-        | zero => rw [map_zero]; exact Submodule.zero_mem _
+        induction x using TensorProduct.inductionOn with
         | tmul x y =>
           change x.val ⊗ₜ[R] y ∈ I • (⊤ : Submodule S ((S ⧸ J) ⊗[R] M))
           have hx : x.val ∈ I • (⊤ : Submodule S (S ⧸ J)) := by
@@ -986,8 +976,7 @@ private theorem quotientTensor_kernel {R S M N : Type*} [CommRing R] [CommRing S
       rw [map_smul]
       have hzero : ∀ w : (S ⧸ I) ⊗[R] N, a • w = 0 := by
         intro w
-        induction w using TensorProduct.induction_on with
-        | zero => exact smul_zero _
+        induction w using TensorProduct.inductionOn with
         | tmul x y =>
           rw [TensorProduct.smul_tmul']
           have hx : a • x = 0 := by
@@ -1658,8 +1647,7 @@ private theorem quotientScalarStalkIso_natural (f : R →+* S)
   intro z
   change vS (eJ z) = eI (TensorProduct.AlgebraTensorModule.map
     (Ideal.Quotient.factorₐ S hJI).toLinearMap vR.hom z)
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul a z => exact ht a z
   | add z w hz hw => simp only [map_add, hz, hw]
 
@@ -1981,12 +1969,10 @@ private theorem tensor_bilinear_map_naturality
     (hp : ∀ u v, k (c₀ u v) = d₀ (i u) (j v))
     (u : TensorProduct R A U) (v : TensorProduct R A V) :
     h (c u v) = d (f u) (g v) := by
-  induction u using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply]
+  induction u using TensorProduct.inductionOn with
   | add u v hu hv => simp only [map_add, LinearMap.add_apply, hu, hv]
   | tmul a u =>
-    induction v using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction v using TensorProduct.inductionOn with
     | add v w hv hw => simp only [map_add, hv, hw]
     | tmul b v => rw [hc, hh, hf, hg, hd, map_mul, hp]
 
@@ -3430,8 +3416,7 @@ theorem lisseCoherence_tensor_intertwining_map
     (x : TensorProduct R A M) :
     c (f x) (TensorProduct.tmul S 1 u) =
       d (TensorProduct.tmul S 1 w) (g x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, LinearMap.add_apply, hx, hy]
   | tmul a x =>
     rw [hf, hg, hc, hd, mul_one, one_mul]

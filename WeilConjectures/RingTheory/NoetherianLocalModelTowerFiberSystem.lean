@@ -197,8 +197,7 @@ theorem fiberNMap_tmul (i j : X.ι) (h : i ≤ j) (b : X.FiberT i) (n : X.N₀ i
 (blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-system)
 -/
 theorem fiberNMap_self (i : X.ι) (x : X.FiberN i) : X.fiberNMap i i le_rfl x = x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp [hx, hy]
   | tmul b n =>
     obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective b
@@ -209,8 +208,7 @@ theorem fiberNMap_self (i : X.ι) (x : X.FiberN i) : X.fiberNMap i i le_rfl x = 
 -/
 theorem fiberNMap_comp (i j k : X.ι) (h : i ≤ j) (h' : j ≤ k) (x : X.FiberN i) :
     X.fiberNMap j k h' (X.fiberNMap i j h x) = X.fiberNMap i k (h.trans h') x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp [hx, hy]
   | tmul b n =>
     obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective b
@@ -403,8 +401,7 @@ theorem fiber_square (i j : X.ι) (f : i ⟶ j) :
 -/
 theorem fiberNMap_smul (i j : X.ι) (h : i ≤ j) (b : X.FiberT i) (x : X.FiberN i) :
     X.fiberNMap i j h (b • x) = X.fiberTMap i j h b • X.fiberNMap i j h x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp [smul_add, hx, hy]
   | tmul c n =>
     simp only [TensorProduct.smul_tmul', fiberNMap_tmul, smul_eq_mul, map_mul]
@@ -495,8 +492,7 @@ theorem fiber_module_baseChange (i j : X.ι) (f : i ⟶ j) :
   change ULift.up (e₄ (e₃ (e₂ (b ⊗ₜ x.down)))) = _
   apply ULift.ext
   change e₄ (e₃ (e₂ (b ⊗ₜ x.down))) = b • X.fiberNMap i j (leOfHom f) x.down
-  induction x.down using TensorProduct.induction_on with
-  | zero => simp
+  induction x.down using TensorProduct.inductionOn with
   | add x y hx hy => simp [TensorProduct.tmul_add, smul_add, hx, hy]
   | tmul c n =>
     simp [e₂, e₃, e₄, he, Algebra.smul_def, TensorProduct.smul_tmul',

@@ -97,12 +97,12 @@ variable (f y) {A : Type u'} [Category.{u + 1} A] (G : Sheaf X.smallEtaleTopolog
 /-- The sections of `G` over `U ×_Y X`, as a functor on the opposite of the category of split
 neighbourhoods of `y`. -/
 def sectionsFunctor : (SplitNbhd f y)ᵒᵖ ⥤ A :=
-  (forget f y).op ⋙ (CategoryOfElements.π (pointSmallEtale y).fiber).op ⋙ f.Etale.op ⋙ G.obj
+  (forget f y).op ⋙ (Functor.Elements.π (pointSmallEtale y).fiber).op ⋙ f.Etale.op ⋙ G.obj
 
 /-- The sections of `G` over the `t`-th piece, as a functor on the opposite of the category of
 split neighbourhoods of `y`. -/
 def pieceSectionsFunctor (t : GeometricFiber f y) : (SplitNbhd f y)ᵒᵖ ⥤ A :=
-  (pieceFunctor t).op ⋙ (CategoryOfElements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj
+  (pieceFunctor t).op ⋙ (Functor.Elements.π (pointSmallEtale t.1).fiber).op ⋙ G.obj
 
 @[simp]
 lemma sectionsFunctor_obj (s : (SplitNbhd f y)ᵒᵖ) :
@@ -132,7 +132,7 @@ instance isIso_piLift_restrictToPiece : IsIso (Pi.lift (restrictToPiece f y G)) 
         Pi.lift fun t ↦ (restrictToPiece f y G t).app s := by
       apply Pi.hom_ext
       intro t
-      rw [Category.assoc, piObjIso_hom_comp_π, ← NatTrans.comp_app, Pi.lift_π, Pi.lift_π]
+      rw [Category.assoc, piObjIso_hom_comp_π, ← NatTrans.comp_app, Pi.lift_comp_π, Pi.lift_comp_π]
     rw [← Iso.eq_comp_inv] at h
     rw [h]
     have : IsIso (Pi.lift fun t ↦ (restrictToPiece f y G t).app s) :=

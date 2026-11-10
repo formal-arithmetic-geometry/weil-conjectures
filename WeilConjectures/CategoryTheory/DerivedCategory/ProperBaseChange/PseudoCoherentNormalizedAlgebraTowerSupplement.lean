@@ -305,7 +305,8 @@ theorem pseudoCoherent_normalizedAlgebraTower
       (Functor.mapDerivedCategoryCompIso
         (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-        (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.mk (J ^ (n + 2))))).inv.app (K n) ≫
+        (ModuleCat.restrictScalars.{max u v} (Ideal.Quotient.mk (J ^ (n + 2))))).symm.inv.app
+          (K n) ≫
       (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{max u v}
         (Ideal.Quotient.mk (J ^ (n + 2)))
         (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))
@@ -374,8 +375,8 @@ theorem pseudoCoherent_normalizedAlgebraTower
         (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso
       (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) ≪≫
-      Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))
-        (ModuleCat.restrictScalars (q (n + 1)))
+      (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars (φ n))
+        (ModuleCat.restrictScalars (q (n + 1)))).symm
   have hχ := fun n ↦ restrictScalarsComp_derived_factors (q (n + 1)) (φ n) (q n) (hq n)
   have htri : IsDerivedLimitTriangle
       (fun n ↦ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map (t n) ≫

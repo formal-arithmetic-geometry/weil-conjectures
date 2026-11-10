@@ -105,7 +105,7 @@ lemma globalSectionsRestriction_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z �
     globalSectionsRestriction (g ≫ f) K ≫
         (rightDerivedGlobalSections A Z).map
           ((Functor.mapDerivedCategoryNatIso (upperStarComp A g f) ≪≫
-            Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).hom.app K) =
+            (Functor.mapDerivedCategoryCompIso (upperStar A f) (upperStar A g)).symm).hom.app K) =
       globalSectionsRestriction f K ≫
         globalSectionsRestriction g (((f)^*[A]).mapDerivedCategory.obj K) := by
   simpa only [globalSectionsRestriction, Category.assoc] using derivedUnitLeray_comp f g K

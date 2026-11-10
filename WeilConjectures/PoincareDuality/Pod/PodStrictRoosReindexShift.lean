@@ -200,7 +200,7 @@ private theorem generic_restricted_shift
     Functor.mapHomologicalComplex_map_f]
   erw [NatTrans.comp_app, NatTrans.comp_app]
   dsimp only
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+  simp only [HomologicalComplex.comp_f,
     Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
     NatTrans.id_app, CochainComplex.shiftFunctor_map_f']
   dsimp only [Functor.comp_obj]

@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparisonQuotientRealizationDefs
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SmoothPurity.Pur.PurSequenceOrdinaryFactorization
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
@@ -51,7 +53,7 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
   SheafOfModules.monoidalCategory completedIntegralCoefficientSheafUnrestricted
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   coefficientFiniteDerivedExtension coefficientFiniteDerivedRestriction
   coefficientConstantTowerLimit coefficientConstantTowerEvaluation
   coefficientSequenceLimit
@@ -60,8 +62,6 @@ attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComple
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   integralOperationsGoodLocalization
 attribute [local implicit_reducible] DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomotopyCategory
 
 private theorem reductionEvaluation_eq (Y : Scheme.{u})
     (O : PurSequenceOrdinaryAdjoints l E Y) (n : ℕ) :
@@ -151,7 +151,7 @@ private theorem square_factors
   simp only [Category.assoc]
   rw [hG, Functor.mapDerivedCategoryNatIso_fac]
   rw [← hF]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [F₂.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
 
@@ -287,20 +287,10 @@ private theorem limitUnit_projection (Y : Scheme.{u})
   let e := eqToIso (coefficientSequenceRestriction_evaluation l E Y n)
   have hsq := square_factors U V F R e C
   have hπ := towerUnit_projection l E Y ((U.mapHomologicalComplex (.up ℤ)).obj C) n
-  have hη : (pullbackTensorConstantLimit l E Y).rightDerivedFunctorUnitQ
-      ((U.mapHomologicalComplex (.up ℤ)).obj C) =
-    (pullbackTensorConstantLimit l E Y).rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        ((U.mapHomologicalComplex (.up ℤ)).obj C)) := by
-    dsimp only [Functor.rightDerivedFunctorUnitQ]
-    change 𝟙 _ ≫ _ ≫ (pullbackTensorConstantLimit l E Y).rightDerivedFunctor.map
-      (𝟙 _) = _
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   change (pullbackTensorConstantLimit l E Y).rightDerivedFunctorUnitQ
     ((U.mapHomologicalComplex (.up ℤ)).obj C) ≫ _ = _ at hπ
   unfold pullbackTensorLimitUnit coefficientSequenceProjection
   dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
-  erw [← hη]
   simp only [Category.assoc]
   erw [(coefficientConstantTowerProjection l E Y n).naturality_assoc
     (U.mapDerivedCategoryFactors.inv.app C)]

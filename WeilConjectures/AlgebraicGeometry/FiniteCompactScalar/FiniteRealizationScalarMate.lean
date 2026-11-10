@@ -19,8 +19,7 @@ open CategoryTheory
 open scoped CategoryTheory.Functor
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
-attribute [local implicit_reducible] CategoryTheory.Equivalence.mk
-  CategoryTheory.Equivalence.mapDerivedCategory
+attribute [local implicit_reducible] CategoryTheory.Equivalence.mapDerivedCategory
   AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
 namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 

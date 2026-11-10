@@ -23,7 +23,6 @@ universe u u₁ v₁ u₂ v₂ u₃ v₃ w₁ w₂ w₃ t₁ t₂ t₃ t₄ t₅
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses.FiniteExactArrow
 
-attribute [local implicit_reducible] ShortComplex.map
 
 /-- Compatibility of exact derived arrows with the indicated functor operation.
 Source: exact functors on Ext and their canonical single/shift comparisons
@@ -352,7 +351,7 @@ theorem kummerComposite_comparison
   have he := congrArg (fun y ↦ y.hom) (mapped_composite_boundary F hs ht ψ a x)
   simp only [γ, Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp,
     ShiftedHom.comp_mk₀, ← mapSingleArrow_ext] at hc he
-  convert hc.trans he using 1 <;> first | rfl | (simp only [Ext.comp_hom]; rfl)
+  convert hc.trans he using 1; first | rfl | (simp only [Ext.comp_hom]; rfl)
 
 /-- A source normalization cancels the inverse comparison of a transported arrow.
 Source: exact single-arrow endpoint naturality and inverse cancellation

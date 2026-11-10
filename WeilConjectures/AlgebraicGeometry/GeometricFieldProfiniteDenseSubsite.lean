@@ -423,7 +423,7 @@ private theorem testTopologyReflect (K : Type u) [Field K]
   refine ⟨Fin (Fintype.card I), inferInstance, fun i ↦ S (e i),
     fun i ↦ r (e i), ?_, fun i ↦ hr (e i)⟩
   apply ((Profinite.effectiveEpiFamily_tfae (fun i ↦ S (e i))
-    (fun i ↦ r (e i))).out 0 2).mpr
+    (fun i ↦ r (e i))).out 1 3).mpr
   intro t
   obtain ⟨i, y, hy⟩ := hjoint (testSpaceHomeo K T t)
   refine ⟨e.symm i, ?_⟩
@@ -445,7 +445,7 @@ private theorem testCoverPreserving (K : Type u) [Field K] :
   obtain ⟨I, hI, S, f, hf, hmem⟩ :=
     (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).mp hR
   let := hI
-  have hs := ((Profinite.effectiveEpiFamily_tfae S f).out 0 2).mp hf
+  have hs := ((Profinite.effectiveEpiFamily_tfae S f).out 1 3).mp hf
   let S' : ULift.{u} I → Profinite.{u} := fun i ↦ S i.down
   let f' : ∀ i, S' i ⟶ T := fun i ↦ f i.down
   have hs' : ∀ t, ∃ i s, f' i s = t := fun t ↦ by

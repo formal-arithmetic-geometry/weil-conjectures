@@ -134,8 +134,8 @@ private theorem tensor_degree_p_presentation
   let I : Ideal (Polynomial M) := Ideal.span {Polynomial.X ^ p - Polynomial.C g}
   let eP := polynomial_tensor_equiv A M C
   have hI : (I.map (algebraMap (Polynomial M) (TensorProduct A (Polynomial M) C))).map
-      eP.toRingHom = Ideal.span {Polynomial.X ^ p -
-        Polynomial.C (algebraMap M (TensorProduct A M C) g)} := by
+      eP.toRingHom =
+        Ideal.span {Polynomial.X ^ p - Polynomial.C (algebraMap M (TensorProduct A M C) g)} := by
     simp only [I, Ideal.map_span, Set.image_singleton]
     rw [show eP.toRingHom ((algebraMap (Polynomial M) (TensorProduct A (Polynomial M) C))
       (Polynomial.X ^ p - Polynomial.C g)) = _ from

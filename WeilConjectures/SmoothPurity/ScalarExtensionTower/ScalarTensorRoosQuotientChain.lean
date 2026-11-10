@@ -48,7 +48,7 @@ attribute [local irreducible] HasDerivedCategory.standard integralOrdinaryScalar
   completedIntegralCommRingSheafUnrestricted integralOperationsRoos integralOperationsRoosMap
   scalarRoosMap integralOrdinaryTensorSection unrestrictedIntegralTensorSection comparisons
 attribute [local implicit_reducible] tensor integralOperationsTensorTowerFunctor
-  integralOperationsRoosFunctor Functor.mapHomologicalComplex NatIso.mapHomologicalComplex
+  integralOperationsRoosFunctor NatIso.mapHomologicalComplex
 
 set_option maxHeartbeats 800000 in
 -- Converting the strict quotient normalizations needs extra elaboration heartbeats.

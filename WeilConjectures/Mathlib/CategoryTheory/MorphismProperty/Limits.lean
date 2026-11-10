@@ -110,6 +110,7 @@ theorem left_prod_map_id' (g : B ⟶ B') (hg : P g.left) : P (prod.map g (𝟙 A
     P.cancel_right_of_respectsIso]
   exact P.left_prod_map_id g hg
 
+
 omit [HasPullbacks C] in
 /-- Isomorphic objects of `Over S` have structure morphisms with the same properties. -/
 lemma hom_of_iso (e : A ≅ B) (hB : P B.hom) : P A.hom := by

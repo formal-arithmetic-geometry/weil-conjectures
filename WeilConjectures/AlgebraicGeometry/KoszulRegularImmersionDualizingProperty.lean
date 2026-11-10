@@ -80,7 +80,7 @@ theorem koszulRegularImmersion_dualizing_property {Z Y : Scheme.{u}} (i : Z ⟶ 
     by_cases hn : 0 ≤ n
     · simpa only [Int.toNat_of_nonneg hn] using
         koszulRegularImmersion_dualizing_term i hregular r hr n.toNat
-    · simp only [Scheme.Modules.locallyRankedExteriorTerm, if_neg hn]
+    · simp only [Scheme.Modules.locallyRankedExteriorTerm, ite_eq_right hn]
       have hzero : IsZero
           (SheafOfModules.free (R := Z.ringCatSheaf) PEmpty.{u + 1}) := by
         apply (IsZero.iff_id_eq_zero _).mpr

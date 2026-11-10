@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PinnedPullbackCounitShifts
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-! # Shift compatibility of the pinned tensor counit on singles
@@ -114,8 +116,7 @@ def mappedCochainSingleIso {A B : Type*} [Category A] [Category B]
         Functor.mapHomologicalComplex_obj_X, HomologicalComplex.comp_f,
         Functor.mapHomologicalComplex_commShiftIso_inv_app_f,
         Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
-        CochainComplex.shiftFunctor_map_f', Category.id_comp]
-      all_goals erw [Category.id_comp])
+        CochainComplex.shiftFunctor_map_f', Category.id_comp])
 
 /-- Passing the mapped-single comparison to the homotopy category.
 (blueprint: lem-pc-pinned-single-tensor-shifts)
@@ -165,10 +166,11 @@ lemma mappedHomotopySingleIso_hom_app {A B : Type*} [Category A] [Category B]
     Functor.mapHomotopyCategoryFactors, mappedCochainSingleIso, precompPostcompIso,
     Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, comp_hom, isoMk_hom_hom,
     Functor.isoWhiskerLeft_hom, isoMk_inv_hom, postcompFunctor_map_hom,
-    NatTrans.comp_app, HomotopyCategory.quotient_obj_singleFunctors_obj,
+    NatTrans.comp_app,
     Functor.associator_hom_app, Functor.whiskerLeft_app, Quotient.lift.isLift_hom,
     Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
   all_goals erw [Category.id_comp, Category.comp_id]
+  all_goals exact Category.id_comp _
 
 end CategoryTheory.SingleFunctors
 
@@ -188,10 +190,11 @@ def pinnedSingleTensorCounit
     (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
         ((Scheme.Modules.tensorPullback g').obj G) :=
-  (pinnedPullbackCounit.{u, w} g').app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+  cast (by rfl) ((pinnedPullbackCounit.{u, w} g').app
+    ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+    DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
       ((HomologicalComplex.singleMapHomologicalComplex
-        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))
+        (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
 set_option maxHeartbeats 400000 in
 -- The nested family comparison must identify the shared sheaf-module category instances.
@@ -238,13 +241,30 @@ theorem exists_pinned_single_tensor_shifts
       DerivedCategory.Qh ≫
     (SingleFunctors.precompPostcompIso (HomotopyCategory.singleFunctors
       (SheafOfModules.{u} (moduleRings X'.toRingedSpace))) T DerivedCategory.Qh).hom
-  refine ⟨c, ?_⟩
+  let e := DerivedCategory.singleFunctorsPostcompQhIso
+    (SheafOfModules.{u} (moduleRings X'.toRingedSpace))
+  let d : ((HomotopyCategory.singleFunctors
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).postcomp
+        DerivedCategory.Qh).precomp T ⟶
+      (DerivedCategory.singleFunctors
+        (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).precomp T :=
+    { hom := fun n ↦ Functor.whiskerLeft T (e.inv.hom n)
+      comm := fun k i j h ↦ by
+        ext G
+        simpa [SingleFunctors.precomp] using congr_app (e.inv.comm k i j h) (T.obj G) }
+  refine ⟨SingleFunctors.postcompHom
+    (DerivedCategory.singleFunctorsPostcompQhIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).hom (derivedPullback g') ≫
+      c ≫ d, ?_⟩
   intro n G
-  change 𝟙 _ ≫ (pinnedPullbackCounit g').app ((F.functor n).obj G) ≫
+  change (derivedPullback g').map (𝟙 _ ≫ 𝟙 _) ≫
+    (𝟙 _ ≫ (pinnedPullbackCounit g').app ((F.functor n).obj G) ≫
       𝟙 _ ≫ DerivedCategory.Qh.map
-        (((SingleFunctors.mappedHomotopySingleIso T).hom.hom n).app G) ≫ 𝟙 _ = _
+        (((SingleFunctors.mappedHomotopySingleIso T).hom.hom n).app G) ≫ 𝟙 _) ≫
+      (𝟙 _ ≫ 𝟙 _) = _
   rw [SingleFunctors.mappedHomotopySingleIso_hom_app]
   simp only [Category.id_comp, Category.comp_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 end AlgebraicGeometry

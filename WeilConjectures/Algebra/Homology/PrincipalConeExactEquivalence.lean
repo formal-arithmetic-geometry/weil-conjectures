@@ -167,14 +167,14 @@ private theorem mapTowerCoconeComparison [HasCountableProducts A] [HasCountableP
     rw [Category.assoc, hp]
     rw [← G.map_comp_assoc]
     simp only [towerTransitionEndomorphism, Preadditive.sub_comp,
-      Category.id_comp, towerProductShift, Pi.lift_π, G.map_sub,
+      Category.id_comp, towerProductShift, Pi.lift_comp_π, G.map_sub,
       Preadditive.sub_comp, G.map_comp, Category.assoc,
       Preadditive.comp_sub, Category.comp_id, hp]
     rw [← Category.assoc p.hom, hp, Category.assoc, he]
   have hunit : G.map (Pi.lift u) ≫ p.hom = Pi.lift v := by
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, hp, ← G.map_comp_assoc, Pi.lift_π, Pi.lift_π]
+    rw [Category.assoc, hp, ← G.map_comp_assoc, Pi.lift_comp_π, Pi.lift_comp_π]
     exact hu n
   let c := coneSquareIso (G.map (towerTransitionEndomorphism f))
     (towerTransitionEndomorphism g) p p hsq

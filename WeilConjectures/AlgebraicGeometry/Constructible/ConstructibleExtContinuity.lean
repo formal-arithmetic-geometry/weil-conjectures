@@ -37,7 +37,9 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartGeneration
 import WeilConjectures.CategoryTheory.SixFunctors.ConstructibleHomContinuityDevissage
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.ConstructibleExtContinuityStratum
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.ConstructibleExtContinuityStratum
+import all WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
+import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
@@ -64,6 +66,19 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+attribute [local instance] localPieceCostalkModelHasZeroMorphisms
+
+local instance extContinuityHasColimit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ) : HasColimit N := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfShape I C := inferInstance
+  have (n : ℤ) : HasColimit (N ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
 /-- The additive functor `K ↦ Hom(C, Q(K)[q])`.
 Source: blueprint sk-lem-constructible-ext-continuity, displayed Hom groups
@@ -154,7 +169,7 @@ private theorem continuity_stratum_locus
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj R)]
-    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
+    (_hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
       R = Profinite.padicAlgClCondensedRing ℓ ∨ R = Profinite.padicIntegersCondensedRing ℓ E)
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
@@ -169,15 +184,34 @@ private theorem continuity_stratum_locus
   have : IsNoetherian X := ⟨⟩
   have : TopologicalSpace.NoetherianSpace Z := i.isClosedEmbedding.isInducing.noetherianSpace
   have : TopologicalSpace.NoetherianSpace S := j.isOpenEmbedding.isInducing.noetherianSpace
-  let V : X.Opens := ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-  have hij : Set.range i.base = (Set.range V.ι.base)ᶜ := by simp [V]
   have hgen : complexHomContinuityLocus _ K
       ((DerivedCategory.singleFunctor _ 0).obj
         ((CondensedRing.lowerStar (coefficientHeartRingObj R) i).obj
           ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj R) j).obj L))) := by
     intro q
-    have hstr := CondensedRing.constructibleExtContinuityStratum (coefficientHeartRingObj R)
-      i V.ι j hij (continuity_admissible ℓ E R hR) L hL K b hb q
+    obtain ⟨N, hN, d, v, hleg⟩ := condensed_local_piece_costalk_model X
+      (coefficientHeartRingObj R) i j L K ⟨b, hb⟩ q
+    let F := shiftFunctor _ q ⋙ preadditiveCoyoneda.obj
+      (op ((DerivedCategory.singleFunctor _ 0).obj
+        ((CondensedRing.lowerStar (coefficientHeartRingObj R) i).obj
+          ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj R) j).obj L))))
+    let G := condensedShiftedHom (coefficientHeartRingObj R) S
+      ((DerivedCategory.singleFunctor _ 0).obj L) q
+    have : IsIso (colimit.desc (N ⋙ G) (G.mapCocone (colimit.cocone N))) :=
+      condensed_finite_free_hom_continuity S (coefficientHeartRingObj R) L
+        (lisseRawCover (coefficientHeartRingObj R) L hL) N hN q
+    have heq : colimit.post K (DerivedCategory.Q ⋙ F) ≫ v.hom =
+        colimMap d.hom ≫ colimit.desc (N ⋙ G) (G.mapCocone (colimit.cocone N)) := by
+      apply colimit.hom_ext
+      intro t
+      dsimp only [G]
+      simp only [colimit.ι_post_assoc, ι_colimMap_assoc, colimit.ι_desc]
+      exact hleg t
+    have : IsIso (colimit.post K (DerivedCategory.Q ⋙ F) ≫ v.hom) := by
+      rw [heq]
+      infer_instance
+    have hstr : IsIso (colimit.post K (DerivedCategory.Q ⋙ F)) :=
+      IsIso.of_isIso_comp_right _ v.hom
     change Function.Bijective (colimit.post K
       (extContinuityTestFunctor ((DerivedCategory.singleFunctor _ 0).obj
         ((CondensedRing.lowerStar (coefficientHeartRingObj R) i).obj
@@ -346,10 +380,10 @@ private theorem constant_model_of_iso
   unfold IsConstantModelConstructible at hM ⊢
   split at hM
   · rename_i h
-    rw [if_pos h]
+    rw [ite_eq_left h]
     exact hstr e hM
   · rename_i h
-    rw [if_neg h]
+    rw [ite_eq_right h]
     exact fun U hU ↦ hstr ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 
 private theorem constant_model_of_isZero

@@ -51,8 +51,8 @@ private theorem sheaf_mate_app
     Functor.rightUnitor_inv_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.comp_map, Functor.leftUnitor_hom_app, id_comp,
     ObjectProperty.FullSubcategory.comp_hom, Adjunction.whiskerLeft_unit_app_app,
-    Functor.op_obj, Adjunction.op_unit, NatTrans.op_app, Adjunction.whiskerLeft_counit_app_app,
-    Adjunction.op_counit, Functor.sheafPushforwardContinuous, ObjectProperty.lift,
+    Functor.op_obj, Adjunction.op_unit_app, NatTrans.op_app, Adjunction.whiskerLeft_counit_app_app,
+    Adjunction.op_counit_app, Functor.sheafPushforwardContinuous, ObjectProperty.lift,
     ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.id_hom,
     NatTrans.id_app, ObjectProperty.homMk, Functor.whiskeringLeft, Functor.whiskerLeft,
     Functor.whiskerRight]

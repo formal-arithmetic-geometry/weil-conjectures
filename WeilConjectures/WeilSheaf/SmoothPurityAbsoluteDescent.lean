@@ -38,12 +38,16 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-local instance : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
-local instance : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instFactPrimeRingChar_smoothPurityAbsoluteDescent
+    : Fact (ringChar k₀).Prime := ⟨CharP.prime_ringChar k₀⟩
+local instance instLocallyOfFiniteType_smoothPurityAbsoluteDescent
+    : LocallyOfFiniteType (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)))
-local instance : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instQuasiCompactHomScheme_smoothPurityAbsoluteDescent
+    : QuasiCompact (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (QuasiCompact (X ↘ Spec (CommRingCat.of k₀)))
-local instance : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
+local instance instIsSeparatedHomScheme_smoothPurityAbsoluteDescent
+    : IsSeparated (Over.mk (X ↘ Spec (CommRingCat.of k₀))).hom :=
   inferInstanceAs (IsSeparated (X ↘ Spec (CommRingCat.of k₀)))
 
 /-- The exceptional constant Weil complex is descent of the root-defined Tate

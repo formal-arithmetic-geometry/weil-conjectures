@@ -36,7 +36,7 @@ lemma geometricFiberWeilRightDerivedLowerShriekIso_forget
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
     (rightDerivedLowerShriekGeometricFiberIso Λ c h).hom.app K =
       (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-        (Endofunctor.IsoAlgebra.forget _)).hom.app
+        (Endofunctor.IsoAlgebra.forget _)).inv.app
           ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ≫
       (Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.map
         ((geometricFiberWeilRightDerivedLowerShriekIso c h hi hg).inv.app K) ≫
@@ -44,14 +44,14 @@ lemma geometricFiberWeilRightDerivedLowerShriekIso_forget
         ((geometricFiberWeilLowerStar Λ s).mapDerivedCategory.obj K) ≫
       (rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h)).map
         ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-          (Endofunctor.IsoAlgebra.forget _)).inv.app K) := by
+          (Endofunctor.IsoAlgebra.forget _)).hom.app K) := by
   have he := Functor.traceCompDescentIso_forget
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ (c.g ≫ t))
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (geometricFiberWeilExtensionByZeroMapDerivedCategoryIso hi)
     (geometricFiberWeilRightDerivedLowerStarIso hg)
     (Functor.mapDerivedCategoryCompForgetIso (Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso
@@ -92,11 +92,11 @@ lemma geometricFiberWeilShriekTrace_forget :
         (geometricFiberWeilShriekTrace Λ c h hi hg ε) =
       (rightDerivedLowerShriekOfCompactification Λ (c.geometricFiber h)).map
         ((Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-          (Endofunctor.IsoAlgebra.forget _)).inv.app P) ≫
+          (Endofunctor.IsoAlgebra.forget _)).hom.app P) ≫
       (rightDerivedLowerShriekGeometricFiberIso Λ c h).inv.app P ≫
       (upperStar Λ t.geometricFiberProj).mapDerivedCategory.map ε ≫
       (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-        (Endofunctor.IsoAlgebra.forget _)).hom.app N := by
+        (Endofunctor.IsoAlgebra.forget _)).inv.app N := by
   exact Functor.descendedTrace_forget
     (rightDerivedLowerShriekOfCompactification Λ c)
     (geometricFiberWeilLowerStar Λ s).mapDerivedCategory
@@ -108,9 +108,9 @@ lemma geometricFiberWeilShriekTrace_forget :
     (upperStar Λ s.geometricFiberProj).mapDerivedCategory
     (upperStar Λ t.geometricFiberProj).mapDerivedCategory
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ s)
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (Functor.mapDerivedCategoryCompIso (geometricFiberWeilLowerStar Λ t)
-      (Endofunctor.IsoAlgebra.forget _)).symm
+      (Endofunctor.IsoAlgebra.forget _))
     (geometricFiberWeilRightDerivedLowerShriekIso c h hi hg)
     (weilRightDerivedLowerShriekCompForgetIso Λ c h)
     (rightDerivedLowerShriekGeometricFiberIso Λ c h)

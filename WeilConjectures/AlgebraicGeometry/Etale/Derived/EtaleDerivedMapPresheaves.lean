@@ -38,7 +38,7 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 
 private noncomputable def exactComp (e : H ≅ F ⋙ G) :
     H.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
-  Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G
+  Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm
 
 @[reassoc]
 private lemma exactComp_fac (e : H ≅ F ⋙ G)
@@ -51,7 +51,7 @@ private lemma exactComp_fac (e : H ≅ F ⋙ G)
   have hcomp := Functor.mapDerivedCategoryCompIso_fach F G P
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hcomp
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at hcomp
-  simp only [exactComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [exactComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hcomp, Functor.mapDerivedCategoryNatIso_fach]
 
 end ExactFunctors
@@ -225,7 +225,7 @@ noncomputable def derivedMapRestrictionIso {U V : X.Etale} (f : U ⟶ V)
         ((upperStar (ModuleCat.{u + 1} B) V.hom).mapDerivedCategory.obj K) :=
   (Functor.mapDerivedCategoryNatIso
     (upperStarComp (ModuleCat.{u + 1} B) f.left V.hom U.hom f.w.symm) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).app K
+      (Functor.mapDerivedCategoryCompIso _ _).symm).app K
 
 /-- Restrict a derived morphism along an arrow of the small etale site.
 Source: Stacks, Tag 09BE (blueprint: def-weil-pbc-etale-derived-map-presheaves). -/

@@ -89,7 +89,7 @@ noncomputable instance : CommRing (ResidueFieldCoeff.{u} ℓ E) :=
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The prime `ℓ` is zero in `𝔽_E`. -/
 lemma natCast_eq_zero_residueFieldCoeff : ((ℓ : ℕ) : ResidueFieldCoeff.{u} ℓ E) = 0 :=
-  ULift.ext _ _ (natCast_eq_zero_integersResidueField ℓ E)
+  ULift.ext (natCast_eq_zero_integersResidueField ℓ E)
 
 /-- The constants `𝔽_E ⟶ Γ(𝔽_{E,X})`: an element of the residue field `𝔽_E` is the constant
 function `X → 𝔽_E`, a global section of `𝔽_{E,X} = C(-, 𝔽_E)_X`

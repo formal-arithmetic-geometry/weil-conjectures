@@ -202,7 +202,7 @@ noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroCompIso :
       (ProEtaleWeilSheaf.extensionByZero k₀ l a).mapDerivedCategory ⋙
         (ProEtaleWeilSheaf.extensionByZero k₀ l b).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.extensionByZeroCompIso k₀ l a b) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end Comp
 

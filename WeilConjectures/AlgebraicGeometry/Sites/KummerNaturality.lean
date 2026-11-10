@@ -46,7 +46,7 @@ lemma kummerδ₀_eq_δSucc (X : Scheme.{u}) (n : ℕ) (hn : IsUnit (n : Γ(X, �
   refine Eq.trans ?_ (Sheaf.H.δ_congr terminalIsTerminal
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)
     (X.kummerSequence_shortExact n hn) (gmSection a))
-  exact (congrArg (Sheaf.H.δ (X.kummerSequence_shortExact n hn)
+  exact (congrArg (Sheaf.H.δSections (X.kummerSequence_shortExact n hn)
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X))
       (gmSheaf_map_gmSection X a)).symm
 

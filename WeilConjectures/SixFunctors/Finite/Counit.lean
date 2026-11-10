@@ -45,7 +45,7 @@ lemma Etale.epi_sheafFiber_map_counit_app_of_isFinite {Ω : Type u} [Field Ω] [
       ((Etale.upperStarLowerStarAdjunction A f).counit.app G)) := by
   have hr : Etale.stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G =
       (Etale.stalkIsoPi A f (s ≫ f) G).hom ≫ Pi.π _ ⟨s, rfl⟩ := by
-    rw [Etale.stalkIsoPi_hom, Pi.lift_π]
+    rw [Etale.stalkIsoPi_hom, Pi.lift_comp_π]
   have : Epi (Etale.stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G) := by
     rw [hr]
     infer_instance

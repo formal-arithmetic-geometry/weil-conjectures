@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 attribute [local irreducible] moduleAlpha moduleBeta moduleSquareG moduleGComp moduleJComp
   Functor.leftAdjoint
-  Functor.mapDerivedCategory Functor.mapDerivedCategoryCompIso Localization.liftNatTrans
+  Functor.mapDerivedCategory Localization.liftNatTrans
 
 attribute [local instance] moduleJAdj_unit_isIso moduleOpenToP_isIso
 
@@ -128,7 +128,7 @@ private theorem cell_pair
   simp only [ExactDerivedPasting.Word.cell, ExactDerivedPasting.Word.comparison,
     ExactDerivedPasting.Word.ordinary, ExactDerivedPasting.Word.derived,
     localizedArrow, Functor.isoWhiskerLeft_refl, Functor.isoWhiskerRight_refl,
-    Iso.trans_refl]
+    Iso.trans_refl, Iso.symm_hom, Iso.symm_inv]
 
 -- Localize the entire ordinary equality as a finite pasting of exact functors.
 private theorem localize_cube
@@ -368,9 +368,9 @@ def alphaPullbackBeta {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
     (hsq : IsPullback a j' j g) : J R φ j ⋙ G R φ g ≅ G R φ a ⋙ J R φ j' :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleBeta R φ a j' j g h hsq) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Exact localization of the specified inverse-image square compositor.
 Source: Stacks, Tags 07A7 and 0F7F (blueprint: lem-sf-semilinear-alpha-pullback).
@@ -379,9 +379,9 @@ ordinary direct-image comparison, with its prescribed adjunction units. -/
 def alphaPullbackSquareG {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     (h : k ≫ p = r ≫ i) : G R φ i ⋙ G R φ r ≅ G R φ p ⋙ G R φ k :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleSquareG R φ k r p i h) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private theorem localizedArrow_iso_hom
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -395,8 +395,9 @@ private theorem localizedArrow_iso_hom
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : F ⋙ G ≅ H ⋙ K) :
     localizedArrow F G H K e.hom =
-      ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso H K).hom := by
+      (Functor.mapDerivedCategoryCompIso F G ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫
+        (Functor.mapDerivedCategoryCompIso H K).symm).hom := by
   simp only [localizedArrow, Iso.trans_hom, Iso.symm_hom,
     Functor.mapDerivedCategoryNatIso, Localization.liftNatIso_hom,
     NatIso.mapHomologicalComplex, Functor.isoWhiskerRight_hom]
@@ -413,8 +414,9 @@ private theorem localizedArrow_iso_inv
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : H ⋙ K ≅ F ⋙ G) :
     localizedArrow F G H K e.inv =
-      ((Functor.mapDerivedCategoryCompIso H K).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).inv := by
+      (Functor.mapDerivedCategoryCompIso H K ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).inv := by
   simp only [localizedArrow, Iso.trans_inv, Iso.symm_inv,
     Functor.mapDerivedCategoryNatIso, Localization.liftNatIso_inv,
     NatIso.mapHomologicalComplex, Functor.isoWhiskerRight_inv, Category.assoc]

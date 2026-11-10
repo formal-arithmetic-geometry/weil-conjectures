@@ -441,7 +441,7 @@ private lemma inclusion_shift (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : �
   have hi (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) (n : ℕ) :
       (shiftInclusion I).f q ≫ π I q n =
         (limit.π I.asFunctor (op n)).f q :=
-    congrArg (fun f ↦ f.f q) (Pi.lift_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
+    congrArg (fun f ↦ f.f q) (Pi.lift_comp_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
   simp only [← Category.assoc, hi]
   have h := limitShift_π I m q n
   erw [Category.id_comp] at h

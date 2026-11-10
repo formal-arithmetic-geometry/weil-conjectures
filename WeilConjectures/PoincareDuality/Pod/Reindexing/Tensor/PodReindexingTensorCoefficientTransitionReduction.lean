@@ -61,12 +61,12 @@ private theorem derivedSquare_factors
       (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj P) ≫
         G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app P) ≫
         G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj P) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F₁ F₂).inv.app
     (DerivedCategory.Q.obj P))).1
   erw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc,
     ← Functor.mapDerivedCategoryNatIso_fac e P]
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc]
+    NatTrans.comp_app, Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
 
 private theorem goodRepresentative_exists (W : AlgebraicGeometry.Scheme.{u})

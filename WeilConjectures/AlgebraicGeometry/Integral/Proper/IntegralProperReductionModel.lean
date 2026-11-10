@@ -95,12 +95,12 @@ private theorem finiteConstantModel_etale_origin
         (ULift.{u + 1} A) (hc q))
   let d : F.mapDerivedCategory ⋙ U.mapDerivedCategory ≅
       (Mod.forget (condensedRingObj (FiniteDiscreteOrdinary.coefficient A) X)).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso F U).symm ≪≫
+    Functor.mapDerivedCategoryCompIso F U ≪≫
       Functor.mapDerivedCategoryNatIso (encodingForgetIso A X e)
   let c : W.mapDerivedCategory ≅ C.mapDerivedCategory ⋙ U.mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso
       (sheafComposeForget₂CompComparisonUpperStarIso (ULift.{u + 1} A) X) ≪≫
-        Functor.mapDerivedCategoryCompIso C U
+        (Functor.mapDerivedCategoryCompIso C U).symm
   exact ⟨L, hL.1.1, ⟨(d.app M).symm ≪≫ U.mapDerivedCategory.mapIso eL.symm ≪≫
     (c.app L).symm⟩⟩
 
@@ -140,9 +140,9 @@ private theorem realization_directImage
       DerivedCategory.Plus.ι.mapIso (c.app (SX.mapDerivedCategoryPlus.obj LP)) ≪≫
       GP.rightDerivedFunctorPlusCompatibility.app
         (NX.mapDerivedCategoryPlus.obj (SX.mapDerivedCategoryPlus.obj LP))
-  exact ⟨(Functor.mapDerivedCategoryCompIso SY NY).app
+  exact ⟨(Functor.mapDerivedCategoryCompIso SY NY).symm.app
       (GM.rightDerivedFunctor.obj L) ≪≫ NY.mapDerivedCategory.mapIso e ≪≫ f ≪≫
-        GP.rightDerivedFunctor.mapIso ((Functor.mapDerivedCategoryCompIso SX NX).app L).symm⟩
+        GP.rightDerivedFunctor.mapIso ((Functor.mapDerivedCategoryCompIso SX NX).app L)⟩
 
 /-- The finite-reduction classical models over a Noetherian source; no base field is used.
 Source: blueprint lem-sfb-integral-proper-reduction-model, with the base field used only to
@@ -177,9 +177,9 @@ theorem integralProperReductionModel_of_isNoetherian
   let d : (Mod.forget (AdicCompletion.ring l E X)).mapDerivedCategory.obj
       (AdicCompletion.integralLevel l E X K n) ≅
       (Mod.forget (AdicCompletion.finiteRing l E X n)).mapDerivedCategory.obj Q :=
-    ((Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (Mod.comap (AdicCompletion.quotient l E X n))
-      (Mod.forget (AdicCompletion.ring l E X))).app Q).symm
+      (Mod.forget (AdicCompletion.ring l E X))).app Q
   let e := d ≪≫ eL
   refine ⟨L, ⟨e⟩, ?_⟩
   obtain ⟨r⟩ := integralReduction_underlying_directImage l E p K hK.1 n

@@ -142,10 +142,10 @@ private theorem derived_left_unit
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, hL, Functor.comp_obj,
     Functor.id_obj, Category.comp_id,
-    Functor.mapDerivedCategoryCompNatIso, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.mapDerivedCategoryCompNatIso, Functor.isoWhiskerRight_hom,
     Functor.leftUnitor_hom_app, Functor.whiskerRight_app, CategoryTheory.Functor.map_comp]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso I F).hom.app K),
-    Iso.hom_inv_id_app_assoc]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso I F).inv.app K),
+    Iso.inv_hom_id_app_assoc]
   have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e F) K
   have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp F) K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hn hu
@@ -173,10 +173,10 @@ private theorem derived_right_unit
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, hL, Functor.comp_obj,
     Functor.id_obj, Category.comp_id,
-    Functor.mapDerivedCategoryCompNatIso, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.mapDerivedCategoryCompNatIso, Functor.isoWhiskerLeft_hom,
     Functor.rightUnitor_hom_app, Functor.whiskerLeft_app]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F I).hom.app K),
-    Iso.hom_inv_id_app_assoc]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F I).inv.app K),
+    Iso.inv_hom_id_app_assoc]
   have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
   have hu := congr_app (Functor.mapDerivedCategoryCompIso_comp_id F) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hn hu
@@ -227,23 +227,10 @@ private theorem identity_factors {C : Type*} [Category C] [Abelian C]
     [HasDerivedCategory C] (K : CochainComplex C ℤ) :
     (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj K) =
       (𝟭 C).mapDerivedCategoryFactors.hom.app K := by
-  have hf := congr_app (congrArg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh C))
-    ((HomotopyCategory.quotient C (.up ℤ)).obj K)
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
-    Functor.mapDerivedCategoryFactorsh_hom_app,
-    Functor.mapHomotopyCategoryIdIso_hom_app] at hf
-  have h₁ : ((𝟭 C).mapHomotopyCategoryFactors (.up ℤ)).inv.app K = 𝟙 _ := rfl
-  have h₂ : (Functor.mapHomologicalComplexIdIso C (.up ℤ)).hom.app K = 𝟙 _ := rfl
-  rw [h₁, h₂] at hf
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-    Category.comp_id, Category.comp_id] at hf
-  have he : (DerivedCategory.quotientCompQhIso C).inv.app
-      (((𝟭 C).mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-  rw [he] at hf
-  erw [Category.id_comp, Category.comp_id, Category.comp_id] at hf
-  exact hf
+  rw [Functor.mapDerivedCategoryIdIso_hom_app]
+  have h : (Functor.mapHomologicalComplexIdIso C (.up ℤ)).hom.app K = 𝟙 _ := rfl
+  rw [h]
+  erw [DerivedCategory.Q.map_id, Category.comp_id]
 
 namespace LocallyClosedExtensionData
 

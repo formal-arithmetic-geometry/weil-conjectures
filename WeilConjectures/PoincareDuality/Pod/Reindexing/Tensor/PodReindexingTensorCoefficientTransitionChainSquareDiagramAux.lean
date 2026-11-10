@@ -52,13 +52,13 @@ attribute [local irreducible] integralCompletedTensor integralOrdinaryScalar
   completedIntegralCommRingSheafUnrestricted coefficientTotalTensor SheafOfModules.monoidalCategory
 attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
-  integralOperationsRoosFunctor integralOperationsTensorOnGood Functor.mapHomologicalComplex
+  integralOperationsRoosFunctor integralOperationsTensorOnGood
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   integralOperationsCommHasDerivedCategory
   podTensorScalarGoodFunctor podTensorScalarGoodComparison podTensorReindexGoodComparison
-    podTensorGoodConstructibleLocalization
+  podTensorGoodConstructibleLocalization
   podTensorGoodConstructible podTensorMixedTensorIso podTensorGoodCoefficientTransition
-    podTensorTensorReindexDerivedChain
+  podTensorTensorReindexDerivedChain
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
 attribute [local irreducible] integralOrdinaryTensorSection
@@ -205,8 +205,8 @@ private theorem chainGeneric
           DerivedCategory.Q.map p) ≫
       G.mapDerivedCategoryFactors.hom.app (integralOperationsRoos C₁) ≫
         DerivedCategory.Q.map q ≫ DerivedCategory.Q.map w =
-    (((F.mapDerivedCategoryCompIso G).symm ≪≫ mapDerivedCategoryNatIso s ≪≫
-        H.mapDerivedCategoryCompIso I).hom.app
+    ((F.mapDerivedCategoryCompIso G ≪≫ mapDerivedCategoryNatIso s ≪≫
+        (H.mapDerivedCategoryCompIso I).symm).hom.app
           (DerivedCategory.Q.obj (integralOperationsRoos C₀))) ≫
       I.mapDerivedCategory.map
         (H.mapDerivedCategoryFactors.hom.app (integralOperationsRoos C₀) ≫
@@ -251,10 +251,10 @@ theorem podTensorMixedChainSquareCore
           ((S.complex l E g L ι D D').hom.app A.obj)
           ((S.complex l E g L ι D D').hom.app B.obj))) =
     (((isoReductionIntegralInverse l E g).mapDerivedCategoryCompIso
-          (integralOrdinaryScalar l E L ι X)).symm ≪≫
+          (integralOrdinaryScalar l E L ι X)) ≪≫
         mapDerivedCategoryNatIso S.ordinary ≪≫
-        (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryCompIso
-          (isoReductionIntegralInverse l L g)).hom.app
+        ((integralOrdinaryScalar l E L ι Y).mapDerivedCategoryCompIso
+          (isoReductionIntegralInverse l L g)).symm).hom.app
           (DerivedCategory.Q.obj
             ((integralOperationsTensorComplexFunctor l E Y).obj (A.obj, B.obj))) ≫
       (isoReductionIntegralInverse l L g).mapDerivedCategory.map

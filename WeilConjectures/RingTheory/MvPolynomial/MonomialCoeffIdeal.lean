@@ -73,7 +73,7 @@ theorem mem_span_C_mul_X_iff (f : MvPolynomial (Fin r) R) :
       rintro _ ⟨j, ⟨hj, hE⟩, rfl⟩
       simp only [SetLike.mem_coe, Submodule.mem_comap, Submodule.restrictScalars_mem]
       have : monomial E (g j) = monomial (E - Finsupp.single j 1) 1 * (C (g j) * X j) := by
-        rw [X, C_mul_monomial, monomial_mul, mul_one, one_mul, tsub_add_cancel_of_le]
+        rw [X, C_mul_monomial, monomial_mul_monomial, mul_one, one_mul, tsub_add_cancel_of_le]
         exact Finsupp.single_le_iff.mpr hE
       rw [this]
       exact Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨⟨j, hj⟩, rfl⟩)
@@ -107,7 +107,7 @@ theorem exists_linearMap_dfinsupp_quotient :
       rw [hφ, coeff_monomial, DFinsupp.single_apply]
       by_cases h : E = F
       · subst h; simp
-      · rw [if_neg h, dif_neg h, map_zero]
+      · rw [ite_eq_right h, dite_eq_right h, map_zero]
   · ext f
     simp only [LinearMap.mem_ker, Submodule.restrictScalars_mem, mem_span_C_mul_X_iff]
     rw [DFunLike.ext_iff]

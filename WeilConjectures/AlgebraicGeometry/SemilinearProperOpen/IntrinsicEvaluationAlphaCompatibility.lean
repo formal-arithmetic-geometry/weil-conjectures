@@ -55,7 +55,7 @@ open GenericComposition
 section ExactEvaluation
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 variable {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
   [Category A₀] [Category A₁] [Category A₂]
   [Category B₀] [Category B₁] [Category B₂]
@@ -84,7 +84,7 @@ end ExactEvaluation
 section ConstantEvaluation
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
+
 variable {A B D F : Type*} [Category A] [Category B] [Category D] [Category F]
   [Abelian A] [Abelian B] [Abelian D] [Abelian F]
   [HasDerivedCategory A] [HasDerivedCategory B]
@@ -108,7 +108,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf alpha gamma
 set_option synthInstance.maxSize 4096
 attribute [local irreducible] Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors SemilinearSections.systemRing
   coefficientMap VaryingRing.ringMap
   Functor.rightDerivedFunctorIsoMapDerivedCategory

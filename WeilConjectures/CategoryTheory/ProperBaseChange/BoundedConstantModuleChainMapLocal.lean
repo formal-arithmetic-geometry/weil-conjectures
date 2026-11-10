@@ -148,7 +148,7 @@ theorem exists_bounded_constant_module_chain_map_local
     have heq (q : ℤ) : (e (F.X q)).hom ≫ p.map (a.f q) =
         c.map (d q) ≫ (e (G.X q)).hom := by
       by_cases hq : q ∈ Finset.Icc lo hi
-      · simpa only [d, dif_pos hq] using hb ⟨q, hq⟩
+      · simpa only [d, dite_eq_left hq] using hb ⟨q, hq⟩
       · have hz : IsZero (F.X q) := hzero q (by
           simpa only [Finset.mem_Icc, not_and_or, not_le] using hq)
         exact (c.map_isZero hz).eq_of_src _ _

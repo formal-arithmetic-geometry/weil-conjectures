@@ -90,6 +90,8 @@ theorem etaleModuleSheaves_grothendieckAbelian (T : Scheme.{u})
     IsGrothendieckAbelian.of_equivalence
       (etaleConstantModuleFunctor T (ULift.{u + 1, u} Λ)).asEquivalence
   have := hG
+  have : HasColimitsOfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} R) :=
+    IsGrothendieckAbelian.hasColimits _
   refine ⟨hG, ?_, inferInstance⟩
   let U : T.AffineEtale → T.Etale := (AffineEtale.Spec T).obj
   refine ⟨T.AffineEtale, U, ?_, ?_, ?_⟩

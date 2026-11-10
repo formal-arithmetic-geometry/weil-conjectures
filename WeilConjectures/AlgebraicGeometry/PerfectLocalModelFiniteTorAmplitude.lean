@@ -92,7 +92,7 @@ theorem finiteTorAmplitude_of_proetale_cover
     rw [heq]
     refine ⟨min a b, max a b, min_le_max, ?_⟩
     apply (DerivedCategory.torAmplitudeIn _ (min a b) (max a b)).prop_of_iso
-      ((c ≪≫ d).app Q).symm
+      ((c ≪≫ d.symm).app Q).symm
     exact hta.mono (min_le_left _ _) (le_max_right _ _)
   choose A B hAB hT using hlocal
   by_cases hne : Nonempty 𝒱.I₀

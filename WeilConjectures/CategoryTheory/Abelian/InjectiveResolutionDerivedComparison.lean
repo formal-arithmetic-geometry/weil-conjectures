@@ -40,7 +40,6 @@ noncomputable def injectiveResolutionDerivedComparison
         (((v.mapHomologicalComplex _).obj I.cocomplex).extend
           ComplexShape.embeddingUpNat) :=
   DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlusObjSingleFunctorIsoQ X).hom ≫
-    (DerivedCategory.quotientCompQhIso B).hom.app _ ≫
     DerivedCategory.Q.map
       ((injectiveResolution X).cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
     DerivedCategory.Q.map (HomologicalComplex.extendMap
@@ -82,11 +81,6 @@ theorem injectiveResolutionDerivedComparison_homology
     InjectiveResolution.isoRightDerivedObjCochainComplex, Iso.trans_hom,
     Iso.symm_hom, Iso.trans_inv, Functor.mapIso_hom, Functor.mapIso_inv,
     Iso.symm_inv, Category.assoc]
-  dsimp only [Iso.app, HomotopyCategory.Plus.quotient, ObjectProperty.ι_obj,
-    ObjectProperty.lift, Functor.comp_obj]
-  erw [DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj
-    B (v.rightDerivedPlusComplex X).obj (n : ℤ)]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   have h := InjectiveResolution.isoRightDerivedObj_hom_naturality (𝟙 X)
     (injectiveResolution X) I (InjectiveResolution.desc (𝟙 X) I (injectiveResolution X))
     (InjectiveResolution.desc_commutes_zero _ _ _) v n

@@ -32,6 +32,14 @@ private abbrev BMod (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) : Type (u + 1) :=
   SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
     (forget₂ CommRingCat RingCat)).obj B.right)
 
+private noncomputable local instance sheafAlgebraHomRestrictedTargetModule
+    {Y : Scheme.{u}} {B : Y.CommAlgebraSheaf} (M : BMod Y B)
+    {U V : (Opens Y)ᵒᵖ} (f : U ⟶ V) :
+    Module (B.right.obj.obj V)
+      ((ModuleCat.restrictScalars (((sheafCompose (Opens.grothendieckTopology Y)
+        (forget₂ CommRingCat RingCat)).obj B.right).obj.map f).hom).obj (M.val.obj V)) :=
+  (M.val.obj V).isModule
+
 /-- Scalar restriction along the structure map of B. -/
 private noncomputable abbrev res (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :
     BMod Y B ⥤ OMod Y :=
@@ -70,6 +78,7 @@ private noncomputable def currySection
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro b
+    change B.right.obj.obj (Opposite.op W.unop.left) at b
     change φ.val.app (Opposite.op V.unop.left)
       (B.right.obj.map f.unop.left.op b • M.val.map V.unop.hom.op m) =
       F.val.map f.unop.left.op
@@ -118,7 +127,8 @@ private noncomputable def curry
                 M.val.map W.unop.hom.op m)
             rw [M.val.map_smul, mul_smul]
             congr 1
-            exact smul_comm c' (B.right.obj.map W.unop.hom.op b) _ }
+            exact smul_comm c' (B.right.obj.map W.unop.hom.op b)
+              (show M.val.obj (Opposite.op W.unop.left) from M.val.map W.unop.hom.op m) }
       naturality := by
         intro U V f
         apply ModuleCat.hom_ext
@@ -129,8 +139,10 @@ private noncomputable def curry
         apply ModuleCat.hom_ext
         apply LinearMap.ext
         intro b
+        change B.right.obj.obj (Opposite.op W.unop.left) at b
         change φ.val.app _ (b • M.val.map W.unop.hom.op (M.val.map f m)) =
-          φ.val.app _ (b • M.val.map ((Over.map f.unop).obj W.unop).hom.op m)
+          φ.val.app _ (b • (show M.val.obj (Opposite.op W.unop.left) from
+            M.val.map ((Over.map f.unop).obj W.unop).hom.op m))
         congr 2
         rw [← M.val.map_comp_apply]
         exact M.val.congr_map_apply (Subsingleton.elim _ _) m }

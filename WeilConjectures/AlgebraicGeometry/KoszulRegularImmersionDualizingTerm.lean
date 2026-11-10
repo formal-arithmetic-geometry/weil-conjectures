@@ -81,7 +81,7 @@ theorem koszulRegularImmersion_dualizing_term {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     rw [Scheme.Opens.range_ι]
     exact r.isLocallyConstant.isClosed_fiber n
   simpa only [Scheme.Modules.locallyRankedExteriorTerm, Int.natCast_nonneg,
-    if_true, Int.toNat_natCast] using
+    ite_true, Int.toNat_natCast] using
     Scheme.Modules.isQuasicoherent_pushforward_of_isClosedImmersion U.ι
       (Scheme.Modules.exteriorPower N n)
 

@@ -39,7 +39,8 @@ private theorem restrictionComp_factors
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app V) := by
   dsimp only
   unfold DerivedCategory.adicRestrictionComp DerivedCategory.adicLevelRestriction
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+    DerivedCategory.adicStepRestriction
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   have hc := Functor.mapDerivedCategoryCompIso_fac
     (ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc I (n + 1)))
     (ModuleCat.restrictScalars (Ideal.Quotient.mk (I ^ (n + 1 + 1)))) V
@@ -119,8 +120,7 @@ private theorem ordinaryCoefficientMap_square
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
   | tmul a x =>
     change TensorProduct.comm A _ _ ((ordinaryCoefficientMap I n).app (P.X j)

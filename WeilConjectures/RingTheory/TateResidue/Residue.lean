@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.TateResidue.TateIdeals
 public import WeilConjectures.RingTheory.Kaehler.Trace
+public import Mathlib.Tactic.NoncommRing
 
 /-!
 # Tate's abstract residue
@@ -338,7 +339,7 @@ noncomputable def res (A : Submodule k V) : Ω[K⁄k] →ₗ[k] k :=
 
 lemma res_smul_D_eq_resPair (hA : Admissible K A) (f g : K) :
     res K A (f • D k K g) = resPair K A f g := by
-  rw [res, dif_pos hA]
+  rw [res, dite_eq_left hA]
   change (resDerivation hA).liftKaehlerDifferential (f • D k K g) 1 = _
   rw [LinearMap.map_smul, Algebra.precompModule_smul_apply, mul_one,
     Derivation.liftKaehlerDifferential_comp_D, resDerivation_apply]
@@ -346,7 +347,7 @@ lemma res_smul_D_eq_resPair (hA : Admissible K A) (f g : K) :
 end Derivation
 
 lemma res_of_not_admissible (hA : ¬ Admissible K A) : res K A = 0 := by
-  rw [res, dif_neg hA]
+  rw [res, dite_eq_right hA]
 
 /-- **Tate's residue, characterisation**: `res (f • D g) = Tr_V [φ, ψ]` for any lifts `φ, ψ` of
 `f, g` (e.g. `φ = π ∘ f`, `ψ = π ∘ g` for a projection `π` of `V` onto `A`). -/

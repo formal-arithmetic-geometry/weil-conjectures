@@ -103,7 +103,7 @@ lemma Etale.derivedBaseChangeMapPlus_paste_horiz (sq₁ : CommSq g' f' f g)
     (((g')^*[A]).mapHomotopyCategoryPlus.obj K)
   -- naturality of the composition isomorphism along the unit of `Rf_*`
   have hnatC := (Etale.upperStarCompDerivedPlus A h g).hom.naturality
-    ((f)_*[A].rightDerivedFunctorPlusUnit.app K)
+    ((f)_*[A].rightDerivedFunctorPlusUnith.app K)
   simp only [Functor.comp_obj, Functor.comp_map] at hnatC
   -- naturality of the derived base change map of the right square along `factorsh`
   have hnat₂ : ((h)^*[A]).mapDerivedCategoryPlus.map ((f')_*[A].rightDerivedFunctorPlus.map
@@ -158,12 +158,13 @@ lemma Etale.derivedBaseChangeMapPlus_paste_horiz (sq₁ : CommSq g' f' f g)
     rfl
   have hη : DerivedCategory.Plus.Qh.map (((f'')_*[A]).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarComp A g'' g').hom).app K)) ≫
-      (f'')_*[A].rightDerivedFunctorPlusUnit.app
+      (f'')_*[A].rightDerivedFunctorPlusUnith.app
         (((g'')^*[A]).mapHomotopyCategoryPlus.obj (((g')^*[A]).mapHomotopyCategoryPlus.obj K)) =
-      (f'')_*[A].rightDerivedFunctorPlusUnit.app (((g'' ≫ g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
+      (f'')_*[A].rightDerivedFunctorPlusUnith.app
+        (((g'' ≫ g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
       (f'')_*[A].rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarComp A g'' g').hom).app K)) :=
-    (f'')_*[A].rightDerivedFunctorPlusUnit.naturality
+    (f'')_*[A].rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarComp A g'' g').hom).app K)
   have hcancel : ((f'')_*[A]).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarComp A g'' g').inv).app K) ≫

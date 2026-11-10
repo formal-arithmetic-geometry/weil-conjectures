@@ -114,10 +114,10 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 /-- Every ordinary square of exact functors has a localized derived square. -/
 theorem exists_isDerivedSquareOf (σ : F₁ ⋙ F₂ ⟶ F₃ ⋙ F₄) :
     ∃ Δ, IsDerivedSquareOf σ Δ := by
-  refine ⟨(mapDerivedCategoryCompIso F₁ F₂).inv ≫ mapDerivedCategoryNatTrans σ ≫
-    (mapDerivedCategoryCompIso F₃ F₄).hom, fun P ↦ ?_⟩
+  refine ⟨(mapDerivedCategoryCompIso F₁ F₂).hom ≫ mapDerivedCategoryNatTrans σ ≫
+    (mapDerivedCategoryCompIso F₃ F₄).inv, fun P ↦ ?_⟩
   simp only [NatTrans.comp_app, Category.assoc]
-  exact inv_comp_eq_of_factors ((mapDerivedCategoryCompIso F₁ F₂).app _)
+  exact inv_comp_eq_of_factors ((mapDerivedCategoryCompIso F₁ F₂).app _).symm
     (mapDerivedCategoryCompIso_hom_app_factors F₃ F₄ P) (mapDerivedCategoryNatTrans_fac σ P)
     (mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ P)
 

@@ -115,11 +115,10 @@ theorem exists_localization_ideal_kernel_generators
     { f.toAddHom with
       map_smul' := by
         intro a n
-        induction a using TensorProduct.induction_on with
-        | zero => simp
+        induction a using TensorProduct.inductionOn with
         | tmul s r =>
-          induction n using TensorProduct.induction_on with
-          | zero => simp
+          change R' ⊗[R] M at n
+          induction n using TensorProduct.inductionOn with
           | tmul r₁ m =>
             change f (s • r • (r₁ ⊗ₜ[R] m)) = q (s ⊗ₜ[R] r) • f (r₁ ⊗ₜ[R] m)
             rw [TensorProduct.smul_tmul', hs, hf, hf, hq]
@@ -150,14 +149,12 @@ theorem exists_localization_ideal_kernel_generators
     { eR.toAddEquiv with
       map_smul' := by
         intro a x
-        induction a using TensorProduct.induction_on with
-        | zero => simp
+        induction a using TensorProduct.inductionOn with
         | tmul s r =>
-          induction x using TensorProduct.induction_on with
-          | zero => simp
+          induction x using TensorProduct.inductionOn with
           | tmul b m =>
-            induction b using TensorProduct.induction_on with
-            | zero => simp
+            change S ⊗[R] R' at b
+            induction b using TensorProduct.inductionOn with
             | tmul s₁ r₁ =>
               change eR (((s ⊗ₜ[R] r) * (s₁ ⊗ₜ[R] r₁)) ⊗ₜ[S] m) =
                 s • r • eR ((s₁ ⊗ₜ[R] r₁) ⊗ₜ[S] m)
@@ -176,8 +173,7 @@ theorem exists_localization_ideal_kernel_generators
   have hfe : fA.comp e.toLinearMap = fT := by
     apply TensorProduct.AlgebraTensorModule.ext
     intro a m
-    induction a using TensorProduct.induction_on with
-    | zero => simp
+    induction a using TensorProduct.inductionOn with
     | tmul s r =>
       change f (r ⊗ₜ[R] (s • m)) = q (s ⊗ₜ[R] r) ⊗ₜ[S] m
       rw [hf, hq, TensorProduct.tmul_smul, ← algebraMap_smul S' s, smul_smul,
@@ -213,15 +209,13 @@ theorem exists_localization_ideal_kernel_generators
   have hsymN (y : J ⊗[R'] N) :
       gN (TensorProduct.comm R' J N y) =
         TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype) y := by
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul b n => rfl
     | add x y hx hy => simp_all
   have hsymP (z : J ⊗[R'] P) :
       gP (TensorProduct.comm R' J P z) =
         TensorProduct.lift ((LinearMap.lsmul R' P).comp J.subtype) z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul b n => rfl
     | add x y hx hy => simp_all
   -- Reindex those generators using the symmetries in the statement.

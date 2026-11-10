@@ -82,7 +82,7 @@ lemma comparison_hom_app_comp_structure_hom_app {A₁ A₂ A₃ A₄ : Type*} [C
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [← NatTrans.naturality_assoc]
   simp only [Functor.comp_obj, Iso.inv_hom_id_app_assoc]
-  exact Iso.map_hom_inv_id_assoc (c.app H) _ _
+  exact Iso.hom_inv_id_map_assoc (c.app H) _ _
 
 end CategoryTheory
 

@@ -105,6 +105,7 @@ lemma leftDerivedEtaleSheafExtendScalarsAdjunction_counit_app_Qh_obj (X : Scheme
     NatTrans.comp_app, Functor.whiskerRight_app]
   rw [h₃', Functor.map_comp, Category.assoc, Adjunction.derivedAdjunction,
     Adjunction.derived_counit, h₁]
+  rfl
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 

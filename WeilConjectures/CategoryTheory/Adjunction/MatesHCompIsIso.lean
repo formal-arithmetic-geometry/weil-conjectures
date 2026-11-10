@@ -43,6 +43,7 @@ lemma _root_.CategoryTheory.Functor.isoHComp_hom (e₁ : T ⋙ R ≅ L ⋙ B₁)
     (Functor.isoHComp e₁ e₂).hom = (e₁.hom ≫ₕ e₂.hom : TwoSquare _ _ _ _).natTrans :=
   rfl
 
+
 /-- The components of `CategoryTheory.Functor.isoHComp e₁ e₂`. -/
 @[simp]
 lemma _root_.CategoryTheory.Functor.isoHComp_hom_app (e₁ : T ⋙ R ≅ L ⋙ B₁)

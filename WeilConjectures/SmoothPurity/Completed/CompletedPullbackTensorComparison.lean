@@ -97,95 +97,99 @@ theorem canonicalCommonStagePullbackTensor_existsUnique {X Y : Scheme.{u}} (f : 
             (commonStageTensorObject l Ω X
               (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q))
             L h h ((@pullbackTensorAtCommonStage l _ Ω _ _ _ X Y f hX hY) P Q L h).hom) := by
-  let A := commonStagePullbackObject l Ω f (commonStageTensorObject l Ω Y P Q)
-  let B := commonStageTensorObject l Ω X
-    (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q)
-  let H := (commonStageTensorObject l Ω Y P Q).stage
-  let S := stageSystem l Ω X
-  let c (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : H ≤ L) :=
-    pullbackTensorAtCommonStage l Ω f P Q L h
-  let d : A ≅ B := S.isoToStage A (show A.stage ≤ H from le_rfl) ≪≫
-    (S.ι H).mapIso (c H le_rfl) ≪≫
-    (S.isoToStage B (show B.stage ≤ H from le_rfl)).symm
-  have hA : (commonStageDerivedPullback l Ω f).obj
-      ((commonStageDerivedTensor l Ω Y).obj (P,Q)) = A :=
-    ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 _).trans
-      (congrArg (commonStagePullbackObject l Ω f)
-        ((commonStageDerivedTensor_existsUnique l Ω Y).exists.choose_spec.1 P Q))
-  have hB : (commonStageDerivedTensor l Ω X).obj
-      ((commonStageDerivedPullback l Ω f).obj P,
-        (commonStageDerivedPullback l Ω f).obj Q) = B := by
-    exact ((commonStageDerivedTensor_existsUnique l Ω X).exists.choose_spec.1 _ _).trans
-      (congrArg₂ (commonStageTensorObject l Ω X)
-        ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 P)
-        ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 Q))
-  let e := eqToIso hA ≪≫ d ≪≫ (eqToIso hB).symm
-  have hbase : HEq e.hom (ofHom A B H le_rfl le_rfl (c H le_rfl).hom) := by
-    have hd : d.hom = ofHom A B H le_rfl le_rfl (c H le_rfl).hom :=
-      (StageSystem.mkHom_eq_isoToStage (S := S) (X := A) (Y := B) (n := H)
-        le_rfl le_rfl
-        (c H le_rfl).hom).symm
-    exact ((conj_eqToHom_iff_heq _ d.hom hA hB).mp rfl).trans (heq_of_eq hd)
-  let μ (L : AlgebraicallyClosedCoefficients.Index l Ω) :
-      rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) Y ⋙
-        rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f ≅
-      (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).prod
-        (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f) ⋙
-        rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X :=
-    NatIso.ofComponents
-      (fun MN ↦ canonicalRationalPullbackTensor l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f MN.1 MN.2)
-      (fun a ↦ canonicalRationalPullbackTensor_naturality l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f a.1 a.2)
-  let a (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
-    commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) K hK ≪≫
-      (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) f).mapIso
-        (commonStageTensorComparison l Ω Y P Q K hK)
-  let z (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
-    commonStageTensorComparison l Ω X
-      (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) K hK ≪≫
-      (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) X).mapIso
-        (Iso.prod
-          (commonStagePullbackComparison l Ω f P K
-            (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK))
-          (commonStagePullbackComparison l Ω f Q K
-            (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans hK)))
-  let g (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
-    (a K hK).hom ≫ (μ K).hom.app
-      (P.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK),
-       Q.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans hK)) ≫
-      (z K hK).inv
-  have hc (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :
-      (c K hK).hom = g K hK := by
-    exact pullbackTensor_conjugate_hom
-      (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) X)
-      (commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) K hK)
-      ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) f).mapIso
-        (commonStageTensorComparison l Ω Y P Q K hK))
-      (canonicalRationalPullbackTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K)
-        f _ _)
-      (commonStagePullbackComparison l Ω f P K
-        (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK))
-      (commonStagePullbackComparison l Ω f Q K
-        (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans hK))
-      (commonStageTensorComparison l Ω X
-        (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) K hK)
-  have he (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : H ≤ L) :
-      HEq e.hom (ofHom A B L h h (c L h).hom) := by
-    apply hbase.trans
-    apply heq_of_eq
-    have ht : ofHom A B H le_rfl le_rfl (g H le_rfl) = ofHom A B L h h (g L h) :=
-      restrictionTensorRepresentativeTransport l Ω f μ (by
-        intro K L h M N
-        exact canonicalRationalPullbackTensor_scalar l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K)
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
-          (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω K L h) f M N) P Q L h
-    exact (congrArg (ofHom A B H le_rfl le_rfl) (hc H le_rfl)).trans
-      (ht.trans (congrArg (ofHom A B L h h) (hc L h).symm))
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  exact Iso.ext (eq_of_heq ((he' H le_rfl).trans (he H le_rfl).symm))
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    let A := commonStagePullbackObject l Ω f (commonStageTensorObject l Ω Y P Q)
+    let B := commonStageTensorObject l Ω X
+      (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q)
+    let H := (commonStageTensorObject l Ω Y P Q).stage
+    let S := stageSystem l Ω X
+    let c (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : H ≤ L) :=
+      pullbackTensorAtCommonStage l Ω f P Q L h
+    let d : A ≅ B := S.isoToStage A (show A.stage ≤ H from le_rfl) ≪≫
+      (S.ι H).mapIso (c H le_rfl) ≪≫
+      (S.isoToStage B (show B.stage ≤ H from le_rfl)).symm
+    have hA : (commonStageDerivedPullback l Ω f).obj
+        ((commonStageDerivedTensor l Ω Y).obj (P,Q)) = A :=
+      ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 _).trans
+        (congrArg (commonStagePullbackObject l Ω f)
+          ((commonStageDerivedTensor_existsUnique l Ω Y).exists.choose_spec.1 P Q))
+    have hB : (commonStageDerivedTensor l Ω X).obj
+        ((commonStageDerivedPullback l Ω f).obj P,
+          (commonStageDerivedPullback l Ω f).obj Q) = B := by
+      exact ((commonStageDerivedTensor_existsUnique l Ω X).exists.choose_spec.1 _ _).trans
+        (congrArg₂ (commonStageTensorObject l Ω X)
+          ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 P)
+          ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 Q))
+    let e := eqToIso hA ≪≫ d ≪≫ (eqToIso hB).symm
+    have hbase : HEq e.hom (ofHom A B H le_rfl le_rfl (c H le_rfl).hom) := by
+      have hd : d.hom = ofHom A B H le_rfl le_rfl (c H le_rfl).hom :=
+        (StageSystem.mkHom_eq_isoToStage (S := S) (X := A) (Y := B) (n := H)
+          le_rfl le_rfl
+          (c H le_rfl).hom).symm
+      exact ((conj_eqToHom_iff_heq _ d.hom hA hB).mp rfl).trans (heq_of_eq hd)
+    let μ (L : AlgebraicallyClosedCoefficients.Index l Ω) :
+        rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) Y ⋙
+          rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f ≅
+        (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).prod
+          (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f) ⋙
+          rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X :=
+      NatIso.ofComponents
+        (fun MN ↦ canonicalRationalPullbackTensor l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f MN.1 MN.2)
+        (fun a ↦ canonicalRationalPullbackTensor_naturality l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f a.1 a.2)
+    let a (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
+      commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) K hK ≪≫
+        (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) f).mapIso
+          (commonStageTensorComparison l Ω Y P Q K hK)
+    let z (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
+      commonStageTensorComparison l Ω X
+        (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) K hK ≪≫
+        (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) X).mapIso
+          (Iso.prod
+            (commonStagePullbackComparison l Ω f P K
+              (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK))
+            (commonStagePullbackComparison l Ω f Q K
+              (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans hK)))
+    let g (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :=
+      (a K hK).hom ≫ (μ K).hom.app
+        (P.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK),
+         Q.toStage (((Padic.finiteCoefficientFields_properties
+         l Ω).1 P.stage Q.stage).2.trans hK)) ≫
+        (z K hK).inv
+    have hc (K : AlgebraicallyClosedCoefficients.Index l Ω) (hK : H ≤ K) :
+        (c K hK).hom = g K hK := by
+      exact pullbackTensor_conjugate_hom
+        (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) X)
+        (commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) K hK)
+        ((rationalDerivedPullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K) f).mapIso
+          (commonStageTensorComparison l Ω Y P Q K hK))
+        (canonicalRationalPullbackTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K)
+          f _ _)
+        (commonStagePullbackComparison l Ω f P K
+          (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans hK))
+        (commonStagePullbackComparison l Ω f Q K
+          (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans hK))
+        (commonStageTensorComparison l Ω X
+          (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) K hK)
+    have he (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : H ≤ L) :
+        HEq e.hom (ofHom A B L h h (c L h).hom) := by
+      apply hbase.trans
+      apply heq_of_eq
+      have ht : ofHom A B H le_rfl le_rfl (g H le_rfl) = ofHom A B L h h (g L h) :=
+        restrictionTensorRepresentativeTransport l Ω f μ (by
+          intro K L h M N
+          exact canonicalRationalPullbackTensor_scalar l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K)
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+            (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω K L h) f M N) P Q L h
+      exact (congrArg (ofHom A B H le_rfl le_rfl) (hc H le_rfl)).trans
+        (ht.trans (congrArg (ofHom A B L h h) (hc L h).symm))
+    refine ⟨e, he, ?_⟩
+    intro e' he'
+    exact Iso.ext (eq_of_heq ((he' H le_rfl).trans (he H le_rfl).symm))
 
 /-- The stage-independent canonical comparison in the actual colimit Hom group.
 Source: blueprint common-stage paragraph (blueprint: def-pur-completed-pullback-tensor-comparison).

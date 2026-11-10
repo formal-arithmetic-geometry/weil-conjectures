@@ -94,7 +94,7 @@ theorem injective_punctured_restriction_kernel
       intro h
       exact hne ((IsLocalRing.maximalIdeal.isMaximal R).eq_of_le
         p.val.isPrime.ne_top h).symm
-    obtain ⟨a, ham, hap⟩ := SetLike.not_le_iff_exists.mp hnot
+    obtain ⟨a, ham, hap⟩ := IsConcreteLE.not_le_iff_exists.mp hnot
     have hak : a ^ n • x = 0 :=
       (Submodule.mem_torsionBySet_iff _ _).mp hn
         ⟨a ^ n, Ideal.pow_mem_pow ham n⟩

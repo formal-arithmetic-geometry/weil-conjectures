@@ -81,6 +81,10 @@ private theorem transport_pair_coherent
   intro i j k h h' X
   simpa only [hc] using hb h h' X
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
@@ -173,7 +177,8 @@ private theorem canonical_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
         (associator l Ω X E L M h k).hom ≫
       (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
         (Coefficient.{u} l Ω M) (coefficientInclusion l Ω E M (h.trans k)) f).hom := by
-  rw [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
+  -- Simplify the associators without rechecking the whole transported equality as a rewrite motive.
+  simp only [GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω Y E L M h k,
     GeneralAlgebraicallyClosedCoefficients.associator_formula l Ω X E L M h k]
   delta GeneralAlgebraicallyClosedCoefficients.normalizedAssociator transition
   exact scalar_tower_nat l

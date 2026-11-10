@@ -210,19 +210,13 @@ private theorem smallEtale_cover_of_surjective (S : Scheme.{u})
     {I : Type u} (V : I → S.Etale) (U : S.Etale) (f : ∀ i, V i ⟶ U)
     (h : ∀ x : U.left, ∃ i y, (f i).left y = x) :
     Presieve.ofArrows V f ∈ S.smallEtalePretopology U := by
-  classical
-  let 𝒰 : U.left.Cover (Scheme.precoverage @AlgebraicGeometry.Etale) :=
-    Cover.mkOfCovers I (fun i => (V i).left) (fun i => (f i).left) h
-      (fun i => by infer_instance)
-  let (i : I) : (𝒰.X i).Over S := ⟨(V i).hom⟩
-  let hOver : 𝒰.Over S :=
-    { over i := inferInstance
-      isOver_map i := ⟨(f i).w⟩ }
-  change ∃ (𝒱 : Cover.{u} (Scheme.precoverage @AlgebraicGeometry.Etale) U.left)
-    (_ : 𝒱.Over S) (hp : ∀ i, AlgebraicGeometry.Etale (𝒱.X i ↘ S)),
-    Presieve.ofArrows V f = 𝒱.toPresieveOverProp hp
-  refine ⟨𝒰, hOver, fun i => (V i).prop, ?_⟩
-  rfl
+  change ((Presieve.ofArrows V f).map (MorphismProperty.Over.forget
+    (@AlgebraicGeometry.Etale) ⊤ S)).map (Over.forget S) ∈
+      Scheme.precoverage (@AlgebraicGeometry.Etale) U.left
+  rw [Presieve.map_ofArrows, Presieve.map_ofArrows, Scheme.ofArrows_mem_precoverage_iff]
+  refine ⟨h, fun i ↦ ?_⟩
+  change AlgebraicGeometry.Etale (f i).left
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -339,6 +333,7 @@ theorem fullAffineEtaleInclusion_special_equivalences (S : Scheme.{u}) :
   exact ⟨fullAffineEtale_special_cocontinuity S,
     fullAffineEtale_sets_equivalence S, fullAffineEtale_ab_equivalence S⟩
 
+
 private noncomputable def affineEtaleFreeSectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (U : C) (F : Cᵒᵖ ⥤ AddCommGrpCat.{u}) :
     (yoneda.obj U ⋙ AddCommGrpCat.free ⟶ F) ≃+ F.obj (op U) where
@@ -376,6 +371,7 @@ private lemma extZero_postcomp {C : Type*} [Category C] [Abelian C]
     Ext.addEquiv₀ (x.comp (Ext.mk₀ f) (add_zero 0)) = Ext.addEquiv₀ x ≫ f := by
   apply (Ext.mk₀_bijective X G).injective
   simp only [Ext.mk₀_addEquiv₀_apply, ← Ext.mk₀_comp_mk₀]
+
 
 private noncomputable def affineEtaleHZeroSectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
@@ -685,5 +681,6 @@ theorem fullAffineEtale_cohomology_base (S : Scheme.{u}) [IsAffine S]
             S.FullAffineEtale)) ≅ Sheaf.functorH.{w, u} S.smallEtaleTopology p) := by
   exact ⟨fullAffineEtale_cohomology_base_left S p,
     fullAffineEtale_cohomology_base_right S p⟩
+
 
 end AlgebraicGeometry.Scheme

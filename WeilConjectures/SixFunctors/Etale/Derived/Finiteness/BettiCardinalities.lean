@@ -181,6 +181,10 @@ theorem finrankH_unit_zero_eq_natCard_connectedComponents [IsAlgClosed k] :
   classical
   have := isNoetherian_of_isProper (Y ↘ Spec (.of k))
   have : Fintype (_root_.ConnectedComponents Y) := Fintype.ofFinite _
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have := Modules.finiteDimensional_H_of_isProper (k := k)
@@ -216,7 +220,11 @@ theorem natCard_sheafH_constantZMod_of_smoothOfRelativeDimension_one [IsAlgClose
       Finset.prod_const, Finset.card_univ, Nat.card_eq_fintype_card]
   refine ⟨hcard 0 fun c ↦ (connectedComponentOpens_facts c ℓ hℓ).2.1, ?_,
     hcard 2 fun c ↦ (connectedComponentOpens_facts c ℓ hℓ).2.2.2.1, fun r hr ↦ ?_⟩
-  · have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation :=
+  · have : (SheafOfModules.unit Y.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    have : (SheafOfModules.unit Y.ringCatSheaf).IsFiniteLocallyFree :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation :=
       SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
     have := Modules.finiteDimensional_H_of_isProper (k := k)
       (SheafOfModules.unit Y.ringCatSheaf) 1
@@ -283,6 +291,10 @@ theorem natCard_sheafH_constantZMod_geometricFibre_of_smooth [IsNoetherian S] (f
       (IsPullback.of_hasPullback _ _) ‹_›,
       IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›⟩
   -- `c s = h⁰(X_{s̄}, 𝒪)` and `g s = h¹(X_{s̄}, 𝒪)` are geometric fibre dimensions of `𝒪_X`
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have : Smooth f := SmoothOfRelativeDimension.smooth 1 f

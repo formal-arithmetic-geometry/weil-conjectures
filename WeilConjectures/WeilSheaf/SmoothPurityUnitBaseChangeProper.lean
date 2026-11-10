@@ -49,7 +49,6 @@ instance isIso_ofNatIsoBaseChange : IsIso (ofNatIsoBaseChange ι ι' bcs) := by
   unfold ofNatIsoBaseChange
   infer_instance
 
-set_option linter.unusedSimpArgs false in
 /-- `CategoryTheory.Adjunction.unitBaseChange` is compatible with the transport of the adjunctions
 along isomorphisms of the left adjoints (`CategoryTheory.Adjunction.ofNatIsoLeft`). -/
 theorem unitBaseChange_ofNatIsoLeft :
@@ -106,7 +105,6 @@ lemma properLowerShriekBaseChangeOfMap_hom :
         (boundedConstructibleBaseChangeOfMap l sqf.toCommSq) :=
   rfl
 
-set_option linter.style.haveILetI false in
 /-- **The exceptional base change map at the unit of a proper morphism** is the base change map
 of the exceptional inverse image `ProEtale.CondensedRing.upperShriekBaseChangeOfMap` at the unit,
 followed by `Rf'^!(e)`. -/
@@ -114,7 +112,7 @@ theorem smoothUnitBaseChange_proper_eq :
     smoothUnitBaseChange l f f' (properLowerShriekBaseChangeOfMap l f f' sqf) e =
       (upperShriekBaseChangeOfMap l sqf).app (𝟙_ _) ≫
         (boundedConstructibleUpperShriek l f').map e := by
-  haveI := isIso_boundedConstructibleBaseChangeOfMap l sqf
+  have := isIso_boundedConstructibleBaseChangeOfMap l sqf
   change Adjunction.unitBaseChange (boundedConstructibleUpperShriekAdjunction l f)
     (boundedConstructibleUpperShriekAdjunction l f')
     (Adjunction.ofNatIsoBaseChange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl l f)
@@ -131,7 +129,6 @@ theorem isIso_smoothUnitBaseChange_of_isIso_upperShriekBaseChangeOfMap
   rw [smoothUnitBaseChange_proper_eq]
   infer_instance
 
-set_option linter.style.longLine false in
 /-- **The proper smooth piece along a weakly étale base change**: for `f` smooth proper of pure
 relative dimension `d` and `πP` weakly étale, the exceptional base change map at the unit is
 invertible

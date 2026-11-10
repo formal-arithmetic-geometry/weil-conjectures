@@ -591,5 +591,6 @@ theorem shortExact_map (A : ShortComplex (Cᵒᵖ ⥤ AddCommGrpCat.{r})) (hA : 
     · exact h₁.mono _
     · exact h₃.epi _
 
+
 end SiteCechComplex
 end CategoryTheory

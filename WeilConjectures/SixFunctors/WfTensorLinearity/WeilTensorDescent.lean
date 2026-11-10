@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Supporting.PbcWeilCategory
 public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedTensorReflector
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
@@ -286,12 +288,10 @@ theorem rationalTensorHom_exists
   intro x
   apply LinearMap.ext
   intro y
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply]
+  induction x using TensorProduct.inductionOn with
   | add x x' hx hx' => simp only [map_add, LinearMap.add_apply, hx, hx']
   | tmul s f =>
-    induction y using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction y using TensorProduct.inductionOn with
     | add y y' hy hy' => simp only [map_add, hy, hy']
     | tmul t g => exact (hγ f g s t).trans (hβ f g s t).symm
 

@@ -42,7 +42,7 @@ open CategoryTheory AlgebraicGeometry IsLocalRing
 lemma DiscreteModule.isPrimary_trivial_zmod {G : Type u} [Group G] [TopologicalSpace G]
     (ℓ : ℕ) :
     IsPrimary ℓ (trivial.{u + 1} G (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)))) := by
-  refine fun x ↦ ⟨1, ULift.ext _ _ ((ULift.smul_down x _).trans ?_)⟩
+  refine fun x ↦ ⟨1, ULift.ext ((ULift.smul_down x _).trans ?_)⟩
   rw [pow_one, nsmul_eq_mul, ZMod.natCast_self, zero_mul]
   rfl
 

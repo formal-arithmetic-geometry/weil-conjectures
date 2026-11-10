@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportScalarTensor
 import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportRestrictionComposition
@@ -478,7 +480,7 @@ private theorem derivedRestriction_left_unit
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     (U : A ⥤ A) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
     (ρ : U ≅ 𝟭 A) :
-    (Functor.mapDerivedCategoryCompIso U U).symm ≪≫
+    Functor.mapDerivedCategoryCompIso U U ≪≫
         Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft U ρ) =
       Functor.isoWhiskerLeft U.mapDerivedCategory
           (Functor.mapDerivedCategoryNatIso ρ ≪≫ Functor.mapDerivedCategoryIdIso A) ≪≫
@@ -488,10 +490,10 @@ private theorem derivedRestriction_left_unit
   have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft U ρ) X
   have hu := congr_app (Functor.mapDerivedCategoryCompIso_comp_id U) X
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hn hu
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U U).hom.app X)).mp
-  rw [Iso.hom_inv_id_app_assoc]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U U).inv.app X)).mp
+  rw [Iso.inv_hom_id_app_assoc]
   simp only [← Category.assoc]
   rw [← hn]
   simp only [Category.assoc]

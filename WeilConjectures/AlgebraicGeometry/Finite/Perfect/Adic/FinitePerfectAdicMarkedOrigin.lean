@@ -74,7 +74,7 @@ import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
 import WeilConjectures.ConstructibleSheaf.Pullback
@@ -173,7 +173,7 @@ private def derivedChartPullbackIso
       (ModuleCat.{t + 1} (ULift.{t + 1} B)) g.left).mapDerivedCategory.obj
         ((finiteCoefficientSliceRestriction X B R ψ V).mapDerivedCategory.obj K) ≅
       (finiteCoefficientSliceRestriction X B R ψ W).mapDerivedCategory.obj K
-  exact ((Functor.mapDerivedCategoryCompIso _ _).app K).symm ≪≫
+  exact (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
       (Functor.mapDerivedCategoryNatIso (chartPullbackIso X B R ψ g)).app K
 
 /-- The coefficient lift is exact; it changes only the universe of the underlying module. -/
@@ -338,14 +338,14 @@ theorem finitePerfectAdic_marked_origin
     let PC := constantSheaf (ProEt.topology (W i).left) D
     let e₁ : C'.mapDerivedCategory.obj (F.mapDerivedCategory.obj K) ≅
         PC.mapDerivedCategory.obj E :=
-      ((Functor.mapDerivedCategoryCompIso F C').app K).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso F C').app K ≪≫
         (Functor.mapDerivedCategoryNatIso
           (ProEtale.comparisonUpperStarUpperStarIso D (g i).left).symm).app K ≪≫
-        (Functor.mapDerivedCategoryCompIso C F').app K ≪≫
+        ((Functor.mapDerivedCategoryCompIso C F').app K).symm ≪≫
         F'.mapDerivedCategory.mapIso eK ≪≫ eJ i
     let e₂ : C'.mapDerivedCategory.obj (EC.mapDerivedCategory.obj E) ≅
         PC.mapDerivedCategory.obj E :=
-      ((Functor.mapDerivedCategoryCompIso EC C').app E).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso EC C').app E ≪≫
         (Functor.mapDerivedCategoryNatIso
           (ProEtale.constantSheafCompComparisonUpperStarIso D (W i).left)).app E
     have hKbound : DerivedCategory.TStructure.t.bounded K :=
@@ -364,7 +364,7 @@ theorem finitePerfectAdic_marked_origin
         (asIso ((ProEtale.derivedComparisonAdjunction D (W i).left).unit.app _)).symm
     let eC : (localIsomorphismRestriction V.left (ULift.{t + 1} B) U).obj
         (finitePerfectAdicEtaleConstant V.left T n) ≅ EC.mapDerivedCategory.obj E :=
-      ((Functor.mapDerivedCategoryCompIso _ _).app E).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).app E ≪≫
         (Functor.mapDerivedCategoryNatIso (upperStarConstantSheafIso D (g i).left)).app E
     let P := derivedLocalIsomorphismPresheaf
       (finitePerfectAdicEtaleConstant V.left T n) K

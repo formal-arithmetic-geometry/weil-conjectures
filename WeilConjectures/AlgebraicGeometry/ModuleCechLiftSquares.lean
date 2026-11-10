@@ -15,11 +15,15 @@ Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ, functoriality of alpha 
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+local instance localInst_ModuleCechLiftSquares_1 (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
 
 /-- Applying the Cech functor and totalization to a lift of a module morphism gives
 commuting squares with both comparison augmentations.
@@ -66,7 +70,7 @@ theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
     intro y
     simp only [CategoryTheory.cechComplexFunctor,
       FormalCoproduct.cochainComplexFunctor_map_f, Functor.rightOp_obj, homOfLE_leOfHom,
-      Functor.mapHomologicalComplex_map_f, Functor.comp_map, SheafOfModules.forget_map,
+      SheafOfModules.forget_map,
       PresheafOfModules.forgetToPresheafModuleCat_map, Category.assoc, Pi.map_π]
     change _ ≫ (Pi.lift fun z : Fin 1 → ι =>
       (I.cocomplex.X n).presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (z l)))).op) ≫
@@ -74,7 +78,7 @@ theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
       _ ≫ _ ≫ (Pi.lift fun z : Fin 1 → ι =>
         (J.cocomplex.X n).presheafModuleCat.map
           (homOfLE (le_top (a := ∏ᶜ fun l => U (z l)))).op) ≫ Pi.π _ y
-    simp only [Pi.lift_π_assoc, Pi.lift_π]
+    simp only [Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     ext x
     exact PresheafOfModules.naturality_apply (ψ.f n).val
       (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op x

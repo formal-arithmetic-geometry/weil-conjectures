@@ -44,7 +44,7 @@ private theorem finite_affine_etale_cover_geometry
     refine ⟨fun x ↦ ?_⟩
     obtain ⟨i, y, hy⟩ := hcover x
     refine ⟨Limits.Sigma.ι Y i y, ?_⟩
-    rw [← Scheme.Hom.comp_apply, Limits.Sigma.ι_desc]
+    rw [← Scheme.Hom.comp_apply, Limits.Sigma.ι_comp_desc]
     exact hy
   let : IsAffine (∐ Y) := inferInstance
   exact ⟨hf, hsurj, inferInstance, inferInstance⟩

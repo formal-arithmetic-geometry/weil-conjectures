@@ -33,9 +33,9 @@ private lemma sigma_desc_comp_sigma_desc
       Sigma.desc (fun i ↦ e ≫ g i) := by
   apply Sigma.hom_ext
   intro i
-  rw [Sigma.ι_desc_assoc]
-  rw [Category.assoc, Sigma.ι_desc]
-  rw [Sigma.ι_desc]
+  rw [Sigma.ι_comp_desc_assoc]
+  rw [Category.assoc, Sigma.ι_comp_desc]
+  rw [Sigma.ι_comp_desc]
 
 private lemma sigma_desc_comp_map
     {C : Type u} [Category.{v} C] {I : Type w} {A B P : C}
@@ -45,7 +45,7 @@ private lemma sigma_desc_comp_map
     Sigma.desc f ≫ m = Sigma.desc g := by
   apply Sigma.hom_ext
   intro i
-  rw [Sigma.ι_desc_assoc, Sigma.ι_desc, h]
+  rw [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc, h]
 
 private lemma qbar_scalarUnitLeg_naturality
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]

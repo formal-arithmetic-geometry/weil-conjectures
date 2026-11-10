@@ -193,7 +193,8 @@ theorem IsHypercover.coneSieve_mem (hU : U.IsHypercover J) :
       if hσ : ∃ y : W'' ⟶ U.obj (0 + 1), ∀ i, y ≫ U.δ 0 i = g' ≫ x σ i then
         some hσ.choose else none
     refine ⟨g' ≫ v, Function.update (fun _ _ ↦ none) 0 k, fun σ hσ ↦ ?_⟩
-    refine ⟨(hy σ hσ).choose, by simp only [Function.update_self, k, dif_pos (hy σ hσ)], ?_, ?_⟩
+    refine ⟨(hy σ hσ).choose,
+      by simp only [Function.update_self, k, dite_eq_left (hy σ hσ)], ?_, ?_⟩
     · simpa [x] using (hy σ hσ).choose_spec 1
     · simpa [x] using (hy σ hσ).choose_spec 0
   | m + 1, W, A => by
@@ -218,7 +219,7 @@ theorem IsHypercover.coneSieve_mem (hU : U.IsHypercover J) :
     have hh' (l : ℕ) (hl : l ≤ m) : (fun τ ↦ (h l τ).map (g' ≫ ·)) = h' l :=
       (Function.update_of_ne (show l ≠ m + 1 by lia) k fun l τ ↦ (h l τ).map (g' ≫ ·)).symm
     refine ⟨g' ≫ v, h', fun σ hσ ↦ ?_⟩
-    refine ⟨(hy σ hσ).choose, by simp only [h', Function.update_self, k, dif_pos (hy σ hσ)],
+    refine ⟨(hy σ hσ).choose, by simp only [h', Function.update_self, k, dite_eq_left (hy σ hσ)],
       ?_, fun i ↦ ⟨?_, ?_⟩⟩
     · rw [(hy σ hσ).choose_spec, coneFamily_last, Category.assoc]
     · obtain ⟨z, hz, -⟩ := (hc' σ hσ i).exists_eq_some

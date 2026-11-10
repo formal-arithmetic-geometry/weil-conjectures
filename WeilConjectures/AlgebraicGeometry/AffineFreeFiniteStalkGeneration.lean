@@ -154,7 +154,7 @@ theorem exists_finset_affine_free_stalk_surjective
     have hi : pair i ∈ S := Finset.mem_image.mpr ⟨i, Finset.mem_univ _, rfl⟩
     refine ⟨(Q.map (Sigma.ι (fun j : S => P j.val.1.val) ⟨pair i, hi⟩)).hom z, ?_⟩
     have hc := congrArg (fun k => (Q.map k).hom z)
-      (Sigma.ι_desc (fun j : S => j.val.2) ⟨pair i, hi⟩)
+      (Sigma.ι_comp_desc (fun j : S => j.val.2) ⟨pair i, hi⟩)
     simpa only [Functor.map_comp, ModuleCat.comp_apply] using hc.trans hz
   have ht : (⊤ : Submodule Λ (Q.obj F)) ≤ LinearMap.range (Q.map g).hom := by
     rw [← hT]

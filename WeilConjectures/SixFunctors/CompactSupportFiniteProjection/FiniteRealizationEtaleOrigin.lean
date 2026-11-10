@@ -78,7 +78,7 @@ private theorem fixedEtaleOrigin (X : SixFunctorSpace D)
   refine ⟨L.obj, (etaleBoundedIff _ _ _).1 L.property, ⟨?_⟩⟩
   apply R.functor.preimageIso
   exact ((Functor.mapDerivedCategoryCompIso U
-    (sfIntrinsicModuleEquivalence X.obj.left A).functor).app L.obj).symm ≪≫
+    (sfIntrinsicModuleEquivalence X.obj.left A).functor).app L.obj) ≪≫
       eL ≪≫ (R.counitIso.app K.obj).symm
 
 /-- Inverse realization of a bounded constructible input has bounded-below étale origin.

@@ -70,7 +70,7 @@ theorem Etale.exists_finset_stalkRestrict_eq_zero (sq : IsPullback g' f' f g)
   obtain ⟨V, v, σ, rfl⟩ := (pointSmallEtale y').toPresheafFiber_jointly_surjective
     (P := ((f')_*[ModuleCat.{u + 1} Λ].obj G).obj) d
   -- an affine pointed étale neighbourhood of `y'` refining `(V, v)` and mapping to `U₀`
-  let c₁ : Nbhd y' := ⟨V, v⟩
+  let c₁ : Nbhd y' := Functor.elementsMk _ V v
   let c₀' : Nbhd y' := (Etale.baseChangeNbhd g (y' ≫ g) ⟨y', rfl⟩).obj c₀
   obtain ⟨c, h₂, hc⟩ := Nbhd.exists_hom_isAffine (IsCofiltered.min c₁ c₀')
   let k₁ : c ⟶ c₁ := h₂ ≫ IsCofiltered.minToLeft c₁ c₀'
@@ -84,7 +84,7 @@ theorem Etale.exists_finset_stalkRestrict_eq_zero (sq : IsPullback g' f' f g)
         σ' := by
     have h := (pointSmallEtale y').toPresheafFiber_w_apply k₁.val c.2
       ((f')_*[ModuleCat.{u + 1} Λ].obj G).obj σ
-    rw [k₁.2] at h
+    rw [Functor.Elements.Hom.val, k₁.map_val] at h
     exact h.symm
   have hres (t : f'.GeometricFiber y') :
       Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f' y' t G

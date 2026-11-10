@@ -62,29 +62,31 @@ lemma restrictPt_ι (c : Nbhd y) (U₁ : c.1.left.Opens)
 neighbourhood `(U, u)` containing the marked point. -/
 abbrev restrict (c : Nbhd y) (U₁ : c.1.left.Opens)
     (hU₁ : c.2.left (default : Spec (.of Ω)) ∈ U₁) : Nbhd y :=
-  ⟨Scheme.Etale.mk (U₁.ι ≫ c.1.hom), CategoryTheory.Over.homMk (c.restrictPt U₁ hU₁) (by
-    change c.restrictPt U₁ hU₁ ≫ U₁.ι ≫ c.1.hom = y
-    rw [restrictPt_ι_assoc]
-    exact CategoryTheory.Over.w c.2)⟩
+  Functor.elementsMk _ (Scheme.Etale.mk (U₁.ι ≫ c.1.hom))
+    (CategoryTheory.Over.homMk (c.restrictPt U₁ hU₁) (by
+      change c.restrictPt U₁ hU₁ ≫ U₁.ι ≫ c.1.hom = y
+      rw [restrictPt_ι_assoc]
+      exact CategoryTheory.Over.w c.2))
 
 /-- The inclusion of the restriction of a pointed étale neighbourhood to an open. -/
 def restrictHom (c : Nbhd y) (U₁ : c.1.left.Opens)
     (hU₁ : c.2.left (default : Spec (.of Ω)) ∈ U₁) : c.restrict U₁ hU₁ ⟶ c :=
-  CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk U₁.ι rfl)
+  Functor.Elements.homMk (MorphismProperty.Over.homMk U₁.ι rfl)
     (CategoryTheory.Over.OverMorphism.ext (c.restrictPt_ι U₁ hU₁))
 
 /-- A pointed étale neighbourhood of the point `u` of a pointed étale neighbourhood `(U, u)` of
 `y`, seen as a pointed étale neighbourhood of `y`. -/
 abbrev comp (c : Nbhd y) (d : Nbhd c.2.left) : Nbhd y :=
-  ⟨Scheme.Etale.mk (d.1.hom ≫ c.1.hom), CategoryTheory.Over.homMk d.2.left (by
-    have h₁ : d.2.left ≫ d.1.hom = c.2.left := CategoryTheory.Over.w d.2
-    have h₂ : c.2.left ≫ c.1.hom = y := CategoryTheory.Over.w c.2
-    change d.2.left ≫ d.1.hom ≫ c.1.hom = y
-    rw [← Category.assoc, h₁, h₂])⟩
+  Functor.elementsMk _ (Scheme.Etale.mk (d.1.hom ≫ c.1.hom))
+    (CategoryTheory.Over.homMk d.2.left (by
+      have h₁ : d.2.left ≫ d.1.hom = c.2.left := CategoryTheory.Over.w d.2
+      have h₂ : c.2.left ≫ c.1.hom = y := CategoryTheory.Over.w c.2
+      change d.2.left ≫ d.1.hom ≫ c.1.hom = y
+      rw [← Category.assoc, h₁, h₂]))
 
 /-- The structure morphism `c.comp d ⟶ c`. -/
 def compHom (c : Nbhd y) (d : Nbhd c.2.left) : c.comp d ⟶ c :=
-  CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk d.1.hom rfl)
+  Functor.Elements.homMk (MorphismProperty.Over.homMk d.1.hom rfl)
     (CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w d.2))
 
 @[simp]
@@ -265,7 +267,7 @@ theorem exists_hom_disjoint_cover (c : Nbhd y) (R : Sieve (f.Etale.obj c.1))
   refine ⟨c', g ≫ c.restrictHom U₁ hu, ι, P, hdisj, hsup, fun i ↦ ?_⟩
   have := hP i
   rwa [Sieve.pullback_apply, Category.assoc, ← Functor.map_comp,
-    ← CategoryOfElements.comp_val] at this
+    Functor.Elements.Hom.val, ← Functor.Elements.comp_hom] at this
 
 end AlgebraicGeometry.Scheme.Hom.Nbhd
 

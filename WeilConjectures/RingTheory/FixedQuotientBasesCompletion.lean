@@ -61,6 +61,7 @@ private theorem coefficientsEquiv_mk
   simp [coefficientsEquiv]
   rfl
 
+
 private def ringCoordinates
     {A : Type u} {C : Type w} [CommRing A] [CommRing C] [Algebra A C]
     (J : Ideal C) (n : ℕ) :

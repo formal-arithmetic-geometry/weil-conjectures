@@ -232,7 +232,6 @@ theorem gradedCohomologyModuleFinite_generators
           DirectSum.of M (m + k)
             ((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b) x) := by
         convert hcompat k m b x using 1
-        congr 2
       rw [hc, hphi_of, hphi_of]
       let r : Γ(Y, ⊤) := ((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val
       let tau := F.smulHom r

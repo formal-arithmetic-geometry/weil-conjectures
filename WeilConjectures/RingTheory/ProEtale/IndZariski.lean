@@ -494,12 +494,12 @@ noncomputable def awayDiag (R : Type u) [CommRing R] (M : Submonoid R) :
   obj m := .of R (Localization.Away m.val)
   map {m m'} h := CommAlgCat.ofHom (awayDvdHom R (m := m.val) (m' := m'.val) h.le)
   map_id m := by
-    refine CommAlgCat.hom_ext (AlgHom.coe_ringHom_injective ?_)
+    refine CommAlgCat.hom_ext (AlgHom.toRingHom_injective ?_)
     refine IsLocalization.ringHom_ext (.powers m.val) ?_
     ext _
     simp [awayDvdHom, IsLocalization.Away.lift]
   map_comp {m _ _} _ _ := by
-    refine CommAlgCat.hom_ext (AlgHom.coe_ringHom_injective ?_)
+    refine CommAlgCat.hom_ext (AlgHom.toRingHom_injective ?_)
     refine IsLocalization.ringHom_ext (.powers m.val) ?_
     ext _
     simp [awayDvdHom, IsLocalization.Away.lift]
@@ -791,6 +791,7 @@ lemma awaySystem_map (j₀ : J) (r : D.obj j₀) {k l : Under j₀} (t : k ⟶ l
     (awaySystem (D := D) j₀ r).map t = awayLift (D.map t.right) _ _ (rAt_map j₀ r t) :=
   rfl
 
+
 /-- The cocone over `awaySystem` with apex the localization of the colimit. -/
 noncomputable def awaySystemCocone (c : Cocone D) (j₀ : J) (r : D.obj j₀) :
     Cocone (awaySystem (D := D) j₀ r) where
@@ -811,6 +812,7 @@ omit [IsFiltered J] in
 lemma awaySystemCocone_app (c : Cocone D) (j₀ : J) (r : D.obj j₀) (k : Under j₀) :
     (awaySystemCocone c j₀ r).ι.app k = awayLift (coconeι c k.right) _ _ (rAt_cocone j₀ r k) :=
   rfl
+
 
 /-- Every element of the localization of the colimit lifts to a stage. -/
 lemma awaySystem_exists_rep {c : Cocone D} (hc : IsColimit c) (j₀ : J) (r : D.obj j₀)
@@ -1269,7 +1271,6 @@ theorem PieceAt.isStandardOpenImmersion {j₀ : J} {A₀ : CommRingCat.{u}}
       exact pushSquare j₀ f₀ k
     intro w
     induction w using hpush.out.inductionOn with
-    | zero => exact ⟨0, 0, by simp⟩
     | tmul a => exact hGoodA a
     | smul b z hz =>
         rw [Algebra.smul_def, map_mul]
@@ -1813,6 +1814,7 @@ lemma pieceChi_push' {j₀ : J} {A₀ : CommRingCat.{u}} {f₀ : D.obj j₀ ⟶ 
         ((pieceChi f₀ k selt q hq).hom ((pushInr j₀ f₀ k).hom a))
     rw [pushInr_map_apply, pieceChi_inr, pieceChi_inr]
     rfl
+
 
 set_option maxHeartbeats 1600000 in
 -- The proof descends many pieces of data stage by stage through a long chain of filtered
@@ -2396,6 +2398,7 @@ theorem _root_.Algebra.IndZariski.iff_ind_indZariksi [Algebra R S] :
   (algebraMap_iff (R := R) (S := S)).symm.trans
     ((iff_ind_indZariski _).trans
       respectsIso.ind_toMorphismProperty_iff_ind_toObjectProperty)
+
 
 /-- Ind-Zariski ring homomorphisms are stable under base change. -/
 lemma isStableUnderBaseChange : RingHom.IsStableUnderBaseChange RingHom.IndZariski := by

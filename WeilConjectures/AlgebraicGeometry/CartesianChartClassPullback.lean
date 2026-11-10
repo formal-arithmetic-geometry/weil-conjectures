@@ -46,6 +46,10 @@ noncomputable def cartesianChartClassPullback {B T T' : Scheme.{u}}
     (D+((b)^*[AddCommGrpCat.{u + 1}])).map z ≫
     (D+((b)^*[AddCommGrpCat.{u + 1}]).commShiftIso q).hom.app K
 
+noncomputable local instance localInst_CartesianChartClassPullback_1 (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
 /-- The actual stage lift for the chart diagram; it uses the inverse of the
 canonical raw cohomology comparison, the chart adjunction, and pullback of the
 resulting derived class. No representative or lift is selected by choice.

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Canonical.CanonicalSectionProjectionCore
 
 /-! # Supported-unit transport for section/projection coherence -/
@@ -62,7 +64,8 @@ variable {C : Type v} [Category.{w} C] [Abelian C]
   [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
   [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance instHasColimitsOfSize_canonicalSectionProjectionTransport
+    : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 private theorem native_braiding_naturality_right
     (A : DerivedCategory C) {B B' : DerivedCategory C} (b : B ⟶ B') :

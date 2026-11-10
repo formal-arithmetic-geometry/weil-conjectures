@@ -548,7 +548,7 @@ private theorem canonicalAugmentation_spec (l : ℕ) [Fact l.Prime] (E : Type u)
           (((unrestrictedIntegralFiniteComplex l E Y n).obj C).X i) V
           (unrestrictedIntegralTensorSection l E Y n (C.X i) (op V) 1 x) := by
     rw [← Category.assoc, hf]
-    simp only [productAug, Pi.lift_π]
+    simp only [productAug, Pi.lift_comp_π]
     exact augmentationTower_formula l E g C n i V x
   exact ⟨hformula, hs⟩
 
@@ -876,6 +876,7 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 section CommonStageMapElaboration
 attribute [local irreducible] ScalarLocalization.category
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The common-stage theta is represented by the same rational root map at the
 least finite coefficient stage, with the prescribed pullback object identification.
 Source: definition clause 4

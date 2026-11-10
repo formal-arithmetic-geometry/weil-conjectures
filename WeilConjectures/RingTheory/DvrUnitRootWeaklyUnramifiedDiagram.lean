@@ -202,7 +202,7 @@ theorem dvr_unit_root_weakly_unramified_diagram
     ext a
     change φ (algebraMap A C a) ∈ q ↔ a ∈ IsLocalRing.maximalIdeal A
     rw [hφ]
-    change algebraMap A T a ∈ q.comap (algebraMap T B) ↔ _
+    change algebraMap A T a ∈ q.under T ↔ _
     rw [hq]
     exact SetLike.ext_iff.mp (IsLocalRing.maximalIdeal_comap (algebraMap A T)) a
   obtain ⟨da, dva, hAA', _, _⟩ := dvr_unit_root_atPrime A e hepos he v p hp

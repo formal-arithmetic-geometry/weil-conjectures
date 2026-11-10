@@ -76,7 +76,7 @@ import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
 import WeilConjectures.ConstructibleSheaf.Pullback
@@ -158,7 +158,7 @@ private def derivedChartPullbackIso
       (ModuleCat.{t + 1} (ULift.{t + 1} B)) g.left).mapDerivedCategory.obj
         ((finiteCoefficientSliceRestriction X B R ψ V).mapDerivedCategory.obj K) ≅
       (finiteCoefficientSliceRestriction X B R ψ W).mapDerivedCategory.obj K
-  exact ((Functor.mapDerivedCategoryCompIso _ _).app K).symm ≪≫
+  exact (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
       (Functor.mapDerivedCategoryNatIso (chartPullbackIso X B R ψ g)).app K
 
 /-- The coefficient lift is exact; it changes only the universe of the underlying module. -/
@@ -346,14 +346,14 @@ theorem finitePerfectChart_etale_origin
   let E := (finitePerfectAdicAlgebraLift B).obj F
   let eZ : CZ.mapDerivedCategory.obj (U.mapDerivedCategory.obj L) ≅
       (finiteCoefficientSliceRestriction X B R ψ Z).mapDerivedCategory.obj K :=
-    ((Functor.mapDerivedCategoryCompIso U CZ).app L).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso U CZ).app L ≪≫
     (Functor.mapDerivedCategoryNatIso
       (AlgebraicGeometry.ProEtale.comparisonUpperStarUpperStarIso D g.left).symm).app L ≪≫
-    (Functor.mapDerivedCategoryCompIso C U').app L ≪≫
+    (Functor.mapDerivedCategoryCompIso C U').symm.app L ≪≫
     U'.mapDerivedCategory.mapIso eL ≪≫ derivedChartPullbackIso X B R ψ g K
   let eC : CZ.mapDerivedCategory.obj (EC.mapDerivedCategory.obj E) ≅
       PC.mapDerivedCategory.obj E :=
-    ((Functor.mapDerivedCategoryCompIso EC CZ).app E).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso EC CZ).app E ≪≫
     (Functor.mapDerivedCategoryNatIso
       (AlgebraicGeometry.ProEtale.constantSheafCompComparisonUpperStarIso D Z.left)).app E
   let eF := ((finiteCoefficient_slice_derived_coordinates X B R ψ hψ Z).2 F).some

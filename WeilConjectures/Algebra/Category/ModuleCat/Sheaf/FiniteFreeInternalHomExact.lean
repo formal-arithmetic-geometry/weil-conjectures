@@ -83,7 +83,7 @@ private theorem finiteFreeHomIso_naturality
       Sigma.desc (fun l : I ↦ if l = j then 𝟙 N else 0) ≫ f := by
     apply Sigma.hom_ext
     intro l
-    simp only [Sigma.ι_map_assoc, Sigma.ι_desc, Sigma.ι_desc_assoc]
+    simp only [Sigma.ι_map_assoc, Sigma.ι_comp_desc, Sigma.ι_comp_desc_assoc]
     split_ifs <;> simp
   simp only [Category.assoc, hp]
   rw [hm, ← Category.assoc (finiteFreeHomIso I E N hE).hom,

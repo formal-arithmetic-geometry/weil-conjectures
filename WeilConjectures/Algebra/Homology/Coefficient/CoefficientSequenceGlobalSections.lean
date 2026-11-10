@@ -257,11 +257,11 @@ def sequenceRestrictionDerivedEvaluation
           (op n)).mapDerivedCategory ≅
       derivedSystemEvaluation B n ⋙
         (sequenceCoefficientRestriction (α.app (op n))).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso r.functor
-    ((CategoryTheory.evaluation ℕᵒᵖ _).obj (op n))).symm ≪≫
+  Functor.mapDerivedCategoryCompIso r.functor
+    ((CategoryTheory.evaluation ℕᵒᵖ _).obj (op n)) ≪≫
     Functor.mapDerivedCategoryNatIso (r.evaluation n) ≪≫
-    Functor.mapDerivedCategoryCompIso (systemEvaluation B n)
-      (sequenceCoefficientRestriction (α.app (op n)))
+    (Functor.mapDerivedCategoryCompIso (systemEvaluation B n)
+      (sequenceCoefficientRestriction (α.app (op n)))).symm
 
 /-- The two finite comparisons, with the actual total derived functors as their endpoints.
 Source: Stacks 0941, 0D6E (blueprint: lem-coef-sequence-global-sections-evaluation). -/
@@ -287,7 +287,6 @@ def SequenceSectionsComparisons.global
     {α : (Functor.const ℕᵒᵖ).obj A ⟶ B} (d : SequenceSectionsComparisons B A α) :
     DerivedCategory (StrictRingSystem B) ⥤ DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) :=
   d.restriction.functor.mapDerivedCategory ⋙ d.tower.functor
-
 /-- The first comparison: restrict scalars exactly, then evaluate the same tower resolution.
 Source: Stacks 0941 (blueprint: lem-coef-sequence-global-sections-evaluation). -/
 def SequenceSectionsComparisons.restrictedEvaluation
@@ -357,6 +356,8 @@ structure SequenceSectionsComparisons.Normalized
       (d.finiteEvaluation n).hom.app M ≫
         (d.finite (B.obj (op n))).functor.map ((systemDerivedTransition B h).app M) ≫
         (d.scalar (B.map (homOfLE h).op)).inv.app ((derivedSystemEvaluation B m).obj M)
+
+-- Keep localization constructions behind their factorization API in the proof.
 
 -- Keep localization constructions behind their factorization API in the proof.
 attribute [local irreducible] Functor.mapDerivedCategory

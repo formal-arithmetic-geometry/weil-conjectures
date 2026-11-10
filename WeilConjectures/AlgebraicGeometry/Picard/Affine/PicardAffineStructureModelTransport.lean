@@ -193,7 +193,7 @@ theorem picard_affine_structure_model_transport
   let erep : B.mapDerivedCategory.obj K ≅
       DerivedCategory.Q.obj ((H.mapHomologicalComplex (.up ℤ)).obj K') :=
     ((Functor.mapDerivedCategoryNatIso θ).app K).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso O H).app K ≪≫
+      (Functor.mapDerivedCategoryCompIso O H).symm.app K ≪≫
       H.mapDerivedCategory.mapIso rep ≪≫ H.mapDerivedCategoryFactors.app K'
   let T : ModuleCat.{v} R ⥤
       SheafOfModules.{v} (moduleRings (Spec R).toRingedSpace) := tilde.functor R

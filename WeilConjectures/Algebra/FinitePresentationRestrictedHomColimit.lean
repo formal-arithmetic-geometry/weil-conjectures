@@ -154,8 +154,7 @@ theorem exists_stage_restricted_hom
   let : DirectedSystem G (fun {j k} hjk ↦ f j k hjk) :=
     { map_self := by
         intro j t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul r n =>
           dsimp only [f, LinearMap.rTensor_tmul, AlgHom.toLinearMap_apply]
           change TensorProduct.tmul S (F.map (homOfLE (le_refl j.val)) r) n =
@@ -164,16 +163,14 @@ theorem exists_stage_restricted_hom
         | add t t' ht ht' => simpa only [map_add] using congrArg₂ (· + ·) ht ht'
       map_map := by
         intro l k j hjk hkl t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul r n =>
           dsimp only [f, LinearMap.rTensor_tmul, AlgHom.toLinearMap_apply]
           exact congrArg (fun r : F.obj l.val ↦ TensorProduct.tmul S r n)
             (ConcreteCategory.congr_hom (F.map_comp (homOfLE hjk) (homOfLE hkl)) r).symm
         | add t t' ht ht' => simpa only [map_add] using congrArg₂ (· + ·) ht ht' }
   have hc (j k : J) (hjk : j ≤ k) (t : G j) : α k (f j k hjk t) = α j t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul r n =>
       dsimp only [α, f, LinearMap.rTensor_tmul, AlgHom.toLinearMap_apply]
       exact congrArg (fun r : A ↦ TensorProduct.tmul S r n)
@@ -216,8 +213,7 @@ theorem exists_stage_restricted_hom
   intro e he m
   let : Algebra (B j) A := rj.toAlgebra
   have ht (t : G j) : e.hom (α j t) = (1 : A) ⊗ₜ[F.obj j.val, rj] t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul r n =>
       change e.hom ((rj r) ⊗ₜ[F.obj i, ri] n) =
         (1 : A) ⊗ₜ[F.obj j.val, rj] (r ⊗ₜ[F.obj i, rij] n)

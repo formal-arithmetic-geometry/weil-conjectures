@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Canonical single comparison under exact postcomposition
 
@@ -46,15 +48,15 @@ theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
       T.mapDerivedCategory.map
         (DerivedCategory.Q.map
           ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).inv.app M) ≫
-          F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
-            ((CochainComplex.singleFunctor C 0).obj M))) ≫
+          cast (by rfl) (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
+            ((CochainComplex.singleFunctor C 0).obj M)))) ≫
       (rightDerivedFunctorCompMapDerivedCategoryIso F T).inv.app
         ((DerivedCategory.singleFunctor C 0).obj M) =
     DerivedCategory.Q.map
       ((HomologicalComplex.singleMapHomologicalComplex (F ⋙ T)
         (ComplexShape.up ℤ) 0).inv.app M) ≫
-      (F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
-        ((CochainComplex.singleFunctor C 0).obj M))  := by
+      cast (by rfl) ((F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
+        ((CochainComplex.singleFunctor C 0).obj M))) := by
   apply (cancel_mono ((rightDerivedFunctorCompMapDerivedCategoryIso F T).hom.app
     ((DerivedCategory.singleFunctor C 0).obj M))).mp
   simp only [Category.assoc, Iso.inv_hom_id_app]
@@ -85,7 +87,7 @@ theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
     rw [Iso.hom_inv_id_app, ht, Iso.hom_inv_id_app]
     rfl
   erw [ht']
-  erw [Functor.map_id, Category.comp_id]
+  erw [Category.comp_id]
   apply (cancel_mono (T.mapDerivedCategoryFactors.hom.app
     ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
       ((CochainComplex.singleFunctor C 0).obj M)))).mp
@@ -96,7 +98,8 @@ theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
   erw [T.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app]
   rw [← DerivedCategory.Q.map_comp]
   apply congrArg DerivedCategory.Q.map
-  ext i
+  apply HomologicalComplex.hom_ext
+  intro i
   by_cases hi : i = 0
   · subst i
     simp [mapCochainComplexSingleFunctor]

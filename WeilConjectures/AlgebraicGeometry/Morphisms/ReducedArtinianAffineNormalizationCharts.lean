@@ -140,7 +140,7 @@ theorem reduced_artinian_affine_normalization_charts
     simp only [Iso.trans_inv, Iso.symm_inv, asIso_hom, Scheme.Spec.mapIso_hom]
     apply Sigma.hom_ext
     intro i
-    simp only [Category.assoc, Sigma.ι_desc]
+    simp only [Category.assoc, Sigma.ι_comp_desc]
     rw [show Sigma.ι Z i = Sigma.ι (ZM ∘ v.symm) i from rfl]
     rw [Sigma.ι_reindex_hom_assoc]
     simp only [ZM, ι_sigmaSpec_assoc]

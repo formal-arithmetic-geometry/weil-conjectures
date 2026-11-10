@@ -28,27 +28,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A pseudo-coherent object with locally finite Tor dimension is perfect.
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CQ, implication (2) to (1).
-(blueprint: lem-pc-pseudo-coherent-locally-finite-tor-perfect).
-
-Proof: At x choose a pseudo-coherent bounded-above finite-free model on U,
-and a Tor neighbourhood W with interval [a,b]. Refine U intersect W to an
-affine open V containing x. Exact over-site restriction preserves the upper
-bound and free terms, and its derived composition comparison restricts the
-representing isomorphism. Lift this finite-free complex through the fully
-faithful affine associated-sheaf functor, using its finite-free comparison.
-Faithfulness checks the differential relations. The lifted ring complex is
-pseudo-coherent by its own finite-free model. The local affine Tor-transfer
-lemma gives finite Tor amplitude from the bounds on W. The ring criterion
-gives a bounded finite-projective model in the ring derived category.
-Associate sheaves to its terms: finite projectives are retracts of finite
-free modules, and the associated-sheaf functor preserves the retractions
-and zero objects. Thus the model is strictly perfect. The localized derived
-sheafification comparison transports the ring-derived isomorphism and the
-original local representing isomorphism to give the required perfect model
-at x. Empty schemes require no witnesses; zero rings and rank-zero terms
-are permitted throughout. -/
 theorem isPerfect_of_isPseudoCoherent_of_hasLocallyFiniteTorDimension (S : Scheme.{uP})
     [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,
@@ -90,7 +69,7 @@ theorem isPerfect_of_isPseudoCoherent_of_hasLocallyFiniteTorDimension (S : Schem
     (Functor.mapDerivedCategoryNatIso
       (SheafOfModules.overFunctorMap.{uP}
         (moduleRings S.toRingedSpace) (homOfLE hVU))).symm.app K ≪≫
-      (Functor.mapDerivedCategoryCompIso G F).app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
+      (Functor.mapDerivedCategoryCompIso G F).symm.app K ≪≫ F.mapDerivedCategory.mapIso eP ≪≫
         F.mapDerivedCategoryFactors.app P
   obtain ⟨M, b, hMb, hMf, ⟨eM⟩⟩ := affine_finiteFree_model S V hV PV hbV hfV
   let R := S.presheaf.obj (.op V)

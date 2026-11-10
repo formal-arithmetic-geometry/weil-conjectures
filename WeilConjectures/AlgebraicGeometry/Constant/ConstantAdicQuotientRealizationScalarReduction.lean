@@ -141,10 +141,10 @@ theorem constantAdicQuotient_realization_scalar_reduction
   have hm₄ := inverseImage_mate_isIso h c
   let m₄ := asIso ((mateEquiv a₃ (pbcDerivedScalarAdjunction b)).symm k₄.inv).natTrans
   -- Expand the exact realizations and compose the four mate isomorphisms.
-  let fn := Functor.mapDerivedCategoryCompIso Qn (Cn ⋙ Bn) ≪≫
-    Functor.isoWhiskerLeft Qn.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cn Bn)
-  let fp := Functor.mapDerivedCategoryCompIso Qp (Cp ⋙ Bp) ≪≫
-    Functor.isoWhiskerLeft Qp.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cp Bp)
+  let fn := (Functor.mapDerivedCategoryCompIso Qn (Cn ⋙ Bn)).symm ≪≫
+    Functor.isoWhiskerLeft Qn.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cn Bn).symm
+  let fp := (Functor.mapDerivedCategoryCompIso Qp (Cp ⋙ Bp)).symm ≪≫
+    Functor.isoWhiskerLeft Qp.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cp Bp).symm
   exact ⟨Pn.mapIso (fn.app ((ConstantScalarRealization.moduleDerivedExtension q).obj E')) ≪≫
     Pn.mapIso (Bn.mapDerivedCategory.mapIso
       (Cn.mapDerivedCategory.mapIso (m₁.symm.app E'))) ≪≫

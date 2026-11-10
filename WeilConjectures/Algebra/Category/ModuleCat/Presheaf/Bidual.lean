@@ -39,6 +39,7 @@ lemma bidual_app_app_apply {X : Cᵒᵖ} (m : A.obj X) (W : (Over X.unop)ᵒᵖ)
       φ.app (op (Over.mk (𝟙 W.unop.left))) (A.map W.unop.hom.op m) :=
   rfl
 
+
 variable {A} in
 /-- The biduality morphism is natural. -/
 @[reassoc]
@@ -123,7 +124,8 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
     let T' : (Over W.unop.left)ᵒᵖ := op (Over.mk (𝟙 W.unop.left))
     let b : ι → R.obj (op W.unop.left) := fun i ↦ ψ.app T' (A.map W.unop.hom.op (m i))
     -- `ψ` is a combination of the restrictions of the `c i`.
-    have hψ : ψ = ∑ i, b i • (homObj A (unit _)).map W.unop.hom.op (c i) := by
+    have hψ : ψ = ∑ i, b i • (show (homObj A (unit _)).obj (op W.unop.left) from
+        (homObj A (unit _)).map W.unop.hom.op (c i)) := by
       refine hom_ext (M₁ := (restrictOver R W.unop.left).obj A)
         (M₂ := (restrictOver R W.unop.left).obj (unit _)) fun W' ↦ ?_
       ext y

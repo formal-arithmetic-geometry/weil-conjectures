@@ -543,8 +543,7 @@ private theorem restrictedTensor_hom_ext (φ : R ⟶ S) (M : Mod R) (N : Mod R)
     ((SheafOfModules.toSheaf (siteModuleRings R)).obj N)).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s m => exact h U s m
   | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
 

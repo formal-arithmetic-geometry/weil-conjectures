@@ -330,12 +330,12 @@ noncomputable def compositionInterchangePullback :
     (upperStar Λ i).mapDerivedCategory ⋙ (upperStar Λ p).mapDerivedCategory ≅
       (upperStar Λ c.obj.obj.g).mapDerivedCategory ⋙
         (upperStar Λ c.obj.obj.i).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ p)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ p) ≪≫
     Functor.mapDerivedCategoryNatIso
       ((upperStarComp Λ p i).symm ≪≫
         eqToIso (congrArg (upperStar Λ) c.obj.obj.comm) ≪≫
           upperStarComp Λ c.obj.obj.i c.obj.obj.g) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar Λ c.obj.obj.g) (upperStar Λ c.obj.obj.i)
+    (Functor.mapDerivedCategoryCompIso (upperStar Λ c.obj.obj.g) (upperStar Λ c.obj.obj.i)).symm
 
 /-- The restriction comparison `i^* Rr_* B → Rp_* j'^* B`, the adjoint mate of the
 canonical pullback square. This construction is defined before proving the square cartesian.
@@ -404,7 +404,7 @@ private theorem interchange_restriction_iso [IsProper p]
     have h := cartesianDerivedCounit Λ (interchange_geometry p i c) T
     exact (NatTrans.isIso_app_iff_of_iso e.counit
       ((Functor.mapDerivedCategoryCompIso (openImmersionLowerShriek Λ i)
-        (upperStar Λ c.obj.obj.g)).app T)).mp h
+        (upperStar Λ c.obj.obj.g)).app T)).mpr h
   have := interchange_mate_iso a b d e (compositionInterchangePullback Λ p i c) hc
   have ht : IsIso ((Adjunction.exchangeRight d b
       (compositionInterchangePullback Λ p i c)).app B) := inferInstance

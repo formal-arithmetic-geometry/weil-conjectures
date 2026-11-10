@@ -164,7 +164,7 @@ lemma boundedConstructibleIntegersModPowReduction_distinguished
   · dsimp [Functor.mapTriangle]
     simp [boundedConstructibleIntegersModPowAdjunction_unit_app_hom]
   · dsimp [Functor.mapTriangle]
-    simp only [Triangle.mk_mor₃, boundedConstructibleIntegersModPowReductionδ_app_hom,
+    simp only [boundedConstructibleIntegersModPowReductionδ_app_hom,
       Functor.comp_obj, ObjectProperty.ι_obj, Category.assoc, CategoryTheory.Functor.map_id,
       Category.comp_id,
       Category.id_comp]

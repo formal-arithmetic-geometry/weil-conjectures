@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorProduct
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.AlgebraicGeometry.TensorCounitCoordinateEquation
@@ -169,14 +171,14 @@ theorem tensorCounit_oneKFlat_coordinates
           (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj
           (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G),
         (derivedPullback k).map a.hom ≫
-          (SingleComplexBaseChange.counit k).app
+          cast (by rfl) ((SingleComplexBaseChange.counit k).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
               (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _
-            (SheafOfModules.monoidalCategory X.sheaf)))) ≫ b.hom =
+            (SheafOfModules.monoidalCategory X.sheaf))))) ≫ b.hom =
           τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj G) ≫
             (derivedPullback k).obj (DerivedCategory.Q.obj P) ◁
-            (SingleComplexBaseChange.counit k).app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj G) := by
+            cast (by rfl) ((SingleComplexBaseChange.counit k).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) := by
   classical
   let := SheafOfModules.monoidalCategory X.sheaf
   let := SheafOfModules.monoidalCategory T.sheaf
@@ -233,8 +235,9 @@ theorem tensorCounit_oneKFlat_coordinates
       (derivedPullback k).obj (Q.obj P) ⊗ QT.obj (K.obj G) :=
     QT.mapIso (φ P G) ≪≫ (asIso ν).symm ≪≫ ((asIso ep).symm ⊗ᵢ Iso.refl _)
   refine ⟨a, b, ?_⟩
+  simp only [cast_eq] at hgeneral
   have h := cancel_coordinate_tensor _ (τ (Q.obj P) (Q.obj G)) ep eg ν hgeneral
-  simpa only [a, b, Q, QT, K, ep, eg, pullbackTensorTotal, Iso.trans_hom, Iso.symm_hom, asIso_hom,
-    asIso_inv, Functor.mapIso_hom, tensorIso_hom, Iso.refl_hom, Category.assoc] using h
+  simpa only [cast_eq, a, b, Q, QT, K, ep, eg, pullbackTensorTotal, Iso.trans_hom, Iso.symm_hom,
+    asIso_hom, asIso_inv, Functor.mapIso_hom, tensorIso_hom, Iso.refl_hom, Category.assoc] using h
 
 end AlgebraicGeometry

@@ -68,7 +68,7 @@ theorem tate_root_ideal_prime
       rw [hc]
       exact a.property.pow _
     have hiK : IsIntegral R c :=
-      (isIntegral_algebraMap_iff (algebraMap K L).injective).mp hiL
+      (isIntegral_algebraMap_iff).mp hiL
     obtain ⟨r, hr⟩ := IsIntegrallyClosed.algebraMap_eq_of_integral hiK
     refine ⟨r, ?_⟩
     apply Subtype.ext
@@ -86,6 +86,7 @@ theorem tate_root_ideal_prime
   · obtain ⟨J, hJ, hJP⟩ :=
       Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain (S := S) P
         (by rw [(RingHom.injective_iff_ker_eq_bot _).mp hinj]; exact bot_le)
+    change J.comap (algebraMap R S) = P at hJP
     have hyJ : y ∈ J := by
       apply hJ.mem_of_pow_mem (p ^ e)
       rw [hy]

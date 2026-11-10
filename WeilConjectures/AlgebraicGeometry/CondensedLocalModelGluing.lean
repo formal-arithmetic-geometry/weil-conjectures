@@ -53,6 +53,10 @@ private lemma local_adjoint (P : Mod _ R) (M : Mod _ S)
   let a := (Mod.extendRestrictAdjunction φ).comp (adj.mapModAdjunction S)
   let b := (adj.mapModAdjunction R).comp
     (Mod.extendRestrictAdjunction (F.map φ))
+  have : IsMonHom (adj.unitAlgHom R) := Adjunction.isMonHom_unitAlgHom adj R
+  have : IsMonHom (adj.unitAlgHom S) := Adjunction.isMonHom_unitAlgHom adj S
+  have hφ : adj.unitAlgHom R ≫ G.map (F.map φ) = φ ≫ adj.unitAlgHom S :=
+    (adj.unit.naturality φ).symm
   let e : Mod.comap (F.map φ) ⋙
       (G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)) ≅
       (G.mapMod (F.obj S) ⋙ Mod.comap (adj.unitAlgHom S)) ⋙ Mod.comap φ :=
@@ -60,7 +64,7 @@ private lemma local_adjoint (P : Mod _ R) (M : Mod _ S)
     Functor.isoWhiskerRight (G.mapModComapIso (F.map φ)) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (Mod.comapComp _ _).symm ≪≫
-    Functor.isoWhiskerLeft _ (Mod.comapCongr (adj.unit.naturality φ).symm) ≪≫
+    Functor.isoWhiskerLeft _ (Mod.comapCongr hφ) ≪≫
     Functor.isoWhiskerLeft _ (Mod.comapComp _ _) ≪≫
     (Functor.associator _ _ _).symm
   have huniq := (b.ofNatIsoRight e).homEquiv_naturality_right

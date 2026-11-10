@@ -110,7 +110,7 @@ noncomputable def graphUpperStarIso :
         (upperStar (ModuleCat.{u + 1} A) (graph q v hf c)).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso
     (upperStarComp _ (graph q v hf c) (pullback.fst c.g v) c.i
-      (graph_fst q v hf c).symm) ≪≫ Functor.mapDerivedCategoryCompIso _ _
+      (graph_fst q v hf c).symm) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The graph transfer. First factor `Rq_*` through the proper graph, identify graph
 pushforward with extension by zero, and take the adjunct of the unit for `c.i`.

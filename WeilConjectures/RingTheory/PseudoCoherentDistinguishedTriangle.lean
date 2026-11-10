@@ -55,7 +55,7 @@ private noncomputable def homologyLadder
         Functor.map_comp] using (congrArg
       ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) i).map) φ.comm₂))
     (((DerivedCategory.homologyFunctor (ModuleCat.{v} R) 0).homologySequenceδ_naturality
-      S T φ i (i + 1) rfl).symm)
+      φ i (i + 1) rfl).symm)
     (by
       dsimp [-Fin.reduceFinMk]
       simpa only [ComposableArrows.Precomp.map, DerivedCategory.shift_homologyFunctor,

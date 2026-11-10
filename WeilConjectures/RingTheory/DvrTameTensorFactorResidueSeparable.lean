@@ -167,8 +167,7 @@ theorem dvr_tame_tensor_factor_residue_isSeparable
     intro z hz
     clear hz
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective z
-    induction x using TensorProduct.induction_on with
-    | zero => exact (Algebra.adjoin A (Set.range iE)).zero_mem
+    induction x using TensorProduct.inductionOn with
     | tmul e a =>
       have he : iE e ∈ Algebra.adjoin A (Set.range iE) :=
         Algebra.subset_adjoin ⟨e, rfl⟩

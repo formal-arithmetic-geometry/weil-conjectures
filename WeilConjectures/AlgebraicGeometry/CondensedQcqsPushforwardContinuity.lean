@@ -38,6 +38,12 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+noncomputable local instance
+    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
 /-- The cocone obtained from good truncation, retaining the original complexes as its
 source. Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
 (auxiliary; not a blueprint node). -/
@@ -165,6 +171,7 @@ theorem condensed_qcqs_pushforward_continuity
     exact condensed_qcqs_pushforward_local_comparison Λ f D a ha q V hV hweak
   exact isIso_of_reflects_iso _ (Mod.forget (condensedRingObj Λ Y))
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem comparison_isIso_of_bounded_model
     {A : Type v} [Category.{w} A] [Abelian A]
     {B : Type u} [Category.{z} B]
@@ -331,6 +338,7 @@ theorem condensed_qcqs_globalSections_continuity
     (F.rightDerivedFunctor.map (DerivedCategory.Q.map ((D.obj i).πTruncGE a))))
   infer_instance
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The representative comparison induces the canonical isomorphism on each homology object.
 Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1), representative
 comparison step.

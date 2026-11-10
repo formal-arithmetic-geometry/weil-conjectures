@@ -411,8 +411,8 @@ def adjB {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) : LB f ⊣ RB f
 Source: Stacks 03D7 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
 def tau {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     U W ⋙ LA f ≅ LB f ⋙ U T :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso f.restriction ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso f.restriction ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 variable [Module.Finite A B] [Module.Free A B]
 
@@ -1039,14 +1039,14 @@ Source: Stacks 0D6D (blueprint: lem-pur-topos-finite-free-compact-constituents).
 def compLA {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) : LA h ≅ LA g ⋙ LA f :=
-  Functor.mapDerivedCategoryNatIso c.moduleA ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryNatIso c.moduleA ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact localization of the canonical B-coefficient inverse-image compositor.
 Source: Stacks 0D6D (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
 def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) : LB h ≅ LB g ⋙ LB f :=
-  Functor.mapDerivedCategoryNatIso c.moduleB ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  Functor.mapDerivedCategoryNatIso c.moduleB ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 section
 omit [Module.Finite A B] [Module.Free A B]

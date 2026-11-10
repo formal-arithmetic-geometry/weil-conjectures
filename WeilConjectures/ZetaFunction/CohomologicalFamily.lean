@@ -83,13 +83,13 @@ theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Modul
     rw [map_sum, PowerSeries.coeff_mk]
     split_ifs with hn
     · simp [hT, hn]
-    · simp only [hT, PowerSeries.coeff_smul, PowerSeries.coeff_mk, if_neg hn, ha]
+    · simp only [hT, PowerSeries.coeff_smul, PowerSeries.coeff_mk, ite_eq_right hn, ha]
   have hP1 (i : ℤ) :
       PowerSeries.constantCoeff (((u i).charpolyRev.comp (Polynomial.X ^ 1) :
         Polynomial K) : PowerSeries K) = 1 := by
     rw [pow_one, Polynomial.comp_X, Polynomial.constantCoeff_coe,
       Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
-  have hf : ∀ i ∈ s, PowerSeries.X * PowerSeries.derivative K
+  have hf : ∀ i ∈ s, PowerSeries.X * PowerSeries.derivative (R := K)
       (if Even i then (((u i).charpolyRev.comp (Polynomial.X ^ 1) : Polynomial K) :
         PowerSeries K)
       else (((u i).charpolyRev.comp (Polynomial.X ^ 1) : Polynomial K) : PowerSeries K)⁻¹) =
@@ -106,12 +106,12 @@ theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Modul
         neg_smul, one_smul, neg_neg, inv_charpolyRev_eq_exp]
       exact PowerSeries.X_mul_derivative_exp_subst _
   set A := alternatingCharpolyRevProd s u 1 with hAdef
-  have hA : PowerSeries.X * PowerSeries.derivative K A =
+  have hA : PowerSeries.X * PowerSeries.derivative (R := K) A =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else a n) * A := by
     rw [hAdef, alternatingCharpolyRevProd, PowerSeries.X_mul_derivative_prod s hf,
       Finset.sum_neg_distrib, hsum]
   set E := (PowerSeries.exp K).subst (alternatingTraceSeries s u) with hEdef
-  have hE : PowerSeries.X * PowerSeries.derivative K E =
+  have hE : PowerSeries.X * PowerSeries.derivative (R := K) E =
       (PowerSeries.mk fun n ↦ if n = 0 then 0 else a n) * E := by
     rw [hEdef, hg]
     exact PowerSeries.X_mul_derivative_exp_subst a
@@ -129,10 +129,10 @@ theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Modul
         fun d hd ↦ by simp [PowerSeries.coeff_zero_eq_constantCoeff, map_pow, zero_pow hd]]
       simp [PowerSeries.coeff_exp]
     simpa using h0
-  have h1 : PowerSeries.X * PowerSeries.derivative K (A * E) = 0 * (A * E) := by
+  have h1 : PowerSeries.X * PowerSeries.derivative (R := K) (A * E) = 0 * (A * E) := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination A * hE + E * hA
-  have h2 : PowerSeries.X * PowerSeries.derivative K (1 : PowerSeries K) = 0 * 1 := by
+  have h2 : PowerSeries.X * PowerSeries.derivative (R := K) (1 : PowerSeries K) = 0 * 1 := by
     rw [Derivation.map_one_eq_zero, mul_zero, zero_mul]
   have hAE : A * E = 1 := by
     ext n

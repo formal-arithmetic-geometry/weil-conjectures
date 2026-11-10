@@ -29,6 +29,12 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+private local instance sheafTypesHasBinaryProduct.{uC, vC, w}
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
+    (X Y : Sheaf J (Type w)) : HasBinaryProduct X Y :=
+  have : HasBinaryProducts (Sheaf J (Type w)) := Sheaf.instHasLimitsOfShape
+  HasLimitsOfShape.has_limit _
+
 private noncomputable def pairSection {C : Type*} [Category C]
     {J : GrothendieckTopology C} (X Y : Sheaf J (Type (u + 1)))
     (W : Cᵒᵖ) (x : X.obj.obj W) (y : Y.obj.obj W) : (X ⨯ Y).obj.obj W :=

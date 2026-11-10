@@ -84,8 +84,7 @@ lemma cechSectionsBaseChangeX_d (k : ℕ)
       ((cechComplex (fun i ↦ g' ⁻¹ᵁ U i)).obj
         (cechSectionsPresheaf ((pullback g').obj ℱ) (f' ⁻¹ᵁ W))).d k (k + 1)
         (cechSectionsBaseChangeX H ℱ U W hg k x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul b c =>
     funext y
@@ -164,8 +163,7 @@ theorem bijective_cechSectionsBaseChangeX [IsAffine S]
     rw [this]
     exact e.bijective
   intro x
-  induction x using TensorProduct.induction_on with
-  | zero => rw [map_zero, map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => rw [map_add, map_add, hx, hy]
   | tmul b c =>
     funext y
@@ -275,8 +273,7 @@ lemma sectionsBaseChangeOpen_smul {UX : X.Opens} {Z : Y.Opens} (hZ : Z ≤ g' �
     (b : Γ(T, W)) (w : Γ(T, W) ⊗[Γ(S, ⊤)] sectionsModule f ℱ UX) :
     sectionsBaseChangeOpen H ℱ W hg hZ (b • w) =
       f'.appLE W Z (hZ.trans inf_le_right) b • sectionsBaseChangeOpen H ℱ W hg hZ w := by
-  induction w using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction w using TensorProduct.inductionOn with
   | add x y hx hy => rw [smul_add, map_add, map_add, hx, hy, smul_add]
   | tmul b' m =>
     rw [TensorProduct.smul_tmul', smul_eq_mul, sectionsBaseChangeOpen_tmul,

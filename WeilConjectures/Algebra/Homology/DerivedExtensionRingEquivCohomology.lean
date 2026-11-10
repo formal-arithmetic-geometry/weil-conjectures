@@ -57,8 +57,7 @@ private theorem exists_scalarExtension_ringEquiv
       map_smul' := by
         intro b z
         change v M (b • z) = eB b • v M z
-        induction z using TensorProduct.induction_on with
-        | zero => simp
+        induction z using TensorProduct.inductionOn with
         | tmul b' x =>
           change v M ((b * (show B₀ from b')) ⊗ₜ[R₀,algebraMap R₀ B₀] x) =
             eB b • v M (b' ⊗ₜ[R₀,algebraMap R₀ B₀] x)

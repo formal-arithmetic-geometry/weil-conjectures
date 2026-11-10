@@ -37,9 +37,9 @@ private theorem filtered_signed_extension (X : Scheme.{u}) {I : Type*} [LinearOr
   by_cases ht : Function.Injective t
   · have hm : StrictMono (t ∘ Tuple.sort t) :=
       (Tuple.monotone_sort t).strictMono_of_injective (ht.comp (Tuple.sort t).injective)
-    rw [signedCechExtensionValue, dif_pos ht]
+    rw [signedCechExtensionValue, dite_eq_left ht]
     rw [Finset.sum_eq_single (Tuple.sort t)]
-    · simp only [dif_pos hm]
+    · simp only [dite_eq_left hm]
     · intro σ _ hσ
       have hn : ¬ StrictMono (t ∘ σ) := by
         intro h
@@ -48,9 +48,9 @@ private theorem filtered_signed_extension (X : Scheme.{u}) {I : Type*} [LinearOr
         intro i
         apply ht
         exact congrFun (Tuple.unique_monotone h.monotone (Tuple.monotone_sort t)) i
-      simp only [dif_neg hn]
+      simp only [dite_eq_right hn]
     · simp
-  · rw [signedCechExtensionValue, dif_neg ht]
+  · rw [signedCechExtensionValue, dite_eq_right ht]
     apply Finset.sum_eq_zero
     intro σ _
     have hn : ¬ StrictMono (t ∘ σ) := by
@@ -60,7 +60,7 @@ private theorem filtered_signed_extension (X : Scheme.{u}) {I : Type*} [LinearOr
       have he := h.injective (show (t ∘ σ) (σ.symm a) = (t ∘ σ) (σ.symm b) by
         simpa using hab)
       simpa using congrArg σ he
-    simp only [dif_neg hn]
+    simp only [dite_eq_right hn]
 
 private theorem signed_projection_differential (X : Scheme.{u}) {I : Type*} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{u})

@@ -108,11 +108,11 @@ theorem exists_cartanEilenberg_object_resolution_rows
     else InjectiveResolution.of _
   have hdneg (p : ℤ) (hp : p ≤ 0) : IsZero (ID p).cocomplex := by
     dsimp [ID]
-    rw [dif_pos hp]
+    rw [dite_eq_left hp]
     exact Functor.map_isZero (CochainComplex.single₀ B) (hd p hp)
   have hhneg (p : ℤ) (hp : p < 0) : IsZero (IH p).cocomplex := by
     dsimp [IH]
-    rw [dif_pos hp]
+    rw [dite_eq_left hp]
     exact Functor.map_isZero (CochainComplex.single₀ B) (hh p hp)
   have hs (p : ℤ) := InjectiveResolution.exists_horseshoe_prescribed_resolutions
     (T p) (hT p) (ID p) (IH p)

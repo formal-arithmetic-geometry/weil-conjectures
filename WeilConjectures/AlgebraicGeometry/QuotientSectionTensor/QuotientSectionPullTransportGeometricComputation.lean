@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
@@ -41,12 +43,12 @@ namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 
 open QuotientChange IntegralQuotient
 
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
+
 attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
@@ -87,7 +89,13 @@ theorem section_pull_transport_geometric_computation {X Y : Scheme.{u}} (f : X �
           (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj
             P)))
       ((ModuleRingedComparison.derivedEquivalence Λ X).functor.map
-        ((pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P)) ≫
+        ((L Λ f).map
+            ((DerivedCategory.quotientCompQhIso (Modules Λ Y)).inv.app P) ≫
+          (pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P) ≫
+          DerivedCategory.Qh.map
+            (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+          (DerivedCategory.quotientCompQhIso (Modules Λ X)).hom.app
+            (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)) ≫
       ((ModuleRingedComparison.equivalence Λ X).functor.mapDerivedCategoryFactors).hom.app
         (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map

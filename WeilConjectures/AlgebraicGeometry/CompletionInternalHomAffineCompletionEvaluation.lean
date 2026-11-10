@@ -36,8 +36,7 @@ private theorem completion_linearMap_ext_of_finite
   apply LinearMap.ext
   intro x
   obtain ⟨z, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J P x
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul r x => simp only [AdicCompletion.ofTensorProduct_tmul, map_smul, h x]
   | add x y hx hy => simp only [map_add, hx, hy]
 

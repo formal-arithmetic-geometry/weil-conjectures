@@ -128,7 +128,14 @@ theorem systemLevelLeftExtensionTheory : Nonempty (SystemLevelLeftExtensionTheor
             coproducts := fun B ↦ inferInstance
             derivedCoproducts := strictRingSystem_derivedCoproducts
             levelDerivedCoproducts := systemLevel_derivedCoproducts
-            evaluationCoproducts := fun B n I ↦ systemEvaluation_colimitsOfShape B (Discrete I) n
+            evaluationCoproducts := fun B n I ↦ by
+              have (m : ℕ) : HasColimitsOfShape (Discrete I) (systemLevel B m) := by
+                have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+                    (derivedChangeRingIndependentCoefficients J (B.obj (op m))).obj) :=
+                  PresheafOfModules.hasColimitsOfShape _ _
+                exact
+                  instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+              exact systemEvaluation_colimitsOfShape B (Discrete I) n
             derivedEvaluationCoproducts := derivedSystemEvaluation_coproducts
             cohomology := systemDerivedCohomology
             detectsIso := systemDerivedEvaluation_isIso_iff

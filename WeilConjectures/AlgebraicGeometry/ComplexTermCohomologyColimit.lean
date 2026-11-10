@@ -30,8 +30,7 @@ attribute [local irreducible] upperStar upperStarComp upperStarId
   Sheaf.H.map cohomologyMap
 
 -- Reduce the mapped-complex wrappers without expanding the pullback constructions.
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-  NatTrans.mapHomologicalComplex NatIso.mapHomologicalComplex
+attribute [local implicit_reducible] NatTrans.mapHomologicalComplex NatIso.mapHomologicalComplex
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem complexTermCohomologyMap_eq

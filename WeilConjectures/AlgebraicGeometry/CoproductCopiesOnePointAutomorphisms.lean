@@ -59,8 +59,8 @@ theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty
       have hh := congrArg (fun t ↦ t ≫ π) hl
       change (l ≫ Sigma.ι G j) ≫ π = (Sigma.ι G i ≫ f) ≫ π at hh
       rw [Category.assoc, Category.assoc, hf] at hh
-      have hj : Sigma.ι G j ≫ π = 𝟙 X := Sigma.ι_desc _ _
-      have hi : Sigma.ι G i ≫ π = 𝟙 X := Sigma.ι_desc _ _
+      have hj : Sigma.ι G j ≫ π = 𝟙 X := Sigma.ι_comp_desc _ _
+      have hi : Sigma.ι G i ≫ π = 𝟙 X := Sigma.ι_comp_desc _ _
       rw [hj, hi, Category.comp_id] at hh
       exact hh
     rw [hid] at hl
@@ -102,8 +102,8 @@ theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty
       intro i
       rw [← Category.assoc, Sigma.ι_reindex_hom q G i]
       change Sigma.ι G (q i) ≫ π = Sigma.ι G i ≫ π
-      exact (Sigma.ι_desc (fun _ : I ↦ 𝟙 X) (q i)).trans
-        (Sigma.ι_desc (fun _ : I ↦ 𝟙 X) i).symm)
+      exact (Sigma.ι_comp_desc (fun _ : I ↦ 𝟙 X) (q i)).trans
+        (Sigma.ι_comp_desc (fun _ : I ↦ 𝟙 X) i).symm)
     refine ⟨a, ?_⟩
     ext i
     rw [hρ, he]

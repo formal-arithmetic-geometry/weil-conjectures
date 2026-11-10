@@ -39,6 +39,7 @@ theorem counit_constant {A : C} (o : 𝟙_ C ⟶ A) (T : D) :
   apply congrArg (fun k ↦ k ≫ o)
   exact toUnit_unique _ _
 
+
 /-- The counit converts inverse product comparisons into the product of counits. -/
 theorem counit_pair {A B X : C} (o : A ⊗ B ⟶ X) {T : D}
     (x : T ⟶ V.obj A) (y : T ⟶ V.obj B) :

@@ -63,7 +63,7 @@ theorem linear_elimination (K : Type u) [CommRing K] (σ : Type v) [DecidableEq 
         simp only [apply_ite C, map_zero, ite_mul, zero_mul]
         exact Fintype.sum_ite_eq _ _
       rw [hs]
-      simp only [val, dif_pos hl, sub_self]
+      simp only [val, dite_eq_left hl, sub_self]
     · simp [val, hl, ← mul_assoc, ← map_mul]
   have hI : ∀ p, p ∈ I → g₀ p = 0 := by
     have hi : I ≤ RingHom.ker g₀.toRingHom := by
@@ -90,7 +90,7 @@ theorem linear_elimination (K : Type u) [CommRing K] (σ : Type v) [DecidableEq 
       have hr' : q (C (a : K)) * q (X l) =
           ∑ j : E, q (C (h l j)) * q (X (j : σ)) := by
         simpa [rel, map_sub, map_mul, map_sum, sub_eq_zero] using hr
-      simp only [val, dif_neg hl, map_mul, map_sum, f, aeval_C, aeval_X]
+      simp only [val, dite_eq_right hl, map_mul, map_sum, f, aeval_C, aeval_X]
       have hc (x : K) : algebraMap K (MvPolynomial σ K ⧸ I) x = q (C x) := rfl
       simp only [hc]
       rw [← hr', ← mul_assoc, ← map_mul, ← C_mul]

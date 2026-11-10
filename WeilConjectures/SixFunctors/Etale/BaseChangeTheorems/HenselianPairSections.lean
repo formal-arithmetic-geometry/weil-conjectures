@@ -198,7 +198,7 @@ noncomputable def sigmaEtale : X.Etale :=
 
 /-- The inclusion of a member into the disjoint union of a family of étale `X`-schemes. -/
 noncomputable def sigmaEtaleι (k : ι) : E k ⟶ sigmaEtale E :=
-  MorphismProperty.Over.homMk (Sigma.ι (fun k ↦ (E k).left) k) (Sigma.ι_desc _ _)
+  MorphismProperty.Over.homMk (Sigma.ι (fun k ↦ (E k).left) k) (Sigma.ι_comp_desc _ _)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections of an étale sheaf over the members of a family glue to a section over their
@@ -458,7 +458,7 @@ lemma exists_surjective_etale_pullSection_eq
     | some k => g k.1
   obtain ⟨gt, hgt⟩ := exists_map_sigmaEtaleι_eq G E gE
   have hι : ∀ o, Sigma.ι (fun o ↦ (E o).left) o ≫ (sigmaEtale E).hom = (E o).hom :=
-    fun o ↦ Sigma.ι_desc _ _
+    fun o ↦ Sigma.ι_comp_desc _ _
   refine ⟨sigmaEtale E, ⟨fun y ↦ ?_⟩, gt, pullSection_sigmaEtale_eq i G t E gE (fun o ↦ ?_) gt hgt⟩
   · by_cases hyi : y ∈ Set.range i
     · obtain ⟨y₀, rfl⟩ := hyi

@@ -163,9 +163,9 @@ lemma exact_mk_piMap {ι : Type*} (S : ι → ShortComplex C) [HasProduct fun i 
       (fun z hz ↦ ?_) (fun z hz m hm ↦ ?_))
   · simpa using congrArg (· ≫ Pi.π (fun i ↦ (S i).X₃) i) hz
   · refine Pi.hom_ext _ _ fun i ↦ ?_
-    rw [Category.assoc, Pi.map_π, Pi.lift_π_assoc, Exact.lift_f]
+    rw [Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc, Exact.lift_f]
   · refine Pi.hom_ext _ _ fun i ↦ ?_
-    rw [Pi.lift_π, ← cancel_mono (S i).f, Exact.lift_f, ← hm, Category.assoc, Category.assoc,
+    rw [Pi.lift_comp_π, ← cancel_mono (S i).f, Exact.lift_f, ← hm, Category.assoc, Category.assoc,
       Pi.map_π]
 
 /-- A short exact sequence in a functor category with values in an abelian category is short

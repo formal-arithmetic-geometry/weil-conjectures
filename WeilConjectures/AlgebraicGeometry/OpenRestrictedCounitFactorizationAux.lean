@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 
 module
+
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
 import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
@@ -20,9 +23,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
 private abbrev schemeModulesDerived
     [d : ∀ Y : Scheme.{u},
@@ -138,7 +139,6 @@ private theorem tensor_square_inverse
   intro n
   simp [openTensorRestrictionComplexIso, openTensorRestrictionSquareIso,
     NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex]
-  rfl
 
 private theorem restriction_counit_glue
     {V : Type*} [Category V] {A B C D E F G H I J : V}
@@ -175,7 +175,7 @@ The equation follows by evaluating the defining left-derived composition
 factorization and the exact restriction adjunction, then identifying the
 remaining tensor comparisons with `openRestrictedTensorDerivedIso`.
 -/
-theorem openRestricted_counit_compatibility_aux
+private theorem openRestricted_counit_compatibility_aux_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
@@ -228,8 +228,8 @@ theorem openRestricted_counit_compatibility_aux
       (DerivedCategory.Q.mapIso (openTensorRestrictionComplexIso g' U P)).inv at ht
   have hj' : (derivedPullback q).map eR.hom ≫ (derivedPullback q).map εj =
       (derivedPullback q).map (DerivedCategory.Q.map θ.inv) := by
-    rw [← Functor.map_comp, hj]
-    rfl
+    exact ((derivedPullback q).map_comp eR.hom εj).symm.trans
+      (congrArg (derivedPullback q).map hj)
   have h := restriction_counit_glue ((derivedPullback q).map eR.hom) b m εp
     (DerivedCategory.Q.mapIso θP).hom ((derivedPullback q).map εj) εqT b₁.inv b₂.hom
     ((derivedPullback q).map (DerivedCategory.Q.map θ.inv)) εqR
@@ -241,4 +241,9 @@ theorem openRestricted_counit_compatibility_aux
   set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
       exact h
+
+/-- Public export of the private `openRestricted_counit_compatibility_aux_private`
+(used by `import all` importers; linter.privateModule). -/
+alias openRestricted_counit_compatibility_aux := openRestricted_counit_compatibility_aux_private
+
 end AlgebraicGeometry.SingleComplexBaseChange

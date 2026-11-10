@@ -79,7 +79,6 @@ private theorem graph_open_sheaf_normalization
     localizationLowerShriek, Scheme.smallEtaleTopology, B, Iso.symm_symm_eq,
     NatIso.isIso_inv_app] at ht ⊢
   convert ht using 1
-  congr 4
 
 private lemma mono_comp_iso
     {C : Type*} [Category C] {X Y Z : C} (a : X ⟶ Y) (ha : Mono a) (e : Y ≅ Z) :

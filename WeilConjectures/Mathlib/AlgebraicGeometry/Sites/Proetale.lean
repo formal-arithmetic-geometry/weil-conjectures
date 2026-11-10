@@ -116,12 +116,12 @@ lemma isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage {Y : Scheme.{u}} {ι 
       obtain ⟨i, x, rfl⟩ := hjs z
       refine ⟨i, (V i).ι x, by simp, ?_⟩
       change _ = (Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i ≫ h) x
-      rw [Sigma.ι_desc]
+      rw [Sigma.ι_comp_desc]
       rfl
     · rintro ⟨i, x, hx, rfl⟩
       obtain ⟨x, rfl⟩ : x ∈ Set.range (V i).ι := by rwa [Scheme.Opens.range_ι]
       exact ⟨Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i x, by
-        rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]⟩
+        rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]⟩
   have : Flat h := IsZariskiLocalAtSource.sigmaDesc fun i ↦ inferInstance
   let p := pullback.snd h (Scheme.Opens.ι U)
   have hfst : IsIso (pullback.fst h (Scheme.Opens.ι U)) := by
@@ -145,7 +145,7 @@ lemma isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage {Y : Scheme.{u}} {ι 
       ext z
       obtain ⟨i, x, rfl⟩ := hjs z
       simp only [Set.mem_preimage, Set.mem_iUnion, Set.mem_image]
-      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
       constructor
       · exact fun hx ↦ ⟨i, x, hx, rfl⟩
       · rintro ⟨j, y, hy, hyx⟩

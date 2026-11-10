@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralBoundaryData
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFinite
-import Mathlib.Logic.Basic
+import Mathlib.Basic.Logic.Lemmas
 
 /-! # Exact evaluation of the integral normalization -/
 

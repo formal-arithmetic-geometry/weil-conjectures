@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 public import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorConstruction
 import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorOrdinaryQuotientSquare
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Quotient compatibility on flat K-flat tensor representatives
 

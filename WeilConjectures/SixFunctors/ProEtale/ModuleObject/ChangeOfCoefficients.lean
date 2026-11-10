@@ -191,9 +191,9 @@ noncomputable def comapUpperStarIso :
 noncomputable def derivedComapUpperStarIso :
     D((f)^*⟦Λ'⟧) ⋙ D(Mod.comap (coefficientMap a X)) ≅
       D(Mod.comap (coefficientMap a Y)) ⋙ D((f)^*⟦Λ⟧) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (comapUpperStarIso a f) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end UpperLowerStar
 

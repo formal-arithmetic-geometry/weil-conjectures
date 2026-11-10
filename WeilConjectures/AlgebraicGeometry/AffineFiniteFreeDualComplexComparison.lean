@@ -131,7 +131,7 @@ private theorem signed_dual_iso_of_components
         (T.map (a (q + 1)).hom ≫ T.map (K.d (q + 1) q) ≫ T.map (a q).inv).op) ≫
         H.map (T.map (a (q + 1)).inv).op ≫ (e0 (q + 1)).hom ≫ T.map (c (q + 1)).inv
     simp only [op_comp, Functor.map_comp, Category.assoc,
-      Linear.units_smul_comp, Linear.comp_units_smul, Iso.map_inv_hom_id_assoc]
+      Linear.units_smul_comp, Linear.comp_units_smul, Iso.inv_hom_id_map_assoc]
     have ha : H.map (T.map (a (q + 1)).hom).op ≫
         H.map (T.map (a (q + 1)).inv).op = 𝟙 _ :=
       (H.mapIso (T.mapIso (a (q + 1))).op).hom_inv_id
@@ -183,7 +183,10 @@ theorem affine_finite_free_dual_complex_comparison
         (ModuleCat.signedDualCochainComplex K)) := by
   classical
   let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
-  have : (tilde.functor Γ(Y, U.1)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : (tilde.functor Γ(Y, U.1)).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := Γ(Y, U.1)) f g
   have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive := ⟨by intros; rfl⟩
   have hT : T.Additive := inferInstanceAs
     (tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive

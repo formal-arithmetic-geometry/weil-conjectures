@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.SixFunctors.BifunctorHomHomotopyExactSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
@@ -63,7 +65,8 @@ private noncomputable def modelComparison (I : CochainComplex C ℤ) [I.IsKInjec
     (CochainComplex.bifunctorHomHomotopyFunctor MonoidalClosed.internalHom I).leftOp ≅
       Qh.op ⋙ MonoidalClosed.internalHom.flip.obj (Q.obj I) := by
   refine NatIso.ofComponents
-    (fun X ↦ asIso (qhInternalHomToIhom X.unop.as I)) ?_
+    (fun X ↦ asIso (qhInternalHomToIhom X.unop.as I) ≪≫
+      (ihom _).mapIso ((quotientCompQhIso C).app I)) ?_
   intro X Y f
   obtain ⟨X⟩ := X
   obtain ⟨Y⟩ := Y
@@ -76,10 +79,12 @@ private noncomputable def modelComparison (I : CochainComplex C ℤ) [I.IsKInjec
   subst f
   change Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map
       (CochainComplex.bifunctorHomMapLeft
-        (H := MonoidalClosed.internalHom) (Y := I) g)) ≫ qhInternalHomToIhom P' I =
-    qhInternalHomToIhom P I ≫ _
-  rw [model_map C]
-  exact qhInternalHomToIhom_naturality g I
+        (H := MonoidalClosed.internalHom) (Y := I) g)) ≫ qhInternalHomToIhom P' I ≫
+      (ihom _).map ((quotientCompQhIso C).hom.app I) =
+    (qhInternalHomToIhom P I ≫ (ihom _).map ((quotientCompQhIso C).hom.app I)) ≫ _
+  rw [model_map C, reassoc_of% qhInternalHomToIhom_naturality g I, Category.assoc]
+  congr 1
+  exact ((MonoidalClosed.pre _).naturality _).symm
 
 end
 

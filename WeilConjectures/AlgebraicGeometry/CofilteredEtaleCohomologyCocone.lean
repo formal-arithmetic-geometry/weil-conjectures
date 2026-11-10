@@ -9,6 +9,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # A cohomology colimit cocone for a cofiltered system over a fixed scheme
@@ -127,7 +128,7 @@ theorem exists_cofiltered_etale_cohomology_cocone
               (c.π.app k.unop) (D.map f.unop) (π.app j.unop) (π.app k.unop)
               t (hπ f.unop) (ht k.unop)
             simp only [c.w f.unop] at h
-            exact (AddCommGrpCat.ofHom_comp _ _).symm.trans
+            simpa only [AddCommGrpCat.ofHom_comp] using
               (congrArg AddCommGrpCat.ofHom h).symm } }
   have hH (j k : J) (f : j ⟶ k) : H.map f.op =
       (eH k).hom ≫ AddCommGrpCat.ofHom

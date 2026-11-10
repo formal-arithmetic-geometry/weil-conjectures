@@ -86,7 +86,7 @@ theorem exists_finset_of_isConstructible_of_isIso [IsDomain R] [IsNoetherianRing
 /-- The polynomial ring in one variable over a field has dimension at most one. -/
 instance AffineSpace.krullDimLE_one_mvPolynomial (n : Type*) [Unique n] (K : Type*) [Field K] :
     Ring.KrullDimLE 1 (MvPolynomial n K) := by
-  rw [Ring.krullDimLE_iff, MvPolynomial.ringKrullDim_of_isNoetherianRing,
+  rw [Ring.krullDimLE_iff, MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite,
     ringKrullDim_eq_zero_of_field K, Nat.card_unique]
   simp
 

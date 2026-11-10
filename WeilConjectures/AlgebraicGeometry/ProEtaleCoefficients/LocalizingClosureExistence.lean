@@ -33,7 +33,7 @@ of the type of all module objects does not enlarge the required coproduct existe
 
 set_option autoImplicit false
 
-universe u v w
+universe u v w t
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open AlgebraicGeometry Scheme
@@ -100,6 +100,17 @@ private theorem triangleCoproducts
     simp only [Category.id_comp, Category.comp_id]
   · exact unop_distinguished U (productTriangle_distinguished T'
       (fun i ↦ op_distinguished (T i) (hT i)))
+
+private theorem derivedCoproductCocone
+    (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{w} A]
+    [HasDerivedCategory.{t} A] (I : Type w) (K : I → CochainComplex A ℤ) :
+    ∃ c : Cofan K,
+      (∀ n : ℤ, Nonempty (IsColimit ((HomologicalComplex.eval _ _ n).mapCocone c))) ∧
+      Nonempty (IsColimit (DerivedCategory.Q.mapCocone c)) := by
+  let : HasColimitsOfSize.{w, w} A := IsGrothendieckAbelian.hasColimits A
+  refine ⟨HomologicalComplex.coconeOfHasColimitEval (Discrete.functor K), ?_, ?_⟩
+  · exact fun n ↦ ⟨colimit.isColimit _⟩
+  · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
 
 /-- The three assertions of the localizing-closure existence lemma.
 
@@ -228,9 +239,7 @@ theorem localizingClosure_exists
     fun P hP hS K hK ↦ hK P hP hS
   refine ⟨inferInstance, ?_, ?_, hloc, hcontains, hminimal, ?_, ?_⟩
   · intro I K
-    refine ⟨HomologicalComplex.coconeOfHasColimitEval (Discrete.functor K), ?_, ?_⟩
-    · exact fun n ↦ ⟨colimit.isColimit _⟩
-    · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
+    exact derivedCoproductCocone A I K
   · exact triangleCoproducts
   · let P := localizingClosure S
     let (I : Type (u + 2)) : P.IsClosedUnderColimitsOfShape (Discrete I) := by

@@ -50,7 +50,7 @@ private theorem open_scheme_localization (X : Scheme.{u}) (U : X.Opens)
   have : R.Additive := Functor.additive_of_preserves_binary_products R
   have : (E ⋙ R).Additive := inferInstance
   let d : E.mapDerivedCategory ⋙ R.mapDerivedCategory ≅ 𝟭 (DerivedCategory B) :=
-    (Functor.mapDerivedCategoryCompIso E R).symm ≪≫
+    Functor.mapDerivedCategoryCompIso E R ≪≫
       Functor.mapDerivedCategoryNatIso e.counitIso ≪≫ Functor.mapDerivedCategoryIdIso B
   let : E.mapDerivedCategory.Faithful := Functor.Faithful.of_comp_iso d
   let : LocallySmall.{w} (DerivedCategory B) :=
@@ -144,9 +144,9 @@ theorem perfect_open_support_detection
           ⟨R, schemeDerivedQCohProperty_of_isPerfect X R hR⟩
         have hβ := htest P hR (ObjectProperty.homMk β)
         change O.mapDerivedCategory.map β = 0 at hβ
-        have hc := (Functor.mapDerivedCategoryCompIso O e.functor).hom.naturality β
+        have hc := (Functor.mapDerivedCategoryCompIso O e.functor).inv.naturality β
         have hLβ : L.map β = 0 := by
-          apply (cancel_mono ((Functor.mapDerivedCategoryCompIso O e.functor).hom.app
+          apply (cancel_mono ((Functor.mapDerivedCategoryCompIso O e.functor).inv.app
             K.obj)).mp
           change L.map β ≫ _ = 0 ≫ _
           rw [zero_comp, hc]

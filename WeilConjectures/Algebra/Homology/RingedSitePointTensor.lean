@@ -166,14 +166,16 @@ private def evalTensorNatIso (A : CommRingCat.{w}) :
   let := SheafOfModules.monoidalCategory (pointRing A)
   refine NatIso.ofComponents (fun M ↦ NatIso.ofComponents (fun N ↦ tensorIso M N)
     (fun {N N'} g ↦ ?_)) (fun {M M'} f ↦ ?_)
-  · change (M.val.obj point ◁ g.val.app point) ≫ (tensorMap M N').app point =
+  · change whiskerLeft (C := ModuleCat A) (M.val.obj point) (g.val.app point) ≫
+      (tensorMap M N').app point =
       (tensorMap M N).app point ≫ (M ◁ g).val.app point
     have h := congrArg (fun z ↦ z.app point) (tensorMap_natural (𝟙 M) g)
     simp only [SheafOfModules.id_val, id_tensorHom, PresheafOfModules.comp_app] at h
     exact h
   · apply NatTrans.ext
     funext N
-    change (f.val.app point ▷ N.val.obj point) ≫ (tensorMap M' N).app point =
+    change whiskerRight (C := ModuleCat A) (f.val.app point) (N.val.obj point) ≫
+      (tensorMap M' N).app point =
       (tensorMap M N).app point ≫ (f ▷ N).val.app point
     have h := congrArg (fun z ↦ z.app point) (tensorMap_natural f (𝟙 N))
     simp only [SheafOfModules.id_val, tensorHom_id, PresheafOfModules.comp_app] at h

@@ -59,8 +59,7 @@ private noncomputable def scalarTensorEquiv (T : ModuleCat.{u} R) :
       map_smul' := by
         intro b x
         change t (b • x) = b • t x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul s a => rfl
         | add x y hx hy => simp only [smul_add, map_add, hx, hy] }
 

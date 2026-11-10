@@ -302,8 +302,9 @@ theorem not_isClosed_homOfSections {k K : Type u} [Field k] [Field K] (φ : k �
     (ht : letI := φ.toAlgebra; Transcendental k t)
     (hs : Ideal.span (Set.range fun i : ULift.{u} (Fin 2) ↦
       (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down)) = ⊤) (z : Spec (.of K)) :
-    ¬ IsClosed {homOfSections (Spec.map (CommRingCat.ofHom φ))
-      (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down)) hs z} := by
+    ¬ IsClosed
+      {homOfSections (Spec.map (CommRingCat.ofHom φ))
+        (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down)) hs z} := by
   set s := fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of K)).inv (![1, t] i.down)
   have hs0 : s ⟨0⟩ = 1 := by simp [s]
   have hB : (Spec (.of K)).basicOpen (s ⟨0⟩) = ⊤ := by

@@ -230,7 +230,7 @@ private theorem totalTensorMapX_comm
         (z ≫ L.map (HomologicalComplex.ιMapBifunctorOrZero P
           ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) (p + 1) q m)))
         (ha (P.d p (p + 1)) (𝟙 (H.X q))) using 1 <;>
-      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc]
   · rw [HomologicalComplex.mapBifunctor.d₂_eq' _ _ _ _ _ (by rfl),
       HomologicalComplex.mapBifunctor.d₂_eq' _ _ _ _ _ (by rfl),
       Linear.units_smul_comp, Category.assoc, totalTensorMapX_orZero]
@@ -239,7 +239,7 @@ private theorem totalTensorMapX_comm
         (z ≫ L.map (HomologicalComplex.ιMapBifunctorOrZero P
           ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) p (q + 1) m)))
         (ha (𝟙 (P.X p)) (H.d q (q + 1))) using 1 <;>
-      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc] <;> rfl
+      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc]
 
 private noncomputable def totalTensorIso
     [PreservesColimitsOfSize.{0, 0} L]

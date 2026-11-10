@@ -132,7 +132,7 @@ noncomputable def tuple : ↑(⨅ i, U i) ⟶ (ambient M).left :=
 
 @[reassoc (attr := simp)]
 lemma tuple_ambientπ (i : ι) : tuple M ≫ ambientπ M i = toProjectiveSpace M i := by
-  rw [tuple, ambientπ, ← Over.comp_left, Pi.lift_π]
+  rw [tuple, ambientπ, ← Over.comp_left, Pi.lift_comp_π]
   rfl
 
 @[reassoc (attr := simp)]

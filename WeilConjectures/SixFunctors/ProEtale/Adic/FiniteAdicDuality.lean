@@ -39,8 +39,8 @@ instance ZMod.neZero_ringChar_ulift (n : ℕ) [NeZero n] :
 theorem ZMod.exists_ulift_apply_ne_zero (n : ℕ) [NeZero n]
     {M : Type u} [AddCommGroup M] [Module (ULift.{u} (ZMod n)) M] {x : M} (hx : x ≠ 0) :
     ∃ χ : M →ₗ[ULift.{u} (ZMod n)] ULift.{u} (ZMod n), χ x ≠ 0 :=
-  ZModLike.exists_apply_ne_zero (Nat.pos_of_ne_zero (NeZero.ne n)) (ULift.ext _ _ (by simp))
-    (fun x ↦ ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext _ _ (by
+  ZModLike.exists_apply_ne_zero (Nat.pos_of_ne_zero (NeZero.ne n)) (ULift.ext (by simp))
+    (fun x ↦ ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext (by
       simpa using (ZMod.intCast_surjective x.down).choose_spec)⟩)
     (fun z hz ↦ (ZMod.intCast_zmod_eq_zero_iff_dvd z n).1 (by simpa using congrArg ULift.down hz))
     hx

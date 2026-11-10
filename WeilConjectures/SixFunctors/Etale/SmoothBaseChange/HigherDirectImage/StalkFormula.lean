@@ -428,14 +428,17 @@ lemma cohomologyPresheafRestrict_stalkPoint_map {V V' : S.Etale} (a : V ⟶ V')
     (v : (Scheme.pointSmallEtale s).fiber.obj V)
     (p : (Etale.higherDirectImagePresheaf Λ f q
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V')) :
-    cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩)
+    cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s (Functor.elementsMk _ V v))
+      (stalkPoint_w f s (Functor.elementsMk _ V v))
         ((Etale.higherDirectImagePresheaf Λ f q
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).map a.op p) =
-      cohomologyPresheafRestrict Λ f F q _ V' (stalkPoint f s ⟨V', _⟩)
-        (stalkPoint_w f s ⟨V', (Scheme.pointSmallEtale s).fiber.map a v⟩) p := by
-  have e : stalkPoint f s ⟨V, v⟩ ≫ a.left =
-      stalkPoint f s ⟨V', (Scheme.pointSmallEtale s).fiber.map a v⟩ :=
-    stalkPoint_map f s (CategoryOfElements.homMk ⟨V, v⟩ ⟨V', _⟩ a rfl)
+      cohomologyPresheafRestrict Λ f F q _ V' (stalkPoint f s (Functor.elementsMk _ V' _))
+        (stalkPoint_w f s
+          (Functor.elementsMk _ V' ((Scheme.pointSmallEtale s).fiber.map a v))) p := by
+  have e : stalkPoint f s (Functor.elementsMk _ V v) ≫ a.left =
+      stalkPoint f s (Functor.elementsMk _ V' ((Scheme.pointSmallEtale s).fiber.map a v)) :=
+    stalkPoint_map f s (Functor.Elements.homMk (x := Functor.elementsMk _ V v)
+      (y := Functor.elementsMk _ V' _) a rfl)
   rw [cohomologyPresheafRestrict_map, cohomologyPresheafRestrict_congr Λ f F q _ V' _ e]
 
 /-- The comparison map from the fibre at `s` of the cohomology presheaf `V ↦ Hᵠ(V ×_S X, F|)`
@@ -449,7 +452,7 @@ noncomputable def higherDirectImageStalkComparison :
           (pullback.snd (Scheme.strictLocalizationToBase s) f)).obj F) q) :=
   (Scheme.pointSmallEtale s).presheafFiberDesc
     (fun V v ↦ AddCommGrpCat.ofHom (cohomologyPresheafRestrict Λ f F q _ V
-      (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩)))
+      (stalkPoint f s (Functor.elementsMk _ V v)) (stalkPoint_w f s (Functor.elementsMk _ V v))))
     (fun _ _ a v ↦ AddCommGrpCat.ext fun p ↦
       cohomologyPresheafRestrict_stalkPoint_map Λ f s F q a v p)
 
@@ -459,7 +462,8 @@ lemma toPresheafFiber_higherDirectImageStalkComparison (V : S.Etale)
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
     higherDirectImageStalkComparison Λ f s F q ((Scheme.pointSmallEtale s).toPresheafFiber V v
       (Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) p) =
-      cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩) p :=
+      cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s (Functor.elementsMk _ V v))
+        (stalkPoint_w f s (Functor.elementsMk _ V v)) p :=
   ConcreteCategory.congr_hom
     ((Scheme.pointSmallEtale s).toPresheafFiber_presheafFiberDesc _ _ V v) p
 end Stalk
@@ -521,7 +525,8 @@ theorem nonempty_geometricStalk_higherDirectImage_addEquiv {X S : Scheme.{u}} (f
       exact (IsPullback.of_hasPullback (V i).hom f).flip
     exact MorphismProperty.of_isPullback H.flip this
   -- the comparison maps at the stages
-  have KI (j : J) : (c.π.app j).left ≫ pullback.fst (V j).hom f = stalkPoint f s ⟨V j, v j⟩ := by
+  have KI (j : J) : (c.π.app j).left ≫ pullback.fst (V j).hom f =
+      stalkPoint f s (Functor.elementsMk _ (V j) (v j)) := by
     refine Eq.trans ?_ (stalkPoint_ι f s (G₀.obj j)).symm
     simp only [c, Scheme.strictLocalizationConeOver]
     exact pullback.lift_fst _ _ _
@@ -535,7 +540,8 @@ theorem nonempty_geometricStalk_higherDirectImage_addEquiv {X S : Scheme.{u}} (f
         (pullback.fst (V j).hom f) pullback.condition _ (Over.w _) _ (KI j) p)
   refine ⟨(injective_iff_map_eq_zero Θ.hom).2 fun ξ hξ ↦ ?_, fun x ↦ ?_⟩
   · obtain ⟨W, w, p, rfl⟩ := (Scheme.pointSmallEtale s).toPresheafFiber_jointly_surjective ξ
-    obtain ⟨y, ⟨g₁⟩⟩ := Scheme.AffinePointedEtaleNeighborhood.exists_hom s ⟨W, w⟩
+    obtain ⟨y, ⟨g₁⟩⟩ :=
+      Scheme.AffinePointedEtaleNeighborhood.exists_hom s (Functor.elementsMk _ W w)
     obtain ⟨⟨j, ⟨⟩, g₂⟩⟩ : Nonempty (CostructuredArrow G₀ y) := IsConnected.is_nonempty
     let g : (Scheme.AffinePointedEtaleNeighborhood.ι s).obj (G₀.obj j) ⟶
         (Scheme.pointSmallEtale s).fiber.elementsMk W w :=

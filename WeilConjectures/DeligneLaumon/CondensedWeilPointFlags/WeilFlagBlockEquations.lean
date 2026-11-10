@@ -46,7 +46,7 @@ theorem leading_block_equations {K : Type u} [Field K] {d : ℕ}
   constructor
   · ext r k
     simp only [Matrix.mul_apply, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq',
-      Finset.mem_univ, if_true]
+      Finset.mem_univ, ite_true]
     refine Fin.lastCases ?_ (fun r ↦ ?_) r
     · have hz : C (Fin.castLE (Nat.succ_le_of_lt j.isLt) (Fin.last j.val))
           (Fin.castLE (Nat.succ_le_of_lt j.isLt) k.castSucc) = 0 :=
@@ -58,7 +58,7 @@ theorem leading_block_equations {K : Type u} [Field K] {d : ℕ}
     · simp [Matrix.submatrix_apply, Fin.castSucc_inj, ite_mul]
   · ext r k
     simp only [Matrix.mul_apply, ite_mul, one_mul, zero_mul,
-      Finset.sum_ite_eq', Finset.mem_univ, if_true]
+      Finset.sum_ite_eq', Finset.mem_univ, ite_true]
     refine Fin.lastCases ?_ (fun k ↦ ?_) k
     · have he : Fin.castLE (Nat.succ_le_of_lt j.isLt) (Fin.last j.val) = j := by
         apply Fin.ext
@@ -68,7 +68,7 @@ theorem leading_block_equations {K : Type u} [Field K] {d : ℕ}
           (Fin.castLE (Nat.succ_le_of_lt j.isLt) k.castSucc) = 0 :=
         hC (show k.val < j.val from k.isLt)
       simp only [Matrix.submatrix_apply, Matrix.smul_apply,
-        if_neg (Fin.castSucc_ne_last k), smul_eq_mul, mul_zero]
+        ite_eq_right (Fin.castSucc_ne_last k), smul_eq_mul, mul_zero]
       exact hz
 
 end WeilConjectures.CondensedWeilPointFlags

@@ -12,15 +12,16 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenClopenProjector
 import WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaPasting
 import WeilConjectures.AlgebraicGeometry.StrictTower.MateEvaluationScalars.TowerMateEvaluationScalars
-import WeilConjectures.AlgebraicGeometry.StrictTower.SingleLevelFiniteProperOpenTransport
+import WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopenMateNormalization
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerPullbackSquarePasting
 import Mathlib.CategoryTheory.Adjunction.Triple
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenComparison
 import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.AlgebraicGeometry.StrictTower.SingleLevelFiniteProperOpenTransport
+import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerPullbackSquarePasting
 
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
@@ -148,7 +149,7 @@ private theorem derived_disjoint_extension {U X C : Scheme.{u}}
     exact module_disjoint_extension B s c hc (M.obj n)
   have hz := F.isZero_mapDerivedCategory_obj N (fun q ↦ hzero _)
   exact hz.of_iso ((Functor.mapDerivedCategoryCompIso (towerJ B s)
-    (towerPullback B c)).app N).symm
+    (towerPullback B c)).app N)
 
 /-- The clopen projection is identity on the image and zero on the complementary open.
 Source: Stacks, Tag 09AE and blueprint, fourth proof step
@@ -471,7 +472,6 @@ private theorem towerGComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
   rw [towerGComp_app, towerPull_map_app, towerGId_app,
     towerG_transport B (Category.comp_id j)]
   exact congr_app (moduleGComp_id_right B j) (N.obj n)
-
 private theorem derived_unit_left
     {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -482,7 +482,7 @@ private theorem derived_unit_left
     (a : H ≅ F ⋙ I) (e : I ≅ 𝟭 D) (b : H ≅ F)
     (ha : a.hom ≫ Functor.whiskerLeft F e.hom = b.hom) :
     (Functor.mapDerivedCategoryNatIso a).hom ≫
-        (Functor.mapDerivedCategoryCompIso F I).hom ≫
+        (Functor.mapDerivedCategoryCompIso F I).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory
           ((Functor.mapDerivedCategoryNatIso e).hom ≫
             (Functor.mapDerivedCategoryIdIso D).hom) =
@@ -512,7 +512,7 @@ private theorem derived_unit_right
     (a : H ≅ I ⋙ F) (e : I ≅ 𝟭 C) (b : H ≅ F)
     (ha : a.hom ≫ Functor.whiskerRight e.hom F = b.hom) :
     (Functor.mapDerivedCategoryNatIso a).hom ≫
-        (Functor.mapDerivedCategoryCompIso I F).hom ≫
+        (Functor.mapDerivedCategoryCompIso I F).inv ≫
         Functor.whiskerRight
           ((Functor.mapDerivedCategoryNatIso e).hom ≫
             (Functor.mapDerivedCategoryIdIso C).hom) F.mapDerivedCategory =
@@ -548,7 +548,7 @@ private theorem gId_eq (X : Scheme.{u}) :
 
 private theorem gComp_hom {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (gComp B f g).hom = (Functor.mapDerivedCategoryNatIso (towerGComp B f g)).hom ≫
-      (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).hom := rfl
+      (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).inv := rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem gComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
@@ -765,7 +765,6 @@ private theorem betaInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
   rw [hp N]
   simp only [Category.assoc, Iso.hom_inv_id_app]
   exact (Category.comp_id _).symm
-
 set_option backward.isDefEq.respectTransparency false in
 private theorem beta_open_comp_aux {V U X V₁ U₁ X₁ : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
@@ -877,7 +876,6 @@ private theorem betaInv_unit {A A' Y Y' : Scheme.{u}}
   exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
 
 end NormalizedIdentities
-
 /-- Beta commutes with composition of open immersions, before evaluation.
 Source: Stacks, Tag 09AE and blueprint, second proof step
 (blueprint: lem-cbc-strict-tower-proper-open-calculus).
@@ -1107,7 +1105,6 @@ private theorem isIso_of_evaluations
       change IsIso ((DerivedCategory.homologyFunctor C q).map
         (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategory.map f))
       infer_instance)
-
 /-- Proper/open interchange is invertible for independently bounded finite etale
 origins at every positive level, with no uniform bound on those origins.
 Source: Stacks, Tag 0F7B and blueprint, steps 7--9

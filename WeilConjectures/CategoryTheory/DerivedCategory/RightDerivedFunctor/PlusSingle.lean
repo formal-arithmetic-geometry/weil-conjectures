@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Extend
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
@@ -42,24 +43,14 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 is the homology of the complex. -/
 noncomputable def homologyFunctorObjQIso (K : CochainComplex.Plus C) (n : ℤ) :
     (homologyFunctor C n).obj (Q.obj K) ≅ K.obj.homology n :=
-  (DerivedCategory.homologyFunctorFactorsh C n).app _ ≪≫
-    (HomotopyCategory.homologyFunctorFactors C _ n).app K.obj
+  (DerivedCategory.homologyFunctorFactors C n).app K.obj
 
 /-- The isomorphism `DerivedCategory.Plus.homologyFunctorObjQIso` is natural. -/
 @[reassoc]
 lemma homologyFunctorObjQIso_hom_naturality {K L : CochainComplex.Plus C} (g : K ⟶ L) (n : ℤ) :
     (homologyFunctor C n).map (Q.map g) ≫ (homologyFunctorObjQIso L n).hom =
       (homologyFunctorObjQIso K n).hom ≫ HomologicalComplex.homologyMap g.hom n := by
-  have h₁ := (DerivedCategory.homologyFunctorFactorsh C n).hom.naturality
-    ((HomotopyCategory.quotient C _).map g.hom)
-  have h₂ := (HomotopyCategory.homologyFunctorFactors C (ComplexShape.up ℤ) n).hom.naturality g.hom
-  dsimp at h₁ h₂
-  simp only [homologyFunctorObjQIso]
-  change (DerivedCategory.homologyFunctor C n).map
-    (DerivedCategory.Qh.map ((HomotopyCategory.quotient C _).map g.hom)) ≫ _ = _
-  erw [Iso.trans_hom, Iso.trans_hom, reassoc_of% h₁, h₂]
-  simp only [Category.assoc]
-  rfl
+  exact (DerivedCategory.homologyFunctorFactors C n).hom.naturality g.hom
 
 end DerivedCategory.Plus
 
@@ -119,6 +110,16 @@ section
 
 variable [HasDerivedCategory C] [HasDerivedCategory D]
 
+local instance (L : CochainComplex.Plus C) [∀ n, Injective (L.obj.X n)] :
+    IsIso (F.rightDerivedFunctorPlusUnit.app L) := by
+  obtain ⟨L, n, hn⟩ := L
+  let L' : CochainComplex (InjectiveObject C) ℤ :=
+    HomologicalComplex.liftObjectProperty _ L inferInstance
+  have hL' : L'.IsStrictlyGE n := by
+    rwa [← CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff _ (InjectiveObject.ι _)]
+  exact inferInstanceAs (IsIso (F.rightDerivedFunctorPlusUnit.app
+    ((InjectiveObject.ι C).mapCochainComplexPlus.obj ⟨L', n, hL'⟩)))
+
 /-- If `L` is a bounded below complex of injective objects, the homology of `R⁺F(L)` is the
 homology of `F(L)`. -/
 noncomputable def homologyRightDerivedFunctorPlusObjQIsoOfInjective (L : CochainComplex.Plus C)
@@ -127,9 +128,8 @@ noncomputable def homologyRightDerivedFunctorPlusObjQIsoOfInjective (L : Cochain
         (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj L)) ≅
       ((F.mapHomologicalComplex _).obj L.obj).homology n :=
   (DerivedCategory.Plus.homologyFunctor D n).mapIso
-      (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L))).symm ≪≫
-    (DerivedCategory.homologyFunctorFactorsh D n).app _ ≪≫
-    (HomotopyCategory.homologyFunctorFactors D _ n).app _
+      (asIso (F.rightDerivedFunctorPlusUnit.app L)).symm ≪≫
+    DerivedCategory.Plus.homologyFunctorObjQIso _ n
 
 /-- The bounded below cochain complex `F(I)`, where `I` is the chosen injective resolution of
 `X : C` (as a `ℤ`-indexed complex). Its image in `DerivedCategory.Plus D` is `R⁺F(X[0])`, see
@@ -146,9 +146,10 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoQ (X : C) :
   let L : CochainComplex.Plus C := ⟨R.cochainComplex, 0, inferInstance⟩
   have : ∀ n, Injective (L.obj.X n) := fun n ↦ inferInstanceAs (Injective (R.cochainComplex.X n))
   F.rightDerivedFunctorPlus.mapIso (DerivedCategory.Plus.ι.preimageIso
+    (X := (DerivedCategory.Plus.singleFunctor C 0).obj X) (Y := DerivedCategory.Plus.Q.obj L)
     ((DerivedCategory.singleFunctorIsoCompQ C 0).app X ≪≫
-      asIso (DerivedCategory.Q.map R.ι') ≪≫ (DerivedCategory.quotientCompQhIso C).symm.app _)) ≪≫
-    (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L))).symm
+      asIso (DerivedCategory.Q.map R.ι'))) ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnit.app L)).symm
 
 /-- The `n`-th homology of `R⁺F` applied to `X` placed in degree `0` is `R^n F X`. -/
 noncomputable def homologyRightDerivedFunctorPlusObjSingleFunctorIso (X : C) (n : ℕ) :
@@ -179,29 +180,24 @@ lemma rightDerivedFunctorPlusObjSingleFunctorIsoQ_hom_naturality {X Y : C} {f : 
   let LX : CochainComplex.Plus C := ⟨(injectiveResolution X).cochainComplex, 0, inferInstance⟩
   let LY : CochainComplex.Plus C := ⟨(injectiveResolution Y).cochainComplex, 0, inferInstance⟩
   let g : LX ⟶ LY := ObjectProperty.homMk φ.hom'
-  have h₁ := F.rightDerivedFunctorPlusUnit.naturality
-    ((HomotopyCategory.Plus.quotient C).map g)
+  have h₁ := F.rightDerivedFunctorPlusUnit.naturality g
   have h₂ : (DerivedCategory.Plus.singleFunctor C 0).map f ≫
       (DerivedCategory.Plus.ι.preimageIso (X := (DerivedCategory.Plus.singleFunctor C 0).obj Y)
-        (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj LY))
+        (Y := DerivedCategory.Plus.Q.obj LY)
         ((DerivedCategory.singleFunctorIsoCompQ C 0).app Y ≪≫
-          asIso (DerivedCategory.Q.map (injectiveResolution Y).ι') ≪≫
-          (DerivedCategory.quotientCompQhIso C).symm.app _)).hom =
+          asIso (DerivedCategory.Q.map (injectiveResolution Y).ι'))).hom =
       (DerivedCategory.Plus.ι.preimageIso (X := (DerivedCategory.Plus.singleFunctor C 0).obj X)
-        (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj LX))
+        (Y := DerivedCategory.Plus.Q.obj LX)
         ((DerivedCategory.singleFunctorIsoCompQ C 0).app X ≪≫
-          asIso (DerivedCategory.Q.map (injectiveResolution X).ι') ≪≫
-          (DerivedCategory.quotientCompQhIso C).symm.app _)).hom ≫
-        DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map g) := by
+          asIso (DerivedCategory.Q.map (injectiveResolution X).ι'))).hom ≫
+        DerivedCategory.Plus.Q.map g := by
     apply DerivedCategory.Plus.ι.map_injective
-    have := (DerivedCategory.quotientCompQhIso C).inv.naturality φ.hom'
     simp only [Functor.map_comp, Functor.preimageIso_hom, Functor.map_preimage]
-    dsimp at this ⊢
+    dsimp
     change (DerivedCategory.singleFunctor C 0).map f ≫ _ =
-      _ ≫ DerivedCategory.Qh.map ((HomotopyCategory.quotient C _).map φ.hom')
-    rw [Category.assoc, Category.assoc, ← this,
-      (DerivedCategory.singleFunctorIsoCompQ C 0).hom.naturality_assoc]
-    simp only [Functor.comp_map, ← Functor.map_comp_assoc,
+      _ ≫ DerivedCategory.Q.map φ.hom'
+    rw [(DerivedCategory.singleFunctorIsoCompQ C 0).hom.naturality_assoc]
+    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp,
       InjectiveResolution.Hom.ι'_comp_hom']
   dsimp [rightDerivedFunctorPlusObjSingleFunctorIsoQ]
   rw [← F.rightDerivedFunctorPlus.map_comp_assoc, h₂, Functor.map_comp, Category.assoc,

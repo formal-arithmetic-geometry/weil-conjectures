@@ -314,6 +314,7 @@ noncomputable def eliminationBlowup : IsAdmissible X U where
 
 lemma eliminationBlowup_I : (eliminationBlowup hU q hq).I = eliminationCentre hU q hq := rfl
 
+
 end EliminationConstruction
 
 /-- The final step of elimination of indeterminacy, for arbitrary data of the shape produced

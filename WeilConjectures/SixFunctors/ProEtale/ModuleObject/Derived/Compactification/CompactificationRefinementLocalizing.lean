@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Compactification.BoundaryRefinement
 public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
 public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
@@ -532,7 +534,8 @@ private theorem derivedTriangle_pasting
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
     at hwl hwr ha
   simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, NatTrans.comp_app,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
+    Iso.symm_hom]
   rw [← reassoc_of% hwl, ha, ← reassoc_of% hwr]
   rw [← Category.assoc, ← Category.assoc, hh]
   simp only [Category.assoc]
@@ -749,7 +752,7 @@ def refinementOpenRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
   Functor.whiskerLeft (lowerStar Λ r.hom).rightDerivedFunctor
       (Functor.mapDerivedCategoryNatIso
         (eqToIso (congrArg (upperStar Λ) r.i_hom.symm) ≪≫ upperStarComp Λ d.i r.hom) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar Λ r.hom) (upperStar Λ d.i)).hom ≫
+        (Functor.mapDerivedCategoryCompIso (upperStar Λ r.hom) (upperStar Λ d.i)).symm).hom ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight
       (Functor.whiskerLeft (lowerStar Λ r.hom).rightDerivedFunctor
@@ -782,15 +785,15 @@ theorem refinementOpenRestriction_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}
   let e := Functor.mapDerivedCategoryNatIso
       (eqToIso (congrArg (upperStar Λ) r.hom.hom.i_hom.symm) ≪≫
         upperStarComp Λ d.obj.obj.i r.hom.hom.hom) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar Λ r.hom.hom.hom)
-      (upperStar Λ d.obj.obj.i)
+    (Functor.mapDerivedCategoryCompIso (upperStar Λ r.hom.hom.hom)
+      (upperStar Λ d.obj.obj.i)).symm
   have : IsIso a.unit := refinementOpenUnit_isIso Λ c.obj.obj.i
   have hc (K) : IsIso (a'.counit.app
       ((upperStar Λ r.hom.hom.hom).mapDerivedCategory.obj
         ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj K))) := by
     have hbase := cartesianDerivedCounit Λ sq K
     let eK := (Functor.mapDerivedCategoryCompIso
-      (openImmersionLowerShriek Λ c.obj.obj.i) (upperStar Λ r.hom.hom.hom)).app K
+      (openImmersionLowerShriek Λ c.obj.obj.i) (upperStar Λ r.hom.hom.hom)).symm.app K
     exact (NatTrans.isIso_app_iff_of_iso _ eK).mp hbase
   have hi := CategoryTheory.restrictionMate_isIso a b a' e hc
   simpa only [refinementOpenRestriction, e, b, Adjunction.ofNatIsoLeft_counit] using hi

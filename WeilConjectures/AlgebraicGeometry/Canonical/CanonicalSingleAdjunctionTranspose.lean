@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Single-module transposes for the pinned derived adjunction
 
@@ -39,7 +41,7 @@ private theorem single_complex_transpose
   funext i
   by_cases hi : i = 0
   · subst i
-    simp [Adjunction.homEquiv_apply, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [Adjunction.homEquiv_apply, CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self,
       Category.assoc]
   · apply (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 N i hi).eq_of_src
@@ -140,7 +142,7 @@ theorem canonicalSingleAdjunctionTranspose {X S : Scheme.{u}} (f : X ⟶ S)
       ((HomotopyCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) hk)
   rw [hb] at h'
-  simp only [canonicalSinglePullbackMap, canonicalSingleDirectImageMap, k, b, ε, t, adj,
+  simp only [canonicalSinglePullbackMap, canonicalSingleDirectImageMap, cast_eq, k, b, ε, t, adj,
     DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
     HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
     SingleFunctors.postcomp, Functor.comp_map, Functor.comp_obj,

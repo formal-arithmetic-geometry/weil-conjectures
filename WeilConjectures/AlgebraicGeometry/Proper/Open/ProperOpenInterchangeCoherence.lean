@@ -167,11 +167,11 @@ private theorem derived_base_change_unit
     [PreservesFiniteLimits β] [PreservesFiniteColimits β]
     [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
     (e : G ⋙ γ ⟶ β ⋙ G') (J : HomotopyCategory.Plus B) :
-    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnit.app J) ≫
+    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnith.app J) ≫
         (Functor.rightDerivedFunctorPlusBaseChange e).app (DerivedCategory.Plus.Qh.obj J) =
       γ.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj J) ≫
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e).app J) ≫
-        G'.rightDerivedFunctorPlusUnit.app (β.mapHomotopyCategoryPlus.obj J) ≫
+        G'.rightDerivedFunctorPlusUnith.app (β.mapHomotopyCategoryPlus.obj J) ≫
         G'.rightDerivedFunctorPlus.map (β.mapDerivedCategoryPlusFactorsh.inv.app J) := by
   have hf := congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac e) J
   simp only [Functor.rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
@@ -198,11 +198,11 @@ private theorem normalized_base_change_unit
       β.mapDerivedCategoryPlus ⋙ G'.rightDerivedFunctorPlus)
     (hc : c = Functor.rightDerivedFunctorPlusBaseChange e)
     (J : HomotopyCategory.Plus B) :
-    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnit.app J) ≫
+    γ.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnith.app J) ≫
         c.app (DerivedCategory.Plus.Qh.obj J) =
       γ.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj J) ≫
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e).app J) ≫
-        G'.rightDerivedFunctorPlusUnit.app (β.mapHomotopyCategoryPlus.obj J) ≫
+        G'.rightDerivedFunctorPlusUnith.app (β.mapHomotopyCategoryPlus.obj J) ≫
         G'.rightDerivedFunctorPlus.map (β.mapDerivedCategoryPlusFactorsh.inv.app J) := by
   rw [hc]
   exact derived_base_change_unit G G' β γ e J
@@ -248,7 +248,7 @@ private theorem derived_horizontal_identity
       G.rightDerivedFunctorPlus := Functor.whiskerLeft G.rightDerivedFunctorPlus eFD.hom
   have hab : a = b := by
     apply Functor.rightDerived_ext (G.rightDerivedFunctorPlus ⋙ F.mapDerivedCategoryPlus)
-      (Functor.whiskerRight G.rightDerivedFunctorPlusUnit F.mapDerivedCategoryPlus ≫
+      (Functor.whiskerRight G.rightDerivedFunctorPlusUnith F.mapDerivedCategoryPlus ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso A)
     apply NatTrans.ext
     funext J
@@ -259,11 +259,11 @@ private theorem derived_horizontal_identity
     erw [hγ, reassoc_of% derived_base_change_unit G G E F δ.hom J]
     erw [← G.rightDerivedFunctorPlus.map_comp, exact_identity_fac E eE J,
       Iso.inv_hom_id_app_assoc]
-    have hn := G.rightDerivedFunctorPlusUnit.naturality
+    have hn := G.rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus eE.hom).app J)
     simp only [Functor.comp_map] at hn
     erw [← hn]
-    have hf := eFD.hom.naturality (G.rightDerivedFunctorPlusUnit.app J)
+    have hf := eFD.hom.naturality (G.rightDerivedFunctorPlusUnith.app J)
     simp only [Functor.id_map] at hf
     erw [hf, exact_identity_fac F eF (G.mapHomotopyCategoryPlus.obj J)]
     have ht : δ.hom ≫ Functor.whiskerRight eE.hom G =
@@ -373,10 +373,10 @@ private theorem derived_vertical_identity
     (hγ : γ = Functor.rightDerivedFunctorPlusBaseChange δ)
     (ia : G.rightDerivedFunctorPlus ⟶ 𝟭 (DerivedCategory.Plus A))
     (ib : H.rightDerivedFunctorPlus ⟶ 𝟭 (DerivedCategory.Plus B))
-    (ha : ∀ J, G.rightDerivedFunctorPlusUnit.app J ≫
+    (ha : ∀ J, G.rightDerivedFunctorPlusUnith.app J ≫
       ia.app (DerivedCategory.Plus.Qh.obj J) =
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus eG.hom).app J))
-    (hb : ∀ J, H.rightDerivedFunctorPlusUnit.app J ≫
+    (hb : ∀ J, H.rightDerivedFunctorPlusUnith.app J ≫
       ib.app (DerivedCategory.Plus.Qh.obj J) =
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus eH.hom).app J))
     (K : DerivedCategory.Plus A) :
@@ -388,7 +388,7 @@ private theorem derived_vertical_identity
       E.mapDerivedCategoryPlus := Functor.whiskerRight ia E.mapDerivedCategoryPlus
   have hab : a = b := by
     apply Functor.rightDerived_ext (G.rightDerivedFunctorPlus ⋙ E.mapDerivedCategoryPlus)
-      (Functor.whiskerRight G.rightDerivedFunctorPlusUnit E.mapDerivedCategoryPlus ≫
+      (Functor.whiskerRight G.rightDerivedFunctorPlusUnith E.mapDerivedCategoryPlus ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso A)
     apply NatTrans.ext
     funext J
@@ -695,10 +695,10 @@ private theorem generic_vertical_pasting
         ((InjectiveObject.ι A₀).mapHomotopyCategoryPlus.obj X)) := by
     let J := (InjectiveObject.ι A₀).mapHomotopyCategoryPlus.obj X
     have hJ : ∀ n : ℤ, Injective (J.obj.as.X n) := fun n ↦ inferInstance
-    have : IsIso (G₁.rightDerivedFunctorPlusUnit.app J) := inferInstance
+    have : IsIso (G₁.rightDerivedFunctorPlusUnith.app J) := inferInstance
     have hGJ : ∀ n : ℤ, Injective ((G₁.mapHomotopyCategoryPlus.obj J).obj.as.X n) :=
       fun n ↦ inferInstanceAs (Injective (G₁.obj (J.obj.as.X n)))
-    have : IsIso (G₂.rightDerivedFunctorPlusUnit.app (G₁.mapHomotopyCategoryPlus.obj J)) := by
+    have : IsIso (G₂.rightDerivedFunctorPlusUnith.app (G₁.mapHomotopyCategoryPlus.obj J)) := by
       have := hGJ
       infer_instance
     change IsIso ((Functor.rightDerivedFunctorPlusCompUnit G₁ G₂).app J)
@@ -735,7 +735,7 @@ private theorem generic_vertical_pasting
     simp only [Category.assoc]
     erw [derived_base_change_unit G H E₀ E₂ e J]
     have hn₂ := (Functor.rightDerivedFunctorPlusBaseChange e₂).naturality
-      (G₁.rightDerivedFunctorPlusUnit.app J)
+      (G₁.rightDerivedFunctorPlusUnith.app J)
     simp only [Functor.comp_map] at hn₂
     rw [Functor.rightDerivedFunctorPlusCompUnit_app, E₂.mapDerivedCategoryPlus.map_comp]
     simp only [Category.assoc]
@@ -745,11 +745,11 @@ private theorem generic_vertical_pasting
     have h₁ := derived_base_change_unit G₁ H₁ E₀ E₁ e₁ J
     have h₁' : E₁.mapDerivedCategoryPlusFactorsh.inv.app
         (G₁.mapHomotopyCategoryPlus.obj J) ≫
-        E₁.mapDerivedCategoryPlus.map (G₁.rightDerivedFunctorPlusUnit.app J) ≫
+        E₁.mapDerivedCategoryPlus.map (G₁.rightDerivedFunctorPlusUnith.app J) ≫
         (Functor.rightDerivedFunctorPlusBaseChange e₁).app
           (DerivedCategory.Plus.Qh.obj J) =
       DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e₁).app J) ≫
-        H₁.rightDerivedFunctorPlusUnit.app (E₀.mapHomotopyCategoryPlus.obj J) ≫
+        H₁.rightDerivedFunctorPlusUnith.app (E₀.mapHomotopyCategoryPlus.obj J) ≫
         H₁.rightDerivedFunctorPlus.map (E₀.mapDerivedCategoryPlusFactorsh.inv.app J) := by
       apply (cancel_epi (E₁.mapDerivedCategoryPlusFactorsh.hom.app
         (G₁.mapHomotopyCategoryPlus.obj J))).1
@@ -761,7 +761,7 @@ private theorem generic_vertical_pasting
     erw [h₁']
     rw [H₂.rightDerivedFunctorPlus.map_comp, H₂.rightDerivedFunctorPlus.map_comp]
     simp only [Category.assoc]
-    have hn := H₂.rightDerivedFunctorPlusUnit.naturality
+    have hn := H₂.rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus e₁).app J)
     simp only [Functor.comp_map] at hn
     erw [← reassoc_of% hn]
@@ -899,12 +899,12 @@ def properOpenInterchangeConditions (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ
         [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (J :
         HomotopyCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map ((lowerStar
-        (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusUnit.app J) ≫
+        (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusUnith.app J) ≫
         (γ k i r p h).hom.app (DerivedCategory.Plus.Qh.obj J) =
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlusFactorsh.hom.app
           ((lowerStar (ModuleCat.{u + 1} Λ) r).mapHomotopyCategoryPlus.obj J) ≫
         DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (δ k i r p h).hom).app J) ≫
-        (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusUnit.app
+        (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusUnith.app
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapHomotopyCategoryPlus.obj J) ≫
         (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p).map ((openImmersionLowerShriek
         (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlusFactorsh.inv.app J)) ∧

@@ -52,6 +52,13 @@ attribute [local irreducible] tensorPullback
 
 namespace AlgebraicGeometry.ConormalGradedAlgebra
 
+local instance conormalRestrictionSMul {Y : Scheme.{u}} (M : Y.Modules)
+    {U V : Y.Opens} (j : U ⟶ V) :
+    SMul Γ(Y, U)
+      ((ModuleCat.restrictScalars (Y.ringCatSheaf.obj.map j.op).hom).obj
+        (M.val.obj (op U))) :=
+  inferInstanceAs (SMul Γ(Y, U) Γ(M, U))
+
 variable {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
   [IsClosedImmersion i] [IsClosedImmersion i']
   (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')

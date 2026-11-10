@@ -91,6 +91,7 @@ lemma isLocalizedEquivalence_of_precomp (Ψ : LocalizerMorphism W₂ W₃)
   have := Functor.isEquivalence_of_comp_left G₁₂ G₂₃
   exact IsLocalizedEquivalence.mk' Ψ W₂.Q W₃.Q G₂₃
 
+
 end LocalizerMorphism
 
 end CategoryTheory

@@ -45,9 +45,9 @@ lemma DerivedCategory.plusEtaleOrigin.leftDerivedUpperStar_obj (f : Y ⟶ X)
   have hN' : DerivedCategory.TStructure.t.plus (D(Etale.upperStar A f).obj N) :=
     ⟨n, (Etale.upperStar A f).isGE_mapDerivedCategory_obj N n⟩
   refine ObjectProperty.prop_of_iso _ ?_ (plusEtaleOrigin_mapDerivedCategory_obj hN')
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm.app N ≪≫
+  exact (Functor.mapDerivedCategoryCompIso _ _).app N ≪≫
     (Functor.mapDerivedCategoryNatIso (comparisonUpperStarUpperStarIso A f).symm).app N ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app N ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm.app N ≪≫
     (D((f)^*[A])).mapIso e ≪≫ (leftDerivedUpperStarIsoMapDerivedCategory A f).symm.app L
 
 end AlgebraicGeometry.ProEtale

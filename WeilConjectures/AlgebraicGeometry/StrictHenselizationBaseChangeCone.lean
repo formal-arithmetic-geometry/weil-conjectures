@@ -30,7 +30,7 @@ noncomputable def strictHenselizationEtaleDiagram
     (y : Spec (.of Ω) ⟶ Y) :
     SmallModel.{v} (strictHenselizationNeighbourhoods y) ⥤ Y.Etale :=
   (equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse ⋙
-    CategoryOfElements.π _ ⋙ AffineEtale.Spec Y
+    Functor.Elements.π _ ⋙ AffineEtale.Spec Y
 
 /-- Base change of the affine pointed-neighbourhood diagram has a limiting cone with
 vertex the strict-henselization fibre product and the two specified projections.
@@ -159,5 +159,6 @@ theorem strictHenselizationBaseChangeCone_exists
         (pullback.fst (strictHenselizationStructuralMap y) f ≫ cY.π.app j)
         (pullback.snd (strictHenselizationStructuralMap y) f)
         (by rw [Category.assoc, hq]; exact pullback.condition))
+
 
 end AlgebraicGeometry.Scheme

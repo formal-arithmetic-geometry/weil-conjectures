@@ -145,7 +145,7 @@ private theorem coefficientFiniteDisjointRefinement
       (d.map c) (d.map e) (congrArg (fun k ↦ d.map k) he)
     have h' := (CoverPreserving.of_isContinuous a (ProEt.topology X) J).cover_preserve h
     rw [Sieve.functorPushforward_bot] at h'
-    have heW : a.obj (d.obj W) = W := ULift.ext _ _ rfl
+    have heW : a.obj (d.obj W) = W := ULift.ext rfl
     exact heW ▸ h'
   · intro i
     have h := hfS ⟨i⟩

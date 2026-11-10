@@ -28,12 +28,12 @@ set_option backward.defeqAttrib.useBackward true
 private def liftElement {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) (e : A.obj.Elementsᵒᵖ) {V : C}
     (f : V ⟶ (elementProjection A).obj e) : A.obj.Elementsᵒᵖ :=
-  op ⟨op V, A.obj.map f.op e.unop.2⟩
+  op (A.obj.elementsMk (op V) (A.obj.map f.op e.unop.2))
 
 private def liftElementHom {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) (e : A.obj.Elementsᵒᵖ) {V : C}
     (f : V ⟶ (elementProjection A).obj e) : liftElement A e f ⟶ e :=
-  (CategoryOfElements.homMk e.unop _ f.op rfl).op
+  (Functor.Elements.homMk (x := e.unop) f.op rfl).op
 
 private theorem projection_push_pull {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (A : Sheaf J (Type u))
@@ -59,10 +59,11 @@ private theorem projection_compatible {C : Type u} [SmallCategory C]
         _ = A.obj.map (g₁.unop.1 ≫ f₁.op) Z.unop.2 := by
           exact congrArg (fun k ↦ A.obj.map k.op Z.unop.2) h.symm
         _ = _ := by rw [Functor.map_comp_apply, g₁.unop.2]; rfl
-    let b : W' ⟶ Y₂ := (CategoryOfElements.homMk Y₂.unop W'.unop f₂.op hs).op
+    let b : W' ⟶ Y₂ :=
+      (Functor.Elements.homMk (x := Y₂.unop) (y := W'.unop) f₂.op hs).op
     exact hx a b hg₁ hg₂ (by
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       exact congrArg Quiver.Hom.op h)
 
 private theorem projection_mem_push {C : Type u} [SmallCategory C]
@@ -73,7 +74,7 @@ private theorem projection_mem_push {C : Type u} [SmallCategory C]
   constructor
   · rintro ⟨d, g, k, hg, hk⟩
     let a : liftElement A e f ⟶ d :=
-      (CategoryOfElements.homMk d.unop _ k.op (by
+      (Functor.Elements.homMk (x := d.unop) k.op (by
         change A.obj.map k.op (d.unop.2) = A.obj.map f.op e.unop.2
         rw [← g.unop.2]
         have h := congrArg Quiver.Hom.op hk.symm
@@ -82,7 +83,7 @@ private theorem projection_mem_push {C : Type u} [SmallCategory C]
           (congrArg (fun q ↦ A.obj.map q e.unop.2) h))).op
     have ha : a ≫ g = liftElementHom A e f := by
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       exact congrArg Quiver.Hom.op hk.symm
     rw [← ha]
     exact S.downward_closed hg a
@@ -97,7 +98,7 @@ private theorem projection_pull_push {C : Type u} [SmallCategory C]
   apply le_antisymm
   · intro d g hg
     obtain ⟨d', g', k, hg', hk⟩ := hg
-    let a : d ⟶ d' := (CategoryOfElements.homMk d'.unop d.unop k.op (by
+    let a : d ⟶ d' := (Functor.Elements.homMk (x := d'.unop) (y := d.unop) k.op (by
       change A.obj.map k.op d'.unop.2 = d.unop.2
       rw [← g'.unop.2]
       have h := congrArg Quiver.Hom.op hk.symm
@@ -106,7 +107,7 @@ private theorem projection_pull_push {C : Type u} [SmallCategory C]
         (congrArg (fun q ↦ A.obj.map q e.unop.2) h)).trans g.unop.2)).op
     have ha : a ≫ g' = g := by
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       exact congrArg Quiver.Hom.op hk.symm
     rw [← ha]
     exact S.downward_closed hg' a
@@ -188,21 +189,22 @@ private theorem elementMap_compatible {C : Type u} [SmallCategory C]
           exact congrArg (fun q ↦ B.obj.map q.op Z.unop.2)
             ((elementProjection A).congr_map h).symm
         _ = _ := by rw [Functor.map_comp_apply, g₁.unop.2]; rfl
-    let c : W' ⟶ Y₂ := (CategoryOfElements.homMk Y₂.unop W'.unop k₂.op hs).op
+    let c : W' ⟶ Y₂ :=
+      (Functor.Elements.homMk (x := Y₂.unop) (y := W'.unop) k₂.op hs).op
     let e : (elementMap b).obj W' ≅ W :=
-      (CategoryOfElements.isoMk (unop W) (unop ((elementMap b).obj W'))
+      (Functor.Elements.isoMk (x := unop W) (y := unop ((elementMap b).obj W'))
         (Iso.refl _) (by
         change A.obj.map (𝟙 _) W.unop.2 = b.hom.app _ (B.obj.map k₁.op Y₁.unop.2)
         rw [Functor.map_id_apply]
         exact f₁.unop.2.symm.trans (NatTrans.naturality_apply b.hom k₁.op Y₁.unop.2).symm)).op
     have h₁ : e.inv ≫ (elementMap b).map a = f₁ := by
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       change f₁.unop.1 ≫ (𝟙 _) = f₁.unop.1
       simp
     have h₂ : e.inv ≫ (elementMap b).map c = f₂ := by
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       change f₂.unop.1 ≫ (𝟙 _) = f₂.unop.1
       simp
     rw [← h₁, ← h₂]
@@ -210,7 +212,7 @@ private theorem elementMap_compatible {C : Type u} [SmallCategory C]
     apply congrArg (F.obj.map e.inv.op)
     exact hx a c hg₁ hg₂ (by
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       exact congrArg Quiver.Hom.op ((elementProjection A).congr_map h))
 
 private theorem elementMap_continuous {C : Type u} [SmallCategory C]
@@ -271,7 +273,7 @@ private theorem pair_ext {C : Type u} [SmallCategory C]
 
 private theorem element_eqToHom_val {D : Type u} [SmallCategory D]
     (F : D ⥤ Type u) {x y : F.Elements} (h : x = y) :
-    (eqToHom h : x ⟶ y).val = eqToHom (congrArg Sigma.fst h) := by
+    (eqToHom h : x ⟶ y).hom = eqToHom (congrArg Functor.Elements.obj h) := by
   cases h
   rfl
 
@@ -288,7 +290,7 @@ private def pairPresheaf {C : Type u} [SmallCategory C]
     have h : elementObjMap A (𝟙 U) s ≫ eqToHom (by simp) = 𝟙 (elementObj A U s) := by
       apply Quiver.Hom.unop_inj
       apply Quiver.Hom.unop_inj
-      apply Subtype.ext
+      apply Functor.Elements.hom_ext
       simp [elementObjMap, eqToHom_unop, element_eqToHom_val]
     rw [h, Functor.map_id_apply]
   map_comp {U V W} f g := by
@@ -301,7 +303,7 @@ private def pairPresheaf {C : Type u} [SmallCategory C]
     apply congrArg (fun k ↦ H.map k x)
     apply Quiver.Hom.unop_inj
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     simp [elementObjMap, eqToHom_unop, element_eqToHom_val]
 
 private def fibrePreimageMap {C : Type u} [SmallCategory C]
@@ -378,7 +380,7 @@ private theorem pairEmbedding_map {C : Type u} [SmallCategory C]
   apply congrArg (fun k ↦ H.map k x)
   apply Quiver.Hom.unop_inj
   apply Quiver.Hom.unop_inj
-  apply Subtype.ext
+  apply Functor.Elements.hom_ext
   simp [elementObjMap, eqToHom_unop, element_eqToHom_val]
 
 private def pairValue {C : Type u} [SmallCategory C]
@@ -411,7 +413,7 @@ private theorem pair_isSheaf {C : Type u} [SmallCategory C]
   have hA := (isSheaf_iff_isSheaf_of_type _ _).mp A.property
   let s := (hA S hS).amalgamate xs hxs
   have hs : xs.IsAmalgamation s := (hA S hS).isAmalgamation hxs
-  let e : A.obj.Elementsᵒᵖ := op ⟨op U, s⟩
+  let e : A.obj.Elementsᵒᵖ := op (A.obj.elementsMk (op U) s)
   let T := S.functorPullback (elementProjection A) (X := e)
   have hT : T ∈ elementTopology A e :=
     @Functor.IsCocontinuous.cover_lift _ _ _ _ _ _ _ (projection_cocontinuous A) e S hS

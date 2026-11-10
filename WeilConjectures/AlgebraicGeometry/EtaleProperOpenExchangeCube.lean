@@ -53,7 +53,6 @@ attribute [local irreducible] lowerStar openImmersionLowerShriek Functor.mapDeri
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
   Functor.mapDerivedCategoryFactorsh Functor.rightDerivedFunctorUnit
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso
 
 /-- The type of sheaf comparisons for proper vertical and open horizontal edges.
 Source: Stacks Project, Tag 0F7B, first proof paragraph

@@ -227,14 +227,14 @@ theorem normalizedCoefficientDirectImageSquare
     simp only [a, derivedRestrictionSquare, pbcDerivedRestrictComp,
       Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_trans,
       Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Iso.symm_inv, Category.assoc]
+      Iso.symm_hom, Category.assoc]
   have hdcomp : Functor.mapDerivedCategorySquareIso d =
       pbcDerivedRestrictComp b.hom φY χ rfl ≪≫
         (pbcDerivedRestrictComp χ (𝟙 SY) χ (by simp)).symm := by
     apply Iso.ext
     simp only [d, pbcDerivedRestrictComp, Functor.mapDerivedCategorySquareIso,
       Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
       Category.assoc]
   have hid : ∀ M : DerivedCategory (pbcModules Y SY),
       (pbcDerivedRestrictComp χ (𝟙 SY) χ (by simp)).inv.app M =

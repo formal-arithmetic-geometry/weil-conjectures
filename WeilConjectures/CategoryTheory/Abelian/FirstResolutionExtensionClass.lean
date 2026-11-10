@@ -66,7 +66,7 @@ private lemma firstBoundary_homotopy :
     erw [CochainComplex.mappingCone.inl_v_descShortComplex_f_assoc
       (S.map (CochainComplex.singleFunctor C 0)) 0 (-1) (by omega)]
     simp only [zero_comp, comp_zero, Iso.inv_hom_id_assoc, Preadditive.comp_neg]
-    simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self]
   · apply (Cochain.fromSingleEquiv (show (0 : ℤ) + 0 = 0 by omega)).injective
     dsimp only [Cochain.fromSingleEquiv]
@@ -85,7 +85,7 @@ private lemma firstBoundary_homotopy :
       Cocycle.fromSingleMk_coe, Cochain.fromSingleMk_v,
       CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq, eqToIso.inv,
       eqToHom_refl, Category.comp_id]
-    simp [S, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    simp [S, CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, R.cocomplex.toCycles_i_assoc,
       R.cochainComplex_d 0 1 0 1 rfl rfl]
 
@@ -110,7 +110,7 @@ theorem extMk_firstCycles :
   apply Abelian.Ext.ext
   simp only [Abelian.Ext.neg_hom, extMk_hom,
     DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
-    ShiftedHom.mk₀_id_comp, CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    ShiftedHom.mk₀_id_comp, CochainComplex.singleFunctor,
     DerivedCategory.Q_obj_single_obj, Category.comp_id]
   erw [hS.extClass_hom]
   change (ShiftedHom.map (Cocycle.equivHomShift.symm z) DerivedCategory.Q).comp
@@ -128,12 +128,7 @@ theorem extMk_firstCycles :
       DerivedCategory.Q.map (CochainComplex.mappingCone.triangle S'.f).mor₃ ≫
         (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app S'.X₁ := by
     dsimp only [ShortComplex.ShortExact.singleδ]
-    simp only [SingleFunctors.evaluation, Functor.mapIso, SingleFunctors.postcomp,
-      DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
-      DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
-      Category.id_comp, Functor.comp_obj]
-    erw [(shiftFunctor (DerivedCategory C) (1 : ℤ)).map_id]
-    rw [Category.comp_id]
+    simp only [Functor.comp_obj]
     exact DerivedCategory.descShortComplex_triangleOfSESδ
       (hS.map_of_exact (HomologicalComplex.single C (.up ℤ) 0))
   conv_rhs =>

@@ -64,7 +64,7 @@ instance commShift_mapDerivedCategoryPlusCompIso_hom (F : C ⥤ D) (G : D ⥤ E)
       (DerivedCategory.TStructure.t.plus.liftCompιIso
         (DerivedCategory.Plus.ι ⋙ (F ⋙ G).mapDerivedCategory)
         (fun X ↦ ((F ⋙ G).mapDerivedCategoryPlus.obj X).2)).hom ≫
-      whiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G).hom ≫
+      whiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G).inv ≫
       (Functor.associator _ _ _).inv ≫
       whiskerRight (DerivedCategory.TStructure.t.plus.liftCompιIso
         (DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory)

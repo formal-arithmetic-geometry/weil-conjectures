@@ -812,7 +812,7 @@ lemma Scheme.galoisRepFunctor_obj_isFiniteContinuous [ConnectedSpace Y] [Topolog
       · intro h
         exact congrArg ULift.down h
       · intro h
-        exact ULift.ext _ _ h
+        exact ULift.ext h
     rw [this]
     exact (isOpen_discrete {a}).preimage (continuous_id.smul continuous_const)
 

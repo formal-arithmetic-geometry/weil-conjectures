@@ -88,7 +88,7 @@ functions times the restriction of m from U. Semilinearity of
 etaleTensorSectionsRestriction moves that scalar product outside restriction.
 A ring homomorphism preserves finite products. For each k, the product map
 omitting j followed by the k-th projection is the j.succAbove(k)-th projection,
-by Pi.lift_π. Functoriality of appTop therefore identifies each pulled-back
+by Pi.lift_comp_π. Functoriality of appTop therefore identifies each pulled-back
 scalar with the corresponding retained projection function on the larger
 product. Composition of etaleTensorSectionsRestriction and the over-U
 triangle identify the restricted coefficient with direct restriction from U.
@@ -144,7 +144,7 @@ theorem singletonTensor_normalized_restriction
       h.left.left ≫ (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left =
       (Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g) (j.succAbove k)).left.left := by
     exact congrArg (fun q ↦ q.left.left)
-      (Pi.lift_π (fun k ↦ Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g)
+      (Pi.lift_comp_π (fun k ↦ Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g)
         (j.succAbove k)) k)
   have ha : h.left.left.appTop a =
       ∏ k, (Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g) k).left.left.appTop

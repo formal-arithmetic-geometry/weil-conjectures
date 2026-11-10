@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionCompar
 import WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
 import Mathlib.Data.Int.Interval
-import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Killing the differential defects of a degreewise family
 

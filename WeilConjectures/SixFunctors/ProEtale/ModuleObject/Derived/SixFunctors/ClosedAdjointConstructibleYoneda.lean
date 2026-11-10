@@ -111,9 +111,9 @@ private theorem support_preserved_of_coefficientIso
   let S := (formalClosedSupport Λ i j).rightDerivedFunctor
   let S' := (formalClosedSupport Λ' i j).rightDerivedFunctor
   let q : F' ⋙ (E X).functor ≅ (E Z).functor ⋙ F :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (comapLowerStarIso a i) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   let q' : (E Z).inverse ⋙ F' ⋙ (E X).functor ≅ F :=
     Functor.isoWhiskerLeft (E Z).inverse q ≪≫
       (Functor.associator _ _ _).symm ≪≫

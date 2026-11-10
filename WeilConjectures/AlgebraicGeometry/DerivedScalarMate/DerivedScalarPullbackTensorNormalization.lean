@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.ScalarMateOrdinaryTensorRoute
 import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.ScalarTensorOneSidedPullback
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
@@ -67,6 +69,14 @@ private theorem coordinates_isIso {W : Scheme.{u}}
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
     (reductionDerivedExistence W a).choose_spec.choose_spec.2.2 P hP
   unfold tensorScalarCoordinates tensorScalarCounit
+  change IsIso ((derivedTensorIso a t).inv.app (DerivedCategory.Q.obj P) ≫
+    ((restriction a).mapDerivedCategory.map
+        ((proEtaleRingDerivedExtensionCounit a).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      (restriction a).mapDerivedCategoryFactorsh.hom.app
+        (((proEtaleRingExtension a).mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫
+    DerivedCategory.Q.map (ordinaryComplexIso a P).hom)
   infer_instance
 
 private theorem flat_representative {T : Scheme.{u}}

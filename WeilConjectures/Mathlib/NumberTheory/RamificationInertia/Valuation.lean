@@ -86,8 +86,7 @@ theorem exists_valuation_eq_exp_mul_of_forall_inertia (m : Ideal R) [m.IsMaximal
   let w : HeightOneSpectrum T := ⟨𝔭, inferInstance, h𝔭⟩
   have : w.asIdeal.LiesOver v.asIdeal := inferInstanceAs (𝔭.LiesOver m)
   have hval := HeightOneSpectrum.valuation_liesOver (K := K) L v w f
-  rw [show v.asIdeal.ramificationIdx' w.asIdeal = 1 from
-    (Ideal.ramificationIdx'_eq_ramificationIdx m 𝔭 hm).trans he, pow_one] at hval
+  rw [show w.asIdeal.ramificationIdx R = 1 from he, pow_one] at hval
   have hxL : algebraMap K L f = ⟨x, mem_adjoin_simple_self K x⟩ ^ N :=
     Subtype.ext (by simpa using hf)
   rw [hxL, map_pow] at hval

@@ -189,7 +189,7 @@ theorem rationalRealizationHomTransport (R : RationalModuleRealization l E X) :
   have := comp_preservesFiniteLimits F G₀
   have := comp_preservesFiniteColimits F G₀
   let δ : F.mapDerivedCategory ⋙ G ≅ pbcDerivedExtend α :=
-    (Functor.mapDerivedCategoryCompIso F G₀).symm ≪≫
+    Functor.mapDerivedCategoryCompIso F G₀ ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ model.symm
   let : Linear (Localization.Away t)
       (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E))) :=

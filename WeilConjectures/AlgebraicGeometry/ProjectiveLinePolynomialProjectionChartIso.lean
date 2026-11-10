@@ -96,7 +96,7 @@ theorem isIso_polynomial_linearProjection_restrict (k : Type v) [Field k]
       ((congrArg (_ * ·) (linearChartSection_self 𝒜 l hl i).symm).trans h)
   let re : {j : Fin 2 // j ≠ i.down} ≃ {j : ι // j ≠ i} :=
     { toFun := fun j ↦ ⟨⟨j.1⟩, fun h ↦ j.2 (congrArg ULift.down h)⟩
-      invFun := fun j ↦ ⟨j.1.down, fun h ↦ j.2 (ULift.ext _ _ h)⟩
+      invFun := fun j ↦ ⟨j.1.down, fun h ↦ j.2 (ULift.ext h)⟩
       left_inv := fun _ ↦ rfl
       right_inv := fun _ ↦ rfl }
   let E : Away 𝒜 (l i) ≃ₐ[k] MvPolynomial {j : ι // j ≠ i} k :=

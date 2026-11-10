@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleCechAugmentation
@@ -46,7 +47,12 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-universe u
+universe u v
+
+local instance instHasLimitsOfShape_moduleCechComparison
+    (R : Type u) [Ring R] (J : Type v) [Small.{u} J] :
+    HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
 
 /-- The Čech complex of the presheaf of `Γ(X, ⊤)`-modules underlying an `O_X`-module is
 additive in the module. Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison).
@@ -120,7 +126,7 @@ private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
     FormalCoproduct.evalOp, AlgebraicTopology.alternatingCofaceMapComplex,
     AlgebraicTopology.AlternatingCofaceMapComplex.map]
   simp only [Category.assoc]
-  erw [Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+  erw [Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
   ext x
   simp only [ModuleCat.comp_apply]
   exact PresheafOfModules.naturality_apply f.val _ x
@@ -147,8 +153,8 @@ private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
   dsimp [moduleCechZero, FormalCoproduct.cosimplicialObjectFunctor,
     FormalCoproduct.evalOp, CosimplicialObject.δ]
   simp only [Category.assoc]
-  erw [Pi.lift_π, Pi.lift_π]
-  erw [Pi.lift_π_assoc, Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π, Pi.lift_comp_π]
+  erw [Pi.lift_comp_π_assoc, Pi.lift_comp_π_assoc]
   congr 1
   erw [← F.presheafModuleCat.map_comp, ← F.presheafModuleCat.map_comp]
   congr 1

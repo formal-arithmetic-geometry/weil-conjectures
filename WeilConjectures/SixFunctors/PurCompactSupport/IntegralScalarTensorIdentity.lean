@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportScalarTensor
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
@@ -21,7 +23,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped MonoidalCategory
 namespace WeilConjectures.PurCompactSupport
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   Functor.map₂HomologicalComplex pbcDerivedRestrict
 attribute [local instance 100000] coefficientSiteSmall coefficientRingSheafify
   coefficientAbSheafify coefficientAbLocallyBijective

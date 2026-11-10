@@ -6,9 +6,11 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 import WeilConjectures.CategoryTheory.RightDerivedSingleUnitShiftTransport
 import WeilConjectures.CategoryTheory.MappedSingleCyclesShiftComparison
+import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 @[expose] public section
 
@@ -44,8 +46,7 @@ theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
         DerivedCategory.Plus.Q.obj S :=
       DerivedCategory.Plus.ι.preimageIso
-        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
     let GS := G.mapCochainComplexPlus.obj S
     let H₀ := DerivedCategory.Plus.homologyFunctor C 0
     let RG := G.rightDerivedFunctorPlus
@@ -58,13 +59,35 @@ theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
         (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))
     GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫
       (DerivedCategory.Plus.homologyFunctor C n).map
-        (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫
+        (G.rightDerivedFunctorPlusUnit.app S) ≫
       (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫
       c.hom.app X =
     GS.obj.iCycles n ≫
       G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom ≫
       G.rightDerivedPlusSingleUnitHomology X := by
-  dsimp only
+  intro S e GS H₀ RG c
+  let eh : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
+      DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient B).obj S) :=
+    DerivedCategory.Plus.ι.preimageIso
+      ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
+        (DerivedCategory.quotientCompQhIso B).symm.app _)
+  have he : (DerivedCategory.Plus.quotientCompQhIso B).hom.app S ≫ e.inv = eh.inv := by
+    apply DerivedCategory.Plus.ι.map_injective
+    simp only [e, eh, Functor.map_comp, Functor.preimageIso_inv, Functor.map_preimage,
+      Iso.trans_inv, Iso.symm_inv, Iso.app_inv]
+    rfl
+  have hu : G.rightDerivedFunctorPlusUnit.app S ≫ RG.map e.inv =
+      (DerivedCategory.Plus.quotientCompQhIso C).inv.app GS ≫
+        G.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient B).obj S) ≫
+        RG.map eh.inv := by
+    rw [rightDerivedFunctorPlusUnit_app]
+    simp only [quotientCompMapHomotopyCategoryPlusIso, Iso.refl_inv, NatTrans.id_app,
+      Category.assoc]
+    rw [← RG.map_comp, he]
+    erw [Functor.map_id, Category.id_comp]
+  rw [← Functor.map_comp_assoc, hu]
+  simp only [Functor.map_comp, Category.assoc]
+  dsimp only [S, e, eh, GS, H₀, RG, c]
   rw [rightDerivedPlusSingleUnit_shift_transport G X n]
   simp only [← Category.assoc]
   have hsource := mappedSingle_cycles_shift_comparison G X n

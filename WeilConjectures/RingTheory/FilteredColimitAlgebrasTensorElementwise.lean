@@ -197,4 +197,5 @@ theorem filteredColimit_tensorProduct_ringHom
     intro t
     rfl
 
+
 end CommAlgCat

@@ -50,6 +50,7 @@ theorem IsSepClosure.exists_intermediateField_mem (k : Type u) {ks : Type v} [Fi
   exact ⟨k⟮x⟯, adjoin.finiteDimensional hx.isIntegral,
     (isSeparable_adjoin_simple_iff_isSeparable k ks).mpr hx, mem_adjoin_simple_self k x⟩
 
+
 /-- A separably closed field is infinite: over a finite field `k` with `q` elements the
 polynomial `X ^ q - X - 1` is separable (its derivative is `-1`) but has no root, since
 `a ^ q = a` for every `a ∈ k`. -/
@@ -146,6 +147,7 @@ theorem iff_forall_finrank_eq_one :
   obtain ⟨a, ha⟩ := h1
   refine ⟨a, (algebraMap k (AlgebraicClosure k)).injective ?_⟩
   rw [map_zero, ← hα, ← ha, ← eval₂_at_apply, aeval_def]
+
 
 end IsSepClosed
 

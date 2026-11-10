@@ -50,9 +50,9 @@ noncomputable def constantTwistDerivedAdjunction (b : (PadicAlgCl l)ˣ) :
     constantTwistCompConstantTwistIso k₀ l X b⁻¹ b ≪≫
       constantTwistFunctorCongrIso k₀ l X (inv_mul_cancel b) ≪≫ constantTwistOneIso k₀ l X
   exact Adjunction.ofInverseFunctorIsos F.mapDerivedCategory G.mapDerivedCategory
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso ef ≪≫ Functor.mapDerivedCategoryIdIso _)
-    ((Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso G F ≪≫
       Functor.mapDerivedCategoryNatIso eg ≪≫ Functor.mapDerivedCategoryIdIso _)
 
 /-- Internal Hom from the Tate sheaf is the inverse scalar twist. -/
@@ -63,7 +63,6 @@ noncomputable def ihomTateSheafIso (d : ℤ) :
     ihomFunctorConstantTwistLeftIso _ (WeilSheaf.cyclotomicUnit k₀ l ^ d) ≪≫
     Functor.isoWhiskerRight (ihomFunctorAdicConstantIso k₀ l X) _ ≪≫ Functor.leftUnitor _
 
-set_option linter.style.longLine false in
 /-- The native derived internal Hom from the Tate complex is the inverse twist. -/
 noncomputable def nativeHomTateIso (d : ℤ) :
     Prod.sectR (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj

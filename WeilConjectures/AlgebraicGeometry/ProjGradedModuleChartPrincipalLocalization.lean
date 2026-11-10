@@ -161,7 +161,7 @@ theorem gradedModuleChart_principalLocalization
       exact hm'.trans (congrArg (x • ·) (b.apply_symm_apply q))
     have hbinv : b.symm (x • q) = ktop x • b.symm q :=
       b.injective (by simpa using hb.symm)
-    change E.val.map V.leTop.op (b.symm (x • q)) = k x • _
+    change E.val.restrictₛₗ V.leTop.op (b.symm (x • q)) = k x • _
     rw [hbinv]
     exact (Scheme.Modules.map_smul E V.leTop (ktop x) (b.symm q)).trans
       (by rw [← hk]; rfl)

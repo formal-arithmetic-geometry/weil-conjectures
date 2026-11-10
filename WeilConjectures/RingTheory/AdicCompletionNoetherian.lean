@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import WeilConjectures.RingTheory.PowerSeriesOntoCompletion
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Noetherianity of adic completion

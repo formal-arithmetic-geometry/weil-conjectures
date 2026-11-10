@@ -348,9 +348,9 @@ private theorem constructible_iso {X : Scheme.{u}}
   classical
   unfold IsConstantModelConstructible at hM ⊢
   split at hM
-  · rw [if_pos ‹_›]
+  · rw [ite_eq_left ‹_›]
     exact stratified_iso e hM
-  · rw [if_neg ‹_›]
+  · rw [ite_eq_right ‹_›]
     exact fun U hU ↦ stratified_iso
       ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 
@@ -660,7 +660,7 @@ private theorem nativeConstructibility (ℓ : ℕ) [Fact ℓ.Prime]
         ((nativeOrdinaryPresentation ℓ T).inverse.obj
           ((nativeToOrdinaryModules ℓ T).obj M)) := by
   classical
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
   change IsAdicConstructibleSheaf M ↔ ∃ S, _
   constructor
   · intro H

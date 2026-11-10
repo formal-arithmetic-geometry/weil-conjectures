@@ -139,7 +139,7 @@ private theorem kernel_family {A : Type u} [CommRing A] [IsDomain A]
           (xx n) = F.map (TypeCat.ofHom
             (fun _ : PUnit.{u + 1} ↦ (0 : A ⧸ Ideal.span ({π} : Set A) ^ (m + 1)))) z := by
       have hh := (hx m ((m + 1) + n) (by omega)).trans hz.symm
-      convert hh using 1 <;> rfl
+      convert hh using 1
     have hy (n : ℕ) := qmF π hπ (m + 1) (n + 1) F (xx n) z (hxzero n)
     choose y hy hyuniq using hy
     refine ⟨y, ?_, ?_⟩
@@ -166,7 +166,7 @@ private theorem kernel_family {A : Type u} [CommRing A] [IsDomain A]
       change F.map _ (F.map _ (y j)) = _
       rw [hy j]
       convert (hx ((m + 1) + i) ((m + 1) + j)
-        (Nat.add_le_add_left hij (m + 1))) using 1 <;> rfl
+        (Nat.add_le_add_left hij (m + 1))) using 1
     · intro n
       have hcomm :
           TypeCat.ofHom (fun a : A ⧸ Ideal.span ({π} : Set A) ^ (n + 1) ↦
@@ -185,7 +185,6 @@ private theorem kernel_family {A : Type u} [CommRing A] [IsDomain A]
       change F.map _ (F.map _ (y n)) = _
       rw [hy n]
       convert (hx n ((m + 1) + n) (Nat.le_add_left n (m + 1))) using 1
-      rfl
 section
 variable {C : Type w} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J CommRingCat.{u}] [HasSheafify J (Type u)]

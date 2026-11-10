@@ -46,6 +46,7 @@ theorem finite_irreducibleComponents_of_finiteType (k A : Type*) [Field k] [Comm
   have := Algebra.FiniteType.isNoetherianRing k A
   exact ⟨inferInstance, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents⟩
 
+
 end PrimeSpectrum
 
 /-- A finite-dimensional algebra over a field has at most as many prime ideals as its
@@ -91,7 +92,7 @@ theorem Ideal.exists_notMem_forall_of_isNoetherianRing {S : Type*} [CommRing S]
       obtain ⟨hne, hQ₁m⟩ := Finset.mem_erase.mp hQ₁
       rw [Set.Finite.mem_toFinset] at hQ₁m
       exact hne (le_antisymm hQ₁le (hQ₀.2 hQ₁m.1 hQ₁le))
-    obtain ⟨h, hh, hhQ₀⟩ := SetLike.not_le_iff_exists.mp hnot
+    obtain ⟨h, hh, hhQ₀⟩ := IsConcreteLE.not_le_iff_exists.mp hnot
     have hgh : g₀ * h ∉ J := fun hmem ↦
       (hQ₀p.mul_mem_iff_mem_or_mem.mp (hQ₀.1.2 hmem)).elim hg₀ hhQ₀
     have : ¬ ∀ Q ∈ {Q : Ideal S | Q.IsPrime ∧ ¬ U Q}, g₀ * h ∈ Q := fun H ↦
@@ -111,7 +112,7 @@ theorem Ideal.exists_notMem_forall_of_isNoetherianRing {S : Type*} [CommRing S]
     intro Q hQ hJQ hUQ
     obtain ⟨Q₀, hQ₀, hQ₀le⟩ := Ideal.exists_minimalPrimes_le hJQ
     exact hmin Q₀ hQ₀ (hgen Q Q₀ hQ hQ₀.1.1 hQ₀le hUQ)
-  obtain ⟨g, hgJ, hgP⟩ := SetLike.not_le_iff_exists.mp fun hle ↦ hV P ‹_› hle hP
+  obtain ⟨g, hgJ, hgP⟩ := IsConcreteLE.not_le_iff_exists.mp fun hle ↦ hV P ‹_› hle hP
   refine ⟨g, hgP, fun Q hQ hgQ ↦ ?_⟩
   by_contra hUQ
   exact hgQ (hJ Q hQ hUQ hgJ)

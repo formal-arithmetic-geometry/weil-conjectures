@@ -95,8 +95,7 @@ theorem exists_isPullback_of_coaction (γ : pullback (v ≫ p) p ⟶ V)
   have hmul : ∀ t : A' ⊗[R] E,
       Algebra.TensorProduct.mulMap R A' E t = (coactionUnit p v).appTop (ξ t) := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x =>
       rw [ξ_tmul, map_mul, Algebra.TensorProduct.mulMap_tmul, Algebra.smul_def]
       have h1 : (coactionUnit p v).appTop ((pullback.snd (v ≫ p) p).appTop a) = v.appTop a :=
@@ -150,8 +149,7 @@ theorem exists_isPullback_of_coaction (γ : pullback (v ≫ p) p ⟶ V)
   have hΘδ : ∀ t, Θ (Algebra.TensorProduct.map (AlgHom.id R A') (δ.restrictScalars R) t) =
       (coactionMap p v γ hγv).appTop (ξ t) := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x =>
       rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, AlgHom.restrictScalars_apply, Θ_tmul,
         ξ_tmul, map_mul, δ_apply]
@@ -163,8 +161,7 @@ theorem exists_isPullback_of_coaction (γ : pullback (v ≫ p) p ⟶ V)
       (Algebra.TensorProduct.includeRight (R := R) (A := A') (B := E)) t) =
       (coactionForget p v).appTop (ξ t) := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x =>
       rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, Algebra.TensorProduct.includeRight_apply,
         Θ_tmul, ξ_tmul, ξ_tmul, map_one, one_mul, map_mul]

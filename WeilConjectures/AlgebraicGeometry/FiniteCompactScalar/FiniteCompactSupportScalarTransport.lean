@@ -170,10 +170,10 @@ private theorem compactSiteIso_factors
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i
   have hcomp : DerivedCategory.Plus.ι.map
       ((Functor.mapDerivedCategoryPlusCompIso JA NZ).inv.app G) =
-      (Functor.mapDerivedCategoryCompIso JA NZ).inv.app G.obj := by
+      (Functor.mapDerivedCategoryCompIso JA NZ).hom.app G.obj := by
     have h : DerivedCategory.Plus.ι.mapIso
         ((Functor.mapDerivedCategoryPlusCompIso JA NZ).app G) =
-        (Functor.mapDerivedCategoryCompIso JA NZ).app G.obj :=
+        (Functor.mapDerivedCategoryCompIso JA NZ).symm.app G.obj :=
       Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app JA NZ G)
     exact congrArg Iso.inv h
   dsimp only [JA, NZ] at hcomp

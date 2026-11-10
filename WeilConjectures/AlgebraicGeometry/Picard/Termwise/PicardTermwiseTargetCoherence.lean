@@ -147,8 +147,7 @@ private theorem open_model_iso (W : Scheme.{v}) (E : schemeDerivedCategory W)
   let : HasDerivedCategory.{v + 1}
       (SheafOfModules.{v} (moduleRings U.toScheme.toRingedSpace)) := d U.toScheme
   exact ⟨(singleComplexOpenPullbackIso W U).app E ≪≫
-    (Functor.mapDerivedCategoryCompIso.{_, _, _, _, _, _, v + 1, v + 1, v + 1}
-      R A).app E ≪≫
+    (Functor.mapDerivedCategoryCompIso R A).symm.app E ≪≫
     A.mapDerivedCategory.{v + 1, v + 1}.mapIso e ≪≫
       A.mapDerivedCategoryFactors.{v + 1, v + 1}.app K⟩
 

@@ -54,8 +54,6 @@ private theorem cancel_restriction_counit
 
 set_option linter.unusedVariables false in
 -- Preserve the existing unused F₀ and a bindings in the public statement.
-set_option maxHeartbeats 800000 in
--- Comparing pinned choices through scheme-module aliases needs additional elaboration heartbeats.
 /-- A separate step of the open counit factorization.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
 (blueprint: lem-pc-k3-open-restricted-counit-cancellation).

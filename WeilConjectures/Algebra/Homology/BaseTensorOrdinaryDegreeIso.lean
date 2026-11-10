@@ -76,8 +76,7 @@ theorem exists_baseTensorOrdinaryDegreeIso
       map_smul' := by
         intro b x
         change fT (b • x) = b • fT x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp only [smul_add, map_add, hx, hy]
         | tmul b' m => rfl }
   let g : (A ⊗[R] B) ≃ₗ[A]
@@ -90,8 +89,7 @@ theorem exists_baseTensorOrdinaryDegreeIso
       map_smul' := by
         intro b x
         change gT (b • x) = b • (show Y from gT x)
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp only [smul_add, map_add, hx, hy]
         | tmul c m =>
           change (b • c) ⊗ₜ[A,algebraMap A (A ⊗[R] B)] m =

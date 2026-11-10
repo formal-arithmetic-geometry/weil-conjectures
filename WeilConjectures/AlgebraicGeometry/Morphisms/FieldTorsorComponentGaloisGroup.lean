@@ -40,7 +40,7 @@ private theorem torsor_translation_unique
   obtain ⟨g, w, hw⟩ := exists_comp_sigmaι_eq_of_subsingleton (z ≫ inv D)
   have hw' : w ≫ pullback.lift (f := T.π) (g := T.π) (T.smul g) (𝟙 T.P)
       (by simp [T.smul_π]) = z := by
-    rw [← Sigma.ι_desc (fun g : G ↦
+    rw [← Sigma.ι_comp_desc (fun g : G ↦
       pullback.lift (f := T.π) (g := T.π) (T.smul g) (𝟙 T.P)
         (by simp [T.smul_π])) g, ← Category.assoc, hw]
     simp [D]
@@ -55,7 +55,7 @@ private theorem torsor_translation_unique
   have he : x ≫ Sigma.ι (fun _ : G ↦ T.P) k =
       x ≫ Sigma.ι (fun _ : G ↦ T.P) g := by
     apply (cancel_mono D).mp
-    simp only [Category.assoc, D, Sigma.ι_desc]
+    simp only [Category.assoc, D, Sigma.ι_comp_desc]
     ext <;> simp [hk, hg]
   obtain ⟨a⟩ := ‹Nonempty X›
   have ha := congrArg (fun f : X ⟶ ∐ fun _ : G ↦ T.P ↦ f.base a) he

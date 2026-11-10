@@ -399,10 +399,10 @@ def Square.theta (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     letI : (sX.modules Λ X ⋙ CondensedRing.upperStar Λ.X f).Additive :=
       inferInstance
     letI : (sh.modules Λ ⋙ sY.modules Λ Y).Additive := inferInstance
-    (Functor.mapDerivedCategoryCompIso (sX.modules Λ X)
-        (CondensedRing.upperStar Λ.X f)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (sX.modules Λ X)
+        (CondensedRing.upperStar Λ.X f) ≪≫
       Functor.mapDerivedCategoryNatIso sq.ordinary ≪≫
-        Functor.mapDerivedCategoryCompIso (sh.modules Λ) (sY.modules Λ Y)
+        (Functor.mapDerivedCategoryCompIso (sh.modules Λ) (sY.modules Λ Y)).symm
 
 /-- The ordinary component module tensor is the existing transported relative tensor.
 Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
@@ -511,7 +511,7 @@ def SliceComposition.derived (Λ : Profinite.CondensedRing.{u})
     letI := comp_preservesFiniteLimits (sf.modules Λ) (sg.modules Λ)
     letI := comp_preservesFiniteColimits (sf.modules Λ) (sg.modules Λ)
     Functor.mapDerivedCategoryNatIso c.ordinary ≪≫
-      Functor.mapDerivedCategoryCompIso (sf.modules Λ) (sg.modules Λ)
+      (Functor.mapDerivedCategoryCompIso (sf.modules Λ) (sg.modules Λ)).symm
 
 /-- Derived scheme identity, with the published ordinary identity and localization maps.
 Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
@@ -534,8 +534,8 @@ def schemeComposition (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
   letI := comp_preservesFiniteColimits (CondensedRing.upperStar Λ.X f)
     (CondensedRing.upperStar Λ.X g)
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ.X g f) ≪≫
-    Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ.X f)
-      (CondensedRing.upperStar Λ.X g)
+    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ.X f)
+      (CondensedRing.upperStar Λ.X g)).symm
 
 section TensorSquare
 universe v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄

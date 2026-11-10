@@ -160,6 +160,10 @@ private theorem normalized_shift_existsUnique
   apply (cancel_mono ((I.commShiftIso n).hom.app (F.obj X))).mp
   exact eq_of_heq ((hc' n X).trans (hc n X).symm)
 
+-- Match the transported field and module structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
@@ -620,13 +624,8 @@ private theorem scalarAssociator_pentagon
     Category.comp_id]
   have hp := (sfRationalScalar_coherence l E L i Y 0
     (Nat.Prime.ne_zero (Fact.out : l.Prime)) M j).2.2 N k K
-  exact hp.trans (congrArg
-    (fun f ↦ (sfRationalScalarComp l L M j Y 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) N k).hom.app
-        ((sfRationalScalarExtension l E Y 0
-          (Nat.Prime.ne_zero (Fact.out : l.Prime)) L i).obj K) ≫ f)
-    (Category.comp_id ((sfRationalScalarComp l E L i Y 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) N (k.comp j)).hom.app K))).symm
+  erw [Category.comp_id]
+  exact hp
 
 private theorem scalarAssociator_pentagon_nat
     (l : ℕ) [Fact l.Prime]

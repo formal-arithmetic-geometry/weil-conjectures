@@ -107,7 +107,7 @@ private theorem integral_naturality (X : Scheme.{u})
         HL.map (Prod.mkHom (T.map a.hom).op (T.map b.hom)) := by
     rw [← HL.map_comp, ← HL.map_comp]
     congr 1
-    ext
+    apply Prod.hom_ext
     · exact congrArg Quiver.Hom.op ha
     · exact hb
   change T.map (HE.map (Prod.mkHom a.hom.op b.hom)) ≫
@@ -199,15 +199,13 @@ theorem specifiedHomScalarRational_naturality (X : Scheme.{u})
     _ ≫ HL.map (ObjectProperty.homMk (X := SP P) (Y := SP P')
       (Prod.mkHom (F.map a).op (F.map b)))
   rw [hβ, hγ]
-  induction a using TensorProduct.induction_on with
-  | zero => simp only [F.map_zero, map_zero, LinearMap.zero_apply, zero_comp, comp_zero]
+  induction a using TensorProduct.inductionOn with
   | add a a' ha ha' =>
     simp only [F.map_add, map_add, LinearMap.add_apply, Preadditive.add_comp,
       Preadditive.comp_add,
       ha, ha']
   | tmul x a =>
-    induction b using TensorProduct.induction_on with
-    | zero => simp only [F.map_zero, map_zero, zero_comp, comp_zero]
+    induction b using TensorProduct.inductionOn with
     | add b b' hb hb' =>
       simp only [F.map_add, map_add, Preadditive.add_comp, Preadditive.comp_add, hb, hb']
     | tmul y b =>

@@ -102,7 +102,7 @@ theorem ringedSliceExtension_preserves_exact
     have : Epi (T.map L).g := hright.2
     exact ⟨hright.1⟩
   have hex : ∀ T : ShortComplex (SheafOfModules.{max u v} (R.over U)),
-      T.Exact → (T.map L).Exact := (L.exact_tfae.out 0 1).mp hshort
+      T.Exact → (T.map L).Exact := (L.exact_tfae.out 1 2).mp hshort
   exact (S.map L).exact_iff_image_eq_kernel.mp (hex S hS)
 
 end SheafOfModules

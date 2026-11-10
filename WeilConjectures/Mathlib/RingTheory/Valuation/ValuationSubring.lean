@@ -109,6 +109,7 @@ theorem mem_comapResidue_of_not_isUnit {x : K} (hx : x ∈ A)
     (h : ¬IsUnit (⟨x, hx⟩ : A)) : x ∈ A.comapResidue A'' :=
   (A.mem_comapResidue A'').mpr ⟨hx, A.residue_mem_of_not_isUnit A'' h⟩
 
+
 /-- The residue map of `A` sends the composite valuation ring into `A''`. -/
 theorem residue_inclusion_mem (c : A.comapResidue A'') :
     residue A (inclusion _ _ (A.comapResidue_le A'') c) ∈ A'' :=

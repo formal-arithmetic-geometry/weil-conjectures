@@ -193,7 +193,7 @@ theorem idealPowersReesZeroGenerators {A : Type v} [CommRing A]
   have hgen : ∀ z ∈ {z | ∃ (i : Fin r) (a : A), a ∈ I ^ m ∧
       z = (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
         f.appLE ⊤ W le_top).hom a) •
-          F.val.map (homOfLE (hWV.trans hVU)).op (u i)}, z ∈ P.map l := by
+          F.val.restrictₛₗ (homOfLE (hWV.trans hVU)).op (u i)}, z ∈ P.map l := by
     rintro z ⟨i, a, ha, rfl⟩
     let b : reesGrading I m := ⟨reesMonomial I a ha, reesMonomial_mem I a ha⟩
     have hb : b.val.val.coeff m = a := Polynomial.coeff_monomial_same m a

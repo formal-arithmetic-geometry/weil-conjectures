@@ -131,14 +131,14 @@ private theorem exact_scalar_unit
     ((Functor.whiskerRight adj.unit U.mapDerivedCategory ≫
       (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft L
-        ((Functor.mapDerivedCategoryCompIso R U).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso R U) ≪≫
           Iso.refl (R ⋙ U).mapDerivedCategory).hom).app
             ((DerivedCategory.singleFunctor A 0).obj M)) ≫
       (R ⋙ U).mapDerivedCategory.map d ≫
       ((R ⋙ U).mapDerivedCategorySingleFunctor 0).hom.app N =
     (U.mapDerivedCategorySingleFunctor 0).hom.app M ≫
       (DerivedCategory.singleFunctor C 0).map (U.map m) := by
-  have hn := (Functor.mapDerivedCategoryCompIso R U).inv.naturality d
+  have hn := (Functor.mapDerivedCategoryCompIso R U).hom.naturality d
   dsimp only [Functor.comp_map] at hn
   dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Iso.trans_hom, Iso.symm_hom, Iso.refl_hom,
@@ -147,7 +147,7 @@ private theorem exact_scalar_unit
   rw [← reassoc_of% hn, ← U.mapDerivedCategory.map_comp_assoc, hd]
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor R U N]
-  simp only [Iso.inv_hom_id_app_assoc, ← U.mapDerivedCategory.map_comp_assoc,
+  simp only [Iso.hom_inv_id_app_assoc, ← U.mapDerivedCategory.map_comp_assoc,
     Iso.inv_hom_id_app]
   exact (congrArg (fun f ↦ U.mapDerivedCategory.map f ≫
       (U.mapDerivedCategorySingleFunctor 0).hom.app (R.obj N))
@@ -200,26 +200,26 @@ private theorem exact_underlying_single
     U.mapDerivedCategory.map ((H.mapDerivedCategorySingleFunctor 0).inv.app (G.obj Y)) ≫
       U.mapDerivedCategory.map
         (H.mapDerivedCategory.map ((G.mapDerivedCategorySingleFunctor 0).inv.app Y)) ≫
-      (Functor.mapDerivedCategoryCompIso H U).inv.app
+      (Functor.mapDerivedCategoryCompIso H U).hom.app
         (G.mapDerivedCategory.obj ((DerivedCategory.singleFunctor A 0).obj Y)) ≫
-      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).inv.app
+      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).hom.app
         ((DerivedCategory.singleFunctor A 0).obj Y) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app
         ((DerivedCategory.singleFunctor A 0).obj Y) ≫
       (V.mapDerivedCategorySingleFunctor 0).hom.app Y =
     (U.mapDerivedCategorySingleFunctor 0).hom.app (H.obj (G.obj Y)) ≫
       (DerivedCategory.singleFunctor D 0).map (e.hom.app Y) := by
-  have hn := (Functor.mapDerivedCategoryCompIso H U).inv.naturality
+  have hn := (Functor.mapDerivedCategoryCompIso H U).hom.naturality
     ((G.mapDerivedCategorySingleFunctor 0).inv.app Y)
   dsimp only [Functor.comp_map] at hn
   erw [reassoc_of% hn]
   erw [Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor,
     ← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor G (H ⋙ U) Y]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [(H ⋙ U).mapDerivedCategory.map_id, Category.id_comp]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor H U (G.obj Y)]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [U.mapDerivedCategory.map_id, Category.id_comp]
 
@@ -239,7 +239,7 @@ private theorem cyclic_generator_epi (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (
     erw [AddCommGrpCat.epi_iff_surjective]
     intro x
     obtain ⟨a, ha⟩ := ZMod.intCast_surjective x.down
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
   have he : constantGenerator A X =
       (constantSheaf J Ab.{u + 1}).map f ≫ (finiteConstantAbComparison A X).inv := by
     apply Sheaf.hom_ext
@@ -292,8 +292,8 @@ private theorem three_source_underlying
     let c : G.mapDerivedCategory ⋙ H.mapDerivedCategory ⋙ U.mapDerivedCategory ≅
         V.mapDerivedCategory :=
       Functor.isoWhiskerLeft G.mapDerivedCategory
-        (Functor.mapDerivedCategoryCompIso H U).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso H U) ≪≫
+      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)) ≪≫
       Functor.mapDerivedCategoryNatIso e
     U.mapDerivedCategory.map
       ((H.mapDerivedCategorySingleFunctor 0).inv.app Z ≫
@@ -310,8 +310,8 @@ private theorem three_source_underlying
   let c : G.mapDerivedCategory ⋙ H.mapDerivedCategory ⋙ U.mapDerivedCategory ≅
       V.mapDerivedCategory :=
     Functor.isoWhiskerLeft G.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso H U).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H U) ≪≫
+    (Functor.mapDerivedCategoryCompIso G (H ⋙ U)) ≪≫
     Functor.mapDerivedCategoryNatIso e
   have hn := c.hom.naturality q.hom
   dsimp only [Functor.comp_map] at hn
@@ -330,6 +330,36 @@ private theorem three_source_underlying
   erw [exact_underlying_single G H U V e Y]
   erw [reassoc_of% hu]
   simp only [Functor.comp_map]
+
+-- `three_source_underlying` with the source folded into `threeFunctorSource`, so that it
+-- applies to `cyclicFiniteEvaluationSource` without the kernel unfolding the composite.
+private theorem three_source_folded
+    {A₁ A B C D : Type*} [Category A₁] [Category A] [Category B] [Category C] [Category D]
+    [Abelian A₁] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A₁] [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (R : DerivedCategory A₁ ⥤ DerivedCategory A)
+    (G : A ⥤ B) (H : B ⥤ C) (U : C ⥤ D) (V : A ⥤ D)
+    [G.Additive] [H.Additive] [U.Additive] [V.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    (e : G ⋙ H ⋙ U ≅ V) (Y : A) {Z : B} (s : G.obj Y ≅ Z) (X₁ : A₁)
+    (q : (DerivedCategory.singleFunctor A 0).obj Y ≅
+      R.obj ((DerivedCategory.singleFunctor A₁ 0).obj X₁)) :
+    U.mapDerivedCategory.map (threeFunctorSource R G H q.hom s) ≫
+      (Functor.isoWhiskerLeft G.mapDerivedCategory
+          (Functor.mapDerivedCategoryCompIso H U) ≪≫
+        (Functor.mapDerivedCategoryCompIso G (H ⋙ U)) ≪≫
+        Functor.mapDerivedCategoryNatIso e).hom.app
+          (R.obj ((DerivedCategory.singleFunctor A₁ 0).obj X₁)) ≫
+      V.mapDerivedCategory.map q.inv ≫ (V.mapDerivedCategorySingleFunctor 0).hom.app Y =
+    (U.mapDerivedCategorySingleFunctor 0).hom.app (H.obj Z) ≫
+      (DerivedCategory.singleFunctor D 0).map ((H ⋙ U).map s.inv ≫ e.hom.app Y) := by
+  have h := three_source_underlying G H U V e Y s _ q
+  unfold threeFunctorSource
+  exact h
 
 open CategoryTheory.MonoidalCategory MonObj in
 private theorem completed_generator_unit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
@@ -495,9 +525,9 @@ private theorem exact_square_single
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (e : U ⋙ V ≅ F ⋙ R) (M : A) :
-    ((Functor.mapDerivedCategoryCompIso U V).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso U V) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso F R).hom.app
+        (Functor.mapDerivedCategoryCompIso F R).symm).hom.app
           ((DerivedCategory.singleFunctor A 0).obj M) ≫
       R.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
       (R.mapDerivedCategorySingleFunctor 0).hom.app (F.obj M) =
@@ -508,7 +538,7 @@ private theorem exact_square_single
   erw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem completed_underlying_single
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
@@ -600,15 +630,14 @@ private theorem cyclic_source_forward
     (DerivedCategory.singleFunctor _ 0).mapIso sourceIso
   let d := Functor.isoWhiskerLeft p.eW.F.mapDerivedCategory
       (Functor.mapDerivedCategoryCompIso
-        (diagonalFiniteToPadic l n (diagonalSurface Y)) U).symm ≪≫
+        (diagonalFiniteToPadic l n (diagonalSurface Y)) U) ≪≫
     (Functor.mapDerivedCategoryCompIso p.eW.F
-      (diagonalFiniteToPadic l n (diagonalSurface Y) ⋙ U)).symm ≪≫
+      (diagonalFiniteToPadic l n (diagonalSurface Y) ⋙ U)) ≪≫
     Functor.mapDerivedCategoryNatIso (cyclicFiniteUnderlying l Y n p)
-  have hf := three_source_underlying p.eW.F
+  have hf := three_source_folded R p.eW.F
     (diagonalFiniteToPadic l n (diagonalSurface Y)) U V
     (cyclicFiniteUnderlying l Y n p) N p.sourceComparison.iso
-    (R.obj ((DerivedCategory.singleFunctor _ 0).obj
-      (source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y))) p.supported.iso.symm
+    (source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y) p.supported.iso.symm
   let m := p.eW.underlying.inv.app N ≫
     (cartierForget (diagonalResidue.{u} l n) (diagonalSurface Y)).map
       p.sourceComparison.iso.hom
@@ -626,7 +655,7 @@ private theorem cyclic_source_forward
     (V.mapDerivedCategory.map p.supported.iso.hom)
     ((V.mapDerivedCategorySingleFunctor 0).hom.app N)
     ((U.mapDerivedCategorySingleFunctor 0).hom.app (cyclic_source_object l Y n))
-    k m (by unfold cyclicFiniteEvaluationSource threeFunctorSource; exact hf) hm
+    k m hf hm
   have htransport := mapped_source_transport
     (p.eW.F.mapDerivedCategory ⋙
       (diagonalFiniteToPadic l n (diagonalSurface Y)).mapDerivedCategory)
@@ -636,205 +665,5 @@ private theorem cyclic_source_forward
       (DerivedCategory.singleFunctor _ 0).map m)
   unfold cyclicEvaluationSource completedFunctorSource
   exact htransport.trans hfinish
-
-private theorem single_comparison_post
-    {A B C : Type*} [Category A] [Category B] [Category C]
-    [Abelian A] [Abelian B] [Abelian C]
-    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
-    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    (P : A) {N : B} (s : F.obj P ≅ N)
-    {X Y : DerivedCategory C} {J : C}
-    (d0 : X ⟶ Y) (d1 : Y ⟶ G.mapDerivedCategory.obj
-      (F.mapDerivedCategory.obj ((DerivedCategory.singleFunctor A 0).obj P)))
-    (j0 : X ⟶ (DerivedCategory.singleFunctor C 0).obj J) (j : J ⟶ G.obj (F.obj P))
-    (h : d0 ≫ d1 ≫
-      G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app P) ≫
-      (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj P) =
-        j0 ≫ (DerivedCategory.singleFunctor C 0).map j) :
-    d0 ≫ d1 ≫ G.mapDerivedCategory.map
-      (((F.mapDerivedCategorySingleFunctor 0).app P ≪≫
-        (DerivedCategory.singleFunctor B 0).mapIso s).hom) ≫
-      (G.mapDerivedCategorySingleFunctor 0).hom.app N =
-    j0 ≫ (DerivedCategory.singleFunctor C 0).map (j ≫ G.map s.hom) := by
-  have hn := (G.mapDerivedCategorySingleFunctor 0).hom.naturality s.hom
-  dsimp only [Functor.comp_map] at hn
-  dsimp only [Iso.trans_hom, NatTrans.comp_app, Functor.mapIso_hom]
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
-  change d0 ≫ d1 ≫
-    G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app P) ≫
-    G.mapDerivedCategory.map ((DerivedCategory.singleFunctor B 0).map s.hom) ≫
-    (G.mapDerivedCategorySingleFunctor 0).hom.app N = _
-  rw [hn]
-  simpa only [CategoryTheory.Functor.map_comp, Category.assoc] using
-    congrArg (fun f ↦ f ≫ (DerivedCategory.singleFunctor C 0).map (G.map s.hom)) h
-
-private theorem augmentation_transport
-    {A B : Type*} [Category A] [Category B] (S : A ⥤ B)
-    {P₀ P₁ P₂ P₃ P₄ : A} (f0 : P₀ ⟶ P₁) (f1 : P₁ ⟶ P₂)
-    (f2 : P₂ ⟶ P₃) (f3 : P₃ ⟶ P₄)
-    {X B₀ C₀ C₁ D₀ D₁ D₂ E : B}
-    (u : X ⟶ B₀) (d : B₀ ⟶ C₀) (a : C₀ ⟶ D₀) (e : E ≅ D₀)
-    (q0 : C₀ ⟶ C₁) (q1 : D₀ ⟶ D₁) (a1 : C₁ ⟶ D₁)
-    (d1 : D₁ ⟶ D₂) (c1 : D₂ ⟶ S.obj P₃) (r0 : C₁ ⟶ S.obj P₂)
-    (j : X ⟶ S.obj P₀) (r : D₀ ⟶ D₂)
-    (hr : r = q1 ≫ d1) (hn : a ≫ q1 = q0 ≫ a1)
-    (hs : a1 ≫ d1 ≫ c1 = r0 ≫ S.map f2)
-    (hb : u ≫ d ≫ q0 ≫ r0 = j ≫ S.map (f0 ≫ f1)) :
-    u ≫ (d ≫ a ≫ e.inv) ≫ (e.hom ≫ r ≫ c1 ≫ S.map f3) =
-      j ≫ S.map (f0 ≫ f1 ≫ f2 ≫ f3) := by
-  rw [hr]
-  simp only [Category.assoc, Iso.inv_hom_id_assoc]
-  rw [reassoc_of% hn, reassoc_of% hs]
-  have h := congrArg (fun f ↦ f ≫ S.map f2 ≫ S.map f3) hb
-  simpa only [CategoryTheory.Functor.map_comp, Category.assoc] using h
-
-private theorem cyclic_augmentation_forward
-    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
-    [DiagonalTraceLocalizations l (diagonalSurface Y)]
-    (eW : CompletedRealization l (diagonalSurface Y))
-    (sourceIso : eW.F.obj (diagonalCompletedSource l Y) ≅
-      source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y)
-    (p : CyclicCartierFrame l Y n) :
-    let U := diagonalForget l (diagonalSurface Y)
-    let Z := diagonalCompletedRestriction l (diagonalSurface Y)
-    let V := Mod.forget (D := DiagonalAb (diagonalSurface Y))
-      (condensedRingObj
-        (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1)))) (diagonalSurface Y))
-    let R := derivedScalars (cyclicMap l n) (diagonalSurface Y)
-    let P := diagonalCompletedSource l Y
-    let N := source (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1)))) Y
-    let q := (eW.F.mapDerivedCategorySingleFunctor 0).app P ≪≫
-      (DerivedCategory.singleFunctor _ 0).mapIso sourceIso
-    let m := p.eW.underlying.inv.app N ≫
-      (cartierForget (diagonalResidue.{u} l n) (diagonalSurface Y)).map
-        p.sourceComparison.iso.hom
-    let c := (cyclicEvaluationUnderlying l Y n eW p).hom.app
-        (diagonalCompletedDomain l Y) ≫
-      V.mapDerivedCategory.map (R.map q.hom ≫ p.supported.iso.hom) ≫
-      (V.mapDerivedCategorySingleFunctor 0).hom.app N ≫
-      (DerivedCategory.singleFunctor _ 0).map m
-    U.mapDerivedCategory.map ((Z.mapDerivedCategorySingleFunctor 0).inv.app P) ≫
-        (cyclicEvaluationAugmentation l Y n eW p).app
-          (diagonalCompletedDomain l Y) ≫ c =
-      (U.mapDerivedCategorySingleFunctor 0).hom.app (Z.obj P) ≫
-        (DerivedCategory.singleFunctor _ 0).map
-          (eW.underlying.inv.app P ≫ sourceIso.hom.hom ≫
-            p.supported.semilinear.hom.hom ≫ m) := by
-  dsimp only
-  let U := diagonalForget l (diagonalSurface Y)
-  let Z := diagonalCompletedRestriction l (diagonalSurface Y)
-  let V := Mod.forget (D := DiagonalAb (diagonalSurface Y))
-    (condensedRingObj
-      (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1)))) (diagonalSurface Y))
-  let V0 := Mod.forget (D := DiagonalAb (diagonalSurface Y))
-    (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) (diagonalSurface Y))
-  let R := derivedScalars (cyclicMap l n) (diagonalSurface Y)
-  let P := diagonalCompletedSource l Y
-  let q := (eW.F.mapDerivedCategorySingleFunctor 0).app P ≪≫
-    (DerivedCategory.singleFunctor _ 0).mapIso sourceIso
-  let N := source (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1)))) Y
-  let S := DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0
-  let m := p.eW.underlying.inv.app N ≫
-    (cartierForget (diagonalResidue.{u} l n) (diagonalSurface Y)).map
-      p.sourceComparison.iso.hom
-  have hn := (scalarUnderlyingUnit (cyclicMap l n) (diagonalSurface Y)).naturality q.hom
-  dsimp only [Functor.comp_map] at hn
-  have hs := scalar_unit_endpoint (cyclicMap l n) (diagonalSurface Y) p.supported
-  have hb := single_comparison_post eW.F V0 P sourceIso
-    (U.mapDerivedCategory.map ((Z.mapDerivedCategorySingleFunctor 0).inv.app P))
-    ((cyclicCompletedUnderlying l Y eW).hom.app (diagonalCompletedDomain l Y))
-    ((U.mapDerivedCategorySingleFunctor 0).hom.app (Z.obj P))
-    (eW.underlying.inv.app P) (completed_underlying_single l Y eW)
-  exact augmentation_transport S (eW.underlying.inv.app P) sourceIso.hom.hom
-    p.supported.semilinear.hom.hom m
-    (U.mapDerivedCategory.map ((Z.mapDerivedCategorySingleFunctor 0).inv.app P))
-    ((cyclicCompletedUnderlying l Y eW).hom.app (diagonalCompletedDomain l Y))
-    ((scalarUnderlyingUnit (cyclicMap l n) (diagonalSurface Y)).app
-      (eW.F.mapDerivedCategory.obj (diagonalCompletedDomain l Y)))
-    ((cyclicEvaluationUnderlying l Y n eW p).app (diagonalCompletedDomain l Y))
-    (V0.mapDerivedCategory.map q.hom) (V.mapDerivedCategory.map (R.map q.hom))
-    ((scalarUnderlyingUnit (cyclicMap l n) (diagonalSurface Y)).app
-      ((DerivedCategory.singleFunctor _ 0).obj
-        (source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y)))
-    (V.mapDerivedCategory.map p.supported.iso.hom)
-    ((V.mapDerivedCategorySingleFunctor 0).hom.app N)
-    ((V0.mapDerivedCategorySingleFunctor 0).hom.app
-      (source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y))
-    ((U.mapDerivedCategorySingleFunctor 0).hom.app (Z.obj P))
-    (V.mapDerivedCategory.map (R.map q.hom ≫ p.supported.iso.hom))
-    (V.mapDerivedCategory.map_comp _ _) hn.symm hs hb
-
-private theorem generator_augmentation
-    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    (U : A ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-    {I : B} {P Q : A} {X E : DerivedCategory A}
-    (t : X ≅ (DerivedCategory.singleFunctor A 0).obj P)
-    (σ : (DerivedCategory.singleFunctor A 0).obj Q ⟶ E)
-    (α : U.mapDerivedCategory.obj X ⟶ U.mapDerivedCategory.obj E)
-    (c : U.mapDerivedCategory.obj E ≅
-      (DerivedCategory.singleFunctor B 0).obj (U.obj Q))
-    (γ : I ⟶ U.obj P) (g : I ⟶ U.obj Q) (m : U.obj P ⟶ U.obj Q)
-    (hσ : U.mapDerivedCategory.map σ ≫ c.hom =
-      (U.mapDerivedCategorySingleFunctor 0).hom.app Q)
-    (hα : U.mapDerivedCategory.map t.inv ≫ α ≫ c.hom =
-      (U.mapDerivedCategorySingleFunctor 0).hom.app P ≫
-        (DerivedCategory.singleFunctor B 0).map m)
-    (hm : γ ≫ m = g) :
-    ((DerivedCategory.singleFunctor B 0).map γ ≫
-      (U.mapDerivedCategorySingleFunctor 0).inv.app P ≫
-        U.mapDerivedCategory.map t.inv) ≫ α =
-    (DerivedCategory.singleFunctor B 0).map g ≫
-      (U.mapDerivedCategorySingleFunctor 0).inv.app Q ≫ U.mapDerivedCategory.map σ := by
-  apply (cancel_mono c.hom).mp
-  simp only [Category.assoc, hα, hσ, Iso.inv_hom_id_app_assoc,
-    Iso.inv_hom_id_app, ← CategoryTheory.Functor.map_comp, hm]
-  exact (Category.comp_id _).symm
-
-private theorem normalized_inverse
-    {A B : Type*} [Category A] [Category B] (F : A ⥤ B)
-    {P Q R T : A} {I : B} (γ : I ⟶ F.obj P) (π : P ⟶ Q)
-    (a : I ⟶ F.obj R) (p : R ⟶ Q) (s : Q ≅ T)
-    (g : I ⟶ F.obj T)
-    (hπ : γ ≫ F.map π = a ≫ F.map p)
-    (hs : a ≫ F.map (p ≫ s.hom) = g) :
-    γ ≫ F.map π = g ≫ F.map s.inv := by
-  rw [hπ, ← hs]
-  simp only [Category.assoc, ← F.map_comp, s.hom_inv_id, Category.comp_id]
-
-private theorem endpoint_generator_argument
-    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
-    [HasDerivedCategory A] [HasDerivedCategory B]
-    (U : A ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-    [U.Faithful] {I : B} {P Q N : A} {X E F : DerivedCategory A}
-    (t : X ≅ (DerivedCategory.singleFunctor A 0).obj P)
-    (σ : (DerivedCategory.singleFunctor A 0).obj Q ⟶ E)
-    (w : E ⟶ F) (r : F ⟶ (DerivedCategory.singleFunctor A 0).obj N)
-    (α : U.mapDerivedCategory.obj X ⟶ U.mapDerivedCategory.obj E)
-    (μ : X ⟶ F) (γ : I ⟶ U.obj P) (g : I ⟶ U.obj Q) [Epi g]
-    (π : P ⟶ N) (s : Q ⟶ N)
-    (hγ : ((DerivedCategory.singleFunctor B 0).map γ ≫
-        (U.mapDerivedCategorySingleFunctor 0).inv.app P ≫
-          U.mapDerivedCategory.map t.inv) ≫ α =
-      (DerivedCategory.singleFunctor B 0).map g ≫
-        (U.mapDerivedCategorySingleFunctor 0).inv.app Q ≫ U.mapDerivedCategory.map σ)
-    (he : α ≫ U.mapDerivedCategory.map w = U.mapDerivedCategory.map μ)
-    (hproject : μ ≫ r = t.hom ≫ (DerivedCategory.singleFunctor A 0).map π)
-    (hordinary : γ ≫ U.map π = g ≫ U.map s) :
-    σ ≫ w ≫ r = (DerivedCategory.singleFunctor A 0).map s := by
-  apply single_generator_injective U g
-  simp only [CategoryTheory.Functor.map_comp]
-  rw [← reassoc_of% hγ]
-  rw [reassoc_of% he, ← U.mapDerivedCategory.map_comp, hproject]
-  simp only [CategoryTheory.Functor.map_comp,
-    ← U.mapDerivedCategory.map_comp_assoc, t.inv_hom_id, U.mapDerivedCategory.map_id,
-    Category.id_comp]
-  have hπ := (U.mapDerivedCategorySingleFunctor 0).inv.naturality π
-  have hs := (U.mapDerivedCategorySingleFunctor 0).inv.naturality s
-  dsimp only [Functor.comp_map] at hπ hs
-  rw [← hπ, ← hs]
-  simp only [← CategoryTheory.Functor.map_comp_assoc, hordinary]
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

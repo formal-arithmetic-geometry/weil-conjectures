@@ -58,6 +58,18 @@ open scoped ChangeOfRings
 
 namespace SheafOfModules
 
+noncomputable local instance
+    {D : Type uC} [Category.{vC} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {R : Sheaf K CommRingCat.{u}}
+    (M : SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R))
+    {U V : Dᵒᵖ} (f : U ⟶ V) :
+    SMul (R.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose K (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (M.val.obj V)) :=
+  (M.val.obj V).isModule.toSMul
+
 private theorem linearEquiv_basis_bijective
     {A : Type u} [Ring A] {M : Type vC} [AddCommGroup M] [Module A M]
     (q : M ≃ₗ[A] A) (x : M) (hx : q x = 1) :
@@ -87,6 +99,7 @@ private noncomputable def presheafBasisChart
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro r
+      change P.obj W at r
       change (P.map f r) • e V = M.map f (r • e W)
       rw [M.map_smul, hn])
 

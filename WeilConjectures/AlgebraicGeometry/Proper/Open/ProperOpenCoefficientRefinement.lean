@@ -150,7 +150,7 @@ private theorem coefficientPullback_comp
     (N : DerivedCategoryModule A T₂) :
     (Functor.mapDerivedCategoryNatIso
           (upperStarComp (ModuleCat.{u + 1} B) j₁ v j₂ h.symm) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).hom.app ((scalarExtension φ T₂).obj N) ≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app ((scalarExtension φ T₂).obj N) ≫
       (upperStar (ModuleCat.{u + 1} B) j₁).mapDerivedCategory.map
         ((properOpenCoefficientPullbackIso φ v).hom.app N) ≫
       (properOpenCoefficientPullbackIso φ j₁).hom.app
@@ -159,7 +159,7 @@ private theorem coefficientPullback_comp
         (scalarExtension φ X).map
           ((Functor.mapDerivedCategoryNatIso
               (upperStarComp (ModuleCat.{u + 1} A) j₁ v j₂ h.symm) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app N) := by
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app N) := by
   simpa only [properOpenCoefficientPullbackIso] using
     scalarPullback_composition φ v j₁ j₂ h N
 
@@ -228,7 +228,7 @@ private def refinementRestriction
       (upperStar (ModuleCat.{u + 1} A) j₁).mapDerivedCategory :=
   let k := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) j₁ v j₂ h.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   { app M := k.hom.app _ ≫
       (upperStar (ModuleCat.{u + 1} A) j₁).mapDerivedCategory.map
         (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v).ofNatIsoLeft
@@ -293,7 +293,7 @@ private theorem refinementRestriction_normalization
       ((upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory.map_id _)).trans
         (Category.comp_id _)
   let k := Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) j₁ v j₂ h.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have hk : _root_.DerivedCategory.Plus.ι.map
       ((upperStarCompDerivedPlus (ModuleCat.{u + 1} A) j₁ v j₂ h.symm).hom.app
         ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) v).obj M)) =
@@ -504,10 +504,10 @@ theorem properOpenComparison_coefficient_refinement
         properOpenComparisonAmbient B v j₁ j₂ h ⟨(scalarExtension φ X).obj K.obj, hQ⟩ := by
   let kA := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) j₁ v j₂ h.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   let kB := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} B) j₁ v j₂ h.symm) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have hχ : ∀ M : DerivedCategoryModule A T₁,
       (upperStar (ModuleCat.{u + 1} B) j₂).mapDerivedCategory.map
           ((scalarMate φ v).app M) ≫

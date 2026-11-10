@@ -30,7 +30,7 @@ theorem ideal_coefficients_monomial_membership
     (p : MvPolynomial (Fin r) R) :
     p ∈ Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j)) ↔
       ∀ E : Fin r →₀ ℕ,
-        coeff E p ∈ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}) := by
+        AddMonoidAlgebra.coeff p E ∈ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}) := by
   classical
   have _ := hr
   let J : Ideal (MvPolynomial (Fin r) R) :=
@@ -63,7 +63,7 @@ theorem ideal_coefficients_monomial_membership
           Ideal.subset_span ⟨j, rfl⟩
         convert J.mul_mem_left (monomial
           (E - Finsupp.single (Fin.castLE hir j) 1) 1) hgen using 1
-        simp only [X, C_apply, monomial_mul]
+        simp only [X, C_apply, monomial_mul_monomial]
         simp [heq]
       | zero => simp
       | add a b ha hb ia ib =>
@@ -71,6 +71,6 @@ theorem ideal_coefficients_monomial_membership
       | smul a b hb ib =>
         simpa only [smul_eq_mul, ← C_mul_monomial] using J.mul_mem_left (C a) ib
     rw [p.as_sum]
-    exact J.sum_mem fun E _ => hm E (coeff E p) (hp E)
+    exact J.sum_mem fun E _ => hm E (AddMonoidAlgebra.coeff p E) (hp E)
 
 end MvPolynomial

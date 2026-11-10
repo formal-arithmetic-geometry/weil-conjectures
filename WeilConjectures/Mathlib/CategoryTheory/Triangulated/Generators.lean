@@ -118,6 +118,7 @@ lemma isIso_of_isClassicalTriangulatedGenerator {P : ObjectProperty C}
   rw [hP]
   trivial
 
+
 end Triangulated
 
 end CategoryTheory.NatTrans

@@ -30,7 +30,8 @@ open CategoryTheory Limits
 attribute [local instance 10000] CategoryTheory.CategoryStruct.toQuiver
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteRealizationFunctor
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

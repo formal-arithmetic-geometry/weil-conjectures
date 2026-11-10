@@ -169,8 +169,7 @@ private theorem tensor_hom_ext_affine {Y Z : Scheme.{u}} (f : Y ⟶ Z)
     (((tensorPullback f).obj E).presheaf.map (homOfLE O.2).op s)
   rw [← ht]
   clear ht
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul t r =>
       rw [hp]
       have hs := Classical.choose_spec (exists_tensorPullbackAdjunction f) E (op U.1) t

@@ -97,7 +97,7 @@ private theorem etaleComparison_liftIso (T : Scheme.{u})
   let G := comparisonUpperStar (ModuleCat.{u + 1} A) T
   let R := finiteCoefficientRealization T A
   let H := finiteCoefficientComparison T A
-  let c := CategoryTheory.Functor.mapDerivedCategoryCompIso G R
+  let c := (CategoryTheory.Functor.mapDerivedCategoryCompIso G R).symm
   let e' : H.mapDerivedCategory.obj X ≅ H.mapDerivedCategory.obj Y :=
     c.app X ≪≫ R.mapDerivedCategory.mapIso e ≪≫ (c.app Y).symm
   let X' : DerivedCategory.Plus _ := ⟨X, hX⟩
@@ -240,7 +240,7 @@ private theorem levelOrigin_realization (T : Scheme.{u})
   letI := pbcFunctionRealization_additive T d n
   letI := pbcFunctionRealization_limits T d n
   letI := pbcFunctionRealization_colimits T d n
-  let c := (CategoryTheory.Functor.mapDerivedCategoryCompIso R G).symm ≪≫
+  let c := CategoryTheory.Functor.mapDerivedCategoryCompIso R G ≪≫
     CategoryTheory.Functor.mapDerivedCategoryNatIso (functionRealizationComparison T d n)
   exact (c.app K).symm ≪≫ G.mapDerivedCategory.mapIso eR ≪≫
     G.mapDerivedCategoryFactors.app C ≪≫ eC

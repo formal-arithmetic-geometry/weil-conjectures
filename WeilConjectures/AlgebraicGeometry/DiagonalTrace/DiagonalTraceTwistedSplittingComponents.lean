@@ -35,10 +35,10 @@ private lemma derived_inverse_triangle
     (e : C ≌ D) [e.functor.Additive] [e.inverse.Additive]
     (Y : DerivedCategory C) :
     e.functor.mapDerivedCategory.map
-        (((Functor.mapDerivedCategoryCompIso e.functor e.inverse).inv.app Y) ≫
+        (((Functor.mapDerivedCategoryCompIso e.functor e.inverse).hom.app Y) ≫
           (Functor.mapDerivedCategoryNatIso e.unitIso.symm).hom.app Y ≫
           (Functor.mapDerivedCategoryIdIso C).hom.app Y) =
-      (Functor.mapDerivedCategoryCompIso e.inverse e.functor).inv.app
+      (Functor.mapDerivedCategoryCompIso e.inverse e.functor).hom.app
           (e.functor.mapDerivedCategory.obj Y) ≫
         (Functor.mapDerivedCategoryNatIso e.counitIso).hom.app
           (e.functor.mapDerivedCategory.obj Y) ≫
@@ -46,20 +46,19 @@ private lemma derived_inverse_triangle
   have h := Functor.mapDerivedCategoryCompNatIso_cocycle
     e.unitIso.symm (Iso.refl e.functor) e.counitIso (Iso.refl e.functor)
     (fun X ↦ by simpa using (e.counit_app_functor X).symm) Y
-  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, NatTrans.comp_app,
-    Iso.symm_hom] at h
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, NatTrans.comp_app] at h
   have hl := congr_app (Functor.mapDerivedCategoryCompIso_id_comp e.functor) Y
   have hr := congr_app (Functor.mapDerivedCategoryCompIso_comp_id e.functor) Y
   simp only [NatTrans.comp_app, NatTrans.id_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app] at hl hr
-  have hl' : (Functor.mapDerivedCategoryCompIso (𝟭 C) e.functor).inv.app Y =
+  have hl' : (Functor.mapDerivedCategoryCompIso (𝟭 C) e.functor).hom.app Y =
       e.functor.mapDerivedCategory.map ((Functor.mapDerivedCategoryIdIso C).hom.app Y) := by
-    exact ((Iso.hom_comp_eq_id
+    exact ((Iso.inv_comp_eq_id
       ((Functor.mapDerivedCategoryCompIso (𝟭 C) e.functor).app Y)).mp hl).symm
-  have hr' : (Functor.mapDerivedCategoryCompIso e.functor (𝟭 D)).inv.app Y =
+  have hr' : (Functor.mapDerivedCategoryCompIso e.functor (𝟭 D)).hom.app Y =
       (Functor.mapDerivedCategoryIdIso D).hom.app
         (e.functor.mapDerivedCategory.obj Y) := by
-    exact ((Iso.hom_comp_eq_id
+    exact ((Iso.inv_comp_eq_id
       ((Functor.mapDerivedCategoryCompIso e.functor (𝟭 D)).app Y)).mp hr).symm
   rw [hl', hr'] at h
   apply (cancel_mono ((Functor.mapDerivedCategoryNatIso (Iso.refl e.functor)).hom.app Y)).mp
@@ -253,8 +252,8 @@ theorem diagonalTrace_twistedSplitting_components
     rfl
   · let γ := p.twistS.cancelNegative l E
     let δ : N ⋙ F ≅ 𝟭 (D S (Arings l E S)) :=
-      (Functor.mapDerivedCategoryCompIso p.twistS.equivalence.inverse
-        p.twistS.equivalence.functor).symm ≪≫
+      Functor.mapDerivedCategoryCompIso p.twistS.equivalence.inverse
+        p.twistS.equivalence.functor ≪≫
       Functor.mapDerivedCategoryNatIso p.twistS.equivalence.counitIso ≪≫
       Functor.mapDerivedCategoryIdIso (Systems S (Arings l E S))
     have htriangle (Y : D S (Arings l E S)) :

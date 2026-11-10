@@ -102,8 +102,8 @@ private theorem pull_completion_chain {X Y : Scheme.{u}} (f : X ⟶ Y)
     apply Limits.Pi.hom_ext
     intro n
     simp only [Category.assoc, ordinaryIntegralProductAugmentation,
-      IntegralOnSlice.productAugmentation, Limits.Pi.lift_π, Limits.Pi.map_π,
-      Limits.Pi.lift_π_assoc]
+      IntegralOnSlice.productAugmentation, Limits.Pi.lift_comp_π, Limits.Pi.map_π,
+      Limits.Pi.lift_comp_π_assoc]
     have h := congrArg (fun a ↦ (a.app P).app (op n))
       (pull_quotient_augmentation l E f p b hb)
     dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,

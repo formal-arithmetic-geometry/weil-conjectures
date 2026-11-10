@@ -54,4 +54,5 @@ theorem surjective_gradedAddHom {f : 𝒜 →+*ᵍ ℬ} (hf : Function.Surjectiv
   obtain ⟨a, ha, hab⟩ := exists_mem_of_surjective hf b.2
   exact ⟨⟨a, ha⟩, Subtype.ext hab⟩
 
+
 end GradedRingHom

@@ -230,18 +230,19 @@ private theorem exact_restriction_cube
   simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
     Functor.mapDerivedCategoryNatIso_refl, Category.id_comp] at h₁
   have htdA : (Functor.mapDerivedCategoryTriangleIso dA).hom =
-      (Functor.mapDerivedCategoryCompIso cA pA).hom ≫
+      (Functor.mapDerivedCategoryCompIso cA pA).inv ≫
         (Functor.mapDerivedCategorySquareIso dA).hom := by
     simp [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryTriangleIso]
   have htdB : (Functor.mapDerivedCategoryTriangleIso dB).hom =
-      (Functor.mapDerivedCategoryCompIso cB pB).hom ≫
+      (Functor.mapDerivedCategoryCompIso cB pB).inv ≫
         (Functor.mapDerivedCategorySquareIso dB).hom := by
     simp [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryTriangleIso]
   erw [htdA, htdB] at h₂
   simp only [NatTrans.comp_app, Functor.map_comp, ← Category.assoc] at h₂
   erw [h₁] at h₂
-  have h := (cancel_epi ((Functor.mapDerivedCategoryCompIso cA pA).hom.app
-    (r₀.mapDerivedCategory.obj N))).1 (by simpa only [Category.assoc] using h₂)
+  have h := (cancel_epi ((Functor.mapDerivedCategoryCompIso cA pA).inv.app
+    (r₀.mapDerivedCategory.obj N))).1
+      (by simpa only [Category.assoc, Iso.symm_hom, cA, pA, r₀] using h₂)
   simpa only [Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryNatIso_symm,
     Iso.symm_hom, Iso.trans_hom, Iso.trans_inv, NatTrans.comp_app,
     pbcDerivedComparisonRestrict, Iso.symm_inv, Sheaf.derivedRestrictScalars,

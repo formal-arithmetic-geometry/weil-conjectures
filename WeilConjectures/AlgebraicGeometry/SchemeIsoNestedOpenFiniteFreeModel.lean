@@ -104,6 +104,7 @@ theorem exists_scheme_iso_nested_open_finite_free_model
     ((Modules.restrictFunctorComp a.inv a.hom).symm ≪≫
       Modules.restrictFunctorCongr a.inv_hom_id ≪≫ Modules.restrictFunctorId)
   let A := (EV.trans ES).trans EW.symm
+  have : A.functor.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full A.functor
   let P' := (A.functor.mapHomologicalComplex (.up ℤ)).obj P
   refine ⟨W, ?_, P', ?_, ?_, ?_⟩
   · intro y

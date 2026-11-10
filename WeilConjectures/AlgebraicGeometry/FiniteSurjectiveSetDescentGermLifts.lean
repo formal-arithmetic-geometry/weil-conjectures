@@ -37,7 +37,7 @@ private theorem descent_coordinate
         (Scheme.pointSmallEtale x).sheafFiber.obj G,
       Function.Bijective c ∧ ∀ a : (Scheme.pointSmallEtale x).sheafFiber.obj G,
         c ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op)
           ((Scheme.pointSmallEtale x).sheafFiber.map
@@ -53,7 +53,7 @@ private theorem descent_coordinate
   obtain ⟨U, z, s, rfl⟩ :=
     (Scheme.pointSmallEtale (t ≫ f)).toPresheafFiber_jointly_surjective (P := G.obj) a
   change c ((colimit.pre
-    ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
+    ((Functor.Elements.π (Scheme.pointSmallEtale t).fiber).op ⋙
       ((Scheme.etaleSetPullback f).obj G).obj)
     (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op)
       ((Scheme.pointSmallEtale (t ≫ f)).presheafFiber.map
@@ -65,9 +65,9 @@ private theorem descent_coordinate
   erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
   have hpre := ConcreteCategory.congr_hom
     (colimit.ι_pre
-      ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
+      ((Functor.Elements.π (Scheme.pointSmallEtale t).fiber).op ⋙
         ((Scheme.etaleSetPullback f).obj G).obj)
-      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op ⟨U, z⟩))
+      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op (Functor.elementsMk _ U z)))
     (etaleSetDescentUnit f G U s)
   erw [hpre]
   exact hg U z s
@@ -126,7 +126,7 @@ theorem finiteSurjectiveSetDescent_compatible_germ_lifts
         X.smallEtaleTopology X'.smallEtaleTopology).obj
           ((Scheme.etaleSetPullback f).obj G)).obj s'
   let r := fun t : {t : Spec (.of Ω) ⟶ X' // t ≫ f = x} ↦ (colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
+          ((Functor.Elements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
             ((Scheme.etaleSetPullback f).obj G).obj)
           (Etale.baseChangeNbhd f x t).op)
   obtain ⟨x', hx'⟩ := f.surjective (x default)

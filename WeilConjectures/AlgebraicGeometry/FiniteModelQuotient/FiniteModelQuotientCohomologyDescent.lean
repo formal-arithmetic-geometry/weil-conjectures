@@ -109,7 +109,7 @@ private theorem integral_constructible_charts
               ((C i).f j ≫ S.immersion i)).obj M ≅ model l E ((C i).X j) P) := by
   have hV : CompactSpace V ∧ QuasiSeparatedSpace V := ⟨inferInstance, inferInstance⟩
   obtain ⟨S, hS⟩ : IsFiniteConstantStratified (DerivedNakayama.integerRing l E) V M := by
-    simpa only [IsConstantModelConstructible, if_pos hV] using hM
+    simpa only [IsConstantModelConstructible, ite_eq_left hV] using hM
   have hcover (i : Fin S.n) :=
     (finiteConstantLocalModel_iff_exists_cover (DerivedNakayama.integerRing l E) _).mp (hS i)
   choose C hC using hcover
@@ -379,7 +379,7 @@ private theorem chart_model (T : Scheme.{u}) (n a b : ℕ)
   classical
   by_cases h₁ : q = -1
   · subst q
-    simpa only [scalarCohomologyModel, if_pos rfl, ite_true] using
+    simpa only [scalarCohomologyModel, ite_eq_left rfl, ite_true] using
       (show Finite ↥(kernel (differential l E n a b v)) ∧
         Nonempty ((ordinaryHomology l E n T (-1)).obj
           ((derivedEncoding l E n T e).functor.obj D) ≅
@@ -391,7 +391,8 @@ private theorem chart_model (T : Scheme.{u}) (n a b : ℕ)
         ⟨h.finiteKernel, h.kernelModel, fun hn ↦ (hn rfl).elim⟩)
   by_cases h₀ : q = 0
   · subst q
-    simpa only [scalarCohomologyModel, if_neg (by decide : (0 : ℤ) ≠ -1), if_pos rfl, ite_true]
+    simpa only
+    [scalarCohomologyModel, ite_eq_right (by decide : (0 : ℤ) ≠ -1), ite_eq_left rfl, ite_true]
       using (show Finite ↥(cokernel (differential l E n a b v)) ∧
         Nonempty ((ordinaryHomology l E n T 0).obj
           ((derivedEncoding l E n T e).functor.obj D) ≅
@@ -402,10 +403,10 @@ private theorem chart_model (T : Scheme.{u}) (n a b : ℕ)
           IsZero (cokernel (differential l E n a b v))) from
         ⟨h.finiteCokernel, h.cokernelModel, fun _ hn ↦ (hn rfl).elim⟩)
   have hZ : IsZero (scalarCohomologyModel l E n a b v q) := by
-    simp only [scalarCohomologyModel, if_neg h₁, if_neg h₀]
+    simp only [scalarCohomologyModel, ite_eq_right h₁, ite_eq_right h₀]
     exact ModuleCat.isZero_iff_subsingleton.mpr inferInstance
   have hF : Finite (scalarCohomologyModel l E n a b v q) := by
-    simp only [scalarCohomologyModel, if_neg h₁, if_neg h₀]
+    simp only [scalarCohomologyModel, ite_eq_right h₁, ite_eq_right h₀]
     infer_instance
   have hz : IsZero ((ordinaryHomology l E n T q).obj
       ((derivedEncoding l E n T e).functor.obj D)) := by
@@ -518,7 +519,7 @@ theorem cohomology_descent
       ((C i).f j) (S.immersion i)).app _).symm ≪≫ eP⟩⟩
   have hcons (q : ℤ) : IsConstantModelConstructible Λ V
       ((quotientHomology l E n V q).obj K) := by
-    rw [IsConstantModelConstructible, if_pos hV]
+    rw [IsConstantModelConstructible, ite_eq_left hV]
     exact (quotient_stratified_comparison l E n hf hd V (enc V) _).mpr (hord q)
   refine ⟨hvan, hcons, fun q ↦ ?_⟩
   have he := (encoded_homology l E n V (enc V) K q).some

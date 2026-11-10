@@ -651,9 +651,9 @@ def finiteHomNuDerivedRestriction {n m : ℕ} (h : m ≤ n) :
     finiteHomNu l E X m ⋙ normalizedDVRRes l E X h ≅
       Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
         finiteHomNu l E X n :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (finiteHomNuRestriction l E X h) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Beta is the canonical left-adjoint mate of identity-on-sections scalar restriction.
 Source: blueprint nu_X^* coefficient formula
@@ -704,22 +704,22 @@ private theorem derivedLeftWhisker
     (e : G ⋙ H ≅ I) (K : DerivedCategory A) :
     (Functor.mapDerivedCategoryCompNatIso (F := F ⋙ G) (G := H)
       (Functor.isoWhiskerLeft F e)).hom.app K ≫
-        (Functor.mapDerivedCategoryCompIso F I).hom.app K =
-      H.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F G).hom.app K) ≫
+        (Functor.mapDerivedCategoryCompIso F I).inv.app K =
+      H.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F G).inv.app K) ≫
         (Functor.mapDerivedCategoryCompNatIso e).hom.app (F.mapDerivedCategory.obj K) := by
   have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
   have ha := congr_app (Functor.mapDerivedCategoryCompIso_assoc F G H) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hn ha
   have ht := congrArg (fun z ↦
-    (Functor.mapDerivedCategoryCompIso (F ⋙ G) H).inv.app K ≫ z ≫
-      (Functor.mapDerivedCategoryCompIso G H).inv.app (F.mapDerivedCategory.obj K)) ha
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app] at ht
-  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom,
+    (Functor.mapDerivedCategoryCompIso (F ⋙ G) H).hom.app K ≫ z ≫
+      (Functor.mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj K)) ha
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app] at ht
+  simp only [Functor.mapDerivedCategoryCompNatIso, Iso.trans_hom,
     NatTrans.comp_app, Category.assoc]
-  have ht' : (Functor.mapDerivedCategoryCompIso (F ⋙ G) H).inv.app K ≫
-      (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom.app K =
-    H.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F G).hom.app K) ≫
-      (Functor.mapDerivedCategoryCompIso G H).inv.app (F.mapDerivedCategory.obj K) := by
+  have ht' : (Functor.mapDerivedCategoryCompIso (F ⋙ G) H).hom.app K ≫
+      (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv.app K =
+    H.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F G).inv.app K) ≫
+      (Functor.mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj K) := by
     erw [Category.comp_id] at ht
     exact ht
   rw [hn, ← Category.assoc, ht', Category.assoc]
@@ -741,24 +741,24 @@ private theorem derivedRightWhisker
     (γ : F ⋙ U ≅ V) (ε : V ⋙ S ≅ P ⋙ Q) (K : DerivedCategory A) :
     (Functor.mapDerivedCategoryCompNatIso (F := F) (G := U ⋙ S)
       (Functor.isoWhiskerRight γ S ≪≫ ε)).hom.app K ≫
-        (Functor.mapDerivedCategoryCompIso P Q).hom.app K =
-      (Functor.mapDerivedCategoryCompIso U S).hom.app (F.mapDerivedCategory.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso P Q).inv.app K =
+      (Functor.mapDerivedCategoryCompIso U S).inv.app (F.mapDerivedCategory.obj K) ≫
         S.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompNatIso γ).hom.app K) ≫
         (Functor.mapDerivedCategorySquareIso ε).hom.app K := by
   have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight γ S) K
   have ha := congr_app (Functor.mapDerivedCategoryCompIso_assoc F U S) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hn ha
   have ht := congrArg (fun z ↦
-    (Functor.mapDerivedCategoryCompIso F (U ⋙ S)).inv.app K ≫ z ≫
-      S.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F U).inv.app K)) ha
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id] at ht
+    (Functor.mapDerivedCategoryCompIso F (U ⋙ S)).hom.app K ≫ z ≫
+      S.mapDerivedCategory.map ((Functor.mapDerivedCategoryCompIso F U).hom.app K)) ha
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp,
+    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id] at ht
   simp only [Functor.mapDerivedCategoryCompNatIso, Functor.mapDerivedCategorySquareIso,
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.mapDerivedCategoryNatIso_trans, Functor.map_comp, Category.assoc]
   rw [reassoc_of% ht]
   rw [← reassoc_of% hn]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
 
 private theorem derivedCompatibility
     {A B C D E J : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -793,7 +793,7 @@ private theorem derivedCompatibility
     (Functor.isoWhiskerLeft P δ) β (Functor.isoWhiskerRight γ S ≪≫ ε) h K
   have hl := derivedLeftWhisker P Q T Q' δ K
   have hr := derivedRightWhisker F U S V P Q' γ ε K
-  have hz := congrArg (fun z ↦ z ≫ (Functor.mapDerivedCategoryCompIso P Q').hom.app K) hd
+  have hz := congrArg (fun z ↦ z ≫ (Functor.mapDerivedCategoryCompIso P Q').inv.app K) hd
   simp only [Category.assoc] at hz
   rw [hl, hr] at hz
   simpa only [Functor.mapDerivedCategoryCompNatIso, Functor.mapDerivedCategorySquareIso,
@@ -866,8 +866,8 @@ private def finiteHomNuDerivedEncoded (n : ℕ) :
   letI := finiteHomConcreteEncoding_additive l E X n
   letI := finiteHomConcreteEncoding_limits l E X n
   letI := finiteHomConcreteEncoding_colimits l E X n
-  exact (Functor.mapDerivedCategoryCompIso (finiteHomNuOrdinary l E X n)
-    (finiteHomEncoding l E X n)).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso (finiteHomNuOrdinary l E X n)
+    (finiteHomEncoding l E X n) ≪≫
       Functor.mapDerivedCategoryNatIso (finiteHomNuEncoded l E X n)
 
 private def finiteHomDerivedEncodingRestriction {n m : ℕ} (h : m ≤ n) :

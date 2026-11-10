@@ -122,7 +122,7 @@ lemma sectionsRestriction_comp {V : X.Etale} {W : X'.Etale} {W'' : X''.Etale}
     (sectionsRestriction A (e' ≫ e) (φ' ≫ φ) (by rw [assoc, hφ, ← assoc, hφ', assoc])).app K ≫
         ((sheafSections X''.smallEtaleTopology A).obj (op W'')).rightDerivedFunctor.map
           ((Functor.mapDerivedCategoryNatIso (upperStarComp A e' e) ≪≫
-            Functor.mapDerivedCategoryCompIso (e)^*[A] (e')^*[A]).hom.app K) =
+            (Functor.mapDerivedCategoryCompIso (e)^*[A] (e')^*[A]).symm).hom.app K) =
       (sectionsRestriction A e φ hφ).app K ≫
         (sectionsRestriction A e' φ' hφ').app ((e)^*[A].mapDerivedCategory.obj K) :=
   Functor.rightDerivedPullback_comp _ _ _ _ _ _ _ (by

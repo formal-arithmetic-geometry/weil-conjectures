@@ -56,23 +56,23 @@ private theorem derivedComp_change
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ≅ F') (a : F ⋙ G ≅ H) (b : F' ⋙ G ≅ H)
     (h : a = Functor.isoWhiskerRight e G ≪≫ b) :
-    (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryCompIso F G ≪≫
         Functor.mapDerivedCategoryNatIso a =
       Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso e) G.mapDerivedCategory ≪≫
-        (Functor.mapDerivedCategoryCompIso F' G).symm ≪≫
+        Functor.mapDerivedCategoryCompIso F' G ≪≫
           Functor.mapDerivedCategoryNatIso b := by
   apply Iso.ext
   rw [h]
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategoryNatIso_trans]
+  simp only [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_trans]
   have hc := Functor.mapDerivedCategoryNatIso_isoWhiskerRight e G
   have hc' : (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight e G)).hom =
-      (Functor.mapDerivedCategoryCompIso F G).hom ≫
+      (Functor.mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso e).hom G.mapDerivedCategory ≫
-          (Functor.mapDerivedCategoryCompIso F' G).inv := by
+          (Functor.mapDerivedCategoryCompIso F' G).hom := by
     rw [← reassoc_of% hc]
-    simp only [Iso.hom_inv_id, Category.comp_id]
+    simp only [Iso.inv_hom_id, Category.comp_id]
   rw [hc']
-  simp only [Category.assoc, Iso.inv_hom_id_assoc, Functor.isoWhiskerRight_hom]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, Functor.isoWhiskerRight_hom]
 
 private theorem restrictedMate_change
     {A B C : Type*} [Category A] [Category B] [Category C]

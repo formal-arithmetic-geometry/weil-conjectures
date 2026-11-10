@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeIntoPullback
 import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 
@@ -61,6 +63,7 @@ private theorem exists_stalkCohomologyComparison (Y : Scheme.{u}) (p : Y) (i : �
     Category.id_comp]
   rfl
 
+-- The original 200000 budget times out at the final equivalence construction in 13s.
 /-- The source-only comparison is unchanged under K-flat representative change.
 Source: Stacks Project, Tags 06Y6, 08IB and perfect.tex, equation-bc before Tag 0DJ8.
 (blueprint: lem-pc-affine-base-change-source-representative-iso).
@@ -133,8 +136,23 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
     have hd' := congrArg (fun b ↦
       (SingleComplexBaseChange.comparisonStalkHomologyIso X' p T i).inv ≫ b) hd
     simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc] at hd'
-    simpa only [affineBaseChangeIntoPullback,
-      SingleComplexBaseChange.comparisonIntoPullback, F, G, T,
+    let : HasDerivedCategory.{w} X'.Modules :=
+      inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace)))
+    have htransport :
+        (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
+          inv ((SingleComplexBaseChange.counit g').app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+          (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app N ≫ eN.hom) =
+        inv ((SingleComplexBaseChange.counit g').app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+          (derivedPullback g').map eN.hom := by
+      simp only [DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+      repeat erw [Category.id_comp]
+    dsimp only [affineBaseChangeIntoPullback]
+    erw [htransport]
+    simpa only [SingleComplexBaseChange.comparisonIntoPullback, F, G, T, cast_eq,
       Functor.comp_map, Functor.map_comp, Category.assoc] using
         congrArg (fun b ↦
           (SingleComplexBaseChange.cohomologyModel f f' g g' sq p N).localizedComparison i ≫

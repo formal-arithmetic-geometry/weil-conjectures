@@ -565,16 +565,16 @@ def fixedDerivedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
   (Functor.mapDerivedCategoryCompIso
     (evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X) m)
-    (finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E m))).inv ≫
+    (finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E m))).hom ≫
   Functor.mapDerivedCategoryNatTrans (fixedTransition l E X h) ≫
   (Functor.mapDerivedCategoryCompIso
     (fixedEvaluation l E X n)
     (Sheaf.restrictScalars (Scheme.ProEt.topology X)
-      (Etale.FiniteProperQuotient.quotient l E h))).hom ≫
+      (Etale.FiniteProperQuotient.quotient l E h))).inv ≫
   Functor.whiskerRight (Functor.mapDerivedCategoryCompIso
     (evaluation.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X) n)
-    (finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n))).hom
+    (finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n))).inv
     (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X)
       (Etale.FiniteProperQuotient.quotient l E h))
 

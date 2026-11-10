@@ -117,7 +117,7 @@ theorem dvr_normalized_compositum_local_diagram
   let fE : E →ₐ[B] F := { toRingHom := iE, commutes' := hcomm }
   have hinjA : Function.Injective (algebraMap A F) := by
     apply (RingHom.injective_iff_ker_eq_bot _).2
-    apply Ideal.eq_bot_of_comap_eq_bot (R := B)
+    apply Ideal.eq_bot_of_under_eq_bot (R := B)
     ext b
     simp only [Ideal.mem_comap, RingHom.mem_ker, Ideal.mem_bot]
     rw [← IsScalarTower.algebraMap_apply B A F, ← fE.commutes]
@@ -193,7 +193,7 @@ theorem dvr_normalized_compositum_local_diagram
   have hU : IsDiscreteValuationRing U :=
     IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain C hRne U
   have hBU : IsLocalHom (algebraMap B U) := by
-    apply ((IsLocalRing.local_hom_TFAE _).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE _).out 5 1).mp
     rw [IsScalarTower.algebraMap_eq B C U, ← Ideal.comap_comap]
     rw [show (IsLocalRing.maximalIdeal U).comap (algebraMap C U) = R from
       Localization.AtPrime.under_maximalIdeal (I := R)]

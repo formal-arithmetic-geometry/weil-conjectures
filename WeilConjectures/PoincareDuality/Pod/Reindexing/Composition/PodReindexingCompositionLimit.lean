@@ -39,12 +39,12 @@ private theorem composition_factors
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (a : H ≅ F ⋙ G) (K : CochainComplex C ℤ) :
     (Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
     H.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map
       ((NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app K) := by
-  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
 
@@ -65,7 +65,7 @@ private theorem localize_composition_models
     (hr : (NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app X ≫
       (G.mapHomologicalComplex (.up ℤ)).map rF ≫ rG = rH ≫ ms) :
     (Functor.mapDerivedCategoryNatIso a ≪≫
-      Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj X) ≫
+      (Functor.mapDerivedCategoryCompIso F G).symm).hom.app (DerivedCategory.Q.obj X) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app X ≫
         DerivedCategory.Q.map rF) ≫
       G.mapDerivedCategoryFactors.hom.app Y ≫ DerivedCategory.Q.map rG =

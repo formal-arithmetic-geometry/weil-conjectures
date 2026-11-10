@@ -240,25 +240,26 @@ lemma nonempty_isColimit_cofan_of_isHull {X Y : Scheme.{u}} {ι : Type u} {T : �
     Cofan.IsColimit.fac hf _ i
   obtain ⟨t, ht, -⟩ := hψ.2 Wsum φsum (Cofan.IsColimit.hom_ext hf _ _ fun i ↦ by
     rw [cofan_mk_inj, ← Category.assoc, hφsum, ProEt.mk_hom, Category.assoc,
-      Sigma.ι_desc, (hψ' i).1])
+      Sigma.ι_comp_desc, (hψ' i).1])
   let ssum : Wsum ⟶ W₀ := MorphismProperty.Over.homMk (Sigma.desc fun i ↦ (s i).left)
     (Sigma.hom_ext _ _ fun i ↦ by
-      rw [Sigma.ι_desc_assoc, MorphismProperty.Over.w (s i), ProEt.mk_hom, Sigma.ι_desc]) trivial
+      rw [Sigma.ι_comp_desc_assoc, MorphismProperty.Over.w (s i),
+        ProEt.mk_hom, Sigma.ι_comp_desc]) trivial
   have h₁ : t ≫ ssum = 𝟙 W₀ := by
     refine (hψ.2 W₀ ψ hψ.1).unique ?_ (Category.comp_id _)
     refine Cofan.IsColimit.hom_ext hf _ _ fun i ↦ ?_
     change f i ≫ ψ ≫ t.left ≫ Sigma.desc (fun i ↦ (s i).left) = f i ≫ ψ
-    rw [← Category.assoc ψ, ht, ← Category.assoc, hφsum, Category.assoc, Sigma.ι_desc, hs]
+    rw [← Category.assoc ψ, ht, ← Category.assoc, hφsum, Category.assoc, Sigma.ι_comp_desc, hs]
   have h₂ : ssum ≫ t = 𝟙 Wsum := by
     refine MorphismProperty.Over.Hom.ext (Sigma.hom_ext _ _ fun i ↦ ?_)
     let ιsum : W i ⟶ Wsum := MorphismProperty.Over.homMk (Sigma.ι (fun i ↦ (W i).left) i)
-      (by rw [ProEt.mk_hom, Sigma.ι_desc]) trivial
+      (by rw [ProEt.mk_hom, Sigma.ι_comp_desc]) trivial
     have hu := ((hψ' i).2 Wsum (ψ' i ≫ Sigma.ι (fun i ↦ (W i).left) i) (by
-      rw [Category.assoc, ProEt.mk_hom, Sigma.ι_desc, (hψ' i).1])).unique
+      rw [Category.assoc, ProEt.mk_hom, Sigma.ι_comp_desc, (hψ' i).1])).unique
       (y₁ := s i ≫ t) (y₂ := ιsum) (by
         change ψ' i ≫ (s i).left ≫ t.left = _
         rw [← Category.assoc, hs, Category.assoc, ht, hφsum]) rfl
-    exact (Sigma.ι_desc_assoc _ _ _).trans
+    exact (Sigma.ι_comp_desc_assoc _ _ _).trans
       ((congrArg (fun m ↦ m.left) hu).trans (Category.comp_id _).symm)
   have : IsIso (Sigma.desc fun i ↦ (s i).left) :=
     ⟨⟨t.left, congrArg (fun m ↦ m.left) h₂, congrArg (fun m ↦ m.left) h₁⟩⟩

@@ -33,7 +33,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 attribute [local irreducible] Functor.rightDerivedFunctor
-  Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctorPlusCompatibility
+  Functor.rightDerivedFunctorPlusCompatibility
   Functor.mapDerivedCategory
   Adjunction.derivedPlus
 

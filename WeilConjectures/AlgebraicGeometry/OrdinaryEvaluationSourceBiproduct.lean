@@ -108,7 +108,7 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
     dsimp only [inclusion, fromTotal]
     rw [HomologicalComplex.ι_mapBifunctorDesc]
     dsimp only [component]
-    rw [dif_pos (by simpa only [neg_neg] using r.property)]
+    rw [dite_eq_left (by simpa only [neg_neg] using r.property)]
     have hr : (⟨- -r.val, by simpa only [neg_neg] using r.property⟩ :
         ↥(Finset.Icc a b)) = r := by
       apply Subtype.ext
@@ -124,7 +124,7 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
     change p + q = n at hpq
     dsimp only [component]
     by_cases hq : -q ∈ Finset.Icc a b
-    · rw [dif_pos hq]
+    · rw [dite_eq_left hq]
       have hp : p = -q + n := by omega
       subst p
       dsimp only [toTotal]
@@ -143,7 +143,7 @@ private lemma finiteTensorBiproduct {C : Type*} [Category C] [Preadditive C]
         intro hh h
         simp
       exact transport _ (neg_neg q).symm _ _
-    · rw [dif_neg hq]
+    · rw [dite_eq_right hq]
       have hzero : IsZero (D.X q) :=
         hbounded q (by
           simpa only [Finset.mem_Icc, not_and_or, not_le] using hq)

@@ -82,12 +82,15 @@ noncomputable def traceHomShiftQIso
       Prod.sectR (op (DerivedCategory.Q.obj (P⟦a⟧))) _ ⋙
         (nativeDerivedClosedComparison k₀ l X).homModels.weilHom := by
   let C := ProEtaleWeilSheaf k₀ l X
+  let e : CochainComplex.KInjectives.toHomotopyCategory ⋙
+      HomotopyCategory.KInjectives.Qh (C := C) ≅
+        traceKInjectiveQ (k₀ := k₀) (l := l) (X := X) :=
+    Functor.isoWhiskerLeft CochainComplex.KInjectives.ι
+      (DerivedCategory.quotientCompQhIso C)
   have : (traceKInjectiveQ (k₀ := k₀) (l := l) (X := X)).Full :=
-    inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
-      (HomotopyCategory.KInjectives.Qh (C := C))).Full
+    Functor.Full.of_iso e
   have : (traceKInjectiveQ (k₀ := k₀) (l := l) (X := X)).EssSurj :=
-    inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
-      (HomotopyCategory.KInjectives.Qh (C := C))).EssSurj
+    Functor.essSurj_of_iso e
   apply (Functor.fullyFaithfulWhiskeringLeftOfFullEssSurj
     (traceKInjectiveQ (k₀ := k₀) (l := l) (X := X)) (DerivedCategory C)).preimageIso
   exact Functor.isoWhiskerRight (traceHomModelIso P) (shiftFunctor _ b) ≪≫

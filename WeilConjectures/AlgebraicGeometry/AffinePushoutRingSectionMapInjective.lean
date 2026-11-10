@@ -90,8 +90,7 @@ theorem affinePushoutSectionMap_injective [IsAffineHom f]
       e.hom.val.app (op (f ⁻¹ᵁ V))
         (c G hG (TensorProduct.comm Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V) z)) =
           q.hom z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul x y => simpa only [TensorProduct.comm_tmul] using hformula x y
     | add z z' hz hz' => simp only [map_add, hz, hz']
   have : IsIso (e.hom.val.app (op (f ⁻¹ᵁ V))) :=

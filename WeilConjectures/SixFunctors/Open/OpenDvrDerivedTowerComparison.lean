@@ -201,7 +201,7 @@ theorem openDvrDerivedTowerComparison
       t.hom.app (DerivedCategory.Q.obj Q) ≫
         C.towers.map ((coefficientSequenceDerivedRestriction.{u, u} l E T).map
           (ε.app Q) ≫
-            (Functor.mapDerivedCategoryFactors.{u+2, u+2, u+1, u+1, u+2, u+2}
+            (Functor.mapDerivedCategoryFactors
               (coefficientSequenceRestriction.{u, u} l E T)).hom.app I) ≫
         C.ordinaryTowers.mapDerivedCategoryFactors.hom.app B := by
   classical

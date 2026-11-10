@@ -117,7 +117,7 @@ theorem WeilComplex.nonempty_iso_tensorLisse_comp (G H : WeilSheaf k₀ l X) (hG
       Functor.isoWhiskerLeft _
         (Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _) _ ≪≫
           Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorIsoMapDerivedCategory _) ≪≫
-          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (ProEtaleWeilSheaf.ihomFunctorDualCompIhomFunctorDualIso G H hG hH) ≪≫
           (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm) ≪≫
@@ -163,7 +163,7 @@ noncomputable def WeilComplex.tateTwistCompTateTwistIso (m n : ℤ) (h : m + n =
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (WeilComplex.tateTwistCompιIso m) _ ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (ProEtaleWeilSheaf.constantTwistCompConstantTwistIso k₀ l X _ _ ≪≫
             ProEtaleWeilSheaf.constantTwistFunctorCongrIso k₀ l X

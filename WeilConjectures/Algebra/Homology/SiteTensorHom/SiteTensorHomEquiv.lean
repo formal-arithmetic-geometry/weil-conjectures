@@ -234,7 +234,9 @@ theorem equiv_naturality {P P' M N : SMod} (f : P' ⟶ P)
       (siteTensorHom f.val M.val)
   have ht := ConcreteCategory.congr_hom
     (congr_app (congrArg (PresheafOfModules.toPresheaf _).map hn) (op W.unop.left))
-      (P'.val.map W.unop.hom.op p ⊗ₜ[A.obj.obj (op W.unop.left)] x)
+      (TensorProduct.tmul (A.obj.obj (op W.unop.left))
+        (M := P'.val.obj (op W.unop.left)) (N := M.val.obj (op W.unop.left))
+        (P'.val.map W.unop.hom.op p) x)
   change siteSheafTensorTmul P M (op W.unop.left)
       (f.val.app (op W.unop.left) (P'.val.map W.unop.hom.op p)) x =
     ((siteSheafTensorRight M).map f).val.app _

@@ -101,10 +101,10 @@ private def exactPullCoordinates (A : Type u) [CommRing A] [Finite A]
     sfIntrinsicDerivedPullback A f ⋙ (sfIntrinsicDerivedEquivalence X A).inverse ≅
       (sfIntrinsicDerivedEquivalence Y A).inverse ⋙ sfFixedDerivedPullback A f :=
   Functor.isoWhiskerRight
-    (Functor.mapDerivedCategoryCompIso (sfIntrinsicModuleEquivalence Y A).inverse
+    ((Functor.mapDerivedCategoryCompIso (sfIntrinsicModuleEquivalence Y A).inverse
       (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f ⋙
-        (sfIntrinsicModuleEquivalence X A).functor) ≪≫
-      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _))
+        (sfIntrinsicModuleEquivalence X A).functor)).symm ≪≫
+      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm)
     (sfIntrinsicDerivedEquivalence X A).inverse ≪≫
       Functor.isoWhiskerLeft
         ((sfIntrinsicDerivedEquivalence Y A).inverse ⋙ sfFixedDerivedPullback A f)
@@ -127,12 +127,12 @@ private theorem exactPullCoordinates_comp (A : Type u) [CommRing A] [Finite A]
   let Lf := upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f
   let Lg := upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) g
   let Lc := upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (f ≫ g)
-  let of := Functor.mapDerivedCategoryCompIso EY.inverse (Lf ⋙ EX.functor) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso Lf EX.functor)
-  let og := Functor.mapDerivedCategoryCompIso EZ.inverse (Lg ⋙ EY.functor) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso Lg EY.functor)
-  let oc := Functor.mapDerivedCategoryCompIso EZ.inverse (Lc ⋙ EX.functor) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso Lc EX.functor)
+  let of := (Functor.mapDerivedCategoryCompIso EY.inverse (Lf ⋙ EX.functor)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso Lf EX.functor).symm
+  let og := (Functor.mapDerivedCategoryCompIso EZ.inverse (Lg ⋙ EY.functor)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso Lg EY.functor).symm
+  let oc := (Functor.mapDerivedCategoryCompIso EZ.inverse (Lc ⋙ EX.functor)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso Lc EX.functor).symm
   have h := inverse_coordinate_comp EZ.mapDerivedCategory EY.mapDerivedCategory
     EX.mapDerivedCategory Lc.mapDerivedCategory Lg.mapDerivedCategory Lf.mapDerivedCategory
     (sfIntrinsicDerivedPullback A (f ≫ g)) (sfIntrinsicDerivedPullback A g)

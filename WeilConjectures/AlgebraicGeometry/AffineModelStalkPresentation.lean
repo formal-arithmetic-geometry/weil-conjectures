@@ -140,8 +140,7 @@ theorem exists_affine_model_stalk_presentation
     have hd := ConcreteCategory.congr_hom (tilde.toOpen_map_app d ⊤) m
     change (tilde N).presheaf.germ ⊤ q _ _ = (tilde N).presheaf.germ ⊤ q _ _
     congr 1
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp [ht, ht']
   | tmul s m =>
     change c.stalkLinearMap x

@@ -176,7 +176,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f]
 (an affine open of `Y` containing the image of `y`). -/
 lemma Scheme.Hom.Nbhd.exists_isAffine {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) : ∃ c : Nbhd y, IsAffine c.1.left := by
-  let c₁ : Nbhd y := ⟨Scheme.Etale.mk (𝟙 Y), CategoryTheory.Over.homMk y (by simp)⟩
+  let c₁ : Nbhd y :=
+    Functor.elementsMk _ (Scheme.Etale.mk (𝟙 Y)) (CategoryTheory.Over.homMk y (by simp))
   obtain ⟨U₁, hU₁, hu, -⟩ := exists_isAffineOpen_mem_and_subset (X := c₁.1.left)
     (x := c₁.2.left (default : Spec (.of Ω))) (U := ⊤) trivial
   exact ⟨c₁.restrict U₁ hu, hU₁⟩

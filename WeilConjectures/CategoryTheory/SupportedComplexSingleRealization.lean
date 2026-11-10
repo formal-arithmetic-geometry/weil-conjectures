@@ -43,8 +43,7 @@ theorem supported_complex_single_realization
     let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅
         DerivedCategory.Plus.Q.obj S :=
       DerivedCategory.Plus.ι.preimageIso
-        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-          (DerivedCategory.quotientCompQhIso B).symm.app _)
+        ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
     ∀ (f : Q.obj L ⟶ (singleFunctor B n).obj X),
       (homologyFunctor B n).map f ≫
         (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X →
@@ -58,8 +57,7 @@ theorem supported_complex_single_realization
   let S : CochainComplex.Plus B :=
     ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩
   let e : (singleFunctor B n).obj X ≅ Q.obj S :=
-    ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
-      (DerivedCategory.quotientCompQhIso B).symm.app _)
+    ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ B n).app X)
   have hd : L.obj.d (n : ℤ) (n + 1) = 0 :=
     (hL (n + 1) (by omega)).eq_of_tgt _ _
   have : IsIso (L.obj.iCycles n) := L.obj.isIso_iCycles n (n + 1) (by simp) hd
@@ -88,28 +86,14 @@ theorem supported_complex_single_realization
       isoWhiskerLeft_inv, Category.assoc, isoWhiskerRight_inv, mapIso_inv,
       SingleFunctors.evaluation_map, NatTrans.comp_app, NatIso.ofComponents_inv_app,
       whiskerLeft_app, associator_inv_app, whiskerRight_app, Category.id_comp,
-      homologyFunctorObjQIso, ObjectProperty.ι_obj, Iso.trans_hom, Iso.app_hom, S]
+      homologyFunctorObjQIso, Iso.app_hom, S]
     rw [DerivedCategory.singleFunctorsPostcompQIso_inv_hom]
-    change _ ≫ _ ≫ (DerivedCategory.homologyFunctor B n).map (𝟙 _) ≫
-      (DerivedCategory.homologyFunctorFactorsh B n).hom.app
-        ((HomotopyCategory.quotient B (.up ℤ)).obj S.obj) ≫ _ = _
-    rw [CategoryTheory.Functor.map_id, Category.id_comp,
-      DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
-    have hq : (DerivedCategory.quotientCompQhIso B).hom.app S.obj = 𝟙 _ := rfl
-    rw [hq, CategoryTheory.Functor.map_id, Category.id_comp]
-    simp only [Category.assoc]
-    change _ ≫ (DerivedCategory.homologyFunctorFactors B n).inv.app S.obj ≫
-      (DerivedCategory.homologyFunctorFactors B n).hom.app S.obj ≫
-      (HomotopyCategory.homologyFunctorFactors B (.up ℤ) n).inv.app S.obj ≫
-      (HomotopyCategory.homologyFunctorFactors B (.up ℤ) n).hom.app S.obj = _
     simp
   have he : e.inv = 𝟙 _ := by
     apply ι.map_injective
     simp only [e, Functor.preimageIso_inv, Functor.map_preimage,
-      Iso.trans_inv, Iso.symm_inv, Iso.app_inv,
-      DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv, NatTrans.id_app]
-    change (DerivedCategory.quotientCompQhIso B).hom.app S.obj ≫ 𝟙 _ = 𝟙 _
-    rw [Category.comp_id]
+      Iso.app_inv, DerivedCategory.singleFunctorIsoCompQ, Iso.refl_inv,
+      NatTrans.id_app]
     rfl
   have hn : (homologyFunctor B n).map (Q.map t ≫ e.inv) ≫
       (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X := by
@@ -149,12 +133,10 @@ theorem supported_complex_single_realization
     (CochainComplex.isStrictlyLE_iff _ _).2 (fun i hi ↦ hL i (ne_of_gt hi))
   have : (Q.obj L).IsGE (n : ℤ) := by
     apply (isGE_ι_obj_iff _ _).mp
-    exact DerivedCategory.TStructure.t.isGE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L.obj).symm n
+    exact inferInstanceAs ((DerivedCategory.Q.obj L.obj).IsGE (n : ℤ))
   have : (Q.obj L).IsLE (n : ℤ) := by
     apply (isLE_ι_obj_iff _ _).mp
-    exact DerivedCategory.TStructure.t.isLE_of_iso
-      ((DerivedCategory.quotientCompQhIso B).app L.obj).symm n
+    exact inferInstanceAs ((DerivedCategory.Q.obj L.obj).IsLE (n : ℤ))
   apply singleFunctor_hom_ext_of_isGE_of_isLE (n : ℤ)
   apply (cancel_mono ((singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X)).1
   exact hn.trans hf.symm

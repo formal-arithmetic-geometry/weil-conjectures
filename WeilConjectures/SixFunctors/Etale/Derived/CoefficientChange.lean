@@ -361,12 +361,12 @@ lemma rightDerivedFunctorCompIso_hom_app_comp_isoMapDerivedCategory_hom_app (F :
         G.rightDerivedFunctor.map (F.rightDerivedFunctorIsoMapDerivedCategory.hom.app K) ≫
         G.rightDerivedFunctorIsoMapDerivedCategory.hom.app (F.mapDerivedCategory.obj K) =
       (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory.hom.app K ≫
-        (Functor.mapDerivedCategoryCompIso F G).hom.app K := by
+        (Functor.mapDerivedCategoryCompIso F G).inv.app K := by
   suffices H : (Functor.rightDerivedFunctorCompIso F G).hom ≫
       Functor.whiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.hom G.rightDerivedFunctor ≫
       Functor.whiskerLeft F.mapDerivedCategory G.rightDerivedFunctorIsoMapDerivedCategory.hom =
       (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory.hom ≫
-        (Functor.mapDerivedCategoryCompIso F G).hom by
+        (Functor.mapDerivedCategoryCompIso F G).inv by
     simpa using NatTrans.congr_app H K
   refine Functor.rightDerived_ext (F ⋙ G).rightDerivedFunctor (F ⋙ G).rightDerivedFunctorUnit
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) _ _ _ ?_
@@ -408,7 +408,7 @@ noncomputable def sectionsTransportIso (ι : H ≅ F) (γ : F ⋙ Γ ≅ Γ) (e 
 /-- The derived-category form of `sectionsTransportIso`, for exact functors. -/
 lemma mapDerivedCategoryCompIso_hom_app_comp_sectionsTransportIso (ι : H ≅ F)
     (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) (K : DerivedCategory C) :
-    (Functor.mapDerivedCategoryCompIso F Γ).hom.app K ≫
+    (Functor.mapDerivedCategoryCompIso F Γ).inv.app K ≫
         (Functor.mapDerivedCategoryNatIso e).hom.app (F.mapDerivedCategory.obj K) ≫
         S.mapDerivedCategory.map ((Functor.mapDerivedCategoryNatIso ι).inv.app K) =
       (Functor.mapDerivedCategoryNatIso γ).hom.app K ≫
@@ -424,7 +424,7 @@ lemma mapDerivedCategoryCompIso_hom_app_comp_sectionsTransportIso (ι : H ≅ F)
   have hWL := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
   have hWR := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight ι.symm S) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hWL hWR
-  rw [Iso.trans_hom, NatTrans.comp_app, reassoc_of% h₂, hWR, reassoc_of% hWL,
+  rw [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, reassoc_of% h₂, hWR, reassoc_of% hWL,
     Functor.mapDerivedCategoryNatIso_symm]
 
 variable [HasKInjectiveResolutions C] [F.PreservesKInjectiveComplexes]

@@ -94,20 +94,6 @@ lemma of_isIso_app_functor_obj' (hα : ∀ (X₁ : C₁), IsIso (α.app (Φ.func
     ← α.naturality (Φ.functor.map f), isIso_comp_right_iff, Functor.comp_map]
   infer_instance
 
-include h in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-lemma isLeftDerivedFunctor_of_isIso [Φ.IsLeftDerivabilityStructure]
-    (hα : ∀ (X₁ : C₁), IsIso (α.app (Φ.functor.obj X₁))) :
-    LF.IsLeftDerivedFunctor α W₂ := by
-  rw [Functor.isLeftDerivedFunctor_iff_op]
-  exact h.op.isRightDerivedFunctor_of_isIso _ (fun _ ↦ by dsimp; infer_instance)
-
-include h in
-lemma isLeftDerivedFunctor_iff_isIso [Φ.IsLeftDerivabilityStructure] :
-    LF.IsLeftDerivedFunctor α W₂ ↔ ∀ (X₁ : C₁), IsIso (α.app (Φ.functor.obj X₁)) :=
-  ⟨fun _ _ ↦ h.isIso_of_isLeftDerivedFunctor α _, h.isLeftDerivedFunctor_of_isIso α⟩
-
 end
 
 end Derives

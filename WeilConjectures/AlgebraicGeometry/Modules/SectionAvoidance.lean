@@ -223,7 +223,7 @@ lemma exists_generatesAt_of_epi {N : X.Modules} [SheafOfModules.IsInvertible.{u,
   set t : I → (𝟙_ X.Modules ⟶ N) := fun i ↦ SheafOfModules.ιFree (R := X.ringCatSheaf) i ≫ φ
   by_contra! hne
   have : SheafOfModules.IsInvertible.{u, u, u} (𝟙_ X.Modules) :=
-    inferInstanceAs (SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit X.ringCatSheaf))
+    IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
   let J := vanishingIdeal ⟨closure {x}, isClosed_closure⟩
   have hxJ : x ∈ (J.support : Set X) := by
     simp only [J, coe_support_vanishingIdeal]

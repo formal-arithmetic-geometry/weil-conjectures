@@ -160,7 +160,7 @@ theorem surjective_app_of_affine_ring_retractions
       (by
         change Limits.Sigma.ι (fun i ↦ (D.X i).left) i ≫ p ≫ f = (D.X i).hom
         dsimp only [p]
-        rw [Limits.Sigma.ι_desc_assoc]
+        rw [Limits.Sigma.ι_comp_desc_assoc]
         exact MorphismProperty.Over.w (D.f i)) trivial
   have hιcov : Presieve.ofArrows D.X ι ∈ precoverage X W := by
     change (Presieve.ofArrows D.X ι).map (ProEt.forget X ⋙ Over.forget X) ∈
@@ -181,7 +181,7 @@ theorem surjective_app_of_affine_ring_retractions
     (by change σ ≫ p ≫ f = f; rw [← Category.assoc, hσ, Category.id_comp]) trivial
   have hτ : τ ≫ π = 𝟙 _ := MorphismProperty.Over.Hom.ext hσ
   have hιπ (i : D.I₀) : ι i ≫ π = D.f i :=
-    MorphismProperty.Over.Hom.ext (Limits.Sigma.ι_desc _ _)
+    MorphismProperty.Over.Hom.ext (Limits.Sigma.ι_comp_desc _ _)
   have himage : α.hom.app (op W) z = G.obj.map π.op s := by
     have hsep := ((isSheaf_iff_isSheaf_of_type _ _).mp G.property).isSeparated
       _ (Precoverage.generate_mem_toGrothendieck hιcov)

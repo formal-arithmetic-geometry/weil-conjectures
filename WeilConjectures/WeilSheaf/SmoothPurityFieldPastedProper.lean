@@ -35,7 +35,12 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   {πY : Y'.left ⟶ Y.left} {πZ : c'.Z ⟶ c.Z}
   (hg : IsPullback πZ c'.g c.g πY) [WeaklyEtale πZ] [WeaklyEtale πY]
 
-set_option linter.unusedSectionVars false in
+omit [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ l)]
+  [Fact (ringChar k₂).Prime] [Fact (ringChar k₂ ≠ l)]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom] in
 /-- The left-derived proper exchange is the usual derived base change map. -/
 lemma purityFieldProperAmbientExchange_hom :
     (purityFieldProperAmbientExchange l f f' c c' hg).hom =
@@ -47,6 +52,8 @@ lemma purityFieldProperAmbientExchange_hom :
     (asIso (baseChangeMap (Profinite.padicAlgClRingObj l) hg.toCommSq))
   exact congrArg Iso.hom he
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- The restricted proper factor is precisely the proper base change used in the
 exceptional base change theorem. -/
 lemma purityFieldProperRestrictedExchange_hom :

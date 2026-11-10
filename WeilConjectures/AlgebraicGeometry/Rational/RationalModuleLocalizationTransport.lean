@@ -111,11 +111,9 @@ private def transportFractionFunctor : ScalarLocalization A D t ⥤ D' where
     change transportFractionHom t φ F hF _ _ (1 ⊗ₜ[A] 𝟙 X.obj) = _
     rw [transportFractionHom_tmul, map_one, one_smul, F.map_id]
   map_comp {X Y Z} f g := by
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [Limits.comp_zero, map_zero]
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp only [Limits.zero_comp, map_zero]
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         change transportFractionHom t φ F hF _ _
           (ScalarLocalization.composition A D t _ _ _ (b ⊗ₜ[A] g) (a ⊗ₜ[A] f)) = _
@@ -138,8 +136,7 @@ private theorem transportFractionFunctor_smul
       φ r • (transportFractionFunctor t φ F hF).map f := by
   change transportFractionHom t φ F hF X.obj Y.obj (r • f) =
     φ r • transportFractionHom t φ F hF X.obj Y.obj f
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul b f =>
     rw [TensorProduct.smul_tmul', smul_eq_mul]
     simp only [transportFractionHom_tmul, map_mul, mul_smul]

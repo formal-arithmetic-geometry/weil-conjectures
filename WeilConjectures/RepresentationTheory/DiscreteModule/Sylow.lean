@@ -197,6 +197,7 @@ theorem exists_filtration_of_isPGroup (ℓ : ℕ) [hℓ : Fact ℓ.Prime] [Finit
     rw [(AddSubgroup.mem_bot).1 hb, smul_zero]
     exact zero_mem _
 
+
 end FixedPoints
 
 /-- The action of `G` on the underlying group of an `Action`, as a `DistribMulAction`. -/

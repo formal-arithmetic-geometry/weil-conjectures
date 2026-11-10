@@ -202,13 +202,13 @@ private theorem outer_term_pair (X : Scheme.{u}) {I : Type v} [LinearOrder I]
   congr 1
   by_cases hja : j.val < a.val
   · have hr : (a.succ.succAbove j).val = j.val := by
-      rw [face_val]; simp only [Fin.val_succ]; rw [if_pos (by omega)]
-    have hab : a.val = b.val + 1 := by rw [hb, if_pos hja]; omega
+      rw [face_val]; simp only [Fin.val_succ]; rw [ite_eq_left (by omega)]
+    have hab : a.val = b.val + 1 := by rw [hb, ite_eq_left hja]; omega
     rw [hr, hab, pow_succ]
     ring
   · have hr : (a.succ.succAbove j).val = j.val + 1 := by
-      rw [face_val]; simp only [Fin.val_succ]; rw [if_neg (by omega)]
-    rw [hr, hb, if_neg hja, pow_succ]
+      rw [face_val]; simp only [Fin.val_succ]; rw [ite_eq_right (by omega)]
+    rw [hr, hb, ite_eq_right hja, pow_succ]
     ring
 
 /-- The faces outside the tripled value cancel the incoming homotopy boundary.
@@ -253,7 +253,7 @@ theorem cechRepeatOuterFaces (X : Scheme.{u}) {I : Type v} [LinearOrder I]
   change (∑ r, O r) = -(∑ j, D j)
   have hO : O a.succ = 0 := by
     dsimp only [O, Fin.val_succ]
-    rw [if_neg (by omega)]
+    rw [ite_eq_right (by omega)]
   have hpair (j : Fin (p + 2)) :
       O (a.succ.succAbove j) = if P j then -D j else 0 := by
     have hP : ((a.succ.succAbove j).val < a.val ∨
@@ -264,9 +264,9 @@ theorem cechRepeatOuterFaces (X : Scheme.{u}) {I : Type v} [LinearOrder I]
       split_ifs <;> omega
     dsimp only [O]
     by_cases hj : P j
-    · rw [if_pos (hP.mpr hj), if_pos hj]
+    · rw [ite_eq_left (hP.mpr hj), ite_eq_left hj]
       exact outer_term_pair X U F S p s t ht a ha j hj
-    · rw [if_neg (fun h ↦ hj (hP.mp h)), if_neg hj]
+    · rw [ite_eq_right (fun h ↦ hj (hP.mp h)), ite_eq_right hj]
   let a₁ : Fin (p + 2) := ⟨a.val + 1, ha.choose⟩
   have hmaps := mapped_sections_eq X U F S p K _ _ (adjacent_faces_eq t a ha)
     (S.W (p + 1) t) (S.indexMap t a.succAbove) (S.indexMap t a₁.succAbove)

@@ -75,8 +75,7 @@ theorem exists_isPushout_forall_flat_of_tensorProduct {R₀ A₁ A B₀ B : Type
     let : Algebra (A₁ ⊗[R₀] B₀) (A ⊗[A₁] (A₁ ⊗[R₀] B₀)) := Algebra.TensorProduct.rightAlgebra
     refine Algebra.IsPushout.of_equiv
       ((Algebra.TensorProduct.cancelBaseChange R₀ A₁ A A B₀).trans e₀) (RingHom.ext fun x ↦ ?_)
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       simp [RingHom.algebraMap_toAlgebra, φ, e₀, Algebra.IsPushout.equiv_tmul,
         Algebra.algebraMap_eq_smul_one]
@@ -86,8 +85,7 @@ theorem exists_isPushout_forall_flat_of_tensorProduct {R₀ A₁ A B₀ B : Type
   refine ⟨A₁, A₁ ⊗[R₀] B₀, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, s₁, fun b ↦ ?_, fun q₁ hq₁ ↦ ?_⟩
-  · induction b with
-    | zero => simp
+  · induction b using TensorProduct.inductionOn with
     | tmul r b =>
       simp only [s₁, RingHom.algebraMap_toAlgebra, φ, e₀]
       simp [Algebra.IsPushout.equiv_tmul, ← IsScalarTower.algebraMap_apply, hs]

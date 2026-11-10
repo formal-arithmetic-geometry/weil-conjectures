@@ -67,8 +67,7 @@ theorem injective_and_range_eq_invariants
       (i : Module.Basis.ofVectorSpaceIndex k A) :
       E (LinearMap.lTensor A (τ : M ≃ₐ[k] M).toLinearEquiv.toLinearMap z) i =
         (τ : M ≃ₐ[k] M) (E z i) := by
-    induction z with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a y => simp [coord_tmul]
     | add x y hx hy => simp [hx, hy]
   constructor
@@ -137,5 +136,6 @@ theorem range_eq_invariants_and_equiv
   · refine ⟨AlgEquiv.ofInjective Algebra.TensorProduct.includeLeft hinj, ?_⟩
     intro a
     rfl
+
 
 end Algebra.TensorProduct

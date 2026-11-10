@@ -95,7 +95,7 @@ theorem schemeDerivedOpenRestriction_isLocalization (X : Scheme.{u}) (U : X.Open
     DerivedCategory.Q (HomologicalComplex.quasiIso A (.up ℤ))
     L.mapDerivedCategory S.mapDerivedCategory
   let k : L.mapDerivedCategory ⋙ S.mapDerivedCategory ≅ 𝟭 (DerivedCategory C) :=
-    (Functor.mapDerivedCategoryCompIso L S).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso L S) ≪≫
       Functor.mapDerivedCategoryNatIso j ≪≫ Functor.mapDerivedCategoryIdIso C
   have : L.mapDerivedCategory.Full := (d.fullyFaithfulLOfCompIsoId k).full
   have : L.mapDerivedCategory.Faithful := (d.fullyFaithfulLOfCompIsoId k).faithful

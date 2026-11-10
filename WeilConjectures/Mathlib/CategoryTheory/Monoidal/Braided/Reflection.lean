@@ -46,7 +46,6 @@ lemma ihomComparison_app :
     NatIso.ofComponents (fun _ ↦ (μIso L _ _).symm ≪≫
         asIso ((adj.counit.app _) ⊗ₘ (adj.counit.app _))) (fun _ ↦ by
       dsimp
-      simp only [μIso_inv]
       rw [Category.assoc, ← δ_natural_right_assoc,
         tensorHom_def', ← MonoidalCategory.whiskerLeft_comp_assoc,
         Adjunction.counit_naturality, whisker_exchange,

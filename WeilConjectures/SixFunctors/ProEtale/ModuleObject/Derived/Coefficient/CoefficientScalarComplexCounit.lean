@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalComplexLocalizationTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.InternalComplexLocalizationTensorComparison
 
 /-! # The scalar complex comparison is the derived counit
 
@@ -49,7 +51,7 @@ isomorphism between the exact derived functor and the total left derived functor
 The comparison between complex and homotopy localizations has identity components.
 Its images under the two functors are identities, so cancellation leaves the counit.
 (blueprint: lem-sfb-coefficient-scalar-complex-counit). -/
-theorem coefficientScalarTensor_complexCounit (Z : Scheme.{u})
+private theorem coefficientScalarTensor_complexCounit_private (Z : Scheme.{u})
     (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     coefficientInternalScalarComplex a Z K =
       (Mod.extendScalars (coefficientMap a Z)).leftDerivedFunctorCounit.app
@@ -64,6 +66,10 @@ theorem coefficientScalarTensor_complexCounit (Z : Scheme.{u})
     DerivedCategory.Qh.map_id _]
   simp only [Category.id_comp, Category.comp_id]
 
+/-- Public export of the private `coefficientScalarTensor_complexCounit_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coefficientScalarTensor_complexCounit := coefficientScalarTensor_complexCounit_private
+
 attribute [local irreducible] coefficientInternalScalarComplex
 
 set_option maxHeartbeats 800000 in
@@ -72,7 +78,7 @@ set_option maxHeartbeats 800000 in
 is the tensor of the two derived counits followed by homotopy localization.
 Use the two scalar-counit equations, tensor their components, and compose with
 the equality of complex and homotopy localization tensorators. -/
-private theorem scalar_complex_tensor_factors (Z : Scheme.{u})
+private theorem scalar_complex_tensor_factors_private (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     let F := Mod.extendScalars (coefficientMap a Z)
     let Fc := F.mapHomologicalComplex (.up ℤ)
@@ -102,5 +108,9 @@ private theorem scalar_complex_tensor_factors (Z : Scheme.{u})
       Functor.LaxMonoidal.μ DerivedCategory.Qh (qS.obj (Fc.obj P)) (qS.obj (Fc.obj Q)) :=
     coefficientScalarTensor_complexLocalization S Z (Fc.obj P) (Fc.obj Q)
   exact congrArg₂ (fun v u ↦ v ≫ u) hct hμ
+
+/-- Public export of the private `scalar_complex_tensor_factors_private`
+(used by `import all` importers; linter.privateModule). -/
+alias scalar_complex_tensor_factors := scalar_complex_tensor_factors_private
 
 end AlgebraicGeometry.ProEtale.CondensedRing

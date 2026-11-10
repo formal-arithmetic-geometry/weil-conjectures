@@ -377,7 +377,7 @@ private theorem ambTowerFiniteScalar_eq (T : Scheme.{u}) (r : AmbTateLevel l E n
       r.val (rootTowerResidueScalar l r.val _
         (show ((l ^ (r.val + 1) : ℕ) :
           ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) = 0 from
-          ULift.ext _ _ r.property)) = ambTateFiniteScalar l E n T r := by
+          ULift.ext r.property)) = ambTateFiniteScalar l E n T r := by
   unfold tateFiniteScalar rootTowerResidueScalar ambTateFiniteScalar
   apply congrArg ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map)
   apply CommRingCat.hom_ext
@@ -385,7 +385,7 @@ private theorem ambTowerFiniteScalar_eq (T : Scheme.{u}) (r : AmbTateLevel l E n
   intro x
   obtain ⟨z, hz⟩ := ZMod.intCast_surjective x.down
   have hx : x = (z : ULift.{u + 1} (ZMod (l ^ (r.val + 1)))) :=
-    ULift.ext _ _ hz.symm
+    ULift.ext hz.symm
   rw [hx]
   exact (map_intCast _ z).trans (map_intCast _ z).symm
 
@@ -444,14 +444,14 @@ private theorem ambFiniteIso_exists (T : AmbTateBase l) (r : AmbTateLevel l E n)
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) _
     (tateFiniteScalar T.val l
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) r.val
-      (rootTowerResidueScalar l r.val _ (ULift.ext _ _ r.property))) _
+      (rootTowerResidueScalar l r.val _ (ULift.ext r.property))) _
     (ambTowerScalar_eq l E n T.val) (ambTowerFiniteScalar_eq l E n T.val r)
     (ambTateConstantRootModule l T.val) (purTwistRootsModule T.val l r.val)
     (fun U x ↦ (rootTowerProjection T.val l r.val).hom.app (op U) x)
   exact Exists.imp (fun _ h ↦ h.1)
     ((rootTower_finite_tensor T.val l T.property r.val).2.2.2
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
-      (ULift.ext _ _ r.property))
+      (ULift.ext r.property))
 
 private def ambFiniteIso (T : AmbTateBase l) (r : AmbTateLevel l E n) :
     ambTateReduced l E n T.val ≅ ambTateFiniteRoots l E n T.val r :=

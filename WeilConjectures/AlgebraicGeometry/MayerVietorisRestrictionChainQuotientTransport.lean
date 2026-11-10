@@ -18,14 +18,14 @@ Source: Stacks Project, Tags 08FE and 08BV.
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Pretriangulated
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
 set_option maxHeartbeats 800000 in
--- Quotient transport elaborates several derived-category and sheaf-category conversions.
+-- The quotient transports fit the original budget when elaboration respects transparency.
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
 Source: Stacks Project, Tags 08FE and 079V.
 Proof: Expand the chain and the transported direct-image unit. Substitute
@@ -65,47 +65,22 @@ theorem schemeMV_restriction_chain_quotient_transport
         (LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I)) := by
   let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
   let LY := schemeOpenRestriction Y W
-  have hx : LX.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ _).obj I) =
-      LX.mapDerivedCategoryFactors.hom.app I := by
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change LX.mapDerivedCategory.map (𝟙 _) ≫ LX.mapDerivedCategoryFactors.hom.app I ≫
-      𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-    erw [LX.mapDerivedCategory.map_id (DerivedCategory.Q.obj I),
-      DerivedCategory.Qh.map_id ((HomotopyCategory.quotient _ _).obj
-        ((LX.mapHomologicalComplex (.up ℤ)).obj I))]
-    simp only [Category.id_comp]
-    exact Category.comp_id _
   have hxi : LX.mapDerivedCategoryFactorsh.inv.app
-      ((HomotopyCategory.quotient _ _).obj I) =
-      LX.mapDerivedCategoryFactors.inv.app I := by
-    rw [← cancel_epi (LX.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ _).obj I)), Iso.hom_inv_id_app, hx,
-      Iso.hom_inv_id_app]
-    rfl
+      ((HomotopyCategory.quotient _ _).obj I) ≫
+      LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) =
+      (DerivedCategory.quotientCompQhIso _).hom.app
+          ((LX.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        LX.mapDerivedCategoryFactors.inv.app I := by
+    apply (cancel_epi (LX.mapDerivedCategoryFactorsh.hom.app
+      ((HomotopyCategory.quotient _ _).obj I))).1
+    rw [Iso.hom_inv_id_app_assoc, LX.mapDerivedCategoryFactorsh_hom_app]
+    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+      Category.assoc]
+    erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
+      Iso.hom_inv_id_app, Category.comp_id]
   have hy := LY.mapDerivedCategoryFactorsh_hom_app
     (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj I)
-  dsimp only
-  unfold schemeMVRestrictionLocalizationChain
-  simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Category.assoc]
-  erw [hy, hxi]
-  simp only [Functor.comp_obj, Category.assoc,
-    Functor.mapHomotopyCategoryFactors, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_inv,
-    Quotient.lift.isLift_hom, CategoryTheory.Functor.map_id, Category.id_comp,
-    Category.comp_id]
-  erw [(schemeDerivedDirectImage (h ∣_ W)).map_id
-    (DerivedCategory.Q.obj ((LX.mapHomologicalComplex (.up ℤ)).obj I)),
-    LY.mapDerivedCategory.map_id (DerivedCategory.Q.obj
-      (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
-        (.up ℤ)).obj I)), LX.mapDerivedCategory.map_id (DerivedCategory.Q.obj I),
-    (RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom).rightDerivedFunctor.map_id
-      (LX.mapDerivedCategory.obj (DerivedCategory.Q.obj I))]
-  erw [Category.id_comp, Category.id_comp, Category.comp_id]
   have hr : (schemeMVHomotopyOpenRestriction h W).hom.app
       ((HomotopyCategory.quotient _ _).obj I) =
       (HomotopyCategory.quotient _ _).map
@@ -117,8 +92,21 @@ theorem schemeMV_restriction_chain_quotient_transport
       ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
         (.up ℤ)).app I) ≫ (HomotopyCategory.quotient _ _).map (𝟙 _) = _
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
-  rw [hr]
-  erw [Category.id_comp, Category.id_comp, Category.id_comp]
+  dsimp only
+  unfold schemeMVRestrictionLocalizationChain
+  simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc]
+  erw [hy, hr]
+  simp only [Functor.comp_obj, Category.assoc, Functor.mapHomotopyCategoryFactors,
+    Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp]
+  erw [hxi]
+  simp only [Functor.map_comp]
+  erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
   rfl
 
 end AlgebraicGeometry

@@ -240,57 +240,27 @@ private theorem rightComparison_unit (K : CochainComplex (IsoAlgebra F) ℤ) :
           (((forget F).mapHomologicalComplex (.up ℤ)).obj K)) at ht
   simp only [Functor.mapDerivedCategoryFactorsh_hom_app, Functor.map_id,
     Category.id_comp] at ht
-  -- The quotient comparison components are identities, after changing their object types.
-  have hP : ((Functor.cyclicComplexUnit (mapOfNatIso e) hF).app K) =
-      ((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutionsUnit hF).app
-        ((HomotopyCategory.quotient _ _).obj K) := by
-    change (𝟙 _) ≫ (𝟙 _) ≫ DerivedCategory.Qh.map (𝟙 _) ≫ (𝟙 _) ≫
-      ((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutionsUnit hF).app
-        ((HomotopyCategory.quotient _ _).obj K) ≫ (𝟙 _) ≫
-      ((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hF).map (𝟙 _) = _
-    simp only [Functor.map_id, Category.id_comp]
-    erw [Category.comp_id]
-  have hL : ((Functor.cyclicComplexUnit L hC).app
-        (((forget F).mapHomologicalComplex (.up ℤ)).obj K)) =
-      (L.rightDerivedFunctorOfQuasiIsoResolutionsUnit hC).app
-        ((HomotopyCategory.quotient _ _).obj
-          (((forget F).mapHomologicalComplex (.up ℤ)).obj K)) := by
-    change (𝟙 _) ≫ (𝟙 _) ≫ DerivedCategory.Qh.map (𝟙 _) ≫ (𝟙 _) ≫
-      (L.rightDerivedFunctorOfQuasiIsoResolutionsUnit hC).app
-        ((HomotopyCategory.quotient _ _).obj
-          (((forget F).mapHomologicalComplex (.up ℤ)).obj K)) ≫ (𝟙 _) ≫
-      (L.rightDerivedFunctorOfQuasiIsoResolutions hC).map (𝟙 _) = _
-    simp only [Functor.map_id, Category.id_comp]
-    erw [Category.comp_id]
-  rw [hP, hL]
-  change (forget G).mapDerivedCategory.map
-      (((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutionsUnit hF).app
-        ((HomotopyCategory.quotient _ _).obj K)) ≫
-      (cyclicDerivedRightForgetComparison F G L e hF hC).hom.app _ ≫
-      (L.rightDerivedFunctorOfQuasiIsoResolutions hC).map
-        ((forget F).mapDerivedCategory.map (𝟙 _) ≫
-          (forget F).mapDerivedCategoryFactors.hom.app K ≫ (𝟙 _) ≫
-          DerivedCategory.Qh.map (𝟙 _)) =
-    ((forget G).mapDerivedCategory.map (𝟙 _) ≫
-      (forget G).mapDerivedCategoryFactors.hom.app
-        (((mapOfNatIso e).mapHomologicalComplex (.up ℤ)).obj K) ≫ (𝟙 _) ≫
-      DerivedCategory.Qh.map (𝟙 _)) ≫ (𝟙 _) ≫
-      (L.rightDerivedFunctorOfQuasiIsoResolutionsUnit hC).app
-        ((HomotopyCategory.quotient _ _).obj
-          (((forget F).mapHomologicalComplex (.up ℤ)).obj K)) at ht
-  simp only [Functor.map_id, Category.id_comp] at ht
-  change (forget G).mapDerivedCategory.map
-      (((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutionsUnit hF).app
-        ((HomotopyCategory.quotient _ _).obj K)) ≫
-      (cyclicDerivedRightForgetComparison F G L e hF hC).hom.app _ ≫
-      (L.rightDerivedFunctorOfQuasiIsoResolutions hC).map
-        ((forget F).mapDerivedCategoryFactors.hom.app K ≫ 𝟙 _) =
-    ((forget G).mapDerivedCategoryFactors.hom.app
-      (((mapOfNatIso e).mapHomologicalComplex (.up ℤ)).obj K) ≫ 𝟙 _) ≫
-      (L.rightDerivedFunctorOfQuasiIsoResolutionsUnit hC).app
-        ((HomotopyCategory.quotient _ _).obj
-          (((forget F).mapHomologicalComplex (.up ℤ)).obj K)) at ht
-  simp only [Category.comp_id] at ht
+  -- `quotientCompQhIso` is no longer a definitional identity: conjugate by it.
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Functor.map_comp,
+    Category.assoc] at ht
+  have hn := (cyclicDerivedRightForgetComparison F G L e hF hC).hom.naturality
+    ((DerivedCategory.quotientCompQhIso (IsoAlgebra F)).hom.app K)
+  simp only [Functor.comp_map] at hn
+  dsimp only [Functor.cyclicComplexUnit, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Functor.map_id,
+    Functor.map_comp, Category.id_comp, Category.assoc]
+  rw [reassoc_of% hn]
+  dsimp only [Functor.comp_obj] at ht ⊢
+  simp only [Functor.map_id, Category.id_comp, Category.comp_id] at ht ⊢
+  rw [← cancel_epi ((forget G).mapDerivedCategory.map
+      ((DerivedCategory.quotientCompQhIso (IsoAlgebra G)).hom.app _)),
+    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+  rw [← cancel_mono ((L.rightDerivedFunctorOfQuasiIsoResolutions hC).map
+      ((DerivedCategory.quotientCompQhIso C).inv.app _))]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] at ht ⊢
+  dsimp only [Functor.comp_obj]
+  simp only [Functor.map_id, Category.comp_id]
   exact ht
 
 private def rightFactors (K : CochainComplex (IsoAlgebra F) ℤ) [K.IsKInjective] :

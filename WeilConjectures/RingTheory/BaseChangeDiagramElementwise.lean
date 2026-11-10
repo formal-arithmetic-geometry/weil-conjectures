@@ -148,8 +148,7 @@ theorem baseChange_diagram_elementwise
     have e_of (i : J) (t : A i ⊗[R₀] D.obj i₀) :
         e (Module.DirectLimit.of R₀ J (fun i ↦ A i ⊗[R₀] D.obj i₀) ft i t) =
           (α i).rTensor (D.obj i₀) t := by
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul a m =>
         dsimp only [e, ft]
         rw [LinearEquiv.trans_apply, TensorProduct.directLimitLeft_symm_of_tmul,
@@ -160,14 +159,12 @@ theorem baseChange_diagram_elementwise
     let : DirectedSystem (fun i ↦ A i ⊗[R₀] D.obj i₀) (fun {i j} h ↦ ft i j h) :=
       { map_self := by
           intro i t
-          induction t using TensorProduct.induction_on with
-          | zero => simp
+          induction t using TensorProduct.inductionOn with
           | tmul a m => simp only [ft, LinearMap.rTensor_tmul, DirectedSystem.map_self']
           | add t u ht hu => simpa only [map_add] using congrArg₂ (· + ·) ht hu
         map_map := by
           intro i j k hij hjk t
-          induction t using TensorProduct.induction_on with
-          | zero => simp
+          induction t using TensorProduct.inductionOn with
           | tmul a m => simp only [ft, LinearMap.rTensor_tmul, DirectedSystem.map_map']
           | add t u ht hu => simpa only [map_add] using congrArg₂ (· + ·) ht hu }
     choose q hq using hS i₀
@@ -179,8 +176,7 @@ theorem baseChange_diagram_elementwise
           (ν.app i.val).hom z = q ((α i).rTensor (D.obj i₀) t) := by
       obtain ⟨p, hp⟩ := hbase i₀ i.val i.property
       refine ⟨p t, ?_⟩
-      induction t using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction t using TensorProduct.inductionOn with
       | tmul a x =>
         rw [hp, LinearMap.rTensor_tmul, q_formula]
         have hv := hν i.val a ((D.map (homOfLE i.property)).hom x)

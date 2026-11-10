@@ -38,7 +38,8 @@ private theorem augmentation_cocycle {C : Type*} [Category C] [Abelian C]
         (I.ι.f 0 ≫ (I.cochainComplexXIso 0 0 rfl).inv) (zero_add (0 : ℤ)) 1
         (by norm_num) (by simp [I.cochainComplex_d 0 1 0 1 rfl rfl,
           reassoc_of% I.ι_f_zero_comp_complex_d])) = ShiftedHom.mk₀ 0 rfl I.ι' := by
-  ext p
+  apply HomologicalComplex.hom_ext
+  intro p
   by_cases hp : p = 0
   · subst p
     simp [CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply,

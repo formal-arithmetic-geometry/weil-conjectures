@@ -56,7 +56,6 @@ private theorem normalized_uncurry
   simp only [Equiv.symm_apply_apply, SheafOfModules.tensorHomAdjunction,
     Adjunction.mkOfHomEquiv_homEquiv] at h
   convert h using 1
-  rfl
 
 omit [E₀.functor.Additive] in
 private theorem ordinary_hom_naturality

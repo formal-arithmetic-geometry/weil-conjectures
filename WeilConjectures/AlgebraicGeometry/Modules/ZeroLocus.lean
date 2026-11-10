@@ -269,10 +269,9 @@ lemma Hom.map_zeroLocusIdeal_basicOpen (φ : M ⟶ N) (W : X.affineOpens) (f : �
           (Ideal.span {b}).map (algebraMap Γ(X, X.basicOpen g) Γ(X, X.basicOpen f')) := by
         rw [Ideal.map_span, Set.image_singleton]
         convert h1 using 2
-        · rfl
-        · exact (Scheme.presheaf_map_map_apply (homOfLE (X.basicOpen_le g))
-            (homOfLE (X.basicOpen_le f')) a).trans
-            (Scheme.presheaf_map_map_apply (homOfLE (X.basicOpen_le f)) (homOfLE hle) a).symm
+        exact (Scheme.presheaf_map_map_apply (homOfLE (X.basicOpen_le g))
+          (homOfLE (X.basicOpen_le f')) a).trans
+          (Scheme.presheaf_map_map_apply (homOfLE (X.basicOpen_le f)) (homOfLE hle) a).symm
       obtain ⟨_, ⟨n, rfl⟩, hn⟩ := (IsLocalization.algebraMap_mem_map_algebraMap_iff
         (.powers f') _ _ _).mp h2
       refine ⟨n, fun _ ↦ ?_⟩
@@ -767,6 +766,7 @@ theorem Hom.eq_zeroLocus_of_ideal_eq_span (φ : M ⟶ N) (I : X.IdealSheafData)
         φ.zeroLocus.ideal U = Ideal.span {b} :=
     fun U _ _ hM hN _ hb ↦ φ.ideal_zeroLocus U hM hN hb
   exact le_antisymm (hle _ _ hI hZ) (hle _ _ hZ hI)
+
 
 end Properties
 

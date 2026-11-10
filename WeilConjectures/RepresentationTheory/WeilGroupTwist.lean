@@ -463,6 +463,7 @@ theorem CompositionSeries.finrank_factor_eq_one_and_exists_twist_eq_one [IsAlgCl
   simp [Subrepresentation.subquotient, hI i hi]
   rfl
 
+
 end Finite
 
 section PadicAlgCl
@@ -478,6 +479,7 @@ theorem exists_isBoundedOn_twist_padicAlgCl (ρ : Representation (PadicAlgCl ℓ
     (hI : ρ.IsBoundedOn deg.ker) :
     ∃ b : (PadicAlgCl ℓ)ˣ, (ρ.twist (degreeCharacter deg b⁻¹)).IsBoundedOn Set.univ :=
   ρ.exists_isBoundedOn_twist hdeg hI
+
 
 end PadicAlgCl
 

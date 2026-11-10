@@ -393,7 +393,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceHomContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedConstructiblePiece
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
@@ -413,14 +412,11 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grothendiec
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeTensorExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
-import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import WeilConjectures.AlgebraicGeometry.IntegralLfpHomContinuity
 import WeilConjectures.AlgebraicGeometry.IntegralLfpLocallyFreeResolution
 import WeilConjectures.AlgebraicGeometry.IntegralLfpEventualFreeImage
 import WeilConjectures.AlgebraicGeometry.ModuleObjectFreeGenerators
@@ -467,7 +463,7 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.AlgebraicGeometry.LisseLatticeClassSheaf
 import WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
@@ -504,7 +500,10 @@ import Mathlib.Analysis.Normed.Field.WithAbs
 import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import Mathlib.GroupTheory.Coset.Defs
 import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
-import Mathlib.Topology.Algebra.Module.Equiv
+import Mathlib.Topology.Algebra.Module.Equiv.Basic
+import Mathlib.Topology.Algebra.Module.Equiv.Pi
+import Mathlib.Topology.Algebra.Module.Equiv.Prod
+import Mathlib.Topology.Algebra.Module.Equiv.Submodule
 import Mathlib.Topology.CompactOpen
 import Mathlib.LinearAlgebra.Basis.Defs
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
@@ -567,6 +566,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 public import WeilConjectures.AlgebraicGeometry.EllAdicProperConstructibleCohomology
+import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
+import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
+import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
+import WeilConjectures.AlgebraicGeometry.IntegralLfpHomContinuity
 
 /-!
 # Constructibility of proper ell-adic direct-image cohomology
@@ -700,7 +703,7 @@ private theorem proper_finiteFixed_bounded
       · exact DerivedCategory.isZero_of_isLE _ b q hq (hX := hb))
   have hB (b : B) (y : Y) : IsUnit (addOrderOf b : Y.presheaf.stalk y) :=
     isUnit_of_dvd_unit (Nat.cast_dvd_cast (addOrderOf_dvd_of_nsmul_eq_zero
-      (ULift.ext _ _ (addOrderOf_nsmul_eq_zero b.down)))) (hA b.down y)
+      (ULift.ext (addOrderOf_nsmul_eq_zero b.down)))) (hA b.down y)
   have hFJ := proper_finiteEtale_bounded p B hB J hJ
   obtain ⟨aJ, bJ, _, hvJ⟩ := hJ.2
   let Jp : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat B)) :=

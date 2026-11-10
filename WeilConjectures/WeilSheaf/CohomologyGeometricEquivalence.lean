@@ -162,7 +162,8 @@ lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
   simp only [← Functor.map_comp]
   refine congrArg _ ?_
   rw [Category.assoc, h₂, ← h₁]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc]
   rfl
 
 /-- The linear equivalence induced by an isomorphism of geometric fibers: the transport of

@@ -127,6 +127,7 @@ noncomputable def toTerminal :
 /-- The components of `toTerminal`. -/
 lemma toTerminal_app (j : J) : (toTerminal U j₀ hj₀).app j = (U.map (hj₀.from j)).left := rfl
 
+
 /-- The étale `D_{j₀}`-scheme `D_{j₀} ×_{D_{j₀}} Dⱼ`, isomorphic to `Dⱼ`. -/
 noncomputable def auxObj (j : J) : (U.obj j₀).left.Etale :=
   (MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale

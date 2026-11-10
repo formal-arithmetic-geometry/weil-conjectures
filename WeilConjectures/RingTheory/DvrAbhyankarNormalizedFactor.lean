@@ -175,8 +175,7 @@ theorem dvr_abhyankar_normalized_factor_ramificationIdx_eq_one
     intro z hz
     clear hz
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective z
-    induction x using TensorProduct.induction_on with
-    | zero => exact (Algebra.adjoin A (Set.range iE)).zero_mem
+    induction x using TensorProduct.inductionOn with
     | tmul e a =>
       have he : iE e ∈ Algebra.adjoin A (Set.range iE) :=
         Algebra.subset_adjoin ⟨e, rfl⟩
@@ -204,7 +203,7 @@ theorem dvr_abhyankar_normalized_factor_ramificationIdx_eq_one
   let := hfracTF
   let := hATF
   have : IsLocalHom (algebraMap A T) := by
-    apply ((IsLocalRing.local_hom_TFAE _).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE _).out 5 1).mp
     rw [IsScalarTower.algebraMap_eq A (integralClosure A F) T, ← Ideal.comap_comap]
     rw [show (IsLocalRing.maximalIdeal T).comap
       (algebraMap (integralClosure A F) T) = Q from

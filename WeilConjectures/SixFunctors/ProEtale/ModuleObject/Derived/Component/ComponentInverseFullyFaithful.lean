@@ -262,7 +262,7 @@ private theorem split_covers {T : Scheme.{u}} (W : Scheme.ProEt.Qcqs T)
       Sigma.desc (fun i : I ↦ (a i.down).left ≫ e.hom) := by
     apply Sigma.hom_ext
     intro i
-    simp only [k, Sigma.ι_desc_assoc, Sigma.ι_desc]
+    simp only [k, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc]
   refine ⟨e.hom ≫ σ ≫ k, ?_⟩
   apply (cancel_mono e.hom).mp
   simp only [Category.assoc, Category.id_comp, hk]
@@ -291,7 +291,7 @@ private theorem iso_of_stonean {S : Profinite.{u}}
     let a := Profinite.presentation.π E.left
     let : ExtremallyDisconnected D :=
       inferInstanceAs (ExtremallyDisconnected E.left.presentation)
-    have : EffectiveEpi a := ((Profinite.effectiveEpi_tfae a).out 0 1).mpr (inferInstance : Epi a)
+    have : EffectiveEpi a := ((Profinite.effectiveEpi_tfae a).out 1 2).mpr (inferInstance : Epi a)
     exact stonean_cover_mem R D a (hR (Over.mk (a ≫ E.hom))
       (show ExtremallyDisconnected D from inferInstance)
       (Over.homMk a rfl))

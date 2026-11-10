@@ -49,9 +49,9 @@ noncomputable def residueFieldDerivedUpperStarIso :
         L((f)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]) :=
   Functor.isoWhiskerRight (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
     (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E f) ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E f) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory _ f).symm
 
 /-- The comparison `Rf_* ⋙ D(G_Y) ⟶ D(G_X) ⋙ Rf_*` between the derived pushforwards: the mate

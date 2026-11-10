@@ -154,12 +154,12 @@ theorem irreducible_X_pow_sub_C_algebraMap {R F : Type*} [CommRing R] [IsDomain 
     · exact (Ideal.span_singleton_eq_top).not.mpr hπ.not_isUnit
     · intro n hn
       rw [Polynomial.natDegree_X_pow_sub_C] at hn
-      simp only [Polynomial.coeff_sub, Polynomial.coeff_X_pow, if_neg hn.ne, zero_sub]
+      simp only [Polynomial.coeff_sub, Polynomial.coeff_X_pow, ite_eq_right hn.ne, zero_sub]
       by_cases hn0 : n = 0
       · subst n
         simp [Polynomial.coeff_C]
       · simp [Polynomial.coeff_C, hn0]
-    · simp only [Polynomial.coeff_sub, Polynomial.coeff_X_pow, if_neg hd.ne,
+    · simp only [Polynomial.coeff_sub, Polynomial.coeff_X_pow, ite_eq_right hd.ne,
         Polynomial.coeff_C_zero, zero_sub, Ideal.span_singleton_pow, Ideal.mem_span_singleton,
         dvd_neg]
       simpa only [pow_one] using

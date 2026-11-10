@@ -109,11 +109,12 @@ def sectionScalarRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
         SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}
           (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)) :=
   (Functor.mapDerivedCategoryCompIso (V₀ a T)
-    (ModuleRingedComparison.equivalence Λ T).functor).symm ≪≫
+    (ModuleRingedComparison.equivalence Λ T).functor) ≪≫
   Functor.mapDerivedCategoryNatIso s.restriction ≪≫
-  Functor.mapDerivedCategoryCompIso (ModuleRingedComparison.equivalence Λ' T).functor
+  (Functor.mapDerivedCategoryCompIso (ModuleRingedComparison.equivalence Λ' T).functor
     (SheafOfModules.scalarRestriction.{u + 1, u, u + 1}
-      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)))
+      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
+        (coefficientMap a T)))).symm
 
 /-- Tensor with the restricted regular coefficient in the existing section derived tensor.
 Source: Stacks 06YU; blueprint integral proper-base-change proof (1)

@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageCoherence
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+import all WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageCoherence
+import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageScalarModels
 import WeilConjectures.CategoryTheory.Adjunction.MateRestrictionComparison
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 
@@ -58,7 +60,8 @@ theorem restrictionDirectImageMate_isIso {U V : Scheme.{u}} (g : U ⟶ V)
   let R' : Coefficients g := ⟨RV, RU, cR⟩
   let S' : Coefficients g := ⟨SV, SU, cS⟩
   let a' : CoefficientMap R' S' := ⟨aV, aU, comm⟩
-  obtain ⟨sV, sU, _, _, hi, _⟩ := finiteFreeDirectImageCoherence g
+  obtain ⟨sV⟩ := finiteFreeDirectImageScalarModels V
+  obtain ⟨sU⟩ := finiteFreeDirectImageScalarModels U
   obtain ⟨b⟩ := hfree
   let N := SheafOfModules.unit ((adicLisseForget V).obj RV)
   let : HasBiproduct (fun _ : Fin d ↦ N) := HasBiproduct.of_hasProduct _
@@ -67,7 +70,10 @@ theorem restrictionDirectImageMate_isIso {U V : Scheme.{u}} (g : U ⟶ V)
     (biproduct.isoProduct (fun _ : Fin d ↦ N)).symm ≪≫
       biproduct.isoCoproduct (fun _ : Fin d ↦ N) ≪≫
         Sigma.whiskerEquiv Equiv.ulift.symm (fun _ ↦ Iso.refl N)
-  have : IsIso (comparison sV sU a') := (hi R' S' a' d ⟨b ≪≫ e⟩).1
+  have (M : DerivedCategory (proEtaleRingModules U RU)) :
+      IsIso ((comparison sV sU a').app M) :=
+    comparison_isIso_app g sV sU R' S' a' d ⟨b ≪≫ e⟩ M
+  have : IsIso (comparison sV sU a') := NatIso.isIso_of_isIso_app _
   let δ := proEtaleRingRestrictionDerivedDirectImage g RV SV RU SU aV aU cR cS comm
   have hm : (mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)
       (TwoSquare.mk _ _ _ _ (comparison sV sU a'))).natTrans = δ.inv := by

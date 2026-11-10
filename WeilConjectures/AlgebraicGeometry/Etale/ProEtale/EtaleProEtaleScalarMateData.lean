@@ -156,10 +156,10 @@ def directImageComparisonAmbientPullbackIso
         (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory :=
   Functor.isoWhiskerLeft _
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) f) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerRight
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).symm _
 
@@ -269,7 +269,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   Functor.leftAdjoint Functor.rightAdjoint
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
-  Functor.mapDerivedCategoryFactorsh Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryFactorsh
   Functor.mapDerivedCategoryNatIso
 
 private theorem inverse_normalization

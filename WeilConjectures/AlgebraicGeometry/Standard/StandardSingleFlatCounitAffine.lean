@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCounitPresentation
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
@@ -115,13 +117,19 @@ private theorem affine_single_unit_iso
     obtain ⟨n, rfl⟩ : ∃ n, q = n + 1 := ⟨q - 1, by omega⟩
     exact hA n)
   dsimp only [Scheme.Modules.canonicalSingleDirectImageMap] at hi
-  have : IsIso (DerivedCategory.Q.map r ≫
+  have : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r) ≫
       (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           ((CochainComplex.singleFunctor
-            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N))) := hi
-  exact IsIso.of_isIso_comp_left (DerivedCategory.Q.map r) _
+            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N))) := by
+    simpa only [r, cast_eq, Scheme.Modules, Scheme.ringCatSheaf,
+      DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
+      HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
+      SingleFunctors.postcomp, Functor.comp_obj] using hi
+  exact IsIso.of_isIso_comp_left
+    (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r)) _
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option maxHeartbeats 400000 in
 -- The scheme-module and ringed-space derived category instances need extra elaboration.
 /-- The single complex of the actual affine direct image realizes the pinned comparison.
@@ -250,9 +258,11 @@ private theorem affine_single_counit_comparison
   have hp : Scheme.picardTermwiseSingleMap p N =
       εp.app D ≫ DerivedCategory.Qh.{u + 1}.map σ.hom := by
     dsimp only [Scheme.picardTermwiseSingleMap, Scheme.Modules.canonicalSinglePullbackMap]
-    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-      CategoryTheory.Functor.map_id]
-    rfl
+    simp only [cast_eq, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+      CategoryTheory.Functor.map_id, Category.comp_id, εp, SingleComplexBaseChange.counit,
+      D, C, σ, P, HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
+      CochainComplex.singleFunctor, CochainComplex.singleFunctors, SingleFunctors.postcomp,
+      Functor.comp_obj, Functor.mapIso_hom, Iso.app_hom]
   have hc := derivedBaseChange_unit_compatibility.{u, u + 1} f f' g p pullback.condition D
   let εg := SingleComplexBaseChange.counit g
   have heq : (derivedPullback.{u, u + 1} g).map e.inv ≫ standardSingleBaseChangeMap f N g =

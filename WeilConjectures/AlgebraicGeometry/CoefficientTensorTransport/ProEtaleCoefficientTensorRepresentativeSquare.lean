@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
 attribute [local implicit_reducible] pbcDerivedRestrict
-  Functor.map₂HomologicalComplex Functor.mapHomologicalComplex
+  Functor.map₂HomologicalComplex
   SheafOfModules.restrictScalars
 
 attribute [local irreducible] Functor.mapDerivedCategory

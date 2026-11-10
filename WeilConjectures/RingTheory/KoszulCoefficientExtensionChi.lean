@@ -137,6 +137,7 @@ private theorem koszulDualBoundary_wedge
       (-1 : R) ^ (n + 1) * Finset.univ.sum (fun i : Fin (n + 1) ↦
         (((-1 : R) ^ (i.val + 2)) * Finsupp.linearCombination R f (v i)) *
           x.hom (exteriorPower.ιMulti R n (v ∘ i.succAbove))) := by
+  change ModuleCat.of R (⋀[R]^n (Fin r →₀ R)) ⟶ ModuleCat.of R R at x
   change (-1 : R) ^ (n + 1) * x.hom
     (((koszulComplex R r f).d (n + 1) n).hom
       (exteriorPower.ιMulti R (n + 1) v)) = _

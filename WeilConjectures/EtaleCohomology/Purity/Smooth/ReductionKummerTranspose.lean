@@ -135,12 +135,11 @@ theorem Adjunction.derivedAdjunctionMapDerivedCategory_unit_app_singleFunctor (a
     ((HomologicalComplex.singleMapHomologicalComplex f (ComplexShape.up ℤ) 0).hom.app P)
   simp only [Functor.comp_map] at hq hn
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
-  erw [Category.id_comp, reassoc_of% hq, CategoryTheory.Functor.map_id,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp, ← reassoc_of% hn,
-    ← DerivedCategory.Q.map_comp_assoc, hc]
+  erw [reassoc_of% hq, Iso.inv_hom_id_app_assoc]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, ← reassoc_of% hn, ← DerivedCategory.Q.map_comp_assoc, hc]
   rw [Functor.map_comp_assoc]
-  rfl
 
 
 /-- The transpose under `L(f) ⊣ g.mapDerivedCategory` of a morphism `P ⟶ g P'` placed in degree

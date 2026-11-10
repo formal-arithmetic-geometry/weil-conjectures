@@ -23,6 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves
@@ -990,8 +991,11 @@ theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
   -- Serre duality for `ℱ = 𝒪_X` and `q = 1`, with `𝒪_Xᵛ ⊗ Ω¹ ≅ Ω¹`.
   obtain ⟨e⟩ := serreDuality (k := k) (X := X) 0 1 rfl
   obtain ⟨d⟩ := Modules.nonempty_dual_unit_iso (X := X)
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   let 𝒪 : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory :=
-    ⟨SheafOfModules.unit X.ringCatSheaf, inferInstance⟩
+    ⟨SheafOfModules.unit X.ringCatSheaf,
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _⟩
   have h : Module.finrank k (Module.Dual k (Modules.H (X := X) 𝒪.obj 1)) =
       Modules.finrankH k (𝒪.objᵛ ⊗ (X ↘ Spec (.of k)).relativeDifferentials) 0 :=
     (e.app (op 𝒪)).toLinearEquiv.finrank_eq
@@ -1121,7 +1125,7 @@ lemma Hom.isClosed_singleton_fieldPoints (f : X ⟶ Spec (.of k)) [LocallyOfFini
   have : LocallyOfFiniteType x.1 := by
     have : LocallyOfFiniteType (x.1 ≫ f) := by rw [hx]; infer_instance
     exact locallyOfFiniteType_of_comp x.1 f
-  exact x.1.closePoints_subset_preimage_closedPoints
+  exact x.1.closedPoints_subset_preimage_closedPoints
     (show IsClosed {default} from isClosed_discrete _)
 
 end ClosedPoint
@@ -1367,8 +1371,11 @@ theorem degree_relativeDifferentials [GlobalSectionsBijective k X] :
   -- Serre duality for `ℱ = 𝒪_X` and `q = 0`, with `𝒪_Xᵛ ⊗ Ω¹ ≅ Ω¹`.
   obtain ⟨e⟩ := serreDuality (k := k) (X := X) 1 0 rfl
   obtain ⟨d⟩ := Modules.nonempty_dual_unit_iso (X := X)
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
   let 𝒪 : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory :=
-    ⟨SheafOfModules.unit X.ringCatSheaf, inferInstance⟩
+    ⟨SheafOfModules.unit X.ringCatSheaf,
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _⟩
   have h : Module.finrank k (Module.Dual k (Modules.H (X := X) (show X.Modules from 𝒪.obj) 0)) =
       Modules.finrankH k (𝒪.objᵛ ⊗ (X ↘ Spec (.of k)).relativeDifferentials) 1 :=
     (e.app (op 𝒪)).toLinearEquiv.finrank_eq

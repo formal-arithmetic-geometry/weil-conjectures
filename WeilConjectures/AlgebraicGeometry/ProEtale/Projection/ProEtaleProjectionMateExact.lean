@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Projection.ProjectionFormulaBaseChangeNaturality
 public import Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProjectionMateData
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Exactness and the coefficient-unit normalization of the pro-etale mate

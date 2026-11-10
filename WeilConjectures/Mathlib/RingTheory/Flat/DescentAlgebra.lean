@@ -95,6 +95,7 @@ lemma δ_algebraMap (a' : A') : D.δ (algebraMap A' E a') = a' ⊗ₜ 1 := by
   rw [AlgHom.commutes]
   rfl
 
+
 /-- The descended algebra of a descent datum: the `A`-subalgebra of `E` consisting of the
 elements `e` with `δ e = 1 ⊗ e`. -/
 noncomputable def descended : Subalgebra A E :=
@@ -102,6 +103,7 @@ noncomputable def descended : Subalgebra A E :=
 
 lemma mem_descended_iff (e : E) : e ∈ D.descended ↔ D.δ e = 1 ⊗ₜ e :=
   Iff.rfl
+
 
 lemma δ_of_mem_descended {e : E} (he : e ∈ D.descended) : D.δ e = 1 ⊗ₜ e :=
   he
@@ -146,12 +148,12 @@ private lemma δ'_injective : Function.Injective D.δ' :=
     simp only [coe_δ'] at this
     rw [← D.counit e₁, ← D.counit e₂, this]
 
+
 omit [Module.Flat A A'] in
 private lemma descendedMap_comp_map_val (x : A' ⊗[A] D.descended) :
     TensorProduct.mulMap A A' E (Algebra.TensorProduct.map (AlgHom.id A' A') D.descended.val x) =
       D.descendedMap x := by
-  induction x with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a' d => simp
   | add x y hx hy => simp [hx, hy]
 
@@ -172,8 +174,7 @@ private lemma map_val_injective :
 private lemma δ'_descendedMap (x : A' ⊗[A] D.descended) : D.δ' (D.descendedMap x) = x := by
   apply D.map_val_injective
   rw [coe_δ']
-  induction x with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a' d =>
     rw [descendedMap_tmul, D.δ_smul, D.δ_of_mem_descended d.2]
     simp [TensorProduct.smul_tmul']
@@ -213,6 +214,7 @@ theorem finitePresentation_descended [Algebra.FinitePresentation A' E] :
   have : Algebra.FinitePresentation A' (A' ⊗[A] D.descended) :=
     Algebra.FinitePresentation.equiv D.descendedEquiv.symm
   Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat A'
+
 
 end FaithfullyFlat
 

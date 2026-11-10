@@ -126,17 +126,26 @@ theorem WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite
 `det (1 - T^{e_x} F_x)` of local polynomials of `F`. -/
 theorem WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite {F : WeilSheaf k₀ l X}
     (h : F.IsReal ι) : ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsReal ι := by
-  intro y n
+  have isReal_of_charpolyRev_eq_prod {α : Type u}
+      (M : FrobeniusModule.{u + 1, 0} (PadicAlgCl l))
+      (N : α → FrobeniusModule.{u + 1, 0} (PadicAlgCl l)) (s : Finset α) (e : α → ℕ)
+      (hM : M.frobeniusEnd.charpolyRev =
+        ∏ x ∈ s, Polynomial.expand _ (e x) (N x).frobeniusEnd.charpolyRev)
+      (he : ∀ x ∈ s, e x ≠ 0) (hN : ∀ x ∈ s, (N x).IsReal ι) : M.IsReal ι := by
+    intro n
+    rw [FrobeniusModule.localPolynomial, hM]
+    exact Polynomial.coeff_prod_fixed ι (starRingEnd ℂ) s _ (fun x hx ↦
+      (Polynomial.forall_coeff_expand_fixed_iff ι _ (he x hx) _).2 (hN x hx)) n
+  intro y
   obtain ⟨s, hs, hA⟩ := F.exists_charpolyRev_stalk_higherLowerShriek_zero f y
-  rw [FrobeniusModule.localPolynomial, hA]
-  refine Polynomial.coeff_prod_fixed ι (starRingEnd ℂ) s _ (fun x hx ↦ ?_) n
+  refine isReal_of_charpolyRev_eq_prod _ (fun x : X.finitePoints ↦ F.stalk x) s
+    (fun x ↦ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 /
+      (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1) hA ?_ (fun x _ ↦ h x)
+  intro x hx
   have hdvd := Scheme.Hom.degreeOver_dvd_of_isOver (k₀ := k₀) f x.2
   rw [(hs x).1 hx] at hdvd
-  have he : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 /
-      (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1 ≠ 0 :=
-    (Nat.div_ne_zero_iff_of_dvd hdvd).2
-      ⟨Scheme.Hom.degreeOver_ne_zero _ x.2, Scheme.Hom.degreeOver_ne_zero _ y.2⟩
-  exact (Polynomial.forall_coeff_expand_fixed_iff ι _ he _).2 (h x)
+  exact (Nat.div_ne_zero_iff_of_dvd hdvd).2
+    ⟨Scheme.Hom.degreeOver_ne_zero _ x.2, Scheme.Hom.degreeOver_ne_zero _ y.2⟩
 
 end DirectImage
 

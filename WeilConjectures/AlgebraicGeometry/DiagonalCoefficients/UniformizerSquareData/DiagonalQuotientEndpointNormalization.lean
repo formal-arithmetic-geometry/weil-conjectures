@@ -78,7 +78,7 @@ def quotientAdjunctionAux
   ((ScalarCompatibility.compositeAdjunction q.route.first q.route.second).comp
     (finiteAdjunction q.eW)).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
-        (ScalarCompatibility.compositeRestriction q.route.first q.route.second)).symm
+        (ScalarCompatibility.compositeRestriction q.route.first q.route.second))
 
 /-- The explicit route adjunction respects the prescribed shifts.
 Source: diagonal tower coefficient changes (1)

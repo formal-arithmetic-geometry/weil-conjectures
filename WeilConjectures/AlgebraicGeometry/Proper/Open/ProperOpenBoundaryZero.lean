@@ -387,7 +387,7 @@ theorem proper_open_boundary_zero
       let : Finite B := hfin
       have hB : ∃ n : ℕ, (ℓ ^ n) • (1 : ULift.{u} B) = 0 := by
         refine ⟨n, ?_⟩
-        exact ULift.ext _ _ (hn 1)
+        exact ULift.ext (hn 1)
       obtain ⟨eB⟩ := finiteBoundaryCoefficientIso.{u} B
       exact boundaryVanishing_transport (e ≪≫ eB) r.left c.left
         (boundaryVanishing_finite (ULift.{u} B) ℓ hB k r Z.left c.left)

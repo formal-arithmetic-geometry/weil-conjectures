@@ -143,7 +143,7 @@ theorem nestedOpen_single_directImage_comparison
   let hcoeff := (Scheme.Modules.restrictAdjunction a).leftAdjointUniq adj
   let K := (DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F
-  exact ⟨(Functor.mapDerivedCategoryCompIso (schemeOpenRestriction S U) b).symm.app
+  exact ⟨(Functor.mapDerivedCategoryCompIso (schemeOpenRestriction S U) b).app
       ((schemeDerivedDirectImage f).obj K) ≪≫ hD.app K ≪≫
     (schemeDerivedDirectImage r ⋙ E.mapDerivedCategory).mapIso
       ((A.mapDerivedCategorySingleFunctor 0).app F ≪≫

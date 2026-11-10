@@ -318,9 +318,9 @@ theorem etale_site_bounded_constant_models
       Si.functor.mapDerivedCategory.obj (DerivedCategory.Q.obj
         (((constantSheaf (X.smallEtaleTopology.over W)
           (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj E)) :=
-    ((Functor.mapDerivedCategoryCompIso F Si.functor).app K).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F Si.functor).app K ≪≫
       (Functor.mapDerivedCategoryNatIso hr).app K ≪≫
-      (Functor.mapDerivedCategoryCompIso S.functor F').app K ≪≫ hmodel ≪≫
+      ((Functor.mapDerivedCategoryCompIso S.functor F').app K).symm ≪≫ hmodel ≪≫
       (DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso c
         (ComplexShape.up ℤ)).app E)).symm ≪≫
       (Si.functor.mapDerivedCategoryFactors.app _).symm
@@ -333,7 +333,7 @@ theorem etale_site_bounded_constant_models
     (Scheme.Etale.overEquiv W).constantSheafSheafCongrIso
     (X.smallEtaleTopology.over W) W.left.smallEtaleTopology (ModuleCat.{u + 1} B)
     CategoryTheory.Over.mkIdTerminal
-  exact hz.symm ≪≫ (Functor.mapDerivedCategoryCompIso F Z.functor).app K ≪≫
+  exact hz.symm ≪≫ ((Functor.mapDerivedCategoryCompIso F Z.functor).app K).symm ≪≫
     Z.functor.mapDerivedCategory.mapIso emodel ≪≫
     Z.functor.mapDerivedCategoryFactors.app _ ≪≫
     DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso cz

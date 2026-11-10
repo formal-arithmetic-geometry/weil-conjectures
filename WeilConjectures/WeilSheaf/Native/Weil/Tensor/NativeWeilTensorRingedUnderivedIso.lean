@@ -49,7 +49,6 @@ private theorem normalized_uncurry
   simp only [Equiv.symm_apply_apply, SheafOfModules.tensorHomAdjunction,
     Adjunction.mkOfHomEquiv_homEquiv, nativeRingedTensorObjData] at h
   convert h using 1
-  rfl
 
 private theorem native_hom_naturality
     (P P' I : ProEtaleWeilSheaf k₀ l X) (p : P ⟶ P') :

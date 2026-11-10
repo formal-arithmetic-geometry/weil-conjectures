@@ -169,7 +169,8 @@ private theorem roos_zero {A : Type*} [Category A] [Preadditive A]
   have hn := limit.w (Functor.ofOpSequence t) (homOfLE (Nat.le_succ n)).op
   simp only [Functor.ofOpSequence_map_homOfLE_succ] at hn
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
-    Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_π, Pi.lift_π_assoc, zero_comp]
+    Preadditive.sub_comp, Category.comp_id, Category.assoc, Pi.lift_comp_π,
+    Pi.lift_comp_π_assoc, zero_comp]
   exact sub_eq_zero.mpr hn.symm
 
 set_option backward.isDefEq.respectTransparency false in
@@ -237,7 +238,7 @@ private theorem roos_sections_surjective
     E.map (Pi.π F j.as) y
   rw [← ModuleCat.comp_apply, ← E.map_comp]
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-    Category.id_comp, Pi.lift_π, E.map_sub, E.map_comp, ModuleCat.hom_sub, LinearMap.sub_apply,
+    Category.id_comp, Pi.lift_comp_π, E.map_sub, E.map_comp, ModuleCat.hom_sub, LinearMap.sub_apply,
     ModuleCat.comp_apply, hx]
   change x j.as - E.map (t j.as) (x (j.as + 1)) = _
   rw [show x (j.as + 1) = σ j.as (x j.as - E.map (Pi.π F j.as) y) from rfl, hσ]

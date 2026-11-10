@@ -146,7 +146,7 @@ lemma Functor.mapDerivedCategoryFactorsh_inv_comp_compIso_inv {C D E : Type*} [C
     (K : HomotopyCategory C (ComplexShape.up ℤ)) :
     g.mapDerivedCategoryFactorsh.inv.app ((f.mapHomotopyCategory _).obj K) ≫
         g.mapDerivedCategory.map (f.mapDerivedCategoryFactorsh.inv.app K) ≫
-        (Functor.mapDerivedCategoryCompIso f g).inv.app (DerivedCategory.Qh.obj K) =
+        (Functor.mapDerivedCategoryCompIso f g).hom.app (DerivedCategory.Qh.obj K) =
       DerivedCategory.Qh.map
           ((Functor.mapHomotopyCategoryCompIso (Iso.refl (f ⋙ g)) _).hom.app K) ≫
         (f ⋙ g).mapDerivedCategoryFactorsh.inv.app K := by
@@ -224,8 +224,8 @@ of exact functors; for `f₁ = f₂` and `g₁ = g₂` this is `CategoryTheory.A
 noncomputable def derivedHom (τ : f₁ ⋙ g₁ ⟶ f₂ ⋙ g₂) :
     f₁.leftDerivedFunctor ⋙ g₁.rightDerivedFunctor ⟶
       f₂.leftDerivedFunctor ⋙ g₂.rightDerivedFunctor :=
-  derivedCompIsoMapDerivedCategoryComp.hom ≫ (Functor.mapDerivedCategoryCompIso f₁ g₁).inv ≫
-    Functor.mapDerivedCategoryNatTrans τ ≫ (Functor.mapDerivedCategoryCompIso f₂ g₂).hom ≫
+  derivedCompIsoMapDerivedCategoryComp.hom ≫ (Functor.mapDerivedCategoryCompIso f₁ g₁).hom ≫
+    Functor.mapDerivedCategoryNatTrans τ ≫ (Functor.mapDerivedCategoryCompIso f₂ g₂).inv ≫
     derivedCompIsoMapDerivedCategoryComp.inv
 
 /-- `derivedEndo` is the special case of `derivedHom` for endomorphisms. -/
@@ -242,31 +242,23 @@ lemma derivedCompQhComparison_comp_derivedHom_app (τ : f₁ ⋙ g₁ ⟶ f₂ �
           (NatTrans.mapHomotopyCategory τ _).app K ≫
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₂ ⋙ g₂)) _).inv.app K) ≫
         derivedCompQhComparison f₂ g₂ K := by
-  have h₂ : derivedCompQhComparison f₂ g₂ K =
-      DerivedCategory.Qh.map
-          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (f₂ ⋙ g₂)) _).hom.app K) ≫
-        (f₂ ⋙ g₂).mapDerivedCategoryFactorsh.inv.app K ≫
-        (Functor.mapDerivedCategoryCompIso f₂ g₂).hom.app (DerivedCategory.Qh.obj K) ≫
-        (derivedCompIsoMapDerivedCategoryComp (f := f₂) (g := g₂)).inv.app
-          (DerivedCategory.Qh.obj K) := by
-    rw [← reassoc_of% (Functor.mapDerivedCategoryFactorsh_inv_comp_compIso_inv f₂ g₂ K),
-      ← reassoc_of% (derivedCompQhComparison_comp_hom f₂ g₂ K)]
-    simp
-  have hτ := Functor.mapDerivedCategoryNatTrans_fach τ K
-  rw [h₂, derivedHom]
-  simp only [NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  rw [← cancel_mono ((derivedCompIsoMapDerivedCategoryComp (f := f₂) (g := g₂)).hom.app
+      (DerivedCategory.Qh.obj K)),
+    ← cancel_mono ((Functor.mapDerivedCategoryCompIso f₂ g₂).hom.app (DerivedCategory.Qh.obj K)),
+    ← cancel_mono ((f₂ ⋙ g₂).mapDerivedCategoryFactorsh.hom.app K)]
+  simp only [derivedHom, NatTrans.comp_app, Category.assoc, Iso.inv_hom_id_app_assoc]
   rw [reassoc_of% (derivedCompQhComparison_comp_hom f₁ g₁ K),
-    reassoc_of% (Functor.mapDerivedCategoryFactorsh_inv_comp_compIso_inv f₁ g₁ K)]
-  have hτ' : (f₁ ⋙ g₁).mapDerivedCategoryFactorsh.inv.app K ≫
-      (Functor.mapDerivedCategoryNatTrans τ).app (DerivedCategory.Qh.obj K) =
-      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory τ _).app K) ≫
-        (f₂ ⋙ g₂).mapDerivedCategoryFactorsh.inv.app K := by
-    rw [← cancel_mono ((f₂ ⋙ g₂).mapDerivedCategoryFactorsh.hom.app K)]
-    simp only [Category.assoc, Iso.inv_hom_id_app, hτ, Iso.inv_hom_id_app_assoc]
-    exact (Category.comp_id _).symm
-  rw [reassoc_of% hτ', ← DerivedCategory.Qh.map_comp_assoc
-    ((Functor.mapHomotopyCategoryCompIso (Iso.refl (f₂ ⋙ g₂)) _).inv.app K),
-    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+    reassoc_of% (derivedCompQhComparison_comp_hom f₂ g₂ K),
+    Functor.mapDerivedCategoryNatTrans_fach τ K,
+    ← Functor.mapDerivedCategoryCompIso_fach f₁ g₁ K,
+    ← Functor.mapDerivedCategoryCompIso_fach f₂ g₂ K]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+    ← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Category.id_comp, Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Category.assoc,
+    Iso.inv_hom_id_app, Category.comp_id]
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
 
 end Adjunction
 

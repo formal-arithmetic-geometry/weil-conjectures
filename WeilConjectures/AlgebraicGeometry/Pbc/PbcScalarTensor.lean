@@ -600,11 +600,9 @@ theorem pbcRationalScalarHom_laws :
         ScalarLocalization.composition _ _ _ _ _ _
           (pbcRationalScalarHom l E F i T hDim hInv L.obj M.obj g)
           (pbcRationalScalarHom l E F i T hDim hInv K.obj L.obj f)
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         rw [ScalarLocalization.composition_tmul]
         rw [pbcRationalScalarHom_tmul, pbcRationalScalarHom_tmul,

@@ -35,7 +35,7 @@ private lemma full_mem (j : ℕ) (k : ℤ) (x : (K.X (-(j : ℤ))).X (k + j)) :
     (if 2 * j' + 2 ≤ 2 * j + 2 then LinearMap.range (full K j' k).hom else ⊥) ⊔
     (if 2 * j' + 1 ≤ 2 * j + 2 then LinearMap.range (lower K S e j' k).hom else ⊥)) j)
   apply Submodule.mem_sup_left
-  simp only [le_refl, if_true]
+  simp only [le_refl, ite_true]
   exact ⟨x, rfl⟩
 
 private lemma generator_mem (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))

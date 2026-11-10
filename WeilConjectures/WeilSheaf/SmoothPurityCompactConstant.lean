@@ -68,7 +68,6 @@ noncomputable def nativeConstructibleTensorConstantIso :
 variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-set_option linter.flexible false in
 /-- Compact pushforward after pullback is tensoring with compact pushforward of
 the constant object, naturally in the input complex. -/
 theorem nonempty_upperStar_comp_shriek_iso_tensor_constant :
@@ -87,7 +86,9 @@ theorem nonempty_upperStar_comp_shriek_iso_tensor_constant :
       Prod.sectR ((derivedLowerShriek k₀ l f).obj U) _ ⋙
         nativeConstructibleTensor k₀ l Y :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun g ↦ by
-      simp [nativeCompactProjectionLeft, nativeConstructibleTensor]
+      simp only [Functor.comp_obj, Functor.prod_obj, Functor.id_obj, Functor.comp_map,
+        Prod.sectR_map, Functor.prod_map, Functor.id_map, Iso.refl_hom, Category.comp_id,
+        Category.id_comp]
       erw [(derivedLowerShriek k₀ l f).map_id U])
   exact ⟨Functor.isoWhiskerLeft (upperStar f)
       (Functor.isoWhiskerRight

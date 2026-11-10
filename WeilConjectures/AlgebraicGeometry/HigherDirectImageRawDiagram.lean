@@ -39,6 +39,7 @@ private theorem five_factor_zero
     (a ≫ b) ≫ F.map (0 : X ⟶ Y) ≫ c ≫ d = 0 := by
   simp only [Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
 
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 400000 in

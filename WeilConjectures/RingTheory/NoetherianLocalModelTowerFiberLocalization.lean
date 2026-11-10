@@ -106,8 +106,7 @@ theorem NoetherianLocalModelTower.fiber_localization
     (Ideal.Quotient.mk (X.fiberIdealS j)) (by ext; rfl) (by ext; rfl)
   have hP : Function.Surjective P := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero P⟩
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy =>
       obtain ⟨x, rfl⟩ := hx
       obtain ⟨y, rfl⟩ := hy
@@ -121,8 +120,7 @@ theorem NoetherianLocalModelTower.fiber_localization
     apply RingHom.ext
     intro x
     simp only [RingHom.comp_apply]
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy => simp [hx, hy]
     | tmul b a => simp [P, q, hg, f₁, f₂, NoetherianLocalModelTower.fiberTMap,
         NoetherianLocalModelTower.fiberφ]

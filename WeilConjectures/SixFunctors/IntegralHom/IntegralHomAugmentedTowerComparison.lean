@@ -43,7 +43,7 @@ Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
@@ -52,6 +52,10 @@ universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace WeilConjectures.IntegralHom
+
+attribute [local implicit_reducible] completedIntegralCoefficientSheaf
+  completedIntegralCommRingSheafUnrestricted
+  completedIntegralCommRingSheaf CategoryTheory.sheafCompose
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

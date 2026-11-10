@@ -42,6 +42,12 @@ universe u
 
 open CategoryTheory Opposite TopologicalSpace
 
+namespace PresheafOfModules
+
+export PresheafOfModulesOfCommRing (Derivation')
+
+end PresheafOfModules
+
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} (M : X.Modules)
@@ -320,6 +326,7 @@ lemma ofIsAffineOpen_app_basicOpen (g : Γ(X, U)) :
       basicOpenDerivation hU δ hδ g :=
   AddMonoidHom.ext fun a ↦ glue_app_basis (O := fun g : Γ(X, U) ↦ X.basicOpen g)
     (fun g ↦ X.basicOpen_le g) _ _ _ g a
+
 
 lemma ofIsAffineOpen_app_self (a : Γ(X, U)) : (ofIsAffineOpen hU δ hδ).app U le_rfl a = δ a :=
   (isGlueValue_glue_app (O := fun g : Γ(X, U) ↦ X.basicOpen g) _ _ _ le_rfl a).unique

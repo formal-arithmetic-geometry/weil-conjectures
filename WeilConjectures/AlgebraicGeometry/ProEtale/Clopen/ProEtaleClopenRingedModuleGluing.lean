@@ -422,7 +422,7 @@ private theorem gluingCounit_isIso {X : Scheme.{t}} {I : Type w} {Y : I → Sche
           fun k ↦ if h : k = i then by subst k; exact x else 0
         refine ⟨z, ?_⟩
         change (F i).val.map (clopenDiagonal (j i) W.unop).op (z i) = y
-        simpa only [z, dif_pos rfl] using hx
+        simpa only [z, dite_eq_left rfl] using hx
     let e := PresheafOfModules.isoMk (fun W ↦ asIso (f.app W)) (fun {_ _} g ↦ f.naturality g)
     have : IsIso f := by change IsIso e.hom; infer_instance
     have : IsIso ((SheafOfModules.forget _).map
@@ -579,10 +579,10 @@ private def coordinateBicone {J : Type*} (D : J → Type*)
       simp [coordinateProjection, coordinateInclusion, coordinateInsertion,
         coordinateTransport, NatTrans.pi', Functor.pi', Pi.eval]
     · have hz : IsZero ((coordinateInsertion D i).obj (M i) l) := by
-        simpa only [coordinateInsertion, Functor.pi'_obj, dif_neg hl, Functor.const_obj_obj]
+        simpa only [coordinateInsertion, Functor.pi'_obj, dite_eq_right hl, Functor.const_obj_obj]
           using (HasZeroObject.zero (C := D l)).choose_spec
       exact hz.eq_of_src _ _
-  · simp only [dif_neg h]
+  · simp only [dite_eq_right h]
     apply NatTrans.ext
     funext M l
     by_cases hi : i = l

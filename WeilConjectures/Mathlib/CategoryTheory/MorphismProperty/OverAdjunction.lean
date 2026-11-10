@@ -340,8 +340,6 @@ instance full_post_map_op : (Under.post (Over.map ⊤ hPf).op (X := Opposite.op 
       apply Over.Hom.ext
       simpa [φ] using hψ
     · ext
-      apply Quiver.Hom.unop_inj
-      apply Over.Hom.ext
       rfl
 
 /-- Composition with `f` is essentially surjective on the slices over each object `T`: an
@@ -365,7 +363,6 @@ instance essSurj_post_map_op :
     · apply Quiver.Hom.unop_inj
       apply Over.Hom.ext
       simp [W, t, s]
-      rfl
 
 /-- Composition with `f` induces equivalences on the slices over each object. -/
 instance isEquivalence_post_map_op :

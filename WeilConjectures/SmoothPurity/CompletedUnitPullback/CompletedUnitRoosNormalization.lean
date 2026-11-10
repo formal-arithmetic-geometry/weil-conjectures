@@ -84,7 +84,7 @@ private theorem generic_roos_unit
       CochainComplex.mappingCocone.lift_fst]
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, Pi.lift_π]
+    simp only [Category.assoc, Pi.lift_comp_π]
     exact limit.isoLimitCone_inv_π _ _
   · intro i
     simp only [HomologicalComplex.comp_f, Category.assoc, roosι, roosLift,
@@ -104,8 +104,8 @@ private theorem generic_roos_augmentation_zero
           Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n)) := by
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, Pi.lift_π]
-    erw [Pi.lift_π]
+    simp only [Category.assoc, Pi.lift_comp_π]
+    erw [Pi.lift_comp_π]
     exact (limit.isoLimitCone_inv_π (F := I.asFunctor)
       ⟨HomologicalComplex.coneOfHasLimitEval I.asFunctor,
         HomologicalComplex.isLimitConeOfHasLimitEval I.asFunctor⟩ (op n)).symm

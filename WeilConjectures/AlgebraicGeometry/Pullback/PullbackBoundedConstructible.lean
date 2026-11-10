@@ -104,9 +104,9 @@ private noncomputable def derivedCoefficientComparisonPullbackIso
     finiteCoefficientDerivedComparison Y Λ ⋙ finiteCoefficientDerivedPullback Y Λ f ≅
       (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategory ⋙
         finiteCoefficientDerivedComparison X Λ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (coefficientComparisonPullbackIso f Λ) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 
 end AlgebraicGeometry.ProEtale

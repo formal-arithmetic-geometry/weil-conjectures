@@ -45,6 +45,7 @@ theorem orderedCechTupleOpenMap_isIso {X : Scheme.{u}} {r p : ℕ}
   · exact le_iInf fun k ↦ (prod.fst ≫ Pi.π (fun l ↦ W ⟨t l⟩) k).le
   · exact (prod.snd : (∏ᶜ fun l ↦ W ⟨t l⟩) ⨯ B ⟶ B).le
 
+
 /-- Evaluate a usual Čech presentation on an increasing tuple after pushforward.
 All transports are actual maps, including the extension isomorphism in degree p.
 Source: Stacks 01FJ and 01FK, restriction to ordered tuples.

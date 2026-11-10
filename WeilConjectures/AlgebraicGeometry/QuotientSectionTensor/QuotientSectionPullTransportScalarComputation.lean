@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
@@ -40,12 +42,12 @@ namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 
 open QuotientChange IntegralQuotient
 
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
+
 attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
@@ -96,7 +98,7 @@ theorem section_pull_transport_scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] 
         (((ModuleRingedComparison.equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj
           P)))
       ((ModuleRingedComparison.derivedEquivalence Λ' T).functor.map
-        ((scalarCounit a T).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+        (compute a T P) ≫
         ((ModuleRingedComparison.equivalence Λ' T).functor.mapDerivedCategoryFactors).hom.app
           (((extension a T).mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map (((Functor.mapHomologicalComplexCompIso c.ordinary (.up ℤ) ≪≫

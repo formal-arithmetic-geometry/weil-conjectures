@@ -56,14 +56,12 @@ private noncomputable def tensorEquiv (R S : Type u₁) [CommRing R] [CommRing S
             ((TensorProduct.mk R S N).map_smul r (show S from s)) }
   have h₁ : ∀ x, invFun (toFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have h₂ : ∀ x, toFun (invFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   exact
@@ -71,8 +69,7 @@ private noncomputable def tensorEquiv (R S : Type u₁) [CommRing R] [CommRing S
       invFun := invFun
       map_add' := toFun.map_add
       map_smul' s x := by
-        induction x using TensorProduct.induction_on with
-        | zero => exact (map_zero toFun).trans (show (0 : T) = s • (0 : T) from (smul_zero s).symm)
+        induction x using TensorProduct.inductionOn with
         | tmul s' n => rfl
         | add x y hx hy =>
           rw [smul_add, map_add, hx, hy, map_add]
@@ -118,12 +115,11 @@ theorem homology_vanishes_of_localization_span
         apply ModuleCat.hom_ext
         apply LinearMap.ext
         intro z
-        induction z using TensorProduct.induction_on with
-        | zero => simp
+        induction z using TensorProduct.inductionOn with
         | tmul s x => simp [F, ModuleCat.ExtendScalars.map_tmul, TensorProduct.tmul_add]
         | add z z' hz hz' => simp only [map_add, hz, hz']⟩
     have : F.PreservesHomology := by
-      apply ((Functor.exact_tfae F).out 1 2).mp
+      apply ((Functor.exact_tfae F).out 2 3).mp
       intro S hS
       rw [ShortComplex.ShortExact.moduleCat_exact_iff_function_exact] at hS ⊢
       have := IsLocalization.flat (Localization.Away (f i)) (Submonoid.powers (f i))
@@ -135,8 +131,7 @@ theorem homology_vanishes_of_localization_span
           tensorEquiv A (Localization.Away (f i)) Y
               (g.hom.lTensor (Localization.Away (f i)) x) =
             F.map g (tensorEquiv A (Localization.Away (f i)) X x) := by
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul s x => rfl
         | add x y hx hy => simp only [map_add, hx, hy]
       change Function.Exact (F.map S.f).hom (F.map S.g).hom

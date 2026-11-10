@@ -101,6 +101,12 @@ theorem proEtaleIntegralDirectImage_preservesCoproduct
   classical
   let C := proEtaleRingModules T S
   let D := proEtaleRingModules U R
+  have : HasColimitsOfShape (Discrete I) C := inferInstance
+  have : HasColimitsOfShape (Discrete I) (CochainComplex C ℤ) := by
+    refine ⟨fun F ↦ ?_⟩
+    have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+      HasColimitsOfShape.has_colimit _
+    exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
   let F := proEtaleRingModuleDirectImage h R S c
   have : EnoughInjectives C := moduleEnoughInjectives T S
   let adj := (proEtaleRingModuleOperations_properties h R S c).2.2.2.2.some
@@ -127,8 +133,15 @@ theorem proEtaleIntegralDirectImage_preservesCoproduct
   have : PreservesColimitsOfShape (Discrete I) (F.rightDerived 0) := hpres 0
   have : PreservesColimitsOfShape (Discrete I) F :=
     preservesColimitsOfShape_of_natIso F.rightDerivedZeroIsoSelf
-  have heval (n : ℤ) : (∐ E).X n ≅ ∐ (fun i ↦ (E i).X n) :=
-    PreservesCoproduct.iso (HomologicalComplex.eval C (.up ℤ) n) E
+  have heval (n : ℤ) : (∐ E).X n ≅ ∐ (fun i ↦ (E i).X n) := by
+    have (k : ℤ) : HasColimit
+        (Discrete.functor E ⋙ HomologicalComplex.eval C (.up ℤ) k) :=
+      HasColimitsOfShape.has_colimit _
+    have : PreservesColimit (Discrete.functor E) (HomologicalComplex.eval C (.up ℤ) n) :=
+      preservesColimit_of_preserves_colimit_cocone
+        (HomologicalComplex.isColimitCoconeOfHasColimitEval (Discrete.functor E))
+        (colimit.isColimit _)
+    exact PreservesCoproduct.iso (HomologicalComplex.eval C (.up ℤ) n) E
   have : (∐ E).IsStrictlyGE N := by
     rw [CochainComplex.isStrictlyGE_iff]
     intro n hn

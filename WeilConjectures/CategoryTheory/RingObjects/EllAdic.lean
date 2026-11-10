@@ -93,12 +93,14 @@ def finiteIntermediateFieldValued : Subring C(U, PadicAlgCl ℓ) where
     rintro f g ⟨E, hE, hf⟩ ⟨F, hF, hg⟩
     refine ⟨E ⊔ F, by have := hE; have := hF; infer_instance, fun x ↦ ?_⟩
     rw [ContinuousMap.mul_apply]
-    exact mul_mem (SetLike.le_def.mp le_sup_left (hf x)) (SetLike.le_def.mp le_sup_right (hg x))
+    exact mul_mem (IsConcreteLE.le_iff.mp le_sup_left (hf x))
+      (IsConcreteLE.le_iff.mp le_sup_right (hg x))
   add_mem' := by
     rintro f g ⟨E, hE, hf⟩ ⟨F, hF, hg⟩
     refine ⟨E ⊔ F, by have := hE; have := hF; infer_instance, fun x ↦ ?_⟩
     rw [ContinuousMap.add_apply]
-    exact add_mem (SetLike.le_def.mp le_sup_left (hf x)) (SetLike.le_def.mp le_sup_right (hg x))
+    exact add_mem (IsConcreteLE.le_iff.mp le_sup_left (hf x))
+      (IsConcreteLE.le_iff.mp le_sup_right (hg x))
   one_mem' := ⟨⊥, inferInstance, fun _ ↦ one_mem ⊥⟩
   zero_mem' := ⟨⊥, inferInstance, fun _ ↦ zero_mem ⊥⟩
   neg_mem' := by
@@ -147,6 +149,7 @@ lemma sheafCompose_obj_padicIntSheaf :
       (sheafCompose (ProEt.topology X) AddCommGrpCat.uliftFunctor.{u + 1}).obj
         (X.ellAdicSheaf ℓ) :=
   rfl
+
 
 /-- The sheaf of rings `ℚ_ℓ,X` on `X_proét`: the sheaf of continuous maps `U ↦ C(U, ℚ_ℓ)` with
 the pointwise ring structure [Bhatt–Scholze, Definition 6.8.1]. -/
@@ -269,6 +272,7 @@ lemma padicAlgClRingPresheaf_map_apply {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
     (g : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ U.unop.left)) :
     ((padicAlgClRingPresheaf X ℓ).map f g).down.1 = g.down.1.comp f.unop.left.base.hom :=
   rfl
+
 
 /-- The ring object `ℚ̄_ℓ,X` of abelian sheaves on `X_proét`: the sheafification of the
 presheaf of rings `U ↦ {f ∈ C(U, ℚ̄_ℓ) | f takes values in a finite subextension of ℚ_ℓ}`,

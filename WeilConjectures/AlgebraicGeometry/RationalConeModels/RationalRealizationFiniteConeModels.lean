@@ -535,7 +535,7 @@ private theorem finite_construction_iso
   apply finite_construction_step l E X G 0 A B (finite_construction_zero l E X G) hA
   refine ⟨0, 0, eB.inv, 0, ?_⟩
   apply isomorphic_distinguished _ (contractible_distinguished₁ A.obj)
-  exact Triangle.isoMk _ _ z (Iso.refl _) eB (by simp) (by simp; rfl) (by simp)
+  exact Triangle.isoMk _ _ z (Iso.refl _) eB (by simp) (by simp) (by simp)
 
 private theorem finite_construction_shift
     (G : Integral l E X → Prop) (A : Integral l E X)

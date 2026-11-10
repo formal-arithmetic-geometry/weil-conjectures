@@ -299,7 +299,7 @@ theorem attachEnd_factor_mono
     apply (cancel_mono (image.ι α)).mp
     simp [Category.assoc, u, hfac]
   rw [h1, Category.assoc, attachEpi_oldEpi U V t r u.hom inferInstance ρ hρ]
-  simp only [h2, attachEnd, dif_neg hα]
+  simp only [h2, attachEnd, dite_eq_right hα]
   rfl
 
 
@@ -399,19 +399,19 @@ def attachmentTerm
   classical
   by_cases hq : q.val < n + 1
   · by_cases hr : r.val < n + 1
-    · exact eqToHom (by simp only [attachmentTerm, dif_pos hr]) ≫
+    · exact eqToHom (by simp only [attachmentTerm, dite_eq_left hr]) ≫
         operator U (q := ⟨q.val, hq⟩) (r := ⟨r.val, hr⟩) α ≫
-          eqToHom (by simp only [attachmentTerm, dif_pos hq])
+          eqToHom (by simp only [attachmentTerm, dite_eq_left hq])
     · have hb := r.isLt
       have he : r = ⟨n + 1, Nat.lt_succ_self _⟩ := Fin.ext (by dsimp; omega)
       subst r
       exact eqToHom (by simp [attachmentTerm]) ≫ attachFace U V Q b ⟨q.val, hq⟩ α ≫
-        eqToHom (by simp only [attachmentTerm, dif_pos hq])
+        eqToHom (by simp only [attachmentTerm, dite_eq_left hq])
   · have hb := q.isLt
     have he : q = ⟨n + 1, Nat.lt_succ_self _⟩ := Fin.ext (by dsimp; omega)
     subst q
     by_cases hr : r.val < n + 1
-    · exact eqToHom (by simp only [attachmentTerm, dif_pos hr]) ≫
+    · exact eqToHom (by simp only [attachmentTerm, dite_eq_left hr]) ≫
         attachLift U V ⟨r.val, hr⟩ α ≫ eqToHom (by simp [attachmentTerm])
     · have hb := r.isLt
       have he : r = ⟨n + 1, Nat.lt_succ_self _⟩ := Fin.ext (by dsimp; omega)
@@ -439,7 +439,7 @@ theorem attachmentMap_id
     attachmentMap U V Q b q q (𝟙 _) = 𝟙 _ := by
   classical
   by_cases hq : q.val < n + 1
-  · simp only [attachmentMap, dif_pos hq]
+  · simp only [attachmentMap, dite_eq_left hq]
     have hmap : operator U (q := ⟨q.val, hq⟩) (r := ⟨q.val, hq⟩) (𝟙 _) = 𝟙 _ := by
       exact U.simplicial.map_id _
     rw [hmap]
@@ -596,7 +596,7 @@ theorem attachFace_refinement {K : SimplicialObject X.Etale}
     change (oldInclusion A.U V a ≫ attachFace A.U V Q b q α) ≫ _ = _
     rw [oldInclusion_face, Category.assoc, old_naturality]
     simp only [topRefinement, Category.assoc, coprod.inr_desc_assoc,
-      Sigma.ι_desc_assoc]
+      Sigma.ι_comp_desc_assoc]
     rw [← K.map_comp]
     rfl
 
@@ -615,7 +615,7 @@ theorem attachEpi_refinement {K : SimplicialObject X.Etale}
     (A.U.inclusion a.1 ≫ operator A.U a.2.val) ≫
       (A.f.app (op (degree q)) ≫ K.map σ.op)
   simp only [oldInclusion, topRefinement, Category.assoc, coprod.inr_desc,
-    Sigma.ι_desc, precomposeLabel]
+    Sigma.ι_comp_desc, precomposeLabel]
   rw [← Category.assoc (operator A.U a.2.val), old_naturality]
   rw [Category.assoc, ← K.map_comp]
   rfl
@@ -735,7 +735,7 @@ theorem attachedRefinement_restrict {K : SimplicialObject X.Etale}
   ext Δ
   change refinementComponent A V g
     ⟨Δ.unop.obj.len, Nat.lt_succ_of_le (Δ.unop.property.trans (Nat.le_succ n))⟩ = _
-  simp only [refinementComponent, dif_pos (Nat.lt_succ_of_le Δ.unop.property),
+  simp only [refinementComponent, dite_eq_left (Nat.lt_succ_of_le Δ.unop.property),
     NatTrans.comp_app, eqToHom_app]
 
 end AlgebraicGeometry.SchemeSplitAttachment

@@ -58,6 +58,7 @@ theorem etaleRestrictedSectionsLift_unique
   apply (cancel_mono (T.L.step q).arrow).mp
   rw [hg, etaleRestrictedSectionsLift_arrow]
 
+
 /-- The canonical sections lift is an isomorphism of complexes.
 Source: Stacks, Tag 015J, proof remark (3); finite diagonal sums.
 

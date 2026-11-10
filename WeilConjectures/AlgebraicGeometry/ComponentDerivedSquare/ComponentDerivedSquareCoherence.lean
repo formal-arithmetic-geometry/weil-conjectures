@@ -57,8 +57,8 @@ private theorem derived_identity (e : F ⋙ G ≅ H ⋙ F) (i : H ≅ 𝟭 A) (j
   rw [he] at ht
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app K)]
-  simp only [Iso.hom_inv_id_app_assoc]
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app K)]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% hi, hu]
   erw [Category.comp_id]
   rw [← reassoc_of% hj, hv]

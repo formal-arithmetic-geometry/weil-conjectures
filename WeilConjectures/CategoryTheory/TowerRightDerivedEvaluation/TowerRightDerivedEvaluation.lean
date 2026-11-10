@@ -145,8 +145,8 @@ private theorem descend_comparison
       R.map f ≫ c Y = c X ≫ S.map f := by
     have ht := dn' (j X) (j Y) (hj X) (hj Y) ((e X).inv ≫ f ≫ (e Y).hom)
     have ht' := congrArg (fun t ↦ R.map (e X).hom ≫ t ≫ S.map (e Y).inv) ht
-    simpa only [c, Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc,
-      Iso.map_inv_hom_id_assoc, Iso.map_hom_inv_id, Category.comp_id] using ht'
+    simpa only [c, Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc,
+      Iso.inv_hom_id_map_assoc, Iso.hom_inv_id_map, Category.comp_id] using ht'
   have ci (X : DerivedCategory C) : IsIso (c X) := by
     have := ha (j X) (hj X)
     have := hb (j X) (hj X)
@@ -158,7 +158,7 @@ private theorem descend_comparison
     have ht := dn' (j (Q.obj I)) I (hj _) hI (e (Q.obj I)).inv
     have ht' := congrArg (fun t ↦ R.map (e (Q.obj I)).hom ≫ t) ht
     change c (Q.obj I) = _
-    simpa only [c, Category.assoc, Iso.map_hom_inv_id_assoc] using ht'.symm
+    simpa only [c, Category.assoc, Iso.hom_inv_id_map_assoc] using ht'.symm
   refine ⟨β, ?_⟩
   intro K
   obtain ⟨I, f, hI, hf⟩ := enough K

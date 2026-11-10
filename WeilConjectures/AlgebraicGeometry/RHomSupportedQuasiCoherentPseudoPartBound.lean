@@ -105,6 +105,11 @@ theorem rhom_supported_quasiCoherent_pseudo_part_bound
   obtain ⟨b, hb⟩ := hPbound
   obtain ⟨a, ha⟩ := hGE
   let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
+  let : Category.{w} (@DerivedCategory (SheafOfModules.{u}
+      ((sheafCompose ((Opens.grothendieckTopology X.toRingedSpace).over U)
+        (forget₂ CommRingCat RingCat)).obj (X.toRingedSpace.sheaf.over U))) _ _
+      (inferInstanceAs (HasDerivedCategory.{w} D))) :=
+    inferInstanceAs (Category.{w} (DerivedCategory D))
   let QU := DerivedCategory.Q (C := D)
   let F := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   have hLU : (F.mapDerivedCategory.obj L).IsGE a := by

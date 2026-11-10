@@ -201,6 +201,7 @@ lemma subobjectEval_inf (S T : Subobject K) (n : ℤ) :
           (monotone_subobjectEval K m inf_le_right)))
   rw [← h, subobjectEval_subcomplexOfDegreewise]
 
+
 /-- Degreewise evaluation commutes with binary unions. -/
 lemma subobjectEval_sup (S T : Subobject K) (n : ℤ) :
     subobjectEval K n (S ⊔ T) = subobjectEval K n S ⊔ subobjectEval K n T := by
@@ -248,6 +249,7 @@ lemma subobjectEval_pullback (T : Subobject L) (n : ℤ) :
   exact (Subobject.pullback_obj_mk
     ((HomologicalComplex.eval C (ComplexShape.up ℤ) n).map_isPullback
       (Subobject.isPullback φ T))).symm
+
 
 /-- Degreewise evaluation commutes with images. -/
 lemma subobjectEval_imageSubobject (n : ℤ) :
@@ -310,6 +312,7 @@ lemma subcomplexClosure_le {S : Subobject K} (h : ∀ n, W n ≤ subobjectEval K
     subcomplexClosure K W ≤ S :=
   (subcomplexOfDegreewise_le_iff K _ (exists_sup_exists_le K W) S).2 (fun n =>
     sup_le (h n) ((exists_obj_mono _ (h (n - 1))).trans (exists_subobjectEval_le S (n - 1) n)))
+
 
 end Closure
 

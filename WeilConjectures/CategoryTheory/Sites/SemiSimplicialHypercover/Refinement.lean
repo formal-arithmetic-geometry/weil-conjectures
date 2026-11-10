@@ -262,10 +262,11 @@ lemma Refinement.stageZero_liftSieve_mem (hU : U.IsHypercover J)
   rintro T'' g' ⟨l, hl⟩
   refine ⟨pullback.lift (g' ≫ g ≫ Pi.lift x) l ?_, fun i ↦ ?_⟩
   · refine U.matching_hom_ext fun i ↦ ?_
-    simp only [Category.assoc, matchingLift_π, Pi.lift_π_assoc, toMatching_π, reassoc_of% hl, hy]
+    simp only [Category.assoc, matchingLift_π, Pi.lift_comp_π_assoc, toMatching_π,
+      reassoc_of% hl, hy]
   · refine (pullback.lift_fst_assoc _ _ _ _).trans ?_
     exact (Category.assoc _ _ _).trans ((congrArg (g' ≫ ·) ((Category.assoc _ _ _).trans
-      (congrArg (g ≫ ·) (Pi.lift_π x i)))).trans (Category.assoc _ _ _).symm)
+      (congrArg (g ≫ ·) (Pi.lift_comp_π x i)))).trans (Category.assoc _ _ _).symm)
 
 /-- The refinement of a hypercover along coverings `π k : W k ⟶ U.obj k` is a hypercover. -/
 lemma IsHypercover.refinement (hU : U.IsHypercover J)

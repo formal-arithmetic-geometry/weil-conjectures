@@ -133,7 +133,7 @@ theorem stalk_product_residue_comparison
     dsimp only [d]
     rw [Category.assoc, Category.assoc, pullback.condition]
     erw [← hc]
-    simp only [Category.assoc, Iso.inv_hom_id_assoc, Sigma.ι_desc_assoc]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, Sigma.ι_comp_desc_assoc]
     rfl
   rcases hdxy with rfl
   have hk : f (d y) = a (b y) := by

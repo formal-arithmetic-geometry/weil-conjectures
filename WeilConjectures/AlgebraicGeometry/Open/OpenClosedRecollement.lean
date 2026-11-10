@@ -105,7 +105,7 @@ theorem exists_functorial_distTriang_openClosed
     refine (Functor.isZero_mapDerivedCategory_obj
       (openImmersionLowerShriek A j ⋙ upperStar A i) M.obj (fun n ↦ ?_)).of_iso
       (((openImmersionLowerShriek A j).mapDerivedCategoryCompIso
-        (upperStar A i)).symm.app M.obj)
+        (upperStar A i)).app M.obj)
     exact isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A j i
       (disjoint_range_of_range_eq_compl j i hij) _
   have hzero' (N : _root_.DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A)) :
@@ -115,7 +115,7 @@ theorem exists_functorial_distTriang_openClosed
       ((lowerStar A i).mapDerivedCategory.obj N.obj))
     refine (Functor.isZero_mapDerivedCategory_obj
       (lowerStar A i ⋙ upperStar A j) N.obj (fun n ↦ ?_)).of_iso
-      (((lowerStar A i).mapDerivedCategoryCompIso (upperStar A j)).symm.app N.obj)
+      (((lowerStar A i).mapDerivedCategoryCompIso (upperStar A j)).app N.obj)
     exact isZero_upperStar_lowerStar_of_disjoint_range A j i
       (disjoint_range_of_range_eq_compl j i hij) _
   have hsheaf : JointlyReflectIsomorphisms (pairFunctor (upperStar A j) (upperStar A i)) := by

@@ -91,7 +91,7 @@ theorem algHom_eq_of_henselianLocalRing_etale
       ‹Etale (Scheme.Spec.map (CommRingCat.ofHom φ).op)›
     obtain ⟨ρ, _, hunique⟩ :=
       IsLocalRing.existsUnique_algHom_of_monic_simple_root_lifting_etale
-      (((HenselianLocalRing.TFAE S).out 0 1).mp
+      (((HenselianLocalRing.TFAE S).out 1 2).mp
         (show HenselianLocalRing S from inferInstance)) q' hq hspec
     exact (hunique σ hσ).trans (hunique τ hτ).symm
 

@@ -25,14 +25,12 @@ attribute [local instance 4000]
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   CategoryTheory.Mod.instAbelian
 attribute [local instance 5000] AlgebraicGeometry.ProEtale.sheafMonoidalCategory
--- Match the native pullback coherence's canonical sheafification instance.
-attribute [local instance 10000] CategoryTheory.sheafToPresheaf_isRightAdjoint
 attribute [local irreducible] upperStar lowerStar upperStarFromPoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   ClosedTestDerivedExchangeModel.exchange
 attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
   Mod.monoidalCategory Mod.monoidalClosed Mod.monoidalCategoryStruct
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   moduleObjectDerivedExchange condensedAmbientExchange
   pullbackSquareComparison derivedUpperStarLowerStarAdjunction
 -- Instance search must find the same sheafification and `EssentiallySmall` instances as the
@@ -286,7 +284,7 @@ private theorem exactExchange_eq_closed
       ClosedTestDerivedExchangeModel.square, ClosedTestDerivedExchangeModel.pullComp,
       ClosedTestDerivedExchangeModel.pull, Functor.mapDerivedCategoryNatIso_trans,
       Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Category.assoc, derived_eqToIso]
+      Iso.symm_hom, Iso.symm_inv, Category.assoc, derived_eqToIso]
   rw [ClosedTestDerivedExchangeModel.exchange, squareExchange_eq_mate]
   unfold exactCondensedExchangeFor
   rw [hsq]

@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -69,10 +71,26 @@ private theorem affine_stalkComparison_normalized
       inv ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
           (derivedPullback g').map c.e.hom ≫ φ := by
+    simp only [cast_eq] at hrep
     rw [← hrep]
-    simp only [IsIso.inv_hom_id_assoc]
-  simp only [SingleComplexBaseChange.stalkComparison, affineBaseChangeIntoPullback,
-    Category.assoc, Functor.map_comp]
+    erw [IsIso.inv_hom_id_assoc]
+  let : HasDerivedCategory.{w} X'.Modules :=
+    inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace)))
+  have htransport :
+      (DerivedCategory.quotientCompQhIso.{w} _).inv.app T ≫
+        inv ((SingleComplexBaseChange.counit g').app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
+        (derivedPullback g').map ((DerivedCategory.quotientCompQhIso _).hom.app c.P ≫ c.e.hom) =
+      inv ((SingleComplexBaseChange.counit g').app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
+        (derivedPullback g').map c.e.hom := by
+    simp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
+    repeat erw [Category.id_comp]
+  dsimp only [affineBaseChangeIntoPullback]
+  erw [htransport]
+  simp only [SingleComplexBaseChange.stalkComparison, Category.assoc, Functor.map_comp]
   dsimp only [st, H, T] at ht
   rw [reassoc_of% ht]
   have hrepmap := congrArg (fun z => st.map (H.map z)) hrep'

@@ -99,10 +99,10 @@ private theorem coneHorizontalSummand_d_factors
       have hsub₂ : (n + 1).toNat - h = (n.toNat - h) + 1 := by omega
       have hs₁ := hs (h + 1) (by omega)
       have hs₂ := hs h le_rfl
-      simp only [coneHorizontalSummand, dif_pos hn'] at hs₁ hs₂
+      simp only [coneHorizontalSummand, dite_eq_left hn'] at hs₁ hs₂
       rw [hsub₁] at hs₁
       rw [hsub₂] at hs₂
-      rw [coneHorizontalSummand, dif_pos hn,
+      rw [coneHorizontalSummand, dite_eq_left hn,
         HomologicalComplex.extend_d_eq _ _ (Int.toNat_of_nonneg hn)
           (Int.toNat_of_nonneg hn')]
       simp only [Category.assoc, Iso.inv_hom_id_assoc]
@@ -192,10 +192,10 @@ private theorem coneHorizontalSummand_map_factors
       (HomologicalComplex.extendMap (total.map f (ComplexShape.up ℕ))
         ComplexShape.embeddingUpNat).f n ≫ a) := by
   by_cases hn : 0 ≤ n
-  · rw [coneHorizontalSummand, dif_pos hn,
+  · rw [coneHorizontalSummand, dite_eq_left hn,
       HomologicalComplex.extendMap_f _ _ (Int.toNat_of_nonneg hn)]
     simp only [Category.assoc, Iso.inv_hom_id_assoc, ιTotalOrZero_map_assoc]
-    simpa only [coneHorizontalSummand, dif_pos hn, Category.assoc] using
+    simpa only [coneHorizontalSummand, dite_eq_left hn, Category.assoc] using
       Subobject.factors_of_factors_right ((f.f h).f (n.toNat - h)) hs
   · simp [coneHorizontalSummand, hn, Subobject.factors_zero]
 

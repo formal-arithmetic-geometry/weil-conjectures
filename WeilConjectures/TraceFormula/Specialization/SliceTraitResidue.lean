@@ -131,6 +131,7 @@ theorem isSeparable_sliceTraitResidueEval
     letI := (slicePrimeResidueFieldHom b₁).toAlgebra
     IsSeparable (RingHom.ker (sliceTraitPointRingHom b₁)).ResidueField
       (sliceTraitResidueEval b₁ z) := by
+  let : Field (ResidueField (strictHenselization (sliceTraitPoint b₁))) := ResidueField.field _
   obtain ⟨s, f, hsep, heq⟩ := strictHenselization_residue_separable_model
     (A := strictHenselization (sliceTraitPoint b₁)) (sliceTraitPoint b₁) (Iso.refl _)
   have hg : Spec.map (CommRingCat.ofHom ((sliceTraitResidueEval b₁).comp f)) ≫

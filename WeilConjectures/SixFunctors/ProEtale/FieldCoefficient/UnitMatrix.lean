@@ -220,7 +220,7 @@ noncomputable def fieldConstantSheafMul (a : fieldFunctions Λ V) :
           exact congrArg ULift.up (smul_mul_assoc _ _ _) }
      naturality U U' g := by
        ext s
-       refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+       refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
        change s.down.1 (g.unop.left x) * a.1 (U'.unop.hom x) =
          s.down.1 (g.unop.left x) * a.1 (U.unop.hom (g.unop.left x))
        congr 1
@@ -416,9 +416,9 @@ lemma unitMatrix_id [DecidableEq ι] :
   simp only [unitMatrix, Matrix.one_apply, Category.id_comp]
   by_cases h : i = j
   · subst h
-    rw [biproduct.ι_π_self, if_pos rfl]
+    rw [biproduct.ι_π_self, ite_eq_left rfl]
     rfl
-  · rw [biproduct.ι_π_ne _ (Ne.symm h), if_neg h]
+  · rw [biproduct.ι_π_ne _ (Ne.symm h), ite_eq_right h]
     rfl
 
 omit [IsUltrametricDist Λ] in
@@ -524,7 +524,7 @@ lemma unitMatrix_blockMap :
       simp [sumComplEquiv]
     rw [unitMatrix, this, blockMap]
     simp only [Category.assoc]
-    erw [biproduct.ι_toSubtype_assoc, dif_neg hj]
+    erw [biproduct.ι_toSubtype_assoc, dite_eq_right hj]
     simp only [Limits.zero_comp]
     rcases x with a | ⟨i, hi⟩ <;> rfl
 

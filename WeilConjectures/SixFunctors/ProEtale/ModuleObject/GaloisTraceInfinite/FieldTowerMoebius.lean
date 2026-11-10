@@ -228,10 +228,10 @@ theorem exists_galoisTowerMoebiusDecomposition :
     exact galoisTower_proj_bot h Λ hd (hc n)
   · have h₁ : e n k ≫ π n k = e n k := by
       rw [he]
-      exact (mul_moebiusComponent (hπ n) k k).trans (if_pos le_rfl)
+      exact (mul_moebiusComponent (hπ n) k k).trans (ite_eq_left le_rfl)
     have h₂ : e n k ≫ π n ⊥ = 0 := by
       rw [he]
-      exact (mul_moebiusComponent (hπ n) k ⊥).trans (if_neg fun hle ↦ hk (le_bot_iff.1 hle))
+      exact (mul_moebiusComponent (hπ n) k ⊥).trans (ite_eq_right fun hle ↦ hk (le_bot_iff.1 hle))
     change ∑ i, e n k ≫ _ = 0
     rw [← comp_sum, ← h₁, assoc, hπdef,
       Fintype.sum_equiv (Fintype.equivFin _).symm _ (fun a ↦ infAction Λ (K.X n)
@@ -243,7 +243,7 @@ theorem exists_galoisTowerMoebiusDecomposition :
   · have h₀ : π n j ≫ e n k = 0 := by
       rw [he]
       exact (moebiusComponent_mul (hπ n) k j).trans
-        (if_neg fun hle ↦ hk (Finset.mem_Iic.2 hle))
+        (ite_eq_right fun hle ↦ hk (Finset.mem_Iic.2 hle))
     change _ ≫ e n k = 0
     rw [← galoisTower_infTransport_comp_proj_self h Λ hd (hc n) j, ← hπdef, assoc, h₀,
       comp_zero]

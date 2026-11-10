@@ -140,7 +140,7 @@ lemma surjective_nsmul_H_zero_of_injective (I : Sheaf J AddCommGrpCat.{max w v})
       intro x y hxy
       change n • x = n • y at hxy
       have : n • x.down = n • y.down := congrArg ULift.down hxy
-      exact ULift.ext _ _ (nsmul_right_injective hn this)
+      exact ULift.ext (nsmul_right_injective hn this)
     have : Mono ((Functor.const Cᵒᵖ).map (n • 𝟙 (AddCommGrpCat.of (ULift.{max w v} ℤ)))) :=
       NatTrans.mono_of_mono_app _
     have : Mono ((presheafToSheaf J _).map

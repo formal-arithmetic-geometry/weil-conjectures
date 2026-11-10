@@ -251,13 +251,13 @@ lemma mapDerivedCategoryCompIso_inv_app_Qh_comp_factorsh (F : C₁ ⥤ C₂) (G 
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (K : HomotopyCategory C₁ (ComplexShape.up ℤ)) :
-    (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Qh.obj K) ≫
+    (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Qh.obj K) ≫
         (F ⋙ G).mapDerivedCategoryFactorsh.hom.app K =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app K) ≫
         G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map ((mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))
           (ComplexShape.up ℤ)).hom.app K) := by
-  rw [← mapDerivedCategoryCompIso_fach, Iso.inv_hom_id_app_assoc]
+  rw [← mapDerivedCategoryCompIso_fach, Iso.hom_inv_id_app_assoc]
 
 end MapDerivedCategory
 
@@ -288,5 +288,6 @@ lemma mapHomotopyCategory_obj_quotient_obj (F : V ⥤ W) [F.Additive] (K : Homol
     (F.mapHomotopyCategory c).obj ((HomotopyCategory.quotient V c).obj K) =
       (HomotopyCategory.quotient W c).obj ((F.mapHomologicalComplex c).obj K) :=
   rfl
+
 
 end CategoryTheory.Functor

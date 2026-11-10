@@ -5,9 +5,10 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationShift
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcActualScalarPullbackSupplement
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationShift
 
 /-! # Identity coherence of scalar operation comparisons
 

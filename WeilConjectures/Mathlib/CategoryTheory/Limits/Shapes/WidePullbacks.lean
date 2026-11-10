@@ -163,6 +163,7 @@ lemma isPullback_ne {β : Type*} {X : C}
     grind
   · exact limit.isLimit _
 
+
 end WidePullbackCone
 
 end

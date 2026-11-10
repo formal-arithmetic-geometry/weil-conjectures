@@ -169,7 +169,7 @@ theorem topologicalKrullDim_fiber_genericPoint_add_one_le {S X : Scheme.{u}} [Is
     have : LocallyOfFiniteType (φ ≫ π.fiberToSpecResidueField η) := by
       rw [hφs]; dsimp [Scheme.Hom.fiberToSpecResidueField]; infer_instance
     exact locallyOfFiniteType_of_comp φ (π.fiberToSpecResidueField η)
-  have hw := φ.closePoints_subset_preimage_closedPoints hzc
+  have hw := φ.closedPoints_subset_preimage_closedPoints hzc
   have hwη : π.fiberι η (φ z) = η' := by
     rw [← Scheme.Hom.comp_apply, hφι, Scheme.Hom.comp_apply]; exact hyF
   apply AffineSpace.not_subsingleton_fiber S η

@@ -37,7 +37,7 @@ theorem topologicalKrullDim_projectiveLine_le_one (k : Type u) [Field k] :
   refine (IsHomeomorph.topologicalKrullDim_eq _ (ProjectiveSpace.standardOpenIso _ _ i ≪≫
     AffineSpace.SpecIso _ _).hom.homeomorph.isHomeomorph).trans_le ?_
   refine (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _).trans_le ?_
-  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field]
+  rw [MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite, ringKrullDim_eq_zero_of_field]
   simp [Nat.card_eq_fintype_card, Fintype.card_subtype_compl]
 
 /-- The projective line over a field is a curve. -/

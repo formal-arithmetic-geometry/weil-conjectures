@@ -74,6 +74,10 @@ theorem isGrothendieckAbelian_coefficientUniverse
   have : HasFilteredColimitsOfSize.{w, w} B := ⟨fun _ _ _ ↦ inferInstance⟩
   have : AB5OfSize.{w, w} B :=
     ⟨fun K _ _ ↦ HasExactColimitsOfShape.domain_of_functor K (SheafOfModules.toSheaf.{w} S)⟩
+  have : HasColimitsOfShape (Discrete (SmallModel.{w} C)) (PresheafOfModules.{w} S.obj) :=
+    PresheafOfModules.hasColimitsOfShape S.obj _
+  have : HasColimitsOfShape (Discrete (SmallModel.{w} C)) B :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf S _
   have : HasSeparator B := ⟨_, hsep.isSeparator_coproduct⟩
   exact {}
 

@@ -119,7 +119,7 @@ theorem truncated_directImage_affine_finiteSupport
       by_cases e : j = i
       · subst j
         simp [P, M]
-      · simp only [dif_neg e]
+      · simp only [dite_eq_right e]
         ext V x
         rfl
     have hm : Mono (Sigma.desc (fun i ↦ G.map (u i))) := by
@@ -170,7 +170,7 @@ theorem truncated_directImage_affine_finiteSupport
             ModuleCat.ofHom φ := by
           apply Sigma.hom_ext
           intro i
-          rw [Sigma.ι_desc, ← Category.assoc, ModuleCat.ι_coprodIsoDirectSum_hom]
+          rw [Sigma.ι_comp_desc, ← Category.assoc, ModuleCat.ι_coprodIsoDirectSum_hom]
           ext x
           simp [φ]
         rw [heq]
@@ -189,7 +189,7 @@ theorem truncated_directImage_affine_finiteSupport
         apply Sigma.hom_ext
         intro i
         dsimp only [b]
-        rw [Sigma.ι_desc, Sigma.ι_map_assoc]
+        rw [Sigma.ι_comp_desc, Sigma.ι_map_assoc]
         change inv (adj.counit.app (M i)) ≫ L.map (Sigma.ι P i) =
           inv (adj.counit.app (M i)) ≫ Sigma.ι (fun i ↦ L.obj (P i)) i ≫ _
         rw [ι_comp_sigmaComparison]
@@ -202,13 +202,13 @@ theorem truncated_directImage_affine_finiteSupport
     have heq : Sigma.desc u = b ≫ d := by
       apply Sigma.hom_ext
       intro i
-      simp only [b, d, Sigma.ι_desc_assoc, Category.assoc]
+      simp only [b, d, Sigma.ι_comp_desc_assoc, Category.assoc]
       rw [← L.map_comp_assoc]
       rw [show Sigma.ι P i ≫ Sigma.desc (fun i ↦ G.map (u i)) = G.map (u i) from
-        Sigma.ι_desc _ _]
+        Sigma.ι_comp_desc _ _]
       have hnat : L.map (G.map (u i)) ≫ adj.counit.app N =
           adj.counit.app (M i) ≫ u i := adj.counit.naturality (u i)
-      rw [hnat, IsIso.inv_hom_id_assoc, Sigma.ι_desc]
+      rw [hnat, IsIso.inv_hom_id_assoc, Sigma.ι_comp_desc]
     rw [heq]
     infer_instance
   let c := Sigma.desc (fun i ↦ H.map (ι i))
@@ -272,7 +272,7 @@ theorem truncated_directImage_affine_finiteSupport
     rw [DirectSum.toModule_lof, DirectSum.toModule_lof]
     change (ev.map (Sigma.ι M i) ≫ ev.map c).hom x = _
     rw [← ev.map_comp]
-    rw [show Sigma.ι M i ≫ c = H.map (ι i) from Sigma.ι_desc _ _]
+    rw [show Sigma.ι M i ≫ c = H.map (ι i) from Sigma.ι_comp_desc _ _]
   have hsurj : Function.Surjective (ev.map c).hom :=
     (ModuleCat.epi_iff_surjective _).1 inferInstance
   change Function.Surjective φ

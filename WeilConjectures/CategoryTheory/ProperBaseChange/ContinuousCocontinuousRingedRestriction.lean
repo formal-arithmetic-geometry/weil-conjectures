@@ -386,7 +386,7 @@ private noncomputable def ringedRestriction : RingedToposMorphism
   module_linear M T a x y z hz U t := by
     rw [familyTranspose_eval, familyTranspose_eval, familyTranspose_eval]
     change (z.hom.app (F.op.obj U) t).val U (𝟙 _) =
-      a.hom.app (F.op.obj U) t •
+      (show (restrictedRing (J := J) F R).obj.obj U from a.hom.app (F.op.obj U) t) •
         (show M.val.obj U from (x.hom.app (F.op.obj U) t).val U (𝟙 _)) +
         (show M.val.obj U from (y.hom.app (F.op.obj U) t).val U (𝟙 _))
     have h := congrArg (fun s ↦ s.val U (𝟙 _)) (hz (F.op.obj U) t)

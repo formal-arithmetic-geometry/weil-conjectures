@@ -92,6 +92,12 @@ theorem conormal_wedge_mem_span_locally
   classical
   dsimp only
   let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+  let _ (P : _root_.PresheafOfModules.{u} Z.ringCatSheaf.obj)
+      {U V : Z.Opens} (g : V ⟶ U) :
+      Module Γ(Z, V)
+        ((ModuleCat.restrictScalars (Z.ringCatSheaf.obj.map g.op).hom).obj
+          (P.obj (op V))) :=
+    inferInstanceAs (Module Γ(Z, V) (P.obj (op V)))
   let E := Scheme.Modules.exteriorPower N n
   let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
     i.ker.toModules

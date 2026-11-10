@@ -169,9 +169,9 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
           (push.rightDerivedFunctorObjQIso I).inv
   /-- Exact derived pull evaluation is the localization of its ordinary realization. -/
   pullEvaluation_model : ∀ n : ℕ,
-    pullEvaluation n = (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    pullEvaluation n = Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (ordinaryPullEvaluation n) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _
+        (Functor.mapDerivedCategoryCompIso _ _).symm
   /-- Restricting coefficient actions commutes with inverse image. -/
   restrictionPullback : ∀ {m n : ℕ} (h : n ≤ m),
     res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h) ⋙ (inverseImage m).modules ≅
@@ -206,9 +206,9 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
       (derivedExact.{c, v, max c v r, c, v} J J' (B m) (coefficients m) (inverseImage
         m).modules).map
         ((A.scalar h).adjunction.unit.app P) ≫
-      (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso (restrictionPullback h) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom.app ((A.scalar h).T.obj P))
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app ((A.scalar h).T.obj P))
   /-- Level tensor pullback is fixed on the signed total K-flat representatives. -/
   levelTensorModel : ∀ n : ℕ,
     TensorComparisonModel.{c, v, r} J J' (B n) (coefficients n) (inverseImage n).modules

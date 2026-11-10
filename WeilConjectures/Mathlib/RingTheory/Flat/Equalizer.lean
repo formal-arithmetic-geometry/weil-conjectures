@@ -70,8 +70,7 @@ theorem map_inf_of_flat (I J : Ideal R) :
   have : x = AlgebraTensorModule.rid R S S (x ⊗ₜ[R] (1 : R)) := by simp
   rw [this, ← hu]
   clear hu this
-  induction u using TensorProduct.induction_on with
-  | zero => simp
+  induction u using TensorProduct.inductionOn with
   | tmul s k =>
     have hk : (k : R) ∈ I ⊓ J := hker ▸ k.2
     simp only [AlgebraTensorModule.lTensor_tmul, Submodule.coe_subtype,
@@ -230,8 +229,7 @@ theorem Algebra.TensorProduct.includeLeftRingHom_mem_nonZeroDivisors_of_flat
   have hcomm (x : B ⊗[A] A') :
       (LinearMap.mulLeft A f).lTensor A' (TensorProduct.comm A B A' x) =
         TensorProduct.comm A B A' (Algebra.TensorProduct.includeLeftRingHom f * x) := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul b a => simp
     | add x y hx hy => rw [map_add, map_add, hx, hy, mul_add, map_add]
   have key (x : B ⊗[A] A') (hx : Algebra.TensorProduct.includeLeftRingHom f * x = 0) :

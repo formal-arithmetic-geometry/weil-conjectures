@@ -91,7 +91,7 @@ theorem localizedTensorComparisonProperty_unit
     have hchain : ((Functor.Monoidal.μIso F S Q).inv ≫ (F.obj S ◁ t)) ≫ d.hom =
         F.map (λ_ Q).hom ≫ t := by
       dsimp [d, S]
-      simp only [tensorIso_hom, Iso.symm_hom, Iso.refl_hom,
+      simp only [
         tensorHom_id, Category.assoc]
       rw [MonoidalCategory.whisker_exchange_assoc]
       rw [MonoidalCategory.leftUnitor_naturality]

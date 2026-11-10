@@ -49,13 +49,13 @@ private lemma telescopeProjection_formula
         Sigma.ι (fun n : ℕ ↦ E.obj n) (k + 1)) ≫ telescopeProjection E j =
       if h : k = j then eqToHom (congrArg E.obj h) else 0 := by
   classical
-  simp only [telescopeProjection, Preadditive.sub_comp, Category.assoc, Sigma.ι_desc]
+  simp only [telescopeProjection, Preadditive.sub_comp, Category.assoc, Sigma.ι_comp_desc]
   by_cases h : k = j
   · subst j
     simp
   · by_cases hkj : k ≤ j
     · have hsj : k + 1 ≤ j := by omega
-      simp only [dif_pos hkj, dif_pos hsj, dif_neg h]
+      simp only [dite_eq_left hkj, dite_eq_left hsj, dite_eq_right h]
       rw [← E.map_comp]
       simp
     · have hsj : ¬ k + 1 ≤ j := by omega
@@ -92,7 +92,7 @@ private lemma sequentialCoproduct_mono
       intro k
       dsimp [φ, c, F, CoproductsFromFiniteFiltered.finiteSubcoproductsCocone,
         CoproductsFromFiniteFiltered.liftToFinsetObj, r]
-      simp only [u, Sigma.ι_desc, Preadditive.comp_sum,
+      simp only [u, Sigma.ι_comp_desc, Preadditive.comp_sum,
         ← Category.assoc, telescopeProjection_formula]
       rw [Finset.sum_eq_single k]
       · simp

@@ -27,6 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 open Scheme.Modules
 
+attribute [local instance] instModuleRestrictedSections
+
 attribute [local irreducible] tensorPullback tensorPullbackObj tensorPullbackSection
 
 private theorem sectionAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)

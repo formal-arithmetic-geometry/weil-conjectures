@@ -22,6 +22,8 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -112,6 +114,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 import WeilConjectures.CategoryTheory.SixFunctors.CokernelAdjointExchange
 import WeilConjectures.CategoryTheory.Normalized.NormalizedScalarBoundaryNaturality
 public import WeilConjectures.AlgebraicGeometry.DivisibleExtensionDerivedReduction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Derived reduction of an extension by a divisible sheaf
@@ -418,6 +421,15 @@ private noncomputable abbrev scalarRes
 open scoped ChangeOfRings
 set_option backward.isDefEq.respectTransparency false
 
+private local instance tensorRestrictionTargetModule
+    {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    {A : Sheaf K CommRingCat.{r}} (M : SheafOfModules.{r} (sr K A))
+    {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((sr K A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
     [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -660,7 +672,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 -- Bound unfolding while checking the denominator cone.
 private theorem exactRestriction_denominator_constancy
@@ -1036,7 +1047,7 @@ omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
 private theorem residue_nsmul_zero (n : ℕ) (M : Residue J n)
     (U : Cᵒᵖ) (x : M.val.obj U) : n • x = 0 := by
   have h : (n : ULift.{r} (ZMod n)) = 0 :=
-    ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
+    ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
   let α := ringUnit (J := J) (CommRingCat.of (ULift.{r} (ZMod n)))
   have h' : (α.app U).hom (n : ULift.{r} (ZMod n)) =
       (n : (residues J n).obj.obj U) := map_natCast _ n
@@ -1058,7 +1069,7 @@ private instance restriction_full (n : ℕ) [NeZero n] : (restriction J n).Full 
         intro U z x
         obtain ⟨z⟩ := z
         have hz : (⟨z⟩ : ULift.{r} (ZMod n)) = (z.val : ULift.{r} (ZMod n)) :=
-          ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
+          ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
         change f.val.app U ((α.app U).hom (⟨z⟩ : ULift.{r} (ZMod n)) •
           (show M.val.obj U from x)) =
           (α.app U).hom (⟨z⟩ : ULift.{r} (ZMod n)) •
@@ -1126,7 +1137,7 @@ private theorem integerUnit_mono (n : ℕ) (hn : n ≠ 0) :
     rw [AddCommGrpCat.mono_iff_injective]
     intro x y h
     change n • x = n • y at h
-    exact ULift.ext _ _ (nsmul_right_injective hn (congrArg ULift.down h))
+    exact ULift.ext (nsmul_right_injective hn (congrArg ULift.down h))
   have hm' : Mono (n • 𝟙 ((constantSheaf J AddCommGrpCat).obj
       (AddCommGrpCat.of (ULift.{r} ℤ)))) := by
     have : Mono ((CategoryTheory.Functor.const Cᵒᵖ).map

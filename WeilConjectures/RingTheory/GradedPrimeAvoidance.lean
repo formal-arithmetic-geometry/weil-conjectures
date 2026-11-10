@@ -28,7 +28,7 @@ private theorem exists_homogeneous_mem_notMem
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (I J : HomogeneousIdeal 𝒜) (hIJ : ¬ I ≤ J) :
     ∃ n : ℕ, ∃ x : A, x ∈ 𝒜 n ∧ x ∈ I ∧ x ∉ J := by
   classical
-  obtain ⟨a, ha, haj⟩ := SetLike.not_le_iff_exists.mp hIJ
+  obtain ⟨a, ha, haj⟩ := IsConcreteLE.not_le_iff_exists.mp hIJ
   have h : ∃ n, (DirectSum.decompose 𝒜 a n : A) ∉ J := by
     by_contra! h
     exact haj (J.isHomogeneous.mem_iff.mpr h)

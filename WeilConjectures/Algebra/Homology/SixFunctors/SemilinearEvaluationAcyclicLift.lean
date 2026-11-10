@@ -134,7 +134,7 @@ private def rightLevel (M : systemLevel B n) (k : ℕ) : systemLevel B k :=
 
 private def rightAboveIso (M : systemLevel B n) {k : ℕ} (hk : n ≤ k) :
     rightLevel B n M k ≅ (systemRestriction B hk).obj M :=
-  eqToIso (dif_pos hk)
+  eqToIso (dite_eq_left hk)
 
 private def rightTransition (M : systemLevel B n) {j k : ℕ} (h : j ≤ k) :
     rightLevel B n M k ⟶ (systemRestriction B h).obj (rightLevel B n M j) :=
@@ -156,7 +156,7 @@ private theorem rightTransition_above (M : systemLevel B n) {j k : ℕ}
         (systemScalarRestrictionComposition (B.map (homOfLE h).op)
           (B.map (homOfLE hj).op) (B.map (homOfLE (hj.trans h)).op)
           (by rw [← B.map_comp]; rfl)).inv.app M ≫
-        (systemRestriction B h).map (rightAboveIso B n M hj).inv := dif_pos hj
+        (systemRestriction B h).map (rightAboveIso B n M hj).inv := dite_eq_left hj
 
 private def rightObj (M : systemLevel B n) : StrictRingSystem B where
   level := rightLevel B n M
@@ -179,7 +179,7 @@ private def rightObj (M : systemLevel B n) : StrictRingSystem B where
         rfl
       · have hz : IsZero (rightLevel B n M k) := by
           dsimp only [rightLevel]
-          rw [dif_neg hk]
+          rw [dite_eq_right hk]
           exact isZero_zero _
         exact hz.eq_of_src _ _
     exact congrArg (fun f ↦ f.val.app U x) he
@@ -209,7 +209,7 @@ private def rightObj (M : systemLevel B n) : StrictRingSystem B where
         rfl
       · have hz : IsZero (rightLevel B n M j) := by
           dsimp only [rightLevel]
-          rw [dif_neg hj]
+          rw [dite_eq_right hj]
           exact isZero_zero _
         exact ((systemRestriction B (h.trans q)).map_isZero hz).eq_of_tgt _ _
     exact congrArg (fun f ↦ f.val.app U x) he
@@ -222,7 +222,7 @@ private def rightLevelMap {M N : systemLevel B n} (f : M ⟶ N) (k : ℕ) :
 private theorem rightLevelMap_above {M N : systemLevel B n} (f : M ⟶ N)
     {k : ℕ} (hk : n ≤ k) :
     rightLevelMap B n f k = (rightAboveIso B n M hk).hom ≫
-      (systemRestriction B hk).map f ≫ (rightAboveIso B n N hk).inv := dif_pos hk
+      (systemRestriction B hk).map f ≫ (rightAboveIso B n N hk).inv := dite_eq_left hk
 
 private def rightMap {M N : systemLevel B n} (f : M ⟶ N) :
     rightObj B n M ⟶ rightObj B n N where
@@ -245,7 +245,7 @@ private def rightMap {M N : systemLevel B n} (f : M ⟶ N) :
         (by rw [← B.map_comp]; rfl)).inv.naturality f
     · have hz : IsZero (rightLevel B n N j) := by
         dsimp only [rightLevel]
-        rw [dif_neg hj]
+        rw [dite_eq_right hj]
         exact isZero_zero _
       exact ((systemRestriction B h).map_isZero hz).eq_of_tgt _ _
 
@@ -261,7 +261,7 @@ private def rightExtension : systemLevel B n ⥤ StrictRingSystem B where
         Iso.hom_inv_id]
     · have hz : IsZero (rightLevel B n M k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_src _ _
   map_comp {M N P} f g := by
@@ -275,7 +275,7 @@ private def rightExtension : systemLevel B n ⥤ StrictRingSystem B where
       simp only [Category.assoc, Iso.inv_hom_id_assoc]
     · have hz : IsZero (rightLevel B n M k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_src _ _
 
@@ -294,7 +294,7 @@ private instance rightExtension_additive : (rightExtension B n).Additive where
       simp only [Preadditive.comp_add, Preadditive.add_comp]
     · have hz : IsZero (rightLevel B n M k) := by
         dsimp only [rightLevel]
-        rw [dif_neg hk]
+        rw [dite_eq_right hk]
         exact isZero_zero _
       exact hz.eq_of_src _ _
 
@@ -334,7 +334,7 @@ private theorem rightExtension_acyclic
     apply HomologicalComplex.ExactAt.of_isZero
     change IsZero (rightLevel B n (Z.X i) k)
     dsimp only [rightLevel]
-    rw [dif_neg hk]
+    rw [dite_eq_right hk]
     exact isZero_zero _
 
 private def rightExtension_evaluation :

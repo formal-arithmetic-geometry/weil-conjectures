@@ -141,7 +141,7 @@ theorem additiveCechCoefficientMap_comm {X : Scheme.{u}} {ι : Type u} [Finite �
     change piComparison T _ ≫
       (TopCat.Presheaf.cechComplexFunctorπ U (P ⋙ T) k y ≫ σ.app _) = _
     rw [← Category.assoc]
-    erw [piComparison_comp_π, Pi.lift_π]
+    erw [piComparison_comp_π, Pi.lift_comp_π]
     rfl
   change additiveCechCoefficientMap U I n ≫
       ((cechComplexFunctor U).obj (i.op ⋙ (I.cocomplex.X 0).obj)).d n m =
@@ -163,7 +163,7 @@ theorem additiveCechCoefficientMap_vertical {X : Scheme.{u}} {ι : Type u}
   change (Pi.lift _ ≫ Limits.Pi.map (fun y : Fin (n + 1) → ι ↦
     (I.cocomplex.d 0 1).hom.app
       (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))))) ≫ _ = _
-  erw [Category.assoc, Limits.Pi.map_π, ← Category.assoc, Pi.lift_π]
+  erw [Category.assoc, Limits.Pi.map_π, ← Category.assoc, Pi.lift_comp_π]
   ext x
   have h := congrArg (fun f ↦ f.hom.app
     (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))))

@@ -167,7 +167,7 @@ theorem nonempty_abelianHigherDirectImage_sheafificationFunctorIso
     (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0
   let R := rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h
   let : R.CommShift ℤ :=
-    (lowerStar AddCommGrpCat.{u + 1} h).instCommShiftPlusRightDerivedFunctorPlusInt_weilConjectures
+    (lowerStar AddCommGrpCat.{u + 1} h).rightDerivedFunctorPlusCommShift
   let E := S ⋙ shiftFunctor _ (q : ℤ)
   let H₀ := DerivedCategory.Plus.homologyFunctor
     (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0

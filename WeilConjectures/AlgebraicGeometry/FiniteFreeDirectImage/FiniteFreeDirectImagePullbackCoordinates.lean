@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageBalancingComputed
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeOrdinaryPullbackCoordinates
 import all WeilConjectures.AlgebraicGeometry.Derived.DerivedFiniteFreeScalarCoordinates
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -126,11 +128,11 @@ private theorem powerInjection_naturality {X Y : A} (f : X ⟶ Y) (i : Fin d) :
       (biproduct.isoProduct (fun _ : Fin d ↦ X)).hom ≫ Pi.π _ j ≫ f =
     f ≫ biproduct.ι (fun _ : Fin d ↦ Y) i ≫
       (biproduct.isoProduct (fun _ : Fin d ↦ Y)).hom ≫ Pi.π _ j
-  simp only [biproduct.isoProduct_hom, Pi.lift_π]
-  erw [Pi.lift_π_assoc]
+  simp only [biproduct.isoProduct_hom, Pi.lift_comp_π]
+  erw [Pi.lift_comp_π_assoc]
   by_cases h : i = j <;> simp [h]
 
-private theorem coordinateInjection_naturality (V : A ⥤ A)
+private theorem coordinateInjection_naturality_private (V : A ⥤ A)
     (Φ : V ≅ Functor.const (Discrete (Fin d)) ⋙ lim)
     {X Y : A} (f : X ⟶ Y) (i : Fin d) :
     biproduct.ι (fun _ : Fin d ↦ X) i ≫
@@ -140,6 +142,10 @@ private theorem coordinateInjection_naturality (V : A ⥤ A)
   rw [← Φ.inv.naturality f]
   simpa only [Category.assoc] using
     congrArg (fun h ↦ h ≫ Φ.inv.app Y) (powerInjection_naturality d f i)
+
+/-- Public export of the private `coordinateInjection_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coordinateInjection_naturality := coordinateInjection_naturality_private
 
 private theorem powerInjection_map (F : A ⥤ B) [F.Additive]
     (X : A) (i : Fin d) :
@@ -154,11 +160,11 @@ private theorem powerInjection_map (F : A ⥤ B) [F.Additive]
     (biproduct.ι (fun _ : Fin d ↦ F.obj X) i ≫
       (biproduct.isoProduct (fun _ : Fin d ↦ F.obj X)).hom) ≫ Pi.π _ j
   rw [Category.assoc, SheafOfModules.RingedTensor.powerComparison_π,
-    ← F.map_comp, Category.assoc, biproduct.isoProduct_hom, Pi.lift_π,
-    biproduct.isoProduct_hom, Category.assoc, Pi.lift_π]
+    ← F.map_comp, Category.assoc, biproduct.isoProduct_hom, Pi.lift_comp_π,
+    biproduct.isoProduct_hom, Category.assoc, Pi.lift_comp_π]
   by_cases h : i = j <;> simp [h]
 
-private theorem coordinateInjection_square (F : A ⥤ B) [F.Additive]
+private theorem coordinateInjection_square_private (F : A ⥤ B) [F.Additive]
     (V : A ⥤ A) (V' : B ⥤ B)
     (Φ : V ≅ Functor.const (Discrete (Fin d)) ⋙ lim)
     (Φ' : V' ≅ Functor.const (Discrete (Fin d)) ⋙ lim)
@@ -182,6 +188,10 @@ private theorem coordinateInjection_square (F : A ⥤ B) [F.Additive]
       (biproduct.isoProduct (fun _ : Fin d ↦ F.obj X)).hom ≫ 𝟙 _
   simp only [Category.comp_id]
   exact powerInjection_map d F X i
+
+/-- Public export of the private `coordinateInjection_square_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coordinateInjection_square := coordinateInjection_square_private
 
 end CoordinateColumns
 
@@ -274,8 +284,8 @@ theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ 
   let Φ := SheafOfModules.RingedTensor.coordinateDescent T U d E ε φW
   let Φ' := SheafOfModules.RingedTensor.coordinateDescent T' U' d E' ε' φZ
   let β := SheafOfModules.RingedTensor.scalarComparisonDescent T F G T' E ε E' ε' χ
-  let ρD := (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso ρ ≪≫ Functor.mapDerivedCategoryCompIso G U'
+  let ρD := Functor.mapDerivedCategoryCompIso U F ≪≫
+    Functor.mapDerivedCategoryNatIso ρ ≪≫ (Functor.mapDerivedCategoryCompIso G U').symm
   let τ := Functor.whiskerLeft E ρD.hom ≫
     Functor.whiskerRight β.hom U'.mapDerivedCategory
   have hρD : ρD.hom = (proEtaleRingRestrictionDerivedPullback q R.target S.target
@@ -308,9 +318,9 @@ theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ 
   · intro X Y f i
     simpa only [eZ, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
       Functor.comp_map, Category.assoc] using
-      coordinateInjection_naturality d (E' ⋙ U'.mapDerivedCategory) Φ' f i
+      coordinateInjection_naturality_private d (E' ⋙ U'.mapDerivedCategory) Φ' f i
   · intro X i
-    have h := coordinateInjection_square d F.mapDerivedCategory
+    have h := coordinateInjection_square_private d F.mapDerivedCategory
       (E ⋙ U.mapDerivedCategory) (E' ⋙ U'.mapDerivedCategory) Φ Φ' τ hτ X i
     simpa only [τ, eW, eZ, Iso.trans_hom, Iso.symm_hom, Iso.app_inv,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,

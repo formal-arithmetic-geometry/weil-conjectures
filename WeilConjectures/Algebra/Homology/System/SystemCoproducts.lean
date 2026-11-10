@@ -65,6 +65,13 @@ Proof: module sheaves are Grothendieck abelian, so the K-injective coproduct con
 applies to each coefficient ring. -/
 theorem systemLevel_derivedCoproducts (n : ℕ) :
     HasCoproducts.{w} (DerivedCategory (systemLevel B n)) := by
+  have : HasCoproducts.{w} (systemLevel B n) := by
+    intro I
+    have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        (derivedChangeRingIndependentCoefficients J (B.obj (op n))).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   have : IsGrothendieckAbelian.{w} (systemLevel B n) :=
     isGrothendieckAbelian_coefficientUniverse _
   exact derived_hasCoproducts
@@ -76,6 +83,13 @@ have K-injective resolutions. Apply exact derived coproduct preservation, using 
 specified exact derived evaluation and its canonical factorization. -/
 theorem derivedSystemEvaluation_coproducts (n : ℕ) (I : Type w) :
     PreservesColimitsOfShape (Discrete I) (derivedSystemEvaluation B n) := by
+  have (n : ℕ) : HasCoproducts.{w} (systemLevel B n) := by
+    intro I
+    have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        (derivedChangeRingIndependentCoefficients J (B.obj (op n))).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   have := strictRingSystem_isGrothendieckAbelian B
   have : IsGrothendieckAbelian.{w} (systemLevel B n) :=
     isGrothendieckAbelian_coefficientUniverse _

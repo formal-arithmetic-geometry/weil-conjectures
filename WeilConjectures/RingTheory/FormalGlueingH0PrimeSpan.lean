@@ -208,8 +208,7 @@ theorem h0_prime_span_eq_top {R : Type u} {S : Type v}
   intro x _
   obtain ⟨y, rfl⟩ := hp x
   change TensorProduct R S M at y
-  induction y using TensorProduct.induction_on with
-  | zero => simpa only [map_zero] using Submodule.zero_mem _
+  induction y using TensorProduct.inductionOn with
   | tmul s m =>
       have he : TensorProduct.tmul R s m = s • TensorProduct.tmul R (1 : S) m := by
         simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]

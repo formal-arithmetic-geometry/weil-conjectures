@@ -164,16 +164,16 @@ private theorem scalarPullback_square
     let k := h ≫ j
     let aA := Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) h j k rfl) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     let aB := Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} B) h j k rfl) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     let bA := Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) j' g k sq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     let bB := Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} B) j' g k sq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     have hleft := scalarPullback_composition φ j h k rfl N
     have hright := scalarPullback_composition φ g j' k sq.w.symm N
     change aB.hom.app _ ≫

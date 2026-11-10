@@ -65,9 +65,9 @@ private theorem constant_model_iso
       ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
   unfold IsConstantModelConstructible at hM ⊢
   by_cases h : CompactSpace X ∧ QuasiSeparatedSpace X
-  · rw [if_pos h] at hM ⊢
+  · rw [ite_eq_left h] at hM ⊢
     exact hstrat X e hM
-  · rw [if_neg h] at hM ⊢
+  · rw [ite_eq_right h] at hM ⊢
     intro U hU
     exact hstrat U.toScheme ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
 
@@ -115,7 +115,7 @@ private theorem truncGE_preservesCoproducts
           π.app (K i) ≫ Sigma.ι L i
         rw [← π.naturality (Sigma.ι K i)]
         change (Sigma.ι K i ≫ (t.truncGEπ a).app (∐ K)) ≫ t.descTruncGE f a = _
-        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_desc]
+        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_comp_desc]
       · apply t.from_truncGE_obj_ext
         dsimp only [r]
         rw [← Category.assoc, t.π_descTruncGE]
@@ -157,7 +157,7 @@ private theorem truncLE_preservesCoproducts
       apply Sigma.hom_ext
       intro i
       rw [← Category.assoc, ι_comp_sigmaComparison]
-      simpa only [f, Sigma.ι_desc, Functor.id_map] using ι.naturality (Sigma.ι K i)
+      simpa only [f, Sigma.ι_comp_desc, Functor.id_map] using ι.naturality (Sigma.ι K i)
     -- The canonical truncation triangle supplies the other half of the coproduct.
     -- Prove invertibility by testing cohomology, where truncation retains a degree or zero.
     have hc : IsIso c := by
@@ -178,7 +178,7 @@ private theorem truncLE_preservesCoproducts
             intro i
             simp only [ι_comp_sigmaComparison_assoc, IsIso.hom_inv_id_assoc,
               Sigma.ι_map_assoc]
-            rw [← H.map_comp, Sigma.ι_desc, H.map_comp]
+            rw [← H.map_comp, Sigma.ι_comp_desc, H.map_comp]
             change H.map (ι.app (K i)) ≫ H.map (Sigma.ι K i) =
               H.map (ι.app (K i)) ≫ Sigma.ι (fun i ↦ H.obj (K i)) i ≫ sigmaComparison H K
             rw [ι_comp_sigmaComparison]

@@ -155,6 +155,10 @@ private theorem kFlat_of_iso_independent
     {P Q : CochainComplex (Mod J R) ℤ}
     (e : P ≅ Q) (hP : P.IsKFlatIndependentCoefficients) :
     Q.IsKFlatIndependentCoefficients := by
+  have (I : Type r) : HasColimitsOfShape (Discrete I)
+      (PresheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := preservesZeroMorphisms_curriedTensor_independentCoefficients R

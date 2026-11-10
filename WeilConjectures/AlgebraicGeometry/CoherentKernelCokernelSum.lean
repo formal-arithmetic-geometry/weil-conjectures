@@ -44,13 +44,12 @@ private theorem finiteType_of_iso
     { I := q.I
       X := q.X
       coversTop := q.coversTop
-      generators i := (q.generators i).ofEpi (e.hom.over (q.X i)) }
+      generators i :=
+        (q.generators i).ofEpi (((SheafOfModules.overFunctor R (q.X i)).mapIso e).hom) }
   refine ⟨⟨q', ?_⟩⟩
   constructor
   intro i
-  have := hq.isFiniteType i
-  dsimp [q']
-  infer_instance
+  exact ⟨(hq.isFiniteType i).finite⟩
 
 private theorem finiteType_free
     {C : Type v} [Category.{w} C] [HasBinaryProducts C]

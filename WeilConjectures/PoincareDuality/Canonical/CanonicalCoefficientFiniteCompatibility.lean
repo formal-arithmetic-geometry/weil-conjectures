@@ -79,7 +79,7 @@ private theorem coefficientProjectionComplex_one (W : Scheme.{u}) (n : ℕ)
     simp only [coefficientProjectionComplex, HomologicalComplex.comp_f,
       Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Category.assoc, Iso.inv_hom_id_assoc, sX, sB]
   change ((sX.inv ≫ (coefficientProjectionComplex l E W n).f 0).val.app U)
     (1 : (completedIntegralCoefficientSheafUnrestricted l E W).obj.obj U) = _

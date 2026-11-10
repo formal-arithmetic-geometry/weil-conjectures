@@ -178,8 +178,7 @@ private def rawTransport
   naturality := by
     intro U V i
     ext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul b x => exact rawTransportApp_naturality_tmul l E g i b x
 
@@ -312,8 +311,7 @@ theorem frobeniusIntegralDiscreteTransport_isIso
     exact (ProEt.topology Y).W_of_isLocallyBijective ηX
   have heq : ηY ≫ φ.hom = rawTransport l E g ≫ ηX := by
     ext U z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul b x =>
       change φ.hom.app U (purTwistIntegralTensor Y l E U b x) =

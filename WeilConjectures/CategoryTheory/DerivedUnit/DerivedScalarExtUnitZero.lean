@@ -48,5 +48,5 @@ theorem DerivedUnit.extUnit_zero {F : B} {H : C} {η : F ⟶ U.obj H}
       CommShift.isoZero_inv_app, Category.assoc]
     simp [shiftFunctorZero', ← Functor.map_comp, e]
   simp only [Function.comp_def, Iso.homFromEquiv_apply, ← he] at hb
-  convert hb using 1 <;> rfl
+  convert hb using 1
 end CategoryTheory.Functor

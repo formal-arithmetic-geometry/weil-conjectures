@@ -36,7 +36,7 @@ noncomputable def freeπ {I : Type u} [DecidableEq I] (i : I) : free (R := R) I 
 @[reassoc (attr := simp)]
 lemma ιFree_freeπ {I : Type u} [DecidableEq I] (i j : I) :
     ιFree j ≫ (freeπ i : free (R := R) I ⟶ _) = if j = i then 𝟙 _ else 0 :=
-  Sigma.ι_desc _ _
+  Sigma.ι_comp_desc _ _
 
 lemma free_hom_ext {I : Type u} {M : SheafOfModules.{u} R} {f g : free (R := R) I ⟶ M}
     (h : ∀ i, ιFree i ≫ f = ιFree i ≫ g) : f = g :=
@@ -77,10 +77,10 @@ noncomputable def freeSectionsLinearEquiv (I : Type u) [Fintype I] [DecidableEq 
     dsimp only
     rw [map_sum, Finset.sum_eq_single j (fun i _ hi ↦ ?_) (by simp)]
     · change (ιFree j ≫ freeπ j).val.app X (c j) = c j
-      rw [ιFree_freeπ, if_pos rfl]
+      rw [ιFree_freeπ, ite_eq_left rfl]
       rfl
     · change (ιFree i ≫ freeπ j).val.app X (c i) = 0
-      rw [ιFree_freeπ, if_neg hi]
+      rw [ιFree_freeπ, ite_eq_right hi]
       rfl
 
 /-- An isomorphism `N ≅ free I` identifies the sections of `N` over `X` with `R(X)^I`. -/

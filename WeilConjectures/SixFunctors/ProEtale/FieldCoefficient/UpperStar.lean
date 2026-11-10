@@ -239,7 +239,7 @@ noncomputable def fieldConstantSheafToLowerStar :
         (fieldFunctionsComp Λ (pullback.fst V'.unop.hom g).base.hom))
      naturality V₁ V₂ a := by
        ext x
-       refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun y ↦ ?_))
+       refine ULift.ext (Subtype.ext (ContinuousMap.ext fun y ↦ ?_))
        change x.down.1 (a.unop.left (pullback.fst _ g y)) =
          x.down.1 (pullback.fst _ g (((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).map
            a.unop).left y))
@@ -256,7 +256,7 @@ lemma fieldConstantSheaf_ext {X : Scheme.{u}} {U : X.ProEt}
     {s s' : (fieldConstantSheaf Λ X).obj.obj (op U)}
     (h : ∀ y, s.down.1 y = s'.down.1 y) :
     s = s' :=
-  ULift.ext _ _ (Subtype.ext (ContinuousMap.ext h))
+  ULift.ext (Subtype.ext (ContinuousMap.ext h))
 
 variable (Λ) in
 /-- The canonical morphism `g^* Λ_V ⟶ Λ_W`, adjoint to

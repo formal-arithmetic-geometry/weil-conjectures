@@ -112,17 +112,17 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp_hom_app (F : C ⥤ D) (G : D ⥤
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (n : ℤ) (K : DerivedCategory C) :
     ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom.app K ≫
-        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).hom.app K) =
+        (DerivedCategory.homologyFunctor E n).map ((mapDerivedCategoryCompIso F G).inv.app K) =
       G.map ((F.mapDerivedCategoryHomologyFunctorIso n).hom.app K) ≫
         (G.mapDerivedCategoryHomologyFunctorIso n).hom.app (F.mapDerivedCategory.obj K) := by
   have h : ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso n).hom ≫
-      whiskerRight (mapDerivedCategoryCompIso F G).hom (DerivedCategory.homologyFunctor E n) =
+      whiskerRight (mapDerivedCategoryCompIso F G).inv (DerivedCategory.homologyFunctor E n) =
       whiskerRight (F.mapDerivedCategoryHomologyFunctorIso n).hom G ≫
         whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso n).hom := by
     refine Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) (fun L => ?_)
     have hc₀ : (F ⋙ G).mapDerivedCategoryFactors.inv.app L ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L) =
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L) ≫
           G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app L) := by
       rw [← cancel_epi ((F ⋙ G).mapDerivedCategoryFactors.hom.app L), Iso.hom_inv_id_app_assoc,
@@ -131,7 +131,7 @@ lemma mapDerivedCategoryHomologyFunctorIso_comp_hom_app (F : C ⥤ D) (G : D ⥤
     have hc : (DerivedCategory.homologyFunctor E n).map
           ((F ⋙ G).mapDerivedCategoryFactors.inv.app L) ≫
         (DerivedCategory.homologyFunctor E n).map
-          ((mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj L)) =
+          ((mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj L)) =
         (DerivedCategory.homologyFunctor E n).map
           (G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj L)) ≫
         (DerivedCategory.homologyFunctor E n).map

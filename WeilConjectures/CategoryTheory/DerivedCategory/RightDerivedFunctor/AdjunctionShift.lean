@@ -190,12 +190,17 @@ lemma commShift_rightDerivedFunctorCompIso'_hom {H : C ⥤ E} [H.Additive]
       (rightDerivedFunctorCompUnit F G)) := by
     refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun X ↦ ?_)
     obtain ⟨K, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective X
+    change IsIso ((rightDerivedFunctorCompUnit F G).app
+      ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))
+    have h₁ : IsIso (F.rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K)) := inferInstance
     have h₂ : IsIso (G.rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj
           ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) := inferInstance
     have h₂' : IsIso (G.rightDerivedFunctorUnit.app
-        ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
-          ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))) := h₂
+        ((HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj
+          ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+            ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K).as))) := h₂
     dsimp [rightDerivedFunctorCompUnit]
     infer_instance
   have e₁ : rightDerivedFunctorCompUnit F G ≫

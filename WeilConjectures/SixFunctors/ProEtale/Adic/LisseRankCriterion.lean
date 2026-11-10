@@ -237,7 +237,7 @@ lemma fibreUnitCoord_injective (s : Spec (.of Ω) ⟶ T) :
     Function.Injective (fibreUnitCoord l s) := by
   intro x y h
   apply (WeilCoefficients.linearEquivOfIso (fibreUnitIso l s)).injective
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun p ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun p ↦ ?_))
   obtain rfl : p = IsLocalRing.closedPoint Ω := Subsingleton.elim _ _
   exact h
 

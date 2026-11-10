@@ -53,7 +53,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
 
 end CategoryTheory.Mod
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_properBaseChangeIntegralReductionTensor
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

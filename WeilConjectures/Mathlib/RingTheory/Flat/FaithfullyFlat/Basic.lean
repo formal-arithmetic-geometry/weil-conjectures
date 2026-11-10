@@ -64,11 +64,9 @@ theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]
       ⇑(TensorProduct.AlgebraTensorModule.cancelBaseChange A B B C P).symm ∘
         ⇑(f.lTensor C) ∘ ⇑(TensorProduct.AlgebraTensorModule.cancelBaseChange A B B C N) := by
     funext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul c y =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | tmul b n =>
         simp only [Function.comp_apply, LinearMap.lTensor_tmul, LinearMap.baseChange_tmul,
           TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul,

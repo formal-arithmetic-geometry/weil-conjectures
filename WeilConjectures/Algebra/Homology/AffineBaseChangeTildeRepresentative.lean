@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 
 public import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
@@ -47,8 +49,14 @@ def affineBaseChangeTildeComplexIso
       SheafOfModules.{u} (moduleRings (Spec (.of D)).toRingedSpace) :=
     Scheme.Modules.tensorPullback (Spec.map (CommRingCat.ofHom φ))
   let : E.Additive := SingleComplexBaseChange.tensorPullbackAdditive.{u, w} _
-  let : (affinePushforwardTilde A).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : (affinePushforwardTilde D).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde A).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
+  let : (affinePushforwardTilde D).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of D) f g
   let θ : affinePushforwardTilde A ⋙ E ≅
       ModuleCat.extendScalars φ ⋙ affinePushforwardTilde D :=
     Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ))
@@ -89,8 +97,8 @@ def affineBaseChangeTildeRepresentativeIso
     ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := hc
   let δ := affineBaseChangeTildeComplexIso A A' φ M
   exact (DerivedCategory.Q.mapIso δ).symm ≪≫
-    (asIso ((SingleComplexBaseChange.counit f).app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).symm ≪≫
+    (cast (by rfl) (asIso ((SingleComplexBaseChange.counit f).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).symm) ≪≫
     (derivedPullback f).mapIso e
 
 
@@ -110,9 +118,9 @@ theorem affineBaseChangeTildeRepresentativeIso_counit
       (DerivedCategory.Q.obj
         (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)) M
       (Iso.refl _) hc).hom ≫
-      (SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
+      cast (by rfl) ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)) =
+          (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M))) =
       DerivedCategory.Q.map (affineBaseChangeTildeComplexIso A D φ M).inv := by
   let p := Spec.map (CommRingCat.ofHom φ)
   let P := ((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M

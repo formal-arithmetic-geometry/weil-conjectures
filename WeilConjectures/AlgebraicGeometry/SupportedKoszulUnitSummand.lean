@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Retract
 import WeilConjectures.AlgebraicGeometry.SupportedKoszulRelativeDetector
 import WeilConjectures.AlgebraicGeometry.SupportedOpenUnitConeProperties

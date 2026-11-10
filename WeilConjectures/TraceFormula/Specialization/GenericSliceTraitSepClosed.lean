@@ -145,7 +145,7 @@ theorem mem_range_fractionRingMap_of_isSeparable [IsSepClosed k'] (hD : D.HasRes
   -- `α` lies in `κ'((t))`
   obtain ⟨β, rfl⟩ := mem_range_traitLaurentFieldMap_of_isSeparable
     D.trdeg_residueSubfield_le_one α (hα.tower_top _)
-  have hβ : IsSeparable (FractionRing D.R) β := IsSeparable.of_algHom
+  have hβ : IsSeparable (FractionRing D.R) β := IsSeparable.of_algHom _
     (IsScalarTower.toAlgHom (FractionRing D.R) (FractionRing (PowerSeries D.residueSubfield))
       (FractionRing (PowerSeries (traitSliceField k')))) hα
   -- `Frac R` is separably closed in `κ'((t))`

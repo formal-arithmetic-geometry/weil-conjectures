@@ -146,4 +146,5 @@ theorem LinearMap.surjective_of_isNilpotent_of_range_sup_smul {N : Type*} [AddCo
   LinearMap.range_eq_top.mp
     (Submodule.eq_top_of_top_le_sup_smul_of_isNilpotent hI (N' := ⊤) h.ge)
 
+
 end Nilpotent

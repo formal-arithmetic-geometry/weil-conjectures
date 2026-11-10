@@ -153,6 +153,10 @@ theorem exists_mem_inertia_eqOn (M : IntermediateField K Ω) [Normal K M]
   have : ContinuousSMul N B := ⟨(hcs.continuous_smul).comp
     ((continuous_subtype_val.comp continuous_fst).prodMk continuous_snd)⟩
   let A := FixedPoints.subalgebra R B N
+  have : SMulCommClass N A B :=
+    ⟨fun σ a b ↦ by
+      change σ • ((a : B) * b) = (a : B) * (σ • b)
+      rw [smul_mul', a.2 σ]⟩
   have hA (a : A) : ((a : B) : Ω) ∈ M :=
     mem_of_mem_fixingSubgroup_smul M fun σ hσ ↦ congrArg Subtype.val (a.2 ⟨σ, hσ⟩)
   have hNM (ρ : N) (x : Ω) (hx : x ∈ M) : (ρ : Gal(Ω/K)) x = x := ρ.2 ⟨x, hx⟩

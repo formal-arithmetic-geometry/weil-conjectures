@@ -51,7 +51,7 @@ lemma continuousMapRingObjMulLeft_comp (s t : T) :
     continuousMapRingObjMulLeft.{u} T s ≫ continuousMapRingObjMulLeft T t =
       continuousMapRingObjMulLeft T (t * s) := by
   ext S a
-  exact ULift.ext _ _ (ContinuousMap.ext fun _ ↦ (mul_assoc t s _).symm)
+  exact ULift.ext (ContinuousMap.ext fun _ ↦ (mul_assoc t s _).symm)
 
 end Profinite
 
@@ -75,7 +75,7 @@ instance mono_padicIntegersRingObjToSubfieldRingObj :
     have h' (s : S.unop) : ((a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E)).down s :
         E) = (b : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E)).down s :=
       congrArg (fun z : ULift.{u + 1} C(S.unop, E) ↦ z.down s) h
-    exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ Subtype.ext (h' s))
+    exact ULift.ext (ContinuousMap.ext fun s ↦ Subtype.ext (h' s))
   have := NatTrans.mono_of_mono_app (Profinite.padicIntegersRingObjToSubfieldRingObj.{u} ℓ E).hom
   exact Sheaf.Hom.mono_of_presheaf_mono _ _ _
 

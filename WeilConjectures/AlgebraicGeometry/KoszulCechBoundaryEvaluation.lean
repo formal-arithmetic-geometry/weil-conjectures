@@ -200,7 +200,7 @@ theorem koszulCechBoundary_evaluation (e : ℕ)
     have := Finset.card_erase_add_one j.property
     omega
   have hne : (J.val.erase j.val).Nonempty := Finset.card_pos.mp (by omega)
-  rw [dif_pos hne]
+  rw [dite_eq_left hne]
   congr 1
   have he : ComplexShape.embeddingDownNat.f k =
       1 - ((J.val.erase j.val).card : ℤ) := by

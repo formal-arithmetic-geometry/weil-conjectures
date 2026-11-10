@@ -372,7 +372,7 @@ private theorem composedFiberComparison
     apply Pi.hom_ext
     intro n
     simp only [Category.assoc, productTransportIso_hom_π]
-    rw [← HC.map_comp_assoc α (Pi.π K n), Pi.lift_π]
+    rw [← HC.map_comp_assoc α (Pi.π K n), Pi.lift_comp_π]
     apply HomologicalComplex.hom_ext
     intro q
     change (G.map (δ₀.f q) ≫ 𝟙 _) ≫ (G.map (F.map ((α ≫ Pi.π K n).f q)) ≫
@@ -483,7 +483,7 @@ theorem completed_fiber_roos_comparison_on_complex
       G.map (δ₀.f q ≫ (intrinsicPresentationModulesBack X d).map
         ((α ≫ Pi.π K m).f q)) ≫ (e m).hom.f q = (γ m).f q := by
     rw [show α ≫ Pi.π K m =
-      completedKoszulTensorUnit X (intrinsicPresentationDatum d) r a P m from Pi.lift_π _ m]
+      completedKoszulTensorUnit X (intrinsicPresentationDatum d) r a P m from Pi.lift_comp_π _ m]
     exact hu m q
   obtain ⟨ei, hei⟩ := composedFiberComparison (intrinsicPresentationModulesBack X d) G
     P C K f α h δ₀ T e he γ hγ hproj

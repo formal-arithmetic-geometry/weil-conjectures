@@ -277,7 +277,7 @@ private theorem coefficientUnit_roos_quasiIso :
   obtain ⟨hz, hk⟩ := AlgebraicGeometry.ProEtale.tower_kernel F c hc.some
     (Fan.mk _ (Pi.π (fun n ↦ F.obj (op n))))
     (productIsProduct _) (productAugmentation l E T none P) δ
-    (fun n ↦ Pi.lift_π _ n) (fun n ↦ by
+    (fun n ↦ Pi.lift_comp_π _ n) (fun n ↦ by
       simp [δ, towerTransitionEndomorphism, towerProductShift,
         integralOperationsTowerStep])
   let S := ShortComplex.mk (productAugmentation l E T none P) δ hz

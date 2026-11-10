@@ -65,7 +65,7 @@ noncomputable def homologySequenceComposableArrows₅Map (T : Triangle C) (n₀ 
     rw [← Functor.map_comp, ← Functor.map_comp, w]
   homMk₅ ((H n₀).map φ.hom₁) ((H n₀).map φ.hom₂) ((H n₀).map φ.hom₃) ((H n₁).map φ.hom₁)
     ((H n₁).map φ.hom₂) ((H n₁).map φ.hom₃) (sq n₀ φ.comm₁) (sq n₀ φ.comm₂)
-    ((homologyFunctor A 0).homologySequenceδ_naturality _ _ φ n₀ n₁ h).symm
+    ((homologyFunctor A 0).homologySequenceδ_naturality φ n₀ n₁ h).symm
     (sq n₁ φ.comm₁) (sq n₁ φ.comm₂)
 
 /-- The epimorphism half of the way-out step: for a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]`,

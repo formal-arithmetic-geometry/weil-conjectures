@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.ModuleCat.Basic
-public import Mathlib.Logic.UnivLE
+public import Mathlib.Basic.UnivLE
 
 /-! # A universe bound from a nonzero etale module-sheaf section
 
@@ -80,9 +80,9 @@ theorem etale_module_sheaf_section_univLE (X : Scheme.{u}) (Λ : Type v) [CommRi
   by_contra hne
   have h := congrArg (fun k ↦ k ≫ F.obj.map (q a).op) hab
   have ha : t a ≫ F.obj.map (q a).op = 𝟙 E := by
-    simpa only [x, if_pos rfl] using F.property.amalgamateOfArrows_map q hq (x a) (@hx a) a
+    simpa only [x, ite_eq_left rfl] using F.property.amalgamateOfArrows_map q hq (x a) (@hx a) a
   have hb : t b ≫ F.obj.map (q a).op = 0 := by
-    simpa only [x, if_neg hne] using F.property.amalgamateOfArrows_map q hq (x b) (@hx b) a
+    simpa only [x, ite_eq_right hne] using F.property.amalgamateOfArrows_map q hq (x b) (@hx b) a
   rw [ha, hb] at h
   apply hs
   exact ConcreteCategory.congr_hom h s

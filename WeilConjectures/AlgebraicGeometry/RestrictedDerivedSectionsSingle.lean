@@ -71,7 +71,7 @@ private lemma derived_single_comp {C D E : Type*}
     (L : C ⥤ D) (M : D ⥤ E)
     [L.Additive] [M.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesFiniteLimits M] [PreservesFiniteColimits M] (X : C) :
-    (Functor.mapDerivedCategoryCompIso L M).hom.app
+    (Functor.mapDerivedCategoryCompIso L M).inv.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       M.mapDerivedCategory.map ((L.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
         (M.mapDerivedCategorySingleFunctor 0).hom.app (L.obj X) =
@@ -103,7 +103,7 @@ private lemma complex_single_nat {C D : Type*}
   by_cases hn : n = 0
   · subst n
     simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-      CochainComplex.singleFunctors, HomologicalComplex.singleMapHomologicalComplex,
+      HomologicalComplex.singleMapHomologicalComplex,
       HomologicalComplex.single, NatTrans.mapHomologicalComplex]
   · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ n hn).eq_of_tgt _ _
 
@@ -144,8 +144,8 @@ private lemma derived_single_square {C D E C' : Type*}
     [A.Additive] [B.Additive] [PreservesFiniteLimits A] [PreservesFiniteColimits A]
     [PreservesFiniteLimits B] [PreservesFiniteColimits B]
     (e : L ⋙ M ≅ A ⋙ B) (X : C) :
-    ((Functor.mapDerivedCategoryCompIso L M).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso A B).hom.app
+    (Functor.mapDerivedCategoryCompIso L M ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso A B).symm).hom.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       B.mapDerivedCategory.map ((A.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
         (B.mapDerivedCategorySingleFunctor 0).hom.app (A.obj X) =
@@ -155,7 +155,7 @@ private lemma derived_single_square {C D E C' : Type*}
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   erw [derived_single_comp A B X, derived_single_nat e X]
   rw [← derived_single_comp L M X]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -171,8 +171,8 @@ private lemma derived_single_square_coefficient {C D E C' : Type*}
     [A.Additive] [B.Additive] [PreservesFiniteLimits A] [PreservesFiniteColimits A]
     [PreservesFiniteLimits B] [PreservesFiniteColimits B]
     (e : L ⋙ M ≅ A ⋙ B) (X : C) (Y : C') (φ : A.obj X ⟶ Y) :
-    ((Functor.mapDerivedCategoryCompIso L M).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso A B).hom.app
+    (Functor.mapDerivedCategoryCompIso L M ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso A B).symm).hom.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
       B.mapDerivedCategory.map ((A.mapDerivedCategorySingleFunctor 0).hom.app X ≫
         (DerivedCategory.singleFunctor C' 0).map φ) ≫
@@ -202,8 +202,8 @@ private lemma single_sections {C D E C' : Type*}
     (e : L ⋙ M ≅ A ⋙ B) (T : DerivedCategory D ⥤ Z) (T' : DerivedCategory E ⥤ Z)
     (δ : T ⟶ M.mapDerivedCategory ⋙ T') (X : C) (Y : C') (φ : A.obj X ⟶ Y) :
     δ.app (L.mapDerivedCategory.obj ((DerivedCategory.singleFunctor C 0).obj X)) ≫
-      T'.map (((Functor.mapDerivedCategoryCompIso L M).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso A B).hom.app
+      T'.map ((Functor.mapDerivedCategoryCompIso L M ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso A B).symm).hom.app
         ((DerivedCategory.singleFunctor C 0).obj X) ≫
         B.mapDerivedCategory.map ((A.mapDerivedCategorySingleFunctor 0).hom.app X ≫
           (DerivedCategory.singleFunctor C' 0).map φ) ≫
@@ -243,8 +243,8 @@ private lemma single_sections_expanded {C D E C' : Type*}
     (e : L ⋙ M ≅ A ⋙ B) (T : DerivedCategory D ⥤ Z) (T' : DerivedCategory E ⥤ Z)
     (δ : T ⟶ M.mapDerivedCategory ⋙ T') (X : C) (Y : C') (φ : A.obj X ⟶ Y) :
     (δ.app (L.mapDerivedCategory.obj ((DerivedCategory.singleFunctor C 0).obj X)) ≫
-      T'.map (((Functor.mapDerivedCategoryCompIso L M).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso A B).hom.app
+      T'.map ((Functor.mapDerivedCategoryCompIso L M ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso A B).symm).hom.app
         ((DerivedCategory.singleFunctor C 0).obj X))) ≫
       T'.map (B.mapDerivedCategory.map ((A.mapDerivedCategorySingleFunctor 0).hom.app X ≫
           (DerivedCategory.singleFunctor C' 0).map φ)) ≫

@@ -183,6 +183,7 @@ lemma overSheafEquiv_functor_obj_val (G : Sheaf (X.smallEtaleTopology.over U) A)
     ((overSheafEquiv U A).functor.obj G).obj = (etaleToOver U).op ⋙ G.obj :=
   rfl
 
+
 end Topology
 
 end AlgebraicGeometry.Scheme.Etale

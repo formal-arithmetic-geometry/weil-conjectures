@@ -71,8 +71,7 @@ lemma TensorProduct.bijective_one_tmul_of_surjective {R S M : Type*} [CommRing R
       exact (heq (by simp [hσ]) m).trans (one_smul R m)
     rw [← h1 m, ← h1 n]
     exact congrArg L h
-  · induction z using TensorProduct.induction_on with
-    | zero => exact ⟨0, by simp⟩
+  · induction z using TensorProduct.inductionOn with
     | tmul s m =>
       refine ⟨σ s • m, ?_⟩
       change (1 : S) ⊗ₜ[R] (σ s • m) = s ⊗ₜ[R] m

@@ -208,7 +208,7 @@ theorem exists_etaleCE_normalized_row_presentations
     have page_eq (r : ℤ) (hr : 1 ≤ r) :
         pages r (by omega) = (δ r hr).page := by
       have hr0 : r ≠ 0 := by omega
-      simp only [pages, dif_neg hr0]
+      simp only [pages, dite_eq_right hr0]
     let jp (r : ℤ) (hr : 1 ≤ r) : pages r (by omega) ≅ (δ r hr).page :=
       eqToIso (page_eq r hr)
     let E : CohomologicalSpectralSequence AddCommGrpCat.{uNatural + 1} 0 :=
@@ -411,7 +411,7 @@ theorem exists_etaleCE_normalized_row_presentations
           intro m s n h
           dsimp [w]
           rw [← Category.assoc, he m s n h, Category.assoc,
-            Functor.mapHomologicalComplex_map_f, ← F.map_comp, Category.assoc]
+            ← F.map_comp, Category.assoc]
         c := c
         c_formula := by
           intro n
@@ -428,7 +428,7 @@ theorem exists_etaleCE_normalized_row_presentations
       have hr0 : r ≠ 0 := by omega
       have hn := (filteredComplex_normalized_homology T L r hr (δ r hr) pq).choose_spec.1
       change FilteredComplexHomologyNormalized T L r (δ r hr) pq _
-      simpa only [j, EtaleTermwiseHypercohomology.sequence, D, E, dif_neg hr0,
+      simpa only [j, EtaleTermwiseHypercohomology.sequence, D, E, dite_eq_right hr0,
         Functor.mapIso_symm, Iso.trans_assoc, Iso.symm_self_id_assoc,
         Iso.symm_self_id, Iso.trans_refl] using hn
     · intro p q

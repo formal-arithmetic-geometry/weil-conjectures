@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ScalarIdentityComplexFormula
@@ -190,7 +192,7 @@ private theorem complexData_eq (l : ℕ) [Fact l.Prime]
     pbcDerivedExtend reductionDerivedChange
     completedAdicDerivedChange pbcExtensionCounit reductionDerivedCounit
     completedDerivedScalarExtension completedScalarChangeData completedAdicChangeData
-  rfl
+  with_unfolding_all rfl
 
 private theorem extension_models_eq (l : ℕ) [Fact l.Prime]
     (E : Type w) [Field E] [Algebra (Padic l) E]

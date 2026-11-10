@@ -103,6 +103,10 @@ private theorem hFiber_unit_eq_card_geometric_components
   have : IsProper (Y ↘ Spec (.of K)) := inferInstanceAs (IsProper (pullback.snd f y))
   have : IsReduced Y := isReduced_of_smooth (pullback.snd f y)
   obtain ⟨p⟩ : Nonempty (Spec (.of K)) := inferInstance
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have h := Scheme.Modules.hFiber_pullback_of_isPullback f (SheafOfModules.unit X.ringCatSheaf)
@@ -171,6 +175,10 @@ theorem proper_smooth_geometric_components_locally_constant
       n s = Scheme.Modules.hFiber (X := X) (SheafOfModules.unit X.ringCatSheaf) f 0 s :=
     (hn s).2.trans (hFiber_unit_eq_card_geometric_components f s).symm
   have := Scheme.Modules.isGrothendieckAbelian X
+  have : (SheafOfModules.unit X.ringCatSheaf).IsInvertible :=
+    SheafOfModules.instIsInvertibleUnit.{u, u, u}
+  have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
   have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
   have hupper : UpperSemicontinuous n := by

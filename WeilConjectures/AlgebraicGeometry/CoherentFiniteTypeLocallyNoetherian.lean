@@ -126,9 +126,70 @@ private theorem isFinitePresentation_of_generators_kernel
       ⟨inferInstanceAs (Finite (r.generators j).I)⟩⟩⟩
   exact D.isFinitePresentation
 
+-- Retain the existing budget for the local-presentation construction (162000 measured heartbeats).
+private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
+    (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
+    (h : RingedSpace.IsCoherent X.toRingedSpace F) :
+    F.IsQuasicoherent ∧ F.IsFiniteType := by
+  classical
+  have : F.IsFiniteType := h.1
+  obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
+  have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
+    have := hq.isFiniteType i
+    let _ := Fintype.ofFinite (q.generators i).I
+    let n := Fintype.card (q.generators i).I
+    let e := (SheafOfModules.freeFunctor (R := X.ringCatSheaf.over (q.X i))).mapIso
+      ((Equiv.ulift.trans (Fintype.equivFin (q.generators i).I).symm).toIso)
+    let f := e.hom ≫ (q.generators i).π
+    have : Epi f := inferInstanceAs (Epi (e.hom ≫ (q.generators i).π))
+    let G := SheafOfModules.GeneratingSections.ofEpiFree f
+    have : G.IsFiniteType := ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
+    have : (Limits.kernel G.π).IsFiniteType := by
+      simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
+        using h.2 (q.X i) n f
+    exact isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
+  have : F.IsFinitePresentation := by
+    exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
+      F q.I q.X q.coversTop hfp
+  exact ⟨inferInstance, h.1⟩
+
 set_option maxHeartbeats 300000 in
--- The two local-presentation constructions and slice-kernel transport need more elaboration
--- heartbeats; the complete file still compiles within the unchanged 60-second wall limit.
+-- Check the slice-kernel transport separately from the forward local-presentation construction.
+private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
+    (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
+    (hq : F.IsQuasicoherent) (ht : F.IsFiniteType) :
+    RingedSpace.IsCoherent X.toRingedSpace F := by
+  change F.IsFiniteType ∧ ∀ (U : X.Opens) (n : ℕ)
+    (f : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n)) ⟶
+      F.over U), (Limits.kernel f).IsFiniteType
+  refine ⟨ht, ?_⟩
+  intro U n f
+  have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
+  let e := overEquiv (X := X) U
+  have hfree : (SheafOfModules.free
+      (R := (Scheme.Opens.toScheme (X := X) U).ringCatSheaf)
+      (ULift.{u} (Fin n))).IsFinitePresentation :=
+    isFinitePresentation_free.{u} _
+  have : (e.functor.obj (F.over U)).IsQuasicoherent :=
+    isQuasicoherent_overEquiv X U (F.over U)
+  have : (e.functor.obj
+      (SheafOfModules.free (R := X.ringCatSheaf.over U)
+        (ULift.{u} (Fin n)))).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation
+      (Scheme.Opens.toScheme (X := X) U).ringCatSheaf).prop_of_iso
+      (SheafOfModules.mapFreeIso e.functor (ULift.{u} (Fin n))
+        (U.sheafOfModulesEquivOverUnit X.ringCatSheaf).symm) hfree
+  have hk := isFinitePresentation_kernel
+    (X := Scheme.Opens.toScheme (X := X) U) (e.functor.map f)
+  have hki := @isFinitePresentation_overEquiv_inverse X U
+    (Limits.kernel (e.functor.map f)) hk
+  let ek := e.unitIso.app (Limits.kernel f) ≪≫
+    e.inverse.mapIso (Limits.PreservesKernel.iso e.functor f)
+  have : (Limits.kernel f).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation (X.ringCatSheaf.over U)).prop_of_iso
+      ek.symm hki
+  exact SheafOfModules.instIsFiniteTypeOfIsFinitePresentation (Limits.kernel f)
+
 /-- On a locally Noetherian scheme, an `𝒪_X`-module is coherent exactly when it is
 quasi-coherent and of finite type.
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.1, Tag 01XZ
@@ -152,59 +213,7 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) :
     RingedSpace.IsCoherent X.toRingedSpace F ↔
       F.IsQuasicoherent ∧ F.IsFiniteType := by
-  constructor
-  · intro h
-    classical
-    have : F.IsFiniteType := h.1
-    obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
-    have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
-      have := hq.isFiniteType i
-      let _ := Fintype.ofFinite (q.generators i).I
-      let n := Fintype.card (q.generators i).I
-      let e := (SheafOfModules.freeFunctor (R := X.ringCatSheaf.over (q.X i))).mapIso
-        ((Equiv.ulift.trans (Fintype.equivFin (q.generators i).I).symm).toIso)
-      let f := e.hom ≫ (q.generators i).π
-      have : Epi f := inferInstanceAs (Epi (e.hom ≫ (q.generators i).π))
-      let G := SheafOfModules.GeneratingSections.ofEpiFree f
-      have : G.IsFiniteType := ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
-      have : (Limits.kernel G.π).IsFiniteType := by
-        simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
-          using h.2 (q.X i) n f
-      exact isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
-    have : F.IsFinitePresentation := by
-      exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
-        F q.I q.X q.coversTop hfp
-    exact ⟨inferInstance, h.1⟩
-  · rintro ⟨hq, ht⟩
-    change F.IsFiniteType ∧ ∀ (U : X.Opens) (n : ℕ)
-      (f : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n)) ⟶
-        F.over U), (Limits.kernel f).IsFiniteType
-    refine ⟨ht, ?_⟩
-    intro U n f
-    have : (F.over U).IsQuasicoherent := SheafOfModules.isQuasicoherent_over F U
-    let e := overEquiv (X := X) U
-    have hfree : (SheafOfModules.free
-        (R := (Scheme.Opens.toScheme (X := X) U).ringCatSheaf)
-        (ULift.{u} (Fin n))).IsFinitePresentation :=
-      isFinitePresentation_free.{u} _
-    have : (e.functor.obj (F.over U)).IsQuasicoherent :=
-      isQuasicoherent_overEquiv X U (F.over U)
-    have : (e.functor.obj
-        (SheafOfModules.free (R := X.ringCatSheaf.over U)
-          (ULift.{u} (Fin n)))).IsFinitePresentation :=
-      (SheafOfModules.isFinitePresentation
-        (Scheme.Opens.toScheme (X := X) U).ringCatSheaf).prop_of_iso
-        (SheafOfModules.mapFreeIso e.functor (ULift.{u} (Fin n))
-          (U.sheafOfModulesEquivOverUnit X.ringCatSheaf).symm) hfree
-    have hk := isFinitePresentation_kernel
-      (X := Scheme.Opens.toScheme (X := X) U) (e.functor.map f)
-    have hki := @isFinitePresentation_overEquiv_inverse X U
-      (Limits.kernel (e.functor.map f)) hk
-    let ek := e.unitIso.app (Limits.kernel f) ≪≫
-      e.inverse.mapIso (Limits.PreservesKernel.iso e.functor f)
-    have : (Limits.kernel f).IsFinitePresentation :=
-      (SheafOfModules.isFinitePresentation (X.ringCatSheaf.over U)).prop_of_iso
-        ek.symm hki
-    exact SheafOfModules.instIsFiniteTypeOfIsFinitePresentation (Limits.kernel f)
+  exact ⟨isQuasicoherent_and_isFiniteType_of_isCoherent X F,
+    fun ⟨hq, ht⟩ ↦ isCoherent_of_isQuasicoherent_and_isFiniteType X F hq ht⟩
 
 end AlgebraicGeometry.Scheme.Modules

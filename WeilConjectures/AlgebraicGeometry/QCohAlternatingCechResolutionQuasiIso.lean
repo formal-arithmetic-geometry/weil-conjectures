@@ -94,7 +94,7 @@ private theorem alternatingCechColumnProjection_isIso
     simp only [Category.assoc, piComparison_comp_π]
     change ((Limits.Pi.lift (alternatingCechColumnProjection U F k)) ≫
       Limits.Pi.π P t).f n = _
-    rw [Limits.Pi.lift_π]
+    rw [Limits.Pi.lift_comp_π]
     erw [ModuleCat.piIsoPi_inv_kernel_ι]
     rfl
   have : IsIso ((Limits.Pi.lift (alternatingCechColumnProjection U F k)).f n ≫
@@ -152,8 +152,8 @@ private theorem alternatingCechColumn_quasiIso
         Limits.Pi.lift (alternatingCechColumnProjection U F k) ≫ Limits.Pi.map a := by
     apply Limits.Pi.hom_ext
     intro t
-    simp only [Category.assoc, Limits.Pi.lift_π]
-    erw [Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+    simp only [Category.assoc, Limits.Pi.lift_comp_π]
+    erw [Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc]
     apply HomologicalComplex.hom_ext
     intro n
     change (HomologicalComplex.extendMap

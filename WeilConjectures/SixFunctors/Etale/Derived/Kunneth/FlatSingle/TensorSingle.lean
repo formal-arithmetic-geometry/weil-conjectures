@@ -59,7 +59,6 @@ noncomputable def quotientTensorRightIso (L : CochainComplex (Sheaf X.smallEtale
   NatIso.ofComponents (fun K ↦ Functor.Monoidal.μIso (HomotopyCategory.quotient _ (.up ℤ)) K L)
     (fun f ↦ by
       dsimp
-      rw [Functor.Monoidal.μIso_hom, Functor.Monoidal.μIso_hom]
       exact Functor.LaxMonoidal.μ_natural_left _ _ _)
 
 variable (A X) in

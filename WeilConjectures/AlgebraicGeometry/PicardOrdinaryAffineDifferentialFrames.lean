@@ -141,10 +141,10 @@ private lemma exists_iso_free_sections {M : SheafOfModules.{w} R} {I A : Type w}
       rw [ιFree_freeπ]
       by_cases hij : i = j
       · subst j
-        rw [if_pos rfl]
+        rw [ite_eq_left rfl]
         simp [b, Pi.basisFun_apply]
-      · rw [if_neg hij]
-        simp only [b, Pi.basisFun_apply, Pi.single_apply, if_neg (Ne.symm hij)]
+      · rw [ite_eq_right hij]
+        simp only [b, Pi.basisFun_apply, Pi.single_apply, ite_eq_right (Ne.symm hij)]
         rfl
     rw [hc]
     change e ((ιFree i ≫ g).val.app (op T) (1 : R.obj.obj (op T))) = _

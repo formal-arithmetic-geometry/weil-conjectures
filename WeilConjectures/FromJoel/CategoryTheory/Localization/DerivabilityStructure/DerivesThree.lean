@@ -52,6 +52,7 @@ include h in
 lemma hasLeftDerivedFunctor₃ : F.HasLeftDerivedFunctor₃ W₁ W₂ W₃ :=
   Derives.hasLeftDerivedFunctor h
 
+
 include h in
 lemma isIso_of_isLeftDerivabilityStructure
     {L₁ : C₁ ⥤ D₁} {L₂ : C₂ ⥤ D₂} {L₃ : C₃ ⥤ D₃} [L₁.IsLocalization W₁]

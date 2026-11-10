@@ -40,7 +40,7 @@ noncomputable def integersSubalgebra (F : IntermediateField ℚ_[l] (PadicAlgCl 
   carrier := {z | z ∈ F ∧ ‖z‖ ≤ 1}
   mul_mem' {a b} ha hb := ⟨mul_mem ha.1 hb.1, by
     rw [norm_mul]
-    exact mul_le_one₀ ha.2 (norm_nonneg _) hb.2⟩
+    exact (mul_le_of_le_one_left (norm_nonneg _) ha.2).trans hb.2⟩
   add_mem' {a b} ha hb := ⟨add_mem ha.1 hb.1,
     (PadicAlgCl.isNonarchimedean l a b).trans (max_le ha.2 hb.2)⟩
   algebraMap_mem' r := ⟨h (r : E).2, by

@@ -305,7 +305,7 @@ theorem strictLocalizationPullback_sections [IsProper f] :
   let Φ : CategoryTheory.Over d₀ ⥤ Scheme.AffinePointedEtaleNeighborhood y :=
     CategoryTheory.Over.forget d₀ ⋙ ι₀
   let U : CategoryTheory.Over d₀ ⥤ X.Etale :=
-    Φ ⋙ Scheme.AffinePointedEtaleNeighborhood.ι y ⋙ CategoryOfElements.π _ ⋙ f.Etale
+    Φ ⋙ Scheme.AffinePointedEtaleNeighborhood.ι y ⋙ Functor.Elements.π _ ⋙ f.Etale
   let cK := (CategoryTheory.Over.forget X).mapCone
     ((CategoryTheory.Over.pullback f).mapCone (Scheme.strictLocalizationConeOver y))
   let E : Φ ⋙ (Scheme.affineNeighborhoodDiagramOver y ⋙ CategoryTheory.Over.pullback f) ⋙
@@ -428,7 +428,8 @@ theorem bijective_stalkToFibreSections_of_isProper [IsProper f] [IsAlgClosed Ω]
         (pointSmallEtale y).toPresheafFiber x.obj.1 x.obj.2
           ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s = z := by
     obtain ⟨V, v, s, rfl⟩ := (pointSmallEtale y).toPresheafFiber_jointly_surjective z
-    obtain ⟨x, ⟨g⟩⟩ := Scheme.AffinePointedEtaleNeighborhood.exists_hom y ⟨V, v⟩
+    obtain ⟨x, ⟨g⟩⟩ := Scheme.AffinePointedEtaleNeighborhood.exists_hom y
+      (Functor.elementsMk _ V v)
     refine ⟨x, ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj.map g.1.op s, ?_⟩
     exact (GrothendieckTopology.Point.toPresheafFiber_w_apply _ g.1 x.obj.2 _ s).trans
       (congrArg (fun w ↦ (pointSmallEtale y).toPresheafFiber V w

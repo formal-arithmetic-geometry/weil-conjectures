@@ -27,7 +27,7 @@ private theorem ulift_isLocallyInjective {C : Type v} [Category.{v} C] (J : Grot
   have hh := Presheaf.equalizerSieve_mem J f x.down y.down (congrArg ULift.down h)
   apply J.superset_covering _ hh
   intro W g hg
-  exact ULift.ext _ _ hg
+  exact ULift.ext hg
 
 private theorem ulift_isLocallySurjective {C : Type v} [Category.{v} C] (J : GrothendieckTopology C)
     {P Q : Cᵒᵖ ⥤ AddCommGrpCat.{u}} (f : P ⟶ Q) [Presheaf.IsLocallySurjective J f] :
@@ -37,7 +37,7 @@ private theorem ulift_isLocallySurjective {C : Type v} [Category.{v} C] (J : Gro
   apply J.superset_covering _ (Presheaf.imageSieve_mem J f x.down)
   intro W g hg
   obtain ⟨y, hy⟩ := hg
-  exact ⟨ULift.up y, ULift.ext _ _ hy⟩
+  exact ⟨ULift.up y, ULift.ext hy⟩
 
 private theorem hasSheafify_large {C : Type v} [Category.{v} C] (J : GrothendieckTopology C) :
     HasSheafify J AddCommGrpCat.{max u v} := by

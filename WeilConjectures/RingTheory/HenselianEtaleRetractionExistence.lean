@@ -90,5 +90,5 @@ theorem exists_algHom_of_henselianLocalRing_etale
     have : Etale (Spec.map (CommRingCat.ofHom (algebraMap S B))) :=
       ‹Etale (Scheme.Spec.map (CommRingCat.ofHom φ).op)›
     exact (IsLocalRing.existsUnique_algHom_of_monic_simple_root_lifting_etale
-      (((HenselianLocalRing.TFAE S).out 0 1).mp
+      (((HenselianLocalRing.TFAE S).out 1 2).mp
         (show HenselianLocalRing S from inferInstance)) q' hq hspec).exists

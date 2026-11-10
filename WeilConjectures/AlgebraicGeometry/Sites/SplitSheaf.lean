@@ -237,13 +237,14 @@ lemma range_zmodHom : AddMonoidHom.range (zmodHom ℓ hz).hom = AddSubgroup.zmul
   · rintro ⟨n, rfl⟩
     exact ⟨⟨(n : ZMod ℓ)⟩, zmodHom_apply ℓ hz n⟩
 
+
 lemma injective_zmodHom (hℓ : addOrderOf z = ℓ) : Function.Injective (zmodHom ℓ hz).hom := by
   refine (injective_iff_map_eq_zero _).2 fun ⟨c⟩ hc ↦ ?_
   obtain ⟨n, rfl⟩ := ZMod.intCast_surjective c
   have : n • z = 0 := (zmodHom_apply ℓ hz n).symm.trans hc
   have hd := addOrderOf_dvd_iff_zsmul_eq_zero.2 this
   rw [hℓ] at hd
-  exact ULift.ext _ _ ((ZMod.intCast_zmod_eq_zero_iff_dvd n ℓ).2 hd)
+  exact ULift.ext ((ZMod.intCast_zmod_eq_zero_iff_dvd n ℓ).2 hd)
 
 /-- The morphism `ℤ/ℓ ⟶ N` of sheaves sending `1` to the global section `z`. -/
 noncomputable def constantZModHom : (Spec (.of F)).constantZMod ℓ ⟶ N :=

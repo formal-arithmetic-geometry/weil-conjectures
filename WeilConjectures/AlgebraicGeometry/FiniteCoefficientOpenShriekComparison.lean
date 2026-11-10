@@ -65,8 +65,8 @@ theorem finiteCoefficientDerivedOpenShriekComparison
         (finiteCoefficientDerivedEquivalence U A).functor ⋙
           (openImmersionLowerShriek
             (ModuleCat.{u + 1} (ULift.{u + 1} A)) j).mapDerivedCategory) := by
-  exact ⟨(Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact ⟨Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openShriekFiniteCoefficientModEquivalenceIso A j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _⟩
+    (Functor.mapDerivedCategoryCompIso _ _).symm⟩
 
 end AlgebraicGeometry.ProEtale

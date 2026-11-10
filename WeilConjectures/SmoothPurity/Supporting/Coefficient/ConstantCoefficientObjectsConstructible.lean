@@ -52,7 +52,8 @@ namespace WeilConjectures
 
 attribute [local instance] HasDerivedCategory.standard
 
-local instance (Y : AlgebraicGeometry.Scheme.{u}) :
+local instance instEssentiallySmallProEt_constantCoefficientObjectsConstructible
+    (Y : AlgebraicGeometry.Scheme.{u}) :
     EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{u} _
 
 private theorem exists_coefficientTestDatum (l : ℕ) :

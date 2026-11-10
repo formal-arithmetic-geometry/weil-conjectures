@@ -111,7 +111,7 @@ theorem classH1_eq_map_of_hom (φ : M →+ M') (t : EtaleTorsor M Y) (t' : Etale
   let Φ' : t.toEtale ⟶ t'.toEtale := MorphismProperty.Over.homMk Φ hΦ
   rw [classH1_mk, classH1_mk]
   refine Sheaf.Torsor.classH1_eq_map_of_equivariant _ _ _ _ (fun U x ↦ ⟨x.down ≫ Φ'⟩)
-    (fun U V f x ↦ ULift.ext _ _ (by
+    (fun U V f x ↦ ULift.ext (by
       change f.unop ≫ x.down ≫ Φ' = (f.unop ≫ x.down) ≫ Φ'
       exact (Category.assoc _ _ _).symm)) (fun U a x ↦ ?_)
   have hnat : (Etale.constantSheafToContinuousMapSheaf Y M').hom.app U

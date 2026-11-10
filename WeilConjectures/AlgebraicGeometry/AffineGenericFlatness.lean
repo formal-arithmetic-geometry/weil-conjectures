@@ -51,8 +51,6 @@ theorem exists_nonzero_flat_restrict_basicOpen {X S : Scheme.{u}}
     apply (HasRingHomProperty.iff_of_isAffine (P := @Flat)).mpr
     rw [Scheme.Hom.comp_appTop, CommRingCat.hom_comp]
     convert hflat Γ(V, ⊤) using 1
-    ext b
-    rfl
   apply MorphismProperty.of_postcomp @Flat (W' := @IsOpenImmersion)
     (f ∣_ S.basicOpen a) (S.basicOpen a).ι inferInstance
   rw [morphismRestrict_ι]

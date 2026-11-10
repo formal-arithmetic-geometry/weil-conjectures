@@ -81,7 +81,7 @@ theorem realized_compatibility_transpose
     (((ScalarCompatibility.compositeAdjunction s t).comp
       (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
         (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse
-          (ScalarCompatibility.compositeRestriction s t)).symm).homEquiv _ _
+          (ScalarCompatibility.compositeRestriction s t))).homEquiv _ _
         (finiteSourceIso e (ScalarCompatibility.compositeSource s t) c).hom =
       (DerivedCategory.singleFunctor _ 0).map
         ((s.supported.semilinear.hom ≫

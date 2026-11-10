@@ -30,7 +30,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 attribute [local implicit_reducible] integralOperationsRoos integralOperationsRoosFunctor
   integralOperationsPullbackComplexFunctor integralOperationsGoodLocalization
   integralOperationsPullbackOnGood
-  Functor.mapHomologicalComplex CochainComplex.mappingCocone
+  CochainComplex.mappingCocone
   completedOrdinaryScalarComplex scalarPullbackSourceTower scalarPullbackRoosEnd
 attribute [local instance 5000] integralTowerHasDerivedCategory
 

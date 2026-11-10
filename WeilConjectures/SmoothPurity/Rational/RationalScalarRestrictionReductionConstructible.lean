@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarDerivedRestriction
 public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructible
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCohomologicalSupport
@@ -55,8 +57,8 @@ section RamifiedSquare
 `ι(ϖ_E) O_F = ϖ_F^e O_F`. Source: Serre, Local Fields, Chapter I, Proposition 9. -/
 theorem exists_coefficientRamification :
     ∃ e : ℕ, 1 ≤ e ∧
-      Ideal.span ({integralScalarIntegerInclusion l E F ι
-        (Padic.coefficientExtensionUniformizer l E)} :
+      Ideal.span ({(integralScalarIntegerInclusion l E F ι
+        (Padic.coefficientExtensionUniformizer l E))} :
           Set (Padic.coefficientExtensionIntegers l F)) =
         Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e} := by
   obtain ⟨e, he, h, _⟩ := RamifiedPullback.ramification_exists l E F ι
@@ -72,8 +74,8 @@ theorem ramifiedIndex_add_one {e : ℕ} (he : 1 ≤ e) (n : ℕ) :
 /-- A source uniformizer power maps into the ramified target ideal.
 Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 theorem ramifiedCoefficientQuotient_kernel {e : ℕ} (he : 1 ≤ e)
-    (hideal : Ideal.span ({integralScalarIntegerInclusion l E F ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
+      (Padic.coefficientExtensionUniformizer l E))} :
         Set (Padic.coefficientExtensionIntegers l F)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e}) (n : ℕ)
     (x : Padic.coefficientExtensionIntegers l E)
@@ -93,8 +95,8 @@ theorem ramifiedCoefficientQuotient_kernel {e : ℕ} (he : 1 ≤ e)
 /-- The ramified quotient map `O_E/ϖ_E^(n+1) → O_F/ϖ_F^(e(n+1))` induced by `ι`.
 Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 noncomputable def ramifiedCoefficientQuotient {e : ℕ} (he : 1 ≤ e)
-    (hideal : Ideal.span ({integralScalarIntegerInclusion l E F ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
+      (Padic.coefficientExtensionUniformizer l E))} :
         Set (Padic.coefficientExtensionIntegers l F)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e}) (n : ℕ) :
     Padic.coefficientExtensionRing l E (n + 1) →+*
@@ -108,8 +110,8 @@ noncomputable def ramifiedCoefficientQuotient {e : ℕ} (he : 1 ≤ e)
 /-- The completed coefficient inclusion reduces to the ramified quotient map.
 Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 theorem completedCoefficientMap_ramifiedProjection {e : ℕ} (he : 1 ≤ e)
-    (hideal : Ideal.span ({integralScalarIntegerInclusion l E F ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
+      (Padic.coefficientExtensionUniformizer l E))} :
         Set (Padic.coefficientExtensionIntegers l F)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e}) (n : ℕ) :
     completedCoefficientMap l E F ι W ≫
@@ -134,8 +136,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 `R_F(U) ⊗_{R_E(U)} A_E(U) = A_F(U)`. Source: Stacks Project, Tag 093M;
 Bhatt--Scholze, Lemma 6.8.2(1). -/
 theorem completedRamifiedSquare_isPushout {e : ℕ} (he : 1 ≤ e)
-    (hideal : Ideal.span ({integralScalarIntegerInclusion l E F ι
-      (Padic.coefficientExtensionUniformizer l E)} :
+    (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
+      (Padic.coefficientExtensionUniformizer l E))} :
         Set (Padic.coefficientExtensionIntegers l F)) =
       Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e}) (n : ℕ)
     (U : W.ProEtᵒᵖ) :
@@ -154,10 +156,10 @@ theorem completedRamifiedSquare_isPushout {e : ℕ} (he : 1 ≤ e)
           ((completedIntegralCommRingProjectionUnrestricted l E W n).hom.app U).hom) := by
     rw [AlgebraicGeometry.ProEtale.uniformizer_kernel,
       AlgebraicGeometry.ProEtale.uniformizer_kernel]
-    change Ideal.span {scalarValue l F W U
-        (Padic.coefficientExtensionUniformizer l F) ^ (RamifiedPullback.index e n + 1)} =
-      Ideal.map (c.hom.app U).hom (Ideal.span {scalarValue l E W U
-        (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)})
+    change Ideal.span {(scalarValue l F W U
+        (Padic.coefficientExtensionUniformizer l F) ^ (RamifiedPullback.index e n + 1))} =
+      Ideal.map (c.hom.app U).hom (Ideal.span {(scalarValue l E W U
+        (Padic.coefficientExtensionUniformizer l E) ^ (n + 1))})
     rw [Ideal.map_span, Set.image_singleton, map_pow]
     have hc := scalarValue_map l E W F ι U (Padic.coefficientExtensionUniformizer l E)
     change (c.hom.app U).hom _ = _ at hc
@@ -200,8 +202,8 @@ private noncomputable instance (priority := high) proEtSite_locallyBijective
   integralCoefficientAbLocallyBijective.{u, u} T
 
 variable {e : ℕ} (he : 1 ≤ e)
-  (hideal : Ideal.span ({integralScalarIntegerInclusion l E F ι
-    (Padic.coefficientExtensionUniformizer l E)} :
+  (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
+    (Padic.coefficientExtensionUniformizer l E))} :
       Set (Padic.coefficientExtensionIntegers l F)) =
     Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e}) (n : ℕ)
 

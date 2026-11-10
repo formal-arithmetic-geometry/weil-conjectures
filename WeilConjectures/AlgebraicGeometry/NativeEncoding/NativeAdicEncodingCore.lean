@@ -282,6 +282,7 @@ theorem encoding_exact_derived (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     have := h
     infer_instance
 
+
 private lemma finiteComparison_eq_chart (ℓ : ℕ) [Fact ℓ.Prime]
     (T : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (CondensedQbarCoefficientRealization.fieldDiagramIso ℓ T).hom.app E =

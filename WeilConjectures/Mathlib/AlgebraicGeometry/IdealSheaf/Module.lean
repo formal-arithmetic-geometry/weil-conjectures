@@ -102,6 +102,7 @@ lemma map_kernelι_eq_toModulesι_app (U : X.Opens) (x : Γ(J.toModules, U)) :
       J.toModulesι.app U x :=
   rfl
 
+
 /-- The ideal cut out by `J` on an **arbitrary** open subset, not just an affine one: the
 kernel of the restriction map to the closed subscheme.
 

@@ -117,8 +117,8 @@ lemma finite_sections_constantSheaf_moduleCat [Finite (_root_.ConnectedComponent
       (op (Etale.mk (𝟙 X)))) := by
   let M' := (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj M
   have : Finite M' := ‹Finite M›
-  have := finite_sections_constantSheaf X M'
-  exact Finite.of_equiv _ (((sheafifyComposeIso X.smallEtaleTopology
+  have hfinite := finite_sections_constantSheaf X M'
+  exact @Finite.of_equiv _ _ hfinite (((sheafifyComposeIso X.smallEtaleTopology
     (CategoryTheory.forget AddCommGrpCat)
     ((Functor.const X.Etaleᵒᵖ).obj M')).app _).toEquiv.symm.trans
       ((sheafifyComposeIso X.smallEtaleTopology (CategoryTheory.forget (ModuleCat.{u + 1} Λ))

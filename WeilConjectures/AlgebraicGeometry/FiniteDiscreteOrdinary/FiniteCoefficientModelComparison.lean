@@ -483,7 +483,7 @@ private theorem sheafConstructibility [Finite A] [DiscreteTopology A]
     IsConstantModelConstructible (coefficient A) X M ↔
       Scheme.IsConstructibleProEtaleModuleSheaf X A ((E X).ordinary.functor.obj M) := by
   have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
-  rw [IsConstantModelConstructible, if_pos hqc]
+  rw [IsConstantModelConstructible, ite_eq_left hqc]
   constructor
   · rintro ⟨S, hS⟩
     have h := (strataComparison A E X M S).mp hS

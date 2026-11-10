@@ -105,7 +105,7 @@ end PureTensorFormula
 
 omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
   HasDerivedCategory.{w} (Modules.{t, a} X R)] in
-private theorem pure_eq_ordinary
+private theorem pure_eq_ordinary_private
     {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (M N : Modules.{t, a} X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
     LineUnbounded.pureTensor.{t, a} X R M N U x y =
@@ -118,6 +118,10 @@ private theorem pure_eq_ordinary
       | Lean.throwError "missing comparison proof"
     (← Lean.Elab.Tactic.getMainGoal).assign hd.toExpr
     Lean.Elab.Tactic.replaceMainGoal []
+
+/-- Public export of the private `pure_eq_ordinary_private`
+(used by `import all` importers; linter.privateModule). -/
+alias pure_eq_ordinary := pure_eq_ordinary_private
 
 private def tensor_site
     {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
@@ -135,7 +139,7 @@ private theorem tensor_site_pure
       siteSheafTensorTmul (J := Scheme.ProEt.topology X) (A := R) M N U x y := by
   unfold tensor_site
   have hcomputed := (congrArg ((ScalarHomOrdinary.tensorIsoSite R M N).hom.val.app U)
-    (pure_eq_ordinary M N U x y)).trans
+    (pure_eq_ordinary_private M N U x y)).trans
       (ScalarHomOrdinary.tensorIsoSite_pure.{t + 1, t, max a (t + 1)} R M N U x y)
   -- Reuse the inferred proof; the kernel checks the displayed target.
   run_tac Lean.Elab.Tactic.withMainContext do

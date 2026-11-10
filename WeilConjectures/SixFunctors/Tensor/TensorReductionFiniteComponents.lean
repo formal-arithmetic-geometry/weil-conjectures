@@ -105,7 +105,6 @@ private theorem evaluationIso_component (W : Scheme.{u}) (n : ℕ)
   unfold tensorReductionEvaluationComplexIso
   simp only [HomologicalComplex.comp_f, NatIso.mapHomologicalComplex_inv_app_f,
     NatIso.mapHomologicalComplex_hom_app_f]
-  rfl
 
 private theorem tensorDegreeMap_literal (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (i : ℤ) (n : ℕ)

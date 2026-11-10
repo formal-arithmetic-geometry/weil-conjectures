@@ -8,6 +8,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine cohomology coordinates for a supplied ordinary comparison
 
@@ -57,16 +60,25 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
             (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))) := by
   let T := affinePushforwardTilde A
   let F := ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B
-  let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
-  let : (affinePushforwardTilde B).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let P : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace) :=
+    Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
+  let : (affinePushforwardTilde B).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits (affinePushforwardTilde B) :=
     Functor.preservesFiniteLimits_of_preservesHomology (affinePushforwardTilde B)
   let : PreservesFiniteColimits (affinePushforwardTilde B) :=
     Functor.preservesFiniteColimits_of_preservesHomology (affinePushforwardTilde B)
   let : F.PreservesHomology := inferInstance
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : P.Additive := inferInstance
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
+  let : P.Additive := RingedSpace.moduleDirectImage_additive
+    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom
   let D := (T.mapHomologicalComplex (.up ℤ)).obj C
   let a : (F.mapHomologicalComplex (.up ℤ)).obj C ⟶
       (P.mapHomologicalComplex (.up ℤ)).obj D :=
@@ -79,7 +91,7 @@ def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [Comm
     ((DerivedCategory.homologyFunctorFactors _ i).app
       ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
     H.map (DerivedCategory.Q.map a) ≫
-    H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D))
+    cast (by rfl) (H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D)))
 
 /-- Cohomology coordinates from the tilde unit and exact homology comparisons.
 Source: Stacks Project, Tags 01I9 and 06Z0.
@@ -93,7 +105,10 @@ def affinePushforwardRepresentativeCohomologyIso (A : Type u) [CommRing A]
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).obj L) := by
   let T := affinePushforwardTilde A
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
   let : T.PreservesHomology := tilde_preservesHomology A
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i

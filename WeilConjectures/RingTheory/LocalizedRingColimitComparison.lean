@@ -151,7 +151,6 @@ theorem localizedRingColimitComparison
               (s.ι.app i).hom ((eᵢ i).symm (algebraMap _ _ x)) at hh
           simp only [RingEquiv.apply_symm_apply, Localization.localRingHom_to_map] at hh
           convert hh using 1
-          rfl
         ext x
         change m.hom (algebraMap _ _ x) = IsLocalization.lift (hu s) (algebraMap _ _ x)
         rw [IsLocalization.lift_eq]

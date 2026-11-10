@@ -117,6 +117,7 @@ lemma twist_def (m : ℤ) :
       (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m) :=
   rfl
 
+
 /-- **`𝒪(0)` is the structure sheaf** of `ℙ(n; S)`. -/
 def unitIsoTwistZero : SheafOfModules.unit (ℙ(n; S)).ringCatSheaf ≅ twist n S 0 :=
   (Scheme.Modules.pullbackObjUnitIso (toProjInt n S)).symm ≪≫
@@ -152,7 +153,7 @@ instance Proj.epi_sigmaUnitToTwist (R : Type u) [CommRing R] (d : ℕ) :
   have : IsIso ((Scheme.Modules.restrictFunctor
       (Proj.basicOpen _ (MvPolynomial.X j ^ d)).ι).map
         (SheafOfModules.ιFree j ≫ Proj.sigmaUnitToTwist n R d)) := by
-    rw [Proj.sigmaUnitToTwist, SheafOfModules.ιFree, Limits.Sigma.ι_desc, Functor.map_comp,
+    rw [Proj.sigmaUnitToTwist, SheafOfModules.ιFree, Limits.Sigma.ι_comp_desc, Functor.map_comp,
       Functor.map_comp]
     have : IsIso ((Scheme.Modules.restrictFunctor
         (Proj.basicOpen _ (MvPolynomial.X j ^ d)).ι).map

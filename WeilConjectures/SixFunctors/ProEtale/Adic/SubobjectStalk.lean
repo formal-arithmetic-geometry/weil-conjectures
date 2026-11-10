@@ -142,7 +142,8 @@ lemma adicStalkSubspace_finset_sup {B : AdicSheaf l Y} {ι : Type*} (s : Finset 
     adicStalkSubspace t (s.sup Q) = ⨆ i ∈ s, adicStalkSubspace t (Q i) := by
   classical
   induction s using Finset.induction_on with
-  | empty => simp [adicStalkSubspace_bot]
+  | empty =>
+    simp only [Finset.sup_empty, adicStalkSubspace_bot, Finset.notMem_empty, iSup_false, iSup_bot]
   | insert i s hi ih => rw [Finset.sup_insert, adicStalkSubspace_sup, ih, Finset.iSup_insert]
 
 /-- A supremum of two lisse subsheaves of a lisse sheaf on a locally Noetherian scheme is lisse:

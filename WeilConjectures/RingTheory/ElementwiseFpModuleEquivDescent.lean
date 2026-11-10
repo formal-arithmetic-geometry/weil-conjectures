@@ -166,8 +166,7 @@ private theorem tensor_elementwise
   have e_of (j : J) (t : A j ⊗[R] M) :
       e (Module.DirectLimit.of R J (fun j ↦ A j ⊗[R] M) dt j t) =
         (μ j).rTensor M t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a m =>
       dsimp only [e, dt]
       rw [LinearEquiv.trans_apply, TensorProduct.directLimitLeft_symm_of_tmul,
@@ -178,14 +177,12 @@ private theorem tensor_elementwise
   let : DirectedSystem (fun j ↦ A j ⊗[R] M) (fun {j k} h ↦ dt j k h) :=
     { map_self := by
         intro j t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul a m => simp only [dt, LinearMap.rTensor_tmul, DirectedSystem.map_self']
         | add t u ht hu => simpa only [map_add] using congrArg₂ (· + ·) ht hu
       map_map := by
         intro j k l hjk hkl t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul a m => simp only [dt, LinearMap.rTensor_tmul, DirectedSystem.map_map']
         | add t u ht hu => simpa only [map_add] using congrArg₂ (· + ·) ht hu }
   constructor
@@ -206,8 +203,7 @@ private theorem tensor_map_smul
     [Algebra R A] [Algebra R B] [AddCommGroup M] [Module R M]
     (φ : A →ₐ[R] B) (a : A) (t : A ⊗[R] M) :
     φ.toLinearMap.rTensor M (a • t) = φ a • φ.toLinearMap.rTensor M t := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul b m => simp [TensorProduct.smul_tmul', map_mul]
   | add t u ht hu => simp only [smul_add, map_add, ht, hu]
 
@@ -219,8 +215,7 @@ private theorem tensor_lift_naturality
     φ.toLinearMap.rTensor N (a.liftBaseChange A t) =
       ((φ.toLinearMap.rTensor N).comp a).liftBaseChange B
         (φ.toLinearMap.rTensor M t) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul b m =>
     simp only [LinearMap.liftBaseChange_tmul, LinearMap.rTensor_tmul,
       AlgHom.toLinearMap_apply, LinearMap.comp_apply]
@@ -236,8 +231,7 @@ private theorem tensor_lift_limit
     (ha : ∀ m, φ.toLinearMap.rTensor N (a m) = E (1 ⊗ₜ[R] m))
     (t : A ⊗[R] M) :
     φ.toLinearMap.rTensor N (a.liftBaseChange A t) = E (φ.toLinearMap.rTensor M t) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul b m =>
     rw [LinearMap.liftBaseChange_tmul, tensor_map_smul, ha]
     simp only [LinearMap.rTensor_tmul, AlgHom.toLinearMap_apply]
@@ -374,13 +368,11 @@ theorem exists_stage_equiv_of_elementwise_colimit
   let μP (j : K) : DP j →ₗ[R] C ⊗[R] P := (q j).toLinearMap.rTensor P
   have dcP {j k l : K} (hjk : j ≤ k) (hkl : k ≤ l) (x : DP j) :
       dP hkl (dP hjk x) = dP (hjk.trans hkl) x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a m => exact congrArg (fun a ↦ a ⊗ₜ[R] m) (tc j k l hjk hkl a)
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   have μcP {j k : K} (hjk : j ≤ k) (x : DP j) : μP k (dP hjk x) = μP j x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a m => exact congrArg (fun a ↦ a ⊗ₜ[R] m) (qc j k hjk a)
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   have criterionP := tensor_elementwise B t ts tc q qc qs qz P
@@ -390,13 +382,11 @@ theorem exists_stage_equiv_of_elementwise_colimit
   let μN (j : K) : DN j →ₗ[R] C ⊗[R] N := (q j).toLinearMap.rTensor N
   have dcN {j k l : K} (hjk : j ≤ k) (hkl : k ≤ l) (x : DN j) :
       dN hkl (dN hjk x) = dN (hjk.trans hkl) x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a m => exact congrArg (fun a ↦ a ⊗ₜ[R] m) (tc j k l hjk hkl a)
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   have μcN {j k : K} (hjk : j ≤ k) (x : DN j) : μN k (dN hjk x) = μN j x := by
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a m => exact congrArg (fun a ↦ a ⊗ₜ[R] m) (qc j k hjk a)
     | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   have criterionN := tensor_elementwise B t ts tc q qc qs qz N

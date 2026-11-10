@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedRealization
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
@@ -64,6 +66,44 @@ private theorem factorsh_quotient
   erw [CategoryTheory.Functor.map_id, DerivedCategory.Qh.map_id]
   erw [Category.comp_id, Category.comp_id, Category.id_comp]
 
+private theorem counit_quotient_transport
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : A ⥤ B) [F.Additive] (LF : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex A ℤ) :
+    LF.map ((DerivedCategory.quotientCompQhIso A).inv.app P) ≫
+        ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+        (DerivedCategory.quotientCompQhIso B).hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+    Quotient.lift.isLift_hom]
+  erw [LF.map_id, DerivedCategory.Qh.map_id]
+  erw [Category.comp_id, Category.comp_id, Category.id_comp]
+
+private theorem unit_quotient_transport
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : A ⥤ B) [F.Additive] (RF : DerivedCategory A ⥤ DerivedCategory B)
+    (η : F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF)
+    (P : CochainComplex A ℤ) :
+    (DerivedCategory.quotientCompQhIso B).inv.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
+        η.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) ≫
+        RF.map ((DerivedCategory.quotientCompQhIso A).hom.app P) =
+      η.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) := by
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
+    Quotient.lift.isLift_hom]
+  erw [DerivedCategory.Qh.map_id, RF.map_id]
+  erw [Category.id_comp, Category.id_comp, Category.comp_id]
+
 private theorem squareFactors
     {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -87,9 +127,9 @@ private theorem squareFactors
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj P))]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   rfl
 
@@ -116,9 +156,9 @@ private theorem squareFactorsh
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factorsh,
     Functor.mapDerivedCategoryNatIso_fach]
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Qh.obj P))]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factorsh_assoc]
 
 private theorem pullSquareFactors
@@ -684,8 +724,8 @@ private theorem derivedPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (Functor.mapDerivedCategorySquareIso (pullComparison Λ f))
     (Functor.mapDerivedCategorySquareIso (pullComparison Λ (f ≫ g)))
     (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-      Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-        (CondensedRing.upperStar Λ f))
+      (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+        (CondensedRing.upperStar Λ f)).symm)
     (derivedPullbackComposition Λ f g)
     (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g)
     (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f)
@@ -764,24 +804,45 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
           (pullback Λ f).mapDerivedCategoryFactors.hom.app
             (((equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj P) =
         (derivedEquivalence Λ X).functor.map
-            ((CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+            ((CondensedRing.upperStar Λ f).leftDerivedFunctor.map
+                ((DerivedCategory.quotientCompQhIso (internalModules Λ Y)).inv.app P) ≫
+              (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
+                ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+              DerivedCategory.Qh.map
+                (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+              (DerivedCategory.quotientCompQhIso (internalModules Λ X)).hom.app
+                (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)) ≫
           (sectionLocalizationComparison Λ X
             (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)).hom ≫
           DerivedCategory.Q.map ((NatIso.mapHomologicalComplex
             (pullComparison Λ f) (.up ℤ)).hom.app P)) ∧
     (∀ P : CochainComplex (internalModules Λ X) ℤ,
       (derivedEquivalence Λ Y).functor.map
-          ((CondensedRing.lowerStar Λ f).rightDerivedFunctorUnit.app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+          ((DerivedCategory.quotientCompQhIso (internalModules Λ Y)).inv.app
+              (((CondensedRing.lowerStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫
+            DerivedCategory.Qh.map
+              (((CondensedRing.lowerStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
+            (CondensedRing.lowerStar Λ f).rightDerivedFunctorUnit.app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+            (CondensedRing.lowerStar Λ f).rightDerivedFunctor.map
+              ((DerivedCategory.quotientCompQhIso (internalModules Λ X)).hom.app P)) ≫
           (derivedPushComparison Λ f).hom.app (DerivedCategory.Q.obj P) ≫
           (derivedPushforward Λ f).map (sectionLocalizationComparison Λ X P).hom =
         (sectionLocalizationComparison Λ Y
             (((CondensedRing.lowerStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)).hom ≫
           DerivedCategory.Q.map ((NatIso.mapHomologicalComplex
             (pushComparison Λ f) (.up ℤ)).hom.app P) ≫
+          (DerivedCategory.quotientCompQhIso (modules Λ Y)).inv.app
+            (((pushforward Λ f).mapHomologicalComplex (.up ℤ)).obj
+              (((equivalence Λ X).functor.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+          DerivedCategory.Qh.map
+            (((pushforward Λ f).mapHomotopyCategoryFactors (.up ℤ)).inv.app
+              (((equivalence Λ X).functor.mapHomologicalComplex (.up ℤ)).obj P)) ≫
           (pushforward Λ f).rightDerivedFunctorUnit.app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
+              (((equivalence Λ X).functor.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+          (pushforward Λ f).rightDerivedFunctor.map
+            ((DerivedCategory.quotientCompQhIso (modules Λ X)).hom.app
               (((equivalence Λ X).functor.mapHomologicalComplex (.up ℤ)).obj P))) ∧
     (∀ (M : DerivedCategory (internalModules Λ Y))
       (N : DerivedCategory (internalModules Λ X))
@@ -850,6 +911,9 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (HomologicalComplex.quasiIso_map_iff_of_preservesHomology i (equivalence Λ T).functor)
       (hK T I)
   · intro P
+    conv_rhs =>
+      lhs
+      rw [counit_quotient_transport]
     exact pullSquareFactors (CondensedRing.upperStar Λ f) (equivalence Λ X).functor
       (equivalence Λ Y).functor (pullback Λ f)
       (CondensedRing.upperStar Λ f).leftDerivedFunctor
@@ -858,6 +922,13 @@ theorem sectionDerivedPushpullNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac
       (pullComparison Λ f) P
   · intro P
+    conv_lhs =>
+      lhs
+      rw [unit_quotient_transport]
+    conv_rhs =>
+      rhs
+      rhs
+      rw [unit_quotient_transport]
     exact rightSquareFactors (CondensedRing.lowerStar Λ f) (equivalence Λ Y).functor
       (equivalence Λ X).functor (pushforward Λ f) (pushComparison Λ f) P
   · intro M N q

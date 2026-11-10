@@ -127,7 +127,7 @@ theorem derivedSingleUnitorNatIso_cancel (X : Scheme.{u})
         (derivedSingleUnitorNatIso B X).hom.app M =
       ((derivedTensor B X).obj M).map t ≫ (derivedTensorRightUnitor B X M).hom := by
   rw [derivedSingleUnitorNatIso_hom_app, Functor.map_comp]
-  simp only [Category.assoc, Iso.map_inv_hom_id_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_map_assoc]
 
 theorem rightDerivedLowerStarComp_hom_eq_conjugate
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :

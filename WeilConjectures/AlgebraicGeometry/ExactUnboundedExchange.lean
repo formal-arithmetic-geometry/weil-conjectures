@@ -35,9 +35,9 @@ noncomputable def exactDerivedSquareUpperStarIso
     {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y}
     (sq : CommSq g' f' f g) :
     D((g)^*[A]) ⋙ D((f')^*[A]) ≅ D((f)^*[A]) ⋙ D((g')^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (squareUpperStarIso A sq) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Canonical unbounded exchange: the mate of the descended inverse-image square,
 under the canonical adjunctions between exact inverse image and total derived direct image.

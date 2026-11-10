@@ -103,17 +103,17 @@ private theorem coefficientPullback_square
   have hg := coefficientPullback_comp φ g f' (h ≫ f) sq.w.symm N
   let ch (R : Type (u + 1)) [CommRing R] :=
     Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} R) h f) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   let cg (R : Type (u + 1)) [CommRing R] :=
     Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} R) f' g (h ≫ f) sq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   have hs (R : Type (u + 1)) [CommRing R] :
       (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} R) sq).hom =
         (cg R).inv ≫ (ch R).hom := by
     simp only [exactDerivedSquareUpperStarIso, squareUpperStarIso,
       Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-      Iso.trans_hom, Iso.symm_hom, cg, ch, Iso.trans_inv, Category.assoc]
+      Iso.trans_hom, Iso.symm_hom, cg, ch, Iso.trans_inv, Iso.symm_inv, Category.assoc]
   apply (cancel_epi ((cg B).hom.app ((scalarExtension φ Y).obj N))).mp
   simp only [hs, NatTrans.comp_app, ← Category.assoc, Iso.hom_inv_id_app,
     Category.id_comp]

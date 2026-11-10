@@ -142,8 +142,7 @@ theorem exists_tensor_right_factor_finite_stage
   have compat (i j : J) (h : i ≤ j) : (μ j).comp (t i j h) = μ i := by
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       dsimp [μ, t]
       exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] b)
@@ -153,8 +152,7 @@ theorem exists_tensor_right_factor_finite_stage
       (t j k hjk).comp (t i j hij) = t i k (hij.trans hjk) := by
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       let := (F.map (homOfLE (h₀ k))).hom.toAlgebra
       dsimp [t]
@@ -189,8 +187,7 @@ theorem exists_tensor_right_factor_finite_stage
       apply RingHom.ext
       intro z
       let := (F.map (homOfLE hj)).hom.toAlgebra
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
         dsimp [μB, tjB, α]
         exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] b)
@@ -207,8 +204,7 @@ theorem exists_tensor_right_factor_finite_stage
   have φsquare (i : J) : (μ i).comp (φ i) = φlim.comp (μB i) := by
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b => rfl
     | add z u hz hu => simpa only [map_add] using congrArg₂ (· + ·) hz hu
   let pC (i : J) := (φ i).comp (pB i)
@@ -218,8 +214,7 @@ theorem exists_tensor_right_factor_finite_stage
     let := aPj
     have square (z : ↥(F.obj j) ⊗[F.obj i₀] B₀) :
         t i k hik (φ i (tjB i z)) = φ k (tjB k z) := by
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | tmul a b =>
         let := (F.map (homOfLE (h₀ k))).hom.toAlgebra
         dsimp [t, φ, tjB]
@@ -251,8 +246,7 @@ theorem exists_tensor_right_factor_finite_stage
     refine ⟨ik, Algebra.TensorProduct.map β (AlgHom.id (F.obj i₀) C₀) x, ?_⟩
     rw [← hx]
     clear hx
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       dsimp [μ, α, β]
       exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] b)

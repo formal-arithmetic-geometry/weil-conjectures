@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Construc
 public import Mathlib.CategoryTheory.Localization.OfQuotient
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # The K-injective derivability structure
@@ -277,6 +278,9 @@ lemma isIso_toHomotopyCategory_map_iff {K L : KInjectives C} (f : K ⟶ L) :
   obtain ⟨K, _, rfl⟩ := K.mk_surjective
   obtain ⟨L, _, rfl⟩ := L.mk_surjective
   obtain ⟨f, rfl⟩ := ObjectProperty.homMk_surjective f
+  change IsIso ((HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).map f) ↔
+    QuasiIso f
+  rw [NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) f]
   exact DerivedCategory.isIso_Q_map_iff_quasiIso C f
 
 set_option backward.defeqAttrib.useBackward true in
@@ -315,6 +319,10 @@ instance : toHomotopyCategory.IsLocalization (KInjectives.quasiIso C) := by
 set_option backward.defeqAttrib.useBackward true in
 instance [HasDerivedCategory C] :
     (ι ⋙ DerivedCategory.Q).IsLocalization (quasiIso C) := by
+  have : (ι ⋙ (HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙
+      DerivedCategory.Qh)).IsLocalization (quasiIso C) := ?_
+  · exact Functor.IsLocalization.of_iso _
+      (Functor.isoWhiskerLeft ι (DerivedCategory.quotientCompQhIso C))
   change (toHomotopyCategory ⋙ (HomotopyCategory.KInjectives.Qh (C := C))).IsLocalization _
   refine Functor.IsLocalization.comp toHomotopyCategory
     (HomotopyCategory.KInjectives.Qh) (W₂ := .isomorphisms _) _ _ ?_ le_rfl ?_
@@ -332,7 +340,8 @@ instance [HasDerivedCategory C] :
       simp only [MorphismProperty.isomorphisms.iff] at hf
       exact (Functor.mapIso HomotopyCategory.KInjectives.ι (@asIso _ _ _ _ _ hf)).isIso_hom
     have : QuasiIso f := by
-      rw [← DerivedCategory.isIso_Q_map_iff_quasiIso]
+      rw [← DerivedCategory.isIso_Q_map_iff_quasiIso,
+        ← NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) f]
       exact
       (DerivedCategory.Qh.mapIso
         (asIso ((HomotopyCategory.quotient _ _).map f))).isIso_hom

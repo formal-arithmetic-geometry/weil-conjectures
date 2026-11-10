@@ -1067,8 +1067,8 @@ private theorem sliceRoosUnit_natural {P Q : Cx.{t, u} l E X U} (a : P ⟶ Q) :
         Limits.Pi.map (fun n ↦ ((tower.{t, u} l E X U).map a).app (op n)) := by
     apply Limits.Pi.hom_ext
     intro n
-    simp only [Category.assoc, productAugmentation, Limits.Pi.lift_π,
-      Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+    simp only [Category.assoc, productAugmentation, Limits.Pi.lift_comp_π,
+      Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc]
     simpa only [Functor.const_map_app, CategoryTheory.NatTrans.comp_app] using
       congrArg (fun k ↦ k.app (op n)) ((augmentation.{t, u} l E X U).naturality a)
   rw [roosUnit_eq, roosUnit_eq]

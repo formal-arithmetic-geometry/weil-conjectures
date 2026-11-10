@@ -171,13 +171,13 @@ theorem isomorphismOrdinaryCompletionChain
           Pi.π (fun n : ℕ ↦ T.obj (op n)) n =
         ((augmentation l E Y none).app P).app (op n) := by
       rw [← Category.assoc, IntegralAmbient.roosUnit_fst]
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
     have hθ : ordinaryCompletionChain l E g P ≫
         CochainComplex.mappingCocone.fst (scalarRoosBoundary
           ((integralOperationsPullbackTowerFunctor l E g).obj P)) ≫ Pi.π _ n =
         ((ordinaryQuotientAugmentation l E g).app P).app (op n) := by
       rw [← Category.assoc, ordinaryCompletionChain, CochainComplex.mappingCocone.lift_fst]
-      exact Pi.lift_π _ _
+      exact Pi.lift_comp_π _ _
     rw [hγ, hθ]
     apply HomologicalComplex.hom_ext
     intro i
@@ -186,8 +186,11 @@ theorem isomorphismOrdinaryCompletionChain
     dsimp only [F, T, Functor.mapHomologicalComplex]
     exact isomorphismOrdinaryFiniteAugmentation l E g b₀ hb₀ P n a ha i
   · intro i
-    exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ i (i - 1) (by omega)
+    exact CochainComplex.mappingCocone.lift_f_snd_v (scalarRoosBoundary T) _ _ _ i (i - 1)
+      (by omega)
   · intro i
-    exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ i (i - 1) (by omega)
+    exact CochainComplex.mappingCocone.lift_f_snd_v
+      (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E g).obj P)) _ _ _ i (i - 1)
+      (by omega)
 
 end WeilConjectures.IntegralOnSlice

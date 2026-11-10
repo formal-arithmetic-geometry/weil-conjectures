@@ -131,7 +131,6 @@ private theorem siteCancel_pure (P Q M : LineEvaluation.Modules.{uC, vC, r} R)
             (LineEvaluation.cancellation_pure.{uC, vC, r} _ P Q M e U x p q)))
 
 attribute [local irreducible] tensorToSite siteCancel
-
 /-- A specified evaluation pairing gives the unique cancellation on pure site tensors.
 Source: Stacks 03EK and 0B8N
 (blueprint: lem-pur-site-tensor-cancellation).
@@ -159,5 +158,6 @@ theorem siteTensorCancellation (P Q : LineEvaluation.Modules.{uC, vC, r} R)
   apply (hext M P Q M (c'.hom.app M) (c.hom.app M)).2
   intro U x p q
   exact (hc' M U x p q).trans (hc M e U x p q).symm
+
 
 end SheafOfModules

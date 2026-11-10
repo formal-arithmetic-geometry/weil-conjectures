@@ -119,7 +119,7 @@ private theorem productIso_inv_indexMap
   intro k
   rw [Category.assoc, hπ]
   rw [← Over.comp_left]
-  simp only [Pi.lift_π]
+  simp only [Pi.lift_comp_π]
   rw [S.indexMap_pr, hπ]
 
 private theorem degreeIso_hom_π
@@ -155,7 +155,7 @@ private theorem degreeIso_indexMap
       sectionIndexMap S F α ≫ (degreeIso S F p).hom := by
   apply Pi.hom_ext
   intro t
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   rw [← Category.assoc, degreeIso_hom_π, Category.assoc, degreeIso_hom_π]
   apply AddCommGrpCat.ext
   intro s

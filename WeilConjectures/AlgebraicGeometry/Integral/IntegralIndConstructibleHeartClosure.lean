@@ -260,7 +260,7 @@ private theorem integral_sheaf_ext_continuity_noetherian
   have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
   let S := CochainComplex.singleFunctor A 0
   let K := M ⋙ S
-  have : HasColimit K := inferInstance
+  have : HasColimit K := HasColimitsOfShape.has_colimit _
   let G := DerivedCategory.Q ⋙ shiftFunctor _ q ⋙
     preadditiveCoyoneda.obj (Opposite.op ((DerivedCategory.singleFunctor A 0).obj C))
   have h := CondensedRing.integralExtHomContinuous_of_isNoetherian (E := E.val) X
@@ -340,7 +340,7 @@ theorem integralIndConstructibleHeartClosure_of_isNoetherian
       change ObjectProperty.EssentiallySmall.{u + 1} (IsConstantModelConstructible Λ X)
       rw [show IsConstantModelConstructible Λ X = IsFiniteConstantStratified Λ X by
         funext M
-        exact if_pos ⟨inferInstance, inferInstance⟩]
+        exact ite_eq_left ⟨inferInstance, inferInstance⟩]
       exact stratifiedModelsSmall Λ X
     infer_instance
   have hpres := canonicalPresentation_of_finitePresentation Λ X hsmall

@@ -69,7 +69,7 @@ instance : Presheaf.IsLocallySurjective (ProEt.topology X)
     let j (m : ULift.{u} (ZMod N)) := (U.left.fiberOpens s m.down).ι
     refine ProEt.mem_topology_of_openImmersion _ j (fun x ↦ ⟨⟨s x⟩, ⟨x, rfl⟩, ?_⟩) fun m ↦ ?_
     · exact Scheme.Opens.ι_apply _ _
-    · refine ⟨ULift.up m.down, ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)⟩
+    · refine ⟨ULift.up m.down, ULift.ext (ContinuousMap.ext fun x ↦ ?_)⟩
       exact x.2.symm
 
 /-- Two constant sections agreeing on `U` agree locally: either they are equal, or `U` is empty
@@ -83,7 +83,7 @@ instance : Presheaf.IsLocallyInjective (ProEt.topology X)
         ((ProEt.topology X).top_mem _)
     · have : IsEmpty U.unop.left := ⟨fun x ↦ hab (by
         have := congr_arg (fun f : ULift.{u + 1} C(U.unop.left, ZMod N) ↦ f.down x) h
-        exact ULift.ext _ _ this)⟩
+        exact ULift.ext this)⟩
       exact ProEt.mem_topology_of_openImmersion _ (fun _ : PEmpty.{u + 1} ↦ 𝟙 U.unop.left)
         (fun x ↦ isEmptyElim x) fun i ↦ i.elim
 

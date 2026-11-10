@@ -184,7 +184,7 @@ theorem finiteGaloisTensorDecomposition
     have hc := ConcreteCategory.congr_hom
       (Types.Small.productIso_hom_comp_eval B q) (t s)
     change (equivShrink.{v} (∀ q, B q)).symm (c.hom (t s)) q = Pi.π B q (t s) at hc
-    rw [hc, ← ConcreteCategory.comp_apply, Pi.lift_π]
+    rw [hc, ← ConcreteCategory.comp_apply, Pi.lift_comp_π]
   let β := Equiv.ofBijective _ hb
   refine ⟨p₁, p₂, σ, rfl, rfl, (fun _ ↦ rfl), β, ?_, ?_⟩
   · intro s q

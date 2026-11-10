@@ -132,7 +132,7 @@ private noncomputable def localization_fraction_iso
     apply LinearMap.ext
     intro x
     change ((colimit.ι _ n ≫ (HasColimit.isoOfNatIso e).hom ≫ eκ.hom) x) = _
-    rw [HasColimit.isoOfNatIso_ι_hom_assoc]
+    rw [HasColimit.ι_isoOfNatIso_hom_assoc]
     change κ ((colimit.ι D₀ n) x) = _
     rw [hκ]
     change A at x

@@ -152,4 +152,5 @@ theorem pointedEtale_completion_stage_flat_factors
     change γ.Flat
     exact he ▸ h
 
+
 end Algebra

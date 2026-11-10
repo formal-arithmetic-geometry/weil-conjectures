@@ -90,7 +90,7 @@ theorem boundedConstructible_tensor_unit :
         refine ⟨1, 0, 0, ⟨e'.symm ≪≫ e1 ≪≫ ?_⟩⟩
         exact (cokernelZeroIsoTarget (X := Mod.finiteFree (H.obj F) 0)
           (Y := Mod.finiteFree (H.obj F) 1)).symm⟩
-    exact constructible_of_iso e.symm hr
+    exact constructible_of_iso (e.symm ≪≫ (DerivedCategory.homologyFunctor C 0).mapIso eUnit) hr
   · by_cases hneg : n < 0
     · have hz := DerivedCategory.isZero_of_isGE U 0 n hneg
       exact constructible_of_isZero (condensedRingObj Λ X.left) hz

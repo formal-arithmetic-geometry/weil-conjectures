@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAbelian
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystem
@@ -74,7 +75,7 @@ theorem grothendieck_existence_devissage
     ∃ F : CoherentModules X, Nonempty ((completion X I).obj F ≅ M) := by
   obtain ⟨t, ht, k, c, hk, hc, hkt, hct⟩ := htorsion
   have hcomponent := ((coherentFormalModule_annihilated_iff X I K M
-    ((completion X I).obj H) α).out 3 0 rfl rfl).mp
+    ((completion X I).obj H) α).out 4 1 rfl rfl).mp
     ⟨k, c, hk, hc, t, ht, fun n ↦ ⟨hkt n, hct n⟩⟩
   obtain ⟨N, δ, σ, θ, hθ, hsquare, hδ⟩ :=
     grothendieckDevissage_secondAdicSystem I K M hthick H α hcomponent

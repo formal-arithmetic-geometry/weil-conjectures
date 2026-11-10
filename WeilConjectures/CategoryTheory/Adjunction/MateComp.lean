@@ -86,7 +86,6 @@ lemma Adjunction.unit_map_comp_unit_map {CA CB CC : Type*} [Category CA] [Catego
   rw [Functor.map_comp, ← reassoc_of% hη]
 
 
-
 /-- The adjoint for a composite adjunction through the conjugate composition isomorphism: for
 `Lpq ≅ Lq ⋙ Lp` and its conjugate `Rp ⋙ Rq ≅ Rpq`, `(φ♯)♯ ≫ (Rp ⋙ Rq ≅ Rpq) = (c ≫ φ)♯`. -/
 lemma Adjunction.homEquiv_homEquiv_comp_hom_app {CA CB CC : Type*} [Category CA] [Category CB]

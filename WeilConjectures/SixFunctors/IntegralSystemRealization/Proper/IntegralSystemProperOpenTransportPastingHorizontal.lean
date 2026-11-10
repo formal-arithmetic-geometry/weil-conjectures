@@ -140,7 +140,7 @@ private def nativeHorizontalData (C₀ : ℕ → CommRingCat.{u + 1})
 attribute [local irreducible] CanonicalBridge.push CanonicalBridge.shriek Compositors.openComp
   Functor.leftAdjoint Functor.mapDerivedCategory Functor.rightDerivedFunctor constantSheaf
   HasDerivedCategory.standard DerivedCategory.Q Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryFactors
+  Functor.mapDerivedCategoryFactors
   ProEtale.SemilinearProperOpen.R ProEtale.SemilinearProperOpen.J
   ProEtale.SemilinearProperOpen.jComp ProEtale.SemilinearProperOpen.gamma
 

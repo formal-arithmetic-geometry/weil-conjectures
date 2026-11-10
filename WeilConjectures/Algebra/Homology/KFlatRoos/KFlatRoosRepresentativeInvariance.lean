@@ -173,10 +173,12 @@ theorem tensorUnit_existsUnique {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :
       naturality := by
         intro U V g
         ext p
-        change M.val.map g p ⊗ₜ[R.obj.obj V]
+        change (show M.val.obj V from M.val.map g p) ⊗ₜ[R.obj.obj V]
             (show (algebraModule ι).val.obj V from (1 : B.obj.obj V)) =
-          M.val.map g p ⊗ₜ[R.obj.obj V]
-            ((algebraModule ι).val.map g (show (algebraModule ι).val.obj U from (1 : B.obj.obj U)))
+          (show M.val.obj V from M.val.map g p) ⊗ₜ[R.obj.obj V]
+            (show (algebraModule ι).val.obj V from
+              (algebraModule ι).val.map g
+                (show (algebraModule ι).val.obj U from (1 : B.obj.obj U)))
         have h_one : (algebraModule ι).val.map g
             (show (algebraModule ι).val.obj U from (1 : B.obj.obj U)) =
               (show (algebraModule ι).val.obj V from (1 : B.obj.obj V)) :=
@@ -431,8 +433,8 @@ private theorem augmentation_naturality {P P' : CochainComplex (Modules R) ℤ}
     have h : unitProduct B ι P ≫ productMap B ι a = a ≫ unitProduct B ι P' := by
       apply Pi.hom_ext
       intro n
-      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_π_assoc,
-        Pi.lift_π]
+      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc,
+        Pi.lift_comp_π]
       exact ((NatTrans.mapHomologicalComplex
         (tensorUnit (ι.app (op n))) (.up ℤ)).naturality a).symm
     exact congrArg (fun f ↦ f.f i) h

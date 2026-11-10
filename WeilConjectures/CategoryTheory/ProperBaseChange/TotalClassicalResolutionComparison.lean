@@ -43,7 +43,7 @@ private theorem total_plus_unit
     (F : C ⥤ D) [F.Additive] (L : HomotopyCategory.Plus C) :
     F.rightDerivedFunctorUnit.app L.obj ≫
         (F.rightDerivedFunctorPlusCompatibility.app (DerivedCategory.Plus.Qh.obj L)).inv =
-      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app L) := by
+      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app L) := by
   apply (Iso.comp_inv_eq _).2
   have h := (Functor.rightDerivedNatTrans_app
     (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
@@ -52,7 +52,7 @@ private theorem total_plus_unit
     (HomotopyCategory.Plus.quasiIso C) (𝟙 _) L).symm
   simp only [NatTrans.id_app, Category.id_comp] at h
   change F.rightDerivedFunctorUnit.app L.obj =
-    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app L) ≫
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnith.app L) ≫
       (F.rightDerivedFunctorPlusCompatibility.app
         (DerivedCategory.Plus.Qh.obj L)).hom at h
   exact h
@@ -84,7 +84,7 @@ private theorem total_classical_chosen
   let v := DerivedCategory.Plus.ι.preimageIso
     (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
     (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj L)) t
-  let ηp := F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L)
+  let ηp := F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L)
   let η := F.rightDerivedFunctorUnit.app
     ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj R.cochainComplex)
   have hp : (F.rightDerivedFunctorPlusCompatibility.app
@@ -110,45 +110,68 @@ private theorem total_classical_chosen
       exact (Category.assoc _ _ _).symm
     rw [ht']
     exact F.rightDerivedFunctor.map_comp_assoc _ _ _
-  have he : (DerivedCategory.Plus.homologyFunctorObjQIso
-      (F.rightDerivedPlusComplex M) (n : ℤ)).hom =
-      H.map ((DerivedCategory.quotientCompQhIso D).hom.app
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex)) ≫
-      (DerivedCategory.homologyFunctorFactors D (n : ℤ)).hom.app _ := by
-    dsimp only [DerivedCategory.Plus.homologyFunctorObjQIso, Iso.trans, Iso.app]
-    have hh := DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj D
-      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex) (n : ℤ)
-    exact factorization_cancel
-      (H.map ((DerivedCategory.quotientCompQhIso D).hom.app
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex)))
-      ((DerivedCategory.homologyFunctorFactors D (n : ℤ)).hom.app _)
-      ((HomotopyCategory.homologyFunctorFactors D (ComplexShape.up ℤ) (n : ℤ)).app _)
-      hh
+  let qC := (DerivedCategory.Plus.quotientCompQhIso C).app L
+  let qD := (DerivedCategory.Plus.quotientCompQhIso D).app (F.rightDerivedPlusComplex M)
+  let v' := DerivedCategory.Plus.ι.preimageIso
+    (X := (DerivedCategory.Plus.singleFunctor C 0).obj M)
+    (Y := DerivedCategory.Plus.Q.obj L) e
+  have hUnit : F.rightDerivedFunctorPlusUnit.app L =
+      qD.inv ≫ ηp ≫ F.rightDerivedFunctorPlus.map qC.hom := by
+    have h1 : F.rightDerivedFunctorPlusUnit.app L =
+        (DerivedCategory.Plus.quotientCompQhIso D).inv.app (F.mapCochainComplexPlus.obj L) ≫
+          DerivedCategory.Plus.Qh.map (F.quotientCompMapHomotopyCategoryPlusIso.inv.app L) ≫
+            ηp ≫ F.rightDerivedFunctorPlus.map qC.hom :=
+      F.rightDerivedFunctorPlusUnit_app L
+    have h2 : DerivedCategory.Plus.Qh.map
+        (F.quotientCompMapHomotopyCategoryPlusIso.inv.app L) = 𝟙 _ :=
+      CategoryTheory.Functor.map_id _ _
+    rw [h1, h2]
+    exact congrArg (_ ≫ ·) (Category.id_comp _)
+  have hv : v.hom ≫ qC.hom = v'.hom := by
+    apply DerivedCategory.Plus.ι.map_injective
+    rw [Functor.map_comp]
+    dsimp only [v, v']
+    erw [Functor.preimageIso_hom, Functor.map_preimage, Functor.preimageIso_hom,
+      Functor.map_preimage]
+    dsimp only [t, e, Iso.trans_hom, Iso.symm_hom, Iso.app_hom]
+    erw [Category.assoc, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  have hplus : (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).hom =
+      F.rightDerivedFunctorPlus.map v.hom ≫ inv ηp ≫ qD.hom := by
+    rw [← cancel_mono (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).inv, Iso.hom_inv_id]
+    dsimp only [Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_inv,
+      Iso.symm_inv, asIso_hom, Functor.mapIso_inv]
+    erw [hUnit]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, IsIso.inv_hom_id_assoc,
+      ← Functor.map_comp]
+    erw [reassoc_of% hv]
+    rw [Iso.hom_inv_id, CategoryTheory.Functor.map_id]
+  have hqD : DerivedCategory.Plus.ι.map qD.hom =
+      (DerivedCategory.quotientCompQhIso D).hom.app
+        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex) := rfl
   let c := (F.rightDerivedFunctorPlusCompatibility.app
     ((DerivedCategory.Plus.singleFunctor C 0).obj M)).inv
   let b := DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlus.map v.hom ≫ inv ηp)
   let j := (DerivedCategory.Plus.homologyFunctorObjQIso
     (F.rightDerivedPlusComplex M) (n : ℤ)).hom
   let k := (R.isoRightDerivedObjCochainComplex F n).inv
-  have hplus : (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ M).hom =
-      F.rightDerivedFunctorPlus.map v.hom ≫ inv ηp := by
-    rfl
   calc
-    _ = H.map (c ≫ b) ≫ j ≫ k := by
+    _ = H.map (c ≫ b ≫ DerivedCategory.Plus.ι.map qD.hom) ≫ j ≫ k := by
       dsimp only [Functor.homologyRightDerivedFunctorObjSingleFunctorIso,
         Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso,
         Iso.trans, Iso.symm, Functor.mapIso, Iso.app]
       erw [hplus]
-      dsimp only [DerivedCategory.Plus.homologyFunctor, Functor.comp_map]
-      exact (H.map_comp_assoc c b (j ≫ k)).symm
-    _ = H.map (F.rightDerivedFunctor.map e.hom ≫
+      dsimp only [DerivedCategory.Plus.homologyFunctor, Functor.comp_map, b]
+      rw [← Category.assoc (F.rightDerivedFunctorPlus.map v.hom), Functor.map_comp]
+      exact (H.map_comp_assoc c _ (j ≫ k)).symm
+    _ = H.map ((F.rightDerivedFunctor.map e.hom ≫
         F.rightDerivedFunctor.map
           ((DerivedCategory.quotientCompQhIso C).inv.app R.cochainComplex) ≫ inv η) ≫
-        j ≫ k := congrArg (fun z ↦ H.map z ≫ j ≫ k) hm
+          DerivedCategory.Plus.ι.map qD.hom) ≫ j ≫ k := by
+      rw [← hm, Category.assoc]
     _ = _ := by
-      dsimp only [j]
-      erw [he]
-      dsimp only [Functor.rightDerivedFunctorObjQIso, e, Iso.trans_hom,
+      rw [hqD]
+      dsimp only [j, DerivedCategory.Plus.homologyFunctorObjQIso,
+        Functor.rightDerivedFunctorObjQIso, e, Iso.trans_hom,
         Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, asIso_inv]
       simp only [Functor.map_comp, Category.assoc]
       rfl

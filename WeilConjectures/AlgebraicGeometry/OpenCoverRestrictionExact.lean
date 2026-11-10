@@ -42,6 +42,10 @@ private theorem isZero_over_of_open_cover
     exact Opens.mem_iSup.mpr ⟨i, hy, hi⟩
   · intro i
     let T : Over (V i) := Over.mk (homOfLE (inf_le_right : W' ⊓ V i ≤ V i))
+    let : (SheafOfModules.evaluation ((moduleRings X.toRingedSpace).over (V i))
+        (Opposite.op T)).Additive :=
+      inferInstanceAs (SheafOfModules.forget _ ⋙
+        PresheafOfModules.evaluation _ (Opposite.op T)).Additive
     have hz := (SheafOfModules.evaluation _ (Opposite.op T)).map_isZero (h i)
     have : Subsingleton (M.val.obj (Opposite.op (W' ⊓ V i))) :=
       ModuleCat.subsingleton_of_isZero hz

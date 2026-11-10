@@ -48,7 +48,7 @@ private theorem coherentChoice {I : Type w} [Preorder I] [WellFoundedLT I]
     rw [WellFoundedLT.fix_eq]
     change C i (fun j _ ↦ a j) (if h : ∃ x, C i (fun j _ ↦ a j) x then
       h.choose else x₀)
-    rw [dif_pos he]
+    rw [dite_eq_left he]
     exact he.choose_spec
 
 /-- A bundled stage, with its carrier still in the specified universe. -/
@@ -200,7 +200,7 @@ private theorem extendRecord_map {R : Type u} [CommRing R]
     (j : I) (h : j < i) :
     recordMap (p j h) (extendRecord i p B g) j (extendRecord_source i p B g j h) =
       g j h := by
-  simp only [recordMap, extendRecord, dif_pos h]
+  simp only [recordMap, extendRecord, dite_eq_left h]
   exact castTowerHom_cancel _ _
 
 /-- Source: Stacks Project, Algebra, Lemma 10.159.1 (Tag 03C3), fourth proof paragraph.

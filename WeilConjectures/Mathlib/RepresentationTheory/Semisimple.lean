@@ -68,7 +68,7 @@ instance isSemisimpleRepresentation_comp_subtype :
   have : WellFoundedLT (Subrepresentation σ) :=
     StrictMono.wellFoundedLT (f := Subrepresentation.toSubmodule)
       fun _ _ h ↦ lt_of_le_of_ne h.le fun h' ↦ h.ne (Subrepresentation.toSubmodule_injective h')
-  have : IsAtomic (Subrepresentation σ) := isAtomic_of_orderBot_wellFounded_lt wellFounded_lt
+  have : IsAtomic (Subrepresentation σ) := inferInstance
   have : IsAtomic (Submodule (MonoidAlgebra k N) (Representation.asModule σ)) :=
     e.isAtomic_iff.1 this
   rw [IsSemisimpleRepresentation, e.complementedLattice_iff]
@@ -159,6 +159,7 @@ theorem IsIrreducible.eq_one_of_isConstituent_trivial [FiniteDimensional k V] [I
     exact sub_eq_zero.1 h0
   · rw [hc0, add_zero]
     exact ha
+
 
 end Representation
 

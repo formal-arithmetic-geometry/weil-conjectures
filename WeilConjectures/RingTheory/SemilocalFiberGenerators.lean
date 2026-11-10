@@ -61,6 +61,7 @@ private theorem residue_crt_surjective (R : Type*) [CommRing R]
   refine ⟨m, funext fun p ↦ ?_⟩
   have hp := congr_fun hm p
   apply_fun e p at hp
+  rw [LinearEquiv.apply_symm_apply] at hp
   simpa [e] using hp
 
 

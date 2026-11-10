@@ -83,6 +83,7 @@ noncomputable def chartToStrict :
 theorem chartToStrict_mk (p : R[X]) :
     chartToStrict g x y (Ideal.Quotient.mk _ p) = p.eval₂ (toStrict g x y) (slope' g x y) := rfl
 
+
 /-- The map `C → A'` restricts to `R → A'`. -/
 theorem chartToStrict_algebraMap (r : R) :
     chartToStrict g x y (algebraMap R _ r) = toStrict g x y r := eval₂_C _ _
@@ -146,7 +147,7 @@ variable [IsLocalRing R]
 theorem toStrict_mem_of_isMaximal [Module.Finite (R ⧸ Ideal.span {g}) (strictTransform g x y)]
     (N : Ideal (strictTransform g x y)) [N.IsMaximal] {r : R} (hr : r ∈ maximalIdeal R) :
     toStrict g x y r ∈ N := by
-  have h1 := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := R ⧸ Ideal.span {g}) N
+  have h1 := Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R ⧸ Ideal.span {g}) N
   have h2 : (Ideal.comap (Ideal.Quotient.mk (Ideal.span {g}))
       (N.comap (algebraMap (R ⧸ Ideal.span {g}) (strictTransform g x y)))).IsMaximal :=
     Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective
@@ -172,8 +173,9 @@ theorem isUnit_eval₂_slope' [IsAlgClosed (ResidueField R)] (hq : q.natDegree �
     IsUnit (p.eval₂ (toStrict g x y) (slope' g x y)) := by
   have := finite_strictTransform hq hg hu
   by_contra hnu
-  obtain ⟨N, hN, hpN⟩ := Ideal.exists_le_maximal (Ideal.span {p.eval₂ (toStrict g x y)
-    (slope' g x y)}) (by rwa [Ne, Ideal.span_singleton_eq_top])
+  obtain ⟨N, hN, hpN⟩ := Ideal.exists_le_maximal
+    (Ideal.span {p.eval₂ (toStrict g x y) (slope' g x y)})
+    (by rwa [Ne, Ideal.span_singleton_eq_top])
   rw [Ideal.span_le, Set.singleton_subset_iff] at hpN
   let F := strictTransform g x y ⧸ N
   let : Field F := Ideal.Quotient.field N

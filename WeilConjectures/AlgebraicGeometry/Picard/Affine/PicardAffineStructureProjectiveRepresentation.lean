@@ -177,7 +177,7 @@ private theorem open_trivialized_image_spectrum_comparison
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L e.counitIso ≪≫
       Functor.rightUnitor L
   let hcD : H.mapDerivedCategory ⋙ T.mapDerivedCategory ≅ L.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso H T).symm ≪≫ Functor.mapDerivedCategoryNatIso hc
+    Functor.mapDerivedCategoryCompIso H T ≪≫ Functor.mapDerivedCategoryNatIso hc
   exact ⟨(hcD.app ((schemeDerivedDirectImage p).obj K)).symm ≪≫
     T.mapDerivedCategory.mapIso c⟩
 
@@ -231,7 +231,7 @@ theorem picard_affine_structure_projective_representation
   let O := SheafOfModules.unit Y.ringCatSheaf
   have : SheafOfModules.IsInvertible.{v, v, v} O := by
     dsimp [O]
-    infer_instance
+    exact SheafOfModules.instIsInvertibleUnit.{v, v, v}
   have : O.IsFinitePresentation :=
     SheafOfModules.IsFiniteLocallyFree.isFinitePresentation O
   let D := (schemeDerivedDirectImage p).obj

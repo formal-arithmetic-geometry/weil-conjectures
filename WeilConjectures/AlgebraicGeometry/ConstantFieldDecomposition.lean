@@ -329,6 +329,7 @@ private lemma comp_base_apply' {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) 
 private lemma id_base_apply' {X : Scheme.{u}} (x : X) : (𝟙 X : X ⟶ X).base x = x :=
   rfl
 
+
 private lemma iso_inv_hom_apply {X Y : Scheme.{u}} (e : X ≅ Y) (x : X) :
     e.inv.base (e.hom.base x) = x := by
   rw [← comp_base_apply', e.hom_inv_id]

@@ -69,7 +69,7 @@ private theorem single_comp (e : H ≅ F ⋙ G) (M : A) :
     (H.mapDerivedCategorySingleFunctor 0).inv.app M ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app
         ((DerivedCategory.singleFunctor A 0).obj M) ≫
-      (Functor.mapDerivedCategoryCompIso F G).hom.app _ := by
+      (Functor.mapDerivedCategoryCompIso F G).inv.app _ := by
   apply (cancel_epi ((H.mapDerivedCategorySingleFunctor 0).hom.app M)).1
   rw [← Category.assoc, ← Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor
     F G H e M]
@@ -113,9 +113,9 @@ private theorem constantSingle_comp (e : H ≅ F ⋙ G) :
       (Functor.mapDerivedCategoryNatIso
         (((Functor.whiskeringRight ℕᵒᵖ A C).mapIso e) ≪≫
           Functor.whiskeringRightObjCompIso F G) ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)
-          ((Functor.whiskeringRight ℕᵒᵖ B C).obj G)) := by
+          ((Functor.whiskeringRight ℕᵒᵖ B C).obj G)).symm) := by
   intro M
   dsimp only [Iso.trans_hom, NatTrans.comp_app]
   simp only [ordinaryConstantSingleComparison, Iso.trans_hom, Iso.symm_hom,

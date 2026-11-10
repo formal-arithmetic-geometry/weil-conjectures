@@ -62,7 +62,7 @@ theorem eq_zero_of_annihilated_quotient_primaryComponent
     rw [sSup_range]
     exact Submodule.mem_iSup_of_mem N hN
   obtain ⟨_, ⟨N, rfl⟩, hN⟩ :=
-    (CompleteLattice.isCompactElement_iff_le_of_directed_sSup_le (α := Ideal R) I).1
+    (isCompactElement_iff_le_of_directed_sSup_le (α := Ideal R) I).1
       ((Submodule.fg_iff_compact I).1 hI) _ (Set.range_nonempty J)
       hJ.directed_le.directedOn_range hIJ
   rw [Submodule.Quotient.mk_eq_zero, primaryComponent_mem]

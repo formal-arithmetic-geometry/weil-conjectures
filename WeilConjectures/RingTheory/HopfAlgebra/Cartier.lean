@@ -173,7 +173,7 @@ theorem eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ [_root_.Finite ι] {r : �
           ∑ i, aeval x (pderiv i f) * (D j (x i) - algebraMap k A (ε (D j (x i)))) := by
         rw [← Finset.sum_sub_distrib]
         simp_rw [mul_sub, sub_sub_cancel, hD, apply_ite (algebraMap k A), map_one, map_zero,
-          mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+          mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
       rw [h3]
       exact sub_mem h1 h2
     have h := hf.sum_X_mul_pderiv
@@ -201,8 +201,8 @@ theorem algebraicIndependent_mk_iInf_pow_ker [_root_.Finite ι] :
         refine aeval_mem_pow_of_homogeneousComponent_eq_zero hx fun m hm ↦ ?_
         rw [map_sub, homogeneousComponent_of_mem (homogeneousComponent_mem n p)]
         rcases (Nat.lt_succ_iff.1 hm).lt_or_eq with hm | rfl
-        · rw [ih m hm, if_neg hm.ne, sub_zero]
-        · rw [if_pos rfl, sub_self]
+        · rw [ih m hm, ite_eq_right hm.ne, sub_zero]
+        · rw [ite_eq_left rfl, sub_self]
       have h2 := sub_mem (Submodule.mem_iInf _ |>.1 hp (n + 1)) h1
       rwa [map_sub, sub_sub_cancel] at h2
   rw [← sum_homogeneousComponent p]
@@ -422,7 +422,7 @@ theorem mem_iInf_pow_ker_of_forall_exists_derivation [IsNoetherianRing A] {W : S
             ∑ i, aeval x (pderiv i f) * (D j (x i) - algebraMap k A (ε (D j (x i)))) := by
           rw [← Finset.sum_sub_distrib]
           simp_rw [mul_sub, sub_sub_cancel, hDx, apply_ite (algebraMap k A), map_one, map_zero,
-            mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+            mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
         rw [h3]
         exact sub_mem h1 h2
       have h := hf.sum_X_mul_pderiv
@@ -448,12 +448,10 @@ private theorem mul'_map_id_algebraMap_mul (d e : A →ₗ[k] k)
           LinearMap.mul' k A (map LinearMap.id (Algebra.linearMap k A ∘ₗ d) v) +
         LinearMap.mul' k A (map LinearMap.id (Algebra.linearMap k A ∘ₗ e) v) *
           LinearMap.mul' k A (map LinearMap.id (Algebra.linearMap k A ∘ₗ d) u) := by
-  induction u using TensorProduct.induction_on with
-  | zero => simp
+  induction u using TensorProduct.inductionOn with
   | add u₁ u₂ h₁ h₂ => simp only [add_mul, map_add, h₁, h₂]; ring
   | tmul a b =>
-    induction v using TensorProduct.induction_on with
-    | zero => simp
+    induction v using TensorProduct.inductionOn with
     | add v₁ v₂ h₁ h₂ => simp only [mul_add, map_add, h₁, h₂]; ring
     | tmul c f =>
       simp only [Algebra.TensorProduct.tmul_mul_tmul, TensorProduct.map_tmul, LinearMap.id_apply,
@@ -585,8 +583,7 @@ theorem ker_liftEquiv_le_map :
   set ε' := liftEquiv k K A K ((Algebra.ofId k K).comp ε)
   have key (b : K ⊗[k] A) : b - algebraMap K (K ⊗[k] A) (ε' b) ∈
       (RingHom.ker ε).map (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
-    induction b using TensorProduct.induction_on with
-    | zero => simp
+    induction b using TensorProduct.inductionOn with
     | add b c hb hc =>
       rw [map_add, map_add, add_sub_add_comm]
       exact add_mem hb hc
@@ -744,6 +741,7 @@ theorem HopfAlgebra.ker_counitAlgHom_baseChange_le_map (K : Type*) [Field K] [Al
       (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
   rw [Bialgebra.counitAlgHom_baseChange_eq_liftEquiv]
   exact AlgHom.ker_liftEquiv_le_map K
+
 
 /-- If `xᵢ ∈ 𝔪` span the augmentation ideal `𝔪` of a commutative Hopf algebra `A` modulo `𝔪²`,
 then the augmentation ideal of a base change `K ⊗[k] A` has height at most the number of

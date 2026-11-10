@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Localization.Away.Basic
 
 import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
@@ -34,6 +35,11 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+local instance instAdditiveModuleCatExtendScalars_affineOpenPseudoCoherentLocalizationPoint
+    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
+    (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+  (ModuleCat.extendRestrictScalarsAdj.{u} f).left_adjoint_additive
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pseudo-coherence of a fixed associated-sheaf complex on an open supplies a
@@ -96,7 +102,8 @@ theorem affine_open_pseudoCoherent_localization_point
   have hC : Nonempty (C ≅
       ((Modules.restrictFunctor X.isoSpec.hom).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj D) :=
-    ⟨HomologicalComplex.Hom.isoOfComponents (fun i ↦ t.app (M.X i))⟩
+    ⟨HomologicalComplex.Hom.isoOfComponents (fun i ↦ t.app (M.X i))
+      (fun i j _ ↦ (t.hom.naturality (M.d i j)).symm)⟩
   obtain ⟨V, hxV, P, hb, hfree, hiso⟩ := hM ⟨x, hx⟩
   obtain ⟨W, hW, P', hb', hfree', hiso'⟩ :=
     exists_scheme_iso_nested_open_finite_free_model X.isoSpec U C D hC V P hb hfree hiso

@@ -68,7 +68,7 @@ def lisseTowerFixedRealizationIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     (lisseTowerFixedSheafRealization f d n).mapDerivedCategory ≅
       lisseTowerFixedRealization f d n := by
   unfold lisseTowerFixedSheafRealization lisseTowerFixedRealization normalizationRestrict
-  exact Functor.mapDerivedCategoryCompIso _ _
+  exact (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Forget the scalar action after associated-module-sheaf realization.
 Source: Stacks Tag 03CY

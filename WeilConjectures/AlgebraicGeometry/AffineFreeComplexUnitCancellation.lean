@@ -121,17 +121,17 @@ theorem exists_affine_free_complex_unit_cancellation (R : CommRingCat.{u})
     intro j
     by_cases hj : j = i
     · subst j
-      rw [if_pos (Or.inl rfl)]
+      rw [ite_eq_left (Or.inl rfl)]
       have hh := hm i
       omega
     · by_cases hj₁ : j = i + 1
       · subst j
-        rw [if_pos (Or.inr rfl)]
+        rw [ite_eq_left (Or.inr rfl)]
         have hh := hm (i + 1)
         have heq : -(i + 1) = -i - 1 := by omega
         rw [heq] at hh ⊢
         omega
-      · rw [if_neg (not_or.mpr ⟨hj, hj₁⟩)]
+      · rw [ite_eq_right (not_or.mpr ⟨hj, hj₁⟩)]
         rw [haway (-j) (by omega) (by omega), hm j]
   have efree : ∀ j : ℤ, Nonempty (Q'.X j ≅ SheafOfModules.free
       (R := (Spec R).ringCatSheaf)
@@ -146,7 +146,7 @@ theorem exists_affine_free_complex_unit_cancellation (R : CommRingCat.{u})
   intro j hj hj₁
   obtain ⟨ej⟩ := efree j
   have hn : (if j = i ∨ j = i + 1 then n j - 1 else n j) = n j :=
-    if_neg (not_or.mpr ⟨hj, hj₁⟩)
+    ite_eq_right (not_or.mpr ⟨hj, hj₁⟩)
   exact ⟨ej ≪≫ eqToIso (by rw [hn]) ≪≫ (e j).symm⟩
 
 end AlgebraicGeometry.Scheme.Modules

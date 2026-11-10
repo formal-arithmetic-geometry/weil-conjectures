@@ -283,7 +283,7 @@ private theorem tensorComparison_bijective [PreservesFiniteColimits F]
     ShortComplex.moduleCatMk fM gM (lTensor_exact M hfg hg).linearMap_comp_eq_zero
   have hS : S.Exact := ModuleCat.shortComplex_exact S (lTensor_exact M hfg hg)
   have : Epi S.g := (ModuleCat.epi_iff_surjective _).2 (LinearMap.lTensor_surjective M hg)
-  have hFS := ((Functor.preservesFiniteColimits_tfae F).out 3 1 rfl rfl).1 inferInstance S
+  have hFS := ((Functor.preservesFiniteColimits_tfae F).out 4 2 rfl rfl).1 inferInstance S
     ⟨hS, inferInstance⟩
   refine cokernel_bijective R
     (X₁ := ModuleCat.of R (F.obj M ⊗[R] P₁))
@@ -392,8 +392,7 @@ theorem constantModule_section_properties
       (((constantSheaf J (ModuleCat.{u} R)).obj
         (ModuleCat.of R (M ⊗[R] Q))).obj.map h.op)
         (tensorComparison R (sectionFunctor J R U) M Q z)
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul s q =>
       simp only [TensorProduct.map_tmul, LinearMap.id_apply, tensorComparison_tmul]
       exact (NatTrans.naturality_apply

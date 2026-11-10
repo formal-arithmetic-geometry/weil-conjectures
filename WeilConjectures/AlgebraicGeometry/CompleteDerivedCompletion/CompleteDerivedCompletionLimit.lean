@@ -100,6 +100,12 @@ private theorem transition_inv_fac (T : Scheme.{u}) (n : ℕ)
   apply (cancel_mono ((ev l E T n).mapDerivedCategoryFactors.hom.app J)).mp
   simp [transition, towerDerivedEvaluationTransition, Localization.liftNatTrans_app, hm, hn]
 
+private def limitAsFunctorIsoOrdinary (A : Type*) [Category A] [Abelian A]
+    [HasLimitsOfShape ℕᵒᵖ A] (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
+    limit I.asFunctor ≅ (ExactProductsRoos.ordinary (B := A)).obj I :=
+  ((HomologicalComplex.functorEquivalenceInverseCompMapHomologicalComplexLim A
+    (.up ℤ) ℕᵒᵖ).app I.asFunctor).symm
+
 /-- The derived limit is a derived limit of the derived evaluations.
 Source: blueprint Assertion 5 (blueprint: det-pbc-complete-derived-completion).
 Proof: represent the tower by a K-injective complex; exact countable products give
@@ -141,10 +147,10 @@ theorem rlim_isDerivedLimit (T : Scheme.{u}) :
     infer_instance
   obtain ⟨c, ⟨hc⟩, hL⟩ := h3 inferInstance I _ _ (asIso τ)
   refine isDerivedLimit_of_iso hL ?_
+  have : HasLimit I.asFunctor := ⟨⟨c, hc⟩⟩
   let e₁ : c.pt ≅ limit I.asFunctor := hc.conePointUniqueUpToIso (limit.isLimit _)
   let e₂ : limit I.asFunctor ≅ (ExactProductsRoos.ordinary (B := A)).obj I :=
-    ((HomologicalComplex.functorEquivalenceInverseCompMapHomologicalComplexLim A
-      (.up ℤ) ℕᵒᵖ).app I.asFunctor).symm
+    limitAsFunctorIsoOrdinary A I
   have hu : IsIso ((inverseLimit l E T).rightDerivedFunctorUnitQ I) := by
     rw [Functor.rightDerivedFunctorUnitQ_eq]
     infer_instance

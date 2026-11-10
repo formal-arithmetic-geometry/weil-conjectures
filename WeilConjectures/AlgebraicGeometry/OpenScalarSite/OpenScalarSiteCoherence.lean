@@ -164,9 +164,9 @@ private theorem exact_identity_square
     Functor.mapDerivedCategoryNatIso_refl
   rw [hu, hv] at hd
   simp only [NatTrans.id_app, Category.comp_id] at hd
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso E N).hom.app K)).mp
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso E N).inv.app K)).mp
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
+    NatTrans.comp_app, Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
   have hp := congr_app (Functor.mapDerivedCategoryCompIso_comp_id N) K
   have he := congr_app (Functor.mapDerivedCategoryCompIso_id_comp N) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
@@ -176,7 +176,7 @@ private theorem exact_identity_square
   calc
     _ = (Functor.mapDerivedCategoryNatIso q).hom.app K ≫
         (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft N p)).hom.app K ≫
-        (Functor.mapDerivedCategoryCompIso N (𝟭 D)).hom.app K ≫
+        (Functor.mapDerivedCategoryCompIso N (𝟭 D)).inv.app K ≫
         (Functor.mapDerivedCategoryIdIso D).hom.app (N.mapDerivedCategory.obj K) := by
       rw [reassoc_of% hleft]
     _ = (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight e N)).hom.app K := by
@@ -184,7 +184,7 @@ private theorem exact_identity_square
       erw [Category.comp_id]
       exact hd
     _ = (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight e N)).hom.app K ≫
-        (Functor.mapDerivedCategoryCompIso (𝟭 C) N).hom.app K ≫
+        (Functor.mapDerivedCategoryCompIso (𝟭 C) N).inv.app K ≫
         N.mapDerivedCategory.map ((Functor.mapDerivedCategoryIdIso C).hom.app K) := by
       rw [he]
       erw [Category.comp_id]
@@ -372,7 +372,7 @@ Source: Stacks 03DI, 09AF (blueprint: lem-sp-open-scalar-site-coherence). -/
 def extensionComp (A : Type (u + 1)) [CommRing A] {V U X : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) [IsOpenImmersion k] [IsOpenImmersion j] :=
   Functor.mapDerivedCategoryNatIso (proEtaleOpenExtensionComp A k j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private theorem et_restrict_comp {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {V U X : Scheme.{u}} (k : V ⟶ U) (j : U ⟶ X)
@@ -415,9 +415,9 @@ private theorem et_derived_restrict_comp {A B : Type (u + 1)} [CommRing A] [Comm
     let UA {S T : Scheme.{u}} (f : S ⟶ T) :=
       (Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
     let β := Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} A) k j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     let γ := Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} B) k j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
     Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ (k ≫ j)) =
       Functor.isoWhiskerRight γ (RA V) ≪≫
       Functor.associator (UB j) (UB k) (RA V) ≪≫
@@ -434,14 +434,14 @@ private theorem et_derived_restrict_comp {A B : Type (u + 1)} [CommRing A] [Comm
   have hc :
       (Sheaf.derivedRestrictScalars (V.smallEtaleTopology) φ).map
           ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} B) k j) ≪≫
-            Functor.mapDerivedCategoryCompIso _ _).hom.app K) ≫
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app K) ≫
         (Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ k)).hom.app
           ((Etale.upperStar (ModuleCat.{u + 1} B) j).mapDerivedCategory.obj K) ≫
         (Etale.upperStar (ModuleCat.{u + 1} A) k).mapDerivedCategory.map
           ((Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ j)).hom.app K) =
       (Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ (k ≫ j))).hom.app K ≫
         (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} A) k j) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom.app
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
             ((Sheaf.derivedRestrictScalars (X.smallEtaleTopology) φ).obj K) := by
     simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
@@ -467,7 +467,7 @@ private theorem et_derived_restrict_comp {A B : Type (u + 1)} [CommRing A] [Comm
         (Etale.upperStarComp (ModuleCat.{u + 1} A) k j) hq)
   have he := congrArg (fun t ↦ t ≫
     (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} A) k j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).inv.app
+      (Functor.mapDerivedCategoryCompIso _ _).symm).inv.app
         ((Sheaf.derivedRestrictScalars (X.smallEtaleTopology) φ).obj K)) hc
   simp only [Category.assoc, Iso.hom_inv_id_app] at he
   erw [Category.comp_id] at he
@@ -935,9 +935,9 @@ theorem etale_scalar_comp {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ j))
     (Functor.mapDerivedCategorySquareIso (Etale.openRestrictScalarsIso φ (k ≫ j)))
     (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} A) k j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} B) k j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).symm
+      (Functor.mapDerivedCategoryCompIso _ _).symm).symm
     (Etale.mapDerivedCategoryOpenImmersionLowerShriekComp (ModuleCat.{u + 1} A) k j)
     (Etale.mapDerivedCategoryOpenImmersionLowerShriekComp (ModuleCat.{u + 1} B) k j)
     (Iso.ext (Etale.derived_open_comp_conjugate (ModuleCat.{u + 1} A) k j))

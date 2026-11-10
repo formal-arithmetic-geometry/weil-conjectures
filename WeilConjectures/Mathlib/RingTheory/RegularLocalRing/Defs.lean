@@ -245,7 +245,7 @@ theorem IsRegularLocalRing.isIntegrallyClosed (R : Type*) [CommRing R] [IsRegula
     have := (IsRegularLocalRing.iff_finrank_cotangentSpace R).mp inferInstance
     rw [hdim] at this
     exact_mod_cast this
-  have : IsDiscreteValuationRing R := ((IsDiscreteValuationRing.TFAE R hR).out 0 5).mpr hfin
+  have : IsDiscreteValuationRing R := ((IsDiscreteValuationRing.TFAE R hR).out 1 6).mpr hfin
   infer_instance
 
 /-- Let `R → S` be a flat local homomorphism of noetherian local rings with `𝔪_R S = 𝔪_S`. If
@@ -257,7 +257,7 @@ theorem IsRegularLocalRing.of_flat_of_map_maximalIdeal_eq {R S : Type*} [CommRin
     (h : (maximalIdeal R).map (algebraMap R S) = maximalIdeal S) : IsRegularLocalRing S := by
   apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le
   have : (maximalIdeal S).LiesOver (maximalIdeal R) :=
-    ⟨(((local_hom_TFAE (algebraMap R S)).out 0 4 rfl rfl).mp inferInstance).symm⟩
+    ⟨(((local_hom_TFAE (algebraMap R S)).out 1 5 rfl rfl).mp inferInstance).symm⟩
   rw [← h, ← maximalIdeal_height_eq_ringKrullDim,
     Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown (maximalIdeal R) (maximalIdeal S)]
   calc (((maximalIdeal R).map (algebraMap R S)).spanFinrank : WithBot ℕ∞)
@@ -373,6 +373,7 @@ theorem connectedComponent_eq_of_mem_irreducibleComponents (k : Type*) [Field k]
     (hZ.prop.isPreirreducible.isPreconnected
       |>.subset_connectedComponent hx)
 
+
 end PrimeSpectrum
 
 /-- **One-dimensional regular local rings.** A regular local ring of Krull dimension one is a
@@ -391,7 +392,7 @@ theorem IsRegularLocalRing.isDiscreteValuationRing (R : Type*) [CommRing R]
     rw [h] at this
     exact_mod_cast this
   have hp : (IsLocalRing.maximalIdeal R).IsPrincipal :=
-    ((IsDiscreteValuationRing.TFAE R hR).out 5 4).mp hfin
+    ((IsDiscreteValuationRing.TFAE R hR).out 6 5).mp hfin
   have hne : IsLocalRing.maximalIdeal R ≠ ⊥ := isField_iff_maximalIdeal_eq.not.mp hR
   refine .of_maximalIdeal_eq_span_singleton (t := hp.generator) (fun ht ↦ hne ?_) ?_
   · rw [← Ideal.span_singleton_generator (IsLocalRing.maximalIdeal R), ht,

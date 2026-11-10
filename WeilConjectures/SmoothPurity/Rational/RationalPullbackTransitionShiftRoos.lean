@@ -34,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 attribute [local implicit_reducible] integralOperationsRoos integralOperationsRoosFunctor
-  CochainComplex.shiftFunctor
 
 section RoosCoordinates
 variable {A S : Type*} [Category A] [Abelian A] [HasCountableProducts A]

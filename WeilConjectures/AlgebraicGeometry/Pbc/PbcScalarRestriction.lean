@@ -342,8 +342,7 @@ theorem pbcScalarDirectImage_rational
         Q.map (α.hom.app K.obj) ≫
           ScalarLocalization.transportHom _ _ HF (IX.obj K.obj) (IX.obj L.obj)
             (pbcRationalScalarHom l E F i X dX hX K.obj L.obj f)
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp only [ScalarLocalization.transportHom, LinearMap.baseChange_tmul,
           CategoryTheory.Functor.mapLinearMap_apply]
@@ -433,8 +432,7 @@ theorem pbcScalarCompletedPull_rational
         Q.map (α.hom.app K.obj) ≫
           ScalarLocalization.transportHom _ _ HF (IX.obj K.obj) (IX.obj L.obj)
             (pbcRationalScalarHom l E F i Y dY hY K.obj L.obj f)
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp only [ScalarLocalization.transportHom, LinearMap.baseChange_tmul,
           CategoryTheory.Functor.mapLinearMap_apply]

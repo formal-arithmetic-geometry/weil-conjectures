@@ -239,23 +239,23 @@ private theorem exact_nt_homology
   have hτ : IsIso ((Functor.rightDerivedFunctorPlusNatTrans τ).app
       (_root_.DerivedCategory.Plus.Qh.obj M)) :=
     (NatTrans.isIso_app_iff_of_iso _ e).2 inferInstance
-  have : IsIso F.rightDerivedFunctorPlusUnit :=
+  have : IsIso F.rightDerivedFunctorPlusUnith :=
     Functor.isIso_rightDerivedFunctorPlusUnit F
-  have : IsIso G.rightDerivedFunctorPlusUnit :=
+  have : IsIso G.rightDerivedFunctorPlusUnith :=
     Functor.isIso_rightDerivedFunctorPlusUnit G
-  have : IsIso (G.rightDerivedFunctorPlusUnit.app M) :=
-    NatIso.isIso_app_of_isIso G.rightDerivedFunctorPlusUnit M
-  have : IsIso (F.rightDerivedFunctorPlusUnit.app M) :=
-    NatIso.isIso_app_of_isIso F.rightDerivedFunctorPlusUnit M
+  have : IsIso (G.rightDerivedFunctorPlusUnith.app M) :=
+    NatIso.isIso_app_of_isIso G.rightDerivedFunctorPlusUnith M
+  have : IsIso (F.rightDerivedFunctorPlusUnith.app M) :=
+    NatIso.isIso_app_of_isIso F.rightDerivedFunctorPlusUnith M
   have he := Functor.rightDerivedFunctorPlusNatTrans_app τ M
   have hi : IsIso (_root_.DerivedCategory.Plus.Qh.map
       ((NatTrans.mapHomotopyCategoryPlus τ).app M)) := by
     have : IsIso (_root_.DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus τ).app M) ≫
-          G.rightDerivedFunctorPlusUnit.app M) := by
+          G.rightDerivedFunctorPlusUnith.app M) := by
       rw [← he]
       infer_instance
-    exact IsIso.of_isIso_comp_right _ (G.rightDerivedFunctorPlusUnit.app M)
+    exact IsIso.of_isIso_comp_right _ (G.rightDerivedFunctorPlusUnith.app M)
   rcases M with ⟨M, hM⟩
   obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective M
   let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L
@@ -264,8 +264,11 @@ private theorem exact_nt_homology
       (_root_.DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus τ).app
         ⟨(HomotopyCategory.quotient _ _).obj L, hM⟩))
     change IsIso ((_root_.DerivedCategory.homologyFunctor D q).map
-      (_root_.DerivedCategory.Q.map a)) at hiq
-    exact (NatIso.isIso_map_iff (_root_.DerivedCategory.homologyFunctorFactors D q) a).1 hiq
+      (_root_.DerivedCategory.Qh.map ((HomotopyCategory.quotient D (.up ℤ)).map a))) at hiq
+    have hiq' := (NatIso.isIso_map_iff
+      (Functor.isoWhiskerRight (_root_.DerivedCategory.quotientCompQhIso D)
+        (_root_.DerivedCategory.homologyFunctor D q)) a).1 hiq
+    exact (NatIso.isIso_map_iff (_root_.DerivedCategory.homologyFunctorFactors D q) a).1 hiq'
   have hτL : IsIso (τ.app (L.homology q)) := by
     change IsIso (τ.app (L.sc q).homology)
     rw [NatTrans.app_homology τ (L.sc q)]
@@ -273,6 +276,8 @@ private theorem exact_nt_homology
     infer_instance
   let eh : (_root_.DerivedCategory.Plus.homologyFunctor C q).obj K ≅ L.homology q :=
     (_root_.DerivedCategory.Plus.homologyFunctor C q).mapIso e.symm ≪≫
+      (_root_.DerivedCategory.homologyFunctor C q).mapIso
+        ((_root_.DerivedCategory.quotientCompQhIso C).app L) ≪≫
       (_root_.DerivedCategory.homologyFunctorFactors C q).app L
   exact (NatTrans.isIso_app_iff_of_iso τ eh).2 hτL
 

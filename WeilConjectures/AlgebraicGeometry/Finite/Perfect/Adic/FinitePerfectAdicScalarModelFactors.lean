@@ -100,15 +100,15 @@ private theorem localizedPaste
     {K : DerivedCategory E' ⥤ DerivedCategory F}
     (a : P.mapDerivedCategory ≅ J) (b : Q.mapDerivedCategory ≅ K)
     (w : S.mapDerivedCategory ⋙ J ≅ K)
-    (hw : (mapDerivedCategoryCompIso S P).hom ≫
+    (hw : (mapDerivedCategoryCompIso S P).inv ≫
       whiskerLeft S.mapDerivedCategory a.hom ≫ w.hom =
       (mapDerivedCategoryNatIso z).hom ≫ b.hom) :
-    (mapDerivedCategoryCompIso R (H ⋙ P)).hom ≫
+    (mapDerivedCategoryCompIso R (H ⋙ P)).inv ≫
       whiskerLeft R.mapDerivedCategory
-        (mapDerivedCategoryCompIso H P ≪≫ isoWhiskerLeft H.mapDerivedCategory a).hom ≫
+        ((mapDerivedCategoryCompIso H P).symm ≪≫ isoWhiskerLeft H.mapDerivedCategory a).hom ≫
       (finitePerfectAdicPasteCoefficientStep (mapDerivedCategorySquareIso e) w).hom =
     (mapDerivedCategoryNatIso (finitePerfectAdicPasteCoefficientStep e z)).hom ≫
-      (mapDerivedCategoryCompIso L Q ≪≫ isoWhiskerLeft L.mapDerivedCategory b).hom := by
+      ((mapDerivedCategoryCompIso L Q).symm ≪≫ isoWhiskerLeft L.mapDerivedCategory b).hom := by
   simp only [finitePerfectAdicPasteCoefficientStep, Iso.trans_hom, isoWhiskerLeft_hom,
     isoWhiskerRight_hom, Iso.symm_hom]
   apply NatTrans.ext
@@ -127,7 +127,7 @@ private theorem localizedPaste
   rw [reassoc_of% hn.symm]
   rw [← Category.assoc, hRH, Category.assoc]
   simp only [Functor.map_comp, Category.assoc]
-  rw [← P.mapDerivedCategory.map_comp_assoc, Iso.hom_inv_id_app]
+  rw [← P.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app]
   simp only [P.mapDerivedCategory.map_id, Category.id_comp]
   rw [← reassoc_of% he, ← reassoc_of% hLS, hwM,
     ← reassoc_of% hz]
@@ -176,7 +176,7 @@ def finitePerfectAdicDerivedFactor
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     {J : DerivedCategory D ⥤ DerivedCategory E} (e : G.mapDerivedCategory ≅ J) :
     (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ J :=
-  mapDerivedCategoryCompIso F G ≪≫ isoWhiskerLeft F.mapDerivedCategory e
+  (mapDerivedCategoryCompIso F G).symm ≪≫ isoWhiskerLeft F.mapDerivedCategory e
 
 /-- The source is the exact derived functor of its explicit ordinary composite.
 Source: Stacks Tag 05RU; exact derived functors commute with composition. -/
@@ -251,7 +251,7 @@ def finitePerfectAdicScalarModelCompletedFactors :
   have hε := h.choose_spec.choose_spec.1
   have : T.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)) := hε
   let e := finitePerfectAdicExactDerivedIso E T ε
-  exact mapDerivedCategoryCompIso (finitePerfectAdicConstant X A) E ≪≫
+  exact (mapDerivedCategoryCompIso (finitePerfectAdicConstant X A) E).symm ≪≫
     isoWhiskerLeft (finitePerfectAdicDerivedConstant X A) e
 
 /-- The completed ordinary target localizes to the model's specified local realization.
@@ -269,8 +269,8 @@ def finitePerfectAdicScalarModelTargetFactors :
   let R := ModuleCat.restrictScalars (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
   let H := finitePerfectAdicScalarModelOrdinary X d
   let O := SheafOfModules.overFunctor (completedAdicRing X d) W
-  exact mapDerivedCategoryCompIso R (H ⋙ O) ≪≫
-    isoWhiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso H O) ≪≫
+  exact (mapDerivedCategoryCompIso R (H ⋙ O)).symm ≪≫
+    isoWhiskerLeft R.mapDerivedCategory (mapDerivedCategoryCompIso H O).symm ≪≫
     isoWhiskerRight (isoWhiskerLeft R.mapDerivedCategory
       (finitePerfectAdicScalarModelCompletedFactors X d)) O.mapDerivedCategory
 
@@ -309,7 +309,7 @@ coefficient comparison, or supplied natural isomorphism between source and targe
 theorem finitePerfectAdicScalarModelSource_localization :
     let Q := ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
     (mapDerivedCategoryCompIso Q
-        (finitePerfectAdicOrdinaryScalarSource X d V U W f (n + 1))).hom ≫
+        (finitePerfectAdicOrdinaryScalarSource X d V U W f (n + 1))).inv ≫
       whiskerLeft Q.mapDerivedCategory
         (finitePerfectAdicScalarModelSourceFactors X d V U W f (n + 1)).hom ≫
       (finitePerfectAdicScalarModelSourceStep X d V U W f n).hom =
@@ -354,15 +354,15 @@ theorem finitePerfectAdicScalarModelSource_localization :
   let zS := finitePerfectAdicScalarModulesCoherence X d V U W f n
   let wS := finitePerfectAdicScalarCoherence X d V U W f n
   have hS : (mapDerivedCategoryCompIso
-      (sheafCompose (ProEt.topology U.left) (ModuleCat.restrictScalars.{t + 1} q)) SB).hom ≫
+      (sheafCompose (ProEt.topology U.left) (ModuleCat.restrictScalars.{t + 1} q)) SB).inv ≫
       whiskerLeft _ (Iso.refl SB.mapDerivedCategory).hom ≫ wS.hom =
       (mapDerivedCategoryNatIso zS).hom ≫ (Iso.refl SD.mapDerivedCategory).hom := by
     apply NatTrans.ext
     funext M
     simp only [q, SB, SD, zS, wS, finitePerfectAdicScalarCoherence, Iso.trans_hom,
-      Iso.symm_hom, Iso.refl_hom, NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app,
+      Iso.refl_hom, NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app,
       Functor.comp_obj, Category.comp_id]
-    erw [Category.id_comp, Iso.hom_inv_id_app_assoc]
+    erw [Category.id_comp, Iso.inv_hom_id_app_assoc]
   let zU := finitePerfectAdicPasteCoefficientStep eU zS
   let wU := finitePerfectAdicPasteCoefficientStep (mapDerivedCategorySquareIso eU) wS
   let aU := finitePerfectAdicDerivedFactor UB SB (Iso.refl SB.mapDerivedCategory)
@@ -400,7 +400,7 @@ theorem finitePerfectAdicScalarModelSource_localization :
   let Q := ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
   let aL := finitePerfectAdicDerivedFactor LB (CB ⋙ PB ⋙ UB ⋙ SB) aC
   have hw := congrArg
-    (fun z ↦ (mapDerivedCategoryCompIso Q (LB ⋙ CB ⋙ PB ⋙ UB ⋙ SB)).hom ≫
+    (fun z ↦ (mapDerivedCategoryCompIso Q (LB ⋙ CB ⋙ PB ⋙ UB ⋙ SB)).inv ≫
       whiskerLeft Q.mapDerivedCategory aL.hom ≫ z) (congrArg Iso.hom hWL)
   exact hw.symm.trans hL
 

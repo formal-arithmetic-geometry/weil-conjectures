@@ -61,8 +61,7 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
   have := F.quasiIso_map_of_rightAcyclic i.hom a hL
     (fun n ↦ F.rightAcyclic_of_injective _)
   have : IsIso (DerivedCategory.Plus.Q.map i) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hi)
+    Localization.inverts DerivedCategory.Plus.Q (CochainComplex.Plus.quasiIso C) i hi
   exact ⟨(DerivedCategory.Plus.homologyFunctor D n).mapIso
       (F.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map i))) ≪≫
     F.homologyRightDerivedFunctorPlusObjQIsoOfInjective T' n ≪≫
@@ -79,11 +78,12 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso [Preserv
         (F.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj K)) ≅
       ((F.mapHomologicalComplex _).obj L.obj).homology n) := by
   have : IsIso (DerivedCategory.Plus.Q.map φ) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 ‹_›)
+    Localization.inverts DerivedCategory.Plus.Q (CochainComplex.Plus.quasiIso C) φ
+      (show QuasiIso φ.hom from inferInstance)
   obtain ⟨e⟩ := F.nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso L hL n
   exact ⟨(DerivedCategory.Plus.homologyFunctor D n).mapIso
     (F.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map φ))) ≪≫ e⟩
+
 
 /-- **Acyclic complexes compute `R⁺F`, at the level of the unit.** If `F` is left exact and `L`
 is a bounded below complex of `F`-acyclic objects, then the unit `F(L) ⟶ R⁺F(L)` is an
@@ -100,7 +100,7 @@ the bottom map is an isomorphism as `T` is injective, `R⁺F(i)` is an isomorphi
 quasi-isomorphism, and `F(i)` is an isomorphism by `Functor.quasiIso_map_of_rightAcyclic`. -/
 theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic [PreservesFiniteLimits F]
     (L : CochainComplex.Plus C) (hL : ∀ n, F.rightAcyclic (L.obj.X n)) :
-    IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L)) := by
+    IsIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L)) := by
   obtain ⟨a, ha⟩ := L.2
   obtain ⟨T, _, i, hi⟩ := CochainComplex.Plus.exists_quasiIso_injective L a
   let T' := (InjectiveObject.ι C).mapCochainComplexPlus.obj T
@@ -120,11 +120,11 @@ theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic [PreservesFiniteLi
       Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
         ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hi)
     infer_instance
-  have h₃ : IsIso (F.rightDerivedFunctorPlusUnit.app
+  have h₃ : IsIso (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient C).obj T')) := inferInstance
-  have hnat := F.rightDerivedFunctorPlusUnit.naturality ((HomotopyCategory.Plus.quotient C).map i)
+  have hnat := F.rightDerivedFunctorPlusUnith.naturality ((HomotopyCategory.Plus.quotient C).map i)
   dsimp only [Functor.comp_map] at hnat
-  have : IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L) ≫
+  have : IsIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L) ≫
       F.rightDerivedFunctorPlus.map
         (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map i))) := by
     rw [← hnat]; infer_instance
@@ -152,10 +152,10 @@ lemma isRightDerivedFunctor_rightDerivedFunctorPlus_comp_of_rightAcyclic
     ((F ⋙ G).mapHomotopyCategoryPlus ⋙
       DerivedCategory.Plus.Qh)).isRightDerivedFunctor_of_isIso _ (fun X₁ => ?_)
   set K : HomotopyCategory.Plus C := (InjectiveObject.ι C).mapHomotopyCategoryPlus.obj X₁
-  have h₁ : IsIso (F.rightDerivedFunctorPlusUnit.app K) := inferInstance
+  have h₁ : IsIso (F.rightDerivedFunctorPlusUnith.app K) := inferInstance
   let L : CochainComplex.Plus D := ⟨(F.mapHomotopyCategoryPlus.obj K).obj.as,
     (HomotopyCategory.plus_quotient_obj_iff _).1 (F.mapHomotopyCategoryPlus.obj K).property⟩
-  have h₂ : IsIso (G.rightDerivedFunctorPlusUnit.app (F.mapHomotopyCategoryPlus.obj K)) :=
+  have h₂ : IsIso (G.rightDerivedFunctorPlusUnith.app (F.mapHomotopyCategoryPlus.obj K)) :=
     G.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic L (fun n ↦
       have : Injective (K.obj.as.X n) := inferInstanceAs (Injective ((X₁.obj.as.X n).obj))
       hFG (K.obj.as.X n))
@@ -172,7 +172,7 @@ noncomputable def rightDerivedFunctorPlusCompIsoOfRightAcyclic
   have := F.isRightDerivedFunctor_rightDerivedFunctorPlus_comp_of_rightAcyclic G hFG
   rightDerivedUnique (F ⋙ G).rightDerivedFunctorPlus
     (F.rightDerivedFunctorPlus ⋙ G.rightDerivedFunctorPlus)
-    (F ⋙ G).rightDerivedFunctorPlusUnit (rightDerivedFunctorPlusCompUnit F G)
+    (F ⋙ G).rightDerivedFunctorPlusUnith (rightDerivedFunctorPlusCompUnit F G)
     (HomotopyCategory.Plus.quasiIso C)
 
 end Composition

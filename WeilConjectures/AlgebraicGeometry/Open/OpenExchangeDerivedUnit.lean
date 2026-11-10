@@ -25,7 +25,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactorsh
   Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
 
 private lemma derived_square_symm
     {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]

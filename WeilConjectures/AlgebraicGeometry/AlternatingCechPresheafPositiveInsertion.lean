@@ -212,7 +212,7 @@ private theorem map_π {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
   let : K.IsRightAdjoint :=
     inferInstanceAs (PresheafOfModules.pushforward (cechCapRingMap (U i))).IsRightAdjoint
   dsimp only [map]
-  rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_π]
+  rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_comp_π]
 
 open Limits Opposite in
 private theorem capIntoCap_map_comp {X : Scheme.{u}} (G : X.Modules)
@@ -251,7 +251,7 @@ private theorem map_d_π {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)
   let K := cechCapPresheafFunctor (U i)
   let : K.Additive := ⟨by intro A B f g; ext V s; rfl⟩
   rw [← K.map_comp]
-  simp only [alternatingCechSheafPresheafD, Pi.lift_π, Functor.map_sum,
+  simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π, Functor.map_sum,
     Functor.map_zsmul, Functor.map_comp, Preadditive.comp_sum, Preadditive.comp_zsmul,
     ← Category.assoc, boundaryCoordinate]
   simp only [K, map_π]
@@ -289,7 +289,7 @@ private theorem coordinate_face {X : Scheme.{u}} {r q : ℕ}
         (Pi.π _ a ≫ capIntoCap G (U (a b))
           (alternatingCechIntersection U ((Fin.succAboveOrderEmb b).trans a))
           (alternatingCechIntersection U a) (intersection_face_cap_le U a b)) := by
-  rw [coordinate, dif_neg (face_omits a b), position_face]
+  rw [coordinate, dite_eq_right (face_omits a b), position_face]
   exact congrArg ((-1 : ℤ) ^ b.val • ·)
     (projection_cap_congr U G _ _ _ a _ _ (insert_face a b))
 
@@ -398,7 +398,7 @@ private theorem alternatingCechPresheaf_insertion_containing_coordinate
   classical
   rcases hi with ⟨b, rfl⟩
   have hzero : coordinate U G (a b) (p + 1) a = 0 := by
-    exact dif_pos ⟨b, rfl⟩
+    exact dite_eq_left ⟨b, rfl⟩
   rw [hzero, Limits.comp_zero, add_zero]
   rw [boundaryCoordinate, Finset.sum_eq_single b]
   · rw [coordinate_face]
@@ -411,7 +411,7 @@ private theorem alternatingCechPresheaf_insertion_containing_coordinate
     have hmem : a b ∈ Set.range ((Fin.succAboveOrderEmb j).trans a) := by
       obtain ⟨k, hk⟩ := Fin.exists_succAbove_eq (Ne.symm hj)
       exact ⟨k, congrArg a hk⟩
-    rw [coordinate, dif_pos hmem, Limits.zero_comp, smul_zero]
+    rw [coordinate, dite_eq_left hmem, Limits.zero_comp, smul_zero]
   · simp
 
 /- Paired noncentral faces cancel on a tuple omitting the inserted index.
@@ -462,7 +462,7 @@ private theorem alternatingCechPresheaf_insertion_omitting_coordinate
     (hcpivot j) (hcface j) (hcap j)
   rw [ht]
   simp only [Preadditive.comp_zsmul, ← Category.assoc,
-    alternatingCechSheafPresheafD, Pi.lift_π, Preadditive.sum_comp,
+    alternatingCechSheafPresheafD, Pi.lift_comp_π, Preadditive.sum_comp,
     Preadditive.zsmul_comp]
   simp only [Category.assoc, capIntoCap_comp]
   rw [Fin.sum_univ_succAbove _ b]

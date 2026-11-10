@@ -129,7 +129,7 @@ lemma exists_unitHomEval_eq {E : FiniteIntermediateField ℓ}
   have h : continuousMapRestrictRingHom X E (op (ProEt.mk (𝟙 X)))
       ((continuousMapComparison X E).hom.app (op (ProEt.mk (𝟙 X))) y).down =
       (continuousMapComparison X E).hom.app (op (ProEt.mk (𝟙 X))) y :=
-    ULift.ext _ _ (ContinuousMap.ext fun x ↦ rfl)
+    ULift.ext (ContinuousMap.ext fun x ↦ rfl)
   rw [h]
   exact congrArg (fun φ ↦ φ.hom.app (op (ProEt.mk (𝟙 X))) y)
     (IsIso.hom_inv_id (continuousMapComparison X E))

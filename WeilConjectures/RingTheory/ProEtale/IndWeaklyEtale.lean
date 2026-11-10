@@ -39,8 +39,7 @@ lemma lmul'_map {C D : Type u} [CommRing C] [CommRing D] [Algebra R C]
     [Algebra R D] (α : C →ₐ[R] D) (y : C ⊗[R] C) :
     Algebra.TensorProduct.lmul' R (Algebra.TensorProduct.map α α y) =
       α (Algebra.TensorProduct.lmul' R y) := by
-  induction y with
-  | zero => simp
+  induction y using TensorProduct.inductionOn with
   | tmul a b => simp [Algebra.TensorProduct.lmul'_apply_tmul]
   | add a b ha hb => simp [ha, hb]
 
@@ -65,8 +64,7 @@ theorem exists_isIdempotentElem_mul_eq_of_mem_kaehlerDifferential_ideal
   -- Every element of `S ⊗[R] S` is defined at some stage.
   have hsurj : ∀ z : S ⊗[R] S, ∃ (i : ι) (y : P.diag.obj i ⊗[R] P.diag.obj i), Φ i y = z := by
     intro z
-    induction z with
-    | zero => exact ⟨IsFiltered.nonempty.some, 0, map_zero _⟩
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       obtain ⟨i, a', ha⟩ := Types.jointly_surjective_of_isColimit hc' a
       obtain ⟨j, b', hb⟩ := Types.jointly_surjective_of_isColimit hc' b
@@ -166,8 +164,7 @@ theorem Algebra.WeaklyEtale.localization_base (M : Submonoid A) [Algebra A A']
     have key : (Algebra.TensorProduct.lmul' A' (S := B)).toRingHom =
         (Algebra.TensorProduct.lmul' A (S := B)).toRingHom.comp (e : B ⊗[A'] B →+* B ⊗[A] B) := by
       refine RingHom.ext fun x ↦ ?_
-      induction x with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul a b =>
         simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_comp, RingHom.coe_coe,
           Function.comp_apply, Algebra.TensorProduct.lmul'_apply_tmul]
@@ -231,12 +228,13 @@ theorem Algebra.WeaklyEtale.bijective_algebraMap_localization_atPrime
     .of_isLocalization B n.primeCompl _
   have : Algebra.WeaklyEtale A (Localization.AtPrime n) := .trans A B _
   have : IsLocalHom (algebraMap A (Localization.AtPrime n)) := by
-    apply ((IsLocalRing.local_hom_TFAE (algebraMap A (Localization.AtPrime n))).out 0 4).mpr
+    apply ((IsLocalRing.local_hom_TFAE (algebraMap A (Localization.AtPrime n))).out 1 5).mpr
     rw [IsScalarTower.algebraMap_eq A B (Localization.AtPrime n), ← Ideal.comap_comap,
       show (IsLocalRing.maximalIdeal (Localization.AtPrime n)).comap
           (algebraMap B (Localization.AtPrime n)) = n from
         Localization.AtPrime.under_maximalIdeal, hn]
   exact Algebra.WeaklyEtale.bijective_of_isStrictlyHenselianLocalRing
+
 
 /-- The stalkwise version of
 `Algebra.WeaklyEtale.bijective_algebraMap_localization_atPrime`: for a weakly étale

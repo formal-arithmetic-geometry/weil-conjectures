@@ -109,7 +109,7 @@ theorem sfbImmersion_residueComparison_fixed
       Nonempty ((ConstantCompletion.extend
         (ConstantCompletion.projection (proEtaleModelTopology S) A I 0)).obj
           (sfbImmersionCompletedModel i I K) ≅
-        (Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}
+        (Functor.mapDerivedCategory.{u + 1, u + 2}
           (SfbResidueComparisonCore.sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj
           (DerivedCategory.Q.obj (sfbResidueComplex X I K))) := by
   let := HasDerivedCategory.standard

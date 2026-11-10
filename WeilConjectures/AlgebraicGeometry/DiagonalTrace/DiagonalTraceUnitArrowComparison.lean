@@ -126,9 +126,9 @@ private def nativePullRealization (A : Type u) [CommRing A] [Finite A]
   let K := (Scheme.sfIntrinsicModuleEquivalence X A).functor
   exact Functor.isoWhiskerLeft e.functor.mapDerivedCategory
       (Functor.mapDerivedCategoryNatIso d) ≪≫
-    (Functor.mapDerivedCategoryCompIso e.functor (Scheme.sfIntrinsicPullback A f)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso e.functor (Scheme.sfIntrinsicPullback A f) ≪≫
     Functor.mapDerivedCategoryNatIso (e.funInvIdAssoc (H ⋙ K)) ≪≫
-    Functor.mapDerivedCategoryCompIso H K
+    (Functor.mapDerivedCategoryCompIso H K).symm
 
 private def linePullRealization (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} {f : X ⟶ S} (e : X ≅ ProjectiveLine S)
@@ -148,7 +148,7 @@ private def linePullRealization (A : Type u) [CommRing A] [Finite A]
   exact nativePullRealization A f ≪≫
     Functor.isoWhiskerRight
       (Functor.mapDerivedCategoryNatIso t ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar C p) (upperStar C e.hom)) K ≪≫
+        (Functor.mapDerivedCategoryCompIso (upperStar C p) (upperStar C e.hom)).symm) K ≪≫
     Functor.associator (upperStar C p).mapDerivedCategory H K ≪≫
     Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory C p).symm (H ⋙ K)
 

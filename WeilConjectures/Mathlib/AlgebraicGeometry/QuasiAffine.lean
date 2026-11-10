@@ -65,6 +65,7 @@ theorem Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite
   ⟨f.normalization, f.toNormalization, f.fromNormalization, inferInstance, inferInstance,
     f.toNormalization_fromNormalization⟩
 
+
 /-- If `f : X ⟶ Y` is separated, quasi-compact and locally quasi-finite of finite type and `Y` is
 quasi-affine, then `X` is quasi-affine. Indeed, by Zariski's Main Theorem `f` factors as an open
 immersion `X ⟶ f.normalization` followed by an affine morphism onto `Y`, so `f.normalization` is
@@ -137,6 +138,7 @@ lemma Scheme.IsQuasiAffine.of_isQuasiAffineHom [IsQuasiAffineHom f] [IsAffine Y]
     X.IsQuasiAffine :=
   have : (⊤ : X.Opens).toScheme.IsQuasiAffine := (isAffineOpen_top Y).isQuasiAffine_preimage f
   .of_isIso X.topIso.inv
+
 
 /-- A qcqs scheme covered by quasi-affine basic opens of global sections is quasi-affine. -/
 lemma Scheme.IsQuasiAffine.of_forall_exists_isQuasiAffine_basicOpen (X : Scheme.{u})

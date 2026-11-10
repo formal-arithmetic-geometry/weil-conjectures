@@ -54,7 +54,7 @@ theorem tensorOperationUnit_normalized
     have hsec := congrArg (fun f ↦ (f.f (p + q)).val.app V
       (constructibleTensorTotalSection l E X P Q p q V x y)) hproj
     with_unfolding_all
-      simp only [IntegralOnSlice.productAugmentation, Pi.lift_π_assoc] at hsec
+      simp only [IntegralOnSlice.productAugmentation, Pi.lift_comp_π_assoc] at hsec
     have hunit := (IntegralOnSlice.augmentation_existsUnique l E X none).exists.choose_spec
     have htower := (tensorTowerModel l E X).exists.choose_spec P Q n p q V 1 x y
     with_unfolding_all refine hsec.trans ?_

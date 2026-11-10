@@ -17,6 +17,7 @@ Source: Stacks Project, Tags 0626, 0663, 0913 and 099H
 
 @[expose] public section
 
+
 set_option autoImplicit false
 
 universe u
@@ -54,13 +55,16 @@ private noncomputable def sectionScalarNat
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro x
-      change ((show R.obj.obj Y from s.val Y) ^ e) • M.val.map f x =
+      change ((show R.obj.obj Y from s.val Y) ^ e) •
+          (show M.val.obj Y from M.val.map f x) =
         M.val.map f (((show R.obj.obj X from s.val X) ^ e) • x)
       rw [M.val.map_smul]
       have hs : R.obj.map f (show R.obj.obj X from s.val X) =
           (show R.obj.obj Y from s.val Y) := s.property f
-      change ((show R.obj.obj Y from s.val Y) ^ e) • M.val.map f x =
-        R.obj.map f ((show R.obj.obj X from s.val X) ^ e) • M.val.map f x
+      change ((show R.obj.obj Y from s.val Y) ^ e) •
+          (show M.val.obj Y from M.val.map f x) =
+        R.obj.map f ((show R.obj.obj X from s.val X) ^ e) •
+          (show M.val.obj Y from M.val.map f x)
       rw [map_pow, hs] }⟩
   naturality M N g := by
     apply SheafOfModules.hom_ext

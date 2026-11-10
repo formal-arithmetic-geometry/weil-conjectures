@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 
 module
+
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Canonical transport under an isomorphic source
@@ -20,7 +23,6 @@ namespace AlgebraicGeometry
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 500000 in
 -- Derived universal-property comparisons must identify the sheaf-module category instances.
 /-- The canonical transport isomorphism for an isomorphic source.
 Source: Stacks Project, Tags 08HY, 0096 and 0D5S.

@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-!
 # Tensor products of presheaves of modules: free presheaves, and sections
@@ -34,6 +36,7 @@ resp. over `V`, is free of rank one over `U ⨯ V`.
 
 @[expose] public section
 
+
 universe u u₁
 
 open CategoryTheory MonoidalCategory Limits Opposite
@@ -58,6 +61,7 @@ noncomputable def homProdEquiv (X : C) : (X ⟶ U ⨯ V) ≃ (X ⟶ U) × (X ⟶
   left_inv _ := by apply prod.hom_ext <;> simp
   right_inv _ := by simp
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor product of the free presheaves of modules on the Yoneda presheaves of `U` and
 of `V` is the free presheaf of modules on the Yoneda presheaf of `U ⨯ V`. -/
@@ -80,6 +84,7 @@ noncomputable def freeYonedaProdIso :
       erw [ModuleCat.freeDesc_apply, ModuleCat.freeDesc_apply]
       simp)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 @[simp]
 lemma freeYonedaProdIso_hom_app_freeYonedaGen :
@@ -107,6 +112,7 @@ section Terminal
 
 variable (R) [HasTerminal C]
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The free presheaf of modules on the Yoneda presheaf of a terminal object is the free
 presheaf of modules of rank one. -/
@@ -126,6 +132,7 @@ noncomputable def freeYonedaTerminalIso :
         ModuleCat.FreeMonoidal.εIso_inv_freeMk]
       exact (unit_map_one _ f).symm)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 set_option backward.isDefEq.respectTransparency false in
 @[simp]
 lemma freeYonedaTerminalIso_hom_app_freeYonedaGen :

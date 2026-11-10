@@ -68,6 +68,8 @@ attribute [local irreducible] Scheme.residueField Padic ScalarLocalization.compo
   operationStageTransitionIso commonStageDerivedTensor commonStageDerivedPullback
 
 section HigherCoherence
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
@@ -145,13 +147,9 @@ private theorem localizedBraiding_natural
         (1 ⊗ₜ[R] (bi M.obj N.obj).hom)
     rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul,
       one_mul, mul_one, mul_comm c a, hn]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp,
-      Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp,
-        Limits.comp_zero]
+    induction g using TensorProduct.inductionOn with
     | tmul c g => exact ht a f c g
     | add g g' hg hg' =>
       simp only [map_add, LinearMap.add_apply, Preadditive.add_comp,
@@ -413,8 +411,8 @@ theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u})
                 hS)) (N.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
                 N.stage).2.trans hS))).hom ≫
             (commonStageTensorComparison l Ω W N M L hT).inv)) := by
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
     let S := stageSystem l Ω W
     let U : BilinearCoefficientDescent.Family S S S :=
       ⟨fun F ↦ rationalDerivedTensor l
@@ -495,8 +493,8 @@ theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u})
 
 end CommonBraidingDescent
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage braiding has its prescribed representative at every larger field.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the rational braiding

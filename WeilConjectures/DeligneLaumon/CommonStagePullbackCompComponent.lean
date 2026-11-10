@@ -20,8 +20,8 @@ import all Mathlib.Logic.Small.Defs
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
@@ -54,12 +54,80 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] ScalarLocalization.composition
   GeneralAlgebraicallyClosedCoefficients.ofHom StageSystem.PairCategory.mkHom
   rationalDerivedPullback commonStagePullbackComparison
+  rationalPullbackCompositionIso rationalPullbackScalarComparison
   commonStagePullbackRationalComposition HasDerivedCategory.standard integralCoefficientLinear
   completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
   scalarReductionDerivedExistence Scheme.residueField
 
-set_option allowUnsafeReducibility true in
-attribute [local reducible] rationalDerivedPullback
+/-! v4.35 note: the final identification in `commonStagePullbackCompComponent_stage_representation`
+goes through a generic transport lemma instantiated in this file (so that every instance term is
+the one of this file) and an opaque boundary for the transported comparisons; the single defeq of
+the original proof needs about 44 s on v4.35. Statements are unchanged. -/
+
+/-- Generic form of the transport of a compositor square through functors equal to the
+scalar extensions. Source: elementary category theory. -/
+private theorem compositor_transport
+    {AX AY AZ BX BY BZ : Type*} [Category AX] [Category AY] [Category AZ]
+    [Category BX] [Category BY] [Category BZ]
+    (pEg : AZ ⥤ AY) (pEf : AY ⥤ AX) (pEfg : AZ ⥤ AX)
+    (pLg : BZ ⥤ BY) (pLf : BY ⥤ BX) (pLfg : BZ ⥤ BX)
+    (SX : AX ⥤ BX) (SY : AY ⥤ BY) (SZ : AZ ⥤ BZ)
+    (TX : AX ⥤ BX) (TY : AY ⥤ BY) (TZ : AZ ⥤ BZ)
+    (eX : TX = SX) (eY : TY = SY) (eZ : TZ = SZ)
+    (ρf : pEf ⋙ SX ≅ SY ⋙ pLf) (ρg : pEg ⋙ SY ≅ SZ ⋙ pLg) (ρfg : pEfg ⋙ SX ≅ SZ ⋙ pLfg)
+    (Q : AZ) (wE : pEfg.obj Q ≅ pEf.obj (pEg.obj Q))
+    (wL : ∀ Q' : BZ, pLfg.obj Q' ≅ pLf.obj (pLg.obj Q'))
+    (R : SX.map wE.hom ≫ ρf.hom.app (pEg.obj Q) ≫ pLf.map (ρg.hom.app Q) =
+      ρfg.hom.app Q ≫ (wL (SZ.obj Q)).hom) :
+    TX.map wE.hom =
+      ((eqToIso eX).app (pEfg.obj Q) ≪≫ ρfg.app Q ≪≫
+          pLfg.mapIso ((eqToIso eZ).app Q).symm).hom ≫
+        (wL (TZ.obj Q)).hom ≫
+        pLf.map ((eqToIso eY).app (pEg.obj Q) ≪≫ ρg.app Q ≪≫
+            pLg.mapIso ((eqToIso eZ).app Q).symm).inv ≫
+        ((eqToIso eX).app (pEf.obj (pEg.obj Q)) ≪≫ ρf.app (pEg.obj Q) ≪≫
+          pLf.mapIso ((eqToIso eY).app (pEg.obj Q)).symm).inv := by
+  subst eX eY eZ
+  simp only [eqToIso_refl, Iso.trans_hom, Iso.trans_inv, Iso.app_hom, Iso.app_inv,
+    Iso.refl_hom, Iso.refl_inv, Iso.symm_hom, Iso.symm_inv, CategoryTheory.Functor.mapIso_hom,
+    CategoryTheory.Functor.mapIso_inv, NatTrans.id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id, Category.assoc]
+  erw [Category.id_comp]
+  rw [← reassoc_of% R]
+  erw [← CategoryTheory.Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+
+/-- A transported comparison whose implementation stays behind an opaque boundary. -/
+private irreducible_def commonStageTransportComparison
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    (p : A ⥤ B) (q : C ⥤ D)
+    (SA TA : A ⥤ C) (SB TB : B ⥤ D) (eA : TA = SA) (eB : TB = SB)
+    (ρ : p ⋙ SB ≅ SA ⋙ q) (Q : A) :
+    TB.obj (p.obj Q) ≅ q.obj (TA.obj Q) :=
+  (eqToIso eB).app (p.obj Q) ≪≫ ρ.app Q ≪≫ q.mapIso ((eqToIso eA).app Q).symm
+
+/-- Transport a compositor using the named comparisons, before specializing the categories. -/
+private theorem commonStageTransportCompositor
+    {AX AY AZ BX BY BZ : Type*} [Category* AX] [Category* AY] [Category* AZ]
+    [Category* BX] [Category* BY] [Category* BZ]
+    (pEg : AZ ⥤ AY) (pEf : AY ⥤ AX) (pEfg : AZ ⥤ AX)
+    (pLg : BZ ⥤ BY) (pLf : BY ⥤ BX) (pLfg : BZ ⥤ BX)
+    (SX TX : AX ⥤ BX) (SY TY : AY ⥤ BY) (SZ TZ : AZ ⥤ BZ)
+    (eX : TX = SX) (eY : TY = SY) (eZ : TZ = SZ)
+    (ρf : pEf ⋙ SX ≅ SY ⋙ pLf) (ρg : pEg ⋙ SY ≅ SZ ⋙ pLg)
+    (ρfg : pEfg ⋙ SX ≅ SZ ⋙ pLfg)
+    (Q : AZ) (wE : pEfg.obj Q ≅ pEf.obj (pEg.obj Q))
+    (wL : ∀ Q' : BZ, pLfg.obj Q' ≅ pLf.obj (pLg.obj Q'))
+    (R : SX.map wE.hom ≫ ρf.hom.app (pEg.obj Q) ≫ pLf.map (ρg.hom.app Q) =
+      ρfg.hom.app Q ≫ (wL (SZ.obj Q)).hom) :
+    TX.map wE.hom =
+      (commonStageTransportComparison pEfg pLfg SZ TZ SX TX eZ eX ρfg Q).hom ≫
+        (wL (TZ.obj Q)).hom ≫
+        pLf.map (commonStageTransportComparison pEg pLg SZ TZ SY TY eZ eY ρg Q).inv ≫
+        (commonStageTransportComparison pEf pLf SY TY SX TX eY eX ρf (pEg.obj Q)).inv := by
+  simpa only [commonStageTransportComparison_def] using
+    compositor_transport pEg pEf pEfg pLg pLf pLfg SX SY SZ TX TY TZ
+      eX eY eZ ρf ρg ρfg Q wE wL R
 
 private theorem normalization_map_heq
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
@@ -80,7 +148,7 @@ private theorem stage_square_cancel {C D : Type*} [Category* C] [Category* D] (G
       (x ≫ ρP ≫ G.map zP.inv ≫ wP.inv) ≫
         (wP.hom ≫ G.map (zP.hom ≫ n ≫ zQ.inv) ≫ wQ.inv) := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc, Functor.map_comp,
-    Iso.map_inv_hom_id_assoc, reassoc_of% h]
+    Iso.inv_hom_id_map_assoc, reassoc_of% h]
 
 /-- The conjugated fixed-stage square underlying common-stage naturality.
 Source: Stacks 099N(5), finite-stage cancellation after coefficient compatibility.
@@ -142,6 +210,146 @@ theorem commonStagePullbackCompComponent_stage_square
     ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).map r)
     (commonStagePullbackRationalComposition_naturality l Ω f g L hP hQ r)
 
+/-- Identify the two presentations of the fixed-stage rational compositor. -/
+private theorem commonStagePullbackRationalComposition_eq_scalar
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Z)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω) (hP : P.stage ≤ L) :
+    commonStagePullbackRationalComposition l Ω f g L P hP =
+      rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
+        (P.toStage hP) := by
+  unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
+  rfl
+
+/-- Identify one comparison without expanding the surrounding compositor square. -/
+private theorem commonStagePullbackComparison_eq_transport
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω) (hP : P.stage ≤ L)
+    (eX : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP)
+    (eY : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP) :
+    commonStagePullbackComparison l Ω f P L hP =
+      commonStageTransportComparison
+        (rationalDerivedPullback l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f)
+        (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+        (GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP)
+        ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP)
+        (GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP)
+        ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP) eY eX
+        (rationalPullbackScalarComparison l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+          (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f) P.obj := by
+  rw [commonStageTransportComparison_def]
+  unfold commonStagePullbackComparison
+  rfl
+
+/-- Substitute the three comparisons while keeping the compositor itself opaque. -/
+private theorem stage_transport_of_comparisons
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {A B W : D} {U V : C} (x : A ⟶ W) (b : B ≅ F.obj U)
+    {a a' : A ≅ B} {c c' : V ≅ U} {d d' : W ≅ F.obj V}
+    (ha : a = a') (hc : c = c') (hd : d = d')
+    (h : x = a'.hom ≫ b.hom ≫ F.map c'.inv ≫ d'.inv) :
+    x = a.hom ≫ b.hom ≫ F.map c.inv ≫ d.inv := by
+  cases ha
+  cases hc
+  cases hd
+  exact h
+
+/-- Transport the rational compositor through the recorded coefficient-stage transitions. -/
+private theorem commonStagePullbackCompComponent_stage_transport
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Z)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω) (hP : P.stage ≤ L) :
+    (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) P.stage).map
+        (rationalPullbackCompositionIso l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj).hom =
+      (GeneralAlgebraicallyClosedCoefficients.ofHom
+        (commonStagePullbackObject l Ω (f ≫ g) P)
+        (commonStagePullbackObject l Ω f
+          (commonStagePullbackObject l Ω g P)) L hP hP
+        ((commonStagePullbackComparison l Ω (f ≫ g) P L hP).hom ≫
+          (commonStagePullbackRationalComposition l Ω f g L P hP).hom ≫
+          (rationalDerivedPullback l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map
+            ((commonStagePullbackComparison l Ω g P L hP).inv) ≫
+          (commonStagePullbackComparison l Ω f
+            (commonStagePullbackObject l Ω g P) L hP).inv)) := by
+  have eX : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP := by
+    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω X).exists.choose_spec.1
+        P.stage L hP
+  have eY : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP := by
+    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Y).exists.choose_spec.1
+        P.stage L hP
+  have eZ : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Z).T hP =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Z P.stage L hP := by
+    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
+        P.stage L hP
+  have key := commonStageTransportCompositor
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g)
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f)
+    (rationalDerivedPullback l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g))
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g)
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g))
+    (GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP) _
+    (GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP) _
+    (GeneralAlgebraicallyClosedCoefficients.transition l Ω Z P.stage L hP) _ eX eY eZ
+    (rationalPullbackScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f)
+    (rationalPullbackScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) g)
+    (rationalPullbackScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) (f ≫ g))
+    P.obj (rationalPullbackCompositionIso l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f g P.obj)
+    (fun Q ↦ rationalPullbackCompositionIso l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g Q)
+    (rationalPullbackComposition_scalar l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g P.obj)
+  refine (StageSystem.ι_map_eq hP _).trans ?_
+  have eR := commonStagePullbackRationalComposition_eq_scalar l Ω f g P L hP
+  simp only [eR]
+  unfold GeneralAlgebraicallyClosedCoefficients.ofHom
+  apply congrArg (StageSystem.PairCategory.mkHom
+      (X := commonStagePullbackObject l Ω (f ≫ g) P)
+      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP)
+  have hfg := commonStagePullbackComparison_eq_transport l Ω (f ≫ g) P L hP eX eZ
+  have hg := commonStagePullbackComparison_eq_transport l Ω g P L hP eY eZ
+  have hf := commonStagePullbackComparison_eq_transport l Ω f
+    (commonStagePullbackObject l Ω g P) L hP eX eY
+  have h := stage_transport_of_comparisons
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    _ _ hfg hg hf key
+  exact h
+
+
 /-- The selected common-stage component is represented at every larger coefficient stage.
 Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible pullback.
 (blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
@@ -183,8 +391,8 @@ theorem commonStagePullbackCompComponent_stage_representation
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) X).obj
         ((constructibleIntegralPullback l _ (f ≫ g)).obj P.obj.obj) =
       (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj :=
-    ((rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).obj P.obj := by
+    simpa only [rationalDerivedPullback] using ((rationalDerivedPullback_existsUnique l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) (f ≫ g)).exists.choose_spec.2.1
         P.obj).symm
   have eB : (sfRationalConstructibleLocalization l
@@ -194,9 +402,10 @@ theorem commonStagePullbackCompComponent_stage_representation
       (rationalDerivedPullback l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
           ((rationalDerivedPullback l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) :=
-    ((congrArg (rationalDerivedPullback l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).obj
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).obj P.obj) := by
+    simpa only [rationalDerivedPullback] using
+      ((congrArg (rationalDerivedPullback_existsUnique l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) f).exists.choose.obj
       ((rationalDerivedPullback_existsUnique l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g).exists.choose_spec.2.1
           P.obj)).trans
@@ -207,37 +416,7 @@ theorem commonStagePullbackCompComponent_stage_representation
   have h1 := normalization_map_heq
     (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) P.stage)
     eA eB hw.symm
-  refine h0.trans (h1.trans (heq_of_eq ?_))
-  have eX : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T hP =
-      GeneralAlgebraicallyClosedCoefficients.transition l Ω X P.stage L hP := by
-    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
-      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω X).exists.choose_spec.1
-        P.stage L hP
-  have eY : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T hP =
-      GeneralAlgebraicallyClosedCoefficients.transition l Ω Y P.stage L hP := by
-    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
-      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Y).exists.choose_spec.1
-        P.stage L hP
-  have eZ : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Z).T hP =
-      GeneralAlgebraicallyClosedCoefficients.transition l Ω Z P.stage L hP := by
-    simpa only [GeneralAlgebraicallyClosedCoefficients.stageSystem] using
-      (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Z).exists.choose_spec.1
-        P.stage L hP
-  have key := rationalPullbackComposition_scalar_transport l
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
-    (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L hP) f g
-    _ _ _ eX eY eZ P.obj
-  refine (StageSystem.ι_map_eq hP _).trans ?_
-  have eR : commonStagePullbackRationalComposition l Ω f g L P hP =
-      rationalPullbackCompositionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f g
-        (P.toStage hP) := by
-    unfold commonStagePullbackRationalComposition rationalPullbackCompositionIso
-    rfl
-  rw [eR]
-  unfold commonStagePullbackComparison
-    operationStageTransitionIso GeneralAlgebraicallyClosedCoefficients.ofHom
-  exact congrArg (StageSystem.PairCategory.mkHom (X := commonStagePullbackObject l Ω (f ≫ g) P)
-      (Y := commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P)) L hP hP) key
+  exact h0.trans (h1.trans (heq_of_eq
+    (commonStagePullbackCompComponent_stage_transport l Ω f g P L hP)))
 
 end WeilConjectures

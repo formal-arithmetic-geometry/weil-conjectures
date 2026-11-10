@@ -133,8 +133,7 @@ variable {B : Type*} [AddCommGroup B] [Module A B]
 lemma rTensor_invariants_subtype_mem (ρ : Representation A G E) (x : ρ.invariants ⊗[A] B) :
     ρ.invariants.subtype.rTensor B x ∈ (ρ.tprod (trivial A G B)).invariants := by
   intro g
-  induction x with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul v b => simp [v.2 g]
   | add x y hx hy => rw [map_add, map_add, hx, hy]
 
@@ -298,10 +297,7 @@ lemma exists_rTensor_discreteAverage_eq (hρ : ρ.IsDiscrete) (y : E ⊗[A] B) :
     ∃ U : OpenNormalSubgroup G, ∀ W ≤ U,
       (ρ.invariants.subtype ∘ₗ discreteAverage hA hρ).rTensor B y =
         (↑(hA W).unit⁻¹ : A) • (ρ.tprod (trivial A G B)).cosetSum W.toSubgroup y := by
-  induction y with
-  | zero =>
-    obtain ⟨U, -⟩ := hρ.exists_openNormalSubgroup 0
-    exact ⟨U, fun W _ ↦ by simp⟩
+  induction y using TensorProduct.inductionOn with
   | tmul v b =>
     obtain ⟨U, hU⟩ := hρ.exists_openNormalSubgroup v
     refine ⟨U, fun W hW ↦ ?_⟩

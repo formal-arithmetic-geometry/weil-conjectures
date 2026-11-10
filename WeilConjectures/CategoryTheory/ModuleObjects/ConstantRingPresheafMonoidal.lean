@@ -103,8 +103,7 @@ noncomputable def tensorToModTensor :
   app U := AddCommGrpCat.ofHom (tensorToModTensorApp N₁ N₂ U)
   naturality U V f := by
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       exact congrArg (fun g ↦ g.hom (a ⊗ₜ[ℤ] b))
         ((Mod.tensorObjπ (toMod T N₁) (toMod T N₂)).naturality f)
@@ -117,8 +116,7 @@ lemma tensorToModTensor_linear :
         γ[constRingObj (C := C) T, (toMod T N₁ ⊗ toMod T N₂).X] := by
   refine NatTrans.ext (funext fun U ↦ AddCommGrpCat.hom_ext_toIntLinearMap
     (TensorProduct.ext' fun (t : T) x ↦ ?_))
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a b =>
     exact (congrArg (fun g ↦ (g.app U).hom (t ⊗ₜ[ℤ] (a ⊗ₜ[ℤ] b)))
       (Mod.whiskerLeft_tensorπ_smul (toMod T N₁) (toMod T N₂))).symm
@@ -138,8 +136,9 @@ lemma moduleTensorπ_balanced :
         (toMod T N₂).X ≫ moduleTensorπ N₁ N₂ =
       ((α_ (toMod T N₁).X (constRingObj T) (toMod T N₂).X).hom ≫
         (toMod T N₁).X ◁ γ[constRingObj (C := C) T, (toMod T N₂).X]) ≫ moduleTensorπ N₁ N₂ :=
-  NatTrans.ext (funext fun _ ↦ AddCommGrpCat.hom_ext_toIntLinearMap
-    (TensorProduct.ext_threefold fun a (t : T) b ↦ TensorProduct.smul_tmul t a b))
+  NatTrans.ext (funext fun U ↦ AddCommGrpCat.hom_ext_toIntLinearMap
+    (TensorProduct.ext_threefold fun (a : N₁.obj U) (t : T) (b : N₂.obj U) ↦
+      TensorProduct.smul_tmul t a b))
 
 /-- The comparison from the relative tensor product of the module objects associated with `N₁` and
 `N₂` to the objectwise tensor product over `T`, induced by `moduleTensorπ`. -/
@@ -157,8 +156,7 @@ noncomputable def toModTensorIso :
       hom_inv_id := by
         refine NatTrans.ext (funext fun U ↦ AddCommGrpCat.hom_ext_toIntLinearMap
           (LinearMap.ext fun x ↦ ?_))
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul a b =>
           exact congrArg (fun g ↦ (g.app U).hom (a ⊗ₜ[ℤ] b))
             (Mod.tensorObjπ_tensorObjDesc _ _ (moduleTensorπ N₁ N₂) (moduleTensorπ_balanced N₁ N₂))
@@ -185,8 +183,7 @@ noncomputable def moduleToModTensorIso :
     (fun N₁ ↦ NatIso.ofComponents (fun N₂ ↦ toModTensorIso N₁ N₂) fun {N₂ N₂'} g ↦ by
       refine Mod.hom_ext _ _ (NatTrans.ext (funext fun U ↦ AddCommGrpCat.hom_ext_toIntLinearMap
         (LinearMap.ext fun x ↦ ?_)))
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul a b =>
         exact (congrArg (fun k ↦ (k.app U).hom (a ⊗ₜ[ℤ] b))
           (Mod.tensorObjπ_whiskerLeft (M := toMod T N₁) ((moduleToMod T).map g))).symm
@@ -194,8 +191,7 @@ noncomputable def moduleToModTensorIso :
     fun {N₁ N₁'} f ↦ by
       refine NatTrans.ext (funext fun N₂ ↦ Mod.hom_ext _ _ (NatTrans.ext (funext fun U ↦
         AddCommGrpCat.hom_ext_toIntLinearMap (LinearMap.ext fun x ↦ ?_))))
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | tmul a b =>
         exact (congrArg (fun k ↦ (k.app U).hom (a ⊗ₜ[ℤ] b))
           (Mod.tensorObjπ_whiskerRight (N := toMod T N₂) ((moduleToMod T).map f))).symm

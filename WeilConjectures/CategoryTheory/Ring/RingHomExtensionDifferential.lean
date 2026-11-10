@@ -55,8 +55,7 @@ private theorem pure_linear_ext
     (ConcreteCategory.bijective_of_isIso (η.app U)).2
   ext z
   obtain ⟨z, rfl⟩ := hs z
-  induction z using TensorProduct.induction_on with
-  | zero => simp [Function.comp_apply]
+  induction z using TensorProduct.inductionOn with
   | tmul b x => exact ht b x
   | add z w hz hw => simpa only [Function.comp_apply, map_add] using congrArg₂ (· + ·) hz hw
 

@@ -199,7 +199,7 @@ private theorem stalkPullbackLevelRegularIso_one {X Y : Scheme.{u}}
     simp only [stalkPullbackLevelRegularIso, Iso.trans_hom, Functor.mapIso_hom,
       Functor.mapHomologicalComplex_map_f, HomologicalComplex.comp_f, Iso.app_hom,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      CochainComplex.singleFunctor,
       HomologicalComplex.single_map_f_self, Functor.map_comp, Category.assoc]
     dsimp only [R, F, a]
     simp only [← Category.assoc, ← CategoryTheory.Functor.map_comp]
@@ -289,6 +289,8 @@ private theorem stalkPullbackRoos_epi {X Y : Scheme.{u}} (g : X ⟶ Y) :
       using quotientStep_epi l E X n
   have h := AlgebraicGeometry.ProEtale.milnor_epimorphic.{u, u, _} X
     (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X) M ht
+  have : HasCountableProducts (CochainComplex (integralTowerModules l E X) ℤ) :=
+    ⟨fun _ _ ↦ HomologicalComplex.instHasLimitsOfShape⟩
   exact singleTower_epi M h.1 _ (stalkPullbackRegularTowerIso l E g)
 private theorem stalkChainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     QuasiIso (chainUnitCandidate l E g) := by
@@ -298,7 +300,7 @@ private theorem stalkChainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y
     (pullbackRegularCone l E g) (stalkPullbackRegularConeIsLimit l E g)
     P (productIsProduct _) (pullbackUnitProduct l E g)
     (constantWeilPullbackRoosEndomorphism l E g)
-    (fun n ↦ Pi.lift_π (pullbackUnitLevel l E g) n)
+    (fun n ↦ Pi.lift_comp_π (pullbackUnitLevel l E g) n)
     (fun n ↦ (towerTransitionEndomorphism_eq_iff _ _).1 rfl n)
   let S := ShortComplex.mk (pullbackUnitProduct l E g)
     (constantWeilPullbackRoosEndomorphism l E g) hz

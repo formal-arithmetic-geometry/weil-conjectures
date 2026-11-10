@@ -168,7 +168,7 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_connectedComp
     · exact (Set.ne_univ_iff_exists_notMem S).1 hSu
   have hlt : V < ⟨(Set.range ((O b).ι ≫ ι).base)ᶜ,
       ((O b).ι ≫ ι).isClosedEmbedding.isClosed_range.isOpen_compl⟩ := by
-    rw [SetLike.lt_iff_le_and_exists]
+    rw [IsConcreteLE.lt_iff_le_and_exists]
     refine ⟨fun x hx hx' ↦ ?_, ι.base z, fun hw ↦ ?_, fun hx ↦ ?_⟩
     · obtain ⟨w, hw⟩ := hx'
       have hx'' : x ∈ (V : Set X) := hx

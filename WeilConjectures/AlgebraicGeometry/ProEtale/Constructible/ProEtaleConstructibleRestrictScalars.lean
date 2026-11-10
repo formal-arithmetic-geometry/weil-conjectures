@@ -112,7 +112,7 @@ theorem IsConstructibleProEtaleModuleSheaf.of_restrictScalars {T : Scheme.{u}}
     IsConstructibleProEtaleModuleSheaf T B F := by
   rw [proEtaleModuleRestriction_constructible_iff] at hF ⊢
   have hf' : Function.Surjective (RingHom.ulift.{u + 1, u + 1} f) := fun b ↦
-    ⟨ULift.up (hf b.down).choose, ULift.ext _ _ (hf b.down).choose_spec⟩
+    ⟨ULift.up (hf b.down).choose, ULift.ext (hf b.down).choose_spec⟩
   exact ProEtale.isConstructible_of_restrictScalars _ hf' _
     (ProEtale.isConstructible_of_iso ((WeilConjectures.restrictionEncodingIso T f).app F) hF)
 

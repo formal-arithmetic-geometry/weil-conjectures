@@ -52,6 +52,7 @@ lemma toRestrictOverHom_comp {M N P : SheafOfModules.{u} 𝓡} (f : M.over U ⟶
     (g : N.over U ⟶ P.over U) :
     toRestrictOverHom (f ≫ g) = toRestrictOverHom f ≫ toRestrictOverHom g := rfl
 
+
 lemma toRestrictOverHom_id (M : SheafOfModules.{u} 𝓡) :
     toRestrictOverHom (𝟙 (M.over U)) = 𝟙 _ := rfl
 
@@ -110,14 +111,14 @@ lemma bidual_app_bijective_of_iso_free [HasWeakSheafify J AddCommGrpCat.{u}]
   let Cc (j : I) : M.over U ⟶ (unit 𝓡).over U :=
     e.inv ≫ Sigma.desc (fun k ↦ if k = j then 𝟙 (unit _) else 0)
   have hsc (i j : I) : S j ≫ Cc i = if j = i then 𝟙 _ else 0 := by
-    simp only [S, Cc, Category.assoc, Iso.hom_inv_id_assoc, Sigma.ι_desc]
+    simp only [S, Cc, Category.assoc, Iso.hom_inv_id_assoc, Sigma.ι_comp_desc]
     rfl
   have hsum : ∑ i, Sigma.desc (fun k ↦ if k = i then 𝟙 (unit _) else 0) ≫
       Sigma.ι (fun _ : I ↦ unit ((𝓡).over U)) i = 𝟙 (free I) := by
     refine Sigma.hom_ext _ _ fun k ↦ ?_
     rw [Preadditive.comp_sum, Finset.sum_eq_single k (fun b _ hb ↦ by simp [Ne.symm hb])
       (by simp)]
-    simp only [Sigma.ι_desc_assoc]
+    simp only [Sigma.ι_comp_desc_assoc]
     exact (Category.comp_id _).symm
   have htot : ∑ i, Cc i ≫ S i = 𝟙 _ := by
     calc ∑ i, Cc i ≫ S i = e.inv ≫ (∑ i, Sigma.desc (fun k ↦ if k = i then 𝟙 (unit _) else 0) ≫

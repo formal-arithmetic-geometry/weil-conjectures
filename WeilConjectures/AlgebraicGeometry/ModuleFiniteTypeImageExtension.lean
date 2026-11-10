@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
-import Mathlib.Data.Finite.Sum
+import Mathlib.Basic.Finite.Sum
 import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-!

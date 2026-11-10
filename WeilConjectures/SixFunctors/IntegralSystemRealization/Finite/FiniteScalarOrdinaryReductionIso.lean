@@ -29,7 +29,7 @@ attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCate
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   PurCompactSupport.completed scalarReductionDerivedRestriction
   coefficientFiniteDerivedExtension coefficientFiniteDerivedRestriction
-  unrestrictedIntegralReductionFunctor CategoryTheory.Functor.mapHomologicalComplex
+  unrestrictedIntegralReductionFunctor
 attribute [local instance] coefficientFiniteExtensionAdditive
 
 /-- The ordinary finite scalar presentation, fixed by its restriction adjunction.

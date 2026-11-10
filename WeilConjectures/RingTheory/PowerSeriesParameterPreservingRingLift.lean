@@ -123,7 +123,7 @@ private theorem adjust_coordinates
     change Φ (e.symm (algebraMap R T r)) = algebraMap R D r
     rw [← hj, ← hej, e.symm_apply_apply, hΦX]
     dsimp [z, j']
-    rw [dif_pos j.isLt]
+    rw [dite_eq_left j.isLt]
 
 /-- An unrestricted ring lift can be chosen to agree with the base map on parameters.
 No assertion of linearity over the whole base ring is made.

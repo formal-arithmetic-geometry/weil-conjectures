@@ -17,6 +17,7 @@ Source: Stacks Project, Modules, Lemma 01CG (lemma-local-tensor-algebra).
 
 @[expose] public section
 
+
 set_option autoImplicit false
 
 universe u
@@ -39,9 +40,8 @@ noncomputable def restriction {U V : X.Opensᵒᵖ} (i : U ⟶ V) :
       map_smul' := by
         intro r x
         rw [F.val.map_smul]
-        change SymmetricAlgebra.ι _ _ ((X.presheaf.map i) r • F.val.map i x) = _
-        rw [map_smul]
-        rfl }
+        exact (SymmetricAlgebra.ι (X.presheaf.obj V) (F.val.obj V)).map_smul
+          ((X.presheaf.map i) r) (F.val.map i x) }
   exact (SymmetricAlgebra.lift f).toRingHom
 
 @[simp]

@@ -19,7 +19,7 @@ Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
@@ -28,6 +28,10 @@ universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace WeilConjectures.IntegralHom
+
+attribute [local implicit_reducible] completedIntegralCoefficientSheaf
+  completedIntegralCommRingSheafUnrestricted
+  completedIntegralCommRingSheaf CategoryTheory.sheafCompose
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -111,6 +115,7 @@ theorem reductionTower_components
     exact τ.hom.naturality (homOfLE n.le_succ).op
   · intro n
     have hbase : (e.inv ≫ t0.hom) ≫ β.app _ = s0.hom := by
+      set_option backward.isDefEq.respectTransparency false in
       simpa only [β, Functor.whiskerRight_app, Category.assoc] using hunit _ (hα _)
     have hnat := augmentation_of_unit _ _ β (ι.app (op n))
       (e.inv ≫ t0.hom) s0.hom hbase
@@ -121,6 +126,7 @@ theorem reductionTower_components
             (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))).obj (op K)).map
               ((integralReductionTowerCone l E Y D hl q hq).π.app (op n)) ≫
             s.hom.app (op n) := by
+      set_option backward.isDefEq.respectTransparency false in
       calc
         _ = (e.inv ≫ t0.hom) ≫ _ ≫ β.app (Q.obj (op n)) := by
           simpa only [Category.assoc] using
@@ -129,6 +135,7 @@ theorem reductionTower_components
         _ = _ := (hs n).symm
     apply (cancel_mono (t.hom.app (op n))).1
     apply (cancel_mono (β.app (Q.obj (op n)))).1
+    set_option backward.isDefEq.respectTransparency false in
     simpa only [τ, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id,
       Iso.app_hom, asIso_inv, NatIso.isIso_inv_app, Functor.whiskerLeft_app,

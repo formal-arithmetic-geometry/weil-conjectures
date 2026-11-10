@@ -102,10 +102,10 @@ def closedComparison :
   haveI := preservesFiniteColimits_lowerStar_of_isCompl (R := A) i j hij
   haveI := isIso_lowerStarComparisonUpperStarBaseChange i (ModuleCat.{u + 1} A)
   Functor.isoWhiskerRight (termwiseIso A i) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (asIso (lowerStarComparisonUpperStarBaseChange i (ModuleCat.{u + 1} A))) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The transported counit obtained by expanding the finite etale-origin Hom bijections.
 It uses the comparison inverse, the transported ordinary etale counit, and the actual

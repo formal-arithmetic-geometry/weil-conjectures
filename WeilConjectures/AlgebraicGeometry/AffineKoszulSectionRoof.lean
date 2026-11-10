@@ -14,6 +14,7 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Limits.Types.Colimits
 import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Koszul representatives of sections on an affine open
 

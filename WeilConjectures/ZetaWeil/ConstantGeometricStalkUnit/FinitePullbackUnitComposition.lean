@@ -76,7 +76,7 @@ private theorem derived_unit_composition
     (a : H ≅ F ⋙ G) {M : C} {N : D} {P : B}
     (x : F.obj M ⟶ N) (y : G.obj N ⟶ P) (z : H.obj M ⟶ P)
     (h : a.hom.app M ≫ G.map x ≫ y = z) :
-    (Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F G).hom.app
+    (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
         ((DerivedCategory.singleFunctor C 0).obj M) ≫
       G.mapDerivedCategory.map
         ((F.mapDerivedCategorySingleFunctor 0).hom.app M ≫
@@ -85,7 +85,7 @@ private theorem derived_unit_composition
         (DerivedCategory.singleFunctor B 0).map y =
       (H.mapDerivedCategorySingleFunctor 0).hom.app M ≫
         (DerivedCategory.singleFunctor B 0).map z := by
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
   have hn := (G.mapDerivedCategorySingleFunctor 0).hom.naturality x
   dsimp only [Functor.comp_map] at hn
   rw [reassoc_of% hn]

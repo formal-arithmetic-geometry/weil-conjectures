@@ -39,12 +39,13 @@ namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 open QuotientChange IntegralQuotient
 open ModuleRingedComparison
 
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
+
 attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
+  HomologicalComplexUpToQuasiIso.Qh
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
@@ -158,10 +159,12 @@ theorem section_pull_transport_kflat_derived {X Y : Scheme.{u}} (f : X ⟶ Y)
     (complex_equivalence (ModuleRingedComparison.equivalence Λ Y))
     (fun P ↦ by
       dsimp only [AD, kD2, complex_iso, section_localization_iso, Functor.comp_obj]
-      exact section_pull_transport_scalar_computation a Y cY hcY P)
+      simpa only [QuotientChange.compute_eq] using
+        section_pull_transport_scalar_computation a Y cY hcY P)
     (fun P ↦ by
       dsimp only [BD, kD3, complex_iso, section_localization_iso, Functor.comp_obj]
-      exact section_pull_transport_scalar_computation a X cX hcX P)
+      simpa only [QuotientChange.compute_eq] using
+        section_pull_transport_scalar_computation a X cX hcX P)
     (geometric_computation (Λ := Λ) f) (geometric_computation (Λ := Λ') f)
     (complex_square (CondensedRing.upperStar Λ f) (CondensedRing.upperStar Λ' f)
       (extension a Y) (extension a X) (pullback Λ f) (pullback Λ' f)

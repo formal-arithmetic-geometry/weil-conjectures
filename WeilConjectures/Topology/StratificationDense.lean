@@ -46,12 +46,6 @@ lemma IsLocallyClosed.isNowhereDense_of_interior_eq_empty {s : Set X} (hs : IsLo
     _ ⊆ closure (interior (closure s) ∩ coborder s) := isOpen_interior.inter_closure
     _ = ∅ := by rw [h₁, closure_empty]
 
-/-- The union of two nowhere dense subsets is nowhere dense. -/
-lemma IsNowhereDense.union {s t : Set X} (hs : IsNowhereDense s) (ht : IsNowhereDense t) :
-    IsNowhereDense (s ∪ t) := by
-  rw [IsNowhereDense, closure_union, interior_union_isClosed_of_interior_empty isClosed_closure ht]
-  exact hs
-
 /-- A finite union of nowhere dense subsets is nowhere dense. -/
 lemma isNowhereDense_biUnion_finset {ι : Type*} (s : Finset ι) {f : ι → Set X}
     (hf : ∀ i ∈ s, IsNowhereDense (f i)) : IsNowhereDense (⋃ i ∈ s, f i) := by

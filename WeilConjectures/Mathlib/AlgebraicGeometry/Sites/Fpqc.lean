@@ -110,7 +110,7 @@ private lemma of_isPullback_of_mem_fpqcTopology_of_isAffine {T Z : Scheme.{u}} [
   intro j
   have hsq := (IsPullback.of_hasPullback (pullback.fst p f) (Sigma.ι 𝒱.cover.X j)).paste_horiz
     (IsPullback.of_hasPullback p f).flip
-  have hj : Sigma.ι 𝒱.cover.X j ≫ p = 𝒱.cover.f j := Sigma.ι_desc _ _
+  have hj : Sigma.ι 𝒱.cover.X j ≫ p = 𝒱.cover.f j := Sigma.ι_comp_desc _ _
   rw [hj] at hsq
   refine H _ _ _ ?_ hsq
   rw [← φ.w₀ j]

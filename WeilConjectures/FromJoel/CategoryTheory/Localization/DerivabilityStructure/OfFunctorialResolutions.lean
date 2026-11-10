@@ -38,6 +38,7 @@ lemma hasLeftResolutions_arrow_of_functorial_resolutions :
     w := Arrow.homMk (p.app _) (p.app _) ((p.naturality f.hom).symm)
     hw := ⟨hp _, hp _⟩ }⟩
 
+
 variable [Φ.functor.Full] [Φ.functor.Faithful] [W₂.HasTwoOutOfThreeProperty]
 
 include hp
@@ -52,6 +53,7 @@ lemma isConnected_leftResolution_of_functorial_resolutions [W₂.IsMultiplicativ
       (NatTrans.op p) (fun _ ↦ hp _) (by simp only [hW₁]; rfl) _
   have := isConnected_of_equivalent (LeftResolution.opEquivalence Φ X₂).symm
   exact isConnected_of_isConnected_op
+
 
 include hW₁ in
 set_option backward.defeqAttrib.useBackward true in

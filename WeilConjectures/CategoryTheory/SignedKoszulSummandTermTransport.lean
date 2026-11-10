@@ -249,8 +249,8 @@ private theorem signed_scalar_degree_transport
   simp only [ringedKoszulCoefficientSMul, Linear.smul_comp]
   rw [neg_one_zpow_eq_ite]
   by_cases he : Even p
-  · simp only [if_pos he, one_smul, one_mul]
-  · simp only [if_neg he, Units.smul_def, Units.val_neg, Units.val_one,
+  · simp only [ite_eq_left he, one_smul, one_mul]
+  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
       neg_one_mul, map_neg, neg_smul, one_smul]
 
 end Scalars

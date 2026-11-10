@@ -7,6 +7,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentative
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Section realization of coefficient scalar extension
 

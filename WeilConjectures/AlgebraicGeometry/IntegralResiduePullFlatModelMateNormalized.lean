@@ -20,7 +20,8 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 open CategoryTheory.Functor
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_agIntegralResiduePullFlatModelMateNormalized
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 -- Private counit and mate calculations retained from the former flat-model proof.
 section ProofCalculations
@@ -34,31 +35,79 @@ local notation "M" => Mod (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) Ab)
   (AlgebraicGeometry.ProEtale.condensedRingObj Λ T)
 @[instance_reducible]
 private noncomputable def cachedProofInstance1 : MonoidalCategory M := inferInstance
-private theorem cachedProofInstance2 : MonoidalPreadditive M := inferInstance
+private theorem cachedProofInstance2_private : MonoidalPreadditive M := inferInstance
+
+/-- Public export of the private `cachedProofInstance2_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance2 := cachedProofInstance2_private
 omit [IsCommMonObj Λ] in
-private theorem cachedProofInstance3 : HasCountableCoproducts M := inferInstance
+private theorem cachedProofInstance3_private : HasCountableCoproducts M := inferInstance
+
+/-- Public export of the private `cachedProofInstance3_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance3 := cachedProofInstance3_private
 omit [IsCommMonObj Λ] in
-private theorem cachedProofInstance4 : HasColimitsOfShape ℤ M := inferInstance
-private theorem cachedProofInstance5 : Abelian.HasFunctorialFlatResolution M := inferInstance
+private theorem cachedProofInstance4_private : HasColimitsOfShape ℤ M := inferInstance
+
+/-- Public export of the private `cachedProofInstance4_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance4 := cachedProofInstance4_private
+private theorem cachedProofInstance5_private : Abelian.HasFunctorialFlatResolution M :=
+  inferInstance
+
+/-- Public export of the private `cachedProofInstance5_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance5 := cachedProofInstance5_private
 omit [IsCommMonObj Λ] in
-private theorem cachedProofInstance6 : Abelian.HasKInjectiveResolutions M := inferInstance
+private theorem cachedProofInstance6_private : Abelian.HasKInjectiveResolutions M := inferInstance
+
+/-- Public export of the private `cachedProofInstance6_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance6 := cachedProofInstance6_private
 omit [IsCommMonObj Λ] in
-private theorem cachedProofInstance7 : HasExactColimitsOfShape ℤ M := inferInstance
-private theorem cachedProofInstance8 : ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ M),
+private theorem cachedProofInstance7_private : HasExactColimitsOfShape ℤ M := inferInstance
+
+/-- Public export of the private `cachedProofInstance7_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance7 := cachedProofInstance7_private
+private theorem cachedProofInstance8_private : ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ M),
     GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
-private theorem cachedProofInstance9 : ∀ (X₁ X₂ X₃ : GradedObject ℤ M),
+
+/-- Public export of the private `cachedProofInstance8_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance8 := cachedProofInstance8_private
+private theorem cachedProofInstance9_private : ∀ (X₁ X₂ X₃ : GradedObject ℤ M),
     GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
-private theorem cachedProofInstance10 : ∀ (X₁ X₂ X₃ : GradedObject ℤ M),
+
+/-- Public export of the private `cachedProofInstance9_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance9 := cachedProofInstance9_private
+private theorem cachedProofInstance10_private : ∀ (X₁ X₂ X₃ : GradedObject ℤ M),
     GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
-private theorem cachedProofInstance11 : ∀ (X : M),
+
+/-- Public export of the private `cachedProofInstance10_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance10 := cachedProofInstance10_private
+private theorem cachedProofInstance11_private : ∀ (X : M),
     PreservesColimitsOfShape ℤ ((curriedTensor M).obj X) := inferInstance
-private theorem cachedProofInstance12 : ∀ (X : M),
+
+/-- Public export of the private `cachedProofInstance11_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance11 := cachedProofInstance11_private
+private theorem cachedProofInstance12_private : ∀ (X : M),
     PreservesColimitsOfShape ℤ ((curriedTensor M).flip.obj X) := inferInstance
+
+/-- Public export of the private `cachedProofInstance12_private`
+(used by `import all` importers; linter.privateModule). -/
+alias cachedProofInstance12 := cachedProofInstance12_private
 end CachedInstances
 attribute [local instance]
-  cachedProofInstance1 cachedProofInstance2 cachedProofInstance3 cachedProofInstance4
-  cachedProofInstance5 cachedProofInstance6 cachedProofInstance7 cachedProofInstance8
-  cachedProofInstance9 cachedProofInstance10 cachedProofInstance11 cachedProofInstance12
+  cachedProofInstance1 cachedProofInstance2_private
+  cachedProofInstance3_private cachedProofInstance4_private
+  cachedProofInstance5_private cachedProofInstance6_private
+  cachedProofInstance7_private cachedProofInstance8_private
+  cachedProofInstance9_private cachedProofInstance10_private
+  cachedProofInstance11_private cachedProofInstance12_private
 
 private theorem exactSquareFac
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -72,8 +121,8 @@ private theorem exactSquareFac
     [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
     [Limits.PreservesFiniteLimits I] [Limits.PreservesFiniteColimits I]
     (e : F ⋙ G ≅ H ⋙ I) (N : HomotopyCategory A (.up ℤ)) :
-    ((mapDerivedCategoryCompIso F G).symm ≪≫ mapDerivedCategoryNatIso e ≪≫
-      mapDerivedCategoryCompIso H I).hom.app (DerivedCategory.Qh.obj N) ≫
+    (mapDerivedCategoryCompIso F G ≪≫ mapDerivedCategoryNatIso e ≪≫
+      (mapDerivedCategoryCompIso H I).symm).hom.app (DerivedCategory.Qh.obj N) ≫
         I.mapDerivedCategory.map (H.mapDerivedCategoryFactorsh.hom.app N) ≫
         I.mapDerivedCategoryFactorsh.hom.app ((H.mapHomotopyCategory (.up ℤ)).obj N) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app N) ≫
@@ -86,7 +135,7 @@ private theorem exactSquareFac
   erw [DerivedCategory.Qh.map_id, Category.comp_id] at hF hH
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [hH, mapDerivedCategoryNatIso_fach, ← hF]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem exactSquareFacInv
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -100,8 +149,8 @@ private theorem exactSquareFacInv
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     [PreservesFiniteLimits I] [PreservesFiniteColimits I]
     (e : H ⋙ I ≅ F ⋙ G) (N : HomotopyCategory A (.up ℤ)) :
-    ((mapDerivedCategoryCompIso F G).symm ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
-      mapDerivedCategoryCompIso H I).hom.app (DerivedCategory.Qh.obj N) ≫
+    (mapDerivedCategoryCompIso F G ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
+      (mapDerivedCategoryCompIso H I).symm).hom.app (DerivedCategory.Qh.obj N) ≫
         I.mapDerivedCategory.map (H.mapDerivedCategoryFactorsh.hom.app N) ≫
         I.mapDerivedCategoryFactorsh.hom.app ((H.mapHomotopyCategory (.up ℤ)).obj N) =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app N) ≫
@@ -132,7 +181,7 @@ private theorem liftedSquareFac
   rw [← I.map_comp_assoc, Iso.inv_hom_id_app, I.map_id, Category.id_comp, hq]
   rw [← eG.hom.naturality_assoc]
 
-private theorem exactLeftSquareFac
+private theorem exactLeftSquareFac_private
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -161,8 +210,8 @@ private theorem exactLeftSquareFac
     [PreservesFiniteLimits I] [PreservesFiniteColimits I]
     (e : H ⋙ I ≅ F ⋙ G) (N : HomotopyCategory A (.up ℤ)) :
     (isoWhiskerLeft F.mapDerivedCategory G.leftDerivedFunctorIsoMapDerivedCategory ≪≫
-      ((mapDerivedCategoryCompIso F G).symm ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
-        mapDerivedCategoryCompIso H I) ≪≫
+      ((mapDerivedCategoryCompIso F G) ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
+        (mapDerivedCategoryCompIso H I).symm) ≪≫
       isoWhiskerRight H.leftDerivedFunctorIsoMapDerivedCategory.symm
         I.mapDerivedCategory).hom.app (DerivedCategory.Qh.obj N) ≫
       I.mapDerivedCategory.map (H.leftDerivedFunctorCounit.app N) ≫
@@ -177,8 +226,8 @@ private theorem exactLeftSquareFac
   exact liftedSquareFac F.mapDerivedCategory G.mapDerivedCategory
     G.leftDerivedFunctor H.mapDerivedCategory H.leftDerivedFunctor I.mapDerivedCategory
     G.leftDerivedFunctorIsoMapDerivedCategory H.leftDerivedFunctorIsoMapDerivedCategory
-    ((mapDerivedCategoryCompIso F G).symm ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
-      mapDerivedCategoryCompIso H I)
+    ((mapDerivedCategoryCompIso F G) ≪≫ (mapDerivedCategoryNatIso e).symm ≪≫
+      (mapDerivedCategoryCompIso H I).symm)
     (F.mapDerivedCategoryFactorsh.hom.app N)
     (G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj N))
     (H.mapDerivedCategoryFactorsh.hom.app N)
@@ -186,6 +235,10 @@ private theorem exactLeftSquareFac
     (DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.inv (.up ℤ)).app N))
     (G.leftDerivedFunctorCounit.app ((F.mapHomotopyCategory (.up ℤ)).obj N))
     (H.leftDerivedFunctorCounit.app N) hG hH (exactSquareFacInv F G H I e N)
+
+/-- Public export of the private `exactLeftSquareFac_private`
+(used by `import all` importers; linter.privateModule). -/
+alias exactLeftSquareFac := exactLeftSquareFac_private
 
 private theorem transportedUnitFac
     {A B : Type*} [Category A] [Category B]
@@ -201,7 +254,7 @@ private theorem transportedUnitFac
   simp only [Category.assoc]
   rw [reassoc_of% hv, Iso.inv_hom_id, Category.comp_id]
 
-private theorem mixedDerivedUnitFac
+private theorem mixedDerivedUnitFac_private
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
     [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
@@ -234,7 +287,11 @@ private theorem mixedDerivedUnitFac
     (DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).unit.app H))
     (R.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj H)) h₁ h₃
 
-private theorem mateModel
+/-- Public export of the private `mixedDerivedUnitFac_private`
+(used by `import all` importers; linter.privateModule). -/
+alias mixedDerivedUnitFac := mixedDerivedUnitFac_private
+
+private theorem mateModel_private
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {LX : C ⥤ D} {RX : D ⥤ C} {LY : C' ⥤ D'} {RY : D' ⥤ C'}
     (adX : LX ⊣ RX) (adY : LY ⊣ RY)
@@ -272,7 +329,11 @@ private theorem mateModel
   rw [← U.map_comp_assoc, ← U.map_comp_assoc, Category.assoc, hηY]
   exact hOrd
 
-private theorem naturalOrdinaryFac
+/-- Public export of the private `mateModel_private`
+(used by `import all` importers; linter.privateModule). -/
+alias mateModel := mateModel_private
+
+private theorem naturalOrdinaryFac_private
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {Q : A ⥤ B} {F : A ⥤ C} {G : B ⥤ D} {R : C ⥤ D}
     (c : Q ⋙ G ⟶ F ⋙ R) {X Y : A} {Z W : C}
@@ -283,6 +344,10 @@ private theorem naturalOrdinaryFac
   have hn := c.naturality η
   dsimp only [Functor.comp_map] at hn
   rw [← R.map_comp, ← h, R.map_comp, ← Category.assoc, ← hn, Category.assoc]
+
+/-- Public export of the private `naturalOrdinaryFac_private`
+(used by `import all` importers; linter.privateModule). -/
+alias naturalOrdinaryFac := naturalOrdinaryFac_private
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor

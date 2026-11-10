@@ -331,7 +331,7 @@ theorem exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk {Y V : S
     (flat_and_surjective_SpecMap_iff _).2 (hg₂ x)
   let W := ∐ fun x : t ↦ Spec (T x.1)
   let j : W ⟶ V := Sigma.desc fun x : t ↦ π x.1
-  have hιj (x : t) : Sigma.ι (fun x : t ↦ Spec (T x.1)) x ≫ j = π x.1 := Sigma.ι_desc _ _
+  have hιj (x : t) : Sigma.ι (fun x : t ↦ Spec (T x.1)) x ≫ j = π x.1 := Sigma.ι_comp_desc _ _
   refine ⟨W, j, inferInstance, ?_, fun v ↦ ?_, fun E hE ↦ ?_, fun w ↦ ?_⟩
   · have (x : t) : Flat (π x.1) := by
       have := (hflat x.1).1

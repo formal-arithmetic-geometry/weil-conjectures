@@ -105,6 +105,7 @@ private theorem sliceCoefficient_reflects
   exact ⟨(sliceRestrictionComparison S R' U K).symm ≪≫
     H.mapDerivedCategory.{u + 2, u + 2}.preimageIso j' ≪≫ sliceRestrictionComparison S R' U L⟩
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Complete integral coefficients lift perfect constant residue models on one stratum.
 Source: Bhatt--Scholze, Proposition 6.6.11, forward implication; Lemma 6.6.8.
 (blueprint: lem-weil-pbc-integral-residue-stratum-lift).

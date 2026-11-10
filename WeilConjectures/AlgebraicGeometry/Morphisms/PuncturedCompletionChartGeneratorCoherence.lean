@@ -430,25 +430,23 @@ private theorem chart_tensor_naturality
     simpa only [TensorProduct.smul_tmul', smul_eq_mul, mul_one, dc] using hh
   constructor
   · intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
-    | add x y hx hy =>
-      rw [mk_add_one (Submonoid.powers (f j))
-        (FormalGlueing.restrict φ (FormalGlueing.extend φ (M i)))]
-      simp only [map_add, hx, hy]
-    | tmul z m =>
+    refine TensorProduct.inductionOn x ?_ ?_
+    · intro z m
       rw [compare_tmul, extendMapR_tmul, hQ]
       simp only [LinearEquiv.coe_coe]
       rw [bl i j m, dt, map_mul, scalar_restrict, app_restrict]
+    · intro x y hx hy
+      rw [mk_add_one (Submonoid.powers (f j))
+        (FormalGlueing.restrict φ (FormalGlueing.extend φ (M i)))]
+      simp only [map_add, hx, hy]
   · intro y
-    induction y using TensorProduct.induction_on with
-    | zero => simp
-    | add x y hx hy =>
+    refine TensorProduct.inductionOn y ?_ ?_
+    · intro z m
+      rw [compare_tmul, hQ, br, dt, map_mul, scalar_restrict, app_restrict]
+    · intro x y hx hy
       rw [mk_add_one (Submonoid.powers (f i))
         (FormalGlueing.restrict φ (FormalGlueing.extend φ (M j)))]
       simp only [map_add, hx, hy]
-    | tmul z m =>
-      rw [compare_tmul, hQ, br, dt, map_mul, scalar_restrict, app_restrict]
 
 
 /-- The square and cocycle paths agree on the images of original module elements.

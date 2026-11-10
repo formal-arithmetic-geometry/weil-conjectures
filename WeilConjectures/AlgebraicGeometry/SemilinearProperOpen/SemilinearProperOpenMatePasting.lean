@@ -192,7 +192,7 @@ section ProofEnvironment
 -- Compare the canonical constructions through their APIs, without unfolding their data.
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors
 
 section CategoricalProof
@@ -712,7 +712,7 @@ theorem pi_components {U X D : Scheme.{u}} (s : U ⟶ X) (c : D ⟶ X)
     have hzD := F.isZero_mapDerivedCategory_obj ((P C τ s).obj M) (fun q ↦ hz' _)
     have hzT := hzD.of_iso
       ((Functor.mapDerivedCategoryCompIso (extension C τ s) (pull C τ c)).app
-        ((P C τ s).obj M)).symm
+        ((P C τ s).obj M))
     exact hzT.eq_of_tgt _ _
 
 end AlgebraicGeometry.ProEtale.SemilinearProperOpen

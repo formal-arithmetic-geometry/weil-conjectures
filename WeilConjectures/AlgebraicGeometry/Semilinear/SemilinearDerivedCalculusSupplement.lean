@@ -360,8 +360,7 @@ private theorem tensorSection_hom_ext
       M N).inv.val.app U ((adj.unit.app _).app U z)) =
     g.val.app U ((SheafOfModules.tensorObjIsoSheafification.{v, c, max c v r}
       M N).inv.val.app U ((adj.unit.app _).app U z))
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul x y => exact h U x y
   | add z w hz hw => simp only [map_add, hz, hw]
 
@@ -393,8 +392,7 @@ private theorem restrictScalars_mu_bijective (R S : Type r) [CommRing R] [CommRi
   have hh : (Functor.LaxMonoidal.μ (ModuleCat.restrictScalars e.toRingHom) M N :
       _ → _) = TensorProduct.congr em en := by
     funext z
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul x y => exact ModuleCat.restrictScalars_μ_tmul e.toRingHom M N x y
     | add x y hx hy => simp only [map_add, hx, hy]
   rw [hh]

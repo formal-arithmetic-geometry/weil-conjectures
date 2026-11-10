@@ -205,6 +205,7 @@ theorem foldRingHom_comp_mapRingHom_inlHom :
     foldRingHom.comp (mapRingHom (inlHom R R)) = RingHom.id R[ε] := by
   ext x <;> simp
 
+
 theorem foldRingHom_comp_mapRingHom_mapRingHom (f : R →+* S) :
     foldRingHom.comp (mapRingHom (mapRingHom f)) = (mapRingHom f).comp foldRingHom := by
   ext x <;> simp
@@ -468,6 +469,7 @@ theorem dualNumbers_obj (U : X.Opens) :
     Γ(X.dualNumbers, U) = CommRingCat.of (DualNumber Γ(X, U)) :=
   rfl
 
+
 /-- The projection `p : X[ε] ⟶ X`: the identity on points and the inclusion of constants
 `𝒪_X → 𝒪_X[ε]` on functions. -/
 noncomputable def dualNumbersProj : X.dualNumbers ⟶ X where
@@ -528,6 +530,7 @@ noncomputable def dualNumbersFold : X.dualNumbers ⟶ X.dualNumbers.dualNumbers 
 theorem dualNumbersFold_app (U : X.Opens) (a : Γ(X.dualNumbers.dualNumbers, U)) :
     X.dualNumbersFold.app U a = DualNumber.foldRingHom a :=
   rfl
+
 
 @[reassoc (attr := simp)]
 theorem dualNumbersFold_comp_proj : X.dualNumbersFold ≫ X.dualNumbers.dualNumbersProj = 𝟙 _ := by

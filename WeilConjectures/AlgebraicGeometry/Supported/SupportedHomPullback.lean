@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -28,6 +30,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.AlgebraicGeometry.Module.ModuleSupportedHomTransport
 import WeilConjectures.AlgebraicGeometry.SupportedConstantNormalization.SupportedConstantExchangeNormalization
 import WeilConjectures.CategoryTheory.RightDerivedPlusCube
+import all WeilConjectures.AlgebraicGeometry.Support.SupportQuotientPairPullback
+import all WeilConjectures.AlgebraicGeometry.Support.SupportSiteComparison
 
 /-!
 # Supported Hom and pullback of closed pairs
@@ -116,7 +120,7 @@ def cocycleMorphism
     (DerivedCategory.singleFunctor (Sheaf S.topology (ModuleCat.{u + 1} A)) 0).obj
       S.supported ⟶ (DerivedCategory.Plus.Q.obj I).obj⟦a⟧ :=
   supportedHomLocalizedCocycle I.obj a f hf ≫
-    ((DerivedCategory.quotientCompQhIso _).hom.app I.obj)⟦a⟧'
+    ((DerivedCategory.Plus.QCompιIso _).inv.app I)⟦a⟧'
 
 /-- The normalized supported-Hom identification. The cocycle clause fixes its value by
 `f ↦ (f ρ)(1)` on every injective representative, so no arbitrary natural isomorphism
@@ -406,8 +410,8 @@ set_option backward.isDefEq.respectTransparency.types false in
         apply DerivedCategory.Plus.ι.map_injective
         change DerivedCategory.Plus.ι.map (DerivedCategory.Plus.ι.preimage _) = _
         rw [Functor.map_preimage]
-        simp
-        rfl
+        simp [DerivedCategory.Plus.QCompιIso_hom_app,
+          DerivedCategory.Plus.QCompιIso_inv_app]; rfl
       let G := shiftFunctor (DerivedCategory (Sheaf S.topology (ModuleCat.{u + 1} A))) a
       let r : S.derivedHom (DerivedCategory.Plus.Q.obj I) a :=
         supportedHomLocalizedCocycle I.obj a f hf
@@ -416,14 +420,14 @@ set_option backward.isDefEq.respectTransparency.types false in
           ((Sheaf.supportSequenceModelIso S.topology (ModuleCat.{u + 1} A) S.sections I
             (DerivedCategory.Plus.Q.obj I) d a).hom ((S.complex I).homologyπ a x)))
         r r rfl (supportedHomResolutionIso S.topology A I I (𝟙 I))
-        ((DerivedCategory.quotientCompQhIso
-          (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I.obj) hid (by rfl) heq
-      have hqh : G.map ((DerivedCategory.quotientCompQhIso
-          (Sheaf S.topology (ModuleCat.{u + 1} A))).hom.app I.obj) = 𝟙 _ := by
+        ((DerivedCategory.Plus.QCompιIso
+          (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I) hid (by rfl) heq
+      have hqh : G.map ((DerivedCategory.Plus.QCompιIso
+          (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I) = 𝟙 _ := by
         change G.map (𝟙 _) = 𝟙 _
         exact G.map_id _
-      change _ = r ≫ G.map ((DerivedCategory.quotientCompQhIso
-        (Sheaf S.topology (ModuleCat.{u + 1} A))).hom.app I.obj)
+      change _ = r ≫ G.map ((DerivedCategory.Plus.QCompιIso
+        (Sheaf S.topology (ModuleCat.{u + 1} A))).inv.app I)
       exact hnorm.trans ((congrArg (fun t => r ≫ t) hqh).trans (Category.comp_id r)).symm
 
 private theorem supportHomIdentificationOfNormalization_chi
@@ -618,51 +622,13 @@ private theorem supportHomProEtaleConstantIso_spec
       supportHomConstantDirectImage (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
         (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) := by
   let := Scheme.ProEt.isContinuous_overPullback f
-  let adj := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
-  let a := ((constantSheafΓAdj (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)).comp
-      adj).ofNatIsoRight (ProEtale.globalSectionsLowerStarIso (ModuleCat.{u + 1} A) f)
-  let c : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) :=
-    (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)).obj
-    (ModuleCat.of A A)
-  apply ((adj.homEquiv _ _).symm).injective
-  rw [Equiv.symm_apply_apply]
-  apply (a.homEquiv _ _).injective
-  rw [ProEtale.constantSheafCompUpperStarIso]
-  erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
-  symm
-  let z : (Sheaf.Γ (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)).obj c ≅
-      c.obj.obj (op (Scheme.ProEt.mk (𝟙 X))) :=
-    (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology X)
-      (ModuleCat.{u + 1} A) (Scheme.ProEt.isTerminalMkId X)).app c
-  apply (cancel_mono z.hom).mp
-  dsimp only [z, Iso.app_hom]
-  simp only [a, Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv,
-    ProEtale.globalSectionsLowerStarIso, Iso.trans_hom,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, NatTrans.comp_app,
-    NatIso.ofComponents_hom_app, Iso.refl_hom, Iso.symm_hom, Category.assoc]
-  erw [Equiv.trans_apply, Equiv.apply_symm_apply]
-  dsimp only [c]
-  erw [Iso.inv_hom_id_app, Category.comp_id, Category.id_comp]
-  change (constantSheafΓAdj (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)).homEquiv _ _
-      (supportHomConstantDirectImage (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
-        (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f)) ≫
-      (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)
-        (Scheme.ProEt.isTerminalMkId Y)).hom.app
-          ((ProEtale.lowerStar (ModuleCat.{u + 1} A) f).obj c) ≫
-      c.obj.map (ProEtale.overPullbackObjMkIdIso f).inv.op = _
-  rw [← Category.assoc]
-  erw [supportHomGlobalEvaluation]
-  simp only [Sheaf.ΓNatIsoSheafSections, Adjunction.unit_rightAdjointUniq_hom_app]
-  have he := supportHomConstantDirectImage_evaluation
-    (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
-    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f)
-    (Scheme.ProEt.isTerminalMkId Y) (Scheme.ProEt.isTerminalMkId X)
-    (ProEtale.overPullbackObjMkIdIso f).inv c (𝟙 _)
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at he
-  conv_rhs at he =>
-    rw [Adjunction.homEquiv_unit]
-    erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  exact he
+  change (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).homEquiv _ _
+      ((ProEtale.constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) f).hom.app
+        (ModuleCat.of A A)) = _
+  rw [ProEtale.CachedConstantCoherence.proConstant_eq_inverse,
+    Scheme.constantInverse]
+  erw [Equiv.apply_symm_apply]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1325,7 +1291,7 @@ private theorem supportHomSquare
     simp only [supportHomEtaleTransport_closedIso_hom,
       supportHomProEtaleTransport_closedIso_hom, supportHomSiteTransport_closedIso_hom,
       Functor.map_comp, Category.assoc]
-    rw [Iso.map_inv_hom_id_assoc (supportHomProEtaleSupportedIso P i) LP]
+    rw [Iso.inv_hom_id_map_assoc (supportHomProEtaleSupportedIso P i) LP]
     have hh := congrArg (fun f => f ≫ (supportHomProEtaleSupportedIso P i').inv) hc
     simp only [Category.assoc] at hh
     exact hh

@@ -26,7 +26,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem quotient_homology_square
-    {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V)
+    {U V : WeilFilteredObject (CochainComplex C ℤ)} (t : U ⟶ V)
     (r : ℤ) (hr : 1 ≤ r)
     (D : FilteredComplexPageDifferential U.obj U.filtration r)
     (D' : FilteredComplexPageDifferential V.obj V.filtration r)
@@ -140,8 +140,8 @@ theorem exists_filteredCanonical_page_descent
           (N.hom r hr).f (q, p) =
         z' ≫ filteredComplexPageπ K' F' r (q, p) ≫ (j' r hr).inv.f (q, p) := by
   classical
-  let U : FilteredObject (CochainComplex C ℤ) := ⟨K, F⟩
-  let V : FilteredObject (CochainComplex C ℤ) := ⟨K', F'⟩
+  let U : WeilFilteredObject (CochainComplex C ℤ) := ⟨K, F⟩
+  let V : WeilFilteredObject (CochainComplex C ℤ) := ⟨K', F'⟩
   let t : U ⟶ V := ⟨b, hb⟩
   let m (r : ℤ) (hr : 1 ≤ r) := quotientPageMap t r (D r hr) (D' r hr)
   let N : E ⟶ E' :=

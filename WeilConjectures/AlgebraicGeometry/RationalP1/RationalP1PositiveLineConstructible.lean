@@ -80,7 +80,7 @@ theorem positiveLine_boundedConstructible
   have hmodel := lisse_finiteModel R Z L hLisse
   have hstrat := stratified_of_finiteModel R Z L hmodel
   have hconstruct : IsConstantModelConstructible R Z L := by
-    rw [IsConstantModelConstructible, if_pos
+    rw [IsConstantModelConstructible, ite_eq_left
       (show CompactSpace Z ∧ QuasiSeparatedSpace Z from ⟨inferInstance, inferInstance⟩)]
     exact hstrat
   exact single_constructible R Z L hconstruct

@@ -64,7 +64,7 @@ private theorem categorical_zero_cocycle_compatibility
     CosimplicialObject.δ,
     FormalCoproduct.cech, FormalCoproduct.mapPower,
     FormalCoproduct.power, SimplexCategory.δ] at h
-  erw [Category.assoc, Pi.lift_π, Category.assoc, Pi.lift_π] at h
+  erw [Category.assoc, Pi.lift_comp_π, Category.assoc, Pi.lift_comp_π] at h
   change z ≫ Pi.π (fun s : Fin 1 → ι ↦
       P.obj (op (∏ᶜ (fun k ↦ U (s k))).left))
       (t ∘ ⇑(Fin.succAboveOrderEmb (0 : Fin 2)).toOrderHom) ≫
@@ -269,7 +269,7 @@ private theorem glue_categoricalCech_lift
     change (c ≫ Limits.Pi.map (fun s : Fin 2 → Fin n ↦
       S.f.hom.app (op (Presheaf.cechNerveObj U s).left))) ≫ Pi.π _ s = _
     rw [Category.assoc]
-    erw [Limits.Pi.map_π, Pi.lift_π_assoc]
+    erw [Limits.Pi.map_π, Pi.lift_comp_π_assoc]
     have hl := (hleft 1 s).1.lift_f (a ≫ KI.d 0 1 ≫ Pi.π _ s) (hb s)
     change (hleft 1 s).1.lift (a ≫ KI.d 0 1 ≫ Pi.π _ s) (hb s) ≫
       S.f.hom.app (op (Presheaf.cechNerveObj U s).left) = _ at hl

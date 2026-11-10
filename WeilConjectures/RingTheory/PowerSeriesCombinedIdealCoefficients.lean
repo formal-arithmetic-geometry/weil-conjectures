@@ -110,7 +110,7 @@ private theorem zero_low_coefficients_mem_variables_pow {Λ : Type u} [CommRing 
   let μ (E : Fin d →₀ ℕ) : Fin d →₀ ℕ :=
     if h : n ≤ E.degree then (Finsupp.exists_le_degree_eq E n h).choose else 0
   have hμ (E : Fin d →₀ ℕ) (h : n ≤ E.degree) : μ E ≤ E ∧ (μ E).degree = n := by
-    simpa only [μ, dif_pos h] using (Finsupp.exists_le_degree_eq E n h).choose_spec
+    simpa only [μ, dite_eq_left h] using (Finsupp.exists_le_degree_eq E n h).choose_spec
   let s : Finset (Fin d →₀ ℕ) := (Finsupp.finite_of_degree_eq n).toFinset
   let G (M : Fin d →₀ ℕ) : MvPowerSeries (Fin d) Λ :=
     fun B => if μ (M + B) = M then MvPowerSeries.coeff (M + B) F else 0
@@ -121,18 +121,18 @@ private theorem zero_low_coefficients_mem_variables_pow {Λ : Type u} [CommRing 
     by_cases hn : n ≤ E.degree
     · have hmem : μ E ∈ s := by simpa [s] using (hμ E hn).2
       rw [Finset.sum_eq_single (μ E)]
-      · rw [if_pos (hμ E hn).1]
+      · rw [ite_eq_left (hμ E hn).1]
         change MvPowerSeries.coeff E F =
           if μ (μ E + (E - μ E)) = μ E then
             MvPowerSeries.coeff (μ E + (E - μ E)) F else 0
-        rw [add_tsub_cancel_of_le (hμ E hn).1, if_pos rfl]
+        rw [add_tsub_cancel_of_le (hμ E hn).1, ite_eq_left rfl]
       · intro M hM hne
         by_cases hME : M ≤ E
-        · rw [if_pos hME]
+        · rw [ite_eq_left hME]
           change (if μ (M + (E - M)) = M then
             MvPowerSeries.coeff (M + (E - M)) F else 0) = 0
-          rw [add_tsub_cancel_of_le hME, if_neg (Ne.symm hne)]
-        · rw [if_neg hME]
+          rw [add_tsub_cancel_of_le hME, ite_eq_right (Ne.symm hne)]
+        · rw [ite_eq_right hME]
       · exact fun h => (h hmem).elim
     · rw [hF E (by omega)]
       symm
@@ -143,7 +143,7 @@ private theorem zero_low_coefficients_mem_variables_pow {Λ : Type u} [CommRing 
         intro h
         have := Finsupp.degree_mono h
         omega
-      rw [if_neg hME]
+      rw [ite_eq_right hME]
   rw [hsum]
   apply Submodule.sum_mem
   intro M hM

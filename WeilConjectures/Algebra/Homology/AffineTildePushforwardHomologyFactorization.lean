@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 
 public import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
@@ -94,7 +96,10 @@ theorem affineTildePushforwardHomologyFactorization
     (S : ModuleCat.{u} B)
     (v : S ⟶ (ModuleCat.restrictScalars ψ).obj (Cg.homology i)) :
     let T := affinePushforwardTilde B
-    let _ : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let _ : T.Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of B) f g
     let _ : T.PreservesHomology := tilde_preservesHomology B
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i
@@ -111,10 +116,13 @@ theorem affineTildePushforwardHomologyFactorization
         (DerivedCategory.homologyFunctorFactors _ i).inv.app
           ((T.mapHomologicalComplex (.up ℤ)).obj
             (((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg)) ≫
-        H.map (DerivedCategory.Q.map a) ≫ H.map β =
+        H.map (DerivedCategory.Q.map a) ≫ cast (by rfl) (H.map β) =
     T.map v ≫ affineTildePushforwardCohomologyMap D B ψ Cg i := by
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
   let : PreservesFiniteLimits T := T.preservesFiniteLimits_of_preservesHomology
   let : PreservesFiniteColimits T := T.preservesFiniteColimits_of_preservesHomology

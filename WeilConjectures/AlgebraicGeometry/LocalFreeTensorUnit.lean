@@ -95,8 +95,6 @@ private noncomputable def localTensorSectionIso (T : (Over (q.X i))ᵒᵖ) :
       (S.obj.obj (op T.unop.left.left)) (S.obj.obj (op T.unop.left.left)))
   exact (e1.trans (e2.trans (e3.trans eS.symm))).toModuleIso
 
-omit [∀ Y : Over V, HasSheafify (((Scheme.ProEt.topology X).over V).over Y)
-  AddCommGrpCat.{u + 1}] in
 private theorem localIntegralCoordinates_naturality {T T' : (Over (q.X i))ᵒᵖ}
     (g : T ⟶ T') (m : M.val.obj (op T.unop.left)) (j : (q.generators i).I) :
     localIntegralCoordinates V M q i T'
@@ -113,8 +111,6 @@ private theorem localIntegralCoordinates_naturality {T T' : (Over (q.X i))ᵒᵖ
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over V)).over (q.X i))) j).val.app
         T' z) hp).trans hf
 
-omit [∀ Y : Over V, HasSheafify (((Scheme.ProEt.topology X).over V).over Y)
-  AddCommGrpCat.{u + 1}] in
 private theorem localTensorSectionIso_coordinate (T : (Over (q.X i))ᵒᵖ)
     (j : (q.generators i).I) (s : S.obj.obj (op T.unop.left.left))
     (m : M.val.obj (op T.unop.left)) :
@@ -154,8 +150,7 @@ private noncomputable def localTensorPresheafIso :
     (SheafOfModules.free (R := (((sheafCompose _
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (S.over V)).over (q.X i)))
         (q.generators i).I).val.map g ((localTensorSectionIso α V M q i T).hom z)
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z z' hz hz' => simp only [map_add, hz, hz']
   | tmul s m =>
     have ht := Classical.choose_spec

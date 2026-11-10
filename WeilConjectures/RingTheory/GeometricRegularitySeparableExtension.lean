@@ -127,4 +127,5 @@ theorem isGeometricallyRegular_iff_of_isSeparable
   · exact isGeometricallyRegular_of_isSeparable k k' R
   · exact isGeometricallyRegular_of_isSeparable_rev k k' R
 
+
 end Algebra

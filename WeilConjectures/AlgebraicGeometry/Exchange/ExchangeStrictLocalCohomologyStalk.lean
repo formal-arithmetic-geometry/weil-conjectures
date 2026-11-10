@@ -80,26 +80,6 @@ private theorem bijective_conjugate
   rw [← Function.Bijective.of_comp_iff' e'.bijective f, hh]
   exact Function.Bijective.of_comp_iff g e.bijective
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- The stalk of degree-q exchange is invertible exactly when the induced map on
-strict-local cohomology is bijective. This is the local calculation in the proof of
-`isIso_exchange_iff_strictLocalCohomology`; the global conservative-family argument
-is kept in that theorem. The hypothesis `hα` identifies the supplied arrow with
-the canonical exchange; an arbitrary arrow between these objects does not satisfy this claim.
-
-Source: Stacks Project, Tag 0EZU, lemma-base-change-f-star-general-stalks.
-(blueprint: lem-weil-pbc-exchange-strict-local-cohomology-stalk-criterion).
-
-Proof: equip both strict henselization rings with their canonical strictly henselian
-local structures. The evaluation equation makes the supplied ring map local, and the
-structural equation gives the pullback square between the strict-local base changes.
-Apply the canonical strict-henselization stalk exchange comparison, followed by the
-strict-local total cohomology exchange comparison. These give additive equivalences
-conjugating the stalk map to the displayed `cohomologyMap`, so bijectivity is preserved.
-The residue-field maps are the canonical maps induced by the evaluation homomorphisms;
-all compatibility equations follow from `Spec.map` composition and the two hypotheses.
--/
 theorem isIso_exchange_stalk_iff_strictLocalCohomology
     {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
     [QuasiCompact g] [QuasiSeparated g]
@@ -140,6 +120,10 @@ theorem isIso_exchange_stalk_iff_strictLocalCohomology
   let := hB
   have := hsA
   have := hsB
+  have : IsSepClosed (IsLocalRing.ResidueField (Scheme.strictHenselizationRing (x ≫ f))) :=
+    @IsStrictlyHenselianLocalRing.isSepClosed_residueField _ _ hsA
+  have : IsSepClosed (IsLocalRing.ResidueField (Scheme.strictHenselizationRing x)) :=
+    @IsStrictlyHenselianLocalRing.isSepClosed_residueField _ _ hsB
   have := evaluation_local (x ≫ f)
   have := evaluation_local x
   have : IsLocalHom ((Scheme.strictHenselizationRingPointEvaluation x).comp a.hom) :=

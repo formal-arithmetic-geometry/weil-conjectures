@@ -90,7 +90,8 @@ theorem glue_simplex
         (show stdSimplex.objEquiv.symm (𝟙 ⦋n⦌) ∈ (⊤ : (Δ[n]).Subcomplex).obj _ by simp)
       change (a.app _ (stdSimplex.objEquiv.symm (𝟙 ⦋n⦌))).1 ∈ U.obj _ at hmem
       apply hx
-      simpa [a, yonedaEquiv_symm_app_objEquiv_symm] using hmem
+      change X.map (𝟙 (Opposite.op ⦋n⦌)) x.1 ∈ U.obj _ at hmem
+      simpa only [Functor.map_id_apply] using hmem
   have hbound : Subcomplex.range ((boundary n).ι ≫ a ≫ V.ι) ≤ U := by
     rw [Subcomplex.range_comp, Subcomplex.image_le_iff, hpre]
     rintro m y ⟨z, rfl⟩

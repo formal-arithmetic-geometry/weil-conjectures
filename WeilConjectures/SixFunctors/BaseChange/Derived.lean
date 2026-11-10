@@ -71,7 +71,7 @@ noncomputable abbrev Etale.rightDerivedLowerStarPlusCompUpperStarUnit (f : X ⟶
         ((g)^*[A]).mapDerivedCategoryPlus ⟶
       DerivedCategory.Plus.Qh ⋙ (f)_*[A].rightDerivedFunctorPlus ⋙
         ((g)^*[A]).mapDerivedCategoryPlus :=
-  Functor.whiskerRight (f)_*[A].rightDerivedFunctorPlusUnit ((g)^*[A]).mapDerivedCategoryPlus ≫
+  Functor.whiskerRight (f)_*[A].rightDerivedFunctorPlusUnith ((g)^*[A]).mapDerivedCategoryPlus ≫
     (Functor.associator _ _ _).hom
 
 instance Etale.isRightDerivedFunctor_rightDerivedLowerStarPlus_comp_upperStar
@@ -103,7 +103,7 @@ noncomputable def Etale.baseChangeMapHomotopyPlus (sq : CommSq g' f' f g) :
       (Iso.refl ((g')^*[A] ⋙ (f')_*[A]))).inv DerivedCategory.Plus.Qh ≫
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft ((g')^*[A]).mapHomotopyCategoryPlus
-      (f')_*[A].rightDerivedFunctorPlusUnit ≫
+      (f')_*[A].rightDerivedFunctorPlusUnith ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight ((g')^*[A]).mapDerivedCategoryPlusFactorsh.inv
       (f')_*[A].rightDerivedFunctorPlus ≫
@@ -117,7 +117,7 @@ lemma Etale.baseChangeMapHomotopyPlus_app (sq : CommSq g' f' f g)
       ((g)^*[A]).mapDerivedCategoryPlusFactorsh.hom.app ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
         DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq)).app K) ≫
-        (f')_*[A].rightDerivedFunctorPlusUnit.app (((g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
+        (f')_*[A].rightDerivedFunctorPlusUnith.app (((g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
         (f')_*[A].rightDerivedFunctorPlus.map
           (((g')^*[A]).mapDerivedCategoryPlusFactorsh.inv.app K) := by
   simp only [Etale.baseChangeMapHomotopyPlus, NatTrans.comp_app, Functor.whiskerLeft_app,
@@ -148,12 +148,12 @@ injectives, this computes the derived base change map on `K`.
 @[reassoc]
 lemma Etale.derivedBaseChangeMapPlus_fac_app (sq : CommSq g' f' f g)
     (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A)) :
-    ((g)^*[A]).mapDerivedCategoryPlus.map ((f)_*[A].rightDerivedFunctorPlusUnit.app K) ≫
+    ((g)^*[A]).mapDerivedCategoryPlus.map ((f)_*[A].rightDerivedFunctorPlusUnith.app K) ≫
         (Etale.derivedBaseChangeMapPlus A sq).app (DerivedCategory.Plus.Qh.obj K) =
       ((g)^*[A]).mapDerivedCategoryPlusFactorsh.hom.app ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
         DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq)).app K) ≫
-        (f')_*[A].rightDerivedFunctorPlusUnit.app (((g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
+        (f')_*[A].rightDerivedFunctorPlusUnith.app (((g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
         (f')_*[A].rightDerivedFunctorPlus.map
           (((g')^*[A]).mapDerivedCategoryPlusFactorsh.inv.app K) := by
   rw [← Etale.baseChangeMapHomotopyPlus_app, Etale.derivedBaseChangeMapPlus,
@@ -172,13 +172,13 @@ lemma Etale.derivedBaseChangeMapPlus_ext (sq : CommSq g' f' f g)
     (δ : (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶
       ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus)
     (hδ : ∀ K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A),
-      ((g)^*[A]).mapDerivedCategoryPlus.map ((f)_*[A].rightDerivedFunctorPlusUnit.app K) ≫
+      ((g)^*[A]).mapDerivedCategoryPlus.map ((f)_*[A].rightDerivedFunctorPlusUnith.app K) ≫
         δ.app (DerivedCategory.Plus.Qh.obj K) =
       ((g)^*[A]).mapDerivedCategoryPlusFactorsh.hom.app
           ((f)_*[A].mapHomotopyCategoryPlus.obj K) ≫
         DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap A sq)).app K) ≫
-        (f')_*[A].rightDerivedFunctorPlusUnit.app
+        (f')_*[A].rightDerivedFunctorPlusUnith.app
           (((g')^*[A]).mapHomotopyCategoryPlus.obj K) ≫
         (f')_*[A].rightDerivedFunctorPlus.map
           (((g')^*[A]).mapDerivedCategoryPlusFactorsh.inv.app K)) :
@@ -208,7 +208,7 @@ instance Etale.commShift_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     infer_instance
   have hα : NatTrans.CommShift α ℤ := by
     have : α = (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (f)_*[A].rightDerivedFunctorPlusUnit
+        Functor.whiskerRight (f)_*[A].rightDerivedFunctorPlusUnith
           ((g)^*[A]).mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom := by
       ext K
       simp [α]

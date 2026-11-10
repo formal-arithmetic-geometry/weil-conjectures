@@ -117,7 +117,7 @@ theorem affine_torsor_orbit_component_descent
           Spec.map (CommRingCat.ofHom (algebraMap H (F i)))) := by
     apply Sigma.hom_ext
     intro i
-    simpa only [Sigma.ι_desc_assoc, Sigma.ι_desc] using hbase i
+    simpa only [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc] using hbase i
   refine ⟨(asIso (Sigma.desc f)).symm, ?_⟩
   change inv (Sigma.desc f) ≫ _ = _
   rw [← hmap, ← Category.assoc, IsIso.inv_hom_id, Category.id_comp]

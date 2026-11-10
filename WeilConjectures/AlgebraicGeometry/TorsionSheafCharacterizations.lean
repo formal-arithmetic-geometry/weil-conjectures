@@ -208,6 +208,8 @@ private theorem ratModInt_dyadic_not_killed (k : ℕ) (hk : 0 < k) :
   omega
 
 -- The inherited statement names a nondependent index binder `n`.
+
+-- The inherited statement names a nondependent index binder `n`.
 set_option linter.unusedVariables false in
 /-- Source: blueprint `sec-abelian-varieties/def-weil-pbc-etale-sheaves`, Q/Z example
 (blueprint: lem-weil-pbc-torsion-sheaf-characterizations).
@@ -292,7 +294,7 @@ theorem constant_ratModIntSheaf_sections_not_torsion (T : Scheme.{u}) :
       MorphismProperty.Over.homMk (A := Etale.mk (𝟙 T)) (B := U)
         (Sigma.ι (fun _ : ℕ+ ↦ T) n) (by
         change Sigma.ι (fun _ : ℕ+ ↦ T) n ≫ f = 𝟙 T
-        exact Sigma.ι_desc _ _)
+        exact Sigma.ι_comp_desc _ _)
     have hcov : ⋃ n, Set.range (j n).left = Set.univ := by
       exact (sigmaOpenCover (fun _ : ℕ+ ↦ T)).iUnion_range
     have hbij : Function.Bijective
@@ -356,6 +358,8 @@ theorem constant_ratModIntSheaf_sections_not_torsion (T : Scheme.{u}) :
         rw [map_nsmul, map_zero, hxn] at he
         simpa only [map_nsmul, map_zero] using he)
       exact hn (congrArg ULift.down hnzero)
+
+
 
 
 end AlgebraicGeometry.Scheme

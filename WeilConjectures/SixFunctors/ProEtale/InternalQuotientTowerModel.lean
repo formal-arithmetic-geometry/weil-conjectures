@@ -71,8 +71,8 @@ def complexIso (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
   let B := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (scalarMap l E X)
   let C := smallModules X (constantRing l E X)
   letI : (A ⋙ B ⋙ C).Additive := inferInstance
-  ((Functor.mapDerivedCategoryCompIso A (B ⋙ C)) ≪≫
-    Functor.isoWhiskerLeft A.mapDerivedCategory (Functor.mapDerivedCategoryCompIso B C)).symm.app
+  (Functor.isoWhiskerLeft A.mapDerivedCategory (Functor.mapDerivedCategoryCompIso B C) ≪≫
+    Functor.mapDerivedCategoryCompIso A (B ⋙ C)).app
       (DerivedCategory.Q.obj P) ≪≫ (modules l E X).mapDerivedCategoryFactors.app P
 
 /-- The actual reductions, with every quotient transition retained.

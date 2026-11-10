@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.PurStrictScalar.ConstantScalarTowerMates
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEvaluation
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
@@ -155,8 +157,7 @@ private theorem derivedComposite_existsUnique
         rw [hq, Category.id_comp]
         convert (inferInstance : IsIso
           (H.rightDerivedFunctorUnitQ ((U.mapHomologicalComplex (.up ℤ)).obj I) ≫
-            H.rightDerivedFunctor.map (U.mapDerivedCategoryFactors.inv.app I))) using 0;
-          with_unfolding_all rfl
+            H.rightDerivedFunctor.map (U.mapDerivedCategoryFactors.inv.app I))) using 0
       exact IsIso.of_isIso_comp_left (F.rightDerivedFunctorUnitQ I)
         (c.app (DerivedCategory.Q.obj I))
     have hn := c.naturality e.hom
@@ -175,7 +176,7 @@ private theorem derivedComposite_existsUnique
     have hq := DerivedCategory.Q.map_id ((F.mapHomologicalComplex (.up ℤ)).obj K)
     rw [hq, Category.id_comp] at h
     simp only [derivedUnit_eq_unitQ, c, F, asIso_hom]
-    convert h using 0; with_unfolding_all rfl
+    convert h using 0
   refine ⟨asIso c, hnorm, ?_⟩
   intro d hd
   apply Iso.ext

@@ -56,7 +56,7 @@ theorem exists_smooth_polynomial_factorization
   have hK : K.FG := Submodule.fg_span (Set.finite_range f)
   let C := MvPolynomial (Fin n) A ⧸ K
   have : Algebra.FinitePresentation A C := Algebra.FinitePresentation.quotient hK
-  let ev := MvPolynomial.eval₂AlgHom A a
+  let ev := MvPolynomial.aeval (R := A) a
   have hkill : ∀ x ∈ K, ev x = 0 := by
     have hle : K ≤ RingHom.ker ev.toRingHom := by
       apply Ideal.span_le.mpr

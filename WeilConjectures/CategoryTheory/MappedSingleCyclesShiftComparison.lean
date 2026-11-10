@@ -61,6 +61,8 @@ theorem mappedSingle_cycles_shift_comparison (X : B) (n : ℕ) :
         (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))
     GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫
       (DerivedCategory.Plus.homologyFunctor C n).map
+        ((DerivedCategory.Plus.quotientCompQhIso C).inv.app GS) ≫
+      (DerivedCategory.Plus.homologyFunctor C n).map
         (G.mapHomotopyCategoryPlusSingleFunctorQhObjIso n X).hom ≫
       d.hom.app (G.obj X) =
     GS.obj.iCycles n ≫
@@ -78,13 +80,18 @@ theorem mappedSingle_cycles_shift_comparison (X : B) (n : ℕ) :
     ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).hom.app (G.obj X))).1
   simp only [Category.assoc, Iso.inv_hom_id_app]
   rw [singleFunctor_homology_shift_comparison (G.obj X) (n : ℤ)]
-  have hmap : (G.mapHomotopyCategoryPlusSingleFunctorQhObjIso n X).hom =
+  have hmap : (DerivedCategory.Plus.quotientCompQhIso C).inv.app GS ≫
+      (G.mapHomotopyCategoryPlusSingleFunctorQhObjIso n X).hom =
       DerivedCategory.Plus.Q.map p := by
     apply DerivedCategory.Plus.ι.map_injective
-    simp only [mapHomotopyCategoryPlusSingleFunctorQhObjIso, Functor.preimageIso_hom,
-      Functor.map_preimage, Functor.mapIso_hom]
-    rfl
-  rw [hmap]
+    simp only [Functor.map_comp, mapHomotopyCategoryPlusSingleFunctorQhObjIso,
+      Functor.preimageIso_hom, Functor.map_preimage, Functor.mapIso_hom,
+      Iso.trans_hom, Iso.app_hom]
+    change (DerivedCategory.quotientCompQhIso C).inv.app GS.obj ≫
+      (DerivedCategory.quotientCompQhIso C).hom.app GS.obj ≫
+        DerivedCategory.Q.map p.hom = DerivedCategory.Q.map p.hom
+    simp
+  rw [← Functor.map_comp_assoc, hmap]
   have hsingle :
       (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).inv.app (G.obj X) ≫
         (DerivedCategory.Plus.homologyFunctorObjQIso SC n).hom =
@@ -97,21 +104,9 @@ theorem mappedSingle_cycles_shift_comparison (X : B) (n : ℕ) :
       Functor.mapIso_inv, SingleFunctors.evaluation_map, NatTrans.comp_app,
       NatIso.ofComponents_inv_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
       Functor.whiskerRight_app, Category.id_comp,
-      DerivedCategory.Plus.homologyFunctorObjQIso, ObjectProperty.ι_obj,
-      Iso.trans_hom, Iso.app_hom, SC]
+      DerivedCategory.Plus.homologyFunctorObjQIso,
+      Iso.app_hom, SC]
     rw [DerivedCategory.singleFunctorsPostcompQIso_inv_hom]
-    change _ ≫ _ ≫ (DerivedCategory.homologyFunctor C n).map (𝟙 _) ≫
-      (DerivedCategory.homologyFunctorFactorsh C n).hom.app
-        ((HomotopyCategory.quotient C (.up ℤ)).obj SC.obj) ≫ _ = _
-    rw [Functor.map_id, Category.id_comp,
-      DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
-    have hq : (DerivedCategory.quotientCompQhIso C).hom.app SC.obj = 𝟙 _ := rfl
-    rw [hq, Functor.map_id, Category.id_comp]
-    simp only [Category.assoc]
-    change _ ≫ (DerivedCategory.homologyFunctorFactors C n).inv.app SC.obj ≫
-      (DerivedCategory.homologyFunctorFactors C n).hom.app SC.obj ≫
-      (HomotopyCategory.homologyFunctorFactors C (.up ℤ) n).inv.app SC.obj ≫
-      (HomotopyCategory.homologyFunctorFactors C (.up ℤ) n).hom.app SC.obj = _
     simp
   have hsingle' : (DerivedCategory.Plus.homologyFunctorObjQIso SC n).inv ≫
       (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).hom.app (G.obj X) =

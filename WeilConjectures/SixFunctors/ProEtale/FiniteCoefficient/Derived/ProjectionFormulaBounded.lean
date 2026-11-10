@@ -123,10 +123,10 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_bounded {Y Z U : Sch
   -- `j_! K ≅ ν^* M₀` and `ν^* L₀ ≅ Lν^* L₀`
   let eM : D((j)_!open[ModuleCat.{u + 1} Λ]).obj K ≅ L(ν^*(Z)[ModuleCat.{u + 1} Λ]).obj M₀ :=
     D((j)_!open[ModuleCat.{u + 1} Λ]).mapIso eK.symm ≪≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j).symm ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app K₀ ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K₀ ≪≫
       ((ν^*(Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app M₀).symm
   let eL := ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm
   -- `j_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `j_! K ⊗ᴸ Lg^* L` is

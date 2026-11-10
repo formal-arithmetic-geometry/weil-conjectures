@@ -51,7 +51,7 @@ theorem associatedPrimes_quotient_map_of_flat
     (TensorProduct.comm R (R ⧸ I) S).toAddEquiv.module S
   let e : ((R ⧸ I) ⊗[R] S) ≃ₗ[S] (S ⧸ I.map (algebraMap R S)) :=
     (TensorProduct.comm R (R ⧸ I) S).toAddEquiv.linearEquiv S ≪≫ₗ
-      (Ideal.qoutMapEquivTensorQout S).symm
+      (Ideal.quotMapEquivTensorQuot S).symm
   have hqt : q ∈ RingTheory.annihilatorAssociatedPrimes S ((R ⧸ I) ⊗[R] S) := by
     exact isAssociatedPrime_iff.mp ((e.isAssociatedPrime_iff).mpr hq)
   have hf := (RingTheory.annihilatorAssociatedPrimes_flat_base_change (R := R) (S := S)

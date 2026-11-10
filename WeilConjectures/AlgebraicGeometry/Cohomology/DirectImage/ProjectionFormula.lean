@@ -61,8 +61,7 @@ lemma projectionHom_naturality {F F' : X.Modules} (φ : F ⟶ F') :
   rw [Functor.map_comp, Functor.map_comp, ← Category.assoc, ← Functor.LaxMonoidal.μ_natural_left,
     Category.assoc, μ_comp_map_projectionHom, ← Category.assoc, μ_comp_map_projectionHom]
   ext U x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul a n =>
     rw [PresheafOfModules.comp_app, PresheafOfModules.comp_app, ModuleCat.hom_comp,
       ModuleCat.hom_comp, LinearMap.comp_apply, LinearMap.comp_apply]

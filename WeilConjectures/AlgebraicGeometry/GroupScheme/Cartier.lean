@@ -280,7 +280,8 @@ field of characteristic zero is reduced. Its coordinate ring is a finitely gener
 reduced by `HopfAlgebra.isReduced_of_charZero`. (blueprint: `lem-ag-cartier-reduced`) -/
 theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
   obtain ⟨H, ⟨e⟩⟩ := (essImage_hopfSpec (R := .of K) (G := Grp.mk (Over.mk f))).2 ‹_›
-  have he : e.hom.hom.hom.left ≫ f = Spec.map (CommRingCat.ofHom (algebraMap K H.unop)) :=
+  let e' : Spec (.of H.unop) ≅ G := (Grp.forget _ ⋙ Over.forget _).mapIso e
+  have he : e'.hom ≫ f = Spec.map (CommRingCat.ofHom (algebraMap K H.unop)) :=
     Over.w e.hom.hom.hom
   have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap K H.unop))) := by
     rw [← he]
@@ -289,9 +290,7 @@ theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
     rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)] at this
     exact RingHom.finiteType_algebraMap.1 this
   have : _root_.IsReduced H.unop := HopfAlgebra.isReduced_of_charZero (k := K)
-  have : IsReduced ((hopfSpec (.of K)).obj H).X.left :=
-    inferInstanceAs (IsReduced (Spec (.of H.unop)))
-  exact isReduced_of_isOpenImmersion e.inv.hom.hom.left
+  exact isReduced_of_isOpenImmersion e'.inv
 
 include f in
 /-- **Cartier's theorem** over an algebraically closed field: a group scheme locally of finite type

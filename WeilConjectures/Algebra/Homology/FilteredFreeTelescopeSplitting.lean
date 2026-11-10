@@ -207,12 +207,12 @@ theorem filteredTelescope_degreewise_splitting {A : Type u} [CommRing A]
   let b := (filteredTelescopeAugmentation P F ι).f k
   have ha : ∀ n, j n ≫ a = j n - (step n).f k ≫ j (n + 1) := by
     intro n
-    have h := Sigma.ι_desc
+    have h := Sigma.ι_comp_desc
       (fun n ↦ Sigma.ι F n - step n ≫ Sigma.ι F (n + 1)) n
     exact congrArg (fun f ↦ f.f k) h
   have hb : ∀ n, j n ≫ b = (ι n).f k := by
     intro n
-    exact congrArg (fun f ↦ f.f k) (Sigma.ι_desc ι n)
+    exact congrArg (fun f ↦ f.f k) (Sigma.ι_comp_desc ι n)
   have hab : a ≫ b = 0 := congrArg (fun f ↦ f.f k)
     (filteredTelescope_comp_zero P F ι step hcompat)
   have hi : ∀ n, Mono ((ι n).f k) := by

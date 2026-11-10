@@ -125,6 +125,6 @@ lemma isZero_mapDerivedCategory_upperStar_upperStar_rightDerivedLowerShriek
       (((g)^*[A]).mapDerivedCategory.obj ((R(i)_![A]).obj B))) :=
   (isZero_mapDerivedCategory_upperStar_rightDerivedLowerShriek A i (h ≫ g) hh B).of_iso
     ((Functor.mapDerivedCategoryNatIso (upperStarComp A h g) ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar A g) (upperStar A h)).app _).symm
+      (Functor.mapDerivedCategoryCompIso (upperStar A g) (upperStar A h)).symm).app _).symm
 
 end AlgebraicGeometry.Etale

@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
 import WeilConjectures.AlgebraicGeometry.TensorStalkChainCoordinates
@@ -62,7 +64,7 @@ private theorem coordinates_comparison_normalize
         ((derivedPullback g').map c.e.hom ≫ φ ≫ c.e'.inv) := by
     apply (cancel_epi ((SingleComplexBaseChange.counit g').app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P))).mp
-    simpa only [Category.assoc, IsIso.hom_inv_id_assoc, Iso.hom_inv_id,
+    simpa only [cast_eq, Category.assoc, IsIso.hom_inv_id_assoc, Iso.hom_inv_id,
       Category.comp_id] using congrArg (fun k ↦ k ≫ c.e'.inv) c.represents
   have hn := SingleComplexBaseChange.comparisonStalkHomologyIso_naturality X' z c.t i
   rw [ht, H.map_comp] at hn
@@ -72,7 +74,7 @@ private theorem coordinates_comparison_normalize
         ≫ k) hn
   simp only [Category.assoc, Iso.inv_hom_id_assoc] at hn'
   simpa only [SingleComplexBaseChange.stalkComparison,
-    SingleComplexBaseChange.comparisonIntoPullback, Category.assoc] using
+    SingleComplexBaseChange.comparisonIntoPullback, cast_eq, Category.assoc] using
     congrArg (fun k ↦
       (SingleComplexBaseChange.cohomologyModel f f' g g' sq z c.P).localizedComparison i ≫
         HomologicalComplex.homologyMap (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z

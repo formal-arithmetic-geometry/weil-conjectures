@@ -91,7 +91,7 @@ theorem strictHenselization_indEtale_of_affine_chart
     -- Compare the small neighbourhood colimit with the filtered triple colimit.
     let Nall := (pointSmallEtale s).fiber.Elements
     let P : ObjectProperty Nall := fun n ↦ IsAffine n.1.left
-    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale s).fiber ⋙
+    let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale s).fiber ⋙
       Etale.forget S ⋙ Over.forget S).op ⋙ Scheme.Γ
     let : HasColimit D := ⟨⟨cn, hcn⟩⟩
     let incl := strictHenselizationAffineInclusion s

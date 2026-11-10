@@ -173,8 +173,7 @@ theorem Cotangent.toComp_injective_of_intersection
       k ∘ₗ (e₁.trans e₂).toLinearMap := by
     apply LinearMap.ext
     intro z
-    induction z using _root_.TensorProduct.induction_on with
-    | zero => simp
+    induction z using _root_.TensorProduct.inductionOn with
     | add x y hx hy => simp [hx, hy]
     | tmul c x =>
       obtain ⟨x, rfl⟩ := Extension.Cotangent.mk_surjective x

@@ -87,8 +87,7 @@ private theorem internalSectionTensor_hom_ext (X : Scheme.{u})
   apply (cancel_epi (Mod.tensorObjπ M N)).mp
   apply Sheaf.tensor_hom_ext
   ext U t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t s ht hs => simp only [map_add, ht, hs]
   | tmul x y => exact he U x y
 
@@ -234,8 +233,7 @@ private theorem projection_pairing {X Y : Scheme.{u}} (f : X ⟶ Y)
       (ProEtale.lowerStar Ab.{u + 1} f).map (Mod.tensorObjπ M N) := by
   apply Sheaf.tensor_hom_ext
   ext U t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | add t s ht hs => simp only [map_add, ht, hs]
   | tmul x y =>
     have hn := internalPush_apply Λ f M N U x y

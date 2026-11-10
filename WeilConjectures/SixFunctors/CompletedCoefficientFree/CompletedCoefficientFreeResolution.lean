@@ -417,7 +417,8 @@ private noncomputable def tensorUnitPresheafIso
   apply ModuleCat.hom_ext
   apply TensorProduct.ext'
   intro a x
-  change (R.obj.map f a) • (M.val.map f x) = M.val.map f (a • x)
+  change (R.obj.map f (show R.obj.obj V from a)) • (show M.val.obj W from M.val.map f x) =
+    M.val.map f ((show R.obj.obj V from a) • x)
   exact ((M.val.map f).hom.map_smul a x).symm
 
 private abbrev sheafifyR :=
@@ -683,7 +684,7 @@ private theorem tensorMultiplication_apply
     (f : unit ((forgetRing J).obj R) ⟶ unit ((forgetRing J).obj R))
     (M : SheafOfModules.{max u (t + 1)} ((forgetRing J).obj R)) (V : Cᵒᵖ) (x : M.val.obj V) :
     (tensorMultiplication J R f M).val.app V x =
-      f.val.app V (1 : R.obj.obj V) • x := by
+      (show R.obj.obj V from f.val.app V (1 : R.obj.obj V)) • x := by
   let adj := PresheafOfModules.sheafificationAdjunction (𝟙 ((forgetRing J).obj R).obj)
   let g := siteTensorHom f.val M.val
   simp only [tensorMultiplication, comp_val, PresheafOfModules.comp_app,
@@ -696,7 +697,8 @@ private theorem tensorMultiplication_apply
     (((PresheafOfModules.sheafification (𝟙 ((forgetRing J).obj R).obj)).map g).val.app V
       ((adj.unit.app _).app V ((1 : R.obj.obj V) ⊗ₜ[R.obj.obj V] x))) = _
   have ht : g.app V ((1 : R.obj.obj V) ⊗ₜ[R.obj.obj V] x) =
-      (1 : R.obj.obj V) ⊗ₜ[R.obj.obj V] (f.val.app V (1 : R.obj.obj V) • x) := by
+      (1 : R.obj.obj V) ⊗ₜ[R.obj.obj V]
+        ((show R.obj.obj V from f.val.app V (1 : R.obj.obj V)) • x) := by
     change (f.val.app V (1 : R.obj.obj V)) ⊗ₜ[R.obj.obj V] x = _
     have hh := TensorProduct.smul_tmul (R := R.obj.obj V) (R' := R.obj.obj V)
       (f.val.app V (1 : R.obj.obj V)) (1 : R.obj.obj V) x
@@ -837,7 +839,7 @@ private theorem scalar_flat_sequence (n : ℕ) (M : scalarReductionSource l E T)
     have htensor := ReductionTensor.tensorMultiplication_apply
       (AlgebraicGeometry.Scheme.ProEt.topology T) R
       (coefficientMultiplication l E T n) M U x
-    exact hact.trans ((congrArg (fun b ↦ b • x) hone).symm.trans htensor.symm)
+    exact hact.trans ((congrArg (fun b : R.obj.obj U ↦ b • x) hone).symm.trans htensor.symm)
   have hη : η = e.inv ≫ F.map (quotientProjection l E T n) ≫ eR.hom :=
     (ordinaryQuotient_unit l E T n M).symm
   have hz : a ≫ η = 0 := by
@@ -1133,7 +1135,7 @@ private theorem complexTower_roos
   let shift : B.pt ⟶ B.pt := towerProductShift
     (fun n ↦ T.map (homOfLE n.le_succ).op)
   have hshift (n : ℕ) : shift ≫ B.proj n =
-      B.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op := Pi.lift_π _ _
+      B.proj (n + 1) ≫ T.map (homOfLE n.le_succ).op := Pi.lift_comp_π _ _
   let S := ShortComplex.mk _ _
     (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hB shift hshift c)
   have hk := Fan.IsLimit.isLimitKernelForkOneSub hB shift hshift hc
@@ -1154,7 +1156,7 @@ private theorem complexTower_roos
       apply Pi.hom_ext
       intro n
       simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
-        Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Pi.lift_π,
+        Preadditive.comp_sub, Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π,
         HomologicalComplex.sub_f_apply, HomologicalComplex.id_f]
       have hn := congrArg (fun q ↦ q.f i) (hshift n)
       simpa only [HomologicalComplex.comp_f, Category.assoc, reassoc_of% he, f] using
@@ -1182,7 +1184,7 @@ private theorem complexTower_roos
   have hE (n : ℕ) : E.hom ≫ Pi.π K₀ n = DerivedCategory.Q.map (B.proj n) :=
     hQFan.conePointUniqueUpToIso_hom_comp (productIsProduct K₀) ⟨n⟩
   have hπ (n : ℕ) : p ≫ Pi.π K₀ n =
-      DerivedCategory.Q.map (c.π.app (op n)) := Pi.lift_π _ _
+      DerivedCategory.Q.map (c.π.app (op n)) := Pi.lift_comp_π _ _
   have hi : DerivedCategory.Q.map S.f ≫ E.hom = p := by
     apply Pi.hom_ext
     intro n
@@ -1198,7 +1200,7 @@ private theorem complexTower_roos
     intro n
     simp only [Category.assoc, hE, ← Functor.map_comp, hu, Functor.map_sub]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, hE, f₀]
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, hE, f₀]
     rw [Functor.map_comp, ← Category.assoc, hE]
   let δ := DerivedCategory.triangleOfSESδ hS
   refine ⟨E.inv ≫ δ, ?_⟩

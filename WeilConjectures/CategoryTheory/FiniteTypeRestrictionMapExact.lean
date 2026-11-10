@@ -58,6 +58,6 @@ theorem overMap_exact {C : Type u} [SmallCategory C]
       (toSheaf.{u} (R.over X))
     exact ShortComplex.shortExact_of_iso (S.mapNatIso e.symm)
       ((hS.map_of_exact (toSheaf.{u} (R.over Y))).map_of_exact H)
-  exact (Functor.exact_tfae F).out 0 3 |>.mp h
+  exact (Functor.exact_tfae F).out 1 4 |>.mp h
 
 end SheafOfModules

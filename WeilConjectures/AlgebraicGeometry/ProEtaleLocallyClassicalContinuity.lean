@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 
 /-!
 # Continuity of locally classical pro-etale sheaves

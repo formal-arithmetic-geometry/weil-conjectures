@@ -109,8 +109,7 @@ private theorem tensorModel_hom_ext (W : AlgebraicGeometry.Scheme.{u})
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | tmul a x => exact h U a x
   | add z z' hz hz' => simp only [map_add, hz, hz']
 
@@ -725,10 +724,10 @@ def isomorphismScalarTensorDerived {X Y : AlgebraicGeometry.Scheme.{u}}
     inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
       integralOrdinaryDerivedScalar l E L ι Y ⋙ inverseImageIntegralDerived l L g :=
   (Functor.mapDerivedCategoryCompIso (inverseImageIntegralModules l E g)
-    (integralOrdinaryScalar l E L ι X)).symm ≪≫
+    (integralOrdinaryScalar l E L ι X)) ≪≫
     Functor.mapDerivedCategoryNatIso (isomorphismScalarTensor l E L ι g) ≪≫
-    Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
-      (inverseImageIntegralModules l L g)
+    (Functor.mapDerivedCategoryCompIso (integralOrdinaryScalar l E L ι Y)
+      (inverseImageIntegralModules l L g)).symm
 
 /-- Both inputs to the X-side completion comparisons lie in the recorded bounded
 constructible, derived-complete category. Source: Bhatt--Scholze 6.5.9(4), and the

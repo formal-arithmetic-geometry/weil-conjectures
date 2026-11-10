@@ -135,15 +135,11 @@ theorem picardConstantTensorBalancedSections_map
   let P := (PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
     (picardConstantVector k Y M)
   change e V.unop ((MonoidalCategory.tensorObj P G.val).map i x) = _
-  induction x using TensorProduct.induction_on with
-  | zero =>
-    simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
   | tmul p t =>
     obtain ⟨z, rfl⟩ := (q U.unop).surjective p
-    induction z using TensorProduct.induction_on with
-    | zero =>
-      simp only [map_zero, TensorProduct.zero_tmul]
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' =>
       simpa only [map_add, TensorProduct.add_tmul] using congrArg₂ (· + ·) hz hz'
     | tmul a s =>
@@ -155,8 +151,9 @@ theorem picardConstantTensorBalancedSections_map
           ⊗ₜ[Γ(Y, U.unop)] t))
       rw [he]
       change s ⊗ₜ[k] (show scalarObj g G V from
-          (Y.presheaf.map i a) • G.val.map i t) =
-        s ⊗ₜ[k] (show scalarObj g G V from G.val.map i (a • t))
+          (Y.presheaf.map i a) • (show G.val.obj V from G.val.map i t)) =
+        s ⊗ₜ[k] (show scalarObj g G V from
+          G.val.map i ((show Γ(Y, U.unop) from a) • t))
       rw [G.val.map_smul]
       rfl
 

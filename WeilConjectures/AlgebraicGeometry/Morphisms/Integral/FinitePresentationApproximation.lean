@@ -132,6 +132,7 @@ lemma fpHom_comp_val {c d e : FPIndex F E} (g : c ⟶ d) (g' : d ⟶ e) :
 
 lemma fpHom_id_val (c : FPIndex F E) : (𝟙 c : c ⟶ c).1 = 𝟙 _ := rfl
 
+
 /-- (Implementation) The morphism `V(K') ⟶ V(K)` for `K ≤ K'`. -/
 noncomputable def fpIncl (i : F.I) {K K' : (E i).e.ker.FGSub} (h : K ≤ K') :
     (⟨i, K'⟩ : FPIndex F E) ⟶ ⟨i, K⟩ :=

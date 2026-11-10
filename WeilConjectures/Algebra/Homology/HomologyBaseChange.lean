@@ -104,8 +104,7 @@ noncomputable def cyclesBaseChangeMap :
 lemma coe_cyclesBaseChangeMap (x : B ⊗[A] LinearMap.ker S.g.hom) :
     (S.cyclesBaseChangeMap B x : B ⊗[A] S.X₂) =
       (LinearMap.ker S.g.hom).subtype.lTensor B x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul b z =>
     rw [cyclesBaseChangeMap, LinearMap.liftBaseChange_tmul, Submodule.coe_smul,
       baseChangeCycles_apply_coe, LinearMap.lTensor_tmul, smul_tmul', smul_eq_mul, mul_one]
@@ -115,8 +114,7 @@ lemma coe_cyclesBaseChangeMap (x : B ⊗[A] LinearMap.ker S.g.hom) :
 lemma homologyBaseChangeAux_lTensor_mkQ (x : B ⊗[A] LinearMap.ker S.g.hom) :
     S.homologyBaseChangeAux B ((LinearMap.range S.moduleCatToCycles).mkQ.lTensor B x) =
       Submodule.Quotient.mk (S.cyclesBaseChangeMap B x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul b z =>
     rw [LinearMap.lTensor_tmul, Submodule.mkQ_apply, homologyBaseChangeAux_tmul,
       cyclesBaseChangeMap, LinearMap.liftBaseChange_tmul]
@@ -231,8 +229,7 @@ theorem homologyBaseChange_naturality {S₁ S₂ : ShortComplex (ModuleCat.{u} A
     S₂.homologyBaseChange B ((homologyMap φ).hom.baseChange B x) =
       (homologyMap ((ModuleCat.baseChange A B).mapShortComplex.map φ)).hom
         (S₁.homologyBaseChange B x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul b h =>
     obtain ⟨z, rfl⟩ : ∃ z, S₁.moduleCatHomologyIso.inv.hom (Submodule.Quotient.mk z) = h := by
@@ -272,12 +269,10 @@ noncomputable def baseChangeBaseChangeIso :
     (by
       ext : 1
       refine LinearMap.ext fun x ↦ ?_
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
       | tmul l y =>
-        induction y using TensorProduct.induction_on with
-        | zero => simp
+        induction y using TensorProduct.inductionOn with
         | add y y' hy hy' =>
           simp only [tmul_add, map_add] at hy hy' ⊢
           rw [hy, hy']
@@ -288,12 +283,10 @@ noncomputable def baseChangeBaseChangeIso :
     (by
       ext : 1
       refine LinearMap.ext fun x ↦ ?_
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
       | tmul l y =>
-        induction y using TensorProduct.induction_on with
-        | zero => simp
+        induction y using TensorProduct.inductionOn with
         | add y y' hy hy' =>
           simp only [tmul_add, map_add] at hy hy' ⊢
           rw [hy, hy']

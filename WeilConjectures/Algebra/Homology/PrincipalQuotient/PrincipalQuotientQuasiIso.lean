@@ -40,11 +40,7 @@ private theorem unit_surjective (M : ModuleCat.{u} R) :
     Function.Surjective ((ModuleCat.extendRestrictScalarsAdj f).unit.app M) := by
   let := f.toAlgebra
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero =>
-    refine ⟨0, ?_⟩
-    change (1 : A) ⊗ₜ[R] (0 : M) = 0
-    simp
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw =>
     obtain ⟨x, rfl⟩ := hz
     obtain ⟨y, rfl⟩ := hw
@@ -71,8 +67,7 @@ private theorem unit_kernel (M : ModuleCat.{u} R) (x : M) :
   have hT := rTensor_exact M hπ hf
   have hμ (z : R ⊗[R] M) :
       TensorProduct.lid R M (LinearMap.rTensor M μ z) = t • TensorProduct.lid R M z := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp [hz, hw, smul_add]
     | tmul a m => simp [μ, smul_smul]
   constructor

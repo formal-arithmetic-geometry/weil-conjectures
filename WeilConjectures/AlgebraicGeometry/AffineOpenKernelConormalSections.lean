@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import WeilConjectures.AlgebraicGeometry.AffineConormalSectionsExistence

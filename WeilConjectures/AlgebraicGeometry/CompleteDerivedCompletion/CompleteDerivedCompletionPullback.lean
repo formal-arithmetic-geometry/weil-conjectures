@@ -66,7 +66,7 @@ private theorem derivedComposition_fac'
     (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj K) ≫
+    (Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj K) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K := by
@@ -90,10 +90,10 @@ private theorem interchange_fac (n : ℕᵒᵖ) (K : CochainComplex (ℕᵒᵖ �
   let EA := (evaluation ℕᵒᵖ A).obj n
   let EB := (evaluation ℕᵒᵖ B).obj n
   apply (cancel_epi
-    ((Functor.mapDerivedCategoryCompIso FT EA).hom.app (DerivedCategory.Q.obj K))).mp
+    ((Functor.mapDerivedCategoryCompIso FT EA).inv.app (DerivedCategory.Q.obj K))).mp
   dsimp only [FT, EA, EB]
   simp only [towerDerivedEvaluationInterchange, Iso.trans_hom, NatTrans.comp_app,
-    Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc]
+    Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
   exact (derivedComposition_fac' EB F K).trans (derivedComposition_fac' FT EA K).symm
 
 private theorem transition_fac {m n : ℕᵒᵖ} (t : m ⟶ n) (J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :

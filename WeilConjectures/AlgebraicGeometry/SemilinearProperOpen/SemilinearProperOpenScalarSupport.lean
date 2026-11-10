@@ -37,7 +37,7 @@ open WeilConjectures.SemilinearSections
 section ProofEnvironment
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 variable (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
@@ -457,10 +457,10 @@ Source: the ring-sheaf change adjunction
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 def rhoP {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P C τ f ⋙ rho C τ B φ hφ X ≅ rho C τ B φ hφ Y ⋙ StrictTower.G B f :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
   Functor.mapDerivedCategoryNatIso
     (@asIso _ _ _ _ (rhoPullInv C τ B φ hφ f) (rhoPullInv_isIso C τ B φ hφ f)).symm ≪≫
-  Functor.mapDerivedCategoryCompIso _ _
+  (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image comparison is the actual derived mate of rhoP inverse.
 Source: the ring-sheaf change adjunction

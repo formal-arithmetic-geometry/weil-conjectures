@@ -130,7 +130,7 @@ private theorem derivedComparison_fac
     (c : R ⋙ T ≅ R2) (K : CochainComplex A ℤ) :
     letI : PreservesFiniteLimits (R ⋙ T) := comp_preservesFiniteLimits R T
     letI : PreservesFiniteColimits (R ⋙ T) := comp_preservesFiniteColimits R T
-    let cD := (Functor.mapDerivedCategoryCompIso R T).symm ≪≫
+    let cD := Functor.mapDerivedCategoryCompIso R T ≪≫
       Functor.mapDerivedCategoryNatIso c
     cD.hom.app (DerivedCategory.Q.obj K) ≫ R2.mapDerivedCategoryFactors.hom.app K =
       T.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫
@@ -141,7 +141,7 @@ private theorem derivedComparison_fac
   let : PreservesFiniteLimits (R ⋙ T) := comp_preservesFiniteLimits R T
   let : PreservesFiniteColimits (R ⋙ T) := comp_preservesFiniteColimits R T
   dsimp only
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_fac]
   have hi : (Functor.mapHomologicalComplexCompIso (Iso.refl (R ⋙ T))
       (ComplexShape.up ℤ)).hom.app K = 𝟙 _ := by
@@ -150,7 +150,7 @@ private theorem derivedComparison_fac
   have hc := Functor.mapDerivedCategoryCompIso_fac R T K
   erw [hi, Functor.map_id, Category.comp_id] at hc
   rw [← hc]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 /-- Exact localization carries a nested adjunction mate to its derived mate.
@@ -193,7 +193,7 @@ theorem derivedPresentation_mate
         c.hom.app (L.obj (R.obj (K.X n))))) :
     letI : PreservesFiniteLimits (R ⋙ T) := comp_preservesFiniteLimits R T
     letI : PreservesFiniteColimits (R ⋙ T) := comp_preservesFiniteColimits R T
-    let cD := (Functor.mapDerivedCategoryCompIso R T).symm ≪≫
+    let cD := Functor.mapDerivedCategoryCompIso R T ≪≫
       Functor.mapDerivedCategoryNatIso c
     let κ := (d2.homEquiv _ _).symm
       (cD.inv.app E ≫ T.mapDerivedCategory.map
@@ -203,7 +203,7 @@ theorem derivedPresentation_mate
       κ ≫ (a1.derivedPresentation d1 K e).hom := by
   let : PreservesFiniteLimits (R ⋙ T) := comp_preservesFiniteLimits R T
   let : PreservesFiniteColimits (R ⋙ T) := comp_preservesFiniteColimits R T
-  let cD := (Functor.mapDerivedCategoryCompIso R T).symm ≪≫
+  let cD := Functor.mapDerivedCategoryCompIso R T ≪≫
     Functor.mapDerivedCategoryNatIso c
   let cK := Functor.mapHomologicalComplexCompIso c (ComplexShape.up ℤ)
   -- Identify the transpose of f degreewise, before localizing.

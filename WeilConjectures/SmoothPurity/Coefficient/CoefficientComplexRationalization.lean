@@ -87,7 +87,7 @@ private theorem coefficientTensorLimits {R S : Type u} [CommRing R] [CommRing S]
     intro C hC
     rw [ShortComplex.ShortExact.moduleCat_exact_iff_function_exact] at hC ⊢
     exact Module.Flat.lTensor_exact S hC
-  have h := ((Functor.exact_tfae (ModuleCat.extendScalars.{u, u, max u v} f)).out 1 3).mp
+  have h := ((Functor.exact_tfae (ModuleCat.extendScalars.{u, u, max u v} f)).out 2 4).mp
     hex
   exact h.1
 
@@ -354,12 +354,12 @@ private theorem deriveCoefficientTower
       Functor.isoWhiskerLeft F c ≪≫ Functor.isoWhiskerRight d W ≪≫
         Functor.isoWhiskerLeft Q e) (K : DerivedCategory C₀) :
     H.mapDerivedCategory.map
-        (((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso F G ≪≫
           Functor.mapDerivedCategoryNatIso a).hom.app K) ≫
         (Functor.mapDerivedCategorySquareIso b).hom.app K =
       (Functor.mapDerivedCategorySquareIso c).hom.app (F.mapDerivedCategory.obj K) ≫
         W.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso d).hom.app K) ≫
-        ((Functor.mapDerivedCategoryCompIso V W).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso V W ≪≫
           Functor.mapDerivedCategoryNatIso e).hom.app (Q.mapDerivedCategory.obj K) := by
   have hm := congrArg (fun z ↦ (Functor.mapDerivedCategoryNatIso z).hom) h
   simp only [Functor.mapDerivedCategoryNatIso_trans] at hm
@@ -372,7 +372,7 @@ private theorem deriveCoefficientTower
   have hQ := Functor.mapDerivedCategoryCompIso_assoc Q V W
   have ht :
       Functor.whiskerRight
-        ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso F G ≪≫
           Functor.mapDerivedCategoryNatIso a).hom H.mapDerivedCategory ≫
         (Functor.mapDerivedCategorySquareIso b).hom =
       Functor.whiskerLeft F.mapDerivedCategory
@@ -380,23 +380,23 @@ private theorem deriveCoefficientTower
         Functor.whiskerRight (Functor.mapDerivedCategorySquareIso d).hom
           W.mapDerivedCategory ≫
         Functor.whiskerLeft Q.mapDerivedCategory
-          ((Functor.mapDerivedCategoryCompIso V W).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso V W ≪≫
             Functor.mapDerivedCategoryNatIso e).hom := by
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (F ⋙ G) H).hom ≫
-      Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (F ⋙ G) H).inv ≫
+      Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).inv
         H.mapDerivedCategory)).mp
     simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
       Functor.whiskerRight_comp, Functor.whiskerLeft_comp, Category.assoc]
-    simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id_assoc]
-    rw [← reassoc_of% ha, Iso.hom_inv_id_assoc]
+    simp only [← Functor.whiskerRight_comp_assoc, Iso.inv_hom_id_assoc]
+    rw [← reassoc_of% ha, Iso.inv_hom_id_assoc]
     rw [← reassoc_of% hF]
-    simp only [← Functor.whiskerLeft_comp_assoc, Iso.hom_inv_id_assoc]
+    simp only [← Functor.whiskerLeft_comp_assoc, Iso.inv_hom_id_assoc]
     simp only [Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Category.assoc]
     rw [← reassoc_of% hc, reassoc_of% hR]
-    simp only [← Functor.whiskerRight_comp_assoc, Iso.hom_inv_id_assoc]
+    simp only [← Functor.whiskerRight_comp_assoc, Iso.inv_hom_id_assoc]
     simp only [Functor.whiskerRight_comp, Category.assoc]
     rw [← reassoc_of% hd, ← reassoc_of% hQ]
-    simp only [← Functor.whiskerLeft_comp_assoc, Iso.hom_inv_id,
+    simp only [← Functor.whiskerLeft_comp_assoc, Iso.inv_hom_id,
       Functor.whiskerLeft_id', Category.id_comp]
     rw [← he, reassoc_of% hm]
   exact congr_app ht K

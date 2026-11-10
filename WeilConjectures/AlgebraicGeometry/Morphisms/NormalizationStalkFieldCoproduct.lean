@@ -211,7 +211,7 @@ private theorem sigmaSpec_structure
         Spec.map (CommRingCat.ofHom (algebraMap R (Π i, B i))) =
       Sigma.desc (fun i ↦ Spec.map (CommRingCat.ofHom (algebraMap R (B i)))) := by
   ext i
-  rw [ι_sigmaSpec_assoc, Sigma.ι_desc, ← Spec.map_comp]
+  rw [ι_sigmaSpec_assoc, Sigma.ι_comp_desc, ← Spec.map_comp]
   congr 1
 
 set_option backward.defeqAttrib.useBackward true in

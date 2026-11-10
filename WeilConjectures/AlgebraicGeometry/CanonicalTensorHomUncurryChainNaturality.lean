@@ -131,7 +131,7 @@ private theorem naturality_transport
     rw [← H.map_comp, ← H.map_comp]
     congr 1
     ext
-    · exact congrArg Quiver.Hom.op hb
+    · exact hb
     · exact hc'
   have hinput : eK'.hom ≫ (a ≫ f ≫ H.map (X := (op L, M)) (Y := (op L', M')) (b.op, c)) ≫
       H.map (X := (op L', M')) (Y := (op N', I')) (eL'.hom.op, eM'.inv) =

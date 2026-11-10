@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 public import WeilConjectures.AlgebraicGeometry.SectionKFlatTensorComparison
 public import WeilConjectures.AlgebraicGeometry.SectionOplaxTotalComparison
@@ -11,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.Topology.ProfiniteCondensedRing
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import all Mathlib.Logic.Small.Defs
+import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.AlgebraicGeometry.InternalOplaxResolvingComponents
 import WeilConjectures.AlgebraicGeometry.SectionResolutionConjugationIdentities
@@ -412,8 +415,10 @@ def actualUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶
       DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ X) ℤ)) :=
   (derivedPullback Λ f).map (regular Λ Y).inv ≫
-    (derivedPullComparison Λ f).inv.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
-    (derivedEquivalence Λ X).functor.map (CondensedRing.leftDerivedUpperStarUnitIso Λ f).hom ≫
+    (cast (by rfl)
+      ((derivedPullComparison Λ f).inv.app (𝟙_ (DerivedCategory (internalModules Λ Y))) ≫
+        (derivedEquivalence Λ X).functor.map (CondensedRing.leftDerivedUpperStarUnitIso Λ f).hom) :
+      (derivedPullback Λ f).obj (tensorUnit Λ Y) ⟶ tensorUnit Λ X) ≫
     (regular Λ X).hom
 
 /-- Naturality of the very square under arbitrary representative maps.
@@ -471,7 +476,7 @@ def UnitorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   ConstraintData.UnitorNormalization (totalSectionPull Λ f) (derivedPullback Λ f)
     DerivedCategory.Q DerivedCategory.Q (fun P Q ↦ (qTensor Λ Y).app (P, Q))
     (pullback Λ f).mapDerivedCategoryFactors.hom (sectionTotalIso Λ f)
-    (sectionTotalUnit Λ f) (regular Λ Y) (regular Λ X)
+    (sectionTotalUnit Λ f) (cast (by rfl) (regular Λ Y)) (cast (by rfl) (regular Λ X))
     (actualTensor Λ f) (actualUnit Λ f) (KFlatSectionComparison.sectionResolving Λ Y)
 
 attribute [local instance 3000] CondensedRing.projectionDerivedMonoidal
@@ -629,7 +634,7 @@ private theorem tensorator_Q_generic
   unfold Functor.LaxMonoidal.μ
   unfold DerivedCategory.laxMonoidalQ
   unfold inferInstance
-  unfold DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures
+  unfold DerivedCategory.instLaxMonoidalQ
   unfold Functor.LaxMonoidal.ofIso
   dsimp only
   rw [Functor.LaxMonoidal.comp_μ]
@@ -710,12 +715,13 @@ private theorem internal_pair {X Y : Scheme.{u}} (f : X ⟶ Y)
       DerivedCategory.Q.map (actualInternalTotalIso Λ f A B).hom := by
   letI := CondensedRing.monoidal_upperStar Λ f
   rw [delta_model, actualInternalTotalIso_hom, totalInternalOplax_eq]
-  simpa only [ResolutionConjugation.cInternal, ResolutionConjugation.aInternal,
-    ResolutionConjugation.eta, internalQTensorArrow,
-    internalDerivedPullback, internalDerivedPullFunctor,
-    internalLocalizationFunctor, comparisonSource,
-    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app, Category.assoc] using
-    cochain_tensor_comparison (CondensedRing.upperStar Λ f) A B
+  with_unfolding_all
+    simpa only [ResolutionConjugation.cInternal, ResolutionConjugation.aInternal,
+      ResolutionConjugation.eta, internalQTensorArrow,
+      internalDerivedPullback, internalDerivedPullFunctor,
+      internalLocalizationFunctor, comparisonSource, retainedCochainObject, cast_eq,
+      Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app, Category.assoc] using
+      cochain_tensor_comparison (CondensedRing.upperStar Λ f) A B
 
 end CoreModels
 end NativeModels
@@ -952,13 +958,18 @@ private theorem unit_equation {X Y : Scheme.{u}} (f : X ⟶ Y) :
   with_unfolding_all
     unfold ResolutionConjugation.UnitEquation ResolutionConjugation.eta internalPullUnitArrow
       internalLocalizationFunctor internalCochainUnit at h
-    rw [← hu] at h
+    simp only [cast_eq] at h
+    simp only [Functor.mapHomotopyCategoryFactors_hom_app, Category.id_comp] at hu
+    erw [Category.id_comp] at hu
+    erw [← hu] at h
     rw [e_eq_regular Λ X, e_eq_regular Λ Y] at h
     simp only [ResolutionConjugation.epsilon, derivedPullSquare, sectionPullUnitArrow] at h
   unfold actualUnit
-  exact invert_prefix
-    ((derivedPullComparison Λ f).app (𝟙_ (DerivedCategory (internalModules Λ Y))))
-    ((derivedPullback Λ f).mapIso (regular Λ Y)) _ _ h
+  with_unfolding_all
+    simp only [cast_eq, Category.assoc]
+    exact invert_prefix
+      ((derivedPullComparison Λ f).app (𝟙_ (DerivedCategory (internalModules Λ Y))))
+      ((derivedPullback Λ f).mapIso (regular Λ Y)) _ _ h
 
 attribute [local semireducible] HomologicalComplex.mapBifunctor
   Functor.mapBifunctorHomologicalComplex
@@ -1142,7 +1153,8 @@ private theorem constraints_from_hypotheses {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ResolvingOplaxConstraints.modelTensor Λ X)
     (pullback Λ f).mapDerivedCategoryFactors.hom (sectionTotalIso Λ f)
     (sectionTotalUnit Λ f)
-    (ResolvingOplaxConstraints.regular Λ Y) (ResolvingOplaxConstraints.regular Λ X)
+    (cast (by rfl) (ResolvingOplaxConstraints.regular Λ Y))
+    (cast (by rfl) (ResolvingOplaxConstraints.regular Λ X))
     (fun M N ↦ (actualComparison Λ f).app (M, N)) (actualUnit Λ f)
     (KFlatSectionComparison.sectionResolving Λ Y)
     (fun P Q H ↦ (h.1 P Q H).2.2.2) (fun P ↦ h.2.1 P)

@@ -84,7 +84,7 @@ theorem affine_derived_summand_models (X : Scheme.{u}) (U : X.Opens)
   let H := RingedSpace.globalSectionsFunctor (Spec R).toRingedSpace ⋙
     ModuleCat.restrictScalars (Scheme.ΓSpecIso R).inv.hom
   have adj : L ⊣ H := tilde.adjunction
-  have : L.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : L.Additive := by constructor; intro M N f g; exact tilde.map_add (R := R) f g
   have : L.IsLeftAdjoint := adj.isLeftAdjoint
   have : L.PreservesMonomorphisms := ⟨by
     intro M N f hf

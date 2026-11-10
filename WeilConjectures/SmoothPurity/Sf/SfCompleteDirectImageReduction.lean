@@ -109,9 +109,9 @@ private theorem map_roos
     intro n
     simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-      Pi.lift_π, Functor.map_sub]
+      Pi.lift_comp_π, Functor.map_sub]
     rw [← Category.assoc, he, ← Functor.map_comp]
-    rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
   have hp : F.map p ≫ e.hom = Pi.lift (fun n ↦ F.map (p ≫ Pi.π T n)) := by
     apply Pi.hom_ext
     intro n
@@ -362,10 +362,10 @@ private theorem normalized_cube
     (hc : ∀ M : A,
       Q.map (a.hom.app M) ≫ h.hom.app (R.obj M) ≫ G'.map (r.hom.app M) =
         s.hom.app (F.obj M) ≫ S'.map (e.hom.app M) ≫ b.hom.app (U.obj M)) :
-    let dr := (Functor.mapDerivedCategoryCompIso R P).symm ≪≫
-      Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso U R'
-    let ds := (Functor.mapDerivedCategoryCompIso S Q).symm ≪≫
-      Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso V S'
+    let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
+      Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
+    let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
+      Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso V S').symm
     ∀ M : DerivedCategory A,
       Q.mapDerivedCategory.map (da.hom.app M) ≫
         dh.hom.app (R.mapDerivedCategory.obj M) ≫
@@ -373,10 +373,10 @@ private theorem normalized_cube
       ds.hom.app (F.rightDerivedFunctor.obj M) ≫
         S'.mapDerivedCategory.map (de.hom.app M) ≫
         db.hom.app (U.mapDerivedCategory.obj M) := by
-  let dr := (Functor.mapDerivedCategoryCompIso R P).symm ≪≫
-    Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso U R'
-  let ds := (Functor.mapDerivedCategoryCompIso S Q).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso V S'
+  let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
+    Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
+  let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
+    Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso V S').symm
   let x : F.rightDerivedFunctor ⋙ S.mapDerivedCategory ⋙ Q.mapDerivedCategory ⟶
       U.mapDerivedCategory ⋙ R'.mapDerivedCategory ⋙ G'.rightDerivedFunctor :=
     Functor.whiskerRight da.hom Q.mapDerivedCategory ≫
@@ -1084,10 +1084,10 @@ private theorem sf_projection_formula (n : ℕ)
   letI : (U ⋙ R').Additive := by infer_instance
   letI : (S ⋙ Q).Additive := by infer_instance
   letI : (V ⋙ S').Additive := by infer_instance
-  let dr := (Functor.mapDerivedCategoryCompIso R P).symm ≪≫
-    Functor.mapDerivedCategoryNatIso r ≪≫ Functor.mapDerivedCategoryCompIso U R'
-  let ds := (Functor.mapDerivedCategoryCompIso S Q).symm ≪≫
-    Functor.mapDerivedCategoryNatIso s ≪≫ Functor.mapDerivedCategoryCompIso V S'
+  let dr := Functor.mapDerivedCategoryCompIso R P ≪≫
+    Functor.mapDerivedCategoryNatIso r ≪≫ (Functor.mapDerivedCategoryCompIso U R').symm
+  let ds := Functor.mapDerivedCategoryCompIso S Q ≪≫
+    Functor.mapDerivedCategoryNatIso s ≪≫ (Functor.mapDerivedCategoryCompIso V S').symm
   have hc := normalized_cube.{u + 2, u + 1, u + 2}
     (addF := inferInstanceAs ((proEtaleConstantModuleDirectImage f
       (Padic.coefficientExtensionRing l E (n + 1))).Additive))
@@ -1352,7 +1352,7 @@ private theorem finish_from_projection_formula
     · intro n
       simp only [p, Iso.refl_hom, Category.id_comp]
     · refine ⟨inferInstance, ε, ?_⟩
-      simpa only [Pi.lift_π] using hε
+      simpa only [Pi.lift_comp_π] using hε
   obtain ⟨hp, ε', hε'⟩ := hR
   have hR' : ∃ ε, IsDerivedLimitTriangle (sfDirectImageTransition l E f K)
       (F.obj K) (Pi.lift p) ε := by
@@ -1377,7 +1377,7 @@ private theorem finish_from_projection_formula
     rw [Equiv.apply_symm_apply, adj.homEquiv_naturality_left]
     erw [hbunit]
     have hn := congrArg (fun z ↦ z ≫ Pi.π (sfDirectImageTerm l E f K) n) he
-    simpa only [Category.assoc, Pi.lift_π] using hn.symm
+    simpa only [Category.assoc, Pi.lift_comp_π] using hn.symm
   rw [h]
   infer_instance
 

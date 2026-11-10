@@ -243,4 +243,5 @@ theorem exists_forall_isIrreducible_baseChange_of_congr (ρ : Representation E G
       Function.Injective (algebraMap E K' ∘ algebraMap O E))
 
 
+
 end Representation

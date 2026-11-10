@@ -51,6 +51,7 @@ theorem exists_flat_model_of_boundedAbove_model
   let L := Q.obj F
   let q := (HomotopyCategory.quotient A (.up ℤ)).map (ε.app F)
   have hq : IsIso (DerivedCategory.Qh.map q) := by
+    apply (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A) (ε.app F)).2
     exact (DerivedCategory.isIso_Q_map_iff_quasiIso A (ε.app F)).2 (hQ F).2.2.2
   refine ⟨L, ⟨b, ?_⟩, (hQ F).1, ?_⟩
   · intro i hi

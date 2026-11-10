@@ -191,8 +191,8 @@ theorem isPerfPair_adicConstantHCup {i j n : ℕ} (h : i + j = n)
       inv_mul_cancel_left₀ hc₀]
   have hspan (k : ℕ) :
       Submodule.span (PadicAlgCl l) (Set.range (integralToAdicConstantH l S k)) = ⊤ :=
-    eq_top_iff.2 fun x _ ↦ (isBaseChange_integralToAdicConstantH l S k).inductionOn x _
-      (Submodule.zero_mem _) (fun z ↦ Submodule.subset_span ⟨z, rfl⟩)
+    eq_top_iff.2 fun x _ ↦ (isBaseChange_integralToAdicConstantH l S k).inductionOn x
+      (fun z ↦ Submodule.subset_span ⟨z, rfl⟩)
       (fun s _ hx ↦ Submodule.smul_mem _ s hx) (fun _ _ ↦ Submodule.add_mem _)
   have hperf := LinearMap.isPerfPair_of_span_eq_top _ _ (hspan i) (hspan j) P Q hQ
     (fun a ha ↦ LinearMap.mem_torsion_of_pow_smul_eq P hl0 (natCast_ne_zero_padicInt l)

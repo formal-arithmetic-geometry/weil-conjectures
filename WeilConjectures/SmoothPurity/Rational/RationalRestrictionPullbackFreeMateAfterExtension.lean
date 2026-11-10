@@ -38,8 +38,7 @@ theorem ScalarLocalization.map_smul_of_map_tmul_heq
       HEq (G.map (c ⊗ₜ[R] g : (⟨K⟩ : ScalarLocalization R C t) ⟶ ⟨L⟩)) (c ⊗ₜ[R] U.map g))
     {K L : ScalarLocalization R C t} (a : Localization.Away t) (h : K ⟶ L) :
     G.map (a • h) = a • G.map h := by
-  induction h using TensorProduct.induction_on with
-  | zero => simp
+  induction h using TensorProduct.inductionOn with
   | tmul c g =>
     have h₁ := (conj_eqToHom_iff_heq _ _ (hobj K) (hobj L)).2 (hmap K.obj L.obj g (a * c))
     have h₂ := (conj_eqToHom_iff_heq _ _ (hobj K) (hobj L)).2 (hmap K.obj L.obj g c)

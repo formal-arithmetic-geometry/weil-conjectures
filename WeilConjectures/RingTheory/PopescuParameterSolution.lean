@@ -262,7 +262,7 @@ theorem exists_popescu_parameter_solution
     exact hηA x
   · let : Algebra (Localization.AtPrime (q.asIdeal.under R)) L :=
       Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply presentation_ringHom_ext P
     · intro x
       change b (θ (algebraMap A B x)) =

@@ -172,7 +172,7 @@ theorem triangularFieldModel_coefficient_descent
   let ev : (MvPolynomial (Fin (d + 1 + (n + 1))) k ⧸ I) →ₐ[k] S :=
     Ideal.Quotient.liftₐ I φ (fun q hq ↦ RingHom.mem_ker.mp (hrel hq))
   have hcoeff : ev.comp psi = (AdjoinRoot.ofAlgHom k g).comp psi₀ := by
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply IsLocalization.ringHom_ext (Submonoid.powers h)
     apply RingHom.ext
     intro r

@@ -56,14 +56,13 @@ private theorem coeff_left (R A : Type u) [CommRing R] [CommRing A] [Algebra R A
   let : IsScalarTower R A M := SMul.comp.isScalarTower (algebraMap R A)
   let : IsScalarTower R A M' := SMul.comp.isScalarTower (algebraMap R A)
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp_all
   | tmul m t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp_all [TensorProduct.tmul_add]
     | tmul a n =>
+      change A at a
       change (a • g m) ⊗ₜ[R] n = g (a • m) ⊗ₜ[R] n
       rw [g.hom.map_smul]
 
@@ -77,12 +76,10 @@ private theorem coeff_right (R A : Type u) [CommRing R] [CommRing A] [Algebra R 
   let : Algebra R A := (algebraMap R A).toAlgebra
   let : Module R M := Module.compHom M (algebraMap R A)
   ext x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy => simp_all
   | tmul m t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp_all [TensorProduct.tmul_add]
     | tmul a n => rfl
 
@@ -180,12 +177,10 @@ private theorem mixed_underlying_ext (R A : Type u)
     HomologicalComplex₂.ι_mapTotalXIso_hom_assoc]
   apply AddCommGrpCat.hom_ext
   ext t
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | add t t' ht ht' => simp_all
   | tmul x t =>
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add t t' ht ht' => simp_all [TensorProduct.tmul_add]
     | tmul c y =>
       change A at c

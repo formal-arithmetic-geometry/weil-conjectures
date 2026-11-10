@@ -339,7 +339,7 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
     obtain ⟨V, g, hw, S, hSf, hSc, z, hz⟩ := exists_supportedSectionsι_app_eq_map F p hF s w
     refine ⟨V, g, ⟨(Sigma.ι G ⟨S, hSf, hSc⟩).hom.app (op V) z, ?_⟩, hw⟩
     rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
-      ← ObjectProperty.FullSubcategory.comp_hom, Sigma.ι_desc]
+      ← ObjectProperty.FullSubcategory.comp_hom, Sigma.ι_comp_desc]
     exact hz
   exact isGloballyGenerated_of_epi_sigmaDesc Λ ψ hG
 

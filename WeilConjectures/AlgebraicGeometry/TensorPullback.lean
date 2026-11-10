@@ -38,8 +38,13 @@ variable {X Y Z : Scheme.{w}} (g : X ⟶ Y)
 
 /-- The ring map `g⁻¹ O_Y → O_X` adjoint to the structure-sheaf map of `g`.
 Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
-def tensorPullbackRingMap : TopCat.Sheaf.inverseImageRing g.base Y.sheaf ⟶ X.sheaf :=
-  (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+def tensorPullbackRingMap : TopCat.Sheaf.inverseImageRing g.base Y.sheaf ⟶ X.sheaf := by
+  have : ∀ (F : (Opens Y)ᵒᵖ ⥤ CommRingCat.{w}),
+      (Opens.map g.base).op.HasLeftKanExtension F := fun F ↦ by
+    have : (Opens.map g.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+    exact Functor.HasLeftKanExtension.mk _
+      (Functor.pointwiseLeftKanExtensionUnit (Opens.map g.base).op F)
+  exact (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (Opens.map g.base) CommRingCat.{w} _ _).homEquiv Y.sheaf X.sheaf |>.symm ⟨g.c⟩
 
 /-- `O_X ⊗_{g⁻¹ O_Y} g⁻¹ M`: change of rings on the explicit abelian inverse image.

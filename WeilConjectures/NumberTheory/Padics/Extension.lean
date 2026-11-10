@@ -174,6 +174,7 @@ noncomputable def valuedOfAlgebra : Valued E ℝ≥0 :=
 
 lemma valuedOfAlgebra_v : (valuedOfAlgebra l E).v = valuationOfAlgebra l E := rfl
 
+
 /-- The ring of integers `𝒪_E` of a subfield `E` of `ℚ̄_ℓ = PadicAlgCl l`: the valuation
 subring of the valuation `PadicAlgCl.valuationOfAlgebra` restricted from `PadicAlgCl l`. -/
 noncomputable def integers : ValuationSubring E :=

@@ -52,6 +52,16 @@ private noncomputable abbrev restriction
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
+private local instance
+    {D : Type uC} [Category.{vC} D] [EssentiallySmall.{u} D]
+    {K : GrothendieckTopology D}
+    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {A : Sheaf K CommRingCat.{u}} (M : SheafOfModules.{u} (ringSheaf A))
+    {X Y : Dᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y)
+      ((ModuleCat.restrictScalars ((ringSheaf A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
 private theorem tensorRestriction_tmul
     {D : Type uC} [Category.{vC} D] [EssentiallySmall.{u} D]
     {K : GrothendieckTopology D}
@@ -476,18 +486,16 @@ private theorem rawPairing_restrict
       ((changeOfRingsPresheaf.{vC, uC, u} c N).map i y) =
     (changeOfRings.{vC, uC, u} c ((monoidalCategory A).tensorObj M N)).val.map i
       (rawPairing c M N W x y) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply]
+  induction x using TensorProduct.inductionOn with
   | add x x' hx hx' => simp only [map_add, LinearMap.add_apply, hx, hx']
   | tmul s m =>
     change B.obj.obj W at s
-    induction y using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction y using TensorProduct.inductionOn with
     | add y y' hy hy' => simp only [map_add, hy, hy']
     | tmul t n =>
       change B.obj.obj W at t
-      rw [tensorRestriction_tmul, tensorRestriction_tmul, rawPairing_tmul,
-        rawPairing_tmul]
+      rw [tensorRestriction_tmul, tensorRestriction_tmul, rawPairing_tmul c,
+        rawPairing_tmul c]
       have h := PresheafOfModules.naturality_apply
         ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf B).obj)).unit.app
           (changeOfRingsPresheaf.{vC, uC, u} c ((monoidalCategory A).tensorObj M N)))
@@ -527,8 +535,7 @@ private theorem tensor_bilinear_exists {C : Type uC} [Category.{vC} C] [Essentia
         ext t
         change TensorProduct.lift (β V) ((F.val ⊗ G.val).map f t) =
           H.val.map f (TensorProduct.lift (β U) t)
-        induction t using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction t using TensorProduct.inductionOn with
         | tmul x y =>
           change β V (F.val.map f x) (G.val.map f y) = H.val.map f (β U x y)
           exact hβ f x y
@@ -725,8 +732,7 @@ private theorem exists_backward
       naturality := by
         intro W V i
         ext x
-        induction x using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction x using TensorProduct.inductionOn with
         | add x y hx hy => simp only [map_add, hx, hy]
         | tmul x y => exact rawPairing_restrict c M N i x y }
   obtain ⟨f, hf⟩ := presheafTensorDescent (B := B) E F H β

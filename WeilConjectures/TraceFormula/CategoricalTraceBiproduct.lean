@@ -131,7 +131,7 @@ theorem traceOrZero_zero {V : C} : traceOrZero (0 : V ⟶ V) = 0 := by
   · let := h.some
     rw [traceOrZero_eq_trace]
     simp [trace]
-  · rw [traceOrZero, dif_neg h]
+  · rw [traceOrZero, dite_eq_right h]
 
 /-- **The trace on a finite biproduct**: the categorical trace of an endomorphism `T` of a finite
 biproduct of dualizable objects `Vᵢ` is the sum of the traces of the diagonal blocks

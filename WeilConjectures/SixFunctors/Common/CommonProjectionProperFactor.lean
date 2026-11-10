@@ -305,6 +305,7 @@ private theorem properFactor_preserved_of_tensor
     SixFunctorCompactifiedSquare.compactification, sixFunctorFactorCompactification,
     middleObject] using hf
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the proper counit factor, including the
 initial support identification, through the canonical tensorator.
 

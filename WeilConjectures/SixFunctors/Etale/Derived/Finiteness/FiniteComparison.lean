@@ -70,7 +70,7 @@ lemma isIso_sheafFiber_map_unit_of_unique {X Y : Scheme.{u}} (ν : Y ⟶ X) [IsF
       ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν).unit.app G)) := by
   have h₁ : IsIso (Etale.stalkRestrict (ModuleCat.{u + 1} Λ) ν x default
       ((ν)^*[ModuleCat.{u + 1} Λ].obj G)) := by
-    rw [← Pi.lift_π (fun t ↦ Etale.stalkRestrict (ModuleCat.{u + 1} Λ) ν x t
+    rw [← Pi.lift_comp_π (fun t ↦ Etale.stalkRestrict (ModuleCat.{u + 1} Λ) ν x t
       ((ν)^*[ModuleCat.{u + 1} Λ].obj G)) default, ← productUniqueIso_hom]
     infer_instance
   obtain ⟨s, hs⟩ : Scheme.Hom.GeometricFiber ν x := default

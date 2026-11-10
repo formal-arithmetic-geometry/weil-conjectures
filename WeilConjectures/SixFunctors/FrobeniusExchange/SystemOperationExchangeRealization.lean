@@ -549,9 +549,9 @@ def systemPullEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (Padic.coefficientExtensionRing l E (n + 1)) f
   letI := sfIntrinsicPullback_preservesFiniteColimits
     (Padic.coefficientExtensionRing l E (n + 1)) f
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (asIso (systemPullEvaluationOrdinaryInv l E f n)) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Direct-image evaluation is the derived adjunction mate of that same pullback map.
 Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/

@@ -649,6 +649,7 @@ lemma higherDirectImageIsoCechResolution_hom_naturality [IsAffine S] [IsSeparate
   rw [hH, IsIso.inv_hom_id_assoc]
   exact hnat
 
+
 end Acyclic
 
 end AlgebraicGeometry.Scheme.Modules

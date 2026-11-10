@@ -219,15 +219,15 @@ private noncomputable def contractMap (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) 
   Pi.lift (fun i ↦ segment T i (φ (ceiling φ i) - i))
 
 private lemma choose_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
-    chooseMap T φ ≫ pr (subTower T φ) n = pr T (φ n) := Pi.lift_π _ _
+    chooseMap T φ ≫ pr (subTower T φ) n = pr T (φ n) := Pi.lift_comp_π _ _
 
 private lemma sum_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
     sumMap T φ ≫ pr (subTower T φ) n =
-      segment T (φ n) (φ (n + 1) - φ n) := Pi.lift_π _ _
+      segment T (φ n) (φ (n + 1) - φ n) := Pi.lift_comp_π _ _
 
 private lemma extend_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (i : ℕ) :
     extendMap T φ ≫ pr T i = pr (subTower T φ) (ceiling φ i) ≫
-      tr T i (φ (ceiling φ i)) (ceiling_le φ i) := Pi.lift_π _ _
+      tr T i (φ (ceiling φ i)) (ceiling_le φ i) := Pi.lift_comp_π _ _
 
 private lemma extend_selected (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
     extendMap T φ ≫ pr T (φ n) = pr (subTower T φ) n := by
@@ -240,10 +240,10 @@ private lemma extend_selected (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ
 private lemma insert_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (i : ℕ) :
     insertMap T φ ≫ pr T i = if i = φ (ceiling φ i) then
       pr (subTower T φ) (ceiling φ i) ≫
-        tr T i (φ (ceiling φ i)) (ceiling_le φ i) else 0 := Pi.lift_π _ _
+        tr T i (φ (ceiling φ i)) (ceiling_le φ i) else 0 := Pi.lift_comp_π _ _
 
 private lemma contract_pr (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (i : ℕ) :
-    contractMap T φ ≫ pr T i = segment T i (φ (ceiling φ i) - i) := Pi.lift_π _ _
+    contractMap T φ ≫ pr T i = segment T i (φ (ceiling φ i) - i) := Pi.lift_comp_π _ _
 
 private lemma square (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
     delta T ≫ sumMap T φ = chooseMap T φ ≫ delta (subTower T φ) := by
@@ -287,7 +287,7 @@ private lemma contract_delta (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
 
 private lemma insert_selected (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ) :
     insertMap T φ ≫ pr T (φ n) = pr (subTower T φ) n := by
-  rw [insert_pr, if_pos (by rw [ceiling_selected])]
+  rw [insert_pr, ite_eq_left (by rw [ceiling_selected])]
   calc
     _ = pr (subTower T φ) n ≫ tr T (φ n) (φ n) le_rfl :=
       sub_pr_tr_eq T φ _ _ (ceiling_selected φ n)
@@ -295,7 +295,7 @@ private lemma insert_selected (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) (n : ℕ
 
 private lemma insert_between (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) {i n : ℕ}
     (hi : φ n < i) (hi' : i < φ (n + 1)) : insertMap T φ ≫ pr T i = 0 := by
-  rw [insert_pr, if_neg]
+  rw [insert_pr, ite_eq_right]
   rw [ceiling_between φ hi hi'.le]
   omega
 
@@ -303,7 +303,7 @@ private lemma sum_insert (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
     insertMap T φ ≫ sumMap T φ = 𝟙 _ := by
   apply Pi.hom_ext
   intro n
-  simp only [Category.assoc, sumMap, Pi.lift_π, Category.id_comp, segment,
+  simp only [Category.assoc, sumMap, Pi.lift_comp_π, Category.id_comp, segment,
     Preadditive.comp_sum]
   rw [Finset.sum_eq_single 0]
   · simp only [Nat.add_zero, insert_selected, tr_self, Category.comp_id]
@@ -337,7 +337,7 @@ private lemma extend_square (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
     · have hlt : i < φ (ceiling φ i) := lt_of_le_of_ne (ceiling_le φ i) hi
       rw [Category.assoc, delta_pr, Preadditive.comp_sub, ← Category.assoc,
         extend_pr, extend_pr, Category.assoc, tr_comp, Category.assoc,
-        insert_pr, if_neg hi, Limits.comp_zero]
+        insert_pr, ite_eq_right hi, Limits.comp_zero]
       exact sub_eq_zero.mpr
         (sub_pr_tr_eq T φ _ _ (ceiling_next φ i hlt).symm)
 
@@ -367,7 +367,7 @@ private lemma delta_contract (T : ℕᵒᵖ ⥤ B) (φ : ℕ ↪o ℕ) :
       abel
     · have hlt : i < φ (ceiling φ i) := lt_of_le_of_ne (ceiling_le φ i) hi
       rw [Preadditive.sub_comp, Category.id_comp, Category.assoc, insert_pr,
-        if_neg hi, Limits.comp_zero, sub_zero]
+        ite_eq_right hi, Limits.comp_zero, sub_zero]
       simp_rw [ceiling_next φ i hlt]
       have hd : φ (ceiling φ i) - i = (φ (ceiling φ i) - (i + 1)) + 1 := by omega
       rw [hd, segment_first]
@@ -390,7 +390,7 @@ private lemma sum_natural {T U : ℕᵒᵖ ⥤ B} (f : T ⟶ U) (φ : ℕ ↪o �
         Pi.π (fun n : ℕ ↦ U.obj (op (φ n))) n =
       (sumMap T φ ≫ Limits.Pi.map (fun n : ℕ ↦ f.app (op (φ n)))) ≫
         Pi.π (fun n : ℕ ↦ U.obj (op (φ n))) n
-    simp only [sumMap, Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc,
+    simp only [sumMap, Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc,
       segment, Preadditive.comp_sum, Preadditive.sum_comp]
     apply Finset.sum_congr rfl
     intro k hk

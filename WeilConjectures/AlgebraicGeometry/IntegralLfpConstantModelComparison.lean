@@ -287,7 +287,7 @@ private theorem comparison_of_local_models
   classical
   have hqcqs : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   change IsConstructibleModuleObject (condensedRingObj Λ X) M ↔ _
-  rw [IsConstantModelConstructible, if_pos hqcqs]
+  rw [IsConstantModelConstructible, ite_eq_left hqcqs]
   constructor
   · intro hM
     obtain ⟨S, hS⟩ := hM

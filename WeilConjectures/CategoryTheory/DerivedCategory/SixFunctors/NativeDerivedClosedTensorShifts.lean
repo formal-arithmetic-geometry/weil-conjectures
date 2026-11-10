@@ -251,7 +251,7 @@ private theorem nativeDerivedClosedTensorShift_left_normalization :
   simp only [Functor.uncurry_obj_map, Functor.comp_obj, curriedTensor_obj_map,
     curriedTensor_map_app, Functor.flip_obj_map, Functor.flip_obj_obj, curriedTensor_obj_obj,
     MonoidalCategory.whiskerLeft_id, Category.comp_id] at he ⊢
-  convert he using 1 <;> rfl
+  convert he using 1
 
 private theorem nativeDerivedClosedTensorShift_right_normalization :
     ∀ (X : CochainComplex C ℤ) (Z : CochainComplex C ℤ) (b : ℤ),
@@ -285,7 +285,7 @@ private theorem nativeDerivedClosedTensorShift_right_normalization :
   simp only [Functor.uncurry_obj_map, Functor.comp_obj, curriedTensor_obj_map,
     curriedTensor_map_app, curriedTensor_obj_obj,
     MonoidalCategory.id_whiskerRight, Category.id_comp] at he ⊢
-  convert he using 1 <;> rfl
+  convert he using 1
 
 end NativeTensorCoherence
 

@@ -575,7 +575,7 @@ private theorem brown_squareFactors
         r.mapDerivedCategoryFactors.hom.app ((Fp.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex hF (.up ℤ)).hom.app K) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).inv.app
     (DerivedCategory.Q.obj K))).mp
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app]
@@ -584,7 +584,7 @@ private theorem brown_squareFactors
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rfl
 
 end SquareFactors

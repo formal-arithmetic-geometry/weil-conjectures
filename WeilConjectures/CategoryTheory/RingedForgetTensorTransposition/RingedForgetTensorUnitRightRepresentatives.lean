@@ -124,7 +124,7 @@ private theorem right_unit_of_models
     CoefficientClosedStructure.tensor, tensor_map]
   rw [← MonoidalCategory.rightUnitor_naturality]
   simp only [← tensorHom_id, tensorHom_comp_tensorHom_assoc,
-    Iso.map_inv_hom_id_assoc, Category.comp_id, Category.id_comp]
+    Iso.inv_hom_id_map_assoc, Category.comp_id, Category.id_comp]
   have hh := congrArg (fun f ↦ f ≫ (𝟙 P' ⊗ₘ uA.inv) ≫ (ρ_ P').hom) hm
   simp only [CoefficientClosedStructure.tensor, tensor_map, Category.assoc,
     tensorHom_comp_tensorHom_assoc, Category.comp_id] at hh

@@ -202,7 +202,7 @@ theorem exists_marked_curve_diagram_restriction
       exact pullback.condition)
   let ν' : (∐ Y') ⟶ pullback f (g' ≫ U'.ι) := Sigma.desc v'
   have hνcomm (i : Fin n) : Sigma.ι Y' i ≫ ν' ≫ F' = j' i ≫ p' i ≫ t' i := by
-    simp only [ν', Sigma.ι_desc_assoc, v', IsPullback.lift_snd]
+    simp only [ν', Sigma.ι_comp_desc_assoc, v', IsPullback.lift_snd]
     exact (hjT i).symm
   have HY (i : Fin n) : IsPullback (aY i) (r' i) (j i ≫ p i ≫ t i) aV :=
     .of_hasPullback _ _
@@ -217,7 +217,7 @@ theorem exists_marked_curve_diagram_restriction
     have he : Sigma.desc (fun i ↦ Sigma.ι Y i ≫ ν) = ν := by
       apply Sigma.hom_ext
       intro i
-      exact Sigma.ι_desc _ _
+      exact Sigma.ι_comp_desc _ _
     simpa only [he] using H
   have hνfinite : IsFinite ν' := MorphismProperty.of_isPullback Hν inferInstance
   have hνsurjective : Surjective ν' := MorphismProperty.of_isPullback Hν inferInstance
@@ -240,7 +240,7 @@ theorem exists_marked_curve_diagram_restriction
     obtain ⟨y', hya, hys⟩ := Scheme.exists_preimage_of_isPullback (hjp i) y.1 s hy
     have hymem : y' ∈ (Sigma.ι Y' i ≫ ν') ⁻¹ᵁ W' := by
       change ((Sigma.ι Y' i ≫ ν') ≫ aX) y' ∈ W
-      simp only [ν', Sigma.ι_desc]
+      simp only [ν', Sigma.ι_comp_desc]
       rw [(Hνi i).w.symm]
       have hyW : (Sigma.ι Y i ≫ ν) y.1 ∈ W := y.2
       simpa only [Scheme.Hom.comp_apply, hya] using hyW

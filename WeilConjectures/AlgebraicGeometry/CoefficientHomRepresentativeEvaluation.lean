@@ -70,6 +70,7 @@ private theorem coefficientHomComponent_eq_native
       homTensorCurryProjection R L M n p q h := by
   rfl
 
+
 end NativeProjection
 
 section ClosedRepresentatives

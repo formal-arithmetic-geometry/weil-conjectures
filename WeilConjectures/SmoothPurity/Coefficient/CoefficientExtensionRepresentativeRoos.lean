@@ -9,6 +9,7 @@ public import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionReduc
 import WeilConjectures.SmoothPurity.Coefficient.CoefficientConstantTowerRoosComparisonSupplement
 import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionRestrictedTower
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMateIsIso
 
 /-! # Roos comparison of strict coefficient-extension representatives
 
@@ -153,18 +154,18 @@ private theorem derivedEvaluationFactors
           ((Functor.mapHomologicalComplexCompIso (Iso.refl (U ⋙ V)) (.up ℤ) ≪≫
             NatIso.mapHomologicalComplex a (.up ℤ) ≪≫
             (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm).hom.app X) =
-      ((Functor.mapDerivedCategoryCompIso U V).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso U V ≪≫
           Functor.mapDerivedCategoryNatIso a ≪≫
-          Functor.mapDerivedCategoryCompIso F R).hom.app (DerivedCategory.Q.obj X) ≫
+          (Functor.mapDerivedCategoryCompIso F R).symm).hom.app (DerivedCategory.Q.obj X) ≫
         R.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app X) ≫
         R.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj X) := by
   have h := Functor.mapDerivedCategoryNatIso_fac a X
   dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   erw [Category.assoc, Category.assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U V).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso U V).inv.app
     (DerivedCategory.Q.obj X))).1
-  erw [Iso.hom_inv_id_app_assoc]
+  erw [Iso.inv_hom_id_app_assoc]
   erw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   have hi : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).inv.app X =
       𝟙 _ := by
@@ -188,11 +189,11 @@ private theorem restrictedEvaluation_factors
           ((coefficientSequenceEvaluation l L W n).mapDerivedCategoryFactors.hom.app X) ≫
         (scalarReductionRestriction l L W n).mapDerivedCategoryFactors.hom.app
           (((coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ)).obj X) := by
-  exact derivedEvaluationFactors
-    (coefficientSequenceRestriction l L W)
-    ((evaluation ℕᵒᵖ (scalarReductionSource l L W)).obj (op n))
-    (coefficientSequenceEvaluation l L W n) (scalarReductionRestriction l L W n)
-    (eqToIso (coefficientSequenceRestriction_evaluation l L W n)) X
+  simp only [coefficientRestrictedEvaluationIso,
+    coefficientRestrictedComplexEvaluation, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.mapHomologicalComplexCompIso_refl_hom_app, Category.id_comp]
+  exact (Functor.mapDerivedCategorySquareIso_hom_app_Q_obj
+      (eqToIso (coefficientSequenceRestriction_evaluation l L W n)) X).symm
 
 private theorem projection_naturality
     {S T V U : Type*} [Category S] [Category T] [Category V] [Category U]

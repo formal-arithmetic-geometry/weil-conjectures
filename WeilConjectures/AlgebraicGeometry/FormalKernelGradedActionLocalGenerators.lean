@@ -28,6 +28,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private noncomputable local instance restrictedSectionModule {X : Scheme.{u}}
+    (M : X.Modules) {U V : X.Opens} (i : U ⟶ V) :
+    Module Γ(X, U)
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map i.op).hom).obj
+        (M.val.obj (op U))) :=
+  inferInstanceAs (Module Γ(X, U) (M.val.obj (op U)))
+
 -- Iterate the error term until the annihilating ideal power makes it vanish.
 private theorem span_eq_top_of_nilpotent_error {R N : Type u} [CommRing R]
     [AddCommGroup N] [Module R N] (J : Ideal R) (L : Submodule R N)
@@ -116,10 +123,7 @@ private theorem affine_restriction_span {X : Scheme.{u}} (G : X.Modules)
   intro z hz
   clear hz
   obtain ⟨q, rfl⟩ := hc.2 z
-  induction q using TensorProduct.induction_on with
-  | zero =>
-    rw [map_zero]
-    exact Submodule.zero_mem _
+  induction q using TensorProduct.inductionOn with
   | tmul x b =>
     rw [ht]
     apply Submodule.smul_mem

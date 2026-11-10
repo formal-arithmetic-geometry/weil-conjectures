@@ -14,6 +14,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
@@ -48,6 +49,7 @@ import all Mathlib.AlgebraicGeometry.Sites.Proetale
 import all Mathlib.CategoryTheory.Sites.ConstantSheaf
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.RingedSiteModules
 import all Mathlib.Algebra.Category.Ring.Colimits
 import all Mathlib.FieldTheory.IsAlgClosed.Basic
@@ -120,7 +122,7 @@ import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import Mathlib.CategoryTheory.Sites.Sheafification
@@ -260,7 +262,7 @@ private theorem flatModel_exists_ordered_refinement
     · intro hx
       obtain ⟨r, hr⟩ := Set.mem_iUnion.mp hx
       by_cases hkr : k ≤ r
-      · rw [if_pos hkr] at hr
+      · rw [ite_eq_left hkr] at hr
         exact fun hk ↦ hr.2 (hmono (show k.castSucc ≤ r.castSucc by
           simp only [Fin.le_def, Fin.val_castSucc, Fin.val_succ] at *
           omega) hk)
@@ -273,7 +275,7 @@ private theorem flatModel_exists_ordered_refinement
         exact hx (hmono (show r.succ ≤ k.castSucc by
           simp only [Fin.le_def, Fin.val_castSucc, Fin.val_succ] at *
           omega) hr.1)
-      exact Set.mem_iUnion.mpr ⟨r, by simpa only [if_pos hkr] using hr⟩
+      exact Set.mem_iUnion.mpr ⟨r, by simpa only [ite_eq_left hkr] using hr⟩
   have hclosed (k : Fin m) :
       IsClosed (⋃ r : Fin m, if k ≤ r then D r else ∅) := by
     rw [htail]
@@ -402,14 +404,15 @@ private theorem flatModel_etale_ordered_filtration
         ext x
         simp only [T, Set.mem_iUnion, Set.mem_empty_iff_false, iff_false, not_exists]
         intro k
-        simp only [if_neg (by omega : ¬r.val ≤ k.val), Set.mem_empty_iff_false, not_false_eq_true]
+        simp only [ite_eq_right (by omega : ¬r.val ≤ k.val), Set.mem_empty_iff_false,
+          not_false_eq_true]
       rw [he]
       exact isClosed_empty
   let U (r : Fin (str.n + 1)) : X.Opens := ⟨(T r)ᶜ, (hT r).isOpen_compl⟩
   have hU0 : U 0 = ⊥ := by
     apply TopologicalSpace.Opens.ext
     change (⋃ k : Fin str.n, if (0 : ℕ) ≤ k.val then str.stratum k else ∅)ᶜ = ∅
-    simp only [Nat.zero_le, if_true, str.iUnion_stratum_eq_univ, Set.compl_univ]
+    simp only [Nat.zero_le, ite_true, str.iUnion_stratum_eq_univ, Set.compl_univ]
   have hUn : U (Fin.last str.n) = ⊤ := by
     apply TopologicalSpace.Opens.ext
     ext x
@@ -418,9 +421,9 @@ private theorem flatModel_etale_ordered_filtration
     intro r s hrs x hx hs
     obtain ⟨k, hk⟩ := Set.mem_iUnion.mp hs
     by_cases hsk : s.val ≤ k.val
-    · rw [if_pos hsk] at hk
+    · rw [ite_eq_left hsk] at hk
       exact hx (Set.mem_iUnion.mpr ⟨k, by
-        rw [if_pos (show r.val ≤ k.val from (Fin.le_def.mp hrs).trans hsk)]
+        rw [ite_eq_left (show r.val ≤ k.val from (Fin.le_def.mp hrs).trans hsk)]
         exact hk⟩)
     · simp [hsk] at hk
   have hdiff (k : Fin str.n) :
@@ -434,12 +437,12 @@ private theorem flatModel_etale_ordered_filtration
       obtain ⟨j, hj⟩ := Set.mem_iUnion.mp ht
       change x ∈ if k.val ≤ j.val then str.stratum j else ∅ at hj
       by_cases hkj : k.val ≤ j.val
-      · rw [if_pos hkj] at hj
+      · rw [ite_eq_left hkj] at hj
         have hjk : j = k := by
           apply Fin.ext
           by_contra h
           exact hx (Set.mem_iUnion.mpr ⟨j, by
-            rw [if_pos (show k.succ.val ≤ j.val by simp only [Fin.val_succ]; omega)]
+            rw [ite_eq_left (show k.succ.val ≤ j.val by simp only [Fin.val_succ]; omega)]
             exact hj⟩)
         simpa [hjk] using hj
       · simp [hkj] at hj
@@ -449,7 +452,7 @@ private theorem flatModel_etale_ordered_filtration
         obtain ⟨j, hj⟩ := Set.mem_iUnion.mp ht
         change x ∈ if k.val + 1 ≤ j.val then str.stratum j else ∅ at hj
         by_cases hkj : k.val + 1 ≤ j.val
-        · rw [if_pos hkj] at hj
+        · rw [ite_eq_left hkj] at hj
           exact (Set.disjoint_left.mp (str.pairwise_disjoint_stratum (by
             intro h; subst j; omega))) hx hj
         · simp [hkj] at hj

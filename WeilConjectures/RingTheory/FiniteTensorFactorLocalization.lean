@@ -177,8 +177,7 @@ theorem exists_flat_tensor_factor_localization
   have hsurj : Function.Surjective (algebraMap C (S ⧸ KC)) := by
     intro y
     obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective y
-    induction t using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero _⟩
+    induction t using TensorProduct.inductionOn with
     | tmul a b =>
         obtain ⟨d, hd⟩ := hgen b
         refine ⟨a * d, ?_⟩

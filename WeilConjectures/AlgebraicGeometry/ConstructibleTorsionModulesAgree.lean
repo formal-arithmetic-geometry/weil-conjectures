@@ -40,7 +40,7 @@ private instance cyclicForgetFull (n : ℕ) :
     refine ⟨ModuleCat.ofHom { φ with map_smul' := ?_ }, rfl⟩
     intro r x
     obtain ⟨a, ha⟩ := ZMod.intCast_surjective r.down
-    have hr : r = (a : ULift.{v + 1} (ZMod n)) := ULift.ext _ _ ha.symm
+    have hr : r = (a : ULift.{v + 1} (ZMod n)) := ULift.ext ha.symm
     change φ (r • x) = r • φ x
     rw [hr, Int.cast_smul_eq_zsmul, Int.cast_smul_eq_zsmul]
     exact map_zsmul φ a x

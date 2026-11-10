@@ -146,9 +146,8 @@ theorem exists_baseTensorCohomologyFunctor (i : ℤ) :
       have : QuasiIso f := hf
       infer_instance
     have hfD : IsIso (F.map f) := by
-      change IsIso (DerivedCategory.Q.map
-        (((restrictScalars (algebraMap R A)).mapHomologicalComplex (.up ℤ)).map f))
-      exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hfR
+      exact (DerivedCategory.isIso_Qh_map_iff _).2
+        ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hfR)
     have := hciso P P'
     have hh : IsIso (G.map (g P P' f) ≫ ((m P').cohomologyIso i).hom) := by
       rw [hg]

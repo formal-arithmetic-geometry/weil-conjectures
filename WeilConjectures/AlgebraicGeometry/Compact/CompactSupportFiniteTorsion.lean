@@ -60,7 +60,7 @@ noncomputable def compactSupportProperOpenRefinementMap
 
 -- Retain the chosen-resolution interfaces while elaborating the private proofs.
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategoryPlus
-  CategoryTheory.Functor.rightDerivedFunctorPlus lowerStar upperStar
+  lowerStar upperStar
   properOpenComparison properOpenIdentification
   CategoryTheory.Functor.rightDerivedFunctorPlusCompIso' properOpenDirectImageCompIso
 

@@ -32,6 +32,7 @@ lemma ofSequence_map_of_isMultiplicative {C : Type*} [Category C] {X : ℕ → C
     · apply ih
     · simp [H]
 
+
 lemma ofOpSequence_map_of_isMultiplicative {C : Type*} [Category C] {X : ℕ → C}
     (f : (n : ℕ) → X (n + 1) ⟶ X n) {m n : ℕ} (hle : m ≤ n) (P : MorphismProperty C)
     [P.IsMultiplicative] (H : ∀ n, P (f n)) :

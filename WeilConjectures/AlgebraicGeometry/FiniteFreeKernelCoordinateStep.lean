@@ -98,7 +98,7 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
     cases i with
     | none => simp [r, t, s, SheafOfModules.ιFree]
     | some i =>
-      simp only [r, t, SheafOfModules.ιFree, Sigma.ι_desc, zero_comp, add_zero,
+      simp only [r, t, SheafOfModules.ιFree, Sigma.ι_comp_desc, zero_comp, add_zero,
         Category.comp_id]
       exact SheafOfModules.ιFree_freeMap some i
   have : Mono inc := mono_of_mono_fac hir

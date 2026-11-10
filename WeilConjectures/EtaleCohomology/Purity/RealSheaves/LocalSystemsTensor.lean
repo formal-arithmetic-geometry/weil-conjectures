@@ -269,8 +269,7 @@ def Scheme.IsFiniteLocallyConstantSheaf.galoisRepTensorEquiv
     let e := (Scheme.sheafFiberTensorIso' s F₁ F₂).toLinearEquiv
     have key (t) : hT.galoisRep s G g (e.symm t) =
         e.symm ((h₁.galoisRep s G).tprod (h₂.galoisRep s G) g t) := by
-      induction t using TensorProduct.induction_on with
-      | zero => simp
+      induction t using TensorProduct.inductionOn with
       | tmul x y =>
         rw [Representation.tprod_apply, TensorProduct.map_tmul]
         exact galoisAct_sheafFiberTensorIso'_inv_tmul s G g h₁ h₂ hT x y

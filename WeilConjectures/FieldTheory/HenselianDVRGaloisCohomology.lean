@@ -275,6 +275,7 @@ theorem finite_H_one_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) �
   have : Finite (DiscreteModule.fixedAddSubgroup M χ.toMonoidHom.ker) := Subtype.finite
   exact Finite.of_equiv _ (h.HOneAddEquiv hM).symm.toEquiv
 
+
 variable (R) in
 /-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation.
 
@@ -302,5 +303,6 @@ theorem finite_H_one_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) 
     (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) [Finite M.obj.V] :
     Finite (DiscreteModule.H Gal(Ω/F) M 1) :=
   finite_H_one_galois_of_natCast_ne_zero R (natCast_ne_zero_of_ne hp hℓp) M hM
+
 
 end IsDiscreteValuationRing

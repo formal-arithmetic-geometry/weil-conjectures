@@ -177,7 +177,7 @@ theorem mateEquiv_leftDerived_inv_eq (adj₁ : E₁ ⊣ R₁) (adj₂ : E₂ ⊣
   erw [hε₂ ((H.mapHomotopyCategory (.up ℤ)).obj K)]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Category.assoc] at hB
-  dsimp at hκ hβ hl
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at hκ hβ hl
   simp only [← Functor.map_comp_assoc]
   rw [hΓK]
   simp only [Functor.map_comp, Category.assoc]

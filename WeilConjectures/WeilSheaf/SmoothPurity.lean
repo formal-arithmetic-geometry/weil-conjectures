@@ -96,7 +96,6 @@ variable [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l f]
 
-set_option linter.style.longLine false in
 /-- **Frobenius equivariance of the orientation of a smooth morphism** (blueprint:
 `thm-pur-weil-equivariance-of-purity-and-trace`, the purity square at `K = ℚ̄_ℓ`): for a smooth
 separated morphism `f : X ⟶ Y` of pure relative dimension `d`, there is an isomorphism

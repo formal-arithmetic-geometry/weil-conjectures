@@ -51,8 +51,7 @@ private theorem tensor_projection_kernel {R : Type*} [CommRing R]
     apply le_antisymm
     · apply sup_le
       · rintro _ ⟨z, rfl⟩
-        induction z using TensorProduct.induction_on with
-        | zero => simpa only [map_zero] using (I • (⊤ : Submodule R (TensorProduct R M N))).zero_mem
+        induction z using TensorProduct.inductionOn with
         | tmul x y =>
           change TensorProduct.tmul R x y.val ∈ I • ⊤
           have hy : y.val ∈ I • (⊤ : Submodule R N) := by
@@ -68,8 +67,7 @@ private theorem tensor_projection_kernel {R : Type*} [CommRing R]
           rw [map_add]
           exact Submodule.add_mem _ hx hy
       · rintro _ ⟨z, rfl⟩
-        induction z using TensorProduct.induction_on with
-        | zero => simpa only [map_zero] using (I • (⊤ : Submodule R (TensorProduct R M N))).zero_mem
+        induction z using TensorProduct.inductionOn with
         | tmul x y =>
           change TensorProduct.tmul R x.val y ∈ I • ⊤
           have hx : x.val ∈ I • (⊤ : Submodule R M) := by
@@ -87,8 +85,7 @@ private theorem tensor_projection_kernel {R : Type*} [CommRing R]
     · apply Submodule.smul_le.mpr
       intro a ha z hz
       clear hz
-      induction z using TensorProduct.induction_on with
-      | zero => rw [smul_zero]; exact Submodule.zero_mem _
+      induction z using TensorProduct.inductionOn with
       | tmul x y =>
         refine (le_sup_right : (LinearMap.rTensor N f.ker.subtype).range ≤ _) ?_
         refine ⟨TensorProduct.tmul R ⟨a • x, ?_⟩ y, ?_⟩
@@ -550,18 +547,15 @@ private theorem scalar_tensor_comparison
   intro g w
   rw [tensorAction_eq]
   change β (TensorProduct.map (X'.ρ g) (Z'.ρ g) w) = W'.ρ g (β w)
-  induction w using TensorProduct.induction_on with
-  | zero => simp
+  induction w using TensorProduct.inductionOn with
   | add w w' hw hw' => simp only [map_add, hw, hw']
   | tmul x z =>
       obtain ⟨x, rfl⟩ := ηF.surjective x
       obtain ⟨z, rfl⟩ := ηH.surjective z
-      induction x using TensorProduct.induction_on with
-      | zero => simp
+      induction x using TensorProduct.inductionOn with
       | add x x' hx hx' => simp only [map_add, TensorProduct.add_tmul, hx, hx']
       | tmul a x =>
-          induction z using TensorProduct.induction_on with
-          | zero => simp
+          induction z using TensorProduct.inductionOn with
           | add z z' hz hz' => simp only [map_add, TensorProduct.tmul_add, hz, hz']
           | tmul b z =>
               rw [TensorProduct.map_tmul,
@@ -587,8 +581,7 @@ private theorem scalar_unit_comparison (X : Rep.{u + 1} R G) (X' : Rep.{u + 1} E
   apply LinearMap.ext
   intro z
   obtain ⟨z, rfl⟩ := η.surjective z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [map_add, hz, hw]
   | tmul a z =>
       change β (X'.ρ g (η (a ⊗ₜ[R] z))) = β (η (a ⊗ₜ[R] z))
@@ -1132,6 +1125,9 @@ private theorem rational_abelian :
   intro E
   let := (hR E).some
   let := Preadditive.ofFullyFaithful (d.eR E).fullyFaithfulFunctor
+  let (J : ℕ) : HasLimitsOfShape (Discrete (Fin J))
+      (galoisCoefficientRepresentations l E.val d.P d.δ) :=
+    @HasFiniteProducts.out _ _ Abelian.has_finite_products J
   let : HasFiniteProducts (LisseRationalSheaf l E.val Y) :=
     ⟨fun J ↦ Adjunction.hasLimitsOfShape_of_equivalence (d.eR E).functor⟩
   exact ⟨abelianOfEquivalence (d.eR E).functor⟩

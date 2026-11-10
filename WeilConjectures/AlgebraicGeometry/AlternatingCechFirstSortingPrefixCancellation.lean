@@ -46,7 +46,7 @@ private theorem prefix_nonjunction {p : ℕ}
   intro h
   have hd : r.val ≤ a.val := le_of_lt hr
   have he : σ ⟨r.val, lt_trans hr a.isLt⟩ = σ a := by
-    simpa only [cechJunction, dif_pos hd] using h
+    simpa only [cechJunction, dite_eq_left hd] using h
   have hv : r.val = a.val := congrArg Fin.val (σ.injective he)
   omega
 
@@ -75,7 +75,7 @@ private theorem junction_restrict (p : ℕ)
   · have hd : (r.castSucc.succAbove k).val ≤ a.val := by
       simp only [Fin.succAbove]
       split <;> simp only [Fin.lt_def, Fin.val_castSucc, Fin.val_succ] at * <;> omega
-    simp only [Function.comp_apply, cechJunction, dif_pos hk, dif_pos hd]
+    simp only [Function.comp_apply, cechJunction, dite_eq_left hk, dite_eq_left hd]
     convert hσ ⟨k.val, by omega⟩ using 1
     congr 1
     apply Fin.ext
@@ -88,7 +88,7 @@ private theorem junction_restrict (p : ℕ)
       rw [Fin.succAbove_of_le_castSucc _ _ (le_of_not_gt hkr)]
       simp only [Fin.val_succ]
       omega
-    simp only [Function.comp_apply, cechJunction, dif_neg hk, dif_neg hd]
+    simp only [Function.comp_apply, cechJunction, dite_eq_right hk, dite_eq_right hd]
     convert hτ ⟨k.val - 1, by omega⟩ using 1
     congr 1
     apply Fin.ext

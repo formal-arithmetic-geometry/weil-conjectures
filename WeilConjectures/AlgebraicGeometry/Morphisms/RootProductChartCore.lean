@@ -97,8 +97,7 @@ theorem rootProductChart_stalk_localization_core {Z : Scheme.{u}}
       (Spec (CommRingCat.of (A k))).presheaf.stalk w :=
     RingEquiv.ofBijective (t.stalkMap w).hom (ConcreteCategory.bijective_of_isIso _)
   refine ⟨k, f₀, hf₀, P, hP, s.trans θ, ?_⟩
-  have hs : s.toRingHom = (t.stalkMap w).hom := by ext r; rfl
-  rw [RingEquiv.toRingHom_trans, RingHom.comp_assoc, hs]
+  change θ.toRingHom.comp ((t.stalkMap w).hom.comp (q.stalkMap (t w)).hom) = _
   exact (congrArg (fun h ↦ θ.toRingHom.comp h) (stalkMap_comp_hom t q w).symm).trans hθ
 
 end AlgebraicGeometry.Scheme

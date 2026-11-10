@@ -196,9 +196,9 @@ theorem integralClosure_isDedekind_surjective_finite_fibres
       · apply Set.Subsingleton.finite
         intro x hx z hz
         apply PrimeSpectrum.ext
-        have hx0 : x.asIdeal = ⊥ := Ideal.eq_bot_of_comap_eq_bot
+        have hx0 : x.asIdeal = ⊥ := Ideal.eq_bot_of_under_eq_bot
           ((congrArg PrimeSpectrum.asIdeal (Set.mem_singleton_iff.mp hx)).trans hy)
-        have hz0 : z.asIdeal = ⊥ := Ideal.eq_bot_of_comap_eq_bot
+        have hz0 : z.asIdeal = ⊥ := Ideal.eq_bot_of_under_eq_bot
           ((congrArg PrimeSpectrum.asIdeal (Set.mem_singleton_iff.mp hz)).trans hy)
         exact hx0.trans hz0.symm
       · have : y.asIdeal.IsMaximal := y.isPrime.isMaximal_of_ne_bot hy
@@ -217,7 +217,7 @@ theorem integralClosure_isDedekind_surjective_finite_fibres
     change (Ideal.ResidueField.map (q.comap (algebraMap A C)) q
       (algebraMap A C) rfl).Finite
     by_cases hp : q.comap (algebraMap A C) = ⊥
-    · have hq : q = ⊥ := Ideal.eq_bot_of_comap_eq_bot hp
+    · have hq : q = ⊥ := Ideal.eq_bot_of_under_eq_bot hp
       have : IsFractionRing C q.ResidueField := isFractionRing_residueField_of_eq_bot q hq
       have : IsFractionRing A (q.comap (algebraMap A C)).ResidueField :=
         isFractionRing_residueField_of_eq_bot _ hp

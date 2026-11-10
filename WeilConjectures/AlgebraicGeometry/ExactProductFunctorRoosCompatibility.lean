@@ -84,7 +84,7 @@ private theorem cofiber_snd {T : CochainComplex A ℤ} (a : T ⟶ T)
     (homotopyCofiber.XIsoBiprod a p j hpj).hom ≫ biprod.snd =
       homotopyCofiber.sndX a p := by
   obtain rfl := (ComplexShape.up ℤ).next_eq' hpj
-  simp only [homotopyCofiber.sndX, dif_pos hpj]
+  simp only [homotopyCofiber.sndX, dite_eq_left hpj]
 
 private theorem compatCoords_snd (i : ℤ) :
     (compatCoords a i).hom ≫ biprod.snd =
@@ -556,8 +556,8 @@ theorem exactProductFunctorRoosCompatibility
       intro n
       change (Pi.lift gamma ≫ (𝟙 _ - towerProductShift _)) ≫ Pi.π _ n = 0 ≫ Pi.π _ n
       rw [Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-        Pi.lift_π, Category.assoc, towerProductShift, Pi.lift_π, ← Category.assoc,
-        Pi.lift_π, hgamma, sub_self, zero_comp]
+        Pi.lift_comp_π, Category.assoc, towerProductShift, Pi.lift_comp_π, ← Category.assoc,
+        Pi.lift_comp_π, hgamma, sub_self, zero_comp]
     let gamma' : ∀ n : ℕ, Fc.obj Q ⟶ (Ft.obj X).asFunctor.obj (op n) :=
       fun n ↦ Fc.map (gamma n)
     have hf' : Pi.lift gamma' ≫ ab (Ft.obj X) = 0 := by
@@ -570,8 +570,8 @@ theorem exactProductFunctorRoosCompatibility
         rw [← Fc.map_comp, hgamma]
       change (Pi.lift gamma' ≫ (𝟙 _ - towerProductShift _)) ≫ Pi.π _ n = 0 ≫ Pi.π _ n
       rw [Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-        Pi.lift_π, Category.assoc, towerProductShift, Pi.lift_π, ← Category.assoc,
-        Pi.lift_π, hg, sub_self, zero_comp]
+        Pi.lift_comp_π, Category.assoc, towerProductShift, Pi.lift_comp_π, ← Category.assoc,
+        Pi.lift_comp_π, hg, sub_self, zero_comp]
     obtain ⟨b, hb⟩ := compatAugmentMaps (a X) (HA.obj X) (hAobj X) (chiA X)
       (hcA X) (Pi.lift gamma) hf
     obtain ⟨b', hb'⟩ := compatAugmentMaps (ab (Ft.obj X)) (HB.obj (Ft.obj X))
@@ -581,7 +581,7 @@ theorem exactProductFunctorRoosCompatibility
       intro n
       rw [Category.assoc, hpsi]
       change Fc.map (Pi.lift gamma) ≫ Fc.map _ = _
-      rw [← Fc.map_comp, Pi.lift_π, Pi.lift_π]
+      rw [← Fc.map_comp, Pi.lift_comp_π, Pi.lift_comp_π]
     have hmap : Fc.map b ≫ (kappa X).hom = b' := by
       apply HomologicalComplex.Hom.ext
       funext i

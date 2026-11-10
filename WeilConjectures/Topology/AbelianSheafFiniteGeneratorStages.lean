@@ -88,7 +88,7 @@ theorem abelianSheaf_finiteGenerator_stages
   have hq {i k : Finset S} (h : i ⟶ k) : q h ≫ p k = p i := by
     apply Sigma.hom_ext
     intro j
-    simp only [q, p, Sigma.ι_desc_assoc, Category.assoc, Sigma.ι_desc]
+    simp only [q, p, Sigma.ι_comp_desc_assoc, Category.assoc, Sigma.ι_comp_desc]
     exact transport (by simp [a])
   let dmap {i k : Finset S} (h : i ⟶ k) : image (p i) ⟶ image (p k) :=
     image.lift
@@ -128,7 +128,7 @@ theorem abelianSheaf_finiteGenerator_stages
         factorThruImage (p i)
     have hl : l ≫ c.app i = φ b := by
       dsimp only [l, c]
-      simp only [Category.assoc, image.fac, p, Sigma.ι_desc]
+      simp only [Category.assoc, image.fac, p, Sigma.ι_comp_desc]
       exact transport hj.symm
     refine ⟨i, (Presheaf.stalkFunctor AddCommGrpCat.{u} x).map l.hom z, ?_⟩
     have hh := congrArg (fun f ↦ (Presheaf.stalkFunctor AddCommGrpCat.{u} x).map f.hom z) hl

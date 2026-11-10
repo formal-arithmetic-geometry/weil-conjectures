@@ -72,10 +72,10 @@ private theorem inclusion_comp_inv
     [PreservesFiniteLimits W] [PreservesFiniteColimits W]
     (K : DerivedCategory.Plus B) :
     DerivedCategory.Plus.ι.map ((Functor.mapDerivedCategoryPlusCompIso V W).inv.app K) =
-      (Functor.mapDerivedCategoryCompIso V W).inv.app K.obj := by
+      (Functor.mapDerivedCategoryCompIso V W).hom.app K.obj := by
   exact congrArg Iso.inv (show DerivedCategory.Plus.ι.mapIso
     ((Functor.mapDerivedCategoryPlusCompIso V W).app K) =
-    (Functor.mapDerivedCategoryCompIso V W).app K.obj from
+    (Functor.mapDerivedCategoryCompIso V W).symm.app K.obj from
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app V W K))
 
 end AlgebraicGeometry.ProEtale

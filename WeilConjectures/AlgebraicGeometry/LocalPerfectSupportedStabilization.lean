@@ -163,8 +163,8 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
         Functor.rightUnitor L
     let cD : A.functor.mapDerivedCategory.obj
         (H.mapDerivedCategory.obj (G.mapDerivedCategory.obj R)) ≅ L.mapDerivedCategory.obj R :=
-      A.functor.mapDerivedCategory.mapIso ((Functor.mapDerivedCategoryCompIso G H).symm.app R) ≪≫
-        (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).symm.app R ≪≫
+      A.functor.mapDerivedCategory.mapIso ((Functor.mapDerivedCategoryCompIso G H).app R) ≪≫
+        (Functor.mapDerivedCategoryCompIso (G ⋙ H) A.functor).app R ≪≫
         (Functor.mapDerivedCategoryNatIso c).app R
     let ed := A.mapDerivedCategory
     exact ⟨ed.unitIso.app _ ≪≫ ed.inverse.mapIso (cD ≪≫ eK₀) ≪≫

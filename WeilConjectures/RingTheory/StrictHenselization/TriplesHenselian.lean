@@ -304,7 +304,7 @@ monic polynomial over `C` lifts (`EtaleTriple.exists_isRoot_and_eval_eq`).
 
 (blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
 instance henselianLocalRing_colim : HenselianLocalRing (colim R p K) := by
-  refine ((HenselianLocalRing.TFAE _).out 1 0).mp fun f hf a₀ h₁ h₂ ↦ ?_
+  refine ((HenselianLocalRing.TFAE _).out 2 1).mp fun f hf a₀ h₁ h₂ ↦ ?_
   let e : ResidueField (colim R p K) ≃+* K := residueFieldEquiv
   have he : (e : ResidueField (colim R p K) →+* K).comp (residue _) = (eval R p K).toRingHom :=
     RingHom.ext fun _ ↦ rfl

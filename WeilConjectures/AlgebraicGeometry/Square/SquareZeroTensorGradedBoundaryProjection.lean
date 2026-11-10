@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedProductProjection
 import WeilConjectures.CategoryTheory.Abelian.ResolvedBoundaryNaturality
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Naturality of homogeneous boundary projections
 
@@ -27,7 +28,7 @@ attribute [local irreducible] RingedSpace.moduleSectionBoundary Functor.rightDer
   Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
   InjectiveResolution.isoRightDerivedObj DerivedCategory.HomologySequence.δ
   ShortComplex.ShortExact.δ tensorGradedAlgebraMap Functor.mapHomologicalComplex
-  Functor.rightDerivedFunctorPlus ShortComplex.ShortExact.singleTrianglePlus
+  ShortComplex.ShortExact.singleTrianglePlus
 private theorem boundary_enoughInjectives (X : Scheme.{u}) :
     EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2

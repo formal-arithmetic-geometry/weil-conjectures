@@ -137,7 +137,7 @@ theorem closedImmersion_rankStrata_scalar_homology_lift
         IsZero ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
           ((Scheme.Modules.pushforward i).obj (T n))) := by
       intro y hy
-      rw [hT n, if_pos hn]
+      rw [hT n, ite_eq_left hn]
       apply rank_term_stalk_zero i r n.toNat (E n.toNat) y
       rintro ⟨z, hz, rfl⟩
       apply hy
@@ -152,7 +152,7 @@ theorem closedImmersion_rankStrata_scalar_homology_lift
       obtain ⟨e⟩ := hother m hm
       apply IsZero.of_iso _ ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapIso e)
       by_cases hm0 : 0 ≤ m
-      · rw [hT m, if_pos hm0]
+      · rw [hT m, ite_eq_left hm0]
         apply rank_term_stalk_zero i r m.toNat (E m.toNat) y
         rintro ⟨z, hz, heq⟩
         apply hy
@@ -162,7 +162,7 @@ theorem closedImmersion_rankStrata_scalar_homology_lift
         apply hm
         have hnat : m.toNat = n.toNat := hz.symm.trans hz'
         omega
-      · rw [hT m, if_neg hm0]
+      · rw [hT m, ite_eq_right hm0]
         exact (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map_isZero
           ((Scheme.Modules.pushforward i).map_isZero (isZero_zero _))
     obtain ⟨L, b, hL, hfactor⟩ := open_supported_homology_approximation
@@ -172,7 +172,7 @@ theorem closedImmersion_rankStrata_scalar_homology_lift
     refine ⟨g ≫ b, ?_⟩
     rw [Functor.map_comp, ← Category.assoc, hg, hc]
   · have hzero : IsZero ((Scheme.Modules.pushforward i).obj (T n)) := by
-      rw [hT n, if_neg hn]
+      rw [hT n, ite_eq_right hn]
       exact (Scheme.Modules.pushforward i).map_isZero (isZero_zero _)
     refine ⟨0, ?_⟩
     rw [Functor.map_zero, comp_zero]

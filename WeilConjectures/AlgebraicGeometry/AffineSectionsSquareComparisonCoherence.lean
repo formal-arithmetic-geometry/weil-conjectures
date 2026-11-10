@@ -186,7 +186,8 @@ theorem affineSections_square_comparison_coherence
     let H := RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom
     let G := affineGlobalSections f
     have hG : IsIso (G.rightDerivedFunctorUnit.app
-        ((H.mapHomotopyCategory (.up ℤ)).obj J)) :=
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          ((H.mapHomologicalComplex (.up ℤ)).obj J.as))) :=
       exactComp_unit_isIso (RingedSpace.globalSectionsFunctor X.toRingedSpace)
         (affineGlobalSectionsRestriction f) _
         (isIso_directImage_globalSections_unit_on_kInjective (pullback.fst f g) I)

@@ -48,9 +48,9 @@ def towerTruncate (n : ℕ) (x : ∀ k, G k) : ∀ k, G k :=
 def TowerPartialSolution.truncate {n m : ℕ} (h : n ≤ m) (x : TowerPartialSolution φ y m) :
     TowerPartialSolution φ y n :=
   ⟨towerTruncate n x.1, fun k hk ↦ by
-    simp only [towerTruncate, if_pos hk.le, if_pos (Nat.succ_le_of_lt hk)]
+    simp only [towerTruncate, ite_eq_left hk.le, ite_eq_left (Nat.succ_le_of_lt hk)]
     exact x.2.1 k (lt_of_lt_of_le hk h), fun k hk ↦ by
-    simp only [towerTruncate, if_neg (not_le.2 hk)]⟩
+    simp only [towerTruncate, ite_eq_right (not_le.2 hk)]⟩
 
 /-- The inverse system of the partial solutions of the `lim¹` equation. -/
 def towerPartialSolutions : ℕᵒᵖ ⥤ Type u where
@@ -111,7 +111,7 @@ theorem exists_sub_map_succ_eq_of_finite [∀ n, Finite (G n)] :
   have h := congrArg (fun x : TowerPartialSolution φ y k ↦ x.1 k)
     (hs (homOfLE k.le_succ).op)
   change (if k ≤ k then (s (op (k + 1))).1 k else 0) = (s (op k)).1 k at h
-  rw [if_pos le_rfl] at h
+  rw [ite_eq_left le_rfl] at h
   dsimp only
   rw [← h]
   exact (s (op (k + 1))).2.1 k k.lt_succ_self

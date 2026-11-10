@@ -57,7 +57,7 @@ private theorem indexedStage_eq (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N i : ℤ) (hi : i ≤ N) :
     indexedStage T π F N i = tower T π F N (depth N i) := by
   unfold indexedStage differential augmentation
-  simp only [dif_pos hi]
+  simp only [dite_eq_left hi]
   exact stage_transport F _ i _ _ (term_eq T π F N i hi)
     (tower_next T π F N i hi) (degree_eq T π F N i hi)
 
@@ -67,11 +67,11 @@ private theorem indexedStage_above (T : A ⥤ A) (π : T ⟶ 𝟭 A)
   have h₁ : ¬ N + 1 ≤ N := by omega
   have h₂ : ¬ N + 1 + 1 ≤ N := by omega
   have hc : term T π F N (N + 1) = (initial F N).current := by
-    simp only [term, if_neg h₁, initial]
+    simp only [term, ite_eq_right h₁, initial]
   have hn : (initial F N).next = term T π F N (N + 1 + 1) := by
-    simp only [term, if_neg h₂, initial]
+    simp only [term, ite_eq_right h₂, initial]
   convert stage_transport F (initial F N) (N + 1) _ _ hc hn rfl using 1
-  simp only [indexedStage, differential, augmentation, dif_neg h₁, initial,
+  simp only [indexedStage, differential, augmentation, dite_eq_right h₁, initial,
     comp_zero, zero_comp]
 
 private theorem indexedStage_step (T : A ⥤ A) (π : T ⟶ 𝟭 A)

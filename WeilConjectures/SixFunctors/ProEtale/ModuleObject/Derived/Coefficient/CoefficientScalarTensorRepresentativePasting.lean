@@ -37,7 +37,6 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   Localization.Monoidal.tensorBifunctor
 
 -- Match native prolongations before reducing concrete section constructions.
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 

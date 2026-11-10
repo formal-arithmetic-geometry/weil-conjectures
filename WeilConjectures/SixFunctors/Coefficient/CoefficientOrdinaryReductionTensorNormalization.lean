@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
@@ -168,10 +170,17 @@ theorem OrdinaryModel.systemLimitUnit_app (M : OrdinaryModel l E W)
             (Iso.refl (coefficientSequenceRestriction l E W ⋙
               (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)))
             (.up ℤ)).inv.app C) ≫
+        (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app
+          (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙
+            (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+              scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj C) ≫
         (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W
           ).rightDerivedFunctorUnit.app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
               (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((DerivedCategory.quotientCompQhIso (ℕᵒᵖ ⥤ scalarReductionSource l E W)).hom.app
+            (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
         (coefficientConstantTowerLimit l E W).map
           ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app C) := by
   rw [← M.limitComparison_termwise l E W C, Functor.map_comp, Category.assoc]
@@ -223,7 +232,37 @@ theorem exists_transpose_of_unitPresentation (M : OrdinaryModel l E W)
   refine ⟨((M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv P C).symm z, ?_, fun n ↦
     evaluation_mapHomologicalComplex_transpose l E W M P C z n (κ n).hom (h2 n)⟩
   apply (adj.homEquiv _ _).injective
-  rw [h1, hhom, Equiv.apply_symm_apply, M.systemLimitUnit_app l E W C]
+  have hunit :
+      (systemLimitUnit l E W M (constantLimitUnit l E W)).app C =
+        DerivedCategory.Q.map
+            ((Functor.mapHomologicalComplexCompIso
+              (Iso.refl (coefficientSequenceRestriction l E W ⋙
+                (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)))
+              (.up ℤ)).inv.app C) ≫
+          (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W
+            ).rightDerivedFunctorUnit.app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj
+                (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+          (coefficientConstantTowerLimit l E W).map
+            ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app C) := by
+    rw [← M.limitComparison_termwise l E W C, Functor.map_comp, Category.assoc]
+    have hqA : (DerivedCategory.quotientCompQhIso
+        (ℕᵒᵖ ⥤ scalarReductionSource l E W)).hom.app ((tower l E W).obj C) = 𝟙 _ := rfl
+    have hqiB (K : CochainComplex (scalarReductionSource l E W) ℤ) :
+        (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app K = 𝟙 _ := rfl
+    have hf : ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+        scalarReductionSource l E W).mapHomotopyCategoryFactors (.up ℤ)).inv.app
+          ((tower l E W).obj C) = 𝟙 _ := rfl
+    dsimp only [systemLimitUnit, constantLimitUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Iso.trans_hom, Iso.symm_hom]
+    simp only [Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.assoc]
+    erw [hqA, hqiB, hf]
+    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+      Category.id_comp, Category.id_comp]
+  rw [h1, hhom, Equiv.apply_symm_apply, hunit]
+  rfl
 
 end WeilConjectures.OrdinaryQuotient
 

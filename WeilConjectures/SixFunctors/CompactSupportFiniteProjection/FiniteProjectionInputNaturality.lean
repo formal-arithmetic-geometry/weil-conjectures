@@ -114,8 +114,8 @@ private def pullIso (S : SixFunctorFiniteOperations D C E n hn)
     ((Functor.mapDerivedCategoryCompIso (sfIntrinsicModuleEquivalence Y.obj.left A).inverse
       (AlgebraicGeometry.ProEtale.upperStar
         (ModuleCat.{u + 1} (ULift.{u + 1} A)) f.hom.left ⋙
-          (sfIntrinsicModuleEquivalence X.obj.left A).functor)) ≪≫
-      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _))
+          (sfIntrinsicModuleEquivalence X.obj.left A).functor)).symm ≪≫
+      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _).symm)
 
 private def fixedPullIso (S : SixFunctorFiniteOperations D C E n hn)
     {X Y : SixFunctorSpace D} (f : X ⟶ Y) :=

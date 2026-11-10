@@ -77,7 +77,7 @@ theorem realizedEndpoint_transpose
       (R.mapDerivedCategorySingleFunctor 0).inv.app N)
     (i : e.F.obj N ≅ P) :
     ((a.comp (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
-      (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse R).symm).homEquiv _ _
+      (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse R)).homEquiv _ _
       (e.F.mapDerivedCategory.map f ≫
         (e.F.mapDerivedCategorySingleFunctor 0).hom.app N ≫
           (DerivedCategory.singleFunctor _ 0).map i.hom) =
@@ -138,7 +138,7 @@ theorem realizedEndpoint_transpose_eq
     (w : M ⟶ (e.F.asEquivalence.inverse ⋙ R).obj P)
     (hw : v ≫ R.map (e.rootInsertion N i) = w) :
     ((a.comp (UniformizerSquareData.finiteAdjunction e)).ofNatIsoRight
-      (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse R).symm).homEquiv _ _
+      (Functor.mapDerivedCategoryCompIso e.F.asEquivalence.inverse R)).homEquiv _ _
       (e.F.mapDerivedCategory.map f ≫
         (e.F.mapDerivedCategorySingleFunctor 0).hom.app N ≫
           (DerivedCategory.singleFunctor _ 0).map i.hom) =

@@ -176,6 +176,7 @@ theorem subsingleton_sheafH_rootsOfUnitySheaf_multiplicativeGroup {n : ℕ} (hn 
     (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) _
     (rootsOfUnitySheaf_isTorsion G (pos_of_natCast_ne_zero hn)) q hq
 
+
 include hj in
 /-- **Kummer computation on `𝔾_{m,k}`, degree one.** `H¹(𝔾_{m,k}, μₙ) ≅ ℤ/n`, the Kummer class
 `δ(t)` of the coordinate going to `1`: the Kummer boundary `Γ(𝔾_m, 𝒪)ˣ/n ⟶ H¹(𝔾_m, μₙ)` is an
@@ -254,6 +255,7 @@ lemma isTorsion_constantSheaf (A : AddCommGrpCat.{u + 1}) {n : ℕ} (hn : 0 < n)
       ext a
       simpa using hA a
     rw [← (constantSheaf _ _).map_id, ← Functor.map_nsmul, this, Functor.map_zero])
+
 
 /-- A constant sheaf with value a group `A` with `n • 𝟙 = 0`, `n > 0`, is a torsion sheaf. -/
 lemma isTorsion_constantSheaf' (A : AddCommGrpCat.{u + 1}) {n : ℕ} (hn : 0 < n)
@@ -471,7 +473,7 @@ theorem bijective_sheafHConstantSheafNatTrans_zmod {n : ℕ} (hn : (n : k) ≠ 0
       calc (c : ZMod m) = c • e (c₀ • (η.app _).hom r) := by rw [h2, nsmul_eq_mul, mul_one]
         _ = e (c₀ • (c • (η.app _).hom r)) := by rw [← map_nsmul, smul_comm]
         _ = 0 := by rw [hφ0, smul_zero, map_zero]
-    refine AddCommGrpCat.hom_ext (AddMonoidHom.ext fun ⟨a⟩ ↦ ULift.ext _ _ ?_)
+    refine AddCommGrpCat.hom_ext (AddMonoidHom.ext fun ⟨a⟩ ↦ ULift.ext ?_)
     change c • (ZMod.castHom hm (ZMod m) a) = (0 : ZMod m)
     rw [nsmul_eq_mul, h1, zero_mul]
   · intro y

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CechComplexAugmentations
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Homology.Functor

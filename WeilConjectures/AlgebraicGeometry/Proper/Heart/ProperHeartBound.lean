@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperHeartUniformBound
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 import WeilConjectures.AlgebraicGeometry.Proper.Heart.ProperHeartBoundRational
@@ -100,7 +101,7 @@ private theorem dimension_bound_of_finite_lower_bounds (D : WithBot ℕ∞) (d :
     | coe n =>
       have hn := h n le_rfl
       have hd : ¬ d < 0 := by omega
-      rw [if_neg hd]
+      rw [ite_eq_right hd]
       exact_mod_cast (show n ≤ d.toNat by omega)
 
 set_option synthInstance.maxHeartbeats 100000 in
@@ -111,33 +112,7 @@ private theorem properHeartHigherDirectImage_preservesFilteredColimits
     {X Y : Scheme.{u}} (p : X ⟶ Y) [QuasiCompact p] [QuasiSeparated p] (q : ℤ) :
     PreservesFilteredColimitsOfSize.{u + 1, u + 1}
       (properHeartHigherDirectImage Λ p q) := by
-  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  let S := CochainComplex.singleFunctor A 0
-  let T := DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ p).rightDerivedFunctor ⋙
-    DerivedCategory.homologyFunctor _ q
-  constructor
-  intro I _ _
-  constructor
-  intro M
-  have : PreservesColimit M S := by
-    change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
-    infer_instance
-  let D := M ⋙ S
-  let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
-  have hπ (i : I) : IsIso (π.app i) := by
-    change IsIso (((S.obj (M.obj i))).πTruncGE 0)
-    infer_instance
-  have : IsIso π := NatIso.isIso_of_isIso_app π
-  have hc : IsColimit (condensedContinuityCocone D 0) :=
-    (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
-  have ht : IsIso (condensedContinuityComparison D 0 T) :=
-    condensed_qcqs_pushforward_continuity Λ p D 0
-      (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q
-  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
-    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
-  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
-  change PreservesColimit M (S ⋙ T)
-  infer_instance
+  exact CondensedRing.higherDirectImage_filtered Λ p q
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Coproduct inference for internal modules needs the same search budget as filtered colimits.

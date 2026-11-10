@@ -7,8 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
@@ -149,11 +151,19 @@ theorem compatible_quotient_formal_comparisons
     have : F.obj.IsQuasicoherent :=
       ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F.obj).mp
         F.property).1
+    let c (i : ι) : formalCompletionSystem J F.obj ⋙
+        Scheme.Modules.restrictFunctor (U i).ι ≅
+        formalCompletionSystem (J.comap (U i).ι)
+          ((Scheme.Modules.restrictFunctor (U i).ι).obj F.obj) :=
+      (restrictionCompletionIso J F.obj (U i)).symm
+    let m (i : ι) : formalCompletionSystem (J.comap (U i).ι)
+        ((Scheme.Modules.restrictFunctor (U i).ι).obj F.obj) ≅
+        formalCompletionSystem (J.comap (U i).ι) (Fi i).obj :=
+      (formalCompletionFunctor (J.comap (U i).ι)).mapIso (ei i)
     let bsch (i : ι) : ((completion X J).obj F).obj ⋙
         Scheme.Modules.restrictFunctor (U i).ι ≅
         N.obj ⋙ Scheme.Modules.restrictFunctor (U i).ι :=
-      (restrictionCompletionIso J F.obj (U i)).symm ≪≫
-        (formalCompletionFunctor (J.comap (U i).ι)).mapIso (ei i) ≪≫ (βi i).symm
+      c i ≪≫ m i ≪≫ (βi i).symm
     let R (i : ι) := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) (U i)
     let E (i : ι) := (Scheme.Modules.overEquiv (U i)).functor
     let T (i : ι) := (Functor.whiskeringRight ℕᵒᵖ _ _).obj (E i)

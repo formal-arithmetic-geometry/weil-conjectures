@@ -333,8 +333,7 @@ private theorem tensor_bilinear_exists {C : Type uC} [Category.{vC} C] [Essentia
         ext t
         change TensorProduct.lift (β V) ((F.val ⊗ G.val).map f t) =
           H.val.map f (TensorProduct.lift (β U) t)
-        induction t using TensorProduct.induction_on with
-        | zero => simp only [map_zero]
+        induction t using TensorProduct.inductionOn with
         | tmul x y =>
           change β V (F.val.map f x) (G.val.map f y) = H.val.map f (β U x y)
           exact hβ f x y

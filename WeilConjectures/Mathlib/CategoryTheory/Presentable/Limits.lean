@@ -95,4 +95,5 @@ lemma preservesColimitsOfShape_lim_of_isSeparator {A : Type u} [Category.{v} A] 
     PreservesColimitsOfShape J (lim : (K ⥤ A) ⥤ A) :=
   preservesColimitsOfShape_lim_of_isDetector hG.isDetector κ J hK
 
+
 end CategoryTheory

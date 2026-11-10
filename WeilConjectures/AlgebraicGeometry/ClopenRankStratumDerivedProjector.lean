@@ -148,7 +148,7 @@ theorem clopenRankStratum_derived_projector
     have hzero : η.app (H.obj K) = 0 := by
       apply (cancel_mono e.hom).mp
       have hs := hsupported k F
-      rw [if_neg hk] at hs
+      rw [ite_eq_right hk] at hs
       calc
         η.app (H.obj K) ≫ e.hom = e.hom ≫ η.app _ := (η.naturality e.hom).symm
         _ = e.hom ≫ 0 := congrArg (fun f ↦ e.hom ≫ f) hs
@@ -165,7 +165,7 @@ theorem clopenRankStratum_derived_projector
   · intro m F a
     rw [hproject m]
     have hs := hsupported q F
-    rw [if_pos rfl] at hs
+    rw [ite_eq_left rfl] at hs
     calc
       a ≫ η.app _ = η.app _ ≫ a := η.naturality a
       _ = 𝟙 _ ≫ a := congrArg (fun f ↦ f ≫ a) hs

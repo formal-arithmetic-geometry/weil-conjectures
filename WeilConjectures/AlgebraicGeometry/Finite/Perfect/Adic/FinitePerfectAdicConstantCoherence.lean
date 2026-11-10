@@ -99,7 +99,7 @@ private theorem normalizationArrow_coherence (Y : Scheme.{t})
   simp only [Category.assoc]
   erw [derivedCoefficientMate_comp Y q f D]
   erw [← reassoc_of% (localIsomorphismRestrictionComp Y R f).inv.naturality δ]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.inv_hom_id_app_assoc (localIsomorphismRestrictionComp Y R f)]
 
 /-- The explicit constant transition satisfies etale restriction coherence.
 

@@ -104,7 +104,7 @@ theorem affine_open_supported_model_torsion
     inferInstanceAs (T ⋙ E.functor).Additive
   obtain ⟨α⟩ := hF
   let β : F ≅ (affinePerfectSheafification X U hU).mapDerivedCategory.{u + 1, w} :=
-    Localization.liftNatIso DerivedCategory.Q
+    Localization.liftNatIso (DerivedCategory.Q (C := ModuleCat.{u} A))
       (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ))
       (DerivedCategory.Q ⋙ F)
       ((affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ) ⋙

@@ -125,7 +125,6 @@ theorem reductionFactorOfIso_mapDerivedCategory {C₁ C₂ : Type*} {_ : Categor
   have : (NatIso.mapHomologicalComplex (Iso.refl F₁) (.up ℤ)).hom.app K = 𝟙 _ := by
     ext i
     simp
-    rfl
   simp [reductionFactorOfIso_hom, this]
 
 /-- Equal exact functors have equal localization factors, after the equality transports.
@@ -143,7 +142,6 @@ theorem Functor.mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} [Category C�
   have : (NatIso.mapHomologicalComplex (Iso.refl F) (.up ℤ)).hom.app K = 𝟙 _ := by
     ext i
     simp
-    rfl
   simp [this]
 
 /-- The transported system localization factor is the localization factor of system

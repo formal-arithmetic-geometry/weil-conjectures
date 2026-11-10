@@ -64,7 +64,7 @@ noncomputable def rightDerivedFunctorPlusBaseChangeAux (e : G ⋙ γ ⟶ β ⋙ 
     Functor.whiskerRight (mapHomotopyCategoryPlusCompIso (Iso.refl (β ⋙ G'))).inv
       DerivedCategory.Plus.Qh ≫
     (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft β.mapHomotopyCategoryPlus G'.rightDerivedFunctorPlusUnit ≫
+    Functor.whiskerLeft β.mapHomotopyCategoryPlus G'.rightDerivedFunctorPlusUnith ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight β.mapDerivedCategoryPlusFactorsh.inv G'.rightDerivedFunctorPlus ≫
     (Functor.associator _ _ _).hom
@@ -75,14 +75,14 @@ noncomputable def rightDerivedFunctorPlusBaseChange (e : G ⋙ γ ⟶ β ⋙ G')
     G.rightDerivedFunctorPlus ⋙ γ.mapDerivedCategoryPlus ⟶
       β.mapDerivedCategoryPlus ⋙ G'.rightDerivedFunctorPlus :=
   (G.rightDerivedFunctorPlus ⋙ γ.mapDerivedCategoryPlus).rightDerivedDesc
-    (Functor.whiskerRight G.rightDerivedFunctorPlusUnit γ.mapDerivedCategoryPlus ≫
+    (Functor.whiskerRight G.rightDerivedFunctorPlusUnith γ.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom)
     (HomotopyCategory.Plus.quasiIso B) _ (rightDerivedFunctorPlusBaseChangeAux e)
 
 /-- The base change morphism is characterized by its compatibility with the units. -/
 @[reassoc]
 lemma rightDerivedFunctorPlusBaseChange_fac (e : G ⋙ γ ⟶ β ⋙ G') :
-    (Functor.whiskerRight G.rightDerivedFunctorPlusUnit γ.mapDerivedCategoryPlus ≫
+    (Functor.whiskerRight G.rightDerivedFunctorPlusUnith γ.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom) ≫
       Functor.whiskerLeft DerivedCategory.Plus.Qh (rightDerivedFunctorPlusBaseChange e) =
     rightDerivedFunctorPlusBaseChangeAux e :=
@@ -100,7 +100,7 @@ instance commShift_rightDerivedFunctorPlusBaseChange (e : G ⋙ γ ⟶ β ⋙ G'
   let α : G.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙ γ.mapDerivedCategoryPlus ⟶
       DerivedCategory.Plus.Qh ⋙ G.rightDerivedFunctorPlus ⋙ γ.mapDerivedCategoryPlus :=
     (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight G.rightDerivedFunctorPlusUnit γ.mapDerivedCategoryPlus ≫
+      Functor.whiskerRight G.rightDerivedFunctorPlusUnith γ.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom
   have hfac : α ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
       (rightDerivedFunctorPlusBaseChange e) = rightDerivedFunctorPlusBaseChangeAux e := by
@@ -111,7 +111,7 @@ instance commShift_rightDerivedFunctorPlusBaseChange (e : G ⋙ γ ⟶ β ⋙ G'
     dsimp only [rightDerivedFunctorPlusBaseChangeAux]
     infer_instance
   have hα : NatTrans.CommShift α ℤ := by
-    have := NatTrans.CommShift.whiskerRight (A := ℤ) G.rightDerivedFunctorPlusUnit
+    have := NatTrans.CommShift.whiskerRight (A := ℤ) G.rightDerivedFunctorPlusUnith
       (G := γ.mapDerivedCategoryPlus)
     dsimp only [α]
     infer_instance
@@ -249,10 +249,10 @@ theorem isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic [PreservesFinite
       (asIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient B).map i)))]
   set K' := (HomotopyCategory.Plus.quotient B).obj T'
   have hK' : ∀ n : ℤ, Injective (K'.obj.as.X n) := fun n ↦ (T.obj.X n).2
-  have h₁ : IsIso (G.rightDerivedFunctorPlusUnit.app K') := inferInstance
+  have h₁ : IsIso (G.rightDerivedFunctorPlusUnith.app K') := inferInstance
   let LT : CochainComplex.Plus B' := ⟨(β.mapHomotopyCategoryPlus.obj K').obj.as,
     (HomotopyCategory.plus_quotient_obj_iff _).1 (β.mapHomotopyCategoryPlus.obj K').property⟩
-  have h₂ : IsIso (G'.rightDerivedFunctorPlusUnit.app (β.mapHomotopyCategoryPlus.obj K')) :=
+  have h₂ : IsIso (G'.rightDerivedFunctorPlusUnith.app (β.mapHomotopyCategoryPlus.obj K')) :=
     G'.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic LT (fun n ↦ h (T'.obj.X n))
   have hfac := congr_app (rightDerivedFunctorPlusBaseChange_fac e.hom) K'
   have h₃ : IsIso ((rightDerivedFunctorPlusBaseChangeAux e.hom).app K') := by
@@ -262,6 +262,6 @@ theorem isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic [PreservesFinite
     Category.comp_id, Functor.whiskerLeft_app] at hfac
   rw [← hfac] at h₃
   exact IsIso.of_isIso_comp_left (γ.mapDerivedCategoryPlus.map
-    (G.rightDerivedFunctorPlusUnit.app K')) _
+    (G.rightDerivedFunctorPlusUnith.app K')) _
 
 end CategoryTheory.Functor

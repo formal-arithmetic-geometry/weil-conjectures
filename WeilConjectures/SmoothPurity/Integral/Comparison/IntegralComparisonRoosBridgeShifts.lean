@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Integral.Comparison.IntegralComparisonCanonicalShifts
 public import WeilConjectures.CategoryTheory.RoosShift.RoosCommShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift

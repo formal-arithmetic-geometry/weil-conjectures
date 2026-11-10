@@ -111,9 +111,9 @@ noncomputable def pointSectionsDerivedBaseChangeIso :
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).mapDerivedCategoryAdjunction
   let κ₀ : derivedRestrictScalars φ (Spec (.of k)) ⋙ eE.functor ≅
       eF.functor ⋙ (ModuleCat.restrictScalars.{u + 1} φ).mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryCompIso
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫ (Functor.mapDerivedCategoryCompIso
       (constantSheafEquivalenceOfIsSepClosed Λ' (k := k)).symm.functor
-      (ModuleCat.restrictScalars.{u + 1} φ)
+      (ModuleCat.restrictScalars.{u + 1} φ)).symm
   let κ : derivedRestrictScalars φ (Spec (.of k)) ≅
       eF.functor ⋙ (ModuleCat.restrictScalars.{u + 1} φ).mapDerivedCategory ⋙ eE.inverse :=
     (Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft _ eE.unitIso ≪≫

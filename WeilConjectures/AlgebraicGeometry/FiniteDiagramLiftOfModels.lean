@@ -131,12 +131,7 @@ private theorem finite_generators_lift
             pullback.fst (pullback.snd W.hom (D.map h)) (c.π.app j) ≫
               pullback.fst W.hom (D.map h) := by
         subst k
-        have H := conjugateEquiv_counit
-          ((Over.mapPullbackAdj (c.π.app j)).comp (Over.mapPullbackAdj (D.map h)))
-          (Over.mapPullbackAdj (c.π.app j ≫ D.map h))
-          (Over.mapComp (c.π.app j) (D.map h)).hom W
-        simpa [Over.pullbackComp, Adjunction.comp_counit_app] using
-          congrArg (fun k ↦ k.left) H
+        simp [Over.pullbackComp, Adjunction.comp_counit_app]
       simpa [K] using hcomp (c.π.app i) (c.w h)
   have he (f : B) : (Over.pullback (c.π.app j)).map (ej f) ≫ K.hom.app (W f) =
       K.hom.app (U f) ≫ ψ f := by

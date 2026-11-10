@@ -11,6 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechExchangeResolution
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The alternating Čech calculation for the pinned derived mate
 
@@ -154,7 +157,7 @@ theorem affineAlternatingCech_pinned_mate
           pullback.condition ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
         (schemeDerivedDirectImage (pullback.snd f g)).map
-          (((Classical.choose (Classical.choose_spec
+          (cast (by rfl) (((Classical.choose (Classical.choose_spec
               exists_derivedPullbackComposition.{u, w})) (pullback.fst f g)).app
             ((HomotopyCategory.singleFunctor
               (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
@@ -162,7 +165,7 @@ theorem affineAlternatingCech_pinned_mate
               ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
                 ((HomologicalComplex.singleMapHomologicalComplex
                   (Scheme.Modules.tensorPullback (pullback.fst f g))
-                  (ComplexShape.up ℤ) 0).hom.app G))) =
+                  (ComplexShape.up ℤ) 0).hom.app G)))) =
           (derivedPullback g).map e.hom ≫
             ((Classical.choose (Classical.choose_spec
               exists_derivedPullbackComposition.{u, w})) g).app

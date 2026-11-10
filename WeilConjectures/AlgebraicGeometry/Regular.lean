@@ -221,6 +221,7 @@ theorem Scheme.normalization_properties {k : Type u} [Field k] {X : Scheme.{u}} 
     fun U hU ↦ X.isIso_fromNormalization_restrict U hU,
     fun _ hdim ↦ Scheme.smooth_fromNormalization_comp q hdim⟩
 
+
 /-- The local rings of a regular locally noetherian scheme of dimension at most one are
 integrally closed: each of them is a field or a discrete valuation ring. -/
 theorem isIntegrallyClosed_stalk_of_isRegular {X : Scheme.{u}} [IsRegular X]

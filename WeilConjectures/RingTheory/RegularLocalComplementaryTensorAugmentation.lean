@@ -76,8 +76,7 @@ private theorem tensorZeroEquiv_boundary_range {R : Type u} [CommRing R]
       Ideal.span (Set.range f) • (⊤ : Submodule R M) := by
   apply le_antisymm
   · rintro _ ⟨x, rfl⟩
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul x m =>
       change tensorZeroEquiv M r ((ExteriorAlgebra.koszulBoundary R r f 0).rTensor M
         (x ⊗ₜ[R] m)) ∈ _
@@ -129,8 +128,7 @@ private theorem exists_tensor_quotient_augmentation
     change qM (e (K.d 1 0 x)) = 0
     change qM (tensorZeroEquiv (A ⧸ J) r
       ((ExteriorAlgebra.koszulBoundary A r f 0).rTensor (A ⧸ J) x)) = 0
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul x m =>
       rw [tensorZeroEquiv_boundary_tmul]
       obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective m

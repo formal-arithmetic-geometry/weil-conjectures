@@ -9,7 +9,6 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Scalar transport with normalized component sources -/
 
-
 @[expose] public section
 
 namespace CategoryTheory.K4Native
@@ -39,7 +38,6 @@ lemma scalarFunctor_coefficient
         (scalarComponent P' R b' (F₀.obj N)).hom := by
   exact purity_scalarFunctor_coefficient P F₀ F P' Q R τ α b b' M N hc e c he
 
-set_option linter.style.longLine false in
 /-- The isomorphism version retains both the datum's component and the named
 composite isomorphism in its conclusion. -/
 lemma scalarDatum_postcomposeIso
@@ -47,7 +45,8 @@ lemma scalarDatum_postcomposeIso
     (P : C₀ ⥤ C) (Q : C ⥤ C) (b : P ⋙ Q ≅ P)
     {K M N : C₀} (e : P.obj K ≅ P.obj M) (v : M ≅ N) (t : P.obj K ≅ P.obj N)
     (ht : t = e ≪≫ P.mapIso v) (c : ℤ)
-    (he : c • ((scalarComponent P Q b K).hom ≫ e.hom) = Q.map e.hom ≫ (scalarComponent P Q b M).hom) :
+    (he : c • ((scalarComponent P Q b K).hom ≫ e.hom) =
+      Q.map e.hom ≫ (scalarComponent P Q b M).hom) :
     c • ((scalarComponent P Q b K).hom ≫ t.hom) = Q.map t.hom ≫ (scalarComponent P Q b N).hom := by
   exact purity_scalarDatum_postcomposeIso P Q b e v t ht c he
 

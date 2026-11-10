@@ -154,6 +154,7 @@ lemma transport_eq_of_toHom_eq {D E : DescentDatum p V} (hDE : D.toHom = E.toHom
   Over.OverMorphism.ext (by
     rw [transport_left_eq_lift_toHom, transport_left_eq_lift_toHom, hDE])
 
+
 end Universal
 
 /-- A descent datum `D` on `V` relative to `p : X ⟶ Y` **base changes** to a descent datum `E` on

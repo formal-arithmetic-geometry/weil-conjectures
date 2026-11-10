@@ -142,10 +142,9 @@ theorem completedLine_complete (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       ((DerivedCategory.singleFunctorIsoCompQ _ 0).app (SheafOfModules.unit _)) hs
   obtain ⟨M, _, hbidual, _⟩ := ringedSitePerfectDuality.{u + 1, u, u, u + 2}
     (ProEt.topology S) R P (line_perfect S R L hL)
-  let := hbidual
   have hc := WeilConjectures.scalarInternalHom_complete l E S
     (H.obj (op P, O)) O hO
   exact (WeilConjectures.sfDerivedComplete_iff_legacy l E S D hl P).mp
-    (sf_complete_iso l E S (asIso (ringedSiteBidual M.closed M.symmetric O P)).symm hc)
+    (sf_complete_iso l E S (@Iso.symm _ _ _ _ (@asIso _ _ _ _ _ hbidual)) hc)
 
 end AlgebraicGeometry.Scheme

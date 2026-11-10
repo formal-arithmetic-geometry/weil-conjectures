@@ -64,7 +64,7 @@ private theorem comp_assoc {X Y Z T : Scheme.{u}}
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
     at hwr hwl ha
   simp only [Ciso, Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc]
+    Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hwr, ← reassoc_of% hwl]
   rw [← ha, reassoc_of% hm]
 set_option backward.isDefEq.respectTransparency false in
@@ -119,7 +119,7 @@ private theorem restriction_hom_eq {B Y Y' : Scheme.{u}}
           (rawAffineRestrictedMap a h h' w U ≫ pullback.snd U.hom h)
           (by simp [rawAffineRestrictedMap])).hom.app K := by
   simp only [RawRestrictedComparison.derivedRestrictionIso, Ciso,
-    Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
     Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
 
@@ -228,7 +228,7 @@ private theorem plus_comp_inv {X Y T : Scheme.{u}}
       ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} f g h hh).hom.app K) =
       (Ciso f g h hh).hom.app K.obj := by
     simp only [upperStarCompDerivedPlus, Ciso, Functor.mapDerivedCategoryTriangleIso,
-      Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
       Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
       Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, ObjectProperty.ι_obj]
   have hi : (DerivedCategory.Plus.ι.mapIso

@@ -995,7 +995,7 @@ end SingleTensor
 
 attribute [local irreducible] singleTensorHom singleTensorIsoComp
 
-set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem coefficientModule_flatResolution
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -1005,7 +1005,7 @@ private theorem coefficientModule_flatResolution
   Mod.hasFunctorialFlatResolution
 
 set_option maxSynthPendingDepth 16 in
-set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def derivedComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

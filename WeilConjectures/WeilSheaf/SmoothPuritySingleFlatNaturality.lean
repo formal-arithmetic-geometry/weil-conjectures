@@ -53,7 +53,6 @@ lemma puritySingleComparison_app_eq_of_flat {P : C} (hP : ObjectProperty.flat P)
     Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom,
     NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, asIso_hom, Functor.map_comp,
     Category.assoc, Functor.comp_obj]
-  rfl
 
 /-- The flat-object comparison is natural in maps between flat objects. -/
 lemma leftDerivedFunctorSingleFunctorIsoOfFlat_naturality

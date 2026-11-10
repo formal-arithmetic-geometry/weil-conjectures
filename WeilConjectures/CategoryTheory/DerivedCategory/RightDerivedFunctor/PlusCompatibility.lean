@@ -43,18 +43,18 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
 
 /-- The unit exhibiting `F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι` as a right
 derived functor of `F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙
-DerivedCategory.Plus.ι`, obtained by whiskering `F.rightDerivedFunctorPlusUnit` with the
+DerivedCategory.Plus.ι`, obtained by whiskering `F.rightDerivedFunctorPlusUnith` with the
 inclusion of the bounded below derived category. -/
 noncomputable def rightDerivedFunctorPlusιUnit :
     F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙ DerivedCategory.Plus.ι ⟶
       DerivedCategory.Plus.Qh ⋙ F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι :=
-  Functor.whiskerRight F.rightDerivedFunctorPlusUnit DerivedCategory.Plus.ι
+  Functor.whiskerRight F.rightDerivedFunctorPlusUnith DerivedCategory.Plus.ι
 
 instance : (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).IsRightDerivedFunctor
     F.rightDerivedFunctorPlusιUnit (HomotopyCategory.Plus.quasiIso C) :=
   (HomotopyCategory.Plus.localizerMorphism_derives _).isRightDerivedFunctor_of_isIso _
     (fun X₁ ↦ inferInstanceAs (IsIso (DerivedCategory.Plus.ι.map
-      (F.rightDerivedFunctorPlusUnit.app
+      (F.rightDerivedFunctorPlusUnith.app
         ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj X₁)))))
 
 /-- The unit exhibiting `DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor` as a right

@@ -34,7 +34,7 @@ The proof is split into the following steps:
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory AlgebraicGeometry

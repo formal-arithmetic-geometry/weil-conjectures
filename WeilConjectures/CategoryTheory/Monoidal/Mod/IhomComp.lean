@@ -76,6 +76,7 @@ lemma curryHomOfLinear_hom {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X) (hq : IsL
     (curryHomOfLinear q hq hq').hom = curry q hq :=
   rfl
 
+
 @[simp]
 lemma uncurryHom_curryHomOfLinear {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X)
     (hq : IsLinearRight q)

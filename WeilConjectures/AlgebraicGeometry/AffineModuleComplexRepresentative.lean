@@ -92,7 +92,7 @@ theorem exists_affine_module_complex_representative (Y : Scheme.{u}) [IsAffine Y
         rw [← Scheme.isoSpec_hom]
         exact Y.isoSpec.hom_inv_id) ≪≫ Scheme.Modules.restrictFunctorId
   let eD : F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ 𝟭 _ :=
-    (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso eFG ≪≫ Functor.mapDerivedCategoryIdIso _
   have hFE : schemeDerivedQCohProperty (Spec Γ(Y, ⊤)) (F.mapDerivedCategory.obj E) := by
     intro n
