@@ -261,18 +261,14 @@ include hpb hq in
 lemma overElt_eq_of_left_comp_q_eq {T : Y.Etale} {b₁ b₂ : T ⟶ V.left}
     (h : b₁.left ≫ q = b₂.left ≫ q) : r.overElt b₁ = r.overElt b₂ := by
   have hc : b₁.left ≫ V.hom.left ≫ p.left = (b₂ ≫ V.hom).left ≫ p.left := by
-    simp only [comp_left, Category.assoc]
     simp only [comp_left_eq, Category.assoc]
     rw [← hpb.w, ← Category.assoc, h, Category.assoc]
   let θ : T ⟶ PC p (V := V) := homMk (pullback.lift _ _ hc) (by
     change _ ≫ pullback.snd _ _ ≫ W.hom = _
     rw [pullback.lift_snd_assoc, w_left])
-  have h₁ : θ ≫ pr₁C p = b₁ := hom_ext (by simp [θ])
-  have h₂ : θ ≫ pr₂C p = b₂ ≫ V.hom := hom_ext (by simp [θ])
   have h₁ : θ ≫ pr₁C p = b₁ := EtaleTorsor.etaleHom_ext (by simp [θ])
   have h₂ : θ ≫ pr₂C p = b₂ ≫ V.hom := EtaleTorsor.etaleHom_ext (by simp [θ])
   have hc' : θ ≫ γC F p r = b₂ := by
-    refine hom_ext (hpb.hom_ext ?_ ?_)
     refine EtaleTorsor.etaleHom_ext (hpb.hom_ext ?_ ?_)
     · change (θ.left ≫ (γC F p r).left) ≫ q = _
       rw [Category.assoc, hq, ← Category.assoc]
@@ -385,7 +381,6 @@ noncomputable def desc [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over
 
 lemma desc_ext [AlgebraicGeometry.Etale n] {Z : Over B} {t t' : Z ⟶ XO n}
     (h : t.left.left = t'.left.left) : t = t' :=
-  Over.OverMorphism.ext (hom_ext h)
   Over.OverMorphism.ext (EtaleTorsor.etaleHom_ext h)
 
 lemma desc_naturality [Surjective p.left] [AlgebraicGeometry.Etale n] {Z Z' : Over B}
@@ -393,23 +388,18 @@ lemma desc_naturality [Surjective p.left] [AlgebraicGeometry.Etale n] {Z Z' : Ov
     desc hpb hq Z' (F.obj.map f.left.op s) = f ≫ desc hpb hq Z s := by
   obtain ⟨a, ha₁, ha₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s)
   let hW : ZW p Z' ⟶ ZW p Z := homMk (pullback.map _ _ _ _ f.left.left (𝟙 _) (𝟙 _)
-    (by simp [← comp_left, Over.w f]) (by simp)) (by
     (by simp [← comp_left_eq, Over.w f]) (by simp)) (by
       change _ ≫ pullback.fst _ _ ≫ Z.left.hom = pullback.fst _ _ ≫ Z'.left.hom
       simp)
-  have h₁ : hW ≫ prW p Z = prW p Z' := hom_ext (by simp [hW])
-  have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := hom_ext (by simp [hW])
   have h₁ : hW ≫ prW p Z = prW p Z' := EtaleTorsor.etaleHom_ext (by simp [hW])
   have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := EtaleTorsor.etaleHom_ext (by simp [hW])
   refine desc_ext ?_
-  rw [desc_left_left, Over.comp_left, comp_left, desc_left_left,
   rw [desc_left_left, Over.comp_left, comp_left_eq, desc_left_left,
     ← cancel_epi (pullback.fst Z'.hom.left p.left),
     fst_descLeft hpb hq Z' _ (hW ≫ a) (by rw [Category.assoc, ha₁, h₁])
       (by rw [r.overElt_comp, ha₂, ← Functor.map_comp_apply, ← op_comp, h₂, op_comp,
         Functor.map_comp_apply])]
   change _ = (prZ p Z' ≫ f.left).left ≫ _
-  rw [← h₂, comp_left, comp_left, Category.assoc, Category.assoc, prZ_left,
   rw [← h₂, comp_left_eq, comp_left_eq, Category.assoc, Category.assoc, prZ_left,
     fst_descLeft hpb hq Z s a ha₁ ha₂]
 
@@ -421,7 +411,6 @@ lemma desc_injective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B
   have e : a.left ≫ q = a'.left ≫ q := by
     rw [← fst_descLeft hpb hq Z s a ha₁ ha₂, ← fst_descLeft hpb hq Z s' a' ha'₁ ha'₂,
       ← desc_left_left (n := n), ← desc_left_left (n := n), h]
-  have : a = a' := hom_ext (hpb.hom_ext e (by rw [← comp_left, ← comp_left, ha₁, ha'₁]))
   have : a = a' :=
     EtaleTorsor.etaleHom_ext (hpb.hom_ext e (by rw [← comp_left_eq, ← comp_left_eq, ha₁, ha'₁]))
   subst this
@@ -437,15 +426,12 @@ lemma desc_surjective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over 
       change _ ≫ V.left.hom = pullback.fst _ _ ≫ Z.left.hom
       rw [← over_w, hpb.lift_snd_assoc]
       exact w_left (prW p Z))
-  have ha₁ : a ≫ V.hom = prW p Z := hom_ext (by simp [a])
   have ha₁ : a ≫ V.hom = prW p Z := EtaleTorsor.etaleHom_ext (by simp [a])
   have ha : a.left ≫ q = pullback.fst _ _ ≫ t.left.left := hpb.lift_fst _ _ _
   obtain ⟨s, hs, -⟩ := existsUnique_of_isSheaf_of_surjective F (prZ p Z) (r.overElt a)
     fun Z' g₁ g₂ hg ↦ by
       rw [← r.overElt_comp, ← r.overElt_comp]
       refine overElt_eq_of_left_comp_q_eq hpb hq ?_
-      rw [comp_left, comp_left, Category.assoc, Category.assoc, ha, ← Category.assoc,
-        ← Category.assoc, ← prZ_left, ← comp_left, ← comp_left, hg]
       rw [comp_left_eq, comp_left_eq, Category.assoc, Category.assoc, ha, ← Category.assoc,
         ← Category.assoc, ← prZ_left, ← comp_left_eq, ← comp_left_eq, hg]
       rfl

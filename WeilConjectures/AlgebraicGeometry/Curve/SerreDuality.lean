@@ -959,7 +959,6 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
   have : Algebra.FiniteType k Γ(X, π ⁻¹ᵁ W) := Algebra.FiniteType.trans (S := Γ(Y, W))
     inferInstance inferInstance
   have hpmax : p.IsMaximal := hW.primeIdealOf_isMaximal_of_isClosed ⟨y, hyW⟩ hy
-  have : q.1.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_under _
   have : q.1.IsMaximal := Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := Γ(Y, W)) _
     ((Ideal.LiesOver.over (P := q.1) (p := p)) ▸ hpmax)
   rw [Ideal.inertiaDeg_eq_one_of_isAlgClosed (k := k) p q.1, Nat.cast_one, mul_one]

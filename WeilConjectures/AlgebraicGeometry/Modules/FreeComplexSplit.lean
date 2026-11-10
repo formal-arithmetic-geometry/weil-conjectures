@@ -69,7 +69,6 @@ theorem exists_split_factorization [IsReduced Y] {m n : Type*} [Fintype m] [Fint
   obtain ⟨x⟩ := this
   obtain ⟨e₁, e₂, he⟩ := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField y)
     (Y.fromSpecResidueField y) x A ρ).1 hge
-  rw [fromSpecResidueField_base_apply] at he
   rw [Scheme.fromSpecResidueField_apply] at he
   refine ⟨N ⊓ Y.basicOpen (A.submatrix e₁ e₂).det, inf_le_left, ⟨hy, he⟩, ?_⟩
   set V := N ⊓ Y.basicOpen (A.submatrix e₁ e₂).det
@@ -87,7 +86,6 @@ theorem exists_split_factorization [IsReduced Y] {m n : Type*} [Fintype m] [Fint
     obtain ⟨x'⟩ : Nonempty (Spec (Y.residueField (V.ι.base z))) := inferInstance
     have := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField (V.ι.base z))
       (Y.fromSpecResidueField (V.ι.base z)) x' A (ρ + 1)).2 ⟨f₁, f₂, by
-        rw [fromSpecResidueField_base_apply]
         rw [Scheme.fromSpecResidueField_apply]
         exact hz⟩
     have := hle _ hzN
@@ -163,8 +161,6 @@ lemma rank_map_appTop_restrict {m n : Type*} [Finite m] [Fintype n] (V : Y.Opens
   rw [← map_appTop_comp]
   refine rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField z)
     (isField_Γ_Spec_residueField _) _ _ x x' ?_ A
-  rw [Scheme.Hom.comp_apply, fromSpecResidueField_base_apply,
-    fromSpecResidueField_base_apply]
   rw [Scheme.Hom.comp_apply, Scheme.fromSpecResidueField_apply,
     Scheme.fromSpecResidueField_apply]
 

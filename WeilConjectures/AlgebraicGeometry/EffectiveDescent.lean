@@ -212,7 +212,6 @@ end CategoryTheory.Over.DescentDatum
 namespace AlgebraicGeometry
 
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
-/-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z_K` is smooth (in particular
 locally of finite type) and proper over `K`, and connected. Then `Z` is of finite type, smooth and
 proper over `k`, and connected.

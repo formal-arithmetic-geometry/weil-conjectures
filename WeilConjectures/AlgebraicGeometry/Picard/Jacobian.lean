@@ -2678,7 +2678,6 @@ lemma exists_isClosedImmersion_projectiveSpace_of_isPullback {ks : Type u} [Fiel
   -- `J_K` is proper and smooth, so the immersion is closed
   have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
   have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
-  obtain ⟨hJK, hJS, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
   obtain ⟨hJK, hJS, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux
     JK.hom Js.hom q hq
     (arithmeticGenus ks
