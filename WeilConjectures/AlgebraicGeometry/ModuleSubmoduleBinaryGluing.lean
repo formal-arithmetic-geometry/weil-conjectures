@@ -57,8 +57,6 @@ private theorem finiteType_of_iso
 
 
 
-set_option maxHeartbeats 400000 in
--- Measured 228151 heartbeats with Lean v4.35.0-rc3 and Mathlib b63f6e8a.
 /-- Glue a finite-type submodule on V to the whole module on W when its inclusion
 is an isomorphism on the overlap. No compactness or affineness is required.
 
@@ -87,6 +85,13 @@ theorem exists_submodule_binary_gluing
       G.IsQuasicoherent ∧ G.IsFiniteType ∧ ∃ (φ : G ⟶ H.over (W ⊔ V)),
         Mono φ ∧ IsIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
           (homOfLE (show W ≤ W ⊔ V from le_sup_left))).map φ) := by
+  -- Cache sheafification on iterated slices for the four isomorphism transports below.
+  have (A : X.Opens) (T : Over A) :
+      HasSheafify (((_root_.Opens.grothendieckTopology X).over A).over T)
+        AddCommGrpCat.{u} := inferInstance
+  have (A : X.Opens) (T : Over A) :
+      (((_root_.Opens.grothendieckTopology X).over A).over T).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let G := binarySubmodule X W V H Q ι
   let φ := binarySubmoduleInclusion X W V H Q ι
   obtain ⟨hW, ⟨eV⟩⟩ := binarySubmodule_restrictions X W V H Q ι
