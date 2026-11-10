@@ -66,8 +66,6 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 400000 in
--- Measured 381069 heartbeats for the transported tensor endpoint on Lean 4.35.
 /-- The normalized tensor comparison followed by input associators is the pair endpoint.
 
 Source: def-pur-section-invariant, common-stage subargument, steps 3–5.
@@ -102,7 +100,9 @@ theorem commonStageTensor_endpoint
       (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage)) W)
     (rationalDerivedTensor l (Coefficient.{u} l Ω L) W)
     (operationStageTransitionIso l Ω W _ L h)
-    (rationalTensorScalarComparison l _ _ (coefficientInclusion l Ω _ L h) W)
+    (rationalTensorScalarComparison l
+      (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage))
+      (Coefficient.{u} l Ω L) (coefficientInclusion l Ω _ L h) W)
     (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1)
     (Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2)
     (((stageSystem l Ω W).assoc
@@ -110,7 +110,7 @@ theorem commonStageTensor_endpoint
     (((stageSystem l Ω W).assoc
       ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)
   run_tac do Lean.logInfo m!"PF652 after have: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
-  simpa only [operationStageTransitionIso, commonStageTensorObject] using hh
+  exact hh
   run_tac do Lean.logInfo m!"PF652 proof end: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
 
 end WeilConjectures
