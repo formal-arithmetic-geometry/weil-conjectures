@@ -247,6 +247,12 @@ theorem integralSystemTensorComparison_square {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end Square
 
+section Factors
+
+variable {C D F : Type*} [Category C] [Category D] [Category F]
+  [Abelian C] [Abelian D] [Abelian F]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory F]
+
 /-- The derived compositor of exact functors induced by `e : H ≅ F₁ ⋙ F₂` is the
 localization of the termwise compositor.
 Source: Stacks 05RU, 0D6D
@@ -265,6 +271,8 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
         F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) := by
   rw [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
+
+end Factors
 
 set_option maxHeartbeats 3000000 in
 -- Matching the strict law against the descent data unfolds instance paths of the

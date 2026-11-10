@@ -92,6 +92,18 @@ private theorem mateCube
   rw [← reassoc_of% hqn, ← H.map_comp_assoc, hj]
   simp only [Functor.map_comp, Category.assoc]
 
+section ExactCoherence
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+  [Abelian C] [Abelian D] [Abelian E] [Abelian F]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  [HasDerivedCategory F]
+  (L : C ⥤ D) (M : D ⥤ E) (N : E ⥤ F)
+  [L.Additive] [M.Additive] [N.Additive]
+  [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+  [PreservesFiniteLimits M] [PreservesFiniteColimits M]
+  [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+
 private noncomputable abbrev tripleComparison :
     (L ⋙ M ⋙ N).mapDerivedCategory ≅
       L.mapDerivedCategory ⋙ M.mapDerivedCategory ⋙ N.mapDerivedCategory :=
@@ -103,6 +115,13 @@ private lemma tripleComparison_hom :
       (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).hom ≫
         Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryCompIso M N).hom :=
   (Functor.mapDerivedCategoryCompIso_assoc L M N).symm
+
+variable {L M N}
+  {D' : Type*} [Category D'] [Abelian D'] [HasDerivedCategory D']
+  {L' : C ⥤ D'} {M' : D' ⥤ E}
+  [L'.Additive] [M'.Additive]
+  [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
+  [PreservesFiniteLimits M'] [PreservesFiniteColimits M']
 
 private lemma tripleComparison_right (e : L ⋙ M ≅ L' ⋙ M') :
     (tripleComparison L M N).hom ≫
@@ -119,6 +138,12 @@ private lemma tripleComparison_right (e : L ⋙ M ≅ L' ⋙ M') :
   simp only [Functor.whiskerRight_id', Category.id_comp]
   rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e N)]
 
+variable {E' : Type*} [Category E'] [Abelian E'] [HasDerivedCategory E']
+  {M'' : D ⥤ E'} {N' : E' ⥤ F}
+  [M''.Additive] [N'.Additive]
+  [PreservesFiniteLimits M''] [PreservesFiniteColimits M'']
+  [PreservesFiniteLimits N'] [PreservesFiniteColimits N']
+
 private lemma tripleComparison_left (e : M ⋙ N ≅ M'' ⋙ N') :
     (tripleComparison L M N).hom ≫
         Functor.whiskerLeft L.mapDerivedCategory
@@ -133,6 +158,38 @@ private lemma tripleComparison_left (e : M ⋙ N ≅ M'' ⋙ N') :
     (Functor.mapDerivedCategoryCompIso M N).inv), Iso.hom_inv_id]
   simp only [Functor.whiskerLeft_id', Category.id_comp]
   rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft L e)]
+
+end ExactCoherence
+
+section DerivedCube
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+variable {C₀ C₁ C₂ C₃ D₀ D₁ D₂ D₃ : Type*}
+  [Category C₀] [Category C₁] [Category C₂] [Category C₃]
+  [Category D₀] [Category D₁] [Category D₂] [Category D₃]
+  [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
+  [Abelian D₀] [Abelian D₁] [Abelian D₂] [Abelian D₃]
+  [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+  [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+  [HasDerivedCategory D₀] [HasDerivedCategory D₁]
+  [HasDerivedCategory D₂] [HasDerivedCategory D₃]
+  {R₀ : D₀ ⥤ C₀} {R₁ : D₁ ⥤ C₁} {R₂ : D₂ ⥤ C₂} {R₃ : D₃ ⥤ C₃}
+  {J : C₀ ⥤ C₁} {H : C₁ ⥤ C₃} {G : C₀ ⥤ C₂} {I : C₂ ⥤ C₃}
+  {J' : D₀ ⥤ D₁} {H' : D₁ ⥤ D₃} {G' : D₀ ⥤ D₂} {I' : D₂ ⥤ D₃}
+  [R₀.Additive] [R₁.Additive] [R₂.Additive] [R₃.Additive]
+  [J.Additive] [H.Additive] [G.Additive] [I.Additive]
+  [J'.Additive] [H'.Additive] [G'.Additive] [I'.Additive]
+  [PreservesFiniteLimits R₀] [PreservesFiniteColimits R₀]
+  [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
+  [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
+  [PreservesFiniteLimits R₃] [PreservesFiniteColimits R₃]
+  [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+  [PreservesFiniteLimits J'] [PreservesFiniteColimits J']
+  [PreservesFiniteLimits H'] [PreservesFiniteColimits H']
+  [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+  [PreservesFiniteLimits I'] [PreservesFiniteColimits I']
 
 private lemma derivedCube
     (qJ : R₀ ⋙ J ≅ J' ⋙ R₁) (qH : R₁ ⋙ H ≅ H' ⋙ R₃)
@@ -180,5 +237,6 @@ private lemma derivedCube
   have h' := (cancel_epi (tripleComparison R₀ J H).hom).1 h
   exact congr_app h' M
 
+end DerivedCube
 
 end AlgebraicGeometry.ProEtale

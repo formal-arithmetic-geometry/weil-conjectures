@@ -79,6 +79,12 @@ private theorem generator_one_id {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option �
     (M : Modules ell E Y s) (U : Site Y s) (m : M.val.obj (op U)) :
     generator ell E f s M U ((base f s).obj U) (𝟙 _) m 1 =
       ((adjunction ell E f s).unit.app M).val.app (op U) m := by
+  simp only [generator, op_id, PresheafOfModules.map_id]
+  exact one_smul
+    ((ring (topology X s) (coefficients ell E X s)).obj.obj (op ((base f s).obj U)))
+    (show ((pull ell E f s).obj M).val.obj (op ((base f s).obj U)) from
+      ((adjunction ell E f s).unit.app M).val.app (op U) m)
+
 private theorem generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     {M N : Modules ell E Y s} (a : M ⟶ N) (U : Site Y s) (V : Site X s)
     (q : V ⟶ (base f s).obj U) (m : M.val.obj (op U))
@@ -93,12 +99,6 @@ private theorem generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
   have hq := PresheafOfModules.naturality_apply ((pull ell E f s).map a).val q.op
     (((adjunction ell E f s).unit.app M).val.app (op U) m)
   exact hq.trans (congrArg (fun z ↦ ((pull ell E f s).obj N).val.map q.op z) hn.symm)
-
-  simp only [generator, op_id, PresheafOfModules.map_id]
-  exact one_smul
-    ((ring (topology X s) (coefficients ell E X s)).obj.obj (op ((base f s).obj U)))
-    (show ((pull ell E f s).obj M).val.obj (op ((base f s).obj U)) from
-      ((adjunction ell E f s).unit.app M).val.app (op U) m)
 
 private theorem ordinary_composition {X Y Z : Scheme.{t}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ)

@@ -47,6 +47,8 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
   integers are the point counts.
 - `AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`: the trace-to-determinant
   identity (`det-thm-tracetodeterminant`, `thm-zl-lefschetz-weil-identity`).
+- `LinearMap.inv_alternatingCharpolyRevProd_eq_exp` and
+  `AlgebraicGeometry.Scheme.trace_determinant`: `prop-trace-determinant`.
 -/
 
 @[expose] public section
@@ -54,6 +56,12 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
 universe u
 
 open CategoryTheory Limits Polynomial
+
+namespace LinearMap
+
+variable {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*} [∀ i, AddCommGroup (W i)]
+  [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)]
+
 /-- The exponential form of the trace-to-determinant identity for a finite graded family
 `(W i, u i)`: the inverse of the alternating determinant
 `∏ᵢ det (1 - T uᵢ)^{(-1)^i}` is `exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ)) Tⁿ / n)`, the exponential of
@@ -134,6 +142,7 @@ theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Modul
   rw [eq_comm, PowerSeries.eq_inv_iff_mul_eq_one (by rw [hconstA]; exact one_ne_zero),
     mul_comm, hAE]
 
+end LinearMap
 
 namespace AlgebraicGeometry
 

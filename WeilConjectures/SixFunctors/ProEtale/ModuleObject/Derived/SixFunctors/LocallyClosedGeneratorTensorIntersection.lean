@@ -1029,6 +1029,12 @@ private noncomputable def derivedComparison
     ((generatorExtension Λ A).obj L) ((generatorExtension Λ B).obj M) _
     (generatorExtension_flat Λ A L hL) (ordinaryComparison Λ a b A B C L M)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [local irreducible] derivedComparison
+
 universe vD wD
 
 set_option backward.isDefEq.respectTransparency false in

@@ -140,6 +140,7 @@ private theorem module_derivedLimit_interval {R : Type r} [CommRing R]
     (PreservesProduct.iso (DerivedCategory.homologyFunctor (ModuleCat.{r} R) i)
       (fun n ↦ K.obj (op n)))
   exact hzprod.of_mono ((DerivedCategory.homologyFunctor (ModuleCat.{r} R) i).map p)
+
 private theorem exists_pseudoCoherent_normalizedTower
     {C : Type r} [CommRing C] [IsNoetherianRing C]
     (J : Ideal C) [IsAdicComplete J C]
@@ -238,7 +239,6 @@ private theorem exists_pseudoCoherent_normalizedTower
   intro L adj
   obtain ⟨e, _, hc, _, _⟩ := hrec.2 L adj
   exact ⟨e, hc⟩
-
 
 private theorem completion_eval_ker {A : Type u} [CommRing A]
     (I : Ideal A) (hI : I.FG) (n : ℕ) :

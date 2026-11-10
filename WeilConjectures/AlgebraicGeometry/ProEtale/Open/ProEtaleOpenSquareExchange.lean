@@ -975,6 +975,7 @@ private theorem dSquare_id_inverse (R : C₁ ⥤ C₂) (P : C₁ ⥤ C₁) (p : 
   rfl
 
 end ExactLocalizationCalculus
+
 private theorem dSquare_comp_reverse
     (q₀₁ : U₀ ⋙ G₀₁ ≅ F₀₁ ⋙ U₁)
     (q₁₂ : U₁ ⋙ G₁₂ ≅ F₁₂ ⋙ U₂)
@@ -1027,7 +1028,7 @@ private theorem dSquare_comp_forward
   erw [Category.comp_id]
   exact ht.symm
 
-
+end DerivedPasting
 private theorem sfPullback_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     eqToIso (congrArg (sfIntrinsicPullback A) h) =
       sfIntrinsicTransportIso A

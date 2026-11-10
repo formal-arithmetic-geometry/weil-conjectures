@@ -236,6 +236,16 @@ private theorem cbcCompletedExchange_naturality
           (d.directImageRlimIso f').inv
   exact e.naturality k
 
+/-- Every normalized proper/open refinement map is invertible on the stated inputs.
+No Cartesian hypothesis is imposed on the refinement square.
+Source: blueprint statement and proof step 8; Stacks 0F7B, 09C9
+(blueprint: thm-cbc-complete-proetale).
+Proof: pass to the strict quotient tower after constant-coefficient restriction. The
+section and unit normalizations identify gamma with the strict proper/open gamma.
+Finite evaluation is the normalized finite-coefficient proper/open map on the retained
+bounded-below origins, hence invertible by finite compact-support base change. The
+cone is acyclic levelwise, so gamma is invertible as an actual derived strict-tower
+map. Apply Rlim and the specified open/limit and proper composition comparisons. -/
 theorem cbcRefinementMap_isIso
     {X Y : Scheme.{t}} {f : X ⟶ Y}
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

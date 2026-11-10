@@ -1301,6 +1301,7 @@ noncomputable def unboundedEtaleUpperStarIdIso
       𝟭 (DerivedCategoryModule A X) :=
   Functor.mapDerivedCategoryNatIso (upperStarId (ModuleCat.{u + 1} A) X) ≪≫
     Functor.mapDerivedCategoryIdIso _
+
 private lemma upperStar_comp_id_unit
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (Functor.mapDerivedCategoryNatIso
@@ -1326,7 +1327,6 @@ private lemma upperStar_comp_id_unit
   erw [Category.id_comp]
   exact congr_app (Functor.mapDerivedCategoryCompIso_comp_id
     (upperStar (ModuleCat.{u + 1} A) (𝟙 X))) K
-
 
 private lemma identity_exchange_of_pasting
     {D E : Type*} [Category D] [Category E]
@@ -2236,6 +2236,7 @@ private lemma exact_square_plus
     NatTrans.comp_app, Category.assoc]
 
 section ProperExchangeRestriction
+attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Functor.rightDerivedFunctorPlusCompatibility
 private lemma exact_unit_plus

@@ -173,5 +173,4 @@ theorem completedReductionPullback_square
     exact towerCounit_isIso X' d _ (stratumPull_flatKFlat d g' _
       (stratumPull_flatKFlat d f P hP.1 hP.2) (hf_flat P hP))
 
-
 end AlgebraicGeometry.Scheme

@@ -16,7 +16,32 @@ Source: Stacks Project, Tags 03DI, 07A7 and 099N; the identity part of
 proof step 7 of `thm-cbc-complete-proetale`.
 -/
 
--- Only imports remain after declaration-level pruning.
+set_option linter.privateModule false
+
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+
+universe t
+open CategoryTheory CategoryTheory.Limits
+
+private theorem idFactors
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (P : CochainComplex C ℤ) :
+    (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj P) =
+      (𝟭 C).mapDerivedCategoryFactors.hom.app P := by
+  have h := Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj C
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app] at h
+  have h₁ : ((𝟭 C).mapHomotopyCategoryFactors (.up ℤ)).inv.app P = 𝟙 _ := rfl
+  have h₂ : (DerivedCategory.quotientCompQhIso C).hom.app P = 𝟙 _ := rfl
+  have h₃ : (DerivedCategory.quotientCompQhIso C).inv.app
+      (((𝟭 C).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
+  rw [h₁, h₂, h₃] at h
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id, Category.comp_id] at h
+  exact h
 
 private theorem identityCounit
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
@@ -41,3 +66,14 @@ private theorem identityCounit
   simp only [Iso.trans_hom, NatTrans.comp_app, idFactors]
   rw [Functor.mapDerivedCategoryNatIso_fac, ← Category.assoc, hn]
   simp only [eqToIso_refl, Iso.refl_hom, Category.id_comp]
+
+namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] cbcDatumOrdinaryTransport AdicCoefficientDatum.pullId
+  cbcModulePullId cbcOpenShriek cbcUnderivedInverseExchange cbcDerivedInverseExchange
+
+attribute [local irreducible] cbcOrdinaryExchange
+  cbcDatumOrdinaryExchange
+
+end AlgebraicGeometry.Scheme
+-- Only imports remain after declaration-level pruning.

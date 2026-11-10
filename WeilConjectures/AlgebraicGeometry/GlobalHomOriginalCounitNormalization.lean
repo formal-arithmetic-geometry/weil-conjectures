@@ -325,6 +325,9 @@ def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
         τ E K ≫ ((derivedPullback g).map a ⊗ₘ (derivedPullback g).map b)
 
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The repaired tensor iso satisfies the representative equation with the ORIGINAL counit.
 Proof: take the chain comparison in the old canonical predicate. Its summand
 formula is unchanged. Precompose its coordinate equation with the change of

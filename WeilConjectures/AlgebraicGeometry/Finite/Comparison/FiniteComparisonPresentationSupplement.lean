@@ -1156,6 +1156,7 @@ private local instance realizedSectionMap_isIso : IsIso (realizedSectionMap B X 
     Iso.trans_inv, Functor.mapIso_inv]
   rfl
 
+omit [DiscreteTopology B] in
 private theorem pointFiniteModel
     (P : ModuleCat.{u + 1} (ULift.{u + 1} B)) [Module.Finite (ULift.{u + 1} B) P] :
     ∃ Q : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -1374,6 +1375,7 @@ private local instance finiteRealizationMonoidal :
     EY.functor.mapIso ((i.app (EX.functor.obj F)).symm) ≪≫
     EY.functor.mapIso (G.mapIso (EX.unitIso.app F).symm)
 
+omit [DiscreteTopology B] in
 private theorem finiteLocalModel_of_ordinary
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)))
     (hF : IsFiniteLocallyConstant (ULift.{u + 1} B) F) :
@@ -1402,6 +1404,28 @@ private theorem constantConstructible_iso
   obtain ⟨S, hS⟩ := hM
   exact ⟨S, fun i ↦ modelOfIso _
     ((CondensedRing.upperStar _ (S.immersion i)).mapIso e.symm) (hS i)⟩
+
+private theorem encoding_constructible_iff
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))) :
+    IsConstructible (ULift.{u + 1} B) F ↔
+      IsConstantModelConstructible (Profinite.continuousMapRingObj.{u} B) X
+        ((CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+          (internalToModule (ULift.{u + 1} B)) rfl X).functor.obj F) := by
+  classical
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
+  constructor
+  · rintro ⟨S, hS⟩
+    refine ⟨S, fun i ↦ ?_⟩
+    exact modelOfIso _ (encodingForwardPullback B X eR (S.immersion i) F)
+      (finiteLocalModel_of_ordinary B (S.domain i) eR _ (hS i))
+  · intro h
+    let E := CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+      (internalToModule (ULift.{u + 1} B)) rfl X
+    have h' := CondensedRing.finiteDiscreteCoefficient_constructible B eR
+      (internalToModule (ULift.{u + 1} B)) rfl X (E.functor.obj F)
+      (modelStratifiedConstructible _ X _ h)
+    exact isConstructible_of_iso (E.unitIso.app F).symm h'
 
 end InternalRealization
 

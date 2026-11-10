@@ -480,6 +480,7 @@ noncomputable def ProEtaleWeilSheaf.upperStarCongr {X Y : Scheme.{u}}
   subst h
   exact Iso.refl _
 
+variable (k₀ l) in
 /-- The derived pullback along a composite is the composite of the derived pullbacks. -/
 noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso {X Y Z : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -491,6 +492,15 @@ noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso {X Y Z : 
   Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l φ ψ) ≪≫
     Functor.mapDerivedCategoryCompIso _ _
 
+variable {X X' Z Z' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [X'.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
+  [Z'.Over (Spec (CommRingCat.of k₀))]
+  (g : X' ⟶ X) [g.IsOver (Spec (CommRingCat.of k₀))]
+  (i' : X' ⟶ Z') [IsOpenImmersion i'] [QuasiCompact i'] [i'.IsOver (Spec (CommRingCat.of k₀))]
+  (i : X ⟶ Z) [IsOpenImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+  (p : Z' ⟶ Z) [p.IsOver (Spec (CommRingCat.of k₀))]
+
+omit [Fact (ringChar k₀ ≠ l)] [g.IsOver (Spec (CommRingCat.of k₀))] in
 /-- Auxiliary form of
 `AlgebraicGeometry.ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj`, for a
 given closed immersion `ι` complementary to `i'`. -/
@@ -524,6 +534,7 @@ lemma ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj_aux
         ((ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory.obj K))
     exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance (by rw [h]; infer_instance)
 
+variable (k₀ l) in
 /-- **Base change for the extension by zero** of pro-étale Weil sheaves, on derived categories:
 for a cartesian square `g ≫ i = i' ≫ p` with `i` and `i'` open immersions,
 `D(p^*) ∘ D(i_!) ≅ D(i'_!) ∘ D(g^*)`. The counit `i'_! i'^* E ⟶ E` is an isomorphism for

@@ -661,6 +661,7 @@ Source: Stacks 03DI (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
 def scalarJModule (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
     moduleJ Λ f ⋙ moduleRes φ X ≅ moduleRes φ U ⋙ moduleJ B f :=
   (@asIso _ _ _ _ (scalarJInv φ f) (scalarJInv_isIso φ f)).symm
+
 /-- Exact descent of the same identity on extension presheaves.
 Source: Stacks 03DI, 03DJ, 015F (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
 def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
@@ -737,7 +738,6 @@ theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc] using hu K
   exact (unit_mateEquiv_symm (dJAdj Λ f) (dJAdj B f)
     (TwoSquare.mk _ _ _ _ (scalarG φ f).hom) K).symm.trans hu'.symm
-
 
 section ScalarCalculations
 
