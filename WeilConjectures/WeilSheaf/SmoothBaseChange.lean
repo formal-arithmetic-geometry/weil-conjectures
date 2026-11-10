@@ -79,7 +79,7 @@ theorem ι_map_upperStarCompIso_hom_app {X Y Z : Scheme.{u}}
     (objectProperty k₀ l X).ι.map ((upperStarCompIso (k₀ := k₀) (l := l) f g).hom.app K) =
       (Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l f g)).hom.app
           K.obj ≫
-        (Functor.mapDerivedCategoryCompIso _ _).hom.app K.obj :=
+        (Functor.mapDerivedCategoryCompIso _ _).inv.app K.obj :=
   rfl
 
 /-- The inverse of the composition isomorphism of pullbacks of Weil complexes lies over the
@@ -90,7 +90,7 @@ theorem ι_map_upperStarCompIso_inv_app {X Y Z : Scheme.{u}}
     [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
     (K : WeilComplex k₀ l Z) :
     (objectProperty k₀ l X).ι.map ((upperStarCompIso (k₀ := k₀) (l := l) f g).inv.app K) =
-      (Functor.mapDerivedCategoryCompIso _ _).inv.app K.obj ≫
+      (Functor.mapDerivedCategoryCompIso _ _).hom.app K.obj ≫
         (Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l f g)).inv.app
           K.obj :=
   rfl
