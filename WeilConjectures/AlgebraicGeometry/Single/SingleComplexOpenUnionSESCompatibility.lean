@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-! # Compatible mapping-cylinder presentations
 

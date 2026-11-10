@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.Limits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! Generic exact rows and homotopy-pullback projections. -/
 

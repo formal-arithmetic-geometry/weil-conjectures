@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections
+import Mathlib.CategoryTheory.Sites.Subcanonical
 
 /-!
 # Finite disjoint unions in the pro-etale site

@@ -13,6 +13,7 @@ import WeilConjectures.RingTheory.PthRootMonomialDimension
 import WeilConjectures.FieldTheory.PthRootsExtensionDegree
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-! # The p-root quotient over a field
 

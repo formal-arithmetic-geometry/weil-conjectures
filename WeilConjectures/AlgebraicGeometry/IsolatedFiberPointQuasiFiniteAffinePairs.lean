@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-!
 # Isolated fibre points and quasi-finiteness on affine pairs

@@ -19,6 +19,8 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import WeilConjectures.RingTheory.PowerSeriesCompleteOverCompleteBase
 import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+import Mathlib.RingTheory.KrullDimension.PID
 
 /-!
 # Power series over a field or Cohen ring

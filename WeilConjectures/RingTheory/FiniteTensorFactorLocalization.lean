@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Category.Ring.Basic
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Localizing the scalar map to a finite tensor factor

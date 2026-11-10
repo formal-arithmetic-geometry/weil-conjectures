@@ -19,6 +19,7 @@ import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.RingTheory.FiniteScalarSurjections
 import WeilConjectures.RingTheory.FiniteConeCycleAttachmentFunctors
+import Mathlib.RingTheory.Flat.Localization
 
 /-! # One descending step in a simultaneous finite free approximation
 

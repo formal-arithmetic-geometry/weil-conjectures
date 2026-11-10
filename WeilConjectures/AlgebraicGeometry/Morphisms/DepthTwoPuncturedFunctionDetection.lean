@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import Mathlib.RingTheory.Regular.IsSMulRegular
+import Mathlib.RingTheory.Nakayama
 
 /-! # Detecting functions on the punctured spectrum of a depth-two local ring
 

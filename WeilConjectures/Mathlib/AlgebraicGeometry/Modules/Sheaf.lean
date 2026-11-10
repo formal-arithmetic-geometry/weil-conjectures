@@ -16,6 +16,7 @@ public import Mathlib.Topology.Sheaves.LocallySurjective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
+import Mathlib.Algebra.Category.ModuleCat.Kernels
 
 /-!
 # Sections of a kernel of `𝒪_X`-modules, and the pullback of the structure sheaf

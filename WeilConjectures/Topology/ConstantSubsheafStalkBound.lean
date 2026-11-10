@@ -15,6 +15,7 @@ import Mathlib.Topology.LocallyConstant.Basic
 import Mathlib.GroupTheory.Archimedean
 import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
 public import Mathlib.CategoryTheory.Limits.IsConnected
+import Mathlib.GroupTheory.SpecificGroups.Cyclic
 
 /-! # A uniform bound for the integer stalk subgroups
 

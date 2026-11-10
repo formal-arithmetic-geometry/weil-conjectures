@@ -19,6 +19,7 @@ public import Mathlib.RingTheory.TensorProduct.MvPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Noether normalization with the number of variables the Krull dimension

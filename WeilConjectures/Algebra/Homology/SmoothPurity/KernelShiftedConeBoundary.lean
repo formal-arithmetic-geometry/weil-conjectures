@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 public import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.Algebra.Homology.Refinements
+import Mathlib.CategoryTheory.Abelian.Refinements
 
 /-!
 # The boundary of the kernel-to-mapping-fibre comparison

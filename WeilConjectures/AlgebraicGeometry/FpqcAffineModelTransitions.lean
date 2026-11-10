@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Cover.Directed
 import WeilConjectures.AlgebraicGeometry.FpqcAffineModelTransitionCartesian
 import WeilConjectures.AlgebraicGeometry.FpqcAffineModelTransitionReconstruction
+import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 
 /-!
 # Transition maps between effective affine models

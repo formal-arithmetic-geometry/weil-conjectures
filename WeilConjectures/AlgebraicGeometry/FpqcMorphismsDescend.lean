@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 
 /-!
 # Descent of morphisms along an fpqc covering

@@ -11,6 +11,7 @@ import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-!
 # Existence of module pullback in a universe containing the sites

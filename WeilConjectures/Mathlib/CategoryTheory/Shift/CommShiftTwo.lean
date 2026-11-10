@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Shift.CommShiftTwo
+import Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-!
 # Postcomposition of bifunctors commuting with shifts

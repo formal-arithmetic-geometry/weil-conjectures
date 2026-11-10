@@ -9,6 +9,7 @@ module
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.RingTheory.Nakayama
 
 /-! # Depth two for a finite module's dual
 

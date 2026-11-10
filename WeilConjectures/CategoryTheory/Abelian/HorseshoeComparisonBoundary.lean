@@ -9,6 +9,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.InjectiveResolutionDerivedComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import WeilConjectures.CategoryTheory.Abelian.RightDerivedInjectiveBoundary
+import Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift
 
 /-!
 # Boundary compatibility of the explicit resolution comparisons

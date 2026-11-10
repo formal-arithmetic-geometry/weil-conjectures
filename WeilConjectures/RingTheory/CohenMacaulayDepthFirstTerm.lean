@@ -15,6 +15,7 @@ import WeilConjectures.RingTheory.DepthInSES
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Regular.Flat
+import Mathlib.RingTheory.Nakayama
 
 @[expose] public section
 

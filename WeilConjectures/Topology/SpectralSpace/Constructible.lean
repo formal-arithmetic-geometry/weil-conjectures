@@ -12,6 +12,7 @@ public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.Data.Set.Card
 public import Mathlib.Topology.Connected.Separation
+import Mathlib.Topology.WithTopology
 
 /-!
 # Constructible topology

@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Functorial short exact presentations of mapping cones -/
 

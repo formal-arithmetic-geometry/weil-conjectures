@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.RingTheory.Localization.LocalizationLocalization
+import Mathlib.RingTheory.RingHom.FinitePresentation
 
 /-! # Finite presentation models for affine morphism stalks
 

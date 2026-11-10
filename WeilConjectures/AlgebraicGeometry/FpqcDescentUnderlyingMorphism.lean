@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDescentDataCategory
+import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 
 /-! Auxiliary steps for Stacks Project, Descent, Lemma 0241. -/
 

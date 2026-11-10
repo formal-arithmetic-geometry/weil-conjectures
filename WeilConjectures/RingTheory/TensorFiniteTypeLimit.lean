@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.RingTheory.Nilpotent.Defs
 
 /-! # Finite-type reduction for tensor products
 
