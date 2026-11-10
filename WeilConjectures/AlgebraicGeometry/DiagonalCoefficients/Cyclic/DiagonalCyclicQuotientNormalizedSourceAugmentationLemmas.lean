@@ -232,6 +232,8 @@ private theorem normalized_inverse
   rw [hπ, ← hs]
   simp only [Category.assoc, ← F.map_comp, s.hom_inv_id, Category.comp_id]
 
+namespace CyclicAugmentation
+
 theorem endpoint_generator_argument
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -264,5 +266,7 @@ theorem endpoint_generator_argument
   dsimp only [Functor.comp_map] at hπ hs
   rw [← hπ, ← hs]
   simp only [← CategoryTheory.Functor.map_comp_assoc, hordinary]
+
+end CyclicAugmentation
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

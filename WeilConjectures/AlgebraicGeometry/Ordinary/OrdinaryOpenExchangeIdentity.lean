@@ -27,6 +27,8 @@ set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits
 
+namespace AlgebraicGeometry.Scheme.OrdinaryOpenExchangeIdentity
+
 theorem idFactors
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (P : CochainComplex C ℤ) :
@@ -67,6 +69,8 @@ theorem identityCounit
   simp only [Iso.trans_hom, NatTrans.comp_app, idFactors]
   rw [Functor.mapDerivedCategoryNatIso_fac, ← Category.assoc, hn]
   simp only [eqToIso_refl, Iso.refl_hom, Category.id_comp]
+
+end AlgebraicGeometry.Scheme.OrdinaryOpenExchangeIdentity
 
 namespace AlgebraicGeometry.Scheme
 

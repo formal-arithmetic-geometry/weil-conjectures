@@ -360,7 +360,8 @@ extensions. Joint injectivity of the target projections identifies the integral 
 Composition of the two field embeddings is the original embedding,
 which proves the scalar equation. All pointwise and limiting arguments include the
 empty site object and repeated fields without any nonemptiness assumption.
--/theorem coefficientPresentations_exists
+-/
+theorem coefficientPresentations_exists
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsCommMonObj (abRing l X)] :
     ∃ coefficient : ∀ E : Index l (PadicAlgCl l),
       CoefficientPresentation l X (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E),
