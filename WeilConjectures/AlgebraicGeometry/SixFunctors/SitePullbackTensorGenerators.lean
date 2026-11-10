@@ -933,10 +933,8 @@ private theorem ordinary_generator_pure
         (((F.obj M).val.obj (op W)).isModule.toSMul.smul r
           ((F.obj M).val.map p.op ((adj.unit.app M).val.app (op V) x)))
         (1 • (F.obj N).val.map p.op ((adj.unit.app N).val.app (op V) y)) := by
-  rw [map_smul, PresheafOfModules.naturality_apply]
-  erw [hunit]
-  erw [SheafOfModules.CochainScalarConstruction.pure_restrict S]
-  rw [one_smul]
+  erw [map_smul, PresheafOfModules.naturality_apply, hunit,
+    SheafOfModules.CochainScalarConstruction.pure_restrict S, one_smul]
   exact sitePure_smul K S (F.obj M) (F.obj N) (op W) r _ _
 
 /-- Keep the concrete geometric lift behind its ring and module presentation. -/
