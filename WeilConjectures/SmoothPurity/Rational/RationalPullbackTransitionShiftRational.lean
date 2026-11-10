@@ -224,7 +224,11 @@ theorem rationalPullbackScalarComparison_commShift
         (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f).hom ℤ _ _ _
       (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _ _ tY)
       (@Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _ tX _) :=
-    set_option backward.isDefEq.respectTransparency true in by
+  letI : FiniteDimensional ℚ_[l] (Coefficient.{u} l Ω E) :=
+    AlgebraicallyClosedCoefficients.coefficientFinite l Ω E
+  letI : FiniteDimensional ℚ_[l] (Coefficient.{u} l Ω L) :=
+    AlgebraicallyClosedCoefficients.coefficientFinite l Ω L
+  set_option backward.isDefEq.respectTransparency true in by
   let A := constructibleIntegralPullback l (Coefficient.{u} l Ω E) f
   let B := constructibleIntegralPullback l (Coefficient.{u} l Ω L) f
   let Ar := rationalDerivedPullback l (Coefficient.{u} l Ω E) f
