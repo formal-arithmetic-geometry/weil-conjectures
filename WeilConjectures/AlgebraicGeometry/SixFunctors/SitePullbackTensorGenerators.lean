@@ -899,6 +899,43 @@ private theorem sitePure_eq
   unfold sitePure tensorSectionAtSize SheafOfModules.CochainScalarConstruction.pure
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem ordinary_generator_pure
+    {C D : Type c} [Category.{v} C] [Category.{v} D]
+    [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    (U : C ⥤ D) [U.IsContinuous J K]
+    (R : Sheaf J CommRingCat.{r}) (S : Sheaf K CommRingCat.{r})
+    (φ : R ⟶ (U.sheafPushforwardContinuous CommRingCat.{r} J K).obj S)
+    (F : SiteMod J R ⥤
+      SiteMod K S)
+    (adj : F ⊣ modulePush.{c, v, r} U R S φ)
+    (e : ∀ M N : SiteMod J R,
+      F.obj (siteTensor J R M N) ≅
+        siteTensor K S (F.obj M) (F.obj N))
+    (hunit : ∀ M N V x y,
+      (e M N).hom.val.app (op (U.obj V))
+        ((adj.unit.app (siteTensor J R M N)).val.app (op V)
+          (sitePure J R M N (op V) x y)) =
+      sitePure K S (F.obj M) (F.obj N) (op (U.obj V))
+        ((adj.unit.app M).val.app (op V) x)
+        ((adj.unit.app N).val.app (op V) y))
+    (M N : SiteMod J R)
+    (V : C) (W : D) (p : W ⟶ U.obj V)
+    (x : M.val.obj (op V)) (y : N.val.obj (op V)) (r : S.obj.obj (op W)) :
+    (e M N).hom.val.app (op W)
+      (r • (F.obj (siteTensor J R M N)).val.map p.op
+        ((adj.unit.app (siteTensor J R M N)).val.app (op V)
+          (sitePure J R M N (op V) x y))) =
+      sitePure K S (F.obj M) (F.obj N) (op W)
+        (r • (F.obj M).val.map p.op ((adj.unit.app M).val.app (op V) x))
+        (1 • (F.obj N).val.map p.op ((adj.unit.app N).val.app (op V) y)) := by
+  rw [map_smul, PresheafOfModules.naturality_apply, hunit]
+  rw [SheafOfModules.CochainScalarConstruction.pure_restrict S]
+  rw [one_smul]
+  exact sitePure_smul K S (F.obj M) (F.obj N) (op W) r _ _
+
 /-- Keep the concrete geometric lift behind its ring and module presentation. -/
 private theorem geometricPresentation
     {C D : Type c} [Category.{v} C] [Category.{v} D]

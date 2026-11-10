@@ -502,6 +502,39 @@ attribute [local implicit_reducible] integralOperationsPullbackTowerFunctor
   integralComparisonSequenceDirectImage
   integralComparisonSequenceGenerator
 
+private theorem finiteEvaluation_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (n : ℕ) :
+    (finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
+        (integralSystemTransition l E) f n).hom.app (DerivedCategory.Q.obj C) ≫
+      (proEtaleConstantRingDerivedPullback
+        (Padic.coefficientExtensionRing l E (n + 1)) f).map
+          ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app C) ≫
+      (proEtaleConstantRingPullback
+        (Padic.coefficientExtensionRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app
+          (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj C) =
+    (coefficientSequenceDerivedEvaluation l E X n).map
+        ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.hom.app C) ≫
+      (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app
+        (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C) ≫
+      DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex (finiteEvaluation l E f n).hom (.up ℤ)).app C) := by
+  have hb : finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
+      (integralSystemTransition l E) f n =
+      (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E f)
+        (coefficientSequenceEvaluation l E X n)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (finiteEvaluation l E f n) ≪≫
+      Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E Y n)
+        (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f) := by
+    unfold finiteSystemDerivedPullbackEvaluation finiteEvaluation
+    rfl
+  rw [hb]
+  exact exactSquare_fac
+    (integralComparisonSequencePullback l E f) (coefficientSequenceEvaluation l E X n)
+    (coefficientSequenceEvaluation l E Y n)
+    (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (finiteEvaluation l E f n) C
+
+
 /-- The derived finite evaluation comparison, followed by an arbitrary map of finite
 complexes, is computed by the ordinary evaluation comparison and the exact factors.
 Source: Stacks Tag 015F; exact localization composition and naturality.

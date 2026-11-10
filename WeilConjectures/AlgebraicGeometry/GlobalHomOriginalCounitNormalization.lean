@@ -273,6 +273,99 @@ theorem schemeHomPullbackCounitIso_inv_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [← schemeHomPullbackCounitIso_fac f P, ← Category.assoc,
     Iso.inv_hom_id_app, Category.id_comp]
 
+/-- The canonical tensor comparison is characterized on every pair of K-flat
+representatives by the left-derived counits, the localization tensor maps and
+termwise module pullback. The degreewise equation pins the chain isomorphism to
+the canonical module tensor map on each summand, including its signs.
+Source: Stacks, 079U; perfect.tex, 0DJA(1)
+(blueprint: lem-pc-global-hom-original-counit-normalization). -/
+def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
+    (τ : ∀ E K : schemeDerivedCategory X,
+      (derivedPullback g).obj (E ⊗ K) ⟶
+        (derivedPullback g).obj E ⊗ (derivedPullback g).obj K) : Prop :=
+  letI := pullbackDescentModuleTensor X
+  letI := pullbackDescentModuleTensor T
+  letI := modulePreadditive X
+  letI := modulePreadditive T
+  letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+  letI := SheafOfModules.preservesZeroMorphisms_curriedTensor T.sheaf
+  letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+  letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf
+  (∀ P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
+    P.IsKFlatTensor → N.IsKFlatTensor →
+    ∃ φ : ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj
+        (pullbackTensorTotal X P N) ≅
+      pullbackTensorTotal T
+        (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
+        (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N),
+      (∀ (p q n : ℤ) (h : p + q = n),
+        (Scheme.Modules.tensorPullback g).map
+            (HomologicalComplex.ιMapBifunctor P N (curriedTensor _) (.up ℤ) p q n h) ≫
+          φ.hom.f n =
+        ((Classical.choose (Scheme.Modules.module_pullback_tensor g)) (P.X p) (N.X q)).hom ≫
+          HomologicalComplex.ιMapBifunctor
+            (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
+            (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N)
+            (curriedTensor
+              (SheafOfModules.{u} (moduleRings T.toRingedSpace))) (.up ℤ) p q n h) ∧
+      (derivedPullback g).map (pullbackTensorModelMap X P N) ≫
+          ((schemeHomPullbackCounitData g).counit).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N)) ≫
+          DerivedCategory.Q.map φ.hom =
+        τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) ≫
+          (((schemeHomPullbackCounitData g).counit).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+            ((schemeHomPullbackCounitData g).counit).app
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+          pullbackTensorModelMap T
+            (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
+            (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N)) ∧
+    ∀ (E E' K K' : schemeDerivedCategory X) (a : E ⟶ E') (b : K ⟶ K'),
+      (derivedPullback g).map (a ⊗ₘ b) ≫ τ E' K' =
+        τ E K ≫ ((derivedPullback g).map a ⊗ₘ (derivedPullback g).map b)
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- The repaired tensor iso satisfies the representative equation with the ORIGINAL counit.
+Proof: take the chain comparison in the old canonical predicate. Its summand
+formula is unchanged. Precompose its coordinate equation with the change of
+presentation, and use naturality to move that change through the localization
+map. The counit identities replace all three old counits by the original ones;
+the inverse change on the input cancels, giving precisely the transported iso.
+Naturality follows from the naturality of the composite natural isomorphism.
+Source: Stacks, Tags 06YJ and 079U (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+theorem schemeHomOriginalTensorPullbackIso_originalCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    IsSchemeHomOriginalCounitTensorComparison f
+      (fun A B ↦ (schemeHomOriginalTensorPullbackIso f).hom.app (A, B)) := by
+  have ht := Classical.choose_spec (exists_mixedHomTensorPullbackIso f)
+  dsimp only [IsCanonicalPullbackTensorComparison] at ht
+  dsimp only [IsSchemeHomOriginalCounitTensorComparison]
+  refine ⟨?_, ?_⟩
+  · intro P N hP hN
+    obtain ⟨φ, hφ, hc⟩ := ht.1 P N hP hN
+    refine ⟨φ, hφ, ?_⟩
+    have hU := schemeHomPullbackCounitIso_fac f
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal Y P N))
+    have hA := schemeHomPullbackCounitIso_fac f
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+    have hB := schemeHomPullbackCounitIso_fac f
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj N)
+    have he := originalCounitTensorEquation (derivedPullback f)
+      (schemeHomPullbackCounitIso f)
+      ((Classical.choose (exists_mixedHomTensorPullbackIso f)).hom.app
+        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N))
+      (pullbackTensorModelMap Y P N) _ _ _ _ _ _ _ _ hU hA hB hc
+    simpa only [schemeHomOriginalTensorPullbackIso, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
+      NatIso.prod_hom, NatTrans.prod_app_fst, NatTrans.prod_app_snd,
+      tensor_obj, tensor_map, Category.assoc] using he
+  · intro A A' B B' a b
+    exact (schemeHomOriginalTensorPullbackIso f).hom.naturality
+      (X := (A, B)) (Y := (A', B')) (a, b)
+
 attribute [local irreducible] schemeHomOriginalTensorPullbackIso
 
 end AlgebraicGeometry

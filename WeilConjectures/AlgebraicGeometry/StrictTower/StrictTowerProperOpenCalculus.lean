@@ -136,6 +136,53 @@ private theorem module_disjoint_extension {U X C : Scheme.{u}}
   apply (a.homEquiv _ _).injective
   apply ((moduleJAdj B s).homEquiv _ _).injective
   exact (module_disjoint_direct B s c hc _).eq_of_tgt _ _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem derived_disjoint_extension {U X C : Scheme.{u}}
+    (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsOpenImmersion c]
+    (hc : Disjoint (Set.range s) (Set.range c)) (N : Derived B U) :
+    IsZero ((G B c).obj ((J B s).obj N)) := by
+  let F := towerJ B s ⋙ towerPullback B c
+  have hzero (M : Towers B U) : IsZero (F.obj M) := by
+    apply (Functor.isZero_iff _).2
+    intro n
+    exact module_disjoint_extension B s c hc (M.obj n)
+  have hz := F.isZero_mapDerivedCategory_obj N (fun q ↦ hzero _)
+  exact hz.of_iso ((Functor.mapDerivedCategoryCompIso (towerJ B s)
+    (towerPullback B c)).app N)
+
+/-- The clopen projection is identity on the image and zero on the complementary open.
+Source: Stacks, Tag 09AE and blueprint, fourth proof step
+(blueprint: lem-cbc-strict-tower-proper-open-calculus).
+Proof: split each test object into the inverse image of the two open components.
+The sheaf condition is the product decomposition. The direct-image adjunction unit
+is projection to the image component, and the inverse open-to-direct comparison
+identifies that component with extension by zero. This is natural in modules,
+transitions and differentials; exact localization preserves both equations. -/
+theorem pi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
+    [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
+    (hc : Set.range c = (Set.range s)ᶜ) (M : Derived B X) :
+    (G B s).map ((pi B s).app M) = (jAdj B s).unit.app ((G B s).obj M) ∧
+      (G B c).map ((pi B s).app M) = 0 := by
+  refine ⟨pi_image B s M, ?_⟩
+  have hc' : Disjoint (Set.range s) (Set.range c) := by
+    rw [hc]
+    exact disjoint_compl_right
+  exact (derived_disjoint_extension B s c hc' ((G B s).obj M)).eq_of_tgt _ _
+
+/-- Cartesian squares recover beta from the intrinsic clopen construction.
+Source: Stacks, Tag 0F7B and blueprint, fourth proof step
+(blueprint: lem-cbc-strict-tower-proper-open-calculus).
+Proof: the fibre-product lift is the canonical isomorphism of the cartesian square.
+Its complementary open is empty, so its component projection is identity. The
+normalized compositors and the open-unit transpose identify the remaining map with beta. -/
+theorem alpha_cartesian {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
+    alpha B k r p i h = (beta B r k i p h.symm hsq.flip).hom := by
+  exact ((properOpen_clopen_projector B k r p i h).2.1 hsq).2
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem moduleR_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
     (N : Modules B X) (U : Y.ProEt)
@@ -498,7 +545,71 @@ private theorem gId_eq (X : Scheme.{u}) :
       Functor.mapDerivedCategoryIdIso (Towers B X) := by
   unfold gId towerGId moduleGId
   rfl
+
+private theorem gComp_hom {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (gComp B f g).hom = (Functor.mapDerivedCategoryNatIso (towerGComp B f g)).hom ≫
+      (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).inv := rfl
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem gComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp B (𝟙 U) j).hom ≫
+        Functor.whiskerLeft (G B j) (gId B U).hom =
+      (eqToIso (congrArg (G B) (Category.id_comp j))).hom := by
+  dsimp only [G]
+  rw [gId_eq, gComp_hom]
+  change (_ ≫ _) ≫ Functor.whiskerLeft (towerPullback B j).mapDerivedCategory
+    ((Functor.mapDerivedCategoryNatIso (towerGId B U)).hom ≫
+      (Functor.mapDerivedCategoryIdIso (Towers B U)).hom) = _
+  rw [Category.assoc]
+  exact
+    (derived_unit_left (towerPullback B j) (towerPullback B ((𝟙 U) ≫ j))
+    (towerPullback B (𝟙 U)) (towerGComp B (𝟙 U) j) (towerGId B U)
+    (eqToIso (congrArg (towerPullback B) (Category.id_comp j)))
+    (towerGComp_id_left B j)).trans (derived_transport B (Category.id_comp j))
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem gComp_id_right {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp B j (𝟙 X)).hom ≫
+        Functor.whiskerRight (gId B X).hom (G B j) =
+      (eqToIso (congrArg (G B) (Category.comp_id j))).hom := by
+  dsimp only [G]
+  rw [gId_eq, gComp_hom]
+  change (_ ≫ _) ≫ Functor.whiskerRight
+    ((Functor.mapDerivedCategoryNatIso (towerGId B X)).hom ≫
+      (Functor.mapDerivedCategoryIdIso (Towers B X)).hom)
+    (towerPullback B j).mapDerivedCategory = _
+  rw [Category.assoc]
+  exact
+    (derived_unit_right (towerPullback B j) (towerPullback B (j ≫ (𝟙 X)))
+    (towerPullback B (𝟙 X)) (towerGComp B j (𝟙 X)) (towerGId B X)
+    (eqToIso (congrArg (towerPullback B) (Category.comp_id j)))
+    (towerGComp_id_right B j)).trans (derived_transport B (Category.comp_id j))
+
 attribute [local irreducible] gComp gId towerGComp adj jAdj G R J alpha
+
+private theorem squareG_id {U X : Scheme.{u}} (j : U ⟶ X)
+    (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (N : Derived B X) :
+    (squareG B (𝟙 U) j j (𝟙 X) h).inv.app N ≫
+        (G B j).map ((gId B X).hom.app N) =
+      (gId B U).hom.app ((G B j).obj N) := by
+  have hl := congr_app (gComp_id_left B j) N
+  have hr := congr_app (gComp_id_right B j) N
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hl hr
+  have ht : (eqToIso (congrArg (G B) h)).hom ≫
+      (eqToIso (congrArg (G B) (Category.comp_id j))).hom =
+        (eqToIso (congrArg (G B) (Category.id_comp j))).hom := by
+    simp only [eqToIso.hom, eqToHom_trans]
+  have htN := congr_app ht N
+  simp only [NatTrans.comp_app] at htN
+  simp only [squareG, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    eqToIso.inv, Category.assoc]
+  change (gComp B (𝟙 U) j).inv.app N ≫
+      (eqToIso (congrArg (G B) h)).hom.app N ≫
+      (gComp B j (𝟙 X)).hom.app N ≫
+      (G B j).map ((gId B X).hom.app N) = _
+  rw [hr, htN, ← hl]
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
 private theorem betaInv_id_aux
     {C D : Type*} [Category* C] [Category* D]
     {L : C ⥤ D} {G₀ : D ⥤ C} (a : L ⊣ G₀)
@@ -512,6 +623,15 @@ private theorem betaInv_id_aux
   rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply,
     Category.assoc, hs, Adjunction.homEquiv_unit]
   exact (eI.hom.naturality (a.unit.app M)).trans (a.unit.naturality (eI.hom.app M))
+
+private theorem betaInv_id {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (M : Derived B U) :
+    (betaInv B (𝟙 U) j j (𝟙 X) h).app M ≫
+        (gId B X).hom.app ((J B j).obj M) =
+      (J B j).map ((gId B U).hom.app M) := by
+  exact betaInv_id_aux (jAdj B j) (gId B U) (gId B X)
+    (squareG B (𝟙 U) j j (𝟙 X) h) (squareG_id B j h) M
+
 private theorem squareG_flip {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     squareG B r k i p h.symm = (squareG B k r p i h).symm := by
@@ -532,6 +652,17 @@ private theorem jId_transpose (X : Scheme.{u}) (N : Derived B X) :
     (jAdj B (𝟙 X)).unit.app N ≫
         (G B (𝟙 X)).map ((jId B X).hom.app N) = (gId B X).inv.app N := by
   exact leftAdjointIdIso_transpose (jAdj B (𝟙 X)) (gId B X) N
+
+private theorem squareG_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (N : Derived B X) :
+    (squareG B p (𝟙 U) (𝟙 X) p h).inv.app N ≫
+        (gId B U).hom.app ((G B p).obj N) =
+      (G B p).map ((gId B X).hom.app N) := by
+  rw [squareG_flip B (𝟙 U) p p (𝟙 X) h.symm, Iso.symm_inv]
+  apply (cancel_epi ((squareG B (𝟙 U) p p (𝟙 X) h.symm).inv.app N)).1
+  rw [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  exact (squareG_id B p h.symm N).symm
+
 private theorem betaInv_id_open_aux
     {C D : Type*} [Category* C] [Category* D]
     {J₀ G₀ : C ⥤ C} {J₁ G₁ : D ⥤ D} (a₀ : J₀ ⊣ G₀) (a₁ : J₁ ⊣ G₁)
@@ -554,9 +685,30 @@ private theorem betaInv_id_open_aux
   apply (cancel_mono (e₁.hom.app (F.obj N))).1
   rw [Category.assoc, hs, ← Functor.map_comp, Iso.inv_hom_id_app]
   exact (F.map_id _).trans (Iso.inv_hom_id_app e₁ _).symm
+
+private theorem betaInv_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (N : Derived B X) :
+    (betaInv B p (𝟙 U) (𝟙 X) p h).app N ≫
+        (G B p).map ((jId B X).hom.app N) =
+      (jId B U).hom.app ((G B p).obj N) := by
+  exact betaInv_id_open_aux (jAdj B (𝟙 X)) (jAdj B (𝟙 U)) (G B p)
+    (gId B X) (gId B U) (jId B X) (jId B U)
+    (squareG B p (𝟙 U) (𝟙 X) p h) (jId_transpose B X) (jId_transpose B U)
+    (squareG_id_open B p h) N
+
 private theorem iso_unit_cancel {C : Type*} [Category* C] {X Y Z : C}
     (e : X ≅ Y) (a : X ⟶ Z) (b : Y ⟶ Z) (h : e.inv ≫ a = b) : e.hom ≫ b = a := by
   rw [← h, ← Category.assoc, e.hom_inv_id, Category.id_comp]
+
+private theorem beta_id_open {U X : Scheme.{u}} (p : U ⟶ X)
+    (h : p ≫ (𝟙 X) = (𝟙 U) ≫ p) (hsq : IsPullback p (𝟙 U) (𝟙 X) p)
+    (N : Derived B X) :
+    (beta B p (𝟙 U) (𝟙 X) p h hsq).hom.app N ≫
+        (jId B U).hom.app ((G B p).obj N) =
+      (G B p).map ((jId B X).hom.app N) := by
+  exact iso_unit_cancel ((beta B p (𝟙 U) (𝟙 X) p h hsq).app N) _ _
+    (betaInv_id_open B p h N)
+
 private theorem betaInv_mate {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g) :
@@ -674,6 +826,44 @@ section NormalizedIdentities
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] gComp gId adj jAdj G R J alpha
+
+/-- Beta is normalized to identity on an identity base change.
+Source: Stacks, Tag 09AE and blueprint, second proof step
+(blueprint: lem-cbc-strict-tower-proper-open-calculus).
+Proof: transpose the two maps under the open adjunction. The unit equation of the
+identity inverse-image compositor makes both transposes the open unit. -/
+theorem beta_id {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (hsq : IsPullback (𝟙 U) j j (𝟙 X))
+    (M : Derived B U) :
+    (beta B (𝟙 U) j j (𝟙 X) h hsq).hom.app M ≫
+        (J B j).map ((gId B U).hom.app M) = (gId B X).hom.app ((J B j).obj M) := by
+  have he : (betaInv B (𝟙 U) j j (𝟙 X) h) ≫
+      Functor.whiskerLeft (J B j) (gId B X).hom =
+        Functor.whiskerRight (gId B U).hom (J B j) := by
+    apply NatTrans.ext
+    funext N
+    exact betaInv_id B j h N
+  exact congr_app (iso_unit_cancel (beta B (𝟙 U) j j (𝟙 X) h hsq) _ _ he) M
+
+private theorem alpha_identities :
+    (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+      (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived B U),
+      (alpha B j (𝟙 U) (𝟙 X) j h).app M ≫
+          (J B j).map ((gId B U).hom.app M) =
+        (gId B X).hom.app ((J B j).obj M)) ∧
+    (∀ {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
+      (h : (𝟙 U) ≫ p = p ≫ (𝟙 X)) (M : Derived B X),
+      (alpha B (𝟙 U) p p (𝟙 X) h).app M ≫
+          (jId B U).hom.app ((G B p).obj M) =
+        (G B p).map ((jId B X).hom.app M)) := by
+  constructor
+  · intro U X j _ _ h M
+    rw [alpha_cartesian B j (𝟙 U) (𝟙 X) j h (IsPullback.of_id_snd (f := j))]
+    exact beta_id B j h.symm (IsPullback.of_id_snd (f := j)).flip M
+  · intro U X p _ h M
+    rw [alpha_cartesian B (𝟙 U) p p (𝟙 X) h (IsPullback.of_id_fst (f := p))]
+    exact beta_id_open B p h.symm (IsPullback.of_id_fst (f := p)).flip M
+
 private theorem betaInv_unit {A A' Y Y' : Scheme.{u}}
     (a : A' ⟶ A) (j' : A' ⟶ Y') (j : A ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -1182,6 +1372,36 @@ private theorem mate_identity_horizontal
   have hh' := congrArg (fun f ↦ e₀.hom.app (R₀.obj M) ≫ f) hh
   simpa only [← Category.assoc, Iso.hom_inv_id_app,
     Category.id_comp, Category.comp_id] using hh'
+
+/-- Identity normalizations of gamma in both directions.
+Source: Stacks, Tags 0F7B and 07A7, blueprint, steps 6 and 10
+(blueprint: lem-cbc-strict-tower-proper-open-calculus).
+Proof: the clopen projection is identity for either identity square. Its alpha is the
+canonical inverse-image/open-extension identity; taking the mate and using the
+triangle identities gives the corresponding identity on direct image or extension. -/
+theorem gamma_identities :
+    (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+      (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived B U),
+      (gamma B j (𝟙 U) (𝟙 X) j h).app M ≫
+          (rId B X).hom.app ((J B j).obj M) =
+        (J B j).map ((rId B U).hom.app M)) ∧
+    (∀ {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
+      (h : (𝟙 U) ≫ p = p ≫ (𝟙 X)) (M : Derived B U),
+      (gamma B (𝟙 U) p p (𝟙 X) h).app M ≫
+          (R B p).map ((jId B U).hom.app M) =
+        (jId B X).hom.app ((R B p).obj M)) := by
+  constructor
+  · intro U X j _ _ h M
+    dsimp only [gamma, rId]
+    exact mate_identity_vertical (adj B (𝟙 U)) (adj B (𝟙 X))
+      (gId B U) (gId B X) (J B j) (alpha B j (𝟙 U) (𝟙 X) j h)
+      (fun N ↦ (alpha_identities B).1 j h N) M
+  · intro U X p _ h M
+    dsimp only [gamma]
+    exact mate_identity_horizontal (adj B p) (J B (𝟙 X)) (J B (𝟙 U))
+      (jId B X) (jId B U) (alpha B (𝟙 U) p p (𝟙 X) h)
+      (fun N ↦ (alpha_identities B).2 p h N) M
+
 end GammaIdentities
 
 end AlgebraicGeometry.ProEtale.StrictTower

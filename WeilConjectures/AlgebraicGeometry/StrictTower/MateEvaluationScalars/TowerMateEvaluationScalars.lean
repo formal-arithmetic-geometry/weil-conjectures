@@ -662,6 +662,83 @@ def scalarJModule (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImme
     moduleJ Λ f ⋙ moduleRes φ X ≅ moduleRes φ U ⋙ moduleJ B f :=
   (@asIso _ _ _ _ (scalarJInv φ f) (scalarJInv_isIso φ f)).symm
 
+/-- Exact descent of the same identity on extension presheaves.
+Source: Stacks 03DI, 03DJ, 015F (blueprint: lem-cbc-tower-mate-evaluation-scalars). -/
+def scalarJ (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X) [IsOpenImmersion f] :
+    j Λ f ⋙ Res φ X ≅ Res φ U ⋙ j B f :=
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso (scalarJModule φ f) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The scalar comparisons preserve the specified ordinary open unit and counit.
+These equations normalize the identity on extension-presheaf generators.
+Source: Stacks 03DI, 03DJ (blueprint: lem-cbc-tower-mate-evaluation-scalars).
+Proof: the slice scalar theorem identifies each generator with the same section in
+the same summand, and sends the open unit and counit to themselves. Transport
+through weakly-etale localization and uniqueness of the unit-preserving adjoint.
+These are exactly the two equations of RingedOpenScalar.Equations. -/
+theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X)
+    [IsOpenImmersion f] :
+    ((∀ N : Modules Λ U,
+      (moduleRes φ U).map ((moduleJAdj Λ f).unit.app N) ≫
+        (scalarGModule φ f).hom.app ((moduleJ Λ f).obj N) ≫
+        (modulePullback B f).map ((scalarJModule φ f).hom.app N) =
+      (moduleJAdj B f).unit.app ((moduleRes φ U).obj N)) ∧
+    (∀ Q : Modules Λ X,
+      (scalarJModule φ f).hom.app ((modulePullback Λ f).obj Q) ≫
+        (moduleJ B f).map ((scalarGModule φ f).hom.app Q) ≫
+        (moduleJAdj B f).counit.app ((moduleRes φ X).obj Q) =
+      (moduleRes φ X).map ((moduleJAdj Λ f).counit.app Q))) ∧
+    ((∀ N : DerivedCategory (Modules Λ U),
+      (Res φ U).map ((dJAdj Λ f).unit.app N) ≫
+        (scalarG φ f).hom.app ((j Λ f).obj N) ≫
+        (g B f).map ((scalarJ φ f).hom.app N) =
+      (dJAdj B f).unit.app ((Res φ U).obj N)) ∧
+    (∀ Q : DerivedCategory (Modules Λ X),
+      (scalarJ φ f).hom.app ((g Λ f).obj Q) ≫
+        (j B f).map ((scalarG φ f).hom.app Q) ≫
+        (dJAdj B f).counit.app ((Res φ X).obj Q) =
+      (Res φ X).map ((dJAdj Λ f).counit.app Q))) := by
+  have hm : ((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
+      (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans =
+      (scalarJModule φ f).inv := rfl
+  have he := SheafOfModules.RingedOpenScalar.equations_of_inverseMate
+    (scalarJModule φ f) (scalarGModule φ f).symm
+    (moduleJAdj Λ f) (moduleJAdj B f) hm
+  refine ⟨he, ?_⟩
+  have hu (K : DerivedCategory (Modules Λ U)) := exact_mate
+    (moduleJAdj Λ f) (moduleJAdj B f) (scalarGModule φ f) (scalarJModule φ f).symm
+    (dJAdj Λ f) (dJAdj B f)
+    (by intro L; simpa only [exactAdj, dJAdj] using exactAdj_unit (moduleJAdj Λ f) L)
+    (by intro L; simpa only [exactAdj, dJAdj] using exactAdj_unit (moduleJAdj B f) L)
+    (by
+      intro L
+      have hh := unit_mateEquiv_symm (moduleJAdj Λ f) (moduleJAdj B f)
+        (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom) L
+      change _ = _ ≫ (modulePullback B f).map
+        (((mateEquiv (moduleJAdj Λ f) (moduleJAdj B f)).symm
+          (TwoSquare.mk _ _ _ _ (scalarGModule φ f).hom)).natTrans.app L) at hh
+      rw [hm] at hh
+      exact hh.symm) K
+  apply SheafOfModules.RingedOpenScalar.equations_of_inverseMate
+    (scalarJ φ f) (scalarG φ f).symm (dJAdj Λ f) (dJAdj B f)
+  ext K
+  apply ((dJAdj B f).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  have hu' : (dJAdj B f).unit.app ((Res φ U).obj K) ≫
+      (g B f).map ((scalarJ φ f).inv.app K) =
+    (Res φ U).map ((dJAdj Λ f).unit.app K) ≫
+      (scalarG φ f).hom.app ((j Λ f).obj K) := by
+    have hG : scalarG φ f =
+        Functor.mapDerivedCategorySquareIso (scalarGModule φ f) := by rfl
+    rw [hG]
+    simpa only [scalarJ, Functor.mapDerivedCategorySquareIso, Iso.trans_inv,
+      Iso.trans_hom, Iso.symm_inv, Iso.symm_hom,
+      Functor.mapDerivedCategoryNatIso_symm, Category.assoc] using hu K
+  exact (unit_mateEquiv_symm (dJAdj Λ f) (dJAdj B f)
+    (TwoSquare.mk _ _ _ _ (scalarG φ f).hom) K).symm.trans hu'.symm
+
 section ScalarCalculations
 
 attribute [local irreducible] Functor.leftAdjoint Scheme.proEtaleRingModulePullback

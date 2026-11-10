@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealKernelBound
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealImageStabilization
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 

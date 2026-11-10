@@ -69,6 +69,32 @@ theorem ι_map_upperStarCongrIso_hom_app {X Y : Scheme.{u}} [X.Over (Spec (CommR
   simp only [ProEtaleWeilSheaf.upperStarCongrIso, Functor.mapDerivedCategoryNatIso_refl]
   rfl
 
+/-- The composition isomorphism of pullbacks of Weil complexes lies over the derived composition
+isomorphism of pullbacks of pro-étale Weil sheaves. -/
+theorem ι_map_upperStarCompIso_hom_app {X Y Z : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    [Z.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) (g : Y ⟶ Z)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
+    (K : WeilComplex k₀ l Z) :
+    (objectProperty k₀ l X).ι.map ((upperStarCompIso (k₀ := k₀) (l := l) f g).hom.app K) =
+      (Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l f g)).hom.app
+          K.obj ≫
+        (Functor.mapDerivedCategoryCompIso _ _).hom.app K.obj :=
+  rfl
+
+/-- The inverse of the composition isomorphism of pullbacks of Weil complexes lies over the
+inverse of the derived composition isomorphism of pullbacks of pro-étale Weil sheaves. -/
+theorem ι_map_upperStarCompIso_inv_app {X Y Z : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    [Z.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) (g : Y ⟶ Z)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
+    (K : WeilComplex k₀ l Z) :
+    (objectProperty k₀ l X).ι.map ((upperStarCompIso (k₀ := k₀) (l := l) f g).inv.app K) =
+      (Functor.mapDerivedCategoryCompIso _ _).inv.app K.obj ≫
+        (Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l f g)).inv.app
+          K.obj :=
+  rfl
+
 variable (k₀ l) in
 /-- The exchange isomorphism `g'^* π^* ≅ π'^* g^*` of pullbacks of Weil complexes along a
 commutative square `g' ≫ π = π' ≫ g`. -/

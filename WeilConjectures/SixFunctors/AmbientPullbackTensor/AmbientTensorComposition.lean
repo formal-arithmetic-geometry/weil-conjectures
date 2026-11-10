@@ -85,6 +85,21 @@ private theorem generator_one_id {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option �
     (show ((pull ell E f s).obj M).val.obj (op ((base f s).obj U)) from
       ((adjunction ell E f s).unit.app M).val.app (op U) m)
 
+private theorem generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
+    {M N : Modules ell E Y s} (a : M ⟶ N) (U : Site Y s) (V : Site X s)
+    (q : V ⟶ (base f s).obj U) (m : M.val.obj (op U))
+    (r : (coefficients ell E X s).obj.obj (op V)) :
+    ((pull ell E f s).map a).val.app (op V) (generator ell E f s M U V q m r) =
+      generator ell E f s N U V q (a.val.app (op U) m) r := by
+  dsimp only [generator]
+  rw [map_smul]
+  congr 1
+  have hn := congrArg (fun z ↦ z.val.app (op U) m)
+    ((adjunction ell E f s).unit.naturality a)
+  have hq := PresheafOfModules.naturality_apply ((pull ell E f s).map a).val q.op
+    (((adjunction ell E f s).unit.app M).val.app (op U) m)
+  exact hq.trans (congrArg (fun z ↦ ((pull ell E f s).obj N).val.map q.op z) hn.symm)
+
 private theorem ordinary_composition {X Y Z : Scheme.{t}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ)
     (A : Tensor ell E Z s) (B : Tensor ell E Y s) (C : Tensor ell E X s)

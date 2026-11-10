@@ -855,6 +855,35 @@ private theorem ordinary_presentation (R : Type w) [CommRing R] [IsNoetherianRin
     ⟨(ModuleCat.isColimitCokernelCofork (ModuleCat.ofHom g) (ModuleCat.ofHom f)
       hgf hf).coconePointUniqueUpToIso (colimit.isColimit (parallelPair (ModuleCat.ofHom g) 0))⟩⟩
 
+private theorem internal_constant_fp {C : Type c} [Category.{h} C]
+    (J : GrothendieckTopology C) (R : Type (max c h)) [CommRing R] [IsNoetherianRing R]
+    [HasSheafify J Ab.{max c h}] [(J.W (A := Ab.{max c h})).IsMonoidal]
+    [HasLimitsOfSize.{h, c} (ModuleCat.{max c h} R)]
+    [HasSheafify J (ModuleCat.{max c h} R)]
+    (P : ModuleCat.{max c h} R) [Module.Finite R P] :
+    ∃ M : Mod (Sheaf J Ab.{max c h}) (Sheaf.sheafifyRingPresheaf J
+        ((Functor.const Cᵒᵖ).obj (RingCat.of R))),
+      Mod.IsFinitelyPresented _ M ∧
+        Nonempty ((ConstantInternalModuleSheafEncoding.sheafEncoding J R
+          (internalToModule R) rfl).obj M ≅ (constantSheaf J (ModuleCat.{max c h} R)).obj P) := by
+  let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
+  let S := constantSheaf J (ModuleCat.{max c h} R)
+  let rr : (internalToModule R).obj (Mod.regular (AddCommGrpCat.of R)) ≅ ModuleCat.of R R :=
+    ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext x; rfl)
+  let e (n : ℕ) : H.obj (Mod.finiteFree _ n) ≅ S.obj (ModuleCat.of R (Fin n → R)) :=
+    ConstantInternalModuleSheafEncoding.encFiniteFreeIso J R (internalToModule R) rfl n ≪≫
+      S.mapIso (biproduct.mapIso (fun _ ↦ rr) ≪≫ ModuleCat.biproductIsoPi _)
+  obtain ⟨n, m, g, ⟨eg⟩⟩ := ordinary_presentation R P
+  let ff := Functor.FullyFaithful.ofFullyFaithful H
+  let g' := ff.preimage ((e m).hom ≫ S.map g ≫ (e n).inv)
+  let eH : H.obj (cokernel g') ≅ S.obj P :=
+    PreservesCokernel.iso H g' ≪≫
+      cokernel.mapIso _ _ (e m) (e n) (by simp [g', ff]) ≪≫
+      (PreservesCokernel.iso S g).symm ≪≫ S.mapIso eg.symm
+  let M := H.objPreimage (S.obj P)
+  exact ⟨M, ⟨n, m, g', ⟨ff.preimageIso (H.objObjPreimageIso _ ≪≫ eH.symm)⟩⟩,
+    ⟨H.objObjPreimageIso _⟩⟩
+
 private def internalConstantPresheafFunctor
     {C : Type c} [Category.{h} C] (R : Type w) [CommRing R] :
     Mod Ab.{w} (AddCommGrpCat.of R) ⥤
@@ -1127,6 +1156,56 @@ private local instance realizedSectionMap_isIso : IsIso (realizedSectionMap B X 
     Iso.trans_inv, Functor.mapIso_inv]
   rfl
 
+omit [DiscreteTopology B] in
+private theorem pointFiniteModel
+    (P : ModuleCat.{u + 1} (ULift.{u + 1} B)) [Module.Finite (ULift.{u + 1} B) P] :
+    ∃ Q : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        (Profinite.continuousMapRingObj.{u} B),
+      Mod.IsFinitelyPresented _ Q ∧
+        Nonempty (((upperStarFromPoint X).mapMod
+          (Profinite.continuousMapRingObj.{u} B)).obj Q ≅
+            (CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+              (internalToModule (ULift.{u + 1} B)) rfl X).functor.obj
+                ((constantSheaf (Scheme.ProEt.topology X)
+                  (ModuleCat.{u + 1} (ULift.{u + 1} B))).obj P)) := by
+  let R := ULift.{u + 1} B
+  let J := coherentTopology Profinite.{u}
+  let N := moduleToInternalObj R P
+  let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
+  let C := (internalConstantFunctor J R).obj N
+  let e : H.obj C ≅ (constantSheaf J (ModuleCat.{u + 1} R)).obj P :=
+    (internalConstantEncoding J R).app N ≪≫
+      (constantSheaf J (ModuleCat.{u + 1} R)).mapIso (CategoryTheory.realizationIso R P)
+  obtain ⟨M, ⟨n, m, g, ⟨eg⟩⟩, ⟨eM⟩⟩ := internal_constant_fp J R P
+  let c : C ≅ cokernel g :=
+    (Functor.FullyFaithful.ofFullyFaithful H).preimageIso (e ≪≫ eM.symm) ≪≫ eg
+  let F := Mod.comap (D := Sheaf J Ab.{u + 1}) eR.inv
+  let : F.IsEquivalence :=
+    (Mod.comapEquivalenceOfIsIso eR.inv).isEquivalence_functor
+  let : F.Additive := Functor.additive_of_preserves_binary_products _
+  let free (k : ℕ) : F.obj (Mod.finiteFree _ k) ≅ Mod.finiteFree _ k :=
+    F.mapBiproduct (fun _ : Fin k ↦ Mod.regular _) ≪≫
+      biproduct.mapIso (fun _ ↦ by simpa using Mod.regularIsoOfIsIso (inv eR.inv))
+  refine ⟨F.obj C, finitePresentation_map_of_presentation F free g c, ⟨?_⟩⟩
+  let HX := ConstantInternalModuleSheafEncoding.sheafEncoding (Scheme.ProEt.topology X) R
+    (internalToModule R) rfl
+  let CX := (internalConstantFunctor (Scheme.ProEt.topology X) R).obj N
+  let eX : HX.obj CX ≅ (constantSheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} R)).obj P :=
+    (internalConstantEncoding (Scheme.ProEt.topology X) R).app N ≪≫
+      (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)).mapIso
+        (CategoryTheory.realizationIso R P)
+  let j : CX ≅ HX.inv.obj ((constantSheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} R)).obj P) :=
+    HX.asEquivalence.unitIso.app CX ≪≫ HX.inv.mapIso eX
+  unfold CondensedRing.finiteDiscreteCoefficientEquivalence
+  change _ ≅ (Mod.comap (asIso (finiteDiscreteSchemeRingIso B X eR).hom).inv).obj _
+  exact pointConstantComparison B X eR N ≪≫
+    (Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv).mapIso j ≪≫
+    (Mod.comapCongr (by
+      apply (cancel_mono (finiteDiscreteSchemeRingIso B X eR).hom).mp
+      simp)).app _
+
 @[irreducible] private def realizedConstantCounit (X : Scheme.{u}) :
     finiteComparisonConstantRealization X B ⋙
       ConstantInternalModuleSheafEncoding.sheafEncoding (Scheme.ProEt.topology X)
@@ -1296,6 +1375,25 @@ private local instance finiteRealizationMonoidal :
     EY.functor.mapIso ((i.app (EX.functor.obj F)).symm) ≪≫
     EY.functor.mapIso (G.mapIso (EX.unitIso.app F).symm)
 
+omit [DiscreteTopology B] in
+private theorem finiteLocalModel_of_ordinary
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)))
+    (hF : IsFiniteLocallyConstant (ULift.{u + 1} B) F) :
+    HasFiniteConstantLocalModel (Profinite.continuousMapRingObj.{u} B) X
+      ((CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+        (internalToModule (ULift.{u + 1} B)) rfl X).functor.obj F) := by
+  obtain ⟨C, hC⟩ := (pro_localFinite_small_cover X (ULift.{u + 1} B) F).mp
+    ((pro_localFinite_iff X (ULift.{u + 1} B) F).mpr hF)
+  refine ⟨C, fun i ↦ ?_⟩
+  obtain ⟨P, hP, ⟨eP⟩⟩ := hC i
+  let : Finite P := hP
+  let : Module.Finite (ULift.{u + 1} B) P :=
+    (Module.finite_iff_finite (R := ULift.{u + 1} B)).mpr hP
+  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := pointFiniteModel B (C.X i) eR P
+  exact ⟨Q, hQ, ⟨encodingForwardPullback B X eR (C.f i) F ≪≫
+    (CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+      (internalToModule (ULift.{u + 1} B)) rfl (C.X i)).functor.mapIso eP ≪≫ eQ.symm⟩⟩
+
 omit [DiscreteTopology B] [Finite B] in
 private theorem constantConstructible_iso
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -1306,6 +1404,28 @@ private theorem constantConstructible_iso
   obtain ⟨S, hS⟩ := hM
   exact ⟨S, fun i ↦ modelOfIso _
     ((CondensedRing.upperStar _ (S.immersion i)).mapIso e.symm) (hS i)⟩
+
+private theorem encoding_constructible_iff
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B))) :
+    IsConstructible (ULift.{u + 1} B) F ↔
+      IsConstantModelConstructible (Profinite.continuousMapRingObj.{u} B) X
+        ((CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+          (internalToModule (ULift.{u + 1} B)) rfl X).functor.obj F) := by
+  classical
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
+  constructor
+  · rintro ⟨S, hS⟩
+    refine ⟨S, fun i ↦ ?_⟩
+    exact modelOfIso _ (encodingForwardPullback B X eR (S.immersion i) F)
+      (finiteLocalModel_of_ordinary B (S.domain i) eR _ (hS i))
+  · intro h
+    let E := CondensedRing.finiteDiscreteCoefficientEquivalence B eR
+      (internalToModule (ULift.{u + 1} B)) rfl X
+    have h' := CondensedRing.finiteDiscreteCoefficient_constructible B eR
+      (internalToModule (ULift.{u + 1} B)) rfl X (E.functor.obj F)
+      (modelStratifiedConstructible _ X _ h)
+    exact isConstructible_of_iso (E.unitIso.app F).symm h'
 
 end InternalRealization
 

@@ -247,6 +247,33 @@ theorem integralSystemTensorComparison_square {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end Square
 
+section Factors
+
+variable {C D F : Type*} [Category C] [Category D] [Category F]
+  [Abelian C] [Abelian D] [Abelian F]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory F]
+
+/-- The derived compositor of exact functors induced by `e : H ≅ F₁ ⋙ F₂` is the
+localization of the termwise compositor.
+Source: Stacks 05RU, 0D6D
+(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) (H : C ⥤ F)
+    [F₁.Additive] [F₂.Additive] [H.Additive]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (e : H ≅ F₁ ⋙ F₂) (K : CochainComplex C ℤ) :
+    H.mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) =
+      (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).hom.app
+          (DerivedCategory.Q.obj K) ≫
+        F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
+        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) := by
+  rw [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+    Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
+
+end Factors
+
 set_option maxHeartbeats 3000000 in
 -- Matching the strict law against the descent data unfolds instance paths of the
 -- abelian categories of strict quotient systems.

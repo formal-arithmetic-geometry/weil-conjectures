@@ -75,5 +75,102 @@ private theorem reductionIso_level {U V : Scheme.{t}} (q : U ⟶ V)
     NatIso.ofComponents_hom_app, Iso.refl_hom, Category.id_comp] at h
   exact h
 
+/-- The normalized completed reduction comparisons respect the inverse-image square.
+This is an equation before taking mates and in the full derived diagram category.
+Source: blueprint completed-exchange-coherence, tensor/pullback coherence in its
+first two proof sentences; Stacks Tags 0D6D and 0E48
+(blueprint: lem-weil-pbc-completed-reduction-pullback-square).
+
+Proof: take a flat-term K-flat representative P on Y. Its two successive inverse
+images remain flat-term K-flat. The canonical geometric composition comparison is
+localization of the ordinary compositor whose right-adjoint conjugate is restriction
+along Over.pullbackComp. At each coefficient level the ordinary reduction comparison
+is tensor balancing; its two composites around the square send a pure tensor to its
+inverse image with the same quotient scalar. Naturality of the ring projections and
+the quotient transition maps makes this an equality of strict tower-complex maps.
+Use the defining normalization equations for completedReductionPullbackIso on all
+four edges. The ordinary equality and the factorization equations for derived
+pullback give the displayed equation after cancellation of the invertible K-flat
+counits. Finally resolve an arbitrary M by P and use naturality across the resulting
+quasi-isomorphism. This proves equality of strict derived maps, without assuming
+that derived evaluation is faithful. Zero complexes, zero coefficient rings and
+empty schemes satisfy the same tensor formulas. -/
+theorem completedReductionPullback_square
+    (sq : ChosenCartesianSquare g' f' f g) :
+    Functor.whiskerRight (d.reductionTowerPullbackIso g).hom (d.towerPull f') ≫
+      Functor.whiskerLeft (d.pull g) (d.reductionTowerPullbackIso f').hom ≫
+      Functor.whiskerRight
+        (proEtaleAmbientRingedPullbackComparison sq
+          (d.completedRing X) (d.completedRing Y) (d.completedRing X') (d.completedRing Y')
+          (d.integralRingIso f) (d.integralRingIso g) (d.integralRingIso g')
+          (d.integralRingIso f') (d.integral_coherent sq)).hom
+        (completedReductionTower X' d) =
+    Functor.whiskerLeft (completedReductionTower Y d)
+        (d.integralTowerRingedSquare sq).exchangeTowerSquare.hom ≫
+      Functor.whiskerRight (d.reductionTowerPullbackIso f).hom (d.towerPull g') ≫
+      Functor.whiskerLeft (d.pull f) (d.reductionTowerPullbackIso g').hom := by
+  have hamb : proEtaleAmbientRingedPullbackComparison sq
+      (d.completedRing X) (d.completedRing Y) (d.completedRing X') (d.completedRing Y')
+      (d.integralRingIso f) (d.integralRingIso g) (d.integralRingIso g')
+      (d.integralRingIso f') (d.integral_coherent sq) =
+      Functor.mapDerivedCategorySquareIso (d.integralTowerRingedSquare sq).exchangeModuleSquare :=
+    (d.integralTowerRingedSquare sq).ambientSquare_localization
+  rw [hamb]
+  unfold StrictTowerRingedSquare.exchangeTowerSquare
+  generalize (d.integralTowerRingedSquare sq).exchangeModuleSquare = σ
+  let good : ObjectProperty (CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :=
+    fun P ↦ P.IsKFlatIndependentCoefficients ∧
+      ∀ n, SheafOfModules.IsFlatOnSite (J := ProEt.topology Y) (R := d.completedRing Y) (P.X n)
+  have res (L : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :
+      ∃ P, ∃ p : P ⟶ L, good P ∧ QuasiIso p := by
+    obtain ⟨P, p, hP, hflat, hp, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := d.completedRing Y) L
+    exact ⟨P, p, ⟨hP, fun n ↦ (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso (d.completedRing Y) (P.X n)).symm
+        (hflat n)⟩, hp⟩
+  have hcounit (T : Scheme.{t}) : (fun P ↦ (stratumComplexCounit d T).app P) =
+      completedReductionTowerComplexCounit T d := funext (stratumComplexCounit_app d T)
+  have spec {U V : Scheme.{t}} (q : U ⟶ V) :
+      StratumReductionFormula d q (d.reductionTowerPullbackIso q) :=
+    (completedReductionPullbackIso_existsUnique d q).choose_spec.1
+  have hf_flat (P) (hP : good P) (n : ℤ) := pullback_flatTerms g' f
+    (d.completedRing Y) (d.completedRing X) (d.completedRing X')
+    (d.integralRingIso f) (d.integralRingIso g') P hP.1 hP.2 n
+  refine derivedReductionTowerSquare_paste
+    (stratumModulePull d g) (stratumModulePull d f') (stratumModulePull d f)
+    (stratumModulePull d g')
+    (completedReductionModuleTowerFunctor Y d) (completedReductionModuleTowerFunctor Y' d)
+    (completedReductionModuleTowerFunctor X d) (completedReductionModuleTowerFunctor X' d)
+    (completedReductionTower Y d) (completedReductionTower Y' d)
+    (completedReductionTower X d) (completedReductionTower X' d)
+    (stratumComplexCounit d Y) (stratumComplexCounit d Y')
+    (stratumComplexCounit d X) (stratumComplexCounit d X')
+    (stratumModuleReductionIso d g) (stratumModuleReductionIso d f')
+    (stratumModuleReductionIso d f) (stratumModuleReductionIso d g')
+    (d.reductionTowerPullbackIso g) (d.reductionTowerPullbackIso f')
+    (d.reductionTowerPullbackIso f) (d.reductionTowerPullbackIso g')
+    σ
+    good res ?_ ?_ ?_ ?_ ?_ (completedReductionModuleUnit d Y)
+    (completedReductionModuleUnit d Y') (completedReductionModuleUnit d X)
+    (completedReductionModuleUnit d X') (fun M n ↦ stratumModuleUnit_epi d Y M n.unop)
+    (reductionIso_level d g) (reductionIso_level d f') (reductionIso_level d f)
+    (reductionIso_level d g')
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec g P hP.1
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec f' _ (stratumPull_flatKFlat d g P hP.1 hP.2)
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec f P hP.1
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec g' _ (stratumPull_flatKFlat d f P hP.1 hP.2)
+  · intro P hP
+    rw [stratumComplexCounit_app]
+    exact towerCounit_isIso X' d _ (stratumPull_flatKFlat d g' _
+      (stratumPull_flatKFlat d f P hP.1 hP.2) (hf_flat P hP))
 
 end AlgebraicGeometry.Scheme

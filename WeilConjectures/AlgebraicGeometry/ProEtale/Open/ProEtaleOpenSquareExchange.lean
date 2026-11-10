@@ -717,6 +717,19 @@ private theorem dMap_iso {F G : C₁ ⥤ D₁} [F.Additive] [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ≅ G) :
     dMap a.hom = (mapDerivedCategoryNatIso a).hom := rfl
 
+private theorem dMap_square
+    (F₁ : C₁ ⥤ C₂) (F₂ : C₂ ⥤ D₂) (G₁ : C₁ ⥤ D₁) (G₂ : D₁ ⥤ D₂)
+    [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    (q : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) :
+    (mapDerivedCategoryCompIso F₁ F₂).hom ≫ dMap q.hom ≫
+      (mapDerivedCategoryCompIso G₁ G₂).inv = (mapDerivedCategorySquareIso q).hom := by
+  rw [dMap_iso]
+  rfl
+
 private noncomputable def dUnit (L : C₁ ⥤ D₁) (R : D₁ ⥤ C₁)
     [L.Additive] [R.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
@@ -866,6 +879,34 @@ private theorem dUnit_square_inverse
   simp only [← Functor.map_comp, Iso.hom_inv_id_app]
   erw [R₂.mapDerivedCategory.map_id, Category.comp_id]
 
+private theorem dMate_restriction
+    (L₁ : C₁ ⥤ D₁) (R₁ : D₁ ⥤ C₁) (L₂ : C₂ ⥤ D₂) (R₂ : D₂ ⥤ C₂)
+    (G : C₁ ⥤ C₂) (H : D₁ ⥤ D₂)
+    [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
+    [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
+    [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂]
+    [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    [IsIso adj₁.unit] [IsIso adj₂.unit]
+    (q : R₁ ⋙ G ≅ H ⋙ R₂) (b : G ⋙ L₂ ≅ L₁ ⋙ H)
+    (hb : mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) =
+      TwoSquare.mk _ _ _ _ q.hom) (K : DerivedCategory C₁) :
+    G.mapDerivedCategory.map (((mapDerivedCategoryIdIso C₁).inv ≫ dMap adj₁.unit ≫
+      (mapDerivedCategoryCompIso L₁ R₁).inv).app K) ≫
+      (mapDerivedCategorySquareIso q).hom.app (L₁.mapDerivedCategory.obj K) ≫
+      R₂.mapDerivedCategory.map ((mapDerivedCategorySquareIso b).inv.app K) =
+    ((mapDerivedCategoryIdIso C₂).inv ≫ dMap adj₂.unit ≫
+      (mapDerivedCategoryCompIso L₂ R₂).inv).app (G.mapDerivedCategory.obj K) := by
+  rw [← asIso_hom adj₁.unit, ← asIso_hom adj₂.unit, dMap_iso, dMap_iso]
+  apply dUnit_square_inverse L₁ R₁ L₂ R₂ G H (asIso adj₁.unit) (asIso adj₂.unit) q b
+  intro X
+  have h := unit_mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) X
+  rw [hb] at h
+  exact h
+
 private theorem dSquare_symm
     (F₁ : C₁ ⥤ C₂) (F₂ : C₂ ⥤ D₂) (G₁ : C₁ ⥤ D₁) (G₂ : D₁ ⥤ D₂)
     [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
@@ -935,6 +976,88 @@ private theorem dSquare_id_inverse (R : C₁ ⥤ C₂) (P : C₁ ⥤ C₁) (p : 
 
 end ExactLocalizationCalculus
 
+
+-- Apply the existing exact-square pasting theorems in both orientations.
+section DerivedPasting
+
+variable {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+  [Category C₀] [Category C₁] [Category C₂]
+  [Category D₀] [Category D₁] [Category D₂]
+  [Abelian C₀] [Abelian C₁] [Abelian C₂]
+  [Abelian D₀] [Abelian D₁] [Abelian D₂]
+  [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+  [HasDerivedCategory D₀] [HasDerivedCategory D₁] [HasDerivedCategory D₂]
+  (F₀₁ : C₀ ⥤ C₁) (F₁₂ : C₁ ⥤ C₂) (F₀₂ : C₀ ⥤ C₂)
+  (G₀₁ : D₀ ⥤ D₁) (G₁₂ : D₁ ⥤ D₂) (G₀₂ : D₀ ⥤ D₂)
+  (U₀ : C₀ ⥤ D₀) (U₁ : C₁ ⥤ D₁) (U₂ : C₂ ⥤ D₂)
+  [F₀₁.Additive] [F₁₂.Additive] [F₀₂.Additive]
+  [G₀₁.Additive] [G₁₂.Additive] [G₀₂.Additive]
+  [U₀.Additive] [U₁.Additive] [U₂.Additive]
+  [PreservesFiniteLimits F₀₁] [PreservesFiniteColimits F₀₁]
+  [PreservesFiniteLimits F₁₂] [PreservesFiniteColimits F₁₂]
+  [PreservesFiniteLimits F₀₂] [PreservesFiniteColimits F₀₂]
+  [PreservesFiniteLimits G₀₁] [PreservesFiniteColimits G₀₁]
+  [PreservesFiniteLimits G₁₂] [PreservesFiniteColimits G₁₂]
+  [PreservesFiniteLimits G₀₂] [PreservesFiniteColimits G₀₂]
+  [PreservesFiniteLimits U₀] [PreservesFiniteColimits U₀]
+  [PreservesFiniteLimits U₁] [PreservesFiniteColimits U₁]
+  [PreservesFiniteLimits U₂] [PreservesFiniteColimits U₂]
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem dSquare_comp_reverse
+    (q₀₁ : U₀ ⋙ G₀₁ ≅ F₀₁ ⋙ U₁)
+    (q₁₂ : U₁ ⋙ G₁₂ ≅ F₁₂ ⋙ U₂)
+    (q₀₂ : U₀ ⋙ G₀₂ ≅ F₀₂ ⋙ U₂)
+    (cF : F₀₂ ≅ F₀₁ ⋙ F₁₂) (cG : G₀₂ ≅ G₀₁ ⋙ G₁₂)
+    (hq : ∀ X, q₀₂.hom.app X ≫ U₂.map (cF.hom.app X) =
+      cG.hom.app (U₀.obj X) ≫ G₁₂.map (q₀₁.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X)) :
+    (mapDerivedCategorySquareIso q₀₂).hom =
+      whiskerLeft U₀.mapDerivedCategory
+        (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom ≫
+      whiskerRight (mapDerivedCategorySquareIso q₀₁).hom G₁₂.mapDerivedCategory ≫
+      whiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂).hom ≫
+      whiskerRight (mapDerivedCategoryNatIso cF ≪≫
+        (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).inv U₂.mapDerivedCategory := by
+  apply NatTrans.ext
+  funext K
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
+  rw [← cancel_mono (U₂.mapDerivedCategory.map
+    ((mapDerivedCategoryNatIso cF ≪≫ (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom.app K))]
+  simp only [Category.assoc, ← U₂.mapDerivedCategory.map_comp, Iso.inv_hom_id_app]
+  erw [U₂.mapDerivedCategory.map_id, Category.comp_id]
+  exact mapDerivedCategorySquareIso_hom_app_comp q₀₁ q₁₂ q₀₂ cG cF hq K
+
+private theorem dSquare_comp_forward
+    (q₀₁ : F₀₁ ⋙ U₁ ≅ U₀ ⋙ G₀₁)
+    (q₁₂ : F₁₂ ⋙ U₂ ≅ U₁ ⋙ G₁₂)
+    (q₀₂ : F₀₂ ⋙ U₂ ≅ U₀ ⋙ G₀₂)
+    (cF : F₀₂ ≅ F₀₁ ⋙ F₁₂) (cG : G₀₂ ≅ G₀₁ ⋙ G₁₂)
+    (hq : ∀ X, U₂.map (cF.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X) ≫
+      G₁₂.map (q₀₁.hom.app X) = q₀₂.hom.app X ≫ cG.hom.app (U₀.obj X)) :
+    (mapDerivedCategorySquareIso q₀₂).hom =
+      whiskerRight (mapDerivedCategoryNatIso cF ≪≫
+        (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom U₂.mapDerivedCategory ≫
+      whiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂).hom ≫
+      whiskerRight (mapDerivedCategorySquareIso q₀₁).hom G₁₂.mapDerivedCategory ≫
+      whiskerLeft U₀.mapDerivedCategory
+        (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).inv := by
+  have h := mapDerivedCategorySquareIso_comp F₀₁ F₁₂ F₀₂ G₀₁ G₁₂ G₀₂ U₀ U₁ U₂
+    q₀₁ q₁₂ q₀₂ cF cG hq
+  apply NatTrans.ext
+  funext K
+  have ht := congrArg (fun e ↦ e.hom.app K) h
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+    isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app, associator_hom_app,
+    associator_inv_app, Category.id_comp, Category.comp_id] at ht
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
+  rw [← cancel_mono ((mapDerivedCategoryNatIso cG ≪≫
+    (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom.app (U₀.mapDerivedCategory.obj K))]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  exact ht.symm
+
+end DerivedPasting
 private theorem sfPullback_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     eqToIso (congrArg (sfIntrinsicPullback A) h) =
       sfIntrinsicTransportIso A

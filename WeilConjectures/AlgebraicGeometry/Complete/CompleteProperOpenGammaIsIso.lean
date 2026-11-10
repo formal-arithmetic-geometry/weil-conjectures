@@ -275,4 +275,33 @@ theorem cbcStrictReduction_scalarEtaleOrigin (V : Scheme.{t}) (K : d.derived V)
       ((ProEtale.StrictTower.ev A V n).obj ((cbcStrictReduction d V).obj K))) :=
   cbcStrictReductionLevel_scalarEtaleOrigin d V K origins n
 
+/-- The proper/open gamma is invertible on complete objects with compatible etale origins.
+Source: blueprint proof step 8; Stacks 0F7B, 09C9 (blueprint: thm-cbc-complete-proetale).
+Proof: both sides are quotient-tower complete, so it suffices that the strict reduction of
+gamma is invertible; constant-coefficient restriction reflects this. After restriction
+gamma is conjugate to the strict gamma, which is invertible levelwise by finite
+compact-support base change on the retained etale origins. -/
+theorem cbcProperOpenGamma_app_isIso {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i)
+    (n : ℕ) (a : Fin n → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : (cbcCompleteProperty d V n a ha).FullSubcategory)
+    (origins : PbcHasCompatibleEtaleOrigins V d K.obj) :
+    IsIso ((cbcProperOpenGamma d k r p i h).app K.obj) := by
+  have hK : d.TowerComplete V K.obj :=
+    cbcTowerComplete_of_completeProperty d V n a ha K.obj K.property
+  have hs : d.TowerComplete T ((cbcJ d i).obj ((d.push r).obj K.obj)) :=
+    cbcJ_towerComplete d i n a ha _ (d.push_complete r K.obj hK)
+  have ht : d.TowerComplete T ((d.push p).obj ((cbcJ d k).obj K.obj)) :=
+    d.push_complete p _ (cbcJ_towerComplete d k n a ha _ hK)
+  refine isIso_of_reductionTower_isIso d T _ hs ht ?_
+  rw [← exchangeTowerRes_isIso_iff]
+  obtain ⟨e₁, e₂, he⟩ := cbcProperOpenGamma_strictConjugate d k r p i h K.obj
+  have := ProEtale.StrictTower.gamma_isIso A k r p i h ((cbcStrictReduction d V).obj K.obj)
+    (fun m ↦ cbcStrictReduction_scalarEtaleOrigin d V K.obj origins m)
+  change IsIso ((cbcStrictReduction d T).map _)
+  rw [he]
+  infer_instance
+
 end AlgebraicGeometry.Scheme

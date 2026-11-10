@@ -198,4 +198,47 @@ private theorem unitCounit_onComplex
     Category.comp_id, Category.comp_id]
   exact h
 
+private theorem exactSquare_fac
+    {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
+    [Abelian B] [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory B] [HasDerivedCategory C]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    (F : B ⥤ C) (G : D ⥤ E) (CX : B ⥤ D) (CY : C ⥤ E)
+    [F.Additive] [G.Additive] [CX.Additive] [CY.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits CX] [PreservesFiniteColimits CX]
+    [PreservesFiniteLimits CY] [PreservesFiniteColimits CY]
+    (e : CX ⋙ G ≅ F ⋙ CY) (P : CochainComplex B ℤ) :
+    (Functor.mapDerivedCategoryCompIso CX G ≪≫
+        Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F CY).symm).hom.app (DerivedCategory.Q.obj P) ≫
+        CY.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
+        CY.mapDerivedCategoryFactors.hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      G.mapDerivedCategory.map (CX.mapDerivedCategoryFactors.hom.app P) ≫
+        G.mapDerivedCategoryFactors.hom.app
+          ((CX.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P) := by
+  let : PreservesFiniteLimits (CX ⋙ G) := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits (CX ⋙ G) := comp_preservesFiniteColimits _ _
+  let : PreservesFiniteLimits (F ⋙ CY) := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits (F ⋙ CY) := comp_preservesFiniteColimits _ _
+  have h1 := Functor.mapDerivedCategoryCompIso_fac F CY P
+  have hc1 : (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ CY))
+      (.up ℤ)).hom.app P = 𝟙 _ := rfl
+  erw [hc1, DerivedCategory.Q.map_id, Category.comp_id] at h1
+  have h2 := Functor.mapDerivedCategoryCompIso_fac CX G P
+  have hc2 : (Functor.mapHomologicalComplexCompIso (Iso.refl (CX ⋙ G))
+      (.up ℤ)).hom.app P = 𝟙 _ := rfl
+  erw [hc2, DerivedCategory.Q.map_id, Category.comp_id] at h2
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso CX G).inv.app
+    (DerivedCategory.Q.obj P))).1
+  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  erw [h1, Functor.mapDerivedCategoryNatIso_fac]
+  erw [← h2]
+  simp only [Category.assoc]
+  rfl
+
 end AlgebraicGeometry.Scheme
