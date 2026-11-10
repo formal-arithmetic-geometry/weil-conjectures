@@ -13,6 +13,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Category.Grp.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Local representatives through an epimorphism of module sheaves
 

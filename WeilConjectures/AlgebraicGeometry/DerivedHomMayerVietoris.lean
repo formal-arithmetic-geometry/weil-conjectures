@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Geometry.RingedSpace.Basic
 import WeilConjectures.Algebra.Homology.OpenHomTriangleRealization
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Mayer--Vietoris sequence for derived Hom
 

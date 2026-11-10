@@ -11,6 +11,7 @@ public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorContraction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorOriginalSectionsExt
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Invertibility of the balanced sheaf tensor map
 
