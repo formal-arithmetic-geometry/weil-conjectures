@@ -91,8 +91,8 @@ private theorem termwise_homotopy_square_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
   rfl
 
-set_option maxHeartbeats 1200000 in
--- After abstracting normalization, the canonical endpoint conversions timed out at 600000 in 38s.
+set_option maxHeartbeats 600000 in
+-- Reusing the abstract exact-factor normalization keeps the proof within the original budget.
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
 stalks and cohomology; it needs neither a base-change square nor K-flatness.
@@ -168,14 +168,7 @@ theorem singleComplexOpen_termwise_counit_compatibility
       ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P) =
       (schemeOpenRestriction X U).mapDerivedCategoryFactors.hom.app P := by
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change (schemeOpenRestriction X U).mapDerivedCategory.map (𝟙 _) ≫
-      (schemeOpenRestriction X U).mapDerivedCategoryFactors.hom.app P ≫
-      𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
-    erw [(schemeOpenRestriction X U).mapDerivedCategory.map_id,
-      DerivedCategory.Qh.map_id]
-    simp only [Category.id_comp]
-    exact Category.comp_id _
+    exact congrArg Iso.hom (termwise_exact_factors (schemeOpenRestriction X U) P)
   rw [hf] at h
   have h' := cancel_counit_factors
     ((derivedPullback j).mapIso ((schemeOpenRestriction X U).mapDerivedCategoryFactors.app P))
