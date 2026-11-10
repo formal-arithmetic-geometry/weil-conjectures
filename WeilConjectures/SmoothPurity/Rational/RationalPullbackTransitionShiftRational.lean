@@ -163,8 +163,6 @@ private theorem whiskerLeft_commShift_of_ofObjEqOfMapHEq
 
 attribute [local irreducible] rationalPullbackScalarComparison
 
-set_option maxHeartbeats 400000 in
--- The statement needs `respectTransparency false` on v4.35, which slows down elaboration.
 /-- The rational pullback scalar comparison commutes with the normalized rational shifts,
 given the shift compatibility of its integral model.
 Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
