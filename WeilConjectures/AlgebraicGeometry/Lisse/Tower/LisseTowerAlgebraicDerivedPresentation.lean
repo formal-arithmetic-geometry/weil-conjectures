@@ -166,7 +166,7 @@ private theorem exists_pseudoCoherent_normalizedTower
       (Functor.mapDerivedCategoryCompIso
         (ModuleCat.restrictScalars.{r} (Ideal.Quotient.factor
           (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))
-        (ModuleCat.restrictScalars.{r} (Ideal.Quotient.mk (J ^ (n + 2))))).inv.app (K n) ≫
+        (ModuleCat.restrictScalars.{r} (Ideal.Quotient.mk (J ^ (n + 2))))).hom.app (K n) ≫
       (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{r}
         (Ideal.Quotient.mk (J ^ (n + 2)))
         (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))
