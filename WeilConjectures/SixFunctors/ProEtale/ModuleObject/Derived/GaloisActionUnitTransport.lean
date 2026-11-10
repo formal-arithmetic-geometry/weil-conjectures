@@ -146,7 +146,7 @@ lemma Functor.mapDerivedCategoryFactorsh_inv_comp_compIso_inv {C D E : Type*} [C
     (K : HomotopyCategory C (ComplexShape.up ℤ)) :
     g.mapDerivedCategoryFactorsh.inv.app ((f.mapHomotopyCategory _).obj K) ≫
         g.mapDerivedCategory.map (f.mapDerivedCategoryFactorsh.inv.app K) ≫
-        (Functor.mapDerivedCategoryCompIso f g).inv.app (DerivedCategory.Qh.obj K) =
+        (Functor.mapDerivedCategoryCompIso f g).hom.app (DerivedCategory.Qh.obj K) =
       DerivedCategory.Qh.map
           ((Functor.mapHomotopyCategoryCompIso (Iso.refl (f ⋙ g)) _).hom.app K) ≫
         (f ⋙ g).mapDerivedCategoryFactorsh.inv.app K := by

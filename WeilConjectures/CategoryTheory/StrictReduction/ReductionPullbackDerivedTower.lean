@@ -294,9 +294,9 @@ def constantDerivedSquare (F : A ⥤ B) [F.Additive]
     comp_preservesFiniteLimits _ _
   letI : PreservesFiniteColimits (F ⋙ Functor.const ℕᵒᵖ) :=
     comp_preservesFiniteColimits _ _
-  (Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ) (termwise F)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ) (termwise F) ≪≫
     Functor.mapDerivedCategoryNatIso (constantSquare F) ≪≫
-      Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)
+      (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm
 
 variable [MonoidalPreadditive B]
 
