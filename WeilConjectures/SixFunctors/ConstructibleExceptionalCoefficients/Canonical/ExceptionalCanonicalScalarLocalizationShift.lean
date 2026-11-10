@@ -55,8 +55,6 @@ private theorem rationalizationShift_eq
   unfold integralRationalizationShift finiteTorIntegralShift
   rfl
 
-set_option maxHeartbeats 400000 in
--- v4.35: the final `rw` on the shift instances unfolds more without `respectTransparency`.
 /-- The ordinary-realization shift descends to the published canonical rational scalar shift.
 Source: Zheng, Construction 6.2; the normalized scalar square in Construction 6.6
 (blueprint: lem-sf-canonical-scalar-localization-shift).
@@ -158,9 +156,11 @@ theorem canonical_scalar_localization_shift
     erw [Category.id_comp, Category.id_comp, Category.comp_id]
     exact normalized_paste_id _ _ hU (congrArg QL.obj hV) (heR (IE.obj K))
       (map_iso_id_heq QL (eI.app K) hV (heI K))
-  · dsimp only [e, Iso.trans_hom, Iso.symm_hom,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
+  · -- rewrite the two shift instances while `e` is still folded (small motive); unfolding `e`
+    -- first makes the second rewrite's motive check time out at the default heartbeat limit
     rw [rationalizationShift_eq l Ω E T, rationalizationShift_eq l Ω L T]
+    dsimp only [e, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
     infer_instance
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
