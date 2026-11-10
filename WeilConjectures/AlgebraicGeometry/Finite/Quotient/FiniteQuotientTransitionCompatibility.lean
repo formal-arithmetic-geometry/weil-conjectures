@@ -151,17 +151,17 @@ private theorem exactFunctorComp_factors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ⋙ G ≅ H) (P : CochainComplex C ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
       H.mapDerivedCategoryFactors.hom.app P =
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) := by
-  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  dsimp only [Iso.trans_hom, NatTrans.comp_app]
   erw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac,
     ← Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
