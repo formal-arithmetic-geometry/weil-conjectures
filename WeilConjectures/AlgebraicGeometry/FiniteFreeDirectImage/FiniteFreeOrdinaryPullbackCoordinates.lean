@@ -255,7 +255,6 @@ private theorem presentedTensor_hom_ext_private (X : Scheme.{u}) (s : ScalarMode
 
 attribute [local instance] unitSMul_presentedScalarCoordinates
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the projected square expands both scalar and geometric adjunctions.
 private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
