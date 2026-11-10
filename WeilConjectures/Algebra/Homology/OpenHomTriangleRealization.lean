@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.Algebra.Homology.OpenCoverAdjunctionTriangle
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Hom identifications for the open-cover triangle
 

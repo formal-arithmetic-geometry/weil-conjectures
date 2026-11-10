@@ -13,6 +13,7 @@ import WeilConjectures.Algebra.Homology.OpenExtensionCounitStalk
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 
 @[expose] public section

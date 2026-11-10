@@ -16,6 +16,7 @@ import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Canonical adjunction maps in the geometric open-cover triangle
 
