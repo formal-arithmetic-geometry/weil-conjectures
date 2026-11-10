@@ -396,7 +396,7 @@ theorem specGeometricFrobenius_pow_hom [Fintype k] (m : ℕ) :
   induction m with
   | zero => exact (Spec.map_id _).symm
   | succ m ih =>
-    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom, ih, specGeometricFrobenius_hom, ← Spec.map_comp,
+    rw [pow_succ, Aut.mul_asIso, Iso.trans_hom, ih, specGeometricFrobenius_hom, ← Spec.map_comp,
       pow_succ']
     rfl
 

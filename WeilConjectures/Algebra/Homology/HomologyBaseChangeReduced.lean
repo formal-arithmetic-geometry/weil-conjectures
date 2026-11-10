@@ -97,7 +97,7 @@ lemma finrank_tensor_le_finrank_residueField (L : Type u) [Field L] [Algebra R L
     finrank L (L ⊗[R] M) ≤ finrank (ResidueField R) (ResidueField R ⊗[R] M) := by
   obtain ⟨φ, hφ⟩ := exists_surjective_fin_finrank_residueField (R := R) M
   have hs : Function.Surjective (φ.baseChange L) := by
-    rw [LinearMap.baseChange_eq_ltensor]
+    rw [LinearMap.baseChange_eq_lTensor]
     exact LinearMap.lTensor_surjective L hφ
   have h := LinearMap.finrank_range_le (φ.baseChange L)
   rw [LinearMap.range_eq_top.2 hs, finrank_top, Module.finrank_baseChange (M' := Fin _ → R),
@@ -133,7 +133,7 @@ theorem free_of_finrank_residueField_tensor_eq [IsReduced R] [Module.Finite R M]
     have : Ideal.IsPrime P := hP
     let L := Ideal.ResidueField P
     have hs : Function.Surjective (φ.baseChange L) := by
-      rw [LinearMap.baseChange_eq_ltensor]
+      rw [LinearMap.baseChange_eq_lTensor]
       exact LinearMap.lTensor_surjective L hφ
     have hinj : Function.Injective (φ.baseChange L) := by
       refine (LinearMap.injective_iff_surjective_of_finrank_eq_finrank ?_).2 hs
@@ -163,10 +163,10 @@ lemma LinearMap.finrank_tensor_cokernel_add_finrank_range (h : X →ₗ[R] Y) (L
       finrank L (L ⊗[R] Y) := by
   let q := (LinearMap.range h).mkQ.baseChange L
   have hq : Function.Surjective q := by
-    rw [LinearMap.baseChange_eq_ltensor]
+    rw [LinearMap.baseChange_eq_lTensor]
     exact LinearMap.lTensor_surjective L (Submodule.mkQ_surjective _)
   have hex : Function.Exact (h.baseChange L) q := by
-    rw [LinearMap.baseChange_eq_ltensor, LinearMap.baseChange_eq_ltensor]
+    rw [LinearMap.baseChange_eq_lTensor, LinearMap.baseChange_eq_lTensor]
     exact lTensor_exact L (LinearMap.exact_iff.2 (Submodule.ker_mkQ _))
       (Submodule.mkQ_surjective _)
   have h₁ := LinearMap.finrank_range_add_finrank_ker q
@@ -311,15 +311,15 @@ theorem bijective_homologyBaseChange_of_finrank_eq [IsReduced A] [Module.Finite 
     constructor
     · intro x y hxy
       have hxy' := congrArg Subtype.val hxy
-      simp only [jR, LinearMap.codRestrict_apply, LinearMap.baseChange_eq_ltensor] at hxy'
+      simp only [jR, LinearMap.codRestrict_apply, LinearMap.baseChange_eq_lTensor] at hxy'
       exact Module.Flat.lTensor_preserves_injective_linearMap _ Subtype.val_injective hxy'
     · rintro ⟨y, hy⟩
       have hy' : S.g.hom.lTensor R y = 0 := by
-        rw [← LinearMap.baseChange_eq_ltensor]
+        rw [← LinearMap.baseChange_eq_lTensor]
         exact hy
       obtain ⟨x, hx⟩ := ((Module.Flat.lTensor_exact R hexZ) y).1 hy'
       exact ⟨x, Subtype.ext (by
-        simp only [jR, LinearMap.codRestrict_apply, LinearMap.baseChange_eq_ltensor]
+        simp only [jR, LinearMap.codRestrict_apply, LinearMap.baseChange_eq_lTensor]
         exact hx)⟩
   let eJ := LinearEquiv.ofBijective jR hjR
   let cZ := (AlgebraTensorModule.cancelBaseChange A R K K Z).symm

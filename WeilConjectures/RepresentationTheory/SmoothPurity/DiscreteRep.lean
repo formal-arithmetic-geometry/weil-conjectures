@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
-public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.Topology.Separation.Regular
 public import Mathlib.CategoryTheory.Abelian.Exact
 
 import Mathlib.CategoryTheory.Abelian.Subcategory

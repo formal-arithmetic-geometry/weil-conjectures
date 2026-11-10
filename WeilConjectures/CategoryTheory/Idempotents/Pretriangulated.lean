@@ -73,9 +73,9 @@ omit [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Addit
 lemma idemPoly_idem {X : C} (x : X ⟶ X) (h : (x ≫ x - x) ≫ (x ≫ x - x) = 0) :
     idemPoly x ≫ idemPoly x = idemPoly x := by
   have := idem_of_sub_mul_sub_eq_zero (R := End X) x (by
-    simp only [End.mul_def] at h ⊢
+    simp only [End.mul_asHom] at h ⊢
     rw [← h])
-  simpa only [End.mul_def, idemPoly, assoc] using this
+  simpa only [End.mul_asHom, idemPoly, assoc] using this
 
 /-- **Lifting of idempotents along a distinguished triangle**: a pair of idempotents on the first
 two terms of a distinguished triangle, compatible with its first morphism, extends to an

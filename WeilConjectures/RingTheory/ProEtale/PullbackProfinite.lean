@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Topology.DiscreteQuotient
-public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.Topology.Separation.Regular
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.RingTheory.ProEtale.IndZariski
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant

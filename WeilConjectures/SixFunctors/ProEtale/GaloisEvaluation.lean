@@ -140,7 +140,7 @@ theorem IsAbelianVariety.exists_genericPointSepAction_forall_eq_one {k : Type u}
     rw [← map_natCast ψK]
     exact (map_ne_zero ψK).2 hrk
   have hζ (m : ℕ) : ∃ ζ : E.left.functionField, IsPrimitiveRoot ζ (r ^ m) := by
-    obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k (r ^ m)
+    obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k (r ^ m)
     exact ⟨ψK ζ, hζ.map_of_injective ψK.injective⟩
   obtain ⟨ι, _, U, _, f, hU, hf, hcov, hpow⟩ :=
     IsAbelianVariety.exists_finite_cover_units_not_pow E hE hr.two_le

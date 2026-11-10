@@ -49,9 +49,9 @@ noncomputable def unitEndRingHom [Preadditive C] [Preadditive D] [F.Additive] :
     End (𝟙_ C) →+* End (𝟙_ D) where
   toFun t := ε F ≫ F.map t ≫ η F
   map_one' := by
-    rw [End.one_def, End.one_def, F.map_id, id_comp, Monoidal.ε_η]
+    rw [End.one_asHom, End.one_asHom, F.map_id, id_comp, Monoidal.ε_η]
   map_mul' s t := by
-    rw [End.mul_def, End.mul_def, F.map_comp, assoc, assoc, assoc, Monoidal.η_ε_assoc]
+    rw [End.mul_asHom, End.mul_asHom, F.map_comp, assoc, assoc, assoc, Monoidal.η_ε_assoc]
   map_zero' := by
     rw [F.map_zero, Limits.zero_comp, Limits.comp_zero]
   map_add' s t := by

@@ -27,7 +27,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
 def Iso.conjRingEquiv {X Y : C} (α : X ≅ Y) : End X ≃+* End Y where
   __ := α.conj
   map_add' f g := by
-    simp only [MulEquiv.toEquiv_eq_coe, Equiv.toFun_as_coe, MulEquiv.coe_toEquiv, Iso.conj_apply]
+    simp only [MulEquiv.toEquiv_eq_coe, Equiv.toFun_as_coe, MulEquiv.coe_toEquiv, Iso.conj_apply_asHom]
     rw [Preadditive.add_comp, Preadditive.comp_add]
 
 @[simp]

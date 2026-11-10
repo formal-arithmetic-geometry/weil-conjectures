@@ -54,10 +54,10 @@ lemma asHom_pow_comp_eq_comp_asHom_pow {a : Y ⟶ Y} {b : X ⟶ X} {p : Y ⟶ X}
     (h : a ≫ p = p ≫ b) (m : ℕ) :
     asHom (of a ^ m) ≫ p = p ≫ asHom (of b ^ m) := by
   induction m with
-  | zero => simp [one_def]
+  | zero => simp [one_asHom]
   | succ m ih =>
     change asHom (of a ^ m * of a) ≫ p = p ≫ asHom (of b ^ m * of b)
-    rw [mul_def, mul_def]
+    rw [mul_asHom, mul_asHom]
     change (a ≫ asHom (of a ^ m)) ≫ p = p ≫ b ≫ asHom (of b ^ m)
     rw [Category.assoc, ih, reassoc_of% h]
 

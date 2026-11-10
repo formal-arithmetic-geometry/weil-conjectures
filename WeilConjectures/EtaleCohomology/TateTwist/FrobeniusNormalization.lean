@@ -274,7 +274,7 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
     simpa using (isUnit_ringChar_of_hasInvertibleExponent (Λ := Λ)
       (Spec (.of (AlgebraicClosure k)))).map (Scheme.ΓSpecIso (.of (AlgebraicClosure k))).hom.hom
   have : NeZero ((ringChar Λ : ℕ) : AlgebraicClosure k) := ⟨hn.ne_zero⟩
-  obtain ⟨ζ₀, hζ₀⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (AlgebraicClosure k) (ringChar Λ)
+  obtain ⟨ζ₀, hζ₀⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot (AlgebraicClosure k) (ringChar Λ)
   obtain ⟨c, hγ, hcq⟩ := exists_geometricFrobeniusAlgEquivOfAlgebraic_eq_pow k hζ₀
   let u₀ := (hζ₀.isUnit (NeZero.ne _)).unit
   have hu₀ : u₀ ^ ringChar Λ = 1 := Units.ext (by

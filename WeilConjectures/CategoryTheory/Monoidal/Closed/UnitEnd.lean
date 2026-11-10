@@ -48,8 +48,8 @@ variable {C : Type*} [Category* C] [MonoidalCategory C]
 @[simps]
 def unitEndAction (X : C) : End (𝟙_ C) →* End X where
   toFun u := (ρ_ X).inv ≫ X ◁ u ≫ (ρ_ X).hom
-  map_one' := by simp [End.one_def]
-  map_mul' u v := by simp [End.mul_def]
+  map_one' := by simp [End.one_asHom]
+  map_mul' u v := by simp [End.mul_asHom]
 
 /-- The action of endomorphisms of the unit is natural. -/
 @[reassoc]
