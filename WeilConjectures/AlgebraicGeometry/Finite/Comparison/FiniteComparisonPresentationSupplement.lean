@@ -855,6 +855,17 @@ private theorem ordinary_presentation (R : Type w) [CommRing R] [IsNoetherianRin
     ⟨(ModuleCat.isColimitCokernelCofork (ModuleCat.ofHom g) (ModuleCat.ofHom f)
       hgf hf).coconePointUniqueUpToIso (colimit.isColimit (parallelPair (ModuleCat.ofHom g) 0))⟩⟩
 
+section ConstantPresentation
+
+private local instance presentationWeakSheafify {C : Type c} [Category.{h} C]
+    (J : GrothendieckTopology C) [HasSheafify J Ab.{max c h}] :
+    HasWeakSheafify J Ab.{max c h} := HasSheafify.isRightAdjoint
+
+private local instance presentationModuleWeakSheafify {C : Type c} [Category.{h} C]
+    (J : GrothendieckTopology C) (R : Type (max c h)) [CommRing R]
+    [HasSheafify J (ModuleCat.{max c h} R)] :
+    HasWeakSheafify J (ModuleCat.{max c h} R) := HasSheafify.isRightAdjoint
+
 private theorem internal_constant_fp {C : Type c} [Category.{h} C]
     (J : GrothendieckTopology C) (R : Type (max c h)) [CommRing R] [IsNoetherianRing R]
     [HasSheafify J Ab.{max c h}] [(J.W (A := Ab.{max c h})).IsMonoidal]
@@ -883,6 +894,8 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
   let M := H.objPreimage (S.obj P)
   exact ⟨M, ⟨n, m, g', ⟨ff.preimageIso (H.objObjPreimageIso _ ≪≫ eH.symm)⟩⟩,
     ⟨H.objObjPreimageIso _⟩⟩
+
+end ConstantPresentation
 
 private def internalConstantPresheafFunctor
     {C : Type c} [Category.{h} C] (R : Type w) [CommRing R] :
