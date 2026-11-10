@@ -80,7 +80,7 @@ private theorem stage_square_cancel {C D : Type*} [Category* C] [Category* D] (G
       (x ≫ ρP ≫ G.map zP.inv ≫ wP.inv) ≫
         (wP.hom ≫ G.map (zP.hom ≫ n ≫ zQ.inv) ≫ wQ.inv) := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc, Functor.map_comp,
-    Iso.map_inv_hom_id_assoc, reassoc_of% h]
+    Iso.inv_hom_id_map_assoc, reassoc_of% h]
 
 /-- The conjugated fixed-stage square underlying common-stage naturality.
 Source: Stacks 099N(5), finite-stage cancellation after coefficient compatibility.

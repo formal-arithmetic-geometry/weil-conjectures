@@ -121,8 +121,7 @@ private theorem rational_naturality
       ⟨(constructibleIntegralPullback l E f).obj
         ((constructibleIntegralPullback l E g).obj M.obj)⟩ := by
     rw [obj, obj]
-  induction v using TensorProduct.induction_on with
-  | zero => simp
+  induction v using TensorProduct.inductionOn with
   | tmul c a =>
     have hm := (normalization_map_heq (rationalDerivedPullback l E f)
       (obj g K) (obj g J)

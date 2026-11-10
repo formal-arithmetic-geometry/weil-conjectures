@@ -14139,7 +14139,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompCoherence
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompConjugate
 public import WeilConjectures.CategoryTheory.Adjunction.MateComparisonTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
-public import WeilConjectures.CategoryTheory.Adjunction.MateCoprojection
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
@@ -26653,7 +26652,6 @@ public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.VerdierExchange
 public import WeilConjectures.WeilSheaf.VerdierExchangeNatural
-public import WeilConjectures.WeilSheaf.VerdierExchangeYoneda
 public import WeilConjectures.WeilSheaf.WeilAffineSpaceBundleTrace
 public import WeilConjectures.WeilSheaf.WeilAffineSpaceTrace
 public import WeilConjectures.WeilSheaf.WeilDescent
