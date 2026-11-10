@@ -92,5 +92,93 @@ private theorem mateCube
   rw [← reassoc_of% hqn, ← H.map_comp_assoc, hj]
   simp only [Functor.map_comp, Category.assoc]
 
+private noncomputable abbrev tripleComparison :
+    (L ⋙ M ⋙ N).mapDerivedCategory ≅
+      L.mapDerivedCategory ⋙ M.mapDerivedCategory ⋙ N.mapDerivedCategory :=
+  Functor.mapDerivedCategoryCompIso (L ⋙ M) N ≪≫
+    isoWhiskerRight (Functor.mapDerivedCategoryCompIso L M) N.mapDerivedCategory
+
+private lemma tripleComparison_hom :
+    (tripleComparison L M N).hom =
+      (Functor.mapDerivedCategoryCompIso L (M ⋙ N)).hom ≫
+        Functor.whiskerLeft L.mapDerivedCategory (Functor.mapDerivedCategoryCompIso M N).hom :=
+  (Functor.mapDerivedCategoryCompIso_assoc L M N).symm
+
+private lemma tripleComparison_right (e : L ⋙ M ≅ L' ⋙ M') :
+    (tripleComparison L M N).hom ≫
+        Functor.whiskerRight (Functor.mapDerivedCategorySquareIso e).hom
+          N.mapDerivedCategory =
+      (Functor.mapDerivedCategoryNatIso (isoWhiskerRight e N)).hom ≫
+        (tripleComparison L' M' N).hom := by
+  dsimp only [tripleComparison, Functor.mapDerivedCategorySquareIso]
+  simp only [Iso.trans_hom, Iso.symm_hom,
+    isoWhiskerRight_hom, Functor.whiskerRight_comp, Category.assoc]
+  rw [← reassoc_of% (Functor.whiskerRight_comp
+    (Functor.mapDerivedCategoryCompIso L M).hom
+    (Functor.mapDerivedCategoryCompIso L M).inv N.mapDerivedCategory), Iso.hom_inv_id]
+  simp only [Functor.whiskerRight_id', Category.id_comp]
+  rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e N)]
+
+private lemma tripleComparison_left (e : M ⋙ N ≅ M'' ⋙ N') :
+    (tripleComparison L M N).hom ≫
+        Functor.whiskerLeft L.mapDerivedCategory
+          (Functor.mapDerivedCategorySquareIso e).hom =
+      (Functor.mapDerivedCategoryNatIso (isoWhiskerLeft L e)).hom ≫
+        (tripleComparison L M'' N').hom := by
+  rw [tripleComparison_hom, tripleComparison_hom]
+  dsimp only [Functor.mapDerivedCategorySquareIso]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.whiskerLeft_comp, Category.assoc]
+  rw [← reassoc_of% (Functor.whiskerLeft_comp L.mapDerivedCategory
+    (Functor.mapDerivedCategoryCompIso M N).hom
+    (Functor.mapDerivedCategoryCompIso M N).inv), Iso.hom_inv_id]
+  simp only [Functor.whiskerLeft_id', Category.id_comp]
+  rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft L e)]
+
+private lemma derivedCube
+    (qJ : R₀ ⋙ J ≅ J' ⋙ R₁) (qH : R₁ ⋙ H ≅ H' ⋙ R₃)
+    (qG : R₀ ⋙ G ≅ G' ⋙ R₂) (qI : R₂ ⋙ I ≅ I' ⋙ R₃)
+    (c : J ⋙ H ≅ G ⋙ I) (d : J' ⋙ H' ≅ G' ⋙ I')
+    (hc : ∀ M, c.hom.app (R₀.obj M) ≫ I.map (qG.hom.app M) ≫ qI.hom.app (G'.obj M) =
+      H.map (qJ.hom.app M) ≫ qH.hom.app (J'.obj M) ≫ R₃.map (d.hom.app M))
+    (M : DerivedCategory D₀) :
+    (Functor.mapDerivedCategorySquareIso c).hom.app (R₀.mapDerivedCategory.obj M) ≫
+        I.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso qG).hom.app M) ≫
+        (Functor.mapDerivedCategorySquareIso qI).hom.app (G'.mapDerivedCategory.obj M) =
+      H.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso qJ).hom.app M) ≫
+        (Functor.mapDerivedCategorySquareIso qH).hom.app (J'.mapDerivedCategory.obj M) ≫
+        R₃.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso d).hom.app M) := by
+  let pL := isoWhiskerLeft R₀ c ≪≫ isoWhiskerRight qG I ≪≫ isoWhiskerLeft G' qI
+  let pR := isoWhiskerRight qJ H ≪≫ isoWhiskerLeft J' qH ≪≫ isoWhiskerRight d R₃
+  have hp : pL = pR := by
+    apply Iso.ext
+    ext K
+    exact hc K
+  have hL : (tripleComparison R₀ J H).hom ≫
+      Functor.whiskerLeft R₀.mapDerivedCategory
+        (Functor.mapDerivedCategorySquareIso c).hom ≫
+      Functor.whiskerRight (Functor.mapDerivedCategorySquareIso qG).hom
+        I.mapDerivedCategory ≫
+      Functor.whiskerLeft G'.mapDerivedCategory
+        (Functor.mapDerivedCategorySquareIso qI).hom =
+      (Functor.mapDerivedCategoryNatIso pL).hom ≫ (tripleComparison G' I' R₃).hom := by
+    rw [reassoc_of% (tripleComparison_left c),
+      reassoc_of% (tripleComparison_right qG), tripleComparison_left qI]
+    simp only [pL, Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
+  have hR : (tripleComparison R₀ J H).hom ≫
+      Functor.whiskerRight (Functor.mapDerivedCategorySquareIso qJ).hom
+        H.mapDerivedCategory ≫
+      Functor.whiskerLeft J'.mapDerivedCategory
+        (Functor.mapDerivedCategorySquareIso qH).hom ≫
+      Functor.whiskerRight (Functor.mapDerivedCategorySquareIso d).hom
+        R₃.mapDerivedCategory =
+      (Functor.mapDerivedCategoryNatIso pR).hom ≫ (tripleComparison G' I' R₃).hom := by
+    rw [reassoc_of% (tripleComparison_right qJ),
+      reassoc_of% (tripleComparison_left qH), tripleComparison_right d]
+    simp only [pR, Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
+  have h := hL.trans ((congrArg (fun p ↦
+    (Functor.mapDerivedCategoryNatIso p).hom ≫ (tripleComparison G' I' R₃).hom) hp).trans hR.symm)
+  have h' := (cancel_epi (tripleComparison R₀ J H).hom).1 h
+  exact congr_app h' M
+
 
 end AlgebraicGeometry.ProEtale

@@ -995,6 +995,40 @@ end SingleTensor
 
 attribute [local irreducible] singleTensorHom singleTensorIsoComp
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem coefficientModule_flatResolution
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    Abelian.HasFunctorialFlatResolution
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+  Mod.hasFunctorialFlatResolution
+
+set_option maxSynthPendingDepth 16 in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def derivedComparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {S T X : Scheme.{u}}
+    [IsLocallyNoetherian X] [CompactSpace X]
+    (a : S ⟶ X) (b : T ⟶ X) [IsImmersion a] [IsImmersion b]
+    (A : GeneratorFactorization a) (B : GeneratorFactorization b)
+    (C : GeneratorFactorization (pullback.fst a b ≫ a))
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (hL : IsLisseCoefficientModule Λ L) :
+    (DerivedCategory.singleFunctor _ 0).obj ((generatorExtension Λ A).obj L) ⊗
+      (DerivedCategory.singleFunctor _ 0).obj ((generatorExtension Λ B).obj M) ≅
+        (DerivedCategory.singleFunctor _ 0).obj ((generatorExtension Λ C).obj
+          ((upperStar Λ (pullback.fst a b)).obj L ⊗
+            (upperStar Λ (pullback.snd a b)).obj M)) := by
+  exact singleTensorIsoComp
+    (D := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hBraided := Mod.braidedCategory) (hClosed := Mod.monoidalClosed)
+    (hFlatResolution := coefficientModule_flatResolution Λ X)
+    ((generatorExtension Λ A).obj L) ((generatorExtension Λ B).obj M) _
+    (generatorExtension_flat Λ A L hL) (ordinaryComparison Λ a b A B C L M)
+
 universe vD wD
 
 set_option backward.isDefEq.respectTransparency false in

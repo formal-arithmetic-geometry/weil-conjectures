@@ -1301,6 +1301,32 @@ noncomputable def unboundedEtaleUpperStarIdIso
       𝟭 (DerivedCategoryModule A X) :=
   Functor.mapDerivedCategoryNatIso (upperStarId (ModuleCat.{u + 1} A) X) ≪≫
     Functor.mapDerivedCategoryIdIso _
+private lemma upperStar_comp_id_unit
+    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    (Functor.mapDerivedCategoryNatIso
+        (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _).hom ≫
+        Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
+          (unboundedEtaleUpperStarIdIso A X).hom = 𝟙 _ := by
+  rw [upperStarComp_id_left]
+  simp only [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_trans,
+    Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
+  rw [reassoc_of% Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
+  ext K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+    unboundedEtaleUpperStarIdIso, Iso.trans_hom]
+  simp only [Functor.mapDerivedCategoryNatIso_symm, Iso.inv_hom_id_app_assoc]
+  have hr : (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).rightUnitor = Iso.refl _ := rfl
+  rw [hr]
+  have he : Functor.mapDerivedCategoryNatIso
+      (Iso.refl ((upperStar (ModuleCat.{u + 1} A) (𝟙 X)) ⋙ 𝟭 _)) = Iso.refl _ := by
+    apply Iso.ext
+    exact Functor.mapDerivedCategoryNatIso_refl
+  rw [he]
+  erw [Category.id_comp]
+  exact congr_app (Functor.mapDerivedCategoryCompIso_comp_id
+    (upperStar (ModuleCat.{u + 1} A) (𝟙 X))) K
+
 
 private lemma identity_exchange_of_pasting
     {D E : Type*} [Category D] [Category E]

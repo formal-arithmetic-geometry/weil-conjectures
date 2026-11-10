@@ -236,6 +236,34 @@ private theorem cbcCompletedExchange_naturality
           (d.directImageRlimIso f').inv
   exact e.naturality k
 
+theorem cbcRefinementMap_isIso
+    {X Y : Scheme.{t}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂)
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : (cbcCompleteProperty d X r a ha).FullSubcategory)
+    (_origins : PbcHasCompatibleEtaleOrigins X d K.obj) :
+    IsIso (cbcRefinementMap d u K.obj) := by
+  apply cbcRefinementMap_isIso_of_gamma
+  unfold cbcRefinementGamma
+  exact @cbcProperOpenGamma_app_isIso _ _ d _ _ _ _ _ _ _ _ _ _ ?_ ?_ _ _ _ r a ha K _origins
+
+/-- The canonical compactification comparison through any supplied common refinement.
+Its factors are the specified proper/open refinement maps, not chosen endpoint isos.
+Source: blueprint proof step 8, I_12 (blueprint: thm-cbc-complete-proetale). -/
+def cbcCompactificationComparison
+    {X Y : Scheme.{t}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c₀ c₁ c₂ : Compactification f} (u₁ : c₀.Refinement c₁) (u₂ : c₀.Refinement c₂)
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : (cbcCompleteProperty d X r a ha).FullSubcategory)
+    (origins : PbcHasCompatibleEtaleOrigins X d K.obj) :
+    (cbcSupport d c₁).obj K.obj ≅ (cbcSupport d c₂).obj K.obj :=
+  @asIso _ _ _ _ (cbcRefinementMap d u₁ K.obj)
+      (cbcRefinementMap_isIso d u₁ r a ha K origins) ≪≫
+    (@asIso _ _ _ _ (cbcRefinementMap d u₂ K.obj)
+      (cbcRefinementMap_isIso d u₂ r a ha K origins)).symm
+
 section
 
 attribute [local irreducible] cbcDerivedOpenShriek cbcProperOpenGamma

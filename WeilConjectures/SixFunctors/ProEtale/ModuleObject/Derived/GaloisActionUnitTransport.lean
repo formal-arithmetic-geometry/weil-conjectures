@@ -136,6 +136,25 @@ lemma Functor.mapDerivedCategoryNatTrans_fach {C D : Type*} [Category C] [Catego
   rw [← DerivedCategory.Qh.map_comp, ← DerivedCategory.Qh.map_comp]
   simp
 
+/-- The inverse of the composition isomorphism `D(f ⋙ g) ≅ D(f) ⋙ D(g)` on the image of a complex,
+through the factorizations through `DerivedCategory.Qh`. -/
+lemma Functor.mapDerivedCategoryFactorsh_inv_comp_compIso_inv {C D E : Type*} [Category C]
+    [Category D] [Category E] [Abelian C] [Abelian D] [Abelian E] [HasDerivedCategory C]
+    [HasDerivedCategory D] [HasDerivedCategory E] (f : C ⥤ D) (g : D ⥤ E) [f.Additive]
+    [g.Additive] [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g]
+    (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    g.mapDerivedCategoryFactorsh.inv.app ((f.mapHomotopyCategory _).obj K) ≫
+        g.mapDerivedCategory.map (f.mapDerivedCategoryFactorsh.inv.app K) ≫
+        (Functor.mapDerivedCategoryCompIso f g).inv.app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (f ⋙ g)) _).hom.app K) ≫
+        (f ⋙ g).mapDerivedCategoryFactorsh.inv.app K := by
+  rw [← cancel_mono ((f ⋙ g).mapDerivedCategoryFactorsh.hom.app K)]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [← Functor.mapDerivedCategoryCompIso_fach f g K]
+  simp [← Functor.map_comp_assoc]
+
 namespace Adjunction
 
 open MonoidalCategory Abelian

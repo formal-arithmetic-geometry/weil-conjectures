@@ -280,6 +280,24 @@ def ordinaryComparison (F : A ⥤ B)
 
 variable [HasDerivedCategory.{w'} B] [HasDerivedCategory.{t'} (ℕᵒᵖ ⥤ B)]
 
+/-- The canonical localization of the constant-tower square.
+Source: Stacks 06YY (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+def constantDerivedSquare (F : A ⥤ B) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory ⋙ (termwise F).mapDerivedCategory ≅
+      F.mapDerivedCategory ⋙ (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory :=
+  letI : PreservesFiniteLimits (Functor.const ℕᵒᵖ ⋙ termwise F) :=
+    comp_preservesFiniteLimits _ _
+  letI : PreservesFiniteColimits (Functor.const ℕᵒᵖ ⋙ termwise F) :=
+    comp_preservesFiniteColimits _ _
+  letI : PreservesFiniteLimits (F ⋙ Functor.const ℕᵒᵖ) :=
+    comp_preservesFiniteLimits _ _
+  letI : PreservesFiniteColimits (F ⋙ Functor.const ℕᵒᵖ) :=
+    comp_preservesFiniteColimits _ _
+  (Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ) (termwise F)).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (constantSquare F) ≪≫
+      Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)
+
 variable [MonoidalPreadditive B]
 
 /-- Normalization by the universal reduction counits on every good representative.

@@ -54,6 +54,86 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
 universe u
 
 open CategoryTheory Limits Polynomial
+/-- The exponential form of the trace-to-determinant identity for a finite graded family
+`(W i, u i)`: the inverse of the alternating determinant
+`∏ᵢ det (1 - T uᵢ)^{(-1)^i}` is `exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ)) Tⁿ / n)`, the exponential of
+the alternating trace series. Equivalently, `log Δ` is the alternating trace series, for
+`Δ = ∏ᵢ det (1 - T uᵢ)^{(-1)^{i+1}}` (blueprint `prop-trace-determinant`). -/
+theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Module.End K (W i)) :
+    (alternatingCharpolyRevProd s u 1)⁻¹ =
+      (PowerSeries.exp K).subst (alternatingTraceSeries s u) := by
+  set T : ℤ → PowerSeries K := fun i ↦
+    PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K (W i) (u i ^ n) with hT
+  set a : ℕ → K := fun n ↦ ∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace K (W i) (u i ^ n)
+    with ha
+  have hg : alternatingTraceSeries s u = PowerSeries.mk fun n ↦ if n = 0 then 0 else a n / n := by
+    ext n
+    rw [coeff_alternatingTraceSeries, PowerSeries.coeff_mk]
+  have hsum : ∑ i ∈ s, (i.negOnePow : ℤ) • T i =
+      PowerSeries.mk fun n ↦ if n = 0 then 0 else a n := by
+    ext n
+    rw [map_sum, PowerSeries.coeff_mk]
+    split_ifs with hn
+    · simp [hT, hn]
+    · simp only [hT, PowerSeries.coeff_smul, PowerSeries.coeff_mk, ite_eq_right hn, ha]
+  have hP1 (i : ℤ) :
+      PowerSeries.constantCoeff (((u i).charpolyRev.comp (Polynomial.X ^ 1) :
+        Polynomial K) : PowerSeries K) = 1 := by
+    rw [pow_one, Polynomial.comp_X, Polynomial.constantCoeff_coe,
+      Polynomial.coeff_zero_eq_eval_zero, eval_charpolyRev]
+  have hf : ∀ i ∈ s, PowerSeries.X * PowerSeries.derivative K
+      (if Even i then (((u i).charpolyRev.comp (Polynomial.X ^ 1) : Polynomial K) :
+        PowerSeries K)
+      else (((u i).charpolyRev.comp (Polynomial.X ^ 1) : Polynomial K) : PowerSeries K)⁻¹) =
+      (-((i.negOnePow : ℤ) • T i)) *
+      (if Even i then (((u i).charpolyRev.comp (Polynomial.X ^ 1) : Polynomial K) :
+        PowerSeries K)
+      else (((u i).charpolyRev.comp (Polynomial.X ^ 1) : Polynomial K) : PowerSeries K)⁻¹) := by
+    intro i _
+    simp only [pow_one, Polynomial.comp_X]
+    split_ifs with h
+    · rw [Int.negOnePow_even _ h, Units.val_one, one_smul]
+      exact X_mul_derivative_charpolyRev (u i)
+    · rw [Int.negOnePow_odd _ (Int.not_even_iff_odd.1 h), Units.val_neg, Units.val_one,
+        neg_smul, one_smul, neg_neg, inv_charpolyRev_eq_exp]
+      exact PowerSeries.X_mul_derivative_exp_subst _
+  set A := alternatingCharpolyRevProd s u 1 with hAdef
+  have hA : PowerSeries.X * PowerSeries.derivative K A =
+      (-PowerSeries.mk fun n ↦ if n = 0 then 0 else a n) * A := by
+    rw [hAdef, alternatingCharpolyRevProd, PowerSeries.X_mul_derivative_prod s hf,
+      Finset.sum_neg_distrib, hsum]
+  set E := (PowerSeries.exp K).subst (alternatingTraceSeries s u) with hEdef
+  have hE : PowerSeries.X * PowerSeries.derivative K E =
+      (PowerSeries.mk fun n ↦ if n = 0 then 0 else a n) * E := by
+    rw [hEdef, hg]
+    exact PowerSeries.X_mul_derivative_exp_subst a
+  have hconstA : PowerSeries.constantCoeff A = 1 := by
+    rw [hAdef, alternatingCharpolyRevProd, map_prod]
+    refine Finset.prod_eq_one fun i _ ↦ ?_
+    split_ifs
+    · exact hP1 i
+    · rw [PowerSeries.constantCoeff_inv, hP1, inv_one]
+  have hconstE : PowerSeries.constantCoeff E = 1 := by
+    have hsub : PowerSeries.HasSubst (alternatingTraceSeries s u) :=
+      PowerSeries.HasSubst.of_constantCoeff_zero' (constantCoeff_alternatingTraceSeries s u)
+    have h0 : PowerSeries.coeff 0 E = 1 := by
+      rw [hEdef, PowerSeries.coeff_subst' (hb := hsub), finsum_eq_single _ 0
+        fun d hd ↦ by simp [PowerSeries.coeff_zero_eq_constantCoeff, map_pow, zero_pow hd]]
+      simp [PowerSeries.coeff_exp]
+    simpa using h0
+  have h1 : PowerSeries.X * PowerSeries.derivative K (A * E) = 0 * (A * E) := by
+    rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
+    linear_combination A * hE + E * hA
+  have h2 : PowerSeries.X * PowerSeries.derivative K (1 : PowerSeries K) = 0 * 1 := by
+    rw [Derivation.map_one_eq_zero, mul_zero, zero_mul]
+  have hAE : A * E = 1 := by
+    ext n
+    exact PowerSeries.coeff_eq_of_X_mul_derivative_eq h1 h2
+      (by rw [map_mul, hconstA, hconstE, map_one, mul_one]) (map_zero _) (m := n)
+      (fun _ _ ↦ rfl) n le_rfl
+  rw [eq_comm, PowerSeries.eq_inv_iff_mul_eq_one (by rw [hconstA]; exact one_ne_zero),
+    mul_comm, hAE]
+
 
 namespace AlgebraicGeometry
 
@@ -182,6 +262,34 @@ theorem map_zetaSeries_mul_evenFrobeniusProduct :
         PowerSeries (PadicAlgCl l)) else 1) _
   rw [hpar Even, hpar Odd] at h
   exact h
+
+/-- Blueprint `prop-trace-determinant` (trace-to-determinant factorization): for a finite
+graded family `(Vᵢ, uᵢ)_{i ∈ I}` of endomorphisms of finite-dimensional vector spaces over a
+field `K` of characteristic zero, with `Pᵢ(T) = det(1 - T uᵢ | Vᵢ)` and
+`Δ(T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`,
+
+* `-log Pᵢ(T) = ∑_{n ≥ 1} Tr(uᵢⁿ | Vᵢ) Tⁿ / n` for every `i`
+  (`LinearMap.logOf_charpolyRev`);
+* `Δ(T) = exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ | Vᵢ)) Tⁿ / n)`, i.e. `log Δ` is the alternating
+  trace series (`LinearMap.inv_alternatingCharpolyRevProd_eq_exp`; the alternating determinant
+  `LinearMap.alternatingCharpolyRevProd` is `Δ⁻¹`);
+
+and, for `X₀` smooth and proper of pure dimension `d` over `k₀`,
+`Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`, with the denominators cleared
+(`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`). -/
+theorem trace_determinant {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*}
+    [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)]
+    (s : Finset ℤ) (u : ∀ i, Module.End K (W i)) :
+    (∀ i, -PowerSeries.logOf ((u i).charpolyRev : PowerSeries K) =
+      LinearMap.traceSeries (u i)) ∧
+    (LinearMap.alternatingCharpolyRevProd s u 1)⁻¹ =
+      (PowerSeries.exp K).subst (LinearMap.alternatingTraceSeries s u) ∧
+    PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (X ↘ Spec (CommRingCat.of k₀)).zetaSeries *
+        (evenFrobeniusProduct k₀ l X d : PowerSeries (PadicAlgCl l)) =
+      (oddFrobeniusProduct k₀ l X d : PowerSeries (PadicAlgCl l)) :=
+  ⟨fun i ↦ by rw [LinearMap.logOf_charpolyRev, neg_neg],
+    LinearMap.inv_alternatingCharpolyRevProd_eq_exp s u,
+    map_zetaSeries_mul_evenFrobeniusProduct k₀ l X d⟩
 
 end SmoothProper
 
