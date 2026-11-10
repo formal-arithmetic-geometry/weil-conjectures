@@ -25,7 +25,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 local instance instEssentiallySmallProfinite_integralResidueScalarCounitModel
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
-private theorem tensorPresentation_app
 private theorem tensorPresentation_app_port
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
