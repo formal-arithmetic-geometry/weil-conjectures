@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisRestrictionLocalizationChain
+import Mathlib.Util.CountHeartbeats
 
 /-! # Complex localization of the open restriction square
 
@@ -24,8 +25,8 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
-set_option maxHeartbeats 1200000 in
--- The explicit quotient transports exhausted 800000 heartbeats at whnf (34s on v4.35).
+set_option maxHeartbeats 800000 in
+-- Quotient transport elaborates several derived-category and sheaf-category conversions.
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
 Source: Stacks Project, Tags 08FE and 079V.
 Proof: Expand the chain and the transported direct-image unit. Substitute
@@ -65,7 +66,7 @@ theorem schemeMV_restriction_chain_quotient_transport
         (LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I)) := by
   let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
   let LY := schemeOpenRestriction Y W
-  have hxi : LX.mapDerivedCategoryFactorsh.inv.app
+  #count_heartbeats have hxi : LX.mapDerivedCategoryFactorsh.inv.app
       ((HomotopyCategory.quotient _ _).obj I) ≫
       LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) =
       (DerivedCategory.quotientCompQhIso _).hom.app
@@ -78,10 +79,10 @@ theorem schemeMV_restriction_chain_quotient_transport
       Category.assoc]
     erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
       Iso.hom_inv_id_app, Category.comp_id]
-  have hy := LY.mapDerivedCategoryFactorsh_hom_app
+  #count_heartbeats have hy := LY.mapDerivedCategoryFactorsh_hom_app
     (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj I)
-  have hr : (schemeMVHomotopyOpenRestriction h W).hom.app
+  #count_heartbeats have hr : (schemeMVHomotopyOpenRestriction h W).hom.app
       ((HomotopyCategory.quotient _ _).obj I) =
       (HomotopyCategory.quotient _ _).map
         ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
@@ -92,21 +93,21 @@ theorem schemeMV_restriction_chain_quotient_transport
       ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
         (.up ℤ)).app I) ≫ (HomotopyCategory.quotient _ _).map (𝟙 _) = _
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
-  dsimp only
-  unfold schemeMVRestrictionLocalizationChain
-  simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
+  #count_heartbeats dsimp only
+  #count_heartbeats unfold schemeMVRestrictionLocalizationChain
+  #count_heartbeats simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
-  erw [hy, hr]
-  simp only [Functor.comp_obj, Category.assoc, Functor.mapHomotopyCategoryFactors,
+  #count_heartbeats erw [hy, hr]
+  #count_heartbeats simp only [Functor.comp_obj, Category.assoc, Functor.mapHomotopyCategoryFactors,
     Quotient.lift.isLift_inv, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+  #count_heartbeats erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
-  simp only [← Functor.map_comp]
-  erw [hxi]
-  simp only [Functor.map_comp]
-  erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  rfl
+  #count_heartbeats simp only [← Functor.map_comp]
+  #count_heartbeats erw [hxi]
+  #count_heartbeats simp only [Functor.map_comp]
+  #count_heartbeats erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  #count_heartbeats rfl
 
 end AlgebraicGeometry
