@@ -1306,11 +1306,11 @@ private lemma upperStar_comp_id_unit
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X) (by simp)) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom ≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom ≫
         Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
           (unboundedEtaleUpperStarIdIso A X).hom = 𝟙 _ := by
   rw [upperStarComp_id_left]
-  simp only [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_trans,
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategoryNatIso_trans,
     Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
   rw [reassoc_of% Functor.mapDerivedCategoryNatIso_isoWhiskerLeft]
   ext K
@@ -2236,7 +2236,6 @@ private lemma exact_square_plus
     NatTrans.comp_app, Category.assoc]
 
 section ProperExchangeRestriction
-attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Functor.rightDerivedFunctorPlusCompatibility
 private lemma exact_unit_plus

@@ -149,7 +149,7 @@ private theorem derived_disjoint_extension {U X C : Scheme.{u}}
     exact module_disjoint_extension B s c hc (M.obj n)
   have hz := F.isZero_mapDerivedCategory_obj N (fun q ↦ hzero _)
   exact hz.of_iso ((Functor.mapDerivedCategoryCompIso (towerJ B s)
-    (towerPullback B c)).app N).symm
+    (towerPullback B c)).app N)
 
 /-- The clopen projection is identity on the image and zero on the complementary open.
 Source: Stacks, Tag 09AE and blueprint, fourth proof step
@@ -548,7 +548,7 @@ private theorem gId_eq (X : Scheme.{u}) :
 
 private theorem gComp_hom {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (gComp B f g).hom = (Functor.mapDerivedCategoryNatIso (towerGComp B f g)).hom ≫
-      (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).hom := rfl
+      (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).inv := rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem gComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
