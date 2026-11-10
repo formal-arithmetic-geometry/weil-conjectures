@@ -90,9 +90,7 @@ theorem commonStageTensor_endpoint
           (((stageSystem l Ω W).assoc
             ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)) =
       commonStageTensorComparison l Ω W P Q L h := by
-  run_tac do Lean.logInfo m!"PF652 proof start: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
   delta rationalTensorStageComparison commonStageTensorComparison operationStageTransitionIso
-  run_tac do Lean.logInfo m!"PF652 after delta: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
   have hh := tensorStageComparison_endpoint
     (C := Stage l Ω W (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage))
     (D := Stage l Ω W L)
@@ -109,8 +107,6 @@ theorem commonStageTensor_endpoint
       ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1 h).app P.obj)
     (((stageSystem l Ω W).assoc
       ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)
-  run_tac do Lean.logInfo m!"PF652 after have: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
   simpa only [operationStageTransitionIso, commonStageTensorObject] using hh
-  run_tac do Lean.logInfo m!"PF652 proof end: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
 
 end WeilConjectures
