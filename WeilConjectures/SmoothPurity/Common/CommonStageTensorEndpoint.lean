@@ -110,7 +110,7 @@ theorem commonStageTensor_endpoint
     (((stageSystem l Ω W).assoc
       ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)
   run_tac do Lean.logInfo m!"PF652 after have: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
-  exact hh
+  simpa only [operationStageTransitionIso, commonStageTensorObject] using hh
   run_tac do Lean.logInfo m!"PF652 proof end: {← IO.getNumHeartbeats}, {← IO.monoMsNow} ms"
 
 end WeilConjectures
