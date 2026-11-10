@@ -55,12 +55,12 @@ theorem mapDerivedCategory_compIso_assoc
     (h : isoWhiskerLeft r₂₃ c₀₁₂ ≪≫ c₀₂₃ =
       (associator _ _ _).symm ≪≫ isoWhiskerRight c₁₂₃ r₀₁ ≪≫ c₀₁₃) :
     isoWhiskerLeft r₂₃.mapDerivedCategory
-        ((mapDerivedCategoryCompIso r₁₂ r₀₁).symm ≪≫ mapDerivedCategoryNatIso c₀₁₂) ≪≫
-      ((mapDerivedCategoryCompIso r₂₃ r₀₂).symm ≪≫ mapDerivedCategoryNatIso c₀₂₃) =
+        ((mapDerivedCategoryCompIso r₁₂ r₀₁) ≪≫ mapDerivedCategoryNatIso c₀₁₂) ≪≫
+      ((mapDerivedCategoryCompIso r₂₃ r₀₂) ≪≫ mapDerivedCategoryNatIso c₀₂₃) =
     (associator _ _ _).symm ≪≫
-      isoWhiskerRight ((mapDerivedCategoryCompIso r₂₃ r₁₂).symm ≪≫
+      isoWhiskerRight ((mapDerivedCategoryCompIso r₂₃ r₁₂) ≪≫
         mapDerivedCategoryNatIso c₁₂₃) r₀₁.mapDerivedCategory ≪≫
-      ((mapDerivedCategoryCompIso r₁₃ r₀₁).symm ≪≫ mapDerivedCategoryNatIso c₀₁₃) := by
+      ((mapDerivedCategoryCompIso r₁₃ r₀₁) ≪≫ mapDerivedCategoryNatIso c₀₁₃) := by
   ext K
   have hD := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app K) h
   have hα : (associator r₂₃ r₁₂ r₀₁).symm = Iso.refl _ := by
@@ -73,32 +73,32 @@ theorem mapDerivedCategory_compIso_assoc
   have A := NatTrans.congr_app (mapDerivedCategoryCompIso_assoc r₂₃ r₁₂ r₀₁) K
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at WL WR A
   have WL' : (mapDerivedCategoryNatIso c₀₁₂).hom.app (r₂₃.mapDerivedCategory.obj K) =
-      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).inv.app K ≫
+      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).hom.app K ≫
         (mapDerivedCategoryNatIso (isoWhiskerLeft r₂₃ c₀₁₂)).hom.app K ≫
-        (mapDerivedCategoryCompIso r₂₃ r₀₂).hom.app K := by
-    rw [WL, Iso.inv_hom_id_app_assoc]
+        (mapDerivedCategoryCompIso r₂₃ r₀₂).inv.app K := by
+    rw [WL, Iso.hom_inv_id_app_assoc]
   have WR' : r₀₁.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₁₂₃).hom.app K) ≫
-      (mapDerivedCategoryCompIso r₁₃ r₀₁).inv.app K =
-      (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K ≫
+      (mapDerivedCategoryCompIso r₁₃ r₀₁).hom.app K =
+      (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K ≫
         (mapDerivedCategoryNatIso (isoWhiskerRight c₁₂₃ r₀₁)).hom.app K := by
-    rw [← cancel_mono ((mapDerivedCategoryCompIso r₁₃ r₀₁).hom.app K), Category.assoc,
-      Category.assoc, Iso.inv_hom_id_app]
+    rw [← cancel_mono ((mapDerivedCategoryCompIso r₁₃ r₀₁).inv.app K), Category.assoc,
+      Category.assoc, Iso.hom_inv_id_app]
     erw [Category.comp_id]
-    rw [WR, Iso.inv_hom_id_app_assoc]
-  have A' : (mapDerivedCategoryCompIso r₁₂ r₀₁).inv.app (r₂₃.mapDerivedCategory.obj K) ≫
-      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).inv.app K =
-      r₀₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₂₃ r₁₂).inv.app K) ≫
-        (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K := by
-    rw [← cancel_mono ((mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K),
-      Category.assoc, Category.assoc, Iso.inv_hom_id_app]
+    rw [WR, Iso.hom_inv_id_app_assoc]
+  have A' : (mapDerivedCategoryCompIso r₁₂ r₀₁).hom.app (r₂₃.mapDerivedCategory.obj K) ≫
+      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).hom.app K =
+      r₀₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₂₃ r₁₂).hom.app K) ≫
+        (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K := by
+    rw [← cancel_mono ((mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K),
+      Category.assoc, Category.assoc, Iso.hom_inv_id_app]
     erw [Category.comp_id]
     rw [← cancel_mono (r₀₁.mapDerivedCategory.map
-      ((mapDerivedCategoryCompIso r₂₃ r₁₂).hom.app K)), Category.assoc, Category.assoc, ← A]
+      ((mapDerivedCategoryCompIso r₂₃ r₁₂).inv.app K)), Category.assoc, Category.assoc, ← A]
     simp [← Functor.map_comp]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
     whiskerLeft_app, isoWhiskerRight_hom, whiskerRight_app, Functor.map_comp, Category.assoc]
   rw [WL', reassoc_of% WR']
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   erw [Category.id_comp]
   rw [reassoc_of% A', hD]
 
@@ -278,7 +278,7 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerLeft_unit
     [PreservesFiniteColimits r] [s.Additive] [PreservesFiniteLimits s]
     [PreservesFiniteColimits s] (e : s ≅ 𝟭 C₀) (c : r ⋙ s ≅ r)
     (hc : c = isoWhiskerLeft r e ≪≫ rightUnitor r) :
-    (mapDerivedCategoryCompIso r s).symm ≪≫ mapDerivedCategoryNatIso c =
+    (mapDerivedCategoryCompIso r s) ≪≫ mapDerivedCategoryNatIso c =
       isoWhiskerLeft r.mapDerivedCategory
         (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C₀) ≪≫
         rightUnitor r.mapDerivedCategory := by
@@ -291,20 +291,20 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerLeft_unit
   have U := NatTrans.congr_app (mapDerivedCategoryCompIso_comp_id r) K
   simp only [NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app] at WL U
   simp only [hρ, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
     rightUnitor_hom_app, NatTrans.id_app]
   have WL' : (mapDerivedCategoryNatIso (isoWhiskerLeft r e)).hom.app K =
-      (mapDerivedCategoryCompIso r s).hom.app K ≫
+      (mapDerivedCategoryCompIso r s).inv.app K ≫
         (mapDerivedCategoryNatIso e).hom.app (r.mapDerivedCategory.obj K) ≫
-        (mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K := by
-    rw [← reassoc_of% WL, Iso.hom_inv_id_app]
+        (mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K := by
+    rw [← reassoc_of% WL, Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  have U' : (mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K =
+  have U' : (mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K =
       (mapDerivedCategoryIdIso C₀).hom.app (r.mapDerivedCategory.obj K) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K), Iso.hom_inv_id_app, U]
+    rw [← cancel_epi ((mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K), Iso.inv_hom_id_app, U]
     rfl
   rw [WL', U']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   all_goals rfl
 
 theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_unit
@@ -314,7 +314,7 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_uni
     [PreservesFiniteColimits r] [s.Additive] [PreservesFiniteLimits s]
     [PreservesFiniteColimits s] (e : s ≅ 𝟭 C₁) (c : s ⋙ r ≅ r)
     (hc : c = isoWhiskerRight e r ≪≫ leftUnitor r) :
-    (mapDerivedCategoryCompIso s r).symm ≪≫ mapDerivedCategoryNatIso c =
+    (mapDerivedCategoryCompIso s r) ≪≫ mapDerivedCategoryNatIso c =
       isoWhiskerRight (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C₁)
         r.mapDerivedCategory ≪≫ leftUnitor r.mapDerivedCategory := by
   subst hc
@@ -326,20 +326,20 @@ theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_uni
   have U := NatTrans.congr_app (mapDerivedCategoryCompIso_id_comp r) K
   simp only [NatTrans.comp_app, whiskerRight_app, NatTrans.id_app] at WR U
   simp only [hl, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerRight_hom, whiskerRight_app,
+    Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom, whiskerRight_app,
     leftUnitor_hom_app, NatTrans.id_app, Functor.map_comp]
   have WR' : (mapDerivedCategoryNatIso (isoWhiskerRight e r)).hom.app K =
-      (mapDerivedCategoryCompIso s r).hom.app K ≫
+      (mapDerivedCategoryCompIso s r).inv.app K ≫
         r.mapDerivedCategory.map ((mapDerivedCategoryNatIso e).hom.app K) ≫
-        (mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K := by
-    rw [← reassoc_of% WR, Iso.hom_inv_id_app]
+        (mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K := by
+    rw [← reassoc_of% WR, Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  have U' : (mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K =
+  have U' : (mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K =
       r.mapDerivedCategory.map ((mapDerivedCategoryIdIso C₁).hom.app K) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K), Iso.hom_inv_id_app, U]
+    rw [← cancel_epi ((mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K), Iso.inv_hom_id_app, U]
     rfl
   rw [WR', U']
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   all_goals rfl
 
 
