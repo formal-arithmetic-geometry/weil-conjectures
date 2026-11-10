@@ -866,6 +866,7 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
       Mod.IsFinitelyPresented _ M ∧
         Nonempty ((ConstantInternalModuleSheafEncoding.sheafEncoding J R
           (internalToModule R) rfl).obj M ≅ (constantSheaf J (ModuleCat.{max c h} R)).obj P) := by
+  trace "constant presentation: statement elaborated"
   let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
   let S := constantSheaf J (ModuleCat.{max c h} R)
   have : H.IsEquivalence :=
@@ -874,11 +875,13 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
       (Sheaf.sheafifyRingPresheaf J ((Functor.const Cᵒᵖ).obj (RingCat.of R)))) := inferInstance
   have : H.Additive := Functor.additive_of_preserves_binary_products H
   have : S.Additive := Functor.additive_of_preserves_binary_products S
+  trace "constant presentation: instances established"
   let rr : (internalToModule R).obj (Mod.regular (AddCommGrpCat.of R)) ≅ ModuleCat.of R R :=
     ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext x; rfl)
   let e (n : ℕ) : H.obj (Mod.finiteFree _ n) ≅ S.obj (ModuleCat.of R (Fin n → R)) :=
     ConstantInternalModuleSheafEncoding.encFiniteFreeIso J R (internalToModule R) rfl n ≪≫
       S.mapIso (biproduct.mapIso (fun _ ↦ rr) ≪≫ ModuleCat.biproductIsoPi _)
+  trace "constant presentation: finite free comparison established"
   obtain ⟨n, m, g, ⟨eg⟩⟩ := ordinary_presentation R P
   let g' := H.preimage ((e m).hom ≫ S.map g ≫ (e n).inv)
   let eH : H.obj (cokernel g') ≅ S.obj P :=
