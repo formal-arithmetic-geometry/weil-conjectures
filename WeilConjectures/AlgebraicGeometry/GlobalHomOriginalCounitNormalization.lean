@@ -359,12 +359,12 @@ theorem schemeHomOriginalTensorPullbackIso_originalCounit {X Y : Scheme.{u}} (f 
       ((Classical.choose (exists_mixedHomTensorPullbackIso f)).hom.app
         (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N))
       (pullbackTensorModelMap Y P N) _ _ _ _ _ _ _ _ hU hA hB hc
-    with_unfolding_all
-      simpa only [cast_eq, schemeHomOriginalTensorPullbackIso, Iso.trans_hom, NatTrans.comp_app,
+    convert he using 1 <;>
+      simp only [schemeHomOriginalTensorPullbackIso, Iso.trans_hom, NatTrans.comp_app,
         Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
         Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
         NatIso.prod_hom, NatTrans.prod_app_fst, NatTrans.prod_app_snd,
-        tensor_obj, tensor_map, Category.assoc] using he
+        tensor_obj, tensor_map, Category.assoc] <;> rfl
   · intro A A' B B' a b
     exact (schemeHomOriginalTensorPullbackIso f).hom.naturality
       (X := (A, B)) (Y := (A', B')) (a, b)
