@@ -855,6 +855,10 @@ private theorem ordinary_presentation (R : Type w) [CommRing R] [IsNoetherianRin
     ⟨(ModuleCat.isColimitCokernelCofork (ModuleCat.ofHom g) (ModuleCat.ofHom f)
       hgf hf).coconePointUniqueUpToIso (colimit.isColimit (parallelPair (ModuleCat.ofHom g) 0))⟩⟩
 
+section ConstantPresentation
+
+attribute [local instance] Sheaf.monoidalPreadditive
+
 private theorem internal_constant_fp {C : Type c} [Category.{h} C]
     (J : GrothendieckTopology C) (R : Type (max c h)) [CommRing R] [IsNoetherianRing R]
     [HasSheafify J Ab.{max c h}] [(J.W (A := Ab.{max c h})).IsMonoidal]
@@ -889,6 +893,8 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
       cokernel.mapIso _ _ (e m) (e n) (by simp [g']) ≪≫
       (PreservesCokernel.iso S g).symm ≪≫ S.mapIso eg.symm
   exact ⟨cokernel g', ⟨n, m, g', ⟨Iso.refl _⟩⟩, ⟨eH⟩⟩
+
+end ConstantPresentation
 
 private def internalConstantPresheafFunctor
     {C : Type c} [Category.{h} C] (R : Type w) [CommRing R] :
