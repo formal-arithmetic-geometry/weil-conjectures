@@ -277,7 +277,7 @@ private theorem rationalPullbackScalarComparison_commShift_of_finiteCoefficients
       ι J J' a 1
     simp only [T, Q, QL, S,
       sfRationalConstructibleLocalization, ScalarLocalization.localization, map_one] at hh ⊢
-    convert hh using 1
+    convert hh using 1 <;> rfl
   let eA := NatIso.ofObjEqOfMapHEq (F := Q X ⋙ Ar) (G := A ⋙ Q Y) oA mA
   let eB := NatIso.ofObjEqOfMapHEq (F := QL X ⋙ Br) (G := B ⋙ QL Y) oB mB
   let eTX := NatIso.ofObjEqOfMapHEq (F := Q X ⋙ T X) (G := S X ⋙ QL X) (oT X) (mT X)
