@@ -864,7 +864,7 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
     (P : ModuleCat.{max c h} R) [Module.Finite R P] :
     ∃ M : Mod (Sheaf J Ab.{max c h}) (Sheaf.sheafifyRingPresheaf J
         ((Functor.const Cᵒᵖ).obj (RingCat.of R))),
-      Mod.IsFinitelyPresented _ M ∧
+      Mod.IsFinitelyPresented (C := Sheaf J Ab.{max c h}) _ M ∧
         Nonempty ((ConstantInternalModuleSheafEncoding.sheafEncoding J R
           (internalToModule R) rfl).obj M ≅ (constantSheaf J (ModuleCat.{max c h} R)).obj P) := by
   let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
