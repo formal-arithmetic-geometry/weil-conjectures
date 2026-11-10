@@ -925,15 +925,16 @@ private theorem ordinary_generator_pure
     (V : C) (W : D) (p : W ⟶ U.obj V)
     (x : M.val.obj (op V)) (y : N.val.obj (op V)) (r : S.obj.obj (op W)) :
     (e M N).hom.val.app (op W)
-      (r • (F.obj (siteTensor J R M N)).val.map p.op
+      (((F.obj (siteTensor J R M N)).val.obj (op W)).isModule.toSMul.smul r
+        ((F.obj (siteTensor J R M N)).val.map p.op
         ((adj.unit.app (siteTensor J R M N)).val.app (op V)
-          (sitePure J R M N (op V) x y))) =
+          (sitePure J R M N (op V) x y)))) =
       sitePure K S (F.obj M) (F.obj N) (op W)
-        (r • (F.obj M).val.map p.op ((adj.unit.app M).val.app (op V) x))
+        (((F.obj M).val.obj (op W)).isModule.toSMul.smul r
+          ((F.obj M).val.map p.op ((adj.unit.app M).val.app (op V) x)))
         (1 • (F.obj N).val.map p.op ((adj.unit.app N).val.app (op V) y)) := by
-  rw [map_smul, PresheafOfModules.naturality_apply, hunit]
-  rw [SheafOfModules.CochainScalarConstruction.pure_restrict S]
-  rw [one_smul]
+  erw [map_smul, PresheafOfModules.naturality_apply, hunit,
+    SheafOfModules.CochainScalarConstruction.pure_restrict S, one_smul]
   exact sitePure_smul K S (F.obj M) (F.obj N) (op W) r _ _
 
 /-- Keep the concrete geometric lift behind its ring and module presentation. -/
