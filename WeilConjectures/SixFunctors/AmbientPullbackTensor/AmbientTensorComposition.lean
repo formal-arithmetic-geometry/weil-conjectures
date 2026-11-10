@@ -91,9 +91,12 @@ private theorem generator_map {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (r : (coefficients ell E X s).obj.obj (op V)) :
     ((pull ell E f s).map a).val.app (op V) (generator ell E f s M U V q m r) =
       generator ell E f s N U V q (a.val.app (op U) m) r := by
-  dsimp only [generator]
-  rw [map_smul]
-  congr 1
+  change (ring (topology X s) (coefficients ell E X s)).obj.obj (op V) at r
+  refine ((((pull ell E f s).map a).val.app (op V)).hom.map_smul r
+    (show ((pull ell E f s).obj M).val.obj (op V) from
+      ((pull ell E f s).obj M).val.map q.op
+        (((adjunction ell E f s).unit.app M).val.app (op U) m))).trans ?_
+  apply congrArg (fun z : ((pull ell E f s).obj N).val.obj (op V) ↦ r • z)
   have hn := congrArg (fun z ↦ z.val.app (op U) m)
     ((adjunction ell E f s).unit.naturality a)
   have hq := PresheafOfModules.naturality_apply ((pull ell E f s).map a).val q.op
