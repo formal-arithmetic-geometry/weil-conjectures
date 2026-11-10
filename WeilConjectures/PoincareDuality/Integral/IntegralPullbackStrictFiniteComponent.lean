@@ -518,21 +518,14 @@ private theorem finiteEvaluation_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C) ≫
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex (finiteEvaluation l E f n).hom (.up ℤ)).app C) := by
+  have hfac := Functor.exactSquare_fac (finiteEvaluation l E f n) C
   have hb : finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
       (integralSystemTransition l E) f n =
-      (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E f)
-        (coefficientSequenceEvaluation l E X n)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso (finiteEvaluation l E f n) ≪≫
-      Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E Y n)
-        (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f) := by
+      Functor.mapDerivedCategorySquareIso (finiteEvaluation l E f n) := by
     unfold finiteSystemDerivedPullbackEvaluation finiteEvaluation
     rfl
-  rw [hb]
-  exact exactSquare_fac
-    (integralComparisonSequencePullback l E f) (coefficientSequenceEvaluation l E X n)
-    (coefficientSequenceEvaluation l E Y n)
-    (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f)
-    (finiteEvaluation l E f n) C
+  erw [← hb] at hfac
+  exact hfac
 
 
 /-- The derived finite evaluation comparison, followed by an arbitrary map of finite
