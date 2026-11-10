@@ -217,7 +217,8 @@ private theorem rationalPullbackScalarComparison_commShift_of_finiteCoefficients
           (((constructibleIntegralPullback l L f).commShiftIso
             (1 : ℤ)).hom.app K.obj)))
     (α : constructibleIntegralPullback l E f ⋙
-        sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y ≅
+        sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+          E L ι Y ≅
       sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X ⋙
         constructibleIntegralPullback l L f)
     (hα : ∀ K, α.app K = integralPullbackScalarComparison l E
@@ -277,7 +278,8 @@ private theorem rationalPullbackScalarComparison_commShift_of_finiteCoefficients
       ι J J' a 1
     simp only [T, Q, QL, S,
       sfRationalConstructibleLocalization, ScalarLocalization.localization, map_one] at hh ⊢
-    convert hh using 1 <;> rfl
+    convert hh using 1
+    rfl
   let eA := NatIso.ofObjEqOfMapHEq (F := Q X ⋙ Ar) (G := A ⋙ Q Y) oA mA
   let eB := NatIso.ofObjEqOfMapHEq (F := QL X ⋙ Br) (G := B ⋙ QL Y) oB mB
   let eTX := NatIso.ofObjEqOfMapHEq (F := Q X ⋙ T X) (G := S X ⋙ QL X) (oT X) (mT X)
