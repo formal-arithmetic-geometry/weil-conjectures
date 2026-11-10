@@ -12,6 +12,7 @@ import WeilConjectures.RingTheory.ResidueFieldProjectiveDimension
 import WeilConjectures.RingTheory.ResidueFieldProjectiveDimensionLowerBound
 import WeilConjectures.RingTheory.ResidueFieldFiniteProjectiveDimensionOfGlobalDimension
 public import Mathlib.Algebra.Module.SpanRankOperations
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Regularity from finite global dimension

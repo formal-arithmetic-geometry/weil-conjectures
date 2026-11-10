@@ -10,6 +10,7 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 import WeilConjectures.RingTheory.ModuleLocalizationFilteredColimit
 import WeilConjectures.RingTheory.TwoLocalizationExact
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # The binary localization Cech sequence
 

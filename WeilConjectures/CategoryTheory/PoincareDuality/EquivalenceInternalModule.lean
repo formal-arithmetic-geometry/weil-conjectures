@@ -330,7 +330,7 @@ private def pointProd (X Y : ContAction FintypeCat.{u} G) :
       X.property.1.comp (continuous_id.prodMk continuous_const)
     have hy : Continuous (fun g : G ↦ (Y.obj.ρ g).asHom.hom x.2) :=
       Y.property.1.comp (continuous_id.prodMk continuous_const)
-    change IsOpen {g : G | ((X.obj.ρ g).hom x.1, (Y.obj.ρ g).hom x.2) = x}
+    change IsOpen {g : G | ((X.obj.ρ g).asHom.hom x.1, (Y.obj.ρ g).asHom.hom x.2) = x}
     convert (hx.isOpen_preimage {x.1} (isOpen_discrete _)).inter
       (hy.isOpen_preimage {x.2} (isOpen_discrete _)) using 1
     ext g

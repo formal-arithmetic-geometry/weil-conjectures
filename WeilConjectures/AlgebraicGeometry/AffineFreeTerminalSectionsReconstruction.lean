@@ -39,7 +39,7 @@ private theorem overChartSectionsIso (W : Scheme.{v}) (U : W.Opens)
     (M.val.presheaf.mapIso a.op) ?_) ?_⟩
   · intro r
     ext x
-    change ((M.val.obj (.op (Over.mk (𝟙 U)))).smul r).hom
+    change ((M.val.obj (.op (Over.mk (𝟙 U)))).smul r).asHom.hom
       (M.val.presheaf.map a.hom.op x) = M.val.presheaf.map a.hom.op _
     change ((M.val.obj (.op (Over.mk (𝟙 U)))).smul r).hom
       (M.val.presheaf.map a.hom.op x) = M.val.presheaf.map a.hom.op

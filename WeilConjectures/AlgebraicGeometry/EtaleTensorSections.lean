@@ -303,8 +303,8 @@ private theorem restrictionOfAdjunction_smul
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
     {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : A ⟶ C)
     (p : a ≫ b = d) (F : C.Modules) (r : Γ(B, ⊤)) (s : Γ((L b).obj F, ⊤)) :
-    restrictionOfAdjunction L adj a b d p F ((((L b).obj F).smul r).hom s) =
-      (((L d).obj F).smul (a.appTop r)).hom (restrictionOfAdjunction L adj a b d p F s) := by
+    restrictionOfAdjunction L adj a b d p F ((((L b).obj F).smul r).asHom.hom s) =
+      (((L d).obj F).smul (a.appTop r)).asHom.hom (restrictionOfAdjunction L adj a b d p F s) := by
   change restrictionOfAdjunction L adj a b d p F (r • s) =
     a.appTop r • restrictionOfAdjunction L adj a b d p F s
   have hu : sectionsUnitOfAdjunction a (L a) (adj a) ((L b).obj F) (r • s) =

@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import Mathlib.CategoryTheory.Generator.Sheaf
 
 /-!
 # Concrete generator on the small etale site
