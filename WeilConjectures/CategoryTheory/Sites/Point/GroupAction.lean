@@ -67,13 +67,13 @@ lemma toPresheafFiber_presheafFiberAct_apply (P : Cᵒᵖ ⥤ AddCommGrpCat.{w})
   congr($(Φ.toPresheafFiber_presheafFiberAct act P σ X x).hom t)
 
 lemma act_mul_app (σ τ : G) (X : C) (x : Φ.fiber.obj X) :
-    (act (σ * τ)).asHom.app X x = (act σ).asHom.app X ((act τ).app X x) := by
-  rw [map_mul, End.mul_def]
+    (act (σ * τ)).asHom.app X x = (act σ).asHom.app X ((act τ).asHom.app X x) := by
+  rw [map_mul, End.mul_asHom]
   rfl
 
 @[simp]
 lemma act_one_app (X : C) (x : Φ.fiber.obj X) : (act 1).asHom.app X x = x := by
-  rw [map_one, End.one_def]
+  rw [map_one, End.one_asHom]
   rfl
 
 /-- The fibre of a presheaf, with its action of `G`. -/
@@ -191,7 +191,7 @@ lemma isSheaf_equivariantPresheaf : Presheaf.IsSheaf J (Φ.equivariantPresheaf a
     key _ _ _ _ (hy _)
   let t : (Φ.equivariantPresheaf act M ⋙ forget AddCommGrpCat.{w}).obj (op X) :=
     ⟨fun x ↦ (s (f x) (hf x)).1 (y x), fun σ x ↦ by
-      have := hval (hf x) ((act σ).app _ (y x))
+      have := hval (hf x) ((act σ).asHom.app _ (y x))
       rw [← NatTrans.naturality_apply, hy] at this
       dsimp only
       rw [this, (s (f x) (hf x)).2 σ (y x)]⟩

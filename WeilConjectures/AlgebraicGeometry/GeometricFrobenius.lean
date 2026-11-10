@@ -512,7 +512,7 @@ theorem geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj (m : ℕ) :
   induction m with
   | zero => exact Category.id_comp _
   | succ m ih =>
-    rw [pow_succ', Aut.Aut_mul_def, Iso.trans_hom, Category.assoc,
+    rw [pow_succ', Aut.mul_asIso, Iso.trans_hom, Category.assoc,
       geometricGaloisFrobenius_hom_comp_geometricFiberProj, ih]
 
 /-- The powers of the geometric Galois Frobenius are semilinear over the powers of `σ`:
@@ -534,9 +534,9 @@ theorem geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure (
   induction m with
   | zero => exact (Category.id_comp _).trans (Category.comp_id _).symm
   | succ m ih =>
-    rw [pow_succ', Aut.Aut_mul_def, Iso.trans_hom, Category.assoc,
+    rw [pow_succ', Aut.mul_asIso, Iso.trans_hom, Category.assoc,
       geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure, reassoc_of% ih,
-      pow_succ', Aut.Aut_mul_def, Iso.trans_hom]
+      pow_succ', Aut.mul_asIso, Iso.trans_hom]
 
 /-- A geometric point `s` over a point `g : Spec K ⟶ X₀` with values in a field with `#k ^ m`
 elements is fixed by `g_Xᵐ` up to reparametrisation by `σᵐ`:

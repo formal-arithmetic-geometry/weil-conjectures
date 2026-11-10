@@ -127,7 +127,7 @@ theorem isGalois_iff_pretransitive_and_card {C : Type u₁} [Category.{u₂} C] 
     obtain ⟨g, hg⟩ := hb.2 y
     obtain ⟨g', hg'⟩ := hb.2 z
     refine ⟨g' * g⁻¹, ?_⟩
-    change F.map (g' * g⁻¹).hom y = z
+    change F.map (g' * g⁻¹).asIso.hom y = z
     rw [← hg, ← hg', ← FintypeCat.comp_apply, ← F.map_comp]
     change F.map (g.hom ≫ (g' * g⁻¹).hom) x = F.map g'.hom x
     congr 2

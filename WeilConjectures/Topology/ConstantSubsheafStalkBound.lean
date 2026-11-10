@@ -117,7 +117,7 @@ private theorem constantSubsheaf_range_integer_bound (M : AddCommGrpCat.{u})
   classical
   let hZ : M →+ ℤ := AddEquiv.ulift.toAddMonoidHom.comp h.hom
   let H := hZ.range
-  obtain ⟨k, hk⟩ := Int.subgroup_cyclic H
+  obtain ⟨k, hk⟩ := AddSubgroup.isAddCyclic H
   have hH : H = AddSubgroup.zmultiples (k.natAbs : ℤ) := by
     rw [Int.zmultiples_natAbs, AddSubgroup.zmultiples_eq_closure]
     exact hk

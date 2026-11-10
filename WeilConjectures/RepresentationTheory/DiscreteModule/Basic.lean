@@ -56,7 +56,7 @@ variable {G : Type u} [Group G]
 
 @[simp]
 lemma ρ_mul_apply (M : Action AddCommGrpCat.{w} G) (a b : G) (x : M.V) :
-    (M.ρ (a * b)).asHom.hom x = (M.ρ a).asHom.hom ((M.ρ b).hom x) := by
+    (M.ρ (a * b)).asHom.hom x = (M.ρ a).asHom.hom ((M.ρ b).asHom.hom x) := by
   rw [map_mul]
   rfl
 
@@ -67,12 +67,12 @@ lemma ρ_one_apply (M : Action AddCommGrpCat.{w} G) (x : M.V) : (M.ρ 1).asHom.h
 
 @[simp]
 lemma ρ_inv_apply_apply (M : Action AddCommGrpCat.{w} G) (a : G) (x : M.V) :
-    (M.ρ a⁻¹).asHom.hom ((M.ρ a).hom x) = x := by
+    (M.ρ a⁻¹).asHom.hom ((M.ρ a).asHom.hom x) = x := by
   rw [← ρ_mul_apply, inv_mul_cancel, ρ_one_apply]
 
 @[simp]
 lemma ρ_apply_inv_apply (M : Action AddCommGrpCat.{w} G) (a : G) (x : M.V) :
-    (M.ρ a).asHom.hom ((M.ρ a⁻¹).hom x) = x := by
+    (M.ρ a).asHom.hom ((M.ρ a⁻¹).asHom.hom x) = x := by
   rw [← ρ_mul_apply, mul_inv_cancel, ρ_one_apply]
 
 lemma hom_comm_apply {M N : Action AddCommGrpCat.{w} G} (f : M ⟶ N) (g : G) (x : M.V) :

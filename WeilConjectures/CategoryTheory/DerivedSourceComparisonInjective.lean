@@ -15,6 +15,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 import all WeilConjectures.CategoryTheory.DerivedSourceComparisonExtCompatibility
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 
 /-! # Detecting derived classes through an acyclic source comparison
 
