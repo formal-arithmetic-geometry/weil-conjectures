@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Global Hom tensor comparison normalized to the original derived counit
 
@@ -309,11 +311,11 @@ def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
             (curriedTensor
               (SheafOfModules.{u} (moduleRings T.toRingedSpace))) (.up ℤ) p q n h) ∧
       (derivedPullback g).map (pullbackTensorModelMap X P N) ≫
-          ((schemeHomPullbackCounitData g).counit).app
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N)) ≫
+          cast (by rfl) (((schemeHomPullbackCounitData g).counit).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P N))) ≫
           DerivedCategory.Q.map φ.hom =
         τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) ≫
-          (((schemeHomPullbackCounitData g).counit).app
+          cast (by rfl) (((schemeHomPullbackCounitData g).counit).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
             ((schemeHomPullbackCounitData g).counit).app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
