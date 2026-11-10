@@ -56,10 +56,21 @@ lemma iterate_zero : G.iterate 0 = 𝟭 C :=
 lemma iterate_succ (n : ℕ) : G.iterate (n + 1) = G.iterate n ⋙ G :=
   rfl
 
+lemma iterate_succ' (n : ℕ) : G.iterate (n + 1) = G.iterate n ⋙ G :=
+  rfl
+
 
 @[simp]
 lemma iterate_one : G.iterate 1 = G :=
   rfl
+
+lemma iterate_succ_left (n : ℕ) : G.iterate (n + 1) = G ⋙ G.iterate n := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    change G.iterate (n + 1) ⋙ G = G ⋙ G.iterate n ⋙ G
+    rw [ih]
+    rfl
 
 
 lemma iterate_add (m n : ℕ) : G.iterate (m + n) = G.iterate m ⋙ G.iterate n := by

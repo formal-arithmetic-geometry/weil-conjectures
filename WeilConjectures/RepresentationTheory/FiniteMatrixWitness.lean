@@ -166,5 +166,82 @@ variable {O E K G V ι : Type*} [CommRing O] [IsNoetherianRing O] [IsLocalRing O
   [Field E] [Algebra O E] [IsFractionRing O E] [Field K] [IsAlgClosed K] [Algebra E K]
   [Group G] [AddCommGroup V] [Module E V] [Fintype ι] [DecidableEq ι]
 
+/-- **Absolute irreducibility has a finite matrix witness**
+(blueprint: `lem-zl-finite-matrix-irreducibility`). Let `ρ` be a representation of `G` on an
+`E`-vector space `V` with basis `b`, in which the matrices of `ρ` have entries in `O`, and
+assume that `ρ` is irreducible over an algebraically closed field `K ⊇ E`. Then there is
+`N ≥ 1` such that every subgroup `H ≤ G` whose matrices are congruent modulo `𝔪ᴺ` to all the
+matrices of `ρ(G)` acts absolutely irreducibly on `V`: irreducibly after extension of scalars
+to any field `K' ⊇ E`. -/
+theorem exists_forall_isIrreducible_baseChange_of_congr (ρ : Representation E G V)
+    (b : Module.Basis ι E V)
+    (hb : ∀ g i j, LinearMap.toMatrix b b (ρ g) i j ∈ (algebraMap O E).range)
+    (hρ : IsIrreducible ((Module.End.baseChangeHom E K V).toMonoidHom.comp ρ)) :
+    ∃ N : ℕ, 0 < N ∧ ∀ H : Subgroup G,
+      (∀ g, ∃ h ∈ H, ∀ i j, ∃ x ∈ maximalIdeal O ^ N,
+        LinearMap.toMatrix b b (ρ h) i j - LinearMap.toMatrix b b (ρ g) i j = algebraMap O E x) →
+      ∀ (K' : Type w) [Field K'] [Algebra E K'],
+        IsIrreducible ((Module.End.baseChangeHom E K' V).toMonoidHom.comp (ρ.comp H.subtype)) := by
+  classical
+  let bK := Algebra.TensorProduct.basis K b
+  have : FiniteDimensional K (TensorProduct E K V) := Module.Finite.of_basis bK
+  obtain ⟨s, hs⟩ := bK.exists_det_ne_zero_of_span_range_eq_top _
+    (span_range_eq_top_of_isIrreducible ((Module.End.baseChangeHom E K V).toMonoidHom.comp ρ))
+  choose c hc using hb
+  set D : Matrix (ι × ι) (ι × ι) O := Matrix.of fun k p ↦ c (s k) p.1 p.2
+  have hD0 : D.det ≠ 0 := by
+    intro h0
+    apply hs
+    have hmap : (Matrix.of fun k p ↦ LinearMap.toMatrix bK bK
+        ((Module.End.baseChangeHom E K V).toMonoidHom.comp ρ (s k)) p.1 p.2) =
+        D.map ((algebraMap E K).comp (algebraMap O E)) := by
+      ext k p
+      simp [bK, D, hc]
+    rw [hmap, ← RingHom.mapMatrix_apply, ← RingHom.map_det, h0, map_zero]
+  obtain ⟨N, hN⟩ : ∃ N, D.det ∉ maximalIdeal O ^ N := by
+    by_contra! h
+    have h' := Ideal.iInf_pow_eq_bot_of_isLocalRing (maximalIdeal O) Ideal.IsPrime.ne_top'
+    exact hD0 (by simpa [h'] using Ideal.mem_iInf.mpr h)
+  refine ⟨N + 1, N.succ_pos, fun H hH K' _ _ ↦ ?_⟩
+  choose h hhH x hx hxeq using fun k ↦ hH (s k)
+  set D' : Matrix (ι × ι) (ι × ι) O := Matrix.of fun k p ↦ c (s k) p.1 p.2 + x k p.1 p.2
+  have hD'0 : D'.det ≠ 0 := by
+    intro h0
+    apply hN
+    apply Ideal.pow_le_pow_right (Nat.le_add_right N 1)
+    have hmap : D.map (Ideal.Quotient.mk (maximalIdeal O ^ (N + 1))) =
+        D'.map (Ideal.Quotient.mk _) := by
+      ext k p
+      simp [D, D', Ideal.Quotient.eq_zero_iff_mem.mpr (hx k p.1 p.2)]
+    rw [← Ideal.Quotient.eq_zero_iff_mem, RingHom.map_det, RingHom.mapMatrix_apply, hmap,
+      ← RingHom.mapMatrix_apply, ← RingHom.map_det, h0, map_zero]
+  let bK' := Algebra.TensorProduct.basis K' b
+  have : Nonempty ι := by
+    have : Nontrivial (TensorProduct E K V) := by
+      by_contra hV
+      rw [not_nontrivial_iff_subsingleton] at hV
+      exact bot_ne_top (α := Subrepresentation
+        ((Module.End.baseChangeHom E K V).toMonoidHom.comp ρ))
+        (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
+    exact bK.index_nonempty
+  have : Nontrivial (TensorProduct E K' V) := Module.nontrivial_of_finrank_pos
+    (by rw [Module.finrank_eq_card_basis bK']; exact Fintype.card_pos)
+  apply isIrreducible_of_span_range_eq_top
+  rw [eq_top_iff, ← bK'.span_range_eq_top_of_det_ne_zero (fun k ↦
+    (Module.End.baseChangeHom E K' V).toMonoidHom.comp (ρ.comp H.subtype) ⟨h k, hhH k⟩)]
+  · apply Submodule.span_mono
+    rintro _ ⟨k, rfl⟩
+    exact ⟨_, rfl⟩
+  · have hmap : (Matrix.of fun k p ↦ LinearMap.toMatrix bK' bK'
+        ((Module.End.baseChangeHom E K' V).toMonoidHom.comp (ρ.comp H.subtype) ⟨h k, hhH k⟩)
+          p.1 p.2) = D'.map ((algebraMap E K').comp (algebraMap O E)) := by
+      ext k p
+      simp [bK', D', hc, sub_eq_iff_eq_add'.mp (hxeq k p.1 p.2)]
+    rw [hmap, ← RingHom.mapMatrix_apply, ← RingHom.map_det]
+    refine (map_ne_zero_iff _ ?_).mpr hD'0
+    exact ((algebraMap E K').injective.comp (IsFractionRing.injective O E) :
+      Function.Injective (algebraMap E K' ∘ algebraMap O E))
+
+
 
 end Representation

@@ -185,6 +185,22 @@ section Lattice
 
 variable (K : CochainComplex C ℤ)
 
+/-- Degreewise evaluation commutes with binary intersections. -/
+lemma subobjectEval_inf (S T : Subobject K) (n : ℤ) :
+    subobjectEval K n (S ⊓ T) = subobjectEval K n S ⊓ subobjectEval K n T := by
+  have hW : ∀ i j, (Subobject.«exists» (K.d i j)).obj
+      (subobjectEval K i S ⊓ subobjectEval K i T) ≤
+      subobjectEval K j S ⊓ subobjectEval K j T := fun i j =>
+    le_inf ((exists_obj_mono _ inf_le_left).trans (exists_subobjectEval_le S i j))
+      ((exists_obj_mono _ inf_le_right).trans (exists_subobjectEval_le T i j))
+  have h : subcomplexOfDegreewise K _ hW = S ⊓ T :=
+    le_antisymm (le_inf ((subcomplexOfDegreewise_le_iff K _ hW S).2 (fun _ => inf_le_left))
+        ((subcomplexOfDegreewise_le_iff K _ hW T).2 (fun _ => inf_le_right)))
+      ((le_subcomplexOfDegreewise_iff K _ hW (S ⊓ T)).2 (fun m =>
+        le_inf (monotone_subobjectEval K m inf_le_left)
+          (monotone_subobjectEval K m inf_le_right)))
+  rw [← h, subobjectEval_subcomplexOfDegreewise]
+
 
 /-- Degreewise evaluation commutes with binary unions. -/
 lemma subobjectEval_sup (S T : Subobject K) (n : ℤ) :
@@ -224,6 +240,15 @@ end Lattice
 section Functoriality
 
 variable {K L : CochainComplex C ℤ} (φ : K ⟶ L)
+
+/-- Degreewise evaluation commutes with pullback along a morphism of complexes. -/
+lemma subobjectEval_pullback (T : Subobject L) (n : ℤ) :
+    subobjectEval K n ((Subobject.pullback φ).obj T) =
+      (Subobject.pullback (φ.f n)).obj (subobjectEval L n T) := by
+  rw [subobjectEval_eq_mk, subobjectEval_eq_mk]
+  exact (Subobject.pullback_obj_mk
+    ((HomologicalComplex.eval C (ComplexShape.up ℤ) n).map_isPullback
+      (Subobject.isPullback φ T))).symm
 
 
 /-- Degreewise evaluation commutes with images. -/
@@ -281,6 +306,12 @@ lemma subobjectEval_subcomplexClosure (n : ℤ) :
 lemma le_subcomplexClosure (n : ℤ) : W n ≤ subobjectEval K n (subcomplexClosure K W) := by
   rw [subobjectEval_subcomplexClosure]
   exact le_sup_left
+
+/-- The subcomplex closure of `W` is the smallest subcomplex containing `W`. -/
+lemma subcomplexClosure_le {S : Subobject K} (h : ∀ n, W n ≤ subobjectEval K n S) :
+    subcomplexClosure K W ≤ S :=
+  (subcomplexOfDegreewise_le_iff K _ (exists_sup_exists_le K W) S).2 (fun n =>
+    sup_le (h n) ((exists_obj_mono _ (h (n - 1))).trans (exists_subobjectEval_le S (n - 1) n)))
 
 
 end Closure

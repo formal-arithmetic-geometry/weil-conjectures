@@ -123,6 +123,11 @@ def equivariantMaps (X : C) : AddSubgroup (Φ.fiber.obj X → M.V) where
   add_mem' {f g} hf hg σ x := by simp [hf σ x, hg σ x]
   neg_mem' {f} hf σ x := by simp [hf σ x]
 
+lemma mem_equivariantMaps {X : C} (f : Φ.fiber.obj X → M.V) :
+    f ∈ Φ.equivariantMaps act M X ↔
+      ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).app X x) = (M.ρ σ).hom (f x) :=
+  Iff.rfl
+
 
 /-- Precomposition with `Φ.fiber.map g` on equivariant maps. -/
 def equivariantMapsComap {X Y : C} (g : Y ⟶ X) :
@@ -150,6 +155,11 @@ def equivariantPresheaf : Cᵒᵖ ⥤ AddCommGrpCat.{w} where
   map_comp f g := by
     ext h x
     simp [equivariantMapsComap]
+
+lemma equivariantPresheaf_map_apply_coe {X Y : Cᵒᵖ} (g : X ⟶ Y)
+    (f : (Φ.equivariantPresheaf act M).obj X) (y : Φ.fiber.obj Y.unop) :
+    ((Φ.equivariantPresheaf act M).map g f).1 y = f.1 (Φ.fiber.map g.unop y) :=
+  rfl
 
 
 /-- Two elements of the fibre over `X` coming from the fibres over two objects of a covering

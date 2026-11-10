@@ -48,5 +48,11 @@ theorem pow_card_eq_self_iff_mem_range {E L : Type*} [Field E] [Fintype E] [Fiel
   obtain ⟨a, -, rfl⟩ := Finset.mem_image.mp hx'
   exact ⟨a, rfl⟩
 
+/-- The `n`-th power of the Frobenius endomorphism `x ↦ x ^ q` of an algebra over a finite field
+with `q` elements is the `q ^ n`-power map. -/
+theorem coe_frobeniusAlgHom_pow (K R : Type*) [Field K] [Fintype K] [CommRing R] [Algebra K R]
+    (n : ℕ) : ⇑(frobeniusAlgHom K R ^ n) = (· ^ (Fintype.card K ^ n)) := by
+  rw [AlgHom.coe_pow, coe_frobeniusAlgHom, pow_iterate]
+
 
 end FiniteField

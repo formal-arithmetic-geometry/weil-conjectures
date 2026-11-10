@@ -129,5 +129,19 @@ theorem exists_refinement_solving_local_requirements
   rw [U.simplicial.map_id, Category.comp_id] at hh
   simpa only [eqToHom_refl, Category.comp_id] using hh
 
+/-- Blueprint: lem-weil-pbc-hypercover-refinement. -/
+theorem exists_truncated_refinement
+    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    (K : SimplicialObject X.Etale)
+    (hK : X.IsSemiRepresentableHypercover
+      (K ⋙ FormalCoproduct.incl.{u} X.Etale)) (r : ℕ) :
+    ∃ V : FiniteSplitEtaleHypercover X,
+      Nonempty ((SimplicialObject.truncation r).obj V.simplicial ⟶
+          (SimplicialObject.truncation r).obj K) := by
+  have hK' : IsEtaleHypercover K :=
+    AlgebraicGeometry.Scheme.semiRepresentableHypercover_isEtaleHypercover K hK
+  obtain ⟨V, ⟨f⟩⟩ := exists_finite_split_replacement K hK'
+  exact ⟨V, ⟨(SimplicialObject.truncation r).map f⟩⟩
+
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover

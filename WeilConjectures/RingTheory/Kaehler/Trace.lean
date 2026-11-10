@@ -69,6 +69,10 @@ lemma traceDerivForm_zero_left (Y : Matrix n m R) :
     traceDerivForm D (0 : Matrix m n R) Y = 0 := by
   simp [traceDerivForm]
 
+lemma traceDerivForm_zero_right (X : Matrix m n R) :
+    traceDerivForm D X (0 : Matrix n m R) = 0 := by
+  simp [traceDerivForm]
+
 
 /-- **Leibniz rule** for `traceDerivForm`:
 `Tr(X D(YZ)) = Tr(XY D(Z)) + Tr(ZX D(Y))`. -/
@@ -276,6 +280,9 @@ lemma traceLin_apply (ω : Ω[B⁄k]) (c : B) :
 lemma traceLin_smul_D (a c : B) :
     traceLin D (c • KaehlerDifferential.D k B a) = traceDeriv D a c := by
   rw [traceLin_apply, Derivation.liftKaehlerDifferential_comp_D, traceDerivation_apply]
+
+lemma traceLin_D (a : B) : traceLin D (KaehlerDifferential.D k B a) = traceDeriv D a 1 := by
+  rw [← traceLin_smul_D, one_smul]
 
 
 end KaehlerDifferential

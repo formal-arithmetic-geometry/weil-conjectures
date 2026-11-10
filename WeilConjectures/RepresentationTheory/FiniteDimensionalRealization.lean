@@ -69,6 +69,16 @@ theorem IsContinuousOn.of_linearEquiv {V V' : Type*} [AddCommGroup V] [Module k 
   rw [this]
   exact h _ _
 
+/-- Continuity along `ι` is invariant under intertwining linear equivalences, between vector
+spaces in possibly different universes. -/
+theorem isContinuousOn_iff_of_linearEquiv {V V' : Type*} [AddCommGroup V] [Module k V]
+    [AddCommGroup V'] [Module k V'] {ι : H →* G} {ρ : Representation k G V}
+    {ρ' : Representation k G V'} (e : V ≃ₗ[k] V') (he : ∀ g v, e (ρ g v) = ρ' g (e v)) :
+    ρ.IsContinuousOn ι ↔ ρ'.IsContinuousOn ι :=
+  ⟨IsContinuousOn.of_linearEquiv e he, IsContinuousOn.of_linearEquiv e.symm fun g v ↦ by
+    apply e.injective
+    simp [he]⟩
+
 
 end IsContinuousOn
 

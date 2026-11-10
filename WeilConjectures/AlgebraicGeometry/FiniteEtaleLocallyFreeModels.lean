@@ -84,6 +84,15 @@ private theorem free_standard_refine
   exact ⟨n, ⟨(upperStarComp Λ f g).app M ≪≫ e⟩⟩
 
 -- Keep the member property abstract while reducing the pullback-cover construction.
+private theorem exists_cover_pullback_property
+    {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (C : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
+    (Q : ∀ Z : Scheme.{u}, (Z ⟶ Y) → Prop)
+    (hQ : ∀ s : C.I₀, Q (pullback f (C.f s)) (pullback.fst f (C.f s))) :
+    ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage Y,
+      ∀ s : D.I₀, Q (D.X s) (D.f s) :=
+  ⟨C.pullback₁ f, hQ⟩
+
 
 private theorem locFree_product
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

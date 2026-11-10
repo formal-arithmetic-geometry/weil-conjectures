@@ -492,6 +492,11 @@ lemma snd_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAl
   change (inr m * y.1 : DualNumber (F.obj (.op U))).snd = _
   simp [mul_comm]
 
+lemma fst_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAlg α).obj (.op U)) :
+    (dualInr m * y).1.fst = 0 := by
+  change (inr m * y.1 : DualNumber (F.obj (.op U))).fst = _
+  simp
+
 
 lemma exists_mul_pow_eq_of_mem_subMod (J : (dualGlueData H).glued.IdealSheafData)
     (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite) (r : Γ(S, U.1))
@@ -608,6 +613,10 @@ noncomputable def subAlgFunctor (J : (dualGlueData H).glued.IdealSheafData) :
       subAlgRes_apply_coe, CategoryTheory.Functor.map_comp, CommRingCat.hom_comp,
       RingHom.comp_apply]
 
+lemma subAlgFunctor_map (J : (dualGlueData H).glued.IdealSheafData)
+    {U V : S.AffineZariskiSiteᵒᵖ} (i : U ⟶ V) : (subAlgFunctor J).map i = subAlgRes J i :=
+  rfl
+
 
 variable {H} in
 /-- The components of the structure morphism `𝒪_S ⟶ subAlgFunctor J`. -/
@@ -632,6 +641,10 @@ noncomputable def subAlgMap (J : (dualGlueData H).glued.IdealSheafData) :
       ((ConcreteCategory.congr_hom (α.naturality i) r).trans
       ((congrArg (F.map i).hom (subAlgMapApp_apply_coe H J U r)).symm.trans
         (subAlgRes_apply_coe H J i _).symm))
+
+lemma subAlgMap_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZariskiSiteᵒᵖ) :
+    (subAlgMap J).app U = subAlgMapApp J U :=
+  rfl
 
 
 variable {H} in
@@ -659,6 +672,10 @@ noncomputable def subAlgInclusion {J J' : (dualGlueData H).glued.IdealSheafData}
       ((congrArg (F.map i).hom (subAlgInclusionApp_apply_coe H h U b)).symm.trans
         (subAlgRes_apply_coe H J' i _).symm))
 
+lemma subAlgInclusion_app {J J' : (dualGlueData H).glued.IdealSheafData} (h : J ≤ J')
+    (U : S.AffineZariskiSiteᵒᵖ) : (subAlgInclusion h).app U = subAlgInclusionApp h U :=
+  rfl
+
 
 variable {H} in
 /-- The components of the inclusion of the subalgebra attached to `J` into `F`. -/
@@ -679,6 +696,10 @@ noncomputable def subAlgι (J : (dualGlueData H).glued.IdealSheafData) : subAlgF
     rw [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_comp, RingHom.comp_apply]
     exact (subAlgιApp_apply H J V _).trans ((subAlgRes_apply_coe H J i b).trans
       (congrArg (F.map i).hom (subAlgιApp_apply H J U b)).symm)
+
+lemma subAlgι_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZariskiSiteᵒᵖ) :
+    (subAlgι J).app U = subAlgιApp J U :=
+  rfl
 
 
 lemma subAlgMap_comp_subAlgInclusion {J J' : (dualGlueData H).glued.IdealSheafData}
@@ -915,6 +936,12 @@ lemma approx_ι_map {j j' : ApproxIndex H} (f : j ⟶ j') (U : S.AffineZariskiSi
     colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U ≫ (approxDiagram H).map f =
       Scheme.Spec.map ((approxRingDiagram H U).map f) ≫
         colimit.ι (relativeGluingData (coequifibered_approx H j')).functor U :=
+  ι_relativeGluingMap _ _ _ U
+
+lemma approx_ι_π (j : ApproxIndex H) (U : S.AffineZariskiSite) :
+    colimit.ι (relativeGluingData H).functor U ≫ (approxπ H).app j =
+      Spec.map ((subAlgι j.unop.1).app (.op U)) ≫
+        colimit.ι (relativeGluingData (coequifibered_approx H j)).functor U :=
   ι_relativeGluingMap _ _ _ U
 
 

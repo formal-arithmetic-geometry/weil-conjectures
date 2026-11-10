@@ -117,6 +117,18 @@ noncomputable def descExtendfArrowIso :
 
 include hi
 
+lemma isIso_descExtend_f_iff :
+    IsIso ((e.descExtend φ hφ).f i') ↔ IsIso (φ.f i) :=
+  (MorphismProperty.isomorphisms C).arrow_mk_iso_iff (e.descExtendfArrowIso φ hφ hi)
+
+lemma mono_descExtend_f_iff :
+    Mono ((e.descExtend φ hφ).f i') ↔ Mono (φ.f i) :=
+  (MorphismProperty.monomorphisms C).arrow_mk_iso_iff (e.descExtendfArrowIso φ hφ hi)
+
+lemma epi_descExtend_f_iff :
+    Epi ((e.descExtend φ hφ).f i') ↔ Epi (φ.f i) :=
+  (MorphismProperty.epimorphisms C).arrow_mk_iso_iff (e.descExtendfArrowIso φ hφ hi)
+
 
 end
 

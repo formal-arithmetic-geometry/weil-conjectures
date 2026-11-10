@@ -136,6 +136,16 @@ instance : (fixingSubgroup s k G).Normal where
   conj_mem g hg h P x := by
     rw [mul_smul, mul_smul, hg, smul_inv_smul]
 
+lemma isClosed_fixingSubgroup [TopologicalSpace G] [∀ P, ContinuousSMul G ((fiber s).obj P)] :
+    IsClosed (fixingSubgroup s k G : Set G) := by
+  have : (fixingSubgroup s k G : Set G) =
+      ⋂ (P : Y.FiniteEtale) (x : (fiber s).obj ((pullback k).obj P)), {g : G | g • x = x} := by
+    ext g
+    simp [mem_fixingSubgroup_iff]
+  rw [this]
+  exact isClosed_iInter fun P ↦ isClosed_iInter fun x ↦
+    isClosed_eq (continuous_id.smul continuous_const) continuous_const
+
 
 variable [IsNaturalSMul (fiber s) G]
 

@@ -198,6 +198,18 @@ lemma henselianLocalRing_integralClosure : HenselianLocalRing (integralClosure R
   have := finite_integralClosure R F L
   exact HenselianLocalRing.finite_local_henselian R (integralClosure R L)
 
+/-- The residue field of the integral closure is the residue field of `R`, if the latter is
+algebraically closed. -/
+lemma bijective_algebraMap_residueField_integralClosure [IsAlgClosed (ResidueField R)] :
+    letI := isLocalRing_integralClosure R L
+    letI := isLocalHom_algebraMap_integralClosure R F L
+    Function.Bijective
+      (algebraMap (ResidueField R) (ResidueField (integralClosure R L))) := by
+  let := isLocalRing_integralClosure R L
+  let := isLocalHom_algebraMap_integralClosure R F L
+  have := Algebra.IsAlgebraic.residueField_of_isIntegral (R := R) (S := integralClosure R L)
+  exact IsAlgClosed.algebraMap_bijective_of_isIntegral
+
 
 variable (R F L) in
 include F in
@@ -259,6 +271,21 @@ theorem exists_eq_unit_mul_pow_mul_finrank_residueField {π : R} (hπ : Irreduci
     Ideal.inertiaDeg_eq_of_isMaximal (maximalIdeal R) (maximalIdeal B),
     ← IsFractionRing.finrank_eq R F B L] at hsum
   exact hsum
+
+/-- **Total ramification.** If the residue field of `R` is algebraically closed, a uniformizer
+`π` of `R` is `u * ϖ ^ [L : F]` in the integral closure of `R` in `L`, for a uniformizer `ϖ` and
+a unit `u`: the residue field does not grow, so the ramification index is the degree. -/
+theorem exists_eq_unit_mul_pow_finrank [IsAlgClosed (ResidueField R)] {π : R}
+    (hπ : Irreducible π) :
+    ∃ (ϖ : integralClosure R L) (u : (integralClosure R L)ˣ), Irreducible ϖ ∧
+      algebraMap R (integralClosure R L) π = u * ϖ ^ finrank F L := by
+  have := isLocalRing_integralClosure R L
+  have := isLocalHom_algebraMap_integralClosure R F L
+  obtain ⟨ϖ, u, e, hϖ, hu, he⟩ := exists_eq_unit_mul_pow_mul_finrank_residueField R F L hπ
+  rw [(LinearEquiv.ofBijective (Algebra.linearMap _ _)
+    (bijective_algebraMap_residueField_integralClosure R F L)).finrank_eq.symm.trans
+    (Module.finrank_self _), mul_one] at he
+  exact ⟨ϖ, u, hϖ, he ▸ hu⟩
 
 
 variable (R F L) in

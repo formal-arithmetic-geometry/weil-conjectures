@@ -64,12 +64,72 @@ section Presentation
 
 variable {k₀ : Type u} [Field k₀]
 
+/-- An affine scheme locally of finite type over a field `k₀` is isomorphic over `Spec k₀` to the
+spectrum of a quotient of a polynomial ring in finitely many variables over `k₀`. -/
+theorem exists_iso_spec_mvPolynomial_quotient {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀))
+    [IsAffine X₀] [LocallyOfFiniteType f₀] :
+    ∃ (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k₀))
+      (e : X₀ ≅ Spec (.of (MvPolynomial (Fin n) k₀ ⧸ I))),
+      e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin n) k₀ ⧸ I))) =
+        f₀ := by
+  let g : CommRingCat.of k₀ ⟶ Γ(X₀, ⊤) := (Scheme.ΓSpecIso _).inv ≫ f₀.appTop
+  have hf₀ : f₀ = X₀.isoSpec.hom ≫ Spec.map g := by
+    rw [Spec.map_comp, Scheme.isoSpec_hom_naturality_assoc, Scheme.isoSpec_hom,
+      toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id]
+  have hg : g.hom.FiniteType := by
+    have := HasRingHomProperty.appTop (P := @LocallyOfFiniteType) f₀ ‹_›
+    exact this.comp (RingHom.FiniteType.of_surjective _
+      (Scheme.ΓSpecIso _).commRingCatIsoToRingEquiv.symm.surjective)
+  let := g.hom.toAlgebra
+  obtain ⟨n, f, hf⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp hg
+  refine ⟨n, RingHom.ker f, X₀.isoSpec ≪≫ specIsoOfAlgEquiv
+    (Ideal.quotientKerAlgEquivOfSurjective hf), ?_⟩
+  rw [Iso.trans_hom, Category.assoc, specIsoOfAlgEquiv_hom_comp, hf₀]
+  rfl
+
 
 end Presentation
 
 section BaseCases
 
 variable {k₀ : Type u} [Field k₀]
+
+/-- `Spec (k₀[∅] ⧸ I) ⟶ Spec k₀` is finite. -/
+theorem isFinite_spec_mvPolynomial_fin_zero_quotient (I : Ideal (MvPolynomial (Fin 0) k₀)) :
+    IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 0) k₀ ⧸ I)))) := by
+  rw [IsFinite.SpecMap_iff, CommRingCat.hom_ofHom, RingHom.finite_algebraMap]
+  have : Module.Finite k₀ (MvPolynomial (Fin 0) k₀) :=
+    Module.Finite.equiv (isEmptyAlgEquiv k₀ (Fin 0)).symm.toLinearEquiv
+  exact Module.Finite.of_surjective (Ideal.Quotient.mkₐ k₀ I).toLinearMap
+    Ideal.Quotient.mk_surjective
+
+/-- For a nonzero ideal `J` of `k₀[X]`, the quotient `k₀[X] ⧸ J` is a finite `k₀`-module. -/
+lemma module_finite_mvPolynomial_fin_one_quotient {J : Ideal (MvPolynomial (Fin 1) k₀)}
+    (hJ : J ≠ ⊥) : Module.Finite k₀ (MvPolynomial (Fin 1) k₀ ⧸ J) := by
+  obtain ⟨f, hfJ, hf0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hJ
+  let ε := uniqueAlgEquiv k₀ (Fin 1)
+  have hg : ε f ≠ 0 := by simpa using hf0
+  have : Module.Finite k₀ (Polynomial k₀ ⧸ Ideal.span {ε f}) := (AdjoinRoot.powerBasis hg).finite
+  obtain ⟨φ, hφ⟩ : ∃ φ : (Polynomial k₀ ⧸ Ideal.span {ε f}) →ₐ[k₀] MvPolynomial (Fin 1) k₀ ⧸ J,
+      ∀ p, φ (Ideal.Quotient.mk _ (ε p)) = Ideal.Quotient.mk J p := by
+    refine ⟨Ideal.Quotient.liftₐ _ ((Ideal.Quotient.mkₐ k₀ J).comp ε.symm.toAlgHom) ?_, ?_⟩
+    · intro p hp
+      obtain ⟨q, rfl⟩ := Ideal.mem_span_singleton'.mp hp
+      simp [Ideal.Quotient.eq_zero_iff_mem.mpr hfJ]
+    · intro p
+      rw [Ideal.Quotient.liftₐ_apply, Ideal.Quotient.lift_mk]
+      simp
+  refine Module.Finite.of_surjective φ.toLinearMap ?_
+  intro x
+  obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective x
+  exact ⟨Ideal.Quotient.mk _ (ε p), hφ p⟩
+
+/-- For a nonzero ideal `J` of `k₀[X]`, `Spec (k₀[X] ⧸ J) ⟶ Spec k₀` is finite. -/
+theorem isFinite_spec_mvPolynomial_fin_one_quotient {J : Ideal (MvPolynomial (Fin 1) k₀)}
+    (hJ : J ≠ ⊥) :
+    IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀ ⧸ J)))) := by
+  rw [IsFinite.SpecMap_iff, CommRingCat.hom_ofHom, RingHom.finite_algebraMap]
+  exact module_finite_mvPolynomial_fin_one_quotient hJ
 
 
 /-- The polynomial algebra `R[X₀, …, X_{n-1}]` is standard smooth of relative dimension `n`
@@ -86,6 +146,15 @@ lemma isStandardSmoothOfRelativeDimension_mvPolynomial (R : Type u) [CommRing R]
     (Ideal.quotientEquivAlgOfEq R (by simp [v])).trans (AlgEquiv.quotientBot R _)
   exact (Q.ofAlgEquiv e).isStandardSmoothOfRelativeDimension
     (by simp [Algebra.Presentation.dimension])
+
+/-- The affine line `Spec k₀[X] ⟶ Spec k₀` is smooth of relative dimension `1`. -/
+theorem smoothOfRelativeDimension_spec_mvPolynomial_fin_one :
+    SmoothOfRelativeDimension 1
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀)))) := by
+  rw [HasRingHomProperty.Spec_iff (P := @SmoothOfRelativeDimension 1), CommRingCat.hom_ofHom]
+  exact RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _
+    ((RingHom.isStandardSmoothOfRelativeDimension_algebraMap 1).2
+      (isStandardSmoothOfRelativeDimension_mvPolynomial k₀ 1))
 
 
 /-- The isomorphism `Spec (k₀[X] ⧸ ⊥) ≅ Spec k₀[X]`. -/
@@ -236,10 +305,134 @@ lemma evalInitDesc_algebraMap (I : Ideal (MvPolynomial (Fin (n + 1)) k₀))
     (c : k₀) : evalInitDesc I φ α β h (algebraMap k₀ _ c) = β c := by
   rw [← MvPolynomial.quotient_mk_C, evalInitDesc_mk, eval₂Hom_C]
 
+/-- The square of rings defining the fibre of `mvPolynomialQuotientProjection` over the
+`k₀`-point given by `φ` is a pushout. -/
+theorem isPushout_evalInit (I : Ideal (MvPolynomial (Fin (n + 1)) k₀))
+    (φ : MvPolynomial (Fin n) k₀ →ₐ[k₀] k₀) :
+    IsPushout (CommRingCat.ofHom (mvPolynomialQuotientProjectionRingHom I))
+      (CommRingCat.ofHom φ.toRingHom)
+      (CommRingCat.ofHom (evalInitQuotientRingHom (fun i ↦ φ (X i)) I))
+      (CommRingCat.ofHom
+        (algebraMap k₀ (MvPolynomial (Fin 1) k₀ ⧸ evalInitIdeal (fun i ↦ φ (X i)) I))) := by
+  have hw : CommRingCat.ofHom (mvPolynomialQuotientProjectionRingHom I) ≫
+      CommRingCat.ofHom (evalInitQuotientRingHom (fun i ↦ φ (X i)) I) =
+      CommRingCat.ofHom φ.toRingHom ≫ CommRingCat.ofHom
+        (algebraMap k₀ (MvPolynomial (Fin 1) k₀ ⧸ evalInitIdeal (fun i ↦ φ (X i)) I)) := by
+    ext : 1
+    refine MvPolynomial.ringHom_ext (fun c ↦ ?_) (fun i ↦ ?_)
+    · simp [mvPolynomialQuotientProjectionRingHom, MvPolynomial.quotient_mk_C]
+    · simp [mvPolynomialQuotientProjectionRingHom, MvPolynomial.quotient_mk_C]
+  refine IsPushout.of_isColimit (PushoutCocone.IsColimit.mk hw
+    (fun s ↦ CommRingCat.ofHom (evalInitDesc I φ s.inl.hom s.inr.hom
+      congr(($(s.condition)).hom))) (fun s ↦ ?_) (fun s ↦ ?_) (fun s m h₁ h₂ ↦ ?_))
+  · ext : 1
+    refine Ideal.Quotient.ringHom_ext (RingHom.ext fun p ↦ ?_)
+    simpa using congr($(eval₂Hom_comp_evalInitAlgHom I φ s.inl.hom s.inr.hom
+      congr(($(s.condition)).hom)) p)
+  · ext c
+    simp [← MvPolynomial.quotient_mk_C]
+  · ext : 1
+    refine Ideal.Quotient.ringHom_ext (MvPolynomial.ringHom_ext (fun c ↦ ?_) (fun i ↦ ?_))
+    · have := congr(($h₂).hom c)
+      simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp,
+        Function.comp_apply] at this
+      simp [MvPolynomial.quotient_mk_C, this]
+    · have := congr(($h₁).hom (Ideal.Quotient.mk I (X (Fin.last n))))
+      simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp,
+        Function.comp_apply, evalInitQuotientRingHom_mk, evalInitAlgHom_X_last] at this
+      simp [Subsingleton.elim i 0, this]
+
+/-- The fibre of `mvPolynomialQuotientProjection I` over a `k₀`-point of
+`Spec k₀[X₀, …, X_{n-1}]` is isomorphic over `Spec k₀` to the spectrum of a quotient of `k₀[X]`.
+-/
+theorem exists_iso_pullback_mvPolynomialQuotientProjection
+    (I : Ideal (MvPolynomial (Fin (n + 1)) k₀))
+    (y₀ : Spec (.of k₀) ⟶ Spec (.of (MvPolynomial (Fin n) k₀)))
+    (hy₀ : y₀ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin n) k₀))) = 𝟙 _) :
+    ∃ (J : Ideal (MvPolynomial (Fin 1) k₀))
+      (e : pullback (mvPolynomialQuotientProjection I) y₀ ≅
+        Spec (.of (MvPolynomial (Fin 1) k₀ ⧸ J))),
+      e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀ ⧸ J))) =
+        pullback.snd (mvPolynomialQuotientProjection I) y₀ := by
+  obtain ⟨g, rfl⟩ := Spec.map_surjective y₀
+  rw [← Spec.map_comp, ← Spec.map_id, Spec.map_inj] at hy₀
+  let φ : MvPolynomial (Fin n) k₀ →ₐ[k₀] k₀ :=
+    { g.hom with commutes' c := congr(($hy₀).hom c) }
+  have h := isPullback_SpecMap_of_isPushout _ _ _ _ (isPushout_evalInit I φ)
+  exact ⟨_, h.isoPullback.symm, h.isoPullback_inv_snd⟩
+
 
 end Projection
 
 section Frobenius
+
+/-- In a field `k` over a finite field `k₀`, the fixed points of `x ↦ x ^ #k₀` are exactly the
+elements of the image of `k₀`. -/
+lemma _root_.FiniteField.mem_range_algebraMap_of_pow_card_eq {k₀ k : Type*} [Field k₀] [Fintype k₀]
+    [Field k] [Algebra k₀ k] {x : k} (hx : x ^ Fintype.card k₀ = x) :
+    x ∈ (algebraMap k₀ k).range := by
+  classical
+  let P : Polynomial k := Polynomial.X ^ Fintype.card k₀ - Polynomial.X
+  have hP : P ≠ 0 := FiniteField.X_pow_card_sub_X_ne_zero k Fintype.one_lt_card
+  have hdeg : P.natDegree = Fintype.card k₀ :=
+    FiniteField.X_pow_card_sub_X_natDegree_eq k Fintype.one_lt_card
+  have hsub : Finset.univ.image (algebraMap k₀ k) ⊆ P.roots.toFinset := by
+    intro y hy
+    obtain ⟨c, -, rfl⟩ := Finset.mem_image.mp hy
+    simp [P, hP, ← map_pow, FiniteField.pow_card]
+  have hcard : P.roots.toFinset.card ≤ (Finset.univ.image (algebraMap k₀ k)).card := by
+    rw [Finset.card_image_of_injective _ (algebraMap k₀ k).injective, Finset.card_univ, ← hdeg]
+    exact (Multiset.toFinset_card_le _).trans (Polynomial.card_roots' P)
+  have hx' : x ∈ P.roots.toFinset := by simp [P, hP, hx]
+  rw [← Finset.eq_of_subset_of_card_le hsub hcard] at hx'
+  obtain ⟨c, -, rfl⟩ := Finset.mem_image.mp hx'
+  exact ⟨c, rfl⟩
+
+/-- A ring map `A →+* k` to a field over a finite field `k₀` whose values are fixed by
+`x ↦ x ^ #k₀` factors through `k₀`. -/
+lemma _root_.FiniteField.exists_ringHom_of_pow_card_eq {k₀ k A : Type*} [Field k₀] [Fintype k₀]
+    [Field k] [Algebra k₀ k] [CommRing A] (g : A →+* k)
+    (hg : ∀ a, g a ^ Fintype.card k₀ = g a) :
+    ∃ φ : A →+* k₀, (algebraMap k₀ k).comp φ = g := by
+  let e : k₀ ≃+* (algebraMap k₀ k).range :=
+    RingEquiv.ofBijective (algebraMap k₀ k).rangeRestrict
+      ⟨fun a b h ↦ (algebraMap k₀ k).injective (congr_arg Subtype.val h),
+        (algebraMap k₀ k).rangeRestrict_surjective⟩
+  refine ⟨(e.symm : _ →+* k₀).comp
+    (g.codRestrict _ fun a ↦ FiniteField.mem_range_algebraMap_of_pow_card_eq (hg a)), ?_⟩
+  ext a
+  have h := e.apply_symm_apply ⟨g a, FiniteField.mem_range_algebraMap_of_pow_card_eq (hg a)⟩
+  exact congr_arg Subtype.val h
+
+/-- Descent of Frobenius-fixed points of affine schemes over a finite field `k₀`: a `k`-point of
+`Spec A` over `k₀` which is fixed by the `#k₀`-power Frobenius of `k` comes from a `k₀`-point. -/
+theorem exists_spec_point_of_frobenius_comp_eq {k₀ k A : Type u} [Field k₀] [Fintype k₀]
+    [Field k] [Algebra k₀ k] [CommRing A] [Algebra k₀ A] (y : Spec (.of k) ⟶ Spec (.of A))
+    (hy : y ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ A)) =
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
+    (hfrob : Spec.map (CommRingCat.ofHom
+      ((FiniteField.frobeniusAlgHom k₀ k : k →ₐ[k₀] k) : k →+* k)) ≫ y = y) :
+    ∃ y₀ : Spec (.of k₀) ⟶ Spec (.of A),
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ k)) ≫ y₀ = y ∧
+        y₀ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ A)) = 𝟙 _ := by
+  obtain ⟨g, rfl⟩ := Spec.map_surjective y
+  rw [← Spec.map_comp, Spec.map_inj] at hy hfrob
+  obtain ⟨φ, hφ⟩ := FiniteField.exists_ringHom_of_pow_card_eq g.hom fun a ↦
+    congr($(hfrob).hom a)
+  refine ⟨Spec.map (CommRingCat.ofHom φ), ?_, ?_⟩
+  · rw [← Spec.map_comp]
+    congr 1
+    ext a
+    exact congr($hφ a)
+  · rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    ext c
+    apply (algebraMap k₀ k).injective
+    have h1 := congr($hφ (algebraMap k₀ A c))
+    have h2 := congr($(hy).hom c)
+    simp only [RingHom.coe_comp, Function.comp_apply, CommRingCat.hom_comp,
+      CommRingCat.hom_ofHom] at h1 h2
+    simp [h1, h2]
 
 
 end Frobenius

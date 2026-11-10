@@ -152,12 +152,39 @@ universe u v
 
 variable (k : Type u) [Field k]
 
+/-- **The algebraic closure of a separably closed field is purely inseparable.** Let `k` be
+separably closed of exponential characteristic `p` and `K / k` algebraic (for instance
+`K = k̄`). Every `α ∈ K` has a power `α ^ p ^ n` which is separable over `k` (it even lies in
+`k`), hence `K / k` is purely inseparable.
+
+(blueprint: `lem-pc-kbar-pure-insep`) -/
+theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed k] (p : ℕ)
+    [ExpChar k p] (K : Type v) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] :
+    (∀ α : K, ∃ n : ℕ, IsSeparable k (α ^ p ^ n)) ∧ IsPurelyInseparable k K := by
+  refine ⟨fun α ↦ ?_, inferInstance⟩
+  obtain ⟨n, a, ha⟩ := IsPurelyInseparable.pow_mem k p α
+  exact ⟨n, ha ▸ isSeparable_algebraMap a⟩
+
 
 end KBar
 
 section PowMem
 
 variable (F : Type*) {E : Type*} [Field F] [Field E] [Algebra F E] (q : ℕ) [ExpChar F q]
+
+/-- **Purely inseparable extensions.** A field extension `E / F` of exponential characteristic
+`q` is purely inseparable if and only if every `α ∈ E` satisfies `α ^ (q ^ n) ∈ F` for some `n`.
+In characteristic `0` we have `q = 1`, and this says `E = F`. This is
+`isPurelyInseparable_iff_pow_mem`, stated with an explicit preimage.
+
+The other notions of the blueprint definition are those of Mathlib: `Module.Finite F E`
+(finite), `Algebra.IsAlgebraic F E` (algebraic), `Algebra.IsSeparable F E` (separable), and
+`IsAlgClosure F E` (algebraic closure: `E` is algebraically closed and algebraic over `F`).
+
+(blueprint: `def-pc-field-tower`) -/
+theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
+    IsPurelyInseparable F E ↔ ∀ α : E, ∃ n : ℕ, ∃ a : F, algebraMap F E a = α ^ q ^ n :=
+  isPurelyInseparable_iff_pow_mem F q
 
 
 end PowMem

@@ -38,6 +38,69 @@ variable {C₀ C₁ C₂ C₃ : Type*} [Category* C₀] [Category* C₁] [Catego
   [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
   [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
   [HasDerivedCategory C₃]
+/-- Derived functors of exact functors carry an associative family of composition
+isomorphisms to an associative family. -/
+theorem mapDerivedCategory_compIso_assoc
+    {r₀₁ : C₁ ⥤ C₀} {r₁₂ : C₂ ⥤ C₁} {r₂₃ : C₃ ⥤ C₂} {r₀₂ : C₂ ⥤ C₀} {r₁₃ : C₃ ⥤ C₁}
+    {r₀₃ : C₃ ⥤ C₀}
+    [r₀₁.Additive] [PreservesFiniteLimits r₀₁] [PreservesFiniteColimits r₀₁]
+    [r₁₂.Additive] [PreservesFiniteLimits r₁₂] [PreservesFiniteColimits r₁₂]
+    [r₂₃.Additive] [PreservesFiniteLimits r₂₃] [PreservesFiniteColimits r₂₃]
+    [r₀₂.Additive] [PreservesFiniteLimits r₀₂] [PreservesFiniteColimits r₀₂]
+    [r₁₃.Additive] [PreservesFiniteLimits r₁₃] [PreservesFiniteColimits r₁₃]
+    [r₀₃.Additive] [PreservesFiniteLimits r₀₃] [PreservesFiniteColimits r₀₃]
+    (c₀₁₂ : r₁₂ ⋙ r₀₁ ≅ r₀₂) (c₁₂₃ : r₂₃ ⋙ r₁₂ ≅ r₁₃) (c₀₂₃ : r₂₃ ⋙ r₀₂ ≅ r₀₃)
+    (c₀₁₃ : r₁₃ ⋙ r₀₁ ≅ r₀₃)
+    (h : isoWhiskerLeft r₂₃ c₀₁₂ ≪≫ c₀₂₃ =
+      (associator _ _ _).symm ≪≫ isoWhiskerRight c₁₂₃ r₀₁ ≪≫ c₀₁₃) :
+    isoWhiskerLeft r₂₃.mapDerivedCategory
+        ((mapDerivedCategoryCompIso r₁₂ r₀₁).symm ≪≫ mapDerivedCategoryNatIso c₀₁₂) ≪≫
+      ((mapDerivedCategoryCompIso r₂₃ r₀₂).symm ≪≫ mapDerivedCategoryNatIso c₀₂₃) =
+    (associator _ _ _).symm ≪≫
+      isoWhiskerRight ((mapDerivedCategoryCompIso r₂₃ r₁₂).symm ≪≫
+        mapDerivedCategoryNatIso c₁₂₃) r₀₁.mapDerivedCategory ≪≫
+      ((mapDerivedCategoryCompIso r₁₃ r₀₁).symm ≪≫ mapDerivedCategoryNatIso c₀₁₃) := by
+  ext K
+  have hD := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app K) h
+  have hα : (associator r₂₃ r₁₂ r₀₁).symm = Iso.refl _ := by
+    ext
+    rfl
+  simp only [hα, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
+    NatTrans.comp_app, Category.id_comp] at hD
+  have WL := NatTrans.congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft r₂₃ c₀₁₂) K
+  have WR := NatTrans.congr_app (mapDerivedCategoryNatIso_isoWhiskerRight c₁₂₃ r₀₁) K
+  have A := NatTrans.congr_app (mapDerivedCategoryCompIso_assoc r₂₃ r₁₂ r₀₁) K
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at WL WR A
+  have WL' : (mapDerivedCategoryNatIso c₀₁₂).hom.app (r₂₃.mapDerivedCategory.obj K) =
+      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).inv.app K ≫
+        (mapDerivedCategoryNatIso (isoWhiskerLeft r₂₃ c₀₁₂)).hom.app K ≫
+        (mapDerivedCategoryCompIso r₂₃ r₀₂).hom.app K := by
+    rw [WL, Iso.inv_hom_id_app_assoc]
+  have WR' : r₀₁.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₁₂₃).hom.app K) ≫
+      (mapDerivedCategoryCompIso r₁₃ r₀₁).inv.app K =
+      (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K ≫
+        (mapDerivedCategoryNatIso (isoWhiskerRight c₁₂₃ r₀₁)).hom.app K := by
+    rw [← cancel_mono ((mapDerivedCategoryCompIso r₁₃ r₀₁).hom.app K), Category.assoc,
+      Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    rw [WR, Iso.inv_hom_id_app_assoc]
+  have A' : (mapDerivedCategoryCompIso r₁₂ r₀₁).inv.app (r₂₃.mapDerivedCategory.obj K) ≫
+      (mapDerivedCategoryCompIso r₂₃ (r₁₂ ⋙ r₀₁)).inv.app K =
+      r₀₁.mapDerivedCategory.map ((mapDerivedCategoryCompIso r₂₃ r₁₂).inv.app K) ≫
+        (mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).inv.app K := by
+    rw [← cancel_mono ((mapDerivedCategoryCompIso (r₂₃ ⋙ r₁₂) r₀₁).hom.app K),
+      Category.assoc, Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    rw [← cancel_mono (r₀₁.mapDerivedCategory.map
+      ((mapDerivedCategoryCompIso r₂₃ r₁₂).hom.app K)), Category.assoc, Category.assoc, ← A]
+    simp [← Functor.map_comp]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+    whiskerLeft_app, isoWhiskerRight_hom, whiskerRight_app, Functor.map_comp, Category.assoc]
+  rw [WL', reassoc_of% WR']
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  erw [Category.id_comp]
+  rw [reassoc_of% A', hD]
+
 
 end CategoryTheory.Functor
 
@@ -155,6 +218,17 @@ theorem pbcRestrictComp_assoc (φ₀₁ : R₀ ⟶ R₁) (φ₁₂ : R₁ ⟶ R�
   erw [pbcRestrictComp_hom_app_val, pbcRestrictComp_hom_app_val, pbcRestrictComp_hom_app_val,
     pbcRestrictComp_hom_app_val]
 
+theorem pbcDerivedRestrictComp_assoc (φ₀₁ : R₀ ⟶ R₁) (φ₁₂ : R₁ ⟶ R₂) (φ₂₃ : R₂ ⟶ R₃)
+    (φ₀₂ : R₀ ⟶ R₂) (φ₁₃ : R₁ ⟶ R₃) (φ₀₃ : R₀ ⟶ R₃) (h₀₁₂ : φ₀₁ ≫ φ₁₂ = φ₀₂)
+    (h₁₂₃ : φ₁₂ ≫ φ₂₃ = φ₁₃) (h₀₂₃ : φ₀₂ ≫ φ₂₃ = φ₀₃) (h₀₁₃ : φ₀₁ ≫ φ₁₃ = φ₀₃) :
+    isoWhiskerLeft (pbcDerivedRestrict φ₂₃) (pbcDerivedRestrictComp φ₀₁ φ₁₂ φ₀₂ h₀₁₂) ≪≫
+        pbcDerivedRestrictComp φ₀₂ φ₂₃ φ₀₃ h₀₂₃ =
+      (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight
+        (pbcDerivedRestrictComp φ₁₂ φ₂₃ φ₁₃ h₁₂₃) (pbcDerivedRestrict φ₀₁) ≪≫
+        pbcDerivedRestrictComp φ₀₁ φ₁₃ φ₀₃ h₀₁₃ :=
+  Functor.mapDerivedCategory_compIso_assoc _ _ _ _
+    (pbcRestrictComp_assoc φ₀₁ φ₁₂ φ₂₃ φ₀₂ φ₁₃ φ₀₃ h₀₁₂ h₁₂₃ h₀₂₃ h₀₁₃)
+
 theorem pbcReductionNormalization_hom_eq {R S B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ) (K : DerivedCategory (pbcModules X R)) :
     (pbcReductionNormalization φ ψ χ h K).hom =
@@ -165,6 +239,28 @@ theorem pbcReductionNormalization_hom_eq {R S B : Sheaf (ProEt.topology X) CommR
   simp only [asIso_hom, Adjunction.leftAdjointCompIso_hom_app, Adjunction.homEquiv_counit,
     Functor.map_comp, Category.assoc]
 
+theorem pbcReductionNormalization_assoc (φ₀₁ : R₀ ⟶ R₁) (φ₁₂ : R₁ ⟶ R₂) (φ₂₃ : R₂ ⟶ R₃)
+    (φ₀₂ : R₀ ⟶ R₂) (φ₁₃ : R₁ ⟶ R₃) (φ₀₃ : R₀ ⟶ R₃) (h₀₁₂ : φ₀₁ ≫ φ₁₂ = φ₀₂)
+    (h₁₂₃ : φ₁₂ ≫ φ₂₃ = φ₁₃) (h₀₂₃ : φ₀₂ ≫ φ₂₃ = φ₀₃) (h₀₁₃ : φ₀₁ ≫ φ₁₃ = φ₀₃)
+    (K : DerivedCategory (pbcModules X R₀)) :
+    (pbcDerivedExtend φ₂₃).map (pbcReductionNormalization φ₀₁ φ₁₂ φ₀₂ h₀₁₂ K).hom ≫
+        (pbcReductionNormalization φ₀₂ φ₂₃ φ₀₃ h₀₂₃ K).hom =
+      (pbcReductionNormalization φ₁₂ φ₂₃ φ₁₃ h₁₂₃ ((pbcDerivedExtend φ₀₁).obj K)).hom ≫
+        (pbcReductionNormalization φ₀₁ φ₁₃ φ₀₃ h₀₁₃ K).hom := by
+  have H := congrArg (fun e ↦ e.hom.app K) (Adjunction.leftAdjointCompIso_assoc
+    (pbcDerivedScalarAdjunction φ₀₁) (pbcDerivedScalarAdjunction φ₁₂)
+    (pbcDerivedScalarAdjunction φ₂₃) (pbcDerivedScalarAdjunction φ₀₂)
+    (pbcDerivedScalarAdjunction φ₁₃) (pbcDerivedScalarAdjunction φ₀₃)
+    (pbcDerivedRestrictComp φ₀₁ φ₁₂ φ₀₂ h₀₁₂) (pbcDerivedRestrictComp φ₁₂ φ₂₃ φ₁₃ h₁₂₃)
+    (pbcDerivedRestrictComp φ₀₁ φ₁₃ φ₀₃ h₀₁₃) (pbcDerivedRestrictComp φ₀₂ φ₂₃ φ₀₃ h₀₂₃)
+    (pbcDerivedRestrictComp_assoc φ₀₁ φ₁₂ φ₂₃ φ₀₂ φ₁₃ φ₀₃ h₀₁₂ h₁₂₃ h₀₂₃ h₀₁₃))
+  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    isoWhiskerRight_hom, whiskerRight_app, Iso.symm_hom, Functor.associator_inv_app,
+    Category.id_comp] at H
+  rw [pbcReductionNormalization_hom_eq, pbcReductionNormalization_hom_eq,
+    pbcReductionNormalization_hom_eq, pbcReductionNormalization_hom_eq]
+  exact H.symm
+
 theorem _root_.CategoryTheory.Adjunction.leftAdjointIdIso_eq_symm {C : Type*} [Category* C]
     {F G : C ⥤ C} (adj : F ⊣ G) (e : G ≅ 𝟭 C) :
     Adjunction.leftAdjointIdIso adj e =
@@ -173,6 +269,77 @@ theorem _root_.CategoryTheory.Adjunction.leftAdjointIdIso_eq_symm {C : Type*} [C
   apply (conjugateEquiv Adjunction.id adj).injective
   rw [Adjunction.conjugateEquiv_leftAdjointIdIso_hom]
   exact ((conjugateEquiv Adjunction.id adj).apply_symm_apply e.inv).symm
+theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerLeft_unit
+    {C₀ C₁ : Type*} [Category* C₀] [Category* C₁] [Abelian C₀] [Abelian C₁]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+    (r : C₁ ⥤ C₀) (s : C₀ ⥤ C₀) [r.Additive] [PreservesFiniteLimits r]
+    [PreservesFiniteColimits r] [s.Additive] [PreservesFiniteLimits s]
+    [PreservesFiniteColimits s] (e : s ≅ 𝟭 C₀) (c : r ⋙ s ≅ r)
+    (hc : c = isoWhiskerLeft r e ≪≫ rightUnitor r) :
+    (mapDerivedCategoryCompIso r s).symm ≪≫ mapDerivedCategoryNatIso c =
+      isoWhiskerLeft r.mapDerivedCategory
+        (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C₀) ≪≫
+        rightUnitor r.mapDerivedCategory := by
+  subst hc
+  have hρ : rightUnitor r = Iso.refl _ := by
+    ext
+    rfl
+  ext K
+  have WL := NatTrans.congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft r e) K
+  have U := NatTrans.congr_app (mapDerivedCategoryCompIso_comp_id r) K
+  simp only [NatTrans.comp_app, whiskerLeft_app, NatTrans.id_app] at WL U
+  simp only [hρ, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    rightUnitor_hom_app, NatTrans.id_app]
+  have WL' : (mapDerivedCategoryNatIso (isoWhiskerLeft r e)).hom.app K =
+      (mapDerivedCategoryCompIso r s).hom.app K ≫
+        (mapDerivedCategoryNatIso e).hom.app (r.mapDerivedCategory.obj K) ≫
+        (mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K := by
+    rw [← reassoc_of% WL, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  have U' : (mapDerivedCategoryCompIso r (𝟭 C₀)).inv.app K =
+      (mapDerivedCategoryIdIso C₀).hom.app (r.mapDerivedCategory.obj K) := by
+    rw [← cancel_epi ((mapDerivedCategoryCompIso r (𝟭 C₀)).hom.app K), Iso.hom_inv_id_app, U]
+    rfl
+  rw [WL', U']
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  all_goals rfl
+
+theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerRight_unit
+    {C₀ C₁ : Type*} [Category* C₀] [Category* C₁] [Abelian C₀] [Abelian C₁]
+    [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+    (r : C₁ ⥤ C₀) (s : C₁ ⥤ C₁) [r.Additive] [PreservesFiniteLimits r]
+    [PreservesFiniteColimits r] [s.Additive] [PreservesFiniteLimits s]
+    [PreservesFiniteColimits s] (e : s ≅ 𝟭 C₁) (c : s ⋙ r ≅ r)
+    (hc : c = isoWhiskerRight e r ≪≫ leftUnitor r) :
+    (mapDerivedCategoryCompIso s r).symm ≪≫ mapDerivedCategoryNatIso c =
+      isoWhiskerRight (mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryIdIso C₁)
+        r.mapDerivedCategory ≪≫ leftUnitor r.mapDerivedCategory := by
+  subst hc
+  have hl : leftUnitor r = Iso.refl _ := by
+    ext
+    rfl
+  ext K
+  have WR := NatTrans.congr_app (mapDerivedCategoryNatIso_isoWhiskerRight e r) K
+  have U := NatTrans.congr_app (mapDerivedCategoryCompIso_id_comp r) K
+  simp only [NatTrans.comp_app, whiskerRight_app, NatTrans.id_app] at WR U
+  simp only [hl, mapDerivedCategoryNatIso_trans, mapDerivedCategoryNatIso_refl,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerRight_hom, whiskerRight_app,
+    leftUnitor_hom_app, NatTrans.id_app, Functor.map_comp]
+  have WR' : (mapDerivedCategoryNatIso (isoWhiskerRight e r)).hom.app K =
+      (mapDerivedCategoryCompIso s r).hom.app K ≫
+        r.mapDerivedCategory.map ((mapDerivedCategoryNatIso e).hom.app K) ≫
+        (mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K := by
+    rw [← reassoc_of% WR, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  have U' : (mapDerivedCategoryCompIso (𝟭 C₁) r).inv.app K =
+      r.mapDerivedCategory.map ((mapDerivedCategoryIdIso C₁).hom.app K) := by
+    rw [← cancel_epi ((mapDerivedCategoryCompIso (𝟭 C₁) r).hom.app K), Iso.hom_inv_id_app, U]
+    rfl
+  rw [WR', U']
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  all_goals rfl
+
 
 variable {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
 
@@ -204,6 +371,54 @@ theorem pbcRestrictComp_id_right (φ : R ⟶ S) (ψ : S ⟶ S) (h : φ ≫ ψ = 
   change ((pbcRestrictComp φ (ψ) φ h).hom.app M).val.app U x =
     (e.hom.app M).val.app U x
   erw [pbcRestrictComp_hom_app_val, he]
+theorem pbcDerivedRestrictComp_id_left (ψ : R ⟶ R) (φ : R ⟶ S) (h : ψ ≫ φ = φ)
+    (e : pbcRestrict ψ ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x) :
+    pbcDerivedRestrictComp (ψ) φ φ h = isoWhiskerLeft (pbcDerivedRestrict φ)
+      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _) ≪≫
+        rightUnitor (pbcDerivedRestrict φ) :=
+  Functor.mapDerivedCategoryCompIso_whiskerLeft_unit (pbcRestrict φ)
+    (pbcRestrict (ψ)) e _ (pbcRestrictComp_id_left ψ φ h e he)
+
+theorem pbcDerivedRestrictComp_id_right (φ : R ⟶ S) (ψ : S ⟶ S) (h : φ ≫ ψ = φ)
+    (e : pbcRestrict ψ ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules X S) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x) :
+    pbcDerivedRestrictComp φ (ψ) φ h = isoWhiskerRight
+      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _)
+        (pbcDerivedRestrict φ) ≪≫ leftUnitor (pbcDerivedRestrict φ) :=
+  Functor.mapDerivedCategoryCompIso_whiskerRight_unit (pbcRestrict φ)
+    (pbcRestrict (ψ)) e _ (pbcRestrictComp_id_right φ ψ h e he)
+
+theorem pbcReductionNormalization_id_left (ψ : R ⟶ R) (φ : R ⟶ S) (h : ψ ≫ φ = φ)
+    (e : pbcRestrict ψ ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x)
+    (K : DerivedCategory (pbcModules X R)) :
+    (pbcReductionNormalization (ψ) φ φ h K).hom =
+      (pbcDerivedExtend φ).map ((pbcDerivedExtendIdIso ψ e).hom.app K) := by
+  have H := Adjunction.leftAdjointCompIso_id_comp (pbcDerivedScalarAdjunction (ψ))
+    (pbcDerivedScalarAdjunction φ) (pbcDerivedRestrictComp (ψ) φ φ h)
+    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _)
+    (pbcDerivedRestrictComp_id_left ψ φ h e he)
+  rw [pbcReductionNormalization_hom_eq, H, Adjunction.leftAdjointIdIso_eq_symm]
+  simp
+
+theorem pbcReductionNormalization_id_right (φ : R ⟶ S) (ψ : S ⟶ S) (h : φ ≫ ψ = φ)
+    (e : pbcRestrict ψ ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules X S) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x)
+    (K : DerivedCategory (pbcModules X R)) :
+    (pbcReductionNormalization φ (ψ) φ h K).hom =
+      (pbcDerivedExtendIdIso ψ e).hom.app ((pbcDerivedExtend φ).obj K) := by
+  have H := Adjunction.leftAdjointCompIso_comp_id (pbcDerivedScalarAdjunction φ)
+    (pbcDerivedScalarAdjunction (ψ)) (pbcDerivedRestrictComp φ (ψ) φ h)
+    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _)
+    (pbcDerivedRestrictComp_id_right φ ψ h e he)
+  rw [pbcReductionNormalization_hom_eq, H, Adjunction.leftAdjointIdIso_eq_symm]
+  simp
+
 
 theorem pbcDerivedExtendIdIso_congr (ψ : R ⟶ R) (hψ : ψ = 𝟙 R) (e : pbcRestrict (𝟙 R) ≅ 𝟭 _)
     (he : ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -244,6 +459,24 @@ theorem pbcAmbientScalarComp_hom_app (i : E →ₐ[Padic l] F) (j : F →ₐ[Pad
   unfold pbcAmbientScalarComp
   rfl
 
+theorem pbcAmbientScalarComp_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G)
+    (k : G →ₐ[Padic l] H) (K : PbcCompletedDerived T (pbcIntegralDatum l E)) :
+    (pbcEmbeddingAmbientTensor l G H k T).map ((pbcAmbientScalarComp l E F G i j T).hom.app K) ≫
+        (pbcAmbientScalarComp l E G H (j.comp i) k T).hom.app K =
+      (pbcAmbientScalarComp l F G H j k T).hom.app ((pbcEmbeddingAmbientTensor l E F i T).obj K) ≫
+        (pbcAmbientScalarComp l E F H i (k.comp j) T).hom.app K ≫
+          eqToHom (congrArg (fun a ↦ (pbcEmbeddingAmbientTensor l E H a T).obj K)
+            (AlgHom.comp_assoc k j i)) := by
+  simp only [pbcAmbientScalarComp_hom_app]
+  have h₀₁₃ : pbcScalarCoefficientMap l E F i T ≫ pbcScalarCoefficientMap l F H (k.comp j) T =
+      pbcScalarCoefficientMap l E H (k.comp (j.comp i)) T :=
+    (pbcScalarCoefficientMap_comp l E F H i (k.comp j) T).trans
+      (congrArg (fun a ↦ pbcScalarCoefficientMap l E H a T) (AlgHom.comp_assoc k j i))
+  rw [pbcReductionNormalization_assoc _ _ _ _ _ _ _ (pbcScalarCoefficientMap_comp l F G H j k T)
+    _ h₀₁₃ K, pbcReductionNormalization_congr _ _ _ _
+      (pbcScalarCoefficientMap_comp l E F H i (k.comp j) T) h₀₁₃
+      (congrArg (fun a ↦ pbcScalarCoefficientMap l E H a T) (AlgHom.comp_assoc k j i))]
+
 theorem pbcEmbeddingAmbientUnit_eq :
     pbcEmbeddingAmbientUnit l E T =
       eqToIso (congrArg (fun φ ↦ pbcDerivedExtend φ) (pbcScalarCoefficientMap_id l E T)) ≪≫
@@ -257,6 +490,41 @@ theorem pbcScalarRestrictId_hom_app_val
     ((pbcScalarRestrictId l E T).hom.app M).val.app U x = x := by
   rw [pbcScalarRestrictId]
   exact (pbcScalarRestrictId_exists l E T).exists.choose_spec M U x
+theorem pbcAmbientScalarComp_id_left (i : E →ₐ[Padic l] F)
+    (K : PbcCompletedDerived T (pbcIntegralDatum l E)) :
+    (pbcAmbientScalarComp l E E F (AlgHom.id (Padic l) E) i T).hom.app K =
+      (pbcEmbeddingAmbientTensor l E F i T).map ((pbcEmbeddingAmbientUnit l E T).hom.app K) ≫
+        eqToHom (congrArg (fun a ↦ (pbcEmbeddingAmbientTensor l E F a T).obj K)
+          (AlgHom.comp_id i).symm) := by
+  have h₁ : pbcScalarCoefficientMap l E E (AlgHom.id (Padic l) E) T ≫
+      pbcScalarCoefficientMap l E F i T = pbcScalarCoefficientMap l E F i T :=
+    (pbcScalarCoefficientMap_comp l E E F (AlgHom.id (Padic l) E) i T).trans
+      (congrArg (fun a ↦ pbcScalarCoefficientMap l E F a T) (AlgHom.comp_id i))
+  have hc := pbcDerivedExtendIdIso_congr _ (pbcScalarCoefficientMap_id l E T) _
+    (pbcScalarRestrictId_hom_app_val l T)
+  rw [pbcAmbientScalarComp_hom_app, pbcEmbeddingAmbientUnit_eq, hc.2,
+    pbcReductionNormalization_congr _ _ _ _ h₁ _
+      (congrArg (fun a ↦ pbcScalarCoefficientMap l E F a T) (AlgHom.comp_id i).symm),
+    pbcReductionNormalization_id_left _ _ _ _ hc.1 K]
+
+theorem pbcAmbientScalarComp_id_right (i : E →ₐ[Padic l] F)
+    (K : PbcCompletedDerived T (pbcIntegralDatum l E)) :
+    (pbcAmbientScalarComp l E F F i (AlgHom.id (Padic l) F) T).hom.app K =
+      (pbcEmbeddingAmbientUnit l F T).hom.app ((pbcEmbeddingAmbientTensor l E F i T).obj K) ≫
+        eqToHom (congrArg (fun a ↦ (pbcEmbeddingAmbientTensor l E F a T).obj K)
+          (AlgHom.id_comp i).symm) := by
+  have h₁ : pbcScalarCoefficientMap l E F i T ≫
+      pbcScalarCoefficientMap l F F (AlgHom.id (Padic l) F) T =
+        pbcScalarCoefficientMap l E F i T :=
+    (pbcScalarCoefficientMap_comp l E F F i (AlgHom.id (Padic l) F) T).trans
+      (congrArg (fun a ↦ pbcScalarCoefficientMap l E F a T) (AlgHom.id_comp i))
+  have hc := pbcDerivedExtendIdIso_congr _ (pbcScalarCoefficientMap_id l F T) _
+    (pbcScalarRestrictId_hom_app_val l T)
+  rw [pbcAmbientScalarComp_hom_app, pbcEmbeddingAmbientUnit_eq, hc.2,
+    pbcReductionNormalization_congr _ _ _ _ h₁ _
+      (congrArg (fun a ↦ pbcScalarCoefficientMap l E F a T) (AlgHom.id_comp i).symm),
+    pbcReductionNormalization_id_right _ _ _ _ hc.1 K]
+
 
 variable [IsNoetherian T] [dim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
 variable [inv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
@@ -300,6 +568,40 @@ theorem pbcRationalization_map_homMk_eqToHom {a b : E →ₐ[Padic l] F} (hab : 
   erw [eqToHom_refl, eqToHom_refl]
   exact (pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)).map_id _
 
+theorem pbcRationalScalarComp_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G)
+    (k : G →ₐ[Padic l] H) (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
+    (pbcRationalScalarExtension l G H k T dim.out inv.out).map
+        ((pbcRationalScalarComp l E F G i j T dim.out inv.out).hom.app K) ≫
+        (pbcRationalScalarComp l E G H (j.comp i) k T dim.out inv.out).hom.app K =
+      (pbcRationalScalarComp l F G H j k T dim.out inv.out).hom.app
+          ((pbcRationalScalarExtension l E F i T dim.out inv.out).obj K) ≫
+        (pbcRationalScalarComp l E F H i (k.comp j) T dim.out inv.out).hom.app K ≫
+          eqToHom (congrArg (fun a ↦ (pbcRationalScalarExtension l E H a T dim.out inv.out).obj K)
+            (AlgHom.comp_assoc k j i)) := by
+  rw [pbcRationalScalarComp_hom_app, pbcRationalScalarComp_hom_app,
+    pbcRationalScalarComp_hom_app, pbcRationalScalarComp_hom_app]
+  erw [pbcRationalScalarExtension_map_rationalization]
+  rw [← pbcRationalization_map_homMk_eqToHom l T (AlgHom.comp_assoc k j i)]
+  erw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  apply ObjectProperty.hom_ext
+  exact pbcAmbientScalarComp_assoc l T i j k K.obj.obj
+
+theorem pbcRationalScalarComp_id_left (i : E →ₐ[Padic l] F)
+    (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
+    (pbcRationalScalarComp l E E F (AlgHom.id (Padic l) E) i T dim.out inv.out).hom.app K =
+      (pbcRationalScalarExtension l E F i T dim.out inv.out).map
+        ((pbcRationalScalarUnit l E T dim.out inv.out).hom.app K) ≫
+        eqToHom (congrArg (fun a ↦ (pbcRationalScalarExtension l E F a T dim.out inv.out).obj K)
+          (AlgHom.comp_id i).symm) := by
+  rw [pbcRationalScalarComp_hom_app, pbcRationalScalarUnit_hom_app]
+  erw [pbcRationalScalarExtension_map_rationalization]
+  rw [← pbcRationalization_map_homMk_eqToHom l T (AlgHom.comp_id i).symm]
+  erw [← Functor.map_comp]
+  congr 1
+  apply ObjectProperty.hom_ext
+  exact pbcAmbientScalarComp_id_left l T i K.obj.obj
+
 theorem pbcAmbientScalarComp_id_right_integral (i : E →ₐ[Padic l] F)
     (η : pbcEmbeddingAmbientTensor l F F (AlgHom.id (Padic l) F) T ⟶ 𝟭 _)
     (hη : ∀ X : PbcCompletedDerived T (pbcIntegralDatum l E),
@@ -313,6 +615,69 @@ theorem pbcAmbientScalarComp_id_right_integral (i : E →ₐ[Padic l] F)
         eqToHom (congrArg (fun a ↦ (pbcEmbeddingAmbientTensor l E F a T).obj K.obj.obj)
           (AlgHom.id_comp i).symm) :=
   hη K.obj.obj
+theorem pbcRationalScalarComp_id_right (i : E →ₐ[Padic l] F)
+    (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
+    (pbcRationalScalarComp l E F F i (AlgHom.id (Padic l) F) T dim.out inv.out).hom.app K =
+      (pbcRationalScalarUnit l F T dim.out inv.out).hom.app
+          ((pbcRationalScalarExtension l E F i T dim.out inv.out).obj K) ≫
+        eqToHom (congrArg (fun a ↦ (pbcRationalScalarExtension l E F a T dim.out inv.out).obj K)
+          (AlgHom.id_comp i).symm) := by
+  rw [pbcRationalScalarComp_hom_app, pbcRationalScalarUnit_hom_app,
+    ← pbcRationalization_map_homMk_eqToHom l T (AlgHom.id_comp i).symm]
+  erw [← Functor.map_comp]
+  congr 1
+  apply ObjectProperty.hom_ext
+  exact pbcAmbientScalarComp_id_right_integral l T i _ (pbcAmbientScalarComp_id_right l T i) K
+
+theorem pbcRationalScalarComp_unit_left (i b : E →ₐ[Padic l] F)
+    (hb : i.comp (AlgHom.id (Padic l) E) = b) (hbi : b = i)
+    (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
+    (pbcRationalScalarComp l E E F (AlgHom.id (Padic l) E) i T dim.out inv.out ≪≫
+        eqToIso (congrArg (fun c ↦ pbcRationalScalarExtension l E F c T dim.out inv.out)
+          hb)).hom.app K =
+      (pbcRationalScalarExtension l E F i T dim.out inv.out).map
+          ((pbcRationalScalarUnit l E T dim.out inv.out).hom.app K) ≫
+        eqToHom (congrArg (fun c ↦ (pbcRationalScalarExtension l E F c T dim.out inv.out).obj K)
+          hbi.symm) := by
+  subst hb
+  rw [eqToIso_refl, Iso.trans_refl, pbcRationalScalarComp_id_left]
+
+theorem pbcRationalScalarComp_unit_right (i b : E →ₐ[Padic l] F)
+    (hb : (AlgHom.id (Padic l) F).comp i = b) (hbi : b = i)
+    (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
+    (pbcRationalScalarComp l E F F i (AlgHom.id (Padic l) F) T dim.out inv.out ≪≫
+        eqToIso (congrArg (fun c ↦ pbcRationalScalarExtension l E F c T dim.out inv.out)
+          hb)).hom.app K =
+      (pbcRationalScalarUnit l F T dim.out inv.out).hom.app
+            ((pbcRationalScalarExtension l E F i T dim.out inv.out).obj K) ≫
+        eqToHom (congrArg (fun c ↦ (pbcRationalScalarExtension l E F c T dim.out inv.out).obj K)
+          hbi.symm) := by
+  subst hb
+  rw [eqToIso_refl, Iso.trans_refl, pbcRationalScalarComp_id_right]
+
+theorem pbcRationalScalarComp_assoc_of_eq (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G)
+    (k : G →ₐ[Padic l] H) (ji : E →ₐ[Padic l] G) (kj : F →ₐ[Padic l] H) (kji : E →ₐ[Padic l] H)
+    (hji : j.comp i = ji) (hkj : k.comp j = kj) (h₁ : k.comp ji = kji) (h₂ : kj.comp i = kji)
+    (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
+    (pbcRationalScalarExtension l G H k T dim.out inv.out).map
+        ((pbcRationalScalarComp l E F G i j T dim.out inv.out ≪≫
+          eqToIso (congrArg (fun c ↦ pbcRationalScalarExtension l E G c T dim.out inv.out)
+            hji)).hom.app K) ≫
+        (pbcRationalScalarComp l E G H ji k T dim.out inv.out ≪≫
+          eqToIso (congrArg (fun c ↦ pbcRationalScalarExtension l E H c T dim.out inv.out)
+            h₁)).hom.app K =
+      (pbcRationalScalarComp l F G H j k T dim.out inv.out ≪≫
+          eqToIso (congrArg (fun c ↦ pbcRationalScalarExtension l F H c T dim.out inv.out)
+            hkj)).hom.app ((pbcRationalScalarExtension l E F i T dim.out inv.out).obj K) ≫
+        (pbcRationalScalarComp l E F H i kj T dim.out inv.out ≪≫
+          eqToIso (congrArg (fun c ↦ pbcRationalScalarExtension l E H c T dim.out inv.out)
+            h₂)).hom.app K := by
+  subst hji
+  subst hkj
+  subst h₁
+  rw [eqToIso_refl, eqToIso_refl, eqToIso_refl, Iso.trans_refl, Iso.trans_refl, Iso.trans_refl,
+    pbcRationalScalarComp_assoc, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app]
+
 
 end Fields
 
@@ -407,6 +772,57 @@ theorem pbcStageNormalization_refl (E : Padic.FiniteCoefficientFields l Ω) :
         eqToIso (pbcStageTransition_refl l Ω T E).symm := by
   rw [pbcStageNormalization, dite_eq_left rfl]
   exact Iso.refl_trans _
+
+/-- Normalized tensor balancing satisfies both units and the four-field pentagon.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence).
+Proof: on a K-flat complex both paths send the three nested scalar factors to
+their product, with the same remaining tensor factor. Associativity gives equality
+before localization. Multiplication by one gives each unit equation. The two
+localizations preserve these equations, including coincident adjacent fields. -/
+theorem pbcStageAssociator_laws :
+    (∀ {E F G H : Padic.FiniteCoefficientFields l Ω}
+      (h : E ≤ F) (h' : F ≤ G) (h'' : G ≤ H)
+      (K : pbcCoefficientStage l Ω T E),
+      (pbcStageTransition l Ω T h'').map
+          ((pbcStageAssociator l Ω T h h').hom.app K) ≫
+        (pbcStageAssociator l Ω T (h.trans h') h'').hom.app K =
+      (pbcStageAssociator l Ω T h' h'').hom.app
+          ((pbcStageTransition l Ω T h).obj K) ≫
+        (pbcStageAssociator l Ω T h (h'.trans h'')).hom.app K) ∧
+    (∀ E : Padic.FiniteCoefficientFields l Ω,
+      pbcStageTransition l Ω T (le_refl E) = 𝟭 _) ∧
+    (∀ {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F),
+      HEq (pbcStageAssociator l Ω T (le_refl E) h)
+        (Functor.leftUnitor (pbcStageTransition l Ω T h)) ∧
+      HEq (pbcStageAssociator l Ω T h (le_refl F))
+        (Functor.rightUnitor (pbcStageTransition l Ω T h))) := by
+  refine ⟨fun {E F G H} h h' h'' K ↦ ?_, pbcStageTransition_refl l Ω T,
+    fun {E F} h ↦ ⟨?_, ?_⟩⟩
+  · unfold pbcStageAssociator
+    exact Functor.normalized_comp_assoc _ _ _ _ _ _ _ _ _ _ _ _ _ _
+      (pbcRationalScalarComp_assoc_of_eq l T _ _ _ _ _ _ (pbcSubfieldInclusion_comp l Ω h h')
+        (pbcSubfieldInclusion_comp l Ω h' h'') (pbcSubfieldInclusion_comp l Ω (h.trans h') h'')
+        (pbcSubfieldInclusion_comp l Ω h (h'.trans h''))) K
+  · unfold pbcStageAssociator
+    exact Functor.normalized_comp_heq_leftUnitor _ _ _ _ (pbcStageTransition_refl l Ω T E)
+      (pbcRationalScalarUnit l E.val T dim.out inv.out)
+      (fun K ↦ by
+        rw [pbcStageNormalization_refl]
+        simp only [Iso.trans_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app]
+        rfl)
+      (fun _ ↦ rfl)
+      (fun K ↦ pbcRationalScalarComp_unit_left l T _ _
+        (pbcSubfieldInclusion_comp l Ω (le_refl E) h) rfl K)
+  · unfold pbcStageAssociator
+    exact Functor.normalized_comp_heq_rightUnitor _ _ _ _ (pbcStageTransition_refl l Ω T F)
+      (pbcRationalScalarUnit l F.val T dim.out inv.out)
+      (fun K ↦ by
+        rw [pbcStageNormalization_refl]
+        simp only [Iso.trans_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app]
+        rfl)
+      (fun _ ↦ rfl)
+      (fun K ↦ pbcRationalScalarComp_unit_right l T _ _
+        (pbcSubfieldInclusion_comp l Ω h (le_refl F)) rfl K)
 
 end NestedFields
 end AlgebraicGeometry.Scheme

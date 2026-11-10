@@ -135,6 +135,13 @@ theorem isProper_comparisonFst : IsProper (comparisonFst σ₁ σ₂) := by
   rw [comparisonFst_eq]
   infer_instance
 
+/-- **Properness of the comparison projections**, second projection: `X₁₂ ⟶ X₂` is a
+closed immersion followed by a base change of the proper structure morphism of `X₁`. -/
+theorem isProper_comparisonSnd : IsProper (comparisonSnd σ₁ σ₂) := by
+  have := σ₁.isProper_s
+  rw [comparisonSnd_eq]
+  infer_instance
+
 
 section ComparisonOverV
 
@@ -445,6 +452,14 @@ of the second side. (Blueprint: `lemma:nagata-comparison-boundary-density`.) -/
 def comparisonBoundary : Set (comparisonSpace σ₁ σ₂) :=
   comparisonFst σ₁ σ₂ ⁻¹' σ₁.forbiddenBoundary
 
+lemma isClosed_comparisonBoundary : IsClosed (comparisonBoundary σ₁ σ₂) :=
+  isClosed_closure.preimage (comparisonFst σ₁ σ₂).continuous
+
+lemma mem_comparisonBoundary_iff {z : comparisonSpace σ₁ σ₂} :
+    z ∈ comparisonBoundary σ₁ σ₂ ↔
+      comparisonFst σ₁ σ₂ z ∈ σ₁.forbiddenBoundary :=
+  Iff.rfl
+
 
 variable {σ₁ σ₂} in
 /-- **Key boundary disjointness from the self boundary** (blueprint:
@@ -471,6 +486,17 @@ theorem comparisonBoundary_subset_preimage_selfBoundary {D : Set (comparisonSpac
     comparisonBoundary σ₁ σ₂ ⊆ comparisonSnd σ₁ σ₂ ⁻¹' σ₂.selfBoundary O₁ :=
   hD.trans <| closure_minimal hmem <|
     isClosed_closure.preimage (comparisonSnd σ₁ σ₂).continuous
+
+/-- **Key boundary disjointness by density** (blueprint:
+`lemma:nagata-comparison-boundary-density`, `lemma:nagata-key-boundary-disjointness`):
+the combination of the two previous lemmas, which is the shape the improved-comparison
+chain of the blueprint produces. -/
+theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared O₁)
+    {D : Set (comparisonSpace σ₁ σ₂)} (hD : comparisonBoundary σ₁ σ₂ ⊆ closure D)
+    (hmem : ∀ z ∈ D, comparisonSnd σ₁ σ₂ z ∈ σ₂.selfBoundary O₁) :
+    KeyDisjoint σ₁ σ₂ :=
+  keyDisjoint_of_comparisonBoundary_subset h₂
+    (comparisonBoundary_subset_preimage_selfBoundary hD hmem)
 
 
 section Avoids

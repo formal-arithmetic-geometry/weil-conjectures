@@ -27,6 +27,211 @@ open CategoryTheory CategoryTheory.Limits Opposite HomologicalComplex
 
 namespace AlgebraicGeometry.Etale
 
+/-- The augmentation of any K-injective resolution induces the canonical isomorphism
+from global sections to degree-zero cohomology. The factor `z` records well-definedness:
+its composite with the inclusion of cycles is precisely the augmentation on sections.
+Source: Stacks Tag 05TD (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
+
+Proof:
+1. The chain-map identity for `s` makes its degree-zero component a cocycle, giving `z`.
+2. A homotopy between lifts of a sheaf map makes their difference a boundary; this gives
+   naturality and compatibility with comparisons (cohomology-pullback-functorial).
+3. Global sections preserve kernels. Choose a nonnegative injective resolution; then its
+   degree-zero cycles are the sections of `G`, with no boundaries (left-exact-injective-
+   resolution-degree-zero). It is K-injective (dplus-injective-representative).
+4. Transport that isomorphism to `I` by the homotopy equivalence between K-injective
+   resolutions (cohomology-resolution-independent). Negative terms of `I` are allowed. -/
+theorem exists_degreeZeroCohomology_cycles_iso (T : Scheme.{u})
+    (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (s : (CochainComplex.singleFunctor _ 0).obj G ⟶ I)
+    [QuasiIso s] [I.IsKInjective] :
+    ∃ z : (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G ⟶
+        (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj I).cycles 0,
+      z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).iCycles 0 =
+        (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+          ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ∧
+      IsIso (z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).homologyπ 0) := by
+  let F := Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let M := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let K := M.obj ((CochainComplex.singleFunctor _ 0).obj G)
+  let k := F.map (singleObjXSelf (ComplexShape.up ℤ) 0 G).inv
+  have hk : k ≫ K.d 0 1 = 0 := by
+    dsimp [k, K, M]
+    simp
+  let w := K.liftCycles k 1 (by simp) hk
+  let z := w ≫ cyclesMap (M.map s) 0
+  have hz : z ≫ (M.obj I).iCycles 0 =
+      F.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) := by
+    dsimp only [z]
+    rw [Category.assoc, cyclesMap_i, ← Category.assoc, liftCycles_i]
+    exact (F.map_comp _ _).symm
+  exact ⟨z, hz, isIso_degreeZeroCohomology_cycles_factor T G I s z hz⟩
+
+/-- Naturality of the augmentation-to-cohomology map for arbitrary K-injective resolutions.
+Taking `G' = G` and `φ = 𝟙 G` gives compatibility with resolution identifications.
+Source: Stacks Tag 05TD (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
+
+Proof: Lift `φ` to `a` between the resolutions (cohomology-pullback-functorial).
+The given homotopy in degree zero says that `a⁰ s⁰ - s'⁰ φ` is `d⁻¹ h⁰`.
+After global sections it is a boundary, hence zero in homology. For the identity sheaf
+map, the lift induces the resolution comparison (cohomology-resolution-independent).
+The existence and bijectivity of the augmentation map are established by the preceding
+four-step argument using a nonnegative injective resolution and transport. -/
+theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
+    (G G' : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : G ⟶ G')
+    (I I' : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (s : (CochainComplex.singleFunctor _ 0).obj G ⟶ I)
+    (s' : (CochainComplex.singleFunctor _ 0).obj G' ⟶ I')
+    [QuasiIso s] [QuasiIso s'] [I.IsKInjective] [I'.IsKInjective]
+    (a : I ⟶ I')
+    (h : Homotopy (s ≫ a) ((CochainComplex.singleFunctor _ 0).map φ ≫ s'))
+    (z : (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G ⟶
+      (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).cycles 0)
+    (z' : (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G' ⟶
+      (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I').cycles 0)
+    (hz : z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).iCycles 0 =
+      (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0))
+    (hz' : z' ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I').iCycles 0 =
+      (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        ((singleObjXSelf (ComplexShape.up ℤ) 0 G').inv ≫ s'.f 0)) :
+    z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).homologyπ 0 ≫
+      homologyMap (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map a) 0 =
+    (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).map φ ≫ z' ≫
+      (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I').homologyπ 0 := by
+  let F := Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let M := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let K := M.obj ((CochainComplex.singleFunctor _ 0).obj G)
+  let k := F.map (singleObjXSelf (ComplexShape.up ℤ) 0 G).inv
+  have hk : k ≫ K.d 0 1 = 0 := by
+    dsimp [k, K, M]
+    simp
+  let w := K.liftCycles k 1 (by simp) hk
+  have hw : w ≫ K.iCycles 0 = k := by
+    apply liftCycles_i
+  have hs : w ≫ cyclesMap (M.map s) 0 = z := by
+    apply (cancel_mono ((M.obj I).iCycles 0)).1
+    rw [Category.assoc, cyclesMap_i, ← Category.assoc, hw, hz]
+    exact (F.map_comp _ _).symm
+  have hs' : w ≫ cyclesMap (M.map ((CochainComplex.singleFunctor _ 0).map φ ≫ s')) 0 =
+      F.map φ ≫ z' := by
+    apply (cancel_mono ((M.obj I').iCycles 0)).1
+    rw [Category.assoc, cyclesMap_i, ← Category.assoc, hw, Category.assoc, hz']
+    dsimp [k, M, CochainComplex.singleFunctor, CochainComplex.singleFunctors]
+    simp only [Functor.map_comp,
+      single_map_f_self, Category.assoc]
+    rw [← F.map_comp_assoc, Iso.inv_hom_id, F.map_id, Category.id_comp]
+  have hh := (F.mapHomotopy h).homologyMap_eq 0
+  rw [Functor.map_comp, homologyMap_comp] at hh
+  calc
+    _ = w ≫ K.homologyπ 0 ≫ homologyMap (M.map s) 0 ≫
+        homologyMap (M.map a) 0 := by
+      change z ≫ (M.obj I).homologyπ 0 ≫ homologyMap (M.map a) 0 = _
+      rw [← hs]
+      simp only [Category.assoc, homologyπ_naturality_assoc, homologyπ_naturality]
+    _ = w ≫ K.homologyπ 0 ≫
+        homologyMap (M.map ((CochainComplex.singleFunctor _ 0).map φ ≫ s')) 0 := by
+      simpa only [Category.assoc] using congrArg (fun f => w ≫ K.homologyπ 0 ≫ f) hh
+    _ = _ := by
+      rw [homologyπ_naturality, ← Category.assoc, hs', Category.assoc]
+
+/-- The degree-zero pullback formula on the actual complexes computing cohomology.
+Source: Stacks Tag 01FA (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
+
+Proof: The chain map on sections is the unit followed by the pushforward/global-sections
+identification and the comparison `r`. The chain-map identity makes `s(g)` a cycle.
+Naturality of the unit at `s⁰` gives `r(η(s(g))) = (r ∘ u⁻¹s)(η(g))`.
+Passing to homology proves the equality. The four-step bounded-below/transport argument
+above makes both augmentation maps isomorphisms; homotopy naturality proves compatibility
+with every choice of resolution (cohomology-pullback-functorial and
+cohomology-resolution-independent). No vanishing of negative terms is assumed. -/
+theorem degreeZeroCohomology_resolution_pullback {X Y : Scheme.{u}} (u : Y ⟶ X)
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (J : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (s : (CochainComplex.singleFunctor _ 0).obj G ⟶ I)
+    (r : ((upperStar AddCommGrpCat.{u + 1} u).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj I ⟶ J)
+    [QuasiIso s] [I.IsKInjective] [QuasiIso r] [J.IsKInjective]
+    (z : (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G ⟶
+      (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).cycles 0)
+    (z' : (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      ((upperStar AddCommGrpCat.{u + 1} u).obj G) ⟶
+      (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj J).cycles 0)
+    (hz : z ≫ (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).iCycles 0 =
+      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0))
+    (hz' : z' ≫ (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj J).iCycles 0 =
+      (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        ((upperStar AddCommGrpCat.{u + 1} u).map
+          ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ≫ r.f 0)) :
+    z ≫ (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).homologyπ 0 ≫
+      homologyMap
+        ((NatTrans.mapHomologicalComplex
+          (Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit
+              (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) ≫
+            (Functor.associator (upperStar AddCommGrpCat.{u + 1} u)
+              (lowerStar AddCommGrpCat.{u + 1} u)
+              (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1})).hom ≫
+            Functor.whiskerLeft (upperStar AddCommGrpCat.{u + 1} u)
+              (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} u).hom)
+          (ComplexShape.up ℤ)).app I ≫
+          ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map r) 0 =
+    globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G ≫ z' ≫
+      (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj J).homologyπ 0 := by
+  let F := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let F' := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let U := upperStar AddCommGrpCat.{u + 1} u
+  let η : F ⟶ U ⋙ F' :=
+    Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit F ≫
+      (Functor.associator U (lowerStar AddCommGrpCat.{u + 1} u) F).hom ≫
+      Functor.whiskerLeft U (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} u).hom
+  let b := (NatTrans.mapHomologicalComplex η (ComplexShape.up ℤ)).app I ≫
+    (F'.mapHomologicalComplex (ComplexShape.up ℤ)).map r
+  have hη : η.app G = globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G := by
+    change F.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit.app G) ≫
+      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} u).hom.app (U.obj G) = _
+    simp only [lowerStarCompGlobalSectionsIso, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
+      globalSectionsUpperStarMap]
+    dsimp only [F, U]
+    erw [← Category.assoc, (Sheaf.ΓNatIsoSheafSections
+      X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).hom.naturality
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit.app G)]
+    rfl
+  change z ≫ _ ≫ homologyMap b 0 = _
+  rw [homologyπ_naturality, ← Category.assoc]
+  rw [← Category.assoc (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G)]
+  apply congrArg (fun f => f ≫
+    (((F'.mapHomologicalComplex (ComplexShape.up ℤ)).obj J).homologyπ 0))
+  apply (cancel_mono
+    (((F'.mapHomologicalComplex (ComplexShape.up ℤ)).obj J).iCycles 0)).1
+  rw [Category.assoc, cyclesMap_i, ← Category.assoc, hz, Category.assoc, hz']
+  change F.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ≫
+      (η.app (I.X 0) ≫ F'.map (r.f 0)) =
+    globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G ≫
+      F'.map (U.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ≫ r.f 0)
+  rw [← Category.assoc, η.naturality, Category.assoc, Functor.comp_map,
+    ← F'.map_comp, hη]
+
 
 private theorem uliftZ_naturality {A B : AddCommGrpCat.{u + 1}}
     (f : AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ A) (k : A ⟶ B) :

@@ -178,8 +178,188 @@ theorem isTorsionAbelianSheaf_characterizations {T : Scheme.{u}}
     exact isIso_of_mono_of_epi φ
   exact ⟨hiff, hiff.trans hlocal⟩
 
+private theorem ratModInt_isAddTorsion :
+    IsAddTorsion (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ)) := by
+  intro x
+  induction x using QuotientAddGroup.induction_on with
+  | H q =>
+    refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨q.den, q.pos, ?_⟩
+    rw [← QuotientAddGroup.mk_nsmul, QuotientAddGroup.eq_zero_iff]
+    refine AddSubgroup.mem_zmultiples_iff.2 ⟨q.num, ?_⟩
+    simp [nsmul_eq_mul, zsmul_eq_mul]
+
+private theorem ratModInt_dyadic_not_killed (k : ℕ) (hk : 0 < k) :
+    ∃ n : ℕ+, k • ((1 / (2 : ℚ) ^ (n : ℕ) : ℚ) :
+      ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ)) ≠ 0 := by
+  let n : ℕ+ := ⟨k + 1, Nat.succ_pos _⟩
+  refine ⟨n, fun h ↦ ?_⟩
+  rw [← QuotientAddGroup.mk_nsmul, QuotientAddGroup.eq_zero_iff] at h
+  obtain ⟨z, hz⟩ := AddSubgroup.mem_zmultiples_iff.1 h
+  have hpow : k < 2 ^ (n : ℕ) := by
+    exact lt_trans (Nat.lt_succ_self k) (Nat.lt_two_pow_self (n := k + 1))
+  have hpos : (0 : ℚ) < (k : ℚ) / 2 ^ (n : ℕ) := by positivity
+  have hlt : (k : ℚ) / 2 ^ (n : ℕ) < 1 := by
+    rw [div_lt_one (by positivity)]
+    exact_mod_cast hpow
+  have he : (z : ℚ) = (k : ℚ) / 2 ^ (n : ℕ) := by
+    simpa [nsmul_eq_mul, zsmul_eq_mul, div_eq_mul_inv] using hz
+  have hzpos : (0 : ℤ) < z := by exact_mod_cast (he ▸ hpos)
+  have hzlt : z < (1 : ℤ) := by exact_mod_cast (he ▸ hlt)
+  omega
 
 -- The inherited statement names a nondependent index binder `n`.
+
+-- The inherited statement names a nondependent index binder `n`.
+set_option linter.unusedVariables false in
+/-- Source: blueprint `sec-abelian-varieties/def-weil-pbc-etale-sheaves`, Q/Z example
+(blueprint: lem-weil-pbc-torsion-sheaf-characterizations).
+
+Proof: (5) The constant sheaf has geometric stalk Q/Z by
+lem-weil-pbc-constant-sheaf-geometric-stalk, hence is torsion by the characterization above.
+(6) The coproduct of positive-integer-indexed copies of T is étale over T, with disjoint open
+coprojections (lem-weil-pbc-scheme-coproduct-copies). The sheaf condition gives the canonical
+restriction isomorphism onto the product of sections on T: off-diagonal overlaps are empty,
+and sections on the empty scheme form the zero group.
+(7) For nonempty T, a geometric stalk identifies the composite of the constant-presheaf unit
+and the germ map with the identity of Q/Z. Thus the unit is injective. The glued section with
+coordinates 1/2^n cannot be killed by any k > 0, since 2^n > k for some n, and k/2^n is then
+not an integer. The universe lift only places Q/Z in the sheaf's value universe. -/
+theorem constant_ratModIntSheaf_sections_not_torsion (T : Scheme.{u}) :
+    IsTorsionAbelianSheaf ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))) ∧
+      (Nonempty T →
+        ∃ (U : T.Etale) (e : U.left ≅ ∐ (fun _ : ℕ+ ↦ T))
+          (j : ∀ n : ℕ+, Scheme.Etale.mk (𝟙 T) ⟶ U),
+          U.hom = e.hom ≫ Sigma.desc (fun _ : ℕ+ ↦ 𝟙 T) ∧
+          (∀ n : ℕ+, (j n).left = Sigma.ι (fun _ : ℕ+ ↦ T) n ≫ e.inv) ∧
+          Function.Bijective (fun s : ((constantSheaf T.smallEtaleTopology
+              AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of
+                (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))).obj.obj (op U) ↦
+            fun n : ℕ+ ↦ ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+              (AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))).obj.map
+                (j n).op s) ∧
+          ∃ x : ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+              (AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))).obj.obj
+                (op U),
+            (∀ n : ℕ+, ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+                (AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))).obj.map
+                  (j n).op x =
+              (toSheafify T.smallEtaleTopology
+                ((Functor.const T.Etaleᵒᵖ).obj
+                  (AddCommGrpCat.of
+                    (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ)))))).app
+                      (op (Scheme.Etale.mk (𝟙 T)))
+                        (ULift.up ((1 / (2 : ℚ) ^ (n : ℕ) : ℚ) :
+                          ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ)))) ∧
+            ∀ k : ℕ, 0 < k → k • x ≠ 0) := by
+  classical
+  let E := AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ)))
+  let F := (constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj E
+  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+    (CategoryTheory.forget AddCommGrpCat.{u + 1})
+  have hE : IsAddTorsion E := by
+    intro x
+    obtain ⟨n, hn, hnx⟩ :=
+      isOfFinAddOrder_iff_nsmul_eq_zero.1 (ratModInt_isAddTorsion x.down)
+    refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, ?_⟩
+    apply ULift.ext
+    exact hnx
+  refine ⟨(isTorsionAbelianSheaf_characterizations F).2.mpr ?_, ?_⟩
+  · intro Ω _ _ t
+    let g := (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj E)).app
+      (op (Etale.mk (𝟙 T))) ≫
+        (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T))
+          (Over.homMk t (Category.comp_id t)) F.obj
+    have : IsIso g := by
+      let Φ := pointSmallEtale t
+      have he : g = (Φ.sheafFiberConstantSheafIso E).inv := by
+        let P := (Functor.const T.Etaleᵒᵖ).obj E
+        have hι : Φ.toPresheafFiber (Etale.mk (𝟙 T))
+            (Over.homMk t (Category.comp_id t)) P = (Φ.presheafFiberConstIso E).inv := by
+          apply (cancel_mono (Φ.presheafFiberConstIso E).hom).1
+          simp [P]
+        exact (Φ.toPresheafFiber_naturality (toSheafify T.smallEtaleTopology P)
+          (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t))).symm.trans
+            (congrArg (fun f ↦ f ≫ Φ.presheafFiber.map (toSheafify T.smallEtaleTopology P)) hι)
+      rw [he]
+      infer_instance
+    exact IsAddTorsion.of_surjective (f := g.hom)
+      (ConcreteCategory.bijective_of_isIso g).2 hE
+  · intro hT
+    let f : (∐ (fun _ : ℕ+ ↦ T)) ⟶ T := Sigma.desc (fun _ : ℕ+ ↦ 𝟙 T)
+    have hf : AlgebraicGeometry.Etale f :=
+      IsZariskiLocalAtSource.sigmaDesc (P := @AlgebraicGeometry.Etale) (fun _ ↦ inferInstance)
+    let U : T.Etale := Etale.mk f
+    let j (n : ℕ+) : Etale.mk (𝟙 T) ⟶ U :=
+      MorphismProperty.Over.homMk (A := Etale.mk (𝟙 T)) (B := U)
+        (Sigma.ι (fun _ : ℕ+ ↦ T) n) (by
+        change Sigma.ι (fun _ : ℕ+ ↦ T) n ≫ f = 𝟙 T
+        exact Sigma.ι_comp_desc _ _)
+    have hcov : ⋃ n, Set.range (j n).left = Set.univ := by
+      exact (sigmaOpenCover (fun _ : ℕ+ ↦ T)).iUnion_range
+    have hbij : Function.Bijective
+        (fun s : F.obj.obj (op U) ↦ fun n : ℕ+ ↦ F.obj.map (j n).op s) := by
+      constructor
+      · intro a b hab
+        exact (isSheafFor_ofArrows F j hcov).isSeparatedFor.ext
+          (fun Z g ⟨n⟩ ↦ congrFun hab n)
+      · intro a
+        obtain ⟨x, hx, -⟩ := (Presieve.isSheafFor_arrows_iff _ j).1
+          (isSheafFor_ofArrows F j hcov) a (fun i l Z gi gl h ↦ by
+            by_cases hil : i = l
+            · subst l
+              have he : gi = gl := MorphismProperty.Over.Hom.ext
+                ((cancel_mono (Sigma.ι (fun _ : ℕ+ ↦ T) i)).1
+                  (congrArg (fun φ ↦ φ.left) h))
+              subst gl
+              rfl
+            · have : IsEmpty Z.left := isEmpty_of_commSq_sigmaι_of_ne
+                ⟨congrArg (fun φ ↦ φ.left) h⟩ hil
+              exact (subsingleton_obj_of_isEmpty F).elim _ _)
+        exact ⟨x, funext hx⟩
+    refine ⟨U, Iso.refl _, j, ?_, ?_, hbij, ?_⟩
+    · simp [U, f]
+    · intro n
+      change Sigma.ι (fun _ : ℕ+ ↦ T) n = Sigma.ι (fun _ : ℕ+ ↦ T) n ≫ 𝟙 _
+      exact (Category.comp_id _).symm
+    · let c := (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj E)).app
+        (op (Etale.mk (𝟙 T)))
+      let a (n : ℕ+) : E := ULift.up
+        ((1 / (2 : ℚ) ^ (n : ℕ) : ℚ) : ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))
+      obtain ⟨x, hx⟩ := hbij.2 (fun n ↦ c (a n))
+      refine ⟨x, fun n ↦ congrFun hx n, ?_⟩
+      let t := T.algClosurePoint (Classical.choice hT)
+      let g := (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T))
+        (Over.homMk t (Category.comp_id t)) F.obj
+      have : IsIso (c ≫ g) := by
+        let Φ := pointSmallEtale t
+        have he : c ≫ g = (Φ.sheafFiberConstantSheafIso E).inv := by
+          let P := (Functor.const T.Etaleᵒᵖ).obj E
+          have hι : Φ.toPresheafFiber (Etale.mk (𝟙 T))
+              (Over.homMk t (Category.comp_id t)) P = (Φ.presheafFiberConstIso E).inv := by
+            apply (cancel_mono (Φ.presheafFiberConstIso E).hom).1
+            simp [P]
+          exact (Φ.toPresheafFiber_naturality (toSheafify T.smallEtaleTopology P)
+            (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t))).symm.trans
+              (congrArg (fun f ↦ f ≫ Φ.presheafFiber.map (toSheafify T.smallEtaleTopology P)) hι)
+        rw [he]
+        infer_instance
+      have hc : Function.Injective c := by
+        intro a b hab
+        exact (ConcreteCategory.bijective_of_isIso (c ≫ g)).1
+          (by
+            change g.hom (c.hom a) = g.hom (c.hom b)
+            exact congrArg g.hom hab)
+      intro k hk hzero
+      obtain ⟨n, hn⟩ := ratModInt_dyadic_not_killed k hk
+      have hnzero : k • a n = (0 : E) := hc (by
+        have he := congrArg (F.obj.map (j n).op) hzero
+        have hxn : F.obj.map (j n).op x = c (a n) := congrFun hx n
+        rw [map_nsmul, map_zero, hxn] at he
+        simpa only [map_nsmul, map_zero] using he)
+      exact hn (congrArg ULift.down hnzero)
+
+
 
 
 end AlgebraicGeometry.Scheme

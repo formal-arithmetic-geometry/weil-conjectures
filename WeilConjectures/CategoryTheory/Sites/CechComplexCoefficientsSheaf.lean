@@ -194,6 +194,14 @@ noncomputable def isLimitOverCechAugmentationOfIsSheafFor
     (fun x hx _ hm ↦ (existsUnique_comp_overCechAugmentation U₀ P h x hx).unique hm
       (existsUnique_comp_overCechAugmentation U₀ P h x hx).exists.choose_spec)
 
+/-- If `P` is a sheaf for the single morphism `U₀ ⟶ V` (with respect to all the functors
+`Hom(a, -)`), then the augmentation `P(V) ⟶ P(U₀)` is a kernel of the first Čech differential.
+-/
+lemma isLimit_overCechAugmentation_of_isSheafFor
+    (h : ∀ a : A, (Presieve.singleton U₀.hom).IsSheafFor (P ⋙ coyoneda.obj (op a))) :
+    Nonempty (IsLimit (KernelFork.ofι (overCechAugmentation U₀ P) (overCechAugmentation_d U₀ P))) :=
+  ⟨isLimitOverCechAugmentationOfIsSheafFor U₀ P h⟩
+
 
 /-- Conversely, if the augmentation `P(V) ⟶ P(U₀)` is a kernel of the first Čech differential,
 then `P` is a sheaf for the single morphism `U₀ ⟶ V` with respect to all the functors

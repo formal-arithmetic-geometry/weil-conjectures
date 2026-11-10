@@ -32,6 +32,103 @@ namespace RingHom
 
 -- The ring equivalence in the hypothesis need not preserve the limit-ring scalars.
 -- Splitting the coordinates of a countable product exhibits the obstruction.
+private theorem comparison_scalar_obstruction :
+    let A := ℕ → ℤ
+    ∃ e : ((A ⊗[ℤ] ℤ) ⊗[ℤ] ℤ) ≃ₐ[ℤ] (A ⊗[ℤ] (ℤ × ℤ)),
+      (∀ z : ℤ, e ((1 ⊗ₜ[ℤ] z) ⊗ₜ[ℤ] 1) = 1 ⊗ₜ[ℤ] (z, z)) ∧
+      ¬Function.Surjective
+        (Algebra.TensorProduct.map (AlgHom.id ℤ A)
+          ((AlgHom.id ℤ ℤ).prod (AlgHom.id ℤ ℤ))) := by
+  let A := ℕ → ℤ
+  let split : A ≃ₐ[ℤ] A × A :=
+    (AlgEquiv.piCongrLeft' ℤ (fun _ : ℕ ↦ ℤ) Equiv.natSumNatEquivNat.symm).trans
+      (AlgEquiv.sumArrowEquivProdArrow ℕ ℕ ℤ ℤ)
+  let rid : A ⊗[ℤ] ℤ ≃ₐ[ℤ] A := Algebra.TensorProduct.rid ℤ ℤ A
+  let prod : A ⊗[ℤ] (ℤ × ℤ) ≃ₐ[ℤ] A × A :=
+    (Algebra.TensorProduct.prodRight ℤ ℤ A ℤ ℤ).trans (rid.prodCongr rid)
+  let e := ((Algebra.TensorProduct.rid ℤ ℤ (A ⊗[ℤ] ℤ)).trans rid).trans
+    (split.trans prod.symm)
+  refine ⟨e, ?_, ?_⟩
+  · intro z
+    apply prod.injective
+    change prod (prod.symm (split (rid
+      (Algebra.TensorProduct.rid ℤ ℤ (A ⊗[ℤ] ℤ) ((1 ⊗ₜ[ℤ] z) ⊗ₜ[ℤ] 1))))) = _
+    rw [prod.apply_symm_apply]
+    simp only [Algebra.TensorProduct.rid_tmul, one_smul]
+    change split (z • (1 : A)) = _
+    rw [← Algebra.algebraMap_eq_smul_one, split.commutes]
+    simp [prod, rid, Algebra.TensorProduct.prodRight_tmul]
+    rfl
+  · intro hs
+    obtain ⟨x, hx⟩ := hs (prod.symm (0, 1))
+    have hdiag : ∀ x : A ⊗[ℤ] ℤ,
+        prod (Algebra.TensorProduct.map (AlgHom.id ℤ A)
+          ((AlgHom.id ℤ ℤ).prod (AlgHom.id ℤ ℤ)) x) = (rid x, rid x) := by
+      intro x
+      induction x using TensorProduct.inductionOn with
+      | tmul a z => simp [prod, rid, Algebra.TensorProduct.prodRight_tmul]
+      | add x y hx hy => simp [hx, hy]
+    have heq := congrArg prod hx
+    rw [hdiag, prod.apply_symm_apply] at heq
+    have hz : (0 : A) = 1 := (congrArg Prod.fst heq).symm.trans (congrArg Prod.snd heq)
+    exact zero_ne_one (congrFun hz 0)
+
+-- A nonsurjective terminal component cannot induce a bijective map of colimits.
+-- This rules out every choice of transitions in the version lacking scalar compatibility.
+private theorem terminal_comparison_obstruction
+    {J : Type v} [SmallCategory J] (D E : J ⥤ CommRingCat.{w}) (α : D ⟶ E)
+    (t : J) (ht : IsTerminal t) (cD : Cocone D) (cE : Cocone E)
+    (hD : IsColimit cD) (hE : IsColimit cE) (f : cD.pt ⟶ cE.pt)
+    (hcomm : α.app t ≫ cE.ι.app t = cD.ι.app t ≫ f)
+    (hnot : ¬Function.Surjective (α.app t)) : ¬Function.Bijective f := by
+  intro hf
+  let := hD.isIso_ι_app_of_isTerminal t ht
+  let := hE.isIso_ι_app_of_isTerminal t ht
+  have hDb := ConcreteCategory.bijective_of_isIso (cD.ι.app t)
+  have hEb := ConcreteCategory.bijective_of_isIso (cE.ι.app t)
+  apply hnot
+  intro y
+  obtain ⟨z, hz⟩ := hf.2 (cE.ι.app t y)
+  obtain ⟨x, hx⟩ := hDb.2 z
+  refine ⟨x, hEb.1 ?_⟩
+  have h := ConcreteCategory.congr_hom hcomm x
+  change cE.ι.app t (α.app t x) = f (cD.ι.app t x) at h
+  simpa only [hx, hz] using h
+
+-- At the terminal stage of Z -> (N -> Z), the last compatibility clause
+-- alone contradicts the existence of the requested bijective colimit map.
+private theorem comparison_terminal_tensor_obstruction
+    {J : Type v} [SmallCategory J] (D E : J ⥤ CommRingCat.{0}) (α : D ⟶ E)
+    (t : J) (ht : IsTerminal t) (cD : Cocone D) (cE : Cocone E)
+    (hD : IsColimit cD) (hE : IsColimit cE) (f : cD.pt ⟶ cE.pt)
+    (hcomm : α.app t ≫ cE.ι.app t = cD.ι.app t ≫ f)
+    (d : D.obj t ≃+* (((ℕ → ℤ) ⊗[ℤ] ℤ) ⊗[ℤ] ℤ))
+    (c : E.obj t ≃+* ((ℕ → ℤ) ⊗[ℤ] (ℤ × ℤ)))
+    (hcompat :
+      (c.toRingHom.comp ((α.app t).hom.comp d.symm.toRingHom)).comp
+        (Algebra.TensorProduct.includeLeftRingHom (R := ℤ)
+          (A := (ℕ → ℤ) ⊗[ℤ] ℤ) (B := ℤ)) =
+        (Algebra.TensorProduct.map (AlgHom.id ℤ (ℕ → ℤ))
+          ((AlgHom.id ℤ ℤ).prod (AlgHom.id ℤ ℤ))).toRingHom) :
+    ¬Function.Bijective f := by
+  apply terminal_comparison_obstruction D E α t ht cD cE hD hE f hcomm
+  intro hα
+  obtain ⟨_, _, hn⟩ := comparison_scalar_obstruction
+  apply hn
+  have hinc : Function.Surjective
+      (Algebra.TensorProduct.includeLeftRingHom (R := ℤ)
+        (A := (ℕ → ℤ) ⊗[ℤ] ℤ) (B := ℤ)) := by
+    intro x
+    refine ⟨Algebra.TensorProduct.rid ℤ ℤ ((ℕ → ℤ) ⊗[ℤ] ℤ) x, ?_⟩
+    exact (Algebra.TensorProduct.rid ℤ ℤ ((ℕ → ℤ) ⊗[ℤ] ℤ)).symm_apply_apply x
+  have hs : Function.Surjective
+      ((c.toRingHom.comp ((α.app t).hom.comp d.symm.toRingHom)).comp
+        (Algebra.TensorProduct.includeLeftRingHom (R := ℤ)
+          (A := (ℕ → ℤ) ⊗[ℤ] ℤ) (B := ℤ))) :=
+    c.surjective.comp (hα.comp (d.symm.surjective.comp hinc))
+  rw [hcompat] at hs
+  exact hs
+
 
 /-- Extend a single comparison map by base change to a pushout system with its colimits.
 

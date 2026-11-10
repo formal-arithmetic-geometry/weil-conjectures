@@ -254,6 +254,8 @@ noncomputable def modObj (M : C) [ModObj (S.obj B) M] : ModObj B (P.obj M) where
     simp only [Category.assoc]
     rw [MonoidalCategory.whiskerLeft_comp, Category.assoc, whiskerLeft_iso_inv_assoc]
 
+lemma modObj_smul (M : C) [ModObj (S.obj B) M] : (pf.modObj B M).smul = pf.smul B M := rfl
+
 
 /-- The linearization `P_B : Mod C (S B) ⥤ Mod D B` of `P`: an `S B`-module object `M` is sent
 to `P M` with the `B`-action induced by the projection formula. -/
@@ -269,9 +271,14 @@ noncomputable def mapModLeft : Mod C (S.obj B) ⥤ Mod D B where
   map_id _ := by ext; simp
   map_comp _ _ := by ext; simp
 
+lemma mapModLeft_obj_X (M : Mod C (S.obj B)) : ((pf.mapModLeft B).obj M).X = P.obj M.X := rfl
+
 
 lemma mapModLeft_map_hom {M N : Mod C (S.obj B)} (f : M ⟶ N) :
     ((pf.mapModLeft B).map f).hom = P.map f.hom := rfl
+
+lemma mapModLeft_obj_smul (M : Mod C (S.obj B)) :
+    γ[B,((pf.mapModLeft B).obj M).X] = pf.smul B M.X := rfl
 
 
 /-- The linearization of `P` commutes with the forgetful functors. -/
@@ -413,6 +420,10 @@ noncomputable def rightModObj (N : D) [ModObj B N] : ModObj (S.obj B) (G.obj N) 
       theta_assoc_assoc, MonoidalCategory.whiskerLeft_comp, Category.assoc,
       theta_natural_right_assoc]
 
+lemma rightModObj_smul (N : D) [ModObj B N] :
+    (pf.rightModObj adj B N).smul = pf.rightSMul adj B N :=
+  rfl
+
 
 /-- The linearization `G_B : Mod D B ⥤ Mod C (S B)` of a right adjoint `G` of `P`: a
 `B`-module object `N` is sent to `G N` with the `S B`-action induced by the mate of the
@@ -429,6 +440,18 @@ noncomputable def mapModRight : Mod D B ⥤ Mod C (S.obj B) where
         theta_natural_right_assoc])
   map_id _ := by ext; simp
   map_comp _ _ := by ext; simp
+
+lemma mapModRight_obj_X (N : Mod D B) : ((pf.mapModRight adj B).obj N).X = G.obj N.X := rfl
+
+lemma mapModRight_map_hom {N N' : Mod D B} (f : N ⟶ N') :
+    ((pf.mapModRight adj B).map f).hom = G.map f.hom := rfl
+
+lemma mapModRight_obj_smul (N : Mod D B) :
+    γ[S.obj B,((pf.mapModRight adj B).obj N).X] = pf.rightSMul adj B N.X := rfl
+
+/-- The linearization of `G` commutes with the forgetful functors. -/
+lemma mapModRight_comp_forget :
+    pf.mapModRight adj B ⋙ Mod.forget (S.obj B) = Mod.forget B ⋙ G := rfl
 
 
 /-! ### The adjunction `P_B ⊣ G_B` -/
@@ -467,6 +490,9 @@ noncomputable def mapModAdjunction : pf.mapModLeft B ⊣ pf.mapModRight adj B :=
       homEquiv_naturality_left_symm _ _ := Mod.hom_ext _ _ (adj.homEquiv_naturality_left_symm _ _)
       homEquiv_naturality_right _ _ := Mod.hom_ext _ _ (adj.homEquiv_naturality_right _ _) }
 
+lemma isLeftAdjoint_mapModLeft {G : D ⥤ C} (adj : P ⊣ G) : (pf.mapModLeft B).IsLeftAdjoint :=
+  (pf.mapModAdjunction adj (B := B)).isLeftAdjoint
+
 
 end MapModRight
 
@@ -485,6 +511,15 @@ noncomputable abbrev mapModLeft : Mod C (S.obj B) ⥤ Mod D B := adj.projectionF
 
 /-- The linearization of `P` commutes with the forgetful functors. -/
 lemma mapModLeft_comp_forget : adj.mapModLeft B ⋙ Mod.forget B = Mod.forget (S.obj B) ⋙ P := rfl
+
+/-- For `G = S`, the mate `θ` of the projection formula is the lax structure `μ S`. -/
+lemma projectionFormula_theta (L N : D) :
+    adj.projectionFormula.theta adj L N = Functor.LaxMonoidal.μ S L N := by
+  rw [Functor.ProjectionFormula.theta, projectionFormula_iso, asIso_hom, homEquiv_naturality_right,
+    homEquiv_projectionFormulaMap, Category.assoc, ← μ_natural_right,
+    ← MonoidalCategory.whiskerLeft_comp_assoc]
+  erw [adj.right_triangle_components]
+  erw [MonoidalCategory.whiskerLeft_id, Category.id_comp]
 
 
 variable {B}

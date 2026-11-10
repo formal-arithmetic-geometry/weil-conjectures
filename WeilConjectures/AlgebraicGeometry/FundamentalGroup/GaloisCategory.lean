@@ -565,6 +565,14 @@ noncomputable def _root_.AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsO
   left_inv x := Hom.GeometricFiber.ext (ext_of_isAffine (by simp))
   right_inv t := PointsOver.ext fun b ↦ by simp
 
+lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOverAppTop_apply_coe
+    {X W : Scheme.{u}} [IsAffine X] [IsAffine W] (h : W ⟶ X) [Algebra Γ(X, ⊤) Γ(W, ⊤)]
+    (hA : algebraMap Γ(X, ⊤) Γ(W, ⊤) = h.appTop.hom) (s : Spec (.of Ω) ⟶ X)
+    (x : h.GeometricFiber s) :
+    (h.geometricFiberEquivPointsOverAppTop hA s x).1 =
+      (x.1.appTop ≫ (ΓSpecIso (.of Ω)).hom).hom :=
+  rfl
+
 
 /-- **Geometric points of a quotient over an affine base.** Let `K` be the action of a finite
 monoid `G` on a finite étale scheme `W` over an affine scheme `X`, with quotient `c`. Then the
@@ -752,6 +760,11 @@ noncomputable def fiberEquivOfOpen {U : Scheme.{u}} (f : U ⟶ Y) (s' : Spec (.o
   left_inv x := Hom.GeometricFiber.ext (pullback.hom_ext (pullback.lift_fst _ _ _)
     ((pullback.lift_snd _ _ _).trans x.2.symm))
   right_inv x := fiber_ext s (pullback.lift_fst _ _ _)
+
+lemma fiberEquivOfOpen_apply_left {U : Scheme.{u}} (f : U ⟶ Y) (s' : Spec (.of Ω) ⟶ U)
+    (hs' : s' ≫ f = s) (P : Y.FiniteEtale) (x : (pullback.snd P.obj.hom f).GeometricFiber s') :
+    (fiberEquivOfOpen s f s' hs' P x).left = x.1 ≫ pullback.fst _ _ :=
+  rfl
 
 
 /-- **The fibre functor preserves quotients**: the geometric points of the quotient of a finite

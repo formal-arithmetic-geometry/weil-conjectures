@@ -54,6 +54,13 @@ private noncomputable def coefficientsEquiv
     ((Finsupp.mapRange.linearMap (α := X) I.mkQ).quotKerEquivOfSurjective
       (Finsupp.mapRange_surjective _ (map_zero I.mkQ) I.mkQ_surjective))
 
+private theorem coefficientsEquiv_mk
+    {A : Type u} [CommRing A] (I : Ideal A) (X : Type v) (f : X →₀ A) :
+    coefficientsEquiv I X (Submodule.Quotient.mk f) =
+      f.mapRange (Ideal.Quotient.mk I) (map_zero (Ideal.Quotient.mk I)) := by
+  simp [coefficientsEquiv]
+  rfl
+
 
 private def ringCoordinates
     {A : Type u} {C : Type w} [CommRing A] [CommRing C] [Algebra A C]

@@ -273,6 +273,11 @@ theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + l
   rw [derivationOfHom_toLie_d, derivationOfHom_toLie_d, derivationOfHom_toLie_d]
   exact epsPart_mul G v w V.unop a
 
+theorem lieEquiv_one : lieEquiv G 1 = 0 := by
+  have h := lieEquiv_mul G 1 1
+  rw [mul_one] at h
+  exact (add_eq_left.mp h.symm)
+
 
 /-- The infinitesimal points form a commutative group: their group law is the addition of tangent
 vectors. -/

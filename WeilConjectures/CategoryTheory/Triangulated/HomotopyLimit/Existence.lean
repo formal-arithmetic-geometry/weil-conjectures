@@ -206,6 +206,13 @@ lemma homotopyLimitMap_π (n : ℕ) :
   simp only [homotopyLimitCone_π_app, Category.assoc]
   exact h.symm.trans rfl
 
+/-- The map of chosen homotopy limits induced by an isomorphism of towers is an isomorphism. -/
+lemma isIso_homotopyLimitMap [∀ n : ℕ, IsIso (a.app (op n))] : IsIso (homotopyLimitMap a) :=
+  have : IsIso (piTowerMap a) := ⟨Limits.Pi.map fun n ↦ inv (a.app (op n)),
+    Pi.hom_ext _ _ fun n ↦ by simp, Pi.hom_ext _ _ fun n ↦ by simp⟩
+  isIso₁_of_isIso₂₃ (homotopyLimitTriangleHom a) (homotopyLimitTriangle_distinguished F)
+    (homotopyLimitTriangle_distinguished G) this this
+
 
 end Map
 

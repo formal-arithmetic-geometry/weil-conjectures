@@ -102,6 +102,75 @@ theorem finiteCoverLowerShriek_constructible {k : Type u}
   exact Scheme.IsConstructibleSheaf.openImmersionLowerShriek
     j j.closedComplement j.range_closedComplement H
 
+/-- Torsion substatement retained as a separately reviewable obligation.
+Source: Stacks Project, Tag 03SD.
+(auxiliary lemma; not a blueprint node) -/
+theorem finiteCoverLowerShriek_torsion {k : Type u}
+    [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
+    (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]
+    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
+    [Scheme.IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v] :
+    let R := ULift.{u + 1} (ZMod r)
+    let F := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).obj G
+    let K := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).obj
+      ((Etale.lowerStar (ModuleCat.{u + 1} R) v).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} R) v).obj G))
+    (Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F →
+      Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) K) ∧
+      (∀ (p : ℕ) [Fact p.Prime] [CharP k p],
+        Scheme.IsPrimaryTorsionSheaf R F p → Scheme.IsPrimaryTorsionSheaf R K p) := by
+  let R := ULift.{u + 1} (ZMod r)
+  have : Limits.HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} R) :=
+    Limits.hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+  let F := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).obj G
+  let K := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).obj
+    ((Etale.lowerStar (ModuleCat.{u + 1} R) v).obj
+      ((Etale.upperStar (ModuleCat.{u + 1} R) v).obj G))
+  change (Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F →
+      Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) K) ∧
+    (∀ (p : ℕ) [Fact p.Prime] [CharP k p],
+      Scheme.IsPrimaryTorsionSheaf R F p → Scheme.IsPrimaryTorsionSheaf R K p)
+  refine ⟨?_, ?_⟩
+  · intro hF
+    by_cases hr : IsUnit (r : Γ(Spec (.of k), ⊤))
+    · refine ⟨fun Ω _ _ s x ↦ ⟨r, (Fact.out : r.Prime).pos, hr, ?_⟩⟩
+      exact prime_nsmul_eq_zero r x
+    · have hzF : Limits.IsZero F := isZero_of_stalk_zero F (by
+        intro Ω _ _ s x
+        by_contra hx
+        obtain ⟨n, -, hn, hnx⟩ := hF.exists_isUnit_nsmul_eq_zero Ω s x
+        obtain ⟨m, hm⟩ := prime_dvd_of_nsmul_eq_zero r hx hnx
+        rw [hm, Nat.cast_mul] at hn
+        exact hr (IsUnit.mul_iff.mp hn).1)
+      have hzK : Limits.IsZero K := finiteCoverLowerShriek_isZero j G v hzF
+      refine ⟨fun Ω _ _ s x ↦ ⟨1, Nat.zero_lt_one,
+        by simpa only [Nat.cast_one] using
+          (isUnit_one : IsUnit (1 : Γ(Spec (.of k), ⊤))), ?_⟩⟩
+      have := (Scheme.pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} R)
+      have := ModuleCat.subsingleton_of_isZero
+        ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
+      exact Subsingleton.elim _ _
+  · intro p _ _ hF
+    by_cases hp : p = r
+    · subst p
+      intro Ω _ _ s x
+      exact ⟨1, by simpa only [pow_one] using prime_nsmul_eq_zero r x⟩
+    · have hzF : Limits.IsZero F := isZero_of_stalk_zero F (by
+        intro Ω _ _ s x
+        by_contra hx
+        obtain ⟨n, hn⟩ := hF Ω s x
+        have hd := prime_dvd_of_nsmul_eq_zero r hx hn
+        have hdp := (Fact.out : r.Prime).dvd_of_dvd_pow hd
+        exact hp ((Nat.prime_dvd_prime_iff_eq (Fact.out : r.Prime)
+          (Fact.out : p.Prime)).mp hdp).symm)
+      have hzK : Limits.IsZero K := finiteCoverLowerShriek_isZero j G v hzF
+      intro Ω _ _ s x
+      have := (Scheme.pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} R)
+      have := ModuleCat.subsingleton_of_isZero
+        ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
+      exact ⟨0, Subsingleton.elim _ _⟩
+
 
 /-- The coefficient hypotheses needed for retract descent pass to the finite-cover sheaf.
 This statement contains no cohomology assertions and does not assume a unit retraction.

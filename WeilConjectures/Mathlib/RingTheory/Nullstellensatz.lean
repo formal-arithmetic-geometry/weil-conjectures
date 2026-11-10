@@ -81,6 +81,22 @@ theorem eq_zero_of_forall_algHom_apply_eq_zero [IsReduced A] {a : A}
     exact fun φ ↦ h φ
   rwa [nilradical_eq_zero, Submodule.zero_eq_bot, Ideal.mem_bot] at this
 
+/-- Blueprint `lem-wf-affine-nullstellensatz-vanishing`, clause (3): let `f : B →ₐ[k] A` be the
+coordinate map of a regular map `X → Y` of affine varieties over an algebraically closed field `k`,
+with `A` reduced and finitely generated, and let `J` be an ideal of `B` (cutting out `Z ⊆ Y`). If
+every `k`-point of `X` maps into `Z`, i.e. `φ (f b) = 0` for every `k`-point `φ` of `X` and
+`b ∈ J`, then `f` factors uniquely through `B ⧸ J`.
+
+Each `f b` with `b ∈ J` vanishes at every `k`-point, so it is zero by the vanishing principle
+`eq_zero_of_forall_algHom_apply_eq_zero`; uniqueness holds as `B → B ⧸ J` is surjective. -/
+theorem existsUnique_comp_mkₐ_eq_of_forall_algHom {B : Type*} [CommRing B] [Algebra k B]
+    [IsReduced A] (f : B →ₐ[k] A) (J : Ideal B) (h : ∀ φ : A →ₐ[k] k, ∀ b ∈ J, φ (f b) = 0) :
+    ∃! g : B ⧸ J →ₐ[k] A, g.comp (Ideal.Quotient.mkₐ k J) = f := by
+  have hJ (b : B) (hb : b ∈ J) : f b = 0 :=
+    eq_zero_of_forall_algHom_apply_eq_zero k A fun φ ↦ h φ b hb
+  refine ⟨Ideal.Quotient.liftₐ J f hJ, by ext; simp, fun g hg ↦ ?_⟩
+  exact Ideal.Quotient.algHom_ext k (by rw [hg]; ext; simp)
+
 
 open TensorProduct in
 /-- Blueprint `lem-wf-affine-product-reduced`: let `A` and `B` be reduced finitely generated

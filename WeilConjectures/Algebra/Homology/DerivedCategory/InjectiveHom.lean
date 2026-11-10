@@ -80,5 +80,28 @@ lemma bijective_comp_singleFunctor_of_injective_of_isGE (T : Triangle (DerivedCa
       (eq_zero_of_isGE_one_of_injective (X := T.obj₃⟦(-1 : ℤ)⟧) _)
     exact ⟨h, hh.symm⟩
 
+/-- Let `u : E ⟶ P` be a morphism of `D(C)` with `E` in the heart, `P ∈ D^{≥ 0}` and `H⁰(u)` an
+isomorphism, and let `I` be an injective object of `C`. Then precomposition with `u` is a
+bijection `Hom(P, I) ≃ Hom(E, I)`: the cone of `u` lies in `D^{≥ 1}`
+(`DerivedCategory.bijective_comp_singleFunctor_of_injective_of_isGE`). -/
+lemma bijective_comp_singleFunctor_of_injective {E P : DerivedCategory C} [E.IsGE 0] [E.IsLE 0]
+    [P.IsGE 0] (u : E ⟶ P) (hu : IsIso ((homologyFunctor C 0).map u)) (I : C) [Injective I] :
+    Function.Bijective (fun h : P ⟶ (singleFunctor C 0).obj I ↦ u ≫ h) := by
+  obtain ⟨Z, v, w, hT⟩ := distinguished_cocone_triangle u
+  have hZ : Z.IsGE 1 := by
+    rw [isGE_iff]
+    intro i hi
+    refine isZero_homology_obj₃_of_epi_of_mono _ hT i ?_ ?_
+    · rcases (show i < 0 ∨ i = 0 by omega) with hi | rfl
+      · exact epi_of_target_iso_zero _ (P.isZero_of_isGE 0 i hi).isoZero
+      · exact inferInstanceAs (Epi ((homologyFunctor C 0).map u))
+    · rcases lt_trichotomy (i + 1) 0 with hi' | hi' | hi'
+      · exact mono_of_source_iso_zero _ (E.isZero_of_isGE 0 (i + 1) hi').isoZero
+      · rw [hi']
+        exact inferInstanceAs (Mono ((homologyFunctor C 0).map u))
+      · exact mono_of_source_iso_zero _ (E.isZero_of_isLE 0 (i + 1) hi').isoZero
+  have : (Triangle.mk u v w).obj₃.IsGE 1 := hZ
+  exact bijective_comp_singleFunctor_of_injective_of_isGE _ hT I
+
 
 end DerivedCategory

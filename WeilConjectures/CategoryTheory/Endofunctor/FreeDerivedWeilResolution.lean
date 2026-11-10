@@ -664,5 +664,31 @@ theorem exists_freeDerivedWeilResolution :
     · exact ((freeWeilDerivedAdjunction F).counit.naturality a.inv).symm
     · exact (δ.naturality a.inv).symm
 
+/-- Underlying membership implies membership in the localizing hull of free images.
+Source: ordinary-derived expansion, step 10
+(blueprint: lem-sf-free-derived-weil-resolution).
+
+Proof: apply `exists_freeDerivedWeilResolution`. If U K lies in L, then I U K lies
+in I(L), hence in its localizing closure. Both initial vertices of the distinguished
+cyclic triangle are I U K. Closure under distinguished cones and isomorphisms puts
+K in that closure (`def-weil-triangulated-subcategory`). No invariance of L under
+the autoequivalence, boundedness, or extra hypothesis on K is needed. -/
+theorem freeWeil_mem_localizingClosure
+    (L : ObjectProperty (DerivedCategory C)) [L.IsLocalizing]
+    (K : DerivedCategory (IsoAlgebra F))
+    (hK : L ((forget F).mapDerivedCategory.obj K)) :
+    ObjectProperty.localizingClosure (fun N : DerivedCategory (IsoAlgebra F) ↦
+      ∃ M : DerivedCategory C, L M ∧
+        Nonempty ((Free.functor F).mapDerivedCategory.obj M ≅ N)) K := by
+  obtain ⟨θ, d, _, _, _, hzero, hshort, dD, δ, _, _, _, hdist⟩ :=
+    exists_freeDerivedWeilResolution F
+  let P : ObjectProperty (DerivedCategory (IsoAlgebra F)) := fun N ↦
+    ∃ M : DerivedCategory C, L M ∧
+      Nonempty ((Free.functor F).mapDerivedCategory.obj M ≅ N)
+  have h : P.localizingClosure
+      ((Free.functor F).mapDerivedCategory.obj ((forget F).mapDerivedCategory.obj K)) :=
+    P.le_localizingClosure _ ⟨_, hK, ⟨Iso.refl _⟩⟩
+  exact P.localizingClosure.ext_of_isTriangulatedClosed₃ _ (hdist K) h h
+
 
 end CategoryTheory.Endofunctor.IsoAlgebra

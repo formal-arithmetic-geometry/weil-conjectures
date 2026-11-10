@@ -81,6 +81,12 @@ noncomputable def cechCochainCompAddEquiv (k : ℕ) :
   AddEquiv.piCongrRight fun y ↦ (P.mapIso
     ((Over.forget _).mapIso (cechNerveObjPostIso G U y)).op).symm.addCommGroupIsoToAddEquiv
 
+/-- `CategoryTheory.Presheaf.cechCochainCompAddEquiv` restricts each component. -/
+lemma cechCochainCompAddEquiv_apply (k : ℕ) (c : CechCochain U (G.op ⋙ P) k)
+    (y : Fin (k + 1) → ι) :
+    cechCochainCompAddEquiv G U P k c y = P.map (cechNerveObjPostIso G U y).inv.left.op (c y) :=
+  rfl
+
 
 /-- The isomorphism between the Čech cosimplicial abelian group of `U` with values in
 `G.op ⋙ P` and that of the image family `fun i ↦ (Over.post G).obj (U i)` with values in

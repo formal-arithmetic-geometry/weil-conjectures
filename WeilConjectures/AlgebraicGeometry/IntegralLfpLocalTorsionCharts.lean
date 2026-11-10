@@ -138,6 +138,20 @@ private noncomputable def scalarCokernelBiprodIso
   exact cokernelIsoOfEq he ≪≫ diagonalCokernelIso _ _ ≪≫
     biprod.mapIso (Iso.refl _) (cokernelIsoOfEq hT ≪≫ cokernelZeroIsoTarget)
 
+private lemma scalarBoundFiniteBiproduct {C : Type*} [Category C] [Abelian C]
+    (r : ℕ) (M : Fin r → C) (k : ℕ → ℕ)
+    (hM : ∀ i, ∃ N : ℕ, ∀ n : ℕ, N ≤ n → k n • 𝟙 (M i) = 0) :
+    ∃ N : ℕ, ∀ n : ℕ, N ≤ n → k n • 𝟙 (⨁ M) = 0 := by
+  classical
+  choose N hN using hM
+  refine ⟨Finset.univ.sup N, fun n hn ↦ ?_⟩
+  apply biproduct.hom_ext'
+  intro i
+  have hi : N i ≤ n := (Finset.le_sup (f := N) (Finset.mem_univ i)).trans hn
+  have hzero := hN i n hi =≫ biproduct.ι M i
+  simpa only [Preadditive.nsmul_comp, Category.id_comp, Preadditive.comp_nsmul,
+    Category.comp_id, Limits.zero_comp, Limits.comp_zero] using hzero
+
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -506,6 +520,31 @@ private lemma integralConstantNormCokernelBound (ℓ : ℕ) [Fact ℓ.Prime]
     Category.comp_id] using h.symm
 
 -- The rank-one nonzero case of the local torsion-chart calculation is complete.
+private lemma integralCyclicLocalChart (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
+    (b : C(X, continuousIntegers ℓ E)) (x : X) (hx : b x ≠ 0) :
+    ∃ U : X.Opens, x ∈ U ∧
+      let bU := b.comp ⟨U.ι, U.ι.continuous⟩
+      (∃ k : ℕ, Nonempty
+        ((Mod.forget (continuousAbRing U (continuousIntegers ℓ E)) ⋙
+            sheafCompose (Scheme.ProEt.topology U) (forget Ab.{u + 1})).obj
+          (cokernel (continuousMultiplier U _ bU)) ≅
+        (constantSheaf (Scheme.ProEt.topology U) (Type (u + 1))).obj
+          (ULift.{u + 1} (Fin k)))) ∧
+      (∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+        (ℓ ^ n) • 𝟙 (cokernel (continuousMultiplier U _ bU)) = 0) := by
+  let f : C(X, E) := ⟨fun y ↦ (b y : E), continuous_subtype_val.comp b.continuous⟩
+  have hx' : f x ≠ 0 := fun h ↦ hx (Subtype.ext h)
+  obtain ⟨V, hxU, hU⟩ := constantNormNeighborhood ℓ E X f x hx'
+  let U : X.Opens := V
+  refine ⟨U, hxU, ?_⟩
+  let bU := b.comp ⟨U.ι, U.ι.continuous⟩
+  have hb : ∀ y : U, ‖(bU y : E)‖ = ‖(b x : E)‖ :=
+    fun y ↦ hU y.val y.property
+  exact ⟨integralConstantNormCokernelSetConstant ℓ E U bU (b x) hx hb,
+    integralConstantNormCokernelBound ℓ E U bU (b x) hx hb⟩
+
 
 private lemma finiteConstantAbSet (X : Scheme.{u}) (G : Ab.{u + 1}) [Finite G] :
     ∃ n : ℕ, Nonempty
@@ -575,6 +614,30 @@ private lemma integralFiniteFreeQuotientSetConstant (ℓ : ℕ) [Fact ℓ.Prime]
   obtain ⟨n, ⟨en⟩⟩ := finiteConstantAbSet X G
   exact ⟨n, ⟨(sheafCompose J (forget Ab.{u + 1})).mapIso (eC ≪≫ eB.symm) ≪≫ en⟩⟩
 
+private lemma integralColumnDivides (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) (r : ℕ)
+    (p : Mod.regular (continuousAbRing X (continuousIntegers ℓ E)) ⟶
+      Mod.regular (continuousAbRing X (continuousIntegers ℓ E)))
+    (c : Mod.regular (continuousAbRing X (continuousIntegers ℓ E)) ⟶
+      Mod.finiteFree (continuousAbRing X (continuousIntegers ℓ E)) r)
+    (hp : ∀ x, (regularCoefficient X (continuousIntegers ℓ E) p x).val ≠ 0)
+    (hc : ∀ (i : Fin r) x,
+      ‖(regularCoefficient X (continuousIntegers ℓ E) (c ≫ biproduct.π _ i) x).val‖ ≤
+        ‖(regularCoefficient X (continuousIntegers ℓ E) p x).val‖) :
+    ∃ s, p ≫ s = c := by
+  classical
+  choose q hq using fun i : Fin r ↦
+    continuousIntegral_divides ℓ E X p (c ≫ biproduct.π _ i) hp (hc i)
+  refine ⟨biproduct.lift q, ?_⟩
+  apply biproduct.hom_ext
+  intro i
+  rw [Category.assoc, biproduct.lift_π]
+  have he : p ≫ q i = q i ≫ p := by
+    apply regularCoefficient_injective X (continuousIntegers ℓ E)
+    rw [regularCoefficient_comp, regularCoefficient_comp]
+    exact mul_comm _ _
+  rw [he, hq]
+
 
 private lemma finiteSetBiprod (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
@@ -611,6 +674,35 @@ private lemma finiteSetBiprod (X : Scheme.{u})
     PreservesLimitPair.iso F M N ≪≫ prod.mapIso em en ≪≫
     (PreservesLimitPair.iso K A B).symm ≪≫
     K.mapIso (Types.binaryProductIso A B) ≪≫ K.mapIso e.toIso⟩⟩
+private lemma finiteSetBiproduct (X : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
+    (r : ℕ) (M : Fin r → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (hM : ∀ i, ∃ n : ℕ, Nonempty
+      ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj
+          (M i) ≅ (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+            (ULift.{u + 1} (Fin n)))) :
+    ∃ k : ℕ, Nonempty
+      ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj
+          (⨁ M) ≅ (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+            (ULift.{u + 1} (Fin k))) := by
+  classical
+  choose n e using hM
+  let F := Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})
+  let K := constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))
+  have : F.IsRightAdjoint := ⟨_, ⟨
+    (Sheaf.adjunction (Scheme.ProEt.topology X) AddCommGrpCat.adj.{u + 1}).comp
+      (Mod.freeForgetAdjunction R)⟩⟩
+  have : PreservesFiniteLimits K := by
+    dsimp only [K, constantSheaf]
+    infer_instance
+  let A (i : Fin r) := ULift.{u + 1} (Fin (n i))
+  let eFin : (∀ i, A i) ≃ ULift.{u + 1} (Fin (Fintype.card (∀ i, A i))) :=
+    (Fintype.equivFin (∀ i, A i)).trans Equiv.ulift.symm
+  refine ⟨Fintype.card (∀ i, A i), ⟨F.mapIso (biproduct.isoProduct M) ≪≫
+    PreservesProduct.iso F M ≪≫ Pi.mapIso (fun i ↦ (e i).some) ≪≫
+    (PreservesProduct.iso K A).symm ≪≫ K.mapIso (Types.productIso A) ≪≫
+      K.mapIso eFin.toIso⟩⟩
+
 
 private lemma scalarFiniteFreeMono (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
@@ -639,6 +731,86 @@ private lemma scalarFiniteFreeMono (ℓ : ℕ) [Fact ℓ.Prime]
   rw [he]
   infer_instance
 
+private lemma integralFreeTorsionScalarChart (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) (r k : ℕ)
+    (hk : (k : continuousIntegers ℓ E) ≠ 0)
+    (T : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (continuousAbRing X (continuousIntegers ℓ E)))
+    (hT : k • 𝟙 T = 0)
+    (hTC : ∃ n : ℕ, Nonempty
+      ((Mod.forget (continuousAbRing X (continuousIntegers ℓ E)) ⋙
+          sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj T ≅
+        (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+          (ULift.{u + 1} (Fin n)))) :
+    let R := continuousAbRing X (continuousIntegers ℓ E)
+    let M := Mod.finiteFree R r
+    Mod.IsFree R (image (k • 𝟙 (M ⊞ T))) ∧
+    ∃ n : ℕ, Nonempty
+      ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj
+          (cokernel (k • 𝟙 (M ⊞ T))) ≅
+        (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+          (ULift.{u + 1} (Fin n))) := by
+  let R := continuousAbRing X (continuousIntegers ℓ E)
+  let M := Mod.finiteFree R r
+  have : Mono (k • 𝟙 M) := scalarFiniteFreeMono ℓ E X r k hk
+  have hfree : Mod.IsFree R M := ⟨r, ⟨Iso.refl _⟩⟩
+  refine ⟨free_of_iso hfree (scalarImageBiprodIso k M T hT).symm, ?_⟩
+  obtain ⟨n, ⟨en⟩⟩ := finiteSetBiprod X R (cokernel (k • 𝟙 M)) T
+    (integralFiniteFreeQuotientSetConstant ℓ E X r k hk) hTC
+  exact ⟨n, ⟨(Mod.forget R ⋙
+    sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).mapIso
+      (scalarCokernelBiprodIso k M T hT) ≪≫ en⟩⟩
+
+private lemma integralCyclicBiproductChart (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) (t : ℕ)
+    (b : Fin t → C(X, continuousIntegers ℓ E)) (a : Fin t → continuousIntegers ℓ E)
+    (ha : ∀ i, a i ≠ 0) (hb : ∀ i x, ‖(b i x : E)‖ = ‖(a i : E)‖) :
+    let R := continuousAbRing X (continuousIntegers ℓ E)
+    let T := ⨁ fun i ↦ cokernel (continuousMultiplier X (continuousIntegers ℓ E) (b i))
+    (∃ N : ℕ, ∀ n : ℕ, N ≤ n → (ℓ ^ n) • 𝟙 T = 0) ∧
+    ∃ k : ℕ, Nonempty
+      ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj T ≅
+        (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+          (ULift.{u + 1} (Fin k))) := by
+  let R := continuousAbRing X (continuousIntegers ℓ E)
+  let M (i : Fin t) := cokernel (continuousMultiplier X (continuousIntegers ℓ E) (b i))
+  exact ⟨scalarBoundFiniteBiproduct t M (fun n ↦ ℓ ^ n)
+      (fun i ↦ integralConstantNormCokernelBound ℓ E X (b i) (a i) (ha i) (hb i)),
+    finiteSetBiproduct X R t M
+      (fun i ↦ integralConstantNormCokernelSetConstant ℓ E X (b i) (a i) (ha i) (hb i))⟩
+
+private lemma integralDiagonalLocalChart (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) (r t : ℕ)
+    (b : Fin t → C(X, continuousIntegers ℓ E)) (a : Fin t → continuousIntegers ℓ E)
+    (ha : ∀ i, a i ≠ 0) (hb : ∀ i x, ‖(b i x : E)‖ = ‖(a i : E)‖) :
+    let R := continuousAbRing X (continuousIntegers ℓ E)
+    let T := ⨁ fun i ↦ cokernel (continuousMultiplier X (continuousIntegers ℓ E) (b i))
+    let P := Mod.finiteFree R r ⊞ T
+    ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+      Mod.IsFree R (image ((ℓ ^ n) • 𝟙 P)) ∧
+      ∃ k : ℕ, Nonempty
+        ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj
+            (cokernel ((ℓ ^ n) • 𝟙 P)) ≅
+          (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+            (ULift.{u + 1} (Fin k))) := by
+  obtain ⟨⟨N, hN⟩, hT⟩ := integralCyclicBiproductChart ℓ E X t b a ha hb
+  refine ⟨N, fun n hn ↦ ?_⟩
+  have hp : (ℓ : ℚ_[ℓ]) ≠ 0 := by
+    exact_mod_cast (Fact.out : ℓ.Prime).ne_zero
+  have hpE : (ℓ : E) ≠ 0 := by
+    simpa only [map_natCast, map_zero] using (algebraMap ℚ_[ℓ] E).injective.ne hp
+  have hk : ((ℓ ^ n : ℕ) : continuousIntegers ℓ E) ≠ 0 := by
+    intro h
+    have he := congrArg (continuousIntegers ℓ E).subtype h
+    simp only [map_zero, Nat.cast_pow] at he
+    exact pow_ne_zero n hpE he
+  exact integralFreeTorsionScalarChart ℓ E X r (ℓ ^ n) hk _ (hN n hn) hT
+
+-- Rationalization already has free charts. Keep this proved universe comparison beside
+-- the remaining local integral chart construction, for use in its matrix induction.
 
 -- Rationalization already has free charts. Keep this proved universe comparison beside
 -- the remaining local integral chart construction, for use in its matrix induction.

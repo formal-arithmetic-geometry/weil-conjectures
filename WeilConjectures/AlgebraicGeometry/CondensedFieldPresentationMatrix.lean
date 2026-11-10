@@ -58,6 +58,20 @@ noncomputable def continuousFieldPresentationMatrix
     biproduct.π (fun _ : Fin n ↦ Mod.regular R) i
   condensedFieldContinuousCoefficientMap E V (inv e ≫ a.hom ≫ e)
 
+/-- The explicit composite uniquely determines the pullback realization.
+Source: Hemo--Richarz--Scholbach, Example 3.1
+(auxiliary; not a blueprint node).
+Proof: the displayed composite is a witness, and the defining equality proves uniqueness. -/
+theorem existsUnique_condensedFieldPullbackRealization
+    (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
+    {X V : Scheme.{u}} (g : V ⟶ X) :
+    ∃! α : (upperStar AddCommGrpCat.{u + 1} g).obj
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X) ⟶
+    condensedFieldContinuousCoefficientObj E V,
+      α = condensedPullbackHom (condensedFieldCoefficientRingObj E) g ≫
+        (condensedFieldContinuousMapIso E V).hom.hom := by
+  exact ⟨_, rfl, fun _ h ↦ h⟩
+
 
 /-- The realization of coefficients pulled back along an arbitrary scheme map.
 Source: Hemo--Richarz--Scholbach, Example 3.1

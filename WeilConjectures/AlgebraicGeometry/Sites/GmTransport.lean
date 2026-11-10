@@ -33,6 +33,9 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f]
 
+lemma etaleRestriction_obj_gmSheaf : (etaleRestriction f).obj Y.gmSheaf = X.gmSheaf :=
+  rfl
+
 
 variable [Mono f]
 

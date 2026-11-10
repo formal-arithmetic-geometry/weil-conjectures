@@ -158,6 +158,23 @@ theorem subsingleton_sheafH_rootsOfUnitySheaf_line {n : ℕ} (hn : (n : k) ≠ 0
           ← Category.comp_id (Limits.kernel.ι (n • 𝟙 _)), ← Preadditive.comp_nsmul,
           Limits.kernel.condition])) q hq
 
+lemma rootsOfUnitySheaf_isTorsion (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
+    (X.rootsOfUnitySheaf n).IsTorsion :=
+  Scheme.isTorsion_of_nsmul_id_eq_zero hn (by
+    refine (cancel_mono (Limits.kernel.ι (n • 𝟙 _))).1 ?_
+    rw [Preadditive.nsmul_comp, Category.id_comp, Limits.zero_comp,
+      ← Category.comp_id (Limits.kernel.ι (n • 𝟙 _)), ← Preadditive.comp_nsmul,
+      Limits.kernel.condition])
+
+/-- **Kummer computation on `𝔾_{m,k}`, degrees `≥ 2`.** `Hᵠ(𝔾_{m,k}, μₙ) = 0` for `q ≥ 2`. -/
+theorem subsingleton_sheafH_rootsOfUnitySheaf_multiplicativeGroup {n : ℕ} (hn : (n : k) ≠ 0)
+    (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H (G.rootsOfUnitySheaf n) q) :=
+  have := isAffine_of_range_eq_compl_zeroSection j hj
+  have := isCurve_of_range_eq_compl_zeroSection j hj
+  IsCurve.subsingleton_sheafH_of_two_le_of_isAffine
+    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) _
+    (rootsOfUnitySheaf_isTorsion G (pos_of_natCast_ne_zero hn)) q hq
+
 
 include hj in
 /-- **Kummer computation on `𝔾_{m,k}`, degree one.** `H¹(𝔾_{m,k}, μₙ) ≅ ℤ/n`, the Kummer class
@@ -227,6 +244,16 @@ theorem _root_.CategoryTheory.Functor.subsingleton_obj_of_zmod
   obtain ⟨ι, _, m, hm, ⟨e⟩⟩ := AddCommGrpCat.exists_iso_biproduct_zmod A n hA
   have := F.subsingleton_obj_biproduct _ fun i ↦ h (m i) (hm i)
   exact (F.mapIso e).addCommGroupIsoToAddEquiv.toEquiv.subsingleton
+
+/-- A constant sheaf with value a group killed by `n > 0` is a torsion sheaf. -/
+lemma isTorsion_constantSheaf (A : AddCommGrpCat.{u + 1}) {n : ℕ} (hn : 0 < n)
+    (hA : ∀ a : A, n • a = 0) :
+    ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A).IsTorsion :=
+  Scheme.isTorsion_of_nsmul_id_eq_zero hn (by
+    have : n • 𝟙 A = 0 := by
+      ext a
+      simpa using hA a
+    rw [← (constantSheaf _ _).map_id, ← Functor.map_nsmul, this, Functor.map_zero])
 
 
 /-- A constant sheaf with value a group `A` with `n • 𝟙 = 0`, `n > 0`, is a torsion sheaf. -/

@@ -599,6 +599,56 @@ lemma cechResolutionAugmentation_naturality {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶
   congr 1
   exact ((restrictAdjunction (⊤ : X.Opens).ι).unit.naturality φ).symm
 
+/-- **The identification of `R^q f_* ℱ` with the cohomology of `f_* Č(U, ℱ)` is natural** in the
+quasi-coherent module `ℱ`. -/
+lemma higherDirectImageIsoCechResolution_hom_naturality [IsAffine S] [IsSeparated f] [Finite ι]
+    [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i)) (hU' : ⨆ i, U i = ⊤)
+    {ℱ 𝒢 : X.Modules} [ℱ.IsQuasicoherent] [𝒢.IsQuasicoherent] (φ : ℱ ⟶ 𝒢) (q : ℕ) :
+    (higherDirectImage f q).map φ ≫ (higherDirectImageIsoCechResolution f U hU hU' 𝒢 q).hom =
+      (higherDirectImageIsoCechResolution f U hU hU' ℱ q).hom ≫
+        HomologicalComplex.homologyMap
+          (((pushforward f).mapHomologicalComplex _).map ((cechResolutionFunctor U).map φ)) q := by
+  have := quasiIso_cechResolutionι U ℱ hU'
+  have := quasiIso_cechResolutionι U 𝒢 hU'
+  let cℱ := InjectiveResolution.descOfQuasiIso (𝟙 ℱ) (injectiveResolution ℱ)
+    (cechResolutionι U ℱ)
+  let c𝒢 := InjectiveResolution.descOfQuasiIso (𝟙 𝒢) (injectiveResolution 𝒢)
+    (cechResolutionι U 𝒢)
+  let d := InjectiveResolution.desc φ (injectiveResolution 𝒢) (injectiveResolution ℱ)
+  have hcℱ := InjectiveResolution.descOfQuasiIso_commutes (𝟙 ℱ) (injectiveResolution ℱ)
+    (cechResolutionι U ℱ)
+  have hc𝒢 := InjectiveResolution.descOfQuasiIso_commutes (𝟙 𝒢) (injectiveResolution 𝒢)
+    (cechResolutionι U 𝒢)
+  have hd := InjectiveResolution.desc_commutes φ (injectiveResolution 𝒢) (injectiveResolution ℱ)
+  have ho : Homotopy ((cechResolutionFunctor U).map φ ≫ c𝒢) (cℱ ≫ d) :=
+    CochainComplex.homotopyOfQuasiIso (cechResolutionι U ℱ) _ _ (by
+      have e1 := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hc𝒢
+      have e2 := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hcℱ
+      have e3 := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hd
+      simp only [HomologicalComplex.comp_f, cechResolutionι_f_zero] at e1 e2 e3 ⊢
+      calc _ = φ ≫ cechResolutionAugmentation U 𝒢 ≫ c𝒢.f 0 := by
+            erw [cechResolutionAugmentation_naturality_assoc]
+        _ = φ ≫ (injectiveResolution 𝒢).ι.f 0 := by erw [e1]; simp
+        _ = (injectiveResolution ℱ).ι.f 0 ≫ d.f 0 := by erw [e3]; simp
+        _ = _ := by erw [reassoc_of% e2]; simp)
+  have : QuasiIso (((pushforward f).mapHomologicalComplex _).map c𝒢) :=
+    (pushforward f).quasiIso_map_of_rightAcyclic_nat c𝒢
+      (rightAcyclic_cechResolution_X f U hU 𝒢) fun _ ↦ Functor.rightAcyclic_of_injective _
+  have hH := ((pushforward f).mapHomotopy ho).homologyMap_eq q
+  rw [Functor.map_comp, Functor.map_comp, HomologicalComplex.homologyMap_comp,
+    HomologicalComplex.homologyMap_comp] at hH
+  have hnat := InjectiveResolution.isoRightDerivedObj_hom_naturality φ (injectiveResolution ℱ)
+    (injectiveResolution 𝒢) d (congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hd) (pushforward f) q
+  dsimp only [higherDirectImageIsoCechResolution, Functor.rightDerivedObjIsoOfResolution,
+    InjectiveResolution.isoRightDerivedObjOfQuasiIso]
+  rw [Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, Iso.symm_hom, asIso_inv, asIso_inv,
+    ← cancel_mono (HomologicalComplex.homologyMap
+      (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).map c𝒢) q)]
+  simp only [Category.assoc]
+  erw [IsIso.inv_hom_id, Category.comp_id]
+  rw [hH, IsIso.inv_hom_id_assoc]
+  exact hnat
+
 
 end Acyclic
 

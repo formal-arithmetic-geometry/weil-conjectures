@@ -55,6 +55,12 @@ noncomputable def continuousSheaf : Sheaf (Scheme.ProEt.topology S) AddCommGrpCa
     Scheme.proetaleTopology).obj
     ⟨continuousMapPresheafAbULift A, isSheaf_proetaleTopology_continuousMapPresheafAbULift A⟩
 
+/-- The sections of `continuousSheaf S A` over `U` are the continuous maps `U → A`. -/
+lemma continuousSheaf_obj_obj (U : S.ProEt) :
+    (continuousSheaf S A).obj.obj (op U) =
+      AddCommGrpCat.of (ULift.{u + 1} C(U.left, A)) :=
+  rfl
+
 
 variable {A} {B : Type} [TopologicalSpace B] [AddCommGroup B] [IsTopologicalAddGroup B]
 
@@ -81,6 +87,11 @@ noncomputable def continuousSheafMap (φ : ContinuousAddMonoidHom A B) :
     continuousSheaf S A ⟶ continuousSheaf S B :=
   ((Scheme.ProEt.forget S ⋙ Over.forget _).sheafPushforwardContinuous _ _
     Scheme.proetaleTopology).map ⟨continuousMapPresheafAbULiftMap φ⟩
+
+lemma continuousSheafMap_app_apply (φ : ContinuousAddMonoidHom A B) (U : S.ProEt)
+    (f : ULift.{u + 1} C(U.left, A)) :
+    (continuousSheafMap S φ).hom.app (op U) f = ULift.up ((φ : C(A, B)).comp f.down) :=
+  rfl
 
 
 lemma continuousSheafMap_id :

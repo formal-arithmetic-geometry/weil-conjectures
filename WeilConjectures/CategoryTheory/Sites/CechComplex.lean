@@ -129,6 +129,15 @@ lemma cechNerveCons_π_of_eq_succ {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U
   rw [cechNerveCons, Pi.lift_comp_π_assoc]
   exact Category.comp_id _
 
+/-- Forgetting the first factor of `U a ×_V U (y 0) ×_V ⋯ ×_V U (y k)` undoes
+`CategoryTheory.Presheaf.cechNerveCons`. -/
+lemma cechNerveCons_cechNerveMap_succ {k : ℕ} {W : Over V} {a : ι} (lam : W ⟶ U a)
+    {y : Fin (k + 1) → ι} (g : W ⟶ cechNerveObj U y) :
+    cechNerveCons U lam g ≫ cechNerveMap U (Fin.cons a y : Fin (k + 2) → ι) Fin.succ = g :=
+  Pi.hom_ext _ _ fun l ↦ by
+    erw [Category.assoc, Pi.lift_comp_π]
+    exact cechNerveCons_π_succ U lam g l
+
 
 variable (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
 

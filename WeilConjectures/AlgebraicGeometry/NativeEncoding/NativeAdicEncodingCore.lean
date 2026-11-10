@@ -248,6 +248,40 @@ Source: Stacks 015F; native right-derived exact-functor interface.
 abbrev derivedEncoding (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   (encoding l T).mapDerivedCategory
 
+/-- Exactness and the unbounded derived equivalence, including preservation and reflection
+of K-injectivity. Source: Stacks 015F and 070I.
+(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
+Proof: the equivalence and its inverse preserve kernels and cokernels, hence acyclicity.
+For an acyclic A, the termwise equivalence identifies Hom_K(A, E I) with Hom_K(G A, I).
+The null-homotopy test gives preservation; applying the inverse gives reflection.
+The termwise unit and counit descend along quasi-isomorphisms and prove the derived
+functor is an equivalence. This uses neither boundedness nor constructibility. -/
+theorem encoding_exact_derived (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
+    PreservesFiniteLimits (encoding l T) ∧ PreservesFiniteColimits (encoding l T) ∧
+      (derivedEncoding l T).IsEquivalence ∧
+      (∀ I : CochainComplex (AdicSheaf l T) ℤ,
+        CochainComplex.IsKInjective (((encoding l T).mapHomologicalComplex (.up ℤ)).obj I) ↔
+          I.IsKInjective) := by
+  refine ⟨inferInstance, inferInstance, inferInstance, fun I ↦ ?_⟩
+  let e := equivalence l T
+  have : e.functor.Additive := inferInstanceAs (encoding l T).Additive
+  have : e.inverse.Additive := e.inverse_additive
+  constructor
+  · intro h
+    have : CochainComplex.IsKInjective
+        ((e.functor.mapHomologicalComplex (.up ℤ)).obj I) := h
+    have : e.inverse.IsEquivalence := inferInstance
+    have : CochainComplex.IsKInjective
+        ((e.inverse.mapHomologicalComplex (.up ℤ)).obj
+          ((e.functor.mapHomologicalComplex (.up ℤ)).obj I)) := inferInstance
+    exact CochainComplex.isKInjective_of_iso
+      (L₁ := (e.inverse.mapHomologicalComplex (.up ℤ)).obj
+        ((e.functor.mapHomologicalComplex (.up ℤ)).obj I))
+      (((e.mapHomologicalComplex (.up ℤ)).unitIso.app I).symm)
+  · intro h
+    have := h
+    infer_instance
+
 
 private lemma finiteComparison_eq_chart (ℓ : ℕ) [Fact ℓ.Prime]
     (T : Scheme.{u}) (E : PadicAlgCl.FiniteIntermediateField ℓ) :

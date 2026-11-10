@@ -117,6 +117,13 @@ lemma mapHomotopyCategoryTensorComparison_app_app (K L : CochainComplex C ℤ) :
       (quotient D (.up ℤ)).map (mapBifunctorComparison δ (.up ℤ) K L) :=
   rfl
 
+/-- For an oplax monoidal functor, the comparison induced by the comonoidal structure is
+`OplaxMonoidal.mapHomotopyCategoryδNatTrans`. -/
+lemma mapHomotopyCategoryTensorComparison_δNatTrans [F.OplaxMonoidal] :
+    F.mapHomotopyCategoryTensorComparison (OplaxMonoidal.δNatTrans F) =
+      OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F :=
+  rfl
+
 
 instance [IsIso δ] : IsIso (F.mapHomotopyCategoryTensorComparison δ) := by
   have (X Y : C) : IsIso ((δ.app X).app Y) := inferInstance

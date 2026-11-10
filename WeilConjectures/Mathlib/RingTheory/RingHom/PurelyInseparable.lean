@@ -37,6 +37,19 @@ lemma RingHom.IsPurelyInseparable.comp_of_bijective {K L M N : Type*} [Field K] 
     (RingHom.IsPurelyInseparable.comp (RingHom.IsPurelyInseparable.of_bijective e he) hf)
     (RingHom.IsPurelyInseparable.of_bijective e' he')
 
+/-- If `e' ∘ f = g ∘ e` with `e`, `e'` bijective, then `f` is purely inseparable iff `g` is. -/
+lemma RingHom.IsPurelyInseparable.of_comp_eq_comp {K L M N : Type*} [Field K] [Field L]
+    [Field M] [Field N] {e : K →+* M} {f : K →+* L} {g : M →+* N} {e' : L →+* N}
+    (he : Function.Bijective e) (he' : Function.Bijective e') (h : e'.comp f = g.comp e)
+    (hg : g.IsPurelyInseparable) : f.IsPurelyInseparable := by
+  let e'' : N ≃+* L := (RingEquiv.ofBijective e' he').symm
+  have hf : f = e''.toRingHom.comp (g.comp e) := by
+    rw [← h]
+    ext x
+    exact ((RingEquiv.ofBijective e' he').symm_apply_apply (f x)).symm
+  rw [hf]
+  exact RingHom.IsPurelyInseparable.comp_of_bijective he hg e''.bijective
+
 
 /-- If `e' ∘ f = g ∘ e` with `e`, `e'` bijective, then `g` is purely inseparable iff `f` is. -/
 lemma RingHom.IsPurelyInseparable.of_comp_eq_comp' {K L M N : Type*} [Field K] [Field L]

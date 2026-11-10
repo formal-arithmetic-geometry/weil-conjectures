@@ -246,6 +246,27 @@ noncomputable def Sheaf.H.quotientRangeAddEquiv [Subsingleton (H S.X₂ 1)] :
   (QuotientAddGroup.quotientAddEquivOfEq (H.ker_δ hS hT)).symm.trans
     (QuotientAddGroup.quotientKerEquivOfSurjective _ (H.surjective_δ hS hT))
 
+/-- **`H¹` as a cokernel of global sections.** Every abelian sheaf `F` on a site with a
+terminal object `T` sits in a short exact sequence `0 → F → I → Q → 0` with `I` injective,
+hence with `H^q(I) = 0` for `q ≥ 1`, and the connecting homomorphism then identifies `H¹(F)`
+with the cokernel of `d_T : Γ(I) → Γ(Q)`.
+
+The blueprint takes for `I` the Godement sheaf of `F`, which is flasque; here `I` is an
+injective sheaf, which has the same two properties used later: it is acyclic, and every
+equivariant map from a torsor into it exists (see
+`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
+(blueprint: `lem-galois-flasque`) -/
+theorem Sheaf.exists_shortExact_injective_addEquiv_H_one (hT : IsTerminal T)
+    [EnoughInjectives (Sheaf J AddCommGrpCat.{w})] (F : Sheaf J AddCommGrpCat.{w}) :
+    ∃ (I Q : Sheaf J AddCommGrpCat.{w}) (ι : F ⟶ I) (d : I ⟶ Q) (w : ι ≫ d = 0),
+      (ShortComplex.mk ι d w).ShortExact ∧ Injective I ∧ (∀ q, Subsingleton (H I (q + 1))) ∧
+      Nonempty (H F 1 ≃+ Q.obj.obj (op T) ⧸ (d.hom.app (op T)).hom.range) := by
+  let S := ShortComplex.mk (Injective.ι F) (cokernel.π (Injective.ι F)) (cokernel.condition _)
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  exact ⟨S.X₂, S.X₃, S.f, S.g, S.zero, hS, inferInstance, fun _ ↦ inferInstance,
+    ⟨(H.quotientRangeAddEquiv hS hT).symm⟩⟩
+
 
 end HOneCokernel
 

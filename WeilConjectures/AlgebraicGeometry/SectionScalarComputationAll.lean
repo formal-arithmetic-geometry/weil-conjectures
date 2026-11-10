@@ -27,6 +27,12 @@ private theorem map_id_cleanup
     F.map (𝟙 x) ≫ t ≫ G.map (𝟙 y) ≫ 𝟙 _ = t := by
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
+private theorem map_id_cleanup_left
+    {A B : Type*} [Category A] [Category B]
+    (F : A ⥤ B) {x : A} {y : B} (t : F.obj x ⟶ y) :
+    F.map (𝟙 x) ≫ t ≫ 𝟙 y = t := by
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+
 
 private theorem natTrans_app_eq_of_epi
     {A B : Type*} [Category A] [Category B] {F G : A ⥤ B}

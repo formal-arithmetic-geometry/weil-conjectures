@@ -303,6 +303,76 @@ namespace PrimeSpectrum
 
 variable {A : Type*} [CommRing A]
 
+/-- Blueprint `lem-wf-smooth-components-disjoint`: if the localization of `A` at every maximal
+ideal is a regular local ring (for instance `A` the coordinate ring of a smooth affine variety),
+then distinct irreducible components of `Spec A` are disjoint.
+
+A component is `V(p)` for a minimal prime `p`. If `x ∈ V(p₁) ∩ V(p₂)` and `𝔪 ⊇ x` is maximal, the
+domain `A_𝔪` forces every minimal prime inside `𝔪` to equal the kernel of `A → A_𝔪`, so
+`p₁ = p₂`. -/
+theorem disjoint_of_mem_irreducibleComponents
+    (h : ∀ (m : Ideal A) [m.IsMaximal], IsRegularLocalRing (Localization.AtPrime m))
+    {Z₁ Z₂ : Set (PrimeSpectrum A)} (h₁ : Z₁ ∈ irreducibleComponents (PrimeSpectrum A))
+    (h₂ : Z₂ ∈ irreducibleComponents (PrimeSpectrum A)) (hne : Z₁ ≠ Z₂) : Disjoint Z₁ Z₂ := by
+  refine Set.disjoint_left.2 fun x hx₁ hx₂ ↦ hne ?_
+  have hc₁ := (isClosed_of_mem_irreducibleComponents _ h₁).closure_eq
+  have hc₂ := (isClosed_of_mem_irreducibleComponents _ h₂).closure_eq
+  have hp₁ : vanishingIdeal Z₁ ∈ minimalPrimes A :=
+    vanishingIdeal_mem_minimalPrimes.2 (by rwa [hc₁])
+  have hp₂ : vanishingIdeal Z₂ ∈ minimalPrimes A :=
+    vanishingIdeal_mem_minimalPrimes.2 (by rwa [hc₂])
+  obtain ⟨m, hm, hxm⟩ := x.asIdeal.exists_le_maximal x.2.ne_top
+  have := h m
+  have hq := RingHom.ker_isPrime (algebraMap A (Localization.AtPrime m))
+  have key (p : Ideal A) (hp : p ∈ minimalPrimes A) (hpx : p ≤ x.asIdeal) :
+      p = RingHom.ker (algebraMap A (Localization.AtPrime m)) := by
+    have hqp : RingHom.ker (algebraMap A (Localization.AtPrime m)) ≤ p := by
+      intro a ha
+      obtain ⟨⟨s, hs⟩, hsa⟩ := (IsLocalization.map_eq_zero_iff m.primeCompl _ a).1 ha
+      have : s * a ∈ p := by rw [hsa]; exact p.zero_mem
+      exact (hp.1.1.mem_or_mem this).resolve_left fun hsp ↦ hs (hxm (hpx hsp))
+    exact le_antisymm (hp.2 ⟨hq, bot_le⟩ hqp) hqp
+  have hle (Z : Set (PrimeSpectrum A)) (hx : x ∈ Z) : vanishingIdeal Z ≤ x.asIdeal :=
+    fun f hf ↦ (mem_vanishingIdeal _ _).1 hf x hx
+  rw [← hc₁, ← hc₂, ← zeroLocus_vanishingIdeal_eq_closure, ← zeroLocus_vanishingIdeal_eq_closure,
+    key _ hp₁ (hle _ hx₁), key _ hp₂ (hle _ hx₂)]
+
+/-- Blueprint `lem-wf-smooth-components-disjoint`, consequence: for a finitely generated algebra `A`
+over a field whose local rings at maximal ideals are regular, each irreducible component of
+`Spec A` is open and closed, its complement being the finite union of the other components. -/
+theorem isClopen_of_mem_irreducibleComponents (k : Type*) [Field k] [Algebra k A]
+    [Algebra.FiniteType k A]
+    (h : ∀ (m : Ideal A) [m.IsMaximal], IsRegularLocalRing (Localization.AtPrime m))
+    {Z : Set (PrimeSpectrum A)} (hZ : Z ∈ irreducibleComponents (PrimeSpectrum A)) :
+    IsClopen Z := by
+  have := Algebra.FiniteType.isNoetherianRing k A
+  refine ⟨isClosed_of_mem_irreducibleComponents _ hZ, ?_⟩
+  have hfin := TopologicalSpace.NoetherianSpace.finite_irreducibleComponents
+    (α := PrimeSpectrum A)
+  have hc : Zᶜ = ⋃₀ (irreducibleComponents (PrimeSpectrum A) \ {Z}) := by
+    ext x
+    constructor
+    · intro hx
+      exact ⟨irreducibleComponent x, ⟨irreducibleComponent_mem_irreducibleComponents x,
+        fun h ↦ hx ((Set.mem_singleton_iff.1 h) ▸ mem_irreducibleComponent)⟩,
+        mem_irreducibleComponent⟩
+    · rintro ⟨W, ⟨hW, hWZ⟩, hxW⟩ hxZ
+      exact Set.disjoint_left.1 (disjoint_of_mem_irreducibleComponents h hW hZ hWZ) hxW hxZ
+  rw [← isClosed_compl_iff, hc, Set.sUnion_eq_biUnion]
+  exact (hfin.sdiff).isClosed_biUnion fun W hW ↦ isClosed_of_mem_irreducibleComponents _ hW.1
+
+/-- Blueprint `lem-wf-smooth-components-disjoint`, consequence: for a finitely generated algebra `A`
+over a field whose local rings at maximal ideals are regular, the irreducible components of
+`Spec A` are its connected components. -/
+theorem connectedComponent_eq_of_mem_irreducibleComponents (k : Type*) [Field k] [Algebra k A]
+    [Algebra.FiniteType k A]
+    (h : ∀ (m : Ideal A) [m.IsMaximal], IsRegularLocalRing (Localization.AtPrime m))
+    {Z : Set (PrimeSpectrum A)} (hZ : Z ∈ irreducibleComponents (PrimeSpectrum A)) {x}
+    (hx : x ∈ Z) : connectedComponent x = Z :=
+  subset_antisymm ((isClopen_of_mem_irreducibleComponents k h hZ).connectedComponent_subset hx)
+    (hZ.prop.isPreirreducible.isPreconnected
+      |>.subset_connectedComponent hx)
+
 
 end PrimeSpectrum
 

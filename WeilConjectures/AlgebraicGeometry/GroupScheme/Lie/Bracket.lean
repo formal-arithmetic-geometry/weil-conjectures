@@ -561,6 +561,15 @@ theorem tangentCoeff_mul (v w : pointsKer G aug₁) (a : stalkOne G) :
   rw [tangentCoeff, kerHom_tangentMap_mul_tangentMap]
   simp [algebraMap_eq_inl]
 
+theorem tangent_mul_comm (v w : pointsKer G aug₁) : v * w = w * v :=
+  tangent_ext fun a ↦ by rw [tangentCoeff_mul, tangentCoeff_mul, add_comm]
+
+theorem tangentCoeff_inv (v : pointsKer G aug₁) (a : stalkOne G) :
+    tangentCoeff v⁻¹ a = -tangentCoeff v a := by
+  have h := tangentCoeff_mul v v⁻¹ a
+  rw [mul_inv_cancel, tangentCoeff_one] at h
+  linear_combination -h
+
 
 theorem snd_snd_algebraMap₂ (c : k) :
     (algebraMap k (DualNumber (DualNumber k)) c).snd.snd = 0 := by
@@ -774,6 +783,11 @@ theorem tangentBracket_one_left (w : pointsKer G aug₁) : tangentBracket 1 w = 
   rw [one_mul] at h
   exact left_eq_mul.mp h
 
+theorem tangentBracket_inv_left (v w : pointsKer G aug₁) :
+    tangentBracket v⁻¹ w = (tangentBracket v w)⁻¹ := by
+  rw [eq_inv_iff_mul_eq_one, ← tangentBracket_mul_left, inv_mul_cancel,
+    tangentBracket_one_left]
+
 
 variable (G) in
 /-- The Lie algebra of `G` is the group of tangent vectors: `Lie(G) ≃ ker(G(k[ε]) → G(k))`. -/
@@ -832,6 +846,9 @@ theorem lie_antisymm' (x y : Lie G) : ⁅x, y⁆ = -⁅y, x⁆ := by
   have h := lie_self' (x + y)
   rw [lie_add_left, lie_add_right, lie_add_right, lie_self', lie_self', zero_add, add_zero] at h
   exact eq_neg_of_add_eq_zero_left h
+
+theorem lie_neg_right' (x y : Lie G) : ⁅x, -y⁆ = -⁅x, y⁆ := by
+  rw [lie_antisymm', lie_neg_left', neg_neg, lie_antisymm' x y, neg_neg]
 
 
 theorem lieEquivTangent_neg (x : Lie G) : lieEquivTangent G (-x) = (lieEquivTangent G x)⁻¹ := by

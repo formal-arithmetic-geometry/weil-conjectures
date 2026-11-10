@@ -69,5 +69,18 @@ lemma fieldPointsEquiv_apply
     fieldPointsEquiv k L x = (Scheme.ΓSpecIso (.of L)).hom.hom (x.1.appTop (coord _ PUnit.unit)) :=
   rfl
 
+/-- For `ι = PUnit`, the coordinate of `fieldPointsEquivPi` is `fieldPointsEquiv`. -/
+lemma fieldPointsEquivPi_punit
+    (x : (𝔸(PUnit.{u + 1}; Spec (CommRingCat.of k)) ↘ Spec (CommRingCat.of k)).fieldPoints L)
+    (i : PUnit.{u + 1}) :
+    fieldPointsEquivPi PUnit k L x i = fieldPointsEquiv k L x :=
+  rfl
+
+/-- The inverse of `fieldPointsEquiv` is the inverse of `fieldPointsEquivPi` at the constant
+vector. -/
+lemma fieldPointsEquiv_symm_apply (a : L) :
+    (fieldPointsEquiv k L).symm a = (fieldPointsEquivPi PUnit.{u + 1} k L).symm fun _ ↦ a :=
+  rfl
+
 
 end AlgebraicGeometry.AffineSpace

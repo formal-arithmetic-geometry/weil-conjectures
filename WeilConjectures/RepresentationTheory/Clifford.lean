@@ -224,6 +224,103 @@ theorem Submodule.exists_isSimpleModule_pow_apply_mem [IsAlgClosed k] [FiniteDim
     (e.symm.trans (LinearEquiv.ofEq _ _ hTb))
   exact ⟨b - a, Nat.sub_pos_of_lt hab, C, hC, hCΘ⟩
 
+/-- **Clifford theory, relative step.** Let `Θ` be a bijective `k`-linear operator on a
+finite-dimensional module twisting the `R`-action in both directions, and `A ≠ ⊤` a
+`Θ`-stable submodule. Then there is a submodule `C` covering `A` which is stable under a
+positive power of `Θ`. -/
+theorem Submodule.exists_covBy_pow_apply_mem [IsAlgClosed k] [FiniteDimensional k M]
+    {Θ : Module.End k M} (hΘ : Function.Bijective Θ)
+    (h₁ : ∀ a : R, ∃ b : R, ∀ m : M, Θ (a • m) = b • Θ m)
+    (h₂ : ∀ a : R, ∃ b : R, ∀ m : M, Θ (b • m) = a • Θ m) {A : Submodule R M} (hA : A ≠ ⊤)
+    (hAΘ : ∀ x ∈ A, Θ x ∈ A) :
+    ∃ j, 0 < j ∧ ∃ C : Submodule R M, A < C ∧
+      (∀ D : Submodule R M, A ≤ D → D ≤ C → D = A ∨ D = C) ∧ ∀ x ∈ C, (Θ ^ j) x ∈ C := by
+  have : FiniteDimensional k (M ⧸ A) :=
+    Module.Finite.of_surjective (A.mkQ.restrictScalars k) A.mkQ_surjective
+  have : Nontrivial (M ⧸ A) := Submodule.Quotient.nontrivial_iff.mpr hA
+  let e := Submodule.Quotient.restrictScalarsEquiv k A
+  -- The operator induced by `Θ` on `M ⧸ A`.
+  let ΘQ : Module.End k (M ⧸ A) := e.toLinearMap ∘ₗ
+    (A.restrictScalars k).mapQ (A.restrictScalars k) Θ hAΘ ∘ₗ e.symm.toLinearMap
+  have hmk (x : M) : ΘQ (A.mkQ x) = A.mkQ (Θ x) := rfl
+  have hmkpow (n : ℕ) (x : M) : (ΘQ ^ n) (A.mkQ x) = A.mkQ ((Θ ^ n) x) := by
+    induction n with
+    | zero => rfl
+    | succ n ih => rw [pow_succ', Module.End.mul_apply, ih, hmk, ← Module.End.mul_apply, pow_succ']
+  have hsurj : Function.Surjective ΘQ := by
+    intro q
+    obtain ⟨x, rfl⟩ := A.mkQ_surjective q
+    obtain ⟨y, rfl⟩ := hΘ.2 x
+    exact ⟨A.mkQ y, hmk y⟩
+  have hbij : Function.Bijective ΘQ := ⟨LinearMap.injective_iff_surjective.mpr hsurj, hsurj⟩
+  have h₁Q (a : R) : ∃ b : R, ∀ q : M ⧸ A, ΘQ (a • q) = b • ΘQ q := by
+    obtain ⟨b, hb⟩ := h₁ a
+    refine ⟨b, fun q ↦ ?_⟩
+    obtain ⟨x, rfl⟩ := A.mkQ_surjective q
+    rw [← map_smul, hmk, hmk, hb, map_smul]
+  have h₂Q (a : R) : ∃ b : R, ∀ q : M ⧸ A, ΘQ (b • q) = a • ΘQ q := by
+    obtain ⟨b, hb⟩ := h₂ a
+    refine ⟨b, fun q ↦ ?_⟩
+    obtain ⟨x, rfl⟩ := A.mkQ_surjective q
+    rw [← map_smul, hmk, hmk, hb, map_smul]
+  obtain ⟨j, hj, C, hC, hCΘ⟩ := Submodule.exists_isSimpleModule_pow_apply_mem hbij h₁Q h₂Q
+  have hCat := isSimpleModule_iff_isAtom.mp hC
+  refine ⟨j, hj, C.comap A.mkQ, lt_of_le_of_ne (fun x hx ↦ ?_) fun h ↦ hCat.1 ?_,
+    fun D hAD hDC ↦ ?_, fun x hx ↦ ?_⟩
+  · rw [Submodule.mem_comap, Submodule.mkQ_apply, (Submodule.Quotient.mk_eq_zero A).mpr hx]
+    exact C.zero_mem
+  · rw [← Submodule.map_comap_eq_of_surjective A.mkQ_surjective C, ← h, Submodule.mkQ_map_self]
+  · have hD : D = (D.map A.mkQ).comap A.mkQ := by
+      rw [Submodule.comap_map_mkQ, sup_of_le_right hAD]
+    rcases (hCat.le_iff.mp (Submodule.map_le_iff_le_comap.mpr hDC)) with h | h
+    · rw [h, Submodule.comap_bot, Submodule.ker_mkQ] at hD
+      exact Or.inl hD
+    · rw [h] at hD
+      exact Or.inr hD
+  · rw [Submodule.mem_comap, ← hmkpow]
+    exact hCΘ _ hx
+
+/-- **Clifford theory, filtration.** Let `Θ` be a bijective `k`-linear operator on a
+finite-dimensional module twisting the `R`-action in both directions, and `A` a submodule
+stable under `Θ ^ m₀`. Then for some positive multiple `m` of `m₀` there is a chain of
+submodules from `A` to `⊤` with covering steps, all stable under `Θ ^ m`. -/
+theorem Submodule.exists_chain_covBy_pow_apply_mem [IsAlgClosed k] [FiniteDimensional k M]
+    {Θ : Module.End k M} (hΘ : Function.Bijective Θ)
+    (h₁ : ∀ a : R, ∃ b : R, ∀ m : M, Θ (a • m) = b • Θ m)
+    (h₂ : ∀ a : R, ∃ b : R, ∀ m : M, Θ (b • m) = a • Θ m) (A : Submodule R M) {m₀ : ℕ}
+    (hm₀ : 0 < m₀) (hA : ∀ x ∈ A, (Θ ^ m₀) x ∈ A) :
+    ∃ m, 0 < m ∧ m₀ ∣ m ∧ ∃ (n : ℕ) (U : Fin (n + 1) → Submodule R M),
+      U 0 = A ∧ U (Fin.last n) = ⊤ ∧ (∀ i, ∀ x ∈ U i, (Θ ^ m) x ∈ U i) ∧
+      ∀ i : Fin n, U i.castSucc < U i.succ ∧
+        ∀ D : Submodule R M, U i.castSucc ≤ D → D ≤ U i.succ →
+          D = U i.castSucc ∨ D = U i.succ := by
+  have : IsNoetherian R M := isNoetherian_of_tower k inferInstance
+  induction A using WellFoundedGT.induction generalizing m₀ with
+  | ind A ih =>
+  by_cases hAtop : A = ⊤
+  · exact ⟨m₀, hm₀, dvd_rfl, 0, fun _ ↦ A, rfl, hAtop, fun _ ↦ hA, fun i ↦ i.elim0⟩
+  have hbij : Function.Bijective ⇑(Θ ^ m₀) := by
+    rw [Module.End.coe_pow]
+    exact hΘ.iterate m₀
+  obtain ⟨j, hj, C, hAC, hcov, hC⟩ := Submodule.exists_covBy_pow_apply_mem hbij
+    (Θ.exists_pow_smul_eq h₁ m₀) (Θ.exists_pow_smul_eq' h₂ m₀) hAtop hA
+  rw [← pow_mul] at hC
+  obtain ⟨m, hm, hdvd, n, U, hU0, hUlast, hUΘ, hUstep⟩ := ih C hAC (Nat.mul_pos hm₀ hj) hC
+  obtain ⟨c, rfl⟩ := (dvd_mul_right m₀ j).trans hdvd
+  refine ⟨m₀ * c, hm, dvd_mul_right m₀ c, n + 1, Fin.cons A U, rfl, ?_, fun i ↦ ?_,
+    fun i ↦ ?_⟩
+  · rw [← Fin.succ_last, Fin.cons_succ, hUlast]
+  · refine Fin.cases ?_ (fun i ↦ ?_) i
+    · rw [Fin.cons_zero, pow_mul]
+      exact Module.End.pow_apply_mem_of_forall_mem (p := A.restrictScalars k) c hA
+    · rw [Fin.cons_succ]
+      exact hUΘ i
+  · refine Fin.cases ?_ (fun i ↦ ?_) i
+    · rw [Fin.castSucc_zero, Fin.cons_zero, Fin.cons_succ, hU0]
+      exact ⟨hAC, hcov⟩
+    · rw [← Fin.succ_castSucc, Fin.cons_succ, Fin.cons_succ]
+      exact hUstep i
+
 
 end Twisted
 
@@ -272,6 +369,13 @@ theorem le_comap_of_mem_adjoin_image (ρ : Representation k W V) (P : Subgroup W
   | add x y _ _ hx hy => exact fun v hv ↦ Q.add_mem (hx hv) (hy hv)
   | mul x y _ _ hx hy => exact fun v hv ↦ hx (hy hv)
 
+/-- `ρ w` twists the action of the subalgebra generated by the image of a normal subgroup. -/
+theorem exists_smul_eq_adjoin_image (ρ : Representation k W V) (P : Subgroup W) [P.Normal]
+    (w : W) (a : Algebra.adjoin k (ρ '' P)) :
+    ∃ b : Algebra.adjoin k (ρ '' P), ∀ v : V, ρ w (a • v) = b • ρ w v :=
+  ⟨⟨ρ w * a * ρ w⁻¹, ρ.conj_mem_adjoin_image P w a.2⟩, fun v ↦ by
+    simp [Subalgebra.smul_def]⟩
+
 
 /-- `ρ w` twists the action of the subalgebra generated by the image of a normal subgroup. -/
 theorem exists_smul_eq_adjoin_image' (ρ : Representation k W V) (P : Subgroup W) [P.Normal]
@@ -284,6 +388,40 @@ end Adjoin
 
 variable {k W V : Type*} [Field k] [IsAlgClosed k] [Group W] [AddCommGroup V] [Module k V]
   [FiniteDimensional k V]
+
+/-- **Geometric constituents after a constant extension**
+(blueprint: `lem-zl-geometric-constituents-any-base`). Let `ρ` be a finite-dimensional
+representation of `W` over an algebraically closed field, `P` a normal subgroup of `W` and
+`F ∈ W`. There are `m ≥ 1` and a finite chain of subspaces `0 = U₀ < U₁ < ⋯ < Uₙ = V`, each
+stable under `P` and under `ρ (F ^ m)`, such that every successive quotient `Uᵢ₊₁ / Uᵢ` is
+irreducible under `P`: no `P`-stable subspace lies strictly between `Uᵢ` and `Uᵢ₊₁`. -/
+theorem exists_filtration_isIrreducible_restrict (ρ : Representation k W V) (P : Subgroup W)
+    [P.Normal] (F : W) :
+    ∃ m : ℕ, 0 < m ∧ ∃ (n : ℕ) (U : Fin (n + 1) → Submodule k V),
+      U 0 = ⊥ ∧ U (Fin.last n) = ⊤ ∧
+      (∀ i, ∀ g ∈ P, U i ≤ (U i).comap (ρ g)) ∧ (∀ i, U i ≤ (U i).comap (ρ (F ^ m))) ∧
+      ∀ i : Fin n, U i.castSucc < U i.succ ∧
+        ∀ Q : Submodule k V, (∀ g ∈ P, Q ≤ Q.comap (ρ g)) → U i.castSucc ≤ Q → Q ≤ U i.succ →
+          Q = U i.castSucc ∨ Q = U i.succ := by
+  have hbij : Function.Bijective (ρ F) :=
+    Function.bijective_iff_has_inverse.mpr ⟨ρ F⁻¹, ρ.inv_self_apply F, ρ.self_inv_apply F⟩
+  obtain ⟨m, hm, -, n, U, hU0, hUlast, hUF, hUstep⟩ :=
+    Submodule.exists_chain_covBy_pow_apply_mem hbij (ρ.exists_smul_eq_adjoin_image P F)
+      (ρ.exists_smul_eq_adjoin_image' P F) ⊥ one_pos (by simp)
+  let ι := Submodule.restrictScalarsEmbedding k (Algebra.adjoin k (ρ '' P)) V
+  refine ⟨m, hm, n, fun i ↦ ι (U i), by simp [ι, hU0], by simp [ι, hUlast],
+    fun i g hg x hx ↦ (U i).smul_mem ⟨ρ g, Algebra.subset_adjoin ⟨g, hg, rfl⟩⟩ hx,
+    fun i x hx ↦ ?_, fun i ↦ ⟨ι.lt_iff_lt.mpr (hUstep i).1, fun Q hQ hQ₁ hQ₂ ↦ ?_⟩⟩
+  · rw [Submodule.mem_comap, map_pow]
+    exact hUF i x hx
+  · let Q' : Submodule (Algebra.adjoin k (ρ '' P)) V :=
+      { Q.toAddSubmonoid with
+        smul_mem' a _ hx := ρ.le_comap_of_mem_adjoin_image P hQ a.2 hx }
+    have hQQ' : Q = ι Q' := rfl
+    rw [hQQ'] at hQ₁ hQ₂ ⊢
+    rcases (hUstep i).2 Q' (ι.le_iff_le.mp hQ₁) (ι.le_iff_le.mp hQ₂) with h | h
+    · exact Or.inl (congrArg ι h)
+    · exact Or.inr (congrArg ι h)
 
 
 end Representation

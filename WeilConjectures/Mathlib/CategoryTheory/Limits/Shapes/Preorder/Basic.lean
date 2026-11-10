@@ -68,8 +68,28 @@ lemma isIso_of_interleave (h₁ : IsColimit c₁) (h₂ : IsColimit c₂)
   · rw [reassoc_of% (h₂.fac _ i), Category.assoc, hf, reassoc_of% (hv i), c₂.w,
       Category.comp_id]
 
+/-- The map `h₁.map c₂ u` between colimits induced by a natural transformation `u : F₁ ⟶ F₂`
+which is interleaved with the transition maps by maps `v i : F₂.obj i ⟶ F₁.obj (succ i)` is an
+isomorphism. See `CategoryTheory.Limits.IsColimit.isIso_of_interleave`. -/
+lemma isIso_map_of_interleave (h₁ : IsColimit c₁) (h₂ : IsColimit c₂)
+    (u : F₁ ⟶ F₂) (v : ∀ i, F₂.obj i ⟶ F₁.obj (Order.succ i))
+    (hu : ∀ i, u.app i ≫ v i = F₁.map (homOfLE (Order.le_succ i)))
+    (hv : ∀ i, v i ≫ u.app (Order.succ i) = F₂.map (homOfLE (Order.le_succ i))) :
+    IsIso (h₁.map c₂ u) :=
+  isIso_of_interleave h₁ h₂ u v hu hv _ (h₁.ι_map c₂ u)
+
 
 end IsColimit
+
+/-- The map of colimits `colimMap u` induced by a natural transformation `u : F₁ ⟶ F₂`
+which is interleaved with the transition maps by maps `v i : F₂.obj i ⟶ F₁.obj (succ i)` is an
+isomorphism. See `CategoryTheory.Limits.IsColimit.isIso_of_interleave`. -/
+lemma isIso_colimMap_of_interleave [HasColimit F₁] [HasColimit F₂]
+    (u : F₁ ⟶ F₂) (v : ∀ i, F₂.obj i ⟶ F₁.obj (Order.succ i))
+    (hu : ∀ i, u.app i ≫ v i = F₁.map (homOfLE (Order.le_succ i)))
+    (hv : ∀ i, v i ≫ u.app (Order.succ i) = F₂.map (homOfLE (Order.le_succ i))) :
+    IsIso (colimMap u) :=
+  IsColimit.isIso_map_of_interleave (colimit.isColimit _) (colimit.isColimit _) u v hu hv
 
 
 end CategoryTheory.Limits

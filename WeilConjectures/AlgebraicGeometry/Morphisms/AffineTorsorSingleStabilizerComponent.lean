@@ -194,6 +194,81 @@ theorem affine_torsor_single_stabilizer_component_section
   exact ⟨s, (huniq (s ≫ p) hsp).trans (huniq b hqb).symm, hs⟩
 
 
+/-- Open/base-map part of stabilizer descent.
+
+Proof: descend the selected section and form its pullback lift; the exact stabilizer
+criterion gives openness and pullback.lift_snd gives the base equation.
+(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-open) -/
+theorem affine_torsor_single_stabilizer_component_open
+    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
+    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
+    [Module.Finite H C] [Module.FaithfullyFlat H C]
+    (G : Type u) [Group G] [Finite G]
+    (ρ : G → C →ₐ[H] C)
+    (hρone : ρ 1 = AlgHom.id H C)
+    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))
+    (hne : algebraMap H C (ι g) ≠ 0)
+    {Y : Scheme.{u}} (p : Y ⟶ Spec R)
+    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))
+    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
+    [IsFinite j] [Etale j]
+    (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap H C))))
+    (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
+      a.comp (algebraMap H C) = b.comp (algebraMap H C) →
+      a (algebraMap H C (ι g)) ≠ 0 →
+      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)
+    (d : ℕ)
+    (T : Scheme.{u}) (t : T ⟶ Spec R)
+    (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))
+      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T)
+    (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫
+      Spec.map (CommRingCat.ofHom ι))
+    (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
+    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
+    (x : Fin d) (K : Subgroup G)
+    (hK : ∀ ζ, ζ ∈ K ↔
+      fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne
+        p T t k hk d δ hδ ζ x = x) :
+    let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+    let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F (ι g))
+    let _q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
+      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
+        change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
+          PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+        rfl)
+    ∃ f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶
+        pullback p (Spec.map (CommRingCat.ofHom ι)),
+      IsOpenImmersion f ∧
+      f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) =
+        Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+          Spec.map (CommRingCat.ofHom (algebraMap H F)) := by
+  classical
+  dsimp only
+  let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let U : (Spec (CommRingCat.of F)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H F (ι g))
+  let b := Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+    Spec.map (CommRingCat.ofHom (algebraMap H F))
+  obtain ⟨s, hsbase, hssection⟩ := affine_torsor_single_stabilizer_component_section
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK
+  let f := pullback.lift s b hsbase
+  have hbase : f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) = b := by
+    exact pullback.lift_snd s b hsbase
+  have hsection : (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
+      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
+        change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
+          PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+        rfl) ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =
+      fixedSplitSection p t k d δ x := by
+    simpa only [f, pullback.lift_fst] using hssection
+  have hopen : IsOpenImmersion f := affine_torsor_stabilizer_section_open
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK f hbase hsection
+  exact ⟨f, hopen, hbase⟩
+
 /-- A single representative section descends to an open component.
 
 Proof: descend the selected section, construct the pullback lift, and apply the

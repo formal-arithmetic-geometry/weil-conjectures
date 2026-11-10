@@ -75,6 +75,14 @@ def HasAmpleFamily (X : Scheme.{u}) : Prop :=
     (∀ i, IsAffineOpen (Modules.Hom.zeroLocus (s i)).support.compl) ∧
       ⨆ i, (Modules.Hom.zeroLocus (s i)).support.compl = ⊤
 
+lemma hasAmpleFamily_iff (X : Scheme.{u}) :
+    X.HasAmpleFamily ↔
+      ∃ (L : X.Modules) (_ : SheafOfModules.IsInvertible.{u, u, u} L) (ι : Type u)
+        (_ : Finite ι) (s : ι → (𝟙_ X.Modules ⟶ L)),
+        (∀ i, IsAffineOpen (Modules.Hom.zeroLocus (s i)).support.compl) ∧
+          ⨆ i, (Modules.Hom.zeroLocus (s i)).support.compl = ⊤ :=
+  Iff.rfl
+
 
 namespace HasAmpleFamily
 

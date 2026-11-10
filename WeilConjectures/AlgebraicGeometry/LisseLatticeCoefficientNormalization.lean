@@ -55,6 +55,12 @@ private theorem coefficientWithAbsLift_isometry (l : ℕ) [Fact l.Prime]
   intro x
   exact (coefficientLiftAbsoluteValue l E x.ofAbs).symm
 
+private theorem coefficientIntegers_mem (l : ℕ) [Fact l.Prime] (E : Type*) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (x : E) :
+    x ∈ Padic.coefficientExtensionIntegers l E ↔
+      Padic.coefficientExtensionAbsoluteValue l E x ≤ 1 :=
+  Padic.mem_coefficientExtensionIntegers l E x
+
 
 private noncomputable def coefficientWithAbsLiftIntegerRingEquiv (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

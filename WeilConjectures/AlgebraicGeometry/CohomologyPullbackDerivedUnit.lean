@@ -37,8 +37,70 @@ universe v
 
 open CategoryTheory CategoryTheory.Limits
 
+/-- Compare a K-injective representative with a bounded below complex of injectives.
+The bijectivity of localization on maps into K-injectives lifts both directions of
+the comparison isomorphism, and naturality transports invertibility of the unit. -/
+private theorem isIso_unit_of_kInjective
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+    (F : C ⥤ D) [F.Additive] (K : HomotopyCategory.Plus C)
+    [CochainComplex.IsKInjective K.obj.as] :
+    IsIso (F.rightDerivedFunctorPlusUnith.app K) := by
+  let E := DerivedCategory.Plus.injectiveObjectEquivalence C
+  let I := (InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
+    (E.inverse.obj (DerivedCategory.Plus.Qh.obj K))
+  have : CochainComplex.IsKInjective I.obj.as := inferInstance
+  let e : DerivedCategory.Plus.Qh.obj I ≅ DerivedCategory.Plus.Qh.obj K :=
+    E.counitIso.app (DerivedCategory.Plus.Qh.obj K)
+  obtain ⟨a, ha⟩ := (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective K I
+    inferInstance).2 e.inv
+  obtain ⟨b, hb⟩ := (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective I K
+    inferInstance).2 e.hom
+  let h : K ≅ I :=
+    { hom := a
+      inv := b
+      hom_inv_id := by
+        apply (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective K K inferInstance).1
+        simp [Functor.map_comp, ha, hb]
+      inv_hom_id := by
+        apply (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective I I inferInstance).1
+        simp [Functor.map_comp, ha, hb] }
+  rw [NatTrans.isIso_app_iff_of_iso F.rightDerivedFunctorPlusUnith h]
+  change IsIso (F.rightDerivedFunctorPlusUnith.app
+    ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj _))
+  infer_instance
+
 
 namespace AlgebraicGeometry.Etale
+
+/-- A bounded below K-injective complex remains K-injective under direct image.
+Source: Stacks Project, Lemma 08BJ and Remark 08J6
+(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
+Proof, step 3 of the node: inverse image is exact and left adjoint to direct image.
+For every acyclic complex `M`, maps `M → f_*J` up to homotopy correspond to maps
+`f⁻¹M → J`, which vanish since `f⁻¹M` is acyclic and `J` is K-injective.
+Boundedness is preserved because the additive direct image preserves zero objects. -/
+theorem lowerStar_isKInjective_boundedBelow {X Y : Scheme.{v}} (f : Y ⟶ X)
+    (J : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
+    [J.obj.IsKInjective] :
+    ((lowerStar AddCommGrpCat.{v + 1} f).mapCochainComplexPlus.obj J).obj.IsKInjective := by
+  have := (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).preservesKInjectiveComplexes
+  exact Functor.PreservesKInjectiveComplexes.isKInjective_map J.obj
+
+theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
+    (J : HomotopyCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
+    [CochainComplex.IsKInjective J.obj.as] :
+    IsIso ((lowerStar AddCommGrpCat.{v + 1} f).rightDerivedFunctorPlusUnith.app J) ∧
+    IsIso ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith.app
+      ((lowerStar AddCommGrpCat.{v + 1} f).mapHomotopyCategoryPlus.obj J)) ∧
+    IsIso ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith.app
+      J) := by
+  have := (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).preservesKInjectiveComplexes
+  have : CochainComplex.IsKInjective
+      ((lowerStar AddCommGrpCat.{v + 1} f).mapHomotopyCategoryPlus.obj J).obj.as :=
+    Functor.PreservesKInjectiveComplexes.isKInjective_map J.obj.as
+  exact ⟨isIso_unit_of_kInjective _ J, isIso_unit_of_kInjective _ _,
+    isIso_unit_of_kInjective _ J⟩
 
 
 /-- Pullback of derived global sections is Γ of the derived unit followed by the natural

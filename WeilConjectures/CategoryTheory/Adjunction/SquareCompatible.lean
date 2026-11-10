@@ -127,6 +127,11 @@ lemma of_eq {ιF₁ ιF₂ : F ⋙ T' ≅ T ⋙ F'} {ιG₁ ιG₂ : G ⋙ T' �
   subst hF hG
   exact h
 
+lemma of_eq_natTrans {α β : F ⟶ G} {α' β' : F' ⟶ G'} (h : SquareCompatible ιF ιG α α')
+    (hα : α = β) (hα' : α' = β') : SquareCompatible ιF ιG β β' := by
+  subst hα hα'
+  exact h
+
 
 section Whisker
 

@@ -158,3 +158,11 @@ instance isWStrictlyLocalRing : IsWStrictlyLocalRing (WStrictLocalization R) := 
 
 end WStrictLocalization
 
+/-- Any ring has an ind-étale, faithfully flat cover that is w-strictly-local. -/
+theorem exists_isWStrictlyLocalRing (R : Type u) [CommRing R] :
+    ∃ (S : Type u) (_ : CommRing S) (_ : Algebra R S) (_ : Algebra.IndEtale R S)
+      (_ : Module.FaithfullyFlat R S),
+      IsWStrictlyLocalRing S := by
+  use WStrictLocalization R, inferInstance, inferInstance, inferInstance, inferInstance
+  infer_instance
+

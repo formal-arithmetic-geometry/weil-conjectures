@@ -68,6 +68,28 @@ lemma isLocalizedEquivalence_op_iff :
   · intro
     infer_instance
 
+lemma isLocalizedEquivalence_of_iso {Φ' : LocalizerMorphism W₁ W₂} (e : Φ.functor ≅ Φ'.functor)
+    [Φ.IsLocalizedEquivalence] : Φ'.IsLocalizedEquivalence := by
+  let G := Φ.localizedFunctor W₁.Q W₂.Q
+  have : CatCommSq Φ'.functor W₁.Q W₂.Q G :=
+    ⟨isoWhiskerRight e.symm _ ≪≫ CatCommSq.iso Φ.functor W₁.Q W₂.Q G⟩
+  exact IsLocalizedEquivalence.mk' Φ' W₁.Q W₂.Q G
+
+lemma isLocalizedEquivalence_of_precomp (Ψ : LocalizerMorphism W₂ W₃)
+    [Φ.IsLocalizedEquivalence] [(Φ.comp Ψ).IsLocalizedEquivalence] :
+    Ψ.IsLocalizedEquivalence := by
+  let G₁₂ := Φ.localizedFunctor W₁.Q W₂.Q
+  let G₂₃ := Ψ.localizedFunctor W₂.Q W₃.Q
+  have : CatCommSq (Φ.comp Ψ).functor W₁.Q W₃.Q (G₁₂ ⋙ G₂₃) :=
+    ⟨Functor.associator _ _ _ ≪≫ isoWhiskerLeft _
+        (CatCommSq.iso Ψ.functor W₂.Q W₃.Q (Ψ.localizedFunctor W₂.Q W₃.Q)) ≪≫
+        (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight (CatCommSq.iso Φ.functor W₁.Q W₂.Q (Φ.localizedFunctor W₁.Q W₂.Q)) _ ≪≫
+      Functor.associator _ _ _⟩
+  have := isEquivalence (Φ.comp Ψ) W₁.Q W₃.Q (G₁₂ ⋙ G₂₃)
+  have := Functor.isEquivalence_of_comp_left G₁₂ G₂₃
+  exact IsLocalizedEquivalence.mk' Ψ W₂.Q W₃.Q G₂₃
+
 
 end LocalizerMorphism
 

@@ -60,6 +60,14 @@ variable {C : Type u} [Category.{v} C] (T : Type w) [Ring T]
 abbrev constRingObj : Cᵒᵖ ⥤ Ab.{w} :=
   (Functor.const Cᵒᵖ).obj (AddCommGrpCat.of T)
 
+lemma constRingObj_one_app (U : Cᵒᵖ) :
+    (η[constRingObj (C := C) T]).app U = η[AddCommGrpCat.of T] :=
+  rfl
+
+lemma constRingObj_mul_app (U : Cᵒᵖ) :
+    (μ[constRingObj (C := C) T]).app U = μ[AddCommGrpCat.of T] :=
+  rfl
+
 
 /-- The constant ring presheaf of a commutative ring is a commutative ring object. -/
 instance isCommMonObj_constRingObj (T : Type w) [CommRing T] :

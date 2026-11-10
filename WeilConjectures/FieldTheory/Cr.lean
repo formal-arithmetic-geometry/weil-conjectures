@@ -244,3 +244,31 @@ theorem IsQuasiAlgClosed.finrank_eq_one_of_isCentral (K D : Type*) [Field K] [Is
       (by rw [pow_one, hdim, sq]; exact lt_mul_left hd (by omega))
     exact absurd hPy (hP0 y hy)
 
+/-- The Brauer group of a quasi-algebraically closed field vanishes: every central simple
+algebra over `K` is a matrix algebra over `K`.
+(blueprint: `lem-sc-c1-brauer-trivial`, `lem-sc-tsen`) -/
+theorem IsQuasiAlgClosed.subsingleton_brauerGroup (K : Type u) [Field K] [IsQuasiAlgClosed K] :
+    Subsingleton (BrauerGroup.{u, u} K) := by
+  let one : CSA.{u, u} K := ⟨.of K K⟩
+  suffices h : ∀ A : CSA.{u, u} K, IsBrauerEquivalent A one by
+    refine ⟨fun A B => ?_⟩
+    induction A using Quotient.inductionOn
+    induction B using Quotient.inductionOn
+    exact Quotient.sound ((h _).trans (h _).symm)
+  intro A
+  have := IsArtinianRing.of_finite K A
+  obtain ⟨n, hn, D, _, _, _, ⟨e⟩⟩ := IsSimpleRing.exists_algEquiv_matrix_divisionRing_finite K A
+  have : Algebra.IsCentral K D := Algebra.IsCentral.of_algEquiv_matrix e
+  let f : K ≃ₐ[K] D := AlgEquiv.ofBijective (Algebra.ofId K D) <| by
+    refine ⟨(algebraMap K D).injective, ?_⟩
+    exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+      (f := (Algebra.ofId K D).toLinearMap)
+      (by rw [Module.finrank_self, finrank_eq_one_of_isCentral K D])).mp
+      (algebraMap K D).injective
+  let u : A ≃ₐ[K] Matrix (Fin 1) (Fin 1) A :=
+    AlgEquiv.ofBijective (Matrix.scalarAlgHom (Fin 1) K) ⟨fun a b h => by
+      simpa using congrFun (congrFun h 0) 0, fun M => ⟨M 0 0, by
+        ext i j
+        simp [Subsingleton.elim i 0, Subsingleton.elim j 0]⟩⟩
+  exact ⟨1, n, one_ne_zero, hn.ne, ⟨u.symm.trans (e.trans f.symm.mapMatrix)⟩⟩
+

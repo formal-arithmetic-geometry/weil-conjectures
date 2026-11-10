@@ -79,6 +79,10 @@ noncomputable def chartToStrict :
     rw [map_mul, coe_eval₂RingHom, eval₂_sub, eval₂_mul, eval₂_C, eval₂_X, eval₂_C,
       toStrict_mul_slope', sub_self, mul_zero]
 
+/-- The map `C → A'` on classes of polynomials. -/
+theorem chartToStrict_mk (p : R[X]) :
+    chartToStrict g x y (Ideal.Quotient.mk _ p) = p.eval₂ (toStrict g x y) (slope' g x y) := rfl
+
 
 /-- The map `C → A'` restricts to `R → A'`. -/
 theorem chartToStrict_algebraMap (r : R) :

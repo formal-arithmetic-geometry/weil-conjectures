@@ -142,5 +142,10 @@ noncomputable def bifunctorRHomSelfAdjunction (hE : E.TriangleIdentity) :
     (congr_app (bifunctorRHomBidualTriangle_eq_id hI hE) (op X))
   right_triangle_components X := congr_app (bifunctorRHomBidualTriangle_eq_id hI hE) X
 
+lemma bifunctorRHomSelfAdjunction_unit {E : BifunctorEvaluation H}
+    (hE : E.TriangleIdentity) :
+    (bifunctorRHomSelfAdjunction hI hE).unit = bifunctorRHomBidual E hI :=
+  rfl
+
 
 end DerivedCategory

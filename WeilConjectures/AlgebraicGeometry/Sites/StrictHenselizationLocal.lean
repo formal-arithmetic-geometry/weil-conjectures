@@ -447,5 +447,16 @@ lemma spec_map_strictHenselizationEval_comp_strictLocalizationToBase :
       (a ≫ t) ≫ inv t ≫ h = a ≫ h := by intros; simp
   exact (key _ _ _).trans hyw
 
+/-- The geometric point `s` factors through the closed point of the strict localization: there
+is an embedding `φ` of the residue field of `𝒪^{sh}_{S,s}` into `Ω` such that `s` is the
+composite `Spec Ω ⟶ Spec κ ⟶ S_(s) ⟶ S`. -/
+theorem exists_residueField_hom_strictLocalization :
+    ∃ φ : IsLocalRing.ResidueField (strictHenselization s) →+* Ω,
+      Spec.map (CommRingCat.ofHom (φ.comp (IsLocalRing.residue _))) ≫
+        strictLocalizationToBase s = s := by
+  refine ⟨strictHenselizationResidueFieldEmb s, ?_⟩
+  rw [strictHenselizationResidueFieldEmb_comp_residue, CommRingCat.ofHom_hom]
+  exact spec_map_strictHenselizationEval_comp_strictLocalizationToBase s
+
 
 end AlgebraicGeometry.Scheme

@@ -56,6 +56,17 @@ lemma etale_essImage_etaleOfRestrict {U₀ : (f ⁻¹ᵁ Y₀).toScheme.Etale}
   exact ⟨(etaleOfOpens Y₀).obj V₀,
     ⟨etaleObjEtaleOfOpensIso f Y₀ V₀ ≪≫ (etaleOfRestrict f Y₀).mapIso e⟩⟩
 
+/-- An étale `X`-scheme with empty underlying space is in the essential image of base change
+along any morphism. -/
+lemma etale_essImage_of_isEmpty {X Y : Scheme.{u}} (f : X ⟶ Y) (U : X.Etale) [IsEmpty U.left] :
+    f.Etale.essImage U := by
+  have : IsEmpty (f.Etale.obj (Etale.mk (⊥ : Y.Opens).ι)).left := by
+    constructor
+    intro x
+    exact (pullback.fst (⊥ : Y.Opens).ι f x).2
+  exact ⟨Etale.mk (⊥ : Y.Opens).ι, ⟨MorphismProperty.Over.isoMk (asIso (isInitialOfIsEmpty.to _))
+    (isInitialOfIsEmpty.hom_ext _ _)⟩⟩
+
 
 end Scheme.Hom
 

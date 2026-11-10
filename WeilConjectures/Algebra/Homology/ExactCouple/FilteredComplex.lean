@@ -115,6 +115,10 @@ lemma coupleg_eq_zero (i j : ℤ × ℤ) (h : i + 0 ≠ j) : F.coupleg i j = 0 :
   rintro rfl
   exact h (add_zero _)
 
+/-- Reduce statements about the maps of the couple to the case of the standard indices. -/
+private lemma eq_of_add (i j : ℤ × ℤ) (a : ℤ × ℤ) (h : i + a = j) : j = (i.1 + a.1, i.2 + a.2) :=
+  h.symm
+
 
 lemma coupleα_coupleg (i j k : ℤ × ℤ) : F.coupleα i j ≫ F.coupleg j k = 0 := by
   by_cases hij : i + ((-1, 0) : ℤ × ℤ) = j

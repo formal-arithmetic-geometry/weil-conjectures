@@ -152,6 +152,10 @@ lemma d_totalπ_zero_succ (n q : ℕ) :
   split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) |
     (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
 
+lemma d_totalπ_zero_zero (n : ℕ) :
+    (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) 0 0 = 0 := by
+  rw [totalπ_eq_zero _ _ _ _ (by omega), comp_zero]
+
 
 section Staircase
 

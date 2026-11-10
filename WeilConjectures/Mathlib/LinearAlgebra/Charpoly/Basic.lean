@@ -175,6 +175,19 @@ theorem charpoly_eq_prod_charpoly_mapQ_of_le (f : V →ₗ[K] V) (F : ℕ → Su
   ext x
   rfl
 
+/-- The characteristic polynomial of the endomorphism induced by `f` on an invariant
+subquotient `S ⧸ U` divides the characteristic polynomial of `f`: the eigenvalues of `f` on a
+subquotient occur among those on `V`, with multiplicity.
+(blueprint: `sk-p-linear-filtration`) -/
+theorem charpoly_mapQ_restrict_dvd (f : V →ₗ[K] V) {U S : Submodule K V}
+    (hU : U ≤ U.comap f) (hS : S ≤ S.comap f) :
+    ((U.comap S.subtype).mapQ (U.comap S.subtype) (f.restrict hS)
+      fun _ hx ↦ hU hx).charpoly ∣ f.charpoly := by
+  rw [charpoly_eq_charpoly_restrict_mul_charpoly_mapQ f S hS,
+    charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f.restrict hS) (U.comap S.subtype)
+      fun _ hx ↦ hU hx]
+  exact (dvd_mul_left _ _).mul_right _
+
 
 end Field
 

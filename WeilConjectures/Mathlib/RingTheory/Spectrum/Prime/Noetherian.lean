@@ -33,6 +33,19 @@ of closed subsets stabilize, and there are finitely many irreducible components.
 
 namespace PrimeSpectrum
 
+/-- Blueprint `lem-wf-affine-noetherian-components`: the spectrum of a finitely generated algebra
+`A` over a field `k` is a Noetherian space with finitely many irreducible components.
+
+The ring `A` is Noetherian by the Hilbert basis theorem (`Algebra.FiniteType.isNoetherianRing`),
+so `Spec A` is a Noetherian space (`PrimeSpectrum.instNoetherianSpace`), and a Noetherian space
+has finitely many irreducible components. -/
+theorem finite_irreducibleComponents_of_finiteType (k A : Type*) [Field k] [CommRing A]
+    [Algebra k A] [Algebra.FiniteType k A] :
+    TopologicalSpace.NoetherianSpace (PrimeSpectrum A) ∧
+      (irreducibleComponents (PrimeSpectrum A)).Finite := by
+  have := Algebra.FiniteType.isNoetherianRing k A
+  exact ⟨inferInstance, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents⟩
+
 
 end PrimeSpectrum
 

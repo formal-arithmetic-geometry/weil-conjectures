@@ -147,6 +147,18 @@ variable (D : Type u) [CommRing D] [Algebra Γ(S, U'') D] [Algebra Γ(S, U) D]
   (hD : algebraMap Γ(S, U) D =
     (algebraMap Γ(S, U'') D).comp (S.presheaf.map (homOfLE hle).op).hom)
 
+/-- For affine opens `U'' ≤ U`, an ind-étale `Γ(S, U'')`-algebra is ind-étale over `Γ(S, U)`
+(through the restriction map, which is étale). -/
+lemma indEtale_of_le [Algebra.IndEtale Γ(S, U'') D] : Algebra.IndEtale Γ(S, U) D := by
+  have h := etale_presheafMap_homOfLE hU hU'' hle
+  algebraize [(S.presheaf.map (homOfLE hle).op).hom]
+  have : Algebra.IndEtale Γ(S, U) Γ(S, U'') := by
+    rw [Algebra.IndEtale.iff_ind_etale]
+    exact ObjectProperty.le_ind _ _ h
+  rw [← RingHom.IndEtale.algebraMap_iff, hD]
+  exact RingHom.IndEtale.comp ((RingHom.IndEtale.algebraMap_iff _ _).mpr ‹_›)
+    ((RingHom.IndEtale.algebraMap_iff _ _).mpr this)
+
 
 include hU hU'' hD in
 /-- For affine opens `U'' ≤ U`, a weakly étale `Γ(S, U'')`-algebra is weakly étale over

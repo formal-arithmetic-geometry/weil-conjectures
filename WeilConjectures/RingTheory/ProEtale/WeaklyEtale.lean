@@ -24,6 +24,24 @@ universe u u₁ u₂ u₃ u₄ u₅
 
 open TensorProduct
 
+lemma RingHom.Flat.iff_ringEquiv_comp {R S T : Type*} [CommRing R] [CommRing S]
+    [CommRing T] {f : R →+* S}
+    {e : S ≃+* T} :
+    (e.toRingHom.comp f).Flat ↔ f.Flat := by
+  refine ⟨fun hf ↦ ?_, fun hf ↦ .comp hf (.of_bijective e.bijective)⟩
+  have : f = e.symm.toRingHom.comp (e.toRingHom.comp f) := by ext; simp
+  rw [this]
+  exact .comp hf (.of_bijective e.symm.bijective)
+
+lemma RingHom.Flat.iff_comp_ringEquiv {R S T : Type*} [CommRing R] [CommRing S]
+    [CommRing T] {f : R →+* S}
+    {e : T ≃+* R} :
+    (f.comp e.toRingHom).Flat ↔ f.Flat := by
+  refine ⟨fun hf ↦ ?_, fun hf ↦ .comp (.of_bijective e.bijective) hf⟩
+  have : f = (f.comp e.toRingHom).comp e.symm.toRingHom := by ext; simp
+  rw [this]
+  exact .comp (.of_bijective e.symm.bijective) hf
+
 
 def TensorProduct.congrRing
     {R S : Type*} (M N : Type*) [CommSemiring R] [CommSemiring S]
@@ -117,6 +135,34 @@ lemma TensorProduct.uliftEquiv_tmul
 open CategoryTheory Limits
 
 -- `(S ⊗[R] S) (T ⊗[R] A) S (T ⊗[S] A)`
+lemma RingHom.Flat.lift_includeLeft_includeRight {R S : Type u} (T A : Type u)
+    [CommRing R] [CommRing S] [CommRing T]
+    [CommRing A] [Algebra R S]
+    [Algebra R T] [Algebra S T] [IsScalarTower R S T]
+    [Algebra R A] [Algebra S A] [IsScalarTower R S A]
+    (h : (Algebra.TensorProduct.lmul' (S := S) R).Flat) :
+    (Algebra.TensorProduct.lift
+      (Algebra.TensorProduct.includeLeft)
+      (Algebra.TensorProduct.includeRight.restrictScalars R)
+      (fun _ _ ↦ .all _ _) : T ⊗[R] A →ₐ[T] T ⊗[S] A).Flat := by
+  rw [← CommRingCat.flat_ofHom_iff] at h ⊢
+  apply MorphismProperty.of_isPushout _ h
+  · exact CommRingCat.ofHom
+      (Algebra.TensorProduct.map (IsScalarTower.toAlgHom R S T)
+      (IsScalarTower.toAlgHom R S A)).toRingHom
+  · exact CommRingCat.ofHom
+      (RingHom.comp (Algebra.TensorProduct.includeLeft (S := R)).toRingHom (algebraMap S T))
+  · refine .of_iso
+      (isPushout_map_codiagonal (CommRingCat.ofHom <| algebraMap S T)
+        (CommRingCat.ofHom <| algebraMap S A) (CommRingCat.ofHom <| algebraMap R S))
+      ?_ ?_ (.refl _) ?_ ?_ ?_ ?_ ?_
+    · exact (CommRingCat.isPushout_tensorProduct R S S).isoPushout.symm
+    · exact pushout.congrHom (by simp [IsScalarTower.algebraMap_eq R S T])
+          (by simp [IsScalarTower.algebraMap_eq R S A]) ≪≫
+        (CommRingCat.isPushout_tensorProduct R T A).isoPushout.symm
+    · exact (CommRingCat.isPushout_tensorProduct S T A).isoPushout.symm
+    all_goals ext <;> simp
+
 
 namespace Algebra
 

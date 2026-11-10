@@ -219,6 +219,14 @@ noncomputable def homDualEquiv (M N : FrobeniusModule.{max u v, v} K) :
     exact ((homDualLinearEquiv M N).apply_symm_apply _).trans
       (congrArg _ ((homDualLinearEquiv M N).apply_symm_apply T).symm)
 
+/-- `homDualEquiv` sends the map `φ ↦ φ(x) y` to `x ⊗ y`. -/
+lemma homDualEquiv_symm_tmul (M N : FrobeniusModule.{max u v, v} K) (x : M.carrier)
+    (y : N.carrier) (φ : Module.Dual K M.carrier) :
+    (show M.dual.carrier →ₗ[K] N.carrier from
+      (homDualEquiv M N).toLinearEquiv.symm (x ⊗ₜ y)) φ =
+      φ x • y :=
+  homDualLinearEquiv_symm_tmul M N x y φ
+
 
 /-- An isomorphism `P ≅ Hom(A, N)` together with `A ≅ M^∨` gives `P ≅ M ⊗ N`, through
 `Hom(M^∨, N) ≅ M ⊗ N` (`FrobeniusModule.homDualEquiv`). -/

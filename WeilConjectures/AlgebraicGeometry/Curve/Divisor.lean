@@ -221,6 +221,12 @@ lemma Divisor.comap_apply (D : X.Divisor) (P : closedPoints U) :
     Divisor.comap i D P = D (i.closedPointsMap P) :=
   rfl
 
+lemma Divisor.surjective_comap : Function.Surjective (Divisor.comap i) := by
+  intro D
+  refine ⟨Finsupp.mapDomain i.closedPointsMap D, ?_⟩
+  ext P
+  rw [comap_apply, Finsupp.mapDomain_apply_of_injective i.closedPointsMap_injective]
+
 
 /-- A divisor restricts to zero on `U` iff it is supported outside the image of `U`. -/
 lemma Divisor.comap_eq_zero_iff (D : X.Divisor) :

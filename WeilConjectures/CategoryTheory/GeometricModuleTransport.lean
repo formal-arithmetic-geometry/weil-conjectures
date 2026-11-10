@@ -77,6 +77,15 @@ private noncomputable def linearLift
         ext x
         exact CategoryTheory.congr_fun (α.hom.naturality f) x }
 
+private theorem linearLift_underlying
+    {C : Type uC} [Category.{vC} C]
+    {J : GrothendieckTopology C}
+    [EssentiallySmall.{u} C]
+    {R : Sheaf J CommRingCat.{u}}
+    {M N : SheafOfModules.{u} (ringBase R)}
+    (α : (moduleSets R).obj M ⟶ (moduleSets R).obj N) (ha hs) :
+    (moduleSets R).map (linearLift α ha hs) = α := rfl
+
 
 private noncomputable def sectionPair
     {C : Type uC} [Category.{vC} C]

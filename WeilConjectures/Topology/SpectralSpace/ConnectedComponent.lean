@@ -253,6 +253,12 @@ variable [SpectralSpace X]
 
 open CategoryTheory TopCat Continuous Limits
 
+theorem ConnectedComponents.spectralSpace_of_isPullback {Y T : Type u} [TopologicalSpace Y]
+    [TopologicalSpace T] [CompactSpace T] [T2Space T] [TotallyDisconnectedSpace T]
+    {f : C(Y, X)} {g : C(Y, T)} {i : C(T, ConnectedComponents X)}
+    (pb : IsPullback (ofHom g) (ofHom f) (ofHom i) (ofHom ⟨mk, continuous_coe⟩)) :
+    SpectralSpace Y := pb.spectralSpace
+
 
 omit [SpectralSpace X] in
 /-- The first projection of a pullback along the connected components map is surjective. -/

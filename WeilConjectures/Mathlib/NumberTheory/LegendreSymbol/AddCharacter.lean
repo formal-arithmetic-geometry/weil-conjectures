@@ -83,10 +83,33 @@ theorem isPrimitive_compTrace [FiniteDimensional K L] [Algebra.IsSeparable K L]
     {ψ : AddChar K R} (hψ : ψ ≠ 1) : (ψ.compTrace L).IsPrimitive :=
   IsPrimitive.of_ne_one (compTrace_ne_one hψ)
 
+/-- Transitivity of induced characters: for a tower `M / L / K` of finite extensions,
+`(ψ_L)_M = ψ_M`, i.e. `ψ(Tr_{L/K}(Tr_{M/L}(x))) = ψ(Tr_{M/K}(x))`. In particular
+`ψₙ = ψ ∘ Tr_{𝔽_{qⁿ}/k₀} = Ψ ∘ Tr_{𝔽_{qⁿ}/𝔽_p}`.
+(blueprint: `def-fd-additive-character`; sketch blueprint: `def-fd-additive-character`) -/
+theorem compTrace_compTrace [IsScalarTower K L M] [Module.Free K L] [Module.Finite K L]
+    [Module.Free L M] [Module.Finite L M] (ψ : AddChar K R) :
+    (ψ.compTrace L).compTrace M = ψ.compTrace M := by
+  ext x
+  simp [Algebra.trace_trace]
+
 
 end CompTrace
 
 section Orthogonality
+
+/-- **Orthogonality of an additive character.** For an additive character `ψ` of a finite
+group `A` with values in a domain and `c ∈ R`,
+`∑_{x ∈ A} c ψ(x) = c · #A` if `ψ = 1` and `0` otherwise. Applied to `ψ_a = ψ(a ·)` on
+`k₀ = 𝔽_q` this is `∑_x c ψ_a(x) = c q` or `0`.
+(blueprint: `lem-fd-character-orthogonality`; sketch blueprint: `lem-fd-additive-orthogonality`) -/
+theorem sum_const_mul_eq_ite {A : Type*} [AddGroup A] [Fintype A] [IsDomain R]
+    (ψ : AddChar A R) (c : R) [Decidable (ψ = 1)] :
+    ∑ x, c * ψ x = if ψ = 1 then c * Fintype.card A else 0 := by
+  rw [← Finset.mul_sum]
+  split_ifs with h
+  · rw [sum_eq_card_of_eq_one h]
+  · rw [sum_eq_zero_of_ne_one h, mul_zero]
 
 
 /-- **Additive orthogonality over `L`.** For a nontrivial additive character `ψ` of `K`, a

@@ -179,6 +179,11 @@ noncomputable def reduction (m n : ℕ) : IntegralAdicH S p n →ₗ[ℤ_[p]] Fi
   Ext.postcompLinearMap (integralSmulRingHom S p) (finiteSmulRingHom S p m)
     (reductionSheafMap S p m) (reductionSheafMap_comm S p m) n
 
+lemma reduction_apply (m n : ℕ) (x : IntegralAdicH S p n) :
+    reduction S p m n x = Ext.comp (C := Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1})
+      x (Ext.mk₀ (reductionSheafMap S p m)) (add_zero n) :=
+  rfl
+
 
 /-- `pᵐ` kills `Hⁿ(S, ℤ/pᵐ)`. -/
 lemma pow_smul_finiteAdicH (m n : ℕ) (y : FiniteAdicH S p m n) : (p : ℤ_[p]) ^ m • y = 0 := by

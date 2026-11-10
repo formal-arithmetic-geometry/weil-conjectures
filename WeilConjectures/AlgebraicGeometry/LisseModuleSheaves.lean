@@ -730,5 +730,173 @@ private noncomputable def recoveredModuleSheaf
     (Presheaf.isSheaf_iff_isSheaf_forget _ _
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).mpr A.property⟩
 
+private theorem recoveredModuleSheaf_str
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (S : ModuleObjectStruct Λ A) :
+    underlyingModuleObjectStruct (recoveredModuleSheaf A S) = S := by
+  have hS : S.IsUnderlying (recoveredModuleSheaf A S) := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · intro U x
+      change S.add.hom.app U x = S.add.hom.app U
+        (sectionPair A A U ((prod.fst : A ⨯ A ⟶ A).hom.app U x)
+          ((prod.snd : A ⨯ A ⟶ A).hom.app U x))
+      rw [sectionPair_eta]
+    · intro U x
+      change S.zero.hom.app U x = S.zero.hom.app U (sectionPoint U)
+      rw [sectionPoint_unique U x]
+    · intro U x
+      rfl
+    · intro r U x
+      rfl
+  exact (existsUnique_moduleObjectStruct_isUnderlying (recoveredModuleSheaf A S)).unique
+    (existsUnique_moduleObjectStruct_isUnderlying (recoveredModuleSheaf A S)).exists.choose_spec hS
+
+private theorem lisseToModuleObject_surjective [Finite Λ] :
+    Function.Surjective (lisseToModuleObject Y Λ).obj := by
+  intro A
+  let F := recoveredModuleSheaf A.sheaf A.str
+  have hF : IsLisseModuleSheaf F :=
+    (lisseModuleSheaf_iff_underlying_finiteLocallyConstant F).mpr A.isFLC
+  refine ⟨⟨F, hF⟩, ?_⟩
+  have h := recoveredModuleSheaf_str A.sheaf A.str
+  cases A
+  dsimp only [lisseToModuleObject, F] at h ⊢
+  congr 1
+
+private theorem moduleCat_ext_operations {M N : ModuleCat.{u + 1} Λ}
+    (hc : (M : Type (u + 1)) = N)
+    (ha : HEq M.isAddCommGroup.add N.isAddCommGroup.add)
+    (hm : HEq M.isModule.smul N.isModule.smul) : M = N := by
+  cases M
+  cases N
+  rename_i M mA mM N nA nM
+  change M = N at hc
+  cases hc
+  have hA : mA = nA := AddCommGroup.ext (eq_of_heq ha)
+  cases hA
+  have hM : mM = nM := Module.ext' _ _
+    (fun r x ↦ congrFun (congrFun (eq_of_heq hm) r) x)
+  cases hM
+  rfl
+
+private theorem recoveredModuleSheaf_obj
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : Y.Etaleᵒᵖ) :
+    (recoveredModuleSheaf ((sheafForget _).obj F)
+      (underlyingModuleObjectStruct F)).obj.obj U = F.obj.obj U := by
+  have hF := (existsUnique_moduleObjectStruct_isUnderlying F).exists.choose_spec
+  change (underlyingModuleObjectStruct F).IsUnderlying F at hF
+  refine moduleCat_ext_operations
+    (M := (recoveredModuleSheaf ((sheafForget _).obj F)
+      (underlyingModuleObjectStruct F)).obj.obj U) (N := F.obj.obj U) rfl ?_ ?_
+  · change HEq (fun x y : F.obj.obj U ↦ (underlyingModuleObjectStruct F).add.hom.app U
+      (sectionPair ((sheafForget _).obj F) ((sheafForget _).obj F) U x y))
+      (fun x y : F.obj.obj U ↦ x + y)
+    apply heq_of_eq
+    funext x y
+    rw [hF.1, sectionPair_fst, sectionPair_snd]
+    rfl
+  · change HEq (fun r (x : F.obj.obj U) ↦
+      ((underlyingModuleObjectStruct F).smul r).hom.app U x)
+      (fun r (x : F.obj.obj U) ↦ r • x)
+    apply heq_of_eq
+    funext r x
+    exact hF.2.2.2 r U x
+
+private theorem moduleCat_hom_hext
+    {M N P Q : ModuleCat.{u + 1} Λ} (f : M ⟶ N) (g : P ⟶ Q)
+    (hM : M = P) (hN : N = Q)
+    (h : HEq (fun x ↦ f x) (fun x ↦ g x)) : HEq f g := by
+  cases hM
+  cases hN
+  apply heq_of_eq
+  apply ConcreteCategory.hom_ext
+  exact congrFun (eq_of_heq h)
+
+private theorem recoveredModuleSheaf_eq
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    recoveredModuleSheaf ((sheafForget _).obj F) (underlyingModuleObjectStruct F) = F := by
+  apply ObjectProperty.FullSubcategory.ext
+  apply CategoryTheory.Functor.hext
+  · exact recoveredModuleSheaf_obj F
+  · intro U V f
+    apply moduleCat_hom_hext _ _ (recoveredModuleSheaf_obj F U)
+      (recoveredModuleSheaf_obj F V)
+    rfl
+
+private theorem lisseToModuleObject_injective [Finite Λ] :
+    Function.Injective (lisseToModuleObject Y Λ).obj := by
+  intro F G h
+  apply ObjectProperty.FullSubcategory.ext
+  have hS := congrArg (fun A ↦ recoveredModuleSheaf A.sheaf A.str) h
+  simpa only [lisseToModuleObject, recoveredModuleSheaf_eq] using hS
+
+private theorem lisseToModuleObject_faithful [Finite Λ] :
+    (lisseToModuleObject Y Λ).Faithful where
+  map_injective := by
+    intro F G f g h
+    apply ObjectProperty.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply ConcreteCategory.hom_ext
+    intro x
+    exact congrArg (fun k ↦ k.hom.hom.app U x) h
+
+private theorem lisseToModuleObject_full [Finite Λ] :
+    (lisseToModuleObject Y Λ).Full where
+  map_surjective := by
+    intro F G f
+    have hF := (existsUnique_moduleObjectStruct_isUnderlying F.obj).exists.choose_spec
+    have hG := (existsUnique_moduleObjectStruct_isUnderlying G.obj).exists.choose_spec
+    change (underlyingModuleObjectStruct F.obj).IsUnderlying F.obj at hF
+    change (underlyingModuleObjectStruct G.obj).IsUnderlying G.obj at hG
+    let φ : F.obj ⟶ G.obj := ObjectProperty.homMk
+      { app := fun U ↦ ModuleCat.ofHom
+          { toFun := f.hom.hom.app U
+            map_add' := fun x y ↦ by
+              have h := sheafType_congr f.add U
+                (sectionPair ((sheafForget _).obj F.obj) ((sheafForget _).obj F.obj) U x y)
+              dsimp only [lisseToModuleObject] at h
+              simp only [sheafType_comp_apply, hF.1, hG.1,
+                sheafType_map_fst_apply, sheafType_map_snd_apply, sectionPair_fst,
+                sectionPair_snd] at h
+              exact h
+            map_smul' := fun r x ↦ by
+              have h := sheafType_congr (f.smul r) U x
+              dsimp only [lisseToModuleObject] at h
+              simp only [sheafType_comp_apply] at h
+              rw [hF.2.2.2, hG.2.2.2] at h
+              exact h }
+        naturality := fun U V g ↦ by
+          apply ConcreteCategory.hom_ext
+          intro x
+          exact ConcreteCategory.congr_hom (f.hom.hom.naturality g) x }
+    refine ⟨ObjectProperty.homMk φ, ?_⟩
+    apply LambdaModuleObject.Hom.ext
+    rfl
+
+/-- Clause (2): the functor sending a lisse sheaf of left `Λ`-modules to its underlying sheaf
+of sets with its addition, zero, negation and scalar multiplications is an isomorphism of
+categories (an equivalence that is bijective on objects) onto the `Λ`-module objects of
+`FLC(Y)`. Source: Stacks Project, Lemma 0DV5 (2)--(3)
+(blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
+
+Proof: by clause (1) the functor lands in `FLC(Y)`. Conversely a module object of `FLC(Y)`
+gives on every `U` a `Λ`-module structure on its sections, compatible with restriction, so a
+sheaf of `Λ`-modules, lisse by clause (1). Forgetting and restoring the operations leaves
+every operation unchanged, and a module object already has exactly the corresponding
+sheaf-of-modules structure. A map is preserved and recovered precisely when it commutes with
+addition, zero, negation and scalar multiplication. So the functor is bijective on objects and
+on morphisms: an isomorphism of categories, hence an equivalence. -/
+theorem lisseToModuleObject_isIso_of_categories [Finite Λ] :
+    (lisseToModuleObject Y Λ).IsEquivalence ∧
+      Function.Bijective (lisseToModuleObject Y Λ).obj := by
+  let : (lisseToModuleObject Y Λ).EssSurj := ⟨fun A ↦ by
+    obtain ⟨F, hF⟩ := lisseToModuleObject_surjective (Y := Y) (Λ := Λ) A
+    exact ⟨F, ⟨eqToIso hF⟩⟩⟩
+  let : (lisseToModuleObject Y Λ).Faithful := lisseToModuleObject_faithful
+  let : (lisseToModuleObject Y Λ).Full := lisseToModuleObject_full
+  exact ⟨Functor.IsEquivalence.mk, lisseToModuleObject_injective,
+    lisseToModuleObject_surjective⟩
+
 
 end AlgebraicGeometry.Scheme

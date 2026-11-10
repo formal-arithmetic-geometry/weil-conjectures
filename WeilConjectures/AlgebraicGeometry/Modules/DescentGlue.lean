@@ -351,6 +351,10 @@ noncomputable def glueProj (a : J) : descentGlue D ⟶ (pushforward (f a)).obj (
       naturality _ _ _ := rfl }
     fun _ _ _ ↦ rfl⟩
 
+lemma glueProj_app (a : J) {V : S.Opens} (s : Γ(descentGlue D, V)) :
+    (glueProj D a).app V s = glueVal D a s :=
+  rfl
+
 
 variable (D) in
 /-- The counit `(f a)^* (descentGlue D) ⟶ D a`, adjoint to the projection to the `a`-th

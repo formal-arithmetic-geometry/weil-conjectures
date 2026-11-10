@@ -786,6 +786,10 @@ noncomputable def awaySystem (j₀ : J) (r : D.obj j₀) : Under j₀ ⥤ CommRi
     rw [h, D.map_comp]
     rfl
 
+lemma awaySystem_map (j₀ : J) (r : D.obj j₀) {k l : Under j₀} (t : k ⟶ l) :
+    (awaySystem (D := D) j₀ r).map t = awayLift (D.map t.right) _ _ (rAt_map j₀ r t) :=
+  rfl
+
 
 /-- The cocone over `awaySystem` with apex the localization of the colimit. -/
 noncomputable def awaySystemCocone (c : Cocone D) (j₀ : J) (r : D.obj j₀) :
@@ -802,6 +806,10 @@ noncomputable def awaySystemCocone (c : Cocone D) (j₀ : J) (r : D.obj j₀) :
         rw [awayLift_algebraMap, awayLift_algebraMap, awayLift_algebraMap]
         congr 1
         exact coconeι_w_apply c t.right x }
+
+lemma awaySystemCocone_app (c : Cocone D) (j₀ : J) (r : D.obj j₀) (k : Under j₀) :
+    (awaySystemCocone c j₀ r).ι.app k = awayLift (coconeι c k.right) _ _ (rAt_cocone j₀ r k) :=
+  rfl
 
 
 /-- Every element of the localization of the colimit lifts to a stage. -/
@@ -1778,6 +1786,32 @@ lemma awaySystemCocone_w_apply (c : Cocone D) (j' : J) (r : D.obj j')
     _ = ((awaySystemCocone c j' r).ι.app m).hom x :=
         congrArg (fun q ↦ q.hom x) ((awaySystemCocone c j' r).w u)
 
+/-- Generalized form of `pieceChi_push` with an arbitrary target element. -/
+lemma pieceChi_push' {j₀ : J} {A₀ : CommRingCat.{u}} {f₀ : D.obj j₀ ⟶ A₀}
+    {k : Under j₀} (selt : D.obj k.right) (q : A₀ ⟶ CommRingCat.of (Localization.Away selt))
+    (hq : f₀ ≫ q =
+      D.map k.hom ≫ CommRingCat.ofHom (algebraMap (D.obj k.right) (Localization.Away selt)))
+    {l : Under j₀} (t : k ⟶ l) (selt' : D.obj l.right) (h : (D.map t.right).hom selt = selt')
+    (hq' : f₀ ≫ q ≫ awayLift (D.map t.right) selt selt' h =
+      D.map l.hom ≫ CommRingCat.ofHom (algebraMap (D.obj l.right) (Localization.Away selt'))) :
+    (pushSystem j₀ f₀).map t ≫ pieceChi f₀ l selt'
+        (q ≫ awayLift (D.map t.right) selt selt' h) hq' =
+      pieceChi f₀ k selt q hq ≫ awayLift (D.map t.right) selt selt' h := by
+  apply (pushSquare j₀ f₀ k).hom_ext
+  · refine CommRingCat.hom_ext (RingHom.ext fun b ↦ ?_)
+    change (pieceChi f₀ l selt' _ hq').hom
+        (((pushSystem j₀ f₀).map t).hom ((pushInl j₀ f₀ k).hom b)) =
+      (awayLift (D.map t.right) selt selt' h).hom
+        ((pieceChi f₀ k selt q hq).hom ((pushInl j₀ f₀ k).hom b))
+    rw [pushInl_map_apply, pieceChi_inl, pieceChi_inl, awayLift_algebraMap]
+  · refine CommRingCat.hom_ext (RingHom.ext fun a ↦ ?_)
+    change (pieceChi f₀ l selt' _ hq').hom
+        (((pushSystem j₀ f₀).map t).hom ((pushInr j₀ f₀ k).hom a)) =
+      (awayLift (D.map t.right) selt selt' h).hom
+        ((pieceChi f₀ k selt q hq).hom ((pushInr j₀ f₀ k).hom a))
+    rw [pushInr_map_apply, pieceChi_inr, pieceChi_inr]
+    rfl
+
 
 set_option maxHeartbeats 1600000 in
 -- The proof descends many pieces of data stage by stage through a long chain of filtered
@@ -2354,6 +2388,13 @@ lemma of_isColimit {R S : CommRingCat.{u}} (f : R ⟶ S) (J : Type u) [SmallCate
     (htc : ∀ i, (t.app i).hom.IndZariski ∧ t.app i ≫ c.app i = f) : f.hom.IndZariski := by
   refine (iff_ind_indZariski _).mpr ⟨J, ‹_›, ‹_›, D, t, c, hc, fun j ↦ ⟨?_, (htc j).2⟩⟩
   exact (htc j).1
+
+theorem _root_.Algebra.IndZariski.iff_ind_indZariksi [Algebra R S] :
+    Algebra.IndZariski R S ↔ ObjectProperty.ind.{u}
+      (RingHom.toObjectProperty RingHom.IndZariski R) (.of R S) :=
+  (algebraMap_iff (R := R) (S := S)).symm.trans
+    ((iff_ind_indZariski _).trans
+      respectsIso.ind_toMorphismProperty_iff_ind_toObjectProperty)
 
 
 /-- Ind-Zariski ring homomorphisms are stable under base change. -/

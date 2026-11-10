@@ -36,6 +36,14 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
+/-- **A smooth morphism is flat and locally of finite presentation.** Both are Mathlib instances
+for `Smooth f`.
+
+(blueprint: `lem-pc-smooth-flat`) -/
+theorem Smooth.flat_and_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f] :
+    Flat f ∧ LocallyOfFinitePresentation f :=
+  ⟨inferInstance, inferInstance⟩
+
 
 /-- **Smoothness by flatness and smooth fibres** (blueprint `lem-pc-smooth-characterization`). A
 morphism `f : X ⟶ Y` is smooth if and only if it is flat, locally of finite presentation, and

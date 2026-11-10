@@ -91,11 +91,18 @@ variable {A A' E : Type*} [CommRing A] [CommRing A'] [CommRing E] [Algebra A A']
 lemma δ_smul (a' : A') (e : E) : D.δ (a' • e) = a' • D.δ e :=
   map_smul D.δ a' e
 
+lemma δ_algebraMap (a' : A') : D.δ (algebraMap A' E a') = a' ⊗ₜ 1 := by
+  rw [AlgHom.commutes]
+  rfl
+
 
 /-- The descended algebra of a descent datum: the `A`-subalgebra of `E` consisting of the
 elements `e` with `δ e = 1 ⊗ e`. -/
 noncomputable def descended : Subalgebra A E :=
   AlgHom.equalizer (D.δ.restrictScalars A) Algebra.TensorProduct.includeRight
+
+lemma mem_descended_iff (e : E) : e ∈ D.descended ↔ D.δ e = 1 ⊗ₜ e :=
+  Iff.rfl
 
 
 lemma δ_of_mem_descended {e : E} (he : e ∈ D.descended) : D.δ e = 1 ⊗ₜ e :=
@@ -134,6 +141,12 @@ private lemma coe_δ' (e : E) :
     Algebra.TensorProduct.includeRight).apply_symm_apply ⟨D.δ e, D.δ_mem_tensorEqualizer e⟩)
   rw [AlgHom.tensorEqualizerEquiv_apply, AlgHom.coe_tensorEqualizer] at this
   exact this
+
+private lemma δ'_injective : Function.Injective D.δ' :=
+  fun e₁ e₂ h ↦ by
+    have := congrArg (fun x ↦ Algebra.TensorProduct.map (AlgHom.id A' A') D.descended.val x) h
+    simp only [coe_δ'] at this
+    rw [← D.counit e₁, ← D.counit e₂, this]
 
 
 omit [Module.Flat A A'] in
@@ -187,6 +200,20 @@ end Flat
 section FaithfullyFlat
 
 variable [Module.FaithfullyFlat A A']
+
+/-- If `E` is étale over `A'` and `A'` is faithfully flat over `A`, the descended algebra is
+étale over `A`. -/
+theorem etale_descended [Algebra.Etale A' E] : Algebra.Etale A D.descended :=
+  have : Algebra.Etale A' (A' ⊗[A] D.descended) := Algebra.Etale.of_equiv D.descendedEquiv.symm
+  Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat A'
+
+/-- If `E` is of finite presentation over `A'` and `A'` is faithfully flat over `A`, the
+descended algebra is of finite presentation over `A`. -/
+theorem finitePresentation_descended [Algebra.FinitePresentation A' E] :
+    Algebra.FinitePresentation A D.descended :=
+  have : Algebra.FinitePresentation A' (A' ⊗[A] D.descended) :=
+    Algebra.FinitePresentation.equiv D.descendedEquiv.symm
+  Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat A'
 
 
 end FaithfullyFlat

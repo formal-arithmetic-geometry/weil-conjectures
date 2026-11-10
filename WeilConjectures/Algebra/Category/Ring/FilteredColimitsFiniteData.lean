@@ -66,5 +66,55 @@ end
 variable {J : Type uJ} [Category.{vJ} J] [IsFiltered J] {F : J ⥤ CommRingCat.{u}}
   {c : Cocone F} [PreservesColimit F (forget CommRingCat)]
 
+/-- Polynomial expressions over `ℤ` commute with ring homomorphisms. -/
+lemma aeval_comp_hom {R S : CommRingCat.{u}} (f : R ⟶ S) {σ : Type*} (y : σ → R)
+    (P : MvPolynomial σ ℤ) : MvPolynomial.aeval (fun a ↦ f (y a)) P = f (MvPolynomial.aeval y P) :=
+  (MvPolynomial.comp_aeval_apply (f := y) f.hom.toIntAlgHom P).symm
+
+/-- Blueprint `lemma-nagata-filtered-colimit-finite-data`: Finite data and finite relations
+descend in a filtered colimit.
+
+Let `c` be a colimit of a filtered diagram `F` of commutative rings. Given finitely many
+elements `x : σ → c.pt` and finitely many equalities `P l (x) = Q l (x)` between ring
+expressions `P l, Q l : MvPolynomial σ ℤ` in them, there is a stage `j` and lifts
+`y : σ → F.obj j` of the `x` such that all the equalities hold for `y`, and after every
+transition `F.obj j ⟶ F.obj k`. -/
+theorem exists_lift_forall_aeval_eq (hc : IsColimit c) {σ ι : Type*} [Finite σ] [Finite ι]
+    (x : σ → c.pt) (P Q : ι → MvPolynomial σ ℤ)
+    (h : ∀ l, MvPolynomial.aeval x (P l) = MvPolynomial.aeval x (Q l)) :
+    ∃ (j : J) (y : σ → F.obj j), (∀ a, c.ι.app j (y a) = x a) ∧
+      ∀ (k : J) (f : j ⟶ k) (l : ι), MvPolynomial.aeval (fun a ↦ F.map f (y a)) (P l) =
+        MvPolynomial.aeval (fun a ↦ F.map f (y a)) (Q l) := by
+  classical
+  have := Fintype.ofFinite σ
+  -- Lift all the elements to a common stage.
+  obtain ⟨j₀, hj₀⟩ := exists_forall_mem_range_ι_app F c hc (Finset.univ.image x)
+  choose y₀ hy₀ using fun a ↦ hj₀ (x a) (Finset.mem_image_of_mem x (Finset.mem_univ a))
+  obtain rfl : (fun a ↦ c.ι.app j₀ (y₀ a)) = x := funext hy₀
+  -- The relations hold in the colimit, hence at a later stage.
+  have := Fintype.ofFinite ι
+  obtain ⟨j, f₀, hf₀⟩ := exists_map_eq_zero_of_finset F c hc
+    (Finset.univ.image fun l ↦ MvPolynomial.aeval y₀ (P l) - MvPolynomial.aeval y₀ (Q l))
+    (by
+      simp only [Finset.mem_image, Finset.mem_univ, true_and, forall_exists_index]
+      rintro _ l rfl
+      rw [map_sub, ← aeval_comp_hom, ← aeval_comp_hom, sub_eq_zero]
+      exact h l)
+  refine ⟨j, fun a ↦ F.map f₀ (y₀ a), fun a ↦ ?_, fun k f l ↦ ?_⟩
+  · rw [← CommRingCat.comp_apply, c.w]
+    rfl
+  · have hcomp : (fun a ↦ F.map f (F.map f₀ (y₀ a))) = fun a ↦ F.map (f₀ ≫ f) (y₀ a) := by
+      funext a
+      rw [F.map_comp, CommRingCat.comp_apply]
+    rw [hcomp, aeval_comp_hom, aeval_comp_hom, F.map_comp, CommRingCat.comp_apply,
+      CommRingCat.comp_apply, ← sub_eq_zero, ← map_sub, ← map_sub,
+      hf₀ _ (Finset.mem_image_of_mem _ (Finset.mem_univ l)), map_zero]
+
+/-- Polynomial identities between elements of a stage persist along every transition. -/
+lemma aeval_map_eq_of_aeval_eq {σ : Type*} {j k : J} (f : j ⟶ k) (y : σ → F.obj j)
+    {P Q : MvPolynomial σ ℤ} (h : MvPolynomial.aeval y P = MvPolynomial.aeval y Q) :
+    MvPolynomial.aeval (fun a ↦ F.map f (y a)) P = MvPolynomial.aeval (fun a ↦ F.map f (y a)) Q :=
+  by rw [aeval_comp_hom, aeval_comp_hom, h]
+
 
 end CommRingCat

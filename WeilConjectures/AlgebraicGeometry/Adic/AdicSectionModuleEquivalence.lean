@@ -572,5 +572,29 @@ noncomputable def comparisonFreeIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (fun (_ : I) ↦ AdicSheaf.unit l X) ≪≫
       Sigma.mapIso (fun (_ : I) ↦ comparisonUnitIso l X)
 
+/-- The free-module comparison preserves each coordinate inclusion.
+Source: Stacks 03CV and 0GMW; the explicit native action and sheafification.
+(blueprint: lem-sf-adic-section-module-equivalence). -/
+theorem comparisonFreeIso_coordinates (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+    (I : Type (u + 1)) (i : I) :
+    (comparisonModuleFunctor l X).map
+        (Sigma.ι (fun (_ : I) ↦ AdicSheaf.unit l X) i) ≫
+          (comparisonFreeIso l X I).hom =
+      (comparisonUnitIso l X).hom ≫ SheafOfModules.ιFree i := by
+  rw [comparisonFreeIso, Iso.trans_hom, ← Category.assoc]
+  have hι : (comparisonModuleFunctor l X).map
+      (Sigma.ι (fun (_ : I) ↦ AdicSheaf.unit l X) i) ≫
+      (PreservesCoproduct.iso (comparisonModuleFunctor l X)
+        (fun (_ : I) ↦ AdicSheaf.unit l X)).hom =
+      Sigma.ι (fun (_ : I) ↦ (comparisonModuleFunctor l X).obj
+        (AdicSheaf.unit l X)) i := by
+    apply (cancel_mono (PreservesCoproduct.iso (comparisonModuleFunctor l X)
+      (fun (_ : I) ↦ AdicSheaf.unit l X)).inv).mp
+    rw [Category.assoc, Iso.hom_inv_id, Category.comp_id, PreservesCoproduct.inv_hom]
+    exact (ι_comp_sigmaComparison (comparisonModuleFunctor l X)
+      (fun (_ : I) ↦ AdicSheaf.unit l X) i).symm
+  rw [hι, Sigma.ι_mapIso_hom]
+  rfl
+
 
 end AlgebraicGeometry.ProEtale

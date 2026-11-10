@@ -97,6 +97,12 @@ noncomputable def gaSheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
 
 variable {X}
 
+/-- Restriction in `𝔾ₐ` along a map `g` of étale `X`-schemes is pullback of functions along
+`g`. -/
+lemma gaPresheaf_map_apply {U V : X.Etale} (g : V ⟶ U) (x : X.gaPresheaf.obj (op U)) :
+    (X.gaPresheaf.map g.op x).down = g.left.appTop x.down :=
+  rfl
+
 
 /-! ### The Čech complexes of `𝔾ₐ` on affine families -/
 
@@ -122,12 +128,20 @@ noncomputable def overΓMap {W W' : Over V} (f : W ⟶ W') :
     congr 3
     exact congrArg (fun g ↦ g.left) (Over.w f)
 
+lemma overΓMap_apply {W W' : Over V} (f : W ⟶ W') (s : OverΓ W') :
+    overΓMap f s = f.left.left.appTop s :=
+  rfl
+
 
 lemma overΓMap_comp {W W' W'' : Over V} (f : W ⟶ W') (g : W' ⟶ W'') (s : OverΓ W'') :
     overΓMap (f ≫ g) s = overΓMap f (overΓMap g s) := by
   change (f.left.left ≫ g.left.left).appTop s = _
   rw [Scheme.Hom.comp_appTop]
   rfl
+
+lemma overΓMap_eq_of_eq {W W' : Over V} {f g : W ⟶ W'} (h : f.left.left = g.left.left)
+    (s : OverΓ W') : overΓMap f s = overΓMap g s := by
+  rw [overΓMap_apply, overΓMap_apply, h]
 
 
 variable (V) in
@@ -142,6 +156,11 @@ noncomputable def gaModulePresheaf : (Over V)ᵒᵖ ⥤ ModuleCat.{u} Γ(V.left,
   map_comp f g := by
     refine ModuleCat.hom_ext (LinearMap.ext fun s ↦ ?_)
     exact overΓMap_comp g.unop f.unop s
+
+lemma gaModulePresheaf_map_apply {W W' : Over V} (f : W ⟶ W')
+    (s : (gaModulePresheaf V).obj (op W')) :
+    (gaModulePresheaf V).map f.op s = overΓMap f s :=
+  rfl
 
 
 /-- The sections of `𝔾ₐ` over `W` are the module `Γ(W, 𝒪)`. -/

@@ -112,6 +112,11 @@ def twist (m : ℤ) : (ℙ(n; S)).Modules :=
   (Scheme.Modules.pullback (toProjInt n S)).obj
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)
 
+lemma twist_def (m : ℤ) :
+    twist n S m = (Scheme.Modules.pullback (toProjInt n S)).obj
+      (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m) :=
+  rfl
+
 
 /-- **`𝒪(0)` is the structure sheaf** of `ℙ(n; S)`. -/
 def unitIsoTwistZero : SheafOfModules.unit (ℙ(n; S)).ringCatSheaf ≅ twist n S 0 :=

@@ -146,6 +146,14 @@ lemma lowerStarGmSheafMap_app_val {V : X.Etale}
         ((Additive.toMul x.down : Γ(pullback V.hom g, ⊤)ˣ) : Γ(pullback V.hom g, ⊤)) :=
   rfl
 
+/-- The value of `gmSheafToLowerStarGmSheaf` on a section, as a function. -/
+lemma gmSheafToLowerStarGmSheaf_app_val {V : X.Etale} (x : X.gmSheaf.obj.obj (op V)) :
+    ((Additive.toMul ((gmSheafToLowerStarGmSheaf g).hom.app (op V) x).down :
+        Γ(pullback V.hom g, ⊤)ˣ) : Γ(pullback V.hom g, ⊤)) =
+      (pullback.fst V.hom g).appTop
+        ((Additive.toMul x.down : Γ(V.left, ⊤)ˣ) : Γ(V.left, ⊤)) :=
+  rfl
+
 
 end Scheme
 
@@ -303,6 +311,10 @@ variable {U : Y.Etale} (σ : U.left ⟶ t.P) (hσ : σ ≫ t.π = U.hom)
 noncomputable def pushforwardGmUnits (x : t.pushforwardGm.obj.obj (op U)) :
     Γ(pullback U.hom t.π, ⊤)ˣ :=
   Additive.toMul x.down
+
+lemma pushforwardGmUnits_add (x y : t.pushforwardGm.obj.obj (op U)) :
+    t.pushforwardGmUnits (x + y) = t.pushforwardGmUnits x * t.pushforwardGmUnits y :=
+  rfl
 
 
 lemma injective_pushforwardGmUnits :

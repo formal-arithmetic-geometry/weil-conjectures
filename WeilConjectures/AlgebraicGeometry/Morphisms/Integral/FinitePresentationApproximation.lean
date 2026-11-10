@@ -127,6 +127,11 @@ noncomputable instance : SmallCategory (FPIndex F E) where
   comp_id g := Subtype.ext (Category.comp_id _)
   assoc g g' g'' := Subtype.ext (Category.assoc _ _ _)
 
+lemma fpHom_comp_val {c d e : FPIndex F E} (g : c ⟶ d) (g' : d ⟶ e) :
+    (g ≫ g').1 = g.1 ≫ g'.1 := rfl
+
+lemma fpHom_id_val (c : FPIndex F E) : (𝟙 c : c ⟶ c).1 = 𝟙 _ := rfl
+
 
 /-- (Implementation) The morphism `V(K') ⟶ V(K)` for `K ≤ K'`. -/
 noncomputable def fpIncl (i : F.I) {K K' : (E i).e.ker.FGSub} (h : K ≤ K') :

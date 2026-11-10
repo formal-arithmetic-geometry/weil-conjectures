@@ -291,6 +291,22 @@ lemma pointSmallEtaleElementsBaseChange_map_val
     ((pointSmallEtaleElementsBaseChange f s).map t).val = f.Etale.map t.val :=
   rfl
 
+/-- `AlgebraicGeometry.Scheme.pointSmallEtaleElementsBaseChange` lies over base change: the
+square
+```
+Elements (pointSmallEtale (s ≫ f)).fiber --- base change ---> Elements (pointSmallEtale s).fiber
+             |                                                             |
+             π                                                             π
+             ↓                                                             ↓
+          Y.Etale ------------------- f.Etale -----------------------> X.Etale
+```
+commutes, on the nose. -/
+lemma pointSmallEtaleElementsBaseChange_comp_π :
+    pointSmallEtaleElementsBaseChange f s ⋙
+        Functor.Elements.π (pointSmallEtale s).fiber =
+      Functor.Elements.π (pointSmallEtale (s ≫ f)).fiber ⋙ f.Etale :=
+  rfl
+
 
 end BaseChange
 

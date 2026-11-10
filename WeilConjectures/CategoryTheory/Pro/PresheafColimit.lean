@@ -31,6 +31,13 @@ open CategoryTheory MorphismProperty Limits
 
 namespace CategoryTheory
 
+lemma IsFinitelyPresentable.exists_eq_of_isColimit_self {C : Type*} [Category* C]
+    {J : Type w} [SmallCategory J] [IsFiltered J] {D : J ⥤ C} {c : Cocone D}
+    (hc : IsColimit c) {X : C} [IsFinitelyPresentable.{w} X]
+    {i : J} (f g : X ⟶ D.obj i) (h : f ≫ c.ι.app i = g ≫ c.ι.app i) :
+    ∃ (j : J) (a : i ⟶ j), f ≫ D.map a = g ≫ D.map a :=
+  exists_eq_of_preservesColimit_coyoneda_self hc _ _ h
+
 
 section
 

@@ -132,6 +132,12 @@ lemma mapIso_π (t : EtaleTorsor M Y) (e : Y ≅ Y') : (t.mapIso e).π = t.π �
 lemma mapIso_vadd (t : EtaleTorsor M Y) (e : Y ≅ Y') (m : M) : (t.mapIso e).vadd m = t.vadd m :=
   rfl
 
+lemma toFiniteEtale_mapIso (t : EtaleTorsor M Y) (e : Y ≅ Y') :
+    (t.mapIso e).toFiniteEtale = (FiniteEtale.mapIso e).obj t.toFiniteEtale := rfl
+
+lemma vaddHom_mapIso (t : EtaleTorsor M Y) (e : Y ≅ Y') (m : M) :
+    (t.mapIso e).vaddHom m = (FiniteEtale.mapIso e).map (t.vaddHom m) := rfl
+
 
 /-- Transport along an isomorphism of the base preserves isomorphism of torsors. -/
 lemma IsIsomorphic.mapIso {t₁ t₂ : EtaleTorsor M Y} (h : t₁.IsIsomorphic t₂) (e : Y ≅ Y') :

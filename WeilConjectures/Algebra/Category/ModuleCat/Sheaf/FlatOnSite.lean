@@ -55,5 +55,28 @@ end SheafOfModules
 
 namespace SheafOfModules
 
+/-- When the site and the coefficients live in one universe, `IsFlatOnSite` agrees with
+`SheafOfModules.IsFlat`, the formalisation of `def-pc-flat-sheaf-modules`
+(auxiliary; not a blueprint node).
+
+Proof: `siteSheafTensorRightIso` identifies `siteSheafTensorRight F` with `tensorRight F` for
+the monoidal structure `SheafOfModules.monoidalCategory R`, and exactness is invariant under
+natural isomorphisms. -/
+theorem isFlatOnSite_iff_isFlat {C : Type uC} [Category.{uC} C] {J : GrothendieckTopology C}
+    [J.WEqualsLocallyBijective AddCommGrpCat.{uC}] [HasWeakSheafify J AddCommGrpCat.{uC}]
+    {R : Sheaf J CommRingCat.{uC}}
+    (F : SheafOfModules.{uC} ((sheafCompose J (forget₂ CommRingCat.{uC} RingCat.{uC})).obj R)) :
+    IsFlatOnSite F ↔ IsFlat F := by
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let e := siteSheafTensorRightIso R F
+  constructor
+  · rintro ⟨h₁, h₂⟩
+    exact ⟨@Limits.preservesFiniteLimits_of_natIso _ _ _ _ _ _ e h₁,
+      @Limits.preservesFiniteColimits_of_natIso _ _ _ _ _ _ e h₂⟩
+  · rintro ⟨h₁, h₂⟩
+    exact ⟨@Limits.preservesFiniteLimits_of_natIso _ _ _ _ _ _ e.symm h₁,
+      @Limits.preservesFiniteColimits_of_natIso _ _ _ _ _ _ e.symm h₂⟩
+
 
 end SheafOfModules

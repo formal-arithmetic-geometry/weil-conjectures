@@ -58,6 +58,11 @@ noncomputable def isColimitSectionsOfIsColimit (hc : IsColimit c) (W : X.ProEt)
     obtain ⟨n, U, -, hUR, hUJ⟩ := exists_finite_cechNerve_of_mem_topology ⟨‹_›, ‹_›⟩ hR
     exact ⟨n, U, hUR, hUJ⟩
 
+lemma abSectionsFunctor_mapCocone_ι_app_apply (W : X.ProEt) (k : K)
+    (t : (F.obj k).obj.obj (op W)) :
+    ((abSectionsFunctor W).mapCocone c).ι.app k t = (c.ι.app k).hom.app (op W) t :=
+  rfl
+
 
 end Large
 

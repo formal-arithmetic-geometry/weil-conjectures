@@ -30,6 +30,82 @@ open scoped ZeroObject
 
 namespace LinearMap
 
+/-- Source: Stacks Project, Remark 0888, the exact-sequence hypothesis
+(blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
+
+The kernel/cokernel formulation is equivalent to the exact-sequence formulation.
+Proof: the inclusion of the kernel, `u`, and the projection to `N / range u` give the
+canonical exact sequence (def-weil-pbc-exact-sequence). Conversely, exactness identifies
+`T` with `ker u` and `Q` with `N / range u` by linear isomorphisms, which preserve
+annihilation by every scalar. Thus the two annihilator conditions are equivalent. -/
+theorem ker_coker_annihilated_iff_exists_exact_sequence
+    {A : Type u} [CommRing A]
+    {M N : Type v} [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
+    (K : Ideal A) (t : ℕ) (u : M →ₗ[A] N) :
+    (K ^ t ≤ Module.annihilator A (ker u) ∧
+      K ^ t ≤ Module.annihilator A (N ⧸ range u)) ↔
+    ∃ (T Q : ModuleCat.{v} A) (i : T ⟶ ModuleCat.of A M)
+      (p : ModuleCat.of A N ⟶ Q),
+      (ComposableArrows.mk₅ (0 : (0 : ModuleCat.{v} A) ⟶ T) i
+        (ModuleCat.ofHom u) p (0 : Q ⟶ (0 : ModuleCat.{v} A))).Exact ∧
+      K ^ t ≤ Module.annihilator A T ∧ K ^ t ≤ Module.annihilator A Q := by
+  constructor
+  · rintro ⟨hker, hcoker⟩
+    refine ⟨ModuleCat.of A (ker u), ModuleCat.of A (N ⧸ range u),
+      ModuleCat.ofHom (ker u).subtype, ModuleCat.ofHom (range u).mkQ, ?_, hker, hcoker⟩
+    refine ⟨⟨?zero⟩, ?exact⟩
+    case zero =>
+      intro i hi
+      have cases : i = 0 ∨ i = 1 ∨ i = 2 ∨ i = 3 := by omega
+      rcases cases with rfl | rfl | rfl | rfl
+      · simp
+      · exact ModuleCat.hom_ext (comp_ker_subtype u)
+      · exact ModuleCat.hom_ext (range_mkQ_comp u)
+      · change ModuleCat.ofHom (range u).mkQ ≫ (0 : _ ⟶ _) = 0
+        simp
+    case exact =>
+      intro i hi
+      have cases : i = 0 ∨ i = 1 ∨ i = 2 ∨ i = 3 := by omega
+      rcases cases with rfl | rfl | rfl | rfl
+      · apply (ShortComplex.moduleCat_exact_iff _).mpr
+        intro x hx
+        refine ⟨0, ?_⟩
+        change 0 = x
+        apply Subtype.ext
+        exact hx.symm
+      · apply (ShortComplex.moduleCat_exact_iff _).mpr
+        intro x hx
+        exact ⟨⟨x, hx⟩, rfl⟩
+      · apply (ShortComplex.moduleCat_exact_iff _).mpr
+        intro x hx
+        exact (Submodule.Quotient.mk_eq_zero _).mp hx
+      · apply (ShortComplex.moduleCat_exact_iff _).mpr
+        intro x _
+        exact (range u).mkQ_surjective x
+  · rintro ⟨T, Q, i, p, hex, hT, hQ⟩
+    have atM := (ShortComplex.moduleCat_exact_iff _).mp (hex.exact 1)
+    have atN := (ShortComplex.moduleCat_exact_iff _).mp (hex.exact 2)
+    change ∀ x : M, u x = 0 → ∃ y : T, i y = x at atM
+    change ∀ y : N, p y = 0 → ∃ x : M, u x = y at atN
+    constructor
+    · intro f hf
+      apply Module.mem_annihilator.mpr
+      intro x
+      obtain ⟨y, hy⟩ := atM (x : M) (LinearMap.mem_ker.mp x.property)
+      apply Subtype.ext
+      change f • (x : M) = 0
+      rw [← hy, ← i.hom.map_smul, Module.mem_annihilator.mp (hT hf) y, map_zero]
+    · intro f hf
+      apply Module.mem_annihilator.mpr
+      intro x
+      induction x using Submodule.Quotient.induction_on with
+      | _ y =>
+        change (range u).mkQ (f • y) = 0
+        apply (Submodule.Quotient.mk_eq_zero _).mpr
+        apply LinearMap.mem_range.mpr
+        apply atN
+        rw [p.hom.map_smul, Module.mem_annihilator.mp (hQ hf) (p y)]
+
 
 /-- Source: Stacks Project, Remark 0888, the final scalar-composite argument
 (blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).

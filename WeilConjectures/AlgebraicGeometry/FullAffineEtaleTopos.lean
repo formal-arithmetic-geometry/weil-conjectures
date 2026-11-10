@@ -307,6 +307,32 @@ theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
   have := fullAffineEtale_dense_subsite S
   exact Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
 
+/-- Source: Stacks 04HR. Proof: use the same dense subsite and small affine hypercovers
+as for sets, and apply Mathlib `Functor.isEquivalence_of_isOneHypercoverDense`
+with coefficients AddCommGrpCat in universe u.
+(blueprint: lem-weil-pbc-affine-etale-ab_equivalence) -/
+theorem fullAffineEtale_ab_equivalence (S : Scheme.{u}) :
+    ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
+  have := fullAffineEtale_oneHypercover_dense S
+  have := fullAffineEtale_dense_subsite S
+  exact Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
+
+/-- Source: Stacks 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
+Proof: combine the proved special cocontinuity and the two restriction equivalences.
+Finite affine refinements identify the finite-cover topology with the induced topology;
+affine image covers and preserved affine pullbacks give one-hypercover density.
+Mathlib's dense-subsite comparison then gives both equivalences directly. -/
+theorem fullAffineEtaleInclusion_special_equivalences (S : Scheme.{u}) :
+    (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings
+      (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage ∧
+    ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type u)
+      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence ∧
+    ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
+  exact ⟨fullAffineEtale_special_cocontinuity S,
+    fullAffineEtale_sets_equivalence S, fullAffineEtale_ab_equivalence S⟩
+
 
 private noncomputable def affineEtaleFreeSectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (U : C) (F : Cᵒᵖ ⥤ AddCommGrpCat.{u}) :
@@ -327,6 +353,25 @@ private noncomputable def affineEtaleSectionsEquiv
   ((sheafificationAdjunction J AddCommGrpCat.{u}).homAddEquiv _ F).trans
     (affineEtaleFreeSectionsEquiv U F.obj)
 
+private lemma affineEtaleSectionsEquiv_naturality
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] (U : C)
+    {F G : Sheaf J AddCommGrpCat.{u}} (f : F ⟶ G)
+    (a : (presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ⟶ F) :
+    affineEtaleSectionsEquiv J U G (a ≫ f) =
+      f.hom.app (op U) (affineEtaleSectionsEquiv J U F a) := by
+  dsimp only [affineEtaleSectionsEquiv, AddEquiv.trans_apply, Adjunction.homAddEquiv_apply]
+  rw [Adjunction.homEquiv_naturality_right]
+  dsimp [affineEtaleFreeSectionsEquiv]
+  rfl
+
+private lemma extZero_postcomp {C : Type*} [Category C] [Abelian C]
+    [HasExt.{w} C] {X F G : C} (f : F ⟶ G) (x : Ext.{w} X F 0) :
+    Ext.addEquiv₀ (x.comp (Ext.mk₀ f) (add_zero 0)) = Ext.addEquiv₀ x ≫ f := by
+  apply (Ext.mk₀_bijective X G).injective
+  simp only [Ext.mk₀_addEquiv₀_apply, ← Ext.mk₀_comp_mk₀]
+
 
 private noncomputable def affineEtaleHZeroSectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
@@ -334,6 +379,302 @@ private noncomputable def affineEtaleHZeroSectionsEquiv
     (U : C) (F : Sheaf J AddCommGrpCat.{u}) :
     Sheaf.H'.{w} F 0 U ≃+ F.obj.obj (op U) :=
   Ext.addEquiv₀.trans (affineEtaleSectionsEquiv J U F)
+
+private lemma affineEtaleHZeroSectionsEquiv_naturality
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{w} (Sheaf J AddCommGrpCat.{u})]
+    (U : C) {F G : Sheaf J AddCommGrpCat.{u}} (f : F ⟶ G) (x : Sheaf.H'.{w} F 0 U) :
+    affineEtaleHZeroSectionsEquiv J U G
+        (((Sheaf.cohomologyPresheafFunctor J 0).map f).app (op U) x) =
+      f.hom.app (op U) (affineEtaleHZeroSectionsEquiv J U F x) := by
+  change affineEtaleSectionsEquiv J U G
+    (Ext.addEquiv₀ (x.comp (Ext.mk₀ f) (add_zero 0))) = _
+  rw [extZero_postcomp, affineEtaleSectionsEquiv_naturality]
+  rfl
+
+private theorem affineEtale_free_restriction (S : Scheme.{u}) (U : S.FullAffineEtale) :
+    Nonempty ((presheafToSheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u}).obj
+        (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
+      ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+        (fullAffineEtaleTopology S) S.smallEtaleTopology).obj
+        ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+          (yoneda.obj U.obj ⋙ AddCommGrpCat.free))) := by
+  let R := (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+    (fullAffineEtaleTopology S) S.smallEtaleTopology
+  have : R.IsEquivalence := fullAffineEtale_ab_equivalence S
+  let E := R.asEquivalence
+  let X := (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (yoneda.obj U.obj ⋙ AddCommGrpCat.free)
+  let Y := (presheafToSheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u}).obj
+    (yoneda.obj U ⋙ AddCommGrpCat.free)
+  let a := E.symm.toAdjunction
+  let e : coyoneda.obj (op (E.inverse.obj Y)) ≅ coyoneda.obj (op X) :=
+    NatIso.ofComponents (fun G =>
+      (((a.homEquiv Y G).trans
+        (affineEtaleSectionsEquiv (fullAffineEtaleTopology S) U (R.obj G)).toEquiv).trans
+        (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj G).toEquiv.symm).toIso) (by
+      intro G H f
+      ext x
+      change (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj H).symm
+        (affineEtaleSectionsEquiv (fullAffineEtaleTopology S) U (R.obj H)
+          (a.homEquiv Y H (x ≫ f))) =
+        (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj G).symm
+          (affineEtaleSectionsEquiv (fullAffineEtaleTopology S) U (R.obj G)
+            (a.homEquiv Y G x)) ≫ f
+      apply (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj H).injective
+      rw [AddEquiv.apply_symm_apply, Adjunction.homEquiv_naturality_right,
+        affineEtaleSectionsEquiv_naturality, affineEtaleSectionsEquiv_naturality,
+        AddEquiv.apply_symm_apply]
+      rfl)
+  let i : E.inverse.obj Y ≅ X := (coyoneda.preimageIso e).unop.symm
+  exact ⟨(E.counitIso.app Y).symm ≪≫ R.mapIso i⟩
+
+set_option linter.unusedVariables false in
+/-- Source: Stacks Project, Cohomology on Sites, Lemma 03YU, specialized to the
+restriction equivalence of Topologies Lemma 04HR.
+(blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_data)
+
+Proof: restriction is the additive equivalence proved by
+`fullAffineEtale_ab_equivalence`. It preserves injective objects and exact sequences,
+so applying it termwise to an injective resolution gives an injective resolution
+of the restricted sheaf. Sections at U of the restricted resolution equal sections
+at its image of the original resolution, with identical differentials. The free
+abelian sheaf on the representable of U represents the sections functor, by
+sheafification, the free-abelian adjunction and Yoneda. Consequently its Ext groups
+are the cohomology of those section complexes. Taking cohomology of the identical
+complexes yields an isomorphism in each degree. A lift of a sheaf morphism between
+injective resolutions restricts to a lift, and restriction takes homotopies to
+homotopies; the induced isomorphisms are therefore natural in the sheaf and
+independent of resolutions. Choose one natural isomorphism for each degree to
+obtain the family e. No normalization in degree zero is asserted here; the proved
+comparison point below supplies that separately.
+The empty affine and zero sheaf cause no exceptions: their section complexes are
+zero. This is the remaining Ext-versus-resolution bridge for these large sites. -/
+theorem fullAffineEtale_cohomology_comparison_data (S : Scheme.{u})
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
+    (U : S.FullAffineEtale) :
+    ∃ e : ∀ p : ℕ,
+      ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) ≅
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+        (CategoryTheory.evaluation _ _).obj (op U.obj)), True := by
+  classical
+  let R := (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+    (fullAffineEtaleTopology S) S.smallEtaleTopology
+  have : R.IsEquivalence := fullAffineEtale_ab_equivalence S
+  have : R.Additive := ⟨by intros; rfl⟩
+  have : EnoughInjectives (Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) := inferInstance
+  obtain ⟨i⟩ := affineEtale_free_restriction S U
+  let X := (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (yoneda.obj U.obj ⋙ AddCommGrpCat.free)
+  let m (p : ℕ) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :=
+    (Ext.precompAddEquiv i (R.obj G) p).toAddMonoidHom.comp (R.mapExtAddHom X G p)
+  have hm (p : ℕ) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :
+      Function.Bijective (m p G) :=
+    (Ext.precompAddEquiv i (R.obj G) p).bijective.comp
+      (R.mapExt_bijective_of_preservesInjectiveObjects X G p)
+  let e (p : ℕ) :
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U.obj) ≅
+      R ⋙ Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) :=
+    NatIso.ofComponents (fun G => (AddEquiv.ofBijective (m p G) (hm p G)).toAddCommGrpIso)
+      (by
+        intro G H f
+        ext x
+        change (Ext.mk₀ i.hom).comp
+          ((x.comp (Ext.mk₀ f) (add_zero p)).mapExactFunctor R) (zero_add p) =
+          ((Ext.mk₀ i.hom).comp (x.mapExactFunctor R) (zero_add p)).comp
+            (Ext.mk₀ (R.map f)) (add_zero p)
+        rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
+        exact (Ext.comp_assoc _ _ _ (zero_add p) (add_zero p) (by omega)).symm)
+  exact ⟨fun p => (e p).symm, trivial⟩
+
+/-- Source: Stacks 03YU, degree-zero sections identification.
+
+Proof: Ext-zero is Hom from the sheafified free representable. Sheafification,
+free-abelian adjunction and Yoneda identify it additively with sections over U.
+Restriction has exactly the same sections at U and its image. Compose these two
+identifications, naturally in the sheaf. Applying the small-site sections
+identification to this composite cancels its inverse, proving the displayed formula.
+The empty object and the zero sheaf are covered by the same adjunctions.
+
+This asserts existence of a normalized degree-zero comparison.
+(blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_point) -/
+theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
+    (U : S.FullAffineEtale) :
+    ∃ e :
+      (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) 0 ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) ≅
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology 0 ⋙
+        (CategoryTheory.evaluation _ _).obj (op U.obj),
+    ∀ (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u})
+      (x : Sheaf.H'.{w}
+        (((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology).obj G) 0 U),
+      (((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u}).homEquiv _ _
+        (Ext.homEquiv₀ ((e.app G).hom x))).app (op U.obj))
+          (FreeAbelianGroup.of (𝟙 U.obj)) =
+      (((sheafificationAdjunction (fullAffineEtaleTopology S) AddCommGrpCat.{u}).homEquiv
+        _ _ (Ext.homEquiv₀ x)).app (op U)) (FreeAbelianGroup.of (𝟙 U))  := by
+  let R := (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+    (fullAffineEtaleTopology S) S.smallEtaleTopology
+  let a (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :=
+    affineEtaleHZeroSectionsEquiv (fullAffineEtaleTopology S) U (R.obj G)
+  let b (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :=
+    affineEtaleHZeroSectionsEquiv S.smallEtaleTopology U.obj G
+  let e : R ⋙ Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) 0 ⋙
+      (CategoryTheory.evaluation _ _).obj (op U) ≅
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology 0 ⋙
+        (CategoryTheory.evaluation _ _).obj (op U.obj) :=
+    NatIso.ofComponents (fun G => ((a G).trans (b G).symm).toAddCommGrpIso) (by
+    intro G H f
+    ext x
+    change (b H).symm (a H
+      (((Sheaf.cohomologyPresheafFunctor (fullAffineEtaleTopology S) 0).map
+        (R.map f)).app (op U) x)) =
+      ((Sheaf.cohomologyPresheafFunctor S.smallEtaleTopology 0).map f).app (op U.obj)
+        ((b G).symm (a G x))
+    apply (b H).injective
+    rw [AddEquiv.apply_symm_apply]
+    change affineEtaleHZeroSectionsEquiv (fullAffineEtaleTopology S) U (R.obj H) _ =
+      affineEtaleHZeroSectionsEquiv S.smallEtaleTopology U.obj H _
+    rw [affineEtaleHZeroSectionsEquiv_naturality,
+      affineEtaleHZeroSectionsEquiv_naturality]
+    change f.hom.app (op U.obj) (a G x) =
+      f.hom.app (op U.obj) (b G ((b G).symm (a G x)))
+    rw [AddEquiv.apply_symm_apply])
+  refine ⟨e, ?_⟩
+  intro G x
+  change b G ((b G).symm (a G x)) = a G x
+  exact AddEquiv.apply_symm_apply _ _
+
+/-- Source: Stacks 03YU, applied to the equivalence of 04HR
+(blueprint: lem-weil-pbc-affine-etale-site-topos).
+Proof: obtain degreewise natural comparisons from the comparison-data obligation.
+Independently identify Ext-zero with sections using sheafification, the free-abelian
+adjunction and Yoneda. Restriction evaluates identically on corresponding objects,
+so composing the two additive identifications gives a normalized degree-zero comparison.
+Use that comparison at zero and the supplied comparisons at positive degrees.
+The displayed normalization follows by cancelling the sections equivalence with its inverse;
+it does not assert normalization of an arbitrary comparison. -/
+theorem fullAffineEtale_cohomology_comparison (S : Scheme.{u})
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
+    (U : S.FullAffineEtale) :
+    ∃ e : ∀ p : ℕ,
+      (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) ≅
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+        (CategoryTheory.evaluation _ _).obj (op U.obj),
+    ∀ (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u})
+      (x : Sheaf.H'.{w}
+        (((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology).obj G) 0 U),
+      (((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u}).homEquiv _ _
+        (Ext.homEquiv₀ (((e 0).app G).hom x))).app (op U.obj))
+          (FreeAbelianGroup.of (𝟙 U.obj)) =
+      (((sheafificationAdjunction (fullAffineEtaleTopology S) AddCommGrpCat.{u}).homEquiv
+        _ _ (Ext.homEquiv₀ x)).app (op U)) (FreeAbelianGroup.of (𝟙 U)) := by
+  classical
+  obtain ⟨d, _⟩ := fullAffineEtale_cohomology_comparison_data S U
+  obtain ⟨e₀, h₀⟩ := fullAffineEtale_cohomology_comparison_point S U
+  let e : ∀ p : ℕ,
+      (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) ≅
+        Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U.obj) := fun p =>
+    match p with
+    | 0 => e₀
+    | n + 1 => d (n + 1)
+  exact ⟨e, h₀⟩
+
+theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
+    Nonempty (Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+      (CategoryTheory.evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 S))) ≅
+      Sheaf.functorH.{w, u} S.smallEtaleTopology p) := by
+  let U := Scheme.Etale.mk (𝟙 S)
+  let X := (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (yoneda.obj U ⋙ AddCommGrpCat.free)
+  let Z := (constantSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (AddCommGrpCat.of (ULift ℤ))
+  let hU : IsTerminal U := MorphismProperty.Over.mkIdTerminal _ _
+  let a (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :
+      (Z ⟶ F) ≃+ F.obj.obj (op U) :=
+    ((constantSheafAdj S.smallEtaleTopology AddCommGrpCat.{u} hU).homAddEquiv _ F).trans
+      (AddCommGrpCat.uliftZMultiplesAddEquiv _)
+  have ha {F G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}} (f : F ⟶ G)
+      (z : Z ⟶ F) : a G (z ≫ f) = f.hom.app (op U) (a F z) := by
+    change (((constantSheafAdj S.smallEtaleTopology AddCommGrpCat.{u} hU).homEquiv
+      _ G (z ≫ f)) (ULift.up 1)) = _
+    rw [Adjunction.homEquiv_naturality_right]
+    rfl
+  let e : coyoneda.obj (op X) ≅ coyoneda.obj (op Z) :=
+    NatIso.ofComponents (fun F =>
+      ((affineEtaleSectionsEquiv S.smallEtaleTopology U F).toEquiv.trans
+        (a F).toEquiv.symm).toIso) (by
+        intro F G f
+        ext x
+        change (a G).symm (affineEtaleSectionsEquiv S.smallEtaleTopology U G (x ≫ f)) =
+          (a F).symm (affineEtaleSectionsEquiv S.smallEtaleTopology U F x) ≫ f
+        apply (a G).injective
+        rw [AddEquiv.apply_symm_apply, ha, AddEquiv.apply_symm_apply,
+          affineEtaleSectionsEquiv_naturality])
+  let eXZ : op X ≅ op Z := coyoneda.preimageIso e
+  exact ⟨(Abelian.extFunctor p).mapIso eXZ⟩
+
+/-- Source: Stacks 03YU and 04HR. Proof: specialize the objectwise cohomology
+comparison to the affine identity object, then compose with the proved comparison
+between cohomology at the final small-site object and global Ext cohomology.
+(blueprint: lem-weil-pbc-affine-etale-cohomology_base_right) -/
+theorem fullAffineEtale_cohomology_base_right (S : Scheme.{u}) [IsAffine S]
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
+    Nonempty ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+      (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+      Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+        (CategoryTheory.evaluation _ _).obj (op (⟨Scheme.Etale.mk (𝟙 S), ‹IsAffine S›⟩ :
+          S.FullAffineEtale)) ≅ Sheaf.functorH.{w, u} S.smallEtaleTopology p) := by
+  obtain ⟨e, _⟩ := fullAffineEtale_cohomology_comparison_data S
+    (⟨Scheme.Etale.mk (𝟙 S), ‹IsAffine S›⟩ : S.FullAffineEtale)
+  obtain ⟨b⟩ := fullAffineEtale_cohomology_base_left S p
+  exact ⟨e p ≪≫ b⟩
+
+/-- Source: Stacks 03YU and 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
+Proof: cohomology over the terminal identity etale object is global Ext cohomology,
+by the representing-object isomorphism in `fullAffineEtale_cohomology_base_left`.
+For the affine identity object, compose this isomorphism with objectwise restriction
+comparison, as proved in `fullAffineEtale_cohomology_base_right`. Pair the results.
+This statement uses the established encoding `Sheaf.functorH`; the separate bridge
+from that encoding to `Etale.cohomology` is not needed for the displayed conclusion. -/
+theorem fullAffineEtale_cohomology_base (S : Scheme.{u}) [IsAffine S]
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
+    Nonempty
+      (Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+        (CategoryTheory.evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 S))) ≅
+        Sheaf.functorH.{w, u} S.smallEtaleTopology p) ∧
+    Nonempty
+      ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+        (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op (⟨Scheme.Etale.mk (𝟙 S), ‹IsAffine S›⟩ :
+            S.FullAffineEtale)) ≅ Sheaf.functorH.{w, u} S.smallEtaleTopology p) := by
+  exact ⟨fullAffineEtale_cohomology_base_left S p,
+    fullAffineEtale_cohomology_base_right S p⟩
 
 
 end AlgebraicGeometry.Scheme

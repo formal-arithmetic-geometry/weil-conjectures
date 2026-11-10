@@ -158,6 +158,10 @@ end NatTrans
 
 namespace MonoidalCategory
 
+set_option backward.defeqAttrib.useBackward true in
+lemma pentagon_curriedAssociatorNatIso_hom [MonoidalCategory C] :
+    NatTrans.Pentagon (curriedAssociatorNatIso C).hom where
+
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

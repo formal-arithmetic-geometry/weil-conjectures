@@ -268,6 +268,12 @@ noncomputable def sheafifyGrp : Cᵒᵖ ⥤ GrpCat.{max u v} where
       (sheafify J (G ⋙ forget GrpCat)).map g ((sheafify J (G ⋙ forget GrpCat)).map f s)
     simp
 
+/-- The underlying presheaf of sets of `sheafifyGrp J G` is the sheafification of
+`G ⋙ forget GrpCat`. -/
+lemma sheafifyGrp_comp_forget :
+    sheafifyGrp J G ⋙ forget GrpCat = sheafify J (G ⋙ forget GrpCat) :=
+  rfl
+
 
 /-- The group law of the sheafification is commutative if that of `G` is. -/
 lemma sheafify_mul_comm (hG : ∀ (X : Cᵒᵖ) (x y : G.obj X), x * y = y * x) {X : C}

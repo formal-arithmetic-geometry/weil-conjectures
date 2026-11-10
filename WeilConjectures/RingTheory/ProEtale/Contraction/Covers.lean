@@ -356,6 +356,10 @@ noncomputable
 def objBase (n : ℕ) : obj P Q X n ⟶ X :=
   (diag P Q X).map (homOfLE <| n.zero_le).op
 
+lemma diag_map_le_succ (n : ℕ) (hn : n ≤ n + 1) :
+    (diag P Q X).map (homOfLE hn).op = ((P ⊓ Q).precontraction _).hom := by
+  simp [diag]
+
 
 set_option backward.defeqAttrib.useBackward true in
 @[simps]

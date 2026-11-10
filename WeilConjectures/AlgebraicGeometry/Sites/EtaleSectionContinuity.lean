@@ -124,6 +124,9 @@ noncomputable def toTerminal :
     change (U.map g).left ≫ (U.map (hj₀.from k)).left = (U.map (hj₀.from j)).left ≫ 𝟙 _
     rw [Category.comp_id, ← etale_comp_left, ← U.map_comp, hj₀.hom_ext (g ≫ hj₀.from k)]
 
+/-- The components of `toTerminal`. -/
+lemma toTerminal_app (j : J) : (toTerminal U j₀ hj₀).app j = (U.map (hj₀.from j)).left := rfl
+
 
 /-- The étale `D_{j₀}`-scheme `D_{j₀} ×_{D_{j₀}} Dⱼ`, isomorphic to `Dⱼ`. -/
 noncomputable def auxObj (j : J) : (U.obj j₀).left.Etale :=

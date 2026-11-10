@@ -150,6 +150,19 @@ lemma isPullback_of_isCompl' {α β : Type*} {X : C}
   exact c.isPullback_of_isCompl _ _ _ (by simpa)
     (Function.injective_of_subsingleton _) hl cl d hc hcl hd
 
+lemma isPullback_ne {β : Type*} {X : C}
+    {Y : β → C} (f : ∀ i, Y i ⟶ X) (i : β)
+    [HasWidePullback X Y f] [HasWidePullback X (fun j : { j // i ≠ j } ↦ Y j) fun j ↦ f j] :
+    IsPullback (WidePullback.π f _)
+      (WidePullback.lift (WidePullback.base _) (fun j ↦ WidePullback.π _ _) (by simp))
+      (f i) (WidePullback.base <| fun j : {j // i ≠ j } ↦ f j) := by
+  apply isPullback_of_isCompl'
+  · exact Subtype.val_injective
+  · rw [isCompl_iff]
+    simp [codisjoint_iff]
+    grind
+  · exact limit.isLimit _
+
 
 end WidePullbackCone
 

@@ -152,6 +152,22 @@ def Adjunction.liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K �
     G.obj (R.obj (L.obj K)) ⟶ R.obj (L.obj K) :=
   (mateEquiv adj adj α.hom).app (L.obj K) ≫ R.map (α.inv.app K ≫ L.map φ)
 
+/-- The unit `η : K ⟶ R (L K)` intertwines `φ` and its lift `Adjunction.liftAlgebraStr`:
+
+```
+  G K ──G η──▶ G (R (L K))
+   │φ              │liftAlgebraStr α φ
+   ▼               ▼
+   K ────η────▶ R (L K)
+``` -/
+lemma Adjunction.map_unit_app_comp_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A}
+    (φ : G.obj K ⟶ K) :
+    G.map (adj.unit.app K) ≫ adj.liftAlgebraStr α φ = φ ≫ adj.unit.app K := by
+  rw [liftAlgebraStr, ← Category.assoc, unit_mateEquiv]
+  simp only [Functor.id_obj, Functor.comp_obj, Category.assoc, Functor.map_comp,
+    ← R.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+  exact adj.unit_naturality φ
+
 
 instance Adjunction.isIso_liftAlgebraStr (α : G ⋙ L ≅ L ⋙ H) {K : A} (φ : G.obj K ⟶ K)
     [IsIso (mateEquiv adj adj α.hom).natTrans] [IsIso φ] : IsIso (adj.liftAlgebraStr α φ) := by
@@ -395,6 +411,39 @@ lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
   ext a
   apply (adj₂.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
+
+/-- Blueprint `lem-trf-adjoint-mate`: mates along an isomorphism of left adjoints. For
+adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a natural isomorphism `α : L₁ ≅ L₂`, the conjugate
+`β = conjugateIsoEquiv adj₁ adj₂ α.symm : R₁ ≅ R₂`
+
+1. is given by `β = R₂ ε₁ ∘ R₂ α⁻¹ R₁ ∘ η₂ R₁`, with inverse `β⁻¹ = R₁ ε₂ ∘ R₁ α R₂ ∘ η₁ R₂`;
+2. carries the units and the counits to each other: `R₂ α ∘ β L₁ ∘ η₁ = η₂` and
+   `ε₂ ∘ α R₂ ∘ L₁ β = ε₁`;
+3. is the unique natural isomorphism `R₁ ≅ R₂` with the unit compatibility of (2). -/
+theorem conjugateIsoEquiv_symm_spec (α : L₁ ≅ L₂) :
+    (∀ b, (conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app b =
+      adj₂.unit.app (R₁.obj b) ≫ R₂.map (α.inv.app (R₁.obj b)) ≫ R₂.map (adj₁.counit.app b)) ∧
+    (∀ b, (conjugateIsoEquiv adj₁ adj₂ α.symm).inv.app b =
+      adj₁.unit.app (R₂.obj b) ≫ R₁.map (α.hom.app (R₂.obj b)) ≫ R₁.map (adj₂.counit.app b)) ∧
+    (∀ a, adj₁.unit.app a ≫ (conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app (L₁.obj a) ≫
+      R₂.map (α.hom.app a) = adj₂.unit.app a) ∧
+    (∀ b, L₁.map ((conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app b) ≫ α.hom.app (R₂.obj b) ≫
+      adj₂.counit.app b = adj₁.counit.app b) ∧
+    (∀ β : R₁ ≅ R₂, (∀ a, adj₁.unit.app a ≫ β.hom.app (L₁.obj a) ≫ R₂.map (α.hom.app a) =
+      adj₂.unit.app a) → β = conjugateIsoEquiv adj₁ adj₂ α.symm) := by
+  refine ⟨fun b ↦ ?_, fun b ↦ ?_, fun a ↦ ?_, fun b ↦ ?_, fun β hβ ↦ ?_⟩
+  · simp [conjugateEquiv_apply_app]
+  · simp [conjugateEquiv_apply_app]
+  · have h := unit_conjugateEquiv adj₁ adj₂ α.inv a
+    simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
+    rw [reassoc_of% h, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id, Category.comp_id]
+  · have h := conjugateEquiv_counit adj₁ adj₂ α.inv b
+    simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
+    rw [α.hom.naturality_assoc, h, Iso.hom_inv_id_app_assoc]
+  · ext1
+    refine (conjugateEquiv_eq_of_unit adj₁ adj₂ α.inv β.hom fun a ↦ ?_).symm
+    rw [← hβ a, Category.assoc, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+      Functor.map_id, Category.comp_id]
 
 
 end ConjugateUnit

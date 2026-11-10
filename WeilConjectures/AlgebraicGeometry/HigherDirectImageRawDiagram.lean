@@ -23,6 +23,22 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+private theorem five_factor_add
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F : C ⥤ D) [F.Additive] {X Y : C} {P Q R T : D}
+    (a : P ⟶ Q) (b : Q ⟶ F.obj X) (c : F.obj Y ⟶ R) (d : R ⟶ T)
+    (x y : X ⟶ Y) :
+    (a ≫ b) ≫ F.map (x + y) ≫ c ≫ d =
+      ((a ≫ b) ≫ F.map x ≫ c ≫ d) + ((a ≫ b) ≫ F.map y ≫ c ≫ d) := by
+  simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+
+private theorem five_factor_zero
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F : C ⥤ D) [F.Additive] {X Y : C} {P Q R T : D}
+    (a : P ⟶ Q) (b : Q ⟶ F.obj X) (c : F.obj Y ⟶ R) (d : R ⟶ T) :
+    (a ≫ b) ≫ F.map (0 : X ⟶ Y) ≫ c ≫ d = 0 := by
+  simp only [Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
+
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

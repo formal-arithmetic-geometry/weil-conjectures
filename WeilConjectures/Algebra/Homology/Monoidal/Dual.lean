@@ -111,6 +111,8 @@ noncomputable def rightDual : CochainComplex C ℤ where
     rw [Linear.units_smul_comp, Linear.comp_units_smul, ← comp_rightAdjointMate, K.d_comp_d,
       rightAdjointMate_zero, smul_zero, smul_zero]
 
+lemma rightDual_X (n : ℤ) : K.rightDual.X n = (K.X (-n))ᘁ := rfl
+
 
 lemma rightDual_d (i j : ℤ) : K.rightDual.d i j = j.negOnePow • (K.d (-j) (-i))ᘁ := rfl
 

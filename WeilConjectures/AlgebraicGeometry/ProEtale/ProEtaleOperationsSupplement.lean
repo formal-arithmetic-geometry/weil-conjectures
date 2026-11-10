@@ -443,6 +443,20 @@ noncomputable abbrev proEtaleRingDerivedDirectImage :
     DerivedCategory (proEtaleRingModules X S) ⥤ DerivedCategory (proEtaleRingModules Y R) :=
   (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctor
 
+/-- Direct image is computed on every K-injective representative, naturally in that
+representative. Source: Stacks, Section 07A5
+(blueprint: def-weil-pbc-proetale-operations).
+Proof: the K-injective right derivability structure gives an invertible component of the
+right-derived unit at each K-injective complex. Its naturality gives the formula for maps.
+A quasi-isomorphism between K-injectives is a homotopy equivalence by
+CochainComplex.IsKInjective.quasiIso_iff; additive termwise direct image preserves its
+homotopy inverse. Thus the resolution calculation descends through localization. -/
+theorem proEtaleRingDerivedDirectImage_kInjective
+    (I : CochainComplex (proEtaleRingModules X S) ℤ) [I.IsKInjective] :
+    IsIso ((proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ _).obj I)) := by
+  infer_instance
+
 
 /-- The ordinary derived adjunction on the full unbounded derived categories.
 Source: Stacks, Lemma 0DVC and Section 0735

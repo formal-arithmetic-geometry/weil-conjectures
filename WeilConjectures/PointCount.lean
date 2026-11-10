@@ -139,6 +139,14 @@ theorem Hom.degreeOver_ne_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
   have : Finite (X.residueField x) := X.mem_finitePoints.mp hx
   exact Module.finrank_pos.ne'
 
+/-- The degree of a point with infinite residue field is `0` (by junk convention). -/
+theorem Hom.degreeOver_eq_zero [Finite k] (f : X.Hom (Spec (.of k))) {x : X}
+    (hx : x ∉ X.finitePoints) : f.degreeOver x = 0 := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have h : ¬ Module.Finite k (X.residueField x) := fun _ ↦
+    hx (X.mem_finitePoints.mpr (Module.finite_of_finite k))
+  exact Module.finrank_of_not_finite h
+
 
 /-- Ring homomorphisms from a finitely generated ring into a finite ring form a finite
 type. -/

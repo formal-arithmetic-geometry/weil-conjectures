@@ -138,6 +138,10 @@ noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅
         exact homObjUnitInvApp_app_one N n }
 
 
+lemma homObjUnitIsoApp_hom_apply (X : Cᵒᵖ) (φ : (homObj (unit _) N).obj X) :
+    (homObjUnitIsoApp N X).hom φ = φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj X) :=
+  rfl
+
 /-- **The internal hom out of the unit.** `homObj R N ≅ N`: a morphism `R|_U ⟶ N|_U` is
 determined by the image of `1`. -/
 noncomputable def homObjUnitIso : homObj (unit _) N ≅ N :=

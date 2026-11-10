@@ -485,6 +485,24 @@ lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).I
     exact idealSheaf_single P n ▸
       (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow n
 
+/-- **Effective divisors are effective Cartier divisors.** On a smooth curve, for every finite
+set `s` of closed points and multiplicities `n`, the ideal sheaf `∏_{P ∈ s} 𝓘_P^{n_P}` of the
+effective divisor `∑_{P ∈ s} n_P [P]` is invertible: each `𝓘_P` is invertible
+(`isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one`), and products of invertible
+ideal sheaves are invertible.
+
+(blueprint: `lem-sc-point-cartier`) -/
+lemma isInvertible_prod_vanishingIdeal_pow (s : Finset (closedPoints C))
+    (n : closedPoints C → ℕ) :
+    (∏ P ∈ s, IdealSheafData.vanishingIdeal ⟨{P.1}, P.2⟩ ^ n P).IsInvertible := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => exact IdealSheafData.isInvertible_top
+  | insert P s hP ih =>
+    rw [Finset.prod_insert hP]
+    exact ((isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow _)
+      |>.mul_effectiveCartier ih
+
 
 variable [IsIntegral C] [IsLocallyNoetherian C]
 
@@ -537,6 +555,10 @@ sections of `𝒪_X`, induced by the inclusion `J ⊆ 𝒪_X`. -/
 noncomputable def IdealSheafData.sectionsι (J : X.IdealSheafData) (W : X.Opens) :
     Γ(J.toModules, W) →+ Γ(X, W) :=
   (J.toModulesι.app W).hom
+
+lemma IdealSheafData.sectionsι_apply (J : X.IdealSheafData) (W : X.Opens)
+    (m : Γ(J.toModules, W)) : J.sectionsι W m = J.toModulesι.app W m :=
+  rfl
 
 
 lemma IdealSheafData.sectionsι_injective (J : X.IdealSheafData) (W : X.Opens) :

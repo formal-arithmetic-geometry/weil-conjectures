@@ -53,6 +53,8 @@ def intSeqShift : (ℕ → ℚ) →ₗ[ℤ] (ℕ → ℚ) := LinearMap.funLeft �
 @[simp]
 lemma intSeqShift_apply (x : ℕ → ℚ) (n : ℕ) : intSeqShift x n = x (n + 1) := rfl
 
+lemma coe_intSeqShift : ⇑intSeqShift = ⇑(seqShift ℚ) := rfl
+
 
 lemma iterate_intSeqShift_apply (m : ℕ) (x : ℕ → ℚ) (n : ℕ) :
     (⇑intSeqShift)^[m] x n = x (n + m) :=

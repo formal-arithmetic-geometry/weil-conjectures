@@ -146,6 +146,73 @@ def mul {T : Sheaf K (Type u)}
 
 variable (g : RingedToposMorphism.RingData A B)
 
+/-- A faithful inverse image and monic structural map reflect generalized elements. -/
+theorem reflect_eq [g.inverse.Faithful] [Mono g.ringMap]
+    {T : Sheaf K (Type u)} (x y : T ⟶ (sheafCompose K (forget RingCat)).obj B)
+    (h : ∀ (U : Cᵒᵖ) (t : (g.inverse.obj T).obj.obj U),
+      ((g.inverse.map x) ≫ g.ringMap).hom.app U t =
+        ((g.inverse.map y) ≫ g.ringMap).hom.app U t) : x = y := by
+  apply g.inverse.map_injective
+  apply (cancel_mono g.ringMap).mp
+  ext U t
+  exact h U t
+
+/-- Reflection of zero through an invertible structural ring map. -/
+theorem reflect_zero [g.inverse.Faithful] [Mono g.ringMap]
+    {T : Sheaf K (Type u)} (z : T ⟶ (sheafCompose K (forget RingCat)).obj B)
+    (h : ∀ (U : Cᵒᵖ) (t : (g.inverse.obj T).obj.obj U),
+      ((g.inverse.map z) ≫ g.ringMap).hom.app U t = (0 : A.obj.obj U)) :
+    ∀ (U : Dᵒᵖ) (t : T.obj.obj U), z.hom.app U t = (0 : B.obj.obj U) := by
+  have hz := g.ring_zero T (zero T) (fun _ _ ↦ rfl)
+  have he : z = zero T := g.reflect_eq z (zero T) (fun U t ↦ (h U t).trans (hz U t).symm)
+  intro U t
+  rw [he]
+  rfl
+
+/-- Reflection of one through an invertible structural ring map. -/
+theorem reflect_one [g.inverse.Faithful] [Mono g.ringMap]
+    {T : Sheaf K (Type u)} (z : T ⟶ (sheafCompose K (forget RingCat)).obj B)
+    (h : ∀ (U : Cᵒᵖ) (t : (g.inverse.obj T).obj.obj U),
+      ((g.inverse.map z) ≫ g.ringMap).hom.app U t = (1 : A.obj.obj U)) :
+    ∀ (U : Dᵒᵖ) (t : T.obj.obj U), z.hom.app U t = (1 : B.obj.obj U) := by
+  have hz := g.ring_one T (one T) (fun _ _ ↦ rfl)
+  have he : z = one T := g.reflect_eq z (one T) (fun U t ↦ (h U t).trans (hz U t).symm)
+  intro U t
+  rw [he]
+  rfl
+
+/-- Reflection of addition through an invertible structural ring map. -/
+theorem reflect_add [g.inverse.Faithful] [Mono g.ringMap]
+    {T : Sheaf K (Type u)} (x y z : T ⟶ (sheafCompose K (forget RingCat)).obj B)
+    (h : ∀ (U : Cᵒᵖ) (t : (g.inverse.obj T).obj.obj U),
+      ((g.inverse.map z) ≫ g.ringMap).hom.app U t =
+        ((g.inverse.map x) ≫ g.ringMap).hom.app U t +
+          ((g.inverse.map y) ≫ g.ringMap).hom.app U t) :
+    ∀ (U : Dᵒᵖ) (t : T.obj.obj U),
+      z.hom.app U t = x.hom.app U t + y.hom.app U t := by
+  have hz := g.ring_add T x y (add x y) (fun _ _ ↦ rfl)
+  have he : z = add x y :=
+    g.reflect_eq z (add x y) (fun U t ↦ (h U t).trans (hz U t).symm)
+  intro U t
+  rw [he]
+  rfl
+
+/-- Reflection of multiplication through an invertible structural ring map. -/
+theorem reflect_mul [g.inverse.Faithful] [Mono g.ringMap]
+    {T : Sheaf K (Type u)} (x y z : T ⟶ (sheafCompose K (forget RingCat)).obj B)
+    (h : ∀ (U : Cᵒᵖ) (t : (g.inverse.obj T).obj.obj U),
+      ((g.inverse.map z) ≫ g.ringMap).hom.app U t =
+        ((g.inverse.map x) ≫ g.ringMap).hom.app U t *
+          ((g.inverse.map y) ≫ g.ringMap).hom.app U t) :
+    ∀ (U : Dᵒᵖ) (t : T.obj.obj U),
+      z.hom.app U t = x.hom.app U t * y.hom.app U t := by
+  have hz := g.ring_mul T x y (mul x y) (fun _ _ ↦ rfl)
+  have he : z = mul x y :=
+    g.reflect_eq z (mul x y) (fun U t ↦ (h U t).trans (hz U t).symm)
+  intro U t
+  rw [he]
+  rfl
+
 
 /-- A lift of the direct image to modules, with the structural-map-induced action. -/
 structure Modules (d : RingedToposMorphism.RingData A B) where

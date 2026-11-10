@@ -155,6 +155,8 @@ section locSub
 variable {A F : Type*} [CommRing A] [Field F] [Algebra A F] {R : Subalgebra A F} {x : F}
   (hx : x ∈ R)
 
+lemma mem_locSub {z : F} : z ∈ locSub R hx ↔ ∃ r ∈ R, ∃ m : ℕ, z * x ^ m = r := Iff.rfl
+
 
 lemma locSub_congr {y : F} (hxy : x = y) (hy : y ∈ R) : locSub R hx = locSub R hy := by
   subst hxy

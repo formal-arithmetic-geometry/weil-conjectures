@@ -99,6 +99,10 @@ def copy (F : ℤ → C) (hF : F = P.obj) : IntTensorFamily C where
 lemma copy_obj (F : ℤ → C) (hF : F = P.obj) : (P.copy F hF).obj = F :=
   rfl
 
+lemma copy_zeroIso (F : ℤ → C) (hF : F = P.obj) :
+    (P.copy F hF).zeroIso = eqToIso (congrFun hF 0) ≪≫ P.zeroIso :=
+  rfl
+
 
 lemma copy_addIso (F : ℤ → C) (hF : F = P.obj) (a b : ℤ) :
     (P.copy F hF).addIso a b =

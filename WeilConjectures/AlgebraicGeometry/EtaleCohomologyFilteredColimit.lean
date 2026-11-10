@@ -140,5 +140,40 @@ theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y
     exact ⟨IsColimit.mapCoconeEquiv (cohomologySingleIsoRightDerived Y q).symm
       (isColimitOfPreserves (Γ.rightDerived q) hc)⟩
 
+/-- The same canonical comparison is an isomorphism for etale sheaves of modules over a
+fixed constant commutative ring. Source: Stacks Tags 03FD, 03CO and 03Q5
+(blueprint: lem-weil-pbc-cohomology-filtered-colimit).
+
+Proof (step 8 of the node): the underlying sheaf functor is a left adjoint by
+restriction/coextension of coefficient scalars and the sheafification adjunction;
+it therefore preserves the input colimit. Apply the abelian theorem to this diagram.
+The natural comparison lem-weil-pbc-etale-module-cohomology-forget is proved by exact
+forgetful functors, underlying injective acyclicity, and the source library's derived
+base-change comparison. Transport the abelian cohomology cocone along this comparison.
+The coefficient forgetful functor preserves colimits and reflects isomorphisms, hence
+reflects colimits. Applying that reflection gives precisely the module image cocone. -/
+theorem etaleModuleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y]
+    [QuasiSeparatedSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
+    {F : I ⥤ Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {c : Cocone F}
+    (hc : IsColimit c) (q : ℕ) :
+    Nonempty (IsColimit
+      ((DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        Etale.cohomology (ModuleCat.{u + 1} Λ) Y (q : ℤ)).mapCocone c)) :=
+  by
+    let U := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+    let S := sheafCompose Y.smallEtaleTopology U
+    have : S.IsLeftAdjoint := moduleSheafForgetIsLeftAdjoint Y Λ
+    have : ReflectsColimitsOfShape I U := reflectsColimitsOfShape_of_reflectsIsomorphisms
+    let H := DerivedCategory.singleFunctor
+      (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+      Etale.cohomology (ModuleCat.{u + 1} Λ) Y (q : ℤ)
+    obtain ⟨e⟩ := nonempty_etaleModuleCohomology_forgetIso Y Λ q
+    have hAb := (etaleCohomology_isColimit_of_isFiltered Y
+      (isColimitOfPreserves S hc) q).some
+    have hU : IsColimit ((H ⋙ U).mapCocone c) :=
+      IsColimit.mapCoconeEquiv e.symm hAb
+    exact ⟨isColimitOfReflects U hU⟩
+
 
 end AlgebraicGeometry.Scheme

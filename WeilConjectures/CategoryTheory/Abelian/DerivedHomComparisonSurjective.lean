@@ -160,5 +160,48 @@ theorem derivedHomComparison_surjective
 
 -- Keep the comparison bundled while cancelling a coefficient isomorphism.
 -- This prevents concrete sheaf functor instances from being repeatedly expanded.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem derivedHomComparison_surjective_postcomp
+    {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
+    [HasDerivedCategory C] [HasExt.{w} C]
+    {D : Type u'} [Category.{v'} D] [Abelian D]
+    [HasDerivedCategory D] [HasExt.{v'} D] [EnoughInjectives D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (L : C) (B : D) (a : B ⟶ F.obj L)
+    (hzero : ∀ N : C, Function.Surjective (fun f : L ⟶ N ↦ a ≫ F.map f))
+    (hacyclic : ∀ (I : C) [Injective I],
+      (preadditiveCoyoneda.obj (op B)).rightAcyclic (F.obj I)) (N : C) (n : ℕ)
+    (N' : D) (e : F.obj N ⟶ N') [IsIso e] :
+    Function.Surjective
+      (((Preadditive.leftComp _
+        ((DerivedCategory.Plus.singleFunctor D 0).map a ≫
+          (F.mapDerivedCategoryPlusSingleFunctor 0).inv.app L)).comp
+        (Preadditive.rightComp _
+          ((F.mapDerivedCategoryPlus.commShiftIso (n : ℤ)).hom.app
+              ((DerivedCategory.Plus.singleFunctor C 0).obj N) ≫
+            (shiftFunctor _ (n : ℤ)).map
+              ((F.mapDerivedCategoryPlusSingleFunctor 0).hom.app N ≫
+                (DerivedCategory.Plus.singleFunctor D 0).map e)))).comp
+        F.mapDerivedCategoryPlus.mapAddHom) := by
+  have hs := derivedHomComparison_surjective F L B a hzero hacyclic N n
+  let d := (shiftFunctor _ (n : ℤ)).map
+    ((DerivedCategory.Plus.singleFunctor D 0).map e)
+  have : IsIso d := by dsimp only [d]; infer_instance
+  intro y
+  obtain ⟨x, hx⟩ := hs (y ≫ inv d)
+  refine ⟨x, ?_⟩
+  change ((DerivedCategory.Plus.singleFunctor D 0).map a ≫
+      (F.mapDerivedCategoryPlusSingleFunctor 0).inv.app L) ≫
+    (F.mapDerivedCategoryPlus.map x ≫
+      ((F.mapDerivedCategoryPlus.commShiftIso (n : ℤ)).hom.app
+          ((DerivedCategory.Plus.singleFunctor C 0).obj N) ≫
+        (shiftFunctor _ (n : ℤ)).map
+          ((F.mapDerivedCategoryPlusSingleFunctor 0).hom.app N ≫
+            (DerivedCategory.Plus.singleFunctor D 0).map e))) = y
+  have hx' := congrArg (fun z ↦ z ≫ d) hx
+  simpa only [d, Category.assoc, IsIso.inv_hom_id, Category.comp_id,
+    Functor.map_comp] using hx'
+
 
 end CategoryTheory

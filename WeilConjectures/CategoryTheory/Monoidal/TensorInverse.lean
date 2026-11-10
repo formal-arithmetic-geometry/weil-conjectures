@@ -179,6 +179,12 @@ noncomputable def addIso' : (a b : ℤ) → e.zpow a ⊗ e.zpow b ≅ e.zpow (a 
 noncomputable def addIso (a b c : ℤ) (h : a + b = c) : e.zpow a ⊗ e.zpow b ≅ e.zpow c :=
   e.addIso' a b ≪≫ eqToIso (congrArg e.zpow h)
 
+lemma addIso_congr {a b c c' : ℤ} (h : a + b = c) (h' : a + b = c') :
+    (e.addIso a b c h).hom ≫ eqToHom (congrArg e.zpow (h.symm.trans h')) =
+      (e.addIso a b c' h').hom := by
+  subst h h'
+  simp
+
 
 lemma addIso_hom_eqToHom {a b c c' : ℤ} (h : a + b = c) (hc : c = c') :
     (e.addIso a b c h).hom ≫ eqToHom (congrArg e.zpow hc) = (e.addIso a b c' (h.trans hc)).hom := by

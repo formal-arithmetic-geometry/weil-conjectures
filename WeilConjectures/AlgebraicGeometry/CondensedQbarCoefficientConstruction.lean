@@ -495,6 +495,32 @@ noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ 
       s.down * restrictBounded ℓ Y U.unop a + s.down * restrictBounded ℓ Y U.unop b
     rw [map_add, mul_add]
 
+/-- Every regular-module endomorphism of the bounded-function presheaf is multiplication
+by a bounded function. Evaluate at one on the terminal object; naturality transports
+this section and module linearity determines the endomorphism at every object.
+Source: RefactorInstruction, Section 4, regular-module scalar realization
+(auxiliary; not a blueprint node). -/
+lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
+    Function.Surjective (presheafScalar ℓ Y) := by
+  intro f
+  let T := Scheme.ProEt.mk (𝟙 Y)
+  let a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y :=
+    ((f.hom.app (op T)) (ULift.up 1)).down
+  refine ⟨a, ?_⟩
+  apply Mod.hom_ext
+  ext U s
+  let t : U.unop ⟶ T := MorphismProperty.Over.homMk U.unop.hom
+  have hn := ConcreteCategory.congr_hom (f.hom.naturality t.op) (ULift.up 1)
+  have hf := IsModHom.smul_hom (A := boundedP ℓ Y) (f := f.hom)
+  have h := ConcreteCategory.congr_hom (congr_app hf U) (s ⊗ₜ[ℤ] ULift.up 1)
+  change (f.hom.app U) (ULift.up (s.down * 1)) =
+    ULift.up (s.down * ((f.hom.app U) (ULift.up 1)).down) at h
+  rw [mul_one] at h
+  change ((f.hom.app U) (ULift.up 1)) =
+    (boundedP ℓ Y).map t.op ((f.hom.app (op T)) (ULift.up 1)) at hn
+  rw [hn] at h
+  exact h.symm
+
 
 /-- Monoidal sheafification carries the regular module to the regular module.
 Source: RefactorInstruction, Section 4, coefficient realization

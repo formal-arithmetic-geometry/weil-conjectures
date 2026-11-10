@@ -70,6 +70,12 @@ noncomputable def curryHomOfLinear {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X)
       Category.assoc, act_whiskerRight_evaluation, associator_naturality_middle_assoc,
       ← MonoidalCategory.whiskerLeft_comp_assoc, curry_evaluation])
 
+/-- The underlying morphism of `curryHomOfLinear q` is `curry q`. -/
+lemma curryHomOfLinear_hom {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X) (hq : IsLinearRight q)
+    (hq' : act M.X ▷ D.X ≫ q = (α_ A M.X D.X).hom ≫ A ◁ q ≫ act N.X) :
+    (curryHomOfLinear q hq hq').hom = curry q hq :=
+  rfl
+
 
 @[simp]
 lemma uncurryHom_curryHomOfLinear {M D N : Mod C A} (q : M.X ⊗ D.X ⟶ N.X)

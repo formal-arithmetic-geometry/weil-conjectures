@@ -41,6 +41,12 @@ noncomputable def restrictScalarsTensorExtendScalarsEquiv (M : ModuleCat.{u} S)
   haveI : IsScalarTower R S M := ⟨fun r s m ↦ mul_smul (φ r) s m⟩
   (TensorProduct.AlgebraTensorModule.cancelBaseChange R S S M N).restrictScalars R
 
+lemma restrictScalarsTensorExtendScalarsEquiv_tmul (M : ModuleCat.{u} S)
+    (N : ModuleCat.{u} R) (m : M) (s : S) (n : N) :
+    restrictScalarsTensorExtendScalarsEquiv φ M N (m ⊗ₜ (s ⊗ₜ n)) =
+      TensorProduct.tmul R (M := (restrictScalars φ).obj M) (s • m) n :=
+  rfl
+
 
 /-- The isomorphism `M ⊗_S (S ⊗_R N) ≅ M ⊗_R N` of modules over `R`, for a module `M` over `S`
 and a module `N` over `R`. -/

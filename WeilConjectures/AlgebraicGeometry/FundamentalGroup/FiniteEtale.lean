@@ -122,6 +122,9 @@ noncomputable def fiber : Y.FiniteEtale ⥤ FintypeCat.{u} :=
 lemma fiber_obj_obj (P : Y.FiniteEtale) :
     ((fiber s).obj P).obj = (pointSmallEtale s).fiber.obj P.obj := rfl
 
+lemma fiber_map_apply {P Q : Y.FiniteEtale} (f : P ⟶ Q) (x : (fiber s).obj P) :
+    (fiber s).map f x = (pointSmallEtale s).fiber.map f.hom x := rfl
+
 
 lemma fiber_map_left {P Q : Y.FiniteEtale}
     (f : P ⟶ Q) (x : (fiber s).obj P) : ((fiber s).map f x).left = x.left ≫ f.hom.left := rfl

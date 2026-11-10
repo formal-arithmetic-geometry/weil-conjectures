@@ -44,5 +44,11 @@ def homOfPairCompatibility (r : ∀ a, D₁.obj a ⟶ D₂.obj a)
   hom := r
   comm W t a b g₁ g₂ h₁ h₂ := (h a b).comm (W := W) t g₁ g₂ h₁ h₂
 
+/-- The assembly preserves the prescribed components.
+Proof: the component field of the constructor is r, so this is reflexivity. -/
+theorem homOfPairCompatibility_hom (r : ∀ a, D₁.obj a ⟶ D₂.obj a)
+    (h : ∀ a b, PairCompatibility r a b) (a : ι) :
+    (homOfPairCompatibility r h).hom a = r a := rfl
+
 
 end CategoryTheory.Pseudofunctor.DescentData

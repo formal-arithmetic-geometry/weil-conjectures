@@ -515,5 +515,36 @@ theorem condensedFieldContinuousMapIso_test
           (ULift.up f) = ULift.up (f.comp (profiniteTestProjection X S)) :=
   (existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected E X).exists.choose_spec S f
 
+/-- The condensed coefficient ring is the ring sheaf of continuous functions on site objects.
+Source: Hemo--Richarz--Scholbach, Example 3.1
+(auxiliary; not a blueprint node).
+Proof: define the adjoint by composing each test function with |X[S]| → S; naturality
+of the projection gives a morphism of ring sheaves. For an affine U, the universal map
+U → X[π₀(U)] is terminal in the opposite comma category, so its Kan cocone leg is
+invertible. The resulting comparison is composition with U → π₀(U), a bijection on
+continuous E-valued functions because the finite normed extension E is totally disconnected.
+Sheafification does not change these sections on weakly contractible affines. Uniqueness
+of left adjoints identifies this sheafified Kan construction with the given composite
+inverse image. Weakly contractible affine covers detect isomorphisms, proving the ring-sheaf
+comparison invertible. The displayed adjoint equations determine its uniqueness. -/
+theorem existsUnique_condensedFieldContinuousMapIso
+    (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
+    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
+    ∃! e : Mon.mk (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ≅
+        Mon.mk ((sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
+            (continuousCoefficientRingSheaf X E)),
+      ∀ (S : Profinite.{u}) (f : C(S, E)),
+        (((pointUpperStarLowerStarAdjunction.comp
+            (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))).homEquiv
+              _ _ e.hom.hom).hom.app (Opposite.op S)) (ULift.up f) =
+          ULift.up (f.comp (profiniteTestProjection X S)) := by
+  let e₀ := (Module.finBasis ℚ_[l] E).equivFunL.toHomeomorph
+  have : TotallyDisconnectedSpace E :=
+    e₀.isEmbedding.isTotallyDisconnected_range.mp
+      (isTotallyDisconnected_of_totallyDisconnectedSpace _)
+  exact existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected E X
+
 
 end AlgebraicGeometry.ProEtale

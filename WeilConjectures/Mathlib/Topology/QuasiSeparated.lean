@@ -31,6 +31,12 @@ theorem Homeomorph.quasiSeparatedSpace [QuasiSeparatedSpace α] (f : α ≃ₜ �
     rw [← f.image_preimage (U ∩ V), Set.preimage_inter]
     exact hc.image f.continuous
 
+/-- Quasi-separatedness is invariant under homeomorphisms. -/
+theorem Homeomorph.quasiSeparatedSpace_iff (f : α ≃ₜ β) :
+    QuasiSeparatedSpace α ↔ QuasiSeparatedSpace β :=
+  ⟨fun _ ↦ f.quasiSeparatedSpace, fun _ ↦ f.symm.quasiSeparatedSpace⟩
+
+-- after `NoetherianSpace.to_quasiSeparatedSpace`
 instance QuasiSeparatedSpace.prod [QuasiSeparatedSpace α] [PrespectralSpace α]
     [QuasiSeparatedSpace β] [PrespectralSpace β] : QuasiSeparatedSpace (α × β) := by
   let b : ({ U : Set α // IsOpen U ∧ IsCompact U } × { V : Set β // IsOpen V ∧ IsCompact V }) →

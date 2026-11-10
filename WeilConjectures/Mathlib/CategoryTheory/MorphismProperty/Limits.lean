@@ -95,6 +95,21 @@ theorem left_prod_map_id (g : B ⟶ B') (hg : P g.left) : P (prod.map (𝟙 A) g
     prod_map_id_left_comp_prodLeftIsoPullback_hom, P.cancel_left_of_respectsIso]
   exact P.of_isPullback (isPullback_pullbackMap_id g) hg
 
+/-- A morphism property stable under base change is stable under taking the product with the
+identity in an over category: if `g : B ⟶ B'` in `Over S` satisfies `P g.left`, then
+`P (prod.map g (𝟙 A)).left`. -/
+theorem left_prod_map_id' (g : B ⟶ B') (hg : P g.left) : P (prod.map g (𝟙 A)).left := by
+  have h : prod.map g (𝟙 A) =
+      (prod.braiding A B).inv ≫ prod.map (𝟙 A) g ≫ (prod.braiding A B').hom := by
+    ext <;> simp
+  have : IsIso ((prod.braiding A B).inv.left) :=
+    inferInstanceAs (IsIso ((Over.forget S).map (prod.braiding A B).inv))
+  have : IsIso ((prod.braiding A B').hom.left) :=
+    inferInstanceAs (IsIso ((Over.forget S).map (prod.braiding A B').hom))
+  rw [h, Over.comp_left, Over.comp_left, P.cancel_left_of_respectsIso,
+    P.cancel_right_of_respectsIso]
+  exact P.left_prod_map_id g hg
+
 
 omit [HasPullbacks C] in
 /-- Isomorphic objects of `Over S` have structure morphisms with the same properties. -/

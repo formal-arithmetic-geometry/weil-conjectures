@@ -70,6 +70,10 @@ noncomputable def coyonedaSectionsMap :
     ext m
     exact (congrArg (e.inv ≫ ·) (H.map_comp m g)).trans (Category.assoc _ _ _).symm
 
+lemma coyonedaSectionsMap_app_apply {M : C₁} (m : (coyonedaSections c₁).obj M) :
+    (coyonedaSectionsMap f c₁ c₂ H e hH).app M m = e.inv ≫ H.map m :=
+  rfl
+
 
 /-- The comparison `B ⊗_A Hom(X₁, M) ⟶ Hom(X₂, H M)`, `b ⊗ m ↦ b • (e⁻¹ ≫ H m)`: the map adjoint
 to `coyonedaSectionsMap`. -/

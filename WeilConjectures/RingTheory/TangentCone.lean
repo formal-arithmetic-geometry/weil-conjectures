@@ -73,6 +73,10 @@ theorem TangentConesMeetAtOrigin.symm {I J : Ideal R} (h : TangentConesMeetAtOri
   refine ⟨n, fun N hN => (hn N hN).trans_eq ?_⟩
   rw [sup_comm (I ⊓ _)]
 
+theorem tangentConesMeetAtOrigin_comm {I J : Ideal R} :
+    TangentConesMeetAtOrigin R I J ↔ TangentConesMeetAtOrigin R J I :=
+  ⟨.symm, .symm⟩
+
 
 /-- Multiplying an element of `I ∩ 𝔪^M + J ∩ 𝔪^M + 𝔪^(M+1)` by an element of `𝔪^k` gives an
 element of `I ∩ 𝔪^(k+M) + J ∩ 𝔪^(k+M) + 𝔪^(k+M+1)`. -/

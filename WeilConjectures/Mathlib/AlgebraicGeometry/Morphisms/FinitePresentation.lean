@@ -162,6 +162,17 @@ instance locallyOfFinitePresentation_diagonal [LocallyOfFinitePresentation f] :
     rw [pullback.diagonal_fst]; infer_instance
   exact locallyOfFinitePresentation_of_comp _ (pullback.fst f f)
 
+/-- **The diagonal of a morphism of finite presentation is of finite presentation.**
+
+Mathlib has no bundled class for "of finite presentation"; a morphism is of finite presentation
+if it is locally of finite presentation, quasi-compact and quasi-separated. Note that `f` itself
+need not be quasi-compact for this. -/
+theorem Scheme.Hom.diagonal_finitePresentation [LocallyOfFinitePresentation f]
+    [QuasiSeparated f] :
+    LocallyOfFinitePresentation (pullback.diagonal f) ∧ QuasiCompact (pullback.diagonal f) ∧
+      QuasiSeparated (pullback.diagonal f) :=
+  ⟨inferInstance, inferInstance, inferInstance⟩
+
 
 end Diagonal
 

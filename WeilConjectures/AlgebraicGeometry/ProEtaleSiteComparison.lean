@@ -58,6 +58,43 @@ noncomputable abbrev comparisonCoefficientAdjunction (X : Scheme.{u}) :=
 
 end
 
+/-- For sets, the inverse image `comparisonCoefficientPullback` preserves finite limits, so
+the comparison adjunction is the geometric morphism from the pro-etale to the etale topos.
+Source: Stacks Project, Tags 099R, 00X6 and 00WJ.
+
+Proof: etale morphisms are weakly etale since they and their open diagonals are flat.
+The existing inclusion therefore retains the underlying schemes and arrows. The terminal
+scheme and scheme fibre products give terminal objects and fibre products in both sites;
+their universal properties show that the inclusion preserves them and hence finite limits.
+Etale covering families are fpqc by `fpqcCover_of_smallEtaleCover`, and their arrows are
+weakly etale, so they are pro-etale covering families. Restriction consequently sends
+sheaves to sheaves. Apply the continuous-functor sheaf adjunction (00WX): its left adjoint
+is the left Kan extension followed by sheafification. The comma categories in this Kan
+extension are filtered, using finite limits of the etale site and their preservation by
+the inclusion (the presheaf-pullback left-exactness lemma). Filtered colimits of sets
+preserve finite limits, so the Kan extension is left exact. Sheafification is left exact
+by 00WJ, and so is inclusion of sheaves into presheaves. Their composite is left exact.
+All categories and comma colimits are taken in the common larger site universe. -/
+theorem preservesFiniteLimits_comparisonCoefficientPullback_type (T : Scheme.{u}) :
+    PreservesFiniteLimits (comparisonCoefficientPullback (Type (u + 1)) T) := by
+  have hlan : PreservesFiniteLimits
+      ((Scheme.toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
+        (T.ProEtᵒᵖ ⥤ Type (u + 1))) := by
+    apply preservesFiniteLimits_of_preservesFiniteLimitsOfSize.{u + 1}
+    intro J _ _
+    apply preservesLimitsOfShape_of_evaluation
+      ((Scheme.toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
+        (T.ProEtᵒᵖ ⥤ Type (u + 1))) J
+    intro K
+    have : IsFiltered (CostructuredArrow (Scheme.toProEt T).op K) :=
+      IsFiltered.of_equivalence
+        (structuredArrowOpEquivalence (Scheme.toProEt T) (Opposite.unop K))
+    exact preservesLimitsOfShape_of_natIso
+      (Functor.lanEvaluationIsoColim' (Scheme.toProEt T).op K).symm
+  let _ := hlan
+  apply Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
+    (Scheme.toProEt T) (Type (u + 1)) T.smallEtaleTopology (Scheme.ProEt.topology T)
+
 
 end AlgebraicGeometry.ProEtale
 

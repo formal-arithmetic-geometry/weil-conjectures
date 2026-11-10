@@ -132,6 +132,11 @@ noncomputable def quotientBasisCoordLinearMap : MvPolynomial n A →ₗ[A] Fin d
   map_add' := quotientBasisCoord_add v
   map_smul' a g := by rw [← C_mul', quotientBasisCoord_C_mul, RingHom.id_apply]
 
+/-- The underlying function of `quotientBasisCoordLinearMap v`. -/
+theorem quotientBasisCoordLinearMap_apply (g : MvPolynomial n A) :
+    quotientBasisCoordLinearMap v g = quotientBasisCoord v g :=
+  rfl
+
 
 /-- The coordinates of `0` vanish. -/
 @[simp]
@@ -377,6 +382,10 @@ theorem aeval_mk_X {σ : Type*} (I : Ideal (MvPolynomial σ R)) (p : MvPolynomia
     aeval (fun x ↦ Ideal.Quotient.mk I (X x)) p = Ideal.Quotient.mk I p := by
   rw [← Ideal.Quotient.mkₐ_eq_mk R, ← comp_aeval_apply, aeval_X_left_apply]
 
+theorem isQuotientBasis_quotientBasisIdeal : IsQuotientBasis w (quotientBasisIdeal w) :=
+  isQuotientBasis_quotientBasisIdealOf w _ fun x hx ↦ by
+    rwa [aeval_mk_X, Ideal.Quotient.eq_zero_iff_mem]
+
 
 /-- The extension of the universal ideal along any `φ : QuotientBasisRing w →ₐ[R] A` is
 `w`-adapted. -/
@@ -420,6 +429,11 @@ noncomputable def quotientBasisEquiv (A : Type*) [CommRing A] [Algebra R A] :
     rw [quotientBasisIdeal, map_quotientBasisIdealOf]
     simp only [Ideal.Quotient.liftₐ_apply, Ideal.Quotient.lift_mk, AlgHom.coe_toRingHom, aeval_X]
     exact quotientBasisIdealOf_eq_of_isQuotientBasis w I.2
+
+theorem coe_quotientBasisEquiv_apply {A : Type*} [CommRing A] [Algebra R A]
+    (φ : QuotientBasisRing w →ₐ[R] A) :
+    (quotientBasisEquiv w A φ).1 = (quotientBasisIdeal w).map (map φ.toRingHom) :=
+  rfl
 
 
 end MvPolynomial

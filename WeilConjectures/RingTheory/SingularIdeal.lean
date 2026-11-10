@@ -49,6 +49,26 @@ theorem singularIdeal_isRadical (R : Type u) (A : Type v) [CommRing R] [CommRing
     [Algebra R A] : (singularIdeal R A).IsRadical := by
   exact Ideal.radical_isRadical _
 
+/-- The smooth locus is the union of the basic opens of smooth principal localizations.
+For a prime `q`, membership on either side means there is a `g` outside `q` whose
+localization is smooth. This is the definition of smoothness at a prime.
+Source: Stacks Project, Smoothing Ring Maps, after Definition 07C5
+(blueprint: def-weil-pbc-singular-ideal). -/
+theorem smoothAtPrime_locus_eq (R : Type u) (A : Type v) [CommRing R] [CommRing A]
+    [Algebra R A] :
+    {q : PrimeSpectrum A | IsSmoothAtPrime R q} =
+      ⋃ g ∈ smoothElements R A, (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum A)) := by
+  ext q
+  simp only [Set.mem_ofPred_eq, Set.mem_iUnion, SetLike.mem_coe,
+    PrimeSpectrum.mem_basicOpen, IsSmoothAtPrime, smoothElements, exists_prop]
+  exact exists_congr fun g ↦ and_comm
+
+theorem isOpen_smoothAtPrime_locus (R : Type u) (A : Type v) [CommRing R] [CommRing A]
+    [Algebra R A] :
+    IsOpen {q : PrimeSpectrum A | IsSmoothAtPrime R q} := by
+  rw [smoothAtPrime_locus_eq]
+  exact isOpen_iUnion fun g ↦ isOpen_iUnion fun _ ↦ (PrimeSpectrum.basicOpen g).isOpen
+
 
 /-- The zero locus of `H_{A/R}` is precisely the nonsmooth locus, or equivalently the
 intersection of the zero loci of all smooth localization elements. A prime contains
@@ -78,6 +98,21 @@ theorem singularIdeal_zeroLocus (R : Type u) (A : Type v) [CommRing R] [CommRing
   · ext q
     simp only [PrimeSpectrum.mem_zeroLocus, Set.mem_iInter, Set.subset_def,
       Set.mem_singleton_iff, forall_eq]
+
+/-- `H_{A/R}` is the unique radical ideal with the nonsmooth locus as its zero locus.
+By `singularIdeal_zeroLocus`, `J` and `H_{A/R}` have the same zero locus. The
+zero-locus equality criterion gives equality of their radicals. Since `J` is radical
+by hypothesis and `H_{A/R}` is radical by `singularIdeal_isRadical`, they are equal.
+Source: Stacks Project, Smoothing Ring Maps, Definition 07C5; Algebra, Lemma 00E0
+(blueprint: def-weil-pbc-singular-ideal). -/
+theorem singularIdeal_unique (R : Type u) (A : Type v) [CommRing R] [CommRing A]
+    [Algebra R A] (J : Ideal A) (hJ : J.IsRadical)
+    (hV : PrimeSpectrum.zeroLocus (J : Set A) =
+      {q : PrimeSpectrum A | ¬ IsSmoothAtPrime R q}) :
+    J = singularIdeal R A := by
+  have h := PrimeSpectrum.zeroLocus_eq_iff.mp
+    (hV.trans (singularIdeal_zeroLocus R A).1.symm)
+  rwa [hJ.radical, (singularIdeal_isRadical R A).radical] at h
 
 
 end Algebra

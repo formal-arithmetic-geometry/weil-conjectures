@@ -48,6 +48,9 @@ variable {Φ₁ Φ₂ Φ₃ F} (h : Derives₃ Φ₁ Φ₂ Φ₃ F)
   [Φ₃.IsLeftDerivabilityStructure] [W₁.ContainsIdentities] [W₂.ContainsIdentities]
   [W₃.ContainsIdentities]
 
+lemma hasLeftDerivedFunctor₃ : F.HasLeftDerivedFunctor₃ W₁ W₂ W₃ :=
+  Derives.hasLeftDerivedFunctor h
+
 
 include h in
 lemma isIso_of_isLeftDerivabilityStructure

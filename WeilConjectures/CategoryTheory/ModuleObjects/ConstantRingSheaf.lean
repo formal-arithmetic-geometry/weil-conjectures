@@ -125,5 +125,12 @@ noncomputable def modConstRingSheafEquivalence :
     Mod (Sheaf J Ab.{u + 1}) (constRingSheaf J T) ≌ Sheaf J (ModuleCat.{u + 1} T) :=
   (modToSheafModule J T).asEquivalence
 
+/-- The abelian sheaf underlying the sheaf of `T`-modules of a module object is its underlying
+abelian sheaf. -/
+lemma modToSheafModule_comp_sheafCompose :
+    modToSheafModule J T ⋙ sheafCompose J (forget₂ (ModuleCat.{u + 1} T) Ab.{u + 1}) =
+      Mod.forget (constRingSheaf J T) :=
+  rfl
+
 
 end CategoryTheory.Sheaf

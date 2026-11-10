@@ -177,5 +177,10 @@ lemma W_toTransfinitePlus_app (P : Cᵒᵖ ⥤ A) : J.W ((J.toTransfinitePlus A 
       (by rintro _ _ _ ⟨F⟩; exact J.W_toPlus _)
   exact J.W.transfiniteCompositionsOfShape_le κ.ord.ToType _ h.map.mem
 
+/-- The natural transformation `𝟭 _ ⟶ J.transfinitePlus A κ` lies in `J.W` objectwise. -/
+lemma functorCategory_W_toTransfinitePlus :
+    J.W.functorCategory (Cᵒᵖ ⥤ A) (J.toTransfinitePlus A κ) :=
+  J.W_toTransfinitePlus_app A κ
+
 
 end CategoryTheory.GrothendieckTopology

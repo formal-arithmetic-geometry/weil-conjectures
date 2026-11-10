@@ -172,6 +172,12 @@ section TensorProduct
 
 variable (M N : Mod C R)
 
+/-- The relative tensor product `M ⊗_R N` is the coequalizer of the right action of `R` on `M`
+and the left action of `R` on `N`. -/
+lemma tensorObj_X : (M ⊗ N).X =
+    coequalizer (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) :=
+  rfl
+
 
 /-- The projection `M ⊗ N ⟶ M ⊗_R N`. -/
 noncomputable def tensorObjπ : M.X ⊗ N.X ⟶ (M ⊗ N).X :=

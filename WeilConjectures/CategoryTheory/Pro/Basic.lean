@@ -232,6 +232,13 @@ class Functor.IsInd (F : C ⥤ D) : Prop where
     (pres₁ : RelativeColimitPresentation J F X) (pres₂ : RelativeColimitPresentation J F Y)
     (t : pres₁.Hom pres₂), f = t.map
 
+lemma Functor.IsInd.obj_exists [IsInd.{w} F] (X : D) :
+    ∃ (J : Type w) (_ : SmallCategory J) (_ : IsFiltered J),
+      Nonempty (RelativeColimitPresentation J F X) := by
+  obtain ⟨J, _, _, pres, _, _, _⟩ := hom_exists (F := F) (𝟙 X)
+  use J, inferInstance, inferInstance
+  exact ⟨pres⟩
+
 
 instance : Functor.IsInd.{v₁} (Ind.yoneda (C := C)) where
   hom_exists {X Y} f := by

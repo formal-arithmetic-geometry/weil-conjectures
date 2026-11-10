@@ -162,6 +162,27 @@ private theorem chartClassPullback_postcomp' {B T T' : Scheme.{u}}
   simp only [cartesianChartClassPullback, Functor.map_comp, Category.assoc]
   rw [Functor.commShiftIso_hom_naturality]
 
+private theorem rawComparison_inv_naturality {S Y Y' : Scheme.{u}}
+    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℕ)
+    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (φ : ((a)^*[AddCommGrpCat.{u + 1}]).obj F ⟶ F') (W : S.Etale)
+    [IsIso (rawRestrictedCohomologyComparison h q F W)]
+    [IsIso (rawRestrictedCohomologyComparison h' q F' W)]
+    (x : rawAffineRestrictedCohomology h q F W) :
+    (asIso (rawRestrictedCohomologyComparison h' q F' W)).inv
+      (rawAffineRestrictedCohomologyMap a h h' w q F F' φ W x) =
+    abelianHigherDirectImageRawPullback a h h' w q F F' φ W
+      ((asIso (rawRestrictedCohomologyComparison h q F W)).inv x) := by
+  let R := asIso (rawRestrictedCohomologyComparison h q F W)
+  let R' := asIso (rawRestrictedCohomologyComparison h' q F' W)
+  have hraw := rawRestrictedCohomologyComparison_naturality a h h' w q F F' φ W
+    (R.inv x)
+  change rawAffineRestrictedCohomologyMap a h h' w q F F' φ W (R.hom (R.inv x)) =
+    R'.hom (abelianHigherDirectImageRawPullback a h h' w q F F' φ W (R.inv x)) at hraw
+  rw [Iso.inv_hom_id_apply] at hraw
+  exact (congrArg (fun y ↦ R'.inv y) hraw).trans (Iso.hom_inv_id_apply R' _)
+
 
 private theorem chartPull_adj_naturality {S X B T T' : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)

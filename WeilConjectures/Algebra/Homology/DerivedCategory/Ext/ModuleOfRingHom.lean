@@ -51,6 +51,11 @@ noncomputable abbrev moduleOfRingHom {X Y : C} (φ : R →+* End Y) (n : ℕ) :
     change x.comp (mk₀ (φ 0)) (add_zero n) = 0
     rw [map_zero, mk₀_zero, Ext.comp_zero]
 
+lemma moduleOfRingHom_smul_def {X Y : C} (φ : R →+* End Y) (n : ℕ) (r : R) (x : Ext X Y n) :
+    letI := moduleOfRingHom (X := X) φ n
+    r • x = x.comp (mk₀ (φ r)) (add_zero n) :=
+  rfl
+
 
 /-- The action of a natural number is the `ℕ`-multiple. -/
 lemma smul_natCast_eq_nsmul {X Y : C} (φ : R →+* End Y) (n : ℕ) (k : ℕ) (x : Ext X Y n) :
@@ -75,6 +80,11 @@ noncomputable def postcompLinearMap {X Y Y' : C} (φ : R →+* End Y) (φ' : R �
         (x.comp (mk₀ g) (add_zero n)).comp (mk₀ (φ' r)) (add_zero n)
       rw [comp_assoc_of_third_deg_zero, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀,
         mk₀_comp_mk₀, hg] }
+
+lemma postcompLinearMap_apply {X Y Y' : C} (φ : R →+* End Y) (φ' : R →+* End Y')
+    (g : Y ⟶ Y') (hg : ∀ r, φ r ≫ g = g ≫ φ' r) (n : ℕ) (x : Ext X Y n) :
+    postcompLinearMap (X := X) φ φ' g hg n x = x.comp (mk₀ g) (add_zero n) :=
+  rfl
 
 
 end CategoryTheory.Abelian.Ext

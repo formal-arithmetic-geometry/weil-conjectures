@@ -84,6 +84,10 @@ noncomputable def image {B : C} (φ : A ⟶ B) : DecreasingFiltration B where
     rw [← Subobject.ofLE_arrow (F.F_succ_le n), Category.assoc]
     exact imageSubobject_comp_le _ _
 
+lemma image_F {B : C} (φ : A ⟶ B) (n : ℤ) :
+    (F.image φ).F n = imageSubobject ((F.F n).arrow ≫ φ) :=
+  rfl
+
 
 end DecreasingFiltration
 

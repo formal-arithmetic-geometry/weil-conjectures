@@ -213,6 +213,16 @@ lemma descentEquiv_apply (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
     descentEquiv θ hunit hcocycle l w = descentLift θ l w :=
   rfl
 
+/-- The value of `descentEquiv` on a pure tensor `b ⊗ₜ n` is `b • n l`. -/
+lemma descentEquiv_tmul (θ : ∀ j k, N j →ₗ[B j] B j ⊗[A] N k)
+    (hunit : ∀ j (x : N j), (LinearMap.id : N j →ₗ[A] N j).liftBaseChange (B j) (θ j j x) = x)
+    (hcocycle : ∀ j k l (x : N j),
+      ((θ k l).restrictScalars A).lTensor (B j) (θ j k x) =
+        (TensorProduct.mk A (B k) (N l) 1).lTensor (B j) (θ j l x))
+    [Finite J] (l : J) [Module.Flat A (B l)] (b : B l) (n : descentSubmodule θ) :
+    descentEquiv θ hunit hcocycle l (b ⊗ₜ n) = b • (n : ∀ j, N j) l :=
+  rfl
+
 
 section Amitsur
 
@@ -224,6 +234,10 @@ noncomputable abbrev amitsurCoaction (A B N : Type*) [CommRing A] [CommRing B] [
     [AddCommGroup N] [Module A N] (_ _ : Unit) :
     B ⊗[A] N →ₗ[B] B ⊗[A] (B ⊗[A] N) :=
   (TensorProduct.mk A B N 1).baseChange B
+
+lemma amitsurCoaction_tmul (b : B) (n : N) :
+    amitsurCoaction A B N () () (b ⊗ₜ n) = b ⊗ₜ (1 ⊗ₜ n) :=
+  rfl
 
 
 /-- The inclusion `n ↦ (1 ⊗ n)` of `N` into the descent submodule of `amitsurCoaction`. -/

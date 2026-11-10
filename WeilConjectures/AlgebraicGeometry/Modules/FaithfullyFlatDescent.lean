@@ -86,6 +86,28 @@ section Algebra
 
 variable {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
 
+/-- Morphisms out of the pullback of a quasi-coherent module along `Spec B ⟶ Spec A` are
+determined by their values on the images of global sections under the unit. -/
+lemma pullback_hom_ext_Spec {M : (Spec (.of A)).Modules} [M.IsQuasicoherent]
+    {Q : (Spec (.of B)).Modules}
+    {α β : (pullback (Spec.map (CommRingCat.ofHom (algebraMap A B)))).obj M ⟶ Q}
+    (h : ∀ m : Γ(M, ⊤),
+      α.app ⊤ (pullbackΓ (Spec.map (CommRingCat.ofHom (algebraMap A B))) M m) =
+        β.app ⊤ (pullbackΓ (Spec.map (CommRingCat.ofHom (algebraMap A B))) M m)) :
+    α = β := by
+  apply hom_ext_of_isQuasicoherent_Spec (R := .of B)
+  intro y
+  obtain ⟨e, he⟩ := exists_linearEquiv_pullback_Spec (B := B) M
+  obtain ⟨t, rfl⟩ := e.surjective y
+  induction t using TensorProduct.inductionOn with
+  | tmul b m =>
+    have : e (b ⊗ₜ m) = b • e (1 ⊗ₜ m) := by
+      rw [← LinearEquiv.map_smul, smul_tmul', smul_eq_mul, mul_one]
+    rw [this, he]
+    exact (Hom.app_smul_of α ⊤ b _).trans
+      ((congrArg (b • ·) (h m)).trans (Hom.app_smul_of β ⊤ b _).symm)
+  | add x y hx hy => rw [map_add, map_add, map_add, hx, hy]
+
 
 /-- The two morphisms `Spec (B ⊗[A] B) ⟶ Spec B`. -/
 noncomputable abbrev specTensorFst (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] :

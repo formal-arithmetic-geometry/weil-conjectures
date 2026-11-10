@@ -74,6 +74,9 @@ lemma mapMod_obj_smul (M : Mod C R) :
     γ[F.obj R, ((F.mapMod R).obj M).X] =
       Functor.LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X] := rfl
 
+/-- `mapMod` commutes with the forgetful functors. -/
+lemma mapMod_comp_forget : F.mapMod R ⋙ Mod.forget (F.obj R) = Mod.forget R ⋙ F := rfl
+
 
 instance faithful_mapMod [F.Faithful] : (F.mapMod R).Faithful where
   map_injective h := Mod.hom_ext _ _ (F.map_injective congr(($h).hom))

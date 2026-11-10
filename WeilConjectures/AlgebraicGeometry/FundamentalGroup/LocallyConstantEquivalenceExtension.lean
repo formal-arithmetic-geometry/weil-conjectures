@@ -46,5 +46,25 @@ theorem exists_finiteEtale_flc_equivalence_sheaf (Y : Scheme.{v}) :
           FiniteEtale.pullback f ⋙ Ψ.functor ⋙ ObjectProperty.ι _)) :=
   exists_finiteEtale_flc_equivalence Y
 
+/-- The Yoneda equivalence carries a finite abelian torsor and its action to its sheaf torsor.
+This is `AlgebraicGeometry.Scheme.finiteEtale_flc_preserves_torsors`.
+Source: Stacks Project, proof of Tag 09ZB, with Tag 03RV
+(blueprint: thm-galois-lc-etale). -/
+theorem finiteEtale_flc_preserves_torsors_sheaf {Y : Scheme.{v}}
+    (Φ : Y.FiniteEtale ≌ Y.FLC)
+    (α : Φ.functor ⋙ ObjectProperty.ι _ ≅
+      ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{v + 1}) :
+    ∀ (M : Type (v + 1)) [AddCommGroup M] [Finite M] (t : EtaleTorsor M Y),
+      ∃ ε : (Φ.functor.obj ⟨t.toEtale, t.isFinite⟩).obj ≅ t.toSheafTorsor.sheaf,
+        ε = α.app ⟨t.toEtale, t.isFinite⟩ ∧
+        ∀ (U : Y.Etale) (m : M)
+          (x : (Φ.functor.obj ⟨t.toEtale, t.isFinite⟩).obj.obj.obj (op U)),
+          ε.hom.hom.app (op U)
+            ((Φ.functor.map (ObjectProperty.homMk
+              (MorphismProperty.Over.homMk (t.vadd m) (t.vadd_π m)))).hom.hom.app (op U) x) =
+            ⟨(ε.hom.hom.app (op U) x).down ≫
+              MorphismProperty.Over.homMk (t.vadd m) (t.vadd_π m)⟩ :=
+  finiteEtale_flc_preserves_torsors Φ α
+
 
 end AlgebraicGeometry.Scheme

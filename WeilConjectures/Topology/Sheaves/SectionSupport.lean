@@ -44,6 +44,9 @@ def DimLT (S : Set X) (n : ℕ) : Prop :=
 lemma DimLT.mono {S T : Set X} {n : ℕ} (h : DimLT T n) (hST : S ⊆ T) : DimLT S n :=
   fun p hp ↦ h p (hp.trans hST)
 
+lemma dimLT_empty (n : ℕ) : DimLT (∅ : Set X) n := fun p hp ↦
+  absurd (Set.subset_empty_iff.1 hp) p.last.isIrreducible.nonempty.ne_empty
+
 
 lemma DimLT.union {S T : Set X} {n : ℕ} (hS : DimLT S n) (hT : DimLT T n) (hS' : IsClosed S)
     (hT' : IsClosed T) : DimLT (S ∪ T) n := fun p hp ↦ by

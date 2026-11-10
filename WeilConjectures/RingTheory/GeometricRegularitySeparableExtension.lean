@@ -89,5 +89,43 @@ theorem isGeometricallyRegular_of_isSeparable
     exact ⟨⟨IntermediateField.adjoin k {x}, inferInstance⟩,
       IntermediateField.subset_adjoin k {x} (by simp)⟩
 
+/-- Descent along a separable algebraic extension. The proof tensors finite purely inseparable
+extensions with the separable extension and uses cancellation, as in Stacks Project,
+Lemma 07QH. (blueprint: lem-weil-pbc-geometric-regularity-separable-extension-backward) -/
+theorem isGeometricallyRegular_of_isSeparable_rev
+    (k : Type u) (k' : Type v) (R : Type w)
+    [Field k] [Field k'] [CommRing R]
+    [Algebra k k'] [Algebra k' R] [Algebra k R] [IsScalarTower k k' R]
+    [Algebra.IsSeparable k k'] [IsNoetherianRing R] :
+    IsGeometricallyRegular k' R → IsGeometricallyRegular k R := by
+  intro hR
+  refine ⟨inferInstance, ?_⟩
+  intro L _ _ _ _
+  obtain ⟨hfield, _, hfinite, _⟩ := separableTensor_purelyInseparable_isField k k' L
+  let : Field (TensorProduct k k' L) := hfield.toField
+  have : Module.Finite k' (TensorProduct k k' L) := hfinite
+  have : IsRegularRing (TensorProduct k' (TensorProduct k k' L) R) :=
+    isRegularRing_tensorProduct_of_isGeometricallyRegular hR (TensorProduct k k' L)
+      (IntermediateField.fg_top k' (TensorProduct k k' L))
+  let e := (Algebra.TensorProduct.comm k' (TensorProduct k k' L) R).trans
+    (Algebra.TensorProduct.cancelBaseChange k k' k' R L)
+  exact IsRegularRing.of_ringEquiv
+    (e.toRingEquiv.trans (Algebra.TensorProduct.comm k R L).toRingEquiv)
+
+/-- Geometric regularity of a Noetherian algebra is unchanged when its base field is replaced
+by a separable algebraic extension over which the algebra is already defined.
+Source: Stacks Project, Algebra, Lemma 07QH and Definition 0382
+(blueprint: lem-weil-pbc-geometric-regularity-separable-extension).
+-/
+theorem isGeometricallyRegular_iff_of_isSeparable
+    (k : Type u) (k' : Type v) (R : Type w)
+    [Field k] [Field k'] [CommRing R]
+    [Algebra k k'] [Algebra k' R] [Algebra k R] [IsScalarTower k k' R]
+    [Algebra.IsSeparable k k'] [IsNoetherianRing R] :
+    IsGeometricallyRegular k R ↔ IsGeometricallyRegular k' R := by
+  constructor
+  · exact isGeometricallyRegular_of_isSeparable k k' R
+  · exact isGeometricallyRegular_of_isSeparable_rev k k' R
+
 
 end Algebra

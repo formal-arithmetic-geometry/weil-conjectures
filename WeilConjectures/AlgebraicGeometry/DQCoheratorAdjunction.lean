@@ -397,6 +397,39 @@ private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
         (DerivedCategory.quotientCompQhIso C).hom.app (I⟦i⟧) ≫
         (DerivedCategory.Q.commShiftIso i).hom.app I) (DerivedCategory.Q.map f)
 
+/-- Global degree-i cohomology of a K-injective representative is the derived Hom
+from O_Y[-i], as an additive group.
+Source: Stacks Project, Tag 0B6I, final proof paragraph
+(blueprint: lem-pc-dq-coherator-adjunction).
+
+Proof: a chain map from O_Y[-i] to I is an i-cocycle of global sections, and
+homotopies correspond to i-coboundaries. Passage to the homotopy category gives
+H^i(Γ(Y,I)). The K-injective comparison (`lem-sc-kinjective-quasi-iso-comparison`)
+identifies these homotopy classes with morphisms in the derived category.
+This identification is additive and natural in I. -/
+theorem globalSections_homology_equiv_structureSheaf_shift (Y : Scheme.{u})
+    [CompactSpace Y] [QuasiSeparatedSpace Y]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    [I.IsKInjective] (i : ℤ) :
+    Nonempty
+      (((((RingedSpace.globalSectionsFunctor Y.toRingedSpace).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj I).homology i) ≃+
+        ((((DerivedCategory.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
+            (SheafOfModules.unit (moduleRings Y.toRingedSpace)))⟦-i⟧) ⟶
+              DerivedCategory.Q.obj I)) := by
+  let Γ := RingedSpace.globalSectionsFunctor Y.toRingedSpace
+  let K := (Γ.mapHomologicalComplex (.up ℤ)).obj I
+  let U := forget₂ (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (Opposite.op ⊤)))
+    AddCommGrpCat
+  let e := (HomologicalComplex.homologyFunctor _ _ i).mapIso
+    (unitHomComplexSectionsIso Y I)
+  let eH := e ≪≫ (K.sc i).mapHomologyIso U
+  exact ⟨eH.addCommGroupIsoToAddEquiv.symm.trans
+    ((CochainComplex.HomComplex.homologyAddEquiv _ I i).trans (unitClassDerivedEquiv Y I i))⟩
+
 
 /-- Any coherator right adjoint detects quasi-isomorphisms on derived global sections,
 computed on K-injective representatives of the source and target.

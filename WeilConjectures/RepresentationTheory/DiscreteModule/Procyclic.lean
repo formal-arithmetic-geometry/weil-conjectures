@@ -245,6 +245,13 @@ lemma exists_mul_sub_eq {A : Type*} [AddCommGroup A] (f : G → A)
       rw [hidxτ, h', Nat.mod_self, Finset.sum_range_zero, zero_sub, neg_eq_iff_eq_neg]
       exact eq_neg_of_add_eq_zero_left hsum
 
+/-- The coinduced module of an `ℓ`-primary module is `ℓ`-primary. -/
+lemma _root_.DiscreteModule.isPrimary_coind₁ {X : DiscreteModule.{w} G} (hX : IsPrimary ℓ X) :
+    IsPrimary ℓ ((coind₁ G).obj X.obj.V) := fun f ↦ by
+  obtain ⟨J, hJ⟩ := exists_pow_nsmul_eq_zero_of_finite ℓ (finite_range_smoothFunctions f)
+    (by rintro _ ⟨x, rfl⟩; exact hX _)
+  exact ⟨J, Subtype.ext (funext fun x ↦ hJ _ ⟨x, rfl⟩)⟩
+
 
 omit [IsTopologicalGroup G] [CompactSpace G] hχ in
 lemma ρ_mul_conj_apply {X : DiscreteModule.{w} G} {y : X.obj.V}
@@ -606,6 +613,20 @@ variable {ℓ} (M : DiscreteModule.{w} (Multiplicative ℤ_[ℓ]))
 /-- The endomorphism `τ - 1` of a discrete `ℤ_ℓ`-module, `τ = 1` the topological generator. -/
 noncomputable abbrev padicIntTauSubOne : M.obj.V →+ M.obj.V :=
   (M.obj.ρ (.ofAdd 1)).hom - AddMonoidHom.id _
+
+/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
+vanishing part.
+
+Let `M` be an `ℓ`-primary (e.g. killed by `ℓ ^ s`) discrete continuous module over
+`G = ℤ_ℓ` (written multiplicatively), with topological generator `τ = 1`. Its continuous
+cohomology is computed by the two-term complex `[M --τ-1--> M]` in degrees `0, 1`:
+`H⁰(G, M) = ker(τ - 1)` (`DiscreteModule.HZeroPadicIntAddEquiv`),
+`H¹(G, M) ≃ coker(τ - 1)` (`DiscreteModule.HOnePadicIntAddEquiv`), and `Hᵠ(G, M) = 0` for
+`q ≥ 2` (this statement). This is the case `χ = id` of
+`DiscreteModule.IsEllAdicQuotient.subsingleton_H`. -/
+theorem subsingleton_H_padicInt (hM : IsPrimary ℓ M) {q : ℕ} (hq : 2 ≤ q) :
+    Subsingleton (H (Multiplicative ℤ_[ℓ]) M q) :=
+  (isEllAdicQuotient_id ℓ).subsingleton_H M hM hq
 
 
 lemma mem_ker_id_iff {k : Multiplicative ℤ_[ℓ]} :

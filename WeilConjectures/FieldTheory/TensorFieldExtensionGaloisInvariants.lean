@@ -109,5 +109,33 @@ end TensorProduct
 
 namespace Algebra.TensorProduct
 
+/-- For a `k`-algebra, the same invariant set is the image subalgebra `A ⊗ 1`, canonically
+isomorphic to `A` by `a ↦ a ⊗ 1`.
+Source: Stacks Project, Varieties, proof of Lemma 038B
+(blueprint: lem-weil-pbc-tensor-field-extension-galois-invariants).
+
+Proof: apply the six-step basis argument of `TensorProduct.injective_and_range_eq_invariants`
+to the underlying vector space of `A`. The map `includeLeft` is the algebra homomorphism
+`a ↦ a ⊗ 1`, so its image is the invariant set and its injectivity gives an algebra
+isomorphism onto its range. This is the parenthetical clause of the node. -/
+theorem range_eq_invariants_and_equiv
+    {k : Type u} {M : Type v} [Field k] [Field M] [Algebra k M]
+    (G : Subgroup (M ≃ₐ[k] M))
+    (hfixed : {y : M | ∀ τ : G, (τ : M ≃ₐ[k] M) y = y} =
+      Set.range (algebraMap k M))
+    (A : Type w) [Ring A] [Algebra k A] :
+    (↑(Algebra.TensorProduct.includeLeft : A →ₐ[k] A ⊗[k] M).range : Set (A ⊗[k] M)) =
+        {z : A ⊗[k] M | ∀ τ : G,
+          LinearMap.lTensor A (τ : M ≃ₐ[k] M).toLinearEquiv.toLinearMap z = z} ∧
+      ∃ e : A ≃ₐ[k] (Algebra.TensorProduct.includeLeft : A →ₐ[k] A ⊗[k] M).range,
+        ∀ a : A, (e a : A ⊗[k] M) = a ⊗ₜ[k] (1 : M) := by
+  obtain ⟨hinj, hrange⟩ :=
+    TensorProduct.injective_and_range_eq_invariants G hfixed A
+  constructor
+  · exact hrange
+  · refine ⟨AlgEquiv.ofInjective Algebra.TensorProduct.includeLeft hinj, ?_⟩
+    intro a
+    rfl
+
 
 end Algebra.TensorProduct

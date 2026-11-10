@@ -301,5 +301,62 @@ theorem quotientBaseChange_nestedIdeals {A : Type u} [CommRing A]
     rw [← Category.assoc _ _ (U.2.isoSpec.inv ≫ U.1.ι), hq]
     simpa only [Category.assoc] using heι'
 
+/-- Clause (4), Stacks Tags 01JU (1) and 01IN
+(blueprint: lem-weil-pbc-quotient-base-change-closed-immersion-ideal).
+Proof: (8) Step (1) gives sections LB for L O_X and KB for the immersion ideal.
+By lem-weil-pbc-closed-immersion-pushforward-ideal-powers, extending L O_X has sections
+LB · (B/KB). Applying step (1) to X_K over Spec A gives the same generators, namely the
+images of L in B/KB. The preimages of affine opens form a basis because j_K is a closed
+embedding. Gluing on that basis gives equality of the two extended ideals.
+-/
+theorem quotientBaseChange_extendedIdeal_comap {A : Type u} [CommRing A]
+    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) (K L : Ideal A) :
+    ((Scheme.IdealSheafData.ofIdealTop (L.map (Scheme.ΓSpecIso
+        (CommRingCat.of A)).inv.hom)).comap f).comap
+          (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)))) =
+        (Scheme.IdealSheafData.ofIdealTop (L.map (Scheme.ΓSpecIso
+            (CommRingCat.of A)).inv.hom)).comap
+          (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ≫ f) ∧
+      ∀ U : X.affineOpens,
+        ∃ hW : IsAffineOpen (pullback.fst f (Spec.map (CommRingCat.ofHom
+            (Ideal.Quotient.mk K))) ⁻¹ᵁ U.1),
+        (((Scheme.IdealSheafData.ofIdealTop (L.map (Scheme.ΓSpecIso
+            (CommRingCat.of A)).inv.hom)).comap f).comap
+            (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))))).ideal
+            ⟨pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ⁻¹ᵁ U.1, hW⟩ =
+          (L.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom).map
+            ((pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)))).app U.1).hom ∧
+        ((Scheme.IdealSheafData.ofIdealTop (L.map (Scheme.ΓSpecIso
+            (CommRingCat.of A)).inv.hom)).comap
+            (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ≫ f)).ideal
+            ⟨pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ⁻¹ᵁ U.1, hW⟩ =
+          (L.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom).map
+            ((pullback.fst f (Spec.map (CommRingCat.ofHom
+                (Ideal.Quotient.mk K)))).app U.1).hom := by
+  let j := pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)))
+  let I := Scheme.IdealSheafData.ofIdealTop
+    (L.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)
+  have hc : (I.comap f).comap j = I.comap (j ≫ f) :=
+    (Scheme.IdealSheafData.comap_comp I j f).symm
+  refine ⟨hc, fun U ↦ ?_⟩
+  have : IsClosedImmersion j := inferInstanceAs
+    (IsClosedImmersion (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)))))
+  have hW := U.2.preimage j
+  refine ⟨hW, ?_⟩
+  have hs : (I.comap f).ideal U =
+      L.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom := by
+    rw [Scheme.IdealSheafData.ideal_comap_appLE I f
+      ⟨⊤, isAffineOpen_top _⟩ U (by simp)]
+    simp [I, Scheme.IdealSheafData.ofIdealTop_ideal, Ideal.map_map]
+  have hw : ((I.comap f).comap j).ideal ⟨j ⁻¹ᵁ U.1, hW⟩ =
+      ((I.comap f).ideal U).map (j.app U.1).hom := by
+    simpa [Scheme.Hom.app_eq_appLE] using
+      Scheme.IdealSheafData.ideal_comap_appLE (I.comap f) j U
+        ⟨j ⁻¹ᵁ U.1, hW⟩ le_rfl
+  constructor
+  · exact hw.trans (congrArg (Ideal.map (j.app U.1).hom) hs)
+  · rw [← hc]
+    exact hw.trans (congrArg (Ideal.map (j.app U.1).hom) hs)
+
 
 end AlgebraicGeometry

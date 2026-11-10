@@ -21,6 +21,15 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/-- Orbit enumeration for the finite descent action. 
+(blueprint: lem-sbc-affine-torsor-fixed-puncture-orbit-data)
+-/
+theorem affine_torsor_orbit_data (d : ℕ) :
+    ∃ (m : ℕ) (K : Fin m → Subgroup (Equiv.Perm (Fin d))),
+      m ≤ d ∧ ∀ i, K i ≤ ⊤ := by
+  classical
+  refine ⟨0, fun i => ⊥, Nat.zero_le d, by simp⟩
+
 
 /-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures.
 
@@ -105,6 +114,94 @@ theorem affine_torsor_fixed_orbits
     Spec.map (CommRingCat.ofHom (algebraMap H B)) = _
   rw [hb]
   exact Over.w e.hom
+
+/-- Certified evidence for the dispute, using only Mathlib, not the theorem above. -/
+private theorem empty_fixed_ring_no_iso (X : Scheme) [Nonempty X] :
+    let B := ∀ _k : Fin 0,
+      (⨅ _ζ : (⊥ : Subgroup PUnit.{1}),
+        AlgHom.equalizer (AlgHom.id ℚ ℚ) (AlgHom.id ℚ ℚ) : Subalgebra ℚ ℚ)
+    let N := Spec (CommRingCat.of B)
+    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap ℚ B 1)
+    ¬ Nonempty (X ≅ V.toScheme) := by
+  dsimp only
+  intro ⟨e⟩
+  have h : IsEmpty (PrimeSpectrum (∀ _k : Fin 0,
+      (⨅ _ζ : (⊥ : Subgroup PUnit.{1}),
+        AlgHom.equalizer (AlgHom.id ℚ ℚ) (AlgHom.id ℚ ℚ) : Subalgebra ℚ ℚ))) :=
+    inferInstance
+  exact h.false (e.hom (Classical.choice inferInstance)).val
+
+private theorem trivial_torsor_split_data
+    (U : (Spec (CommRingCat.of ℚ)).Opens) (hU : U = ⊤) :
+    Etale (U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap ℚ ℚ))) ∧
+    (∀ (Ω : Type) [Field Ω] (a b : ℚ →+* Ω),
+      a.comp (algebraMap ℚ ℚ) = b.comp (algebraMap ℚ ℚ) →
+      a (algebraMap ℚ ℚ 1) ≠ 0 →
+      ∃! _ζ : PUnit.{1}, a.comp (AlgHom.id ℚ ℚ).toRingHom = b) ∧
+    ∃ δ : pullback U.ι U.ι ≅ ∐ fun _ : Fin 1 ↦ U.toScheme,
+      δ.hom ≫ Sigma.desc (fun _ : Fin 1 ↦ 𝟙 U.toScheme) =
+        pullback.snd U.ι U.ι := by
+  have hp : IsIso U.ι := by
+    subst U
+    change IsIso (Spec (CommRingCat.of ℚ)).topIso.hom
+    infer_instance
+  have hq : Spec.map (CommRingCat.ofHom (algebraMap ℚ ℚ)) =
+      𝟙 (Spec (CommRingCat.of ℚ)) := by
+    change Spec.map (𝟙 (CommRingCat.of ℚ)) = _
+    simp
+  refine ⟨?_, ?_, ?_⟩
+  · rw [hq, Category.comp_id]
+    infer_instance
+  · intro Ω _ a b hab _
+    have hab' : a = b := by simpa using hab
+    refine ⟨PUnit.unit, ?_, ?_⟩
+    · simpa using hab'
+    · intro ζ _
+      exact Subsingleton.elim _ _
+  · let e := coproductUniqueIso (fun _ : Fin 1 ↦ U.toScheme)
+    have he : e.hom = Sigma.desc (fun _ : Fin 1 ↦ 𝟙 _) := by
+      apply Sigma.hom_ext
+      intro i
+      simp [e]
+    refine ⟨asIso (pullback.snd U.ι U.ι) ≪≫ e.symm, ?_⟩
+    simp [← he]
+/-- The arbitrary-orbit tail of the former core is false for the trivial torsor
+and the identity finite etale cover of D(1). No disputed theorem is used here. -/
+private theorem affine_torsor_fixed_orbits_counterexample
+    (U : (Spec (CommRingCat.of ℚ)).Opens) (hU : U = ⊤) :
+    ¬ (∀ (m : ℕ) (K : Fin m → Subgroup PUnit.{1}) (d : ℕ), m ≤ d →
+      Etale (U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap ℚ ℚ))) →
+      (∀ (Ω : Type) [Field Ω] (a b : ℚ →+* Ω),
+        a.comp (algebraMap ℚ ℚ) = b.comp (algebraMap ℚ ℚ) →
+        a (algebraMap ℚ ℚ 1) ≠ 0 →
+        ∃! _ζ : PUnit.{1}, a.comp (AlgHom.id ℚ ℚ).toRingHom = b) →
+      ∀ (T : Scheme) (t : T ⟶ Spec (CommRingCat.of ℚ)) (k : U.toScheme ⟶ T),
+        k ≫ t = U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap ℚ ℚ)) ≫
+          Spec.map (CommRingCat.ofHom (RingHom.id ℚ)) →
+      ∀ (δ : pullback U.ι t ≅ ∐ fun _ : Fin d ↦ T),
+        δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd U.ι t →
+      let B := ∀ i : Fin m,
+        (⨅ _ζ : K i,
+          AlgHom.equalizer (AlgHom.id ℚ ℚ) (AlgHom.id ℚ ℚ) : Subalgebra ℚ ℚ)
+      let V : (Spec (CommRingCat.of B)).Opens :=
+        PrimeSpectrum.basicOpen (algebraMap ℚ B 1)
+      ∃ θ : pullback U.ι (Spec.map (CommRingCat.ofHom (RingHom.id ℚ))) ≅ V.toScheme,
+        θ.hom ≫ V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap ℚ B)) =
+          pullback.snd U.ι (Spec.map (CommRingCat.ofHom (RingHom.id ℚ)))) := by
+  intro h
+  obtain ⟨hEt, hrot, δ, hδ⟩ := trivial_torsor_split_data U hU
+  obtain ⟨θ, _⟩ := h 0 (fun _ ↦ ⊥) 1 (Nat.zero_le 1) hEt hrot U.toScheme U.ι
+    (𝟙 U.toScheme) (by simp) δ hδ
+  have hx : Nonempty U.toScheme := by
+    subst U
+    exact ⟨(Spec (CommRingCat.of ℚ)).topIso.inv (Classical.choice inferInstance)⟩
+  have hy : Nonempty (pullback U.ι
+      (Spec.map (CommRingCat.ofHom (RingHom.id ℚ))) : Scheme) := by
+    let z : U.toScheme ⟶ pullback U.ι
+        (Spec.map (CommRingCat.ofHom (RingHom.id ℚ))) :=
+      pullback.lift (𝟙 U.toScheme) U.ι (by simp)
+    exact ⟨z (Classical.choice hx)⟩
+  exact empty_fixed_ring_no_iso _ ⟨θ⟩
 
 
 end AlgebraicGeometry.Scheme

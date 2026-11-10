@@ -36,6 +36,19 @@ private noncomputable abbrev coeff (E : Type u) [NormedField E] (X : Scheme.{u})
     (g : coeff E X ⟶ coeff E X) : E :=
   condensedFieldContinuousCoefficientMap E X g x
 
+private lemma coefficientValue_eq
+    (E : Type u) [NormedField E] (X : Scheme.{u}) (x : X)
+    (g : coeff E X ⟶ coeff E X) :
+    coefficientValue E X x g =
+      ((g.hom.app (op (Scheme.ProEt.mk (𝟙 X)))) (ULift.up 1)).down x := by
+  unfold coefficientValue condensedFieldContinuousCoefficientMap
+  rfl
+
+@[irreducible] private noncomputable def coefficientValue
+    (E : Type u) [NormedField E] (X : Scheme.{u}) (x : X)
+    (g : coeff E X ⟶ coeff E X) : E :=
+  condensedFieldContinuousCoefficientMap E X g x
+
 
 @[irreducible] private noncomputable def ringScalar
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]

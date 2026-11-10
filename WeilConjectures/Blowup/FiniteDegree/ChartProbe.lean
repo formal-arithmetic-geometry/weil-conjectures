@@ -283,6 +283,27 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_of_comap_probe
   exact Ideal.le_of_comap_le_comap_of_bijective
     (ConcreteCategory.bijective_of_isIso _) h
 
+/-- Comparing two ideal sheaves on affine opens inside an open `O` through their
+restrictions to `O`. -/
+lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ideal_of_comap_ι_le
+    {Y : Scheme.{u}} {O : Y.Opens} {K₁ K₂ : Y.IdealSheafData}
+    (h : K₁.comap O.ι ≤ K₂.comap O.ι) (W : Y.affineOpens) (hW : W.1 ≤ O) :
+    K₁.ideal W ≤ K₂.ideal W := by
+  have hle : W.1 ≤ O.ι.opensRange := by
+    rw [Scheme.Opens.opensRange_ι]
+    exact hW
+  have hW' : IsAffineOpen (O.ι ⁻¹ᵁ W.1) := W.2.preimage_of_isOpenImmersion O.ι hle
+  have h' := h ⟨O.ι ⁻¹ᵁ W.1, hW'⟩
+  rw [Scheme.IdealSheafData.ideal_comap_eq_map_appLE O.ι K₁ W ⟨_, hW'⟩ le_rfl,
+    Scheme.IdealSheafData.ideal_comap_eq_map_appLE O.ι K₂ W ⟨_, hW'⟩ le_rfl] at h'
+  have : IsIso (O.ι.appLE W.1 (O.ι ⁻¹ᵁ W.1) le_rfl) := by
+    rw [Scheme.Hom.appLE_eq_app]
+    exact O.ι.isIso_app W.1 hle
+  have hbij : Function.Bijective (O.ι.appLE W.1 (O.ι ⁻¹ᵁ W.1) le_rfl).hom :=
+    ConcreteCategory.bijective_of_isIso _
+  have h2 := Ideal.comap_mono (f := (O.ι.appLE W.1 (O.ι ⁻¹ᵁ W.1) le_rfl).hom) h'
+  rwa [Ideal.comap_map_of_bijective _ hbij, Ideal.comap_map_of_bijective _ hbij] at h2
+
 
 end FiniteDegreeBlowup
 

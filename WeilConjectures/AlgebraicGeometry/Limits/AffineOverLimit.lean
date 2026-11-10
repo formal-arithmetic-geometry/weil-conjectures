@@ -111,6 +111,10 @@ noncomputable def sections (i : I) : S.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{
   map_id _ := (D.obj i).presheaf.map_id _
   map_comp _ _ := ((D.obj i).presheaf.map_comp _ _)
 
+/-- The sections of `(pᵢ)_* 𝒪_{Dᵢ}` over `U` are `Γ(Dᵢ, pᵢ⁻¹ U)`. -/
+lemma sections_obj (i : I) (U : S.AffineZariskiSiteᵒᵖ) :
+    (sections D p i).obj U = Γ(D.obj i, p i ⁻¹ᵁ U.unop.toOpens) := rfl
+
 
 /-- The structure morphism `𝒪_S ⟶ (pᵢ)_* 𝒪_{Dᵢ}`. -/
 noncomputable def sectionsι (i : I) : (toOpensFunctor S).op ⋙ S.presheaf ⟶ sections D p i where
@@ -210,6 +214,10 @@ noncomputable abbrev limitScheme : Scheme.{u} := (gluingData D p hp).glued
 
 /-- The structure morphism `lim Dᵢ ⟶ S`. -/
 noncomputable abbrev limitHom : limitScheme D p hp ⟶ S := (gluingData D p hp).toBase
+
+/-- The transition maps of the relative gluing datum are `Spec` of restriction maps. -/
+lemma gluingData_functor_map {U V : S.AffineZariskiSite} (f : U ⟶ V) :
+    (gluingData D p hp).functor.map f = Spec.map ((algebra D p hp).map f.op) := rfl
 
 
 /-- The chart `Spec Γ(Dᵢ, pᵢ⁻¹ U) ⟶ Dᵢ` over an affine open `U ⊆ S`. -/

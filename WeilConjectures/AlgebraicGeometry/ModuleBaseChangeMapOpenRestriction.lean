@@ -68,6 +68,63 @@ theorem moduleBaseChangeMap_naturality {X S T X₁ : Scheme.{u}}
     (pushforwardComp v f).hom ≫ (pushforwardCongr h).hom ≫ (pushforwardComp f₁ u₁).inv
   exact (t ≫ Functor.whiskerLeft (tensorPullback v) q).naturality φ
 
+theorem moduleBaseChangeMap_open_restriction
+    {X S X' S' U V XU X'V : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (h : g' ≫ f = f' ≫ g)
+    (jU : U ⟶ S) (jV : V ⟶ S') (jX : XU ⟶ X) (jX' : X'V ⟶ X')
+    [IsOpenImmersion jU] [IsOpenImmersion jV]
+    [IsOpenImmersion jX] [IsOpenImmersion jX']
+    (fU : XU ⟶ U) (fV' : X'V ⟶ V) (gV : V ⟶ U) (gV' : X'V ⟶ XU)
+    (hf : jX ≫ f = fU ≫ jU) (hf' : jX' ≫ f' = fV' ≫ jV)
+    (hg : jV ≫ g = gV ≫ jU) (hg' : jX' ≫ g' = gV' ≫ jX)
+    (hV : gV' ≫ fU = fV' ≫ gV)
+    (hX : Set.range jX = f ⁻¹' Set.range jU)
+    (hX' : Set.range jX' = f' ⁻¹' Set.range jV) :
+    let adj : ∀ {A B : Scheme.{u}} (k : A ⟶ B), tensorPullback k ⊣ pushforward k :=
+      fun {A B : Scheme.{u}} (k : A ⟶ B) ↦
+      Classical.choose (exists_tensorPullbackAdjunction k)
+    let c : ∀ {A B C : Scheme.{u}} (k : A ⟶ B) (l : B ⟶ C),
+        tensorPullback (k ≫ l) ≅ tensorPullback l ⋙ tensorPullback k :=
+      fun {A B C : Scheme.{u}} (k : A ⟶ B) (l : B ⟶ C) ↦
+      (conjugateIsoEquiv ((adj l).comp (adj k)) (adj (k ≫ l))).symm
+        (pushforwardComp k l)
+    let rho := fun F : X.Modules ↦ moduleBaseChangeMap f fU jU jX hf F
+    let rho' := fun G : X'.Modules ↦ moduleBaseChangeMap f' fV' jV jX' hf' G
+    (∀ F : X.Modules, IsIso (rho F)) ∧
+    (∀ G : X'.Modules, IsIso (rho' G)) ∧
+    ∀ F : X.Modules,
+      let a := (c jV g).inv.app ((pushforward f).obj F) ≫
+        (eqToIso (congrArg (fun k ↦ (tensorPullback k).obj ((pushforward f).obj F)) hg)).hom ≫
+        (c gV jU).hom.app ((pushforward f).obj F) ≫ (tensorPullback gV).map (rho F)
+      let b := rho' ((tensorPullback g').obj F) ≫
+        (pushforward fV').map ((c jX' g').inv.app F) ≫
+        (pushforward fV').map
+          (eqToIso (congrArg (fun k ↦ (tensorPullback k).obj F) hg')).hom ≫
+        (pushforward fV').map ((c gV' jX).hom.app F)
+      let beta := moduleBaseChangeMap f f' g g' h F
+      let betaV := moduleBaseChangeMap fU fV' gV gV' hV ((tensorPullback jX).obj F)
+      IsIso a ∧ IsIso b ∧
+        (tensorPullback jV).map beta ≫ b = a ≫ betaV ∧
+        (IsIso ((tensorPullback jV).map beta) ↔ IsIso betaV) := by
+  intro adj c rho rho'
+  have hr : ∀ F : X.Modules, IsIso (rho F) := fun F ↦
+    moduleBaseChangeMap_open_square_isIso f fU jU jX hf hX F
+  have hr' : ∀ G : X'.Modules, IsIso (rho' G) := fun G ↦
+    moduleBaseChangeMap_open_square_isIso f' fV' jV jX' hf' hX' G
+  refine ⟨hr, hr', ?_⟩
+  intro F a b beta betaV
+  have : IsIso (rho F) := hr F
+  have : IsIso (rho' ((tensorPullback g').obj F)) := hr' _
+  have ha : IsIso a := by dsimp only [a]; infer_instance
+  have hb : IsIso b := by dsimp only [b]; infer_instance
+  have hc : (tensorPullback jV).map beta ≫ b = a ≫ betaV :=
+    moduleBaseChangeMap_square_restriction_commutes f f' g g' h
+      jU jV jX jX' fU fV' gV gV' hf hf' hg hg' hV F
+  refine ⟨ha, hb, hc, ?_⟩
+  rw [← isIso_comp_right_iff ((tensorPullback jV).map beta) b, hc,
+    isIso_comp_left_iff a betaV]
+
 
 end
 end AlgebraicGeometry.Scheme.Modules

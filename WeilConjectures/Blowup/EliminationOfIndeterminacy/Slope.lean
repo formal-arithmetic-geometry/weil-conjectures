@@ -154,6 +154,13 @@ lemma awayMap_awaySlope_eq {a b c c' : A} (ha : a ∈ I) (hb : b ∈ I) (hc : c 
   refine ⟨1, Subtype.ext ?_⟩
   simp [Polynomial.monomial_mul_monomial, h]
 
+/-- The transition maps of the blow-up charts intertwine the structure maps from `A`. -/
+lemma awayMap_awayAlgebraMap_apply {a : A} (ha : a ∈ I) {g : reesAlgebra I}
+    (hg : g ∈ reesGrading I 1) {x : reesAlgebra I} (hx : x = reesX I a ha * g) (r : A) :
+    awayMap (reesGrading I) hg hx (awayAlgebraMap I (reesX I a ha) r) =
+      awayAlgebraMap I x r :=
+  awayMap_fromZeroRingHom (reesGrading I) hg hx ((reesGradingZero I) r)
+
 
 /-- The `Away.isLocalizationElem` of two degree-one Rees elements is the slope. -/
 lemma isLocalizationElem_eq_awaySlope {a b : A} (ha : a ∈ I) (hb : b ∈ I) :

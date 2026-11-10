@@ -162,5 +162,40 @@ theorem filteredColimit_tensorProduct_elementwise
     obtain ⟨j, u, v, huv⟩ := Concrete.isColimit_exists_of_rep_eq G hc t 0 h
     exact ⟨j, u, by simpa [G] using huv⟩
 
+/-- When the tensor factor is a commutative algebra, the tensor coprojections and
+transition maps are underlying maps of ring homomorphisms.
+
+Source: Stacks Project, Algebra, Sections Tags 00CV and 05G3
+(blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
+Proof: apply `lem-weil-pbc-algebra-tensor-map-ring-hom` to every coprojection and
+transition algebra homomorphism. `Algebra.TensorProduct.rTensor` supplies the algebra
+homomorphism, whose underlying linear map is the displayed `LinearMap.rTensor`.
+Taking `AlgHom.toRingHom` gives the required ring homomorphisms. -/
+theorem filteredColimit_tensorProduct_ringHom
+    (R : Type uR) [CommRing R]
+    {I : Type uI} [SmallCategory I] [IsFiltered I]
+    (F : I ⥤ CommAlgCat.{vA, uR} R) [HasColimit F]
+    (N : Type uN) [CommRing N] [Algebra R N] :
+    (∀ i : I, ∃ φ : (F.obj i : Type vA) ⊗[R] N →+*
+        (colimit F : CommAlgCat R) ⊗[R] N,
+      ∀ t, φ t = LinearMap.rTensor N (colimit.ι F i).hom.toLinearMap t) ∧
+    (∀ (i j : I) (u : i ⟶ j),
+      ∃ φ : (F.obj i : Type vA) ⊗[R] N →+* (F.obj j : Type vA) ⊗[R] N,
+        ∀ t, φ t = LinearMap.rTensor N (F.map u).hom.toLinearMap t) := by
+  constructor
+  · intro i
+    let φ : (F.obj i : Type vA) ⊗[R] N →ₐ[R]
+        (colimit F : CommAlgCat R) ⊗[R] N :=
+      Algebra.TensorProduct.rTensor N (colimit.ι F i).hom
+    refine ⟨φ.toRingHom, ?_⟩
+    intro t
+    rfl
+  · intro i j u
+    let φ : (F.obj i : Type vA) ⊗[R] N →ₐ[R] (F.obj j : Type vA) ⊗[R] N :=
+      Algebra.TensorProduct.rTensor N (F.map u).hom
+    refine ⟨φ.toRingHom, ?_⟩
+    intro t
+    rfl
+
 
 end CommAlgCat

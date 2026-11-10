@@ -216,6 +216,25 @@ open IsLocalRing
 
 variable {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
 
+/-- Blueprint `thm:ind-etale-strictly-henselian-localization-isom`, weakly étale version
+(which covers the ind-étale case): if `A` is strictly henselian and `B` is weakly étale
+over `A`, then for every prime `n` of `B` lying over the maximal ideal of `A` the canonical
+map `A → B_n` is bijective. -/
+theorem Algebra.WeaklyEtale.bijective_algebraMap_localization_atPrime
+    [IsStrictlyHenselianLocalRing A] [Algebra.WeaklyEtale A B] (n : Ideal B) [n.IsPrime]
+    (hn : n.comap (algebraMap A B) = maximalIdeal A) :
+    Function.Bijective (algebraMap A (Localization.AtPrime n)) := by
+  have : Algebra.WeaklyEtale B (Localization.AtPrime n) :=
+    .of_isLocalization B n.primeCompl _
+  have : Algebra.WeaklyEtale A (Localization.AtPrime n) := .trans A B _
+  have : IsLocalHom (algebraMap A (Localization.AtPrime n)) := by
+    apply ((IsLocalRing.local_hom_TFAE (algebraMap A (Localization.AtPrime n))).out 1 5).mpr
+    rw [IsScalarTower.algebraMap_eq A B (Localization.AtPrime n), ← Ideal.comap_comap,
+      show (IsLocalRing.maximalIdeal (Localization.AtPrime n)).comap
+          (algebraMap B (Localization.AtPrime n)) = n from
+        Localization.AtPrime.under_maximalIdeal, hn]
+  exact Algebra.WeaklyEtale.bijective_of_isStrictlyHenselianLocalRing
+
 
 /-- The stalkwise version of
 `Algebra.WeaklyEtale.bijective_algebraMap_localization_atPrime`: for a weakly étale

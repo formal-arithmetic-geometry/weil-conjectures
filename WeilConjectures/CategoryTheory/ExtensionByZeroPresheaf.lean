@@ -293,5 +293,36 @@ theorem extensionByZeroPresheafSection_isEmpty
   intro i
   exact isEmptyElim i
 
+/-- When `V ⟶ U` is unique, the canonical isomorphism sends the injection
+of a section into the sole summand to that section, lifted in universe.
+Stacks Project, Lemma 03DI and Lemma 0F6Z
+(blueprint: def-weil-extension-by-zero-presheaf). -/
+theorem extensionByZeroPresheafSection_unique
+    (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ)
+    [Unique (V.unop ⟶ U)] :
+    ∃ e : extensionByZeroPresheafSection R U G V ≅
+        (ModuleCat.uliftFunctor.{v₁} (R.obj.obj V)).obj
+          (G.val.obj (Opposite.op (Over.mk (default : V.unop ⟶ U)))),
+      ∀ s : G.val.obj (Opposite.op (Over.mk (default : V.unop ⟶ U))),
+        e.hom (DirectSum.of (fun φ : V.unop ⟶ U =>
+          G.val.obj (Opposite.op (Over.mk φ))) default s) = ULift.up s := by
+  classical
+  let M : (V.unop ⟶ U) → Type v := fun φ => G.val.obj (Opposite.op (Over.mk φ))
+  let e : DirectSum (V.unop ⟶ U) M ≃ₗ[R.obj.obj V] M default :=
+    { DirectSum.component (R.obj.obj V) (V.unop ⟶ U) M default with
+      invFun := DirectSum.of M default
+      left_inv := fun s => by
+        apply DirectSum.ext
+        intro i
+        have hi : i = default := Unique.eq_default i
+        subst i
+        exact DFinsupp.single_eq_same
+      right_inv := fun s => DFinsupp.single_eq_same }
+  refine ⟨(e.trans ULift.moduleEquiv.symm).toModuleIso, ?_⟩
+  intro s
+  change ULift.up (e (DirectSum.of M default s)) = ULift.up s
+  congr 1
+
+
 
 end SheafOfModules

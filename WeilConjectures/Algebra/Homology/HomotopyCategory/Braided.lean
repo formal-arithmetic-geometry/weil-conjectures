@@ -52,6 +52,10 @@ complexes. -/
 noncomputable def braiding (K L : HomotopyCategory C (.up ℤ)) : K ⊗ L ≅ L ⊗ K :=
   (quotient C (.up ℤ)).mapIso (β_ K.as L.as)
 
+lemma braiding_quotient (K L : CochainComplex C ℤ) :
+    braiding ((quotient C _).obj K) ((quotient C _).obj L) = (quotient C _).mapIso (β_ K L) :=
+  rfl
+
 
 /-- The braided monoidal structure on the homotopy category of cochain complexes. -/
 noncomputable instance braidedCategory : BraidedCategory (HomotopyCategory C (.up ℤ)) where

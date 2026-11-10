@@ -32,6 +32,9 @@ def homologicalComplex {ι : Type*} (c : ComplexShape ι) :
     ObjectProperty (HomologicalComplex C c) :=
   fun K ↦ ∀ i, P (K.X i)
 
+lemma homologicalComplex_iff {ι : Type*} {c : ComplexShape ι} (K : HomologicalComplex C c) :
+    P.homologicalComplex c K ↔ ∀ i, P (K.X i) := Iff.rfl
+
 
 lemma monotone_homologicalComplex {ι : Type*} (c : ComplexShape ι) :
     Monotone (fun (P : ObjectProperty C) ↦ P.homologicalComplex c) :=

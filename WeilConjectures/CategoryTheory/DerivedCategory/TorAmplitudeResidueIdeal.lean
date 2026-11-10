@@ -144,6 +144,10 @@ structure on `D(C)` the one of `DerivedCategory.torAmplitudeIn` after specialisa
 def TensorSingleConcentratedIn (a b : ℤ) (K : DerivedCategory C) (F : C) : Prop :=
   homologyConcentratedIn a b (K ⊗ (singleFunctor C 0).obj F)
 
+lemma torAmplitudeIn_iff_forall_tensorSingleConcentratedIn (a b : ℤ) (K : DerivedCategory C) :
+    torAmplitudeIn C a b K ↔ ∀ F : C, TensorSingleConcentratedIn C a b K F :=
+  Iff.rfl
+
 
 end TensorSingle
 

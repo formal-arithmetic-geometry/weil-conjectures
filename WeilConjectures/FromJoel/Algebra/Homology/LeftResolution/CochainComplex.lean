@@ -42,6 +42,12 @@ noncomputable def objectPropertyColimitOfShapeLeftResolutionObj
   toColimitPresentation := .colimit _
   prop_diag_obj _ := hP _ (L.obj_mem_essImage _)
 
+lemma objectPropertyColimitOfShape_leftResolution_obj
+    (P : ObjectProperty (CochainComplex A ℤ)) (hP : L.essImage ≤ P)
+    (K : CochainComplex A ℤ) :
+    P.colimitsOfShape ℤ ((leftResolution L).obj K) :=
+  ⟨objectPropertyColimitOfShapeLeftResolutionObj L P hP K⟩
+
 
 variable {L} (α : L ⟶ Minus.ι _)
 

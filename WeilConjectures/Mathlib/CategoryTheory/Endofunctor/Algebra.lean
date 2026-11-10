@@ -243,6 +243,25 @@ lemma strIterate_one (K : IsoAlgebra F) : K.strIterate 1 = K.str := by
   ext
   simp
 
+/-- The iterated structure isomorphisms are compatible with addition: up to the identification
+`Fᵐ⁺ⁿ a = Fⁿ (Fᵐ a)` of `Functor.iterate_add`, `Φ^[m + n]` is the composite
+
+```
+             Fⁿ (Φ^[m])          Φ^[n]
+Fⁿ (Fᵐ a) -------------> Fⁿ a --------> a
+```
+-/
+lemma strIterate_add_hom (K : IsoAlgebra F) (m n : ℕ) :
+    (K.strIterate (m + n)).hom =
+      eqToHom (Functor.congr_obj (F.iterate_add m n) K.carrier) ≫
+        (F.iterate n).map (K.strIterate m).hom ≫ (K.strIterate n).hom := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    change F.map (K.strIterate (m + n)).hom ≫ K.str.hom =
+      _ ≫ F.map ((F.iterate n).map (K.strIterate m).hom) ≫ F.map (K.strIterate n).hom ≫ _
+    rw [ih, F.map_comp, F.map_comp, eqToHom_map, Category.assoc, Category.assoc]
+
 
 section Map
 
@@ -357,6 +376,14 @@ lemma mapOfNatIso₂_obj_obj_carrier
     (((mapOfNatIso₂ B e).obj K).obj L).carrier = (B.obj K.carrier).obj L.carrier :=
   rfl
 
+lemma mapOfNatIso₂_obj_obj_str
+    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B)
+    (K : IsoAlgebra F₁) (L : IsoAlgebra F₂) :
+    (((mapOfNatIso₂ B e).obj K).obj L).str =
+      e.app (K.carrier, L.carrier) ≪≫ (Functor.uncurry.obj B).mapIso (K.str.prod L.str) := by
+  ext
+  simp [mapOfNatIso₂]
+
 
 end Map₂
 
@@ -377,6 +404,10 @@ noncomputable def opFunctor : (IsoAlgebra F)ᵒᵖ ⥤ IsoAlgebra F.op where
         change (K'.unop.str.inv ≫ F.map φ.unop.hom.f) = φ.unop.hom.f ≫ K.unop.str.inv
         rw [Iso.inv_comp_eq, ← Category.assoc, ← h, Category.assoc, Iso.hom_inv_id,
           Category.comp_id] }
+
+lemma opFunctor_obj_carrier (K : (IsoAlgebra F)ᵒᵖ) :
+    (opFunctor.obj K).carrier = Opposite.op K.unop.carrier :=
+  mk_carrier _ _
 
 
 @[simp]

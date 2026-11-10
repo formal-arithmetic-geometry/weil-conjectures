@@ -87,6 +87,11 @@ lemma pullbackSection_presheaf_map (g : X ⟶ Y) {M : Y.Modules} {U V : Y.Opens}
   rw [show i = homOfLE i.le from Subsingleton.elim _ _]
   exact pullbackSection_map g i.le m
 
+/-- Two restrictions of the same section to the same open agree. -/
+lemma presheaf_map_apply_congr (M : X.Modules) {U V : X.Opens} (i j : V ⟶ U) (m : Γ(M, U)) :
+    M.presheaf.map i.op m = M.presheaf.map j.op m := by
+  rw [Subsingleton.elim i j]
+
 
 /-- Restricting twice is restricting once. -/
 lemma presheaf_map_presheaf_map_apply (M : X.Modules) {U V W : X.Opens} (i : V ⟶ U)

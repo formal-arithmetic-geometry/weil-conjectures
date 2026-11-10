@@ -80,6 +80,8 @@ def homMod (Z : C) (N : Mod C A) : Mod C A :=
   letI := homModObj Z N
   ⟨(CategoryTheory.ihom Z).obj N.X⟩
 
+lemma act_homMod (Z : C) (N : Mod C A) : act (homMod A Z N).X = homAct A Z N := rfl
+
 
 /-- Post-composition with a morphism of modules is linear. -/
 def homModMap (Z : C) {N N' : Mod C A} (f : N ⟶ N') : homMod A Z N ⟶ homMod A Z N' :=

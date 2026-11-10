@@ -90,6 +90,19 @@ theorem isIso_map_ihomUnitTensorToIhom_of_isDualizable (j : U ⟶ X) [IsOpenImme
     ← isDualizable_iff_isIso_ihomUnitTensorToIhom]
   exact hL
 
+/-- Conversely, for an open immersion `j : U ⟶ X` and a bounded constructible `ℚ̄_ℓ`-complex `L`
+on `X`, if `Lj^*` carries the comparison map `[L, 𝟙] ⊗ L ⟶ [L, L]` to an isomorphism, then the
+restriction `Lj^* L` is dualizable. -/
+theorem isDualizable_obj_of_isIso_map_ihomUnitTensorToIhom (j : U ⟶ X) [IsOpenImmersion j.left]
+    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hL : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+      (ihomUnitTensorToIhom L L))) :
+    IsDualizable ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L) := by
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion ℓ j L
+  rw [isDualizable_iff_isIso_ihomUnitTensorToIhom,
+    ← Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_iff]
+  exact hL
+
 
 /-- A bounded constructible `ℚ̄_ℓ`-complex `L` whose comparison map `[L, 𝟙] ⊗ L ⟶ [L, L]` is an
 isomorphism is dualizable: `[L, 𝟙]` is a left dual of `L`

@@ -85,6 +85,48 @@ variable {𝒳 𝒵 𝒴 : Type*} [Category 𝒳] [Category 𝒵] [Category 𝒴
   (hG : ∀ X : PZ.FullSubcategory, PY (G.obj X.obj))
   {Fs : 𝒴 ⥤ 𝒳} (hFs : ∀ X : PY.FullSubcategory, PX (Fs.obj X.obj)) (e : Fs ≅ Gs ⋙ Is)
 
+/-- **The exceptional projection morphism of a composite, on full subcategories**: the
+composite of the projection morphism of `Gs ⊣ G`, of the inverse of the projection comparison of
+`I ⊣ Is` and of a morphism `Fs B ⟶ Is Gs B` lifting `e⁻¹`, computed for the restricted
+adjunctions, is the same composite for the ambient adjunctions: with `ι` the inclusions,
+```
+ι (G (I K) ⊗ B) --ι(PF restricted)--> ι (G (I (K ⊗ Fs B)))
+       ‖                                    ‖
+G (I K) ⊗ B ----------PF---------> G (I (K ⊗ Fs B))
+```
+where `PF = pm ≫ G (π⁻¹ ≫ I (K ◁ e⁻¹))`. -/
+lemma ι_map_exceptionalProjection_restrictFullyFaithful (K : PX.FullSubcategory)
+    (B : PY.FullSubcategory)
+    (εB : (PX.lift (PZ.ι ⋙ Is) hIs).obj ((PZ.lift (PY.ι ⋙ Gs) hGs).obj B) ⟶
+      (PX.lift (PY.ι ⋙ Fs) hFs).obj B) (hεB : PX.ι.map εB = e.inv.app B.obj)
+    (hq' : IsIso ((bi.restrictFullyFaithful PX.fullyFaithfulι PZ.fullyFaithfulι
+      (PZ.liftCompιIso (PX.ι ⋙ I) hI).symm
+      (PX.liftCompιIso (PZ.ι ⋙ Is) hIs).symm).projectionComparison K
+        ((PZ.lift (PY.ι ⋙ Gs) hGs).obj B)))
+    (hq : IsIso (bi.projectionComparison K.obj (Gs.obj B.obj))) :
+    PY.ι.map ((ag.restrictFullyFaithful PY.fullyFaithfulι PZ.fullyFaithfulι
+        (PZ.liftCompιIso (PY.ι ⋙ Gs) hGs).symm
+        (PY.liftCompιIso (PZ.ι ⋙ G) hG).symm).projectionMorphism
+          ((PZ.lift (PX.ι ⋙ I) hI).obj K) B ≫
+        (PY.lift (PZ.ι ⋙ G) hG).map
+          (inv ((bi.restrictFullyFaithful PX.fullyFaithfulι PZ.fullyFaithfulι
+              (PZ.liftCompιIso (PX.ι ⋙ I) hI).symm
+              (PX.liftCompιIso (PZ.ι ⋙ Is) hIs).symm).projectionComparison K
+              ((PZ.lift (PY.ι ⋙ Gs) hGs).obj B)) ≫
+            (PZ.lift (PX.ι ⋙ I) hI).map (K ◁ εB))) =
+      ag.projectionMorphism (I.obj K.obj) B.obj ≫
+        G.map (inv (bi.projectionComparison K.obj (Gs.obj B.obj)) ≫
+          I.map (K.obj ◁ e.inv.app B.obj)) := by
+  rw [Functor.map_comp, ι_map_projectionMorphism_restrictFullyFaithful]
+  congr 1
+  change G.map (PZ.ι.map (_ ≫ _)) = _
+  congr 1
+  rw [Functor.map_comp, Functor.map_inv]
+  simp only [ι_map_projectionComparison_restrictFullyFaithful]
+  congr 1
+  change I.map (PX.ι.map (K ◁ _)) = _
+  rw [ObjectProperty.ι_map, ObjectProperty.whiskerLeft_hom, ← ObjectProperty.ι_map, hεB]
+
 
 end Exceptional
 

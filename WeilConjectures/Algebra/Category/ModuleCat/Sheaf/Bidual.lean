@@ -45,6 +45,13 @@ noncomputable def toRestrictOverHom {M N : SheafOfModules.{u} 𝓡} (f : M.over 
   app W := f.val.app W
   naturality _ := f.val.naturality _
 
+lemma toRestrictOverHom_app {M N : SheafOfModules.{u} 𝓡} (f : M.over U ⟶ N.over U) (W) (x) :
+    (toRestrictOverHom f).app W x = f.val.app W x := rfl
+
+lemma toRestrictOverHom_comp {M N P : SheafOfModules.{u} 𝓡} (f : M.over U ⟶ N.over U)
+    (g : N.over U ⟶ P.over U) :
+    toRestrictOverHom (f ≫ g) = toRestrictOverHom f ≫ toRestrictOverHom g := rfl
+
 
 lemma toRestrictOverHom_id (M : SheafOfModules.{u} 𝓡) :
     toRestrictOverHom (𝟙 (M.over U)) = 𝟙 _ := rfl

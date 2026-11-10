@@ -105,6 +105,14 @@ noncomputable def twistMonomialFraction {a b : n → ℤ} (h : ∑ i, a i = ∑ 
     isLocallyFraction_mk (by rw [cast_sum_toNat ha, cast_sum_toNat hb, h]) _ _
       fun x ↦ hU x.1 x.2⟩
 
+lemma coe_twistMonomialFraction_apply {a b : n → ℤ} (h : ∑ i, a i = ∑ i, b i + m) (ha : 0 ≤ a)
+    (hb : 0 ≤ b) (U : (Proj (homogeneousSubmodule n R)).Opens)
+    (hU : ∀ x ∈ U, monomialToNat R b ∉ x.asHomogeneousIdeal) (x : U) :
+    ((twistMonomialFraction (R := R) (m := m) h ha hb U hU).1 x :
+      Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
+      Localization.mk (monomialToNat R a) ⟨monomialToNat R b, hU x.1 x.2⟩ :=
+  rfl
+
 
 lemma monomialToNat_nsmul_indicator_notMem {x : Proj (homogeneousSubmodule n R)}
     (hx : x ∈ Proj.basicOpen _ (monomialToNat R (s.indicator 1))) (N : ℕ) :

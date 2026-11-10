@@ -105,6 +105,98 @@ def distribMulActionQuotient (B : AddSubgroup A) (hB : ∀ k : K, ∀ b ∈ B, k
   smul_zero k := map_zero _
   smul_add k := map_add _
 
+/-- **Filtration of a module over an `ℓ`-group.** Let `K` act on a finite `ℓ`-primary abelian
+group `A` through an `ℓ`-group, and let `B` be a `K`-stable subgroup. Then there is a finite
+increasing chain of `K`-stable subgroups from `B` to `A` whose successive quotients are killed
+by `ℓ` and have trivial `K`-action. -/
+theorem exists_filtration_of_isPGroup_of_le (ℓ : ℕ) [hℓ : Fact ℓ.Prime] [Finite A]
+    (N : Subgroup K) [N.Normal] (hN : ∀ n ∈ N, ∀ a : A, n • a = a)
+    (hK : ∀ k : K, ∃ j : ℕ, k ^ ℓ ^ j ∈ N) (hA : ∀ a : A, ∃ j : ℕ, ℓ ^ j • a = 0)
+    (B : AddSubgroup A) (hB : ∀ k : K, ∀ b ∈ B, k • b ∈ B) :
+    ∃ (n : ℕ) (F : ℕ → AddSubgroup A), F 0 = B ∧ F n = ⊤ ∧ Monotone F ∧
+      (∀ i, ∀ k : K, ∀ x ∈ F i, k • x ∈ F i) ∧ (∀ i, ∀ x ∈ F (i + 1), ℓ • x ∈ F i) ∧
+      (∀ i, ∀ k : K, ∀ x ∈ F (i + 1), k • x - x ∈ F i) := by
+  induction B using WellFoundedGT.induction with
+  | _ B ih =>
+  by_cases htop : B = ⊤
+  · refine ⟨0, fun _ ↦ B, rfl, htop, monotone_const, fun _ ↦ hB, fun _ x _ ↦ ?_,
+      fun _ k x _ ↦ ?_⟩
+    · rw [htop]
+      exact AddSubgroup.mem_top _
+    · rw [htop]
+      exact AddSubgroup.mem_top _
+  let := distribMulActionQuotient B hB
+  have : Nontrivial (A ⧸ B) := by
+    obtain ⟨a, ha⟩ : ∃ a, a ∉ B := by
+      by_contra! h
+      exact htop (eq_top_iff.2 fun a _ ↦ h a)
+    exact ⟨⟨QuotientAddGroup.mk a, 0, fun h ↦ ha ((QuotientAddGroup.eq_zero_iff a).1 h)⟩⟩
+  have : Finite (A ⧸ B) := Finite.of_surjective _ (QuotientAddGroup.mk_surjective (s := B))
+  obtain ⟨q, hq0, hqℓ, hqK⟩ := exists_ne_zero_nsmul_eq_zero_smul_eq_of_isPGroup (A := A ⧸ B) ℓ N
+    (fun n hn q ↦ QuotientAddGroup.induction_on q fun a ↦ congrArg QuotientAddGroup.mk
+      (hN n hn a))
+    hK (fun q ↦ QuotientAddGroup.induction_on q fun a ↦ by
+      obtain ⟨j, hj⟩ := hA a
+      exact ⟨j, by rw [← QuotientAddGroup.mk_nsmul, hj, QuotientAddGroup.mk_zero]⟩)
+  obtain ⟨x, rfl⟩ := QuotientAddGroup.mk_surjective q
+  have hxB : x ∉ B := fun h ↦ hq0 ((QuotientAddGroup.eq_zero_iff x).2 h)
+  have hxℓ : ℓ • x ∈ B := (QuotientAddGroup.eq_zero_iff _).1 (by
+    rw [QuotientAddGroup.mk_nsmul]; exact hqℓ)
+  have hxK (k : K) : k • x - x ∈ B := by
+    rw [← QuotientAddGroup.eq_iff_sub_mem]
+    exact hqK k
+  let B' := B ⊔ AddSubgroup.zmultiples x
+  have hmem {y : A} (hy : y ∈ B') : ∃ b ∈ B, ∃ m : ℤ, b + m • x = y := by
+    obtain ⟨b, hb, z, ⟨m, rfl⟩, rfl⟩ := AddSubgroup.mem_sup.1 hy
+    exact ⟨b, hb, m, rfl⟩
+  have hB' : ∀ k : K, ∀ y ∈ B', k • y ∈ B' := by
+    intro k y hy
+    obtain ⟨b, hb, m, rfl⟩ := hmem hy
+    rw [smul_add, smul_comm, show k • x = (k • x - x) + x by abel, smul_add, ← add_assoc]
+    refine add_mem (AddSubgroup.mem_sup_left (add_mem (hB k b hb) (zsmul_mem (hxK k) m)))
+      (AddSubgroup.mem_sup_right (zsmul_mem (AddSubgroup.mem_zmultiples x) m))
+  have hlt : B < B' := lt_of_le_of_ne le_sup_left fun h ↦
+    hxB (h ▸ AddSubgroup.mem_sup_right (AddSubgroup.mem_zmultiples x))
+  obtain ⟨n, F, hF0, hFn, hFm, hFK, hFℓ, hFt⟩ := ih B' hlt hB'
+  refine ⟨n + 1, fun i ↦ Nat.casesOn i B F, rfl, hFn, monotone_nat_of_le_succ fun i ↦ ?_,
+    fun i ↦ ?_, fun i ↦ ?_, fun i ↦ ?_⟩
+  · cases i with
+    | zero =>
+      change B ≤ F 0
+      exact hF0 ▸ hlt.le
+    | succ i => exact hFm i.le_succ
+  · cases i with
+    | zero => exact hB
+    | succ i => exact hFK i
+  · cases i with
+    | zero =>
+      intro y hy
+      obtain ⟨b, hb, m, rfl⟩ := hmem (show y ∈ B' from hF0 ▸ hy)
+      change _ ∈ B
+      rw [smul_add, smul_comm]
+      exact add_mem (nsmul_mem hb ℓ) (zsmul_mem hxℓ m)
+    | succ i => exact hFℓ i
+  · cases i with
+    | zero =>
+      intro k y hy
+      obtain ⟨b, hb, m, rfl⟩ := hmem (show y ∈ B' from hF0 ▸ hy)
+      change _ ∈ B
+      rw [smul_add, smul_comm, show k • b + m • k • x - (b + m • x) =
+        (k • b - b) + m • (k • x - x) by rw [zsmul_sub]; abel]
+      exact add_mem (sub_mem (hB k b hb) hb) (zsmul_mem (hxK k) m)
+    | succ i => exact hFt i
+
+/-- The filtration of `exists_filtration_of_isPGroup_of_le` starting from `0`. -/
+theorem exists_filtration_of_isPGroup (ℓ : ℕ) [hℓ : Fact ℓ.Prime] [Finite A]
+    (N : Subgroup K) [N.Normal] (hN : ∀ n ∈ N, ∀ a : A, n • a = a)
+    (hK : ∀ k : K, ∃ j : ℕ, k ^ ℓ ^ j ∈ N) (hA : ∀ a : A, ∃ j : ℕ, ℓ ^ j • a = 0) :
+    ∃ (n : ℕ) (F : ℕ → AddSubgroup A), F 0 = ⊥ ∧ F n = ⊤ ∧ Monotone F ∧
+      (∀ i, ∀ k : K, ∀ x ∈ F i, k • x ∈ F i) ∧ (∀ i, ∀ x ∈ F (i + 1), ℓ • x ∈ F i) ∧
+      (∀ i, ∀ k : K, ∀ x ∈ F (i + 1), k • x - x ∈ F i) :=
+  exists_filtration_of_isPGroup_of_le ℓ N hN hK hA ⊥ fun k b hb ↦ by
+    rw [(AddSubgroup.mem_bot).1 hb, smul_zero]
+    exact zero_mem _
+
 
 end FixedPoints
 
@@ -171,5 +263,27 @@ theorem exists_isOpen_not_dvd_index_pow_mem [CompactSpace G] (ℓ : ℕ) [Fact �
     refine ⟨j, (QuotientGroup.eq_one_iff _).1 ?_⟩
     simpa using congrArg Subtype.val hj
 
+
+/-- **Sylow reduction of a finite torsion module.** Let `G` be a profinite (more generally,
+compact) group, `ℓ` a prime and `M` a finite `ℓ`-primary discrete `G`-module. There is an open
+subgroup `K` of index prime to `ℓ` and a finite filtration `0 = F₀ ≤ F₁ ≤ ⋯ ≤ Fₙ = M` by
+`K`-stable subgroups whose successive quotients `Fᵢ₊₁ / Fᵢ` are trivial `𝔽_ℓ`-modules: they are
+killed by `ℓ` and `K` acts trivially on them.
+(blueprint: `lem-sc-sylow-module-filtration`) -/
+theorem exists_isOpen_not_dvd_index_filtration [CompactSpace G] (ℓ : ℕ) [Fact ℓ.Prime]
+    [Finite M.obj.V] (hM : ∀ x : M.obj.V, ∃ j : ℕ, ℓ ^ j • x = 0) :
+    ∃ K : Subgroup G, IsOpen (K : Set G) ∧ ¬ ℓ ∣ K.index ∧
+      ∃ (n : ℕ) (F : ℕ → AddSubgroup M.obj.V), F 0 = ⊥ ∧ F n = ⊤ ∧ Monotone F ∧
+        (∀ i, ∀ k ∈ K, ∀ x ∈ F i, (M.obj.ρ k).hom x ∈ F i) ∧
+        (∀ i, ∀ x ∈ F (i + 1), ℓ • x ∈ F i) ∧
+        (∀ i, ∀ k ∈ K, ∀ x ∈ F (i + 1), (M.obj.ρ k).hom x - x ∈ F i) := by
+  obtain ⟨K, hKo, hKℓ, -, hpow⟩ := exists_isOpen_not_dvd_index_pow_mem M ℓ
+  let := M.obj.distribMulAction
+  let : DistribMulAction K M.obj.V := DistribMulAction.compHom _ K.subtype
+  obtain ⟨n, F, h0, hn, hmono, hK, hℓ, htriv⟩ := exists_filtration_of_isPGroup (K := K) ℓ
+    ((actionKernel M).comap K.subtype) (fun k hk x ↦ (mem_actionKernel M).1 hk x)
+    (fun k ↦ by simpa [Subgroup.mem_subgroupOf] using hpow k k.2) hM
+  exact ⟨K, hKo, hKℓ, n, F, h0, hn, hmono, fun i k hk ↦ hK i ⟨k, hk⟩, hℓ,
+    fun i k hk ↦ htriv i ⟨k, hk⟩⟩
 
 end DiscreteModule

@@ -107,6 +107,17 @@ lemma isIso_app_of_triangEnvelope {P : ObjectProperty C} (h : ∀ X, P X → IsI
     {X : C} (hX : P.triangEnvelope X) : IsIso (τ.app X) :=
   (P.triangEnvelope_le_iff (Q := τ.isoLocus)).2 h X hX
 
+/-- Blueprint `lem-sf-generating-class-determination` (and `sk-lem-sf-determination`): a
+natural transformation between triangulated functors, compatible with the shifts, which is an
+isomorphism on the objects of a classical generator `P` is an isomorphism. -/
+lemma isIso_of_isClassicalTriangulatedGenerator {P : ObjectProperty C}
+    (hP : P.IsClassicalTriangulatedGenerator) (h : ∀ X, P X → IsIso (τ.app X)) : IsIso τ := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro X
+  apply τ.isIso_app_of_triangEnvelope h
+  rw [hP]
+  trivial
+
 
 end Triangulated
 

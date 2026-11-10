@@ -357,6 +357,25 @@ lemma homogeneousLocalizationAwayXEquiv_symm_X (j : {j : σ // j ≠ i}) :
   rw [AlgEquiv.symm_apply_eq, homogeneousLocalizationAwayXEquiv_awayMk,
     dehomogenizeX_X_of_ne R i j.2]
 
+/-- The class of `Xᵢ / Xᵢ` is sent to `1`. -/
+lemma homogeneousLocalizationAwayXEquiv_awayMk_X_self (h) :
+    homogeneousLocalizationAwayXEquiv R i
+        (HomogeneousLocalization.Away.mk _ (X_mem_homogeneousSubmodule_one R i) 1 (X i) h) = 1 := by
+  rw [homogeneousLocalizationAwayXEquiv_awayMk, dehomogenizeX_X_self]
+
+/-- The class of `Xⱼ / Xᵢ` is sent to `Yⱼ`, for `j ≠ i`. -/
+lemma homogeneousLocalizationAwayXEquiv_awayMk_X_of_ne {j : σ} (hj : j ≠ i) (h) :
+    homogeneousLocalizationAwayXEquiv R i
+        (HomogeneousLocalization.Away.mk _ (X_mem_homogeneousSubmodule_one R i) 1 (X j) h) =
+      X ⟨j, hj⟩ := by
+  rw [homogeneousLocalizationAwayXEquiv_awayMk, dehomogenizeX_X_of_ne R i hj]
+
+/-- The isomorphism is a map of `R`-algebras: it sends the class of a constant `r` to `C r`. -/
+lemma homogeneousLocalizationAwayXEquiv_algebraMap (r : R) :
+    homogeneousLocalizationAwayXEquiv R i
+      (algebraMap R (HomogeneousLocalization.Away (homogeneousSubmodule σ R) (X i)) r) = C r := by
+  rw [AlgEquiv.commutes, algebraMap_eq]
+
 
 end Chart
 

@@ -137,6 +137,14 @@ noncomputable def IsUniversalSection.baseChangeObj : T.Etale :=
   have : AlgebraicGeometry.Etale v := etale_of_comp_eq hv
   Etale.mk (pullback.snd v o ≫ u')
 
+/-- The underlying scheme of the base change is the fibre product `V ×_U O`. -/
+lemma IsUniversalSection.baseChangeObj_left :
+    (IsUniversalSection.baseChangeObj hv o u').left = pullback v o := rfl
+
+/-- The structure morphism of the base change is the second projection followed by `u'`. -/
+lemma IsUniversalSection.baseChangeObj_hom :
+    (IsUniversalSection.baseChangeObj hv o u').hom = pullback.snd v o ≫ u' := rfl
+
 
 variable {o u'} in
 /-- The projection `V ×_U O ⟶ V`, as a morphism of étale `T`-schemes. -/

@@ -398,6 +398,25 @@ variable {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
   {ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l}
 
+/-- Open–closed dévissage of the Grothendieck–Lefschetz formula for a Weil sheaf `G` on `X`,
+from the formula for the Weil sheaves `j^*G` and `i^*G`. -/
+theorem satisfiesLefschetz_toComplex_of_openClosed (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {G : WeilSheaf k₀ l X} (hU : SatisfiesLefschetz (toComplex.obj ((upperStar j).obj G)))
+    (hZ : SatisfiesLefschetz (toComplex.obj ((upperStar i).obj G))) :
+    SatisfiesLefschetz (toComplex.obj G) :=
+  .of_openClosed j i hij (hU.of_iso ((toComplexCompUpperStarIso j).app G).symm)
+    (hZ.of_iso ((toComplexCompUpperStarIso i).app G).symm)
+
+/-- Open–closed dévissage of the local comparison for a Weil sheaf `G` on `X`, from the local
+comparisons for the Weil sheaves `j^*G` and `i^*G`. -/
+theorem hasLocalWeilObjectComparison_toComplex_of_openClosed
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) {G : WeilSheaf k₀ l X}
+    (hU : HasLocalWeilObjectComparison ι (toComplex.obj ((upperStar j).obj G)))
+    (hZ : HasLocalWeilObjectComparison ι (toComplex.obj ((upperStar i).obj G))) :
+    HasLocalWeilObjectComparison ι (toComplex.obj G) :=
+  .of_openClosed j i hij (hU.of_iso ((toComplexCompUpperStarIso j).app G).symm)
+    (hZ.of_iso ((toComplexCompUpperStarIso i).app G).symm)
+
 
 /-- Open–closed dévissage of the comparison for a Weil sheaf `G` on `X`, from the comparisons for
 the Weil sheaves `j^*G` and `i^*G`. -/

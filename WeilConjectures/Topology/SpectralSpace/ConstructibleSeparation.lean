@@ -87,5 +87,25 @@ lemma disjoint_constructibleSeparation :
   rw [disjoint_iff_inter_eq_empty, ← compl_compl ((constructibleSeparation h₁ h₂ hd).1 ∩ _),
     compl_inter, (constructibleSeparation_spec_compl h₁ h₂ hd).2.2.2.2.2.2, compl_univ]
 
+/-- **Properties of the constructible separation data** (blueprint:
+`lemma-nagata-spectral-constructible-separation`): in a compact quasi-separated prespectral
+space (for instance a spectral space), the separation data `(T₁_c, T₂_c)` are closed and
+constructible, contain `T₁` resp. `T₂`, and are disjoint. Complements of compact opens are
+constructible since compact opens of a quasi-separated space are retrocompact. -/
+theorem constructibleSeparation_spec [QuasiSeparatedSpace X] :
+    IsClosed (constructibleSeparation h₁ h₂ hd).1 ∧
+      Topology.IsConstructible (constructibleSeparation h₁ h₂ hd).1 ∧
+      IsClosed (constructibleSeparation h₁ h₂ hd).2 ∧
+      Topology.IsConstructible (constructibleSeparation h₁ h₂ hd).2 ∧
+      T₁ ⊆ (constructibleSeparation h₁ h₂ hd).1 ∧ T₂ ⊆ (constructibleSeparation h₁ h₂ hd).2 ∧
+      Disjoint (constructibleSeparation h₁ h₂ hd).1 (constructibleSeparation h₁ h₂ hd).2 := by
+  obtain ⟨ho₁, ho₂, hc₁, hc₂, -⟩ := constructibleSeparation_spec_compl h₁ h₂ hd
+  exact ⟨isClosed_constructibleSeparation_fst h₁ h₂ hd,
+    Topology.isConstructible_compl.mp (hc₁.isConstructible ho₁),
+    isClosed_constructibleSeparation_snd h₁ h₂ hd,
+    Topology.isConstructible_compl.mp (hc₂.isConstructible ho₂),
+    subset_constructibleSeparation_fst h₁ h₂ hd, subset_constructibleSeparation_snd h₁ h₂ hd,
+    disjoint_constructibleSeparation h₁ h₂ hd⟩
+
 
 end PrespectralSpace

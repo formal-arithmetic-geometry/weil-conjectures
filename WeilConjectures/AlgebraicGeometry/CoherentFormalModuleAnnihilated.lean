@@ -134,10 +134,63 @@ theorem coherentFormalModule_annihilated_iff (X : Scheme.{u}) [IsNoetherian X]
       X.affineOpens id (iSup_affineOpens_eq_top X) t ht).mp h U
   tfae_finish
 
+/-- The exponent t on a finite affine cover gives exponent 2t for every component.
+Source: Stacks, Remark 0888 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power).
+Proof: pair the existing double-exponent kernel and cokernel conclusions at each level
+(node step 3). Those lemmas apply reduction modulo the adic ideal powers on affines
+and glue the resulting ideal-product vanishing over the cover.
+-/
+theorem coherentFormalModule_annihilated_double (X : Scheme.{u}) [IsNoetherian X]
+    (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G)
+    (r : ℕ) (U : Fin r → X.affineOpens) (t : ℕ)
+    (hcover : (⨆ i, (U i).1) = ⊤) (ht : 1 ≤ t)
+    (h : ∀ i : Fin r,
+      K.ideal (U i) ^ t ≤ Module.annihilator Γ(X, (U i).1) (LinearMap.ker
+        (lim.map (Functor.whiskerRight α.hom
+          (SheafOfModules.evaluation X.ringCatSheaf (op (U i).1)))).hom) ∧
+      K.ideal (U i) ^ t ≤ Module.annihilator Γ(X, (U i).1)
+        (↥(limit (G.obj ⋙
+          SheafOfModules.evaluation X.ringCatSheaf (op (U i).1)) :
+          ModuleCat Γ(X, (U i).1)) ⧸ LinearMap.range
+          (lim.map (Functor.whiskerRight α.hom
+          (SheafOfModules.evaluation X.ringCatSheaf (op (U i).1)))).hom)) :
+    ∀ n : ℕ,
+      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * t)).2
+        (kernel (α.hom.app (op n)))) ∧
+      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * t)).2
+        (cokernel (α.hom.app (op n)))) := by
+  intro n
+  exact ⟨coherentFormalModule_annihilated_double_kernel X I K F G α r U t hcover ht h n,
+    coherentFormalModule_annihilated_double_cokernel X I K F G α r U t hcover ht h n⟩
+
 
 end AlgebraicGeometry
 
 namespace LinearMap
+
+/-- The commutative algebra fact underlying the four-way equivalence: reduce modulo
+any ideal J. The kernel/cokernel hypothesis is the intrinsic form of the exact sequence
+0 → T → M → N → Q → 0, which identifies T with ker u and Q with N/range u.
+Source: Stacks, Remark 0888 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power).
+Proof (node step 3): for f,g in K^t, lift fy to x and set h(y)=gx. The kernel
+hypothesis makes this independent of x, and linearity gives a linear map. The two
+composites with u are multiplication by fg. Reduce these identities modulo J; every
+product fg kills the reduced kernel and cokernel. Such products generate K^(2t).
+-/
+theorem ker_coker_reduction_annihilated_double
+    {A : Type u} [CommRing A] {M : Type v} {N : Type w}
+    [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
+    (K J : Ideal A) (t : ℕ) (ht : 1 ≤ t) (u : M →ₗ[A] N)
+    (hker : K ^ t ≤ Module.annihilator A (ker u))
+    (hcoker : K ^ t ≤ Module.annihilator A (N ⧸ range u)) :
+    K ^ (2 * t) ≤ Module.annihilator A
+      (ker ((J • ⊤ : Submodule A M).mapQ (J • ⊤ : Submodule A N) u
+        (Submodule.smul_top_le_comap_smul_top J u))) ∧
+    K ^ (2 * t) ≤ Module.annihilator A
+      ((N ⧸ (J • ⊤ : Submodule A N)) ⧸
+        range ((J • ⊤ : Submodule A M).mapQ (J • ⊤ : Submodule A N) u
+          (Submodule.smul_top_le_comap_smul_top J u))) := by
+  exact (ker_coker_annihilated_mod_ideal.{u, v, w, v, w, v, w} K t ht u hker hcoker).2.1 J
 
 
 end LinearMap

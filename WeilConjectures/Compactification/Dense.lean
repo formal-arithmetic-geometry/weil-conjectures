@@ -53,6 +53,12 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 protected def Compactification.IsDense (c : Compactification f) : Prop :=
   IsSchemeTheoreticallyDominant c.i
 
+/-- The defining property of a dense compactification, in the form usable by typeclass
+search: if `c` is dense, then `c.i` is scheme-theoretically dominant. -/
+theorem Compactification.IsDense.isSchemeTheoreticallyDominant {c : Compactification f}
+    (hc : c.IsDense) : IsSchemeTheoreticallyDominant c.i :=
+  hc
+
 
 /-- The dense refinement of a compactification of a quasi-compact morphism is dense
 (blueprint: `prop:nagata-dense-refinement`). -/

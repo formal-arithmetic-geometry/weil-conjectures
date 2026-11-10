@@ -55,6 +55,15 @@ noncomputable def Etale.continuousMapSheaf : Sheaf X.smallEtaleTopology AddCommG
     ⟨continuousMapPresheafAb.{u + 1, u} A,
       .of_le proetaleTopology_le_fpqcTopology (isSheaf_fpqcTopology_continuousMapPresheafAb A)⟩
 
+lemma Etale.continuousMapSheaf_obj_obj (U : X.Etale) :
+    (Etale.continuousMapSheaf X A).obj.obj (op U) = AddCommGrpCat.of C(U.left, A) :=
+  rfl
+
+lemma Etale.continuousMapSheaf_obj_map_apply {U V : X.Etale} (f : U ⟶ V)
+    (s : C(V.left, A)) :
+    (Etale.continuousMapSheaf X A).obj.map f.op s = s.comp f.left.base.hom :=
+  rfl
+
 
 section Discrete
 
@@ -69,6 +78,10 @@ noncomputable def Etale.constToContinuousMap :
       map_zero' := rfl
       map_add' _ _ := rfl }
   naturality _ _ _ := rfl
+
+lemma Etale.constToContinuousMap_app_apply (U : X.Etaleᵒᵖ) (a : A) :
+    (Etale.constToContinuousMap X A).app U a = ContinuousMap.const _ a :=
+  rfl
 
 
 /-- A continuous function to a discrete group is locally constant: it is constant on the open

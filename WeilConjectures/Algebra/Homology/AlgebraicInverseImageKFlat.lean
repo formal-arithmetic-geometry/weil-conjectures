@@ -147,6 +147,20 @@ private noncomputable def compositePoint : RingedSitePoint R (p.comp f) where
         (f.inverse.map z ≫ I.moduleUnderlying.inv.app M) (I.moduleSMul M T a b z hz) x
   modules_additive := inferInstance
 
+private theorem precoverageSite {E : Type uC} [Category.{vC} E] [HasPullbacks E]
+    (J : GrothendieckTopology E) : J.toPrecoverage.IsSiteForCoverings := by
+  refine ⟨inferInstance, ?_, ?_⟩
+  · intro X R T hR hT
+    exact J.toPretopology.transitive R (fun _ a ha ↦ T a ha) hR
+      (fun _ a ha ↦ hT _ a ha)
+  · intro ι X U a ha Y b
+    refine ⟨fun i ↦ pullback b (a i), fun i ↦ pullback.fst _ _,
+      fun i ↦ pullback.snd _ _, fun i ↦ IsPullback.of_hasPullback _ _, ?_⟩
+    change Sieve.ofArrows _ _ ∈ J Y
+    rw [Sieve.ofArrows_eq_pullback_of_isPullback _
+      (fun i ↦ IsPullback.of_hasPullback b (a i))]
+    exact J.pullback_stable b ha
+
 
 private theorem precoverageTopology {E : Type uC} [Category.{vC} E]
     (J : GrothendieckTopology E) : J.toPrecoverage.toGrothendieck = J := by

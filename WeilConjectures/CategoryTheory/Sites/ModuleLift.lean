@@ -159,6 +159,11 @@ lemma moduleLift_obj_obj_obj (a : 𝒜) (U : Cᵒᵖ) :
       (P.obj a).obj.obj U :=
   rfl
 
+lemma moduleLift_obj_obj_smul (a : 𝒜) (U : Cᵒᵖ) (c : Λ)
+    (x : ((moduleLift P ρ hρ).obj a).obj.obj U) :
+    c • x = (ρ a c).hom.app U x :=
+  rfl
+
 
 @[simp]
 lemma moduleLift_map_hom_app_apply {a b : 𝒜} (f : a ⟶ b) (U : Cᵒᵖ)

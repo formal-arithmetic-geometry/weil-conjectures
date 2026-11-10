@@ -104,6 +104,31 @@ lemma vanishingLocus_map {U V : X.Etale} (a : V ⟶ U) (s : F.obj.obj (op U)) :
         MorphismProperty.Over.Hom.ext (by simp [pullback.condition]),
       op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hs, map_zero]
 
+lemma vanishingLocus_neg {U : X.Etale} (s : F.obj.obj (op U)) :
+    vanishingLocus F (-s) = vanishingLocus F s := by
+  ext x
+  refine ⟨fun ⟨V, a, hx, hs⟩ ↦ ⟨V, a, hx, ?_⟩, fun ⟨V, a, hx, hs⟩ ↦ ⟨V, a, hx, ?_⟩⟩
+  · simpa using hs
+  · simp [hs]
+
+/-- The vanishing locus of a sum contains the intersection of the vanishing loci. -/
+lemma inter_vanishingLocus_subset_add {U : X.Etale} (s₁ s₂ : F.obj.obj (op U)) :
+    vanishingLocus F s₁ ∩ vanishingLocus F s₂ ⊆ vanishingLocus F (s₁ + s₂) := by
+  rintro x ⟨⟨V₁, a₁, ⟨v₁, hv₁⟩, hs₁⟩, ⟨V₂, a₂, ⟨v₂, hv₂⟩, hs₂⟩⟩
+  obtain ⟨z, hz₁, hz₂⟩ := Scheme.Pullback.exists_preimage_pullback v₁ v₂ (hv₁.trans hv₂.symm)
+  refine ⟨overlap a₁ a₂, overlapFst a₁ a₂ ≫ a₁, ⟨z, by simp [hz₁, hv₁]⟩, ?_⟩
+  have e : overlapFst a₁ a₂ ≫ a₁ = overlapSnd a₁ a₂ ≫ a₂ :=
+    MorphismProperty.Over.Hom.ext (by simp [pullback.condition])
+  rw [map_add]
+  nth_rw 2 [e]
+  rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hs₁, op_comp, Functor.map_comp,
+    ConcreteCategory.comp_apply, hs₂, map_zero, map_zero, add_zero]
+
+lemma inter_vanishingLocus_subset_sub {U : X.Etale} (s₁ s₂ : F.obj.obj (op U)) :
+    vanishingLocus F s₁ ∩ vanishingLocus F s₂ ⊆ vanishingLocus F (s₁ - s₂) := by
+  rw [sub_eq_add_neg, ← vanishingLocus_neg s₂]
+  exact inter_vanishingLocus_subset_add _ _
+
 
 end VanishingLocus
 

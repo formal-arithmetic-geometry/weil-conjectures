@@ -137,6 +137,12 @@ lemma inf_iSup_of_directed (S : Subobject X) (T : ι → Subobject X)
   rw [Category.assoc, Subobject.ofLE_arrow, Subobject.ofLE_arrow] at h2
   exact h2
 
+/-- **AB5 distributivity of the subobject lattice**, with the factors of the intersection
+swapped. -/
+lemma iSup_inf_of_directed (S : Subobject X) (T : ι → Subobject X)
+    (hT : Directed (· ≤ ·) T) : (⨆ i, T i) ⊓ S = ⨆ i, T i ⊓ S := by
+  simp only [_root_.inf_comm _ S, inf_iSup_of_directed S T hT]
+
 
 end
 

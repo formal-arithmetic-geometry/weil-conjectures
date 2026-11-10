@@ -37,6 +37,12 @@ noncomputable def _root_.CategoryTheory.Functor.isoHComp (e₁ : T ⋙ R ≅ L �
   Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft T e₂ ≪≫ (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight e₁ B₂ ≪≫ Functor.associator _ _ _
 
+/-- The underlying 2-square of `CategoryTheory.Functor.isoHComp e₁ e₂` is `e₁.hom ≫ₕ e₂.hom`. -/
+lemma _root_.CategoryTheory.Functor.isoHComp_hom (e₁ : T ⋙ R ≅ L ⋙ B₁)
+    (e₂ : T' ⋙ R' ≅ R ⋙ B₂) :
+    (Functor.isoHComp e₁ e₂).hom = (e₁.hom ≫ₕ e₂.hom : TwoSquare _ _ _ _).natTrans :=
+  rfl
+
 
 /-- The components of `CategoryTheory.Functor.isoHComp e₁ e₂`. -/
 @[simp]

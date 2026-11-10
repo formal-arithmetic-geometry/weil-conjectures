@@ -370,6 +370,11 @@ noncomputable def Sheaf.pairRightDerivedTriangle (p : Arrow C) [Mono p.hom] :
     Plus (Sheaf J A) ⥤ Pretriangulated.Triangle (DerivedCategory A) :=
   ShortComplex.rightDerivedTriangle (Sheaf.shortExactOnInjectives_pairShortComplex J A p)
 
+lemma Sheaf.pairRightDerivedTriangle_obj_distinguished (p : Arrow C) [Mono p.hom]
+    (K : Plus (Sheaf J A)) :
+    (Sheaf.pairRightDerivedTriangle J A p).obj K ∈ distTriang _ :=
+  ShortComplex.rightDerivedTriangle_obj_distinguished _ K
+
 
 /-- The functoriality of the triangle of a pair in morphisms of pairs `p ⟶ q`. -/
 noncomputable def Sheaf.pairRightDerivedTriangleMap {p q : Arrow C} [Mono p.hom] [Mono q.hom]

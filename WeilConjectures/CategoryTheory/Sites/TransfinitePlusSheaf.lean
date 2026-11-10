@@ -102,6 +102,14 @@ theorem isSheaf_transfinitePlus_obj
     exact congrArg (_ ≫ ·) (S.toMultiequalizer_naturality (e i).inv)
   · exact (S.toMultiequalizerNatTrans A).naturality _
 
+/-- If `A` is Grothendieck abelian with a `κ`-presentable separator and `C` has fewer than
+`κ` arrows, then the transfinite plus construction `P^{(κ)}` of any presheaf `P` is a sheaf. -/
+theorem isSheaf_transfinitePlus_obj_of_isSeparator [Abelian A] [IsGrothendieckAbelian.{v} A]
+    {G : A} (hG : IsSeparator G) [IsCardinalPresentable G κ] (hC : HasCardinalLT (Arrow C) κ)
+    (P : Cᵒᵖ ⥤ A) :
+    Presheaf.IsSheaf J ((J.transfinitePlus A κ).obj P) :=
+  J.isSheaf_transfinitePlus_obj κ hG.isDetector hC P
+
 
 section Sheafification
 

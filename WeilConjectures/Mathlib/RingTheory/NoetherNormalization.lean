@@ -102,6 +102,23 @@ theorem exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq
     exact_mod_cast (ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin).symm.trans hB
   exact ⟨g, hg, hfin⟩
 
+/-- Blueprint `det-i-real-normalization`: One-dimensional Noether normalization.
+
+A finitely generated algebra `B` of Krull dimension one over a field `K` admits an injective
+`K`-algebra map from the polynomial ring `K[T]` making `B` a finite module.
+
+Nontriviality of `B` is automatic: the zero ring has `ringKrullDim = ⊥`. This is the case
+`n = 1` of `exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq`, along the isomorphism
+`MvPolynomial (Fin 1) K ≃ₐ[K] K[T]`. -/
+theorem exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one
+    (K B : Type*) [Field K] [CommRing B] [Algebra K B] [Algebra.FiniteType K B]
+    (hB : ringKrullDim B = 1) :
+    ∃ g : Polynomial K →ₐ[K] B, Function.Injective g ∧ g.Finite := by
+  obtain ⟨g, hg, hfin⟩ := exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq K B 1 hB
+  let e := MvPolynomial.uniqueAlgEquiv K (Fin 1)
+  exact ⟨g.comp e.symm.toAlgHom, hg.comp e.symm.injective,
+    RingHom.Finite.comp hfin (RingHom.Finite.of_surjective _ e.symm.surjective)⟩
+
 
 /-- A proper closed subset of an irreducible affine variety has strictly smaller dimension: for a
 finitely generated domain `A` over a field and a nonzero prime `P` of `A`,

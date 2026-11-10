@@ -803,3 +803,16 @@ theorem exists_isWContractibleRing :
   · exact Algebra.IndEtale.trans _ (WStrictLocalization R) _
   · exact Module.FaithfullyFlat.trans _ (WStrictLocalization R) _
 
+/-- Any ring has an ind-étale, faithfully flat cover for which every ind-étale
+faithfully flat cover splits. -/
+theorem exists_forall_exists_retraction :
+    ∃ (S : Type u) (_ : CommRing S) (_ : Algebra R S),
+      Algebra.IndEtale R S ∧ Module.FaithfullyFlat R S ∧
+      ∀ (T : Type u) [CommRing T] [Algebra S T] [Algebra.IndEtale S T] [Module.FaithfullyFlat S T],
+        ∃ (f : T →+* S), f.comp (algebraMap S T) = RingHom.id S := by
+  obtain ⟨S, _, _, _, _, _⟩ := exists_isWContractibleRing R
+  use S, inferInstance, inferInstance, inferInstance, inferInstance
+  intro T _ _ _ _
+  obtain ⟨f, hf⟩ := IsWContractibleRing.exists_retraction S T
+  use f, hf
+

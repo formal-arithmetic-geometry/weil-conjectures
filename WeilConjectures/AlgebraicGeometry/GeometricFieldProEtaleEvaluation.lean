@@ -597,5 +597,141 @@ theorem geometric_field_proetale_evaluation_coherence
     simpa only [Functor.sheafPushforwardContinuousComp'_hom_app_hom_app,
       Functor.sheafPushforwardContinuous_map_hom_app, f, g, Category.assoc] using h
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Identity compatibility, including the actual inverse-image identity comparison.
+Source: Bhatt--Scholze, Example 4.1.10
+(auxiliary; not a blueprint node).
+
+Proof: (8) Base change along the identity has its canonical projection to the original
+test object. The unit triangle identity makes its conjugate the identity inverse-image
+comparison. Evaluate at the singleton for the first equation; retain every test object
+for the second. -/
+theorem geometric_field_proetale_evaluation_identity
+    (K : Type u) [Field K] [IsAlgClosed K]
+    (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
+    [HasWeakSheafify (Scheme.ProEt.topology (Spec (.of K))) D]
+    (F : Sheaf (Scheme.ProEt.topology (Spec (.of K))) D) :
+    (geometricFieldEvaluationComparison (𝟙 (Spec (.of K))) D).app F ≫
+      ((sheafSections (Scheme.ProEt.topology (Spec (.of K))) D).obj
+        (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))).map
+          ((geometricFieldInverseImageIdentity (Spec (.of K)) D).hom.app F) = 𝟙 _ ∧
+    (geometricFieldRestrictionComparison (𝟙 (Spec (.of K))) D).app F ≫
+      (geometricFieldRestriction (Spec (.of K)) D).map
+        ((geometricFieldInverseImageIdentity (Spec (.of K)) D).hom.app F) = 𝟙 _ := by
+  let adj := Scheme.proEtaleSheafAdjunction (𝟙 (Spec (.of K))) D
+  let e := Functor.sheafPushforwardContinuousId'
+    (MorphismProperty.Over.pullbackId (P := @WeaklyEtale) (Q := ⊤) (Spec (.of K)))
+    D (Scheme.ProEt.topology (Spec (.of K)))
+  have h := unit_conjugateEquiv_symm Adjunction.id adj e.inv F
+  simp only [Adjunction.id_unit, NatTrans.id_app, Category.id_comp, Functor.id_obj] at h
+  change e.inv.app F = adj.unit.app F ≫
+    (Scheme.proEtaleSheafDirectImage (𝟙 (Spec (.of K))) D).map
+      ((geometricFieldInverseImageIdentity (Spec (.of K)) D).hom.app F) at h
+  let α := (geometricFieldInverseImageIdentity (Spec (.of K)) D).hom.app F
+  let G := (Scheme.proEtaleSheafInverseImage (𝟙 (Spec (.of K))) D).obj F
+  let r := MorphismProperty.Over.pullbackId (P := @WeaklyEtale) (Q := ⊤) (Spec (.of K))
+  have hU (U : (Spec (.of K)).ProEt) :
+      (adj.unit.app F).hom.app (op U) ≫ G.obj.map (r.inv.app U).op ≫
+        α.hom.app (op U) = 𝟙 _ := by
+    have hh := congrArg (fun k ↦ k.hom.app (op U)) h
+    simp only [e, Functor.sheafPushforwardContinuousId'_inv_app_hom_app,
+      Scheme.proEtaleSheafDirectImage, lowerStar] at hh
+    change F.obj.map (r.hom.app U).op = (adj.unit.app F).hom.app (op U) ≫
+      α.hom.app (op ((Scheme.proEtaleBaseChange (𝟙 (Spec (.of K)))).obj U)) at hh
+    have hn := α.hom.naturality (r.inv.app U).op
+    change G.obj.map (r.inv.app U).op ≫ α.hom.app (op U) =
+      α.hom.app _ ≫ F.obj.map (r.inv.app U).op at hn
+    rw [hn, ← Category.assoc, ← hh]
+    rw [← CategoryTheory.Functor.map_comp, ← op_comp, r.inv_hom_id_app,
+      op_id, CategoryTheory.Functor.map_id]
+    rfl
+  constructor
+  · dsimp [geometricFieldEvaluationComparison]
+    rw [Category.assoc]
+    have ht : (MorphismProperty.Over.isoMk
+        (asIso (pullback.snd (𝟙 (Spec (.of K))) (𝟙 (Spec (.of K)))))
+        (Category.comp_id _)).inv = r.inv.app (Scheme.ProEt.mk (𝟙 (Spec (.of K)))) := by
+      apply (cancel_mono (r.hom.app _)).1
+      rw [r.inv_hom_id_app]
+      apply MorphismProperty.Over.Hom.ext
+      change inv (pullback.snd (𝟙 (Spec (.of K))) (𝟙 (Spec (.of K)))) ≫
+        pullback.fst (𝟙 (Spec (.of K))) (𝟙 (Spec (.of K))) = 𝟙 _
+      rw [show pullback.fst (𝟙 (Spec (.of K))) (𝟙 (Spec (.of K))) =
+          pullback.snd (𝟙 (Spec (.of K))) (𝟙 (Spec (.of K))) by
+        simpa only [Category.comp_id] using
+          pullback.condition (f := 𝟙 (Spec (.of K))) (g := 𝟙 (Spec (.of K)))]
+      exact IsIso.inv_hom_id _
+    change (adj.unit.app F).hom.app _ ≫ G.obj.map _ ≫ α.hom.app _ = 𝟙 _
+    simpa only [Iso.op_inv, ← ht] using hU (Scheme.ProEt.mk (𝟙 (Spec (.of K))))
+  · ext T
+    dsimp [geometricFieldRestrictionComparison]
+    rw [Category.assoc]
+    have ht : (geometricFieldTestBaseChange (𝟙 (Spec (.of K)))).inv.app T.unop =
+        r.inv.app ((profiniteToProEtOf (Spec (.of K))).obj T.unop) := by
+      simp only [geometricFieldTestBaseChange, MorphismProperty.Over.pullbackComp_id_left,
+        MorphismProperty.Over.pullbackCongr_refl]
+      rfl
+    simp only [Functor.sheafPushforwardContinuousComp'_hom_app_hom_app]
+    change (adj.unit.app F).hom.app _ ≫ G.obj.map _ ≫ α.hom.app _ = 𝟙 _
+    rw [ht]
+    exact hU ((profiniteToProEtOf (Spec (.of K))).obj T.unop)
+
+/-- Compatibility with every finite-arity operation on sheaves of sets. In particular,
+apply this to addition, multiplication, units and an arbitrary ring-sheaf module action.
+The inverse-image operation is its image under the specified scheme inverse image;
+the product comparisons specify the product identification rather than choosing one.
+Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
+(auxiliary; not a blueprint node).
+
+Proof: (8) The restriction comparison is natural at all operation morphisms, since it
+is built from an adjunction unit and a test-object isomorphism. Inverse image preserves
+finite products. The naturality equations for product projections identify the comparison
+on a finite product with the product of its components; naturality at the operation
+then gives the equation. The empty family is the nullary case and includes zero and one.
+The same equations apply to the action R times M to M, without requiring commutativity
+or a nonzero ring. Thus the evaluation comparison is linear over its coefficient-ring
+comparison for every ring-sheaf module, not only constant coefficient modules. -/
+theorem geometric_field_proetale_evaluation_operations
+    (K K' : Type u) [Field K] [IsAlgClosed K] [Field K'] [IsAlgClosed K']
+    (i : K →+* K') (I : Type u) [Finite I]
+    (F : I → Sheaf (Scheme.ProEt.topology (Spec (.of K))) (Type (u + 1)))
+    (H : Sheaf (Scheme.ProEt.topology (Spec (.of K))) (Type (u + 1)))
+    (a : (∏ᶜ F) ⟶ H) :
+    PreservesFiniteProducts
+      (Scheme.proEtaleSheafInverseImage (Spec.map (CommRingCat.ofHom i)) (Type (u + 1))) ∧
+    ((sheafSections (Scheme.ProEt.topology (Spec (.of K))) (Type (u + 1))).obj
+      (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))).map a ≫
+        (geometricFieldEvaluationComparison (Spec.map (CommRingCat.ofHom i))
+          (Type (u + 1))).app H =
+      (geometricFieldEvaluationComparison (Spec.map (CommRingCat.ofHom i))
+        (Type (u + 1))).app (∏ᶜ F) ≫
+        ((sheafSections (Scheme.ProEt.topology (Spec (.of K'))) (Type (u + 1))).obj
+          (op (Scheme.ProEt.mk (𝟙 (Spec (.of K')))))).map
+            ((Scheme.proEtaleSheafInverseImage (Spec.map (CommRingCat.ofHom i))
+              (Type (u + 1))).map a) ∧
+    (∀ k : I,
+      ((sheafSections (Scheme.ProEt.topology (Spec (.of K))) (Type (u + 1))).obj
+        (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))).map (Pi.π F k) ≫
+          (geometricFieldEvaluationComparison (Spec.map (CommRingCat.ofHom i))
+            (Type (u + 1))).app (F k) =
+        (geometricFieldEvaluationComparison (Spec.map (CommRingCat.ofHom i))
+          (Type (u + 1))).app (∏ᶜ F) ≫
+          ((sheafSections (Scheme.ProEt.topology (Spec (.of K'))) (Type (u + 1))).obj
+            (op (Scheme.ProEt.mk (𝟙 (Spec (.of K')))))).map
+              ((Scheme.proEtaleSheafInverseImage (Spec.map (CommRingCat.ofHom i))
+                (Type (u + 1))).map (Pi.π F k))) := by
+  have : RepresentablyFlat (Scheme.proEtaleBaseChange
+      (Spec.map (CommRingCat.ofHom i))) := flat_of_preservesFiniteLimits _
+  have : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+    AB5OfSize_shrink.{u, u + 1, u + 1, u + 1} _
+  have : PreservesFiniteLimits (Scheme.proEtaleSheafInverseImage
+      (Spec.map (CommRingCat.ofHom i)) (Type (u + 1))) := by
+    dsimp [Scheme.proEtaleSheafInverseImage]
+    infer_instance
+  refine ⟨inferInstance, ?_, ?_⟩
+  · exact (geometricFieldEvaluationComparison _ _).naturality a
+  · intro k
+    exact (geometricFieldEvaluationComparison _ _).naturality (Pi.π F k)
+
 
 end AlgebraicGeometry.ProEtale

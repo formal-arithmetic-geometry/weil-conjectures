@@ -177,6 +177,12 @@ def overSheafEquiv :
     Sheaf (X.smallEtaleTopology.over U) A ≌ Sheaf U.left.smallEtaleTopology A :=
   (overEquiv U).sheafCongr (X.smallEtaleTopology.over U) U.left.smallEtaleTopology A
 
+/-- The sections of the sheaf on `U.left.Etale` corresponding to `G` over `V` are the sections
+of `G` over `V ⟶ U`. -/
+lemma overSheafEquiv_functor_obj_val (G : Sheaf (X.smallEtaleTopology.over U) A) :
+    ((overSheafEquiv U A).functor.obj G).obj = (etaleToOver U).op ⋙ G.obj :=
+  rfl
+
 
 end Topology
 

@@ -47,5 +47,25 @@ lemma isIso_of_isIso_map_leftAdjoint {d : D} (t : G.obj d ⟶ G.obj d) [IsIso (F
       Category.id_comp]
   exact ⟨x, hx, inj _ _ (by rw [reassoc_of% hx, Category.comp_id])⟩
 
+/-- An endomorphism `t` of `F c`, for an adjunction `F ⊣ G`, is an isomorphism as soon as `G t`
+is one. -/
+lemma isIso_of_isIso_map_rightAdjoint {c : C} (t : F.obj c ⟶ F.obj c) [IsIso (G.map t)] :
+    IsIso t := by
+  have key : ∀ y : F.obj c ⟶ F.obj c,
+      adj.homEquiv _ _ (y ≫ t) = adj.homEquiv _ _ y ≫ G.map t := fun y ↦ by
+    simp [homEquiv_unit]
+  have inj : ∀ y₁ y₂ : F.obj c ⟶ F.obj c, y₁ ≫ t = y₂ ≫ t → y₁ = y₂ := fun y₁ y₂ h ↦ by
+    apply (adj.homEquiv _ _).injective
+    have h' := congrArg (adj.homEquiv _ _) h
+    rw [key, key] at h'
+    exact (cancel_mono _).1 h'
+  let x : F.obj c ⟶ F.obj c := (adj.homEquiv _ _).symm (adj.unit.app c ≫ inv (G.map t))
+  have hx : x ≫ t = 𝟙 _ := by
+    apply (adj.homEquiv _ _).injective
+    rw [key, Equiv.apply_symm_apply, Category.assoc, IsIso.inv_hom_id, Category.comp_id,
+      homEquiv_unit, G.map_id]
+    exact (Category.comp_id _).symm
+  exact ⟨x, inj _ _ (by rw [Category.assoc, hx, Category.id_comp, Category.comp_id]), hx⟩
+
 
 end CategoryTheory.Adjunction

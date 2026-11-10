@@ -24,6 +24,64 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+/-- Evaluation of a section at a field-valued point of an étale morphism is
+separable over the base residue field. Source: Stacks Project, Tag 04GW.
+Factor the point through its residue field, use étaleness of the induced residue-field
+extension, then map the resulting separable element into Ω. -/
+private theorem affine_eval_mem
+    {X S : Scheme.{v}} {Ω : Type v} [Field Ω]
+    (g : X ⟶ S) [Etale g] (s : Spec (.of Ω) ⟶ X)
+    (b : Γ(X, ⊤))
+    [Algebra (S.residueField (g (s (IsLocalRing.closedPoint Ω)))) Ω]
+    (hbase : algebraMap (S.residueField (g (s (IsLocalRing.closedPoint Ω)))) Ω =
+      (descResidueField (stalkClosedPointTo (s ≫ g))).hom) :
+    (ΓSpecIso (.of Ω)).hom (s.appTop b) ∈
+      separableClosure (S.residueField (g (s (IsLocalRing.closedPoint Ω)))) Ω := by
+  let q := s (IsLocalRing.closedPoint Ω)
+  let p := g q
+  let F := S.residueField p
+  let L := X.residueField q
+  let m := g.residueFieldMap q
+  let e := X.descResidueField (stalkClosedPointTo s)
+  let : Algebra F L := m.hom.toAlgebra
+  have hm : m.hom.Etale := g.etale_residueFieldMap q
+  let : Algebra.Etale F L := by
+    rw [← RingHom.etale_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact hm
+  have hsep : Algebra.IsSeparable F L :=
+    (Algebra.FormallyEtale.iff_isSeparable F L).mp inferInstance
+  have hcomp : m ≫ e = descResidueField (stalkClosedPointTo (s ≫ g)) := by
+    rw [descResidueField_stalkClosedPointTo_comp]
+  have hbase' : algebraMap F Ω =
+      (descResidueField (stalkClosedPointTo (s ≫ g))).hom := by
+    simpa [F, p, q] using hbase
+  let a : L →ₐ[F] Ω :=
+    { e.hom with
+      commutes' r := by
+        have hh : CommRingCat.ofHom (algebraMap F L) ≫ e =
+            CommRingCat.ofHom (algebraMap F Ω) := by
+          have hbcat : CommRingCat.ofHom (algebraMap F Ω) =
+              descResidueField (stalkClosedPointTo (s ≫ g)) := by
+            exact congrArg CommRingCat.ofHom hbase'
+          rw [hbcat]
+          change CommRingCat.ofHom (algebraMap F L) ≫ e =
+            descResidueField (stalkClosedPointTo (s ≫ g))
+          change m ≫ e = descResidueField (stalkClosedPointTo (s ≫ g))
+          exact hcomp
+        exact congrArg (fun f => f.hom r) hh }
+  let z := (X.fromSpecResidueField q).appTop b
+  let w := (ΓSpecIso L).hom z
+  have hz : IsSeparable F (a w) :=
+    (Algebra.IsSeparable.isSeparable F w).map a a.injective
+  have hzmem : a w ∈ separableClosure F Ω := mem_separableClosure_iff.mpr hz
+  have heval : (ΓSpecIso (.of Ω)).hom (s.appTop b) = a w := by
+    have hf := descResidueField_stalkClosedPointTo_fromSpecResidueField Ω X s
+    rw [← hf, Hom.comp_appTop]
+    exact congrArg (fun t ↦ t ((X.fromSpecResidueField q).appTop b))
+      (ΓSpecIso_naturality e)
+  rw [heval]
+  exact hzmem
+
 
 /-- Pointed evaluation lands in the relative separable closure.
 (blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).

@@ -646,6 +646,9 @@ def iteratedAffineLineProj (S : Scheme.{u}) : ∀ r : ℕ, iteratedAffineLine S 
 @[simp]
 lemma iteratedAffineLine_zero (S : Scheme.{u}) : iteratedAffineLine S 0 = S := rfl
 
+lemma iteratedAffineLine_succ (S : Scheme.{u}) (r : ℕ) :
+    iteratedAffineLine S (r + 1) = 𝔸(PUnit.{u + 1}; iteratedAffineLine S r) := rfl
+
 
 @[simp]
 lemma iteratedAffineLineProj_zero (S : Scheme.{u}) : iteratedAffineLineProj S 0 = 𝟙 S := rfl
@@ -704,6 +707,11 @@ noncomputable def Scheme.Hom.toIteratedAffineLine {X S : Scheme.{u}} (g : X ⟶ 
 section toIteratedAffineLine
 
 variable {X S : Scheme.{u}} (g : X ⟶ S)
+
+lemma Scheme.Hom.toIteratedAffineLine_succ {r : ℕ} (t : Fin (r + 1) → Γ(X, ⊤)) :
+    g.toIteratedAffineLine t =
+      AffineSpace.homOfVector (g.toIteratedAffineLine (Fin.tail t)) fun _ ↦ t 0 :=
+  rfl
 
 
 lemma Scheme.Hom.toIteratedAffineLine_comp_over {r : ℕ} (t : Fin (r + 1) → Γ(X, ⊤)) :
@@ -1130,6 +1138,39 @@ open CategoryTheory
 namespace AlgebraicGeometry.AffineSpace
 
 open MvPolynomial
+
+/-- The global sections of `𝔸(n; Spec R)` are the polynomial ring over `R`: evaluating
+polynomials at the coordinates is bijective. -/
+lemma bijective_eval₂Hom_coord {n : Type u} (R : CommRingCat.{u}) :
+    Function.Bijective (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+      (𝔸(n; Spec R) ↘ Spec R).appTop).hom (coord (Spec R))) := by
+  have : IsIso (CommRingCat.ofHom (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+      (𝔸(n; Spec R) ↘ Spec R).appTop).hom (coord (Spec R)))) := by
+    rw [← (Scheme.ΓSpecIso _).inv_hom_id_assoc (CommRingCat.ofHom _), ← SpecIso_hom_appTop]
+    infer_instance
+  exact ConcreteCategory.bijective_of_isIso (CommRingCat.ofHom (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+    (𝔸(n; Spec R) ↘ Spec R).appTop).hom (coord (Spec R))))
+
+/-- For `i : Z ⟶ 𝔸(n; Spec R)`, evaluating polynomials over `R` at the pulled back coordinates
+factors through the global sections of `𝔸(n; Spec R)`. -/
+lemma eval₂Hom_appTop_coord {n : Type u} {R : CommRingCat.{u}} {Z : Scheme.{u}}
+    (i : Z ⟶ 𝔸(n; Spec R)) :
+    eval₂Hom ((Scheme.ΓSpecIso R).inv ≫ (i ≫ 𝔸(n; Spec R) ↘ Spec R).appTop).hom
+        (fun j ↦ i.appTop (coord (Spec R) j)) =
+      i.appTop.hom.comp
+        (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫ (𝔸(n; Spec R) ↘ Spec R).appTop).hom
+          (coord (Spec R))) := by
+  ext <;> simp
+
+/-- For a closed immersion `i : Z ⟶ 𝔸(n; Spec R)`, the global sections of `Z` are generated
+over `R` by the pulled back coordinates. -/
+lemma surjective_eval₂Hom_appTop_coord {n : Type u} {R : CommRingCat.{u}} {Z : Scheme.{u}}
+    (i : Z ⟶ 𝔸(n; Spec R)) [IsClosedImmersion i] :
+    Function.Surjective (eval₂Hom ((Scheme.ΓSpecIso R).inv ≫
+      (i ≫ 𝔸(n; Spec R) ↘ Spec R).appTop).hom fun j ↦ i.appTop (coord (Spec R) j)) := by
+  rw [eval₂Hom_appTop_coord, RingHom.coe_comp]
+  exact (IsClosedImmersion.isAffine_surjective_of_isAffine i).2.comp
+    (bijective_eval₂Hom_coord R).2
 
 
 end AlgebraicGeometry.AffineSpace

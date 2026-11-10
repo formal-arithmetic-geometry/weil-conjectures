@@ -38,5 +38,7 @@ instance : PartialOrder DvdOrder where
   le_antisymm n m hnm hmn := PNat.eq (m := n.toPNat) (n := m.toPNat) (Nat.dvd_antisymm hnm hmn)
   lt_iff_le_not_ge := by intro a b; rfl
 
+theorem le_iff_dvd {n m : DvdOrder} : n ≤ m ↔ n.val ∣ m.val := Iff.rfl
+
 
 end PNat.DvdOrder

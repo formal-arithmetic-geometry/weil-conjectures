@@ -447,6 +447,22 @@ theorem finrank_eq_one_and_exists_twist_eq_one [IsAlgClosed k] [FiniteDimensiona
   · exact absurd (h ▸ Submodule.mem_span_singleton_self v) (by simpa using hv)
   · rw [← finrank_top k V, ← h, finrank_span_singleton hv]
 
+/-- **Trivial geometric monodromy, semisimplification.** If the kernel of `deg` acts trivially
+in a finite-dimensional representation `ρ` over an algebraically closed field, then every
+composition factor of `ρ` is one-dimensional, given by a character `b ^ deg`. -/
+theorem CompositionSeries.finrank_factor_eq_one_and_exists_twist_eq_one [IsAlgClosed k]
+    [FiniteDimensional k V] {ρ : Representation k W V} {deg : W →* Multiplicative ℤ}
+    (hdeg : Function.Surjective deg) (hI : ∀ i ∈ deg.ker, ρ i = 1) (s : ρ.CompositionSeries)
+    (j : Fin s.length) :
+    Module.finrank k ((s.series j.succ).toSubmodule ⧸
+      (s.series j.castSucc).toSubmodule.comap (s.series j.succ).toSubmodule.subtype) = 1 ∧
+    ∃ b : kˣ, ∀ w, (s.factor j).twist (degreeCharacter deg b⁻¹) w = 1 := by
+  have := s.isIrreducible_factor j
+  refine finrank_eq_one_and_exists_twist_eq_one (s.factor j) hdeg fun i hi ↦ ?_
+  refine Submodule.linearMap_qext _ (LinearMap.ext fun x ↦ ?_)
+  simp [Subrepresentation.subquotient, hI i hi]
+  rfl
+
 
 end Finite
 
@@ -454,6 +470,15 @@ section PadicAlgCl
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {W V : Type*} [Group W] [AddCommGroup V]
   [Module (PadicAlgCl ℓ) V] [FiniteDimensional (PadicAlgCl ℓ) V]
+
+/-- **Deligne, Weil II, 1.3.14**, for `ℚ̄_ℓ`-coefficients: an irreducible finite-dimensional
+`ℚ̄_ℓ`-representation of a Weil group `W` whose restriction to the geometric fundamental group
+`ker deg` is bounded becomes bounded on all of `W` after a twist by `b ^ (-deg)`. -/
+theorem exists_isBoundedOn_twist_padicAlgCl (ρ : Representation (PadicAlgCl ℓ) W V)
+    [ρ.IsIrreducible] {deg : W →* Multiplicative ℤ} (hdeg : Function.Surjective deg)
+    (hI : ρ.IsBoundedOn deg.ker) :
+    ∃ b : (PadicAlgCl ℓ)ˣ, (ρ.twist (degreeCharacter deg b⁻¹)).IsBoundedOn Set.univ :=
+  ρ.exists_isBoundedOn_twist hdeg hI
 
 
 end PadicAlgCl

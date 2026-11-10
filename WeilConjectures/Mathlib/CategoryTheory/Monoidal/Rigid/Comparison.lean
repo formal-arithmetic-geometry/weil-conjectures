@@ -60,6 +60,21 @@ lemma map_ihomUnitTensorToIhom_comp (X Z : C) :
     comp_whiskerRight]
   simp
 
+/-- If the comparison maps `G [X, -] ⟶ [G X, G -]` are isomorphisms, `G` carries an invertible
+comparison map `[X, 𝟙] ⊗ Z ⟶ [X, Z]` to an invertible comparison map. -/
+lemma isIso_ihomUnitTensorToIhom_obj (X Z : C) [IsIso (ihomComparison G X).natTrans]
+    [IsIso (G.map (ihomUnitTensorToIhom X Z))] :
+    IsIso (ihomUnitTensorToIhom (G.obj X) (G.obj Z)) := by
+  have h := map_ihomUnitTensorToIhom_comp G X Z
+  have : IsIso (δ G _ Z ≫ ((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+      (ihom (G.obj X)).map (η G)) ▷ G.obj Z ≫ ihomUnitTensorToIhom (G.obj X) (G.obj Z)) := by
+    rw [← h]; infer_instance
+  have : IsIso (((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+      (ihom (G.obj X)).map (η G)) ▷ G.obj Z ≫ ihomUnitTensorToIhom (G.obj X) (G.obj Z)) :=
+    IsIso.of_isIso_comp_left (δ G _ Z) _
+  exact IsIso.of_isIso_comp_left (((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+      (ihom (G.obj X)).map (η G)) ▷ G.obj Z) _
+
 
 /-- If the comparison maps `G [X, -] ⟶ [G X, G -]` are isomorphisms and the comparison map of
 `G X` and `G Z` is invertible, so is the image under `G` of the comparison map of `X` and `Z`. -/

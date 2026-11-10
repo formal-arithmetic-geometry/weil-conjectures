@@ -183,6 +183,19 @@ lemma quotient_map_map_id :
   exact HomotopyCategory.eq_of_homotopy _ _ (R.homotopyOfComp _ _
     ((R.mapHomotopy R (𝟙 K)).trans (Homotopy.ofEq (by simp))))
 
+/-- The morphisms `R.map S φ` are compatible with composition in the homotopy category. -/
+lemma quotient_map_map_comp {M : CochainComplex C ℤ} (T : M.KInjectiveResolution)
+    (φ : K ⟶ L) (ψ : L ⟶ M) :
+    (HomotopyCategory.quotient C (.up ℤ)).map (R.map T (φ ≫ ψ)) =
+      (HomotopyCategory.quotient C (.up ℤ)).map (R.map S φ ≫ S.map T ψ) := by
+  refine HomotopyCategory.eq_of_homotopy _ _ (R.homotopyOfComp _ _ ?_)
+  refine (R.mapHomotopy T (φ ≫ ψ)).trans ?_
+  refine (Homotopy.ofEq (Category.assoc _ _ _)).trans ?_
+  refine (((S.mapHomotopy T ψ).compLeft φ).symm.trans ?_)
+  refine (Homotopy.ofEq (Category.assoc _ _ _).symm).trans ?_
+  refine (((R.mapHomotopy S φ).symm.compRight _).trans ?_)
+  exact Homotopy.ofEq (Category.assoc _ _ _)
+
 
 end Functoriality
 
@@ -239,6 +252,21 @@ lemma rightDerivedMap_id : R.rightDerivedMap R v (𝟙 K) = 𝟙 _ := by
   rw [rightDerivedMap, quotient_map_mapHomologicalComplex_map v _ (𝟙 _)
     (by rw [quotient_map_map_id, CategoryTheory.Functor.map_id])]
   simp [rightDerived]
+
+/-- Functoriality of `Rv`: composition. -/
+lemma rightDerivedMap_comp {M : CochainComplex C ℤ} (T : M.KInjectiveResolution)
+    (φ : K ⟶ L) (ψ : L ⟶ M) :
+    R.rightDerivedMap T v (φ ≫ ψ) = R.rightDerivedMap S v φ ≫ S.rightDerivedMap T v ψ := by
+  rw [rightDerivedMap, quotient_map_mapHomologicalComplex_map v _ _
+    (R.quotient_map_map_comp S T φ ψ), Functor.map_comp, Functor.map_comp]
+  rfl
+
+/-- The isomorphism `Rv(K) ≅ Rv(K)` between the complexes computed from two K-injective
+resolutions of `K` is the map induced by the identity of `K`. -/
+lemma rightDerivedIso_hom : (R.rightDerivedIso R' v).hom = R.rightDerivedMap R' v (𝟙 K) := by
+  refine quotient_map_mapHomologicalComplex_map v _ _ (HomotopyCategory.eq_of_homotopy _ _ ?_)
+  exact (R.homotopyEquivUnique R' _ ((R.mapHomotopy R' (𝟙 K)).trans
+    (Homotopy.ofEq (Category.id_comp _)))).symm
 
 
 end RightDerived

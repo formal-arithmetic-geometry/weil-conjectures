@@ -128,6 +128,32 @@ noncomputable def toHom (D : DescentDatum p V) : Limits.pullback (V.hom ≫ p) p
   (D.transport _ (pullback.snd (V.hom ≫ p) p) (by rw [Category.assoc, pullback.condition])
     universalPoint).left
 
+/-- **A descent datum is determined by its morphism `φ : V ×_Y X ⟶ V`.** The transport of a
+point `a` of `V` over `f₁` to `f₂` is `(a, f₂) ≫ φ`, by naturality of the transport. -/
+lemma transport_left_eq_lift_toHom (D : DescentDatum p V) {T : C} (f₁ f₂ : T ⟶ X)
+    (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
+    (D.transport f₁ f₂ h a).left =
+      pullback.lift a.left f₂ (by rw [← Category.assoc, Over.w a]; exact h) ≫ D.toHom := by
+  let g : T ⟶ Limits.pullback (V.hom ≫ p) p :=
+    pullback.lift a.left f₂ (by rw [← Category.assoc, Over.w a]; exact h)
+  have key := D.transport_homMk_comp g _ (pullback.snd (V.hom ≫ p) p)
+    (by rw [Category.assoc, pullback.condition]) universalPoint
+  have e₁ : f₁ = g ≫ pullback.fst (V.hom ≫ p) p ≫ V.hom := by
+    rw [pullback.lift_fst_assoc]; exact (Over.w a).symm
+  have e₂ : f₂ = g ≫ pullback.snd (V.hom ≫ p) p := (pullback.lift_snd _ _ _).symm
+  rw [D.transport_left_congr h (by rw [← e₁, ← e₂]; exact h) a
+    ((Over.homMk g rfl : Over.mk (g ≫ pullback.fst (V.hom ≫ p) p ≫ V.hom) ⟶
+      Over.mk (pullback.fst (V.hom ≫ p) p ≫ V.hom)) ≫ universalPoint)
+    e₁ e₂ (by simp [g]), key]
+  rfl
+
+/-- Two descent data on `V` with the same morphism `V ×_Y X ⟶ V` have the same transport. -/
+lemma transport_eq_of_toHom_eq {D E : DescentDatum p V} (hDE : D.toHom = E.toHom) {T : C}
+    (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
+    D.transport f₁ f₂ h a = E.transport f₁ f₂ h a :=
+  Over.OverMorphism.ext (by
+    rw [transport_left_eq_lift_toHom, transport_left_eq_lift_toHom, hDE])
+
 
 end Universal
 

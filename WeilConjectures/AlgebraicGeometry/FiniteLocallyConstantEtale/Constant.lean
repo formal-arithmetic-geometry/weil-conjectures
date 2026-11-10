@@ -44,6 +44,17 @@ noncomputable def Etale.continuousMapSheafType : Sheaf X.smallEtaleTopology (Typ
     ⟨continuousMapPresheaf.{u + 1, u} A,
       .of_le proetaleTopology_le_fpqcTopology (isSheaf_fpqcTopology_continuousMapPresheaf A)⟩
 
+/-- The sections of `U ↦ C(U, A)` over `U` are the continuous functions on `U`. -/
+lemma Etale.continuousMapSheafType_obj_obj (U : X.Etale) :
+    (Etale.continuousMapSheafType X A).obj.obj (op U) = C(U.left, A) :=
+  rfl
+
+/-- The restriction maps of `U ↦ C(U, A)` are given by precomposition. -/
+lemma Etale.continuousMapSheafType_obj_map_apply {U V : X.Etale} (f : U ⟶ V)
+    (s : C(V.left, A)) :
+    (Etale.continuousMapSheafType X A).obj.map f.op s = s.comp f.left.base.hom :=
+  rfl
+
 
 variable [DiscreteTopology A]
 
@@ -208,6 +219,11 @@ summands on the fibres of `f`. -/
 lemma sigmaHomEquiv_apply_coe {W : Scheme.{u}} (w : W ⟶ X) (f : C(W, A)) :
     (sigmaHomEquiv e w f).1 =
       W.glueOfContinuousMap f (fun m ↦ w ≫ Sigma.ι (fun _ : S' ↦ X) (e m)) := rfl
+
+/-- The locally constant function attached to `a : W ⟶ ∐_{S'} X` is the index of the summand. -/
+lemma sigmaHomEquiv_symm_apply {W : Scheme.{u}} (w : W ⟶ X)
+    (a : {a : W ⟶ ∐ fun _ : S' ↦ X // a ≫ Sigma.desc (fun _ ↦ 𝟙 X) = w}) (z : W) :
+    (sigmaHomEquiv e w).symm a z = e.symm (sigmaIdx S' X (a.1 z)) := rfl
 
 
 /-- `sigmaHomEquiv` is natural in `W`. -/

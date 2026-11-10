@@ -156,5 +156,21 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   {D : Type u'} [Category.{v'} D] [MonoidalCategory D]
   {P : C ⥤ C} [P.Monoidal] {Q : D ⥤ D} [Q.Monoidal]
 
+/-- Existential monoidal and line data suffice to construct the strict comparison.
+Source: Tate compatibility, the beta square (blueprint: lem-wf-strict-pair-tensor).
+Proof: eliminate the two witnesses and use tensorRightScalarIso. This elimination
+is performed for abstract monoidal categories, so applications need not expand
+monoidal structures in the concrete derived category. -/
+theorem tensorRightScalarIso_nonempty (B : C ⥤ D) (c : B ⋙ Q ≅ P ⋙ B)
+    {L : C} {M : D} (τ : P.obj L ≅ L) (σ : Q.obj M ≅ M)
+    (h : ∃ hB : B.Monoidal, letI := hB
+      NatTrans.IsMonoidal c.hom ∧ ∃ b : B.obj L ≅ M,
+        Q.map b.hom ≫ σ.hom = c.hom.app L ≫ B.map τ.hom ≫ b.hom) :
+    Nonempty (tensorWith P τ ⋙ mapOfNatIso c ≅ mapOfNatIso c ⋙ tensorWith Q σ) := by
+  obtain ⟨hB, hc, b, hb⟩ := h
+  let := hB
+  let := hc
+  exact ⟨tensorRightScalarIso B c τ σ b hb⟩
+
 
 end CategoryTheory.Endofunctor.IsoAlgebra

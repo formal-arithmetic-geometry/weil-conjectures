@@ -157,6 +157,12 @@ noncomputable def pointFunctionSheafToLowerStar :
       funext z
       exact congrArg D (overPullback_map_left_fst g φ.unop z).symm }⟩
 
+lemma pointFunctionSheafToLowerStar_app_apply (V : X.Etale) (D : V.left → M)
+    (z : ↥(pullback V.hom g)) :
+    ((pointFunctionSheafToLowerStar M g).hom.app (op V) D : _ → M) z =
+      D (pullback.fst V.hom g z) :=
+  rfl
+
 
 open Classical in
 /-- Extension by zero of a function on `V ×_X Z` along the first projection to `V`: the value
@@ -226,6 +232,12 @@ noncomputable def lowerStarPointFunctionSheafToPointFunctionSheaf :
       funext y
       exact extendByZero_comp φ.unop c y }⟩
 
+lemma lowerStarPointFunctionSheafToPointFunctionSheaf_app_apply (V : X.Etale)
+    (c : ↥(pullback V.hom g) → M) :
+    ((lowerStarPointFunctionSheafToPointFunctionSheaf M g).hom.app (op V) c : _ → M) =
+      extendByZero M g c :=
+  rfl
+
 
 /-- Extension by zero followed by restriction is the identity. -/
 @[reassoc (attr := simp)]
@@ -279,6 +291,13 @@ noncomputable def pointFunctionSheafIndicator (S : Set X) :
       change (if W.unop.hom y ∈ S then D (φ.unop.left y) else 0) =
         if V.unop.hom (φ.unop.left y) ∈ S then D (φ.unop.left y) else 0
       rw [e] }⟩
+
+open Classical in
+lemma pointFunctionSheafIndicator_app_apply (S : Set X) (V : X.Etale) (D : V.left → M)
+    (y : V.left) :
+    ((pointFunctionSheafIndicator M S).hom.app (op V) D : V.left → M) y =
+      if V.hom y ∈ S then D y else 0 :=
+  rfl
 
 
 end Indicator

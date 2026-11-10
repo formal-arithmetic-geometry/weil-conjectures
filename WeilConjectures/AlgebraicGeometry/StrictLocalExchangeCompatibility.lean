@@ -24,6 +24,38 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+private theorem module_inverseImage_stalk_germ
+    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : X.Etale)
+    (ū : (Scheme.pointSmallEtale (y ≫ f)).fiber.obj U) :
+    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app G).hom.app
+        (op U) ≫
+      (Scheme.pointSmallEtale y).toPresheafFiber (f.Etale.obj U)
+        ((Scheme.pointSmallEtaleFiberEtaleIso f y).inv.app U ū)
+        ((upperStar (ModuleCat.{u + 1} Λ) f).obj G).obj ≫
+      (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) f y).hom.app G =
+      (Scheme.pointSmallEtale (y ≫ f)).toPresheafFiber U ū G.obj := by
+  rw [← Category.assoc]
+  apply (Iso.eq_comp_inv ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) f y).app G)).1
+  simp only [upperStarCompSheafFiberIso, Iso.app_inv, Iso.trans_inv, Iso.symm_inv,
+    NatTrans.comp_app, Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
+    Category.assoc]
+  rw [GrothendieckTopology.Point.toPresheafFiber_sheafFiberIso_inv_app_assoc]
+  rw [GrothendieckTopology.Point.toPresheafFiber_sheafFiberComapIso_hom_app_assoc]
+  rw [show (Scheme.pointSmallEtale y).sheafFiber.map _ =
+    (Scheme.pointSmallEtale y).presheafFiber.map _ from rfl,
+    GrothendieckTopology.Point.toPresheafFiber_naturality]
+  have hu := Adjunction.unit_leftAdjointUniq_hom_app
+    (Functor.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ f) (ModuleCat.{u + 1} Λ)
+      (X.smallGrothendieckTopology (P := @Etale))
+      (Y.smallGrothendieckTopology (P := @Etale)))
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f) G
+  have huU := NatTrans.congr_app (Sheaf.hom_ext_iff.1 hu) (op U)
+  rw [← Category.assoc, ← huU]
+  rfl
+
 
 set_option maxRecDepth 2048 in
 /-- Any linear map with the strict-local representative formula intertwines exchange

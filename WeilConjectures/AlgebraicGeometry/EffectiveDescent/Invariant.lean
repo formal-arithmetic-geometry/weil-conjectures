@@ -88,6 +88,8 @@ lemma isInvariant_iff (U : V.left.Opens) :
     rwa [← pullback.lift_fst a.left f₂ (by rw [← Category.assoc, Over.w a]; exact h),
       Scheme.Hom.comp_apply] at this
 
+lemma isInvariant_top : D.IsInvariant ⊤ := fun _ _ _ _ _ _ ↦ by simp
+
 
 lemma IsInvariant.inf {U U' : V.left.Opens} (hU : D.IsInvariant U) (hU' : D.IsInvariant U') :
     D.IsInvariant (U ⊓ U') := fun _ f₁ f₂ h a ha ↦

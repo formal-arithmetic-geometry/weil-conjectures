@@ -103,4 +103,11 @@ theorem exists_unit_conj_of_algEquiv (σ : Matrix n n F ≃ₐ[F] Matrix n n F) 
   rw [← key, Units.mul_inv_cancel_right]
 
 
+/-- An `F`-algebra automorphism of `Matrix n n F` preserves the determinant. -/
+theorem det_algEquiv_apply (σ : Matrix n n F ≃ₐ[F] Matrix n n F) (X : Matrix n n F) :
+    (σ X).det = X.det := by
+  obtain ⟨g, hg⟩ := exists_unit_conj_of_algEquiv σ
+  rw [hg, det_mul, det_mul, mul_right_comm, ← det_mul, Units.mul_inv, det_one, one_mul]
+
+
 end Matrix

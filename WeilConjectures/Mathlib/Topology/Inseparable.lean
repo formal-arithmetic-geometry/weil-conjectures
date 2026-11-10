@@ -23,6 +23,10 @@ def generalizationHull {X : Type*} [TopologicalSpace X] (s : Set X) : Set X :=
 
 variable {X : Type*} [TopologicalSpace X]
 
+lemma stableUnderGeneralization_generalizationHull (s : Set X) :
+    StableUnderGeneralization (generalizationHull s) :=
+  stableUnderGeneralization_sInter _ fun _ ht ↦ ht.1
+
 
 lemma generalizationHull_eq (s : Set X) :
     generalizationHull s = { x | ∃ y ∈ s, x ⤳ y } := by

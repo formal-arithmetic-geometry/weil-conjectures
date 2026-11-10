@@ -170,6 +170,11 @@ lemma isLeftDerivedFunctor_bifunctorCounit₁_kFlat (X : C) :
   W.localizerMorphismKFlat.isLeftDerivedFunctor_of_isLeftDerivabilityStructure _
     (fun Y ↦ isIso_counit_app_app_of_kFlat_right _ _ _ _ Y.property)
 
+lemma isLeftDerivedFunctor_bifunctorCounit₂_kFlat (Y : C) :
+    Functor.IsLeftDerivedFunctor _ (Functor.bifunctorCounit₂ (counit L W) Y) W :=
+  W.localizerMorphismKFlat.isLeftDerivedFunctor_of_isLeftDerivabilityStructure _
+    (fun X ↦ isIso_counit_app_app_of_kFlat_left _ _ _ _ X.property)
+
 
 end DerivedMonoidal
 

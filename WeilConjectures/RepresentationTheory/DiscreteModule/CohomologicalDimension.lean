@@ -132,6 +132,11 @@ lemma quotientπ_apply (x : X.obj.V) :
     (quotientπ X S hS).hom.hom.hom x = QuotientAddGroup.mk x :=
   rfl
 
+lemma quotient_ρ_mk (g : G) (x : X.obj.V) :
+    ((quotient X S hS).obj.ρ g).hom (QuotientAddGroup.mk x) =
+      QuotientAddGroup.mk ((X.obj.ρ g).hom x) :=
+  rfl
+
 
 end quotient
 

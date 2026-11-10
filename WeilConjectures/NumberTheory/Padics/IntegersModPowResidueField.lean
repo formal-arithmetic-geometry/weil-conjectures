@@ -34,6 +34,12 @@ noncomputable def integersModPowToResidueField :
     rw [map_mul, map_pow, map_natCast, natCast_eq_zero_integersResidueField,
       zero_pow (NeZero.ne n), mul_zero]
 
+/-- The residue map of `𝒪_E ⧸ ℓⁿ` composed with the reduction `𝒪_E → 𝒪_E ⧸ ℓⁿ` is the residue map
+of `𝒪_E`. -/
+lemma integersModPowToResidueField_comp_integersModPowMk :
+    (integersModPowToResidueField l E n).comp (integersModPowMk l E n) = integersResidue l E :=
+  RingHom.ext fun _ ↦ rfl
+
 
 lemma integersModPowToResidueField_integersModPowMk (x : integers l E) :
     integersModPowToResidueField l E n (integersModPowMk l E n x) = integersResidue l E x :=

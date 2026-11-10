@@ -84,5 +84,16 @@ lemma preservesColimitsOfShape_lim_of_isDetector {A : Type u} [Category.{v} A]
   exact preservesColimitsOfShape_of_reflects_of_preserves (lim : (K ⥤ A) ⥤ A)
     (coyoneda.obj (op G))
 
+/-- In a balanced category `A` with a `κ`-presentable separator `G`, the limit functor
+`lim : (K ⥤ A) ⥤ A` over a category `K` with `HasCardinalLT (Arrow K) κ` preserves
+colimits of any `κ`-filtered shape `J`. -/
+lemma preservesColimitsOfShape_lim_of_isSeparator {A : Type u} [Category.{v} A] [Balanced A]
+    {G : A} (hG : IsSeparator G) (κ : Cardinal.{v}) [Fact κ.IsRegular]
+    [IsCardinalPresentable G κ]
+    (J : Type v) [SmallCategory J] [IsCardinalFiltered J κ] [HasColimitsOfShape J A]
+    {K : Type u'} [Category.{v'} K] [HasLimitsOfShape K A] (hK : HasCardinalLT (Arrow K) κ) :
+    PreservesColimitsOfShape J (lim : (K ⥤ A) ⥤ A) :=
+  preservesColimitsOfShape_lim_of_isDetector hG.isDetector κ J hK
+
 
 end CategoryTheory

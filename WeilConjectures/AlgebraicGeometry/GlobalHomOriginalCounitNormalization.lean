@@ -64,6 +64,28 @@ theorem schemeHomCounit_comp_iso_leftDerived
   exact (Functor.isRightKanExtension_iff_of_iso₂ ε (ε ≫ e.hom) e (Iso.refl L)
     (by simp)).mp h
 
+/-- Change of counit in a tensor representative equation.
+Source: Stacks, Tag 079U (blueprint: lem-pc-global-hom-original-counit-normalization). -/
+private theorem originalCounitTensorEquation
+    {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
+    {D : Type uD} [Category.{vD} D] [MonoidalCategory D]
+    (L : C ⥤ D) (δ : L ≅ L) {A B U : C} {A' B' U' V : D}
+    (τ : L.obj (A ⊗ B) ⟶ L.obj A ⊗ L.obj B) (μ : A ⊗ B ⟶ U)
+    (εU ε'U : L.obj U ⟶ U') (εA ε'A : L.obj A ⟶ A')
+    (εB ε'B : L.obj B ⟶ B') (ν : A' ⊗ B' ⟶ V) (φ : U' ⟶ V)
+    (hU : δ.hom.app U ≫ ε'U = εU) (hA : δ.hom.app A ≫ ε'A = εA)
+    (hB : δ.hom.app B ≫ ε'B = εB)
+    (hcoord : L.map μ ≫ εU ≫ φ = τ ≫ (εA ⊗ₘ εB) ≫ ν) :
+    L.map μ ≫ ε'U ≫ φ =
+      (δ.inv.app (A ⊗ B) ≫ τ ≫ (δ.hom.app A ⊗ₘ δ.hom.app B)) ≫
+        (ε'A ⊗ₘ ε'B) ≫ ν := by
+  apply (cancel_epi (δ.hom.app (A ⊗ B))).1
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  simp only [Category.assoc]
+  rw [← δ.hom.naturality_assoc, reassoc_of% hU,
+    tensorHom_comp_tensorHom_assoc, hA, hB]
+  exact hcoord
+
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

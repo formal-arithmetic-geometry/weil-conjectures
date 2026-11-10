@@ -78,6 +78,18 @@ section Diagonal
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
+/-- **The diagonal of a separated morphism of finite presentation is a closed immersion of
+finite presentation.**
+
+Mathlib has no bundled class for "of finite presentation"; a morphism is of finite presentation
+if it is locally of finite presentation, quasi-compact and quasi-separated. -/
+theorem Scheme.Hom.diagonal_isClosedImmersion_finitePresentation [IsSeparated f]
+    [LocallyOfFinitePresentation f] :
+    IsClosedImmersion (pullback.diagonal f) ∧
+      LocallyOfFinitePresentation (pullback.diagonal f) ∧
+      QuasiCompact (pullback.diagonal f) ∧ QuasiSeparated (pullback.diagonal f) :=
+  ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
+
 
 end Diagonal
 
@@ -358,6 +370,20 @@ theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated {W T Y Z : Scheme.{u
     exact Scheme.Hom.le_ker_comp _ _
   rw [← cancel_epi (equalizer.ι f' g').left]
   exact congr($(equalizer.condition f' g').left)
+
+/-- **Morphisms of `S`-schemes into a separated `S`-scheme agreeing on a
+scheme-theoretically dominant subscheme are equal.** For `S`-morphisms `f g : T ⟶ Y`
+into a separated `S`-scheme `Y`, `f = g` as soon as `ι ≫ f = ι ≫ g` for some
+scheme-theoretically dominant `ι : W ⟶ T`.
+
+This is `AlgebraicGeometry.ext_of_isDominant_of_isSeparated'` with dominance of `ι`
+strengthened to scheme-theoretic dominance and, in exchange, the reducedness assumption
+on `T` dropped. -/
+theorem ext_of_isSchemeTheoreticallyDominant_of_isSeparated' (S : Scheme.{u})
+    {T Y : Scheme.{u}} [T.Over S] [Y.Over S] [IsSeparated (Y ↘ S)] {f g : T ⟶ Y}
+    [f.IsOver S] [g.IsOver S] {W : Scheme.{u}} (ι : W ⟶ T)
+    [IsSchemeTheoreticallyDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g :=
+  ext_of_isSchemeTheoreticallyDominant_of_isSeparated (Y ↘ S) (by simp) ι hU
 
 
 end SchemeTheoreticallyDominant

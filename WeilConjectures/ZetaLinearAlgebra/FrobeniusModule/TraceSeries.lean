@@ -89,6 +89,13 @@ theorem leadingCoeff_localPolynomial (M : FrobeniusModule.{u, v} K) :
       (-1) ^ Module.finrank K M.carrier * LinearMap.det M.frobeniusEnd :=
   LinearMap.leadingCoeff_charpolyRev (LinearEquiv.isUnit_det' M.frobenius)
 
+/-- The leading coefficient `(-1) ^ dim V * det F` of `det (1 - T F ∣ V)` is nonzero. -/
+theorem leadingCoeff_localPolynomial_ne_zero (M : FrobeniusModule.{u, v} K) :
+    M.localPolynomial.leadingCoeff ≠ 0 := by
+  rw [leadingCoeff_localPolynomial]
+  exact mul_ne_zero (pow_ne_zero _ (neg_ne_zero.2 one_ne_zero))
+    (LinearEquiv.isUnit_det' M.frobenius).ne_zero
+
 
 /-- The *alternating trace series*
 
@@ -102,6 +109,12 @@ trace series of the blueprint (blueprint: `def-zl-frobenius-trace-series`,
 noncomputable def alternatingTraceSeries (s : Finset ℤ) (M : ℤ → FrobeniusModule.{u, v} K) :
     K⟦X⟧ :=
   LinearMap.alternatingTraceSeries s fun i ↦ (M i).frobeniusEnd
+
+/-- The alternating trace series is the alternating sum `∑_{i ∈ s} (-1) ^ i tr_{F_i}(T)` of the
+trace series. -/
+theorem alternatingTraceSeries_eq_sum (s : Finset ℤ) (M : ℤ → FrobeniusModule.{u, v} K) :
+    alternatingTraceSeries s M = ∑ i ∈ s, (i.negOnePow : ℤ) • (M i).traceSeries :=
+  rfl
 
 
 /-- The `n`-th coefficient of the alternating trace series is

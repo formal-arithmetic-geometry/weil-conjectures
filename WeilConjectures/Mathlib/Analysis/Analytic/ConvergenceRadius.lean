@@ -279,6 +279,71 @@ theorem radius_tprod_le_radius {J : Type*} {f : J → ℂ⟦X⟧} (hf : ∀ j, (
   rw [RCLike.norm_ofReal, RCLike.norm_ofReal, abs_of_nonneg ha, abs_of_nonneg hb]
   exact_mod_cast hab
 
+/-- Blueprint `lem-rp-positive-product-radius` (the "in particular" clause): Positive products
+and radii of convergence.
+
+Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in
+`1 + T ℝ≥0⟦T⟧` and have a convergent product `F = ∏ f_j`. Then no `P_j` vanishes in the open
+disc of radius `R(F)`: each `P_j⁻¹` has radius at least `R(F)` by `radius_tprod_le_radius`, and
+a polynomial has no zero inside the disc of convergence of its inverse
+(`eval_ne_zero_of_lt_radius_inv`). -/
+theorem eval_ne_zero_of_lt_radius_tprod_inv {J : Type*} {P : J → Polynomial ℂ}
+    (hP : ∀ j, (P j).coeff 0 = 1) (hf : ∀ j, ((P j : ℂ⟦X⟧)⁻¹).HasNonnegCoeffs)
+    (hmul : Multipliable fun j ↦ (P j : ℂ⟦X⟧)⁻¹) (j : J) {z : ℂ}
+    (hz : (‖z‖₊ : ℝ≥0∞) < (∏' i, (P i : ℂ⟦X⟧)⁻¹).radius) : (P j).eval z ≠ 0 :=
+  eval_ne_zero_of_lt_radius_inv (by simp [hP]) <| hz.trans_le <|
+    radius_tprod_le_radius hf (fun i ↦ by
+      rw [constantCoeff_inv, ← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe, hP,
+        inv_one]) hmul j
+
+/-- Blueprint `lem-rp-positive-product-radius` (holomorphic hypothesis): Positive products and
+radii of convergence.
+
+If `F ∈ ℂ⟦X⟧` is the Taylor series at `0` of a function `g` holomorphic on the open disc of
+radius `R`, then `F` has radius of convergence at least `R`: on every closed disc of radius
+`r < R` the Cauchy integral formula expands `g` into a power series, which agrees with the
+Taylor series of `g` by uniqueness of power series expansions. -/
+theorem le_radius_of_differentiableOn {g : ℂ → ℂ} {R : ℝ≥0∞} {F : ℂ⟦X⟧}
+    (hg : DifferentiableOn ℂ g (Metric.eball 0 R))
+    (hF : ∀ n, coeff n F = iteratedDeriv n g 0 / n.factorial) : R ≤ F.radius := by
+  refine ENNReal.le_of_forall_pos_nnreal_lt fun r hr hrR ↦ ?_
+  have hp := (hg.mono fun z hz ↦ mem_eball_zero_iff.2 <| lt_of_le_of_lt (by
+    rw [Metric.mem_closedBall, dist_zero_right] at hz
+    rw [← ofReal_norm, ← ENNReal.ofReal_coe_nnreal]
+    exact ENNReal.ofReal_le_ofReal hz) hrR).hasFPowerSeriesOnBall hr
+  have h := hp.hasFPowerSeriesAt.eq_formalMultilinearSeries hp.analyticAt.hasFPowerSeriesAt
+  have hrad : F.radius = (cauchyPowerSeries g 0 r).radius := by
+    rw [radius, h]
+    simp_rw [hF]
+  exact hrad ▸ hp.r_le
+
+/-- Blueprint `lem-rp-positive-product-radius`: Positive products and radii of convergence.
+
+Let `(f_j)` be a family of series in `1 + T ℝ≥0⟦T⟧` whose product converges in the product
+topology. If the product is the Taylor series at `0` of a function `g` holomorphic on the open
+disc of radius `R`, then every factor `f_j` has radius of convergence at least `R`. -/
+theorem le_radius_of_differentiableOn_tprod {J : Type*} {f : J → ℂ⟦X⟧}
+    (hf : ∀ j, (f j).HasNonnegCoeffs) (h1 : ∀ j, constantCoeff (f j) = 1) (hmul : Multipliable f)
+    {g : ℂ → ℂ} {R : ℝ≥0∞} (hg : DifferentiableOn ℂ g (Metric.eball 0 R))
+    (hF : ∀ n, coeff n (∏' i, f i) = iteratedDeriv n g 0 / n.factorial) (j : J) :
+    R ≤ (f j).radius :=
+  (le_radius_of_differentiableOn hg hF).trans (radius_tprod_le_radius hf h1 hmul j)
+
+/-- Blueprint `lem-rp-positive-product-radius` (the "in particular" clause): Positive products
+and radii of convergence.
+
+Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in
+`1 + T ℝ≥0⟦T⟧` and have a convergent product `F = ∏ f_j`. If `F` is the Taylor series at `0` of
+a function holomorphic on the open disc of radius `R`, then no `P_j` vanishes in that disc. -/
+theorem eval_ne_zero_of_differentiableOn_tprod_inv {J : Type*} {P : J → Polynomial ℂ}
+    (hP : ∀ j, (P j).coeff 0 = 1) (hf : ∀ j, ((P j : ℂ⟦X⟧)⁻¹).HasNonnegCoeffs)
+    (hmul : Multipliable fun j ↦ (P j : ℂ⟦X⟧)⁻¹) {g : ℂ → ℂ} {R : ℝ≥0∞}
+    (hg : DifferentiableOn ℂ g (Metric.eball 0 R))
+    (hF : ∀ n, coeff n (∏' i, (P i : ℂ⟦X⟧)⁻¹) = iteratedDeriv n g 0 / n.factorial) (j : J)
+    {z : ℂ} (hz : ‖z‖ₑ < R) : (P j).eval z ≠ 0 :=
+  eval_ne_zero_of_lt_radius_tprod_inv hP hf hmul j <|
+    (enorm_eq_nnnorm z ▸ hz).trans_le (le_radius_of_differentiableOn hg hF)
+
 
 end Nonneg
 

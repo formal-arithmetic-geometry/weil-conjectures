@@ -183,5 +183,21 @@ theorem isKFlatIndependentCoefficients_iff_isKFlat
     IsKFlatIndependentCoefficients K ↔ IsKFlatTensor K := by
   rfl
 
+/-- The independent resolution predicate specializes to `CochainComplex.IsKFlatTensorResolution`
+when the coefficient universe is the maximum of the site universes.
+Source: Stacks Project, Cohomology on Sites, Tag 06YS.
+
+Proof: unfold both resolution predicates. Their quasi-isomorphism conjuncts are
+identical, and the K-flat conjuncts agree by
+`isKFlatIndependentCoefficients_iff_isKFlat`. -/
+theorem isKFlatResolutionIndependentCoefficients_iff_isKFlatResolution
+    {C : Type u} [Category.{v} C] [EssentiallySmall.{max u v} C]
+    {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}}
+    {K G : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ}
+    (f : K ⟶ G) :
+    IsKFlatResolutionIndependentCoefficients f ↔ IsKFlatTensorResolution f := by
+  rfl
+
 
 end CochainComplex

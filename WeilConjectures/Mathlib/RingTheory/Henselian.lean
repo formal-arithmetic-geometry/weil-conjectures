@@ -203,6 +203,13 @@ theorem henselianLocalRing_of_maximalIdeal_le_nilradical
   · exact nilradical_le_prime (IsLocalRing.maximalIdeal R)
       (by simpa only [mem_nilradical, neg_sub] using ha.1.neg)
 
+/-- A local ring of Krull dimension zero (e.g. an artinian local ring) is henselian: its maximal
+ideal is its nilradical. (blueprint: `lem-weil-pbc-local-dimension-zero-henselian`) -/
+theorem HenselianLocalRing.of_krullDimLE_zero {R : Type*} [CommRing R]
+    [IsLocalRing R] [Ring.KrullDimLE 0 R] : HenselianLocalRing R :=
+  henselianLocalRing_of_maximalIdeal_le_nilradical R
+    (Ring.KrullDimLE.nilradical_eq_maximalIdeal (R := R)).ge
+
 
 /-- **Uniqueness of simple roots in a residue class.** Let `R` be a local ring with maximal ideal
 `𝔪`, `f : R[X]` and `a b : R` roots of `f` with `a - b ∈ 𝔪` and `f'(a) ∉ 𝔪`. Then `a = b`.

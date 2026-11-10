@@ -30,10 +30,27 @@ variable (Φ : LocalizerMorphism W₁ W₂)
   {ρ : C₂ ⥤ C₁} (p : ρ ⋙ Φ.functor ⟶ 𝟭 C₂) (hp : ∀ X₂, W₂ (p.app X₂))
   (hW₁ : W₁ = W₂.inverseImage Φ.functor)
 
+lemma hasLeftResolutions_arrow_of_functorial_resolutions :
+    Φ.arrow.HasLeftResolutions :=
+  fun f ↦ ⟨{
+    X₁ := Arrow.mk (ρ.map f.hom)
+    w := Arrow.homMk (p.app _) (p.app _) ((p.naturality f.hom).symm)
+    hw := ⟨hp _, hp _⟩ }⟩
+
 
 variable [Φ.functor.Full] [Φ.functor.Faithful] [W₂.HasTwoOutOfThreeProperty]
 
 include hp
+lemma isConnected_leftResolution_of_functorial_resolutions [W₂.IsMultiplicative] (X₂ : C₂) :
+    IsConnected (Φ.LeftResolution X₂) := by
+  have : Φ.op.functor.Faithful := by dsimp; infer_instance
+  have : Φ.op.functor.Full := by dsimp; infer_instance
+  have : IsConnected (Φ.op.RightResolution (Opposite.op X₂)) :=
+    Φ.op.isConnected_rightResolution_of_functorial_resolutions (ρ := ρ.op)
+      (NatTrans.op p) (fun _ ↦ hp _) (by simp only [hW₁]; rfl) _
+  have := isConnected_of_equivalent (LeftResolution.opEquivalence Φ X₂).symm
+  exact isConnected_of_isConnected_op
+
 
 include hW₁ in
 set_option backward.defeqAttrib.useBackward true in

@@ -255,6 +255,22 @@ theorem subsingleton_H_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) 
   obtain ⟨χ, τ, h⟩ := exists_isEllAdicQuotient R F Ω hℓ
   exact h.subsingleton_H M hM hq
 
+/-- `H⁰(Gal(Ω/F), M)` is finite for finite `M`. -/
+theorem finite_H_zero_galois (M : DiscreteModule.{w} Gal(Ω/F)) [Finite M.obj.V] :
+    Finite (DiscreteModule.H Gal(Ω/F) M 0) :=
+  Finite.of_injective (fun x ↦ (DiscreteModule.H_zero_addEquiv M x).1)
+    (Subtype.val_injective.comp (DiscreteModule.H_zero_addEquiv M).injective)
+
+/-- `H¹(Gal(Ω/F), M)` is finite for finite `ℓ`-primary `M`, for a prime `ℓ` invertible in the
+residue field: it is a quotient of `Mᴷ` (`DiscreteModule.IsEllAdicQuotient.HOneAddEquiv`). -/
+theorem finite_H_one_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) ≠ 0)
+    (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) [Finite M.obj.V] :
+    Finite (DiscreteModule.H Gal(Ω/F) M 1) := by
+  have : IsSepClosure F Ω := ⟨‹_›, ‹_›⟩
+  obtain ⟨χ, τ, h⟩ := exists_isEllAdicQuotient R F Ω hℓ
+  have : Finite (DiscreteModule.fixedAddSubgroup M χ.toMonoidHom.ker) := Subtype.finite
+  exact Finite.of_equiv _ (h.HOneAddEquiv hM).symm.toEquiv
+
 
 variable (R) in
 /-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation.
@@ -275,6 +291,13 @@ theorem subsingleton_H_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime
     (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) {q : ℕ} (hq : 1 < q) :
     Subsingleton (DiscreteModule.H Gal(Ω/F) M q) :=
   subsingleton_H_galois_of_natCast_ne_zero R (natCast_ne_zero_of_ne hp hℓp) M hM hq
+
+/-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation,
+finiteness of `H¹` (see `IsDiscreteValuationRing.subsingleton_H_galois`). -/
+theorem finite_H_one_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) (hℓp : ℓ ≠ p)
+    (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) [Finite M.obj.V] :
+    Finite (DiscreteModule.H Gal(Ω/F) M 1) :=
+  finite_H_one_galois_of_natCast_ne_zero R (natCast_ne_zero_of_ne hp hℓp) M hM
 
 
 end IsDiscreteValuationRing

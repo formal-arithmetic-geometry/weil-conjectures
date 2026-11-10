@@ -56,6 +56,15 @@ lemma Scheme.IsQuasiAffine.of_isIso (e : X ⟶ Y) [IsIso e] [Y.IsQuasiAffine] : 
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace e
   .of_isImmersion e
 
+/-- **Zariski's Main Theorem**, in factorization form: a separated, quasi-compact, locally
+quasi-finite morphism of finite type factors as an open immersion followed by an affine
+morphism. The factorization is through the relative normalization `f.normalization`. -/
+theorem Scheme.Hom.exists_isOpenImmersion_isAffineHom_of_locallyQuasiFinite
+    [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f] :
+    ∃ (W : Scheme.{u}) (j : X ⟶ W) (g : W ⟶ Y), IsOpenImmersion j ∧ IsAffineHom g ∧ j ≫ g = f :=
+  ⟨f.normalization, f.toNormalization, f.fromNormalization, inferInstance, inferInstance,
+    f.toNormalization_fromNormalization⟩
+
 
 /-- If `f : X ⟶ Y` is separated, quasi-compact and locally quasi-finite of finite type and `Y` is
 quasi-affine, then `X` is quasi-affine. Indeed, by Zariski's Main Theorem `f` factors as an open
@@ -122,6 +131,13 @@ instance (V : Y.Opens) [IsQuasiAffineHom f] : IsQuasiAffineHom (f ∣_ V) where
       (hW.image_of_isOpenImmersion V.ι).isQuasiAffine_preimage f
     .of_isIso ((f ⁻¹ᵁ V).ι.isoImage ((f ∣_ V) ⁻¹ᵁ W) ≪≫
       X.isoOfEq (image_morphismRestrict_preimage f V W)).hom
+
+/-- Over an affine base, a quasi-affine morphism has quasi-affine source: the relative notion
+recovers the absolute one. -/
+lemma Scheme.IsQuasiAffine.of_isQuasiAffineHom [IsQuasiAffineHom f] [IsAffine Y] :
+    X.IsQuasiAffine :=
+  have : (⊤ : X.Opens).toScheme.IsQuasiAffine := (isAffineOpen_top Y).isQuasiAffine_preimage f
+  .of_isIso X.topIso.inv
 
 
 /-- A qcqs scheme covered by quasi-affine basic opens of global sections is quasi-affine. -/

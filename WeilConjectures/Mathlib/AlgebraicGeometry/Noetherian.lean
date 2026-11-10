@@ -104,5 +104,32 @@ theorem isNoetherian_left {k : Type u} [Field k] (Y : CategoryTheory.Over (Spec 
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] : IsNoetherian Y.left :=
   isNoetherian_of_locallyOfFiniteType Y.hom
 
+/-- On a quasi-compact locally noetherian scheme the nilpotency index of nilpotent sections is
+uniformly bounded: every local ring is a localization of a noetherian ring of sections over one
+of finitely many affine opens, whose nilradical is nilpotent. -/
+theorem Scheme.exists_pow_eq_zero_of_isNilpotent (X : Scheme.{u}) [CompactSpace X]
+    [IsLocallyNoetherian X] :
+    ∃ N : ℕ, ∀ (U : X.Opens) (a : Γ(X, U)), IsNilpotent a → a ^ N = 0 := by
+  have key (x : X) : ∃ (V : X.Opens) (N : ℕ), x ∈ V ∧
+      ∀ y ∈ V, _root_.nilradical (X.presheaf.stalk y) ^ N = ⊥ := by
+    obtain ⟨V, hV, hxV, -⟩ := exists_isAffineOpen_mem_and_subset (x := x) (U := ⊤) trivial
+    have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+    obtain ⟨N, hN⟩ := IsNoetherianRing.isNilpotent_nilradical Γ(X, V)
+    refine ⟨V, N, hxV, fun y hy ↦ ?_⟩
+    let := TopCat.Presheaf.algebra_section_stalk X.presheaf (⟨y, hy⟩ : V)
+    have := hV.isLocalization_stalk ⟨y, hy⟩
+    exact nilradical_pow_eq_bot_of_isLocalization (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl hN
+  choose V N hxV hN using key
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ (V x : Set X))
+    (fun x ↦ (V x).isOpen) (fun x _ ↦ Set.mem_iUnion.2 ⟨x, hxV x⟩)
+  refine ⟨t.sup N, fun U a ha ↦ TopCat.Presheaf.section_ext X.sheaf U _ _ fun y hy ↦
+    (?_ : (X.presheaf.germ U y hy).hom (a ^ t.sup N) = 0).trans (map_zero _).symm⟩
+  obtain ⟨x, hxt, hyx⟩ : ∃ x ∈ t, y ∈ V x := by simpa using ht (Set.mem_univ y)
+  have hmem := Ideal.pow_mem_pow (mem_nilradical.mpr (ha.map (X.presheaf.germ U y hy).hom))
+    (t.sup N)
+  rw [map_pow]
+  exact (Ideal.mem_bot.mp ((Ideal.pow_le_pow_right (Finset.le_sup hxt)).trans
+    (hN x y hyx).le hmem))
+
 
 end AlgebraicGeometry

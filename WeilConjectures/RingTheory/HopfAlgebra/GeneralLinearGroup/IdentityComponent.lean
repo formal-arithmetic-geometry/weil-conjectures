@@ -173,6 +173,13 @@ theorem normal_zeroLocus_identityComponent (hI : I.IsRadical) (R : Type*) [CommR
   rw [← h₁, ← h₂, ← map_inv, ← map_mul, ← map_mul, evalAlgHom_map, AlgHom.comp_apply, key a ha,
     map_zero]
 
+/-- A closed subgroup `G = V(I)` of `GL_n` has finitely many connected components.
+(blueprint: `sk-p-geometry`) -/
+theorem finite_connectedComponents_zeroLocus :
+    Finite (_root_.ConnectedComponents
+      (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))) :=
+  inferInstance
+
 
 /-- The connected components of a closed subgroup `G = V(I)` of `GL_n` are the cosets of the
 identity component: a point `x` of `G` lies in the connected component of `g ∈ G` if and only if
@@ -208,6 +215,17 @@ theorem finiteIndex_zeroLocus_identityComponent :
     fun x y ↦ Quotient.inductionOn₂ x y fun a b hab ↦
       Quotient.sound (QuotientGroup.leftRel_apply.2 ((hf a b).1 hab))
   exact Subgroup.finiteIndex_of_finite_quotient
+
+/-- **Identity component and cosets.** The connected component of a point `g` of a closed subgroup
+`G = V(I)` of `GL_n` is open and closed in `G`, and it is the coset `g G°`: its points are the `x`
+with `g⁻¹ * x ∈ G°` (`toPrimeSpectrum_mem_connectedComponentIn_iff`). There are finitely many of
+them (`finite_connectedComponents_zeroLocus`, `finiteIndex_zeroLocus_identityComponent`), and `G°`
+is normal (`normal_zeroLocus_identityComponent`), so that `G(k) ⧸ G°(k)` is a finite group.
+(blueprint: `lem-wf-algebraic-component-cosets`) -/
+theorem isClopen_connectedComponent_zeroLocus
+    (p : PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
+    IsClopen (connectedComponent p) :=
+  ⟨isClosed_connectedComponent, TopologicalSpace.NoetherianSpace.isOpen_connectedComponent p⟩
 
 
 end Matrix.GeneralLinearGroup

@@ -62,6 +62,9 @@ lemma toHom_mul {M N : C} [ComonObj M] [MonObj N] (f g : Conv M N) :
     toHom (f * g) = Δ[M] ≫ toHom f ▷ M ≫ N ◁ toHom g ≫ μ[N] :=
   rfl
 
+lemma toHom_one {M N : C} [ComonObj M] [MonObj N] : toHom (1 : Conv M N) = ε[M] ≫ η[N] :=
+  rfl
+
 
 section Preadditive
 

@@ -55,6 +55,10 @@ noncomputable def pullbackObj (x : PointedEtaleNeighborhood (s' ≫ g)) :
     val := CategoryTheory.Over.homMk (pullback.lift x.2.left s' (CategoryTheory.Over.w x.2))
       (pullback.lift_snd _ _ _) }
 
+lemma pullbackObj_snd_left (x : PointedEtaleNeighborhood (s' ≫ g)) :
+    (pullbackObj g s' x).2.left = pullback.lift x.2.left s' (CategoryTheory.Over.w x.2) :=
+  rfl
+
 
 /-- Base change of pointed étale neighbourhoods along `g : S' ⟶ S`. -/
 @[simps obj]

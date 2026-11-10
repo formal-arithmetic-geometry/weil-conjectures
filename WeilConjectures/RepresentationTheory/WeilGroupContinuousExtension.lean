@@ -61,6 +61,11 @@ theorem matrixUnits_apply (ρ : Representation k W V) (b : Basis ι k V) (w : W)
     (ρ.matrixUnits b w : Matrix ι ι k) i j = b.coord i (ρ w (b j)) := by
   rw [coe_matrixUnits, LinearMap.toMatrix_apply, Basis.coord_apply]
 
+theorem coe_matrixUnits_inv (ρ : Representation k W V) (b : Basis ι k V) (w : W) :
+    (((ρ.matrixUnits b w)⁻¹ : (Matrix ι ι k)ˣ) : Matrix ι ι k) =
+      (ρ.matrixUnits b w⁻¹ : Matrix ι ι k) := by
+  rw [map_inv]
+
 
 end Matrix
 

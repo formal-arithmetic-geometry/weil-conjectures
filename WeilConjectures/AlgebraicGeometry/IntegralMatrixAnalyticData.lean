@@ -183,5 +183,15 @@ theorem continuousFunctionPushforward_app {X Y : Scheme.{u}} (f : Y ⟶ X)
   unfold continuousFunctionPushforward
   rfl
 
+/-- The sectionwise continuous direct image preserves the unit section.
+Source: the defining section formula for continuousFunctionPushforward.
+(auxiliary; not a blueprint node) -/
+theorem continuousFunctionPushforward_app_one {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O] (U : X.ProEt) :
+    ((continuousFunctionPushforward f O).hom.app (op U)) (ULift.up 1) =
+      ULift.up 1 := by
+  rw [continuousFunctionPushforward_app]
+  rfl
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing

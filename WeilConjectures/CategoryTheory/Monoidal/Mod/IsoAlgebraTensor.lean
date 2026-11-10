@@ -104,6 +104,10 @@ lemma isoAlgebraTensor_obj_carrier (K L : IsoAlgebra (mapModComap σ)) :
     ((isoAlgebraTensor σ hβF K).obj L).carrier = (tensorLeft K.carrier).obj L.carrier :=
   rfl
 
+lemma isoAlgebraTensor_obj_str (K L : IsoAlgebra (mapModComap σ)) :
+    ((isoAlgebraTensor σ hβF K).obj L).str = isoAlgebraTensorStr σ hβF K L :=
+  IsoAlgebra.mk_str _ _
+
 
 @[simp]
 lemma isoAlgebraTensor_map_hom_f (K : IsoAlgebra (mapModComap σ))

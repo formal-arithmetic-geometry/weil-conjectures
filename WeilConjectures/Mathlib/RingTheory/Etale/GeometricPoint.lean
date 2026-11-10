@@ -68,6 +68,14 @@ lemma residueFieldLift_algebraMap (t : A →+* Ω) (x : A) :
     t.residueFieldLift (algebraMap A _ x) = t x :=
   Ideal.ResidueField.lift_algebraMap _ _ _ _ x
 
+lemma residueFieldLift_injective (t : A →+* Ω) : Function.Injective t.residueFieldLift :=
+  t.residueFieldLift.injective
+
+/-- A ring homomorphism into a field factors through the residue field of its kernel. -/
+lemma residueFieldLift_comp_algebraMap (t : A →+* Ω) :
+    t.residueFieldLift.comp (algebraMap A _) = t :=
+  RingHom.ext (residueFieldLift_algebraMap t)
+
 
 end ResidueFieldLift
 

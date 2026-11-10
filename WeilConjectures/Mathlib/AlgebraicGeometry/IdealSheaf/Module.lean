@@ -97,6 +97,11 @@ noncomputable def toModulesι :
     J.toModules ⟶ (SheafOfModules.unit X.ringCatSheaf : X.Modules) :=
   kernel.ι _
 
+lemma map_kernelι_eq_toModulesι_app (U : X.Opens) (x : Γ(J.toModules, U)) :
+    (SheafOfModules.evaluation X.ringCatSheaf (op U)).map (kernel.ι J.toPushforwardSubscheme) x =
+      J.toModulesι.app U x :=
+  rfl
+
 
 /-- The ideal cut out by `J` on an **arbitrary** open subset, not just an affine one: the
 kernel of the restriction map to the closed subscheme.
@@ -142,4 +147,20 @@ lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModules�
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
 
 
+/-- If the global sections are mapped injectively to the closed subscheme cut out by `J`, then
+`J` has no nonzero global sections. -/
+lemma subsingleton_sections_toModules_of_injective
+    (h : Function.Injective (J.subschemeι.app ⊤)) : Subsingleton Γ(J.toModules, ⊤) := by
+  refine ⟨fun a b ↦ J.injective_toModulesι_app ⊤ ?_⟩
+  have ha : J.subschemeι.app ⊤ (J.toModulesι.app ⊤ a) = 0 :=
+    (J.range_toModulesι_app_eq ⊤).subset ⟨a, rfl⟩
+  have hb : J.subschemeι.app ⊤ (J.toModulesι.app ⊤ b) = 0 :=
+    (J.range_toModulesι_app_eq ⊤).subset ⟨b, rfl⟩
+  exact h (ha.trans hb.symm)
+
+lemma subsingleton_sections_toModules_of_isField (hX : IsField Γ(X, ⊤)) [Nonempty J.subscheme] :
+    Subsingleton Γ(J.toModules, ⊤) := by
+  let := hX.toField
+  have : Nonempty ↥(J.subschemeι ⁻¹ᵁ ⊤) := ⟨⟨Classical.arbitrary J.subscheme, trivial⟩⟩
+  exact J.subsingleton_sections_toModules_of_injective (J.subschemeι.app ⊤).hom.injective
 end AlgebraicGeometry.Scheme.IdealSheafData

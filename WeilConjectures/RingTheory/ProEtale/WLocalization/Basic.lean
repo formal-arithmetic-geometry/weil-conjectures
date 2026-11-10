@@ -343,6 +343,13 @@ lemma Stratification.Index.ext_of_left {E : Finset A} {i j : Stratification.Inde
   ext a
   simp_rw [mem_right_iff, h]
 
+/-- In a disjoint union decomposition `E = E' ⨿ E''`, the right part is determined by the
+left part as `E \ E'`. -/
+lemma Stratification.Index.right_eq_sdiff {E : Finset A} [DecidableEq A]
+    (i : Stratification.Index E) : i.right = E \ i.left := by
+  ext a
+  rw [Finset.mem_sdiff, mem_right_iff]
+
 
 omit [CommRing A] in
 instance (E : Finset A) : Finite (Stratification.Index E) :=
@@ -580,6 +587,14 @@ lemma ProdStrata.map_ideal_le {E F : Finset A} (h : E ⊆ F) :
   simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_coe, map_apply]
   exact Generalization.map_ideal_le _ (i.ideal_restrict_le h) (i.function_restrict_dvd_function h)
     (Ideal.mem_map_of_mem _ ((Ideal.mem_pi _ _).mp hx _))
+
+lemma ProdStrata.mapsTo_map_specComap {E F : Finset A} (h : E ⊆ F) :
+    Set.MapsTo (PrimeSpectrum.comap (map h).toRingHom)
+      (zeroLocus (ideal F)) (zeroLocus (ideal E)) := by
+  intro p hp
+  simp only [mem_zeroLocus, SetLike.coe_subset_coe, comap_asIdeal,
+    ← Ideal.map_le_iff_le_comap] at hp ⊢
+  exact (map_ideal_le h).trans hp
 
 
 variable (A) in

@@ -45,6 +45,16 @@ lemma isIso_of_isIso_comp_of_isSplitEpi (a : A ⟶ B) (x : B ⟶ D) (y : D ⟶ E
   have : Mono x := mono_of_mono x y
   exact isIso_of_mono_of_isSplitEpi x
 
+/-- If a morphism has an epi–mono factorisation `p ≫ i` and also factors as `b ≫ s` through an
+object `B` with `s ≫ b = 𝟙 B`, then `i ≫ b` is an isomorphism, with inverse `s ≫ p`: the image of
+`p ≫ i` is identified with `B`. -/
+lemma isIso_comp_of_fac {M P : C} (p : M ⟶ P) (i : P ⟶ M) (b : M ⟶ B) (s : B ⟶ M) [Epi p]
+    [Mono i] (h : p ≫ i = b ≫ s) (hs : s ≫ b = 𝟙 B) : IsIso (i ≫ b) := by
+  refine ⟨s ≫ p, ?_, by rw [Category.assoc, reassoc_of% h, reassoc_of% hs, hs]⟩
+  rw [← cancel_mono i, ← cancel_epi p]
+  simp only [Category.assoc, Category.id_comp]
+  rw [reassoc_of% h, reassoc_of% hs, h, reassoc_of% hs]
+
 
 /-- A morphism `a` such that `a ≫ b` and `b ≫ a` are isomorphisms for some `b` is an
 isomorphism. -/

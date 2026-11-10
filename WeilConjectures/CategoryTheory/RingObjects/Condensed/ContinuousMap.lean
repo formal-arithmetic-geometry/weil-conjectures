@@ -167,6 +167,18 @@ lemma continuousMapRingSheafMap_hom :
     (continuousMapRingSheafMap.{u} φ hφ).hom = continuousMapRingPresheafMap φ hφ :=
   rfl
 
+/-- Postcomposition with the identity is the identity. -/
+lemma continuousMapRingSheafMap_id :
+    continuousMapRingSheafMap.{u} (RingHom.id T) continuous_id = 𝟙 _ :=
+  rfl
+
+/-- Postcomposition is compatible with composition of continuous ring homomorphisms. -/
+lemma continuousMapRingSheafMap_comp {T'' : Type} [TopologicalSpace T''] [Ring T'']
+    [IsTopologicalRing T''] (ψ : T' →+* T'') (hψ : Continuous ψ) :
+    continuousMapRingSheafMap.{u} (ψ.comp φ) (hψ.comp hφ) =
+      continuousMapRingSheafMap φ hφ ≫ continuousMapRingSheafMap ψ hψ :=
+  rfl
+
 
 end Ring
 

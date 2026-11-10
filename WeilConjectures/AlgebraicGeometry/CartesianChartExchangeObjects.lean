@@ -22,5 +22,13 @@ lemma chartDiagram_obj_hom
       pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) := by
   rfl
 
+lemma chartCone_pt_hom
+    {S X : Scheme.{u}} (f : X ⟶ S)
+    {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)
+    (i : I) :
+    (cartesianChartCone f D c i).pt.hom =
+      pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom) := by
+  rfl
+
 
 end AlgebraicGeometry.Etale

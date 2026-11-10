@@ -87,3 +87,10 @@ lemma RingHom.surjective_of_forall_isMaximal_exists {f : R →+* S}
   obtain ⟨r, hrm, hr_range⟩ := h s m hm
   exact hrm (hJm hr_range)
 
+/-- Converse of `RingHom.surjective_of_forall_isMaximal_exists`. -/
+lemma RingHom.exists_mul_mem_range_of_surjective {f : R →+* S}
+    (hf : Function.Surjective f) (s : S) (m : Ideal R) (hm : m.IsMaximal) :
+    ∃ r : R, r ∉ m ∧ f r * s ∈ f.range := by
+  obtain ⟨r, rfl⟩ := hf s
+  exact ⟨1, (Ideal.ne_top_iff_one m).mp hm.ne_top, r, by simp⟩
+

@@ -211,6 +211,8 @@ noncomputable def strictLocalizationCone : Cone (affineNeighborhoodDiagram s) :=
   (Cone.postcompose (affineNeighborhoodDiagramIso s).inv).obj
     (Scheme.Spec.mapCone (coneRightOpOfCocone (colimit.cocone (strictHenselizationDiagram s))))
 
+lemma strictLocalizationCone_pt : (strictLocalizationCone s).pt = strictLocalization s := rfl
+
 
 lemma strictLocalizationCone_π_app (x : AffinePointedEtaleNeighborhood s) :
     (strictLocalizationCone s).π.app x =
@@ -292,6 +294,14 @@ noncomputable def isLimitStrictLocalizationConePullback {X : Scheme.{u}} (f : X 
   isLimitOfPreserves (CategoryTheory.Over.forget X)
     (isLimitOfPreserves (CategoryTheory.Over.pullback f) (isLimitStrictLocalizationConeOver s))
 
+/-- The point of the cone of `isLimitStrictLocalizationConePullback` is the fibre product
+`S_(s) ×_S X`. -/
+lemma isLimitStrictLocalizationConePullback_pt {X : Scheme.{u}} (f : X ⟶ S) :
+    ((CategoryTheory.Over.forget X).mapCone
+      ((CategoryTheory.Over.pullback f).mapCone (strictLocalizationConeOver s))).pt =
+      pullback (strictLocalizationToBase s) f :=
+  rfl
+
 
 section Stalk
 
@@ -327,6 +337,15 @@ instance preservesFiniteLimits_geometricStalkFunctor :
 instance preservesFiniteColimits_geometricStalkFunctor :
     PreservesFiniteColimits (geometricStalkFunctor s AddCommGrpCat.{u}) :=
   inferInstance
+
+/-- **Exactness of geometric stalks**: the stalk functor `Ab(S_ét) ⥤ Ab` at a geometric point
+carries short exact sequences of abelian étale sheaves to short exact sequences.
+
+(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
+theorem shortExact_map_geometricStalkFunctor
+    {T : ShortComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})} (hT : T.ShortExact) :
+    (T.map (geometricStalkFunctor s AddCommGrpCat.{u})).ShortExact :=
+  hT.map_of_exact _
 
 
 end Stalk

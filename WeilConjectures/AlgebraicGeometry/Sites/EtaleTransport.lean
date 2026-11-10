@@ -193,12 +193,30 @@ noncomputable def restrict (P : Torsor G) : Torsor ((etaleRestriction f).obj G) 
     intro V g hg
     exact hg
 
+lemma restrict_vadd (P : Torsor G) (U : X.Etaleᵒᵖ) (a : G.obj.obj
+    (op ((etaleLocalization f).obj U.unop))) (x) :
+    (P.restrict f).vadd U a x =
+      P.vadd (op ((etaleLocalization f).obj U.unop)) a x :=
+  rfl
+
 
 /-- The sections of the restriction of a torsor over `U` are its sections over the
 localization of `U`. -/
 def restrictSheafEquiv (P : Torsor G) (U : X.Etaleᵒᵖ) :
     (P.restrict f).sheaf.obj.obj U ≃ P.sheaf.obj.obj (op ((etaleLocalization f).obj U.unop)) :=
   Equiv.refl _
+
+lemma restrictSheafEquiv_map (P : Torsor G) {U V : X.Etaleᵒᵖ} (g : U ⟶ V)
+    (x : (P.restrict f).sheaf.obj.obj U) :
+    P.restrictSheafEquiv f V ((P.restrict f).sheaf.obj.map g x) =
+      P.sheaf.obj.map ((etaleLocalization f).map g.unop).op (P.restrictSheafEquiv f U x) :=
+  rfl
+
+lemma restrictSheafEquiv_vadd (P : Torsor G) (U : X.Etaleᵒᵖ)
+    (a : G.obj.obj (op ((etaleLocalization f).obj U.unop))) (x : (P.restrict f).sheaf.obj.obj U) :
+    P.restrictSheafEquiv f U ((P.restrict f).vadd U a x) =
+      P.vadd (op ((etaleLocalization f).obj U.unop)) a (P.restrictSheafEquiv f U x) :=
+  rfl
 
 
 /-- Restriction preserves isomorphism of torsors. -/

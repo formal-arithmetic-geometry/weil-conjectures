@@ -69,5 +69,25 @@ theorem rawRestrictedCohomologyClass_map {S Y Y' : Scheme.{u}}
   rw [rawRestrictedCohomologyClass_spec] at hn
   exact hn
 
+/-- The canonical raw class commutes with the specified restricted pullback.
+Source: Stacks Project, Tags 03Q8 and 0EYM.
+(blueprint: def-sc-raw-restricted-cohomology-class).
+
+Proof: Evaluation is injective. Evaluating the left side recovers the restricted
+cohomology map, and evaluating the right side gives the same map by naturality. -/
+theorem rawRestrictedCohomologyClass_naturality {S Y Y' : Scheme.{u}}
+    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℕ)
+    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (φ : ((a)^*[AddCommGrpCat.{u + 1}]).obj F ⟶ F') (V : S.Etale)
+    (x : rawAffineRestrictedCohomology h q F V) :
+    rawRestrictedCohomologyClass h' q F' V
+      (rawAffineRestrictedCohomologyMap a h h' w q F F' φ V x) =
+      abelianHigherDirectImageRawPullback a h h' w q F F' φ V
+        (rawRestrictedCohomologyClass h q F V x) := by
+  let := isIso_rawRestrictedCohomologyComparison h' q F' V
+  apply (ConcreteCategory.bijective_of_isIso (rawRestrictedCohomologyComparison h' q F' V)).1
+  rw [rawRestrictedCohomologyClass_spec, ← rawRestrictedCohomologyClass_map]
+
 
 end AlgebraicGeometry.Etale

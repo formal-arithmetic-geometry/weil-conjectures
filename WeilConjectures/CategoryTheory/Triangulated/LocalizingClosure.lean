@@ -85,6 +85,11 @@ lemma localizingClosure_le {Q : ObjectProperty C} [Q.IsLocalizing] (h : P ≤ Q)
     P.localizingClosure ≤ Q :=
   fun _ hX ↦ hX Q h inferInstance
 
+/-- The localizing closure is monotone. -/
+lemma localizingClosure_monotone {Q : ObjectProperty C} (h : P ≤ Q) :
+    P.localizingClosure ≤ Q.localizingClosure :=
+  fun _ hX R hQR hR ↦ hX R (h.trans hQR) hR
+
 
 instance : P.localizingClosure.IsClosedUnderIsomorphisms where
   of_iso e hX Q hPQ hQ := Q.prop_of_iso e (hX Q hPQ hQ)
@@ -108,6 +113,10 @@ instance hasCoproducts_fullSubcategory [HasCoproducts.{v} C] (Q : ObjectProperty
 instance preservesColimitsOfShape_ι [HasCoproducts.{v} C] (Q : ObjectProperty C)
     [Q.IsLocalizing] (J : Type v) : PreservesColimitsOfShape (Discrete J) Q.ι :=
   inferInstance
+/-- A localizing property is its own localizing closure. -/
+lemma localizingClosure_eq_self [P.IsLocalizing] : P.localizingClosure = P :=
+  le_antisymm (localizingClosure_le le_rfl) (le_localizingClosure P)
+
 
 /-- Blueprint `det-proper-image-localizing-principle`: a triangulated functor `F : C ⥤ D`
 preserving coproducts indexed by `Type v` which maps the objects of `P` into `Loc(P')` maps

@@ -74,6 +74,10 @@ lemma unitValue_add (a b : Modules.unit Y ⟶ Modules.unit Y) :
     unitValue (a + b) = unitValue a + unitValue b :=
   rfl
 
+lemma unitValue_sub (a b : Modules.unit Y ⟶ Modules.unit Y) :
+    unitValue (a - b) = unitValue a - unitValue b :=
+  rfl
+
 
 @[simp]
 lemma unitValue_smulHom (a : Γ(Y, ⊤)) : unitValue ((Modules.unit Y).smulHom a) = a := by
@@ -99,6 +103,13 @@ lemma freeMatrix_add {I J : Type u} [DecidableEq J] (φ ψ : free (R := Y.ringCa
     freeMatrix (φ + ψ) = freeMatrix φ + freeMatrix ψ := by
   ext j i
   rw [freeMatrix_apply, Preadditive.add_comp, Preadditive.comp_add, unitValue_add]
+  rfl
+
+/-- The matrix of a difference is the difference of the matrices. -/
+lemma freeMatrix_sub {I J : Type u} [DecidableEq J] (φ ψ : free (R := Y.ringCatSheaf) I ⟶ free J) :
+    freeMatrix (φ - ψ) = freeMatrix φ - freeMatrix ψ := by
+  ext j i
+  rw [freeMatrix_apply, Preadditive.sub_comp, Preadditive.comp_sub, unitValue_sub]
   rfl
 
 

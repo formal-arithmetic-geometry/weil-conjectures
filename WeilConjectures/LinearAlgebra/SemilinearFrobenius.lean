@@ -253,6 +253,11 @@ instance finite_fixedPointsSubmodule [FiniteDimensional k V] (F : V →ₚ[k, p]
   Module.rank_lt_aleph0_iff.mp <|
     (rank_fixedPointsSubmodule_le F).trans_lt Cardinal.natCast_lt_aleph0
 
+/-- The fixed points of `F` have dimension at most `dim_k V` over the prime subfield. -/
+theorem finrank_fixedPointsSubmodule_le [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
+    Module.finrank (⊥ : Subfield k) (fixedPointsSubmodule F) ≤ Module.finrank k V :=
+  Module.finrank_le_of_rank_le (rank_fixedPointsSubmodule_le F)
+
 
 /-- Blueprint `lem-sc-fixed-points-finite`: Fixed points of `p`-linear maps are finite.
 
@@ -265,6 +270,18 @@ instance finite_fixedPoints [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
     Nat.finite_of_card_ne_zero ((Subfield.card_bot k p).trans_ne (Fact.out : p.Prime).ne_zero)
   have := Module.finite_of_finite (⊥ : Subfield k) (M := fixedPointsSubmodule F)
   .of_equiv _ (fixedPointsEquivSubmodule F).symm
+
+/-- Blueprint `lem-sc-fixed-points-finite`: Fixed points of `p`-linear maps are finite.
+
+The `𝔽_p`-subspace of fixed points of a `p`-linear endomorphism `F` of a finite-dimensional
+`k`-vector space `V` has `𝔽_p`-dimension at most `Module.finrank k V`; equivalently, it has at
+most `p ^ Module.finrank k V` elements. This is the dimension bound of blueprint
+`lem-sc-fixed-points-finite`. -/
+theorem natCard_fixedPoints_le [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
+    Nat.card (fixedPoints F) ≤ p ^ Module.finrank k V := by
+  rw [Nat.card_congr (fixedPointsEquivSubmodule F),
+    Module.natCard_eq_pow_finrank (K := (⊥ : Subfield k)), Subfield.card_bot k p]
+  exact Nat.pow_le_pow_right (Fact.out : p.Prime).pos (finrank_fixedPointsSubmodule_le F)
 
 
 open Polynomial in
@@ -372,6 +389,34 @@ theorem surjective_sub_id [IsAlgClosed k] [FiniteDimensional k V] (F : V →ₚ[
   abel
 
 variable {k' : Type*} [Field k'] [CharP k' p] [Algebra k k']
+
+/-- A `p`-linear endomorphism `F` of `V` has exactly one `p`-linear extension to the base change
+`k' ⊗[k] V`, namely `a ⊗ₜ v ↦ a ^ p ⊗ₜ F v`. This is the map `F' = F ⊗ σ_{k'}` of blueprint
+`lem-sc-frobenius-fixed-invariance`. -/
+theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
+    ∃! F' : (k' ⊗[k] V) →ₚ[k', p] (k' ⊗[k] V), ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v := by
+  let f : k' →+ V →+ k' ⊗[k] V :=
+    { toFun a := (TensorProduct.mk k k' V (a ^ p)).toAddMonoidHom.comp F.toAddMonoidHom
+      map_zero' := by ext; simp [zero_pow (Fact.out : p.Prime).ne_zero]
+      map_add' a b := by ext; simp [add_pow_char] }
+  let G := TensorProduct.liftAddHom f fun (r : k) a v ↦ by
+    change ((r • a) ^ p) ⊗ₜ[k] F v = (a ^ p) ⊗ₜ[k] F (r • v)
+    rw [map_smulₛₗ, _root_.frobenius_def, TensorProduct.tmul_smul, TensorProduct.smul_tmul',
+      smul_pow]
+  have hG (a : k') (v : V) : G (a ⊗ₜ[k] v) = (a ^ p) ⊗ₜ[k] F v := rfl
+  refine ⟨{ toFun := G, map_add' := G.map_add, map_smul' := fun c x ↦ ?_ }, fun v ↦ ?_,
+    fun F'' hF'' ↦ ?_⟩
+  · induction x using TensorProduct.inductionOn with
+    | tmul a v => simp [TensorProduct.smul_tmul', hG, mul_pow, _root_.frobenius_def]
+    | add x y hx hy => simp only [smul_add, map_add] at hx hy ⊢; rw [hx, hy]
+  · simp [hG]
+  · ext x
+    induction x using TensorProduct.inductionOn with
+    | tmul a v =>
+      rw [show a ⊗ₜ[k] v = a • (1 ⊗ₜ[k] v) by simp [TensorProduct.smul_tmul'], map_smulₛₗ,
+        hF'']
+      simp [hG, TensorProduct.smul_tmul', _root_.frobenius_def]
+    | add x y hx hy => simp only [map_add, hx, hy]
 
 
 /-- Blueprint `lem-sc-frobenius-fixed-invariance` (proved as `lem-sc-frobenius-fixed-invariance`):

@@ -33,6 +33,12 @@ variable {C : Type u} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u}}
 noncomputable def bidual : A ⟶ homObj (homObj A (unit _)) (unit _) :=
   tensorHomCurry ((β_ (homObj A (unit _)) A).hom ≫ tensorHomUncurry (𝟙 _))
 
+lemma bidual_app_app_apply {X : Cᵒᵖ} (m : A.obj X) (W : (Over X.unop)ᵒᵖ)
+    (φ : (homObj A (unit _)).obj (op W.unop.left)) :
+    (((bidual A).app X m).app W) φ =
+      φ.app (op (Over.mk (𝟙 W.unop.left))) (A.map W.unop.hom.op m) :=
+  rfl
+
 
 variable {A} in
 /-- The biduality morphism is natural. -/

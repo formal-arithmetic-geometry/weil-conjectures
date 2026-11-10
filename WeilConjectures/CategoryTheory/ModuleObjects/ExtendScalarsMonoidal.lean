@@ -591,6 +591,10 @@ noncomputable def extendScalarsMonoidal : (extendScalars φ).Monoidal :=
   haveI := isIso_extendScalarsOplaxMonoidal_δ φ
   (Functor.CoreMonoidal.ofOplaxMonoidal _).toMonoidal
 
+lemma extendScalarsMonoidal_toOplaxMonoidal :
+    (extendScalarsMonoidal φ).toOplaxMonoidal = extendScalarsOplaxMonoidal φ :=
+  rfl
+
 
 end ExtendScalars
 

@@ -155,4 +155,113 @@ private theorem derived_equivalence
     (F ⋙ DerivedCategory.Q) e.functor.mapDerivedCategory
     (G ⋙ DerivedCategory.Q) e.inverse.mapDerivedCategory α β
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedVariables false in
+/-- Existence of the transported derived-functor isomorphism, before its counit equation.
+Source: Stacks Project, Tag 06Y6.
+The proof uses uniqueness of left derived functors after transport through ring equivalences.
+(blueprint: lem-pc-derived-extension-ring-equiv-raw-transport-iso). -/
+theorem exists_raw_transport_iso
+    {R₀ B₀ R B : Type u}
+    [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]
+    [Algebra R₀ B₀] [Algebra R B]
+    [HasDerivedCategory.{w} (ModuleCat.{u} R₀)]
+    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]
+    [HasDerivedCategory.{w'} (ModuleCat.{u} R)]
+    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]
+    (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀))
+    (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
+    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶
+      (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))
+    (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))
+    (eR : R₀ ≃+* R) (eB : B₀ ≃+* B)
+    (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =
+      (algebraMap R B).comp eR.toRingHom) :
+    ∀ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀))
+      (q : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅
+        (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ) ⋙
+          (HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh))
+      (t : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙
+        (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ) ≅
+        (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⋙
+          (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ)),
+      Nonempty ((restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙
+        HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L₀ ≅
+        HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L ⋙ E) :=
+  by
+  intro E q t
+  -- Compare universal counits on complexes, where the supplied square t lives.
+  let SR := (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)
+  let T₀ := (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ)
+  let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)
+  let QB₀ := HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh
+  let cB := DerivedCategory.quotientCompQhIso (ModuleCat.{u} B)
+  let cB₀ := DerivedCategory.quotientCompQhIso (ModuleCat.{u} B₀)
+  let sR := restrictScalars.{u} eR.toRingHom
+  let sB := restrictScalars.{u} eB.toRingHom
+  let _ : SR.IsEquivalence :=
+    (restrictScalarsEquivalenceOfRingEquiv eR).mapHomologicalComplex (.up ℤ)
+      |>.isEquivalence_functor
+  let _ : sR.mapDerivedCategory.IsEquivalence :=
+    derived_equivalence (restrictScalarsEquivalenceOfRingEquiv eR)
+  obtain ⟨α₀, hα₀⟩ := complex_universal (extendScalars (algebraMap R₀ B₀)) L₀ ε₀ h₀
+  let := hα₀
+  let αpre := (Functor.associator SR DerivedCategory.Q L₀).hom ≫
+    Functor.whiskerLeft SR α₀
+  have hpre := (Functor.isRightKanExtension_iff_precomp L₀ SR α₀).mp hα₀
+  let β₀ := (Functor.associator DerivedCategory.Q sR.mapDerivedCategory L₀).inv ≫
+    Functor.whiskerRight sR.mapDerivedCategoryFactors.hom L₀ ≫ αpre
+  let hβ₀ := (Functor.isRightKanExtension_iff_postcomp₁ sR.mapDerivedCategory
+    sR.mapDerivedCategoryFactors αpre).mp hpre
+  let := hβ₀
+  -- Localization makes q descend uniquely to an isomorphism of derived functors.
+  let qe : DerivedCategory.Q ⋙ E ≅ DerivedCategory.Q ⋙ sB.mapDerivedCategory :=
+    Functor.isoWhiskerRight cB.symm E ≪≫ q ≪≫
+      Functor.isoWhiskerLeft _ cB₀ ≪≫ sB.mapDerivedCategoryFactors.symm
+  let pre := (Functor.whiskeringLeft (CochainComplex (ModuleCat.{u} B) ℤ)
+    (DerivedCategory (ModuleCat.{u} B)) (DerivedCategory (ModuleCat.{u} B₀))).obj
+      DerivedCategory.Q
+  let _ : pre.Full := Localization.full_whiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso (ModuleCat.{u} B) (.up ℤ)) _
+  let _ : pre.Faithful := Localization.faithful_whiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso (ModuleCat.{u} B) (.up ℤ)) _
+  let e : E ≅ sB.mapDerivedCategory := pre.preimageIso qe
+  let _ : sB.mapDerivedCategory.IsEquivalence :=
+    derived_equivalence (restrictScalarsEquivalenceOfRingEquiv eB)
+  let _ : E.IsEquivalence := Functor.isEquivalence_of_iso e.symm
+  obtain ⟨α, hα⟩ := complex_universal (extendScalars (algebraMap R B)) L ε h
+  let := hα
+  let αpost := (Functor.associator DerivedCategory.Q L E).inv ≫ Functor.whiskerRight α E
+  let := kan_postcomp_equivalence DerivedCategory.Q _ L E α
+  obtain ⟨β, hβ⟩ := kan_change_iso (L ⋙ E) (Iso.refl DerivedCategory.Q)
+    (Functor.associator T DerivedCategory.Q E) αpost
+  let := hβ
+  -- The ordinary comparison needs only t; its construction already encodes hRB.
+  let ordinary : SR ⋙ T₀ ⋙ DerivedCategory.Q ≅ T ⋙ DerivedCategory.Q ⋙ E :=
+    Functor.isoWhiskerLeft SR (Functor.isoWhiskerLeft T₀ cB₀.symm) ≪≫
+      (Functor.associator SR T₀ QB₀).symm ≪≫
+      Functor.isoWhiskerRight t QB₀ ≪≫
+      Functor.associator T _ QB₀ ≪≫
+      Functor.isoWhiskerLeft T q.symm ≪≫
+      Functor.isoWhiskerLeft T (Functor.isoWhiskerRight cB E) ≪≫
+      Functor.associator T DerivedCategory.Q E
+  -- Uniqueness of universal extensions supplies the derived comparison.
+  let a := Functor.rightKanExtensionUniqueOfIso
+    ((restrictScalars.{u} eR.toRingHom).mapDerivedCategory ⋙ L₀) β₀ ordinary (L ⋙ E) β
+  let r := (restrictScalars.{u} eR.toRingHom).mapDerivedCategoryFactors
+  let cR := DerivedCategory.quotientCompQhIso (ModuleCat.{u} R)
+  let cR₀ := DerivedCategory.quotientCompQhIso (ModuleCat.{u} R₀)
+  refine ⟨?_⟩
+  exact Functor.isoWhiskerLeft SR
+      ((Functor.associator _ _ L₀).symm ≪≫ Functor.isoWhiskerRight cR₀ L₀) ≪≫
+    (Functor.associator SR DerivedCategory.Q L₀).symm ≪≫
+    Functor.isoWhiskerRight r.symm L₀ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft DerivedCategory.Q a ≪≫
+    Functor.isoWhiskerRight cR.symm (L ⋙ E) ≪≫
+    Functor.associator _ _ _
 end ModuleCat

@@ -37,6 +37,14 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
+/-- Blueprint `lem-weil-pbc-flat-lfp-open`: Flat finite-presentation morphisms are open.
+
+A flat morphism locally of finite presentation is universally open: it is open, and so is every
+base change of it. This is Mathlib's `AlgebraicGeometry.UniversallyOpen.of_flat`. -/
+theorem universallyOpen_of_flat_of_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f :=
+  UniversallyOpen.of_flat f
+
 
 /-- The local rings of a scheme étale over an integral scheme with integrally closed local rings
 are integrally closed domains (the étale case of Stacks 033C). -/

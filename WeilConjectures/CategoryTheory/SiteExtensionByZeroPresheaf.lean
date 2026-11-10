@@ -192,6 +192,18 @@ noncomputable def siteExtensionByZeroPresheaf :
   map_id F := siteExtensionByZeroHom_id W F
   map_comp α β := siteExtensionByZeroHom_comp W α β
 
+/-- Forgetting scalars in the module construction gives the same direct sums and
+restrictions. In particular this applies to the constant integer ring sheaf, where modules
+are abelian groups. Proof: compare the section types and maps; their formulas agree on every
+injection, and functor extensionality concludes. Stacks Project, 03DI and 03EJ
+(blueprint: def-weil-pbc-site-extension-by-zero-presheaf). -/
+theorem siteExtensionByZeroPresheaf_modules {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{r}) (G : SheafOfModules.{w} (R.over W)) :
+    (siteExtensionByZeroPresheaf W).obj G.val.presheaf =
+      (PresheafOfModules.toPresheaf R.obj).obj
+        ((SheafOfModules.extensionByZeroPresheaf R W).obj G) := by
+  rfl
+
 
 end
 

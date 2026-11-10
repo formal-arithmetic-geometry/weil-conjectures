@@ -102,6 +102,10 @@ lemma flat_submodule [Ring.WeakDimensionLEOne R] {M : Type*} [AddCommGroup M] [M
       ← LinearMap.rTensor_comp_lTensor, LinearMap.coe_comp]
   exact (hnat ▸ h).of_comp
 
+lemma flat_ideal [Ring.WeakDimensionLEOne R] (I : Ideal R) :
+    Module.Flat R I :=
+  flat_submodule _ _
+
 
 /-- The product of valuation rings is of weak dimension `≤ 1`. -/
 lemma pi_of_isValuationRing {ι : Type*} (R : ι → Type*) [∀ i, CommRing (R i)]

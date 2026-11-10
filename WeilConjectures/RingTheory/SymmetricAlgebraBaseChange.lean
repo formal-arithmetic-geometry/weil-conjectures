@@ -80,5 +80,58 @@ theorem baseChange_bijective
   exact ⟨(show Function.LeftInverse Ψ Φ from fun x ↦ DFunLike.congr_fun hleft x).injective,
     (show Function.RightInverse Ψ Φ from fun x ↦ DFunLike.congr_fun hright x).surjective⟩
 
+/-- The principal localization of a symmetric algebra is the symmetric algebra of the
+localized module over the localized ring.
+Source: Stacks Project, Algebra, Lemma 0C6F
+(blueprint: lem-weil-pbc-symmetric-algebra-base-change).
+
+Proof: (6) Specialize the base-change isomorphism to `S = Localization.Away f`.
+Use the algebra and module tensor-localization identifications
+(lem-weil-pbc-localization-tensor), namely `IsLocalization.Away.tensorRightEquiv` and
+`LocalizedModule.equivTensorProduct`, to identify its source with the localization of
+`SymmetricAlgebra R M` at the image of the powers of `f`, and its degree-one module
+with `LocalizedModule (Submonoid.powers f) M`. Under these identifications the comparison
+is exactly the stated localization isomorphism. The image submonoid is exactly the powers
+of `algebraMap R (SymmetricAlgebra R M) f`. -/
+theorem exists_away_baseChange
+    {R : Type u} {M : Type w} [CommRing R] [AddCommGroup M] [Module R M] (f : R) :
+    Nonempty (Localization
+        (Algebra.algebraMapSubmonoid (SymmetricAlgebra R M) (Submonoid.powers f))
+        ≃ₐ[Localization.Away f]
+        SymmetricAlgebra (Localization.Away f) (LocalizedModule (Submonoid.powers f) M)) := by
+  let S := Localization.Away f
+  let N := LocalizedModule (Submonoid.powers f) M
+  let k : M →ₗ[R] S ⊗[R] M := TensorProduct.mk R S M 1
+  let β : SymmetricAlgebra R M →ₐ[R] SymmetricAlgebra S (S ⊗[R] M) :=
+    lift ((ι S (S ⊗[R] M)).restrictScalars R |>.comp k)
+  have hβ : ∀ m : M, β (ι R M m) = ι S (S ⊗[R] M) (1 ⊗ₜ[R] m) := by
+    intro m
+    simp [β, k]
+  let e₁ := AlgEquiv.ofBijective
+    (AlgHom.liftEquiv R S (SymmetricAlgebra R M)
+      (SymmetricAlgebra S (S ⊗[R] M)) β) (baseChange_bijective β hβ)
+  let e := (LocalizedModule.equivTensorProduct (Submonoid.powers f) M).symm
+  let g : SymmetricAlgebra S (S ⊗[R] M) →ₐ[S] SymmetricAlgebra S N :=
+    lift ((ι S N).comp e.toLinearMap)
+  let h : SymmetricAlgebra S N →ₐ[S] SymmetricAlgebra S (S ⊗[R] M) :=
+    lift ((ι S (S ⊗[R] M)).comp e.symm.toLinearMap)
+  have hgh : g.comp h = AlgHom.id S _ := by
+    apply algHom_ext
+    apply LinearMap.ext
+    intro x
+    change g (h (ι S N x)) = ι S N x
+    simp only [g, h, lift_ι_apply, LinearMap.comp_apply]
+    exact congrArg (ι S N) (e.apply_symm_apply x)
+  have hhg : h.comp g = AlgHom.id S _ := by
+    apply algHom_ext
+    apply LinearMap.ext
+    intro x
+    change h (g (ι S (S ⊗[R] M) x)) = ι S (S ⊗[R] M) x
+    simp only [g, h, lift_ι_apply, LinearMap.comp_apply]
+    exact congrArg (ι S (S ⊗[R] M)) (e.symm_apply_apply x)
+  let e₂ := AlgEquiv.ofAlgHom g h hgh hhg
+  exact ⟨(Localization.tensorRightAlgEquiv (Submonoid.powers f)
+    (SymmetricAlgebra R M)).symm.trans (e₁.trans e₂)⟩
+
 
 end SymmetricAlgebra

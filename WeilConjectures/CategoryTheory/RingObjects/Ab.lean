@@ -262,6 +262,10 @@ instance monoidalClosed : MonoidalClosed Ab.{u} where
 theorem ihom_obj (M N : Ab.{u}) : (ihom M).obj N = of (M ⟶ N) :=
   rfl
 
+theorem ihom_map_apply {M N P : Ab.{u}} (f : N ⟶ P) (g : M ⟶ N) :
+    ((ihom M).map f).hom g = g ≫ f :=
+  rfl
+
 
 @[simp]
 theorem monoidalClosed_curry {M N P : Ab.{u}} (f : M ⊗ N ⟶ P) (m : M) (n : N) :
@@ -306,6 +310,10 @@ noncomputable instance ringMonObj : MonObj (of R) where
 
 lemma ringMonObj_one_apply (n : ULift.{u} ℤ) :
     (η[of R] : of (ULift.{u} ℤ) ⟶ of R).hom n = n.down :=
+  rfl
+
+lemma ringMonObj_mul_tmul (a b : R) :
+    (μ[of R] : of (R ⊗[ℤ] R) ⟶ of R).hom (a ⊗ₜ[ℤ] b) = a * b :=
   rfl
 
 

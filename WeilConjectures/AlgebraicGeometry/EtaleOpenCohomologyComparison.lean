@@ -193,6 +193,40 @@ noncomputable def etaleCohomologyOverOpenEquiv {X U : Scheme.{u}} (j : U ⟶ X)
   exact (Abelian.Ext.precompAddEquiv (EtaleOpenComparison.representingIso j) G q).symm.trans e.symm
 
 
+/-- The canonical comparison commutes with a morphism of coefficient sheaves.
+Source: Stacks 03F3; naturality of the exact Ext adjunction and Ext composition.
+(blueprint: def-weil-pbc-etale-open-comparison-data).
+Proof: apply the inverse comparison. Naturality of the Ext adjunction moves the
+coefficient map across the adjunction, and associativity of Yoneda composition moves
+it across precomposition with the representing isomorphism. -/
+theorem etaleCohomologyOverOpenEquiv_naturality {X U : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] [Etale j]
+    [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]
+    [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})]
+    {G G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G') (q : ℕ)
+    (x : Abelian.Ext
+      ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk j) ⋙ AddCommGrpCat.free)) G q) :
+    etaleCohomologyOverOpenEquiv j G' q (x.comp (Abelian.Ext.mk₀ f) (add_zero q)) =
+      Sheaf.H.map ((Etale.openImmersionRestriction AddCommGrpCat.{u + 1} j).map f) q
+        (etaleCohomologyOverOpenEquiv j G q x) := by
+  let adj := Etale.openImmersionLowerShriekAdjunction AddCommGrpCat.{u + 1} j
+  let y := etaleCohomologyOverOpenEquiv j G q x
+  have hx : (etaleCohomologyOverOpenEquiv j G q).symm y = x :=
+    AddEquiv.symm_apply_apply _ x
+  apply (etaleCohomologyOverOpenEquiv j G' q).symm.injective
+  rw [AddEquiv.symm_apply_apply]
+  change x.comp (Abelian.Ext.mk₀ f) (add_zero q) =
+    (Abelian.Ext.mk₀ (EtaleOpenComparison.representingIso j).hom).comp
+      (adj.mapExtCounit (EtaleOpenComparison.integerSheaf U) G' q
+        (y.comp (Abelian.Ext.mk₀
+          ((Etale.openImmersionRestriction AddCommGrpCat.{u + 1} j).map f))
+            (add_zero q))) (zero_add q)
+  rw [adj.mapExtCounit_comp_mk₀]
+  rw [← Abelian.Ext.comp_assoc]
+  · exact congrArg (fun z ↦ z.comp (Abelian.Ext.mk₀ f) (add_zero q)) hx.symm
+  all_goals omega
+
 /-- The free abelian sheaf functor representing sections on the small etale site.
 Source: Stacks 03F3 (blueprint: def-weil-pbc-etale-open-comparison-data). -/
 noncomputable abbrev EtaleOpenComparison.freeSheaf (X : Scheme.{u}) :

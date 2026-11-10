@@ -87,6 +87,10 @@ def homologyProperty : ObjectProperty (DerivedCategory A) :=
 
 variable {P}
 
+lemma homologyProperty_iff (M : DerivedCategory A) :
+    homologyProperty P M ↔ ∀ n : ℤ, P ((homologyFunctor A n).obj M) :=
+  Iff.rfl
+
 
 variable (P)
 

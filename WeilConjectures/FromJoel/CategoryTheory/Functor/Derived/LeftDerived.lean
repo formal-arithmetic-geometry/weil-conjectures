@@ -218,6 +218,23 @@ lemma hasLeftDerivedFunctor_iff_op :
       (LF := (F.op.totalRightDerived W.Q.op W.op).unop)
       (α := NatTrans.unop (F.op.totalRightDerivedUnit W.Q.op W.op))
 
+lemma hasRightDerivedFunctor_iff_op :
+    F.HasRightDerivedFunctor W ↔ F.op.HasLeftDerivedFunctor W.op := by
+  constructor
+  · intro h
+    exact HasLeftDerivedFunctor.mk' (L := W.Q.op)
+      (LF := (F.totalRightDerived W.Q W).op)
+      (α := NatTrans.op (F.totalRightDerivedUnit W.Q W))
+  · intro h
+    have : (F.op.totalLeftDerived W.Q.op W.op).unop.IsRightDerivedFunctor
+      (NatTrans.unop (F.op.totalLeftDerivedCounit W.Q.op W.op)) W := by
+      rw [isRightDerivedFunctor_iff_op]
+      exact inferInstanceAs ((F.op.totalLeftDerived W.Q.op W.op).IsLeftDerivedFunctor
+        (F.op.totalLeftDerivedCounit W.Q.op W.op) W.op)
+    exact HasRightDerivedFunctor.mk' (L := W.Q)
+      (RF := (F.op.totalLeftDerived W.Q.op W.op).unop)
+      (α := NatTrans.unop (F.op.totalLeftDerivedCounit W.Q.op W.op))
+
 
 end
 

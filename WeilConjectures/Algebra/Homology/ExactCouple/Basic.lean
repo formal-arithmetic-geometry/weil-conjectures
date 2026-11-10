@@ -438,6 +438,10 @@ noncomputable def spectralSequence (r₀ : ℤ) : SpectralSequence C (pageShape 
   page r _ := (X.derivedIter (r - r₀).toNat).dComplex
   iso r r' pq hrr' hr := eqToIso (X.homology_dComplex_derivedIter _ _ (by omega) pq)
 
+lemma spectralSequence_page (r₀ r : ℤ) (hr : r₀ ≤ r) :
+    (X.spectralSequence r₀).page r hr = (X.derivedIter (r - r₀).toNat).dComplex :=
+  rfl
+
 
 /-! ### The `D`-objects of the iterated derived couples -/
 

@@ -139,6 +139,16 @@ theorem SpectralSequence.Hom.isIso_hom {E E' : SpectralSequence C c r₀} (φ : 
       infer_instance
     exact HomologicalComplex.Hom.isIso_of_components _
 
+/-- **Page induction for `E∞`.** A morphism of first quadrant spectral sequences which is an
+isomorphism on the `E₂`-page is an isomorphism on the `E∞`-terms.
+
+(blueprint: `lem-sp-page-induction`) -/
+theorem SpectralSequence.Hom.isIso_pageInfinity {E E' : E₂CohomologicalSpectralSequenceNat C}
+    (φ : E ⟶ E') (h : IsIso (φ.hom 2)) (pq : ℕ × ℕ) :
+    IsIso ((φ.hom (pq.1 + pq.2 + 2 : ℕ) (by lia)).f pq) := by
+  have := φ.isIso_hom h (pq.1 + pq.2 + 2 : ℕ) (by lia)
+  infer_instance
+
 
 end PageInduction
 

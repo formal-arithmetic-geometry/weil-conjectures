@@ -228,6 +228,15 @@ lemma zmodHom_apply (n : ℤ) : (zmodHom ℓ hz).hom (ULift.up (n : ZMod ℓ)) =
   rw [ZMod.lift_coe]
   rfl
 
+lemma range_zmodHom : AddMonoidHom.range (zmodHom ℓ hz).hom = AddSubgroup.zmultiples z := by
+  ext x
+  constructor
+  · rintro ⟨⟨c⟩, rfl⟩
+    obtain ⟨n, rfl⟩ := ZMod.intCast_surjective c
+    exact ⟨n, (zmodHom_apply ℓ hz n).symm⟩
+  · rintro ⟨n, rfl⟩
+    exact ⟨⟨(n : ZMod ℓ)⟩, zmodHom_apply ℓ hz n⟩
+
 
 lemma injective_zmodHom (hℓ : addOrderOf z = ℓ) : Function.Injective (zmodHom ℓ hz).hom := by
   refine (injective_iff_map_eq_zero _).2 fun ⟨c⟩ hc ↦ ?_

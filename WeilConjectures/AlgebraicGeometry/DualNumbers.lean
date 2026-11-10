@@ -196,6 +196,15 @@ theorem scale_mapRingHom (f : R →+* S) (c : R) (x : R[ε]) :
     scale (f c) (mapRingHom f x) = mapRingHom f (scale c x) := by
   ext <;> simp [map_mul]
 
+/-- Folding the constants in `δ` is the identity: `R[ε] → R[ε][δ] → R[ε]`. -/
+theorem foldRingHom_comp_inlHom : foldRingHom.comp (inlHom R[ε] R[ε]) = RingHom.id R[ε] := by
+  ext x <;> simp
+
+/-- Folding the elements of `R[δ] ⊆ R[ε][δ]` sends `δ` to `ε`. -/
+theorem foldRingHom_comp_mapRingHom_inlHom :
+    foldRingHom.comp (mapRingHom (inlHom R R)) = RingHom.id R[ε] := by
+  ext x <;> simp
+
 
 theorem foldRingHom_comp_mapRingHom_mapRingHom (f : R →+* S) :
     foldRingHom.comp (mapRingHom (mapRingHom f)) = (mapRingHom f).comp foldRingHom := by
@@ -455,6 +464,11 @@ noncomputable def dualNumbers : Scheme.{u} where
     have : IsAffine U := hU
     exact ⟨⟨U, hxU⟩, _, ⟨@asIso _ _ _ _ _ (LocallyRingedSpace.isIso_toΓSpec_dualNumbers U)⟩⟩
 
+/-- The sections of `𝒪_{X[ε]}` over `U` are the dual numbers over the sections of `𝒪_X`. -/
+theorem dualNumbers_obj (U : X.Opens) :
+    Γ(X.dualNumbers, U) = CommRingCat.of (DualNumber Γ(X, U)) :=
+  rfl
+
 
 /-- The projection `p : X[ε] ⟶ X`: the identity on points and the inclusion of constants
 `𝒪_X → 𝒪_X[ε]` on functions. -/
@@ -512,6 +526,10 @@ noncomputable def dualNumbersFold : X.dualNumbers ⟶ X.dualNumbers.dualNumbers 
     erw [DualNumber.fst_foldRingHom] at h
     exact (X.dualNumbers.presheaf.isUnit_germ_dualNumber_iff x U hxU g).mpr
       ((X.presheaf.isUnit_germ_dualNumber_iff x U hxU g.fst).mpr h)
+
+theorem dualNumbersFold_app (U : X.Opens) (a : Γ(X.dualNumbers.dualNumbers, U)) :
+    X.dualNumbersFold.app U a = DualNumber.foldRingHom a :=
+  rfl
 
 
 @[reassoc (attr := simp)]

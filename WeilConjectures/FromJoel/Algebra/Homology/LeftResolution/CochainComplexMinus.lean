@@ -261,6 +261,19 @@ instance (K : Minus A) :
     QuasiIso ((Functor.whiskerRight Λ.minusResolutionNatTrans (Minus.ι A)).app K) := by
   dsimp; infer_instance
 
+set_option backward.isDefEq.respectTransparency false in
+lemma quasiIso_minusResolutionFunctor_map {K L : CochainComplex.Minus A} (f : K ⟶ L)
+    (hf : Minus.quasiIso _ f) :
+    Minus.quasiIso _ (ι.mapCochainComplexMinus.map (Λ.minusResolutionFunctor.map f)) := by
+  have : QuasiIso f.hom := hf
+  have eq := (CochainComplex.Minus.ι _).congr_map (Λ.minusResolutionNatTrans.naturality f)
+  dsimp at eq
+  change QuasiIso _
+  rw [← quasiIso_iff_comp_right _ (Λ.minusResolutionNatTrans.app L).hom]
+  dsimp
+  rw [eq]
+  infer_instance
+
 
 end
 

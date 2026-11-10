@@ -39,6 +39,11 @@ instance internalHom_additive : (MonoidalClosed.internalHom (C := C)).Additive w
 instance (X : Cᵒᵖ) : ((MonoidalClosed.internalHom (C := C)).obj X).Additive :=
   inferInstanceAs (ihom X.unop).Additive
 
+/-- The hom complex of the internal hom bifunctor is the internal hom complex. -/
+lemma bifunctorHomObj_internalHom (N J : CochainComplex C ℤ) :
+    bifunctorHomObj MonoidalClosed.internalHom N J = internalHomObj N J :=
+  rfl
+
 
 variable [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]

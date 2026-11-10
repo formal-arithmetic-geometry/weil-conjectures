@@ -63,6 +63,11 @@ of `L ⊣ R` tensored with `N`. -/
 noncomputable def projectionTensorMap (M N : D) : R.obj M ⊗ F.obj N ⟶ R.obj (M ⊗ N) :=
   adj.homEquiv _ _ (inv (π (R.obj M) N) ≫ adj.counit.app M ▷ N)
 
+lemma homEquiv_symm_projectionTensorMap (M N : D) :
+    (adj.homEquiv _ _).symm (adj.projectionTensorMap π M N) =
+      inv (π (R.obj M) N) ≫ adj.counit.app M ▷ N :=
+  Equiv.symm_apply_apply _ _
+
 
 /-- The transpose of the tensor map along `L ⊣ R`. -/
 @[reassoc]

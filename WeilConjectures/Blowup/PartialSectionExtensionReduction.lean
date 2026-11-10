@@ -271,6 +271,36 @@ lemma isCompact_coe_preimage_blowupMap {W : X.Opens} (hW : IsCompact (W : Set X)
   have := B₁.quasiCompact_blowupMap
   B₁.I.blowupMap.isCompact_preimage hW
 
+lemma compactSpace_pullback_blowupMap [CompactSpace Y] :
+    CompactSpace (pullback B₁.I.blowupMap p : Scheme.{u}) :=
+  have := B₁.quasiCompact_blowupMap
+  inferInstance
+
+lemma isSeparated_pullback_snd_blowupMap : IsSeparated (pullback.snd B₁.I.blowupMap p) :=
+  have : IsSeparated B₁.I.blowupMap := B₁.isProper_blowupMap.toIsSeparated
+  MorphismProperty.of_isPullback (P := @IsSeparated)
+    (IsPullback.of_hasPullback B₁.I.blowupMap p) inferInstance
+
+lemma quasiSeparatedSpace_pullback_blowupMap [QuasiSeparatedSpace Y] :
+    QuasiSeparatedSpace (pullback B₁.I.blowupMap p : Scheme.{u}) := by
+  have := B₁.isSeparated_pullback_snd_blowupMap (p := p)
+  exact quasiSeparatedSpace_of_quasiSeparated (pullback.snd B₁.I.blowupMap p)
+
+lemma isSeparated_pullback_fst_blowupMap [IsSeparated p] :
+    IsSeparated (pullback.fst B₁.I.blowupMap p) :=
+  MorphismProperty.of_isPullback (P := @IsSeparated)
+    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
+
+lemma locallyOfFiniteType_pullback_fst_blowupMap [LocallyOfFiniteType p] :
+    LocallyOfFiniteType (pullback.fst B₁.I.blowupMap p) :=
+  MorphismProperty.of_isPullback (P := @LocallyOfFiniteType)
+    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
+
+lemma quasiCompact_pullback_fst_blowupMap [QuasiCompact p] :
+    QuasiCompact (pullback.fst B₁.I.blowupMap p) :=
+  MorphismProperty.of_isPullback (P := @QuasiCompact)
+    (IsPullback.of_hasPullback B₁.I.blowupMap p).flip inferInstance
+
 
 /-- The closed-image hypothesis of Conrad's Theorem 2.4 transports to the base-changed
 section: the range of `AlgebraicGeometry.baseChangeSection` is closed in the preimage of

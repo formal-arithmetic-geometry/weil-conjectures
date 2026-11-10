@@ -61,6 +61,15 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v} RingCat.{max c v})]
   (R : Sheaf J CommRingCat.{max c v})
 
+/-- Compatibility of the cached projection presentation with the native tensor-Hom API. -/
+private theorem coefficientHomComponent_eq_native
+    (L M : CochainComplex (SheafOfModules.{max c v}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v} RingCat.{max c v})).obj R)) ℤ)
+    (n p q : ℤ) (h : p + n = q) :
+    coefficientHomComponent.{0, c, v} J R L M n p q h =
+      homTensorCurryProjection R L M n p q h := by
+  rfl
+
 
 end NativeProjection
 

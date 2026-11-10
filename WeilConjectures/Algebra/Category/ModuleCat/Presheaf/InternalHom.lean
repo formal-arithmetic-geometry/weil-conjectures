@@ -322,6 +322,11 @@ lemma homObjMap_comp_homObjMap {M'' N'' : PresheafOfModules.{v} (R ⋙ forget₂
     (restrictOver R X.unop).map g) ≫ (restrictOver R X.unop).map g' =
       (restrictOver R X.unop).map (f' ≫ f) ≫ φ ≫ (restrictOver R X.unop).map (g ≫ g'))
 
+lemma homObjMap_comp {M'' N'' : PresheafOfModules.{v} (R ⋙ forget₂ _ _)} (f : M' ⟶ M)
+    (f' : M'' ⟶ M') (g : N ⟶ N') (g' : N' ⟶ N'') :
+    homObjMap (f' ≫ f) (g ≫ g') = homObjMap f g ≫ homObjMap f' g' :=
+  (homObjMap_comp_homObjMap f f' g g').symm
+
 
 variable (R) in
 /-- The internal hom bifunctor on presheaves of modules, `(M, N) ↦ homObj M N`, contravariant in

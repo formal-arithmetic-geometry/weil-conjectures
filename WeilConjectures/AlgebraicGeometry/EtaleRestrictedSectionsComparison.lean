@@ -44,6 +44,20 @@ theorem etaleRestrictedSectionsLift_arrow
       etaleRestrictedSectionsInclusion X K T q := by
   exact Subobject.factorThru_arrow _ _ _
 
+/-- Any lift with the prescribed inclusion composite is the canonical lift.
+Source: Stacks, Tag 015J. Proof: cancel the monic filtered-step inclusion.
+(blueprint: def-weil-pbc-etale-restricted-sections-lift). -/
+theorem etaleRestrictedSectionsLift_unique
+    (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (q : ℤ)
+    (g : ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj (etaleRestrictedTotal X K T q) ⟶ (T.L.step q))
+    (hg : g ≫ (T.L.step q).arrow = etaleRestrictedSectionsInclusion X K T q) :
+    g = etaleRestrictedSectionsLift X K T q := by
+  apply (cancel_mono (T.L.step q).arrow).mp
+  rw [hg, etaleRestrictedSectionsLift_arrow]
+
 
 /-- The canonical sections lift is an isomorphism of complexes.
 Source: Stacks, Tag 015J, proof remark (3); finite diagonal sums.

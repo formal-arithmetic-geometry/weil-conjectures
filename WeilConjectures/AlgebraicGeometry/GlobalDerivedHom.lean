@@ -115,6 +115,24 @@ theorem schemeDerivedGlobalSections_point_comparison (X : Scheme.{u})
   exact ⟨(F.rightDerivedFunctorCompMapDerivedCategoryIso G).symm ≪≫
     Functor.rightDerivedFunctorNatIso h⟩
 
+/-- Any K-injective resolution K → I computes RΓ(X,K) by Γ(X,I).
+Source: Stacks, Tag 0B6A (blueprint: def-pc-global-derived-rhom).
+Proof: `schemeDerivedGlobalSections` is the right derived functor of Γ(X,-), and the
+right derived functor is computed on K-injective complexes by termwise application
+(`Functor.rightDerivedFunctorObjQIso`). Since K → I is a quasi-isomorphism,
+Q(K) ≅ Q(I); compose. -/
+theorem schemeDerivedGlobalSections_computed_by_resolution (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]
+    {K I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}
+    (s : K ⟶ I) [QuasiIso s] [I.IsKInjective] :
+    Nonempty ((schemeDerivedGlobalSections X).obj (DerivedCategory.Q.obj K) ≅
+      DerivedCategory.Q.obj
+        (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj I)) := by
+  exact ⟨(schemeDerivedGlobalSections X).mapIso (asIso (DerivedCategory.Q.map s)) ≪≫
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorObjQIso I⟩
+
 
 /-- Global derived Hom: RΓ(X,R𝓗om(P,Q)) in D(O_X(X)), contravariant in P and
 covariant in Q, encoded as a functor from D(O_X)ᵒᵖ × D(O_X).

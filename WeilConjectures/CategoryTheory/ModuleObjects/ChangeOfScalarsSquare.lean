@@ -242,6 +242,15 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] {D : Type u₂
 
 open scoped Obj
 
+/-- If the morphisms `η_R : R_Y ⟶ F R_X`, `η_S : S_Y ⟶ F S_X` form a commutative square with
+`φ_X` and `φ_Y`, then so do their mates `α_R = G η_R ≫ counit : G R_Y ⟶ R_X` and
+`α_S : G S_Y ⟶ S_X` with `φ_X` and `G φ_Y`: `G φ_Y ≫ α_S = α_R ≫ φ_X`. -/
+lemma pullbackHom_square (sq : φ_Y ≫ η_S = η_R ≫ F.map φ_X) :
+    G.map φ_Y ≫ (G.map η_S ≫ adj.counitAlgHom S_X) =
+      (G.map η_R ≫ adj.counitAlgHom R_X) ≫ φ_X := by
+  rw [← Category.assoc, ← G.map_comp, sq, G.map_comp, Category.assoc, Category.assoc,
+    Adjunction.counitAlgHom, Adjunction.counitAlgHom, adj.counit_naturality]
+
 
 end Adjunction
 

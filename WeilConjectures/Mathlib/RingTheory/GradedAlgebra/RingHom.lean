@@ -48,5 +48,11 @@ theorem exists_mem_of_surjective {f : 𝒜 →+*ᵍ ℬ} (hf : Function.Surjecti
   refine ⟨DirectSum.decompose 𝒜 a i, SetLike.coe_mem _, ?_⟩
   rw [map_directSumDecompose 𝒜 ℬ f, DirectSum.decompose_of_mem_same ℬ hb]
 
+/-- A surjective graded ring homomorphism induces a surjection on each graded piece. -/
+theorem surjective_gradedAddHom {f : 𝒜 →+*ᵍ ℬ} (hf : Function.Surjective f) (i : ι) :
+    Function.Surjective (f.gradedAddHom i) := fun b ↦ by
+  obtain ⟨a, ha, hab⟩ := exists_mem_of_surjective hf b.2
+  exact ⟨⟨a, ha⟩, Subtype.ext hab⟩
+
 
 end GradedRingHom

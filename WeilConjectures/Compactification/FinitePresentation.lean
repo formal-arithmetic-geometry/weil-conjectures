@@ -143,6 +143,19 @@ noncomputable def Scheme.noetherianBaseSystem (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S] : S.NoetherianApproximation :=
   Classical.choice S.nonempty_noetherianApproximation
 
+/-- **Properties of the selected Noetherian base system**: every stage is Noetherian, quasi-compact
+and locally of finite type over `ℤ`, every transition morphism is affine, and the comparison of
+`S` with the limit of the stages is an isomorphism (`S` is a limit of the stages).
+(blueprint: `lemma-nagata-final-noetherian-base-system`) -/
+theorem Scheme.noetherianBaseSystem_spec (S : Scheme.{u}) [CompactSpace S]
+    [QuasiSeparatedSpace S] :
+    (∀ i, IsNoetherian (S.noetherianBaseSystem.D.obj i)) ∧
+      (∀ i, LocallyOfFiniteType (specULiftZIsTerminal.from (S.noetherianBaseSystem.D.obj i))) ∧
+      (∀ {i j} (g : i ⟶ j), IsAffineHom (S.noetherianBaseSystem.D.map g)) ∧
+      Nonempty (IsLimit (Cone.mk S S.noetherianBaseSystem.π)) :=
+  ⟨fun _ ↦ inferInstance, fun _ ↦ inferInstance, fun _ ↦ inferInstance,
+    ⟨S.noetherianBaseSystem.isLimit⟩⟩
+
 
 variable {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S]
   [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f]
@@ -203,12 +216,34 @@ lemma descendedModelIso_hom_comp :
     (descendedModelIso f).hom ≫ f = pullback.snd _ _ := by
   simp [descendedModelIso]
 
+/-- **Properties of the descended model**: `Y_λ ⟶ S_λ` is separated, quasi-compact and locally
+of finite presentation, the stage `S_λ` is Noetherian, and `ε_Y` is an isomorphism over `S`.
+(blueprint: `lemma-nagata-final-descended-model`) -/
+theorem descendedModel_spec :
+    LocallyOfFinitePresentation (descendedModelHom f) ∧ QuasiCompact (descendedModelHom f) ∧
+      IsSeparated (descendedModelHom f) ∧
+      IsNoetherian (S.noetherianBaseSystem.D.obj (descendedModelStage f)) ∧
+      IsIso (descendedModelIso f).hom ∧ (descendedModelIso f).hom ≫ f = pullback.snd _ _ :=
+  ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
+    descendedModelIso_hom_comp f⟩
+
 
 /-- **The selected Noetherian compactification** `C_{Y,λ}` of the descended model, given by the
 recursive Noetherian construction `AlgebraicGeometry.noetherianCompactification`.
 (blueprint: `def-nagata-final-noetherian-compactification`) -/
 noncomputable def descendedModelCompactification : Compactification (descendedModelHom f) :=
   noetherianCompactification (descendedModelHom f)
+
+/-- **The selected Noetherian compactification is a compactification** of the descended model:
+an open immersion followed by a proper morphism, composing to `Y_λ ⟶ S_λ`.
+(blueprint: `lemma-nagata-final-noetherian-compactification`) -/
+theorem descendedModelCompactification_spec :
+    IsOpenImmersion (descendedModelCompactification f).i ∧
+      IsProper (descendedModelCompactification f).g ∧
+      (descendedModelCompactification f).i ≫ (descendedModelCompactification f).g =
+        descendedModelHom f :=
+  ⟨(descendedModelCompactification f).isOpenImmersion,
+    (descendedModelCompactification f).isProper, (descendedModelCompactification f).comm.symm⟩
 
 
 /-- **The base-changed compactification** `C^fp(X/S)`: the base change of the Noetherian

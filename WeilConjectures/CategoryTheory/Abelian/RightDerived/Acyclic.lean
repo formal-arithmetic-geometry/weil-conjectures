@@ -297,6 +297,16 @@ noncomputable def rightDerivedObjIsoOfResolution (hI : ∀ n, F.rightAcyclic (I.
   (injectiveResolution X).isoRightDerivedObjOfQuasiIso F
     (InjectiveResolution.descOfQuasiIso (𝟙 X) _ ι) hI q
 
+/-- **Acyclic resolutions compute right derived functors.** Let `F : C ⥤ D` be a left exact
+additive functor. If `ι : single₀ X ⟶ I` is a resolution `X → I⁰ → I¹ → ⋯` of `X` by
+`F`-acyclic objects, then `R^q F X ≅ H^q(F I)` for all `q`. The witness is the natural
+isomorphism `Functor.rightDerivedObjIsoOfResolution`. (blueprint: `sk-thm-acyclicity`;
+`lemma-weil-pbc-leray-acyclicity`, item 2) -/
+theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyclic (I.X n))
+    (q : ℕ) :
+    Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) :=
+  ⟨F.rightDerivedObjIsoOfResolution ι hI q⟩
+
 
 end Functor
 

@@ -97,6 +97,11 @@ instance subsingleton_hom_invertibleExponentBase (X : Scheme.{u}) :
     CommRingCat.hom_ext h
   simpa using h'
 
+/-- Any morphism to `Spec ℤ[1/n]` is the canonical one. -/
+lemma eq_toInvertibleExponentBase {X : Scheme.{u}} [HasInvertibleExponent Λ X]
+    (f : X ⟶ invertibleExponentBase.{u} Λ) : f = toInvertibleExponentBase X :=
+  Subsingleton.elim _ _
+
 
 /-- The canonical morphisms to `Spec ℤ[1/n]` are compatible with all morphisms. -/
 @[reassoc (attr := simp)]

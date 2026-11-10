@@ -165,5 +165,19 @@ theorem continuousMonoidHomEquiv_apply_coe {G : Type*} [Group G] [TopologicalSpa
   simp only [continuousMonoidHomEquiv, Equiv.coe_fn_mk]
   rfl
 
+/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+finite-level classes, the naturality.
+
+The bijection `PadicInt.continuousMonoidHomEquiv` is natural in the group: the reductions of
+`b ∘ φ` are the reductions of `b` composed with `φ`. In particular it intertwines the
+precomposition by an automorphism, which is how the Frobenius acts on both sides. -/
+theorem continuousMonoidHomEquiv_comp {G H : Type*} [Group G] [TopologicalSpace G]
+    [IsTopologicalGroup G] [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
+    (b : G →ₜ* Multiplicative ℤ_[p]) (φ : H →ₜ* G) (n : ℕ) :
+    (continuousMonoidHomEquiv p H (b.comp φ)).1 n =
+      ((continuousMonoidHomEquiv p G b).1 n).comp φ := by
+  simp only [continuousMonoidHomEquiv, Equiv.coe_fn_mk]
+  rfl
+
 
 end PadicInt

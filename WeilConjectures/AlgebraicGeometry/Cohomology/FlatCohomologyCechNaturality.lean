@@ -52,6 +52,15 @@ noncomputable def extendScalarsTensorIso (A : Type u) [AddCommGroup A] [Module R
         | add x y hx hy => simp only [smul_add, map_add, hx, hy] }
   exact eS.toModuleIso
 
+/-- The tensor identification is the identity on pure tensors.
+Source: the defining tensor maps in Mathlib.
+(blueprint: lem-pc-flat-cech-cohomology-square) -/
+lemma extendScalarsTensorIso_hom_tmul (A : Type u) [AddCommGroup A] [Module R A]
+    (b : S) (a : A) :
+    (extendScalarsTensorIso (R := R) (S := S) A).hom
+      (TensorProduct.tmul R b a) = TensorProduct.tmul R b a := by
+  rfl
+
 
 /-- Exact scalar extension commutes with the homology of the ordered Cech complex.
 This uses only the three terms at the selected degree; boundedness is unnecessary.

@@ -537,6 +537,60 @@ theorem comparison_exists (S' : SiteCechComplex f hom) :
   subst i
   rfl
 
+/-- Short exact presheaf sequences give short exact sequences of integer-indexed complexes.
+Source: Stacks 03AQ.
+Proof: evaluate the sequence sectionwise, take products of the resulting exact sequences
+as in `degreewise_exact`, and use componentwise injectivity and surjectivity of the maps.
+Negative degrees are zero. A sequence of complexes is short exact exactly when it is
+short exact in each degree (lem-weil-pbc-cochain-complexes-degreewise-exact).
+(blueprint: def-weil-pbc-site-cech-complex) -/
+theorem shortExact_map (A : ShortComplex (Cᵒᵖ ⥤ AddCommGrpCat.{r})) (hA : A.ShortExact) :
+    (A.map S.integerComplexFunctor).ShortExact := by
+  classical
+  have hm := hA.mono_f
+  have hg := hA.epi_g
+  have hn (p : ℕ) :
+      ((A.map S.complexFunctor).map (HomologicalComplex.eval _ _ p)).ShortExact := by
+    refine { exact := ?_, mono_f := ?_, epi_g := ?_ }
+    · apply (ShortComplex.ab_exact_iff_function_exact _).mpr
+      exact S.degreewise_exact A hA.exact p
+    · apply (AddCommGrpCat.mono_iff_injective _).mpr
+      intro a b h
+      funext t
+      exact (AddCommGrpCat.mono_iff_injective (A.f.app (op (S.W p t)))).mp
+        inferInstance (congrFun h t)
+    · apply (AddCommGrpCat.epi_iff_surjective _).mpr
+      intro s
+      have hs (t : Fin (p + 1) → T) :=
+        (AddCommGrpCat.epi_iff_surjective (A.g.app (op (S.W p t)))).mp
+          inferInstance (s t)
+      choose a ha using hs
+      exact ⟨a, funext ha⟩
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro z
+  let e := ComplexShape.embeddingUpNat
+  by_cases hz : ∃ p, e.f p = z
+  · obtain ⟨p, hp⟩ := hz
+    let i (F : Cᵒᵖ ⥤ AddCommGrpCat.{r}) := (S.complex F).extendXIso e hp
+    apply ShortComplex.shortExact_of_iso
+      (ShortComplex.isoMk (i A.X₁).symm (i A.X₂).symm (i A.X₃).symm ?_ ?_) (hn p)
+    · change (i A.X₁).inv ≫ (HomologicalComplex.extendMap (S.complexMap A.f) e).f z =
+        S.cochainsMap A.f p ≫ (i A.X₂).inv
+      rw [HomologicalComplex.extendMap_f _ _ hp]
+      simp [i, complexMap]
+    · change (i A.X₂).inv ≫ (HomologicalComplex.extendMap (S.complexMap A.g) e).f z =
+        S.cochainsMap A.g p ≫ (i A.X₃).inv
+      rw [HomologicalComplex.extendMap_f _ _ hp]
+      simp [i, complexMap]
+  · have hz' (p) : e.f p ≠ z := fun hp ↦ hz ⟨p, hp⟩
+    have h₁ := (S.complex A.X₁).isZero_extend_X e z hz'
+    have h₂ := (S.complex A.X₂).isZero_extend_X e z hz'
+    have h₃ := (S.complex A.X₃).isZero_extend_X e z hz'
+    refine { exact := ?_, mono_f := ?_, epi_g := ?_ }
+    · exact ShortComplex.exact_of_isZero_X₂ _ h₂
+    · exact h₁.mono _
+    · exact h₃.epi _
+
 
 end SiteCechComplex
 end CategoryTheory

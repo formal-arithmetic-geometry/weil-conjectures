@@ -107,5 +107,16 @@ noncomputable def restrictOverHomObjIso :
       inv_hom_id := by ext ψ : 2; exact restrictOverHomObjFwd_bwd W.unop ψ })
     (fun _ _ _ ↦ rfl)
 
+lemma restrictOverHomObjIso_hom_app_apply (W : (Over U)ᵒᵖ)
+    (φ : (restrictOver R W.unop.left).obj M ⟶ (restrictOver R W.unop.left).obj N) :
+    (restrictOverHomObjIso M N U).hom.app W φ = restrictOverHomObjFwd U W.unop φ :=
+  rfl
+
+lemma restrictOverHomObjIso_inv_app_apply (W : (Over U)ᵒᵖ)
+    (ψ : (restrictOver ((Over.forget U).op ⋙ R) W.unop).obj ((restrictOver R U).obj M) ⟶
+      (restrictOver ((Over.forget U).op ⋙ R) W.unop).obj ((restrictOver R U).obj N)) :
+    (restrictOverHomObjIso M N U).inv.app W ψ = restrictOverHomObjBwd U W.unop ψ :=
+  rfl
+
 
 end PresheafOfModules

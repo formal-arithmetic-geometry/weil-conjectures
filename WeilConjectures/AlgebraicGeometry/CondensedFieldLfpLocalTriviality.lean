@@ -224,5 +224,57 @@ theorem exists_finiteFree_cover_of_condensedField_lfp
   rcases ij with ⟨i, j⟩
   exact (free_pullback_comp_iff ((D i).f j) (C.f i) P).mpr (hD i j)
 
+/-- The local triviality assertion applies on every noetherian locally closed stratum.
+Source: the concluding application in the agent rank/descent argument accompanying
+Hemo--Richarz--Scholbach, Example 3.1
+(auxiliary; not a blueprint node).
+Proof: restrict the module to a stratum of its finite locally closed stratification.
+The coefficient composition comparison identifies the restricted ring with the condensed
+coefficient ring of the stratum. Apply the local triviality theorem there, to the finite
+presentations in the stratified constructibility hypothesis. Pullback preserves the
+coefficient comparison, so its finite free modules give exactly the displayed ones.
+This includes empty strata, rank zero, and presentations with zero rows or columns. -/
+theorem exists_finiteFree_cover_on_condensedField_strata
+    (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
+    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (S : Scheme.Stratification X)
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))
+    (hP : ∀ a : Fin S.n,
+      IsLocallyFinitelyPresented
+        ((upperStar AddCommGrpCat.{u + 1} (S.immersion a)).obj
+          (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))
+        (((upperStar AddCommGrpCat.{u + 1} (S.immersion a)).mapMod
+          (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)).obj P)) :
+    ∀ (a : Fin S.n), TopologicalSpace.NoetherianSpace (S.domain a) →
+      ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (S.domain a), ∀ i : C.I₀,
+        Mod.IsFree
+          ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj
+            ((upperStar AddCommGrpCat.{u + 1} (S.immersion a)).obj
+              (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)))
+          (((upperStar AddCommGrpCat.{u + 1} (C.f i)).mapMod
+            ((upperStar AddCommGrpCat.{u + 1} (S.immersion a)).obj
+              (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))).obj
+            (((upperStar AddCommGrpCat.{u + 1} (S.immersion a)).mapMod
+              (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)).obj P)) := by
+  intro a ha
+  let Λ := Profinite.continuousCoefficientRingObj E
+  let R := (upperStar AddCommGrpCat.{u + 1} (S.immersion a)).obj (condensedRingObj Λ X)
+  let M := ((upperStar AddCommGrpCat.{u + 1} (S.immersion a)).mapMod
+    (condensedRingObj Λ X)).obj P
+  let φ := condensedPullbackHom Λ (S.immersion a)
+  let Q := (Mod.comap (inv φ)).obj M
+  have hQ : IsLocallyFinitelyPresented (condensedRingObj Λ (S.domain a)) Q :=
+    lfp_comap (inv φ) (hP a)
+  obtain ⟨C, hC⟩ := exists_finiteFree_cover_of_condensedField_lfp l E (S.domain a) Q hQ
+  refine ⟨C, fun i ↦ ?_⟩
+  let F := upperStar AddCommGrpCat.{u + 1} (C.f i)
+  let e : (Mod.comap φ).obj Q ≅ M :=
+    ((Mod.comapComp φ (inv φ)).symm ≪≫
+      Mod.comapCongr (IsIso.hom_inv_id φ) ≪≫ Mod.comapId R).app M
+  obtain ⟨n, ⟨f⟩⟩ := free_comap (F.map φ) (hC i)
+  exact ⟨n, ⟨(F.mapMod R).mapIso e.symm ≪≫ (F.mapModComapIso φ).app Q ≪≫ f⟩⟩
+
 
 end AlgebraicGeometry.ProEtale

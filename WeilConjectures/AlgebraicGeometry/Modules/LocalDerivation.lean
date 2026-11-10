@@ -321,6 +321,12 @@ noncomputable def ofIsAffineOpen : LocalDerivation M U :=
     (fun W hW x hx ↦ basicOpen_cover hU W hW x hx) (fun _ _ hgh a ↦ basicOpenDerivation_map
       hU δ hδ hgh a) (fun g a b ↦ basicOpenDerivation_mul hU δ hδ g a b)
 
+lemma ofIsAffineOpen_app_basicOpen (g : Γ(X, U)) :
+    (ofIsAffineOpen hU δ hδ).app (X.basicOpen g) (X.basicOpen_le g) =
+      basicOpenDerivation hU δ hδ g :=
+  AddMonoidHom.ext fun a ↦ glue_app_basis (O := fun g : Γ(X, U) ↦ X.basicOpen g)
+    (fun g ↦ X.basicOpen_le g) _ _ _ g a
+
 
 lemma ofIsAffineOpen_app_self (a : Γ(X, U)) : (ofIsAffineOpen hU δ hδ).app U le_rfl a = δ a :=
   (isGlueValue_glue_app (O := fun g : Γ(X, U) ↦ X.basicOpen g) _ _ _ le_rfl a).unique

@@ -109,6 +109,11 @@ variable {X}
 def zariskiSpaceOpens (V : TopologicalSpace.Opens X.zariskiSpace) : X.Opens :=
   Homeomorph.ulift.opensCongr V
 
+/-- Membership in the open subscheme corresponding to an open subset of `X.zariskiSpace`. -/
+lemma mem_zariskiSpaceOpens {V : TopologicalSpace.Opens X.zariskiSpace} {x : X} :
+    x ∈ zariskiSpaceOpens V ↔ ULift.up x ∈ V :=
+  Iff.rfl
+
 
 /-- The correspondence between opens of `X.zariskiSpace` and of `X` is monotone. -/
 lemma zariskiSpaceOpens_mono {V W : TopologicalSpace.Opens X.zariskiSpace} (h : V ≤ W) :

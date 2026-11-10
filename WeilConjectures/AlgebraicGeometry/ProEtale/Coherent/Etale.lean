@@ -358,5 +358,9 @@ instance Scheme.Etale.preregular (S : Scheme.{u}) : Preregular S.Etale := by
     infer_instance
   infer_instance
 
+/-- The small étale site of a scheme is precoherent. -/
+lemma Scheme.Etale.precoherent (S : Scheme.{u}) : Precoherent S.Etale :=
+  inferInstance
+
 
 end AlgebraicGeometry
