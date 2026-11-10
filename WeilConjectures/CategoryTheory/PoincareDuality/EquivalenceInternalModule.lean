@@ -301,7 +301,7 @@ omit [IsTopologicalGroup G] in
 omit [IsTopologicalGroup G] in
 omit [IsTopologicalGroup G] in
 private def caHom {X Y : ContAction FintypeCat.{u} G} (f : X.obj.V → Y.obj.V)
-    (hf : ∀ (g : G) x, f ((X.obj.ρ g).hom x) = (Y.obj.ρ g).hom (f x)) : X ⟶ Y :=
+    (hf : ∀ (g : G) x, f ((X.obj.ρ g).asHom.hom x) = (Y.obj.ρ g).asHom.hom (f x)) : X ⟶ Y :=
   ⟨⟨FintypeCat.homMk f, fun g ↦ FintypeCat.hom_ext _ _ (hf g)⟩⟩
 
 -- Concrete products let us evaluate categorical diagrams at arbitrary carrier points.
@@ -310,7 +310,7 @@ private def pointProd (X Y : ContAction FintypeCat.{u} G) :
   obj :=
     { V := FintypeCat.of (X.obj.V × Y.obj.V)
       ρ :=
-        { toFun g := FintypeCat.homMk (fun p ↦ ((X.obj.ρ g).hom p.1, (Y.obj.ρ g).hom p.2))
+        { toFun g := FintypeCat.homMk (fun p ↦ ((X.obj.ρ g).asHom.hom p.1, (Y.obj.ρ g).asHom.hom p.2))
           map_one' := by
             apply FintypeCat.hom_ext
             intro p
@@ -326,7 +326,7 @@ private def pointProd (X Y : ContAction FintypeCat.{u} G) :
   property := by
     apply (@continuousSMul_iff_stabilizer_isOpen _ _ _ _ _ _ _ ⟨rfl⟩).mpr
     intro x
-    have hx : Continuous (fun g : G ↦ (X.obj.ρ g).hom x.1) :=
+    have hx : Continuous (fun g : G ↦ (X.obj.ρ g).asHom.hom x.1) :=
       X.property.1.comp (continuous_id.prodMk continuous_const)
     have hy : Continuous (fun g : G ↦ (Y.obj.ρ g).hom x.2) :=
       Y.property.1.comp (continuous_id.prodMk continuous_const)

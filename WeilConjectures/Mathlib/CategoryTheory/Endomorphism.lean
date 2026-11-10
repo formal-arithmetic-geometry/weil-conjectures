@@ -29,17 +29,17 @@ namespace CategoryTheory.Aut
 variable {C : Type*} [Category* C] (X : C)
 
 @[simp]
-lemma one_hom : (1 : Aut X).hom = 𝟙 X :=
+lemma one_hom : (1 : Aut X).asIso.hom = 𝟙 X :=
   rfl
 
 variable {X}
 
 @[simp]
-lemma inv_hom (f : Aut X) : f⁻¹.hom = f.inv :=
+lemma inv_hom (f : Aut X) : f⁻¹.asIso.hom = f.asIso.inv :=
   rfl
 
 @[simp]
-lemma mul_hom (f g : Aut X) : (f * g).hom = g.hom ≫ f.hom :=
+lemma mul_hom (f g : Aut X) : (f * g).asIso.hom = g.asIso.hom ≫ f.asIso.hom :=
   rfl
 
 end CategoryTheory.Aut

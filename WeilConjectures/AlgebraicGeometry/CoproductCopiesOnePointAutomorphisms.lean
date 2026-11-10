@@ -85,7 +85,7 @@ theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty
   let ρ : Aut C →* Equiv.Perm I :=
     e.permCongrHom.toMonoidHom.comp
       (Aut.mulEquivPerm.toMonoidHom.comp (F.mapAut C))
-  have hρ (a : Aut C) (i : I) : ρ a i = e (a.hom.left (e.symm i)) := rfl
+  have hρ (a : Aut C) (i : I) : ρ a i = e (a.asIso.hom.left (e.symm i)) := rfl
   refine ⟨MulEquiv.ofBijective ρ ⟨?_, ?_⟩⟩
   · intro a b hab
     apply Iso.ext

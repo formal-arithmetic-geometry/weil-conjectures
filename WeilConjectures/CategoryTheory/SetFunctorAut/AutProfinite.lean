@@ -28,13 +28,13 @@ Source: Stacks Project, Tag 0BMR (blueprint: lem-galois-aut-profinite). -/
 @[instance_reducible]
 def fiberTopology (A : Type w) : TopologicalSpace (Aut A) :=
   letI : TopologicalSpace A := ⊥
-  TopologicalSpace.induced (fun σ : Aut A => (σ.hom : A → A)) inferInstance
+  TopologicalSpace.induced (fun σ : Aut A => (σ.asIso.hom : A → A)) inferInstance
 
 /-- Evaluation of a natural automorphism on every object.
 Source: Stacks Project, equation (58.3.0.1) (blueprint: lem-galois-aut-profinite). -/
 def evaluation {C : Type u} [Category.{v} C] (F : C ⥤ Type w) :
     Aut F →* ∀ X : C, Aut (F.obj X) :=
-  MonoidHom.mk' (fun σ X => σ.app X) (fun _ _ => rfl)
+  MonoidHom.mk' (fun σ X => σ.asIso.app X) (fun _ _ => rfl)
 
 /-- The topology induced by evaluation into the product of pointwise permutation groups.
 Source: Stacks Project, Tag 0BMR (blueprint: lem-galois-aut-profinite). -/
@@ -53,7 +53,7 @@ private theorem evaluation_injective {C : Type u} [Category.{v} C]
     (F : C ⥤ Type w) : Function.Injective (evaluation F) := by
   intro σ τ h
   ext X x
-  have hx : σ.app X = τ.app X := congr_fun h X
+  have hx : σ.asIso.app X = τ.asIso.app X := congr_fun h X
   rw [← Iso.app_hom, ← Iso.app_hom, hx]
 
 end SetFunctorAut

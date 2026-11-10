@@ -163,7 +163,7 @@ noncomputable def unitsUnitEndMulEquivAut (X : C) [IsIso (MonoidalClosed.id X)] 
 @[simp]
 lemma unitsUnitEndMulEquivAut_apply_hom (X : C) [IsIso (MonoidalClosed.id X)]
     (u : (End (𝟙_ C))ˣ) :
-    (unitsUnitEndMulEquivAut X u).hom = unitEndAction X u :=
+    (unitsUnitEndMulEquivAut X u).asIso.hom = unitEndAction X u :=
   rfl
 
 /-- **Two isomorphisms `X ≅ Y` differ by a unique unit of `End (𝟙_ C)`**, provided

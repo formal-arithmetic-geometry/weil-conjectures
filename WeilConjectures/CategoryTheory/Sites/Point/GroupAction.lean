@@ -57,22 +57,22 @@ noncomputable def presheafFiberAct (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) 
 lemma toPresheafFiber_presheafFiberAct (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) (X : C)
     (x : Φ.fiber.obj X) :
     Φ.toPresheafFiber X x P ≫ Φ.presheafFiberAct act P σ =
-      Φ.toPresheafFiber X ((act σ).app X x) P := by
+      Φ.toPresheafFiber X ((act σ).asHom.app X x) P := by
   simp [presheafFiberAct, actHom]
 
 lemma toPresheafFiber_presheafFiberAct_apply (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) (X : C)
     (x : Φ.fiber.obj X) (t : P.obj (op X)) :
     (Φ.presheafFiberAct act P σ).hom (Φ.toPresheafFiber X x P t) =
-      Φ.toPresheafFiber X ((act σ).app X x) P t :=
+      Φ.toPresheafFiber X ((act σ).asHom.app X x) P t :=
   congr($(Φ.toPresheafFiber_presheafFiberAct act P σ X x).hom t)
 
 lemma act_mul_app (σ τ : G) (X : C) (x : Φ.fiber.obj X) :
-    (act (σ * τ)).app X x = (act σ).app X ((act τ).app X x) := by
+    (act (σ * τ)).asHom.app X x = (act σ).asHom.app X ((act τ).app X x) := by
   rw [map_mul, End.mul_def]
   rfl
 
 @[simp]
-lemma act_one_app (X : C) (x : Φ.fiber.obj X) : (act 1).app X x = x := by
+lemma act_one_app (X : C) (x : Φ.fiber.obj X) : (act 1).asHom.app X x = x := by
   rw [map_one, End.one_def]
   rfl
 
@@ -118,14 +118,14 @@ variable (M : Action AddCommGrpCat.{w} G)
 
 /-- The `G`-equivariant maps `Φ.fiber.obj X → M`. -/
 def equivariantMaps (X : C) : AddSubgroup (Φ.fiber.obj X → M.V) where
-  carrier := {f | ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).app X x) = (M.ρ σ).hom (f x)}
+  carrier := {f | ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).asHom.app X x) = (M.ρ σ).asHom.hom (f x)}
   zero_mem' σ x := by simp
   add_mem' {f g} hf hg σ x := by simp [hf σ x, hg σ x]
   neg_mem' {f} hf σ x := by simp [hf σ x]
 
 lemma mem_equivariantMaps {X : C} (f : Φ.fiber.obj X → M.V) :
     f ∈ Φ.equivariantMaps act M X ↔
-      ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).app X x) = (M.ρ σ).hom (f x) :=
+      ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).asHom.app X x) = (M.ρ σ).asHom.hom (f x) :=
   Iff.rfl
 
 

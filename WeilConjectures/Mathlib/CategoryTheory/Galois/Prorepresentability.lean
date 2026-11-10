@@ -90,7 +90,7 @@ lemma bijective_app_of_isGalois (η : F ⟶ F') (A : C) [IsGalois A] :
     intro x y hxy
     obtain ⟨σ, rfl⟩ := (evaluation_aut_bijective_of_isGalois F A a).2 x
     obtain ⟨τ, rfl⟩ := (evaluation_aut_bijective_of_isGalois F A a).2 y
-    have h₁ := ConcreteCategory.congr_hom (η.naturality σ.hom) a
+    have h₁ := ConcreteCategory.congr_hom (η.naturality σ.asIso.hom) a
     have h₂ := ConcreteCategory.congr_hom (η.naturality τ.hom) a
     simp only [ConcreteCategory.comp_apply] at h₁ h₂
     have : σ = τ := evaluation_aut_injective_of_isConnected F' A (η.app A a) (by
