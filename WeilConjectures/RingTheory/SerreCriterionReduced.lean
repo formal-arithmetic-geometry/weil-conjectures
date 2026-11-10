@@ -10,6 +10,8 @@ public import WeilConjectures.RingTheory.SerreConditions
 import Mathlib.RingTheory.LocalProperties.Reduced
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.KrullDimension.Field
 
 /-!
 # Serre's criterion for reducedness
@@ -60,8 +62,7 @@ private theorem depth_ge_one_of_reduced (A : Type u) [CommRing A]
       simp only [Submodule.mem_colon_singleton, Submodule.mem_bot, smul_eq_mul]
       exact hu.mul_left_eq_zero
     have hf := (IsLocalRing.isField_iff_maximalIdeal_eq).mpr hm
-    let := hf.toField
-    exact hdim (by simp)
+    exact hdim (ringKrullDim_eq_zero_of_isField hf)
   have hzmem : z ∈ IsLocalRing.maximalIdeal A := hzu
   rw [hz, Submodule.mem_colon_singleton, Submodule.mem_bot, smul_eq_mul] at hzmem
   exact hz0 (IsNilpotent.eq_zero ⟨2, by simpa [pow_two] using hzmem⟩)

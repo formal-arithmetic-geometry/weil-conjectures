@@ -124,7 +124,7 @@ private theorem frobenius_expansion
 semilinear for the module structures. -/
 private theorem semilinear_of_smul_comp {X Y : Scheme.{u}} {M : X.Modules} {N : Y.Modules}
     (f : Y ⟶ X) (ρ : Γ(M, ⊤) ⟶ Γ(N, ⊤))
-    (h : ∀ c, M.smul c ≫ ρ = ρ ≫ (N.smul (f.appTop c)).asHom) (c : Γ(X, ⊤)) (x : Γ(M, ⊤)) :
+    (h : ∀ c, (M.smul c).asHom ≫ ρ = ρ ≫ (N.smul (f.appTop c)).asHom) (c : Γ(X, ⊤)) (x : Γ(M, ⊤)) :
     ρ (c • x) = f.appTop c • ρ x := by
   rw [← Modules.smul_apply, ← Modules.smul_apply, ← ConcreteCategory.comp_apply, h,
     ConcreteCategory.comp_apply]
@@ -137,8 +137,8 @@ private theorem coord_restriction_natural_aux {S : Scheme.{u}} (E : S.Modules) (
       Γ((Modules.tensorPullback W.hom).obj E, ⊤)))
     (hcomp : ∀ {U W W' : S.Etale} (h : W' ⟶ W) (g : W ⟶ U), ρ (h ≫ g) = ρ g ≫ ρ h)
     (hsmul : ∀ {U W : S.Etale} (g : W ⟶ U) (c : Γ(U.left, ⊤)),
-      ((Modules.tensorPullback U.hom).obj E).smul c ≫ ρ g =
-        ρ g ≫ (((Modules.tensorPullback W.hom).obj E)).asHom.smul (g.left.appTop c))
+      (((Modules.tensorPullback U.hom).obj E).smul c).asHom ≫ ρ g =
+        ρ g ≫ (((Modules.tensorPullback W.hom).obj E).smul (g.left.appTop c)).asHom)
     (e : ∀ (W : S.Etale), (W ⟶ etaleSelf S) →
       Γ((Modules.tensorPullback W.hom).obj E, ⊤) ≃ₗ[Γ(W.left, ⊤)]
         (Fin n → Γ(W.left, ⊤)))
@@ -175,8 +175,8 @@ private theorem coord_restriction_natural {S : Scheme.{u}} (E : S.Modules) [E.Is
         (Modules.etaleTensorSectionsSheaf E).obj.obj (op W)))
     (hcomp : ∀ {U W W' : S.Etale} (h : W' ⟶ W) (g : W ⟶ U), ρ (h ≫ g) = ρ g ≫ ρ h)
     (hsmul : ∀ {U W : S.Etale} (g : W ⟶ U) (c : Γ(U.left, ⊤)),
-      ((Modules.tensorPullback U.hom).obj E).smul c ≫ ρ g =
-        ρ g ≫ (((Modules.tensorPullback W.hom).obj E)).asHom.smul (g.left.appTop c))
+      (((Modules.tensorPullback U.hom).obj E).smul c).asHom ≫ ρ g =
+        ρ g ≫ (((Modules.tensorPullback W.hom).obj E).smul (g.left.appTop c)).asHom)
     (e : ∀ (W : S.Etale), (W ⟶ etaleSelf S) →
       Γ((Modules.tensorPullback W.hom).obj E, ⊤) ≃ₗ[Γ(W.left, ⊤)]
         (Fin n → Γ(W.left, ⊤)))

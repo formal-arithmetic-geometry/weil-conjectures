@@ -87,13 +87,13 @@ lemma isIso_pow_nsmul_id {Y : C} (n : ℕ) [IsIso (n • 𝟙 Y)] (k : ℕ) : Is
 
 /-- If `t` is a right inverse of multiplication by `n` on `Y`, then multiplying `f ≫ t ^ k` by
 `n ^ k` gives back `f`. -/
-lemma eq_pow_nsmul_comp_pow {Y Z : C} (n : ℕ) (t : End Y) (ht : (n • 𝟙 Y) ≫ t = 𝟙 Y) (k : ℕ)
+lemma eq_pow_nsmul_comp_pow {Y Z : C} (n : ℕ) (t : End Y) (ht : (n • 𝟙 Y) ≫ t.asHom = 𝟙 Y) (k : ℕ)
     (f : Z ⟶ Y) : f = n ^ k • (f ≫ (t ^ k).asHom) := by
   induction k generalizing f with
-  | zero => rw [pow_zero, one_smul, pow_zero, End.one_def, Category.comp_id]
+  | zero => rw [pow_zero, one_smul, pow_zero, End.one_asHom, Category.comp_id]
   | succ k ih =>
-    rw [pow_succ', mul_smul, pow_succ, End.mul_def, ← Category.assoc, ← ih (f ≫ t),
-      ← Preadditive.comp_nsmul, ← Category.id_comp t, ← Preadditive.nsmul_comp, ht,
+    rw [pow_succ', mul_smul, pow_succ, End.mul_asHom, ← Category.assoc, ← ih (f ≫ t.asHom),
+      ← Preadditive.comp_nsmul, ← Category.id_comp t.asHom, ← Preadditive.nsmul_comp, ht,
       Category.comp_id]
 
 end CategoryTheory.Preadditive

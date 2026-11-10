@@ -21,9 +21,9 @@ private theorem homology_scalar_comm
     (A : ShortComplex (ModuleCat.{u} R)) (B : ShortComplex (ModuleCat.{u} S))
     (f : A.map (forget₂ _ AddCommGrpCat.{u}) ⟶
       B.map (forget₂ _ AddCommGrpCat.{u})) (r : R) (s : S)
-    (hf : A.mapNatTrans (ModuleCat.smulNatTrans R r) ≫ f =
-      f ≫ B.mapNatTrans (ModuleCat.smulNatTrans S s)) :
-    A.homology.smul r ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
+    (hf : A.mapNatTrans (ModuleCat.smulNatTrans R r).asHom ≫ f =
+      f ≫ B.mapNatTrans (ModuleCat.smulNatTrans S s).asHom) :
+    (A.homology.smul r).asHom ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap f ≫ (B.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).hom =
     (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap f ≫ (B.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).hom ≫
@@ -87,10 +87,10 @@ theorem ModuleCohomologyFMapData.map_semilinear
     rw [ha']
     exact (ΓY.map (D.lambda.f n)).hom.map_smul r x
   have hμ (r : Y.ringCatSheaf.obj.obj (op ⊤)) :
-      (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ (h.appTop.hom r)) ≫
+      (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ (h.appTop.hom r)).asHom ≫
         (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map μ =
       (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map μ ≫
-        (C.sc p).mapNatTrans (ModuleCat.smulNatTrans _ r) := by
+        (C.sc p).mapNatTrans (ModuleCat.smulNatTrans _ r).asHom := by
     ext x
     all_goals exact hμn _ r x
   have hm (r : Y.ringCatSheaf.obj.obj (op ⊤)) (x : A.homology p) :

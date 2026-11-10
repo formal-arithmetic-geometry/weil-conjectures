@@ -103,8 +103,8 @@ theorem tensorAction_of_additiveFunctor
   let M := K.obj Q
   let κ : End Q →+* End M :=
     { K.mapEnd Q with
-      map_zero' := K.map_zero Q Q
-      map_add' := fun _ _ ↦ K.map_add }
+      map_zero' := End.ext (K.map_zero Q Q)
+      map_add' := fun _ _ ↦ End.ext K.map_add }
   let φ : A →+* Module.End B M :=
     (endRingEquiv M).toRingHom.comp (κ.comp (algebraMap A (End Q)))
   have hφ : ∀ r : R, φ (algebraMap R A r) =

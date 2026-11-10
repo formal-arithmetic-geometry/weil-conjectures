@@ -29,7 +29,7 @@ private theorem homology_scalar_transport
     (A : ShortComplex (ModuleCat.{u} R)) (B : ShortComplex C)
     (E : C ⥤ AddCommGrpCat.{u}) [E.PreservesZeroMorphisms] [E.PreservesHomology]
     (q : A.map (forget₂ _ AddCommGrpCat.{u}) ⟶ B.map E) (r : R) (τ : E ⟶ E)
-    (hq : A.mapNatTrans (ModuleCat.smulNatTrans R r) ≫ q = q ≫ B.mapNatTrans τ) :
+    (hq : A.mapNatTrans (ModuleCat.smulNatTrans R r).asHom ≫ q = q ≫ B.mapNatTrans τ) :
     (A.homology.smul r).asHom ≫ (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
       ShortComplex.homologyMap q ≫ (B.mapHomologyIso E).hom =
     (A.mapHomologyIso (forget₂ _ AddCommGrpCat.{u})).inv ≫
@@ -105,7 +105,7 @@ theorem resolutionSectionsHomology_scalar
   intro a y
   let b := ((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a
   let τ : E ⟶ E := {
-    app := fun M ↦ ((M.obj (op V))).asHom.smul a
+    app := fun M ↦ ((M.obj (op V)).smul a).asHom
     naturality := fun M N q ↦ by
       ext z
       exact ((q.app (op V)).hom.map_smul a z).symm }
@@ -143,7 +143,7 @@ theorem resolutionSectionsHomology_scalar
     exact hw
   let q := (HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map
     R.sections.hom
-  have hq : (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ b) ≫ q =
+  have hq : (A.sc p).mapNatTrans (ModuleCat.smulNatTrans _ b).asHom ≫ q =
       q ≫ (B.sc p).mapNatTrans τ := by
     apply ShortComplex.hom_ext
     · ext z
