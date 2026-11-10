@@ -855,6 +855,10 @@ private theorem ordinary_presentation (R : Type w) [CommRing R] [IsNoetherianRin
     ⟨(ModuleCat.isColimitCokernelCofork (ModuleCat.ofHom g) (ModuleCat.ofHom f)
       hgf hf).coconePointUniqueUpToIso (colimit.isColimit (parallelPair (ModuleCat.ofHom g) 0))⟩⟩
 
+section ConstantPresentation
+
+attribute [local instance] Sheaf.monoidalPreadditive
+
 private theorem internal_constant_fp {C : Type c} [Category.{h} C]
     (J : GrothendieckTopology C) (R : Type (max c h)) [CommRing R] [IsNoetherianRing R]
     [HasSheafify J Ab.{max c h}] [(J.W (A := Ab.{max c h})).IsMonoidal]
@@ -868,21 +872,32 @@ private theorem internal_constant_fp {C : Type c} [Category.{h} C]
           (internalToModule R) rfl).obj M ≅ (constantSheaf J (ModuleCat.{max c h} R)).obj P) := by
   let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
   let S := constantSheaf J (ModuleCat.{max c h} R)
+  have : H.IsEquivalence :=
+    ConstantInternalModuleSheafEncoding.sheafEncodingIsEquivalence J R (internalToModule R) rfl
+  have : H.Full :=
+    ConstantInternalModuleSheafEncoding.sheafEncodingFull J R (internalToModule R) rfl
+  have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full H
+  have : HasFiniteLimits (Mod (Sheaf J Ab.{max c h})
+      (Sheaf.sheafifyRingPresheaf J ((Functor.const Cᵒᵖ).obj (RingCat.of R)))) := inferInstance
+  have : HasBinaryProducts (Mod (Sheaf J Ab.{max c h})
+      (Sheaf.sheafifyRingPresheaf J ((Functor.const Cᵒᵖ).obj (RingCat.of R)))) :=
+    HasFiniteLimits.out _
+  have : H.Additive := Functor.additive_of_preserves_binary_products H
+  have : S.Additive := inferInstance
   let rr : (internalToModule R).obj (Mod.regular (AddCommGrpCat.of R)) ≅ ModuleCat.of R R :=
     ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext x; rfl)
   let e (n : ℕ) : H.obj (Mod.finiteFree _ n) ≅ S.obj (ModuleCat.of R (Fin n → R)) :=
     ConstantInternalModuleSheafEncoding.encFiniteFreeIso J R (internalToModule R) rfl n ≪≫
       S.mapIso (biproduct.mapIso (fun _ ↦ rr) ≪≫ ModuleCat.biproductIsoPi _)
   obtain ⟨n, m, g, ⟨eg⟩⟩ := ordinary_presentation R P
-  let ff := Functor.FullyFaithful.ofFullyFaithful H
-  let g' := ff.preimage ((e m).hom ≫ S.map g ≫ (e n).inv)
+  let g' := H.preimage ((e m).hom ≫ S.map g ≫ (e n).inv)
   let eH : H.obj (cokernel g') ≅ S.obj P :=
     PreservesCokernel.iso H g' ≪≫
-      cokernel.mapIso _ _ (e m) (e n) (by simp [g', ff]) ≪≫
+      cokernel.mapIso _ _ (e m) (e n) (by simp [g']) ≪≫
       (PreservesCokernel.iso S g).symm ≪≫ S.mapIso eg.symm
-  let M := H.objPreimage (S.obj P)
-  exact ⟨M, ⟨n, m, g', ⟨ff.preimageIso (H.objObjPreimageIso _ ≪≫ eH.symm)⟩⟩,
-    ⟨H.objObjPreimageIso _⟩⟩
+  exact ⟨cokernel g', ⟨n, m, g', ⟨Iso.refl _⟩⟩, ⟨eH⟩⟩
+
+end ConstantPresentation
 
 private def internalConstantPresheafFunctor
     {C : Type c} [Category.{h} C] (R : Type w) [CommRing R] :
