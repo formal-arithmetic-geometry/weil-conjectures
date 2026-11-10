@@ -180,6 +180,7 @@ lemma exists_finite_ofArrows_mem_smallEtaleTopology {W : X.Etale} [CompactSpace 
     (R : Sieve W) (hR : R ∈ X.smallEtaleTopology W) :
     ∃ (n : ℕ) (U : Fin n → Over W), (∀ a, R (U a).hom) ∧
       Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ X.smallEtaleTopology W := by
+  obtain ⟨n, U, g, hRg, -, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
   obtain ⟨n, U, g, hRg, -, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   exact ⟨n, fun a ↦ Over.mk (g a), hRg, (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
 

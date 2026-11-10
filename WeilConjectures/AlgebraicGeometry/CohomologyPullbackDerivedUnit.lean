@@ -87,6 +87,19 @@ theorem lowerStar_isKInjective_boundedBelow {X Y : Scheme.{v}} (f : Y ⟶ X)
   have := (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).preservesKInjectiveComplexes
   exact Functor.PreservesKInjectiveComplexes.isKInjective_map J.obj
 
+/-- On a bounded below K-injective complex `J` the derived direct image and the derived global
+sections on both sites are computed by `J` itself: the units are isomorphisms, so the natural
+Leray isomorphism `Functor.rightDerivedFunctorPlusCompIso'`, characterized by its unit
+compatibility `Functor.rightDerivedFunctorPlusCompIso'_fac`, is the sectionwise identification.
+Source: Stacks Project, Lemma 01EZ and Remark 08J6
+(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
+Proof: use the exact inverse-image adjunction to preserve K-injectivity under direct image.
+For any bounded below K-injective representative, compare it with the image of a complex
+of injective objects under the equivalence `K⁺(Inj) ≌ D⁺`. Localization is bijective on
+maps into either K-injective complex, so both directions of the derived isomorphism lift
+and their composites are identities already in the homotopy category. Naturality of the
+derived-functor unit transports its invertibility from the complex of injective objects.
+Apply this argument to direct image and to global sections on the two sites. -/
 theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
     (J : HomotopyCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [CochainComplex.IsKInjective J.obj.as] :

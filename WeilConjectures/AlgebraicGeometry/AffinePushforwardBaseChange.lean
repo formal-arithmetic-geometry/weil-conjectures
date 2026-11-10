@@ -171,6 +171,18 @@ theorem affinePushforward_baseChange_affine_formula
   simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
 
 
+/-- For the structure sheaf the base change isomorphism respects multiplication and unit.
+Multiplications are specified on all tensor sections, so they are the canonical sheaf
+multiplications, rather than unspecified algebra structures. The tensor comparison is the
+one of module_pullback_tensor, and epsilon is the landed tensorPullbackObjUnitToUnit
+(the adjoint of the structure ring map); gamma is beta for O_X followed by f'_* of epsilon.
+Source: Lemma 02KG, affine formula for M = B; node clause (2)
+(blueprint: lem-weil-pbc-affine-pushforward-base-change).
+Proof: step (5) of the node: the structure sheaf is quasi-coherent. Clause (1) and the
+structure-sheaf pullback isomorphism make gamma invertible. On affine charts its formula
+is the identity of R-prime tensor B, hence respects products and 1. The same follows from
+the adjoint ring-map description of module-base-change-map-algebra. These equalities glue.
+The inverse of an invertible module map respecting multiplication and unit respects them too. -/
 theorem affinePushforward_baseChange_algebra {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f] :

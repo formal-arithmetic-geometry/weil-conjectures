@@ -325,6 +325,7 @@ theorem injective_one_tmul :
   obtain ⟨c, hc⟩ := (IsLocalizedModule.eq_zero_iff (nonZeroDivisors ℤ_[ℓ]) _).mp ht
   exact (smul_eq_zero.mp hc).resolve_left (nonZeroDivisors.ne_zero c.2)
 
+variable {ℓ M} in
 /-- Blueprint `def-tate-module-abelian-group`: rescaling a fraction. The fraction `ℓ ^ (-b) t`
 equals `ℓ ^ (-(b + c)) (ℓ ^ c t)` in `V_ℓ M`. -/
 theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
@@ -337,6 +338,7 @@ theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
   field_simp
   ring
 
+variable {ℓ M} in
 /-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
 
 `V_ℓ M = T_ℓ M [1 / ℓ]`: every element of the rational Tate module is a fraction `ℓ ^ (-b) t`
@@ -355,6 +357,7 @@ theorem exists_eq_inv_pow_tmul (v : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) :
     rw [TensorProduct.tmul_add, inv_pow_tmul_eq_inv_pow_add_tmul b c,
       inv_pow_tmul_eq_inv_pow_add_tmul c b, add_comm c b]
 
+variable {ℓ M} in
 /-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
 
 Equality of fractions in `V_ℓ M = T_ℓ M [1 / ℓ]`: `ℓ ^ (-b) t = ℓ ^ (-c) u` if and only if

@@ -68,6 +68,7 @@ lemma isLocalizedEquivalence_op_iff :
   · intro
     infer_instance
 
+variable {Φ} in
 lemma isLocalizedEquivalence_of_iso {Φ' : LocalizerMorphism W₁ W₂} (e : Φ.functor ≅ Φ'.functor)
     [Φ.IsLocalizedEquivalence] : Φ'.IsLocalizedEquivalence := by
   let G := Φ.localizedFunctor W₁.Q W₂.Q

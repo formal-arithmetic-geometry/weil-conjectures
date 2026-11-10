@@ -64,6 +64,7 @@ theorem schemeHomCounit_comp_iso_leftDerived
   exact (Functor.isRightKanExtension_iff_of_iso₂ ε (ε ≫ e.hom) e (Iso.refl L)
     (by simp)).mp h
 
+
 /-- Change of counit in a tensor representative equation.
 Source: Stacks, Tag 079U (blueprint: lem-pc-global-hom-original-counit-normalization). -/
 private theorem originalCounitTensorEquation

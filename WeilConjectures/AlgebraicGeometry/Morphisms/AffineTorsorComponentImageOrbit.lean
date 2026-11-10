@@ -374,6 +374,15 @@ theorem affine_torsor_component_image_orbit
     rw [show l y ≫ pullback.fst b v = s y from pullback.lift_fst _ _ _] at hla
     exact hla
 
+/-- Forward half of the orbit criterion; Source: Stacks Project, Tag 03SF.
+Over geometric points, the finite étale cover is the disjoint union of the
+deck graphs indexed by G, by the unique-rotation hypothesis. The invariant
+subring construction is integral, so its basic-open map is universally
+surjective. Pulling the open immersion and its section equation back along
+this cover identifies its range with the union of the translated split
+sections. Membership therefore supplies a deck label ζ with A(ζ)x = y;
+membership is unchanged after extending the residue field to an algebraic
+closure. (blueprint: lem-sbc-affine-torsor-component-image-orbit-forward) -/
 theorem affine_torsor_component_image_orbit_forward
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

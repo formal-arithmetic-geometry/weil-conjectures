@@ -147,6 +147,7 @@ variable (D : Type u) [CommRing D] [Algebra Γ(S, U'') D] [Algebra Γ(S, U) D]
   (hD : algebraMap Γ(S, U) D =
     (algebraMap Γ(S, U'') D).comp (S.presheaf.map (homOfLE hle).op).hom)
 
+include hU hU'' hD in
 /-- For affine opens `U'' ≤ U`, an ind-étale `Γ(S, U'')`-algebra is ind-étale over `Γ(S, U)`
 (through the restriction map, which is étale). -/
 lemma indEtale_of_le [Algebra.IndEtale Γ(S, U'') D] : Algebra.IndEtale Γ(S, U) D := by

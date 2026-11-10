@@ -59,6 +59,21 @@ theorem isPerfect_tensorUnit (X : Scheme.{u})
     exact ⟨F.mapDerivedCategory.mapIso eunit ≪≫
       (F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
       (DerivedCategory.singleFunctorIsoCompQ _ 0).app (SheafOfModules.unit R)⟩
+private theorem module_restriction_zero
+    (Y : Scheme.{u}) (V : Y.Opens)
+    (M : SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+    (hM : ∀ x : Y, x ∈ V →
+      Subsingleton (↑(TopCat.Presheaf.stalk M.val.presheaf x))) :
+    IsZero ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V).obj M) := by
+  apply (IsZero.iff_id_eq_zero _).mpr
+  ext U z
+  change z = 0
+  apply TopCat.Presheaf.section_ext
+    ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj M)
+  intro x hx
+  change TopCat.Presheaf.germ M.val.presheaf _ x hx _ =
+    TopCat.Presheaf.germ M.val.presheaf _ x hx _
+  exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
 set_option maxHeartbeats 800000 in
 -- Comparing the shared derived tensor instance with its additive construction is expensive.

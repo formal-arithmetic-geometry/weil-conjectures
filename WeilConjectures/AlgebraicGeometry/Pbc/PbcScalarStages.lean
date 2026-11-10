@@ -38,6 +38,7 @@ variable {C₀ C₁ C₂ C₃ : Type*} [Category* C₀] [Category* C₁] [Catego
   [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
   [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
   [HasDerivedCategory C₃]
+
 /-- Derived functors of exact functors carry an associative family of composition
 isomorphisms to an associative family. -/
 theorem mapDerivedCategory_compIso_assoc
@@ -269,6 +270,7 @@ theorem _root_.CategoryTheory.Adjunction.leftAdjointIdIso_eq_symm {C : Type*} [C
   apply (conjugateEquiv Adjunction.id adj).injective
   rw [Adjunction.conjugateEquiv_leftAdjointIdIso_hom]
   exact ((conjugateEquiv Adjunction.id adj).apply_symm_apply e.inv).symm
+
 theorem _root_.CategoryTheory.Functor.mapDerivedCategoryCompIso_whiskerLeft_unit
     {C₀ C₁ : Type*} [Category* C₀] [Category* C₁] [Abelian C₀] [Abelian C₁]
     [HasDerivedCategory C₀] [HasDerivedCategory C₁]
@@ -371,6 +373,7 @@ theorem pbcRestrictComp_id_right (φ : R ⟶ S) (ψ : S ⟶ S) (h : φ ≫ ψ = 
   change ((pbcRestrictComp φ (ψ) φ h).hom.app M).val.app U x =
     (e.hom.app M).val.app U x
   erw [pbcRestrictComp_hom_app_val, he]
+
 theorem pbcDerivedRestrictComp_id_left (ψ : R ⟶ R) (φ : R ⟶ S) (h : ψ ≫ φ = φ)
     (e : pbcRestrict ψ ≅ 𝟭 _)
     (he : ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -490,6 +493,7 @@ theorem pbcScalarRestrictId_hom_app_val
     ((pbcScalarRestrictId l E T).hom.app M).val.app U x = x := by
   rw [pbcScalarRestrictId]
   exact (pbcScalarRestrictId_exists l E T).exists.choose_spec M U x
+
 theorem pbcAmbientScalarComp_id_left (i : E →ₐ[Padic l] F)
     (K : PbcCompletedDerived T (pbcIntegralDatum l E)) :
     (pbcAmbientScalarComp l E E F (AlgHom.id (Padic l) E) i T).hom.app K =
@@ -615,6 +619,7 @@ theorem pbcAmbientScalarComp_id_right_integral (i : E →ₐ[Padic l] F)
         eqToHom (congrArg (fun a ↦ (pbcEmbeddingAmbientTensor l E F a T).obj K.obj.obj)
           (AlgHom.id_comp i).symm) :=
   hη K.obj.obj
+
 theorem pbcRationalScalarComp_id_right (i : E →ₐ[Padic l] F)
     (K : PbcRationalDerivedCategory l E T dim.out inv.out) :
     (pbcRationalScalarComp l E F F i (AlgHom.id (Padic l) F) T dim.out inv.out).hom.app K =

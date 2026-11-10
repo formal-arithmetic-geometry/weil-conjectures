@@ -91,6 +91,7 @@ lemma basicOpen_monomialToNat_indicator_mono {s t : Set n} (h : t ⊆ s) :
     mem_basicOpen_monomialToNat_indicator.1 hx i (h hi)
 
 
+
 variable (R m) in
 /-- **The section `xᵃ / xᵇ` of `𝒪(m)`** over an open `U` of `Proj R[Xᵢ]` on which `xᵇ` does not
 vanish, for nonnegative exponent vectors `a`, `b` with `∑ aᵢ = ∑ bᵢ + m`. -/
@@ -159,6 +160,7 @@ lemma twist_presheaf_map_twistMonomial {t : Set n} (hts : t ⊆ s) (e : laurentE
     (nsmul_nonneg h0' _) (add_nsmul_indicator_nonneg (fun i hi ↦ e.2.2 i fun h ↦ hi (hts h))
       (neg_le_negExponentSum e.1)) (nsmul_nonneg h0 _) ?_ _ _
   abel
+
 
 
 variable (s m) in

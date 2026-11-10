@@ -79,6 +79,7 @@ noncomputable def Etale.constToContinuousMap :
       map_add' _ _ := rfl }
   naturality _ _ _ := rfl
 
+omit [DiscreteTopology A] in
 lemma Etale.constToContinuousMap_app_apply (U : X.Etaleᵒᵖ) (a : A) :
     (Etale.constToContinuousMap X A).app U a = ContinuousMap.const _ a :=
   rfl

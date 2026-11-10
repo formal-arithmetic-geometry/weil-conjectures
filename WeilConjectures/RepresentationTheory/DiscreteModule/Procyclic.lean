@@ -245,6 +245,7 @@ lemma exists_mul_sub_eq {A : Type*} [AddCommGroup A] (f : G → A)
       rw [hidxτ, h', Nat.mod_self, Finset.sum_range_zero, zero_sub, neg_eq_iff_eq_neg]
       exact eq_neg_of_add_eq_zero_left hsum
 
+omit [Fact ℓ.Prime] hχ in
 /-- The coinduced module of an `ℓ`-primary module is `ℓ`-primary. -/
 lemma _root_.DiscreteModule.isPrimary_coind₁ {X : DiscreteModule.{w} G} (hX : IsPrimary ℓ X) :
     IsPrimary ℓ ((coind₁ G).obj X.obj.V) := fun f ↦ by

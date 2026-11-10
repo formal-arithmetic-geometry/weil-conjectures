@@ -455,6 +455,7 @@ def comparisonBoundary : Set (comparisonSpace σ₁ σ₂) :=
 lemma isClosed_comparisonBoundary : IsClosed (comparisonBoundary σ₁ σ₂) :=
   isClosed_closure.preimage (comparisonFst σ₁ σ₂).continuous
 
+variable {σ₁ σ₂} in
 lemma mem_comparisonBoundary_iff {z : comparisonSpace σ₁ σ₂} :
     z ∈ comparisonBoundary σ₁ σ₂ ↔
       comparisonFst σ₁ σ₂ z ∈ σ₁.forbiddenBoundary :=
@@ -487,6 +488,7 @@ theorem comparisonBoundary_subset_preimage_selfBoundary {D : Set (comparisonSpac
   hD.trans <| closure_minimal hmem <|
     isClosed_closure.preimage (comparisonSnd σ₁ σ₂).continuous
 
+variable {σ₁ σ₂} in
 /-- **Key boundary disjointness by density** (blueprint:
 `lemma:nagata-comparison-boundary-density`, `lemma:nagata-key-boundary-disjointness`):
 the combination of the two previous lemmas, which is the shape the improved-comparison

@@ -185,6 +185,7 @@ lemma connecting_id_comp (F : Cx ⥤ Cs) [ShiftLift ι F ιs] {a c : Cx}
     connecting ι ιs (𝟭 Cx ⋙ F) δ = connecting ι ιs F δ := by
   rw [connecting_comp, connecting_id]
 
+variable {ι ιs} in
 /-- The connecting morphism through `F ⋙ 𝟭` is the one through `F`. -/
 lemma connecting_comp_id (F : Cx ⥤ Cs) [ShiftLift ι F ιs] {a c : Cx}
     (δ : ι.obj c ⟶ (shiftFunctor Dx (1 : ℤ)).obj (ι.obj a)) :

@@ -198,6 +198,10 @@ lemma henselianLocalRing_integralClosure : HenselianLocalRing (integralClosure R
   have := finite_integralClosure R F L
   exact HenselianLocalRing.finite_local_henselian R (integralClosure R L)
 
+variable (R F L) in
+include F in
+omit [IsDomain R] [IsDiscreteValuationRing R] [FiniteDimensional F L]
+  [Algebra.IsSeparable F L] in
 /-- The residue field of the integral closure is the residue field of `R`, if the latter is
 algebraically closed. -/
 lemma bijective_algebraMap_residueField_integralClosure [IsAlgClosed (ResidueField R)] :
@@ -272,6 +276,8 @@ theorem exists_eq_unit_mul_pow_mul_finrank_residueField {π : R} (hπ : Irreduci
     ← IsFractionRing.finrank_eq R F B L] at hsum
   exact hsum
 
+variable (R F L) in
+include F in
 /-- **Total ramification.** If the residue field of `R` is algebraically closed, a uniformizer
 `π` of `R` is `u * ϖ ^ [L : F]` in the integral closure of `R` in `L`, for a uniformizer `ϖ` and
 a unit `u`: the residue field does not grow, so the ramification index is the degree. -/

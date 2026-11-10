@@ -166,6 +166,7 @@ lemma rootsOfUnitySheaf_isTorsion (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
       ← Category.comp_id (Limits.kernel.ι (n • 𝟙 _)), ← Preadditive.comp_nsmul,
       Limits.kernel.condition])
 
+include hj in
 /-- **Kummer computation on `𝔾_{m,k}`, degrees `≥ 2`.** `Hᵠ(𝔾_{m,k}, μₙ) = 0` for `q ≥ 2`. -/
 theorem subsingleton_sheafH_rootsOfUnitySheaf_multiplicativeGroup {n : ℕ} (hn : (n : k) ≠ 0)
     (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H (G.rootsOfUnitySheaf n) q) :=

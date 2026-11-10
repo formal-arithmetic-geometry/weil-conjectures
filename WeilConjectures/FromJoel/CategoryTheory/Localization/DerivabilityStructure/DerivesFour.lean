@@ -52,6 +52,7 @@ variable {Φ₁ Φ₂ Φ₃ Φ₄ F} (h : Derives₄ Φ₁ Φ₂ Φ₃ Φ₄ F)
   [W₁.ContainsIdentities] [W₂.ContainsIdentities]
   [W₃.ContainsIdentities] [W₄.ContainsIdentities]
 
+include h in
 lemma hasLeftDerivedFunctor₄ : F.HasLeftDerivedFunctor₄ W₁ W₂ W₃ W₄ :=
   Derives.hasLeftDerivedFunctor h
 

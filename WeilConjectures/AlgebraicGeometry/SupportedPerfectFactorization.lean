@@ -18,6 +18,14 @@ import all WeilConjectures.AlgebraicGeometry.SupportedKoszulRelativeDetector
 Source: Stacks Project, Tags 0A9C, 0E4G, 094A and 09SP.
 (blueprint: lem-sc-supported-perfect-factorization).
 -/
+@[expose] public section
+universe u v w
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry
+
+open scoped ZeroObject
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -279,3 +287,5 @@ theorem supported_perfect_factorization
   rw [← Category.assoc α.hom β.hom]
   rw [show α.hom ≫ β.hom = fstage from congrArg InducedCategory.Hom.hom hαβ]
   exact hfstage
+
+end AlgebraicGeometry

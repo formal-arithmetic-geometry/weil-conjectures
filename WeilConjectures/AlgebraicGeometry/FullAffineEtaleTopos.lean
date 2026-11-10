@@ -600,6 +600,12 @@ theorem fullAffineEtale_cohomology_comparison (S : Scheme.{u})
     | n + 1 => d (n + 1)
   exact ⟨e, h₀⟩
 
+/-- Source: Stacks 03YU, cohomology over the final object. Proof: the free abelian
+sheaf on the final representable and the constant integer sheaf both represent
+sections at the terminal identity etale object. The two natural Hom equivalences
+give an isomorphism of representing objects by fully faithful coyoneda. Applying
+the Ext bifunctor gives the displayed natural isomorphism in every degree.
+(blueprint: lem-weil-pbc-affine-etale-cohomology_base_left) -/
 theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
     [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
     [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :

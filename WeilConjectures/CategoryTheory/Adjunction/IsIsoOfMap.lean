@@ -47,6 +47,7 @@ lemma isIso_of_isIso_map_leftAdjoint {d : D} (t : G.obj d ⟶ G.obj d) [IsIso (F
       Category.id_comp]
   exact ⟨x, hx, inj _ _ (by rw [reassoc_of% hx, Category.comp_id])⟩
 
+include adj in
 /-- An endomorphism `t` of `F c`, for an adjunction `F ⊣ G`, is an isomorphism as soon as `G t`
 is one. -/
 lemma isIso_of_isIso_map_rightAdjoint {c : C} (t : F.obj c ⟶ F.obj c) [IsIso (G.map t)] :

@@ -75,6 +75,7 @@ lemma flat_of_isPullback_spec : Flat π := by
   rw [Flat.SpecMap_iff]
   exact RingHom.flat_algebraMap_iff.mpr inferInstance
 
+omit [Module.Finite k k'] in
 lemma surjective_of_isPullback_spec : Surjective π :=
   MorphismProperty.of_isPullback (P := @Surjective) H.flip surjective_specMap_algebraMap_of_field
 

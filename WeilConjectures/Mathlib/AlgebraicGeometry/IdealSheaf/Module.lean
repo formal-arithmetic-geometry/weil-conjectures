@@ -158,6 +158,9 @@ lemma subsingleton_sections_toModules_of_injective
     (J.range_toModulesι_app_eq ⊤).subset ⟨b, rfl⟩
   exact h (ha.trans hb.symm)
 
+/-- If `Γ(X, 𝒪_X)` is a field (for instance if `X` is proper and geometrically integral over a
+field), and the closed subscheme cut out by `J` is nonempty, then `J` has no nonzero global
+sections. -/
 lemma subsingleton_sections_toModules_of_isField (hX : IsField Γ(X, ⊤)) [Nonempty J.subscheme] :
     Subsingleton Γ(J.toModules, ⊤) := by
   let := hX.toField

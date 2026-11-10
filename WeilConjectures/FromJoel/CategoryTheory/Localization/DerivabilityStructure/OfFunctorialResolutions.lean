@@ -30,6 +30,7 @@ variable (Φ : LocalizerMorphism W₁ W₂)
   {ρ : C₂ ⥤ C₁} (p : ρ ⋙ Φ.functor ⟶ 𝟭 C₂) (hp : ∀ X₂, W₂ (p.app X₂))
   (hW₁ : W₁ = W₂.inverseImage Φ.functor)
 
+include hp in
 lemma hasLeftResolutions_arrow_of_functorial_resolutions :
     Φ.arrow.HasLeftResolutions :=
   fun f ↦ ⟨{
@@ -41,6 +42,8 @@ lemma hasLeftResolutions_arrow_of_functorial_resolutions :
 variable [Φ.functor.Full] [Φ.functor.Faithful] [W₂.HasTwoOutOfThreeProperty]
 
 include hp
+set_option backward.defeqAttrib.useBackward true in
+include hW₁ in
 lemma isConnected_leftResolution_of_functorial_resolutions [W₂.IsMultiplicative] (X₂ : C₂) :
     IsConnected (Φ.LeftResolution X₂) := by
   have : Φ.op.functor.Faithful := by dsimp; infer_instance

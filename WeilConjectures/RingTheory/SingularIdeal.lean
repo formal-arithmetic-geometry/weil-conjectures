@@ -63,6 +63,9 @@ theorem smoothAtPrime_locus_eq (R : Type u) (A : Type v) [CommRing R] [CommRing 
     PrimeSpectrum.mem_basicOpen, IsSmoothAtPrime, smoothElements, exists_prop]
   exact exists_congr fun g ↦ and_comm
 
+/-- The smooth locus is open: by `smoothAtPrime_locus_eq` it is a union of basic
+opens, each of which is open. Source: Stacks Project,
+Smoothing Ring Maps, after Definition 07C5 (blueprint: def-weil-pbc-singular-ideal). -/
 theorem isOpen_smoothAtPrime_locus (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] :
     IsOpen {q : PrimeSpectrum A | IsSmoothAtPrime R q} := by

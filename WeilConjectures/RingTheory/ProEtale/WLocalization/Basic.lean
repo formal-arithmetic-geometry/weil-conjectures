@@ -343,6 +343,7 @@ lemma Stratification.Index.ext_of_left {E : Finset A} {i j : Stratification.Inde
   ext a
   simp_rw [mem_right_iff, h]
 
+omit [CommRing A] in
 /-- In a disjoint union decomposition `E = E' ⨿ E''`, the right part is determined by the
 left part as `E \ E'`. -/
 lemma Stratification.Index.right_eq_sdiff {E : Finset A} [DecidableEq A]

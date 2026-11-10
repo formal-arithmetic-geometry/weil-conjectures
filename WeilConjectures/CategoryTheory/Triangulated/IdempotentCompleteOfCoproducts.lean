@@ -47,6 +47,7 @@ open BrownRepresentability Telescope
 variable {A : C} {e : A ⟶ A} (he : e ≫ e = e)
 include he
 
+omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
 /-- For an idempotent `e : A ⟶ A`, precomposition with `𝟙 - t` is surjective on morphisms out of
 `∐ₙ A`, where `t` is the shift of the sequence `A ⟶[e] A ⟶[e] ⋯`: a family `hₙ : A ⟶ W` is the
 image of `gₙ = (𝟙 - e) ≫ hₙ - ∑_{j < n} e ≫ hⱼ`. -/

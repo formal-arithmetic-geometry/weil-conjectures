@@ -118,6 +118,7 @@ theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ 
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation) :
     (M : T.Modules).IsFinitePresentation :=
   isFinitePresentation_of_toDescentData_iso_of_isQuasicoherent g hg D M
+    (isQuasicoherent_of_toDescentData_iso g hg D M hM fun i ↦ have := hD i; inferInstance) hM hD
     (isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology g hg D M hM
       fun i ↦ have := hD i; inferInstance) hM hD
 
@@ -135,6 +136,7 @@ theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.
       (D.obj i : (T' i).Modules).IsLocallyFree) :
     (M : T.Modules).IsLocallyFree :=
   isLocallyFree_of_toDescentData_iso_of_isQuasicoherent g hg D M
+    (isQuasicoherent_of_toDescentData_iso g hg D M hM fun i ↦ have := (hD i).1; inferInstance)
     (isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology g hg D M hM
       fun i ↦ have := (hD i).1; inferInstance)
     hM hD

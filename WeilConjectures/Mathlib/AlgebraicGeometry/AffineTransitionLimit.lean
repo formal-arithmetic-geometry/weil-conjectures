@@ -2813,6 +2813,7 @@ lemma DescendsAtWithOpen.mono {k k' : I} (f : k' ⟶ k) {X : Scheme.{u}} {g : X 
     QuasiCompact.isCompact_preimage _ O.isOpen hOc, ?_⟩
   rw [← Scheme.Hom.comp_preimage, isPullbackLift_fst, hO]
 
+omit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] in
 lemma DescendsAtWithOpen.descendsAt {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt} {W : X.Opens}
     (H : DescendsAtWithOpen D c k g W) : DescendsAt D c k g := by
   obtain ⟨Y, p, h, O, hp, hcpt, hqs, hsq, -, -⟩ := H
@@ -4218,6 +4219,7 @@ theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.
     MorphismProperty.pullback_snd _ _ ‹_›, hk, pullback.lift_snd _ _ _⟩
 
 end FinitePresentationModel
+
 
 
 section ClosedSubschemeLimit

@@ -786,6 +786,7 @@ noncomputable def awaySystem (j₀ : J) (r : D.obj j₀) : Under j₀ ⥤ CommRi
     rw [h, D.map_comp]
     rfl
 
+omit [IsFiltered J] in
 lemma awaySystem_map (j₀ : J) (r : D.obj j₀) {k l : Under j₀} (t : k ⟶ l) :
     (awaySystem (D := D) j₀ r).map t = awayLift (D.map t.right) _ _ (rAt_map j₀ r t) :=
   rfl
@@ -807,6 +808,7 @@ noncomputable def awaySystemCocone (c : Cocone D) (j₀ : J) (r : D.obj j₀) :
         congr 1
         exact coconeι_w_apply c t.right x }
 
+omit [IsFiltered J] in
 lemma awaySystemCocone_app (c : Cocone D) (j₀ : J) (r : D.obj j₀) (k : Under j₀) :
     (awaySystemCocone c j₀ r).ι.app k = awayLift (coconeι c k.right) _ _ (rAt_cocone j₀ r k) :=
   rfl
@@ -1786,6 +1788,7 @@ lemma awaySystemCocone_w_apply (c : Cocone D) (j' : J) (r : D.obj j')
     _ = ((awaySystemCocone c j' r).ι.app m).hom x :=
         congrArg (fun q ↦ q.hom x) ((awaySystemCocone c j' r).w u)
 
+omit [IsFiltered J] in
 /-- Generalized form of `pieceChi_push` with an arbitrary target element. -/
 lemma pieceChi_push' {j₀ : J} {A₀ : CommRingCat.{u}} {f₀ : D.obj j₀ ⟶ A₀}
     {k : Under j₀} (selt : D.obj k.right) (q : A₀ ⟶ CommRingCat.of (Localization.Away selt))

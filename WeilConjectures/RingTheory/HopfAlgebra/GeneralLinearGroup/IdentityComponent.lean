@@ -173,6 +173,7 @@ theorem normal_zeroLocus_identityComponent (hI : I.IsRadical) (R : Type*) [CommR
   rw [← h₁, ← h₂, ← map_inv, ← map_mul, ← map_mul, evalAlgHom_map, AlgHom.comp_apply, key a ha,
     map_zero]
 
+omit [IsAlgClosed k] [I.IsHopfIdeal k] in
 /-- A closed subgroup `G = V(I)` of `GL_n` has finitely many connected components.
 (blueprint: `sk-p-geometry`) -/
 theorem finite_connectedComponents_zeroLocus :
@@ -216,6 +217,7 @@ theorem finiteIndex_zeroLocus_identityComponent :
       Quotient.sound (QuotientGroup.leftRel_apply.2 ((hf a b).1 hab))
   exact Subgroup.finiteIndex_of_finite_quotient
 
+omit [IsAlgClosed k] [I.IsHopfIdeal k] in
 /-- **Identity component and cosets.** The connected component of a point `g` of a closed subgroup
 `G = V(I)` of `GL_n` is open and closed in `G`, and it is the coset `g G°`: its points are the `x`
 with `g⁻¹ * x ∈ G°` (`toPrimeSpectrum_mem_connectedComponentIn_iff`). There are finitely many of

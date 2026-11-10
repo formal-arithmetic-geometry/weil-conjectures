@@ -106,6 +106,7 @@ instance isSemisimpleRepresentation_comp_subtype :
   have hv : v ∈ T' := by rw [hT'top]; trivial
   exact (Subrepresentation.mem_asSubmodule_iff (σ := e.symm T) (v := v)).2 hv
 
+omit [FiniteDimensional k V] [IsSemisimpleRepresentation ρ] in
 /-- A normal subgroup `N` such that the trivial one-dimensional representation is a constituent
 of an irreducible finite-dimensional representation `V` acts trivially on `V`. The restriction
 `V|_N` is semisimple (`Representation.isSemisimpleRepresentation_comp_subtype`), so the

@@ -485,6 +485,7 @@ lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).I
     exact idealSheaf_single P n ▸
       (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow n
 
+include f in
 /-- **Effective divisors are effective Cartier divisors.** On a smooth curve, for every finite
 set `s` of closed points and multiplicities `n`, the ideal sheaf `∏_{P ∈ s} 𝓘_P^{n_P}` of the
 effective divisor `∑_{P ∈ s} n_P [P]` is invertible: each `𝓘_P` is invertible

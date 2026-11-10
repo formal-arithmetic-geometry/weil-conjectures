@@ -110,6 +110,7 @@ theorem exists_lift_forall_aeval_eq (hc : IsColimit c) {σ ι : Type*} [Finite �
       CommRingCat.comp_apply, ← sub_eq_zero, ← map_sub, ← map_sub,
       hf₀ _ (Finset.mem_image_of_mem _ (Finset.mem_univ l)), map_zero]
 
+omit [IsFiltered J] [PreservesColimit F (forget CommRingCat)] in
 /-- Polynomial identities between elements of a stage persist along every transition. -/
 lemma aeval_map_eq_of_aeval_eq {σ : Type*} {j k : J} (f : j ⟶ k) (y : σ → F.obj j)
     {P Q : MvPolynomial σ ℤ} (h : MvPolynomial.aeval y P = MvPolynomial.aeval y Q) :

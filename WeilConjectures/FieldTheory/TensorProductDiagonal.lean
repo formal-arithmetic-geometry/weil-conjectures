@@ -45,6 +45,7 @@ lemma one_tmul_eq_tmul_one (L : IntermediateField F E) {s : E} (hs : s ∈ L) :
     rw [Algebra.smul_def, mul_one]
     rfl
   rw [h, smul_tmul]
+
 /-- **The kernel of multiplication dies at a finite level.** Let `E/F` be algebraic and let
 `x ∈ E ⊗_F E` be killed by the multiplication map `E ⊗_F E → E`. Then the image of `x` in
 `E ⊗_L E` vanishes for some intermediate field `L` which is finite over `F`. -/

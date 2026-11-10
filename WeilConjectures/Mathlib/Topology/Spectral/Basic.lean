@@ -78,6 +78,7 @@ theorem IsCompact.exists_isOpen_isCompact_subset_of_forall_not_specializes [Spec
   obtain ⟨y, hyt, hxUy⟩ : ∃ y ∈ t, x ∈ U y.1 y.2 := by simpa using hxV
   exact hxnU y.1 y.2 hxUy
 
+variable {X} in
 /-- In a spectral space, any compact set closed under generalization equals the intersection of
 all compact opens containing it. -/
 theorem IsCompact.eq_sInter_isOpen_isCompact_of_stableUnderGeneralization [SpectralSpace X]

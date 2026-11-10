@@ -257,11 +257,17 @@ variable {T : Type*} [TopologicalSpace T] [CompactSpace T] (S : DiscreteQuotient
   (f : C(T, ConnectedComponents (PrimeSpectrum A)))
 
 
+
 namespace Pullback
+
+
+
 
 
 variable {T : Type u} [TopologicalSpace T] [CompactSpace T] (S : DiscreteQuotient T)
   (f : C(T, ConnectedComponents (PrimeSpectrum A)))
+
+
 
 
 -- Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting for 1.123

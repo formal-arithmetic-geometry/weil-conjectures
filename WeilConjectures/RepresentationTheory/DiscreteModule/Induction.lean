@@ -259,6 +259,7 @@ lemma cosetRep_eq_of_mul_inv_mem {g g' : G} (h : g' * g⁻¹ ∈ K) :
   congr 1
   exact (Quotient.sound (QuotientGroup.rightRel_apply.2 h)).symm
 
+omit [TopologicalSpace G] [IsTopologicalGroup G] [K.FiniteIndex] in
 lemma cosetRep_eq_out (c : Quotient (QuotientGroup.rightRel K)) :
     cosetRep K c.out = c.out := by
   unfold cosetRep

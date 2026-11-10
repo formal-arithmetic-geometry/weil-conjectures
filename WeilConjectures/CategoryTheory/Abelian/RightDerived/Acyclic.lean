@@ -297,6 +297,7 @@ noncomputable def rightDerivedObjIsoOfResolution (hI : ∀ n, F.rightAcyclic (I.
   (injectiveResolution X).isoRightDerivedObjOfQuasiIso F
     (InjectiveResolution.descOfQuasiIso (𝟙 X) _ ι) hI q
 
+include ι in
 /-- **Acyclic resolutions compute right derived functors.** Let `F : C ⥤ D` be a left exact
 additive functor. If `ι : single₀ X ⟶ I` is a resolution `X → I⁰ → I¹ → ⋯` of `X` by
 `F`-acyclic objects, then `R^q F X ≅ H^q(F I)` for all `q`. The witness is the natural
