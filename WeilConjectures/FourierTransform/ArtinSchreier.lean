@@ -424,7 +424,7 @@ lemma artinSchreierIdempotent_comp_artinSchreierTranslationAction (Ψ : AddChar 
 
 /-- `e_Ψ` is an idempotent. -/
 lemma isIdempotentElem_artinSchreierIdempotent (Ψ : AddChar k Λ) :
-    IsIdempotentElem (M := End 𝒫[Λ, k]) .of ((artinSchreierIdempotent Ψ)) := by
+    IsIdempotentElem (M := End 𝒫[Λ, k]) .of (.of ((artinSchreierIdempotent Ψ))) := by
   change artinSchreierIdempotent Ψ ≫ artinSchreierIdempotent Ψ = artinSchreierIdempotent Ψ
   conv_lhs => arg 2; rw [artinSchreierIdempotent]
   simp only [Preadditive.comp_sum, Linear.comp_smul,

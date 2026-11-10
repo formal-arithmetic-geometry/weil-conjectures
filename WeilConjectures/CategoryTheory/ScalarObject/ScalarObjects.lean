@@ -44,7 +44,7 @@ variable {R : Type r} [Ring R] {C : Type u} [Category.{v} C] [Preadditive C]
 (blueprint: lem-exc-scalar-objects-equivalence) -/
 structure Hom (M N : ScalarObject R C) where
   hom : M.X ⟶ N.X
-  comm : ∀ a : R, M.ρ a ≫ hom = hom ≫ (N.ρ a).asHom
+  comm : ∀ a : R, (M.ρ a).asHom ≫ hom = hom ≫ (N.ρ a).asHom
 
 @[ext] theorem hom_ext {M N : ScalarObject R C} {f g : Hom M N}
     (h : f.hom = g.hom) : f = g := by cases f; cases g; cases h; rfl

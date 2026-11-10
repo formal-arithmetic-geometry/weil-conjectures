@@ -78,7 +78,7 @@ theorem large_hom_solutionSetCondition
     have h := hrel (.inl (a, b))
     change (i (a + b) - i a - i b) ≫ q = 0 at h
     simpa only [Preadditive.sub_comp, sub_sub, sub_eq_zero, Preadditive.add_comp] using h
-  have hsmul (r : R) (a : A) : i (r • a) ≫ q = r.unop ≫ (i a ≫ q) := by
+  have hsmul (r : R) (a : A) : i (r • a) ≫ q = (r.unop).asHom ≫ (i a ≫ q) := by
     have h := hrel (.inr (r, a))
     change (i (r • a) - r.unop ≫ i a) ≫ q = 0 at h
     simpa only [Preadditive.sub_comp, Category.assoc, sub_eq_zero] using h

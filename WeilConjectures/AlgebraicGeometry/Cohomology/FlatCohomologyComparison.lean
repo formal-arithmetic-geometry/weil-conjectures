@@ -303,7 +303,7 @@ def cohomologyComparisonLinear
       G.obj ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))))
     {F : Sheaf J AddCommGrpCat.{u}} {F' : Sheaf K AddCommGrpCat.{u}}
     (φ : G.obj F ⟶ F') (ρ : R →+* End F) (τ : R →+* End F')
-    (h : ∀ a, G.map (ρ a) ≫ φ = φ ≫ (τ a).asHom) (q : ℕ) :
+    (h : ∀ a, G.map ((ρ a)).asHom ≫ φ = φ ≫ (τ a).asHom) (q : ℕ) :
     letI := cohomologyModule F ρ q
     letI := cohomologyModule F' τ q
     F.H q →ₗ[R] F'.H q := by

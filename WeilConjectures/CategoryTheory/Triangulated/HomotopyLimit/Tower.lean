@@ -130,10 +130,10 @@ lemma towerShift_pow_proj (k n : ℕ) :
       P.proj (n + k) ≫ F.map (homOfLE (Nat.le_add_right n k)).op := by
   induction k generalizing n with
   | zero =>
-    rw [pow_zero, End.one_def, id_comp]
+    rw [pow_zero, End.one_asHom, id_comp]
     exact (Category.comp_id _).symm.trans (by congr 1; exact (F.map_id _).symm)
   | succ k ih =>
-    rw [pow_succ, End.mul_def, assoc, ih, towerShift_proj_assoc, ← F.map_comp]
+    rw [pow_succ, End.mul_asHom, assoc, ih, towerShift_proj_assoc, ← F.map_comp]
     rfl
 
 omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
@@ -334,13 +334,13 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
       ((End.of (towerShift hP) ^ j).asHom) = Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, comp_id]
-    | succ j ih => rw [pow_succ, End.mul_def, ← assoc, hℓ, ih]
+    | zero => rw [pow_zero, End.one_asHom, comp_id]
+    | succ j ih => rw [pow_succ, End.mul_asHom, ← assoc, hℓ, ih]
   have hδ : towerShift hP ≫ δ = δ := by
     have : (𝟙 _ - towerShift hP) ≫ δ = 0 := comp_distTriang_mor_zero₂₃ _ hT
     rw [Preadditive.sub_comp, id_comp, sub_eq_zero] at this
     exact this.symm
-  have hδpow : ∀ j : ℕ, (End.of (towerShift hP) ^ j) ≫ δ = δ := by
+  have hδpow : ∀ j : ℕ, ((End.of (towerShift hP) ^ j).asHom) ≫ δ = δ := by
     intro j
     induction j with
     | zero => rw [pow_zero, End.one_def, id_comp]

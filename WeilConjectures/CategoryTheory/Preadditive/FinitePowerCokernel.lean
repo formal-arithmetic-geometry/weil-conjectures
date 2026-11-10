@@ -57,7 +57,7 @@ endomorphism of `X` is invertible, so is every nonzero endomorphism of `Y`. -/
 lemma Functor.isIso_of_ne_zero_end {C : Type*} [Category* C] {D : Type*} [Category* D]
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Full]
     [F.PreservesZeroMorphisms] {X : C} {Y : D} (e : F.obj X ≅ Y)
-    (h : ∀ t : End X, t ≠ 0 → IsIso t) (t : End Y) (ht : t ≠ 0) : IsIso (t).asHom := by
+    (h : ∀ t : End X, t ≠ 0 → IsIso (t).asHom) (t : End Y) (ht : t ≠ 0) : IsIso (t).asHom := by
   obtain ⟨s, hs⟩ := F.map_surjective (e.hom ≫ t ≫ e.inv)
   have hs' : t = e.inv ≫ F.map s ≫ e.hom := by
     simp [hs]
@@ -222,7 +222,7 @@ theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 →
     let e := eX ≪≫ biproductFinSuccIso fun _ : Fin (n + 1) ↦ U
     have hg : g ≫ e.hom = biprod.lift (g ≫ e.hom ≫ biprod.fst) (g ≫ e.hom ≫ biprod.snd) := by
       apply biprod.hom_ext <;> simp
-    by_cases ha : (g ≫ e.hom ≫ biprod.fst : End U) = 0
+    by_cases ha : .of ((g ≫ e.hom ≫ biprod.fst : End U)) = 0
     · obtain ⟨k, ⟨e'⟩⟩ := ih (Iso.refl _) (g ≫ e.hom ≫ biprod.snd)
       rw [ha] at hg
       exact ⟨k + 1, ⟨(cokernelCompIsIso g e.hom).symm ≪≫ cokernelIsoOfEq hg ≪≫

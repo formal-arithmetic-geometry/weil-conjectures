@@ -63,8 +63,8 @@ theorem isDerivedComplete_of_isDerivedLimit_of_nilpotent
       induction r generalizing j with
       | zero => simp
       | succ r ih =>
-        rw [pow_succ, End.mul_def, Category.assoc, ih, Linear.comp_smul]
-        have hsπ : s ≫ Pi.π K (j + r) = a • Pi.π K (j + r + 1) := by
+        rw [pow_succ, End.mul_asHom, Category.assoc, ih, Linear.comp_smul]
+        have hsπ : (s).asHom ≫ Pi.π K (j + r) = a • Pi.π K (j + r + 1) := by
           simp [s, towerProductShift, K]
         rw [hsπ, smul_smul, pow_succ, Nat.add_assoc]
     have hnil : IsNilpotent s := by

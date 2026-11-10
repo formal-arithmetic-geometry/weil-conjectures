@@ -77,8 +77,8 @@ unit of `D(R)`. -/
 lemma ε_Qh_comp_map_single_map_algebraMap_comp_inv (r : R) :
     ε Qh ≫ Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).map
-          (algebraMap R (End (𝟙_ (ModuleCat.{u} R))) r))) ≫ inv (ε Qh) =
-      algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r := by
+          ((algebraMap R (End (𝟙_ (ModuleCat.{u} R))) r)).asHom)) ≫ inv (ε Qh) =
+      (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r).asHom := by
   have : (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).Linear R :=
     inferInstanceAs ((CochainComplex.singleFunctor _ 0).Linear R)
   have hF := Functor.map_smul (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0 ⋙

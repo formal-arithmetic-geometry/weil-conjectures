@@ -81,7 +81,7 @@ noncomputable abbrev presheafFiberAction (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) :
     Action AddCommGrpCat.{w} G where
   V := Φ.presheafFiber.obj P
   ρ :=
-    { toFun σ := Φ.presheafFiberAct act P σ
+    { toFun σ := .of <| Φ.presheafFiberAct act P σ
       map_one' := by
         refine Φ.presheafFiber_hom_ext fun X x ↦ ?_
         rw [toPresheafFiber_presheafFiberAct, act_one_app, End.one_def, Category.comp_id]

@@ -14,8 +14,8 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import WeilConjectures.CategoryTheory.ColimitSiteRawFiniteEqualityStabilization
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
-public import Mathlib.Data.Finite.Prod
-public import Mathlib.Data.Finite.Sigma
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sigma
 
 /-! # Finite raw overlap refinement
 

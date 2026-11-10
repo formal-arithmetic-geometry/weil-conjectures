@@ -171,13 +171,13 @@ private lemma proZero_transition_iso
       Pi.π X (n + k) ≫ K.map (homOfLE (Nat.le_add_right n k)).op := by
     induction k generalizing n with
     | zero =>
-      rw [pow_zero, End.one_def, Category.id_comp]
+      rw [pow_zero, End.one_asHom, Category.id_comp]
       exact (Category.comp_id _).symm.trans (by congr 1; exact (K.map_id _).symm)
     | succ k ih =>
-      rw [pow_succ, End.mul_def, Category.assoc, ih, ← Category.assoc, hs]
+      rw [pow_succ, End.mul_asHom, Category.assoc, ih, ← Category.assoc, hs]
       rw [Category.assoc, ← K.map_comp]
       rfl
-  have hn (n : ℕ) : ∃ k : ℕ, (End.of s ^ k) ≫ Pi.π X n = 0 := by
+  have hn (n : ℕ) : ∃ k : ℕ, ((End.of s ^ k).asHom) ≫ Pi.π X n = 0 := by
     obtain ⟨m, h, hm⟩ := hz n
     obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le h
     refine ⟨k, ?_⟩

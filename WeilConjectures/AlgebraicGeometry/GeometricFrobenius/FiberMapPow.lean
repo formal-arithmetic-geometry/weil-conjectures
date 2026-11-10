@@ -29,8 +29,8 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 @[reassoc]
 theorem geometricFiberMap_comp_geometricGaloisFrobenius_pow (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
     (m : ℕ) :
-    geometricFiberMap φ h ≫ (g.geometricGaloisFrobenius ^ m).hom =
-      (f.geometricGaloisFrobenius ^ m).hom ≫ geometricFiberMap φ h := by
+    geometricFiberMap φ h ≫ (g.geometricGaloisFrobenius ^ m).asIso.hom =
+      (f.geometricGaloisFrobenius ^ m).asIso.hom ≫ geometricFiberMap φ h := by
   induction m with
   | zero => exact (Category.comp_id _).trans (Category.id_comp _).symm
   | succ m ih =>

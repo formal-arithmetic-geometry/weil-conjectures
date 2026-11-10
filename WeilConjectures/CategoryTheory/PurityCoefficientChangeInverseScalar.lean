@@ -25,8 +25,8 @@ Source: inverse scalar convention in coefficient-change normalization
 Proof: its product with the endomorphism is the identity by the unit inverse law;
 cancel that endomorphism against the categorical inverse. -/
 theorem ringInverse_eq_categoricalInv
-    {C : Type u₁} [Category.{v₁} C] [Preadditive C] {X : C} (f : End X) [IsIso f] :
-    Ring.inverse f = .of (inv f) := by
+    {C : Type u₁} [Category.{v₁} C] [Preadditive C] {X : C} (f : End X) [IsIso (f).asHom] :
+    Ring.inverse f = .of (inv (f).asHom) := by
   apply (cancel_mono f).1
   have h := Ring.mul_inverse_cancel f ((isUnit_iff_isIso f).mpr inferInstance)
   change Ring.inverse (M₀ := End X) f ≫ f = 𝟙 X at h
@@ -43,7 +43,7 @@ theorem map_inverse_nsmul_id_natural
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]
     (n : ℕ) (X : C) (Y : D) (e : F.obj X ⟶ Y)
     [IsIso (n • 𝟙 X)] [IsIso (n • 𝟙 Y)] :
-    F.map (Ring.inverse (M₀ := End X) (n • (1 : End X))) ≫ e =
+    F.map ((Ring.inverse (M₀ := End X) (n • (1 : End X)))).asHom ≫ e =
       e ≫ (Ring.inverse (M₀ := End Y) (n • (1 : End Y))).asHom := by
   rw [ringInverse_eq_categoricalInv, ringInverse_eq_categoricalInv, F.map_inv]
   simp only [End.one_def]

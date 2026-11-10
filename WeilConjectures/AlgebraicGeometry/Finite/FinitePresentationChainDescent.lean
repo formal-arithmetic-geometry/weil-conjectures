@@ -25,8 +25,8 @@ import WeilConjectures.AlgebraicGeometry.EventuallyProper
 import WeilConjectures.AlgebraicGeometry.IsOpenImmersion.OpenImmersionInverseLimitDescent
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.DescendSmoothQcqs
 import Mathlib.Order.Filter.AtTopBot.Finite
-public import Mathlib.Data.Finite.Prod
-public import Mathlib.Data.Finite.Sigma
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sigma
 public import Mathlib.Topology.Compactness.Compact
 
 /-!

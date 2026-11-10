@@ -183,7 +183,7 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
         (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv
     ∀ f g : C.right.obj.obj (op ⊤), d.hom (f * g) =
       ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f)).hom (d.hom g) +
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g)).hom (d.hom f) := by
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map ((μ g)).asHom).hom (d.hom f) := by
   classical
   have _ := hsq
   let := HasDerivedCategory.standard

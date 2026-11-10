@@ -50,7 +50,7 @@ lemma specMapIso_hom_comp_pointOfAlgebra (σ : Ω ≃ₐ[K] Ω) :
 /-- The Galois group `Gal(Ω / K)` acts on the fibre functor at the geometric point
 `Spec Ω ⟶ Spec K ⟶ Y`: an automorphism `σ` acts by precomposition with `Spec σ`. -/
 noncomputable def galoisToAut : (Ω ≃ₐ[K] Ω) →* Aut (fiber (pointOfAlgebra Ω y)) where
-  toFun σ := fiberPrecompIso _ (specMapIso σ.toRingEquiv)
+  toFun σ := .of <| fiberPrecompIso _ (specMapIso σ.toRingEquiv)
     (specMapIso_hom_comp_pointOfAlgebra y σ)
   map_one' := by
     ext P t
@@ -67,7 +67,7 @@ noncomputable def galoisToAut : (Ω ≃ₐ[K] Ω) →* Aut (fiber (pointOfAlgebr
 
 lemma galoisToAut_hom_app_left (σ : Ω ≃ₐ[K] Ω) (P : Y.FiniteEtale)
     (t : (fiber (pointOfAlgebra Ω y)).obj P) :
-    ((galoisToAut y σ).hom.app P t).left =
+    ((galoisToAut y σ).asIso.hom.app P t).left =
       Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ t.left :=
   rfl
 
@@ -88,10 +88,10 @@ noncomputable def galoisToFundamentalGroup : (Ω ≃ₐ[K] Ω) →* G :=
 lemma galoisToFundamentalGroup_smul (σ : Ω ≃ₐ[K] Ω) (P : Y.FiniteEtale)
     (t : (fiber (pointOfAlgebra Ω y)).obj P) :
     galoisToFundamentalGroup y τ G σ • τ.hom.app P t =
-      τ.hom.app P ((galoisToAut y σ).hom.app P t) := by
+      τ.hom.app P ((galoisToAut y σ).asIso.hom.app P t) := by
   rw [← toAut_hom_app_apply (F := fiber s) (G := G)]
   change ((toAutMulEquiv (fiber s) G) ((toAutMulEquiv (fiber s) G).symm
-    (Iso.conjAut τ (galoisToAut y σ)))).hom.app P _ = _
+    (Iso.conjAut τ (galoisToAut y σ)))).asIso.hom.app P _ = _
   rw [MulEquiv.apply_symm_apply, Iso.conjAut_hom]
   change (τ.hom.app P) ((galoisToAut y σ).hom.app P ((τ.inv.app P) (τ.hom.app P t))) = _
   rw [← ConcreteCategory.comp_apply (τ.hom.app P) (τ.inv.app P), τ.hom_inv_id_app]

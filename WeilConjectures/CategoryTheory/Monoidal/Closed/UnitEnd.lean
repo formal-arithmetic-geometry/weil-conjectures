@@ -54,7 +54,7 @@ def unitEndAction (X : C) : End (𝟙_ C) →* End X where
 /-- The action of endomorphisms of the unit is natural. -/
 @[reassoc]
 lemma unitEndAction_naturality {X Y : C} (φ : X ⟶ Y) (u : End (𝟙_ C)) :
-    unitEndAction X u ≫ φ = φ ≫ (unitEndAction Y u).asHom := by
+    (unitEndAction X u).asHom ≫ φ = φ ≫ (unitEndAction Y u).asHom := by
   rw [unitEndAction_apply, unitEndAction_apply, Category.assoc, Category.assoc,
     ← rightUnitor_naturality, whisker_exchange_assoc, ← rightUnitor_inv_naturality_assoc]
 
@@ -170,8 +170,8 @@ lemma unitsUnitEndMulEquivAut_apply_hom (X : C) [IsIso (MonoidalClosed.id X)]
 `𝟙_ C ≅ [Y, Y]`: there is a unique unit `u` with `ψ = u • φ`. -/
 theorem existsUnique_hom_eq_comp_unitEndAction {X Y : C} [IsIso (MonoidalClosed.id Y)]
     (φ ψ : X ≅ Y) : ∃! u : (End (𝟙_ C))ˣ, ψ.hom = φ.hom ≫ (unitEndAction Y u).asHom := by
-  let a : Aut Y := φ.symm ≪≫ ψ
-  have ha : Iso.hom a = φ.inv ≫ ψ.hom := rfl
+  let a : Aut Y := .of (φ.symm ≪≫ ψ)
+  have ha : Iso.hom (a).asIso = φ.inv ≫ ψ.hom := rfl
   refine ⟨(unitsUnitEndMulEquivAut Y).symm a, ?_, fun v hv ↦ ?_⟩
   · beta_reduce
     rw [← unitsUnitEndMulEquivAut_apply_hom, MulEquiv.apply_symm_apply, ha, Iso.hom_inv_id_assoc]

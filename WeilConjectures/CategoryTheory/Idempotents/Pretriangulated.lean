@@ -72,7 +72,7 @@ omit [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Addit
   [Pretriangulated C] in
 lemma idemPoly_idem {X : C} (x : X ⟶ X) (h : (x ≫ x - x) ≫ (x ≫ x - x) = 0) :
     idemPoly x ≫ idemPoly x = idemPoly x := by
-  have := idem_of_sub_mul_sub_eq_zero (R := End X) .of (x (by)
+  have := idem_of_sub_mul_sub_eq_zero (R := End X) .of (.of (x (by))
     simp only [End.mul_asHom] at h ⊢
     rw [← h])
   simpa only [End.mul_asHom, idemPoly, assoc] using this

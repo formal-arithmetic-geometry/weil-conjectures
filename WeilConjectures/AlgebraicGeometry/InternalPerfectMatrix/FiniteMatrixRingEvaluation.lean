@@ -21,7 +21,7 @@ Proof: commute the two source scalars and apply preservation of multiplication;
 endomorphism multiplication is reverse categorical composition. -/
 theorem ringEntry_comp {C : Type*} [Category* C] [Preadditive C]
     {R : Type*} [CommRing R] (M : C) (e : R →+* End M) (a b : R) :
-    e a ≫ e b = (e (a * b)).asHom := by
+    e a ≫ (e b).asHom = (e (a * b)).asHom := by
   rw [mul_comm a b, map_mul]
   rfl
 
@@ -36,7 +36,7 @@ theorem ringMatrix_comp {C : Type*} [Category* C] [Preadditive C]
     (M : C) (e : R →+* End M) {I J K : Type} [Finite I] [Fintype J] [Finite K]
     (a : I → J → R) (b : J → K → R) :
     biproduct.matrix (fun i j ↦ e (a i j)) ≫
-      biproduct.matrix (fun j k ↦ e (b j k)) =
+      biproduct.matrix (fun j k ↦ (e (b j k)).asHom) =
         biproduct.matrix (fun i k ↦ (e (∑ j, a i j * b j k)).asHom) := by
   apply biproduct.hom_ext'
   intro i
@@ -57,7 +57,7 @@ theorem ringMatrix_add {C : Type*} [Category* C] [Preadditive C]
     (M : C) (e : R →+* End M) {I J : Type} [Finite I] [Finite J]
     (a b : I → J → R) :
     biproduct.matrix (fun i j ↦ e (a i j + b i j)) =
-      biproduct.matrix (fun i j ↦ e (a i j)) +
+      biproduct.matrix (fun i j ↦ (e (a i j)).asHom) +
         biproduct.matrix (fun i j ↦ (e (b i j)).asHom) := by
   ext i j
   simp [biproduct.matrix, map_add, Preadditive.comp_add, Preadditive.add_comp]
@@ -70,7 +70,7 @@ theorem ringMatrix_units_smul {C : Type*} [Category* C] [Preadditive C]
     [HasFiniteBiproducts C] {R : Type*} [CommRing R]
     (M : C) (e : R →+* End M) {I J : Type} [Finite I] [Finite J]
     (a : I → J → R) (s : ℤˣ) :
-    biproduct.matrix (fun i j ↦ e (s • a i j)) =
+    biproduct.matrix (fun i j ↦ (e (s • a i j)).asHom) =
       s • biproduct.matrix (fun i j ↦ (e (a i j)).asHom) := by
   ext i j
   simp only [biproduct.matrix, Units.smul_def, map_zsmul,

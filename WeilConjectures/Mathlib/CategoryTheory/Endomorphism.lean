@@ -63,7 +63,7 @@ lemma asHom_pow_comp_eq_comp_asHom_pow {a : Y ⟶ Y} {b : X ⟶ X} {p : Y ⟶ X}
 
 /-- If `x ≫ A = S ≫ x` then `x ≫ A ^ j = S ^ j ≫ x` for the monoid powers in `End`. -/
 lemma comp_pow_eq_pow_comp {W X : C} (x : W ⟶ X) (A : End X)
-    (S : End W) (h : x ≫ A = S ≫ x) (j : ℕ) : x ≫ (A ^ j : End X) = ((S ^ j : End W)).asHom ≫ x := by
+    (S : End W) (h : x ≫ A = S ≫ x) (j : ℕ) : x ≫ ((A ^ j : End X)).asHom = ((S ^ j : End W)).asHom ≫ x := by
   induction j with
   | zero => rw [pow_zero, pow_zero, End.one_def, End.one_def, Category.comp_id, Category.id_comp]
   | succ j ih =>

@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 public import Mathlib.CategoryTheory.Elements
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Limits.Final
-public import Mathlib.Data.Finite.Prod
-public import Mathlib.Data.Finite.Sigma
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sigma
 
 /-!
 # Finite initial truncation of the simplicial indexing category

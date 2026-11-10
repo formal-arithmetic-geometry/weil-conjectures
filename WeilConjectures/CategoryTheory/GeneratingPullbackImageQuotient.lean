@@ -64,7 +64,7 @@ private theorem ideal_unit_endomorphism
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) :
     ∃ a : M ⟶ M, a ≫ j = j ≫ (δ).asHom := by
   let s := (SheafOfModules.unit
-    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).unitHomEquiv δ
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).unitHomEquiv (δ).asHom
   let a : M ⟶ M := ⟨PresheafOfModules.sectionsSMul M.val ⟨s.val, s.property⟩⟩
   refine ⟨a, ?_⟩
   ext W x
@@ -253,8 +253,8 @@ theorem exists_ringed_image_ideal_quotient
     rw [Category.assoc, hb, hcanonical, ← Category.assoc,
       ← ε.inv.naturality ιY, Category.assoc]
   let δ : SheafOfModules.unit B ≅ SheafOfModules.unit B := vG.symm ≪≫ u
-  obtain ⟨a, ha⟩ := ideal_unit_endomorphism RX IX ιX δ.hom
-  obtain ⟨a', ha'⟩ := ideal_unit_endomorphism RX IX ιX δ.inv
+  obtain ⟨a, ha⟩ := ideal_unit_endomorphism RX IX ιX .of (δ.hom)
+  obtain ⟨a', ha'⟩ := ideal_unit_endomorphism RX IX ιX .of (δ.inv)
   have haa : a' ≫ a = 𝟙 IX := by
     apply (cancel_mono ιX).mp
     rw [Category.assoc, ha, ← Category.assoc, ha', Category.assoc,

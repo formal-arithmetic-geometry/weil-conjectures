@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.Subcanonical
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # Gluing a representation after effective descent

@@ -82,7 +82,7 @@ theorem splitProjector_π (d : G) :
     (Pi.lift_comp_π (fun d ↦ Pi.π (fun _ : G ↦ U) (d + c)) d)
 
 theorem splitProjector_eigen (d : G) :
-    splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) d =
+    (splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) d =
       χ d • ((splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0) := by
   rw [splitProjector_π, splitProjector_π, Finset.smul_sum]
   apply Fintype.sum_equiv (Equiv.addLeft d)
@@ -116,7 +116,7 @@ theorem splitCharacterVector_projector
 
 /-- The averaging endomorphism factors through its value at zero. -/
 theorem splitProjector_factor :
-    (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫ splitCharacterVector U χ =
+    ((splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0) ≫ splitCharacterVector U χ =
       (splitProjector U χ).asHom := by
   apply Pi.hom_ext
   intro d
@@ -125,7 +125,7 @@ theorem splitProjector_factor :
 
 /-- The finite average is idempotent when the group order is invertible. -/
 theorem splitProjector_idempotent (hq : IsUnit (Fintype.card G : R)) :
-    splitProjector U χ ≫ splitProjector U χ = (splitProjector U χ).asHom := by
+    splitProjector U χ ≫ (splitProjector U χ).asHom = (splitProjector U χ).asHom := by
   calc
     _ = (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫
         splitCharacterVector U χ ≫ splitProjector U χ := by
@@ -141,7 +141,7 @@ def actionProjector (M : C) (σ : G → End M) (χ : AddChar G R) : End M :=
 /-- Reindexing the finite average gives its character eigenrelation. -/
 theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (b : G) :
-    actionProjector M σ χ ≫ σ b = (χ b • actionProjector M σ χ).asHom := by
+    actionProjector M σ χ ≫ (σ b).asHom = (χ b • actionProjector M σ χ).asHom := by
   unfold actionProjector
   rw [Preadditive.sum_comp, Finset.smul_sum]
   apply Fintype.sum_equiv (Equiv.addRight b)
@@ -165,7 +165,7 @@ theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
 /-- Averaging is idempotent whenever the group order is invertible. -/
 theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (hq : IsUnit (Fintype.card G : R)) :
-    actionProjector M σ χ ≫ actionProjector M σ χ = (actionProjector M σ χ).asHom := by
+    actionProjector M σ χ ≫ (actionProjector M σ χ).asHom = (actionProjector M σ χ).asHom := by
   conv_lhs => arg 2; rw [actionProjector]
   rw [Preadditive.comp_sum]
   have ht (c : G) : actionProjector M σ χ ≫
@@ -192,7 +192,7 @@ Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, first paragra
 root evaluation (blueprint: lem-wft-as-split-character-projector). -/
 def splitProjectorImageIso (hq : IsUnit (Fintype.card G : R)) :
     image ((splitProjector U χ)).asHom ≅ U := by
-  let r := splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0
+  let r := (splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0
   let j := splitCharacterVector U χ
   have hjr : j ≫ r = 𝟙 U := by
     dsimp only [j, r]
@@ -208,7 +208,7 @@ def splitProjectorImageIso (hq : IsUnit (Fintype.card G : R)) :
 theorem splitProjectorImageIso_hom (hq : IsUnit (Fintype.card G : R)) :
     (splitProjectorImageIso U χ hq).hom =
       image.ι ((splitProjector U χ)).asHom ≫ Pi.π (fun _ : G ↦ U) 0 := by
-  let r := splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0
+  let r := (splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0
   let j := splitCharacterVector U χ
   have hjr : j ≫ r = 𝟙 U := by
     dsimp only [j, r]

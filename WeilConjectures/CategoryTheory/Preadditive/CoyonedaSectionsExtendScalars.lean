@@ -55,7 +55,7 @@ variable {C₁ C₂ : Type*} [Category.{w} C₁] [Category.{w} C₂] [Preadditiv
   {A B : Type w} [CommRing A] [CommRing B] (f : A →+* B)
   {X₁ : C₁} {X₂ : C₂} (c₁ : A →+* (End X₁)ᵐᵒᵖ) (c₂ : B →+* (End X₂)ᵐᵒᵖ)
   (H : C₁ ⥤ C₂) [H.Additive] (e : H.obj X₁ ≅ X₂)
-  (hH : ∀ a, e.inv ≫ H.map (c₁ a).unop = ((c₂ (f a))).asHom.unop ≫ e.inv)
+  (hH : ∀ a, e.inv ≫ H.map ((c₁ a)).asHom.unop = ((c₂ (f a))).asHom.unop ≫ e.inv)
 
 /-- The `A`-linear map `Hom(X₁, M) ⟶ Hom(X₂, H M)`, `m ↦ e⁻¹ ≫ H m`. -/
 noncomputable def coyonedaSectionsMap :

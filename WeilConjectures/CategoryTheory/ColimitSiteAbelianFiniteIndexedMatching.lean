@@ -11,6 +11,8 @@ public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Mathlib.CategoryTheory.Filtered.Final
 import WeilConjectures.CategoryTheory.ColimitSiteAbelianPairwiseEventualMatching
+public import Mathlib.Data.Finite.Prod
+public import Mathlib.Data.Finite.Sigma
 
 /-! # Finite matching equations at a common transition
 

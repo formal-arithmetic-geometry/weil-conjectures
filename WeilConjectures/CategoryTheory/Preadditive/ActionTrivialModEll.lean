@@ -55,7 +55,7 @@ variable {C : Type*} [Category C] [Preadditive C]
 ```
 Then `ρ τ = 1 + ℓ g`, and `ρ (τ ^ ℓ ^ m) - 1` is divisible by `ℓ ^ (m + 1)`. -/
 theorem End.exists_map_pow_sub_one_eq_pow_smul {Y Z : C} (π : Y ⟶ Z) {ℓ : ℕ}
-    (hπ : ∀ f : End Y, f ≫ π = 0 → ∃ g : End Y, f = ℓ • g)
+    (hπ : ∀ f : End Y, (f).asHom ≫ π = 0 → ∃ g : End Y, f = ℓ • g)
     {G : Type*} [Group G] (ρ : G →* End Y) (hρ : ∀ τ, (ρ τ).asHom ≫ π = π) (m : ℕ) (τ : G) :
     ∃ y : End Y, ρ (τ ^ ℓ ^ m) - 1 = (ℓ ^ (m + 1)) • y := by
   obtain ⟨g, hg⟩ := hπ (ρ τ - 1) (by
@@ -69,7 +69,7 @@ theorem End.exists_map_pow_sub_one_eq_pow_smul {Y Z : C} (π : Y ⟶ Z) {ℓ : �
 `ℓ`. A group in which every element is an `ℓ ^ m`-th power, acting on `Y` by `ρ` with
 `ρ τ ≫ π = π` for all `τ` (as in `End.exists_map_pow_sub_one_eq_pow_smul`), acts trivially. -/
 theorem End.eq_one_of_comp_eq_of_forall_exists_pow {Y Z : C} (π : Y ⟶ Z) {ℓ m : ℕ}
-    (hℓ : (ℓ ^ m) • 𝟙 Y = 0) (hπ : ∀ f : End Y, f ≫ π = 0 → ∃ g : End Y, f = ℓ • g)
+    (hℓ : (ℓ ^ m) • 𝟙 Y = 0) (hπ : ∀ f : End Y, (f).asHom ≫ π = 0 → ∃ g : End Y, f = ℓ • g)
     {G : Type*} [Group G] (ρ : G →* End Y) (hρ : ∀ τ, (ρ τ).asHom ≫ π = π)
     (hdiv : ∀ σ : G, ∃ τ, τ ^ ℓ ^ m = σ) (σ : G) : ρ σ = 1 := by
   obtain ⟨τ, rfl⟩ := hdiv σ
@@ -84,7 +84,7 @@ element is an `ℓ ^ m`-th power for every `m`, acting on `Y` by `ρ` with `ρ �
 `τ` (as in `End.exists_map_pow_sub_one_eq_pow_smul`), acts trivially. -/
 theorem End.eq_one_of_comp_eq_of_forall_exists_pow_of_separated {Y Z : C} (π : Y ⟶ Z)
     {ℓ : ℕ} (hsep : ∀ f : End Y, (∀ m : ℕ, ∃ g : End Y, f = (ℓ ^ m) • g) → f = 0)
-    (hπ : ∀ f : End Y, f ≫ π = 0 → ∃ g : End Y, f = ℓ • g)
+    (hπ : ∀ f : End Y, (f).asHom ≫ π = 0 → ∃ g : End Y, f = ℓ • g)
     {G : Type*} [Group G] (ρ : G →* End Y) (hρ : ∀ τ, (ρ τ).asHom ≫ π = π)
     (hdiv : ∀ (m : ℕ) (σ : G), ∃ τ, τ ^ ℓ ^ m = σ) (σ : G) : ρ σ = 1 := by
   rw [← sub_eq_zero]
@@ -106,7 +106,7 @@ every endomorphism `f` of `Y` with `f ≫ π = 0` factors through `u`, so it is 
 theorem exists_eq_nsmul_of_comp_eq_zero {Y Z : C} {ℓ : ℕ} {u : Y ⟶ Y} (π : Y ⟶ Z)
     (δ : Z ⟶ Y⟦(1 : ℤ)⟧) (hT : Triangle.mk u π δ ∈ distTriang C) (hu : u = ℓ • 𝟙 Y)
     (f : End Y) (hf : (f).asHom ≫ π = 0) : ∃ g : End Y, f = ℓ • g := by
-  obtain ⟨g, hg⟩ : ∃ g : Y ⟶ Y, f = g ≫ u := Triangle.coyoneda_exact₂ _ hT f hf
+  obtain ⟨g, hg⟩ : ∃ g : Y ⟶ Y, f = .of (g) ≫ u := Triangle.coyoneda_exact₂ _ hT f hf
   exact ⟨g, by rw [hg, hu, Preadditive.comp_nsmul, Category.comp_id]⟩
 
 end Pretriangulated

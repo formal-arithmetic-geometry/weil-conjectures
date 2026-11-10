@@ -140,7 +140,7 @@ private theorem sequenceDifference_nilpotent
     induction r generalizing j with
     | zero => simp
     | succ r ih =>
-      rw [pow_succ, End.mul_def, Category.assoc, ih]
+      rw [pow_succ, End.mul_asHom, Category.assoc, ih]
       simp only [s, Preadditive.nsmul_comp, Preadditive.comp_nsmul, Pi.lift_comp_π]
       rw [smul_smul, ← pow_succ]
       simp only [Nat.add_assoc]

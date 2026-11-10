@@ -67,7 +67,7 @@ lemma smul_natCast_eq_nsmul {X Y : C} (φ : R →+* End Y) (n : ℕ) (k : ℕ) (
 /-- Postcomposition with a morphism `g : Y ⟶ Y'` commuting with actions `φ`, `φ'` of `R` is an
 `R`-linear map `Ext X Y n ⟶ Ext X Y' n`. -/
 noncomputable def postcompLinearMap {X Y Y' : C} (φ : R →+* End Y) (φ' : R →+* End Y')
-    (g : Y ⟶ Y') (hg : ∀ r, φ r ≫ g = g ≫ (φ' r).asHom) (n : ℕ) :
+    (g : Y ⟶ Y') (hg : ∀ r, (φ r).asHom ≫ g = g ≫ (φ' r).asHom) (n : ℕ) :
     letI := moduleOfRingHom (X := X) φ n
     letI := moduleOfRingHom (X := X) φ' n
     Ext X Y n →ₗ[R] Ext X Y' n :=
@@ -82,7 +82,7 @@ noncomputable def postcompLinearMap {X Y Y' : C} (φ : R →+* End Y) (φ' : R �
         mk₀_comp_mk₀, hg] }
 
 lemma postcompLinearMap_apply {X Y Y' : C} (φ : R →+* End Y) (φ' : R →+* End Y')
-    (g : Y ⟶ Y') (hg : ∀ r, φ r ≫ g = g ≫ (φ' r).asHom) (n : ℕ) (x : Ext X Y n) :
+    (g : Y ⟶ Y') (hg : ∀ r, (φ r).asHom ≫ g = g ≫ (φ' r).asHom) (n : ℕ) (x : Ext X Y n) :
     postcompLinearMap (X := X) φ φ' g hg n x = x.comp (mk₀ g) (add_zero n) :=
   rfl
 

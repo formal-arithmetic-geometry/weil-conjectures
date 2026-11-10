@@ -56,7 +56,7 @@ lemma isGalois_of_iso {X Y : C} (e : X ≅ Y) [IsGalois X] : IsGalois Y := by
   rw [isGalois_iff_pretransitive F]
   refine ⟨fun y₁ y₂ ↦ ?_⟩
   obtain ⟨σ, hσ⟩ := MulAction.exists_smul_eq (Aut X) (F.map e.inv y₁) (F.map e.inv y₂)
-  refine ⟨e.symm ≪≫ (σ ≪≫ e).asIso, ?_⟩
+  refine ⟨e.symm ≪≫ ((σ ≪≫ e).asIso).asIso, ?_⟩
   change F.map (e.inv ≫ σ.asIso.hom ≫ e.hom) y₁ = y₂
   change F.map σ.hom (F.map e.inv y₁) = F.map e.inv y₂ at hσ
   rw [F.map_comp, F.map_comp, FintypeCat.comp_apply, FintypeCat.comp_apply, hσ,
