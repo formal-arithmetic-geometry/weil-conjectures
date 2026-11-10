@@ -24,6 +24,7 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
+attribute [local irreducible] schemeMVUnderivedOpenRestriction
 
 set_option maxHeartbeats 800000 in
 -- Quotient transport elaborates several derived-category and sheaf-category conversions.
