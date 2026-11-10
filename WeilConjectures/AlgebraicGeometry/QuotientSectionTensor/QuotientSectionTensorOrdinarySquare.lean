@@ -215,7 +215,6 @@ private theorem scalar_unit_image (T : Scheme.{u})
 attribute [local irreducible] ordinaryTensorComparison Mod.extendRestrictAdjunction
   sectionScalarElement Mod.extendScalarsObj
 
-set_option maxHeartbeats 800000 in
 -- Compare the concrete scalar-unit formulas through the section equivalence.
 /-- The scalar section comparison intertwines the ordinary tensor constraints.
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.

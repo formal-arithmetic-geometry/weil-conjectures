@@ -25,7 +25,7 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Normalizing the two continuous module functors needs the upstream normalization budget.
 /-- Direct-image evaluation retains sections in the native evaluation carrier.
 Source: Zheng, Construction 4.1 (blueprint: lem-sf-scalar-evaluation-direct-sections).

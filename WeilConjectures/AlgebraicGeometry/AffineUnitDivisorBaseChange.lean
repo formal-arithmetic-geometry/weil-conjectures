@@ -131,8 +131,8 @@ theorem affine_unit_divisor_base_change
   let : Smooth f' := (baseChange_curve (k' := k') f).2.2.1 inferInstance
   let : IsConnectedCurve c'.g := (baseChange_curve (k' := k') c.g).2.2.2.2.2 inferInstance
   let : Smooth c'.g := (baseChange_curve (k' := k') c.g).2.2.1 inferInstance
-  let : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace' c.g
-  let : ConnectedSpace c'.Z := IsConnectedCurve.connectedSpace' c'.g
+  let : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace (f := c.g)
+  let : ConnectedSpace c'.Z := IsConnectedCurve.connectedSpace (f := c'.g)
   let : IsNoetherian c.Z := isNoetherian_of_locallyOfFiniteType c.g
   let : IsRegular c.Z := IsRegular.of_smooth c.g
   let : IsIntegral c.Z := IsRegular.isIntegral c.Z

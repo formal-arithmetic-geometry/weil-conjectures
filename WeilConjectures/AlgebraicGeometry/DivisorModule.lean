@@ -287,7 +287,7 @@ noncomputable def moduleOfSmoothConnectedCurve (k : Type u) [Field k] [IsAlgClos
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (D : C.Divisor) : C.Modules :=
   letI : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
-  letI : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  letI : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   letI : IsRegular C := IsRegular.of_smooth f
   letI : IsIntegral C := IsRegular.isIntegral C
   D.associatedModule C

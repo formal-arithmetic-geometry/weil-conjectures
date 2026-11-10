@@ -79,7 +79,7 @@ set_option maxRecDepth 2048 in
 attribute [local irreducible] Modules.tensorPullback picardDirectImageUnitMorphism in
 set_option cleanup.letToHave false in
 -- Preserve the explicit signature lets; cleanup expands the large tensor-adjunction choices.
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- Fixed derived choices and single-functor comparisons need a larger elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

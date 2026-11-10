@@ -30,7 +30,7 @@ variable {X : Scheme.{u}}
   [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetricCategory
-  cupRealizationHasColimitsOfSize cupRealizationMonoidalPreadditive cupRealizationMonoidalClosed
+  globalPullbackMatesColimits cupRealizationMonoidalPreadditive cupRealizationMonoidalClosed
   cupRealizationHasFunctorialFlatResolution cupRealizationIsGrothendieckAbelian
   cupRealizationDerivedMonoidal cupRealizationQLax
 

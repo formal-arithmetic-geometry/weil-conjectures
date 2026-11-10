@@ -7,13 +7,15 @@ module
 
 public import Mathlib.CategoryTheory.Sites.LocalSite
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 /-!
 # Étale sheaves on a separably closed point are constant
 
 Let `k` be a separably closed field. Every covering sieve of `Spec k` in the small étale site
 contains the identity, so the small étale site of `Spec k` is a local site
-(`AlgebraicGeometry.Scheme.isLocalSite_smallEtaleTopology_of_isSepClosed`) and the constant
+(`AlgebraicGeometry.Scheme.isLocalSite_smallEtaleTopology_of_isSepClosed_derived`) and the constant
 sheaf functor is fully faithful. An étale sheaf of `Λ`-modules on `Spec k` with no global
 sections is zero, and taking global sections is exact, so taking global sections reflects
 isomorphisms. Hence the constant sheaf functor `ModuleCat Λ ⥤ Sheaf (Spec k)_ét (ModuleCat Λ)`
@@ -32,23 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (k : Type u) [Field k] [IsSepClosed k]
 
-/-- Over a separably closed field `k`, the small étale site of `Spec k` is a local site: its
-terminal object `Spec k` has only the trivial covering sieve. -/
-instance isLocalSite_smallEtaleTopology_of_isSepClosed :
-    (Spec (.of k)).smallEtaleTopology.IsLocalSite where
-  toHasLimitsOfShape := isTerminalEtalePoint.hasTerminal
-  eq_top_of_mem S hS := by
-    have h := id_mem_of_mem_smallEtaleTopology_of_isSepClosed k _
-      ((Spec (.of k)).smallEtaleTopology.pullback_stable (terminal.from (etalePoint k)) hS)
-    have h' := S.downward_closed h (isTerminalEtalePoint.from (⊤_ _))
-    rw [show isTerminalEtalePoint.from (⊤_ _) ≫ 𝟙 _ ≫ terminal.from (etalePoint k) = 𝟙 _ from
-      terminal.hom_ext _ _] at h'
-    exact (Sieve.id_mem_iff_eq_top).1 h'
-
 variable (Λ : Type (u + 1)) [Ring Λ]
-
-local instance localInstance_PointConstantSheaf_1 : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
-  hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
 
 local instance localInstance_PointConstantSheaf_2 :
     HasColimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=

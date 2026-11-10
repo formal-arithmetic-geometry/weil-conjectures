@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
@@ -296,7 +297,7 @@ noncomputable def Etale.isoOfIsUniversalSection {ξ : E.obj (op (Etale.trivialCo
         Etale.mk (W₂.unop.hom ≫ U.hom) ⟶ Etale.mk (W₁.unop.hom ≫ U.hom)).op (κ W₁.unop f)
   simp only [κ]
   rw [← Functor.map_comp_apply, ← op_comp]
-  refine congrArg (fun g ↦ E.map (Opposite.op g) ξ) (Etale.hom_ext ?_)
+  refine congrArg (fun g ↦ E.map (Opposite.op g) ξ) (EtaleTorsor.etaleHom_ext ?_)
   change (sigmaHomEquiv e W₂.unop.hom (f.comp φ.unop.left.base.hom)).1 =
     φ.unop.left ≫ (sigmaHomEquiv e W₁.unop.hom f).1
   exact sigmaHomEquiv_comp' e φ.unop.left _ (MorphismProperty.Over.w φ.unop) f
@@ -306,7 +307,7 @@ lemma Etale.restrictPresheaf_map_eq {W₁ W₂ : U.left.Etale} (a : W₁ ⟶ W�
     (b : Etale.mk (W₁.hom ≫ U.hom) ⟶ Etale.mk (W₂.hom ≫ U.hom)) (hab : b.left = a.left)
     (x : E.obj (op (Etale.mk (W₂.hom ≫ U.hom)))) :
     (Etale.restrictPresheaf E U).map a.op x = E.map b.op x :=
-  congrArg (fun g ↦ E.map (Opposite.op g) x) (Etale.hom_ext hab.symm)
+  congrArg (fun g ↦ E.map (Opposite.op g) x) (EtaleTorsor.etaleHom_ext hab.symm)
 
 /-- **An identification with locally constant functions gives a universal section.** If the
 restriction of `E` to `U` is identified with the sheaf of locally constant `A`-valued functions,
@@ -326,7 +327,8 @@ lemma Etale.isUniversalSection_of_iso
       {a : W ⟶ ∐ fun _ : S' ↦ U.left // a ≫ Sigma.desc (fun _ ↦ 𝟙 U.left) = w} :=
     fun a ↦ ⟨a.1.left, a.2⟩
   have hψ : Function.Bijective ψ := by
-    refine ⟨fun a b hab ↦ Subtype.ext (Etale.hom_ext (congrArg Subtype.val hab)), fun b ↦ ?_⟩
+    refine ⟨fun a b hab ↦ Subtype.ext (EtaleTorsor.etaleHom_ext (congrArg Subtype.val hab)),
+      fun b ↦ ?_⟩
     refine ⟨⟨MorphismProperty.Over.homMk b.1 ?_, b.2⟩, rfl⟩
     exact (Category.assoc _ _ _).symm.trans (congrArg (· ≫ U.hom) b.2)
   have key : α.hom.app (op W'') ∘ (fun a : {a : Etale.mk (w ≫ U.hom) ⟶ Etale.trivialCover U S' //

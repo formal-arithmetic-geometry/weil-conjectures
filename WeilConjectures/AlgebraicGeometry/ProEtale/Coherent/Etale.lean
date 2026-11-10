@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.LimitsOver
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
@@ -327,12 +329,6 @@ lemma Scheme.Etale.forget_map {S : Scheme} {X Y : S.Etale} (f : X ⟶ Y) :
 
 instance {S : Scheme} {X Y : S.Etale} (f : X ⟶ Y) : Etale f.left :=
   MorphismProperty.of_postcomp @Etale f.left Y.hom Y.prop (by simp [X.prop])
-
--- These are regressions in mathlib
-instance (S : Scheme) : (Scheme.Etale.forget S).Full :=
-  inferInstanceAs <| (MorphismProperty.Over.forget _ _ _).Full
-instance (S : Scheme) : (Scheme.Etale.forget S).Faithful :=
-  inferInstanceAs <| (MorphismProperty.Over.forget _ _ _).Faithful
 
 /-- A morphism in the small étale site is an epimorphism if and only if it is surjective. -/
 instance Scheme.Etale.effectiveEpi_of_surjective {S : Scheme} {X Y : S.Etale} (f : X ⟶ Y)

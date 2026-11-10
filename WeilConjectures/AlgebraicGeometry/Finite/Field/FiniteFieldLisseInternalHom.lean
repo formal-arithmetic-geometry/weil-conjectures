@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheafOfUniverses
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
@@ -165,14 +166,7 @@ attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The existing locally bijective criterion in the fixed finite-coefficient universe.
-This specializes the general coefficient-universe instance explicitly, so that an
-unrelated completed-coefficient instance cannot leave a free universe metavariable.
-Source: Stacks Project, Modules on Sites, Section 03DA
-(blueprint: lem-sfb-finite-field-lisse-internal-hom). -/
-instance finiteFieldInternalHom_locallyBijective (S : Scheme.{u}) :
-    (ProEt.topology S).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1}
+attribute [local instance] WeilConjectures.sfAbBijective
 
 /-- The bifunctor `(L,N) ↦ H^r RHom(L[0],N)` on the ordinary constant-ring module
 category. The first variable is contravariant. Source: the K-injective construction

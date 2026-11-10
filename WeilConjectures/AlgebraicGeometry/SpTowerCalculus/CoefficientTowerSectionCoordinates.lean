@@ -54,7 +54,6 @@ private theorem hom_function_heq {R : Type*} [Ring R]
   cases hfg
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the two concrete ring-presheaf presentations requires unfolding their objects.
 private theorem evaluation_restrictions (b : SpTowerShriek.Base l E)
     (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
@@ -90,7 +89,6 @@ private theorem evaluation_restrictions (b : SpTowerShriek.Base l E)
     (((spCoefficientRing l E T n).obj).map f).hom).obj
     (eq_of_heq ((b.sections T M n V).trans (D.sections M n V).symm))
 
-set_option maxHeartbeats 2000000 in
 -- Evaluation changes scalar actions but leaves these underlying section functions intact.
 private theorem evaluation_maps (b : SpTowerShriek.Base l E)
     (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)

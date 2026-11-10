@@ -120,7 +120,7 @@ curve consists of closed points. -/
 lemma Compactification.isClosed_singleton_of_notMem_range (c : Compactification f)
     [IsConnectedCurve c.g] [Smooth c.g] [Nonempty C] {x : c.Z} (hx : x ∉ Set.range c.i) :
     IsClosed {x} := by
-  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.connectedSpace (f := c.g)
   have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
   have : IsRegular c.Z := IsRegular.of_smooth c.g
   have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z
@@ -182,7 +182,7 @@ theorem IsConnectedCurve.baseChangeField_of_compactification [IsAlgClosed k] [Is
   have : Smooth (c.g.baseChangeField k') := hs'.smooth
   have := IsConnectedCurve.baseChangeField c.g k'
   have : ConnectedSpace (c.baseChangeField k').Z :=
-    IsConnectedCurve.connectedSpace' (c.g.baseChangeField k')
+    IsConnectedCurve.connectedSpace (f := c.g.baseChangeField k')
   have : IsLocallyNoetherian (c.baseChangeField k').Z :=
     LocallyOfFiniteType.isLocallyNoetherian (c.g.baseChangeField k')
   have : IsRegular (c.baseChangeField k').Z := IsRegular.of_smooth (c.g.baseChangeField k')
@@ -214,7 +214,7 @@ compactification of the smooth affine connected curve `C_{k'}`, of genus `g`
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have := IsConnectedCurve.nonempty f
   have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
   have : QuasiSeparatedSpace C := (quasiSeparated_iff_quasiSeparatedSpace f).mp inferInstance

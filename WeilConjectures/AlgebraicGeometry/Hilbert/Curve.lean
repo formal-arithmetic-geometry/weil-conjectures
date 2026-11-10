@@ -1226,7 +1226,7 @@ theorem isProper_and_geometricallyIntegral_of_representableBy_hilbertPresheaf_cu
     exists_surjective_of_representableBy_hilbertPresheaf_curve f d H e
   have : UniversallyClosed H.hom := UniversallyClosed.of_comp_surjective π H.hom
   refine ⟨⟨⟩, ?_⟩
-  have := GeometricallyReduced.of_smooth H.hom
+  have := Smooth.geometricallyReduced H.hom
   have : GeometricallyIrreducible H.hom := by
     refine ⟨geometrically_iff_of_isClosedUnderIsomorphisms.mpr fun K _ y ↦ ?_⟩
     have : IrreducibleSpace ↥(Limits.pullback (π ≫ H.hom) y) :=

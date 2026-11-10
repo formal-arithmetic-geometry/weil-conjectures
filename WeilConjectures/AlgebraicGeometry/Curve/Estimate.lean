@@ -63,7 +63,7 @@ that `C` is connected, so `k` need not be algebraically closed.
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) :=
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   Scheme.nonempty_addEquiv_sheafH_zero_constantZMod C n
 
 /-- A primitive `n`-th root of unity identifies `H^q(C, ℤ/n)` with `H^q(C, μₙ)`. -/
@@ -92,7 +92,7 @@ After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H¹(C, 
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   let : C.Over (Spec (.of k)) := ⟨f⟩
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
     IsConnectedCurve.smoothOfRelativeDimension_one f
@@ -119,7 +119,7 @@ After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H²(C, 
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   let : C.Over (Spec (.of k)) := ⟨f⟩
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
     IsConnectedCurve.smoothOfRelativeDimension_one f

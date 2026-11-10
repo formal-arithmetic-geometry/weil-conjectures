@@ -27,7 +27,7 @@ def geoCartierEtaleClass (A : Type (u + 1)) [CommRing A] [Finite A]
     (hZ : IsUnit (n : Γ(Z, ⊤))) :
     Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))
       (Scheme.finiteEtaleTateLine Z n A hA) 2 :=
-  Classical.choose (ordinary_supported_kummer_uniqueBoundary Z n hn A hA hZ i hI)
+  Classical.choose (supported_cartier_boundary_existsUnique Z n hn A hA hZ i hI)
 
 /-- The canonical class has the specified boundary and is its only representative.
 Source: blueprint sk-lem-geo-cartier, construction and local lifts
@@ -45,6 +45,6 @@ theorem geoCartierEtaleClass_spec (A : Type (u + 1)) [CommRing A] [Finite A]
         SupportedKummerBoundary A n hA i hI hZ κ →
           κ = geoCartierEtaleClass A n hn hA i hI hZ := by
   exact Classical.choose_spec
-    (ordinary_supported_kummer_uniqueBoundary Z n hn A hA hZ i hI)
+    (supported_cartier_boundary_existsUnique Z n hn A hA hZ i hI)
 
 end AlgebraicGeometry.Etale

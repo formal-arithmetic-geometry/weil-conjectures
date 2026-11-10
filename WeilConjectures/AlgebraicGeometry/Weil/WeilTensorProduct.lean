@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.SixFunctors.Supporting.PbcWeilCategory
 public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedTensorReflector
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
@@ -208,8 +209,7 @@ private theorem scalarLocalization_bilinear_naturality
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
   (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
 
-local instance wfSiteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
-  essentiallySmallSelf.{0, u, u + 1} _
+attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 /-- Ordinary uncompleted derived tensor over the actual completed coefficient sheaf.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/

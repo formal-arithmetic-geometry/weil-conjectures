@@ -23,6 +23,7 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import WeilConjectures.AlgebraicGeometry.Base.BaseFieldFiniteTorsionCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.SmoothPurity.SeparablyClosedTorsionCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.Torsion.TorsionCohomologicalDimensionAffineLimit
 import WeilConjectures.AlgebraicGeometry.Finite.Field.FiniteFieldTorsionCohomologicalDimension
@@ -336,7 +337,7 @@ theorem hasClassicalUniformBounds {k : Type u} [Field k]
   have hcd : Scheme.HasTorsionEtaleCohomologicalDimensionLE (Spec (.of k)) 1 := by
     rcases hk with hfinite | hclosed
     · have : Finite k := hfinite
-      exact Scheme.hasTorsionEtaleCohomologicalDimensionLE_one_of_finite k
+      exact Scheme.hasTorsionEtaleCohomologicalDimensionLE_one_of_finite_baseField k
     · have : IsAlgClosed k := hclosed
       intro F hF q hq
       exact Scheme.hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed k

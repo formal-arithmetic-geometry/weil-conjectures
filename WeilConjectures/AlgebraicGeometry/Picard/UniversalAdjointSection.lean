@@ -97,9 +97,7 @@ theorem isQuasicoherent_pushforward_dual_toModules [IsProper (X ↘ Spec (.of k)
 variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
   [GeometricallyIntegral (X ↘ Spec (.of k))]
 
-/-- A morphism smooth of relative dimension `1` is smooth. -/
-local instance {Y Z : Scheme.{u}} (f : Y ⟶ Z) [SmoothOfRelativeDimension 1 f] : Smooth f :=
-  SmoothOfRelativeDimension.smooth 1 f
+attribute [local instance] instSmoothOfSmoothOfRelativeDimensionOfNatNat_weilConjectures
 
 /-- **The adjoint section has zero scheme `D`.** Let `ℒ ∈ F(T)` and let `D` be a point of
 `Hilb^g_{X/k}(T)` with `ℒ ≅ 𝒪(D) ⊗ f_T^* N` for an invertible `𝒪_T`-module `N` (for the

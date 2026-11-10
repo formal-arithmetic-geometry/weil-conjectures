@@ -133,7 +133,7 @@ theorem pic_affine_base_change_compatibility
   have : Smooth c'.g := hZ.2.2.1 inferInstance
   have : IsProper c'.g := c'.isProper
   have : IsOpenImmersion c'.i := c'.isOpenImmersion
-  have : ConnectedSpace c'.Z := IsConnectedCurve.connectedSpace' c'.g
+  have : ConnectedSpace c'.Z := IsConnectedCurve.connectedSpace (f := c'.g)
   have : IsLocallyNoetherian c'.Z := LocallyOfFiniteType.isLocallyNoetherian c'.g
   have : IsRegular c'.Z := IsRegular.of_smooth c'.g
   have : IrreducibleSpace c'.Z := IsRegular.irreducibleSpace c'.Z
@@ -141,7 +141,7 @@ theorem pic_affine_base_change_compatibility
   have : IsNoetherian c'.Z := ⟨⟩
   have hne : (Set.range c'.i.base).Nonempty := by
     have : Nonempty ↥(pullback f b) :=
-      (IsConnectedCurve.connectedSpace' (pullback.snd f b)).toNonempty
+      (IsConnectedCurve.connectedSpace (f := pullback.snd f b)).toNonempty
     exact Set.range_nonempty _
   have hfin : (Set.range c'.i.base)ᶜ.Finite :=
     c'.i.isOpenEmbedding.isOpen_range.finite_compl_of_topologicalKrullDim_le_one

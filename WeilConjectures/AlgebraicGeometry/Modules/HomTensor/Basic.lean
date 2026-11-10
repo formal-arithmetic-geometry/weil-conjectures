@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- The rewrites through the localized monoidal structure on sheaves of modules are slow.
 /-- The identification `M ⊗ P ≅ a(M ⊗ P)` of the tensor product of sheaves of modules with the
 sheafification of the tensor product of presheaves is natural in `M`: for `f : M ⟶ M'` the square

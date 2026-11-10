@@ -221,7 +221,6 @@ private theorem derivedTransformation_ext
   apply (cancel_epi (F.map (DerivedCategory.Q.map p))).1
   rw [α.naturality, β.naturality, h']
 
-set_option maxHeartbeats 800000 in
 -- The original-site coefficient transports require the same budget as the source theorem.
 /-- The unique derived comparison with exactly the original theorem's ordinary,
 termwise and K-flat normalization, with the derived comparison returned first.

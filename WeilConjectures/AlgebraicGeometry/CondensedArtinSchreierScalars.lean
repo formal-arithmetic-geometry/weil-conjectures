@@ -24,7 +24,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 private theorem linear_lowerStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -44,7 +43,6 @@ private theorem linear_lowerStar
   exact (upperStarLowerStarAdjunction Ab.{u + 1} f).ε_comp_map_comp_unit_app_comp_map
     (upperStarFromPoint Y) (upperStarFromPoint X) (upperStarFromPointComp f).hom a.hom
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- Module pullback is linear for scalars pulled back from the coefficient point.
 Source: the linear module adjunction (blueprint: lem-kernel-condensed-projector-scalars). -/
@@ -60,7 +58,6 @@ theorem condensedModulePullback_linear
   let := linear_lowerStar Λ f
   exact (CondensedRing.upperStarLowerStarAdjunction Λ f).left_adjoint_linear
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 private theorem regularEnd_eq_smul
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -71,7 +68,6 @@ private theorem regularEnd_eq_smul
   exact Mod.regularEndRingHom_eq_smul
       (MonObj.Γ.mapFunctor (upperStarFromPoint X) (R := Λ)) a
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- In the linear structure induced from the coefficient ring, the defining condensed
 projector is the usual normalized sum of its translation endomorphisms.

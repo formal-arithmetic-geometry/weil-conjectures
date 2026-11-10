@@ -94,9 +94,9 @@ theorem IsFiniteFreeComplex.isZero_homology_of_isZero_homology_pullback
       rwa [Subsingleton.elim x' x]
     obtain ⟨p⟩ : Nonempty (Spec (Y.residueField y)) := inferInstance
     rw [rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField y) (isField_Γ_Spec hR) _ g p x
-        (by rw [fromSpecResidueField_base_apply, hgx]),
+        (by rw [Scheme.fromSpecResidueField_apply, hgx]),
       rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField y) (isField_Γ_Spec hR) _ g p x
-        (by rw [fromSpecResidueField_base_apply, hgx])]
+        (by rw [Scheme.fromSpecResidueField_apply, hgx])]
     exact rank_add_rank_eq_card_of_isZero_homology_pullback (isField_Γ_Spec hR) hx g P e q hg
   -- near every point the complex splits in degree `q`
   choose W hyW hW using fun y ↦ Scheme.exists_opens_split_of_rank_add_eq _ _ (hC _ _ _) y

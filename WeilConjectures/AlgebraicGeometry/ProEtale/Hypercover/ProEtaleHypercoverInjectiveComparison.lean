@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 variable (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
   (W : X.ProEt) (U : SimplicialObject (Over W))
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The comparison expands the evaluation, single-complex and section functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact descent for individual injective sheaves implies descent for a

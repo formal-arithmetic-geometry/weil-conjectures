@@ -540,7 +540,6 @@ def sliceRestrictionSectionIso (K : DerivedCategory (Internal Λ X)) :
         (Scheme.ProEt.topology X) (ring Λ X) U).obj ((forward Λ X).obj K) :=
   (sliceDerivedEquivalence Λ X U).counitIso.app _
 
-set_option maxHeartbeats 600000 in
 -- The dependent counit and restriction equations have large derived-category endpoint types.
 /-- The local comparison identifies the native local tensor-Hom counit.
 Source: Stacks 08J9, Step 5 (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
@@ -562,7 +561,6 @@ def sliceHomEvaluationNormalized
       ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))
     SU.evaluation tU.iso iso
 
-set_option maxHeartbeats 600000 in
 -- The dependent counit and restriction equations have large derived-category endpoint types.
 /-- The module-side restriction is the unique lift of the normalized ringed Hom
 square through the local section equivalence, with its canonical counits.

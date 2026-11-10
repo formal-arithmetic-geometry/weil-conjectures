@@ -234,7 +234,6 @@ private theorem transport_transpose (V : Scheme.{u}) (n : ℕ)
       (coefficientUnderlying (J := V.smallEtaleTopology) O' mu n)
       (transport_underlying (a := a) V n) M N f
 
-set_option maxHeartbeats 1500000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
 private theorem scalar_insertion_ext (n : ℕ)
     (M : strictEtaleLevel S O ell (index n)) (N : strictEtaleLevel T O' mu n)
@@ -268,7 +267,7 @@ private theorem scalar_insertion_ext (n : ℕ)
   apply congrArg ((strictEtaleSetAdjunction g).homEquiv _ _)
   exact he
 
-set_option maxHeartbeats 1500000 in
+set_option maxHeartbeats 400000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
 private theorem ordinary_evaluation
     {DA : CoefficientDerivedImage A.inverse A.rightSystem A.systemAdj}
@@ -331,11 +330,8 @@ private theorem ordinary_evaluation
   erw [← hUT']
   exact hs'
 
-set_option maxHeartbeats 1500000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
-set_option maxHeartbeats 1500000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
-set_option maxHeartbeats 1500000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
 attribute [local semireducible] siteCoefficientTensor
 

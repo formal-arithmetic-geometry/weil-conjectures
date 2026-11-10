@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 
 /-!
 # Galois covers and open subgroups of the fundamental group
@@ -96,28 +97,6 @@ lemma isConnected_of_isPretransitive (P : Y.FiniteEtale) [Nonempty ((fiber s).ob
     exact ⟨g • z, by rw [IsNaturalSMul.naturality, hg]⟩
   exact isIso_of_reflects_iso i (fiber s)
 
-omit [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G] in
-/-- A finite discrete `G`-set with open stabilisers has a continuous action. -/
-lemma continuousSMul_of_isOpen_stabilizer' {X : Type*} [TopologicalSpace X] [DiscreteTopology X]
-    [MulAction G X] (h : ∀ x : X, IsOpen {g : G | g • x = x}) : ContinuousSMul G X := by
-  refine ⟨continuous_discrete_rng.mpr fun y ↦ ?_⟩
-  have : (fun p : G × X ↦ p.1 • p.2) ⁻¹' {y} = ⋃ x : X, {g : G | g • x = y} ×ˢ {x} := by
-    ext ⟨g, x⟩
-    simp
-  rw [this]
-  refine isOpen_iUnion fun x ↦ (?_ : IsOpen _).prod (isOpen_discrete _)
-  by_cases hx : ∃ g₀ : G, g₀ • x = y
-  · obtain ⟨g₀, rfl⟩ := hx
-    have : {g : G | g • x = g₀ • x} = (fun g ↦ g₀⁻¹ * g) ⁻¹' {g | g • x = x} := by
-      ext g
-      simp [mul_smul, inv_smul_eq_iff]
-    rw [this]
-    exact (h x).preimage (continuous_const_mul _)
-  · push Not at hx
-    convert isOpen_empty
-    ext g
-    simpa using hx g
-
 /-- Every finite `G`-set with open stabilizers is, equivariantly, the geometric fibre of a finite
 étale cover (`AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction`). -/
 lemma exists_fiber_equiv {X : Type u} [Finite X] [MulAction G X]
@@ -128,7 +107,7 @@ lemma exists_fiber_equiv {X : Type u} [Finite X] [MulAction G X]
   let XA : Action FintypeCat.{u} G := Action.FintypeCat.ofMulAction G (FintypeCat.of X)
   have hcont : XA.IsContinuous := by
     let : DiscreteTopology ((CategoryTheory.forget₂ _ TopCat).obj XA) := ⟨rfl⟩
-    exact continuousSMul_of_isOpen_stabilizer' G hX
+    exact AlgebraicGeometry.continuousSMul_of_isOpen_stabilizer G hX
   let XC : ContAction FintypeCat.{u} G := ⟨XA, hcont⟩
   let A := equivalenceContAction s G
   let iP : A.functor.obj (A.inverse.obj XC) ≅ XC := A.counitIso.app XC

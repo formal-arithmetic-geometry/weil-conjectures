@@ -443,7 +443,7 @@ private theorem scalarSquare_termwise {U' U X' X : Scheme.{u}}
   exact (termwiseIso_square_eq (StrictTower.moduleSquareG B a j' j g h)).trans
     (StrictTower.towerSquare_moduleSquareG B a j' j g h)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 700000 in
 -- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)

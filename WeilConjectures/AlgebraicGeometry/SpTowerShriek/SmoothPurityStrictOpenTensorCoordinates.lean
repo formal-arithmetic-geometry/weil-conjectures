@@ -294,7 +294,7 @@ private abbrev HS (X : Scheme.{u}) (σ : ∀ n, B l E X (n + 1) ⟶ B l E X n)
     {m n : ℕ} (h : n ≤ m) :=
   transitionValue (ProEt.topology X) (B l E X) σ h
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1200000 in
 -- Each section comparison normalizes the two continuous module-sheaf carrier presentations.
 private theorem canonicalPushHorizontal
     (R' : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R' (n + 1) ⟶ R' n)

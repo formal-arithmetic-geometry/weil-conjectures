@@ -86,7 +86,7 @@ private theorem finiteScalarComposite_exists {R S T : Sheaf J CommRingCat.{u}}
 
 include V adj hL
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 600000 in
 -- The proof forms two successive mates under four adjunctions.
 private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     ∃ e : (F.algebra R).modules ⋙ change (F.rings.map a) ≅

@@ -219,7 +219,7 @@ theorem projective_bundle_fiber_geometry (S : Scheme.{u}) (E : S.Modules)
     have := smooth_projectiveSpace n (U i).toScheme
     infer_instance
   let _ := hSmooth
-  have : GeometricallyReduced p := GeometricallyReduced.of_smooth p
+  have : GeometricallyReduced p := Smooth.geometricallyReduced p
   refine ⟨inferInstance, inferInstance, ?_⟩
   intro s
   obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (show s ∈ ⨆ i, U i by rw [hU]; trivial)

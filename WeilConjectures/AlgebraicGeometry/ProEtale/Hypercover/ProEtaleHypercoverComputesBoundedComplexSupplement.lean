@@ -78,7 +78,6 @@ open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-set_option maxHeartbeats 800000 in
 -- Explicit derived comparisons expand the section and evaluation functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- A weakly contractible hypercover computes bounded-below derived evaluation.

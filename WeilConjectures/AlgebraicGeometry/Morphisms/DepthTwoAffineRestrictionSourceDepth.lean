@@ -210,7 +210,7 @@ private theorem localized_restriction_unit_surjective
   exact localization_surjective_of_stalk_surjective N G _ hqc hG V hV y
     (unit_stalk_surjective U N y hy)
 
-set_option maxHeartbeats 600000 in
+set_option maxHeartbeats 400000 in
 -- The nested subtype and stalk comparisons elaborate several scalar structures.
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine comparison for the restriction source.

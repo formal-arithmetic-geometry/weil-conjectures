@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineCoaction
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Universal
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
@@ -93,14 +94,6 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 namespace Etale
-
-@[simp, reassoc]
-lemma comp_left {U V W : Y.Etale} (f : U ⟶ V) (g : V ⟶ W) : (f ≫ g).left = f.left ≫ g.left :=
-  rfl
-
-@[simp]
-lemma id_left (U : Y.Etale) : (𝟙 U : U ⟶ U).left = 𝟙 U.left :=
-  rfl
 
 /-- A morphism of étale `Y`-schemes from a morphism of schemes over `Y`. -/
 noncomputable def homMk {U V : Y.Etale} (f : U.left ⟶ V.left) (w : f ≫ V.hom = U.hom) : U ⟶ V :=
@@ -203,8 +196,8 @@ lemma d_γ : coactionUnit p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ := by
     homMk (coactionUnit p.left V.hom.left) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = _
       rw [pullback.lift_snd_assoc, over_w])
-  have h₁ : dC ≫ pr₁C p = 𝟙 _ := hom_ext (by simp [dC])
-  have h₂ : dC ≫ pr₂C p = V.hom := hom_ext (by simp [dC])
+  have h₁ : dC ≫ pr₁C p = 𝟙 _ := EtaleTorsor.etaleHom_ext (by simp [dC])
+  have h₂ : dC ≫ pr₂C p = V.hom := EtaleTorsor.etaleHom_ext (by simp [dC])
   have : dC ≫ γC F p r = 𝟙 _ := by
     refine r.overElt_injective (by rw [Category.assoc, γC_hom, h₂, Category.id_comp]) ?_
     rw [r.overElt_comp, overElt_γC, ← r.overElt_comp, h₁]
@@ -229,9 +222,9 @@ lemma γ₁_γ : coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r) ≫
     (coactionForget p.left V.hom.left) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
       simp)
-  have e₁ : γ₁C ≫ pr₁C p = fstC ≫ γC F p r := hom_ext (by simp [γ₁C, fstC])
-  have e₂ : γ₁C ≫ pr₂C p = π₁C ≫ pr₂C p := hom_ext (by simp [γ₁C, π₁C])
-  have e₃ : π₁C ≫ pr₁C p = fstC ≫ pr₁C p := hom_ext (by simp [π₁C, fstC])
+  have e₁ : γ₁C ≫ pr₁C p = fstC ≫ γC F p r := EtaleTorsor.etaleHom_ext (by simp [γ₁C, fstC])
+  have e₂ : γ₁C ≫ pr₂C p = π₁C ≫ pr₂C p := EtaleTorsor.etaleHom_ext (by simp [γ₁C, π₁C])
+  have e₃ : π₁C ≫ pr₁C p = fstC ≫ pr₁C p := EtaleTorsor.etaleHom_ext (by simp [π₁C, fstC])
   have : γ₁C ≫ γC F p r = π₁C ≫ γC F p r := by
     refine r.overElt_injective (by simp only [Category.assoc, γC_hom, e₂]) ?_
     rw [r.overElt_comp, r.overElt_comp, overElt_γC, ← r.overElt_comp, ← r.overElt_comp, e₁, e₃,
@@ -255,12 +248,12 @@ lemma left_comp_q_eq {T : Y.Etale} {a₁ a₂ : T ⟶ V.left}
   let θ : T ⟶ PC p (V := V) := homMk (pullback.lift _ _ hc) (by
     change _ ≫ pullback.snd _ _ ≫ W.hom = _
     rw [pullback.lift_snd_assoc, w_left])
-  have h₁ : θ ≫ pr₁C p = a₁ := hom_ext (by simp [θ])
-  have h₂ : θ ≫ pr₂C p = a₂ ≫ V.hom := hom_ext (by simp [θ])
+  have h₁ : θ ≫ pr₁C p = a₁ := EtaleTorsor.etaleHom_ext (by simp [θ])
+  have h₂ : θ ≫ pr₂C p = a₂ ≫ V.hom := EtaleTorsor.etaleHom_ext (by simp [θ])
   have : θ ≫ γC F p r = a₂ := by
     refine r.overElt_injective (by rw [Category.assoc, γC_hom, h₂]) ?_
     rw [r.overElt_comp, overElt_γC, ← r.overElt_comp, h₁, h]
-  rw [← this, comp_left, Category.assoc, hq, ← Category.assoc, ← pr₁C_left, ← comp_left, h₁]
+  rw [← this, comp_left_eq, Category.assoc, hq, ← Category.assoc, ← pr₁C_left, ← comp_left_eq, h₁]
 
 include hpb hq in
 /-- Two points of `V` with the same image in the descended scheme represent the same section of
@@ -268,15 +261,15 @@ include hpb hq in
 lemma overElt_eq_of_left_comp_q_eq {T : Y.Etale} {b₁ b₂ : T ⟶ V.left}
     (h : b₁.left ≫ q = b₂.left ≫ q) : r.overElt b₁ = r.overElt b₂ := by
   have hc : b₁.left ≫ V.hom.left ≫ p.left = (b₂ ≫ V.hom).left ≫ p.left := by
-    simp only [comp_left, Category.assoc]
+    simp only [comp_left_eq, Category.assoc]
     rw [← hpb.w, ← Category.assoc, h, Category.assoc]
   let θ : T ⟶ PC p (V := V) := homMk (pullback.lift _ _ hc) (by
     change _ ≫ pullback.snd _ _ ≫ W.hom = _
     rw [pullback.lift_snd_assoc, w_left])
-  have h₁ : θ ≫ pr₁C p = b₁ := hom_ext (by simp [θ])
-  have h₂ : θ ≫ pr₂C p = b₂ ≫ V.hom := hom_ext (by simp [θ])
+  have h₁ : θ ≫ pr₁C p = b₁ := EtaleTorsor.etaleHom_ext (by simp [θ])
+  have h₂ : θ ≫ pr₂C p = b₂ ≫ V.hom := EtaleTorsor.etaleHom_ext (by simp [θ])
   have hc' : θ ≫ γC F p r = b₂ := by
-    refine hom_ext (hpb.hom_ext ?_ ?_)
+    refine EtaleTorsor.etaleHom_ext (hpb.hom_ext ?_ ?_)
     · change (θ.left ≫ (γC F p r).left) ≫ q = _
       rw [Category.assoc, hq, ← Category.assoc]
       change (θ ≫ pr₁C p).left ≫ q = _
@@ -310,7 +303,7 @@ noncomputable def prW (Z : Over B) : ZW p Z ⟶ W :=
 @[simp] lemma prW_left (Z : Over B) : (prW p Z).left = pullback.snd Z.hom.left p.left := rfl
 
 lemma prW_comp (Z : Over B) : prW p Z ≫ p = prZ p Z ≫ Z.hom :=
-  hom_ext (by simp [pullback.condition])
+  EtaleTorsor.etaleHom_ext (by simp [pullback.condition])
 
 instance (Z : Over B) [Surjective p.left] : Surjective (prZ p Z).left := by
   rw [prZ_left]
@@ -331,7 +324,8 @@ lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.l
     change pullback.snd _ _ ≫ pullback.fst _ _ ≫ Z.left.hom =
       pullback.fst _ _ ≫ pullback.fst _ _ ≫ Z.left.hom
     rw [← pullback.condition_assoc])
-  have hk : k₁ ≫ prZ p Z = k₂ ≫ prZ p Z := hom_ext (by simp [k₁, k₂, pullback.condition])
+  have hk : k₁ ≫ prZ p Z = k₂ ≫ prZ p Z :=
+    EtaleTorsor.etaleHom_ext (by simp [k₁, k₂, pullback.condition])
   have hK : k₁.left ≫ a.left ≫ q = k₂.left ≫ a.left ≫ q := by
     have := left_comp_q_eq hq (a₁ := k₁ ≫ a) (a₂ := k₂ ≫ a)
       (by simp only [Category.assoc, reassoc_of% ha₁, prW_comp, reassoc_of% hk])
@@ -362,7 +356,7 @@ lemma descLeft_comp [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.left))
     descLeft hpb hq Z s ≫ n = Z.hom.left := by
   obtain ⟨a, ha₁, ha₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s)
   rw [← cancel_epi (pullback.fst Z.hom.left p.left), reassoc_of% fst_descLeft hpb hq Z s a ha₁ ha₂,
-    hpb.w, ← Category.assoc, ← comp_left, ha₁, prW_left, pullback.condition]
+    hpb.w, ← Category.assoc, ← comp_left_eq, ha₁, prW_left, pullback.condition]
 
 variable (n) in
 /-- The descended scheme, as an étale `Y`-scheme. -/
@@ -380,33 +374,33 @@ noncomputable def desc [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over
     (s : F.obj.obj (op Z.left)) : Z ⟶ XO n :=
   Over.homMk (homMk (descLeft hpb hq Z s) (by
     change _ ≫ n ≫ B.hom = _
-    rw [reassoc_of% descLeft_comp, w_left])) (hom_ext (by simp [descLeft_comp]))
+    rw [reassoc_of% descLeft_comp, w_left])) (EtaleTorsor.etaleHom_ext (by simp [descLeft_comp]))
 
 @[simp] lemma desc_left_left [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B)
     (s : F.obj.obj (op Z.left)) : (desc hpb hq Z s).left.left = descLeft hpb hq Z s := rfl
 
 lemma desc_ext [AlgebraicGeometry.Etale n] {Z : Over B} {t t' : Z ⟶ XO n}
     (h : t.left.left = t'.left.left) : t = t' :=
-  Over.OverMorphism.ext (hom_ext h)
+  Over.OverMorphism.ext (EtaleTorsor.etaleHom_ext h)
 
 lemma desc_naturality [Surjective p.left] [AlgebraicGeometry.Etale n] {Z Z' : Over B}
     (f : Z' ⟶ Z) (s : F.obj.obj (op Z.left)) :
     desc hpb hq Z' (F.obj.map f.left.op s) = f ≫ desc hpb hq Z s := by
   obtain ⟨a, ha₁, ha₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s)
   let hW : ZW p Z' ⟶ ZW p Z := homMk (pullback.map _ _ _ _ f.left.left (𝟙 _) (𝟙 _)
-    (by simp [← comp_left, Over.w f]) (by simp)) (by
+    (by simp [← comp_left_eq, Over.w f]) (by simp)) (by
       change _ ≫ pullback.fst _ _ ≫ Z.left.hom = pullback.fst _ _ ≫ Z'.left.hom
       simp)
-  have h₁ : hW ≫ prW p Z = prW p Z' := hom_ext (by simp [hW])
-  have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := hom_ext (by simp [hW])
+  have h₁ : hW ≫ prW p Z = prW p Z' := EtaleTorsor.etaleHom_ext (by simp [hW])
+  have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := EtaleTorsor.etaleHom_ext (by simp [hW])
   refine desc_ext ?_
-  rw [desc_left_left, Over.comp_left, comp_left, desc_left_left,
+  rw [desc_left_left, Over.comp_left, comp_left_eq, desc_left_left,
     ← cancel_epi (pullback.fst Z'.hom.left p.left),
     fst_descLeft hpb hq Z' _ (hW ≫ a) (by rw [Category.assoc, ha₁, h₁])
       (by rw [r.overElt_comp, ha₂, ← Functor.map_comp_apply, ← op_comp, h₂, op_comp,
         Functor.map_comp_apply])]
   change _ = (prZ p Z' ≫ f.left).left ≫ _
-  rw [← h₂, comp_left, comp_left, Category.assoc, Category.assoc, prZ_left,
+  rw [← h₂, comp_left_eq, comp_left_eq, Category.assoc, Category.assoc, prZ_left,
     fst_descLeft hpb hq Z s a ha₁ ha₂]
 
 lemma desc_injective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B) :
@@ -417,7 +411,8 @@ lemma desc_injective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over B
   have e : a.left ≫ q = a'.left ≫ q := by
     rw [← fst_descLeft hpb hq Z s a ha₁ ha₂, ← fst_descLeft hpb hq Z s' a' ha'₁ ha'₂,
       ← desc_left_left (n := n), ← desc_left_left (n := n), h]
-  have : a = a' := hom_ext (hpb.hom_ext e (by rw [← comp_left, ← comp_left, ha₁, ha'₁]))
+  have : a = a' :=
+    EtaleTorsor.etaleHom_ext (hpb.hom_ext e (by rw [← comp_left_eq, ← comp_left_eq, ha₁, ha'₁]))
   subst this
   exact ext_of_isSheaf_of_surjective F (prZ p Z) (ha₂.symm.trans ha'₂)
 
@@ -431,14 +426,14 @@ lemma desc_surjective [Surjective p.left] [AlgebraicGeometry.Etale n] (Z : Over 
       change _ ≫ V.left.hom = pullback.fst _ _ ≫ Z.left.hom
       rw [← over_w, hpb.lift_snd_assoc]
       exact w_left (prW p Z))
-  have ha₁ : a ≫ V.hom = prW p Z := hom_ext (by simp [a])
+  have ha₁ : a ≫ V.hom = prW p Z := EtaleTorsor.etaleHom_ext (by simp [a])
   have ha : a.left ≫ q = pullback.fst _ _ ≫ t.left.left := hpb.lift_fst _ _ _
   obtain ⟨s, hs, -⟩ := existsUnique_of_isSheaf_of_surjective F (prZ p Z) (r.overElt a)
     fun Z' g₁ g₂ hg ↦ by
       rw [← r.overElt_comp, ← r.overElt_comp]
       refine overElt_eq_of_left_comp_q_eq hpb hq ?_
-      rw [comp_left, comp_left, Category.assoc, Category.assoc, ha, ← Category.assoc,
-        ← Category.assoc, ← prZ_left, ← comp_left, ← comp_left, hg]
+      rw [comp_left_eq, comp_left_eq, Category.assoc, Category.assoc, ha, ← Category.assoc,
+        ← Category.assoc, ← prZ_left, ← comp_left_eq, ← comp_left_eq, hg]
       rfl
   refine ⟨s, desc_ext ?_⟩
   rw [desc_left_left, ← cancel_epi (pullback.fst Z.hom.left p.left),

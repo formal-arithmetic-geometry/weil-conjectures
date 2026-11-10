@@ -120,24 +120,13 @@ Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
 def cofinalSite (W : Scheme.{u}) (r : ℕ ↪o ℕ) : ℕ × W.Etale ⥤ ℕ × W.Etale :=
   r.toOrderHom.toFunctor.prod (𝟭 W.Etale)
 
-/-- Continuity and the literal coefficient-ring identification for restriction.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate).
-Proof: covers are vertical, so reindexing leaves the cover at U unchanged. The
-ring at (i,U) on both sides is C_(r(i))(U); horizontal arrows are the same
-composites of the original ring maps, by functoriality of the tower. -/
-theorem cofinalSite_continuous (W : Scheme.{u}) (r : ℕ ↪o ℕ) :
-    (cofinalSite W r).IsContinuous
-      (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology)
-      (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology) := by
-  exact blockSite_continuous W.smallEtaleTopology r.toOrderHom
-
 /-- The canonical continuity witness.
 Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
 instance cofinalSiteContinuous (W : Scheme.{u}) (r : ℕ ↪o ℕ) :
     (cofinalSite W r).IsContinuous
       (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology)
       (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology) :=
-  cofinalSite_continuous W r
+  blockSite_continuous W.smallEtaleTopology r.toOrderHom
 
 private theorem cofinalCoefficientRings (W : Scheme.{u})
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :

@@ -340,7 +340,6 @@ private noncomputable def firstSortingFamily {X : Scheme.{u}}
     (i j : ℕ) (h : (ComplexShape.up ℕ).Rel j i) : D.X i ⟶ D.X j :=
   eqToHom (congrArg D.X h.symm) ≫ Q j
 
-set_option maxHeartbeats 800000 in
 -- Transport through the dependent sectionwise cochain model needs additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem firstSorting_boundary_cochain {X' : Scheme.{u}}

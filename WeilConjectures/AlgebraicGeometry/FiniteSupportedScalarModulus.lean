@@ -110,7 +110,7 @@ theorem supportedKummerScalarModulus
   unfold SupportedKummerScalar at hs
   obtain ⟨η', θ, hη', hθ, hunit', _, hsquare⟩ := hs
   have hmod : κM.comp (Ext.mk₀ e.hom) (add_zero 2) = κA := by
-    exact (ordinary_supported_kummer_uniqueBoundary T N hN A hAN hTN i hI).unique
+    exact (supported_cartier_boundary_existsUnique T N hN A hAN hTN i hI).unique
       (boundary_modulus A M N hdiv hAM hAN i hI hTM hTN q e hq he κM hκM) hκA
   let V := Sheaf.restrictScalars T.smallEtaleTopology φ
   refine ⟨η', θ ≫ V.map e.hom, hη', ?_, hunit', ?_⟩

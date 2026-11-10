@@ -29,7 +29,6 @@ local instance TensorResolutionTotalCoherence_localInst4 (X : Scheme.{u}) (M : X
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The componentwise identification of two successive chart restrictions. -/
 noncomputable def tensorResolutionChartRestrictionComplexIso (Y : Scheme.{u})
@@ -41,7 +40,6 @@ noncomputable def tensorResolutionChartRestrictionComplexIso (Y : Scheme.{u})
     ((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj E :=
   (Functor.mapHomologicalComplexCompIso (tensorResolutionChartRestrictionIso Y V U h) (.up ℤ)).app E
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Inverse total tensor comparisons respect successive affine restrictions. -/
 theorem tensorResolutionChartRestriction_total_inv (Y : Scheme.{u})
@@ -87,7 +85,6 @@ theorem tensorResolutionChartRestriction_total_inv (Y : Scheme.{u})
   rw [reassoc_of% tensorResolutionChartRestriction_tensor_inv]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Forward total tensor comparisons respect successive affine restrictions. -/
 theorem tensorResolutionChartRestriction_total (Y : Scheme.{u})

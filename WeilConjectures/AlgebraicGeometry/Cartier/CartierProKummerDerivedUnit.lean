@@ -28,7 +28,7 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 attribute [local instance] AlgebraicGeometry.cartierEtaleAbSheafify
-  AlgebraicGeometry.cartierProAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
+  WeilConjectures.sfAbSheafify AlgebraicGeometry.cartierEtaleModuleSheafify
   AlgebraicGeometry.cartierProModuleSheafify AlgebraicGeometry.cartierEtaleAbHasExt
   AlgebraicGeometry.ProEtale.geoCartierIntegralExt AlgebraicGeometry.Etale.hasExt_sheaf_moduleCat
   AlgebraicGeometry.ProEtale.geoCartierModuleExt

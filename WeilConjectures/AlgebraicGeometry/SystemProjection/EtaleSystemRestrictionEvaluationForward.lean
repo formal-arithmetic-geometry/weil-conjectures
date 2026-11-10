@@ -71,7 +71,6 @@ private def ordinaryScalarEvaluation (W : Scheme.{u})
     Functor.isoWhiskerLeft _ (constantRestriction W _ _ (a.app (op n))) ≪≫
     (Functor.associator _ _ _).symm
 
-set_option maxHeartbeats 2000000 in
 -- Reduce the identity maps through the sequence-site evaluation and constant-ring models.
 attribute [local irreducible] eqToHom in
 private theorem ordinaryScalarEvaluation_sections (W : Scheme.{u})
@@ -186,7 +185,6 @@ private theorem openExtensionMate
   exact (Category.comp_id _).trans
     (openImmersionLowerShriekAdjunction_unit_app_comp_openImmersionRestrictionMap a j M).symm
 
-set_option maxHeartbeats 2000000 in
 -- Reduce the section groups through the actual sequence-site and constant-ring models.
 attribute [local irreducible] eqToHom in
 private theorem ordinaryInverseCube
@@ -582,7 +580,6 @@ private theorem openCube
   simpa only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Iso.symm_inv,
     sz, sy, ec, eb, r, Category.assoc] using (congrArg Iso.inv he).symm
 
-set_option maxHeartbeats 2000000 in
 -- Pasting unfolds the support functors and normalizes the resulting derived object types.
 attribute [local irreducible] eqToHom in
 private theorem supportCube

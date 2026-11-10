@@ -35,7 +35,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The restriction comparison uses independent localization universes.
 /-- A K-flat model on an open computes pullback along a morphism factoring through it.
 Source: Stacks Project, Tag 08DW, compatibility with open restriction, and Tag 06YJ.

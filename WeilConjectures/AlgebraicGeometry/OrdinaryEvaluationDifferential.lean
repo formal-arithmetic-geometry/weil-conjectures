@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverDualProjection
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferentialSummand
 
 /-! # The differential identity for ordinary evaluation
@@ -32,9 +33,7 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-local instance localEvaluationMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
-    MonoidalPreadditive (localEvaluationModules X U) :=
-  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
+attribute [local instance] ordinaryDualProjectionOverPreadditive
 
 /-- The chosen projections make each term of the Hom complex a product.
 Source: Stacks Project, Section 20.41, construction of the Hom complex.

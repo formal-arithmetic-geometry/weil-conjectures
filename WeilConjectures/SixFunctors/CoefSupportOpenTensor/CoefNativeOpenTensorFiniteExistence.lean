@@ -280,8 +280,10 @@ theorem nativeOpenTensor_finite_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
   let a := ProEtale.StrictTower.moduleJAdj B j
   let A := proEtaleRingModules X RX
   let C := proEtaleRingModules Z RZ
-  let : EssentiallySmall.{u + 1} X.ProEt := ProEtale.VaryingRing.siteSmall X
-  let : EssentiallySmall.{u + 1} Z.ProEt := ProEtale.VaryingRing.siteSmall Z
+  let : EssentiallySmall.{u + 1} X.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures X
+  let : EssentiallySmall.{u + 1} Z.ProEt :=
+    WeilConjectures.instEssentiallySmallProEt_weilConjectures Z
   let := SemilinearSections.abelianSheafify.{u + 1, u, u + 1} (ProEt.topology X)
   let := SemilinearSections.abelianSheafify.{u + 1, u, u + 1} (ProEt.topology Z)
   let := SemilinearSections.locallyBijective.{u + 1, u, u + 1} (ProEt.topology X)

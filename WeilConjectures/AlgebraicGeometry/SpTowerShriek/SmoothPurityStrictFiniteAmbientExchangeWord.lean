@@ -35,7 +35,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 -- Produce explicit checked congruences for definitional instance diamonds.
 -- Each reduction is recorded as a separate reflexivity theorem; the final
 -- proof uses these equations, so the kernel never reduces the complete word.
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -43,14 +42,12 @@ private meta def conversionOfEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``heq_of_eq ty.getAppFn.constLevels!)
     (ty.getAppArgs.push h)
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionSymm (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, β, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``HEq.symm ty.getAppFn.constLevels!) #[α, β, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
@@ -59,14 +56,12 @@ private meta def conversionTrans (h k : Lean.Expr) : Lean.MetaM Lean.Expr := do
   return Lean.mkAppN (Lean.mkConst ``HEq.trans ty.getAppFn.constLevels!)
     #[α, β, γ, a, b, c, h, k]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionToEq (h : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let ty ← Lean.Meta.inferType h
   let some (α, a, _, b) := ty.heq? | throwError "expected HEq"
   return Lean.mkAppN (Lean.mkConst ``eq_of_heq ty.getAppFn.constLevels!) #[α, a, b, h]
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr := do
   let α ← Lean.Meta.inferType a
@@ -77,7 +72,6 @@ private meta def conversionReduction (a b : Lean.Expr) : Lean.MetaM Lean.Expr :=
     (zetaDelta := true) (kind? := `_finiteReduction)
   conversionOfEq h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta partial def conversionCongruence
     (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
@@ -212,7 +206,6 @@ private meta partial def conversionCongruence
   cache.modify fun m => m.insert (a, b) h
   return h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Unit :=
   Lean.Elab.Tactic.withMainContext do
@@ -229,7 +222,6 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let result ← Lean.Meta.mkAppM ``Eq.mp #[e, h]
     Lean.Elab.Tactic.closeMainGoal `exact result
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem replaceExchangeArrow
     {C D : Type*} [Category C] [Category D]
@@ -244,7 +236,6 @@ variable {X Z Y X' Z' Y' IX IZ IY IX' IZ' IY' : Type*}
   [Category X] [Category Z] [Category Y] [Category X'] [Category Z'] [Category Y']
   [Category IX] [Category IZ] [Category IY] [Category IX'] [Category IZ'] [Category IY']
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem pasteExchangeWords
     (J : X ⥤ Z) (R : Z ⥤ Y) (G : Y ⥤ Y') (P : Z ⥤ Z') (H : X ⥤ X')
@@ -306,22 +297,18 @@ private theorem pasteExchangeWords
 
 end Pasting
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private abbrev nativeD (A : Type u) [CommRing A] (T : Scheme.{u}) :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology T)
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private abbrev nativeOpen (A : Type u) [CommRing A]
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private abbrev nativePush (A : Type u) [CommRing A]
     {U V : Scheme.{u}} (f : U ⟶ V) :=
   (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).rightDerivedFunctor
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private abbrev nativePull (A : Type u) [CommRing A]
     {U V : Scheme.{u}} (f : U ⟶ V) :=
@@ -331,7 +318,6 @@ section NativePasting
 variable {IX IZ IY IX' IZ' IY' : Type*}
   [Category IX] [Category IZ] [Category IY] [Category IX'] [Category IZ'] [Category IY']
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem pasteNativeExchangeWords (A : Type u) [CommRing A] [Finite A]
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -397,7 +383,7 @@ end NativePasting
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1100000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
 canonical pro-etale compactification base-change map.
@@ -475,7 +461,6 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
 
-set_option maxHeartbeats 2000000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
 compactification base-change map.

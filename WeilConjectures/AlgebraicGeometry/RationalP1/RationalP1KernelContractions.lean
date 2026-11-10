@@ -33,7 +33,6 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] unitComponent counitComponent twistProjectionMap
 attribute [local irreducible] coefficient line diagram secondLineComparison
 
-set_option maxHeartbeats 800000 in
 -- The canonical ambient pastes use the existing unit/counit elaboration allowance.
 /-- The ambient diagonal-class insertion and trace contraction give the two kernel
 integrals. This statement concerns the ambient pastes for any pair of natural transformations

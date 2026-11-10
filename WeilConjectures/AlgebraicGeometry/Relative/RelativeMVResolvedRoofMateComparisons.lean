@@ -130,7 +130,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh RingedSpace.moduleDirectImage
 set_option backward.defeqAttrib.useBackward true
 set_option linter.all false in
-set_option maxHeartbeats 50000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem global_arrow_transpose
@@ -168,7 +167,6 @@ private theorem global_arrow_transpose
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 200000 in
 -- The three vertex comparison types include composed derived and complex functors.
 /-- Identify the three normalized roof maps with the prescribed base-change
 arrows, after their denominator vertices are known invertible.

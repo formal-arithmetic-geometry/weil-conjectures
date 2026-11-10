@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 600000 in
 -- Comparing restriction scalars expands the canonical open-subscheme isomorphisms.
 set_option backward.isDefEq.respectTransparency false in
 private theorem restrict_sections_smul {Y S : Scheme.{u}} (p : Y ⟶ S)

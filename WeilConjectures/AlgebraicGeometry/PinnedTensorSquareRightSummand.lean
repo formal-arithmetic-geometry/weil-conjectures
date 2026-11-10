@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import WeilConjectures.AlgebraicGeometry.PinnedTensorSquareLeftSummand
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.AlgebraicGeometry.PinnedStalkTensor
@@ -38,13 +39,8 @@ local instance pinnedTensorSquareRightSummandInstance2 (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   modulePreadditive Y
 
-local instance pinnedTensorSquareRightSummandInstance3
-    (Y : Scheme.{u}) : (curriedTensor Y.Modules).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf
-
-local instance pinnedTensorSquareRightSummandInstance4 (Y : Scheme.{u}) (M : Y.Modules) :
-    ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
+attribute [local instance] pinnedTensorSquareLeftSummandInstance3
+  pinnedTensorSquareLeftSummandInstance4
 
 set_option maxHeartbeats 1000000 in
 -- Nested tensor-complex functors require additional elaboration heartbeats.

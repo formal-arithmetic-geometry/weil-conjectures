@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import WeilConjectures.AlgebraicGeometry.AdicLisseModule
@@ -25,22 +26,8 @@ universe u v w vD vE
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
-/-- Abelian sheafification at the specified coefficient size, transported through the
-small site model. Source: Stacks Tag 03DA
-(auxiliary; not a blueprint node). -/
-instance completedConstantAbSheafify (X : Scheme.{u}) :
-    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
-  letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-  hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
-/-- The locally bijective description at exactly the same coefficient size.
-Source: Stacks Tag 03DA
-(auxiliary; not a blueprint node). -/
-instance completedConstantAbLocallyBijective (X : Scheme.{u}) :
-    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1, u + 1,
-    u + 2, u + 1, u + 1, u + 1}
-    _
+attribute [local instance] WeilConjectures.sfAbSheafify
+attribute [local instance] WeilConjectures.sfAbBijective
 /-- The standard localization, used uniformly for the representative calculations.
 Source: Stacks Tag 05RU
 (auxiliary; not a blueprint node). -/

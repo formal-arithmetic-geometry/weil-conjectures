@@ -165,7 +165,7 @@ private theorem finite_stalk_vanishing (K : Type u) [Field K] [Finite K]
       intro i _
       rw [(hz i).eq_of_tgt (T.map (a i)) 0, zero_comp]
 
-private theorem finite_stalk_colimit
+theorem finite_stalk_colimit
     (K : Type u) [Field K]
     (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (hM : M.IsTorsion) :
@@ -237,40 +237,5 @@ private theorem finite_stalk_colimit
   · intro i
     exact (e.inverse.obj i).property
   · exact ⟨hc⟩
-
-/-- Every locally torsion abelian sheaf on a finite field has no cohomology above degree one.
-Source: main-20261015, det-pe-unbounded-classical-bounds, steps 1--3; Stacks 04JQ,
-03SA and 03QQ, and sk-lem-base-field-cd-finite-field.proof.md.
-(blueprint: lem-sfb-finite-field-all-torsion-cd)
-
-Proof: Finite-stalk subobjects cover a torsion sheaf over a field. They form a directed
-family, since the sum is an image of the product of the two finite stalks. Shrink this
-family to the sheaf universe and use the Grothendieck-category supremum/colimit criterion
-to express the sheaf as its filtered colimit. Each subobject remains torsion by injectivity
-of its section maps. Decompose each finite-stalk sheaf into finitely many primary retracts.
-A finite primary stalk has a common prime-power annihilator. The conservative geometric
-point family detects the same annihilator on the sheaf. The prime-power kernel colimit is
-then isomorphic to the sheaf: the kernel at that exponent provides an inverse, and passage
-to a common larger exponent proves the other inverse identity on every colimit injection.
-Thus the prime-power cohomological dimension bound for finite fields kills each primary
-piece above degree one. Applying the additive cohomology functor to the finite sum of
-projection-inclusion composites kills the original finite-stalk sheaf. Finally filtered
-colimit continuity of etale cohomology on the affine field spectrum kills the arbitrary
-torsion sheaf. The bottom subobject and an empty primary decomposition include the zero
-sheaf; no uniform exponent for the original sheaf is assumed. -/
-theorem hasTorsionEtaleCohomologicalDimensionLE_one_of_finite
-    (K : Type u) [Field K] [Finite K] :
-    HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 1 := by
-  intro M hM q hq
-  obtain ⟨I, hI, hfiltered, D, ι, htor, hfin, hcolim⟩ := finite_stalk_colimit K M hM
-  let _ := hI
-  let _ := hfiltered
-  let T := DerivedCategory.singleFunctor _ 0 ⋙
-    Etale.cohomology AddCommGrpCat.{u + 1} (Spec (.of K)) (q : ℤ)
-  have hH := (Scheme.etaleCohomology_isColimit_large_filtered
-    (Spec (.of K)) hcolim.some q).some
-  have hzero : IsZero (D ⋙ T) := (Functor.isZero_iff _).mpr fun i ↦
-    finite_stalk_vanishing K (D.obj i) (htor i) (hfin i) q hq
-  exact AddCommGrpCat.isZero_iff_subsingleton.mp (hH.isZero_pt hzero)
 
 end AlgebraicGeometry.Scheme

@@ -38,7 +38,6 @@ attribute [local irreducible] twist projectionMap singleUnitIso
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] condensedAmbientExchange
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed geometric coefficient and derived interfaces folded during elaboration.
 /-- The first kernel calculation at a single localizing object, for two arrows
 normalized by the literal ambient formulas. No natural transformation or adjunction for the twisted

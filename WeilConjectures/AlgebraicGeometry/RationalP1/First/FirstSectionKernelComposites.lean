@@ -40,7 +40,6 @@ def firstNativeFunctional
   unfold moduleObjectDerivedPushforward firstProjection
   exact (eqToIso d.p₁_canonical).inv.app N ≫ t
 
-set_option maxHeartbeats 800000 in
 -- Keep the native functor sources fixed while constructing the prefix.
 /-- The supported-kernel insertion, with its source and target fixed before direct image.
 Source: blueprint First identity, the section followed by the diagonal tensor comparison
@@ -62,7 +61,6 @@ def firstKernelInsertion
         ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M ◁
           ((supportedUnitIso Λ Y).hom ≫ α)))
 
-set_option maxHeartbeats 800000 in
 -- The terminal functional has the native path objects as its declared endpoints.
 /-- Change direct-image paths and evaluate a first-projection functional.
 Source: blueprint First identity, the functional after trace base change

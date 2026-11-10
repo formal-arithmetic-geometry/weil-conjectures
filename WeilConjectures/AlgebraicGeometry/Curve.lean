@@ -91,22 +91,16 @@ since `topologicalKrullDim` is `⊥` exactly on the empty space. This is also pa
 `def-sc-curves`.
 
 The field `IsConnectedCurve.connectedSpace` is not an instance, since `f` cannot be inferred
-from `ConnectedSpace C`; use `have := IsConnectedCurve.connectedSpace' f`. -/
+from `ConnectedSpace C`; use `have := IsConnectedCurve.connectedSpace (f := f)`. -/
 class IsConnectedCurve (f : C ⟶ Spec (.of K)) : Prop extends IsCurve f where
   /-- The underlying space of a connected curve is connected, in particular nonempty. -/
   connectedSpace : ConnectedSpace C
   /-- The underlying space of a connected curve has dimension exactly one. -/
   krullDim_eq_one : topologicalKrullDim C = 1
 
-/-- The underlying space of a connected curve is connected; a version of
-`AlgebraicGeometry.IsConnectedCurve.connectedSpace` with `f` explicit. -/
-lemma IsConnectedCurve.connectedSpace' (f : C ⟶ Spec (.of K)) [IsConnectedCurve f] :
-    ConnectedSpace C :=
-  IsConnectedCurve.connectedSpace (f := f)
-
 /-- The underlying space of a connected curve is nonempty. -/
 lemma IsConnectedCurve.nonempty (f : C ⟶ Spec (.of K)) [IsConnectedCurve f] : Nonempty C :=
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   inferInstance
 
 variable (K) in

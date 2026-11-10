@@ -68,7 +68,7 @@ private theorem relative_ring_stalk_map
   rw [huv]
   exact (PresheafedSpace.stalkMap_germ f.toPshHom V y hV).symm
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- Comparing germ actions unfolds the module structures on both colimit stalks.
 private theorem restriction_stalk_smul
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : X)

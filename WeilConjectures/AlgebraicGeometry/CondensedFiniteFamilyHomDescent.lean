@@ -255,7 +255,7 @@ private lemma rawScalarMap_naturality {i j : CoeffIndex.{u} ℓ E} (a : i ⟶ j)
     (upperStar Ab.{u + 1} g).map ((upperStar Ab.{u + 1} f).map
       (padicSubfieldRingObjMap T ℓ (coeffIndex_le ℓ E j)))
   rw [← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp,
-    coefficientComplex_ringMap_comp]
+    padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap]
 
 private lemma rawScalarMap_toAlgCl (i : CoeffIndex.{u} ℓ E) :
     rawScalarMap T X f ℓ E Y g i ≫ (rawRingCocone T X f ℓ E Y g).ι.app i =

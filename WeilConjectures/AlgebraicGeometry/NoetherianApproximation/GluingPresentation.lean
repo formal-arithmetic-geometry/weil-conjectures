@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.SectionSubrings
 
 /-!
@@ -245,11 +246,6 @@ lemma exists_sum_mul_resLE_eq_one {U W : S.Opens} (hW : IsAffineOpen W) (hWU : W
 lemma range_appLE_congr {X : Scheme.{u}} (p : S ⟶ X) {O O' : X.Opens} (h : O = O')
     (W : S.Opens) (e : W ≤ p ⁻¹ᵁ O) (e' : W ≤ p ⁻¹ᵁ O') :
     (p.appLE O W e).hom.range = (p.appLE O' W e').hom.range := by
-  subst h
-  rfl
-
-lemma appLE_congr_hom {X Y : Scheme.{u}} {p q : X ⟶ Y} (h : p = q) (O : Y.Opens) (W : X.Opens)
-    (e : W ≤ p ⁻¹ᵁ O) (e' : W ≤ q ⁻¹ᵁ O) : p.appLE O W e = q.appLE O W e' := by
   subst h
   rfl
 
@@ -561,7 +557,7 @@ theorem exists_stage_superset (T : ∀ a, Set Γ(S, G.U a)) (hT : ∀ a, (T a).F
         (N.proj k₁).appLE (V₁ a) (G.U a : S.Opens) (hV₁U a).ge t := by
     intro a t
     rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
-      appLE_congr_hom (N.proj_comp_map h₂) _ _ _ (hV₁U a).ge]
+      Scheme.Hom.appLE_congr_hom (N.proj_comp_map h₂) _ _ _ (hV₁U a).ge]
   have hbo : ∀ a (t : Γ(N.D.obj k₁, V₁ a)),
       (N.D.obj k₂).basicOpen ((N.D.map h₂).appLE (V₁ a) (V₂ a) le_rfl t) =
         N.D.map h₂ ⁻¹ᵁ (N.D.obj k₁).basicOpen t := by

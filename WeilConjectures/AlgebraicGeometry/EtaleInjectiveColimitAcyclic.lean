@@ -281,7 +281,7 @@ theorem isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize
       ∃ (L : Type (u + 1)) (W : L → X.Etale) (g : ∀ l : L, W l ⟶ U),
         Cov U L W g ∧ ∀ l : L, ∃ (k : K) (t : W l ⟶ V k), t ≫ f k = g l := by
     let := hU.1
-    obtain ⟨m, W, g, hR, hW, hg⟩ := exists_finite_affine_of_mem_smallEtaleTopology hf
+    obtain ⟨m, W, g, hR, hW, hg⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hf
     refine ⟨ULift.{u + 1} (Fin m), fun l ↦ W l.down, fun l ↦ g l.down,
       ⟨inferInstance, hU, ?_, ?_⟩, ?_⟩
     · intro l

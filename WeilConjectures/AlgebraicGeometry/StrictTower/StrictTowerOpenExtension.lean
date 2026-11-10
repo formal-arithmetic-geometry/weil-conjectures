@@ -32,24 +32,14 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- An open restriction has an exact left adjoint, constructed by localized-site
-extension followed by sheafification. Source: Stacks, Tags 03DI, 03DJ and 09AE
-(blueprint: def-cbc-strict-tower-open-extension).
-Proof: weakly-etale localization identifies the source site with the site over the
-open object. The module localization equivalence identifies inverse image with
-`SheafOfModules.overFunctor`. Transfer its extension-by-zero adjunction back. -/
-theorem openPullback_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    (modulePullback B j).IsRightAdjoint := by
-  simpa only [modulePullback] using
-    (AlgebraicGeometry.Scheme.proEtaleOpenRestriction_isRightAdjoint j
-      (coefficients B X) (coefficients B U) (constantRingIso B j))
-
 /-- The right-adjoint instance records the localized-site universal property.
 Source: Stacks, Tags 03DI and 09AE
 (blueprint: def-cbc-strict-tower-open-extension). -/
 noncomputable instance openPullback_rightAdjoint {U X : Scheme.{u}}
-    (j : U ⟶ X) [IsOpenImmersion j] : (modulePullback B j).IsRightAdjoint :=
-  openPullback_isRightAdjoint B j
+    (j : U ⟶ X) [IsOpenImmersion j] : (modulePullback B j).IsRightAdjoint := by
+  simpa only [modulePullback] using
+    (AlgebraicGeometry.Scheme.proEtaleOpenRestriction_isRightAdjoint j
+      (coefficients B X) (coefficients B U) (constantRingIso B j))
 
 /-- Open extension, determined up to its unit-preserving unique isomorphism by the
 localized-site adjunction. Source: Stacks, Tag 09AE

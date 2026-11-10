@@ -179,7 +179,6 @@ private theorem coefficientCounitTranspose_pasting
     (coefficientCounitTranspose_eq p p2 t' a' ha' K _ e') hs he
 
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 200000 in
 -- The selected adjunction and coefficient isomorphisms have large dependent types.
 /-- Coefficient pasting for the transposes of base change, with no structure-sheaf
 normalization and no test section.

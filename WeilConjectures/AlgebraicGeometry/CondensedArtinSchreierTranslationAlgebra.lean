@@ -52,7 +52,6 @@ local notation "R" => Mod.regular (condensedRingObj Λ A)
 local notation "q" => AffineSpace.artinSchreierMap PUnit (Spec (CommRingCat.of k)) (Fintype.card k)
 local notation "G" => CondensedRing.lowerStar Λ q
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 private theorem translation_eq (a : k) :
     condensedArtinSchreierTranslationAction Λ k a =
@@ -67,7 +66,6 @@ private theorem translation_eq (a : k) :
   simp only [CondensedRing.lowerStarCongr, eqToIso.hom, eqToHom_app]
   congr 2
 
-set_option maxHeartbeats 1600000 in
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- The actual deck translation defining the character projector preserves multiplication
 and constant functions in the algebra of the Artin–Schreier pushforward.

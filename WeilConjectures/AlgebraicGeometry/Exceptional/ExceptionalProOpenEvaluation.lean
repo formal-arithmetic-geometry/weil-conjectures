@@ -110,7 +110,7 @@ namespace AlgebraicGeometry
 private local instance (priority := 30000) openEvaluationSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance 20000] exceptionalTransportProEtaleCommRingSheafify
-  exceptionalTransportProEtaleAddCommGrpSheafify exceptionalTransportProEtaleAddCommGrpLocal
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
   exceptionalTransportProEtaleTypeSheafify exceptionalTransportProEtaleRingCompose
   exceptionalTransportProEtaleRingSetCompose exceptionalTransportProEtaleAddCommGrpSetCompose
 attribute [local irreducible] HasDerivedCategory.standard constantSheaf

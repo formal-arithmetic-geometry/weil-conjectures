@@ -177,7 +177,6 @@ private theorem openUnit {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     infer_instance
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
-set_option maxHeartbeats 800000 in
 -- The transported module actions involve several nested functor structures.
 /-- The canonical open and closed base-change mates are invertible.
 Source: blueprint det-sf-open-closed-sequence-ring-sheaf, proof part (4);

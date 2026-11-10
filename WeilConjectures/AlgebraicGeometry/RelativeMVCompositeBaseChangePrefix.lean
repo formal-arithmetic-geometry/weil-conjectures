@@ -60,7 +60,6 @@ private theorem composite_transpose
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- The pasted comparison contains the fixed derived-composition data.
 private theorem comparison_pasting
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
@@ -236,7 +235,6 @@ private theorem imageComp_inv_counit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
 -- Transposing the pinned derived adjunctions requires a larger elaboration budget.
 private theorem local_transpose
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}

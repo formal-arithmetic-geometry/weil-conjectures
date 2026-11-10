@@ -112,7 +112,7 @@ private theorem directImage_naturality
         ((𝟙 ((schemeDerivedDirectImage f).obj P)).op,
           (schemeDerivedDirectImage f).map t) := by
   let H := derivedInternalHom (Opens.grothendieckTopology X) X.sheaf
-  let c := Classical.choose (exists_mixedHomDirectImageComparison f)
+  let c := Classical.choose (exists_schemeHomDirectImageComparison f)
   have hn := c.naturality (X := (op P, Q)) (Y := (op P, Q')) ((𝟙 P).op, t)
   have hl := (mixedGlobalSectionsDirectImageIso f).inv.naturality
     (H.map (X := (op P, Q)) (Y := (op P, Q')) ((𝟙 P).op, t))

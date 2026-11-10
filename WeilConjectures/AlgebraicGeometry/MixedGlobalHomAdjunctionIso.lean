@@ -42,7 +42,7 @@ def mixedHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
         schemeDerivedDirectImage f ⟶
       (schemeDerivedDirectImage f).op.prod (schemeDerivedDirectImage f) ⋙
         derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf :=
-  Classical.choose (exists_mixedHomDirectImageComparison f)
+  Classical.choose (exists_schemeHomDirectImageComparison f)
 
 /-- The canonical global direct-image Hom comparison: Leray followed by the
 internal-Hom comparison defined by the evaluation mate equation.
@@ -123,7 +123,7 @@ theorem mixedGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}}
     simp only [bx, by', Adjunction.mkOfHomEquiv_homEquiv,
       tensorAdjunctionCore, Equiv.symm_symm, Hx, R, c, Functor.prod_obj, tensorRight,
       Functor.flip_obj_obj, curriedTensor_obj_obj, tensor]
-    exact (Classical.choose_spec (exists_mixedHomDirectImageComparison f)) L M A α
+    exact (Classical.choose_spec (exists_schemeHomDirectImageComparison f)) L M A α
   have h := qcqsSheafRHomAdjunction X Y f
     (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst a adj DQ coh
     (schemeHomPullbackAdjunction f) bx by' (mixedHomTensorPullbackIso f) c hc

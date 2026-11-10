@@ -84,7 +84,6 @@ private noncomputable def unitQNat (F : C₀ ⥤ C₂) [F.Additive] :
   naturality := fun _ _ f ↦ by
     simpa only [Functor.comp_map] using F.rightDerivedFunctorUnitQ_naturality f
 
-set_option maxHeartbeats 50000 in
 -- The representative normalization compares derived units and localization factorizations.
 private theorem normalization_of_representatives
     (θ : R ⋙ E ⟶ K ⋙ P)
@@ -267,7 +266,6 @@ private def normalizes
         H.rightDerivedFunctorUnitQ ((P.mapHomologicalComplex (.up ℤ)).obj M) ≫
         R(H).map (P.mapDerivedCategoryFactors.inv.app M)
 
-set_option maxHeartbeats 150000 in
 -- The cube compares twelve functors and four localization factorizations.
 private theorem derived_cube
     (e : G ⋙ Q ⟶ P ⋙ H) (e₀ : G₀ ⋙ Q₀ ⟶ P₀ ⋙ H₀)
@@ -482,7 +480,6 @@ private theorem exchange_normalization (A : Type (u + 1)) [CommRing A]
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f')
     (squareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq) I
 
-set_option maxHeartbeats 50000 in
 -- The support cube contains eight sheaf functors and both direct-image compositors.
 private theorem ordinary_cube (A : Type (u + 1)) [CommRing A]
     (θ : ∀ {U V W Z : Scheme.{u}}
@@ -599,7 +596,6 @@ private theorem derived_open_comparison
         (g)^*[ModuleCat.{u + 1} A] := by
   rfl
 
-set_option maxHeartbeats 50000 in
 -- Elaborating the specialization compares the eight sheaf categories of the cube.
 /-- BaseChange for families normalized on sheaves and on every K-injective representative.
 Source: Stacks Project, Tags 0F7F.

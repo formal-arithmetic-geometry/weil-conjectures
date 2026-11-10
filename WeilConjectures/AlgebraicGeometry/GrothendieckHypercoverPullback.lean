@@ -20,8 +20,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
 variable {X Y : Scheme.{u}}
   [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
 
-local instance : HasColimitsOfSize.{u, u + 1} A :=
-  hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
+attribute [local instance] instHasColimitsOfSize
 
 /-- The injection of a hypercover cohomology summand into the concrete colimit. -/
 noncomputable def hypercoverCohomologyι (F : Sheaf X.smallEtaleTopology A) (q : ℕ)

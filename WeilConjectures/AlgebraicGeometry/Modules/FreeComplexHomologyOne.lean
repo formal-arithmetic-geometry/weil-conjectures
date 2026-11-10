@@ -155,7 +155,7 @@ theorem IsFiniteFreeComplex.isFiniteLocallyFree_homology_one {P : CochainComplex
     obtain ⟨x⟩ : Nonempty (Spec (Y.residueField y)) := inferInstance
     obtain ⟨r, c, hrc⟩ := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField y) g x (C 0 1)
       (rk 0 - 1)).1 (by omega)
-    rw [hg, fromSpecResidueField_base_apply] at hrc
+    rw [hg, Scheme.fromSpecResidueField_apply] at hrc
     set W := Y.basicOpen ((C 0 1).submatrix r c).det with hW
     set Q := ((Modules.pullback W.ι).mapHomologicalComplex _).obj P
     let E (n : ℤ) : Q.X n ≅ free (ULift.{u} (Fin (rk n))) :=

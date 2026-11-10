@@ -5,6 +5,8 @@ Authors: Jiedong Jiang, Christian Merten
 -/
 module
 
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Preserves
@@ -52,17 +54,14 @@ def zariskiTopology : GrothendieckTopology X.ProEt :=
 
 
 
-instance precoverageHasIsos : (precoverage X).HasIsos := by
-  dsimp [precoverage]
-  infer_instance
+instance precoverageHasIsos : (precoverage X).HasIsos :=
+  instHasIsosPrecoverage_weilConjectures.{u} X
 
-instance precoverageStableUnderComposition : (precoverage X).IsStableUnderComposition := by
-  dsimp [precoverage]
-  infer_instance
+instance precoverageStableUnderComposition : (precoverage X).IsStableUnderComposition :=
+  instIsStableUnderCompositionPrecoverage_weilConjectures.{u} X
 
-instance precoverageStableUnderBaseChange : (precoverage X).IsStableUnderBaseChange := by
-  dsimp [precoverage]
-  infer_instance
+instance precoverageStableUnderBaseChange : (precoverage X).IsStableUnderBaseChange :=
+  instIsStableUnderBaseChangePrecoverage_weilConjectures.{u} X
 
 variable {S : Scheme.{u}}
 

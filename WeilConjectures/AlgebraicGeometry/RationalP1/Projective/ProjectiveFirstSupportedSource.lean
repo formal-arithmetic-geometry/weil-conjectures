@@ -51,7 +51,6 @@ private theorem canonical_model_single
     Quotient.lift.isLift_hom, Quotient.lift.isLift_inv]
   erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
   rfl
-set_option maxHeartbeats 800000 in
 -- Fix the native module instances during support normalization.
 private theorem first_ordinary_source
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -142,7 +141,7 @@ private theorem exact_single_unit_iso
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
   rw [← Category.assoc, hu, Iso.inv_hom_id_app]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Cancel the exact-single augmentation with fixed native functor instances.
 /-- The normalized supported source agrees with the first-projection section arrow.
 There is no variable tensor factor, kernel class, functional or outer direct image.

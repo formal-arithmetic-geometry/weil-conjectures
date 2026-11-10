@@ -48,7 +48,7 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 400000 in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -156,7 +156,6 @@ private theorem pushScalar_unit (ℓ : ℕ) [Fact ℓ.Prime]
   congr 1
   exact Mod.extendUnitHom_extendHom _ _
 
-set_option maxHeartbeats 1600000 in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fintype k]
@@ -199,7 +198,6 @@ private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
 set_option allowUnsafeReducibility true in
 attribute [local semireducible] Mod.extendScalars
 
-set_option maxHeartbeats 800000 in
 -- The explicit coefficient-change comparison needs additional elaboration heartbeats.
 private theorem artinFunctionScalar
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -222,9 +220,7 @@ private theorem artinFunctionScalar
     (condensedArtinSchreierSheaf (Profinite.continuousMapRingObj E.1) k₀ ψ)
     (condensedArtinSchreierSheaf (Profinite.padicAlgClRingObj ℓ) k₀ ψ') e
 
-set_option maxHeartbeats 400000 in
 -- Keep the ordinary image and pullback calculation independent of derived localization.
-set_option maxHeartbeats 800000 in
 private theorem ordinaryArtinScalar
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k₀ : Type u) [Field k₀] [Fintype k₀]

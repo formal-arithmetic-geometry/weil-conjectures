@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
@@ -59,14 +60,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Select the recorded locally-bijective description at the coefficient size t+1.
-This is the existing small-site transport, with its size supplied explicitly; imported
-max-universe instances otherwise leave an unresolved universe metavariable.
-Source: Stacks Tag 03DA; blueprint def-weil-pbc-derived-inverse-limit
-(blueprint: def-weil-pbc-derived-inverse-limit). -/
-noncomputable instance (priority := 1100) adicModuleLocallyBijective (T : Scheme.{t}) :
-    (Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T
+attribute [local instance 1100] WeilConjectures.sfAbBijective
 
 variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : Scheme.AdicCoefficientDatum A)
 

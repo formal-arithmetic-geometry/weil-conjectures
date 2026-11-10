@@ -59,7 +59,7 @@ theorem finrankΓ_comp_le_mul_of_finite {X Y : Scheme.{u}} {K : Type u} [Field K
     rfl
   have : Module.Finite K Γ(Y, ⊤) := by
     have := finite_sections_top_of_isFinite g
-    rwa [Scheme.Hom.appLE_top_top_fiberDegree] at this
+    rwa [Scheme.Hom.appLE_top_top] at this
   have : Module.Finite Γ(Y, ⊤) Γ(X, ⊤) := f.finite_appTop
   have : IsArtinianRing Γ(Y, ⊤) := .of_finite K Γ(Y, ⊤)
   have hb : ∀ p : MaximalSpectrum Γ(Y, ⊤), p.asIdeal.fiberDegree Γ(X, ⊤) ≤ n := by

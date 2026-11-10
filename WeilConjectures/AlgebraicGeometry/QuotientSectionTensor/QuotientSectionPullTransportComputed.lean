@@ -579,7 +579,6 @@ private def section_pull_compute_nat {X Y : Scheme.{u}} (f : X ⟶ Y) :
         DerivedCategory.Q :=
   (ModuleRingedComparison.pullback Λ f).mapDerivedCategoryFactors.hom
 
-set_option maxHeartbeats 300000 in
 -- Unfold the two named interfaces once, preserving the fixed derived-functor instances.
 private theorem geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
@@ -609,7 +608,6 @@ attribute [local irreducible] complex_iso complex_comp_iso section_localization_
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- Infer the fixed cochain instances for all eight coefficient categories together.
-set_option maxHeartbeats 1600000 in
 /-- The normalized scalar and geometric squares commute at a cochain representative
 where the internal scalar computation counit is invertible.
 Source: Stacks 06YY, 0D6D and 07A6; the computation step of the parent transport argument.

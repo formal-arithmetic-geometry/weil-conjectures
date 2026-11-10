@@ -24,8 +24,6 @@ variable {X Z U V : Scheme.{w}}
 variable (i : Z ⟶ X) (u : U ⟶ X) (v : V ⟶ Z) (j : V ⟶ U)
 variable [HasCompactification i] [HasCompactification j] [QuasiCompact j]
 set_option maxRecDepth 2000
-set_option maxHeartbeats 1000000 in
--- Matching derived tensor comparisons to the abstract mate theorem takes extra heartbeats.
 /-- The canonical inverse exceptional exchange commutes with tensor mates.
 Source: sk-lem-coprojection, displayed Hom calculation, and sk-thm-regular Step 4(ii)
 (blueprint: lem-pur-canonical-tensor-exchange).

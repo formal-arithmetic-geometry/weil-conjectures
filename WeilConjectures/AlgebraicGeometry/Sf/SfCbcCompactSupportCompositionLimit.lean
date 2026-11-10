@@ -60,12 +60,7 @@ def sfCbcSite (T : Scheme.{t}) : AdicSites.Site.{t + 1} where
   objects := proEtaleSiteModel T
   topology := proEtaleModelTopology T
 
-/-- Continuity of the published transported base change.
-Source: Stacks 00VC (blueprint: lem-sf-cbc-compact-support-composition-limit). -/
-instance sfCbcModelContinuous {U V : Scheme.{t}} (u : U ⟶ V) :
-    (proEtaleModelBaseChange u).IsContinuous
-      (proEtaleModelTopology V) (proEtaleModelTopology U) :=
-  proEtaleModelBaseChange_isContinuous u
+attribute [instance 2000] proEtaleModelBaseChange_isContinuous
 
 /-- Geometric inverse image on the equivalent small models, by sheafified Kan extension.
 Source: Stacks 00VC, 099N (blueprint: lem-sf-cbc-compact-support-composition-limit). -/

@@ -104,7 +104,7 @@ private theorem tuple_over_eval (X : RingedSpace.{u})
     (Over.homMk (homOfLE hVU) : Over.mk (homOfLE hVU) ⟶ Over.mk (𝟙 U)).op).symm)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Unfold restriction functors while synthesizing the pullback instance.
 /-- The pullback of a finite tuple along a cokernel projection admits a local
 finite-free epimorphism.

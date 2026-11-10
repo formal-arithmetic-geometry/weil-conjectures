@@ -87,7 +87,7 @@ noncomputable def FiniteEtale.pullbackCompιIso {X : Scheme.{v}} (f : X ⟶ Y) :
     ObjectProperty.ι _ ⋙ f.Etale ≅
       FiniteEtale.pullback f ⋙ ObjectProperty.ι _ :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ by
-    refine Etale.hom_ext ?_
+    refine EtaleTorsor.etaleHom_ext ?_
     apply Limits.pullback.hom_ext <;> simp [FiniteEtale.pullback, Hom.Etale]
 
 /-- The inverse image of the sheaf of sections of a finite étale `Y`-scheme `P` along

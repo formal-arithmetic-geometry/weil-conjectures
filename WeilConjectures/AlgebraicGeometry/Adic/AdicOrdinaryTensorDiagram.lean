@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientDiagram
 public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
@@ -82,13 +83,6 @@ private theorem algebraicFlatResolution (A : Type t) [CommRing A] :
     (ModuleCat.freeMk x) = x
   simp only [ModuleCat.freeDesc_apply]
   rfl
-
-/-- Scalar extension is additive by its scalar restriction adjunction.
-Source: Stacks Project, Tag 06Y6 (blueprint: lem-weil-pbc-adic-ordinary-tensor-levels). -/
-instance adicOrdinaryExtend_additive
-    {A B : Type t} [CommRing A] [CommRing B] (φ : A →+* B) :
-    (ModuleCat.extendScalars.{t, t, t} φ).Additive :=
-  (ModuleCat.extendRestrictScalarsAdj.{t, t, t} φ).left_adjoint_additive
 
 /-- K-flatness makes the transpose of the localized ordinary unit invertible.
 Source: Stacks Project, Tag 06Y6 (blueprint: lem-weil-pbc-adic-ordinary-tensor-levels).

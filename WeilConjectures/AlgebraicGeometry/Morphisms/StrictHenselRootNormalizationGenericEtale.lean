@@ -155,7 +155,7 @@ theorem GaloisCover.strict_hensel_root_normalization_generic_etale
   have := hp
   have := hn
   apply etale_shrink_of_fibre_source_opens _ (j η)
-  exact W.root_normalization_generic_source_etale i G R φ f β hβ
+  exact root_normalization_generic_source_etale_point i G W R φ f β hβ
     (strictHenselization barY) b hG' hgreg hroot hN hp he hn D j hD hDi hj hV η hη
 
 

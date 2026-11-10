@@ -58,7 +58,7 @@ theorem epi_etaleCohomology_artinSchreier_zero_of_isProper
       ((DerivedCategory.singleFunctor
         (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).map wp)) := by
   classical
-  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
   have : IsRegular C := IsRegular.of_smooth f
   have : IsReduced C := isReduced_of_isReduced_stalk C

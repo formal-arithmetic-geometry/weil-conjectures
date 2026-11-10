@@ -45,7 +45,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] 
 
 namespace SplitNbhd
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- many local algebra instances and large fibre-product diagrams
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Every pointed étale neighbourhood of `t` receives a morphism from a piece of a split

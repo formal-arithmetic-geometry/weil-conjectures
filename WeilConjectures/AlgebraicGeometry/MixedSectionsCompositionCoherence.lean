@@ -29,7 +29,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-set_option maxHeartbeats 800000 in
 -- Checking canonical comparison choices expands derived-functor and sheaf instances.
 /-- Normalized mixed Leray comparisons compose with the normalized direct-image
 comparison and restriction along a composite.

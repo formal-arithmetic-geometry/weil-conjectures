@@ -128,7 +128,7 @@ theorem exists_map_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpac
     (h : (c.ι.app k).hom.app (op W) t = (c.ι.app k).hom.app (op W) t') :
     ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = (F.map a).hom.app (op W) t' := by
   obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_map_eq hc t t' h
-  obtain ⟨n, U, g, hRg, -, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+  obtain ⟨n, U, g, hRg, -, hcov⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   choose k₁ a₁ ha₁ using fun i ↦ hloc (g i) (hRg i)
   obtain ⟨k', A, b, hb⟩ := IsFiltered.exists_comp_eq_of_finite a₁
   refine ⟨k', A, (isSheafFor_ofArrows_moduleCat (F.obj k') g hcov).isSeparatedFor.ext ?_⟩
@@ -147,7 +147,7 @@ theorem exists_app_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpac
     [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
     ∃ (k : K) (t : (F.obj k).obj.obj (op W)), (c.ι.app k).hom.app (op W) t = s := by
   obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_app_eq hc s
-  obtain ⟨n, U, g, hRg, hU, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
+  obtain ⟨n, U, g, hRg, hU, hcov⟩ := (AlgebraicGeometry.Etale.exists_affine_refinement _) hR
   choose k₁ t₁ ht₁ using fun i ↦ hloc (g i) (hRg i)
   obtain ⟨k, ⟨b⟩⟩ := IsFiltered.exists_cocone_of_finite k₁
   let t₂ (i : Fin n) : (F.obj k).obj.obj (op (U i)) := (F.map (b i)).hom.app _ (t₁ i)

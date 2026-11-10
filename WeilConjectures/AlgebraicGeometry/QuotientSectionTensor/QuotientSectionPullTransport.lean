@@ -89,7 +89,6 @@ theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ 
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- Reconcile the source module-object instances with the normalized section interfaces.
-set_option maxHeartbeats 800000 in
 /-- The derived section comparison satisfies the pull condition once its normalized
 counit square is fixed. Source: Stacks 06YY, 0D6D and 07A6; parent proof step 8.
 (blueprint: lem-sfb-quotient-section-pull-transport-condition).

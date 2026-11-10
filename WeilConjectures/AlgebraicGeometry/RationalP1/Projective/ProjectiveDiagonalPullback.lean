@@ -50,14 +50,12 @@ def nativeTensorBundle (C : Type a) [Category.{v} C] [Abelian C]
     [Abelian.HasFunctorialFlatResolution C] : TensorBundle (DerivedCategory C) :=
   ⟨inferInstance, inferInstance⟩
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
 /-- First projection of the actual self-product. Source: blueprint clause 1
 (blueprint: def-sfb-projective-diagonal-pullback). -/
 def firstProjection (Y : Scheme.{u}) : diagonalSurface Y ⟶ ProjectiveLine Y :=
   pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
 /-- Second projection of the actual self-product. Source: blueprint clause 1
 (blueprint: def-sfb-projective-diagonal-pullback). -/
@@ -84,7 +82,6 @@ instance internalTensorCommShift (X : Scheme.{u}) :
     (curriedTensor (DerivedCategory (Modules Λ X))).CommShift₂Int :=
   (internalTensorBundle Λ X).comm
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
 /-- The canonical section comparison, with no arbitrary isomorphism. Source: blueprint
 unit/counit clause 1 (blueprint: def-sfb-projective-diagonal-pullback). -/

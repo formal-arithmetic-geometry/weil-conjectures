@@ -44,7 +44,7 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Comparing scalar restrictions unfolds several dependent section module instances.
 set_option backward.isDefEq.respectTransparency false in
 /-- Change of rings between quasi-coherent algebras preserves quasi-coherence of the

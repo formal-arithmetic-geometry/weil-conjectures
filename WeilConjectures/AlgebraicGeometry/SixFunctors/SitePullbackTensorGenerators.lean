@@ -401,7 +401,6 @@ private theorem pushforward_operations
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Bound the generic scalar-action calculation.
 private theorem pushforward_action
     {C D : Type c} [Category.{v} C] [Category.{v} D]

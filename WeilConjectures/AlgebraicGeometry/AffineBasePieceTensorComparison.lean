@@ -138,7 +138,7 @@ theorem exists_affine_base_piece_tensor_comparison
   let : Algebra R Γ(VT.toScheme, ⊤) := aB.toAlgebra
   let : Algebra R Γ((fT ⁻¹ᵁ VT).toScheme, ⊤) := aC.toAlgebra
   refine ⟨Γ(VT.toScheme, ⊤), Γ((fT ⁻¹ᵁ VT).toScheme, ⊤), aB, aC, φ, hφ, ?_⟩
-  exact affine_base_piece_tensor_base_change d X₀ Y₀ f₀ V W R _ _ aB aC e0 q
+  exact affine_base_piece_tensor_base_change_instance d X₀ Y₀ f₀ V W R _ _ aB aC e0 q
     (Scheme.Hom.resLE_comp_ι _ _) VT.toScheme.isoSpec (fT ⁻¹ᵁ VT).toScheme.isoSpec
     φ hB hC
 

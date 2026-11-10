@@ -60,8 +60,8 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
   have := c.isOpenImmersion
   let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
   let : C.Over (Spec (.of k)) := ⟨f⟩
-  have := IsConnectedCurve.connectedSpace' c.g
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := c.g)
+  have := IsConnectedCurve.connectedSpace (f := f)
   have := IsConnectedCurve.nonempty f
   have : SmoothOfRelativeDimension 1 c.g := IsConnectedCurve.smoothOfRelativeDimension_one c.g
   have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) :=
@@ -312,7 +312,7 @@ theorem natCard_sheafH_one_constantZMod_mul (f : C ⟶ Spec (.of k)) [IsConnecte
   obtain ⟨hdivC, hfinC⟩ := surjective_zsmul_pic_and_finite_torsionBy f hn
   have := c.isProper
   let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
-  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.connectedSpace (f := c.g)
   have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) :=
     IsConnectedCurve.smoothOfRelativeDimension_one c.g
   have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper

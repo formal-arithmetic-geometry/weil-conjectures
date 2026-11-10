@@ -82,7 +82,7 @@ connected curve over `k'`: the curve has a rational point, so it is geometricall
 (blueprint: `lem-sc-base-change-curve`) -/
 theorem IsConnectedCurve.baseChangeField [IsAlgClosed k] [IsConnectedCurve f] [Smooth f]
     [IsProper f] : IsConnectedCurve (f.baseChangeField k') := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : SmoothOfRelativeDimension 1 f := IsConnectedCurve.smoothOfRelativeDimension_one f
   obtain ⟨hs, hc, -, -⟩ := f.baseChangeField_isCurve k'
   obtain ⟨s, hs'⟩ := f.exists_comp_eq_id_of_isAlgClosed
@@ -169,7 +169,7 @@ smooth proper connected curve of the same genus.
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsProper f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
-  have := IsConnectedCurve.connectedSpace' f
+  have := IsConnectedCurve.connectedSpace (f := f)
   have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
   have : QuasiSeparatedSpace C := (quasiSeparated_iff_quasiSeparatedSpace f).mp inferInstance
   have : SmoothOfRelativeDimension 1 f := IsConnectedCurve.smoothOfRelativeDimension_one f

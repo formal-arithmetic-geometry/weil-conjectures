@@ -87,7 +87,7 @@ attribute [local instance] enoughInjectives
 
 -- The cycle and restriction calculations below follow the private proved calculations in
 -- FlatUnitRawSections and TargetSectionClassRestriction, respectively.
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The adjunction comparison crosses sheaf, presheaf, and evaluation homology objects.
 /-- Evaluation of theta sends the homology class of a cycle to its sheaf cohomology class.
 The cycle section is pinned by the inverse kernel comparison and exact evaluation.

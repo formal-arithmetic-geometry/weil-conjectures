@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfect
 public import WeilConjectures.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantConstructibility
@@ -33,7 +34,7 @@ restriction on the Noetherian scheme.
 
 ## Main definitions
 
-* `integralCriterionWEquals`: the canonical small-site instance at the fixed coefficient size.
+* `WeilConjectures.sfAbBijective`: the canonical small-site instance at the fixed coefficient size.
 
 ## Main statements
 
@@ -53,14 +54,7 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing small-site criterion at the standard coefficient universe. Fixing the
-auxiliary enlargement universe to zero avoids an undetermined maximum during synthesis.
-Source: Stacks Tag 03DA; Mathlib small-site equivalence transport
-(auxiliary; not a blueprint node). -/
-instance (priority := 3000) integralCriterionWEquals (X : Scheme.{u}) :
-    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
-    u + 1, u + 2, u + 1} (ProEt.topology X)
+attribute [local instance 3000] WeilConjectures.sfAbBijective
 
 private theorem constantExact (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     PreservesFiniteLimits (adicLisseConstantModules X A) ∧

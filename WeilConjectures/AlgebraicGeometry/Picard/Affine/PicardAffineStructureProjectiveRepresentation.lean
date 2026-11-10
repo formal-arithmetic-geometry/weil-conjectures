@@ -55,7 +55,7 @@ private noncomputable def affineTransportEquivalence (W : Scheme.{v}) (U : W.Ope
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Deriving the open square involves several independently chosen localization instances.
 /-- Open base change and a coefficient trivialization, before using any perfectness.
 Source: Stacks Project, Tag 08FE, and the tensor pullback composition and unit comparisons. -/

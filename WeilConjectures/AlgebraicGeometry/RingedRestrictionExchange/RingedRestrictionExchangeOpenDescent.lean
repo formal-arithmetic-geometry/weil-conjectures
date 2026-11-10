@@ -216,7 +216,7 @@ private theorem chainComparison_isKInjective
 
 -- State the chain with the instance used by `exchange`, matching `exchange_chainUnit`.
 section ExchangeChain
-attribute [local instance 40000] completedConstantAbLocallyBijective
+attribute [local instance 40000] WeilConjectures.sfAbBijective
 
 private theorem exchange_chain (r : StrictTowerRingedSquare sq)
     (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :
@@ -317,7 +317,7 @@ end OpenComparisonTransfer
 -- Specialize the category instances before substituting the ringed functors.
 section SchemeOpenComparisonTransfer
 -- Same locally bijective instance as in `exchange`, so the chain types agree syntactically.
-attribute [local instance 40000] completedConstantAbLocallyBijective
+attribute [local instance 40000] WeilConjectures.sfAbBijective
 variable (r : StrictTowerRingedSquare sq)
   (F : proEtaleRingModules X r.RX ⥤ proEtaleRingModules Y r.RY)
   (G : proEtaleRingModules Y r.RY ⥤ proEtaleRingModules Y' r.RY')
@@ -777,7 +777,7 @@ private theorem left_square_of_conjugate {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1300000 in
 -- Section comparisons reduce the chosen site pullbacks and their module structures.
 private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
@@ -913,7 +913,6 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 2000000 in
 -- Instantiate the conjugation identity with the chosen coefficient compositors.
 private theorem identity_square {P T : Scheme.{u}} (p : P ⟶ T)
     (s : ChosenCartesianSquare (𝟙 P) p p (𝟙 T))
@@ -950,7 +949,6 @@ private theorem identity_square {P T : Scheme.{u}} (p : P ⟶ T)
     Iso.trans_assoc] using hc
 
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 2000000 in
 -- Compare the concrete derived functors with the localized ordinary identity square.
 /-- For the identity base change exchange is the identity under the canonical
 identity and resolution comparisons. Source: Stacks 09A5 and 09T5

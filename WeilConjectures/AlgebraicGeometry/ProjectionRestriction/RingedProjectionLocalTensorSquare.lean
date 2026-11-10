@@ -216,7 +216,6 @@ private theorem two_models
   simp only [← c.functor.map_comp_assoc, prod_comp, Functor.map_comp]
   rfl
 
-set_option maxHeartbeats 600000 in
 -- On each signed-total summand the square is the inverse ordinary tensor square.
 private theorem total_square
     {C₃ : Type (u + 1)} [Category.{u} C₃] [EssentiallySmall.{u + 1} C₃]
@@ -325,7 +324,6 @@ private theorem total_square
   simp only [x, y, Iso.trans_inv, Functor.mapIso_inv, Category.assoc] at h
   exact hl.trans (h.trans hr.symm)
 
-set_option maxHeartbeats 600000 in
 -- Keep the four-model calculation abstract, so its category algebra does not
 -- unfold the concrete pro-étale pullbacks and restriction functors.
 private theorem four_models_inverse
@@ -450,7 +448,6 @@ private theorem four_models_inverse
 
 end Representatives
 
-set_option maxHeartbeats 600000 in
 -- Specialize the abstract calculation using the canonical cochain normalization.
 private theorem inverse_on_representatives
     {X Y : Scheme.{u}} {f : X ⟶ Y}

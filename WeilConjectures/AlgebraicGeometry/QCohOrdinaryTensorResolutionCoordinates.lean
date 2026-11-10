@@ -32,7 +32,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Unfolding the normalized coordinate family exceeds the default heartbeat budget.
 
 /-- Affine algebraic resolutions compute ordinary tensor homology of a supplied

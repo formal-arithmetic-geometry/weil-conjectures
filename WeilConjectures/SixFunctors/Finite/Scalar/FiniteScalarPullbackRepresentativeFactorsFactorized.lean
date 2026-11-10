@@ -23,7 +23,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme MonoidalCategory
 open CategoryTheory.Functor
 attribute [local instance 2000] isNoetherian_of_finite
-attribute [local instance 10000] finiteProjection_groupW finiteProjection_groupSheafify
+attribute [local instance 10000] WeilConjectures.sfAbBijective WeilConjectures.sfAbSheafify
   finiteProjection_moduleSheafify finiteProjection_sheafGroth finiteProjection_functorLimits
   finiteProjection_functorColimits finiteProjection_inverseAdditive finiteProjection_inverseLimits
   finiteProjection_inverseColimits finiteProjection_moduleGroth finiteProjection_modulePreadditive

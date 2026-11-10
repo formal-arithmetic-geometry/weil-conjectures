@@ -186,7 +186,7 @@ attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom
 attribute [local irreducible] moduleCohomologyFMap sectionExtendIso
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- The proof transports the natural-indexed section equation through fixed integer models.
 /-- Restriction of an augmented roof computes the classical h-map on an arbitrary open.
 There is one scheme morphism, no direct-image square, and no total derived functor.

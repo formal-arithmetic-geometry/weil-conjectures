@@ -52,10 +52,6 @@ lemma rank_map_appTop_eq_of_base_eq {m n : Type*} [Finite m] [Fintype n] {R R' :
 lemma isField_Γ_Spec_residueField (y : Y) : IsField Γ(Spec (Y.residueField y), ⊤) :=
   isField_Γ_Spec (Field.toIsField _)
 
-lemma fromSpecResidueField_base_apply (y : Y) (x : Spec (Y.residueField y)) :
-    (Y.fromSpecResidueField y).base x = y :=
-  (Scheme.range_fromSpecResidueField y).subset ⟨x, rfl⟩
-
 /-- **Local split factorisation of a matrix of constant rank on a reduced scheme.** Let `A` be a
 matrix of global functions on a reduced scheme `Y`, of rank at most `ρ` at every point of an open
 `N`, and of rank at least `ρ` at a point `y ∈ N`. Then on an open neighbourhood `V ≤ N` of `y`,
@@ -72,7 +68,7 @@ theorem exists_split_factorization [IsReduced Y] {m n : Type*} [Fintype m] [Fint
   obtain ⟨x⟩ := this
   obtain ⟨e₁, e₂, he⟩ := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField y)
     (Y.fromSpecResidueField y) x A ρ).1 hge
-  rw [fromSpecResidueField_base_apply] at he
+  rw [Scheme.fromSpecResidueField_apply] at he
   refine ⟨N ⊓ Y.basicOpen (A.submatrix e₁ e₂).det, inf_le_left, ⟨hy, he⟩, ?_⟩
   set V := N ⊓ Y.basicOpen (A.submatrix e₁ e₂).det
   refine Matrix.exists_mul_eq_of_isUnit_det_submatrix _ e₁ e₂ ?_ fun f₁ f₂ ↦ ?_
@@ -89,7 +85,7 @@ theorem exists_split_factorization [IsReduced Y] {m n : Type*} [Fintype m] [Fint
     obtain ⟨x'⟩ : Nonempty (Spec (Y.residueField (V.ι.base z))) := inferInstance
     have := (le_rank_map_appTop_iff (isField_Γ_Spec_residueField (V.ι.base z))
       (Y.fromSpecResidueField (V.ι.base z)) x' A (ρ + 1)).2 ⟨f₁, f₂, by
-        rw [fromSpecResidueField_base_apply]
+        rw [Scheme.fromSpecResidueField_apply]
         exact hz⟩
     have := hle _ hzN
     omega
@@ -164,8 +160,8 @@ lemma rank_map_appTop_restrict {m n : Type*} [Finite m] [Fintype n] (V : Y.Opens
   rw [← map_appTop_comp]
   refine rank_map_appTop_eq_of_base_eq (isField_Γ_Spec_residueField z)
     (isField_Γ_Spec_residueField _) _ _ x x' ?_ A
-  rw [Scheme.Hom.comp_apply, fromSpecResidueField_base_apply,
-    fromSpecResidueField_base_apply]
+  rw [Scheme.Hom.comp_apply, Scheme.fromSpecResidueField_apply,
+    Scheme.fromSpecResidueField_apply]
 
 /-- The matrices of the differentials of the pullback of a complex of free modules are the
 images of the matrices of the differentials. -/

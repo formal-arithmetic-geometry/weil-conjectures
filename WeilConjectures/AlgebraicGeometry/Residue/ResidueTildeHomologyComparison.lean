@@ -22,7 +22,6 @@ universe v
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- The scalar and sheaf homology structures require several comparison instances.
 /-- Associated sheaves followed by derived homology and field sections compute
 module-complex homology naturally. Source: Stacks Project, Tag 01XK.

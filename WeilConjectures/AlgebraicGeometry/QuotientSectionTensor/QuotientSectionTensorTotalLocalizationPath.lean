@@ -59,7 +59,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 1600000 in
 -- Retain the large total tensor maps while pasting the localization faces.
 /-- The total scalar square, localized and pasted with scalar normalization.
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.

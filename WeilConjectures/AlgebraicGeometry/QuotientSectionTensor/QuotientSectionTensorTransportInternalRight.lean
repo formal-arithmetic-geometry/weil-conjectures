@@ -75,7 +75,6 @@ private theorem internal_right_total_tensor_map
   change (f ▷ _) ≫ (_ ◁ g) = f ⊗ₘ g
   exact (MonoidalCategory.tensorHom_def f g).symm
 
-set_option maxHeartbeats 1600000 in
 -- Retain large derived tensor terms while identifying the localized path wrappers.
 /-- Evaluate the ordinary scalar-total side on all internal complexes.
 Source: Stacks Project, sites-modules.tex, Tag 03EL, extension of scalars and pure

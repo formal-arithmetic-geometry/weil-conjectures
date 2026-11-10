@@ -79,7 +79,6 @@ private theorem joint_free_coordinates
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The tensor and quotient comparison contains several dependent module instances.
 /-- The residue square yields joint finite free coordinates.
 Source: Stacks Project, Tag 0BF2, the finite free degree-one calculation.

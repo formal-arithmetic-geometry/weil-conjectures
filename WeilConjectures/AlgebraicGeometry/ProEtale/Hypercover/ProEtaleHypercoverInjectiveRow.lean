@@ -78,7 +78,7 @@ private theorem singleAugmentation_quasiIso
       (HomologicalComplex.ExactAt.of_isZero
         (HomologicalComplex.isZero_single_obj_X _ _ _ (n + 1) (by omega)))).mpr (hpos n)
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Transporting the ringed site unfolds its pushforward and scalar restriction functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmented section row of an injective module sheaf on a representable

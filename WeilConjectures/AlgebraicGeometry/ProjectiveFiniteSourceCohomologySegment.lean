@@ -29,7 +29,6 @@ open CategoryTheory
 open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 800000 in
 -- Comparing the underlying Ext cohomology with pushforward unfolds several functors.
 private theorem pushforward_cohomology_linearEquiv
     {X P T : Scheme.{u}} (j : X ⟶ P) [IsAffineHom j] (g : P ⟶ T)

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
+
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -40,51 +42,8 @@ namespace AlgebraicGeometry.Scheme
 Source: Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction
 (blueprint: lem-pur-proetale-constant-coefficient-comparison). -/
 theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) := by
-  let D := CommRingCat.{u + 1}
-  let J := ProEt.topology Y
-  let K := ProEt.topology X
-  let G := proEtaleBaseChange f
-  let T := ⊤_ Y.ProEt
-  have hT : IsTerminal T := terminalIsTerminal
-  have hGT : IsTerminal (G.obj T) := hT.isTerminalObj G T
-  let adj := ((constantSheafAdj J D hT).comp (proEtaleSheafAdjunction f D)).ofNatIsoRight
-    (G.sheafPushforwardContinuousCompSheafSectionsObjIso D J K (Opposite.op T))
-  let adj' := constantSheafAdj K D hGT
-  let B := CommRingCat.of (ULift.{u + 1, u} A)
-  have h : (adj.leftAdjointUniq adj').hom.app B =
-      proEtaleCoefficientInverseImageMap f A := by
-    apply (adj.homEquiv _ _).injective
-    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
-    simp only [adj, Adjunction.homEquiv_ofNatIsoRight_apply]
-    change adj'.unit.app B =
-      (constantSheafAdj J D hT).homEquiv B _
-        ((proEtaleSheafAdjunction f D).homEquiv _ _
-          (proEtaleConstantInverseImageMap f D B)) ≫ _
-    change _ = (constantSheafAdj J D hT).homEquiv B _
-      ((proEtaleSheafAdjunction f D).homEquiv _ _
-        (((proEtaleSheafAdjunction f D).homEquiv _ _).symm
-          (proEtaleConstantDirectImageMap f D B))) ≫ _
-    rw [Equiv.apply_symm_apply]
-    rw [constantSheafAdj_homEquiv_apply]
-    have hu : adj'.unit.app B =
-        (toSheafify K ((Functor.const X.ProEtᵒᵖ).obj B)).app
-          (Opposite.op (G.obj T)) := by
-      simp [adj', constantSheafAdj, Adjunction.comp]
-      rfl
-    rw [hu]
-    change _ = (toSheafify J ((Functor.const Y.ProEtᵒᵖ).obj B)).app (Opposite.op T) ≫
-      (proEtaleConstantDirectImageMap f D B).hom.app (Opposite.op T) ≫ 𝟙 _
-    rw [Category.comp_id]
-    let C := (proEtaleSheafDirectImage f D).obj ((constantSheaf K D).obj B)
-    let q : (Functor.const Y.ProEtᵒᵖ).obj B ⟶ C.obj :=
-      Functor.whiskerLeft G.op (toSheafify K ((Functor.const X.ProEtᵒᵖ).obj B))
-    have eq := ((sheafificationAdjunction J D).homEquiv
-      ((Functor.const Y.ProEtᵒᵖ).obj B) C).apply_symm_apply q
-    change toSheafify J _ ≫ (proEtaleConstantDirectImageMap f D B).hom = q at eq
-    exact (congrArg (fun η ↦ η.app (Opposite.op T)) eq).symm
-  rw [← h]
-  infer_instance
+    (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) :=
+  proEtaleConstantRingComparison_isIso.{u} f A
 
 private noncomputable def constantModulePullbackFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] :

@@ -97,7 +97,6 @@ private theorem independence_diagram_cancel
   simp only [Category.assoc]
   rw [hm, IsIso.inv_hom_id, Category.comp_id, hβ, ← Category.assoc, hj]
 
-set_option maxHeartbeats 800000 in
 -- The sections square elaborates two scheme-module and complex functor composites.
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem sectionsComparison_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
@@ -119,7 +118,7 @@ private theorem sectionsComparison_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
   exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
     ((InjectiveResolution.desc (𝟙 F) C'.I C.I).f n)).naturality _ |>.symm
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, Tags 01F8 and 01FB

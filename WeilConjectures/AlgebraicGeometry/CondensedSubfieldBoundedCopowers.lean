@@ -108,7 +108,7 @@ private theorem coproductStrictlyGE
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The explicit colimit and truncation transports elaborate in several large module categories.
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived direct image commutes with copowers of one bounded-below complex.

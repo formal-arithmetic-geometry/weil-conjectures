@@ -62,7 +62,7 @@ private theorem baseChange_isIso_of_iso_top {A B A' A'' T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 400000 in
 -- The prescribed composite adjunction comparison requires additional elaboration.
 /-- Ordinary flat exchange, normalized for the supplied adjunction on f.
 Source: Stacks Project, Tags 02KH (part (1), degree zero) and 02N7 (mate construction).

@@ -40,7 +40,6 @@ private theorem isColimit_of_truncated_comparison
     (hc.uniqueUpToIso (colimit.isColimit D)))⟩
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- Elaborating the exact dual tensor and derived sections requires extra heartbeats.
 /-- Continuity for a pro-etale locally finite free internal module.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), locally free calculation.

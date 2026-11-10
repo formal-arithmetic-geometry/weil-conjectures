@@ -779,7 +779,7 @@ ordinaryRho to one such representative and conjugate by the two universal reduct
 counits and exact-restriction factorization maps. The formula descends through resolving
 quasi-isomorphisms, giving the isomorphism. Every derived object has a representative
 of this kind, so the formula determines the natural isomorphism uniquely. -/
-theorem rho_exists_core (T : Scheme.{t}) :
+theorem rho_exists (T : Scheme.{t}) :
     ∃ e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
         res d T ⋙ reduction d T, RhoNormalization d T e := by
   have hflat := orderedScalarFlat d T
@@ -870,7 +870,7 @@ theorem rho_exists_core (T : Scheme.{t}) :
   erw [hρ, Category.comp_id] at key'
   exact key'.trans (Category.assoc _ _ _)
 
-theorem rho_unique_core (T : Scheme.{t})
+theorem rho_unique (T : Scheme.{t})
     {e₁ e₂ : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
         res d T ⋙ reduction d T}
     (h₁ : RhoNormalization d T e₁) (h₂ : RhoNormalization d T e₂) : e₁ = e₂ := by
@@ -901,17 +901,6 @@ theorem rho_unique_core (T : Scheme.{t})
         (((reductionRestrict T (exchangeScalar d T)).mapHomologicalComplex (.up ℤ)).obj L))).mp
   unfold RhoNormalization at h₁ h₂
   exact (h₁ L hL hLf).trans (h₂ L hL hLf).symm
-
-theorem rho_exists (T : Scheme.{t}) :
-    ∃ e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
-        res d T ⋙ reduction d T, RhoNormalization d T e := by
-  exact rho_exists_core d T
-
-theorem rho_unique (T : Scheme.{t})
-    {e₁ e₂ : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
-        res d T ⋙ reduction d T}
-    (h₁ : RhoNormalization d T e₁) (h₂ : RhoNormalization d T e₂) : e₁ = e₂ := by
-  exact rho_unique_core d T h₁ h₂
 
 theorem rho_existsUnique (T : Scheme.{t}) :
     ∃! e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅

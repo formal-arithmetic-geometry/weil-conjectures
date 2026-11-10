@@ -47,10 +47,6 @@ lemma Etale.comp_left_eq {X Y Z : T.Etale} (f : X ⟶ Y) (g : Y ⟶ Z) :
 @[simp]
 lemma Etale.id_left_eq (X : T.Etale) : (𝟙 X : X ⟶ X).left = 𝟙 X.left := rfl
 
-/-- Morphisms in the small étale site are determined by their underlying morphisms. -/
-lemma Etale.hom_ext {X Y : T.Etale} {f g : X ⟶ Y} (h : f.left = g.left) : f = g :=
-  MorphismProperty.Over.Hom.ext h
-
 /-- A section `ξ ∈ E(V)` is *universal* relative to `u : U ⟶ T` along `v : V ⟶ U` if for every
 étale `T`-scheme `W` and every factorisation `w : W ⟶ U` of its structure morphism through `u`,
 the map `a ↦ a^* ξ` from `U`-morphisms `W ⟶ V` to `E(W)` is bijective. When `v ≫ u` is the

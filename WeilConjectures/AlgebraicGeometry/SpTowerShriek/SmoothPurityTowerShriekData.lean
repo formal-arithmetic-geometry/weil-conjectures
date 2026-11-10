@@ -5,8 +5,10 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTowersAbelian
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
+public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 public import WeilConjectures.SixFunctors.Finite.FiniteTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
@@ -80,11 +82,6 @@ object and morphism universes unchanged. Source: blueprint size convention
 (blueprint: def-sp-tower-shriek-data). -/
 instance (priority := 2000) small (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
-
-/-- The sequence site has the same coefficient-universe bound.
-Source: blueprint sequence-site model (blueprint: def-sp-tower-shriek-data). -/
-instance (priority := 2000) sequenceSmall (T : Scheme.{u}) :
-    EssentiallySmall.{u + 1} (ℕ × T.ProEt) := essentiallySmallSelf.{0} _
 
 /-- The published ringed sequence-site model of these strict varying-ring systems.
 Source: blueprint clause (2), semilinear section model

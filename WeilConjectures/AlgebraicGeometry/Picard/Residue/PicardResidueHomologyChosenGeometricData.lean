@@ -28,7 +28,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- The finite family of dependent derived-category maps requires extra elaboration heartbeats.
 /-- The coefficient arrows have chain representatives for the fixed affine models, and the
 canonical affine residue comparisons intertwine their residue cycle homology maps with the

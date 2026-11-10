@@ -28,7 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Scalar restriction and localization equivalences require additional elaboration work.
 /-- A localizing module presheaf has unique gluing on every cover of one affine
 open by its principal opens.

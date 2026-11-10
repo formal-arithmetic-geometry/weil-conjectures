@@ -33,7 +33,7 @@ private lemma transport_comparison
     _ = (e ≪≫ e₂).hom ≫ f := (Category.assoc _ _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Transporting the standard derived-category instances needs extra elaboration heartbeats.
 /-- A strict first-map square whose cones represent the overlap comparisons.
 Unlike a short exact presentation, this asserts no monomorphism, epimorphism,

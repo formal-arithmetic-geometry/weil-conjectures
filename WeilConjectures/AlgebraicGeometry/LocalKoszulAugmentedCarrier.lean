@@ -223,7 +223,6 @@ private theorem local_tensor_free {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 600000 in
 -- Several natural isomorphisms transport the complex across charts and the over site.
 private theorem local_koszul_pullback_zero {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] [(Scheme.Modules.tensorPullback i).Additive]

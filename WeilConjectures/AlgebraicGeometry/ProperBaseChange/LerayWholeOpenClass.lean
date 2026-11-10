@@ -51,7 +51,7 @@ attribute [local irreducible] moduleCohomologyFMap sectionCohomologyTheta
   resolutionSectionClass
 
 set_option backward.defeqAttrib.useBackward false in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 500000 in
 -- Compare the cycle kernels in the module, presheaf, and additive group categories.
 private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (n : ℕ)

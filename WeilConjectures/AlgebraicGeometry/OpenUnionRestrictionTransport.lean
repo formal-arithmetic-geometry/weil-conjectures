@@ -144,7 +144,6 @@ private theorem comparison_diagram_pair
 
 -- The existential localization data must remain inline for the following let-bound functors.
 set_option linter.style.haveILetI false in
-set_option maxHeartbeats 1600000 in
 -- Instantiating the categorical transport lemma needs many derived-functor type comparisons.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency true in

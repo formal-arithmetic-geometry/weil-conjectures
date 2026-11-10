@@ -141,7 +141,6 @@ section
 universe a b w
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
   [HasDerivedCategory.{w} A] [CountableAB4Star A]
-set_option maxHeartbeats 400000 in
 -- Assembly of the scalar tower and both localized descents has many dependent fields.
 -- Elaborating the concrete tensor and localization interfaces needs extra heartbeats.
 private theorem scalarPresentation (r : End (𝟭 A)) :

@@ -327,7 +327,7 @@ lemma toPt_ofPt {Z : Y.Etale} (z : Z.left ⟶ Y') (hz : z ≫ p = Z.hom)
 lemma ofPt_toPt {Z : Y.Etale} (z : Z.left ⟶ Y') (hz : z ≫ p = Z.hom)
     (a : (sheaf D).obj.obj (op Z)) : ofPt z hz (toPt z hz a) (toPt_hom z hz a) = a := by
   apply Subtype.ext
-  apply Etale.hom_ext
+  apply EtaleTorsor.etaleHom_ext
   change ofPtLeft D z hz (toPt z hz a) (toPt_hom z hz a) = a.1.left
   have := compat a (pullback.fst Z.hom p ≫ pullback.lift (𝟙 _) z (by simp [hz])) (𝟙 _)
     (by simp)
@@ -409,11 +409,11 @@ noncomputable def homEquivW (Z : Over W) :
         change pullback.lift _ _ _ ≫ pullback.snd V.hom w ≫ W.hom = Z.left.hom
         rw [pullback.lift_snd_assoc]
         exact MorphismProperty.Over.w Z.hom)) (by
-      apply Etale.hom_ext
+      apply EtaleTorsor.etaleHom_ext
       exact pullback.lift_snd _ _ _)
   left_inv φ := by
     apply Over.OverMorphism.ext
-    apply Etale.hom_ext
+    apply EtaleTorsor.etaleHom_ext
     apply pullback.hom_ext
     · exact (pullback.lift_fst _ _ _).trans (toPt_ofPt _ _ _ _)
     · exact (pullback.lift_snd _ _ _).trans (left_left_snd w φ).symm
@@ -491,7 +491,7 @@ lemma isPullback_descQ : IsPullback (descQ r) V.hom X.hom p := by
     rw [toPt_hom_assoc]
     exact hzZ)
   have h1 : φ ≫ ψ = 𝟙 _ := by
-    have hφ : φE ≫ fstE = descQE r := Etale.hom_ext (pullback.lift_fst _ _ _)
+    have hφ : φE ≫ fstE = descQE r := EtaleTorsor.etaleHom_ext (pullback.lift_fst _ _ _)
     calc φ ≫ ψ = toPt V.hom rfl ((sheaf D).obj.map φE.op (r.homEquiv fstE)) :=
           (toPt_map φE _ hzZ V.hom rfl (pullback.lift_snd _ _ _).symm _).symm
       _ = toPt V.hom rfl (idSection D) := by rw [← r.homEquiv_comp, hφ, homEquiv_descQE]

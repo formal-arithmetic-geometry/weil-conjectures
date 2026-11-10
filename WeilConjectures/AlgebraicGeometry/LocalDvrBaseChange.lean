@@ -131,8 +131,8 @@ theorem Scheme.local_dvr_base_change
   let : Smooth s' := hbase.2.2.1 inferInstance
   let : IsNoetherian X := isNoetherian_of_locallyOfFiniteType s
   let : IsNoetherian X' := isNoetherian_of_locallyOfFiniteType s'
-  let : ConnectedSpace X := IsConnectedCurve.connectedSpace' s
-  let : ConnectedSpace X' := IsConnectedCurve.connectedSpace' s'
+  let : ConnectedSpace X := IsConnectedCurve.connectedSpace (f := s)
+  let : ConnectedSpace X' := IsConnectedCurve.connectedSpace (f := s')
   let : IsRegular X := IsRegular.of_smooth s
   let : IsRegular X' := IsRegular.of_smooth s'
   let : IsIntegral X := IsRegular.isIntegral X

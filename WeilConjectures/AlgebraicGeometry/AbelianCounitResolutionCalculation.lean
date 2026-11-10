@@ -28,9 +28,7 @@ attribute [local irreducible] abelianResolutionIso
 attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
 attribute [local irreducible] siteSectionsObjIso
 
-local instance abelianPushforward_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (abelianPushforward f).Additive :=
-  ⟨by intros; ext U x; rfl⟩
+attribute [local instance] cocycle_pushforward_additive
 
 /-- Fix the standard abelian injective resolution before composing functors.
 Source: Stacks, Tag 06XR. -/
