@@ -515,7 +515,8 @@ omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 (`AlgebraicGeometry.Scheme.FiniteEtale.isIso_sigmaDesc_of_existsUnique`). -/
 lemma isIso_graphDesc (P : Y.FiniteEtale) [IsGalois P] :
     IsIso (Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
-      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+        m.down.asIso.hom.hom.left (𝟙 P.obj.left)
         (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)) := by
   have : Finite (ULift.{u + 1} (Aut P)) := Finite.of_equiv _ Equiv.ulift.symm
   refine isIso_sigmaDesc_of_existsUnique (M := ULift.{u + 1} (Aut P)) y P
@@ -533,7 +534,8 @@ lemma exists_aut_of_mem_pullback (P : Y.FiniteEtale) [IsGalois P]
         (by rw [Category.id_comp]; exact hom_left_comp σ.asIso.hom)).base z = q := by
   have := isIso_graphDesc y P
   set Φ := Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
-      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+        m.down.asIso.hom.hom.left (𝟙 P.obj.left)
         (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)
   obtain ⟨m, z, hz⟩ := (sigmaOpenCover fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left).exists_eq
     ((inv Φ).base q)
@@ -557,10 +559,12 @@ lemma aut_eq_of_pullback_lift_eq (P : Y.FiniteEtale) [IsGalois P] (σ σ' : Aut 
         (by rw [Category.id_comp]; exact hom_left_comp σ'.asIso.hom)).base z') : σ = σ' := by
   have := isIso_graphDesc y P
   set Φ := Sigma.desc fun m : ULift.{u + 1} (Aut P) ↦
-      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom) m.down.asIso.hom.hom.left (𝟙 P.obj.left)
+      Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
+        m.down.asIso.hom.hom.left (𝟙 P.obj.left)
         (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)
   have e (τ : Aut P) (w : P.obj.left) : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
-      τ.asIso.hom.hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp τ.asIso.hom)).base w =
+      τ.asIso.hom.hom.left (𝟙 P.obj.left)
+        (by rw [Category.id_comp]; exact hom_left_comp τ.asIso.hom)).base w =
       Φ.base ((Sigma.ι (fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left) ⟨τ⟩).base w) := by
     rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
   rw [e, e] at h
@@ -725,17 +729,20 @@ noncomputable def autAt (j : Index y) (g : Aut (fiber y)) : Aut ((obj y).obj j) 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- The defining property of `autAt`. -/
 lemma autAt_spec (j : Index y) (g : Aut (fiber y)) :
-    (fiber y).map (autAt y j g).asIso.inv (point y j) = g.asIso.inv.app ((obj y).obj j) (point y j) :=
+    (fiber y).map (autAt y j g).asIso.inv (point y j) =
+      g.asIso.inv.app ((obj y).obj j) (point y j) :=
   (existsUnique_autAt y j g).exists.choose_spec
 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- A loop acts on the point `a_j` through `autAt`. -/
 lemma asIso.hom_app_point (j : Index y) (g : Aut (fiber y)) :
-    g.asIso.hom.app ((obj y).obj j) (point y j) = (fiber y).map (autAt y j g).asIso.hom (point y j) := by
+    g.asIso.hom.app ((obj y).obj j) (point y j) =
+      (fiber y).map (autAt y j g).asIso.hom (point y j) := by
   have e := ConcreteCategory.congr_hom (g.asIso.inv.naturality (autAt y j g).asIso.hom) (point y j)
   simp only [FintypeCat.comp_apply] at e
   rw [← autAt_spec] at e
-  have e₁ := ConcreteCategory.congr_hom ((fiber y).mapIso ((autAt y j g)).asIso).inv_hom_id (point y j)
+  have e₁ := ConcreteCategory.congr_hom
+    ((fiber y).mapIso ((autAt y j g)).asIso).inv_hom_id (point y j)
   simp only [Functor.mapIso_inv, Functor.mapIso_hom, FintypeCat.comp_apply,
     FintypeCat.id_apply] at e₁
   rw [e₁] at e
