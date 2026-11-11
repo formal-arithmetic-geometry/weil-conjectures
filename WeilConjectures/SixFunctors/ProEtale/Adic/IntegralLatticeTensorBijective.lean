@@ -152,9 +152,8 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
   induction τ using TensorProduct.inductionOn with
   | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ']
   | tmul o m =>
-    rewrite [Subalgebra.stageTensorMap_tmul]
-    rewrite [AdicSheaf.tensorSections_tmul]
-    rewrite [adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul']
+    simp only [Subalgebra.stageTensorMap_tmul, AdicSheaf.tensorSections_tmul,
+      adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul']
     refine (congrArg (fun y ↦ (upperStarRightDerivedSections g p i W).map
       ((weilCoefficientsForgetAb l T).map ((weilSmulNatTrans l T _).app
         (adicConstantSheaf l T))) y)
