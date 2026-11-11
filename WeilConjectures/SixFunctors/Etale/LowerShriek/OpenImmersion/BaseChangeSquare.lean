@@ -203,15 +203,16 @@ lemma Etale.baseChangeMap_flip_id_left :
   refine (Etale.mateEquiv_baseChangeSquare A _).trans ?_
   have hR : Etale.upperStarBaseChange A j q k hk ≫ ((j)^*[A]).rightUnitor.inv ≫
         Functor.whiskerLeft (j)^*[A] (Etale.lowerStarId A X).inv =
-      ((TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((k)^*[A]) (𝟭 _)
+      (TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((k)^*[A]) (𝟭 _)
         (Etale.upperStarBaseChange A j q k hk)).whiskerBottom
-          (Etale.lowerStarId A X).inv).natTrans := by
+          (Etale.lowerStarId A X).inv := by
     ext F
     simp [TwoSquare.whiskerBottom]
   rw [hR, mateEquiv_whiskerBottom]
   subst hk
-  rw [TwoSquare.whiskerLeft, Etale.mateEquiv_upperStarBaseChange A j q (j ≫ q) rfl,
-    Etale.squareLowerStarIso,
+  have hmate := Etale.mateEquiv_upperStarBaseChange A j q (j ≫ q) rfl
+  change mateEquiv _ _ _ = _ at hmate
+  rw [TwoSquare.whiskerLeft, hmate, Etale.squareLowerStarIso,
     Iso.trans_hom, Iso.symm_hom, Etale.lowerStarComp_id_left]
   ext F
   simp
