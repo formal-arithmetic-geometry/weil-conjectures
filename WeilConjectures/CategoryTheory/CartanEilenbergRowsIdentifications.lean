@@ -64,7 +64,8 @@ private noncomputable def rowHomologyData
     CokernelCofork.IsColimit.ofπ _ _
       (fun k hk ↦ (R.exact₂ p).gIsCokernel.desc (CokernelCofork.ofπ k (by
         apply (cancel_epi r).1
-        simpa [hlift, Category.assoc] using hk)))
+        rw [← hlift, Category.assoc]
+        exact hk)))
       (fun k hk ↦ (R.exact₂ p).gIsCokernel.fac _ WalkingParallelPair.one)
       (fun k hk b hb ↦ by
         have : Epi (R.x p) := (R.exact₂ p).epi_g
