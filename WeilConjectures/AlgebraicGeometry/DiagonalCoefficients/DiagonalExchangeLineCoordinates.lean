@@ -39,7 +39,7 @@ theorem exchangeLineCoordinate_isIso
     (e : F.obj K ⟶ K') [IsSplitMono (F.map u ≫ e)]
     (hz : F.map a ≫ e ≫ t' = 0) (i : F.obj A ≅ A')
     (hline : ∀ q : End A, IsSplitMono q → IsIso q)
-    (hline' : ∀ q : End A', IsSplitMono q → IsIso q) :
+    (hline' : ∀ q : End A', IsSplitMono q → IsIso (q).asHom) :
     IsIso (F.map a ≫ e ≫ inv (biprod.desc a' b') ≫ biprod.fst) := by
   let d := u ≫ inv (biprod.desc a b) ≫ biprod.fst
   have : IsIso d := splitLineCoordinate_isIso a b t hat hbt u hu (Iso.refl A) hline

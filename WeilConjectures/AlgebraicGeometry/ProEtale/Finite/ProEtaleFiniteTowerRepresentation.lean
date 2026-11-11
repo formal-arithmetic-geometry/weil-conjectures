@@ -53,6 +53,8 @@ import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 import WeilConjectures.AlgebraicGeometry.ProfiniteLocallyConstantAdjunction
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+public import Mathlib.Data.Finite.Prod
+public import Mathlib.Data.Finite.Sigma
 
 /-! # Geometric representation of finite coefficient towers -/
 

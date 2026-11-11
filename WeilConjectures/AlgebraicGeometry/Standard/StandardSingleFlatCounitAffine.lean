@@ -50,8 +50,8 @@ private theorem affine_pushforward_isFlat
   have hflat := hN V ⟨f ⁻¹ᵁ W.1, W.2.preimage f⟩ hpre
   convert hflat using 1 <;> try rfl
   ext r m
-  change (N.smul ((f.app W.1).hom ((B.presheaf.map (homOfLE hWV).op).hom r))).hom m =
-    (N.smul ((f.appLE V.1 (f ⁻¹ᵁ W.1) hpre).hom r)).hom m
+  change (N.smul ((f.app W.1).hom ((B.presheaf.map (homOfLE hWV).op).hom r))).asHom.hom m =
+    (N.smul ((f.appLE V.1 (f ⁻¹ᵁ W.1) hpre).hom r)).asHom.hom m
   have heq : B.presheaf.map (homOfLE hWV).op ≫ f.app W.1 =
       f.appLE V.1 (f ⁻¹ᵁ W.1) hpre := by
     rw [f.app_eq_appLE, f.map_appLE]

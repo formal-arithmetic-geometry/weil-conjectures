@@ -125,7 +125,7 @@ theorem splitProjector_factor :
 
 /-- The finite average is idempotent when the group order is invertible. -/
 theorem splitProjector_idempotent (hq : IsUnit (Fintype.card G : R)) :
-    splitProjector U χ ≫ (splitProjector U χ).asHom = (splitProjector U χ).asHom := by
+    (splitProjector U χ).asHom ≫ (splitProjector U χ).asHom = (splitProjector U χ).asHom := by
   calc
     _ = (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫
         splitCharacterVector U χ ≫ splitProjector U χ := by
@@ -141,7 +141,7 @@ def actionProjector (M : C) (σ : G → End M) (χ : AddChar G R) : End M :=
 /-- Reindexing the finite average gives its character eigenrelation. -/
 theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (b : G) :
-    actionProjector M σ χ ≫ (σ b).asHom = (χ b • actionProjector M σ χ).asHom := by
+    (actionProjector M σ χ).asHom ≫ (σ b).asHom = (χ b • actionProjector M σ χ).asHom := by
   unfold actionProjector
   rw [Preadditive.sum_comp, Finset.smul_sum]
   apply Fintype.sum_equiv (Equiv.addRight b)
@@ -165,7 +165,7 @@ theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
 /-- Averaging is idempotent whenever the group order is invertible. -/
 theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (hq : IsUnit (Fintype.card G : R)) :
-    actionProjector M σ χ ≫ (actionProjector M σ χ).asHom = (actionProjector M σ χ).asHom := by
+    (actionProjector M σ χ).asHom ≫ (actionProjector M σ χ).asHom = (actionProjector M σ χ).asHom := by
   conv_lhs => arg 2; rw [actionProjector]
   rw [Preadditive.comp_sum]
   have ht (c : G) : actionProjector M σ χ ≫

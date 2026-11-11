@@ -34,7 +34,7 @@ theorem geometricFiberMap_comp_geometricGaloisFrobenius_pow (φ : X₀ ⟶ Y₀)
   induction m with
   | zero => exact (Category.comp_id _).trans (Category.id_comp _).symm
   | succ m ih =>
-    rw [pow_succ, pow_succ, Aut.Aut_mul_def, Aut.Aut_mul_def, Iso.trans_hom, Iso.trans_hom,
+    rw [pow_succ, pow_succ, Aut.mul_asIso, Aut.mul_asIso, Iso.trans_hom, Iso.trans_hom,
       geometricFiberMap_comp_geometricGaloisFrobenius_assoc, ih, Category.assoc]
 
 end AlgebraicGeometry.Scheme.Hom

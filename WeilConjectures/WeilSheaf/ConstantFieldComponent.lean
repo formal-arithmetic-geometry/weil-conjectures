@@ -64,8 +64,8 @@ include hc in
 `r`-th power of that over `k₀`, `#k' = #k₀ ^ r`: `Fr' ≫ θ = θ ≫ Frʳ`. -/
 lemma geometricGaloisFrobenius_hom_comp_geometricFiberComponentMap (r : ℕ)
     (hr : Nat.card k' = Nat.card k₀ ^ r) :
-    c.geometricGaloisFrobenius.hom ≫ geometricFiberComponentMap c f hc =
-      geometricFiberComponentMap c f hc ≫ (f.geometricGaloisFrobenius ^ r).hom := by
+    c.geometricGaloisFrobenius.asIso.hom ≫ geometricFiberComponentMap c f hc =
+      geometricFiberComponentMap c f hc ≫ (f.geometricGaloisFrobenius ^ r).asIso.hom := by
   have hτ := spec_algebraicClosureAlgEquiv_comp_specGeometricFrobenius (k₀ := k₀) (k₀' := k') r hr
   have h₁ : Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').symm.toRingHom) ≫
       Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').toRingHom) = 𝟙 _ := by
@@ -75,11 +75,11 @@ lemma geometricGaloisFrobenius_hom_comp_geometricFiberComponentMap (r : ℕ)
       Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').symm.toRingHom) = 𝟙 _ := by
     rw [spec_map_comp_spec_map_eq _ _ (RingHom.id _) (fun x ↦ by simp), CommRingCat.ofHom_id,
       Spec.map_id]
-  have hσ : (specGeometricFrobenius k').hom ≫
+  have hσ : (specGeometricFrobenius k').asIso.hom ≫
       Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').symm.toRingHom) =
       Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').symm.toRingHom) ≫
-        (specGeometricFrobenius k₀ ^ r).hom := by
-    rw [← Category.id_comp (specGeometricFrobenius k').hom, ← h₁, Category.assoc, Category.assoc,
+        (specGeometricFrobenius k₀ ^ r).asIso.hom := by
+    rw [← Category.id_comp (specGeometricFrobenius k').asIso.hom, ← h₁, Category.assoc, Category.assoc,
       reassoc_of% hτ, h₂, Category.comp_id]
   ext
   · simp

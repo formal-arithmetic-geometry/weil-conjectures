@@ -47,8 +47,8 @@ private theorem localizationPresentation_flatOver_restrict
   convert hh using 1 <;> try rfl
   ext r m
   change (M.smul (((i.appIso U.1).inv.hom)
-    (((i ≫ p).appLE V.1 U.1 e).hom r))).hom m =
-      (M.smul ((p.appLE V.1 U'.1 e').hom r)).hom m
+    (((i ≫ p).appLE V.1 U.1 e).hom r))).asHom.hom m =
+      (M.smul ((p.appLE V.1 U'.1 e').hom r)).asHom.hom m
   exact congrArg (fun x ↦ (M.smul x).hom m) (congrArg (fun x ↦ x.hom r) heq)
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
@@ -104,8 +104,8 @@ theorem standardSingleFlatCounit_localization_presentation_data
     convert hh using 1 <;> try rfl
     ext r m
     change (M.smul (((p ⁻¹ᵁ S).ι.appIso U0.1).inv.hom
-      ((p.appLE V1.1 U1.1 e1).hom r))).hom m =
-        (M.smul ((p.appLE V1.1 U1.1 e1).hom r)).hom m
+      ((p.appLE V1.1 U1.1 e1).hom r))).asHom.hom m =
+        (M.smul ((p.appLE V1.1 U1.1 e1).hom r)).asHom.hom m
     rw [Scheme.Opens.ι_appIso]
     rfl
   let q := p ∣_ S

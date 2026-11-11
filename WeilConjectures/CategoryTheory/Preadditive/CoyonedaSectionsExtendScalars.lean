@@ -102,7 +102,7 @@ lemma coyonedaSectionsExtendScalarsComparison_app_one_tmul {M : C₁}
 endomorphism of `X₁` is the action of a scalar of `A` and if `B` acts bijectively on `X₂`:
 both sides are then `B`. -/
 lemma isIso_coyonedaSectionsExtendScalarsComparison_app_self
-    (hc₁ : ∀ t : X₁ ⟶ X₁, ∃ a, (c₁ a).unop = t) (hc₂ : Function.Bijective fun b ↦ (c₂ b).unop) :
+    (hc₁ : ∀ t : X₁ ⟶ X₁, ∃ a, (c₁ a).unop = .of (t)) (hc₂ : Function.Bijective fun b ↦ (c₂ b).unop) :
     IsIso ((coyonedaSectionsExtendScalarsComparison f c₁ c₂ H e hH).app X₁) := by
   let α := (coyonedaSectionsExtendScalarsComparison f c₁ c₂ H e hH).app X₁
   let one : (ModuleCat.extendScalars f).obj ((coyonedaSections c₁).obj X₁) :=

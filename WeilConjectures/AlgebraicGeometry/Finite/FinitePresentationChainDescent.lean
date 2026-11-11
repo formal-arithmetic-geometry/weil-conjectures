@@ -29,6 +29,8 @@ public import Mathlib.Basic.Finite.Prod
 public import Mathlib.Basic.Finite.Sigma
 public import Mathlib.Topology.Compactness.Compact
 public import Mathlib.Data.Fintype.Shrink
+public import Mathlib.Data.Finite.Prod
+public import Mathlib.Data.Finite.Sigma
 
 /-!
 # Common-stage descent of finite chains with a finite comparison

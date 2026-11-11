@@ -97,7 +97,7 @@ lemma presheafFiberAction_V (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) :
 
 @[simp]
 lemma presheafFiberAction_ρ (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) :
-    (Φ.presheafFiberAction act P).ρ σ = Φ.presheafFiberAct act P σ :=
+    (Φ.presheafFiberAction act P).ρ σ = .of (Φ.presheafFiberAct act P σ :=)
   rfl
 
 /-- The fibre functor on abelian sheaves, with the action of `G` on the fibres. -/
@@ -293,7 +293,7 @@ noncomputable def fromEquivariantSheaf (M : Action AddCommGrpCat.{w} G) :
     change Φ.toPresheafFiber X x _ ≫ Φ.presheafFiberAct act _ σ ≫
         Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) =
       Φ.toPresheafFiber X x _ ≫
-        Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) ≫ M.ρ σ
+        Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) ≫ (M.ρ σ).asHom
     rw [toPresheafFiber_presheafFiberAct_assoc,
       Φ.toPresheafFiber_presheafFiberDesc _ (Φ.evalEquivariantMaps_w act M),
       Φ.toPresheafFiber_presheafFiberDesc_assoc _ (Φ.evalEquivariantMaps_w act M)]
@@ -372,7 +372,7 @@ variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrp
 
 /-- `G` acts trivially on the fibre of a constant sheaf. -/
 lemma sheafFiberAction_constantSheaf_ρ (A : AddCommGrpCat.{w}) (σ : G) :
-    ((Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A)).ρ σ = 𝟙 _ := by
+    ((Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A)).ρ σ = .of (𝟙 _) := by
   change Φ.presheafFiberAct act (CategoryTheory.sheafify J ((Functor.const Cᵒᵖ).obj A)) σ = 𝟙 _
   rw [← cancel_epi (Φ.presheafFiber.map (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj A))),
     presheafFiber_map_presheafFiberAct, presheafFiberAct_const, Category.id_comp,
