@@ -317,19 +317,19 @@ theorem automorphismConstructibleStage_integral_shift_witness
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom)
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom)
     (b : constructibleIntegralPullback l E f ⋙
-      constructibleIntegralPullback l E eY.hom ≅
-      constructibleIntegralPullback l E eX.hom ⋙
+      constructibleIntegralPullback l E eY.asIso.hom ≅
+      constructibleIntegralPullback l E eX.asIso.hom ⋙
         constructibleIntegralPullback l E f)
     (hb : ∀ K : sfIntegralConstructibleCategory l E X,
       (b.hom.app K).hom =
-        (integralComparisonComposition l E C eY.hom f K).inv ≫
+        (integralComparisonComposition l E C eY.asIso.hom f K).inv ≫
           eqToHom (congrArg (fun g ↦ (integralDerivedPullback l E g).obj K.obj) h) ≫
-          (integralComparisonComposition l E C f eX.hom K).hom) :
+          (integralComparisonComposition l E C f eX.asIso.hom K).hom) :
     ∃ (cf : (constructibleIntegralPullback l E f).CommShift ℤ)
-      (cX : (constructibleIntegralPullback l E eX.hom).CommShift ℤ)
-      (cY : (constructibleIntegralPullback l E eY.hom).CommShift ℤ),
+      (cX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ)
+      (cY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ),
       (∃ (c : (integralOperationsPullbackComplexFunctor l E f).CommShift ℤ)
         (d : (integralDerivedPullback l E f).CommShift ℤ),
         IntegralCompletedComparison.ShiftCoordinates l E f c ∧
@@ -338,28 +338,28 @@ theorem automorphismConstructibleStage_integral_shift_witness
             HEq (((constructibleIntegralPullback l E f).commShiftIso
               (self := cf) r).hom.app K).hom
               (((integralDerivedPullback l E f).commShiftIso r).hom.app K.obj)) ∧
-      (∃ (c : (integralOperationsPullbackComplexFunctor l E eX.hom).CommShift ℤ)
-        (d : (integralDerivedPullback l E eX.hom).CommShift ℤ),
-        IntegralCompletedComparison.ShiftCoordinates l E eX.hom c ∧
-          IntegralCompletedComparison.ShiftDescent l E eX.hom c d ∧
+      (∃ (c : (integralOperationsPullbackComplexFunctor l E eX.asIso.hom).CommShift ℤ)
+        (d : (integralDerivedPullback l E eX.asIso.hom).CommShift ℤ),
+        IntegralCompletedComparison.ShiftCoordinates l E eX.asIso.hom c ∧
+          IntegralCompletedComparison.ShiftDescent l E eX.asIso.hom c d ∧
           ∀ (K : sfIntegralConstructibleCategory l E X) (r : ℤ),
-            HEq (((constructibleIntegralPullback l E eX.hom).commShiftIso
+            HEq (((constructibleIntegralPullback l E eX.asIso.hom).commShiftIso
               (self := cX) r).hom.app K).hom
-              (((integralDerivedPullback l E eX.hom).commShiftIso r).hom.app K.obj)) ∧
-      (∃ (c : (integralOperationsPullbackComplexFunctor l E eY.hom).CommShift ℤ)
-        (d : (integralDerivedPullback l E eY.hom).CommShift ℤ),
-        IntegralCompletedComparison.ShiftCoordinates l E eY.hom c ∧
-          IntegralCompletedComparison.ShiftDescent l E eY.hom c d ∧
+              (((integralDerivedPullback l E eX.asIso.hom).commShiftIso r).hom.app K.obj)) ∧
+      (∃ (c : (integralOperationsPullbackComplexFunctor l E eY.asIso.hom).CommShift ℤ)
+        (d : (integralDerivedPullback l E eY.asIso.hom).CommShift ℤ),
+        IntegralCompletedComparison.ShiftCoordinates l E eY.asIso.hom c ∧
+          IntegralCompletedComparison.ShiftDescent l E eY.asIso.hom c d ∧
           ∀ (K : sfIntegralConstructibleCategory l E Y) (r : ℤ),
-            HEq (((constructibleIntegralPullback l E eY.hom).commShiftIso
+            HEq (((constructibleIntegralPullback l E eY.asIso.hom).commShiftIso
               (self := cY) r).hom.app K).hom
-              (((integralDerivedPullback l E eY.hom).commShiftIso r).hom.app K.obj)) ∧
+              (((integralDerivedPullback l E eY.asIso.hom).commShiftIso r).hom.app K.obj)) ∧
       (fun [sf : (constructibleIntegralPullback l E f).CommShift ℤ]
-        [sX : (constructibleIntegralPullback l E eX.hom).CommShift ℤ]
-        [sY : (constructibleIntegralPullback l E eY.hom).CommShift ℤ] ↦
+        [sX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
+        [sY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ] ↦
         (constructibleIntegralPullback l E f).IsTriangulated ∧
-          (constructibleIntegralPullback l E eX.hom).IsTriangulated ∧
-          (constructibleIntegralPullback l E eY.hom).IsTriangulated ∧
+          (constructibleIntegralPullback l E eX.asIso.hom).IsTriangulated ∧
+          (constructibleIntegralPullback l E eY.asIso.hom).IsTriangulated ∧
           NatTrans.CommShift b.hom ℤ)
         (sf := cf) (sX := cX) (sY := cY) := by
   classical
@@ -376,15 +376,15 @@ theorem automorphismConstructibleStage_integral_shift_witness
       (constructibleIntegralPullback l E g).CommShift ℤ := restrictShift l E g (d' g)
   refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_, ?_, ?_⟩
   · exact ⟨a' f, d' f, ha' f, hd' f, restrictShift_hom l E f (d' f)⟩
-  · exact ⟨a' eX.hom, d' eX.hom, ha' eX.hom, hd' eX.hom,
-      restrictShift_hom l E eX.hom (d' eX.hom)⟩
-  · exact ⟨a' eY.hom, d' eY.hom, ha' eY.hom, hd' eY.hom,
-      restrictShift_hom l E eY.hom (d' eY.hom)⟩
+  · exact ⟨a' eX.asIso.hom, d' eX.asIso.hom, ha' eX.asIso.hom, hd' eX.asIso.hom,
+      restrictShift_hom l E eX.asIso.hom (d' eX.asIso.hom)⟩
+  · exact ⟨a' eY.asIso.hom, d' eY.asIso.hom, ha' eY.asIso.hom, hd' eY.asIso.hom,
+      restrictShift_hom l E eY.asIso.hom (d' eY.asIso.hom)⟩
   · refine ⟨restrict_tri l E C f (a' f) (d' f) (ha' f) (hd' f),
-      restrict_tri l E C eX.hom (a' eX.hom) (d' eX.hom) (ha' eX.hom) (hd' eX.hom),
-      restrict_tri l E C eY.hom (a' eY.hom) (d' eY.hom) (ha' eY.hom) (hd' eY.hom), ?_⟩
-    obtain ⟨c, hc, hcs⟩ := composition_shift l E C a' d' ha' hd' eY.hom f
-    obtain ⟨t, ht, hts⟩ := composition_shift l E C a' d' ha' hd' f eX.hom
+      restrict_tri l E C eX.asIso.hom (a' eX.asIso.hom) (d' eX.asIso.hom) (ha' eX.asIso.hom) (hd' eX.asIso.hom),
+      restrict_tri l E C eY.asIso.hom (a' eY.asIso.hom) (d' eY.asIso.hom) (ha' eY.asIso.hom) (hd' eY.asIso.hom), ?_⟩
+    obtain ⟨c, hc, hcs⟩ := composition_shift l E C a' d' ha' hd' eY.asIso.hom f
+    obtain ⟨t, ht, hts⟩ := composition_shift l E C a' d' ha' hd' f eX.asIso.hom
     have eqshift {g g' : Y ⟶ X} (he : g = g') :
         NatTrans.CommShift
           (eqToIso (congrArg (fun g : Y ⟶ X ↦ constructibleIntegralPullback l E g) he)).hom
@@ -399,8 +399,8 @@ theorem automorphismConstructibleStage_integral_shift_witness
       dsimp only [bs, Iso.trans_hom, Iso.symm_hom]
       infer_instance
     have hc' (K : sfIntegralConstructibleCategory l E X) :
-        (c.inv.app K).hom = (integralComparisonComposition l E C eY.hom f K).inv := by
-      apply (cancel_mono (integralComparisonComposition l E C eY.hom f K).hom).1
+        (c.inv.app K).hom = (integralComparisonComposition l E C eY.asIso.hom f K).inv := by
+      apply (cancel_mono (integralComparisonComposition l E C eY.asIso.hom f K).hom).1
       calc
         _ = (c.inv.app K).hom ≫ (c.hom.app K).hom := by rw [hc K]
         _ = 𝟙 _ := congrArg (fun r ↦ r.hom) (c.inv_hom_id_app K)
