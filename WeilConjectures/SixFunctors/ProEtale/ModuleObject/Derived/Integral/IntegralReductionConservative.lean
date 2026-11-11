@@ -293,3 +293,4 @@ theorem integralReduction_reflects_isIso (X : Scheme.{u})
     ((Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).mp (hzero.of_iso e))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
