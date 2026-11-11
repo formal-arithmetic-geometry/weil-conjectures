@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Galois.GaloisLisseCorrespondenceData
 
 /-! # The normalized inverse scalar comparison on unit germs -/

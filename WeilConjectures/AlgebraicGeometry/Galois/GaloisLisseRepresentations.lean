@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Galois.GaloisLisseCorrespondenceData
 import WeilConjectures.AlgebraicGeometry.Galois.GaloisLisseCorrespondenceData
 import WeilConjectures.CategoryTheory.InternalModule.InternalModule

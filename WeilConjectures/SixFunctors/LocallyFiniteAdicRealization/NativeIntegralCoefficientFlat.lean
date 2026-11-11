@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicRealizationData
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralRationalizationExact
 import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction

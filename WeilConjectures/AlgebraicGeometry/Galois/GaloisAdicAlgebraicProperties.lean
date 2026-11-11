@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicDataFromFinite
 import WeilConjectures.AlgebraicGeometry.Galois.GaloisLisseCorrespondenceData
 import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicAlgebraicMonoidal

@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.CategoryTheory.SetFunctorAut.AutProfinite
 public import WeilConjectures.AlgebraicGeometry.Galois.GaloisLisseCorrespondenceData
