@@ -47,9 +47,9 @@ theorem exists_cokernel_limit_of_continuous_end
   let y (k : ℕ) := Projective.factorThru (x k) (cokernel.π A)
   have hy (k : ℕ) : y k ≫ cokernel.π A = x k := Projective.factorThru_comp _ _
   let t : Matrix (Fin n) (Fin m) C(S, R) := fun i j ↦
-    e.symm .of (.of (.of (.of (.of ((biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i))))))
+    e.symm .of (.of (.of (.of (.of (.of ((biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i)))))))
   let b (k : ℕ) : Fin n → C(S, R) := fun i ↦
-    e.symm .of (.of (.of (.of (.of ((y k ≫ biproduct.π (fun _ ↦ P) i))))))
+    e.symm .of (.of (.of (.of (.of (.of ((y k ≫ biproduct.π (fun _ ↦ P) i)))))))
   have hsum {p : ℕ} {Y Z : C} (f : Y ⟶ ⨁ fun _ : Fin p ↦ P)
       (g : (⨁ fun _ : Fin p ↦ P) ⟶ Z) :
       f ≫ g = ∑ a, (f ≫ biproduct.π (fun _ ↦ P) a) ≫
@@ -58,7 +58,7 @@ theorem exists_cokernel_limit_of_continuous_end
     rw [Preadditive.sum_comp, Preadditive.comp_sum]
     simp only [Category.assoc]
   have happ (z : P ⟶ ⨁ fun _ : Fin m ↦ P) (i : Fin n) :
-      e (∑ j, t i j * e.symm .of (.of (.of (.of (.of ((z ≫ biproduct.π (fun _ ↦ P) j))))))) =
+      e (∑ j, t i j * e.symm .of (.of (.of (.of (.of (.of ((z ≫ biproduct.π (fun _ ↦ P) j)))))))) =
         .of (z) ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
     rw [map_sum, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
     apply Finset.sum_congr rfl

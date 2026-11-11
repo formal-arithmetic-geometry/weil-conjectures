@@ -68,7 +68,7 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
   let η := tensorGradedUnit j (L.tensorPow a)
   let g := (T.c a).app ⊤ s
   let w := μ g
-  let v := T.k d ≫ w ≫ (T.degree (d + a)).τ₁
+  let v := T.k d ≫ (w).asHom ≫ (T.degree (d + a)).τ₁
   refine ⟨v, ?_⟩
   have hi : Mono T.i := T.shortExact.mono_f
   have hc : Mono (T.c (a + d)) := mono_of_mono_fac (T.c_projection (a + d))

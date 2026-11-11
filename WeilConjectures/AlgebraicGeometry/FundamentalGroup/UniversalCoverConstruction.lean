@@ -541,7 +541,7 @@ lemma exists_aut_of_mem_pullback (P : Y.FiniteEtale) [IsGalois P]
   rw [sigmaOpenCover_f] at hz
   rw [← Sigma.ι_comp_desc (fun m : ULift.{u + 1} (Aut P) ↦ Limits.pullback.lift (f := P.obj.hom)
     (g := P.obj.hom) m.down.asIso.hom.hom.left (𝟙 P.obj.left)
-      (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)) m, Scheme.Hom.comp_apply]
+      (by rw [Category.id_comp]; exact hom_left_comp m.down.asIso.hom)) m, Scheme.Hom.comp_apply]
   erw [hz]
   rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]
   rfl
@@ -736,7 +736,7 @@ lemma asIso.hom_app_point (j : Index y) (g : Aut (fiber y)) :
   have e := ConcreteCategory.congr_hom (g.asIso.inv.naturality (autAt y j g).asIso.hom) (point y j)
   simp only [FintypeCat.comp_apply] at e
   rw [← autAt_spec] at e
-  have e₁ := ConcreteCategory.congr_hom ((fiber y).mapIso (autAt y j g)).inv_hom_id (point y j)
+  have e₁ := ConcreteCategory.congr_hom ((fiber y).mapIso ((autAt y j g)).asIso).inv_hom_id (point y j)
   simp only [Functor.mapIso_inv, Functor.mapIso_hom, FintypeCat.comp_apply,
     FintypeCat.id_apply] at e₁
   rw [e₁] at e

@@ -365,7 +365,7 @@ lemma mem_range_geometricFiberComponentMap_comp_iff (n : ℕ) (x : f.geometricFi
     refine ⟨(specGeometricFrobenius k₀ ^ n).asIso.hom.base w, ?_⟩
     change ((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^ n).asIso.hom.base
         (constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).asIso.inv.base
-          ((specGeometricFrobenius k₀ ^ n).hom.base w))) =
+          ((specGeometricFrobenius k₀ ^ n).asIso.hom.base w))) =
       (geometricFiberToConstantFieldFiber c f hc).base ((f.geometricGaloisFrobenius ^ n).asIso.hom.base
         ((geometricFiberComponentMap c f hc).base y))
     rw [iso_inv_hom_apply, hw]
@@ -381,7 +381,7 @@ lemma mem_range_geometricFiberComponentMap_comp_iff (n : ℕ) (x : f.geometricFi
       change constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).asIso.inv.base u) =
         ((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^ n).asIso.inv.base
           (((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^
-            n).hom.base
+            n).asIso.hom.base
               (constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).inv.base u)))
       rw [iso_inv_hom_apply]
     obtain ⟨y, hy⟩ := hx

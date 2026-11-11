@@ -69,7 +69,7 @@ private theorem homogeneous_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
     ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
         kernel (tensorGradedUnit j (L.tensorPow (a + d))),
       T.k d ≫ (μ ((T.c a).app ⊤ s)).asHom = v ≫ T.k (a + d) := by
-  let r := T.k d ≫ μ ((T.c a).app ⊤ s)
+  let r := T.k d ≫ (μ ((T.c a).app ⊤ s)).asHom
   let π := (T.degree (a + d)).τ₁
   refine ⟨r ≫ π, ?_⟩
   change r = (r ≫ π) ≫ T.k (a + d)
