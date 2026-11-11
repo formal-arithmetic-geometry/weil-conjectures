@@ -62,7 +62,6 @@ lemma iso_hom_integralLatticeSectionsOfIdentification (U : S.ProEt) (m : C(U.lef
     e.iso.hom.hom.app (op U) (integralLatticeSectionsOfIdentification e E θ U m) =
       (upperStarRightDerivedSections g q i U).map (adicConstantSheafLeg T l E 0)
         (θ.hom.app (op U) (ULift.up m)) := by
-
   have h : integralLatticeHomOfIdentification e E θ ≫ e.iso.hom =
       θ ≫ (q)^*[Ab.{u + 1}].map (((g)_*[Ab.{u + 1}].rightDerived i).map
         (adicConstantSheafLeg T l E 0)) := by

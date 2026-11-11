@@ -53,6 +53,7 @@ noncomputable def integersAct (U : X.ProEt) (f : C(U.left, integers l E.1)) :
 lemma integersAct_add (U : X.ProEt) (f g : C(U.left, integers l E.1))
     (v : F.X.obj.obj (op U)) :
     integersAct E hι F U (f + g) v = integersAct E hι F U f v + integersAct E hι F U g v := by
+
   refine (congrArg (fun a ↦ sectionAct F a v) ?_).trans (add_sectionAct F _ _ v)
   refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
   change algebraMap _ (PadicAlgCl l) ((f + g) x) =

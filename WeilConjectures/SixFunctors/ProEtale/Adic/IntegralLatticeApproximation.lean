@@ -41,6 +41,7 @@ variable (M) in
 def powTorsion : Submodule (integers l E.1) M where
   carrier := {y | ∃ n : ℕ, l ^ n • y = 0}
   add_mem' := by
+
     rintro y z ⟨a, ha⟩ ⟨b, hb⟩
     refine ⟨a + b, ?_⟩
     rw [smul_add, pow_add, mul_smul, mul_smul, smul_comm (l ^ a) (l ^ b) y, ha, hb,

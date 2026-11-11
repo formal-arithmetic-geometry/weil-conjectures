@@ -46,6 +46,7 @@ lemma flcProperty_upperStarRightDerivedIntegersModL_comp {T Y S S' : Scheme.{u}}
     (j : S ⟶ Y) (v : S' ⟶ S) (j' : S' ⟶ Y) (hj' : j' = v ≫ j) (k : ℕ)
     (h : Etale.flcProperty S (upperStarRightDerivedIntegersModL l E.1 g j k)) :
     Etale.flcProperty S' (upperStarRightDerivedIntegersModL l E.1 g j' k) := by
+
   subst hj'
   have : IsFiniteLocallyConstantSheaf
       (FA := fun M N : ModuleCat.{u + 1} (integersShrink.{u} l E.1 ⧸

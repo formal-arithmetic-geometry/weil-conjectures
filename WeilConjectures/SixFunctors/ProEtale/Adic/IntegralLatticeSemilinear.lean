@@ -91,6 +91,7 @@ theorem integralLatticeSemilinear_of_integralLatticeIntegral {T Y : Scheme.{u}} 
     [QuasiCompact g] [QuasiSeparated g] (i : ℕ) (E : FiniteIntermediateField l)
     (hsurj : Function.Surjective (integersPadicIntHom l E.1))
     (h : IntegralLatticeIntegral l g i E) : IntegralLatticeSemilinear l g i E := by
+
   intro S S₀ p _ j M _ _ _ τ _ _ _ _ hι hτ θ _ U f m
   subst hτ
   let e := (AdicAbIdentification.ofUpperStar (l := l) g i j).upperStar p

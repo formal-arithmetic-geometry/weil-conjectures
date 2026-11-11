@@ -40,6 +40,7 @@ variable {l : ℕ} [Fact l.Prime] {E F : IntermediateField ℚ_[l] (PadicAlgCl l
 /-- The inclusion `𝒪_E → 𝒪_F` is compatible with the inclusions of `ℤ_ℓ`. -/
 lemma integersInclusion_integersPadicIntHom (h : E ≤ F) (z : ℤ_[l]) :
     integersInclusion l h (integersPadicIntHom l E z) = integersPadicIntHom l F z := by
+
   refine FaithfulSMul.algebraMap_injective _ (PadicAlgCl l) ?_
   rw [algebraMap_integersPadicIntHom l F z, ← algebraMap_integersPadicIntHom l E z]
   rfl
