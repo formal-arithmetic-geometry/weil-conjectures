@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeTowerSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeFiniteLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeFrame

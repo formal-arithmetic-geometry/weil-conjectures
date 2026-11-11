@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedLatticeFrame
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLatticeLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficients

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSheaf
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineCoaction
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale.Constant

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import Mathlib.Topology.LocallyConstant.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory

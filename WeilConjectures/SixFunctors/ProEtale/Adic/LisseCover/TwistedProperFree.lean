@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSection
 public import Mathlib.LinearAlgebra.Finsupp.Defs
 
