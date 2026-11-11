@@ -71,7 +71,6 @@ theorem exists_flatConstructibleModel {Λ : Type (u + 1)} [CommRing Λ] [Finite 
     ∃ P : CochainComplex (Sheaf M.X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ,
       (∃ a b, IsBoundedFlatComplex Λ a b P) ∧ (∀ q : ℤ, IsConstructibleSheaf (P.X q)) ∧
         Nonempty (K ≅ DerivedCategory.Q.obj P) := by
-  -- Validate this downstream proof against the updated monodromy torsor.
   have := SmoothOfRelativeDimension.smooth 1 M.f
   have : CompactSpace M.X := QuasiCompact.compactSpace_of_compactSpace M.f
   exact DerivedCategory.exists_flatConstructibleModel_of_locallyOfFiniteType M.f K hK

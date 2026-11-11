@@ -86,7 +86,6 @@ nonempty. -/
 lemma nonempty_overRestrict_compl (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0)
     {I : X.left.IdealSheafData} (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h})) :
     Nonempty (overRestrict X I.support.compl).left := by
-  -- Validate this downstream proof against the updated monodromy torsor.
   have := hX.1
   have hsupp : (I.support : Set X.left) = X.left.zeroLocus (U := ⊤) {h} := by
     rw [← IdealSheafData.range_subschemeι, hI, IdealSheafData.range_subschemeι_ofIdealTop_span]

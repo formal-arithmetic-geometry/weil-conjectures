@@ -74,7 +74,6 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_associated_sheaf
             (constantSheaf V.smallEtaleTopology
               (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
               (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by
-  -- Validate this downstream proof against the updated monodromy torsor.
   obtain ⟨V, v, hv, he, hc, d, hd, hf, P, hg, hfin, hp, M, hm, T, ha, hs, eM, e1⟩ :=
     Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data ℓ G
   let R : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)) ⥤
