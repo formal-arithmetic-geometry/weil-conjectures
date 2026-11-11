@@ -37,18 +37,28 @@ private theorem sectionsComparisonNatIso_apply
       (c.hom.app (T.obj F)) ((b.inv.app (T.obj F)) ((a.hom.app F) x)) := by
   rfl
 
-private theorem sectionsComparisonNatIso_apply_of_eq
-    {A E : Type*} [Category A] [Category E]
-    {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R} {T : A ⥤ E}
-    {B L Q : E ⥤ AddCommGrpCat.{u}}
-    (a : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ B)
-    (b : L ≅ B) (c : L ≅ Q)
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ Q)
-    (hη : η = sectionsComparisonNatIso a b c) (F : A) (x : K.obj F) :
+private theorem moduleComparisonEquiv_siteSections
+    {A : Type*} [Category A] {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{u}]
+    [Abelian.HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R}
+    {T : A ⥤ Sheaf J AddCommGrpCat.{u}} (U : C) (p : ℕ)
+    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
+        (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))
+    (a : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙
+      (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+        (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived p)
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ Sheaf.functorH J p)
+    (hη : η = a ≪≫ Functor.isoWhiskerLeft T
+      ((siteSectionsNatIso J U p).symm ≪≫ siteExtNatIso J U p ≪≫
+        extSourceNatIso e p ≪≫ siteHNatIso J p)) (F : A) (x : K.obj F) :
     moduleComparisonEquiv η F x =
-      (c.hom.app (T.obj F)) ((b.inv.app (T.obj F)) ((a.hom.app F) x)) := by
+      (Abelian.Ext.precompAddEquiv e (T.obj F) p).symm
+        ((siteSectionsObjIso J U (T.obj F) p).inv ((a.app F).hom x)) := by
   subst η
-  exact sectionsComparisonNatIso_apply a b c F x
+  exact sectionsComparisonNatIso_apply a (siteSectionsNatIso J U p)
+    (siteExtNatIso J U p ≪≫ extSourceNatIso e p ≪≫ siteHNatIso J p) F x
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
@@ -82,7 +92,7 @@ theorem ext_sections_factorization
       exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm
         (d.inv (((resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
           (fun M _ ↦ forgottenInjectiveAcyclic X M)).app F).hom x))) := by
-  letI : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  let : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
   let Γ := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
@@ -92,12 +102,11 @@ theorem ext_sections_factorization
     ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
   -- Compare natural isomorphisms before evaluating their components.
   unfold moduleCohomologyExtResolutionEquiv
-  refine sectionsComparisonNatIso_apply_of_eq
+  refine moduleComparisonEquiv_siteSections (Opens.grothendieckTopology X)
     (K := RingedSpace.moduleCohomology X.toRingedSpace p)
+    ⊤ p (terminalSourceIso X)
     (resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
       (fun M _ ↦ forgottenInjectiveAcyclic X M))
-    (siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p)
-    (extSourceNatIso (terminalSourceIso X) p)
     (moduleCohomologyExtResolutionNatIso X p) ?_ F x
   unfold moduleCohomologyExtResolutionNatIso
   rfl
