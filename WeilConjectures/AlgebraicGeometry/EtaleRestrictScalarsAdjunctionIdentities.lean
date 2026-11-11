@@ -95,11 +95,6 @@ private theorem underived_mate
         (lowerStarRestrictScalarsIso φ f).hom := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ)
     (Sheaf.restrictCoextendScalarsAdj W.smallEtaleTopology φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ)
-    (Sheaf.restrictCoextendScalarsAdj W.smallEtaleTopology φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom))) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   simp only [upperStarRestrictScalarsIsoSheaf, Adjunction.leftAdjointUniq, Iso.symm_hom,
     conjugateIsoEquiv_symm_apply_inv, Iso.refl_inv, TwoSquare.mk]

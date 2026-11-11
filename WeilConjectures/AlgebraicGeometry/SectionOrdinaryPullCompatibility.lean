@@ -82,7 +82,7 @@ private theorem paste_mate
     (mateEquiv (a₁.comp a₃) (a₂.comp a₄) q.inv) = p.hom := by
   have hv : TwoSquare.vComp q₁.inv q₃.inv = q.inv := by
     refine NatTrans.ext (funext fun X ↦ ?_)
-    simp only [TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app,
+    simp only [TwoSquare.vComp, NatTrans.comp_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Category.id_comp, Category.comp_id]
@@ -96,7 +96,7 @@ private theorem paste_mate
   rw [hh]
   apply NatTrans.ext
   funext Z
-  simp only [TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.id_comp, Category.comp_id]
