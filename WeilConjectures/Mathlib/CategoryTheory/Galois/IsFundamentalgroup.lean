@@ -34,7 +34,8 @@ variable {C : Type u₁} [Category.{u₂} C] (F : C ⥤ FintypeCat.{w})
 small: an automorphism is determined by its components on a small model of the source. -/
 lemma small_aut [EssentiallySmall.{w} C] : Small.{w} (Aut F) := by
   let e := equivSmallModel.{w} C
-  let φ : Aut F → ∀ X : SmallModel.{w} C, Aut (F.obj (e.inverse.obj X)) := fun σ X ↦ .of (σ.asIso.app _)
+  let φ : Aut F → ∀ X : SmallModel.{w} C, Aut (F.obj (e.inverse.obj X)) :=
+    fun σ X ↦ .of (σ.asIso.app _)
   refine small_of_injective (f := φ) fun σ τ h ↦ ?_
   refine Aut.ext (Iso.ext (NatTrans.ext (funext fun P ↦ ?_)))
   have hP := congr_arg (fun ρ ↦ (ρ (e.functor.obj P)).asIso.hom) h

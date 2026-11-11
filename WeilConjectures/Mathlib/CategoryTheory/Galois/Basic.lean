@@ -101,7 +101,8 @@ theorem eq_of_map_apply_eq {X Y : C} [IsConnected X] {a b : X ⟶ Y} (x : F.obj 
 /-- For a connected object `X` and `x ∈ F(X)`, the evaluation `Aut X → F(X)`, `g ↦ F(g)(x)` is
 injective, so `#Aut X ≤ #F(X)`. (blueprint: `lem-galois-axioms`) -/
 theorem injective_evaluation_aut_and_card_le (X : C) [IsConnected X] (x : F.obj X) :
-    Function.Injective (fun g : Aut X ↦ F.map g.asIso.hom x) ∧ Nat.card (Aut X) ≤ Nat.card (F.obj X) :=
+    Function.Injective (fun g : Aut X ↦ F.map g.asIso.hom x) ∧
+      Nat.card (Aut X) ≤ Nat.card (F.obj X) :=
   ⟨evaluation_aut_injective_of_isConnected F X x, card_aut_le_card_fiber_of_connected F X⟩
 
 /-- A connected object `X` is Galois if and only if `Aut X` acts transitively on `F(X)`, if and
