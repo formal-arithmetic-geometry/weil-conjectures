@@ -240,6 +240,7 @@ private theorem negativeBasis_d_insert_term (r : ℕ)
     Finset.erase_insert_of_ne (Fin.succ_ne_zero i).symm, ← Finset.map_erase,
     negativeBasis_insert_zero, negative_units_comp]
   erw [pow_succ (-1 : ℤ), mul_neg_one, neg_smul]
+  simp only [End.neg_asHom]
 
 private theorem negativeBasis_d_insert (r : ℕ)
     (b : Fin (r + 1) → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ)
