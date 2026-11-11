@@ -162,7 +162,8 @@ theorem downAut_frobPathPow (m : ℕ)
     have hm : (B.t ≫ (p.geometricGaloisFrobenius ^ m).asIso.hom) ≫ p.geometricFiberProj =
         B.t ≫ p.geometricFiberProj := by
       rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
-    have H : (B.t ≫ p.geometricGaloisFrobenius.asIso.hom) ≫ (p.geometricGaloisFrobenius ^ m).asIso.hom =
+    have H : (B.t ≫ p.geometricGaloisFrobenius.asIso.hom) ≫
+        (p.geometricGaloisFrobenius ^ m).asIso.hom =
         B.t ≫ (p.geometricGaloisFrobenius ^ (m + 1)).asIso.hom := by
       rw [pow_succ, Aut.mul_asIso, Iso.trans_hom, Category.assoc]
     rw [pow_succ' B.frobAut m, ← ih hm, frobAut]

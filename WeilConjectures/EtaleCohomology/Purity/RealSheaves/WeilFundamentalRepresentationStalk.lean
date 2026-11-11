@@ -57,7 +57,8 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.lisseFrobPowStr (F : WeilSh
     (F.toLisse hF).upperStar l ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso.hom ≅
       F.toLisse hF :=
   (ObjectProperty.fullyFaithfulι _).preimageIso
-    ((adicUpperStarIsoLowerStarInv l ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso).app _ ≪≫
+    ((adicUpperStarIsoLowerStarInv l
+      ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso).app _ ≪≫
       F.frobeniusPowIso n)
 
 omit [IsCurve (C ↘ Spec (.of K))] in
@@ -129,7 +130,8 @@ theorem frobPowStalk_comp_frobStalkIso (F : WeilSheaf K l C) (hF : F.IsLisse) (m
       (M.mono B.frobPath).hom.app _ ≫ (lisseStalk l _).map (F.lisseFrobPowStr hF m).hom :=
     (M.mono B.frobPath).hom.naturality _
   -- naturality of `ℱ_{t ≫ Fr} = (Fr^* ℱ)_t` with respect to `φ_m`
-  have n₂ := upperStarStalkIso_hom_naturality l Fr.asIso.hom B.t (F.lisseFrobPowStr hF m).hom.hom.hom
+  have n₂ := upperStarStalkIso_hom_naturality l Fr.asIso.hom B.t
+    (F.lisseFrobPowStr hF m).hom.hom.hom
   -- compatibility of the transport with pullback along `Frᵐ`
   have n₃ := M.mono_upperStar (Fr ^ m).asIso.hom B.frobPath (F.toLisse hF)
   -- `φ_{m+1} = φ ∘ Fr^* φ_m`
@@ -325,8 +327,8 @@ private theorem frobenius_reparam_step (F : WeilSheaf K l C) (hF : F.IsLisse)
         K)).geometricGaloisFrobenius ^ m).asIso.hom) s (F.toLisse hF).obj.X).hom).hom
         (((WeilCoefficients.toModuleCat l).map
           ((Sheaf.Γ _ _).map ((upperStarCongr _ hs.symm).hom.app (F.toLisse hF).obj.X))).hom
-          (((WeilCoefficients.toModuleCat l).map (reparamStalkIso l (specGeometricFrobenius K ^ m).asIso
-            s (F.toLisse hF).obj.X).inv).hom v))) := by
+          (((WeilCoefficients.toModuleCat l).map (reparamStalkIso l
+            (specGeometricFrobenius K ^ m).asIso s (F.toLisse hF).obj.X).inv).hom v))) := by
   have hcongr
       {y z : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber}
       (h : y = z) (G : LisseSheaf l (C ↘ Spec (.of K)).geometricFiber) :
@@ -339,9 +341,10 @@ private theorem frobenius_reparam_step (F : WeilSheaf K l C) (hF : F.IsLisse)
     reparamStalkIso l (specGeometricFrobenius K ^ m).asIso s (F.toLisse hF).obj.X :=
     Iso.ext (M.mono_reparam (specGeometricFrobenius K ^ m).asIso s (F.toLisse hF))
   have h₁ : ((WeilCoefficients.toModuleCat l).map
-      ((M.mono (fiberReparamIso (specGeometricFrobenius K ^ m).asIso s)).inv.app (F.toLisse hF))).hom v =
-      ((WeilCoefficients.toModuleCat l).map (reparamStalkIso l (specGeometricFrobenius K ^ m).asIso s
-        (F.toLisse hF).obj.X).inv).hom v := by
+      ((M.mono (fiberReparamIso (specGeometricFrobenius K ^ m).asIso s)).inv.app
+        (F.toLisse hF))).hom v =
+      ((WeilCoefficients.toModuleCat l).map (reparamStalkIso l
+        (specGeometricFrobenius K ^ m).asIso s (F.toLisse hF).obj.X).inv).hom v := by
     rw [← Iso.app_inv, e₃]
     rfl
   have h₂ : ∀ w, ((WeilCoefficients.toModuleCat l).map
