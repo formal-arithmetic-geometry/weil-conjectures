@@ -208,6 +208,7 @@ private theorem coefficientDerived_eq (a : Padic.coefficientExtensionIntegers l 
         (Functor.whiskerRight (integralScalarChainAction l E Y a) DerivedCategory.Q)).app
       (DerivedCategory.Q.obj P) =
     DerivedCategory.Q.map ((integralScalarChainAction l E Y a).app P) at h
+  change _ = (CatCenter.localization _ DerivedCategory.Q _).app (DerivedCategory.Q.obj P)
   rw [CatCenter.localization_app]
   exact h.trans (congrArg (fun k ↦ DerivedCategory.Q.map (k.app P))
     (coefficientChain_eq l E Y a))
