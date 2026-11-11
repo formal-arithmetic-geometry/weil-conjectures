@@ -116,6 +116,7 @@ private theorem sequential_nilpotent_colimit
     | zero =>
       simp only [Nat.add_zero, homOfLE_refl, CategoryTheory.Functor.map_id,
         pow_zero, End.one_asHom]
+      rfl
     | succ j ih =>
       have he : homOfLE (Nat.le_add_right n (j + 1)) =
           homOfLE (Nat.le_add_right n j) ≫ homOfLE (Nat.le_succ (n + j)) := rfl
