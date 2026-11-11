@@ -55,10 +55,10 @@ lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app_hom
     (M : AdicSheaf l f.geometricFiber) :
     ((adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom.app M).hom =
       (lowerStarComp (WeilCoefficients.{u} l) (Scheme.Hom.geometricFiberMap φ h)
-          g.geometricGaloisFrobenius.inv).hom.app M.X ≫
+          g.geometricGaloisFrobenius.asIso.inv).hom.app M.X ≫
         (lowerStarCongr _
           (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h)).hom.app M.X ≫
-        (lowerStarComp _ f.geometricGaloisFrobenius.inv
+        (lowerStarComp _ f.geometricGaloisFrobenius.asIso.inv
           (Scheme.Hom.geometricFiberMap φ h)).inv.app M.X := by
   rw [adicLowerStarGeometricFiberMapCompFrobeniusIso_eq]
   exact lowerStarExchange_hom_app_hom _ _ _ _ M
@@ -85,13 +85,13 @@ along `φ̄` of the Weil structure of `F`, through
 `Fr_Y^* φ̄_* ≅ (Fr_Y⁻¹)_* φ̄_* ≅ (φ̄ ≫ Fr_Y⁻¹)_* = (Fr_X⁻¹ ≫ φ̄)_* ≅ φ̄_* (Fr_X⁻¹)_*`. -/
 lemma frobeniusStr_lowerStar :
     ((lowerStar φ).obj F).frobeniusStr =
-      (ProEtale.upperStarIsoLowerStarInv _ (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+      (ProEtale.upperStarIsoLowerStarInv _ (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
         ).hom.app ((lowerStar φ).obj F).obj.carrier.X ≫
       (ProEtale.lowerStarComp _ (φ̄)
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).hom.app F.obj.carrier.X ≫
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).hom.app F.obj.carrier.X ≫
       (ProEtale.lowerStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv
         φ (comp_over φ (Spec (CommRingCat.of k₀))))).hom.app F.obj.carrier.X ≫
-      (ProEtale.lowerStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+      (ProEtale.lowerStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
         (φ̄)).inv.app F.obj.carrier.X ≫
       (φ̄)_*[_].map ((ProEtale.AdicSheaf.forget _).map F.obj.str.hom) := by
   rw [frobeniusStr, lowerStar_obj_obj_str, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
@@ -112,14 +112,14 @@ section FrobeniusStr
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 lemma map_comp_frobeniusStr {F G : WeilSheaf k₀ l X} (α : F ⟶ G) :
-    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
         ((ProEtale.AdicSheaf.forget _).map α.hom.hom.f) ≫ G.frobeniusStr =
       F.frobeniusStr ≫ (ProEtale.AdicSheaf.forget _).map α.hom.hom.f := by
   have h := congrArg (ProEtale.AdicSheaf.forget _).map α.hom.hom.h
   rw [Functor.map_comp, Functor.map_comp] at h
   simp only [frobeniusStr, Category.assoc]
   erw [(ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.naturality_assoc]
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.naturality_assoc]
   exact congrArg (_ ≫ ·) h
 
 end FrobeniusStr
@@ -139,23 +139,23 @@ local notation "φ̄" => Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (Co
 /-- The counit `φ̄^* φ̄_* F ⟶ F` of the underlying sheaves is compatible with the Weil
 structures of `φ_* F` and of `F`. -/
 lemma lowerStar_counit_frobeniusStr_compatible :
-    (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (φ̄)).hom.app ((φ̄)_*[WeilCoefficients.{u} l].obj F.obj.carrier.X) ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
           ((ProEtale.upperStarLowerStarAdjunction _ (φ̄)).counit.app F.obj.carrier.X) ≫
         F.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app
           ((φ̄)_*[WeilCoefficients.{u} l].obj F.obj.carrier.X) ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
           ((φ̄)_*[WeilCoefficients.{u} l].obj F.obj.carrier.X) ≫
         (φ̄)^*[_].map ((lowerStar φ).obj F).frobeniusStr ≫
         (ProEtale.upperStarLowerStarAdjunction _ (φ̄)).counit.app F.obj.carrier.X := by
   rw [frobeniusStr_lowerStar, frobeniusStr]
   have key := ProEtale.upperStarComp_hom_app_comp_map_counit_comp_structure'
-    (WeilCoefficients.{u} l) (φ̄) (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (WeilCoefficients.{u} l) (φ̄) (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
       (comp_over φ (Spec (CommRingCat.of k₀))))
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ
@@ -169,27 +169,27 @@ structures of `G` and `φ_* F`, the composite `φ̄^* G ⟶ φ̄^* φ̄_* F ⟶ 
 counit is compatible with the Weil structures. -/
 lemma map_comp_lowerStar_counit_frobeniusStr_compatible {G : WeilSheaf k₀ l Y}
     (c : G.obj.carrier.X ⟶ (φ̄)_*[WeilCoefficients.{u} l].obj F.obj.carrier.X)
-    (hc : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map c ≫
+    (hc : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map c ≫
       ((lowerStar φ).obj F).frobeniusStr = G.frobeniusStr ≫ c) :
-    (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (φ̄)).hom.app G.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
           ((φ̄)^*[_].map c ≫
             (ProEtale.upperStarLowerStarAdjunction _ (φ̄)).counit.app F.obj.carrier.X) ≫
         F.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app G.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (φ̄)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app G.obj.carrier.X ≫
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app G.obj.carrier.X ≫
         (φ̄)^*[_].map G.frobeniusStr ≫ (φ̄)^*[_].map c ≫
         (ProEtale.upperStarLowerStarAdjunction _ (φ̄)).counit.app F.obj.carrier.X := by
   have n₁ := (ProEtale.upperStarComp (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom (φ̄)).hom.naturality c
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom (φ̄)).hom.naturality c
   have n₂ := (ProEtale.upperStarCongr (WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
       φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.naturality c
   have n₃ := (ProEtale.upperStarComp (WeilCoefficients.{u} l) (φ̄)
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.naturality c
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.naturality c
   simp only [Functor.comp_map] at n₁ n₂ n₃
   rw [Functor.map_comp]
   simp only [Category.assoc]
