@@ -64,7 +64,8 @@ theorem mateEquiv_upperStarRestrictScalarsIso_hom
           Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ)) := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)).injective
-  ext M : 1
+  apply NatTrans.ext
+  funext M
   rw [iterated_mateEquiv_conjugateEquiv, conjugateEquiv_upperStarRestrictScalarsIso_hom]
   ext ⟨U⟩ x
   exact congrArg (fun t ↦ t.hom x)
