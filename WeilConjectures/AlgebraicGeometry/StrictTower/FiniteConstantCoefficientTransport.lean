@@ -817,11 +817,6 @@ private theorem scalar_direct_mate
           Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ) := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
-    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   rw [conjugateEquiv_upperStarRestrictScalarsIso_hom]
   ext M ⟨U⟩ x
@@ -843,7 +838,6 @@ private theorem siteDirect_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
   apply (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
     (comparisonAdjunction (ModuleCat.{u + 1} Λ) Y)).injective
   rw [Equiv.apply_symm_apply]
-  change (mateEquiv _ _ (mateEquiv _ _ _)) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   change conjugateEquiv
     ((cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).comp

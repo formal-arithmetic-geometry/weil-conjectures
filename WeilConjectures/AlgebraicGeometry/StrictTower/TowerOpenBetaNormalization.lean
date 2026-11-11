@@ -709,10 +709,10 @@ private lemma finiteSquareTransport
   subst y
   have h₁ (M : E) := congrArg (fun t ↦ t.app M) ha
   have h₂ (M : E) := congrArg (fun t ↦ t.app M) ha'
-  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h₁ h₂
   refine NatTrans.ext (funext fun M ↦ ?_)
-  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
     Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, eqToIso_refl,
     Iso.refl_trans, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
