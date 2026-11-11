@@ -587,11 +587,12 @@ instance isIso_geometricFiberWeilExtensionByZeroBaseChange (hc : UpperStarWeilCo
       ((upperStarLowerStarAdjunction Λ s.geometricFiberProj).comp
         (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap φ h)))
       α.natTrans) := by
-    rw [← hc', Equiv.apply_symm_apply]
-    simpa only [geometricFiberUpperStarComparison, Iso.symm_hom,
-      upperStarSquareComparison_flip_inv, lowerStarBaseChange_eq,
-      Adjunction.exchangeRight_eq_mateEquiv, TwoSquare.natTrans] using
-      isIso_lowerStarBaseChange_of_isPullback Λ (Scheme.Hom.isPullback_geometricFiberMap φ h)
+    rw [← hc', Equiv.apply_symm_apply, geometricFiberUpperStarComparison, Iso.symm_hom,
+      upperStarSquareComparison_flip_inv Λ (Scheme.Hom.isPullback_geometricFiberMap φ h).toCommSq]
+    have hb := isIso_lowerStarBaseChange_of_isPullback Λ
+      (Scheme.Hom.isPullback_geometricFiberMap φ h)
+    rw [lowerStarBaseChange_eq, Adjunction.exchangeRight_eq_mateEquiv] at hb
+    exact hb
   have : IsIso α.natTrans := conjugateEquiv_of_iso
     ((openImmersionLowerShriekUpperStarAdjunction Λ φ).comp
       (upperStarLowerStarAdjunction Λ t.geometricFiberProj))
