@@ -310,7 +310,8 @@ private def pointProd (X Y : ContAction FintypeCat.{u} G) :
   obj :=
     { V := FintypeCat.of (X.obj.V × Y.obj.V)
       ρ :=
-        { toFun g := .of <| FintypeCat.homMk (fun p ↦ ((X.obj.ρ g).asHom.hom p.1, (Y.obj.ρ g).asHom.hom p.2))
+        { toFun g := .of <| FintypeCat.homMk
+            (fun p ↦ ((X.obj.ρ g).asHom.hom p.1, (Y.obj.ρ g).asHom.hom p.2))
           map_one' := by
             apply End.ext
             apply FintypeCat.hom_ext
