@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelGaloisTrace
 public import WeilConjectures.TraceFormula.WeilIdentityStalkTrace
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
