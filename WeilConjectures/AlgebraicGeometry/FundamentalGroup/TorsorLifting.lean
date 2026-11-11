@@ -96,3 +96,4 @@ theorem exists_card_continuousMonoidHom_zmod_eq (p : C ⟶ Spec (.of K))
 end Scheme.EtaleTorsor
 
 end AlgebraicGeometry
+
