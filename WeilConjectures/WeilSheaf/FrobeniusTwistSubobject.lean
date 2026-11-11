@@ -469,7 +469,8 @@ lemma toModuleCat_map_frobenius_stalkAt_of_eq
       (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
     (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
       (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s')
-    (hcomm : g ≫ (specGeometricFrobenius k₀ ^ m).asIso.hom = (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ g)
+    (hcomm : g ≫ (specGeometricFrobenius k₀ ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ g)
     (f : F.stalkObj s ⟶ F.stalkObj s')
     (hf : f = ProEtale.globalSectionsTransport _ hg (F.frobeniusPowStr j))
     (v : (F.stalkAt s m hs).carrier) :
@@ -491,8 +492,9 @@ lemma toModuleCat_map_frobenius_stalkAt_of_eq
 `σᵃ ≫ s = (σᵃ ≫ s) ≫ Fr⁰` and the `0`-th iterate of the Weil structure. -/
 lemma stalkObjSpecFrobeniusPowIso_inv_eq_globalSectionsTransport (a : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (h : (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ s = ((specGeometricFrobenius k₀ ^ a).asIso.hom ≫ s) ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom) :
+    (h : (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ s =
+      ((specGeometricFrobenius k₀ ^ a).asIso.hom ≫ s) ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom) :
     (F.stalkObjSpecFrobeniusPowIso a s).inv =
       ProEtale.globalSectionsTransport _ h (F.frobeniusPowStr 0) := by
   have p : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom = 𝟙 _ := by
@@ -540,11 +542,13 @@ theorem stalkObjSpecFrobeniusPowIso_frobenius
         ((F.stalkAt _ N ht').frobenius v) =
       (F.stalkAt t N ht).frobenius
         (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t) v) := by
-  have h₀ : (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t = ((specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t) ≫
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom := by
+  have h₀ : (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t =
+      ((specGeometricFrobenius k₀ ^ a).asIso.hom ≫ t) ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).asIso.hom := by
     rw [pow_zero]
     exact (Category.comp_id _).symm
-  have hcomm : (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ (specGeometricFrobenius k₀ ^ N).asIso.hom =
+  have hcomm :
+      (specGeometricFrobenius k₀ ^ a).asIso.hom ≫ (specGeometricFrobenius k₀ ^ N).asIso.hom =
       (specGeometricFrobenius k₀ ^ N).asIso.hom ≫ (specGeometricFrobenius k₀ ^ a).asIso.hom := by
     rw [CategoryTheory.Aut.pow_hom_comp_pow_hom, CategoryTheory.Aut.pow_hom_comp_pow_hom,
       Nat.add_comm]
