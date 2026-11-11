@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!

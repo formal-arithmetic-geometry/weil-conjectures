@@ -8,7 +8,6 @@ module
 
 public import Mathlib.FieldTheory.Galois.Basic
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-
 import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends
 
 /-!

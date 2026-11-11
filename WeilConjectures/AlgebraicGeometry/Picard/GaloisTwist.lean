@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 
 /-!

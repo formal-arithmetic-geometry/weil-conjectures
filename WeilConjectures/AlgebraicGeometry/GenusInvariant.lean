@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-
 import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
