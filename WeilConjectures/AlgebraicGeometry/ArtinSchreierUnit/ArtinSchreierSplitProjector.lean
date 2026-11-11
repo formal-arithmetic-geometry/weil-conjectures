@@ -72,11 +72,11 @@ theorem splitProjector_π (d : G) :
       ∑ c : G, (Ring.inverse (Fintype.card G : R) * χ (-c)) •
         Pi.π (fun _ : G ↦ U) (d + c) := by
   unfold splitProjector
-  rw [Preadditive.sum_comp]
+  rw [End.sum_asHom, Preadditive.sum_comp]
   apply Finset.sum_congr rfl
   intro c hc
   change ((Ring.inverse (Fintype.card G : R) * χ (-c)) •
-    splitTranslation U c) ≫ Pi.π (fun _ : G ↦ U) d = _
+    (splitTranslation U c).asHom) ≫ Pi.π (fun _ : G ↦ U) d = _
   rw [CategoryTheory.Linear.smul_comp]
   exact congrArg (fun t ↦ (Ring.inverse (Fintype.card G : R) * χ (-c)) • t)
     (Pi.lift_comp_π (fun d ↦ Pi.π (fun _ : G ↦ U) (d + c)) d)
@@ -127,12 +127,13 @@ theorem splitProjector_factor :
 theorem splitProjector_idempotent (hq : IsUnit (Fintype.card G : R)) :
     (splitProjector U χ).asHom ≫ (splitProjector U χ).asHom = (splitProjector U χ).asHom := by
   calc
-    _ = (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫
-        splitCharacterVector U χ ≫ splitProjector U χ := by
+    _ = ((splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0) ≫
+        splitCharacterVector U χ ≫ (splitProjector U χ).asHom := by
       rw [← Category.assoc, splitProjector_factor]
-    _ = (splitProjector U χ ≫ Pi.π (fun _ : G ↦ U) 0) ≫ splitCharacterVector U χ := by
+    _ = ((splitProjector U χ).asHom ≫ Pi.π (fun _ : G ↦ U) 0) ≫
+        splitCharacterVector U χ := by
       rw [splitCharacterVector_projector U χ hq]
-    _ = splitProjector U χ := splitProjector_factor U χ
+    _ = (splitProjector U χ).asHom := splitProjector_factor U χ
 
 /-- Averaging an actual finite group action, without choosing a splitting chart. -/
 def actionProjector (M : C) (σ : G → End M) (χ : AddChar G R) : End M :=
@@ -140,42 +141,45 @@ def actionProjector (M : C) (σ : G → End M) (χ : AddChar G R) : End M :=
 
 /-- Reindexing the finite average gives its character eigenrelation. -/
 theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
-    (hσ : ∀ a b, σ (a + b) = .of (σ a) ≫ σ b) (b : G) :
+    (hσ : ∀ a b, σ (a + b) = .of ((σ a).asHom ≫ (σ b).asHom)) (b : G) :
     (actionProjector M σ χ).asHom ≫ (σ b).asHom = (χ b • actionProjector M σ χ).asHom := by
   unfold actionProjector
+  simp only [End.sum_asHom, End.smul_asHom]
   rw [Preadditive.sum_comp, Finset.smul_sum]
   apply Fintype.sum_equiv (Equiv.addRight b)
   intro a
-  change ((Ring.inverse (Fintype.card G : R) * χ (-a)) • σ a) ≫ σ b =
-    χ b • ((Ring.inverse (Fintype.card G : R) * χ (-(a + b))) • σ (a + b))
+  change ((Ring.inverse (Fintype.card G : R) * χ (-a)) • (σ a).asHom) ≫ (σ b).asHom =
+    χ b • ((Ring.inverse (Fintype.card G : R) * χ (-(a + b))) • (σ (a + b)).asHom)
   have hs : χ b * (Ring.inverse (Fintype.card G : R) * χ (-(a + b))) =
       Ring.inverse (Fintype.card G : R) * χ (-a) := by
     rw [mul_left_comm, ← AddChar.map_add_eq_mul]
     congr 1
     abel_nf
   calc
-    _ = (Ring.inverse (Fintype.card G : R) * χ (-a)) • (σ a ≫ σ b) :=
+    _ = (Ring.inverse (Fintype.card G : R) * χ (-a)) • ((σ a).asHom ≫ (σ b).asHom) :=
       Linear.smul_comp _ _ _ _ _ _
-    _ = (Ring.inverse (Fintype.card G : R) * χ (-a)) • σ (a + b) :=
-      congrArg (fun t ↦ (Ring.inverse (Fintype.card G : R) * χ (-a)) • t) (hσ a b).symm
-    _ = (χ b * (Ring.inverse (Fintype.card G : R) * χ (-(a + b)))) • σ (a + b) :=
-      congrArg (fun r ↦ r • σ (a + b)) hs.symm
+    _ = (Ring.inverse (Fintype.card G : R) * χ (-a)) • (σ (a + b)).asHom :=
+      congrArg (fun t ↦ (Ring.inverse (Fintype.card G : R) * χ (-a)) • t)
+        (congrArg End.asHom (hσ a b)).symm
+    _ = (χ b * (Ring.inverse (Fintype.card G : R) * χ (-(a + b)))) • (σ (a + b)).asHom :=
+      congrArg (fun r ↦ r • (σ (a + b)).asHom) hs.symm
     _ = _ := (smul_smul _ _ _).symm
 
 /-- Averaging is idempotent whenever the group order is invertible. -/
 theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
-    (hσ : ∀ a b, σ (a + b) = .of (σ a) ≫ σ b) (hq : IsUnit (Fintype.card G : R)) :
+    (hσ : ∀ a b, σ (a + b) = .of ((σ a).asHom ≫ (σ b).asHom))
+    (hq : IsUnit (Fintype.card G : R)) :
     (actionProjector M σ χ).asHom ≫ (actionProjector M σ χ).asHom = (actionProjector M σ χ).asHom := by
-  conv_lhs => arg 2; rw [actionProjector]
+  conv_lhs => arg 2; simp only [actionProjector, End.sum_asHom, End.smul_asHom]
   rw [Preadditive.comp_sum]
-  have ht (c : G) : actionProjector M σ χ ≫
-        ((Ring.inverse (Fintype.card G : R) * χ (-c)) • σ c) =
-      Ring.inverse (Fintype.card G : R) • actionProjector M σ χ := by
+  have ht (c : G) : (actionProjector M σ χ).asHom ≫
+        ((Ring.inverse (Fintype.card G : R) * χ (-c)) • (σ c).asHom) =
+      Ring.inverse (Fintype.card G : R) • (actionProjector M σ χ).asHom := by
     calc
       _ = (Ring.inverse (Fintype.card G : R) * χ (-c)) •
-          (actionProjector M σ χ ≫ σ c) := Linear.comp_smul _ _ _ _ _ _
+          ((actionProjector M σ χ).asHom ≫ (σ c).asHom) := Linear.comp_smul _ _ _ _ _ _
       _ = (Ring.inverse (Fintype.card G : R) * χ (-c)) •
-          (χ c • actionProjector M σ χ) :=
+          (χ c • (actionProjector M σ χ).asHom) :=
         congrArg (fun t ↦ (Ring.inverse (Fintype.card G : R) * χ (-c)) • t)
           (actionProjector_eigen M σ χ hσ c)
       _ = _ := by
