@@ -35,7 +35,6 @@ pro-étale site). This is the base change towards spectra of fields (blueprint `
   `AlgebraicGeometry.ProEtale.CondensedRing.isIso_baseChangeMap_app_of_field_residueField`.
 -/
 
-
 @[expose] public section
 
 universe u

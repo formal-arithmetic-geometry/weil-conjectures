@@ -41,7 +41,6 @@ map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
   valuation ring (`ProEtale.bounded_derivedExtendScalars_integersModPowToResidueField`).
 -/
 
-
 @[expose] public section
 
 universe u

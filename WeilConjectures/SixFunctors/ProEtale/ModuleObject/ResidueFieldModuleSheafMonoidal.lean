@@ -29,7 +29,6 @@ commutation `f^* ⋙ G_X ≅ G_Y ⋙ f^*` with the pullbacks
 (`ProEtale.tensorCompatible_residueFieldModuleSheafUpperStarIso`).
 -/
 
-
 @[expose] public section
 
 universe w u
