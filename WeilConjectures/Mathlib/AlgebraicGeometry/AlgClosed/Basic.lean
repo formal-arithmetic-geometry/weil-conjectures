@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.CategoryTheory.MorphismProperty.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 
