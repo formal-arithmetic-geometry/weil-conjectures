@@ -121,7 +121,7 @@ lemma isZero_of_isIso_zsmul_id {n : ℤ} {K : C} [HasProduct (fun _ : ℕ ↦ K)
   have : IsIso (𝟙 _ - n • adicTowerShift K) := hK
   let u : End K := .of (inv (n • 𝟙 K))
   have hu : n • u.asHom = 𝟙 K := by
-    show n • inv (n • 𝟙 K) = 𝟙 K
+    change n • inv (n • 𝟙 K) = 𝟙 K
     conv_rhs => rw [← IsIso.hom_inv_id (n • 𝟙 K)]
     rw [zsmul_comp, id_comp]
   have hι : (Pi.lift fun i ↦ (u ^ i).asHom) ≫ (𝟙 _ - n • adicTowerShift K) =
