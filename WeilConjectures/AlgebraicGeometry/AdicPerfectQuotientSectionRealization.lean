@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectModuleFunctors
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectSliceSections
-import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
+import all
+  WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 
 /-! # Explicit section adjoints for the ordinary quotient realization
 
