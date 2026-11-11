@@ -132,7 +132,7 @@ theorem uniformizer_koszul_scalar_square
     (U.inv ≫ T.map (S.map ck.hom)) ≫
       (ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n).asHom
   rw [ringedSingletonKoszulPower, ringedSingletonKoszulPower,
-    End.of, rank_one_power (ring l E X) a t c hc, Category.assoc,
+    rank_one_power (ring l E X) a t c hc, Category.assoc,
     ← Functor.map_comp, ← Functor.map_comp, hck]
 
 end AlgebraicGeometry.ProEtale.InternalCompletionTransport
