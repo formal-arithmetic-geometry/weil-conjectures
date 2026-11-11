@@ -63,7 +63,6 @@ private theorem square_counit {X S T X' : Scheme.{u}}
         ((tensorAdj g).comp (tensorAdj f'))).symm
         (rightSquare f f' g v e).natTrans).app ((pushforward f).obj F) := by
     rw [baseSquare, iterated_mateEquiv_conjugateEquiv_symm]
-    rfl
   have hc' := mateEquiv_counit_symm (tensorAdj f) (tensorAdj f')
     (baseSquare f f' g v e) F
   rw [baseSquare_app, he] at hc'
