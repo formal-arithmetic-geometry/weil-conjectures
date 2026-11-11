@@ -485,7 +485,7 @@ noncomputable def geometricFiberUpperStarComparison :
 (`AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilLowerStar`) with the Weil structure
 of `geometricFiberMapWeilUpperStar φ (p_Y^* N)`. -/
 def UpperStarWeilCompatible : Prop :=
-  ∀ N, (lowerStar Λ s.geometricGaloisFrobenius.inv).map
+  ∀ N, (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv).map
       ((geometricFiberUpperStarComparison Λ φ h).hom.app N) ≫
       ((geometricFiberMapWeilUpperStar Λ φ h).obj
         ((geometricFiberWeilLowerStar Λ t).obj N)).str.hom =
@@ -587,11 +587,11 @@ instance isIso_geometricFiberWeilExtensionByZeroBaseChange (hc : UpperStarWeilCo
       ((upperStarLowerStarAdjunction Λ s.geometricFiberProj).comp
         (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap φ h)))
       α.natTrans) := by
-    rw [← hc', Equiv.apply_symm_apply, geometricFiberUpperStarComparison, Iso.symm_hom,
-      upperStarSquareComparison_flip_inv, ← Adjunction.exchangeRight_eq_mateEquiv,
-      ← lowerStarBaseChange_eq]
-    exact isIso_lowerStarBaseChange_of_isPullback Λ
-      (Scheme.Hom.isPullback_geometricFiberMap φ h)
+    rw [← hc', Equiv.apply_symm_apply]
+    simpa only [geometricFiberUpperStarComparison, Iso.symm_hom,
+      upperStarSquareComparison_flip_inv, lowerStarBaseChange_eq,
+      Adjunction.exchangeRight_eq_mateEquiv, TwoSquare.natTrans] using
+      isIso_lowerStarBaseChange_of_isPullback Λ (Scheme.Hom.isPullback_geometricFiberMap φ h)
   have : IsIso α.natTrans := conjugateEquiv_of_iso
     ((openImmersionLowerShriekUpperStarAdjunction Λ φ).comp
       (upperStarLowerStarAdjunction Λ t.geometricFiberProj))
@@ -657,8 +657,8 @@ the geometric fibres, attached to a compactification `X₀ ⟶[i] Z₀ ⟶[g] Y�
 `k`-schemes; for `Λ = ℚ̲̄_ℓ` it is
 `AlgebraicGeometry.ProEtaleWeilSheaf.condensedRightDerivedLowerShriek`. -/
 noncomputable def weilRightDerivedLowerShriek (c : Compactification f) (h : f ≫ t = s) :
-    DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ s.geometricGaloisFrobenius.inv)) ⥤
-      DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ t.geometricGaloisFrobenius.inv)) :=
+    DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ s.geometricGaloisFrobenius.asIso.inv)) ⥤
+      DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ t.geometricGaloisFrobenius.asIso.inv)) :=
   (weilExtensionByZero Λ c.i (c.i_comp_g_comp h)).mapDerivedCategory ⋙
     (geometricFiberMapWeilLowerStar Λ c.g (rfl : c.g ≫ t = c.g ≫ t)).rightDerivedFunctor
 
