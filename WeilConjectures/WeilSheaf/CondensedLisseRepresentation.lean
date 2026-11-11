@@ -85,8 +85,8 @@ noncomputable def comonadicOfFaithfulOfPreservesFiniteLimits : ComonadicLeftAdjo
 /-- The comparison functor from `C` to the coalgebras over the comonad `F ⋙ G` is an equivalence
 for a faithful left adjoint `F` out of an abelian category which preserves finite limits. -/
 lemma isEquivalence_comparison_of_faithful_of_preservesFiniteLimits :
-    (comparison adj).IsEquivalence := by
-  exact (comonadicOfFaithfulOfPreservesFiniteLimits adj).eqv
+    (comparison adj).IsEquivalence :=
+  (comonadicOfFaithfulOfPreservesFiniteLimits adj).eqv
 
 /-- **Effective descent**, explicit form: for a faithful left adjoint `F` out of an abelian
 category which preserves finite limits and a coalgebra `(N, δ)` over `F ⋙ G`, the equalizer `M`
