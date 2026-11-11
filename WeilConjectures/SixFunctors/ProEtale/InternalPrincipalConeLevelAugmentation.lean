@@ -116,7 +116,8 @@ end Generic
 
 private theorem conjugateFunctor_pow {C D : Type*} [Category* C] [Category* D]
     (F : C ⥤ D) {U : C} {V : D} (e : F.obj U ≅ V) (d : End U) (k : ℕ) :
-    e.inv ≫ F.map (d ^ k) ≫ e.hom = (End.of (e.inv ≫ F.map d ≫ e.hom)) ^ k := by
+    e.inv ≫ F.map (d ^ k).asHom ≫ e.hom =
+      (End.of (e.inv ≫ F.map d.asHom ≫ e.hom) ^ k).asHom := by
   induction k with
   | zero =>
     change e.inv ≫ F.map (𝟙 U) ≫ e.hom = 𝟙 V
@@ -124,16 +125,16 @@ private theorem conjugateFunctor_pow {C D : Type*} [Category* C] [Category* D]
   | succ k ih =>
     simpa only [pow_succ, End.mul_asHom, Functor.map_comp, Category.assoc,
       Iso.hom_inv_id_assoc] using
-      congrArg (fun t ↦ (e.inv ≫ F.map d ≫ e.hom) ≫ t) ih
+      congrArg (fun t ↦ (e.inv ≫ F.map d.asHom ≫ e.hom) ≫ t) ih
 
 private theorem complexAction_pow {A : Type*} [Category* A] [Abelian A]
     [MonoidalCategory A] [MonoidalPreadditive A]
     (P : CochainComplex A ℤ) (μ : End P) (r : End (𝟙_ A))
-    (hμ : ∀ q, μ.f q = unitEndAction (P.X q) r) (k : ℕ) (q : ℤ) :
-    (μ ^ k).f q = unitEndAction (P.X q) (r ^ k) := by
+    (hμ : ∀ q, μ.asHom.f q = (unitEndAction (P.X q) r).asHom) (k : ℕ) (q : ℤ) :
+    (μ ^ k).asHom.f q = (unitEndAction (P.X q) (r ^ k)).asHom := by
   induction k with
   | zero =>
-    change 𝟙 (P.X q) = unitEndAction (P.X q) (1 : End (𝟙_ A))
+    change 𝟙 (P.X q) = (unitEndAction (P.X q) (1 : End (𝟙_ A))).asHom
     rw [map_one]
     rfl
   | succ k ih =>
@@ -162,20 +163,22 @@ theorem internal_principal_cone_level_augmentation
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (f : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) f).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) f).down s =
         Padic.coefficientExtensionUniformizer l E * f.down s)
     (P : CochainComplex (Modules l E X) ℤ)
     (hP : (HomologicalComplex.quasiIso (Modules l E X) (.up ℤ)).kFlat P)
     (n : ℕ) :
     ∃ a : CochainComplex.PrincipalCone.level
-        (DerivedNakayama.scalarOnComplex l E X d P) n ⟶ (level l E X n).obj P,
+        (End.of (DerivedNakayama.scalarOnComplex l E X d P)) n ⟶ (level l E X n).obj P,
       QuasiIso a ∧ ∀ q : ℤ, a.f q =
         (CochainComplex.mappingCone.snd
-          (End.of (DerivedNakayama.scalarOnComplex l E X d P) ^ (n + 1))).v q q (add_zero q) ≫
+          (End.of (DerivedNakayama.scalarOnComplex l E X d P) ^ (n + 1)).asHom).v
+            q q (add_zero q) ≫
             (levelUnit l E X P n).f q := by
   classical
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   have hd' : d = DerivedNakayama.uniformizerEnd l E := by
+    apply End.ext
     apply Mod.hom_ext
     apply Sheaf.hom_ext
     apply NatTrans.ext
@@ -193,11 +196,11 @@ theorem internal_principal_cone_level_augmentation
     DerivedNakayama.unitEndOnX l E X (DerivedNakayama.uniformizerEnd l E ^ (n + 1))
   have hr : r • 𝟙 (𝟙_ A) = e.inv ≫
       (DerivedNakayama.pullback l E X).map
-        (DerivedNakayama.uniformizerEnd l E ^ (n + 1)) ≫ e.hom := by
+        (DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom ≫ e.hom := by
     rw [DerivedNakayama.UnitScalar.smul_eq, unitEndAction_unit, Category.comp_id]
     rfl
   let S := (ShortComplex.mk
-    (DerivedNakayama.uniformizerEnd l E ^ (n + 1))
+    (DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom
     (DerivedNakayama.reductionHom l E (n + 1))
     (DerivedNakayama.reduction_zero l E (n + 1))).map (DerivedNakayama.pullback l E X)
   have hS : S.ShortExact :=
@@ -219,28 +222,29 @@ theorem internal_principal_cone_level_augmentation
       simp
   have hpow (k : ℕ) : DerivedNakayama.unitEndOnX l E X
       (DerivedNakayama.uniformizerEnd l E ^ k) =
-      DerivedNakayama.unitEndOnX l E X (DerivedNakayama.uniformizerEnd l E) ^ k :=
-    conjugateFunctor_pow (DerivedNakayama.pullback l E X) e
+      DerivedNakayama.unitEndOnX l E X (DerivedNakayama.uniformizerEnd l E) ^ k := by
+    apply End.ext
+    exact conjugateFunctor_pow (DerivedNakayama.pullback l E X) e
       (DerivedNakayama.uniformizerEnd l E) k
-  let μ : End P := DerivedNakayama.scalarOnComplex l E X
-    (DerivedNakayama.uniformizerEnd l E) P
-  have hbase (q : ℤ) : μ.f q = unitEndAction (P.X q)
-      (DerivedNakayama.unitEndOnX l E X (DerivedNakayama.uniformizerEnd l E)) := by
+  let μ : End P := .of (DerivedNakayama.scalarOnComplex l E X
+    (DerivedNakayama.uniformizerEnd l E) P)
+  have hbase (q : ℤ) : μ.asHom.f q = (unitEndAction (P.X q)
+      (DerivedNakayama.unitEndOnX l E X (DerivedNakayama.uniformizerEnd l E))).asHom := by
     change (DerivedNakayama.scalarOnComplex l E X
       (DerivedNakayama.uniformizerEnd l E) P).f q = _
     rw [DerivedNakayama.scalarOnComplex_eq]
     change DerivedNakayama.unitEndOnX l E X
       (DerivedNakayama.uniformizerEnd l E) • 𝟙 (P.X q) = _
     rw [DerivedNakayama.UnitScalar.smul_eq, Category.comp_id]
-  have hμ : μ ^ (n + 1) = r • 𝟙 P := by
+  have hμ : (μ ^ (n + 1)).asHom = r • 𝟙 P := by
     apply HomologicalComplex.hom_ext
     intro q
     rw [complexAction_pow P μ _ hbase, ← hpow]
-    change unitEndAction (P.X q) r = r • 𝟙 (P.X q)
+    change (unitEndAction (P.X q) r).asHom = r • 𝟙 (P.X q)
     rw [DerivedNakayama.UnitScalar.smul_eq, Category.comp_id]
-  change ∃ a : CochainComplex.mappingCone (μ ^ (n + 1)) ⟶ (level l E X n).obj P,
+  change ∃ a : CochainComplex.mappingCone (μ ^ (n + 1)).asHom ⟶ (level l E X n).obj P,
     QuasiIso a ∧ ∀ q : ℤ, a.f q =
-      (CochainComplex.mappingCone.snd (μ ^ (n + 1))).v q q (add_zero q) ≫
+      (CochainComplex.mappingCone.snd (μ ^ (n + 1)).asHom).v q q (add_zero q) ≫
         (levelUnit l E X P n).f q
   rw [hμ]
   exact normalized_scalar_augmentation r (finiteUnit l E X n) hzero hseq P hP
