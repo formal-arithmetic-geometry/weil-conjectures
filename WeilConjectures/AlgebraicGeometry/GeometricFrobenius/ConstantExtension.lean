@@ -293,7 +293,8 @@ variable [Finite k₀]
 geometric point `t` of `Ȳ₀` satisfies `t ≫ Fr₀^{m n} = σ₀^{m n} ≫ t`, `m = [k₁ : k₀]`. -/
 theorem geometricFiberExtensionPoint_comp_geometricGaloisFrobenius_pow
     {s : Spec (.of (AlgebraicClosure k₁)) ⟶ f₁.geometricFiber} {n : ℕ}
-    (hs : s ≫ (f₁.geometricGaloisFrobenius ^ n).asIso.hom = (specGeometricFrobenius k₁ ^ n).asIso.hom ≫ s) :
+    (hs : s ≫ (f₁.geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k₁ ^ n).asIso.hom ≫ s) :
     geometricFiberExtensionPoint f₁ f₀ hf θ s ≫
         (f₀.geometricGaloisFrobenius ^ (Module.finrank k₀ k₁ * n)).asIso.hom =
       (specGeometricFrobenius k₀ ^ (Module.finrank k₀ k₁ * n)).asIso.hom ≫
