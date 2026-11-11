@@ -132,7 +132,7 @@ private noncomputable def matrixEnd (A : C) (n : Type) [Fintype n] [DecidableEq 
   map_one' := by
     apply End.ext
     ext i j
-    by_cases hij : i = j <;> simp [Matrix.one_apply, biproduct.ι_π, hij, eq_comm]
+    by_cases hij : i = j <;> simp [Matrix.one_apply, hij, eq_comm]
   map_add' M N := by
     apply End.ext
     change biproduct.matrix (fun i j => ((M + N) j i).asHom) =
