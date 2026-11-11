@@ -96,8 +96,8 @@ lemma mateEquiv_adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso_in
   set b := g.geometricGaloisFrobenius
   set adjUL := adicUpperStarLowerStarAdjunction l j
   set adj := adicOpenImmersionLowerShriekAdjunction l j
-  set Ea := adicLowerStarEquivalence l a.symm
-  set Eb := adicLowerStarEquivalence l b.symm
+  set Ea := adicLowerStarEquivalence l a.asIso.symm
+  set Eb := adicLowerStarEquivalence l b.asIso.symm
   set U := adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso l φ h
   set V := adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h
   -- the mate of `U⁻¹` under the inverse Frobenius equivalences is `V⁻¹`
