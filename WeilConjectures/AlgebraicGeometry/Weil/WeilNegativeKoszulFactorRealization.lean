@@ -215,7 +215,7 @@ private theorem realizeRankOne
       Q.obj (ModuleCat.of A A)) [IsIso c] (a : A)
     (b : (O.obj ⋙ CategoryTheory.forget CommRingCat.{u + 1}).sections)
     (hc : ∀ n : ℕ, c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A (a ^ n))) =
-      ((ringedKoszulScalar O b) ^ n) ≫ c) :
+      ((ringedKoszulScalar O b) ^ n).asHom ≫ c) :
     let H := Q.mapHomologicalComplex (.up ℤ)
     ∃ e : ∀ m : ℕ, H.obj (completedKoszulPower (A := A) 1 (fun _ ↦ a) m) ≅
         ringedNegativeKoszulFactor O b m,
@@ -226,7 +226,7 @@ private theorem realizeRankOne
   let H := Q.mapHomologicalComplex (.up ℤ)
   let K (m : ℕ) := completedKoszulPower (A := A) 1 (fun _ ↦ a) m
   have hd (m : ℕ) : c ≫ Q.map (rankOneNegativeIso a m).inv ≫ Q.map ((K m).d (-1) 0) =
-      ((ringedKoszulScalar O b) ^ (m + 1)) ≫ c ≫ Q.map (rankOneZeroIso a m).inv := by
+      ((ringedKoszulScalar O b) ^ (m + 1)).asHom ≫ c ≫ Q.map (rankOneZeroIso a m).inv := by
     have h : (rankOneNegativeIso a m).inv ≫ (K m).d (-1) 0 =
         ModuleCat.ofHom (LinearMap.mul A A (a ^ (m + 1))) ≫
           (rankOneZeroIso a m).inv := by
@@ -261,7 +261,7 @@ private theorem realizeRankOne
     exact HomologicalComplex.Hom.isIso_of_components (v m)
   have htneg (m : ℕ) : c ≫ Q.map (rankOneNegativeIso a (m + 1)).inv ≫
       Q.map ((completedKoszulTransition (A := A) 1 (fun _ ↦ a) m).f (-1)) =
-        ringedKoszulScalar O b ≫ c ≫ Q.map (rankOneNegativeIso a m).inv := by
+        (ringedKoszulScalar O b).asHom ≫ c ≫ Q.map (rankOneNegativeIso a m).inv := by
     have h : (rankOneNegativeIso a (m + 1)).inv ≫
         (completedKoszulTransition (A := A) 1 (fun _ ↦ a) m).f (-1) =
           ModuleCat.ofHom (LinearMap.mul A A a) ≫ (rankOneNegativeIso a m).inv := by
@@ -269,7 +269,7 @@ private theorem realizeRankOne
       simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using
         rankOne_transition_negative a m
     have hc1 : c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A a)) =
-        ringedKoszulScalar O b ≫ c := by simpa only [pow_one] using hc 1
+        (ringedKoszulScalar O b).asHom ≫ c := by simpa only [pow_one] using hc 1
     rw [← Q.map_comp, h, Q.map_comp, ← Category.assoc, hc1]
     simp only [Category.assoc]
   have htzero (m : ℕ) : Q.map (rankOneZeroIso a (m + 1)).inv ≫
@@ -322,8 +322,8 @@ private theorem scalar_power
     {D : Type*} [Category D] {A : Type (u + 1)} [CommRing A]
     (Q : ModuleCat.{u + 1} A ⥤ D) {U : D} (c : U ⟶ Q.obj (ModuleCat.of A A))
     (a : A) (s : End U)
-    (hc : c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A a)) = s ≫ c) (n : ℕ) :
-    c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A (a ^ n))) = (s ^ n) ≫ c := by
+    (hc : c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A a)) = s.asHom ≫ c) (n : ℕ) :
+    c ≫ Q.map (ModuleCat.ofHom (LinearMap.mul A A (a ^ n))) = (s ^ n).asHom ≫ c := by
   induction n with
   | zero =>
     have hmul : ModuleCat.ofHom (LinearMap.mul A A (a ^ 0)) =
