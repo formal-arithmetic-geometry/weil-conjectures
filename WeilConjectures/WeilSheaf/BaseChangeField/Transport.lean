@@ -54,7 +54,7 @@ composite `(Fr^{m+1})^* K ≅ Fr^* (Frᵐ)^* K --Fr^* φ_m--> Fr^* K --φ--> K`,
 identification `𝟙^* K ≅ K`; the pullback along an automorphism `g` is the pushforward along
 `g⁻¹`. This is `AlgebraicGeometry.WeilSheaf.frobeniusPowIso` for all pro-étale Weil sheaves. -/
 def frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l Y) : (m : ℕ) →
-    ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].obj K.carrier ≅
+    ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].obj K.carrier ≅
       K.carrier)
   | 0 => (adicLowerStarCongr l (by rw [pow_zero]; rfl)).app _ ≪≫ (adicLowerStarId l _).app _
   | m + 1 =>
@@ -72,7 +72,7 @@ lemma _root_.AlgebraicGeometry.WeilSheaf.frobeniusPowIso_eq [Fact (ringChar k₀
 /-- The iterated Weil structures are natural. -/
 @[reassoc]
 lemma frobeniusPowIso_hom_naturality {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') (m : ℕ) :
-    (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].map φ.hom.f ≫
+    (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].map φ.hom.f ≫
         (K'.frobeniusPowIso m).hom =
       (K.frobeniusPowIso m).hom ≫ φ.hom.f := by
   induction m with
@@ -95,7 +95,7 @@ geometric Galois Frobenius. -/
 abbrev frobeniusPowPullback (m : ℕ) :
     AdicSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
       AdicSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l])
+  ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l])
 
 variable (k₀ l Y) in
 /-- The `r`-th power of a Weil structure: `(K, φ) ↦ (K, φ_r)`, a pro-étale sheaf with an
@@ -133,14 +133,14 @@ variable {k₀' : Type u} [Field k₀'] [Finite k₀']
   {Y' : Scheme.{u}} [Y'.Over (Spec (CommRingCat.of k₀'))]
   (θ : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
     (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
-  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
-    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
+  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.hom =
+    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.hom ≫ θ.hom)
 
 include hθ in
 lemma hom_comp_geometricGaloisFrobenius_inv :
-    θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv =
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).inv ≫ θ.hom := by
-  rw [← cancel_mono (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom,
+    θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.inv =
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.inv ≫ θ.hom := by
+  rw [← cancel_mono (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.asIso.hom,
     Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hθ, Iso.inv_hom_id_assoc]
 
 /-- The commutation `θ_* ⋙ Fr'^* ≅ (Frʳ)^* ⋙ θ_*` of the pushforward along `θ` with the
