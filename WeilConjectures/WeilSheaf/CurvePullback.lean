@@ -61,8 +61,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
   {L : Type u} [Field L] [Finite L] [Fact (ringChar L ≠ l)]
   {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of L))] {N : ℕ}
   (j : (Y ↘ Spec (CommRingCat.of L)).geometricFiber ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-    (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j)
+  (hj : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom =
+    (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
 
 /-- The pullback of Weil sheaves along `j : Ȳ ⟶ X̄` with `j ≫ Fr^N = Fr_Y ≫ j`: the pullback
 `j^* F̄` with the Weil structure induced by the iterated Weil structure `φ_N` of `F`. -/
@@ -105,8 +105,10 @@ lemma curvePullback_obj_obj_obj_str (F : WeilSheaf k₀ l X) :
 -- `upperStarIsoLowerStarInv` at objects which are only definitionally equal makes the kernel unfold
 -- the isomorphism (about 30s), while for a variable `α` it only compares the objects.
 private lemma hom_app_comp_forget_map_frobeniusPowIso (F : WeilSheaf k₀ l X) (M : ℕ)
-    (α : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).hom)^*[WeilCoefficients l]
-      ≅ (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).inv)_*[WeilCoefficients l]) :
+    (α : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.hom)^*[
+        WeilCoefficients l] ≅
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.inv)_*[
+        WeilCoefficients l]) :
     α.hom.app F.obj.carrier.X ≫ (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso M).hom =
       α.hom.app (F.powIsoAlgebra M).carrier.X ≫
         (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra M).obj.str :=
@@ -123,18 +125,20 @@ lemma frobeniusPowStr_eq_powIsoAlgebra (F : WeilSheaf k₀ l X) (M : ℕ) :
 -- Stated for an arbitrary isomorphism `α`, for the same reason as
 -- `hom_app_comp_forget_map_frobeniusPowIso` (about 75s for the concrete isomorphism).
 private lemma hom_app_comp_inv_app_curvePullback (F : WeilSheaf k₀ l X)
-    (α : ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l] ≅
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]) :
+    (α : ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom)^*[
+        WeilCoefficients.{u} l] ≅
+      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]) :
     α.hom.app ((curvePullback j hj).obj F).obj.carrier.X ≫
       α.inv.app ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
   Iso.hom_inv_id_app _ _
 
 private lemma upperStarIsoLowerStarInv_hom_inv_id_app_curvePullback (F : WeilSheaf k₀ l X) :
     (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).hom.app
+      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso).hom.app
         ((curvePullback j hj).obj F).obj.carrier.X ≫
     (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).inv.app
+      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso).inv.app
         ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
   hom_app_comp_inv_app_curvePullback j hj F _
 
@@ -143,11 +147,11 @@ of the iterated Weil structure `φ_N`, through
 `Fr_Y^* j^* ≅ (Fr_Y ≫ j)^* = (j ≫ Fr^N)^* ≅ j^* (Fr^N)^*`. -/
 lemma frobeniusStr_curvePullback (F : WeilSheaf k₀ l X) :
     ((curvePullback j hj).obj F).frobeniusStr =
-      (ProEtale.upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom
+      (ProEtale.upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom
           j).inv.app (F.powIsoAlgebra N).carrier.X ≫
         (ProEtale.upperStarCongr _ hj.symm).hom.app (F.powIsoAlgebra N).carrier.X ≫
         (ProEtale.upperStarComp _ j
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom).hom.app
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom).hom.app
           (F.powIsoAlgebra N).carrier.X ≫
         (j)^*[WeilCoefficients.{u} l].map
           ((ProEtale.upperStarIsoLowerStarInv _ _).hom.app (F.powIsoAlgebra N).carrier.X ≫
@@ -162,15 +166,15 @@ lemma frobeniusStr_curvePullback (F : WeilSheaf k₀ l X) :
 /-- The identity `j^* F̄ ⟶ j^* F̄` of the underlying sheaves of the curve pullback is compatible
 with the Weil structure of the pullback and the iterated Weil structure `φ_N` of `F`. -/
 lemma curvePullback_frobeniusStr_compatible (F : WeilSheaf k₀ l X) :
-    (ProEtale.upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom
+    (ProEtale.upperStarComp _ (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom
         j).hom.app (F.powIsoAlgebra N).carrier.X ≫
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom)^*[_].map
+      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom)^*[_].map
         (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
           ((curvePullback j hj).obj F).obj.carrier.X) ≫
       ((curvePullback j hj).obj F).frobeniusStr =
     (ProEtale.upperStarCongr _ hj.symm).hom.app (F.powIsoAlgebra N).carrier.X ≫
       (ProEtale.upperStarComp _ j
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom).hom.app
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom).hom.app
           (F.powIsoAlgebra N).carrier.X ≫
       (j)^*[_].map (F.frobeniusPowStr N) ≫
       (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
@@ -182,10 +186,10 @@ lemma curvePullback_frobeniusStr_compatible (F : WeilSheaf k₀ l X) :
 
 /-- `j` intertwines the powers `Fr_Yᵐ` and `Fr^{N m}` of the geometric Galois Frobenii. -/
 lemma comp_geometricGaloisFrobenius_pow_mul_eq
-    (hj' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
-      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom ≫ j) (m : ℕ) :
-    j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom =
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom ≫ j := by
+    (hj' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom =
+      (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j) (m : ℕ) :
+    j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom =
+      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.hom ≫ j := by
   induction m with
   | zero =>
     rw [Nat.mul_zero, pow_zero, pow_zero]
@@ -204,8 +208,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback_one (F : WeilSh
     {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
     {τ' : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure L))}
     (h₁ : Θ ≫ t₁ = t₁' ≫ j) (h₂ : Θ ≫ t₂ = t₂' ≫ j)
-    (hX : τ ≫ t₁ = t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom)
-    (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ 1).hom)
+    (hX : τ ≫ t₁ = t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom)
+    (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ 1).asIso.hom)
     (hΘ : τ' ≫ Θ = Θ ≫ τ) :
     ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr N) ≫
         ProEtale.globalSectionsTransport _ h₂
@@ -215,7 +219,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback_one (F : WeilSh
           (𝟙 _ : (j)^*[WeilCoefficients.{u} l].obj (F.powIsoAlgebra N).carrier.X ⟶
             ((curvePullback j hj).obj F).obj.carrier.X) ≫
         ProEtale.globalSectionsTransport _ hY (((curvePullback j hj).obj F).frobeniusPowStr 1) := by
-  have pY := congrArg Iso.hom (pow_one (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius)
+  have pY := congrArg (fun e ↦ e.asIso.hom)
+    (pow_one (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius)
   rw [ProEtale.globalSectionsTransport_congr _ hY pY _ _ (frobeniusPowStr_one _ pY)]
   exact ProEtale.globalSectionsTransport_comm_of_upperStar_of_comp _ j _ _
     hj.symm _ _ _ (curvePullback_frobeniusStr_compatible j hj F) h₁ h₂ hX _ hΘ
@@ -231,8 +236,9 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback (hN : 1 ≤ N)
     {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
     {τ' : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure L))}
     (h₁ : Θ ≫ t₁ = t₁' ≫ j) (h₂ : Θ ≫ t₂ = t₂' ≫ j)
-    (hX : τ ≫ t₁ = t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom)
-    (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom)
+    (hX : τ ≫ t₁ =
+      t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom)
+    (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.hom)
     (hΘ : τ' ≫ Θ = Θ ≫ τ) :
     ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr (N * m)) ≫
         ProEtale.globalSectionsTransport _ h₂
@@ -245,40 +251,44 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback (hN : 1 ≤ N)
   induction m, hm using Nat.le_induction generalizing t₁ t₂ t₁' t₂' τ τ' with
   | base =>
     have hX' : τ ≫ t₁ =
-        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom := by
+        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom := by
       rw [hX, Nat.mul_one]
     rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_one N) rfl hX hX']
     exact globalSectionsTransport_frobeniusPowStr_comp_curvePullback_one j hj F h₁ h₂ hX' hY hΘ
   | succ m hm ih =>
-    have pc' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv =
-        ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv ≫ j := by
-      rw [← cancel_mono ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom,
+    have pc' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv =
+        ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.inv ≫ j := by
+      rw [← cancel_mono
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom,
         Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id,
         comp_geometricGaloisFrobenius_pow_mul_eq j hj m, Iso.inv_hom_id_assoc]
     have haX : (Iso.refl _).hom ≫ t₁ =
-        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv) ≫
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom := by
+        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) ≫
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom := by
       simp
-    have hbX : τ ≫ (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv) =
-        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom := by
-      rw [← cancel_mono ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).hom,
+    have hbX : τ ≫
+        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) =
+        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom := by
+      rw [← cancel_mono
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom,
         Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hX, Category.assoc,
         Aut.pow_hom_comp_pow_hom, Nat.mul_succ]
     have haY : (Iso.refl _).hom ≫ t₁' =
-        (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv) ≫
-          ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom := by
+        (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.inv) ≫
+          ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.hom := by
       simp
-    have hbY : τ' ≫ (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv) =
-        t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ 1).hom := by
-      rw [← cancel_mono ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).hom,
+    have hbY : τ' ≫ (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.inv) =
+        t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ 1).asIso.hom := by
+      rw [← cancel_mono ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.hom,
         Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hY, Category.assoc,
         Aut.pow_hom_comp_pow_hom]
-    have hmid : Θ ≫ (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).inv) =
-        (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).inv) ≫ j := by
+    have hmid : Θ ≫
+        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) =
+        (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.inv) ≫ j := by
       rw [← Category.assoc, h₁, Category.assoc, pc', Category.assoc]
     have hΘ₀ : (Iso.refl _).hom ≫ Θ = Θ ≫ (Iso.refl _).hom := by simp
     have hX'' : τ ≫ t₁ =
-        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m + N)).hom := by
+        t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m + N)).asIso.hom := by
       rw [hX, Nat.mul_succ]
     rw [globalSectionsTransport_frobeniusPowStr_congr F (Nat.mul_succ N m) rfl hX hX'',
       ← F.globalSectionsTransport_frobeniusPowStr_comp (N * m) N hN haX hbX (Category.comp_id τ)
