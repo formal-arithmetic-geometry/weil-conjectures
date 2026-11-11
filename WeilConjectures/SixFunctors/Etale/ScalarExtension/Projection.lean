@@ -130,7 +130,11 @@ lemma mateEquiv_symm_lowerStarCompSheafComposeCoextendScalarsIso :
         (TwoSquare.mk _ _ _ _ (lowerStarCompSheafComposeCoextendScalarsIso R S g).inv) =
       TwoSquare.mk _ _ _ _
         (lowerStarCompSheafComposeRestrictScalarsIso (algebraMap R S) g).hom := by
-  ext G U : 4
+  apply NatTrans.ext
+  funext G
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
   simp only [Functor.comp_obj, mateEquiv_symm_apply, NatTrans.comp_app, Functor.id_obj,
     Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map,
     Functor.associator_inv_app, Functor.associator_hom_app, CategoryTheory.Functor.map_id,
