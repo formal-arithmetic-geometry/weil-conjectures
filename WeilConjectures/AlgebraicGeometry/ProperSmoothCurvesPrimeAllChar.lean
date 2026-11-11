@@ -69,7 +69,6 @@ private noncomputable def constantHigherDirectImagePlusIso
 private theorem exists_smoothOfRelativeDimension_of_connectedSpace
     {k : Type u} [Field k] {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k))
     [Smooth g] [ConnectedSpace Y] : ∃ n : ℕ, SmoothOfRelativeDimension n g := by
-
   have := LocallyOfFiniteType.isLocallyNoetherian g
   have := IsRegular.of_smooth g
   have := IsRegular.isIntegral Y
