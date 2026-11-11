@@ -218,8 +218,8 @@ variable (k₀ l Y) in
 sheaves: `(Fr⁻¹)_* M ⟶ M`. -/
 noncomputable def strForgetAb :
     forgetAb k₀ l Y ⋙
-        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[AddCommGrpCat.{u + 1}] ⟶
-      forgetAb k₀ l Y :=
+        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[AddCommGrpCat.{u + 1}]
+      ⟶ forgetAb k₀ l Y :=
   Functor.whiskerRight (IsoAlgebra.strNatIso (WeilSheaf.frobeniusPullback k₀ l Y)).hom
     (AdicSheaf.forget _ ⋙ sheafForget₂ (ULift.{u + 1} (PadicAlgCl l)) _)
 
@@ -264,10 +264,12 @@ lemma cocycleFrobenius_eq_resolutionFrobeniusCocycle (n : ℕ)
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv (I.cocomplex.X n).carrier.X f
   have h₃ := constantIntHomAddEquivΓ_comp
     (M :=
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l].obj
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+        l].obj
       (I.cocomplex.X n).carrier.X) (N := (I.cocomplex.X n).carrier.X) (constantIntSheafToLowerStar
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≫
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[AddCommGrpCat.{u + 1}].map f)
+      ((Y ↘ Spec
+        (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[AddCommGrpCat.{u + 1}].map f)
     ((AdicSheaf.forget _).map (I.cocomplex.X n).str.hom)
   rw [h₂, Category.assoc] at h₃
   rw [sectionsAddEquiv_cocycleFrobenius]
