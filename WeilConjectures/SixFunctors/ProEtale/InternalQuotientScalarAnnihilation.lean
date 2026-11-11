@@ -10,7 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
 import all WeilConjectures.AlgebraicGeometry.IntegralConstantSectionProjection
 import all WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
 import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
-import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import all WeilConjectures.SixFunctors.ProEtale.InternalDiscreteQuotientComparison
 
@@ -84,8 +84,8 @@ private def extendComapTensorIso {R S : A}
 private theorem tensor_single_scalar_f (P : CochainComplex A ℤ)
     (s : End (𝟙_ A)) (q : ℤ) :
     (HomologicalComplex.rightUnitor P).inv.f q ≫
-      (P ◁ (HomologicalComplex.single A (.up ℤ) 0).map s).f q ≫
-        (HomologicalComplex.rightUnitor P).hom.f q = unitEndAction (P.X q) s := by
+      (P ◁ (HomologicalComplex.single A (.up ℤ) 0).map s.asHom).f q ≫
+        (HomologicalComplex.rightUnitor P).hom.f q = (unitEndAction (P.X q) s).asHom := by
   change (HomologicalComplex.rightUnitor' P).inv q ≫ _ ≫ _ = _
   rw [HomologicalComplex.rightUnitor'_inv]
   simp only [Category.assoc]
@@ -95,7 +95,7 @@ private theorem tensor_single_scalar_f (P : CochainComplex A ℤ)
   change (ρ_ (P.X q)).inv ≫
     P.X q ◁ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ A)).inv ≫
       (𝟙 (P.X q) ▷ _) ≫ P.X q ◁
-        ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ A)).hom ≫ s ≫
+        ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ A)).hom ≫ s.asHom ≫
           (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ A)).inv) ≫
         HomologicalComplex.ιTensorObj P (HomologicalComplex.tensorUnit A (.up ℤ))
           q 0 q (add_zero q) ≫ (HomologicalComplex.rightUnitor P).hom.f q = _
@@ -164,35 +164,35 @@ private theorem pure_rightUnitor (M : ConstantCompletion.Mod O) (U : Cᵒᵖ)
 
 private def sectionScalar (a : (O.obj ⋙ forget CommRingCat).sections)
     (M : ConstantCompletion.Mod O) : End M :=
-  ⟨PresheafOfModules.sectionsSMul M.val ⟨a.val, a.property⟩⟩
+  End.of ⟨PresheafOfModules.sectionsSMul M.val ⟨a.val, a.property⟩⟩
 
 attribute [local implicit_reducible] SheafOfModules.unit PresheafOfModules.unit
   CategoryTheory.sheafCompose
 
 private theorem unit_action_apply (M : ConstantCompletion.Mod O)
     (s : End (SheafOfModules.unit (siteModuleRings O))) (U : Cᵒᵖ) (x : M.val.obj U) :
-    (unitEndAction M s).val.app U x =
-      (show O.obj.obj U from s.val.app U (1 : O.obj.obj U)) • x := by
-  have h : M ◁ s ≫ (ρ_ M).hom = (ρ_ M).hom ≫
-      sectionScalar O (SheafOfModules.unitHomEquiv _ s) M := by
+    (unitEndAction M s).asHom.val.app U x =
+      (show O.obj.obj U from s.asHom.val.app U (1 : O.obj.obj U)) • x := by
+  have h : M ◁ s.asHom ≫ (ρ_ M).hom = (ρ_ M).hom ≫
+      (sectionScalar O (SheafOfModules.unitHomEquiv _ s.asHom) M).asHom := by
     apply pure_hom_ext O M (SheafOfModules.unit (siteModuleRings O)) M
     intro V m r
     let r₀ : O.obj.obj V := r
-    let F : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (s.val.app V).hom
-    have ht : (M ◁ s).val.app V
+    let F : O.obj.obj V →ₗ[O.obj.obj V] O.obj.obj V := (s.asHom.val.app V).hom
+    have ht : (M ◁ s.asHom).val.app V
         (pure O M (SheafOfModules.unit (siteModuleRings O)) V m r) =
         pure O M (SheafOfModules.unit (siteModuleRings O)) V m (F r₀) := by
       calc
-        _ = (𝟙 M ⊗ₘ s).val.app V
+        _ = (𝟙 M ⊗ₘ s.asHom).val.app V
             (pure O M (SheafOfModules.unit (siteModuleRings O)) V m r) :=
           congrArg (fun f ↦ f.val.app V
             (pure O M (SheafOfModules.unit (siteModuleRings O)) V m r))
-              (id_tensorHom M s).symm
-        _ = _ := pure_map O (𝟙 M) s V m r
+              (id_tensorHom M s.asHom).symm
+        _ = _ := pure_map O (𝟙 M) s.asHom V m r
     have hF : F r₀ = F 1 * r₀ := by
       have hh := F.map_smul r₀ (1 : O.obj.obj V)
       simpa only [smul_eq_mul, mul_one, mul_comm] using hh
-    change (ρ_ M).hom.val.app V ((M ◁ s).val.app V
+    change (ρ_ M).hom.val.app V ((M ◁ s.asHom).val.app V
       (pure O M (SheafOfModules.unit (siteModuleRings O)) V m r)) =
         F 1 • ((ρ_ M).hom.val.app V
           (pure O M (SheafOfModules.unit (siteModuleRings O)) V m r))
@@ -206,23 +206,23 @@ private theorem unit_action_apply (M : ConstantCompletion.Mod O)
   have hh := congrArg (fun f ↦ f.val.app U x)
     (congrArg (fun f ↦ (ρ_ M).inv ≫ f) h)
   simp only [Iso.inv_hom_id_assoc] at hh
-  change (unitEndAction M s).val.app U x =
-    (show O.obj.obj U from s.val.app U (1 : O.obj.obj U)) • x at hh
+  change (unitEndAction M s).asHom.val.app U x =
+    (show O.obj.obj U from s.asHom.val.app U (1 : O.obj.obj U)) • x at hh
   exact hh
 
 private theorem koszul_scalar_power_apply
     (a : (O.obj ⋙ forget CommRingCat).sections) (k : ℕ) (U : Cᵒᵖ)
-    (r : O.obj.obj U) : (ringedKoszulScalar O a ^ k).val.app U r = a.val U ^ k * r := by
+    (r : O.obj.obj U) : (ringedKoszulScalar O a ^ k).asHom.val.app U r = a.val U ^ k * r := by
   induction k generalizing r with
   | zero => simp [End.one_asHom]
   | succ k ih =>
     erw [pow_succ, End.mul_asHom]
-    change (ringedKoszulScalar O a ^ k).val.app U
-      ((ringedKoszulScalar O a).val.app U r) = _
+    change (ringedKoszulScalar O a ^ k).asHom.val.app U
+      ((ringedKoszulScalar O a).asHom.val.app U r) = _
     erw [ih]
-    have h : (ringedKoszulScalar O a).val.app U r = a.val U * r := by
+    have h : (ringedKoszulScalar O a).asHom.val.app U r = a.val U * r := by
       let F : O.obj.obj U →ₗ[O.obj.obj U] O.obj.obj U :=
-        ((ringedKoszulScalar O a).val.app U).hom
+        ((ringedKoszulScalar O a).asHom.val.app U).hom
       have h1 : F 1 = a.val U := by
         let e := SheafOfModules.unitHomEquiv (SheafOfModules.unit (siteModuleRings O))
         have he := e.apply_symm_apply ⟨a.val, a.property⟩
@@ -241,6 +241,7 @@ private theorem scalar_power_zero_of_restriction
     (M : ConstantCompletion.Mod O) (L : ConstantCompletion.Mod D)
     (e : (ConstantCompletion.res φ).obj L ≅ M) :
     unitEndAction M (ringedKoszulScalar O a ^ k) = 0 := by
+  apply End.ext
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro U
@@ -583,7 +584,7 @@ theorem quotient_scalar_annihilation
     (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,
       (residue l E X).hom.app (op U) (a.val (op U)) = 0)
     (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
-    ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n ≫
+    (ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n).asHom ≫
       (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).hom ≫
         (quotientUnits l E X P).app (op n) = 0 := by
   let O := ring l E X
@@ -603,10 +604,10 @@ theorem quotient_scalar_annihilation
   simp only [HomologicalComplex.comp_f, HomologicalComplex.zero_f, comp_zero]
   unfold ringedSingletonKoszulPower ringedKoszulTensor ringedKoszulRightUnitIso
   change (HomologicalComplex.rightUnitor N).inv.f q ≫
-      (N ◁ (HomologicalComplex.single _ (.up ℤ) 0).map s).f q ≫
+      (N ◁ (HomologicalComplex.single _ (.up ℤ) 0).map s.asHom).f q ≫
         (HomologicalComplex.rightUnitor N).hom.f q ≫ f.f q = 0
   rw [← Category.assoc, ← Category.assoc,
     Category.assoc _ _ ((HomologicalComplex.rightUnitor N).hom.f q),
-    tensor_single_scalar_f, unitEndAction_naturality, hz, comp_zero]
+    tensor_single_scalar_f, unitEndAction_naturality, hz, End.zero_asHom, comp_zero]
 
 end AlgebraicGeometry.ProEtale.InternalCompletionTransport
