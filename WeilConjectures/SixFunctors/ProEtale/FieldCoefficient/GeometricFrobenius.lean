@@ -92,8 +92,8 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 `Fr^* = (Fr⁻¹)_*` of sheaves of `Λ`-modules: both composites are the pushforward along
 `φ̄ ≫ Fr_Y⁻¹ = Fr_X⁻¹ ≫ φ̄`. -/
 noncomputable def fieldLowerStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)_*ᶠ[Λ] ⋙ (g.geometricGaloisFrobenius.inv)_*ᶠ[Λ] ≅
-      (f.geometricGaloisFrobenius.inv)_*ᶠ[Λ] ⋙ (Scheme.Hom.geometricFiberMap φ h)_*ᶠ[Λ] :=
+    (Scheme.Hom.geometricFiberMap φ h)_*ᶠ[Λ] ⋙ (g.geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ] ≅
+      (f.geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ] ⋙ (Scheme.Hom.geometricFiberMap φ h)_*ᶠ[Λ] :=
   fieldLowerStarComp Λ _ _ ≪≫
     fieldLowerStarCongr Λ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
     (fieldLowerStarComp Λ _ _).symm
@@ -102,12 +102,12 @@ noncomputable def fieldLowerStarGeometricFiberMapCompFrobeniusIso :
 `Fr^* = (Fr⁻¹)_*` of sheaves of `Λ`-modules: identifying `(Fr⁻¹)_*` with `Fr^*`, both
 composites are the pullback along `Fr_X ≫ φ̄ = φ̄ ≫ Fr_Y`. -/
 noncomputable def fieldUpperStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)^*ᶠ[Λ] ⋙ (f.geometricGaloisFrobenius.inv)_*ᶠ[Λ] ≅
-      (g.geometricGaloisFrobenius.inv)_*ᶠ[Λ] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᶠ[Λ] :=
-  Functor.isoWhiskerLeft _ (fieldUpperStarIsoLowerStarInv Λ f.geometricGaloisFrobenius).symm ≪≫
+    (Scheme.Hom.geometricFiberMap φ h)^*ᶠ[Λ] ⋙ (f.geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ] ≅
+      (g.geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᶠ[Λ] :=
+  Functor.isoWhiskerLeft _ (fieldUpperStarIsoLowerStarInv Λ f.geometricGaloisFrobenius.asIso).symm ≪≫
     (fieldUpperStarComp Λ _ _).symm ≪≫
     fieldUpperStarCongr Λ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm ≪≫
     fieldUpperStarComp Λ _ _ ≪≫
-    Functor.isoWhiskerRight (fieldUpperStarIsoLowerStarInv Λ g.geometricGaloisFrobenius) _
+    Functor.isoWhiskerRight (fieldUpperStarIsoLowerStarInv Λ g.geometricGaloisFrobenius.asIso) _
 
 end AlgebraicGeometry.ProEtale
