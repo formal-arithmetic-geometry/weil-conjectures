@@ -183,7 +183,8 @@ theorem sectionPushforward_smul (T U : Scheme.{u}) (f : U ⟶ T)
       ((CondensedRing.lowerStar (coefficient A) f).obj M)).obj.obj V) a).asHom.hom m) =
     (show M.X.obj.obj ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V) from
       (ModuleCat.smul (((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).obj
-      ((sectionEncoding A U eU.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V) a).asHom.hom m) := by
+        ((sectionEncoding A U eU.ringIso ⋙ fixedRestriction A U).obj M)).obj.obj V)
+        a).asHom.hom m) := by
   exact (encodedPushforward_action A T U f eT M V a m).trans
     ((normalizedPushforward_action A T U f M V a m).trans
       (fixedPushforward_action A T U f eU M V a m).symm)
