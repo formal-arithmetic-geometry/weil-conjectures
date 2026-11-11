@@ -507,7 +507,7 @@ def evaluate (W : Scheme.{u})
     z.map (quotientEntry l E P hfree n q i j hij s t)
   exact CochainComplex.HomComplex.Cochain.mk fun i j hij ↦
     (quotientIso l E W P hfree n i).hom ≫
-      biproduct.matrix (fun s t ↦ coefficientEndEquiv l E W n (entry i j hij s t)) ≫
+      biproduct.matrix (fun s t ↦ (coefficientEndEquiv l E W n (entry i j hij s t)).asHom) ≫
       (quotientIso l E W P hfree n j).inv
 
 private theorem matrix_zero {C : Type*} [Category* C] [Preadditive C]
