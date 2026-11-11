@@ -105,10 +105,10 @@ lemma curvePullback_obj_obj_obj_str (F : WeilSheaf k₀ l X) :
 -- `upperStarIsoLowerStarInv` at objects which are only definitionally equal makes the kernel unfold
 -- the isomorphism (about 30s), while for a variable `α` it only compares the objects.
 private lemma hom_app_comp_forget_map_frobeniusPowIso (F : WeilSheaf k₀ l X) (M : ℕ)
-    (α : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.hom)^*[
-        WeilCoefficients l] ≅
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.inv)_*[
-        WeilCoefficients l]) :
+    (α : (((X ↘ Spec
+        (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.hom)^*[WeilCoefficients l] ≅
+      (((X ↘ Spec
+        (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.inv)_*[WeilCoefficients l]) :
     α.hom.app F.obj.carrier.X ≫ (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso M).hom =
       α.hom.app (F.powIsoAlgebra M).carrier.X ≫
         (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra M).obj.str :=
@@ -125,10 +125,10 @@ lemma frobeniusPowStr_eq_powIsoAlgebra (F : WeilSheaf k₀ l X) (M : ℕ) :
 -- Stated for an arbitrary isomorphism `α`, for the same reason as
 -- `hom_app_comp_forget_map_frobeniusPowIso` (about 75s for the concrete isomorphism).
 private lemma hom_app_comp_inv_app_curvePullback (F : WeilSheaf k₀ l X)
-    (α : ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom)^*[
-        WeilCoefficients.{u} l] ≅
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.inv)_*[
-        WeilCoefficients.{u} l]) :
+    (α : ((Y ↘ Spec
+        (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom)^*[WeilCoefficients.{u} l] ≅
+      ((Y ↘ Spec
+        (CommRingCat.of L)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]) :
     α.hom.app ((curvePullback j hj).obj F).obj.carrier.X ≫
       α.inv.app ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
   Iso.hom_inv_id_app _ _

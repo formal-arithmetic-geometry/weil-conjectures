@@ -77,8 +77,8 @@ theorem ProEtaleWeilSheaf.homToIhom_comm (M D N : ProEtaleWeilSheaf k₀ l X)
     (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
     (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
         Mod.evaluation D.carrier N.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-        WeilCoefficients.{u} l]
+      μ ((X ↘ Spec
+        (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           M.carrier.X D.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
@@ -105,8 +105,8 @@ noncomputable def ProEtaleWeilSheaf.homToIhom (M D N : ProEtaleWeilSheaf k₀ l 
     (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
     (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
         Mod.evaluation D.carrier N.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-        WeilCoefficients.{u} l]
+      μ ((X ↘ Spec
+        (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           M.carrier.X D.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
@@ -119,8 +119,8 @@ lemma ProEtaleWeilSheaf.homToIhom_hom_f (M D N : ProEtaleWeilSheaf k₀ l X)
     (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
     (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
         Mod.evaluation D.carrier N.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-        WeilCoefficients.{u} l]
+      μ ((X ↘ Spec
+        (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           M.carrier.X D.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
