@@ -215,7 +215,7 @@ noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
   haveI : IsProper (toPoint X).left := by
     rw [toPoint_left]
     infer_instance
-  (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+  .of ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (toPoint X)).unit.app (𝟙_ _) ≫
     (boundedConstructibleLowerStar ℓ (toPoint X)).map
       (Functor.Monoidal.εIso
@@ -223,12 +223,13 @@ noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
       (toPoint X)).inv.app (𝟙_ _) ≫
     ((boundedConstructibleUpperShriekAdjunction ℓ
-      (toPoint X)).homEquiv _ _).symm α
+      (toPoint X)).homEquiv _ _).symm α)
 
 /-- The integral is additive (blueprint `lem-trf-integration-linear`). -/
 lemma integral_add [IsProper X.hom] (α β : BorelMooreSection ℓ X) :
     (α + β).integral = α.integral + β.integral :=
   by
+  apply End.ext
   simp only [integral, Adjunction.homEquiv_counit, Functor.map_add, Preadditive.add_comp,
     Preadditive.comp_add]
 
@@ -286,11 +287,11 @@ private lemma integral_point_aux (a : point k ⟶ point k) (ha : a = 𝟙 (point
 /-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
 (`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
 theorem integral_point (α : BorelMooreSection ℓ (point k)) :
-    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom :=
+    α.integral = .of (α ≫ (dualizingComplexPointIso ℓ k).hom) :=
   haveI : IsProper (toPoint (point k)).left := by
     rw [toPoint_left]
     infer_instance
-  integral_point_aux (toPoint (point k)) (toPoint_ext _ _) α
+  End.ext (integral_point_aux (toPoint (point k)) (toPoint_ext _ _) α)
 
 end BorelMooreSection
 

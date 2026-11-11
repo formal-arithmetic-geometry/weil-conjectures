@@ -243,8 +243,8 @@ lemma iterateStr_add (K : WeilBoundedConstructible ℓ Φ) (m n : ℕ) :
         eqToHom (show _ = (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (𝟙 X)).obj K.carrier by rw [frobeniusIterate_zero]) ≫
           (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app
-            K.carrier :=
-      (Category.id_comp _).symm
+            K.carrier := by
+      simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom]
     rw [h₀]
     exact (boundedConstructibleUpperStarComp_id_aux _ ℓ (frobeniusIterate_zero Φ)
       (frobeniusIterate_add Φ m 0) (K.iterateStr m).hom).symm
