@@ -353,7 +353,8 @@ noncomputable def evaluationRepConstantSheafIso [HasWeakSheafify J (ModuleCat.{w
   (Rep.mkIso (Representation.Equiv.mk
     (LinearEquiv.ofBijective ((toSheafify J ((Functor.const Cᵒᵖ).obj X)).app (op T)).hom hX)
     fun h ↦ LinearMap.ext fun x ↦
-      ConcreteCategory.congr_hom ((toSheafify J _).naturality (Quiver.Hom.op (a h).unop.asHom)) x)).symm
+      ConcreteCategory.congr_hom
+        ((toSheafify J _).naturality (Quiver.Hom.op (a h).unop.asHom)) x)).symm
 
 end Sheaf
 

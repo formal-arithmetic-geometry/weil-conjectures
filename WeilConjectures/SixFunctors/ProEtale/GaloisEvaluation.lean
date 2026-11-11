@@ -57,18 +57,19 @@ noncomputable def genericPointSepAction {H : Type*} [Group H]
     (φ : H →* (SeparableClosure X.functionField ≃ₐ[X.functionField]
       SeparableClosure X.functionField)) :
     H →* (End (genericPointSep X))ᵐᵒᵖ where
-  toFun h := MulOpposite.op (genericPointSepAut X (φ h))
+  toFun h := MulOpposite.op (End.of (genericPointSepAut X (φ h)))
   map_one' := by
     rw [map_one, genericPointSepAut_one]
     rfl
   map_mul' g h := by
-    rw [map_mul, genericPointSepAut_mul, ← End.mul_asHom, MulOpposite.op_mul]
+    rw [map_mul, genericPointSepAut_mul]
+    rfl
 
 @[simp]
 lemma unop_genericPointSepAction {H : Type*} [Group H]
     (φ : H →* (SeparableClosure X.functionField ≃ₐ[X.functionField]
       SeparableClosure X.functionField)) (h : H) :
-    (genericPointSepAction X φ h).unop = genericPointSepAut X (φ h) :=
+    (genericPointSepAction X φ h).unop.asHom = genericPointSepAut X (φ h) :=
   rfl
 
 variable {X} in
@@ -89,7 +90,7 @@ theorem exists_mem_topology_forall_eq_one {ι : Type*} {U : ι → X.Opens} [∀
     (W : X.ProEt) :
     ∃ S ∈ topology X W, ∀ ⦃W' : X.ProEt⦄ (g : W' ⟶ W), S g →
       ∀ (h : H) (t : genericPointSep X ⟶ W'),
-        (genericPointSepAction X φ h).unop ≫ t = t → h = 1 := by
+        (genericPointSepAction X φ h).unop.asHom ≫ t = t → h = 1 := by
   refine ⟨(Sieve.ofArrows _ fun i ↦ (isTerminalMkId X).from
       (kummerCover (hU i) (f i) r (hf i) (hr i))).pullback ((isTerminalMkId X).from W),
     (topology X).pullback_stable _ (ofArrows_kummerCover_mem_topology hU f r hf hr hcov), ?_⟩
@@ -119,7 +120,7 @@ theorem IsAbelianVariety.exists_genericPointSepAction_forall_eq_one {k : Type u}
       ∀ W : E.left.ProEt, ∃ S ∈ Scheme.ProEt.topology E.left W, ∀ ⦃W' : E.left.ProEt⦄
         (g : W' ⟶ W), S g → ∀ (h : Multiplicative (ULift.{u + 1} ℕ →₀ ℤ))
           (t : Scheme.ProEt.genericPointSep E.left ⟶ W'),
-          (Scheme.ProEt.genericPointSepAction E.left φ h).unop ≫ t = t → h = 1 := by
+          (Scheme.ProEt.genericPointSepAction E.left φ h).unop.asHom ≫ t = t → h = 1 := by
   -- a prime `r` invertible in `k`
   obtain ⟨r, hr₁, hr⟩ := Nat.exists_infinite_primes (ringChar k + 1)
   have hrk : (r : k) ≠ 0 := by
