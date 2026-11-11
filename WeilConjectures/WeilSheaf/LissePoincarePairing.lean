@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.WeilSheaf.Cohomology
