@@ -1612,4 +1612,3 @@ theorem completion_triangle_comparison :
     exact ⟨F.map_distinguished T hT, triangleAugmentation l E X F c hcs T, rfl, rfl, rfl⟩
 
 end AlgebraicGeometry.ProEtale.CompletionTriangle
-

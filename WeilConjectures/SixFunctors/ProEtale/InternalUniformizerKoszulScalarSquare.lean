@@ -104,7 +104,7 @@ theorem uniformizer_koszul_scalar_square
         (fun _ ↦ a.val (op U)))
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
+      (s : S.unop), ((d.hom.hom.app S) b).down s =
         Padic.coefficientExtensionUniformizer l E * b.down s)
     (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
     ∃ b : complex l E X P ≅

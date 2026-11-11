@@ -246,7 +246,7 @@ theorem uniformizer_scalar_realization :
         Function.Injective (fun x : (ring l E X).obj.obj (op U) ↦ t.val (op U) * x)) ∧
       ∀ (d : End (Mod.regular (DerivedNakayama.integerRing l E))),
         (∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-          (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
+          (s : S.unop), ((d.hom.hom.app S) b).down s =
             Padic.coefficientExtensionUniformizer l E * b.down s) →
         ∀ (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ),
           ((modules l E X).mapHomologicalComplex (.up ℤ)).map
