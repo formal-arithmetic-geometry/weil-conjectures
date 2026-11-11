@@ -62,6 +62,8 @@ noncomputable def baseChangeAutActionHom
   map_mul' σ τ := by
     apply End.ext
     rw [End.mul_asHom]
+    dsimp only
+    trace_state
     exact autAction_baseChangeAut_mul hM b hb v hv Λ σ τ A
 
 @[simp]
