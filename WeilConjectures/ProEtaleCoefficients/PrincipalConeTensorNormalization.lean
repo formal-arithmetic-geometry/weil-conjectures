@@ -44,7 +44,8 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
 @[instance_reducible] private def scalarRing : CommRing (End (𝟙_ A)) :=
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
-      have h := unitEndAction_naturality a b
+      apply End.ext
+      have h := unitEndAction_naturality a.asHom b
       simpa only [End.mul_asHom, unitEndAction_unit] using h }
 private def Scalars := End (𝟙_ A)
 private instance : CommRing (Scalars A) := scalarRing A
@@ -54,9 +55,9 @@ end ScalarTools
 
 private def scalar (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     UnitEndScalars.Scalars (AdicCompletion.Modules l E X) :=
-  (DerivedNakayama.regularPullbackIso l E X).inv ≫
-    (DerivedNakayama.pullback l E X).map d ≫
-    (DerivedNakayama.regularPullbackIso l E X).hom
+  End.of ((DerivedNakayama.regularPullbackIso l E X).inv ≫
+    (DerivedNakayama.pullback l E X).map d.asHom ≫
+    (DerivedNakayama.regularPullbackIso l E X).hom)
 
 section Generic
 universe v z
