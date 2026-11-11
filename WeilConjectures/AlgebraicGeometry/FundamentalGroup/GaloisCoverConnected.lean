@@ -130,6 +130,7 @@ lemma eq_of_fiber_map_smulHom_eq (x : (fiber s).obj c.toFiniteEtale) {g h : G}
 /-- `G` acts simply transitively on the geometric fibre of a Galois cover with group `G`. -/
 lemma existsUnique_fiber_map_smulHom (x y : (fiber s).obj c.toFiniteEtale) :
     ∃! g, (fiber s).map (c.smulHom g) x = y := by
+  -- Transitivity gives existence, and freeness gives uniqueness.
   obtain ⟨g, hg⟩ := c.exists_fiber_map_smulHom s x y
   exact ⟨g, hg, fun h hh ↦ c.eq_of_fiber_map_smulHom_eq s x (hh.trans hg.symm)⟩
 
