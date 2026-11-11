@@ -379,10 +379,11 @@ private theorem pod_field_transport
       ⟨A.rationalShift, A.rationalExact⟩⟩
     · intro K
       exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom] using Nonempty.intro B.epsilon
+    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv] using
+        Nonempty.intro B.epsilon
     · intro K
       exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, sfWeilFrobeniusPullback] using
+    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv, sfWeilFrobeniusPullback] using
         Nonempty.intro B.rationalEpsilon
   have tensor := derivedPullbackTensorIso l E (D.geometricFrobenius T₀).asIso.hom 0 Ω
   obtain ⟨μ, hμ⟩ := tensor.2.2.2.2.2.2.1
@@ -400,7 +401,7 @@ private theorem pod_field_transport
     refine ⟨(S L).rationalEpsilon, ?_⟩
     intro K
     exact U.epsilon_formula ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj K)
-  · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom,
+  · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv,
       sfCommonStageWeilFrobeniusPullback] using Nonempty.intro V.epsilon
   · exact (pod_tensor_hom_field_operation_lifts _ _ μ _ _ _ κ).1
   · exact (pod_tensor_hom_field_operation_lifts _ _ ν _ _ _ ρ).1
