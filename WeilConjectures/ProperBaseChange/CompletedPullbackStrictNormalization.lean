@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import
-  Mathlib.Algebra.Homology.Localization
+public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
