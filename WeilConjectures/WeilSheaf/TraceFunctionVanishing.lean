@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.PointCount
+public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.TracePowVanishing
 
 /-!
