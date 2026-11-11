@@ -153,6 +153,7 @@ theorem equivTorsion_symm_zsmul (d : JacobianTorsionDatum p l) (n : ℕ)
           Additive (Scheme.specAlgebraicClosure K ⟶ d.J)) =
       (l : ℤ) • ((d.equivTorsion (n + 1)).symm y :
         Additive (Scheme.specAlgebraicClosure K ⟶ d.J)) := by
+
   set x := (d.equivTorsion (n + 1)).symm y
   have h := d.equivTorsion_zsmul n x
   rw [show d.equivTorsion (n + 1) x = y from (d.equivTorsion (n + 1)).apply_symm_apply y] at h
