@@ -28,12 +28,12 @@ noncomputable def scalarFrobeniusIso
     [MonObj Λ] [IsCommMonObj Λ]
     {k : Type u} [Field k] [Finite k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    (CondensedRing.upperStar Λ f.geometricGaloisFrobenius.hom).obj
+    (CondensedRing.upperStar Λ f.geometricGaloisFrobenius.asIso.hom).obj
         ((CondensedRing.upperStar Λ f.geometricFiberProj).obj M) ≅
       (CondensedRing.upperStar Λ f.geometricFiberProj).obj M :=
   CategoryTheory.K4Native.scalarComponent
     (CondensedRing.upperStar Λ f.geometricFiberProj)
-    (CondensedRing.upperStar Λ f.geometricGaloisFrobenius.hom)
+    (CondensedRing.upperStar Λ f.geometricGaloisFrobenius.asIso.hom)
     (geometricFiberProjUpperStarFrobeniusIso Λ f) M
 
 section ScalarRelation
@@ -51,21 +51,21 @@ variable (M N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X
 
 /-- Changing coefficients preserves the scalar relation of an underlying trivialization. -/
 theorem purityChangeCoefficientPullbackIso_weil
-    (he : (f.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e.hom.hom ≫
+    (he : (f.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map e.hom.hom ≫
         (purityAbelianFrobeniusFactorIso f).hom.app N.X =
       c • ((purityAbelianFrobeniusFactorIso f).hom.app M.X ≫ e.hom.hom)) :
     c • ((scalarFrobeniusIso Λ' f
           ((Mod.extendScalars (coefficientMap a X)).obj M)).hom ≫
         (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M N e).hom) =
-      (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map
+      (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧.map
           (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M N e).hom ≫
         (scalarFrobeniusIso Λ' f
           ((Mod.extendScalars (coefficientMap a X)).obj N)).hom := by
   exact CategoryTheory.K4Native.scalarFunctor_coefficient (f.geometricFiberProj)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X))
     (Mod.extendScalars (coefficientMap a f.geometricFiber)) (f.geometricFiberProj)^*⟦Λ'⟧
-    (f.geometricGaloisFrobenius.hom)^*⟦Λ⟧ (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
-    (pullIso a f.geometricGaloisFrobenius.hom) (pullIso a f.geometricFiberProj)
+    (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ⟧ (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧
+    (pullIso a f.geometricGaloisFrobenius.asIso.hom) (pullIso a f.geometricFiberProj)
     (geometricFiberProjUpperStarFrobeniusIso Λ f)
     (geometricFiberProjUpperStarFrobeniusIso Λ' f) M N
     (fun K ↦
@@ -78,17 +78,17 @@ theorem purityChangeCoefficientPullbackIso_weil
 theorem purityChangeCoefficientTrivialization_weil
     (e₁ : ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj M ≅
       ((f.geometricFiberProj)^*[Ab.{u + 1}].mapMod _).obj (𝟙_ _))
-    (he : (f.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e₁.hom.hom ≫
+    (he : (f.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map e₁.hom.hom ≫
         (purityAbelianFrobeniusFactorIso f).hom.app (condensedRingObj Λ X) =
       c • ((purityAbelianFrobeniusFactorIso f).hom.app M.X ≫ e₁.hom.hom)) :
     c • ((scalarFrobeniusIso Λ' f
           ((Mod.extendScalars (coefficientMap a X)).obj M)).hom ≫
         (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom) =
-      (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧.map
+      (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧.map
           (purityChangeCoefficientTrivialization Λ a f.geometricFiberProj M e₁).hom ≫
         (scalarFrobeniusIso Λ' f (𝟙_ _)).hom := by
   have h := CategoryTheory.K4Native.scalarDatum_postcomposeIso (f.geometricFiberProj)^*⟦Λ'⟧
-    (f.geometricGaloisFrobenius.hom)^*⟦Λ'⟧
+    (f.geometricGaloisFrobenius.asIso.hom)^*⟦Λ'⟧
     (geometricFiberProjUpperStarFrobeniusIso Λ' f)
     (purityChangeCoefficientPullbackIso Λ a f.geometricFiberProj M (𝟙_ _) e₁)
     (purityCoefficientUnitIso Λ a X)
