@@ -131,7 +131,7 @@ private theorem regular_generic_charZero
     IsRegularRing.of_ringEquiv (Algebra.TensorProduct.comm (Polynomial A) C K).toRingEquiv
   have : CharZero (⊥ : Ideal (Polynomial A)).ResidueField :=
     IsFractionRing.charZero_of_isFractionRing (Polynomial A)
-  refine ⟨hregular.toIsNoetherianRing, ?_⟩
+  refine ⟨hregular.toIsNoetherian, ?_⟩
   intro L _ _ _ _
   have hb := IsPurelyInseparable.bijective_algebraMap_of_isSeparable
     (⊥ : Ideal (Polynomial A)).ResidueField L
