@@ -91,3 +91,4 @@ theorem isFiniteLocallyConstantSheaf_homology_boundaryComplex
     (C.leftDerivedUpperStarPuncturedYBoundaryComplexIso Λ E a).symm n
 
 end AlgebraicGeometry.Scheme.TransverseCorner
+
