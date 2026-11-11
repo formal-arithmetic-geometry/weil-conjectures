@@ -56,7 +56,6 @@ variable {A g} in
 lemma pullbackDiagonalSection_comp_map_left (a : Over.mk g ⟶ A) :
     (pullbackDiagonalSection g ≫ (Over.pullback g).map a).left =
       pullback.lift a.left (𝟙 _) (by simp) := by
-
   apply pullback.hom_ext
   · simp only [pullbackDiagonalSection, Over.comp_left, Over.homMk_left, Over.pullback_map_left,
       Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc]

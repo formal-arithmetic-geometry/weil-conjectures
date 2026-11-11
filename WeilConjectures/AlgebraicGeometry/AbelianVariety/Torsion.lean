@@ -70,7 +70,6 @@ Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n`
 theorem etale_torsionSubgroupScheme (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) (hnp : ¬ p ∣ n) :
     Etale (torsionSubgroupScheme A n).hom := by
-
   have := isFinite_torsionSubgroupScheme A n hn
   refine etale_of_not_dvd_finrankΓ p _ ?_
   rw [finrankΓ_torsionSubgroupScheme n hn]

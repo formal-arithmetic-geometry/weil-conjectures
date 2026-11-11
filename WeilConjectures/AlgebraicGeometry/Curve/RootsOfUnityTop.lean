@@ -50,7 +50,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} [X.Over (Spec (
 is the group of points of the Jacobian, an abelian variety. -/
 lemma surjective_pow_picardZero [GeometricallyIntegral (X ↘ Spec (.of k))] (n : ℕ)
     (hn : 0 < n) : Function.Surjective fun L : picardZero k X ↦ L ^ n := by
-
   obtain ⟨J, _, -, hP, hS, hG, -, ⟨φ⟩⟩ := exists_jacobian (k := k) (X := X)
   have : Smooth J.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) _
   have : IrreducibleSpace J.left :=

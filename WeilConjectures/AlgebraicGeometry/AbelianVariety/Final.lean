@@ -116,7 +116,6 @@ theorem surjective_comp_torsionSubgroupSchemeMul (A : Over (Spec (.of K))) [GrpO
     Function.Surjective fun x : Scheme.specAlgebraicClosure K ⟶
         torsionSubgroupScheme A (ℓ ^ (n + 1)) ↦
       x ≫ torsionSubgroupSchemeMul A ℓ (pow_succ' ℓ n) := by
-
   intro y
   have := isIsogeny_npow_id (A := A) ℓ hℓ
   have := IsIsogeny.isFinite (𝟙 A ^ ℓ)

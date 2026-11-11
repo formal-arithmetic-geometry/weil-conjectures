@@ -45,7 +45,6 @@ abelian variety of dimension `g` over `K` has `ℓ ^ (2 g)` elements. -/
 theorem natCard_torsionBy_geometricPoints (hℓ : (ℓ : K) ≠ 0) :
     Nat.card (AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A)) (ℓ : ℤ)) =
       ℓ ^ (2 * IsAbelianVariety.dim A) := by
-
   have hp : ¬ ringChar K ∣ ℓ := fun h ↦ hℓ ((ringChar.spec K ℓ).2 h)
   obtain ⟨f⟩ := nonempty_addEquiv_torsionBy_points (K' := AlgebraicClosure K) A (ringChar K) ℓ
     (Fact.out : ℓ.Prime).pos hp
