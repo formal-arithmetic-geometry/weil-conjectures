@@ -351,7 +351,9 @@ theorem kummerComposite_comparison
   have he := congrArg (fun y ↦ y.hom) (mapped_composite_boundary F hs ht ψ a x)
   simp only [γ, Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp,
     ShiftedHom.comp_mk₀, ← mapSingleArrow_ext] at hc he
-  convert hc.trans he using 1 <;> (simp only [Ext.comp_hom]; rfl)
+  convert hc.trans he using 1
+  simp only [Ext.comp_hom]
+  rfl
 
 /-- A source normalization cancels the inverse comparison of a transported arrow.
 Source: exact single-arrow endpoint naturality and inverse cancellation
