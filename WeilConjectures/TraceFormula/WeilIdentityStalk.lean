@@ -116,7 +116,7 @@ theorem _root_.CategoryTheory.Iso.powSuccStr_trans_hom_eq_of_pred {C D : Type*} 
         G (e.pow (n + 1)).hom) (h1 : G (𝟙 X ≫ e.hom)) (n : ℕ) :
     (e.powSuccStr P comp (κ e.hom he ≪≫ β) n).hom =
       (κ (e.pow (n + 1)).hom (hpow n)).hom ≫
-          @HPow.hPow (End a) ℕ (End a) instHPow β.hom (n + 1) := by
+          End.asHom (End.of β.hom ^ (n + 1)) := by
   induction n with
   | zero =>
     rw [Iso.powSuccStr_zero, Iso.trans_hom, Iso.trans_hom, eqToIso.hom, ← Category.assoc,
@@ -185,7 +185,7 @@ lemma powSuccStr_upperStarIsoIdOfEq_trans_hom {e : X ≅ X} (he : e.hom.left = �
       (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
       ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) n).hom =
     (upperStarIsoIdOfEq ℓ (pow_hom_left_eq_id he (n + 1))).hom.app M ≫
-      @HPow.hPow (End M) ℕ (End M) instHPow β.hom (n + 1) :=
+      End.asHom (End.of β.hom ^ (n + 1)) :=
   e.powSuccStr_trans_hom_eq_of_pred _ _ (fun g ↦ g.left = 𝟙 X.left)
     (fun g hg ↦ (upperStarIsoIdOfEq ℓ hg).app M)
     (fun f g hf hg hfg ↦ upperStarComp_hom_app_comp_upperStarIsoIdOfEq_of_eq' ℓ
@@ -238,7 +238,7 @@ lemma WeilSheaf.pow_mk_upperStarIsoIdOfEq_str_hom {e : X ≅ X} (he : e.hom.left
     (WeilSheaf.pow ℓ (IsoAlgebra.mk M ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) :
         WeilSheaf ℓ e) (n + 1)).str.hom =
       (upperStarIsoIdOfEq ℓ (pow_hom_left_eq_id he (n + 1))).hom.app M ≫
-        @HPow.hPow (End M) ℕ (End M) instHPow β.hom (n + 1) := by
+        End.asHom (End.of β.hom ^ (n + 1)) := by
   unfold WeilSheaf.pow
   rw [IsoAlgebra.mk_str, powStr_succ_upperStar_eq_powSuccStr, IsoAlgebra.mk_str]
   erw [powSuccStr_upperStarIsoIdOfEq_trans_hom]
@@ -329,7 +329,7 @@ lemma traceOrZero_stalkFunctor_obj_pow_mk {e : X ≅ X} (he : e.hom.left = 𝟙 
             (Category.comp_id x)))).hom.app (WeilSheaf.pow ℓ (IsoAlgebra.mk M
             ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) : WeilSheaf ℓ e) (n + 1)).carrier ≫
         (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
-          (@HPow.hPow (End M) ℕ (End M) instHPow β.hom (n + 1))) := by
+          (End.asHom (End.of β.hom ^ (n + 1)))) := by
   rw [stalkFunctor_obj_str_hom_of_upperStarIsoIdOfEq ℓ (pow_hom_left_eq_id he (n + 1)) _ _
     (WeilSheaf.pow_mk_upperStarIsoIdOfEq_str_hom ℓ he M β n) σ x hx]
 
