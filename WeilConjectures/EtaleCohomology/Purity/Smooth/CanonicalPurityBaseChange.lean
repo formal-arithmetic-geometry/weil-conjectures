@@ -10,6 +10,10 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilEquivariance
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekTensorMapUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChangeMapComparison
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TensorMapBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.LowerShriekTraceCounitBaseChange
 
 /-!
 # Compatibility of the canonical purity map with base change
@@ -21,15 +25,19 @@ composite of the twist reassociation, the inverse of the canonical orientation
 and the canonical tensor map `ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
 (`AlgebraicGeometry.Etale.dualizingComplexTensorMap`). Blueprint
 `proposition-compatibility-purity-base-change` asserts `g'^* γ_f(K) = γ_{f'}(g^* K)` for a
-cartesian square (`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`). This file
-states it and derives from it, at `K = Λ_Y`, the compatibility of the canonical orientation with
-base change (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`).
+cartesian square (`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`).
+
+Each factor of `γ_f` commutes with base change: the orientation
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`), the tensor map
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap_baseChange`), the symmetry
+(`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_derivedTensorBraiding_comp_tensorComparison`)
+and the twist reassociation
+(`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_twistShiftObjIso_hom`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`
   (`proposition-compatibility-purity-base-change`).
-- `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`.
 -/
 
 @[expose] public section
@@ -154,7 +162,59 @@ lemma leftDerivedUpperStarTwistShiftIso_hom_naturality (f : X ⟶ Y) (m : ℤ)
   rw [reassoc_of% leftDerivedUpperStarTensorIso_hom_naturality_left, Category.assoc,
     NatTrans.naturality]
 
+omit [Finite Λ] [HasKummerClass.IsNormalized Λ] in
+/-- The twist reassociation `M(m)[2m] ≅ M ⊗ᴸ Λ_Y(m)[2m]`
+(`AlgebraicGeometry.Etale.twistShiftObjIso`) commutes with the derived pullback: through the
+tensor structure of `Lf^*` and `Lf^*(Λ_Y(m)[2m]) ≅ Λ_X(m)[2m]`, its pullback is the twist
+reassociation of `Lf^* M`. -/
+lemma leftDerivedUpperStar_map_twistShiftObjIso_hom (f : X ⟶ Y) (m : ℤ)
+    (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (twistShiftObjIso Λ Y m M).hom ≫
+        (leftDerivedUpperStarTensorIso _ f M _).hom ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)).map
+            (twistShiftConstantComplexBaseChangeIso Λ f m).hom =
+      (leftDerivedUpperStarTwistShiftIso Λ f m M).hom ≫
+        (twistShiftObjIso Λ X m ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)).hom := by
+  have hs := leftDerivedUpperStarTensorComparison_shift_right (ModuleCat.{u + 1} Λ) f M
+    (tateObject Λ Y m) (2 * m)
+  have hn := leftDerivedUpperStarTensorIso_hom_naturality_right f M
+    (twistShiftConstantComplexIso Λ Y m).inv
+  simp only [← leftDerivedUpperStarTensorIso_hom] at hs
+  have hq := ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+    ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)).commShiftIso_inv_naturality
+      (leftDerivedUpperStarTateObjectIso f m).hom (2 * m)
+  simp only [twistShiftObjIso, twistShiftConstantComplexBaseChangeIso,
+    leftDerivedUpperStarTwistShiftIso, leftDerivedUpperStarTateShiftIso, Iso.trans_hom,
+    Iso.symm_hom, Iso.app_inv, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn, ← Functor.map_comp_assoc _ ((L((f)^*[ModuleCat.{u + 1} Λ])).map _),
+    ← Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hq]
+  rw [← cancel_epi ((L((f)^*[ModuleCat.{u + 1} Λ])).map
+    ((((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).commShiftIso (2 * m)).hom.app
+      (tateObject Λ Y m))), ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [reassoc_of% hs]
+  rw [Iso.hom_inv_id_app_assoc]
+
 end TwistShift
+
+omit [CommRing Λ] [Finite Λ] [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
+/-- The monoidal computation behind
+`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`. -/
+private lemma baseChange_aux {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
+    {S P₁ P₂ P₃ Q R A T W A' T' W' Z : C} (a : S ⟶ P₁) (b : P₁ ⟶ P₂) (bb : P₂ ⟶ P₃)
+    (lμ : P₃ ⟶ Q) (bK : Q ⟶ R) (τ₁ : P₁ ⟶ A ⊗ T) (τ₂ : P₂ ⟶ A ⊗ W) (τ₃ : P₃ ⟶ W ⊗ A)
+    (lθ : T ⟶ W) (vT : T ⟶ T') (vω : W ⟶ W') (θ : T' ⟶ W') (c : A ⟶ A')
+    (μ : W' ⊗ A' ⟶ R) (Ψ : S ⟶ Z) (t : Z ⟶ A' ⊗ T')
+    (hΨ : Ψ ≫ t = a ≫ τ₁ ≫ A ◁ vT ≫ c ▷ T') (h₂ : b ≫ τ₂ = τ₁ ≫ A ◁ lθ)
+    (h₃ : bb ≫ τ₃ = τ₂ ≫ (β_ A W).hom) (h₄ : lμ ≫ bK = τ₃ ≫ vω ▷ A ≫ W' ◁ c ≫ μ)
+    (h₅ : lθ ≫ vω = vT ≫ θ) :
+    (a ≫ b ≫ bb ≫ lμ) ≫ bK = Ψ ≫ t ≫ A' ◁ θ ≫ (β_ A' W').hom ≫ μ := by
+  rw [reassoc_of% hΨ]
+  simp only [Category.assoc]
+  rw [h₄, reassoc_of% h₃, reassoc_of% h₂, ← BraidedCategory.braiding_naturality_right_assoc,
+    ← BraidedCategory.braiding_naturality_left_assoc, ← whiskerLeft_comp_assoc, h₅,
+    whiskerLeft_comp_assoc, whisker_exchange_assoc]
 
 section BaseChange
 
@@ -171,7 +231,12 @@ For a cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` smooth separated 
 dimension `d` and `K ∈ D(Y_ét, Λ)`, identify the sources of the canonical purity maps by
 `Lg'^* Lf^* ≅ Lf'^* Lg^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTwistShiftBaseChangeIso`)
 and the targets by the exceptional base change map
-(`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`). Then `g'^* γ_f(K) = γ_{f'}(g^* K)`. -/
+(`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`). Then `g'^* γ_f(K) = γ_{f'}(g^* K)`.
+
+The proof composes the base change of the orientation
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`), of the tensor map
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap_baseChange`), of the symmetry and of the
+twist reassociation. -/
 theorem canonicalSmoothPurityMap_baseChange (sq : IsPullback g' f' f g)
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (aY' : Y' ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY']
@@ -179,55 +244,48 @@ theorem canonicalSmoothPurityMap_baseChange (sq : IsPullback g' f' f g)
     (L((g')^*[ModuleCat.{u + 1} Λ])).map (canonicalSmoothPurityMap Λ f d aY K) ≫
         (upperShriekBaseChangeMap Λ sq).app K =
       (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫
-        canonicalSmoothPurityMap Λ f' d aY' ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
-
-/-- Blueprint `proposition-compatibility-purity-base-change`, the orientation part: the canonical
-orientations `θ_f : Rf^! Λ_Y ≅ Λ_X(d)[2d]` and `θ_{f'}`
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`) are compatible with the exceptional base
-change `Lg'^* Rf^! ⟶ Rf'^! Lg^*` and the pullback of the Tate twist. This is the case
-`K = Λ_Y` of `AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`. -/
-theorem dualizingComplexTwistShiftIso_baseChange (sq : IsPullback g' f' f g)
-    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
-    (aY' : Y' ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY'] :
-    (upperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y) ≫
-        (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom ≫
-          (dualizingComplexTwistShiftIso Λ f' d aY').hom =
-      (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTwistShiftIso Λ f d aY).hom ≫
-        (leftDerivedUpperStarTwistShiftIso Λ g' d (constantComplex Λ X)).hom ≫
-          (twistShift Λ X' d).map (leftDerivedUpperStarUnitIso _ g').hom := by
-  -- the units of the two factorizations of `g' ≫ f = f' ≫ g`
-  have hε : (L((g')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarUnitIso _ f).hom ≫
-      (leftDerivedUpperStarUnitIso _ g').hom =
-      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g' f (g' ≫ f) rfl).inv.app _ ≫
-        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f' g (g' ≫ f) sq.w).hom.app _) ≫
-          (L((f')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarUnitIso _ g).hom ≫
-            (leftDerivedUpperStarUnitIso _ f').hom := by
-    have h₁ := congrArg Iso.hom (leftDerivedUpperStarConstantComplexIso_comp Λ g' f _ rfl)
-    have h₂ := congrArg Iso.hom (leftDerivedUpperStarConstantComplexIso_comp Λ f' g _ sq.w)
-    simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom] at h₁ h₂
-    have hu {S T : Scheme.{u}} (h : S ⟶ T) : (leftDerivedUpperStarUnitIso _ h).hom =
-        (leftDerivedUpperStarConstantComplexIso Λ h).hom :=
-      leftDerivedUpperStarUnitIso_hom_eq_η h
-    rw [hu, hu, hu, hu, Category.assoc]
-    erw [← h₂, h₁, Iso.inv_hom_id_app_assoc]
-  have hnode := canonicalSmoothPurityMap_baseChange Λ d sq aY aY' (𝟙_ _)
-  have hnat := canonicalSmoothPurityMap_naturality Λ f' d aY' (leftDerivedUpperStarUnitIso _ g).hom
-  have htsi := leftDerivedUpperStarTwistShiftIso_hom_naturality Λ g' d
-    (leftDerivedUpperStarUnitIso _ f).hom
-  rw [canonicalSmoothPurityMap_unit] at hnode hnat
-  rw [← cancel_epi ((L((g')^*[ModuleCat.{u + 1} Λ])).map ((twistShift Λ X d).map
-    (leftDerivedUpperStarUnitIso _ f).hom ≫ (dualizingComplexTwistShiftIso Λ f d aY).inv))]
-  erw [reassoc_of% hnode]
-  rw [reassoc_of% hnat, Iso.inv_hom_id, Category.comp_id, Functor.map_comp, Category.assoc,
-    ← Functor.map_comp_assoc (L((g')^*[ModuleCat.{u + 1} Λ]))
-      (dualizingComplexTwistShiftIso Λ f d aY).inv, Iso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.id_comp]
-  erw [reassoc_of% htsi]
-  simp only [leftDerivedUpperStarTwistShiftBaseChangeIso, Iso.trans_hom, Functor.mapIso_hom,
-    Category.assoc, ← Functor.map_comp]
-  rw [hε]
-  simp only [Iso.app_hom, Iso.symm_hom, Iso.app_inv, Category.assoc]
+        canonicalSmoothPurityMap Λ f' d aY' ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  let := _root_.DerivedCategory.braidedCategory'
+    (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  have : QuasiCompact f := HasCompactification.quasiCompact_of_locallyOfFiniteType f aY
+  -- the orientations
+  have hO := dualizingComplexTwistShiftIso_baseChange Λ d sq aY aY'
+  rw [← twistShiftConstantComplexBaseChangeIso_hom] at hO
+  have h₅ : (L((g')^*[ModuleCat.{u + 1} Λ])).map (dualizingComplexTwistShiftIso Λ f d aY).inv ≫
+      (upperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y) ≫
+        (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom =
+      (twistShiftConstantComplexBaseChangeIso Λ g' d).hom ≫
+        (dualizingComplexTwistShiftIso Λ f' d aY').inv := by
+    rw [← cancel_mono (dualizingComplexTwistShiftIso Λ f' d aY').hom]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [hO, ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+      Category.id_comp]
+  -- the twist reassociations
+  have hΨ := leftDerivedUpperStar_map_twistShiftObjIso_hom Λ g' d
+    ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)
+  have hn := twistShiftObjIso_hom_naturality Λ (d : ℤ)
+    (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq K)
+  have hΨ' : (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫
+      (twistShiftObjIso Λ X' d _).hom =
+      (L((g')^*[ModuleCat.{u + 1} Λ])).map (twistShiftObjIso Λ X d _).hom ≫
+        (leftDerivedUpperStarTensorIso _ g' _ _).hom ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) X').obj _).map
+            (twistShiftConstantComplexBaseChangeIso Λ g' d).hom ≫
+          ((derivedTensor (ModuleCat.{u + 1} Λ) X').map
+            (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq K)).app _ := by
+    simp only [leftDerivedUpperStarTwistShiftBaseChangeIso, Iso.trans_hom, Functor.mapIso_hom,
+      Category.assoc]
+    erw [hn]
+    rw [reassoc_of% hΨ]
+  -- the tensor structure, the braiding and the tensor maps
+  have h₂ := leftDerivedUpperStarTensorIso_hom_naturality_right g'
+    ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) (dualizingComplexTwistShiftIso Λ f d aY).inv
+  have h₃ := leftDerivedUpperStar_map_derivedTensorBraiding_comp_tensorComparison g'
+    ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) (dualizingComplex Λ f)
+  have h₄ := dualizingComplexTensorMap_baseChange sq K
+  rw [canonicalSmoothPurityMap, canonicalSmoothPurityMap, Functor.map_comp, Functor.map_comp,
+    Functor.map_comp]
+  exact baseChange_aux _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ hΨ' h₂ h₃ h₄ h₅
 
 end BaseChange
 

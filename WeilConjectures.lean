@@ -17087,14 +17087,17 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClassSm
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicallySmooth
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CompIsoExchangeCompatible
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalCompIsoBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsTensor
