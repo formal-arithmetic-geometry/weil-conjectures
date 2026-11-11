@@ -91,7 +91,7 @@ transformation `f_* ⋙ g^* ⟶ g'^* ⋙ f'_*`: the mate of the square isomorphi
 `f'^* ⊣ f'_*`. A local section of `g^* f_* F` cannot in general be represented by a section
 on `V ×_{Y'} Y`, the square supplying no morphism `Y ⟶ Y'`; this is why the map is defined
 categorically, through unit, square isomorphism and counit, and not by a sectionwise rule.
-(blueprint: `def-weil-pbc-underived-exchange`,
+(blueprint: `definition-underived-base-change-map`, `def-weil-pbc-underived-exchange`,
 `s0.-comparison-data-and-injective-acyclicity--warning-1`) -/
 noncomputable def Etale.baseChangeMap (sq : CommSq g' f' f g) :
     (f)_*[A] ⋙ (g)^*[A] ⟶ (g')^*[A] ⋙ (f')_*[A] :=
@@ -110,7 +110,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **The adjoint of the base change map** is the square isomorphism followed by the counit:
 for a sheaf `F` on `X`,
 `f'^* (baseChangeMap F) ≫ ε_{f'} = squareUpperStarIso (f_* F) ≫ g'^* (ε_f F)`.
-(blueprint: `def-weil-pbc-underived-exchange`) -/
+(blueprint: `definition-underived-base-change-map--1`, `def-weil-pbc-underived-exchange`) -/
 lemma Etale.upperStar_map_baseChangeMap_app_counit (sq : CommSq g' f' f g)
     (F : Sheaf X.smallEtaleTopology A) :
     ((f')^*[A]).map ((Etale.baseChangeMap A sq).app F) ≫
