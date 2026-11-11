@@ -268,7 +268,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [NeZero (ringChar Λ)] (k : Type u) [
 /-- The geometric Frobenius of `k̄` over `k` acts on `H⁰(Spec k̄, Λ(1))` by `q⁻¹`: its Frobenius
 scalar `c_1` (`AlgebraicGeometry.Etale.tateFrobeniusScalar`) satisfies `c_1 q = 1`. -/
 theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
-    tateFrobeniusScalar Λ (specGeometricFrobenius k).hom 1 * (Nat.card k : Λ) = 1 := by
+    tateFrobeniusScalar Λ (specGeometricFrobenius k).asIso.hom 1 * (Nat.card k : Λ) = 1 := by
   let := Fintype.ofFinite k
   have hn : IsUnit ((ringChar Λ : ℕ) : AlgebraicClosure k) := by
     simpa using (isUnit_ringChar_of_hasInvertibleExponent (Λ := Λ)
@@ -282,7 +282,7 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
   let ζ : Γ(Spec (.of (AlgebraicClosure k)), ⊤)ˣ :=
     Units.map (Scheme.ΓSpecIso (.of (AlgebraicClosure k))).inv.hom.toMonoidHom u₀
   have hζ : ζ ^ ringChar Λ = 1 := by rw [← map_pow, hu₀, map_one]
-  have hc : Units.map (specGeometricFrobenius k).hom.appTop.hom.toMonoidHom ζ = ζ ^ c := by
+  have hc : Units.map (specGeometricFrobenius k).asIso.hom.appTop.hom.toMonoidHom ζ = ζ ^ c := by
     have key := congrArg (fun φ ↦ φ.hom ζ₀) (Scheme.ΓSpecIso_inv_naturality
       (CommRingCat.ofHom (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k
         (AlgebraicClosure k)).toRingEquiv.toRingHom))
@@ -317,9 +317,9 @@ characteristic `n ≠ 0` invertible on `Spec k̄`, so that `q` is a unit of `Λ`
 theorem frobeniusOperator_tateWeilDatum (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k))) r) :
-    frobeniusOperator (specGeometricFrobenius k).hom (tateWeilDatum Λ _ r).hom x =
+    frobeniusOperator (specGeometricFrobenius k).asIso.hom (tateWeilDatum Λ _ r).hom x =
       (((isUnit_natCard_of_hasInvertibleExponent Λ k).unit⁻¹ ^ r : Λˣ) : Λ) • x := by
-  have hu : tateFrobeniusUnit Λ (specGeometricFrobenius k).hom =
+  have hu : tateFrobeniusUnit Λ (specGeometricFrobenius k).asIso.hom =
       (isUnit_natCard_of_hasInvertibleExponent Λ k).unit⁻¹ := by
     refine Units.ext ?_
     rw [val_tateFrobeniusUnit, Units.inv_eq_of_mul_eq_one_left]
