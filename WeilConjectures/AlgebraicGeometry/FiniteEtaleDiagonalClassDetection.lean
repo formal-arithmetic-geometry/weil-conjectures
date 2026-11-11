@@ -7,12 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierCanonicalEtale
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
+public import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
 import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalAlpha
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
 import WeilConjectures.ConstructibleSheaf.RankOne
-import WeilConjectures.ConstructibleSheaf.LisseRankOne
+public import WeilConjectures.ConstructibleSheaf.LisseRankOne
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZero
