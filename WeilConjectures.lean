@@ -16945,6 +16945,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurveConstituent
+public import WeilConjectures.DeligneLaumon.Reduction.RealCurvePurity
 public import WeilConjectures.DeligneLaumon.Reduction.RealLissePurity
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
