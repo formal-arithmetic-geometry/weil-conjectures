@@ -29,9 +29,9 @@ section Generic
 variable {D : Type*} [Category D] [Abelian D]
 private theorem scalarNat_homology
     (z : 𝟭 D ⟶ 𝟭 D) (K : CochainComplex D ℤ) (μ : End K)
-    (hμ : ∀ q, μ.f q = z.app (K.X q)) (q : ℤ) :
-    HomologicalComplex.homologyMap (μ q).asHom = z.app (K.homology q) := by
-  have hc : HomologicalComplex.cyclesMap (μ q).asHom = z.app (K.cycles q) := by
+    (hμ : ∀ q, μ.asHom.f q = z.app (K.X q)) (q : ℤ) :
+    HomologicalComplex.homologyMap μ.asHom q = z.app (K.homology q) := by
+  have hc : HomologicalComplex.cyclesMap μ.asHom q = z.app (K.cycles q) := by
     apply (cancel_mono (K.iCycles q)).1
     rw [HomologicalComplex.cyclesMap_i, hμ]
     exact z.naturality (K.iCycles q)
@@ -89,7 +89,7 @@ private theorem sectionScalarNat_unit
       intro x
       simp [sectionScalarNat]
   | succ e ih =>
-      rw [pow_succ, ← ih]
+      rw [pow_succ, End.mul_asHom, ← ih]
       apply SheafOfModules.hom_ext
       apply PresheafOfModules.hom_ext
       intro X
