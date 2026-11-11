@@ -291,7 +291,7 @@ private theorem transportScalar_app (e : A ≌ B) (r : End (𝟭 A)) (M : A) :
       e.functor.map (e.unitIso.inv.app M) := by
     apply (cancel_epi (e.counitIso.inv.app (e.functor.obj M))).mp
     simp only [Iso.inv_hom_id_app]
-    exact (e.counitIso_functor_comp M).symm
+    exact (e.counitInv_functor_comp M).symm
   dsimp only [Functor.id_obj, Functor.comp_obj] at hn
   symm
   calc
