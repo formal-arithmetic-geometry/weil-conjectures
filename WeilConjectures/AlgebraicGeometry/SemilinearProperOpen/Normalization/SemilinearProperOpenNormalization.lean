@@ -95,10 +95,7 @@ private theorem system_pull_comp_heq
     (SemilinearProperOpen.pull_eq.{u} C τ f) (SemilinearProperOpen.push_eq.{u} C τ f)
     (SemilinearProperOpen.pull_eq.{u} C τ (f ≫ g))
     (SemilinearProperOpen.push_eq.{u} C τ (f ≫ g)) hag haf hafg he
-  congr 1 <;> first
-  | exact hcomp
-  | rfl
-  | (simp only [SemilinearProperOpen.pull_eq]; rfl)
+  congr 1 <;> (simp only [SemilinearProperOpen.pull_eq]; rfl)
 
 private theorem pcomp_heq
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)

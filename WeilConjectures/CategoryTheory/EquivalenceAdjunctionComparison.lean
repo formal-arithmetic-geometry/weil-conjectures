@@ -149,8 +149,6 @@ theorem equivalenceAdjunctionComparison_compositor
   have hm : mateEquiv (adj01.comp adj12) (adjb01.comp adjb12) alpha =
       TwoSquare.hComp r12.hom r01.hom := by
     rw [mateEquiv_hcomp]
-    change TwoSquare.hComp ((mateEquiv adj12 adjb12 c12.inv))
-      ((mateEquiv adj01 adjb01 c01.inv)) = _
     rw [h01, h12]
   have hl := conjugateEquiv_mateEquiv_vcomp adj02 (adj01.comp adj12)
     (adjb01.comp adjb12) a.hom alpha
