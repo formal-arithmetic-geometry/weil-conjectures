@@ -565,14 +565,14 @@ private lemma single_projection_iso (L : ringedSiteComplex O) (n : ℤ) :
   exact dependent_iso (fun q h ↦ homComplexπ (R := O) L M n (-n) q h) (by omega) hi
 
 private lemma unit_pre_eval (f : End (RUnit O)) :
-    SheafOfModules.homObjMap (R := O) f (𝟙 _) ≫
+    SheafOfModules.homObjMap (R := O) f.asHom (𝟙 _) ≫
         (SheafOfModules.homObjUnitIso.{u} (R := O) (RUnit O)).hom =
-      (SheafOfModules.homObjUnitIso.{u} (R := O) (RUnit O)).hom ≫ f := by
+      (SheafOfModules.homObjUnitIso.{u} (R := O) (RUnit O)).hom ≫ f.asHom := by
   apply SheafOfModules.hom_ext
   ext X φ : 3
   let φX : O.obj.obj X →ₗ[O.obj.obj X] O.obj.obj X :=
     (φ.app (op (Over.mk (𝟙 X.unop)))).hom
-  let fX : O.obj.obj X →ₗ[O.obj.obj X] O.obj.obj X := (f.val.app X).hom
+  let fX : O.obj.obj X →ₗ[O.obj.obj X] O.obj.obj X := (f.asHom.val.app X).hom
   change φX (fX 1) = fX (φX 1)
   have h₁ := φX.map_smul (fX 1) 1
   have h₂ := fX.map_smul (φX 1) 1
@@ -616,7 +616,7 @@ private lemma standardRankOneDualIso_natural {A A' : RMod O} (f : A' ⟶ A)
   exact bifunctorMapEval_natural (SheafOfModules.homObj (R := O))
     (fun f g ↦ SheafOfModules.homObjMap (R := O) f g)
     (fun f f' g g' ↦ SheafOfModules.homObjMap_comp_homObjMap (R := O) f f' g g')
-    f e e' _ _ (unit_pre_eval O)
+    f e e' _ _ (fun g ↦ unit_pre_eval O (End.of g))
 
 @[irreducible] private def coordinateIso (L : ringedSiteComplex O) (n p : ℤ) (h : p + n = 0) :
     (RHom O L (ringedSiteRingComplex O)).X n ≅
@@ -831,7 +831,7 @@ private lemma negative_transition_neg
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     (ringedNegativeKoszulFactorTransition O b m).f (-1) ≫
         (negativeNeg O b m).hom =
-      (negativeNeg O b (m + 1)).hom ≫ ringedKoszulScalar O b := by
+      (negativeNeg O b (m + 1)).hom ≫ (ringedKoszulScalar O b).asHom := by
   delta ringedNegativeKoszulFactorTransition ringedNegativeKoszulFactorTransitionF
     negativeNeg ringedNegativeKoszulFactor
   simp only [Int.reduceNeg, ↓reduceDIte, Category.assoc]
@@ -851,7 +851,7 @@ private lemma negative_transition_zero
 private lemma positive_step_one
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     (ringedKoszulFactorStep O b m).f 1 ≫ (positiveOne O b (m + 1)).hom =
-      (positiveOne O b m).hom ≫ ringedKoszulScalar O b := by
+      (positiveOne O b m).hom ≫ (ringedKoszulScalar O b).asHom := by
   delta ringedKoszulFactorStep ringedKoszulFactorStepF positiveOne ringedKoszulFactor
   simp only [one_ne_zero, ↓reduceDIte, Category.assoc]
   erw [eqToHom_refl, Category.id_comp]
