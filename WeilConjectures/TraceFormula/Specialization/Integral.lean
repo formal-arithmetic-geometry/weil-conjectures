@@ -164,7 +164,7 @@ noncomputable def unitClass :
 variable {ℓ X}
 
 lemma integral_eq (α : BorelMooreSection ℓ X) :
-    α.integral = unitClass ℓ X ≫
+    α.integral.asHom = unitClass ℓ X ≫
       ((boundedConstructibleUpperShriekAdjunction ℓ
         (toPoint X)).homEquiv _ _).symm α := by
   simp only [integral, unitClass, Category.assoc]
@@ -196,7 +196,7 @@ theorem integral_sp_eq [IsProper F'.F.hom]
         (toPoint F'.F) ⟶
       boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt)
     (hθ : T.θF = dualizingExchange ℓ σpt νF) (z : BorelMooreSection ℓ F.F) :
-    (T.sp z).integral = BorelMooreSection.unitClass ℓ F'.F ≫
+    (T.sp z).integral.asHom = BorelMooreSection.unitClass ℓ F'.F ≫
       (boundedConstructibleLowerShriek ℓ (toPoint F'.F)).map
         T.σF ≫ νF.app (𝟙_ (Dᵇc(F.F.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) ≫
       Ψpt.map (((boundedConstructibleUpperShriekAdjunction ℓ

@@ -109,7 +109,7 @@ Frobenius operators commuting with all the maps (`superTrace_eq_add_of_exact`). 
 theorem weilStalkTraceAlternatingSum_eq_add_of_isDistTriang_of_isFiniteFree {e : Y ≅ Y} (n : ℕ)
     (x : Spec (.of (AlgebraicClosure k)) ⟶ Y.left)
     (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x)
-    (hK : ∀ t : End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))), t ≠ 0 → IsIso t)
+    (hK : ∀ t : End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))), t ≠ 0 → IsIso t.asHom)
     (h₁ : (1 : End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k)))) ≠ 0)
     (hfree : ∀ (K : WeilBoundedConstructible ℓ e.hom) (j : ℤ),
       letI := Abelian.hasFiniteBiproducts (C := GeometricPointMod ℓ (AlgebraicClosure k))
