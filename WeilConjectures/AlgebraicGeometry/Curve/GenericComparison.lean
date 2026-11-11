@@ -326,3 +326,4 @@ theorem bijective_H_map_unit_fromSpecFunctionField
 end IsCurve
 
 end AlgebraicGeometry
+

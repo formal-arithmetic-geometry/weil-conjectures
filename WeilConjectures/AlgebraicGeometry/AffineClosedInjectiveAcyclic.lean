@@ -73,3 +73,4 @@ theorem Etale.subsingleton_H_affine_closed_of_injective
     ((hc.isZero_pt hzero).of_iso (hiso ei ≪≫ e.symm))
 
 end AlgebraicGeometry
+

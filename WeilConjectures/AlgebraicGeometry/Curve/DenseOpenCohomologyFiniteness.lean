@@ -104,4 +104,3 @@ theorem dense_open_cohomology_finiteness (Λ : Type (u + 1)) [CommRing Λ] [Fini
       (Sheaf.H.exact_map_map hS q)
 
 end AlgebraicGeometry.IsCurve
-

@@ -217,4 +217,3 @@ theorem IsCurve.Assertions.of_constructible_shortExact {k : Type u} [Field k]
       (h₃.surjective_cohomologyMap_of_isOpenImmersion a)
 
 end AlgebraicGeometry
-

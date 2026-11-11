@@ -180,4 +180,3 @@ theorem dense_open_closed_term (Λ : Type (u + 1)) [CommRing Λ]
   exact e'.symm.bijective.comp (hΓ.comp e.bijective)
 
 end AlgebraicGeometry.IsCurve
-

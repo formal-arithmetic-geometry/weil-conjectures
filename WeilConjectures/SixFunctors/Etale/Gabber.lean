@@ -429,4 +429,3 @@ theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : 
 end Etale
 
 end AlgebraicGeometry
-
