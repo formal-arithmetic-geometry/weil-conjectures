@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import WeilConjectures.AlgebraicGeometry.AdicResidueQuotientTensorTower
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
