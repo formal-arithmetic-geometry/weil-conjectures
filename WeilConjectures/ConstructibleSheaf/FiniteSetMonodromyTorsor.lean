@@ -66,6 +66,7 @@ theorem exists_connected_torsor_constant_set_pullback
   have : ConnectedSpace A.obj.left := FiniteEtale.connectedSpace_of_isConnected A
   let Q := Aut A
   let δ : ULift.{u + 1} Q ≃* Aut A := MulEquiv.ulift
+  -- Use the underlying morphisms of the automorphisms to define the torsor action.
   let v (q : ULift.{u + 1} Q) : A ⟶ A := (δ q).hom
   have hv (b d : (FiniteEtale.fiber s).obj A) :
       ∃! q, (FiniteEtale.fiber s).map (v q) b = d := by
