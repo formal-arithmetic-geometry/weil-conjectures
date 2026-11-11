@@ -57,17 +57,20 @@ noncomputable def baseChangeAutActionHom
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     GenericAut k' K →* End (((baseChange hM b hb v hv).nearbyCycles Λ).obj A) where
-  toFun σ := (baseChangeAut hM b hb v hv σ).autAction Λ A
-  map_one' := autAction_baseChangeAut_one hM b hb v hv Λ A
+  toFun σ := .of ((baseChangeAut hM b hb v hv σ).autAction Λ A)
+  map_one' := End.ext (autAction_baseChangeAut_one hM b hb v hv Λ A)
   map_mul' σ τ := by
+    apply End.ext
     rw [End.mul_asHom]
+    dsimp only
     exact autAction_baseChangeAut_mul hM b hb v hv Λ σ τ A
 
 @[simp]
 lemma baseChangeAutActionHom_apply
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) (σ : GenericAut k' K) :
-    baseChangeAutActionHom hM b hb v hv Λ A σ = (baseChangeAut hM b hb v hv σ).autAction Λ A :=
+    (baseChangeAutActionHom hM b hb v hv Λ A σ).asHom =
+      (baseChangeAut hM b hb v hv σ).autAction Λ A :=
   rfl
 
 /-- **Generic automorphisms trivial modulo `ℓ` are trivial, integral case**: let `A` be such that
@@ -109,9 +112,12 @@ theorem autAction_baseChangeAut_eq_id_of_distinguished_of_separated {ℓ : ℕ}
   have key := End.eq_one_of_distinguished_of_separated (Ψ.map π) _ hT'
     (by simp) hsep
     ((baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype)
-    (fun τ ↦ (Hom.autAction_naturality _ _ π).trans
-      (by rw [Subgroup.coe_subtype, hV _ τ.2, Category.comp_id])) hdivV ⟨σ, hσ⟩
-  rwa [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_asHom] at key
+    (fun τ ↦ by
+      dsimp only [MonoidHom.comp, baseChangeAutActionHom, MonoidHom.coe_mk, OneHom.coe_mk, Ψ]
+      rw [Hom.autAction_naturality, Subgroup.coe_subtype, hV _ τ.2, Category.comp_id]) hdivV ⟨σ, hσ⟩
+  have key' := congrArg End.asHom key
+  dsimp only [MonoidHom.comp, baseChangeAutActionHom, End.one_asHom, Ψ] at key'
+  exact key'
 
 /-- **Generic automorphisms trivial modulo `ℓ` are trivial, torsion case**: the same as
 `autAction_baseChangeAut_eq_id_of_distinguished_of_separated` for `A` killed by `ℓ ^ m`, for
@@ -130,6 +136,8 @@ theorem autAction_baseChangeAut_eq_id_of_distinguished {ℓ m : ℕ}
   refine autAction_baseChangeAut_eq_id_of_distinguished_of_separated hM b hb v hv Λ π δ hT
     (fun f hf ↦ ?_) hdiv V hV hσ
   obtain ⟨g, rfl⟩ := hf m
-  rw [← Category.id_comp g, ← Preadditive.nsmul_comp, hℓ', zero_comp]
+  apply End.ext
+  change (ℓ ^ m) • g.asHom = 0
+  rw [← Category.id_comp g.asHom, ← Preadditive.nsmul_comp, hℓ', zero_comp]
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
