@@ -123,4 +123,3 @@ theorem bijective_cohomologyMap_succ_of_henselianRing_of_nsmul_eq_zero
     rw [hδ, hy, hy0]
 
 end AlgebraicGeometry.Etale
-

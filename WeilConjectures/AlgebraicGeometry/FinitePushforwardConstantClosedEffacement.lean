@@ -197,4 +197,3 @@ theorem exists_finite_cover_pushforward_unit_closed_cohomology_eq_zero
   convert hfinal using 1; first | rfl | simp only [map_zero]
 
 end AlgebraicGeometry.Etale
-

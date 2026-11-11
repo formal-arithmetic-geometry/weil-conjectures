@@ -232,3 +232,4 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     (fun f ↦ by rw [← Spec.map_comp, c.w f]) e k hi hk H eH (fun f ↦ hH _ _ f) B hcol eB hB
 
 end AlgebraicGeometry
+
