@@ -110,12 +110,11 @@ theorem autAction_baseChangeAut_eq_id_of_distinguished_of_separated {ℓ : ℕ}
     exact ⟨⟨τ', hτ'⟩, Subtype.ext (by rwa [Subgroup.coe_pow])⟩
   have hT' : Triangle.mk (Ψ.map (ℓ • 𝟙 A)) (Ψ.map π) _ ∈ distTriang _ := Ψ.map_distinguished _ hT
   have key := End.eq_one_of_distinguished_of_separated (Ψ.map π) _ hT'
-    (by rw [Functor.map_nsmul, Functor.map_id]) hsep
+    (by simp) hsep
     ((baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype)
     (fun τ ↦ by
-      dsimp only [MonoidHom.comp_apply, baseChangeAutActionHom]
-      exact (Hom.autAction_naturality Λ (baseChangeAut hM b hb v hv τ) π).trans
-        (by rw [hV _ τ.2, Category.comp_id])) hdivV ⟨σ, hσ⟩
+      simp only [MonoidHom.comp_apply, baseChangeAutActionHom_apply]
+      rw [Hom.autAction_naturality, hV _ τ.2, Category.comp_id]) hdivV ⟨σ, hσ⟩
   simpa only [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_asHom]
     using congrArg End.asHom key
 
