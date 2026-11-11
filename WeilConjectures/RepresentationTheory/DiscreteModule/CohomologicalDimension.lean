@@ -9,6 +9,7 @@ public import WeilConjectures.RepresentationTheory.DiscreteModule.Induction
 public import WeilConjectures.RepresentationTheory.DiscreteModule.Sylow
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 public import Mathlib.GroupTheory.FiniteAbelian.Basic
 
 /-!
@@ -101,24 +102,25 @@ end coind₁
 section quotient
 
 variable (X : DiscreteModule.{w} G) (S : AddSubgroup X.obj.V)
-  (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).hom x ∈ S)
+  (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).asHom.hom x ∈ S)
 
 /-- The quotient of a discrete module by a stable subgroup. -/
 @[simps]
 def quotientAction : Action AddCommGrpCat.{max u w} G where
   V := AddCommGrpCat.of (X.obj.V ⧸ S)
   ρ :=
-    { toFun g := AddCommGrpCat.ofHom (QuotientAddGroup.map S S (X.obj.ρ g).hom fun x hx ↦ hS g x hx)
-      map_one' := AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
+    { toFun g := .of <| AddCommGrpCat.ofHom
+        (QuotientAddGroup.map S S (X.obj.ρ g).asHom.hom fun x hx ↦ hS g x hx)
+      map_one' := End.ext <| AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
         simp [End.one_asHom]
-      map_mul' a b := AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
+      map_mul' a b := End.ext <| AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
         simp [End.mul_asHom] }
 
 /-- The quotient of a discrete module by a stable subgroup. -/
 def quotient : DiscreteModule.{w} G :=
   ⟨quotientAction X S hS, fun q ↦ QuotientAddGroup.induction_on q fun x ↦
     Subgroup.isOpen_mono (H₁ := X.obj.stabilizer x) (fun g (hg : _ = _) ↦ by
-      change QuotientAddGroup.mk ((X.obj.ρ g).hom x) = _
+      change QuotientAddGroup.mk ((X.obj.ρ g).asHom.hom x) = _
       rw [hg]) (X.isOpen_stabilizer x)⟩
 
 /-- The projection onto the quotient. -/
@@ -133,8 +135,8 @@ lemma quotientπ_apply (x : X.obj.V) :
   rfl
 
 lemma quotient_ρ_mk (g : G) (x : X.obj.V) :
-    ((quotient X S hS).obj.ρ g).hom (QuotientAddGroup.mk x) =
-      QuotientAddGroup.mk ((X.obj.ρ g).hom x) :=
+    ((quotient X S hS).obj.ρ g).asHom.hom (QuotientAddGroup.mk x) =
+      QuotientAddGroup.mk ((X.obj.ρ g).asHom.hom x) :=
   rfl
 
 
@@ -176,25 +178,25 @@ lemma zmodHom_intCast {A : Type*} [AddCommGroup A] (x : A) (hx : ℓ • x = 0) 
 
 /-- The inclusion `𝔽_ℓ ⟶ X`, `1 ↦ x`, of an invariant element killed by `ℓ`. -/
 def ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
-    (hxg : ∀ g : G, (X.obj.ρ g).hom x = x) : trivialZMod.{w} G ℓ ⟶ X :=
+    (hxg : ∀ g : G, (X.obj.ρ g).asHom.hom x = x) : trivialZMod.{w} G ℓ ⟶ X :=
   ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom (zmodHom.{max u w} ℓ x hx)
       comm g := AddCommGrpCat.ext fun a ↦ by
         obtain ⟨n, hn⟩ := ZMod.intCast_surjective a.down
         obtain rfl : a = ULift.up (n : ZMod ℓ) := ULift.ext hn.symm
         change zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)) =
-          (X.obj.ρ g).hom (zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)))
+          (X.obj.ρ g).asHom.hom (zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)))
         rw [zmodHom_intCast, map_zsmul, hxg g] }
 
 omit [IsTopologicalGroup G] in
 lemma ofInvariant_apply_intCast (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
-    (hxg : ∀ g : G, (X.obj.ρ g).hom x = x) (n : ℤ) :
+    (hxg : ∀ g : G, (X.obj.ρ g).asHom.hom x = x) (n : ℤ) :
     (ofInvariant ℓ X x hx hxg).hom.hom.hom (ULift.up (n : ZMod ℓ)) = n • x :=
   zmodHom_intCast.{max u w} ℓ x hx n
 
 omit [IsTopologicalGroup G] in
 lemma injective_ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
-    (hxg : ∀ g : G, (X.obj.ρ g).hom x = x) (hx0 : x ≠ 0) :
+    (hxg : ∀ g : G, (X.obj.ρ g).asHom.hom x = x) (hx0 : x ≠ 0) :
     Function.Injective (ofInvariant ℓ X x hx hxg).hom.hom.hom := by
   rw [injective_iff_map_eq_zero]
   rintro ⟨a⟩ ha
@@ -219,7 +221,7 @@ copy of `𝔽_ℓ` spanned by a fixed vector, and we argue by induction on `#X`.
 theorem subsingleton_H_two_of_forall_pow_mem (N : Subgroup G) [N.Normal]
     (hpow : ∀ k : G, ∃ j : ℕ, k ^ ℓ ^ j ∈ N) (h2 : Subsingleton (H G (trivialZMod.{w} G ℓ) 2))
     (n : ℕ) (X : DiscreteModule.{w} G) [Finite X.obj.V] (hn : Nat.card X.obj.V = n)
-    (hN : ∀ k ∈ N, ∀ x : X.obj.V, (X.obj.ρ k).hom x = x) (hX : IsPrimary ℓ X) :
+    (hN : ∀ k ∈ N, ∀ x : X.obj.V, (X.obj.ρ k).asHom.hom x = x) (hX : IsPrimary ℓ X) :
     Subsingleton (H G X 2) := by
   induction n using Nat.strong_induction_on generalizing X with
   | _ n ih =>
@@ -229,7 +231,7 @@ theorem subsingleton_H_two_of_forall_pow_mem (N : Subgroup G) [N.Normal]
   let := X.obj.distribMulAction
   obtain ⟨x, hx0, hxℓ, hxg⟩ := exists_ne_zero_nsmul_eq_zero_smul_eq_of_isPGroup ℓ N hN hpow hX
   let S := AddSubgroup.zmultiples x
-  have hS : ∀ g : G, ∀ y ∈ S, (X.obj.ρ g).hom y ∈ S := by
+  have hS : ∀ g : G, ∀ y ∈ S, (X.obj.ρ g).asHom.hom y ∈ S := by
     rintro g _ ⟨m, rfl⟩
     exact ⟨m, by rw [map_zsmul]; exact congrArg (m • ·) (hxg g).symm⟩
   have hzero : ofInvariant ℓ X x hxℓ hxg ≫ quotientπ X S hS = 0 := by
@@ -312,8 +314,8 @@ omit [IsTopologicalGroup G] in
 elements. -/
 lemma forall_exists_comp_eq_iff {Y Z : DiscreteModule.{w} G} (p : Y ⟶ Z) :
     (∀ φ : intTrivial G ⟶ Z, ∃ ψ : intTrivial G ⟶ Y, ψ ≫ p = φ) ↔
-      ∀ z : Z.obj.V, (∀ g, (Z.obj.ρ g).hom z = z) →
-        ∃ y : Y.obj.V, (∀ g, (Y.obj.ρ g).hom y = y) ∧ p.hom.hom.hom y = z := by
+      ∀ z : Z.obj.V, (∀ g, (Z.obj.ρ g).asHom.hom z = z) →
+        ∃ y : Y.obj.V, (∀ g, (Y.obj.ρ g).asHom.hom y = y) ∧ p.hom.hom.hom y = z := by
   constructor
   · intro h z hz
     obtain ⟨ψ, hψ⟩ := h ((homIntTrivialEquiv Z).symm ⟨z, hz⟩)
@@ -339,7 +341,7 @@ def toCoind₁ : X ⟶ (coind₁ G).obj X.obj.V :=
 
 @[simp]
 lemma toCoind₁_apply (x : X.obj.V) (g : G) :
-    ((toCoind₁ X).hom.hom.hom x).1 g = (X.obj.ρ g).hom x :=
+    ((toCoind₁ X).hom.hom.hom x).1 g = (X.obj.ρ g).asHom.hom x :=
   rfl
 
 lemma injective_toCoind₁ : Function.Injective (toCoind₁ X).hom.hom.hom :=
@@ -350,7 +352,7 @@ def toCoind₁Range : AddSubgroup ((coind₁ G).obj X.obj.V).obj.V :=
   (toCoind₁ X).hom.hom.hom.range
 
 lemma mem_toCoind₁Range_iff (f : ((coind₁ G).obj X.obj.V).obj.V) :
-    f ∈ toCoind₁Range X ↔ ∃ x, ∀ g, f.1 g = (X.obj.ρ g).hom x := by
+    f ∈ toCoind₁Range X ↔ ∃ x, ∀ g, f.1 g = (X.obj.ρ g).asHom.hom x := by
   constructor
   · rintro ⟨x, rfl⟩
     exact ⟨x, fun g ↦ rfl⟩
@@ -359,9 +361,9 @@ lemma mem_toCoind₁Range_iff (f : ((coind₁ G).obj X.obj.V).obj.V) :
 
 lemma toCoind₁Range_stable (g : G) (f : ((coind₁ G).obj X.obj.V).obj.V)
     (hf : f ∈ toCoind₁Range X) :
-    (((coind₁ G).obj X.obj.V).obj.ρ g).hom f ∈ toCoind₁Range X := by
+    (((coind₁ G).obj X.obj.V).obj.ρ g).asHom.hom f ∈ toCoind₁Range X := by
   obtain ⟨x, rfl⟩ := hf
-  exact ⟨(X.obj.ρ g).hom x, hom_comm_apply (toCoind₁ X).hom g x⟩
+  exact ⟨(X.obj.ρ g).asHom.hom x, hom_comm_apply (toCoind₁ X).hom g x⟩
 
 /-- The cokernel `C^sm(G, X) / X` of the embedding of `X` into its coinduced module. -/
 def coker₁ : DiscreteModule.{w} G :=
@@ -388,13 +390,13 @@ lemma shortExact₁ : (shortComplex₁ X).ShortExact :=
     fun y hy ↦ (QuotientAddGroup.eq_zero_iff y).1 hy
 
 lemma coker₁_ρ_mk (g : G) (f : ((coind₁ G).obj X.obj.V).obj.V) :
-    ((coker₁ X).obj.ρ g).hom (QuotientAddGroup.mk f) =
-      (QuotientAddGroup.mk ((((coind₁ G).obj X.obj.V).obj.ρ g).hom f) : (coker₁ X).obj.V) :=
+    ((coker₁ X).obj.ρ g).asHom.hom (QuotientAddGroup.mk f) =
+      (QuotientAddGroup.mk ((((coind₁ G).obj X.obj.V).obj.ρ g).asHom.hom f) : (coker₁ X).obj.V) :=
   rfl
 
 lemma coker₁_mk_eq_mk_iff (f f' : ((coind₁ G).obj X.obj.V).obj.V) :
     (QuotientAddGroup.mk f : (coker₁ X).obj.V) = QuotientAddGroup.mk f' ↔
-      ∃ y, ∀ x, f.1 x - f'.1 x = (X.obj.ρ x).hom y := by
+      ∃ y, ∀ x, f.1 x - f'.1 x = (X.obj.ρ x).asHom.hom y := by
   rw [QuotientAddGroup.eq_iff_sub_mem, mem_toCoind₁Range_iff]
   exact Iff.rfl
 
@@ -417,17 +419,18 @@ end coker₁
 section sub
 
 variable (X : DiscreteModule.{w} G) (S : AddSubgroup X.obj.V)
-  (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).hom x ∈ S)
+  (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).asHom.hom x ∈ S)
 
 /-- The action of `G` on a stable subgroup. -/
 @[simps]
 def subAction : Action AddCommGrpCat.{max u w} G where
   V := AddCommGrpCat.of S
   ρ :=
-    { toFun g := AddCommGrpCat.ofHom (((X.obj.ρ g).hom.comp S.subtype).codRestrict S
+    { toFun g := .of <| AddCommGrpCat.ofHom (((X.obj.ρ g).asHom.hom.comp S.subtype).codRestrict S
         fun x ↦ hS g x x.2)
-      map_one' := AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.one_asHom])
-      map_mul' a b := AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.mul_asHom]) }
+      map_one' := End.ext <| AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.one_asHom])
+      map_mul' a b := End.ext <| AddCommGrpCat.ext fun x ↦
+        Subtype.ext (by simp [End.mul_asHom]) }
 
 /-- The discrete submodule given by a stable subgroup. -/
 def sub : DiscreteModule.{w} G :=
@@ -456,8 +459,8 @@ lemma coker₁SubMap_mk (f : ((coind₁ G).obj (sub X S hS).obj.V).obj.V) :
   rfl
 
 lemma coker₁SubMap_ρ (g : G) (c : (coker₁ (sub X S hS)).obj.V) :
-    coker₁SubMap X S hS (((coker₁ (sub X S hS)).obj.ρ g).hom c) =
-      ((coker₁ X).obj.ρ g).hom (coker₁SubMap X S hS c) := by
+    coker₁SubMap X S hS (((coker₁ (sub X S hS)).obj.ρ g).asHom.hom c) =
+      ((coker₁ X).obj.ρ g).asHom.hom (coker₁SubMap X S hS c) := by
   obtain ⟨f, rfl⟩ := QuotientAddGroup.mk_surjective c
   rfl
 
@@ -469,9 +472,9 @@ lemma injective_coker₁SubMap : Function.Injective (coker₁SubMap X S hS) := b
   obtain ⟨m, hm⟩ := hc
   rw [QuotientAddGroup.eq_zero_iff, mem_toCoind₁Range_iff]
   refine ⟨f.1 1, fun x ↦ Subtype.ext ?_⟩
-  have hx : Subtype.val (f.1 x) = (X.obj.ρ x).hom m := hm x
-  have h1 : Subtype.val (f.1 1) = (X.obj.ρ 1).hom m := hm 1
-  change Subtype.val (f.1 x) = (X.obj.ρ x).hom (Subtype.val (f.1 1))
+  have hx : Subtype.val (f.1 x) = (X.obj.ρ x).asHom.hom m := hm x
+  have h1 : Subtype.val (f.1 1) = (X.obj.ρ 1).asHom.hom m := hm 1
+  change Subtype.val (f.1 x) = (X.obj.ρ x).asHom.hom (Subtype.val (f.1 1))
   rw [hx, h1, ρ_one_apply]
 
 end sub
@@ -500,7 +503,7 @@ finite subset of `M` is contained in a stable subgroup `S` with `H²(G, S) = 0`.
 `H²(G, M) = 0`. -/
 theorem subsingleton_H_two_of_forall_finite (M : DiscreteModule.{w} G)
     (hM : ∀ T : Set M.obj.V, T.Finite → ∃ (S : AddSubgroup M.obj.V)
-      (hS : ∀ g : G, ∀ x ∈ S, (M.obj.ρ g).hom x ∈ S),
+      (hS : ∀ g : G, ∀ x ∈ S, (M.obj.ρ g).asHom.hom x ∈ S),
         T ⊆ S ∧ Subsingleton (H G (sub M S hS) 2)) :
     Subsingleton (H G M 2) := by
   classical
@@ -525,18 +528,18 @@ theorem subsingleton_H_two_of_forall_finite (M : DiscreteModule.{w} G)
     ⟨Φ ∘ f.1, Subgroup.isOpen_mono (H₁ := rightStab G f.1)
       (fun _ hg x ↦ by simp only [Function.comp_apply, hg x]) f.2⟩
   have hjf (x : G) : j (fN.1 x) = f.1 x := hΦ _ ⟨x, rfl⟩
-  have hinv (g : G) : ∃ c, ∀ x, f.1 (x * g) - f.1 x = ((coker₁ M).obj.ρ x).hom c := by
+  have hinv (g : G) : ∃ c, ∀ x, f.1 (x * g) - f.1 x = ((coker₁ M).obj.ρ x).asHom.hom c := by
     have := hz g
     rw [coker₁_ρ_mk, coker₁_mk_eq_mk_iff] at this
     exact this
-  have hzN : ∀ g, ((coker₁ (coker₁ (sub M S hS))).obj.ρ g).hom (QuotientAddGroup.mk fN) =
+  have hzN : ∀ g, ((coker₁ (coker₁ (sub M S hS))).obj.ρ g).asHom.hom (QuotientAddGroup.mk fN) =
       QuotientAddGroup.mk fN := by
     intro g
     rw [coker₁_ρ_mk, coker₁_mk_eq_mk_iff]
     obtain ⟨c, hc⟩ := hinv g
     refine ⟨fN.1 g - fN.1 1, fun x ↦ injective_coker₁SubMap M S hS ?_⟩
     rw [map_sub, coker₁SubMap_ρ, map_sub]
-    change j (fN.1 (x * g)) - j (fN.1 x) = ((coker₁ M).obj.ρ x).hom (j (fN.1 g) - j (fN.1 1))
+    change j (fN.1 (x * g)) - j (fN.1 x) = ((coker₁ M).obj.ρ x).asHom.hom (j (fN.1 g) - j (fN.1 1))
     have hc1 := hc 1
     rw [one_mul, ρ_one_apply] at hc1
     rw [hjf, hjf, hjf, hjf, hc x, hc1]
@@ -570,7 +573,7 @@ lemma exists_pow_nsmul_eq_zero_of_finite (ℓ : ℕ) {A : Type*} [AddCommGroup A
     · exact key b J (le_max_right _ _) (hJ b hb)
 
 lemma isPrimary_quotient {ℓ : ℕ} {X : DiscreteModule.{w} G} (hX : IsPrimary ℓ X)
-    (S : AddSubgroup X.obj.V) (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).hom x ∈ S) :
+    (S : AddSubgroup X.obj.V) (hS : ∀ g : G, ∀ x ∈ S, (X.obj.ρ g).asHom.hom x ∈ S) :
     IsPrimary ℓ (quotient X S hS) := by
   intro q
   obtain ⟨y, rfl⟩ := QuotientAddGroup.mk_surjective q
@@ -624,17 +627,17 @@ theorem subsingleton_H_two
     (M : DiscreteModule.{w} G) (hM : IsPrimary ℓ M) :
     Subsingleton (H G M 2) := by
   refine subsingleton_H_two_of_forall_finite M fun T hT ↦ ?_
-  let U : Set M.obj.V := ⋃ t ∈ T, Set.range fun g : G ↦ (M.obj.ρ g).hom t
+  let U : Set M.obj.V := ⋃ t ∈ T, Set.range fun g : G ↦ (M.obj.ρ g).asHom.hom t
   have hU : U.Finite := hT.biUnion fun t _ ↦ finite_range_of_forall_mul_eq _
     (M.obj.stabilizer t) (M.isOpen_stabilizer t) fun x u hu ↦ by
       rw [ρ_mul_apply, mem_stabilizer.1 hu]
   have hstab : ∀ g : G, ∀ x ∈ AddSubgroup.closure U,
-      (M.obj.ρ g).hom x ∈ AddSubgroup.closure U := by
+      (M.obj.ρ g).asHom.hom x ∈ AddSubgroup.closure U := by
     intro g x hx
-    refine (AddSubgroup.closure_le (K := (AddSubgroup.closure U).comap (M.obj.ρ g).hom)).2
+    refine (AddSubgroup.closure_le (K := (AddSubgroup.closure U).comap (M.obj.ρ g).asHom.hom)).2
       ?_ hx
     intro u hu
-    obtain ⟨t, ht, h, rfl⟩ : ∃ t ∈ T, ∃ h : G, (M.obj.ρ h).hom t = u := by simpa [U] using hu
+    obtain ⟨t, ht, h, rfl⟩ : ∃ t ∈ T, ∃ h : G, (M.obj.ρ h).asHom.hom t = u := by simpa [U] using hu
     exact AddSubgroup.subset_closure (Set.mem_biUnion ht ⟨g * h, by simp⟩)
   refine ⟨_, hstab, fun t ht ↦ AddSubgroup.subset_closure (Set.mem_biUnion ht ⟨1, by simp⟩), ?_⟩
   have : Finite U := hU.to_subtype
