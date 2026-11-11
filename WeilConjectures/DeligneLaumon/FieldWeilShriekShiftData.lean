@@ -157,8 +157,8 @@ theorem fieldIntegralPullShift_existsUnique :
   let : ∀ x : T, Invertible (l : T.residueField x) := fun x ↦ PEmpty.elim x
   obtain ⟨C, _⟩ := automorphismConstructibleStage_comparison_system.{u} l
   obtain ⟨c, d, hc, hd⟩ :=
-    (automorphismConstructibleStage_integral_shifts l E C (𝟙 T) (Iso.refl T)
-      (Iso.refl T) (by simp)).1 X Y f
+    (automorphismConstructibleStage_integral_shifts l E C (𝟙 T) (1 : Aut T)
+      (1 : Aut T) (by simp)).1 X Y f
   refine ⟨d, ⟨c, hc, hd⟩, ?_⟩
   rintro d' ⟨c', hc', hd'⟩
   have he := fieldChainShift_unique l E f c' c hc' hc
@@ -240,7 +240,7 @@ theorem fieldRationalPullShift_existsUnique :
   obtain ⟨C, _⟩ := automorphismConstructibleStage_comparison_system.{u} l
   obtain ⟨c, _, _, hc, _⟩ :=
     (automorphismConstructibleStage_descended_shifts l (AlgebraicClosure (Padic l)) C f
-      (Iso.refl Y) (Iso.refl X) (by simp)).1 E
+      (1 : Aut Y) (1 : Aut X) (by simp)).1 E
   obtain ⟨s, hs, hn⟩ := hc
   have he := fieldConstructibleShift_normalization l E f s hs
   subst s
@@ -306,7 +306,7 @@ theorem fieldCommonPullShift_existsUnique :
   obtain ⟨C, _⟩ := automorphismConstructibleStage_comparison_system.{u} l
   obtain ⟨c, _, _, hc, _⟩ :=
     (automorphismConstructibleStage_descended_shifts l Ω C f
-      (Iso.refl Y) (Iso.refl X) (by simp)).2
+      (1 : Aut Y) (1 : Aut X) (by simp)).2
   have hn (L : AlgebraicallyClosedCoefficients.Index l Ω)
       (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L) :
       HEq ((Functor.commShiftIso (commonStageDerivedPullback l Ω f)
@@ -658,10 +658,10 @@ def fieldWeilPullSquare (f₀ : X₀ ⟶ Y₀) :
       sfWeilFrobeniusPullback D l hl Y₀ E ⋙ fieldWeilPull D l hl E f₀ :=
   letI := sfWeilPrimeInvertible D l hl X₀
   letI := sfWeilPrimeInvertible D l hl Y₀
-  (fieldRationalPullComp l E (D.geometricFrobenius X₀).hom (zlFiberMap D f₀)).symm ≪≫
+  (fieldRationalPullComp l E (D.geometricFrobenius X₀).asIso.hom (zlFiberMap D f₀)).symm ≪≫
     eqToIso (congrArg (fun f ↦ rationalDerivedPullback l E f)
       (zlFrobenius_naturality D f₀)) ≪≫
-    fieldRationalPullComp l E (zlFiberMap D f₀) (D.geometricFrobenius Y₀).hom
+    fieldRationalPullComp l E (zlFiberMap D f₀) (D.geometricFrobenius Y₀).asIso.hom
 
 /-- Proper rational pullback has its constructible right adjoint, and open rational
 pullback has its extension-by-zero left adjoint. Source: SGA 4 XVII, sections 5--6
@@ -850,7 +850,7 @@ geometric Frobenius (blueprint: def-zl-field-weil-shriek-shift-data). -/
 instance fieldWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (sfWeilFrobeniusPullback D l hl X₀ E).CommShift ℤ :=
-  @fieldRationalPullShift l _ E _ _ _ _ _ (D.geometricFrobenius X₀).hom
+  @fieldRationalPullShift l _ E _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
 /-- The canonical common-stage Frobenius shift. Source: blueprint geometric Frobenius
@@ -858,7 +858,7 @@ instance fieldWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
 instance fieldCommonWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).CommShift ℤ :=
-  @fieldCommonPullShift l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).hom
+  @fieldCommonPullShift l _ Ω _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
 end WeilConjectures
