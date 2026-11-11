@@ -171,6 +171,7 @@ theorem nonempty_iso_overPullback_npow_id (A : Over (Spec (.of K))) [GrpObj A]
     simp only [ht, pow_one]
     exact toSkeleton_eq_toSkeleton_iff.2 ⟨(pullbackId _).app N⟩
   have h2 : t 2 = u ^ 4 := by
+    -- Specialize the cube relation to the identity, identity, and inverse maps.
     have hc := toSkeleton_cube A N (𝟙 A) (𝟙 A) ι[A]
     have h1' : toSkeleton (overPullback (𝟙 A) N) = u := by simpa only [ht, pow_one] using h1
     rw [GrpObj.inv_eq_inv, mul_inv_cancel_right, mul_inv_cancel, toSkeleton_overPullback_one,
