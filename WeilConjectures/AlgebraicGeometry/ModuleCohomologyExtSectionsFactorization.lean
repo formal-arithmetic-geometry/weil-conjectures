@@ -53,6 +53,22 @@ private theorem moduleComparisonEquiv_apply_of_component
   rfl
   run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
 
+private theorem siteSections_component
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    (U : C) (F : Sheaf J AddCommGrpCat.{u}) (p : ℕ)
+    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
+        (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) :
+    ((siteSectionsNatIso J U p).symm ≪≫ siteExtNatIso J U p ≪≫
+      extSourceNatIso e p ≪≫ siteHNatIso J p).app F =
+      (siteSectionsObjIso J U F p).symm ≪≫
+        (Abelian.Ext.precompAddEquiv e F p).symm.toAddCommGrpIso := by
+  run_tac do Lean.logInfo m!"PS043 site helper start: {← IO.monoMsNow}"
+  simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
+  rfl
+  run_tac do Lean.logInfo m!"PS043 site helper end: {← IO.monoMsNow}"
+
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
@@ -123,8 +139,8 @@ theorem ext_sections_factorization
       siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
         extSourceNatIso (terminalSourceIso X) p ≪≫
           siteHNatIso (Opens.grothendieckTopology X) p).app (T.obj F) = _
-    simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
-    rfl
+    exact siteSections_component (Opens.grothendieckTopology X) ⊤ (T.obj F) p
+      (terminalSourceIso X)
   run_tac do Lean.logInfo m!"PS043 component equality proved: {← IO.monoMsNow}"
   have h := moduleComparisonEquiv_apply_of_component
     (moduleCohomologyExtResolutionNatIso X p) F (a.app F)
@@ -152,7 +168,8 @@ run_cmd do
   let env := (← Lean.getEnv).setExporting false
   let lctx : Lean.LocalContext := default
   for name in #[``sectionsComparisonNatIso_apply,
-      ``moduleComparisonEquiv_apply_of_component, ``ext_sections_factorization] do
+      ``moduleComparisonEquiv_apply_of_component, ``siteSections_component,
+      ``ext_sections_factorization] do
     let some info := env.find? name | throwError "missing declaration {name}"
     let start ← IO.monoMsNow
     match Lean.Kernel.check env lctx info.type with
