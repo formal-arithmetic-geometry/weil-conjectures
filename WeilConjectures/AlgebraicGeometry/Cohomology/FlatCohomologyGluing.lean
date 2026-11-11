@@ -61,6 +61,7 @@ theorem H.baseChange_bijective_of_openCover
     (hUV : ∀ q : ℕ, Function.Bijective
       (H.baseChange (S := S) ((U ⊓ V).ι ≫ f) ((pullback (U ⊓ V).ι).obj M) q))
     (q : ℕ) : Function.Bijective (H.baseChange (S := S) f M q) := by
+
   obtain ⟨r, d, δ, r', d', δ', hr, hr', hA, hB, cr, cd, cδ⟩ :=
     H.baseChange_mayerVietoris (S := S) f M U V hcover
   have hp (n : ℕ) : Function.Bijective

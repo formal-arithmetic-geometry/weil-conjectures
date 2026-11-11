@@ -93,6 +93,7 @@ theorem H.baseChange_mayerVietoris
       (∀ n : ℕ, (d' n).comp ((β U n).prodMap (β V n)) =
         (β (U ⊓ V) n).comp (d n)) ∧
       (∀ n : ℕ, (δ' n).comp (β (U ⊓ V) n) = (βX (n + 1)).comp (δ n)) := by
+
   classical
   dsimp only
   obtain ⟨r, d, δ, r', d', δ', hr, hr', hex, hex', hs₁, hs₂, hs₃⟩ :=
