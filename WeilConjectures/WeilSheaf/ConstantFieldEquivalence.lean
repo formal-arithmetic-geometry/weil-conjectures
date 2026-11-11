@@ -48,7 +48,7 @@ variable {k₀ k' : Type u} [Field k₀] [Field k'] [Finite k₀] [Finite k'] [A
 /-- The `i`-th piece `jᵢ = θ ≫ Frⁱ : V̄' ⟶ V̄₀`. -/
 def pieceMap (i : Fin (m + 1)) : (V ↘ Spec (CommRingCat.of k')).geometricFiber ⟶
     (V ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  componentMap hc ≫ ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (i : ℕ)).asIso.hom
+  componentMap hc ≫ ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (i : ℕ)).hom
 
 instance (i : Fin (m + 1)) : IsOpenImmersion (pieceMap hc i) :=
   have : Algebra.IsAlgebraic k₀ k' := Algebra.IsAlgebraic.of_finite k₀ k'
@@ -91,15 +91,15 @@ lemma isClosedImmersion_pieceMap (i : Fin (m + 1)) : IsClosedImmersion (pieceMap
   IsClosedImmersion.of_isOpenImmersion _ (isClosed_range_pieceMap hc hm i)
 
 lemma pieceMap_comp_frobenius (k : Fin m) :
-    pieceMap hc k.castSucc ≫ (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom =
+    pieceMap hc k.castSucc ≫ (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
       pieceMap hc k.succ := by
   simp only [pieceMap, Category.assoc, Fin.val_castSucc, Fin.val_succ, pow_succ',
-    Aut.mul_asIso, Iso.trans_hom]
+    Aut.Aut_mul_def, Iso.trans_hom]
 
 include hm in
 lemma pieceMap_last_comp_frobenius :
-    pieceMap hc (Fin.last m) ≫ (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom =
-      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso.hom ≫ pieceMap (m := m) hc 0 := by
+    pieceMap hc (Fin.last m) ≫ (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
+      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.hom ≫ pieceMap (m := m) hc 0 := by
   have hr : Nat.card k' = Nat.card k₀ ^ (m + 1) := by
     have : Module.Finite k₀ k' := Module.Finite.of_finite
     let := Fintype.ofFinite k₀
@@ -107,9 +107,8 @@ lemma pieceMap_last_comp_frobenius :
     rw [Nat.card_eq_fintype_card, Nat.card_eq_fintype_card, Module.card_eq_pow_finrank (K := k₀),
       hm]
   have h := geometricGaloisFrobenius_hom_comp_componentMap hc (m + 1) hr
-  simp only [pow_succ', Aut.mul_asIso, Iso.trans_hom] at h
-  simp only [pieceMap, Category.assoc, Fin.val_last, Fin.val_zero, pow_zero, Aut.one_asIso,
-    Iso.refl_hom]
+  simp only [pow_succ', Aut.Aut_mul_def, Iso.trans_hom] at h
+  simp only [pieceMap, Category.assoc, Fin.val_last, Fin.val_zero, pow_zero]
   rw [reassoc_of% h]
   exact (Category.comp_id _).symm
 
@@ -121,13 +120,13 @@ abbrev cyclicDecomposition :
       (WeilSheaf.frobeniusPullback k' l V) m where
   J i := (pieceMap hc i)^*ᵃ[l]
   α k := Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-      (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm _ ≪≫
+      (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm _ ≪≫
     (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l (pieceMap_comp_frobenius hc k)
   β := Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-      (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm _ ≪≫
+      (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm _ ≪≫
     (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l (pieceMap_last_comp_frobenius hc hm) ≪≫
     adicUpperStarComp l _ _ ≪≫ Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l
-      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso)
+      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius)
   fullyFaithful :=
     have := isClosedImmersion_pieceMap hc hm
     adicUpperStarPiFullyFaithful l (pieceMap hc) (disjoint_range_pieceMap hc hm)
