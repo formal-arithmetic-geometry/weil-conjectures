@@ -170,7 +170,7 @@ theorem BoundaryChart.fixingSubgroup_le_topologicalClosure_normalClosure {z : C}
   -- so inertia acts trivially on the generic fibre of `Z`
   have hIZ : ∀ σ ∈ Q.inertia Gal(Ω/C.functionField),
       ∀ t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z,
-        (galoisToAut (genericPointLift j) σ).hom.app Z t = t := by
+        (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t := by
     intro σ hσ t
     apply ((ConcreteCategory.isIso_iff_bijective (τ.hom.app Z)).1 inferInstance).1
     rw [← galoisToFundamentalGroup_smul (genericPointLift j) τ G σ Z t]
