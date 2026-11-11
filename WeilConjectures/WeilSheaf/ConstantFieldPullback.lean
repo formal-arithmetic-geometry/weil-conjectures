@@ -128,7 +128,7 @@ lemma geometricFiberPullbackFrobeniusIso_hom_app {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] (H : AdicSheaf l X) :
     ((geometricFiberPullbackFrobeniusIso k₀ l X).app H).hom =
       (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ ≫
         (adicUpperStarFactorIso
           (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) H).hom := by
   simp [geometricFiberPullbackFrobeniusIso, adicUpperStarFactorIso]
@@ -169,27 +169,27 @@ lemma cyclicDecomposition_J (i : Fin (m + 1)) :
 lemma cyclicDecomposition_α (k : Fin m) :
     (cyclicDecomposition l hc hm).α k =
       Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm _ ≪≫
+        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm _ ≪≫
       (adicUpperStarComp l _ _).symm ≪≫ adicUpperStarCongr l (pieceMap_comp_frobenius hc k) :=
   rfl
 
 lemma cyclicDecomposition_β :
     (cyclicDecomposition l hc hm).β =
       Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm _ ≪≫
+        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm _ ≪≫
       (adicUpperStarComp l _ _).symm ≪≫
       adicUpperStarCongr l (pieceMap_last_comp_frobenius hc hm) ≪≫
       adicUpperStarComp l _ _ ≪≫ Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l
-        (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso) :=
+        (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius) :=
   rfl
 
 lemma cyclicDecomposition_α_hom_app (k : Fin m) (M : AdicSheaf l
     (V ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     ((cyclicDecomposition l hc hm).α k).hom.app M =
       (pieceMap hc k.castSucc)^*ᵃ[l].map ((adicUpperStarIsoLowerStarInv l
-        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app M) ≫
+        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app M) ≫
         (adicUpperStarComp l (pieceMap hc k.castSucc)
-          (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).inv.app M ≫
+          (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).inv.app M ≫
         (adicUpperStarCongr l (pieceMap_comp_frobenius hc k)).hom.app M :=
   rfl
 
@@ -197,14 +197,14 @@ lemma cyclicDecomposition_β_hom_app (M : AdicSheaf l
     (V ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     (cyclicDecomposition l hc hm).β.hom.app M =
       (pieceMap hc (Fin.last m))^*ᵃ[l].map ((adicUpperStarIsoLowerStarInv l
-        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app M) ≫
+        (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app M) ≫
         (adicUpperStarComp l (pieceMap hc (Fin.last m))
-          (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).inv.app M ≫
+          (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).inv.app M ≫
         (adicUpperStarCongr l (pieceMap_last_comp_frobenius hc hm)).hom.app M ≫
-        (adicUpperStarComp l (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso.hom
+        (adicUpperStarComp l (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.hom
           (pieceMap hc 0)).hom.app M ≫
         (adicUpperStarIsoLowerStarInv l
-          (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso).hom.app _ := by
+          (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius).hom.app _ := by
   rw [cyclicDecomposition_β]
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
@@ -222,7 +222,7 @@ lemma geometricFiberPullbackTwistStr_hom (k₀ : Type u) [Field k₀] [Finite k�
     [X.Over (Spec (CommRingCat.of k₀))] (H : AdicSheaf l X) (b : (PadicAlgCl l)ˣ) :
     (geometricFiberPullbackTwistStr k₀ l X H b).hom =
       (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ ≫
         (adicUpperStarFactorIso
           (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) H).hom ≫
         (WeilCoefficients.smulIso b _).hom := by
