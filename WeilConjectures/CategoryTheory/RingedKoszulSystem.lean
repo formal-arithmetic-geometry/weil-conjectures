@@ -42,7 +42,7 @@ Source: Stacks Project, Tags 0913 and 0A0A
 (auxiliary; not a blueprint node). -/
 def ringedKoszulFactor (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedSiteComplex O :=
-  HomologicalComplex.double (((ringedKoszulScalar O s)).asHom ^ (m + 1))
+  HomologicalComplex.double ((ringedKoszulScalar O s ^ (m + 1)).asHom)
     (by decide : (ComplexShape.up ℤ).Rel 0 1)
 
 /-- Components of the forward map (1,s), zero outside degrees zero and one.
@@ -59,7 +59,7 @@ def ringedKoszulFactorStepF (s : (O.obj ⋙ forget CommRingCat).sections)
   else if h : n = 1 then
     eqToHom (congrArg (ringedKoszulFactor O s m).X h) ≫
       (HomologicalComplex.doubleXIso₁ _ _ (by decide)).hom ≫
-      ringedKoszulScalar O s ≫
+      (ringedKoszulScalar O s).asHom ≫
       (HomologicalComplex.doubleXIso₁ _ _ (by decide)).inv ≫
       eqToHom (congrArg (ringedKoszulFactor O s (m + 1)).X h.symm)
   else 0
@@ -78,7 +78,7 @@ theorem ringedKoszulFactorStepF_comm
   by_cases hn : n = 0
   · subst n
     simp [ringedKoszulFactorStepF, ringedKoszulFactor,
-      HomologicalComplex.double_d, Category.assoc, pow_succ']
+      HomologicalComplex.double_d, pow_succ', End.mul_asHom, Category.assoc]
   · rw [show (ringedKoszulFactor O s (m + 1)).d n (n + 1) = 0 from
       HomologicalComplex.double_d_eq_zero₀ _ _ _ _ hn,
       show (ringedKoszulFactor O s m).d n (n + 1) = 0 from
