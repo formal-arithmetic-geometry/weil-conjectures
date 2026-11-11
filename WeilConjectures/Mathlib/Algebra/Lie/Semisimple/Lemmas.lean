@@ -42,13 +42,19 @@ characteristic-zero Lie algebra with central radical.
   semisimple finite-dimensional representation has central radical.
 * `LieAlgebra.center_sup_derivedSeries_eq_top`: a finite-dimensional characteristic-zero Lie
   algebra with central radical is the sum of its centre and its derived subalgebra.
+* `LieAlgebra.radical_eq_center_and_center_sup_derivedSeries_eq_top`: both conclusions for a
+  Lie algebra with a faithful semisimple finite-dimensional representation.
 
 ## Blueprint
 
 `LieAlgebra.hasCentralRadical_of_isFaithful` and `LieAlgebra.center_sup_derivedSeries_eq_top`
 implement `sk-p-lie`. The first also implements `lem-ag-faithful-semisimple-lie-central-radical`;
 `LieAlgebra.hasTrivialRadical_quotient_center` together with the second implements
-`lem-ag-central-radical-quotient`.
+`lem-ag-central-radical-quotient`. Together they give
+`LieAlgebra.radical_eq_center_and_center_sup_derivedSeries_eq_top`, which implements
+`proposition-lie-algebras-faithful-semisimple-representation`; its clause `--1` is
+implemented by `LieAlgebra.hasCentralRadical_of_isFaithful`, and its clause `--2` by
+`LieAlgebra.hasTrivialRadical_quotient_center` and `LieAlgebra.center_sup_derivedSeries_eq_top`.
 -/
 
 @[expose] public section
@@ -97,7 +103,8 @@ namespace LieAlgebra
 /-- A finite-dimensional Lie algebra over a field of characteristic zero admitting a faithful
 semisimple finite-dimensional representation `M` has central radical: on each irreducible
 summand of `M` the bracket `⁅L, rad L⁆` acts as zero, so it vanishes by faithfulness.
-(blueprint: `sk-p-lie`, `lem-ag-faithful-semisimple-lie-central-radical`) -/
+(blueprint: `sk-p-lie`, `lem-ag-faithful-semisimple-lie-central-radical`,
+`proposition-lie-algebras-faithful-semisimple-representation--1`) -/
 theorem hasCentralRadical_of_isFaithful (k L M : Type*) [Field k] [CharZero k]
     [LieRing L] [LieAlgebra k L] [Module.Finite k L]
     [AddCommGroup M] [Module k M] [LieRingModule L M] [LieModule k L M] [Module.Finite k M]
@@ -137,7 +144,8 @@ private lemma mkCenter_eq_zero_iff {k L : Type*} [CommRing k] [LieRing L] [LieAl
 /-- If the radical of a finite-dimensional Lie algebra `L` over a field is central, then the
 quotient `L ⧸ Z(L)` has trivial radical: the inverse image of an abelian ideal of the quotient is
 solvable, hence contained in `rad L = Z(L)`.
-(blueprint: part of `lem-ag-central-radical-quotient`) -/
+(blueprint: part of `lem-ag-central-radical-quotient`,
+`proposition-lie-algebras-faithful-semisimple-representation--2`) -/
 theorem hasTrivialRadical_quotient_center (k L : Type*) [Field k] [LieRing L] [LieAlgebra k L]
     [Module.Finite k L] [HasCentralRadical k L] :
     HasTrivialRadical k (L ⧸ center k L) := by
@@ -170,7 +178,8 @@ theorem hasTrivialRadical_quotient_center (k L : Type*) [Field k] [LieRing L] [L
 is *reductive*: it is the sum of its centre `Z(L)` and its derived subalgebra `[L, L]`.
 The quotient `L ⧸ Z(L)` has trivial radical, so its Killing form is non-degenerate and it is
 perfect; lifting brackets gives the decomposition.
-(blueprint: `sk-p-lie`, `lem-ag-central-radical-quotient`) -/
+(blueprint: `sk-p-lie`, `lem-ag-central-radical-quotient`,
+`proposition-lie-algebras-faithful-semisimple-representation--2`) -/
 theorem center_sup_derivedSeries_eq_top (k L : Type*) [Field k] [CharZero k]
     [LieRing L] [LieAlgebra k L] [Module.Finite k L] [HasCentralRadical k L] :
     center k L ⊔ derivedSeries k L 1 = ⊤ := by
@@ -184,5 +193,18 @@ theorem center_sup_derivedSeries_eq_top (k L : Type*) [Field k] [CharZero k]
       mkCenter k L x ∈ (derivedSeries k L 1).map (mkCenter k L))
   refine ⟨x - y, mkCenter_eq_zero_iff.mp ?_, y, hy, sub_add_cancel x y⟩
   rw [map_sub, hxy, sub_self]
+
+/-- **Lie algebras with a faithful semisimple representation.** If a finite-dimensional Lie
+algebra `L` over a field of characteristic zero has a faithful semisimple finite-dimensional
+representation `M` on which it acts triangularizably, then `rad L = Z(L)` and
+`L = Z(L) + [L, L]`.
+(blueprint: `proposition-lie-algebras-faithful-semisimple-representation`) -/
+theorem radical_eq_center_and_center_sup_derivedSeries_eq_top (k L M : Type*) [Field k]
+    [CharZero k] [LieRing L] [LieAlgebra k L] [Module.Finite k L]
+    [AddCommGroup M] [Module k M] [LieRingModule L M] [LieModule k L M] [Module.Finite k M]
+    [IsFaithful k L M] [IsTriangularizable k L M] [LieModule.IsSemisimple k L M] :
+    radical k L = center k L ∧ center k L ⊔ derivedSeries k L 1 = ⊤ := by
+  have := hasCentralRadical_of_isFaithful k L M
+  exact ⟨HasCentralRadical.radical_eq_center, center_sup_derivedSeries_eq_top k L⟩
 
 end LieAlgebra
