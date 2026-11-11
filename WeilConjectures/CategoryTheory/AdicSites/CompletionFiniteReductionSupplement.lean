@@ -111,26 +111,25 @@ private theorem sequential_nilpotent_colimit
     (M : C) (f : M ⟶ M) (k : ℕ) (hf : (End.of f) ^ k = 0) :
     IsZero (colimit (Functor.ofSequence (X := fun _ : ℕ ↦ M) (fun _ ↦ f))) := by
   let F := Functor.ofSequence (X := fun _ : ℕ ↦ M) (fun _ ↦ f)
-  have hm (n j : ℕ) : F.map (homOfLE (Nat.le_add_right n j)) = (End.of f) ^ j := by
+  have hm (n j : ℕ) : F.map (homOfLE (Nat.le_add_right n j)) = ((End.of f) ^ j).asHom := by
     induction j with
     | zero =>
       simp only [Nat.add_zero, homOfLE_refl, CategoryTheory.Functor.map_id,
         pow_zero, End.one_asHom]
-      rfl
     | succ j ih =>
       have he : homOfLE (Nat.le_add_right n (j + 1)) =
           homOfLE (Nat.le_add_right n j) ≫ homOfLE (Nat.le_succ (n + j)) := rfl
       rw [he, CategoryTheory.Functor.map_comp, ih]
       dsimp only [F]
       rw [Functor.ofSequence_map_homOfLE_succ]
-      change ((End.of f) ^ j) ≫ f = (End.of f) ^ (j + 1)
+      change ((End.of f) ^ j).asHom ≫ f = ((End.of f) ^ (j + 1)).asHom
       rw [pow_succ', End.mul_asHom]
   apply (IsZero.iff_id_eq_zero _).mpr
   apply colimit.hom_ext
   intro n
   have h := colimit.w F (homOfLE (Nat.le_add_right n k))
   rw [hm, hf] at h
-  simpa only [zero_comp, Category.comp_id, comp_zero] using h.symm
+  simpa only [End.zero_asHom, zero_comp, Category.comp_id, comp_zero] using h.symm
 
 private theorem sectionLocalization_nilpotent
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -143,17 +142,18 @@ private theorem sectionLocalization_nilpotent
       (fun V ↦ R.obj.map V.unop.hom.op f)
       (fun {V W} a ↦ ringedSiteSectionLocalization_compatible R U f V W a))
   have hp (j : ℕ) (V : (Over U)ᵒᵖ) (m : R.obj.obj (op V.unop.left)) :
-      (((End.of μ) ^ j : End M).val.app V) m =
+      (((End.of μ) ^ j : End M).asHom.val.app V) m =
         m * (R.obj.map V.unop.hom.op f) ^ j := by
     induction j generalizing m with
     | zero => simp only [pow_zero, End.one_asHom]; exact (mul_one m).symm
     | succ j ih =>
       rw [pow_succ', End.mul_asHom]
-      change ((μ.val.app V) ((((End.of μ) ^ j : End M).val.app V) m)) = _
+      change ((μ.val.app V) ((((End.of μ) ^ j : End M).asHom.val.app V) m)) = _
       rw [ih]
       change (m * (R.obj.map V.unop.hom.op f) ^ j) * R.obj.map V.unop.hom.op f = _
       rw [mul_assoc, ← pow_succ]
   have hμ : (End.of μ) ^ k = 0 := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
