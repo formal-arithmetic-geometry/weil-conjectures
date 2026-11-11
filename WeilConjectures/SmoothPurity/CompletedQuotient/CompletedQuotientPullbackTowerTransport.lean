@@ -56,7 +56,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local implicit_reducible] value expression IntegralCoherence.value scalarQuotients
-  pullbackTensorRestrictedTower CategoryTheory.TwoSquare
+  pullbackTensorRestrictedTower
   referenceOrdinaryModel integralCoefficientSheaf integralCoefficientCommRingSheaf
   HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
