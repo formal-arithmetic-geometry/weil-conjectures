@@ -183,7 +183,8 @@ def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   smul_add a x y := (Sheaf.H.map (ρ a).asHom q).map_add x y
   smul_zero a := (Sheaf.H.map (ρ a).asHom q).map_zero
   add_smul a b x := by
-    change Sheaf.H.map (ρ (a + b)).asHom q x = Sheaf.H.map (ρ a).asHom q x + Sheaf.H.map (ρ b).asHom q x
+    change Sheaf.H.map (ρ (a + b)).asHom q x =
+      Sheaf.H.map (ρ a).asHom q x + Sheaf.H.map (ρ b).asHom q x
     rw [map_add, End.add_asHom, Sheaf.H.map_add_apply]
   zero_smul x := by
     change Sheaf.H.map (ρ 0).asHom q x = 0
