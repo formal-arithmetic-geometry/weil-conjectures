@@ -56,37 +56,19 @@ private theorem sectionsComparisonNatIso_apply
       (c.hom.app (T.obj F)) ((b.inv.app (T.obj F)) ((a.hom.app F) x)) := by
   rfl
 
-private theorem moduleComparisonEquiv_siteSections
-    {A : Type*} [Category A] {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{u}]
-    [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
-    {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R}
-    {T : A ⥤ Sheaf J AddCommGrpCat.{u}} (U : C) (p : ℕ)
-    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
-      (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
-        (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))
-    (a : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙
-      (sheafToPresheaf J AddCommGrpCat.{u} ⋙
-        (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived p)
-    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ Sheaf.functorH J p)
-    (hη : η = a ≪≫ Functor.isoWhiskerLeft T
-      ((siteSectionsNatIso J U p).symm ≪≫ siteExtNatIso J U p ≪≫
-        extSourceNatIso e p ≪≫ siteHNatIso J p)) (F : A) (x : K.obj F) :
-    moduleComparisonEquiv η F x =
-      (Abelian.Ext.precompAddEquiv e (T.obj F) p).symm
-        ((siteSectionsObjIso J U (T.obj F) p).inv ((a.app F).hom x)) := by
+private theorem moduleComparisonEquiv_apply_of_component
+    {A : Type*} [Category A] {R : Type u} [Ring R]
+    {K : A ⥤ ModuleCat.{u} R} {L : A ⥤ AddCommGrpCat.{u}}
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (F : A)
+    {B C : AddCommGrpCat.{u}}
+    (a : (forget₂ _ AddCommGrpCat.{u}).obj (K.obj F) ≅ B)
+    (b : C ≅ B) (c : C ≃+ L.obj F)
+    (h : η.app F = a ≪≫ b.symm ≪≫ c.toAddCommGrpIso) (x : K.obj F) :
+    moduleComparisonEquiv η F x = c (b.inv (a.hom x)) := by
   run_tac do Lean.logInfo m!"PS043 helper start: {← IO.monoMsNow}"
-  subst η
-  have h := sectionsComparisonNatIso_apply a (siteSectionsNatIso J U p)
-    (siteExtNatIso J U p ≪≫ extSourceNatIso e p ≪≫ siteHNatIso J p) F x
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let expected ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
-    let actual ← Lean.Meta.zetaReduce
-      (← Lean.instantiateMVars
-        (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h)))))
-    ps043ExprDiff 12 "type" actual expected
-  simpa only [sectionsComparisonNatIso, siteExtNatIso, siteHNatIso,
-    Iso.refl_trans, Iso.trans_refl, extSourceNatIso, siteSectionsObjIso] using h
+  change (η.app F).hom x = _
+  rw [h]
+  rfl
   run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
 
 set_option maxHeartbeats 800000 in
@@ -143,9 +125,22 @@ theorem ext_sections_factorization
     unfold moduleCohomologyExtResolutionNatIso
     rfl
   run_tac do Lean.logInfo m!"PS043 iso equality proved: {← IO.monoMsNow}"
-  have h := moduleComparisonEquiv_siteSections (Opens.grothendieckTopology X)
-    (K := RingedSpace.moduleCohomology X.toRingedSpace p)
-    ⊤ p (terminalSourceIso X) a (moduleCohomologyExtResolutionNatIso X p) hη F x
+  have hcomp : (moduleCohomologyExtResolutionNatIso X p).app F =
+      a.app F ≪≫ (siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p).symm ≪≫
+        (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm.toAddCommGrpIso := by
+    rw [hη, NatIso.trans_app]
+    apply congrArg (fun e ↦ a.app F ≪≫ e)
+    change ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
+      siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
+        extSourceNatIso (terminalSourceIso X) p ≪≫
+          siteHNatIso (Opens.grothendieckTopology X) p).app (T.obj F) = _
+    simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
+    rfl
+  run_tac do Lean.logInfo m!"PS043 component equality proved: {← IO.monoMsNow}"
+  have h := moduleComparisonEquiv_apply_of_component
+    (moduleCohomologyExtResolutionNatIso X p) F (a.app F)
+    (siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p)
+    (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm hcomp x
   run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
   run_tac Lean.Elab.Tactic.withMainContext do
     let expected ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
