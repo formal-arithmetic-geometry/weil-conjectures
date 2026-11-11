@@ -73,7 +73,7 @@ variable (O : Sheaf J CommRingCat.{u})
 private def regularScalarAux
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     End (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
-  (SheafOfModules.unitHomEquiv _).symm ⟨s.val, s.property⟩
+  .of ((SheafOfModules.unitHomEquiv _).symm ⟨s.val, s.property⟩)
 
 private abbrev sectionValueAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) : O.obj.obj X := s.val X
@@ -125,20 +125,20 @@ private theorem fractionMap_applyAux
 
 private theorem scalar_applyAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) (a : O.obj.obj X) :
-    (regularScalarAux O s).val.app X a = a * sectionValueAux O s X := by
+    (regularScalarAux O s).asHom.val.app X a = a * sectionValueAux O s X := by
   change a • sectionValueAux O s X = _
   rfl
 
 private theorem fractionMap_stepAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
-    (regularScalarAux O s).val ≫ fractionMapAux O s (n + 1) = fractionMapAux O s n := by
+    (regularScalarAux O s).asHom.val ≫ fractionMapAux O s (n + 1) = fractionMapAux O s n := by
   apply PresheafOfModules.hom_ext
   intro X
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro a
   change O.obj.obj X at a
-  change (fractionMapAux O s (n + 1)).app X ((regularScalarAux O s).val.app X a) =
+  change (fractionMapAux O s (n + 1)).app X ((regularScalarAux O s).asHom.val.app X a) =
     (fractionMapAux O s n).app X a
   rw [fractionMap_applyAux, scalar_applyAux, fractionMap_applyAux, map_mul, pow_succ]
   calc
@@ -150,12 +150,12 @@ private def localizationPresheafCoconeAux
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     Cocone (Functor.ofSequence (X := fun _ : ℕ ↦
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
-        (fun _ ↦ regularScalarAux O s) ⋙ SheafOfModules.forget _) where
+        (fun _ ↦ (regularScalarAux O s).asHom) ⋙ SheafOfModules.forget _) where
   pt := ringedSectionLocalizationPresheafOfUniverses O s
   ι := NatTrans.ofSequence (fun n ↦ fractionMapAux O s n) (by
     intro n
     change ((SheafOfModules.forget _).map
-      ((Functor.ofSequence (fun _ ↦ regularScalarAux O s)).map _)) ≫ _ = _ ≫ 𝟙 _
+      ((Functor.ofSequence (fun _ ↦ (regularScalarAux O s).asHom)).map _)) ≫ _ = _ ≫ 𝟙 _
     rw [Functor.ofSequence_map_homOfLE_succ, Category.comp_id]
     exact fractionMap_stepAux O s n)
 
@@ -169,7 +169,7 @@ private def localizationPresheafCoconeIsColimitAux
     (fun _ ↦ ModuleCat.ofHom (LinearMap.lsmul R R (sectionValueAux O s X)))
   let c := (PresheafOfModules.evaluation _ X).mapCocone
     (localizationPresheafCoconeAux O s)
-  let F := (Functor.ofSequence (fun _ ↦ regularScalarAux O s) ⋙
+  let F := (Functor.ofSequence (fun _ ↦ (regularScalarAux O s).asHom) ⋙
     SheafOfModules.forget _) ⋙ PresheafOfModules.evaluation _ X
   let t : D ⟶ F := NatTrans.ofSequence (fun _ ↦ 𝟙 (ModuleCat.of R R)) (by
     intro n
@@ -178,7 +178,7 @@ private def localizationPresheafCoconeIsColimitAux
     apply LinearMap.ext
     intro a
     change O.obj.obj X at a
-    change (sectionValueAux O s X) * a = (regularScalarAux O s).val.app X a
+    change (sectionValueAux O s X) * a = (regularScalarAux O s).asHom.val.app X a
     rw [scalar_applyAux, mul_comm])
   let et : D ≅ F := NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intro i j f; exact t.naturality f)
   let e := Classical.choose (scalar_localization_colimitAux (sectionValueAux O s X))
@@ -210,10 +210,10 @@ private def localizationSheafMapAux
 
 private theorem localizationSheafMap_stepAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
-    regularScalarAux O s ≫ localizationSheafMapAux O s (n + 1) =
+    (regularScalarAux O s).asHom ≫ localizationSheafMapAux O s (n + 1) =
       localizationSheafMapAux O s n := by
   apply SheafOfModules.hom_ext
-  change (regularScalarAux O s).val ≫ (fractionMapAux O s (n + 1) ≫ _) = _
+  change (regularScalarAux O s).asHom.val ≫ (fractionMapAux O s (n + 1) ≫ _) = _
   rw [← Category.assoc, fractionMap_stepAux]
   rfl
 
@@ -221,12 +221,12 @@ private def localizationSheafCoconeAux
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     Cocone (Functor.ofSequence (X := fun _ : ℕ ↦
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
-        (fun _ ↦ regularScalarAux O s)) where
+        (fun _ ↦ (regularScalarAux O s).asHom)) where
   pt := ringedSectionLocalizationOfUniverses O s
   ι := NatTrans.ofSequence (fun n ↦ localizationSheafMapAux O s n) (by
     intro n
     rw [Functor.ofSequence_map_homOfLE_succ, Functor.const_obj_map]
-    change regularScalarAux O s ≫ _ = _ ≫ 𝟙 _
+    change (regularScalarAux O s).asHom ≫ _ = _ ≫ 𝟙 _
     rw [Category.comp_id]
     exact localizationSheafMap_stepAux O s n)
 
