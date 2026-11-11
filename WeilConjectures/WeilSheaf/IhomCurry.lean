@@ -77,13 +77,15 @@ theorem ProEtaleWeilSheaf.homToIhom_comm (M D N : ProEtaleWeilSheaf k₀ l X)
     (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
     (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
         Mod.evaluation D.carrier N.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           M.carrier.X D.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
     (WeilSheaf.frobeniusPullback k₀ l X).map κ ≫ (ProEtaleWeilSheaf.ihom k₀ l X D N).str.hom =
       M.str.hom ≫ κ := by
-  set Fr := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+  set Fr :=
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
   have : IsIso D.str.hom.hom := inferInstanceAs (IsIso ((Mod.forget _).map D.str.hom))
   have he := ProEtaleWeilSheaf.ihom_evaluation_str D N
   apply Mod.hom_ext
@@ -103,9 +105,10 @@ noncomputable def ProEtaleWeilSheaf.homToIhom (M D N : ProEtaleWeilSheaf k₀ l 
     (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
     (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
         Mod.evaluation D.carrier N.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           M.carrier.X D.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
     M ⟶ ProEtaleWeilSheaf.ihom k₀ l X D N :=
   ObjectProperty.homMk ⟨κ, ProEtaleWeilSheaf.homToIhom_comm M D N κ hκ⟩
@@ -116,9 +119,10 @@ lemma ProEtaleWeilSheaf.homToIhom_hom_f (M D N : ProEtaleWeilSheaf k₀ l X)
     (κ : M.carrier ⟶ (AdicSheaf.ihom D.carrier).obj N.carrier)
     (hκ : (M.str.hom.hom ⊗ₘ D.str.hom.hom) ≫ (κ.hom ▷ D.carrier.X ≫
         Mod.evaluation D.carrier N.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           M.carrier.X D.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (κ.hom ▷ D.carrier.X ≫ Mod.evaluation D.carrier N.carrier) ≫ N.str.hom.hom) :
     (ProEtaleWeilSheaf.homToIhom M D N κ hκ).hom.f = κ :=
   rfl
