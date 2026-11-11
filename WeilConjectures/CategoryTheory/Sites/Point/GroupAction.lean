@@ -83,9 +83,11 @@ noncomputable abbrev presheafFiberAction (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) :
   ρ :=
     { toFun σ := .of <| Φ.presheafFiberAct act P σ
       map_one' := by
+        apply End.ext
         refine Φ.presheafFiber_hom_ext fun X x ↦ ?_
         rw [toPresheafFiber_presheafFiberAct, act_one_app, End.one_asHom, Category.comp_id]
       map_mul' σ τ := by
+        apply End.ext
         refine Φ.presheafFiber_hom_ext fun X x ↦ ?_
         rw [toPresheafFiber_presheafFiberAct, End.mul_asHom, toPresheafFiber_presheafFiberAct_assoc,
           toPresheafFiber_presheafFiberAct, act_mul_app] }
@@ -97,7 +99,7 @@ lemma presheafFiberAction_V (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) :
 
 @[simp]
 lemma presheafFiberAction_ρ (P : Cᵒᵖ ⥤ AddCommGrpCat.{w}) (σ : G) :
-    (Φ.presheafFiberAction act P).ρ σ = .of (Φ.presheafFiberAct act P σ :=)
+    (Φ.presheafFiberAction act P).ρ σ = .of (Φ.presheafFiberAct act P σ) :=
   rfl
 
 /-- The fibre functor on abelian sheaves, with the action of `G` on the fibres. -/
@@ -373,6 +375,7 @@ variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrp
 /-- `G` acts trivially on the fibre of a constant sheaf. -/
 lemma sheafFiberAction_constantSheaf_ρ (A : AddCommGrpCat.{w}) (σ : G) :
     ((Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A)).ρ σ = .of (𝟙 _) := by
+  apply End.ext
   change Φ.presheafFiberAct act (CategoryTheory.sheafify J ((Functor.const Cᵒᵖ).obj A)) σ = 𝟙 _
   rw [← cancel_epi (Φ.presheafFiber.map (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj A))),
     presheafFiber_map_presheafFiberAct, presheafFiberAct_const, Category.id_comp,
