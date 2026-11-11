@@ -67,7 +67,7 @@ theorem exists_connected_torsor_constant_set_pullback
   let Q := Aut A
   let δ : ULift.{u + 1} Q ≃* Aut A := MulEquiv.ulift
   -- Use the underlying morphisms of the automorphisms to define the torsor action.
-  let v (q : ULift.{u + 1} Q) : A ⟶ A := (δ q).hom
+  let v (q : ULift.{u + 1} Q) : A ⟶ A := (δ q).asIso.hom
   have hv (b d : (FiniteEtale.fiber s).obj A) :
       ∃! q, (FiniteEtale.fiber s).map (v q) b = d := by
     have hb := PreGaloisCategory.evaluation_aut_bijective_of_isGalois
@@ -84,11 +84,11 @@ theorem exists_connected_torsor_constant_set_pullback
       smul q := (v q).hom.left
       smul_π q := FiniteEtale.hom_left_comp (v q)
       one_smul := by
-        change ((δ 1).hom).hom.left = _
+        change ((δ 1).asIso.hom).hom.left = _
         rw [map_one]
         rfl
       mul_smul q r := by
-        change ((δ (q * r)).hom).hom.left = _
+        change ((δ (q * r)).asIso.hom).hom.left = _
         rw [map_mul]
         rfl
       isIso_sigmaDesc := FiniteEtale.isIso_sigmaDesc_of_existsUnique s A v hv }
