@@ -309,7 +309,6 @@ private theorem scalarPushRestriction_inv (n : ℕ)
      AdicCompletion.modulesDerived, AdicCompletion.finiteModulesDerived] at *
   unfold scalarPushRestriction
   apply restrictionPushIso_inv
-  try simp only [CondensedRing.scalarSixPullHom, Adjunction.pushHomOfComapIso]
   exact
     ((mateEquiv _ _).apply_symm_apply (TwoSquare.mk _ _ _ _ _))
 
