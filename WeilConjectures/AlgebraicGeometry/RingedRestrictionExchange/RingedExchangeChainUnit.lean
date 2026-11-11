@@ -68,7 +68,7 @@ def ordinary (r : StrictTowerRingedSquare sq) :
     verticalPush r ⋙ basePull r ⟶ upperPull r ⋙ targetPush r :=
   (mateEquiv (proEtaleRingModuleAdjunction f r.RY r.RX r.cf)
     (proEtaleRingModuleAdjunction f' r.RY' r.RX' r.cf')
-    (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom))
 
 /-- The derived counit mate for the ordinary-derived adjunctions. Source: Stacks 09T5
 (blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
@@ -128,11 +128,11 @@ private theorem chain_mate (a : F ⊣ G) (a' : F' ⊣ G')
       F.mapDerivedCategory ⋙ H.mapDerivedCategory)
     (hδ : δ = Functor.mapDerivedCategorySquareIso θ)
     (m : G ⋙ P ⟶ H ⋙ G')
-    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans)
+    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)))
     (e : G.rightDerivedFunctor ⋙ P.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ G'.rightDerivedFunctor)
     (he : e = (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)).natTrans)
+      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)))
     (K : CochainComplex A ℤ)
     (β : DerivedCategory.Q.obj ((P.mapHomologicalComplex (.up ℤ)).obj
         ((G.mapHomologicalComplex (.up ℤ)).obj K)) ⟶
@@ -180,11 +180,11 @@ private theorem scheme_chain_mate (a : F ⊣ G) (a' : F' ⊣ G')
       F.mapDerivedCategory ⋙ H.mapDerivedCategory)
     (hδ : δ = Functor.mapDerivedCategorySquareIso θ)
     (m : G ⋙ P ⟶ H ⋙ G')
-    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans)
+    (hm : m = (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)))
     (e : G.rightDerivedFunctor ⋙ P.mapDerivedCategory ⟶
       H.mapDerivedCategory ⋙ G'.rightDerivedFunctor)
     (he : e = (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
-      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)).natTrans)
+      a'.mapDerivedCategoryRightDerivedAdjunction (TwoSquare.mk _ _ _ _ δ.hom)))
     (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :
     P.mapDerivedCategory.map (chainComparison G K) ≫
         e.app (DerivedCategory.Q.obj K) ≫
@@ -198,14 +198,14 @@ end SchemeMate
 private theorem ordinary_mate (r : StrictTowerRingedSquare sq) :
     ordinary r = (mateEquiv (proEtaleRingModuleAdjunction f r.RY r.RX r.cf)
       (proEtaleRingModuleAdjunction f' r.RY' r.RX' r.cf')
-      (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)).natTrans := rfl
+      (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)) := rfl
 
 private theorem exchange_mate (r : StrictTowerRingedSquare sq) :
     exchange r = (mateEquiv
       (proEtaleRingModuleAdjunction f r.RY r.RX r.cf).mapDerivedCategoryRightDerivedAdjunction
       (proEtaleRingModuleAdjunction f' r.RY' r.RX' r.cf').mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ (proEtaleAmbientRingedPullbackComparison sq
-        r.RX r.RY r.RX' r.RY' r.cf r.cg r.cg' r.cf' r.coherent).hom)).natTrans := rfl
+        r.RX r.RY r.RX' r.RY' r.cf r.cg r.cg' r.cf' r.coherent).hom)) := rfl
 
 /-- The chosen exchange commutes with the canonical right-derived cochain units.
 Source: Stacks Project, Derived Categories, Tags 070K and 09T5

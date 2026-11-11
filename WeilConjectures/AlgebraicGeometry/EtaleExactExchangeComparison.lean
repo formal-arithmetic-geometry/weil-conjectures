@@ -89,7 +89,6 @@ theorem derivedBaseChangeMap_eq_exact
   change _ ≫ _ = _ ≫ _
   simp only [Category.assoc]
   erw [← R.map_comp_assoc]
-  dsimp -failIfUnchanged only [TwoSquare.natTrans]
   try simp only [← R.map_comp, Category.assoc]
   simp only [Functor.map_comp, Category.assoc]
   have hh := congrArg R.map hm.symm

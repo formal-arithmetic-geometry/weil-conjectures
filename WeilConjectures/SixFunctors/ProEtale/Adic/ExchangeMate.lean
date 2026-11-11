@@ -188,12 +188,12 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
     (mateEquiv (adicLowerStarEquivalence l a).symm.toAdjunction
         (adicLowerStarEquivalence l b).symm.toAdjunction
         (TwoSquare.mk _ _ _ _ (adicLowerStarComp l J b.inv ≪≫ adicLowerStarCongr l c' ≪≫
-          (adicLowerStarComp l a.inv J).symm).hom)).natTrans =
+          (adicLowerStarComp l a.inv J).symm).hom)) =
     (adicLowerStarComp l a.hom J).hom ≫ (adicLowerStarCongr l c).hom ≫
       (adicLowerStarComp l J b.hom).inv := by
   -- Both sides are compared on sections, where they are restriction maps of `M.X`; see
   -- `AlgebraicGeometry.ProEtale.adicLowerStarComp_exchange`.
-  refine congrArg TwoSquare.natTrans (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
+  refine (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
     fun M ↦ Mod.hom_ext _ _ (ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))))
   have key := congrArg (fun φ ↦ φ.hom.app V)
     (lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X)
@@ -244,7 +244,7 @@ lemma mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom :
     (mateEquiv (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction
         (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction
         (TwoSquare.mk _ _ _ _
-          (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)).natTrans =
+          (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)) =
     (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
@@ -262,7 +262,7 @@ lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     (mateEquiv (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
         (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
         (TwoSquare.mk _ _ _ _
-          (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)).natTrans =
+          (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)) =
       (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom := by
   have h₁ := iterated_mateEquiv_conjugateEquiv
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
@@ -272,6 +272,6 @@ lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     (TwoSquare.mk _ _ _ _ (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)
   rw [conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv,
     ← mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom] at h₁
-  exact congrArg TwoSquare.natTrans ((mateEquiv _ _).injective h₁)
+  exact ((mateEquiv _ _).injective h₁)
 
 end AlgebraicGeometry.ProEtale

@@ -116,7 +116,7 @@ theorem finitePerfectAdicQuotientStrictTransition_app (X : Scheme.{t}) {A : Type
         ProEtale.localizationRestriction
           (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) V.hom inferInstance).map
           ((completedAdicChangeQuotientTransition X d n).app N) ≫
-        (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n).natTrans.app
+        (finitePerfectAdicQuotientStrictSquare X d φ hcompat V n).app
           ((completedAdicChange X (completedAdicCommProjection X d n)).obj N) := by
   ext U x
   with_unfolding_all rfl

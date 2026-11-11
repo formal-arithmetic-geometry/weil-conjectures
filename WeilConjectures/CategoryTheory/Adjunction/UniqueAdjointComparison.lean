@@ -45,7 +45,7 @@ noncomputable def coefficientAdjointComparison
     {J : D ⥤ C} {J' : D' ⥤ C'}
     (a : F ⊣ J) (a' : F' ⊣ J') (b : F ⋙ T ≅ S ⋙ F') :
     J ⋙ S ⟶ T ⋙ J' :=
-  (mateEquiv a a' (TwoSquare.mk S F F' T b.inv)).natTrans
+  (mateEquiv a a' (TwoSquare.mk S F F' T b.inv))
 
 /-- The composition identity for coefficient comparisons, with explicit
 composition isomorphisms for source and target scalar extension.

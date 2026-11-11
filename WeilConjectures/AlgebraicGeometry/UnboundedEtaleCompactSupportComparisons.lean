@@ -54,8 +54,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
-      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α) =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)) := by
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
@@ -428,14 +428,14 @@ private lemma open_exchange_mate_coefficients
         (openImmersionLowerShriekUpperStarAdjunction B l
           ).mapDerivedCategoryAdjunction).symm
         (TwoSquare.mk _ _ _ _
-          (exactDerivedSquareUpperStarIso B sq.toCommSq).inv)).natTrans := by
+          (exactDerivedSquareUpperStarIso B sq.toCommSq).inv)) := by
   let := isIso_openImmersionLowerShriekBaseChangeMap B sq
   have h := mateEquiv_eq_of_unit
     (openImmersionLowerShriekUpperStarAdjunction B r).mapDerivedCategoryAdjunction
     (openImmersionLowerShriekUpperStarAdjunction B l).mapDerivedCategoryAdjunction
     (TwoSquare.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B sq).hom)
     (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq.toCommSq).inv) (fun K ↦ ?_)
-  · exact (congrArg TwoSquare.natTrans ((mateEquiv _ _).symm_apply_eq.mpr h.symm)).symm
+  · exact (((mateEquiv _ _).symm_apply_eq.mpr h.symm)).symm
   have hK := Adjunction.mapDerivedCategoryAdjunction_mate
     (openImmersionLowerShriekUpperStarAdjunction B r)
     (openImmersionLowerShriekUpperStarAdjunction B l)
@@ -471,7 +471,7 @@ private lemma unbounded_open_base_change
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b) :
-    ((unboundedFormalism A).baseChange t l r b sq.w).natTrans =
+    ((unboundedFormalism A).baseChange t l r b sq.w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) sq).hom := by
   rw [ExchangeFormalism.baseChange, unbounded_sq_iso]
@@ -490,12 +490,12 @@ private lemma unbounded_open_exchange
     (sq : IsPullback t l r b) :
     haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := unboundedFormalism A) sq
-    ((unboundedFormalism A).exchange t l r b sq.w).natTrans =
+    ((unboundedFormalism A).exchange t l r b sq.w) =
       openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange
     (F := unboundedFormalism A) sq
   dsimp only [ExchangeFormalism.exchange, openImmersionLowerShriekLowerStarExchange]
-  have hh : inv ((unboundedFormalism A).baseChange t l r b sq.w).natTrans =
+  have hh : inv ((unboundedFormalism A).baseChange t l r b sq.w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) sq).inv := by
     apply IsIso.inv_eq_of_hom_inv_id
@@ -1053,7 +1053,7 @@ private lemma unbounded_base_change_refinement
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
-    ((unboundedFormalism A).baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
+    ((unboundedFormalism A).baseChange (𝟙 X) c.i d.i r.hom hr.flip.w) =
       Functor.whiskerRight ((unboundedFormalism A).pbId X).hom
           ((unboundedFormalism A).sh c.i) ≫
         (Functor.leftUnitor _).hom ≫
@@ -1067,7 +1067,7 @@ private lemma unbounded_base_change_refinement
         (refinementLowerShriekBaseChangeDerivedIso B r hr).hom))
     ((unboundedFormalism A).sqIso (𝟙 X) c.i d.i r.hom hr.flip.w).hom (fun K ↦ ?_)
   · rw [ExchangeFormalism.baseChange, ← key]
-    exact congrArg TwoSquare.natTrans (Equiv.symm_apply_apply _ _)
+    exact (Equiv.symm_apply_apply _ _)
   rw [ExchangeFormalism.sqIso_eq _ _ _ _ _ _ d.i (Category.id_comp _) r.i_hom]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Functor.map_comp]

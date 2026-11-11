@@ -190,8 +190,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
-      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α) =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)) := by
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
@@ -226,11 +226,11 @@ private lemma inverse_mates_unit
     (e : L₁ ⋙ F₂ ≅ F₁ ⋙ L₂)
     (α : TwoSquare U₁ L₂ L₁ U₂)
     (hα : ∀ K, adj₄.unit.app (L₁.obj K) ≫ U₂.map (e.hom.app K) =
-      L₁.map (adj₃.unit.app K) ≫ α.natTrans.app (F₁.obj K)) (K : D) :
+      L₁.map (adj₃.unit.app K) ≫ α.app (F₁.obj K)) (K : D) :
     (adj₃.homEquiv _ _
-      ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app K)) ≫
-      (mateEquiv adj₂ adj₁ α).natTrans.app (F₂.obj K) = R₁.map (adj₄.unit.app K) := by
-  let γ := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv)).natTrans
+      ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv)).app K)) ≫
+      (mateEquiv adj₂ adj₁ α).app (F₂.obj K) = R₁.map (adj₄.unit.app K) := by
+  let γ := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ e.inv))
   change (adj₃.homEquiv _ _ (γ.app K)) ≫ _ = _
   simp only [Adjunction.homEquiv_unit, mateEquiv_apply, NatTrans.comp_app,
     Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.associator_hom_app,
@@ -239,13 +239,13 @@ private lemma inverse_mates_unit
     Category.comp_id, Category.assoc]
   change adj₃.unit.app (R₁.obj K) ≫ U₁.map (γ.app K) ≫
     adj₁.unit.app (U₁.obj (R₂.obj (F₂.obj K))) ≫
-    R₁.map (α.natTrans.app (R₂.obj (F₂.obj K))) ≫
+    R₁.map (α.app (R₂.obj (F₂.obj K))) ≫
     R₁.map (U₂.map (adj₂.counit.app (F₂.obj K))) = _
   rw [reassoc_of% (adj₁.unit.naturality (U₁.map (γ.app K)))]
   rw [reassoc_of% (adj₁.unit.naturality (adj₃.unit.app (R₁.obj K)))]
   simp only [← R₁.map_comp]
-  rw [reassoc_of% (α.natTrans.naturality (γ.app K))]
-  rw [← Category.assoc (L₁.map _) (α.natTrans.app _) _, ← hα]
+  rw [reassoc_of% (α.naturality (γ.app K))]
+  rw [← Category.assoc (L₁.map _) (α.app _) _, ← hα]
   rw [Category.assoc]
   rw [← U₂.map_comp (L₂.map (γ.app K)) (adj₂.counit.app (F₂.obj K))]
   rw [mateEquiv_counit]
@@ -494,14 +494,14 @@ private lemma open_exchange_mate_coefficients
         (openImmersionLowerShriekUpperStarAdjunction B l
           ).mapDerivedCategoryAdjunction).symm
         (TwoSquare.mk _ _ _ _
-          (exactDerivedSquareUpperStarIso B sq.toCommSq).inv)).natTrans := by
+          (exactDerivedSquareUpperStarIso B sq.toCommSq).inv)) := by
   let := isIso_openImmersionLowerShriekBaseChangeMap B sq
   have h := mateEquiv_eq_of_unit
     (openImmersionLowerShriekUpperStarAdjunction B r).mapDerivedCategoryAdjunction
     (openImmersionLowerShriekUpperStarAdjunction B l).mapDerivedCategoryAdjunction
     (TwoSquare.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B sq).hom)
     (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq.toCommSq).inv) (fun K ↦ ?_)
-  · exact (congrArg TwoSquare.natTrans ((mateEquiv _ _).symm_apply_eq.mpr h.symm)).symm
+  · exact (((mateEquiv _ _).symm_apply_eq.mpr h.symm)).symm
   have hK := Adjunction.mapDerivedCategoryAdjunction_mate
     (openImmersionLowerShriekUpperStarAdjunction B r)
     (openImmersionLowerShriekUpperStarAdjunction B l)
@@ -546,7 +546,7 @@ private lemma unbounded_open_base_change
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b) :
-    ((unboundedFormalism A).baseChange t l r b sq.w).natTrans =
+    ((unboundedFormalism A).baseChange t l r b sq.w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) sq).hom := by
   rw [ExchangeFormalism.baseChange, unbounded_sq_iso]
@@ -565,12 +565,12 @@ private lemma unbounded_open_exchange
     (sq : IsPullback t l r b) :
     haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := unboundedFormalism A) sq
-    ((unboundedFormalism A).exchange t l r b sq.w).natTrans =
+    ((unboundedFormalism A).exchange t l r b sq.w) =
       openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange
     (F := unboundedFormalism A) sq
   dsimp only [ExchangeFormalism.exchange, openImmersionLowerShriekLowerStarExchange]
-  have hh : inv ((unboundedFormalism A).baseChange t l r b sq.w).natTrans =
+  have hh : inv ((unboundedFormalism A).baseChange t l r b sq.w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) sq).inv := by
     apply IsIso.inv_eq_of_hom_inv_id
@@ -993,7 +993,7 @@ private lemma unbounded_base_change_refinement
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
-    ((unboundedFormalism A).baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
+    ((unboundedFormalism A).baseChange (𝟙 X) c.i d.i r.hom hr.flip.w) =
       Functor.whiskerRight ((unboundedFormalism A).pbId X).hom
           ((unboundedFormalism A).sh c.i) ≫
         (Functor.leftUnitor _).hom ≫
@@ -1007,7 +1007,7 @@ private lemma unbounded_base_change_refinement
         (refinementLowerShriekBaseChangeDerivedIso B r hr).hom))
     ((unboundedFormalism A).sqIso (𝟙 X) c.i d.i r.hom hr.flip.w).hom (fun K ↦ ?_)
   · rw [ExchangeFormalism.baseChange, ← key]
-    exact congrArg TwoSquare.natTrans (Equiv.symm_apply_apply _ _)
+    exact (Equiv.symm_apply_apply _ _)
   rw [ExchangeFormalism.sqIso_eq _ _ _ _ _ _ d.i (Category.id_comp _) r.i_hom]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Functor.map_comp]
@@ -1445,7 +1445,7 @@ theorem unboundedEtaleCompactSupport_tower_adjunct
         (upperStar B k).mapDerivedCategory.map (e.hom.app M) =
       (upperStar B r).mapDerivedCategory.map
           ((derivedOpenImmersionLowerShriekUpperStarAdjunction B i).unit.app M) ≫
-        α.natTrans.app ((openImmersionLowerShriek B i).mapDerivedCategory.obj M) := by
+        α.app ((openImmersionLowerShriek B i).mapDerivedCategory.obj M) := by
     exact Adjunction.mapDerivedCategoryAdjunction_mate
       (openImmersionLowerShriekUpperStarAdjunction B i)
       (openImmersionLowerShriekUpperStarAdjunction B k)
@@ -1562,12 +1562,12 @@ private lemma unbounded_shriek_base_change
     {v : Y' ⟶ Y} {v' : X' ⟶ X}
     (sq : IsPullback v' f' f v)
     (c : Compactification f) :
-    ((unboundedFormalism A).shriekBaseChangeOfIsPullback sq c).natTrans =
+    ((unboundedFormalism A).shriekBaseChangeOfIsPullback sq c) =
       unboundedEtaleCompactSupportExchange A sq c := by
   let := CompactSupportFormalism.HasBaseChange.isIso_baseChange
     (F := unboundedFormalism A) (c.isPullback_i_ofIsPullback sq)
   have hh : inv ((unboundedFormalism A).baseChange v' (c.ofIsPullback sq).i c.i
-      (pullback.fst c.g v) (c.isPullback_i_ofIsPullback sq).w).natTrans =
+      (pullback.fst c.g v) (c.isPullback_i_ofIsPullback sq).w) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         (ModuleCat.{u + 1} A) (c.isPullback_i_ofIsPullback sq)).inv := by
     apply IsIso.inv_eq_of_hom_inv_id
@@ -1576,7 +1576,7 @@ private lemma unbounded_shriek_base_change
   rw [exchange_normalization_general]
   dsimp only [CompactSupportFormalism.shriekBaseChangeOfIsPullback,
     CompactSupportFormalism.shriekBaseChange, ExchangeFormalism.shriekBaseChange,
-    TwoSquare.hComp, TwoSquare.natTrans, TwoSquare.mk]
+    TwoSquare.hComp, TwoSquare.mk]
   rw [unbounded_pf_base_change, hh]
   rfl
 
@@ -1587,7 +1587,7 @@ private lemma unbounded_chosen_base_change
     {v : Y' ⟶ Y} {v' : X' ⟶ X}
     [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
     (sq : IsPullback v' f' f v) :
-    ((unboundedFormalism A).lowerShriekBaseChange sq).natTrans =
+    ((unboundedFormalism A).lowerShriekBaseChange sq) =
       unboundedEtaleCompactSupportBaseChange A sq := by
   let B := ModuleCat.{u + 1} A
   let c := HasCompactification.compactification f
@@ -1638,13 +1638,13 @@ theorem unboundedEtaleCompactSupport_baseChange
     infer_instance
   · intro c
     rw [← unbounded_chosen_base_change A sq]
-    have h := congrArg TwoSquare.natTrans
+    have h := 
       ((unboundedFormalism A).lowerShriekBaseChange_eq sq c)
     rw [← (unboundedFormalism A).shriekIso_symm c
       (HasCompactification.compactification f)] at h
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
       unbounded_shriek_base_change, unbounded_shriek_iso, Iso.symm_hom,
-      TwoSquare.mk, TwoSquare.natTrans, Category.assoc] at h
+      TwoSquare.mk, Category.assoc] at h
     convert! h using 1
 
 end UnboundedBaseChange
@@ -1689,8 +1689,8 @@ private lemma shriekBaseChange_arbitrary
     [QuasiCompact f'] (c : Compactification f) (c' : Compactification f')
     (h : c'.Z ⟶ c.Z) (hi : IsPullback g' c'.i c.i h)
     (hp : IsPullback h c'.g c.g g) :
-    (F.shriekBaseChange c c' h hi hp).natTrans =
-      (F.shriekBaseChangeOfIsPullback sq c).natTrans ≫
+    (F.shriekBaseChange c c' h hi hp) =
+      (F.shriekBaseChangeOfIsPullback sq c) ≫
         Functor.whiskerLeft (F.pb g') (F.shriekIso (c.ofIsPullback sq) c').hom := by
   let r := pullbackRefinement sq c c' h hi hp
   have hr := pullbackRefinement_cartesian sq c c' h hi hp
@@ -1733,7 +1733,7 @@ private lemma chosenBaseChange_arbitrary
     (HasCompactification.compactification f')]
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, TwoSquare.mk, TwoSquare.natTrans, Category.assoc]
+    Functor.whiskerRight_app, TwoSquare.mk, Category.assoc]
 
 private lemma chosenBaseChange_paste_horiz
     (F : CompactSupportFormalism.{w, v, u}) [F.HasProperExchange]
@@ -1764,7 +1764,7 @@ private lemma chosenBaseChange_paste_horiz
     F.shriekBaseChange_paste_horiz c c' c'' h₁ h₂ hi₁ hp₁ hi₂ hp₂ hi hp]
   ext K
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans,
+    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc, ExchangeFormalism.pbComp'_rfl,
@@ -1819,13 +1819,13 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_horiz
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (unboundedEtaleUpperStarCompIso A w' v').inv
         (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f'') := by
-  have h := congrArg TwoSquare.natTrans
+  have h := 
     (chosenBaseChange_paste_horiz (unboundedFormalism A) sq₁ sq₂ sq₃)
   have hc {S T U : Scheme.{u}} (a : S ⟶ T) (b : T ⟶ U) :
       (unboundedFormalism A).pbComp a b = unboundedEtaleUpperStarCompIso A a b := rfl
   rw [hc, hc] at h
   simp only [unbounded_chosen_base_change, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans] at h
+    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk] at h
   change (_ : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
       (upperStar (ModuleCat.{u + 1} A) (w ≫ v)).mapDerivedCategory ⟶
       (upperStar (ModuleCat.{u + 1} A) (w' ≫ v')).mapDerivedCategory ⋙
@@ -1938,16 +1938,15 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_vert
       (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) vX).mapDerivedCategory
         (unboundedEtaleLowerShriekCompIso A f' g').hom  := by
-  have h₀ := congrArg TwoSquare.natTrans
+  have h₀ := 
     ((unboundedFormalism A).lowerShriekBaseChange_paste_vert sqf sqg sqgf)
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-    TwoSquare.mk, TwoSquare.natTrans, Category.assoc] at h₀
+    TwoSquare.mk, Category.assoc] at h₀
   have h := (Iso.eq_inv_comp (Functor.isoWhiskerRight
     ((unboundedFormalism A).lowerShriekCompIso f g)
     ((unboundedFormalism A).pb vZ))).mp h₀
   simp only [Functor.isoWhiskerRight_hom, unbounded_chosen_comp,
-    unbounded_chosen_base_change, TwoSquare.hComp, TwoSquare.mk,
-    TwoSquare.natTrans] at h
+    unbounded_chosen_base_change, TwoSquare.hComp, TwoSquare.mk] at h
   change (_ : ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
       rightDerivedLowerShriek (ModuleCat.{u + 1} A) g) ⋙
         (upperStar (ModuleCat.{u + 1} A) vZ).mapDerivedCategory ⟶
@@ -2611,7 +2610,7 @@ private theorem bounded_open_isIso
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b) :
-    IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} A)).baseChange t l r b sq.w).natTrans :=
+    IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} A)).baseChange t l r b sq.w) :=
   CompactSupportFormalism.HasBaseChange.isIso_baseChange
     (F := derivedPlusFormalism (ModuleCat.{u + 1} A)) sq
 
@@ -2624,10 +2623,10 @@ private lemma plus_open_forward
     (sq : IsPullback t l r b)
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology B)) :
     DerivedCategory.Plus.ι.map
-      (((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans.app K) =
+      (((derivedPlusFormalism B).baseChange t l r b sq.w).app K) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         B sq).hom.app (DerivedCategory.Plus.ι.obj K) := by
-  have hβ := congrArg TwoSquare.natTrans (plus_open_base_change_mate B t l r b sq.w)
+  have hβ := (plus_open_base_change_mate B t l r b sq.w)
   change @Eq ((upperStar B t).mapDerivedCategoryPlus ⋙
       (openImmersionLowerShriek B l).mapDerivedCategoryPlus ⟶
       (openImmersionLowerShriek B r).mapDerivedCategoryPlus ⋙
@@ -2650,15 +2649,15 @@ private lemma plus_open_inverse
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b)
-    [IsIso ((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans]
+    [IsIso ((derivedPlusFormalism B).baseChange t l r b sq.w)]
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology B)) :
     DerivedCategory.Plus.ι.map
-      ((inv ((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans
+      ((inv ((derivedPlusFormalism B).baseChange t l r b sq.w)
         ).app K) =
       (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
         B sq).inv.app (DerivedCategory.Plus.ι.obj K) := by
   exact inverse_app_transport DerivedCategory.Plus.ι
-    ((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans K
+    ((derivedPlusFormalism B).baseChange t l r b sq.w) K
     ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B sq).app
       (DerivedCategory.Plus.ι.obj K)) (plus_open_forward B sq K)
 
@@ -2669,10 +2668,10 @@ private lemma proper_open_exchange_plus_generic
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b)
-    [IsIso ((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans]
+    [IsIso ((derivedPlusFormalism B).baseChange t l r b sq.w)]
     (K : DerivedCategory.Plus (Sheaf U'.smallEtaleTopology B)) :
     DerivedCategory.Plus.ι.map
-        (((derivedPlusFormalism B).exchange t l r b sq.w).natTrans.app K) ≫
+        (((derivedPlusFormalism B).exchange t l r b sq.w).app K) ≫
       (lowerStar B b).rightDerivedFunctorPlusCompatibility.hom.app
         ((openImmersionLowerShriek B l).mapDerivedCategoryPlus.obj K) =
     (openImmersionLowerShriek B r).mapDerivedCategory.map
@@ -2683,7 +2682,7 @@ private lemma proper_open_exchange_plus_generic
       (upperStar B b).mapDerivedCategoryPlus ⟶
       (upperStar B t).mapDerivedCategoryPlus ⋙
         (openImmersionLowerShriek B l).mapDerivedCategoryPlus :=
-    inv ((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans
+    inv ((derivedPlusFormalism B).baseChange t l r b sq.w)
   change DerivedCategory.Plus.ι.map
       ((mateEquiv (upperStarLowerStarAdjunction B t).derivedPlus
         (upperStarLowerStarAdjunction B b).derivedPlus
@@ -2737,7 +2736,7 @@ private lemma proper_open_exchange_plus
     (K : DerivedCategory.Plus (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     let := bounded_open_isIso A sq
     DerivedCategory.Plus.ι.map
-        (((derivedPlusFormalism (ModuleCat.{u + 1} A)).exchange t l r b sq.w).natTrans.app K) ≫
+        (((derivedPlusFormalism (ModuleCat.{u + 1} A)).exchange t l r b sq.w).app K) ≫
       (lowerStar (ModuleCat.{u + 1} A) b).rightDerivedFunctorPlusCompatibility.hom.app
         ((openImmersionLowerShriek (ModuleCat.{u + 1} A) l).mapDerivedCategoryPlus.obj K) =
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) r).mapDerivedCategory.map
@@ -2848,7 +2847,7 @@ private noncomputable def restriction_comp
     (κF : Fp ⋙ iD ⟶ iC ⋙ F) (κG : Gp ⋙ iE ⟶ iD ⋙ G) :
     (Fp ⋙ Gp) ⋙ iE ⟶ iC ⋙ (F ⋙ G) :=
   (TwoSquare.hComp (TwoSquare.mk _ _ _ _ κF)
-    (TwoSquare.mk _ _ _ _ κG)).natTrans
+    (TwoSquare.mk _ _ _ _ κG))
 
 private lemma restriction_comp_app
     {C D E Cp Dp Ep : Type*}
@@ -3210,12 +3209,12 @@ private noncomputable def native_bounded_exchange
     {U U' Z Z' : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
     {r : U ⟶ Z} {b : Z' ⟶ Z} [IsOpenImmersion r] [IsOpenImmersion l]
     (sq : IsPullback t l r b)
-    [IsIso ((derivedPlusFormalism B).baseChange t l r b sq.w).natTrans] :
+    [IsIso ((derivedPlusFormalism B).baseChange t l r b sq.w)] :
     (lowerStar B t).rightDerivedFunctorPlus ⋙
       (openImmersionLowerShriek B r).mapDerivedCategoryPlus ⟶
       (openImmersionLowerShriek B l).mapDerivedCategoryPlus ⋙
         (lowerStar B b).rightDerivedFunctorPlus :=
-  ((derivedPlusFormalism B).exchange t l r b sq.w).natTrans
+  ((derivedPlusFormalism B).exchange t l r b sq.w)
 
 private noncomputable def native_bounded_triangle_iso
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]

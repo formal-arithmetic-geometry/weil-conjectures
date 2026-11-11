@@ -39,7 +39,7 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D] {F : C ⥤ C} {G : D ⥤ D}
   {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
-  (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = eR.hom)
+  (h : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) = eR.hom)
 
 include h in
 /-- The unit of `L ⊣ R` intertwines the structure morphism of an algebra with that of its
@@ -153,9 +153,9 @@ variable [F.IsEquivalence] [G.IsEquivalence]
 mate along the adjunctions `F ⊣ F⁻¹` and `G ⊣ G⁻¹` is the conjugate of `eL⁻¹`
 (`CategoryTheory.iterated_mateEquiv_conjugateEquiv`), an isomorphism, and the units and counits
 of these adjunctions are isomorphisms. -/
-instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans := by
+instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) := by
   have hγ : IsIso (mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction
-      (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv))).natTrans := by
+      (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv))) := by
     erw [iterated_mateEquiv_conjugateEquiv adj adj F.asEquivalence.toAdjunction
       G.asEquivalence.toAdjunction (TwoSquare.mk _ _ _ _ eL.inv)]
     exact conjugateEquiv_iso _ _ (α := (eL.inv : F ⋙ L ⟶ L ⋙ G))
@@ -163,9 +163,9 @@ instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv
   set γ := mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction β
   have hβ : β = (mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction).symm γ :=
     ((mateEquiv _ _).symm_apply_apply β).symm
-  have (Y : D) : IsIso (β.natTrans.app Y) := by
+  have (Y : D) : IsIso (β.app Y) := by
     rw [hβ]
-    have : ∀ Z, IsIso (γ.natTrans.app Z) := fun Z ↦ @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hγ Z
+    have : ∀ Z, IsIso (γ.app Z) := fun Z ↦ @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hγ Z
     simp only [mateEquiv_symm_apply, TwoSquare.mk, NatTrans.comp_app, Functor.comp_obj,
       Functor.id_obj, Functor.leftUnitor_inv_app, Functor.whiskerRight_app,
       Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
@@ -183,10 +183,10 @@ instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv
 of `eL⁻¹` by definition, so `L ⊣ R` lifts along `eL` and `mateIso adj eL`
 (`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`). -/
 noncomputable def mateIso : R ⋙ F ≅ G ⋙ R :=
-  asIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans
+  asIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv))
 
 lemma mateEquiv_natTrans_eq_mateIso_hom :
-    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = (mateIso adj eL).hom :=
+    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) = (mateIso adj eL).hom :=
   rfl
 
 

@@ -57,16 +57,16 @@ theorem inverseMate_isIso_of_left_adjoints
     {G : A ⥤ C} {H : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
     (w : TwoSquare R₁ H G R₂)
-    [IsIso ((mateEquiv b₁ b₂).symm w).natTrans] :
-    IsIso ((mateEquiv a₁ a₂).symm w).natTrans := by
+    [IsIso ((mateEquiv b₁ b₂).symm w)] :
+    IsIso ((mateEquiv a₁ a₂).symm w) := by
   have hw : (mateEquiv a₁ a₂).symm w = TwoSquare.mk _ _ _ _
       (Functor.whiskerLeft G (a₂.leftAdjointUniq b₂).hom ≫
-        ((mateEquiv b₁ b₂).symm w).natTrans ≫
+        ((mateEquiv b₁ b₂).symm w) ≫
           Functor.whiskerRight (a₁.leftAdjointUniq b₁).inv H) := by
     apply (mateEquiv a₁ a₂).injective
     rw [Equiv.apply_symm_apply, mateEquiv_leftAdjointUniq, Equiv.apply_symm_apply]
   rw [hw]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   apply IsIso.comp_isIso'
   · exact (Functor.isoWhiskerLeft G (a₂.leftAdjointUniq b₂)).isIso_hom
   · apply IsIso.comp_isIso'
@@ -103,7 +103,7 @@ private def sequenceRestrictionPullbackInv {X B : Scheme.{u}} (j : X ⟶ B) :
       integralComparisonSequencePullback l L j ⋙ sequenceRestriction l E L ι X :=
   ((mateEquiv (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
-    (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv))
 
 section OpenRestriction
 
@@ -117,7 +117,7 @@ private theorem openRestrictionMate_app_apply {X B : Scheme.{u}} (j : X ⟶ B)
     (x : M.val.obj (op (((𝟭 ℕ).prod (openMap j)).obj U.unop))) :
     ((((mateEquiv (openPullAdj (sequenceRings l L) (sequenceQuotient l L) j)
         (openPullAdj (sequenceRings l E) (sequenceQuotient l E) j)).symm
-        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans.app
+        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).app
           M).val.app U) x = x := by
   change M.val.presheaf.map (((𝟭 ℕ).prod (openMap j)).map
       ((prodAdj (openAdj j)).unit.app U.unop)).op
@@ -138,11 +138,11 @@ private theorem openRestrictionMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] :
     IsIso ((mateEquiv (openPullAdj (sequenceRings l L) (sequenceQuotient l L) j)
       (openPullAdj (sequenceRings l E) (sequenceQuotient l E) j)).symm
-      (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)) := by
   have h (M : coefficientSequenceModules l L B) :
       IsIso (((mateEquiv (openPullAdj (sequenceRings l L) (sequenceQuotient l L) j)
         (openPullAdj (sequenceRings l E) (sequenceQuotient l E) j)).symm
-        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).natTrans.app M) := by
+        (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)).app M) := by
     apply sheafOfModules_isIso_of_bijective
     intro U
     have key := openRestrictionMate_app_apply l E L ι j M U
@@ -188,7 +188,7 @@ private theorem sequenceScalarPullback_hom_eq {X B : Scheme.{u}} (j : X ⟶ B) :
         (sequenceScalarAdjunction l E L ι X).choose).symm
         (TwoSquare.mk (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l L j)
           (integralComparisonSequencePullback l E j) (sequenceRestriction l E L ι X)
-          (sequenceRestrictionPullbackInv l E L ι j))).natTrans := by
+          (sequenceRestrictionPullbackInv l E L ι j))) := by
   let adjY := (sequenceScalarAdjunction l E L ι B).choose
   have hY := sequenceScalarAdjunction_unit l E L ι B
   let adjZ := (sequenceScalarAdjunction l E L ι X).choose
@@ -228,7 +228,7 @@ private theorem sequenceScalarPullback_hom_eq {X B : Scheme.{u}} (j : X ⟶ B) :
   have hc : h.choose = (conjugateIsoEquiv adj₂ adj₁).symm e.symm :=
     normalizedAdjointComparison_choose_eq _ _ _ _ adj₁ adj₂ e
   rw [heq, hc]
-  have hi := congrArg TwoSquare.natTrans
+  have hi := 
     (iterated_mateEquiv_conjugateEquiv_symm adjY adjZ pE pL (TwoSquare.mk _ _ _ _ e.inv))
   exact hi.symm
 
@@ -271,7 +271,7 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
       sequenceRestriction l E L ι B ⋙ integralComparisonSequencePullback l E j)
     (a : integralComparisonSequencePullback l E j ⋙ MX.E ≅
       MB.E ⋙ integralComparisonSequencePullback l L j)
-    (ha : a.hom = ((mateEquiv oB oX).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans)
+    (ha : a.hom = ((mateEquiv oB oX).symm (TwoSquare.mk _ _ _ _ q.inv)))
     (S : integralComparisonDerivedSequencePullback l E j ⋙ MX.T ≅
       MB.T ⋙ integralComparisonDerivedSequencePullback l L j)
     (hS : ∀ (P : CochainComplex (coefficientSequenceModules l E B) ℤ),
@@ -288,7 +288,7 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
     ∃ (σB : MB.T ⊣ (sequenceRestriction l E L ι B).mapDerivedCategory)
       (σX : MX.T ⊣ (sequenceRestriction l E L ι X).mapDerivedCategory),
       S.hom = ((mateEquiv σB σX).symm (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso q).inv)).natTrans := by
+        (Functor.mapDerivedCategorySquareIso q).inv)) := by
   obtain ⟨AB, rfl⟩ := hAB
   obtain ⟨AX, rfl⟩ := hAX
   have hoB : oB.unit = AB.ordinaryAdj.unit := by
@@ -397,7 +397,7 @@ theorem systemScalarPullback_leftMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     (adjE : JE ⊣ integralComparisonDerivedSequencePullback l E j)
     (adjL : JL ⊣ integralComparisonDerivedSequencePullback l L j) :
     IsIso ((mateEquiv adjE adjL).symm (TwoSquare.mk _ _ _ _
-      (integralComparisonSystemScalarPullback l E L ι j).hom)).natTrans := by
+      (integralComparisonSystemScalarPullback l E L ι j).hom)) := by
   have : IsIso (sequenceRestrictionPullbackInv l E L ι j) :=
     sequenceRestrictionPullbackInv_isIso l E L ι j
   let q := (asIso (sequenceRestrictionPullbackInv l E L ι j)).symm
@@ -414,7 +414,7 @@ theorem systemScalarPullback_leftMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     (integralComparisonSystemScalarPullback l E L ι j)
     (integralComparisonSystemScalarPullback_existsUnique l E L ι j).exists.choose_spec
   rw [hS]
-  have h := congrArg TwoSquare.natTrans (iterated_mateEquiv_conjugateEquiv_symm adjE adjL σX σB
+  have h := (iterated_mateEquiv_conjugateEquiv_symm adjE adjL σX σB
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).inv))
   erw [h]
   change IsIso ((conjugateEquiv (adjE.comp σB) (σX.comp adjL)).symm

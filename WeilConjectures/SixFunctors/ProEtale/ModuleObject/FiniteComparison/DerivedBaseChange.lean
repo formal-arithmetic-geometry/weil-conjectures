@@ -89,7 +89,7 @@ noncomputable def finiteCoefficientDerivedPushHom :
   (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction
     (Profinite.continuousMapRingObj.{u} T) f)
     (ProEtale.derivedUpperStarLowerStarAdjunction _ f)
-    (finiteCoefficientDerivedUpperStarIso T f).inv).natTrans
+    (finiteCoefficientDerivedUpperStarIso T f).inv)
 
 /-- The comparison `finiteCoefficientDerivedPushHom` is an isomorphism, being the mate of an
 isomorphism along equivalences. -/

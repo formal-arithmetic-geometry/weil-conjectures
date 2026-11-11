@@ -213,7 +213,7 @@ private def pushOrdinaryR (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       (IntegralSystemRealization.calculus l E X).reduction ⋙
         IntegralSystemRealization.Operations.push l E o.system f :=
   (mateEquiv (IntegralSystemRealization.ringedAdj l E f) (o.system.direct f).adj
-    (o.realization.reductionPull f).inv).natTrans
+    (o.realization.reductionPull f).inv)
 
 private theorem mate_reconstruction
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -224,14 +224,14 @@ private theorem mate_reconstruction
     RB.map (Q.map (aa.unit.app K) ≫
         (conjugateIsoEquiv (ap.comp aa) (ab.comp af) χ).hom.app (RA.obj K)) ≫
         ab.counit.app (G.obj (RA.obj K)) =
-      (mateEquiv ap af χ.hom).natTrans.app K := by
+      (mateEquiv ap af χ.hom).app K := by
   have hv := conjugateEquiv_counit (ap.comp aa) (ab.comp af) χ.hom (RA.obj K)
   have hn := χ.hom.naturality (Q.map (aa.unit.app K))
   have hε := ap.counit.naturality (aa.unit.app K)
   apply (af.homEquiv _ _).symm.injective
   change F.map _ ≫ af.counit.app _ = _
   rw [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp, Category.assoc]
-  change _ = F.map ((mateEquiv ap af χ.hom).natTrans.app K) ≫ af.counit.app _
+  change _ = F.map ((mateEquiv ap af χ.hom).app K) ≫ af.counit.app _
   rw [mateEquiv_counit ap af χ.hom K]
   simp only [Adjunction.comp_counit_app, Functor.comp_map, Functor.comp_obj] at hv
   rw [CategoryTheory.Functor.map_comp, Category.assoc, conjugateIsoEquiv_apply_hom]
@@ -250,7 +250,7 @@ private theorem mate_unit_square
     {R : A ⥤ C} {T : B ⥤ D} (a : P ⊣ Q) (b : F ⊣ G)
     (χ : R ⋙ F ≅ P ⋙ T) {X : A} {Y : C} (q : R.obj X ⟶ Y) :
     q ≫ b.unit.app Y = R.map (a.unit.app X) ≫
-      (mateEquiv a b χ.hom).natTrans.app (P.obj X) ≫
+      (mateEquiv a b χ.hom).app (P.obj X) ≫
       G.map (χ.inv.app X ≫ F.map q) := by
   have hm := unit_mateEquiv a b χ.hom X
   dsimp only [Functor.id_obj] at hm
@@ -265,7 +265,7 @@ private theorem mate_counit_square
     {R : A ⥤ C} {T : B ⥤ D} (a : P ⊣ Q) (b : F ⊣ G)
     (χ : R ⋙ F ≅ P ⋙ T) {X : B} {Y : D} (q : T.obj X ⟶ Y) :
     χ.inv.app (Q.obj X) ≫
-        F.map ((mateEquiv a b χ.hom).natTrans.app X ≫ G.map q) ≫ b.counit.app Y =
+        F.map ((mateEquiv a b χ.hom).app X ≫ G.map q) ≫ b.counit.app Y =
       T.map (a.counit.app X) ≫ q := by
   have hn := b.counit.naturality q
   have hm := mateEquiv_counit a b χ.hom X
@@ -289,18 +289,18 @@ private theorem mate_compositor_square
     (α : P'' ⟶ P ⋙ P') (β : F'' ⟶ F ⋙ F')
     (h : (TwoSquare.vComp χ χ').whiskerRight β =
       (TwoSquare.mk _ _ _ _ χ'').whiskerLeft α) (X : A₂) :
-    (mateEquiv a b χ).natTrans.app (Q'.obj X) ≫
-        G.map ((mateEquiv a' b' χ').natTrans.app X) ≫
+    (mateEquiv a b χ).app (Q'.obj X) ≫
+        G.map ((mateEquiv a' b' χ').app X) ≫
         (conjugateEquiv (b.comp b') b'' β).app (R₂.obj X) =
       R₀.map ((conjugateEquiv (a.comp a') a'' α).app X) ≫
-        (mateEquiv a'' b'' χ'').natTrans.app X := by
+        (mateEquiv a'' b'' χ'').app X := by
   have hh := congrArg (mateEquiv (a.comp a') b'') h
   rw [mateEquiv_conjugateEquiv_vcomp (a.comp a') (b.comp b') b'',
     conjugateEquiv_mateEquiv_vcomp (a.comp a') a'' b'',
     mateEquiv_hcomp a b a' b'] at hh
-  have hx := congrArg (fun t ↦ t.natTrans.app X) hh
+  have hx := congrArg (fun t ↦ t.app X) hh
   simpa only [TwoSquare.hComp, TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerRight_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app,
     Functor.associator_inv_app, CategoryTheory.Functor.map_id, Category.id_comp,
     Category.comp_id, Functor.comp_obj, Category.assoc] using hx
@@ -342,13 +342,13 @@ private theorem inverse_mate_unit_square
     {P : A ⥤ B} {Q : B ⥤ A} {F : C ⥤ D} {G : D ⥤ C}
     {R : A ⥤ C} {T : B ⥤ D} (a : P ⊣ Q) (b : F ⊣ G)
     (χ : Q ⋙ R ⟶ T ⋙ G) {X : A} {Y : C} (q : R.obj X ⟶ Y)
-    [IsIso (((mateEquiv a b).symm χ).natTrans.app X)] :
+    [IsIso (((mateEquiv a b).symm χ).app X)] :
     q ≫ b.unit.app Y = R.map (a.unit.app X) ≫ χ.app (P.obj X) ≫
-      G.map (inverseOrZero (((mateEquiv a b).symm χ).natTrans.app X) ≫ F.map q) := by
+      G.map (inverseOrZero (((mateEquiv a b).symm χ).app X) ≫ F.map q) := by
   have hm := unit_mateEquiv_symm a b χ X
   rw [inverseOrZero_eq_inv, G.map_comp, ← Category.assoc, ← Category.assoc, hm]
   simp only [Category.assoc, ← G.map_comp_assoc, Functor.comp_obj,
-    Functor.id_obj, TwoSquare.natTrans, IsIso.hom_inv_id, G.map_id, Category.id_comp]
+    Functor.id_obj, IsIso.hom_inv_id, G.map_id, Category.id_comp]
   exact b.unit.naturality q
 
 private theorem inverse_mate_counit_square
@@ -357,8 +357,8 @@ private theorem inverse_mate_counit_square
     {P : A ⥤ B} {Q : B ⥤ A} {F : C ⥤ D} {G : D ⥤ C}
     {R : A ⥤ C} {T : B ⥤ D} (a : P ⊣ Q) (b : F ⊣ G)
     (χ : Q ⋙ R ⟶ T ⋙ G) {X : B} {Y : D} (q : T.obj X ⟶ Y)
-    [IsIso (((mateEquiv a b).symm χ).natTrans.app (Q.obj X))] :
-    inverseOrZero (((mateEquiv a b).symm χ).natTrans.app (Q.obj X)) ≫
+    [IsIso (((mateEquiv a b).symm χ).app (Q.obj X))] :
+    inverseOrZero (((mateEquiv a b).symm χ).app (Q.obj X)) ≫
         F.map (χ.app X ≫ G.map q) ≫ b.counit.app Y =
       T.map (a.counit.app X) ≫ q := by
   have hm := mateEquiv_counit_symm a b χ X

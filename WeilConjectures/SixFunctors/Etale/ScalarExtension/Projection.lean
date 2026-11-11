@@ -152,7 +152,7 @@ lemma mateEquiv_symm_lowerStarCompSheafComposeCoextendScalarsIso :
 instance isIso_upperStarRestrictScalarsMap : IsIso (upperStarRestrictScalarsMap R S g) := by
   have hA : (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g)
-        (upperStarRestrictScalarsMap R S g)).natTrans =
+        (upperStarRestrictScalarsMap R S g)) =
       conjugateEquiv ((sheafExtendScalarsAdjunction (algebraMap R S) X).comp
           (upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g))
         ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).comp

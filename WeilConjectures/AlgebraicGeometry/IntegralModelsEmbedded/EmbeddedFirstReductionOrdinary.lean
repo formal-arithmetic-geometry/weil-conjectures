@@ -316,7 +316,7 @@ private def smallExtensionIso (X : Scheme.{u})
   let b := SheafOfModules.RingedTensor.tensorAdjunction
     (IntegralModelsStacks.smallMap X f)
   let β := smallRestrictionIso X f
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))
   have : IsIso α := InternalAbelianSheafModule.inverseMate_isIso a b β
   exact (asIso α).symm
 

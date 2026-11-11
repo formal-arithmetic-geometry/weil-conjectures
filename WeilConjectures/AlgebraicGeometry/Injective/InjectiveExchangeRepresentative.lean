@@ -114,7 +114,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X âŸ
             (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
-              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).natTrans.app K) =
+              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).app K) =
     DerivedCategory.Q.map a â‰«
       (DerivedCategory.quotientCompQhIso _).inv.app
         ((F.mapHomologicalComplex (.up â„¤)).obj D) â‰«
@@ -142,7 +142,7 @@ theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X âŸ
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
       (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
-    (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom))
   have fac := Adjunction.derivedPlus_mateEquiv_app_fac
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)
     (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f

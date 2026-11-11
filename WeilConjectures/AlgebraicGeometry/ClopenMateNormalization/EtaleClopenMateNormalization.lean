@@ -303,18 +303,18 @@ private theorem mate_ambient (adj : L ⊣ R) (adj' : L' ⊣ R')
     ∀ X : DerivedCategory.Plus C₁,
       DerivedCategory.Plus.ι.map
           ((mateEquiv adj.derivedPlus adj'.derivedPlus
-            (TwoSquare.mk _ _ _ _ (clopenLocalizedSquarePlus σ.natTrans))).app X) ≫
+            (TwoSquare.mk _ _ _ _ (clopenLocalizedSquarePlus σ))).app X) ≫
         R'.rightDerivedFunctorPlusCompatibility.hom.app (G'.mapDerivedCategoryPlus.obj X) =
       G.mapDerivedCategory.map (R.rightDerivedFunctorPlusCompatibility.hom.app X) ≫
         (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
           adj'.mapDerivedCategoryRightDerivedAdjunction
-          (TwoSquare.mk _ _ _ _ (clopenLocalizedSquare σ.natTrans))).app
+          (TwoSquare.mk _ _ _ _ (clopenLocalizedSquare σ))).app
             (DerivedCategory.Plus.ι.obj X) := by
   let gammaPlus := (mateEquiv adj.derivedPlus adj'.derivedPlus
-    (TwoSquare.mk _ _ _ _ (clopenLocalizedSquarePlus σ.natTrans))).natTrans
+    (TwoSquare.mk _ _ _ _ (clopenLocalizedSquarePlus σ)))
   let γ := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
     adj'.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (clopenLocalizedSquare σ.natTrans))).natTrans
+    (TwoSquare.mk _ _ _ _ (clopenLocalizedSquare σ)))
   let a : (R.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι) ⋙ G.mapDerivedCategory ⟶
       G'.mapDerivedCategoryPlus ⋙ DerivedCategory.Plus.ι ⋙ R'.rightDerivedFunctor :=
     Functor.whiskerRight gammaPlus DerivedCategory.Plus.ι ≫
@@ -335,11 +335,11 @@ private theorem mate_ambient (adj : L ⊣ R) (adj' : L' ⊣ R')
       Functor.whiskerLeft_app, Functor.associator_hom_app,
       CategoryTheory.Functor.comp_map, Category.id_comp, Category.assoc]
     have hp := Adjunction.derivedPlus_mateEquiv_app_fac adj adj' σ
-      (TwoSquare.mk _ _ _ _ (clopenLocalizedSquarePlus σ.natTrans))
-      (clopenLocalizedSquarePlus_fac σ.natTrans) K
+      (TwoSquare.mk _ _ _ _ (clopenLocalizedSquarePlus σ))
+      (clopenLocalizedSquarePlus_fac σ) K
     have hu := Adjunction.derivedExact_mateEquiv_app_fac adj adj' σ
-      (TwoSquare.mk _ _ _ _ (clopenLocalizedSquare σ.natTrans))
-      (clopenLocalizedSquare_fach σ.natTrans) ((HomotopyCategory.Plus.ι C₁).obj K)
+      (TwoSquare.mk _ _ _ _ (clopenLocalizedSquare σ))
+      (clopenLocalizedSquare_fach σ) ((HomotopyCategory.Plus.ι C₁).obj K)
     change G.mapDerivedCategoryPlus.map _ ≫ gammaPlus.app _ = _ at hp
     change G.mapDerivedCategory.map _ ≫ γ.app _ = _ at hu
     erw [← G.mapDerivedCategory.map_comp_assoc,
@@ -383,11 +383,11 @@ private theorem plus_mate_eq (adj : L ⊣ R) (adj' : L' ⊣ R')
           G'.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj K) =
         L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
           L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj K) ≫
-          DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app K))
+          DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ).app K))
     (δ : R ⋙ G ⟶ G' ⋙ R')
     (γ : R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus ⟶
       G'.mapDerivedCategoryPlus ⋙ R'.rightDerivedFunctorPlus)
-    (hδ : (mateEquiv adj adj' σ).natTrans = δ)
+    (hδ : (mateEquiv adj adj' σ) = δ)
     (hγ : ∀ K : HomotopyCategory.Plus C₁,
       G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
           γ.app (DerivedCategory.Plus.Qh.obj K) =
@@ -395,7 +395,7 @@ private theorem plus_mate_eq (adj : L ⊣ R) (adj' : L' ⊣ R')
           DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus δ).app K) ≫
           R'.rightDerivedFunctorPlusUnith.app (G'.mapHomotopyCategoryPlus.obj K) ≫
           R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K)) :
-    (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans = γ := by
+    (mateEquiv adj.derivedPlus adj'.derivedPlus θ) = γ := by
   apply Functor.rightDerived_ext (R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus)
     (Functor.whiskerRight R.rightDerivedFunctorPlusUnith G.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso C₁)
@@ -856,7 +856,7 @@ Source: Stacks Tags 0F7B and 070K
         (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctor :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r)
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p)
-    (derivedAlpha Λ k r p i h)).natTrans
+    (derivedAlpha Λ k r p i h))
 
 /-- The proper mate in D+, formed with the induced bounded-below adjunctions.
 Source: Stacks Tags 0F7B and 015F
@@ -870,7 +870,7 @@ def derivedMatePlus {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
         (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus :=
   (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r).derivedPlus
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).derivedPlus
-    (derivedAlphaPlus Λ k r p i h)).natTrans
+    (derivedAlphaPlus Λ k r p i h))
 
 /-- The support-preserving comparison selected from the recorded coherence theorem.
 Its inclusion into (ir)_* = (pk)_* retains every section, uniquely determining it.
@@ -977,7 +977,7 @@ private theorem plus_normalized [Finite Λ] {V W S T : Scheme.{u}}
     (by exact clopenLocalizedSquarePlus_fac (alpha Λ k r p i h))
     (supportComparison Λ k r p i h).hom
     ((properOpenInterchangeData Λ).derived k i r p h).hom
-  · simpa only [mate, TwoSquare.mk, TwoSquare.natTrans] using hm
+  · simpa only [mate, TwoSquare.mk] using hm
   · intro K
     delta supportComparison
     simpa only [rightDerivedLowerStarPlus] using
@@ -1061,13 +1061,13 @@ private theorem mate_include {V W S T : Scheme.{u}}
   simp only [TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
     Functor.whiskerLeft_id', Functor.whiskerRight_id', Category.comp_id] at hb
   rw [hb] at hm
-  have hm' := congrArg TwoSquare.natTrans hm
+  have hm' := hm
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight] at hm'
   dsimp only [b] at hm'
   have hmate := mateEquiv_baseChangeSquare (ModuleCat.{u + 1} Λ) sq
   change mateEquiv _ _ _ = _ at hmate
   rw [hmate] at hm'
-  simpa only [mate, a, sq, TwoSquare.mk, TwoSquare.natTrans,
+  simpa only [mate, a, sq, TwoSquare.mk,
     Functor.whiskerLeft_id, Category.comp_id] using hm'
 
 private theorem open_compare_mono {X Y : Scheme.{u}}

@@ -68,11 +68,10 @@ private theorem mate_whisker
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (t : TwoSquare F L₁ L₂ G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t).natTrans ≫
+    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t) ≫
         Functor.whiskerRight g R₂ := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -94,12 +93,12 @@ private theorem mate_transfer
     {SX TX : C₀ ⥤ C₁} {SY TY : D₀ ⥤ D₁}
     (α : F₀ ≅ H₀) (β : F₁ ≅ H₁) (x : SX ≅ TX) (y : SY ≅ TY)
     (q : H₀ ⋙ TY ≅ TX ⋙ H₁)
-    (hq : IsIso (mateEquiv b₀ b₁ q.inv).natTrans) :
+    (hq : IsIso (mateEquiv b₀ b₁ q.inv)) :
     IsIso (mateEquiv a₀ a₁
       ((((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv).whiskerLeft
         α.inv |>.whiskerRight
-        β.hom)).natTrans := by
-  let m := @asIso _ _ _ _ ((mateEquiv b₀ b₁ q.inv).natTrans) hq
+        β.hom)) := by
+  let m := @asIso _ _ _ _ ((mateEquiv b₀ b₁ q.inv)) hq
   let eα := Functor.isoWhiskerRight ((conjugateIsoEquiv a₀ b₀) α.symm) SX
   let ex := Functor.isoWhiskerLeft J₀ x
   let ey := Functor.isoWhiskerRight y.symm J₁
@@ -107,11 +106,11 @@ private theorem mate_transfer
   rw [mateEquiv_conjugateEquiv_vcomp a₀ b₁ a₁]
   change IsIso ((mateEquiv a₀ b₁
     ((((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv).whiskerLeft
-      α.inv)).natTrans ≫ Functor.whiskerLeft SY (conjugateEquiv b₁ a₁ β.hom))
+      α.inv)) ≫ Functor.whiskerLeft SY (conjugateEquiv b₁ a₁ β.hom))
   rw [conjugateEquiv_mateEquiv_vcomp a₀ b₀ b₁]
   change IsIso ((Functor.whiskerRight (conjugateEquiv a₀ b₀ α.inv) SX ≫
     (mateEquiv b₀ b₁
-      (((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv)).natTrans) ≫
+      (((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv))) ≫
       Functor.whiskerLeft SY (conjugateEquiv b₁ a₁ β.hom))
   rw [mate_whisker]
   exact ((eα ≪≫ (ex ≪≫ m ≪≫ ey)) ≪≫ eβ).isIso_hom
@@ -194,7 +193,7 @@ private theorem ring_invertibility_from_comparison
       (pbcDerivedExtend (a.map Y)).map (r₀.hom.app K) ≫
       (PurCompactSupport.comparison a c).app
         ((RingStage.inclusion.{u, v} l Ω X s).obj K))
-    (hm : IsIso (mateEquiv adj₀ adj₁ q₀.inv).natTrans) :
+    (hm : IsIso (mateEquiv adj₀ adj₁ q₀.inv)) :
     IsIso (Functor.whiskerLeft (RingStage.inclusion.{u, v} l Ω X s)
       (PurCompactSupport.comparison a c)) ∧
     ∀ (q : A.F ⋙ SY.functor ≅ SX.functor ⋙ B.F),
@@ -206,7 +205,7 @@ private theorem ring_invertibility_from_comparison
           (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫
           (PurCompactSupport.comparison a c).app
             ((RingStage.inclusion.{u, v} l Ω X s).obj K)) →
-      IsIso (mateEquiv A.adjunction B.adjunction q.inv).natTrans := by
+      IsIso (mateEquiv A.adjunction B.adjunction q.inv) := by
   classical
   let IX₀ := RingStage.inclusion.{u, v} l Ω X s
   let IX₁ := RingStage.inclusion.{u, v} l Ω X t
@@ -270,7 +269,7 @@ private theorem ring_invertibility_from_comparison
     have hi : q₁.inv =
         ((((TwoSquare.mk _ _ _ _ q₀.inv).whiskerTop x.hom).whiskerBottom y.inv).whiskerLeft
           α.inv |>.whiskerRight
-          β.hom).natTrans := by
+          β.hom) := by
       ext K
       simp [q₁, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
         TwoSquare.whiskerLeft, TwoSquare.whiskerRight, Category.assoc]
@@ -332,7 +331,7 @@ theorem ring_canonical_scalar_invertibility
           (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫
           (PurCompactSupport.comparison a c).app
             ((RingStage.inclusion.{u, v} l Ω X s).obj K)) →
-      IsIso (mateEquiv A.adjunction B.adjunction q.inv).natTrans := by
+      IsIso (mateEquiv A.adjunction B.adjunction q.inv) := by
   classical
   let Ω' := ULift.{u} Ω
   have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed (Padic l)
@@ -354,14 +353,14 @@ theorem ring_canonical_scalar_invertibility
   have hn := d.comparison_normalized a _ha
   let sq : TwoSquare (d.scalar a _ha true).functor A₀.F B₀.F
       (d.scalar a _ha false).functor := TwoSquare.mk _ _ _ _ dc.q.inv
-  have hm : IsIso (mateEquiv A₀.adjunction B₀.adjunction sq).natTrans := by
-    have he : (mateEquiv A₀.adjunction B₀.adjunction sq).natTrans = dc.b.hom := by
+  have hm : IsIso (mateEquiv A₀.adjunction B₀.adjunction sq) := by
+    have he : (mateEquiv A₀.adjunction B₀.adjunction sq) = dc.b.hom := by
       apply NatTrans.ext
       funext N
       apply (B₀.adjunction.homEquiv _ _).symm.injective
       simp only [Adjunction.homEquiv_symm_apply]
       rw [mateEquiv_counit A₀.adjunction B₀.adjunction sq N]
-      dsimp only [sq, TwoSquare.mk, TwoSquare.natTrans]
+      dsimp only [sq, TwoSquare.mk]
       rw [← dc.counit N]
       dsimp only [A₀, B₀]
       simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]

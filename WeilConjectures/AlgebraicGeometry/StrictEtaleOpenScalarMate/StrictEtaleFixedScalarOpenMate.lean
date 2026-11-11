@@ -39,7 +39,7 @@ theorem fixed_scalar_mate_iso
         (.mk (Etale.openImmersionRestriction (ModuleCat.{u + 1} B) j)
           (Sheaf.restrictScalars Z.smallEtaleTopology f)
           (Sheaf.restrictScalars X.smallEtaleTopology f)
-          (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j) (𝟙 _))).natTrans := by
+          (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j) (𝟙 _))) := by
   let a := Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} B) j
   let b := Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j
   let am : ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} f ⊣
@@ -54,7 +54,7 @@ theorem fixed_scalar_mate_iso
       (Etale.openImmersionRestriction (ModuleCat.{u + 1} B) j)
       (sheafCompose X.smallEtaleTopology (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} f)) :=
     .mk _ _ _ _ (𝟙 _)
-  have hγ : ((mateEquiv d c).symm γ).natTrans = 𝟙 _ := by
+  have hγ : ((mateEquiv d c).symm γ) = 𝟙 _ := by
     ext M U x
     simp only [comp_obj, mateEquiv_symm_apply, NatTrans.comp_app, id_obj,
       leftUnitor_inv_app, whiskerRight_app, Functor.comp_map, associator_inv_app,
@@ -74,8 +74,8 @@ theorem fixed_scalar_mate_iso
     exact hγ
   rw [hβ] at he
   rw [he]
-  change IsIso ((conjugateEquiv (a.comp d) (c.comp b)).symm γ.natTrans)
-  have : IsIso γ.natTrans := by dsimp [γ]; infer_instance
-  exact conjugateEquiv_symm_iso (a.comp d) (c.comp b) γ.natTrans
+  change IsIso ((conjugateEquiv (a.comp d) (c.comp b)).symm γ)
+  have : IsIso γ := by dsimp [γ]; infer_instance
+  exact conjugateEquiv_symm_iso (a.comp d) (c.comp b) γ
 
 end AlgebraicGeometry.StrictEtaleOpenScalarMate

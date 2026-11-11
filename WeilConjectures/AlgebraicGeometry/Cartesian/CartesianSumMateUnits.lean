@@ -85,9 +85,9 @@ private lemma derived_square_mate_units
         Functor.whiskerLeft DerivedCategory.Qh
           (mateEquiv d.mapDerivedCategoryRightDerivedAdjunction
             d'.mapDerivedCategoryRightDerivedAdjunction
-            (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso β).hom)).natTrans =
+            (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso β).hom)) =
       Functor.whiskerRight (NatTrans.mapHomotopyCategory
-          (mateEquiv d d' (TwoSquare.mk _ _ _ _ β.hom)).natTrans (.up ℤ))
+          (mateEquiv d d' (TwoSquare.mk _ _ _ _ β.hom)) (.up ℤ))
           DerivedCategory.Qh ≫
         Functor.mapDerivedCategoryCompRightDerivedFunctorUnit G' R' := by
   let σ := TwoSquare.mk _ _ _ _ β.hom
@@ -150,20 +150,20 @@ theorem cartesian_sum_mate_units
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm
       (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)
-        sq.toCommSq).hom)).natTrans)] :
+        sq.toCommSq).hom)))] :
     let θ := (mateEquiv
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom))
     let sumEx := ((mateEquiv
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
       (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance)).symm
       (TwoSquare.mk _ _ _ _
-        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).hom)).natTrans
+        (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).hom))
     let gam := (mateEquiv
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
       (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-      (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans
+      (TwoSquare.mk _ _ _ _ (inv sumEx)))
     (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit
       (lowerStar (ModuleCat.{u + 1} A) q)
       (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance)) ≫
@@ -183,22 +183,22 @@ theorem cartesian_sum_mate_units
   let sd := ((mateEquiv
     (derivedEtaleLowerShriekUpperStarAdjunction B v inferInstance)
     (derivedEtaleLowerShriekUpperStarAdjunction B b inferInstance)).symm
-      (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq.toCommSq).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso B sq.toCommSq).hom))
   have (F : Sheaf Z.smallEtaleTopology B) :
       IsIso ((baseChangeMap B sq.toCommSq).app F) :=
     isIso_baseChangeMap_app_of_flat A sq F
   have : IsIso (baseChangeMap B sq.toCommSq) := NatIso.isIso_of_isIso_app _
-  have hs : ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)).natTrans = β.inv := by
+  have hs : ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)) = β.inv := by
     apply (conjugateEquiv (a.comp d') (d.comp a')).injective
     rw [← iterated_mateEquiv_conjugateEquiv a a' d d', Equiv.apply_symm_apply]
     change baseChangeMap B sq.toCommSq = _
     exact (conjugate_comparison_inv (a.comp d') (d.comp a')
       (asIso (baseChangeMap B sq.toCommSq))).symm
-  have : IsIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)).natTrans := by
+  have : IsIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)) := by
     rw [hs]
     infer_instance
   have hl := (exact_localization_inverse_mate a a' χ).2.1
-  have hi : asIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)).natTrans =
+  have hi : asIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)) =
       β.symm := Iso.ext hs
   rw [hi] at hl
   have hd : inv sd = (Functor.mapDerivedCategorySquareIso β).hom := by
@@ -215,7 +215,7 @@ theorem cartesian_sum_mate_units
       Functor.whiskerLeft DerivedCategory.Qh
         (mateEquiv (mapDerivedUpperStarLowerStarAdjunction B q)
           (mapDerivedUpperStarLowerStarAdjunction B p)
-          (TwoSquare.mk _ _ _ _ (inv sd))).natTrans = _
+          (TwoSquare.mk _ _ _ _ (inv sd))) = _
   rw [hd]
   exact derived_square_mate_units d d' β
 

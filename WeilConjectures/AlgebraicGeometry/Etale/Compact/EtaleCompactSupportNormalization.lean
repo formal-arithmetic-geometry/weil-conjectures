@@ -85,7 +85,7 @@ structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A] where
     (c : Compactification f) (g : X' ⟶ X) (k : X'' ⟶ X'),
     ((exactCompactSupportExchangeSquare A c g).vComp
         (exactCompactSupportExchangeSquare A
-          (c.ofIsPullback (IsPullback.of_hasPullback g f).flip) k)).natTrans ≫
+          (c.ofIsPullback (IsPullback.of_hasPullback g f).flip) k)) ≫
       Functor.whiskerLeft
         ((upperStar (ModuleCat.{u + 1} A) (pullback.snd g f)).mapDerivedCategory ⋙
           (upperStar (ModuleCat.{u + 1} A)
@@ -97,7 +97,7 @@ structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A] where
         ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ⋙
           (upperStar (ModuleCat.{u + 1} A) k).mapDerivedCategory) ≫
         ((exactEtaleSumExchangeSquare A f g).vComp
-          (exactEtaleSumExchangeSquare A (pullback.fst g f) k)).natTrans
+          (exactEtaleSumExchangeSquare A (pullback.fst g f) k))
   /-- Under a proper refinement, use the comparison for the coarser open immersion,
   normalized by graph extension (hence identity over U), and then compose direct images. -/
   refinement : ∀ {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
@@ -175,12 +175,12 @@ theorem comparison_vComp
     (a₀ : TwoSquare F₀ H₀ G₀ F₁) (a₁ : TwoSquare F₁ H₁ G₁ F₂)
     (b₀ : TwoSquare S₀ H₀ G₀ S₁) (b₁ : TwoSquare S₁ H₁ G₁ S₂)
     (e₀ : F₀ ≅ S₀) (e₁ : F₁ ≅ S₁) (e₂ : F₂ ≅ S₂)
-    (h₀ : a₀.natTrans ≫ Functor.whiskerLeft H₀ e₁.hom =
-      Functor.whiskerRight e₀.hom G₀ ≫ b₀.natTrans)
-    (h₁ : a₁.natTrans ≫ Functor.whiskerLeft H₁ e₂.hom =
-      Functor.whiskerRight e₁.hom G₁ ≫ b₁.natTrans) :
-    (a₀.vComp a₁).natTrans ≫ Functor.whiskerLeft (H₀ ⋙ H₁) e₂.hom =
-      Functor.whiskerRight e₀.hom (G₀ ⋙ G₁) ≫ (b₀.vComp b₁).natTrans := by
+    (h₀ : a₀ ≫ Functor.whiskerLeft H₀ e₁.hom =
+      Functor.whiskerRight e₀.hom G₀ ≫ b₀)
+    (h₁ : a₁ ≫ Functor.whiskerLeft H₁ e₂.hom =
+      Functor.whiskerRight e₁.hom G₁ ≫ b₁) :
+    (a₀.vComp a₁) ≫ Functor.whiskerLeft (H₀ ⋙ H₁) e₂.hom =
+      Functor.whiskerRight e₀.hom (G₀ ⋙ G₁) ≫ (b₀.vComp b₁) := by
   ext K
   have h₀K := NatTrans.congr_app h₀ K
   have h₁K := NatTrans.congr_app h₁ (H₀.obj K)

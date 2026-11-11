@@ -147,7 +147,7 @@ theorem proEtaleReductionPullbackInv_isIso :
           (az.homEquiv _ _ (az.counit.app N)) ≫ d.hom.app N at h
     rw [hid, CategoryTheory.Functor.map_id, Category.id_comp] at h
     rw [← h]
-    simp only [α, mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    simp only [α, mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
       Functor.comp_obj,
       Functor.comp_map, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app,
@@ -156,10 +156,10 @@ theorem proEtaleReductionPullbackInv_isIso :
     erw [Category.comp_id]
   let γ := (mateEquiv av au).symm α
   have hm : mateEquiv av au γ = α := (mateEquiv av au).apply_symm_apply α
-  have hc : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
+  have hc : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ) := by
     rw [← iterated_mateEquiv_conjugateEquiv av au ar az γ, hm, hmate]
     infer_instance
-  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ.natTrans
+  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ
 
 /-- The coefficient-reduction comparison chi, in the displayed direction of the node.
 Source: blueprint four corners; Stacks Tags 06YY and 0D6D

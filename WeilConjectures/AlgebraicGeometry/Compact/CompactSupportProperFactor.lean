@@ -62,9 +62,9 @@ private theorem cube
     (hc : ∀ M, N₄.map (e.app M) ≫ h.hom.app (L₁.obj M) ≫
       H'.map (s.hom.app M) = t.hom.app (G.obj M) ≫
         L₄.map (a.hom.app M) ≫ p.app (N₁.obj M)) (K : B) :
-    G'.map (b.app K) ≫ (mateEquiv ad₃ ad₄ (TwoSquare.mk _ _ _ _ p)).natTrans.app (N₂.obj K) ≫
+    G'.map (b.app K) ≫ (mateEquiv ad₃ ad₄ (TwoSquare.mk _ _ _ _ p)).app (N₂.obj K) ≫
       R₄.map (h.inv.app K) =
-    a.inv.app (R₁.obj K) ≫ N₃.map ((mateEquiv ad₁ ad₂ (TwoSquare.mk _ _ _ _ e)).natTrans.app K) ≫
+    a.inv.app (R₁.obj K) ≫ N₃.map ((mateEquiv ad₁ ad₂ (TwoSquare.mk _ _ _ _ e)).app K) ≫
       b'.app (H.obj K) := by
   apply (ad₄.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
@@ -97,12 +97,12 @@ private theorem cube
   dsimp only [Functor.comp_obj]
   rw [hb1]
   have ht := t.inv.naturality
-    ((mateEquiv ad₁ ad₂ (TwoSquare.mk _ _ _ _ e)).natTrans.app K)
+    ((mateEquiv ad₁ ad₂ (TwoSquare.mk _ _ _ _ e)).app K)
   dsimp only [Functor.comp_map, Functor.comp_obj] at ht
   rw [reassoc_of% ht]
   have hm := N₄.congr_map
     (mateEquiv_counit ad₁ ad₂ (TwoSquare.mk _ _ _ _ e) K)
-  dsimp only [TwoSquare.natTrans, TwoSquare.mk] at hm
+  dsimp only [TwoSquare.mk] at hm
   simp only [Functor.map_comp] at hm
   rw [hm]
 
@@ -204,13 +204,13 @@ private theorem etale_mate_eq (A : Type (u + 1)) [CommRing A]
     (mateEquiv
       (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) p)
       (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) p')
-      (Etale.pullbackSquareComparison (ModuleCat.{u + 1} A) sq).hom).natTrans =
+      (Etale.pullbackSquareComparison (ModuleCat.{u + 1} A) sq).hom) =
       Etale.baseChange (ModuleCat.{u + 1} A) sq := by
   apply NatTrans.ext
   funext K
   rw [Etale.baseChange_app, Etale.baseChangeUnitStep_app,
     Etale.baseChangeSquareStep_hom_app, Etale.baseChangeCounitStep_app]
-  simp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans,
+  simp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk,
     NatTrans.comp_app, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app,

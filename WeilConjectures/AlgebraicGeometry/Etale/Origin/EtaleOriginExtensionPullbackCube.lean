@@ -53,10 +53,9 @@ private theorem realization_scalar_mate
           (RingHom.ulift.{u + 1, u + 1, u, u} φ)))
       (Scheme.pbcDerivedScalarAdjunction
         (Scheme.FiniteCompactScalar.scalarRingMap φ T))
-      (TwoSquare.mk _ _ _ _ (Scheme.FiniteCompactScalar.realizationScalarIso φ T).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Scheme.FiniteCompactScalar.realizationScalarIso φ T).hom)) =
       (Functor.mapDerivedCategorySquareIso
         (Scheme.sfRealizationRestriction T φ)).inv := by
-  apply congrArg TwoSquare.natTrans
   apply mateEquiv_eq_of_unit
   intro K
   exact Scheme.FiniteCompactScalar.realization_scalar_unit T φ K
@@ -70,7 +69,7 @@ private theorem site_scalar_mate
           (RingHom.ulift.{u + 1, u + 1, u, u} φ)))
       (Scheme.pbcDerivedScalarAdjunction
         (Scheme.FiniteCompactScalar.scalarRingMap φ T))
-      (TwoSquare.mk _ _ _ _ (Scheme.FiniteCompactScalar.siteScalarIso φ T).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Scheme.FiniteCompactScalar.siteScalarIso φ T).hom)) =
       (properOriginRestrictionIso φ T).inv := by
   let a := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars T.smallEtaleTopology (RingHom.ulift.{u + 1, u + 1, u, u} φ))
@@ -99,10 +98,10 @@ private theorem site_scalar_mate
       Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.assoc]
-  change (mateEquiv a c _).natTrans = _
+  change (mateEquiv a c _) = _
   rw [hw, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_vcomp a b c, hs, hr]
   ext K
-  simp only [properOriginRestrictionIso, TwoSquare.mk, TwoSquare.natTrans, TwoSquare.vComp,
+  simp only [properOriginRestrictionIso, TwoSquare.mk, TwoSquare.vComp,
     TwoSquare.whiskerLeft, TwoSquare.whiskerRight, Iso.trans_inv, Iso.symm_inv,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -179,14 +178,14 @@ theorem etaleOriginExtensionPullbackCube
     ext N
     simpa only [a, Scheme.pbcDerivedRestrict, Scheme.pbcRestrict,
       Scheme.FiniteCompactScalar.scalarRingMap, scalarMateRestriction,
-      Scheme.proEtaleRingRestrictScalars, TwoSquare.mk, TwoSquare.natTrans, TwoSquare.vComp,
+      Scheme.proEtaleRingRestrictScalars, TwoSquare.mk, TwoSquare.vComp,
       TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp, Category.comp_id, Category.assoc] using
       etaleOriginRestrictionPullbackCube φ p N
-  have h := congrArg (fun t ↦ t.natTrans.app C) hm
-  simp only [sy, sp, se, sz, TwoSquare.mk, TwoSquare.natTrans,
+  have h := congrArg (fun t ↦ t.app C) hm
+  simp only [sy, sp, se, sz, TwoSquare.mk,
     TwoSquare.hComp, TwoSquare.whiskerTop,
     TwoSquare.whiskerBottom, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,

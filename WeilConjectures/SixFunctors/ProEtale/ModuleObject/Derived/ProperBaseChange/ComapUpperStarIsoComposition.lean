@@ -101,8 +101,7 @@ theorem comapUpperStarIso_comp
       conjugateEquiv_mateEquiv_vcomp _ (upperStarLowerStarAdjunction Λ' (f ≫ g))]
     simp only [αf, αg, αfg, comapUpperStarIso_mate, upperStarComp_conjugate,
       upperStarComp_inv_conjugate]
-    apply TwoSquare.ext
-    intro K
+    refine NatTrans.ext (funext fun K ↦ ?_)
     simp only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
       TwoSquare.mk, NatTrans.comp_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
@@ -121,7 +120,7 @@ theorem comapUpperStarIso_comp
     (upperStarComp Λ f g).hom.app ((Mod.comap (coefficientMap a Z)).obj N) ≫ k ≫
       (comapUpperStarIso a f).hom.app ((g)^*⟦Λ'⟧.obj N) ≫
         (f)^*⟦Λ⟧.map ((comapUpperStarIso a g).hom.app N)) hN
-  simp only [TwoSquare.natTrans, Category.assoc, Iso.inv_hom_id_app_assoc,
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
     ← Functor.map_comp, Iso.inv_hom_id_app, Iso.hom_inv_id_app_assoc] at hh
   have hm := (f)^*⟦Λ⟧.map_id ((Mod.comap (coefficientMap a Z) ⋙ (g)^*⟦Λ⟧).obj N)
   rw [hm] at hh

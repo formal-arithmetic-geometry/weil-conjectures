@@ -34,7 +34,7 @@ def finiteOpenScalar
   ((mateEquiv (pbcDerivedScalarAdjunction (scalarRingMap φ X))
     (pbcDerivedScalarAdjunction (scalarRingMap φ Z))).symm
     (TwoSquare.mk _ _ _ _
-      (Functor.mapDerivedCategorySquareIso (sfOpenRestriction j φ)).hom)).natTrans
+      (Functor.mapDerivedCategorySquareIso (sfOpenRestriction j φ)).hom))
 
 /-- Evaluation of open extension, inverse to the specified open-adjunction mate.
 Source: Zheng 4.10 (blueprint: lem-sf-system-open-scalar-evaluation). -/

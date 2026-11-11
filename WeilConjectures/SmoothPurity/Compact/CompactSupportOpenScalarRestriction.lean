@@ -56,7 +56,7 @@ def compactSupportScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* 
       ProEtale.StrictTower.modulePullback (ULift.{u + 1, u} B) f ⋙
         proEtaleCoefficientRestrictScalars X φ :=
   ((mateEquiv (proEtaleConstantRingAdjunction B f)
-    (proEtaleConstantRingAdjunction A f)).symm (compactSupportScalarDirectImage f φ).hom).natTrans
+    (proEtaleConstantRingAdjunction A f)).symm (compactSupportScalarDirectImage f φ).hom)
 
 private theorem compactSupportScalarPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
     IsIso (compactSupportScalarPullback f φ) := by

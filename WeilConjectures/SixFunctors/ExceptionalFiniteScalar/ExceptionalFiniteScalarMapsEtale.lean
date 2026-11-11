@@ -467,13 +467,13 @@ private theorem inverseMateShift
     [G.CommShift ℤ] [H.CommShift ℤ] [L₁.CommShift ℤ] [R₁.CommShift ℤ]
     [L₂.CommShift ℤ] [R₂.CommShift ℤ]
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [adj₁.CommShift ℤ] [adj₂.CommShift ℤ]
-    (β : TwoSquare R₁ H G R₂) [β.natTrans.CommShift ℤ] :
-    ((mateEquiv adj₁ adj₂).symm β).natTrans.CommShift ℤ := by
+    (β : TwoSquare R₁ H G R₂) [β.CommShift ℤ] :
+    ((mateEquiv adj₁ adj₂).symm β).CommShift ℤ := by
   change ((Functor.leftUnitor (G ⋙ L₂)).inv ≫
     Functor.whiskerRight adj₁.unit (G ⋙ L₂) ≫
     (Functor.associator (L₁ ⋙ R₁) G L₂).inv ≫
     Functor.whiskerRight (Functor.associator L₁ R₁ G).hom L₂ ≫
-    Functor.whiskerRight (Functor.whiskerLeft L₁ β.natTrans) L₂ ≫
+    Functor.whiskerRight (Functor.whiskerLeft L₁ β) L₂ ≫
     Functor.whiskerRight (Functor.associator L₁ H R₂).inv L₂ ≫
     (Functor.associator (L₁ ⋙ H) R₂ L₂).hom ≫
     Functor.whiskerLeft (L₁ ⋙ H) adj₂.counit ≫
@@ -489,9 +489,9 @@ private theorem inverseConjugateShift
     ((conjugateEquiv adj₁ adj₂).symm β).CommShift ℤ := by
   let sq : TwoSquare R₁ (𝟭 D) (𝟭 C) R₂ :=
     .mk _ _ _ _ (R₁.rightUnitor.hom ≫ β ≫ R₂.leftUnitor.inv)
-  have : sq.natTrans.CommShift ℤ := by dsimp only [sq]; infer_instance
+  have : sq.CommShift ℤ := by dsimp only [sq]; infer_instance
   have := inverseMateShift adj₁ adj₂ sq
-  change (L₂.leftUnitor.inv ≫ ((mateEquiv adj₁ adj₂).symm sq).natTrans ≫
+  change (L₂.leftUnitor.inv ≫ ((mateEquiv adj₁ adj₂).symm sq) ≫
     L₁.rightUnitor.hom).CommShift ℤ
   infer_instance
 

@@ -153,7 +153,7 @@ private def ordinaryMate
     (T : C ⥤ E) (O : D ⥤ F)
     (adj : L ⊣ R) (adj' : L' ⊣ R') (β : T ⋙ L' ⟶ L ⋙ O) :
     R ⋙ T ⟶ O ⋙ R' :=
-  (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ β)).natTrans
+  (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ β))
 
 private noncomputable def ordinaryOpenExchange
     (A : Type (u + 1)) [CommRing A]
@@ -183,7 +183,7 @@ private lemma ordinaryOpenExchange_eq
         (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
         (TwoSquare.mk _ _ _ _ (@asIso _ _ _ _ _
           (isIso_openImmersionLowerShriekBaseChangeMap
-            (ModuleCat.{u + 1} A) sq)).inv)).natTrans := by
+            (ModuleCat.{u + 1} A) sq)).inv)) := by
   unfold ordinaryOpenExchange ordinaryMate
   rfl
 

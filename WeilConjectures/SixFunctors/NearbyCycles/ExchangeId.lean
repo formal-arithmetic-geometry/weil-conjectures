@@ -35,7 +35,7 @@ namespace CategoryTheory
 lemma mateEquiv_app_of_isoId {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
     (a : L ⊣ R) {G : C ⥤ C} {H : D ⥤ D} (I₁ : G ≅ 𝟭 C) (I₂ : H ≅ 𝟭 D) (θ : G ⋙ L ⟶ L ⋙ H)
     (hθ : ∀ B, θ.app B = L.map (I₁.hom.app B) ≫ I₂.inv.app (L.obj B)) (Y : D) :
-    (mateEquiv a a θ).natTrans.app Y = I₁.hom.app (R.obj Y) ≫ R.map (I₂.inv.app Y) := by
+    (mateEquiv a a θ).app Y = I₁.hom.app (R.obj Y) ≫ R.map (I₂.inv.app Y) := by
   apply (a.homEquiv _ _).symm.injective
   rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, mateEquiv_counit, hθ,
     Functor.map_comp, Category.assoc, Category.assoc, a.counit_naturality]

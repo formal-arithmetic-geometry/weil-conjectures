@@ -117,9 +117,9 @@ private theorem push_conjugate
   rw [Equiv.symm_apply_apply] at h
   have hh := congrArg (mateEquiv gx gy) h
   rw [Equiv.apply_symm_apply] at hh
-  have he := congrArg (fun s ↦ s.natTrans.app K) hh
+  have he := congrArg (fun s ↦ s.app K) hh
   simp only [Adjunction.pushHomOfComapIso, conjugateIsoEquiv_apply_inv,
-    mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.rightUnitor_inv_app,
     Functor.leftUnitor_hom_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.comp_obj, Functor.comp_map, Adjunction.homEquiv_unit, Functor.map_comp,
@@ -235,7 +235,7 @@ private theorem restrictionPush_mate :
       (mateEquiv (geometricAdjunction Λ' f) (geometricAdjunction Λ f)
         (TwoSquare.mk (restriction a Y) (scalarSixPull Λ' f)
           (scalarSixPull Λ f) (restriction a X)
-          (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv)).natTrans := by
+          (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv)) := by
   have hn : (D.theta a f).hom = Adjunction.pushHomOfComapIso
       (exactScalarAdj a Y) (exactScalarAdj a X)
       (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f) := by
@@ -249,7 +249,7 @@ private theorem restrictionPush_mate :
     (TwoSquare.mk (scalarSixPull Λ f) (scalarSixChange a Y)
       (scalarSixChange a X) (scalarSixPull Λ' f) (D.theta a f).hom)
   exact h.symm.trans (congrArg (fun s ↦
-    (mateEquiv (geometricAdjunction Λ' f) (geometricAdjunction Λ f) s).natTrans) htheta)
+    (mateEquiv (geometricAdjunction Λ' f) (geometricAdjunction Λ f) s)) htheta)
 
 private theorem restrictionPush_mate_exact :
     (mateEquiv
@@ -259,7 +259,7 @@ private theorem restrictionPush_mate_exact :
         (CondensedRing.upperStarLowerStarAdjunction Λ.X f))
       (TwoSquare.mk (restriction a Y) (scalarSixPull Λ' f)
       (scalarSixPull Λ f) (restriction a X)
-      (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv)).natTrans =
+      (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv)) =
     (restrictionPush D a f).hom := by
   rw [restrictionPush_mate]
   unfold geometricAdjunction
