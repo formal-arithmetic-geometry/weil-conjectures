@@ -886,3 +886,5 @@ theorem integralContinuousEncoding_constructible
       (S.immersion i) Q U).mpr (hv U g hg)⟩
 
 end AlgebraicGeometry.ProEtale
+
+-- PS351 downstream validation target; removed after checking.
