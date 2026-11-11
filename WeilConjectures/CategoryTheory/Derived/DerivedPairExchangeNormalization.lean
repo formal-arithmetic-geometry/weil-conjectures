@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 
 /-!
 # Representative normalization for a square of derived functor pairs

@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.PerfectProjection.PerfectProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateThickLocus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback

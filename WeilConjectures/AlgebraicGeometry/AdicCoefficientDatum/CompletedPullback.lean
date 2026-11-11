@@ -8,7 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
-public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackInterface
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
