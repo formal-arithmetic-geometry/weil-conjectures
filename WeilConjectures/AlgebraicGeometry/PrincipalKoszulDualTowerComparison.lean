@@ -222,3 +222,5 @@ theorem principalKoszul_dual_tower_comparison
   exact congrArg (fun g ↦ g.f q) (tensorDualTower_unit R a P m)
 
 end CategoryTheory
+
+-- Downstream validation of PrincipalKoszulDualEndpoints for the stable toolchain.
