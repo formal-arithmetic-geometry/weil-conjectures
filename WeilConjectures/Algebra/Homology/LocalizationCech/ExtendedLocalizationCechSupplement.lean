@@ -95,7 +95,8 @@ noncomputable def differential (R : Sheaf J CommRingCat.{u}) (r : ℕ)
 
 private theorem scalar_powers_comm (R : Sheaf J CommRingCat.{u})
     (f g : (unit (rings R)).sections) (k : ℕ) :
-    ((scalar R f ^ k).asHom) ≫ ((scalar R g ^ k).asHom) = ((scalar R g ^ k).asHom) ≫ ((scalar R f ^ k).asHom) := by
+    ((scalar R f ^ k).asHom) ≫ ((scalar R g ^ k).asHom) =
+      ((scalar R g ^ k).asHom) ≫ ((scalar R f ^ k).asHom) := by
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro X

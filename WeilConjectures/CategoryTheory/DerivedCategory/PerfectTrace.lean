@@ -84,8 +84,8 @@ lemma ε_Qh_comp_map_single_map_algebraMap_comp_inv (r : R) :
   have hF := Functor.map_smul (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0 ⋙
     HomotopyCategory.quotient _ (.up ℤ) ⋙ Qh) r (𝟙 (𝟙_ (ModuleCat.{u} R)))
   rw [CategoryTheory.Functor.map_id] at hF
-  rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, End.smul_asHom, End.smul_asHom,
-    End.one_asHom, End.one_asHom]
+  rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one,
+    End.smul_asHom, End.smul_asHom, End.one_asHom, End.one_asHom]
   erw [hF]
   rw [Linear.smul_comp, Linear.comp_smul]
   erw [Category.id_comp]
