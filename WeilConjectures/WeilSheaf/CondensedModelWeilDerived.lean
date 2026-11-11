@@ -304,8 +304,9 @@ Frobenius pullbacks `(Fr⁻¹)_*`: both composites are the pushforward along
 `φ̄ ≫ Fr_Y⁻¹ = Fr_X⁻¹ ≫ φ̄`. This is the new-model counterpart of
 `AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`. -/
 noncomputable def lowerStarGeometricFiberMapCompFrobeniusIso :
-    lowerStar Λ (Scheme.Hom.geometricFiberMap φ h) ⋙ lowerStar Λ g.geometricGaloisFrobenius.inv ≅
-      lowerStar Λ f.geometricGaloisFrobenius.inv ⋙
+    lowerStar Λ (Scheme.Hom.geometricFiberMap φ h) ⋙
+        lowerStar Λ g.geometricGaloisFrobenius.asIso.inv ≅
+      lowerStar Λ f.geometricGaloisFrobenius.asIso.inv ⋙
         lowerStar Λ (Scheme.Hom.geometricFiberMap φ h) :=
   lowerStarComp Λ _ _ ≪≫
     lowerStarCongr Λ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
@@ -316,8 +317,8 @@ fibre with an isomorphism `(Fr⁻¹)_* M ≅ M`): the pushforward along the base
 Weil structure transported along
 `AlgebraicGeometry.ProEtale.CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso`. -/
 noncomputable def geometricFiberMapWeilLowerStar :
-    Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.inv) ⥤
-      Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.inv) :=
+    Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.asIso.inv) ⥤
+      Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.asIso.inv) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (lowerStarGeometricFiberMapCompFrobeniusIso Λ φ h)
 
 instance : (geometricFiberMapWeilLowerStar Λ φ h).Additive :=
@@ -327,8 +328,9 @@ instance : (geometricFiberMapWeilLowerStar Λ φ h).Additive :=
 `AlgebraicGeometry.ProEtale.CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso` under
 `φ̄^* ⊣ φ̄_*`. -/
 noncomputable def upperStarGeometricFiberMapCompFrobeniusIso :
-    upperStar Λ (Scheme.Hom.geometricFiberMap φ h) ⋙ lowerStar Λ f.geometricGaloisFrobenius.inv ≅
-      lowerStar Λ g.geometricGaloisFrobenius.inv ⋙
+    upperStar Λ (Scheme.Hom.geometricFiberMap φ h) ⋙
+        lowerStar Λ f.geometricGaloisFrobenius.asIso.inv ≅
+      lowerStar Λ g.geometricGaloisFrobenius.asIso.inv ⋙
         upperStar Λ (Scheme.Hom.geometricFiberMap φ h) :=
   Endofunctor.IsoAlgebra.leftMateIso (upperStarLowerStarAdjunction Λ _)
     (lowerStarGeometricFiberMapCompFrobeniusIso Λ φ h)
@@ -336,8 +338,8 @@ noncomputable def upperStarGeometricFiberMapCompFrobeniusIso :
 /-- The pullback `φ^*` of condensed Weil objects: the pullback along the base change `φ̄`, with
 the Weil structure transported along the mate of the exchange isomorphism of the pushforward. -/
 noncomputable def geometricFiberMapWeilUpperStar :
-    Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.inv) ⥤
-      Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.inv) :=
+    Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.asIso.inv) ⥤
+      Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.asIso.inv) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (upperStarGeometricFiberMapCompFrobeniusIso Λ φ h)
 
 instance : (geometricFiberMapWeilUpperStar Λ φ h).Additive :=
@@ -365,8 +367,8 @@ along the base change of an open immersion, the mate of
 `φ̄_! ⊣ φ̄^*`. -/
 noncomputable def openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso :
     openImmersionLowerShriek Λ (Scheme.Hom.geometricFiberMap φ h) ⋙
-        lowerStar Λ g.geometricGaloisFrobenius.inv ≅
-      lowerStar Λ f.geometricGaloisFrobenius.inv ⋙
+        lowerStar Λ g.geometricGaloisFrobenius.asIso.inv ≅
+      lowerStar Λ f.geometricGaloisFrobenius.asIso.inv ⋙
         openImmersionLowerShriek Λ (Scheme.Hom.geometricFiberMap φ h) :=
   Endofunctor.IsoAlgebra.leftMateIso (openImmersionLowerShriekUpperStarAdjunction Λ _)
     (upperStarGeometricFiberMapCompFrobeniusIso Λ φ h)
@@ -374,8 +376,8 @@ noncomputable def openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso :
 /-- Extension by zero `φ_!` of condensed Weil objects along an open immersion `φ`: the extension
 by zero along the base change `φ̄`, with the transported Weil structure. -/
 noncomputable def weilExtensionByZero :
-    Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.inv) ⥤
-      Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.inv) :=
+    Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.asIso.inv) ⥤
+      Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.asIso.inv) :=
   Endofunctor.IsoAlgebra.mapOfNatIso
     (openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso Λ φ h)
 
@@ -411,8 +413,8 @@ with the Frobenius exchange isomorphisms
 lemma exchangeCompatible_lowerStar_geometricFiberMap :
     Endofunctor.IsoAlgebra.ExchangeCompatible
       (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h)
-      (adicLowerStarCompCondensedModIso l f.geometricGaloisFrobenius.inv)
-      (adicLowerStarCompCondensedModIso l g.geometricGaloisFrobenius.inv)
+      (adicLowerStarCompCondensedModIso l f.geometricGaloisFrobenius.asIso.inv)
+      (adicLowerStarCompCondensedModIso l g.geometricGaloisFrobenius.asIso.inv)
       (CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso _ φ h)
       (adicLowerStarCompCondensedModIso l (Scheme.Hom.geometricFiberMap φ h)) :=
   exchangeCompatible_adicLowerStarCompCondensedModIso l _ _ _
@@ -483,7 +485,7 @@ the old model to condensed Weil objects. -/
 noncomputable def condensedEquivalence :
     ProEtaleWeilSheaf k₀ l X ≌ Endofunctor.IsoAlgebra
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv) :=
   (toCondensed k₀ l X).asEquivalence
 
 lemma condensedEquivalence_functor :
@@ -505,7 +507,7 @@ noncomputable def derivedEquivCondensed :
     _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X) ≌
       _root_.DerivedCategory (Endofunctor.IsoAlgebra
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)) :=
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)) :=
   (condensedEquivalence k₀ l X).mapDerivedCategory
 
 lemma derivedEquivCondensed_functor :
@@ -583,10 +585,10 @@ noncomputable def condensedRightDerivedLowerShriek (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] (c : Compactification f) :
     _root_.DerivedCategory (Endofunctor.IsoAlgebra
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)) ⥤
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)) ⥤
       _root_.DerivedCategory (Endofunctor.IsoAlgebra
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)) :=
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)) :=
   (CondensedRing.weilExtensionByZero (Profinite.padicAlgClRingObj l) c.i
       (comp_over c.i _)).mapDerivedCategory ⋙
     (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l) c.g
