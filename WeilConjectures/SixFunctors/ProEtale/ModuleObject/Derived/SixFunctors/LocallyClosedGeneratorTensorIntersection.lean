@@ -327,7 +327,6 @@ attribute [local irreducible] upperStar upperStarComp upperStarCongr
 private theorem immersion_noetherian {S X : Scheme.{u}}
     [IsLocallyNoetherian X] [CompactSpace X] (a : S ⟶ X) [IsImmersion a] :
     IsLocallyNoetherian S ∧ CompactSpace S := by
-
   let : IsNoetherian X := ⟨⟩
   let : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
   exact ⟨LocallyOfFiniteType.isLocallyNoetherian a, inferInstance⟩
