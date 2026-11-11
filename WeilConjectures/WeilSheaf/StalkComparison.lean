@@ -199,8 +199,8 @@ lemma _root_.AlgebraicGeometry.WeilCoefficients.linearEquivOfIso_toLinearMap
 theorem IsReal.stalkAt {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} (h : F.IsReal ι)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m : ℕ} (hm : m ≠ 0)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
-      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
     (F.stalkAt s m hs).IsReal ι := by
   obtain ⟨hx, hdvd⟩ :=
     Scheme.Hom.mem_finitePoints_and_degreeOver_dvd_of_geometricGaloisFrobenius_pow _ s
