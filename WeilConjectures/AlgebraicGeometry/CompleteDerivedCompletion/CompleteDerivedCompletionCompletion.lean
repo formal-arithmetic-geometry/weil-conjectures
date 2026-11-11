@@ -127,14 +127,14 @@ homomorphism on endomorphisms, so their composite preserves powers. -/
 theorem scalarOnModules_pow (T : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (k : ℕ) :
     DerivedNakayama.scalarOnModules l E T (d ^ k) =
-      (End.of (DerivedNakayama.scalarOnModules l E T d)) ^ k := by
+      ((End.of (DerivedNakayama.scalarOnModules l E T d)) ^ k).asHom := by
   let A := AdicCompletion.Modules l E T
   let F₁ := (DerivedNakayama.pullback l E T).mapEnd
     (Mod.regular (DerivedNakayama.integerRing l E))
   let F₂ := (DerivedNakayama.regularPullbackIso l E T).conj.toMonoidHom
   let F₃ := (tensoringLeft A).mapEnd (𝟙_ A)
   let F₄ := (leftUnitorNatIso A).conj.toMonoidHom
-  exact (F₄.comp (F₃.comp (F₂.comp F₁))).map_pow d k
+  exact congrArg End.asHom ((F₄.comp (F₃.comp (F₂.comp F₁))).map_pow d k)
 
 /-- The derived reduction tower is triangulated with its totalization shift.
 Source: blueprint Notation 3 and Assertion 6
@@ -389,8 +389,9 @@ private theorem evaluatedPowerMap (T : Scheme.{u}) (n : ℕ) :
   funext P
   apply HomologicalComplex.Hom.ext
   funext j
-  exact (((evaluation _ _).obj (P.X j)).mapEnd (𝟭 (AdicCompletion.Modules l E T))).map_pow
-    (End.of (scalar l E T)) (n + 1) |>.symm
+  exact congrArg End.asHom
+    ((((evaluation _ _).obj (P.X j)).mapEnd (𝟭 (AdicCompletion.Modules l E T))).map_pow
+      (End.of (scalar l E T)) (n + 1)).symm
 
 private abbrev principalScalar (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) : End P :=
@@ -399,7 +400,7 @@ private abbrev principalScalar (T : Scheme.{u})
 private theorem scalarOnComplex_pow (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) (k : ℕ) :
     DerivedNakayama.scalarOnComplex l E T (uniformizer l E ^ k) P =
-      principalScalar l E T P ^ k := by
+      (principalScalar l E T P ^ k).asHom := by
   apply HomologicalComplex.Hom.ext
   funext j
   change (DerivedNakayama.scalarOnModules l E T (uniformizer l E ^ k)).app (P.X j) = _
@@ -409,16 +410,17 @@ private theorem scalarOnComplex_pow (T : Scheme.{u})
       (𝟭 (AdicCompletion.Modules l E T))).map_pow (End.of (scalar l E T)) k
   have h₂ := ((HomologicalComplex.eval (AdicCompletion.Modules l E T) (.up ℤ) j).mapEnd P).map_pow
     (principalScalar l E T P) k
-  exact h₁.trans h₂.symm
+  exact congrArg End.asHom (h₁.trans h₂.symm)
 
 private theorem power_on_complex (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) (n : ℕ) :
     ((ev l E T n).mapHomologicalComplex (.up ℤ)).map ((complexPowerMap l E T).app P) =
-      principalScalar l E T P ^ (n + 1) := by
+      (principalScalar l E T P ^ (n + 1)).asHom := by
   apply HomologicalComplex.Hom.ext
   funext j
-  exact ((HomologicalComplex.eval (AdicCompletion.Modules l E T) (.up ℤ) j).mapEnd P).map_pow
-    (principalScalar l E T P) (n + 1) |>.symm
+  exact congrArg End.asHom
+    (((HomologicalComplex.eval (AdicCompletion.Modules l E T) (.up ℤ) j).mapEnd P).map_pow
+      (principalScalar l E T P) (n + 1)).symm
 
 set_option maxHeartbeats 1600000 in
 -- Comparing the nested tower, cone and evaluation functors needs extra elaboration fuel.
@@ -434,22 +436,22 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
       (∀ n : ℕ, ((ev l E T n).mapHomologicalComplex (.up ℤ)).map
           ((strictAugmentation l E T).app P) ≫ (b n).hom =
         CochainComplex.mappingCone.inr
-          (principalScalar l E T P ^ (n + 1))) := by
+          (principalScalar l E T P ^ (n + 1)).asHom) := by
   let μ := principalScalar l E T P
   let X := (((scalarTower l E T).mapHomologicalComplex (.up ℤ)).obj P).asFunctor
   let Y := (((constant l E T).mapHomologicalComplex (.up ℤ)).obj P).asFunctor
   let f : X ⟶ Y := HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
     ((complexPowerMap l E T).app P)
   let e : ((strictRed l E T).obj P).asFunctor ≅ levelConeTower f := levelConeTowerIso f
-  have hf (n : ℕ) : f.app (op n) = μ ^ (n + 1) := power_on_complex l E T P n
-  let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1))
+  have hf (n : ℕ) : f.app (op n) = (μ ^ (n + 1)).asHom := power_on_complex l E T P n
+  let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1)).asHom
     (Iso.refl P) (Iso.refl P) (by
       simp only [Iso.refl_hom]
       exact hf n)
   let b (n : ℕ) := e.app (op n) ≪≫ c n
   refine ⟨b, ?_, ?_⟩
   · intro n
-    have hX : X.map (homOfLE (Nat.le_succ n)).op = μ := by
+    have hX : X.map (homOfLE (Nat.le_succ n)).op = μ.asHom := by
       apply HomologicalComplex.Hom.ext
       funext j
       change ((Functor.ofOpSequence
@@ -903,7 +905,7 @@ private theorem scalarSource_reduction_zero (T : Scheme.{u})
         (((scalarTower l E T).mapHomologicalComplex (.up ℤ)).obj P)))) := by
   let A := AdicCompletion.Modules l E T
   let : Linear (CatCenter A) A := Linear.ofRingMorphism (RingHom.id (CatCenter A))
-  let r : CatCenter A := scalar l E T
+  let r : CatCenter A := End.of (scalar l E T)
   let X := ((scalarTower l E T).mapHomologicalComplex (.up ℤ)).obj P
   let V := ∏ᶜ (fun _ : ℕ ↦ P)
   let a : V ⟶ V := Limits.Pi.map (fun _ : ℕ ↦ r • 𝟙 P)
@@ -940,14 +942,14 @@ private theorem scalarSource_reduction_zero (T : Scheme.{u})
     rw [hd]
     exact CochainComplex.scalarTowerProductFibre_scalar_quasiIso P r
   let F := ExactProductsRoos.fibre.obj X
-  have hi : IsIso (DerivedCategory.Q.map (principalScalar l E T F)) := by
+  have hi : IsIso (DerivedCategory.Q.map (principalScalar l E T F).asHom) := by
     let := hq
     exact inferInstanceAs (IsIso (DerivedCategory.Q.map
       (DerivedNakayama.scalarOnComplex l E T (uniformizer l E) F)))
   have hip : IsIso (DerivedCategory.Q.map
       (DerivedNakayama.scalarOnComplex l E T (uniformizer l E ^ (n + 1)) F)) := by
     rw [scalarOnComplex_pow]
-    change IsIso ((DerivedCategory.Q.mapEnd F) (principalScalar l E T F ^ (n + 1)))
+    change IsIso (((DerivedCategory.Q.mapEnd F) (principalScalar l E T F ^ (n + 1))).asHom)
     rw [map_pow]
     exact (isUnit_iff_isIso _).1 (((isUnit_iff_isIso _).2 hi).pow (n + 1))
   have hz := (DerivedCategory.Q.mapTriangle.obj
@@ -1044,4 +1046,3 @@ theorem finiteReduction_kappa (T : Scheme.{u})
 end CompleteDerivedCompletion
 
 end AlgebraicGeometry.ProEtale
-
