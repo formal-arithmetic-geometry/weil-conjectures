@@ -231,19 +231,23 @@ private theorem forward_realization_mate
         (sfIntrinsicModuleEquivalence T A).toAdjunction
         (TwoSquare.mk _ _ _ _ (sfRealizationRestriction T φ).inv) =
       TwoSquare.mk _ _ _ _ (sfInverseRealizationRestriction T φ).inv := by
-  apply NatTrans.ext
-  funext M
-  simp only [sfInverseRealizationRestriction, mateEquiv_apply,
-    Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp,
-    Category.assoc]
-  dsimp only [Equivalence.symm, Equivalence.toAdjunction, Equivalence.unit,
-    Equivalence.counit, TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj, Functor.comp_map]
-  all_goals rfl
+  have h {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+      (eC : C ≌ E) (eD : D ≌ F) (G : C ⥤ D) (H : E ⥤ F)
+      (e : eC.functor ⋙ H ≅ G ⋙ eD.functor) :
+      mateEquiv eC.toAdjunction eD.toAdjunction e.inv =
+        (isoWhiskerRight eC.counitIso.symm (H ⋙ eD.inverse) ≪≫
+          isoWhiskerLeft eC.inverse (isoWhiskerRight e eD.inverse) ≪≫
+          isoWhiskerLeft (eC.inverse ⋙ G) eD.unitIso.symm).inv := by
+    apply NatTrans.ext
+    funext M
+    simp only [mateEquiv_apply, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+      isoWhiskerRight_inv, isoWhiskerLeft_inv, whiskerRight_app, whiskerLeft_app,
+      leftUnitor_hom_app, rightUnitor_inv_app, associator_hom_app, associator_inv_app,
+      Category.id_comp, Category.assoc]
+    rfl
+  exact h (sfIntrinsicModuleEquivalence T B) (sfIntrinsicModuleEquivalence T A)
+    (sfFixedRestriction T φ) (proEtaleCoefficientRestrictScalars T φ)
+    (sfRealizationRestriction T φ)
 
 private theorem inverse_realization_unit
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
