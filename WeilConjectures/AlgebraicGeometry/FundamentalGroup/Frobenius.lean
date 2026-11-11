@@ -645,8 +645,8 @@ theorem exists_extension_of_isIsomorphic_mapIso
       monodromy_eq_of_isIsomorphic s G (hT n)]
     exact ht n g
 
-/-- Blueprint `prop-wf-open-curve-h1-no-frobenius-fixed`: No Frobenius-fixed compatible class
-on an open normal curve.
+/-- Blueprint `prop-wf-open-curve-h1-no-frobenius-fixed`, `proposition-no-fixed-class-degree-one`:
+No Frobenius-fixed compatible class on an open normal curve.
 
 Let `U₀` be a smooth geometrically connected curve over a finite field `K = 𝔽_q`, let
 `U = U₀ ×_K K̄` be its geometric fibre with geometric point `s` and fundamental group
