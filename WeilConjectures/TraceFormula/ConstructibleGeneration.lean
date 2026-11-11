@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
--- PS309 downstream validation; removed after checking.
-
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceEmbedding
 public import WeilConjectures.TraceFormula.OpenClosedTriangle

@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
--- PS309 downstream validation; removed after checking.
-
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian

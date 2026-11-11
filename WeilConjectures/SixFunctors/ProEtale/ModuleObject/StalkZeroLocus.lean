@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
--- PS309 downstream validation; removed after checking.
-
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
