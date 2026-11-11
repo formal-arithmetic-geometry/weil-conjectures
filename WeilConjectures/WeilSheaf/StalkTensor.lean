@@ -176,22 +176,20 @@ omit [Fact (ringChar k₀ ≠ l)] in
 theorem ProEtaleWeilSheaf.ihom_evaluation_str (A B : ProEtaleWeilSheaf k₀ l X) :
     ((ProEtaleWeilSheaf.ihom k₀ l X A B).str.hom.hom ⊗ₘ A.str.hom.hom) ≫
         Mod.evaluation A.carrier B.carrier =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-          WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
           ((ProEtale.AdicSheaf.ihom A.carrier).obj B.carrier).X A.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
           (Mod.evaluation A.carrier B.carrier) ≫
         B.str.hom.hom := by
-  have : (Mod.mapModComap
-      (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+  have : (Mod.mapModComap (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[
       WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
   have h := Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) A.carrier B.carrier
   have hstr : (ProEtaleWeilSheaf.ihom k₀ l X A B).str.hom.hom =
-      ((adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+      ((adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
         A.carrier).inv.app B.carrier).hom ≫
       ((Mod.ihomMap A.str.inv).app _).hom ≫
       ((ProEtale.AdicSheaf.ihom A.carrier).map B.str.hom).hom := rfl
@@ -210,8 +208,8 @@ namespace WeilSheaf
 section TensorStalk
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
-      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
 
 /-- The pairing `(F ⊗ G)_s × (F^∨)_s → G_s` of stalks induced by the evaluation
 `[F^∨, G] ⊗ F^∨ ⟶ G` intertwines the Frobenius of the stalks. -/
