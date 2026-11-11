@@ -168,8 +168,8 @@ attribute [local instance] coefficientModuleLinear
 
 private theorem coefficientChain_eq (a : Padic.coefficientExtensionIntegers l E) :
     integralScalarChainAction l E Y a =
-      Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
-        (CochainComplex (integralTowerModules l E Y) ℤ) a := by
+      (Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
+        (CochainComplex (integralTowerModules l E Y) ℤ) a).asHom := by
   apply NatTrans.ext
   funext P
   apply HomologicalComplex.hom_ext
@@ -184,13 +184,14 @@ private theorem coefficientChain_eq (a : Padic.coefficientExtensionIntegers l E)
 
 private theorem coefficientDerived_eq (a : Padic.coefficientExtensionIntegers l E) :
     integralScalarDerivedAction l E Y a =
-      CatCenter.localization
+      (CatCenter.localization
         (Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
           (CochainComplex (integralTowerModules l E Y) ℤ) a)
-        DerivedCategory.Q (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)) := by
+        DerivedCategory.Q
+        (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))).asHom := by
   unfold integralScalarDerivedAction
   rw [(existsUnique_eq (a' := _)).exists.choose_spec]
-  apply CatCenter.ext_of_localization DerivedCategory.Q
+  apply Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
   intro P
   have h := NatTrans.congr_app
