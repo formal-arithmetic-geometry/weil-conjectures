@@ -113,9 +113,14 @@ theorem autAction_baseChangeAut_eq_id_of_derivedComplete [IsAlgClosed K] {ℓ : 
       (Profinite.padicIntegersRingObj ℓ E) Z = 𝟙 _) {σ : GenericAut k' K} (hσ : σ ∈ V) :
     (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicIntegersRingObj ℓ E) A = 𝟙 _ :=
   autAction_baseChangeAut_eq_id_of_distinguished_of_separated hM b hb v hv _ π δ hT
-    (fun f hf ↦ ProEtale.eq_zero_of_forall_exists_eq_pow_zsmul hc fun m ↦ by
+    (fun f hf ↦ by
+      apply End.ext
+      apply ProEtale.eq_zero_of_forall_exists_eq_pow_zsmul hc
+      intro m
       obtain ⟨g, hg⟩ := hf m
-      exact ⟨g, by rw [hg, ← natCast_zsmul, Nat.cast_pow]⟩)
+      refine ⟨g.asHom, ?_⟩
+      simpa only [End.nsmul_asHom, ← natCast_zsmul, Nat.cast_pow] using
+        congrArg End.asHom hg)
     (GenericAut.exists_pow_ell_pow_eq hℓ) V hV hσ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
