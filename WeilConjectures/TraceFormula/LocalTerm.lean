@@ -478,7 +478,7 @@ the local term of `α` is its restriction `j^* α : ℚ̄_ℓ,s ⟶ ω_s`, read 
 `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem localTerm_point (j : point k ⟶ E) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (α : BorelMooreSection ℓ E) :
-    α.localTerm j = α.restrict j ≫ (dualizingComplexPointIso ℓ k).hom :=
+    α.localTerm j = .of (α.restrict j ≫ (dualizingComplexPointIso ℓ k).hom) :=
   integral_point _
 
 /-- **The local term at a point component** (blueprint `lem-trf-local-term-point`): for an open
@@ -488,7 +488,7 @@ of `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem localTerm_eq_of_iso [IsProper B.hom] (j : B ⟶ E) [IsOpenImmersion j.left]
     [IsClosedImmersion j.left] (e : B ≅ point k) [IsProper e.hom.left]
     (α : BorelMooreSection ℓ E) :
-    α.localTerm j = pushforward e.hom (α.restrict j) ≫ (dualizingComplexPointIso ℓ k).hom := by
+    α.localTerm j = .of (pushforward e.hom (α.restrict j) ≫ (dualizingComplexPointIso ℓ k).hom) := by
   rw [← integral_point, integral_pushforward, localTerm]
 
 end BorelMooreSection
