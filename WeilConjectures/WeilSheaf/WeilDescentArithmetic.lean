@@ -74,7 +74,8 @@ lemma pullbackPathHom_frobConj (g : Aut (fiber B.t)) :
   simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, Iso.trans_inv, eqToIso.inv,
     Category.assoc]
   rw [← cancel_epi (eqToHom (congrArg fiber (Category.assoc B.t
-      (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom (X ↘ Spec (.of K)).geometricFiberProj))),
+      (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
+        (X ↘ Spec (.of K)).geometricFiberProj))),
     ← cancel_mono (eqToHom (congrArg fiber (Category.assoc B.t
       (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
         (X ↘ Spec (.of K)).geometricFiberProj)).symm)] at h'
