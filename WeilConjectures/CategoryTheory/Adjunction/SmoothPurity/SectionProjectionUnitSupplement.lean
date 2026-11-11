@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory.Adjunction
 
-attribute [local implicit_reducible] TwoSquare
+attribute [local reducible] TwoSquare
 
 /-- Compose tensor comparisons and cancel a section compositor. -/
 theorem tensor_compatibility_of_composite_section
