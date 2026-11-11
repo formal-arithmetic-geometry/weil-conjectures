@@ -69,8 +69,8 @@ private theorem projectionTermIso_d (L : ringedSiteComplex R) :
 
 private theorem scalarPower (n : ℕ) :
     endoPow (globalSectionMultiplication R a) n =
-      (ringedKoszulScalar R ⟨a.val, a.property⟩) ^ n := by
-  change endoPow (ringedKoszulScalar R ⟨a.val, a.property⟩) n = _
+      ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ n).asHom := by
+  change endoPow (ringedKoszulScalar R ⟨a.val, a.property⟩).asHom n = _
   induction n with
   | zero => rfl
   | succ n ih => erw [endoPow, ih, pow_succ', End.mul_asHom]
@@ -107,7 +107,7 @@ private theorem coneZeroProjection (m : ℕ) :
 private theorem coneDifferential (m : ℕ) :
     (principalKoszul R a m).d (-1) 0 ≫ (coneZeroTerm R a m).hom =
       (coneNegOneTerm R a m).hom ≫
-        (ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1) := by
+        ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom := by
   let e := HomologicalComplex.singleObjXSelf (.up ℤ) 0
     (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
   have hc0 : (coneZeroTerm R a m).hom =
@@ -133,10 +133,10 @@ private theorem dualDifferential (m : ℕ) :
     ((ringedKoszulDualTower R 1 (fun _ ↦ ⟨a.val, a.property⟩)).obj (op m)).d (-1) 0 ≫
         (dualZeroTerm R a m).hom =
       (dualNegOneTerm R a m).hom ≫
-        (ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1) := by
+        ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom := by
   erw [dualZeroTerm_hom R a m, dualNegOneTerm_hom R a m]
   let U := SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-  let f := (ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)
+  let f := ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom
   let L := ringedKoszulFactor R ⟨a.val, a.property⟩ m
   let H := homComplex (R := R) L (ringedSiteRingComplex R)
   let e := SheafOfModules.homObjUnitIso (R := R) U
