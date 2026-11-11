@@ -40,7 +40,7 @@ private theorem sectionsComparisonNatIso_apply
 private theorem moduleComparisonEquiv_siteSections
     {A : Type*} [Category A] {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{u}]
-    [Abelian.HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
     {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R}
     {T : A ⥤ Sheaf J AddCommGrpCat.{u}} (U : C) (p : ℕ)
     (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
