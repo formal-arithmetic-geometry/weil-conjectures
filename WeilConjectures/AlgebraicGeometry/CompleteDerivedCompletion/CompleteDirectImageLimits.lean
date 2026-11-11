@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCompletionCompatibility
 
-
 /-!
 # Derived direct image, reduction towers and completion
 
