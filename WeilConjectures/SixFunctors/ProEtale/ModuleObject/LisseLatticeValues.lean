@@ -52,7 +52,6 @@ lemma Γ_map_padicIntegersToPadicSubfield (W : Scheme.{u}) :
           (continuousMapCoefficientSectionRingHom W (integers ℓ E.1) h) =
         continuousMapCoefficientSectionRingHom W E.1
           ((⟨Subtype.val, continuous_subtype_val⟩ : C(integers ℓ E.1, E.1)).comp h) := by
-
   let := normedFieldOfAlgebra ℓ E.1
   have := isUltrametricDist_ofAlgebra ℓ E.1
   intro h

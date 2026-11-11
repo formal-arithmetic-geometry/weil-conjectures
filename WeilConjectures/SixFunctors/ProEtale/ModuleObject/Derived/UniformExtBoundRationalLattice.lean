@@ -71,7 +71,6 @@ theorem exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_l
             ((DerivedCategory.singleFunctor _ 0).obj L))) ≅
         (DerivedCategory.singleFunctor _ 0).obj
           ((Mod.extendScalars (padicIntegersToPadicSubfield T ℓ E)).obj G)) := by
-
   have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
   have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
   obtain ⟨L', hL', ⟨e⟩⟩ := exists_isLocallyFree_padicIntegers_extendScalars_iso (ℓ := ℓ) L

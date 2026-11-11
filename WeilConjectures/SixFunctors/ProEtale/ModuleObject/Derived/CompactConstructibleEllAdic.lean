@@ -660,7 +660,6 @@ private noncomputable def continuousIso
     (e : A ≃+* B) (he : Continuous e) (hei : Continuous e.symm) :
     Mon.mk (Profinite.continuousMapRingObj.{u} A) ≅
       Mon.mk (Profinite.continuousMapRingObj.{u} B) := by
-
   let eR : Profinite.continuousMapRingSheaf.{u} A ≅
       Profinite.continuousMapRingSheaf.{u} B :=
     { hom := Profinite.continuousMapRingSheafMap e.toRingHom he
