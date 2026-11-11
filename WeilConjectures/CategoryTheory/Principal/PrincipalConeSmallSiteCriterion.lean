@@ -193,14 +193,15 @@ unit equality identifies the reflector's invertibility criterion with the stated
 theorem principalConeSmallSiteCriterion
     (a : (R.obj ⋙ forget CommRingCat).sections) (P : CochainComplex A ℤ) (μ : End P)
     (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x = @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :
+      (μ.asHom.f q).val.app U x = @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul
+        (a.val U) x) :
     principalLocallyComplete.{u, u, u, w} R a
         ((DerivedCategory.Q.{w} (C := A)).obj (CochainComplex.PrincipalCone.completion μ)) ∧
       (principalLocallyComplete.{u, u, u, w} R a ((DerivedCategory.Q.{w} (C := A)).obj P) ↔
         IsIso ((DerivedCategory.Q.{w} (C := A)).map (CochainComplex.PrincipalCone.unit μ))) := by
   let := principalLocalTestSliceDerived R
-  let I := image (ringedKoszulScalar R a)
-  let ι := image.ι (ringedKoszulScalar R a)
+  let I := image (ringedKoszulScalar R a).asHom
+  let ι := image.ι (ringedKoszulScalar R a).asHom
   obtain ⟨D, hC, _, hcrit, _⟩ := ringedKoszulCompletionReflector R 1 (fun _ ↦ a)
     I ι (principal_generators R a)
   let b : (SheafOfModules.unit Rg).sections := ⟨a.val, a.property⟩
