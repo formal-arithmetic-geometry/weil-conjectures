@@ -167,7 +167,8 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
       (padicIntegersSheafMulOfLE_comp_adicConstantSheafLeg (X := T) (E := E) (F := F.1) F.2
         (integersSubalgebraFamilyEquiv E F o) n)
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at key
-    trace_state
+    dsimp only [integralLatticeSectionsEquiv, AddEquiv.ofBijective, Equiv.ofBijective,
+      AddEquiv.ulift, Equiv.ulift]
     exact key.symm
 
 include hθ hθW in
