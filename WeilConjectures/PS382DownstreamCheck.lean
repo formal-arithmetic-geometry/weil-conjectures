@@ -1,3 +1,3 @@
 module
 
-import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
