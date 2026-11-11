@@ -372,5 +372,3 @@ theorem completedKoszulFiniteComparison
     exact hw.trans hv
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.
