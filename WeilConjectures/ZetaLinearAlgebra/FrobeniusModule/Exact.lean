@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.InfinityReductionLinearAlgebra
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
 
@@ -27,6 +28,8 @@ field cardinality `q` becomes `qᵐ`.
   (`lem-a1-punctual-bound-module-mixed`): a bound on all eigenvalues is an upper weight bound.
 - `FrobeniusModule.HasWeightsAtMost.of_powFrobenius` (`lem-a1-weight-bound-constant-extension`):
   a weight bound over a finite constant extension descends.
+- `FrobeniusModule.hasWeightsAtMost_powFrobenius_iff` (`lemma-weight-bound-constant-extension--1`):
+  over an algebraically closed field, weight bounds over `k₀` and over `k_m` are equivalent.
 - `FrobeniusModule.roots_charpoly_frobeniusEnd_map_eq_add` (`lem-a1-spectrum-exact-sequence`): the
   spectrum of the middle term of a short exact sequence is the sum of those of the outer terms.
 - `FrobeniusModule.HasWeightsAtMost.of_subquotient` (`lem-a1-subquotient-extension-bounds`):
@@ -175,6 +178,45 @@ theorem HasWeightsAtMost.of_powFrobenius {M : FrobeniusModule.{u, v} K} {ι : K 
       ← Real.rpow_natCast (q : ℝ) m, ← Real.rpow_mul (Nat.cast_nonneg _), mul_comm]
   rw [map_pow, norm_pow, Nat.cast_pow, e] at hb
   exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg (Nat.cast_nonneg _) _) hm).1 hb
+
+/-- Over an algebraically closed field, for `m ≠ 0`, every eigenvalue `β` of `Fᵐ` is the
+`m`-th power of an eigenvalue `α` of `F`. -/
+theorem exists_hasEigenvalue_pow_eq_of_powFrobenius [IsAlgClosed K]
+    {M : FrobeniusModule.{u, v} K} {m : ℕ} (hm : m ≠ 0) {β : K}
+    (hβ : (M.powFrobenius m).frobeniusEnd.HasEigenvalue β) :
+    ∃ α, M.frobeniusEnd.HasEigenvalue α ∧ α ^ m = β := by
+  rw [powFrobenius_frobeniusEnd] at hβ
+  exact WeilConjectures.infinity_eigenvalue_power_preimage (RingHom.id K) Function.surjective_id
+    _ m (Nat.pos_of_ne_zero hm) β hβ
+
+/-- **Weight bounds and finite constant extensions.** Over an algebraically closed field, for
+`m ≠ 0`, every eigenvalue `α` of the Frobenius `F` of `M` satisfies `|ι α| ≤ q ^ (b / 2)` if and
+only if every eigenvalue `β` of `Fᵐ`, the Frobenius over the constant extension of degree `m`,
+satisfies `|ι β| ≤ (qᵐ) ^ (b / 2)`.
+(blueprint: `lemma-weight-bound-constant-extension--1`) -/
+theorem hasWeightsAtMost_powFrobenius_iff [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
+    {ι : K →+* ℂ} {q m : ℕ} (hm : m ≠ 0) {b : ℝ} :
+    (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b ↔ M.HasWeightsAtMost ι q b := by
+  rw [HasWeightsAtMost, HasWeightsAtMost, powFrobenius_frobeniusEnd]
+  exact (WeilConjectures.infinity_eigenvalue_bound_power_iff (RingHom.id K)
+    Function.surjective_id M.frobeniusEnd ι q m (Nat.pos_of_ne_zero hm) b).symm
+
+/-- **Weight bounds over a finite constant extension**, the ascending direction. Over an
+algebraically closed field, if `M` has weights at most `b`, so has the Frobenius module `(M, Fᵐ)`
+for the field cardinality `qᵐ`. For `m = 0` the only eigenvalue of `F⁰ = 1` is `1`. -/
+theorem HasWeightsAtMost.powFrobenius [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
+    {ι : K →+* ℂ} {q : ℕ} {b : ℝ} (h : M.HasWeightsAtMost ι q b) (m : ℕ) :
+    (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b := by
+  rcases eq_or_ne m 0 with rfl | hm
+  · intro β hβ
+    rw [powFrobenius_frobeniusEnd, pow_zero] at hβ
+    obtain ⟨x, hx⟩ := hβ.exists_hasEigenvector
+    have h1 : (1 : K) • x = β • x := by
+      rw [one_smul]
+      exact Module.End.mem_eigenspace_iff.1 hx.1
+    rw [← smul_left_injective K hx.2 h1]
+    simp
+  · exact (hasWeightsAtMost_powFrobenius_iff hm).2 h
 
 /-- A Frobenius module with weights at most `w` whose dual has weights at most `-w` (through an
 isomorphism `N ≃ M^∨`) is pure of weight `w`: the eigenvalues of the Frobenius of `M^∨` are the
