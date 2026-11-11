@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
 import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest
