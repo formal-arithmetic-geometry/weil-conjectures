@@ -206,6 +206,7 @@ private lemma free_hasConstantModel
       Mod.IsFree (condensedRingObj Λ (U.X i))
         ((CondensedRing.upperStar Λ (U.f i)).obj M)) :
     HasFiniteConstantLocalModel Λ Y M := by
+
   obtain ⟨U, hU⟩ := hM
   refine ⟨U, fun i ↦ ?_⟩
   obtain ⟨n, ⟨e⟩⟩ := hU i

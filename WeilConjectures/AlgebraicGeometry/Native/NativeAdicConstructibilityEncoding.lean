@@ -178,7 +178,6 @@ private lemma encoding_free_of_iso {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
     (h : Mod.IsFree R M) (e : M ≅ N) : Mod.IsFree R N := by
-
   obtain ⟨n, ⟨i⟩⟩ := h
   exact ⟨n, ⟨e.symm ≪≫ i⟩⟩
 

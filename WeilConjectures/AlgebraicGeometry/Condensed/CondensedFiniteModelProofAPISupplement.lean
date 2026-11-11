@@ -203,6 +203,7 @@ variable {D : Type w} [Category.{v} D] [HasZeroObject D] [HasShift D ℤ]
 private def factors (K : D) : Prop :=
   ∀ f : K ⟶ c.pt, ∃ (i : I) (g : K ⟶ N.obj i), f = g ≫ c.ι.app i
 private lemma factors_iso {K L : D} (e : K ≅ L) (h : factors c K) : factors c L := by
+
   intro f
   obtain ⟨i, g, hg⟩ := h (e.hom ≫ f)
   refine ⟨i, e.inv ≫ g, ?_⟩

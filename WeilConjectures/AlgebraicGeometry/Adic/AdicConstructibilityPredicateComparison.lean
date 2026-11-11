@@ -196,7 +196,6 @@ private theorem comparison_transport
       (condensedRingObj Λ' X)) :
     IsConstructibleModuleObject (condensedRingObj Λ' X) M ↔
       IsConstantModelConstructible Λ' X M := by
-
   let φ := e.hom.hom
   have : IsMonHom φ := inferInstanceAs (IsMonHom e.hom.hom)
   have : IsIso φ := inferInstanceAs (IsIso e.hom.hom)
