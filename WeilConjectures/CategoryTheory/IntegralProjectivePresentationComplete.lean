@@ -115,7 +115,9 @@ theorem exists_cokernel_limit_of_continuous_end
     have hh := congrArg End.asHom hh
     simp only [End.add_asHom, End.nsmul_asHom] at hh
     have hha := happ za i
-    simp only [za, biproduct.lift_π, RingEquiv.symm_apply_apply] at hha
+    simp only [za, biproduct.lift_π] at hha
+    change (e (∑ j, t i j * e.symm (e (a j)))).asHom = _ at hha
+    simp only [RingEquiv.symm_apply_apply] at hha
     rw [hha] at hh
     simpa only [z, zc, b, biproduct.lift_π, RingEquiv.apply_symm_apply,
       Preadditive.add_comp, Preadditive.nsmul_comp, Category.assoc] using hh
