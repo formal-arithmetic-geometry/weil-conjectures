@@ -251,6 +251,7 @@ instance isTriangulated_boundedConstructible_finiteDiscreteRingObj
     [IsTopologicalRing T] [DiscreteTopology T] [Finite T] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)).IsTriangulated := by
+
   obtain ⟨hc, he⟩ := constructible_cokernels_extensions X
     (condensedRingObj (Profinite.continuousMapRingObj T) X)
   exact isTriangulated_boundedConstructible_of_serre _

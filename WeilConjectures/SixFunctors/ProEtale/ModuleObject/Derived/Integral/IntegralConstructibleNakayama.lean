@@ -206,7 +206,6 @@ private lemma isIso_app_of_restriction {W : Scheme.{u}} (g : W ⟶ X)
     (h : IsIso ((ProEtale.localizationRestriction Ab.{u + 1} g inferInstance).map φ))
     (V : X.ProEt) (p : V.left ⟶ W) (hp : p ≫ g = V.hom) :
     IsIso (φ.hom.app (op V)) := by
-
   have hpweaklyEtale : WeaklyEtale p := by
     have : WeaklyEtale (p ≫ g) := hp ▸ V.prop
     exact MorphismProperty.of_postcomp (W := @WeaklyEtale) (W' := @WeaklyEtale) p g ‹_› ‹_›

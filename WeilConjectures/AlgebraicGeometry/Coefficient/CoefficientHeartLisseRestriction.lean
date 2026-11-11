@@ -213,7 +213,6 @@ private theorem lisse_pullback
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : IsLisseCoefficientModule Λ M) :
     IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ f).obj M) := by
-
   exact (isLocallyFree_iff _).1 (IsLocallyFree.upperStar Λ f ((isLocallyFree_iff M).2 hM))
 
 private theorem finitePresentation_fromPoint

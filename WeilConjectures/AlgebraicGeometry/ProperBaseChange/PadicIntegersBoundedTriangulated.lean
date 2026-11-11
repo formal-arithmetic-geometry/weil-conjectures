@@ -232,6 +232,7 @@ bounded-constructible triangulation theorem.
 instance isTriangulated_boundedConstructible_padicIntegers :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)).IsTriangulated := by
+
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   let : NormedAlgebra ℚ_[ℓ] E.1 :=
     { norm_smul_le c x := by
