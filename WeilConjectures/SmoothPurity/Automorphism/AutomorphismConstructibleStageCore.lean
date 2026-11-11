@@ -175,12 +175,12 @@ Source: Weil-structures paragraph, the maps b and d
 (blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
 def automorphismStageFiniteSquare (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom) :
-    sfIntrinsicDerivedPullback A f ⋙ sfIntrinsicDerivedPullback A eY.hom ≅
-      sfIntrinsicDerivedPullback A eX.hom ⋙ sfIntrinsicDerivedPullback A f :=
-  (sfIntrinsicDerivedPullbackComp A eY.hom f).symm ≪≫
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
+    sfIntrinsicDerivedPullback A f ⋙ sfIntrinsicDerivedPullback A eY.asIso.hom ≅
+      sfIntrinsicDerivedPullback A eX.asIso.hom ⋙ sfIntrinsicDerivedPullback A f :=
+  (sfIntrinsicDerivedPullbackComp A eY.asIso.hom f).symm ≪≫
     eqToIso (congrArg (sfIntrinsicDerivedPullback A) h) ≪≫
-      sfIntrinsicDerivedPullbackComp A f eX.hom
+      sfIntrinsicDerivedPullbackComp A f eX.asIso.hom
 
 private theorem integral_composition_natural
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -247,26 +247,26 @@ theorem automorphismStageIntegralSquare_existsUnique
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
     {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
-    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :
-    ∃! b : constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.hom ≅
-        constructibleIntegralPullback l E eX.hom ⋙ constructibleIntegralPullback l E f,
+    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
+    ∃! b : constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.asIso.hom ≅
+        constructibleIntegralPullback l E eX.asIso.hom ⋙ constructibleIntegralPullback l E f,
       ∀ K : sfIntegralConstructibleCategory l E X,
         (b.hom.app K).hom =
-          (integralComparisonComposition l E C eY.hom f K).inv ≫
+          (integralComparisonComposition l E C eY.asIso.hom f K).inv ≫
             eqToHom (congrArg (fun g ↦ (integralDerivedPullback l E g).obj K.obj) h) ≫
-              (integralComparisonComposition l E C f eX.hom K).hom := by
-  obtain ⟨c, hc⟩ := integral_composition_natural l E C eY.hom f
-  obtain ⟨d, hd⟩ := integral_composition_natural l E C f eX.hom
+              (integralComparisonComposition l E C f eX.asIso.hom K).hom := by
+  obtain ⟨c, hc⟩ := integral_composition_natural l E C eY.asIso.hom f
+  obtain ⟨d, hd⟩ := integral_composition_natural l E C f eX.asIso.hom
   let b := c.symm ≪≫
     eqToIso (congrArg (fun g : Y ⟶ X ↦ constructibleIntegralPullback l E g) h) ≪≫ d
   have hb (K : sfIntegralConstructibleCategory l E X) :
       (b.hom.app K).hom =
-        (integralComparisonComposition l E C eY.hom f K).inv ≫
+        (integralComparisonComposition l E C eY.asIso.hom f K).inv ≫
           eqToHom (congrArg (fun g ↦ (integralDerivedPullback l E g).obj K.obj) h) ≫
-            (integralComparisonComposition l E C f eX.hom K).hom := by
+            (integralComparisonComposition l E C f eX.asIso.hom K).hom := by
     have hc' : (c.inv.app K).hom =
-        (integralComparisonComposition l E C eY.hom f K).inv := by
-      apply (cancel_mono (integralComparisonComposition l E C eY.hom f K).hom).1
+        (integralComparisonComposition l E C eY.asIso.hom f K).inv := by
+      apply (cancel_mono (integralComparisonComposition l E C eY.asIso.hom f K).hom).1
       calc
         _ = (c.inv.app K).hom ≫ (c.hom.app K).hom := by rw [hc K]
         _ = 𝟙 _ := congrArg (fun r ↦ r.hom) (c.inv_hom_id_app K)
@@ -290,7 +290,7 @@ def automorphismStageIntegralSquare
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
     {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
-    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :=
+    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :=
   (automorphismStageIntegralSquare_existsUnique l E C f eX eY h).exists.choose
 
 set_option backward.isDefEq.respectTransparency.types false
@@ -364,19 +364,19 @@ theorem automorphismStageRationalSquare_existsUnique
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
     {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
-    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :
-    ∃! b : rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.hom ≅
-        rationalDerivedPullback l E eX.hom ⋙ rationalDerivedPullback l E f,
+    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
+    ∃! b : rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.asIso.hom ≅
+        rationalDerivedPullback l E eX.asIso.hom ⋙ rationalDerivedPullback l E f,
       ∀ K : sfRationalConstructibleCategory l E X,
         HEq (b.hom.app K)
           ((sfRationalConstructibleLocalization l E Y).map
             ((automorphismStageIntegralSquare l E C f eX eY h).hom.app K.obj)) := by
   let R := Padic.coefficientExtensionIntegers l E
   let t := Padic.coefficientExtensionUniformizer l E
-  let U := constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.hom
-  let V := constructibleIntegralPullback l E eX.hom ⋙ constructibleIntegralPullback l E f
-  let F := rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.hom
-  let G := rationalDerivedPullback l E eX.hom ⋙ rationalDerivedPullback l E f
+  let U := constructibleIntegralPullback l E f ⋙ constructibleIntegralPullback l E eY.asIso.hom
+  let V := constructibleIntegralPullback l E eX.asIso.hom ⋙ constructibleIntegralPullback l E f
+  let F := rationalDerivedPullback l E f ⋙ rationalDerivedPullback l E eY.asIso.hom
+  let G := rationalDerivedPullback l E eX.asIso.hom ⋙ rationalDerivedPullback l E f
   have ho {Z W : Scheme.{u}}
       [∀ z : Z, Invertible (l : Z.residueField z)]
       [∀ w : W, Invertible (l : W.residueField w)] (g : Z ⟶ W)
@@ -400,26 +400,26 @@ theorem automorphismStageRationalSquare_existsUnique
       (rationalDerivedPullback l E g).Additive :=
     (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.1
   let : (rationalDerivedPullback l E f).Additive := hadd f
-  let : (rationalDerivedPullback l E eX.hom).Additive := hadd eX.hom
-  let : (rationalDerivedPullback l E eY.hom).Additive := hadd eY.hom
+  let : (rationalDerivedPullback l E eX.asIso.hom).Additive := hadd eX.asIso.hom
+  let : (rationalDerivedPullback l E eY.asIso.hom).Additive := hadd eY.asIso.hom
   apply rawIso_existsUnique t t id U V
     (automorphismStageIntegralSquare l E C f eX eY h) F G
   · intro K
-    exact (ho eY.hom _).trans (congrArg
+    exact (ho eY.asIso.hom _).trans (congrArg
       (fun Z : sfRationalConstructibleCategory l E Y ↦
-        ScalarLocalization.mk ((constructibleIntegralPullback l E eY.hom).obj Z.obj)) (ho f K))
+        ScalarLocalization.mk ((constructibleIntegralPullback l E eY.asIso.hom).obj Z.obj)) (ho f K))
   · intro K
     exact (ho f _).trans (congrArg
       (fun Z : sfRationalConstructibleCategory l E X ↦
-        ScalarLocalization.mk ((constructibleIntegralPullback l E f).obj Z.obj)) (ho eX.hom K))
+        ScalarLocalization.mk ((constructibleIntegralPullback l E f).obj Z.obj)) (ho eX.asIso.hom K))
   · intro K M a z
-    exact (map_heq (rationalDerivedPullback l E eY.hom)
+    exact (map_heq (rationalDerivedPullback l E eY.asIso.hom)
       (ho f _) (ho f _) (hm f K M a z)).trans
-        (hm eY.hom _ _ ((constructibleIntegralPullback l E f).map a) z)
+        (hm eY.asIso.hom _ _ ((constructibleIntegralPullback l E f).map a) z)
   · intro K M a z
     exact (map_heq (rationalDerivedPullback l E f)
-      (ho eX.hom _) (ho eX.hom _) (hm eX.hom K M a z)).trans
-        (hm f _ _ ((constructibleIntegralPullback l E eX.hom).map a) z)
+      (ho eX.asIso.hom _) (ho eX.asIso.hom _) (hm eX.asIso.hom K M a z)).trans
+        (hm f _ _ ((constructibleIntegralPullback l E eX.asIso.hom).map a) z)
 
 /-- The rational square is exactly the rationalization of the integral one.
 Source: Weil-structures paragraph, b and d
@@ -429,7 +429,7 @@ def automorphismStageRationalSquare
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
     {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
-    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :=
+    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :=
   (automorphismStageRationalSquare_existsUnique l E C f eX eY h).exists.choose
 
 set_option backward.isDefEq.respectTransparency false
@@ -457,9 +457,9 @@ theorem automorphismStageQbarSquare_existsUnique
     (C : IntegralComparisonSystem.{u} l)
     {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
-    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :
-    ∃! b : commonStageDerivedPullback l Ω f ⋙ commonStageDerivedPullback l Ω eY.hom ≅
-        commonStageDerivedPullback l Ω eX.hom ⋙ commonStageDerivedPullback l Ω f,
+    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
+    ∃! b : commonStageDerivedPullback l Ω f ⋙ commonStageDerivedPullback l Ω eY.asIso.hom ≅
+        commonStageDerivedPullback l Ω eX.asIso.hom ⋙ commonStageDerivedPullback l Ω f,
       ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω X,
         HEq (b.hom.app K)
           ((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := Y) K.stage).map
@@ -489,7 +489,7 @@ def automorphismStageQbarSquare
     (C : IntegralComparisonSystem.{u} l)
     {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
-    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :=
+    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :=
   (automorphismStageQbarSquare_existsUnique l Ω C f eX eY h).exists.choose
 
 end QbarSquare
@@ -529,7 +529,7 @@ private theorem identity_transport
 
 private theorem finite_shift (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}}
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom) :
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
     NatTrans.CommShift (automorphismStageFiniteSquare A f eX eY h).hom ℤ := by
   have he : NatTrans.CommShift
       (eqToIso (congrArg (sfIntrinsicDerivedPullback A) h)).hom ℤ := by
@@ -543,8 +543,8 @@ private theorem finite_shift (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.
       NatTrans.CommShift (sfIntrinsicDerivedPullbackComp A a b).hom ℤ := by
     dsimp only [sfIntrinsicDerivedPullbackComp, Iso.trans_hom]
     infer_instance
-  have := hc eY.hom f
-  have := hc f eX.hom
+  have := hc eY.asIso.hom f
+  have := hc f eX.asIso.hom
   dsimp only [automorphismStageFiniteSquare, Iso.trans_hom, Iso.symm_hom]
   infer_instance
 
@@ -739,24 +739,24 @@ theorem automorphismConstructibleStage_integral_shifts
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom) :
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
     (∀ (Z W : Scheme.{u}) (g : Z ⟶ W),
       ∃ (c : (integralOperationsPullbackComplexFunctor l E g).CommShift ℤ)
         (d : (integralDerivedPullback l E g).CommShift ℤ),
         IntegralCompletedComparison.ShiftCoordinates l E g c ∧
           IntegralCompletedComparison.ShiftDescent l E g c d) ∧
     ∃ (cf : (constructibleIntegralPullback l E f).CommShift ℤ)
-      (cX : (constructibleIntegralPullback l E eX.hom).CommShift ℤ)
-      (cY : (constructibleIntegralPullback l E eY.hom).CommShift ℤ),
+      (cX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ)
+      (cY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ),
       automorphismStageIntegralShiftNormalization l E f cf ∧
-      automorphismStageIntegralShiftNormalization l E eX.hom cX ∧
-      automorphismStageIntegralShiftNormalization l E eY.hom cY ∧
+      automorphismStageIntegralShiftNormalization l E eX.asIso.hom cX ∧
+      automorphismStageIntegralShiftNormalization l E eY.asIso.hom cY ∧
       (fun [sf : (constructibleIntegralPullback l E f).CommShift ℤ]
-        [sX : (constructibleIntegralPullback l E eX.hom).CommShift ℤ]
-        [sY : (constructibleIntegralPullback l E eY.hom).CommShift ℤ] ↦
+        [sX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
+        [sY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ] ↦
         (constructibleIntegralPullback l E f).IsTriangulated ∧
-          (constructibleIntegralPullback l E eX.hom).IsTriangulated ∧
-          (constructibleIntegralPullback l E eY.hom).IsTriangulated ∧
+          (constructibleIntegralPullback l E eX.asIso.hom).IsTriangulated ∧
+          (constructibleIntegralPullback l E eY.asIso.hom).IsTriangulated ∧
           NatTrans.CommShift (automorphismStageIntegralSquare l E C f eX eY h).hom ℤ)
         (sf := cf) (sX := cX) (sY := cY) := by
   constructor

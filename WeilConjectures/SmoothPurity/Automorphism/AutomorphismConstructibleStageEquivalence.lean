@@ -258,36 +258,36 @@ private theorem common_square_shift
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom)
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom)
     (rf : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
       (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
         f).CommShift ℤ)
     (rx : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
       (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
-        eX.hom).CommShift ℤ)
+        eX.asIso.hom).CommShift ℤ)
     (ry : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
       (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
-        eY.hom).CommShift ℤ)
+        eY.asIso.hom).CommShift ℤ)
     [(commonStageDerivedPullback l Ω f).CommShift ℤ]
-    [(commonStageDerivedPullback l Ω eX.hom).CommShift ℤ]
-    [(commonStageDerivedPullback l Ω eY.hom).CommShift ℤ]
+    [(commonStageDerivedPullback l Ω eX.asIso.hom).CommShift ℤ]
+    [(commonStageDerivedPullback l Ω eY.asIso.hom).CommShift ℤ]
     (nf : ∀ E K n, HEq (((commonStageDerivedPullback l Ω f).commShiftIso n).hom.app
         ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj K))
       ((GeneralAlgebraicallyClosedCoefficients.inclusion E).map
         (((rationalDerivedPullback l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) f).commShiftIso
             (self := rf E) n).hom.app K)))
-    (nx : ∀ E K n, HEq (((commonStageDerivedPullback l Ω eX.hom).commShiftIso n).hom.app
+    (nx : ∀ E K n, HEq (((commonStageDerivedPullback l Ω eX.asIso.hom).commShiftIso n).hom.app
         ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj K))
       ((GeneralAlgebraicallyClosedCoefficients.inclusion E).map
         (((rationalDerivedPullback l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eX.hom).commShiftIso
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eX.asIso.hom).commShiftIso
             (self := rx E) n).hom.app K)))
-    (ny : ∀ E K n, HEq (((commonStageDerivedPullback l Ω eY.hom).commShiftIso n).hom.app
+    (ny : ∀ E K n, HEq (((commonStageDerivedPullback l Ω eY.asIso.hom).commShiftIso n).hom.app
         ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj K))
       ((GeneralAlgebraicallyClosedCoefficients.inclusion E).map
         (((rationalDerivedPullback l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eY.hom).commShiftIso
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eY.asIso.hom).commShiftIso
             (self := ry E) n).hom.app K)))
     (hb : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
       let := rf E
@@ -302,8 +302,8 @@ private theorem common_square_shift
   apply pairNatTrans_shift (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X)
   intro E
   obtain ⟨ef, hef, sef⟩ := common_restriction l Ω f E (nf E)
-  obtain ⟨ex, hex, sex⟩ := common_restriction l Ω eX.hom E (nx E)
-  obtain ⟨ey, hey, sey⟩ := common_restriction l Ω eY.hom E (ny E)
+  obtain ⟨ex, hex, sex⟩ := common_restriction l Ω eX.asIso.hom E (nx E)
+  obtain ⟨ey, hey, sey⟩ := common_restriction l Ω eY.asIso.hom E (ny E)
   let := sef
   let := sex
   let := sey
@@ -313,13 +313,13 @@ private theorem common_square_shift
   let J := GeneralAlgebraicallyClosedCoefficients.inclusion
     (l := l) (Ω := Ω) (Y := Y) E
   let F := commonStageDerivedPullback l Ω f
-  let A := commonStageDerivedPullback l Ω eX.hom
-  let B := commonStageDerivedPullback l Ω eY.hom
+  let A := commonStageDerivedPullback l Ω eX.asIso.hom
+  let B := commonStageDerivedPullback l Ω eY.asIso.hom
   let fE := rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) f
   let aE := rationalDerivedPullback l
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eX.hom
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eX.asIso.hom
   let bE := rationalDerivedPullback l
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eY.hom
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) eY.asIso.hom
   let left := restrict_composite I J J F B fE bE ef ey
   let right := restrict_composite I I J A F aE fE ex ef
   have sl : NatTrans.CommShift left.hom ℤ :=
@@ -333,13 +333,13 @@ private theorem common_square_shift
       left.hom ≫ Functor.whiskerRight β.hom J ≫ right.inv := by
     ext K
     have ol := (congrArg B.obj (common_obj l Ω f E K)).trans
-      (common_obj l Ω eY.hom E (fE.obj K))
-    have oR := (congrArg F.obj (common_obj l Ω eX.hom E K)).trans
+      (common_obj l Ω eY.asIso.hom E (fE.obj K))
+    have oR := (congrArg F.obj (common_obj l Ω eX.asIso.hom E K)).trans
       (common_obj l Ω f E (aE.obj K))
     have nl := restrict_composite_normalization I J J F B fE bE ef ey
-      (common_obj l Ω f E) (common_obj l Ω eY.hom E) hef hey K
+      (common_obj l Ω f E) (common_obj l Ω eY.asIso.hom E) hef hey K
     have nr := restrict_composite_normalization I I J A F aE fE ex ef
-      (common_obj l Ω eX.hom E) (common_obj l Ω f E) hex hef K
+      (common_obj l Ω eX.asIso.hom E) (common_obj l Ω f E) hex hef K
     have ni : right.inv.app K = eqToHom oR.symm := by
       apply (cancel_epi (right.hom.app K)).1
       rw [Iso.hom_inv_id_app, nr]
@@ -401,34 +401,34 @@ theorem automorphismConstructibleStage_descended_shifts
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
-    (h : eY.hom ≫ f = f ≫ eX.hom) :
+    (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
     (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
       ∃ (cf : (rationalDerivedPullback l E f).CommShift ℤ)
-        (cX : (rationalDerivedPullback l E eX.hom).CommShift ℤ)
-        (cY : (rationalDerivedPullback l E eY.hom).CommShift ℤ),
+        (cX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ)
+        (cY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ),
         automorphismStageRationalShiftNormalization l E f cf ∧
-        automorphismStageRationalShiftNormalization l E eX.hom cX ∧
-        automorphismStageRationalShiftNormalization l E eY.hom cY ∧
+        automorphismStageRationalShiftNormalization l E eX.asIso.hom cX ∧
+        automorphismStageRationalShiftNormalization l E eY.asIso.hom cY ∧
         (fun [sf : (rationalDerivedPullback l E f).CommShift ℤ]
-          [sX : (rationalDerivedPullback l E eX.hom).CommShift ℤ]
-          [sY : (rationalDerivedPullback l E eY.hom).CommShift ℤ] ↦
+          [sX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
+          [sY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ] ↦
           (rationalDerivedPullback l E f).IsTriangulated ∧
-            (rationalDerivedPullback l E eX.hom).IsTriangulated ∧
-            (rationalDerivedPullback l E eY.hom).IsTriangulated ∧
+            (rationalDerivedPullback l E eX.asIso.hom).IsTriangulated ∧
+            (rationalDerivedPullback l E eY.asIso.hom).IsTriangulated ∧
             NatTrans.CommShift (automorphismStageRationalSquare l E C f eX eY h).hom ℤ)
           (sf := cf) (sX := cX) (sY := cY)) ∧
     ∃ (cf : (commonStageDerivedPullback l Ω f).CommShift ℤ)
-      (cX : (commonStageDerivedPullback l Ω eX.hom).CommShift ℤ)
-      (cY : (commonStageDerivedPullback l Ω eY.hom).CommShift ℤ),
+      (cX : (commonStageDerivedPullback l Ω eX.asIso.hom).CommShift ℤ)
+      (cY : (commonStageDerivedPullback l Ω eY.asIso.hom).CommShift ℤ),
       automorphismStageQbarShiftNormalization l Ω f cf ∧
-      automorphismStageQbarShiftNormalization l Ω eX.hom cX ∧
-      automorphismStageQbarShiftNormalization l Ω eY.hom cY ∧
+      automorphismStageQbarShiftNormalization l Ω eX.asIso.hom cX ∧
+      automorphismStageQbarShiftNormalization l Ω eY.asIso.hom cY ∧
       (fun [sf : (commonStageDerivedPullback l Ω f).CommShift ℤ]
-        [sX : (commonStageDerivedPullback l Ω eX.hom).CommShift ℤ]
-        [sY : (commonStageDerivedPullback l Ω eY.hom).CommShift ℤ] ↦
+        [sX : (commonStageDerivedPullback l Ω eX.asIso.hom).CommShift ℤ]
+        [sY : (commonStageDerivedPullback l Ω eY.asIso.hom).CommShift ℤ] ↦
         (commonStageDerivedPullback l Ω f).IsTriangulated ∧
-          (commonStageDerivedPullback l Ω eX.hom).IsTriangulated ∧
-          (commonStageDerivedPullback l Ω eY.hom).IsTriangulated ∧
+          (commonStageDerivedPullback l Ω eX.asIso.hom).IsTriangulated ∧
+          (commonStageDerivedPullback l Ω eY.asIso.hom).IsTriangulated ∧
           NatTrans.CommShift (automorphismStageQbarSquare l Ω C f eX eY h).hom ℤ)
         (sf := cf) (sX := cX) (sY := cY) := by
   classical
@@ -442,11 +442,11 @@ theorem automorphismConstructibleStage_descended_shifts
     obtain ⟨sf, hsf, ef⟩ := commonStagePullbackShiftExactDescent l Ω f rf (fun E ↦ (hs E).1)
       (normalized_transition_shift l Ω f rf nf)
     obtain ⟨sx, hsx, ex⟩ :=
-      commonStagePullbackShiftExactDescent l Ω eX.hom rx (fun E ↦ (hs E).2.1)
-      (normalized_transition_shift l Ω eX.hom rx nx)
+      commonStagePullbackShiftExactDescent l Ω eX.asIso.hom rx (fun E ↦ (hs E).2.1)
+      (normalized_transition_shift l Ω eX.asIso.hom rx nx)
     obtain ⟨sy, hsy, ey⟩ :=
-      commonStagePullbackShiftExactDescent l Ω eY.hom ry (fun E ↦ (hs E).2.2.1)
-      (normalized_transition_shift l Ω eY.hom ry ny)
+      commonStagePullbackShiftExactDescent l Ω eY.asIso.hom ry (fun E ↦ (hs E).2.2.1)
+      (normalized_transition_shift l Ω eY.asIso.hom ry ny)
     let := sf
     let := sx
     let := sy
