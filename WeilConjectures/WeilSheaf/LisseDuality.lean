@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TransposePairing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AbelianIrreducible
