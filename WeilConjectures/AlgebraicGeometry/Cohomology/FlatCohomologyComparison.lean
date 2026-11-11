@@ -180,8 +180,8 @@ def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
       Sheaf.H.map (ρ a) q (Sheaf.H.map (ρ b) q x)
     rw [map_mul]
     exact Sheaf.H.map_comp_apply (ρ b) (ρ a) x
-  smul_add a x y := (Sheaf.H.map (ρ a) q).hom.map_add x y
-  smul_zero a := (Sheaf.H.map (ρ a) q).hom.map_zero
+  smul_add a x y := AddMonoidHom.map_add (Sheaf.H.map (ρ a) q) x y
+  smul_zero a := AddMonoidHom.map_zero (Sheaf.H.map (ρ a) q)
   add_smul a b x := by
     change Sheaf.H.map (ρ (a + b)) q x = Sheaf.H.map (ρ a) q x + Sheaf.H.map (ρ b) q x
     rw [map_add, Sheaf.H.map_add_apply]
@@ -320,7 +320,7 @@ def cohomologyComparisonLinear
       map_add' := fun x y ↦ by
         rw [map_add, map_add]
       map_smul' := fun a x ↦
-        sheafComparison_naturality G e φ φ (ρ a) (τ a) (h a) q x }
+        sheafComparison_naturality G e φ φ (ρ a).asHom (τ a) (h a) q x }
 
 /-- The pullback on cohomology before extending scalars.
 Source: Stacks Project, Tag 02KH, canonical comparison.

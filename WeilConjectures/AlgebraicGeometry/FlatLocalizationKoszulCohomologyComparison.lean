@@ -211,7 +211,7 @@ private theorem sectionScalar_central
   apply (cancel_epi (ρ_ M).hom).1
   simp only [Iso.hom_inv_id_assoc]
   rw [← tensor_rightUnitor_hom R M]
-  erw [whiskerLeft_tensorObjIsoSheafification_hom_assoc (R := R) M (scalar R s)]
+  erw [whiskerLeft_tensorObjIsoSheafification_hom_assoc (R := R) M (scalar R s).asHom]
   rw [← Functor.map_comp_assoc, hpre, Functor.map_comp]
   have hε := ε.naturality ((sectionScalar R s).app M)
   change S.map ((sectionScalar R s).app M).val ≫ ε.app M =
