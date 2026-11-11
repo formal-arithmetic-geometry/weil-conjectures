@@ -40,7 +40,6 @@ attribute [local irreducible] sfIntrinsicModuleEquivalence
   scalarReductionDerivedExistence completedIntegralCoefficientSheafUnrestricted
 
 set_option allowUnsafeReducibility true in
-attribute [local reducible] CategoryTheory.Aut
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
 
 set_option allowUnsafeReducibility true in

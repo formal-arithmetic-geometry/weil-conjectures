@@ -105,7 +105,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 set_option allowUnsafeReducibility true in
-attribute [local reducible] CategoryTheory.Aut
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
 
 universe u v r s u₁ v₁ u₂ v₂
