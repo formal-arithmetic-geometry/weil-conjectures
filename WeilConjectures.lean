@@ -22551,6 +22551,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.OpenImmersionField
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.StrictlyHenselianBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.TorsionSmoothBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.UnboundedComparisonBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleDerived
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleProjection
