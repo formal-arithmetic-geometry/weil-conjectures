@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+
 public import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientScalarComparison
 
 import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerIsomorphismSections

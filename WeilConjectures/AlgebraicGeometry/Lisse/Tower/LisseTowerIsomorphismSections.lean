@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientScalarComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
