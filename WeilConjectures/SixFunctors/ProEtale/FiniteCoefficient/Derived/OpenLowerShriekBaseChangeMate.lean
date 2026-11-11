@@ -80,7 +80,6 @@ lemma baseChangeMap_eq_mateEquiv (sq : CommSq g' j' j g'') :
     (upperStarLowerStarAdjunction A j') (upperStarCompIso A sq.w).hom
   rw [conjugateEquiv_upperStarCompIso_hom A sq] at h
   rw [ProEtale.baseChangeMap]
-  congr 1
   rw [Equiv.symm_apply_eq]
   exact (congrArg (TwoSquare.mk _ _ _ _) h).symm
 
