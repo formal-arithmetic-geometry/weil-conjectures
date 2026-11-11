@@ -204,3 +204,4 @@ theorem integralFiniteFree_one_sub_nsmul_isIso (X : Scheme.{u})
     (fun f => integralRegular_one_sub_nsmul_isIso ℓ E X R e f) T
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
