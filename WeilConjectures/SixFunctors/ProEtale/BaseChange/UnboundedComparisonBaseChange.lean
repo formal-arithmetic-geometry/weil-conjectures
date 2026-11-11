@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquarePa
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareComponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquarePasting
 public import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionMapDerived
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs
 
 /-!
 # Transport of unbounded base change along the site comparison
@@ -289,21 +290,6 @@ theorem CategoryTheory.cube_conjugation (jl : l ≅ lD) (jl' : l' ≅ l'D) (jg :
     Iso.inv_hom_id_app, p'D.map_id, Category.id_comp, ← reassoc_of% h₂, reassoc_of% (hcube M)]
 
 end CubeConjugation
-
-namespace AlgebraicGeometry
-
-/-- The composition isomorphism `Etale.upperStarComp` along a morphism `h₁₂` equal to the
-composite `h₁ ≫ h₂` is the one along the composite, preceded by the transport along
-`h₁₂ = h₁ ≫ h₂`. -/
-lemma Etale.upperStarComp_eq_eqToIso_trans (A : Type*) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] {T S R : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-    (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂) :
-    Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂ =
-      eqToIso (congrArg (Etale.upperStar A) hh₁₂) ≪≫ Etale.upperStarComp A h₁ h₂ := by
-  subst hh₁₂
-  simp
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 
