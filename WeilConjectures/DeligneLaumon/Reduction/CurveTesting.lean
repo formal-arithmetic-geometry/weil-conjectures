@@ -68,7 +68,7 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
       SmoothOfRelativeDimension 1 (i ≫ f.geometricFiberToAlgebraicClosure) ∧
       ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧
       (∀ j, IsIrreducibleAdicLocalSystem ((i)^*ᵃ[l].obj (F j))) ∧
-      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C, φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).hom := by
+      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C, φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom := by
   have : ConnectedSpace f.geometricFiber :=
     GeometricallyConnected.geometrically_connectedSpace (f := f)
       (Scheme.specAlgebraicClosure k₀).hom f.geometricFiberProj
@@ -82,7 +82,7 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
   · refine ⟨_, 𝟙 _, inferInstance, inferInstance, by rwa [Category.id_comp], inferInstance,
       fun s _ ↦ ⟨s, Category.comp_id s⟩,
       fun j ↦ (hF j).of_iso ((adicUpperStarId l _).app _).symm, 1, one_pos,
-      f.geometricGaloisFrobenius ^ 1, by simp⟩
+      (f.geometricGaloisFrobenius ^ 1).asIso, by simp⟩
   -- the geometric fiber is regular and locally Noetherian
   have : Smooth f.geometricFiberToAlgebraicClosure := SmoothOfRelativeDimension.smooth d _
   have := IsRegular.of_smooth f.geometricFiberToAlgebraicClosure
@@ -168,7 +168,7 @@ theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k
       (∀ j, ProEtale.IsIrreducibleAdicLocalSystem
         ((i)^*ᵃ[l].obj (𝒮 j).obj.carrier)) ∧
       ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
-        φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom :=
+        φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom :=
   Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperStar _ hd
     (fun j ↦ (𝒮 j).obj.carrier) h𝒮 S hS hS'
 
