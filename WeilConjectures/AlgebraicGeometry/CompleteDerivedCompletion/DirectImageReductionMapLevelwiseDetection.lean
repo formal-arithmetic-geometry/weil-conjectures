@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletion
 
-
 /-! # Levelwise detection of isomorphisms of derived reduction towers
 
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/

@@ -71,7 +71,6 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 
-
 /-!
 # Roos limit data for complete direct images
 

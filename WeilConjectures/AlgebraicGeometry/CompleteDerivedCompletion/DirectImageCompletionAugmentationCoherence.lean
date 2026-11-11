@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompletePullbackReduction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+
 /-! # Augmentation coherence for completed pullback
 
 This is the strict derived-category square needed by the direct-image completion

@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCompletionUnitSquare
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageReductionMapIsIso
 
+
 /-!
 # Reduction and completion compatibility for direct image
 

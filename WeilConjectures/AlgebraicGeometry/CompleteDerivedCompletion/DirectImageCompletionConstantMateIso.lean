@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 import all WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjunctionSquare
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+
 /-! # Invertibility of the constant direct-image mate
 
 The exact constant-tower comparison is invertible by the unbounded exact
