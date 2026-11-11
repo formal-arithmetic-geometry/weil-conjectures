@@ -655,7 +655,7 @@ private theorem mateVerticalIdentity
     rw [← cancel_epi (a.inv.app M)]
     simp only [Iso.inv_hom_id_app]
     rw [reassoc_of% (hq M)]
-    simp only [TwoSquare.whiskerBottom, TwoSquare.mk,
+    simp only [TwoSquare.whiskerBottom,
       NatTrans.comp_app, whiskerLeft_app, leftUnitor_hom_app,
       rightUnitor_inv_app, Category.comp_id]
     erw [Category.id_comp, Iso.hom_inv_id_app]
