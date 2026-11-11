@@ -404,7 +404,6 @@ local instance integralContinuityHasColimitsOfShape
     [MonObj Λ] (X : Scheme.{u}) (I : Type (u + 1)) [SmallCategory I] :
     HasColimitsOfShape I (CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) := by
-
   let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
   have : HasColimitsOfShape I C := inferInstance
   infer_instance

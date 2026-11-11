@@ -544,7 +544,6 @@ private abbrev literalRestriction {X : Scheme.{u}} (U : X.ProEt) :
 set_option backward.isDefEq.respectTransparency false in
 private instance literalRestrictionLaxMonoidal {X : Scheme.{u}} (U : X.ProEt) :
     (literalRestriction U).LaxMonoidal := by
-
   have : (MorphismProperty.Over.map (P := @WeaklyEtale.{u}) (f := U.hom) ⊤ U.prop).IsContinuous
       (ProEt.topology U.left) (ProEt.topology X) := ProEt.isContinuous_overMap U.prop
   exact Functor.sheafPushforwardContinuousLaxMonoidal
