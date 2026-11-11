@@ -66,8 +66,10 @@ omit [PreservesFiniteColimits (tensorLeft R)] in
 lemma finFreeMatrix_comp {l m n : ℕ} (φ : finiteFree R l ⟶ finiteFree R m)
     (ψ : finiteFree R m ⟶ finiteFree R n) :
     finFreeMatrix (φ ≫ ψ) = finFreeMatrix ψ * finFreeMatrix φ := by
-  ext a c
-  rw [Matrix.mul_apply, finFreeMatrix_apply, finFreeEntry]
+  apply Matrix.ext
+  intro a c
+  apply End.ext
+  rw [Matrix.mul_apply, End.sum_asHom, finFreeMatrix_apply, finFreeEntry]
   have : φ ≫ ψ = φ ≫ (∑ b, biproduct.π (fun _ : Fin m ↦ regular R) b ≫
       biproduct.ι (fun _ : Fin m ↦ regular R) b) ≫ ψ := by
     rw [biproduct.total, Category.id_comp]
@@ -80,7 +82,9 @@ lemma finFreeMatrix_comp {l m n : ℕ} (φ : finiteFree R l ⟶ finiteFree R m)
 omit [PreservesFiniteColimits (tensorLeft R)] in
 /-- The matrix of the identity is the identity matrix. -/
 lemma finFreeMatrix_id {n : ℕ} : finFreeMatrix (𝟙 (finiteFree R n)) = 1 := by
-  ext a b
+  apply Matrix.ext
+  intro a b
+  apply End.ext
   rw [finFreeMatrix_apply, finFreeEntry, Category.id_comp, Matrix.one_apply]
   by_cases h : b = a
   · subst h
@@ -97,13 +101,15 @@ lemma finFreeMatrix_injective {m n : ℕ} {φ ψ : finiteFree R m ⟶ finiteFree
 /-- The morphism of free module objects with a given matrix. -/
 noncomputable def finFreeOfMatrix {m n : ℕ} (A : Matrix (Fin n) (Fin m) (End (regular R))) :
     finiteFree R m ⟶ finiteFree R n :=
-  biproduct.matrix fun b a ↦ A a b
+  biproduct.matrix fun b a ↦ (A a b).asHom
 
 omit [PreservesFiniteColimits (tensorLeft R)] in
 @[simp]
 lemma finFreeMatrix_finFreeOfMatrix {m n : ℕ} (A : Matrix (Fin n) (Fin m) (End (regular R))) :
     finFreeMatrix (finFreeOfMatrix A) = A := by
-  ext a b
+  apply Matrix.ext
+  intro a b
+  apply End.ext
   simp [finFreeMatrix_apply, finFreeEntry, finFreeOfMatrix]
 
 /-- The isomorphism of free module objects with a given invertible matrix. -/
@@ -428,7 +434,9 @@ lemma finFreeMatrix_upperStar {W' W : Scheme.{u}} (g : W' ⟶ W) {m n : ℕ}
     (φ : Mod.finiteFree (condensedRingObj Λ W) m ⟶ Mod.finiteFree (condensedRingObj Λ W) n) :
     Mod.finFreeMatrix ((upperStarFiniteFreeIso Λ g m).inv ≫ (g)^*⟦Λ⟧.map φ ≫
       (upperStarFiniteFreeIso Λ g n).hom) = (Mod.finFreeMatrix φ).map (restrictEnd Λ g) := by
-  ext a b
+  apply Matrix.ext
+  intro a b
+  apply End.ext
   simp [Mod.finFreeMatrix_apply, Mod.finFreeEntry, upperStarFiniteFreeIso, Mod.finiteFreeIsoMap,
     restrictEnd_apply]
 /-- The entries `(p^* Λ_V ≅ Λ_P ⟶ ...)` appearing in `ProEtale.CondensedRing.IsDefinedOver` of a
@@ -442,7 +450,7 @@ lemma upperStarObjRegularIso_inv_comp_map_ι_comp {P V V' : Scheme.{u}} (p : P �
         (p)^*⟦Λ⟧.map (biproduct.ι (fun _ : Fin n ↦ Mod.regular (condensedRingObj Λ V)) i) ≫
         ((upperStarFiniteFreeIso Λ p n).hom ≫ φ ≫ (upperStarFiniteFreeIso Λ p' m).inv) ≫
         (p')^*⟦Λ⟧.map (biproduct.π (fun _ : Fin m ↦ Mod.regular (condensedRingObj Λ V')) j) ≫
-        (upperStarObjRegularIso Λ p').hom = Mod.finFreeEntry φ j i := by
+        (upperStarObjRegularIso Λ p').hom = (Mod.finFreeEntry φ j i).asHom := by
   have h₁ : (upperStarFiniteFreeIso Λ p' m).inv ≫
       (p')^*⟦Λ⟧.map (biproduct.π (fun _ : Fin m ↦ Mod.regular (condensedRingObj Λ V')) j) ≫
       (upperStarObjRegularIso Λ p').hom =
