@@ -334,9 +334,10 @@ theorem weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre [IsPrope
   let _ : Fintype {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
   refine homologyUnitEndRingHom_injective ℓ
     (point (AlgebraicClosure k)) ?_
+  apply End.ext
   rw [homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek ℓ hf y hi hZ K,
     ← WeilBoundedConstructible.globalOperator_one, htf, finsum_eq_sum_of_fintype, map_sum,
-    ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
+    End.sum_asHom, ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
   refine Finset.sum_congr rfl fun z _ ↦ ?_
   rw [WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar hi,
     WeilBoundedConstructible.trace_stalkFrobenius_one _ _ _ (by
