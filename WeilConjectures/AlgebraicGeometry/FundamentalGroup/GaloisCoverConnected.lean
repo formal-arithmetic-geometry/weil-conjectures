@@ -246,4 +246,3 @@ theorem exists_connected_subcover {Y : Scheme.{u}} [ConnectedSpace Y] {G : Type 
     connectedSpace_of_isConnected A, i.hom.left, hom_left_comp i⟩
 
 end AlgebraicGeometry.Scheme.GaloisCover
-

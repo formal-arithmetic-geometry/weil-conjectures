@@ -573,4 +573,3 @@ theorem range_restrictH1_eq_ker_residueH1 (N : ℕ) [NeZero N] [NeZero (N : k)] 
 end Curve
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
-

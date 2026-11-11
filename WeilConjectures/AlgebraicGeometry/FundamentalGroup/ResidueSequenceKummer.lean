@@ -158,4 +158,3 @@ theorem exists_residue_eq_ord_of_isUnit {ζ : k} (hζ : IsPrimitiveRoot ζ N) {g
   simp [x, m]
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
-

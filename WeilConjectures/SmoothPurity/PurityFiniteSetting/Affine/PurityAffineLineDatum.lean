@@ -382,3 +382,4 @@ noncomputable def coordinateKummer (P : PurityFiniteSetting.{u})
     (P.exponent_isUnit (Punctured Y) (puncturedProjection Y ≫ a)) (coordinateUnit Y)
 
 end WeilConjectures.PurityFiniteSetting
+

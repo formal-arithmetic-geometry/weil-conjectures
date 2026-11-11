@@ -176,3 +176,4 @@ noncomputable def kummerExtensionFiberEquiv :
   (kummerCoverHomEquiv n (u : Γ(X, ⊤)) U.hom).symm
 
 end AlgebraicGeometry.Scheme
+
