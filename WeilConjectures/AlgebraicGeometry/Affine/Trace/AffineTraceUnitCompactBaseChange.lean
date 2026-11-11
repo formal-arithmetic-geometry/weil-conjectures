@@ -374,7 +374,8 @@ theorem affineTraceUnitCompactComparison_baseChange
   let P := ordinaryFinitePullback A f
   have he := tower_exchange A f d K
   have hn := (affineTraceUnboundedCompactComparison A T d).hom.naturality b.hom
-  apply (cancel_epi (P.map ((affineTraceUnboundedCompactComparison A S d).hom.app K))).mp
+  apply (cancel_epi (C := DerivedCategoryModule A T)
+    (P.map ((affineTraceUnboundedCompactComparison A S d).hom.app K))).mp
   erw [← P.map_comp_assoc, Iso.hom_inv_id_app, P.map_id, Category.id_comp]
   erw [reassoc_of% he, ← reassoc_of% hn]
   simp only [Iso.hom_inv_id_app, Category.comp_id]
