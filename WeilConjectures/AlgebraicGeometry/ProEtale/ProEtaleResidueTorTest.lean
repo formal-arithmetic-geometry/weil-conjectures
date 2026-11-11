@@ -226,7 +226,7 @@ variable {𝒞 : Type u} [Category.{v} 𝒞] [Abelian 𝒞]
 
 omit [Abelian 𝒞] in
 private lemma natural_power_comm (η : 𝟭 𝒞 ⟶ 𝟭 𝒞) {X Y : 𝒞} (f : X ⟶ Y) (n : ℕ) :
-    ((End.of (η.app X)) ^ n) ≫ f = f ≫ ((End.of (η.app Y)) ^ n) := by
+    ((End.of (η.app X)) ^ n).asHom ≫ f = f ≫ ((End.of (η.app Y)) ^ n).asHom := by
   induction n with
   | zero => simp [End.one_asHom]
   | succ n ih =>
@@ -243,20 +243,21 @@ private theorem property_of_nilpotent
   induction n generalizing X with
   | zero =>
     apply hzero X
-    exact (IsZero.iff_id_eq_zero X).2 hn
+    exact (IsZero.iff_id_eq_zero X).2 (congrArg End.asHom hn)
   | succ n ih =>
     let f := η.app X
     let I := image f
     let i : I ⟶ X := image.ι f
     let q := cokernel.π i
     have hI : ((End.of (η.app I)) ^ n) = 0 := by
+      apply End.ext
       apply (cancel_epi (factorThruImage f)).1
       apply (cancel_mono i).1
-      rw [comp_zero, zero_comp, Category.assoc, natural_power_comm η i n,
+      rw [End.zero_asHom, comp_zero, zero_comp, Category.assoc, natural_power_comm η i n,
         ← Category.assoc]
       change (factorThruImage f ≫ image.ι f) ≫ _ = 0
       rw [image.fac]
-      simpa only [pow_succ, End.mul_asHom] using hn
+      simpa only [pow_succ, End.mul_asHom, End.zero_asHom] using congrArg End.asHom hn
     have hQ : η.app (cokernel i) = 0 := by
       apply (cancel_epi q).1
       rw [comp_zero, show q ≫ η.app (cokernel i) = f ≫ q from η.naturality q]
@@ -291,31 +292,35 @@ private noncomputable def constantSections (T : Scheme.{u}) (A : Type u) [CommRi
 
 private noncomputable def scalarEnd (T : Scheme.{u}) (A : Type u) [CommRing A]
     (M : proEtaleRingModules T (proEtaleConstantRing T A)) : A →+* End M where
-  toFun a := ⟨PresheafOfModules.sectionsSMul M.val (constantSections T A a)⟩
+  toFun a := .of ⟨PresheafOfModules.sectionsSMul M.val (constantSections T A a)⟩
   map_one' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     change PresheafOfModules.sectionsSMul M.val (constantSections T A 1) = _
     rw [(constantSections T A).map_one]
-    exact (PresheafOfModules.sectionsSMulHom M.val).map_one
+    exact congrArg End.asHom (PresheafOfModules.sectionsSMulHom M.val).map_one
   map_mul' a b := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     change PresheafOfModules.sectionsSMul M.val (constantSections T A (a * b)) = _
     rw [(constantSections T A).map_mul]
-    exact (PresheafOfModules.sectionsSMulHom M.val).map_mul _ _
+    exact congrArg End.asHom ((PresheafOfModules.sectionsSMulHom M.val).map_mul _ _)
   map_zero' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     change PresheafOfModules.sectionsSMul M.val (constantSections T A 0) = _
     rw [(constantSections T A).map_zero]
-    exact (PresheafOfModules.sectionsSMulHom M.val).map_zero
+    exact congrArg End.asHom (PresheafOfModules.sectionsSMulHom M.val).map_zero
   map_add' a b := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     change PresheafOfModules.sectionsSMul M.val (constantSections T A (a + b)) = _
     rw [(constantSections T A).map_add]
-    exact (PresheafOfModules.sectionsSMulHom M.val).map_add _ _
+    exact congrArg End.asHom ((PresheafOfModules.sectionsSMulHom M.val).map_add _ _)
 
 private noncomputable def scalarNatTrans (T : Scheme.{u}) (A : Type u) [CommRing A]
     (a : A) : 𝟭 (proEtaleRingModules T (proEtaleConstantRing T A)) ⟶ 𝟭 _ where
-  app M := scalarEnd T A M a
+  app M := (scalarEnd T A M a).asHom
   naturality {M N} f := by
     apply SheafOfModules.hom_ext
     exact PresheafOfModules.sectionsSMul_naturality f.val (constantSections T A a)
