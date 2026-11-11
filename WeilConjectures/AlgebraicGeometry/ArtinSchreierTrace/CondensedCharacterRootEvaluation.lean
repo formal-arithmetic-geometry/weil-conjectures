@@ -21,7 +21,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
-attribute [local implicit_reducible] condensedUnit CategoryTheory.Aut
+attribute [local implicit_reducible] condensedUnit
 attribute [local implicit_reducible] CommMon.toMon
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
@@ -90,16 +90,16 @@ theorem condensedProjector_rootEvaluation
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}} (Y : Over X)
     (G : Type v) [AddGroup G] [Fintype G] (σ : G → (Y ⟶ Y))
     (χ : AddChar G (MonObj.Γ Λ)) (x : T ⟶ X) (s : Over.mk x ⟶ Y) :
-    (ProEtale.CondensedRing.upperStar Λ x).map (condensedProjector Λ G Y σ χ) ≫
+    (ProEtale.CondensedRing.upperStar Λ x).map (condensedProjector Λ G Y σ χ).asHom ≫
         condensedEvaluation Λ x s (𝟙 _) =
       ∑ c : G, condensedEvaluation Λ x (s ≫ σ c) (𝟙 _) ≫
-        Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom
+        (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom
           (ProEtale.upperStarFromPoint T)
-          (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))) := by
+          (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c)))).asHom := by
   classical
   let : (ProEtale.CondensedRing.upperStar Λ x).Additive :=
     ProEtale.CondensedRing.upperStar_additive Λ x
-  simp only [condensedProjector,
+  simp only [condensedProjector, End.sum_asHom,
     Functor.map_sum (ProEtale.CondensedRing.upperStar Λ x), Functor.map_comp,
     Preadditive.sum_comp, Category.assoc]
   apply Finset.sum_congr rfl
@@ -115,15 +115,15 @@ private theorem evaluation_translation
     (G : Type v) [AddCommGroup G] (σ : Multiplicative G →* Aut Y)
     (x : T ⟶ X) (s : Over.mk x ⟶ Y) (a c : G) :
     (ProEtale.CondensedRing.upperStar Λ x).map
-        (condensedPull Λ (σ (Multiplicative.ofAdd c)).hom) ≫
-      condensedEvaluation Λ x (s ≫ (σ (Multiplicative.ofAdd a)).hom) (𝟙 _) =
-    condensedEvaluation Λ x (s ≫ (σ (Multiplicative.ofAdd (a + c))).hom) (𝟙 _) := by
-  have he : (s ≫ (σ (Multiplicative.ofAdd a)).hom) ≫
-      (σ (Multiplicative.ofAdd c)).hom =
-      s ≫ (σ (Multiplicative.ofAdd (a + c))).hom := by
+        (condensedPull Λ (σ (Multiplicative.ofAdd c)).asIso.hom) ≫
+      condensedEvaluation Λ x (s ≫ (σ (Multiplicative.ofAdd a)).asIso.hom) (𝟙 _) =
+    condensedEvaluation Λ x (s ≫ (σ (Multiplicative.ofAdd (a + c))).asIso.hom) (𝟙 _) := by
+  have he : (s ≫ (σ (Multiplicative.ofAdd a)).asIso.hom) ≫
+      (σ (Multiplicative.ofAdd c)).asIso.hom =
+      s ≫ (σ (Multiplicative.ofAdd (a + c))).asIso.hom := by
     rw [Category.assoc]
     congr 1
-    rw [add_comm a c, ofAdd_add, map_mul, Aut.Aut_mul_def, Iso.trans_hom]
+    rw [add_comm a c, ofAdd_add, map_mul, Aut.mul_asIso, Iso.trans_hom]
   simp only [condensedEvaluation, Category.id_comp, ← Functor.map_comp_assoc]
   rw [← he, condensedPull_comp Λ (s ≫ _) _]
 
@@ -146,22 +146,22 @@ theorem condensedCharacterImage_rootEvaluation_isIso
     (hn : IsUnit (Fintype.card G : MonObj.Γ Λ))
     (x : T ⟶ X) [WeaklyEtale x] (s : Over.mk x ⟶ Y)
     (hc : Nonempty (IsColimit (Cofan.mk (pullback Y.hom x)
-      (fun a : G ↦ pullback.lift (s.left ≫ (σ (Multiplicative.ofAdd a)).hom.left)
+      (fun a : G ↦ pullback.lift (s.left ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left)
         (𝟙 T) (by
           simp only [Category.assoc, Over.w, Over.mk_hom]
           exact (Category.id_comp x).symm))))) :
     IsIso (condensedEvaluation Λ x s
       (image.ι (condensedProjector Λ G Y
-        (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ))) := by
+        (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom)) := by
   classical
   let F := ProEtale.CondensedRing.upperStar Λ x
   let : F.Additive := ProEtale.CondensedRing.upperStar_additive Λ x
-  let P := condensedProjector Λ G Y (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ
-  let E (a : G) := condensedEvaluation Λ x (s ≫ (σ (Multiplicative.ofAdd a)).hom) (𝟙 _)
+  let P := (condensedProjector Λ G Y (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom
+  let E (a : G) := condensedEvaluation Λ x (s ≫ (σ (Multiplicative.ofAdd a)).asIso.hom) (𝟙 _)
   let r : MonObj.Γ Λ →+* End (condensedUnit Λ T) :=
     Mod.regularEndRingHom.comp (MonObj.Γ.mapFunctor (ProEtale.upperStarFromPoint T))
   have hE (a : G) : E a = sheetProjection Λ Y.hom x
-      (s.left ≫ (σ (Multiplicative.ofAdd a)).hom.left)
+      (s.left ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left)
       (by simp only [Category.assoc, Over.w, Over.mk_hom]) :=
     condensedEvaluation_id_eq_sheetProjection Λ Y x _
   have hq : IsIso (Pi.lift E) := by
@@ -171,28 +171,28 @@ theorem condensedCharacterImage_rootEvaluation_isIso
   let q := asIso (Pi.lift E)
   have he (a : G) : F.map P ≫ q.hom ≫ Pi.π (fun _ : G ↦ condensedUnit Λ T) a =
       ∑ b : G, (q.hom ≫ Pi.π (fun _ : G ↦ condensedUnit Λ T) b) ≫
-        r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (a - b)) := by
+        (r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (a - b))).asHom := by
     simp only [q, asIso_hom, Pi.lift_comp_π]
-    change F.map P ≫ E a = ∑ b : G, E b ≫ r
-      (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (a - b))
-    simp only [P, condensedProjector, Functor.map_sum F, Functor.map_comp,
+    change F.map P ≫ E a = ∑ b : G, E b ≫ (r
+      (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (a - b))).asHom
+    simp only [P, condensedProjector, End.sum_asHom, Functor.map_sum F, Functor.map_comp,
       Preadditive.sum_comp, Category.assoc]
     have hs (c : G) : F.map
         ((ProEtale.CondensedRing.lowerStar Λ Y.hom).map
           (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom
             (ProEtale.upperStarFromPoint Y.left)
-            (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))))) ≫ E a =
-        E a ≫ r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c)) := by
+            (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c)))).asHom) ≫ E a =
+        E a ≫ (r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))).asHom := by
       rw [hE]
       exact sheetProjection_scalar Λ Y.hom x _ _ _
     have ht (c : G) : F.map
-        (condensedPull Λ (σ (Multiplicative.ofAdd c)).hom) ≫ E a = E (a + c) :=
+        (condensedPull Λ (σ (Multiplicative.ofAdd c)).asIso.hom) ≫ E a = E (a + c) :=
       evaluation_translation Λ Y G σ x s a c
     simp_rw [hs, ← Category.assoc, ht]
     apply Fintype.sum_equiv (Equiv.addLeft a)
     intro c
     simp only [Equiv.coe_addLeft, sub_add_eq_sub_sub, sub_self, zero_sub]
-  have hi := characterMatrix_image_evaluation_isIso r G χ hn q (F.map P) he
+  have hi := characterMatrix_image_evaluation_isIso r G χ hn q (End.of (F.map P)) he
   have hzero : E 0 = condensedEvaluation Λ x s (𝟙 _) := by
     simp only [E, ofAdd_zero, map_one]
     change condensedEvaluation Λ x (s ≫ 𝟙 Y) (𝟙 _) = _
@@ -224,7 +224,7 @@ theorem condensedTrivialCharacter_constantMap_evaluation
     (G : Type v) [AddGroup G] [Fintype G] (σ : G → (Y ⟶ Y))
     (hn : IsUnit (Fintype.card G : MonObj.Γ Λ))
     (x : T ⟶ X) (s : Over.mk x ⟶ Y) :
-    let P := condensedProjector Λ G Y σ (1 : AddChar G (MonObj.Γ Λ))
+    let P := (condensedProjector Λ G Y σ (1 : AddChar G (MonObj.Γ Λ))).asHom
     let u : condensedUnit Λ X ⟶
       (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left) :=
     Mod.regularLift
@@ -252,12 +252,12 @@ theorem condensedTrivialCharacter_constantMap_evaluation
     rw [evaluation_map]
     exact condensedEvaluation_coefficientUnit Λ Y x (s ≫ σ c)
   change ∑ c : G, F.map u ≫ condensedEvaluation Λ x (s ≫ σ c) (𝟙 _) ≫
-    r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) *
-      (1 : AddChar G (MonObj.Γ Λ)) (-c)) = eps
+    (r (Ring.inverse (Fintype.card G : MonObj.Γ Λ) *
+      (1 : AddChar G (MonObj.Γ Λ)) (-c))).asHom = eps
   simp only [← Category.assoc, hu, AddChar.one_apply, mul_one,
     Finset.sum_const, Finset.card_univ]
-  rw [← Preadditive.comp_nsmul, ← map_nsmul r, nsmul_eq_mul,
-    Ring.mul_inverse_cancel _ hn, map_one]
+  rw [← Preadditive.comp_nsmul, ← End.nsmul_asHom, ← map_nsmul r, nsmul_eq_mul,
+    Ring.mul_inverse_cancel _ hn, map_one, End.one_asHom]
   exact Category.comp_id eps
 
 end AlgebraicGeometry.ArtinSchreierTrace
