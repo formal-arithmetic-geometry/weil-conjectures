@@ -203,7 +203,6 @@ private theorem split_cofan_refine {X U Y Z : Scheme.{u}} (p : U ⟶ X) (g : Y �
     (a : Z ⟶ Y) (w' : ∀ j, (a ≫ t j) ≫ p = a ≫ g) :
     Nonempty (IsColimit (Cofan.mk (pullback p (a ≫ g))
       (fun j ↦ pullback.lift (a ≫ t j) (𝟙 Z) (by simpa using w' j)))) := by
-
   let i (j : Fin d) := pullback.lift (t j) (𝟙 Y) (by simpa using w j)
   let i' (j : Fin d) := pullback.lift (a ≫ t j) (𝟙 Z) (by simpa using w' j)
   let b : pullback p (a ≫ g) ⟶ pullback p g :=

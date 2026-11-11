@@ -207,6 +207,7 @@ private theorem closure_isLocalizing
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     (G : ObjectProperty C) :
     IsLocalizingSubcategoryOfSize.{w} (localizingClosureOfSize.{w} G) := by
+
   let L := localizingClosureOfSize.{w} G
   have hi : L.IsClosedUnderIsomorphisms := ⟨by
     intro X Y e hX P hP hGP

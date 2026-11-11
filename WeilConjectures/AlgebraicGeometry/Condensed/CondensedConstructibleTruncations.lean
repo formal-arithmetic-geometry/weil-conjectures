@@ -218,7 +218,6 @@ private theorem restricted_standard
         (∀ n : ℤ,
           Nonempty (t.truncLE n ⋙ Q.ι ≅ Q.ι ⋙ DerivedCategory.TStructure.t.truncLE n) ∧
           Nonempty (t.truncGE n ⋙ Q.ι ≅ Q.ι ⋙ DerivedCategory.TStructure.t.truncGE n)) := by
-
   let Q := DerivedCategory.TStructure.t.bounded ⊓ DerivedCategory.homologyProperty P
   have htr (K : DerivedCategory A) (hK : Q K) (n : ℤ) :
       Q ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧

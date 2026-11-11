@@ -231,6 +231,7 @@ private lemma fp_map_of_finiteFree (F : Mod C R ⥤ Mod D S) [F.Additive]
     (e : ∀ n : ℕ, F.obj (Mod.finiteFree R n) ≅ Mod.finiteFree S n)
     {M : Mod C R} (hM : Mod.IsFinitelyPresented R M) :
     Mod.IsFinitelyPresented S (F.obj M) := by
+
   obtain ⟨n, m, g, ⟨eg⟩⟩ := hM
   refine ⟨n, m, (e m).inv ≫ F.map g ≫ (e n).hom, ⟨?_⟩⟩
   exact F.mapIso eg ≪≫ PreservesCokernel.iso F g ≪≫
