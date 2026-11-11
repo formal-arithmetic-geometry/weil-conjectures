@@ -288,17 +288,17 @@ the Weil group, then `Spec σ ≫ η = η ≫ Frⁿ`. -/
 theorem specMap_comp_genericGeomPoint (σ : Gal(Ω/C.functionField)) (n : ℕ)
     (h : (genericGaloisMap j sU GU σ, Multiplicative.ofAdd (n : ℤ)) ∈ weilGroup pU sU GU) :
     Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ genericGeomPoint pU j =
-      genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).hom := by
+      genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).asIso.hom := by
   let _ := Fintype.ofFinite K
   apply pullback.hom_ext
   · change _ ≫ genericGeomPoint pU j ≫ pU.geometricFiberProj =
-      _ ≫ (pU.geometricGaloisFrobenius ^ n).hom ≫ pU.geometricFiberProj
+      _ ≫ (pU.geometricGaloisFrobenius ^ n).asIso.hom ≫ pU.geometricFiberProj
     rw [genericGeomPoint_geometricFiberProj,
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj,
       genericGeomPoint_geometricFiberProj]
     exact specMapIso_hom_comp_pointOfAlgebra (genericPointLift j) σ
   · change _ ≫ genericGeomPoint pU j ≫ pU.geometricFiberToAlgebraicClosure =
-      _ ≫ (pU.geometricGaloisFrobenius ^ n).hom ≫ pU.geometricFiberToAlgebraicClosure
+      _ ≫ (pU.geometricGaloisFrobenius ^ n).asIso.hom ≫ pU.geometricFiberToAlgebraicClosure
     rw [genericGeomPoint_geometricFiberToAlgebraicClosure,
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       genericGeomPoint_geometricFiberToAlgebraicClosure_assoc, specGeometricFrobenius_pow_hom,
