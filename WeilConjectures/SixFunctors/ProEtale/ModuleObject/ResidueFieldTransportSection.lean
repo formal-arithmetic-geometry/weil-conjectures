@@ -19,6 +19,7 @@ disconnected topological ring `T`, given by constant continuous maps `X → T`, 
 equivalence of categories.
 -/
 
+
 @[expose] public section
 
 universe u

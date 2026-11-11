@@ -36,6 +36,7 @@ class is stable under the operations entering the Künneth formula for nearby cy
   (`ProEtale.CondensedRing.plusEtaleOrigin_of_boundedConstructible_residueField`).
 -/
 
+
 @[expose] public section
 
 universe w v u' u

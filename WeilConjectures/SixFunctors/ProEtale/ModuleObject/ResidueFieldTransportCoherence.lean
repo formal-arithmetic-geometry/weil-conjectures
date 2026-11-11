@@ -19,6 +19,7 @@ compatibility `ProEtale.residueFieldModuleSheafUpperStarIso_compCoherence`, by a
 isomorphisms `L(h^*) ≅ D(h^*)` (`CategoryTheory.compCoherence_of_isoConj`).
 -/
 
+
 @[expose] public section
 
 universe u
