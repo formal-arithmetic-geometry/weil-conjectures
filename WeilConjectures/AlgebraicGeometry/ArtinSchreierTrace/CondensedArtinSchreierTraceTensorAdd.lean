@@ -57,7 +57,6 @@ theorem condensedArtinSchreier_tensor_add_generic
     σ (tensorAddCharacter ψ) hq' htrans φ₁ hφ₁
   obtain ⟨U₂, hU₂⟩ := condensed_isotypic_recognition Λ Y hsurj (k × k)
     σ (tensorAddCharacter ψ) hq' htrans φ₂ hφ₂
-  -- Both local eigenmaps identify their domains with the same projector image.
   obtain ⟨e₁⟩ := condensedArtinSchreier_tensor_add_of_local_map Λ _ U₁ hU₁
   obtain ⟨e₂⟩ := condensedArtinSchreier_tensor_add_of_local_map Λ _ U₂ hU₂
   exact ⟨e₁ ≪≫ e₂.symm⟩
