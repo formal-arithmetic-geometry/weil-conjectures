@@ -104,7 +104,8 @@ noncomputable def ProEtale.openImmersionRestrictionGeometricFiberMapCompFrobeniu
         ProEtale.openImmersionRestriction A (Scheme.Hom.geometricFiberMap φ h) ≅
       ProEtale.openImmersionRestriction A (Scheme.Hom.geometricFiberMap φ h) ⋙
         (f.geometricGaloisFrobenius.asIso.hom)_*[A] :=
-  Functor.isoWhiskerRight (upperStarIsoLowerStarInv A g.geometricGaloisFrobenius.asIso.symm).symm _ ≪≫
+  Functor.isoWhiskerRight
+      (upperStarIsoLowerStarInv A g.geometricGaloisFrobenius.asIso.symm).symm _ ≪≫
     Functor.isoWhiskerLeft _ (upperStarIsoOpenImmersionRestriction A _).symm ≪≫
     (upperStarComp A _ _).symm ≪≫
     upperStarCongr A
