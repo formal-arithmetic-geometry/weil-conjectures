@@ -84,7 +84,8 @@ multiplication by a global section `s` of `R` to the multiplication by its image
 lemma extendScalarsCompObjRegularIso_inv_comp_map (s : Γ R) :
     (extendScalarsCompObjRegularIso φ ψ).inv ≫
         (extendScalars φ ⋙ extendScalars ψ).map (regularEndRingHom s).asHom =
-      (regularEndRingHom (Γ.map ψ (Γ.map φ s))).asHom ≫ (extendScalarsCompObjRegularIso φ ψ).inv := by
+      (regularEndRingHom (Γ.map ψ (Γ.map φ s))).asHom ≫
+        (extendScalarsCompObjRegularIso φ ψ).inv := by
   rw [extendScalarsCompObjRegularIso, Iso.trans_inv, Functor.mapIso_inv, Functor.comp_map,
     Category.assoc, ← Functor.map_comp, extendScalarsObjRegularIso_inv_comp_map, Functor.map_comp,
     extendScalarsObjRegularIso_inv_comp_map_assoc]
