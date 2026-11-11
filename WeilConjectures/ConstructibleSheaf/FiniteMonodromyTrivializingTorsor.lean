@@ -63,7 +63,6 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_monodromy_trivializing
       Nonempty ((c.π)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G ≅
         (constantSheaf c.P.smallEtaleTopology
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj A) := by
-  -- Validate this downstream proof against the updated monodromy torsor.
   classical
   let R := ULift.{u + 1} (ZMod ℓ)
   obtain ⟨d, hd⟩ := (Scheme.finite_locally_constant_module_values_iff G).1.mpr

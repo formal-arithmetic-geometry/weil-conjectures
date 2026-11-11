@@ -43,7 +43,6 @@ theorem Scheme.isConstant_of_retract {X : Scheme.{u}} [ConnectedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (h : Retract F G) [G.IsConstant X.smallEtaleTopology] :
     F.IsConstant X.smallEtaleTopology := by
-  -- Validate this downstream proof against the updated monodromy torsor.
   let hT : IsTerminal (Etale.mk (𝟙 X)) :=
     MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X
   rw [Sheaf.isConstant_iff_isIso_counit_app _ _ hT]

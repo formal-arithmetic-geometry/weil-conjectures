@@ -43,7 +43,6 @@ namespace AlgebraicGeometry.Etale
 private theorem affine_clopen_isAffineOpen
     {X : Scheme.{u}} [IsAffine X] (U : X.Opens) (hU : IsClosed (U : Set X)) :
     IsAffineOpen U := by
-  -- Validate this downstream proof against the updated monodromy torsor.
   have : IsClosedImmersion U.ι :=
     IsClosedImmersion.of_isPreimmersion U.ι (by simpa using hU)
   exact isAffine_of_isAffineHom U.ι
