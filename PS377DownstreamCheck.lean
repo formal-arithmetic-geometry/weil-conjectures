@@ -1,8 +1,0 @@
-module
-
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegersPowShift
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionHomologyCenter
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionHomologyBounds
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionHomologyCokernel
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionHomologyTriangle
