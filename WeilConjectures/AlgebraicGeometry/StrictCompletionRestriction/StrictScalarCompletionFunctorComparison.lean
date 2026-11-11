@@ -595,12 +595,10 @@ private theorem reductionTransition
     have ht := (T.reduction_step n).naturality (F.mapDerivedCategoryFactors.hom.app M)
     erw [← Category.assoc ((T.reduction_step n).app _) _ _, ← ht, Category.assoc,
       T.reduction_step_descent]
-    try simp only [Category.assoc]
     erw [reassoc_of% (hδ (n + 1) M)]
     have hn := F.mapDerivedCategoryFactors.hom.naturality
       ((S.tower.obj M).asFunctor.map (homOfLE (Nat.le_succ n)).op)
     dsimp only [Functor.comp_map] at hn
-    try simp only [Category.assoc]
     erw [reassoc_of% hn]
     have hc := congrArg (fun f ↦ DerivedCategory.Q.map f)
       (coneLevel_step F S T hscalar M n)

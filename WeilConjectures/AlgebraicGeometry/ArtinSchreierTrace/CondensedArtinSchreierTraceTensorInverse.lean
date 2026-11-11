@@ -419,7 +419,8 @@ private def reflection_total_iso :
 private theorem reflection_total_conjugates (a : k) :
     (CondensedRing.upperStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
         (reflection_total_iso Λ k).hom =
-      (reflection_total_iso Λ k).hom ≫ (condensedArtinSchreierTranslationAction Λ k (-a)).asHom := by
+      (reflection_total_iso Λ k).hom ≫
+        (condensedArtinSchreierTranslationAction Λ k (-a)).asHom := by
   change _ ≫ (reflection_pull_push Λ k).hom.app _ ≫ (reflection_push_iso Λ k).hom = _
   rw [NatTrans.naturality_assoc, reflection_conjugates]
   simp [reflection_total_iso]
@@ -604,7 +605,8 @@ private theorem scaling_total_conjugates (a : k) :
 private theorem scaling_projector_conjugate (ψ : AddChar k (MonObj.Γ Λ)) :
     (CondensedRing.upperStar Λ S).map (condensedArtinSchreierProjector Λ k ψ).asHom ≫
         (scaling_total_iso Λ k c).hom =
-      (scaling_total_iso Λ k c).hom ≫ (condensedArtinSchreierProjector Λ k (ψ.mulShift c)).asHom := by
+      (scaling_total_iso Λ k c).hom ≫
+        (condensedArtinSchreierProjector Λ k (ψ.mulShift c)).asHom := by
   simp only [projector_linear, End.sum_asHom, End.smul_asHom]
   rw [CategoryTheory.Functor.map_sum, Preadditive.sum_comp, Preadditive.comp_sum]
   refine Fintype.sum_equiv (Units.mulLeft c⁻¹) _ _ fun a ↦ ?_
