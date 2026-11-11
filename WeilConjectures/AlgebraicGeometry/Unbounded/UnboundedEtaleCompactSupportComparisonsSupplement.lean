@@ -1644,7 +1644,7 @@ theorem unboundedEtaleCompactSupport_baseChange
       (HasCompactification.compactification f)] at h
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
       unbounded_shriek_base_change, unbounded_shriek_iso, Iso.symm_hom,
-      TwoSquare.mk, Category.assoc] at h
+      Category.assoc] at h
     convert! h using 1
 
 end UnboundedBaseChange
@@ -1733,7 +1733,7 @@ private lemma chosenBaseChange_arbitrary
     (HasCompactification.compactification f')]
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, TwoSquare.mk, Category.assoc]
+    Functor.whiskerRight_app, Category.assoc]
 
 private lemma chosenBaseChange_paste_horiz
     (F : CompactSupportFormalism.{w, v, u}) [F.HasProperExchange]
@@ -1764,7 +1764,7 @@ private lemma chosenBaseChange_paste_horiz
     F.shriekBaseChange_paste_horiz c c' c'' h₁ h₂ hi₁ hp₁ hi₂ hp₂ hi hp]
   ext K
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk,
+    TwoSquare.whiskerRight, TwoSquare.vComp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc, ExchangeFormalism.pbComp'_rfl,
@@ -1825,7 +1825,7 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_horiz
       (unboundedFormalism A).pbComp a b = unboundedEtaleUpperStarCompIso A a b := rfl
   rw [hc, hc] at h
   simp only [unbounded_chosen_base_change, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.vComp, TwoSquare.mk] at h
+    TwoSquare.whiskerRight, TwoSquare.vComp] at h
   change (_ : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
       (upperStar (ModuleCat.{u + 1} A) (w ≫ v)).mapDerivedCategory ⟶
       (upperStar (ModuleCat.{u + 1} A) (w' ≫ v')).mapDerivedCategory ⋙
@@ -1941,12 +1941,12 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_vert
   have h₀ := 
     ((unboundedFormalism A).lowerShriekBaseChange_paste_vert sqf sqg sqgf)
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-    TwoSquare.mk, Category.assoc] at h₀
+    Category.assoc] at h₀
   have h := (Iso.eq_inv_comp (Functor.isoWhiskerRight
     ((unboundedFormalism A).lowerShriekCompIso f g)
     ((unboundedFormalism A).pb vZ))).mp h₀
   simp only [Functor.isoWhiskerRight_hom, unbounded_chosen_comp,
-    unbounded_chosen_base_change, TwoSquare.hComp, TwoSquare.mk] at h
+    unbounded_chosen_base_change, TwoSquare.hComp] at h
   change (_ : ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙
       rightDerivedLowerShriek (ModuleCat.{u + 1} A) g) ⋙
         (upperStar (ModuleCat.{u + 1} A) vZ).mapDerivedCategory ⟶
