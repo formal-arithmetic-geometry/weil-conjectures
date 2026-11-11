@@ -72,11 +72,11 @@ instance : (forget R C).Faithful where
 Source: Stacks Project, Tag 04JQ.
 (blueprint: lem-exc-scalar-objects-equivalence) -/
 def mapEndRing (F : C ⥤ D) [F.Additive] (X : C) : End X →+* End (F.obj X) where
-  toFun := F.map
-  map_one' := F.map_id X
-  map_mul' _a _b := F.map_comp _b _a
-  map_zero' := F.map_zero X X
-  map_add' _a _b := F.map_add
+  toFun a := .of (F.map a.asHom)
+  map_one' := End.ext (F.map_id X)
+  map_mul' a b := End.ext (F.map_comp b.asHom a.asHom)
+  map_zero' := End.ext (F.map_zero X X)
+  map_add' _a _b := End.ext F.map_add
 
 /-- Transport scalar operations by an additive functor.
 Source: Stacks Project, Tag 04JQ.
@@ -104,23 +104,30 @@ noncomputable def mapFullyFaithful (F : C ⥤ D) [F.Additive]
 Source: Stacks Project, Tag 04JQ.
 (blueprint: lem-exc-scalar-objects-equivalence) -/
 def conjugate (X Y : D) (i : X ≅ Y) : End Y →+* End X where
-  toFun a := .of (i.hom) ≫ (a).asHom ≫ i.inv
-  map_one' := by simp
+  toFun a := .of (i.hom ≫ a.asHom ≫ i.inv)
+  map_one' := by
+    apply End.ext
+    simp
   map_mul' a b := by
-    change i.hom ≫ (b ≫ a) ≫ i.inv =
-      (i.hom ≫ b ≫ i.inv) ≫ (i.hom ≫ (a).asHom ≫ i.inv)
+    apply End.ext
+    change i.hom ≫ (b.asHom ≫ a.asHom) ≫ i.inv =
+      (i.hom ≫ b.asHom ≫ i.inv) ≫ (i.hom ≫ a.asHom ≫ i.inv)
     simp [Category.assoc]
-  map_zero' := by simp
+  map_zero' := by
+    apply End.ext
+    simp
   map_add' a b := by
-    exact ((Preadditive.leftComp X i.hom).comp
-      (Preadditive.rightComp Y i.inv)).map_add (a b).asHom
+    apply End.ext
+    change i.hom ≫ (a.asHom + b.asHom) ≫ i.inv =
+      (i.hom ≫ a.asHom ≫ i.inv) + (i.hom ≫ b.asHom ≫ i.inv)
+    simp only [Preadditive.comp_add, Preadditive.add_comp]
 
 /-- Scalar operations lift uniquely through a fully faithful additive functor.
 Source: Stacks Project, Tag 04JQ.
 (blueprint: lem-exc-scalar-objects-equivalence) -/
 noncomputable def endRingEquiv (F : C ⥤ D) [F.Additive]
     (hF : F.FullyFaithful) (X : C) : End X ≃+* End (F.obj X) :=
-  RingEquiv.ofBijective (mapEndRing F X) hF.homEquiv.bijective
+  RingEquiv.ofBijective (mapEndRing F X) (hF.mulEquivEnd X).bijective
 
 /-- An additive equivalence induces an equivalence of scalar objects, with precisely
 its original underlying functor. Full faithfulness lifts compatible maps. For essential
@@ -143,19 +150,20 @@ noncomputable def equivalence (e : C ≌ D) [e.functor.Additive] :
       ((endRingEquiv e.functor e.fullyFaithfulFunctor X).symm.toRingHom).comp
         ((conjugate _ _ i).comp N.ρ)
     let M : ScalarObject R C := ⟨X, ρ⟩
-    have hρ (a : R) : e.functor.map (ρ a) = i.hom ≫ N.ρ a ≫ i.inv :=
-      (endRingEquiv e.functor e.fullyFaithfulFunctor X).apply_symm_apply _
+    have hρ (a : R) : e.functor.map (ρ a).asHom = i.hom ≫ (N.ρ a).asHom ≫ i.inv :=
+      congrArg End.asHom
+        ((endRingEquiv e.functor e.fullyFaithfulFunctor X).apply_symm_apply _)
     refine ⟨M, ⟨{
       hom := ⟨i.hom, ?_⟩
       inv := ⟨i.inv, ?_⟩
       hom_inv_id := hom_ext i.hom_inv_id
       inv_hom_id := hom_ext i.inv_hom_id }⟩⟩
     · intro a
-      change e.functor.map (ρ a) ≫ i.hom = i.hom ≫ N.ρ a
+      change e.functor.map (ρ a).asHom ≫ i.hom = i.hom ≫ (N.ρ a).asHom
       rw [hρ]
       simp [Category.assoc]
     · intro a
-      change N.ρ a ≫ i.inv = i.inv ≫ e.functor.map (ρ a)
+      change (N.ρ a).asHom ≫ i.inv = i.inv ≫ e.functor.map (ρ a).asHom
       rw [hρ]
       simp [← Category.assoc]
   have : F.IsEquivalence := {}
