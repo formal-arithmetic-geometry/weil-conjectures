@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
