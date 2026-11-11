@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
+public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections

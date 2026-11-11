@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.Stalk
 import WeilConjectures.PointCount
 import WeilConjectures.ZetaFunction.WeilObjectComparison
 import WeilConjectures.WeilSheaf.StalkCharpoly
