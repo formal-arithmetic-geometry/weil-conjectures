@@ -75,5 +75,4 @@ theorem exists_generic_torsion_finite_stalk_cohomology_colimit
   refine ⟨I, hI, hfiltered, F, ι, htor, hfin, hcolim, ?_⟩
   exact generic_torsion_cohomology_colimit X M hcolim
 
-
 end AlgebraicGeometry.Scheme
