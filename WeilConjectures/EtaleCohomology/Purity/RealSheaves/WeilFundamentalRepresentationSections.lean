@@ -136,7 +136,8 @@ lemma globalSectionsToUpperStar_frobenius_comp (X : Sheaf (Scheme.ProEt.topology
     (globalSectionsToUpperStar _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom).app X ≫
       (Sheaf.Γ _ _).map ((upperStarIsoLowerStarInv _
         (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso).hom.app X) =
-    (globalSectionsLowerStarIso _ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv).inv.app X := by
+    (globalSectionsLowerStarIso _
+      (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.inv).inv.app X := by
   have h' := globalSectionsToUpperStar_app_comp_globalSectionsUpperStarIso
     (WeilCoefficients.{u} l) (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso X
   simp only [globalSectionsUpperStarIso, Iso.trans_hom, NatTrans.comp_app,
@@ -167,8 +168,8 @@ lemma globalSections_frobenius_comp_res (F : WeilSheaf K l C) (hF : F.IsLisse) :
     (globalSectionsToUpperStar _ B.t).app F.obj.carrier.X ≫ (frobStalkIso M B F hF).hom := by
   have e₁ : (globalSectionsToUpperStar _ B.t).app F.obj.carrier.X ≫
       (M.mono B.frobPath).hom.app (F.toLisse hF) =
-      (globalSectionsToUpperStar _ (B.t ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)).app
-        F.obj.carrier.X :=
+      (globalSectionsToUpperStar _
+        (B.t ≫ (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)).app F.obj.carrier.X :=
     M.mono_globalSections B.frobPath (F.toLisse hF)
   have e₂ := globalSectionsToUpperStar_comp (WeilCoefficients.{u} l) B.t
     (C ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom F.obj.carrier.X
