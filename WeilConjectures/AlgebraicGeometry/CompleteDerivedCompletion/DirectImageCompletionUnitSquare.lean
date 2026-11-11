@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCompletionAugmentationCoherence
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCompletionConstantMateIso
 
-
 /-! # Completion augmentation square for direct image
 
 Source: literature/blueprint/latest/blueprint/sec-proper-base-change/

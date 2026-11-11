@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Comple
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
-
 /-!
 # Normalization predicates for the direct-image reduction cone tower
 
