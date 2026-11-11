@@ -24,7 +24,6 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
 
 private theorem evaluation_transition_mate
     {A B C D C' D' : Type*}

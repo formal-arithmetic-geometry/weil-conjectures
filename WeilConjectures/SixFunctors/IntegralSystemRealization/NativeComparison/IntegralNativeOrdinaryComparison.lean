@@ -17,7 +17,6 @@ set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
 universe u v u₁ u₂ u₃ u₄
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.IntegralSystemRealization.NativeComparison
