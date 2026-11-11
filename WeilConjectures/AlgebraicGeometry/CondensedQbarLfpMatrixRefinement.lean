@@ -131,7 +131,7 @@ variable {ι κ ν : Type} [Fintype ι] [Fintype κ] [Fintype ν]
 
 private noncomputable def matrixHom (M : Matrix κ ι R) :
     (⨁ fun _ : ι ↦ A) ⟶ ⨁ fun _ : κ ↦ A :=
-  biproduct.matrix fun j i ↦ φ (M i j)
+  biproduct.matrix fun j i ↦ (φ (M i j)).asHom
 
 private lemma matrixHom_mul (M : Matrix ν κ R) (N : Matrix κ ι R) :
     matrixHom A φ (M * N) = matrixHom A φ N ≫ matrixHom A φ M := by
