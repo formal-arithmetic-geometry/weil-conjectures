@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-
 public import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorCoherenceData
 public import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenTensorQuotientAugmentation
 public import WeilConjectures.SixFunctors.OpenRoos.OpenRoosUnitAdjunction
