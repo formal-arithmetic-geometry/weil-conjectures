@@ -96,7 +96,12 @@ theorem ext_sections_factorization
     ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
   -- Compare natural isomorphisms before evaluating their components.
   unfold moduleCohomologyExtResolutionEquiv
-  let a := resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
+  let a := resolutionSectionsNatIso
+    (A := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    (B := ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+    (D := AddCommGrpCat.{u})
+    (E := Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    G V T Γ p (sectionHomologyIso X p)
     (fun M _ ↦ forgottenInjectiveAcyclic X M)
   run_tac do Lean.logInfo m!"PS043 comparison defined: {← IO.monoMsNow}"
   have hη : moduleCohomologyExtResolutionNatIso X p = a ≪≫ Functor.isoWhiskerLeft T
