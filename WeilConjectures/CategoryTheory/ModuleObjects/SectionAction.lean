@@ -61,18 +61,18 @@ an `R`-module object `M`: a global section `s` acts by `M.X ≅ 𝟙 ⊗ M.X ⟶
 def sectionActRingHom (M : Mod C R) : Γ R →+* End M.X where
   toFun s := .of (sectionAct M.X s.hom)
   map_one' := by rw [Γ.one_hom, sectionAct_one]; rfl
-  map_mul' s t := sectionAct_mul M.X s t
-  map_zero' := by simp [sectionAct]
-  map_add' s t := by simp [sectionAct]
+  map_mul' s t := End.ext (sectionAct_mul M.X s t)
+  map_zero' := End.ext (by simp [sectionAct])
+  map_add' s t := End.ext (by simp [sectionAct])
 
 lemma sectionActRingHom_apply (M : Mod C R) (s : Γ R) :
-    sectionActRingHom M s = .of ((λ_ M.X)).inv ≫ s.hom ▷ M.X ≫ act M.X :=
+    sectionActRingHom M s = .of ((λ_ M.X).inv ≫ s.hom ▷ M.X ≫ act M.X) :=
   rfl
 
 /-- The action of global sections commutes with morphisms of `R`-modules. -/
 @[reassoc]
 lemma sectionActRingHom_comp_hom {M N : Mod C R} (f : M ⟶ N) (s : Γ R) :
-    sectionActRingHom M s ≫ f.hom = f.hom ≫ (sectionActRingHom N s :=).asHom
+    (sectionActRingHom M s).asHom ≫ f.hom = f.hom ≫ (sectionActRingHom N s).asHom :=
   sectionAct_comp f.hom s.hom
 
 end CategoryTheory.Mod
