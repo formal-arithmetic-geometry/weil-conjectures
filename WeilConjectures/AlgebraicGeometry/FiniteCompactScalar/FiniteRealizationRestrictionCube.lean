@@ -342,7 +342,8 @@ private theorem forward_realization_mate
         (sfIntrinsicModuleEquivalence T A).toAdjunction
         (TwoSquare.mk _ _ _ _ (sfRealizationRestriction T φ).inv) =
       TwoSquare.mk _ _ _ _ (sfInverseRealizationRestriction T φ).inv := by
-  ext M : 1
+  apply NatTrans.ext
+  funext M
   simp only [sfInverseRealizationRestriction, mateEquiv_apply,
     Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
