@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Localized.LocalizedTStructure
 public import WeilConjectures.CategoryTheory.StageSystem.PbcQbarCategory
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicSheaves

@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleMonodromyRealizationData
 import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients

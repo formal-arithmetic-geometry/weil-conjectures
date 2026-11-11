@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSized
 public import WeilConjectures.AlgebraicGeometry.Galois.GaloisLisseRepresentations
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
