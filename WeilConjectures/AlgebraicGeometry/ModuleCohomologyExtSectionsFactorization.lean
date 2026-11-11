@@ -77,7 +77,7 @@ private theorem moduleComparisonEquiv_siteSections
   run_tac Lean.Elab.Tactic.withMainContext do
     let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
     let actual ← Lean.Meta.zetaReduce
-      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (← `(h)))))
+      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h))))
     ps043ExprDiff 12 "type" actual expected
   exact h
   run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
@@ -143,7 +143,7 @@ theorem ext_sections_factorization
   run_tac Lean.Elab.Tactic.withMainContext do
     let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
     let actual ← Lean.Meta.zetaReduce
-      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (← `(h)))))
+      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h))))
     ps043ExprDiff 12 "type" actual expected
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
