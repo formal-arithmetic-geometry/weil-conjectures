@@ -144,7 +144,7 @@ lemma superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map (n : ℤ
           ((shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r)) ≫ e.hom) :=
         (traceOrZero_conj e _).symm
     _ = traceOrZero r := by rw [← he]
-    _ = r := by let : HasRightDual (𝟙_ A) := ⟨𝟙_ A⟩; rw [traceOrZero_eq_trace, trace_tensorUnit]
+    _ = .of (r) := by let : HasRightDual (𝟙_ A) := ⟨𝟙_ A⟩; rw [traceOrZero_eq_trace, trace_tensorUnit]
 
 /-- The trace of an endomorphism of a shifted unit `𝟙⟦n⟧` of `D(A)` is the supertrace of the
 induced endomorphisms of its homology objects, placed in degree `0`. -/
