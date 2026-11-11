@@ -174,7 +174,8 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 
 private lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq :
     adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h =
-      Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.asIso).symm ≪≫
+      Functor.isoWhiskerLeft _
+        (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.asIso).symm ≪≫
       (adicUpperStarComp l _ _).symm ≪≫
       adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm ≪≫
       adicUpperStarComp l _ _ ≪≫
@@ -196,8 +197,8 @@ lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom
         (upperStarComp _ (Scheme.Hom.geometricFiberMap φ h)
           g.geometricGaloisFrobenius.asIso.hom).hom.app M.X ≫
         (Scheme.Hom.geometricFiberMap φ h)^*[WeilCoefficients.{u} l].map
-          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l) g.geometricGaloisFrobenius.asIso).hom.app
-            M.X) :=
+          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
+            g.geometricGaloisFrobenius.asIso).hom.app M.X) :=
   (congrArg (fun i ↦ (i.hom.app M).hom)
     (adicUpperStarGeometricFiberMapCompFrobeniusIso_eq (l := l) φ h)).trans
     (exchange_hom_app_hom _ _ _ _ M)
