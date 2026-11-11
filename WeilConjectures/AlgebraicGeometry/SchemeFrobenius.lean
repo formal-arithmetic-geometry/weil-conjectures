@@ -391,7 +391,8 @@ theorem absoluteFrobenius_geometricFiber_eq_comp_schemeFrobenius (m : ℕ) :
 `Φ^m = g_γ^m ∘ Fr^{(q^m)}_X`. -/
 theorem schemeFrobenius_eq_absoluteFrobenius_comp (m : ℕ) :
     f.schemeFrobenius m =
-      (f.geometricFiberProj ≫ f).absoluteFrobenius m ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom := by
+      (f.geometricFiberProj ≫ f).absoluteFrobenius m ≫
+        (f.geometricGaloisFrobenius ^ m).asIso.hom := by
   rw [absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp, Category.assoc, ← Aut.mul_hom,
     arithmeticGaloisFrobenius_eq_inv, inv_pow, mul_inv_cancel,
     Aut.one_hom, Category.comp_id]

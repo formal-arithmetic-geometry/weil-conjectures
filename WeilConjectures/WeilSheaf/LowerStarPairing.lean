@@ -61,7 +61,8 @@ lemma lowerStar_obj_obj_str_hom_hom (F : WeilSheaf k₀ l X) :
 theorem lowerStar_pairing_str (P Q R : WeilSheaf k₀ l X)
     (e : P.obj.carrier.X ⊗ Q.obj.carrier.X ⟶ R.obj.carrier.X)
     (h : (P.obj.str.hom.hom ⊗ₘ Q.obj.str.hom.hom) ≫ e =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec
+          (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           P.obj.carrier.X Q.obj.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map e ≫
           R.obj.str.hom.hom) :
@@ -69,7 +70,8 @@ theorem lowerStar_pairing_str (P Q R : WeilSheaf k₀ l X)
         (μ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l]
           P.obj.carrier.X Q.obj.carrier.X ≫
           (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map e) =
-      μ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((Y ↘ Spec
+          (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj P.obj.carrier.X)
           ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj Q.obj.carrier.X) ≫
         ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
@@ -103,10 +105,12 @@ private lemma unit_str_aux {C D : Type*} [Category C] [Category D] [MonoidalCate
 
 /-- **Pushforwards of compatible units are compatible.** -/
 theorem lowerStar_unit_str (R : WeilSheaf k₀ l X) (η : 𝟙_ _ ⟶ R.obj.carrier.X)
-    (h : ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
+    (h : ε ((X ↘ Spec
+          (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map η ≫
         R.obj.str.hom.hom = η) :
-    ε ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
+    ε ((Y ↘ Spec
+          (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
         ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (ε (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l] ≫
             (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map η) ≫
