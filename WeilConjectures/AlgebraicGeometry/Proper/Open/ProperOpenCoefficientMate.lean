@@ -493,7 +493,6 @@ private theorem mate_transport_left
     CategoryTheory.Functor.map_comp, Category.id_comp,
     Category.assoc]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  dsimp only [TwoSquare.natTrans]
   simp only [← CategoryTheory.Functor.map_comp_assoc,
     Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp]
