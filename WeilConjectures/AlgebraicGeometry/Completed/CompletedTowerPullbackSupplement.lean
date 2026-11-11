@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalRestriction.ProEtaleLocalD
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
