@@ -45,7 +45,6 @@ theorem inverseMate_isIso [G.IsEquivalence] [H.IsEquivalence]
     simp only [aH, Equivalence.toAdjunction_counit]
     infer_instance
   have : IsIso β := by
-    change IsIso β
     infer_instance
   have hβ : IsIso (mateEquiv aH aG β) := by
     dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk]

@@ -350,7 +350,6 @@ private theorem completed_iteratedInverseMate_isIso
     (α : TwoSquare U₂ R₂ R₁ U₁) [IsIso α] :
     IsIso (((mateEquiv a b).symm ((mateEquiv d c).symm α))) := by
   rw [iterated_mateEquiv_conjugateEquiv_symm]
-  change IsIso ((conjugateEquiv (a.comp d) (c.comp b)).symm α)
   infer_instance
 
 private abbrev completedRestrictFunctor {W : Scheme.{t}} (U : W.ProEt) :=
