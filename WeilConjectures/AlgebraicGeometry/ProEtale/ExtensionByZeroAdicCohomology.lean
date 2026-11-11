@@ -541,7 +541,9 @@ def _root_.CategoryTheory.Functor.mapRingHom (G : C ⥤ D) [G.Additive] {X : C}
   toFun r := .of (G.map (φ r).asHom)
   map_one' := by
     apply End.ext
-    simp only [map_one, End.one_asHom, Functor.map_id]
+    change G.map (φ 1).asHom = 𝟙 (G.obj X)
+    rw [map_one, End.one_asHom]
+    exact G.map_id X
   map_mul' r s := by
     apply End.ext
     simp only [map_mul, End.mul_asHom, Functor.map_comp]
