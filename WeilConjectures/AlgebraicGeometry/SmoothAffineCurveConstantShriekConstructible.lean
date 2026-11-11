@@ -70,7 +70,6 @@ private theorem properSmooth_finiteEtale_constantShriek_constructible
         ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj
           ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
             ((constantSheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))) := by
-
   have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian t
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace t
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p

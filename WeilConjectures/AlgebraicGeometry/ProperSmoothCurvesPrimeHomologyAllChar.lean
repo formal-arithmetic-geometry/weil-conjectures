@@ -60,7 +60,6 @@ theorem properSmoothCurves_prime_higherDirectImage_constructible_homology_all_ch
           ((constantSheaf C.smallEtaleTopology
             (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod p)))))) := by
-
   rw [Etale.DerivedCategory.constructibleHomology_eq]
   intro q
   let F := (constantSheaf C.smallEtaleTopology

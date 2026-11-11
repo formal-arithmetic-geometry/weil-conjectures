@@ -82,7 +82,6 @@ theorem properSmoothCurves_finiteModule_higherDirectImage_constructible_all_char
           ((DerivedCategory.Plus.singleFunctor
             (Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
             ((constantSheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))) := by
-
   classical
   let A := ULift.{u + 1} (ZMod (ringChar Λ))
   have hne : NeZero (ringChar Λ) :=
