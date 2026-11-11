@@ -47,7 +47,7 @@ lemma purity_upperStarForgetIso_factor_normalized
         (Mod.forget (condensedRingObj Λ U)).map ((purityModuleFactorIso Λ p s hs).hom.app M) =
       (purityAbelianFactorIso p s hs).hom.app M.X ≫
         (CondensedRing.upperStarForgetIso Λ p).hom.app M := by
-  have h := (CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M)
+  have h := CondensedRing.purity_upperStarForgetIso_factor_hom Λ p s hs M
   simp only [Category.assoc, purityModuleFactorIso, purityAbelianFactorIso] at h ⊢
   dsimp only [Functor.comp_obj, Functor.comp_map, Mod.forget] at h ⊢
   cast_proofs h
