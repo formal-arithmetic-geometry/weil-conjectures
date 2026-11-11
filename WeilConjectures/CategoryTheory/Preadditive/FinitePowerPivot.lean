@@ -71,22 +71,24 @@ theorem exists_cokernel_iso_of_isIso_entry [HasCokernels C] {m n : ℕ}
 noncomputable def biproductFinMatrix {p q : ℕ}
     (g : (⨁ fun _ : Fin p ↦ U) ⟶ ⨁ fun _ : Fin q ↦ U) :
     Matrix (Fin q) (Fin p) (End U) :=
-  fun i j ↦ .of (biproduct.ι (fun _ : Fin p ↦ U) j) ≫ g ≫ biproduct.π (fun _ : Fin q ↦ U) i
+  fun i j ↦ .of (biproduct.ι (fun _ : Fin p ↦ U) j ≫ g ≫ biproduct.π (fun _ : Fin q ↦ U) i)
 
 /-- The matrix of a composition is the product of the matrices (in the opposite order, since
 multiplication in `End U` is composition in the opposite order). -/
 lemma biproductFinMatrix_comp {p q r : ℕ} (g : (⨁ fun _ : Fin p ↦ U) ⟶ ⨁ fun _ : Fin q ↦ U)
     (h : (⨁ fun _ : Fin q ↦ U) ⟶ ⨁ fun _ : Fin r ↦ U) :
     biproductFinMatrix (g ≫ h) = biproductFinMatrix h * biproductFinMatrix g := by
-  ext i k
-  simp only [biproductFinMatrix, Matrix.mul_apply, End.mul_asHom]
+  funext i k
+  apply End.ext
+  simp only [biproductFinMatrix, Matrix.mul_apply, End.sum_asHom, End.mul_asHom]
   conv_lhs => rw [← Category.id_comp h, ← biproduct.total]
   simp only [comp_sum, sum_comp, Category.assoc]
 
 /-- The matrix of the identity is the identity matrix. -/
 lemma biproductFinMatrix_id (p : ℕ) :
     biproductFinMatrix (𝟙 (⨁ fun _ : Fin p ↦ U)) = 1 := by
-  ext i j
+  funext i j
+  apply End.ext
   simp only [biproductFinMatrix, Category.id_comp, Matrix.one_apply]
   by_cases h : j = i
   · subst h
@@ -124,7 +126,11 @@ theorem exists_le_iso_cokernel_biproduct_fin [HasCokernels C]
       exact hf (biproduct_fin_hom_ext fun a b ↦ by simp [h a b])
     obtain _ | m := m
     · exact b.elim0
-    have := hU _ hab
+    have : IsIso (biproduct.ι (fun _ : Fin (m + 1) ↦ U) b ≫ f ≫
+        biproduct.π (fun _ : Fin (n + 1) ↦ U) a) :=
+      hU (biproductFinMatrix f a b) (by
+        intro h
+        exact hab (congr($(h).asHom)))
     obtain ⟨f', ⟨e⟩⟩ := exists_cokernel_iso_of_isIso_entry f a b
     obtain ⟨d, hd, -, ⟨e'⟩⟩ := ih f'
     exact ⟨d, by omega, fun _ ↦ by omega, ⟨e ≪≫ e'⟩⟩
