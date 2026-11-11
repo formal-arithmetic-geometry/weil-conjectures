@@ -39,6 +39,7 @@ theorem nontrivial_stalk_iff_nontrivial_stalkObj (F : WeilSheaf k₀ l X) (x : X
       (IsLocalRing.closedPoint (AlgebraicClosure k₀)) = x.1) :
     Nontrivial (F.stalk x).carrier ↔
       Nontrivial ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) := by
+
   have hx :=
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base x
   obtain ⟨g, j, -, hg, -⟩ :=

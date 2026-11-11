@@ -51,6 +51,7 @@ lemma ptRes_app_comp_upperStarStalkIso (y : Spec (.of (AlgebraicClosure Ω)) ⟶
     (F : Sheaf (ProEt.topology Y) (WeilCoefficients.{u} l)) :
     (U.ptRes l (y ≫ f)).app F ≫ (upperStarStalkIso l f y F).hom =
       φ.mapRes l y F ≫ (U'.ptRes l y).app ((f)^*[_].obj F) := by
+
   have h₀ : U.pt (y ≫ f) ≫ U.proj (y ≫ f) = y ≫ f := U.pt_proj _
   rw [ptRes_app, ptRes_app, resOver_app_eq_transport, resOver_app_eq_transport, mapRes]
   refine Eq.trans ?_ (globalSectionsTransport_comp_eq _ _ _ h₀ (φ.pt_map y)
