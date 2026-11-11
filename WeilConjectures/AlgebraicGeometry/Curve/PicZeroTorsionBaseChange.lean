@@ -72,6 +72,7 @@ theorem picZero_torsion_base_change
   let (S : Over (Spec (.of k))) : CommGroup (S ⟶ J) := CategoryTheory.Hom.commGroup
   let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k')))
   have hinj : Function.Injective j := by
+
     intro x z hxz
     apply e.injective
     apply Over.OverMorphism.ext

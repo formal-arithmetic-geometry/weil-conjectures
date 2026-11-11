@@ -75,6 +75,7 @@ theorem normalizationIn (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
       ∃ e : Spec (.of L) ≅ Spec (C.normalizationIn L).functionField,
         e.hom ≫ (C.normalizationIn L).fromSpecFunctionField =
           (C.fromSpecOfAlgebraFunctionField L).toNormalization := by
+
   set h := C.fromNormalizationIn L
   have : IsFinite h := C.isFinite_fromNormalizationIn L f
   have : IsAffine (C.normalizationIn L) := isAffine_of_isAffineHom h

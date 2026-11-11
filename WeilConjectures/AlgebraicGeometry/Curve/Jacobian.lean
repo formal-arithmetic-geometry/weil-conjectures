@@ -53,6 +53,7 @@ theorem Scheme.exists_jacobian_addEquiv_prod :
         Nonempty (picardZero k C ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J)) ∧
         ∃ E : Additive C.Pic ≃+ ℤ × Additive (𝟙_ (Over (Spec (.of k))) ⟶ J),
           ∀ L, (E L).1 = Multiplicative.toAdd (Scheme.picDegreeHom k C L.toMul) := by
+
   have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
   have : GeometricallyConnected (C ↘ Spec (.of k)) :=
     GeometricallyConnected.of_connectedSpace_of_isSepClosed _
