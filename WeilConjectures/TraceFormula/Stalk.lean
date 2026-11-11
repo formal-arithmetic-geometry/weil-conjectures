@@ -363,7 +363,8 @@ lemma stalkFrobenius_zero (K : WeilBoundedConstructible ℓ Φ) (x : RationalPoi
     (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
     (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X)
     (fun a K ↦ boundedConstructibleUpperStarComp_id_right_app _ ℓ a K)
-    (frobeniusIterate_zero Φ) hx (K.iterate_carrier 0) _ (Category.id_comp _).symm
+    (frobeniusIterate_zero Φ) hx (K.iterate_carrier 0) _ (by
+      simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom])
 
 /-- At a point fixed by `Φ_a` and `Φ_b`, `F_{x,a+b} = F_{x,b} ∘ F_{x,a}`. -/
 lemma stalkFrobenius_add (K : WeilBoundedConstructible ℓ Φ) {a b : ℕ} (x : RationalPoint X)
@@ -387,8 +388,7 @@ lemma stalkFrobenius_mul (K : WeilBoundedConstructible ℓ Φ) {d : ℕ} {x : Ra
     (hx : x ≫ frobeniusIterate Φ d = x) (n : ℕ) :
     K.stalkFrobenius (d * n) x
         (by rw [frobeniusIterate_mul]; exact comp_frobeniusIterate_of_comp hx n) =
-      (show End ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-          K.carrier) from K.stalkFrobenius d x hx) ^ n := by
+      (End.of (K.stalkFrobenius d x hx) ^ n).asHom := by
   induction n with
   | zero => exact K.stalkFrobenius_zero x _
   | succ n ih =>
@@ -429,7 +429,8 @@ lemma iterateStr_comm (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
     (frobeniusIterate_zero Φ) (frobeniusIterate_succ Φ 0) (frobeniusIterate_succ Φ m)
     (frobeniusIterate_add Φ 1 m) (by rw [Nat.add_comm]) (comp_frobeniusIterate_comm Φ m)
     K.str.hom (K.iterateStr m).hom (K.iterateStr 0).hom (K.iterateStr 1).hom
-    (K.iterateStr (m + 1)).hom (K.iterateStr (1 + m)).hom (Category.id_comp _).symm rfl rfl
+    (K.iterateStr (m + 1)).hom (K.iterateStr (1 + m)).hom
+    (by simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom]) rfl rfl
     (iterateStr_add K 1 m) (hcongr (Nat.add_comm m 1))
 
 /-- The isomorphism underlying the Frobenius transport `stalkTransport`:
