@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.CompletedCoefficientFree.CompletedCoefficientFreeResolution
 import all WeilConjectures.SixFunctors.CompletedCoefficientFree.CompletedCoefficientFreeResolution
 public import WeilConjectures.CategoryTheory.Ringed.RingedProEtaleTorAmplitudeOfUniverses
