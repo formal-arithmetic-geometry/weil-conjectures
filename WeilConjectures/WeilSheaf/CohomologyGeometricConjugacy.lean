@@ -60,8 +60,7 @@ lemma cohomologyCarrierIso_inv_derivedGlobalSectionsUnitIso_pow (i : ℤ) (n : �
     exact congrArg (fun f ↦ f.hom w) hF
   induction n generalizing z with
   | zero =>
-    rw [pow_zero, pow_zero,
-      show (1 : Aut (X ↘ Spec (.of k)).geometricFiber) = Iso.refl _ from rfl,
+    rw [pow_zero, pow_zero, Aut.one_asIso,
       Iso.refl_symm, ProEtale.derivedGlobalSectionsUnitIso_refl, Iso.refl_hom,
       CategoryTheory.Functor.map_id]
     rfl
