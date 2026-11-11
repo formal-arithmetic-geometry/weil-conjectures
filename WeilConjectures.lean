@@ -3982,6 +3982,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.PicBoundaryBaseChangeTrans
 public import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsion
 public import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsionCoker
 public import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsionDiv
+public import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsionJacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsionTorsion
 public import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionBoundary
 public import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionBoundaryTrivial
@@ -6803,6 +6804,7 @@ public import WeilConjectures.AlgebraicGeometry.Flat.FlatConstructibleTensor
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatDerivedStructureUnit
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatDerivedStructureUnitProperties
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatInvertibleCanonicalDerivedBaseChange
+public import WeilConjectures.AlgebraicGeometry.Flat.FlatInvertibleCanonicalModuleBaseChange
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatModel
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatModelGeneration
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatProperComponentCountLowerSemicontinuous
@@ -17024,6 +17026,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.EulerRadius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGroup
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.JacobianKummer
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.JacobianKummerTateModule
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseRepAbelian
@@ -17508,6 +17511,7 @@ public import WeilConjectures.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddi
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TateModuleDual
 public import WeilConjectures.GroupTheory.TorsionCharacter
+public import WeilConjectures.GroupTheory.TorsionInverseLimit
 public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LeanEval.WeilConjectures
 public import WeilConjectures.LinearAlgebra.Basis.PowQuotientTower
