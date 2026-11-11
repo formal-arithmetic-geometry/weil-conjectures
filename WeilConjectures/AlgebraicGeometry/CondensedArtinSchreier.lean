@@ -67,13 +67,13 @@ Source: current blueprint, def-fd-artin-schreier-sheaf.md, displayed projector
 (blueprint: def-fd-artin-schreier-sheaf). -/
 def condensedArtinSchreierProjector (ψ : AddChar k (MonObj.Γ Λ)) :
     End (condensedArtinSchreierPushforward Λ k) :=
-  ∑ a : k, End.of <| (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
+  ∑ a : k, End.of ((condensedArtinSchreierTranslationAction Λ k a).asHom ≫
     (CondensedRing.lowerStar Λ
       (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
         (Mod.regularEndRingHom
           (MonObj.Γ.mapFunctorMonoidHom
             (upperStarFromPoint (AffineSpace PUnit (Spec (.of k))))
-            (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)))).asHom
+            (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)))).asHom)
 
 /-- The condensed Artin–Schreier sheaf is the actual image of its character projector.
 Source: current blueprint, def-fd-artin-schreier-sheaf.md, condensed-coefficients paragraph
