@@ -166,7 +166,7 @@ instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv
   have (Y : D) : IsIso (β.app Y) := by
     rw [hβ]
     have : ∀ Z, IsIso (γ.app Z) := fun Z ↦ @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hγ Z
-    simp only [mateEquiv_symm_apply, TwoSquare.mk, NatTrans.comp_app, Functor.comp_obj,
+    simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.comp_obj,
       Functor.id_obj, Functor.leftUnitor_inv_app, Functor.whiskerRight_app,
       Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
       Functor.rightUnitor_hom_app, Category.id_comp, Category.comp_id, Functor.map_id,
