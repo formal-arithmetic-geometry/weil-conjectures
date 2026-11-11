@@ -61,4 +61,3 @@ def SfbIntegralComparison (l : ℕ) [Fact l.Prime]
           ULift.up ((profiniteToProEtOf X).map (g ≫ j.hom ≫ c.π.app (op n)))
 
 end AlgebraicGeometry.ProEtale
-

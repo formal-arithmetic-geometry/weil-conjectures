@@ -51,4 +51,3 @@ noncomputable def integralLocalizationSequenceMapIso
 
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-

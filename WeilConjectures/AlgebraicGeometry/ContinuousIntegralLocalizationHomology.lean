@@ -72,4 +72,3 @@ theorem integralLocalization_homology_isColimit (X : Scheme.{u})
   exact ⟨isColimitOfPreserves _ hc⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-

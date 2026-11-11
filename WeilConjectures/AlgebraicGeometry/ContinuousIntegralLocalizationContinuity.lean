@@ -64,4 +64,3 @@ theorem integralLocalization_push_homology_isColimit {X Y : Scheme.{u}} (f : X �
   exact ⟨IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := by exact h)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-

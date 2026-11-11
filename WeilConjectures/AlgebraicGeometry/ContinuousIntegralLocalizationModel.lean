@@ -147,4 +147,3 @@ theorem exists_integralLocalization_complex_model (X : Scheme.{u})
   exact (Category.id_comp (DerivedCategory.Q.map (c.ι.app n.down) ≫ g)).symm.trans hh
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-

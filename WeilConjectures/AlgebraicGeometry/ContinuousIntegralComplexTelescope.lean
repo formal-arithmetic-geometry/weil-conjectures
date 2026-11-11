@@ -80,4 +80,3 @@ theorem integralComplexLocalization_colimit (X : Scheme.{u})
   · simp [c, scalarLocalizationUnitCocone, adj, φ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-

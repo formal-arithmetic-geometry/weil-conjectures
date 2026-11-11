@@ -79,4 +79,3 @@ theorem integralModuleLocalization_isColimit (X : Scheme.{u})
   exact ⟨isColimitOfReflects F ((IsColimit.precomposeInvEquiv α _) hd)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
