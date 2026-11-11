@@ -93,7 +93,7 @@ private theorem powerCompare (M : CochainComplex (AdicCompletion.Modules l E T) 
       ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).obj (M.X i)))) ^
         (n.unop+1))
   simp only [Category.comp_id, Category.id_comp]
-  have hp := map_pow
+  have hp := congrArg End.asHom <| map_pow
     ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapEnd (M.X i))
     (End.of ((scalar l E T).app (M.X i))) (n.unop+1)
   change _ = End.asHom ((End.of
