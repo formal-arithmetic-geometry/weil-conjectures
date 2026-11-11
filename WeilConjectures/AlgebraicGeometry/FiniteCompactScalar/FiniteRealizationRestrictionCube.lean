@@ -342,7 +342,8 @@ private theorem forward_realization_mate
         (sfIntrinsicModuleEquivalence T A).toAdjunction
         (TwoSquare.mk _ _ _ _ (sfRealizationRestriction T φ).inv) =
       TwoSquare.mk _ _ _ _ (sfInverseRealizationRestriction T φ).inv := by
-  ext M : 1
+  apply NatTrans.ext
+  funext M
   simp only [sfInverseRealizationRestriction, mateEquiv_apply,
     Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
     Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
@@ -353,6 +354,7 @@ private theorem forward_realization_mate
     Category.assoc]
   dsimp only [Equivalence.symm, Equivalence.toAdjunction, Equivalence.unit,
     Equivalence.counit, TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj, Functor.comp_map]
+  simp only [Category.id_comp]
   all_goals rfl
 
 private theorem realization_functor (T : Scheme.{u})
