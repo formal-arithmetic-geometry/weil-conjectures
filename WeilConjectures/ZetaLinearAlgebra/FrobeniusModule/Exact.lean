@@ -27,6 +27,8 @@ field cardinality `q` becomes `qᵐ`.
   (`lem-a1-punctual-bound-module-mixed`): a bound on all eigenvalues is an upper weight bound.
 - `FrobeniusModule.HasWeightsAtMost.of_powFrobenius` (`lem-a1-weight-bound-constant-extension`):
   a weight bound over a finite constant extension descends.
+- `FrobeniusModule.hasWeightsAtMost_powFrobenius_iff` (`lemma-weight-bound-constant-extension--1`):
+  over an algebraically closed field, weight bounds over `k₀` and over `k_m` are equivalent.
 - `FrobeniusModule.roots_charpoly_frobeniusEnd_map_eq_add` (`lem-a1-spectrum-exact-sequence`): the
   spectrum of the middle term of a short exact sequence is the sum of those of the outer terms.
 - `FrobeniusModule.HasWeightsAtMost.of_subquotient` (`lem-a1-subquotient-extension-bounds`):
@@ -175,6 +177,59 @@ theorem HasWeightsAtMost.of_powFrobenius {M : FrobeniusModule.{u, v} K} {ι : K 
       ← Real.rpow_natCast (q : ℝ) m, ← Real.rpow_mul (Nat.cast_nonneg _), mul_comm]
   rw [map_pow, norm_pow, Nat.cast_pow, e] at hb
   exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg (Nat.cast_nonneg _) _) hm).1 hb
+
+/-- Over an algebraically closed field, every eigenvalue `β` of `Fᵐ` is the `m`-th power of an
+eigenvalue `α` of `F`: the `β`-eigenspace of `Fᵐ` is a nonzero `F`-stable subspace, on which `F`
+has an eigenvalue `α`, and `αᵐ = β`. -/
+theorem exists_hasEigenvalue_pow_eq_of_powFrobenius [IsAlgClosed K]
+    {M : FrobeniusModule.{u, v} K} {m : ℕ} {β : K}
+    (hβ : (M.powFrobenius m).frobeniusEnd.HasEigenvalue β) :
+    ∃ α, M.frobeniusEnd.HasEigenvalue α ∧ α ^ m = β := by
+  rw [powFrobenius_frobeniusEnd] at hβ
+  set E := (M.frobeniusEnd ^ m).eigenspace β
+  have hmaps : ∀ x ∈ E, M.frobeniusEnd x ∈ E := fun x hx ↦ by
+    rw [Module.End.mem_eigenspace_iff] at hx ⊢
+    rw [← Module.End.mul_apply, ← pow_succ, pow_succ', Module.End.mul_apply, hx, map_smul]
+  have : Nontrivial E := Submodule.nontrivial_iff_ne_bot.2 hβ
+  obtain ⟨α, hα⟩ := Module.End.exists_eigenvalue (M.frobeniusEnd.restrict hmaps)
+  obtain ⟨⟨x, hxE⟩, hx⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+  have hFx : M.frobeniusEnd x = α • x := congrArg Subtype.val hx.1
+  have hx0 : x ≠ 0 := fun h ↦ hx.2 (Subtype.ext h)
+  refine ⟨α, Module.End.hasEigenvalue_of_hasEigenvector
+    ((Module.End.hasEigenvector_iff).2 ⟨Module.End.mem_eigenspace_iff.2 hFx, hx0⟩), ?_⟩
+  have key : ∀ n : ℕ, (M.frobeniusEnd ^ n) x = α ^ n • x := by
+    intro n
+    induction n with
+    | zero => simp
+    | succ n ih => rw [pow_succ', Module.End.mul_apply, ih, map_smul, hFx, smul_smul, pow_succ]
+  have hβx : (M.frobeniusEnd ^ m) x = β • x := Module.End.mem_eigenspace_iff.1 hxE
+  rw [key] at hβx
+  exact smul_left_injective K hx0 hβx
+
+/-- **Weight bounds over a finite constant extension**, the ascending direction. Over an
+algebraically closed field, if `M` has weights at most `b`, so has the Frobenius module `(M, Fᵐ)`
+for the field cardinality `qᵐ`: every eigenvalue of `Fᵐ` is `αᵐ` for an eigenvalue `α` of `F`. -/
+theorem HasWeightsAtMost.powFrobenius [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
+    {ι : K →+* ℂ} {q : ℕ} {b : ℝ} (h : M.HasWeightsAtMost ι q b) (m : ℕ) :
+    (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b := by
+  intro β hβ
+  obtain ⟨α, hα, rfl⟩ := exists_hasEigenvalue_pow_eq_of_powFrobenius hβ
+  have e : ((q : ℝ) ^ m) ^ (b / 2) = ((q : ℝ) ^ (b / 2)) ^ m := by
+    rw [← Real.rpow_natCast ((q : ℝ) ^ (b / 2)) m, ← Real.rpow_mul (Nat.cast_nonneg _),
+      ← Real.rpow_natCast (q : ℝ) m, ← Real.rpow_mul (Nat.cast_nonneg _), mul_comm]
+  rw [map_pow, norm_pow, Nat.cast_pow, e]
+  exact pow_le_pow_left₀ (norm_nonneg _) (h α hα) m
+
+/-- **Weight bounds and finite constant extensions.** Over an algebraically closed field, for
+`m ≠ 0`, every eigenvalue `α` of the Frobenius `F` of `M` satisfies `|ι α| ≤ q ^ (u / 2)` if and
+only if every eigenvalue `β` of `Fᵐ`, the Frobenius over the constant extension of degree `m`,
+satisfies `|ι β| ≤ (qᵐ) ^ (u / 2)`.
+(blueprint: `lemma-weight-bound-constant-extension--1`) -/
+theorem hasWeightsAtMost_powFrobenius_iff [IsAlgClosed K] {M : FrobeniusModule.{u, v} K}
+    {ι : K →+* ℂ} {q m : ℕ} (hm : m ≠ 0) {b : ℝ} :
+    (M.powFrobenius m).HasWeightsAtMost ι (q ^ m) b ↔ M.HasWeightsAtMost ι q b :=
+  ⟨HasWeightsAtMost.of_powFrobenius hm, fun h ↦ h.powFrobenius m⟩
 
 /-- A Frobenius module with weights at most `w` whose dual has weights at most `-w` (through an
 isomorphism `N ≃ M^∨`) is pure of weight `w`: the eigenvalues of the Frobenius of `M^∨` are the
