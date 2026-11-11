@@ -77,7 +77,7 @@ private theorem composite_mate_app
       (mateEquiv a b χ).app (Q'.obj X) ≫
         R.map ((mateEquiv a' b' χ').app X) := by
   rw [mateEquiv_hcomp]
-  simp only [TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id]
 
