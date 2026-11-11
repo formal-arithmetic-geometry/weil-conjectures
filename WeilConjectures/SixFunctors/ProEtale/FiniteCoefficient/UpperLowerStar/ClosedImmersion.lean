@@ -78,7 +78,6 @@ private lemma isIso_map_counit_of_local_adjunction
   have : IsIso γ := by
     dsimp [γ, β]
     rw [iterated_mateEquiv_conjugateEquiv_symm ai ai' aj aj']
-    change IsIso ((conjugateEquiv (ai.comp aj') (aj.comp ai')).symm α)
     infer_instance
   have h := mateEquiv_counit_symm ai ai' β M
   have : IsIso ai'.counit := hc
