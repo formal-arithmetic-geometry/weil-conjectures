@@ -138,7 +138,7 @@ private theorem tensor_truncGE_image_left
   have hb' := V.isLE_mapDerivedCategory_obj T.obj₁ (a - 1)
   have : (F.mapTriangle.obj T).obj₁.IsLE (i - 1) := by
     have h := DerivedCategory.isLE_tensor (V.mapDerivedCategory.obj T.obj₁) N (a - 1) b
-    convert h using 1 <;> (dsimp [F, a] <;> omega)
+    convert h using 1 <;> (dsimp [F, a]; omega)
   have hT := F.map_distinguished T (DerivedCategory.triangleOfSES_distinguished S)
   have : IsIso ((DerivedCategory.homologyFunctor D i).map (F.map T.mor₂)) :=
     homology_iso_of_upper_triangle (F.mapTriangle.obj T) hT i
@@ -172,7 +172,7 @@ private theorem tensor_truncGE_image_right
   have hb' := V.isLE_mapDerivedCategory_obj T.obj₁ (a - 1)
   have : (F.mapTriangle.obj T).obj₁.IsLE (i - 1) := by
     have h := DerivedCategory.isLE_tensor N (V.mapDerivedCategory.obj T.obj₁) b (a - 1)
-    convert h using 1 <;> (dsimp [F, a] <;> omega)
+    convert h using 1 <;> (dsimp [F, a]; omega)
   have hT := F.map_distinguished T (DerivedCategory.triangleOfSES_distinguished S)
   have : IsIso ((DerivedCategory.homologyFunctor D i).map (F.map T.mor₂)) :=
     homology_iso_of_upper_triangle (F.mapTriangle.obj T) hT i

@@ -198,13 +198,11 @@ theorem exists_rawDerivedClass_affine_descent
         Over.homMk_left, NatIso.ofComponents_hom_app, Category.assoc,
         pullbackSymmetry_hom_comp_fst, pullbackSymmetry_hom_comp_snd,
         Category.comp_id]
-    all_goals first
-      | exact pullback.lift_fst _ _ _
-      | exact pullback.lift_snd _ _ _
-      | (erw [pullback.lift_fst, pullback.lift_snd]
-         first
-         | exact (pullbackSymmetry_hom_comp_fst _ _).symm
-         | exact (pullbackSymmetry_hom_comp_snd_assoc _ _ _).symm)
+    all_goals
+      erw [pullback.lift_fst, pullback.lift_snd]
+      first
+      | exact (pullbackSymmetry_hom_comp_fst _ _).symm
+      | exact (pullbackSymmetry_hom_comp_snd_assoc _ _ _).symm
   have (l : Over j.left) : CompactSpace (M.obj l) := by
     have : IsAffine (M.obj l) := by
       dsimp [M]
