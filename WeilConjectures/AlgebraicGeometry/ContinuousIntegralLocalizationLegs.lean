@@ -49,3 +49,4 @@ theorem integralLocalization_coconeLegs (ℓ : ℕ)
         _ = d.ι.app (n + 1) ≫ (ℓ • 𝟙 d.pt) := central _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+

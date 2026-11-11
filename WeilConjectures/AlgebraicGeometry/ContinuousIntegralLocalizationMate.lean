@@ -48,3 +48,4 @@ theorem integralLocalization_cocone_map_isIso (ℓ : ℕ)
   exact (Cocone.forget _ ⋙ 𝟭 B).map_isIso h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
