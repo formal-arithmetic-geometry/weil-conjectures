@@ -180,7 +180,7 @@ private theorem filtration_of_primary_representation
     apply Subobject.mk_le_mk_of_comm (T.map (f i j hij))
     simp only [a, ← Category.assoc, ← T.map_comp, hfac]
   have hWzero : IsZero (W 0) := by
-    apply (Rep.isZero_iff Λ P (W 0)).mpr
+    apply (Rep.isZero_iff (W 0)).mpr
     change Subsingleton (N 0)
     rw [hzero]
     infer_instance
