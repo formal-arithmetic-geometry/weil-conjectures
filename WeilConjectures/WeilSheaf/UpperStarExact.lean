@@ -55,5 +55,4 @@ theorem shortExact_map_upperStar {S : ShortComplex (WeilSheaf k₀ l Y)} (hS : S
     (S.map (upperStar φ)).ShortExact :=
   hS.map_of_exact _
 
-
 end AlgebraicGeometry.WeilSheaf

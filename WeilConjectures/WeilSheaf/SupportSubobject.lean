@@ -47,5 +47,4 @@ theorem isZero_of_support_eq_empty {F : WeilSheaf k₀ l X} (hF : F.support = �
 theorem isZero_iff_support_eq_empty {F : WeilSheaf k₀ l X} : IsZero F ↔ F.support = ∅ :=
   ⟨support_eq_empty_of_isZero, isZero_of_support_eq_empty⟩
 
-
 end AlgebraicGeometry.WeilSheaf

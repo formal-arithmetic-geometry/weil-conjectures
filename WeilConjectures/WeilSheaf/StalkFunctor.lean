@@ -143,8 +143,8 @@ instance epi_stalkMap (f : F ⟶ G) [Epi f] : Epi (stalkMap s f) :=
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The iterated Weil structure `φ_m : (Frᵐ)^* F ≅ F` is natural in `F`. -/
 theorem frobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].map f.hom.hom.f ≫
-      (G.frobeniusPowIso m).hom =
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].map
+      f.hom.hom.f ≫ (G.frobeniusPowIso m).hom =
       (F.frobeniusPowIso m).hom ≫ f.hom.hom.f := by
   induction m with
   | zero =>
@@ -197,7 +197,8 @@ private theorem stalkObjFrobeniusPowIso_hom_eq (m : ℕ) :
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom).hom.app
           F.obj.carrier.X ≫
         (s)^*[_].map ((ProEtale.upperStarIsoLowerStarInv _
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso).hom.app F.obj.carrier.X ≫
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso).hom.app
+            F.obj.carrier.X ≫
             (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)) :=
   rfl
 
@@ -213,7 +214,8 @@ theorem stalkObjFrobeniusPowIso_hom_naturality (f : F ⟶ G) (m : ℕ) :
     ((s)^*[WeilCoefficients.{u} l])
     ((s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)^*[
       WeilCoefficients.{u} l]) _ _
-    (ProEtale.upperStarComp _ s ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
+    (ProEtale.upperStarComp _ s
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
     (ProEtale.upperStarIsoLowerStarInv _
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso)
     (A := F.obj.carrier.X) (B := G.obj.carrier.X) f.hom.hom.f.hom
