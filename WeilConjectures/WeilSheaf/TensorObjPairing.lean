@@ -62,16 +62,18 @@ lemma act_str (G : WeilSheaf k₀ l X) :
     ((adicConstant k₀ l X).obj.str.hom.hom ⊗ₘ G.obj.str.hom.hom) ≫
         Mod.act (A := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
           G.obj.carrier.X =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           _ G.obj.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.act (A := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
             G.obj.carrier.X) ≫ G.obj.str.hom.hom := by
   have h := Mod.act_hom G.obj.str.hom
   have hact : Mod.act ((frobeniusPullback k₀ l X).obj G.obj.carrier).X =
-      adicConstantSheafToLowerStar l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ▷
-          _ ≫
-        μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      adicConstantSheafToLowerStar l
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ▷ _ ≫
+        μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           _ G.obj.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.act G.obj.carrier.X) := rfl
@@ -88,12 +90,14 @@ structures of `F`, `G` and of the tensor product `F ⊗ G = 𝓗om(F^∨, G)`. -
 theorem toIhomDual_str (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     (F.obj.str.hom.hom ⊗ₘ G.obj.str.hom.hom) ≫
         Mod.toIhomDual F.obj.carrier G.obj.carrier =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           F.obj.carrier.X G.obj.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.toIhomDual F.obj.carrier G.obj.carrier) ≫
         (F.tensorObj G hF).obj.str.hom.hom := by
-  set Fr := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+  set Fr :=
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
   have : IsIso (F.dual hF).obj.str.hom.hom :=
     inferInstanceAs (IsIso ((Mod.forget _).map (F.dual hF).obj.str.hom))
   have hq := Functor.tensorHom_comp_braiding_comp_associator_inv_comp Fr F.obj.str.hom.hom

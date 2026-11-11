@@ -176,12 +176,14 @@ omit [Fact (ringChar k₀ ≠ l)] in
 theorem ProEtaleWeilSheaf.ihom_evaluation_str (A B : ProEtaleWeilSheaf k₀ l X) :
     ((ProEtaleWeilSheaf.ihom k₀ l X A B).str.hom.hom ⊗ₘ A.str.hom.hom) ≫
         Mod.evaluation A.carrier B.carrier =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]
           ((ProEtale.AdicSheaf.ihom A.carrier).obj B.carrier).X A.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.evaluation A.carrier B.carrier) ≫
         B.str.hom.hom := by
-  have : (Mod.mapModComap (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+  have : (Mod.mapModComap (G :=
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
       WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
