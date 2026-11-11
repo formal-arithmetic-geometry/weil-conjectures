@@ -253,11 +253,11 @@ private theorem property_of_nilpotent
       apply End.ext
       apply (cancel_epi (factorThruImage f)).1
       apply (cancel_mono i).1
-      rw [comp_zero, zero_comp, Category.assoc, natural_power_comm η i n,
+      rw [End.zero_asHom, comp_zero, zero_comp, Category.assoc, natural_power_comm η i n,
         ← Category.assoc]
       change (factorThruImage f ≫ image.ι f) ≫ _ = 0
       rw [image.fac]
-      simpa only [pow_succ, End.mul_asHom] using congrArg End.asHom hn
+      simpa only [pow_succ, End.mul_asHom, End.zero_asHom] using congrArg End.asHom hn
     have hQ : η.app (cokernel i) = 0 := by
       apply (cancel_epi q).1
       rw [comp_zero, show q ≫ η.app (cokernel i) = f ≫ q from η.naturality q]
