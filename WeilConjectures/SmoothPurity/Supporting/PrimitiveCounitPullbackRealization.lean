@@ -48,7 +48,7 @@ attribute [local irreducible] HasDerivedCategory.standard constantSheaf Functor.
 
 attribute [local implicit_reducible]
   HomologicalComplex.asFunctor HomologicalComplex.complexOfFunctorsToFunctorToComplex
-  integralOperationsGoodLocalization CategoryTheory.TwoSquare
+  integralOperationsGoodLocalization
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   PrimitiveCounit.direct PrimitiveCounit.inverse
   integralComparisonSequenceDirectImage integralComparisonSequencePullback
