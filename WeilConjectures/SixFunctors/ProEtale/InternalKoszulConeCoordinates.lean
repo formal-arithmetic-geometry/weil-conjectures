@@ -54,35 +54,35 @@ private theorem transport_cone_coordinates
     (s : End P) (r : End V)
     (b : ((F.mapHomologicalComplex (.up ℤ)).obj P) ≅ V)
     (U : V ≅ (F.mapHomologicalComplex (.up ℤ)).obj P)
-    (hb : (F.mapHomologicalComplex (.up ℤ)).map s ≫ U.inv = b.hom ≫ r)
-    (k : CochainComplex.mappingCone r ≅ D)
+    (hb : (F.mapHomologicalComplex (.up ℤ)).map s.asHom ≫ U.inv = b.hom ≫ r.asHom)
+    (k : CochainComplex.mappingCone r.asHom ≅ D)
     (η : (F.mapHomologicalComplex (.up ℤ)).obj P ⟶ D)
     (Z : ℤ → B) (ι : ∀ q, Z q ⟶ D.X q)
-    (hk₀ : CochainComplex.mappingCone.inr r ≫ k.hom = U.hom ≫ η)
+    (hk₀ : CochainComplex.mappingCone.inr r.asHom ≫ k.hom = U.hom ≫ η)
     (hk₁ : ∀ q : ℤ, ∃ z : F.obj (P.X (q + 1)) ⟶ Z q,
-      U.inv.f (q + 1) ≫ (CochainComplex.mappingCone.inl r).v
+      U.inv.f (q + 1) ≫ (CochainComplex.mappingCone.inl r.asHom).v
         (q + 1) q (by omega) ≫ k.hom.f q = z ≫ ι q) :
-    ∃ e : (F.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.mappingCone s) ≅ D,
-      (∀ q : ℤ, F.map ((CochainComplex.mappingCone.inr s).f q) ≫ e.hom.f q = η.f q) ∧
+    ∃ e : (F.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.mappingCone s.asHom) ≅ D,
+      (∀ q : ℤ, F.map ((CochainComplex.mappingCone.inr s.asHom).f q) ≫ e.hom.f q = η.f q) ∧
       (∀ q : ℤ, ∃ z : F.obj (P.X (q + 1)) ⟶ Z q,
-        F.map ((CochainComplex.mappingCone.inl s).v (q + 1) q (by omega)) ≫
+        F.map ((CochainComplex.mappingCone.inl s.asHom).v (q + 1) q (by omega)) ≫
           e.hom.f q = z ≫ ι q) := by
   let G := F.mapHomologicalComplex (.up ℤ)
-  let m := CochainComplex.mappingCone.mapHomologicalComplexIso s F
-  let c := coneSquareIso (G.map s) r b U.symm hb
+  let m := CochainComplex.mappingCone.mapHomologicalComplexIso s.asHom F
+  let c := coneSquareIso (G.map s.asHom) r.asHom b U.symm hb
   let e := m ≪≫ c ≪≫ k
   refine ⟨e, ?_, ?_⟩
   · intro q
-    have hm := congrArg (fun t ↦ t.f q) (CochainComplex.mappingCone.map_inr s F)
-    have hc : CochainComplex.mappingCone.inr (G.map s) ≫ c.hom =
-        U.inv ≫ CochainComplex.mappingCone.inr r := by
+    have hm := congrArg (fun t ↦ t.f q) (CochainComplex.mappingCone.map_inr s.asHom F)
+    have hc : CochainComplex.mappingCone.inr (G.map s.asHom) ≫ c.hom =
+        U.inv ≫ CochainComplex.mappingCone.inr r.asHom := by
       simp [c, coneSquareIso, CochainComplex.mappingCone.map]
     have hh := congrArg (fun t ↦ t.f q) hc
     have hk := congrArg (fun t ↦ t.f q) hk₀
-    change F.map ((CochainComplex.mappingCone.inr s).f q) ≫
+    change F.map ((CochainComplex.mappingCone.inr s.asHom).f q) ≫
       (m.hom.f q ≫ c.hom.f q ≫ k.hom.f q) = _
-    change F.map ((CochainComplex.mappingCone.inr s).f q) ≫ m.hom.f q =
-      (CochainComplex.mappingCone.inr (G.map s)).f q at hm
+    change F.map ((CochainComplex.mappingCone.inr s.asHom).f q) ≫ m.hom.f q =
+      (CochainComplex.mappingCone.inr (G.map s.asHom)).f q at hm
     simp only [HomologicalComplex.comp_f] at hh hk
     rw [← Category.assoc, ← Category.assoc, hm, hh, Category.assoc, hk]
     change U.inv.f q ≫ U.hom.f q ≫ _ = _
@@ -92,27 +92,27 @@ private theorem transport_cone_coordinates
   · intro q
     obtain ⟨z, hz⟩ := hk₁ q
     refine ⟨b.hom.f (q + 1) ≫ U.hom.f (q + 1) ≫ z, ?_⟩
-    have hm : F.map ((CochainComplex.mappingCone.inl s).v
+    have hm : F.map ((CochainComplex.mappingCone.inl s.asHom).v
           (q + 1) q (by omega)) ≫ m.hom.f q =
-        (CochainComplex.mappingCone.inl (G.map s)).v (q + 1) q (by omega) := by
-      change _ ≫ (CochainComplex.mappingCone.mapHomologicalComplexXIso' s F
+        (CochainComplex.mappingCone.inl (G.map s.asHom)).v (q + 1) q (by omega) := by
+      change _ ≫ (CochainComplex.mappingCone.mapHomologicalComplexXIso' s.asHom F
         q (q + 1) rfl).hom = _
       simp only [CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom,
         Preadditive.comp_add, ← F.map_comp_assoc,
         CochainComplex.mappingCone.inl_v_fst_v, CochainComplex.mappingCone.inl_v_snd_v,
         F.map_id, F.map_zero, Category.id_comp, zero_comp, add_zero]
       rfl
-    have hc : (CochainComplex.mappingCone.inl (G.map s)).v
+    have hc : (CochainComplex.mappingCone.inl (G.map s.asHom)).v
           (q + 1) q (by omega) ≫ c.hom.f q =
-        b.hom.f (q + 1) ≫ (CochainComplex.mappingCone.inl r).v
+        b.hom.f (q + 1) ≫ (CochainComplex.mappingCone.inl r.asHom).v
           (q + 1) q (by omega) := by
       simp [c, coneSquareIso, CochainComplex.mappingCone.map]
-    change F.map ((CochainComplex.mappingCone.inl s).v (q + 1) q (by omega)) ≫
+    change F.map ((CochainComplex.mappingCone.inl s.asHom).v (q + 1) q (by omega)) ≫
       (m.hom.f q ≫ c.hom.f q ≫ k.hom.f q) = _
     rw [← Category.assoc, ← Category.assoc, hm, hc]
     calc
       _ = (b.hom.f (q + 1) ≫ U.hom.f (q + 1)) ≫
-          (U.inv.f (q + 1) ≫ (CochainComplex.mappingCone.inl r).v
+          (U.inv.f (q + 1) ≫ (CochainComplex.mappingCone.inl r.asHom).v
             (q + 1) q (by omega) ≫ k.hom.f q) := by
         have hU : U.hom.f (q + 1) ≫ U.inv.f (q + 1) = 𝟙 _ :=
           congrArg (fun f ↦ f.f (q + 1)) U.hom_inv_id
@@ -146,40 +146,40 @@ private theorem coefficient_cone
     (a : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     ∃ e : CochainComplex.mappingCone
         ((HomologicalComplex.single _ (.up ℤ) 0).map
-          (ringedKoszulScalar O a ^ (n + 1))) ≅
+          (ringedKoszulScalar O a ^ (n + 1)).asHom) ≅
         (ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n),
       CochainComplex.mappingCone.inr _ ≫ e.hom = ringedKoszulDualUnit O 1 (fun _ ↦ a) n := by
   let I := ringedSiteRingComplex O
   let Q := (ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n)
   let f : I ⟶ I := (HomologicalComplex.single _ (.up ℤ) 0).map
-    (ringedKoszulScalar O a ^ (n + 1))
+    (ringedKoszulScalar O a ^ (n + 1)).asHom
   let g := ringedSingletonKoszulPower O a I n
   let L : ((ringedKoszulTensor O).obj I).obj I ≅ I := HomologicalComplex.leftUnitor I
   let LQ : ((ringedKoszulTensor O).obj I).obj Q ≅ Q := HomologicalComplex.leftUnitor Q
-  have h : g ≫ L.hom = L.hom ≫ f := by
+  have h : g.asHom ≫ L.hom = L.hom ≫ f := by
     unfold g ringedSingletonKoszulPower
     exact leftUnitor_naturality f
-  let sq := coneSquareIso g f L L h
+  let sq := coneSquareIso g.asHom f L L h
   obtain ⟨e, he, _, _⟩ := ringedSingletonKoszulCone O a I
   let en : ((ringedKoszulTensor O).obj I).obj Q ≅
-      CochainComplex.mappingCone g := e n
+      CochainComplex.mappingCone g.asHom := e n
   have he₀ : ringedKoszulTensorUnitComponent O 1 (fun _ ↦ a) I (op n) ≫ en.hom =
-      (ringedKoszulRightUnitIso O I).inv ≫ CochainComplex.mappingCone.inr g := he n
+      (ringedKoszulRightUnitIso O I).inv ≫ CochainComplex.mappingCone.inr g.asHom := he n
   let c := sq.symm ≪≫ en.symm ≪≫ LQ
   refine ⟨c, ?_⟩
-  have hi : CochainComplex.mappingCone.inr g ≫ en.inv =
+  have hi : CochainComplex.mappingCone.inr g.asHom ≫ en.inv =
       ((ringedKoszulTensor O).obj I).map (ringedKoszulDualUnit O 1 (fun _ ↦ a) n) := by
     have hh := congrArg (fun t ↦ (ringedKoszulRightUnitIso O I).hom ≫ t ≫ en.inv)
       he₀
     simpa only [ringedKoszulTensorUnitComponent, Category.assoc,
       Iso.inv_hom_id, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc] using hh.symm
   have hs : CochainComplex.mappingCone.inr f ≫ sq.inv =
-      L.inv ≫ CochainComplex.mappingCone.inr g := by
+      L.inv ≫ CochainComplex.mappingCone.inr g.asHom := by
     simp [sq, coneSquareIso, CochainComplex.mappingCone.map]
   change CochainComplex.mappingCone.inr f ≫ (sq.inv ≫ en.inv ≫ LQ.hom) = _
   rw [← Category.assoc, hs]
   simp only [Category.assoc]
-  rw [← Category.assoc (CochainComplex.mappingCone.inr g) en.inv LQ.hom, hi]
+  rw [← Category.assoc (CochainComplex.mappingCone.inr g.asHom) en.inv LQ.hom, hi]
   have hn :
       ((ringedKoszulTensor O).obj I).map (ringedKoszulDualUnit O 1 (fun _ ↦ a) n) ≫
         LQ.hom = L.hom ≫ ringedKoszulDualUnit O 1 (fun _ ↦ a) n :=
@@ -188,7 +188,7 @@ private theorem coefficient_cone
 
 private theorem singleton_inverse_coordinates
     (a : (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O) (n : ℕ) :
-    ∃ e : CochainComplex.mappingCone (ringedSingletonKoszulPower O a N n) ≅
+    ∃ e : CochainComplex.mappingCone (ringedSingletonKoszulPower O a N n).asHom ≅
         ((ringedKoszulTensorTower O 1 (fun _ ↦ a)).obj N).obj (op n),
       (CochainComplex.mappingCone.inr _ ≫ e.hom =
         (ringedKoszulRightUnitIso O N).hom ≫
@@ -197,7 +197,7 @@ private theorem singleton_inverse_coordinates
           ((curriedTensor _).obj (N.X (q + 1))).obj
             (((ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n)).X (-1)),
         (ringedKoszulRightUnitIso O N).inv.f (q + 1) ≫
-          (CochainComplex.mappingCone.inl (ringedSingletonKoszulPower O a N n)).v
+          (CochainComplex.mappingCone.inl (ringedSingletonKoszulPower O a N n).asHom).v
             (q + 1) q (by omega) ≫ e.hom.f q =
           z ≫ HomologicalComplex.ιMapBifunctor N
             ((ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n))
@@ -208,7 +208,7 @@ private theorem singleton_inverse_coordinates
   obtain ⟨c, hc⟩ := coefficient_cone O a n
   let I := ringedSiteRingComplex O
   let f : I ⟶ I := (HomologicalComplex.single _ (.up ℤ) 0).map
-    (ringedKoszulScalar O a ^ (n + 1))
+    (ringedKoszulScalar O a ^ (n + 1)).asHom
   let V := CochainComplex.mapBifunctorMappingCone₂Iso N f (curriedTensor _)
   let T := (ringedKoszulTensor O).obj N
   let e := V.symm ≪≫ T.mapIso c
@@ -309,7 +309,7 @@ theorem koszul_uniformizer_cone_coordinates
         (fun _ ↦ a.val (op U)))
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) b).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
         Padic.coefficientExtensionUniformizer l E * b.down s)
     (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
     ∃ e : ((modules l E X).mapHomologicalComplex (.up ℤ)).obj
@@ -337,7 +337,7 @@ theorem koszul_uniformizer_cone_coordinates
   obtain ⟨k, hk₀, hk₁⟩ := singleton_inverse_coordinates (ring l E X) a
     (complex l E X P) n
   exact transport_cone_coordinates (modules l E X)
-    (PrincipalReduction.scalar l E X d n P)
+    (End.of (PrincipalReduction.scalar l E X d n P))
     (ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n)
     b (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)) hb k
     (ringedKoszulTensorUnitComponent (ring l E X) 1 (fun _ ↦ a)
