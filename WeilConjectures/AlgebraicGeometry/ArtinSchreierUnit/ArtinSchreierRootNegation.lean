@@ -109,7 +109,8 @@ theorem condensedProjector_neg_action
 /-- The universal averaging endomorphism is an actual idempotent. -/
 theorem universalProjector_idempotent (χ : AddChar k (MonObj.Γ Λ))
     (hq : IsUnit (Fintype.card k : MonObj.Γ Λ)) :
-    universalProjector k Λ χ ≫ universalProjector k Λ χ = universalProjector k Λ χ := by
+    (universalProjector k Λ χ).asHom ≫ (universalProjector k Λ χ).asHom =
+      (universalProjector k Λ χ).asHom := by
   apply condensedProjector_idempotent Λ k (universalCover k) (universalTranslation k) _ χ hq
   intro a b
   apply Over.OverMorphism.ext
@@ -118,7 +119,7 @@ theorem universalProjector_idempotent (χ : AddChar k (MonObj.Γ Λ))
 /-- The specified universal image has its canonical idempotent retraction. -/
 theorem universalProjector_image_retraction (χ : AddChar k (MonObj.Γ Λ))
     (hq : IsUnit (Fintype.card k : MonObj.Γ Λ)) :
-    image.ι (universalProjector k Λ χ) ≫ factorThruImage (universalProjector k Λ χ) =
+    image.ι (universalProjector k Λ χ).asHom ≫ factorThruImage (universalProjector k Λ χ).asHom =
       𝟙 _ := by
   rw [← cancel_mono (image.ι _), ← cancel_epi (factorThruImage _)]
   simp only [Category.assoc, image.fac_assoc, image.fac, Category.id_comp]
@@ -129,27 +130,27 @@ The remaining comparison with pullback along base negation is separate from this
 isomorphism of covers. Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md,
 Duality, negating roots (blueprint: lem-wft-as-root-negation). -/
 theorem rootNegation_coverComparison (χ : AddChar k (MonObj.Γ Λ)) :
-    ∃ J : image (universalProjector k Λ χ) ≅
-        image (condensedProjector Λ k (negativeCover k) (negativeTranslation k) χ⁻¹),
+    ∃ J : image (universalProjector k Λ χ).asHom ≅
+        image (condensedProjector Λ k (negativeCover k) (negativeTranslation k) χ⁻¹).asHom,
       ∀ (T : Scheme.{u}) (x : T ⟶ AffineSpace PUnit (Spec (.of k)))
         (s : Over.mk x ⟶ negativeCover k),
         (ProEtale.CondensedRing.upperStar Λ x).map J.hom ≫
             condensedEvaluation Λ x s
               (image.ι (condensedProjector Λ k (negativeCover k)
-                (negativeTranslation k) χ⁻¹)) =
+                (negativeTranslation k) χ⁻¹).asHom) =
           condensedEvaluation Λ x (s ≫ (negativeCoverIso k).inv)
-            (image.ι (universalProjector k Λ χ)) := by
+            (image.ι (universalProjector k Λ χ).asHom) := by
   rw [← condensedProjector_neg_action k Λ (negativeCover k) (negativeTranslation k) χ]
   obtain ⟨J, hJ⟩ := condensedProjector_coverIso Λ k (negativeCoverIso k)
     (universalTranslation k) (fun c ↦ negativeTranslation k (-c))
     (negativeCoverIso_translation k) χ
   refine ⟨J, ?_⟩
-  have hid : (Iso.refl (image (universalProjector k Λ χ))).hom ≫
-        image.ι (universalProjector k Λ χ) =
-      image.ι (universalProjector k Λ χ) ≫ condensedPull Λ (𝟙 (universalCover k)) := by
+  have hid : (Iso.refl (image (universalProjector k Λ χ).asHom)).hom ≫
+        image.ι (universalProjector k Λ χ).asHom =
+      image.ι (universalProjector k Λ χ).asHom ≫ condensedPull Λ (𝟙 (universalCover k)) := by
     rw [condensedPull_id, Category.comp_id, Iso.refl_hom, Category.id_comp]
   have he := (hJ (universalCover k) (𝟙 _) _
-    (image.ι (universalProjector k Λ χ)) (Iso.refl _) hid).2
+    (image.ι (universalProjector k Λ χ).asHom) (Iso.refl _) hid).2
   intro T x s
   simpa only [Iso.refl_trans, Category.comp_id] using he T x s
 
@@ -199,11 +200,11 @@ def negativeFunctionIso (χ : AddChar k (MonObj.Γ Λ))
     (ProEtale.CondensedRing.upperStar Λ
         (AffineSpace.homOfVector (X ↘ Spec (.of k)) (fun _ : PUnit ↦ f))).obj
       ((ProEtale.CondensedRing.upperStar Λ (AffineSpace.neg PUnit (Spec (.of k)))).obj
-        (image (universalProjector k Λ χ))) ≅ condensedSheafOf Λ k χ X (-f) := by
+        (image (universalProjector k Λ χ).asHom)) ≅ condensedSheafOf Λ k χ X (-f) := by
   unfold condensedSheafOf
   exact (ProEtale.CondensedRing.upperStarComp Λ
       (AffineSpace.homOfVector (X ↘ Spec (.of k)) (fun _ : PUnit ↦ f))
-      (AffineSpace.neg PUnit (Spec (.of k)))).symm.app (image (universalProjector k Λ χ)) ≪≫
+      (AffineSpace.neg PUnit (Spec (.of k)))).symm.app (image (universalProjector k Λ χ).asHom) ≪≫
     (ProEtale.CondensedRing.upperStarCongr Λ (functionMap_neg k X f).symm).app _
 
 end AlgebraicGeometry.ArtinSchreierUnit
