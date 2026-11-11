@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 
 /-!

@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Prime-to-characteristic torsion in the Picard group of a proper curve
