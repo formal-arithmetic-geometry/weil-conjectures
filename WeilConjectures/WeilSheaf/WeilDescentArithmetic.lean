@@ -45,15 +45,15 @@ variable {K : Type u} [Field K] [Finite K] {X : Scheme.{u}} [X.Over (Spec (.of K
 
 /-- The geometric Galois Frobenius lies over `X₀`, at the base point. -/
 lemma frob_comp_geometricFiberProj :
-    (B.t ≫ (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom) ≫
+    (B.t ≫ (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) ≫
       (X ↘ Spec (.of K)).geometricFiberProj = B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj := by
   rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj]
 
 /-- The *arithmetic Frobenius* `F₀ ∈ π₁(X₀, t ≫ π)`: the image `π_* β` of the path
 `β : F_t ≅ F_{t ≫ Fr}`, a loop at `t ≫ π` since `Fr ≫ π = π`. -/
 noncomputable def arithFrob : Aut (fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)) :=
-  pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj B.frobPath ≪≫
-    eqToIso (congrArg fiber B.frob_comp_geometricFiberProj)
+  .of (pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj B.frobPath ≪≫
+    eqToIso (congrArg fiber B.frob_comp_geometricFiberProj))
 
 /-- The image of the Frobenius transport of a loop `g` at `t` in `π₁(X₀, t ≫ π)` is the
 conjugate `F₀⁻¹ π_*(g) F₀`. -/
@@ -61,11 +61,12 @@ lemma pullbackPathHom_frobConj (g : Aut (fiber B.t)) :
     pullbackPathHom (X ↘ Spec (.of K)).geometricFiberProj B.t (B.frobConj g) =
       B.arithFrob⁻¹ * pullbackPathHom (X ↘ Spec (.of K)).geometricFiberProj B.t g *
         B.arithFrob := by
-  have h := pullbackPathIso_comp (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
-    (X ↘ Spec (.of K)).geometricFiberProj g
+  apply Aut.ext
+  have h := pullbackPathIso_comp (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
+    (X ↘ Spec (.of K)).geometricFiberProj g.asIso
   rw [pullbackPathIso_congr
     (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _)] at h
-  simp only [pullbackPathHom_apply, frobConj_apply, Aut.Aut_mul_def, Aut.Aut_inv_def, arithFrob,
+  simp only [pullbackPathHom_apply, frobConj_apply, Aut.mul_asIso, Aut.inv_asIso, arithFrob,
     pullbackPathIso_trans, pullbackPathIso_symm]
   ext1
   have h' := congrArg Iso.hom h
@@ -73,9 +74,9 @@ lemma pullbackPathHom_frobConj (g : Aut (fiber B.t)) :
   simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, Iso.trans_inv, eqToIso.inv,
     Category.assoc]
   rw [← cancel_epi (eqToHom (congrArg fiber (Category.assoc B.t
-      (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom (X ↘ Spec (.of K)).geometricFiberProj))),
+      (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom (X ↘ Spec (.of K)).geometricFiberProj))),
     ← cancel_mono (eqToHom (congrArg fiber (Category.assoc B.t
-      (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
+      (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
         (X ↘ Spec (.of K)).geometricFiberProj)).symm)] at h'
   simp only [eqToHom_refl, Category.comp_id, Category.id_comp] at h'
   rw [← h']
@@ -155,14 +156,14 @@ lemma pullbackPathHom_hom_app_constantCover
     (g : Aut (fiber B.t)) (A : FiniteEtaleAlgebra K)
     (y : (fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)).obj
       (constantCover (X ↘ Spec (.of K)) A)) :
-    (pullbackPathHom (X ↘ Spec (.of K)).geometricFiberProj B.t g).hom.app _ y = y := by
+    (pullbackPathHom (X ↘ Spec (.of K)).geometricFiberProj B.t g).asIso.hom.app _ y = y := by
   obtain ⟨z, rfl⟩ : ∃ z, (pullbackFiberIso (X ↘ Spec (.of K)).geometricFiberProj B.t).hom.app _ z
       = y := ⟨_, ConcreteCategory.congr_hom
         ((pullbackFiberIso (X ↘ Spec (.of K)).geometricFiberProj B.t).inv_hom_id_app _) y⟩
   rw [pullbackPathHom_apply, pullbackPathIso_hom_app_pullbackFiberIso]
   congr 1
   obtain ⟨σ, hσ, hz⟩ := exists_section_pullback_constantCover (X ↘ Spec (.of K)) A ht z
-  exact fiber_ext _ ((path_section g _ σ hσ z hz).trans hz.symm)
+  exact fiber_ext _ ((path_section g.asIso _ σ hσ z hz).trans hz.symm)
 
 /-- The geometric Galois Frobenius `Fr` of `X = X₀ ×_K K̄` followed by the section of a
 `K̄`-point `u` of `Spec A` and the arithmetic Frobenius of `X₀ ×_K Spec A` is the section of `u`:
@@ -171,7 +172,7 @@ Frobenius `x ↦ x ^ q` of `A` undoes. -/
 lemma geometricGaloisFrobenius_sectionOfPoint_arithmeticFrobenius (A : FiniteEtaleAlgebra K)
     (u : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of A.1))
     (hu : u ≫ A.specHom = (Scheme.specAlgebraicClosure K).hom) :
-    (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom ≫
+    (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom ≫
         sectionOfPoint (X ↘ Spec (.of K)) A u hu ≫
           Limits.pullback.fst (constantCover (X ↘ Spec (.of K)) A).obj.hom
             (X ↘ Spec (.of K)).geometricFiberProj ≫
@@ -190,7 +191,7 @@ lemma arithFrob_hom_app_constantCover
     (A : FiniteEtaleAlgebra K)
     (y : (fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)).obj
       (constantCover (X ↘ Spec (.of K)) A)) :
-    B.arithFrob.hom.app _ y =
+    B.arithFrob.asIso.hom.app _ y =
       geometricFrobenius (X ↘ Spec (.of K)) (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj) A y := by
   obtain ⟨z, rfl⟩ : ∃ z, (pullbackFiberIso (X ↘ Spec (.of K)).geometricFiberProj B.t).hom.app _ z
       = y := ⟨_, ConcreteCategory.congr_hom
@@ -217,7 +218,7 @@ lemma arithMap_hom_app_constantCover
     (w : B.WeilGroup) (A : FiniteEtaleAlgebra K)
     (y : (fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)).obj
       (constantCover (X ↘ Spec (.of K)) A)) :
-    (B.arithMap w).hom.app _ y = (geometricFrobenius (X ↘ Spec (.of K))
+    (B.arithMap w).asIso.hom.app _ y = (geometricFrobenius (X ↘ Spec (.of K))
       (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj) A ^ w.right.toAdd) y := by
   set φ := MulAction.toPermHom (Aut (fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)))
     ((fiber (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)).obj
