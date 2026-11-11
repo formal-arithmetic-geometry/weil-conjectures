@@ -194,6 +194,6 @@ theorem exists_finite_cover_pushforward_unit_closed_cohomology_eq_zero
       ((lowerStar AddCommGrpCat.{u + 1} f).map
         ((lowerStar AddCommGrpCat.{u + 1} π).map a))) q) ht₀
   rw [hm, Functor.map_comp, Sheaf.H.map_comp_apply]
-  convert hfinal using 1; first | rfl | simp only [map_zero]
+  convert hfinal using 1 <;> simp only [map_zero]
 
 end AlgebraicGeometry.Etale
