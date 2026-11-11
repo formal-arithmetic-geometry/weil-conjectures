@@ -84,8 +84,8 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
     (boundedConstructibleLowerStarRestrictScalarsSubfieldIso ℓ h g)
     (TwoSquare.mk _ _ _ _ (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g))
     (Equiv.apply_symm_apply _ _)
-    (fun i ↦ Linear.toCatCenter F _ (b i))
-    (fun i ↦ Linear.toCatCenter F _ (b i))
+    (fun i ↦ (Linear.toCatCenter F _ (b i)).asHom)
+    (fun i ↦ (Linear.toCatCenter F _ (b i)).asHom)
     hμ hZ hY
   with_reducible exact H
 
