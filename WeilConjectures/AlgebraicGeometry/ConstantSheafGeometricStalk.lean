@@ -77,7 +77,7 @@ theorem constantSheaf_geometricStalk_isIso (T : Scheme.{u})
       Φ.presheafFiber.map (toSheafify T.smallEtaleTopology
         ((Functor.const T.Etaleᵒᵖ).obj E))) := by
     have : Limits.PreservesFilteredColimitsOfSize.{u, u}
-        (forget AddCommGrpCat.{(max u v) + 1}) :=
+        (CategoryTheory.forget AddCommGrpCat.{(max u v) + 1}) :=
       Limits.preservesFilteredColimitsOfSize_shrink.{u, (max u v) + 1, u, (max u v) + 1} _
     have : T.smallEtaleTopology.WEqualsLocallyBijective AddCommGrpCat.{(max u v) + 1} :=
       GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
