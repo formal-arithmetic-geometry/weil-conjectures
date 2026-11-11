@@ -430,7 +430,11 @@ lemma iterateStr_comm (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) :
     (frobeniusIterate_add Φ 1 m) (by rw [Nat.add_comm]) (comp_frobeniusIterate_comm Φ m)
     K.str.hom (K.iterateStr m).hom (K.iterateStr 0).hom (K.iterateStr 1).hom
     (K.iterateStr (m + 1)).hom (K.iterateStr (1 + m)).hom
-    (by simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom]) rfl rfl
+    (by simp only [iterateStr, eqToHom_refl, Category.id_comp, Iso.app_hom])
+    (by simp only [iterateStr, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
+      Functor.mapIso_hom, Category.assoc])
+    (by simp only [iterateStr, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
+      Functor.mapIso_hom, Category.assoc])
     (iterateStr_add K 1 m) (hcongr (Nat.add_comm m 1))
 
 /-- The isomorphism underlying the Frobenius transport `stalkTransport`:
