@@ -132,7 +132,7 @@ theorem proEtaleReductionPullbackInv_isIso :
   let b := proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm
   let d := proEtaleRingRestrictionDerivedDirectImage f RV SV RU SU aV aU cR cS comm
   let α := TwoSquare.mk _ _ _ _ b.inv
-  have hmate : (mateEquiv az ar α).natTrans = d.hom := by
+  have hmate : mateEquiv az ar α = d.hom := by
     apply NatTrans.ext
     funext N
     have h := (proEtaleRingSheafChangeAdjunction
