@@ -216,8 +216,7 @@ private theorem resPull_fixed (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
       TwoSquare.mk _ _ _ _ (𝟙 _) from hs]
   apply (cancel_mono (Functor.whiskerRight (resFixed a Y).hom
     (lowerStar (ModuleCat.{u + 1} B) f))).mp
-  simp only [Equiv.coe_fn_mk,
-    TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
     Category.assoc, ← Functor.whiskerRight_comp, Iso.inv_hom_id,
     Functor.whiskerRight_id', Category.comp_id]
   ext M V m
