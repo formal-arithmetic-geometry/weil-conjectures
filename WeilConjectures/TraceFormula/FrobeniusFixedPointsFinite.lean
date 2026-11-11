@@ -40,7 +40,7 @@ variable {k : Type u} [Field k] [Finite k]
 /-- The `N`-th power of the geometric Frobenius of `Spec k̄` is `Spec` of the `N`-th power of the
 geometric Frobenius of `k̄`. -/
 lemma geometricFrobeniusField_hom_pow (N : ℕ) :
-    (show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N =
+    (End.of (geometricFrobeniusField k).hom ^ N).asHom =
       Spec.map (CommRingCat.ofHom
         ((geometricFrobenius k (AlgebraicClosure k)) ^ N).toRingEquiv.toRingHom) := by
   induction N with
@@ -105,7 +105,7 @@ lemma finite_geometricFrobeniusPowFixedField {N : ℕ} (hN : N ≠ 0) :
 through `Spec L` for the field `L ⊆ k̄` fixed by `σ^N`. -/
 lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
     (x : Spec (.of (AlgebraicClosure k)) ⟶ T)
-    (hx : ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫
+    (hx : (End.of (geometricFrobeniusField k).hom ^ N).asHom ≫
       x = x) :
     ∃ g : Spec (.of (geometricFrobeniusPowFixedField k N)) ⟶ T,
       Spec.map (CommRingCat.ofHom (algebraMap (geometricFrobeniusPowFixedField k N)
@@ -145,16 +145,16 @@ theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
   obtain ⟨m, hm⟩ := he
   set N := (n + 1) * (m + 1)
   have hN : N ≠ 0 := Nat.mul_ne_zero (Nat.succ_ne_zero n) (Nat.succ_ne_zero m)
-  have hA : (show End X.left from (e.pow (n + 1)).hom.left) ^ (m + 1) = 𝟙 X.left := by
+  have hA : (End.of (e.pow (n + 1)).hom.left ^ (m + 1)).asHom = 𝟙 X.left := by
     rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul,
       ← Iso.pow_hom_eq_pow, hm, Iso.refl_hom, ← End.one_asHom, one_pow]
     rfl
   have hfix : ∀ x : frobeniusFixedPoints e (n + 1),
-      ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫
+      (End.of (geometricFrobeniusField k).hom ^ N).asHom ≫
         x.1 = x.1 := by
     rintro ⟨y, -, hy⟩
-    have h := End.comp_pow_eq_pow_comp y (show End X.left from (e.pow (n + 1)).hom.left)
-      (show End _ from ((geometricFrobeniusField k).pow (n + 1)).hom) hy (m + 1)
+    have h := End.comp_pow_eq_pow_comp y (End.of (e.pow (n + 1)).hom.left)
+      (End.of ((geometricFrobeniusField k).pow (n + 1)).hom) hy (m + 1)
     rw [hA, Category.comp_id, Iso.pow_hom_eq_pow, ← pow_mul] at h
     exact h.symm
   have := finite_geometricFrobeniusPowFixedField (k := k) hN
