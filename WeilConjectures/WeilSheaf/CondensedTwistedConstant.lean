@@ -90,8 +90,8 @@ variable {C D : Type*} [Category.{v} C] [Category.{v} D] {L : C ⥤ D} {R : D �
 form a limit fan. -/
 lemma isIso_galoisComparison_of_isLimit [HasLimitsOfShape (Discrete Γ) D] (N : D)
     (h : IsLimit (Fan.mk (L.obj (R.obj N)) fun σ ↦ adj.galoisComponent S κ σ N)) :
-    IsIso (adj.galoisComparison S κ N) :=
-  (Fan.nonempty_isLimit_iff_isIso_piLift _).1 ⟨h⟩
+    IsIso (adj.galoisComparison S κ N) := by
+  exact (Fan.nonempty_isLimit_iff_isIso_piLift _).1 ⟨h⟩
 
 /-- **Transport of Galois components along an isomorphism of left adjoints.** Let `L, L' ⊣ R`
 with `ι : L ≅ L'` compatible with the counits, and `S σ ≅ T σ`. If the composites
