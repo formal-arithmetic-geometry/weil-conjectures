@@ -146,8 +146,11 @@ theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsS
       IsField.isSepClosed_toField P i (𝟙 _)
     exact ⟨{ rightDual := _
              exact := (UnitBasis.ofIso (((upperStarId _ _).app _).symm ≪≫ e)).exactPairing }⟩
-  apply End.homEquiv.symm.injective
-  dsimp only [End.homEquiv]
+  suffices h : End.of (trace v) = homologyUnitEndRingHom ℓ (point Ω)
+      (superTrace
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).obj P.obj)
+        (fun j ↦ (DerivedCategory.homologyFunctor _ j).map v.hom)) from
+    congrArg End.asHom h
   apply hinj
   apply End.ext
   rw [← I.trace_eq_unitEndRingHom_trace v (I.map v) (Iso.refl _) (by simp),
