@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 import WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 
 /-!
 # The zero-scheme dictionary and the representability of `F`
