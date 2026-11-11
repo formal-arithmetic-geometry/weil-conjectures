@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-
 public import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictCompletionRestrictionData
 import all WeilConjectures.AlgebraicGeometry.CompletionTriangle.CompletionTriangleComparisonSupplement
 import all WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
@@ -110,14 +109,14 @@ private theorem integralReductionStep_app (X : Scheme.{u}) (n : ℕ)
 private def scalarEnd (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     End (𝟭 (AdicCompletion.Modules l E X)) :=
-  DerivedNakayama.scalarOnModules l E X d
+  .of (DerivedNakayama.scalarOnModules l E X d)
 
 private theorem functor_conjugate_pow {C D A : Type*}
     [Category C] [Category D] [Category A]
     (G : C ⥤ D) {R : C} {S : D} (e : G.obj R ≅ S)
     (H : D ⥤ A) {U : A} (η : U ≅ H.obj S) (d : End R) (n : ℕ) :
-    η.hom ≫ H.map (e.inv ≫ G.map (d ^ n) ≫ e.hom) ≫ η.inv =
-      (End.of (η.hom ≫ H.map (e.inv ≫ G.map d ≫ e.hom) ≫ η.inv)) ^ n := by
+    η.hom ≫ H.map (e.inv ≫ G.map (d ^ n).asHom ≫ e.hom) ≫ η.inv =
+      (End.of (η.hom ≫ H.map (e.inv ≫ G.map d.asHom ≫ e.hom) ≫ η.inv) ^ n).asHom := by
   induction n with
   | zero => simp
   | succ n ih =>
@@ -128,7 +127,7 @@ private theorem functor_conjugate_pow {C D A : Type*}
 private theorem scalarOnModules_pow (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (n : ℕ) :
     DerivedNakayama.scalarOnModules l E X (d ^ n) =
-      scalarEnd l E X d ^ n := by
+      (scalarEnd l E X d ^ n).asHom := by
   exact functor_conjugate_pow (DerivedNakayama.pullback l E X)
     (DerivedNakayama.regularPullbackIso l E X)
     (tensoringLeft (AdicCompletion.Modules l E X))
@@ -188,7 +187,8 @@ theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
       (fun n : ℕ ↦ (data.j n).app M) n)
   have hcone (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :
       (tower.obj M).asFunctor.obj (op n) = CochainComplex.mappingCone
-        ((NatTrans.mapHomologicalComplex (scalarEnd l E X data.d ^ (n + 1)) (.up ℤ)).app M) := by
+        ((NatTrans.mapHomologicalComplex
+          (scalarEnd l E X data.d ^ (n + 1)).asHom (.up ℤ)).app M) := by
     rw [hobj, data.hobj]
     congr 1
     dsimp only [PrincipalReduction.scalar, DerivedNakayama.scalarOnComplex]
