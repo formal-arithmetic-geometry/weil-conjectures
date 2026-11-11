@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierTrace
-
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.SmoothPuritySeparatedAdjunction
 
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle

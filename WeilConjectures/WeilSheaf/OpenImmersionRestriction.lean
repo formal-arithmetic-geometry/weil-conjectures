@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.OpenImmersion
-
 public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
