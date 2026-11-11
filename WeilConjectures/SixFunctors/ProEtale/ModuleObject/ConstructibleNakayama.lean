@@ -190,28 +190,31 @@ theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
     (hinv : ∀ d : C(V, O), (∀ v, IsUnit (d v)) → IsUnit d)
     (eR : C(V, O) →+* End (regular R)) (heR : Function.Bijective eR)
     (eS : C(V, k) →+* End (regular S)) (heS : Function.Injective eS)
-    (hcompat : ∀ f, (extendScalarsObjRegularIso φ).inv ≫ (extendScalars φ).map (eR f) =
-      eS ((⟨π, hπ⟩ : C(O, k)).comp f) ≫ (extendScalarsObjRegularIso φ).inv)
+    (hcompat : ∀ f, (extendScalarsObjRegularIso φ).inv ≫ (extendScalars φ).map (eR f).asHom =
+      (eS ((⟨π, hπ⟩ : C(O, k)).comp f)).asHom ≫ (extendScalarsObjRegularIso φ).inv)
     (N : Mod C R) (hN : IsFinitelyPresented R N) (h : IsZero ((extendScalars φ).obj N)) :
     IsZero N := by
   have : (extendScalars φ).Additive := (extendRestrictAdjunction φ).left_adjoint_additive
   have : PreservesColimits (extendScalars φ) :=
     (extendRestrictAdjunction φ).leftAdjoint_preservesColimits
   obtain ⟨n, m, A, ⟨i⟩⟩ := hN
-  have hext0 (f : C(V, O)) (hf : (extendScalars φ).map (eR f) = 0) (v : V) : π (f v) = 0 := by
-    have h1 : eS ((⟨π, hπ⟩ : C(O, k)).comp f) ≫ (extendScalarsObjRegularIso φ).inv = 0 := by
+  have hext0 (f : C(V, O)) (hf : (extendScalars φ).map (eR f).asHom = 0) (v : V) :
+      π (f v) = 0 := by
+    have h1 : (eS ((⟨π, hπ⟩ : C(O, k)).comp f)).asHom ≫
+        (extendScalarsObjRegularIso φ).inv = 0 := by
       rw [← hcompat, hf, comp_zero]
-    have h2 : eS ((⟨π, hπ⟩ : C(O, k)).comp f) = 0 := (cancel_mono _).1 (h1.trans zero_comp.symm)
+    have h2 : eS ((⟨π, hπ⟩ : C(O, k)).comp f) = 0 :=
+      End.ext ((cancel_mono _).1 (h1.trans zero_comp.symm))
     have h3 : (⟨π, hπ⟩ : C(O, k)).comp f = 0 := heS (h2.trans (map_zero eS).symm)
     exact congrArg (fun g ↦ g v) h3
   have hepi : Epi ((extendScalars φ).map A) := Preadditive.epi_of_isZero_cokernel _
     ((h.of_iso ((extendScalars φ).mapIso i).symm).of_iso (PreservesCokernel.iso _ A).symm)
   let eR' := RingEquiv.ofBijective eR heR
   let t : Matrix (Fin n) (Fin m) C(V, O) := Matrix.of fun a b ↦
-    eR'.symm (biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ biproduct.π (fun _ ↦ regular R) a)
-  have ht (a : Fin n) (b : Fin m) : eR (t a b) =
+    eR'.symm (.of (biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ biproduct.π (fun _ ↦ regular R) a))
+  have ht (a : Fin n) (b : Fin m) : (eR (t a b)).asHom =
       biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ biproduct.π (fun _ ↦ regular R) a :=
-    eR'.apply_symm_apply _
+    congrArg End.asHom (eR'.apply_symm_apply _)
   -- composites through a finite free module are sums over the summands
   have hsum {p : ℕ} {Y Z : Mod C R} (f : Y ⟶ finiteFree R p) (g : finiteFree R p ⟶ Z) :
       f ≫ g = ∑ a, (f ≫ biproduct.π (fun _ ↦ regular R) a) ≫
@@ -222,11 +225,11 @@ theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
   have H : ∀ y : Fin n → C(V, O), (∀ b v, π ((∑ a, y a * t a b) v) = 0) →
       ∀ a v, π (y a v) = 0 := by
     intro y hy
-    let yt : finiteFree R n ⟶ regular R := biproduct.desc fun a ↦ eR (y a)
+    let yt : finiteFree R n ⟶ regular R := biproduct.desc fun a ↦ (eR (y a)).asHom
     have hrow (b : Fin m) :
         (extendScalars φ).map (biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ yt) = 0 := by
-      have e : biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ yt = eR (∑ a, y a * t a b) := by
-        rw [← Category.assoc, hsum _ yt, map_sum]
+      have e : biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ yt = (eR (∑ a, y a * t a b)).asHom := by
+        rw [← Category.assoc, hsum _ yt, map_sum, End.sum_asHom]
         refine Finset.sum_congr rfl fun a _ ↦ ?_
         rw [map_mul, End.mul_asHom, biproduct.ι_desc, ht]
         simp only [Category.assoc]
@@ -235,7 +238,7 @@ theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
       rw [hcompat, comp_zero]
       have : (⟨π, hπ⟩ : C(O, k)).comp (∑ a, y a * t a b) = 0 :=
         ContinuousMap.ext fun v ↦ hy b v
-      rw [this, map_zero, zero_comp]
+      rw [this, map_zero, End.zero_asHom, zero_comp]
     have h1 : (extendScalars φ).map (A ≫ yt) = 0 := by
       rw [← Category.id_comp (A ≫ yt), ← biproduct.total, Preadditive.sum_comp, Functor.map_sum]
       refine Finset.sum_eq_zero fun b _ ↦ ?_
@@ -245,19 +248,20 @@ theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
       exact (cancel_epi _).1 (h1.trans comp_zero.symm)
     intro a v
     refine hext0 _ ?_ v
-    rw [← biproduct.ι_desc (fun a ↦ eR (y a)) a, Functor.map_comp]
+    rw [← biproduct.ι_desc (fun a ↦ (eR (y a)).asHom) a, Functor.map_comp]
     exact (congrArg _ h2).trans comp_zero
   obtain ⟨s, hs⟩ := ContinuousMap.exists_mul_eq_one_of_forall_residue π hπ hsurj hunit hinv t H
   -- `A` has a right inverse
-  let D : finiteFree R n ⟶ finiteFree R m := biproduct.matrix fun c b ↦ eR (s b c)
+  let D : finiteFree R n ⟶ finiteFree R m := biproduct.matrix fun c b ↦ (eR (s b c)).asHom
   have hDA : D ≫ A = 𝟙 _ := by
     refine biproduct.hom_ext' _ _ fun c ↦ biproduct.hom_ext _ _ fun a ↦ ?_
     have e1 : (biproduct.ι (fun _ ↦ regular R) c ≫ D ≫ A) ≫ biproduct.π (fun _ ↦ regular R) a =
-        eR ((t * s) a c) := by
+        (eR ((t * s) a c)).asHom := by
       have e : (biproduct.ι (fun _ ↦ regular R) c ≫ D ≫ A) ≫ biproduct.π (fun _ ↦ regular R) a =
           (biproduct.ι (fun _ ↦ regular R) c ≫ D) ≫ (A ≫ biproduct.π (fun _ ↦ regular R) a) := by
         simp only [Category.assoc]
-      rw [e, hsum (biproduct.ι _ c ≫ D) (A ≫ biproduct.π _ a), Matrix.mul_apply, map_sum]
+      rw [e, hsum (biproduct.ι _ c ≫ D) (A ≫ biproduct.π _ a), Matrix.mul_apply, map_sum,
+        End.sum_asHom]
       refine Finset.sum_congr rfl fun b _ ↦ ?_
       rw [biproduct.ι_matrix, biproduct.lift_π, map_mul, End.mul_asHom, ht]
     rw [e1, hs, Category.comp_id, biproduct.ι_π, Matrix.one_apply]
