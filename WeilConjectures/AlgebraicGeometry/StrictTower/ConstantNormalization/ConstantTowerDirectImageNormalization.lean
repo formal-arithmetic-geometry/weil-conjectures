@@ -738,7 +738,7 @@ private theorem extensionPullInv_isIso :
   let α := TwoSquare.mk _ _ _ _ b
   let γ := (mateEquiv av au).symm α
   have hm : mateEquiv av au γ = α := (mateEquiv av au).apply_symm_apply α
-  have hmate : (mateEquiv az ar α).natTrans = d.hom :=
+  have hmate : mateEquiv az ar α = d.hom :=
     AlgebraicGeometry.Scheme.restrictionPullback_mate
       f RY SY RX SX aY aX cR cS comm
   have hc : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
