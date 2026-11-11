@@ -47,7 +47,8 @@ lemma purityCanonicalTateOneTrivialization_weil :
         ((upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.asIso.hom
           a.geometricFiberToAlgebraicClosure).hom ≫
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom) =
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.hom).map
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+        a.geometricGaloisFrobenius.asIso.hom).map
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)

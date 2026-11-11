@@ -79,8 +79,8 @@ lemma geometricGaloisFrobenius_hom_comp_geometricFiberComponentMap (r : ℕ)
       Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').symm.toRingHom) =
       Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k').symm.toRingHom) ≫
         (specGeometricFrobenius k₀ ^ r).asIso.hom := by
-    rw [← Category.id_comp (specGeometricFrobenius k').asIso.hom, ← h₁, Category.assoc, Category.assoc,
-      reassoc_of% hτ, h₂, Category.comp_id]
+    rw [← Category.id_comp (specGeometricFrobenius k').asIso.hom, ← h₁, Category.assoc,
+      Category.assoc, reassoc_of% hτ, h₂, Category.comp_id]
   ext
   · simp
   · simp only [Category.assoc, geometricFiberComponentMap_comp_geometricFiberToAlgebraicClosure,
