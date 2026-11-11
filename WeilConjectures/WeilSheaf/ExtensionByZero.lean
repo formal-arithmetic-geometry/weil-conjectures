@@ -96,7 +96,7 @@ omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- The comparison `j₀! F ⟶ j₀* F` is compatible with the Weil structures on the underlying
 sheaves. -/
 lemma map_extensionByZeroToDirectImageSheaf_comp_frobeniusStr (F : WeilSheaf k₀ l U) :
-    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
       (extensionByZeroToDirectImageSheaf j F) ≫ ((lowerStar j).obj F).frobeniusStr =
       ((extensionByZero j).obj F).frobeniusStr ≫ extensionByZeroToDirectImageSheaf j F :=
   map_comp_frobeniusStr ((extensionByZeroToDirectImage j).app F)
@@ -104,9 +104,9 @@ lemma map_extensionByZeroToDirectImageSheaf_comp_frobeniusStr (F : WeilSheaf k�
 omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- The map `j̄^* j₀! F ⟶ j̄^* j̄_* F ⟶ F` is compatible with the Weil structures. -/
 lemma extensionByZero_stalk_compatible (F : WeilSheaf k₀ l U) :
-    (ProEtale.upperStarComp _ (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (ProEtale.upperStarComp _ (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (j̄)).hom.app ((extensionByZero j).obj F).obj.carrier.X ≫
-        ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map
+        ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map
           ((j̄)^*[_].map (extensionByZeroToDirectImageSheaf j F) ≫
             (ProEtale.upperStarLowerStarAdjunction _ (j̄)).counit.app F.obj.carrier.X) ≫
         F.frobeniusStr =
@@ -114,7 +114,7 @@ lemma extensionByZero_stalk_compatible (F : WeilSheaf k₀ l U) :
           j (comp_over j (Spec (CommRingCat.of k₀)))).symm).hom.app
           ((extensionByZero j).obj F).obj.carrier.X ≫
         (ProEtale.upperStarComp _ (j̄)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
           ((extensionByZero j).obj F).obj.carrier.X ≫
         (j̄)^*[_].map ((extensionByZero j).obj F).frobeniusStr ≫
         ((j̄)^*[_].map (extensionByZeroToDirectImageSheaf j F) ≫
@@ -127,10 +127,10 @@ omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 Frobenius relative to `𝔽_{qᵐ}`. -/
 lemma nonempty_equiv_stalkAt_extensionByZero (F : WeilSheaf k₀ l U)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (U ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ)
-    (ht : t ≫ ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ t)
-    (ht' : (t ≫ j̄) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ (t ≫ j̄)) :
+    (ht : t ≫ ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ t)
+    (ht' : (t ≫ j̄) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ (t ≫ j̄)) :
     Nonempty ((((extensionByZero j).obj F).stalkAt (t ≫ j̄) m ht').Equiv (F.stalkAt t m ht)) :=
   nonempty_equiv_stalkAt_of_upperStar (φ := j) (F := (extensionByZero j).obj F) (G := F)
     (θ := (j̄)^*[_].map (extensionByZeroToDirectImageSheaf j F) ≫
@@ -150,8 +150,8 @@ theorem charpoly_frobeniusEnd_stalk_extensionByZero (F : WeilSheaf k₀ l U) (z 
     (U ↘ Spec (CommRingCat.of k₀)) z
   have ht' : ((U ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint z ≫ j̄) ≫
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
-      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+        (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom ≫
         ((U ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint z ≫ j̄) := by
     rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
       ← Category.assoc, ht, Category.assoc]
