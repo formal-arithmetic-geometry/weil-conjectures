@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import
-  WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
+public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 public import WeilConjectures.AlgebraicGeometry.PerfectProjection.PerfectProjectionFormula
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback

@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 import all WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientTransitionCompatibility
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor

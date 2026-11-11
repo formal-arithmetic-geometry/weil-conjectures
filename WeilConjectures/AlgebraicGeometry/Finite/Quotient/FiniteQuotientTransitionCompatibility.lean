@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
 
 import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientOrdinaryComparison
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients

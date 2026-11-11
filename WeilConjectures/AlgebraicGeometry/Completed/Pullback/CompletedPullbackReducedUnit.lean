@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
 import all WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantCoefficientEquivalence
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulConstantTransport
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedCoefficientFiniteUnit

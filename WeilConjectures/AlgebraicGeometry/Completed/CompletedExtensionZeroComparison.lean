@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import
-  WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
+public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
 public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization

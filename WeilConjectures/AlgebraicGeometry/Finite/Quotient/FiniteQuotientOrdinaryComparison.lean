@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
+public import
+  WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
