@@ -194,6 +194,7 @@ private theorem internal_criterion
     AlgebraicGeometry.ProEtale.boundedConstructible
         (AlgebraicGeometry.ProEtale.condensedRingObj Λ T) K ↔
       internalFiniteFreeTarget T (AlgebraicGeometry.ProEtale.condensedRingObj Λ T) K := by
+
   open AlgebraicGeometry.ProEtale in
   constructor
   · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩

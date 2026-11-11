@@ -89,6 +89,7 @@ theorem condensedQbar_lfp_locally_free (ℓ : ℕ) [Fact ℓ.Prime]
       ∃ r : ℕ, Nonempty
         ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (𝒲.f i)).obj P ≅
           Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (𝒲.X i)) r) := by
+
   classical
   rcases hP with ⟨𝒰, h𝒰⟩
   have h0 (i : 𝒰.I₀) := exists_condensedQbar_finiteFree_refinement ℓ X (𝒰.X i)

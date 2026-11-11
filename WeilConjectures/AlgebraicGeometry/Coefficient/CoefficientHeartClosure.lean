@@ -195,6 +195,7 @@ private lemma heart_free_model
     {Y : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
     (hM : IsLisseCoefficientModule Λ M) : HasFiniteConstantLocalModel Λ Y M := by
+
   open MonoidalCategory MonObj Functor.LaxMonoidal Functor.OplaxMonoidal in
   obtain ⟨U, hU⟩ := hM
   refine ⟨U, fun i ↦ ?_⟩
