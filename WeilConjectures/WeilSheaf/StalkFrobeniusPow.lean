@@ -42,8 +42,8 @@ lemma globalSectionsLowerStarIso_inv_comp_pow_succ {Y : Scheme.{u}} (e : Aut Y)
       (Sheaf.Γ _ _).map ((ProEtale.lowerStarCongr _ h).hom.app N) ≫
         (Sheaf.Γ _ _).map ((ProEtale.lowerStarComp _ (e ^ m).asIso.inv e.asIso.inv).inv.app N) =
     (ProEtale.globalSectionsLowerStarIso _ (e ^ m).asIso.inv).inv.app N ≫
-      (ProEtale.globalSectionsLowerStarIso _ e.asIso.inv).inv.app (((e ^
-        m).asIso.inv)_*[_].obj N) := by
+      (ProEtale.globalSectionsLowerStarIso _ e.asIso.inv).inv.app
+        (((e ^ m).asIso.inv)_*[_].obj N) := by
   have e₁ := ProEtale.globalSectionsLowerStarIso_congr (WeilCoefficients.{u} l) h N
   have e₂ := ProEtale.globalSectionsLowerStarIso_comp (WeilCoefficients.{u} l) (e ^ m).asIso.inv
     e.asIso.inv N
@@ -65,7 +65,7 @@ noncomputable def globalSectionsFrobeniusPow (m : ℕ) :
     (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier.X ⟶
       (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj F.obj.carrier.X :=
   (ProEtale.globalSectionsLowerStarIso _
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv).asIso.inv.app
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv).inv.app
         F.obj.carrier.X ≫
     (Sheaf.Γ _ _).map ((ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso m).hom)
 
