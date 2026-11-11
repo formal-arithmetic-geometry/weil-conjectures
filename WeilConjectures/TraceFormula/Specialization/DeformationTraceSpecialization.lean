@@ -182,7 +182,7 @@ theorem restrict_eq_zero_of_sp_eq_zero {B : Over (Spec (.of k))} [QuasiCompact B
       (supportSpecializationUnit k') νX) j hS z hz
   obtain ⟨b, -, hb⟩ := RationalPoint.exists_lift_of_range_eq_singleton j _ hB
   exact BorelMooreSection.integral_injective b hb (((traitSpecialization_map_eq_zero_iff k k'
-    _).mp h').trans BorelMooreSection.integral_zero.symm)
+    _).mp h').trans (BorelMooreSection.integral_zero (ℓ := ℓ) (X := B)).symm)
 
 end IsContractingAt
 
