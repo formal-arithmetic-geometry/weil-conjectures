@@ -499,7 +499,7 @@ theorem idealRow_comparison_zero {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
   have hi : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings R)) j ≫ idealRow R r f =
       (scalar R (f j)).asHom := fun j ↦ Sigma.ι_comp_desc _ _
   have hb : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings B)) j ≫
-      idealRow B r (mapSection φ ∘ f) = ((((scalar B (mapSection φ (f j)) :=)))).asHom.asHom.asHom.asHom
+      idealRow B r (mapSection φ ∘ f) = (((((scalar B (mapSection φ (f j)) :=))))).asHom.asHom.asHom.asHom.asHom
     fun j ↦ Sigma.ι_comp_desc _ _
   apply Sigma.hom_ext
   intro j

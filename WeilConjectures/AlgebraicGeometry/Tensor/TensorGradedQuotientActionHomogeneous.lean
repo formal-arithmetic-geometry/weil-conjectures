@@ -175,7 +175,7 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     have hproj := congrArg (fun f ↦ f.app (V x) z) (T.k_projection (d + a))
     change (T.degree (d + a)).τ₁.val.app (op (V x)) ((T.k (d + a)).app (V x) z) = z at hproj
     change T.I.val.map (homOfLE (hVU x)).op
-        ((T.k d ≫ w).val.app (op U) y) =
+        ((T.k d ≫ (w).asHom).val.app (op U) y) =
       T.I.val.map (homOfLE (hVU x)).op
         ((v ≫ T.k (d + a)).val.app (op U) y)
     rw [← PresheafOfModules.naturality_apply, ← PresheafOfModules.naturality_apply]

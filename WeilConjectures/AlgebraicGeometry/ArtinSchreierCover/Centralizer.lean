@@ -105,7 +105,7 @@ variable (hP hchar) in
 /-- The translation by a locally constant function, as an automorphism of the cover. -/
 def locallyConstantAut : Multiplicative (LocallyConstant S (ZMod p)) →* Aut (adjoinRootCover S P)
     where
-  toFun b := (Scheme.Etale.forget S).mapIso (locallyConstantIso (hP := hP) (hchar := hchar) b.toAdd)
+  toFun b := .of ((Scheme.Etale.forget S)).mapIso (locallyConstantIso (hP := hP) (hchar := hchar) b.toAdd)
   map_one' := by
     ext : 1
     exact congr_arg (Scheme.Etale.forget S).map locallyConstantHom_zero
