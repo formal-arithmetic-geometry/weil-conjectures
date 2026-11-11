@@ -118,7 +118,8 @@ private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
         (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars φ))
         (sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars φ))
         (openImmersionRestriction (ModuleCat.{u + 1} A) j) (eqToHom (by rfl)) := by
-    ext F : 1
+    apply NatTrans.ext
+    funext F
     apply Sheaf.hom_ext
     apply NatTrans.ext
     funext V
