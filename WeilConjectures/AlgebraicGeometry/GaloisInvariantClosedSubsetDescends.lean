@@ -8,6 +8,7 @@ module
 
 public import Mathlib.FieldTheory.Galois.Basic
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+
 import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeFiberTransitivity
 

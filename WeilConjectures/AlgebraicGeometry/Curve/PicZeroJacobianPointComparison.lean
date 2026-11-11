@@ -12,6 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
+
 /-!
 # Picard pullback as extension of Jacobian points
 

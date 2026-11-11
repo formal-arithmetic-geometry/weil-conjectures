@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
-
 /-!
 # The Jacobian of a curve
 

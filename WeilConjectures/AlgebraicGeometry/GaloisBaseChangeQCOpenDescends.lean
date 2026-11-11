@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.Galois.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+
 import WeilConjectures.AlgebraicGeometry.DescendQCOpenFGSubalgebra
 
 /-!

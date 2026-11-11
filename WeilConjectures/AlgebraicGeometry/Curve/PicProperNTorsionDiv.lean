@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 @[expose] public section
