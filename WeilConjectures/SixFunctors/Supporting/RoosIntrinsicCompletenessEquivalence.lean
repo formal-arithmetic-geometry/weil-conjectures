@@ -210,27 +210,27 @@ theorem integralKoszulScalar_existsUnique (P : IntegralOnSlice.Cx l E T none) :
 /-- The uniquely section-normalized scalar chain map.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
 def integralKoszulScalar (P : IntegralOnSlice.Cx l E T none) : End P :=
-  (integralKoszulScalar_existsUnique l E T P).exists.choose
+  .of (integralKoszulScalar_existsUnique l E T P).exists.choose
 
 /-- P tensor [R --t^(n+1)--> R], in the standard total-cone coordinates.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
 def integralKoszulLevel (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :=
-  CochainComplex.mappingCone (integralKoszulScalar l E T P ^ (n + 1))
+  CochainComplex.mappingCone (integralKoszulScalar l E T P ^ (n + 1)).asHom
 
 /-- The square defining the (t,1) transition commutes.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
 Proof: compose the indicated powers of the same endomorphism. Both sides are its
 (n+2)-nd power, by the power recursion and the identity composition law. -/
 theorem integralKoszulStep_square (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
-    (integralKoszulScalar l E T P ^ (n + 1 + 1)) ≫ 𝟙 P =
-      integralKoszulScalar l E T P ≫ (integralKoszulScalar l E T P ^ (n + 1)) := by
+    (integralKoszulScalar l E T P ^ (n + 1 + 1)).asHom ≫ 𝟙 P =
+      (integralKoszulScalar l E T P).asHom ≫ (integralKoszulScalar l E T P ^ (n + 1)).asHom := by
   exact CochainComplex.PrincipalCone.square (integralKoszulScalar l E T P) n
 
 /-- The specified transition, multiplication by t in degree -1 and identity in degree 0.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
 def integralKoszulStep (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
     integralKoszulLevel l E T P (n + 1) ⟶ integralKoszulLevel l E T P n :=
-  CochainComplex.mappingCone.map _ _ (integralKoszulScalar l E T P) (𝟙 P)
+  CochainComplex.mappingCone.map _ _ (integralKoszulScalar l E T P).asHom (𝟙 P)
     (integralKoszulStep_square l E T P n)
 
 /-- The strict positive-power Koszul tensor tower on this single representative.
@@ -244,7 +244,7 @@ Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence)
 def integralKoszulProductUnit (P : IntegralOnSlice.Cx l E T none) :
     P ⟶ ∏ᶜ (fun n : ℕ ↦ (integralKoszulTower l E T P).obj (op n)) :=
   Pi.lift (fun n ↦ CochainComplex.mappingCone.inr
-    (integralKoszulScalar l E T P ^ (n + 1)))
+    (integralKoszulScalar l E T P ^ (n + 1)).asHom)
 
 /-- The specified one-minus-transition map on the termwise product.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
