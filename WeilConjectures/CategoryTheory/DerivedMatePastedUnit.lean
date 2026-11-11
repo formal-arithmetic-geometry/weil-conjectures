@@ -197,7 +197,7 @@ theorem derivedMate_pastedUnit :
     leftUnitor_hom_app, rightUnitor_inv_app, Functor.comp_map,
     Category.id_comp, Category.assoc]
   dsimp only [TwoSquare.mk, Functor.comp_obj]
-  eexact Category.comp_id _
+  erw [Category.comp_id]
   dsimp only [TwoSquare.natTrans]
   erw [Category.id_comp, Category.id_comp]
   erw [ag.mapDerivedCategoryRightDerivedAdjunction.unit.naturality_assoc]
