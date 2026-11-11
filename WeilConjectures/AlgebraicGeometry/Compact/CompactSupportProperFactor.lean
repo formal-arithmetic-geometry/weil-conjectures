@@ -210,7 +210,7 @@ private theorem etale_mate_eq (A : Type (u + 1)) [CommRing A]
   funext K
   rw [Etale.baseChange_app, Etale.baseChangeUnitStep_app,
     Etale.baseChangeSquareStep_hom_app, Etale.baseChangeCounitStep_app]
-  simp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk,
+  simp only [mateEquiv, Equiv.coe_fn_mk,
     NatTrans.comp_app, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
