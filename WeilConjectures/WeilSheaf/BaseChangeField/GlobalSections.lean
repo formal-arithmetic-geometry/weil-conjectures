@@ -159,8 +159,9 @@ lemma globalSectionsFrobeniusPow_succ (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ)
         (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app
         ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].obj
           K.carrier.X) ≫
-        (Sheaf.Γ _ _).map (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
-          ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)) =
+        (Sheaf.Γ _ _).map
+          (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
+            ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)) =
       (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom) ≫
         (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
           (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app K.carrier.X :=
