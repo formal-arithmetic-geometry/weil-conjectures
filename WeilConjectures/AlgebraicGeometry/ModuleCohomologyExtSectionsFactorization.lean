@@ -59,7 +59,25 @@ private theorem moduleComparisonEquiv_siteSections
         ((siteSectionsObjIso J U (T.obj F) p).inv ((a.app F).hom x)) := by
   run_tac do Lean.logInfo m!"PS043 helper start: {← IO.monoMsNow}"
   subst η
-  rfl
+  have h := sectionsComparisonNatIso_apply a (siteSectionsNatIso J U p)
+    (siteExtNatIso J U p ≪≫ extSourceNatIso e p ≪≫ siteHNatIso J p) F x
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
+    let actual ← Lean.Meta.zetaReduce
+      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (← `(h)))))
+    let rec diff (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
+      if a == b then return
+      match fuel with
+      | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
+      | n + 1 =>
+        if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
+            a.getAppArgs.size == b.getAppArgs.size then
+          for i in [:a.getAppArgs.size] do
+            diff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
+        else
+          Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
+    diff 12 "type" actual expected
+  exact h
   run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
 
 set_option maxHeartbeats 800000 in
@@ -120,6 +138,22 @@ theorem ext_sections_factorization
     (K := RingedSpace.moduleCohomology X.toRingedSpace p)
     ⊤ p (terminalSourceIso X) a (moduleCohomologyExtResolutionNatIso X p) hη F x
   run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
+    let actual ← Lean.Meta.zetaReduce
+      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (← `(h)))))
+    let rec diff (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
+      if a == b then return
+      match fuel with
+      | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
+      | n + 1 =>
+        if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
+            a.getAppArgs.size == b.getAppArgs.size then
+          for i in [:a.getAppArgs.size] do
+            diff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
+        else
+          Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
+    diff 12 "type" actual expected
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
