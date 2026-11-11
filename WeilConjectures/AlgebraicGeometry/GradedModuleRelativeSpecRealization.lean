@@ -30,6 +30,7 @@ Source: Stacks Project, Cohomology of Schemes, Tag 0897(1).
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
+
 namespace AlgebraicGeometry
 
 private theorem finitePresentation_of_quasicoherent_finiteType
