@@ -399,8 +399,8 @@ lemma ProEtaleWeilSheaf.unitToLowerStar_comm :
   simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, NatTrans.comp_app, Functor.mapIso_hom,
     Category.assoc]
   exact adicConstantSheafToLowerStar_lowerStarExchange_iso s̄
-    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (W₁ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+    (W₁ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
 
 variable (k₀ l) in
