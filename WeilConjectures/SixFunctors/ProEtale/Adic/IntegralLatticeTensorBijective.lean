@@ -167,9 +167,11 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
       (padicIntegersSheafMulOfLE_comp_adicConstantSheafLeg (X := T) (E := E) (F := F.1) F.2
         (integersSubalgebraFamilyEquiv E F o) n)
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at key
-    simpa only [integralLatticeSectionsEquiv, AddEquiv.ofBijective_apply,
-      AddMonoidHom.coe_comp, Function.comp_apply, AddEquiv.coe_toAddMonoidHom,
-      AddEquiv.ulift, Equiv.ulift, AddEquiv.symm, Equiv.symm] using key.symm
+    conv_rhs =>
+      arg 2
+      arg 2
+      change θ.hom.app (op W) (ULift.up m)
+    exact key.symm
 
 include hθ hθW in
 /-- **`ℚ̄_ℓ ⊗_{𝒪_E} C(W, M) = Γ(W, p^* Rⁱg_* ℚ̄_ℓ,T)`** for `W` quasi-compact and
