@@ -34,8 +34,8 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
 
 /-- The components of the inverse mate of a square along two adjunctions. -/
 lemma mateEquiv_symm_natTrans_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (β : TwoSquare R₁ H G R₂)
-    (a : A) : ((mateEquiv adj₁ adj₂).symm β).natTrans.app a =
-      L₂.map (G.map (adj₁.unit.app a)) ≫ L₂.map (β.natTrans.app (L₁.obj a)) ≫
+    (a : A) : ((mateEquiv adj₁ adj₂).symm β).app a =
+      L₂.map (G.map (adj₁.unit.app a)) ≫ L₂.map (β.app (L₁.obj a)) ≫
         adj₂.counit.app (H.obj (L₁.obj a)) := by
   simp [mateEquiv_symm_apply]
 
@@ -43,11 +43,11 @@ lemma mateEquiv_symm_natTrans_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R�
 adjunctions with `α`. -/
 lemma mateEquiv_eq_of_unit_comp_map (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H)
     (β : TwoSquare R₁ H G R₂)
-    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.natTrans.app (L₁.obj a) =
-      adj₂.unit.app (G.obj a) ≫ R₂.map (α.natTrans.app a)) :
+    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.app (L₁.obj a) =
+      adj₂.unit.app (G.obj a) ≫ R₂.map (α.app a)) :
     mateEquiv adj₁ adj₂ α = β := by
   rw [← Equiv.eq_symm_apply]
-  refine TwoSquare.ext _ _ fun a ↦ ?_
+  refine NatTrans.ext (funext fun a ↦ ?_)
   rw [mateEquiv_symm_natTrans_app, ← Functor.map_comp_assoc, h]
   simp
 
@@ -153,7 +153,7 @@ lemma mateEquiv_adicUpperStarCompCondensedModIso_inv (f : S ⟶ T) :
       (adicUpperStarCompCondensedModIso l f).inv =
         (condensedModInverseCompAdicLowerStarIso l f).hom :=
     (conjugateEquiv _ _).apply_symm_apply _
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   have h3 := NatTrans.congr_app (h1.trans h2) M
   refine h3.trans ?_
   simp [condensedModInverseCompAdicLowerStarIso, mateEquiv_apply]
@@ -187,7 +187,7 @@ lemma adicUpperStarCompCondensedModIso_comp_inv {R : Scheme.{u}} (f : S ⟶ T) (
         (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)),
     mateEquiv_hcomp, mateEquiv_adicUpperStarCompCondensedModIso_inv,
     mateEquiv_adicUpperStarCompCondensedModIso_inv, hold, hnew]
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   refine Mod.Hom.ext ?_
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
@@ -291,7 +291,7 @@ lemma adicUpperStarCompCondensedModIso_inv_of_iso (e : S ≅ T) :
       (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e),
     conjugateEquiv_adicUpperStarIsoLowerStarInv_inv, conjugateEquiv_upperStarIsoLowerStarInv_hom]
   rw [mateEquiv_adicLowerStarCompCondensedModIso_inv]
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
 
 /-- The pullback comparison of the two models is compatible with the transports of the
@@ -302,7 +302,7 @@ lemma adicUpperStarCompCondensedModIso_inv_congr {f f' : S ⟶ T} (h : f = f') :
         (CondensedRing.upperStarCongr (Profinite.padicAlgClRingObj l) h).inv).whiskerLeft
         (adicUpperStarCongr l h).hom := by
   subst h
-  refine TwoSquare.ext _ _ fun M ↦ ?_
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, CondensedRing.upperStarCongr,
     adicUpperStarCongr]
 
