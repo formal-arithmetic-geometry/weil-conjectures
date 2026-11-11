@@ -253,7 +253,8 @@ lemma iterateStr_add (K : WeilBoundedConstructible ℓ Φ) (m n : ℕ) :
       (frobeniusIterate_succ Φ (m + n)) (frobeniusIterate_add Φ m n)
       (frobeniusIterate_add Φ m (n + 1)) (frobeniusIterate_succ Φ n) (K.iterateStr m).hom
       (K.iterateStr n).hom K.str.hom (K.iterateStr (m + n)).hom ih
-    exact h
+    simpa only [Nat.add_succ, iterateStr, Iso.trans_hom, eqToIso.hom, Iso.app_hom,
+      Functor.mapIso_hom, Category.assoc] using h
 
 end WeilBoundedConstructible
 

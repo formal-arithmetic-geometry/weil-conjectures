@@ -125,6 +125,7 @@ lemma bijective_pointSections_map_unit :
   · ext x
     obtain ⟨a, rfl⟩ := (End.homEquiv.bijective.comp
       (bijective_pointUnitEndRingHom ℓ k)).2 x
+    dsimp only [Function.comp_apply, End.homEquiv]
     rw [← smul_pointSectionsUnit ℓ k (ULift.up a), map_smul, map_smul]
     congr 1
 

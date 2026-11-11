@@ -230,7 +230,7 @@ lemma integral_add [IsProper X.hom] (α β : BorelMooreSection ℓ X) :
     (α + β).integral = α.integral + β.integral :=
   by
   apply End.ext
-  simp only [integral, Adjunction.homEquiv_counit, Functor.map_add, Preadditive.add_comp,
+  simp only [End.add_asHom, integral, Adjunction.homEquiv_counit, Functor.map_add, Preadditive.add_comp,
     Preadditive.comp_add]
 
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
