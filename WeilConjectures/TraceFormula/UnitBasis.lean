@@ -173,9 +173,11 @@ variable [MonoidalPreadditive C] [BraidedCategory C]
 /-- The categorical trace of an endomorphism of an object with a unit basis is the sum of its
 diagonal entries. -/
 theorem traceOrZero_eq_sum (φ : X ⟶ X) :
-    traceOrZero φ = ∑ i, b.incl i ≫ φ ≫ b.proj i := by
+    traceOrZero φ = ∑ i, End.of (b.incl i ≫ φ ≫ b.proj i) := by
   let := b.exactPairing
   let : HasRightDual X := ⟨X⟩
+  apply End.ext
+  simp only [End.sum_asHom]
   rw [traceOrZero_eq_trace, trace_eq_of_exactPairing X]
   have hη : η_ X X = ∑ i, (ρ_ (𝟙_ C)).inv ≫ (b.incl i ⊗ₘ b.incl i) := rfl
   have hε : ε_ X X = ∑ i, (b.proj i ⊗ₘ b.proj i) ≫ (ρ_ (𝟙_ C)).hom := rfl
@@ -197,21 +199,27 @@ section Linear
 `𝟙_ C ⟶ X`, the coordinates of `x` being the `x ≫ proj i`. -/
 noncomputable def basis : Module.Basis ι (End (𝟙_ C))ᵐᵒᵖ (𝟙_ C ⟶ X) :=
   .ofEquivFun
-    { toFun x i := .op (x ≫ b.proj i)
+    { toFun x i := .op (.of (x ≫ b.proj i))
       invFun c := ∑ i, c i • b.incl i
       map_add' x y := by
-        ext i
+        funext i
+        apply MulOpposite.unop_injective
+        apply End.ext
         simp
       map_smul' r x := by
-        ext i
+        funext i
         apply MulOpposite.unop_injective
+        apply End.ext
         simp [End.smul_left, End.mul_asHom]
       left_inv x := by
         simp only [End.smul_left, MulOpposite.unop_op, Category.assoc, ← Preadditive.comp_sum,
           b.total, Category.comp_id]
       right_inv c := by
-        ext j
-        simp only [End.smul_left, Preadditive.sum_comp, Category.assoc, b.incl_proj]
+        funext j
+        apply MulOpposite.unop_injective
+        apply End.ext
+        simp only [MulOpposite.unop_op, End.smul_left, Preadditive.sum_comp, Category.assoc,
+          b.incl_proj]
         rw [Finset.sum_eq_single j (fun x _ hx ↦ by simp [hx]) (by simp)]
         simp }
 
@@ -223,7 +231,7 @@ lemma basis_apply (i : ι) : b.basis i = b.incl i := by
   simp
 
 @[simp]
-lemma basis_repr_apply (x : 𝟙_ C ⟶ X) (i : ι) : b.basis.repr x i = .op (x ≫ b.proj i) :=
+lemma basis_repr_apply (x : 𝟙_ C ⟶ X) (i : ι) : b.basis.repr x i = .op (.of (x ≫ b.proj i)) :=
   rfl
 
 /-- The module `𝟙_ C ⟶ X` is finite when `X` has a unit basis. -/
