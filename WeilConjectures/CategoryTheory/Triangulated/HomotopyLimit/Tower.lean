@@ -143,8 +143,10 @@ isomorphism of `∏ₙ Fₙ`. -/
 lemma isIso_sub_towerShift_of_eq_zero (N : ℕ)
     (hN : ∀ n : ℕ, F.map (homOfLE (Nat.le_add_right n N)).op = 0) :
     IsIso (𝟙 P.pt - towerShift hP) := by
-  have h : (End.of (towerShift hP) ^ N) = 0 :=
-    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by rw [towerShift_pow_proj, hN, comp_zero, zero_comp]
+  have h : (End.of (towerShift hP) ^ N) = 0 := by
+    apply End.ext
+    exact Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+      rw [towerShift_pow_proj, hN, End.zero_asHom, comp_zero, zero_comp]
   have : IsUnit (1 - End.of (towerShift hP)) := IsNilpotent.isUnit_one_sub ⟨N, h⟩
   exact (isUnit_iff_isIso _).1 this
 
@@ -305,9 +307,9 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
   have hp (n : ℕ) : p ≫ P'.proj n = P.proj (n + k) := Fan.IsLimit.fac hP' _ n
   have hq (n : ℕ) : q ≫ P.proj n = P'.proj n ≫ F.map (homOfLE (Nat.le_add_right n k)).op :=
     Fan.IsLimit.fac hP _ n
-  have hpq : p ≫ q = End.of (towerShift hP) ^ k :=
+  have hpq : p ≫ q = (End.of (towerShift hP) ^ k).asHom :=
     Fan.IsLimit.hom_ext hP _ _ fun n ↦ by rw [assoc, hq, ← assoc, hp, towerShift_pow_proj]
-  have hqp : q ≫ p = End.of (towerShift hP') ^ k :=
+  have hqp : q ≫ p = (End.of (towerShift hP') ^ k).asHom :=
     Fan.IsLimit.hom_ext hP' _ _ fun n ↦ by
       rw [assoc, hp, hq, towerShift_pow_proj]
       rfl
