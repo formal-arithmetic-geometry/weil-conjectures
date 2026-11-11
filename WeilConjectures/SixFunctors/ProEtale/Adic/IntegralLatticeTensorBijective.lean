@@ -169,7 +169,8 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at key
     dsimp only [integralLatticeSectionsEquiv, AddEquiv.ofBijective, Equiv.ofBijective,
       AddEquiv.ulift, Equiv.ulift]
-    exact key.symm
+    set_option backward.isDefEq.respectTransparency true in
+      with_reducible exact key.symm
 
 include hθ hθW in
 /-- **`ℚ̄_ℓ ⊗_{𝒪_E} C(W, M) = Γ(W, p^* Rⁱg_* ℚ̄_ℓ,T)`** for `W` quasi-compact and
