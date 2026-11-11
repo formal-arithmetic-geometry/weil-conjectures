@@ -99,7 +99,6 @@ theorem towerLimit_finite_integersStratum {T Y S : Scheme.{u}} (g : T ⟶ Y) (j 
       inferInstance
     letI := ModuleCat.towerLimitModuleOf G (shrinkRingEquiv.{0, u} l E)
     Module.Finite (integers l E) (ModuleCat.towerLimit G) := by
-
   intro G _
   have := Etale.finite_limit_sheafFiber_upperStar_higherDirectImageQuotPowTower
     (integersShrinkIdeal.{u} l E) g (natCast_mem_nonZeroDivisors_shrink l E) rfl j s k h
