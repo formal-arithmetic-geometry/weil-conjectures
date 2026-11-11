@@ -133,6 +133,10 @@ theorem ext_sections_factorization
     AlgebraicGeometry.Scheme.Modules.H, AlgebraicGeometry.Scheme.Modules.instAddCommGroupH,
     Sheaf.functorH, Sheaf.H, Sheaf.H'] at h ⊢
   run_tac do Lean.logInfo m!"PS043 object representations normalized: {← IO.monoMsNow}"
+  conv_rhs =>
+    pattern resolutionSectionsNatIso _ _ _ _ _ _ _
+    change a
+  run_tac do Lean.logInfo m!"PS043 comparison aligned before projection: {← IO.monoMsNow}"
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
