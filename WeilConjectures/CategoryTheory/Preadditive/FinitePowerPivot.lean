@@ -126,7 +126,7 @@ theorem exists_le_iso_cokernel_biproduct_fin [HasCokernels C]
       exact hf (biproduct_fin_hom_ext fun a b ↦ by simp [h a b])
     obtain _ | m := m
     · exact b.elim0
-    have := hU (.of (biproduct.ι _ b ≫ f ≫ biproduct.π _ a)) (by
+    have := hU (biproductFinMatrix f a b) (by
       intro h
       exact hab (congr($(h).asHom)))
     obtain ⟨f', ⟨e⟩⟩ := exists_cokernel_iso_of_isIso_entry f a b
