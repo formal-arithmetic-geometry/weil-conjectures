@@ -113,8 +113,8 @@ def quotientAction : Action AddCommGrpCat.{max u w} G where
         (QuotientAddGroup.map S S (X.obj.ρ g).asHom.hom fun x hx ↦ hS g x hx)
       map_one' := End.ext <| AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
         simp [End.one_asHom]
-      map_mul' a b := End.ext <| AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
-        simp [End.mul_asHom] }
+      map_mul' a b := End.ext <| AddCommGrpCat.ext fun q ↦
+        QuotientAddGroup.induction_on q fun x ↦ by simp [End.mul_asHom] }
 
 /-- The quotient of a discrete module by a stable subgroup. -/
 def quotient : DiscreteModule.{w} G :=
