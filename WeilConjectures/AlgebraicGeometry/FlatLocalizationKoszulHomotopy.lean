@@ -31,7 +31,7 @@ private theorem scalarNat_homology
     (z : 𝟭 D ⟶ 𝟭 D) (K : CochainComplex D ℤ) (μ : End K)
     (hμ : ∀ q, μ.f q = z.app (K.X q)) (q : ℤ) :
     HomologicalComplex.homologyMap (μ q).asHom = z.app (K.homology q) := by
-  have hc : HomologicalComplex.cyclesMap μ q = z.app (K.cycles q) := by
+  have hc : HomologicalComplex.cyclesMap (μ q).asHom = z.app (K.cycles q) := by
     apply (cancel_mono (K.iCycles q)).1
     rw [HomologicalComplex.cyclesMap_i, hμ]
     exact z.naturality (K.iCycles q)

@@ -269,7 +269,7 @@ theorem iterateFrobenius_geometricFiber_mul_eq (hp : (ringChar k).Prime)
     exact (Category.id_comp _).symm
   | succ m ih =>
     rw [Nat.mul_succ, iterateFrobenius_add, ih, iterateFrobenius_geometricFiber_eq, pow_succ',
-      End.mul_asHom, pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
+      End.mul_asHom, pow_succ, Aut.mul_asIso, Iso.trans_inv]
     simp only [Category.assoc, geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv_assoc]
 
 /-- Blueprint `prop-trf-frobenius-factorization`: for every `m`, the absolute `q ^ m`-power

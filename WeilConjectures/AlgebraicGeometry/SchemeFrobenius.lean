@@ -284,7 +284,7 @@ variable {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 `def-trf-scheme-frobenius`). It is the inverse of the geometric Galois Frobenius
 `g_γ = geometricGaloisFrobenius` (`arithmeticGaloisFrobenius_eq_inv`). -/
 def arithmeticGaloisFrobenius : Aut f.geometricFiber :=
-  asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
+  .of <| asIso (pullback.map f (Scheme.specAlgebraicClosure k).hom f
     (Scheme.specAlgebraicClosure k).hom (𝟙 X₀) (specArithmeticFrobenius k).asIso.hom
     (𝟙 (Spec (.of k))) (by simp) (by simp))
 
