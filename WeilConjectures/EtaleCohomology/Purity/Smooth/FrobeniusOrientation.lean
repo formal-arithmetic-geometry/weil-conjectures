@@ -176,17 +176,17 @@ acts by `q^d` on the compactly supported cohomology `H^{2d}_c(X, Λ)` through th
 theorem exists_iso_dualizingComplex_isWeilMorphism :
     ∃ o : (𝟙_ (DerivedCategoryModule Λ f.geometricFiber))⟦(2 * d : ℤ)⟧ ≅
         dualizingComplex Λ f.geometricFiberToAlgebraicClosure,
-      IsWeilMorphism f.geometricGaloisFrobenius.asIso.hom
-        (shiftWeilDatum f.geometricGaloisFrobenius.asIso.hom
-          (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.asIso.hom).hom (2 * d))
+      IsWeilMorphism f.geometricGaloisFrobenius.hom
+        (shiftWeilDatum f.geometricGaloisFrobenius.hom
+          (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom).hom (2 * d))
         (((Nat.card k₀ : Λ) ^ d) •
           upperShriekMateWeilDatum (Λ := Λ) f.isPullback_geometricGaloisFrobenius
-            (leftDerivedUpperStarUnitIso _ (specGeometricFrobenius k₀).asIso.hom).hom)
+            (leftDerivedUpperStarUnitIso _ (specGeometricFrobenius k₀).hom).hom)
         o.hom := by
   have : NeZero (ringChar Λ) := ⟨CharP.char_ne_zero_of_finite Λ (ringChar Λ)⟩
   set a := f.geometricFiberToAlgebraicClosure
-  set g := f.geometricGaloisFrobenius.asIso.hom
-  set σ := (specGeometricFrobenius k₀).asIso.hom
+  set g := f.geometricGaloisFrobenius.hom
+  set σ := (specGeometricFrobenius k₀).hom
   have sq : IsPullback g a a σ := f.isPullback_geometricGaloisFrobenius
   have : SmoothOfRelativeDimension d a :=
     inferInstanceAs (SmoothOfRelativeDimension d (Limits.pullback.snd _ _))
