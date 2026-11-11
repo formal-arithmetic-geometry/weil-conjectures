@@ -111,3 +111,4 @@ theorem residueFieldModuleSheafUpperStarIso_compCoherence {X Y Z : Scheme.{u}} (
   residueFieldModuleSheafUpperStarIsoAux_compCoherence ℓ E f g
 
 end AlgebraicGeometry.ProEtale
+
