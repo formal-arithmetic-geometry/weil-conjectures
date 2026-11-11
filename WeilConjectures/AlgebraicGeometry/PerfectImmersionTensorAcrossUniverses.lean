@@ -43,6 +43,7 @@ private noncomputable def standardUnitComparison (X : Scheme.{u})
       ((@DerivedCategory.singleFunctor _ _ _ h 0).obj
         (SheafOfModules.unit X.ringCatSheaf)) ≅
       𝟙_ (@schemeDerivedCategory X (HasDerivedCategory.standard _)) := by
+
   let A := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   exact (Localization.compUniqFunctor (@DerivedCategory.Qh A _ _ h)
     (@DerivedCategory.Qh A _ _ (HasDerivedCategory.standard _))

@@ -103,6 +103,7 @@ theorem smooth_proper_diagonal_tensor_formula
               hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
             (ObjectProperty.homMk (pf.hom ≫
               K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by
+
   obtain ⟨hTor', hTor⟩ := perfectImmersion_stalkwiseTorBounds i hperfect
   obtain ⟨hRf, hO, hTensor, hmon, hadj, hcase⟩ :=
     smoothProper_tensor_perfect_case i hTor'
