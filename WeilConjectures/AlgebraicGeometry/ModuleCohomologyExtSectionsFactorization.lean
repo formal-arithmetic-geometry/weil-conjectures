@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturalityExtension
-meta import Lean
 
 /-! # The Ext-to-abelian-sections part of the comparison
 
@@ -47,27 +46,9 @@ private theorem moduleComparisonEquiv_apply_of_component
     (b : C ≅ B) (c : C ≃+ L.obj F)
     (h : η.app F = a ≪≫ b.symm ≪≫ c.toAddCommGrpIso) (x : K.obj F) :
     moduleComparisonEquiv η F x = c (b.inv (a.hom x)) := by
-  run_tac do Lean.logInfo m!"PS043 helper start: {← IO.monoMsNow}"
   change (η.app F).hom x = _
   rw [h]
   rfl
-  run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
-
-private theorem siteSections_component
-    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
-    (U : C) (F : Sheaf J AddCommGrpCat.{u}) (p : ℕ)
-    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
-      (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
-        (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) :
-    ((siteSectionsNatIso J U p).symm ≪≫ siteExtNatIso J U p ≪≫
-      extSourceNatIso e p ≪≫ siteHNatIso J p).app F =
-      (siteSectionsObjIso J U F p).symm ≪≫
-        (Abelian.Ext.precompAddEquiv e F p).symm.toAddCommGrpIso := by
-  run_tac do Lean.logInfo m!"PS043 site helper start: {← IO.monoMsNow}"
-  simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
-  rfl
-  run_tac do Lean.logInfo m!"PS043 site helper end: {← IO.monoMsNow}"
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
@@ -101,7 +82,6 @@ theorem ext_sections_factorization
       exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm
         (d.inv (((resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
           (fun M _ ↦ forgottenInjectiveAcyclic X M)).app F).hom x))) := by
-  run_tac do Lean.logInfo m!"PS043 main start: {← IO.monoMsNow}"
   let : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
@@ -121,7 +101,6 @@ theorem ext_sections_factorization
     (fun M _ ↦ forgottenInjectiveAcyclic X M)
   let b := siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p
   let c := Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p
-  run_tac do Lean.logInfo m!"PS043 comparison defined: {← IO.monoMsNow}"
   have hη : moduleCohomologyExtResolutionNatIso X p = a ≪≫ Functor.isoWhiskerLeft T
       ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
         siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
@@ -129,28 +108,23 @@ theorem ext_sections_factorization
             siteHNatIso (Opens.grothendieckTopology X) p) := by
     unfold moduleCohomologyExtResolutionNatIso
     rfl
-  run_tac do Lean.logInfo m!"PS043 iso equality proved: {← IO.monoMsNow}"
   have hcomp : (moduleCohomologyExtResolutionNatIso X p).app F =
-      a.app F ≪≫ b.symm ≪≫
-        c.symm.toAddCommGrpIso := by
+      a.app F ≪≫ b.symm ≪≫ c.symm.toAddCommGrpIso := by
     rw [hη, NatIso.trans_app]
     apply congrArg (fun e ↦ a.app F ≪≫ e)
     change ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
       siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
         extSourceNatIso (terminalSourceIso X) p ≪≫
           siteHNatIso (Opens.grothendieckTopology X) p).app (T.obj F) = _
-    exact siteSections_component (Opens.grothendieckTopology X) ⊤ (T.obj F) p
-      (terminalSourceIso X)
-  run_tac do Lean.logInfo m!"PS043 component equality proved: {← IO.monoMsNow}"
+    simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
+    rfl
   have h := moduleComparisonEquiv_apply_of_component
-    (moduleCohomologyExtResolutionNatIso X p) F (a.app F)
-    b
-    c.symm hcomp x
-  run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
+    (moduleCohomologyExtResolutionNatIso X p) F (a.app F) b c.symm hcomp x
   dsimp only [id, Functor.comp_obj, RingedSpace.moduleCohomology,
     AlgebraicGeometry.Scheme.Modules.H, AlgebraicGeometry.Scheme.Modules.instAddCommGroupH,
     Sheaf.functorH, Sheaf.H, Sheaf.H'] at h ⊢
-  run_tac do Lean.logInfo m!"PS043 object representations normalized: {← IO.monoMsNow}"
+  -- Align the comparison objects before projecting their maps; otherwise instance conversion
+  -- unfolds the derived functor constructions underneath those projections.
   conv_rhs =>
     pattern resolutionSectionsNatIso _ _ _ _ _ _ _
     change a
@@ -160,34 +134,6 @@ theorem ext_sections_factorization
   conv_rhs =>
     pattern Abelian.Ext.precompAddEquiv _ _ _
     change c
-  run_tac do Lean.logInfo m!"PS043 comparison aligned before projection: {← IO.monoMsNow}"
   exact h
-  run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
-
-run_cmd do
-  let env := (← Lean.getEnv).setExporting false
-  let lctx : Lean.LocalContext := default
-  for name in #[``sectionsComparisonNatIso_apply,
-      ``moduleComparisonEquiv_apply_of_component, ``siteSections_component,
-      ``ext_sections_factorization] do
-    let some info := env.find? name | throwError "missing declaration {name}"
-    let start ← IO.monoMsNow
-    match Lean.Kernel.check env lctx info.type with
-    | .ok _ => pure ()
-    | .error _ => throwError "kernel rejected declaration type {name}"
-    let typeEnd ← IO.monoMsNow
-    let inferred ← match Lean.Kernel.check env lctx (info.value! true) with
-      | .ok ty => pure ty
-      | .error _ => throwError "kernel rejected declaration value {name}"
-    let valueEnd ← IO.monoMsNow
-    let agrees ← match Lean.Kernel.isDefEq env lctx inferred info.type with
-      | .ok eq => pure eq
-      | .error _ => throwError "kernel type comparison failed {name}"
-    let endTime ← IO.monoMsNow
-    unless agrees do throwError "inferred and declared types differ {name}"
-    Lean.logInfo m!"PS043 kernel replay {name}: type {typeEnd - start} ms, value \
-      {valueEnd - typeEnd} ms, final defeq {endTime - valueEnd} ms"
-
-#print axioms ext_sections_factorization
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
