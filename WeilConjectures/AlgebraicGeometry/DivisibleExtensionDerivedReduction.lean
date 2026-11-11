@@ -848,7 +848,7 @@ private theorem resolving_derived_adjunction
       map_homotopy_iso_hom, quotient_homotopy_iso_hom,
       ]
     erw [DerivedCategory.Qh.map_id]
-    repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
+    repeat' erw [Category.id_comp]
     rfl
   have hαcK : αc.app K = α.app (qA.obj K) := by
     simp only [αc, NatTrans.comp_app, Functor.whiskerRight_app,
