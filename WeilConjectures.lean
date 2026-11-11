@@ -20936,6 +20936,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ExtensionTowe
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ExtensionTowerStalkLimit
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ExtensionTowerStratification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundaryDetection
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatConstructibleComplex
