@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.LocalProperties.Reduced
 public import Mathlib.RingTheory.LocalRing.Module
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
