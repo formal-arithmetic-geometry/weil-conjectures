@@ -211,3 +211,4 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 end
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+

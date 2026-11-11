@@ -71,3 +71,4 @@ theorem localizationCocone_isColimit_of_model
   rw [← F.map_comp, ← F.map_comp, hv]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
