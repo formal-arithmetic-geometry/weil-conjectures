@@ -214,6 +214,7 @@ lemma schemeFrobenius_add (m n : ℕ) :
 /-- `Φ^m` is the `m`-fold iterate of the scheme Frobenius `Φ = Φ^1`. -/
 lemma schemeFrobenius_eq_pow (m : ℕ) :
     End.of (f.schemeFrobenius m) = End.of (f.schemeFrobenius 1) ^ m := by
+  apply End.ext
   induction m with
   | zero => exact f.schemeFrobenius_zero
   | succ m ih => rw [pow_succ', End.mul_asHom, ← ih, ← schemeFrobenius_add]
@@ -260,7 +261,8 @@ lemma specArithmeticFrobenius_eq_inv :
     specArithmeticFrobenius k = (specGeometricFrobenius k)⁻¹ := by
   let := Fintype.ofFinite k
   rw [eq_inv_iff_mul_eq_one]
-  ext1
+  apply Aut.ext
+  apply Iso.ext
   rw [Aut.mul_hom, specArithmeticFrobenius_hom, specGeometricFrobenius_hom, ← Spec.map_comp,
     Aut.one_hom, ← Spec.map_id]
   congr 1
@@ -303,7 +305,8 @@ lemma arithmeticGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure :
 lemma arithmeticGaloisFrobenius_eq_inv :
     f.arithmeticGaloisFrobenius = f.geometricGaloisFrobenius⁻¹ := by
   rw [eq_inv_iff_mul_eq_one]
-  ext1
+  apply Aut.ext
+  apply Iso.ext
   rw [Aut.mul_hom, Aut.one_hom]
   ext
   · simp
