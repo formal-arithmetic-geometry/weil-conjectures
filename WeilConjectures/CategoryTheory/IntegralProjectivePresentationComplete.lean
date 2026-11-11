@@ -47,9 +47,9 @@ theorem exists_cokernel_limit_of_continuous_end
   let y (k : ℕ) := Projective.factorThru (x k) (cokernel.π A)
   have hy (k : ℕ) : y k ≫ cokernel.π A = x k := Projective.factorThru_comp _ _
   let t : Matrix (Fin n) (Fin m) C(S, R) := fun i j ↦
-    e.symm .of (.of (.of (.of (.of (.of (.of (.of (.of (.of (.of (.of ((biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i)))))))))))))
+    e.symm (.of (biproduct.ι (fun _ ↦ P) j ≫ A ≫ biproduct.π (fun _ ↦ P) i))
   let b (k : ℕ) : Fin n → C(S, R) := fun i ↦
-    e.symm .of (.of (.of (.of (.of (.of (.of (.of (.of (.of (.of (.of ((y k ≫ biproduct.π (fun _ ↦ P) i)))))))))))))
+    e.symm (.of (y k ≫ biproduct.π (fun _ ↦ P) i))
   have hsum {p : ℕ} {Y Z : C} (f : Y ⟶ ⨁ fun _ : Fin p ↦ P)
       (g : (⨁ fun _ : Fin p ↦ P) ⟶ Z) :
       f ≫ g = ∑ a, (f ≫ biproduct.π (fun _ ↦ P) a) ≫
@@ -58,9 +58,9 @@ theorem exists_cokernel_limit_of_continuous_end
     rw [Preadditive.sum_comp, Preadditive.comp_sum]
     simp only [Category.assoc]
   have happ (z : P ⟶ ⨁ fun _ : Fin m ↦ P) (i : Fin n) :
-      e (∑ j, t i j * e.symm .of (.of (.of (.of (.of (.of (.of (.of (.of (.of (.of (.of ((z ≫ biproduct.π (fun _ ↦ P) j)))))))))))))) =
-        .of (z) ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
-    rw [map_sum, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
+      (e (∑ j, t i j * e.symm (.of (z ≫ biproduct.π (fun _ ↦ P) j)))).asHom =
+        z ≫ A ≫ biproduct.π (fun _ ↦ P) i := by
+    rw [map_sum, End.sum_asHom, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
     apply Finset.sum_congr rfl
     intro j _
     simp only [map_mul, RingEquiv.apply_symm_apply, End.mul_asHom, t]
@@ -87,13 +87,15 @@ theorem exists_cokernel_limit_of_continuous_end
       (ShortComplex.cokernelSequence_exact A).liftFromProjective _ hz
     have hza : z ≫ A = y l - y k - r ^ (k + 1) • c :=
       (ShortComplex.cokernelSequence_exact A).liftFromProjective_comp _ hz
-    refine ⟨fun j ↦ e.symm .of ((z ≫ biproduct.π (fun _ ↦ P) j)),
-      fun i ↦ e.symm .of ((c ≫ biproduct.π (fun _ ↦ P) i)), fun i ↦ ?_⟩
+    refine ⟨fun j ↦ e.symm (.of (z ≫ biproduct.π (fun _ ↦ P) j)),
+      fun i ↦ e.symm (.of (c ≫ biproduct.π (fun _ ↦ P) i)), fun i ↦ ?_⟩
     apply e.injective
+    apply End.ext
     rw [map_add, map_add, show (r : R) ^ (k + 1) •
-      e.symm .of ((c ≫ biproduct.π (fun _ ↦ P) i)) =
-      r ^ (k + 1) • e.symm .of ((c ≫ biproduct.π (fun _ ↦ P) i)) by
-        rw [← Nat.cast_pow, Nat.cast_smul_eq_nsmul], map_nsmul, happ,
+      e.symm (.of (c ≫ biproduct.π (fun _ ↦ P) i)) =
+      r ^ (k + 1) • e.symm (.of (c ≫ biproduct.π (fun _ ↦ P) i)) by
+        rw [← Nat.cast_pow, Nat.cast_smul_eq_nsmul], map_nsmul,
+      End.add_asHom, End.add_asHom, End.nsmul_asHom, happ,
       ← Category.assoc, hza, Preadditive.sub_comp, Preadditive.sub_comp,
       Preadditive.nsmul_comp]
     simp only [b, RingEquiv.apply_symm_apply]
@@ -110,8 +112,12 @@ theorem exists_cokernel_limit_of_continuous_end
     have hh := congrArg e (hac i)
     rw [map_add, map_add, show (r : R) ^ (k + 1) • c i =
       r ^ (k + 1) • c i by rw [← Nat.cast_pow, Nat.cast_smul_eq_nsmul], map_nsmul] at hh
+    have hh := congrArg End.asHom hh
+    simp only [End.add_asHom, End.nsmul_asHom] at hh
     have hha := happ za i
-    simp only [za, biproduct.lift_π, RingEquiv.symm_apply_apply] at hha
+    simp only [za, biproduct.lift_π] at hha
+    change (e (∑ j, t i j * e.symm (e (a j)))).asHom = _ at hha
+    simp only [RingEquiv.symm_apply_apply] at hha
     rw [hha] at hh
     simpa only [z, zc, b, biproduct.lift_π, RingEquiv.apply_symm_apply,
       Preadditive.add_comp, Preadditive.nsmul_comp, Category.assoc] using hh
