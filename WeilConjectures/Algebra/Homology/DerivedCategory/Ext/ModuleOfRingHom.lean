@@ -33,23 +33,23 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] {R : Type*} [R
 `r • x = x ∘ φ r`. -/
 noncomputable abbrev moduleOfRingHom {X Y : C} (φ : R →+* End Y) (n : ℕ) :
     Module R (Ext X Y n) where
-  smul r x := x.comp (mk₀ (φ r)) (add_zero n)
+  smul r x := x.comp (mk₀ (φ r).asHom) (add_zero n)
   one_smul x := by
-    change x.comp (mk₀ (φ 1)) (add_zero n) = x
+    change x.comp (mk₀ (φ 1).asHom) (add_zero n) = x
     rw [map_one, End.one_asHom, comp_mk₀_id]
   mul_smul r s x := by
-    change x.comp (mk₀ (φ (r * s))) (add_zero n) =
-      (x.comp (mk₀ (φ s)) (add_zero n)).comp (mk₀ (φ r)) (add_zero n)
+    change x.comp (mk₀ (φ (r * s)).asHom) (add_zero n) =
+      (x.comp (mk₀ (φ s).asHom) (add_zero n)).comp (mk₀ (φ r).asHom) (add_zero n)
     rw [map_mul, End.mul_asHom, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
-  smul_zero r := Ext.zero_comp X n (mk₀ (φ r)) n (add_zero n)
-  smul_add r x y := Ext.add_comp x y (mk₀ (φ r)) (add_zero n)
+  smul_zero r := Ext.zero_comp X n (mk₀ (φ r).asHom) n (add_zero n)
+  smul_add r x y := Ext.add_comp x y (mk₀ (φ r).asHom) (add_zero n)
   add_smul r s x := by
-    change x.comp (mk₀ (φ (r + s))) (add_zero n) =
-      x.comp (mk₀ (φ r)) (add_zero n) + x.comp (mk₀ (φ s)) (add_zero n)
-    rw [map_add, mk₀_add, Ext.comp_add]
+    change x.comp (mk₀ (φ (r + s)).asHom) (add_zero n) =
+      x.comp (mk₀ (φ r).asHom) (add_zero n) + x.comp (mk₀ (φ s).asHom) (add_zero n)
+    rw [map_add, End.add_asHom, mk₀_add, Ext.comp_add]
   zero_smul x := by
-    change x.comp (mk₀ (φ 0)) (add_zero n) = 0
-    rw [map_zero, mk₀_zero, Ext.comp_zero]
+    change x.comp (mk₀ (φ 0).asHom) (add_zero n) = 0
+    rw [map_zero, End.zero_asHom, mk₀_zero, Ext.comp_zero]
 
 lemma moduleOfRingHom_smul_def {X Y : C} (φ : R →+* End Y) (n : ℕ) (r : R) (x : Ext X Y n) :
     letI := moduleOfRingHom (X := X) φ n
@@ -76,8 +76,8 @@ noncomputable def postcompLinearMap {X Y Y' : C} (φ : R →+* End Y) (φ' : R �
   { toFun x := x.comp (mk₀ g) (add_zero n)
     map_add' x y := add_comp _ _ _ _
     map_smul' r x := by
-      change (x.comp (mk₀ (φ r)) (add_zero n)).comp (mk₀ g) (add_zero n) =
-        (x.comp (mk₀ g) (add_zero n)).comp (mk₀ (φ' r)) (add_zero n)
+      change (x.comp (mk₀ (φ r).asHom) (add_zero n)).comp (mk₀ g) (add_zero n) =
+        (x.comp (mk₀ g) (add_zero n)).comp (mk₀ (φ' r).asHom) (add_zero n)
       rw [comp_assoc_of_third_deg_zero, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀,
         mk₀_comp_mk₀, hg] }
 
