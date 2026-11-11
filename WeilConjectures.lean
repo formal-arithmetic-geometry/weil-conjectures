@@ -18657,6 +18657,7 @@ public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.PoincareDuality.VerdierBiduality
 public import WeilConjectures.PointCount
 public import WeilConjectures.PointCountBound
+public import WeilConjectures.PointCountBound.Finite
 public import WeilConjectures.PointCountFiber
 public import WeilConjectures.ProEtaleCoefficients.CoefficientComparisonAffineCech
 public import WeilConjectures.ProEtaleCoefficients.CoefficientComparisonConstantChartCounit
@@ -25982,6 +25983,7 @@ public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.CurryIsoCriterion
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.CurveEndpoints
+public import WeilConjectures.WeilSheaf.CurveEndpoints.ExtremeDegrees
 public import WeilConjectures.WeilSheaf.CurvePullback
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.Defs
