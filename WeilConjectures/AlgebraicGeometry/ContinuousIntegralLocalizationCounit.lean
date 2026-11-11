@@ -27,11 +27,11 @@ theorem integralLocalization_zero_isIso (ℓ : ℕ)
     {C : Type*} [Category C] [Preadditive C] (K : C) [IsIso (ℓ • 𝟙 K)]
     (c : Cocone (Mod.smulSequence K ℓ)) (hc : IsColimit c)
     [IsIso (ℓ • 𝟙 c.pt)] : IsIso (c.ι.app 0) := by
-  let t : End K := inv (ℓ • 𝟙 K)
+  let t : End K := .of (inv (ℓ • 𝟙 K))
   let d : Cocone (Mod.smulSequence K ℓ) :=
-    Mod.smulSequenceCocone ℓ (fun n ↦ t ^ n) fun n ↦ by
-      rw [← Category.id_comp (t ^ (n + 1)), ← Preadditive.nsmul_comp, pow_succ, End.mul_asHom,
-        ← Category.assoc]
+    Mod.smulSequenceCocone ℓ (fun n ↦ (t ^ n).asHom) fun n ↦ by
+      rw [← Category.id_comp (t ^ (n + 1)).asHom, ← Preadditive.nsmul_comp, pow_succ,
+        End.mul_asHom, ← Category.assoc]
       simp [t]
   have hz : d.ι.app 0 = 𝟙 K := rfl
   let g := hc.desc d
