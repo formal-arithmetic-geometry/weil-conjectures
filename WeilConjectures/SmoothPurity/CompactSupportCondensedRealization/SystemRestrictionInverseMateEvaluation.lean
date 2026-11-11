@@ -103,8 +103,7 @@ private theorem inverseMateCube
     simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.id_app,
-      Category.id_comp, Category.assoc,
-      TwoSquare.mk, Functor.comp_obj]
+      Category.id_comp, Category.assoc, Functor.comp_obj]
     erw [R₃.map_id]
     simpa only [Category.comp_id, Category.assoc] using hc N
   intro M
