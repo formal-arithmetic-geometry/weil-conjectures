@@ -125,7 +125,7 @@ lemma superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map (n : ℤ
         ((shiftFunctor (DerivedCategory A) n).obj ((singleFunctor A 0).obj (𝟙_ A))))
       (fun i ↦ (homologyFunctor A i).map
         ((shiftFunctor (DerivedCategory A) n).map ((singleFunctor A 0).map r))) =
-      (n.negOnePow : ℤ) • r := by
+      .of ((n.negOnePow : ℤ)) • r := by
   unfold superTrace
   rw [finsum_eq_single _ (-n) fun i hi ↦ by
     rw [traceOrZero_eq_zero_of_isZero

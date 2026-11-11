@@ -99,7 +99,7 @@ lemma pow_refl (n : ℕ) : (Iso.refl X).pow n = Iso.refl X := by
   | succ n ih => rw [pow_succ, ih, Iso.refl_trans]
 
 /-- The powers `e.pow n` of an automorphism are the monoid powers `e.hom ^ n` in `End X`. -/
-lemma pow_hom_eq_pow (n : ℕ) : (e.pow n).hom = (show End X from .of (e.hom)) ^ n := by
+lemma pow_hom_eq_pow (n : ℕ) : (e.pow n).hom = ((show End X from .of (e.hom))).asHom ^ n := by
   induction n with
   | zero => exact (_root_.pow_zero (show End X from e.hom)).symm
   | succ n ih => rw [pow_succ, Iso.trans_hom, ih, _root_.pow_succ' _ n]; rfl
