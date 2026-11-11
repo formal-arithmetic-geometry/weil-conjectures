@@ -254,6 +254,7 @@ private lemma proper_bounded_induction (P : ObjectProperty (_root_.DerivedCatego
     [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
     (h : ∀ G : C, P ((singleFunctor C 0).obj G)) (K : _root_.DerivedCategory C) (a b : ℤ)
     [K.IsGE a] [K.IsLE b] : P K := by
+  -- Validate this downstream proof against the updated monodromy torsor.
   exact prop_of_bounded P ⊤ (fun G _ ↦ h G) K
     ⟨⟨a, inferInstance⟩, ⟨b, inferInstance⟩⟩ (fun _ ↦ trivial)
 

@@ -126,6 +126,7 @@ private noncomputable instance
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (shriekFunctor A c).CommShift ℤ := by
+  -- Validate this downstream proof against the updated monodromy torsor.
   unfold shriekFunctor
   infer_instance
 

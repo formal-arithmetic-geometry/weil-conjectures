@@ -64,6 +64,7 @@ attribute [local instance 2000] etaleSheafModuleAbelian
 @[instance_reducible] noncomputable def etaleSheafModuleHasDerivedCategory
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     HasDerivedCategory.{u + 1} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
+  -- Validate this downstream proof against the updated monodromy torsor.
   unfold etaleSheafModuleAbelian
   infer_instance
 
