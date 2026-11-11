@@ -121,7 +121,6 @@ theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
     rw [PowerSeries.isUnit_iff_constantCoeff, map_prod]
     simp [Polynomial.constantCoeff_coe, hQ0]
   have hkey : NS + ∑ i ∈ se, T i = ∑ i ∈ so, T i := by
-    -- Cancel the common product, which is a unit since each factor has constant coefficient one.
     rw [hfac, hO] at hL
     exact (hunit.mul_left_cancel (by rw [mul_comm, hL, mul_comm])).symm
   have hc := congrArg (PowerSeries.coeff n) hkey
