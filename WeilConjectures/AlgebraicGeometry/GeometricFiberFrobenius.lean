@@ -262,7 +262,8 @@ scheme Frobenius and `g_σ = g_γ⁻¹`. -/
 theorem iterateFrobenius_geometricFiber_mul_eq (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) (m : ℕ) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k * m) =
-      End.asHom (End.of f.geometricFiberFrobenius ^ m) ≫ (f.geometricGaloisFrobenius ^ m).asIso.inv := by
+      End.asHom (End.of f.geometricFiberFrobenius ^ m) ≫
+        (f.geometricGaloisFrobenius ^ m).asIso.inv := by
   induction m with
   | zero =>
     rw [mul_zero, iterateFrobenius_zero, pow_zero, pow_zero]
@@ -278,7 +279,8 @@ Frobenius of the geometric fibre factors as `Fr_X^{(q ^ m)} = g_σᵐ ≫ Φᵐ`
 theorem iterateFrobenius_geometricFiber_mul_eq' (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) (m : ℕ) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k * m) =
-      (f.geometricGaloisFrobenius ^ m).asIso.inv ≫ End.asHom (End.of f.geometricFiberFrobenius ^ m) := by
+      (f.geometricGaloisFrobenius ^ m).asIso.inv ≫
+        End.asHom (End.of f.geometricFiberFrobenius ^ m) := by
   rw [iterateFrobenius_geometricFiber_mul_eq, End.asHom_pow_comp_eq_comp_asHom_pow
     (f.geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv m) m]
 
