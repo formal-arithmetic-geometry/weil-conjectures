@@ -16936,6 +16936,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
+public import WeilConjectures.DeligneLaumon.Reduction.MixedOperations
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
@@ -17513,6 +17514,7 @@ public import WeilConjectures.LeanEval.WeilConjectures
 public import WeilConjectures.LinearAlgebra.Basis.PowQuotientTower
 public import WeilConjectures.LinearAlgebra.Basis.TowerLift
 public import WeilConjectures.LinearAlgebra.Basis.ULiftPowQuotient
+public import WeilConjectures.LinearAlgebra.Charpoly.FiltrationRoots
 public import WeilConjectures.LinearAlgebra.ContinuousIntegralDiagonalRankLocus
 public import WeilConjectures.LinearAlgebra.ContinuousIntegralMatrixLocalSmith
 public import WeilConjectures.LinearAlgebra.DvrMatrixSmithPowers
