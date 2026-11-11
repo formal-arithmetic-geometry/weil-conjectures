@@ -6,8 +6,10 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Ring.Shrink
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Separation.Hausdorff
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
