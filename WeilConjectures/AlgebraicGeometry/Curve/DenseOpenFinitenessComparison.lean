@@ -212,4 +212,3 @@ theorem IsCurve.dense_open_finiteness_comparison {k : Type u} [Field k] [IsAlgCl
 
 
 end AlgebraicGeometry
-

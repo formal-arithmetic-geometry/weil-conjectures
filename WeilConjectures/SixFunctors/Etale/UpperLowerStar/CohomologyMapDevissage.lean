@@ -270,4 +270,3 @@ theorem bijective_cohomologyMap_of_isTorsion [CompactSpace X] [QuasiSeparatedSpa
   exact bijective_cohomologyMap_of_nsmul_eq_zero f hp n hn _ hnD q
 
 end AlgebraicGeometry.Etale
-

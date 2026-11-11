@@ -115,4 +115,3 @@ theorem dense_open_integral_cohomology_finiteness {k : Type u} [Field k] [IsAlgC
 
 
 end AlgebraicGeometry.IsCurve
-
