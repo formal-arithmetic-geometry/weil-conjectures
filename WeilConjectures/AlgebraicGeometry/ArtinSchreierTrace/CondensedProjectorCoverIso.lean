@@ -6,9 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.ArtinSchreierTraceComparison
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
-
-import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 
 /-! # Transport of character-projector images under an isomorphism of covers -/
 
