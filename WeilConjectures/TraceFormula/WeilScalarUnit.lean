@@ -109,6 +109,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 lemma scalarEndRingHom_eq_map (Y : Scheme.{u}) (c : _root_.PadicAlgCl ℓ) :
     scalarEndRingHom ℓ Y c = .of ((upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y).map
+      (X := Mod.regular (Profinite.padicAlgClRingObj ℓ))
+      (Y := Mod.regular (Profinite.padicAlgClRingObj ℓ))
       (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c).asHom) := by
   rw [scalarEndRingHom_apply]
   apply End.ext
