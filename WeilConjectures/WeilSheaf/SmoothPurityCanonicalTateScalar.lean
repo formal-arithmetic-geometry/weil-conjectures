@@ -44,14 +44,14 @@ noncomputable def purityCanonicalTateOneTrivialization :
 root trivialization. -/
 lemma purityCanonicalTateOneTrivialization_weil :
     (Nat.card k : ℤ) •
-        ((upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.hom
+        ((upperStarTateTwistOneIso ℓ a.geometricGaloisFrobenius.asIso.hom
           a.geometricFiberToAlgebraicClosure).hom ≫
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom) =
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom).map
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.hom).map
           (purityCanonicalTateOneTrivialization ℓ a hζ hζ').hom ≫
         (Functor.Monoidal.εIso
           (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
-            a.geometricGaloisFrobenius.hom)).inv := by
+            a.geometricGaloisFrobenius.asIso.hom)).inv := by
   have h := CategoryTheory.K4Native.scalarEquation_conjugate_named
     (purityScalarFrobeniusPull ℓ a)
     (purityScalarTateCompare ℓ a) (purityScalarUnitCompare ℓ a)
