@@ -339,7 +339,7 @@ private theorem existsPresentation (O : Sheaf J CommRingCat.{u})
   have : IsIso (ringedDerivedHomUnit O E) := by
     dsimp only [ringedDerivedHomUnit]
     repeat' apply IsIso.comp_isIso'
-    all_goals first | infer_instance | skip
+    all_goals try infer_instance
     change IsIso ((derivedInternalHom J O).mapIso ((Iso.refl _).prod e)).hom
     infer_instance
   have : IsIso (ringedCechCompletionUnit O (ringedExtendedCech O 0 b).1
