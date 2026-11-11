@@ -719,5 +719,3 @@ theorem completed_koszul_constant_transport
   rw [← H.map_comp, δ.hom_inv_id_app, H.map_id, Category.comp_id]
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.

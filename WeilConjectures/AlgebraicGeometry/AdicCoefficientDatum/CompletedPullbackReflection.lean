@@ -170,3 +170,5 @@ theorem AdicCoefficientDatum.completedPull_reflection {U V : Scheme.{t}} (u : U 
       exact hb
 
 end AlgebraicGeometry.Scheme
+
+-- PS351 downstream validation target; removed after checking.

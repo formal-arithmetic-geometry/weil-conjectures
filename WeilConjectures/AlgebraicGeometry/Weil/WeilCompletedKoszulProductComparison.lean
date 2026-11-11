@@ -494,5 +494,3 @@ theorem completed_fiber_roos_comparison_on_complex
   exact hei.trans (koszul_roos_augment_unit O r b N γ hγ (fun _ _ ↦ rfl))
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.

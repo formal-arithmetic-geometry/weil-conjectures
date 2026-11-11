@@ -500,5 +500,3 @@ theorem completed_constant_presentation_transport
       T d β hβ F.functor δD r a ha C }⟩
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.

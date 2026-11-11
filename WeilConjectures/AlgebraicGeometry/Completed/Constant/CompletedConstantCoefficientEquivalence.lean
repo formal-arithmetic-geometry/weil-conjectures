@@ -872,5 +872,3 @@ theorem completed_constant_coefficient_equivalence
   exact comparisonFiniteReduction_unit T d M n
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.
