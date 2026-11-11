@@ -20,11 +20,16 @@ Source: Stacks Project, Tags 015E and 03FD.
 
 private meta def ps043ExprDiff (fuel : Nat) (path : String)
     (a b : Lean.Expr) : Lean.MetaM Unit := do
+  let a := a.consumeMData
+  let b := b.consumeMData
   if a == b then return
   match fuel with
   | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
   | n + 1 =>
-    if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
+    if a.isApp && b.isApp &&
+        (a.getAppFn == b.getAppFn ||
+          (a.getAppFn.isConst && b.getAppFn.isConst &&
+            a.getAppFn.constName! == b.getAppFn.constName!)) &&
         a.getAppArgs.size == b.getAppArgs.size then
       for i in [:a.getAppArgs.size] do
         ps043ExprDiff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
@@ -79,7 +84,8 @@ private theorem moduleComparisonEquiv_siteSections
     let actual ← Lean.Meta.zetaReduce
       (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h))))
     ps043ExprDiff 12 "type" actual expected
-  exact h
+  simpa only [sectionsComparisonNatIso, siteExtNatIso, siteHNatIso,
+    Iso.refl_trans, Iso.trans_refl, extSourceNatIso, siteSectionsObjIso] using h
   run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
 
 set_option maxHeartbeats 800000 in
@@ -145,6 +151,7 @@ theorem ext_sections_factorization
     let actual ← Lean.Meta.zetaReduce
       (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h))))
     ps043ExprDiff 12 "type" actual expected
+  dsimp only [id, AlgebraicGeometry.Scheme.Modules.H, Sheaf.functorH] at h ⊢
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
