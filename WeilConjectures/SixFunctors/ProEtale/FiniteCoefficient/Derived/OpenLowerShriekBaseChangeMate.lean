@@ -105,7 +105,8 @@ lemma mateEquiv_openImmersionLowerShriekBaseChangeMap [IsOpenImmersion j] [IsOpe
       (openImmersionLowerShriekBaseChangeMap A sq) = ProEtale.baseChangeMap A sq := by
     rw [openImmersionLowerShriekBaseChangeMap, Equiv.apply_symm_apply]
   rw [hc, baseChangeMap_eq_mateEquiv] at h
-  ext1 X
+  apply NatTrans.ext
+  funext X
   exact NatTrans.congr_app h X
 
 /-- The transport `Lf^* ≅ Lg^*` along `f = g` is induced by `f^* ≅ g^*`. -/
