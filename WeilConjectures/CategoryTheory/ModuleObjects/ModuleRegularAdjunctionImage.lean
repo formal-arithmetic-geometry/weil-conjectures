@@ -76,8 +76,8 @@ theorem image_tensor_regular_isIso (e₁ e₂ e₃ : End (G.obj (Mod.regular S))
     IsIso (((image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
         G.map (Mod.regularMul S)) ≫ factorThruImage e₃.asHom) := by
   rw [← isIso_iff_of_reflects_iso _ F]
-  have : IsIso (F.map (((image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫ μ G (Mod.regular S) (Mod.regular S) ≫
-        G.map (Mod.regularMul S)) ≫ factorThruImage e₃.asHom) ≫
+  have : IsIso (F.map (((image.ι e₁.asHom ⊗ₘ image.ι e₂.asHom) ≫
+        μ G (Mod.regular S) (Mod.regular S) ≫ G.map (Mod.regularMul S)) ≫ factorThruImage e₃.asHom) ≫
         F.map (image.ι e₃.asHom) ≫ adj.counit.app (Mod.regular S)) := by
     rw [← F.map_comp_assoc, Category.assoc, image.fac, h, F.map_comp, F.map_comp,
       Category.assoc, Category.assoc]
