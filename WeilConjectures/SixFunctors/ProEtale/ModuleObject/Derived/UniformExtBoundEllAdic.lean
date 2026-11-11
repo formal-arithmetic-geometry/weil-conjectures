@@ -62,6 +62,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
 lemma hasFiniteCohomologicalDimension_residueFieldCoeff (E : FiniteIntermediateField ℓ)
     (hk : Finite k ∨ IsSepClosed k) :
     Etale.HasFiniteCohomologicalDimension (ResidueFieldCoeff.{u} ℓ E) (Spec (.of k)) := by
+
   rcases hk with hk | hk
   · exact Etale.hasFiniteCohomologicalDimension_of_finite ℓ (natCast_eq_zero_residueFieldCoeff ℓ E)
   · refine Etale.hasFiniteCohomologicalDimension_of_isSepClosed _ (fun x ↦ ?_) (𝟙 _)

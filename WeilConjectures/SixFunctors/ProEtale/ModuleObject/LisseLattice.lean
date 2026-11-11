@@ -52,6 +52,7 @@ sections of a sheaf over every object, an empty scheme, are terminal. -/
 lemma isZero_mod_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
     {R : Sheaf (ProEt.topology X) Ab.{u + 1}} [MonObj R]
     (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) R) : IsZero M := by
+
   have hX : IsZero M.X := by
     refine (IsZero.iff_id_eq_zero _).2 (Sheaf.hom_ext (NatTrans.ext (funext fun T ↦ ?_)))
     have : IsEmpty T.unop.left := ⟨fun x ↦ isEmptyElim (α := X) (T.unop.hom.base x)⟩

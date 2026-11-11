@@ -44,6 +44,7 @@ open scoped CategoryTheory.Obj
 lemma Matrix.eq_of_mul_eq_one_of_mul_eq_one {K : Type*} [Field K] {m n : ℕ}
     (A : Matrix (Fin m) (Fin n) K) (B : Matrix (Fin n) (Fin m) K) (hBA : B * A = 1)
     (hAB : A * B = 1) : n = m := by
+
   have h₁ : n ≤ m := by
     have := (Matrix.rank_mul_le_right B A).trans A.rank_le_height
     rwa [hBA, Matrix.rank_one, Fintype.card_fin] at this
