@@ -209,6 +209,7 @@ import WeilConjectures.ConstructibleSheaf.LisseRankOne
 import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModules
+import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 import WeilConjectures.NumberTheory.Padics.IntegersModPow
 import WeilConjectures.RingTheory.AdicCompletionNoetherianOfQuotient
 import WeilConjectures.RingTheory.FactorsThroughLocalization
@@ -294,27 +295,13 @@ theorem spEllQuotient_finite_continuous (E : PadicAlgCl.FiniteIntermediateField 
     @Continuous _ _ (spIntegersTopology ℓ E) ⊥
       (Ideal.Quotient.mk (spTateEllIdeal ℓ E n)) := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-  let : NormedSpace (Padic ℓ) E.1 :=
-    { norm_smul_le c x := by
-        change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
-          ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
-        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
-          PadicAlgCl.norm_extends] }
-  let : ProperSpace E.1 := FiniteDimensional.proper (Padic ℓ) E.1
   let : TopologicalSpace (spEllQuotient ℓ E n) := ⊥
   let : DiscreteTopology (spEllQuotient ℓ E n) := ⟨rfl⟩
   have hq : Continuous (Ideal.Quotient.mk (spTateEllIdeal ℓ E n)) :=
     PadicAlgCl.continuous_integersModPowMk ℓ E.1 (n + 1)
   refine ⟨?_, hq⟩
-  have hclosed : IsCompact (PadicAlgCl.integers ℓ E.1 : Set E.1) := by
-    have heq : (PadicAlgCl.integers ℓ E.1 : Set E.1) = Metric.closedBall 0 1 := by
-      ext x
-      simp only [SetLike.mem_coe, Metric.mem_closedBall, dist_zero_right]
-      exact NNReal.coe_le_coe.symm
-    rw [heq]
-    exact isCompact_closedBall 0 1
   have : CompactSpace (PadicAlgCl.integers ℓ E.1) :=
-    isCompact_iff_compactSpace.mp hclosed
+    PadicAlgCl.compactSpace_integers ℓ E.1
   have himage : IsCompact (Set.univ : Set (spEllQuotient ℓ E n)) := by
     rw [← Set.range_eq_univ.mpr (Ideal.Quotient.mk_surjective
       (I := spTateEllIdeal ℓ E n))]
