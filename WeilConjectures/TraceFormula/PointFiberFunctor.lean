@@ -353,4 +353,3 @@ theorem exists_fiberFunctor_point :
     fun _ hM ↦ exists_pointFiberFunctor_obj_iso ℓ k hM, ⟨pointFiberFunctorUnitIso ℓ k⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-

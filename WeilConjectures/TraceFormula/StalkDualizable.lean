@@ -54,4 +54,3 @@ theorem nonempty_hasRightDual_upperStar_homology
   exact ⟨{ rightDual := _, exact := b.exactPairing }⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
