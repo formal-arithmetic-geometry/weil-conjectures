@@ -66,6 +66,7 @@ private theorem pointEnd_pullback_unit
       ProEtale.PullbackScalar.pointScalar Λ Z (Mod.regularEndRingHom a) =
         Mod.regularEndRingHom
           (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Z) a) := by
+    apply End.ext
     apply Mod.hom_ext
     rw [ProEtale.PullbackScalar.pointScalar_hom, pointEnd_hom]
     rfl
