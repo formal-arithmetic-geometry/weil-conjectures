@@ -120,7 +120,8 @@ variable (M : Action AddCommGrpCat.{w} G)
 
 /-- The `G`-equivariant maps `Φ.fiber.obj X → M`. -/
 def equivariantMaps (X : C) : AddSubgroup (Φ.fiber.obj X → M.V) where
-  carrier := {f | ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).asHom.app X x) = (M.ρ σ).asHom.hom (f x)}
+  carrier := {f | ∀ (σ : G) (x : Φ.fiber.obj X),
+    f ((act σ).asHom.app X x) = (M.ρ σ).asHom.hom (f x)}
   zero_mem' σ x := by simp
   add_mem' {f g} hf hg σ x := by simp [hf σ x, hg σ x]
   neg_mem' {f} hf σ x := by simp [hf σ x]
@@ -295,7 +296,8 @@ noncomputable def fromEquivariantSheaf (M : Action AddCommGrpCat.{w} G) :
     change Φ.toPresheafFiber X x _ ≫ Φ.presheafFiberAct act _ σ ≫
         Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) =
       Φ.toPresheafFiber X x _ ≫
-        Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) ≫ (M.ρ σ).asHom
+        Φ.presheafFiberDesc (Φ.evalEquivariantMaps act M) (Φ.evalEquivariantMaps_w act M) ≫
+          (M.ρ σ).asHom
     rw [toPresheafFiber_presheafFiberAct_assoc,
       Φ.toPresheafFiber_presheafFiberDesc _ (Φ.evalEquivariantMaps_w act M),
       Φ.toPresheafFiber_presheafFiberDesc_assoc _ (Φ.evalEquivariantMaps_w act M)]
