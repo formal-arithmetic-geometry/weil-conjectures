@@ -1360,6 +1360,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDi
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedExchangeCoherence
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedExchangeUnit
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedProperBaseChange
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullback
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackInterface
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
@@ -20447,6 +20448,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Counit
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.IdentityPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso
@@ -22547,6 +22549,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquarePa
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareProEtalePathNormalization
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonUnit
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.NaturalityPastingComparison
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.OpenImmersionFieldBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.StrictlyHenselianBaseChange
@@ -22614,6 +22617,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealization
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AmbientAdjointClass
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.BaseChangePasting
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.BoundedHom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
