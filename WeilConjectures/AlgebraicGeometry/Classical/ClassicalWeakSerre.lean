@@ -25,8 +25,8 @@ Classical pro-étale module sheaves are closed under kernels, cokernels and exte
 (blueprint: `corollary-bounded-below-classical-complexes--1`).
 
 Kernels and cokernels: classical sheaves form the essential image of the exact fully faithful
-functor `ν^*`. Extensions: the derived counit of `ν^* ⊣ Rν_*` is invertible on classical sheaves
-placed in degree `0`, hence, by the triangle attached to a short exact sequence, on the middle
+functor `ν^*`. Extensions: the derived counit of `ν^* ⊣ Rν_*` is invertible on classical
+sheaves placed in degree `0`, hence, by the triangle attached to a short exact sequence, on the middle
 term, which is therefore `ν^*` of the étale sheaf `H⁰(Rν_* G)`.
 -/
 
@@ -132,7 +132,8 @@ instance isClosedUnderExtensions_isClassicalModuleFor (X : Scheme.{u}) (Λ : Typ
         ((F₀.mapDerivedCategoryPlusSingleFunctor 0).app M ≪≫
           (DerivedCategory.Plus.singleFunctor B 0).mapIso eG).symm
     have h₂ : IsIso (adj.counit.app hS.singleTrianglePlus.obj₂) :=
-      NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ adj.counit hS.singleTrianglePlus_distinguished
+      NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ adj.counit
+        hS.singleTrianglePlus_distinguished
         (hsingle _ h₁) (hsingle _ h₃)
     rw [isClassicalModuleFor_eq_essImage]
     exact ⟨(DerivedCategory.Plus.homologyFunctor A 0).obj
