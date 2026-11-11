@@ -47,5 +47,4 @@ lemma deformationSpaceSection_toBlowup_blowupMap :
       AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace := by
   rw [IdealSheafData.deformationSpaceToBlowup_blowupMap, deformationSpaceSection_toPolynomialSpec]
 
-
 end AlgebraicGeometry.Scheme.Hom
