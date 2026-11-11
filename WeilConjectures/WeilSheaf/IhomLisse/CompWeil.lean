@@ -45,7 +45,7 @@ noncomputable abbrev frobeniusIhomComparison
     (WeilSheaf.frobeniusPullback k₀ l X).obj ((AdicSheaf.ihom M).obj N) ⟶
       (AdicSheaf.ihom ((WeilSheaf.frobeniusPullback k₀ l X).obj M)).obj
         ((WeilSheaf.frobeniusPullback k₀ l X).obj N) :=
-  (adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+  (adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     M).inv.app N
 
 /-- The comparison for the Frobenius pullback, an automorphism, is an isomorphism. -/
@@ -58,22 +58,23 @@ instance (M N : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
 lemma uncurryHom_frobeniusIhomComparison
     (M N : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     Mod.uncurryHom (frobeniusIhomComparison k₀ l X M N) =
-      Functor.LaxMonoidal.μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[
+      Functor.LaxMonoidal.μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
         WeilCoefficients.{u} l] _ _ ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.evaluation M N) := by
-  have : (Mod.mapModComap (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[
+  have : (Mod.mapModComap (G := (
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
       WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)).IsEquivalence :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
   exact (Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) M N).symm
 
 /-- The Weil structure of the internal hom is the transport of the Weil structures. -/
 lemma ihom_str_eq_trIso (A B : ProEtaleWeilSheaf k₀ l X) :
     (ihom k₀ l X A B).str = Mod.trIso (adicConstantSheafToLowerStar l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
       (fun M N ↦ frobeniusIhomComparison k₀ l X M N) A.str B.str := by
   unfold ProEtaleWeilSheaf.ihom
   rw [IsoAlgebra.mk_str]
@@ -89,9 +90,10 @@ theorem ihomIhomComparison_comm (a H L K : ProEtaleWeilSheaf k₀ l X) :
       Mod.ihomIhomComparison a.carrier H.carrier L.carrier K.carrier := by
   rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom]
   exact Mod.map_ihomIhomComparison_comp_of_eq
-    (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l])
+    (G := (
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l])
     (ρ := adicConstantSheafToLowerStar l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (c := fun M N ↦ frobeniusIhomComparison k₀ l X M N) uncurryHom_frobeniusIhomComparison
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) a.str H.str L.str K.str
     _ (ihom_str_eq_trIso H L) _ (ihom_str_eq_trIso a H) _
