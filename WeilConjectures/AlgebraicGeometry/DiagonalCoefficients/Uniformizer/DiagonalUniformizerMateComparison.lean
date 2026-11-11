@@ -124,7 +124,7 @@ private theorem push_conjugate
     Functor.leftUnitor_hom_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.comp_obj, Functor.comp_map, Adjunction.homEquiv_unit, Functor.map_comp,
     Category.id_comp] at he ⊢
-  repeat first | erw [Category.id_comp] at he | erw [Category.comp_id] at he
+  repeat erw [Category.comp_id] at he
   exact he
 
 private theorem exactDerivedAdj
