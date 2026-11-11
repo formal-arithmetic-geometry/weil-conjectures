@@ -283,5 +283,3 @@ theorem adicResidue_cech_quotient_cone
       ((congrArg (fun z ↦ z ≫ c.π.app (op n)) hf).trans (hleg n))
 
 end AlgebraicGeometry.Scheme
-
--- PS360 downstream validation.
