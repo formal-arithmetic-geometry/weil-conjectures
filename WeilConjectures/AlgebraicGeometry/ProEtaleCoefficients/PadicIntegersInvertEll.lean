@@ -165,11 +165,11 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     ∃ j : padicIntegersRegularModule X ℓ E ⟶ padicSubfieldIntegralModule X ℓ E,
       j.hom = padicIntegersToPadicSubfield X ℓ E ∧
       ∃ t : End (padicSubfieldIntegralModule X ℓ E),
-        (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) ≫ t = 𝟙 _ ∧
-        t ≫ (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) = 𝟙 _ ∧
+        (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) ≫ t.asHom = 𝟙 _ ∧
+        t.asHom ≫ (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) = 𝟙 _ ∧
         ∃ α : padicIntegersEllSequence X ℓ E ⟶
             (Functor.const ℕ).obj (padicSubfieldIntegralModule X ℓ E),
-          (∀ m : ℕ, α.app m = j ≫ t ^ m) ∧
+          (∀ m : ℕ, α.app m = j ≫ (t ^ m).asHom) ∧
           Nonempty (IsColimit
             ({ pt := padicSubfieldIntegralModule X ℓ E, ι := α } :
               Cocone (padicIntegersEllSequence X ℓ E))) ∧
@@ -198,8 +198,8 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     have h := (Mod.comap (padicIntegersToPadicSubfield X ℓ E)).map_isIso
       (ℓ • 𝟙 (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E.1) X)))
     simpa only [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id] using h
-  let t : End (padicSubfieldIntegralModule X ℓ E) := inv (ℓ • 𝟙 _)
-  have hpow (n : ℕ) : α.app n = α.app 0 ≫ t ^ n := by
+  let t : End (padicSubfieldIntegralModule X ℓ E) := .of (inv (ℓ • 𝟙 _))
+  have hpow (n : ℕ) : α.app n = α.app 0 ≫ (t ^ n).asHom := by
     induction n with
     | zero => simp [End.one_asHom]
     | succ n ih =>
