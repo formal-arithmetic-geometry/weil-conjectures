@@ -295,9 +295,11 @@ lemma ProEtaleWeilSheaf.torsorPushforward_str_mul :
         (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom) ≫
       MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
         (W ↘ Spec (CommRingCat.of k₀)).geometricFiber)) =
-      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+          l]
           _ _ ≫
-        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l].map
+        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+          l].map
           (MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
             (W ↘ Spec (CommRingCat.of k₀)).geometricFiber))) ≫
         (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom := by
