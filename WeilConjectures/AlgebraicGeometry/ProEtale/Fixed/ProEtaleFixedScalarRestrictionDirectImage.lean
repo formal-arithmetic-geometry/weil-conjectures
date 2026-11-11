@@ -135,11 +135,6 @@ private theorem restriction_underived_mate
           Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ) := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
-    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   rw [conjugateEquiv_upperStarRestrictScalarsIso_hom]
   ext M ⟨U⟩ x
