@@ -117,7 +117,7 @@ theorem evaluation_successor_of_squares (W : Scheme.{u})
   congr 2
   congr 1
   funext s t
-  congr 1
+  apply congrArg (fun v ↦ (coefficientEndEquiv l E W n v).asHom)
   apply LocallyConstant.ext
   intro x
   let w : LocallyConstant (ConnectedComponents W)
