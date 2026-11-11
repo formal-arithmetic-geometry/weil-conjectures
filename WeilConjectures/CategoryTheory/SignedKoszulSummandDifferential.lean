@@ -42,14 +42,16 @@ variable (P Q : CochainComplex E ℤ) (p t n : ℤ) (h : p + t = n)
   (f : 𝟙_ E ⟶ P.X p) (g : 𝟙_ E ⟶ Q.X t)
 
 private theorem tensorPoint_precomp_left (s : End (𝟙_ E)) :
-    tensorPoint P Q p t n h (s ≫ f) g = s ≫ tensorPoint P Q p t n h f g := by
+    tensorPoint P Q p t n h (s.asHom ≫ f) g =
+      s.asHom ≫ tensorPoint P Q p t n h f g := by
   unfold tensorPoint
   rw [unitors_inv_equal, rightUnitor_inv_comp_tensorHom_assoc]
   simp only [Category.assoc, rightUnitor_inv_naturality_assoc,
     tensorHom_def, comp_whiskerRight]
 
 private theorem tensorPoint_precomp_right (s : End (𝟙_ E)) :
-    tensorPoint P Q p t n h f (s ≫ g) = s ≫ tensorPoint P Q p t n h f g := by
+    tensorPoint P Q p t n h f (s.asHom ≫ g) =
+      s.asHom ≫ tensorPoint P Q p t n h f g := by
   unfold tensorPoint
   simp only [leftUnitor_inv_comp_tensorHom_assoc, Category.assoc]
 
@@ -100,7 +102,8 @@ private theorem negativeFactorBasis_d_neg
     (O : Sheaf J CommRingCat.{u}) (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedNegativeKoszulFactorBasis O b m (-1) ≫
         (ringedNegativeKoszulFactor O b m).d (-1) 0 =
-      ((ringedKoszulScalar O b) ^ (m + 1)) ≫ ringedNegativeKoszulFactorBasis O b m 0 := by
+      ((ringedKoszulScalar O b) ^ (m + 1)).asHom ≫
+        ringedNegativeKoszulFactorBasis O b m 0 := by
   simp [ringedNegativeKoszulFactorBasis, ringedNegativeKoszulFactor,
     HomologicalComplex.double_d]
 
@@ -226,11 +229,11 @@ private theorem negativeBasis_d_insert_term (r : ℕ)
           (-1) (n + 1 + 1) (n + 1) (by omega)
           (ringedNegativeKoszulFactorBasis O (b 0) m (-1))
           ((((-1 : ℤ) ^ (S.filter (fun j ↦ j < i)).card) •
-            ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))) ≫
+            ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))).asHom ≫
             ringedNegativeKoszulBasis O r (fun j ↦ b j.succ) m (S.erase i) (n + 1 + 1)) =
       (((-1 : ℤ) ^
         ((insert 0 (S.map (Fin.succEmb r))).filter (fun j ↦ j < i.succ)).card) •
-        ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))) ≫
+        ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))).asHom ≫
         ringedNegativeKoszulBasis O (r + 1) b m
           ((insert 0 (S.map (Fin.succEmb r))).erase i.succ) (n + 1) := by
   erw [tensorPoint_precomp_right, earlier_insert_zero,
@@ -245,13 +248,13 @@ private theorem negativeBasis_d_insert (r : ℕ)
     ringedNegativeKoszulBasis O r (fun i ↦ b i.succ) m T k ≫
         (ringedNegativeKoszul O r (fun i ↦ b i.succ) m).d k (k + 1) =
       ∑ i ∈ T, (((-1 : ℤ) ^ (T.filter (fun j ↦ j < i)).card) •
-        ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))) ≫
+        ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))).asHom ≫
         ringedNegativeKoszulBasis O r (fun i ↦ b i.succ) m (T.erase i) (k + 1)) :
     ringedNegativeKoszulBasis O (r + 1) b m (insert 0 (S.map (Fin.succEmb r))) n ≫
         (ringedNegativeKoszul O (r + 1) b m).d n (n + 1) =
       ∑ i ∈ (insert 0 (S.map (Fin.succEmb r))), (((-1 : ℤ) ^
         ((insert 0 (S.map (Fin.succEmb r))).filter (fun j ↦ j < i)).card) •
-        ((ringedKoszulScalar O (b i)) ^ (m + 1))) ≫
+        ((ringedKoszulScalar O (b i)) ^ (m + 1))).asHom ≫
         ringedNegativeKoszulBasis O (r + 1) b m
           ((insert 0 (S.map (Fin.succEmb r))).erase i) (n + 1) := by
   classical
@@ -276,13 +279,13 @@ private theorem negativeBasis_d_map (r : ℕ)
     ringedNegativeKoszulBasis O r (fun i ↦ b i.succ) m T k ≫
         (ringedNegativeKoszul O r (fun i ↦ b i.succ) m).d k (k + 1) =
       ∑ i ∈ T, (((-1 : ℤ) ^ (T.filter (fun j ↦ j < i)).card) •
-        ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))) ≫
+        ((ringedKoszulScalar O (b i.succ)) ^ (m + 1))).asHom ≫
         ringedNegativeKoszulBasis O r (fun i ↦ b i.succ) m (T.erase i) (k + 1)) :
     ringedNegativeKoszulBasis O (r + 1) b m (S.map (Fin.succEmb r)) n ≫
         (ringedNegativeKoszul O (r + 1) b m).d n (n + 1) =
       ∑ i ∈ (S.map (Fin.succEmb r)), (((-1 : ℤ) ^
         ((S.map (Fin.succEmb r)).filter (fun j ↦ j < i)).card) •
-        ((ringedKoszulScalar O (b i)) ^ (m + 1))) ≫
+        ((ringedKoszulScalar O (b i)) ^ (m + 1))).asHom ≫
         ringedNegativeKoszulBasis O (r + 1) b m
           ((S.map (Fin.succEmb r)).erase i) (n + 1) := by
   classical
@@ -301,7 +304,7 @@ private theorem negativeBasis_d (r : ℕ)
     (I : Finset (Fin r)) (n : ℤ) :
     ringedNegativeKoszulBasis O r b m I n ≫ (ringedNegativeKoszul O r b m).d n (n + 1) =
       ∑ i ∈ I, (((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card) •
-        ((ringedKoszulScalar O (b i)) ^ (m + 1))) ≫
+        ((ringedKoszulScalar O (b i)) ^ (m + 1))).asHom ≫
         ringedNegativeKoszulBasis O r b m (I.erase i) (n + 1) := by
   classical
   induction r generalizing n with
@@ -358,7 +361,7 @@ theorem ringedNegativeKoszulBasis_d_succ
         (-(I.card : ℤ)) (-(I.card : ℤ) + 1) =
       ∑ i ∈ I, if h : -(I.card : ℤ) + 1 = -((I.erase i).card : ℤ) then
         ((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •
-            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)) ≫
+            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)).asHom ≫
           ringedNegativeKoszulBasis O (r + 1)
             (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m
             (I.erase i) (-((I.erase i).card : ℤ)) ≫
@@ -379,7 +382,7 @@ theorem ringedNegativeKoszulBasis_d_succ
   symm
   exact congrArg (fun f ↦
     ((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •
-      ((ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1))) ≫ f)
+      ((ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1))).asHom ≫ f)
     (negativeBasis_transport O (r + 1)
       (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m (I.erase i)
       _ _ hsrc.symm)
