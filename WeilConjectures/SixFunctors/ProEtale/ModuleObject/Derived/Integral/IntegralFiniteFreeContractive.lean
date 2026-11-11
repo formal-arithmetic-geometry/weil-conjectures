@@ -124,7 +124,7 @@ variable {C : Type v} [Category.{w} C] [Preadditive C] [HasFiniteBiproducts C]
 
 private noncomputable def matrixEnd (A : C) (n : Type) [Fintype n] [DecidableEq n] :
     Matrix n n (End A) →+* End (⨁ fun _ : n => A) where
-  toFun M := biproduct.matrix fun i j => M j i
+  toFun M := .of (biproduct.matrix fun i j => (M j i).asHom)
   map_zero' := by
     apply End.ext
     ext
@@ -132,20 +132,22 @@ private noncomputable def matrixEnd (A : C) (n : Type) [Fintype n] [DecidableEq 
   map_one' := by
     apply End.ext
     ext i j
-    simp [Matrix.one_apply, biproduct.ι_π, eq_comm]
+    by_cases hij : i = j <;> simp [Matrix.one_apply, biproduct.ι_π, hij, eq_comm]
   map_add' M N := by
     apply End.ext
-    change biproduct.matrix (fun i j => (M + N) j i) =
-      biproduct.matrix (fun i j => M j i) + biproduct.matrix (fun i j => N j i)
+    change biproduct.matrix (fun i j => ((M + N) j i).asHom) =
+      biproduct.matrix (fun i j => (M j i).asHom) +
+        biproduct.matrix (fun i j => (N j i).asHom)
     ext
     simp
   map_mul' M N := by
     apply End.ext
-    change biproduct.matrix (fun i j => (M * N) j i) =
-      biproduct.matrix (fun i j => N j i) ≫ biproduct.matrix (fun i j => M j i)
+    change biproduct.matrix (fun i j => ((M * N) j i).asHom) =
+      biproduct.matrix (fun i j => (N j i).asHom) ≫
+        biproduct.matrix (fun i j => (M j i).asHom)
     ext i j
     simp only [biproduct.ι_matrix_assoc, biproduct.matrix_π,
-      biproduct.lift_desc, Matrix.mul_apply, End.mul_asHom, Category.assoc,
+      biproduct.lift_desc, Matrix.mul_apply, End.sum_asHom, End.mul_asHom, Category.assoc,
       biproduct.ι_desc]
 
 private theorem finiteFreeContractive {A : C} (n : Type) [Finite n]
@@ -164,7 +166,7 @@ private theorem finiteFreeContractive {A : C} (n : Type) [Finite n]
       simp only [nsmul_eq_mul, Nat.cast_comm, neg_mul, sub_neg_eq_add]
     rw [heq, mul_add, mul_one] at hz
     exact sub_eq_zero.mpr (by simpa only [mul_assoc, add_comm] using hz)
-  let M : Matrix n n (End A) := fun j i => biproduct.components T i j
+  let M : Matrix n n (End A) := fun j i => .of (biproduct.components T.asHom i j)
   have hM : p • M ∈ (⊥ : TwoSidedIdeal (Matrix n n (End A))).jacobson := by
     rw [← TwoSidedIdeal.matrix_jacobson_bot]
     rw [TwoSidedIdeal.mem_matrix]
@@ -176,7 +178,7 @@ private theorem finiteFreeContractive {A : C} (n : Type) [Finite n]
   have heq : matrixEnd A n (1 - p • M) = (1 - p • T : End (⨁ fun _ : n => A)) := by
     rw [map_sub, map_one, map_nsmul]
     congr 1
-    exact congrArg (p • ·) (biproduct.components_matrix T)
+    exact congrArg (p • ·) (End.ext (biproduct.components_matrix T.asHom))
   rw [heq] at hu
   exact (isUnit_iff_isIso _).mp hu
 
@@ -201,6 +203,6 @@ theorem integralFiniteFree_one_sub_nsmul_isIso (X : Scheme.{u})
     (n : ℕ) (T : Mod.finiteFree R n ⟶ Mod.finiteFree R n) :
     IsIso (𝟙 _ - ℓ • T) := by
   exact finiteFreeContractive (A := Mod.regular R) (Fin n) ℓ
-    (fun f => integralRegular_one_sub_nsmul_isIso ℓ E X R e f) T
+    (fun f => integralRegular_one_sub_nsmul_isIso ℓ E X R e f.asHom) (.of T)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
