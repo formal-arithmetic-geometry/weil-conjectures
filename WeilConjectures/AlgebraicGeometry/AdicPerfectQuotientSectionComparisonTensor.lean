@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientSectionModel
-import all
-  WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
+import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient

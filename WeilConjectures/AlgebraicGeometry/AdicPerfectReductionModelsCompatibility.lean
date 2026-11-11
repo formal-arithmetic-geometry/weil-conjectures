@@ -6,8 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelComplexes
 import WeilConjectures.Algebra.Homology.RingedSiteRestrictionKFlat
-import all
-  WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
+import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 
 /-! # Compatible reductions of constant perfect models -/
 
