@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+
 public import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends
 import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends

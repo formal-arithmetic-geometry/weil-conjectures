@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
-
 /-!
 # The rational points of `Pic^d`
 

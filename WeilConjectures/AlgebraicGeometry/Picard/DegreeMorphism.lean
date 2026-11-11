@@ -8,7 +8,6 @@ module
 public import Mathlib.CategoryTheory.Sites.Subsheaf
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
-
 /-!
 # The degree morphism `Pic_{X/S} ⟶ ℤ` and its kernel
 

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+
 public import Mathlib.FieldTheory.Separable
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.GaloisFiniteInvariantClopenPartition
