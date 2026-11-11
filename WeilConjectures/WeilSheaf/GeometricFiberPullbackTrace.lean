@@ -52,27 +52,28 @@ lemma frobeniusPowStr_comp_eq_of_iso (F : WeilSheaf k₀ l X) {H : AdicSheaf l X
     (e : F.obj.carrier.X ≅
       ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*[WeilCoefficients.{u} l].obj H.X)
     (hF : F.frobeniusStr ≫ e.hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[WeilCoefficients.{u} l].map
           e.hom ≫
         upperStarInvariantHom (WeilCoefficients.{u} l) _
           (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) H.X)
     (m : ℕ) (hm : 1 ≤ m) :
     F.frobeniusPowStr m ≫ e.hom =
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)^*[
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)^*[
         WeilCoefficients.{u} l].map
           e.hom ≫
         upperStarInvariantHom (WeilCoefficients.{u} l) _
           (Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj _ m) H.X := by
   induction m, hm using Nat.le_induction with
   | base =>
-    have p := congrArg Iso.hom (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
+    have p := congrArg (fun e : Aut _ ↦ e.asIso.hom)
+      (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)
     have n := (ProEtale.upperStarCongr (WeilCoefficients.{u} l) p).hom.naturality e.hom
     rw [frobeniusPowStr_one F p, Category.assoc, hF, ← reassoc_of% n,
       upperStarCongr_hom_app_comp_upperStarInvariantHom]
   | succ m hm ih =>
-    have e' : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).hom := by
+    have e' : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).asIso.hom := by
       rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom]
     have n := (upperStarFactor (WeilCoefficients.{u} l) e').hom.naturality e.hom
     rw [Functor.comp_map] at n
@@ -87,18 +88,18 @@ lemma upperStarComp_hom_app_comp_map_inv_comp_frobeniusPowStr (F : WeilSheaf k�
     (e : F.obj.carrier.X ≅
       ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*[WeilCoefficients.{u} l].obj H.X)
     (hF : F.frobeniusStr ≫ e.hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[WeilCoefficients.{u} l].map
           e.hom ≫
         upperStarInvariantHom (WeilCoefficients.{u} l) _
           (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) H.X)
     (m : ℕ) (hm : 1 ≤ m)
-    (hc : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom ≫
+    (hc : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom ≫
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj =
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ 𝟙 X) :
     (ProEtale.upperStarComp (WeilCoefficients.{u} l)
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).hom.app H.X ≫
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)^*[
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)^*[
         WeilCoefficients.{u} l].map
           e.inv ≫ F.frobeniusPowStr m =
       (ProEtale.upperStarCongr (WeilCoefficients.{u} l) hc).hom.app H.X ≫
@@ -107,7 +108,7 @@ lemma upperStarComp_hom_app_comp_map_inv_comp_frobeniusPowStr (F : WeilSheaf k�
         ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*[WeilCoefficients.{u} l].map
           ((ProEtale.upperStarId (WeilCoefficients.{u} l) X).hom.app H.X) ≫ e.inv := by
   have k := frobeniusPowStr_comp_eq_of_iso F e hF m hm
-  have k' : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)^*[
+  have k' : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)^*[
       WeilCoefficients.{u} l].map e.inv ≫ F.frobeniusPowStr m =
         upperStarInvariantHom (WeilCoefficients.{u} l) _
           (Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj _ m) H.X ≫
@@ -128,7 +129,7 @@ theorem traceFunction_eq_trace_galoisGlobalSections_of_iso (F : WeilSheaf k₀ l
     (e : F.obj.carrier.X ≅
       ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*[WeilCoefficients.{u} l].obj H.X)
     (hF : F.frobeniusStr ≫ e.hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[WeilCoefficients.{u} l].map
           e.hom ≫
         upperStarInvariantHom (WeilCoefficients.{u} l) _
           (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) H.X)
@@ -149,14 +150,14 @@ theorem traceFunction_eq_trace_galoisGlobalSections_of_iso (F : WeilSheaf k₀ l
     y.2).trans hx
   subst hx'
   have hY := h.trans (Category.comp_id _).symm
-  have hc : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (n + 1)).hom ≫
+  have hc : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (n + 1)).asIso.hom ≫
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj =
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ 𝟙 X :=
     (Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj _ (n + 1)).trans
       (Category.comp_id _).symm
   have comm := globalSectionsTransport_comm_of_upperStar (WeilCoefficients.{u} l)
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj
-    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (n + 1)).hom (𝟙 X) hc
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (n + 1)).asIso.hom (𝟙 X) hc
     ((ProEtale.upperStarId (WeilCoefficients.{u} l) X).hom.app H.X) (F.frobeniusPowStr (n + 1))
     e.inv
     (upperStarComp_hom_app_comp_map_inv_comp_frobeniusPowStr F e hF (n + 1)
@@ -177,15 +178,15 @@ structures, read on the underlying sheaves. -/
 lemma frobeniusStr_comp_forget_map_eq (F : WeilSheaf k₀ l X) {H : AdicSheaf l X}
     (e : F.obj.carrier ≅ ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj H)
     (hF : (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app F.obj.carrier ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app F.obj.carrier ≫
           F.obj.str.hom ≫ e.hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*ᵃ[l].map e.hom ≫
-        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map e.hom ≫
+        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv.app H ≫
         (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
           (X ↘ Spec (CommRingCat.of k₀)))).hom.app H) :
     F.frobeniusStr ≫ ((AdicSheaf.forget _).mapIso e).hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[WeilCoefficients.{u} l].map
           ((AdicSheaf.forget _).mapIso e).hom ≫
         upperStarInvariantHom (WeilCoefficients.{u} l) _
           (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) H.X := by
@@ -201,10 +202,10 @@ theorem traceFunction_eq_trace_galoisGlobalSections_of_adicIso (F : WeilSheaf k�
     {H : AdicSheaf l X}
     (e : F.obj.carrier ≅ ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj H)
     (hF : (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app F.obj.carrier ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.app F.obj.carrier ≫
           F.obj.str.hom ≫ e.hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*ᵃ[l].map e.hom ≫
-        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map e.hom ≫
+        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv.app H ≫
         (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
           (X ↘ Spec (CommRingCat.of k₀)))).hom.app H)
