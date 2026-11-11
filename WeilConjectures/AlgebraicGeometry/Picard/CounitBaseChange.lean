@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
-public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.RightExactness
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Sections of `F`-classes do not vanish on fibres
