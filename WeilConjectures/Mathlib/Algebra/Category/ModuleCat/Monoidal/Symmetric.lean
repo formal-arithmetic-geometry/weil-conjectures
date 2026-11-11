@@ -114,7 +114,7 @@ theorem trace_eq_algebraMap_linearMapTrace {M : ModuleCat.{u} R} [HasRightDual M
   refine LinearMap.ext_ring ?_
   simp only [hom_comp, LinearMap.comp_apply, hom_ofHom]
   erw [LinearMap.toSpanSingleton_apply, one_smul]
-  simp only [map_sum, End.one_asHom, LinearMap.toMatrix_apply, Matrix.diag_apply]
+  simp only [map_sum, LinearMap.toMatrix_apply, Matrix.diag_apply]
   exact (Finset.sum_congr rfl fun i _ ↦ rfl).trans (mul_one _).symm
 
 end ModuleCat
