@@ -16,6 +16,7 @@ public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+
 import WeilConjectures.AlgebraicGeometry.Proper.Smooth.ProperSmoothCurvesArtinSchreierKernel
 import WeilConjectures.AlgebraicGeometry.FrobeniusLinearVectorBundleKernelConstructible
 
