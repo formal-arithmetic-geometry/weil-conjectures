@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturalityExtension
+meta import Lean
 
 /-! # The Ext-to-abelian-sections part of the comparison
 
@@ -56,9 +57,10 @@ private theorem moduleComparisonEquiv_siteSections
     moduleComparisonEquiv η F x =
       (Abelian.Ext.precompAddEquiv e (T.obj F) p).symm
         ((siteSectionsObjIso J U (T.obj F) p).inv ((a.app F).hom x)) := by
+  run_tac do Lean.logInfo m!"PS043 helper start: {← IO.monoMsNow}"
   subst η
-  exact sectionsComparisonNatIso_apply a (siteSectionsNatIso J U p)
-    (siteExtNatIso J U p ≪≫ extSourceNatIso e p ≪≫ siteHNatIso J p) F x
+  rfl
+  run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
@@ -92,6 +94,7 @@ theorem ext_sections_factorization
       exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm
         (d.inv (((resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
           (fun M _ ↦ forgottenInjectiveAcyclic X M)).app F).hom x))) := by
+  run_tac do Lean.logInfo m!"PS043 main start: {← IO.monoMsNow}"
   let : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
@@ -102,13 +105,22 @@ theorem ext_sections_factorization
     ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
   -- Compare natural isomorphisms before evaluating their components.
   unfold moduleCohomologyExtResolutionEquiv
-  refine moduleComparisonEquiv_siteSections (Opens.grothendieckTopology X)
+  let a := resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
+    (fun M _ ↦ forgottenInjectiveAcyclic X M)
+  run_tac do Lean.logInfo m!"PS043 comparison defined: {← IO.monoMsNow}"
+  have hη : moduleCohomologyExtResolutionNatIso X p = a ≪≫ Functor.isoWhiskerLeft T
+      ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
+        siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
+          extSourceNatIso (terminalSourceIso X) p ≪≫
+            siteHNatIso (Opens.grothendieckTopology X) p) := by
+    unfold moduleCohomologyExtResolutionNatIso
+    rfl
+  run_tac do Lean.logInfo m!"PS043 iso equality proved: {← IO.monoMsNow}"
+  have h := moduleComparisonEquiv_siteSections (Opens.grothendieckTopology X)
     (K := RingedSpace.moduleCohomology X.toRingedSpace p)
-    ⊤ p (terminalSourceIso X)
-    (resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
-      (fun M _ ↦ forgottenInjectiveAcyclic X M))
-    (moduleCohomologyExtResolutionNatIso X p) ?_ F x
-  unfold moduleCohomologyExtResolutionNatIso
-  rfl
+    ⊤ p (terminalSourceIso X) a (moduleCohomologyExtResolutionNatIso X p) hη F x
+  run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
+  exact h
+  run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
