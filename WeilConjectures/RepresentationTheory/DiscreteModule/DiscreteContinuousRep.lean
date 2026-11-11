@@ -42,7 +42,7 @@ variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 /-- The `ℤ`-linear representation underlying a discrete `G`-module. -/
 @[simps]
 def representation (M : DiscreteModule.{w} G) : Representation ℤ G M.obj.V where
-  toFun g := (M.obj.ρ g).hom.toIntLinearMap
+  toFun g := (M.obj.ρ g).asHom.hom.toIntLinearMap
   map_one' := by ext; simp
   map_mul' _ _ := by ext; simp
 
@@ -65,7 +65,7 @@ lemma toDiscreteContinuousRep_obj_V (M : DiscreteModule.{w} G) :
 
 @[simp]
 lemma toDiscreteContinuousRep_obj_ρ_apply (M : DiscreteModule.{w} G) (g : G) (x : M.obj.V) :
-    ((toDiscreteContinuousRep G).obj M).obj.ρ g x = (M.obj.ρ g).hom x :=
+    ((toDiscreteContinuousRep G).obj M).obj.ρ g x = (M.obj.ρ g).asHom.hom x :=
   rfl
 
 @[simp]
@@ -81,9 +81,10 @@ def ofDiscreteContinuousRep :
     Rep.DiscreteContinuousRep.{0, u, max u w} ℤ G ⥤ DiscreteModule.{w} G where
   obj X := ⟨{ V := AddCommGrpCat.of X.obj.V
               ρ :=
-                { toFun g := AddCommGrpCat.ofHom (X.obj.ρ g : X.obj.V →+ X.obj.V)
-                  map_one' := AddCommGrpCat.ext fun x ↦ by simp [End.one_asHom]
-                  map_mul' _ _ := AddCommGrpCat.ext fun x ↦ by simp [End.mul_asHom] } },
+                { toFun g := End.of (AddCommGrpCat.ofHom (X.obj.ρ g : X.obj.V →+ X.obj.V))
+                  map_one' := End.ext (AddCommGrpCat.ext fun x ↦ by simp [End.one_asHom])
+                  map_mul' _ _ :=
+                    End.ext (AddCommGrpCat.ext fun x ↦ by simp [End.mul_asHom]) } },
     fun x ↦ X.property x⟩
   map {X Y} f := ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom (f.hom.hom : X.obj.V →+ Y.obj.V)
@@ -99,7 +100,7 @@ lemma ofDiscreteContinuousRep_obj_V (X : Rep.DiscreteContinuousRep.{0, u, max u 
 @[simp]
 lemma ofDiscreteContinuousRep_obj_ρ_apply (X : Rep.DiscreteContinuousRep.{0, u, max u w} ℤ G)
     (g : G) (x : X.obj.V) :
-    (((ofDiscreteContinuousRep G).obj X).obj.ρ g).hom x = X.obj.ρ g x :=
+    (((ofDiscreteContinuousRep G).obj X).obj.ρ g).asHom.hom x = X.obj.ρ g x :=
   rfl
 
 @[simp]
