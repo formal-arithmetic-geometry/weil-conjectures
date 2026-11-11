@@ -28,9 +28,9 @@ noncomputable def scalarLocalizationUnitCocone
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     {L : A ⥤ B} {U : B ⥤ A} [U.Additive] (adj : L ⊣ U) (K : A)
     [IsIso (ℓ • 𝟙 (L.obj K))] : Cocone (Mod.smulSequence K ℓ) :=
-  let t : End (L.obj K) := inv (ℓ • 𝟙 (L.obj K))
-  Mod.smulSequenceCocone ℓ (fun n ↦ adj.unit.app K ≫ U.map (t ^ n)) fun n ↦ by
-    have ht : (ℓ • 𝟙 (L.obj K)) ≫ t ^ (n + 1) = t ^ n := by
+  let t : End (L.obj K) := .of (inv (ℓ • 𝟙 (L.obj K)))
+  Mod.smulSequenceCocone ℓ (fun n ↦ adj.unit.app K ≫ U.map (t ^ n).asHom) fun n ↦ by
+    have ht : (ℓ • 𝟙 (L.obj K)) ≫ (t ^ (n + 1)).asHom = (t ^ n).asHom := by
       rw [pow_succ, End.mul_asHom, ← Category.assoc]
       simp only [t, IsIso.hom_inv_id, Category.id_comp]
     rw [← Preadditive.comp_nsmul, ← U.map_nsmul, ← ht, Preadditive.nsmul_comp,
