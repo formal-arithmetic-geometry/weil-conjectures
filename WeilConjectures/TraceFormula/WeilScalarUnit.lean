@@ -208,12 +208,12 @@ theorem CategoryTheory.Iso.powSuccStr_symm_trans_hom_eq {C D : Type*} [Category 
       simp
     rw [powSuccStr_zero, Iso.trans_hom, Iso.trans_hom, eqToIso.hom, Iso.symm_hom, ht,
       ← Category.assoc, key _ _ (Category.id_comp e.hom)]
-    exact congrArg (fun s ↦ (ε (e.pow 1).hom).inv ≫ s.asHom) (_root_.pow_one t).symm
+    exact congrArg (fun s : End a ↦ (ε (e.pow 1).hom).inv ≫ s.asHom) (_root_.pow_one t).symm
   | succ n ih =>
     rw [powSuccStr_succ, Iso.trans_hom, Iso.trans_hom, ih, Iso.app_hom, Functor.mapIso_hom,
       Iso.trans_hom, Functor.map_comp, Iso.symm_hom, ht, Category.assoc, reassoc_of% hT,
       reassoc_of% h]
-    exact congrArg (fun s ↦ (ε (e.pow (n + 2)).hom).inv ≫ s.asHom)
+    exact congrArg (fun s : End a ↦ (ε (e.pow (n + 2)).hom).inv ≫ s.asHom)
       (_root_.pow_succ t (n + 1)).symm
 
 /-- If the carrier of an algebra for the identity functor is isomorphic to the unit, by an
