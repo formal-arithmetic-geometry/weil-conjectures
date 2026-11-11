@@ -23,7 +23,6 @@ Source: Stacks Project, Tag 0897, proof; Tags 01SB and 01PB.
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
-
 namespace AlgebraicGeometry
 
 /-- The homogeneous action and local generators give a finite-type quasi-coherent
