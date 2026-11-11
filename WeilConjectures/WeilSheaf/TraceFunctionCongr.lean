@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
+
 public import WeilConjectures.WeilSheaf.StalkIso
 
 /-!
