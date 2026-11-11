@@ -581,5 +581,3 @@ theorem principalConeKoszulRoosComparison
   exact ⟨e, by simpa only [principalKoszulRoosUnit, b] using he⟩
 
 end CategoryTheory
-
--- Downstream validation of PrincipalKoszulDualEndpoints for the stable toolchain.

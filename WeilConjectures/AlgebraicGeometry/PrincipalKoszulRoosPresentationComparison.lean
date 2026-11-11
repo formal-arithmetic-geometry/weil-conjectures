@@ -266,5 +266,3 @@ theorem principalKoszulRoos_presentation_comparison
       D.inverseLimit.map (D.tensorFactors.app P).inv) hαQ
 
 end CategoryTheory
-
--- Downstream validation of PrincipalKoszulDualEndpoints for the stable toolchain.
