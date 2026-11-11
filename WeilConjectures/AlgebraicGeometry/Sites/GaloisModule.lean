@@ -293,7 +293,8 @@ variable {K Ω} in
 lemma galoisPointAct_fiber_map_galoisPointFiberSpec {E : IntermediateField K Ω}
     [FiniteDimensional K E] {X : (Spec (.of K)).Etale} (g : galoisEtaleSpec K Ω E ⟶ X)
     {σ : Gal(Ω/K)} (hσ : σ ∈ E.fixingSubgroup) :
-    (galoisPointAct K Ω σ).asHom.app X ((galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E)) =
+    (galoisPointAct K Ω σ).asHom.app X
+        ((galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E)) =
       (galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E) := by
   rw [NatTrans.naturality_apply, (galoisPointAct_galoisPointFiberSpec_eq_iff σ).2 hσ]
 
