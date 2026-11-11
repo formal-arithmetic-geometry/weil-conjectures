@@ -113,7 +113,7 @@ theorem autAction_baseChangeAut_eq_id_of_distinguished_of_separated {ℓ : ℕ}
     (by simp) hsep
     ((baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype)
     (fun τ ↦ by
-      dsimp only [MonoidHom.comp, baseChangeAutActionHom, Ψ]
+      dsimp only [MonoidHom.comp, baseChangeAutActionHom, MonoidHom.coe_mk, OneHom.coe_mk, Ψ]
       rw [Hom.autAction_naturality, hV _ τ.2, Category.comp_id]) hdivV ⟨σ, hσ⟩
   have key' := congrArg End.asHom key
   dsimp only [MonoidHom.comp, baseChangeAutActionHom, End.one_asHom, Ψ] at key'
