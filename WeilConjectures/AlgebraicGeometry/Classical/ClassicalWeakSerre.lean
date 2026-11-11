@@ -26,8 +26,8 @@ Classical pro-étale module sheaves are closed under kernels, cokernels and exte
 
 Kernels and cokernels: classical sheaves form the essential image of the exact fully faithful
 functor `ν^*`. Extensions: the derived counit of `ν^* ⊣ Rν_*` is invertible on classical
-sheaves placed in degree `0`, hence, by the triangle attached to a short exact sequence, on the middle
-term, which is therefore `ν^*` of the étale sheaf `H⁰(Rν_* G)`.
+sheaves placed in degree `0`, hence, by the triangle attached to a short exact sequence, on
+the middle term, which is therefore `ν^*` of the étale sheaf `H⁰(Rν_* G)`.
 -/
 
 @[expose] public section
