@@ -25,7 +25,6 @@ noncomputable def purity_geometricTateInterfacePairIso
     {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) (d : ℕ) :
     (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj ℓ) a).obj
         (tateTwistNat X ℓ d) ≅ purityTateRootPair ℓ a d := by
-
   let e := purity_pairIso_transport (purityTateFrobeniusCompare ℓ a)
     (purityTatePulledDatum ℓ a d) (purityTateRootDatum ℓ a d)
     ((geometricFiberProjLowerStarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a).app
