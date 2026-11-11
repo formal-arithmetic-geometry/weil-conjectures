@@ -37,6 +37,19 @@ private theorem sectionsComparisonNatIso_apply
       (c.hom.app (T.obj F)) ((b.inv.app (T.obj F)) ((a.hom.app F) x)) := by
   rfl
 
+private theorem sectionsComparisonNatIso_apply_of_eq
+    {A E : Type*} [Category A] [Category E]
+    {R : Type u} [Ring R] {K : A ⥤ ModuleCat.{u} R} {T : A ⥤ E}
+    {B L Q : E ⥤ AddCommGrpCat.{u}}
+    (a : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ B)
+    (b : L ≅ B) (c : L ≅ Q)
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ T ⋙ Q)
+    (hη : η = sectionsComparisonNatIso a b c) (F : A) (x : K.obj F) :
+    moduleComparisonEquiv η F x =
+      (c.hom.app (T.obj F)) ((b.inv.app (T.obj F)) ((a.hom.app F) x)) := by
+  subst η
+  exact sectionsComparisonNatIso_apply a b c F x
+
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
@@ -69,14 +82,24 @@ theorem ext_sections_factorization
       exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm
         (d.inv (((resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
           (fun M _ ↦ forgottenInjectiveAcyclic X M)).app F).hom x))) := by
-  -- Evaluate the generic comparison before exposing the specialized scheme instances.
-  unfold moduleCohomologyExtResolutionEquiv moduleCohomologyExtResolutionNatIso
-  delta RingedSpace.moduleCohomology at x ⊢
-  dsimp only [id, AlgebraicGeometry.Scheme.Modules.H, Sheaf.functorH]
-  change @Eq (Abelian.Ext
-    ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift.{u} ℤ)))
-    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p) _ _
-  erw [sectionsComparisonNatIso_apply]
+  letI : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
+  let Γ := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+    (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let V := forget₂ (ModuleCat.{u}
+    ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
+  -- Compare natural isomorphisms before evaluating their components.
+  unfold moduleCohomologyExtResolutionEquiv
+  refine sectionsComparisonNatIso_apply_of_eq
+    (K := RingedSpace.moduleCohomology X.toRingedSpace p)
+    (resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
+      (fun M _ ↦ forgottenInjectiveAcyclic X M))
+    (siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p)
+    (extSourceNatIso (terminalSourceIso X) p)
+    (moduleCohomologyExtResolutionNatIso X p) ?_ F x
+  unfold moduleCohomologyExtResolutionNatIso
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
