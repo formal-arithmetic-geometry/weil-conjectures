@@ -73,6 +73,7 @@ monoidal. -/
 instance isMonoidal_upperStarCongr_ab_hom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g') :
     NatTrans.IsMonoidal (upperStarCongr Ab.{u + 1} h).hom := by
   subst h
+
   exact inferInstanceAs (NatTrans.IsMonoidal (𝟙 _))
 
 variable {U' U X : Scheme.{u}} (g₁ : U' ⟶ U) (g : U ⟶ X) {g' : U' ⟶ X} (h : g₁ ≫ g = g')
