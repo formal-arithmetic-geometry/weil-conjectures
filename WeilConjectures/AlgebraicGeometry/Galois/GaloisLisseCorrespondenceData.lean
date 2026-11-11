@@ -233,8 +233,8 @@ def galoisFiniteEvaluationAction
     : (pointSmallEtale y).fiber.obj U) (s : F.obj.obj.obj (op U)), κ ((pointSmallEtale
     y).toPresheafFiber U x F.obj.obj s) = (pointSmallEtale y).toPresheafFiber U x
     (galoisUnderlyingSetSheaf Λ F.obj).obj s) ∧ ∀ (g : G) (z : ((d.e Λ).functor.obj F).obj.V), κ
-    ((d.τ Λ).hom.app F (((d.e Λ).functor.obj F).obj.ρ g z)) = (d.γ g).asIso.hom.app (galoisUnderlyingFLC Λ
-    F.obj h) (κ ((d.τ Λ).hom.app F z))
+    ((d.τ Λ).hom.app F (((d.e Λ).functor.obj F).obj.ρ g z)) = (d.γ g).asIso.hom.app
+    (galoisUnderlyingFLC Λ F.obj h) (κ ((d.τ Λ).hom.app F z))
 
 /-- Clause `finiteTensor` of the finite correspondence.
 Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
