@@ -108,18 +108,18 @@ isomorphism of pushforwards. -/
 lemma conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     conjugateEquiv
         ((adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)).comp
-          (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction)
-        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction.comp
+          (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction)
+        ((adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction.comp
           (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h)))
       (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv =
-    (adicLowerStarComp l f.geometricGaloisFrobenius.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
+    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        g.geometricGaloisFrobenius.hom).inv := by
+        g.geometricGaloisFrobenius.asIso.hom).inv := by
   set j := Scheme.Hom.geometricFiberMap φ h
-  set a := f.geometricGaloisFrobenius
-  set b := g.geometricGaloisFrobenius
+  set a := f.geometricGaloisFrobenius.asIso
+  set b := g.geometricGaloisFrobenius.asIso
   set adj := adicUpperStarLowerStarAdjunction l j
   have h₁ := conjugateEquiv_whiskerRight (adicUpperStarLowerStarAdjunction l b.hom)
     (adicLowerStarEquivalence l b).symm.toAdjunction adj (adicUpperStarIsoLowerStarInv l b).inv
@@ -241,15 +241,15 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
 is the mate, under the Frobenius equivalences, of the composition isomorphism
 `(Fr_X)_* ⋙ φ̄_* ≅ φ̄_* ⋙ (Fr_Y)_*` of pushforwards. -/
 lemma mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom :
-    (mateEquiv (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction
-        (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction
+    (mateEquiv (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction
+        (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction
         (TwoSquare.mk _ _ _ _
           (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)).natTrans =
-    (adicLowerStarComp l f.geometricGaloisFrobenius.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
+    (adicLowerStarComp l f.geometricGaloisFrobenius.asIso.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        g.geometricGaloisFrobenius.hom).inv :=
+        g.geometricGaloisFrobenius.asIso.hom).inv :=
   mateEquiv_adicLowerStarComp_hom l _ _ _ _ _
 
 /-- **The Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*` are mates**: under the adjunction
@@ -267,8 +267,8 @@ lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
   have h₁ := iterated_mateEquiv_conjugateEquiv
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
     (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
-    (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction
-    (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction
+    (adicLowerStarEquivalence l g.geometricGaloisFrobenius.asIso).symm.toAdjunction
+    (adicLowerStarEquivalence l f.geometricGaloisFrobenius.asIso).symm.toAdjunction
     (TwoSquare.mk _ _ _ _ (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)
   rw [conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv,
     ← mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom] at h₁
