@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
+
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!
