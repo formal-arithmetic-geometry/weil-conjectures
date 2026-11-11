@@ -56,13 +56,13 @@ Source: adjunction construction of deck pullback, latest blueprint
 `prop-kernel-lisse.proof.md` (blueprint: lem-kernel-condensed-deck-evaluation). -/
 def regularDeckEnd {X Y : Scheme.{u}} (f : X ⟶ Y) (g : X ⟶ X) (hg : g ≫ f = f) :
     End ((lowerStar Λ f).obj (Mod.regular (condensedRingObj Λ X))) :=
-  (lowerStar Λ f).map ((upperStarLowerStarAdjunction Λ g).homEquiv _ _
+  End.of <| (lowerStar Λ f).map ((upperStarLowerStarAdjunction Λ g).homEquiv _ _
     (Functor.Monoidal.εIso (upperStar Λ g)).inv) ≫
       (lowerStarComp Λ g f).hom.app _ ≫ (lowerStarCongr Λ hg).hom.app _
 
 private theorem deck_counit {X Y : Scheme.{u}} (f : X ⟶ Y) (g : X ⟶ X)
     (hg : g ≫ f = f) :
-    (upperStar Λ f).map (regularDeckEnd Λ f g hg) ≫
+    (upperStar Λ f).map (regularDeckEnd Λ f g hg).asHom ≫
       (upperStarLowerStarAdjunction Λ f).counit.app (Mod.regular (condensedRingObj Λ X)) =
     stalkLowerStarProj Λ hg (Mod.regular (condensedRingObj Λ X)) ≫
       (Functor.Monoidal.εIso (upperStar Λ g)).inv := by
@@ -96,7 +96,7 @@ comparisons then identify the result with evaluation on the composite sheet. -/
 theorem regularDeckEnd_evaluation
     {X Y P : Scheme.{u}} (f : X ⟶ Y) (g : X ⟶ X) (hg : g ≫ f = f)
     (v : P ⟶ Y) (t : P ⟶ X) (ht : t ≫ f = v) :
-    (upperStar Λ v).map (regularDeckEnd Λ f g hg) ≫
+    (upperStar Λ v).map (regularDeckEnd Λ f g hg).asHom ≫
         stalkLowerStarProj Λ ht (Mod.regular (condensedRingObj Λ X)) ≫
         (Functor.Monoidal.εIso (upperStar Λ t)).inv =
       stalkLowerStarProj Λ (show (t ≫ g) ≫ f = v by rw [Category.assoc, hg, ht])
@@ -105,8 +105,8 @@ theorem regularDeckEnd_evaluation
   let c := (upperStarCongr Λ ht.symm).hom.app
       ((lowerStar Λ f).obj (Mod.regular (condensedRingObj Λ X))) ≫
     (upperStarComp Λ t f).hom.app ((lowerStar Λ f).obj (Mod.regular (condensedRingObj Λ X)))
-  have hn := (upperStarComp Λ t f).hom.naturality (regularDeckEnd Λ f g hg)
-  have hn' := (upperStarCongr Λ ht.symm).hom.naturality (regularDeckEnd Λ f g hg)
+  have hn := (upperStarComp Λ t f).hom.naturality (regularDeckEnd Λ f g hg).asHom
+  have hn' := (upperStarCongr Λ ht.symm).hom.naturality (regularDeckEnd Λ f g hg).asHom
   simp only [Functor.comp_map] at hn
   rw [stalkLowerStarProj_eq]
   simp only [Category.assoc]
