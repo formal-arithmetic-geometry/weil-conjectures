@@ -528,7 +528,7 @@ private theorem restricted_scalar_sections
             ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
               (ULift.up 1)) • m := by
   let N := (Mod.comap φ).obj ((Mod.comap ψ).obj M)
-  exact smallModules_scalar_map X R N ((Mod.comap ψ ⋙ Mod.comap φ).mapEnd f) c
+  exact smallModules_scalar_map X R N ((Mod.comap ψ ⋙ Mod.comap φ).mapEnd M f) c
     (hf.trans (restricted_action φ ψ c b h M)) U m
 
 section OrdinaryScalar
