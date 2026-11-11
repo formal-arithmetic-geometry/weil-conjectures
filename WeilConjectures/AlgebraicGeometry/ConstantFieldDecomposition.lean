@@ -382,7 +382,7 @@ lemma mem_range_geometricFiberComponentMap_comp_iff (n : ℕ) (x : f.geometricFi
         ((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^ n).asIso.inv.base
           (((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^
             n).asIso.hom.base
-              (constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).inv.base u)))
+              (constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).asIso.inv.base u)))
       rw [iso_inv_hom_apply]
     obtain ⟨y, hy⟩ := hx
     refine ⟨y, ?_⟩
