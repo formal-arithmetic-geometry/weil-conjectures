@@ -58,7 +58,7 @@ def frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l Y) : (m : ℕ) →
       K.carrier)
   | 0 => (adicLowerStarCongr l (by rw [pow_zero]; rfl)).app _ ≪≫ (adicLowerStarId l _).app _
   | m + 1 =>
-    (adicLowerStarCongr l (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
+    (adicLowerStarCongr l (by rw [pow_succ, Aut.mul_asIso, Iso.trans_inv])).app _ ≪≫
       (adicLowerStarComp l _ _).symm.app _ ≪≫
       (WeilSheaf.frobeniusPullback k₀ l Y).mapIso (K.frobeniusPowIso m) ≪≫ K.str
 
