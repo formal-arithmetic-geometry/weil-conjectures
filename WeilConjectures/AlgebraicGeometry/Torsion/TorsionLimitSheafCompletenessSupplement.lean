@@ -83,6 +83,7 @@ public import WeilConjectures.CategoryTheory.RingedSectionLocalization
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Endomorphism
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.TorsionCompletionDefinitions
 import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsLocal
