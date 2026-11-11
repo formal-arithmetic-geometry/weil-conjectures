@@ -80,9 +80,10 @@ private theorem moduleComparisonEquiv_siteSections
   have h := sectionsComparisonNatIso_apply a (siteSectionsNatIso J U p)
     (siteExtNatIso J U p ≪≫ extSourceNatIso e p ≪≫ siteHNatIso J p) F x
   run_tac Lean.Elab.Tactic.withMainContext do
-    let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
+    let expected ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
     let actual ← Lean.Meta.zetaReduce
-      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h))))
+      (← Lean.instantiateMVars
+        (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h)))))
     ps043ExprDiff 12 "type" actual expected
   simpa only [sectionsComparisonNatIso, siteExtNatIso, siteHNatIso,
     Iso.refl_trans, Iso.trans_refl, extSourceNatIso, siteSectionsObjIso] using h
@@ -147,9 +148,10 @@ theorem ext_sections_factorization
     ⊤ p (terminalSourceIso X) a (moduleCohomologyExtResolutionNatIso X p) hη F x
   run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
   run_tac Lean.Elab.Tactic.withMainContext do
-    let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
+    let expected ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
     let actual ← Lean.Meta.zetaReduce
-      (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h))))
+      (← Lean.instantiateMVars
+        (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h)))))
     ps043ExprDiff 12 "type" actual expected
   dsimp only [id, AlgebraicGeometry.Scheme.Modules.H, Sheaf.functorH] at h ⊢
   exact h
