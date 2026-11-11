@@ -136,7 +136,7 @@ lemma IsIPCOfShape.of_preservesFilteredColimitsOfSize {D : Type*} [Category* D] 
         (Functor.associator _ _ _).symm
     · refine (Cocone.ext (PreservesProduct.iso F _) fun j ↦ ?_).symm
       refine Pi.hom_ext _ _ fun i ↦ ?_
-      simp only [Cocone.functoriality_obj_ι_app, NatTrans.comp_app, Functor.whiskerRight_app,
+      simp only [NatTrans.comp_app, Functor.whiskerRight_app,
         Pi.constCompPiIsoConst_hom_app, Category.comp_id, PreservesProduct.iso_hom, Category.assoc,
         Cocone.precompose_obj_ι, Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerLeft_inv,
         Functor.isoWhiskerRight_inv, Functor.associator_hom_app, Functor.whiskerLeft_app,
