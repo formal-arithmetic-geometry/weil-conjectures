@@ -10,11 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Sites.Representability
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 
 /-!
 # Representability of the Picard functor of a smooth projective curve
