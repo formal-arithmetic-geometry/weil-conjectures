@@ -58,7 +58,8 @@ compatible with the iterated Weil structures. -/
 theorem frobeniusPowIso_tensor (P Q R : WeilSheaf k₀ l X)
     (e : P.obj.carrier.X ⊗ Q.obj.carrier.X ⟶ R.obj.carrier.X)
     (h : (P.obj.str.hom.hom ⊗ₘ Q.obj.str.hom.hom) ≫ e =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+          WeilCoefficients.{u} l]
           P.obj.carrier.X Q.obj.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map e ≫
           R.obj.str.hom.hom) (m : ℕ) :
@@ -105,7 +106,8 @@ theorem frobeniusPowIso_tensor (P Q R : WeilSheaf k₀ l X)
     have n₂ := (lowerStarCongr (WeilCoefficients.{u} l) hc).hom.naturality e
     simp only [Functor.comp_map] at n₁
     have hμ := Functor.LaxMonoidal.comp_μ
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[WeilCoefficients.{u} l]
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[
+        WeilCoefficients.{u} l]
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
       P.obj.carrier.X Q.obj.carrier.X
     rw [Functor.map_comp, Functor.map_comp]
@@ -115,7 +117,8 @@ theorem frobeniusPowIso_tensor (P Q R : WeilSheaf k₀ l X)
 /-- A unit of the underlying sheaf of a Weil sheaf compatible with the Weil structure is
 compatible with the iterated Weil structures. -/
 theorem frobeniusPowIso_unit (R : WeilSheaf k₀ l X) (η : 𝟙_ _ ⟶ R.obj.carrier.X)
-    (h : ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
+    (h : ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+          WeilCoefficients.{u} l] ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map η ≫
           R.obj.str.hom.hom = η) (m : ℕ) :
     ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[
@@ -163,7 +166,8 @@ open scoped Obj
 
 /-- The Weil structure of the constant Weil sheaf preserves the unit section. -/
 lemma adicConstant_unit_str :
-    ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
+    ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l] ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           η[adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] ≫
         (adicConstant k₀ l X).obj.str.hom.hom =
