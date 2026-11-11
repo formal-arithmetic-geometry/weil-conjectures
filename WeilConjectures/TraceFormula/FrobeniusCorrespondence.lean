@@ -192,4 +192,27 @@ theorem globalOperator_graph_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : �
 
 end WeilBoundedConstructible
 
+namespace Correspondence
+
+variable {ℓ}
+
+/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--4`: the identity of operators
+`T_{c_m}(φ_m) = Frob_{X,K}^m = RΓ_c(X, φ_m) ∘ Φ_m^♯` of
+`WeilBoundedConstructible.globalOperator_graph_eq_pow` and
+`WeilBoundedConstructible.globalOperator_eq`
+holds for an arbitrary morphism `v : LΦ_m^* K ⟶ K` in place of `φ_m`: the global operator of the
+graph correspondence `c_m = (𝟙, Φ_m)` with coefficient map `v` is
+`RΓ_c(X, v) ∘ Φ_m^♯`. As in the rest of this file, Weil structures are taken for the scheme
+Frobenius `Φ` itself, so that the comparison `κ_m` is the identity. -/
+theorem globalOperator_ofGraph_frobeniusIterate (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (m : ℕ) [IsProper (frobeniusIterate Φ m).left]
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (frobeniusIterate Φ m)).obj K ⟶ K) :
+    (ofGraph K (frobeniusIterate Φ m) v).globalOperator =
+      (compactPullback ℓ (frobeniusIterate Φ m)).app K ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X)).map v :=
+  globalOperator_ofGraph _ _
+
+end Correspondence
+
 end AlgebraicGeometry.ProEtale.CondensedRing
