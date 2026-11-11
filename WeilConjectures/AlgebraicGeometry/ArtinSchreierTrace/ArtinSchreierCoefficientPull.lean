@@ -326,5 +326,4 @@ theorem condensedProjector_image_retraction
   simp only [Category.assoc, image.fac_assoc, image.fac, Category.id_comp]
   exact condensedProjector_idempotent Λ G Y σ hσ χ hq
 
-
 end AlgebraicGeometry.ArtinSchreierTrace
