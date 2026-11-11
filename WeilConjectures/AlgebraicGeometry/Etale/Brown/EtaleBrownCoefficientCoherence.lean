@@ -80,7 +80,6 @@ private theorem mate_comp_iff
       Functor.whiskerLeft R₀ cU.inv ≫
         (TwoSquare.vComp (mateEquiv a₀ a₁ α₁) (mateEquiv a₁ a₂ α₂)) ≫
         Functor.whiskerRight cV.hom R₂ := by
-    change (mateEquiv a₀ a₂ α) = _
     rw [mate_whisker_normalized, mateEquiv_vcomp]
   have hleft : (∀ P, L₂.map (cU.hom.app P) ≫ α₃.app P =
       α₂.app (U₁.obj P) ≫ V₂.map (α₁.app P) ≫ cV.hom.app (L₀.obj P)) ↔ α₃ = α := by
@@ -117,7 +116,6 @@ private theorem mate_unit_iff
   let β := ((TwoSquare.hId L₀).whiskerTop cU.hom).whiskerBottom cV.inv
   have hm : mateEquiv a a β =
       Functor.whiskerLeft R₀ cU.hom ≫ Functor.whiskerRight cV.inv R₀ := by
-    change (mateEquiv a a β) = _
     rw [mate_whisker_normalized]
     have hid : mateEquiv a a (TwoSquare.hId L₀) = TwoSquare.vId R₀ := by
       ext Q

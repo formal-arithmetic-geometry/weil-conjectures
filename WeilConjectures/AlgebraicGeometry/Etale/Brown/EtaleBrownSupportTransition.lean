@@ -193,10 +193,6 @@ private theorem left_tensor_transition_of_right
       γ.hom.app (EAm.obj K) ≫ TB.map (em.inv.app K) ≫ tB.app (Fs.obj K) := by
   apply left_tensor_transition asys am an em en γ tA tB ?_ K
   intro H
-  change TA.map (((mateEquiv asys am (.mk _ _ _ _ em.inv))).app H) ≫
-      ((mateEquiv am an (.mk _ _ _ _ γ.hom))).app (EBm.obj H) ≫
-        Gn.map (tB.app H) =
-    tA.app (Gs.obj H) ≫ ((mateEquiv asys an (.mk _ _ _ _ en.inv))).app H
   rw [hm, hn, hγ]
   apply (cancel_epi (TA.map (rm.inv.app H))).1
   rw [← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
