@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackInterface
+
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonFormula
 import all WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionAugmentationCompatibility
 import all WeilConjectures.CategoryTheory.StrictReduction.ReductionPullbackDerivedTower

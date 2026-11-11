@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
-
 public import WeilConjectures.AlgebraicGeometry.Projection.ProjectionFormulaCompactified
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension

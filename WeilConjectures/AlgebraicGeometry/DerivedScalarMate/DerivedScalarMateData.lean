@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
-
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarTensorOrdinary
