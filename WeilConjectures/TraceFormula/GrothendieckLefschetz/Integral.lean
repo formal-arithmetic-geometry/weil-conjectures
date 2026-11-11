@@ -90,10 +90,13 @@ theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I 
           geometricStalk (R ⧸ I ^ (n + 1 + 1)) x.1 ≅
         geometricStalk (R ⧸ I ^ (n + 1)) x.1 ⋙
           ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
-    (hβ : ∀ (x : geometricFixedPoint f m) (n : ℕ), IsCoefficientChange (I.powSuccFactor n) _ _ (β x n))
-    (hβ' : ∀ (x : geometricFixedPoint f m) (n : ℕ), IsStalkPullbackCompatible (I.powSuccFactor n) (β x n) x.2.2)
+    (hβ : ∀ (x : geometricFixedPoint f m) (n : ℕ),
+      IsCoefficientChange (I.powSuccFactor n) _ _ (β x n))
+    (hβ' : ∀ (x : geometricFixedPoint f m) (n : ℕ),
+      IsStalkPullbackCompatible (I.powSuccFactor n) (β x n) x.2.2)
     (cx : ∀ x : geometricFixedPoint f m, Cone (S.stalkTower x.1 (β x) (hβ x)).restrict)
-    (hcx : ∀ x : geometricFixedPoint f m, IsHomotopyLimit (cx x)) [∀ x : geometricFixedPoint f m, HasRightDual (cx x).pt]
+    (hcx : ∀ x : geometricFixedPoint f m, IsHomotopyLimit (cx x))
+    [∀ x : geometricFixedPoint f m, HasRightDual (cx x).pt]
     [∀ (x : geometricFixedPoint f m) (n : ℕ), HasRightDual ((S.stalkTower x.1 (β x) (hβ x)).obj n)]
     (Vx : ∀ x : geometricFixedPoint f m, (cx x).pt ⟶ (cx x).pt)
     (hVx : ∀ x : geometricFixedPoint f m, (S.stalkTower x.1 (β x) (hβ x)).IsLift (cx x)
