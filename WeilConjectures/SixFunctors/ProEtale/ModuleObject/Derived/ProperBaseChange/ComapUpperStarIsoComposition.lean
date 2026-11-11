@@ -110,7 +110,7 @@ theorem comapUpperStarIso_comp
       Category.id_comp, Category.comp_id, Category.assoc]
     rw [← Category.assoc, comap_lowerStar_comp, Category.assoc, Category.assoc,
       Iso.hom_inv_id_app]
-    simp only [TwoSquare.natTrans]
+    dsimp only [TwoSquare.natTrans]
     erw [Category.comp_id]
   have hN := congrArg (fun s ↦ s.app N) h
   simp only [αf, αg, αfg, TwoSquare.vComp, TwoSquare.whiskerLeft,
