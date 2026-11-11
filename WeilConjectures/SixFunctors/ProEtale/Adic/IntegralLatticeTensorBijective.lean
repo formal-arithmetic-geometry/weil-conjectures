@@ -152,31 +152,21 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
   induction τ using TensorProduct.inductionOn with
   | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ']
   | tmul o m =>
-    run_tac Lean.logInfo m!"HB start: {(← Lean.getRemainingHeartbeats) / 1000}"
-    rw [Subalgebra.stageTensorMap_tmul]
-    rw [AdicSheaf.tensorSections_tmul]
-    rw [adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul']
-    run_tac Lean.logInfo m!"HB smul: {(← Lean.getRemainingHeartbeats) / 1000}"
+    rewrite [Subalgebra.stageTensorMap_tmul]
+    rewrite [AdicSheaf.tensorSections_tmul]
+    rewrite [adicUpperStarRightDerivedLowerStarUnitAbIso_hom_app_smul']
     refine (congrArg (fun y ↦ (upperStarRightDerivedSections g p i W).map
       ((weilCoefficientsForgetAb l T).map ((weilSmulNatTrans l T _).app
         (adicConstantSheaf l T))) y)
       (adicUpperStarRightDerivedLowerStarUnitAbIso_hom_integralLatticeSections' g p i E θ W
         m)).trans ?_
-    run_tac Lean.logInfo m!"HB refine: {(← Lean.getRemainingHeartbeats) / 1000}"
-    rw [stageMap_tmul]
-    rw [algebraMap_natCast_pow_inv_mul_eq]
-    run_tac Lean.logInfo m!"HB stages: {(← Lean.getRemainingHeartbeats) / 1000}"
+    rewrite [stageMap_tmul]
+    rewrite [algebraMap_natCast_pow_inv_mul_eq]
     have key := congrArg (fun φ ↦ (upperStarRightDerivedSections g p i W).map φ
       (θ.hom.app (op W) (ULift.up m)))
       (padicIntegersSheafMulOfLE_comp_adicConstantSheafLeg (X := T) (E := E) (F := F.1) F.2
         (integersSubalgebraFamilyEquiv E F o) n)
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at key
-    run_tac Lean.logInfo m!"HB key: {(← Lean.getRemainingHeartbeats) / 1000}"
-    conv_rhs =>
-      arg 2
-      arg 2
-      trace_state
-      change θ.hom.app (op W) (ULift.up m)
     exact key.symm
 
 include hθ hθW in
