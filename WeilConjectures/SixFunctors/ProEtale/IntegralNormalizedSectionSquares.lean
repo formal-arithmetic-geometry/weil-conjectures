@@ -107,3 +107,4 @@ private def restrictComp
       (by intros; ext x; rfl))) (by intros; ext U x; rfl)
 
 end AlgebraicGeometry.ProEtale.IntegralPresentation
+
