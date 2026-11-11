@@ -71,9 +71,10 @@ noncomputable def endTensorUnitRingEquiv :
   (RingEquiv.ofBijective (R := End (Mod.regular (Profinite.padicAlgClRingObj ℓ)))
       (S := End ((upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω))).obj
         (Mod.regular (Profinite.padicAlgClRingObj ℓ)))) φ
-    ⟨fun _ _ h ↦ (upperStarFromPointMod _ _).map_injective h,
-      fun t ↦ (upperStarFromPointMod _ _).map_surjective t⟩).symm.trans
+    ⟨fun _ _ h ↦ End.ext ((upperStarFromPointMod _ _).map_injective congr($(h).asHom)),
+      fun t ↦ by
+        obtain ⟨s, hs⟩ := (upperStarFromPointMod _ _).map_surjective t.asHom
+        exact ⟨.of s, End.ext hs⟩⟩).symm.trans
     (Profinite.PadicAlgCl.endRegularRingEquiv ℓ).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
