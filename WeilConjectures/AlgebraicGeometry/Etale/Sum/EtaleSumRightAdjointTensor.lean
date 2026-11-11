@@ -393,7 +393,7 @@ private theorem tensorComparisonVComp
   have h₀K := NatTrans.congr_app h₀ K
   have h₁K := NatTrans.congr_app h₁ (H₀.obj K)
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h₀K h₁K
-  simp only [TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app, Functor.associator_hom_app,
+  simp only [TwoSquare.vComp, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.comp_obj, Functor.comp_map, Category.id_comp, Category.comp_id, Category.assoc]
   rw [h₁K, ← G₁.map_comp_assoc, h₀K, G₁.map_comp, Category.assoc]
