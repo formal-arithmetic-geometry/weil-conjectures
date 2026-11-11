@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
