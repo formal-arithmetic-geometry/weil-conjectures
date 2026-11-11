@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Etale.Field

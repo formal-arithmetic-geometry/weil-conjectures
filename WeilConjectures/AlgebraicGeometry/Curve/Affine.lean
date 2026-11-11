@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Group.Subgroup.Finsupp
+
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification

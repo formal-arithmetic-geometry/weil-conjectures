@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
