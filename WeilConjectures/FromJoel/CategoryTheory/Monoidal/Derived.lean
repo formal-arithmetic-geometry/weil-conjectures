@@ -268,7 +268,8 @@ lemma pentagon :
         associator_hom_fac_app_app_app_assoc]
 
 /-! The tensor product and the whiskerings of the derived monoidal structure are separate
-constants, definitionally equal to the corresponding fields of `MonoidalCategory.ofBifunctorPentagon`.
+constants, definitionally equal to the corresponding fields of
+`MonoidalCategory.ofBifunctorPentagon`.
 When two terms differ only in nested instance proofs, the kernel then compares these constants
 argument by argument instead of unfolding the left derived bifunctor. -/
 
@@ -288,8 +289,8 @@ argument by argument instead of unfolding the left derived bifunctor. -/
   ((bifunctor L W).map f₁).app X₂
 
 /-- The derived monoidal structure: the data of
-`MonoidalCategory.ofBifunctorPentagon _ _ _ _ _ (pentagon L W) (triangle L W)`, with the tensor product
-and the whiskerings given by the constants above; the axioms are those of `ofBifunctor`. -/
+`MonoidalCategory.ofBifunctorPentagon _ _ _ _ _ (pentagon L W) (triangle L W)`, with the tensor
+product and the whiskerings given by the constants above; the axioms are those of `ofBifunctor`. -/
 noncomputable instance : MonoidalCategory (DerivedMonoidal L W) where
   __ := MonoidalCategory.ofBifunctorPentagon _ _ _ _ _ (pentagon L W) (triangle L W)
   tensorObj := tensorObjAux L W
