@@ -28,19 +28,19 @@ private theorem comp_average_ring
     {R : Type*} [CommRing R] {G : Type*} [AddCommGroup G] [Fintype G]
     [Invertible (Fintype.card G : R)] {A B : C}
     (β : R →+* End B) (τ : G → (B ⟶ B)) (χ : AddChar G R) (φ : A ⟶ B)
-    (hφ : ∀ a, φ ≫ τ a = φ ≫ (β (χ a)).asHom) :
-    φ ≫ (∑ a : G, τ a ≫ (β (⅟(Fintype.card G : R) * χ (-a))).asHom) = φ := by
+    (hφ : ∀ a, φ ≫ τ a = φ ≫ β (χ a)) :
+    φ ≫ (∑ a : G, τ a ≫ β (⅟(Fintype.card G : R) * χ (-a))) = φ := by
   rw [Preadditive.comp_sum]
   calc
-    _ = ∑ _a : G, φ ≫ (β (⅟(Fintype.card G : R))).asHom := by
+    _ = ∑ _a : G, φ ≫ β (⅟(Fintype.card G : R)) := by
       apply Finset.sum_congr rfl
       intro a _
       rw [← Category.assoc, hφ a, Category.assoc]
-      change φ ≫ (β (⅟(Fintype.card G : R) * χ (-a)) * β (χ a)).asHom = _
+      change φ ≫ (β (⅟(Fintype.card G : R) * χ (-a)) * β (χ a)) = _
       rw [← map_mul, mul_assoc, ← AddChar.map_add_eq_mul, neg_add_cancel,
         AddChar.map_zero_eq_one, mul_one]
-    _ = φ ≫ (β (∑ _a : G, ⅟(Fintype.card G : R))).asHom := by
-      rw [map_sum, End.sum_asHom, Preadditive.comp_sum]
+    _ = φ ≫ β (∑ _a : G, ⅟(Fintype.card G : R)) := by
+      rw [map_sum, Preadditive.comp_sum]
     _ = φ := by
       simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul,
         mul_invOf_self, map_one]
@@ -80,10 +80,10 @@ def CondensedEigenmap
       (ProEtale.condensedRingObj Λ X)}
     (φ : F ⟶ (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj
       (condensedUnit Λ Y.left)) : Prop :=
-  (∀ a : G, φ ≫ condensedPull Λ (σ (Multiplicative.ofAdd a)).asIso.hom =
+  (∀ a : G, φ ≫ condensedPull Λ (σ (Multiplicative.ofAdd a)).hom =
     φ ≫ (ProEtale.CondensedRing.lowerStar Λ Y.hom).map
       (Mod.regularEndRingHom
-        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left) (χ a))).asHom) ∧
+        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left) (χ a)))) ∧
   IsIso ((ProEtale.CondensedRing.upperStar Λ Y.hom).map φ ≫
     (ProEtale.CondensedRing.upperStarLowerStarAdjunction Λ Y.hom).counit.app
       (condensedUnit Λ Y.left))
@@ -98,8 +98,7 @@ private theorem projector_fixes_eigenmap
       (ProEtale.condensedRingObj Λ X)}
     (φ : F ⟶ (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj
       (condensedUnit Λ Y.left)) (hφ : CondensedEigenmap Λ Y G σ χ φ) :
-    φ ≫ (condensedProjector Λ G Y
-      (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom = φ := by
+    φ ≫ condensedProjector Λ G Y (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ = φ := by
   classical
   let : Invertible (Fintype.card G : MonObj.Γ Λ) := hq.invertible
   let β : MonObj.Γ Λ →+* End ((ProEtale.CondensedRing.lowerStar Λ Y.hom).obj
@@ -109,8 +108,8 @@ private theorem projector_fixes_eigenmap
         (Mod.regularEndRingHom.comp
           (MonObj.Γ.mapFunctor (ProEtale.upperStarFromPoint Y.left) (R := Λ)))
   unfold condensedProjector
-  simp only [Ring.inverse_invertible, End.sum_asHom]
-  exact comp_average_ring β (fun a ↦ condensedPull Λ (σ (Multiplicative.ofAdd a)).asIso.hom)
+  simp only [Ring.inverse_invertible]
+  exact comp_average_ring β (fun a ↦ condensedPull Λ (σ (Multiplicative.ofAdd a)).hom)
     χ φ hφ.1
 
 private theorem exists_cover_satisfying
@@ -154,7 +153,7 @@ theorem condensed_isotypic_recognition
     (hq : IsUnit (Fintype.card G : MonObj.Γ Λ))
     (htrans : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
       (s t : Spec (.of Ω) ⟶ Y.left), s ≫ Y.hom = t ≫ Y.hom →
-        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left)
+        ∃ a : G, s = t ≫ (σ (Multiplicative.ofAdd a)).hom.left)
     {F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (ProEtale.condensedRingObj Λ X)}
     (φ : F ⟶ (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj
@@ -162,10 +161,9 @@ theorem condensed_isotypic_recognition
     ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
       ∀ i : U.I₀, IsIso ((ProEtale.CondensedRing.upperStar Λ (U.f i)).map
         (φ ≫ factorThruImage (condensedProjector Λ G Y
-          (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom)) := by
+          (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ))) := by
   classical
-  let P := (condensedProjector Λ G Y
-    (fun a ↦ (σ (Multiplicative.ofAdd a)).asIso.hom) χ).asHom
+  let P := condensedProjector Λ G Y (fun a ↦ (σ (Multiplicative.ofAdd a)).hom) χ
   have hfix : φ ≫ P = φ := projector_fixes_eigenmap Λ Y G σ χ hq φ hφ
   let L := ProEtale.CondensedRing.upperStar Λ Y.hom
   let ε := (ProEtale.CondensedRing.upperStarLowerStarAdjunction Λ Y.hom).counit.app
