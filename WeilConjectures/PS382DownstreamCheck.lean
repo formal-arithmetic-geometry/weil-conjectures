@@ -1,6 +1,3 @@
 module
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSmoothFamilyStage
-import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
-import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
