@@ -113,10 +113,11 @@ theorem autAction_baseChangeAut_eq_id_of_distinguished_of_separated {ℓ : ℕ}
     (by simp) hsep
     ((baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype)
     (fun τ ↦ by
-      simp only [MonoidHom.comp_apply, baseChangeAutActionHom_apply]
+      dsimp only [MonoidHom.comp, baseChangeAutActionHom, Ψ]
       rw [Hom.autAction_naturality, hV _ τ.2, Category.comp_id]) hdivV ⟨σ, hσ⟩
-  simpa only [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_asHom]
-    using congrArg End.asHom key
+  have key' := congrArg End.asHom key
+  dsimp only [MonoidHom.comp, baseChangeAutActionHom, End.one_asHom, Ψ] at key'
+  exact key'
 
 /-- **Generic automorphisms trivial modulo `ℓ` are trivial, torsion case**: the same as
 `autAction_baseChangeAut_eq_id_of_distinguished_of_separated` for `A` killed by `ℓ ^ m`, for
