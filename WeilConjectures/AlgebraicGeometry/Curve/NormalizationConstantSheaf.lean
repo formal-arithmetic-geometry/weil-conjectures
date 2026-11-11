@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.NormalGenericConstant
 public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.AlgebraicGeometry.Curve.GenericModelAux
@@ -30,7 +31,9 @@ geometric branches of `X` at `y` when `ν` is the normalisation. Hence its coker
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.constantSheafToLowerStar`: the natural map `M_X ⟶ ν_* M_{X'}`.
+- `AlgebraicGeometry.Etale.mono_constantSheafToLowerStar`: the natural map
+  `M_X ⟶ ν_* M_{X'}` (`AlgebraicGeometry.Etale.constantSheafToLowerStar`) is injective for
+  surjective `ν`.
 - `AlgebraicGeometry.IsCurve.constantSheafToLowerStar_of_isIso_restrict`: for a finite surjective
   `ν` which is an isomorphism over a dense open of a curve, this map is injective, its cokernel
   is supported on finitely many points and has stalk `M^b / ΔM` at a point with `b` geometric
@@ -56,16 +59,15 @@ section Map
 
 variable {X X' : Scheme.{u}} (ν : X' ⟶ X) (M : ModuleCat.{u + 1} Λ)
 
-/-- The natural map `M_X ⟶ ν_* M_{X'}` of constant sheaves for a morphism `ν : X' ⟶ X`: the unit
-`M_X ⟶ ν_* ν^* M_X` followed by the identification `ν^* M_X ≅ M_{X'}`. -/
-noncomputable def Etale.constantSheafToLowerStar :
-    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M ⟶
-      (ν)_*[ModuleCat.{u + 1} Λ].obj
-        ((constantSheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
-  (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν).unit.app
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) ≫
-    (ν)_*[ModuleCat.{u + 1} Λ].map
-      ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) ν).hom.app M)
+/-- `AlgebraicGeometry.Etale.constantSheafToLowerStar` unfolded, with the constant sheaf kept
+folded. -/
+lemma Etale.constantSheafToLowerStar_eq :
+    constantSheafToLowerStar ν M =
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν).unit.app
+          ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) ≫
+        (ν)_*[ModuleCat.{u + 1} Λ].map
+          ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) ν).hom.app M) :=
+  rfl
 
 /-- For a surjective `ν`, the natural map `M_X ⟶ ν_* M_{X'}` is a monomorphism. -/
 theorem Etale.mono_constantSheafToLowerStar (hν : Function.Surjective ν.base) :
@@ -86,7 +88,7 @@ lemma Etale.isIso_sheafFiber_map_constantSheafToLowerStar_comp_stalkRestrict
   have h := sheafFiber_map_unit_stalkRestrict_upperStarCompSheafFiberIso_moduleCat ν
     ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) s
   rw [← Iso.app_hom, ← Category.assoc, Iso.comp_hom_eq_id] at h
-  rw [constantSheafToLowerStar, Functor.map_comp, Category.assoc,
+  rw [constantSheafToLowerStar_eq, Functor.map_comp, Category.assoc,
     ← stalkRestrict_naturality, ← Category.assoc, h]
   infer_instance
 
@@ -245,7 +247,7 @@ theorem Etale.exists_upperStar_constantSheafToLowerStar_iso {X X' Y Y' : Scheme.
     have hn := (baseChangeMap A h.toCommSq).naturality
       ((upperStarConstantSheafIso A ν).hom.app M)
     simp only [Functor.comp_map] at hn
-    simp only [b, a, constantSheafToLowerStar, Functor.map_comp, Category.assoc, Iso.trans_hom,
+    simp only [b, a, constantSheafToLowerStar_eq, Functor.map_comp, Category.assoc, Iso.trans_hom,
       asIso_hom, Functor.mapIso_hom, Iso.app_hom]
     rw [reassoc_of% hn, reassoc_of% (map_unit_baseChangeMap_app A h.toCommSq (cst X)),
       ← Functor.map_comp, ← Functor.map_comp, key]
