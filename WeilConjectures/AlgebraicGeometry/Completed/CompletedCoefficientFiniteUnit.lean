@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionKoszulReflector
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
