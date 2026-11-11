@@ -119,4 +119,3 @@ theorem finrank_affineLineKummerAlgebra [Nontrivial Γ((multiplicativeGroup Y).t
 end Etale
 
 end AlgebraicGeometry
-
