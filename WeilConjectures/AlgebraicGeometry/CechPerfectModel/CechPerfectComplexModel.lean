@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
--- Rechecked with the stable-toolchain torsion completeness supplement.
 public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedKoszulSite
 import all WeilConjectures.AlgebraicGeometry.SfbPerfectModelComplexComparison
 import all WeilConjectures.AlgebraicGeometry.SfbCompletionRingComparison

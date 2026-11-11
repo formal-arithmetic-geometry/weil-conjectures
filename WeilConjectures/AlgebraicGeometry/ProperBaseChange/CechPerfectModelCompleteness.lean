@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
--- Rechecked with the stable-toolchain torsion completeness supplement.
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
 import all WeilConjectures.AlgebraicGeometry.CechPerfectModel.CechPerfectComplexModel
