@@ -219,7 +219,7 @@ variable {K : Type u} [Field K] [Finite K]
 `𝟙 × Spec σ` of the geometric Frobenius `σ ∈ Gal(K̄ / K)`. -/
 lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius_hom_eq_geometricFiberGaloisMap
     [Fintype K] {C : Scheme.{u}} (p : C ⟶ Spec (.of K)) :
-    p.geometricGaloisFrobenius.hom = p.geometricFiberGaloisMap
+    p.geometricGaloisFrobenius.asIso.hom = p.geometricFiberGaloisMap
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)).toAlgHom := by
   rw [Scheme.Hom.geometricGaloisFrobenius, asIso_hom, Scheme.Hom.geometricFiberGaloisMap]
   congr 1
@@ -254,8 +254,8 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
         (AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l : ℤ) ^ n) →+ ZMod (l ^ n)),
       (∀ n t, Ψ n t = 0 → ∃ σ : p.geometricFiber ⟶ t.P, σ ≫ t.π = 𝟙 _) ∧
       (∀ n t₁ t₂, t₁.IsIsomorphic t₂ → Ψ n t₁ = Ψ n t₂) ∧
-      (∀ n t y, Ψ n (t.mapIso p.geometricGaloisFrobenius) y =
-        Ψ n t ⟨(Scheme.Pic.mapHom p.geometricGaloisFrobenius.hom).toAdditive y,
+      (∀ n t y, Ψ n (t.mapIso p.geometricGaloisFrobenius.asIso) y =
+        Ψ n t ⟨(Scheme.Pic.mapHom p.geometricGaloisFrobenius.asIso.hom).toAdditive y,
           AddSubgroup.apply_mem_torsionBy _ y.2⟩) ∧
       ∀ n (t : EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
         (t' : EtaleTorsor (ULift.{u + 1} (ZMod (l ^ (n + 1)))) p.geometricFiber),
@@ -291,9 +291,9 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
       AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l ^ n : ℕ) : ℤ) := by
     rw [Nat.cast_pow]
   -- the geometric Galois Frobenius lies over the Frobenius of `Spec K̄`
-  have hf : p.geometricGaloisFrobenius.hom ≫
+  have hf : p.geometricGaloisFrobenius.asIso.hom ≫
       (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) =
-      (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) ≫ (specGeometricFrobenius K).hom :=
+      (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) ≫ (specGeometricFrobenius K).asIso.hom :=
     p.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure
   have hincl (n : ℕ) (z : AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l ^ n : ℕ) : ℤ)) :
       AddSubgroup.inclusion (heq n).le ⟨z.1, (heq n).ge z.2⟩ = z :=
@@ -312,8 +312,8 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
       (picPairing_eq_of_isIsomorphic (hm n) h)
   · have := hne n
     rw [AddMonoidHom.comp_apply, AddMonoidHom.comp_apply,
-      picPairing_transport p.geometricGaloisFrobenius.hom (specGeometricFrobenius K).hom hf
-        (hm n) t (t.mapIso p.geometricGaloisFrobenius) (𝟙 _) (Category.id_comp _).symm
+      picPairing_transport p.geometricGaloisFrobenius.asIso.hom (specGeometricFrobenius K).asIso.hom hf
+        (hm n) t (t.mapIso p.geometricGaloisFrobenius.asIso) (𝟙 _) (Category.id_comp _).symm
         (by rw [Category.comp_id, Category.id_comp]; rfl)]
     exact congrArg _ (Subtype.ext rfl)
   · have := hne n
@@ -346,7 +346,7 @@ theorem exists_section_of_isIsomorphic_mapIso_of_isProper
     (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
     (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
       ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
-    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) (n : ℕ) :
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n)) (n : ℕ) :
     ∃ σ : p.geometricFiber ⟶ (t n).P, σ ≫ (t n).π = 𝟙 _ := by
   have hl : l.Prime := Fact.out
   let _ : Fintype K := Fintype.ofFinite K
@@ -373,7 +373,7 @@ theorem exists_section_of_isIsomorphic_mapIso_of_isProper
     rw [← Scheme.Hom.geometricGaloisFrobenius_hom_eq_geometricFiberGaloisMap] at hg
     change Ψ m (t m) (d.equivTorsion m ⟨e y, _⟩) = Ψ m (t m) (d.equivTorsion m y)
     rw [show d.equivTorsion m ⟨e y, _⟩ =
-        ⟨(Scheme.Pic.mapHom p.geometricGaloisFrobenius.hom).toAdditive (d.equivTorsion m y),
+        ⟨(Scheme.Pic.mapHom p.geometricGaloisFrobenius.asIso.hom).toAdditive (d.equivTorsion m y),
           AddSubgroup.apply_mem_torsionBy _ (d.equivTorsion m y).2⟩ from
       Subtype.ext hg, ← hfrob, hiso m _ _ (hfix m)]
   have hψ (m : ℕ) (y : AddSubgroup.torsionBy A ((l : ℤ) ^ (m + 1))) :
@@ -419,7 +419,7 @@ theorem exists_pow_mul_monodromy_eq_zero
     (hz : (V : Set c.g.geometricFiber) \ Set.range (p.geometricFiberMap c.i c.comm.symm).base =
       {z}) :
     ∃ v : ℕ, ∀ (n : ℕ) (T : EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber),
-      (T.mapIso p.geometricGaloisFrobenius).IsIsomorphic T →
+      (T.mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic T →
       ∀ g ∈ fixingSubgroup s (IsOpenImmersion.lift V.ι (p.geometricFiberMap c.i c.comm.symm)
           (by rwa [Scheme.Opens.range_ι])) G,
         ((l ^ v : ℕ) : ZMod (l ^ n)) * (T.monodromy s G g).toAdd.down = 0 := by
@@ -439,8 +439,8 @@ theorem exists_pow_mul_monodromy_eq_zero
   have hlK' : ((l ^ n : ℕ) : AlgebraicClosure K) ≠ 0 := by
     rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
     exact pow_ne_zero _ ((map_ne_zero _).2 hlK)
-  let ψ' : Aut T.P := ψ
-  exact hmon hlK' T (ψ' ^ m) (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' _ hψπ m)
+  let ψ' : Aut T.P := .of ψ
+  exact hmon hlK' T (ψ' ^ m).asIso (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' _ hψπ m)
     (fun a ↦ (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' ψ' (hψv a).symm m).symm) g hg
 
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
@@ -465,7 +465,7 @@ theorem exists_pullback_iso_of_isIsomorphic_mapIso
     (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
     (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
       ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
-    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) (n : ℕ)
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n)) (n : ℕ)
     (V : c.g.geometricFiber.Opens)
     (hV : Set.range (p.geometricFiberMap c.i c.comm.symm).base ⊆ V) (z : c.g.geometricFiber)
     (hz : (V : Set c.g.geometricFiber) \ Set.range (p.geometricFiberMap c.i c.comm.symm).base =
@@ -543,13 +543,13 @@ theorem exists_extension_of_isIsomorphic_mapIso
     (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
     (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
       ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
-    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) :
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n)) :
     ∃ (G' : ProfiniteGrp.{u})
       (_ : ∀ P, MulAction G' ((fiber (s ≫ p.geometricFiberMap c.i c.comm.symm)).obj P))
       (_ : IsFundamentalGroup (fiber (s ≫ p.geometricFiberMap c.i c.comm.symm)) G')
       (t' : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) c.g.geometricFiber),
       (∀ n, ((t' n).pullback (p.geometricFiberMap c.i c.comm.symm)).IsIsomorphic (t n)) ∧
-      (∀ n, ((t' n).mapIso c.g.geometricGaloisFrobenius).IsIsomorphic (t' n)) ∧
+      (∀ n, ((t' n).mapIso c.g.geometricGaloisFrobenius.asIso).IsIsomorphic (t' n)) ∧
       ∀ (n : ℕ) (g : G'), ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
           ((t' (n + 1)).monodromy (s ≫ p.geometricFiberMap c.i c.comm.symm) G' g).toAdd.down =
         ((t' n).monodromy (s ≫ p.geometricFiberMap c.i c.comm.symm) G' g).toAdd.down := by
@@ -636,7 +636,7 @@ theorem exists_extension_of_isIsomorphic_mapIso
   choose T hT using fun n ↦ exists_isIsomorphic_pullback j s hρ (t n) (hkill n)
   refine ⟨G', inferInstance, inferInstance, T, hT, fun n ↦ ?_, fun n g' ↦ ?_⟩
   · refine isIsomorphic_of_isIsomorphic_pullback j s hρ ?_
-    have hcomm : j ≫ c.g.geometricGaloisFrobenius.hom = p.geometricGaloisFrobenius.hom ≫ j :=
+    have hcomm : j ≫ c.g.geometricGaloisFrobenius.asIso.hom = p.geometricGaloisFrobenius.asIso.hom ≫ j :=
       Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius _ _
     exact (isIsomorphic_pullback_mapIso (T n) j _ _ hcomm).trans
       (((hT n).mapIso _).trans ((hfix n).trans (hT n).symm))
@@ -675,7 +675,7 @@ theorem exists_section_of_isIsomorphic_mapIso {K : Type u} [Field K] [Finite K]
     (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) p.geometricFiber)
     (ht : ∀ n g, ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
       ((t (n + 1)).monodromy s G g).toAdd.down = ((t n).monodromy s G g).toAdd.down)
-    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n)) (n : ℕ) :
+    (hfix : ∀ n, ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n)) (n : ℕ) :
     ∃ σ : p.geometricFiber ⟶ (t n).P, σ ≫ (t n).π = 𝟙 _ := by
   -- Reduce to the smooth proper compactification `C₀` of `U₀`.
   obtain ⟨c, hcurve, hsm, hconn, -, -⟩ := exists_smooth_properCompactification p
