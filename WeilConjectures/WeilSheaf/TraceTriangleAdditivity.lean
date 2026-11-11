@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+
 public import WeilConjectures.WeilSheaf.StalkExact
 public import WeilConjectures.LinearAlgebra.TraceLongExactSequenceFinsum
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
