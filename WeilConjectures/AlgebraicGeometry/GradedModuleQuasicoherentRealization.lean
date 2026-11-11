@@ -114,7 +114,8 @@ theorem gradedModule_quasicoherent_realization
         apply End.ext
         apply Sigma.hom_ext
         intro m
-        change Sigma.ι G m ≫ Sigma.desc _ = Sigma.ι G m ≫ (_ + _)
+        change Sigma.ι G m ≫ Sigma.desc _ =
+          Sigma.ι G m ≫ (Sigma.desc _ + Sigma.desc _)
         rw [Preadditive.comp_add, Sigma.ι_comp_desc, Sigma.ι_comp_desc, Sigma.ι_comp_desc,
           hmu_add, Preadditive.add_comp] }
   have hT (k m : ℕ) (b : graded k) :
@@ -144,7 +145,9 @@ theorem gradedModule_quasicoherent_realization
       exact eq_of_heq (hmu_scalar m a U.unop t)
     exact congrArg (fun q ↦ q ≫ i m) hm
   have hTunit : T 0 ⟨1, hunit⟩ = 1 := by
-    simpa only [map_one, Scheme.Modules.smulHom_one] using hTscalar 1
+    apply End.ext
+    simpa only [End.one_asHom, map_one, Scheme.Modules.smulHom_one] using
+      congrArg End.asHom (hTscalar 1)
   have hTmul (k l : ℕ) (b : graded k) (c : graded l) :
       T (k + l) ⟨b.val * c.val, hmul k l b.property c.property⟩ = T k b * T l c := by
     apply End.ext
