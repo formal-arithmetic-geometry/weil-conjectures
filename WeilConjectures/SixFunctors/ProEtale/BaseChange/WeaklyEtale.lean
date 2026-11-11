@@ -186,9 +186,7 @@ lemma ProEtale.baseChangeMap_eq (sq : CommSq g' j' j g'') :
             (ProEtale.upperStarIsoLocalizationRestriction A j' inferInstance).inv
               (g')_*[A])) := by
     refine Eq.trans ?_ h.symm
-    ext1
-    exact congrArg (fun α ↦ NatTrans.app α _)
-      (ProEtale.mateEquiv_localizationRestrictionBaseChangeMap A sq).symm
+    exact (ProEtale.mateEquiv_localizationRestrictionBaseChangeMap A sq).symm
   rw [ProEtale.baseChangeMap, h', Equiv.symm_apply_apply]
 
 /-- **Weakly étale base change for the pushforward**: for a cartesian square the base change
