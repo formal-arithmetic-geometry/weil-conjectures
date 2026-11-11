@@ -462,7 +462,7 @@ private theorem scalarSection_pow (X : Scheme.{u})
   induction k with
   | zero => simp
   | succ k ih =>
-      simp only [pow_succ, End.mul_def, NatTrans.comp_app, Functor.map_comp, ih]
+      simp only [pow_succ, End.mul_asHom, NatTrans.comp_app, Functor.map_comp, ih]
       exact congrArg (fun h ↦ h ≫ _) (hb M)
 
 -- Instantiate the abstract transport with the actual coefficient quotient.

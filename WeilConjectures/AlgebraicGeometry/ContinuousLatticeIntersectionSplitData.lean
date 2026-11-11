@@ -189,7 +189,7 @@ private theorem localizedAdjoint_isIso
       simp only [d₀, σ, Mod.smulSequenceCompIso, NatIso.ofComponents_inv_app, Iso.refl_inv,
         Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app, c,
         integralModuleLocalizationCocone, scalarLocalizationUnitCocone, pow_zero,
-        End.one_def, CategoryTheory.Functor.map_id]
+        End.one_asHom, CategoryTheory.Functor.map_id]
       exact Category.id_comp _
     change c'.ι.app 0 ≫ UY.map q' = d₀.ι.app 0 ≫ v.hom
     rw [hz₀]

@@ -120,7 +120,7 @@ private theorem functor_conjugate_pow {C D A : Type*}
   induction n with
   | zero => simp
   | succ n ih =>
-      rw [pow_succ, End.mul_def, G.map_comp, pow_succ, End.mul_def, ← ih]
+      rw [pow_succ, End.mul_asHom, G.map_comp, pow_succ, End.mul_asHom, ← ih]
       simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc]
       simp only [← H.map_comp_assoc, Iso.hom_inv_id_assoc]
 

@@ -56,7 +56,7 @@ lemma scalarPow_regularSmulIso_hom (b : (PadicAlgCl l)ˣ) :
     rfl
   | d + 1 => by
     rw [IsoAlgebra.scalarPow, Iso.trans_hom, scalarPow_regularSmulIso_hom b d, regularSmulIso_hom,
-      regularSmulIso_hom, regularSmulIso_hom, ← End.mul_def]
+      regularSmulIso_hom, regularSmulIso_hom, ← End.mul_asHom]
     erw [← map_mul, ← map_mul]
     rw [← Units.val_mul, ← pow_succ']
     rfl

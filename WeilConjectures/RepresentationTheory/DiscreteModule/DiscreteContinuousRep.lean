@@ -82,8 +82,8 @@ def ofDiscreteContinuousRep :
   obj X := ⟨{ V := AddCommGrpCat.of X.obj.V
               ρ :=
                 { toFun g := AddCommGrpCat.ofHom (X.obj.ρ g : X.obj.V →+ X.obj.V)
-                  map_one' := AddCommGrpCat.ext fun x ↦ by simp [End.one_def]
-                  map_mul' _ _ := AddCommGrpCat.ext fun x ↦ by simp [End.mul_def] } },
+                  map_one' := AddCommGrpCat.ext fun x ↦ by simp [End.one_asHom]
+                  map_mul' _ _ := AddCommGrpCat.ext fun x ↦ by simp [End.mul_asHom] } },
     fun x ↦ X.property x⟩
   map {X Y} f := ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom (f.hom.hom : X.obj.V →+ Y.obj.V)

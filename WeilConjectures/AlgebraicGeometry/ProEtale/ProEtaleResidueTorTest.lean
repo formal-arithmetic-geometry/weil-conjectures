@@ -228,9 +228,9 @@ omit [Abelian 𝒞] in
 private lemma natural_power_comm (η : 𝟭 𝒞 ⟶ 𝟭 𝒞) {X Y : 𝒞} (f : X ⟶ Y) (n : ℕ) :
     ((End.of (η.app X)) ^ n) ≫ f = f ≫ ((End.of (η.app Y)) ^ n) := by
   induction n with
-  | zero => simp [End.one_def]
+  | zero => simp [End.one_asHom]
   | succ n ih =>
-    simp only [pow_succ, End.mul_def]
+    simp only [pow_succ, End.mul_asHom]
     rw [Category.assoc, ih, ← Category.assoc,
       show η.app X ≫ f = f ≫ η.app Y from (η.naturality f).symm, Category.assoc]
 
@@ -256,7 +256,7 @@ private theorem property_of_nilpotent
         ← Category.assoc]
       change (factorThruImage f ≫ image.ι f) ≫ _ = 0
       rw [image.fac]
-      simpa only [pow_succ, End.mul_def] using hn
+      simpa only [pow_succ, End.mul_asHom] using hn
     have hQ : η.app (cokernel i) = 0 := by
       apply (cancel_epi q).1
       rw [comp_zero, show q ≫ η.app (cokernel i) = f ≫ q from η.naturality q]

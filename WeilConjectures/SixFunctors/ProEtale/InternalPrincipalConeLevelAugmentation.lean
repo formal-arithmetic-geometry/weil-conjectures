@@ -122,7 +122,7 @@ private theorem conjugateFunctor_pow {C D : Type*} [Category* C] [Category* D]
     change e.inv ≫ F.map (𝟙 U) ≫ e.hom = 𝟙 V
     rw [F.map_id, Category.id_comp, Iso.inv_hom_id]
   | succ k ih =>
-    simpa only [pow_succ, End.mul_def, Functor.map_comp, Category.assoc,
+    simpa only [pow_succ, End.mul_asHom, Functor.map_comp, Category.assoc,
       Iso.hom_inv_id_assoc] using
       congrArg (fun t ↦ (e.inv ≫ F.map d ≫ e.hom) ≫ t) ih
 
@@ -137,7 +137,7 @@ private theorem complexAction_pow {A : Type*} [Category* A] [Abelian A]
     rw [map_one]
     rfl
   | succ k ih =>
-    rw [pow_succ, pow_succ, map_mul, End.mul_def, End.mul_def,
+    rw [pow_succ, pow_succ, map_mul, End.mul_asHom, End.mul_asHom,
       HomologicalComplex.comp_f, ih, hμ]
 
 /-- The normalized cone augmentation computes one positive quotient on a K-flat complex.

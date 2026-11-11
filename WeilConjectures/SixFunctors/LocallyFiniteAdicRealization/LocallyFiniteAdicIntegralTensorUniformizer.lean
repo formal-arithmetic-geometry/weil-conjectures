@@ -85,7 +85,7 @@ private theorem scalar_factor_isIso {R : Type*} [CommRing R] {A B : Type*} [Cate
       Category.id_comp, smul_smul, mul_comm]
   have hi : IsUnit (f * g) := by
     apply (CategoryTheory.isUnit_iff_isIso _).mpr
-    simpa only [f, g, End.mul_def, ← F.map_comp, Linear.smul_comp,
+    simpa only [f, g, End.mul_asHom, ← F.map_comp, Linear.smul_comp,
       Linear.comp_smul, Category.id_comp, smul_smul, mul_comm] using h
   exact (CategoryTheory.isUnit_iff_isIso _).mp ((hc.isUnit_mul_iff).mp hi).1
 

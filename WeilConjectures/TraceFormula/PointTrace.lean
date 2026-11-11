@@ -363,7 +363,7 @@ lemma linearMapTrace_gradedHom_map_shiftedUnitEquiv (n m : ℤ) (c : PadicAlgCl 
       change gradedHomHom ℓ k (((gradedHom ℓ k n).map _).hom (shiftedUnitEquiv ℓ k n d)) =
         gradedHomHom ℓ k (shiftedUnitEquiv ℓ k n (c * d))
       rw [gradedHomHom_map_apply, gradedHomHom_shiftedUnitEquiv, gradedHomHom_shiftedUnitEquiv,
-        gradedHomHom_shiftedUnitEquiv, ← Functor.map_comp, ← End.mul_def, ← map_mul]
+        gradedHomHom_shiftedUnitEquiv, ← Functor.map_comp, ← End.mul_asHom, ← map_mul]
     rw [e, map_smul, LinearMap.trace_id, ← (shiftedUnitEquiv ℓ k n).finrank_eq,
       Module.finrank_self, Nat.cast_one, smul_eq_mul, mul_one]
   · have := subsingleton_hom_shiftedUnit ℓ k n m h

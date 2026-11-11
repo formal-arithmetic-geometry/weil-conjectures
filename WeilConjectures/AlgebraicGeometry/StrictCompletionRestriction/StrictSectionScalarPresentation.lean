@@ -152,7 +152,7 @@ private theorem scalarPresentation (r : End (𝟭 A)) :
       (τ (n + 1)).app M = a.app M ≫ (τ n).app M := by
     ext q
     simp only [τ, a, NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.comp_f,
-      pow_succ, End.mul_def, NatTrans.comp_app]
+      pow_succ, End.mul_asHom, NatTrans.comp_app]
   let D (n : ℕ) := AlgebraicGeometry.ProEtale.strictCone (τ n)
   let t (n : ℕ) : D (n + 1) ⟶ D n := strictConeMap (τ (n + 1)) (τ n) a (hs n)
   let j (n : ℕ) : 𝟭 _ ⟶ D n := strictConeUnit (τ n)

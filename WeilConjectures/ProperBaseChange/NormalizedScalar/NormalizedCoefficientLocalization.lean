@@ -187,7 +187,7 @@ private theorem ring_localization_of_telescope
           rw [Category.comp_id, ← Category.assoc]
           have hw : (p • 𝟙 A) ≫ g = g ≫ (p • 𝟙 D) := by simp
           have ht : (p • 𝟙 D) ≫ t ^ (n + 1) = t ^ n := by
-            rw [pow_succ, End.mul_def, ← Category.assoc]
+            rw [pow_succ, End.mul_asHom, ← Category.assoc]
             simp only [t, IsIso.hom_inv_id, Category.id_comp]
           rw [hw, Category.assoc, ht]) }
   let f : B ⟶ D := e.inv ≫ hc.desc d

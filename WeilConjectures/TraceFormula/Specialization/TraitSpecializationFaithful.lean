@@ -176,11 +176,11 @@ theorem traitSpecialization_map_eq_zero_iff
     · exact hf
     exfalso
     have hid : 𝟙 ((traitSpecialization k k' (ℓ := ℓ)).obj (𝟙_ _)) = 0 := by
-      rw [← CategoryTheory.Functor.map_id, ← End.one_def, ← u.mul_inv, End.mul_def,
+      rw [← CategoryTheory.Functor.map_id, ← End.one_asHom, ← u.mul_inv, End.mul_asHom,
         Functor.map_comp, h, comp_zero]
     have := isIso_traitSpecializationUnit k k' (ℓ := ℓ)
     have h1 : (1 : End (𝟙_ (Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧))) = 0 := by
-      rw [End.one_def, ← IsIso.hom_inv_id (traitSpecializationUnit k k' (ℓ := ℓ)),
+      rw [End.one_asHom, ← IsIso.hom_inv_id (traitSpecializationUnit k k' (ℓ := ℓ)),
         ← Category.id_comp (inv _), hid, zero_comp, comp_zero]
     exact one_ne_zero h1
   · subst h

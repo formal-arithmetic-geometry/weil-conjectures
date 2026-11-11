@@ -343,7 +343,7 @@ private theorem scalar_power
       intro x
       simp [pow_succ, mul_assoc, mul_comm a]
     rw [hmul, Q.map_comp, ← Category.assoc, ih, Category.assoc, hc]
-    rw [pow_succ', End.mul_def, Category.assoc]
+    rw [pow_succ', End.mul_asHom, Category.assoc]
 
 /-- The rank-one exterior complex realizes as the explicit negative two-term factor.
 

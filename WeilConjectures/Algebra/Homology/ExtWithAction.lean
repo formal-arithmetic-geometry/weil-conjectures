@@ -50,13 +50,13 @@ noncomputable def smulEnd (P : C) (n : ℕ) : A →+* AddMonoid.End (Ext P F n) 
   map_one' := by
     ext x
     change x.comp (mk₀ (ρ 1)) (add_zero n) = x
-    rw [map_one, End.one_def]
+    rw [map_one, End.one_asHom]
     exact comp_mk₀_id x
   map_mul' a b := by
     ext x
     change x.comp (mk₀ (ρ (a * b))) (add_zero n) =
       (x.comp (mk₀ (ρ b)) (add_zero n)).comp (mk₀ (ρ a)) (add_zero n)
-    rw [map_mul, End.mul_def, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
+    rw [map_mul, End.mul_asHom, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
   map_zero' := by
     ext x
     change x.comp (mk₀ (ρ 0)) (add_zero n) = 0

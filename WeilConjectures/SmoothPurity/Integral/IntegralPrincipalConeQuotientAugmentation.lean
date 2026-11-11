@@ -129,7 +129,7 @@ private theorem scalarPower_eq
     induction k with
     | zero => simp
     | succ k ih =>
-      rw [pow_succ, End.mul_def]
+      rw [pow_succ, End.mul_asHom]
       change ((μ ^ k).f q).val.app U ((μ.f q).val.app U x) = _
       rw [hμ]
       have hlin := (((μ ^ k).f q).val.app U).hom.map_smul

@@ -62,7 +62,7 @@ noncomputable def genericPointSepAction {H : Type*} [Group H]
     rw [map_one, genericPointSepAut_one]
     rfl
   map_mul' g h := by
-    rw [map_mul, genericPointSepAut_mul, ← End.mul_def, MulOpposite.op_mul]
+    rw [map_mul, genericPointSepAut_mul, ← End.mul_asHom, MulOpposite.op_mul]
 
 @[simp]
 lemma unop_genericPointSepAction {H : Type*} [Group H]

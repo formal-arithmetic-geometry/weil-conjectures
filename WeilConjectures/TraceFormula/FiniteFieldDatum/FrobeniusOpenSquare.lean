@@ -113,15 +113,15 @@ private theorem isPullback_pow {X Y : Scheme.{u}} {f : X ⟶ X} {g : Y ⟶ Y}
   induction m with
   | zero => exact IsPullback.of_id_fst
   | succ m ih =>
-    simpa only [pow_succ, End.mul_def] using h.paste_horiz ih
+    simpa only [pow_succ, End.mul_asHom] using h.paste_horiz ih
 
 private theorem semilinear_pow {X S : Scheme.{u}} {f : X ⟶ X} {g : S ⟶ S}
     {a : X ⟶ S} (h : f ≫ a = a ≫ g) (m : ℕ) :
     (End.of f ^ m) ≫ a = a ≫ (End.of g ^ m) := by
   induction m with
-  | zero => simp only [pow_zero, End.one_def, Category.id_comp, Category.comp_id]
+  | zero => simp only [pow_zero, End.one_asHom, Category.id_comp, Category.comp_id]
   | succ m ih =>
-    rw [pow_succ, pow_succ, End.mul_def, End.mul_def, Category.assoc, ih,
+    rw [pow_succ, pow_succ, End.mul_asHom, End.mul_asHom, Category.assoc, ih,
       ← Category.assoc, h, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency false in

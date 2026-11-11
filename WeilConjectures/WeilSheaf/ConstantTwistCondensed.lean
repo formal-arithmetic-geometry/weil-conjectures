@@ -54,10 +54,10 @@ noncomputable def regularSmulIso (b : (PadicAlgCl l)ˣ) :
     (Profinite.PadicAlgCl.constRingHom l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
     ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l))
   hom_inv_id := by
-    rw [← End.mul_def, ← map_mul, ← map_mul, Units.inv_mul, map_one, map_one]
+    rw [← End.mul_asHom, ← map_mul, ← map_mul, Units.inv_mul, map_one, map_one]
     rfl
   inv_hom_id := by
-    rw [← End.mul_def, ← map_mul, ← map_mul, Units.mul_inv, map_one, map_one]
+    rw [← End.mul_asHom, ← map_mul, ← map_mul, Units.mul_inv, map_one, map_one]
     rfl
 
 omit [Finite k₀] in

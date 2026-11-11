@@ -83,7 +83,7 @@ lemma isZero_finiteFree_iff {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpa
       rw [← biproduct.ι_π_self (fun _ : Fin d ↦ Mod.regular _) i,
         h.eq_of_tgt (biproduct.ι (fun _ : Fin d ↦ Mod.regular _) i) 0, zero_comp]
     have h2 := congrArg (endValueRingHom (ℓ := ℓ) w) h1
-    rw [← End.one_def, map_one, map_zero] at h2
+    rw [← End.one_asHom, map_one, map_zero] at h2
     exact one_ne_zero h2
   · rintro rfl
     exact isZero_finiteFree_zero _

@@ -183,13 +183,16 @@ def artinSchreierAction (hP : P = X ^ p - X - C f) (hchar : (p : Γ(S, ⊤)) = 0
     Multiplicative (ZMod p) →* Aut (adjoinRootCover S P) where
   toFun a := artinSchreierTranslationIso hP hchar a.toAdd
   map_one' := by
+    apply Aut.ext
+    rw [Aut.one_asIso]
     ext : 1
     refine Over.OverMorphism.ext ?_
     exact artinSchreierTranslation_zero hP hchar
   map_mul' a b := by
+    apply Aut.ext
+    rw [Aut.mul_asIso]
     ext : 1
     refine Over.OverMorphism.ext ?_
-    rw [Aut.Aut_mul_def]
     exact (congr_arg (artinSchreierTranslation hP hchar) (add_comm a.toAdd b.toAdd)).trans
       (artinSchreierTranslation_add hP hchar _ _)
 

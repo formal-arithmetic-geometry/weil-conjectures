@@ -205,7 +205,7 @@ noncomputable def basis : Module.Basis ι (End (𝟙_ C))ᵐᵒᵖ (𝟙_ C ⟶ 
       map_smul' r x := by
         ext i
         apply MulOpposite.unop_injective
-        simp [End.smul_left, End.mul_def]
+        simp [End.smul_left, End.mul_asHom]
       left_inv x := by
         simp only [End.smul_left, MulOpposite.unop_op, Category.assoc, ← Preadditive.comp_sum,
           b.total, Category.comp_id]

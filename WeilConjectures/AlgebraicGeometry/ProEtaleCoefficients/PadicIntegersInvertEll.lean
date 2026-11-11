@@ -201,7 +201,7 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
   let t : End (padicSubfieldIntegralModule X ℓ E) := inv (ℓ • 𝟙 _)
   have hpow (n : ℕ) : α.app n = α.app 0 ≫ t ^ n := by
     induction n with
-    | zero => simp [End.one_def]
+    | zero => simp [End.one_asHom]
     | succ n ih =>
       have hn := c.w (homOfLE (Nat.le_succ n))
       dsimp only [padicIntegersEllSequence] at hn
@@ -217,7 +217,7 @@ theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
           Functor.const_obj_obj] at hn ⊢
         rw [Preadditive.comp_nsmul, Category.comp_id]
         exact hn
-      rw [pow_succ', End.mul_def, ← Category.assoc, ← ih]
+      rw [pow_succ', End.mul_asHom, ← Category.assoc, ← ih]
       apply (cancel_mono (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E))).1
       dsimp only [t]
       rw [Category.assoc, IsIso.inv_hom_id, Category.comp_id, hn']

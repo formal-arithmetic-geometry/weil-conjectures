@@ -44,6 +44,6 @@ lemma purity_regularSmulIso_cyclotomic_cancel :
     exact (nsmul_one (Nat.card k₀)).symm
   rw [hn] at h
   simpa only [r, RingHom.comp_apply, regularSmulIso_hom, WeilSheaf.cyclotomicUnit_eq,
-    End.mul_def, End.one_def] using h
+    End.mul_asHom, End.one_asHom] using h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

@@ -74,7 +74,7 @@ lemma finFreeMatrix_comp {l m n : ℕ} (φ : finiteFree R l ⟶ finiteFree R m)
   rw [this, Preadditive.sum_comp, Preadditive.comp_sum, Preadditive.sum_comp,
     Preadditive.comp_sum]
   refine Finset.sum_congr rfl fun b _ ↦ ?_
-  rw [finFreeMatrix_apply, finFreeMatrix_apply, End.mul_def, finFreeEntry, finFreeEntry]
+  rw [finFreeMatrix_apply, finFreeMatrix_apply, End.mul_asHom, finFreeEntry, finFreeEntry]
   simp only [Category.assoc]
 
 omit [PreservesFiniteColimits (tensorLeft R)] in

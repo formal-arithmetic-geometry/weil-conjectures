@@ -267,7 +267,7 @@ theorem map_power_intertwines (f : End X) (g : End Y) (e : P.obj X ≅ Y)
   induction n with
   | zero => simp
   | succ n ih =>
-    simp only [pow_succ, End.mul_def, P.map_comp, Category.assoc, ih]
+    simp only [pow_succ, End.mul_asHom, P.map_comp, Category.assoc, ih]
     rw [← Category.assoc, h, Category.assoc]
 
 noncomputable def doubleComparisonX (f : End X) (g : End Y)

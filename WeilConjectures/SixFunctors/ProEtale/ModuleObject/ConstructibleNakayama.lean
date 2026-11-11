@@ -228,7 +228,7 @@ theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
       have e : biproduct.ι (fun _ ↦ regular R) b ≫ A ≫ yt = eR (∑ a, y a * t a b) := by
         rw [← Category.assoc, hsum _ yt, map_sum]
         refine Finset.sum_congr rfl fun a _ ↦ ?_
-        rw [map_mul, End.mul_def, biproduct.ι_desc, ht]
+        rw [map_mul, End.mul_asHom, biproduct.ι_desc, ht]
         simp only [Category.assoc]
       rw [e]
       refine (cancel_epi (extendScalarsObjRegularIso φ).inv).1 ?_
@@ -259,7 +259,7 @@ theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
         simp only [Category.assoc]
       rw [e, hsum (biproduct.ι _ c ≫ D) (A ≫ biproduct.π _ a), Matrix.mul_apply, map_sum]
       refine Finset.sum_congr rfl fun b _ ↦ ?_
-      rw [biproduct.ι_matrix, biproduct.lift_π, map_mul, End.mul_def, ht]
+      rw [biproduct.ι_matrix, biproduct.lift_π, map_mul, End.mul_asHom, ht]
     rw [e1, hs, Category.comp_id, biproduct.ι_π, Matrix.one_apply]
     by_cases hac : a = c
     · subst hac

@@ -61,7 +61,7 @@ variable {C : Type u} [Category.{v} C] {T : C} {H : Type*} [Group H] (a : H →*
 
 lemma End.unop_map_mul (g h : H) :
     MulOpposite.unop (a (g * h)) = .of ((a g)).unop ≫ (a h).unop := by
-  rw [map_mul, MulOpposite.unop_mul, End.mul_def]
+  rw [map_mul, MulOpposite.unop_mul, End.mul_asHom]
 
 namespace Presheaf
 

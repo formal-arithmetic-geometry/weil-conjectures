@@ -150,10 +150,10 @@ private theorem intertwine_pow {C : Type*} [Category C] {A B : C}
   | succ k ih =>
       calc
         (a ^ (k + 1)) ≫ v = a ≫ ((a ^ k) ≫ v) := by
-          rw [pow_succ, End.mul_def, Category.assoc]
+          rw [pow_succ, End.mul_asHom, Category.assoc]
         _ = a ≫ (v ≫ (b ^ k)) := by rw [ih]
         _ = v ≫ (b ^ (k + 1)) := by
-          rw [← Category.assoc, h, Category.assoc, pow_succ, End.mul_def]
+          rw [← Category.assoc, h, Category.assoc, pow_succ, End.mul_asHom]
 
 private theorem scalarOnModules_pow
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (k : ℕ) :
@@ -161,11 +161,11 @@ private theorem scalarOnModules_pow
       (End.of (DerivedNakayama.scalarOnModules l E X d)) ^ k := by
   induction k with
   | zero =>
-      simp only [pow_zero, End.one_def, DerivedNakayama.scalarOnModules,
+      simp only [pow_zero, End.one_asHom, DerivedNakayama.scalarOnModules,
         CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id]
       erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id]
   | succ k ih =>
-      rw [pow_succ, End.mul_def, pow_succ, End.mul_def, ← ih]
+      rw [pow_succ, End.mul_asHom, pow_succ, End.mul_asHom, ← ih]
       unfold DerivedNakayama.scalarOnModules
       simp only [Functor.map_comp, Category.assoc]
       simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_assoc]
@@ -184,7 +184,7 @@ private theorem scalarOnModules_map_pow
   induction k with
   | zero => simp
   | succ k ih =>
-      simpa only [pow_succ, End.mul_def, NatTrans.comp_app, Functor.map_comp,
+      simpa only [pow_succ, End.mul_asHom, NatTrans.comp_app, Functor.map_comp,
         End.of] using congrArg (fun z ↦ (modules l E X).map (τ.app M) ≫ z) ih
 
 private theorem complex_scalar_unitor

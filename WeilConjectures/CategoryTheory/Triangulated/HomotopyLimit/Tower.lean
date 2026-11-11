@@ -361,8 +361,8 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
   have hδ''pow : ∀ j : ℕ, ((End.of (towerShift hP') ^ j).asHom) ≫ δ'' = δ'' := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, id_comp]
-    | succ j ih => rw [pow_succ, End.mul_def, assoc, ih, hδ'']
+    | zero => rw [pow_zero, End.one_asHom, id_comp]
+    | succ j ih => rw [pow_succ, End.mul_asHom, assoc, ih, hδ'']
   let φ : Triangle.mk _ _ δ ⟶ Triangle.mk ℓ'' (𝟙 P'.pt - towerShift hP') δ'' :=
     { hom₁ := u, hom₂ := p, hom₃ := p, comm₁ := hu₁, comm₂ := hpτ.symm, comm₃ := hu₃ }
   let φ' : Triangle.mk ℓ'' (𝟙 P'.pt - towerShift hP') δ'' ⟶ Triangle.mk _ _ δ :=

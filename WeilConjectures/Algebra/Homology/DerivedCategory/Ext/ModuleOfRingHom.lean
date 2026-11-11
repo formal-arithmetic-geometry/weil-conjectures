@@ -36,11 +36,11 @@ noncomputable abbrev moduleOfRingHom {X Y : C} (φ : R →+* End Y) (n : ℕ) :
   smul r x := x.comp (mk₀ (φ r)) (add_zero n)
   one_smul x := by
     change x.comp (mk₀ (φ 1)) (add_zero n) = x
-    rw [map_one, End.one_def, comp_mk₀_id]
+    rw [map_one, End.one_asHom, comp_mk₀_id]
   mul_smul r s x := by
     change x.comp (mk₀ (φ (r * s))) (add_zero n) =
       (x.comp (mk₀ (φ s)) (add_zero n)).comp (mk₀ (φ r)) (add_zero n)
-    rw [map_mul, End.mul_def, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
+    rw [map_mul, End.mul_asHom, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
   smul_zero r := Ext.zero_comp X n (mk₀ (φ r)) n (add_zero n)
   smul_add r x y := Ext.add_comp x y (mk₀ (φ r)) (add_zero n)
   add_smul r s x := by

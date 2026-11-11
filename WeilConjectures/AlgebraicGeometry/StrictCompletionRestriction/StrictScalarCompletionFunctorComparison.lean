@@ -89,7 +89,7 @@ private theorem map_scalar_pow (n : ℕ) (M : A) :
   induction n with
   | zero => simp
   | succ n ih =>
-      simp only [pow_succ, End.mul_def, NatTrans.comp_app, Functor.map_comp, ih, hscalar]
+      simp only [pow_succ, End.mul_asHom, NatTrans.comp_app, Functor.map_comp, ih, hscalar]
 
 omit [HasCountableProducts A] [HasDerivedCategory A]
   [HasCountableProducts B] [HasDerivedCategory B]

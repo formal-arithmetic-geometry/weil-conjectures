@@ -31,7 +31,7 @@ noncomputable def scalarLocalizationUnitCocone
   let t : End (L.obj K) := inv (ℓ • 𝟙 (L.obj K))
   Mod.smulSequenceCocone ℓ (fun n ↦ adj.unit.app K ≫ U.map (t ^ n)) fun n ↦ by
     have ht : (ℓ • 𝟙 (L.obj K)) ≫ t ^ (n + 1) = t ^ n := by
-      rw [pow_succ, End.mul_def, ← Category.assoc]
+      rw [pow_succ, End.mul_asHom, ← Category.assoc]
       simp only [t, IsIso.hom_inv_id, Category.id_comp]
     rw [← Preadditive.comp_nsmul, ← U.map_nsmul, ← ht, Preadditive.nsmul_comp,
       Category.id_comp]

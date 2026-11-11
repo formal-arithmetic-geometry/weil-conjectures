@@ -53,7 +53,7 @@ lemma pow_map_adicSheafSmul {D : Type*} [Category D] {Z : Scheme.{u}} (F : AdicS
     erw [AdicSheaf.smul_one, CategoryTheory.Functor.map_id]
     rfl
   | succ n ih =>
-    rw [_root_.pow_succ, End.mul_def, ih, ← F.map_comp, AdicSheaf.smul_smul, _root_.pow_succ]
+    rw [_root_.pow_succ, End.mul_asHom, ih, ← F.map_comp, AdicSheaf.smul_smul, _root_.pow_succ]
     rfl
 
 omit [Fact (ringChar k₀ ≠ l)] in

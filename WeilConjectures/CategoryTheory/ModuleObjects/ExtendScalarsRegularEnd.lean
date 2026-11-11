@@ -63,7 +63,7 @@ variable [Preadditive C] [MonoidalPreadditive C] [IsCommMonObj S]
 `s : 𝟙 ⟶ R` of `R` to the multiplication by the global section `s ≫ φ` of `S`. -/
 @[reassoc]
 lemma extendScalarsObjRegularIso_inv_comp_map (s : Γ R) :
-    (extendScalarsObjRegularIso φ).inv ≫ (extendScalars φ).map (regularEndRingHom s) =
+    (extendScalarsObjRegularIso φ).inv ≫ (extendScalars φ).map (regularEndRingHom s).asHom =
       (regularEndRingHom (Γ.map φ s)).asHom ≫ (extendScalarsObjRegularIso φ).inv := by
   refine regular_hom_ext ?_
   rw [comp_hom', comp_hom', regularEndRingHom_apply, regularEndRingHom_apply,
@@ -83,7 +83,7 @@ noncomputable def extendScalarsCompObjRegularIso :
 multiplication by a global section `s` of `R` to the multiplication by its image in `T`. -/
 lemma extendScalarsCompObjRegularIso_inv_comp_map (s : Γ R) :
     (extendScalarsCompObjRegularIso φ ψ).inv ≫
-        (extendScalars φ ⋙ extendScalars ψ).map (regularEndRingHom s) =
+        (extendScalars φ ⋙ extendScalars ψ).map (regularEndRingHom s).asHom =
       (regularEndRingHom (Γ.map ψ (Γ.map φ s))).asHom ≫ (extendScalarsCompObjRegularIso φ ψ).inv := by
   rw [extendScalarsCompObjRegularIso, Iso.trans_inv, Functor.mapIso_inv, Functor.comp_map,
     Category.assoc, ← Functor.map_comp, extendScalarsObjRegularIso_inv_comp_map, Functor.map_comp,

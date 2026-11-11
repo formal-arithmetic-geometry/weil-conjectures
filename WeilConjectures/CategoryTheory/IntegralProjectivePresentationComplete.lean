@@ -63,7 +63,7 @@ theorem exists_cokernel_limit_of_continuous_end
     rw [map_sum, hsum z (A ≫ biproduct.π (fun _ ↦ P) i)]
     apply Finset.sum_congr rfl
     intro j _
-    simp only [map_mul, RingEquiv.apply_symm_apply, End.mul_def, t]
+    simp only [map_mul, RingEquiv.apply_symm_apply, End.mul_asHom, t]
   have hb : ∀ k l : ℕ, k ≤ l →
       ∃ a : Fin m → C(S, R), ∃ c : Fin n → C(S, R),
         ∀ i, b l i = b k i + (∑ j, t i j * a j) + (r : R) ^ (k + 1) • c i := by

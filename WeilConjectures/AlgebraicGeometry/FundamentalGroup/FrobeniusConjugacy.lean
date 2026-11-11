@@ -123,7 +123,7 @@ lemma IsFrobeniusElement.exists_conj {x : X₀} [Finite (X₀.residueField x)] {
     ∃ c : G, c * f₁ * c⁻¹ = f₂ := by
   obtain ⟨σ₁, hσ₁⟩ := h₁
   obtain ⟨σ₂, hσ₂⟩ := h₂
-  obtain ⟨c, hc⟩ := (toAut_bijective (fiber s) G).2 .of ((σ₁.symm ≪≫ σ₂))
+  obtain ⟨c, hc⟩ := (toAut_bijective (fiber s) G).2 (.of (σ₁.symm ≪≫ σ₂))
   have hcact (P : X₀.FiniteEtale) (y : (fiber (residueFieldPoint X₀ x)).obj P) :
       c • σ₁.hom.app P y = σ₂.hom.app P y := by
     rw [← toAut_hom_app_apply, hc]

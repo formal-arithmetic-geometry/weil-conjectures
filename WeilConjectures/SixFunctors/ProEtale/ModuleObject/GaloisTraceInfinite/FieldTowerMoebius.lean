@@ -188,7 +188,7 @@ theorem exists_galoisTowerMoebiusDecomposition :
       End ((infFunctor Λ (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).obj
         (K.X n)), ∀ n k, π n k = 𝒫[K.X n, hc n, k] := ⟨_, fun _ _ ↦ rfl⟩
   have hπ : ∀ n x y, π n x * π n y = π n (x ⊓ y) := fun n x y ↦ by
-    rw [End.mul_def, inf_comm, hπdef, hπdef, hπdef]
+    rw [End.mul_asHom, inf_comm, hπdef, hπdef, hπdef]
     exact galoisTower_proj_comp_proj h Λ hd (hc n) y x
   obtain ⟨e, he⟩ : ∃ e : ∀ n, FiniteGaloisIntermediateField L Ω →
       End ((infFunctor Λ (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).obj

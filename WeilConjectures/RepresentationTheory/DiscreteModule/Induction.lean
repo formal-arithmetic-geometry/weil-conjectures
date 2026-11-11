@@ -136,9 +136,9 @@ def coindAction (N : DiscreteModule.{w} K) : Action AddCommGrpCat.{max u w} G wh
   ρ :=
     { toFun g := AddCommGrpCat.ofHom (coindTranslate N g)
       map_one' := AddCommGrpCat.ext fun f ↦ Subtype.ext (Subtype.ext (funext fun x ↦ by
-        simp [End.one_def]))
+        simp [End.one_asHom]))
       map_mul' a b := AddCommGrpCat.ext fun f ↦ Subtype.ext (Subtype.ext (funext fun x ↦ by
-        simp [End.mul_def, mul_assoc])) }
+        simp [End.mul_asHom, mul_assoc])) }
 
 lemma coindAction_stabilizer (N : DiscreteModule.{w} K) (f : (coindAction K N).V) :
     (coindAction K N).stabilizer f = rightStab G f.1.1 := by

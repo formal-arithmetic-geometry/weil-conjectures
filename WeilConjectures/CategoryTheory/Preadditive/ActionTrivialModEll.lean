@@ -59,7 +59,7 @@ theorem End.exists_map_pow_sub_one_eq_pow_smul {Y Z : C} (π : Y ⟶ Z) {ℓ : �
     {G : Type*} [Group G] (ρ : G →* End Y) (hρ : ∀ τ, (ρ τ).asHom ≫ π = π) (m : ℕ) (τ : G) :
     ∃ y : End Y, ρ (τ ^ ℓ ^ m) - 1 = (ℓ ^ (m + 1)) • y := by
   obtain ⟨g, hg⟩ := hπ (ρ τ - 1) (by
-    rw [Preadditive.sub_comp, hρ, End.one_def, Category.id_comp, sub_self])
+    rw [Preadditive.sub_comp, hρ, End.one_asHom, Category.id_comp, sub_self])
   have hτ : ρ τ = 1 + ℓ * g := by rw [← nsmul_eq_mul, ← hg, add_sub_cancel]
   obtain ⟨y, hy⟩ := exists_one_add_natCast_mul_pow_sub_one_eq ℓ m g
   exact ⟨y, by rw [map_pow, hτ, hy, nsmul_eq_mul, Nat.cast_pow]⟩

@@ -45,10 +45,10 @@ lemma geometricFrobeniusField_hom_pow (N : ℕ) :
         ((geometricFrobenius k (AlgebraicClosure k)) ^ N).toRingEquiv.toRingHom) := by
   induction N with
   | zero =>
-    rw [pow_zero, pow_zero, End.one_def]
+    rw [pow_zero, pow_zero, End.one_asHom]
     exact (Spec.map_id _).symm
   | succ N ih =>
-    rw [pow_succ, End.mul_def, ih, geometricFrobeniusField_hom, ← Spec.map_comp]
+    rw [pow_succ, End.mul_asHom, ih, geometricFrobeniusField_hom, ← Spec.map_comp]
     congr 1
     ext y
     simp [pow_succ', AlgEquiv.mul_apply]
@@ -147,7 +147,7 @@ theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
   have hN : N ≠ 0 := Nat.mul_ne_zero (Nat.succ_ne_zero n) (Nat.succ_ne_zero m)
   have hA : (show End X.left from (e.pow (n + 1)).hom.left) ^ (m + 1) = 𝟙 X.left := by
     rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul,
-      ← Iso.pow_hom_eq_pow, hm, Iso.refl_hom, ← End.one_def, one_pow]
+      ← Iso.pow_hom_eq_pow, hm, Iso.refl_hom, ← End.one_asHom, one_pow]
     rfl
   have hfix : ∀ x : frobeniusFixedPoints e (n + 1),
       ((show End (Spec (.of (AlgebraicClosure k))) from (geometricFrobeniusField k).hom) ^ N) ≫

@@ -102,7 +102,7 @@ lemma averaging_comp {E : C} (ρ : G →* End E) (g : G) :
   rw [averaging, Linear.smul_comp, Preadditive.sum_comp]
   congr 1
   refine Fintype.sum_equiv (Equiv.mulLeft g) _ _ fun h ↦ ?_
-  rw [Equiv.coe_mulLeft, map_mul, End.mul_def]
+  rw [Equiv.coe_mulLeft, map_mul, End.mul_asHom]
 
 /-- The averaging endomorphism is invariant: `e ∘ ρ(g) = e`. -/
 lemma comp_averaging {E : C} (ρ : G →* End E) (g : G) :
@@ -110,7 +110,7 @@ lemma comp_averaging {E : C} (ρ : G →* End E) (g : G) :
   rw [averaging, Linear.comp_smul, Preadditive.comp_sum]
   congr 1
   refine Fintype.sum_equiv (Equiv.mulRight g) _ _ fun h ↦ ?_
-  rw [Equiv.coe_mulRight, map_mul, End.mul_def]
+  rw [Equiv.coe_mulRight, map_mul, End.mul_asHom]
 
 /-- The averaging endomorphism of an action is an **idempotent**. -/
 lemma averaging_comp_averaging {E : C} (ρ : G →* End E) :
@@ -128,9 +128,9 @@ variable {C' : Type u₂} [Category.{v₂} C'] [Preadditive C'] [Linear R C'] (D
 @[simps]
 def contragredient {E : C} (ρ : G →* End E) : G →* End (D.obj (op E)) where
   toFun h := D.map (ρ h⁻¹).op
-  map_one' := by rw [inv_one, map_one, End.one_def, op_id, D.map_id, End.one_def]
+  map_one' := by rw [inv_one, map_one, End.one_asHom, op_id, D.map_id, End.one_asHom]
   map_mul' g h := by
-    rw [mul_inv_rev, map_mul, End.mul_def, op_comp, D.map_comp, End.mul_def]
+    rw [mul_inv_rev, map_mul, End.mul_asHom, op_comp, D.map_comp, End.mul_asHom]
 
 /-- **Duality sends the averaging idempotent to the averaging idempotent of the contragredient
 action**, since inversion `h ↦ h⁻¹` permutes the summands. Only additivity of `D` is used: the

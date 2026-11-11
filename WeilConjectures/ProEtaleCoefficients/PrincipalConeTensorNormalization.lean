@@ -45,7 +45,7 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
       have h := unitEndAction_naturality a b
-      simpa only [End.mul_def, unitEndAction_unit] using h }
+      simpa only [End.mul_asHom, unitEndAction_unit] using h }
 private def Scalars := End (𝟙_ A)
 private instance : CommRing (Scalars A) := scalarRing A
 variable [BraidedCategory A]

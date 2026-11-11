@@ -29,6 +29,6 @@ lemma pow_left {S : C} {X : Over S} (a : End X) (j : ℕ) :
     (a ^ j : End X).left = (show End X.left from a.left) ^ j := by
   induction j with
   | zero => rfl
-  | succ j ih => rw [pow_succ, pow_succ, End.mul_def, End.mul_def, Over.comp_left, ih]
+  | succ j ih => rw [pow_succ, pow_succ, End.mul_asHom, End.mul_asHom, Over.comp_left, ih]
 
 end CategoryTheory.Over

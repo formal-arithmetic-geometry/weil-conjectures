@@ -31,7 +31,7 @@ def level (n : ℕ) := mappingCone (μ ^ (n + 1))
 Source: Stacks 0A0E (auxiliary; not a blueprint node).
 Proof: the power recursion in the endomorphism monoid is composition. -/
 theorem square (n : ℕ) : (μ ^ (n + 1 + 1)) ≫ 𝟙 P = μ ≫ (μ ^ (n + 1)) := by
-  simpa only [Category.comp_id, End.mul_def] using pow_succ μ (n + 1)
+  simpa only [Category.comp_id, End.mul_asHom] using pow_succ μ (n + 1)
 
 /-- The transition acts by μ on the source and by 1 on the target.
 Source: Stacks 0A0E (auxiliary; not a blueprint node). -/

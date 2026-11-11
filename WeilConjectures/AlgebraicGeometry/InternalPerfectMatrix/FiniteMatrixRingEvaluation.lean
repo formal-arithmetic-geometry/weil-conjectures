@@ -44,6 +44,7 @@ theorem ringMatrix_comp {C : Type*} [Category* C] [Preadditive C]
   intro k
   simp only [Category.assoc, biproduct.ι_matrix_assoc, biproduct.matrix_π,
     biproduct.lift_desc, biproduct.ι_desc, map_sum]
+  rw [End.sum_asHom]
   congr 1
   funext j
   exact ringEntry_comp M e _ _
@@ -73,7 +74,7 @@ theorem ringMatrix_units_smul {C : Type*} [Category* C] [Preadditive C]
     biproduct.matrix (fun i j ↦ (e (s • a i j)).asHom) =
       s • biproduct.matrix (fun i j ↦ (e (a i j)).asHom) := by
   ext i j
-  simp only [biproduct.matrix, Units.smul_def, map_zsmul,
+  simp only [biproduct.matrix, Units.smul_def, map_zsmul, End.zsmul_asHom,
     Preadditive.comp_zsmul, Preadditive.zsmul_comp,
     biproduct.ι_desc_assoc, biproduct.lift_π]
 

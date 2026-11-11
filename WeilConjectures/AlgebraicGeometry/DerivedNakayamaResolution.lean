@@ -219,7 +219,7 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
       have h := unitEndAction_naturality a b
-      simpa only [End.mul_def, unitEndAction_unit] using h }
+      simpa only [End.mul_asHom, unitEndAction_unit] using h }
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 private instance derivedNakayamaResolutionInst1 : CommRing (Scalars A) := scalarRing A
@@ -382,7 +382,7 @@ private theorem sequences :
       (∀ m n, r (n + m) ≫ q m n = r n) ∧
       ∀ m n, ∃ h : i m n ≫ q m n = 0, (ShortComplex.mk _ _ h).ShortExact := by
   have hpow (m n : ℕ) : (d ^ m) ≫ (d ^ n) = d ^ (n + m) := by
-    rw [← End.mul_def, ← pow_add]
+    rw [← End.mul_asHom, ← pow_add]
   let e (m n : ℕ) : cokernel ((d ^ m) ≫ (d ^ n)) ≅ B (n + m) :=
     cokernelIsoOfEq (hpow m n) ≪≫ quotientIso d B r hz hs (n + m)
   let S (m n : ℕ) := kernelCokernelCompSequence.snakeInput (d ^ m) (d ^ n)
@@ -546,7 +546,7 @@ private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     change f.down s = _
     simp
   | succ n ih =>
-    rw [pow_succ, End.mul_def]
+    rw [pow_succ, End.mul_asHom]
     change (((uniformizerEnd l E ^ n).hom.hom.app S)
       (((uniformizerEnd l E).hom.hom.app S) f)).down s = _
     rw [ih, uniformizerEnd_apply, pow_succ, mul_assoc]

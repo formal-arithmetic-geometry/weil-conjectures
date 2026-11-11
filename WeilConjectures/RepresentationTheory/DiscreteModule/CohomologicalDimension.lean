@@ -110,9 +110,9 @@ def quotientAction : Action AddCommGrpCat.{max u w} G where
   ρ :=
     { toFun g := AddCommGrpCat.ofHom (QuotientAddGroup.map S S (X.obj.ρ g).hom fun x hx ↦ hS g x hx)
       map_one' := AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
-        simp [End.one_def]
+        simp [End.one_asHom]
       map_mul' a b := AddCommGrpCat.ext fun q ↦ QuotientAddGroup.induction_on q fun x ↦ by
-        simp [End.mul_def] }
+        simp [End.mul_asHom] }
 
 /-- The quotient of a discrete module by a stable subgroup. -/
 def quotient : DiscreteModule.{w} G :=
@@ -426,8 +426,8 @@ def subAction : Action AddCommGrpCat.{max u w} G where
   ρ :=
     { toFun g := AddCommGrpCat.ofHom (((X.obj.ρ g).hom.comp S.subtype).codRestrict S
         fun x ↦ hS g x x.2)
-      map_one' := AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.one_def])
-      map_mul' a b := AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.mul_def]) }
+      map_one' := AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.one_asHom])
+      map_mul' a b := AddCommGrpCat.ext fun x ↦ Subtype.ext (by simp [End.mul_asHom]) }
 
 /-- The discrete submodule given by a stable subgroup. -/
 def sub : DiscreteModule.{w} G :=

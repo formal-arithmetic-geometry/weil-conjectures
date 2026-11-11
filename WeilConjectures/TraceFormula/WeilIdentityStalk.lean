@@ -128,7 +128,7 @@ theorem _root_.CategoryTheory.Iso.powSuccStr_trans_hom_eq_of_pred {C D : Type*} 
       hβ, Category.assoc, ← Category.assoc ((P _).map (κ e.hom he).hom),
       ← Category.assoc ((comp _ _).hom.app a), hκ _ _ (hpow n) he (hpow (n + 1)),
           _root_.pow_succ,
-      End.mul_def]
+      End.mul_asHom]
     rfl
 lemma upperStarComp_hom_app_comp_upperStarIsoIdOfEq_of_eq {Y : Scheme.{u}} {f g h : Y ⟶ Y}
     (hfgh : f ≫ g = h) (hf : f = 𝟙 Y) (hg : g = 𝟙 Y) (hh : h = 𝟙 Y)

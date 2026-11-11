@@ -546,7 +546,7 @@ noncomputable def sheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y �
     rw [map_one]
     exact CategoryTheory.Functor.map_id _ _
   map_mul' a b := by
-    simp only [map_mul, End.mul_def, Functor.map_comp]
+    simp only [map_mul, End.mul_asHom, Functor.map_comp]
     simp [Category.assoc]
   map_zero' := by
     rw [map_zero, Functor.map_zero]
@@ -579,7 +579,7 @@ Source: RefactorInstruction, Section 4, coefficient realization
     change _ ≫ 𝟙 _ ≫ _ = _
     simp
   · intro a b
-    simp only [map_mul, End.mul_def, CategoryTheory.Functor.map_comp]
+    simp only [map_mul, End.mul_asHom, CategoryTheory.Functor.map_comp]
     simp [Category.assoc]
   · rw [map_zero, CategoryTheory.Functor.map_zero]
     simp

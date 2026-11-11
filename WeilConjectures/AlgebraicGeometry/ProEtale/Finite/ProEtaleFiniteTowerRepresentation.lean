@@ -55,6 +55,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.Basic.Finite.Prod
 public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.Data.Fintype.Shrink
 
 /-! # Geometric representation of finite coefficient towers -/
 

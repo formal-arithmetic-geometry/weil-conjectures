@@ -39,7 +39,8 @@ private theorem character_column_row
     rw [mul_left_comm, ← χ.map_add_eq_mul, add_neg_cancel,
       χ.map_zero_eq_one, mul_one]
   simp only [scalar_comp r, he, Finset.sum_const, Finset.card_univ]
-  change (Fintype.card G • r (Ring.inverse (Fintype.card G : S)) : End R) = 1
+  rw [← End.nsmul_asHom, ← End.one_asHom]
+  congr 1
   rw [← map_nsmul r, nsmul_eq_mul, Ring.mul_inverse_cancel _ hn, map_one]
 
 private theorem character_matrix_factorization
@@ -64,7 +65,7 @@ private theorem character_matrix_factorization
   apply Finset.sum_congr rfl
   intro b hb
   simp only [Category.assoc, scalar_comp r]
-  apply congrArg (fun z ↦ q.hom ≫ Pi.π (fun _ : G ↦ R) b ≫ r z)
+  apply congrArg (fun z ↦ q.hom ≫ Pi.π (fun _ : G ↦ R) b ≫ (r z).asHom)
   rw [sub_eq_add_neg, χ.map_add_eq_mul]
   ring
 
@@ -98,16 +99,16 @@ theorem characterMatrix_image_evaluation_isIso
     dsimp only [col, row]
     simp only [Category.assoc, Iso.inv_hom_id_assoc]
     exact character_column_row r G χ hn
-  have hp : row ≫ col = e := character_matrix_factorization r G χ q e he
+  have hp : row ≫ col = e.asHom := character_matrix_factorization r G χ q e he
   let : IsSplitEpi row := IsSplitEpi.mk' ⟨col, hs⟩
   let : IsSplitMono col := IsSplitMono.mk' ⟨row, hs⟩
-  let i : R ≅ image e := image.isoStrongEpiMono row col hp
-  have hi : i.hom ≫ (image.ι e ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0) = 𝟙 R := by
+  let i : R ≅ image e.asHom := image.isoStrongEpiMono row col hp
+  have hi : i.hom ≫ (image.ι e.asHom ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0) = 𝟙 R := by
     rw [← Category.assoc, image.isoStrongEpiMono_hom_comp_ι]
     simp only [col, Category.assoc, Iso.inv_hom_id_assoc, Pi.lift_comp_π,
       χ.map_zero_eq_one, map_one]
     rfl
-  have : IsIso (i.hom ≫ (image.ι e ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0)) := by
+  have : IsIso (i.hom ≫ (image.ι e.asHom ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0)) := by
     rw [hi]
     infer_instance
   exact IsIso.of_isIso_comp_left i.hom _

@@ -30,7 +30,7 @@ theorem integralLocalization_zero_isIso (ℓ : ℕ)
   let t : End K := inv (ℓ • 𝟙 K)
   let d : Cocone (Mod.smulSequence K ℓ) :=
     Mod.smulSequenceCocone ℓ (fun n ↦ t ^ n) fun n ↦ by
-      rw [← Category.id_comp (t ^ (n + 1)), ← Preadditive.nsmul_comp, pow_succ, End.mul_def,
+      rw [← Category.id_comp (t ^ (n + 1)), ← Preadditive.nsmul_comp, pow_succ, End.mul_asHom,
         ← Category.assoc]
       simp [t]
   have hz : d.ι.app 0 = 𝟙 K := rfl

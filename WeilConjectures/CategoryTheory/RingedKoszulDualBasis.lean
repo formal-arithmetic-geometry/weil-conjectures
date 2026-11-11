@@ -71,7 +71,7 @@ private theorem unit_tensor_scalars
     (f * g) ≫ (MonoidalCategory.leftUnitor (MonoidalCategory.tensorUnit E)).inv := by
   rw [MonoidalCategory.leftUnitor_inv_comp_tensorHom,
     MonoidalCategory.unitors_inv_equal, ← MonoidalCategory.rightUnitor_inv_naturality]
-  simp only [End.mul_def, Category.assoc]
+  simp only [End.mul_asHom, Category.assoc]
 
 private theorem subset_prod_succ {A : Type w} [CommRing A] (r : ℕ)
     (a : Fin (r + 1) → A) (I : Finset (Fin (r + 1))) :
@@ -340,7 +340,7 @@ theorem exists_ringedKoszulDualBasis
         rw [← Functor.map_comp]
         congr 1
       rw [hm, HomologicalComplex.comp_f, ← Category.assoc, hstep, Category.assoc, ih,
-        ← Category.assoc, ← End.mul_def, ← map_mul]
+        ← Category.assoc, ← End.mul_asHom, ← map_mul]
       congr 2
       have hsub : m + 1 - n = (m - n) + 1 := by omega
       simp only [hsub, pow_succ, Finset.prod_mul_distrib]

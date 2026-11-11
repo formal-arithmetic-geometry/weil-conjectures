@@ -46,7 +46,7 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
       have h := unitEndAction_naturality a b
-      simpa only [End.mul_def, unitEndAction_unit] using h }
+      simpa only [End.mul_asHom, unitEndAction_unit] using h }
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 private instance principalConeTensorNormalizationInst1 : CommRing (Scalars A) := scalarRing A
@@ -168,7 +168,7 @@ private theorem scalar_mul
     (DerivedNakayama.regularPullbackIso l E X).inv ≫
       (DerivedNakayama.pullback l E X).map a ≫
       (DerivedNakayama.regularPullbackIso l E X).hom
-  rw [End.mul_def, Functor.map_comp]
+  rw [End.mul_asHom, Functor.map_comp]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
 
 section Generic

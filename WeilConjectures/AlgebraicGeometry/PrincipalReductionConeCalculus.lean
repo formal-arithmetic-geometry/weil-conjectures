@@ -1138,7 +1138,7 @@ private theorem action_mul
       DerivedNakayama.scalarOnModules l E X b ≫
         DerivedNakayama.scalarOnModules l E X a := by
     unfold DerivedNakayama.scalarOnModules
-    simp only [End.mul_def, Functor.map_comp, Category.assoc,
+    simp only [End.mul_asHom, Functor.map_comp, Category.assoc,
       Iso.hom_inv_id_assoc]
     simp only [← Functor.map_comp_assoc]
     congr 2

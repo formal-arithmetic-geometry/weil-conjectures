@@ -214,9 +214,9 @@ private theorem koszul_scalar_power_apply
     (a : (O.obj ⋙ forget CommRingCat).sections) (k : ℕ) (U : Cᵒᵖ)
     (r : O.obj.obj U) : (ringedKoszulScalar O a ^ k).val.app U r = a.val U ^ k * r := by
   induction k generalizing r with
-  | zero => simp [End.one_def]
+  | zero => simp [End.one_asHom]
   | succ k ih =>
-    erw [pow_succ, End.mul_def]
+    erw [pow_succ, End.mul_asHom]
     change (ringedKoszulScalar O a ^ k).val.app U
       ((ringedKoszulScalar O a).val.app U r) = _
     erw [ih]

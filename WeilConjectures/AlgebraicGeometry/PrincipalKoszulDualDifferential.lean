@@ -73,7 +73,7 @@ private theorem scalarPower (n : ℕ) :
   change endoPow (ringedKoszulScalar R ⟨a.val, a.property⟩) n = _
   induction n with
   | zero => rfl
-  | succ n ih => erw [endoPow, ih, pow_succ', End.mul_def]
+  | succ n ih => erw [endoPow, ih, pow_succ', End.mul_asHom]
 
 private theorem coneZeroProjection (m : ℕ) :
     (coneZeroTerm R a m).hom =

@@ -97,10 +97,10 @@ private theorem tensor_unit_on_killed
     [∀ M : D, PreservesFiniteColimits (tensorLeft M)]
     {P : D} (u : 𝟙_ D ⟶ P) {r : ℕ} (s : Fin r → End (𝟙_ D))
     (hQ : IsIso (((rightUnitorNatIso D).inv ≫ (tensoringRight D).map u).app
-      (cokernel (Sigma.desc s))))
+      (cokernel (Sigma.desc (fun j ↦ (s j).asHom)))))
     (M : D) (hM : ∀ j, (centralScalar (s j)).app M = 0) :
     IsIso (((rightUnitorNatIso D).inv ≫ (tensoringRight D).map u).app M) := by
-  let t := Sigma.desc s
+  let t := Sigma.desc (fun j ↦ (s j).asHom)
   let Q := cokernel t
   let η : 𝟭 D ⟶ tensorRight P :=
     (rightUnitorNatIso D).inv ≫ (tensoringRight D).map u
@@ -112,7 +112,7 @@ private theorem tensor_unit_on_killed
     simp only [ι_comp_sigmaComparison_assoc, ← Functor.map_comp, Sigma.ι_comp_desc,
       comp_zero]
     have h := hM j
-    change (ρ_ M).inv ≫ M ◁ s j ≫ (ρ_ M).hom = 0 at h
+    change (ρ_ M).inv ≫ M ◁ (s j).asHom ≫ (ρ_ M).hom = 0 at h
     apply (cancel_epi (ρ_ M).inv).1
     apply (cancel_mono (ρ_ M).hom).1
     simpa using h
@@ -197,7 +197,7 @@ private theorem sectionScalar_central
   let := monoidalCategory R
   let S := PresheafOfModules.sheafification (𝟙 (rings R).obj)
   let ε := (PresheafOfModules.sheafificationAdjunction (𝟙 (rings R).obj)).counit
-  have hpre : M.val ◁ (scalar R s).val ≫ (ρ_ M.val).hom =
+  have hpre : M.val ◁ (scalar R s).asHom.val ≫ (ρ_ M.val).hom =
       (ρ_ M.val).hom ≫ ((sectionScalar R s).app M).val := by
     apply PresheafOfModules.hom_ext
     intro U

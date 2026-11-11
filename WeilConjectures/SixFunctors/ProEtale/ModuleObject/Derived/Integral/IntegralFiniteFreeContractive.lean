@@ -145,7 +145,7 @@ private noncomputable def matrixEnd (A : C) (n : Type) [Fintype n] [DecidableEq 
       biproduct.matrix (fun i j => N j i) ≫ biproduct.matrix (fun i j => M j i)
     ext i j
     simp only [biproduct.ι_matrix_assoc, biproduct.matrix_π,
-      biproduct.lift_desc, Matrix.mul_apply, End.mul_def, Category.assoc,
+      biproduct.lift_desc, Matrix.mul_apply, End.mul_asHom, Category.assoc,
       biproduct.ι_desc]
 
 private theorem finiteFreeContractive {A : C} (n : Type) [Finite n]

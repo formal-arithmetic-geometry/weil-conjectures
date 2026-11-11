@@ -287,9 +287,9 @@ def coind₁Action (A : AddCommGrpCat.{max u w}) : Action AddCommGrpCat.{max u w
   ρ :=
     { toFun g := .of <| AddCommGrpCat.ofHom (translate g)
       map_one' := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
-        simp [End.one_def])
+        simp [End.one_asHom])
       map_mul' a b := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
-        simp [End.mul_def, mul_assoc]) }
+        simp [End.mul_asHom, mul_assoc]) }
 
 lemma coind₁Action_stabilizer (A : AddCommGrpCat.{max u w}) (f : (coind₁Action G A).V) :
     (coind₁Action G A).stabilizer f = rightStab G f.1 := by

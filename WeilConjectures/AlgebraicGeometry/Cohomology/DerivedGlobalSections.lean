@@ -65,7 +65,7 @@ noncomputable def smulRingHom (M : X.Modules) :
     Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
   toFun a := (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
   map_one' := by rw [smulHom_one, CategoryTheory.Functor.map_id]; rfl
-  map_mul' a b := by rw [smulHom_mul, CategoryTheory.Functor.map_comp, End.mul_def]
+  map_mul' a b := by rw [smulHom_mul, CategoryTheory.Functor.map_comp, End.mul_asHom]
   map_zero' := by rw [smulHom_zero, CategoryTheory.Functor.map_zero]
   map_add' a b := by rw [smulHom_add, CategoryTheory.Functor.map_add]
 

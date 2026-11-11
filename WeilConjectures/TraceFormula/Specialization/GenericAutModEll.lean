@@ -60,7 +60,7 @@ noncomputable def baseChangeAutActionHom
   toFun σ := (baseChangeAut hM b hb v hv σ).autAction Λ A
   map_one' := autAction_baseChangeAut_one hM b hb v hv Λ A
   map_mul' σ τ := by
-    rw [End.mul_def]
+    rw [End.mul_asHom]
     exact autAction_baseChangeAut_mul hM b hb v hv Λ σ τ A
 
 @[simp]
@@ -111,7 +111,7 @@ theorem autAction_baseChangeAut_eq_id_of_distinguished_of_separated {ℓ : ℕ}
     ((baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype)
     (fun τ ↦ (Hom.autAction_naturality _ _ π).trans
       (by rw [Subgroup.coe_subtype, hV _ τ.2, Category.comp_id])) hdivV ⟨σ, hσ⟩
-  rwa [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_def] at key
+  rwa [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_asHom] at key
 
 /-- **Generic automorphisms trivial modulo `ℓ` are trivial, torsion case**: the same as
 `autAction_baseChangeAut_eq_id_of_distinguished_of_separated` for `A` killed by `ℓ ^ m`, for
