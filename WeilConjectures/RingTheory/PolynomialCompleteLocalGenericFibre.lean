@@ -127,11 +127,11 @@ private theorem regular_generic_charZero
           _ = algebraMap C T r * ↑z⁻¹ := by rw [hy]
     · intro r hr
       exact (IsLocalization.map_eq_zero_iff M T r).mp hr
-  have : IsRegularRing ((⊥ : Ideal (Polynomial A)).Fiber C) :=
+  have hregular : IsRegularRing ((⊥ : Ideal (Polynomial A)).Fiber C) :=
     IsRegularRing.of_ringEquiv (Algebra.TensorProduct.comm (Polynomial A) C K).toRingEquiv
   have : CharZero (⊥ : Ideal (Polynomial A)).ResidueField :=
     IsFractionRing.charZero_of_isFractionRing (Polynomial A)
-  refine ⟨inferInstance, ?_⟩
+  refine ⟨hregular.toIsNoetherianRing, ?_⟩
   intro L _ _ _ _
   have hb := IsPurelyInseparable.bijective_algebraMap_of_isSeparable
     (⊥ : Ideal (Polynomial A)).ResidueField L
