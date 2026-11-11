@@ -36,7 +36,6 @@ private theorem flatCohomologyBaseChange_bijective_of_compact_open
     ∀ (Y : Scheme.{u}) (j : Y ⟶ X) (_ : IsOpenImmersion j), j.opensRange = U →
       ∀ (N : Y.Modules) (_ : N.IsQuasicoherent) (n : ℕ),
         Function.Bijective (Scheme.Modules.H.baseChange (S := B) (j ≫ f) N n) := by
-
   classical
   let P (U : X.Opens) : Prop :=
     ∀ (Y : Scheme.{u}) (j : Y ⟶ X) (_ : IsOpenImmersion j), j.opensRange = U →
