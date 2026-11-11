@@ -1064,7 +1064,9 @@ private theorem mate_include {V W S T : Scheme.{u}}
   have hm' := congrArg TwoSquare.natTrans hm
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight] at hm'
   dsimp only [b] at hm'
-  rw [mateEquiv_baseChangeSquare] at hm'
+  have hmate := mateEquiv_baseChangeSquare (ModuleCat.{u + 1} Λ) sq
+  change mateEquiv _ _ _ = _ at hmate
+  rw [hmate] at hm'
   simpa only [mate, a, sq, TwoSquare.mk, TwoSquare.natTrans,
     Functor.whiskerLeft_id, Category.comp_id] using hm'
 
