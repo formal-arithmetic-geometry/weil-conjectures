@@ -62,8 +62,9 @@ lemma uncurryHom_frobeniusIhomComparison
         WeilCoefficients.{u} l] _ _ ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.evaluation M N) := by
-  have : (Mod.mapModComap (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-      WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
+  have : (Mod.mapModComap
+      (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
         (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
   exact (Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l
@@ -89,7 +90,8 @@ theorem ihomIhomComparison_comm (a H L K : ProEtaleWeilSheaf k₀ l X) :
       Mod.ihomIhomComparison a.carrier H.carrier L.carrier K.carrier := by
   rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom]
   exact Mod.map_ihomIhomComparison_comp_of_eq
-    (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l])
+    (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+      WeilCoefficients.{u} l])
     (ρ := adicConstantSheafToLowerStar l
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (c := fun M N ↦ frobeniusIhomComparison k₀ l X M N) uncurryHom_frobeniusIhomComparison
