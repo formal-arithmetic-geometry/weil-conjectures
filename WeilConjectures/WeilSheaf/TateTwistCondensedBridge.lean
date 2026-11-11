@@ -65,7 +65,7 @@ lemma scalarPow_regularSmulIso_hom (b : (PadicAlgCl l)ˣ) :
 noncomputable abbrev geometricFiberFrobeniusIso :
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
 
 /-- The comparison `Fr_X^* ≅ (Fr_X⁻¹)_*` of the two Frobenius functors of the condensed model. -/
 noncomputable abbrev frobeniusUpperStarIsoLowerStarInv :
