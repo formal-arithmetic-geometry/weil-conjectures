@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Sites.RingedSitePoint
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 import all WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
 import all WeilConjectures.Algebra.Homology.RingedSitePointTensor
 import WeilConjectures.Algebra.Homology.RingedSitePointFlat
