@@ -740,7 +740,7 @@ abbrev pbcRationalIsoPullback {T : Scheme.{u}} (e : Aut T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (p : A) :
     PbcRationalCategory T d p ⥤ PbcRationalCategory T d p :=
   ScalarLocalization.map A (PbcBoundedConstructibleComplete T d) p
-    (pbcIsoIntegralPullback e.hom d)
+    (pbcIsoIntegralPullback e.asIso.hom d)
 
 variable (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω]
   [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -780,49 +780,49 @@ Identity on sections gives the isomorphism and determines it uniquely. -/
 theorem pbcIsoScalarRightComparison_exists (h : E ≤ F) :
     ∃! r :
       pbcRestrict (pbcCompletedScalarMap l Ω T h) ⋙
-          proEtaleRingModuleDirectImage e.hom
+          proEtaleRingModuleDirectImage e.asIso.hom
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
-            (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E))) ≅
-        proEtaleRingModuleDirectImage e.hom
+            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E))) ≅
+        proEtaleRingModuleDirectImage e.asIso.hom
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F))
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F))
-            (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω F))) ⋙
+            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω F))) ⋙
           pbcRestrict (pbcCompletedScalarMap l Ω T h),
       ∀ (M : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F)))
         (U : T.ProEtᵒᵖ) (x : ((pbcRestrict (pbcCompletedScalarMap l Ω T h) ⋙
-          proEtaleRingModuleDirectImage e.hom
+          proEtaleRingModuleDirectImage e.asIso.hom
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
-            (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E)))).obj M).val.obj U),
+            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E)))).obj M).val.obj U),
         HEq ((r.hom.app M).val.app U x) x := by
   have hs :
       pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h) ≫
-          pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω F) =
-        pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω E) ≫
-          (proEtaleSheafDirectImage e.hom RingCat.{u + 1}).map
+          pbcActualStructureMap e.asIso.hom (pbcStageDatum.{u} l Ω F) =
+        pbcActualStructureMap e.asIso.hom (pbcStageDatum.{u} l Ω E) ≫
+          (proEtaleSheafDirectImage e.asIso.hom RingCat.{u + 1}).map
             (pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h)) := by
     rw [pbcStageCoefficientMap_eq l Ω T h]
     exact pbcScalarCoefficientStructureSquare l (pbcFiniteField.{u} l Ω E)
-      (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) e.hom
-  exact scalarRightInverse e.hom
+      (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) e.asIso.hom
+  exact scalarRightInverse e.asIso.hom
     (pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h))
     (pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h))
-    (pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω E))
-    (pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω F)) hs
+    (pbcActualStructureMap e.asIso.hom (pbcStageDatum.{u} l Ω E))
+    (pbcActualStructureMap e.asIso.hom (pbcStageDatum.{u} l Ω F)) hs
 
 /-- The right-adjoint comparison fixed by identity on sections.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 def pbcIsoScalarRightComparison (h : E ≤ F) :
     pbcRestrict (pbcCompletedScalarMap l Ω T h) ⋙
-          proEtaleRingModuleDirectImage e.hom
+          proEtaleRingModuleDirectImage e.asIso.hom
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
-            (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E))) ≅
-        proEtaleRingModuleDirectImage e.hom
+            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E))) ≅
+        proEtaleRingModuleDirectImage e.asIso.hom
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F))
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F))
-            (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω F))) ⋙
+            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω F))) ⋙
           pbcRestrict (pbcCompletedScalarMap l Ω T h) :=
   (pbcIsoScalarRightComparison_exists l Ω e h).exists.choose
 
@@ -831,16 +831,16 @@ This pins down its tensor normalization.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 def pbcIsoOrdinaryScalarComparison (h : E ≤ F) :
     pbcExtend (pbcCompletedScalarMap l Ω T h) ⋙
-        pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F) ≅
-      pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcExtend (pbcCompletedScalarMap l Ω T h) :=
   (conjugateIsoEquiv
-    ((proEtaleRingModuleAdjunction e.hom _ _
-        (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E)))).comp
+    ((proEtaleRingModuleAdjunction e.asIso.hom _ _
+        (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E)))).comp
       (pbcScalarAdjunction (pbcCompletedScalarMap l Ω T h)))
     ((pbcScalarAdjunction (pbcCompletedScalarMap l Ω T h)).comp
-      (proEtaleRingModuleAdjunction e.hom _ _
-        (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω F)))))).symm
+      (proEtaleRingModuleAdjunction e.asIso.hom _ _
+        (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω F)))))).symm
     (pbcIsoScalarRightComparison l Ω e h)
 
 /-- The ordinary comparison on nested complex functors, using the canonical
@@ -848,17 +848,17 @@ composition isomorphisms on both sides.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 def pbcIsoOrdinaryComplexComparison (h : E ≤ F) :
     (pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ) ⋙
-        (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F)).mapHomologicalComplex
+        (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).mapHomologicalComplex
         (.up ℤ) ≅
-      (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
+      (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
         (.up ℤ) ⋙
         (pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ) :=
   Functor.mapHomologicalComplexCompIso
       (Iso.refl (pbcExtend (pbcCompletedScalarMap l Ω T h) ⋙
-        pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F))) (.up ℤ) ≪≫
+        pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F))) (.up ℤ) ≪≫
     NatIso.mapHomologicalComplex (pbcIsoOrdinaryScalarComparison l Ω e h) (.up ℤ) ≪≫
     (Functor.mapHomologicalComplexCompIso
-      (Iso.refl (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+      (Iso.refl (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcExtend (pbcCompletedScalarMap l Ω T h))) (.up ℤ)).symm
 
 attribute [local irreducible] pbcExtensionCounit pbcComplexCounit
@@ -901,25 +901,25 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcAmbientScalarExtension l Ω T h ⋙
-        pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
-      pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcAmbientScalarExtension l Ω T h,
       ∀ P : CochainComplex
           (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ,
         c.hom.app (DerivedCategory.Q.obj P) ≫
           (pbcAmbientScalarExtension l Ω T h).map
-            ((pbcIsoModulePullback e.hom
+            ((pbcIsoModulePullback e.asIso.hom
               (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors.hom.app P) ≫
           pbcComplexCounit (pbcCompletedScalarMap l Ω T h)
-            (((pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
+            (((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
               (.up ℤ)).obj P) =
-        (pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω F)).map
+        (pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).map
             (pbcComplexCounit (pbcCompletedScalarMap l Ω T h) P) ≫
-          (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors.hom.app
+          (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors.hom.app
               (((pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map
             ((pbcIsoOrdinaryComplexComparison l Ω e h).hom.app P) := by
-  exact isoTransportAmbientScalarComparison T e.hom
+  exact isoTransportAmbientScalarComparison T e.asIso.hom
     (pbcStageDatum.{u} l Ω E) (pbcStageDatum.{u} l Ω F)
     (pbcCompletedScalarMap l Ω T h) (pbcIsoOrdinaryComplexComparison l Ω e h)
 
@@ -927,8 +927,8 @@ theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 def pbcIsoAmbientScalarComparison (h : E ≤ F) :
     pbcAmbientScalarExtension l Ω T h ⋙
-        pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
-      pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcAmbientScalarExtension l Ω T h :=
   (pbcIsoAmbientScalarComparison_exists l Ω e h).exists.choose
 
@@ -945,8 +945,8 @@ subcategories. Lift ambient components and inverses by fullness; faithfulness
 proves the naturality, inverse and uniqueness equations. -/
 theorem pbcIsoIntegralScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
-        pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
-      pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcIntegralScalarExtension l Ω T hdim hl h,
       Functor.whiskerRight c.hom
           (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω F))) =
@@ -955,8 +955,8 @@ theorem pbcIsoIntegralScalarComparison_exists (h : E ≤ F) :
           (pbcIsoAmbientScalarComparison l Ω e h).hom := by
   let c := pbcIsoAmbientScalarComparison l Ω e h
   let b : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
-        pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
-      pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcIntegralScalarExtension l Ω T hdim hl h :=
     NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (c.app K.obj))
       (fun a ↦ ObjectProperty.hom_ext _ (c.hom.naturality a.hom))
@@ -974,8 +974,8 @@ end
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 def pbcIsoIntegralScalarComparison (h : E ≤ F) :
     pbcIntegralScalarExtension l Ω T hdim hl h ⋙
-        pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
-      pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcIntegralScalarExtension l Ω T hdim hl h :=
   (pbcIsoIntegralScalarComparison_exists l Ω e hdim hl h).exists.choose
 
@@ -988,7 +988,7 @@ the asserted equality of functors. -/
 theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
     pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) ⋙
         pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) =
-      pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+      pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) := by
   refine CategoryTheory.Functor.ext
     (F := pbcRationalization T (pbcStageDatum.{u} l Ω E)
@@ -1020,7 +1020,7 @@ theorem pbcIsoRationalScalarComparison_exists (h : E ≤ F) :
           (pbcRationalization T (pbcStageDatum.{u} l Ω F) (pbcStageUniformizer.{u} l Ω F)).map
             ((pbcIsoIntegralScalarComparison l Ω e hdim hl h).hom.app K) ≫
           (pbcScalarIntegralComparison l Ω T hdim hl h).inv.app
-            ((pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)).obj K) ≫
+            ((pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).obj K) ≫
           (pbcScalarExtension l Ω T hdim hl h).map
             ((eqToIso (pbcIsoRationalization l Ω e E)).inv.app K) := by
   let QE := pbcStageLocalization l Ω T E
@@ -1031,8 +1031,8 @@ theorem pbcIsoRationalScalarComparison_exists (h : E ≤ F) :
     (pbcStageUniformizer.{u} l Ω E)
   let PF := pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω F)
     (pbcStageUniformizer.{u} l Ω F)
-  let IE := pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)
-  let IF := pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω F)
+  let IE := pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω E)
+  let IF := pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω F)
   let a : QE ⋙ (SEF ⋙ PF) ≅ QE ⋙ (PE ⋙ SEF) :=
     (Functor.associator QE SEF PF).symm ≪≫
       Functor.isoWhiskerRight (pbcScalarIntegralComparison l Ω T hdim hl h) PF ≪≫
