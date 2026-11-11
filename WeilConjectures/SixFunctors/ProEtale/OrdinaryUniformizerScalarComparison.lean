@@ -60,9 +60,9 @@ private theorem internal_leftUnitor_inv
 
 private theorem internal_scalar_underlying
     (d : End (Mod.regular R)) (M : Mod (Sheaf J AddCommGrpCat.{u}) R) :
-    ((λ_ M).inv ≫ d ▷ M ≫ (λ_ M).hom).hom =
+    ((λ_ M).inv ≫ d.asHom ▷ M ≫ (λ_ M).hom).hom =
       (λ_ M.X).inv ≫ ((MonObj.one : 𝟙_ (Sheaf J AddCommGrpCat.{u}) ⟶ R) ≫
-        d.hom) ▷ M.X ≫ Mod.act (A := R) M.X := by
+        d.asHom.hom) ▷ M.X ≫ Mod.act (A := R) M.X := by
   simp only [Mod.comp_hom', internal_leftUnitor_inv J R, Category.assoc]
   have hπ := InternalAbelianSheafModule.comparison_internal_leftUnitorπ J R M
   change Mod.tensorObjπ (Mod.regular R) M ≫ (λ_ M).hom.hom =
@@ -226,18 +226,18 @@ private theorem point_scalar_section (A : Type u) [CommRing A] [TopologicalSpace
 private theorem point_uniformizer_section
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) b).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
         Padic.coefficientExtensionUniformizer l E * b.down s) :
     constantElement (coherentTopology Profinite.{u})
         (show AddCommGrpCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))
           from ULift.up (Padic.coefficientExtensionUniformizer l E)) ≫
       (pointIso (Padic.coefficientExtensionIntegers l E)).hom ≫
       scalarPointMap l E ≫ (IntegralConstantModel.pointComparison l E).inv.hom =
-        (MonObj.one : 𝟙_ _ ⟶ DerivedNakayama.integerRing l E) ≫ d.hom := by
+        (MonObj.one : 𝟙_ _ ⟶ DerivedNakayama.integerRing l E) ≫ d.asHom.hom := by
   rw [scalarPointMap_absolute]
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   exact point_scalar_section (Padic.coefficientExtensionIntegers l E)
-    (Padic.coefficientExtensionUniformizer l E) d.hom hd
+    (Padic.coefficientExtensionUniformizer l E) d.asHom.hom hd
 
 private theorem scheme_constantElement (A : Type u) [CommRing A]
     (a : AddCommGrpCat.of (ULift.{u + 1} A)) :
@@ -421,16 +421,16 @@ private theorem scalarOnModules_underlying
       (λ_ M.X).inv ≫
         (Functor.LaxMonoidal.ε (upperStarFromPoint X) ≫
           (upperStarFromPoint X).map
-            ((MonObj.one : 𝟙_ _ ⟶ DerivedNakayama.integerRing l E) ≫ d.hom)) ▷ M.X ≫
+            ((MonObj.one : 𝟙_ _ ⟶ DerivedNakayama.integerRing l E) ≫ d.asHom.hom)) ▷ M.X ≫
           Mod.act (A := condensedRingObj (DerivedNakayama.integerRing l E) X) M.X := by
   let dX : End (Mod.regular (condensedRingObj (DerivedNakayama.integerRing l E) X)) :=
-    (DerivedNakayama.regularPullbackIso l E X).inv ≫
-      (DerivedNakayama.pullback l E X).map d ≫
-        (DerivedNakayama.regularPullbackIso l E X).hom
-  have hX : dX.hom = (upperStarFromPoint X).map d.hom := by
-    change 𝟙 _ ≫ (upperStarFromPoint X).map d.hom ≫ 𝟙 _ = _
+    .of ((DerivedNakayama.regularPullbackIso l E X).inv ≫
+      (DerivedNakayama.pullback l E X).map d.asHom ≫
+        (DerivedNakayama.regularPullbackIso l E X).hom)
+  have hX : dX.asHom.hom = (upperStarFromPoint X).map d.asHom.hom := by
+    change 𝟙 _ ≫ (upperStarFromPoint X).map d.asHom.hom ≫ 𝟙 _ = _
     simp only [Category.id_comp, Category.comp_id]
-  change ((λ_ M).inv ≫ dX ▷ M ≫ (λ_ M).hom).hom = _
+  change ((λ_ M).inv ≫ dX.asHom ▷ M ≫ (λ_ M).hom).hom = _
   rw [internal_scalar_underlying (Scheme.ProEt.topology X)
     (condensedRingObj (DerivedNakayama.integerRing l E) X) dX M, hX]
   have hunit :
@@ -464,7 +464,7 @@ attribute [local irreducible] IntegralModelsStacks.scalarPointMap
 private theorem uniformizer_section
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) b).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
         Padic.coefficientExtensionUniformizer l E * b.down s) :
     (constantElement (Scheme.ProEt.topology X)
       (show AddCommGrpCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))
@@ -474,7 +474,7 @@ private theorem uniformizer_section
         coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X =
     Functor.LaxMonoidal.ε (upperStarFromPoint X) ≫
       (upperStarFromPoint X).map
-        ((MonObj.one : 𝟙_ _ ⟶ DerivedNakayama.integerRing l E) ≫ d.hom) := by
+        ((MonObj.one : 𝟙_ _ ⟶ DerivedNakayama.integerRing l E) ≫ d.asHom.hom) := by
   rw [scheme_constantElement X]
   unfold IntegralModelsStacks.scalarMap coefficientMap
   simp only [Category.assoc, ← CategoryTheory.Functor.map_comp]
@@ -496,16 +496,16 @@ private theorem smallModules_scalar_map
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : End N)
     (c : 𝟙_ (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ⟶ R)
-    (hf : f.hom = (λ_ N.X).inv ≫ c ▷ N.X ≫ @Mod.act _ _ _ R _ N.X N.mod)
+    (hf : f.asHom.hom = (λ_ N.X).inv ≫ c ▷ N.X ≫ @Mod.act _ _ _ R _ N.X N.mod)
     (U : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ)
     (m : ((smallModules X R).obj N).val.obj U) :
-    ((smallModules X R).map f).val.app U m =
+    ((smallModules X R).map f.asHom).val.app U m =
       (show (smallRing X R).obj.obj U from
         ((Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ≫
           c.hom).app
             ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
               (ULift.up 1)) • m := by
-  change f.hom.hom.app _ m = _
+  change f.asHom.hom.hom.app _ m = _
   rw [hf]
   exact internal_action_sections (Scheme.ProEt.topology X) R c N _ m
 
@@ -518,17 +518,17 @@ private theorem restricted_scalar_sections
     (b : 𝟙_ (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ⟶ T)
     (h : c ≫ φ ≫ ψ = b) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) T)
     (f : End M)
-    (hf : f.hom = (λ_ M.X).inv ≫ b ▷ M.X ≫ @Mod.act _ _ _ T _ M.X M.mod)
+    (hf : f.asHom.hom = (λ_ M.X).inv ≫ b ▷ M.X ≫ @Mod.act _ _ _ T _ M.X M.mod)
     (U : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ)
     (m : ((Mod.comap ψ ⋙ Mod.comap φ ⋙ smallModules X R).obj M).val.obj U) :
-    ((Mod.comap ψ ⋙ Mod.comap φ ⋙ smallModules X R).map f).val.app U m =
+    ((Mod.comap ψ ⋙ Mod.comap φ ⋙ smallModules X R).map f.asHom).val.app U m =
       (show (smallRing X R).obj.obj U from
         ((Functor.LaxMonoidal.ε (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}) ≫
           c.hom).app
             ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).op.obj U))
               (ULift.up 1)) • m := by
   let N := (Mod.comap φ).obj ((Mod.comap ψ).obj M)
-  exact smallModules_scalar_map X R N ((Mod.comap ψ ⋙ Mod.comap φ).map f) c
+  exact smallModules_scalar_map X R N ((Mod.comap ψ ⋙ Mod.comap φ).mapEnd f) c
     (hf.trans (restricted_action φ ψ c b h M)) U m
 
 section OrdinaryScalar
@@ -541,8 +541,8 @@ local instance ordinaryUniformizerScalarComparisonInst1
 
 private theorem ordinary_scalar_characterization (M : ConstantCompletion.Mod O)
     (s : (O.obj ⋙ forget CommRingCat).sections) (f : End M)
-    (hf : ∀ (U : Cᵒᵖ) (m : M.val.obj U), f.val.app U m = s.val U • m) :
-    f ≫ (ρ_ M).inv = (ρ_ M).inv ≫ M ◁ ringedKoszulScalar O s := by
+    (hf : ∀ (U : Cᵒᵖ) (m : M.val.obj U), f.asHom.val.app U m = s.val U • m) :
+    f.asHom ≫ (ρ_ M).inv = (ρ_ M).inv ≫ M ◁ (ringedKoszulScalar O s).asHom := by
   apply (cancel_mono (ρ_ M).hom).1
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   apply SheafOfModules.hom_ext
@@ -564,10 +564,10 @@ private theorem ordinary_scalar_characterization (M : ConstantCompletion.Mod O)
       ModuleCat.id_apply] at h
     rw [hr, one_smul] at h
     exact h
-  change f.val.app U m = (ρ_ M).hom.val.app U
-    ((M ◁ ringedKoszulScalar O s).val.app U ((ρ_ M).inv.val.app U m))
+  change f.asHom.val.app U m = (ρ_ M).hom.val.app U
+    ((M ◁ (ringedKoszulScalar O s).asHom).val.app U ((ρ_ M).inv.val.app U m))
   rw [hunit]
-  have hmap := CochainPullback.moduleTmul_map (𝟙 M) (ringedKoszulScalar O s)
+  have hmap := CochainPullback.moduleTmul_map (𝟙 M) (ringedKoszulScalar O s).asHom
     U m (1 : O.obj.obj U)
   rw [id_tensorHom] at hmap
   erw [hmap, hr]
@@ -576,7 +576,7 @@ private theorem ordinary_scalar_characterization (M : ConstantCompletion.Mod O)
       (show (SheafOfModules.unit
         ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)).sections from
         ⟨s.val, s.property⟩))
-  change (ringedKoszulScalar O s).val.app U (1 : O.obj.obj U) = s.val U at hs
+  change (ringedKoszulScalar O s).asHom.val.app U (1 : O.obj.obj U) = s.val U at hs
   erw [hs]
   simpa only [SheafOfModules.id_val, PresheafOfModules.id_app,
     ModuleCat.id_apply] using hf U m
@@ -617,14 +617,14 @@ theorem ordinary_uniformizer_scalar_comparison :
         e.hom ≫ residue l E X) ∧
       ∀ (d : End (Mod.regular (DerivedNakayama.integerRing l E))),
         (∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-          (s : S.unop), ((d.hom.hom.app S) b).down s =
+          (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
             Padic.coefficientExtensionUniformizer l E * b.down s) →
         ∀ M : AdicCompletion.Modules l E X,
           (modules l E X).map ((DerivedNakayama.scalarOnModules l E X d).app M) ≫
               (ρ_ ((modules l E X).obj M)).inv =
             (ρ_ ((modules l E X).obj M)).inv ≫ (modules l E X).obj M ◁
-              ringedKoszulScalar (ring l E X) (ConstantCompletion.algebraSection e.hom
-                (ULift.up (Padic.coefficientExtensionUniformizer l E))) := by
+              (ringedKoszulScalar (ring l E X) (ConstantCompletion.algebraSection e.hom
+                (ULift.up (Padic.coefficientExtensionUniformizer l E)))).asHom := by
   let A := Padic.coefficientExtensionIntegers l E
   let I := Padic.coefficientExtensionIdeal l E 1
   have hI : Ideal.map (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom I =
@@ -641,7 +641,7 @@ theorem ordinary_uniformizer_scalar_comparison :
   apply ordinary_scalar_characterization (ring l E X) ((modules l E X).obj M)
     (ConstantCompletion.algebraSection (smallIso X A).hom
       (ULift.up (Padic.coefficientExtensionUniformizer l E)))
-    ((modules l E X).map ((DerivedNakayama.scalarOnModules l E X d).app M))
+    (.of ((modules l E X).map ((DerivedNakayama.scalarOnModules l E X d).app M)))
   intro U m
   rw [smallIso_section_element X A
     (ULift.up (Padic.coefficientExtensionUniformizer l E)) U]
@@ -652,7 +652,7 @@ theorem ordinary_uniformizer_scalar_comparison :
       (show AddCommGrpCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))
         from ULift.up (Padic.coefficientExtensionUniformizer l E)) ≫
       (schemeIso X A).hom) _ (uniformizer_section l E X d hd) M
-    ((DerivedNakayama.scalarOnModules l E X d).app M)
+    (.of ((DerivedNakayama.scalarOnModules l E X d).app M))
     (scalarOnModules_underlying l E X d M) U m
 
 end AlgebraicGeometry.ProEtale.InternalCompletionTransport
