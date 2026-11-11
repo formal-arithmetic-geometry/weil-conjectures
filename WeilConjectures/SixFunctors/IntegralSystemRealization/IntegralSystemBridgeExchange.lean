@@ -47,8 +47,6 @@ private def bridgePair {A B C : Type*} [Category A] [Category B] [Category C]
     F ⋙ G ≅ F' ⋙ G' :=
   Functor.isoWhiskerRight e G ≪≫ Functor.isoWhiskerLeft F' f
 
-attribute [local implicit_reducible] TwoSquare
-
 private theorem mateBridge
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {L₁ L₁' : A ⥤ B} {R₁ R₁' : B ⥤ A}
