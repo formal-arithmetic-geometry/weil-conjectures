@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant

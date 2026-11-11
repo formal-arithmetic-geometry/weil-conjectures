@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverDescent
 public import WeilConjectures.WeilSheaf.Dual
