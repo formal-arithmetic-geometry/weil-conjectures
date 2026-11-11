@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Dual
