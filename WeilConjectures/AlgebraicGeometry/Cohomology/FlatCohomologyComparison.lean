@@ -180,8 +180,8 @@ def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
       Sheaf.H.map (ρ a) q (Sheaf.H.map (ρ b) q x)
     rw [map_mul]
     exact Sheaf.H.map_comp_apply (ρ b) (ρ a) x
-  smul_add a x y := (Sheaf.H.map (ρ a) q).map_add x y
-  smul_zero a := (Sheaf.H.map (ρ a) q).map_zero
+  smul_add a x y := (Sheaf.H.map (ρ a) q).hom.map_add x y
+  smul_zero a := (Sheaf.H.map (ρ a) q).hom.map_zero
   add_smul a b x := by
     change Sheaf.H.map (ρ (a + b)) q x = Sheaf.H.map (ρ a) q x + Sheaf.H.map (ρ b) q x
     rw [map_add, Sheaf.H.map_add_apply]
@@ -197,18 +197,24 @@ Source: the source library's `smulHom` identities and functoriality of `toSheaf`
 (blueprint: def-pc-flat-cohomology-comparison) -/
 def scalarRep (M : X.Modules) :
     Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
-  toFun a := .of ((SheafOfModules.toSheaf X.ringCatSheaf)).map (M.smulHom a)
-  map_one' := by
+  toFun a := .of ((SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a))
+  map_one' := End.ext (by
     change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom 1) = 𝟙 _
     rw [smulHom_one]
-    exact (SheafOfModules.toSheaf X.ringCatSheaf).map_id M
-  map_zero' := by rw [smulHom_zero, Functor.map_zero]
-  map_add' a b := by rw [smulHom_add, Functor.map_add]
-  map_mul' a b := by
+    exact (SheafOfModules.toSheaf X.ringCatSheaf).map_id M)
+  map_zero' := End.ext (by
+    change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom 0) = 0
+    rw [smulHom_zero, Functor.map_zero])
+  map_add' a b := End.ext (by
+    change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom (a + b)) =
+      (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a) +
+        (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom b)
+    rw [smulHom_add, Functor.map_add])
+  map_mul' a b := End.ext (by
     change (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom (a * b)) =
       (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom b) ≫
         (SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a)
-    rw [smulHom_mul, Functor.map_comp]
+    rw [smulHom_mul, Functor.map_comp])
 
 instance HOver_module (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : Module R (HOver f M q) :=
   letI : Module Γ(X, ⊤) (HOver f M q) := moduleH M q

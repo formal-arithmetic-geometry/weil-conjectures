@@ -67,7 +67,7 @@ theorem balancedAction_affine_open
       (∀ (b : B) (x : M.val.obj (op U.val)),
         tau (Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U.val))).op
           (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) x =
-            (rho b).val.app (op U.val) x) := by
+            (rho b).asHom.val.app (op U.val) x) := by
   classical
   dsimp only
   let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
@@ -79,7 +79,7 @@ theorem balancedAction_affine_open
   let N := M.val.obj (op U.val)
   let dact : D →+* AddMonoid.End N := Module.toAddMonoidEnd D N
   let bact : B →+* AddMonoid.End N :=
-    { toFun := fun b ↦ ((rho b).val.app (op U.val)).hom.toAddMonoidHom
+    { toFun := fun b ↦ ((rho b).asHom.val.app (op U.val)).hom.toAddMonoidHom
       map_one' := by rw [map_one]; rfl
       map_zero' := by rw [map_zero]; rfl
       map_add' := fun b c ↦ by rw [map_add]; rfl
@@ -89,9 +89,9 @@ theorem balancedAction_affine_open
     rintro x (⟨d, rfl⟩ | ⟨b, rfl⟩) y (⟨e, rfl⟩ | ⟨c, rfl⟩)
     · rw [← map_mul, ← map_mul, mul_comm]
     · ext n
-      exact (((rho c).val.app (op U.val)).hom.map_smul d n).symm
+      exact (((rho c).asHom.val.app (op U.val)).hom.map_smul d n).symm
     · ext n
-      exact ((rho b).val.app (op U.val)).hom.map_smul e n
+      exact ((rho b).asHom.val.app (op U.val)).hom.map_smul e n
     · rw [← map_mul, ← map_mul, mul_comm]
   let S := Subring.closure (Set.range dact ∪ Set.range bact)
   have : IsMulCommutative S :=
@@ -126,7 +126,7 @@ theorem balancedAction_affine_open
     change (f.appLE ⊤ U.val (by simp)
       ((Scheme.ΓSpecIso (.of A)).inv a)) • n =
       (rho ((Scheme.ΓSpecIso (.of B)).hom
-        (g.appLE ⊤ ⊤ (by simp) ((Scheme.ΓSpecIso (.of A)).inv a)))).val.app (op U.val) n
+        (g.appLE ⊤ ⊤ (by simp) ((Scheme.ΓSpecIso (.of A)).inv a)))).asHom.val.app (op U.val) n
     have hg' : g.appLE ⊤ ⊤ (by simp) ((Scheme.ΓSpecIso (.of A)).inv a) =
         (Scheme.ΓSpecIso (.of B)).inv (algebraMap A B a) := by
       change (Scheme.ΓSpecIso (.of B)).inv (algebraMap A B a) =
@@ -150,7 +150,7 @@ theorem balancedAction_affine_open
   have hb (b : B) (x : N) : tau (Y.presheaf.map
       (homOfLE (le_top (a := W))).op
       (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) x =
-        (rho b).val.app (op U.val) x := by
+        (rho b).asHom.val.app (op U.val) x := by
     have he := CategoryTheory.congr_fun (hp.inr_desc left right hc)
       ((Scheme.ΓSpecIso (.of B)).inv b)
     change lift (fB.appLE ⊤ W (by simp) ((Scheme.ΓSpecIso (.of B)).inv b)) =

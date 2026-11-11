@@ -118,11 +118,18 @@ private theorem constantSubsheaf_range_integer_bound (M : AddCommGrpCat.{u})
   let hZ : M →+ ℤ := AddEquiv.ulift.toAddMonoidHom.comp h.hom
   let H := hZ.range
   obtain ⟨k, hk⟩ := AddSubgroup.isAddCyclic H
-  have hH : H = AddSubgroup.zmultiples (k.natAbs : ℤ) := by
-    rw [Int.zmultiples_natAbs, AddSubgroup.zmultiples_eq_closure]
-    exact hk
+  have hH : H = AddSubgroup.zmultiples ((k : ℤ).natAbs : ℤ) := by
+    rw [Int.zmultiples_natAbs]
+    ext x
+    constructor
+    · intro hx
+      obtain ⟨n, hn⟩ := hk ⟨x, hx⟩
+      exact AddSubgroup.mem_zmultiples_iff.mpr ⟨n, by simpa using congrArg Subtype.val hn⟩
+    · intro hx
+      obtain ⟨n, rfl⟩ := AddSubgroup.mem_zmultiples_iff.mp hx
+      exact H.zsmul_mem k.2 n
   have hrange : Set.range (fun t : M ↦ h t) =
-      Set.range (fun z : ULift.{u} ℤ ↦ (k.natAbs : ℤ) • z) := by
+      Set.range (fun z : ULift.{u} ℤ ↦ ((k : ℤ).natAbs : ℤ) • z) := by
     ext z
     constructor
     · rintro ⟨t, rfl⟩
@@ -133,26 +140,27 @@ private theorem constantSubsheaf_range_integer_bound (M : AddCommGrpCat.{u})
       apply ULift.ext
       simpa [Int.zsmul_eq_mul, mul_comm] using hn.symm
     · rintro ⟨z, rfl⟩
-      have hz : ((k.natAbs : ℤ) • z).down ∈ H := by
-        rw [hH, Int.mem_zmultiples_iff]
+      have hz : (((k : ℤ).natAbs : ℤ) • z).down ∈ AddSubgroup.zmultiples ((k : ℤ).natAbs : ℤ) := by
+        rw [Int.mem_zmultiples_iff]
         exact ⟨z.down, by simp [mul_comm]⟩
+      rw [← hH] at hz
       obtain ⟨t, ht⟩ := hz
       refine ⟨t, ?_⟩
       apply ULift.ext
       exact ht
-  refine ⟨k.natAbs, ?_, hrange⟩
+  refine ⟨(k : ℤ).natAbs, ?_, hrange⟩
   by_cases hz : h = 0
-  · have hmem : ULift.up (k.natAbs : ℤ) ∈ Set.range (fun t : M ↦ h t) := by
+  · have hmem : ULift.up ((k : ℤ).natAbs : ℤ) ∈ Set.range (fun t : M ↦ h t) := by
       rw [hrange]
       exact ⟨ULift.up 1, by apply ULift.ext; simp⟩
     obtain ⟨t, ht⟩ := hmem
     rw [hz] at ht
-    have : k.natAbs = 0 := by
+    have : (k : ℤ).natAbs = 0 := by
       have := congrArg ULift.down ht
       simpa using this.symm
     simp [this]
   · obtain ⟨t, ht, htb⟩ := hb hz
-    have hd : (k.natAbs : ℤ) ∣ (h t).down := by
+    have hd : ((k : ℤ).natAbs : ℤ) ∣ (h t).down := by
       rw [← Int.mem_zmultiples_iff, ← hH]
       exact ⟨t, rfl⟩
     have hpos : 0 < (h t).down.natAbs := by
