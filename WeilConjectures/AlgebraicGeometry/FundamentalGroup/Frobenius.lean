@@ -312,7 +312,8 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
       (picPairing_eq_of_isIsomorphic (hm n) h)
   · have := hne n
     rw [AddMonoidHom.comp_apply, AddMonoidHom.comp_apply,
-      picPairing_transport p.geometricGaloisFrobenius.asIso.hom (specGeometricFrobenius K).asIso.hom hf
+      picPairing_transport p.geometricGaloisFrobenius.asIso.hom
+        (specGeometricFrobenius K).asIso.hom hf
         (hm n) t (t.mapIso p.geometricGaloisFrobenius.asIso) (𝟙 _) (Category.id_comp _).symm
         (by rw [Category.comp_id, Category.id_comp]; rfl)]
     exact congrArg _ (Subtype.ext rfl)
@@ -636,7 +637,8 @@ theorem exists_extension_of_isIsomorphic_mapIso
   choose T hT using fun n ↦ exists_isIsomorphic_pullback j s hρ (t n) (hkill n)
   refine ⟨G', inferInstance, inferInstance, T, hT, fun n ↦ ?_, fun n g' ↦ ?_⟩
   · refine isIsomorphic_of_isIsomorphic_pullback j s hρ ?_
-    have hcomm : j ≫ c.g.geometricGaloisFrobenius.asIso.hom = p.geometricGaloisFrobenius.asIso.hom ≫ j :=
+    have hcomm : j ≫ c.g.geometricGaloisFrobenius.asIso.hom =
+        p.geometricGaloisFrobenius.asIso.hom ≫ j :=
       Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius _ _
     exact (isIsomorphic_pullback_mapIso (T n) j _ _ hcomm).trans
       (((hT n).mapIso _).trans ((hfix n).trans (hT n).symm))
