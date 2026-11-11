@@ -190,8 +190,9 @@ theorem geomAut_ofLift
   rw [geomAut_apply]
   change (toAutMulEquiv (fiber sU) GU).symm _ = (toAutMulEquiv (fiber sU) GU).symm _
   congr 1
-  simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, Iso.conjAut_apply]
+  simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom]
   apply Aut.ext
+  simp only [Aut.autMulEquivOfIso, Iso.conjAut_apply]
   rw [← pullbackPathIso'_eq, pullbackPathIso'_trans, pullbackPathIso'_symm,
     pullbackPathIso'_liftPath_specMap B₀ ξ hξ σ hξ' h' (genericGeomPoint_geometricFiberProj j)]
   simp only [ofLift, Iso.trans_symm, Iso.trans_assoc, Iso.symm_self_id_assoc]
@@ -223,8 +224,9 @@ theorem downAut_ofLift
   rw [downAut]
   change (toAutMulEquiv (fiber sU) GU).symm _ = (toAutMulEquiv (fiber sU) GU).symm _
   congr 1
-  simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, Iso.conjAut_apply]
+  simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom]
   apply Aut.ext
+  simp only [Aut.autMulEquivOfIso, Iso.conjAut_apply]
   rw [← pullbackPathIso'_eq, pullbackPathIso'_trans, pullbackPathIso'_symm,
     pullbackPathIso'_liftPath_specMap B₀ ξ hξ σ hξ' h₁ hη', UniversalCover.liftPath_map _ B₀.t ξ hξ,
     pullbackPathIso'_pullbackPathIso'_of_comp_eq hF]
