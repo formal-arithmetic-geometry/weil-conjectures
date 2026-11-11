@@ -537,15 +537,21 @@ theorem trace_eq_trace_add_trace_of_distTriang [IsSepClosed k]
   let : HasRightDual (ι.obj P₃) :=
     @HasRightDual.mk _ _ _ _ (ι.obj (P₃ᘁ)) (ExactPairing.map ι P₃ (P₃ᘁ))
   have key {P : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} [HasRightDual P]
-      [HasRightDual (ι.obj P)] (v : P ⟶ P) : trace (ι.map v) = ι.unitEndRingHom (trace v) :=
+      [HasRightDual (ι.obj P)] (v : P ⟶ P) :
+      trace (ι.map v) = (ι.unitEndRingHom (.of (trace v))).asHom :=
     ι.trace_eq_unitEndRingHom_trace v (ι.map v) (Iso.refl _) (by simp)
   have hinj : Function.Injective ι.unitEndRingHom := fun a b h ↦ by
     rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
+    apply End.ext
     apply ι.map_injective
-    change 𝟙 _ ≫ ι.map a ≫ 𝟙 _ = 𝟙 _ ≫ ι.map b ≫ 𝟙 _ at h
+    have h := congrArg End.asHom h
+    change 𝟙 _ ≫ ι.map a.asHom ≫ 𝟙 _ = 𝟙 _ ≫ ι.map b.asHom ≫ 𝟙 _ at h
     simpa only [Category.id_comp, Category.comp_id] using h
+  suffices h : End.of (trace v₂) = End.of (trace v₁) + End.of (trace v₃) from
+    congrArg End.asHom h
   apply hinj
-  rw [RingHom.map_add, ← key, ← key, ← key]
+  apply End.ext
+  rw [RingHom.map_add, End.add_asHom, ← key, ← key, ← key]
   exact trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition ℓ k
     ((nonempty_shiftDecomposition_point ℓ k P₁).some.map ι)
     ((nonempty_shiftDecomposition_point ℓ k P₂).some.map ι)
