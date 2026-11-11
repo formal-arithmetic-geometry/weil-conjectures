@@ -169,7 +169,8 @@ theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
 theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
     (hσ : ∀ a b, σ (a + b) = .of ((σ a).asHom ≫ (σ b).asHom))
     (hq : IsUnit (Fintype.card G : R)) :
-    (actionProjector M σ χ).asHom ≫ (actionProjector M σ χ).asHom = (actionProjector M σ χ).asHom := by
+    (actionProjector M σ χ).asHom ≫ (actionProjector M σ χ).asHom =
+      (actionProjector M σ χ).asHom := by
   conv_lhs => arg 2; simp only [actionProjector, End.sum_asHom, End.smul_asHom]
   rw [Preadditive.comp_sum]
   have ht (c : G) : (actionProjector M σ χ).asHom ≫
