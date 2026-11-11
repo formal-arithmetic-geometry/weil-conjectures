@@ -45,11 +45,11 @@ variable {C : Type*} [Category* C] [MonoidalCategory C]
 
 /-- The action of an endomorphism `u` of the unit on an object `X`:
 `X ≅ X ⊗ 𝟙_ C ⟶ X ⊗ 𝟙_ C ≅ X`, the middle map being `X ◁ u`. -/
-@[simps]
+@[simps apply]
 def unitEndAction (X : C) : End (𝟙_ C) →* End X where
-  toFun u := .of ((ρ_ X)).inv ≫ X ◁ (u).asHom ≫ (ρ_ X).hom
-  map_one' := by simp [End.one_asHom]
-  map_mul' u v := by simp [End.mul_asHom]
+  toFun u := .of ((ρ_ X).inv ≫ X ◁ u.asHom ≫ (ρ_ X).hom)
+  map_one' := by apply End.ext; simp
+  map_mul' u v := by apply End.ext; simp
 
 /-- The action of endomorphisms of the unit is natural. -/
 @[reassoc]
@@ -60,17 +60,19 @@ lemma unitEndAction_naturality {X Y : C} (φ : X ⟶ Y) (u : End (𝟙_ C)) :
 
 /-- The action of endomorphisms of the unit on the unit is the multiplication. -/
 lemma unitEndAction_unit (u : End (𝟙_ C)) : unitEndAction (𝟙_ C) u = u := by
+  apply End.ext
   rw [unitEndAction_apply, ← unitors_inv_equal, ← unitors_equal, leftUnitor_naturality,
     Iso.inv_hom_id_assoc]
 
 /-- The action of endomorphisms of the unit, as a ring homomorphism. -/
 def unitEndRingHom [Preadditive C] [MonoidalPreadditive C] (X : C) : End (𝟙_ C) →+* End X where
-  toFun u := .of ((ρ_ X)).inv ≫ X ◁ (u).asHom ≫ (ρ_ X).hom
+  toFun u := .of ((ρ_ X).inv ≫ X ◁ u.asHom ≫ (ρ_ X).hom)
   map_one' := (unitEndAction X).map_one
   map_mul' := (unitEndAction X).map_mul
-  map_zero' := by simp
+  map_zero' := by apply End.ext; simp
   map_add' u v := by
-    rw [MonoidalPreadditive.whiskerLeft_add, Preadditive.add_comp, Preadditive.comp_add]
+    apply End.ext
+    simp [MonoidalPreadditive.whiskerLeft_add, Preadditive.add_comp, Preadditive.comp_add]
 
 @[simp]
 lemma unitEndRingHom_apply [Preadditive C] [MonoidalPreadditive C] (X : C) (u : End (𝟙_ C)) :
@@ -128,10 +130,13 @@ lemma unitEndAction_apply_eq_uncurry' (X : C) (u : End (𝟙_ C)) :
 action `End (𝟙_ C) → End X` is bijective. -/
 theorem bijective_unitEndAction (X : C) [IsIso (MonoidalClosed.id X)] :
     Function.Bijective (unitEndAction X) := by
-  refine ⟨fun u v h ↦ ?_, fun g ↦ ⟨.of (curry' (g).asHom) ≫ inv (MonoidalClosed.id X), ?_⟩⟩
+  refine ⟨fun u v h ↦ ?_, fun g ↦ ⟨.of (curry' g.asHom ≫ inv (MonoidalClosed.id X)), ?_⟩⟩
   · rw [unitEndAction_apply_eq_uncurry', unitEndAction_apply_eq_uncurry'] at h
-    exact (cancel_mono (MonoidalClosed.id X)).1 (uncurry'_injective h)
-  · rw [unitEndAction_apply_eq_uncurry', Category.assoc, IsIso.inv_hom_id, Category.comp_id,
+    exact End.ext ((cancel_mono (MonoidalClosed.id X)).1 (uncurry'_injective congr($(h).asHom)))
+  · apply End.ext
+    rw [unitEndAction_apply_eq_uncurry']
+    change uncurry' ((curry' g.asHom ≫ inv (MonoidalClosed.id X)) ≫ MonoidalClosed.id X) = _
+    rw [Category.assoc, IsIso.inv_hom_id, Category.comp_id,
       uncurry'_curry']
 
 /-- The action `End (𝟙_ C) ≃* End X`, for `X` with `𝟙_ C ≅ [X, X]`. -/
@@ -163,7 +168,7 @@ noncomputable def unitsUnitEndMulEquivAut (X : C) [IsIso (MonoidalClosed.id X)] 
 @[simp]
 lemma unitsUnitEndMulEquivAut_apply_hom (X : C) [IsIso (MonoidalClosed.id X)]
     (u : (End (𝟙_ C))ˣ) :
-    (unitsUnitEndMulEquivAut X u).asIso.hom = (unitEndAction X u :=).asHom
+    (unitsUnitEndMulEquivAut X u).asIso.hom = (unitEndAction X u).asHom :=
   rfl
 
 /-- **Two isomorphisms `X ≅ Y` differ by a unique unit of `End (𝟙_ C)`**, provided
@@ -176,6 +181,7 @@ theorem existsUnique_hom_eq_comp_unitEndAction {X Y : C} [IsIso (MonoidalClosed.
   · beta_reduce
     rw [← unitsUnitEndMulEquivAut_apply_hom, MulEquiv.apply_symm_apply, ha, Iso.hom_inv_id_assoc]
   · rw [MulEquiv.eq_symm_apply]
+    apply Aut.ext
     refine Iso.ext ?_
     rw [unitsUnitEndMulEquivAut_apply_hom, ha, hv, Iso.inv_hom_id_assoc]
 
