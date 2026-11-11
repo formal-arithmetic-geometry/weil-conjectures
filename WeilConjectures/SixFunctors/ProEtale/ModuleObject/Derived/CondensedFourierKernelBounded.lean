@@ -106,7 +106,7 @@ theorem condensedFourierKernel_boundedConstructible
       simp
     have hz : condensedArtinSchreierProjector Λ k₀ ψ = 0 := by
       apply End.ext
-      simp [condensedArtinSchreierProjector, End.sum_asHom, Ring.inverse_non_unit _ hq, hzero]
+      simp [condensedArtinSchreierProjector, Ring.inverse_non_unit _ hq, hzero]
     have hi : IsZero (condensedArtinSchreierSheaf Λ k₀ ψ) := by
       apply IsZero.of_mono_eq_zero (image.ι (condensedArtinSchreierProjector Λ k₀ ψ).asHom)
       apply (cancel_epi (factorThruImage (condensedArtinSchreierProjector Λ k₀ ψ).asHom)).mp
