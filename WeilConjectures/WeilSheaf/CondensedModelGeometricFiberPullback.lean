@@ -370,8 +370,8 @@ lemma geometricFiberPullbackFrobeniusIso_eq :
     geometricFiberPullbackFrobeniusIso k₀ l X =
       Functor.isoWhiskerLeft ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l]
           (adicUpperStarIsoLowerStarInv l
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm ≪≫
-        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm ≪≫
+        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).symm ≪≫
         adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _) :=
   rfl
@@ -382,7 +382,7 @@ lemma geometricFiberPullback_comp_toCondensed_eq :
     geometricFiberPullback k₀ l X ⋙ toCondensed k₀ l X =
       Endofunctor.IsoAlgebra.functorOfNatIso _ (geometricFiberPullbackFrobeniusIso k₀ l X) ⋙
         Endofunctor.IsoAlgebra.mapOfNatIso (adicLowerStarCompCondensedModIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).symm :=
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).symm :=
   rfl
 
 /-- **Pulled-back Weil sheaves in the two models**: the old-model Weil sheaf `p^* H` with its
