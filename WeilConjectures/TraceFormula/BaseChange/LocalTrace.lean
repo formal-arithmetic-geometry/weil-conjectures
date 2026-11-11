@@ -160,6 +160,7 @@ theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum (K : WeilBoundedCons
         ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (e.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).frobenius.hom := by
   rw [weilStalkTraceAlternatingSum_eq_superTrace ℓ n x hxk hx K]
-  exact (trace_eq_homologyUnitEndRingHom_superTrace ℓ (AlgebraicClosure k) _ _).symm
+  simpa only using
+    (trace_eq_homologyUnitEndRingHom_superTrace ℓ (AlgebraicClosure k) _ _).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
