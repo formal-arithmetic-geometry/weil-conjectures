@@ -31,7 +31,6 @@ lemma purity_upperStarTateTwistOneIso_comp :
           (upperStarTateTwistOneIso ℓ g a).hom ≫
         (upperStarTateTwistOneIso ℓ f (g ≫ a)).hom =
       (upperStarTateTwistOneIso ℓ (f ≫ g) a).hom := by
-
   have h := purity_upperStarExtendScalarsLimitFreeTowerIso_geometric_comp
     (Profinite.continuousMapRingObj ℤ_[ℓ]) f g
     (F := fun n ↦ rootsOfUnitySheaf Z (ℓ ^ n))

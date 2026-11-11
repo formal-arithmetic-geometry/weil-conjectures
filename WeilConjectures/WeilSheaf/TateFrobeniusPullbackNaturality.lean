@@ -42,7 +42,6 @@ lemma upperStarCongr_hom_app_comp_upperStarRootsOfUnitySheafHom (N : ℕ) :
     (upperStarCongr Ab.{u + 1} h).hom.app (rootsOfUnitySheaf X N) ≫
         upperStarRootsOfUnitySheafHom g' N =
       upperStarRootsOfUnitySheafHom (g₁ ≫ g) N := by
-
   subst h
   simp [upperStarCongr]
 

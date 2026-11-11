@@ -31,6 +31,7 @@ lemma purity_upperStarTateTwistOneIso_independent_base
     {X Y : Scheme.{u}} (g : X ⟶ Y) (a : Y ⟶ Spec (.of k))
     (a' : Y ⟶ Spec (.of k')) :
     upperStarTateTwistOneIso ℓ g a = upperStarTateTwistOneIso ℓ g a' := by
+
   rfl
 
 /-- Transport along an equality of geometric maps preserves the canonical root datum. -/
