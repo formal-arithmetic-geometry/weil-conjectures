@@ -65,7 +65,6 @@ lemma linearMapTrace_eq_zero_of_isZero {M : ModuleCat.{u} L} (hM : IsZero M) (f 
   rw [hM.eq_of_src f 0, ModuleCat.hom_zero, map_zero]
 
 variable [HasDerivedCategory.{u} (ModuleCat.{u} L)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} L)]
 
 /-- **The trace over a field is the supertrace on cohomology**: for a perfect complex `P` of
 `D(L)`, `L` a field, an endomorphism `w` of `P` and a finite set `s` of degrees outside of which
@@ -123,35 +122,33 @@ theorem IsPerfect.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map
     _ = _ := (Finset.sum_subset Finset.subset_union_right fun i _ hi ↦ by
         rw [hzero i (hs i hi), smul_zero]).symm
 
-omit [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} L)] in
-/-- The cohomology functors `Hⁿ : D(L) ⥤ Mod_L` are `L`-linear. -/
-lemma homologyFunctor_linear (n : ℤ) : (homologyFunctor (ModuleCat.{u} L) n).Linear L := by
-  have : (HomologicalComplex.shortComplexFunctor (ModuleCat.{u} L) (ComplexShape.up ℤ) n).Linear
-      L := ⟨fun _ _ ↦ rfl⟩
-  have hF : (HomologicalComplex.homologyFunctor (ModuleCat.{u} L) (ComplexShape.up ℤ) n).Linear L :=
-    inferInstanceAs ((HomologicalComplex.shortComplexFunctor (ModuleCat.{u} L) (ComplexShape.up ℤ)
-      n ⋙ ShortComplex.homologyFunctor (ModuleCat.{u} L)).Linear L)
-  let : Localization.Lifting (Q : _ ⥤ DerivedCategory (ModuleCat.{u} L))
-      (HomologicalComplex.quasiIso (ModuleCat.{u} L) (ComplexShape.up ℤ))
-      (HomologicalComplex.homologyFunctor (ModuleCat.{u} L) (ComplexShape.up ℤ) n)
-      (homologyFunctor (ModuleCat.{u} L) n) :=
-    ⟨homologyFunctorFactors (ModuleCat.{u} L) n⟩
-  exact (Localization.functor_linear_iff (Q : _ ⥤ DerivedCategory (ModuleCat.{u} L))
-    (HomologicalComplex.quasiIso (ModuleCat.{u} L) (ComplexShape.up ℤ)) L
-    (HomologicalComplex.homologyFunctor (ModuleCat.{u} L) (ComplexShape.up ℤ) n)
-    (homologyFunctor (ModuleCat.{u} L) n)).1 hF
+/-- The cohomology of a perfect complex vanishes outside a finite set of degrees. -/
+lemma IsPerfect.exists_finset_isZero_homology {P : DerivedCategory (ModuleCat.{u} L)}
+    (hP : P.IsPerfect) :
+    ∃ s : Finset ℤ, ∀ i ∉ s, IsZero ((homologyFunctor (ModuleCat.{u} L) i).obj P) := by
+  obtain ⟨a, b, ha, hb⟩ := hP.exists_homologyConcentratedIn
+  refine ⟨Finset.Icc a b, fun i hi ↦ ?_⟩
+  rcases not_and_or.1 (Finset.mem_Icc.not.1 hi) with h | h
+  · exact P.isZero_of_isGE a i (by lia)
+  · exact P.isZero_of_isLE b i (by lia)
 
-/-- The degree-`0` scalar of the image of `r ∈ L` in `End (𝟙_ D(L))` is `r`. -/
-@[simp]
-lemma unitEndScalar_algebraMap (r : L) :
-    unitEndScalar L (algebraMap L (End (𝟙_ (DerivedCategory (ModuleCat.{u} L)))) r) = r := by
-  have := homologyFunctor_linear (L := L) 0
-  rw [unitEndScalar, Algebra.algebraMap_eq_smul_one, End.one_def, Functor.map_smul,
-    CategoryTheory.Functor.map_id]
-  simp
+/-- The categorical trace on a perfect complex over a field is `L`-linear:
+`tr_L(r • w ∣ P) = r • tr_L(w ∣ P)`. -/
+theorem IsPerfect.trace_smul {P : DerivedCategory (ModuleCat.{u} L)} (hP : P.IsPerfect)
+    [HasRightDual P] (r : L) (w : P ⟶ P) :
+    letI := braidedCategory' (ModuleCat.{u} L)
+    MonoidalCategory.trace (r • w) = r • MonoidalCategory.trace w := by
+  obtain ⟨s, hs⟩ := hP.exists_finset_isZero_homology
+  have := fun i ↦ homologyFunctor_linear L i
+  rw [hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map _ s hs,
+    hP.trace_eq_algebraMap_sum_negOnePow_trace_homologyFunctor_map _ s hs,
+    Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, smul_smul]
+  congr 1
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [Functor.map_smul, ModuleCat.hom_smul, map_smul, smul_eq_mul, mul_smul_comm]
 
-omit [HasDerivedCategory.{u} (ModuleCat.{u} L)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} L)] in
+omit [HasDerivedCategory.{u} (ModuleCat.{u} L)] in
 /-- A functor to `L`-modules sends powers of an endomorphism to powers of linear maps. -/
 lemma hom_map_pow {D : Type*} [Category D] (F : D ⥤ ModuleCat.{u} L) {X : D} (v : End X)
     (m : ℕ) : (F.map (v ^ m)).hom = (F.map v).hom ^ m := by
