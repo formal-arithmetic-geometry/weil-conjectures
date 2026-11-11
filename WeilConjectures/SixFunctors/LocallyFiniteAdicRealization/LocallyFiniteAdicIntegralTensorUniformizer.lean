@@ -76,9 +76,10 @@ private theorem scalar_factor_isIso {R : Type*} [CommRing R] {A B : Type*} [Cate
     [Preadditive A] [Preadditive B] [Linear R A]
     (F : A ⥤ B) [F.Additive] (K : A) (t b : R)
     (h : IsIso (F.map ((t * b) • 𝟙 K))) : IsIso (F.map (t • 𝟙 K)) := by
-  let f : End (F.obj K) := F.map (t • 𝟙 K)
-  let g : End (F.obj K) := F.map (b • 𝟙 K)
+  let f : End (F.obj K) := .of (F.map (t • 𝟙 K))
+  let g : End (F.obj K) := .of (F.map (b • 𝟙 K))
   have hc : Commute f g := by
+    apply End.ext
     change F.map (b • 𝟙 K) ≫ F.map (t • 𝟙 K) =
       F.map (t • 𝟙 K) ≫ F.map (b • 𝟙 K)
     simp only [← F.map_comp, Linear.smul_comp, Linear.comp_smul,
