@@ -762,7 +762,6 @@ private lemma coordinateIso_natural_assoc {L L' : ringedSiteComplex O}
       (coordinateIso O L n p h).hom ≫
         SheafOfModules.homObjMap (R := O) (f.f p) (𝟙 (TargetUnit O)) ≫ a := by
   erw [← Category.assoc, coordinateIso_natural, Category.assoc]
-  try rfl
 
 private lemma unit_dual_evaluation :
     (coordinateIso O (ringedSiteRingComplex O) 0 0 (by omega)).hom ≫
