@@ -217,15 +217,14 @@ private lemma matrixHom_block :
     · have : (sumComplEquiv ρ hρ).symm (Sum.inr ⟨i, hi⟩) = i := by
         simp [sumComplEquiv]
       rw [this, biproduct.ι_π_ne _ (fun h ↦ hi ⟨b, h⟩)]
-      simpa only [End.zero_asHom] using congrArg End.asHom (map_zero φ)
+      simp
   · have : (sumComplEquiv γ hγ).symm (Sum.inr ⟨j, hj⟩) = j := by
       simp [sumComplEquiv]
     rw [this, blockMap]
     simp only [Category.assoc]
     erw [biproduct.ι_toSubtype_assoc, dite_eq_right hj]
     simp only [Limits.zero_comp]
-    rcases x with a | ⟨i, hi⟩ <;>
-      simpa only [End.zero_asHom] using congrArg End.asHom (map_zero φ)
+    rcases x with a | ⟨i, hi⟩ <;> simp
 
 private lemma cokernel_block_free : ∃ n : ℕ,
     Nonempty (cokernel (blockMap A ρ γ hρ hγ) ≅ ⨁ fun _ : Fin n ↦ A) := by
