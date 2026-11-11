@@ -58,8 +58,8 @@ pairing of stalks compatible with the local Frobenius. -/
 lemma stalkAt_pairing_frobenius (P Q R : WeilSheaf k₀ l X)
     (e : P.obj.carrier.X ⊗ Q.obj.carrier.X ⟶ R.obj.carrier.X)
     (h : (P.obj.str.hom.hom ⊗ₘ Q.obj.str.hom.hom) ≫ e =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-        WeilCoefficients.{u} l]
+      μ ((X ↘
+        Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           P.obj.carrier.X Q.obj.carrier.X ≫
         ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map e ≫
           R.obj.str.hom.hom)
@@ -76,8 +76,8 @@ lemma stalkAt_pairing_frobenius (P Q R : WeilSheaf k₀ l X)
 /-- A unit of the underlying sheaf of a Weil sheaf compatible with the Weil structure induces an
 element of the stalk fixed by the local Frobenius. -/
 lemma stalkAt_unit_frobenius (R : WeilSheaf k₀ l X) (η : 𝟙_ _ ⟶ R.obj.carrier.X)
-    (h : ε ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
-        WeilCoefficients.{u} l] ≫
+    (h : ε ((X ↘
+        Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map η ≫
         R.obj.str.hom.hom = η) :
     (R.stalkAt s m hs).frobenius (((stalkSheafFunctor k₀ l X s).map η).hom

@@ -310,7 +310,7 @@ noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
   match m with
   | 0 => (adicLowerStarCongr l (by rw [pow_zero]; rfl)).app _ ≪≫ (adicLowerStarId l _).app _
   | m + 1 =>
-    (adicLowerStarCongr l (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
+    (adicLowerStarCongr l (by rw [pow_succ, Aut.mul_asIso, Iso.trans_inv])).app _ ≪≫
       (adicLowerStarComp l _ _).symm.app _ ≪≫
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
