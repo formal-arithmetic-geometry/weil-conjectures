@@ -291,7 +291,8 @@ along the Frobenii: `(Fr_Y)_* ⋙ φ̄^* ≅ φ̄^* ⋙ (Fr_X)_*`. -/
 noncomputable def adicOpenImmersionUpperStarGeometricFiberMapCompFrobeniusIso :
     (g.geometricGaloisFrobenius.asIso.hom)_*ᵃ[l] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ≅
       (Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l] ⋙ (f.geometricGaloisFrobenius.asIso.hom)_*ᵃ[l] :=
-  Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.asIso.symm).symm _ ≪≫
+  Functor.isoWhiskerRight
+    (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.asIso.symm).symm _ ≪≫
     (adicUpperStarComp l _ _).symm ≪≫
     adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
     adicUpperStarComp l _ _ ≪≫
