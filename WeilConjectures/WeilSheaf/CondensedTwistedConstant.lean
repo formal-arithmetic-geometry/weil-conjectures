@@ -90,8 +90,8 @@ variable {C D : Type*} [Category.{v} C] [Category.{v} D] {L : C ⥤ D} {R : D �
 form a limit fan. -/
 lemma isIso_galoisComparison_of_isLimit [HasLimitsOfShape (Discrete Γ) D] (N : D)
     (h : IsLimit (Fan.mk (L.obj (R.obj N)) fun σ ↦ adj.galoisComponent S κ σ N)) :
-    IsIso (adj.galoisComparison S κ N) := by
-  exact (Fan.nonempty_isLimit_iff_isIso_piLift _).1 ⟨h⟩
+    IsIso (adj.galoisComparison S κ N) :=
+  (Fan.nonempty_isLimit_iff_isIso_piLift _).1 ⟨h⟩
 
 /-- **Transport of Galois components along an isomorphism of left adjoints.** Let `L, L' ⊣ R`
 with `ι : L ≅ L'` compatible with the counits, and `S σ ≅ T σ`. If the composites
@@ -560,16 +560,16 @@ lemma isGaloisDescentDatum_map_comp_inv_app
     (hκ : ∀ σ τ M, (κ (σ * τ)).hom.app M =
       (μ σ τ).hom.app (L.obj M) ≫ (S σ).map ((κ τ).hom.app M) ≫ (κ σ).hom.app M)
     {M₀ : C} (a : Γ →* (Aut M₀)ᵐᵒᵖ) :
-    IsGaloisDescentDatum S ε₀ μ fun σ ↦ L.map (a σ).unop.hom ≫ (κ σ).inv.app M₀ where
+    IsGaloisDescentDatum S ε₀ μ fun σ ↦ L.map (a σ).unop.asIso.hom ≫ (κ σ).inv.app M₀ where
   one := by
     rw [map_one, MulOpposite.unop_one, Category.assoc, ← hκ₁, Iso.inv_hom_id_app]
     exact (Category.comp_id _).trans (L.map_id M₀)
   mul σ τ := by
-    have hn : (κ σ).inv.app M₀ ≫ (S σ).map (L.map (a τ).unop.hom) =
-        L.map (a τ).unop.hom ≫ (κ σ).inv.app M₀ :=
-      ((κ σ).inv.naturality (a τ).unop.hom).symm
+    have hn : (κ σ).inv.app M₀ ≫ (S σ).map (L.map (a τ).unop.asIso.hom) =
+        L.map (a τ).unop.asIso.hom ≫ (κ σ).inv.app M₀ :=
+      ((κ σ).inv.naturality (a τ).unop.asIso.hom).symm
     rw [Functor.map_comp, Category.assoc, reassoc_of% hn,
-      inv_app_comp_map_inv_app hκ σ τ M₀, map_mul, MulOpposite.unop_mul, Aut.Aut_mul_def,
+      inv_app_comp_map_inv_app hκ σ τ M₀, map_mul, MulOpposite.unop_mul, Aut.mul_asIso,
       Iso.trans_hom, Functor.map_comp, Category.assoc, Category.assoc]
 
 /-- **Twisted objects.** Let `L ⊣ R` with `L` faithful and left exact out of an abelian category,
@@ -585,7 +585,7 @@ theorem exists_iso_twist [Abelian C] [L.Faithful] [PreservesFiniteLimits L]
     (M₀ : C) [IsIso (adj.galoisComparison S κ (L.obj M₀))]
     [IsIso (adj.galoisComparison S κ (L.obj (R.obj (L.obj M₀))))] (a : Γ →* (Aut M₀)ᵐᵒᵖ) :
     ∃ (M : C) (e : L.obj M ≅ L.obj M₀), ∀ σ,
-      e.hom ≫ L.map (a σ).unop.hom ≫ (κ σ).inv.app M₀ = (κ σ).inv.app M ≫ (S σ).map e.hom :=
+      e.hom ≫ L.map (a σ).unop.asIso.hom ≫ (κ σ).inv.app M₀ = (κ σ).inv.app M ≫ (S σ).map e.hom :=
   adj.exists_iso_of_isGaloisDescentDatum hκ₁ hκ (L.obj M₀)
     (isGaloisDescentDatum_map_comp_inv_app hκ₁ hκ a)
 
@@ -615,7 +615,7 @@ theorem exists_upperStar_obj_iso_twist [Surjective q] [QuasiCompact q] [Finite �
     (a : Γ →* (Aut M₀)ᵐᵒᵖ) :
     ∃ (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
       (e : (q)^*⟦Λ⟧.obj M ≅ (q)^*⟦Λ⟧.obj M₀), ∀ σ,
-      e.hom ≫ (q)^*⟦Λ⟧.map (a σ).unop.hom ≫
+      e.hom ≫ (q)^*⟦Λ⟧.map (a σ).unop.asIso.hom ≫
           ((upperStarCongr Λ (hρ σ)).inv.app M₀ ≫ (upperStarComp Λ (ρ σ) q).hom.app M₀) =
         ((upperStarCongr Λ (hρ σ)).inv.app M ≫ (upperStarComp Λ (ρ σ) q).hom.app M) ≫
           (ρ σ)^*⟦Λ⟧.map e.hom := by
@@ -654,7 +654,7 @@ theorem exists_upperStar_finiteLevelProj_obj_iso_twist
     (a : Γ →* (Aut M₀)ᵐᵒᵖ) :
     ∃ (M : Mod (Sheaf (Scheme.ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀))
       (e : (f.finiteLevelProj K)^*⟦Λ⟧.obj M ≅ (f.finiteLevelProj K)^*⟦Λ⟧.obj M₀), ∀ σ,
-      e.hom ≫ (f.finiteLevelProj K)^*⟦Λ⟧.map (a σ).unop.hom ≫
+      e.hom ≫ (f.finiteLevelProj K)^*⟦Λ⟧.map (a σ).unop.asIso.hom ≫
           ((upperStarCongr Λ (finiteLevelGaloisAction_comp_finiteLevelProj f K χ σ)).inv.app M₀ ≫
             (upperStarComp Λ (f.finiteLevelGaloisAction χ σ) (f.finiteLevelProj K)).hom.app M₀) =
         ((upperStarCongr Λ (finiteLevelGaloisAction_comp_finiteLevelProj f K χ σ)).inv.app M ≫
@@ -738,7 +738,7 @@ theorem exists_upperStar_finiteLevelProj_obj_iso_frobeniusTwist
     ∃ (M : Mod (Sheaf (Scheme.ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀))
       (e : (f.finiteLevelProj K)^*⟦Λ⟧.obj M ≅ (f.finiteLevelProj K)^*⟦Λ⟧.obj M₀), ∀ σ,
       e.hom ≫ (f.finiteLevelProj K)^*⟦Λ⟧.map
-          (FiniteField.geometricFrobeniusCharacter K A hA σ).unop.hom ≫
+          (FiniteField.geometricFrobeniusCharacter K A hA σ).unop.asIso.hom ≫
           ((upperStarCongr Λ (finiteLevelGaloisAction_comp_finiteLevelProj f K
               (MulEquiv.refl Gal(K/k)) σ)).inv.app M₀ ≫
             (upperStarComp Λ (f.finiteLevelGaloisAction (MulEquiv.refl Gal(K/k)) σ)
