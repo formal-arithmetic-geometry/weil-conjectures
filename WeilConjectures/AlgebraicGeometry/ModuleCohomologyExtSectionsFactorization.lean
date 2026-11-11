@@ -18,6 +18,19 @@ Source: Stacks Project, Tags 015E and 03FD.
 (blueprint: new-module-cohomology-ext-sections-factorization)
 -/
 
+private meta def ps043ExprDiff (fuel : Nat) (path : String)
+    (a b : Lean.Expr) : Lean.MetaM Unit := do
+  if a == b then return
+  match fuel with
+  | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
+  | n + 1 =>
+    if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
+        a.getAppArgs.size == b.getAppArgs.size then
+      for i in [:a.getAppArgs.size] do
+        ps043ExprDiff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
+    else
+      Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
+
 @[expose] public section
 universe u
 set_option autoImplicit false
@@ -65,18 +78,7 @@ private theorem moduleComparisonEquiv_siteSections
     let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
     let actual ← Lean.Meta.zetaReduce
       (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (← `(h)))))
-    let rec diff (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
-      if a == b then return
-      match fuel with
-      | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
-      | n + 1 =>
-        if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
-            a.getAppArgs.size == b.getAppArgs.size then
-          for i in [:a.getAppArgs.size] do
-            diff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
-        else
-          Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
-    diff 12 "type" actual expected
+    ps043ExprDiff 12 "type" actual expected
   exact h
   run_tac do Lean.logInfo m!"PS043 helper end: {← IO.monoMsNow}"
 
@@ -142,18 +144,7 @@ theorem ext_sections_factorization
     let expected ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
     let actual ← Lean.Meta.zetaReduce
       (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (← `(h)))))
-    let rec diff (fuel : Nat) (path : String) (a b : Lean.Expr) : Lean.MetaM Unit := do
-      if a == b then return
-      match fuel with
-      | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
-      | n + 1 =>
-        if a.isApp && b.isApp && a.getAppFn == b.getAppFn &&
-            a.getAppArgs.size == b.getAppArgs.size then
-          for i in [:a.getAppArgs.size] do
-            diff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
-        else
-          Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
-    diff 12 "type" actual expected
+    ps043ExprDiff 12 "type" actual expected
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
