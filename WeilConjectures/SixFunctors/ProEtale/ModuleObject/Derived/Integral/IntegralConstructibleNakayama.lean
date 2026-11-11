@@ -370,3 +370,4 @@ theorem integralConstructible_isZero_of_isIso_nsmul (X : Scheme.{u})
     exact ⟨a, (S.range_immersion a).symm ▸ ha⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
