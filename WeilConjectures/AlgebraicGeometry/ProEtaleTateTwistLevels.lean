@@ -310,7 +310,7 @@ theorem spEllQuotient_finite_continuous (E : PadicAlgCl.FiniteIntermediateField 
     have heq : (PadicAlgCl.integers ℓ E.1 : Set E.1) = Metric.closedBall 0 1 := by
       ext x
       change ‖algebraMap E.1 (PadicAlgCl ℓ) x‖₊ ≤ 1 ↔ dist x 0 ≤ 1
-      rw [dist_zero_right]
+      rw [dist_zero_right x]
       exact NNReal.coe_le_coe.symm
     rw [heq]
     exact isCompact_closedBall 0 1
