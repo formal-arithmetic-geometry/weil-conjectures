@@ -148,4 +148,29 @@ theorem ext_sections_factorization
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
+run_cmd do
+  let env := (← Lean.getEnv).setExporting false
+  let lctx : Lean.LocalContext := default
+  for name in #[``sectionsComparisonNatIso_apply,
+      ``moduleComparisonEquiv_apply_of_component, ``ext_sections_factorization] do
+    let some info := env.find? name | throwError "missing declaration {name}"
+    let start ← IO.monoMsNow
+    match Lean.Kernel.check env lctx info.type with
+    | .ok _ => pure ()
+    | .error _ => throwError "kernel rejected declaration type {name}"
+    let typeEnd ← IO.monoMsNow
+    let inferred ← match Lean.Kernel.check env lctx (info.value! true) with
+      | .ok ty => pure ty
+      | .error _ => throwError "kernel rejected declaration value {name}"
+    let valueEnd ← IO.monoMsNow
+    let agrees ← match Lean.Kernel.isDefEq env lctx inferred info.type with
+      | .ok eq => pure eq
+      | .error _ => throwError "kernel type comparison failed {name}"
+    let endTime ← IO.monoMsNow
+    unless agrees do throwError "inferred and declared types differ {name}"
+    Lean.logInfo m!"PS043 kernel replay {name}: type {typeEnd - start} ms, value \
+      {valueEnd - typeEnd} ms, final defeq {endTime - valueEnd} ms"
+
+#print axioms ext_sections_factorization
+
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
