@@ -61,6 +61,7 @@ noncomputable def baseChangeAutActionHom
   map_one' := End.ext (autAction_baseChangeAut_one hM b hb v hv Λ A)
   map_mul' σ τ := by
     apply End.ext
+    rw [End.mul_asHom]
     exact autAction_baseChangeAut_mul hM b hb v hv Λ σ τ A
 
 @[simp]
