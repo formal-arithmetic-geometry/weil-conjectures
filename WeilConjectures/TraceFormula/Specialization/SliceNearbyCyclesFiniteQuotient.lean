@@ -119,8 +119,8 @@ theorem autAction_baseChangeAut_eq_id_of_derivedComplete [IsAlgClosed K] {ℓ : 
       intro m
       obtain ⟨g, hg⟩ := hf m
       refine ⟨g.asHom, ?_⟩
-      simpa only [End.nsmul_asHom, ← natCast_zsmul, Nat.cast_pow] using
-        congrArg End.asHom hg)
+      rw [← Nat.cast_pow, natCast_zsmul]
+      exact congrArg End.asHom hg)
     (GenericAut.exists_pow_ell_pow_eq hℓ) V hV hσ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
