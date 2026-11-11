@@ -718,5 +718,3 @@ theorem nativeIntegralCoefficient_heart
       (ProEtale.IsConstructibleModuleObject.of_iso q.symm hext))
 
 end WeilConjectures.LocallyFiniteAdicRealization
-
--- PS351 downstream validation target; removed after checking.
