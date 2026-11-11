@@ -95,7 +95,7 @@ lemma exists_forall_le_isDefinedOver {P V V' : Scheme.{u}} [CompactSpace P]
   refine ⟨F, fun E hE i j ↦ ?_⟩
   obtain ⟨t, ht⟩ := hE₀ (i, j) E ((hF (i, j)).trans hE)
   refine ⟨t, ?_⟩
-  rw [← congrArg End.asHom (hs i j), ← ht]
+  simpa only [← ht] using (congrArg End.asHom (hs i j)).symm
 
 variable {ℓ} in
 /-- The unit `M ⟶ ℚ̄_ℓ,X ⊗_{E_X} M` is a monomorphism: it has the retraction induced by the
