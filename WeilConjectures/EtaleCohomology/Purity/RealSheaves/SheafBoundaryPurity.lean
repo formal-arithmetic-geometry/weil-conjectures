@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
