@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.RingTheory.Flat.TorsionFree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetAbRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleUpperStar
 
@@ -129,8 +130,10 @@ instance (T : Type*) [TopologicalSpace T] : IsAddTorsionFree (ULift.{u + 1} C(T,
 
 /-- The sections of `ℤ_ℓ,X` are flat `ℤ`-modules, being torsion-free. -/
 lemma flat_padicIntAbSheaf_obj_obj (X : Scheme.{u}) (U : X.ProEtᵒᵖ) :
-    Module.Flat ℤ ((padicIntAbSheaf X l).obj.obj U) :=
-  inferInstanceAs (Module.Flat ℤ (ULift.{u + 1} C(U.unop.left, ℤ_[l])))
+    Module.Flat ℤ ((padicIntAbSheaf X l).obj.obj U) := by
+  have : Module.IsTorsionFree ℤ (ULift.{u + 1} C(U.unop.left, ℤ_[l])) :=
+    Module.isTorsionFree_int_iff_hasUniqueDiv.mpr inferInstance
+  exact inferInstanceAs (Module.Flat ℤ (ULift.{u + 1} C(U.unop.left, ℤ_[l])))
 
 end AlgebraicGeometry.ProEtale
 
