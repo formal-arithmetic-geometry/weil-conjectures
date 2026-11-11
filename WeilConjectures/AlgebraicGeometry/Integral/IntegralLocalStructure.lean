@@ -761,6 +761,15 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
 import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
+import WeilConjectures.AlgebraicGeometry.Integral.LocalStructure.ConstantModels
+import WeilConjectures.AlgebraicGeometry.Integral.LocalStructure.SieveCover
+import WeilConjectures.AlgebraicGeometry.IntegralModelsCompletionTransport
+import WeilConjectures.AlgebraicGeometry.IntegralModelsResidueTransport
+import WeilConjectures.SixFunctors.ProEtale.InternalCompletionStacksComparison
+import WeilConjectures.SixFunctors.ProEtale.InternalResidueStacksComparison
+import WeilConjectures.AlgebraicGeometry.AdicConstructibleLocalModels
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharts
+import all WeilConjectures.AlgebraicGeometry.IntegralCohomologicalAdicCriterion
 
 /-! # Integral local structure for continuous coefficient complexes
 
@@ -787,36 +796,18 @@ has bounded finite free scalar models pro-etale locally on a finite stratificati
 Source: current blueprint sk-prop-integral-local-structure, statement and proof
 (blueprint: sk-prop-integral-local-structure).
 
-Proof plan:
-1. Refine the cohomology stratifications of the first reduction and their connected
-   components, using lemma-constructible-common-refinement and
-   lem-sfb-noetherian-connected-components-open. By
-   lem-sfb-strict-completion-restriction-comparison, exact restriction preserves
-   completeness and the actual reductions.
-2. sk-lem-integral-finite-levels gives lisse finite cohomology and a common Tor bound.
-   Use lem-pe-finite-coefficient-model-comparison,
-   lem-sf-finite-discrete-encoding-tensor-tor and sk-thm-pe-constructible-comparison,
-   with det-pe-finite-tor-comparison-noetherian, to pass to the etale presentation.
-   lem-sfb-coefficient-connected-stalk-constant gives perfect scalar stalk models
-   on the cover of lem-sfb-coefficient-connected-contractible-cover.
-   lem-sfb-coefficient-etale-stalk-scalar-extension identifies their reductions.
-3. sk-lem-integral-scalar-towers (1) gives one bounded finite free scalar complex P.
-   lem-pc-bounded-above-flat-kflat-site and
-   lem-pe-internal-section-tensor-comparison compute its actual derived reductions,
-   separately isomorphic to those of K, using sk-def-pe-derived-completion.
-4. lem-sfb-finite-scalar-local-model-complete and the restriction comparison prove
-   completeness of its finite free terms. A finite stupid filtration, shifts and
-   cones preserve completeness by det-pe-derived-nakayama-first-reduction.
-5. Choose an exponent killing the torsion of H^1 of the scalar endomorphism complex,
-   finite over the DVR by lem-weil-l-adic-extension-integers-dvr. Apply
-   lem-pe-internal-perfect-reduction-hom-ml to stabilize the images of the Hom tower.
-6. Choose an invertible stable image at the first level. Its fibres at every level
-   are nonempty and Mittag-Leffler, since their images are the stabilized Hom images
-   intersected with the fibre. lem-weil-pbc-ml-sets-tower-limit-nonempty supplies a
-   compatible family of maps with this invertible first reduction.
-7. lem-pe-internal-perfect-hom-limit-surjective lifts that family to an integral map.
-   Both source and target are complete, so sk-lem-pe-derived-nakayama makes it an
-   isomorphism. The chosen weakly contractible charts cover each stratum. -/
+Proof: transport `K` to the completed constant ring sheaf, where the completion and residue
+conditions become Stacks adic constructibility (`completion_transport`, `residue_transport`,
+`internal_completion_stacks_comparison`, `internal_residue_stacks_comparison`). The adic
+stratified perfect models (`Scheme.adicConstructible_localModels`, built on the residue-lisse
+perfect lift: Mittag-Leffler Hom towers, a compatible family of reductions lifted to an
+integral map, and derived Nakayama) give a finite stratification, covering sieves and bounded
+finite projective scalar models; over the DVR these are finite free. Inverse image of the
+comparison functor agrees with the internal inverse image up to an equivalence
+(`exists_derived_integralRealization_pullback`), and the completed constant model of a finite
+free complex is the pullback of free condensed modules from the point
+(`nonempty_adicTowerPullback_sfbCompletedModel_iso`). Reflect the local isomorphisms along
+that equivalence and replace each covering sieve by a small pro-étale cover. -/
 theorem integral_local_structure
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -838,6 +829,67 @@ theorem integral_local_structure
               DerivedCategory.Q.obj
                 (((CondensedRing.upperStarFromPointMod (DerivedNakayama.integerRing l E)
                     (U.X i)).mapHomologicalComplex (.up ℤ)).obj P)) := by
-  sorry
+  classical
+  let Λ := DerivedNakayama.integerRing l E
+  let O := Padic.coefficientExtensionIntegers l E
+  obtain ⟨hR, hcpl, hI⟩ := Scheme.integralCoefficients l E
+  have : IsDiscreteValuationRing (IntegralConstantCompletion.integers l E) := hR
+  have : IsAdicComplete (IntegralConstantCompletion.ideal l E)
+    (IntegralConstantCompletion.integers l E) := hcpl
+  let K₀ := (Mod.comap (coefficientMap
+    (IntegralConstantModel.pointComparison l E).inv.hom X)).mapDerivedCategory.obj K
+  have hC := ((IntegralModelsStacks.completion_transport l E X).1 K₀).mpr
+    ((internal_completion_stacks_comparison l E X K).mp hc)
+  have hS := (IntegralModelsStacks.residue_transport l E X K₀ hC).mp
+    ((internal_residue_stacks_comparison l E X K).mpr
+      ⟨hr, finiteTorAmplitude_of_constantModelBoundedConstructible_residue l E X hr⟩)
+  obtain ⟨s, -, hs⟩ := Scheme.adicConstructible_localModels X _ _ hI _ hS
+  refine ⟨s, fun a ↦ ?_⟩
+  obtain ⟨V, hV, hm⟩ := hs a
+  refine Scheme.exists_cover_of_mem_proEt_topology (fun {Y} (f : Y ⟶ s.domain a) ↦
+    ∃ (P : CochainComplex
+        (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) ℤ) (b c : ℤ),
+      P.IsStrictlyGE b ∧ P.IsStrictlyLE c ∧ (∀ q : ℤ, Mod.IsFree Λ (P.X q)) ∧
+      Nonempty ((CondensedRing.upperStar Λ (f ≫ s.immersion a)).mapDerivedCategory.obj K ≅
+        DerivedCategory.Q.obj
+          (((CondensedRing.upperStarFromPointMod Λ Y).mapHomologicalComplex (.up ℤ)).obj P)))
+    V hV ?_
+  intro U f hf
+  obtain ⟨P, b, c, hb, hc', hP, ⟨e⟩⟩ := hm U f hf
+  obtain ⟨e₁⟩ := Scheme.nonempty_adicTowerPullback_comp_iso_of_local (s.immersion a) _ U ⟨e⟩
+  obtain ⟨Φ, _, _, ⟨α⟩, hK⟩ :=
+    exists_derived_integralRealization_pullback l E (U.hom ≫ s.immersion a)
+  obtain ⟨P₀, n, hn, ⟨eP⟩⟩ := exists_freeScalars_complex (O := O) P hP
+  obtain ⟨eM⟩ := nonempty_adicTowerPullback_sfbCompletedModel_iso l E _ Φ α P₀ n hn
+  obtain ⟨eK⟩ := hK K
+  let eS : Scheme.sfbCompletedModel X (Scheme.pbcIntegralDatum l E).ideal
+      (((ModuleCat.restrictScalars.{u + 1}
+        (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+* O).toRingHom).mapHomologicalComplex
+          (.up ℤ)).obj P₀) ≅ Scheme.sfbCompletedModel X (Scheme.pbcIntegralDatum l E).ideal P :=
+    DerivedCategory.Q.mapIso (((Scheme.completedAdicChange X
+      (Scheme.CompletedConstantReduction.base X _)).mapHomologicalComplex (.up ℤ)).mapIso
+        ((Scheme.CompletedConstantReduction.constantComplex X _).mapIso eP))
+  let ι := eK.symm ≪≫ e₁ ≪≫ (Scheme.adicTowerPullback _ _).mapIso eS.symm ≪≫ eM
+  let rsE := ModuleCat.restrictScalarsEquivalenceOfRingEquiv
+    (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+* O)
+  have hzero (i : ℤ) (hi : IsZero (P.X i)) :
+      IsZero ((letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+        continuousScalarFunctor O).obj (P₀.X i)) := by
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    have h₁ : IsZero (rsE.functor.obj (P₀.X i)) :=
+      hi.of_iso ((HomologicalComplex.eval _ _ i).mapIso eP)
+    exact Functor.map_isZero _ ((rsE.inverse.map_isZero h₁).of_iso (rsE.unitIso.app _))
+  refine ⟨((letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    continuousScalarFunctor O).mapHomologicalComplex (.up ℤ)).obj P₀, b, c, ?_, ?_, ?_,
+    ⟨Φ.mapDerivedCategory.preimageIso ι⟩⟩
+  · rw [CochainComplex.isStrictlyGE_iff] at hb ⊢
+    exact fun i hi ↦ hzero i (hb i hi)
+  · rw [CochainComplex.isStrictlyLE_iff] at hc' ⊢
+    exact fun i hi ↦ hzero i (hc' i hi)
+  · intro q
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    change Mod.IsFree _ ((continuousScalarFunctor O).obj (P₀.X q))
+    rw [congrFun hn q]
+    exact isFree_continuousScalarFunctor_freeScalars O (n q)
 
 end AlgebraicGeometry.ProEtale
