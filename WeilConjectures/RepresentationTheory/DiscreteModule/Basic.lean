@@ -286,9 +286,9 @@ def coind₁Action (A : AddCommGrpCat.{max u w}) : Action AddCommGrpCat.{max u w
   V := AddCommGrpCat.of (smoothFunctions G A)
   ρ :=
     { toFun g := .of <| AddCommGrpCat.ofHom (translate g)
-      map_one' := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
+      map_one' := End.ext <| AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
         simp [End.one_asHom])
-      map_mul' a b := AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
+      map_mul' a b := End.ext <| AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ by
         simp [End.mul_asHom, mul_assoc]) }
 
 lemma coind₁Action_stabilizer (A : AddCommGrpCat.{max u w}) (f : (coind₁Action G A).V) :
@@ -321,13 +321,14 @@ def coind₁Lift {X : DiscreteModule.{w} G} {A : AddCommGrpCat.{max u w}} (φ : 
     X ⟶ (coind₁ G).obj A :=
   ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom
-        { toFun x := ⟨fun g ↦ φ.hom ((X.obj.ρ g).hom x), Subgroup.isOpen_mono
+        { toFun x := ⟨fun g ↦ φ.hom ((X.obj.ρ g).asHom.hom x), Subgroup.isOpen_mono
             (H₁ := X.obj.stabilizer x) (fun u hu y ↦ by simp [mem_stabilizer.1 hu])
             (X.isOpen_stabilizer x)⟩
           map_zero' := by ext; simp
           map_add' _ _ := by ext; simp }
       comm g := AddCommGrpCat.ext fun x ↦ Subtype.ext (funext fun y ↦ by
-        change φ.hom ((X.obj.ρ y).hom ((X.obj.ρ g).hom x)) = φ.hom ((X.obj.ρ (y * g)).hom x)
+        change φ.hom ((X.obj.ρ y).asHom.hom ((X.obj.ρ g).asHom.hom x)) =
+          φ.hom ((X.obj.ρ (y * g)).asHom.hom x)
         simp) }
 
 @[simp]
@@ -363,7 +364,7 @@ def coind₁Adjunction : forget₂Ab.{w} G ⊣ coind₁ G :=
           right_inv F := by
             ext x
             refine Subtype.ext (funext fun g ↦ ?_)
-            change ((F.hom.hom.hom ((X.obj.ρ g).hom x))).1 1 = (F.hom.hom.hom x).1 g
+            change ((F.hom.hom.hom ((X.obj.ρ g).asHom.hom x))).1 1 = (F.hom.hom.hom x).1 g
             rw [hom_comm_apply]
             change (F.hom.hom.hom x).1 (1 * g) = _
             rw [one_mul] }
