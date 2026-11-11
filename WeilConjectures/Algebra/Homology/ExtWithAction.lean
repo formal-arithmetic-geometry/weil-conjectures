@@ -46,27 +46,27 @@ noncomputable instance (P : C) (n : ℕ) : AddCommGroup (WithAction ρ P n) :=
 /-- The action of `A` on `Ext P F n` induced by `ρ`, as a ring homomorphism to the additive
 endomorphisms. -/
 noncomputable def smulEnd (P : C) (n : ℕ) : A →+* AddMonoid.End (Ext P F n) where
-  toFun a := (mk₀ (ρ a)).postcomp P (add_zero n)
+  toFun a := (mk₀ (ρ a).asHom).postcomp P (add_zero n)
   map_one' := by
     ext x
-    change x.comp (mk₀ (ρ 1)) (add_zero n) = x
+    change x.comp (mk₀ (ρ 1).asHom) (add_zero n) = x
     rw [map_one, End.one_asHom]
     exact comp_mk₀_id x
   map_mul' a b := by
     ext x
-    change x.comp (mk₀ (ρ (a * b))) (add_zero n) =
-      (x.comp (mk₀ (ρ b)) (add_zero n)).comp (mk₀ (ρ a)) (add_zero n)
+    change x.comp (mk₀ (ρ (a * b)).asHom) (add_zero n) =
+      (x.comp (mk₀ (ρ b).asHom) (add_zero n)).comp (mk₀ (ρ a).asHom) (add_zero n)
     rw [map_mul, End.mul_asHom, comp_assoc_of_third_deg_zero, mk₀_comp_mk₀]
   map_zero' := by
     ext x
-    change x.comp (mk₀ (ρ 0)) (add_zero n) = 0
-    rw [map_zero, mk₀_zero]
+    change x.comp (mk₀ (ρ 0).asHom) (add_zero n) = 0
+    rw [map_zero, End.zero_asHom, mk₀_zero]
     exact comp_zero _ _ _ _ _
   map_add' a b := by
     ext x
-    change x.comp (mk₀ (ρ (a + b))) (add_zero n) =
-      x.comp (mk₀ (ρ a)) (add_zero n) + x.comp (mk₀ (ρ b)) (add_zero n)
-    rw [map_add, mk₀_add]
+    change x.comp (mk₀ (ρ (a + b)).asHom) (add_zero n) =
+      x.comp (mk₀ (ρ a).asHom) (add_zero n) + x.comp (mk₀ (ρ b).asHom) (add_zero n)
+    rw [map_add, End.add_asHom, mk₀_add]
     exact comp_add _ _ _ _
 
 noncomputable instance (P : C) (n : ℕ) : Module A (WithAction ρ P n) :=
