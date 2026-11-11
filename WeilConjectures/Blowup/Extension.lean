@@ -467,4 +467,31 @@ lemma IsAdmissible.I_mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissibl
     (B₁.mul B₂).I = B₁.I * B₂.I :=
   rfl
 
+/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**
+(blueprint `lemma-products-composites-u-admissible-blow--1`): for a finite family `B` of
+`U`-admissible centers on `X`, there is a `U`-admissible center `C` (the product of the
+centers) whose blow-up maps to each blow-up `(B i).I.blowup` over `X`. -/
+theorem IsAdmissible.exists_common {X : Scheme.{u}} {U : X.Opens} {ι : Type*} [Finite ι]
+    (B : ι → IsAdmissible X U) :
+    ∃ C : IsAdmissible X U, ∀ i, ∃ g : C.I.blowup ⟶ (B i).I.blowup,
+      g ≫ (B i).I.blowupMap = C.I.blowupMap := by
+  classical
+  have := Fintype.ofFinite ι
+  let C : IsAdmissible X U :=
+    { I := ∏ i, (B i).I
+      finiteType := Finset.prod_induction _ _ (fun _ _ ha hb ↦ ha.mul hb)
+        (by simpa using Scheme.IdealSheafData.ofFiniteType_top) fun i _ ↦ (B i).finiteType
+      disjoint_support := by
+        refine Finset.prod_induction _
+          (fun J : X.IdealSheafData ↦ Disjoint (U : Set X) (J.support : Set X))
+          (fun a b ha hb ↦ ?_) (by simp) fun i _ ↦ (B i).disjoint_support
+        rw [Scheme.IdealSheafData.support_mul, TopologicalSpace.Closeds.coe_sup]
+        exact Set.disjoint_union_right.mpr ⟨ha, hb⟩ }
+  refine ⟨C, fun i ↦ (B i).I.exists_lift_blowup ?_⟩
+  refine Scheme.IdealSheafData.IsInvertible.of_mul_left
+    (K₂ := (∏ j ∈ Finset.univ.erase i, (B j).I).comap C.I.blowupMap) ?_
+  rw [← Scheme.IdealSheafData.comap_mul,
+    Finset.mul_prod_erase Finset.univ (fun j ↦ (B j).I) (Finset.mem_univ i)]
+  exact C.I.isInvertible_comap_blowupMap
+
 end AlgebraicGeometry
