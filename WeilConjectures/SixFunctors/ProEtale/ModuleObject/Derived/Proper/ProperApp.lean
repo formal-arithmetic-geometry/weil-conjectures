@@ -119,4 +119,3 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_app [IsProper f]
     (boundedConstructibleBaseChange ℓ (sq.toCommSq.asOver (Spec (.of k)))) e).1 hcomp
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
