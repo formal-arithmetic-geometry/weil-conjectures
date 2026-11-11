@@ -239,5 +239,3 @@ theorem completedPullback_reduction
         (completedPullbackReductionArrow_isIso g d r f hf K C e _hK)
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.

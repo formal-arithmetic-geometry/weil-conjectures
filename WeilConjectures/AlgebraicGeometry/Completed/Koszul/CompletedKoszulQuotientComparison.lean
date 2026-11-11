@@ -85,5 +85,3 @@ theorem completedKoszulQuotientComparison
   erw [Category.comp_id]
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.

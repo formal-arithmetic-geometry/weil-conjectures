@@ -170,5 +170,3 @@ theorem completedPullbackComparison_reduction_isIso
   exact IsIso.of_isIso_comp_right _ (L.map α.hom)
 
 end AlgebraicGeometry.Scheme
-
--- PS351 downstream validation target; removed after checking.
