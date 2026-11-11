@@ -1,8 +1,0 @@
-module
-
-import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianSumMateSheafNormalization
-import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianSumMateUnits
-import WeilConjectures.AlgebraicGeometry.DiagonalFiniteRootRigidity
-import WeilConjectures.AlgebraicGeometry.Etale.Affine.EtaleAffineLinePullbackFull
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleDiagonalClassDetection
-import WeilConjectures.AlgebraicGeometry.ProperBaseChange.ConnectedFibresConstantDegreeZero
