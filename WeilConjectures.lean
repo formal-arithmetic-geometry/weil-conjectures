@@ -24903,6 +24903,7 @@ public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.Pullback
+public import WeilConjectures.TateTwist.QbarTwistComparison
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
