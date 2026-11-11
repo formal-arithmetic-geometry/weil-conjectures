@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.LowerShriek
