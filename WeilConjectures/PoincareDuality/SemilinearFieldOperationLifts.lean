@@ -383,8 +383,8 @@ private theorem pod_field_transport
         Nonempty.intro B.epsilon
     · intro K
       exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv, sfWeilFrobeniusPullback] using
-        Nonempty.intro B.rationalEpsilon
+    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, IsIso.Iso.inv_inv,
+        sfWeilFrobeniusPullback] using Nonempty.intro B.rationalEpsilon
   have tensor := derivedPullbackTensorIso l E (D.geometricFrobenius T₀).asIso.hom 0 Ω
   obtain ⟨μ, hμ⟩ := tensor.2.2.2.2.2.2.1
   obtain ⟨ν, hν⟩ := tensor.2.2.2.2.2.2.2.1
