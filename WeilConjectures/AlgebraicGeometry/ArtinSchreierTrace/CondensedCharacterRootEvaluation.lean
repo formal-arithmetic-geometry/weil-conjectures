@@ -93,9 +93,9 @@ theorem condensedProjector_rootEvaluation
     (ProEtale.CondensedRing.upperStar Λ x).map (condensedProjector Λ G Y σ χ) ≫
         condensedEvaluation Λ x s (𝟙 _) =
       ∑ c : G, condensedEvaluation Λ x (s ≫ σ c) (𝟙 _) ≫
-        Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom
+        (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom
           (ProEtale.upperStarFromPoint T)
-          (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))) := by
+          (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c)))).asHom := by
   classical
   let : (ProEtale.CondensedRing.upperStar Λ x).Additive :=
     ProEtale.CondensedRing.upperStar_additive Λ x
