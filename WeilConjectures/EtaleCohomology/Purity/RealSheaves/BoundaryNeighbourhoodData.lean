@@ -92,9 +92,9 @@ structure BoundaryNeighbourhood
   /-- A lift of the Frobenius to `Spec A`. -/
   α : Spec (.of A) ⟶ Spec (.of A)
   hα : α ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^
-    (C ↘ Spec (.of K)).degreeOver x.1).hom
+    (C ↘ Spec (.of K)).degreeOver x.1).asIso.hom
   /-- The lift of the Frobenius is compatible with the lift of `x̄`. -/
-  hcα : (specGeometricFrobenius K ^ (C ↘ Spec (.of K)).degreeOver x.1).hom ≫
+  hcα : (specGeometricFrobenius K ^ (C ↘ Spec (.of K)).degreeOver x.1).asIso.hom ≫
       (t.left ≫ pullback.fst h _) = (t.left ≫ pullback.fst h _) ≫ α
   /-- The lift of the Frobenius is compatible with `σ_F` on the generic point. -/
   hεα : Spec.map (CommRingCat.ofHom (σF : Ω →+* Ω)) ≫
