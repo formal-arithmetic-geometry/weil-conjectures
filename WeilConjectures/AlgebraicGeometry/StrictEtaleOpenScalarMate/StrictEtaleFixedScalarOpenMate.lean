@@ -74,7 +74,6 @@ theorem fixed_scalar_mate_iso
     exact hγ
   rw [hβ] at he
   rw [he]
-  dsimp only [Equiv.trans_apply]
   change IsIso ((conjugateEquiv (a.comp d) (c.comp b)).symm γ.natTrans)
   have : IsIso γ.natTrans := by dsimp [γ]; infer_instance
   exact conjugateEquiv_symm_iso (a.comp d) (c.comp b) γ.natTrans
