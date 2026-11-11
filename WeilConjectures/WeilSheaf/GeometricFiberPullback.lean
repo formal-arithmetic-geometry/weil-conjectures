@@ -57,7 +57,7 @@ noncomputable def geometricFiberPullbackFrobeniusIso :
       ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l] :=
   Functor.isoWhiskerLeft _
       (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).symm ≪≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).symm ≪≫
     (adicUpperStarComp l _ _).symm ≪≫
     adicUpperStarCongr l
       (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _)
