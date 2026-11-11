@@ -76,3 +76,4 @@ noncomputable def endTensorUnitRingEquiv :
     (Profinite.PadicAlgCl.endRegularRingEquiv ℓ).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+

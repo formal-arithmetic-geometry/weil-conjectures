@@ -189,3 +189,4 @@ theorem weilStalkTraceAlternatingSum_eq_add_of_isDistTriang {e : Y â‰… Y} (n : â
       (Field.toIsField _) IsField.isSepClosed_toField K.carrier j x) h
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
