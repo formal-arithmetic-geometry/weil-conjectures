@@ -7182,6 +7182,7 @@ public import WeilConjectures.AlgebraicGeometry.GeneratingSectionsStalkSpan
 public import WeilConjectures.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
 public import WeilConjectures.AlgebraicGeometry.GenericComponentsSplit
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateProjections
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.GenericRegularity
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.GenericSmoothness
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.GeometricGenericFiber
@@ -20950,6 +20951,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConsta
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantTower
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.OpenComplement
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.OpenDirectImageOverField
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
