@@ -343,7 +343,6 @@ private theorem ordinary_scalar_mate_unit
     (TwoSquare.mk _ _ _ _ (compactificationOrdinaryScalarMate φ r)) M
   change _ ≫ (mateEquiv _ _ (mateEquiv _ _
     (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom))).app _ = _ at h
-  dsimp only [TwoSquare.natTrans] at ht
   rw [ht] at h
   simp only [scalarSheafPullbackIso, conjugateIsoEquiv_symm_apply_hom,
     Equiv.apply_symm_apply, lowerStarCompRestrictScalarsIso, Iso.symm_hom,
