@@ -403,13 +403,15 @@ private theorem sequences :
     dsimp [i]
     rw [← assoc, quotientIso_inv]
     change cokernel.π (d ^ m).asHom ≫
-      cokernel.map (d ^ m).asHom ((d ^ m).asHom ≫ (d ^ n).asHom) (𝟙 U) (d ^ n).asHom (by simp) ≫ _ = _
+      cokernel.map (d ^ m).asHom ((d ^ m).asHom ≫ (d ^ n).asHom)
+        (𝟙 U) (d ^ n).asHom (by simp) ≫ _ = _
     simp only [cokernel.map, cokernel.π_desc_assoc, assoc, he]
   · intro m n
     dsimp [q]
     rw [← assoc, he']
     change cokernel.π ((d ^ m).asHom ≫ (d ^ n).asHom) ≫
-      cokernel.map ((d ^ m).asHom ≫ (d ^ n).asHom) (d ^ n).asHom (d ^ m).asHom (𝟙 U) (by simp) ≫ _ = _
+      cokernel.map ((d ^ m).asHom ≫ (d ^ n).asHom) (d ^ n).asHom
+        (d ^ m).asHom (𝟙 U) (by simp) ≫ _ = _
     simp only [cokernel.map, cokernel.π_desc_assoc, id_comp, quotientIso_hom]
   · intro m n
     have hz' : i m n ≫ q m n = 0 := by simp [i, q]
