@@ -202,6 +202,7 @@ theorem descendsToPadicSubfield_lowerShriek [TopologicalSpace.NoetherianSpace X]
         ((DerivedCategory.singleFunctor _ 0).obj L))) := by
   have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
   have : TopologicalSpace.NoetherianSpace S := i.isClosedEmbedding.isInducing.noetherianSpace
+  -- Descend the lisse sheaf before applying the extension-by-zero functors.
   obtain ⟨E, L', hL', ⟨e⟩⟩ := exists_isLocallyFree_extendScalars_iso ℓ S L hL
   refine ⟨E, (D((j)_!open⟦_⟧)).obj ((R((i)_*⟦_⟧)).obj
     ((DerivedCategory.singleFunctor _ 0).obj L')), ?_, ⟨?_⟩⟩
