@@ -84,13 +84,13 @@ noncomputable def ProEtale.lowerStarGeometricFiberMapCompFrobeniusIso :
 `Fr^* = (Fr⁻¹)_*`: identifying `(Fr⁻¹)_*` with `Fr^*`, both composites are the pullback along
 `Fr_X ≫ φ̄ = φ̄ ≫ Fr_Y`. -/
 noncomputable def ProEtale.upperStarGeometricFiberMapCompFrobeniusIso :
-    (Scheme.Hom.geometricFiberMap φ h)^*[A] ⋙ (f.geometricGaloisFrobenius.inv)_*[A] ≅
-      (g.geometricGaloisFrobenius.inv)_*[A] ⋙ (Scheme.H(om.geometricFiberMap φ h).asIso)^*[A] :=
-  Functor.isoWhiskerLeft _ (upperStarIsoLowerStarInv A f.geometricGaloisFrobenius).symm ≪≫
+    (Scheme.Hom.geometricFiberMap φ h)^*[A] ⋙ (f.geometricGaloisFrobenius.asIso.inv)_*[A] ≅
+      (g.geometricGaloisFrobenius.asIso.inv)_*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*[A] :=
+  Functor.isoWhiskerLeft _ (upperStarIsoLowerStarInv A f.geometricGaloisFrobenius.asIso).symm ≪≫
     (upperStarComp A _ _).symm ≪≫
     upperStarCongr A (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm ≪≫
     upperStarComp A _ _ ≪≫
-    Functor.isoWhiskerRight (upperStarIsoLowerStarInv A g.geometricGaloisFrobenius) _
+    Functor.isoWhiskerRight (upperStarIsoLowerStarInv A g.geometricGaloisFrobenius.asIso) _
 
 section OpenImmersion
 
@@ -104,14 +104,15 @@ noncomputable def ProEtale.openImmersionRestrictionGeometricFiberMapCompFrobeniu
         ProEtale.openImmersionRestriction A (Scheme.Hom.geometricFiberMap φ h) ≅
       ProEtale.openImmersionRestriction A (Scheme.Hom.geometricFiberMap φ h) ⋙
         (f.geometricGaloisFrobenius.asIso.hom)_*[A] :=
-  Functor.isoWhiskerRight (upperStarIsoLowerStarInv A g.geometricGaloisFrobenius.symm).symm _ ≪≫
+  Functor.isoWhiskerRight
+      (upperStarIsoLowerStarInv A g.geometricGaloisFrobenius.asIso.symm).symm _ ≪≫
     Functor.isoWhiskerLeft _ (upperStarIsoOpenImmersionRestriction A _).symm ≪≫
     (upperStarComp A _ _).symm ≪≫
     upperStarCongr A
       (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) ≪≫
     upperStarComp A _ _ ≪≫
     Functor.isoWhiskerRight (upperStarIsoOpenImmersionRestriction A _) _ ≪≫
-    Functor.isoWhiskerLeft _ (upperStarIsoLowerStarInv A f.geometricGaloisFrobenius.symm)
+    Functor.isoWhiskerLeft _ (upperStarIsoLowerStarInv A f.geometricGaloisFrobenius.asIso.symm)
 
 /-- The extension by zero along the base change `φ̄` of an open immersion `φ` of `k`-schemes
 commutes with the Frobenius pullbacks `Fr^* = (Fr⁻¹)_*`: the two composites
@@ -121,10 +122,10 @@ noncomputable def ProEtale.openImmersionLowerShriekGeometricFiberMapCompFrobeniu
     (Scheme.Hom.geometricFiberMap φ h)_!open[A] ⋙ (g.geometricGaloisFrobenius.asIso.inv)_*[A] ≅
       (f.geometricGaloisFrobenius.asIso.inv)_*[A] ⋙ (Scheme.Hom.geometricFiberMap φ h)_!open[A] :=
   (conjugateIsoEquiv
-      ((lowerStarEquivalence A f.geometricGaloisFrobenius).symm.toAdjunction.comp
+      ((lowerStarEquivalence A f.geometricGaloisFrobenius.asIso).symm.toAdjunction.comp
         (openImmersionLowerShriekAdjunction A _))
-      ((openImmersionLowerShriek(Adjunction A _).asIso).comp
-        (lowerStarEquivalence A g.geometricGaloisFrobenius).symm.toAdjunction)).symm
+      ((openImmersionLowerShriekAdjunction A _).comp
+        (lowerStarEquivalence A g.geometricGaloisFrobenius.asIso).symm.toAdjunction)).symm
     (openImmersionRestrictionGeometricFiberMapCompFrobeniusIso A φ h).symm
 
 /-- The exchange isomorphism `ProEtale.lowerStarGeometricFiberMapCompFrobeniusIso` for the
@@ -133,15 +134,15 @@ equivalences, to `ProEtale.openImmersionRestrictionGeometricFiberMapCompFrobeniu
 restrictions. Each of the seven constituents of the latter is conjugate to the identity, to a
 composition isomorphism or to a congruence isomorphism of pushforwards. -/
 lemma ProEtale.conjugateEquiv_openImmersionRestrictionFrobeniusIso_inv :
-    conjugateEquiv ((lowerStarEquivalence A g.geometricGaloisFrobenius).toAdjunction.comp
+    conjugateEquiv ((lowerStarEquivalence A g.geometricGaloisFrobenius.asIso).toAdjunction.comp
         (openImmersionRestrictionLowerStarAdjunction A (Scheme.Hom.geometricFiberMap φ h)))
-      ((openImmersionRestriction(LowerStarAdjunction A (Scheme.Hom.geometricFiberMap φ h)).asIso).comp
-        (lowerStarEquivalence A f.geometricGaloisFrobenius).toAdjunction)
+      ((openImmersionRestrictionLowerStarAdjunction A (Scheme.Hom.geometricFiberMap φ h)).comp
+        (lowerStarEquivalence A f.geometricGaloisFrobenius.asIso).toAdjunction)
       (openImmersionRestrictionGeometricFiberMapCompFrobeniusIso A φ h).inv =
     (lowerStarGeometricFiberMapCompFrobeniusIso A φ h).hom := by
   set j := Scheme.Hom.geometricFiberMap φ h
-  set a := f.geometricGaloisFrobenius
-  set b := g.geometricGaloisFrobenius
+  set a := f.geometricGaloisFrobenius.asIso
+  set b := g.geometricGaloisFrobenius.asIso
   set adj := openImmersionRestrictionLowerStarAdjunction A j
   have h₁ := conjugateEquiv_whiskerRight (lowerStarEquivalence A b).toAdjunction
     (upperStarLowerStarAdjunction A (Iso.symm b).hom) adj (upperStarIsoLowerStarInv A b.symm).hom
@@ -235,9 +236,9 @@ lemma ProEtale.openImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniu
     simp
   have := Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom
     (openImmersionLowerShriekAdjunction A (Scheme.Hom.geometricFiberMap φ h))
-    (openImmersionRestrictio(nLowerStarAdjunction A (Scheme.Hom.geometricFiberMap φ h)).asIso)
+    (openImmersionRestrictionLowerStarAdjunction A (Scheme.Hom.geometricFiberMap φ h))
     (lowerStarEquivalence A (f.geometricGaloisFrobenius).asIso)
-    (lowerStarEquivalence A g.geometricGaloisFrobenius)
+    (lowerStarEquivalence A g.geometricGaloisFrobenius.asIso)
     (openImmersionRestrictionGeometricFiberMapCompFrobeniusIso A φ h) _ hcan
   rw [conjugateIsoEquiv_apply_hom, Iso.symm_hom,
     conjugateEquiv_openImmersionRestrictionFrobeniusIso_inv] at this
