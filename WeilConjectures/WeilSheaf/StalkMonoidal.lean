@@ -208,7 +208,8 @@ theorem stalkUnit_frobenius
     (η : 𝟙_ _ ⟶ R)
     (h : ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
         m).asIso.inv)_*[WeilCoefficients.{u} l] ≫
-      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].map η ≫ φR = η) :
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*[_].map η ≫
+        φR = η) :
     (ε (stalkSheafFunctor k₀ l X s) ≫ (stalkSheafFunctor k₀ l X s).map η) ≫
         (stalkFrobeniusIso k₀ l X s m hs).hom.app R ≫ (stalkSheafFunctor k₀ l X s).map φR =
       ε (stalkSheafFunctor k₀ l X s) ≫ (stalkSheafFunctor k₀ l X s).map η := by
@@ -220,5 +221,3 @@ theorem stalkUnit_frobenius
 end Frobenius
 
 end AlgebraicGeometry.WeilSheaf
-
--- PS552 probe

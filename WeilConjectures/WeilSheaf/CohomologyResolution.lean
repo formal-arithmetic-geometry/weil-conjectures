@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraStr
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsComm
+public import
+  WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsComm
 public import WeilConjectures.WeilSheaf.CohomologyProEtale
 
 /-!
@@ -104,7 +105,8 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
         (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
           (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))))
       (Functor.whiskerLeft (AdicSheaf.forget _) (globalSectionsLowerStarIso _
-        (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
+        (Spec (CommRingCat.of k₀) ↘
+          Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
   refine NatTrans.ext (funext fun X ↦ ?_)
   have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
@@ -148,7 +150,8 @@ theorem exists_linearEquiv_cohomology_resolution (F : WeilSheaf k₀ l Y)
         (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
           (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))))
       (Functor.whiskerLeft (AdicSheaf.forget _) (globalSectionsLowerStarIso _
-        (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv)
+        (Spec (CommRingCat.of k₀) ↘
+          Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv)
       I r
   rw [frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans] at h
   refine ⟨WeilCoefficients.linearEquivOfIso (IsoAlgebra.globalSectionsHomologyIso
