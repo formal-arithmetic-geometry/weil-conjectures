@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+-- PS358 downstream validation.
+
 public import WeilConjectures.CategoryTheory.AdicSites.Morphism.CompletionMateComparison
 import all WeilConjectures.CategoryTheory.AdicSites.CompletionFiniteReductionSupplement
 
