@@ -152,7 +152,8 @@ noncomputable def frobConj : Aut (fiber B.t) ≃* Aut (fiber B.t) where
     simp
   right_inv g := by
     apply Aut.ext
-    have h := pullbackPathIso_inv_pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.symm
+    have h := pullbackPathIso_inv_pullbackPathIso
+      (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.symm
       (B.frobPath.symm ≪≫ g.asIso ≪≫ B.frobPath)
     simp only [Iso.symm_hom, Iso.symm_inv] at h
     dsimp only
@@ -251,13 +252,15 @@ theorem mono_hom_app_comp_frobStalkIso_hom (F : WeilSheaf K l X) (hF : F.IsLisse
   have h₁ : (B.frobPath ≪≫
       pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
       B.frobPath.symm) ≪≫ B.frobPath =
-      B.frobPath ≪≫ pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso := by
+      B.frobPath ≪≫
+        pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso := by
     simp
   have e₁ := congrArg (fun τ ↦ (M.mono τ).hom.app (F.toLisse hF)) h₁
   rw [M.mono_trans (B.frobPath ≪≫ pullbackPathIso _ g.asIso ≪≫ B.frobPath.symm) B.frobPath,
     M.mono_trans B.frobPath (pullbackPathIso _ g.asIso)] at e₁
   simp only [Iso.trans_hom, NatTrans.comp_app] at e₁
-  have e₂ := M.mono_upperStar (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso (F.toLisse hF)
+  have e₂ := M.mono_upperStar (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso
+    (F.toLisse hF)
   have e₃ := (M.mono g.asIso).hom.naturality (F.lisseFrobStr hF).hom
   simp only [frobStalkIso, frobConj_apply, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
     Category.assoc]
@@ -377,7 +380,8 @@ theorem stalkMap_injective (hM : M.IsEquivalenceAt B.t) {F G : LisseWeilSheaf K 
 identification `𝒢_{t ≫ Fr} = (Fr^* 𝒢)_t`. -/
 noncomputable def frobPathStalkIso (G : LisseSheaf l (X ↘ Spec (.of K)).geometricFiber) :
     (lisseStalk l B.t).obj G ≅
-      (lisseStalk l B.t).obj (G.upperStar l (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) :=
+      (lisseStalk l B.t).obj
+        (G.upperStar l (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom) :=
   (M.mono B.frobPath).app G ≪≫
     upperStarStalkIso l (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom B.t G.obj.X
 
@@ -409,7 +413,8 @@ theorem frobPathStalkIso_conj (G : LisseSheaf l (X ↘ Spec (.of K)).geometricFi
   have h₁ : (B.frobPath ≪≫
       pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
       B.frobPath.symm) ≪≫ B.frobPath =
-      B.frobPath ≪≫ pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso := by
+      B.frobPath ≪≫
+        pullbackPathIso (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom g.asIso := by
     simp
   have e₁ := congrArg (fun τ ↦ (M.mono τ).hom.app G) h₁
   rw [M.mono_trans (B.frobPath ≪≫ pullbackPathIso _ g.asIso ≪≫ B.frobPath.symm) B.frobPath,
@@ -436,7 +441,8 @@ theorem upperStar_comp_lisseFrobStr_of_frobStalk (hM : M.IsEquivalenceAt B.t)
         (frobStalk M B F hF v) =
       frobStalk M B G hG
         (((WeilCoefficients.toModuleCat l).map ((lisseStalk l B.t).map f)).hom v)) :
-    (ObjectProperty.homMk (((X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map f.hom) :
+    (ObjectProperty.homMk
+      (((X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map f.hom) :
         (F.toLisse hF).upperStar l _ ⟶ (G.toLisse hG).upperStar l _) ≫ (G.lisseFrobStr hG).hom =
       (F.lisseFrobStr hF).hom ≫ f := by
   apply hM.faithful
