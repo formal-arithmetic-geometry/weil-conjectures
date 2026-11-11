@@ -340,10 +340,10 @@ private theorem squareSymm (e : L ⋙ H ≅ G ⋙ L') :
 
 private theorem rightSquareMate (a : L ⊣ R) (b : L' ⊣ R')
     (e : L ⋙ H ≅ G ⋙ L') (r : R ⋙ G ≅ H ⋙ R')
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom) :
+    (hm : (mateEquiv a b e.inv) = r.hom) :
     (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
-        (Functor.mapDerivedCategorySquareIso e).inv).natTrans =
+        (Functor.mapDerivedCategorySquareIso e).inv) =
       (rightSquareIso R G H R' r).hom := by
   have hf (P : HomotopyCategory B (.up ℤ)) :=
     squareFactorsh G L' L H e.symm P
@@ -411,12 +411,12 @@ private theorem normalizedMate_hom
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb)
     (e : L ⋙ H ≅ G ⋙ Lb) (r : R ⋙ G ≅ H ⋙ Rb)
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom)
+    (hm : (mateEquiv a b e.inv) = r.hom)
     (M : A) (N : B) (q : L.obj M ⟶ N) :
     b.homEquiv _ _ (e.inv.app M ≫ H.map q) = G.map (a.homEquiv _ _ q) ≫ r.hom.app N := by
-  have he : ((mateEquiv a b).symm r.hom).natTrans = e.inv := by
+  have he : ((mateEquiv a b).symm r.hom) = e.inv := by
     rw [← hm]
-    exact congrArg TwoSquare.natTrans ((mateEquiv a b).symm_apply_apply e.inv)
+    exact (mateEquiv a b).symm_apply_apply e.inv
   have h := adjunctionMate_transpose a b r.hom M N q
   change b.homEquiv _ _ (((mateEquiv a b).symm r.hom).natTrans.app M ≫ H.map q) = _ at h
   rw [he] at h
@@ -428,7 +428,7 @@ private theorem normalizedMate_unit
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb)
     (e : L ⋙ H ≅ G ⋙ Lb) (r : R ⋙ G ≅ H ⋙ Rb)
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom) (M : A) :
+    (hm : (mateEquiv a b e.inv) = r.hom) (M : A) :
     b.unit.app (G.obj M) = G.map (a.unit.app M) ≫ r.hom.app (L.obj M) ≫
       Rb.map (e.hom.app M) := by
   have h := unit_mateEquiv a b e.inv M
@@ -445,7 +445,7 @@ private theorem normalizedMate_counit
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb)
     (e : L ⋙ H ≅ G ⋙ Lb) (r : R ⋙ G ≅ H ⋙ Rb)
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom) (N : B) :
+    (hm : (mateEquiv a b e.inv) = r.hom) (N : B) :
     b.counit.app (H.obj N) = Lb.map (r.inv.app N) ≫ e.inv.app (R.obj N) ≫
       H.map (a.counit.app N) := by
   have h := mateEquiv_counit a b e.inv N
