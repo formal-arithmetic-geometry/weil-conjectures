@@ -121,8 +121,7 @@ theorem transportedTensorBoundary_product
         _ = P (ρ s (δ' t)) + P (ρ t (δ' s)) := P.map_add _ _
         _ = H.map (mulTensorPowSection f F e 1) cx +
             H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom cf) :=
-          congrArg₂ (· + ·)
-            hl hr
+          congrArg₂ (· + ·) hl hr
 
 end
 end AlgebraicGeometry.Scheme.Modules
