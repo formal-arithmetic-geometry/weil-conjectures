@@ -546,7 +546,7 @@ theorem evaluate_zero (W : Scheme.{u})
             (quotientEntry l E P hfree n q i j hij s t) = 0 := by
     ext x
     exact (quotientEntry l E P hfree n q i j hij s t).hom.map_zero
-  simp_rw [hz, map_zero]
+  simp_rw [hz, map_zero, End.zero_asHom]
   rw [matrix_zero]
   simp only [Limits.comp_zero, Limits.zero_comp]
 
@@ -576,7 +576,7 @@ theorem evaluate_add (W : Scheme.{u})
           w.map (quotientEntry l E P hfree n q i j hij s t) := by
     ext x
     exact (quotientEntry l E P hfree n q i j hij s t).hom.map_add (z x) (w x)
-  simp_rw [ha, map_add]
+  simp_rw [ha, map_add, End.add_asHom]
   rw [matrix_add, Preadditive.add_comp, Preadditive.comp_add]
 
 /-- The explicit degreewise matrix evaluation as a homomorphism of abelian groups.
