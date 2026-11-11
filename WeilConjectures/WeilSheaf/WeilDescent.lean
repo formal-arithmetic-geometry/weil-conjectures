@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.WeilDescentConstantField
