@@ -381,8 +381,10 @@ theorem automorphismConstructibleStage_integral_shift_witness
   · exact ⟨a' eY.asIso.hom, d' eY.asIso.hom, ha' eY.asIso.hom, hd' eY.asIso.hom,
       restrictShift_hom l E eY.asIso.hom (d' eY.asIso.hom)⟩
   · refine ⟨restrict_tri l E C f (a' f) (d' f) (ha' f) (hd' f),
-      restrict_tri l E C eX.asIso.hom (a' eX.asIso.hom) (d' eX.asIso.hom) (ha' eX.asIso.hom) (hd' eX.asIso.hom),
-      restrict_tri l E C eY.asIso.hom (a' eY.asIso.hom) (d' eY.asIso.hom) (ha' eY.asIso.hom) (hd' eY.asIso.hom), ?_⟩
+      restrict_tri l E C eX.asIso.hom (a' eX.asIso.hom) (d' eX.asIso.hom)
+        (ha' eX.asIso.hom) (hd' eX.asIso.hom),
+      restrict_tri l E C eY.asIso.hom (a' eY.asIso.hom) (d' eY.asIso.hom)
+        (ha' eY.asIso.hom) (hd' eY.asIso.hom), ?_⟩
     obtain ⟨c, hc, hcs⟩ := composition_shift l E C a' d' ha' hd' eY.asIso.hom f
     obtain ⟨t, ht, hts⟩ := composition_shift l E C a' d' ha' hd' f eX.asIso.hom
     have eqshift {g g' : Y ⟶ X} (he : g = g') :

@@ -407,11 +407,13 @@ theorem automorphismStageRationalSquare_existsUnique
   · intro K
     exact (ho eY.asIso.hom _).trans (congrArg
       (fun Z : sfRationalConstructibleCategory l E Y ↦
-        ScalarLocalization.mk ((constructibleIntegralPullback l E eY.asIso.hom).obj Z.obj)) (ho f K))
+        ScalarLocalization.mk ((constructibleIntegralPullback l E eY.asIso.hom).obj Z.obj))
+      (ho f K))
   · intro K
     exact (ho f _).trans (congrArg
       (fun Z : sfRationalConstructibleCategory l E X ↦
-        ScalarLocalization.mk ((constructibleIntegralPullback l E f).obj Z.obj)) (ho eX.asIso.hom K))
+        ScalarLocalization.mk ((constructibleIntegralPullback l E f).obj Z.obj))
+      (ho eX.asIso.hom K))
   · intro K M a z
     exact (map_heq (rationalDerivedPullback l E eY.asIso.hom)
       (ho f _) (ho f _) (hm f K M a z)).trans
