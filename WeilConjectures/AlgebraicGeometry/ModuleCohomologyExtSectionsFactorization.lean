@@ -103,6 +103,8 @@ theorem ext_sections_factorization
     (E := Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     G V T Γ p (sectionHomologyIso X p)
     (fun M _ ↦ forgottenInjectiveAcyclic X M)
+  let b := siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p
+  let c := Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p
   run_tac do Lean.logInfo m!"PS043 comparison defined: {← IO.monoMsNow}"
   have hη : moduleCohomologyExtResolutionNatIso X p = a ≪≫ Functor.isoWhiskerLeft T
       ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
@@ -113,8 +115,8 @@ theorem ext_sections_factorization
     rfl
   run_tac do Lean.logInfo m!"PS043 iso equality proved: {← IO.monoMsNow}"
   have hcomp : (moduleCohomologyExtResolutionNatIso X p).app F =
-      a.app F ≪≫ (siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p).symm ≪≫
-        (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm.toAddCommGrpIso := by
+      a.app F ≪≫ b.symm ≪≫
+        c.symm.toAddCommGrpIso := by
     rw [hη, NatIso.trans_app]
     apply congrArg (fun e ↦ a.app F ≪≫ e)
     change ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
@@ -126,8 +128,8 @@ theorem ext_sections_factorization
   run_tac do Lean.logInfo m!"PS043 component equality proved: {← IO.monoMsNow}"
   have h := moduleComparisonEquiv_apply_of_component
     (moduleCohomologyExtResolutionNatIso X p) F (a.app F)
-    (siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p)
-    (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm hcomp x
+    b
+    c.symm hcomp x
   run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
   dsimp only [id, Functor.comp_obj, RingedSpace.moduleCohomology,
     AlgebraicGeometry.Scheme.Modules.H, AlgebraicGeometry.Scheme.Modules.instAddCommGroupH,
@@ -136,6 +138,12 @@ theorem ext_sections_factorization
   conv_rhs =>
     pattern resolutionSectionsNatIso _ _ _ _ _ _ _
     change a
+  conv_rhs =>
+    pattern siteSectionsObjIso _ _ _ _
+    change b
+  conv_rhs =>
+    pattern Abelian.Ext.precompAddEquiv _ _ _
+    change c
   run_tac do Lean.logInfo m!"PS043 comparison aligned before projection: {← IO.monoMsNow}"
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
