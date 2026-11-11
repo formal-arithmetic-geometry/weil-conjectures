@@ -157,6 +157,7 @@ theorem isFinite_npow_id (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety 
     exact IsProper.of_comp _ A.hom
   let g : Spec (.of (AlgebraicClosure K)) ⟶ Spec (.of K) :=
     Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))
+  -- Base change preserves multiplication by `n` in the group of morphisms.
   have hφ : (Over.pullback g).map (𝟙 A ^ n) = 𝟙 ((Over.pullback g).obj A) ^ n := by
     rw [← (Over.pullback g).homMonoidHom_apply, map_pow]
     simp
