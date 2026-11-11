@@ -8,7 +8,7 @@ module
 public import WeilConjectures.DeligneLaumon.AffineLine.CurvePunctualPart
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.HeartAbelian
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 /-!
 # The perverse t-structure on a smooth curve
@@ -25,7 +25,7 @@ triangle of a Weil complex `K` is built from the standard truncation
 `τ_{<0} K ⟶ K ⟶ τ_{≥0} K ⟶` and the maximal punctual subsheaf `P` of `𝓗⁰K`: the cone `Y`
 of `P[0] ⟶ τ_{≥0} K` lies in `ᵖD^{≥1}`, and the fibre of the composite `K ⟶ τ_{≥0} K ⟶ Y`
 lies in `ᵖD^{≤0}`. The abelianness of the heart is the general fact
-`CategoryTheory.Triangulated.TStructure.heartAbelian`.
+`CategoryTheory.Triangulated.TStructure.abelianHeart`.
 
 The only sheaf-theoretic input is the existence of the maximal punctual subsheaf of a Weil sheaf,
 `AlgebraicGeometry.WeilSheaf.exists_mono_support_finite_cokernel`: it is the kernel of the unit
@@ -276,7 +276,8 @@ theorem exists_tStructure_of_punctual
     exact isCurvePerverseGE_zero_iff K
   refine ⟨t, rfl, hge0, fun _ _ ↦ Iff.rfl,
     fun n K ↦ isCurvePerverseGE_iff_isCurvePerverseLower_shift n K,
-    exists_isCurvePerverseGE_isCurvePerverseLE, ?_, t.exists_abelian_heart⟩
+    exists_isCurvePerverseGE_isCurvePerverseLE, ?_,
+    letI := t.hasHeartFullSubcategory; ⟨t.abelianHeart _, rfl⟩⟩
   change t.le 0 ⊓ t.ge 0 = _
   rw [hge0]
   rfl
