@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomTransport
 public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarComparison
 
