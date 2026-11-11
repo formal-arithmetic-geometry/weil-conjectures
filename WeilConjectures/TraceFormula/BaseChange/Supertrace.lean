@@ -147,6 +147,7 @@ theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsS
     exact ⟨{ rightDual := _
              exact := (UnitBasis.ofIso (((upperStarId _ _).app _).symm ≪≫ e)).exactPairing }⟩
   apply End.homEquiv.symm.injective
+  dsimp only [End.homEquiv]
   apply hinj
   apply End.ext
   rw [← I.trace_eq_unitEndRingHom_trace v (I.map v) (Iso.refl _) (by simp),
