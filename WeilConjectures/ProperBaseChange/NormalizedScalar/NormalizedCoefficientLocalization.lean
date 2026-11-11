@@ -6,7 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedCoefficientModel
-public import all Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Functor.OfSequence
+
+import Mathlib.CategoryTheory.Endomorphism
 
 import WeilConjectures.ProperBaseChange.NormalizedScalar.FieldModel.NormalizedCoefficientExact
 import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedScalarActions
@@ -14,6 +16,7 @@ import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedScalarActions
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralRegularTelescope
 import all WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 import all Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
+import all Mathlib.CategoryTheory.Functor.OfSequence
 import all Mathlib.CategoryTheory.Limits.Types.Filtered
 import all WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import all WeilConjectures.CategoryTheory.ModuleObjects.MapMod
