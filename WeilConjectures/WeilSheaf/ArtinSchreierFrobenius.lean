@@ -33,9 +33,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
 local notation "𝐅𝐫" =>
-  Scheme.Hom.geometricGaloisFrobenius (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+  (Scheme.Hom.geometricGaloisFrobenius (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).asIso
 local notation "Frₕ" =>
-  Iso.hom (Scheme.Hom.geometricGaloisFrobenius (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+  Iso.hom (Scheme.Hom.geometricGaloisFrobenius (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).asIso
 
 variable (k₀ l) in
 /-- The counit `ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of `ĀS^* ⊣ ĀS_*` at the constant sheaf. -/
