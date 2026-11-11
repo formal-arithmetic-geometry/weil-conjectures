@@ -1435,7 +1435,7 @@ private theorem modelPull_normalized_iff
     H.mapDerivedCategory.map_id, DF.reduction.map_id,
     (DerivedCategory.Qh (C := T)).map_id]
   erw [DG.reduction.map_id, H.mapDerivedCategory.map_id]
-  repeat' first | erw [Category.id_comp] | erw [Category.comp_id] | erw [Functor.map_id]
+  repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
   erw [(DerivedCategory.Qh (C := U)).map_id, H.mapDerivedCategory.map_id]
   repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
   rfl
