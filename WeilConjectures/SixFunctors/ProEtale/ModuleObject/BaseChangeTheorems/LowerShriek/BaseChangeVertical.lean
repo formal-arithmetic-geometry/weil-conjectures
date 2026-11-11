@@ -60,9 +60,9 @@ lemma CategoryTheory.TwoSquare.eq_hComp_of_conj {A B C A' B' C' : Type*} [Catego
     (hC₁ : C₁.hom = kU₁.hom ≫ cT₁.inv ≫ NatTrans.hcomp jV₁.hom jW₁.hom)
     (hkV₂ : iV₂.symm = kV₂) (hkW₂ : iW₂.symm = kW₂) (hkU₁ : jU₁.symm = kU₁)
     (h : Functor.whiskerRight cT₂.hom Ll ≫ SU =
-      (TwoSquare.hComp (T := V₂T) (B := V₁T) SV SW).natTrans ≫ Functor.whiskerLeft Lh cT₁.hom) :
+      (TwoSquare.hComp (T := V₂T) (B := V₁T) SV SW) ≫ Functor.whiskerLeft Lh cT₁.hom) :
     EU = Functor.whiskerRight C₂.hom Ll ≫
-      (TwoSquare.hComp (T := V₂) (B := V₁) EV EW).natTrans ≫ Functor.whiskerLeft Lh C₁.inv := by
+      (TwoSquare.hComp (T := V₂) (B := V₁) EV EW) ≫ Functor.whiskerLeft Lh C₁.inv := by
   subst hkV₂ hkW₂ hkU₁ hU hV hW
   obtain rfl : C₁ = jU₁.symm ≪≫ cT₁.symm ≪≫ NatIso.hcomp jV₁ jW₁ := Iso.ext (by simp [hC₁])
   ext X
@@ -189,7 +189,7 @@ lemma pasteVert_compIso_shriekBaseChange :
           (compactificationOverField w₂) ((compactificationOverField w₂).ofIsPullback sq₂.overLeft)
           ((compactificationOverField w₂).overBaseChangeFst sq₂)
           ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂)
-          ((compactificationOverField w₂).overBaseChange_isPullback_g sq₂))).natTrans ≫
+          ((compactificationOverField w₂).overBaseChange_isPullback_g sq₂))) ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h)
         ((𝔽).compIso (triangleShriekTriangle (pasteVertTriangle' sq₁ sq₂))).hom := by
   have := isIso_baseChange_triangleShriekTriangle ℓ (pasteVertTriangle v₂ w₂)
@@ -201,7 +201,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (triangleShriekTriangle (pasteVertTriangle v₂ w₂)).i₁
       (SepFinType.homMk ((compactificationOverField v₂).overBaseChangeFst sq₁))
       (SepFinType.homMk_comp_homMk
-        ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁).w)).natTrans :=
+        ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁).w)) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       ((compactificationOverField v₂).overBaseChange_isPullback_i sq₁)
   have : IsIso ((𝔽).baseChange (SepFinType.homMk g)
@@ -209,7 +209,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (triangleShriekTriangle (pasteVertTriangle v₂ w₂)).i₂
       (SepFinType.homMk ((compactificationOverField w₂).overBaseChangeFst sq₂))
       (SepFinType.homMk_comp_homMk
-        ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂).w)).natTrans :=
+        ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂).w)) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       ((compactificationOverField w₂).overBaseChange_isPullback_i sq₂)
   have : IsIso ((𝔽).baseChange (SepFinType.homMk h)
@@ -219,7 +219,7 @@ lemma pasteVert_compIso_shriekBaseChange :
         (pasteVertTriangle v₂ w₂)).overBaseChangeFst (sq₁.paste_vert sq₂)))
       (SepFinType.homMk_comp_homMk ((Compactification.Triangle.overCfg
         (pasteVertTriangle v₂ w₂)).overBaseChange_isPullback_i
-          (sq₁.paste_vert sq₂)).w)).natTrans :=
+          (sq₁.paste_vert sq₂)).w)) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       ((Compactification.Triangle.overCfg (pasteVertTriangle v₂ w₂)).overBaseChange_isPullback_i
         (sq₁.paste_vert sq₂))
@@ -229,7 +229,7 @@ lemma pasteVert_compIso_shriekBaseChange :
       (triangleShriekTriangle (pasteVertTriangle v₂ w₂)).q
       (SepFinType.homMk ((Compactification.Triangle.overCfg
         (pasteVertTriangle v₂ w₂)).overBaseChangeFst (sq₁.paste_vert sq₂)))
-      (SepFinType.homMk_comp_homMk (isPullback_pasteVertTriangle_q sq₁ sq₂).w)).natTrans :=
+      (SepFinType.homMk_comp_homMk (isPullback_pasteVertTriangle_q sq₁ sq₂).w)) :=
     isIso_baseChange_boundedConstructibleExchangeFormalism ℓ
       (isPullback_pasteVertTriangle_q sq₁ sq₂)
   unfold boundedConstructibleLowerShriekOfCompactificationBaseChange
@@ -262,7 +262,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' :
         (TwoSquare.hComp (T := boundedConstructibleLowerShriek ℓ v₂)
           (B := boundedConstructibleLowerShriek ℓ v₁)
           (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁)
-          (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)).natTrans ≫
+          (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂)) ≫
         Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h)
           (boundedConstructibleLowerShriekComp_padicAlgCl ℓ v₁ w₁).inv := by
   have := isIso_baseChange_triangleShriekTriangle ℓ (pasteVertTriangle v₂ w₂)

@@ -83,7 +83,7 @@ lemma restrictScalars_map_unit_app (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u
         ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g).unit.app G) =
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app
           ((Sheaf.restrictScalars Y.smallEtaleTopology φ).obj G) ≫
-        (g)_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g).natTrans.app G) := by
+        (g)_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g).app G) := by
   have := unit_mateEquiv_symm (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
     (TwoSquare.mk _ _ _ _ (lowerStarCompRestrictScalarsIso φ g).hom) G
@@ -116,7 +116,7 @@ lemma mateEquiv_symm_lowerStarCompCoextendScalarsIso :
 `g^*(res G) ⟶ res(g^* G)` is an isomorphism. Its conjugate along the adjunctions
 `res ⊣ coext` is the identification of `g_* ∘ coext` with `coext ∘ g_*`
 (`CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm`). -/
-instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ g).natTrans := by
+instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ g) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
@@ -138,7 +138,7 @@ instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ g).
 noncomputable def upperStarRestrictScalarsIso :
     Sheaf.restrictScalars Y.smallEtaleTopology φ ⋙ (g)^*[ModuleCat.{u + 1} Λ] ≅
       (g)^*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars Z.smallEtaleTopology φ :=
-  asIso (upperStarRestrictScalars φ g).natTrans
+  asIso (upperStarRestrictScalars φ g)
 
 /-- `AlgebraicGeometry.Etale.upperStarRestrictScalarsIso` is conjugate, along the adjunctions
 `res ⊣ coext` and `g^* ⊣ g_*`, to the identity of `g_* ∘ coext = coext ∘ g_*`. -/
@@ -156,7 +156,7 @@ lemma conjugateEquiv_upperStarRestrictScalarsIso_hom :
     (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ)
     (TwoSquare.mk _ _ _ _ (lowerStarCompCoextendScalarsIso φ g).inv)
   rw [mateEquiv_symm_lowerStarCompCoextendScalarsIso] at h
-  change conjugateEquiv _ _ (upperStarRestrictScalars φ g).natTrans = _
+  change conjugateEquiv _ _ (upperStarRestrictScalars φ g) = _
   rw [upperStarRestrictScalars, h]
   exact (conjugateEquiv _ _).apply_symm_apply (lowerStarCompCoextendScalarsIso φ g).inv
 
@@ -198,8 +198,8 @@ theorem baseChangeMap_app_restrictScalars (sq : CommSq g' f' f g)
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     (baseChangeMap (ModuleCat.{u + 1} Λ) sq).app
         ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj G) ≫
-        (f')_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g').natTrans.app G) =
-      (upperStarRestrictScalars φ g).natTrans.app ((f)_*[ModuleCat.{u + 1} Λ'].obj G) ≫
+        (f')_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g').app G) =
+      (upperStarRestrictScalars φ g).app ((f)_*[ModuleCat.{u + 1} Λ'].obj G) ≫
         (Sheaf.restrictScalars Y'.smallEtaleTopology φ).map
           ((baseChangeMap (ModuleCat.{u + 1} Λ') sq).app G) := by
   apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv _ _).injective
@@ -212,11 +212,11 @@ theorem baseChangeMap_app_restrictScalars (sq : CommSq g' f' f g)
   have h₅ := restrictScalars_map_squareLowerStarIso_hom_app φ sq
     ((g')^*[ModuleCat.{u + 1} Λ'].obj G)
   have h₆ := (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq).hom.naturality
-    ((upperStarRestrictScalars φ g').natTrans.app G)
+    ((upperStarRestrictScalars φ g').app G)
   calc _ = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _ ≫
           (g)_*[ModuleCat.{u + 1} Λ].map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq).app _)) ≫
         (g)_*[ModuleCat.{u + 1} Λ].map ((f')_*[ModuleCat.{u + 1} Λ].map
-          ((upperStarRestrictScalars φ g').natTrans.app G)) := by
+          ((upperStarRestrictScalars φ g').app G)) := by
         rw [Functor.map_comp, Category.assoc]
     _ = (f)_*[ModuleCat.{u + 1} Λ].map
           ((Sheaf.restrictScalars X.smallEtaleTopology φ).map

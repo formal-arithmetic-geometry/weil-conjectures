@@ -120,7 +120,7 @@ theorem ordinaryRestrictionQuotient
   obtain ⟨r, hr⟩ := ordinaryExtensionTensorAssembly l E j o AX AU tensor
   let s : restriction l E j o ⋙ MU.tensor ⟶ MX.tensor ⋙ systemRestriction l E j o :=
     (mateEquiv (ordinaryAdjunction l E j o) (ordinarySystemAdjunction l E j o)
-      (TwoSquare.mk _ _ _ _ r.inv)).natTrans
+      (TwoSquare.mk _ _ _ _ r.inv))
   have hs (N : scalarReductionSource l E X) (n : ℕ) :
       (coefficientSequenceEvaluation l E U n).map (s.app N) ≫
         (ordinaryRestrictionEvaluation l E j o n).hom.app (MX.tensor.obj N) ≫

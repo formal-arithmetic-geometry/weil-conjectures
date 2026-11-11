@@ -61,8 +61,8 @@ private theorem inverse_mate_transport
     (x : TwoSquare U H G V) (e : G ≅ G') (f : H ≅ H') :
     ((mateEquiv a b).symm
       (TwoSquare.mk U H' G' V
-        (Functor.whiskerLeft U e.inv ≫ x.natTrans ≫ Functor.whiskerRight f.hom V))).natTrans =
-      Functor.whiskerRight e.inv M ≫ ((mateEquiv a b).symm x).natTrans ≫
+        (Functor.whiskerLeft U e.inv ≫ x ≫ Functor.whiskerRight f.hom V))) =
+      Functor.whiskerRight e.inv M ≫ ((mateEquiv a b).symm x) ≫
         Functor.whiskerLeft L f.hom := by
   ext z
   simp only [mateEquiv_symm_apply, NatTrans.comp_app, Functor.whiskerRight_app,
@@ -105,10 +105,10 @@ private theorem mateCube
       ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).app (J.obj N) ≫
         H'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).app N) ≫
         d.app (S₀.obj N) := by
-  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ)).natTrans
-  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH)).natTrans
-  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG)).natTrans
-  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI)).natTrans
+  let lJ := ((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qJ))
+  let lH := ((mateEquiv a₁ a₃).symm (TwoSquare.mk _ _ _ _ qH))
+  let lG := ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qG))
+  let lI := ((mateEquiv a₂ a₃).symm (TwoSquare.mk _ _ _ _ qI))
   have hj (K : C₀) : J.map (a₀.unit.app K) ≫ qJ.app (S₀.obj K) =
       a₁.unit.app (J.obj K) ≫ R₁.map (lJ.app K) :=
     unit_mateEquiv_symm a₀ a₁ (TwoSquare.mk _ _ _ _ qJ) K
@@ -159,11 +159,10 @@ private theorem scalar_exchange_of_cube
       tb.app (s.obj N) ≫ h'.map (la.app N) ≫ lh.app (a.obj N) =
         d.map (lg.app N) ≫ lc.app (g.obj N) ≫ w.map (ta.app N))
     (M : D) :
-    g'.map ((mateEquiv aa ab la).natTrans.app M) ≫
-        (mateEquiv ab ad tb).natTrans.app (t.obj M) ≫ dr.map (lh.app M) =
-      lg.app (ar.obj M) ≫ v.map ((mateEquiv aa ac ta).natTrans.app M) ≫
-        (mateEquiv ac ad lc).natTrans.app (h.obj M) := by
-  dsimp only [TwoSquare.natTrans]
+    g'.map ((mateEquiv aa ab la).app M) ≫
+        (mateEquiv ab ad tb).app (t.obj M) ≫ dr.map (lh.app M) =
+      lg.app (ar.obj M) ≫ v.map ((mateEquiv aa ac ta).app M) ≫
+        (mateEquiv ac ad lc).app (h.obj M) := by
   apply (ad.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   rw [show d.map (dr.map (lh.app M)) ≫ ad.counit.app _ =
@@ -358,22 +357,22 @@ private theorem exact_scalar_mate_etale (q : R →+* S) {X Y : Scheme.{u}} (f : 
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology q))).symm
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso
-          (upperStarRestrictScalarsIsoSheaf q f)).hom)).natTrans := by
+          (upperStarRestrictScalarsIsoSheaf q f)).hom)) := by
   let a := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology q)
   let b := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology q)
   let x := TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso q f).hom
   let e := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} R) f
   let e' := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} S) f
-  have hx : IsIso ((mateEquiv a b).symm x).natTrans := (ProEtale.scalarPullbackReverse_isIso q f).2
+  have hx : IsIso ((mateEquiv a b).symm x) := (ProEtale.scalarPullbackReverse_isIso q f).2
   have h := inverse_mate_transport a b x e e'
   have ht : IsIso (Functor.whiskerRight e.inv _ ≫
-      ((mateEquiv a b).symm x).natTrans ≫ Functor.whiskerLeft _ e'.hom) := inferInstance
+      ((mateEquiv a b).symm x) ≫ Functor.whiskerLeft _ e'.hom) := inferInstance
   rw [← h] at ht
   have heq : TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf q f)).hom =
       TwoSquare.mk _ _ _ _
         (Functor.whiskerLeft (Sheaf.derivedRestrictScalars Y.smallEtaleTopology q)
-          e.inv ≫ x.natTrans ≫
+          e.inv ≫ x ≫
           Functor.whiskerRight e'.hom
             (Sheaf.derivedRestrictScalars X.smallEtaleTopology q)) := by
     ext M
@@ -454,16 +453,16 @@ private theorem coefficient_of_mate
     {S : B ⥤ D} {R : D ⥤ B} (adjX : S ⊣ R)
     {S' : A ⥤ C} {R' : C ⥤ A} (adjT : S' ⊣ R')
     (e : R ⋙ Q ≅ Q' ⋙ R')
-    [IsIso (((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans)]
+    [IsIso (((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)))]
     (M : A) :
-    let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
-    let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv)).natTrans
+    let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom))
+    let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv))
     Q.map (adjX.unit.app (P.obj M)) ≫ e.hom.app (S.obj (P.obj M)) ≫
       R'.map (Q'.map (γ.app M) ≫ adjB.counit.app (S'.obj M)) =
         adjA.counit.app M ≫ adjT.unit.app M := by
   dsimp only
-  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans
-  let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv)).natTrans
+  let k := ((mateEquiv adjX adjT).symm (TwoSquare.mk _ _ _ _ e.hom))
+  let γ := (mateEquiv adjA adjB (TwoSquare.mk _ _ _ _ (asIso k).inv))
   have hunit := unit_mateEquiv_symm adjX adjT (TwoSquare.mk _ _ _ _ e.hom) (P.obj M)
   change Q.map (adjX.unit.app (P.obj M)) ≫ e.hom.app (S.obj (P.obj M)) =
     adjT.unit.app (Q.obj (P.obj M)) ≫ R'.map (k.app (P.obj M)) at hunit
@@ -483,10 +482,9 @@ private theorem mate_transport_left
     {S : A ⥤ C} {T : B ⥤ D} (x : S ⋙ M ⟶ L ⋙ T) :
     (mateEquiv (a.ofNatIsoLeft e) (b.ofNatIsoLeft f)
       (TwoSquare.mk _ _ _ _
-        (Functor.whiskerLeft S f.inv ≫ x ≫ Functor.whiskerRight e.hom T))).natTrans =
-      (mateEquiv a b (TwoSquare.mk _ _ _ _ x)).natTrans := by
+        (Functor.whiskerLeft S f.inv ≫ x ≫ Functor.whiskerRight e.hom T))) =
+      (mateEquiv a b (TwoSquare.mk _ _ _ _ x)) := by
   ext K
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
@@ -504,7 +502,7 @@ private abbrev exactScalarReverse
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))).symm
       (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ f)).hom)).natTrans
+        (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ f)).hom))
 
 private instance exactScalarReverse_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
@@ -516,7 +514,7 @@ private def exactCoefficientMap
     {T X : Scheme.{u}} (f : T ⟶ X) :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-    (TwoSquare.mk _ _ _ _ (asIso (exactScalarReverse φ f)).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (asIso (exactScalarReverse φ f)).inv))
 
 /- Identify the universal scalar-unit definition with the geometric mate; transport
 along the canonical exact/left-derived pullback comparison. -/
@@ -529,11 +527,11 @@ private theorem exactCoefficientMap_app
   let x := TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ f).hom
   let e := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f
   let e' := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) f
-  let l := ((mateEquiv a b).symm x).natTrans
+  let l := ((mateEquiv a b).symm x)
   have : IsIso l := (ProEtale.scalarPullbackReverse_isIso φ f).2
   let γ := (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-    (TwoSquare.mk _ _ _ _ (asIso l).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (asIso l).inv))
   have hγ : γ.app K = finiteCoefficientDirectImageMap φ f K := by
     apply (finiteCoefficientDirectImageMap_existsUnique φ f K).choose_spec.2
     exact coefficient_of_mate
@@ -545,7 +543,7 @@ private theorem exactCoefficientMap_app
       (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ f)).hom =
       TwoSquare.mk _ _ _ _
         (Functor.whiskerLeft (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
-          e.inv ≫ x.natTrans ≫
+          e.inv ≫ x ≫
           Functor.whiskerRight e'.hom
             (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)) := by
     ext M
@@ -774,7 +772,7 @@ private theorem scalarOpenTranspose
     b.unit.app (SU.obj K) ≫ JB.map
         (((a.comp x).leftAdjointUniq ((u.comp b).ofNatIsoRight q)).inv.app K) =
       SU.map (a.unit.app K) ≫
-        ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans.app (LA.obj K) := by
+        ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).app (LA.obj K) := by
   apply (u.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]
   have h := Adjunction.unit_leftAdjointUniq_hom_app
@@ -794,7 +792,7 @@ private theorem scalarOpenTranspose
   have hm := unit_mateEquiv_symm x u (TwoSquare.mk _ _ _ _ q.inv) (LA.obj K)
   change JA.map (x.unit.app (LA.obj K)) ≫ q.inv.app (SX.obj (LA.obj K)) =
     u.unit.app (JA.obj (LA.obj K)) ≫ RU.map
-      (((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).natTrans.app (LA.obj K)) at hm
+      (((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv)).app (LA.obj K)) at hm
   have hu := u.unit.naturality (a.unit.app K)
   dsimp only [Functor.id_map, Functor.comp_map, Functor.comp_obj] at hu
   rw [← reassoc_of% hu, ← hm]

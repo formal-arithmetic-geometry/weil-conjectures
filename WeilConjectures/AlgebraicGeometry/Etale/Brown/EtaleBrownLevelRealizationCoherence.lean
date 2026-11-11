@@ -106,7 +106,7 @@ theorem etaleBrownLevelRealizationCoherence_exists
     exact (asIso (((mateEquiv (P.scalar h).derivedAdj
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
         (strictEtaleBrownRingMap O t h)))).symm
-      (.mk _ _ _ _ (restriction h).hom)).natTrans)).symm
+      (.mk _ _ _ _ (restriction h).hom)))).symm
   let R' : StrictEtaleBrownRealizationData O t W P :=
     { ordinaryAdditive := R.ordinaryAdditive
       derived := R.derived
@@ -124,7 +124,7 @@ theorem etaleBrownLevelRealizationCoherence_exists
     exact HEq.rfl
   · exact hrestriction
   · intro m n h
-    exact congrArg (fun s ↦ s.natTrans)
+    exact congrArg (fun s ↦ s)
       ((mateEquiv (P.scalar h).derivedAdj
         (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
           (strictEtaleBrownRingMap O t h)))).apply_symm_apply

@@ -175,7 +175,7 @@ def compactificationOrdinaryScalarMate
       ProEtale.etaleSheafExtendScalars φ W ⋙ lowerStar (ModuleCat.{u + 1} B) r :=
   (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) r)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) r)
-    (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom))
 
 attribute [local irreducible] upperStar ProEtale.etaleSheafExtendScalars
   etaleLowerShriek openImmersionLowerShriek
@@ -407,7 +407,6 @@ private theorem scalar_open_to_direct
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j)
     (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ j).hom) N
   have hm := underived_mate φ j
-  dsimp only [TwoSquare.natTrans] at hm
   rw [hm] at hc
   simp only [lowerStarRestrictScalarsIso, Iso.refl_hom, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp] at hc

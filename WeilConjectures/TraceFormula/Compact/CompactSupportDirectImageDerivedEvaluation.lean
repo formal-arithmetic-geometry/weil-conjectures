@@ -73,7 +73,7 @@ private theorem unit_model (adj : L ⊣ G) (adj' : L' ⊣ G')
           (DerivedCategory.Q.obj J) ≫
       G'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app J) =
     DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app J) ≫
+      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app J) ≫
       G'.rightDerivedFunctorUnitQ ((H.mapHomologicalComplex (.up ℤ)).obj J) := by
   have ht := CategoryTheory.UnboundedExactTower.localized_mate_cochain_normalization
     adj adj' s J
@@ -241,14 +241,14 @@ theorem compactSupportDirectImageDerivedEvaluation
   let b (n : ℕ) := Adjunction.ofIsRightAdjoint (compactSupportLevelDirectImage l E p n)
   let (n : ℕ) := compactSupportEvaluationOrdinaryMate_isIso l E p n (ordinary n)
   let s (n : ℕ) := asIso (((mateEquiv a (b n)).symm
-    (TwoSquare.mk _ _ _ _ (ordinary n).hom)).natTrans)
+    (TwoSquare.mk _ _ _ _ (ordinary n).hom)))
   let left (n : ℕ) := (Functor.mapDerivedCategorySquareIso (s n)).symm
   let beta (n : ℕ) := (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
     (b n).mapDerivedCategoryRightDerivedAdjunction
-    (Functor.mapDerivedCategorySquareIso (s n)).hom).natTrans
-  have hs (n : ℕ) : (mateEquiv a (b n) (s n).hom).natTrans =
+    (Functor.mapDerivedCategorySquareIso (s n)).hom)
+  have hs (n : ℕ) : (mateEquiv a (b n) (s n).hom) =
       (ordinary n).hom := by
-    exact congrArg TwoSquare.natTrans ((mateEquiv a (b n)).apply_symm_apply
+    exact ((mateEquiv a (b n)).apply_symm_apply
       (TwoSquare.mk _ _ _ _ (ordinary n).hom))
   have hu (n : ℕ) (J : CochainComplex (coefficientSequenceModules l E Z) ℤ) :
       (coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.inv.app

@@ -26,10 +26,9 @@ private theorem mate_whisker
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (t : TwoSquare F L₁ L₂ G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t).natTrans ≫ Functor.whiskerRight g R₂ := by
+    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t) ≫ Functor.whiskerRight g R₂ := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -54,22 +53,22 @@ private theorem mate_paste_isIso
     (k₀₂ : R₀ ⋙ U₀₂ ≅ V₀₂ ⋙ R₂)
     (cU : U₀₂ ≅ U₀₁ ⋙ U₁₂) (cV : V₀₂ ≅ V₀₁ ⋙ V₁₂)
     (hk : k₀₂.hom = Functor.whiskerLeft R₀ cU.hom ≫
-      (TwoSquare.vComp k₀₁.hom k₁₂.hom).natTrans ≫ Functor.whiskerRight cV.inv R₂)
-    (h₀₁ : IsIso ((mateEquiv a₀ a₁).symm k₀₁.hom).natTrans)
-    (h₁₂ : IsIso ((mateEquiv a₁ a₂).symm k₁₂.hom).natTrans) :
-    IsIso ((mateEquiv a₀ a₂).symm k₀₂.hom).natTrans := by
+      (TwoSquare.vComp k₀₁.hom k₁₂.hom) ≫ Functor.whiskerRight cV.inv R₂)
+    (h₀₁ : IsIso ((mateEquiv a₀ a₁).symm k₀₁.hom))
+    (h₁₂ : IsIso ((mateEquiv a₁ a₂).symm k₁₂.hom)) :
+    IsIso ((mateEquiv a₀ a₂).symm k₀₂.hom) := by
   have := h₀₁
   have := h₁₂
   let t₀₁ := (mateEquiv a₀ a₁).symm k₀₁.hom
   let t₁₂ := (mateEquiv a₁ a₂).symm k₁₂.hom
   let t := TwoSquare.hComp t₀₁ t₁₂
   let t' := (t.whiskerTop cU.hom).whiskerBottom cV.inv
-  have ht : (mateEquiv a₀ a₂ t').natTrans = k₀₂.hom := by
+  have ht : (mateEquiv a₀ a₂ t') = k₀₂.hom := by
     rw [mate_whisker]
     have hh := mateEquiv_vcomp a₀ a₁ a₂ t₀₁ t₁₂
     dsimp only [t₀₁, t₁₂] at hh
     simp only [Equiv.apply_symm_apply] at hh
-    change (mateEquiv a₀ a₂ t).natTrans = _ at hh
+    change (mateEquiv a₀ a₂ t) = _ at hh
     rw [hh, hk]
   have ht' : (mateEquiv a₀ a₂).symm k₀₂.hom = t' := by
     rw [← ht]
@@ -119,11 +118,11 @@ theorem derivedScalarMatePasting
     (hk : ∀ N, k₀₂.hom.app N ≫ R₂.map (cV.hom.app N) =
       cU.hom.app (R₀.obj N) ≫ U₁₂.map (k₀₁.hom.app N) ≫ k₁₂.hom.app (V₀₁.obj N))
     (h₀₁ : IsIso ((mateEquiv a₀ a₁).symm
-      (Functor.mapDerivedCategorySquareIso k₀₁).hom).natTrans)
+      (Functor.mapDerivedCategorySquareIso k₀₁).hom))
     (h₁₂ : IsIso ((mateEquiv a₁ a₂).symm
-      (Functor.mapDerivedCategorySquareIso k₁₂).hom).natTrans) :
+      (Functor.mapDerivedCategorySquareIso k₁₂).hom)) :
     IsIso ((mateEquiv a₀ a₂).symm
-      (Functor.mapDerivedCategorySquareIso k₀₂).hom).natTrans := by
+      (Functor.mapDerivedCategorySquareIso k₀₂).hom) := by
   let cUD := Functor.mapDerivedCategoryNatIso cU ≪≫
     (Functor.mapDerivedCategoryCompIso U₀₁ U₁₂).symm
   let cVD := Functor.mapDerivedCategoryNatIso cV ≪≫
@@ -140,7 +139,7 @@ theorem derivedScalarMatePasting
     TwoSquare.vComp, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc]
   rw [← R₂.mapDerivedCategory.map_comp, Iso.inv_hom_id_app]
-  simp only [TwoSquare.natTrans, R₂.mapDerivedCategory.map_id]
+  simp only [R₂.mapDerivedCategory.map_id]
   simpa [cUD, cVD] using h
 
 end CategoryTheory

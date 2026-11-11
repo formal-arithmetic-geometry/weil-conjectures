@@ -27,10 +27,9 @@ private theorem mate_whisker_normalized
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (t : TwoSquare F L₁ L₂ G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t).natTrans ≫ Functor.whiskerRight g R₂ := by
+    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t) ≫ Functor.whiskerRight g R₂ := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -79,9 +78,9 @@ private theorem mate_comp_iff
   let α := ((TwoSquare.hComp α₁ α₂).whiskerTop cU.inv).whiskerBottom cV.hom
   have hm : mateEquiv a₀ a₂ α =
       Functor.whiskerLeft R₀ cU.inv ≫
-        (TwoSquare.vComp (mateEquiv a₀ a₁ α₁) (mateEquiv a₁ a₂ α₂)).natTrans ≫
+        (TwoSquare.vComp (mateEquiv a₀ a₁ α₁) (mateEquiv a₁ a₂ α₂)) ≫
         Functor.whiskerRight cV.hom R₂ := by
-    change (mateEquiv a₀ a₂ α).natTrans = _
+    change (mateEquiv a₀ a₂ α) = _
     rw [mate_whisker_normalized, mateEquiv_vcomp]
   have hleft : (∀ P, L₂.map (cU.hom.app P) ≫ α₃.app P =
       α₂.app (U₁.obj P) ≫ V₂.map (α₁.app P) ≫ cV.hom.app (L₀.obj P)) ↔ α₃ = α := by
@@ -118,7 +117,7 @@ private theorem mate_unit_iff
   let β := ((TwoSquare.hId L₀).whiskerTop cU.hom).whiskerBottom cV.inv
   have hm : mateEquiv a a β =
       Functor.whiskerLeft R₀ cU.hom ≫ Functor.whiskerRight cV.inv R₀ := by
-    change (mateEquiv a a β).natTrans = _
+    change (mateEquiv a a β) = _
     rw [mate_whisker_normalized]
     have hid : mateEquiv a a (TwoSquare.hId L₀) = TwoSquare.vId R₀ := by
       ext Q

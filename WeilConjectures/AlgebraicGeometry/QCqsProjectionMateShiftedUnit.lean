@@ -36,10 +36,10 @@ private theorem equivalence_projection_mate_isIso
   let a := A.symm.toAdjunction
   let b := B.symm.toAdjunction
   let β := (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ α.hom)
-  have hβ : IsIso β.natTrans := by
+  have hβ : IsIso β := by
     dsimp [β, mateEquiv]
     infer_instance
-  let γ := conjugateEquiv (a.comp p) (p.comp b) β.natTrans
+  let γ := conjugateEquiv (a.comp p) (p.comp b) β
   have hγ : IsIso γ := conjugateEquiv_iso _ _ _
   have heq : γ.app L = p.homEquiv (A.functor.obj (G.obj L)) (B.functor.obj L)
       (α.hom.app (G.obj L) ≫ B.functor.map (p.counit.app L)) := by

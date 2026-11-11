@@ -93,7 +93,7 @@ def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
   ((mateEquiv
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} B) j)
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j)).symm
-      (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))).natTrans
+      (TwoSquare.mk _ _ _ _ (eqToHom (by rfl))))
 
 private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -130,10 +130,10 @@ private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     exact (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).left_triangle_components _
   have h := iterated_mateEquiv_conjugateEquiv_symm aB aA aU aX γ
   rw [hβ] at h
-  have hi : IsIso ((conjugateEquiv (aB.comp aX) (aU.comp aA)).symm γ.natTrans) := by
+  have hi : IsIso ((conjugateEquiv (aB.comp aX) (aU.comp aA)).symm γ) := by
     exact inferInstance
   change IsIso (((mateEquiv aB aA).symm
-    (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))).natTrans)
+    (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))))
   rw [h]
   exact hi
 

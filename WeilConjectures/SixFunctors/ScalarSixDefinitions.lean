@@ -187,7 +187,7 @@ structure ScalarSixGeometry where
     (mateEquiv (upperStarLowerStarAdjunction Λ.X f)
       (proEtaleRingModuleAdjunction f (scalarSixSectionRing Λ Y)
         (scalarSixSectionRing Λ X) (coefficient Λ f))
-      (.mk _ _ _ _ (pull Λ f).inv)).natTrans = (push Λ f).hom
+      (.mk _ _ _ _ (pull Λ f).inv)) = (push Λ f).hom
 
 /-- The locally closed coefficient arrow with its canonically normalized coefficient map.
 Source: blueprint clause (2) (blueprint: det-prop-scalar-six-pullback). -/
@@ -348,7 +348,7 @@ structure ScalarSixOpenComparison (E : LocallyClosedExtensionData.{u})
     (mateEquiv (openImmersionLowerShriekUpperStarAdjunction Λ.X j.left)
       (E.openAdjunction (scalarSixImmersion G Λ j)
         (inferInstanceAs (IsOpenImmersion j.left)))
-      (.mk _ _ _ _ (comparison Λ j).inv)).natTrans = (G.pull Λ j.left).hom
+      (.mk _ _ _ _ (comparison Λ j).inv)) = (G.pull Λ j.left).hom
 
 variable (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
   (G : ScalarSixGeometry.{u})

@@ -254,8 +254,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (e : L₁ ≅ L₁') (e' : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (a.ofNatIsoLeft e) (b.ofNatIsoLeft e') α).natTrans =
-      (mateEquiv a b ((α.whiskerRight e'.hom).whiskerLeft e.inv)).natTrans := by
+    (mateEquiv (a.ofNatIsoLeft e) (b.ofNatIsoLeft e') α) =
+      (mateEquiv a b ((α.whiskerRight e'.hom).whiskerLeft e.inv)) := by
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
@@ -292,7 +292,7 @@ private theorem normalized_exact_inverse
           inferInstance)).symm
         (TwoSquare.mk _ _ _ _
           (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).inv)
-        ).natTrans.app M) := by
+        ).app M) := by
   rw [normalization_comparison_eq_canonical A N e c,
     normalization_comparison_eq_canonical A N e' d]
   let a := derivedEtaleLowerShriekUpperStarAdjunction
@@ -305,7 +305,7 @@ private theorem normalized_exact_inverse
   have h := normalized_square A sq c d _ _
     (a.ofNatIsoLeft dc.symm) (b.ofNatIsoLeft dd.symm)
   have hm := mate_ofNatIsoLeft a b dc.symm dd.symm α
-  simp only [Iso.symm_hom, Iso.symm_inv, TwoSquare.natTrans] at hm
+  simp only [Iso.symm_hom, Iso.symm_inv] at hm
   have he : mateEquiv a b ((α.whiskerRight dd.inv).whiskerLeft dc.hom) =
       TwoSquare.mk _ _ _ _
         (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).inv := by
@@ -313,7 +313,7 @@ private theorem normalized_exact_inverse
     rw [← hm]
     have hK := h K
     change (mateEquiv (a.ofNatIsoLeft dc.symm) (b.ofNatIsoLeft dd.symm) α
-      ).natTrans.app K ≫
+      ).app K ≫
         (conjugateIsoEquiv (b.ofNatIsoLeft dd.symm) b dd.symm).hom.app _ =
       (upperStar (ModuleCat.{u + 1} A) r₁).mapDerivedCategory.map
         ((conjugateIsoEquiv (a.ofNatIsoLeft dc.symm) a dc.symm).hom.app K) ≫ _ at hK
@@ -323,7 +323,7 @@ private theorem normalized_exact_inverse
     erw [Category.comp_id] at hK
     exact hK
   have he' := (mateEquiv a b).symm_apply_eq.mpr he.symm
-  have hh := congrArg (fun t ↦ t.natTrans.app M) he'
+  have hh := congrArg (fun t ↦ t.app M) he'
   simpa only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
     α, dc, dd, Category.assoc] using hh.symm
 
@@ -336,9 +336,9 @@ private theorem inverseMate_ofNatIsoRight
     (β : TwoSquare R H G R') :
     ((mateEquiv (a.ofNatIsoRight e.symm) (b.ofNatIsoRight f.symm)).symm
       (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight e.hom G ≫ β.natTrans ≫
-          Functor.whiskerLeft H f.inv))).natTrans =
-      ((mateEquiv a b).symm β).natTrans := by
+        (Functor.whiskerRight e.hom G ≫ β ≫
+          Functor.whiskerLeft H f.inv))) =
+      ((mateEquiv a b).symm β) := by
   ext X
   dsimp only [mateEquiv, Equiv.coe_fn_symm_mk, Adjunction.ofNatIsoRight_unit,
     Adjunction.ofNatIsoRight_counit, NatTrans.comp_app, Functor.whiskerRight_app,
@@ -409,16 +409,16 @@ private theorem leftDerived_square_inverse
     (leftDerivedUpperStarIsoMapDerivedCategory B r).hom).whiskerBottom
       (leftDerivedUpperStarIsoMapDerivedCategory B r₁).inv).whiskerRight
       (leftDerivedUpperStarIsoMapDerivedCategory B e').hom).whiskerLeft
-      (leftDerivedUpperStarIsoMapDerivedCategory B e).inv).natTrans
+      (leftDerivedUpperStarIsoMapDerivedCategory B e).inv)
   have : IsIso q := by
     dsimp only [q, α, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.mk, TwoSquare.natTrans]
+      TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.mk]
     infer_instance
   have hq : asIso q = derivedSquareUpperStarIso B sq :=
-    Iso.ext (congrArg TwoSquare.natTrans hs)
+    Iso.ext (hs)
   have hi := congrArg Iso.inv hq
   simpa only [q, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.mk, TwoSquare.natTrans, IsIso.inv_comp,
+    TwoSquare.whiskerRight, TwoSquare.mk, IsIso.inv_comp,
     Functor.inv_whiskerLeft, Functor.inv_whiskerRight, asIso_inv,
     IsIso.Iso.inv_inv, IsIso.Iso.inv_hom, B, α, Category.assoc] using hi
 
@@ -435,7 +435,7 @@ private theorem leftDerived_sum_mate
         (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e'
           inferInstance)).symm
         (TwoSquare.mk _ _ _ _
-          (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).inv)).natTrans) ≫
+          (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).inv))) ≫
       Functor.whiskerLeft
         (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) r).inv =
@@ -447,7 +447,7 @@ private theorem leftDerived_sum_mate
           (ModuleCat.{u + 1} A) e' inferInstance).ofNatIsoRight
             (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e').symm)).symm
         (TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso
-          (ModuleCat.{u + 1} A) sq).inv)).natTrans) := by
+          (ModuleCat.{u + 1} A) sq).inv))) := by
   let a := derivedEtaleLowerShriekUpperStarAdjunction
     (ModuleCat.{u + 1} A) e inferInstance
   let b := derivedEtaleLowerShriekUpperStarAdjunction
@@ -456,22 +456,22 @@ private theorem leftDerived_sum_mate
     (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).inv
   let t := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) r₁).hom
   let z := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) r).inv
-  have h₁ := congrArg TwoSquare.natTrans (inverseMate_edges a b β t z)
+  have h₁ := (inverseMate_edges a b β t z)
   have h₂ := inverseMate_ofNatIsoRight a b
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e)
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e')
     ((β.whiskerRight t).whiskerLeft z)
   rw [show Functor.whiskerRight
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom _ ≫
-      ((β.whiskerRight t).whiskerLeft z).natTrans ≫
+      ((β.whiskerRight t).whiskerLeft z) ≫
       Functor.whiskerLeft _
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e').inv =
       (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).inv by
     simpa only [β, t, z, TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
-      TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using
+      TwoSquare.mk, Category.assoc] using
       leftDerived_square_inverse A sq] at h₂
   simpa only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.mk,
-    TwoSquare.natTrans, a, b, β, t, z, Category.assoc] using h₁.symm.trans h₂.symm
+    a, b, β, t, z, Category.assoc] using h₁.symm.trans h₂.symm
 
 private theorem chosen_exchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -571,7 +571,7 @@ private theorem normalized_leftDerived_inverse
           (ModuleCat.{u + 1} A) e' inferInstance).ofNatIsoRight
             (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e').symm)).symm
         (TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso
-          (ModuleCat.{u + 1} A) sq.toCommSq).inv)).natTrans.app M) := by
+          (ModuleCat.{u + 1} A) sq.toCommSq).inv)).app M) := by
   have := isIso_rightDerivedLowerShriekBaseChangeMap A sq
   have := (unboundedEtaleCompactSupport_baseChange A sq).1
   let c := HasCompactification.compactification e
@@ -698,7 +698,7 @@ theorem etaleAmbientLeftComparison_baseChange
           (TwoSquare.mk _ _ _ _
             (((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) r₁ u).symm ≪≫
               leftDerivedUpperStarComp (ModuleCat.{u + 1} A) u' r (r₁ ≫ u)
-                sqU.w).hom))).natTrans.app M) ≫
+                sqU.w).hom))).app M) ≫
       (inv (rightDerivedLowerShriekBaseChangeMap A sq)).app
         ((etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).mapDerivedCategory.obj M) := by
   let : HasCompactification u :=

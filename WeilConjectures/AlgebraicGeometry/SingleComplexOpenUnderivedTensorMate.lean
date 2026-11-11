@@ -31,7 +31,7 @@ set_option maxHeartbeats 800000 in
 private theorem underived_open_mate
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     (mateEquiv (schemeOpenModuleAdjunction X (f ⁻¹ᵁ V)) (schemeOpenModuleAdjunction Y V)
-      (TwoSquare.mk _ _ _ _ (singleComplexOpenUnderivedDirectImageIso f V).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (singleComplexOpenUnderivedDirectImageIso f V).hom)) =
       (schemeMVUnderivedOpenComposition f V).hom := by
   apply NatTrans.ext
   funext M
@@ -193,7 +193,7 @@ theorem singleComplexOpen_underived_tensor_mate
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))
       (TwoSquare.mk _ _ _ _
         (openPinnedTensorRestrictionIso f V (f ⁻¹ᵁ V) (f ∣_ V)
-          (morphismRestrict_ι f V)).inv)).natTrans =
+          (morphismRestrict_ι f V)).inv)) =
       (singleComplexOpenUnderivedDirectImageIso f V).hom := by
   apply (mateEquiv (schemeOpenModuleAdjunction X (f ⁻¹ᵁ V))
     (schemeOpenModuleAdjunction Y V)).injective

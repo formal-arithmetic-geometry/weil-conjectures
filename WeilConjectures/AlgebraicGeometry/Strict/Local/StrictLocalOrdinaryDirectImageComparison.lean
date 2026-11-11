@@ -34,7 +34,7 @@ private theorem mate_eq_derivedExchange
     {f : X ⟶ S} {g : S' ⟶ S} (sq : CommSq p f' f g) :
     (mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).derivedPlus
       (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f').derivedPlus
-      (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{u + 1} sq).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{u + 1} sq).hom)) =
       derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq := by
   apply derivedBaseChangeMapPlus_ext
   intro K

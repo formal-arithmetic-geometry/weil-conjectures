@@ -51,8 +51,8 @@ theorem transport_mates
     (t : TwoSquare G L K H) (t' : TwoSquare G L' K' H)
     (ht : ∀ M, q.inv.app (G.obj M) ≫ t.app M = t'.app M ≫ H.map (p.inv.app M))
     (M : B) :
-    (mateEquiv a b t).natTrans.app M ≫ (conjugateEquiv b b' q.inv).app (H.obj M) =
-      G.map ((conjugateEquiv a a' p.inv).app M) ≫ (mateEquiv a' b' t').natTrans.app M := by
+    (mateEquiv a b t).app M ≫ (conjugateEquiv b b' q.inv).app (H.obj M) =
+      G.map ((conjugateEquiv a a' p.inv).app M) ≫ (mateEquiv a' b' t').app M := by
   apply (b'.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   rw [conjugateEquiv_counit]
@@ -76,8 +76,8 @@ private theorem transport_square
     (hs : conjugateEquiv b b' q.inv = s.hom)
     (e : L ⋙ H ≅ G ⋙ K) (e' : L' ⋙ H ≅ G ⋙ K')
     (β : R ⋙ G ≅ H ⋙ S) (β' : R' ⋙ G ≅ H ⋙ S')
-    (hβ : (mateEquiv a b (TwoSquare.mk _ _ _ _ e.inv)).natTrans = β.hom)
-    (hβ' : (mateEquiv a' b' (TwoSquare.mk _ _ _ _ e'.inv)).natTrans = β'.hom)
+    (hβ : (mateEquiv a b (TwoSquare.mk _ _ _ _ e.inv)) = β.hom)
+    (hβ' : (mateEquiv a' b' (TwoSquare.mk _ _ _ _ e'.inv)) = β'.hom)
     (comm : ∀ M, β.hom.app M ≫ s.hom.app (H.obj M) =
       G.map (r.hom.app M) ≫ β'.hom.app M) :
     ∀ M, H.map (p.hom.app M) ≫ e'.hom.app M =
@@ -88,16 +88,16 @@ private theorem transport_square
     simp only [τ, Iso.trans_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv,
       Functor.isoWhiskerRight_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Category.assoc, Iso.inv_hom_id_app_assoc]
-  have hh : (mateEquiv a b (TwoSquare.mk _ _ _ _ τ.inv)).natTrans = β.hom := by
+  have hh : (mateEquiv a b (TwoSquare.mk _ _ _ _ τ.inv)) = β.hom := by
     apply NatTrans.ext
     funext M
     apply (cancel_mono (s.hom.app (H.obj M))).mp
     have hm := transport_mates a a' b b' p q
       (TwoSquare.mk _ _ _ _ τ.inv) (TwoSquare.mk _ _ _ _ e'.inv) ht M
     rw [hr, hs] at hm
-    change (mateEquiv a b (TwoSquare.mk _ _ _ _ τ.inv)).natTrans.app M ≫ _ =
+    change (mateEquiv a b (TwoSquare.mk _ _ _ _ τ.inv)).app M ≫ _ =
       G.map (r.hom.app M) ≫
-        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ e'.inv)).natTrans.app M at hm
+        (mateEquiv a' b' (TwoSquare.mk _ _ _ _ e'.inv)).app M at hm
     rw [hβ'] at hm
     rw [hm]
     exact (comm M).symm
@@ -107,7 +107,7 @@ private theorem transport_square
       mateEquiv a b (TwoSquare.mk _ _ _ _ τ.inv) =
         mateEquiv a b (TwoSquare.mk _ _ _ _ e.inv) by
       exact congrArg (TwoSquare.mk _ _ _ _) (hh.trans hβ.symm))
-    exact congrArg TwoSquare.natTrans hi
+    exact hi
   intro M
   have h := congrArg (fun z ↦ z.hom.app M ≫ q.hom.app (G.obj M)) hτ
   simp only [τ, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom,
@@ -208,7 +208,7 @@ theorem nativeFinitePullIso_conjugate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 private theorem ordinary_mate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (mateEquiv (pullbackTensorSequenceAdjunction l E f)
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
-      (TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv)) =
         (pullbackTensorSequenceDirectEvaluation l E f n).hom := by
   let a := pullbackTensorSequenceAdjunction l E f
   let b := sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1))
@@ -218,8 +218,7 @@ private theorem ordinary_mate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   let R := proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 1))
   have he : (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom) =
       TwoSquare.mk _ _ _ _ (ordinaryEvaluation l E f n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     apply (b.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit]
     erw [← unit_mateEquiv_symm]
@@ -242,7 +241,7 @@ private theorem ordinary_mate_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       M).symm
   have hh := congrArg (mateEquiv a b) he
   rw [Equiv.apply_symm_apply] at hh
-  exact (congrArg TwoSquare.natTrans hh).symm
+  exact (hh).symm
 
 /-- A normalized ordinary direct comparison determines the inverse-evaluation square.
 Source: the native and sequence unit normalizations and naturality of adjunction mates.
@@ -279,7 +278,7 @@ theorem ordinary_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   have hs' : conjugateEquiv b b' (nativeFinitePullIso l E f n).hom = s.inv :=
     congrArg Iso.inv hs
   have hm : (mateEquiv a' b'
-      (TwoSquare.mk _ _ _ _ (ProEtale.VaryingRing.moduleEvalG R q f n).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (ProEtale.VaryingRing.moduleEvalG R q f n).inv)) =
         (ProEtale.VaryingRing.moduleEvalP R q f n).hom := by
     have hi := ProEtale.VaryingRing.inverseMateEqOfUnit a' b'
       (ProEtale.VaryingRing.eval R q Y n) (ProEtale.VaryingRing.eval R q X n)
@@ -289,12 +288,11 @@ theorem ordinary_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     have hi' : (mateEquiv a' b').symm
         (TwoSquare.mk _ _ _ _ (ProEtale.VaryingRing.moduleEvalP R q f n).hom) =
       TwoSquare.mk _ _ _ _ (ProEtale.VaryingRing.moduleEvalG R q f n).inv := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       exact congr_app hi N
     have h := congrArg (mateEquiv a' b') hi'
     rw [Equiv.apply_symm_apply] at h
-    exact (congrArg TwoSquare.natTrans h).symm
+    exact (h).symm
   apply transport_square
     (G := coefficientSequenceEvaluation l E Y n)
     (H := coefficientSequenceEvaluation l E X n) a a' b b'

@@ -51,16 +51,16 @@ theorem ordinaryProperOpenConjugateSquare
     (α : P' ⟶ P) (β : F' ⟶ F)
     (h : (TwoSquare.mk _ _ _ _ χ).whiskerRight β =
       (TwoSquare.mk _ _ _ _ χ').whiskerLeft α) (X : B) :
-    (mateEquiv a b χ).natTrans.app X ≫
+    (mateEquiv a b χ).app X ≫
         (conjugateEquiv b b' β).app (T.obj X) =
       R.map ((conjugateEquiv a a' α).app X) ≫
-        (mateEquiv a' b' χ').natTrans.app X := by
+        (mateEquiv a' b' χ').app X := by
   have hh := congrArg (mateEquiv a b') h
   rw [mateEquiv_conjugateEquiv_vcomp a b b',
     conjugateEquiv_mateEquiv_vcomp a a' b'] at hh
-  have hx := congrArg (fun t ↦ t.natTrans.app X) hh
+  have hx := congrArg (fun t ↦ t.app X) hh
   simpa only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerRight_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
     Functor.comp_obj] using hx
@@ -73,11 +73,11 @@ private theorem composite_mate_app
     {U : A ⥤ D} {V : B ⥤ E} {W : C ⥤ F}
     (a : P ⊣ Q) (a' : P' ⊣ Q') (b : L ⊣ R) (b' : L' ⊣ R')
     (χ : U ⋙ L ⟶ P ⋙ V) (χ' : V ⋙ L' ⟶ P' ⋙ W) (X : C) :
-    (mateEquiv (a.comp a') (b.comp b') (TwoSquare.vComp χ χ')).natTrans.app X =
-      (mateEquiv a b χ).natTrans.app (Q'.obj X) ≫
-        R.map ((mateEquiv a' b' χ').natTrans.app X) := by
+    (mateEquiv (a.comp a') (b.comp b') (TwoSquare.vComp χ χ')).app X =
+      (mateEquiv a b χ).app (Q'.obj X) ≫
+        R.map ((mateEquiv a' b' χ').app X) := by
   rw [mateEquiv_hcomp]
-  simp only [TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [TwoSquare.hComp, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id]
 
@@ -124,11 +124,11 @@ private theorem inverse_unit_square
     {R : A ⥤ C} {T : B ⥤ D} (a : P ⊣ Q) (b : F ⊣ G)
     (χ : Q ⋙ R ⟶ T ⋙ G) (ur : 𝟭 A ≅ P ⋙ Q) (us : 𝟭 C ≅ F ⋙ G)
     (X : A) (δ : T.obj (P.obj X) ⟶ F.obj (R.obj X))
-    [IsIso (((mateEquiv a b).symm χ).natTrans.app X)]
+    [IsIso (((mateEquiv a b).symm χ).app X)]
     (hur : ur.hom.app X = a.unit.app X)
     (hus : us.hom.app (R.obj X) = b.unit.app (R.obj X))
     (hδ : δ = GeneratorReduction.inverseOrZero
-      (((mateEquiv a b).symm χ).natTrans.app X)) :
+      (((mateEquiv a b).symm χ).app X)) :
     χ.app (P.obj X) ≫ G.map δ ≫ us.inv.app (R.obj X) = R.map (ur.inv.app X) := by
   have hu := GeneratorReduction.inverse_mate_unit_square a b χ (𝟙 (R.obj X))
   erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] at hu
@@ -196,11 +196,11 @@ private theorem open_comp_coefficient_square
       simp only [RealizationModel.openReduction, ringedOpenAdj, ringedOpenComp,
         Compositors.openComp, Equiv.apply_symm_apply,
         Adjunction.conjugateEquiv_leftAdjointCompIso_inv, Iso.symm_hom]
-      simpa only [TwoSquare.natTrans] using!
+      simpa only [] using!
         pull_comp_inverse l E o a.realizationModel a.compositors j k M)
-  have hx := congrArg (fun v ↦ v.natTrans.app L) hh
+  have hx := congrArg (fun v ↦ v.app L) hh
   dsimp only [TwoSquare.vComp, TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerRight_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app] at hx
   simp only [Category.id_comp, Category.comp_id, Functor.comp_obj] at hx
   have hj : ∀ M, IsIso ((a.realizationModel.openReduction l E j).app M) :=
@@ -323,7 +323,7 @@ private theorem unit_inverse_coefficient_square
       (calculus l E U).reduction.map
         ((a.ringedOpenComparisons.unit l E a.ringedModels j).inv.app L) := by
   have hi : IsIso (((mateEquiv (ringedOpenAdj l E j) (o.extension j).adj).symm
-    (a.realizationModel.reductionPull j).hom).natTrans.app L) :=
+    (a.realizationModel.reductionPull j).hom).app L) :=
     GeneratorReduction.fixedOpenReduction_isIso l E o a.realizationModel j L
   exact inverse_unit_square (ringedOpenAdj l E j) (o.extension j).adj
     (a.realizationModel.reductionPull j).hom

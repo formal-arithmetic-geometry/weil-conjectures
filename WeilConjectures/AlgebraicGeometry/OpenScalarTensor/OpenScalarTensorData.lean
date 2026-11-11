@@ -117,7 +117,7 @@ def restrictionOpen {A B : Type u} [CommRing A] [CommRing B]
     scalarRestriction φ U ⋙ openExtension (A := A) j ⟶
       openExtension (A := B) j ⋙ scalarRestriction φ X :=
   ((mateEquiv (openAdj B j) (openAdj A j)).symm
-    (TwoSquare.mk _ _ _ _ (rightSquare φ j).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (rightSquare φ j).hom))
 
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restricting the existing K-flat tensor model to flat-term representatives.

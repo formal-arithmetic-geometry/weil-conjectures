@@ -174,7 +174,7 @@ lemma Etale.baseChangeMap_app_eq (sq : CommSq g' f' f g) (F : Sheaf X.smallEtale
         (Etale.upperStarLowerStarAdjunction A g).counit.app
           ((f')_*[A].obj (((g')^*[A]).obj F)) := by
   have h := congrArg (fun (w : TwoSquare (f)_*[A] (g')^*[A] (g)^*[A] (f')_*[A]) ↦
-    w.natTrans.app F) (Etale.baseChangeSquare_eq_mateEquiv_symm A sq)
+    w.app F) (Etale.baseChangeSquare_eq_mateEquiv_symm A sq)
   simp only [mateEquiv_symm_apply, Etale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.leftUnitor_inv_app, Functor.whiskerRight_app,
     Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerLeft_app,

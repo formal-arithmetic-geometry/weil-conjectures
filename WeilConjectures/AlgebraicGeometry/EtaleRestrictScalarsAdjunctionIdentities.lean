@@ -66,9 +66,9 @@ private theorem derived_mate_eq
     (mateEquiv adj.derivedPlus adj'.derivedPlus
       (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryPlusCompIso G L').symm ≪≫
         Functor.mapDerivedCategoryPlusNatIso e ≪≫
-        Functor.mapDerivedCategoryPlusCompIso L H).hom)).natTrans =
+        Functor.mapDerivedCategoryPlusCompIso L H).hom)) =
       Functor.rightDerivedFunctorPlusBaseChange
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) := by
   refine Functor.rightDerived_ext (R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus)
     (Functor.whiskerRight R.rightDerivedFunctorPlusUnith G.mapDerivedCategoryPlus ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B) _ _ _ ?_
@@ -91,7 +91,7 @@ private theorem underived_mate
     {Z W : Scheme.{u}} (f : Z ⟶ W) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)) =
         (lowerStarRestrictScalarsIso φ f).hom := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ)
     (Sheaf.restrictCoextendScalarsAdj W.smallEtaleTopology φ)).injective
@@ -99,7 +99,7 @@ private theorem underived_mate
     (Sheaf.restrictCoextendScalarsAdj W.smallEtaleTopology φ)
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom))).natTrans = _
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom))) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   simp only [upperStarRestrictScalarsIsoSheaf, Adjunction.leftAdjointUniq, Iso.symm_hom,
     conjugateIsoEquiv_symm_apply_inv, Iso.refl_inv, TwoSquare.mk]
@@ -116,7 +116,7 @@ private theorem derived_mate
     {Z W : Scheme.{u}} (f : Z ⟶ W) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f).derivedPlus
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
-      (TwoSquare.mk _ _ _ _ (derivedUpperStarRestrictScalarsIso φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (derivedUpperStarRestrictScalarsIso φ f).hom)) =
         (derivedLowerStarRestrictScalarsIso φ f).hom := by
   change _ = derivedLowerStarRestrictScalarsMap φ f
   unfold derivedLowerStarRestrictScalarsMap
@@ -169,7 +169,6 @@ theorem derivedRestrictScalars_adjunction_identities
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
       (TwoSquare.mk _ _ _ _ (derivedUpperStarRestrictScalarsIso φ f).hom) M
     have hm := derived_mate φ f
-    dsimp only [TwoSquare.natTrans] at hm
     rw [hm] at h
     dsimp only [TwoSquare.mk, Functor.id_obj] at h
     simp only [derivedBaseChangeTargetRestrictScalarsIso, Iso.trans_hom,
@@ -182,7 +181,6 @@ theorem derivedRestrictScalars_adjunction_identities
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
       (TwoSquare.mk _ _ _ _ (derivedUpperStarRestrictScalarsIso φ f).hom) N
     have hm := derived_mate φ f
-    dsimp only [TwoSquare.natTrans] at hm
     rw [hm] at h
     dsimp only [TwoSquare.mk, Functor.id_obj] at h
     simp only [derivedBaseChangeSourceRestrictScalarsIso, Iso.trans_hom,

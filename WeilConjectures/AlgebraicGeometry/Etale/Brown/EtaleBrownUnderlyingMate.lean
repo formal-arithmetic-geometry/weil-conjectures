@@ -53,10 +53,10 @@ variable {A₀ : Type a₀u} [Category.{a₀v} A₀] {A₁ : Type a₁u} [Catego
 
 include h₀ h₁ hβ in
 private theorem ordinary_restriction_mate (N : B₀) :
-    Ua.map ((mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).natTrans.app N) ≫
+    Ua.map ((mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).app N) ≫
         γ₁.hom.app (RB.obj N) ≫ V.map (rb.hom.app N) =
       ra.hom.app (G₀.obj N) ≫ γ₀.hom.app N := by
-  let α := (mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom)).natTrans
+  let α := (mateEquiv a₀ a₁ (.mk _ _ _ _ β.hom))
   let M := G₀.obj N
   let ε := a₀.counit.app N
   have ha : α.app N = a₁.homEquiv _ _
@@ -67,7 +67,7 @@ private theorem ordinary_restriction_mate (N : B₀) :
       Functor.leftUnitor_hom_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Functor.comp_obj]
     simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.id_comp]
-    dsimp only [Functor.comp_map, TwoSquare.natTrans]
+    dsimp only [Functor.comp_map]
     erw [Category.comp_id]
   rw [ha]
   erw [← Category.assoc, h₁]
@@ -112,7 +112,7 @@ private theorem brown_underlying_cube
     {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel V O t m) :
     (coefficientUnderlying (J := W.smallEtaleTopology) O t n).map
         ((mateEquiv (A.levelAdj m) (A.levelAdj n)
-          (.mk _ _ _ _ (A.restrictInverse h).hom)).natTrans.app M) ≫
+          (.mk _ _ _ _ (A.restrictInverse h).hom)).app M) ≫
       (A.rightUnderlying n).hom.app
         ((coefficientRestriction (J := V.smallEtaleTopology) O t h).obj M) ≫
       ((MorphismProperty.Over.pullback @Etale ⊤ g).sheafPushforwardContinuous
@@ -164,14 +164,14 @@ theorem etaleBrownOrdinaryRestrictionCube
             Functor.whiskerLeft (strictEtaleBrownConstant O t V m)
       (Etale.lowerStarRestrictScalarsIso (strictEtaleBrownRingMap O t h) g).hom).app M =
         (Functor.whiskerRight ((mateEquiv (A.levelAdj m) (A.levelAdj n) (.mk _ _ _ _
-      (A.restrictInverse h).hom)).natTrans) (strictEtaleBrownConstant O t W n) ≫
+      (A.restrictInverse h).hom))) (strictEtaleBrownConstant O t W n) ≫
           Functor.whiskerLeft (coefficientRestriction.{u + 1, u, u + 1} (J := V.smallEtaleTopology)
       O t h) (rg n).val.ordinaryRight.hom).app M ≫
             (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).map
       ((RV.val.ordinaryRestriction h).hom.app M) := by
   let qV := coefficientRestriction.{u + 1, u, u + 1} (J := V.smallEtaleTopology) O t h
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
-    (.mk _ _ _ _ (A.restrictInverse h).hom)).natTrans
+    (.mk _ _ _ _ (A.restrictInverse h).hom))
   have ho := brown_underlying_cube O t g A h M
   ext U x
   have hox := congrArg (fun k ↦ (k.hom.app U) x) ho

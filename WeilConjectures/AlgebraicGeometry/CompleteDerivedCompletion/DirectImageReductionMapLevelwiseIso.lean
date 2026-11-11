@@ -78,7 +78,7 @@ theorem directImage_pushReductionMap_levelwiseIso :
     ∀ K : DerivedCategory (AdicCompletion.Modules l E X), ∀ n : ℕ,
       IsIso ((CompleteDerivedCompletion.dev l E Y n).map
         (((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
-          (.mk _ _ _ _ (pullReduction l E f).hom)).natTrans).app K)) := by
+          (.mk _ _ _ _ (pullReduction l E f).hom))).app K)) := by
   sorry
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion

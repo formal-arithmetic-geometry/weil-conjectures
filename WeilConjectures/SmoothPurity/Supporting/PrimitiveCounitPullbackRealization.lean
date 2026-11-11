@@ -110,13 +110,13 @@ private theorem primitiveInverseMateUnit
     {F : C ⥤ D} {G : D ⥤ C} {L : A ⥤ B} {R : B ⥤ A}
     {U : C ⥤ A} {V : D ⥤ B} (adj : F ⊣ G) (adjn : L ⊣ R)
     (d : G ⋙ U ≅ V ⋙ R) (e : U ⋙ L ≅ F ⋙ V)
-    (he : e.hom = ((mateEquiv adj adjn).symm d.hom).natTrans) (M : C) :
+    (he : e.hom = ((mateEquiv adj adjn).symm d.hom)) (M : C) :
     U.map (adj.unit.app M) ≫ d.hom.app (F.obj M) ≫ R.map (e.inv.app M) =
       adjn.unit.app (U.obj M) := by
   have hu := unit_mateEquiv_symm adj adjn d.hom M
   change U.map (adj.unit.app M) ≫ d.hom.app (F.obj M) =
     adjn.unit.app (U.obj M) ≫
-      R.map (((mateEquiv adj adjn).symm d.hom).natTrans.app M) at hu
+      R.map (((mateEquiv adj adjn).symm d.hom).app M) at hu
   rw [← he] at hu
   rw [← Category.assoc, hu, Category.assoc, ← R.map_comp,
     e.hom_inv_id_app]
@@ -165,7 +165,7 @@ private theorem primitiveOrdinaryInverseEvaluation {X Y : Scheme.{t}} (f : X ⟶
       (Adjunction.ofIsRightAdjoint (PrimitiveCounit.direct l E f))
       (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f
         (CommRingCat.of (ULift.{t + 1} (finiteCoefficientRing l E (n + 1)))))).symm
-          (eqToIso (PrimitiveCounit.directEvaluation_eq l E f n)).hom).natTrans := by
+          (eqToIso (PrimitiveCounit.directEvaluation_eq l E f n)).hom) := by
     rw [← primitiveOrdinaryDirectEvaluation l E f n]
     exact OrdinaryTowerProof.inverseEvaluation_hom l E f n
   have hnorm := fun M ↦ primitiveInverseMateUnit

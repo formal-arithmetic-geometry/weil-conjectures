@@ -69,8 +69,8 @@ lemma mateEquiv_symm_app_of_iso_aux (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ 
     (h₁ : ∀ M, adj₁.unit.app M ≫ eR₁.hom.app (L₁.obj M) = eL₁.inv.app M)
     (h₂ : ∀ N, adj₂.unit.app N ≫ eR₂.hom.app (L₂.obj N) = eL₂.inv.app N)
     (β : TwoSquare R₁ G G R₂)
-    (hβ : ∀ N, β.natTrans.app N ≫ eR₂.hom.app (G.obj N) = G.map (eR₁.hom.app N)) (M : C) :
-    eL₂.inv.app (G.obj M) ≫ ((mateEquiv adj₁ adj₂).symm β).natTrans.app M =
+    (hβ : ∀ N, β.app N ≫ eR₂.hom.app (G.obj N) = G.map (eR₁.hom.app N)) (M : C) :
+    eL₂.inv.app (G.obj M) ≫ ((mateEquiv adj₁ adj₂).symm β).app M =
       G.map (eL₁.inv.app M) := by
   rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom]
   apply (adj₂.homEquiv _ _).injective

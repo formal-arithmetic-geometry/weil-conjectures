@@ -83,8 +83,8 @@ private lemma mateEquiv_ofNatIsoRight_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L�
     (i₂ : R₂ ≅ R₂') (α : TwoSquare G L₁ L₂ H) (d : D) :
     (mateEquiv (adj₁.ofNatIsoRight i₁) (adj₂.ofNatIsoRight i₂) α).app d =
       G.map (i₁.inv.app d) ≫ (mateEquiv adj₁ adj₂ α).app d ≫ i₂.hom.app _ := by
-  have hα : α.natTrans.app _ ≫ H.map (L₁.map (i₁.inv.app d)) =
-      L₂.map (G.map (i₁.inv.app d)) ≫ α.natTrans.app _ := (α.natTrans.naturality _).symm
+  have hα : α.app _ ≫ H.map (L₁.map (i₁.inv.app d)) =
+      L₂.map (G.map (i₁.inv.app d)) ≫ α.app _ := (α.naturality _).symm
   simp only [Functor.comp_obj, mateEquiv_apply, Adjunction.ofNatIsoRight_unit,
     Functor.whiskerLeft_comp, Functor.whiskerLeft_twice, Adjunction.ofNatIsoRight_counit,
     Functor.whiskerRight_comp, Functor.whiskerRight_twice, Category.assoc, Iso.inv_hom_id_assoc,

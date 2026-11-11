@@ -60,26 +60,26 @@ private theorem matePastingSquare
     (δi : I ⋙ RW ⟶ RZ ⋙ J) (δk : K ⋙ RU ⟶ RV ⋙ H)
     (θr : TwoSquare I P P' K) (θs : TwoSquare J F F' H)
     (h : (Functor.whiskerLeft I δr.hom ≫ Functor.whiskerRight δi F') ≫
-        Functor.whiskerLeft RZ θs.natTrans =
-      Functor.whiskerRight θr.natTrans RU ≫
+        Functor.whiskerLeft RZ θs =
+      Functor.whiskerRight θr RU ≫
         (Functor.whiskerLeft P δk ≫ Functor.whiskerRight δp.hom H))
     (L : AV) :
-    δi.app (Q.obj L) ≫ J.map ((mateEquiv a c δp.inv).natTrans.app L) ≫
-        (mateEquiv c d θs).natTrans.app (RV.obj L) =
-      RW.map ((mateEquiv a b θr).natTrans.app L) ≫
-        (mateEquiv b d δr.inv).natTrans.app (K.obj L) ≫ G'.map (δk.app L) := by
+    δi.app (Q.obj L) ≫ J.map ((mateEquiv a c δp.inv).app L) ≫
+        (mateEquiv c d θs).app (RV.obj L) =
+      RW.map ((mateEquiv a b θr).app L) ≫
+        (mateEquiv b d δr.inv).app (K.obj L) ≫ G'.map (δk.app L) := by
   apply (d.homEquiv _ _).symm.injective
   change F'.map _ ≫ d.counit.app _ = F'.map _ ≫ d.counit.app _
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   have hε := d.counit.naturality (δk.app L)
   dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj] at hε
   erw [hε, mateEquiv_counit c d θs (RV.obj L)]
-  have hn := θs.natTrans.naturality ((mateEquiv a c δp.inv).natTrans.app L)
+  have hn := θs.naturality ((mateEquiv a c δp.inv).app L)
   dsimp only [Functor.comp_map] at hn
   erw [reassoc_of% hn]
   erw [← H.map_comp, mateEquiv_counit a c δp.inv L]
   erw [reassoc_of% (mateEquiv_counit b d δr.inv (K.obj L))]
-  have hn' := δr.inv.naturality ((mateEquiv a b θr).natTrans.app L)
+  have hn' := δr.inv.naturality ((mateEquiv a b θr).app L)
   dsimp only [Functor.comp_map] at hn'
   erw [reassoc_of% hn', ← RU.map_comp_assoc, mateEquiv_counit a b θr L]
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
@@ -88,7 +88,7 @@ private theorem matePastingSquare
   erw [hn'']
   apply (cancel_epi (δr.hom.app (I.obj (Q.obj L)))).1
   simp only [Iso.hom_inv_id_app_assoc]
-  have h₀ := whisker_square_app δi δr.hom δp.hom δk θr.natTrans θs.natTrans h
+  have h₀ := whisker_square_app δi δr.hom δp.hom δk θr θs h
     (Q.obj L)
   erw [reassoc_of% h₀]
   simp only [← H.map_comp_assoc, Iso.hom_inv_id_app]
@@ -108,17 +108,17 @@ private theorem matePastingNaturalSquare
     (δi : I ⋙ RW ⟶ RZ ⋙ J) (δk : K ⋙ RU ⟶ RV ⋙ H)
     (θr : TwoSquare I P P' K) (θs : TwoSquare J F F' H)
     (h : (Functor.whiskerLeft I δr.hom ≫ Functor.whiskerRight δi F') ≫
-        Functor.whiskerLeft RZ θs.natTrans =
-      Functor.whiskerRight θr.natTrans RU ≫
+        Functor.whiskerLeft RZ θs =
+      Functor.whiskerRight θr RU ≫
         (Functor.whiskerLeft P δk ≫ Functor.whiskerRight δp.hom H))
     (L : AV) {M : BV} (q : RV.obj L ⟶ M) :
     (δi.app (Q.obj L) ≫
-        J.map ((mateEquiv a c δp.inv).natTrans.app L ≫ G.map q)) ≫
-        (mateEquiv c d θs).natTrans.app M =
-      RW.map ((mateEquiv a b θr).natTrans.app L) ≫
-        (mateEquiv b d δr.inv).natTrans.app (K.obj L) ≫
+        J.map ((mateEquiv a c δp.inv).app L ≫ G.map q)) ≫
+        (mateEquiv c d θs).app M =
+      RW.map ((mateEquiv a b θr).app L) ≫
+        (mateEquiv b d δr.inv).app (K.obj L) ≫
         G'.map (δk.app L ≫ H.map q) := by
-  have hn := (mateEquiv c d θs).natTrans.naturality q
+  have hn := (mateEquiv c d θs).naturality q
   dsimp only [Functor.comp_map] at hn
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   rw [hn]
@@ -202,9 +202,9 @@ private theorem open_beta_coeff
   have hj₀ := hj
   have hj'₀ := hj'
   change IsIso (((mateEquiv (ringedOpenAdj l E j) (o.extension j).adj).symm
-    (a.realizationModel.reductionPull j).hom).natTrans.app L) at hj
+    (a.realizationModel.reductionPull j).hom).app L) at hj
   change IsIso (((mateEquiv (ringedOpenAdj l E j') (o.extension j').adj).symm
-    (a.realizationModel.reductionPull j').hom).natTrans.app
+    (a.realizationModel.reductionPull j').hom).app
       ((ringedPull l E v).obj L)) at hj'
   have hu : q ≫ (o.extension j).adj.unit.app M =
       (calculus l E _).reduction.map ((ringedOpenAdj l E j).unit.app L) ≫
@@ -302,7 +302,7 @@ private theorem ringedCompactificationMap
       (ringedPush l E cf.g) (ringedPush l E cf'.g)
       (ringedPull l E y) (ringedPull l E x) (ringedPull l E z)
       (mateEquiv (ringedAdj l E cf.g) (ringedAdj l E cf'.g)
-        (TwoSquare.mk _ _ _ _ (ringedSquare l E z cf'.g cf.g y wp).hom)).natTrans
+        (TwoSquare.mk _ _ _ _ (ringedSquare l E z cf'.g cf.g y wp).hom))
       (a.ringedOpenComparisons.beta x cf'.i cf.i z wi hi) := by
   rfl
 

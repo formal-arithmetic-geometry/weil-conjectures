@@ -70,7 +70,7 @@ private def restrictionRightSquareMate
   (mateEquiv
     (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
     (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
-    (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) w).hom).natTrans
+    (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) w).hom)
 
 private theorem restrictionRightSquareMate_cancel
     (A : Type (u + 1)) [CommRing A]
@@ -288,7 +288,7 @@ theorem finite_base_change_restriction_right_square
           ((mateEquiv
             (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
             (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
-            (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom).natTrans.app M) ≫
+            (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom).app M) ≫
         e.pullU_pin.right.hom.app
           ((ProEtale.upperStar (ModuleCat.{u + 1} A) j').obj M) ≫
         (direct .ordinary gU _ _ (cornerCoefficient t)).map

@@ -224,7 +224,7 @@ private theorem intrinsic_beta_inverse_mate
     (i : U ⟶ X) (p : X' ⟶ X) [IsOpenImmersion i] [IsOpenImmersion b]
     (h : a ≫ i = b ≫ p) :
     ((mateEquiv (SemilinearProperOpen.jAdj.{u} C τ i) (SemilinearProperOpen.jAdj.{u} C τ b)).symm
-      (TwoSquare.mk _ _ _ _ (SemilinearProperOpen.squareP.{u} C τ a b i p h).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (SemilinearProperOpen.squareP.{u} C τ a b i p h).inv)) =
       SemilinearProperOpen.betaInv.{u} C τ a b i p h := by
   apply NatTrans.ext
   funext M

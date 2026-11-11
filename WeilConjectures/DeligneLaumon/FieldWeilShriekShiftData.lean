@@ -735,14 +735,14 @@ Source: blueprint lem-fix-weil-operations.proof, first paragraph
 (blueprint: def-zl-field-weil-shriek-shift-data). -/
 def fieldWeilProperExchangeMap (p₀ : X₀ ⟶ Y₀) [IsProper p₀.left] :=
   (mateEquiv (fieldWeilProperAdj D l hl E p₀) (fieldWeilProperAdj D l hl E p₀)
-    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E p₀).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E p₀).inv))
 
 /-- The inverse open exchange is the left mate of inverse-image exchange.
 Source: blueprint lem-fix-weil-operations.proof, first paragraph
 (blueprint: def-zl-field-weil-shriek-shift-data). -/
 def fieldWeilOpenExchangeInverseMap (j₀ : X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] :=
   ((mateEquiv (fieldWeilOpenAdj D l hl E j₀) (fieldWeilOpenAdj D l hl E j₀)).symm
-    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E j₀).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E j₀).hom))
 
 -- The finite Frobenius equivalence is already part of the recorded semilinear transport.
 set_option backward.isDefEq.respectTransparency false in
@@ -762,12 +762,12 @@ private theorem fieldInverseMate_isIso
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ F} {R' : F ⥤ C}
     {G : A ⥤ C} {H : B ⥤ F} [G.IsEquivalence] [H.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (β : R ⋙ G ≅ H ⋙ R') :
-    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans) := by
-  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))) := by
+  let α := ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β.hom))
   let βop : TwoSquare H.op R.op R'.op G.op :=
     TwoSquare.mk _ _ _ _ (NatTrans.op β.hom)
   have hi := isIso_mateEquiv_of_isEquivalence a.op b.op βop
-  have he : NatTrans.op α = (mateEquiv a.op b.op βop).natTrans := by
+  have he : NatTrans.op α = (mateEquiv a.op b.op βop) := by
     ext X
     simp [α, βop, mateEquiv]
   have : IsIso (NatTrans.op α) := by rw [he]; exact hi

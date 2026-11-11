@@ -205,7 +205,7 @@ noncomputable def towerH {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
       G B x ⋙ (J B c'.i ⋙ R B c'.g) :=
   (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (J B c.i)
-      (mateEquiv (adj B c.g) (adj B c'.g) (squareG B z c'.g c.g a sp.w).hom).natTrans ≫
+      (mateEquiv (adj B c.g) (adj B c'.g) (squareG B z c'.g c.g a sp.w).hom) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (beta B x c'.i c.i z sj.w sj).hom (R B c'.g) ≫
     (Functor.associator _ _ _).hom
@@ -223,7 +223,7 @@ noncomputable def ordinaryH
     Functor.whiskerLeft (ordinaryJ B c.i)
       (mateEquiv (ordinaryAdj B c.g) (ordinaryAdj B c'.g)
         (Functor.mapDerivedCategorySquareIso
-          (moduleSquareG B z c'.g c.g a sp.w)).hom).natTrans ≫
+          (moduleSquareG B z c'.g c.g a sp.w)).hom) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (ordinaryBeta B x c'.i c.i z sj).hom (ordinaryR B c'.g) ≫
     (Functor.associator _ _ _).hom
@@ -242,7 +242,7 @@ def paste
     F₀ ⋙ A ⟶ BB ⋙ F₂ :=
   Functor.whiskerLeft F₀ ca.hom ≫
     (TwoSquare.vComp (TwoSquare.mk F₀ B₁ A₁ F₁ t₁)
-      (TwoSquare.mk F₁ B₂ A₂ F₂ t₂)).natTrans ≫ Functor.whiskerRight cb.inv F₂
+      (TwoSquare.mk F₁ B₂ A₂ F₂ t₂)) ≫ Functor.whiskerRight cb.inv F₂
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -260,9 +260,9 @@ private theorem mate_paste
     (s : A ⋙ L₂ ≅ L₀ ⋙ BB)
     (hs : ∀ M, cb.hom.app (L₀.obj M) ≫ B₂.map (s₁.inv.app M) ≫
       s₂.inv.app (A₁.obj M) = s.inv.app M ≫ L₂.map (ca.hom.app M)) :
-    (mateEquiv a₀ a₂ (TwoSquare.mk _ _ _ _ s.hom)).natTrans =
-      paste ca cb (mateEquiv a₀ a₁ (TwoSquare.mk _ _ _ _ s₁.hom)).natTrans
-        (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s₂.hom)).natTrans := by
+    (mateEquiv a₀ a₂ (TwoSquare.mk _ _ _ _ s.hom)) =
+      paste ca cb (mateEquiv a₀ a₁ (TwoSquare.mk _ _ _ _ s₁.hom))
+        (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s₂.hom)) := by
   have hh (M : C₀) : L₂.map (ca.hom.app M) ≫ s₂.hom.app (A₁.obj M) ≫
       B₂.map (s₁.hom.app M) = s.hom.app M ≫ cb.hom.app (L₀.obj M) := by
     apply (cancel_epi (s.inv.app M)).1
@@ -278,13 +278,13 @@ private theorem mate_paste
     ← R₂.map_comp, Iso.inv_hom_id_app, R₂.map_id]
   apply (a₂.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_symm_apply, Functor.map_comp, Category.assoc]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   erw [a₂.counit_naturality, reassoc_of% (mateEquiv_counit a₀ a₂ (TwoSquare.mk _ _ _ _ s.hom) N)]
   erw [CategoryTheory.Functor.map_id]
   simp only [Category.id_comp]
   dsimp only [Functor.comp_obj]
   erw [mateEquiv_counit a₁ a₂ (TwoSquare.mk _ _ _ _ s₂.hom) (B₁.obj N)]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   erw [reassoc_of% (s₂.hom.naturality ((mateEquiv a₀ a₁ (TwoSquare.mk _ _ _ _ s₁.hom)).app N))]
   erw [← B₂.map_comp, mateEquiv_counit a₀ a₁ (TwoSquare.mk _ _ _ _ s₁.hom) N, B₂.map_comp]
   change s.hom.app (R₀.obj N) ≫ BB.map (a₀.counit.app N) ≫ cb.hom.app N =
@@ -302,7 +302,7 @@ private def combine
     {X : C ⥤ C'} {Z : D ⥤ D'} {A : E ⥤ E'}
     (β : J₀ ⋙ Z ⟶ X ⋙ J₁) (e : P₀ ⋙ A ⟶ Z ⋙ P₁) :
     (J₀ ⋙ P₀) ⋙ A ⟶ X ⋙ (J₁ ⋙ P₁) :=
-  (TwoSquare.hComp (TwoSquare.mk _ _ _ _ β) (TwoSquare.mk _ _ _ _ e)).natTrans
+  (TwoSquare.hComp (TwoSquare.mk _ _ _ _ β) (TwoSquare.mk _ _ _ _ e))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -323,7 +323,7 @@ private theorem combine_paste
       paste ca cx (combine β₁ e₁) (combine β₂ e₂) := by
   ext M
   simp only [combine, paste, TwoSquare.hComp_app, TwoSquare.vComp_app,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.comp_obj, Functor.comp_map,
     Functor.map_comp, Category.assoc]
   rw [← P₂.map_comp_assoc, Iso.inv_hom_id_app]
@@ -621,7 +621,7 @@ theorem ordinaryPasting {X₀ X₁ X₂ Y₀ Y₁ Y₂ : Scheme.{u}}
     ext M
     apply (cancel_mono ((ordinaryJ B c₂.i).map ((ordinaryGComp B x₂ x₁).hom.app M))).1
     simp only [paste, NatTrans.comp_app, Functor.whiskerLeft_app,
-      Functor.whiskerRight_app, TwoSquare.vComp_app, TwoSquare.mk, TwoSquare.natTrans,
+      Functor.whiskerRight_app, TwoSquare.vComp_app, TwoSquare.mk,
       Category.assoc,
       ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
     dsimp only [Functor.comp_obj]
@@ -782,7 +782,7 @@ theorem finiteEvaluation [Finite B] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' :
       combine (ordinaryBeta B x c'.i c.i z sj).hom
         (ordinaryE B z c'.g c.g a sp.w) := rfl
   rw [ht, ho]
-  simp only [combine, TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans,
+  simp only [combine, TwoSquare.hComp, TwoSquare.mk,
     supportEval, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Iso.symm_hom, Functor.map_comp,

@@ -615,11 +615,10 @@ private theorem mate_whisker
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (t : TwoSquare F L₁ L₂ G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t).natTrans ≫
+    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t) ≫
         Functor.whiskerRight g R₂ := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -678,10 +677,10 @@ theorem finiteScalarPresentationCompatibility
       (TwoSquare.mk _ _ _ _ (ExceptionalFiniteScalar.leftScalarMap φ c))
       (finiteImageIso l E n c).hom (finiteImageIso l L m c).inv
     dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      TwoSquare.mk, TwoSquare.natTrans] at hw
+      TwoSquare.mk] at hw
     simp only [Category.assoc] at hw
     dsimp only [comparison, ExceptionalFiniteScalar.leftScalarMap,
-      TwoSquare.mk, TwoSquare.natTrans] at hw ⊢
+      TwoSquare.mk] at hw ⊢
     dsimp only [pbcDerivedRestrict, pbcRestrict, proEtaleCoefficientRestrictScalars,
       proEtaleConstantRingMap, sfAmbientCompactSupportCandidate,
       sfIntrinsicCompactSupport] at hw ⊢

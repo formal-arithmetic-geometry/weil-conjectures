@@ -55,11 +55,10 @@ private theorem mate_whisker
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (t : TwoSquare F L₁ L₂ G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t).natTrans ≫
+    (mateEquiv a₁ a₂ ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R₁ f ≫ (mateEquiv a₁ a₂ t) ≫
         Functor.whiskerRight g R₂ := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -81,12 +80,12 @@ private theorem mate_transfer
     {SX TX : C₀ ⥤ C₁} {SY TY : D₀ ⥤ D₁}
     (α : F₀ ≅ H₀) (β : F₁ ≅ H₁) (x : SX ≅ TX) (y : SY ≅ TY)
     (q : H₀ ⋙ TY ≅ TX ⋙ H₁)
-    (hq : IsIso (mateEquiv b₀ b₁ q.inv).natTrans) :
+    (hq : IsIso (mateEquiv b₀ b₁ q.inv)) :
     IsIso (mateEquiv a₀ a₁
       ((((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv).whiskerLeft
         α.inv |>.whiskerRight
-        β.hom)).natTrans := by
-  let m := @asIso _ _ _ _ ((mateEquiv b₀ b₁ q.inv).natTrans) hq
+        β.hom)) := by
+  let m := @asIso _ _ _ _ ((mateEquiv b₀ b₁ q.inv)) hq
   let eα := Functor.isoWhiskerRight ((conjugateIsoEquiv a₀ b₀) α.symm) SX
   let ex := Functor.isoWhiskerLeft J₀ x
   let ey := Functor.isoWhiskerRight y.symm J₁
@@ -94,11 +93,11 @@ private theorem mate_transfer
   rw [mateEquiv_conjugateEquiv_vcomp a₀ b₁ a₁]
   change IsIso ((mateEquiv a₀ b₁
     ((((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv).whiskerLeft
-      α.inv)).natTrans ≫ Functor.whiskerLeft SY (conjugateEquiv b₁ a₁ β.hom))
+      α.inv)) ≫ Functor.whiskerLeft SY (conjugateEquiv b₁ a₁ β.hom))
   rw [conjugateEquiv_mateEquiv_vcomp a₀ b₀ b₁]
   change IsIso ((Functor.whiskerRight (conjugateEquiv a₀ b₀ α.inv) SX ≫
     (mateEquiv b₀ b₁
-      (((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv)).natTrans) ≫
+      (((TwoSquare.mk _ _ _ _ q.inv).whiskerTop x.hom).whiskerBottom y.inv))) ≫
       Functor.whiskerLeft SY (conjugateEquiv b₁ a₁ β.hom))
   rw [mate_whisker]
   exact ((eα ≪≫ (ex ≪≫ m ≪≫ ey)) ≪≫ eβ).isIso_hom
@@ -181,7 +180,7 @@ private theorem ring_invertibility_from_comparison
       (pbcDerivedExtend (a.map Y)).map (r₀.hom.app K) ≫
       (PurCompactSupport.comparison a c).app
         ((RingStage.inclusion.{u} l Ω X s).obj K))
-    (hm : IsIso (mateEquiv adj₀ adj₁ q₀.inv).natTrans) :
+    (hm : IsIso (mateEquiv adj₀ adj₁ q₀.inv)) :
     IsIso (Functor.whiskerLeft (RingStage.inclusion.{u} l Ω X s)
       (PurCompactSupport.comparison a c)) ∧
     ∀ (q : A.F ⋙ SY.functor ≅ SX.functor ⋙ B.F),
@@ -193,7 +192,7 @@ private theorem ring_invertibility_from_comparison
           (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫
           (PurCompactSupport.comparison a c).app
             ((RingStage.inclusion.{u} l Ω X s).obj K)) →
-      IsIso (mateEquiv A.adjunction B.adjunction q.inv).natTrans := by
+      IsIso (mateEquiv A.adjunction B.adjunction q.inv) := by
   classical
   let IX₀ := RingStage.inclusion.{u} l Ω X s
   let IX₁ := RingStage.inclusion.{u} l Ω X t
@@ -257,7 +256,7 @@ private theorem ring_invertibility_from_comparison
     have hi : q₁.inv =
         ((((TwoSquare.mk _ _ _ _ q₀.inv).whiskerTop x.hom).whiskerBottom y.inv).whiskerLeft
           α.inv |>.whiskerRight
-          β.hom).natTrans := by
+          β.hom) := by
       ext K
       simp [q₁, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
         TwoSquare.whiskerLeft, TwoSquare.whiskerRight, Category.assoc]
@@ -271,9 +270,9 @@ private theorem rightMate_of_reverseAdjunction
     {EX : A ⥤ C} {EY : B ⥤ D} {RX : C ⥤ A} {RY : D ⥤ B}
     (adj : F ⊣ G) (adj' : F' ⊣ G') (ax : RX ⊣ EX) (ay : RY ⊣ EY)
     (q : F ⋙ EY ≅ EX ⋙ F')
-    (h : IsIso ((mateEquiv ax ay).symm q.inv).natTrans) :
-    IsIso (mateEquiv adj adj' q.inv).natTrans := by
-  let α := ((mateEquiv ax ay).symm q.inv).natTrans
+    (h : IsIso ((mateEquiv ax ay).symm q.inv)) :
+    IsIso (mateEquiv adj adj' q.inv) := by
+  let α := ((mateEquiv ax ay).symm q.inv)
   let : IsIso α := h
   have he := iterated_mateEquiv_conjugateEquiv ax ay adj' adj
     ((mateEquiv ax ay).symm q.inv)
@@ -484,8 +483,8 @@ private theorem finiteRightMate
           ((PurCompactSupport.finiteImageIso l E.carrier n c).inv.app K.obj)
           ((PurCompactSupport.finiteImageIso l E.carrier n c).hom.app K.obj),
           Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
-    have hi : IsIso (mateEquiv d.source.adjunction d.target.adjunction d.q.inv).natTrans := by
-      have he : (mateEquiv d.source.adjunction d.target.adjunction d.q.inv).natTrans =
+    have hi : IsIso (mateEquiv d.source.adjunction d.target.adjunction d.q.inv) := by
+      have he : (mateEquiv d.source.adjunction d.target.adjunction d.q.inv) =
           d.b.hom := by
         apply NatTrans.ext
         funext N

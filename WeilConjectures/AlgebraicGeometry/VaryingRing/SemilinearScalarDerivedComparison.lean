@@ -50,13 +50,13 @@ private theorem scalarInverseMateEqOfUnit
     (d : P ⋙ E ⟶ E' ⋙ P') (q : F ⋙ E' ≅ E ⋙ F')
     (hq : ∀ N, E.map (a.unit.app N) ≫ d.app (F.obj N) ≫
       P'.map (q.hom.app N) = b.unit.app (E.obj N)) :
-    ((mateEquiv a b).symm d).natTrans = q.inv := by
+    ((mateEquiv a b).symm d) = q.inv := by
   apply NatTrans.ext
   funext N
   apply (b.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   have hu : E.map (a.unit.app N) ≫ d.app (F.obj N) =
-      b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).natTrans.app N) :=
+      b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).app N) :=
     unit_mateEquiv_symm a b d N
   rw [← hu]
   apply (cancel_mono (P'.map (q.hom.app N))).mp
@@ -96,7 +96,7 @@ private theorem inverseMateCube
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.id_app,
       Category.id_comp, Category.assoc,
-      TwoSquare.natTrans, TwoSquare.mk, Functor.comp_obj]
+      TwoSquare.mk, Functor.comp_obj]
     erw [R₃.map_id]
     simpa only [Category.comp_id, Category.assoc] using hc N
   intro M
@@ -105,7 +105,7 @@ private theorem inverseMateCube
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.id_app,
     Category.id_comp, Category.comp_id, Category.assoc, CategoryTheory.Functor.map_id,
-    TwoSquare.natTrans, TwoSquare.mk, Functor.comp_obj] using hm
+    TwoSquare.mk, Functor.comp_obj] using hm
 
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 
@@ -142,7 +142,7 @@ def scalarB {X Y : Scheme.{u}} (f : X ⟶ Y) :
 Source: Stacks 07A6 (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
 def scalarD {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P R φ f ⋙ scalarRho D Y ⟶ scalarRho D X ⋙ StrictTower.R B f :=
-  (mateEquiv (adj R φ f) (StrictTower.adj B f) (scalarB D f).inv).natTrans
+  (mateEquiv (adj R φ f) (StrictTower.adj B f) (scalarB D f).inv)
 
 /-- Exact localization of the ordinary open comparison, retaining its open units.
 Source: Stacks 03DI, 04VG (blueprint: lem-sf-semilinear-scalar-derived-comparison). -/
@@ -271,7 +271,7 @@ private theorem scalarEvalP_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (mateEquiv (moduleAdj R φ f)
       (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
         (coefficients R X n) (StrictTower.constantRingIso (R n) f))
-      (moduleEvalG R φ f n).inv).natTrans = (moduleEvalP R φ f n).hom := by
+      (moduleEvalG R φ f n).inv) = (moduleEvalP R φ f n).hom := by
   have hq := scalarInverseMateEqOfUnit (moduleAdj R φ f)
     (Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
       (coefficients R X n) (StrictTower.constantRingIso (R n) f))
@@ -283,7 +283,7 @@ private theorem scalarEvalP_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       (TwoSquare.mk _ _ _ _ (moduleEvalP R φ f n).hom) =
         TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv := by
     exact hq
-  exact congrArg TwoSquare.natTrans ((Equiv.eq_symm_apply _).1 hh.symm)
+  exact ((Equiv.eq_symm_apply _).1 hh.symm)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem scalarTowerEvaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
@@ -292,7 +292,7 @@ private theorem scalarTowerEvaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
         (StrictTower.coefficients B X) (StrictTower.constantRingIso B f)).whiskerRight ℕᵒᵖ)
       (Scheme.proEtaleRingModuleAdjunction f (StrictTower.coefficients B Y)
         (StrictTower.coefficients B X) (StrictTower.constantRingIso B f))
-      (TwoSquare.mk _ _ _ _ (eqToIso (StrictTower.evaluationPullback B f n)).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (eqToIso (StrictTower.evaluationPullback B f n)).inv)) =
         𝟙 ((evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n) ⋙
           StrictTower.moduleDirectImage B f) := by
   apply NatTrans.ext
@@ -355,7 +355,7 @@ private theorem scalarOrdinaryInverseCube {X Y : Scheme.{u}} (f : X ⟶ Y) (n : 
     (Scheme.proEtaleConstantInverseImageMap_naturality f (ψ n)).symm)
       ((eval R φ X n).obj N)
   rw [h1]
-  dsimp only [TwoSquare.natTrans, TwoSquare.mk] at h2 h3 h4 ⊢
+  dsimp only [TwoSquare.mk] at h2 h3 h4 ⊢
   have h2' : (mateEquiv (scalarTowerAdj B f)
       (Scheme.proEtaleRingModuleAdjunction f (StrictTower.coefficients B Y)
         (StrictTower.coefficients B X) (StrictTower.constantRingIso B f))
@@ -541,7 +541,7 @@ private theorem scalarD_evaluation_of_cube
   rw [scalarLevelD_mate] at ht
   unfold StrictTower.moduleDirectImage
   simp only [scalarD, StrictTower.evalR, evalP, evalPMate, TwoSquare.mk,
-    TwoSquare.natTrans, Functor.comp_obj,
+    Functor.comp_obj,
     Scheme.proEtaleRingDerivedAdjunction, Scheme.proEtaleRingDerivedDirectImage] at ht ⊢
   convert ht using 1
   rfl

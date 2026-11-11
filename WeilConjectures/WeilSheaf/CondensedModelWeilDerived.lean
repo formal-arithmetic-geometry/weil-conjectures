@@ -75,9 +75,9 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 /-- The mate of an isomorphism along adjunctions whose units and counits are isomorphisms (for
 instance, along equivalences) is an isomorphism. -/
 lemma isIso_mateEquiv_natTrans (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [IsIso adj₁.counit]
-    [IsIso adj₂.unit] (α : TwoSquare G L₁ L₂ H) [IsIso α.natTrans] :
-    IsIso (mateEquiv adj₁ adj₂ α).natTrans := by
-  have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).natTrans.app d) := by
+    [IsIso adj₂.unit] (α : TwoSquare G L₁ L₂ H) [IsIso α] :
+    IsIso (mateEquiv adj₁ adj₂ α) := by
+  have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).app d) := by
     simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
@@ -96,7 +96,7 @@ variable {C D : Type*} [Category C] [Category D] {F : C ⥤ C} {G : D ⥤ D} {L 
 and `G ⊣ G⁻¹` is the conjugate of the mate of `eR`
 (`CategoryTheory.iterated_mateEquiv_conjugateEquiv`), which is an isomorphism. -/
 instance isIso_mateEquiv_symm :
-    IsIso ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ eR.hom)).natTrans := by
+    IsIso ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ eR.hom)) := by
   have : IsIso G.asEquivalence.toAdjunction.counit :=
     inferInstanceAs (IsIso G.asEquivalence.counitIso.hom)
   have : IsIso F.asEquivalence.toAdjunction.unit :=
@@ -105,7 +105,7 @@ instance isIso_mateEquiv_symm :
     G.asEquivalence.toAdjunction ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ eR.hom))
   rw [Equiv.apply_symm_apply] at h
   have : IsIso (mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction
-      (TwoSquare.mk _ _ _ _ eR.hom)).natTrans :=
+      (TwoSquare.mk _ _ _ _ eR.hom)) :=
     isIso_mateEquiv_natTrans _ _ (TwoSquare.mk _ _ _ _ eR.hom)
   rw [h] at this
   exact conjugateEquiv_of_iso (adj.comp G.asEquivalence.toAdjunction)
@@ -116,14 +116,14 @@ instance isIso_mateEquiv_symm :
 `L ⊣ R` lifts to algebras (`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction` and
 `CategoryTheory.Endofunctor.IsoAlgebra.mateEquiv_leftMateIso_inv`). -/
 noncomputable def leftMateIso : L ⋙ G ≅ F ⋙ L :=
-  (asIso ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ eR.hom)).natTrans).symm
+  (asIso ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ eR.hom))).symm
 
 /-- The mate of the inverse of `CategoryTheory.Endofunctor.IsoAlgebra.leftMateIso adj eR` is
 `eR`. -/
 lemma mateEquiv_leftMateIso_inv :
-    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ (leftMateIso adj eR).inv)).natTrans = eR.hom := by
+    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ (leftMateIso adj eR).inv)) = eR.hom := by
   rw [leftMateIso, Iso.symm_inv, asIso_hom]
-  exact congrArg TwoSquare.natTrans ((mateEquiv adj adj).apply_symm_apply _)
+  exact ((mateEquiv adj adj).apply_symm_apply _)
 
 end LeftMate
 

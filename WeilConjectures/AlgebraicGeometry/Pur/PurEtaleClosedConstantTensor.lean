@@ -429,14 +429,14 @@ private theorem mate_symm_monoidal
     (adj : L ⊣ R) (adj' : L' ⊣ R') (F : V ⥤ V') (G : W ⥤ W')
     [L.Monoidal] [R.LaxMonoidal] [L'.Monoidal] [R'.LaxMonoidal]
     [F.LaxMonoidal] [G.LaxMonoidal] [adj.IsMonoidal] [adj'.IsMonoidal]
-    (β : TwoSquare R G F R') [β.natTrans.IsMonoidal] :
-    NatTrans.IsMonoidal ((mateEquiv adj adj').symm β).natTrans := by
+    (β : TwoSquare R G F R') [β.IsMonoidal] :
+    NatTrans.IsMonoidal ((mateEquiv adj adj').symm β) := by
   change NatTrans.IsMonoidal
     ((Functor.leftUnitor _).inv ≫
       Functor.whiskerRight adj.unit (F ⋙ L') ≫
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (Functor.associator _ _ _).hom _ ≫
-      Functor.whiskerRight (Functor.whiskerLeft L β.natTrans) L' ≫
+      Functor.whiskerRight (Functor.whiskerLeft L β) L' ≫
       Functor.whiskerRight (Functor.associator _ _ _).inv _ ≫
       (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft (L ⋙ G) adj'.counit ≫
@@ -448,7 +448,7 @@ private theorem basechange_monoidal
     {C' C X' X : Scheme.{u}} {q : C' ⟶ C} {r : C' ⟶ X'}
     {i : C ⟶ X} {v : X' ⟶ X} (sq : CommSq q r i v) :
     NatTrans.IsMonoidal (baseChangeMap (ModuleCat.{u + 1} A) sq) := by
-  change NatTrans.IsMonoidal (baseChangeSquare (ModuleCat.{u + 1} A) sq).natTrans
+  change NatTrans.IsMonoidal (baseChangeSquare (ModuleCat.{u + 1} A) sq)
   rw [baseChangeSquare_eq_mateEquiv_symm]
   have : NatTrans.IsMonoidal (squareLowerStarIso (ModuleCat.{u + 1} A) sq).hom := by
     dsimp only [squareLowerStarIso, Iso.trans_hom, Iso.symm_hom]

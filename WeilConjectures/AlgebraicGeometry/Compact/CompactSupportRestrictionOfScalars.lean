@@ -128,7 +128,7 @@ theorem isIso_mateEquiv_symm_upperStarRestrictScalarsIso_inv
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     IsIso ((mateEquiv (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).symm
-        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ j).inv)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ j).inv)) := by
   have h : (mateEquiv (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).symm
         (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ j).inv) =
@@ -138,9 +138,9 @@ theorem isIso_mateEquiv_symm_upperStarRestrictScalarsIso_inv
     rw [openImmersionLowerShriekUpperStarAdjunction_eq,
       openImmersionLowerShriekUpperStarAdjunction_eq, mateEquiv_symm_ofNatIsoRight]
     congr 1
-    refine TwoSquare.ext _ _ fun G ↦ ?_
+    refine NatTrans.ext (funext fun G ↦ ?_)
     have hc := upperStarRestrictScalarsIso_hom_app_comp_of_isOpenImmersion φ j G
-    simp only [TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerRight_app,
+    simp only [TwoSquare.mk, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Iso.symm_hom, Iso.symm_inv]
     erw [← hc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
     rfl
@@ -163,7 +163,7 @@ theorem fixedScalarRestrictionOpenMap_isIso
   let β := asIso ((mateEquiv
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).symm
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ j).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ j).inv))
   have hunit := Adjunction.mapDerivedCategoryAdjunction_mate
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
@@ -180,7 +180,7 @@ theorem fixedScalarRestrictionOpenMap_isIso
     (Functor.mapDerivedCategorySquareIso β).hom
     (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso φ j).symm).hom
     (fun K ↦ (hunit K).symm)
-  have h := congrArg TwoSquare.natTrans (mateEquiv_ofNatIsoRight
+  have h := (mateEquiv_ofNatIsoRight
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B)
       j).mapDerivedCategoryAdjunction
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)
@@ -190,7 +190,7 @@ theorem fixedScalarRestrictionOpenMap_isIso
     (Functor.mapDerivedCategorySquareIso β).hom)
   rw [hmate] at h
   have heq : fixedScalarRestrictionOpenMap φ j = (Functor.mapDerivedCategorySquareIso β).hom := by
-    refine ((mateEquiv _ _).symm_apply_eq).2 (TwoSquare.ext _ _ fun K ↦ ?_)
+    refine ((mateEquiv _ _).symm_apply_eq).2 (NatTrans.ext (funext fun K ↦ ?_))
     rw [fixedScalarOpenAdjunction, fixedScalarOpenAdjunction, NatTrans.congr_app h K]
     simp [fixedScalarRestrictionPullback, leftDerivedUpperStarRestrictScalarsIso,
       Functor.mapDerivedCategorySquareIso_symm]

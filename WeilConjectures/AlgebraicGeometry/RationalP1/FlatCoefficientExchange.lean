@@ -366,7 +366,7 @@ private theorem mate_counit_of_eq
     {U : C ⥤ D} {R : D ⥤ C} {V : C' ⥤ D'} {S : D' ⥤ C'}
     {G : C ⥤ C'} {H : D ⥤ D'} (a : U ⊣ R) (b : V ⊣ S)
     (θ : G ⋙ V ⟶ U ⋙ H) (B : R ⋙ G ⟶ H ⋙ S)
-    (h : B = (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans) (K : D) :
+    (h : B = (mateEquiv a b (TwoSquare.mk _ _ _ _ θ))) (K : D) :
     V.map (B.app K) ≫ b.counit.app (H.obj K) =
       θ.app (R.obj K) ≫ H.map (a.counit.app K) := by
   subst B
@@ -404,8 +404,8 @@ private theorem exchange_of_whole_comparisons
     (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
     (αG : G ⋙ T₃ ⟶ T₁ ⋙ Ge) (αH : H ⋙ T₄ ⟶ T₂ ⋙ He)
     (δ : R ⋙ T₁ ⟶ T₂ ⋙ Re) (δ' : S ⋙ T₃ ⟶ T₄ ⋙ Se)
-    (hB : B = (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).natTrans)
-    (hBe : Be = (mateEquiv ae be (TwoSquare.mk _ _ _ _ θe)).natTrans)
+    (hB : B = (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)))
+    (hBe : Be = (mateEquiv ae be (TwoSquare.mk _ _ _ _ θe)))
     (hU : αU = Adjunction.pullIsoOfComapIso s₂ s₁ a ae e)
     (hV : αV = Adjunction.pullIsoOfComapIso s₄ s₃ b be e')
     (hδ : δ = Adjunction.pushHomOfComapIso s₂ s₁ e)

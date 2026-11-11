@@ -132,7 +132,7 @@ private theorem exact_mate
     (hb : ∀ P, a₂.unit.app (G.obj P) ≫ R₂.map (b.hom.app P) =
       G.map (a₁.unit.app P) ≫ d.hom.app (L₁.obj P)) :
     ((mateEquiv (exactDerivedAdjunction a₁) (exactDerivedAdjunction a₂)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)) =
         (Functor.mapDerivedCategorySquareIso b).hom := by
   have hι (K : CochainComplex A ℤ) :
       (a₂.mapHomologicalComplex (.up ℤ)).homEquiv

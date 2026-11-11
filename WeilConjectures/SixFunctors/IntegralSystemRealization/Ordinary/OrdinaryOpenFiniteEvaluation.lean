@@ -64,16 +64,16 @@ private theorem inverseMate_change_left
     {G : A ⥤ C} {H : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
     (w : TwoSquare R₁ H G R₂)
-    [IsIso ((mateEquiv b₁ b₂).symm w).natTrans] :
-    IsIso ((mateEquiv a₁ a₂).symm w).natTrans := by
+    [IsIso ((mateEquiv b₁ b₂).symm w)] :
+    IsIso ((mateEquiv a₁ a₂).symm w) := by
   have hw : (mateEquiv a₁ a₂).symm w = TwoSquare.mk _ _ _ _
       (Functor.whiskerLeft G (a₂.leftAdjointUniq b₂).hom ≫
-        ((mateEquiv b₁ b₂).symm w).natTrans ≫
+        ((mateEquiv b₁ b₂).symm w) ≫
           Functor.whiskerRight (a₁.leftAdjointUniq b₁).inv H) := by
     apply (mateEquiv a₁ a₂).injective
     rw [Equiv.apply_symm_apply, mateEquiv_leftAdjointUniq, Equiv.apply_symm_apply]
   rw [hw]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   apply IsIso.comp_isIso'
   · exact (Functor.isoWhiskerLeft G (a₂.leftAdjointUniq b₂)).isIso_hom
   · apply IsIso.comp_isIso'
@@ -176,10 +176,10 @@ private theorem normalizedFiniteEvaluation
     exact (hg M).symm
   -- The existing open mate theorem supplies the finite extension isomorphism.
   let bn := ProEtale.StrictTower.moduleJAdj (R n) j
-  let α := ((mateEquiv a bn).symm (TwoSquare.mk _ _ _ _ g.hom)).natTrans
+  let α := ((mateEquiv a bn).symm (TwoSquare.mk _ _ _ _ g.hom))
   have hα : IsIso α := by
     have : IsIso ((mateEquiv (ProEtale.VaryingRing.moduleJAdj R τ j) bn).symm
-        (TwoSquare.mk _ _ _ _ g.hom)).natTrans :=
+        (TwoSquare.mk _ _ _ _ g.hom)) :=
       ProEtale.VaryingRing.ordinaryOpenMateIso R τ j n
     exact inverseMate_change_left a (ProEtale.VaryingRing.moduleJAdj R τ j)
       bn bn (TwoSquare.mk _ _ _ _ g.hom)

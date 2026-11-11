@@ -44,9 +44,9 @@ private theorem scalar_counit_shift {T : Scheme.{u}} (c : Chern l E T) :
   let : ad.CommShift ℤ := ad.commShift_of_rightAdjoint ℤ
   let : ah.CommShift ℤ := Adjunction.CommShift.mk' ah (A := ℤ) inferInstance
   let β := r.mapDerivedCategoryFactors.inv
-  let τ := ((mateEquiv ah ad).symm (TwoSquare.mk _ _ _ _ β)).natTrans
+  let τ := ((mateEquiv ah ad).symm (TwoSquare.mk _ _ _ _ β))
   have hτshift : NatTrans.CommShift τ ℤ := by
-    dsimp only [τ, mateEquiv, Equiv.symm, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
+    dsimp only [τ, mateEquiv, Equiv.symm, Equiv.coe_fn_mk, TwoSquare.mk]
     infer_instance
   have hflat (P : CochainComplex (Systems T (Rrings l T)) ℤ)
       (hp : CochainComplex.IsKFlatIndependentCoefficients P) :

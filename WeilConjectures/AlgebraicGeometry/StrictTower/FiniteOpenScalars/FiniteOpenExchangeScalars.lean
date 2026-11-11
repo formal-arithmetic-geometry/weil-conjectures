@@ -139,7 +139,7 @@ private theorem pullRes_mate (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
         (coefficients C X) (coefficients C Y) (constantRingIso C f))
       (Scheme.proEtaleRingModuleAdjunction f
         (coefficients B X) (coefficients B Y) (constantRingIso B f))
-      (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans = (pushRes a f).hom := by
+      (TwoSquare.mk _ _ _ _ (pullRes a f).hom)) = (pushRes a f).hom := by
   change (mateEquiv (Scheme.proEtaleRingModuleAdjunction f
       (coefficients C X) (coefficients C Y) (constantRingIso C f))
     (Scheme.proEtaleRingModuleAdjunction f
@@ -147,8 +147,7 @@ private theorem pullRes_mate (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
       (TwoSquare.mk _ _ _ _ (pullRes a f).hom) =
     TwoSquare.mk _ _ _ _ (pushRes a f).hom
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_symm_apply, pullRes, asIso_hom,
     Scheme.proEtaleRingRestrictionPullbackInv,
     Scheme.proEtaleRingRestrictionPullbackApp, pushRes, NatTrans.comp_app,
@@ -157,7 +156,7 @@ private theorem pullRes_mate (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
     Functor.comp_map, Category.id_comp]
   simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   exact congrArg (fun k ↦ _ ≫ _ ≫ k) (Category.comp_id _).symm
 
@@ -178,7 +177,7 @@ private def fixedPull {A : Type (u + 1)} [CommRing A]
     (TwoSquare.mk _ _ _ _ (fixedDirect A f).hom)
 
 private instance fixedPull_isIso {A : Type (u + 1)} [CommRing A]
-    {Y X : Scheme.{u}} (f : Y ⟶ X) : IsIso (fixedPull (A := A) f).natTrans :=
+    {Y X : Scheme.{u}} (f : Y ⟶ X) : IsIso (fixedPull (A := A) f) :=
   inverseMate_isIso_of_equivalences _ _ _
 
 -- The pullback square can be checked on the identity-on-sections direct-image mates.
@@ -200,25 +199,24 @@ private theorem resPull_fixed (a : B →+* C) {Y X : Scheme.{u}} (f : Y ⟶ X) :
   rw [mateEquiv_vcomp adjC adjB ordB, mateEquiv_whiskerTop_whiskerBottom adjC ordB,
     mateEquiv_vcomp adjC ordC ordB]
   have hp := pullRes_mate a f
-  change (mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans =
+  change (mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)) =
     (pushRes a f).hom at hp
   have hp' : mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom) =
       TwoSquare.mk _ _ _ _ (pushRes a f).hom := by
-    exact (TwoSquare.equivNatTrans _ _ _ _).injective hp
+    exact hp
   rw [hp', show mateEquiv adjB ordB (fixedPull (A := B) f) =
       TwoSquare.mk _ _ _ _ (fixedDirect B f).hom from Equiv.apply_symm_apply _ _,
     show mateEquiv adjC ordC (fixedPull (A := C) f) =
       TwoSquare.mk _ _ _ _ (fixedDirect C f).hom from Equiv.apply_symm_apply _ _]
   have hs := scalar_direct_mate a f
   change (mateEquiv ordC ordB
-    (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom)).natTrans = 𝟙 _ at hs
+    (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom)) = 𝟙 _ at hs
   rw [show mateEquiv ordC ordB
       (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a f).hom) =
-      TwoSquare.mk _ _ _ _ (𝟙 _) from (TwoSquare.equivNatTrans _ _ _ _).injective hs]
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
+      TwoSquare.mk _ _ _ _ (𝟙 _) from hs]
   apply (cancel_mono (Functor.whiskerRight (resFixed a Y).hom
     (lowerStar (ModuleCat.{u + 1} B) f))).mp
-  simp only [TwoSquare.equivNatTrans, Equiv.coe_fn_mk, TwoSquare.natTrans,
+  simp only [Equiv.coe_fn_mk,
     TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
     Category.assoc, ← Functor.whiskerRight_comp, Iso.inv_hom_id,
     Functor.whiskerRight_id', Category.comp_id]
@@ -257,7 +255,7 @@ private theorem pullRes_comp (a : B →+* C) {V W Z : Scheme.{u}}
       mateEquiv (pullAdj C k) (pullAdj B k)
           (TwoSquare.mk _ _ _ _ (pullRes a k).hom) =
         TwoSquare.mk _ _ _ _ (pushRes a k).hom :=
-    (TwoSquare.equivNatTrans _ _ _ _).injective (pullRes_mate a k)
+    (pullRes_mate a k)
   have hc : q.whiskerRight (moduleGComp B f g).hom =
       (TwoSquare.mk _ _ _ _ (pullRes a (f ≫ g)).hom).whiskerLeft
         (moduleGComp C f g).hom := by
@@ -270,8 +268,7 @@ private theorem pullRes_comp (a : B →+* C) {V W Z : Scheme.{u}}
             (moduleGComp A f g).hom = (moduleRComp A f g).hom :=
       Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _
     rw [hG B, hG C]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro Y
@@ -280,7 +277,7 @@ private theorem pullRes_comp (a : B →+* C) {V W Z : Scheme.{u}}
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    simp only [ModuleCat.comp_apply]
     erw [pushRes_apply a g ((moduleDirectImage C f).obj N) Y n]
     change ((moduleRComp B f g).hom.app ((res a V).obj N)).val.app Y
         (((pushRes a f).hom.app N).val.app ((Scheme.proEtaleBaseChange g).op.obj Y) n) =
@@ -324,11 +321,11 @@ theorem openResMap_isIso [Finite B] [Finite C] (a : B →+* C)
   let β := fixedPull (A := B) j
   let γ := fixedPull (A := C) j
   let δ := TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso a j).hom
-  have : IsIso α.natTrans := by dsimp only [α, TwoSquare.mk]; infer_instance
-  have : IsIso β.natTrans := fixedPull_isIso j
-  have : IsIso γ.natTrans := fixedPull_isIso j
-  have : IsIso δ.natTrans := by dsimp only [δ, TwoSquare.mk]; infer_instance
-  have : IsIso (TwoSquare.hComp γ δ).natTrans := by
+  have : IsIso α := by dsimp only [α, TwoSquare.mk]; infer_instance
+  have : IsIso β := fixedPull_isIso j
+  have : IsIso γ := fixedPull_isIso j
+  have : IsIso δ := by dsimp only [δ, TwoSquare.mk]; infer_instance
+  have : IsIso (TwoSquare.hComp γ δ) := by
     dsimp only [TwoSquare.hComp, TwoSquare.mk]
     infer_instance
   let oa := moduleJAdj C j
@@ -340,47 +337,47 @@ theorem openResMap_isIso [Finite B] [Finite C] (a : B →+* C)
   have := fixedRestriction_equivalence C U
   have := fixedRestriction_equivalence C X
   have : IsIso ((mateEquiv oa od).symm
-      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv γ.natTrans))).natTrans :=
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv γ))) :=
     inverseMate_isIso_of_equivalences oa od _
   have : IsIso ((mateEquiv od oc).symm
-      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv δ.natTrans))).natTrans := by
-    simp only [δ, TwoSquare.mk, TwoSquare.natTrans, IsIso.Iso.inv_hom]
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv δ))) := by
+    simp only [δ, TwoSquare.mk, IsIso.Iso.inv_hom]
     rw [← scalarPullbackModel_eq B j C a]
     exact scalarOpenModel_isIso B j C a
   have hw : IsIso ((mateEquiv oa oc).symm
       (TwoSquare.mk _ _ _ _
-        (CategoryTheory.inv (TwoSquare.hComp γ δ).natTrans))).natTrans := by
+        (CategoryTheory.inv (TwoSquare.hComp γ δ)))) := by
     rw [inv_hComp, inverseMate_vComp oa od oc]
     dsimp only [TwoSquare.hComp, TwoSquare.mk]
     infer_instance
-  let w := TwoSquare.mk _ _ _ _ (CategoryTheory.inv (TwoSquare.hComp γ δ).natTrans)
+  let w := TwoSquare.mk _ _ _ _ (CategoryTheory.inv (TwoSquare.hComp γ δ))
   let t := TwoSquare.hComp α β
-  have : IsIso t.natTrans := by
+  have : IsIso t := by
     dsimp only [t, TwoSquare.hComp, TwoSquare.mk]
     infer_instance
   let z := Functor.isoWhiskerRight (resFixed a X) _ ≪≫
-    asIso (TwoSquare.hComp γ δ).natTrans ≪≫
+    asIso (TwoSquare.hComp γ δ) ≪≫
     Functor.isoWhiskerLeft (modulePullback C j) (resFixed a U).symm
-  have ht : CategoryTheory.inv t.natTrans =
-      ((w.whiskerRight (resFixed a U).hom).whiskerLeft (resFixed a X).inv).natTrans := by
-    have hz : t.natTrans = z.hom := congrArg TwoSquare.natTrans (resPull_fixed a j)
+  have ht : CategoryTheory.inv t =
+      ((w.whiskerRight (resFixed a U).hom).whiskerLeft (resFixed a X).inv) := by
+    have hz : t = z.hom := (resPull_fixed a j)
     calc
-      CategoryTheory.inv t.natTrans = CategoryTheory.inv z.hom :=
+      CategoryTheory.inv t = CategoryTheory.inv z.hom :=
         IsIso.inv_eq_inv.mpr hz
       _ = _ := by
         simp only [IsIso.Iso.inv_hom, z, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
           Functor.isoWhiskerRight_inv, Iso.symm_inv, asIso_inv, w,
           TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk, Category.assoc]
   have hi : IsIso ((mateEquiv oa oc).symm
-      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans))).natTrans := by
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t))) := by
     rw [ht]
     exact inverseMate_iso_edges oa oc (resFixed a U) (resFixed a X).symm w
   let x := (mateEquiv oa ob).symm (TwoSquare.mk _ _ _ _ (pullRes a j).inv)
   let y := (mateEquiv ob oc).symm
-    (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β.natTrans))
-  have : IsIso y.natTrans := inverseMate_isIso_of_equivalences ob oc _
+    (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β))
+  have : IsIso y := inverseMate_isIso_of_equivalences ob oc _
   have he : (mateEquiv oa oc).symm
-      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans)) = TwoSquare.hComp x y := by
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t)) = TwoSquare.hComp x y := by
     dsimp only [t]
     rw [inv_hComp]
     exact inverseMate_vComp oa ob oc _ _
@@ -497,7 +494,7 @@ theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
   · intro F
     have hu := unit_mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom) F
     change (res a X).map (adjC.unit.app F) ≫
-      ((mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans).app _ =
+      ((mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom))).app _ =
         adjB.unit.app _ ≫ (moduleDirectImage B f).map ((pullRes a f).hom.app F) at hu
     rw [hm] at hu
     exact hu
@@ -505,7 +502,7 @@ theorem pull_unit_counit [Finite B] [Finite C] (a : B →+* C)
     have hc := mateEquiv_counit adjC adjB
       (TwoSquare.mk _ _ _ _ (pullRes a f).hom) N
     change (modulePullback B f).map
-      ((mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).natTrans.app N) ≫
+      ((mateEquiv adjC adjB (TwoSquare.mk _ _ _ _ (pullRes a f).hom)).app N) ≫
         adjB.counit.app _ = (pullRes a f).hom.app _ ≫
           (res a Y).map (adjC.counit.app N) at hc
     rw [hm] at hc

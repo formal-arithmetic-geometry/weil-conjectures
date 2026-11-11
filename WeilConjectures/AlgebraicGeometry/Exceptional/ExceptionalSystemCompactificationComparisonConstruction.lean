@@ -67,29 +67,29 @@ private theorem localizeMate
       HD.map (φL.hom.app P) ≫ φH.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj P) =
         LD'.map (φG.hom.app P) ≫
           φL'.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj P) ≫
-          DerivedCategory.Q.map ((α.natTrans.mapHomologicalComplex (.up ℤ)).app P))
+          DerivedCategory.Q.map ((α.mapHomologicalComplex (.up ℤ)).app P))
     (hβ : ∀ K, βD.app (DerivedCategory.Q.obj K) ≫
       RD'.map (φH.hom.app K) ≫ φR'.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj K) =
         GD.map (φR.hom.app K) ≫
           φG.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
-          DerivedCategory.Q.map ((β.natTrans.mapHomologicalComplex (.up ℤ)).app K)) :
+          DerivedCategory.Q.map ((β.mapHomologicalComplex (.up ℤ)).app K)) :
     mateEquiv ad ad' αD = βD := by
   have hrep (P : CochainComplex A ℤ) := derivedMate_comparison
     (adj.mapHomologicalComplex (.up ℤ)) (adj'.mapHomologicalComplex (.up ℤ)) ad ad'
     φL.hom φL'.hom φR φR' φG φH hL hL'
-    (.mk _ _ _ _ (β.natTrans.mapHomologicalComplex (.up ℤ))) βD hβ
-    (α.natTrans.mapHomologicalComplex (.up ℤ))
+    (.mk _ _ _ _ (β.mapHomologicalComplex (.up ℤ))) βD hβ
+    (α.mapHomologicalComplex (.up ℤ))
     (fun P ↦ by
       rw [Adjunction.homEquiv_unit]
       apply HomologicalComplex.hom_ext
       intro i
       have hu := unit_mateEquiv adj adj' α (P.X i)
       change G.map (adj.unit.app (P.X i)) ≫
-        ((mateEquiv adj adj' α).natTrans).app (L.obj (P.X i)) =
-          adj'.unit.app (G.obj (P.X i)) ≫ R'.map (α.natTrans.app (P.X i)) at hu
+        ((mateEquiv adj adj' α)).app (L.obj (P.X i)) =
+          adj'.unit.app (G.obj (P.X i)) ≫ R'.map (α.app (P.X i)) at hu
       rw [hm] at hu
       exact hu.symm) P
-  have heq : ((mateEquiv ad ad').symm βD).natTrans = αD.natTrans := by
+  have heq : ((mateEquiv ad ad').symm βD) = αD := by
     apply (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
       (HomologicalComplex.quasiIso A (.up ℤ)) (DerivedCategory D)).map_injective
     apply NatTrans.ext
@@ -106,7 +106,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
 
 private theorem etaleOpenEvaluationMate (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :
     (mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)
-      (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)).natTrans =
+      (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)) =
       (S.openDerived.inverseEvaluation n).hom := by
   apply localizeMate S.val.openAdjunction (S.val.levelOpenAdjunction n)
     S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)
@@ -131,7 +131,7 @@ private theorem proOpenEvaluationMate
     {PZ : ExceptionalProEvaluation c.Z O ell}
     (P : ExceptionalProCompactSupport O ell c PX PY PZ) (n : ℕ) :
     (mateEquiv P.val.derivedOpenAdjunction (P.val.levelDerivedOpenAdjunction n)
-      (.mk _ _ _ _ (P.val.openDerivedEvaluation n).inv)).natTrans =
+      (.mk _ _ _ _ (P.val.openDerivedEvaluation n).inv)) =
       (P.val.openDerived.inverseEvaluation n).hom := by
   apply localizeMate P.val.openAdjunction (P.val.levelOpenAdjunction n)
     P.val.derivedOpenAdjunction (P.val.levelDerivedOpenAdjunction n)
@@ -223,7 +223,7 @@ theorem exceptionalSystemCompactificationComparison_exists
     (.mk _ _ _ _ RO.ordinary.inv)
   let τn (n : ℕ) := (mateEquiv (S.val.levelOpenAdjunction n)
     (P.val.levelOpenAdjunction n)).symm (.mk _ _ _ _ (RO.level n).inv)
-  have (n : ℕ) : IsIso (τn n).natTrans := hi n
+  have (n : ℕ) : IsIso (τn n) := hi n
   have hτ (M) : IsIso (τ.app M) := by
     refine @JointlyReflectIsomorphisms.isIso _ _ _ _ _ _
       (evaluations_jointlyReflect (K := Scheme.ProEt.topology c.Z) O ell) _ _
@@ -259,20 +259,20 @@ theorem exceptionalSystemCompactificationComparison_exists
         (CZ.ordinary.inverseEvaluation n).hom.app (S.val.openExtension.obj M)) :=
       (isIso_comp_left_iff _ _).mp hh
     exact (isIso_comp_right_iff _ _).mp this
-  have : IsIso τ.natTrans := NatIso.isIso_of_isIso_app τ.natTrans
+  have : IsIso τ := NatIso.isIso_of_isIso_app τ
   obtain ⟨eD, heD⟩ := derivedSquare_exists S.val.openExtension CX.ordinary.inverse
     CZ.ordinary.inverse P.val.openExtension S.derivedOpen CX.image.system.inverse
     CZ.image.system.inverse P.val.derivedOpen S.val.openFactors
     CX.image.system.inverseFactors CZ.image.system.inverseFactors P.val.openFactors
-    (asIso τ.natTrans).symm
+    (asIso τ).symm
   have hlev (n : ℕ) := derivedSquare_exists (S.val.levelOpen n) (CX.ordinary.lift n).modules
     (CZ.ordinary.lift n).modules (P.val.levelOpen n) (S.levelDerivedOpen n)
     (CX.image.level n).inverse (CZ.image.level n).inverse (P.val.levelDerivedOpen n)
     (S.val.levelOpenFactors n) (CX.image.level n).inverseFactors
-    (CZ.image.level n).inverseFactors (P.val.levelOpenFactors n) (asIso (τn n).natTrans).symm
+    (CZ.image.level n).inverseFactors (P.val.levelOpenFactors n) (asIso (τn n)).symm
   choose eDn heDn using hlev
   have hmD : (mateEquiv S.derivedOpenAdjunction P.val.derivedOpenAdjunction
-      (.mk _ _ _ _ eD.inv)).natTrans = RO.square.inv := by
+      (.mk _ _ _ _ eD.inv)) = RO.square.inv := by
     apply localizeMate S.val.openAdjunction P.val.openAdjunction
       S.derivedOpenAdjunction P.val.derivedOpenAdjunction
       S.val.openFactors S.openDerived.system.inverseFactors
@@ -283,7 +283,7 @@ theorem exceptionalSystemCompactificationComparison_exists
     · exact derivedSquare_symm_rep S.val.openExtension CX.ordinary.inverse CZ.ordinary.inverse
         P.val.openExtension S.derivedOpen CX.image.system.inverse CZ.image.system.inverse
         P.val.derivedOpen S.val.openFactors CX.image.system.inverseFactors
-        CZ.image.system.inverseFactors P.val.openFactors (asIso τ.natTrans).symm eD heD
+        CZ.image.system.inverseFactors P.val.openFactors (asIso τ).symm eD heD
     · exact derivedSquare_symm_rep CZ.ordinary.inverse S.openImage.inverse
         P.val.openImage.inverse CX.ordinary.inverse CZ.image.system.inverse
         S.openDerived.system.inverse P.val.openDerived.system.inverse CX.image.system.inverse
@@ -292,7 +292,7 @@ theorem exceptionalSystemCompactificationComparison_exists
         RO.ordinary RO.square RO.property.2.2.2.2
   have hmDn (n : ℕ) :
       (mateEquiv (S.levelDerivedOpenAdjunction n) (P.val.levelDerivedOpenAdjunction n)
-        (.mk _ _ _ _ (eDn n).inv)).natTrans = (RO.derivedLevel n).inv := by
+        (.mk _ _ _ _ (eDn n).inv)) = (RO.derivedLevel n).inv := by
     apply localizeMate (S.val.levelOpenAdjunction n) (P.val.levelOpenAdjunction n)
       (S.levelDerivedOpenAdjunction n) (P.val.levelDerivedOpenAdjunction n)
       (S.val.levelOpenFactors n) (S.openDerived.level n).inverseFactors
@@ -306,7 +306,7 @@ theorem exceptionalSystemCompactificationComparison_exists
         (CX.image.level n).inverse (CZ.image.level n).inverse (P.val.levelDerivedOpen n)
         (S.val.levelOpenFactors n) (CX.image.level n).inverseFactors
         (CZ.image.level n).inverseFactors (P.val.levelOpenFactors n)
-        (asIso (τn n).natTrans).symm (eDn n) (heDn n)
+        (asIso (τn n)).symm (eDn n) (heDn n)
     · exact derivedSquare_symm_rep (CZ.ordinary.lift n).modules (S.openImage.lift n).modules
         (P.val.openImage.lift n).modules (CX.ordinary.lift n).modules
         (CZ.image.level n).inverse (S.openDerived.level n).inverse
@@ -318,26 +318,26 @@ theorem exceptionalSystemCompactificationComparison_exists
     (.mk _ _ _ _ RO.square.inv)
   let αn (n : ℕ) := (mateEquiv (S.levelDerivedOpenAdjunction n)
     (P.val.levelDerivedOpenAdjunction n)).symm (.mk _ _ _ _ (RO.derivedLevel n).inv)
-  have hα : α.natTrans = eD.inv := by
+  have hα : α = eD.inv := by
     exact (mateEquiv S.derivedOpenAdjunction P.val.derivedOpenAdjunction).symm_apply_eq.mpr
       hmD.symm
-  have hαn (n : ℕ) : (αn n).natTrans = (eDn n).inv := by
+  have hαn (n : ℕ) : (αn n) = (eDn n).inv := by
     exact (mateEquiv (S.levelDerivedOpenAdjunction n)
       (P.val.levelDerivedOpenAdjunction n)).symm_apply_eq.mpr (hmDn n).symm
-  have : IsIso α.natTrans := by rw [hα]; infer_instance
-  have (n : ℕ) : IsIso (αn n).natTrans := by rw [hαn]; infer_instance
-  let e := (asIso α.natTrans).symm
-  let en (n : ℕ) := (asIso (αn n).natTrans).symm
+  have : IsIso α := by rw [hα]; infer_instance
+  have (n : ℕ) : IsIso (αn n) := by rw [hαn]; infer_instance
+  let e := (asIso α).symm
+  let en (n : ℕ) := (asIso (αn n)).symm
   let record : ExceptionalSystemCompactificationComparisonData S CX CY CZ P :=
     { properSquare := RP
       openSquare := RO
       openComparison := e
       levelOpenComparison := en }
   refine ⟨⟨record, ?_, ?_, ?_⟩⟩
-  · exact congrArg TwoSquare.natTrans
+  · exact 
       ((mateEquiv S.derivedOpenAdjunction P.val.derivedOpenAdjunction).apply_symm_apply _)
   · intro n
-    exact congrArg TwoSquare.natTrans
+    exact
       ((mateEquiv (S.levelDerivedOpenAdjunction n)
         (P.val.levelDerivedOpenAdjunction n)).apply_symm_apply _)
   · intro n M

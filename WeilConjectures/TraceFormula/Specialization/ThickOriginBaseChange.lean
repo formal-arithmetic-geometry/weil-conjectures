@@ -90,7 +90,7 @@ lemma isIso_pullbackExchange_of_isUniversalHomeomorphism
     IsIso (φ.pullbackExchange Λ) := by
   have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
+      (pullbackSquareComparison Λ φ.commSq_j).hom) := by
     have := isIso_baseChangeMap_of_isUniversalHomeomorphism Λ hφ
     rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
   unfold pullbackExchange

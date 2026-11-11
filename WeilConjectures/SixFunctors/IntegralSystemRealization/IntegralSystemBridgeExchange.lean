@@ -54,7 +54,7 @@ private theorem mateBridge
     (a : L₁ ⊣ R₁) (a' : L₁' ⊣ R₁') (b : L₂ ⊣ R₂) (b' : L₂' ⊣ R₂')
     (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂') (eg : G ≅ G') (eh : H ≅ H')
     (α : TwoSquare G L₁ L₂ H) (β : TwoSquare G' L₁' L₂' H')
-    (h : α.natTrans ≫ (bridgePair e₁ eh).hom = (bridgePair eg e₂).hom ≫ β.natTrans)
+    (h : α ≫ (bridgePair e₁ eh).hom = (bridgePair eg e₂).hom ≫ β)
     (M : B) :
     (mateEquiv a b α).app M ≫
         (conjugateIsoEquiv b b' e₂.symm).hom.app (H.obj M) ≫
@@ -63,14 +63,13 @@ private theorem mateBridge
         (mateEquiv a' b' β).app M := by
   let w := (β.whiskerTop eg.hom).whiskerBottom eh.inv
   have hw : w.whiskerLeft e₁.inv = α.whiskerRight e₂.inv := by
-    apply TwoSquare.ext
-    intro X
+    refine NatTrans.ext (funext fun X ↦ ?_)
     have hx := congr_app h X
     simp only [bridgePair, Iso.trans_hom, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Category.assoc] at hx
     dsimp only [w, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-      TwoSquare.whiskerRight, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      TwoSquare.whiskerRight, TwoSquare.mk, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app]
     apply (cancel_epi (e₂.hom.app (G.obj X))).mp
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
@@ -83,7 +82,7 @@ private theorem mateBridge
   have hh := congr_app hm M
   rw [hn] at hh
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.whiskerRight, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] at hh
   simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
   rw [← Category.assoc, ← hh]
@@ -92,7 +91,7 @@ private theorem mateBridge
   dsimp only [Functor.comp_obj] at *
   simpa only [Category.comp_id] using
     eg.hom.naturality_assoc ((conjugateEquiv a a' e₁.inv).app M)
-      ((mateEquiv a' b' β).natTrans.app M)
+      ((mateEquiv a' b' β).app M)
 
 private theorem bridgePullComp (o : Operations l E) (c : Compositors l E o)
     (b : CanonicalBridge l E o) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :

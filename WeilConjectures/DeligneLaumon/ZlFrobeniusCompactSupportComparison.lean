@@ -134,7 +134,7 @@ def zlFrobeniusOpenMate :
     (openDerivedAdjunction (completed l E) (zlGeometricCompactification D f₀ c₀).i)
     (openDerivedAdjunction (completed l E) (zlGeometricCompactification D f₀ c₀).i)).symm
       (TwoSquare.mk _ _ _ _
-        (zlAmbientFrobeniusSquare D (zlCompactificationOpen D f₀ c₀) l E).hom)).natTrans
+        (zlAmbientFrobeniusSquare D (zlCompactificationOpen D f₀ c₀) l E).hom))
 
 /-- Proper direct-image mate of the same normalized Frobenius square.
 Source: blueprint Weil operations; Stacks 0D6D
@@ -150,7 +150,7 @@ def zlFrobeniusProperMate :
     (proEtaleRingDerivedAdjunction (zlGeometricCompactification D f₀ c₀).g
       ((completed l E).ring _) ((completed l E).ring _) ((completed l E).pull _))
     (TwoSquare.mk _ _ _ _
-      (zlAmbientFrobeniusSquare D (zlCompactificationProper D f₀ c₀) l E).inv)).natTrans
+      (zlAmbientFrobeniusSquare D (zlCompactificationProper D f₀ c₀) l E).inv))
 
 open Opposite in
 private theorem pushforward_of_ringIso_isEquivalence

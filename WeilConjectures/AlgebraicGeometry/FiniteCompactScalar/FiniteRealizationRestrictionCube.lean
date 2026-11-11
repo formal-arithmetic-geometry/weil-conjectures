@@ -353,7 +353,7 @@ private theorem forward_realization_mate
     Category.id_comp,
     Category.assoc]
   dsimp only [Equivalence.symm, Equivalence.toAdjunction, Equivalence.unit,
-    Equivalence.counit, TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj, Functor.comp_map]
+    Equivalence.counit, TwoSquare.mk, Functor.comp_obj, Functor.comp_map]
   simp only [Category.id_comp]
   all_goals rfl
 

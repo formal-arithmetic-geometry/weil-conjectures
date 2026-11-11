@@ -198,7 +198,7 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
 `𝟙_ D ⟶ [F X, F X]`, up to the unit map and the comparison map. -/
 @[reassoc]
 lemma ε_comp_map_id_comp_ihomComparison (X : C) :
-    ε F ≫ F.map (MonoidalClosed.id X) ≫ (ihomComparison F X).natTrans.app X =
+    ε F ≫ F.map (MonoidalClosed.id X) ≫ (ihomComparison F X).app X =
       MonoidalClosed.id (F.obj X) :=
   uncurry_injective (by
     rw [uncurry_natural_left, uncurry_natural_left, uncurry_eq, ihomComparison_ev,
@@ -208,14 +208,14 @@ lemma ε_comp_map_id_comp_ihomComparison (X : C) :
 
 /-- If the unit map and the comparison map of `F` at `X` are isomorphisms, `F` maps the
 canonical map `𝟙_ C ⟶ [X, X]` to an isomorphism if `𝟙_ D ⟶ [F X, F X]` is one. -/
-lemma isIso_map_id [IsIso (ε F)] (X : C) [IsIso ((ihomComparison F X).natTrans.app X)]
+lemma isIso_map_id [IsIso (ε F)] (X : C) [IsIso ((ihomComparison F X).app X)]
     [IsIso (MonoidalClosed.id (F.obj X))] : IsIso (F.map (MonoidalClosed.id X)) := by
-  have : IsIso (ε F ≫ F.map (MonoidalClosed.id X) ≫ (ihomComparison F X).natTrans.app X) := by
+  have : IsIso (ε F ≫ F.map (MonoidalClosed.id X) ≫ (ihomComparison F X).app X) := by
     rw [ε_comp_map_id_comp_ihomComparison]
     infer_instance
-  have : IsIso (F.map (MonoidalClosed.id X) ≫ (ihomComparison F X).natTrans.app X) :=
+  have : IsIso (F.map (MonoidalClosed.id X) ≫ (ihomComparison F X).app X) :=
     IsIso.of_isIso_comp_left (ε F) _
-  exact IsIso.of_isIso_comp_right _ ((ihomComparison F X).natTrans.app X)
+  exact IsIso.of_isIso_comp_right _ ((ihomComparison F X).app X)
 
 end Functor.LaxMonoidal
 

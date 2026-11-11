@@ -460,25 +460,25 @@ variable {A D E F : Type*} [Category A] [Category D] [Category E] [Category F]
 
 private theorem inverseMate_isIso_of_equivalences (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     [G.IsEquivalence] [H.IsEquivalence]
-    (β : TwoSquare R₁ H G R₂) [IsIso β.natTrans] :
-    IsIso ((mateEquiv a b).symm β).natTrans := by
+    (β : TwoSquare R₁ H G R₂) [IsIso β] :
+    IsIso ((mateEquiv a b).symm β) := by
   let eG := G.asEquivalence.toAdjunction
   let eH := H.asEquivalence.toAdjunction
   let α := (mateEquiv a b).symm β
-  have hi : IsIso (mateEquiv eH eG β).natTrans := by
+  have hi : IsIso (mateEquiv eH eG β) := by
     dsimp only [mateEquiv, Equiv.coe_fn_mk]
     infer_instance
   have he := iterated_mateEquiv_conjugateEquiv a b eG eH α
-  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))).natTrans = _ at he
+  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))) = _ at he
   rw [Equiv.apply_symm_apply] at he
-  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α.natTrans) := he ▸ hi
-  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α.natTrans
+  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α) := he ▸ hi
+  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α
 
 private theorem inverseMate_iso_edges (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (e : G' ≅ G) (f : H ≅ H') (β : TwoSquare R₁ H G R₂)
-    [IsIso ((mateEquiv a b).symm β).natTrans] :
+    [IsIso ((mateEquiv a b).symm β)] :
     IsIso ((mateEquiv a b).symm
-      ((β.whiskerRight e.hom).whiskerLeft f.hom)).natTrans := by
+      ((β.whiskerRight e.hom).whiskerLeft f.hom)) := by
   have he := mateEquiv_whiskerTop_whiskerBottom a b ((mateEquiv a b).symm β)
     e.hom f.hom
   rw [Equiv.apply_symm_apply] at he
@@ -495,9 +495,9 @@ private theorem inverseMate_ofNatIsoRight (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂
     (β : TwoSquare R₁ H G R₂) :
     ((mateEquiv (a.ofNatIsoRight e.symm) (b.ofNatIsoRight f.symm)).symm
       (TwoSquare.mk _ _ _ _
-        (Functor.whiskerRight e.hom G ≫ β.natTrans ≫
-          Functor.whiskerLeft H f.inv))).natTrans =
-      ((mateEquiv a b).symm β).natTrans := by
+        (Functor.whiskerRight e.hom G ≫ β ≫
+          Functor.whiskerLeft H f.inv))) =
+      ((mateEquiv a b).symm β) := by
   ext X
   dsimp only [mateEquiv, Equiv.coe_fn_symm_mk, Adjunction.ofNatIsoRight_unit,
     Adjunction.ofNatIsoRight_counit, NatTrans.comp_app, Functor.whiskerRight_app,
@@ -519,9 +519,9 @@ variable {A D E F K L : Type*} [Category A] [Category D] [Category E] [Category 
   {P₁ : A ⥤ D} {P₂ : E ⥤ F} {P₃ : K ⥤ L}
 
 private theorem isIso_of_hComp (α : TwoSquare G₁ P₁ P₂ H₁)
-    (β : TwoSquare G₂ P₂ P₃ H₂) [IsIso β.natTrans]
-    [IsIso (TwoSquare.hComp α β).natTrans] [H₂.ReflectsIsomorphisms] :
-    IsIso α.natTrans := by
+    (β : TwoSquare G₂ P₂ P₃ H₂) [IsIso β]
+    [IsIso (TwoSquare.hComp α β)] [H₂.ReflectsIsomorphisms] :
+    IsIso α := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
   have : IsIso (β.app (G₁.obj M) ≫ H₂.map (α.app M)) := by
@@ -531,11 +531,11 @@ private theorem isIso_of_hComp (α : TwoSquare G₁ P₁ P₂ H₁)
   exact isIso_of_reflects_iso _ H₂
 
 private theorem inv_hComp (α : TwoSquare G₁ P₁ P₂ H₁)
-    (β : TwoSquare G₂ P₂ P₃ H₂) [IsIso α.natTrans] [IsIso β.natTrans]
-    [IsIso (TwoSquare.hComp α β).natTrans] :
-    CategoryTheory.inv (TwoSquare.hComp α β).natTrans =
-      (TwoSquare.vComp (TwoSquare.mk _ _ _ _ (CategoryTheory.inv α.natTrans))
-        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β.natTrans))).natTrans := by
+    (β : TwoSquare G₂ P₂ P₃ H₂) [IsIso α] [IsIso β]
+    [IsIso (TwoSquare.hComp α β)] :
+    CategoryTheory.inv (TwoSquare.hComp α β) =
+      (TwoSquare.vComp (TwoSquare.mk _ _ _ _ (CategoryTheory.inv α))
+        (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β))) := by
   simp [TwoSquare.hComp, TwoSquare.vComp]
 
 variable {J₁ : D ⥤ A} {J₂ : F ⥤ E} {J₃ : L ⥤ K}
@@ -795,7 +795,7 @@ private theorem cFixed_direct {X Y : Scheme.{u}} (f : X ⟶ Y)
         (C B X Λ φ) (C B Y Λ φ) (moduleDirectImage B f) (cDirect B f Λ φ).hom)
       (TwoSquare.mk (moduleDirectImage B f)
         (fixedRestriction B X) (fixedRestriction B Y)
-        (lowerStar (ModuleCat.{u + 1} B) f) (fixedDirect B f).hom)).natTrans ≫
+        (lowerStar (ModuleCat.{u + 1} B) f) (fixedDirect B f).hom)) ≫
       Functor.whiskerRight (cFixed B X Λ φ).hom (lowerStar (ModuleCat.{u + 1} B) f) =
     Functor.whiskerLeft (lowerStar (ModuleCat.{u + 1} Λ) f) (cFixed B Y Λ φ).hom := by
   ext M V m
@@ -812,7 +812,7 @@ private theorem scalar_direct_mate
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)) =
         𝟙 (lowerStar (ModuleCat.{u + 1} B) f ⋙
           Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ) := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
@@ -821,7 +821,7 @@ private theorem scalar_direct_mate
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))).natTrans = _
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   rw [conjugateEquiv_upperStarRestrictScalarsIso_hom]
   ext M ⟨U⟩ x
@@ -834,7 +834,7 @@ private theorem siteDirect_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
     [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (mateEquiv (cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
       (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
-      (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv).natTrans =
+      (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv) =
         lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ) := by
   change mateEquiv _ _ _ = (mateEquiv
     (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
@@ -843,8 +843,7 @@ private theorem siteDirect_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
   apply (mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} Λ) X)
     (comparisonAdjunction (ModuleCat.{u + 1} Λ) Y)).injective
   rw [Equiv.apply_symm_apply]
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
-  change (mateEquiv _ _ (mateEquiv _ _ _)).natTrans = _
+  change (mateEquiv _ _ (mateEquiv _ _ _)) = _
   rw [iterated_mateEquiv_conjugateEquiv]
   change conjugateEquiv
     ((cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f).comp
@@ -868,7 +867,7 @@ private theorem hDirect_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   have : IsIso (mateEquiv
       (cbcEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
       (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
-      (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv).natTrans := by
+      (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv) := by
     rw [siteDirect_eq]
     exact isIso_lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ)
   dsimp only [hDirect]
@@ -903,10 +902,9 @@ private theorem cPullback_fixed {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hd : d =
       ((mateEquiv a c s).whiskerRight (cFixed B Y Λ φ).hom).whiskerLeft
         (cFixed B X Λ φ).inv := by
-    apply (TwoSquare.equivNatTrans _ _ _ _).injective
-    change d.natTrans = Functor.whiskerLeft _ (cFixed B Y Λ φ).hom ≫
-      (mateEquiv a c s).natTrans ≫ Functor.whiskerRight (cFixed B X Λ φ).inv _
-    have hs : (mateEquiv a c s).natTrans = 𝟙 _ := scalar_direct_mate φ f
+    change d = Functor.whiskerLeft _ (cFixed B Y Λ φ).hom ≫
+      (mateEquiv a c s) ≫ Functor.whiskerRight (cFixed B X Λ φ).inv _
+    have hs : (mateEquiv a c s) = 𝟙 _ := scalar_direct_mate φ f
     rw [hs, Category.id_comp]
     apply (cancel_mono (Functor.whiskerRight (cFixed B X Λ φ).hom
       (lowerStar (ModuleCat.{u + 1} B) f))).mp
@@ -924,15 +922,15 @@ private theorem cPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     IsIso ((mateEquiv (cbcProEtaleComparisonAdjunction (ModuleCat.{u + 1} Λ) f)
       (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
-        (coefficients B X) (constantRingIso B f))).symm (cDirect B f Λ φ).hom).natTrans := by
+        (coefficients B X) (constantRingIso B f))).symm (cDirect B f Λ φ).hom) := by
   let a := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
   let b := Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)
   let c := upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f
   let α := (mateEquiv a b).symm (cDirect B f Λ φ).hom
   let β := (mateEquiv b c).symm (fixedDirect B f).hom
-  have : IsIso β.natTrans := inverseMate_isIso_of_equivalences b c (fixedDirect B f).hom
-  have : IsIso (TwoSquare.hComp α β).natTrans := by
+  have : IsIso β := inverseMate_isIso_of_equivalences b c (fixedDirect B f).hom
+  have : IsIso (TwoSquare.hComp α β) := by
     rw [show TwoSquare.hComp α β = _ from cPullback_fixed B f Λ φ]
     dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.mk]
     infer_instance
@@ -957,10 +955,10 @@ theorem hPullbackInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1))
     (coefficients B X) (constantRingIso B f)
   let α := (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) f).inv
   let β := ((mateEquiv b c).symm (cDirect B f Λ φ).hom)
-  have : IsIso β.natTrans := cPullback_isIso B f Λ φ
+  have : IsIso β := cPullback_isIso B f Λ φ
   have h := mateEquiv_vcomp a b c α β
   rw [Equiv.apply_symm_apply] at h
-  have he : hPullbackInv B f Λ φ = (TwoSquare.hComp α β).natTrans := by
+  have he : hPullbackInv B f Λ φ = (TwoSquare.hComp α β) := by
     apply (mateEquiv a c).injective
     change (mateEquiv a c) ((mateEquiv a c).symm (hDirect B f Λ φ)) = _
     rw [Equiv.apply_symm_apply]
@@ -1002,7 +1000,7 @@ private theorem scalarOpenModel_isIso {U X : Scheme.{u}}
     IsIso ((mateEquiv
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)).symm
-        (scalarPullbackModel B j Λ φ).inv).natTrans := by
+        (scalarPullbackModel B j Λ φ).inv) := by
   have he := inverseMate_ofNatIsoRight
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Λ) j)
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} B) j)
@@ -1018,7 +1016,7 @@ private theorem scalarOpenModel_isIso {U X : Scheme.{u}}
         (Functor.whiskerRight
             (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} Λ) j).hom _ ≫
           (scalarRestrictionModel B j Λ φ).inv ≫ Functor.whiskerLeft _
-            (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} B) j).inv))).natTrans)
+            (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} B) j).inv))))
   rw [he]
   exact scalarMap_isIso φ j
 
@@ -1027,7 +1025,7 @@ private theorem scalarRestriction_direct_mate {U X : Scheme.{u}}
     (mateEquiv
       (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} B) j)
-      (TwoSquare.mk _ _ _ _ (scalarRestrictionModel B j Λ φ).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionModel B j Λ φ).hom)) =
       𝟙 (lowerStar (ModuleCat.{u + 1} Λ) j ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology X) φ) := by
   ext M V m
@@ -1044,7 +1042,7 @@ private theorem scalarPullbackModel_direct_mate {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (Λ : Type (u + 1)) [CommRing Λ] (φ : B →+* Λ) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) j)
-      (scalarPullbackModel B j Λ φ).hom).natTrans =
+      (scalarPullbackModel B j Λ φ).hom) =
       𝟙 (lowerStar (ModuleCat.{u + 1} Λ) j ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology X) φ) := by
   change (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
@@ -1057,7 +1055,7 @@ private theorem scalarPullbackModel_direct_mate {U X : Scheme.{u}}
         Functor.whiskerRight
           ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).leftAdjointUniq
             (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)).inv
-          (Sheaf.restrictScalars (Scheme.ProEt.topology U) φ)))).natTrans = _
+          (Sheaf.restrictScalars (Scheme.ProEt.topology U) φ)))) = _
   rw [mateEquiv_leftAdjointUniq]
   exact scalarRestriction_direct_mate B j Λ φ
 
@@ -1067,7 +1065,7 @@ private theorem siteOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion
     IsIso ((mateEquiv
       (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)).symm
-        (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom).natTrans := by
+        (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom) := by
   let e := Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Λ) j
   let p := openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Λ) j
   let uEt := Etale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} Λ) j
@@ -1083,14 +1081,14 @@ private theorem siteOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion
         (ModuleCat.{u + 1} Λ) j).hom.app F))).mp
     simp only [β, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
     exact (openComparison_unit_normalization Λ j).2 F
-  have : IsIso ((mateEquiv e p).symm γ).natTrans := by
+  have : IsIso ((mateEquiv e p).symm γ) := by
     rw [← hm, Equiv.symm_apply_apply]
     change IsIso (openImmersionLowerShriekComparisonUpperStarIso
       (ModuleCat.{u + 1} Λ) j).inv
     infer_instance
   have hγ : (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom =
       Functor.whiskerRight uEt.hom (comparisonUpperStar (ModuleCat.{u + 1} Λ) U) ≫
-        γ.natTrans ≫ Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
+        γ ≫ Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
           uPro.inv := by
     change (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom =
       Functor.whiskerRight uEt.hom (comparisonUpperStar (ModuleCat.{u + 1} Λ) U) ≫
@@ -1104,7 +1102,7 @@ private theorem siteOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion
   change IsIso (((mateEquiv (e.ofNatIsoRight uEt.symm)
     (p.ofNatIsoRight uPro.symm)).symm
       (TwoSquare.mk _ _ _ _
-        (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom)).natTrans)
+        (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).hom)))
   rw [hγ]
   erw [inverseMate_ofNatIsoRight e p uEt uPro γ]
   infer_instance
@@ -1115,7 +1113,6 @@ private theorem scalarPullbackModel_eq {U X : Scheme.{u}}
   apply Iso.ext
   apply (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) j)).injective
-  apply (TwoSquare.equivNatTrans _ _ _ _).injective
   exact (scalarPullbackModel_direct_mate B j Λ φ).trans
     (scalar_direct_mate φ j).symm
 
@@ -1126,10 +1123,10 @@ private theorem cOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     let b := Scheme.proEtaleRingModuleAdjunction j (coefficients B X)
       (coefficients B U) (constantRingIso B j)
     let α := (mateEquiv a b).symm (cDirect B j Λ φ).hom
-    letI : IsIso α.natTrans := cPullback_isIso B j Λ φ
+    letI : IsIso α := cPullback_isIso B j Λ φ
     IsIso ((mateEquiv
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
-      (moduleJAdj B j)).symm (CategoryTheory.inv α.natTrans)).natTrans := by
+      (moduleJAdj B j)).symm (CategoryTheory.inv α)) := by
   dsimp only
   let a := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
   let b := Scheme.proEtaleRingModuleAdjunction j (coefficients B X)
@@ -1137,44 +1134,44 @@ private theorem cOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   let c := upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) j
   let α := (mateEquiv a b).symm (cDirect B j Λ φ).hom
   let β := (mateEquiv b c).symm (fixedDirect B j).hom
-  have : IsIso α.natTrans := cPullback_isIso B j Λ φ
-  have : IsIso β.natTrans := inverseMate_isIso_of_equivalences b c (fixedDirect B j).hom
+  have : IsIso α := cPullback_isIso B j Λ φ
+  have : IsIso β := inverseMate_isIso_of_equivalences b c (fixedDirect B j).hom
   let t := TwoSquare.hComp α β
-  have : IsIso t.natTrans := by
+  have : IsIso t := by
     dsimp only [t, TwoSquare.hComp]
     infer_instance
   let oa := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j
   let ob := moduleJAdj B j
   let oc := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j
   let s := TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ j).inv
-  have : IsIso ((mateEquiv oa oc).symm s).natTrans := by
+  have : IsIso ((mateEquiv oa oc).symm s) := by
     change IsIso ((mateEquiv oa oc).symm
-      (upperStarRestrictScalarsIso φ j).inv).natTrans
+      (upperStarRestrictScalarsIso φ j).inv)
     rw [← scalarPullbackModel_eq B j Λ φ]
     exact scalarOpenModel_isIso B j Λ φ
   let d := (s.whiskerRight (cFixed B U Λ φ).hom).whiskerLeft (cFixed B X Λ φ).inv
-  have : IsIso ((mateEquiv oa oc).symm d).natTrans :=
+  have : IsIso ((mateEquiv oa oc).symm d) :=
     inverseMate_iso_edges oa oc (cFixed B U Λ φ) (cFixed B X Λ φ).symm s
   let z := (Functor.isoWhiskerRight (cFixed B X Λ φ)
       (upperStar (ModuleCat.{u + 1} B) j) ≪≫ upperStarRestrictScalarsIso φ j) ≪≫
     Functor.isoWhiskerLeft (upperStar (ModuleCat.{u + 1} Λ) j) (cFixed B U Λ φ).symm
-  have hz : t.natTrans = z.hom := congrArg TwoSquare.natTrans
+  have hz : t = z.hom := 
     (cPullback_fixed B j Λ φ)
-  have hd : CategoryTheory.inv t.natTrans = d.natTrans := by
+  have hd : CategoryTheory.inv t = d := by
     calc
-      CategoryTheory.inv t.natTrans = CategoryTheory.inv z.hom := IsIso.inv_eq_inv.mpr hz
-      _ = d.natTrans := by
+      CategoryTheory.inv t = CategoryTheory.inv z.hom := IsIso.inv_eq_inv.mpr hz
+      _ = d := by
         simp only [IsIso.Iso.inv_hom, z, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
           Functor.isoWhiskerRight_inv, Iso.symm_inv, d, s, TwoSquare.whiskerRight,
           TwoSquare.whiskerLeft, TwoSquare.mk, Category.assoc]
   have ht : IsIso ((mateEquiv oa oc).symm
-      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans))).natTrans := by
+      (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t))) := by
     rw [hd]
     infer_instance
-  let γ := (mateEquiv oa ob).symm (TwoSquare.mk _ _ _ _ (CategoryTheory.inv α.natTrans))
-  let δ := (mateEquiv ob oc).symm (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β.natTrans))
-  have : IsIso δ.natTrans := inverseMate_isIso_of_equivalences ob oc _
-  have he : (mateEquiv oa oc).symm (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t.natTrans)) =
+  let γ := (mateEquiv oa ob).symm (TwoSquare.mk _ _ _ _ (CategoryTheory.inv α))
+  let δ := (mateEquiv ob oc).symm (TwoSquare.mk _ _ _ _ (CategoryTheory.inv β))
+  have : IsIso δ := inverseMate_isIso_of_equivalences ob oc _
+  have he : (mateEquiv oa oc).symm (TwoSquare.mk _ _ _ _ (CategoryTheory.inv t)) =
       TwoSquare.hComp γ δ := by
     dsimp only [t]
     rw [inv_hComp]
@@ -1194,7 +1191,7 @@ noncomputable def hOpenInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
       Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j ⋙ H B X Λ φ :=
   ((mateEquiv (Etale.openImmersionLowerShriekUpperStarAdjunction
     (ModuleCat.{u + 1} Λ) j) (moduleJAdj B j)).symm
-    (@inv _ _ _ _ (hPullbackInv B j Λ φ) (hPullbackInv_isIso B j Λ φ))).natTrans
+    (@inv _ _ _ _ (hPullbackInv B j Λ φ) (hPullbackInv_isIso B j Λ φ)))
 
 /-- The specified inverse open comparison is invertible.
 Source: Stacks, Tag 09AF
@@ -1217,14 +1214,14 @@ theorem hOpenInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (coefficients B U) (constantRingIso B j)
   let α := (cbcComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j).inv
   let β := (mateEquiv b c).symm (cDirect B j Λ φ).hom
-  have : IsIso β.natTrans := cPullback_isIso B j Λ φ
-  have : IsIso (TwoSquare.hComp α β).natTrans := by
+  have : IsIso β := cPullback_isIso B j Λ φ
+  have : IsIso (TwoSquare.hComp α β) := by
     dsimp only [TwoSquare.hComp]
     infer_instance
   have : IsIso (hPullbackInv B j Λ φ) := hPullbackInv_isIso B j Λ φ
   have hp := mateEquiv_vcomp a b c α β
   rw [Equiv.apply_symm_apply] at hp
-  have he : hPullbackInv B j Λ φ = (TwoSquare.hComp α β).natTrans := by
+  have he : hPullbackInv B j Λ φ = (TwoSquare.hComp α β) := by
     apply (mateEquiv a c).injective
     change (mateEquiv a c) ((mateEquiv a c).symm (hDirect B j Λ φ)) = _
     rw [Equiv.apply_symm_apply]
@@ -1234,23 +1231,23 @@ theorem hOpenInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   let oc := moduleJAdj B j
   let γ := TwoSquare.mk _ _ _ _ (cbcComparisonCoefficientPullbackIso
     (ModuleCat.{u + 1} Λ) j).hom
-  let δ := TwoSquare.mk _ _ _ _ (CategoryTheory.inv β.natTrans)
-  have hi : CategoryTheory.inv (hPullbackInv B j Λ φ) = (TwoSquare.vComp γ δ).natTrans := by
+  let δ := TwoSquare.mk _ _ _ _ (CategoryTheory.inv β)
+  have hi : CategoryTheory.inv (hPullbackInv B j Λ φ) = (TwoSquare.vComp γ δ) := by
     calc
       CategoryTheory.inv (hPullbackInv B j Λ φ) =
-          CategoryTheory.inv (TwoSquare.hComp α β).natTrans := IsIso.inv_eq_inv.mpr he
-      _ = (TwoSquare.vComp γ δ).natTrans := by
+          CategoryTheory.inv (TwoSquare.hComp α β) := IsIso.inv_eq_inv.mpr he
+      _ = (TwoSquare.vComp γ δ) := by
         simpa only [α, γ, δ, IsIso.Iso.inv_inv] using inv_hComp α β
-  have : IsIso ((mateEquiv oa ob).symm γ).natTrans := siteOpen_isIso j Λ
-  have : IsIso ((mateEquiv ob oc).symm δ).natTrans := cOpen_isIso B j Λ φ
-  change IsIso ((mateEquiv oa oc).symm (CategoryTheory.inv (hPullbackInv B j Λ φ))).natTrans
+  have : IsIso ((mateEquiv oa ob).symm γ) := siteOpen_isIso j Λ
+  have : IsIso ((mateEquiv ob oc).symm δ) := cOpen_isIso B j Λ φ
+  change IsIso ((mateEquiv oa oc).symm (CategoryTheory.inv (hPullbackInv B j Λ φ)))
   rw [hi]
-  change IsIso ((mateEquiv oa oc).symm (TwoSquare.vComp γ δ)).natTrans
+  change IsIso ((mateEquiv oa oc).symm (TwoSquare.vComp γ δ))
   have hu : IsIso (TwoSquare.hComp ((mateEquiv oa ob).symm γ)
-      ((mateEquiv ob oc).symm δ)).natTrans := by
+      ((mateEquiv ob oc).symm δ)) := by
     dsimp only [TwoSquare.hComp]
     infer_instance
-  exact (congrArg TwoSquare.natTrans (inverseMate_vComp oa ob oc γ δ)).symm ▸ hu
+  exact ((inverseMate_vComp oa ob oc γ δ)).symm ▸ hu
 
 /-- The forward open comparison is the inverse of the specified open-adjunction mate.
 Source: Stacks, Tag 09AF
