@@ -85,7 +85,7 @@ private theorem difference_iso_of_nilpotent {B : Type*} [Category* B]
   obtain ⟨e, he⟩ := ha
   have hnil : IsNilpotent s := by
     refine ⟨e, End.ext (Pi.hom_ext _ _ fun j ↦ ?_)⟩
-    rw [hs, he, End.zero_asHom, comp_zero, zero_comp]
+    simp only [hs, he, End.zero_asHom, comp_zero, zero_comp]
   exact (isUnit_iff_isIso (1 - s)).mp hnil.isUnit_one_sub
 
 private def endPower {B : Type*} [Category* B] {M : B} (a : End M) (n : ℕ) :
