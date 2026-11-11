@@ -82,9 +82,9 @@ lemma bidual_uncurry_str (A B : ProEtaleWeilSheaf k₀ l X) :
     (A.str.hom.hom ⊗ₘ (ProEtaleWeilSheaf.ihom k₀ l X A B).str.hom.hom) ≫
         ((Mod.bidual A.carrier B.carrier).hom ▷ (ProEtaleWeilSheaf.ihom k₀ l X A B).carrier.X ≫
           Mod.evaluation (ProEtaleWeilSheaf.ihom k₀ l X A B).carrier B.carrier) =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
           A.carrier.X (ProEtaleWeilSheaf.ihom k₀ l X A B).carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           ((Mod.bidual A.carrier B.carrier).hom ▷ (ProEtaleWeilSheaf.ihom k₀ l X A B).carrier.X ≫
             Mod.evaluation (ProEtaleWeilSheaf.ihom k₀ l X A B).carrier B.carrier) ≫
         B.str.hom.hom := by
