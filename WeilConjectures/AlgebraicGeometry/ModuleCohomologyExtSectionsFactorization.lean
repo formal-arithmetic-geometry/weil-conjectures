@@ -18,24 +18,6 @@ Source: Stacks Project, Tags 015E and 03FD.
 (blueprint: new-module-cohomology-ext-sections-factorization)
 -/
 
-private meta def ps043ExprDiff (fuel : Nat) (path : String)
-    (a b : Lean.Expr) : Lean.MetaM Unit := do
-  let a := a.consumeMData
-  let b := b.consumeMData
-  if a == b then return
-  match fuel with
-  | 0 => Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
-  | n + 1 =>
-    if a.isApp && b.isApp &&
-        (a.getAppFn == b.getAppFn ||
-          (a.getAppFn.isConst && b.getAppFn.isConst &&
-            a.getAppFn.constName! == b.getAppFn.constName!)) &&
-        a.getAppArgs.size == b.getAppArgs.size then
-      for i in [:a.getAppArgs.size] do
-        ps043ExprDiff n s!"{path}.{i}" a.getAppArgs[i]! b.getAppArgs[i]!
-    else
-      Lean.logInfo m!"PS043 DIFF {path}:\nactual: {a}\nexpected: {b}"
-
 @[expose] public section
 universe u
 set_option autoImplicit false
@@ -142,13 +124,10 @@ theorem ext_sections_factorization
     (siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p)
     (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm hcomp x
   run_tac do Lean.logInfo m!"PS043 helper applied: {← IO.monoMsNow}"
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let expected ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
-    let actual ← Lean.Meta.zetaReduce
-      (← Lean.instantiateMVars
-        (← Lean.Meta.inferType (.fvar (← Lean.Elab.Tactic.getFVarId (Lean.mkIdent `h)))))
-    ps043ExprDiff 12 "type" actual expected
-  dsimp only [id, AlgebraicGeometry.Scheme.Modules.H, Sheaf.functorH] at h ⊢
+  dsimp only [id, Functor.comp_obj, RingedSpace.moduleCohomology,
+    AlgebraicGeometry.Scheme.Modules.H, AlgebraicGeometry.Scheme.Modules.instAddCommGroupH,
+    Sheaf.functorH, Sheaf.H, Sheaf.H'] at h ⊢
+  run_tac do Lean.logInfo m!"PS043 object representations normalized: {← IO.monoMsNow}"
   exact h
   run_tac do Lean.logInfo m!"PS043 main end: {← IO.monoMsNow}"
 
