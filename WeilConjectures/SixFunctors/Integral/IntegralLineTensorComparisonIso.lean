@@ -180,8 +180,6 @@ theorem integralLineTensorComparison_iso
       (CochainComplex.PrincipalCone.unit (integralKoszulScalar l E X (G.obj P.obj)))) := by
     have hu : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
         (End.of (G.map (integralKoszulScalar l E X P.obj).asHom)))) := by
-      change IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-        (End.of (G.map (integralKoszulScalar l E X P.obj).asHom))))
       rw [← hc, Functor.map_comp]
       infer_instance
     exact (congrArg (fun μ : End (G.obj P.obj) ↦ IsIso (DerivedCategory.Q.map
