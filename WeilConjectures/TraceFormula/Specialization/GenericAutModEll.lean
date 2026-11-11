@@ -59,7 +59,9 @@ noncomputable def baseChangeAutActionHom
     GenericAut k' K →* End (((baseChange hM b hb v hv).nearbyCycles Λ).obj A) where
   toFun σ := .of ((baseChangeAut hM b hb v hv σ).autAction Λ A)
   map_one' := End.ext (autAction_baseChangeAut_one hM b hb v hv Λ A)
-  map_mul' σ τ := End.ext (autAction_baseChangeAut_mul hM b hb v hv Λ σ τ A)
+  map_mul' σ τ := by
+    apply End.ext
+    exact autAction_baseChangeAut_mul hM b hb v hv Λ σ τ A
 
 @[simp]
 lemma baseChangeAutActionHom_apply
