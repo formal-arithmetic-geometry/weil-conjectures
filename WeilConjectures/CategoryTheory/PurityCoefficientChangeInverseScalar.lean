@@ -47,8 +47,8 @@ theorem map_inverse_nsmul_id_natural
     [IsIso (n • 𝟙 X)] [IsIso (n • 𝟙 Y)] :
     F.map ((Ring.inverse (M₀ := End X) (n • (1 : End X)))).asHom ≫ e =
       e ≫ (Ring.inverse (M₀ := End Y) (n • (1 : End Y))).asHom := by
-  haveI : IsIso (n • (1 : End X)).asHom := ‹IsIso (n • 𝟙 X)›
-  haveI : IsIso (n • (1 : End Y)).asHom := ‹IsIso (n • 𝟙 Y)›
+  have : IsIso (n • (1 : End X)).asHom := ‹IsIso (n • 𝟙 X)›
+  have : IsIso (n • (1 : End Y)).asHom := ‹IsIso (n • 𝟙 Y)›
   rw [ringInverse_eq_categoricalInv, ringInverse_eq_categoricalInv, F.map_inv]
   simp only [End.nsmul_asHom, End.one_asHom]
   have hs : F.map (n • 𝟙 X) ≫ e = e ≫ (n • 𝟙 Y) := by
