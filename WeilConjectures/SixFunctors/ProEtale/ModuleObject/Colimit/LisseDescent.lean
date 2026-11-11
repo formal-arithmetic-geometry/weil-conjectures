@@ -76,19 +76,19 @@ lemma exists_forall_le_isDefinedOver {P V V' : Scheme.{u}} [CompactSpace P]
     ∃ E₀ : FiniteIntermediateField ℓ, ∀ E, E₀ ≤ E →
       CondensedRing.IsDefinedOver (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p p' Y := by
   choose s hs using fun i j ↦ Mod.regularEndRingHom_bijective.2
-    ((CondensedRing.upperStarObjRegularIso _ p).inv ≫
+    (End.of ((CondensedRing.upperStarObjRegularIso _ p).inv ≫
       (p)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
         (biproduct.ι (fun _ : Fin n ↦ Mod.regular (padicAlgClRingObj V ℓ)) i) ≫ Y ≫
       (p')^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
         (biproduct.π (fun _ : Fin m ↦ Mod.regular (padicAlgClRingObj V' ℓ)) j) ≫
-      (CondensedRing.upperStarObjRegularIso _ p').hom)
+      (CondensedRing.upperStarObjRegularIso _ p').hom))
   choose E₀ hE₀ using fun ij : Fin n × Fin m ↦
     exists_forall_le_subfieldToPadicAlgClSection_eq (s ij.1 ij.2)
   obtain ⟨F, hF⟩ := exists_forall_le_finiteIntermediateField ℓ E₀
   refine ⟨F, fun E hE i j ↦ ?_⟩
   obtain ⟨t, ht⟩ := hE₀ (i, j) E ((hF (i, j)).trans hE)
   refine ⟨t, ?_⟩
-  rw [← hs i j, ← ht]
+  rw [← congr($(hs i j).asHom), ← ht]
 
 variable {ℓ} in
 /-- The unit `M ⟶ ℚ̄_ℓ,X ⊗_{E_X} M` is a monomorphism: it has the retraction induced by the
