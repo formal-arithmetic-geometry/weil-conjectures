@@ -22,6 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
+
 private theorem map_cone_hom_ext {A B : Type*} [Category A] [Abelian A]
     [Category B] [Preadditive B] (F : A ⥤ B) [F.Additive]
     {P Q : CochainComplex A ℤ} (s : P ⟶ Q) (q : ℤ) {Y : B}
