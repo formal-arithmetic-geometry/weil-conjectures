@@ -78,7 +78,6 @@ theorem Scheme.Hom.pic_proper_ntorsion_torsion
     (n : ℕ) (_hn : (n : k) ≠ 0) :
     Nonempty ((powMonoidHom n : C.Pic →* C.Pic).ker ≃*
       Multiplicative (Fin (2 * f.genus) → ZMod n)) := by
-
   classical
   have hn : n ≠ 0 := by
     intro h

@@ -42,7 +42,6 @@ theorem Scheme.Hom.pic_proper_ntorsion_div
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]
     (n : ℕ) (_hn : (n : k) ≠ 0) :
     ∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L := by
-
   let : C.Over (Spec (.of k)) := ⟨f⟩
   have : ConnectedSpace C := IsConnectedCurve.connectedSpace (f := f)
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f

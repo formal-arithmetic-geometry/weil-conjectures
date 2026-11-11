@@ -47,6 +47,7 @@ noncomputable def geometricFiberGaloisGrpHom (σ : AlgebraicClosure K →ₐ[K] 
   hom := A.hom.geometricFiberGaloisMap σ
   w := A.hom.geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure σ
   mul_comp := by
+
     have ha : A.hom.geometricFiberGaloisMap σ ≫
         pullback.fst A.hom (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))) =
           pullback.fst A.hom (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K)))) :=
