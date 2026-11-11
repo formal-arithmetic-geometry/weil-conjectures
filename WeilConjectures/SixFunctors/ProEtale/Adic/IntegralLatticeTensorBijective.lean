@@ -161,6 +161,8 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
       (adicUpperStarRightDerivedLowerStarUnitAbIso_hom_integralLatticeSections' g p i E θ W
         m)).trans ?_
     rw [stageMap_tmul]
+    rw [show integralLatticeSectionsEquiv g p i E θ W hθW m =
+      θ.hom.app (op W) (ULift.up m) from rfl]
     rw [algebraMap_natCast_pow_inv_mul_eq]
     have key := congrArg (fun φ ↦ (upperStarRightDerivedSections g p i W).map φ
       (θ.hom.app (op W) (ULift.up m)))
