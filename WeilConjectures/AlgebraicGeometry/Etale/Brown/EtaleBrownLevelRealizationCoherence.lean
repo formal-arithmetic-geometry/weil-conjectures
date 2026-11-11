@@ -48,17 +48,17 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
           ((toSheafify W.smallEtaleTopology
             ((Functor.const W.Etaleᵒᵖ).obj
               (CommRingCat.of (strictEtaleBrownRing O t m)))).app U
-                (strictEtaleBrownRingMap O t h a))).hom x =
+                (strictEtaleBrownRingMap O t h a))).asHom.hom x =
         ((M.val.obj U).smul
           ((coefficientQuotientMap (J := W.smallEtaleTopology) O t h).hom.app U
             ((toSheafify W.smallEtaleTopology
               ((Functor.const W.Etaleᵒᵖ).obj
-                (CommRingCat.of (strictEtaleBrownRing O t n)))).app U a))).hom x
+                (CommRingCat.of (strictEtaleBrownRing O t n)))).app U a))).asHom.hom x
       have hu := congrArg (fun f ↦ f.app U a)
         (toSheafify_naturality W.smallEtaleTopology
           ((Functor.const W.Etaleᵒᵖ).map
             (CommRingCat.ofHom (strictEtaleBrownRingMap O t h))))
-      exact congrArg (fun r ↦ ((M.val.obj U).smul r).hom x) hu)
+      exact congrArg (fun r ↦ ((M.val.obj U).smul r).asHom.hom x) hu)
   · intro U V f
     ext x
     rfl
