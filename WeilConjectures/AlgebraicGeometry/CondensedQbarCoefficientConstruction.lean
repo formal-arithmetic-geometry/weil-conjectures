@@ -467,14 +467,16 @@ Source: RefactorInstruction, Section 4, coefficient realization
 (auxiliary; not a blueprint node). -/
 noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
     End (Mod.regular (boundedP ℓ Y)) where
-  toFun a := Mod.homMk (boundedMul ℓ Y a) (boundedMul_linear ℓ Y a)
+  toFun a := .of (Mod.homMk (boundedMul ℓ Y a) (boundedMul_linear ℓ Y a))
   map_one' := by
+    apply End.ext
     apply Mod.hom_ext
     ext U s
     apply ULift.ext
     change s.down * restrictBounded ℓ Y U.unop 1 = s.down
     rw [map_one, mul_one]
   map_mul' a b := by
+    apply End.ext
     apply Mod.hom_ext
     ext U s
     apply ULift.ext
@@ -482,12 +484,14 @@ noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ 
       (s.down * restrictBounded ℓ Y U.unop b) * restrictBounded ℓ Y U.unop a
     rw [map_mul, mul_assoc, mul_comm (restrictBounded ℓ Y U.unop a)]
   map_zero' := by
+    apply End.ext
     apply Mod.hom_ext
     ext U s
     apply ULift.ext
     change s.down * restrictBounded ℓ Y U.unop 0 = 0
     rw [map_zero, mul_zero]
   map_add' a b := by
+    apply End.ext
     apply Mod.hom_ext
     ext U s
     apply ULift.ext
@@ -505,19 +509,20 @@ lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
   intro f
   let T := Scheme.ProEt.mk (𝟙 Y)
   let a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y :=
-    ((f.hom.app (op T)) (ULift.up 1)).down
+    ((f.asHom.hom.app (op T)) (ULift.up 1)).down
   refine ⟨a, ?_⟩
+  apply End.ext
   apply Mod.hom_ext
   ext U s
   let t : U.unop ⟶ T := MorphismProperty.Over.homMk U.unop.hom
-  have hn := ConcreteCategory.congr_hom (f.hom.naturality t.op) (ULift.up 1)
-  have hf := IsModHom.smul_hom (A := boundedP ℓ Y) (f := f.hom)
+  have hn := ConcreteCategory.congr_hom (f.asHom.hom.naturality t.op) (ULift.up 1)
+  have hf := IsModHom.smul_hom (A := boundedP ℓ Y) (f := f.asHom.hom)
   have h := ConcreteCategory.congr_hom (congr_app hf U) (s ⊗ₜ[ℤ] ULift.up 1)
-  change (f.hom.app U) (ULift.up (s.down * 1)) =
-    ULift.up (s.down * ((f.hom.app U) (ULift.up 1)).down) at h
+  change (f.asHom.hom.app U) (ULift.up (s.down * 1)) =
+    ULift.up (s.down * ((f.asHom.hom.app U) (ULift.up 1)).down) at h
   rw [mul_one] at h
-  change ((f.hom.app U) (ULift.up 1)) =
-    (boundedP ℓ Y).map t.op ((f.hom.app (op T)) (ULift.up 1)) at hn
+  change ((f.asHom.hom.app U) (ULift.up 1)) =
+    (boundedP ℓ Y).map t.op ((f.asHom.hom.app (op T)) (ULift.up 1)) at hn
   rw [hn] at h
   exact h.symm
 
@@ -536,25 +541,29 @@ Source: RefactorInstruction, Section 4, coefficient realization
 (auxiliary; not a blueprint node). -/
 noncomputable def sheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
     End (Mod.regular (padicAlgClSheaf Y ℓ)) where
-  toFun a := (sheafificationRegularIso ℓ Y).inv ≫
+  toFun a := .of ((sheafificationRegularIso ℓ Y).inv ≫
     ((presheafToSheaf (Scheme.ProEt.topology Y) Ab.{u + 1}).mapMod (boundedP ℓ Y)).map
-      (presheafScalar ℓ Y a) ≫ (sheafificationRegularIso ℓ Y).hom
+      (presheafScalar ℓ Y a).asHom ≫ (sheafificationRegularIso ℓ Y).hom)
   map_one' := by
+    apply End.ext
     apply Mod.hom_ext
     change (presheafToSheaf (Scheme.ProEt.topology Y) Ab.{u + 1}).map
-      (presheafScalar ℓ Y 1).hom = 𝟙 _
+      (presheafScalar ℓ Y 1).asHom.hom = 𝟙 _
     rw [map_one]
     exact CategoryTheory.Functor.map_id _ _
   map_mul' a b := by
+    apply End.ext
     simp only [map_mul, End.mul_asHom, Functor.map_comp]
     simp [Category.assoc]
   map_zero' := by
-    rw [map_zero, Functor.map_zero]
+    apply End.ext
+    rw [map_zero, End.zero_asHom, Functor.map_zero]
     simp
   map_add' a b := by
+    apply End.ext
     apply Mod.hom_ext
     change (presheafToSheaf (Scheme.ProEt.topology Y) Ab.{u + 1}).map
-      (presheafScalar ℓ Y (a + b)).hom = _
+      (presheafScalar ℓ Y (a + b)).asHom.hom = _
     rw [map_add]
     exact Functor.map_add _
 
@@ -570,22 +579,26 @@ Source: RefactorInstruction, Section 4, coefficient realization
   let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (inv e.inv.hom)
   let d := Mod.regularIsoOfIsIso e.inv.hom
   refine
-    { toFun := fun a ↦ d.inv ≫ F.map (sheafScalar ℓ Y a) ≫ d.hom
+    { toFun := fun a ↦ .of (d.inv ≫ F.map (sheafScalar ℓ Y a).asHom ≫ d.hom)
       map_one' := ?_
       map_mul' := ?_
       map_zero' := ?_
       map_add' := ?_ }
-  · rw [map_one]
+  · apply End.ext
+    rw [map_one, End.one_asHom]
     change _ ≫ 𝟙 _ ≫ _ = _
     simp
   · intro a b
+    apply End.ext
     simp only [map_mul, End.mul_asHom, CategoryTheory.Functor.map_comp]
     simp [Category.assoc]
-  · rw [map_zero, CategoryTheory.Functor.map_zero]
+  · apply End.ext
+    rw [map_zero, End.zero_asHom, CategoryTheory.Functor.map_zero]
     simp
   · intro a b
-    rw [map_add, CategoryTheory.Functor.map_add]
-    simp only [Preadditive.comp_add, Preadditive.add_comp]
+    apply End.ext
+    rw [map_add, End.add_asHom, CategoryTheory.Functor.map_add]
+    simp only [End.add_asHom, Preadditive.comp_add, Preadditive.add_comp]
 
 end CondensedQbarScalarConstruction
 
