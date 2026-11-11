@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelPointTrace
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.FourierFirstFormula
@@ -31,9 +32,10 @@ isomorphisms needed to read an isomorphism of tensor products and duals at a poi
 The blueprint clauses of `lemma-artin-schreier-character-sheaf` stating that the multiplication
 and duality isomorphisms respect these trivializations are
 `AlgebraicGeometry.exists_iso_tensorObj_artinSchreierOf_compatible` and
-`AlgebraicGeometry.exists_iso_dual_artinSchreier_compatible`. Their proofs (rescale any
-isomorphism by a scalar, using that the automorphisms of `ℚ̄_ℓ` on `Spec k₀` are scalars and that
-scalars commute with all the comparison isomorphisms) are not yet formalised.
+`AlgebraicGeometry.exists_iso_dual_artinSchreier_compatible`. They are proved by rescaling any
+such isomorphism by a scalar: every automorphism of `ℚ̄_ℓ` on `Spec k₀` is a scalar, scalars
+commute with all morphisms and pullbacks, so every automorphism of the restriction to a rational
+point of a sheaf trivial there lifts (`AlgebraicGeometry.WeilSheaf.exists_upperStar_mapIso_eq`).
 -/
 
 @[expose] public section
@@ -200,6 +202,105 @@ noncomputable def artinSchreierOfTrivialization {X : Scheme.{u}}
 
 end Trivialization
 
+section Scalar
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+/-- Multiplication by a scalar commutes with morphisms of Weil sheaves. -/
+@[reassoc]
+lemma WeilSheaf.smulEnd_comp (b : PadicAlgCl l) {F G : WeilSheaf k₀ l X} (f : F ⟶ G) :
+    WeilSheaf.smulEnd b F ≫ f = f ≫ WeilSheaf.smulEnd b G :=
+  ObjectProperty.hom_ext _ (ProEtaleWeilSheaf.smulEnd_comp b f.hom)
+
+/-- Multiplication by scalars on a Weil sheaf is multiplicative in the scalar. -/
+lemma WeilSheaf.smulEnd_smulEnd (b c : PadicAlgCl l) (F : WeilSheaf k₀ l X) :
+    WeilSheaf.smulEnd b F ≫ WeilSheaf.smulEnd c F = WeilSheaf.smulEnd (c * b) F :=
+  ObjectProperty.hom_ext _ (ProEtaleWeilSheaf.smulEnd_smulEnd b c F.obj)
+
+/-- Multiplication by `1` on a Weil sheaf is the identity. -/
+lemma WeilSheaf.smulEnd_one (F : WeilSheaf k₀ l X) : WeilSheaf.smulEnd 1 F = 𝟙 F :=
+  ObjectProperty.hom_ext _ (ProEtaleWeilSheaf.smulEnd_one F.obj)
+
+/-- The pullback of Weil sheaves commutes with multiplication by a scalar. -/
+lemma WeilSheaf.upperStar_map_smulEnd {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+    (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] (b : PadicAlgCl l)
+    (F : WeilSheaf k₀ l Y) :
+    (WeilSheaf.upperStar φ).map (WeilSheaf.smulEnd b F) =
+      WeilSheaf.smulEnd b ((WeilSheaf.upperStar φ).obj F) :=
+  ObjectProperty.hom_ext _ (ProEtaleWeilSheaf.upperStar_map_smulEnd φ b F.obj)
+
+omit [Finite k₀] in
+/-- The geometric fiber `Spec k₀ ×_{Spec k₀} Spec k̄` of the point `Spec k₀` has at most one
+point. -/
+lemma Scheme.Hom.subsingleton_geometricFiber_spec :
+    Subsingleton (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber := by
+  have : IsIso (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (IsIso (𝟙 _))
+  have : Subsingleton (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (Subsingleton (PrimeSpectrum (AlgebraicClosure k₀)))
+  exact (pullback.snd (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
+    (Scheme.specAlgebraicClosure k₀).hom).isOpenEmbedding.injective.subsingleton
+
+/-- Every endomorphism of the constant Weil sheaf `ℚ̄_ℓ` on `Spec k₀` is the multiplication by a
+scalar. -/
+lemma WeilSheaf.exists_eq_smulEnd_adicConstant_spec
+    (φ : WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)) ⟶
+      WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))) :
+    ∃ c : PadicAlgCl l, φ = WeilSheaf.smulEnd c _ := by
+  have := Scheme.Hom.subsingleton_geometricFiber_spec (k₀ := k₀)
+  obtain ⟨c, hc⟩ := ProEtale.AdicSheaf.exists_eq_smul_unit
+    (V := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiber) φ.hom.hom.f
+  exact ⟨c, ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext hc))⟩
+
+/-- Distinct scalars act differently on the constant Weil sheaf `ℚ̄_ℓ` on `Spec k₀`. -/
+lemma WeilSheaf.eq_of_smulEnd_adicConstant_spec_eq {c d : PadicAlgCl l}
+    (h : WeilSheaf.smulEnd c (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))) =
+      WeilSheaf.smulEnd d _) : c = d := by
+  obtain ⟨x⟩ := Scheme.Hom.nonempty_geometricFiber k₀ (Spec (CommRingCat.of k₀))
+  have hs (b : PadicAlgCl l) :
+      (ProEtale.AdicSheaf.unitEndFun (WeilSheaf.smulEnd b
+        (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))).hom.hom.f).1 x = b := by
+    change b * 1 = b
+    exact mul_one b
+  rw [← hs c, ← hs d, h]
+
+/-- An automorphism of the restriction `x^* B` of a Weil sheaf `B` to a rational point `x`, at
+which `B` is trivial, is the restriction of an automorphism of `B`: it is the multiplication by a
+scalar. -/
+lemma WeilSheaf.exists_upperStar_mapIso_eq (x : Spec (CommRingCat.of k₀) ⟶ X)
+    [x.IsOver (Spec (CommRingCat.of k₀))] {B : WeilSheaf k₀ l X}
+    (τ : (WeilSheaf.upperStar x).obj B ≅ WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))
+    (e : (WeilSheaf.upperStar x).obj B ≅ (WeilSheaf.upperStar x).obj B) :
+    ∃ α : B ≅ B, (WeilSheaf.upperStar x).mapIso α = e := by
+  obtain ⟨c, hc⟩ := WeilSheaf.exists_eq_smulEnd_adicConstant_spec (τ.inv ≫ e.hom ≫ τ.hom)
+  obtain ⟨c', hc'⟩ := WeilSheaf.exists_eq_smulEnd_adicConstant_spec (τ.inv ≫ e.inv ≫ τ.hom)
+  have he : e.hom = WeilSheaf.smulEnd c _ := by
+    calc e.hom = τ.hom ≫ (τ.inv ≫ e.hom ≫ τ.hom) ≫ τ.inv := by simp
+      _ = WeilSheaf.smulEnd c _ := by
+        rw [hc, ← WeilSheaf.smulEnd_comp_assoc, Iso.hom_inv_id, Category.comp_id]
+  have hcc : c' * c = 1 := by
+    refine WeilSheaf.eq_of_smulEnd_adicConstant_spec_eq (k₀ := k₀) (l := l) ?_
+    rw [← WeilSheaf.smulEnd_smulEnd, ← hc, ← hc', WeilSheaf.smulEnd_one]
+    simp
+  refine ⟨⟨WeilSheaf.smulEnd c B, WeilSheaf.smulEnd c' B, ?_, ?_⟩, ?_⟩
+  · rw [WeilSheaf.smulEnd_smulEnd, hcc, WeilSheaf.smulEnd_one]
+  · rw [WeilSheaf.smulEnd_smulEnd, mul_comm, hcc, WeilSheaf.smulEnd_one]
+  · ext1
+    rw [Functor.mapIso_hom, WeilSheaf.upperStar_map_smulEnd, he]
+
+/-- Any isomorphism `μ₀ : A ≅ B` can be corrected by an automorphism of `B` so that its
+restriction to a rational point `x`, at which `B` is trivial, is a given isomorphism. -/
+lemma WeilSheaf.exists_iso_upperStar_mapIso_eq (x : Spec (CommRingCat.of k₀) ⟶ X)
+    [x.IsOver (Spec (CommRingCat.of k₀))] {A B : WeilSheaf k₀ l X}
+    (τ : (WeilSheaf.upperStar x).obj B ≅ WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))
+    (μ₀ : A ≅ B) (R : (WeilSheaf.upperStar x).obj A ≅ (WeilSheaf.upperStar x).obj B) :
+    ∃ μ : A ≅ B, (WeilSheaf.upperStar x).mapIso μ = R := by
+  obtain ⟨α, hα⟩ := WeilSheaf.exists_upperStar_mapIso_eq x τ
+    (((WeilSheaf.upperStar x).mapIso μ₀).symm ≪≫ R)
+  exact ⟨μ₀ ≪≫ α, by rw [Functor.mapIso_trans, hα, Iso.self_symm_id_assoc]⟩
+
+end Scalar
+
 section Compatibility
 
 variable (ψ : AddChar k₀ (PadicAlgCl l))
@@ -226,7 +327,9 @@ theorem exists_iso_tensorObj_artinSchreierOf_compatible {X : Scheme.{u}}
             (WeilSheaf.isLisse_adicConstant k₀ l _) ≪≫
           WeilSheaf.adicConstantTensorObjIso _ ≪≫
           (artinSchreierOfTrivialization ψ (f + g) x (by rw [map_add, hf, hg, add_zero])).symm := by
-  sorry
+  obtain ⟨μ₀⟩ := nonempty_iso_tensorObj_artinSchreierOf ψ f g
+  exact WeilSheaf.exists_iso_upperStar_mapIso_eq x
+    (artinSchreierOfTrivialization ψ (f + g) x (by rw [map_add, hf, hg, add_zero])) μ₀ _
 
 /-- **The duality isomorphism respects the trivializations at zero**
 (blueprint `lemma-artin-schreier-character-sheaf--5`). There is an isomorphism
@@ -241,7 +344,9 @@ theorem exists_iso_dual_artinSchreier_compatible (a : k₀) :
           WeilSheaf.dualIsoOfIso (artinSchreierZeroIso ψ a) _
             (WeilSheaf.isLisse_adicConstant k₀ l _) ≪≫
           WeilSheaf.dualAdicConstantIso ≪≫ (artinSchreierZeroIso ψ⁻¹ a).symm := by
-  sorry
+  obtain ⟨δ₀⟩ := nonempty_iso_dual_artinSchreier ψ a
+  exact WeilSheaf.exists_iso_upperStar_mapIso_eq (affineLine.zero k₀)
+    (artinSchreierZeroIso ψ⁻¹ a) δ₀ _
 
 end Compatibility
 
