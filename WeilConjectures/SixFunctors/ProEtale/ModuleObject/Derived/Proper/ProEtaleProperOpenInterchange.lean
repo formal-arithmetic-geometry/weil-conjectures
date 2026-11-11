@@ -153,6 +153,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerS
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.Data.Fintype.Shrink
 import Mathlib.Algebra.Ring.Shrink
 import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenBoundaryZero
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.OpenPullbackGenerators
