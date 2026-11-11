@@ -53,8 +53,9 @@ private def Scalars := End (𝟙_ A)
 private instance principalConeTensorNormalizationInst1 : CommRing (Scalars A) := scalarRing A
 private def centerHom : Scalars A →+* CatCenter A where
   toFun a :=
-    .of { app := fun X ↦ (unitEndAction X a).asHom
-      naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
+    .of
+      { app := fun X ↦ (unitEndAction X a).asHom
+        naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
   map_one' := by
     apply CatCenter.ext
     intro X
