@@ -46,7 +46,7 @@ abbrev rings (R : Sheaf J CommRingCat.{u}) : Sheaf J RingCat.{u} :=
 (auxiliary; not a blueprint node). -/
 noncomputable def scalar (R : Sheaf J CommRingCat.{u})
     (f : (unit (rings R)).sections) : End (unit (rings R)) :=
-  .of ((unit (rings R))).unitHomEquiv.symm f
+  .of ((unit (rings R)).unitHomEquiv.symm f)
 
 /-- Restriction of scalars along a commutative coefficient map. Source: Tag 099H
 (auxiliary; not a blueprint node). -/

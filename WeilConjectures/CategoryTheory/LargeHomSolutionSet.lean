@@ -80,7 +80,7 @@ theorem large_hom_solutionSetCondition
     simpa only [Preadditive.sub_comp, sub_sub, sub_eq_zero, Preadditive.add_comp] using h
   have hsmul (r : R) (a : A) : i (r • a) ≫ q = (r.unop).asHom ≫ (i a ≫ q) := by
     have h := hrel (.inr (r, a))
-    change (i (r • a) - r.unop ≫ i a) ≫ q = 0 at h
+    change (i (r • a) - r.unop.asHom ≫ i a) ≫ q = 0 at h
     simpa only [Preadditive.sub_comp, Category.assoc, sub_eq_zero] using h
   let f : A ⟶ (preadditiveCoyonedaObj G ⋙
       ModuleCat.uliftFunctor.{vH, w} (End G)ᵐᵒᵖ).obj Q := ModuleCat.ofHom
@@ -106,10 +106,10 @@ theorem large_hom_solutionSetCondition
       rw [hh, add_sub_cancel_left, sub_self]
     | inr ra =>
       rcases ra with ⟨r, a⟩
-      change (i (r • a) - r.unop ≫ i a) ≫ k = 0
+      change (i (r • a) - r.unop.asHom ≫ i a) ≫ k = 0
       rw [Preadditive.sub_comp, Category.assoc, hik, hik]
       have hh := congrArg ULift.down (h.hom.map_smul r a)
-      change (h (r • a)).down = r.unop ≫ (h a).down at hh
+      change (h (r • a)).down = r.unop.asHom ≫ (h a).down at hh
       rw [hh, sub_self]
   refine ⟨PUnit.unit, cokernel.desc d k hd, ?_⟩
   ext a

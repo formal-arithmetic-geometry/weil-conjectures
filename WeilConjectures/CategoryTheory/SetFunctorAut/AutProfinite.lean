@@ -53,7 +53,7 @@ private theorem evaluation_injective {C : Type u} [Category.{v} C]
     (F : C ⥤ Type w) : Function.Injective (evaluation F) := by
   intro σ τ h
   ext X x
-  have hx : σ.asIso.app X = τ.asIso.app X := congr_fun h X
+  have hx : σ.asIso.app X = τ.asIso.app X := congr($(congr_fun h X).asIso)
   rw [← Iso.app_hom, ← Iso.app_hom, hx]
 
 end SetFunctorAut

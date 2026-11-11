@@ -71,13 +71,13 @@ private theorem ideal_unit_endomorphism
   let : CommRing ((SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).val.obj W) :=
     inferInstanceAs (CommRing (R.obj.obj W))
-  change j.val.app W ((show R.obj.obj W from s.val W) • x) = δ.val.app W (j.val.app W x)
+  change j.val.app W ((show R.obj.obj W from s.val W) • x) = δ.asHom.val.app W (j.val.app W x)
   rw [map_smul]
-  change (δ.val.app W (1 : R.obj.obj W) : R.obj.obj W) *
-    (j.val.app W x : R.obj.obj W) = (δ.val.app W (j.val.app W x) : R.obj.obj W)
+  change (δ.asHom.val.app W (1 : R.obj.obj W) : R.obj.obj W) *
+    (j.val.app W x : R.obj.obj W) = (δ.asHom.val.app W (j.val.app W x) : R.obj.obj W)
   rw [mul_comm]
   simpa only [RingHom.id_apply, smul_eq_mul, mul_one] using
-    ((δ.val.app W).hom.map_smul (j.val.app W x) (1 : R.obj.obj W)).symm
+    ((δ.asHom.val.app W).hom.map_smul (j.val.app W x) (1 : R.obj.obj W)).symm
 
 /-- The least structural-image ideal is an epic quotient of any specified module pullback.
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 04IE; Algebraization, Tag 0A0G.
@@ -253,8 +253,8 @@ theorem exists_ringed_image_ideal_quotient
     rw [Category.assoc, hb, hcanonical, ← Category.assoc,
       ← ε.inv.naturality ιY, Category.assoc]
   let δ : SheafOfModules.unit B ≅ SheafOfModules.unit B := vG.symm ≪≫ u
-  obtain ⟨a, ha⟩ := ideal_unit_endomorphism RX IX ιX .of (δ.hom)
-  obtain ⟨a', ha'⟩ := ideal_unit_endomorphism RX IX ιX .of (δ.inv)
+  obtain ⟨a, ha⟩ := ideal_unit_endomorphism RX IX ιX (.of δ.hom)
+  obtain ⟨a', ha'⟩ := ideal_unit_endomorphism RX IX ιX (.of δ.inv)
   have haa : a' ≫ a = 𝟙 IX := by
     apply (cancel_mono ιX).mp
     rw [Category.assoc, ha, ← Category.assoc, ha', Category.assoc,

@@ -145,9 +145,9 @@ private theorem sequenceDifference_nilpotent
       rw [smul_smul, ← pow_succ]
       simp only [Nat.add_assoc]
   have hnil : IsNilpotent s := by
-    refine ⟨e, Pi.hom_ext _ _ fun j ↦ ?_⟩
+    refine ⟨e, End.ext (Pi.hom_ext _ _ fun j ↦ ?_)⟩
     rw [hs, ← Category.comp_id (Pi.π (fun _ : ℕ ↦ M) (j + e)),
-      ← Preadditive.comp_nsmul, he, comp_zero, zero_comp]
+      ← Preadditive.comp_nsmul, he, comp_zero, End.zero_asHom, zero_comp]
   exact (isUnit_iff_isIso (1 - s)).mp hnil.isUnit_one_sub
 
 private theorem sequenceDifference_orthogonal

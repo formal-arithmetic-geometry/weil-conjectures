@@ -43,7 +43,7 @@ variable [Preadditive C]
 /-- The endomorphism ring of the monoidal unit is commutative. -/
 instance instCommRingEndTensorUnit : CommRing (End (𝟙_ C)) where
   __ := (inferInstance : Ring (End (𝟙_ C)))
-  mul_comm s t := tensorUnit_endo_comm t s
+  mul_comm s t := End.ext (tensorUnit_endo_comm t.asHom s.asHom)
 
 /-- If every nonzero endomorphism of the monoidal unit is invertible and `𝟙_ C` is not a zero
 object, then `End (𝟙_ C)` is a field. -/
@@ -53,6 +53,6 @@ theorem isField_end_tensorUnit (hK : ∀ t : End (𝟙_ C), t ≠ 0 → IsIso (t
   mul_comm := mul_comm
   mul_inv_cancel {t} ht := by
     have := hK t ht
-    exact ⟨inv t, IsIso.inv_hom_id t⟩
+    exact ⟨.of (inv t.asHom), End.ext (IsIso.inv_hom_id t.asHom)⟩
 
 end CategoryTheory.MonoidalCategory

@@ -37,25 +37,25 @@ variable [Preadditive C] [MonoidalPreadditive C] [BraidedCategory C] [IsCommMonO
 an endomorphism `R ⟶ R` of the regular module: a ring homomorphism. -/
 def regularEndRingHom : Γ R →+* End (regular R) where
   toFun s := .of (regularLift (regular R) s.hom)
-  map_one' := regular_hom_ext (by
-    rw [one_comp_regularLift_regular, Γ.one_hom, End.one_def, Mod.id_hom']
-    exact (Category.comp_id _).symm)
-  map_mul' s t := regular_hom_ext (by
-    rw [one_comp_regularLift_regular, End.mul_def, Mod.comp_hom']
+  map_one' := End.ext (regular_hom_ext (by
+    rw [one_comp_regularLift_regular, Γ.one_hom, End.one_asHom, Mod.id_hom']
+    exact (Category.comp_id _).symm))
+  map_mul' s t := End.ext (regular_hom_ext (by
+    rw [one_comp_regularLift_regular, End.mul_asHom, Mod.comp_hom']
     erw [← Category.assoc, one_comp_regularLift_regular]
     rw [Γ.mul_comm', Γ.mul_hom]
     change _ = t.hom ≫ (ρ_ R).inv ≫ R ◁ s.hom ≫ μ
-    rw [rightUnitor_inv_naturality_assoc, ← unitors_inv_equal, ← tensorHom_def_assoc])
-  map_zero' := regular_hom_ext (by
-    rw [one_comp_regularLift_regular, Γ.zero_hom, zero_hom]
-    exact Limits.comp_zero.symm)
-  map_add' s t := regular_hom_ext (by
-    rw [one_comp_regularLift_regular, Γ.add_hom, add_hom]
-    erw [comp_add, one_comp_regularLift_regular, one_comp_regularLift_regular])
+    rw [rightUnitor_inv_naturality_assoc, ← unitors_inv_equal, ← tensorHom_def_assoc]))
+  map_zero' := End.ext (regular_hom_ext (by
+    rw [one_comp_regularLift_regular, Γ.zero_hom, End.zero_asHom, zero_hom]
+    exact Limits.comp_zero.symm))
+  map_add' s t := End.ext (regular_hom_ext (by
+    rw [one_comp_regularLift_regular, Γ.add_hom, End.add_asHom, add_hom]
+    erw [comp_add, one_comp_regularLift_regular, one_comp_regularLift_regular]))
 
 @[simp]
 lemma regularEndRingHom_apply (s : Γ R) :
-    regularEndRingHom s = .of (regularLift (regular R) s.hom :=)
+    regularEndRingHom s = .of (regularLift (regular R) s.hom) :=
   rfl
 
 end CategoryTheory.Mod

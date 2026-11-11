@@ -100,15 +100,15 @@ The composite `ε ≫ e` equals `ε` by `h`, so `ε` factors through `image e`, 
 `ε ≫ factorThruImage e` is an isomorphism.
 Source: blueprint lem-kernel-condensed-projector-descent. -/
 theorem unit_image_regular_isIso (e : End (G.obj (Mod.regular S)))
-    [IsIso (F.map (image.ι e) ≫ adj.counit.app (Mod.regular S))]
+    [IsIso (F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S))]
     (h : ε G ≫ (e).asHom = ε G) :
     IsIso (ε G ≫ factorThruImage (e).asHom) := by
   rw [← isIso_iff_of_reflects_iso _ F]
-  have : IsIso (F.map (ε G ≫ factorThruImage e) ≫
-      F.map (image.ι e) ≫ adj.counit.app (Mod.regular S)) := by
+  have : IsIso (F.map (ε G ≫ factorThruImage e.asHom) ≫
+      F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S)) := by
     rw [← F.map_comp_assoc, Category.assoc, image.fac, h]
     erw [adj.map_ε_comp_counit_app_unit]
     infer_instance
-  exact IsIso.of_isIso_comp_right _ (F.map (image.ι e) ≫ adj.counit.app (Mod.regular S))
+  exact IsIso.of_isIso_comp_right _ (F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S))
 
 end CategoryTheory.Adjunction

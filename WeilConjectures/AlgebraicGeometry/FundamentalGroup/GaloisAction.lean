@@ -93,7 +93,7 @@ lemma galoisToFundamentalGroup_smul (σ : Ω ≃ₐ[K] Ω) (P : Y.FiniteEtale)
   change ((toAutMulEquiv (fiber s) G) ((toAutMulEquiv (fiber s) G).symm
     (Iso.conjAut τ (galoisToAut y σ)))).asIso.hom.app P _ = _
   rw [MulEquiv.apply_symm_apply, Iso.conjAut_hom]
-  change (τ.hom.app P) ((galoisToAut y σ).hom.app P ((τ.inv.app P) (τ.hom.app P t))) = _
+  change (τ.hom.app P) ((galoisToAut y σ).asIso.hom.app P ((τ.inv.app P) (τ.hom.app P t))) = _
   rw [← ConcreteCategory.comp_apply (τ.hom.app P) (τ.inv.app P), τ.hom_inv_id_app]
   rfl
 

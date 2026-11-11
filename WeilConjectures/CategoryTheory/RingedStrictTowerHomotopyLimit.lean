@@ -19,6 +19,7 @@ import WeilConjectures.Algebra.Homology.KInjectiveProductsTermwise
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 
 /-!
 # Total derived inverse limits of strict towers on a ringed site
@@ -189,7 +190,7 @@ private lemma proZero_transition_iso
     | zero => exact le_rfl
     | succ n => exact le_max_right _ _
   have hkk (n : ℕ) : k n ≤ k (n + 1) := le_max_left _ _
-  have hv (n i : ℕ) (hi : b n ≤ i) : (End.of s ^ i) ≫ Pi.π X n = 0 := by
+  have hv (n i : ℕ) (hi : b n ≤ i) : (End.of s ^ i).asHom ≫ Pi.π X n = 0 := by
     obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le hi
     rw [pow_add, End.mul_def, Category.assoc, hb, comp_zero]
   let g (l : ℕ) : P ⟶ P := ∑ i ∈ Finset.range l, End.asHom (End.of s ^ i)
@@ -199,10 +200,9 @@ private lemma proZero_transition_iso
     | succ l ih =>
       simp only [g, Finset.sum_range_succ] at *
       rw [Preadditive.add_comp, ih, Preadditive.comp_sub, Category.comp_id]
-      have hpow : (End.of s ^ l) ≫ s = End.of s ^ (l + 1) := by
-        rw [pow_succ', End.mul_def]
+      have hpow : (End.of s ^ l).asHom ≫ s = (End.of s ^ (l + 1)).asHom := by
+        rw [pow_succ', End.mul_asHom]
       rw [hpow]
-      dsimp only [End.asHom, End.of]
       simp only [sub_add_sub_cancel]
   have hg' (l : ℕ) : (𝟙 P - s) ≫ g l = 𝟙 P - End.asHom (End.of s ^ l) := by
     induction l with
@@ -210,10 +210,9 @@ private lemma proZero_transition_iso
     | succ l ih =>
       simp only [g, Finset.sum_range_succ] at *
       rw [Preadditive.comp_add, ih, Preadditive.sub_comp, Category.id_comp]
-      have hpow : s ≫ (End.of s ^ l) = End.of s ^ (l + 1) := by
-        rw [pow_succ, End.mul_def]
+      have hpow : s ≫ (End.of s ^ l).asHom = (End.of s ^ (l + 1)).asHom := by
+        rw [pow_succ, End.mul_asHom]
       rw [hpow]
-      dsimp only [End.asHom, End.of]
       simp only [sub_add_sub_cancel]
   have hstable (n l l' : ℕ) (hl : b n ≤ l) (hll : l ≤ l') :
       g l ≫ Pi.π X n = g l' ≫ Pi.π X n := by

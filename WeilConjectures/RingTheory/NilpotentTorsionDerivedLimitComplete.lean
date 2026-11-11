@@ -68,8 +68,8 @@ theorem isDerivedComplete_of_isDerivedLimit_of_nilpotent
           simp [s, towerProductShift, K]
         rw [hsπ, smul_smul, pow_succ, Nat.add_assoc]
     have hnil : IsNilpotent s := by
-      refine ⟨e, Pi.hom_ext _ _ fun j ↦ ?_⟩
-      rw [hs, zero_comp]
+      refine ⟨e, End.ext (Pi.hom_ext _ _ fun j ↦ ?_)⟩
+      rw [hs, End.zero_asHom, zero_comp]
       simpa only [K, Linear.comp_smul, Category.comp_id, comp_zero] using
         congrArg (fun z ↦ Pi.π K (j + e) ≫ z) he
     apply Pretriangulated.Triangle.isZero₁_of_isIso₂ _ hT

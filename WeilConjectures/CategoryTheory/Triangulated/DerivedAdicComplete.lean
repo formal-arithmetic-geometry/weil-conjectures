@@ -120,14 +120,16 @@ lemma isZero_of_isIso_zsmul_id {n : ℤ} {K : C} [HasProduct (fun _ : ℕ ↦ K)
     (hK : IsDerivedAdicComplete n K) (hn : IsIso (n • 𝟙 K)) : IsZero K := by
   have : IsIso (𝟙 _ - n • adicTowerShift K) := hK
   let u : End K := .of (inv (n • 𝟙 K))
-  have hu : n • u = .of (𝟙 K) := by
-    rw [← IsIso.hom_inv_id (n • 𝟙 K), zsmul_comp, id_comp]
-  have hι : (Pi.lift fun i ↦ u ^ i) ≫ (𝟙 _ - n • adicTowerShift K) =
+  have hu : n • u.asHom = 𝟙 K := by
+    show n • inv (n • 𝟙 K) = 𝟙 K
+    conv_rhs => rw [← IsIso.hom_inv_id (n • 𝟙 K)]
+    rw [zsmul_comp, id_comp]
+  have hι : (Pi.lift fun i ↦ (u ^ i).asHom) ≫ (𝟙 _ - n • adicTowerShift K) =
       0 ≫ (𝟙 _ - n • adicTowerShift K) := by
     ext i
     simp only [assoc, sub_comp, id_comp, zsmul_comp, adicTowerShift_π, comp_sub, comp_zsmul,
       zero_comp, Pi.lift_comp_π, smul_zero, sub_zero]
-    rw [pow_succ', End.mul_def, ← comp_zsmul, hu, comp_id, sub_self]
+    rw [pow_succ', End.mul_asHom, ← comp_zsmul, hu, comp_id, sub_self]
   rw [cancel_mono] at hι
   rw [IsZero.iff_id_eq_zero]
   simpa using congrArg (· ≫ Pi.π (fun _ : ℕ ↦ K) 0) hι
