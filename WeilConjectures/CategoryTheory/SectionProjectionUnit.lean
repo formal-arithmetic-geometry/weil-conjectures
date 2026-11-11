@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory.Adjunction
 
-attribute [local implicit_reducible] TwoSquare
+-- `TwoSquare` is already reducible in Mathlib.
 
 /-- The unit law for a tensor-compatible comultiplication forces tensor compatibility
 of its counit. This avoids a separate localization calculation for identity pullback. -/
