@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
 public import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimitProperties
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.PointedGaloisSmall
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Construction of the universal profinite étale cover
@@ -667,7 +668,7 @@ theorem continuous_graph (x : Spec (.of K)) :
   let R (c : (fiber y).obj ((obj y).obj j)) : (Limits.pullback (p y j) (p y j) : Scheme.{u}) :=
     (Limits.pullback.lift (point y j).left c.left
       ((fiber_left_comp y _).trans (fiber_left_comp y c).symm)).base x
-  have key (g : Aut (fiber y)) : Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
+  have key (g : Aut (fibe(r y).asIso)) : Limits.pullback.lift (f := proj y) (g := proj y) (pt y)
       (pt y ≫ (transport g).hom) (by rw [Category.assoc, transport_hom, transportHom_proj]) ≫
         (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j =
       Limits.pullback.lift (point y j).left (g.inv.app _ (point y j)).left
@@ -730,7 +731,7 @@ lemma autAt_spec (j : Index y) (g : Aut (fiber y)) :
 
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- A loop acts on the point `a_j` through `autAt`. -/
-lemma hom_app_point (j : Index y) (g : Aut (fiber y)) :
+lemma asIso.hom_app_point (j : Index y) (g : Aut (fiber y)) :
     g.hom.app ((obj y).obj j) (point y j) = (fiber y).map (autAt y j g).hom (point y j) := by
   have e := ConcreteCategory.congr_hom (g.inv.naturality (autAt y j g).hom) (point y j)
   simp only [FintypeCat.comp_apply] at e

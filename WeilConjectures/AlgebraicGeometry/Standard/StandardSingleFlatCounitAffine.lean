@@ -55,7 +55,7 @@ private theorem affine_pushforward_isFlat
   have heq : B.presheaf.map (homOfLE hWV).op ≫ f.app W.1 =
       f.appLE V.1 (f ⁻¹ᵁ W.1) hpre := by
     rw [f.app_eq_appLE, f.map_appLE]
-  exact congrArg (fun a ↦ (N.smul a).hom m) (ConcreteCategory.congr_hom heq r)
+  exact congrArg (fun a ↦ (N.smul a).asHom.hom m) (ConcreteCategory.congr_hom heq r)
 
 namespace Scheme.Modules
 

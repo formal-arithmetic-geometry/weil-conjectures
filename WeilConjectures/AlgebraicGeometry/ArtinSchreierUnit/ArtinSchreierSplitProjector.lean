@@ -140,7 +140,7 @@ def actionProjector (M : C) (σ : G → End M) (χ : AddChar G R) : End M :=
 
 /-- Reindexing the finite average gives its character eigenrelation. -/
 theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
-    (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (b : G) :
+    (hσ : ∀ a b, σ (a + b) = .of (σ a) ≫ σ b) (b : G) :
     (actionProjector M σ χ).asHom ≫ (σ b).asHom = (χ b • actionProjector M σ χ).asHom := by
   unfold actionProjector
   rw [Preadditive.sum_comp, Finset.smul_sum]
@@ -164,7 +164,7 @@ theorem actionProjector_eigen (M : C) (σ : G → End M) (χ : AddChar G R)
 
 /-- Averaging is idempotent whenever the group order is invertible. -/
 theorem actionProjector_idempotent (M : C) (σ : G → End M) (χ : AddChar G R)
-    (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b) (hq : IsUnit (Fintype.card G : R)) :
+    (hσ : ∀ a b, σ (a + b) = .of (σ a) ≫ σ b) (hq : IsUnit (Fintype.card G : R)) :
     (actionProjector M σ χ).asHom ≫ (actionProjector M σ χ).asHom = (actionProjector M σ χ).asHom := by
   conv_lhs => arg 2; rw [actionProjector]
   rw [Preadditive.comp_sum]

@@ -35,14 +35,14 @@ Source: Stacks Project, Tags 0913 and 0A0A
 (auxiliary; not a blueprint node). -/
 def ringedKoszulScalar (s : (O.obj ⋙ forget CommRingCat).sections) :
     End (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
-  SheafOfModules.unitHomEquiv _ |>.symm ⟨s.val, s.property⟩
+  .of (SheafOfModules.unitHomEquiv _ |>.symm ⟨s.val, s.property⟩)
 
 /-- The positive Koszul factor [O --s^(m+1)--> O] in degrees zero and one.
 Source: Stacks Project, Tags 0913 and 0A0A
 (auxiliary; not a blueprint node). -/
 def ringedKoszulFactor (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedSiteComplex O :=
-  HomologicalComplex.double ((ringedKoszulScalar O s) ^ (m + 1))
+  HomologicalComplex.double (((ringedKoszulScalar O s)).asHom ^ (m + 1))
     (by decide : (ComplexShape.up ℤ).Rel 0 1)
 
 /-- Components of the forward map (1,s), zero outside degrees zero and one.

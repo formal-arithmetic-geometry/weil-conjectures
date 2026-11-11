@@ -225,7 +225,7 @@ private lemma proZero_transition_iso
     (fun n : ℕ ↦ K.map (homOfLE (Nat.le_succ n)).op)
   have hs (n : ℕ) : s ≫ Pi.π X n =
       Pi.π X (n + 1) ≫ K.map (homOfLE (Nat.le_succ n)).op := Pi.lift_comp_π _ _
-  have hp (k n : ℕ) : (End.of s ^ k) ≫ Pi.π X n =
+  have hp (k n : ℕ) : ((End.of s ^ k).asHom) ≫ Pi.π X n =
       Pi.π X (n + k) ≫ K.map (homOfLE (Nat.le_add_right n k)).op := by
     induction k generalizing n with
     | zero =>

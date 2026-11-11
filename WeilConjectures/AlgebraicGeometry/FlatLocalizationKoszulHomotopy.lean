@@ -30,7 +30,7 @@ variable {D : Type*} [Category D] [Abelian D]
 private theorem scalarNat_homology
     (z : 𝟭 D ⟶ 𝟭 D) (K : CochainComplex D ℤ) (μ : End K)
     (hμ : ∀ q, μ.f q = z.app (K.X q)) (q : ℤ) :
-    HomologicalComplex.homologyMap μ q = z.app (K.homology q) := by
+    HomologicalComplex.homologyMap (μ q).asHom = z.app (K.homology q) := by
   have hc : HomologicalComplex.cyclesMap μ q = z.app (K.cycles q) := by
     apply (cancel_mono (K.iCycles q)).1
     rw [HomologicalComplex.cyclesMap_i, hμ]
@@ -78,7 +78,7 @@ private noncomputable def sectionScalarNat
 set_option backward.isDefEq.respectTransparency false in
 private theorem sectionScalarNat_unit
     (R : Sheaf J CommRingCat.{u}) (s : (unit (rings R)).sections) (e : ℕ) :
-    (sectionScalarNat R s e).app (unit (rings R)) = scalar R s ^ e := by
+    (sectionScalarNat R s e).app (unit (rings R)) = (scalar R s ^ e).asHom := by
   induction e with
   | zero =>
       apply SheafOfModules.hom_ext

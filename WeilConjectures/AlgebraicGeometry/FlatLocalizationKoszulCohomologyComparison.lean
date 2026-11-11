@@ -89,7 +89,7 @@ private theorem exact_natTrans_nilpotent
 
 private def centralScalar {D : Type*} [Category D] [MonoidalCategory D]
     (s : End (𝟙_ D)) : 𝟭 D ⟶ 𝟭 D :=
-  (rightUnitorNatIso D).inv ≫ (tensoringRight D).map s ≫ (rightUnitorNatIso D).hom
+  (rightUnitorNatIso D).inv ≫ (tensoringRight D).map (s).asHom ≫ (rightUnitorNatIso D).hom
 
 private theorem tensor_unit_on_killed
     {D : Type*} [Category D] [Abelian D] [MonoidalCategory D]
@@ -207,7 +207,7 @@ private theorem sectionScalar_central
     change (a * (show R.obj.obj U from s.val U)) • x =
       (show R.obj.obj U from s.val U) • (a • x)
     rw [mul_smul, smul_comm]
-  change (ρ_ M).inv ≫ M ◁ scalar R s ≫ (ρ_ M).hom = _
+  change (ρ_ M).inv ≫ M ◁ (scalar R s).asHom ≫ (ρ_ M).hom = _
   apply (cancel_epi (ρ_ M).hom).1
   simp only [Iso.hom_inv_id_assoc]
   rw [← tensor_rightUnitor_hom R M]

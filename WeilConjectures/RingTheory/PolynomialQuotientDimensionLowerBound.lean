@@ -14,6 +14,7 @@ import WeilConjectures.RingTheory.ClosedPointDimensionLocalRing
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Dimension lower bound for a polynomial quotient over a field

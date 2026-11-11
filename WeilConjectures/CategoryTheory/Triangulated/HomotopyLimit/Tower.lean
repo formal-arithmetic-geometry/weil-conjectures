@@ -352,13 +352,13 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
   have hℓ''pow : ∀ j : ℕ, ℓ'' ≫ ((End.of (towerShift hP') ^ j).asHom) = ℓ'' := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, comp_id]
-    | succ j ih => rw [pow_succ, End.mul_def, ← assoc, hℓ'', ih]
+    | zero => rw [pow_zero, End.one_asHom, comp_id]
+    | succ j ih => rw [pow_succ, End.mul_asHom, ← assoc, hℓ'', ih]
   have hδ'' : towerShift hP' ≫ δ'' = δ'' := by
     have : (𝟙 _ - towerShift hP') ≫ δ'' = 0 := comp_distTriang_mor_zero₂₃ _ hT''
     rw [Preadditive.sub_comp, id_comp, sub_eq_zero] at this
     exact this.symm
-  have hδ''pow : ∀ j : ℕ, (End.of (towerShift hP') ^ j) ≫ δ'' = δ'' := by
+  have hδ''pow : ∀ j : ℕ, ((End.of (towerShift hP') ^ j).asHom) ≫ δ'' = δ'' := by
     intro j
     induction j with
     | zero => rw [pow_zero, End.one_def, id_comp]

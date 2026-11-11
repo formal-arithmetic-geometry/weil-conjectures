@@ -21,7 +21,7 @@ namespace CategoryTheory
 private theorem scalar_comp {C : Type*} [Category C] [Preadditive C]
     {S : Type*} [CommRing S] {R : C} (r : S →+* End R) (a b : S) :
     (r a).asHom ≫ (r b).asHom = (r (a * b)).asHom := by
-  rw [← End.mul_def, ← map_mul, mul_comm]
+  rw [← End.mul_asHom, ← map_mul, mul_comm]
 
 private theorem character_column_row
     {C : Type*} [Category C] [Preadditive C]
@@ -47,7 +47,7 @@ private theorem character_matrix_factorization
     {S : Type*} [CommRing S] {R M : C} (r : S →+* End R)
     (G : Type*) [AddCommGroup G] [Fintype G] [HasProduct (fun _ : G ↦ R)]
     (χ : AddChar G S) (q : M ≅ ∏ᶜ (fun _ : G ↦ R)) (e : End M)
-    (he : ∀ a : G, e ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) a =
+    (he : ∀ a : G, (e).asHom ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) a =
       ∑ b : G, (q.hom ≫ Pi.π (fun _ : G ↦ R) b) ≫
         (r (Ring.inverse (Fintype.card G : S) * χ (a - b))).asHom) :
     (q.hom ≫ ∑ b : G, Pi.π (fun _ : G ↦ R) b ≫
@@ -92,8 +92,8 @@ theorem characterMatrix_image_evaluation_isIso
     IsIso (image.ι (e).asHom ≫ q.hom ≫ Pi.π (fun _ : G ↦ R) 0) := by
   classical
   let row : M ⟶ R := q.hom ≫ ∑ b : G, Pi.π (fun _ : G ↦ R) b ≫
-    r (Ring.inverse (Fintype.card G : S) * χ (-b))
-  let col : R ⟶ M := Pi.lift (fun a : G ↦ r (χ a)) ≫ q.inv
+    (r (Ring.inverse (Fintype.card G : S) * χ (-b))).asHom
+  let col : R ⟶ M := Pi.lift (fun a : G ↦ (r (χ a)).asHom) ≫ q.inv
   have hs : col ≫ row = 𝟙 R := by
     dsimp only [col, row]
     simp only [Category.assoc, Iso.inv_hom_id_assoc]

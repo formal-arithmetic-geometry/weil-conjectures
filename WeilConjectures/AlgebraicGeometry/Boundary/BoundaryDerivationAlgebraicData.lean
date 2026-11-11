@@ -73,7 +73,7 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
       (∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens) (x : I.val.obj (op U)),
         (μ f).val.app (op U) x = σ U (C.right.obj.map (homOfLE le_top).op f) x) ∧
       (∀ f : C.right.obj.obj (op ⊤), ρ f =
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f)).hom) ∧
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map ((μ f)).asHom).hom) ∧
       (∀ f : C.right.obj.obj (op ⊤), δ f =
         (((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
             (commAlgebraSheafModule X.sheaf C) ≫

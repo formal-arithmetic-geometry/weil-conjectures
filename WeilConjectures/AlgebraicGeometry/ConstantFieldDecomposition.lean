@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FormallyUnramifiedSections
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.FieldTheory.FiniteFieldEmbeddings
 public import WeilConjectures.WeilSheaf.ConstantFieldComponent
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # The geometric fibre over a smaller base field is a disjoint union of components

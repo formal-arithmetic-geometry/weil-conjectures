@@ -115,7 +115,7 @@ private theorem flatOver_restrict
       b.appLE V.1 U'.1 hU' := by
     rw [← hcomp, Category.assoc, ← Scheme.Hom.appIso_hom', Iso.hom_inv_id,
       Category.comp_id]
-  exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).hom m) hring
+  exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).asHom.hom m) hring
 
 private theorem flatOver_tensorPullback_iso
     {P Q T : Scheme.{u}} (e : P ≅ Q) (b : Q ⟶ T) (M : Q.Modules)

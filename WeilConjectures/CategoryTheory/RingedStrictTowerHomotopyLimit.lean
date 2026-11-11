@@ -192,7 +192,7 @@ private lemma proZero_transition_iso
   have hkk (n : ℕ) : k n ≤ k (n + 1) := le_max_left _ _
   have hv (n i : ℕ) (hi : b n ≤ i) : (End.of s ^ i).asHom ≫ Pi.π X n = 0 := by
     obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le hi
-    rw [pow_add, End.mul_def, Category.assoc, hb, comp_zero]
+    rw [pow_add, End.mul_asHom, Category.assoc, hb, comp_zero]
   let g (l : ℕ) : P ⟶ P := ∑ i ∈ Finset.range l, End.asHom (End.of s ^ i)
   have hg (l : ℕ) : g l ≫ (𝟙 P - s) = 𝟙 P - End.asHom (End.of s ^ l) := by
     induction l with

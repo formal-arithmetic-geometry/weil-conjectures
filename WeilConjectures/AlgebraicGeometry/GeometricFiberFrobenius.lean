@@ -155,15 +155,15 @@ theorem geometricFiberFrobenius_comp_geometricFiberToAlgebraicClosure :
 `g_γ⁻¹ ≫ p_X = p_X`. -/
 @[reassoc (attr := simp)]
 theorem geometricGaloisFrobenius_inv_comp_geometricFiberProj :
-    f.geometricGaloisFrobenius.inv ≫ f.geometricFiberProj = f.geometricFiberProj := by
+    f.geometricGaloisFrobenius.asIso.inv ≫ f.geometricFiberProj = f.geometricFiberProj := by
   rw [Iso.inv_comp_eq, geometricGaloisFrobenius_hom_comp_geometricFiberProj]
 
 /-- The inverse of the geometric Galois Frobenius lies over `σ⁻¹`:
 `g_γ⁻¹ ≫ a_X = a_X ≫ σ⁻¹`. -/
 @[reassoc (attr := simp)]
 theorem geometricGaloisFrobenius_inv_comp_geometricFiberToAlgebraicClosure :
-    f.geometricGaloisFrobenius.inv ≫ f.geometricFiberToAlgebraicClosure =
-      f.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).inv := by
+    f.geometricGaloisFrobenius.asIso.inv ≫ f.geometricFiberToAlgebraicClosure =
+      f.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).asIso.inv := by
   rw [Iso.inv_comp_eq, geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure_assoc,
     Iso.hom_inv_id, Category.comp_id]
 
@@ -182,16 +182,16 @@ theorem geometricFiberMap_comp_geometricFiberFrobenius {Y₀ : Scheme.{u}}
 /-- The scheme Frobenius commutes with the powers of the geometric Galois Frobenius. -/
 @[reassoc]
 theorem geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_hom (m : ℕ) :
-    f.geometricFiberFrobenius ≫ (f.geometricGaloisFrobenius ^ m).hom =
-      (f.geometricGaloisFrobenius ^ m).hom ≫ f.geometricFiberFrobenius := by
+    f.geometricFiberFrobenius ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom =
+      (f.geometricGaloisFrobenius ^ m).asIso.hom ≫ f.geometricFiberFrobenius := by
   ext <;> simp
 
 /-- The scheme Frobenius commutes with the inverses of the powers of the geometric Galois
 Frobenius. -/
 @[reassoc]
 theorem geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv (m : ℕ) :
-    f.geometricFiberFrobenius ≫ (f.geometricGaloisFrobenius ^ m).inv =
-      (f.geometricGaloisFrobenius ^ m).inv ≫ f.geometricFiberFrobenius := by
+    f.geometricFiberFrobenius ≫ (f.geometricGaloisFrobenius ^ m).asIso.inv =
+      (f.geometricGaloisFrobenius ^ m).asIso.inv ≫ f.geometricFiberFrobenius := by
   rw [Iso.comp_inv_eq, Category.assoc,
     geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_hom,
     Iso.inv_hom_id_assoc]
@@ -199,16 +199,16 @@ theorem geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv (m : ℕ) 
 /-- The scheme Frobenius commutes with the geometric Galois Frobenius: `Φ ≫ g_γ = g_γ ≫ Φ`. -/
 @[reassoc]
 theorem geometricFiberFrobenius_comp_geometricGaloisFrobenius_hom :
-    f.geometricFiberFrobenius ≫ f.geometricGaloisFrobenius.hom =
-      f.geometricGaloisFrobenius.hom ≫ f.geometricFiberFrobenius := by
+    f.geometricFiberFrobenius ≫ f.geometricGaloisFrobenius.asIso.hom =
+      f.geometricGaloisFrobenius.asIso.hom ≫ f.geometricFiberFrobenius := by
   simpa using f.geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_hom 1
 
 /-- The scheme Frobenius commutes with the inverse of the geometric Galois Frobenius:
 `Φ ≫ g_γ⁻¹ = g_γ⁻¹ ≫ Φ`. -/
 @[reassoc]
 theorem geometricFiberFrobenius_comp_geometricGaloisFrobenius_inv :
-    f.geometricFiberFrobenius ≫ f.geometricGaloisFrobenius.inv =
-      f.geometricGaloisFrobenius.inv ≫ f.geometricFiberFrobenius := by
+    f.geometricFiberFrobenius ≫ f.geometricGaloisFrobenius.asIso.inv =
+      f.geometricGaloisFrobenius.asIso.inv ≫ f.geometricFiberFrobenius := by
   simpa using f.geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv 1
 
 end Scheme.Hom
@@ -219,7 +219,7 @@ variable (k) [Finite k]
 absolute `q`-power Frobenius of `Spec k̄`. -/
 theorem specGeometricFrobenius_inv_eq_iterateFrobenius (hp : (ringChar k).Prime)
     (hK : (ringChar k : Γ(Spec (.of (AlgebraicClosure k)), ⊤)) = 0) :
-    (specGeometricFrobenius k).inv =
+    (specGeometricFrobenius k).asIso.inv =
       (Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK (frobeniusExponent k) := by
   let := Fintype.ofFinite k
   rw [Scheme.iterateFrobenius_Spec hp _ ringChar_cast_algebraicClosure]
@@ -238,7 +238,7 @@ arithmetic Galois automorphism, `σ : z ↦ z ^ q`. -/
 theorem iterateFrobenius_geometricFiber_eq (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k) =
-      f.geometricFiberFrobenius ≫ f.geometricGaloisFrobenius.inv := by
+      f.geometricFiberFrobenius ≫ f.geometricGaloisFrobenius.asIso.inv := by
   ext
   · rw [← comp_iterateFrobenius hp _ (isOfCharacteristic_of_hom_spec f) hX, Category.assoc,
       geometricGaloisFrobenius_inv_comp_geometricFiberProj,
@@ -253,7 +253,7 @@ Frobenius of the geometric fibre factors as `Fr_X^{(q)} = g_σ ≫ Φ`, where `g
 theorem iterateFrobenius_geometricFiber_eq' (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k) =
-      f.geometricGaloisFrobenius.inv ≫ f.geometricFiberFrobenius := by
+      f.geometricGaloisFrobenius.asIso.inv ≫ f.geometricFiberFrobenius := by
   rw [iterateFrobenius_geometricFiber_eq, geometricFiberFrobenius_comp_geometricGaloisFrobenius_inv]
 
 /-- Blueprint `prop-trf-frobenius-factorization`: for every `m`, the absolute `q ^ m`-power
@@ -262,14 +262,14 @@ scheme Frobenius and `g_σ = g_γ⁻¹`. -/
 theorem iterateFrobenius_geometricFiber_mul_eq (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) (m : ℕ) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k * m) =
-      End.asHom (End.of f.geometricFiberFrobenius ^ m) ≫ (f.geometricGaloisFrobenius ^ m).inv := by
+      End.asHom (End.of f.geometricFiberFrobenius ^ m) ≫ (f.geometricGaloisFrobenius ^ m).asIso.inv := by
   induction m with
   | zero =>
     rw [mul_zero, iterateFrobenius_zero, pow_zero, pow_zero]
     exact (Category.id_comp _).symm
   | succ m ih =>
     rw [Nat.mul_succ, iterateFrobenius_add, ih, iterateFrobenius_geometricFiber_eq, pow_succ',
-      End.mul_def, pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
+      End.mul_asHom, pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
     simp only [Category.assoc, geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv_assoc]
 
 /-- Blueprint `prop-trf-frobenius-factorization`: for every `m`, the absolute `q ^ m`-power
@@ -278,7 +278,7 @@ Frobenius of the geometric fibre factors as `Fr_X^{(q ^ m)} = g_σᵐ ≫ Φᵐ`
 theorem iterateFrobenius_geometricFiber_mul_eq' (hp : (ringChar k).Prime)
     (hX : (ringChar k : Γ(f.geometricFiber, ⊤)) = 0) (m : ℕ) :
     f.geometricFiber.iterateFrobenius hp hX (frobeniusExponent k * m) =
-      (f.geometricGaloisFrobenius ^ m).inv ≫ End.asHom (End.of f.geometricFiberFrobenius ^ m) := by
+      (f.geometricGaloisFrobenius ^ m).asIso.inv ≫ End.asHom (End.of f.geometricFiberFrobenius ^ m) := by
   rw [iterateFrobenius_geometricFiber_mul_eq, End.asHom_pow_comp_eq_comp_asHom_pow
     (f.geometricFiberFrobenius_comp_geometricGaloisFrobenius_pow_inv m) m]
 

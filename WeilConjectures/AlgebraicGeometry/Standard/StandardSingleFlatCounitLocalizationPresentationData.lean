@@ -49,7 +49,7 @@ private theorem localizationPresentation_flatOver_restrict
   change (M.smul (((i.appIso U.1).inv.hom)
     (((i ≫ p).appLE V.1 U.1 e).hom r))).asHom.hom m =
       (M.smul ((p.appLE V.1 U'.1 e').hom r)).asHom.hom m
-  exact congrArg (fun x ↦ (M.smul x).hom m) (congrArg (fun x ↦ x.hom r) heq)
+  exact congrArg (fun x ↦ (M.smul x).asHom.hom m) (congrArg (fun x ↦ x.hom r) heq)
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Concrete localized presentation witnesses used by completion.
