@@ -130,7 +130,7 @@ which is isomorphic to the pullback along `Fr_X`
 noncomputable abbrev WeilSheaf.frobeniusPullback :
     AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
       AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l]
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*ᵃ[l]
 
 /-- The Frobenius pullback is an equivalence, `Fr_X` being an automorphism. -/
 instance : (WeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
@@ -304,7 +304,7 @@ pullback along an automorphism `g` is the pushforward along `g⁻¹`. At a geome
 by `Fr_Xᵐ` up to reparametrisation it induces the Frobenius relative to `𝔽_{qᵐ}` on the
 stalk. -/
 noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].obj
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].obj
         F.obj.carrier ≅
       F.obj.carrier :=
   match m with
