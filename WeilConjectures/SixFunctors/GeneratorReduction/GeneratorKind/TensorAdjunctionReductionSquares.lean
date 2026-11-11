@@ -176,7 +176,6 @@ private theorem comparison_associator {A N : Type*} [Category A] [Category N]
   let := TN.monoidal
   dsimp only [CoefficientClosedStructure.tensor] at μ
   dsimp only [CoefficientClosedStructure.tensor] at *
-  try simp only [Category.id_comp, Category.comp_id]
   have hn := MonoidalCategory.associator_naturality x y z
   change TN.tensor.map (Prod.mkHom (TN.tensor.map (Prod.mkHom x y)) z) ≫
       (TN.monoidal.associator X' Y' Z').hom =
