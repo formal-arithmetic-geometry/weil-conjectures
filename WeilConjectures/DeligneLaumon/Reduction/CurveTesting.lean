@@ -135,7 +135,7 @@ theorem Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_upperSt
     (WeilCoefficients.linearEquivOfIso (upperStarStalkIso l i c (G j).obj.X)) (fun h v ↦ ?_)
     (hUirr j _ fun g ↦ ?_)
   · have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v)
-      (hcompat h (G j))
+      (hcompat h.asIso (G j))
     simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at this
     exact this
   · obtain ⟨γ, hγ, hγU⟩ := hΓ g
