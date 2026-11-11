@@ -112,7 +112,7 @@ variable {K}
 
 /-- The smooth functions `f : G → N` with `f (k * g) = k • f g` for `k ∈ K`. -/
 def coindSubgroup (N : DiscreteModule.{w} K) : AddSubgroup (smoothFunctions G N.obj.V) where
-  carrier := {f | ∀ (k : K) (g : G), f.1 (k * g) = (N.obj.ρ k).hom (f.1 g)}
+  carrier := {f | ∀ (k : K) (g : G), f.1 (k * g) = (N.obj.ρ k).asHom.hom (f.1 g)}
   zero_mem' := by simp
   add_mem' {f₁ f₂} h₁ h₂ k g := by simp [h₁ k g, h₂ k g]
   neg_mem' {f} h k g := by simp [h k g]
@@ -134,10 +134,10 @@ acting by right translation. -/
 def coindAction (N : DiscreteModule.{w} K) : Action AddCommGrpCat.{max u w} G where
   V := AddCommGrpCat.of (coindSubgroup N)
   ρ :=
-    { toFun g := AddCommGrpCat.ofHom (coindTranslate N g)
-      map_one' := AddCommGrpCat.ext fun f ↦ Subtype.ext (Subtype.ext (funext fun x ↦ by
+    { toFun g := .of <| AddCommGrpCat.ofHom (coindTranslate N g)
+      map_one' := End.ext <| AddCommGrpCat.ext fun f ↦ Subtype.ext (Subtype.ext (funext fun x ↦ by
         simp [End.one_asHom]))
-      map_mul' a b := AddCommGrpCat.ext fun f ↦ Subtype.ext (Subtype.ext (funext fun x ↦ by
+      map_mul' a b := End.ext <| AddCommGrpCat.ext fun f ↦ Subtype.ext (Subtype.ext (funext fun x ↦ by
         simp [End.mul_asHom, mul_assoc])) }
 
 lemma coindAction_stabilizer (N : DiscreteModule.{w} K) (f : (coindAction K N).V) :
@@ -171,22 +171,22 @@ def coindLift {X : DiscreteModule.{w} G} {N : DiscreteModule.{w} K}
     (ψ : (resSub K).obj X ⟶ N) : X ⟶ (coind K).obj N :=
   ObjectProperty.homMk
     { hom := AddCommGrpCat.ofHom
-        { toFun x := ⟨⟨fun g ↦ ψ.hom.hom.hom ((X.obj.ρ g).hom x), Subgroup.isOpen_mono
+        { toFun x := ⟨⟨fun g ↦ ψ.hom.hom.hom ((X.obj.ρ g).asHom.hom x), Subgroup.isOpen_mono
             (H₁ := X.obj.stabilizer x) (fun u hu y ↦ by simp [mem_stabilizer.1 hu])
             (X.isOpen_stabilizer x)⟩, fun k g ↦ by
               simp only [ρ_mul_apply]
-              exact hom_comm_apply ψ.hom k ((X.obj.ρ g).hom x)⟩
+              exact hom_comm_apply ψ.hom k ((X.obj.ρ g).asHom.hom x)⟩
           map_zero' := by ext; simp
           map_add' _ _ := by ext; simp }
       comm g := AddCommGrpCat.ext fun x ↦ Subtype.ext (Subtype.ext (funext fun y ↦ by
-        change ψ.hom.hom.hom ((X.obj.ρ y).hom ((X.obj.ρ g).hom x)) =
-          ψ.hom.hom.hom ((X.obj.ρ (y * g)).hom x)
+        change ψ.hom.hom.hom ((X.obj.ρ y).asHom.hom ((X.obj.ρ g).asHom.hom x)) =
+          ψ.hom.hom.hom ((X.obj.ρ (y * g)).asHom.hom x)
         simp)) }
 
 @[simp]
 lemma coindLift_apply {X : DiscreteModule.{w} G} {N : DiscreteModule.{w} K}
     (ψ : (resSub K).obj X ⟶ N) (x : X.obj.V) (g : G) :
-    ((coindLift ψ).hom.hom.hom x).1.1 g = ψ.hom.hom.hom ((X.obj.ρ g).hom x) :=
+    ((coindLift ψ).hom.hom.hom x).1.1 g = ψ.hom.hom.hom ((X.obj.ρ g).asHom.hom x) :=
   rfl
 
 variable (K) in
@@ -198,7 +198,7 @@ def coindEval (N : DiscreteModule.{w} K) : (resSub K).obj ((coind K).obj N) ⟶ 
           map_zero' := rfl
           map_add' _ _ := rfl }
       comm k := AddCommGrpCat.ext fun f ↦ by
-        change f.1.1 (1 * (k : G)) = (N.obj.ρ k).hom (f.1.1 1)
+        change f.1.1 (1 * (k : G)) = (N.obj.ρ k).asHom.hom (f.1.1 1)
         rw [one_mul, ← f.2 k 1, mul_one] }
 
 @[simp]
@@ -215,12 +215,12 @@ def resCoindAdjunction : resSub.{w} K ⊣ coind K :=
           invFun F := (resSub K).map F ≫ coindEval K N
           left_inv ψ := by
             ext x
-            change ψ.hom.hom.hom ((X.obj.ρ 1).hom x) = ψ.hom.hom.hom x
+            change ψ.hom.hom.hom ((X.obj.ρ 1).asHom.hom x) = ψ.hom.hom.hom x
             simp
           right_inv F := by
             ext x
             refine Subtype.ext (Subtype.ext (funext fun g ↦ ?_))
-            change ((F.hom.hom.hom ((X.obj.ρ g).hom x))).1.1 1 = (F.hom.hom.hom x).1.1 g
+            change ((F.hom.hom.hom ((X.obj.ρ g).asHom.hom x))).1.1 1 = (F.hom.hom.hom x).1.1 g
             rw [hom_comm_apply]
             change (F.hom.hom.hom x).1.1 (1 * g) = _
             rw [one_mul] }
@@ -228,7 +228,7 @@ def resCoindAdjunction : resSub.{w} K ⊣ coind K :=
       homEquiv_naturality_right f g := rfl }
 
 lemma resCoindAdjunction_unit_app_apply (M : DiscreteModule.{w} G) (x : M.obj.V) (g : G) :
-    (((resCoindAdjunction K).unit.app M).hom.hom.hom x).1.1 g = (M.obj.ρ g).hom x :=
+    (((resCoindAdjunction K).unit.app M).hom.hom.hom x).1.1 g = (M.obj.ρ g).asHom.hom x :=
   rfl
 
 instance : PreservesFiniteLimits (coind.{w} K) :=
@@ -273,8 +273,8 @@ lemma surjective_coind_map (hK : IsOpen (K : Set G)) {N N' : DiscreteModule.{w} 
   intro f'
   let n : G → N.obj.V := fun r ↦ Function.surjInv hψ (f'.1.1 r)
   let kk : G → K := fun g ↦ ⟨g * (cosetRep K g)⁻¹, mul_inv_cosetRep_mem g⟩
-  let F : G → N.obj.V := fun g ↦ (N.obj.ρ (kk g)).hom (n (cosetRep K g))
-  have hFk (k : K) (g : G) : F (k * g) = (N.obj.ρ k).hom (F g) := by
+  let F : G → N.obj.V := fun g ↦ (N.obj.ρ (kk g)).asHom.hom (n (cosetRep K g))
+  have hFk (k : K) (g : G) : F (k * g) = (N.obj.ρ k).asHom.hom (F g) := by
     have h1 : cosetRep K (k * g) = cosetRep K g :=
       cosetRep_eq_of_mul_inv_mem (by simp [mul_assoc])
     have h2 : kk (k * g) = k * kk g := Subtype.ext (by simp [kk, h1, mul_assoc])
@@ -305,7 +305,7 @@ lemma surjective_coind_map (hK : IsOpen (K : Set G)) {N N' : DiscreteModule.{w} 
       simp only [kk, h1, Subgroup.coe_mul, hσu, hc]
       group)
     simp only [F, h1, h2, ρ_mul_apply]
-    rw [show (N.obj.ρ σ).hom (n (cosetRep K g)) = n (cosetRep K g) from hσ]
+    rw [show (N.obj.ρ σ).asHom.hom (n (cosetRep K g)) = n (cosetRep K g) from hσ]
   · rw [Subgroup.coe_iInf]
     exact isOpen_iInter_of_finite hV
   · refine Subtype.ext (Subtype.ext (funext fun g ↦ ?_))
@@ -349,19 +349,19 @@ variable (M : DiscreteModule.{w} G)
 /-- The summand `h⁻¹ • f h` of the trace, which only depends on the right coset `K h`. -/
 def traceTerm (f : ((coind K).obj ((resSub K).obj M)).obj.V)
     (c : Quotient (QuotientGroup.rightRel K)) : M.obj.V :=
-  Quotient.liftOn' c (fun h ↦ (M.obj.ρ h⁻¹).hom (f.1.1 h)) fun a b hab ↦ by
+  Quotient.liftOn' c (fun h ↦ (M.obj.ρ h⁻¹).asHom.hom (f.1.1 h)) fun a b hab ↦ by
     rw [QuotientGroup.rightRel_apply] at hab
     have := (show coindSubgroup ((resSub K).obj M) from f).2 ⟨b * a⁻¹, hab⟩ a
     simp only [inv_mul_cancel_right] at this
-    change (M.obj.ρ a⁻¹).hom (f.1.1 a) = (M.obj.ρ b⁻¹).hom (f.1.1 b)
+    change (M.obj.ρ a⁻¹).asHom.hom (f.1.1 a) = (M.obj.ρ b⁻¹).asHom.hom (f.1.1 b)
     rw [this]
-    change _ = (M.obj.ρ b⁻¹).hom ((M.obj.ρ (b * a⁻¹)).hom (f.1.1 a))
+    change _ = (M.obj.ρ b⁻¹).asHom.hom ((M.obj.ρ (b * a⁻¹)).asHom.hom (f.1.1 a))
     rw [← ρ_mul_apply]
     simp
 
 omit [K.FiniteIndex] in
 lemma traceTerm_mk (f : ((coind K).obj ((resSub K).obj M)).obj.V) (h : G) :
-    traceTerm M f (Quotient.mk'' h) = (M.obj.ρ h⁻¹).hom (f.1.1 h) :=
+    traceTerm M f (Quotient.mk'' h) = (M.obj.ρ h⁻¹).asHom.hom (f.1.1 h) :=
   rfl
 
 noncomputable local instance : Fintype (Quotient (QuotientGroup.rightRel K)) :=
@@ -383,12 +383,12 @@ noncomputable def coindTrace : (coind K).obj ((resSub K).obj M) ⟶ M :=
             exact map_add _ _ _ }
       comm g := AddCommGrpCat.ext fun f ↦ by
         change ∑ c, traceTerm M (coindTranslate _ g f) c =
-          (M.obj.ρ g).hom (∑ c, traceTerm M f c)
+          (M.obj.ρ g).asHom.hom (∑ c, traceTerm M f c)
         rw [map_sum]
         conv_rhs => rw [← (rightCosetMul g).sum_comp]
         refine Finset.sum_congr rfl fun c _ ↦ Quotient.inductionOn' c fun h ↦ ?_
-        change (M.obj.ρ h⁻¹).hom (f.1.1 (h * g)) =
-          (M.obj.ρ g).hom ((M.obj.ρ (h * g)⁻¹).hom (f.1.1 (h * g)))
+        change (M.obj.ρ h⁻¹).asHom.hom (f.1.1 (h * g)) =
+          (M.obj.ρ g).asHom.hom ((M.obj.ρ (h * g)⁻¹).asHom.hom (f.1.1 (h * g)))
         rw [← ρ_mul_apply]
         simp }
 
