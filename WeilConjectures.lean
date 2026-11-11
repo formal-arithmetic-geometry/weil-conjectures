@@ -22646,6 +22646,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleRetract
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DerivedStalk
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DirectImageAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualPerfect
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualizableLocal
@@ -22714,7 +22715,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Pro
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaBounded
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaProperField
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProperBaseChangeUnbounded
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProperFiniteness
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProperGeometricFibre
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RefinementComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsLowerStar
