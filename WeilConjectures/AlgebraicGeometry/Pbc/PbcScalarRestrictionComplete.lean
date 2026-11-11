@@ -109,13 +109,13 @@ private theorem scalarPrincipalMap
     ∃ c : (F.mapHomologicalComplex (.up ℤ)).obj
         (CochainComplex.PrincipalCone.completion μ) ≅
           CochainComplex.PrincipalCone.completion
-            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ.asHom)),
+            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)),
       (F.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ) ≫
         c.hom = CochainComplex.PrincipalCone.unit
-          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ.asHom)) := by
+          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)) := by
   classical
   let G := F.mapHomologicalComplex (.up ℤ)
-  let ν := End.of (G.map μ.asHom)
+  let ν := End.of (G.map μ)
   let K := fun n ↦ CochainComplex.PrincipalCone.level μ n
   let L := fun n ↦ CochainComplex.PrincipalCone.level ν n
   let e := CochainComplex.principalLevelIso F μ
@@ -243,7 +243,7 @@ private theorem pbcScalarModelRestrictionComplete
   let Q := DerivedCategory.Q.objPreimage M
   let e : DerivedCategory.Q.obj Q ≅ M := DerivedCategory.Q.objObjPreimageIso M
   obtain ⟨μ, hμ⟩ : ∃ μ : End Q, ∀ (q : ℤ) (U : W.ProEtᵒᵖ) (x : (Q.X q).val.obj U),
-      (μ.asHom.f q).val.app U x = σ' U • x := by
+      (μ.f q).val.app U x = σ' U • x := by
     let μ : Q ⟶ Q :=
       { f := fun q ↦
           { val :=
@@ -271,14 +271,14 @@ private theorem pbcScalarModelRestrictionComplete
           intro U
           ext x
           exact ((Q.d a b).val.app U).hom.map_smul (σ' U) x }
-    exact ⟨End.of μ, fun q U x ↦ rfl⟩
+    exact ⟨μ, fun q U x ↦ rfl⟩
   have hF := (WeilConjectures.IntegralPrincipalCone.localCriterion l F W σ' hσ' Q μ hμ M e).2.mp
     hloc
   have hu : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)) :=
     IsIso.of_isIso_comp_left e.inv _
   have := (pbcScalarAdjunction φ').rightAdjoint_preservesLimits
   obtain ⟨c, hc⟩ := scalarPrincipalMap G μ
-  let ν := End.of ((G.mapHomologicalComplex (.up ℤ)).map μ.asHom)
+  let ν := End.of ((G.mapHomologicalComplex (.up ℤ)).map μ)
   have hG : IsIso (DerivedCategory.Q.map
       ((G.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ))) := by
     have h := G.mapDerivedCategoryFactors.hom.naturality (CochainComplex.PrincipalCone.unit μ)

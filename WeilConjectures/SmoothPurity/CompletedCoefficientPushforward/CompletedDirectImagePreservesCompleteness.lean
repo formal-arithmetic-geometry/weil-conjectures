@@ -329,7 +329,8 @@ private theorem mapEnd_pow (G : CochainComplex A ℤ ⥤ CochainComplex B ℤ)
 private def principalLevelIso (H : A ⥤ B) [H.Additive]
     {P : CochainComplex A ℤ} (μ : End P) (n : ℕ) :
     (H.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.PrincipalCone.level μ n) ≅
-      CochainComplex.PrincipalCone.level (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n :=
+      CochainComplex.PrincipalCone.level
+        (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n :=
   CochainComplex.mappingCone.mapHomologicalComplexIso (μ ^ (n + 1)).asHom H ≪≫
     eqToIso (congrArg
       (fun z : (H.mapHomologicalComplex (.up ℤ)).obj P ⟶

@@ -48,13 +48,13 @@ private theorem principalMap
     ∃ c : (F.mapHomologicalComplex (.up ℤ)).obj
         (CochainComplex.PrincipalCone.completion μ) ≅
           CochainComplex.PrincipalCone.completion
-            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ.asHom)),
+            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)),
       (F.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ) ≫
         c.hom = CochainComplex.PrincipalCone.unit
-          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ.asHom)) := by
+          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)) := by
   classical
   let G := F.mapHomologicalComplex (.up ℤ)
-  let ν := End.of (G.map μ.asHom)
+  let ν := End.of (G.map μ)
   let K := fun n ↦ CochainComplex.PrincipalCone.level μ n
   let L := fun n ↦ CochainComplex.PrincipalCone.level ν n
   let e := CochainComplex.principalLevelIso F μ
@@ -231,11 +231,10 @@ private theorem inverse_scalar
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem scalar_restriction (Q : IntegralOnSlice.Cx l E X none) :
-    End.of (((restriction l E j o).mapHomologicalComplex (.up ℤ)).map
-        (WeilConjectures.integralKoszulScalar l E X Q).asHom) =
+    ((restriction l E j o).mapHomologicalComplex (.up ℤ)).map
+        (WeilConjectures.integralKoszulScalar l E X Q) =
       WeilConjectures.integralKoszulScalar l E U
         (((restriction l E j o).mapHomologicalComplex (.up ℤ)).obj Q) := by
-  apply End.ext
   apply HomologicalComplex.Hom.ext
   funext i
   let R := WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E U
@@ -249,7 +248,7 @@ private theorem scalar_restriction (Q : IntegralOnSlice.Cx l E X none) :
     (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E X) (openObject j)
   refine inverse_scalar (S := S) (R := R) (sliceSite j) φ
     o.integral o.integralFunctor (F.obj (Q.X i))
-    (F.map ((WeilConjectures.integralKoszulScalar l E X Q).asHom.f i))
+    (F.map ((WeilConjectures.integralKoszulScalar l E X Q).f i))
     _ (fun V ↦ WeilConjectures.integralCompletionScalarValue l E X (op V.unop.left))
     (WeilConjectures.integralCompletionScalarValue l E U) ?_ ?_ ?_
   · intro V x
@@ -305,13 +304,13 @@ theorem openRestrictionComplete
   let : PreservesLimitsOfShape (Discrete ℕ) F :=
     (ordinaryAdjunction l E j o).rightAdjoint_preservesLimits.preservesLimitsOfShape
   have hμ := scalar_restriction l E j o Q
-  change End.of (G.map (WeilConjectures.integralKoszulScalar l E X Q).asHom) =
+  change G.map (WeilConjectures.integralKoszulScalar l E X Q) =
     WeilConjectures.integralKoszulScalar l E U (G.obj Q) at hμ
   have hm := principalMap F (WeilConjectures.integralKoszulScalar l E X Q)
   change ∃ c : G.obj _ ≅ CochainComplex.PrincipalCone.completion
-      (End.of (G.map (WeilConjectures.integralKoszulScalar l E X Q).asHom)),
+      (G.map (WeilConjectures.integralKoszulScalar l E X Q)),
     G.map _ ≫ c.hom = CochainComplex.PrincipalCone.unit
-      (End.of (G.map (WeilConjectures.integralKoszulScalar l E X Q).asHom)) at hm
+      (G.map (WeilConjectures.integralKoszulScalar l E X Q)) at hm
   rw [hμ] at hm
   obtain ⟨c, hc⟩ := hm
   have hmap : IsIso (DerivedCategory.Q.map (G.map

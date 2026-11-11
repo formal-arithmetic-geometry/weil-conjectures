@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
 public import WeilConjectures.SixFunctors.Supporting.DerivedCompleteUnrestricted
 import WeilConjectures.SmoothPurity.Derived.DerivedCompleteUnrestrictedIso

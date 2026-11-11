@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.SmoothPurity.IntegralScalarOperations.IntegralOperationsScalarExtension
 
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
