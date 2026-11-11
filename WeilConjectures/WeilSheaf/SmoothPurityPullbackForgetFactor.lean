@@ -56,6 +56,6 @@ lemma purity_upperStarForgetIso_factor_hom
       simp only [Functor.mapIso_inv, Iso.app_inv, Functor.comp_obj] at h ⊢
       dsimp only [Mod.forget] at h ⊢
       exact h)
-  exact (h')
+  exact h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
