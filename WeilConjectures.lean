@@ -25222,6 +25222,7 @@ public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.FieldDualizable
+public import WeilConjectures.TraceFormula.FiltrationTraceAdditivity
 public import WeilConjectures.TraceFormula.FiniteEtaleStalkTrace
 public import WeilConjectures.TraceFormula.FiniteFieldDatum.FrobeniusOpenSquare
 public import WeilConjectures.TraceFormula.FiniteGeometricTensorDomain
