@@ -152,8 +152,7 @@ lemma fiberRankFun_upperStar_eq_zero {W : Scheme.{u}} (g : W ⟶ X) {x : W}
   by_cases hne : {d | ∃ (W' : Scheme.{u}) (g' : W' ⟶ W) (w : W'), g' w = x ∧
       HasFiberRank ℓ ((g')^*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧.obj
         ((g)^*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧.obj M)) w d}.Nonempty
-  · -- A realized fiber rank pulls back from the composite map to the original scheme.
-    obtain ⟨W', g', w, hw, H⟩ := Nat.sInf_mem hne
+  · obtain ⟨W', g', w, hw, H⟩ := Nat.sInf_mem hne
     have H' := H.of_iso ((upperStarComp (Profinite.padicAlgClRingObj.{u} ℓ) g' g).app M).symm
     change sInf _ = 0
     rw [H'.eq_fiberRankFun (g' ≫ g), Scheme.Hom.comp_apply, hw, h]
