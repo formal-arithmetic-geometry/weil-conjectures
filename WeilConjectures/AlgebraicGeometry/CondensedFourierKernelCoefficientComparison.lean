@@ -54,14 +54,14 @@ private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] (k : Type u) [Field k] [Fintype k] (c : k) :
-    (condensedArtinSchreierTranslationAction Λ k c).asHom.hom ≫
+    (condensedArtinSchreierTranslationAction Λ k c).hom ≫
         (ProEtale.lowerStar Ab.{u + 1}
           (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
             (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) =
       (ProEtale.lowerStar Ab.{u + 1}
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
           (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) ≫
-        (condensedArtinSchreierTranslationAction Λ' k c).asHom.hom := by
+        (condensedArtinSchreierTranslationAction Λ' k c).hom := by
   unfold condensedArtinSchreierTranslationAction
   simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]
   erw [CondensedRing.homEquiv_εIso_inv_hom Λ (Etale.artinSchreierTranslation k c),
@@ -81,15 +81,15 @@ private theorem regularCoefficient
     [MonoidalPreadditive C] [BraidedCategory C]
     {R S : C} [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
     (a : R ⟶ S) [IsMonHom a] (s : MonObj.Γ R) :
-    (Mod.regularEndRingHom s).asHom.hom ≫ a =
-      a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom.hom := by
-  have h : (Mod.regularEndRingHom s).asHom ≫ Mod.regularHomComap a =
+    (Mod.regularEndRingHom s).hom ≫ a =
+      a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).hom := by
+  have h : Mod.regularEndRingHom s ≫ Mod.regularHomComap a =
       Mod.regularHomComap a ≫ (Mod.comap a).map
-        (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom := by
+        (Mod.regularEndRingHom (MonObj.Γ.map a s)) := by
     apply Mod.regular_hom_ext
-    change (MonObj.one : 𝟙_ C ⟶ R) ≫ ((Mod.regularEndRingHom s).asHom.hom ≫ a) =
+    change (MonObj.one : 𝟙_ C ⟶ R) ≫ ((Mod.regularEndRingHom s).hom ≫ a) =
       (MonObj.one : 𝟙_ C ⟶ R) ≫
-        (a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom.hom)
+        (a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).hom)
     rw [← Category.assoc, ← Category.assoc, IsMonHom.one_hom (f := a)]
     erw [Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular,
       Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular]
@@ -177,9 +177,9 @@ private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
   let : PreservesFiniteColimits F := by infer_instance
   let : PreservesFiniteLimits F :=
     CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl ℓ A E
-  let P := (condensedArtinSchreierProjector (Profinite.continuousMapRingObj E.1) k ψ).asHom
-  let Q := (condensedArtinSchreierProjector (Profinite.padicAlgClRingObj ℓ) k
-    ((MonObj.Γ.map a).toMonoidHom.compAddChar ψ)).asHom
+  let P := condensedArtinSchreierProjector (Profinite.continuousMapRingObj E.1) k ψ
+  let Q := condensedArtinSchreierProjector (Profinite.padicAlgClRingObj ℓ) k
+    ((MonObj.Γ.map a).toMonoidHom.compAddChar ψ)
   let e := pushScalar ℓ E f
   have h : F.map P ≫ e.hom = e.hom ≫ Q := by
     apply Mod.extendScalarsObj_hom_ext'
