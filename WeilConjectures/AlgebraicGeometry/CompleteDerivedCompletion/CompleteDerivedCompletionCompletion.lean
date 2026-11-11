@@ -1044,3 +1044,4 @@ theorem finiteReduction_kappa (T : Scheme.{u})
 end CompleteDerivedCompletion
 
 end AlgebraicGeometry.ProEtale
+
