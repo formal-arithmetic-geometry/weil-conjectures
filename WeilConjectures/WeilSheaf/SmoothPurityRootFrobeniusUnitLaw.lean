@@ -35,7 +35,7 @@ variable {k : Type u} [Field k] [Finite k] {ℓ : ℕ} [Fact ℓ.Prime]
 
 /-- The root trivialization, including the mapped-module unit, has scalar q. -/
 lemma purity_tateModule_rootTrivialization_frobenius :
-    (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map
+    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
         (upperStarMapModTateModuleIsoUnit a.geometricFiberProj
           a.geometricFiberToAlgebraicClosure ℓ hζ hζ' ≪≫
           (a.geometricFiberProj)^*[Ab.{u + 1}].mapModUnitIso).hom.hom ≫

@@ -34,7 +34,6 @@ lemma purity_upperStarTateTwistNatIso_comp (d : ℕ) :
           (upperStarTateTwistNatIso ℓ g a d).hom ≫
         (upperStarTateTwistNatIso ℓ f (g ≫ a) d).hom =
       (upperStarTateTwistNatIso ℓ (f ≫ g) a d).hom := by
-
   induction d with
   | zero => exact upperStarComp_hom_app_unit (Profinite.padicAlgClRingObj ℓ) f g
   | succ d ih =>
