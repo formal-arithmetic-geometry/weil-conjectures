@@ -193,8 +193,8 @@ theorem subsingleton_H_of_cohomologicalDimension_le (ℓ : ℕ) (hℓ : ℓ.Prim
 `Spec k` vanishes above `c`. For every pro-affine étale `v : U ⟶ X` (a cofiltered limit of
 affine étale `X`-schemes `Uᵢ`) and every abelian étale sheaf `F` on `X` killed by a power of
 `ℓ`, `Hⁿ(U_ét, F|_U) = 0` for `n > d + c`: the group is the filtered colimit of the
-`Hⁿ((Uᵢ)_ét, F|_{Uᵢ})` [Stacks, Tag 03Q6], each of which vanishes by `ℓ`-primary affine Artin
-vanishing, since `dim Uᵢ ≤ dim X`. -/
+`Hⁿ((Uᵢ)_ét, F|_{Uᵢ})` [Stacks, Tag 03Q6], each of which vanishes by `ℓ`-primary
+affine Artin vanishing, since `dim Uᵢ ≤ dim X`. -/
 theorem subsingleton_H_upperStar_of_proAffineEtale (ℓ : ℕ) (hℓ : ℓ.Prime) {k : Type u}
     [Field k] {c d : ℕ}
     (hk : ∀ G : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1},
@@ -271,8 +271,8 @@ nilpotent (e.g. a finite `ℓ`-primary ring). For every classical sheaf `F` of `
 pro-affine étale), `Hᵠ(U, F) = 0` for `q > d + c`.
 
 Proof (blueprint): write `F = ν^* G` (`proEtaleClassicalSheaves`) and `U = lim Uᵢ`; then
-`Hᵠ(U_proét, F|_U) = Hᵠ(U_ét, G|_U)`, whose underlying abelian group is the étale cohomology of
-the underlying abelian sheaf, killed by a power of `ℓ`; it vanishes by
+`Hᵠ(U_proét, F|_U) = Hᵠ(U_ét, G|_U)`, whose underlying abelian group is the étale
+cohomology of the underlying abelian sheaf, killed by a power of `ℓ`; it vanishes by
 `subsingleton_H_upperStar_of_proAffineEtale`. -/
 theorem isZero_cohomology_of_proAffineEtale_of_isClassicalModuleFor (ℓ : ℕ) (hℓ : ℓ.Prime)
     {k : Type u} [Field k] {c d : ℕ} (hk : cohomologicalDimension ℓ hℓ (Spec (.of k)) ≤ c)
@@ -296,7 +296,8 @@ theorem isZero_cohomology_of_proAffineEtale_of_isClassicalModuleFor (ℓ : ℕ) 
       (ObjectProperty.ι _).mapIso (Φ.objObjPreimageIso ⟨F, hF⟩)
   let w := U.hom
   let GU := (Etale.upperStar (ModuleCat.{u + 1} A) w).obj G
-  let Fo := sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
+  let Fo := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
   have h0 (V : X.Etaleᵒᵖ) (y : G.obj.obj V) : (ℓ ^ m) • y = 0 := by
     rw [← Nat.cast_smul_eq_nsmul A, Nat.cast_pow, hm, zero_smul]
   have hmo : (ℓ ^ m) • 𝟙 (Fo.obj G) = 0 := by
