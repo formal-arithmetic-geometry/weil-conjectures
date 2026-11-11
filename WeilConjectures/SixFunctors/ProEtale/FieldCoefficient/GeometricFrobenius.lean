@@ -104,7 +104,8 @@ composites are the pullback along `Fr_X ≫ φ̄ = φ̄ ≫ Fr_Y`. -/
 noncomputable def fieldUpperStarGeometricFiberMapCompFrobeniusIso :
     (Scheme.Hom.geometricFiberMap φ h)^*ᶠ[Λ] ⋙ (f.geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ] ≅
       (g.geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ] ⋙ (Scheme.Hom.geometricFiberMap φ h)^*ᶠ[Λ] :=
-  Functor.isoWhiskerLeft _ (fieldUpperStarIsoLowerStarInv Λ f.geometricGaloisFrobenius.asIso).symm ≪≫
+  Functor.isoWhiskerLeft _
+      (fieldUpperStarIsoLowerStarInv Λ f.geometricGaloisFrobenius.asIso).symm ≪≫
     (fieldUpperStarComp Λ _ _).symm ≪≫
     fieldUpperStarCongr Λ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm ≪≫
     fieldUpperStarComp Λ _ _ ≪≫
