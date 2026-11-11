@@ -173,14 +173,14 @@ def scalarOnModules (X : Scheme.{u})
     𝟭 (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integerRing l E) X)) ⟶ 𝟭 _ :=
   let dX : End (Mod.regular (condensedRingObj (integerRing l E) X)) :=
-    (regularPullbackIso l E X).inv ≫ (pullback l E X).map d ≫
-      (regularPullbackIso l E X).hom
+    .of ((regularPullbackIso l E X).inv ≫ (pullback l E X).map d.asHom ≫
+      (regularPullbackIso l E X).hom)
   (leftUnitorNatIso (CategoryTheory.Mod
     (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (integerRing l E) X))).inv ≫
       (tensoringLeft (CategoryTheory.Mod
         (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (integerRing l E) X))).map dX ≫ (leftUnitorNatIso _).hom
+        (condensedRingObj (integerRing l E) X))).map dX.asHom ≫ (leftUnitorNatIso _).hom
 
 /-- Scalar multiplication as an actual chain map, degree by degree.
 Source: blueprint resolution, On X, step 5
@@ -218,44 +218,45 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
 @[instance_reducible] private def scalarRing : CommRing (End (𝟙_ A)) :=
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
-      have h := unitEndAction_naturality a b
+      apply End.ext
+      have h := unitEndAction_naturality a.asHom b
       simpa only [End.mul_asHom, unitEndAction_unit] using h }
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 private instance derivedNakayamaResolutionInst1 : CommRing (Scalars A) := scalarRing A
 private def centerHom : Scalars A →+* CatCenter A where
-  toFun a :=
-    { app := fun X ↦ unitEndAction X a
+  toFun a := .of
+    { app := fun X ↦ (unitEndAction X a).asHom
       naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
-  map_one' := by ext X; exact (unitEndAction X).map_one
-  map_mul' a b := by ext X; exact (unitEndAction X).map_mul a b
-  map_zero' := by ext X; exact (unitEndRingHom X).map_zero
-  map_add' a b := by ext X; exact (unitEndRingHom X).map_add a b
+  map_one' := CatCenter.ext _ _ fun X ↦ congrArg End.asHom (unitEndAction X).map_one
+  map_mul' a b := CatCenter.ext _ _ fun X ↦ congrArg End.asHom ((unitEndAction X).map_mul a b)
+  map_zero' := CatCenter.ext _ _ fun X ↦ congrArg End.asHom (unitEndRingHom X).map_zero
+  map_add' a b := CatCenter.ext _ _ fun X ↦ congrArg End.asHom ((unitEndRingHom X).map_add a b)
 private instance (priority := 2000) scalarLinear : Linear (Scalars A) A :=
   Linear.ofRingMorphism (centerHom A)
 private theorem smul_eq {X Y : A} (a : Scalars A) (f : X ⟶ Y) :
-    a • f = unitEndAction X a ≫ f := rfl
+    a • f = (unitEndAction X a).asHom ≫ f := rfl
 variable [BraidedCategory A]
 omit [Preadditive A] [MonoidalPreadditive A] [BraidedCategory A] in
 private theorem action_tensor_right (X Y : A) (a : End (𝟙_ A)) :
-    X ◁ unitEndAction Y a = unitEndAction (X ⊗ Y) a := by
+    X ◁ (unitEndAction Y a).asHom = (unitEndAction (X ⊗ Y) a).asHom := by
+  cases a
   simp only [unitEndAction_apply, whiskerLeft_comp]
-  change (𝟙_ A ⟶ 𝟙_ A) at a
   monoidal
 omit [Preadditive A] [MonoidalPreadditive A] in
 private theorem action_left (X : A) (a : End (𝟙_ A)) :
-    unitEndAction X a = (λ_ X).inv ≫ a ▷ X ≫ (λ_ X).hom := by
+    (unitEndAction X a).asHom = (λ_ X).inv ≫ a.asHom ▷ X ≫ (λ_ X).hom := by
   apply (cancel_epi (λ_ X).hom).mp
   apply (cancel_mono (ρ_ X).inv).mp
   simpa only [unitEndAction_apply, Category.assoc, Iso.hom_inv_id_assoc,
     Iso.hom_inv_id, Category.comp_id, braiding_tensorUnit_left] using
-    (braiding_naturality_left a X).symm
+    (braiding_naturality_left a.asHom X).symm
 omit [Preadditive A] [MonoidalPreadditive A] in
 private theorem action_tensor_left (X Y : A) (a : End (𝟙_ A)) :
-    unitEndAction X a ▷ Y = unitEndAction (X ⊗ Y) a := by
+    (unitEndAction X a).asHom ▷ Y = (unitEndAction (X ⊗ Y) a).asHom := by
+  cases a
   rw [action_left, action_left]
   simp only [comp_whiskerRight]
-  change (𝟙_ A ⟶ 𝟙_ A) at a
   monoidal
 private instance (priority := 2000) scalarMonoidal :
     MonoidalLinear (Scalars A) A where
@@ -300,14 +301,14 @@ private theorem reductionComparison {M : A} (r : Scalars A) (p : 𝟙_ A ⟶ M)
 -- Transport through the named unit comparison using categorical identities.
 -- Unfolding the equality of the underlying module records is expensive.
 private theorem reductionComparisonViaIso {U M : A} (d : End U) (p : U ⟶ M)
-    (w : d ≫ p = 0) (hs : (ShortComplex.mk _ _ w).ShortExact)
+    (w : d.asHom ≫ p = 0) (hs : (ShortComplex.mk _ _ w).ShortExact)
     (e : U ≅ 𝟙_ A) (r : Scalars A)
-    (hr : (r : End (𝟙_ A)) = e.inv ≫ d ≫ e.hom)
+    (hr : (r : End (𝟙_ A)).asHom = e.inv ≫ d.asHom ≫ e.hom)
     (τ : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _) (hτ : τ = scalarNat r) :
     Nonempty (DerivedCategory.Q ⋙
       (curriedTensor (DerivedCategory A)).flip.obj
         ((DerivedCategory.singleFunctor A 0).obj M) ≅ coneOf τ) := by
-  have hscalar : r • 𝟙 (𝟙_ A) = e.inv ≫ d ≫ e.hom := by
+  have hscalar : r • 𝟙 (𝟙_ A) = e.inv ≫ d.asHom ≫ e.hom := by
     rw [smul_eq, unitEndAction_unit, comp_id, hr]
   let p' := e.inv ≫ p
   have w' : (r • 𝟙 (𝟙_ A)) ≫ p' = 0 := by
@@ -361,62 +362,64 @@ open Category
 namespace PowerQuotients
 variable {C : Type u} [Category.{v} C] [Abelian C]
   {U : C} (d : End U) (B : ℕ → C) (r : ∀ n, U ⟶ B n)
-  (hz : ∀ n, (d ^ n) ≫ r n = 0)
+  (hz : ∀ n, (d ^ n).asHom ≫ r n = 0)
   (hs : ∀ n, (ShortComplex.mk _ _ (hz n)).ShortExact)
-private def quotientIso (n : ℕ) : cokernel (d ^ n) ≅ B n := by
+private def quotientIso (n : ℕ) : cokernel (d ^ n).asHom ≅ B n := by
   have := (hs n).epi_g
   exact IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel _)
     (hs n).exact.gIsCokernel
 private theorem quotientIso_hom (n : ℕ) :
-    cokernel.π (d ^ n) ≫ (quotientIso d B r hz hs n).hom = r n := by
+    cokernel.π (d ^ n).asHom ≫ (quotientIso d B r hz hs n).hom = r n := by
   have := (hs n).epi_g
   exact IsColimit.comp_coconePointUniqueUpToIso_hom (cokernelIsCokernel _)
     (hs n).exact.gIsCokernel WalkingParallelPair.one
 private theorem quotientIso_inv (n : ℕ) :
-    r n ≫ (quotientIso d B r hz hs n).inv = cokernel.π (d ^ n) := by
+    r n ≫ (quotientIso d B r hz hs n).inv = cokernel.π (d ^ n).asHom := by
   rw [← quotientIso_hom d B r hz hs n, Category.assoc, Iso.hom_inv_id, comp_id]
 include hz hs in
 private theorem sequences :
     ∃ (i : ∀ m n, B m ⟶ B (n + m)) (q : ∀ m n, B (n + m) ⟶ B n),
-      (∀ m n, r m ≫ i m n = (d ^ n) ≫ r (n + m)) ∧
+      (∀ m n, r m ≫ i m n = (d ^ n).asHom ≫ r (n + m)) ∧
       (∀ m n, r (n + m) ≫ q m n = r n) ∧
       ∀ m n, ∃ h : i m n ≫ q m n = 0, (ShortComplex.mk _ _ h).ShortExact := by
-  have hpow (m n : ℕ) : (d ^ m) ≫ (d ^ n) = d ^ (n + m) := by
+  have hpow (m n : ℕ) : (d ^ m).asHom ≫ (d ^ n).asHom = (d ^ (n + m)).asHom := by
     rw [← End.mul_asHom, ← pow_add]
-  let e (m n : ℕ) : cokernel ((d ^ m) ≫ (d ^ n)) ≅ B (n + m) :=
+  let e (m n : ℕ) : cokernel ((d ^ m).asHom ≫ (d ^ n).asHom) ≅ B (n + m) :=
     cokernelIsoOfEq (hpow m n) ≪≫ quotientIso d B r hz hs (n + m)
-  let S (m n : ℕ) := kernelCokernelCompSequence.snakeInput (d ^ m) (d ^ n)
+  let S (m n : ℕ) := kernelCokernelCompSequence.snakeInput (d ^ m).asHom (d ^ n).asHom
   let i (m n : ℕ) : B m ⟶ B (n + m) :=
     (quotientIso d B r hz hs m).inv ≫ (S m n).L₃.f ≫ (e m n).hom
   let q (m n : ℕ) : B (n + m) ⟶ B n :=
     (e m n).inv ≫ (S m n).L₃.g ≫ (quotientIso d B r hz hs n).hom
   have he (m n : ℕ) :
-      cokernel.π ((d ^ m) ≫ (d ^ n)) ≫ (e m n).hom = r (n + m) := by
+      cokernel.π ((d ^ m).asHom ≫ (d ^ n).asHom) ≫ (e m n).hom = r (n + m) := by
     simp only [e, Iso.trans_hom, ← assoc, π_comp_cokernelIsoOfEq_hom]
     exact quotientIso_hom d B r hz hs _
   have he' (m n : ℕ) :
-      r (n + m) ≫ (e m n).inv = cokernel.π ((d ^ m) ≫ (d ^ n)) := by
+      r (n + m) ≫ (e m n).inv = cokernel.π ((d ^ m).asHom ≫ (d ^ n).asHom) := by
     rw [← he, assoc, Iso.hom_inv_id, comp_id]
   refine ⟨i, q, ?_, ?_, ?_⟩
   · intro m n
     dsimp [i]
     rw [← assoc, quotientIso_inv]
-    change cokernel.π (d ^ m) ≫
-      cokernel.map (d ^ m) ((d ^ m) ≫ (d ^ n)) (𝟙 U) (d ^ n) (by simp) ≫ _ = _
+    change cokernel.π (d ^ m).asHom ≫
+      cokernel.map (d ^ m).asHom ((d ^ m).asHom ≫ (d ^ n).asHom)
+        (𝟙 U) (d ^ n).asHom (by simp) ≫ _ = _
     simp only [cokernel.map, cokernel.π_desc_assoc, assoc, he]
   · intro m n
     dsimp [q]
     rw [← assoc, he']
-    change cokernel.π ((d ^ m) ≫ (d ^ n)) ≫
-      cokernel.map ((d ^ m) ≫ (d ^ n)) (d ^ n) (d ^ m) (𝟙 U) (by simp) ≫ _ = _
+    change cokernel.π ((d ^ m).asHom ≫ (d ^ n).asHom) ≫
+      cokernel.map ((d ^ m).asHom ≫ (d ^ n).asHom) (d ^ n).asHom
+        (d ^ m).asHom (𝟙 U) (by simp) ≫ _ = _
     simp only [cokernel.map, cokernel.π_desc_assoc, id_comp, quotientIso_hom]
   · intro m n
     have hz' : i m n ≫ q m n = 0 := by simp [i, q]
     refine ⟨hz', ?_⟩
-    have : Mono (d ^ n) := (hs n).mono_f
+    have : Mono (d ^ n).asHom := (hs n).mono_f
     have hmono : Mono (S m n).L₃.f := by
       have h0 : (S m n).L₂'.f = 0 :=
-        (isZero_kernel_of_mono (d ^ n)).eq_of_src _ _
+        (isZero_kernel_of_mono (d ^ n).asHom).eq_of_src _ _
       exact ((S m n).L₂'.exact_iff_mono h0).mp (S m n).L₂'_exact
     have : Epi (S m n).L₂.g := by
       dsimp [S, kernelCokernelCompSequence.snakeInput]
@@ -489,7 +492,7 @@ private def uniformizerMap : integerRing l E ⟶ integerRing l E := by
 
 private def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  refine Mod.homMk (uniformizerMap l E) ?_
+  refine .of (Mod.homMk (uniformizerMap l E) ?_)
   change MonObj.mul ≫ uniformizerMap l E =
     integerRing l E ◁ uniformizerMap l E ≫ MonObj.mul
   apply Sheaf.tensor_hom_ext
@@ -521,7 +524,7 @@ private def reductionHom (n : ℕ) :
 
 private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (x : S.unop) :
-    (((uniformizerEnd l E).hom.hom.app S) f).down x =
+    (((uniformizerEnd l E).asHom.hom.hom.app S) f).down x =
       Padic.coefficientExtensionUniformizer l E * f.down x := by
   rfl
 
@@ -539,7 +542,7 @@ private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E 
 
 private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (s : S.unop) :
-    (((uniformizerEnd l E ^ n).hom.hom.app S) f).down s =
+    (((uniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s =
       Padic.coefficientExtensionUniformizer l E ^ n * f.down s := by
   induction n generalizing f with
   | zero =>
@@ -547,12 +550,12 @@ private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     simp
   | succ n ih =>
     rw [pow_succ, End.mul_asHom]
-    change (((uniformizerEnd l E ^ n).hom.hom.app S)
-      (((uniformizerEnd l E).hom.hom.app S) f)).down s = _
+    change (((uniformizerEnd l E ^ n).asHom.hom.hom.app S)
+      (((uniformizerEnd l E).asHom.hom.hom.app S) f)).down s = _
     rw [ih, uniformizerEnd_apply, pow_succ, mul_assoc]
 
 private theorem reduction_zero (n : ℕ) :
-    (uniformizerEnd l E ^ n) ≫ reductionHom l E n = 0 := by
+    (uniformizerEnd l E ^ n).asHom ≫ reductionHom l E n = 0 := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   apply Mod.hom_ext
   apply Sheaf.hom_ext
@@ -564,7 +567,7 @@ private theorem reduction_zero (n : ℕ) :
   apply ContinuousMap.ext
   intro s
   change Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
-      ((((uniformizerEnd l E ^ n).hom.hom.app S) f).down s) = 0
+      ((((uniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s) = 0
   rw [uniformizerPower_apply, map_mul]
   have h : Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
       (Padic.coefficientExtensionUniformizer l E ^ n) = 0 := by
@@ -597,9 +600,9 @@ private instance pullbackFiniteColimits (X : Scheme.{u}) :
   infer_instance
 
 private theorem pointResolution (n : ℕ) :
-    (ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
+    (ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
       (reduction_zero l E n)).ShortExact := by
-  let S := ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
+  let S := ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
     (reduction_zero l E n)
   have hs : (S.map (Mod.forget _)).ShortExact := by
     apply shortExact_of_sectionwise
@@ -615,8 +618,8 @@ private theorem pointResolution (n : ℕ) :
       apply ContinuousMap.ext
       intro t
       have h' := congrArg (fun f ↦ f.down t) h
-      change (((uniformizerEnd l E ^ n).hom.hom.app T) f).down t =
-        (((uniformizerEnd l E ^ n).hom.hom.app T) g).down t at h'
+      change (((uniformizerEnd l E ^ n).asHom.hom.hom.app T) f).down t =
+        (((uniformizerEnd l E ^ n).asHom.hom.hom.app T) g).down t at h'
       rw [uniformizerPower_apply, uniformizerPower_apply] at h'
       exact mul_left_cancel₀ (pow_ne_zero n (uniformizer_ne_zero l E)) h'
     have hg : Function.Surjective S'.g := by
@@ -651,7 +654,7 @@ private theorem pointResolution (n : ℕ) :
       apply ULift.ext
       apply ContinuousMap.ext
       intro t
-      change (((uniformizerEnd l E ^ n).hom.hom.app T)
+      change (((uniformizerEnd l E ^ n).asHom.hom.hom.app T)
         (ULift.up (⟨g, hg⟩ : C(T.unop, Padic.coefficientExtensionIntegers l E)))).down t = _
       rw [uniformizerPower_apply]
       exact Subtype.ext (by simpa using hgf t)
@@ -668,8 +671,8 @@ private def unitEndOnX (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E))) :
     UnitScalar.Scalars (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integerRing l E) X)) :=
-  (regularPullbackIso l E X).inv ≫ (pullback l E X).map d ≫
-    (regularPullbackIso l E X).hom
+  .of ((regularPullbackIso l E X).inv ≫ (pullback l E X).map d.asHom ≫
+    (regularPullbackIso l E X).hom)
 
 private theorem scalarOnComplex_eq (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E)))
@@ -679,7 +682,7 @@ private theorem scalarOnComplex_eq (X : Scheme.{u})
     scalarOnComplex l E X d C = unitEndOnX l E X d • 𝟙 C := by
   apply HomologicalComplex.Hom.ext
   funext j
-  change (λ_ (C.X j)).inv ≫ unitEndOnX l E X d ▷ C.X j ≫ (λ_ (C.X j)).hom =
+  change (λ_ (C.X j)).inv ≫ (unitEndOnX l E X d).asHom ▷ C.X j ≫ (λ_ (C.X j)).hom =
     unitEndOnX l E X d • 𝟙 (C.X j)
   rw [UnitScalar.smul_eq, Category.comp_id, UnitScalar.action_left]
 
@@ -700,9 +703,9 @@ private theorem naturalCone (X : Scheme.{u}) (n : ℕ) :
     (curriedTensor (Derived l E X)).flip.obj
       ((DerivedCategory.singleFunctor A 0).obj
         ((pullback l E X).obj (quotientModule l E n))) ≅ UnitScalar.coneOf τ)
-  let S := (ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
+  let S := (ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
     (reduction_zero l E n)).map (pullback l E X)
-  exact UnitScalar.reductionComparisonViaIso S.f S.g S.zero
+  exact UnitScalar.reductionComparisonViaIso (.of S.f) S.g S.zero
     ((pointResolution l E n).map_of_exact (pullback l E X))
     (regularPullbackIso l E X) r rfl τ hτ
 
@@ -739,16 +742,16 @@ Proof:
 theorem derived_nakayama_resolution :
     ∃ (d : End (Mod.regular (integerRing l E))),
       (∀ (S : Profinite.{u}ᵒᵖ) (f : (integerRing l E).obj.obj S) (s : S.unop),
-        ((d.hom.hom.app S) f).down s =
+        ((d.asHom.hom.hom.app S) f).down s =
           Padic.coefficientExtensionUniformizer l E * f.down s) ∧
       ∃ (r : ∀ n : ℕ, Mod.regular (integerRing l E) ⟶ quotientModule l E n),
         (∀ n : ℕ, (r n).hom = reductionRing l E n) ∧
         ∃ (i : ∀ m n : ℕ, quotientModule l E m ⟶ quotientModule l E (n + m))
           (q : ∀ m n : ℕ, quotientModule l E (n + m) ⟶ quotientModule l E n),
-          (∀ m n : ℕ, r m ≫ i m n = (d ^ n) ≫ r (n + m)) ∧
+          (∀ m n : ℕ, r m ≫ i m n = (d ^ n).asHom ≫ r (n + m)) ∧
           (∀ m n : ℕ, r (n + m) ≫ q m n = r n) ∧
           ∀ (X : Scheme.{u}) (n : ℕ), 1 ≤ n →
-            (∃ h : (pullback l E X).map (d ^ n) ≫ (pullback l E X).map (r n) = 0,
+            (∃ h : (pullback l E X).map (d ^ n).asHom ≫ (pullback l E X).map (r n) = 0,
               (ShortComplex.mk _ _ h).ShortExact) ∧
             Nonempty (DerivedCategory.Q ⋙ reductionFunctor l E X n ≅
               coneFunctor l E X (d ^ n)) ∧
