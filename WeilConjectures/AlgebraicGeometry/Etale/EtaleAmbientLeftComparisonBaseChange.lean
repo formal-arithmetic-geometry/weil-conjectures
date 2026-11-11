@@ -305,7 +305,7 @@ private theorem normalized_exact_inverse
   have h := normalized_square A sq c d _ _
     (a.ofNatIsoLeft dc.symm) (b.ofNatIsoLeft dd.symm)
   have hm := mate_ofNatIsoLeft a b dc.symm dd.symm α
-  simp only [Iso.symm_hom, Iso.symm_inv] at hm
+  simp only [Iso.symm_hom, Iso.symm_inv, TwoSquare.natTrans] at hm
   have he : mateEquiv a b ((α.whiskerRight dd.inv).whiskerLeft dc.hom) =
       TwoSquare.mk _ _ _ _
         (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).inv := by
