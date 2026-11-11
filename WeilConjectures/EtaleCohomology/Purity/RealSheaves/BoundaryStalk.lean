@@ -243,7 +243,7 @@ theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Fini
       FiniteLocallyConstant.stalkEquiv_toPresheafFiber]
     rfl
   have ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app P t = t := by
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app P t = t := by
     intro σ hσ
     have h := hx σ hσ
     rw [← hx₀, galoisStalkMap] at h

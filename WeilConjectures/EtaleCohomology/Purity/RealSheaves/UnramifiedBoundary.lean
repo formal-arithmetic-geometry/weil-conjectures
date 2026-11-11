@@ -162,7 +162,7 @@ lemma _root_.AlgebraicGeometry.Scheme.FiniteEtale.app_apply_eq_of_pullbackPathIs
     {X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (f : X ⟶ Y)
     {y : Spec (.of Ω) ⟶ X} {σ : Aut (fiber y)} (hσ : pullbackPathIso f σ = Iso.refl _)
     {Q : X.FiniteEtale} {P : Y.FiniteEtale} (i : Q ≅ (pullback f).obj P) (a : (fiber y).obj Q) :
-    σ.hom.app Q a = a := by
+    σ.asIso.hom.app Q a = a := by
   have h₁ : σ.hom.app ((pullback f).obj P) = 𝟙 _ := by
     have h := congrArg (fun τ : fiber (y ≫ f) ≅ fiber (y ≫ f) ↦ τ.hom.app P) hσ
     simp only [pullbackPathIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,

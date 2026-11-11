@@ -145,7 +145,7 @@ lemma constantCoverPoint_injective (A : FiniteEtaleAlgebra K) {ψ ψ' : A.1 →+
 omit [Finite K] in
 lemma galoisToAut_constantCoverPoint (σ : Gal(Ω/C.functionField)) (A : FiniteEtaleAlgebra K)
     (ψ : A.1 →+* Ω) (hψ : ψ.comp (algebraMap K A.1) = genericStructHom pU j) :
-    (galoisToAut (genericPointLift j) σ).hom.app _ (constantCoverPoint j A ψ hψ) =
+    (galoisToAut (genericPointLift j) σ).asIso.hom.app _ (constantCoverPoint j A ψ hψ) =
       constantCoverPoint j A ((σ : Ω →+* Ω).comp ψ)
         (by rw [RingHom.comp_assoc, hψ, galois_comp_genericStructHom]) := by
   apply fiber_ext
