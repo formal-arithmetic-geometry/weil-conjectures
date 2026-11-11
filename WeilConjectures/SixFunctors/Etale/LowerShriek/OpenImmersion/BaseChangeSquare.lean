@@ -210,7 +210,8 @@ lemma Etale.baseChangeMap_flip_id_left :
     simp [TwoSquare.whiskerBottom]
   rw [hR, mateEquiv_whiskerBottom]
   subst hk
-  rw [TwoSquare.whiskerLeft, Etale.mateEquiv_upperStarBaseChange, Etale.squareLowerStarIso,
+  rw [TwoSquare.whiskerLeft, Etale.mateEquiv_upperStarBaseChange A j q (j ≫ q) rfl,
+    Etale.squareLowerStarIso,
     Iso.trans_hom, Iso.symm_hom, Etale.lowerStarComp_id_left]
   ext F
   simp
