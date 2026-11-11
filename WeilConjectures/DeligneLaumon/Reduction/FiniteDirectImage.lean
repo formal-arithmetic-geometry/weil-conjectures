@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
-
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.StalkIso
