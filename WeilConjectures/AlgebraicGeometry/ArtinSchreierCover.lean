@@ -107,7 +107,7 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
     Etale (artinSchreierCover p X f).hom ∧
     (artinSchreierCover p X f).hom.IsFiniteLocallyFreeOfDegree p ∧
     ∃ σ : Multiplicative (ZMod p) →* Aut (artinSchreierCover p X f),
-      (∀ a : ZMod p, (σ (Multiplicative.ofAdd a)).hom.left.appTop
+      (∀ a : ZMod p, (σ (Multiplicative.ofAdd a)).asIso.hom.left.appTop
           (artinSchreierCoverCoordinate p X f) =
         artinSchreierCoverCoordinate p X f + (a.val : Γ((artinSchreierCover p X f).left, ⊤))) ∧
       (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),
@@ -115,7 +115,7 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
           s ≫ (artinSchreierCover p X f).hom = x} ∧
         ∀ s t : {s : Spec (.of Ω) ⟶ (artinSchreierCover p X f).left //
           s ≫ (artinSchreierCover p X f).hom = x},
-          ∃! a : ZMod p, t.val = s.val ≫ (σ (Multiplicative.ofAdd a)).hom.left) ∧
+          ∃! a : ZMod p, t.val = s.val ≫ (σ (Multiplicative.ofAdd a)).asIso.hom.left) ∧
       (∃ (R : Sheaf.Torsor
           ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
             (AddCommGrpCat.of (ULift.{u + 1} (ZMod p)))))
@@ -128,16 +128,16 @@ theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
                 ((Functor.const X.Etaleᵒᵖ).obj
                   (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app
                     (Opposite.op U)) (ULift.up a)) s)).down =
-            (e.hom.app (Opposite.op U) s).down ≫ (σ (Multiplicative.ofAdd a)).hom) ∧
+            (e.hom.app (Opposite.op U) s).down ≫ (σ (Multiplicative.ofAdd a)).asIso.hom) ∧
       (Nonempty X → Function.Injective σ) ∧
       (∃ E : Multiplicative (LocallyConstant X (ZMod p)) ≃*
           Subgroup.centralizer (Set.range σ),
         ∀ (b : LocallyConstant X (ZMod p)) (a : ZMod p) (U : X.Opens),
           (∀ x : U, b x = a) →
           ((artinSchreierCover p X f).hom ⁻¹ᵁ U).ι ≫
-              (E (Multiplicative.ofAdd b)).val.hom.left =
+              (E (Multiplicative.ofAdd b)).val.asIso.hom.left =
             ((artinSchreierCover p X f).hom ⁻¹ᵁ U).ι ≫
-              (σ (Multiplicative.ofAdd a)).hom.left) ∧
+              (σ (Multiplicative.ofAdd a)).asIso.hom.left) ∧
       (ConnectedSpace (artinSchreierCover p X f).left → Function.Bijective σ) ∧
       (IsEmpty X → IsEmpty (artinSchreierCover p X f).left ∧
         Subsingleton (Aut (artinSchreierCover p X f))) :=
