@@ -68,7 +68,7 @@ lemma cohomologyCarrierIso_inv_derivedGlobalSectionsUnitIso_pow (i : ℤ) (n : �
     have hσ : ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).asIso.symm =
         ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm ≪≫
           (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm := by
-      rw [pow_succ, Aut.Aut_mul_def, Iso.trans_symm]
+      rw [pow_succ, Aut.mul_asIso, Iso.trans_symm]
     have hD : ProEtale.derivedGlobalSectionsUnitIso l
         ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).asIso.symm =
         ProEtale.derivedGlobalSectionsUnitIso l
