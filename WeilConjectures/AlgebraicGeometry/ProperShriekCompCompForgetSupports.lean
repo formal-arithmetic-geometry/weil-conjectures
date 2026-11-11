@@ -411,11 +411,12 @@ by the composite counit formula and uniqueness of adjoints. Naturality and assoc
 of the ordinary direct-image compositor then identify the remaining three proper
 pushforward factors with the displayed compositor for p and f. The equality
 `e.restrict.i ≫ pullback.fst e.g d.i = e.i` removes the final open congruence.
-This calculation has no comparison between different compactifications.
+This calculation has no comparison between different compactifications, and it uses no
+properness of `p` and `f`.
 (auxiliary; not a blueprint node)
 -/
-theorem properShriekComp_compactificationForgetSupports {W X S : Scheme.{u}}
-    (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f]
+theorem rightDerivedLowerShriekOfCompactificationCompIso_hom_app_comp_forgetSupports
+    {W X S : Scheme.{u}} (p : W ⟶ X) (f : X ⟶ S)
     (d : Compactification f) (e : Compactification (p ≫ d.i))
     (E : DerivedCategoryModule A W) :
     (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app E ≫
@@ -492,5 +493,23 @@ theorem properShriekComp_compactificationForgetSupports {W X S : Scheme.{u}}
     (p ≫ d.i) f (p ≫ f) rfl d.comm
     (by rw [Category.assoc, ← d.comm]) E
   erw [← h4]
+
+/-- Forget supports commutes with composition on compatible compactifications, for proper
+`p` and `f`: the special case of
+`rightDerivedLowerShriekOfCompactificationCompIso_hom_app_comp_forgetSupports`.
+(auxiliary; not a blueprint node) -/
+theorem properShriekComp_compactificationForgetSupports {W X S : Scheme.{u}}
+    (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f]
+    (d : Compactification f) (e : Compactification (p ≫ d.i))
+    (E : DerivedCategoryModule A W) :
+    (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app E ≫
+        (compactificationForgetSupports (ModuleCat.{u + 1} A) (d.comp e)).app E =
+      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map
+          ((compactificationForgetSupports (ModuleCat.{u + 1} A) e.restrict).app E) ≫
+        (compactificationForgetSupports (ModuleCat.{u + 1} A) d).app
+          ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫
+        (rightDerivedLowerStarCompIsoOfComp
+          (ModuleCat.{u + 1} A) p f (p ≫ f) rfl).hom.app E :=
+  rightDerivedLowerShriekOfCompactificationCompIso_hom_app_comp_forgetSupports A p f d e E
 
 end AlgebraicGeometry.Etale
