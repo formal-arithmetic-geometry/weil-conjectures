@@ -794,7 +794,8 @@ theorem pbcIsoScalarRightComparison_exists (h : E ≤ F) :
           proEtaleRingModuleDirectImage e.asIso.hom
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
-            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E)))).obj M).val.obj U),
+            (asIso (completedCoefficientMap e.asIso.hom (pbcStageDatum.{u} l Ω E)))).obj
+            M).val.obj U),
         HEq ((r.hom.app M).val.app U x) x := by
   have hs :
       pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h) ≫
@@ -915,7 +916,8 @@ theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
               (.up ℤ)).obj P) =
         (pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).map
             (pbcComplexCounit (pbcCompletedScalarMap l Ω T h) P) ≫
-          (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors.hom.app
+          (pbcIsoModulePullback e.asIso.hom
+            (pbcStageDatum.{u} l Ω F)).mapDerivedCategoryFactors.hom.app
               (((pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map
             ((pbcIsoOrdinaryComplexComparison l Ω e h).hom.app P) := by

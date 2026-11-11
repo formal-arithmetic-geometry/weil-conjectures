@@ -585,8 +585,8 @@ private theorem ambient_comparison_normalization (h : E ≤ F)
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :
     (pbcIsoAmbientScalarComparison l Ω e h).hom.app (DerivedCategory.Q.obj P) ≫
       (pbcAmbientScalarExtension l Ω T h).map
-        ((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors.hom.app
-          P) ≫
+        ((pbcIsoModulePullback e.asIso.hom
+          (pbcStageDatum.{u} l Ω E)).mapDerivedCategoryFactors.hom.app P) ≫
       pbcComplexCounit (pbcCompletedScalarMap l Ω T h)
         (((pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω E)).mapHomologicalComplex
           (.up ℤ)).obj P) =
