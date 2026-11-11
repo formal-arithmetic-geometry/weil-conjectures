@@ -161,15 +161,20 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
       (adicUpperStarRightDerivedLowerStarUnitAbIso_hom_integralLatticeSections' g p i E θ W
         m)).trans ?_
     rw [stageMap_tmul]
-    rw [show integralLatticeSectionsEquiv g p i E θ W hθW m =
-      θ.hom.app (op W) (ULift.up m) from rfl]
     rw [algebraMap_natCast_pow_inv_mul_eq]
     have key := congrArg (fun φ ↦ (upperStarRightDerivedSections g p i W).map φ
       (θ.hom.app (op W) (ULift.up m)))
       (padicIntegersSheafMulOfLE_comp_adicConstantSheafLeg (X := T) (E := E) (F := F.1) F.2
         (integersSubalgebraFamilyEquiv E F o) n)
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at key
-    exact key.symm
+    refine key.symm.trans ?_
+    exact congrArg (fun x ↦ (upperStarRightDerivedSections g p i W).map
+      (adicConstantSheafLeg T l F.1 n)
+      ((upperStarRightDerivedSections g p i W).map
+        (padicIntegersSheafMulOfLE T (E := E) (F := F.1) F.2
+          (integersSubalgebraFamilyEquiv E F o)) x))
+      (show θ.hom.app (op W) (ULift.up m) =
+        integralLatticeSectionsEquiv g p i E θ W hθW m from rfl)
 
 include hθ hθW in
 /-- **`ℚ̄_ℓ ⊗_{𝒪_E} C(W, M) = Γ(W, p^* Rⁱg_* ℚ̄_ℓ,T)`** for `W` quasi-compact and
