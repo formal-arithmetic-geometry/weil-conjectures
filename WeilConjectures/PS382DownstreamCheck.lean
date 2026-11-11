@@ -1,3 +1,3 @@
 module
 
-import WeilConjectures.AlgebraicGeometry.SectionComponentLocallyConstructible
+import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentOpen
