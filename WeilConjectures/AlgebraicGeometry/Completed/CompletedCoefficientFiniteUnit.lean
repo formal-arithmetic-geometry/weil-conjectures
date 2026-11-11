@@ -5,8 +5,6 @@ Authors: Bin Wu
 -/
 module
 
--- PS358 downstream validation.
-
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionKoszulReflector
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
