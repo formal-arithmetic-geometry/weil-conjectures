@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerEtaleDescentData
 import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleDescent
 import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerEtaleNormalizationDescent
