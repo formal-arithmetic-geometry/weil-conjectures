@@ -316,7 +316,7 @@ private theorem stratumScalarIso_exists (n : ℕ) :
     (d.projection X n) (d.projection Y n) (d.integralRingIso f) (d.finiteRingIso f n)
     (d.projection_comm f n)
   let β := TwoSquare.mk _ _ _ _ b
-  have hm : (mateEquiv az ar β).natTrans = t.hom :=
+  have hm : mateEquiv az ar β = t.hom :=
     restrictionPullback_mate f _ _ _ _ _ _ _ _ _
   let γ := (mateEquiv av au).symm β
   have hγ : IsIso γ.natTrans := by
