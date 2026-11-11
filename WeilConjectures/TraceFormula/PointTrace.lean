@@ -466,8 +466,9 @@ noncomputable def gradedHomShift (n : ℤ) (Y : DerivedCategory (PointMod ℓ k)
         _ ≫ (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k y)
     rw [Functor.map_add, Preadditive.comp_add]
   map_smul' c x := by
-    change _ ≫ (shiftFunctor _ (1 : ℤ)).map ((shiftFunctor _ (n - 1)).map (pointScalar ℓ k c).asHom ≫
-        gradedHomHom ℓ k x) = (shiftFunctor _ n).map (pointScalar ℓ k c).asHom ≫ _ ≫
+    change _ ≫ (shiftFunctor _ (1 : ℤ)).map
+        ((shiftFunctor _ (n - 1)).map (pointScalar ℓ k c).asHom ≫ gradedHomHom ℓ k x) =
+      (shiftFunctor _ n).map (pointScalar ℓ k c).asHom ≫ _ ≫
         (shiftFunctor _ (1 : ℤ)).map (gradedHomHom ℓ k x)
     have h :=
       (shiftFunctorAdd' (DerivedCategory (PointMod ℓ k)) (n - 1) 1 n (by lia)).hom.naturality
