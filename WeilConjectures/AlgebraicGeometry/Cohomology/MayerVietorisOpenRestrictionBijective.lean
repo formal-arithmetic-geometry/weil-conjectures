@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 
 module
+public import Mathlib.Algebra.FiveLemma
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtRestrictionMap
 import WeilConjectures.AlgebraicGeometry.Cohomology.OpenImmersionInverseImageInjectives
