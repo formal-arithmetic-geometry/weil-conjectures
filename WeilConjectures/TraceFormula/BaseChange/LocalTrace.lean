@@ -149,8 +149,8 @@ theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum (K : WeilBoundedCons
             (geometricFrobeniusField_pow_inv n)).2 hx)).obj
         ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (e.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).carrier] :
-    homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
-        (weilStalkTraceAlternatingSum ℓ (n + 1) x hx K) =
+    (homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
+        (weilStalkTraceAlternatingSum ℓ (n + 1) x hx K)).asHom =
       trace ((weilStalk ℓ (baseChangeModelFrobenius (AlgebraicClosure k) X (n + 1) (e.pow (n +
           1)).hom)
         (geometricBaseChangePoint x hxk)
@@ -160,7 +160,6 @@ theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum (K : WeilBoundedCons
         ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (e.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).frobenius.hom := by
   rw [weilStalkTraceAlternatingSum_eq_superTrace ℓ n x hxk hx K]
-  simpa only using
-    (trace_eq_homologyUnitEndRingHom_superTrace ℓ (AlgebraicClosure k) _ _).symm
+  exact (trace_eq_homologyUnitEndRingHom_superTrace ℓ (AlgebraicClosure k) _ _).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
