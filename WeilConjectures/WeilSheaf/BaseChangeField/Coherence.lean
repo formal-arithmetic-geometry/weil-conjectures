@@ -112,7 +112,7 @@ lemma lowerStarFactor_exchange_id {Z P : Scheme.{u}} (p : Z ⟶ P) (c : Z ⟶ P)
   repeat' apply pullback.hom_ext
   all_goals try simp [MorphismProperty.Over.pullback, MorphismProperty.Over.pullbackId,
     MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp]
-  all_goals first | exact Category.id_comp _ | exact pullback.condition.symm
+  all_goals exact pullback.condition.symm
 
 /-- Two exchange isomorphisms, written with factorisation isomorphisms, pasted along a
 commutative cube agree. The vertical morphisms are `θ : Z ⟶ Z'`, `ψ : P ⟶ P'`, the
