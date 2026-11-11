@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
-
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAmbientRingedExchange
 
 /-! # Constant-coefficient scalar operations

@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
-
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit

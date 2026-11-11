@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 public import WeilConjectures.AlgebraicGeometry.Direct.DirectImageScalarOperations
 public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 

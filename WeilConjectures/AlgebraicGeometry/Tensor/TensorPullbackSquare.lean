@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteOpenBaseChange
 public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+
 public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbackSquare
