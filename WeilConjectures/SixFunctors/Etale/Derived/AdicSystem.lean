@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTowerQuotient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
 public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect

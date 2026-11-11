@@ -150,11 +150,10 @@ theorem exists_trace_eq_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n}
     (hf : T.IsCompatible f) {V : c.pt ⟶ c.pt} (hV : T.IsLift c f V) :
     ∃ r : R,
       MonoidalCategory.trace V =
-        (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r).asHom ∧
+        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r ∧
       ∀ n, MonoidalCategory.trace (f n) =
-        (algebraMap (R ⧸ I ^ (n + 1))
-          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))))))
-            (I.powSuccMk n r)).asHom :=
+        algebraMap (R ⧸ I ^ (n + 1))
+          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))) (I.powSuccMk n r) :=
   have := isLocalRing_quotient_pow_succ_of_mem hϖ hI
   T.exists_trace_eq_of_isLift I.powSuccMk_surjective (Ideal.ker_powSuccMk hI)
     Ideal.exists_powSuccMk_eq Ideal.eq_zero_of_forall_powSuccMk_eq_zero hc hf hV
