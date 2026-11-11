@@ -255,8 +255,8 @@ theorem lowerComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
   have h (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)) (V : Y.ProEtᵒᵖ) (r : (ring Λ Y).obj.obj V)
       (m : (R.obj M).val.obj V) :
-      ((ModuleCat.smul ((L.obj M).val.obj V) r).hom) m =
-        ((ModuleCat.smul ((R.obj M).val.obj V) r).hom) m := by
+      ((ModuleCat.smul ((L.obj M).val.obj V) r).asHom.hom) m =
+        ((ModuleCat.smul ((R.obj M).val.obj V) r).asHom.hom) m := by
     change ((Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y)
       (((siteMap f).sheafPushforwardContinuous Ab.{u + 1}
