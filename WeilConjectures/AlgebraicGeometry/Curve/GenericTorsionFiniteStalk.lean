@@ -6,8 +6,10 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
