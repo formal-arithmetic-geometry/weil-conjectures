@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-
 public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibility
 public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding

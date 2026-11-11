@@ -88,7 +88,8 @@ theorem nativePrincipalConeCriterion
     (a : (R.obj ⋙ forget CommRingCat).sections)
     (P : CochainComplex (NativeModules.{max c v r, c, v} R) ℤ) (μ : End P)
     (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x = @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :
+      (μ.asHom.f q).val.app U x =
+        @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :
     principalLocallyComplete.{c, v, r, w} R a
         (DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ)) ∧
       (principalLocallyComplete.{c, v, r, w} R a (DerivedCategory.Q.obj P) ↔
@@ -97,11 +98,12 @@ theorem nativePrincipalConeCriterion
   let : H.IsEquivalence :=
     globalModulesEquivalence.{max c v r, c, max c v r, v, r} (K := Jsmall) F R
   let G := H.mapHomologicalComplex (.up ℤ)
-  let μ' := End.of (G.map μ)
+  let μ' := End.of (G.map μ.asHom)
   let a' := restrictedSection.{max c v r, c, max c v r, v, r} (K := Jsmall) F R a
   have hμ' : ∀ (q : ℤ) (U : (AsSmall.{max c v r} C)ᵒᵖ)
       (x : ((G.obj P).X q).val.obj U),
-      (μ'.f q).val.app U x = @SMul.smul _ _ (((G.obj P).X q).val.obj U).isModule.toSMul (a'.val U)
+      (μ'.asHom.f q).val.app U x =
+        @SMul.smul _ _ (((G.obj P).X q).val.obj U).isModule.toSMul (a'.val U)
         x := by
     intro q U x
     exact hμ q ((F).op.obj U) x
