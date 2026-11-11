@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.ConstructibleSheaf.Defs
@@ -58,7 +59,7 @@ private theorem constant_fin_power (T : Scheme.{u}) (ℓ d : ℕ) :
         ((Fin d → ULift.{u + 1} (ZMod ℓ)) × ULift.{u + 1} (ZMod ℓ)) :=
       { toEquiv := (Fin.snocEquiv (fun _ ↦ ULift.{u + 1} (ZMod ℓ))).symm.trans
           (Equiv.prodComm _ _)
-        map_add' := fun _ _ ↦ rfl }
+        map_add' := by intros; rfl }
     exact ⟨F.mapIso (a.toAddCommGrpIso ≪≫ (AddCommGrpCat.biprodIsoProd _ _).symm) ≪≫
       F.mapBiprod (AddCommGrpCat.of (Fin d → ULift.{u + 1} (ZMod ℓ)))
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))) ≪≫ biprod.mapIso hd (Iso.refl _)⟩
