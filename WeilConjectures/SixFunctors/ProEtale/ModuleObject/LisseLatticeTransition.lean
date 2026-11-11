@@ -75,7 +75,9 @@ lemma finFreeMatrix_comp {l m n : ℕ} (φ : finiteFree R l ⟶ finiteFree R m)
     rw [biproduct.total, Category.id_comp]
   rw [this, Preadditive.sum_comp, Preadditive.comp_sum, Preadditive.sum_comp,
     Preadditive.comp_sum]
-  refine Finset.sum_congr rfl fun b _ ↦ ?_
+  dsimp only
+  apply Finset.sum_congr rfl
+  intro b _
   rw [finFreeMatrix_apply, finFreeMatrix_apply, End.mul_asHom, finFreeEntry, finFreeEntry]
   simp only [Category.assoc]
 
