@@ -29,7 +29,7 @@ universe u v c r
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerShriek
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
+attribute [local implicit_reducible]
   AlgebraicGeometry.ProEtale.VaryingRing.push
   AlgebraicGeometry.ProEtale.spCoefficientCommRings
   AlgebraicGeometry.ProEtale.SpTowerShriek.tau
