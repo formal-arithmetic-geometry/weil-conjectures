@@ -146,8 +146,8 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 private theorem scalarPresentation (r : End (𝟭 A)) :
     ∃ S : Presentation A, S.scalar = r := by
   let τ (n : ℕ) : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ :=
-    NatTrans.mapHomologicalComplex (r ^ (n + 1)) (.up ℤ)
-  let a : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ := NatTrans.mapHomologicalComplex r (.up ℤ)
+    NatTrans.mapHomologicalComplex (r ^ (n + 1)).asHom (.up ℤ)
+  let a : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ := NatTrans.mapHomologicalComplex r.asHom (.up ℤ)
   have hs (n : ℕ) (M : CochainComplex A ℤ) :
       (τ (n + 1)).app M = a.app M ≫ (τ n).app M := by
     ext q
@@ -279,28 +279,28 @@ section
 universe a b c d
 variable {A : Type a} [Category.{b} A] {B : Type c} [Category.{d} B]
 private def transportScalar (e : A ≌ B) (r : End (𝟭 A)) : End (𝟭 B) :=
-  e.counitIso.inv ≫ Functor.whiskerRight (Functor.whiskerLeft e.inverse r) e.functor ≫
-    e.counitIso.hom
+  .of (e.counitIso.inv ≫ Functor.whiskerRight
+    (Functor.whiskerLeft e.inverse r.asHom) e.functor ≫ e.counitIso.hom)
 private theorem transportScalar_app (e : A ≌ B) (r : End (𝟭 A)) (M : A) :
-    e.functor.map (r.app M) = (transportScalar e r).app (e.functor.obj M) := by
+    e.functor.map (r.asHom.app M) = (transportScalar e r).asHom.app (e.functor.obj M) := by
   dsimp only [transportScalar, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app]
-  have hn := congrArg (fun f ↦ e.functor.map f) (r.naturality (e.unitIso.inv.app M))
+  have hn := congrArg (fun f ↦ e.functor.map f) (r.asHom.naturality (e.unitIso.inv.app M))
   simp only [Functor.id_map, e.functor.map_comp] at hn
   have hi : e.counitIso.hom.app (e.functor.obj M) =
       e.functor.map (e.unitIso.inv.app M) := by
     apply (cancel_epi (e.counitIso.inv.app (e.functor.obj M))).mp
     simp only [Iso.inv_hom_id_app]
-    exact (e.counitIso_functor_comp M).symm
+    exact (e.counitInv_functor_comp M).symm
   dsimp only [Functor.id_obj, Functor.comp_obj] at hn
   symm
   calc
     _ = e.counitIso.inv.app (e.functor.obj M) ≫
-        (e.functor.map (r.app (e.inverse.obj (e.functor.obj M))) ≫
+        (e.functor.map (r.asHom.app (e.inverse.obj (e.functor.obj M))) ≫
           e.functor.map (e.unitIso.inv.app M)) := by
       simp only [hi]
     _ = e.counitIso.inv.app (e.functor.obj M) ≫
-        (e.functor.map (e.unitIso.inv.app M) ≫ e.functor.map (r.app M)) :=
+        (e.functor.map (e.unitIso.inv.app M) ≫ e.functor.map (r.asHom.app M)) :=
       congrArg (fun k ↦ e.counitIso.inv.app (e.functor.obj M) ≫ k) hn.symm
     _ = _ := by rw [← Category.assoc, ← hi, Iso.inv_hom_id_app, Category.id_comp]
 
@@ -325,7 +325,7 @@ private theorem section_scalar_value
   let R := condensedRingObj (DerivedNakayama.integerRing l E) X
   let : MonObj R := (upperStarFromPoint X).monObjObj (DerivedNakayama.integerRing l E)
   let dX := (DerivedNakayama.regularPullbackIso l E X).inv ≫
-    (DerivedNakayama.pullback l E X).map d ≫
+    (DerivedNakayama.pullback l E X).map d.asHom ≫
       (DerivedNakayama.regularPullbackIso l E X).hom
   have hi : (((sectionModuleEquivalence J R).functor.map (λ_ M).inv).val.app U) x =
       comparison_internalTmul J R (𝟙_ _) M U (1 : (sectionRingSheaf J R).obj.obj U) x := by
@@ -385,15 +385,15 @@ theorem strictSectionScalarPresentation (X : Scheme.{u})
       (∀ M : AdicCompletion.Modules l E X,
         (ModuleObjectRingedComparison.equivalence (DerivedNakayama.integerRing l E) X).functor.map
           ((DerivedNakayama.scalarOnModules l E X d).app M) =
-        T.scalar.app ((ModuleObjectRingedComparison.equivalence
+        T.scalar.asHom.app ((ModuleObjectRingedComparison.equivalence
           (DerivedNakayama.integerRing l E) X).functor.obj M)) ∧
       (∀ (N : ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X)
         (U : X.ProEtᵒᵖ) (x : N.val.obj U),
-        (T.scalar.app N).val.app U x = sectionScalarValue l E X d U • x) := by
+        (T.scalar.asHom.app N).val.app U x = sectionScalarValue l E X d U • x) := by
   let e := ModuleObjectRingedComparison.equivalence.{u} (DerivedNakayama.integerRing l E) X
   let r : End (𝟭 (ModuleObjectRingedComparison.Modules
       (DerivedNakayama.integerRing l E) X)) :=
-    transportScalar e (DerivedNakayama.scalarOnModules l E X d)
+    transportScalar e (.of (DerivedNakayama.scalarOnModules l E X d))
   let : HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} := inferInstance
   let : (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
     smallSiteLocalEquivalences X
@@ -411,15 +411,15 @@ theorem strictSectionScalarPresentation (X : Scheme.{u})
   · intro N U x
     let M := e.inverse.obj N
     let c := e.counitIso.app N
-    have hn := T.scalar.naturality c.hom
+    have hn := T.scalar.asHom.naturality c.hom
     have hx := congrArg (fun f ↦ (f.val.app U) ((c.inv.val.app U) x)) hn.symm
     have hc : ((c.inv ≫ c.hom).val.app U) x = x := by rw [c.inv_hom_id]; rfl
-    have hr : T.scalar.app (e.functor.obj M) =
+    have hr : T.scalar.asHom.app (e.functor.obj M) =
         e.functor.map ((DerivedNakayama.scalarOnModules l E X d).app M) := by
       rw [hT]
       exact (transportScalar_app e _ M).symm
-    change (c.hom.val.app U) ((T.scalar.app (e.functor.obj M)).val.app U
-      ((c.inv.val.app U) x)) = (T.scalar.app N).val.app U
+    change (c.hom.val.app U) ((T.scalar.asHom.app (e.functor.obj M)).val.app U
+      ((c.inv.val.app U) x)) = (T.scalar.asHom.app N).val.app U
         ((c.hom.val.app U) ((c.inv.val.app U) x)) at hx
     rw [hr] at hx
     dsimp only [e] at hx
@@ -427,7 +427,7 @@ theorem strictSectionScalarPresentation (X : Scheme.{u})
     erw [hv] at hx
     rw [(c.hom.val.app U).hom.map_smul] at hx
     change sectionScalarValue l E X d U • ((c.inv ≫ c.hom).val.app U) x =
-      (T.scalar.app N).val.app U (((c.inv ≫ c.hom).val.app U) x) at hx
+      (T.scalar.asHom.app N).val.app U (((c.inv ≫ c.hom).val.app U) x) at hx
     rw [hc] at hx
     exact hx.symm
 end AlgebraicGeometry.ProEtale.StrictCompletionRestriction

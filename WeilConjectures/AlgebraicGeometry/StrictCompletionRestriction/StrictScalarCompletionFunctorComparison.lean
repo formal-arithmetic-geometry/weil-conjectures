@@ -80,12 +80,12 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
   [HasDerivedCategory.{z} B]
   (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   (S : Presentation A) (T : Presentation B)
-  (hscalar : ∀ M : A, F.map (S.scalar.app M) = T.scalar.app (F.obj M))
+  (hscalar : ∀ M : A, F.map (S.scalar.asHom.app M) = T.scalar.asHom.app (F.obj M))
 
 include hscalar in
 omit [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
 private theorem map_scalar_pow (n : ℕ) (M : A) :
-    F.map ((S.scalar ^ n).app M) = (T.scalar ^ n).app (F.obj M) := by
+    F.map ((S.scalar ^ n).asHom.app M) = (T.scalar ^ n).asHom.app (F.obj M) := by
   induction n with
   | zero => simp
   | succ n ih =>
@@ -139,8 +139,8 @@ private def coneLevel (M : CochainComplex A ℤ) (n : ℕ) :
       (T.tower.obj ((F.mapHomologicalComplex (.up ℤ)).obj M)).asFunctor.obj (op n) :=
   (F.mapHomologicalComplex (.up ℤ)).mapIso (eqToIso (S.cone M n)) ≪≫
     CategoryTheory.cc (P := M) (Q := (F.mapHomologicalComplex (.up ℤ)).obj M) F
-      ((NatTrans.mapHomologicalComplex (S.scalar ^ (n + 1)) (.up ℤ)).app M)
-      ((NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)) (.up ℤ)).app
+      ((NatTrans.mapHomologicalComplex (S.scalar ^ (n + 1)).asHom (.up ℤ)).app M)
+      ((NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)).asHom (.up ℤ)).app
         ((F.mapHomologicalComplex (.up ℤ)).obj M))
       (Iso.refl _) (by
         simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
@@ -156,8 +156,8 @@ private theorem coneLevel_coordinates (M : CochainComplex A ℤ) (n : ℕ) (q : 
   rw [S.coordinates_eq, T.coordinates_eq]
   have hc := transported_cc_coordinates (P := M)
     (Q := (F.mapHomologicalComplex (.up ℤ)).obj M) F
-    ((NatTrans.mapHomologicalComplex (S.scalar ^ (n + 1)) (.up ℤ)).app M)
-    ((NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)) (.up ℤ)).app
+    ((NatTrans.mapHomologicalComplex (S.scalar ^ (n + 1)).asHom (.up ℤ)).app M)
+    ((NatTrans.mapHomologicalComplex (T.scalar ^ (n + 1)).asHom (.up ℤ)).app
       ((F.mapHomologicalComplex (.up ℤ)).obj M)) (Iso.refl _) (by
         simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
         ext q
@@ -170,7 +170,7 @@ private theorem coneLevel_coordinates (M : CochainComplex A ℤ) (n : ℕ) (q : 
   have hh := congrArg (fun k ↦ F.map (eqToIso
       (congrArg (fun K ↦ K.X q) (S.cone M n)) ≪≫
       principalConeCoordinates
-        ((NatTrans.mapHomologicalComplex (S.scalar ^ (n + 1)) (.up ℤ)).app M) q).hom ≫
+        ((NatTrans.mapHomologicalComplex (S.scalar ^ (n + 1)).asHom (.up ℤ)).app M) q).hom ≫
         F.biprodComparison (M.X q) (M.X (q + 1)) ≫ k) hr
   have hc := hc.trans (hh.trans ((Category.assoc _ _ _).symm.trans (Category.comp_id _)))
   exact hc
