@@ -165,4 +165,3 @@ theorem HasFiniteLocallyConstantHomology.constantSheaf_of_constantZModModule
     (IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes_sheafForget _)
 
 end AlgebraicGeometry.Scheme
-
