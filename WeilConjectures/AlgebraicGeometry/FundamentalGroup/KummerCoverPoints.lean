@@ -137,3 +137,4 @@ noncomputable def kummerCoverHomEquiv :
     ((specHomEquivKummerAlgebraHom n f h).trans (kummerAlgebraHomEquiv n f h))
 
 end AlgebraicGeometry.Scheme
+

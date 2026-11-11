@@ -700,4 +700,3 @@ end Curve
 end EtaleTorsor
 
 end AlgebraicGeometry.Scheme
-

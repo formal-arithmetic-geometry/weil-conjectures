@@ -95,4 +95,3 @@ theorem exists_kummer_element (t : Spec (.of Ω) ⟶ T.P) {ζ : Ω} (hζ : IsPri
   rw [← mul_assoc, ← hc, add_sub_cancel_left]
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
-
