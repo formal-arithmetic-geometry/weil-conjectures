@@ -72,7 +72,6 @@ theorem properPerfect_rightAdjoint_preservesCoproducts
     (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
     (adj : R ⊣ c) :
     ∀ I : Type v, PreservesColimitsOfShape (Discrete I) c := by
-
   let : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
   let : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y
   obtain ⟨S, G, hcompact, hdetect⟩ := properPerfect_compactTests f hTor R eR
