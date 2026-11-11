@@ -1592,7 +1592,9 @@ private lemma unbounded_chosen_base_change
   let B := ModuleCat.{u + 1} A
   let c := HasCompactification.compactification f
   dsimp only [CompactSupportFormalism.lowerShriekBaseChange, TwoSquare.whiskerBottom]
-  rw [unbounded_shriek_base_change, unbounded_shriek_iso]
+  have hbc := unbounded_shriek_base_change A sq c
+  change (unboundedFormalism A).shriekBaseChangeOfIsPullback sq c = _ at hbc
+  rw [hbc, unbounded_shriek_iso]
   rw [unboundedEtaleCompactSupportExchange, unboundedEtaleCompactSupportBaseChange,
     rightDerivedLowerShriekBaseChangeMap]
   ext K
