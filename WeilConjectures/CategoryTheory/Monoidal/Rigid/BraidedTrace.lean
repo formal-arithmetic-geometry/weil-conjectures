@@ -67,7 +67,7 @@ if an isomorphism `e : F X ≅ X'` intertwines `F f` with an endomorphism `f'` o
 theorem trace_eq_unitEndRingHom_trace [Preadditive C] [Preadditive D] [F.Additive] {X : C}
     {X' : D} [HasRightDual X] [HasRightDual (F.obj X)] [HasRightDual X'] (f : X ⟶ X)
     (f' : X' ⟶ X') (e : F.obj X ≅ X') (h : F.map f ≫ e.hom = e.hom ≫ f') :
-    trace f' = F.unitEndRingHom .of (.of (.of (.of (.of (.of (.of (.of ((trace f))))))))) := by
+    trace f' = F.unitEndRingHom .of (.of (.of (.of (.of (.of (.of (.of (.of ((trace f)))))))))) := by
   rw [unitEndRingHom_apply, ← trace_map, trace_eq_of_iso e _ _ h]
 
 end Functor
