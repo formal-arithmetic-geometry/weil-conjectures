@@ -64,20 +64,21 @@ is a morphism of Weil objects from the datum induced by the canonical datum of `
 `Ra_!` and the shift by `2d`) to `τ`. -/
 theorem exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace :
     ∃ (γ : TateOrientation Λ f.geometricFiberToAlgebraicClosure d)
-      (τ : (L(((specGeometricFrobenius k₀).hom)^*[ModuleCat.{u + 1} Λ])).obj
+      (τ : (L(((specGeometricFrobenius k₀).asIso.hom)^*[ModuleCat.{u + 1} Λ])).obj
           (tateObject Λ (Spec (.of (AlgebraicClosure k₀))) (-d)) ⟶
         tateObject Λ (Spec (.of (AlgebraicClosure k₀))) (-d)),
-      IsWeilMorphism (specGeometricFrobenius k₀).hom
-          (shiftWeilDatum (specGeometricFrobenius k₀).hom
+      IsWeilMorphism (specGeometricFrobenius k₀).asIso.hom
+          (shiftWeilDatum (specGeometricFrobenius k₀).asIso.hom
             (lowerShriekWeilDatum f.isPullback_geometricGaloisFrobenius
-              (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom).hom) (2 * d))
+              (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.asIso.hom).hom) (2 * d))
           τ γ.untwistedSmoothTrace ∧
-        ∀ z, frobeniusOperator (specGeometricFrobenius k₀).hom τ z = ((Nat.card k₀ : Λ) ^ d) • z :=
+        ∀ z, frobeniusOperator (specGeometricFrobenius k₀).asIso.hom τ z =
+          ((Nat.card k₀ : Λ) ^ d) • z :=
   by
   obtain ⟨o, ho⟩ := exists_iso_dualizingComplex_isWeilMorphism f d Λ
   obtain ⟨e⟩ := nonempty_tateObject_iso_unit Λ (AlgebraicClosure k₀) (d : ℤ)
   have sq := f.isPullback_geometricGaloisFrobenius
-  set σ := (specGeometricFrobenius k₀).hom
+  set σ := (specGeometricFrobenius k₀).asIso.hom
   set c : Λ := (Nat.card k₀ : Λ) ^ d
   let E := TateOrientation.unitIsoTateObjectNeg e
   refine ⟨TateOrientation.ofUnit o e, (L((σ)^*[ModuleCat.{u + 1} Λ])).map E.inv ≫
@@ -94,7 +95,8 @@ theorem exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace :
       unfold IsWeilMorphism lowerShriekWeilDatum at h ⊢
       simp only [Functor.map_smul, Linear.comp_smul, Linear.smul_comp, h]
     have hs := ((isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv sq
-      (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) f.geometricGaloisFrobenius.hom).hom
+      (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ)
+        f.geometricGaloisFrobenius.asIso.hom).hom
         (2 * d)).comp
         (ho.rightDerivedLowerShriek_map sq)).comp h3
     unfold IsWeilMorphism at hs ⊢
