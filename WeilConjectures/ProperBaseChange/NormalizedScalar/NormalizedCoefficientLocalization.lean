@@ -8,8 +8,6 @@ module
 public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedCoefficientModel
 public import Mathlib.CategoryTheory.Functor.OfSequence
 
-import Mathlib.CategoryTheory.Endomorphism
-
 import WeilConjectures.ProperBaseChange.NormalizedScalar.FieldModel.NormalizedCoefficientExact
 import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedScalarActions
 
@@ -178,17 +176,18 @@ private theorem ring_localization_of_telescope
     [∀ Y : C, PreservesColimitsOfShape ℕ (tensorRight Y)]
     (D : C) [MonObj D] [IsIso (p • 𝟙 D)] (g : A ⟶ D) [IsMonHom g] :
     ∃! f : B ⟶ D, IsMonHom f ∧ φ ≫ f = g := by
-  let t : End D := inv (p • 𝟙 D)
+  let t : End D := .of (inv (p • 𝟙 D))
   let d : Cocone (Functor.ofSequence (fun _ ↦ p • 𝟙 A)) :=
     { pt := D
       «ι» := NatTrans.ofSequence
-        (fun n ↦ g ≫ t ^ n) (by
+        (fun n ↦ g ≫ (t ^ n).asHom) (by
           intro n
           simp only [Functor.ofSequence_map_homOfLE_succ, Functor.const_obj_map]
-          change (p • 𝟙 A) ≫ (g ≫ t ^ (n + 1)) = (g ≫ t ^ n) ≫ 𝟙 D
+          change (p • 𝟙 A) ≫ (g ≫ (t ^ (n + 1)).asHom) =
+            (g ≫ (t ^ n).asHom) ≫ 𝟙 D
           rw [Category.comp_id, ← Category.assoc]
           have hw : (p • 𝟙 A) ≫ g = g ≫ (p • 𝟙 D) := by simp
-          have ht : (p • 𝟙 D) ≫ t ^ (n + 1) = t ^ n := by
+          have ht : (p • 𝟙 D) ≫ (t ^ (n + 1)).asHom = (t ^ n).asHom := by
             rw [pow_succ, End.mul_asHom, ← Category.assoc]
             simp only [t, IsIso.hom_inv_id, Category.id_comp]
           rw [hw, Category.assoc, ht]) }
