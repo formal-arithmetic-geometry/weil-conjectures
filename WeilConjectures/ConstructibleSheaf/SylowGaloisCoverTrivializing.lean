@@ -56,6 +56,7 @@ theorem Scheme.exists_sylow_galoisCover_trivializing {U : Scheme.{u}} [Connected
         (c : Scheme.GaloisCover P V), ∀ i, ∃ (M : ModuleCat.{u + 1} Λ) (_ : Finite M),
           Nonempty ((c.π)^*[ModuleCat.{u + 1} Λ].obj ((v)^*[ModuleCat.{u + 1} Λ].obj (F i)) ≅
             (constantSheaf c.P.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
+  -- Validate this downstream proof against the updated monodromy torsor.
   classical
   obtain ⟨Q, hQ, hQfin, c, hc, htriv⟩ :=
     IsFiniteLocallyConstantSheaf.exists_galoisCover_trivializing F
