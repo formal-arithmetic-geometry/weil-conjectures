@@ -21024,6 +21024,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.External
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
@@ -23015,6 +23016,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChangeRational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSquareCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTensorObj
