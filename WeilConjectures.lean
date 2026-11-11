@@ -16634,6 +16634,7 @@ public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.Compactification.CompactificationBaseChangeSetting
 public import WeilConjectures.Compactification.CompactificationCategory
+public import WeilConjectures.Compactification.ConstructibleBoundarySeparation
 public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Compactification.Dense
