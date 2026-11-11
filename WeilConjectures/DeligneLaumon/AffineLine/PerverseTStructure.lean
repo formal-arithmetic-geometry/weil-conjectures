@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.AffineLine.CurvePunctualPart
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.HeartAbelian
@@ -27,9 +28,8 @@ lies in `ᵖD^{≤0}`. The abelianness of the heart is the general fact
 `CategoryTheory.Triangulated.TStructure.heartAbelian`.
 
 The only sheaf-theoretic input is the existence of the maximal punctual subsheaf of a Weil sheaf,
-`AlgebraicGeometry.WeilSheaf.exists_mono_support_finite_cokernel`. It is proved on the affine
-line, where it is the kernel of the unit `F ⟶ j_* j^* F` of a dense open on which `F` is lisse;
-on a general smooth curve it is left open.
+`AlgebraicGeometry.WeilSheaf.exists_mono_support_finite_cokernel`: it is the kernel of the unit
+`F ⟶ j_* j^* F` of a dense open on which `F` is lisse.
 
 ## Main declarations
 
@@ -39,7 +39,7 @@ on a general smooth curve it is left open.
 - `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure`: the clause
   `lemma-perverse-sheaves-curve--1` on a smooth curve.
 - `AlgebraicGeometry.WeilComplex.exists_curvePerverse_tStructure_affineLine`: the same clause on
-  the affine line, without further input.
+  the affine line.
 -/
 
 @[expose] public section
@@ -288,18 +288,6 @@ end WeilComplex
 namespace WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-/-- **Maximal punctual subsheaves on a smooth curve** (input to
-`lemma-perverse-sheaves-curve--1`): a Weil sheaf `F` on a smooth curve has a subsheaf `P` of
-finite support such that `F / P` has no nonzero subsheaf of finite support. -/
-theorem exists_mono_support_finite_cokernel {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l X) :
-    ∃ (P : WeilSheaf k₀ l X) (i : P ⟶ F), Mono i ∧ P.support.Finite ∧
-      ∀ (G : WeilSheaf k₀ l X) (j : G ⟶ cokernel i), Mono j → G.support.Finite → IsZero G := by
-  sorry
 
 attribute [local instance 1000] IsSeparated.isSeparated_of_mono in
 /-- **Maximal punctual subsheaves on the affine line**: for a dense open `j : U₀ ↪ 𝔸¹` on which
