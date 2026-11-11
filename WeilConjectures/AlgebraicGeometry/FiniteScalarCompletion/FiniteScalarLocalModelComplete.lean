@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 
-
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
