@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
