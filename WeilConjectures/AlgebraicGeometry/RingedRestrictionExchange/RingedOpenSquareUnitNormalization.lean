@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
-
 public import WeilConjectures.AlgebraicGeometry.ProEtaleOpenRestriction.ProEtaleOpenRestrictionCounit
 
 /-! # Unit normalization of the actual-ring open square

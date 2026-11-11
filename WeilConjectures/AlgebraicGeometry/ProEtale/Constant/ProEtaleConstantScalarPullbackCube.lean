@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Direct.DirectImageScalarOperations
-
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 import WeilConjectures.AlgebraicGeometry.DirectScalar.ConstantScalarPullbackSquare
 import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteOpenBaseChangeNormalized

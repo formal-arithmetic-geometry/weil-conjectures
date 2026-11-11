@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionData
 
