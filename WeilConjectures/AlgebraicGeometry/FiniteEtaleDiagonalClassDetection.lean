@@ -80,7 +80,7 @@ private theorem class_detects_from_integral_and_unit_action
     (t : R.obj (((DerivedCategory.singleFunctor C 0).obj L)⟦(2 : ℤ)⟧) ⟶ Q)
     (hint : s.hom ≫ R.map δ.hom ≫ t = 𝟙 Q)
     (hunit : Function.Injective (fun a : End (𝟙_ C) ↦
-      R.map ((DerivedCategory.singleFunctor C 0).map (unitEndAction S a)))) :
+      R.map ((DerivedCategory.singleFunctor C 0).map (unitEndAction S a).asHom))) :
     Function.Injective (fun f : L ⟶ L ↦ δ.comp (Abelian.Ext.mk₀ f) (add_zero 2)) := by
   intro f g hfg
   obtain ⟨a, ha⟩ := (bijective_unitEndAction L).2 f
