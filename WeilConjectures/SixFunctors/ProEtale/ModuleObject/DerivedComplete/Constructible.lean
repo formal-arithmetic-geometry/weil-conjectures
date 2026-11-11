@@ -167,3 +167,4 @@ theorem derivedCompleteIntegers_of_boundedConstructible {X : Scheme.{u}} [IsNoet
       (hϖ ▸ Ideal.mem_span_singleton_self ϖ) M hM)
 
 end AlgebraicGeometry.ProEtale
+

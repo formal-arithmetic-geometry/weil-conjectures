@@ -162,3 +162,4 @@ theorem isLE_of_isLE_derivedReduction {X : Scheme.{u}} [IsNoetherian X]
     (((mem_boundedConstructible_iff _ _).1 hK).2 q) (Mod.isZero_of_isZero_comap _ hz)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+

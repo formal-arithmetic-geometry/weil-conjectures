@@ -126,3 +126,4 @@ theorem isZero_of_isIso_pow_zsmul_id {n : ℕ} (hn : n ≠ 0)
   exact IsZero.of_mono_zero K K
 
 end AlgebraicGeometry.ProEtale
+
