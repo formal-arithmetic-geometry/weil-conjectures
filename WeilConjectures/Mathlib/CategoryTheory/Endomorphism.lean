@@ -66,7 +66,8 @@ lemma comp_pow_eq_pow_comp {W X : C} (x : W ⟶ X) (A : End X)
     (S : End W) (h : x ≫ A.asHom = S.asHom ≫ x) (j : ℕ) :
     x ≫ ((A ^ j : End X)).asHom = ((S ^ j : End W)).asHom ≫ x := by
   induction j with
-  | zero => rw [pow_zero, pow_zero, End.one_asHom, End.one_asHom, Category.comp_id, Category.id_comp]
+  | zero =>
+    rw [pow_zero, pow_zero, End.one_asHom, End.one_asHom, Category.comp_id, Category.id_comp]
   | succ j ih =>
     rw [pow_succ, pow_succ, End.mul_asHom, End.mul_asHom, ← Category.assoc, h, Category.assoc, ih,
       Category.assoc]

@@ -81,8 +81,8 @@ lemma Functor.one_ne_zero_end {C : Type*} [Category* C] {D : Type*} [Category* D
   apply End.ext
   apply F.map_injective
   have h'' : 𝟙 Y = 0 := congr($(h').asHom)
-  rw [End.zero_asHom, End.one_asHom, F.map_zero, F.map_id, ← e.hom_inv_id, ← Category.id_comp e.inv, h'',
-    Limits.zero_comp, Limits.comp_zero]
+  rw [End.zero_asHom, End.one_asHom, F.map_zero, F.map_id, ← e.hom_inv_id,
+    ← Category.id_comp e.inv, h'', Limits.zero_comp, Limits.comp_zero]
 
 namespace Limits
 
@@ -242,7 +242,8 @@ theorem exists_iso_biproduct_cokernel_of_source (hU : ∀ t : End U, t ≠ 0 →
 /-- **Cokernels of morphisms between finite powers.** If every nonzero endomorphism of `U` is
 invertible, the cokernel of a morphism `Uᵐ ⟶ Uⁿ` between finite biproducts of copies of `U` is
 again a finite biproduct of copies of `U`. -/
-theorem exists_iso_biproduct_cokernel (hU : ∀ t : End U, t ≠ 0 → IsIso (t).asHom) {m n : ℕ} {X Y : C}
+theorem exists_iso_biproduct_cokernel (hU : ∀ t : End U, t ≠ 0 → IsIso (t).asHom)
+    {m n : ℕ} {X Y : C}
     (eY : Y ≅ ⨁ fun _ : Fin m ↦ U) (eX : X ≅ ⨁ fun _ : Fin n ↦ U) (f : Y ⟶ X) :
     ∃ k : ℕ, Nonempty (cokernel f ≅ ⨁ fun _ : Fin k ↦ U) := by
   induction m generalizing n X Y with
