@@ -105,8 +105,10 @@ lemma curvePullback_obj_obj_obj_str (F : WeilSheaf k₀ l X) :
 -- `upperStarIsoLowerStarInv` at objects which are only definitionally equal makes the kernel unfold
 -- the isomorphism (about 30s), while for a variable `α` it only compares the objects.
 private lemma hom_app_comp_forget_map_frobeniusPowIso (F : WeilSheaf k₀ l X) (M : ℕ)
-    (α : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.hom)^*[WeilCoefficients l]
-      ≅ (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.inv)_*[WeilCoefficients l]) :
+    (α : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.hom)^*[
+        WeilCoefficients l] ≅
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).asIso.inv)_*[
+        WeilCoefficients l]) :
     α.hom.app F.obj.carrier.X ≫ (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso M).hom =
       α.hom.app (F.powIsoAlgebra M).carrier.X ≫
         (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra M).obj.str :=
@@ -123,8 +125,10 @@ lemma frobeniusPowStr_eq_powIsoAlgebra (F : WeilSheaf k₀ l X) (M : ℕ) :
 -- Stated for an arbitrary isomorphism `α`, for the same reason as
 -- `hom_app_comp_forget_map_frobeniusPowIso` (about 75s for the concrete isomorphism).
 private lemma hom_app_comp_inv_app_curvePullback (F : WeilSheaf k₀ l X)
-    (α : ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom)^*[WeilCoefficients.{u} l] ≅
-      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]) :
+    (α : ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom)^*[
+        WeilCoefficients.{u} l] ≅
+      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.inv)_*[
+        WeilCoefficients.{u} l]) :
     α.hom.app ((curvePullback j hj).obj F).obj.carrier.X ≫
       α.inv.app ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
   Iso.hom_inv_id_app _ _
@@ -232,7 +236,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback (hN : 1 ≤ N)
     {τ : Spec (.of (AlgebraicClosure k₀)) ⟶ Spec (.of (AlgebraicClosure k₀))}
     {τ' : Spec (.of (AlgebraicClosure L)) ⟶ Spec (.of (AlgebraicClosure L))}
     (h₁ : Θ ≫ t₁ = t₁' ≫ j) (h₂ : Θ ≫ t₂ = t₂' ≫ j)
-    (hX : τ ≫ t₁ = t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom)
+    (hX : τ ≫ t₁ =
+      t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom)
     (hY : τ' ≫ t₁' = t₂' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.hom)
     (hΘ : τ' ≫ Θ = Θ ≫ τ) :
     ProEtale.globalSectionsTransport _ hX (F.frobeniusPowStr (N * m)) ≫
@@ -253,16 +258,19 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback (hN : 1 ≤ N)
   | succ m hm ih =>
     have pc' : j ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv =
         ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.inv ≫ j := by
-      rw [← cancel_mono ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom,
+      rw [← cancel_mono
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom,
         Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id,
         comp_geometricGaloisFrobenius_pow_mul_eq j hj m, Iso.inv_hom_id_assoc]
     have haX : (Iso.refl _).hom ≫ t₁ =
         (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) ≫
           ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom := by
       simp
-    have hbX : τ ≫ (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) =
+    have hbX : τ ≫
+        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) =
         t₂ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).asIso.hom := by
-      rw [← cancel_mono ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom,
+      rw [← cancel_mono
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.hom,
         Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hX, Category.assoc,
         Aut.pow_hom_comp_pow_hom, Nat.mul_succ]
     have haY : (Iso.refl _).hom ≫ t₁' =
@@ -274,7 +282,8 @@ lemma globalSectionsTransport_frobeniusPowStr_comp_curvePullback (hN : 1 ≤ N)
       rw [← cancel_mono ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.hom,
         Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, hY, Category.assoc,
         Aut.pow_hom_comp_pow_hom]
-    have hmid : Θ ≫ (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) =
+    have hmid : Θ ≫
+        (t₁ ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (N * m)).asIso.inv) =
         (t₁' ≫ ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius ^ m).asIso.inv) ≫ j := by
       rw [← Category.assoc, h₁, Category.assoc, pc', Category.assoc]
     have hΘ₀ : (Iso.refl _).hom ≫ Θ = Θ ≫ (Iso.refl _).hom := by simp
