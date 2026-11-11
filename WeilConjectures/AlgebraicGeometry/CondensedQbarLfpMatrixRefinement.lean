@@ -142,10 +142,7 @@ private lemma matrixHom_mul (M : Matrix ν κ R) (N : Matrix κ ι R) :
   intro i
   simp only [Category.assoc, matrixHom, biproduct.ι_matrix_assoc, biproduct.matrix_π,
     biproduct.ι_desc, Matrix.mul_apply, map_sum]
-  rw [biproduct.lift_desc]
-  apply Finset.sum_congr rfl
-  intro k hk
-  exact φ.map_mul (M i k) (N k j)
+  simp only [biproduct.lift_desc, End.sum_asHom, map_mul, End.mul_asHom]
 
 private lemma matrixHom_one [DecidableEq ι] :
     matrixHom A φ (1 : Matrix ι ι R) = 𝟙 _ := by
@@ -216,18 +213,19 @@ private lemma matrixHom_block :
         simp
       · rw [biproduct.ι_π_ne _ (hρ.ne hab)]
         simp only [Matrix.fromBlocks_apply₁₁]
-        rw [Matrix.one_apply_ne (Ne.symm hab), map_zero]
+        rw [Matrix.one_apply_ne (Ne.symm hab), map_zero, End.zero_asHom]
     · have : (sumComplEquiv ρ hρ).symm (Sum.inr ⟨i, hi⟩) = i := by
         simp [sumComplEquiv]
       rw [this, biproduct.ι_π_ne _ (fun h ↦ hi ⟨b, h⟩)]
-      exact map_zero φ
+      simpa only [End.zero_asHom] using congrArg End.asHom (map_zero φ)
   · have : (sumComplEquiv γ hγ).symm (Sum.inr ⟨j, hj⟩) = j := by
       simp [sumComplEquiv]
     rw [this, blockMap]
     simp only [Category.assoc]
     erw [biproduct.ι_toSubtype_assoc, dite_eq_right hj]
     simp only [Limits.zero_comp]
-    rcases x with a | ⟨i, hi⟩ <;> exact map_zero φ
+    rcases x with a | ⟨i, hi⟩ <;>
+      simpa only [End.zero_asHom] using congrArg End.asHom (map_zero φ)
 
 private lemma cokernel_block_free : ∃ n : ℕ,
     Nonempty (cokernel (blockMap A ρ γ hρ hγ) ≅ ⨁ fun _ : Fin n ↦ A) := by
