@@ -74,10 +74,10 @@ lemma mapMod_map_regularEndRingHom (s : Γ R) :
 lemma bijective_regularEndRingHom_comp_mapFunctor (hF : (F.mapMod R).FullyFaithful) :
     Function.Bijective (Mod.regularEndRingHom.comp (Γ.mapFunctor F (R := R))) := by
   have h : ⇑(Mod.regularEndRingHom.comp (Γ.mapFunctor F (R := R))) =
-      (fun φ ↦ (F.mapMod R).map φ) ∘ Mod.regularEndRingHom := by
+      (F.mapMod R).mapEnd ∘ Mod.regularEndRingHom := by
     ext1 s
-    exact (mapMod_map_regularEndRingHom F R s).symm
+    exact End.ext (mapMod_map_regularEndRingHom F R s).symm
   rw [h]
-  exact (hF.map_bijective _ _).comp Mod.regularEndRingHom_bijective
+  exact (hF.mulEquivEnd _).bijective.comp Mod.regularEndRingHom_bijective
 
 end CategoryTheory.Functor
