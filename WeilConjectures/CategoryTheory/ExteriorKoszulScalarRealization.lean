@@ -175,7 +175,7 @@ private def coefficientEnd
       intro z
       exact add_mul x y z
     change c.hom ≫ E.map _ ≫ c.inv = _
-    rw [h, E.map_add, Preadditive.add_comp, Preadditive.comp_add]
+    rw [h, E.map_add, Preadditive.add_comp, Preadditive.comp_add, End.add_asHom]
   map_mul' x y := by
     apply End.ext
     have h : ModuleCat.ofHom (LinearMap.mul A A (x * y)) =
