@@ -30,6 +30,7 @@ noncomputable def purity_geometricTatePairIso
           a.geometricGaloisFrobenius).app _).symm ≪≫
           upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
             a.geometricFiberToAlgebraicClosure d) := by
+  -- Compose the interface comparison with the root-pair identification.
   exact purity_geometricTateInterfacePairIso ℓ a d ≪≫
     eqToIso (purityTateRootPair_eq ℓ a d)
 
