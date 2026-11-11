@@ -80,7 +80,7 @@ noncomputable abbrev frobeniusUpperStarIsoLowerStarInv :
 `(Fr_X⁻¹)_*` model of condensed Weil sheaves. -/
 noncomputable def tateTwistLowerPair (d : ℕ) :
     IsoAlgebra (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv) :=
   IsoAlgebra.mk (tateTwistNat (X ↘ Spec (CommRingCat.of k₀)).geometricFiber l d)
     (((frobeniusUpperStarIsoLowerStarInv k₀ l X).app _).symm ≪≫
       upperStarTateTwistNatIso l (geometricFiberFrobeniusIso k₀ X).hom
