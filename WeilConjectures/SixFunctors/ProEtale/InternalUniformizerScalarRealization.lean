@@ -143,64 +143,61 @@ local instance ordinaryModulesGrothendieck :
   SheafOfModules.isGrothendieckAbelian _
 
 private theorem intertwine_pow {C : Type*} [Category C] {A B : C}
-    (a : End A) (b : End B) (v : A ⟶ B) (h : a ≫ v = v ≫ b) (k : ℕ) :
-    (a ^ k) ≫ v = v ≫ (b ^ k) := by
+    (a : End A) (b : End B) (v : A ⟶ B) (h : a.asHom ≫ v = v ≫ b.asHom) (k : ℕ) :
+    (a ^ k).asHom ≫ v = v ≫ (b ^ k).asHom := by
   induction k with
   | zero => simp
   | succ k ih =>
       calc
-        (a ^ (k + 1)) ≫ v = a ≫ ((a ^ k) ≫ v) := by
+        (a ^ (k + 1)).asHom ≫ v = a.asHom ≫ ((a ^ k).asHom ≫ v) := by
           rw [pow_succ, End.mul_asHom, Category.assoc]
-        _ = a ≫ (v ≫ (b ^ k)) := by rw [ih]
-        _ = v ≫ (b ^ (k + 1)) := by
+        _ = a.asHom ≫ (v ≫ (b ^ k).asHom) := by rw [ih]
+        _ = v ≫ (b ^ (k + 1)).asHom := by
           rw [← Category.assoc, h, Category.assoc, pow_succ, End.mul_asHom]
 
 private theorem scalarOnModules_pow
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (k : ℕ) :
     DerivedNakayama.scalarOnModules l E X (d ^ k) =
-      (End.of (DerivedNakayama.scalarOnModules l E X d)) ^ k := by
-  induction k with
-  | zero =>
-      simp only [pow_zero, End.one_asHom, DerivedNakayama.scalarOnModules,
-        CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id]
-      erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id]
-  | succ k ih =>
-      rw [pow_succ, End.mul_asHom, pow_succ, End.mul_asHom, ← ih]
-      unfold DerivedNakayama.scalarOnModules
-      simp only [Functor.map_comp, Category.assoc]
-      simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_assoc]
+      ((End.of (DerivedNakayama.scalarOnModules l E X d)) ^ k).asHom := by
+  let A := AdicCompletion.Modules l E X
+  let F₁ := (DerivedNakayama.pullback l E X).mapEnd
+    (Mod.regular (DerivedNakayama.integerRing l E))
+  let F₂ := (DerivedNakayama.regularPullbackIso l E X).conj.toMonoidHom
+  let F₃ := (tensoringLeft A).mapEnd (𝟙_ A)
+  let F₄ := (leftUnitorNatIso A).conj.toMonoidHom
+  exact congrArg End.asHom ((F₄.comp (F₃.comp (F₂.comp F₁))).map_pow d k)
 
 private theorem scalarOnModules_map_pow
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (M : AdicCompletion.Modules l E X) (k : ℕ) :
     (modules l E X).map ((DerivedNakayama.scalarOnModules l E X (d ^ k)).app M) =
-      (End.of ((modules l E X).map
-        ((DerivedNakayama.scalarOnModules l E X d).app M))) ^ k := by
+      ((End.of ((modules l E X).map
+        ((DerivedNakayama.scalarOnModules l E X d).app M))) ^ k).asHom := by
   rw [scalarOnModules_pow]
   let τ : End (𝟭 (AdicCompletion.Modules l E X)) :=
-    DerivedNakayama.scalarOnModules l E X d
-  change (modules l E X).map ((τ ^ k).app M) =
-    (End.of ((modules l E X).map (τ.app M))) ^ k
+    .of (DerivedNakayama.scalarOnModules l E X d)
+  change (modules l E X).map ((τ ^ k).asHom.app M) =
+    ((End.of ((modules l E X).map (τ.asHom.app M))) ^ k).asHom
   induction k with
   | zero => simp
   | succ k ih =>
       simpa only [pow_succ, End.mul_asHom, NatTrans.comp_app, Functor.map_comp,
-        End.of] using congrArg (fun z ↦ (modules l E X).map (τ.app M) ≫ z) ih
+        End.of] using congrArg (fun z ↦ (modules l E X).map (τ.asHom.app M) ≫ z) ih
 
 private theorem complex_scalar_unitor
     (P : ringedSiteComplex (ring l E X)) (f : End P)
     (a : End (𝟙_ (ConstantCompletion.Mod (ring l E X))))
-    (h : ∀ q : ℤ, f.f q ≫ (ρ_ (P.X q)).inv =
-      (ρ_ (P.X q)).inv ≫ P.X q ◁ a) :
-    f ≫ (ringedKoszulRightUnitIso (ring l E X) P).inv =
+    (h : ∀ q : ℤ, f.asHom.f q ≫ (ρ_ (P.X q)).inv =
+      (ρ_ (P.X q)).inv ≫ P.X q ◁ a.asHom) :
+    f.asHom ≫ (ringedKoszulRightUnitIso (ring l E X) P).inv =
       (ringedKoszulRightUnitIso (ring l E X) P).inv ≫
         ((ringedKoszulTensor (ring l E X)).obj P).map
-          ((HomologicalComplex.single _ (.up ℤ) 0).map a) := by
+          ((HomologicalComplex.single _ (.up ℤ) 0).map a.asHom) := by
   ext q : 1
-  change f.f q ≫ (HomologicalComplex.rightUnitor' P).inv q =
+  change f.asHom.f q ≫ (HomologicalComplex.rightUnitor' P).inv q =
     (HomologicalComplex.rightUnitor' P).inv q ≫
       (HomologicalComplex.mapBifunctorMap (𝟙 P)
-        ((HomologicalComplex.single _ (.up ℤ) 0).map a)
+        ((HomologicalComplex.single _ (.up ℤ) 0).map a.asHom)
         (curriedTensor _) (.up ℤ)).f q
   rw [HomologicalComplex.rightUnitor'_inv]
   simp only [Category.assoc, HomologicalComplex.ι_mapBifunctorMap,
@@ -246,14 +243,14 @@ theorem uniformizer_scalar_realization :
         Function.Injective (fun x : (ring l E X).obj.obj (op U) ↦ t.val (op U) * x)) ∧
       ∀ (d : End (Mod.regular (DerivedNakayama.integerRing l E))),
         (∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)
-          (s : S.unop), ((d.hom.hom.app S) b).down s =
+          (s : S.unop), ((d.asHom.hom.hom.app S) b).down s =
             Padic.coefficientExtensionUniformizer l E * b.down s) →
         ∀ (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ),
           ((modules l E X).mapHomologicalComplex (.up ℤ)).map
               (PrincipalReduction.scalar l E X d n P) ≫
               (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).inv =
             (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).inv ≫
-              ringedSingletonKoszulPower (ring l E X) t (complex l E X P) n := by
+              (ringedSingletonKoszulPower (ring l E X) t (complex l E X P) n).asHom := by
   obtain ⟨e, f, hf, hscalar⟩ := ordinary_uniformizer_scalar_comparison l E X
   let t := ConstantCompletion.algebraSection e.hom
     (ULift.up (Padic.coefficientExtensionUniformizer l E))
@@ -266,17 +263,17 @@ theorem uniformizer_scalar_realization :
           ((DerivedNakayama.scalarOnModules l E X (d ^ (n + 1))).app M) ≫
           (ρ_ ((modules l E X).obj M)).inv =
         (ρ_ ((modules l E X).obj M)).inv ≫
-          (modules l E X).obj M ◁ (a ^ (n + 1)) := by
+          (modules l E X).obj M ◁ (a ^ (n + 1)).asHom := by
     rw [scalarOnModules_map_pow]
-    have hm := map_pow
+    have hm := congrArg End.asHom (map_pow
       (((curriedTensor (ConstantCompletion.Mod (ring l E X))).obj
-        ((modules l E X).obj M)).mapEnd (𝟙_ _)) a (n + 1)
-    change (modules l E X).obj M ◁ (a ^ (n + 1)) =
-      (End.of ((modules l E X).obj M ◁ a)) ^ (n + 1) at hm
+        ((modules l E X).obj M)).mapEnd (𝟙_ _)) a (n + 1))
+    change (modules l E X).obj M ◁ (a ^ (n + 1)).asHom =
+      ((End.of ((modules l E X).obj M ◁ a.asHom)) ^ (n + 1)).asHom at hm
     rw [hm]
     exact intertwine_pow _ _ _ (hscalar d hd M) (n + 1)
   unfold ringedSingletonKoszulPower
-  apply complex_scalar_unitor l E X (complex l E X P) _ (a ^ (n + 1))
+  apply complex_scalar_unitor l E X (complex l E X P) (.of _) (a ^ (n + 1))
   intro q
   exact hp (P.X q)
 
