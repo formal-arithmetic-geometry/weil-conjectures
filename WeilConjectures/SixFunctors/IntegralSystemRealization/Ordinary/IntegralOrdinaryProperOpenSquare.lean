@@ -28,8 +28,7 @@ set_option synthInstance.maxSize 4096
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
-attribute [local implicit_reducible] TwoSquare
-  SemilinearSections.moduleAbelian SemilinearSections.hasDerived
+attribute [local implicit_reducible] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
   integralOperationsCommHasDerivedCategory
 attribute [local irreducible] pullbackTensorCalculus
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted

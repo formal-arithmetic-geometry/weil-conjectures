@@ -27,7 +27,6 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
-attribute [local implicit_reducible] TwoSquare
 attribute [local irreducible] pullbackTensorCalculus
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
