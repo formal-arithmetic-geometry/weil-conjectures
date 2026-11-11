@@ -198,4 +198,3 @@ theorem bijective_cohomologyMap_zero_affineLine_of_strictlyHenselian
 end Etale
 
 end AlgebraicGeometry
-

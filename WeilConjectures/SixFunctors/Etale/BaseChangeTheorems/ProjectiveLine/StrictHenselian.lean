@@ -550,4 +550,3 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal
 end StrictLocalExchange
 
 end AlgebraicGeometry
-
