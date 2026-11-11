@@ -55,6 +55,7 @@ private theorem higherDirectImage_vanishes
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
     (q : ℤ) (hq : q < 0 ∨ 2 * (d : ℤ) < q) :
     IsZero (higherDirectImage A f q F) := by
+
   rcases hq with hq | hq
   · exact Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
       (lowerStar (ModuleCat.{u + 1} A) f)
