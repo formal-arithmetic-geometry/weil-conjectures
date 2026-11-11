@@ -145,9 +145,12 @@ theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
   obtain ⟨m, hm⟩ := he
   set N := (n + 1) * (m + 1)
   have hN : N ≠ 0 := Nat.mul_ne_zero (Nat.succ_ne_zero n) (Nat.succ_ne_zero m)
+  have hm' : End.of e.hom ^ (m + 1) = 1 := by
+    apply End.ext
+    rw [← Iso.pow_hom_eq_pow, hm]
+    rfl
   have hA : (End.of (e.pow (n + 1)).hom.left ^ (m + 1)).asHom = 𝟙 X.left := by
-    rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul,
-      ← Iso.pow_hom_eq_pow, hm, Iso.refl_hom, ← End.one_asHom, one_pow]
+    rw [Iso.pow_hom_eq_pow, ← Over.pow_left, ← pow_mul, mul_comm, pow_mul, hm', one_pow]
     rfl
   have hfix : ∀ x : frobeniusFixedPoints e (n + 1),
       (End.of (geometricFrobeniusField k).hom ^ N).asHom ≫
