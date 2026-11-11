@@ -51,7 +51,7 @@ theorem balancedAction_affine_sections
     (M : X.Modules) (hM : M.IsQuasicoherent)
     (rho : B →+* End M)
     (hscalar : ∀ a : A, rho (algebraMap A B a) =
-      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a)) :
+      .of (M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))) :
     let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
     let Y := pullback f g
     let pi : Y ⟶ X := pullback.fst f g

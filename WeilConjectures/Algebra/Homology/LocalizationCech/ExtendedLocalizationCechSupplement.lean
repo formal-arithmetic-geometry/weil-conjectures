@@ -95,7 +95,7 @@ noncomputable def differential (R : Sheaf J CommRingCat.{u}) (r : ℕ)
 
 private theorem scalar_powers_comm (R : Sheaf J CommRingCat.{u})
     (f g : (unit (rings R)).sections) (k : ℕ) :
-    (scalar R f ^ k) ≫ (scalar R g ^ k) = ((scalar R g ^ k).asHom) ≫ ((scalar R f ^ k).asHom) := by
+    (scalar R f ^ k) ≫ ((scalar R g ^ k).asHom) = ((scalar R g ^ k).asHom) ≫ ((scalar R f ^ k).asHom) := by
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro X
@@ -263,7 +263,7 @@ theorem transition_comm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
       (koszul R r f n).d q (q + 1) ≫ transitionTerm R r f (q + 1) := by
   classical
   have hc (s : Finset (Fin r)) (j : Fin r) (h : j ∉ s) :
-      subsetScalar R r f s ≫ (scalar R (f j) ^ (n + 1 + 1)) =
+      subsetScalar R r f s ≫ ((scalar R (f j) ^ (n + 1 + 1)).asHom) =
         ((scalar R (f j) ^ (n + 1)).asHom) ≫ (subsetScalar R r f (insert j s)).asHom := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -369,7 +369,7 @@ private theorem subsetScalar_unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶
   have hl : ∀ l : List (Fin r),
       l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _) ≫ unitMap φ =
         unitMap φ ≫ (restriction φ).map
-          (l.foldr (fun j b ↦ scalar B (mapSection φ (f j)) ≫ b) (𝟙 _)) := by
+          (l.foldr (fun j b ↦ (scalar B (mapSection φ (f j))).asHom ≫ b) (𝟙 _)) := by
     intro l
     induction l with
     | nil => simp
@@ -499,7 +499,7 @@ theorem idealRow_comparison_zero {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
   have hi : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings R)) j ≫ idealRow R r f =
       (scalar R (f j)).asHom := fun j ↦ Sigma.ι_comp_desc _ _
   have hb : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings B)) j ≫
-      idealRow B r (mapSection φ ∘ f) = ((scalar B (mapSection φ (f j)) :=)).asHom.asHom
+      idealRow B r (mapSection φ ∘ f) = (((scalar B (mapSection φ (f j)) :=))).asHom.asHom.asHom
     fun j ↦ Sigma.ι_comp_desc _ _
   apply Sigma.hom_ext
   intro j

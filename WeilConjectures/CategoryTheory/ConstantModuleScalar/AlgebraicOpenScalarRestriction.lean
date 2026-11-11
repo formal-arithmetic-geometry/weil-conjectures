@@ -18,6 +18,7 @@ public import Mathlib.CategoryTheory.Subterminal
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.CategoryTheory.Sites.Subsheaf
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Ordinary scalar restriction and extension from an open subtopos -/
 

@@ -40,7 +40,7 @@ lemma regularEndRingHom_injective : Function.Injective (regularEndRingHom (R := 
   intro s t h
   ext1
   rw [← one_comp_regularLift_regular s.hom, ← one_comp_regularLift_regular t.hom]
-  exact congrArg (fun φ : End (regular R) ↦ η[R] ≫ φ.hom) h
+  exact congrArg (fun φ : End (regular R) ↦ η[R] ≫ φ.asHom.hom) h
 
 /-- The endomorphisms of the regular module `R` are the multiplications by the global sections
 of `R`. -/
@@ -61,7 +61,7 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [Preadditive C
 /-- A lax monoidal functor sends the multiplication by a global section `s` on the regular module
 `R` to the multiplication by `ε ≫ F s` on the regular module `F R`. -/
 lemma mapMod_map_regularEndRingHom (s : Γ R) :
-    (F.mapMod R).map (Mod.regularEndRingHom s) = Mod.regularEndRingHom (Γ.mapFunctor F s) := by
+    (F.mapMod R).map ((Mod.regularEndRingHom s)).asHom = (Mod.regularEndRingHom (Γ.mapFunctor F s)).asHom := by
   refine Mod.regular_hom_ext ?_
   change η[F.obj R] ≫ F.map (Mod.regularLift (Mod.regular R) s.hom).hom =
     η[F.obj R] ≫ (Mod.regularLift (Mod.regular (F.obj R)) (Γ.mapFunctor F s).hom).hom

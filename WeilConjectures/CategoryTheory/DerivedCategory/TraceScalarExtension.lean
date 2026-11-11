@@ -93,10 +93,10 @@ theorem exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap
     ∃ a : R,
       (letI := braidedCategory' (ModuleCat.{u} R)
       MonoidalCategory.trace w =
-        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a) ∧
+        (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a).asHom) ∧
       (letI := braidedCategory' (ModuleCat.{u} B)
       MonoidalCategory.trace w' =
-        algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)) := by
+        (algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)).asHom) := by
   refine ⟨_, trace_eq_algebraMap_sum_negOnePow_linearMapTrace P v s hs hfree hfin K w e hw, ?_⟩
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace _ _ s
     (fun i hi ↦ (ModuleCat.extendScalars φ).map_isZero (hs i hi))

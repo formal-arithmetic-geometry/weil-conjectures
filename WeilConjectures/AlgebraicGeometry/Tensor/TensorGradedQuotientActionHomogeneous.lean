@@ -63,7 +63,7 @@ theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
       (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
         kernel (tensorGradedUnit j (L.tensorPow (d + a))),
-      T.k d ≫ μ ((T.c a).app ⊤ s) = v ≫ T.k (d + a)  := by
+      T.k d ≫ (μ ((T.c a).app ⊤ s)).asHom = v ≫ T.k (d + a)  := by
   classical
   let η := tensorGradedUnit j (L.tensorPow a)
   let g := (T.c a).app ⊤ s

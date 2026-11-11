@@ -134,7 +134,7 @@ theorem one_ne_zero_end_regular :
 /-- Every nonzero endomorphism of the regular module `ℚ̲̄_ℓ` is invertible: the endomorphisms are
 the multiplications by the constants `ℚ̄_ℓ`, a field. -/
 theorem isIso_of_ne_zero_end_regular (t : End (Mod.regular (padicAlgClRingObj.{u} ℓ)))
-    (ht : t ≠ 0) : IsIso t :=
+    (ht : t ≠ 0) : IsIso (t :=).asHom
   isIso_of_ne_zero_of_surjective (Mod.regularEndRingHom.comp (constRingHom.{u} ℓ))
     (Mod.regularEndRingHom_surjective.comp (constRingHom_surjective ℓ)) t ht
 

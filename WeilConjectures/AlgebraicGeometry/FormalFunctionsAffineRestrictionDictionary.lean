@@ -57,7 +57,7 @@ private noncomputable def affineRestrictionSectionsIso {X Y : Scheme.{u}}
     change M.presheaf.map (eqToHom V.ι_image_top).op ≫
       (M.restrict V.ι).smul
         (((Scheme.ΓSpecIso Γ(Y, U)).inv ≫ ((f ∣_ U) ≫ hU.isoSpec.hom).appTop).hom r) =
-      M.smul ((f.app U).hom r) ≫ M.presheaf.map (eqToHom V.ι_image_top).op
+      (M.smul ((f.app U).hom r)).asHom ≫ M.presheaf.map (eqToHom V.ι_image_top).op
     rw [affine_restriction_appTop]
     have hr := Scheme.Modules.smul_restrictAppIso_hom V.ι M ⊤
       ((f.app U ≫ X.presheaf.map (eqToHom V.ι_image_top).op).hom r)
