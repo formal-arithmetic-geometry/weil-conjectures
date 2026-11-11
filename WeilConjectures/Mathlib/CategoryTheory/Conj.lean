@@ -36,7 +36,7 @@ lemma Iso.conjRingEquiv_apply {X Y : C} (α : X ≅ Y) (f : End X) :
   rfl
 
 /-- An additive functor induces a ring homomorphism `End X →+* End (F.obj X)`. -/
-@[simps]
+@[simps!]
 def Functor.mapEndRingHom (F : C ⥤ D) [F.Additive] (X : C) : End X →+* End (F.obj X) where
   __ := F.mapEnd X
   map_zero' := End.ext (F.map_zero X X)
