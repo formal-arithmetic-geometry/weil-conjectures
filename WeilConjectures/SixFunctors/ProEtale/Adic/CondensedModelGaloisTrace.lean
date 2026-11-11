@@ -101,7 +101,7 @@ lemma adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_smul_comp_hom (Ω : T
         (adicSheafEquivCondensedModTensorUnitIso l (Spec (.of Ω))).hom =
       (CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c).asHom := by
   apply End.homEquiv.symm.injective
-  dsimp only [End.homEquiv]
+  dsimp only [End.homEquiv, Equiv.symm]
   apply (CondensedRing.endTensorUnitRingEquiv l Ω).injective
   rw [adicSheafEquivCondensedModTensorUnitIso_eq,
     endTensorUnitRingEquiv_adicSheafEquivCondensedMod_map_smul,

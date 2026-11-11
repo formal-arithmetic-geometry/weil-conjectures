@@ -38,12 +38,12 @@ lemma purity_regularSmulIso_cyclotomic_cancel :
     exact hc rfl
   have h := congrArg r (inv_mul_cancel₀ hq)
   rw [r.map_mul, r.map_one] at h
-  have hn : r (Nat.card k₀) = (Nat.card k₀ : ℤ) • 𝟙 _ := by
+  have hn : r (Nat.card k₀) = (Nat.card k₀ : ℤ) • 1 := by
     rw [map_natCast]
     rw [Nat.cast_smul_eq_nsmul]
     exact (nsmul_one (Nat.card k₀)).symm
   rw [hn] at h
   simpa only [r, RingHom.comp_apply, regularSmulIso_hom, WeilSheaf.cyclotomicUnit_eq,
-    End.mul_asHom, End.one_asHom] using h
+    End.mul_asHom, End.zsmul_asHom, End.one_asHom] using congrArg End.asHom h
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
