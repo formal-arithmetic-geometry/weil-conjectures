@@ -246,7 +246,6 @@ private lemma finite_affine_free_cover
       Finite U.I₀ ∧ (∀ i, IsAffine (U.X i)) ∧
       ∀ i, Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj R)
         (((upperStar Ab.{u + 1} (U.f i)).mapMod R).obj M) := by
-
   obtain ⟨U, hU⟩ := h
   obtain ⟨V, q, hfin, ho⟩ := QuasiCompactCover.exists_hom U.forgetQc
   have : Finite V.cover.I₀ := hfin

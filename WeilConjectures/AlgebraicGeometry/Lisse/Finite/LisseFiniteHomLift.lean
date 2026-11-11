@@ -241,7 +241,6 @@ lemma IsLisseCoefficientModule.isLocallyFree
     {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (hP : IsLisseCoefficientModule Λ P) :
     IsLocallyFree (condensedRingObj Λ X) P := by
-
   obtain ⟨U, hU⟩ := hP
   refine ⟨U, fun i ↦ ?_⟩
   let φ := condensedPullbackHom Λ (U.f i)

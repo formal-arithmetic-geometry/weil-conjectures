@@ -246,7 +246,6 @@ private lemma locallyFinitelyPresented_of_isZero {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R} (hM : IsZero M) :
     IsLocallyFinitelyPresented R M := by
-
   refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
   refine ⟨0, 0, 𝟙 _, ⟨?_⟩⟩
   exact (((ProEtale.upperStar Ab.{u + 1} _).mapMod R).map_isZero hM).iso

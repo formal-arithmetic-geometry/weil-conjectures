@@ -412,6 +412,7 @@ open CategoryTheory.Pretriangulated
 private theorem freeZero {C : Type*} [Category C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] (R : C) [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
     {M : Mod C R} (hM : IsZero M) : Mod.IsFree R M := by
+
   have hzero : IsZero (Mod.finiteFree R 0) := by
     apply (IsZero.iff_id_eq_zero _).mpr
     apply biproduct.hom_ext

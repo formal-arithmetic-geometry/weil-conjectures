@@ -435,6 +435,7 @@ private theorem continuousTraceImage_rationalization_isIso
       (Mod.comap (coefficientMap (integralScalarMap l E) X)).map τ
     IsIso (((Mod.extendRestrictAdjunction
       (coefficientMap (integralScalarMap l E) X)).homEquiv (image g) P).symm (image.ι g)) := by
+
   dsimp only
   let a := coefficientMap (integralScalarMap l E) X
   let F := Mod.extendScalars a
