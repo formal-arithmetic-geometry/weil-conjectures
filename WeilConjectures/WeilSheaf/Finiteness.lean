@@ -90,14 +90,14 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
 structure* if `𝟙 ⟶ Fr^* 𝟙 ⟶ Fr^* R ⟶ R` is `η`, the first map being the unit of the lax
 monoidal `Fr^* = (Fr⁻¹)_*`. -/
 def WeilSheaf.IsUnitCompatible (R : WeilSheaf k₀ l Y) (η : 𝟙_ _ ⟶ R.obj.carrier.X) : Prop :=
-  ε ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l] ≫
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map η ≫
+  ε ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l] ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map η ≫
         R.obj.str.hom.hom = η
 
 /-- A compatible unit transports along a morphism of Weil sheaves. -/
 lemma WeilSheaf.IsUnitCompatible.comp {R R' : WeilSheaf k₀ l Y} {η : 𝟙_ _ ⟶ R.obj.carrier.X}
     (hη : R.IsUnitCompatible η) (f : R ⟶ R') : R'.IsUnitCompatible (η ≫ f.hom.hom.f.hom) := by
-  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
+  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
       f.hom.hom.f.hom ≫ R'.obj.str.hom.hom = R.obj.str.hom.hom ≫ f.hom.hom.f.hom :=
     congrArg (fun φ ↦ φ.hom) f.hom.hom.h
   rw [IsUnitCompatible, Functor.map_comp, Category.assoc, h]
@@ -111,17 +111,17 @@ lemma WeilSheaf.IsUnitCompatible.globalSections_frobenius
     {η : 𝟙_ _ ⟶ R.obj.carrier.X} (hη : R.IsUnitCompatible η) :
     R.globalSections.frobenius (globalSectionOfHom η) = globalSectionOfHom η := by
   have hε := NatTrans.IsMonoidal.unit (τ := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).hom)
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).hom)
   have key : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map η ≫
       (globalSectionsLowerStarIso _
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app _ ≫
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app _ ≫
       (Sheaf.Γ _ _).map R.obj.str.hom.hom =
       ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (Sheaf.Γ _ _).map η := by
     have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality η
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality η
     have hε' : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (globalSectionsLowerStarIso _
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app (𝟙_ _) =
-        ε (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_] ⋙
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app (𝟙_ _) =
+        ε (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_] ⋙
           Sheaf.Γ _ (WeilCoefficients.{u} l)) := by
       rw [← hε, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
     erw [reassoc_of% n, reassoc_of% hε']

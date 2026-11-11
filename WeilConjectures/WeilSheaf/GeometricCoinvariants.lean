@@ -66,7 +66,7 @@ variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 lemma globalSections_frobenius_apply (G : WeilSheaf k₀ l X) (a : G.globalSections.carrier) :
     G.globalSections.frobenius a = ((Sheaf.Γ _ _).map G.obj.str.hom.hom).hom
       (((globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app
           G.obj.carrier.X).hom a) :=
   rfl
 
@@ -76,27 +76,27 @@ end GlobalSections
 lemma adicConstant_globalSections_str_one :
     ((Sheaf.Γ _ _).map (adicConstant k₀ l X).obj.str.hom.hom).hom
       (((globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app
           (adicConstant k₀ l X).obj.carrier.X).hom
         (oneGlobalSection (l := l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) =
       oneGlobalSection (l := l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber := by
   have hε := NatTrans.IsMonoidal.unit (τ := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).hom)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).hom)
   have key : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫
       (Sheaf.Γ _ _).map (MonObj.one (X := adicConstantSheaf l
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ≫
       (globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app _ ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app _ ≫
       (Sheaf.Γ _ _).map (adicConstant k₀ l X).obj.str.hom.hom =
       ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫
         (Sheaf.Γ _ _).map (MonObj.one (X := adicConstantSheaf l
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := by
     have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.naturality
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.naturality
         (MonObj.one (X := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))
     have hε' : ε (Sheaf.Γ _ (WeilCoefficients.{u} l)) ≫ (globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app (𝟙_ _) =
-        ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_] ⋙
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app (𝟙_ _) =
+        ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_] ⋙
           Sheaf.Γ _ (WeilCoefficients.{u} l)) := by
       rw [← hε, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
     erw [reassoc_of% n, reassoc_of% hε']
@@ -135,7 +135,7 @@ theorem modHomOfGlobalSection_comm (G : WeilSheaf k₀ l X) (β : (PadicAlgCl l)
     rw [← globalSectionOfModHom_eq]
     exact globalSectionOfModHom_modHomOfGlobalSection G a
   let gs := globalSectionsLowerStarIso (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
   let one := oneGlobalSection (l := l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
   have e₁ : ((Sheaf.Γ _ _).map (adicConstant k₀ l X).obj.str.inv.hom).hom one =
       (gs.inv.app _).hom one := by

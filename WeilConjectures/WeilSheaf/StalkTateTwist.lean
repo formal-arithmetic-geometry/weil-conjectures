@@ -43,8 +43,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (n : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
-    (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ s)
+  (n : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
+    (specGeometricFrobenius k₀ ^ n).hom ≫ s)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The Frobenius of the stalk of the constant twist `ℚ̄_ℓ ⊗ 𝓑_b` relative to `𝔽_{qⁿ}` is
