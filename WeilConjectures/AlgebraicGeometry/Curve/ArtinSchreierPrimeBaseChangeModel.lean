@@ -24,7 +24,10 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.IsCurve
 
-private theorem exists_fixedPoints_equiv_of_exact_row
+/-- If `0 → A → G → G → 0` is short exact, with second map `wp` surjective on `H⁰`, and `wp` acts on
+`H¹(G) ≅ V` as `F - 1` for a `p`-linear `F`, then `H¹(A)` is identified with the fixed points of
+`F`, compatibly with the map `H¹(A) → H¹(G)`. -/
+theorem exists_fixedPoints_equiv_of_exact_row
     {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p]
     {X : Scheme.{u}} {A G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (i : A ⟶ G) (wp : G ⟶ G) (z : i ≫ wp = 0)

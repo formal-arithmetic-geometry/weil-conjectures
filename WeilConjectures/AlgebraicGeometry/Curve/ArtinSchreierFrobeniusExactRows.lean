@@ -31,7 +31,10 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.IsCurve
 
-private theorem surjective_sheafH_zero
+/-- On a smooth proper connected curve over an algebraically closed field of characteristic `p`,
+the Artin--Schreier map `a ↦ a ^ p - a` of the additive sheaf is surjective on global sections:
+global functions are constants, and `x ^ p - x = c` is solvable in `k`. -/
+theorem surjective_sheafH_zero_artinSchreier
     {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
     [Smooth f] [ConnectedSpace C] [IsProper f]
@@ -73,7 +76,10 @@ private theorem surjective_sheafH_zero
   rw [← Sheaf.H.equiv₀_naturality, AddEquiv.apply_symm_apply]
   exact hx
 
-private theorem exists_frobenius_model
+/-- A `k`-module structure on `H¹` of the additive sheaf `G`, induced by multiplication on sections,
+turns the map induced by `a ↦ a ^ p` into a `p`-linear endomorphism `F`; the Artin--Schreier map
+`wp` then acts on `H¹` as `F - 1`. -/
+theorem exists_frobenius_model
     {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
     (p : ℕ) [Fact p.Prime] [CharP k p]
     (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -218,7 +224,7 @@ theorem exists_artinSchreier_frobenius_exact_rows
   have : GeometricallyConnected f' := MorphismProperty.of_isPullback h inferInstance
   have : ConnectedSpace C' := GeometricallyConnected.connectedSpace_of_subsingleton f'
   exact ⟨V, hfinite, F, F', hFF', G, G', i, i', wp, wp', z, z', q, b, b',
-    hs, hs', surjective_sheafH_zero f p G a wp hwp,
-    surjective_sheafH_zero f' p G' a' wp' hwp', hiq, hF, hF', hbc⟩
+    hs, hs', surjective_sheafH_zero_artinSchreier f p G a wp hwp,
+    surjective_sheafH_zero_artinSchreier f' p G' a' wp' hwp', hiq, hF, hF', hbc⟩
 
 end AlgebraicGeometry.IsCurve
