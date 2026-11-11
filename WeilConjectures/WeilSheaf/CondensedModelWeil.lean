@@ -138,7 +138,7 @@ models along the equivalence `E` of `AlgebraicGeometry.ProEtale.adicSheafEquivCo
 noncomputable def condensedFrobeniusComparison :
     (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor ⋙
         CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≅
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≅
       WeilSheaf.frobeniusPullback k₀ l X ⋙
         (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor :=
   (adicLowerStarCompCondensedModIso l _).symm
@@ -149,7 +149,7 @@ the old model becomes the condensed `ℚ̲̄_ℓ`-module `E F` on `X̄` with the
 noncomputable def toCondensed :
     ProEtaleWeilSheaf k₀ l X ⥤ Endofunctor.IsoAlgebra
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv) :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (condensedFrobeniusComparison k₀ l X)
 
 instance : (toCondensed k₀ l X).IsEquivalence :=
@@ -181,7 +181,7 @@ the pullback along `Fr_X` of the new model, through
 noncomputable def condensedUpperStarFrobeniusComparison :
     (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor ⋙
         CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≅
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom ≅
       WeilSheaf.frobeniusPullback k₀ l X ⋙
         (adicSheafEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).functor :=
   Functor.isoWhiskerLeft _ (CondensedRing.upperStarIsoLowerStarInv _ _) ≪≫
@@ -194,7 +194,7 @@ automorphism `Fr_X` of `X̄`. -/
 noncomputable def toCondensedUpperStar :
     ProEtaleWeilSheaf k₀ l X ⥤ Endofunctor.IsoAlgebra
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom) :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (condensedUpperStarFrobeniusComparison k₀ l X)
 
 instance : (toCondensedUpperStar k₀ l X).IsEquivalence :=
@@ -233,7 +233,7 @@ lemma geometricFiberFrobenius_eq_iterateFrobenius_comp :
     f.geometricFiberFrobenius =
       f.geometricFiber.iterateFrobenius (FiniteField.ringChar_prime k)
           f.isOfCharacteristic_geometricFiber (FiniteField.frobeniusExponent k) ≫
-        f.geometricGaloisFrobenius.hom := by
+        f.geometricGaloisFrobenius.asIso.hom := by
   rw [iterateFrobenius_geometricFiber_eq, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 end AlgebraicGeometry.Scheme.Hom
@@ -251,7 +251,7 @@ absolute `q`-power Frobenius `F` of `X̄`
 (`AlgebraicGeometry.Scheme.Hom.iterateFrobenius_geometricFiber_eq`), and `F^* ≅ 𝟭`
 (`AlgebraicGeometry.ProEtale.CondensedRing.upperStarIterateFrobeniusIso`). -/
 noncomputable def upperStarGeometricFiberFrobeniusIso :
-    upperStar Λ f.geometricFiberFrobenius ≅ upperStar Λ f.geometricGaloisFrobenius.hom :=
+    upperStar Λ f.geometricFiberFrobenius ≅ upperStar Λ f.geometricGaloisFrobenius.asIso.hom :=
   upperStarCongr Λ (Scheme.Hom.geometricFiberFrobenius_eq_iterateFrobenius_comp f) ≪≫
     upperStarComp Λ _ _ ≪≫
     Functor.isoWhiskerLeft _ (upperStarIterateFrobeniusIso Λ (FiniteField.ringChar_prime k)
@@ -263,7 +263,7 @@ under the geometric Galois Frobenius: `p^* ⋙ Fr_X^* ≅ (Fr_X ≫ p)^* = p^*`,
 `Fr_X ≫ p = p`
 (`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj`). -/
 noncomputable def geometricFiberProjUpperStarFrobeniusIso :
-    upperStar Λ f.geometricFiberProj ⋙ upperStar Λ f.geometricGaloisFrobenius.hom ≅
+    upperStar Λ f.geometricFiberProj ⋙ upperStar Λ f.geometricGaloisFrobenius.asIso.hom ≅
       upperStar Λ f.geometricFiberProj :=
   (upperStarComp Λ _ _).symm ≪≫
     upperStarCongr Λ (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj f)
@@ -275,7 +275,7 @@ isomorphism `Fr_X^* p^* M ≅ (Fr_X ≫ p)^* M = p^* M`
 @[simps obj map]
 noncomputable def geometricFiberWeil :
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀) ⥤
-      Endofunctor.IsoAlgebra (upperStar Λ f.geometricGaloisFrobenius.hom) where
+      Endofunctor.IsoAlgebra (upperStar Λ f.geometricGaloisFrobenius.asIso.hom) where
   obj M := Endofunctor.IsoAlgebra.mk _ ((geometricFiberProjUpperStarFrobeniusIso Λ f).app M)
   map φ := ObjectProperty.homMk
     { f := (upperStar Λ f.geometricFiberProj).map φ
@@ -291,7 +291,7 @@ lemma geometricFiberWeil_comp_forget :
 geometric Galois Frobenius in the pushforward convention of the old model:
 `p^* ⋙ (Fr_X⁻¹)_* ≅ p^* ⋙ Fr_X^* ≅ p^*`. -/
 noncomputable def geometricFiberProjLowerStarFrobeniusIso :
-    upperStar Λ f.geometricFiberProj ⋙ lowerStar Λ f.geometricGaloisFrobenius.inv ≅
+    upperStar Λ f.geometricFiberProj ⋙ lowerStar Λ f.geometricGaloisFrobenius.asIso.inv ≅
       upperStar Λ f.geometricFiberProj :=
   Functor.isoWhiskerLeft _ (upperStarIsoLowerStarInv Λ _).symm ≪≫
     geometricFiberProjUpperStarFrobeniusIso Λ f
@@ -304,7 +304,7 @@ of the target of `AlgebraicGeometry.ProEtaleWeilSheaf.toCondensed`. -/
 @[simps obj map]
 noncomputable def geometricFiberWeilLowerStar :
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀) ⥤
-      Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.inv) where
+      Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.asIso.inv) where
   obj M := Endofunctor.IsoAlgebra.mk _ ((geometricFiberProjLowerStarFrobeniusIso Λ f).app M)
   map φ := ObjectProperty.homMk
     { f := (upperStar Λ f.geometricFiberProj).map φ
