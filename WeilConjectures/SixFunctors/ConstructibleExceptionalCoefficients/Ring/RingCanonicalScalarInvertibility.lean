@@ -79,7 +79,6 @@ private theorem mate_whisker
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.comp_obj, Category.id_comp, Functor.map_comp, Category.assoc]
   rw [← a₂.unit_naturality_assoc]
-  dsimp only [TwoSquare.natTrans]
   simp only [Functor.comp_map]
   have hg := congrArg R₂.map (g.naturality (a₁.counit.app N))
   simp only [R₂.map_comp] at hg
