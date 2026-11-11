@@ -399,7 +399,7 @@ private theorem completedDiscreteUnderlying_normalization
   have he : eW.F.map (eW.F.asEquivalence.unitIso.inv.app X) =
       eW.F.asEquivalence.counitIso.hom.app (eW.F.obj X) := by
     apply (cancel_epi (eW.F.asEquivalence.counitIso.inv.app (eW.F.obj X))).1
-    exact (eW.F.asEquivalence.counitIso_functor_comp X).trans
+    exact (eW.F.asEquivalence.counitInv_functor_comp X).trans
       (Iso.inv_hom_id_app eW.F.asEquivalence.counitIso (eW.F.obj X)).symm
   change (diagonalForget l W).map
       ((diagonalCompletedRestriction l W).map (eW.F.asEquivalence.unitIso.inv.app X)) ≫
