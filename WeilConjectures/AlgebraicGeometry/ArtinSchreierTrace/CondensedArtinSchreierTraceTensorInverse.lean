@@ -192,7 +192,7 @@ private theorem linearUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
 attribute [local instance] linearUpperStar
 
 private theorem scalarEnd (X : Scheme.{u}) (a : MonObj.Γ Λ) :
-    Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (upperStarFromPoint X) a) =
+    (Mod.regularEndRingHom (MonObj.Γ.mapFunctorMonoidHom (upperStarFromPoint X) a)).asHom =
       a • 𝟙 (Mod.regular (condensedRingObj Λ X)) := by
   rw [Mod.linearOfRingHom_smul_id (scalars Λ X)]
   apply Mod.hom_ext
@@ -234,10 +234,12 @@ private theorem projector_linear (ψ : AddChar k (MonObj.Γ Λ)) :
   unfold condensedArtinSchreierProjector
   apply Finset.sum_congr rfl
   intro a _
+  apply End.ext
+  simp only [End.smul_asHom]
   rw [scalarEnd, CategoryTheory.Functor.map_smul, CategoryTheory.Functor.map_id,
     Linear.comp_smul]
   change (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)) •
-    (condensedArtinSchreierTranslationAction Λ k a ≫
+    ((condensedArtinSchreierTranslationAction Λ k a).asHom ≫
       𝟙 (condensedArtinSchreierPushforward Λ k)) = _
   rw [Category.comp_id]
 
@@ -245,14 +247,14 @@ private theorem neg_intertwine_image
     (ψ : AddChar k (MonObj.Γ Λ))
     (e : (CondensedRing.upperStar Λ N).obj (condensedArtinSchreierPushforward Λ k) ≅
       condensedArtinSchreierPushforward Λ k)
-    (h : (CondensedRing.upperStar Λ N).map (condensedArtinSchreierProjector Λ k ψ) ≫
+    (h : (CondensedRing.upperStar Λ N).map (condensedArtinSchreierProjector Λ k ψ).asHom ≫
         e.hom =
-      e.hom ≫ condensedArtinSchreierProjector Λ k ψ⁻¹) :
+      e.hom ≫ (condensedArtinSchreierProjector Λ k ψ⁻¹).asHom) :
     Nonempty ((CondensedRing.upperStar Λ N).obj (condensedArtinSchreierSheaf Λ k ψ) ≅
       condensedArtinSchreierSheaf Λ k ψ⁻¹) := by
   let F := CondensedRing.upperStar Λ N
-  let p := condensedArtinSchreierProjector Λ k ψ
-  let q := condensedArtinSchreierProjector Λ k ψ⁻¹
+  let p := (condensedArtinSchreierProjector Λ k ψ).asHom
+  let q := (condensedArtinSchreierProjector Λ k ψ⁻¹).asHom
   refine ⟨(PreservesImage.iso F p).symm ≪≫
     image.compIso (F.map p) e.hom ≪≫ image.eqToIso h ≪≫ ?_⟩
   exact asIso (image.preComp e.hom q)
@@ -262,28 +264,28 @@ private theorem neg_projector_conjugate
     (e : (CondensedRing.upperStar Λ N).obj (condensedArtinSchreierPushforward Λ k) ≅
       condensedArtinSchreierPushforward Λ k)
     (h : ∀ a : k,
-      (CondensedRing.upperStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a) ≫
+      (CondensedRing.upperStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
           e.hom =
         e.hom ≫
-          condensedArtinSchreierTranslationAction Λ k (-a)) :
-    (CondensedRing.upperStar Λ N).map (condensedArtinSchreierProjector Λ k ψ) ≫
+          (condensedArtinSchreierTranslationAction Λ k (-a)).asHom) :
+    (CondensedRing.upperStar Λ N).map (condensedArtinSchreierProjector Λ k ψ).asHom ≫
         e.hom =
-      e.hom ≫ condensedArtinSchreierProjector Λ k ψ⁻¹ := by
-  rw [projector_linear, projector_linear]
+      e.hom ≫ (condensedArtinSchreierProjector Λ k ψ⁻¹).asHom := by
+  simp only [projector_linear, End.sum_asHom, End.smul_asHom]
   calc
     _ = ∑ a : k, (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)) •
-        (e.hom ≫ condensedArtinSchreierTranslationAction Λ k (-a)) := by
+        (e.hom ≫ (condensedArtinSchreierTranslationAction Λ k (-a)).asHom) := by
       rw [CategoryTheory.Functor.map_sum, Preadditive.sum_comp]
       apply Finset.sum_congr rfl
       intro a _
       rw [CategoryTheory.Functor.map_smul (R := MonObj.Γ Λ), Linear.smul_comp, h]
     _ = ∑ a : k, (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ⁻¹ (-a)) •
-        (e.hom ≫ condensedArtinSchreierTranslationAction Λ k a) := by
+        (e.hom ≫ (condensedArtinSchreierTranslationAction Λ k a).asHom) := by
       refine Fintype.sum_equiv (Equiv.neg k)
         (fun a : k ↦ (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)) •
-          (e.hom ≫ condensedArtinSchreierTranslationAction Λ k (-a)))
+          (e.hom ≫ (condensedArtinSchreierTranslationAction Λ k (-a)).asHom))
         (fun a : k ↦ (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ⁻¹ (-a)) •
-          (e.hom ≫ condensedArtinSchreierTranslationAction Λ k a)) ?_
+          (e.hom ≫ (condensedArtinSchreierTranslationAction Λ k a).asHom)) ?_
       intro a
       simp only [Equiv.neg_apply, AddChar.inv_apply, neg_neg]
     _ = _ := by
@@ -292,7 +294,7 @@ private theorem neg_projector_conjugate
       intro a _
       exact (Linear.comp_smul _ _ _ e.hom
         (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ⁻¹ (-a))
-        (condensedArtinSchreierTranslationAction Λ k a)).symm
+        (condensedArtinSchreierTranslationAction Λ k a).asHom).symm
 
 private theorem zero_transport
     (ψ : AddChar k (MonObj.Γ Λ))
@@ -369,7 +371,7 @@ private def reflection_push_iso :
     mapOverIso Λ (AS ≫ N) AS N (reflection_square k)
 
 private theorem action_mapOver (a : k) :
-    condensedArtinSchreierTranslationAction Λ k a = mapOver Λ AS AS
+    (condensedArtinSchreierTranslationAction Λ k a).asHom = mapOver Λ AS AS
       (Etale.artinSchreierTranslation k a)
       (Etale.artinSchreierTranslation_comp_artinSchreierMap k a) := by
   unfold condensedArtinSchreierTranslationAction mapOver unitPush
@@ -377,9 +379,9 @@ private theorem action_mapOver (a : k) :
   rfl
 
 private theorem reflection_conjugates (a : k) :
-    (CondensedRing.lowerStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a) ≫
+    (CondensedRing.lowerStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
         (reflection_push_iso Λ k).hom =
-      (reflection_push_iso Λ k).hom ≫ condensedArtinSchreierTranslationAction Λ k (-a) := by
+      (reflection_push_iso Λ k).hom ≫ (condensedArtinSchreierTranslationAction Λ k (-a)).asHom := by
   let t := Etale.artinSchreierTranslation k a
   let t' := Etale.artinSchreierTranslation k (-a)
   have ht := Etale.artinSchreierTranslation_comp_artinSchreierMap k a
@@ -415,9 +417,9 @@ private def reflection_total_iso :
   (reflection_pull_push Λ k).app _ ≪≫ reflection_push_iso Λ k
 
 private theorem reflection_total_conjugates (a : k) :
-    (CondensedRing.upperStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a) ≫
+    (CondensedRing.upperStar Λ N).map (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
         (reflection_total_iso Λ k).hom =
-      (reflection_total_iso Λ k).hom ≫ condensedArtinSchreierTranslationAction Λ k (-a) := by
+      (reflection_total_iso Λ k).hom ≫ (condensedArtinSchreierTranslationAction Λ k (-a)).asHom := by
   change _ ≫ (reflection_pull_push Λ k).hom.app _ ≫ (reflection_push_iso Λ k).hom = _
   rw [NatTrans.naturality_assoc, reflection_conjugates]
   simp [reflection_total_iso]
@@ -439,7 +441,7 @@ private theorem cover_trivialization
   let := hq.invertible
   have := condensedArtinSchreierProjector_evaluation Λ k ψ
   exact ⟨asIso ((CondensedRing.upperStar Λ AS).map
-    (image.ι (condensedArtinSchreierProjector Λ k ψ)) ≫
+    (image.ι (condensedArtinSchreierProjector Λ k ψ).asHom) ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ AS).counit.app
         (Mod.regular (condensedRingObj Λ A)))⟩
 
@@ -553,10 +555,10 @@ private def scaling_push_iso :
     mapOverIso Λ (AS ≫ S') AS S (scaling_square k c)
 
 private theorem scaling_conjugates (a : k) :
-    (CondensedRing.lowerStar Λ S').map (condensedArtinSchreierTranslationAction Λ k a) ≫
+    (CondensedRing.lowerStar Λ S').map (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
         (scaling_push_iso Λ k c).hom =
       (scaling_push_iso Λ k c).hom ≫
-        condensedArtinSchreierTranslationAction Λ k ((c⁻¹ : kˣ) * a) := by
+        (condensedArtinSchreierTranslationAction Λ k ((c⁻¹ : kˣ) * a)).asHom := by
   let t := Etale.artinSchreierTranslation k a
   let t' := Etale.artinSchreierTranslation k ((c⁻¹ : kˣ) * a)
   have ht := Etale.artinSchreierTranslation_comp_artinSchreierMap k a
@@ -591,20 +593,20 @@ private def scaling_total_iso :
   (scaling_pull_push Λ k c).app _ ≪≫ scaling_push_iso Λ k c
 
 private theorem scaling_total_conjugates (a : k) :
-    (CondensedRing.upperStar Λ S).map (condensedArtinSchreierTranslationAction Λ k a) ≫
+    (CondensedRing.upperStar Λ S).map (condensedArtinSchreierTranslationAction Λ k a).asHom ≫
         (scaling_total_iso Λ k c).hom =
       (scaling_total_iso Λ k c).hom ≫
-        condensedArtinSchreierTranslationAction Λ k ((c⁻¹ : kˣ) * a) := by
+        (condensedArtinSchreierTranslationAction Λ k ((c⁻¹ : kˣ) * a)).asHom := by
   change _ ≫ (scaling_pull_push Λ k c).hom.app _ ≫ (scaling_push_iso Λ k c).hom = _
   rw [NatTrans.naturality_assoc, scaling_conjugates]
   simp [scaling_total_iso]
 
 private theorem scaling_projector_conjugate (ψ : AddChar k (MonObj.Γ Λ)) :
-    (CondensedRing.upperStar Λ S).map (condensedArtinSchreierProjector Λ k ψ) ≫
+    (CondensedRing.upperStar Λ S).map (condensedArtinSchreierProjector Λ k ψ).asHom ≫
         (scaling_total_iso Λ k c).hom =
-      (scaling_total_iso Λ k c).hom ≫ condensedArtinSchreierProjector Λ k (ψ.mulShift c) := by
-  rw [projector_linear, projector_linear, CategoryTheory.Functor.map_sum, Preadditive.sum_comp,
-    Preadditive.comp_sum]
+      (scaling_total_iso Λ k c).hom ≫ (condensedArtinSchreierProjector Λ k (ψ.mulShift c)).asHom := by
+  simp only [projector_linear, End.sum_asHom, End.smul_asHom]
+  rw [CategoryTheory.Functor.map_sum, Preadditive.sum_comp, Preadditive.comp_sum]
   refine Fintype.sum_equiv (Units.mulLeft c⁻¹) _ _ fun a ↦ ?_
   rw [CategoryTheory.Functor.map_smul (R := MonObj.Γ Λ), Linear.smul_comp,
     scaling_total_conjugates, Linear.comp_smul, Units.mulLeft_apply, AddChar.mulShift_apply,
@@ -623,10 +625,10 @@ theorem nonempty_iso_upperStar_scaling_condensedArtinSchreierSheaf
     Nonempty ((CondensedRing.upperStar Λ S).obj (condensedArtinSchreierSheaf Λ k ψ) ≅
       condensedArtinSchreierSheaf Λ k (ψ.mulShift c)) := by
   let F := CondensedRing.upperStar Λ S
-  let p := condensedArtinSchreierProjector Λ k ψ
+  let p := (condensedArtinSchreierProjector Λ k ψ).asHom
   let e := scaling_total_iso Λ k c
   refine ⟨(PreservesImage.iso F p).symm ≪≫
     image.compIso (F.map p) e.hom ≪≫ image.eqToIso (scaling_projector_conjugate Λ k c ψ) ≪≫ ?_⟩
-  exact asIso (image.preComp e.hom (condensedArtinSchreierProjector Λ k (ψ.mulShift c)))
+  exact asIso (image.preComp e.hom (condensedArtinSchreierProjector Λ k (ψ.mulShift c)).asHom)
 
 end AlgebraicGeometry.ArtinSchreierTrace
