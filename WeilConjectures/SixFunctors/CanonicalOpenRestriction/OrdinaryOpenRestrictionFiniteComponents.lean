@@ -20,7 +20,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
 attribute [local irreducible] HasDerivedCategory.standard
 universe t u a b c d e f av bv cv dv ev fv
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
