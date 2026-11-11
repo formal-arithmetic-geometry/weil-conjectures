@@ -225,8 +225,8 @@ private theorem coefficientLinear_lowerStar {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
 attribute [local instance] coefficientLinear_lowerStar
 
 private theorem coefficientScalar_eq_smul (X : Scheme.{u}) (a : MonObj.Γ Λ) :
-    Mod.regularEndRingHom
-        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) a) =
+    (Mod.regularEndRingHom
+        (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) a)).asHom =
       a • 𝟙 (condensedUnit Λ X) := by
   rw [Mod.linearOfRingHom_smul_id (coefficientScalars Λ X)]
   apply Mod.hom_ext
@@ -240,7 +240,7 @@ private theorem coefficientScalar_eq_smul (X : Scheme.{u}) (a : MonObj.Γ Λ) :
 private theorem mappedCoefficientScalar {X : Scheme.{u}} (T : Over X) (a : MonObj.Γ Λ) :
     (ProEtale.CondensedRing.lowerStar Λ T.hom).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint T.left) a)) =
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint T.left) a)).asHom =
       a • 𝟙 ((ProEtale.CondensedRing.lowerStar Λ T.hom).obj (condensedUnit Λ T.left)) := by
   exact (congrArg (ProEtale.CondensedRing.lowerStar Λ T.hom).map
     (coefficientScalar_eq_smul Λ T.left a)).trans
@@ -255,10 +255,10 @@ theorem condensedCoefficientScalar_naturality {X : Scheme.{u}} {Y Z : Over X}
       (ProEtale.CondensedRing.lowerStar Λ Z.hom).obj (condensedUnit Λ Z.left)) :
     f ≫ (ProEtale.CondensedRing.lowerStar Λ Z.hom).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Z.left) a)) =
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Z.left) a)).asHom =
       (ProEtale.CondensedRing.lowerStar Λ Y.hom).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left) a)) ≫ f := by
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left) a)).asHom ≫ f := by
   rw [mappedCoefficientScalar, mappedCoefficientScalar]
   calc
     _ = a • f := by rw [Linear.comp_smul, Category.comp_id]
@@ -271,10 +271,11 @@ theorem condensedProjector_conjugacy (G : Type v) [AddGroup G] [Fintype G]
     {X : Scheme.{u}} {Y Z : Over X} (e : Y ≅ Z)
     (σY : G → (Y ⟶ Y)) (σZ : G → (Z ⟶ Z))
     (hσ : ∀ c, σY c ≫ e.hom = e.hom ≫ σZ c) (χ : AddChar G (MonObj.Γ Λ)) :
-    condensedProjector Λ G Y σY χ ≫ (condensedCoverIso Λ e).hom =
-      (condensedCoverIso Λ e).hom ≫ condensedProjector Λ G Z σZ χ := by
+    (condensedProjector Λ G Y σY χ).asHom ≫ (condensedCoverIso Λ e).hom =
+      (condensedCoverIso Λ e).hom ≫ (condensedProjector Λ G Z σZ χ).asHom := by
   classical
   unfold condensedProjector
+  simp only [End.sum_asHom]
   rw [Preadditive.sum_comp, Preadditive.comp_sum]
   apply Finset.sum_congr rfl
   intro c hc
@@ -287,10 +288,11 @@ private theorem condensedProjector_eq_actionProjector
     {X : Scheme.{u}} (Y : Over X) (σ : G → (Y ⟶ Y)) (χ : AddChar G (MonObj.Γ Λ)) :
     condensedProjector Λ G Y σ χ = ArtinSchreierUnit.actionProjector
       ((ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left))
-      (fun c ↦ condensedPull Λ (σ c)) χ := by
+      (fun c ↦ End.of (condensedPull Λ (σ c))) χ := by
   unfold condensedProjector ArtinSchreierUnit.actionProjector
   apply Finset.sum_congr rfl
   intro c hc
+  apply End.ext
   have hs := mappedCoefficientScalar Λ Y
     (Ring.inverse (Fintype.card G : MonObj.Γ Λ) * χ (-c))
   calc
@@ -307,8 +309,8 @@ theorem condensedProjector_idempotent
     {X : Scheme.{u}} (Y : Over X) (σ : G → (Y ⟶ Y))
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b)
     (χ : AddChar G (MonObj.Γ Λ)) (hq : IsUnit (Fintype.card G : MonObj.Γ Λ)) :
-    condensedProjector Λ G Y σ χ ≫ condensedProjector Λ G Y σ χ =
-      condensedProjector Λ G Y σ χ := by
+    (condensedProjector Λ G Y σ χ).asHom ≫ (condensedProjector Λ G Y σ χ).asHom =
+      (condensedProjector Λ G Y σ χ).asHom := by
   rw [condensedProjector_eq_actionProjector]
   apply ArtinSchreierUnit.actionProjector_idempotent _ _ χ _ hq
   intro a b
@@ -320,10 +322,11 @@ theorem condensedProjector_image_retraction
     {X : Scheme.{u}} (Y : Over X) (σ : G → (Y ⟶ Y))
     (hσ : ∀ a b, σ (a + b) = σ a ≫ σ b)
     (χ : AddChar G (MonObj.Γ Λ)) (hq : IsUnit (Fintype.card G : MonObj.Γ Λ)) :
-    image.ι (condensedProjector Λ G Y σ χ) ≫
-        factorThruImage (condensedProjector Λ G Y σ χ) = 𝟙 _ := by
+    image.ι (condensedProjector Λ G Y σ χ).asHom ≫
+        factorThruImage (condensedProjector Λ G Y σ χ).asHom = 𝟙 _ := by
   rw [← cancel_mono (image.ι _), ← cancel_epi (factorThruImage _)]
   simp only [Category.assoc, image.fac_assoc, image.fac, Category.id_comp]
   exact condensedProjector_idempotent Λ G Y σ hσ χ hq
+
 
 end AlgebraicGeometry.ArtinSchreierTrace
