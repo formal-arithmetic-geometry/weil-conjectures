@@ -20,6 +20,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import Mathlib.AlgebraicGeometry.QuasiAffine
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import Mathlib.RingTheory.DedekindDomain.Dvr
+
 import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedOrderedFiltration
 import WeilConjectures.AlgebraicGeometry.Ordered.OrderedSpectralLattices
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedLocallyClosedScalarExtension
