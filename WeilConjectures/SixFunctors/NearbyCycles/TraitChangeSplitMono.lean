@@ -76,7 +76,7 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_map_exchangeRight_app (�
   isSplitMono_pullbackExchange_app_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     _ ((baseChangeMap_eq_exchangeRight Λ φ.commSq_j).symm.trans
       (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ))
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl K hK

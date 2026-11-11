@@ -56,7 +56,7 @@ lemma Correspondence.FixedLocus.supportedRestriction_eq_mateEquiv (F : c.FixedLo
     F.supportedRestriction P =
       (CategoryTheory.mateEquiv (boundedConstructibleUpperShriekAdjunction ℓ c.support)
         (boundedConstructibleUpperShriekAdjunction ℓ F.d)
-        (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).natTrans.app P := by
+        (TwoSquare.mk _ _ _ _ F.lowerShriekBaseChangeIso.inv)).app P := by
   rw [Adjunction.mateEquiv_app_eq_homEquiv, ← F.homEquiv_symm_supportedRestriction]
   exact (Equiv.apply_symm_apply _ _).symm
 
