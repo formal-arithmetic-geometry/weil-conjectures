@@ -70,7 +70,6 @@ lemma CategoryTheory.TwoSquare.eq_hComp_of_conj {A B C A' B' C' : Type*} [Catego
   simp only [TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp, Category.comp_id,
     Functor.comp_obj] at hX
-  dsimp only [TwoSquare.natTrans] at hX
   simp only [hC₂, TwoSquare.hComp, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
     NatIso.hcomp_inv, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
