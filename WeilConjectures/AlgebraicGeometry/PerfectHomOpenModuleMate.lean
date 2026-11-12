@@ -103,11 +103,14 @@ private theorem isIso_open_module_mate_of_isPullback
       let b := (i.opensFunctor.map (eqToHom hc)).op
       let d := (i.opensFunctor.map ((TopologicalSpace.Opens.map p'.base).map
         (eqToHom (B.ι.preimage_image_eq W).symm))).op
+      have hm : M.val.presheaf.map a ≫ M.val.presheaf.map b ≫ M.val.presheaf.map d =
+          M.val.presheaf.map (eqToHom hW).op := by
+        rw [← Functor.map_comp, ← Functor.map_comp]
+        congr 1
       ext x
       change M.val.presheaf.map d
         (M.val.presheaf.map b (M.val.presheaf.map a x)) = _
-      simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
-      congr 1
+      exact ConcreteCategory.congr_hom hm x
     rw [hh]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
