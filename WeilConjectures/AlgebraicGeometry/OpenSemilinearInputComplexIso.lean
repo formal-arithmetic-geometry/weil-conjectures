@@ -66,7 +66,6 @@ private theorem restriction_stalk_smul
   erw [hg, hg]
   exact PresheafOfModules.germ_smul (R := Y.presheaf) M.val _ _ _ _ _
 
-set_option profiler true in
 /-- The canonical additive open restriction comparison is a semilinear chain iso,
 with the same-germ component formula, including transport of the ambient point.
 
