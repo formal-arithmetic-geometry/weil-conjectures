@@ -370,9 +370,10 @@ theorem structure_derived_image_module_naturality
   rw [← affineLerayEquiv_apply qY, ← affineLerayEquiv_apply q] at hg
   have hg' : affineLerayEquiv qY
       (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) =
-      Γ.map edge (H.map α (affineLerayEquiv q ((affineLerayEquiv q).symm z))) := by
+      Γ.map edge (H.map α z) := by
     with_reducible refine hg.trans ?_
     with_reducible simp only [Scheme.Hom.id_base, eqToHom_refl,
+      AddEquiv.apply_symm_apply,
       edge, H, H₁, Γ, globalLerayUnitMap, globalLerayImage,
       RingedSpace.globalSectionsFunctor, Modules.Hom.comp_app,
       Functor.comp_map, Functor.map_comp,
@@ -384,7 +385,6 @@ theorem structure_derived_image_module_naturality
     with_unfolding_all change (H₁.obj K).val.presheaf.map (𝟙 (op ⊤)) y = y
     with_unfolding_all exact
       ConcreteCategory.congr_hom ((H₁.obj K).val.presheaf.map_id (op ⊤)) y
-  rw [AddEquiv.apply_symm_apply] at hg'
   calc
     θ (H.map b z) = Γ.map edge (H.map α z) := by
       dsimp only [θ, θiso]
