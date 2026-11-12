@@ -260,6 +260,7 @@ private theorem reductionNat_app
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (reductionNat l E X D hl n).app P = reductionCounit l E X D hl n P := rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionCounit_isIso
@@ -270,6 +271,7 @@ private theorem reductionCounit_isIso
   unfold reductionCounit
   infer_instance
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem restrictionComparison_eq
@@ -591,6 +593,7 @@ private theorem beta_scalar (n : ℕ)
   erw [totalPair_smul_right, map_smul, hbeta]
   exact (reduction_smul X l E n _ V s _).symm
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- The unit normalization crosses the finite coefficient wrappers.
 private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
@@ -909,6 +912,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   completedIntegralCommRingSheafUnrestricted integralCoefficientCommRingSheaf
   integralCoefficientSheaf
 
+set_option profiler true in
 set_option maxHeartbeats 16000000 in
 -- Keep the coefficient wrappers folded while elaborating the comparison squares.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
