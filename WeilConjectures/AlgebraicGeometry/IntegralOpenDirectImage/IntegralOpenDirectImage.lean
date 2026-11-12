@@ -334,7 +334,6 @@ private theorem residue_open_image
   exact ⟨hbc, min a b, max b a + d, hta⟩
 
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.
-set_option profiler true in
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
@@ -436,10 +435,18 @@ theorem integral_open_direct_image
     (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
         (DerivedNakayama.quotientRing l E 1) j)
-  obtain ⟨hcomplete, hmate⟩ := hpush K
-  obtain ⟨hinput, _⟩ := internal_integral_residue_criterion l E U
-  obtain ⟨houtput, htor'⟩ := internal_integral_residue_criterion l E X
-  obtain ⟨hcK, hrK, htK⟩ := (hinput K).mp hK
+  have hpushK := hpush K
+  have hcomplete := hpushK.1
+  have hmate := hpushK.2
+  have hinputAll := internal_integral_residue_criterion l E U
+  have hinput := hinputAll.1
+  have houtputAll := internal_integral_residue_criterion l E X
+  have houtput := houtputAll.1
+  have htor' := houtputAll.2
+  have hresK := (hinput K).mp hK
+  have hcK := hresK.1
+  have hrK := hresK.2.1
+  have htK := hresK.2.2
   have hcomplete' := hcomplete hcK
   obtain ⟨c, hc, hunique⟩ := unique_mate adj adj'
     (AdicCompletion.derivedReduction l E X 0)
