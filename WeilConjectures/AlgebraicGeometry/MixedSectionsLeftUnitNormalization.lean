@@ -263,6 +263,6 @@ theorem mixedSections_left_unit_normalization
   dsimp only [HZ, schemeDerivedGlobalSections] at h ⊢
   convert h using 1
   · simp only [hK, F]
-  · congr!
+  · congr! (postTransparency := .reducible)
 
 end AlgebraicGeometry
