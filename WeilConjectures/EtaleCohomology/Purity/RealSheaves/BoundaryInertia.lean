@@ -419,7 +419,6 @@ lemma BoundaryChart.restrictionMap_genericGaloisMap (σ : Gal(Ω/C.functionField
   refine IsFundamentalGroup.non_trivial (F := fiber sC) _ fun P y ↦ ?_
   rw [mul_smul, key, smul_inv_smul]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Frobenius lifts in the decomposition group.** Some element of the decomposition group of `Q`
