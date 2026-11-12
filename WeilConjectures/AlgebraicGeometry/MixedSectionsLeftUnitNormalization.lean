@@ -224,6 +224,7 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
+  let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   have he := (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
@@ -240,7 +241,10 @@ theorem mixedSections_left_unit_normalization
     (schemeDerivedGlobalSections Y ⋙ schemeGlobalScalarRestriction g)
     (mixedGlobalSectionsDirectImageIso g).hom (Df.rightDerivedFunctorUnit.app K) hg₀
   have hf := mixedSections_unit f K
-  have h := finish_unit_paste (schemeGlobalScalarRestriction g) _
+  have h := finish_unit_paste
+    (A := (HZ.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).obj
+      ((Dg.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
+    (schemeGlobalScalarRestriction g) _
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
     (Sg.mapDerivedCategoryFactorsh.inv.app
       ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)))
