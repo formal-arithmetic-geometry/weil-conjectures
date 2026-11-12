@@ -181,11 +181,10 @@ private theorem localBoundaryLinearEquiv_frobenius
     {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
     {N H Q : FrobeniusModule.{max u v, v} K}
     (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) (q : K)
-    (hΨ : ∀ x, Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) :
-    ∀ x y, (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap)
+    (x : M.carrier) (hΨ : Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) (y : Q.carrier) :
+    (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap)
         (M.frobenius x) (Q.frobenius y) =
       q * (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x y := by
-  intro x y
   simp only [LinearEquiv.trans_apply]
   rw [hΨ x, map_smul, S.map_frobenius]
   erw [LinearEquiv.dualMap_apply]
@@ -360,7 +359,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   rw [← hqd]
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
     (F.dual hF)).stalk s) Ψ.toLinearEquiv
-    S₅' ψ (q ^ d) (by simpa [hone] using hΨ') a b
+    S₅' ψ (q ^ d) a (by simpa [hone] using hΨ') b
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
