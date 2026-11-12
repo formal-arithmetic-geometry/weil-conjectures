@@ -80,7 +80,7 @@ lemma CategoryTheory.ObjectProperty.exists_biduality_comparison_lift_comp
   obtain ⟨c, h⟩ := h
   refine ⟨R.ι.mapIso c, ?_⟩
   have h' := congrArg (fun f ↦ f.hom) h
-  rw [toIhomIhom_hom, comp_hom] at h'
+  rw [toIhomIhom_hom, FullSubcategory.comp_hom] at h'
   change toIhomIhom W'.obj ((F ⋙ G).obj L.obj) =
     (F ⋙ G).map (toIhomIhom W L).hom ≫ (R.ι.mapIso c).hom at h'
   rw [toIhomIhom_hom] at h'
@@ -140,7 +140,6 @@ private lemma integral_qbar_biduality_comparison_bounded
   have := hβ ((ihom L).obj W)
   exact exists_biduality_comparison T w.hom L
 
-set_option profiler true in
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
 Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark
