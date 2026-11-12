@@ -27,8 +27,6 @@ open CategoryTheory Opposite AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-set_option profiler true in
--- Elaborating the nested scheme/module comparisons needs additional heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The termwise affine Hom comparison on K-injective targets respects evaluation.
 This statement involves only the underived adjunction, with no supplied derived functors.

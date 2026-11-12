@@ -53,8 +53,6 @@ private theorem externalTensorAlgebraEquiv_tmul
     TensorProduct.congr_tmul, Algebra.IsPushout.cancelBaseChange_tmul, one_smul,
     LinearEquiv.refl_apply]
 
-set_option profiler true in
--- Affine section comparisons require several nested scalar restriction instances.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary section modules of the two projection pullbacks on an affine rectangle
 have tensor product over its coordinate ring equal to the tensor of the factor sections.

@@ -38,6 +38,18 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+private theorem rightDerivedFunctor_of_source_iso
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]
+    {F G : C ⥤ E} (S : D ⥤ E) (e : F ≅ G) (α : F ⟶ Q ⋙ S)
+    [S.IsRightDerivedFunctor α W] :
+    S.IsRightDerivedFunctor (e.inv ≫ α) W := by
+  rw [Functor.isRightDerivedFunctor_iff_isLeftKanExtension]
+  apply (Functor.isLeftKanExtension_iff_of_iso₂ α (e.inv ≫ α) e (Iso.refl S) ?_).mp
+  · exact Functor.IsRightDerivedFunctor.isLeftKanExtension S α W
+  · simp only [Iso.hom_inv_id_assoc]
+    exact Category.comp_id α
+
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
 -- The localization comparisons require unfolding several sheaf carrier encodings.
@@ -130,8 +142,9 @@ theorem exists_affine_derivedSheafHom_adjunction
     (R := moduleRings X.toRingedSpace)
     (R' := moduleRings (directImageAlgebraSpace f))
     ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩
-  obtain ⟨E, _, adjE, _⟩ := SheafOfModules.exists_changeOfRingsAdjunction
-    X.toTopCat X.sheaf (directImageAlgebraSpace f).sheaf ⟨f.c⟩
+  refine (SheafOfModules.exists_changeOfRingsAdjunction
+    X.toTopCat X.sheaf (directImageAlgebraSpace f).sheaf ⟨f.c⟩).elim fun E hE ↦ ?_
+  rcases hE with ⟨_, adjE, _⟩
   change E ⊣ T at adjE
   have : T.IsRightAdjoint := adjE.isRightAdjoint
   have : T.IsLeftAdjoint := adj₀.isLeftAdjoint
@@ -191,16 +204,9 @@ theorem exists_affine_derivedSheafHom_adjunction
         DerivedCategory.Q
     let e := e₁ ≪≫ e₂
     let δ := e.inv ≫ Functor.whiskerRight β L ≫ (Functor.associator _ _ _).hom
-    have hδ : (R ⋙ L).IsRightDerivedFunctor δ W := by
-      rw [Functor.isRightDerivedFunctor_iff_isLeftKanExtension]
-      apply (Functor.isLeftKanExtension_iff_of_iso₂
-        (Functor.whiskerRight β L ≫ (Functor.associator _ _ _).hom) δ e
-        (Iso.refl (R ⋙ L)) ?_).mp
-      · exact Functor.IsRightDerivedFunctor.isLeftKanExtension _ _ W
-      · dsimp [δ]
-        simp only [Iso.hom_inv_id_assoc]
-        change _ ≫ 𝟙 _ = _
-        exact Category.comp_id _
+    have hδ : (R ⋙ L).IsRightDerivedFunctor δ W :=
+      rightDerivedFunctor_of_source_iso DerivedCategory.Q W (R ⋙ L) e
+        (Functor.whiskerRight β L ≫ (Functor.associator _ _ _).hom)
     exact derivedInternalHom_single_comparison X M (R ⋙ L) δ hδ
   · intro K
     have hε : (adj₀.mapHomologicalComplex (.up ℤ)).counit.app K =
