@@ -161,8 +161,8 @@ private lemma adicSliceTensorIso_hom (l : ℕ) [Fact l.Prime]
       (base U.left).ring ≅
         (localizationRestriction RingCat.{u + 1} U.hom U.prop).obj (base X).ring)
     (r : AdicSliceRestrictionData l base c)
-    (X : Scheme.{u}) (U : X.ProEt) (M N : AdicSheaf l X)
-    : (adicSliceTensorIso l base c r X U M N).hom =
+    (X : Scheme.{u}) (U : X.ProEt) (M N : AdicSheaf l X) :
+    (adicSliceTensorIso l base c r X U M N).hom =
       let P := base X
       let Q := base U.left
       let F := adicComparisonRestriction U P Q (c X U)
@@ -178,7 +178,6 @@ private lemma adicSliceTensorIso_hom (l : ℕ) [Fact l.Prime]
         ((r.sliceIso X U).app N).hom := by
   rfl
 
-set_option profiler true in
 /-- The explicitly constructed tensor restriction iso preserves local pure tensors.
 Source: Stacks 03EL and 0E8H; the pure-tensor test in step 2 of the parent comparison.
 (blueprint: lem-sf-adic-slice-tensor).

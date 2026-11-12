@@ -205,7 +205,6 @@ private theorem reflectEquivalenceIso
   have := ha
   exact isIso_of_reflects_iso a e.functor
 
-set_option profiler true in
 /-- Pullback preserves arrows which become invertible on the given open. -/
 private theorem pullbackLocalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hx : HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -226,6 +225,7 @@ private theorem pullbackLocalIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   let AY := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let BX := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
   let BY := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)
+  -- Reuse these structures throughout the localization comparisons.
   let : Abelian AX := inferInstance
   let : Abelian AY := inferInstance
   let : Abelian BX := inferInstance

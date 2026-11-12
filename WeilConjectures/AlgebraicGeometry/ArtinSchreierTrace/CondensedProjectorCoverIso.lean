@@ -66,7 +66,6 @@ private lemma pull_hom
     ProEtale.CondensedRing.lowerStarCongr_hom_app_hom]
   rfl
 
-set_option profiler true in
 private lemma functionPull_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y Z P : Scheme.{u}}
@@ -101,9 +100,17 @@ private lemma functionPull_comp
   simp only [ProEtale.lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app,
     Category.comp_id] at hc ⊢
   simp only [Category.assoc]
-  erw [← hc]
-  erw [← (ProEtale.lowerStarComp Ab.{u + 1} g pP).hom.naturality_assoc]
-  rfl
+  refine (congrArg (fun t ↦
+    (ProEtale.lowerStar Ab.{u + 1} pP).map (ProEtale.condensedPushforwardHom Λ g) ≫
+      (ProEtale.lowerStar Ab.{u + 1} pP).map
+        ((ProEtale.lowerStar Ab.{u + 1} g).map (ProEtale.condensedPushforwardHom Λ f)) ≫ t)
+    hc.symm).trans ?_
+  exact congrArg (fun t ↦
+    (ProEtale.lowerStar Ab.{u + 1} pP).map (ProEtale.condensedPushforwardHom Λ g) ≫ t)
+    ((ProEtale.lowerStarComp Ab.{u + 1} g pP).hom.naturality_assoc
+      (ProEtale.condensedPushforwardHom Λ f)
+      ((ProEtale.lowerStarComp Ab.{u + 1} f (g ≫ pP)).hom.app
+        (ProEtale.condensedRingObj Λ Y)))
 
 private lemma pull_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
