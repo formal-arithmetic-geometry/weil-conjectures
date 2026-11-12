@@ -46,6 +46,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The chosen geometric square compares derived pullback and explicit tensor quotients.
 /-- For fixed strictly perfect affine models `m`, `m'`, the coefficient arrows have chain
