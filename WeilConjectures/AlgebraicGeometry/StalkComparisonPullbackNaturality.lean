@@ -70,8 +70,6 @@ def comparisonIntoPullback (z : X')
           (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- The default 200000 timed out at whnf in 13s; BZ856 checked this historical limit in 17s.
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
 underlying cohomology transport.

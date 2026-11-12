@@ -79,8 +79,6 @@ private theorem tensorStalkIso_naturality (z : X')
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- The default 200000 times out at whnf; this historical limit passed in 40 seconds remotely.
 /-- A natural comparison with the specified K-flat representative equation, without an
 invertibility assertion.
 
