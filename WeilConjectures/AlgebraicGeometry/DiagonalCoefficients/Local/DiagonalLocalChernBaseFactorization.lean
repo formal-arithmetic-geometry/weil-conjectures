@@ -162,7 +162,7 @@ private theorem pushLine_complete (l : ℕ) [Fact l.Prime]
   let := hpush V hV
   exact (Iso.homCongr (Iso.refl V) c).injective.subsingleton
 
-set_option trace.profiler true in
+set_option profiler true in
 private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -480,7 +480,6 @@ private theorem realize_factorization (l : ℕ) [Fact l.Prime]
   exact concrete_factor_pair l f D canonical cF (eX.localChern l X w) (eS.localChern l S z) _
     (realized_factor_composite l f eX eS R D canonical hcanonical push cF z w b hb)
 
--- Concrete derived-category comparisons require additional elaboration heartbeats.
 /-- A realized local Chern class of a base line factors through the shifted
 integral Tate line on that base, before taking any right adjunct.
 

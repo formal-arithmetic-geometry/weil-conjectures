@@ -10,6 +10,7 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalUniformizerAdjunctConditions
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientUnitPush
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedOrdinaryUnit
+import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedRealizedUnitTransport
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFinitePushUnitSeed
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineComplete
@@ -273,7 +274,34 @@ private theorem completed_map_injective
   exact congrArg (fun k => k.hom) (ff.map_injective (X := ⟨_, hunit⟩)
     (Y := ⟨_, hsource⟩) (show (P.ι ⋙ F).map ⟨a⟩ = (P.ι ⋙ F).map ⟨b⟩ from h))
 
-set_option trace.profiler true in
+-- Transport a normalized unit square before specializing the derived categories.
+private theorem adjunct_transport_calculation
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    (R : A ⥤ B) (U : A ⥤ C) (V : B ⥤ D) (S : C ⥤ D)
+    (σ : R ⋙ V ⟶ U ⋙ S) {US : B} {UX LX : A} {US' : D} {UX' LX' : C}
+    (i : U.obj UX ≅ UX') (u : V.obj US ⟶ US') (a : US' ⟶ S.obj UX')
+    (b : US ⟶ R.obj UX) (z : UX ⟶ LX) (k : U.obj LX ⟶ LX')
+    (h : V.map b ≫ σ.app UX ≫ S.map i.hom = u ≫ a) :
+    V.map (b ≫ R.map z) ≫ (σ.app LX ≫ S.map k) =
+      u ≫ (a ≫ S.map ((i.inv ≫ U.map z) ≫ k)) := by
+  have hb : V.map b ≫ σ.app UX = u ≫ a ≫ S.map i.inv := by
+    apply (cancel_mono (S.map i.hom)).mp
+    simpa only [Category.assoc, ← S.map_comp, i.inv_hom_id,
+      S.map_id, Category.comp_id] using h
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (σ.naturality z), ← Category.assoc, hb]
+  simp only [Category.assoc, Functor.comp_map]
+
+private theorem map_comp_naturality_square
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    (R : A ⥤ B) (U : B ⥤ C) (V : A ⥤ D) (T : D ⥤ C)
+    (σ : R ⋙ U ⟶ V ⋙ T) {X Y : A} {Z : B} (a : Z ⟶ R.obj X) (f : X ⟶ Y) :
+    U.map (a ≫ R.map f) ≫ σ.app Y =
+      (U.map a ≫ σ.app X) ≫ T.map (V.map f) := by
+  simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using
+    congrArg (fun k ↦ U.map a ≫ k) (σ.naturality f)
+
+set_option profiler true in
 /-- Realizing the normalized completed adjunct gives the condensed adjunct of the local arrow.
 Source: diagonal tower coefficient changes (1), and diagonal tower trace proof (1).
 (blueprint: lem-diagonal-completed-adjunct-square).
@@ -324,24 +352,9 @@ theorem completed_adjunct_square
       s.q_square.derived.iso.hom.app (DiagonalTrace.completedUnit l (ProjectiveLine Y)) ≫
         s.zl.Rq.R.map iP.hom =
     s.completedY.singleUnit l Y ≫ coefficientUnitPush _ Y s.zl.Rq := by
-    have hs := single_square s.completedP.F s.completedY.F t.Rc s.zl.Rq
-      s.q_square.ordinary s.q_square.derived UP
-    have hn := (s.completedY.F.mapDerivedCategorySingleFunctor 0).hom.naturality m
-    change s.completedY.F.mapDerivedCategory.map
-        ((DerivedCategory.singleFunctor _ 0).map m) ≫
-        (s.completedY.F.mapDerivedCategorySingleFunctor 0).hom.app _ =
-      (s.completedY.F.mapDerivedCategorySingleFunctor 0).hom.app UY ≫
-        (DerivedCategory.singleFunctor _ 0).map (s.completedY.F.map m) at hn
-    dsimp only [b, iP, Iso.trans_hom, Functor.mapIso_hom]
-    simp only [Functor.map_comp, Category.assoc]
-    erw [reassoc_of% hs]
-    erw [reassoc_of% hn]
-    erw [← singlePushComparison_naturality s.zl.Rq s.completedP.unitIso.hom]
-    unfold CompletedRealization.singleUnit coefficientUnitPush
-    have hh := congrArg (DerivedCategory.singleFunctor _ 0).map hm
-    simpa only [Functor.map_comp, Category.assoc] using
-      congrArg (fun k => (s.completedY.F.mapDerivedCategorySingleFunctor 0).hom.app UY ≫
-        k ≫ singlePushComparison s.zl.Rq _) hh
+    exact realization_unit_square s.completedP.F s.completedY.F t.Rc s.zl.Rq
+      s.q_square.ordinary s.q_square.derived UP UY _ _
+      s.completedP.unitIso s.completedY.unitIso m (coefficientOrdinaryUnit _ Y) hm
   let theta := SpTowerClasses.firstChern l (ULift.{u} (Padic l)) t.chernX
     (SpTowerClasses.hyperplanePic Y)
   let unitSys := t.restrictionS.F.mapDerivedCategory.map
@@ -360,12 +373,8 @@ theorem completed_adjunct_square
       rw [hp, Adjunction.homEquiv_unit, Functor.map_comp]
       simp only [SpTowerClasses.unitArrow, theta, Category.assoc]
     unfold DiagonalTrace.Presentation.systemChern
-    rw [hmodel, Functor.map_comp]
-    have hn := t.varying.hom.naturality theta
-    have hh := congrArg (fun k => t.restrictionS.F.mapDerivedCategory.map
-        (SpTowerClasses.unitArrow l (ULift.{u} (Padic l)) t.model.coefficientPullback) ≫ k) hn
-    simp only [unitSys, Functor.comp_map, Category.assoc] at hh ⊢
-    convert! hh using 1
+    rw [hmodel]
+    exact map_comp_naturality_square _ _ _ _ t.varying.hom _ theta
   have hu : (diagonalCompletedUnderlying l Y).map b ≫
     t.completed.iso.hom.app (DiagonalTrace.completedUnit l (ProjectiveLine Y)) ≫
       t.Rf.R.map (t.coefficientsX.unitMap l (ULift.{u} (Padic l)) t.LX) ≫
@@ -418,19 +427,10 @@ theorem completed_adjunct_square
       (coefficientUnitPush _ Y s.zl.Rq ≫ s.zl.Rq.R.map
         ((iP.inv ≫ s.completedP.F.mapDerivedCategory.map p.z) ≫
           s.completedP.shiftedLine l (ProjectiveLine Y)))
-  rw [hc, Functor.map_comp]
-  have hn := s.q_square.derived.iso.hom.naturality p.z
-  simp only [Category.assoc, Functor.map_comp]
-  erw [reassoc_of% hn]
-  have hb' : s.completedY.F.mapDerivedCategory.map b ≫
-      s.q_square.derived.iso.hom.app (DiagonalTrace.completedUnit l (ProjectiveLine Y)) =
-    s.completedY.singleUnit l Y ≫ coefficientUnitPush _ Y s.zl.Rq ≫
-      s.zl.Rq.R.map iP.inv := by
-    apply (cancel_mono (s.zl.Rq.R.map iP.hom)).mp
-    have hi : s.zl.Rq.R.map iP.inv ≫ s.zl.Rq.R.map iP.hom = 𝟙 _ := by
-      rw [← s.zl.Rq.R.map_comp, iP.inv_hom_id, s.zl.Rq.R.map_id]
-    simpa only [Category.assoc, hi, Category.comp_id] using hb
-  rw [← Category.assoc, hb']
-  simp only [Category.assoc]
+  rw [hc]
+  exact adjunct_transport_calculation t.Rc.R s.completedP.F.mapDerivedCategory
+    s.completedY.F.mapDerivedCategory s.zl.Rq.R s.q_square.derived.iso.hom
+    iP (s.completedY.singleUnit l Y) (coefficientUnitPush _ Y s.zl.Rq)
+    b p.z (s.completedP.shiftedLine l (ProjectiveLine Y)) hb
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
