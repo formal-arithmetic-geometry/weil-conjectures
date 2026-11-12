@@ -31,8 +31,6 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
--- The chart scalar transports and projective homology comparisons need elaboration fuel.
 /-- Algebraic self-Tor gives linear coordinates on the affine sections of the
 ambient tensor homology, compatible with augmented resolution comparisons.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG and Tag 00LS.
@@ -139,7 +137,7 @@ theorem exists_selfTor_ambient_section_coordinates
       ((R.isoLeftDerivedObj (tensorRight (ModuleCat.of C (C ⧸ J))) n).inv
         (e.hom (HomologicalComplex.homologyMap k n
           ((P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom x)))))
-  rw [← ModuleCat.comp_apply, Iso.inv_hom_id]
-  simpa only [heq, ModuleCat.id_apply] using! hnat
+  rw [Iso.inv_hom_id_apply]
+  simpa only [heq] using! hnat
 
 end AlgebraicGeometry

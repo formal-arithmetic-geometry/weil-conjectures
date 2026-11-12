@@ -36,9 +36,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 
 set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
--- The unbounded tensor comparison needs elaboration fuel for its total-complex instances.
-
 /-- Ambient affine coordinates compatible with one localized resolution comparison for each
 basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts.
 Source: Stacks Project, Tag 08DX(2), with Tags 06YG and 00LS(1).
@@ -111,10 +108,12 @@ theorem exists_selfTor_ambient_localized_comparisons
   classical
   let := SheafOfModules.monoidalCategory Y.sheaf
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  have : Abelian C := inferInstance
   let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
   let N := (CochainComplex.singleFunctor C 0).obj B
   obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
   have : QuasiIso q := hq
+  have : K.HasMapBifunctor N (curriedTensor C) := inferInstance
   obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y
     ((Functor.const (Discrete PUnit.{1})).obj K)
     ((Functor.const (Discrete PUnit.{1})).obj N) (fun _ ↦ hK)
