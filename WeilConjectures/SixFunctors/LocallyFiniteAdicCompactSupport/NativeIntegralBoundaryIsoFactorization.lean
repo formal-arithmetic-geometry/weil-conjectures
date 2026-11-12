@@ -53,7 +53,6 @@ attribute [local irreducible]
   WeilConjectures.LocallyFiniteAdicRealization.sections
   AlgebraicGeometry.Scheme.completedAdicDerivedChange
 
-set_option trace.profiler true in
 -- Compare the cached finite-stage types without unfolding their constructions.
 /-- The boundary-isomorphism interface to the normalized component factorization.
 Source: Bhatt--Scholze, Remark 6.8.15.
@@ -104,7 +103,9 @@ theorem integralComponent_factorization_of_isos [G : NativeGeometry.{u} l]
       nativeScalarComponent l c source target E (change E) hs ht K.obj ≫
       d.hom.app ((PurCompactSupport.finiteTorIntegralInclusion l
         (Coefficient l (PadicAlgCl l) E) X).obj K) := by
-  exact integralComponent_factorization.{u} l D hl P c source target E change
-    hs ht K _ _ _ hb hd hm
+  apply integralComponent_factorization.{u} l D hl P c source target E change hs ht K
+  · exact hb
+  · exact hd
+  · exact hm
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
