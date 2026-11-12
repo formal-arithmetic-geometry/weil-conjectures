@@ -104,9 +104,7 @@ private theorem tensor_square_pasting
   rw [reassoc_of% hL]
   rw [hν]
 
-set_option maxHeartbeats 1600000 in
 -- Compare the concrete total tensors through their map APIs.
-set_option synthInstance.maxHeartbeats 200000 in
 -- Synthesis compares the existing ordinary and ringed cochain tensor instances.
 /-- The ringed associator square, after one outer homogeneous inclusion, transports
 through the ordinary comparison and the signed balanced tensor quotient.
