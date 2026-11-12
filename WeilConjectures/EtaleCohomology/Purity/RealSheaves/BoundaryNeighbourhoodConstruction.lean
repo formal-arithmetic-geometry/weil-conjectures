@@ -158,6 +158,9 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk, hΦ])
   have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
       r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
+    let τ : Ideal.inertiaInvariants C.functionField Q →+*
+        Ideal.inertiaInvariants C.functionField Q :=
+      Ideal.inertiaInvariantsMap C.functionField Q hσF
     let b : Ideal.inertiaInvariants C.functionField Q := ε (r a)
     have hεr : r b = r a := RingHom.congr_fun hrε (r a)
     have h0 : r (a - ε (r a)) = 0 := by
@@ -166,18 +169,15 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         r (a - b) = r a - r b := r.map_sub _ _
         _ = r a - r a := congrArg (fun y => r a - y) hεr
         _ = 0 := sub_self _
-    have h2 : r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
-        Ideal.inertiaInvariantsMap C.functionField Q hσF b) = 0 := by
-      let τ := Ideal.inertiaInvariantsMap C.functionField Q hσF
-      have hτ : τ (a - b) = τ a - τ b := τ.map_sub _ _
-      calc
-        r (τ a - τ b) = r (τ (a - b)) := congrArg r hτ.symm
-        _ = 0 := by
-          apply (hr (a - b)).2
-          intro hu
-          exact (hr (a - b)).1 h0
-            (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField) (Q := Q)
-              (a := a - b) hσF hu)
+    have hnonunit : ¬ IsUnit (a - b) := by
+      intro hu
+      exact (hr (a - b)).1 h0 hu
+    have hτzero := (hr (τ (a - b))).2 (by
+      intro hu
+      exact hnonunit (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField)
+        (Q := Q) (a := a - b) hσF hu))
+    have hmap := congrArg r (τ.map_sub a b)
+    have h2 : r (τ a - τ b) = 0 := hmap.symm ▸ hτzero
     exact (sub_eq_zero.1 ((r.map_sub _ _).symm.trans h2)).trans
       ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
   have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
