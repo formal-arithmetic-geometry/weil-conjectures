@@ -53,8 +53,6 @@ private theorem externalTensorAlgebraEquiv_tmul
     TensorProduct.congr_tmul, Algebra.IsPushout.cancelBaseChange_tmul, one_smul,
     LinearEquiv.refl_apply]
 
-set_option maxHeartbeats 600000 in
--- Affine section comparisons require several nested scalar restriction instances.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary section modules of the two projection pullbacks on an affine rectangle
 have tensor product over its coordinate ring equal to the tensor of the factor sections.
@@ -203,7 +201,9 @@ theorem exists_affine_rectangle_projection_sections_tensor
     rw [d.apply_symm_apply]
     exact (externalTensorAlgebraEquiv_tmul k A B C M N s t).symm
   change (TensorProduct.congr eF eG) (d.symm (s ⊗ₜ[k] t)) = _
-  rw [hd, TensorProduct.congr_tmul, hF, hG]
+  exact (congrArg (TensorProduct.congr eF eG) hd).trans
+    ((TensorProduct.congr_tmul eF eG _ _).trans
+      (congrArg₂ (fun x y ↦ x ⊗ₜ[C] y) (hF s) (hG t)))
 
 
 end AlgebraicGeometry.Scheme.Modules

@@ -27,8 +27,6 @@ open CategoryTheory Opposite AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1000000 in
--- Elaborating the nested scheme/module comparisons needs additional heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The termwise affine Hom comparison on K-injective targets respects evaluation.
 This statement involves only the underived adjunction, with no supplied derived functors.
@@ -104,12 +102,13 @@ theorem affine_hom_kInjective_evaluation
           j.hom.app (DerivedCategory.Q.obj I) =
             DerivedCategory.Q.map
               ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I) := by
-  obtain ⟨e, he⟩ := affine_hom_complex_evaluation f H iH adj₀ h_eval
-  obtain ⟨j, hj⟩ := derived_single_hom_evaluation Y e
+  refine (affine_hom_complex_evaluation f H iH adj₀ h_eval).elim fun e he ↦ ?_
+  refine (derived_single_hom_evaluation Y e).elim fun j hj ↦ ?_
   refine ⟨j, ?_⟩
   intro I hI
-  obtain ⟨d, hd⟩ := he I
-  obtain ⟨c, hc⟩ := hj _ (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) I hI
+  refine (he I).elim fun d hd ↦ ?_
+  refine (hj _ (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) I hI).elim
+    fun c hc ↦ ?_
   refine ⟨DerivedCategory.Q.mapIso d ≪≫ c, ?_⟩
   dsimp only [Iso.trans_hom, Functor.mapIso_hom]
   simp only [Category.assoc]
