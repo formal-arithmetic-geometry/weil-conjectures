@@ -575,18 +575,18 @@ private noncomputable def rawIso (M : Modules.{t, u} X R) :
 private theorem rawIso_apply (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
     (s : S.obj.obj U) (x : M.val.obj U) :
     (rawIso X R S c M).hom.app U (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x) =
-      s ⊗ₜ[R.obj.obj U] x := rfl
+      (s : (coefficient X R S c).val.obj U) ⊗ₜ[R.obj.obj U] x := rfl
 
 private theorem sheafification_map_unit_section
     (A : Sheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)})
     (P Q : PresheafOfModules.{max u (t + 1)} A.obj) (f : P ⟶ Q)
     (U : X.ProEtᵒᵖ) (x : P.obj U) :
-    (((PresheafOfModules.sheafification (𝟙 A.obj)).map f).val.app U)
-        (((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.app P).app U x) =
-      ((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.app Q).app U
+    (((PresheafOfModules.sheafification.{max u (t + 1)} (𝟙 A.obj)).map f).val.app U)
+        (((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app P).app U x) =
+      ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app Q).app U
         (f.app U x) := by
   have h := congrArg (fun g ↦ g.app U x)
-    ((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.naturality f)
+    ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.naturality f)
   simpa only [Functor.id_map, PresheafOfModules.comp_app, ModuleCat.comp_apply,
     Functor.comp_map, SheafOfModules.forget, PresheafOfModules.restrictScalars_map_app,
     ModuleCat.restrictScalars.map_apply] using h.symm
@@ -688,7 +688,7 @@ private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
   simp only [levelIso, strengthReductionTensor, Iso.trans_hom, Functor.mapIso_hom,
     eqToIso.hom, SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
     SheafOfModules.restrictScalars,
-    PresheafOfModules.restrictScalars_map_app, ModuleCat.restrictScalars.map_apply]
+    PresheafOfModules.restrictScalars_map_app]
   erw [SheafOfModules.eqToHom_val_app_eqToHom_symm h U]
   exact coefficientIso_pure X (base X l E) (level X l E n) (projection X l E n) M U s x
 
