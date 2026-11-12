@@ -158,6 +158,7 @@ theorem class_pushforward_core :
     P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
     (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
   refine Eq.trans ?_ (hcoh.trans ?_)
+  -- Normalize the coefficient abbreviation before comparing the long composites.
   all_goals simp only [coeff, Functor.comp_obj]
   all_goals rfl
 

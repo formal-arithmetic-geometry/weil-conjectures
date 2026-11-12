@@ -66,8 +66,6 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-set_option profiler true in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- **The class of the coefficient pushforward** (blueprint `lem-trf-trace-source-exchange`,
 identity (b)): `[δ ∘ Rg_* u ∘ γ] = Φ ∘ Rq_* [u] ∘ Ξ ∘ Rb_! η_g`. -/
 theorem class_pushforward :
