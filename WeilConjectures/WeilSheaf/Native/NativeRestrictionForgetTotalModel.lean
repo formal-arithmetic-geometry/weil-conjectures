@@ -708,7 +708,9 @@ private theorem native_restriction_goal_proof
   intro hR sr hsr rho c _hc dU dZ P T hP hT
   have hdata := native_restriction_data k₀ l (Lα)
     hR sr rho c _hc
-  rcases hdata with ⟨totalRestriction, restriction_summands, restriction_model'⟩
+  let totalRestriction := hdata.choose
+  have restriction_summands := hdata.choose_spec.1
+  have restriction_model' := hdata.choose_spec.2
   clear _hc c
   dsimp only
   let F := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)
@@ -728,14 +730,20 @@ private theorem native_restriction_goal_proof
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
   let P₀ := (F.mapHomologicalComplex (.up ℤ)).obj P
   let T₀ := (F.mapHomologicalComplex (.up ℤ)).obj T
-  obtain ⟨cZ, hcZ, hmZ⟩ := native_forget_normalized_binary_models k₀ l Z P T hP hT dZ
+  have hmodelsZ := native_forget_normalized_binary_models k₀ l Z P T hP hT dZ
+  let cZ := hmodelsZ.choose
+  have hcZ := hmodelsZ.choose_spec.1
+  have hmZ := hmodelsZ.choose_spec.2
   let mZ := (nativeForget k₀ l Z).mapIso (nativeOpenTensorModel k₀ l Z P T hP hT) ≪≫
     F.mapDerivedCategoryFactors.app _ ≪≫ DerivedCategory.Q.mapIso cZ
   have hmZ' : mZ.hom = _ := hmZ
   let RP := ((Lα).mapHomologicalComplex (.up ℤ)).obj P
   let RT := ((Lα).mapHomologicalComplex (.up ℤ)).obj T
-  obtain ⟨cU, hcU, hmU⟩ := native_forget_normalized_binary_models k₀ l U RP RT
+  have hmodelsU := native_forget_normalized_binary_models k₀ l U RP RT
     (hR P hP) (hR T hT) dU
+  let cU := hmodelsU.choose
+  have hcU := hmodelsU.choose_spec.1
+  have hmU := hmodelsU.choose_spec.2
   let e : (Lα) ⋙ FU ≅ F ⋙ R :=
     Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α
   let a : (Lα).mapHomologicalComplex (.up ℤ) ⋙
