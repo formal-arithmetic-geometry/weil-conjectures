@@ -119,38 +119,6 @@ private theorem transportedTensorMate_assoc
   simp only [← U.map_comp, ← F.map_comp, Iso.hom_inv_id,
     Functor.map_id, Category.comp_id]
 
-private theorem map_comp_eq_id_of_inverse
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {X Y : C} (b : X ≅ Y) (k : Y ⟶ X) (h : b.inv = k) :
-    F.map b.hom ≫ F.map k = 𝟙 (F.obj X) := by
-  rw [← h, ← F.map_comp, b.hom_inv_id, F.map_id]
-
-private theorem transport_tensor_normalization
-    {C D : Type*} [Category C] [Category D]
-    (T T' : C × C ⥤ C) (S S' : D × D ⥤ D) (F : C ⥤ D)
-    (e : T ≅ T') (f : S ≅ S') (mu : T ⋙ F ≅ F.prod F ⋙ S)
-    {A X Z : C} {B H Y W : D}
-    (r : A ≅ T.obj (X, Z)) (s : B ≅ S.obj (Y, W))
-    (r' : A ⟶ T'.obj (X, Z)) (s' : B ⟶ S'.obj (Y, W))
-    (epsX : F.obj X ⟶ Y) (epsZ : F.obj Z ⟶ W) (eps : F.obj A ⟶ H)
-    (b : B ≅ H) (k : H ⟶ B)
-    (hr : r' = r.hom ≫ e.hom.app (X, Z))
-    (hs : s' = s.hom ≫ f.hom.app (Y, W)) (hk : b.hom ≫ k = 𝟙 B)
-    (hn : F.map r.hom ≫ mu.hom.app (X, Z) ≫
-      S.map (Prod.mkHom epsX epsZ) ≫ s.inv ≫ b.hom = eps) :
-    F.map r' ≫
-      (Functor.isoWhiskerRight e.symm F ≪≫ mu ≪≫
-        Functor.isoWhiskerLeft (F.prod F) f).hom.app (X, Z) ≫
-      S'.map (Prod.mkHom epsX epsZ) = eps ≫ k ≫ s' := by
-  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
-    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
-    Functor.whiskerLeft_app, Functor.prod_obj]
-  rw [hr, hs, ← hn]
-  simp only [Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
-  rw [← f.hom.naturality]
-  simp only [Category.assoc, reassoc_of% hk, Category.id_comp, Iso.inv_hom_id_assoc]
-
 end CategoryTheory
 
 namespace WeilConjectures.IntegralHom
@@ -162,8 +130,6 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   integralReductionSourceHasDerivedCategory integralReductionTargetHasDerivedCategory
   coefficientFiniteHasDerived coefficientFiniteDerivedExtension derivedCategory
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
-  integralReductionChangeOfRings integralReductionExistence
-  scalarReductionExtension scalarReductionExistence
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -202,143 +168,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-private theorem integral_totalPair_eq_generator
-    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      CommRingCat.{max u (t + 1)})
-    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ)
-    (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-    (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
-    totalPair Y R P Q i j U x y =
-      coefficientTensorGenerator.{u, t + 1, t}
-        (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
-  rfl
-
+set_option maxHeartbeats 1600000 in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-private theorem normalizedBeta_inv_generator (n : ℕ)
-    (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
-    (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
-      (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
-      (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q) ⟶
-      ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj
-        (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q))
-    [IsIso beta]
-    (hbeta : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
-      (beta.f (i + j)).val.app U
-        (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-          i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-            ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) =
-      (reductionUnit l E Y D hl n
-        ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
-          (i + j))).val.app U
-        (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
-    ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
-      ((inv beta).f (i + j)).val.app U
-        ((reductionUnit l E Y D hl n
-          ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
-            (i + j))).val.app U
-          (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) =
-      totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y) := by
-  intro i j U x y
-  have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
-      (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
-      (asIso beta).hom_inv_id
-  rw [show (asIso beta).hom = beta from rfl,
-    show (asIso beta).inv = inv beta from rfl] at hh
-  dsimp only [HomologicalComplex.comp_f] at hh
-  have hcomp := congrArg (fun z ↦ ((inv beta).f (i + j)).val.app U z)
-    (hbeta i j U x y)
-  rw [← ConcreteCategory.comp_apply] at hcomp
-  change (ConcreteCategory.hom ((beta.f (i + j) ≫ (inv beta).f (i + j)).val.app U)) _ = _ at hcomp
-  exact hcomp.symm.trans hh
-
-private theorem reductionUnit_eq_coefficientIntegralScalarUnitSection
-    (n : ℕ) (M : completedIntegralModuleSheaves l E Y D hl)
-    (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : M.val.obj U) :
-    (reductionUnit l E Y D hl n M).val.app U x =
-      coefficientIntegralScalarUnitSection l E Y n M U x := by
-  with_unfolding_all rfl
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option profiler true in
-private theorem integralScalarTensorIso_generators (n : ℕ)
-    (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
-    (b : ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj
-        (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≅
-      ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q))
-    (h : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
-      (b.hom.f (i + j)).val.app U
-        ((reductionUnit l E Y D hl n
-          ((((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
-            (i + j))).val.app U
-          (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) =
-      totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) :
-    CoefficientScalarTensorGenerators.{u, t + 1, t}
-      (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (completedIntegralCommRingSheafUnrestricted l E Y)
-      (integralCoefficientCommRingSheaf l E Y n) (scalarReductionExtension l E Y n)
-      (hF := coefficientFiniteExtensionAdditive l E Y n)
-      (coefficientIntegralScalarUnitSection l E Y n) P Q b := by
-  intro i j k hij U x y
-  subst k
-  have hh := h i j U x y
-  dsimp only [totalPair, coefficientTensorGenerator, reductionUnit,
-    coefficientIntegralScalarUnitSection, coefficientOrdinaryScalarAdjunction,
-    coefficientRestrictionSection, totalTensor, coefficientTotalTensor, ordinaryTensor,
-    integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence,
-    completedIntegralCommRingSheaf, completedIntegralCommRingProjection,
-    Functor.uncurry_obj_obj] at hh ⊢
-  exact hh
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option profiler true in
-private theorem integralScalarTensorIso_unique (n : ℕ)
-    (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
-    (b : ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj
-        (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≅
-      ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q))
-    (h : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
-      (b.hom.f (i + j)).val.app U
-        ((reductionUnit l E Y D hl n
-          ((((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
-            (i + j))).val.app U
-          (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) =
-      totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) :
-    b = coefficientScalarTensorIso l E Y n P Q := by
-  exact (coefficientScalarTensorIso_exists l E Y n P Q).unique
-    (integralScalarTensorIso_generators l E Y D hl n P Q b h)
-    (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option profiler true in
 private theorem normalizedBeta_eq (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
@@ -360,23 +192,23 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
-  exact integralScalarTensorIso_unique l E Y D hl n P Q (asIso beta).symm
-    (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta)
+  apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
+  · intro i j k hij U x y
+    subst k
+    have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
+      (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
+          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
+      (asIso beta).hom_inv_id
+    change ((inv beta).f (i + j)).val.app U
+      ((beta.f (i + j)).val.app U _) = _ at hh
+    rw [hbeta] at hh
+    with_unfolding_all exact hh
+  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-private theorem native_reduction_counit (n : ℕ)
-    (A : CochainComplex (scalarReductionSource l E Y) ℤ)
-    (hA : A.IsKFlatIndependentCoefficients) :
-    (finiteCochainModel l E Y n).ε.app A = reductionCounit l E Y D hl n A := by
-  rw [finiteCochainModel_counit l E Y n A hA]
-  unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
-  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
-  change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
-  with_unfolding_all rfl
-
--- Comparing the fixed localization models requires many definitional equalities.
 set_option maxHeartbeats 6400000 in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -533,7 +365,6 @@ private theorem nativeReductionMonoidal
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-set_option profiler true in
 /-- A native tensor comparison transports the normalized scalar tensor mate to
 an associative tensor strength. No invertibility of that mate is asserted here.
 
