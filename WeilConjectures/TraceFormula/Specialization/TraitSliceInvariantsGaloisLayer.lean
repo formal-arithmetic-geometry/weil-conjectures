@@ -348,18 +348,14 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         ph112_data_diff "constructibility" hC
         cast_proofs hC) E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   ph112_remaining "PH112 finite layer ready"
-  let χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
-    (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
-    (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian
-  let ψ := (baseChangeGaloisModel hM b hb v hv).galoisLayerHom
-    (baseChangeGaloisResidue hM b hb v hv)
-    (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
-  let actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
-    (baseChangeGaloisResidue hM b hb v hv)
-    (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
   have result := exists_subgroup_pullbackExchange_of_galois_average
     (Λ := Profinite.padicAlgClRingObj ℓ)
-    (ρ := baseChangeToGaloisLayer hM b hb v hv) (ψ := ψ) (χ := χ)
+    (ρ := baseChangeToGaloisLayer hM b hb v hv) (ψ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))) (χ := (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv)).comp
+            (baseChangeHom hM b hb v hv).fromCartesian))
     (φ := baseChangeHom hM b hb v hv) (A := A)
     (hχ := by
       exact isIso_pullbackExchange_app_of_model_eq
@@ -367,12 +363,24 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
           (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
           (baseChangeHom_total_comp hM b hb v hv))
         (M₁ := baseChangeGaloisModel hM b hb v hv)
-        (Profinite.padicAlgClRingObj ℓ) χ χ rfl HEq.rfl A hM1)
+        (Profinite.padicAlgClRingObj ℓ)
+        (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv)).comp
+            (baseChangeHom hM b hb v hv).fromCartesian)
+        (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv)).comp
+            (baseChangeHom hM b hb v hv).fromCartesian) rfl HEq.rfl A (by
+          ph112_data_diff "cartesian source" hM1
+          cast_proofs hM1))
     (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
     (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
     (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
     (act := baseChangeAut hM b hb v hv)
-    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁) (actΩ := actΩ)
+    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁) (actΩ := ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))))
     (hmul := autAction_baseChangeAut_mul hM b hb v hv _)
     (hint := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
     (htriv := hL₁.1)
@@ -382,8 +390,22 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
           (baseChangeGaloisResidue hM b hb v hv)
           (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
         (M₁ := baseChangeGaloisLayer hM b hb v hv)
-        (Profinite.padicAlgClRingObj ℓ) L₁ ψ ψ actΩ actΩ rfl HEq.rfl HEq.rfl A
-        (by cast_proofs hL₁.2))
+        (Profinite.padicAlgClRingObj ℓ) L₁
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))) rfl HEq.rfl HEq.rfl A
+        (by
+          ph112_data_diff "average source" hL₁.2
+          cast_proofs hL₁.2))
   ph112_remaining "PH112 average ready"
   ph112_data_diff "conclusion" result
   cast_proofs result
