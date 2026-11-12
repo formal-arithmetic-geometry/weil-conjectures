@@ -168,7 +168,7 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
     _ (Category.id_comp (𝟙 X)) (Category.id_comp (𝟙 X')) (Category.id_comp _)
     (N.galoisLayerTower_generic_comp_galoisLayerRestrict_generic h Ω L') C
 
--- Cache the graded tensor instances used by each derived pullback. Reconstructing them
+-- Cache the tensor and colimit instances used by each derived pullback. Reconstructing them
 -- through the monoidal closed structure of module sheaves dominates elaboration below.
 local instance galoisRestrictTensor₄ObjExt (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
@@ -203,7 +203,6 @@ local instance galoisRestrictTensorRightSequential (Y : Scheme.{u})
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option trace.profiler true in
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
 of `Ω/L` are invertible). Let `L ⊆ L' ⊆ Ω` with `L'/L` finite and `Lε^* C` bounded below of étale
