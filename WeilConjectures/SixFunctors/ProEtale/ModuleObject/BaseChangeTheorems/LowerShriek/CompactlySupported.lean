@@ -79,7 +79,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-! ### For a compactification -/
 
-set_option profiler true in
 include ℓ k in
 /-- **The base change theorem for the compactly supported direct image attached to a
 compactification** of bounded constructible `E`-sheaves: for a compactification
@@ -94,6 +93,7 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
       ℓ E c sq) := by
   have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
   rw [ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
+  -- Build the pasting explicitly to avoid instance search through the entire composite.
   refine IsIso.comp_isIso' ?_
     (IsIso.comp_isIso' ?_ (IsIso.comp_isIso' ?_ (IsIso.comp_isIso' ?_ ?_)))
   · exact Iso.isIso_hom _
