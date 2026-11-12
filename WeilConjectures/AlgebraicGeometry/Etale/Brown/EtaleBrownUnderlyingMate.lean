@@ -136,6 +136,7 @@ private theorem brown_underlying_cube
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
 -- Check the section calculation independently of the derived assembly.
+set_option profiler true in
 /-- The ordinary Brown restriction/image cube, before deriving.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ.
 (blueprint: lem-pur-brown-ordinary-restriction-cube).
