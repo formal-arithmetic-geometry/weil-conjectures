@@ -54,7 +54,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 -- the restricted Künneth maps are large terms
 /-- **The non-closed points are reached by generic slices**: under the generic-slicing step in
 chart dimension `m + m' - 1` with coefficients `Λ`, every point `z` of the special fibre of the
