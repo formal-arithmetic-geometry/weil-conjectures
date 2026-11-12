@@ -32,6 +32,7 @@ attribute [local instance_reducible] IntegralOnSlice.Site IntegralOnSlice.topolo
   IntegralOnSlice.restrict IntegralOnSlice.ring
 attribute [local instance_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the normalized ring actions consumes heartbeats across several restrictions.
 /-- The finite quotient augmentation agrees on each degree after the two comparisons.
