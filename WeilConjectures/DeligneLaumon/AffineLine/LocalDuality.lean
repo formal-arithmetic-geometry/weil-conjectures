@@ -202,8 +202,6 @@ private theorem exists_pairing_of_rescale_equiv
     LinearEquiv.symm_apply_apply, smul_eq_mul]
   rfl
 
-set_option profiler true in
--- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
 closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perfect pairing
@@ -346,6 +344,8 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     (by rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)])
     (S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))) S₅ (S₆.trans S₇)
 
+/-- Transport the cohomology sequence of a triangle whose third term is concentrated in
+degree zero along Frobenius-equivariant comparisons of its outer terms. -/
 private theorem exact_boundary_of_triangle
     (T : Triangle (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
     (hT : T ∈ distTriang (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
@@ -414,8 +414,6 @@ private theorem exact_boundary_of_triangle
         (WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x))
     erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
 
--- the cohomology of the three terms of the triangle unfolds through the Weil structures
-set_option profiler true in
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
 of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
 open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
