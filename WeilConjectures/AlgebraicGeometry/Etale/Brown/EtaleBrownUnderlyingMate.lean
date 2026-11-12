@@ -135,6 +135,14 @@ private theorem brown_underlying_cube
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
+private def brown_underlying_restriction_coherence
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t)
+    (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
+    (U : W.Etaleᵒᵖ) (x : M.val.obj U),
+    HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x
+
 private def brown_underlying_localization_coherence
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
@@ -170,9 +178,7 @@ private theorem brown_underlying_coherence_iff
     (P : StrictEtaleEvaluation W O t)
     (R : StrictEtaleBrownRealizationData O t W P) :
     StrictEtaleBrownRealizationCoherence O t W P R ↔
-      (∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
-        (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-        HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x) ∧
+      brown_underlying_restriction_coherence O t W P R ∧
       brown_underlying_localization_coherence O t W P R ∧
       brown_underlying_scalar_coherence O t W P R := Iff.rfl
 
@@ -181,9 +187,7 @@ private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
     (R : StrictEtaleBrownRealization O t W P) :
-    ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
-      (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x :=
+    brown_underlying_restriction_coherence O t W P R.val :=
   ((brown_underlying_coherence_iff O t W P R.val).mp R.property).1
 
 private theorem brown_underlying_right_section
@@ -239,11 +243,6 @@ theorem etaleBrownOrdinaryRestrictionCube
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
     (.mk _ _ _ _ (A.restrictInverse h).hom))
   have ho := brown_underlying_cube O t g A h M
-  have hrW := brown_underlying_restriction_section O t W PW RW h
-    ((A.right m).obj M)
-  have hrV := brown_underlying_restriction_section O t V PV RV h M
-  have hrgm := brown_underlying_right_section O t g m A PW PV B RV RW (rg m) M
-  have hrgn := brown_underlying_right_section O t g n A PW PV B RV RW (rg n)
   ext U x
   have hox := congrArg (fun k ↦ (k.hom.app U) x) ho
   change ((A.rightUnderlying n).hom.app (qV.obj M)).hom.app U
@@ -256,12 +255,13 @@ theorem etaleBrownOrdinaryRestrictionCube
   calc
     _ = ((rg m).val.ordinaryRight.hom.app M).hom.app U x :=
       congrArg (fun y ↦ ((rg m).val.ordinaryRight.hom.app M).hom.app U y)
-        (eq_of_heq (hrW U x))
-    _ = ((A.rightUnderlying m).hom.app M).hom.app U x := hrgm U _
+        (eq_of_heq (brown_underlying_restriction_section O t W PW RW h _ U x))
+    _ = ((A.rightUnderlying m).hom.app M).hom.app U x :=
+      brown_underlying_right_section O t g m A PW PV B RV RW (rg m) M U x
     _ = ((A.rightUnderlying n).hom.app (qV.obj M)).hom.app U
         ((α.app M).val.app U x) := hox.symm
     _ = ((rg n).val.ordinaryRight.hom.app (qV.obj M)).hom.app U
-        ((α.app M).val.app U x) := (hrgn _ U _).symm
-    _ = _ := (eq_of_heq (hrV _ _)).symm
+        ((α.app M).val.app U x) := (brown_underlying_right_section O t g n A PW PV B RV RW (rg n) _ U _).symm
+    _ = _ := (eq_of_heq (brown_underlying_restriction_section O t V PV RV h M _ _)).symm
 
 end AlgebraicGeometry
