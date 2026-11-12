@@ -150,7 +150,6 @@ lemma leftProjection_lowerShriek_unit (g : C ⟶ Y) [IsProper g.left]
     (fun A B ↦ boundedConstructibleUpperStar_map_braiding_hom_δ ℓ g A B)
     (fun _ _ ↦ boundedConstructible_braiding_hom_braiding_hom _ _) M
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The left projection morphism of a composite `g ≫ b` with `g` proper at the unit point. -/
 lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : Y ⟶ Z)
@@ -201,10 +200,10 @@ lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : 
   have hi : M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app (𝟙_ _) ≫
       M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).hom.app (𝟙_ _) = 𝟙 _ := by
     rw [← MonoidalCategory.whiskerLeft_comp, Iso.inv_hom_id_app, MonoidalCategory.whiskerLeft_id]
-  rw [hc', ← Category.assoc (M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app
-      (𝟙_ _)),
-    hi, Category.id_comp, reassoc_of% hn, ← Functor.map_comp_assoc,
-    hu]
+  simp only [hc']
+  simp only [← Category.assoc (M ◁ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).inv.app
+    (𝟙_ _))]
+  simp only [hi, Category.id_comp, reassoc_of% hn, ← Functor.map_comp_assoc, hu]
 
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- `leftProjection_lowerShriek_comp_unit` for a composite `s = g ≫ b`, mapped by a functor. -/
