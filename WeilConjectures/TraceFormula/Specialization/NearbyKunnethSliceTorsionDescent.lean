@@ -116,6 +116,7 @@ lemma isIso_kunnethMap_leftDerivedUpperStar_id {X₀ Y₀ Z₀ X₀' Y₀' Z₀'
       (leftDerivedUpperStarId Λ Y₀).app _) h
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- the Künneth maps of the three product configurations are large terms
 /-- **The Künneth map descends along a Galois slice** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, identification (2) and projection formula (3); finite field
