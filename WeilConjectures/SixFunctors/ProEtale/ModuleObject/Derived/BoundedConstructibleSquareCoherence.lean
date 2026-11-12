@@ -326,8 +326,8 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
   clear h_tensor
   run_tac
     let g ← Lean.Elab.Tactic.getMainGoal
-    let t ← instantiateMVars (← g.getType)
-    let rec tree (e : Expr) (d : Nat) : String :=
+    let t ← Lean.Meta.instantiateMVars (← g.getType)
+    let rec tree (e : Lean.Expr) (d : Nat) : String :=
       if d = 0 then "…" else
         match e with
         | .app f x => s!"({tree f (d - 1)} {tree x (d - 1)})"
