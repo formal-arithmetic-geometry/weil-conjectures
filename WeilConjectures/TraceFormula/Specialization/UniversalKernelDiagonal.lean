@@ -182,10 +182,9 @@ theorem universalKernelSpecialization_comp_evaluationKernel
   unfold universalKernelSpecialization evaluationKernel
   simp only [specialization, specializationProd,
     Correspondence.IsContractingAt.diagPushforwardExchange] at hρ ⊢
-  exact CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-      (diag (deformationSpecialFibre X x.left.ker k')))
-    _ _ hχ _ _ _ _ hρ
+  apply_by_match CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange
+    [a := boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X),
+      a' := boundedConstructibleUpperStarLowerStarAdjunction ℓ
+        (diag (deformationSpecialFibre X x.left.ker k')), hχ := hχ, hρ := hρ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
