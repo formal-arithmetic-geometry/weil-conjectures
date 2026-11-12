@@ -297,8 +297,13 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
         (leftDerivedUpperStarTateTwistDerivedZeroIso N.j ℓ).symm) = N.unit _ := by
     rw [twistSpecializationMap_tateTwistZero, leftDerivedUpperStarTateTwistDerivedZeroIso_eq,
       Iso.inv_hom_id_assoc]
-  rw [hM, hN, leftDerivedUpperStarTateTwistDerivedZeroIso_eq,
-    leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
+  have hf' : (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv := by
+    rw [leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
+  have hf : (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
+    rw [leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
+  rw [hM, hN, hf', hf]
   refine (congrArg (_ ≫ ·) ?_).trans (Iso.inv_hom_id_assoc _ _)
   transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
 
