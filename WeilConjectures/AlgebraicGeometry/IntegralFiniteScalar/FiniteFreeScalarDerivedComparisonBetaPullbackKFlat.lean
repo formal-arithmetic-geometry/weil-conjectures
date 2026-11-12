@@ -277,10 +277,9 @@ private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
   have h := point_ordinary_coefficient a f S.X₃
     ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 S.X₃).hom ≫ t.hom)
   have hC : ((CochainComplex.singleFunctor (PointModules Λ) 0).obj S.X₃).X 0 = S.X₃ := rfl
-  dsimp only [targetZeroIso, target]
-  rw [hC]
   rw [pointComplexComp_hom_f]
-  simpa only [mapIso_composite_hom, Functor.map_comp, Category.assoc] using h
+  simpa only [targetZeroIso, target, hC, mapIso_composite_hom, Functor.map_comp,
+    Category.assoc] using h
 
 -- Prove naturality for abstract complexes before inserting the mapping-cone augmentation.
 private lemma pointComplexComp_naturality (Λ : ScalarSixRing.{u})
