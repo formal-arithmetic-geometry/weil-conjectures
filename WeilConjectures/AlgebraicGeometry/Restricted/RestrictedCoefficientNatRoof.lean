@@ -81,6 +81,33 @@ private theorem roof_formula_cancel {C : Type*} [Category C] {A B I J K : C}
     (rI.hom ≫ b ≫ inv mu ≫ rJ.inv) ≫ rJ.hom ≫ mu = rI.hom ≫ b := by
   simp only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id, Category.comp_id]
 
+private theorem coefficientData_roof_formula {X Y : Scheme.{u}} {v : X ⟶ Y}
+    {F : SheafOfModules.{u} Y.ringCatSheaf} {G : SheafOfModules.{u} X.ringCatSheaf}
+    {φ : F ⟶ (pushforward v).obj G} (D : ModuleCohomologyFMapData v F G φ) (q : ℕ) :
+    let Γ := (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) q
+    let rI := (forget₂ _ AddCommGrpCat.{u}).mapIso
+      (D.J.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Y.toRingedSpace) q) ≪≫
+      (((RingedSpace.globalSectionsComplex D.J).sc q).mapHomologyIso
+        (forget₂ _ AddCommGrpCat.{u})).symm
+    let rJ := (forget₂ _ AddCommGrpCat.{u}).mapIso
+      (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q) ≪≫
+      (((RingedSpace.globalSectionsComplex D.I).sc q).mapHomologyIso
+        (forget₂ _ AddCommGrpCat.{u})).symm
+    D.map q ≫ rJ.hom ≫ H.map (D.a.hom ≫ Γ.map D.lambda) =
+      rI.hom ≫ H.map (Γ.map D.β) := by
+  intro Γ H rI rJ
+  have : IsIso (H.map (D.a.hom ≫ Γ.map D.lambda)) := D.invertible q
+  have he : D.map q = rI.hom ≫ H.map (Γ.map D.β) ≫
+      inv (H.map (D.a.hom ≫ Γ.map D.lambda)) ≫ rJ.inv := by
+    unfold ModuleCohomologyFMapData.map
+    dsimp only [rI, rJ, Iso.trans, Iso.symm, Functor.mapIso]
+    exact regroup_six _ _ _ _ _ _
+  exact (congrArg (fun f ↦ f ≫ rJ.hom ≫ H.map (D.a.hom ≫ Γ.map D.lambda)) he).trans
+    (roof_formula_cancel rI rJ (H.map (Γ.map D.β))
+      (H.map (D.a.hom ≫ Γ.map D.lambda)) (hmu := D.invertible q))
+
 set_option profiler true in
 -- Compare the explicit scheme-restriction and section-functor presentations.
 /-- Restricting an augmented injective roof computes the classical coefficient map.
@@ -274,17 +301,8 @@ theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
     unfold moduleCohomologyFMap
     exact moduleCohomologyFMap_independent _ (restrictedDirectImageMap v φ U)
       (Classical.choice (moduleCohomologyFMapData_nonempty _ _ _ _)) D q
-  have : IsIso (H.map (a.hom ≫ ΓU.map lambda)) := D.invertible q
-  have he : D.map q = rI.hom ≫ H.map (ΓU.map betaU) ≫
-      inv (H.map (a.hom ≫ ΓU.map lambda)) ≫ rJ.inv := by
-    unfold ModuleCohomologyFMapData.map
-    dsimp only [D, rI, rJ, Iso.trans, Iso.symm, Functor.mapIso]
-    exact regroup_six _ _ _ _ _ _
   have hD : D.map q ≫ rJ.hom ≫ H.map (a.hom ≫ ΓU.map lambda) =
-      rI.hom ≫ H.map (ΓU.map betaU) := by
-    exact (congrArg (fun f ↦ f ≫ rJ.hom ≫ H.map (a.hom ≫ ΓU.map lambda)) he).trans
-      (roof_formula_cancel rI rJ (H.map (ΓU.map betaU))
-        (H.map (a.hom ≫ ΓU.map lambda)) (hmu := D.invertible q))
+      rI.hom ≫ H.map (ΓU.map betaU) := coefficientData_roof_formula D q
   let Γ' := (RingedSpace.globalSectionsFunctor (v ⁻¹ᵁ U).toScheme.toRingedSpace ⋙
     forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
   refine (congrArg (fun f ↦ f ≫ rJ.hom ≫ H.map R'.sections.hom ≫ H.map (Γ.map ell))

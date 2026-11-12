@@ -97,7 +97,7 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
           (RingedSpace.localSectionComplexSheafificationIso Y.toRingedSpace (q : ℤ) J).hom).app
             (op V) ≫
         ((RingedSpace.localAbelianSections Y.toRingedSpace).map d.hom).app (op V) := by
-  intro P hP E Γ hΓ B a J d
+  intro P E Γ B a J d
   let F := RingedSpace.localAbelianSections Y.toRingedSpace
   let I := L.extend ComplexShape.embeddingUpNat
   let A := (P.mapHomologicalComplex (.up ℤ)).obj I
