@@ -135,6 +135,34 @@ private theorem brown_underlying_cube
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
+private theorem brown_restriction_section_normalized
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t)
+    (R : StrictEtaleBrownRealization O t W P) :
+    ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
+      (U : W.Etaleᵒᵖ) (x : M.val.obj U),
+      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x := by
+  letI := R.val.ordinaryAdditive
+  exact R.property.1
+
+private theorem brown_right_section_normalized
+    (O : Type (u + 1)) [CommRing O] (t : O)
+    {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
+    (A : StrictEtaleOrdinaryImage O t g)
+    (PW : StrictEtaleEvaluation W O t) (PV : StrictEtaleEvaluation V O t)
+    (B : CoefficientSystemDerivedImage (J := W.smallEtaleTopology)
+      (K := V.smallEtaleTopology) O t _ _ _ A PW PV)
+    (RV : StrictEtaleBrownRealization O t V PV)
+    (RW : StrictEtaleBrownRealization O t W PW)
+    (r : StrictEtaleBrownImageRealization O t g n A (B.level n) RV RW) :
+    ∀ (M : strictEtaleLevel V O t n) (U : W.Etaleᵒᵖ)
+      (x : ((A.right n).obj M).val.obj U),
+      ((r.val.ordinaryRight.hom.app M).hom.app U x) =
+        ((A.rightUnderlying n).hom.app M).hom.app U x := by
+  letI := RV.val.ordinaryAdditive
+  letI := RW.val.ordinaryAdditive
+  exact r.property.1
+
 -- Check the section calculation independently of the derived assembly.
 set_option profiler true in
 /-- The ordinary Brown restriction/image cube, before deriving.
@@ -172,6 +200,10 @@ theorem etaleBrownOrdinaryRestrictionCube
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
     (.mk _ _ _ _ (A.restrictInverse h).hom))
   have ho := brown_underlying_cube O t g A h M
+  have hrW := brown_restriction_section_normalized O t W PW RW h
+  have hrV := brown_restriction_section_normalized O t V PV RV h M
+  have hrgm := brown_right_section_normalized O t g m A PW PV B RV RW M
+  have hrgn := brown_right_section_normalized O t g n A PW PV B RV RW _
   ext U x
   have hox := congrArg (fun k ↦ (k.hom.app U) x) ho
   change ((A.rightUnderlying n).hom.app (qV.obj M)).hom.app U
@@ -184,12 +216,12 @@ theorem etaleBrownOrdinaryRestrictionCube
   calc
     _ = ((rg m).val.ordinaryRight.hom.app M).hom.app U x :=
       congrArg (fun y ↦ ((rg m).val.ordinaryRight.hom.app M).hom.app U y)
-        (eq_of_heq (RW.property.1 h _ U x))
-    _ = ((A.rightUnderlying m).hom.app M).hom.app U x := (rg m).property.1 M U x
+        (eq_of_heq (hrW U x))
+    _ = ((A.rightUnderlying m).hom.app M).hom.app U x := hrgm U _
     _ = ((A.rightUnderlying n).hom.app (qV.obj M)).hom.app U
         ((α.app M).val.app U x) := hox.symm
     _ = ((rg n).val.ordinaryRight.hom.app (qV.obj M)).hom.app U
-        ((α.app M).val.app U x) := ((rg n).property.1 _ U _).symm
-    _ = _ := (eq_of_heq (RV.property.1 h M _ _)).symm
+        ((α.app M).val.app U x) := (hrgn _ U _).symm
+    _ = _ := (eq_of_heq (hrV U _)).symm
 
 end AlgebraicGeometry
