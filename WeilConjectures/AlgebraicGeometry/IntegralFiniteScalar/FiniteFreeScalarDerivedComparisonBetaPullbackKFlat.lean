@@ -278,6 +278,7 @@ private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
     ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 S.X₃).hom ≫ t.hom)
   dsimp only [targetZeroIso, target]
   rw [pointComplexComp_hom_f]
+  change _ = (pointModuleComp Λ f).hom.app S.X₃ ≫ _
   simpa only [mapIso_composite_hom, Functor.map_comp, Category.assoc] using h
 
 -- Prove naturality for abstract complexes before inserting the mapping-cone augmentation.
