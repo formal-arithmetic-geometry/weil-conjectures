@@ -64,14 +64,14 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 -- Reuse tensor preservation of colimits throughout the graded tensor constructions.
-private instance (priority := 10000) properTensorLeftColimit (T : Scheme.{u})
+local instance (priority := 10000) properTensorLeftColimit (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
     {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
     PreservesColimit V ((MonoidalCategory.curriedTensor _).obj M) := by
   infer_instance
 
-private instance (priority := 10000) properTensorRightColimit (T : Scheme.{u})
+local instance (priority := 10000) properTensorRightColimit (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
     {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :

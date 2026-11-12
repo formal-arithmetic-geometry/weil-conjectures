@@ -85,26 +85,27 @@ theorem Stratification.isFiniteLocallyConstantSheaf_upperStar_interiorUnion
       (Etale.upperStarComp A (S.interiorUnionCover.f i) S.interiorUnion.ι).app F
   exact IsFiniteLocallyConstantSheaf.of_openCover S.interiorUnionCover _
 
+/-- Pulling a complex back into the interiors of its lisse strata gives lisse homology. -/
+theorem Stratification.isFiniteLocallyConstantSheaf_homology_mapDerivedCategory_upperStar
+    (S : Stratification X) {Y : Scheme.{u}} (g : Y ⟶ X)
+    (hg : Set.range g.base ⊆ Set.range S.interiorUnion.ι.base)
+    (F : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ)
+    (hS : ∀ i, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj
+      ((DerivedCategory.homologyFunctor _ n).obj F))) :
+    IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ n).obj
+      (D(Etale.upperStar A g).obj F)) := by
+  have := S.isFiniteLocallyConstantSheaf_upperStar_interiorUnion _ hS
+  have := IsFiniteLocallyConstantSheaf.upperStar_of_range_subset g S.interiorUnion.ι hg
+    ((DerivedCategory.homologyFunctor _ n).obj F)
+  exact IsFiniteLocallyConstantSheaf.of_iso
+    (F := (Etale.upperStar A g).obj ((DerivedCategory.homologyFunctor _ n).obj F))
+    ((Functor.mapDerivedCategoryHomologyFunctorIso (Etale.upperStar A g) n).app F)
+
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
--- Reuse tensor preservation of colimits throughout the graded tensor constructions.
-private instance (priority := 10000) lisseTensorLeftColimit (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
-    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimit V ((MonoidalCategory.curriedTensor _).obj M) := by
-  infer_instance
-
-private instance (priority := 10000) lisseTensorRightColimit (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
-    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-    PreservesColimit V ((MonoidalCategory.curriedTensor _).flip.obj M) := by
-  infer_instance
 
 section Geometry
 
@@ -275,32 +276,23 @@ theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left
     R.interiorUnion R.dense_interiorUnion
   have : Nonempty (overRestrict X V).left :=
     ⟨(centreι (overRestrict X V) (I.comap (overRestrictι X V).left)).left ζV⟩
+  let K := (boundedConstructibleUpperStar
+    (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) ℓ w).obj ⟨F, hF⟩
   refine ⟨V, ζV, hζeq, hX.of_isOpenImmersion (overRestrictι X V).left,
     (overRestrictι X V).left.appTop_ne_zero_of_isOpenImmersion hh, ?_,
     closure_singleton_mem_irreducibleComponents_of_centreMap (overRestrictι X V) I hζeq hζ,
-    L((w.left)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F,
+    K.obj,
     D(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
       w.left).obj F₀,
-    boundedConstructible_leftDerivedUpperStar_obj _ ℓ w ⟨F, hF⟩, ?_, fun n ↦ ?_,
+    K.property, ?_, fun n ↦ ?_,
     ⟨finiteCoefficientDerivedEquivalenceLeftDerivedUpperStarIso _ w.left e₀.symm⟩, fun hK ↦ ?_⟩
   · rw [hI, IdealSheafData.comap_ofIdealTop, Ideal.map_span, Set.image_singleton]
   · obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ :=
       (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
         w.left).bounded_mapDerivedCategory_obj hF₀.1
     exact ⟨a, b, ha, hb⟩
-  · have := R.isFiniteLocallyConstantSheaf_upperStar_interiorUnion _ (hR n)
-    have h₁ := IsFiniteLocallyConstantSheaf.upperStar_of_range_subset w.left R.interiorUnion.ι hw
-      ((DerivedCategory.homologyFunctor _ n).obj F₀)
-    have h₂ : IsFiniteLocallyConstantSheaf
-        ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
-          w.left).obj ((DerivedCategory.homologyFunctor _ n).obj F₀)) := by
-      exact_mod_proofs h₁
-    exact IsFiniteLocallyConstantSheaf.of_iso
-      (F := (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
-          w.left).obj ((DerivedCategory.homologyFunctor _ n).obj F₀))
-      ((Functor.mapDerivedCategoryHomologyFunctorIso
-        (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) w.left)
-        n).app F₀)
+  · exact R.isFiniteLocallyConstantSheaf_homology_mapDerivedCategory_upperStar
+      w.left hw F₀ n (hR n)
   · rw [← hζeq]
     exact nearbyCyclesVanishNear_of_isOpenImmersion (overRestrictι X V) I k' _ _ ζV
       ((nearbyCyclesVanishNear _ _ k' _ ζV).prop_of_iso
