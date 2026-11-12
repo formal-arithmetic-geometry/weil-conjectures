@@ -72,7 +72,7 @@ lemma boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardDa
 variable {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left]
   [IsProper p'.left]
 
-set_option trace.profiler true in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- the final `exact` identifies the `𝒪_E` adjunctions and pullback comparison of `p` with those of
 -- the proper map of the trivial compactification of `p`, which is only definitional
