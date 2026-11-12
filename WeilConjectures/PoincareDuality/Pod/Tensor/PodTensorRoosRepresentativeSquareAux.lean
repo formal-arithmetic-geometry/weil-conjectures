@@ -251,6 +251,7 @@ theorem podTensorReindexAt_generators
     rw [ht]
     exact (podReindexingStrictTensorTowersGenerators l E g D hD).choose_spec P' Q' n p q U x y
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- The two sides of the strict normalization have types equal only after unfolding.
 /-- The representative square, assembled from the strict Roos normalization and the
 adjunction calculation of the canonical completed comparison.
