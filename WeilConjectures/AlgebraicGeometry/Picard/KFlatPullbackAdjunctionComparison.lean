@@ -93,9 +93,9 @@ private theorem kFlat_pullback_adjunction_comparison_iso_hom
         (SheafOfModules.{u} (moduleRings S'.toRingedSpace))).inv.app
           (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≫
         (asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))).inv ≫
-        (derivedPullback g).map
+        ((derivedPullback g).mapIso
           (DerivedCategory.quotientCompQhIso
-            (SheafOfModules.{u} (moduleRings S.toRingedSpace))).hom.app P := by
+            (SheafOfModules.{u} (moduleRings S.toRingedSpace))).app P).hom := by
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
