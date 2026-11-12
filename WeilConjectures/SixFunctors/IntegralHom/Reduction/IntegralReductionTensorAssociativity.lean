@@ -132,6 +132,7 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
 
 -- Comparing the fixed localization models requires many definitional equalities.
+attribute [local reducible] totalPair reductionUnit
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem nativeIso_representative
     (Y : AlgebraicGeometry.Scheme.{t})
