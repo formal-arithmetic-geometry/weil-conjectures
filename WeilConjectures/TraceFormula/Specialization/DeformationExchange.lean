@@ -255,38 +255,18 @@ private lemma supportCompactSupportExchange_component_identity
   run_tac do
     let n ← Lean.getRemainingHeartbeats
     Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let saved ← Lean.Meta.saveState
-    let e ← Lean.Meta.mkConstWithFreshMVarLevels
-      ``CategoryTheory.supportIdentity_aux
-    let ty ← Lean.Meta.inferType e
-    let mut names : Array Lean.Name := #[]
-    let mut t := ty
-    while t.isForall do
-      names := names.push t.bindingName!
-      t := t.bindingBody!
-    let (mvs, _, _) ← Lean.Meta.forallMetaTelescope ty
-    let mut measurements : Array (String × Nat) := #[]
-    for (binder, value) in #[
-        ("hF1", "hF1"), ("hF3", "hF3"), ("hF2", "hF2"), ("hF2'", "hF2'"),
-        ("hL", "hL"), ("hL'", "hL'"), ("hχΔ", "hχΔ'"), ("hχdj", "hχdj"),
-        ("hχg", "hχg")] do
-      let some idx := names.findIdx? (· == Lean.Name.mkSimple binder)
-        | throwError "missing binder"
-      let ety ← Lean.instantiateMVars (← Lean.Meta.inferType mvs[idx]!)
-      let v ← Lean.Meta.getFVarFromUserName (Lean.Name.mkSimple value)
-      synMatch ety (← Lean.Meta.inferType v)
-      mvs[idx]!.mvarId!.assign v
-      measurements := measurements.push (binder, (← Lean.getRemainingHeartbeats) / 1000)
-      Lean.logInfo m!"matched {binder}: {(← Lean.getRemainingHeartbeats) / 1000}"
-    saved.restore
-    Lean.logInfo m!"matching budgets: {measurements}"
   apply_by_match CategoryTheory.supportIdentity_aux
     [Sp := specialization (ℓ := ℓ) k' y,
     Ts := specializationProd (ℓ := ℓ) k' (y ≫ c.c₁),
     SX := specialization (ℓ := ℓ) k' (y ≫ c.c₁),
     SB := NearbyCyclesModel.boundedConstructibleNearbyCycles hM,
     χΔ := diagPushforwardExchange ℓ X k' (y ≫ c.c₁),
+    N₀ := (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧),
+    Rι' := boundedConstructibleLowerStar ℓ (hc.specialFixedLocus k').ι,
+    Rd' := boundedConstructibleLowerShriek ℓ (hc.specialFixedLocus k').d,
+    Ξ' := lowerStarLowerShriekCompIso ℓ (hc.specialFixedLocus k').isPullback.w,
+    M' := (boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)),
     hχΔ := hχΔ', hχg := hχg, hχdj := hχdj,
     hF2 := hF2, hF2' := hF2', hL := hL, hL' := hL', hF1 := hF1, hF3 := hF3,
     t := (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _),
