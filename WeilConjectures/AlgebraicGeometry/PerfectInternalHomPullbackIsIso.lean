@@ -83,7 +83,46 @@ private theorem monoidal_adjunct_isIso
     infer_instance
   exact IsIso.of_isIso_comp_left (F.map (s.hom.app K)) q
 
--- Elaborating the shared derived tensor instances needs additional heartbeats.
+/-- Use only the dual and pairing from the full perfect comparison package. -/
+private theorem perfect_exactPairing_exists
+    (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    (M : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M) :
+    ∃ D : schemeDerivedCategory X, Nonempty (ExactPairing M D) := by
+  have ha := scheme_derivedInternalHom_adjunction X
+  let adj := ha.choose
+  let adj' := ha.choose_spec.choose_spec.choose
+  have hadj := ha.choose_spec.choose_spec.choose_spec.1
+  have hadj' := ha.choose_spec.choose_spec.choose_spec.2.2.2
+  let P : schemeDerivedQCohCategory X :=
+    ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩
+  have hp := perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
+  exact ⟨hp.choose.obj, ⟨hp.choose_spec.choose_spec.choose_spec.2.2.choose_spec.2.2.2
+    |>.choose_spec.2.2.choose_spec.2.2.1.choose⟩⟩
+
+/-- Convert the tensor comparison to the tensorator before specializing to derived categories. -/
+private theorem monoidal_adjunct_isIso_of_tensorIso
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) (M K : C)
+    (hM : ∃ N : C, Nonempty (ExactPairing M N))
+    (t : tensor C ⋙ F ≅ F.prod F ⋙ tensor D)
+    (ht : ∃ m : F.CoreMonoidal, ∀ A B : C, (m.μIso A B).inv = t.hom.app (A, B))
+    (H : C ⥤ C) (J : D ⥤ D) (b : tensorRight M ⊣ H)
+    (c : tensorRight (F.obj M) ⊣ J) :
+    IsIso (c.homEquiv (F.obj (H.obj K)) (F.obj K)
+      (t.inv.app (H.obj K, M) ≫ F.map (b.counit.app K))) := by
+  obtain ⟨N, ⟨p⟩⟩ := hM
+  let := p
+  obtain ⟨m, hm⟩ := ht
+  let := m.toMonoidal
+  have htensor (A B : C) : t.inv.app (A, B) = Functor.LaxMonoidal.μ F A B := by
+    have he : (m.μIso A B).symm = t.app (A, B) := Iso.ext (hm A B)
+    exact (congrArg Iso.inv he).symm
+  rw [htensor]
+  exact monoidal_adjunct_isIso F M N K H J b c
+
 /-- Pullback of internal Hom from a perfect source commutes with internal Hom.
 This asserts invertibility of the evaluation-defined map, for the fixed normalized
 tensor-Hom adjunctions and a canonical pullback tensor comparison, rather than
@@ -131,31 +170,10 @@ theorem perfect_internalHom_pullback_isIso
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
   exact (by
-    classical
-    have ha := scheme_derivedInternalHom_adjunction X
-    let adj := ha.choose
-    let adj' := ha.choose_spec.choose_spec.choose
-    have hadj := ha.choose_spec.choose_spec.choose_spec.1
-    have hadj' := ha.choose_spec.choose_spec.choose_spec.2.2.2
-    let P : schemeDerivedQCohCategory X :=
-      ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩
-    have hp := perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
-    let D := hp.choose
-    let p := hp.choose_spec.choose_spec.choose_spec.2.2.choose_spec.2.2.2.choose_spec.2.2
-      |>.choose_spec.2.2.1.choose
-    let := p
-    have hm₀ := canonicalPullbackTensor_monoidal_realization g
-      (fun A B ↦ t.hom.app (A, B)) ht
-    let m := hm₀.choose
-    have hm := hm₀.choose_spec
-    let := m.toMonoidal
-    have htensor (A B : schemeDerivedCategory X) :
-        t.inv.app (A, B) = Functor.LaxMonoidal.μ (derivedPullback g) A B := by
-      have he : (m.μIso A B).symm = t.app (A, B) := Iso.ext (hm A B)
-      exact (congrArg Iso.inv he).symm
-    rw [htensor]
-    exact monoidal_adjunct_isIso (derivedPullback g) M D.obj K _ _
-      (canonicalTensorHomAdjunction X M)
+    exact monoidal_adjunct_isIso_of_tensorIso (derivedPullback g) M K
+      (perfect_exactPairing_exists X M hM) t
+      (canonicalPullbackTensor_monoidal_realization g (fun A B ↦ t.hom.app (A, B)) ht)
+      _ _ (canonicalTensorHomAdjunction X M)
       (canonicalTensorHomAdjunction T ((derivedPullback g).obj M)))
 
 end AlgebraicGeometry

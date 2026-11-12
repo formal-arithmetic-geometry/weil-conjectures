@@ -108,7 +108,6 @@ private theorem affineSectionsAcyclic
     (affineGlobalSectionsRestriction (𝟙 (Spec A))) _
     (isIso_directImage_globalSections_unit_on_kInjective h I)
 
--- The three comparisons expand scalar actions and derived-functor identifications.
 /-- Normalized sections comparisons for f, its base change, and g itself.
 This statement concerns only right-derived composition; it has no input E,
 quasi-coherence hypothesis, extension functor, or base-change map.

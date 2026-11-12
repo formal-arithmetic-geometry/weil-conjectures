@@ -85,7 +85,6 @@ private theorem change_evaluation_iso
     Category.assoc, ι.hom.naturality α.hom]
   simp [α, ← Category.assoc, hd]
 
--- The nested scheme/module category comparisons need additional elaboration heartbeats.
 /-- Evaluation compatibility on complex representatives for an already supplied derived
 sheaf-Hom adjunction. This does not construct the adjunction or the unit-Hom isomorphism.
 
