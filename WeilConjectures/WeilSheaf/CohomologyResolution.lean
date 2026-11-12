@@ -84,15 +84,14 @@ lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
         (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map X.str.hom) := by
   have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
     g g hW hZ comm.symm X.carrier.X ((AdicSheaf.forget _).map X.str.hom)
-  rw [IsoAlgebra.frobeniusNatTrans_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
-    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom,
-    Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, NatTrans.comp_app,
-    Mod.comp_hom', Mod.comp_hom', adicLowerStarComp_hom_app_hom,
-    adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom]
-  simp only [Category.assoc]
-  exact h
+  change (globalSectionsLowerStarIso _ g).inv.app X.carrier.X ≫
+    (globalSectionsLowerStarIso _ hW).inv.app ((g)_*[WeilCoefficients.{u} l].obj X.carrier.X) ≫
+      (Sheaf.Γ _ _).map (((lowerStarComp (WeilCoefficients.{u} l) g hW).hom.app X.carrier.X ≫
+        (lowerStarCongr (WeilCoefficients.{u} l) comm).hom.app X.carrier.X ≫
+        (lowerStarComp (WeilCoefficients.{u} l) hZ g).inv.app X.carrier.X) ≫
+        (g)_*[WeilCoefficients.{u} l].map ((AdicSheaf.forget _).map X.str.hom)) ≫
+      (globalSectionsLowerStarIso _ g).hom.app X.carrier.X = _
+  simpa only [Category.assoc] using h
 
 /-- The underlying morphism of sheaves of the Frobenius exchange isomorphism. -/
 lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app {k : Type u}
