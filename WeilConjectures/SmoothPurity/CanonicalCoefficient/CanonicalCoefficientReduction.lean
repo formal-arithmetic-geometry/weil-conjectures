@@ -222,7 +222,8 @@ theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : Grothendieck
     CoefficientTensorUncurryModel.{r, c, v, w} J R T
       (tensorModelsComparison J R S T M) := by
   intro P L N φ
-  obtain ⟨ψ, hψ, he⟩ := M.uncurry_model P L N φ
+  let u := M.uncurry_model
+  obtain ⟨ψ, hψ, he⟩ := u P L N φ
   refine ⟨ψ, hψ, ?_⟩
   change (M.comparison.hom.app (P, L) ≫
     (CoefficientClosedStructure.comparison S T).hom.app
