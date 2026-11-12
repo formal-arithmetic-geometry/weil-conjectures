@@ -338,7 +338,6 @@ lemma isIso_app_of_forall_upperStar {X'' : Scheme.{u}} {M : NearbyCyclesModel X 
 
 end Transport
 
-set_option profiler true in
 /-- The proper exchange is invertible at any complex isomorphic to the pullback of a bounded
 constructible complex on the total space. -/
 lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
@@ -381,7 +380,6 @@ lemma isIso_of_square {C : Type*} [Category C] {W X₁ X₂ X₃ Y₁ Y₂ : C} 
   exact IsIso.of_isIso_comp_left b c
 
 -- the composite square identifying the direct image of the Künneth map has large terms
-set_option profiler true in
 /-- **The global-sections step, abstractly**: for the product `P` over the trait of models `M`,
 `N` of finite type, with projections compatible with the structure morphisms to `Spec Ω`, the
 direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map to the point `Spec k'` is an isomorphism
@@ -426,6 +424,7 @@ theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
     (hgen.trans (Category.comp_id _).symm)
     ((special_comp_hom_snd hN hpb hP).trans (Category.comp_id _).symm)
     (L((M.ε)^*⟦Λ⟧).obj A) (L((N.ε)^*⟦Λ⟧).obj B)
+  -- Align the proof arguments before composing the isomorphisms.
   have key := isIso_of_square sq inferInstance (by cast_proofs hκs) (by cast_proofs hT)
     (Functor.map_isIso _ _) (by cast_proofs hχP)
   cast_proofs key
@@ -463,7 +462,6 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 -- the composite square identifying the direct image of the Künneth map has large terms
-set_option profiler true in
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧` of
