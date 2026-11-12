@@ -190,7 +190,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit
   simp only [pullbackSquareComparison_hom_app]
   simp only [Category.assoc]
   have hcomp := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-    (R((aX)_*⟦Λ⟧).obj A) (h := by rw [sq₁.w])
+    (R((aX)_*⟦Λ⟧).obj A) (h := by rw [← sq₁.w])
   rw [reassoc_of% hcomp]
   rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
     ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A)))]
@@ -209,7 +209,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
   simp only [pullbackSquareComparison_hom_app]
   simp only [Category.assoc]
   have hcomp := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
-    (R((aY)_*⟦Λ⟧).obj B) (h := by rw [sq₂.w])
+    (R((aY)_*⟦Λ⟧).obj B) (h := by rw [← sq₂.w])
   rw [reassoc_of% hcomp]
   rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
     ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)))]
