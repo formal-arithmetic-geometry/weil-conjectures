@@ -273,10 +273,10 @@ noncomputable def tateTwistZeroShiftUpperStarIso (f : Y ⟶ X) (n : ℤ) :
 variable {ℓ} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : Y ⟶ X} {f' : Y' ⟶ X'}
 
 -- the twists `ℚ̄_ℓ(0)` are the units only up to deep definitional unfoldings
+set_option profiler true in
 /-- The unit law of the pullback exchange
 (`NearbyCyclesModel.Hom.map_unit_comp_pullbackExchange_app`) for the specialization maps of
 `ℚ̄_ℓ(0)` in degree `0`. -/
-set_option profiler true in
 lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
     (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
         L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
