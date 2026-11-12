@@ -53,7 +53,6 @@ local instance twoTermCoordinateEvaluationLocal6 (K L : CochainComplex (Modules.
     ((countableColimits.{t, u} Y R).has_colimits_of_shape _) _
 open TwoTermCoordinates
 
-set_option profiler true in
 /-- Test a total-tensor component after postcomposition into a Hom-complex term.
 The tensor and Hom extensionality reductions are shared by all four coordinates. -/
 private theorem twoTermCoordinate_component_ext
@@ -85,7 +84,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
 
-set_option profiler true in
 /-- A homogeneous signed evaluation map has the two invertible finite coordinates.
 Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1; Stacks 0A8X.
 (blueprint: lem-sf-two-term-coordinate-evaluation).
