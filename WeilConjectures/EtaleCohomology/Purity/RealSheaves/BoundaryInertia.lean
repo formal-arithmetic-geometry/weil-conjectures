@@ -419,7 +419,14 @@ lemma BoundaryChart.restrictionMap_genericGaloisMap (σ : Gal(Ω/C.functionField
   refine IsFundamentalGroup.non_trivial (F := fiber sC) _ fun P y ↦ ?_
   rw [mul_smul, key, smul_inv_smul]
 
--- instance search through `SeparableClosure` and its integral closures is slow
+-- Make the action on the integral closure explicit so synthesis does not search through
+-- `SeparableClosure` and its integral closures while elaborating the stabilizer.
+local instance boundarySmulCommClass :
+    SMulCommClass Gal(Ω/C.functionField) Γ(C, c.W) Ω :=
+  AlgEquiv.smulCommClass_of_isScalarTower
+local instance boundaryIntegralClosureAction :
+    MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
+
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Frobenius lifts in the decomposition group.** Some element of the decomposition group of `Q`
 restricts to a Frobenius element at `z` in `π₁(C₀)`: one inducing the inverse of the arithmetic
