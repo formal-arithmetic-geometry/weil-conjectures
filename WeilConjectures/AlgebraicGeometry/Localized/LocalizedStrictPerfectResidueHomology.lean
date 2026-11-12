@@ -82,6 +82,7 @@ private theorem strictlyPerfect_overEquiv_isKFlat (S : Scheme.{u}) (U : S.Opens)
   exact CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat C hbounded hflat B hB
 
 set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The residue and over-site comparisons involve several chosen derived localizations.
 /-- Termwise residue stalk homology of strictly perfect localized complexes agrees
 naturally with localized derived residue homology. The comparisons are simultaneous

@@ -24,6 +24,7 @@ namespace AlgebraicGeometry
 open Scheme.Modules
 
 set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The two exact sheafification comparisons use different homology functors.
 /-- The ordinary abelian sheafification class sends cycles to their module cohomology
 classes through the canonical kernel comparison.

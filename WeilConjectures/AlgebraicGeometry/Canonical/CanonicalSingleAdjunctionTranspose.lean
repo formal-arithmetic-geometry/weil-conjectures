@@ -76,6 +76,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The pinned choices and sheaf functor instances need a larger elaboration budget.
 /-- The pinned derived adjunction transposes the ordinary single-module comparison.
 Source: Stacks Project, Tags 079W and 0FP1; the factorization defining
