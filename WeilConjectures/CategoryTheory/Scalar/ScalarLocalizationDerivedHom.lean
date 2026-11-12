@@ -532,6 +532,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxHeartbeats 100000 in
+set_option trace.profiler true in
 -- Match the coefficient actions through the sheaf restriction functor.
 private theorem restrict_scalar_identity
     (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
