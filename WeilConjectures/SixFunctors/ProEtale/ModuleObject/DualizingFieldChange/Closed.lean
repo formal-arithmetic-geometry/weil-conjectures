@@ -409,8 +409,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
--- the proof elaborates two triangles and several base change maps of the derived categories
 /-- **The base change map of a closed exceptional inverse image along a field extension is an
 isomorphism**: for a closed immersion `i : Z ⟶ P` of separated `F`-schemes of finite type, its
 base change `i' : Z' ⟶ P'` along a field extension `F ⟶ L` and a bounded constructible
@@ -439,10 +437,11 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
     rw [← Scheme.Hom.comp_apply, sq.w, Scheme.Hom.comp_apply]
   have sqV : IsPullback (πP ∣_ V) V'.ι V.ι πP := isPullback_morphismRestrict πP V
   /- The triangle `X ⟶ M ⟶ Rj_* j^* M ⟶`. -/
+  let jStar := L((V.ι)^*⟦𝐐⟧)
   let adjV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
   obtain ⟨X, f, h, hT⟩ := distinguished_cocone_triangle₁ (adjV.unit.app M.obj)
-  have hjX : IsZero ((L((V.ι)^*⟦𝐐⟧)).obj X) := by
-    refine Triangle.isZero₁_of_isIso₂ _ ((L((V.ι)^*⟦𝐐⟧)).map_distinguished _ hT) ?_
+  have hjX : IsZero (jStar.obj X) := by
+    refine Triangle.isZero₁_of_isIso₂ _ (jStar.map_distinguished _ hT) ?_
     exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adjV.left_triangle_components M.obj)
   have hiX : IsIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X) :=
     isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero _ V.ι i.left hcompl hjX
@@ -453,7 +452,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
   have : IsSeparated (Over.mk (V.ι ≫ P.hom)).hom :=
     inferInstanceAs (IsSeparated (V.ι ≫ P.hom))
   have hjM := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ V.ι M.obj M.property
-  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
+  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj (jStar.obj M.obj)) :=
     boundedConstructible_rightDerivedLowerStar_obj ℓ
       (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
   have hX : boundedConstructible _ X :=
@@ -473,34 +472,38 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
       (derivedUpperStarLowerStarAdjunction 𝐐 i'.left).fullyFaithfulROfIsIsoCounit).ofIso
       (boundedConstructibleLowerStarCompatibility ℓ i').symm
   /- The pulled back triangle. -/
+  let πStar := L((πP)^*⟦𝐐⟧)
   let Tr := Triangle.mk f (adjV.unit.app M.obj) h
-  have hT' : (L((πP)^*⟦𝐐⟧)).mapTriangle.obj Tr ∈ distTriang _ :=
-    (L((πP)^*⟦𝐐⟧)).map_distinguished _ hT
+  have hT' : πStar.mapTriangle.obj Tr ∈ distTriang _ :=
+    πStar.map_distinguished _ hT
   have : IsLocallyNoetherian P.left := LocallyOfFiniteType.isLocallyNoetherian P.hom
   have : IsNoetherian V.toScheme := {}
-  have hbcU : IsIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) := by
+  have hbcU : IsIso ((baseChangeMap 𝐐 sqV.toCommSq).app (jStar.obj M.obj)) := by
     exact_mod_proofs isIso_baseChangeMap_app_padicAlgCl_of_fieldExtension P.hom P'.hom hP ℓ sqV
       (isUnit_natCast_spec ℓ F) _ hjM
-  let e₃ : ((L((πP)^*⟦𝐐⟧)).mapTriangle.obj Tr).obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
-      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
-    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
+  let e₃ := asIso ((baseChangeMap 𝐐 sqV.toCommSq).app (jStar.obj M.obj))
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sq
-  exact isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
+  refine isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
     (lowerStarUpperShriekAdjunction ℓ i') (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) hLi hLi'
-    (L((πP)^*⟦𝐐⟧)) (ObjectProperty.liftCompιIso _ _ _) Tr hT hT' e₁ (Iso.refl _)
-    (fun Q ↦ adjV.subsingleton_hom_of_isZero
+    πStar (ObjectProperty.liftCompιIso _ _ _) Tr hT hT' e₁ (Iso.refl _)
+    ?_ ?_ ?_ ?_
+  · intro Q
+    exact adjV.subsingleton_hom_of_isZero
       (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V.ι i.left
-        hcompl.symm.disjoint Q.obj) _)
-    (fun Q ↦ subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V.ι i.left
-        hcompl.symm.disjoint Q.obj _ _)
-    (fun Q ↦ @Equiv.subsingleton _ _ (Iso.homCongr (Iso.refl _) e₃)
+        hcompl.symm.disjoint Q.obj) _
+  · intro Q
+    exact subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V.ι i.left
+      hcompl.symm.disjoint Q.obj _ _
+  · intro Q
+    exact @Equiv.subsingleton _ _ (Iso.homCongr (Iso.refl _) e₃)
       ((derivedUpperStarLowerStarAdjunction 𝐐 V'.ι).subsingleton_hom_of_isZero
         (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V'.ι i'.left
-          hV' Q.obj) _))
-    (fun Q ↦ @Equiv.subsingleton _ _
+          hV' Q.obj) _)
+  · intro Q
+    exact @Equiv.subsingleton _ _
       (Iso.homCongr (Iso.refl _) ((shiftFunctor _ (-1 : ℤ)).mapIso e₃))
-      (subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V'.ι i'.left hV' Q.obj _ _))
+      (subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V'.ι i'.left hV' Q.obj _ _)
 
 end Closed
 
