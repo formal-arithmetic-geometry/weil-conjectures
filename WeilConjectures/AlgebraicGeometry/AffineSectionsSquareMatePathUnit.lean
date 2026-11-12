@@ -407,6 +407,16 @@ private theorem sections_unit_pasting
 
 
 
+local instance affineSections_directImage_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).Additive := inferInstance
+
+local instance affineSections_globalSections_additive {R : CommRingCat.{u}} {X : Scheme.{u}}
+    (f : X ⟶ Spec R) : (affineGlobalSections f).Additive := inferInstance
+
+local instance affineSections_module_kInjective (X : Scheme.{u}) :
+    Abelian.HasKInjectiveResolutions
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]

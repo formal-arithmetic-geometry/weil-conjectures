@@ -82,6 +82,7 @@ private theorem localized_hom_evaluation
     IsIso.hom_inv_id, Category.comp_id]
   rfl
 
+set_option profiler true in
 private theorem sheaf_hom_evaluation
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
@@ -117,7 +118,8 @@ private theorem sheaf_hom_evaluation
     have : QuasiIso (η.app M) :=
       (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
     infer_instance
-  obtain ⟨j, hj⟩ := localized_hom_evaluation DerivedCategory.Q
+  obtain ⟨j, hj⟩ := localized_hom_evaluation
+    (C := CochainComplex A ℤ) (E := DerivedCategory A) (DerivedCategory.Q (C := A))
     (HomologicalComplex.quasiIso A (.up ℤ))
     (homComplexFunctor (R := R))
     (derivedInternalHom J R)
@@ -138,6 +140,7 @@ private theorem sheaf_hom_evaluation
   exact hj B k I inferInstance
 
 set_option backward.isDefEq.respectTransparency true in
+set_option profiler true in
 -- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
@@ -197,7 +200,7 @@ theorem derived_single_hom_evaluation (Y : Scheme.{u})
                 (((CochainComplex.singleFunctor
                   (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op)).app I ≫
                     e.hom.app I)  := by
-  obtain ⟨j, hj⟩ := sheaf_hom_evaluation
+  obtain ⟨j, hj⟩ := sheaf_hom_evaluation.{u, wY} (C := Opens Y)
     (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf _ e
   refine ⟨j, ?_⟩
   intro B k I hI
