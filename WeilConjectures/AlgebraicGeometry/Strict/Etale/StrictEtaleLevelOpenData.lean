@@ -394,15 +394,19 @@ private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
       fixed T (coefficient O t n) ⋙
         Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h) where
   app M := liftFixedMap T (coefficient O t m) _ _
-    ((coefficientRestrictionUnderlying (J := T.smallEtaleTopology) O t h).hom.app M)
+    ⟨{ app := fun _ ↦ TypeCat.ofHom id
+       naturality := fun _ _ _ ↦ rfl }⟩
     (fun _ _ _ ↦ rfl) (fun U a x ↦ by
-      trace_state
-      sorry)
+      have hunit := ConcreteCategory.congr_hom (congr_app
+        (toSheafify_naturality T.smallEtaleTopology
+          ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
+      exact (congrArg (fun b ↦ b • (show M.val.obj U from x)) hunit).symm)
   naturality := by
     intro M N f
     ext U x
     rfl
 
+set_option profiler true in
 -- Compare the bundled coefficient presentations without unfolding their scalar actions.
 private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
@@ -413,8 +417,12 @@ private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
   have hi (M : strictEtaleLevel T O t n) : IsIso (α.app M) := by
     have hi' : IsIso ((sheafCompose T.smallEtaleTopology
         (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m)))).map (α.app M)) := by
-      change IsIso ((coefficientRestrictionUnderlying
-        (J := T.smallEtaleTopology) O t h).hom.app M)
+      have he : (sheafCompose T.smallEtaleTopology
+          (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m)))).map (α.app M) =
+          (coefficientRestrictionUnderlying (J := T.smallEtaleTopology) O t h).hom.app M := by
+        ext U x
+        rfl
+      rw [he]
       infer_instance
     exact isIso_of_reflects_iso _ (sheafCompose T.smallEtaleTopology
       (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m))))
