@@ -327,7 +327,7 @@ private theorem normalizedReductionComparison_square
   dsimp only [integralDerivedReduction, completedIntegralCommRingSheaf,
     totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
-  run_tac
+  run_tac Lean.Elab.Tactic.withMainContext do
     let mut a := (← Lean.Meta.getLocalDeclFromUserName `hs).type
     let mut b ← Lean.Elab.Tactic.getMainTarget
     for _ in [:64] do
