@@ -320,8 +320,7 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
           (fun i ↦ M.val.map f (a i)) :=
   (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The comparison unfolds section modules and their transported scalar actions.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -354,12 +353,15 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
     ((openPresheafRestrictionAdjunction U.ι).leftAdjointUniq
       (PresheafOfModules.pullbackPushforwardAdjunction.{v}
         U.ι.toRingCatSheafHom.hom)).symm.app P
-  let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) :=
-    PresheafOfModules.isoMk
-      (fun V ↦ ringTransportIso
+  let e₁ : Q ≅ (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n) := by
+    refine PresheafOfModules.isoMk (fun V ↦ ?_) ?_
+    · dsimp only [_root_.PresheafOfModules.exteriorPower, restrict, restrictFunctor,
+        SheafOfModules.pushforward, PresheafOfModules.pushforward_obj_obj,
+        openPresheafRestriction, openRingRestriction, P, Q]
+      exact ringTransportIso
         (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-        (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n)
-      (by
+        (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
+    ·
         intro V W f
         apply ringTransport_ext
           (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
@@ -381,7 +383,7 @@ theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n 
         rw [restriction_wedge]
         refine (ringTransportInverse_wedge _ _ _ _ n _).trans ?_
         conv_rhs => rw [ringTransportInverse_wedge]
-        exact (restriction_wedge (M.restrict U.ι) n f a).symm)
+        exact (restriction_wedge (M.restrict U.ι) n f a).symm
   let e := e₀ ≪≫ e₁
   exact ⟨fun V ↦ (PresheafOfModules.evaluation _ V).mapIso e, fun f ↦ e.hom.naturality f⟩
 

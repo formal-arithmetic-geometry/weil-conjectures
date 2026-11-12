@@ -31,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the two lifts requires elaboration of restricted tensor complexes.
 /-- Affine tensor-resolution homology computes the sections of the ordinary total tensor
 with a global K-flat resolution. This is a statement entirely about complexes and homology;
@@ -126,11 +125,10 @@ theorem exists_selfTor_ordinary_resolution_sections
     exact (hψ₀ x).trans (hψ x).symm
   subst ψ₀
   obtain ⟨H⟩ := ModuleCat.quotient_tensor_resolution_lift_homotopy
-    (i.ker.ideal U) (i.ker.ideal V) (Y.presheaf.map (homOfLE h).op).hom
-    (projectiveResolution _) (projectiveResolution _) ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+    I J φ P R ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
   have heq := H.homologyMap_eq n
   intro e x
-  simpa only [heq] using hc₀ x
+  exact (hc₀ x).trans (congrArg (fun k ↦ c V (e.hom (k x))) heq)
 
 
 end AlgebraicGeometry
