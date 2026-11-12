@@ -67,7 +67,6 @@ private theorem tensor_evaluation_interchange
   simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.id_comp,
     Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
 -- Evaluation crosses the two definitionally equal presentations of scheme module sheaves.
 private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
@@ -86,21 +85,21 @@ private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
     P Q ((schemeDerivedDirectImage h).obj E) (𝟙 _)
   simp only [Category.id_comp] at hc
   dsimp only [mixedHomDirectImageComparison]
-  erw [hc]
+  rw [hc]
   have he := schemeHomTensorHom_naturality T
     E ((derivedPullback h).obj
     ((schemeDerivedDirectImage h).obj E)) P P Q Q (adj.counit.app E)
     (𝟙 P) (𝟙 Q) (𝟙 E)
   have hid : H.map ((𝟙 P).op, 𝟙 Q) = 𝟙 (H.obj (op P, Q)) := H.map_id (op P, Q)
-  erw [hid] at he
-  erw [Category.comp_id, Category.comp_id] at he
+  rw [hid] at he
+  rw [Category.comp_id, Category.comp_id] at he
   have hi : (adj.homEquiv _ E).symm (𝟙 _) = adj.counit.app E := by
-    erw [Adjunction.homEquiv_counit]
+    rw [Adjunction.homEquiv_counit]
     simp
-  erw [Category.comp_id] at he
-  erw [hi, he]
+  rw [Category.comp_id] at he
+  rw [hi, he]
   dsimp only [mixedDirectImageTensorPairing]
-  erw [← adj.homEquiv_naturality_right]
+  rw [← adj.homEquiv_naturality_right]
   congr 1
   exact tensor_evaluation_interchange
     ((mixedHomTensorPullbackIso h).hom.app
@@ -121,7 +120,6 @@ private theorem evaluation_formula (S : Scheme.{u})
   erw [hid] at hn
   simpa only [Category.comp_id] using hn
 
-set_option maxHeartbeats 1200000 in
 set_option profiler true in
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
 /-- The exchange identity before applying global sections.
@@ -225,7 +223,7 @@ theorem mixedInternalHom_baseChange_exchange
   have hc' := directImage_evaluation (pullback.snd f g) (L'.obj M) (L'.obj N)
   have hc := directImage_evaluation f M N
   simp only [z, Category.assoc] at hl ⊢
-  erw [hl, hr, hc']
+  rw [hl, hr, hc']
   have hp' := evaluation_formula (pullback f g) _ _ _ a
   have hpt := evaluation_formula Y _ _ _ t
   have ha : schemeDerivedTensorHomEquiv (pullback f g) _ _ _ a =
@@ -237,20 +235,20 @@ theorem mixedInternalHom_baseChange_exchange
         ((H Y).obj (op (R.obj M), R.obj N), R.obj M) ≫
         L.map (schemeDerivedTensorHomEquiv Y _ _ _ (𝟙 _)) := by
     exact (schemeDerivedTensorHomEquiv Y' _ _ _).apply_symm_apply _
-  erw [hb]
+  rw [hb]
   have hq := tensorPairing_naturality (pullback.snd f g) a (𝟙 (L'.obj M))
   have ht := (mixedHomTensorPullbackIso g).inv.naturality
     (X := (R.obj E, R.obj M))
     (Y := ((H Y).obj (op (R.obj M), R.obj N), R.obj M)) (t, 𝟙 _)
   dsimp only [Functor.comp_map, Functor.prod_map, tensor] at ht
-  erw [CategoryTheory.Functor.map_id] at hq ht
+  rw [CategoryTheory.Functor.map_id] at hq ht
   have hsplit : ((β E ≫ R'.map a) ⊗ₘ β M) =
       (β E ⊗ₘ β M) ≫ (R'.map a ⊗ₘ 𝟙 _) := by
-    erw [tensorHom_comp_tensorHom, Category.comp_id]
-  erw [hsplit]
+    rw [tensorHom_comp_tensorHom, Category.comp_id]
+  rw [hsplit]
   simp only [Category.assoc]
-  erw [reassoc_of% hq, ← R'.map_comp, ← hp', ha]
-  erw [reassoc_of% ht]
+  rw [reassoc_of% hq, ← R'.map_comp, ← hp', ha]
+  rw [reassoc_of% ht]
   have hm := map_pair_comp L (t ⊗ₘ 𝟙 (R.obj M))
     (schemeDerivedTensorHomEquiv Y ((H Y).obj (op (R.obj M), R.obj N))
       (R.obj M) (R.obj N) (𝟙 _))
