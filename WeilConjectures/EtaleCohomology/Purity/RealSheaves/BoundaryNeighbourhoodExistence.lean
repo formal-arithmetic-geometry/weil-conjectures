@@ -314,10 +314,6 @@ variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- the construction combines the Galois action with the neighbourhood of a compatible point
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [IsCurve (U ↘ Spec (.of K))] in
 /-- **Strictly henselian neighbourhoods of boundary points exist** (blueprint
 `lem-wf-boundary-stalk-invariants`). For a boundary point `z` with closed point `x`, there is
