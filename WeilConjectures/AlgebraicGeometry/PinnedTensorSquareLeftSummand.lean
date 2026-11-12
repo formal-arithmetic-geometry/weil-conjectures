@@ -69,6 +69,14 @@ private theorem pinnedTensorSquareLeftSummand_inverse_square
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, h,
     Iso.inv_hom_id_assoc]
 
+private theorem pinnedTensorSquareLeftSummand_transport_naturality
+    {I C D : Type*} [Category C] [Category D] (F : I → C ⥤ D)
+    {a b : I} (h : a = b) {H : C ⥤ D} (τ : F b ⟶ H) {M N : C} (f : M ⟶ N) :
+    (F a).map f ≫ eqToHom (congrArg (fun i ↦ (F i).obj N) h) ≫ τ.app N =
+      (eqToHom (congrArg (fun i ↦ (F i).obj M) h) ≫ τ.app M) ≫ H.map f := by
+  subst a
+  simpa only [eqToHom_refl, Category.id_comp] using τ.naturality f
+
 -- Transport the module square once along an equality of scalar maps.
 private theorem pinnedTensorSquareLeftSummand_tensor_square {X Y : Scheme.{u}}
     (f : X ⟶ Y) (x : X)
@@ -267,12 +275,11 @@ theorem pinned_tensor_square_left_summand
         (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv.app
           (P.X p ⊗ Q.X q)) ≫ D.map (H.map iPQ) := by
     rw [hk]
-    let transport := eqToHom (congrArg (fun a ↦ T ⋙ ModuleCat.extendScalars a)
+    exact pinnedTensorSquareLeftSummand_transport_naturality
+      (fun a ↦ T ⋙ ModuleCat.extendScalars.{u, u, u} a)
       (Classical.choose_spec
-        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1)
-    simpa only [transport, NatTrans.comp_app, eqToHom_app, Category.assoc] using
-      (transport ≫ (Classical.choose
-        (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv).naturality iPQ
+        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1
+      (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv iPQ
   have hm : G.map (ty (P.X p) (Q.X q)).inv ≫
       (eqToHom (congrArg (fun a : SingleComplexBaseChange.A g' z →+*
           SingleComplexBaseChange.C z ↦ (ModuleCat.extendScalars a).obj
