@@ -212,10 +212,10 @@ theorem picardDirectImageUnitMorphism_pullback
           (SheafOfModules.{v} (moduleRings T'.toRingedSpace)) 0).map ui) ≫
       Modules.canonicalSinglePullbackMap p' V' =
     P ≫ H.map ((Modules.pullback p').map ui) := by
+    have hn := congrArg (fun q ↦
+      (derivedPullback p').map (Modules.canonicalSinglePullbackMap i V) ≫ q) hsingle
     with_reducible
-      simpa only [H, P, Functor.map_comp, Category.assoc] using
-        congrArg (fun q ↦
-          (derivedPullback p').map (Modules.canonicalSinglePullbackMap i V) ≫ q) hsingle
+      simpa only [H, P, Functor.map_comp, Category.assoc] using hn
   let : SheafOfModules.IsInvertible.{v, v, v} V := SheafOfModules.instIsInvertibleUnit.{v, v, v}
   let : SheafOfModules.IsInvertible.{v, v, v} V' := SheafOfModules.instIsInvertibleUnit.{v, v, v}
   let : SheafOfModules.IsInvertible.{v, v, v} ((Modules.pullback i).obj V) :=
