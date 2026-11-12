@@ -54,9 +54,7 @@ private theorem counit_transport
     rw [m.naturality, n.naturality, hi]
   simpa [m, n] using he
 
-set_option maxHeartbeats 700000 in
 set_option trace.profiler true in
--- The diagram chase elaborates several specialized derived-category interfaces.
 /-- On a K-injective complex on the inverse-image open, restricting the normalized
 composition comparison and then applying the base-open counit agrees with first
 using the open-restriction comparison and then pushing forward the source-open counit.
@@ -152,22 +150,6 @@ theorem schemeMVOpenComposition_counit_Q
     LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
       DerivedCategory.Qh.map α₀ ≫
       G.rightDerivedFunctorUnit.app (LXh.obj (RXh.obj K)) at hα
-  have hα' : LY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app (RXh.obj K)) ≫
-      α.hom.app (DerivedCategory.Qh.obj (RXh.obj K)) =
-    LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
-      DerivedCategory.Qh.map α₀ ≫
-      G.rightDerivedFunctorUnit.app (LXh.obj (RXh.obj K)) ≫
-      G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.inv.app (RXh.obj K)) := by
-    have hid : G.rightDerivedFunctor.map
-        (LX.mapDerivedCategoryFactorsh.hom.app (RXh.obj K)) ≫
-        G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.inv.app (RXh.obj K)) =
-        𝟙 _ := (G.rightDerivedFunctor.mapIso
-          (LX.mapDerivedCategoryFactorsh.app (RXh.obj K))).hom_inv_id
-    have he := congrArg (fun f ↦ f ≫ G.rightDerivedFunctor.map
-      (LX.mapDerivedCategoryFactorsh.inv.app (RXh.obj K))) hα
-    simp only [Category.assoc, hid] at he
-    erw [Category.comp_id] at he
-    exact he
   have hβ' := schemeMVOpenComposition_unit_normalization X Y h U β hβ K
   change F.rightDerivedFunctorUnit.app (RXh.obj K) ≫
       F.rightDerivedFunctor.map (RX.rightDerivedFunctorUnit.app K) ≫
@@ -236,11 +218,10 @@ theorem schemeMVOpenComposition_counit_Q
             (RX.rightDerivedFunctorUnit.app K)) :=
         α.hom.naturality (RX.rightDerivedFunctorUnit.app K)
       rw [reassoc_of% hn]
-      simp only [Functor.comp_obj]
-      rw [← Category.assoc, hα']
-      simp only [Category.assoc, ← Functor.map_comp]
-      rw [ha]
-      simp only [Iso.inv_hom_id_app_assoc]
+      simp only [Functor.comp_obj, ← Functor.map_comp]
+      rw [ha, Functor.map_comp]
+      simp only [Category.assoc]
+      rw [reassoc_of% hα]
       have hg : DerivedCategory.Qh.map (Gh.map εX) ≫
           G.rightDerivedFunctorUnit.app K =
         G.rightDerivedFunctorUnit.app (LXh.obj (RXh.obj K)) ≫
