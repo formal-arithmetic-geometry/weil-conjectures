@@ -115,9 +115,9 @@ theorem standardSingle_union_homotopy_chain_data
   have hcover : (W.ι ⁻¹ᵁ U) ⊔ (W.ι ⁻¹ᵁ V) = ⊤ := by
     rw [← Scheme.Hom.preimage_sup]
     exact W.ι_preimage_self
-  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ :=
-    relativeMV_cover_homotopy_data f (pullback.snd f g) g (pullback.fst f g)
-      (IsPullback.of_hasPullback f g) K K' φ (W.ι ⁻¹ᵁ U) (W.ι ⁻¹ᵁ V) hcover
+  have hdata := relativeMV_cover_homotopy_data f (pullback.snd f g) g (pullback.fst f g)
+    (IsPullback.of_hasPullback f g) K K' φ (W.ι ⁻¹ᵁ U) (W.ι ⁻¹ᵁ V) hcover
+  obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ := hdata
   obtain ⟨iU⟩ := standardSingle_open_relative_arrow p g W U le_sup_left N
   obtain ⟨iV⟩ := standardSingle_open_relative_arrow p g W V le_sup_right N
   obtain ⟨iUV⟩ := standardSingle_open_relative_arrow p g W (U ⊓ V)
