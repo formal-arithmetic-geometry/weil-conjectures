@@ -139,7 +139,9 @@ theorem reduction_total_hom_ext (W : Scheme.{u})
       (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq V x y
     have e₁ := ordinaryReduction_homEquiv_apply l E W n M N h₁ V z
     have e₂ := ordinaryReduction_homEquiv_apply l E W n M N h₂ V z
-    exact e₁.trans ((h n p q hpq V.unop x y).trans e₂.symm)
+    apply e₁.trans
+    apply (h n p q hpq V.unop x y).trans
+    exact e₂.symm
   apply SheafOfModules.hom_ext
   ext ⟨n, V⟩ r
   exact congrArg (fun f ↦ f.val.app (op V) r) (hn n)
