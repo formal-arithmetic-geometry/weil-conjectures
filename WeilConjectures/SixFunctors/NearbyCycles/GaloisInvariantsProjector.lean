@@ -375,9 +375,6 @@ lemma galoisLayerProjectorFactorization
     Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]
   simpa only [Functor.map_comp] using hα
 
-set_option profiler true in
--- matching the objects of the Galois layer with the unfolded composite of derived functors
--- (`κ`, `α`) is a large defeq check
 /-- `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant`, with the
 idempotent made explicit: `r ≫ α = κ⁻¹ ≫ Li^* Rj_* (R ≫ η) ≫ κ` for the derived unit `η` and
 `κ = NearbyCyclesModel.galoisLayerExchangeIso`. -/
@@ -452,8 +449,6 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
       L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
 
-set_option profiler true in
--- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`,
 with a projector onto all the invariants** (torsion coefficients in which the degrees of the
 finite Galois subextensions of `Ω/L` are invertible). If `Lε^* C` is bounded below of étale
