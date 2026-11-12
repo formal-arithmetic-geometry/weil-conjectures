@@ -250,21 +250,19 @@ private theorem normalizedBeta_eq (n : ℕ)
     integralReductionChangeOfRings, integralReductionExistence,
     scalarReductionExtension, scalarReductionExistence,
     completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at *
-  apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
-  · intro i j k hij U x y
-    subst k
-    have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
-      (hbeta i j U x y)
-    simp only [nativeReductionPair_eq_generator] at hh
-    dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
-      coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
-    dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
-      integralReductionChangeOfRings, integralReductionExistence,
-      scalarReductionExtension, scalarReductionExistence,
-      completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at hh ⊢
-    exact hh
-  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
-    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  apply (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2
+  intro i j k hij U x y
+  subst k
+  have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
+    (hbeta i j U x y)
+  simp only [nativeReductionPair_eq_generator] at hh
+  dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
+    coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
+    integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence,
+    completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at hh ⊢
+  exact hh
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem finiteCochainModel_reductionCounit (n : ℕ)
@@ -351,8 +349,9 @@ private theorem nativeReductionMonoidal
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
       let := hbeta
       run_tac Lean.logInfo "PH324: before normalizedBeta_eq"
-      have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
-      have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      have hbκ : (asIso beta).symm = κ.app (P, Q) := by
+        rw [hc P Q]
+        exact normalizedBeta_eq l E Y D hl n P Q beta hgen
       run_tac Lean.logInfo "PH324: before representative square"
       refine ⟨hEP, hEQ, ?_⟩
       have hrepR := nativeIso_representative Y R a P Q hP hQ
