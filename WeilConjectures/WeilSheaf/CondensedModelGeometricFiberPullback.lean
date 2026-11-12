@@ -268,11 +268,14 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
         (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
         (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
-  exact CategoryTheory.mateEquiv_eq_of_unit _ _ _ _ (fun x ↦ by
-      rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
-        ← Functor.map_comp, Iso.hom_inv_id_app]
-      erw [CategoryTheory.Functor.map_id, Category.comp_id]
-      rfl)
+  rw [← Equiv.eq_symm_apply]
+  refine NatTrans.ext (funext fun x ↦ ?_)
+  rw [CategoryTheory.mateEquiv_symm_natTrans_app]
+  rw [← Functor.map_comp_assoc]
+  rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc,
+    ← Functor.map_comp, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/
