@@ -28,12 +28,6 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-attribute [-instance] Functor.preservesZeroMorphisms_of_additive
-
-local instance chartPreservesZeroMorphisms {C D : Type*} [Category C] [Category D]
-    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive] : F.PreservesZeroMorphisms where
-  map_zero X Y := (F.mapAddHom : (X ⟶ Y) →+ (F.obj X ⟶ F.obj Y)).map_zero
-
 -- The chart carrier and the two localization universes require additional elaboration.
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
@@ -109,7 +103,8 @@ theorem exists_mixedAffineSections_chart_model_factorization
       ∀ [F.Additive] [H.Additive] [J.Additive] [E.Additive] [K.Additive]
         (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)
         (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),
-      let Q := DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)
+      let C := (F.mapHomologicalComplex (.up ℤ)).obj P
+      let Q := DerivedCategory.Q.obj C
       ∃ (a : (mixedGlobalExtension g).obj ((schemeDerivedGlobalSections S).obj Q) ≅
             DerivedCategory.Q.obj (((F ⋙ H ⋙ E).mapHomologicalComplex (.up ℤ)).obj P))
         (b : (schemeDerivedGlobalSections T).obj ((derivedPullback g).obj Q) ≅
