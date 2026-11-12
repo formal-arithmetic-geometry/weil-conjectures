@@ -82,7 +82,7 @@ private theorem mateBridge
   have hh := congr_app hm M
   rw [hn] at hh
   simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft,
-    TwoSquare.whiskerRight, TwoSquare.mk, NatTrans.comp_app,
+    TwoSquare.whiskerRight, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] at hh
   simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
   rw [← Category.assoc, ← hh]
