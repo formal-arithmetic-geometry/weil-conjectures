@@ -77,9 +77,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (integralExceptionalUniformizer l E))
   (B : IntegralExceptionalComparison l E W P)
 
-set_option maxHeartbeats 2000000 in
 set_option profiler true in
--- The sectionwise algebraic graph argument elaborates several large sheaf functors.
 /-- Ordinary site direct-image realization, fixed on every section by the actual
 underlying set-sheaf comparison.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization).
