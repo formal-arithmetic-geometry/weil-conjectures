@@ -49,6 +49,10 @@ local instance ordinaryRingedTensorTargetStruct :
     MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
   (ordinaryRingedTensorTargetMonoidal J R).toMonoidalCategoryStruct
 
+local instance ordinaryRingedTensorHomSMul
+    (M N : RingedTensorModules.{u + 1, u + 1, u + 1} J R) :
+    HSMul ℤˣ (M ⟶ N) (M ⟶ N) := inferInstance
+
 /-- A binary comparison fixed uniquely by its tensor--Hom mate.
 Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
 structure OrdinaryRingedTensorUnderivedData where
@@ -94,15 +98,10 @@ structure OrdinaryRingedTensorChainComparison
         (.up ℤ) p q n hpq) ≫
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
-      (by
-        change E.functor.obj (((ordinaryTensorBifunctor l Y).obj (P.X p)).obj (Q.X q)) ⟶
-          ((coefficientTotalTensor J R).obj
-            (((E.functor.mapHomologicalComplex (.up ℤ)).obj Q),
-              ((E.functor.mapHomologicalComplex (.up ℤ)).obj P))).X n
-        exact (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
+      (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
         RingedForgetTensorTransposition.tensorSummand J R
           ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
+          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)
   associativity (P Q N : CochainComplex (ProEtale.AdicSheaf l
       Y) ℤ) :
     let G := E.functor.mapHomologicalComplex (.up ℤ)
