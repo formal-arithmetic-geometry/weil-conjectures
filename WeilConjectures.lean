@@ -1360,6 +1360,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDi
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedExchangeCoherence
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedExchangeUnit
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedProperBaseChange
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullback
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackInterface
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
@@ -20447,6 +20448,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Counit
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.IdentityPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso
@@ -22987,6 +22989,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AffineLineUnitLocal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangeCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangePaste
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructibleHomPreservation

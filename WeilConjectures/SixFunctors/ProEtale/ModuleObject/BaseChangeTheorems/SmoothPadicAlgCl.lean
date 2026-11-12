@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangeCoherence
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
@@ -77,17 +78,6 @@ lemma isGE_leftDerivedFunctor_extendScalars_obj
   have := (Mod.extendScalars (coefficientMap a X)).isGE_mapDerivedCategory_obj K n
   exact DerivedCategory.TStructure.t.isGE_of_iso
     ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctorIsoMapDerivedCategory.app K).symm n
-
-/-- The base change map of module objects is the exchange morphism of the pullback square
-comparison. The two sides only differ by the unfolding of `baseChangeMap`, whose instance
-arguments were elaborated in another context (comparing them at default transparency times
-out). -/
-lemma baseChangeMap_eq_exchangeRight (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (sq : CommSq g' p' p g) :
-    baseChangeMap Λ sq = Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction Λ p)
-      (derivedUpperStarLowerStarAdjunction Λ p') (pullbackSquareComparison Λ sq) := by
-  delta baseChangeMap
-  with_reducible_and_instances rfl
 
 /-- **The base change map under a flat change of coefficients**: if the comparisons
 `derivedPullIso a` are compatible with composition and the (Push) comparisons along `p` at `K` and
