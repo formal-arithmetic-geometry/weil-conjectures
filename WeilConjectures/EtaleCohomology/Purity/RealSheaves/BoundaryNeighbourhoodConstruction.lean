@@ -223,7 +223,9 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   have hW := c.isAffineOpen
   have hxW : x.1 ∈ c.W := c.mem
   have : IsDedekindDomain Γ(C, c.W) := isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
-  letI := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
+  letI : IsLocalRing (Ideal.inertiaInvariants C.functionField Q) := by
+    letI := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
+    infer_instance
   -- the embedding of `k̄` and the residue map
   have hε₀ : (genericEmb (U ↘ Spec (.of K)) j).comp (algebraMap K (AlgebraicClosure K)) =
       (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
