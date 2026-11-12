@@ -356,14 +356,18 @@ theorem picard_h1_fixed_model_comparison
     obtain ⟨C, hC⟩ := Classical.axiomOfChoice fun i ↦
       picard_affine_target_normalization (fi i) (hOi i)
         ((Modules.tensorPullback (ui i)).obj L) W k U hU (htrivial i)
+    trace "PH298: target models selected"
     let p := RingHom.ker (W.evaluation U w hwU).hom
     let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
     let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
+    trace "PH298: fibre trivialization selected"
     obtain ⟨φ, e, ei, hmaps⟩ := picard_residue_cycle_homology_geometric_maps
       f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
       (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
+    trace "PH298: residue comparisons selected"
     refine residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
       (fun i ↦ (hC i).2.2.1) e0 e1 _ _ _ e ei φ hmaps ?_
+    trace "PH298: joint coordinates applied"
     exact affine_betti_model_residue_minimality W _ w U hwU hU K hK.1 hrank hE
 
-  end AlgebraicGeometry.Scheme
+end AlgebraicGeometry.Scheme
