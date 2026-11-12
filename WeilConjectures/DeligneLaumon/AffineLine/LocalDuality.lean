@@ -332,7 +332,12 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     simp
   let Ψ := S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))
   let ψ := S₆.trans S₇
-  refine ⟨Ψ.toLinearEquiv ≪≫ₗ S₅.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap, fun a b ↦ ?_⟩
+  let S₅' : (((H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ))).stalk zf).Equiv
+      (H.stalk zf).dual := by
+    rw [hone]
+    exact (FrobeniusModule.rescaleOneEquiv ((H.dual hH).stalk zf)).trans S₅
+  refine ⟨Ψ.toLinearEquiv ≪≫ₗ S₅'.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap,
+    fun a b ↦ ?_⟩
   have hΨ := Ψ.map_frobenius a
   rw [show ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).rescale
       ((c : PadicAlgCl l) ^ d)).frobenius a = (c : PadicAlgCl l) ^ d •
@@ -354,7 +359,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   rw [← hqd]
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
     (F.dual hF)).stalk s) Ψ.toLinearEquiv
-    ((FrobeniusModule.rescaleOneEquiv ((H.dual hH).stalk zf)).trans S₅) ψ (q ^ d) hΨ' a b
+    S₅' ψ (q ^ d) (by simpa [hone] using hΨ') a b
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
