@@ -140,6 +140,7 @@ lemma nativeWeilHom_map_model_hom (P : CochainComplex (ProEtaleWeilSheaf k₀ l 
   exact h
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- Matching the composites of morphisms in the derived category of pro-étale Weil sheaves is slow.
 /-- **The native internal hom out of a single sheaf**: for a pro-étale Weil sheaf `A` placed in
 degree `d`, the native derived internal hom `RHom(A[-d], -)` is `R𝓗om(A, -)[d]`, naturally. On a

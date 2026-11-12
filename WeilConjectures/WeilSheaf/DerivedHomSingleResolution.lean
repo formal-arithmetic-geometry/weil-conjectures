@@ -357,6 +357,7 @@ private lemma resolutionComparison_hom (A : ProEtaleWeilSheaf k₀ l X)
       ((ihomFunctor k₀ l X A).rightDerivedFunctorObjQIso I).inv := rfl
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The concrete derived-functor identities require extra sheaf-category typeclass inference.
 /-- Native derived internal Hom from A[0] is the total right derived functor of H_A.
 The comparison is represented by precomposition with every K-injective resolution
