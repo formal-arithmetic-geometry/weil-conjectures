@@ -597,7 +597,6 @@ abbrev continuousExchangeIntegralModelStatement
         Arrow.mk ((ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E
           (sq.toCommSq.asOver (Spec (.of k)))).app K).hom)
 
-set_option maxHeartbeats 400000 in
 -- Elaborating both bundled coefficient exchange arrows needs the extra budget.
 /-- A continuous E exchange arrow is realized by scalar extension of an integral one.
 Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2), with the exchange

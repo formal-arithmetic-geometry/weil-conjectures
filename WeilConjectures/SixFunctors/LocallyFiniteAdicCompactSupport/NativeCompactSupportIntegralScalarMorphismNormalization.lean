@@ -75,7 +75,6 @@ private theorem sixArrow_combine
   subst b d
   simp only [Category.assoc]
 
-set_option maxHeartbeats 400000 in
 -- Comparing the cached coefficient-category presentations needs extra elaboration heartbeats.
 /-- Construct a normalized integral morphism from a scalar natural transformation.
 Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15.

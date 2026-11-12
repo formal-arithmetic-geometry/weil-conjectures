@@ -176,7 +176,6 @@ private def openRho (Λ : ScalarSixRing.{u}) {S X : Scheme.{u}} (j : S ⟶ X)
   have : IsIso adj.unit := openUnit Λ.X j
   exact (asIso adj.unit).symm
 
-set_option maxHeartbeats 2000000 in
 -- Keep the concrete derived models folded during transport.
 private theorem restriction_localized (E : LocallyClosedExtensionData.{u})
     (D : E.DerivedCoherence) {S X : LocallyClosedCoefficients.{u}}
@@ -188,7 +187,6 @@ private theorem restriction_localized (E : LocallyClosedExtensionData.{u})
   intro K
   exact (D.restrictionTermwise b K).trans (E.restrictionTermwise b K).symm
 
-set_option maxHeartbeats 2000000 in
 -- Keep the concrete derived models folded during transport.
 private theorem openRestriction
     (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)

@@ -26,7 +26,6 @@ attribute [local irreducible] HasDerivedCategory.standard
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   completedCoefficientMap completedScalarCounit pbcComplexCounit
 
-set_option maxHeartbeats 800000 in
 -- Normalize the shared scalar witness through the two localization factorizations.
 /-- The canonical cochain counit is the counit of the same completed scalar witness.
 
