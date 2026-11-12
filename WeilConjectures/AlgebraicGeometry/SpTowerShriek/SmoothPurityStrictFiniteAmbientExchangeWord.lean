@@ -131,6 +131,10 @@ private meta partial def conversionCongruence
       if e.headBeta != e then return some e.headBeta
       if let some e' ← e.reduceProjStruct? then return some e'
       return none
+    -- Instance diamonds are definitional equalities. Check them directly instead of
+    -- deriving congruences for every field and argument of their constructors.
+    if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
+      return ← conversionReduction a b
     let mut congruenceError : Option Lean.Exception := none
     let sameHead := a.getAppFn == b.getAppFn ||
       (a.getAppFn.isConst && b.getAppFn.isConst &&
@@ -176,8 +180,6 @@ private meta partial def conversionCongruence
     if let some b' ← reduce b then
       return ← conversionTrans (← conversionCongruence cache congrCache a b')
         (← conversionSymm (← conversionReduction b b'))
-    if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
-      return ← conversionReduction a b
     let a' ← Lean.Meta.withTransparency .reducible (Lean.Meta.whnf a)
     let a' ← match (← reduce a') with
       | some v => pure v

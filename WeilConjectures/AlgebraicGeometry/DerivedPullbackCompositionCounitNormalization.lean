@@ -30,6 +30,13 @@ namespace AlgebraicGeometry
 attribute [local irreducible] Scheme.Modules.tensorPullback
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Functor.rightDerivedFunctorUnit
   DerivedCategory.Qh canonicalDerivedPullbackComposition schemeHomPullbackAdjunction
+-- Perform the substitution abstractly, so specialization does not reconstruct a
+-- congruence proof over the chosen derived-category instances.
+private theorem normalizeCounitPrecomposition
+    {C : Type*} [Category C] {W X Y : C} (p : W ⟶ X)
+    {a b : X ⟶ Y} {c : W ⟶ Y} (h : a = b) (hc : p ≫ b = c) :
+    p ≫ a = c := (congrArg (fun t ↦ p ≫ t) h).trans hc
+
 variable [∀ S : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
 
@@ -112,7 +119,11 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
-  rw [derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K]
-  exact derivedPullbackComposition_localized_counit.{u, w} f g K
+  exact normalizeCounitPrecomposition
+    ((canonicalDerivedPullbackComposition f g).hom.app
+      (((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).mapHomotopyCategory
+        (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K))
+    (derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K)
+    (derivedPullbackComposition_localized_counit.{u, w} f g K)
 
 end AlgebraicGeometry
