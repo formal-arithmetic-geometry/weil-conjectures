@@ -23,6 +23,15 @@ attribute [local implicit_reducible] spCoefficientCommRings
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
   cartierProRootMap
 
+private theorem finiteBoundaryTargetRestriction_inv_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U) :
+    HEq (((finiteBoundaryRestrictionUnderlying l T r n).inv.app M).hom.app U x) x := by
+  change HEq ((eqToHom (r.underlying M n U).symm) x) x
+  exact finiteBoundary_cast_heq _ _
+
 set_option profiler true in
 /-- Target endpoint transport.  The finite root map, the inverse line
 comparison, the inverse restriction comparison and the coefficient lineForget
@@ -77,14 +86,16 @@ theorem finiteBoundary_target_endpoint
   let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
       (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  trace "target: scalar section named"
   let w := (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  have hw : HEq w v := finiteBoundary_cast_heq
-    (r.underlying (lineModule l (ULift.{u} (Padic l)) c) n U).symm v
+  trace "target: restricted section named"
+  have hw : HEq w v := finiteBoundaryTargetRestriction_inv_section l T r n _ U v
   trace "target: restriction comparison complete"
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
+  dsimp only [w, v, η, x'] at ht hi
   exact congrArg ((cartierProRootMap A (l ^ (n + 1)) hA T
     (pow_pos (Fact.out : l.Prime).pos _) hN).hom.app U) (ht.trans hi)
 

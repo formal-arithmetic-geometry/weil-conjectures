@@ -23,6 +23,15 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   DerivedCategory.singleFunctors DerivedCategory.singleFunctorIsoCompQ
 attribute [local implicit_reducible] spCoefficientCommRings
 
+private theorem finiteBoundarySourceRestriction_inv_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U) :
+    HEq (((finiteBoundaryRestrictionUnderlying l T r n).inv.app M).hom.app U x) x := by
+  change HEq ((eqToHom (r.underlying M n U).symm) x) x
+  exact finiteBoundary_cast_heq _ _
+
 set_option profiler true in
 /-- Source endpoint transport.  This is the coefficient-one calculation: the
 finite quotient followed by the restricted evaluation comparison is the
@@ -58,11 +67,12 @@ theorem finiteBoundary_source_endpoint
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
-  have hx : HEq x x' := finiteBoundary_cast_heq
-    (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
+  have hx : HEq x x' := finiteBoundarySourceRestriction_inv_section l T r n _ U x'
   have ha := k.coefficient_one n U x (hx.trans hx')
   have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
   rw [Int.cast_one] at hi
+  dsimp only [x, x', z, U] at ha
+  dsimp only [U] at hi
   exact ha.trans hi.symm
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
