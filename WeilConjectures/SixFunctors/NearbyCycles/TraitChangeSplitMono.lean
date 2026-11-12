@@ -110,7 +110,7 @@ private theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers_hE
         (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) N.j)
         (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) M.j)
         (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) φ.commSq_j)).app
-          ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) := by
+          ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀))) := by
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
   exact isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E φ.commSq_j M.i
     ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀ hn₀
