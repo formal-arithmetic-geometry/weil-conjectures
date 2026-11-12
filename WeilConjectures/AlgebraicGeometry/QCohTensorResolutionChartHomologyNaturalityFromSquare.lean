@@ -73,7 +73,7 @@ theorem tensorResolutionChartHomologyIso_naturality_of_square
   rw [tensorResolutionChartHomologyIso_hom N U MA NA sA PA n,
     tensorResolutionChartHomologyIso_hom N V MB NB sB PB n]
   rw [Functor.map_comp]
-  exact tensorResolutionChartHomologyIso_formula_naturality_of_square
+  apply tensorResolutionChartHomologyIso_formula_naturality_of_square
     Y N V U h MA NA MB NB sA sB PA PB n k l hl
 
 end AlgebraicGeometry
