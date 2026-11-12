@@ -37,8 +37,6 @@ attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
   picardDerivedCoefficientMap structureSheafAb structureSheafCohomologyPullback
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- The dependent family of derived-category maps requires extra elaboration heartbeats.
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives intertwining the canonical affine residue comparisons, and geometric fibre
 comparisons `e`, `ei` intertwine the derived coefficient arrows with structure-sheaf pullback.
@@ -111,11 +109,12 @@ theorem picard_residue_homology_chosen_geometric_fibre_data
             (((Over.pullback (S.fromSpecResidueField s)).map
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                 (ui i) (hui i))).left) 1 (e z) := by
-  obtain ⟨φ, hφ⟩ := picard_residue_homology_chosen_geometric_data
-    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m'
-  obtain ⟨e, he⟩ := picard_derived_fibre_naturality
-    f Xi fi ui hui L W k w s hw τ
-  choose ei hei using he
-  exact ⟨φ, e, ei, fun i ↦ ⟨(hφ i).1, (hφ i).2, hei i⟩⟩
+  apply (picard_residue_homology_chosen_geometric_data
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK m C hC m').imp
+  intro φ hφ
+  apply (picard_derived_fibre_naturality f Xi fi ui hui L W k w s hw τ).imp
+  intro e he
+  exact ⟨fun i ↦ Classical.choose (he i),
+    fun i ↦ ⟨(hφ i).1, (hφ i).2, Classical.choose_spec (he i)⟩⟩
 
 end AlgebraicGeometry.Scheme
