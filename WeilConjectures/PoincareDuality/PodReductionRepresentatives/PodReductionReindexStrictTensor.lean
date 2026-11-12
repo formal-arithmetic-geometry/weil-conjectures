@@ -212,6 +212,9 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   let y₀ := reducedUnitSection l E Y n (Q.X q) (op V.2) y
   let uP := inverseImageUnitSection l E g (((R[Y]).obj P).X p) V x₀
   let uQ := inverseImageUnitSection l E g (((R[Y]).obj Q).X q) V y₀
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: local maps prepared {now}"
   have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k) V
     (reducedUnitSection l E Y n _ (op V.2)
       (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
@@ -220,21 +223,29 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have e12 := e1.trans (congrArg
     (inverseImageUnitSection l E g (((S[Y]).obj ((R[Y]).obj P, (R[Y]).obj Q)).X k) V) e2)
   have hL1 := congrArg (fun z ↦ res (m (a z))) e12
-  trace "PH199: strict map evaluated"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: strict map evaluated {now}"
   have e3 := systemChain_generator l E g ((R[Y]).obj P) ((R[Y]).obj Q)
     p q k hpq V x₀ y₀
   have hL2 := congrArg (fun z ↦ res (m z)) e3
-  trace "PH199: system tensor evaluated"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: system tensor evaluated {now}"
   have e4 := coefficientTotalTensor_map_tensorGenerator.{u, u + 1, u}
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     βP.hom βQ.hom p q k hpq (op V') uP uQ
-  trace "PH199: tensor map prepared"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: tensor map prepared {now}"
   have hL3 := congrArg res e4
   have hL4 := coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
     (coefficientSequenceCommRingSheaf l E X) ((R[X]).obj ((F[g]).obj P))
     ((R[X]).obj ((F[g]).obj Q)) p q k hpq c
     ((βP.hom.f p).val.app (op V') uP) ((βQ.hom.f q).val.app (op V') uQ)
-  trace "PH199: restriction formula prepared"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: restriction formula prepared {now}"
   have rP := (PresheafOfModules.naturality_apply (βP.hom.f p).val c uP).symm.trans
     (generators_unitSection l E g P βP hβP n p U x)
   have rQ := (PresheafOfModules.naturality_apply (βQ.hom.f q).val c uQ).symm.trans
@@ -243,15 +254,25 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     ((R[X]).obj ((F[g]).obj P)) ((R[X]).obj ((F[g]).obj Q)) p q k hpq (op (n, U)))
     rP rQ
-  trace "PH199: scalar normalization prepared"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: scalar normalization prepared {now}"
   have hL12 := hL1.trans hL2
-  trace "PH199: left steps 1-2 joined"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: left steps 1-2 joined {now}"
   have hL123 := hL12.trans hL3
-  trace "PH199: left steps 1-3 joined"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: left steps 1-3 joined {now}"
   have hL1234 := hL123.trans hL4
-  trace "PH199: left steps 1-4 joined"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: left steps 1-4 joined {now}"
   have hL := hL1234.trans hL5
-  trace "PH199: left steps 1-5 joined"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: left steps 1-5 joined {now}"
   have rT := generators_unitSection l E g ((T[Y]).obj (P, Q)) βT hβT n k U
     (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y)
@@ -262,11 +283,16 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have hNat := PresheafOfModules.naturality_apply
     (βT.hom.f k ≫ ((R[X]).map t.hom).f k ≫
       (tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val c s
-  trace "PH199: left side completed"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: left side completed {now}"
   have r3 := reducedUnitSection_map l E X n (t.hom.f k) U z
   have r4 := hPure p q k hpq U x y
   have r5 := strictMap_reducedUnit_generator l E X ((F[g]).obj P) ((F[g]).obj Q)
     n p q k hpq U x y
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: right formulas prepared {now}"
   have hR1 := congrArg (fun z ↦
     ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
       ((((R[X]).map t.hom).f k).val.app (op (n, U)) z)) rT
@@ -275,11 +301,25 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have hR3 := congrArg (fun z ↦
     ((tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val.app (op (n, U))
       (reducedUnitSection l E X n _ (op U) z)) r4
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: right congruences prepared {now}"
   have hR01 := hNat.symm.trans hR1
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: right restriction joined {now}"
   have hR012 := hR01.trans hR2
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: right reduction joined {now}"
   have hR0123 := hR012.trans hR3
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: right pure formula joined {now}"
   have hR := hR0123.trans r5
-  trace "PH199: right side completed"
+  run_tac do
+    let now ← IO.monoMsNow
+    Lean.logInfo m!"PH199: right side completed {now}"
   exact hL.trans hR.symm
 
 end WeilConjectures.PodReductionRepresentatives
