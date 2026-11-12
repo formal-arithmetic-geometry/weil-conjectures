@@ -324,7 +324,6 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O) (W : Scheme.{u})
   (S : CoefficientSystemOrdinaryImage (J := W.smallEtaleTopology)
     (K := Scheme.ProEt.topology W) O ell _ _ (Scheme.proEtaleSiteComparison W))
 
-set_option maxHeartbeats 1300000 in
 set_option trace.profiler true in
 -- Elaborate the sectionwise addition and scalar-action graph calculations.
 private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
@@ -362,7 +361,7 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
       ((S.levelAdj n).counit.app M) = 𝟙 _ at hc
     change Q.map ((S.levelAdj n).homEquiv (R.obj M) M
       ((S.levelAdj n).counit.app M)) ≫ β.hom.app M = _ at h
-    rw [hc, Q.map_id, Category.id_comp] at h
+    simp only [hc, Q.map_id, Category.id_comp] at h
     exact h
   have hunit (M) (T : Sheaf W.smallEtaleTopology (Type (u + 1)))
       (a : T ⟶ Q.obj (R.obj M)) (U : W.Etaleᵒᵖ) (z : T.obj.obj U) :
@@ -371,7 +370,7 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
         ((I.moduleUnderlying.inv.app (R.obj M)).hom.app ((Scheme.toProEt W).op.obj U)
           ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
             ((adj.unit.app T).hom.app U z))) := by
-    rw [hβ, Adjunction.homEquiv_unit]
+    simp only [hβ, Adjunction.homEquiv_unit]
     have h := congrArg (fun f ↦ f.hom.app U z) (adj.unit.naturality a)
     change (adj.unit.app (Q.obj (R.obj M))).hom.app U (a.hom.app U z) =
       (L.map a).hom.app ((Scheme.toProEt W).op.obj U)
@@ -406,9 +405,9 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     change (β.hom.app M).hom.app U (x + y) = _ at ht
     change (β.hom.app M).hom.app U x = _ at ha
     change (β.hom.app M).hom.app U y = _ at hb
-    rw [ht, ha, hb]
+    simp only [ht, ha, hb]
     dsimp only [id] at h
-    rw [h]
+    simp only [h]
     exact (((S.levelAdj n).counit.app M).val.app
       ((Scheme.toProEt W).op.obj U)).hom.map_add _ _
   have hsmul (M) (U : W.Etaleᵒᵖ) (q : (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))
@@ -477,10 +476,10 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
       ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology) O ell n).obj.obj U
         from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
-    rw [ha] at ht
-    rw [ht, hb]
+    simp only [ha] at ht
+    simp only [ht, hb]
     dsimp only [id] at h
-    rw [h]
+    simp only [h]
     have hconst := constantSection_apply (Scheme.ProEt.topology W)
       (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)) q ((Scheme.toProEt W).op.obj U)
       ((S.singleton.hom).hom.app ((Scheme.toProEt W).op.obj U)
@@ -490,7 +489,7 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
       ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
         ((adj.unit.app T).hom.app U z)) = _ at hc'
     have hs := hc'.trans hconst
-    rw [hs]
+    simp only [hs]
     exact (((S.levelAdj n).counit.app M).val.app
       ((Scheme.toProEt W).op.obj U)).hom.map_smul _ _
   let F := R ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n
@@ -675,7 +674,6 @@ private theorem exceptional_inverse_scalar_transpose
       dsimp only [Functor.comp_obj]
       rw [Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 set_option trace.profiler true in
 -- Assemble the derived comparison and all evaluation and scalar-mate clauses.
 /-- The site comparison core, before the final evaluation-origin projection.
@@ -845,10 +843,10 @@ theorem exceptionalSiteOriginComparison_core
           ((PX.transition h).app (I.system.inverse.obj M)) =
           (PX.scalar h).derived.map em.hom ≫ g ≫ en.inv := by
         apply ((PX.scalar h).derivedAdj.homEquiv _ _).injective
-        rw [Equiv.apply_symm_apply, (PX.scalar h).derivedAdj.homEquiv_naturality_left,
+        simp only [Equiv.apply_symm_apply, (PX.scalar h).derivedAdj.homEquiv_naturality_left,
           (PX.scalar h).derivedAdj.homEquiv_naturality_right]
         dsimp only [Functor.comp_obj] at hg ⊢
-        rw [hg]
+        simp only [hg]
         have ht := I.inverseTransition h M
         change (PX.transition h).app (I.system.inverse.obj M) ≫
             (PX.scalar h).restriction.map en.hom = em.hom ≫
