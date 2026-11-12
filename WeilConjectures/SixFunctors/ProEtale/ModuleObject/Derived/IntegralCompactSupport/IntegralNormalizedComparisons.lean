@@ -89,6 +89,7 @@ private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
     h.2.2.2.2.2.2.2.2.2.2.2.1⟩
 
 variable (k : Type u) [Field k]
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- The explicit comparison family has several large derived-category instance arguments.
 attribute [-instance] CategoryTheory.catToReflQuiver in
