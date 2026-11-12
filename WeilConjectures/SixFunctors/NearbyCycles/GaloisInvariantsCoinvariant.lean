@@ -273,6 +273,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
   let Λ := Profinite.continuousMapRingObj T₀
   let g := pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))
+  let F₁ := R((N.j)_*⟦Λ⟧)
+  let F₂ := L((N.i)^*⟦Λ⟧)
+  let κ := N.galoisLayerExchangeIso h Ω Λ C
   let C₀ := L((N.ε)^*⟦Λ⟧).obj C
   have hC₀ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) N.generic
       ((finiteCoefficientDerivedEquivalence N.generic T₀).functor.obj C₀) := hC
@@ -352,9 +355,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
         Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
           (condensedRingObj (Λ) Z)) ↦
     retraction_of_eq_comp_map_comp_of_coinvariant
-      R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧)
-      G _ ((leftDerivedUpperStarId (Λ) X').app _) _
-      (N.galoisLayerExchangeIso h Ω (Λ) C) rfl _ _ hα hRC
+      F₁ F₂ G _ ((leftDerivedUpperStarId (Λ) X').app _) _
+      κ rfl _ _ hα hRC
       (fun k ↦ derivedUnitTransport (Λ)
         (pullbackAction h _ specGaloisAction_comp (act k))
         (pullbackAction_fst h _ specGaloisAction_comp (act k))
@@ -369,8 +371,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
     DerivedCategory.homologyFunctor _ q)).2 φ (fun φ' hφ' ↦ ?_) hφ
   exact (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
     (Λ) hd K hc a hK _ e
-    (R((N.j)_*⟦Λ⟧) ⋙
-      L((N.i)^*⟦Λ⟧) ⋙
+    (F₁ ⋙ F₂ ⋙
         L((f')^*⟦Λ⟧) ⋙ DerivedCategory.homologyFunctor _ q)
     (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N (galoisTower Ω h) K
       hcab a f' q).some
