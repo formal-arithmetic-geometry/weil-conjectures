@@ -362,20 +362,8 @@ theorem picard_h1_fixed_model_comparison
     obtain ⟨φ, e, ei, hmaps⟩ := picard_residue_homology_chosen_geometric_maps
       f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
       (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
-    have hreszero := affine_betti_model_residue_minimality W
-      ((schemeDerivedDirectImage (pullback.snd f k)).obj
-        ((DerivedCategory.singleFunctor
-          (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
-            ((Modules.tensorPullback (pullback.fst f k)).obj L)))
-      w U hwU hU K hK.1 hrank hE
-    let B := Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1
-    let D := fun i ↦ Sheaf.H
-      (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1
-    let g : ∀ i, B → D i := fun i ↦ structureSheafCohomologyPullback
-      (((Over.pullback (S.fromSpecResidueField s)).map
-        (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-          (ui i) (hui i))).left) 1
-    exact residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
-      (fun i ↦ (hC i).2.2.1) e0 e1 B D g _ _ φ (fun i ↦ (hmaps i).2.2) hreszero
+    refine residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
+      (fun i ↦ (hC i).2.2.1) e0 e1 _ _ _ _ _ φ (fun i ↦ (hmaps i).2.2) ?_
+    exact affine_betti_model_residue_minimality W _ w U hwU hU K hK.1 hrank hE
 
 end AlgebraicGeometry.Scheme
