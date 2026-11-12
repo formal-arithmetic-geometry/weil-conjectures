@@ -25,6 +25,7 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- Transport through the complex and homotopy localization interfaces.
 /-- The open composition unit equation on any complex on the inverse-image open.

@@ -28,6 +28,7 @@ attribute [local instance 2000] schemeMVModuleAbelian
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- The exact restriction factors require additional categorical instance conversions.
 /-- Left-hand composition normalization to the complex-composition composite.

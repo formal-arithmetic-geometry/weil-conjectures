@@ -24,6 +24,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The quotient transports fit the original budget when elaboration respects transparency.
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
