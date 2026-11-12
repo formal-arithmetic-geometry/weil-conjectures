@@ -105,15 +105,14 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
   have hK (n : ℤ) :=
     rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
   obtain ⟨hΦ⟩ := N.nonempty_isColimit_homology_nearbyCycles_galoisTower T₀ h Ω K a hKe q
-  have : IsNoetherianObject ((DerivedCategory.Q ⋙
-      R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q).mapCocone
-        ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
-    isNoetherianObject_of_mono ((DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (GaloisTower.derivedTraceIso _ K a hK _ e).hom) ≫
-        (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom))
+  let Ψ := R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q
+  let Φ := DerivedCategory.Q ⋙ Ψ
+  let eK := GaloisTower.derivedTraceIso (Profinite.continuousMapRingObj T₀) K a hK _ e
+  have : IsNoetherianObject (Φ.mapCocone
+      ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
+    isNoetherianObject_of_mono (Ψ.map eK.hom ≫ (DerivedCategory.homologyFunctor _ q).map
+      (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom)
   obtain ⟨j, hj⟩ := exists_epi_ι_of_isNoetherianObject hΦ
   let L' : FiniteGaloisIntermediateField L Ω := j
   refine ⟨L', fun σ hσ ↦ ?_⟩
@@ -123,37 +122,28 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       (restrictNormal_eq_one_of_forall_apply_eq Ω L' τ hτ ▸
         pullbackAction_comp_galoisLevelProjection h L' τ)
   have key (τ : Ω ≃ₐ[L] Ω) (hτ : ∀ x : L', τ x = x) := by
-    have hτ' := congrArg (DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q).map
-        (hU τ hτ)
-    rwa [Functor.map_comp, Functor.map_comp] at hτ'
-  have hG := (cancel_epi (((DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q).mapCocone
-        ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).ι.app j)).1
+    have hτ' := congrArg Φ.map (hU τ hτ)
+    rwa [Φ.map_comp, Φ.map_comp] at hτ'
+  have hG := (cancel_epi ((Φ.mapCocone
+      ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).ι.app j)).1
     ((key σ hσ).trans (key 1 fun _ ↦ rfl).symm)
-  simp only [Functor.comp_map] at hG
-  have hA : (DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-            (pullbackAction h _ specGaloisAction_comp σ)
-            (pullbackAction_fst h _ specGaloisAction_comp σ)
-            (pullbackAction_fst h _ specGaloisAction_comp σ)
-            (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))) =
-      (DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-            (pullbackAction h _ specGaloisAction_comp 1)
-            (pullbackAction_fst h _ specGaloisAction_comp 1)
-            (pullbackAction_fst h _ specGaloisAction_comp 1)
-            (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))) := by
-    rw [← cancel_epi ((DerivedCategory.homologyFunctor _ q).map
-      (L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).map
-          (GaloisTower.derivedTraceIso _ K a hK _ e).hom)))]
-    simp only [← Functor.map_comp, GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport]
-    simp only [Functor.map_comp, hG]
+  have hA : Ψ.map
+      (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
+        (pullbackAction h _ specGaloisAction_comp σ)
+        (pullbackAction_fst h _ specGaloisAction_comp σ)
+        (pullbackAction_fst h _ specGaloisAction_comp σ)
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) =
+      Ψ.map
+      (derivedUnitTransport (Profinite.continuousMapRingObj T₀)
+        (pullbackAction h _ specGaloisAction_comp 1)
+        (pullbackAction_fst h _ specGaloisAction_comp 1)
+        (pullbackAction_fst h _ specGaloisAction_comp 1)
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
+    apply (cancel_epi (Ψ.map eK.hom)).1
+    simp only [← Ψ.map_comp, eK,
+      GaloisTower.derivedTraceIso_hom_comp_derivedUnitTransport]
+    exact (Ψ.map_comp _ _).trans ((congrArg (fun f ↦ f ≫ Ψ.map eK.hom) hG).trans
+      (Ψ.map_comp _ _).symm)
   have hσ1 : (DerivedCategory.homologyFunctor _ q).map
       (N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω σ
         (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) =
