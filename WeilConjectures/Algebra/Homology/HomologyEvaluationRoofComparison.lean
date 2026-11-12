@@ -36,6 +36,7 @@ private theorem homComplex_precomp_homology_isIso
   infer_instance
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Comparing the restricted Hom components elaborates several chosen product signatures.
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
