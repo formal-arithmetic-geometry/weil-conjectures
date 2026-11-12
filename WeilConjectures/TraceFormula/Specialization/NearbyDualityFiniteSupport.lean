@@ -195,7 +195,8 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
   obtain ⟨V, hzV, ιV, _, cV, -, hcVi, hcV⟩ := hm (M.i z)
   have : QuasiCompact V.ι := inferInstance
   have hR := h.restrictOpen V
-  have hRM := hR.isTraitModelOver
+  have hRM : (M.restrictOpen V).IsTraitModelOver (V.ι ≫ q) ((M.j ⁻¹ᵁ V).ι ≫ g) :=
+    hR.isTraitModelOver
   let coord : ιV → ((M.restrictOpen V).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')) :=
     fun a ↦ cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')
   have hcoord : ∀ a, coord a ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = V.ι ≫ q :=
