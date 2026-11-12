@@ -49,8 +49,6 @@ private theorem sectionCounit_injective (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
 -- Use the evaluation API without unfolding the chosen Hom map or counit.
 attribute [local irreducible] homComparison sectionCounit
 
-set_option maxHeartbeats 400000 in
--- The section calculation crosses the large native Hom and equivalence interfaces.
 /-- For the *specified* lifted native coefficient model and its *specified* ordinary
 Hom comparison, native pushforward by an inverse scheme isomorphism is translation,
 compatibly with internal Hom. No site, ring, module equivalence, or Hom isomorphism
@@ -159,7 +157,14 @@ theorem nativeFrobeniusComparison (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
       (((sectionCounit Y l).hom.app
         (S.obj (SheafOfModules.homObj (R := ring Y l) M N))).val.app V
           ((c.app (SheafOfModules.homObj (R := ring Y l) M N)).hom.hom.hom.app V z)) at hp
-  erw [hp, hcs (SheafOfModules.homObj (R := ring Y l) M N) V, hcs M V]
-  exact (translated_evaluation Y l g P M N (op (AsSmall.up.obj V.unop)) _ _).symm
+  -- Transport the local map and its argument separately to avoid rewriting the evaluation goal.
+  have hf := hp.trans (congrArg ((P.sigmaHom M N).hom.val.app _)
+    (hcs (SheafOfModules.homObj (R := ring Y l) M N) V z))
+  exact (translated_evaluation Y l g P M N (op (AsSmall.up.obj V.unop)) _ _).symm.trans
+    (congrArg₂ (fun (f : (SheafOfModules.homObj (R := ring Y l)
+        (S.obj M) (S.obj N)).val.obj (op (AsSmall.up.obj V.unop)))
+      (w : (S.obj M).val.obj (op (AsSmall.up.obj V.unop))) ↦
+        f.app (op (Over.mk (𝟙 (AsSmall.up.obj V.unop)))) w)
+      hf.symm (hcs M V y).symm)
 
 end AlgebraicGeometry.ProEtale.NativeFrobenius
