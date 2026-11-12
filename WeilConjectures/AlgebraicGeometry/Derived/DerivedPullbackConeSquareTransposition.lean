@@ -154,7 +154,7 @@ theorem derivedPullback_cone_square_transposition
             (CochainComplex.mappingCone.mapHomologicalComplexIso t' G).inv) ≫
               η.app (CochainComplex.mappingCone t')) := by
   classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf, moduleRings] at *
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf, moduleRings]
   intro α β H
   obtain ⟨hL, e, he⟩ := kFlat_pullback_adjunction_comparison g
   let E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
