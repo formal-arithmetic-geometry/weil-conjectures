@@ -327,6 +327,7 @@ private theorem normalizedReductionComparison_square
   dsimp only [integralDerivedReduction, completedIntegralCommRingSheaf,
     totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
+  trace_state
   exact hs
 
 set_option profiler true in
