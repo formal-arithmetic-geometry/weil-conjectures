@@ -96,6 +96,8 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
   let := RingedSpace.globalSectionsFunctor_additive (h ⁻¹ᵁ V).toScheme.toRingedSpace
   let L := ((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
+  let C := ((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   let a := (forget₂ _ AddCommGrpCat.{u}).map
     (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p).hom
   let b := (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso
@@ -132,16 +134,18 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
   have hn : H.map rY ≫ t V = t ⊤ ≫
       (L.homology p).presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op :=
     (sectionClass_restriction L V p).trans (Category.assoc _ _ _).symm
+  let r := (L.homology p).presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op
+  have hid : H.map (𝟙 C) ≫ t ⊤ = t ⊤ :=
+    (congrArg (fun q ↦ q ≫ t ⊤) (H.map_id C)).trans (Category.id_comp _)
   unfold resolutionSectionClass
   dsimp only
   simp only [Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id]
-  change (a ≫ b ≫ H.map (𝟙 (((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
-      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
-        I.cocomplex)) ≫ t ⊤) ≫ _ =
+  change (a ≫ b ≫ H.map (𝟙 C) ≫ t ⊤) ≫ r =
     moduleCohomologyRestriction (h ⁻¹ᵁ V) G p ≫ a' ≫ b' ≫ H.map R.sections.hom ≫ t V
-  rw [H.map_id, Category.id_comp]
   calc
-    (a ≫ b ≫ t ⊤) ≫ _ = a ≫ b ≫ (t ⊤ ≫ _) := by simp only [Category.assoc]
+    (a ≫ b ≫ H.map (𝟙 C) ≫ t ⊤) ≫ r = (a ≫ b ≫ t ⊤) ≫ r :=
+      congrArg (fun q ↦ (a ≫ b ≫ q) ≫ r) hid
+    _ = a ≫ b ≫ (t ⊤ ≫ r) := by simp only [Category.assoc]
     _ = a ≫ b ≫ H.map rY ≫ t V := congrArg (fun q ↦ a ≫ b ≫ q) hn.symm
     _ = (a ≫ b ≫ H.map rY) ≫ t V := by simp only [Category.assoc]
     _ = (moduleCohomologyRestriction (h ⁻¹ᵁ V) G p ≫ a' ≫ b' ≫
