@@ -128,6 +128,36 @@ private theorem exchange_components_finish
   exact (congrArg (fun x ↦ adj'.homEquiv _ _ x ≫ i'.inv.app T) hlocal).trans
     (adjunct_sum_factor (L := L') adj' i' c γ v a₀)
 
+/-- Addition of normalized completed classes realizes multiplication in the Picard group. -/
+private theorem completedChern_mul_normalization (l : ℕ) [Fact l.Prime]
+    {X S : Scheme.{u}} [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
+    {f : X ⟶ S} (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
+    (L K : X.Pic)
+    (hK : K = L * Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S))
+    (w z : DiagonalTrace.completedUnit l X ⟶
+      (DiagonalTrace.completedLine l X)⟦(2 : ℤ)⟧)
+    (hw : (diagonalCompletedUnderlying l X).map w ≫
+      DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X)
+        (p.restrictionX.F.mapDerivedCategory ⋙ p.LX.R)
+        (p.coefficientsX.lineMap l (ULift.{u} (Padic l)) p.LX) 2 =
+      p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX ≫
+        p.LX.R.map (p.restrictionX.F.mapDerivedCategory.map
+          (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX L)))
+    (hz : ModelLocalChernNormalized l p z) :
+    (diagonalCompletedUnderlying l X).map (w + z) ≫
+      DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X)
+        (p.restrictionX.F.mapDerivedCategory ⋙ p.LX.R)
+        (p.coefficientsX.lineMap l (ULift.{u} (Padic l)) p.LX) 2 =
+      p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX ≫
+        p.LX.R.map (p.restrictionX.F.mapDerivedCategory.map
+          (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX K)) := by
+  have : p.LX.R.Additive := by
+    have := p.LX.triangulated
+    infer_instance
+  rw [hK, firstChern_mul]
+  simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+  exact congrArg₂ (· + ·) hw (by simpa only [ModelLocalChernNormalized] using hz)
+
 /-- Factor the base contribution before taking the derived adjunction. -/
 private theorem diagonalLocalChern_pullback_sum_factorization (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
@@ -171,29 +201,12 @@ private theorem diagonalLocalChern_pullback_sum_factorization (l : ℕ) [Fact l.
           L'.map c.derived ≫ (cF'.derived ≫ eX'.localChern l X' z') := by
   let Λ := Profinite.continuousMapRingObj.{u} ℤ_[l]
   let L' := derivedUpper Λ f'
-  let θ := (CondensedRing.leftDerivedUpperStarComp Λ f' hS).symm ≪≫
-    Functor.leftDerivedFunctorNatIso _ (CondensedRing.upperStarCongr Λ h) ≪≫
-    CondensedRing.leftDerivedUpperStarComp Λ hX f
   obtain ⟨M, hM⟩ := hPic
   have hX' : IsUnit (l : Γ(X', ⊤)) := by
     simpa only [map_natCast] using hunit'.map f'.appTop.hom
   obtain ⟨w, hw, _⟩ := DiagonalTrace.diagonalCompletedLocalChern_lift l p' hX'
     (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p'.chernX (Scheme.Pic.map f' M))
-  have : p'.LX.R.Additive := by
-    have := p'.LX.triangulated
-    infer_instance
-  have hsum : (diagonalCompletedUnderlying l X').map (w + z') ≫
-      DiagonalTrace.shiftedComparison (diagonalCompletedUnderlying l X')
-        (p'.restrictionX.F.mapDerivedCategory ⋙ p'.LX.R)
-        (p'.coefficientsX.lineMap l (ULift.{u} (Padic l)) p'.LX) 2 =
-      p'.coefficientsX.unitMap l (ULift.{u} (Padic l)) p'.LX ≫
-        p'.LX.R.map (p'.restrictionX.F.mapDerivedCategory.map
-          (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p'.chernX
-            (Scheme.Pic.map hX
-              (Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S))))) := by
-    rw [hM, firstChern_mul]
-    simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
-    exact congrArg₂ (· + ·) hw (by simpa only [ModelLocalChernNormalized] using hz')
+  have hsum := completedChern_mul_normalization l p' _ _ hM w z' hw hz'
   have hpull := diagonalLocalChern_horizontal_realization l f f' hX hS h
     hunit hunit' p p' eX eX' cF cF' line c z (w + z') hz hsum
   obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f' hunit'
