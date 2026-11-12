@@ -157,7 +157,7 @@ end OpenRestriction
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
-  have := openRestrictionMate_isIso l E L ι j
+  letI := openRestrictionMate_isIso l E L ι j
   exact inverseMate_isIso_of_left_adjoints
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
