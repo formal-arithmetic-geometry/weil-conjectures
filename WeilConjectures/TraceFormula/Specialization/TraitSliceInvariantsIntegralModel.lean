@@ -47,9 +47,31 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+-- Resolve the families of tensor instances once, before specializing the coefficients.
+private instance (priority := 2000) integralModelTensorFour (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] :
+    ∀ P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T)), GradedObject.HasTensor₄ObjExt P Q S U := by
+  intros
+  infer_instance
+
+private instance (priority := 2000) integralModelTensorAssocLeft (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] :
+    ∀ P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T)), GradedObject.HasGoodTensor₁₂Tensor P Q S := by
+  intros
+  infer_instance
+
+private instance (priority := 2000) integralModelTensorAssocRight (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] :
+    ∀ P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj Λ T)), GradedObject.HasGoodTensorTensor₂₃ P Q S := by
+  intros
+  infer_instance
+
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option trace.profiler true in
+set_option profiler true in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
