@@ -58,6 +58,11 @@ private noncomputable def relativeMV_cover_homotopy_data_cached
     (φ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hcover : U ⊔ V = ⊤) :=
   relativeMV_cover_homotopy_data f f' g g' hpull K K' φ U V hcover
 
+private noncomputable def standardSingle_open_relative_arrow_cached
+    {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B)
+    (W Z : Y.Opens) (hZ : Z ≤ W) (N : W.toScheme.Modules) :=
+  standardSingle_open_relative_arrow p g W Z hZ N
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The resolved cover comparison before cylinder rectification.
@@ -125,12 +130,12 @@ theorem standardSingle_union_homotopy_chain_data
   have hcover : (W.ι ⁻¹ᵁ U) ⊔ (W.ι ⁻¹ᵁ V) = ⊤ := by
     rw [← Scheme.Hom.preimage_sup]
     exact W.ι_preimage_self
-  have hdata := relativeMV_cover_homotopy_data_cached (inst := inst) f (pullback.snd f g) g (pullback.fst f g)
+  have hdata := relativeMV_cover_homotopy_data_cached f (pullback.snd f g) g (pullback.fst f g)
     (IsPullback.of_hasPullback f g) K K' φ (W.ι ⁻¹ᵁ U) (W.ι ⁻¹ᵁ V) hcover
   obtain ⟨C, D, C', D', t, t', α, β, H, e₁, e₂, e₃, e₁', e₂', e₃', hα, hβ, hγ⟩ := hdata
-  obtain ⟨iU⟩ := standardSingle_open_relative_arrow p g W U le_sup_left N
-  obtain ⟨iV⟩ := standardSingle_open_relative_arrow p g W V le_sup_right N
-  obtain ⟨iUV⟩ := standardSingle_open_relative_arrow p g W (U ⊓ V)
+  obtain ⟨iU⟩ := standardSingle_open_relative_arrow_cached p g W U le_sup_left N
+  obtain ⟨iV⟩ := standardSingle_open_relative_arrow_cached p g W V le_sup_right N
+  obtain ⟨iUV⟩ := standardSingle_open_relative_arrow_cached p g W (U ⊓ V)
     (inf_le_left.trans le_sup_left) N
   let lU := Arrow.leftFunc.mapIso iU
   let rU := Arrow.rightFunc.mapIso iU
