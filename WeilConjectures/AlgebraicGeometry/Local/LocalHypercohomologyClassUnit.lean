@@ -145,7 +145,6 @@ private theorem sheafification_resolution_diagram
   simp only [Category.assoc]
   rw [← hf, ← reassoc_of% hn, hm, reassoc_of% hu, reassoc_of% hp, hc]
 
-set_option profiler true in
 -- This compares homology in module sheaves, abelian sheaves and abelian presheaves.
 private theorem sheafification_unit_of_resolution
     {Y : RingedSpace.{u}}
@@ -207,7 +206,8 @@ private theorem sheafification_unit_of_resolution
     simp only [Functor.map_comp, Category.assoc]
     erw [((DerivedCategory.homologyFunctorFactors _ q).app J).map_inv_hom_id T,
       Category.comp_id]
-  have : IsIso (T.map (HomologicalComplex.homologyMap s q)) := by infer_instance
+  have : Mono (T.map ((HomologicalComplex.homologyFunctor _ (.up ℤ) q).map s)) :=
+    inferInstanceAs (Mono (T.map (HomologicalComplex.homologyMap s q)))
   exact sheafification_resolution_diagram hn hf' hm hu' hp' hc
 
 private theorem sheafification_unit
