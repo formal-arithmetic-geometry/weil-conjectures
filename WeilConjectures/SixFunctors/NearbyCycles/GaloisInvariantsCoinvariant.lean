@@ -235,13 +235,13 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-local instance category_mod (Y : Scheme.{u}) :
-    Category (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T₀) Y)) := inferInstance
+noncomputable local instance category_derived_X :
+    Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X))) := inferInstance
 
-local instance category_derived_mod (Y : Scheme.{u}) :
-    Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T₀) Y))) := inferInstance
+noncomputable local instance category_derived_X' :
+    Category (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X'))) := inferInstance
 
 set_option profiler true in
 -- the objects of the Galois layer are large terms
