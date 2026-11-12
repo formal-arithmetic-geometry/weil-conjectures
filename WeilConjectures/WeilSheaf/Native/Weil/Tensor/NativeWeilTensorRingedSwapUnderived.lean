@@ -144,9 +144,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
           (((adj.adj P).homEquiv Q I).symm f) =
       ((Mod.ihomAdjunction P.carrier).homEquiv Q.carrier I.carrier).symm f.hom.f)
 
-set_option maxHeartbeats 1200000 in
 -- Compare the two concrete sheaf tensor constructions in the evaluation square.
-set_option profiler true in
+set_option trace.profiler true in
 private theorem binaryMate_forget
     (P Q I : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
     (f : Q ⟶ SheafOfModules.homObj (R := b.R) P I) :
@@ -192,11 +191,7 @@ private theorem binaryMate_forget
 
 include he
 
-set_option synthInstance.maxHeartbeats 200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option profiler true in
+set_option trace.profiler true in
 private theorem binary_square
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :
@@ -281,11 +276,7 @@ private theorem binary_square
   exact hv'
 
 
-set_option synthInstance.maxHeartbeats 200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
-set_option profiler true in
+set_option trace.profiler true in
 private theorem underived_swap_square
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :
@@ -331,8 +322,6 @@ private theorem underived_swap_square
   rw [reassoc_of% h₀]
   rfl
 
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
--- The concrete sheaf tensor comparisons require additional elaboration fuel.
 /-- The normalized ordinary symmetry determines the native underived swap.
 Source: Stacks 03EK, 06YU and 0FPT; the binary mate and tensor symmetry squares.
 (blueprint: new-sf-native-weil-ringed-swap-underived).
