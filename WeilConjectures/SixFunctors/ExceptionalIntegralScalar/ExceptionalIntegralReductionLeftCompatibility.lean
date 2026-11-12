@@ -34,14 +34,15 @@ private theorem cancel_coordinates {D : Type*} [Category D] {A B C F G : D}
     Category.comp_id] using hh
 
 -- Paste the integral realization and counit squares before specializing to derived categories.
+-- Keeping the paths right-associated avoids repeated normalization of the coefficient types.
 private theorem reduction_comparison_pasting {C₀ C₁ : Type*} [Category C₀] [Category C₁]
     {F G : C₀ ⥤ C₁} (δ : F ≅ G) {A B C D H : C₀} (r : A ≅ B)
-    (k : A ⟶ H) (b : B ⟶ C) (s : C ⟶ D) (t : D ⟶ H)
+    {k : A ⟶ H} {b : B ⟶ C} {s : C ⟶ D} {t : D ⟶ H}
     {Z₀ Z₁ Z₂ Z₃ Z₄ Z₅ Z₆ Z₇ Z₈ : C₁} (p : Z₀ ⟶ F.obj A)
-    (q : F.obj H ⟶ Z₁) (i : Z₁ ⟶ Z₂) (j : Z₂ ⟶ Z₃)
-    (u₁ : G.obj D ⟶ Z₄) (u₂ : Z₄ ⟶ Z₅)
-    (v₁ : G.obj C ⟶ Z₆) (v₂ : Z₆ ⟶ Z₇)
-    (v : Z₇ ⟶ Z₅) (w₁ : Z₅ ⟶ Z₈) (w₂ : Z₈ ⟶ Z₃)
+    {q : F.obj H ⟶ Z₁} {i : Z₁ ⟶ Z₂} {j : Z₂ ⟶ Z₃}
+    {u₁ : G.obj D ⟶ Z₄} {u₂ : Z₄ ⟶ Z₅}
+    {v₁ : G.obj C ⟶ Z₆} {v₂ : Z₆ ⟶ Z₇}
+    {v : Z₇ ⟶ Z₅} {w₁ : Z₅ ⟶ Z₈} {w₂ : Z₈ ⟶ Z₃}
     (hi : r.inv ≫ k = b ≫ s ≫ t)
     (hp : G.map t ≫ δ.inv.app H ≫ q ≫ i ≫ j = u₁ ≫ u₂ ≫ w₁ ≫ w₂)
     (hm : G.map s ≫ u₁ ≫ u₂ = v₁ ≫ v₂ ≫ v) :
@@ -379,7 +380,6 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   WeilConjectures.coefficientSequenceCommRingPresheaf
 
 -- The ambient comparison elaborates several dependent coefficient-stage identifications.
-set_option profiler true in
 /-- The canonical finite evaluation intertwines the left exceptional scalar mate.
 Source: Zheng, Lemma 5.22 and Proposition 5.26, reduction compatibility.
 Proof: apply the faithful finite full inclusion and substitute the scalar equality
@@ -536,7 +536,7 @@ theorem integralReductionLeftCompatibility
     ⟨n + 1, Nat.succ_pos n⟩ a ha false)).hom.app ((operation (.integral E)).F.obj K)
   have hp'' := reduction_comparison_pasting δY
     ((finiteTorConstructibleIntegral l E.carrier Y).ι.mapIso ((transport.realizeF E).app K))
-    _ _ _ _ py _ _ _ _ _ _ _ _ _ _ hi hproj hμ
+    py hi hproj hμ
   simp only [Functor.map_comp] at hp''
   have hr := congrArg (fun z ↦
     IY.map (eY.hom.app ((operation (.integral E)).F.obj K)) ≫ z ≫
