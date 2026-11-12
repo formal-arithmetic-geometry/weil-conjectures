@@ -48,6 +48,29 @@ private lemma comp_eq_comp_of_points {C : Type*} [Category C]
   simp only [← Category.assoc] at hpg hhb ⊢
   rw [hpg, hhb, ← htr]
 
+/-- Transporting a point and then a section through a naturality square agrees with
+transporting their composite. The two composition isomorphisms cancel at the point. -/
+private lemma comp_map_eq_of_point_square {A B C D : Type*}
+    [Category A] [Category B] [Category C] [Category D]
+    {I : A ⥤ B} {G : B ⥤ D} {H : A ⥤ C} {J : C ⥤ D} {S T : A ⥤ D}
+    (e : I ⋙ G ≅ S) (e' : H ⋙ J ≅ T)
+    {U V : A} {oB : B} {oC : C} {oD : D} {N : C}
+    {p : oB ⟶ I.obj U} {g : oD ⟶ G.obj oB}
+    {h : oC ⟶ H.obj U} {b : oD ⟶ J.obj oC}
+    {s : oD ⟶ S.obj U} {t : oD ⟶ T.obj U}
+    (α : U ⟶ V) (τ : H.obj V ⟶ N) (fU : S.obj U ⟶ T.obj U) (fV : S.obj V ⟶ T.obj V)
+    (hnat : S.map α ≫ fV = fU ≫ T.map α)
+    (hpg : g ≫ G.map p = s ≫ e.inv.app U)
+    (hhb : b ≫ J.map h = t ≫ e'.inv.app U) (htr : s ≫ fU = t) :
+    b ≫ J.map (h ≫ H.map α ≫ τ) =
+      g ≫ G.map (p ≫ I.map α) ≫ e.hom.app V ≫ fV ≫ e'.inv.app V ≫ J.map τ := by
+  have n₁ := e.hom.naturality α
+  have n₃ := e'.inv.naturality α
+  simp only [Functor.comp_map] at n₁ n₃
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% n₁, reassoc_of% hnat, reassoc_of% n₃, reassoc_of% hpg,
+    Iso.inv_hom_id_app_assoc, reassoc_of% htr, reassoc_of% hhb]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -66,8 +89,6 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y) (Fc : c.FixedLocus)
   (Fb : P.pushforward.FixedLocus)
 
-set_option maxHeartbeats 3000000 in
--- composite functors on bounded constructible complexes are unfolded
 /-- The point `T_b = 𝔱 ∘ ũ` of the pushed correspondence is obtained from that of `c` by
 transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
 `T_b = Ri_{b*} τ_h ∘ Rg_* T_c ∘ η_g`. -/
@@ -84,6 +105,8 @@ lemma mate_comp_traceMap_pushforward :
         (boundedConstructibleLowerStar ℓ Fb.ι).map
           (lowerStarDualizingComplexTrace ℓ (P.fixMap Fc Fb)) := by
   have e4 := Adjunction.homEquiv_comp_mateEquiv_of_eq
+    (G := boundedConstructibleLowerStar ℓ P.g)
+    (H := boundedConstructibleLowerStar ℓ (prod.map P.f P.f))
     (boundedConstructibleUpperShriekAdjunction ℓ c.support)
     (boundedConstructibleUpperShriekAdjunction ℓ P.pushforward.support)
     (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom
@@ -108,8 +131,6 @@ lemma mate_comp_traceMap_pushforward :
   rw [← cancel_mono Fb.supportIso.hom]
   simpa only [Category.assoc] using e5
 
-set_option maxHeartbeats 3000000 in
--- composite functors on bounded constructible complexes are unfolded
 /-- **Proper pushforward compatibility of the trace class** (blueprint
 `thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
 diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed loci `h`,
@@ -128,8 +149,6 @@ theorem traceClassPushforward_eq :
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ Fb.ι)).inv ≫
         P.traceClassPushforward Fc Fb) = P.pushforward.mate ≫ P.pushforward.traceMap Fb := by
     rw [P.mate_comp_traceMap_pushforward Fc Fb, hTc]
-    simp only [Adjunction.homEquiv_unit, traceClassPushforward, BorelMooreSection.pushforward,
-      lowerStarDualizingComplexTrace, Functor.map_comp, Category.assoc]
     have hpg := Adjunction.unit_map_comp_unit_map
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ Fc.ι)
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ P.g)
@@ -151,31 +170,19 @@ theorem traceClassPushforward_eq :
       rfl _ _ _
       (boundedConstructibleUpperStarComp_hom_app_unit ℓ (P.fixMap Fc Fb) Fb.ι)
     have htr := unit_comp_map_εIso_inv_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
-    have n1 := (boundedConstructibleLowerStarComp ℓ
-      Fc.ι P.g).hom.naturality (c.traceClass Fc)
-    have n2 := lowerStar_map_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
+    have hn := lowerStar_map_comp_eqToHom_of_eq (ℓ := ℓ) (P.fixMap_ι Fc Fb).symm
       (c.traceClass Fc)
-    have n3 := (boundedConstructibleLowerStarComp ℓ
-      (P.fixMap Fc Fb) Fb.ι).inv.naturality (c.traceClass Fc)
-    simp only [Functor.comp_map] at n1 n3
-    refine comp_eq_comp_of_points _ _ _ _ _ _ _ _ _ _ _ _ _
-      ((boundedConstructibleLowerStarComp ℓ
-        Fc.ι P.g).hom.app (𝟙_ _))
-      (eqToHom (congrArg (fun r : Fc.F ⟶ P.D ↦
-        (boundedConstructibleLowerStar ℓ r).obj (𝟙_ _))
-          (P.fixMap_ι Fc Fb).symm))
-      ((boundedConstructibleLowerStarComp ℓ (P.fixMap Fc Fb)
-        Fb.ι).inv.app (𝟙_ _))
-      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
-          (Fc.ι ≫ P.g)).unit.app (𝟙_ _) ≫
-        (boundedConstructibleLowerStar ℓ (Fc.ι ≫ P.g)).map
-          (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-            (Fc.ι ≫ P.g))).inv) _ _
-      ?_ ?_ htr ?_
-    · rw [reassoc_of% n1, reassoc_of% n2, n3]
-    · simp only [Functor.map_comp, Category.assoc] at hpg
-      rw [reassoc_of% hpg, Iso.inv_hom_id_app, Category.comp_id]
-    · simpa only [Functor.map_comp, Category.assoc] using hhb
+    have h := comp_map_eq_of_point_square
+      (I := boundedConstructibleLowerStar ℓ Fc.ι)
+      (G := boundedConstructibleLowerStar ℓ P.g)
+      (H := boundedConstructibleLowerStar ℓ (P.fixMap Fc Fb))
+      (J := boundedConstructibleLowerStar ℓ Fb.ι)
+      (boundedConstructibleLowerStarComp ℓ Fc.ι P.g)
+      (boundedConstructibleLowerStarComp ℓ (P.fixMap Fc Fb) Fb.ι)
+      (c.traceClass Fc) (lowerStarDualizingComplexTrace ℓ (P.fixMap Fc Fb))
+      _ _ hn hpg hhb htr
+    simpa only [Adjunction.homEquiv_unit, traceClassPushforward, BorelMooreSection.pushforward,
+      lowerStarDualizingComplexTrace, Functor.map_comp, Category.assoc] using h
   rw [traceClass, ← key, Equiv.symm_apply_apply, Iso.hom_inv_id_assoc]
 
 end Correspondence.ProperPushforwardDiagram
