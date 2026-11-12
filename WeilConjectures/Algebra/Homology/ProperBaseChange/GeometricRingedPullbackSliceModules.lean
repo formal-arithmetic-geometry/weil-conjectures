@@ -351,7 +351,12 @@ private theorem sliceUnderlyingComparison
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     NatTrans.id_app, CategoryTheory.Functor.map_id, Category.assoc]
-  erw [Category.id_comp, Category.comp_id]
+  change IA.moduleUnderlying.hom.app
+      ((elementModulePullback (localCoefficientRings RY) A).obj M) ≫
+    𝟙 _ ≫ a.hom.app ((toSheaf (localCoefficientRings RY) ⋙
+      sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ≫
+    (elementSheafPullback B).map (I.moduleUnderlying.inv.app M) ≫ 𝟙 _ = _
+  simp only [Category.id_comp, Category.comp_id]
 
 -- The graph equations compare several composed underlying-sheaf functors.
 private noncomputable def sliceScalarSection
