@@ -39,9 +39,12 @@ private theorem map_hom_comp_of_symm_eq
   rw [Iso.symm_hom, ← F.map_comp, e.hom_inv_id, F.map_id]
 
 private theorem comp_of_right_inverse
-    {C : Type*} [Category C] {X Y Z : C} (f : X ⟶ Y) (b : Y ⟶ Z) (k : Z ⟶ Y)
-    (ε : X ⟶ Z) (h : f ≫ b = ε) (hk : b ≫ k = 𝟙 Y) : f = ε ≫ k := by
-  have hh := congrArg (· ≫ k) h
+    {C : Type*} [Category C] {X X₁ X₂ X₃ Y Z : C}
+    (f : X ⟶ X₁) (g : X₁ ⟶ X₂) (h : X₂ ⟶ X₃) (i : X₃ ⟶ Y)
+    (b : Y ⟶ Z) (k : Z ⟶ Y) (ε : X ⟶ Z)
+    (hn : f ≫ g ≫ h ≫ i ≫ b = ε) (hk : b ≫ k = 𝟙 Y) :
+    f ≫ g ≫ h ≫ i = ε ≫ k := by
+  have hh := congrArg (· ≫ k) hn
   simpa only [Category.assoc, hk, Category.comp_id] using hh
 
 private theorem transportedTensorComparison_square
@@ -321,8 +324,7 @@ private theorem normalizedReductionComparison_square
   have hcan := map_hom_comp_of_symm_eq DerivedCategory.Q (asIso beta)
     (coefficientScalarTensorIso l E Y n P Q) he
   refine ⟨hEP, hEQ, ?_⟩
-  apply comp_of_right_inverse _ (DerivedCategory.Q.map beta) _ _ ?_ hcan
-  simpa only [Category.assoc] using hnorm
+  exact comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
 
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
@@ -390,6 +392,7 @@ private theorem nativeReductionMonoidal
       exact h
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  have ht := transportedTensorComparison_square F e f m.mu
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
@@ -425,7 +428,7 @@ private theorem nativeReductionMonoidal
           F, integralDerivedReduction, AS, CoefficientClosedStructure.tensor,
           totalTensor, coefficientTotalTensor, ordinaryTensor,
           CategoryTheory.Functor.uncurry_obj_obj, Category.assoc] using
-          (transportedTensorComparison_square F e f m.mu
+          (ht
           (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))
           (TR.iso J R AR P Q hP hQ).hom
           (m.target.representative.app (⟨_, hEP⟩, ⟨_, hEQ⟩)) cS hcr hcs
