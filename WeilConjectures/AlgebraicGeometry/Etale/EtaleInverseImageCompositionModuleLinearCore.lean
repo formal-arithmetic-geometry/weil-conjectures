@@ -132,6 +132,30 @@ private theorem pushforward_comp_homEquiv_forget
   exact erase_map_id (f.sheafPushforwardContinuous AddCommGrpCat J₁ J₂)
     ((SheafOfModules.toSheaf S₂).obj ((SheafOfModules.pushforward ψ).obj F)) _ _ hh
 
+/-- The module unit forgets to the sheaf unit through the inverse-image comparison. -/
+private theorem pushforward_unit_forget
+    {C D : Type*} [Category C] [Category D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    (f : C ⥤ D) [f.IsContinuous J K]
+    (S : Sheaf J RingCat.{u + 1}) (T : Sheaf K RingCat.{u + 1})
+    (φ : S ⟶ (f.sheafPushforwardContinuous RingCat J K).obj T)
+    (L : SheafOfModules.{u + 1} S ⥤ SheafOfModules.{u + 1} T)
+    (l : Sheaf J AddCommGrpCat.{u + 1} ⥤ Sheaf K AddCommGrpCat.{u + 1})
+    (a : L ⊣ SheafOfModules.pushforward φ)
+    (b : l ⊣ f.sheafPushforwardContinuous AddCommGrpCat J K)
+    (e : L ⋙ SheafOfModules.toSheaf T ≅ SheafOfModules.toSheaf S ⋙ l)
+    (h : ∀ G F (k : L.obj G ⟶ F),
+      (SheafOfModules.toSheaf S).map (a.homEquiv G F k) ≫ 𝟙 _ =
+      b.homEquiv ((SheafOfModules.toSheaf S).obj G) ((SheafOfModules.toSheaf T).obj F)
+        (e.inv.app G ≫ (SheafOfModules.toSheaf T).map k)) (G : SheafOfModules.{u + 1} S) :
+    (SheafOfModules.toSheaf S).map (a.unit.app G) ≫
+      (f.sheafPushforwardContinuous AddCommGrpCat J K).map (e.hom.app G) =
+      b.unit.app ((SheafOfModules.toSheaf S).obj G) := by
+  have hh := unit_forget (SheafOfModules.toSheaf S) (SheafOfModules.toSheaf T)
+    L (SheafOfModules.pushforward φ) l (f.sheafPushforwardContinuous AddCommGrpCat J K)
+    a b (Iso.refl _) e h G
+  exact erase_middle_id _ _ _ hh
+
 /-- Pasting a naturality square with a unit comparison. -/
 private theorem paste_rectangle
     {A : Type*} [Category A] {X P Q R S : A}
@@ -499,13 +523,8 @@ theorem etaleInverseImageCompositionModuleLinearCore
   have hunit : ∀ G, UX.map (aUV.unit.app G) ≫
       puv.map (eUV.hom.app G) =
       auv.unit.app (UX.obj G) := by
-    let pUV : SheafOfModules.pushforward chi ⋙ UX ≅ UZ ⋙ puv := Iso.refl _
-    intro G
-    have hh := unit_forget UX UZ LUV (SheafOfModules.pushforward chi)
-      luv puv aUV auv pUV eUV hLUV G
     set_option backward.isDefEq.respectTransparency false in
-      exact erase_middle_id (UX.map (aUV.unit.app G)) (puv.map (eUV.hom.app G))
-        (auv.unit.app (UX.obj G)) hh
+      exact pushforward_unit_forget JX JZ h SX SZ chi LUV luv aUV auv eUV hLUV
   have hconj : conjugateEquiv auv (au.comp av) c0.hom = d0.hom :=
     congrArg Iso.inv
       (Etale.conjugateIsoEquiv_upperStarComp AddCommGrpCat.{u + 1} vMap uMap)
@@ -518,8 +537,8 @@ theorem etaleInverseImageCompositionModuleLinearCore
       (fun (q : puv ⟶ pv ⋙ pu) => auv.unit.app G ≫ q.app (luv.obj G)) hconj)
   refine ⟨d, c, ?_, ?_, hu⟩
   · intro F
-    ext W x
-    rfl
+    simpa only [Iso.refl_hom, NatTrans.id_app, Functor.map_id,
+      Category.id_comp, Category.comp_id] using hd F
   · intro G
     let ec := eV.app (LU.obj G) ≪≫ lv.mapIso (eU.app G)
     have hc : (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
