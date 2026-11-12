@@ -39,6 +39,16 @@ private theorem derivedOpenGluing_additive_of_preservesFiniteLimits
 -- when inferring preservation of binary products and zero morphisms separately.
 attribute [local instance] derivedOpenGluing_additive_of_preservesFiniteLimits
 
+private theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.Opens)
+    [Preadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U)).Additive := by
+  apply derivedOpenGluing_additive_of_preservesFiniteLimits
+
 private theorem compatible_composites
     {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
     (RU : C ⥤ CU) (RV : C ⥤ CV) (RW : C ⥤ CW)
