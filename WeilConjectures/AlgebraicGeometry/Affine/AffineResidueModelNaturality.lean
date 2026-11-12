@@ -60,7 +60,6 @@ noncomputable def affineResidueModelEquiv
     ((affinePerfectResidueModelIso W w U hwU hU).app ⟨K, hK⟩).toLinearEquiv.toAddEquiv).trans
     oK.toLinearEquiv.toAddEquiv
 
-set_option maxHeartbeats 800000 in
 -- The model isomorphisms compare multiple derived and residue-module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
