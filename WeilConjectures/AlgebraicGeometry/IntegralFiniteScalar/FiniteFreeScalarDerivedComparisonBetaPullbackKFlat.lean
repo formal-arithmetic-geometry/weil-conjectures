@@ -590,7 +590,7 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     dsimp only [wY] at hnat'' haug ⊢
     simp only [Functor.map_comp, Category.assoc] at haug ⊢
     apply Eq.trans hnat''
-    exact congrArg
+    simpa only [Category.assoc] using congrArg
       (fun k ↦ (scalarSixPull Λ f).map
         (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫
         F.mapDerivedCategoryFactors.hom.app (complex Λ S Y ⊗ C) ≫ k) haug
