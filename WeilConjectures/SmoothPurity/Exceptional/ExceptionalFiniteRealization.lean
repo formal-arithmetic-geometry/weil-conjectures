@@ -391,6 +391,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 attribute [local irreducible] integralExceptionalQuotient
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- The sectionwise linearity argument elaborates several sheaf constructions.
 /-- Direct-image realization, uniquely determined by the given set-sheaf comparison
