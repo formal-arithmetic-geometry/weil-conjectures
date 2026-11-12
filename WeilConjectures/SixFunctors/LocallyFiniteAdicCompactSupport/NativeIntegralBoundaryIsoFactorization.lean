@@ -53,8 +53,6 @@ attribute [local irreducible]
   WeilConjectures.LocallyFiniteAdicRealization.sections
   AlgebraicGeometry.Scheme.completedAdicDerivedChange
 
-set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Compare the cached finite-stage types without unfolding their constructions.
 /-- The boundary-isomorphism interface to the normalized component factorization.
 Source: Bhatt--Scholze, Remark 6.8.15.
@@ -109,26 +107,7 @@ theorem integralComponent_factorization_of_isos [G : NativeGeometry.{u} l]
     (Coefficient l (PadicAlgCl l) E) X).obj K
   let Q := (rationalization.{u, u} l (ULift.{u} (PadicAlgCl l))
     (finiteField l E) X).obj K
-  let U := (finiteSource l D hl P c target stage E).obj Q
-  let V := (finiteTarget l c source E).obj Q
-  have hfactor := integralComponent_factorization.{u} l D hl P c source target E change
-    hs ht K (U := U) (V := V)
-  have hh := hfactor (alpha.app Q)
-    (by
-      have b' := b.hom.app Ki
-      dsimp only [U, Q, Ki, finiteSource, rationalization, Functor.comp_obj,
-        PurCompactSupport.finiteTorIntegralInclusion, ObjectProperty.ι,
-        inducedFunctor, catToReflQuiver] at b' ⊢
-      exact b')
-    (by
-      have d' := d.hom.app Ki
-      dsimp only [V, Q, Ki, finiteTarget, rationalization, Functor.comp_obj,
-        PurCompactSupport.finiteTorIntegralInclusion, ObjectProperty.ι,
-        inducedFunctor, catToReflQuiver] at d' ⊢
-      exact d')
-    (by exact hb)
-    (by exact hd)
-    (by exact hm)
-  exact hh
+  exact integralComponent_factorization.{u} l D hl P c source target E change
+    hs ht K (alpha.app Q) (b.hom.app Ki) (d.hom.app Ki) hb hd hm
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
