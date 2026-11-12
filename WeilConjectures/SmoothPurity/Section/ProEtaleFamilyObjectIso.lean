@@ -252,6 +252,7 @@ theorem eq_proEtaleFamilyObjectIso
   exact (cancel_mono _).1 h
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- the proof chases a long diagram of naturality squares between derived categories
 /-- Blueprint `prop-pur-dnc-family-constancy` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
 with base change `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B`. The restriction of the constancy comparison,
