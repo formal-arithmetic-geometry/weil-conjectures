@@ -834,72 +834,73 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   apply Iso.ext
   apply NatTrans.ext
   funext N
-  trace_state
-  apply (cancel_mono (db.hom.app N)).mp
-  change (da.hom.app N ≫ t.hom.app N ≫ db.inv.app N) ≫ db.hom.app N = _
+  have h : da.hom.app N ≫ t.hom.app N =
+      (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N) ≫
+        (identityDirect T R).inv.app
+          ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N := by
+    ext V m
+    simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+      ModuleCat.comp_apply]
+    change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
+      (db.hom.app N).val.app V (((identityDirect T R).inv.app
+        ((proEtaleRingModuleDirectImage p R S c).obj N)).val.app V
+        ((((proEtaleRingModuleDirectImage p R S c).map
+          ((identityDirect P S).hom.app N)).val.app V) m))
+    have hda := ha N V.unop m
+    change (da.hom.app N).val.app V m = _ at hda
+    rw [hda]
+    have htr := direct_transport e.symm N V.unop
+      (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+        (𝟙 P) p).hom.app V.unop).op m)
+    change (t.hom.app N).val.app V
+        (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+          (𝟙 P) p).hom.app V.unop).op m) = _ at htr
+    rw [htr]
+    have hidP := identityDirect_hom_sections P S N ((proEtaleBaseChange p).obj V.unop) m
+    change (((proEtaleRingModuleDirectImage p R S c).map
+      ((identityDirect P S).hom.app N)).val.app V) m = _ at hidP
+    rw [hidP]
+    have hidT := identityDirect_inv_sections T R
+      ((proEtaleRingModuleDirectImage p R S c).obj N) V.unop
+      (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+        ((proEtaleBaseChange p).obj V.unop)).op m)
+    rw [hidT]
+    have hdb := hb N V.unop
+      (N.val.map ((proEtaleBaseChange p).map
+        ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
+        (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+          ((proEtaleBaseChange p).obj V.unop)).op m))
+    change (db.hom.app N).val.app V _ = _ at hdb
+    erw [hdb]
+    set_option backward.isDefEq.respectTransparency false in
+    have hcombine :
+        N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+            p (𝟙 T)).hom.app V.unop).op
+          (N.val.map ((proEtaleBaseChange p).map
+            ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
+            (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+              ((proEtaleBaseChange p).obj V.unop)).op m)) =
+        N.val.map (((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+            p (𝟙 T)).hom.app V.unop) ≫
+          (proEtaleBaseChange p).map
+            ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop) ≫
+          (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
+            ((proEtaleBaseChange p).obj V.unop)).op m := by
+      simp only [op_comp, PresheafOfModules.map_comp_apply]
+      rfl
+    rw [hcombine]
+    simp only [← PresheafOfModules.map_comp_apply, ← op_comp]
+    exact congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
+        (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
+      N.val.map k.op m)
+      (site_identity p (congrArg Sigma.fst e) V.unop)
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
-    Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-  erw [Category.id_comp ((identityDirect T R).inv.app
-    ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N)]
-  ext V m
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
-    ModuleCat.comp_apply]
-  change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
-    (db.hom.app N).val.app V (((identityDirect T R).inv.app
-      ((proEtaleRingModuleDirectImage p R S c).obj N)).val.app V
-      ((((proEtaleRingModuleDirectImage p R S c).map
-        ((identityDirect P S).hom.app N)).val.app V) m))
-  have hda := ha N V.unop m
-  change (da.hom.app N).val.app V m = _ at hda
-  rw [hda]
-  have htr := direct_transport e.symm N V.unop
-    (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-      (𝟙 P) p).hom.app V.unop).op m)
-  change (t.hom.app N).val.app V
-      (N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-        (𝟙 P) p).hom.app V.unop).op m) = _ at htr
-  rw [htr]
-  have hidP := identityDirect_hom_sections P S N ((proEtaleBaseChange p).obj V.unop) m
-  change (((proEtaleRingModuleDirectImage p R S c).map
-    ((identityDirect P S).hom.app N)).val.app V) m = _ at hidP
-  rw [hidP]
-  have hidT := identityDirect_inv_sections T R
-    ((proEtaleRingModuleDirectImage p R S c).obj N) V.unop
-    (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-      ((proEtaleBaseChange p).obj V.unop)).op m)
-  rw [hidT]
-  have hdb := hb N V.unop
-    (N.val.map ((proEtaleBaseChange p).map
-      ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
-      (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-        ((proEtaleBaseChange p).obj V.unop)).op m))
-  change (db.hom.app N).val.app V _ = _ at hdb
-  erw [hdb]
-  set_option backward.isDefEq.respectTransparency false in
-  have hcombine :
-      N.val.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-          p (𝟙 T)).hom.app V.unop).op
-        (N.val.map ((proEtaleBaseChange p).map
-          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
-          (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-            ((proEtaleBaseChange p).obj V.unop)).op m)) =
-      N.val.map (((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
-          p (𝟙 T)).hom.app V.unop) ≫
-        (proEtaleBaseChange p).map
-          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop) ≫
-        (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
-          ((proEtaleBaseChange p).obj V.unop)).op m := by
-    simp only [op_comp, PresheafOfModules.map_comp_apply]
-    rfl
-  rw [hcombine]
-  simp only [← PresheafOfModules.map_comp_apply, ← op_comp]
-  exact congrArg (fun k : (proEtaleBaseChange (p ≫ 𝟙 T)).obj V.unop ⟶
-      (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
-    N.val.map k.op m)
-    (site_identity p (congrArg Sigma.fst e) V.unop)
+    Category.assoc]
+  rw [h]
+  simp only [Iso.inv_hom_id_app, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
