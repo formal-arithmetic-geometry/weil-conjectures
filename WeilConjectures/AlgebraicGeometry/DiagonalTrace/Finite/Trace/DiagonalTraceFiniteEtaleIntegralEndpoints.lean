@@ -307,8 +307,11 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n))
     a.line_roots
   rw [hline]
+  dsimp only [abEvaluation, Functor.comp_map, evaluation_obj_map]
   apply Sheaf.hom_ext
   ext U z
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
   let T := diagonalSurface Y
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
@@ -324,9 +327,11 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (coefficientSystemMap l (ULift.{u} (Padic l)) T)
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
-  let v := ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
-      (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
+      (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
+    ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
+        (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
   let w := ((evalIso l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   have hw : HEq w v := restrictionInverseSection l T r n _ U v
@@ -334,10 +339,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
-  change ((cartierProRootMap _ _ _ _ _ _).hom.app U)
-    ((k.lineForget.hom.app (op n)).hom.app U w) = _
-  rw [ht, hi]
-  rfl
+  exact congrArg ((cartierProRootMap _ _ _ _ _ _).hom.app U) (ht.trans hi)
 
 private theorem normalizedLift_glue {D : Type*} [Category D] [HasShift D ℤ]
     {I K X Y R S A B A₀ B₀ L : D}
@@ -564,6 +566,8 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (geoCartierConstant (diagonalResidue.{u} l n) (diagonalSurface Y)) =
       siteIntegralGenerator (diagonalResidue.{u} l n) (diagonalSurface Y) := by
   apply constantAb_ext_one
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
   let T := diagonalSurface Y
   let U := op (Scheme.ProEt.mk (𝟙 T))
   let z := (toSheafify (Scheme.ProEt.topology T)
