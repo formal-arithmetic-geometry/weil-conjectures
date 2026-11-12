@@ -23,6 +23,17 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
+-- Extensionality on pure tensors keeps tensor induction independent of the stalk constructions.
+private theorem tensor_germ_hom_ext
+    {R M N : Type u} [CommRing R] [AddCommGroup M] [AddCommGroup N]
+    [Module R M] [Module R N] {Z : AddCommGrpCat.{u}}
+    (a b : AddCommGrpCat.of (M ⊗[R] N) ⟶ Z)
+    (h : ∀ m n, a (m ⊗ₜ[R] n) = b (m ⊗ₜ[R] n)) : a = b := by
+  ext x
+  induction x using TensorProduct.inductionOn with
+  | tmul m n => exact h m n
+  | add x y hx hy => simp only [map_add, hx, hy]
+
 set_option profiler true in
 /-- Compatible ordinary tensor coordinates, pinned to the actual open restriction map.
 
@@ -146,14 +157,12 @@ theorem exists_openOrdinaryTensor_germ_coordinates
   obtain ⟨τ, hτ⟩ := exists_semilinearTensorComplexIso _ _ _ eC hCA _ _ α hα
   refine ⟨eR, _, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ?_⟩
   intro n
-  ext x
-  induction x using TensorProduct.inductionOn with
-  | tmul c q =>
-    simp only [AddCommGrpCat.comp_apply]
-    erw [hτ n (show C z from c) q]
-    have hq := ConcreteCategory.congr_hom (hαcoord n) q
-    erw [hq]
-    exact hpure n c q
-  | add x y hx hy => simp only [map_add, hx, hy]
+  apply tensor_germ_hom_ext
+  intro c q
+  let φ₁ := (algebraMap (A₁ ⊗[R₁] B₁) C₁).comp (algebraMap A₁ (A₁ ⊗[R₁] B₁))
+  let t := F.map ((tensorStalkIso f f' g g' sq z.val P).hom.f n)
+  have hq := ConcreteCategory.congr_hom (hαcoord n) q
+  exact (congrArg t (hτ n c q)).trans
+    ((congrArg (fun q : K.X n ↦ t (eC c ⊗ₜ[A₁,φ₁] q)) hq).trans (hpure n c q))
 
 end AlgebraicGeometry
