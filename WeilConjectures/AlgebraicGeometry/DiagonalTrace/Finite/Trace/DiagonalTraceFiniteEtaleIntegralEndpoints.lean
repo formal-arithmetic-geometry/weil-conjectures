@@ -332,8 +332,8 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
         (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
-  let w := ((evalIso l T r n).inv.app
-    (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
+  let w : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U :=
+    ((evalIso l T r n).inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   have hw : HEq w v := by
     dsimp only [w, evalIso]
     exact restrictionInverseSection l T r n (lineModule l (ULift.{u} (Padic l)) c) U v
@@ -342,6 +342,7 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
+  dsimp only [w, v, η, x'] at ht hi
   exact congrArg ((cartierProRootMap _ _ _ _ _ _).hom.app U) (ht.trans hi)
 
 private theorem normalizedLift_glue {D : Type*} [Category D] [HasShift D ℤ]
@@ -577,8 +578,10 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
       (ULift.up 1)
   let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z
-  let x := ((evalIso l T r n).inv.app
-    (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
+  let x : ((r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T))).obj
+      (op n)).obj.obj U :=
+    ((evalIso l T r n).inv.app
+      (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
   have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists.choose_spec
       U (ULift.up 1)
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
