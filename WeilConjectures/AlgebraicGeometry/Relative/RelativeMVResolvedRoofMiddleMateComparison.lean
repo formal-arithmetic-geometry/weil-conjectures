@@ -27,7 +27,7 @@ attribute [local instance 2000] schemeMVModuleAbelian
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh RingedSpace.moduleDirectImage
 
-set_option maxHeartbeats 900000 in
+set_option profiler true in
 -- The middle-vertex type contains fixed complex and derived functor comparisons.
 /-- The diagonal middle component of the normalized resolved row roof has the
 specified mate comparison. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T.
