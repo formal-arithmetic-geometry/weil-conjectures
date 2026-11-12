@@ -120,10 +120,12 @@ CX --Gx--> CX'
 ```
 with comparisons `θ₁ : Gz ⋙ Lg' ≅ Lg ⋙ Gy` and `θ₂ : Gy ⋙ Lf' ≅ Lf ⋙ Gx`, and a comparison
 `θ : Gz ⋙ Lfg' ≅ Lfg ⋙ Gx` of the outer square, compatible with them through isomorphisms
-`c : Lfg ≅ Lg ⋙ Lf` and `c' : Lfg' ≅ Lg' ⋙ Lf'`. Let `d : Rf ⋙ Rg ≅ Rfg` and
-`d' : Rf' ⋙ Rg' ≅ Rfg'` be the conjugates of `c` and `c'` (expressed by the counit identities
-`hd`, `hd'`). Then the exchange morphism `bc` of `θ` is the exchange morphism `bc₁` of `θ₁` at
-`Rf K` followed by `Rg'` of the exchange morphism `bc₂` of `θ₂` at `K`, through `d` and `d'`. -/
+`c : Lfg ≅ Lg ⋙ Lf` and `c' : Lfg' ≅ Lg' ⋙ Lf'` (the compatibility `hc` is stated for the
+inverse comparisons `θ₁f`, `θ₂f`, `θf`, those of the transposed squares). Let
+`d : Rf ⋙ Rg ≅ Rfg` and `d' : Rf' ⋙ Rg' ≅ Rfg'` be the conjugates of `c` and `c'`
+(expressed by the counit identities `hd`, `hd'`). Then the exchange morphism `bc` of `θ` is the
+exchange morphism `bc₁` of `θ₁` at `Rf K` followed by `Rg'` of the exchange morphism `bc₂` of `θ₂`
+at `K`, through `d` and `d'`. -/
 lemma exchangeRight_app_paste_vert (af : Lf ⊣ Rf) (ag : Lg ⊣ Rg) (afg : Lfg ⊣ Rfg)
     (af' : Lf' ⊣ Rf') (ag' : Lg' ⊣ Rg') (afg' : Lfg' ⊣ Rfg')
     (θ₁ : Gz ⋙ Lg' ≅ Lg ⋙ Gy) (θ₂ : Gy ⋙ Lf' ≅ Lf ⋙ Gx) (θ : Gz ⋙ Lfg' ≅ Lfg ⋙ Gx)
