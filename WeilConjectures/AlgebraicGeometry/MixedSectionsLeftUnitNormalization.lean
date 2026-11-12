@@ -134,12 +134,6 @@ private theorem finish_unit_paste {C D : Type*} [Category C] [Category D]
   simp only [Category.assoc]
   rw [← S.map_comp, ← S.map_comp, hf, S.map_comp]
 
--- Reuse the sheaf-module structure when elaborating the derived functors and units.
-private noncomputable abbrev mixedSectionsSheafAbelian (X : Scheme.{u}) :
-    Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
-
-attribute [local instance] mixedSectionsSheafAbelian
-
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
@@ -222,6 +216,7 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
+  clear_value K
   have he := (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
