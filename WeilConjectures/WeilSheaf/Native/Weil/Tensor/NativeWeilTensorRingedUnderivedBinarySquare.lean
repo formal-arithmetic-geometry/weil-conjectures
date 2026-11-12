@@ -187,7 +187,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
   (D : NativeWeilTensorRingedAssociatorChainData k₀ l X T)
 
-set_option maxHeartbeats 1200000 in
 -- Compare the two concrete sheaf tensor constructions in the evaluation square.
 private theorem binaryMate_forget
     (P Q I : RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R)
@@ -232,9 +231,7 @@ private theorem binaryMate_forget
   rw [hc, Category.assoc, ← reassoc_of% hn]
   exact congrArg (D.b.forget.map (f ⊗ₘ 𝟙 P) ≫ ·) he
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Compare the two site tensor instances through the bridge.
-set_option maxHeartbeats 1200000 in
 -- The normalized mates involve both concrete tensor constructions.
 /-- The two evaluation-normalized underived tensor comparisons form a binary square.
 Source: Stacks 06YS and 06YU
