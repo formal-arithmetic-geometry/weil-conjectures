@@ -139,7 +139,12 @@ theorem exists_supported_overlap_restriction_data
           Nonempty ((schemeOpenRestriction V.toScheme U).mapDerivedCategory ⋙ e.functor ≅ SV) ∧
           Nonempty (e.functor.obj (G ⊞ G⟦(1 : ℤ)⟧) ≅ SW.obj (F ⊞ F⟦(1 : ℤ)⟧)) := by
   classical
+  have : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace)) :=
+    inferInstance
   let U : V.toScheme.Opens := V.ι ⁻¹ᵁ W
+  have : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
   have hcU : IsCompact (U : Set V.toScheme) := by
     apply (Topology.IsEmbedding.subtypeVal.isCompact_iff).mpr
     have he : Subtype.val '' (U : Set V.toScheme) = (V : Set X) ∩ W := by

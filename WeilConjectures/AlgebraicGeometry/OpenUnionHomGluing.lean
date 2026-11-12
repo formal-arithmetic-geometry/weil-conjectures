@@ -93,8 +93,14 @@ theorem exists_open_union_hom
       ∃ (α : L.obj G ⟶ L.obj E),
         PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a ∧
         PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b := by
-  dsimp only
-  intro a b hab
+  intro L JW JV SW SV sW sV PW PV kW kV a b hab
+  have : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace)) :=
+    inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace)) :=
+    inferInstance
   let U := (W ⊔ V).ι ⁻¹ᵁ W
   let T := (W ⊔ V).ι ⁻¹ᵁ V
   have hcover : U ⊔ T = ⊤ := by
@@ -105,13 +111,10 @@ theorem exists_open_union_hom
   let := hU
   let := hT
   let := hI
-  let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory
-  let PW := (schemeOpenOverlapRestriction X
-    (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory
-  let PV := (schemeOpenOverlapRestriction X
-    (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory
-  let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)
-  let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)
+  have : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings (U ⊓ T).toScheme.toRingedSpace)) :=
+    inferInstance
   let a' := eW.functor.preimage
     (qW.hom.app (L.obj G) ≫ kW.hom.app G ≫ a ≫
       kW.inv.app E ≫ qW.inv.app (L.obj E))
