@@ -75,7 +75,7 @@ private lemma full_mem (n j : ℕ) (k : ℤ) (h : 2 * j + 2 ≤ n)
     (if 2 * j + 2 ≤ n then LinearMap.range (full K j k).hom else ⊥) ⊔
       (if 2 * j + 1 ≤ n then LinearMap.range (lower K S e j k).hom else ⊥)) j)
   apply Submodule.mem_sup_left
-  simpa only [if_pos h] using (LinearMap.mem_range_self (full K j k).hom x)
+  simpa only [ite_eq_left h] using (LinearMap.mem_range_self (full K j k).hom x)
 
 private lemma lower_mem (n j : ℕ) (k : ℤ) (h : 2 * j + 1 ≤ n)
     (x : (S j).X₁.X (k + j)) : lower K S e j k x ∈ term K S e n k := by
@@ -83,7 +83,7 @@ private lemma lower_mem (n j : ℕ) (k : ℤ) (h : 2 * j + 1 ≤ n)
     (if 2 * j + 2 ≤ n then LinearMap.range (full K j k).hom else ⊥) ⊔
       (if 2 * j + 1 ≤ n then LinearMap.range (lower K S e j k).hom else ⊥)) j)
   apply Submodule.mem_sup_right
-  simpa only [if_pos h] using (LinearMap.mem_range_self (lower K S e j k).hom x)
+  simpa only [ite_eq_left h] using (LinearMap.mem_range_self (lower K S e j k).hom x)
 
 private lemma full_d (j : ℕ) (k : ℤ) :
     full K j k ≫ (K.total (ComplexShape.up ℤ)).d k (k + 1) =

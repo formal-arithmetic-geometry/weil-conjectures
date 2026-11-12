@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Realization of a single invertible derived action
 
@@ -228,7 +229,7 @@ private theorem action_comparison
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{wF} (IsoAlgebra F)]
     (Y : CochainComplex C ℤ) (τ : (F.mapHomologicalComplex (.up ℤ)).obj Y ≅ Y) :
     let B := complexOfAction F Y τ
-    ((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
       Functor.mapDerivedCategoryNatIso (strNatIso F)).hom.app (DerivedCategory.Q.obj B) ≫
         (forget F).mapDerivedCategoryFactors.hom.app B =
       F.mapDerivedCategory.map ((forget F).mapDerivedCategoryFactors.hom.app B) ≫
@@ -242,14 +243,14 @@ private theorem action_comparison
   have hid : (Functor.mapHomologicalComplexCompIso (Iso.refl (forget F ⋙ F))
       (.up ℤ)).hom.app B = 𝟙 _ := by rfl
   erw [hid, Functor.map_id, Category.comp_id] at hc
-  change ((Functor.mapDerivedCategoryCompIso (forget F) F).hom.app
+  change ((Functor.mapDerivedCategoryCompIso (forget F) F).inv.app
       (DerivedCategory.Q.obj B)) ≫
     F.mapDerivedCategory.map ((forget F).mapDerivedCategoryFactors.hom.app B) ≫
       F.mapDerivedCategoryFactors.hom.app Y = _ at hc
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [h, he, ← hc]
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app_assoc]
+  erw [Iso.hom_inv_id_app_assoc]
 
 /-- Realize a bounded derived object with its prescribed invertible twisted action in
 the ordinary derived category of fixed pairs, preserving its cohomology intervals
@@ -300,7 +301,7 @@ theorem exists_cyclicDerivedActionRealization
     (vN : F.mapDerivedCategory.obj N ≅ N) :
     ∃ (M : DerivedCategory (IsoAlgebra F))
       (e : (forget F).mapDerivedCategory.obj M ≅ N),
-      ((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
         Functor.mapDerivedCategoryNatIso (F := forget F ⋙ F) (G := forget F)
           (NatIso.ofComponents (fun (K : IsoAlgebra F) ↦ K.str)
             (fun f ↦ f.hom.h))).hom.app M ≫ e.hom =
@@ -331,7 +332,7 @@ theorem exists_cyclicDerivedActionRealization
   refine ⟨DerivedCategory.Q.obj B, e, ?_, ?_, ?_⟩
   · change _ ≫ (α.hom ≫ β.hom) = _
     rw [← Category.assoc]
-    change (((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫
+    change ((Functor.mapDerivedCategoryCompIso (forget F) F ≪≫
       Functor.mapDerivedCategoryNatIso (strNatIso F)).hom.app _ ≫ α.hom) ≫ β.hom = _
     have hcomp := action_comparison F Y τ
     change _ ≫ α.hom = F.mapDerivedCategory.map α.hom ≫

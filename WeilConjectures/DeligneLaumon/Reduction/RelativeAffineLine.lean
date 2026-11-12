@@ -324,9 +324,8 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
   have hloc (x : X'.finitePoints) (n : ℕ) :
       (starRingEnd ℂ) (ι (LinearMap.trace _ _ ((E'.stalk x).frobeniusEnd ^ n))) =
         ι (LinearMap.trace _ _ ((E'.stalk x).frobeniusEnd ^ n)) := by
-    rw [LinearMap.trace_pow_eq_of_charpoly_eq
-      (WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar g E x), ← pow_mul]
-    exact LinearMap.conj_trace_pow_of_charpolyRev ι _ (hreal _) _
+    exact (FrobeniusModule.isReal_iff_forall_trace_pow ι (E'.stalk x)).1
+      (hreal.upperStar g x) n
   -- the trace formula: the alternating traces on the cohomology of the fibre are real
   have htr (m : ℕ) (hm : m ≠ 0) : (starRingEnd ℂ) (ι (LinearMap.trace _ _
       ((E'.compactlySupportedCohomology 2).frobeniusEnd ^ m) - LinearMap.trace _ _

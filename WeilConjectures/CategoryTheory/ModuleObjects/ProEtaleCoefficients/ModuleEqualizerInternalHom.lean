@@ -92,7 +92,7 @@ private noncomputable def equalizerAdjTensorRightIso (N : Mod C R) :
     apply colimit.hom_ext
     intro j
     simp only [id_eq, Iso.trans_hom, tensorLeft, Functor.comp_map, colim_map, Category.assoc,
-      ι_colimMap_assoc, HasColimit.isoOfNatIso_ι_hom_assoc]
+      ι_colimMap_assoc, HasColimit.ι_isoOfNatIso_hom_assoc]
     cases j <;> apply Mod.hom_ext <;>
       simp [equalizerAdjTensorCofork, equalizerAdjTensorπ, tensorObjπ_whiskerRight])
 

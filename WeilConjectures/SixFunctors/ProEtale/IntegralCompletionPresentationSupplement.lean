@@ -68,10 +68,10 @@ def derivedSquare (n : ℕ) (e : FiniteEncoding l E X n)
   letI := scalarReductionRestrictionLimits.{u, u} l E X n
   letI := scalarReductionRestrictionColimits.{u, u} l E X n
   (Functor.mapDerivedCategoryCompIso
-    (Mod.comap (AdicCompletion.quotient l E X n)) (A.modules.functor)).symm ≪≫
+    (Mod.comap (AdicCompletion.quotient l E X n)) (A.modules.functor)) ≪≫
     Functor.mapDerivedCategoryNatIso a ≪≫
-      Functor.mapDerivedCategoryCompIso e.ordinary.functor
-        (scalarReductionRestriction.{u, u} l E X n)
+      (Functor.mapDerivedCategoryCompIso e.ordinary.functor
+        (scalarReductionRestriction.{u, u} l E X n)).symm
 
 /-- A comparison in D(R_n), retaining the finite coefficient action.
 Source: Stacks 06YY, derived tensor under an isomorphism of coefficients
@@ -144,19 +144,19 @@ private theorem map_roos_complete
   have hfirst : F.map (Pi.lift p) ≫ B.hom = Pi.lift q := by
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, hB, Pi.lift_π]
-    rw [← Category.assoc, ← F.map_comp, Pi.lift_π, hp]
+    simp only [Category.assoc, hB, Pi.lift_comp_π]
+    rw [← Category.assoc, ← F.map_comp, Pi.lift_comp_π, hp]
   have hmiddle : F.map (towerTransitionEndomorphism t) ≫ B.hom =
       B.hom ≫ towerTransitionEndomorphism s := by
     apply Pi.hom_ext
     intro n
     simp only [Category.assoc, hB, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-      Pi.lift_π, Functor.map_sub]
+      Pi.lift_comp_π, Functor.map_sub]
     simp only [reassoc_of% hB]
     erw [F.map_id, Category.id_comp]
     congr 1
-    rw [← F.map_comp_assoc, Pi.lift_π, Functor.map_comp, Category.assoc, ht]
+    rw [← F.map_comp_assoc, Pi.lift_comp_π, Functor.map_comp, Category.assoc, ht]
   refine ⟨B.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app K, ?_⟩
   apply Pretriangulated.isomorphic_distinguished _ (F.map_distinguished _ hT) _
   refine Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) B.symm B.symm ?_ ?_ ?_

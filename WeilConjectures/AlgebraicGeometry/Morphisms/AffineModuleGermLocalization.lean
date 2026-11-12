@@ -7,10 +7,12 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The module germ map on an affine open is a localization
 
@@ -112,8 +114,7 @@ theorem isLocalizedModule_affine_germ
         have h := congrArg (F.presheaf.map (homOfLE hgV).op) heq
         rw [← Functor.map_comp_apply, ← Functor.map_comp_apply] at h
         rw [map_sub, sub_eq_zero]
-        convert h using 1 <;>
-          exact congrArg (fun i ↦ F.presheaf.map i _) (Subsingleton.elim _ _)
+        convert h using 1
       obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_isAffineOpen F U.2 g (m₁ - m₂) hz
       refine ⟨⟨g ^ n, S.pow_mem (hprime g hxg) n⟩, ?_⟩
       exact sub_eq_zero.mp ((smul_sub _ _ _).symm.trans hn)

@@ -81,6 +81,7 @@ theorem Proj.isAffineOpen_basicOpen_and_nonempty_iso {f : A} {m : ℕ} (f_deg : 
       Nonempty ((Proj.basicOpen 𝒜 f).toScheme ≅ Spec (.of (Away 𝒜 f))) :=
   ⟨Proj.isAffineOpen_basicOpen 𝒜 f f_deg hm, ⟨Proj.basicOpenIsoSpec 𝒜 f f_deg hm⟩⟩
 
+
 namespace Proj
 
 variable {X Y : Scheme.{u}}

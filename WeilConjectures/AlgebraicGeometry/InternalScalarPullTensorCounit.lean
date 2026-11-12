@@ -55,8 +55,7 @@ private theorem cochain_tensor_comparison_isIso
           (𝟙 ((HomotopyCategory.quotient _ _).obj (P ⊗ Q)))) ≫ 𝟙 _ = _
     simp only [id_tensorHom_id, Category.comp_id, Category.id_comp]
     erw [DerivedCategory.Qh.map_id, Category.comp_id]
-  rw [he]
-  assumption
+  rwa [he]
 
 private theorem tensor_normalization_unique (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (t : TensorNormalization a T) (ht : TensorNormalized a T t) :

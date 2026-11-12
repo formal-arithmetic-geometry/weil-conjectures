@@ -26,7 +26,6 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
 open MonoidalCategory TensorProduct
 namespace WeilConjectures
 attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
-  CategoryTheory.Functor.mapHomologicalComplex
 attribute [local irreducible] SheafOfModules.monoidalCategory
   proEtaleTensorPullbackTotalIso CategoryTheory.Functor.mapBifunctorHomologicalComplex
   HomologicalComplex₂.total

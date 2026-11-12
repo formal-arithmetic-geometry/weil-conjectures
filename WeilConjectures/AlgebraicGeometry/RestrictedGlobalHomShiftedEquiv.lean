@@ -112,7 +112,6 @@ theorem restrictedGlobalHom_shiftedHom_equiv
           dsimp only at h
           simp only [Quiver.Hom.unop_op, Category.id_comp] at h
           simp only [AddEquiv.trans_apply]
-          convert h using 1
-          all_goals rfl))
+          convert h using 1))
 
 end AlgebraicGeometry

@@ -91,6 +91,7 @@ theorem IsCompact.eq_sInter_isOpen_isCompact_of_stableUnderGeneralization [Spect
       (fun y hy hxy ↦ hxs (hgen hxy hy))
   exact hxV (hx V ⟨hVopen, hVcompact, hsV⟩)
 
+
 variable {X} in
 theorem generalizationHull.eq_sInter_of_isCompact [SpectralSpace X] {s : Set X} (hs : IsCompact s) :
     ∃ S ⊆ {U : Set X | IsOpen U ∧ IsCompact U}, (generalizationHull s) = ⋂₀ S := by

@@ -21,7 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory
-attribute [local implicit_reducible] Equivalence.mapDerivedCategory Functor.mapHomologicalComplex
+attribute [local implicit_reducible] Equivalence.mapDerivedCategory
 
 section
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -35,7 +35,7 @@ private theorem derived_counit_factors (R : C ≌ D)
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex R.counitIso.hom (.up ℤ)).app K) =
     R.mapDerivedCategory.counitIso.hom.app (DerivedCategory.Q.obj K) := by
-  change _ = (Functor.mapDerivedCategoryCompIso R.inverse R.functor).inv.app _ ≫
+  change _ = (Functor.mapDerivedCategoryCompIso R.inverse R.functor).hom.app _ ≫
     (Functor.mapDerivedCategoryNatIso R.counitIso).hom.app _ ≫
     (Functor.mapDerivedCategoryIdIso D).hom.app _
   have hid : (Functor.mapDerivedCategoryIdIso D).hom.app (DerivedCategory.Q.obj K) =
@@ -52,14 +52,12 @@ private theorem derived_counit_factors (R : C ≌ D)
       ((DerivedCategory.quotientCompQhIso D).hom.app K))).mp
     rw [hn]
     congr 1
-    simp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift]
+    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift]
     repeat erw [Functor.map_id]
-    repeat erw [Category.comp_id]
+    erw [Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
   rw [hid, Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem derived_unitInv_factors (R : C ≌ D)
     [R.functor.Additive] [R.inverse.Additive] (K : CochainComplex C ℤ) :
@@ -87,7 +85,7 @@ private theorem derived_unitInv_factors (R : C ≌ D)
     (R.functor.mapDerivedCategoryFactors.hom.app K)
   dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at hn
   convert hn using 1 <;>
-    simp only [Equivalence.mapDerivedCategory, Equivalence.mk, Iso.trans_hom, Iso.symm_hom,
+    simp only [Equivalence.mapDerivedCategory, Equivalence.mk, Iso.trans_hom,
       NatTrans.comp_app, Functor.comp_obj, Functor.id_obj, Category.assoc]
 end
 
@@ -123,8 +121,8 @@ theorem mapDerivedCategory_cancelEquivalence (q : P ≅ H ⋙ L ⋙ R.functor) :
     let δ := Functor.isoWhiskerRight q R.inverse ≪≫
       Functor.isoWhiskerLeft H (Functor.isoWhiskerLeft L R.unitIso.symm) ≪≫
       Functor.isoWhiskerLeft H (Functor.rightUnitor L)
-    let o := Functor.mapDerivedCategoryCompIso H (L ⋙ R.functor) ≪≫
-      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L R.functor)
+    let o := (Functor.mapDerivedCategoryCompIso H (L ⋙ R.functor)).symm ≪≫
+      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L R.functor).symm
     (Functor.mapDerivedCategorySquareIso δ).hom =
       Functor.whiskerRight ((Functor.mapDerivedCategoryNatIso q).hom ≫ o.hom)
         R.inverse.mapDerivedCategory ≫
@@ -134,8 +132,8 @@ theorem mapDerivedCategory_cancelEquivalence (q : P ≅ H ⋙ L ⋙ R.functor) :
   let δ := Functor.isoWhiskerRight q R.inverse ≪≫
     Functor.isoWhiskerLeft H (Functor.isoWhiskerLeft L R.unitIso.symm) ≪≫
     Functor.isoWhiskerLeft H (Functor.rightUnitor L)
-  let o := Functor.mapDerivedCategoryCompIso H (L ⋙ R.functor) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L R.functor)
+  let o := (Functor.mapDerivedCategoryCompIso H (L ⋙ R.functor)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L R.functor).symm
   apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso A (.up ℤ))
   intro K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
@@ -150,7 +148,7 @@ theorem mapDerivedCategory_cancelEquivalence (q : P ≅ H ⋙ L ⋙ R.functor) :
     dsimp only [o, a, T, Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
     simp only [Functor.map_comp, Category.assoc]
-    erw [← (Functor.mapDerivedCategoryCompIso L R.functor).hom.naturality_assoc]
+    erw [← (Functor.mapDerivedCategoryCompIso L R.functor).inv.naturality_assoc]
     erw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
       Functor.mapDerivedCategoryCompIso_hom_app_factors]
   have hh : (Functor.mapDerivedCategoryNatIso q).hom.app (DerivedCategory.Q.obj K) ≫

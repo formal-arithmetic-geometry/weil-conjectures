@@ -95,7 +95,11 @@ theorem Sheaf.hasLocallyTrivialRelations_lan (hG : CoverPreserving J K G)
   have hnat := NatTrans.naturality_apply (G.op.leftKanExtensionUnit F.obj) f.op (y' j)
   change _ = P.map (G.op.map f.op) _ at hnat
   rw [← hnat, hyz j]
-  simp [map_sum, map_smul]
+  change (P.map h'.op).hom
+      (((G.op.leftKanExtensionUnit F.obj).app (op W)).hom (∑ m, b j m • z m)) =
+    ∑ m, b j m • (P.map h'.op).hom
+      (((G.op.leftKanExtensionUnit F.obj).app (op W)).hom (z m))
+  simp only [map_sum, map_smul]
 
 variable [K.HasSheafCompose (forget (ModuleCat.{u + 1} R))]
   [K.WEqualsLocallyBijective (ModuleCat.{u + 1} R)]

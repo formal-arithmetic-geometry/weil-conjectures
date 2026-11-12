@@ -118,7 +118,6 @@ theorem injective_ses_homotopy_boundary_lift
         DerivedCategory.Plus.QhCompιIsoιCompQh, ObjectProperty.liftCompιIso]
       repeat first | erw [Category.id_comp] | erw [Category.comp_id] |
         erw [Functor.map_id]
-      rfl
     rw [he, he] at hn
     simpa only [f, d, ShiftedHom.comp_map] using hn
   · let σv (n : ℤ) : ((S.map (v.mapHomologicalComplex (.up ℤ))).map
@@ -129,7 +128,6 @@ theorem injective_ses_homotopy_boundary_lift
       ext n
       simp [ShiftedHom.map, d, CochainComplex.cocycleOfDegreewiseSplit, σv,
         Functor.map_comp]
-      rfl
     let e₁ := HomotopyCategory.Plus.quotientCompιIso A
     let e₂ := DerivedCategory.Plus.QhCompιIsoιCompQh B
     let e₃ : v.mapHomotopyCategoryPlus ⋙ HomotopyCategory.Plus.ι B ≅
@@ -187,7 +185,6 @@ theorem injective_ses_homotopy_boundary_lift
         Functor.mapHomotopyCategoryFactors]
       repeat first | erw [Category.id_comp] | erw [Category.comp_id] |
         erw [Functor.map_id]
-      rfl
     rw [he, he] at hn
     simpa only [f, ShiftedHom.comp_map, Functor.map_id, Category.id_comp,
       Category.comp_id] using hn

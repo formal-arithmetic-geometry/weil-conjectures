@@ -57,7 +57,7 @@ private lemma of_finite_affine_flat_family [IsZariskiLocalAtTarget P]
   intro j
   have hsq := (IsPullback.of_hasPullback (pullback.fst p f) (Sigma.ι V j)).paste_horiz
     (IsPullback.of_hasPullback p f).flip
-  have hj : Sigma.ι V j ≫ p = h j := Sigma.ι_desc _ _
+  have hj : Sigma.ι V j ≫ p = h j := Sigma.ι_comp_desc _ _
   rw [hj] at hsq
   have key : P (pullback.snd (pullback.fst p f) (Sigma.ι V j)) := by
     rw [← hsq.isoPullback_hom_snd, P.cancel_left_of_respectsIso]

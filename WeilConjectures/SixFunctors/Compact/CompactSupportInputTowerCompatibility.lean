@@ -15,6 +15,7 @@ import all WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.SixFunctors.Normalized.NormalizedDVRKFlatTransition
 import all WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import all Mathlib.Algebra.Homology.Localization
 
 /-! Compatibility of the compact-support input reduction with the completed tower. -/
 
@@ -99,6 +100,44 @@ private theorem normalizeRepresentativeTransition
 
 attribute [local irreducible] Functor.mapDerivedCategory
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The normalized comparison is the representative comparison. -/
+private theorem normalizedDVRKFlatComparison_eq (m : ℕ)
+    (P : CochainComplex (scalarReductionSource.{u, u} l E X) ℤ) :
+    normalizedDVRKFlatComparison.{u, u} l E X m P =
+      sfReductionRepresentativeComparison l E X m P := by
+  unfold normalizedDVRKFlatComparison sfReductionRepresentativeComparison
+  rw [cast_eq]
+  erw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  have e1 : (scalarReductionDerivedExtension l E X m).map
+      ((DerivedCategory.quotientCompQhIso _).inv.app P) = 𝟙 _ :=
+    CategoryTheory.Functor.map_id _ _
+  have e2 : DerivedCategory.Qh.map
+      (((scalarReductionExtension l E X m).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) =
+        𝟙 _ :=
+    CategoryTheory.Functor.map_id _ _
+  have e3 : (DerivedCategory.quotientCompQhIso (scalarReductionTarget l E X m)).hom.app
+      (unrestrictedTowerFiniteComplex l E X m P) = 𝟙 _ := rfl
+  have e4 : (scalarReductionRestriction l E X m).mapDerivedCategory.map
+      ((DerivedCategory.quotientCompQhIso (scalarReductionTarget l E X m)).hom.app
+        (((scalarReductionExtension l E X m).mapHomologicalComplex (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P).as)) = 𝟙 _ :=
+    CategoryTheory.Functor.map_id _ _
+  have e5 : (DerivedCategory.quotientCompQhIso (scalarReductionSource l E X)).inv.app
+      (((scalarReductionRestriction l E X m).mapHomologicalComplex (.up ℤ)).obj
+        (((scalarReductionExtension l E X m).mapHomologicalComplex (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P).as)) = 𝟙 _ := rfl
+  have e6 : DerivedCategory.Qh.map
+      (((scalarReductionRestriction l E X m).mapHomotopyCategoryFactors (.up ℤ)).inv.app
+        (((scalarReductionExtension l E X m).mapHomologicalComplex (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P).as)) = 𝟙 _ :=
+    CategoryTheory.Functor.map_id _ _
+  rw [e1, e2, e3, e4, e5, e6]
+  simp only [Category.id_comp]
+  repeat erw [Category.comp_id]
+  rfl
+
 private theorem sectionTransitionAdjoint
     (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (n : ℕ) :
     sfDerivedReductionTransition l E X n =
@@ -127,9 +166,11 @@ private theorem sectionTransitionAdjoint
     (DerivedCategory.Q.map (integralTowerTransition l E X D hl P n)) h
   have hf := congrArg (fun f ↦ DerivedCategory.Q.map f)
     (transition_eq l E X D hl P n)
-  simpa only [normalizedDVRKFlatComparison, sfReductionRepresentativeComparison] using
-    h'.trans (congrArg
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  · have key := h'.trans (congrArg
       (fun f ↦ normalizedDVRKFlatComparison.{u, u} l E X (n + 1) P ≫ f) hf)
+    simpa only [normalizedDVRKFlatComparison_eq] using key
 
 section RestrictionCompositor
 attribute [local semireducible] completedIntegralCoefficientSheafUnrestricted
@@ -156,7 +197,7 @@ private theorem normalizedDVRTransitionRestriction_comp
     (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (n : ℕ) :
     (Functor.mapDerivedCategoryCompIso
       (normalizedDVRModuleRes l E X n.le_succ)
-      (scalarReductionRestriction.{u, u} l E X (n + 1))).symm ≪≫
+      (scalarReductionRestriction.{u, u} l E X (n + 1))) ≪≫
         Functor.mapDerivedCategoryNatIso
           (normalizedDVRTransitionRestriction l E X D hl n) =
       normalizedDVRResCompletedComp l E X D hl n.le_succ := by
@@ -207,23 +248,23 @@ private theorem derivedComp_change
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (e : F ≅ F') (a : F ⋙ G ≅ H) (b : F' ⋙ G ≅ H)
     (h : a = Functor.isoWhiskerRight e G ≪≫ b) :
-    (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G) ≪≫
         Functor.mapDerivedCategoryNatIso a =
       Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso e) G.mapDerivedCategory ≪≫
-        (Functor.mapDerivedCategoryCompIso F' G).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso F' G) ≪≫
           Functor.mapDerivedCategoryNatIso b := by
   apply Iso.ext
   rw [h]
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategoryNatIso_trans]
+  simp only [Iso.trans_hom, Functor.mapDerivedCategoryNatIso_trans]
   have hc := Functor.mapDerivedCategoryNatIso_isoWhiskerRight e G
   have hc' : (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight e G)).hom =
-      (Functor.mapDerivedCategoryCompIso F G).hom ≫
+      (Functor.mapDerivedCategoryCompIso F G).inv ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso e).hom G.mapDerivedCategory ≫
-          (Functor.mapDerivedCategoryCompIso F' G).inv := by
+          (Functor.mapDerivedCategoryCompIso F' G).hom := by
     rw [← reassoc_of% hc]
-    simp only [Iso.hom_inv_id, Category.comp_id]
+    simp only [Iso.inv_hom_id, Category.comp_id]
   rw [hc']
-  simp only [Category.assoc, Iso.inv_hom_id_assoc, Functor.isoWhiskerRight_hom]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, Functor.isoWhiskerRight_hom]
 
 private theorem restrictedMate_change
     {A B C : Type*} [Category A] [Category B] [Category C]

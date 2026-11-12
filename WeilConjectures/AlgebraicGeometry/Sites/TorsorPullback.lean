@@ -94,7 +94,7 @@ lemma H.equiv₀_congr {T T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
 object. -/
 lemma H.δ_congr {T T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
     {S : ShortComplex (Sheaf J AddCommGrpCat.{w})} (hS : S.ShortExact) (s : S.X₃.obj.obj (op T)) :
-    H.δ hS hT' (S.X₃.obj.map (hT.from T').op s) = H.δ hS hT s := by
+    H.δSections hS hT' (S.X₃.obj.map (hT.from T').op s) = H.δSections hS hT s := by
   obtain ⟨x, rfl⟩ := (H.equiv₀ S.X₃ hT).surjective s
   rw [← H.equiv₀_congr hT hT', ← H.δSucc_zero, ← H.δSucc_zero]
 

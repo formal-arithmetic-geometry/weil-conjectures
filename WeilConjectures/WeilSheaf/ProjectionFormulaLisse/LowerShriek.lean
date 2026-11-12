@@ -114,10 +114,10 @@ noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroCompIhomFun
     ((ProEtaleWeilSheaf.upperStar k₀ l j).obj B) hjB
   exact Functor.isoWhiskerLeft _
       (ProEtaleWeilSheaf.ihomFunctor k₀ l X B).rightDerivedFunctorIsoMapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (ProEtaleWeilSheaf.extensionByZeroCompIhomFunctorIso j B hB).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerRight (ProEtaleWeilSheaf.ihomFunctor k₀ l U
       ((ProEtaleWeilSheaf.upperStar k₀ l j).obj B)).rightDerivedFunctorIsoMapDerivedCategory.symm _
 

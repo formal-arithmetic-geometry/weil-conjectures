@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import WeilConjectures.AlgebraicGeometry.SingleSupportedFiniteFreeHomologyIso
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The one-column finite free Hom calculation
 
@@ -53,6 +54,7 @@ private theorem qc_overEquiv_inverse (X : Scheme.{u}) (U : X.Opens)
     (U.overEquivalence.functor) _
     (U.sheafOfModulesEquivOverInverseUnit X.ringCatSheaf)
 
+set_option backward.isDefEq.respectTransparency true in
 /-- A one-column source gives shifts of finite sums of target cohomology.
 
 Source: Stacks Project, Tag 08I5, Hom double-complex calculation, and Tag 0A6H (2).

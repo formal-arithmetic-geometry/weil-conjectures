@@ -74,7 +74,7 @@ private theorem derivedUnit_commShift
       (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
         Functor.whiskerRight adj.mapHomotopyCategoryPlus.unit DerivedCategory.Plus.Qh ≫
         (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft L.mapHomotopyCategoryPlus R.rightDerivedFunctorPlusUnit ≫
+        Functor.whiskerLeft L.mapHomotopyCategoryPlus R.rightDerivedFunctorPlusUnith ≫
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight L.mapDerivedCategoryPlusFactorsh.inv R.rightDerivedFunctorPlus ≫
         (Functor.associator _ _ _).hom := by

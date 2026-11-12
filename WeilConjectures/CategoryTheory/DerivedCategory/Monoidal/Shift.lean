@@ -329,6 +329,15 @@ lemma commShiftTensorRight_eq (P : CochainComplex.KFlat C) :
     commShiftTensorRight C ((LKFlat C).obj P) =
       commShiftTensorRightQhObj ((HomotopyCategory.quotient C _).obj P.obj)
         ((HomotopyCategory.kFlat_quotient_obj_iff _).2 P.2) := by
+  -- Reuse the coproduct and graded-tensor instances throughout the localization comparison.
+  have (J : Type) : HasColimitsOfShape (Discrete J) C := inferInstance
+  have (X₁ X₂ : GradedObject ℤ C) : X₁.HasTensor X₂ := inferInstance
+  have (X₁ X₂ X₃ X₄ : GradedObject ℤ C) :
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
   have hP := (HomotopyCategory.kFlat_quotient_obj_iff _).2 P.2
   refine Functor.CommShift.eq_of_natTransCommShift (LKFlat C)
     (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat _ _

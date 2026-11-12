@@ -85,10 +85,10 @@ lemma isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek (e : U ⟶
       inferInstance).mapDerivedCategory.map_isZero h₁).of_iso
     ((leftDerivedUpperStarIsoMapDerivedCategory _ jV).app _ ≪≫
       ((etaleLowerShriek (ModuleCat.{u + 1} Λ) e inferInstance).mapDerivedCategoryCompIso
-        (jV)^*[ModuleCat.{u + 1} Λ]).symm.app T ≪≫
+        (jV)^*[ModuleCat.{u + 1} Λ]).app T ≪≫
       (Functor.mapDerivedCategoryNatIso (etaleLowerShriekBaseChangeIso Λ hsq.flip)).app T ≪≫
       (((pullback.fst e jV)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryCompIso
-        (etaleLowerShriek (ModuleCat.{u + 1} Λ) (pullback.snd e jV) inferInstance)).app T)
+        (etaleLowerShriek (ModuleCat.{u + 1} Λ) (pullback.snd e jV) inferInstance)).symm.app T)
 
 /-- **The restriction of supports along an étale morphism** `e : U ⟶ X`,
 `ψ : Le^* (Ri_! Ri^! L) ⟶ Ri'_! Ri'^! L'` (`AlgebraicGeometry.Etale.supportedRestriction`), is an

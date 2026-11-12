@@ -255,34 +255,31 @@ private theorem complex_fac
           (mapHomologicalComplexCompIso (Iso.refl (E ⋙ G))
             (ComplexShape.up ℤ)).inv.app K) ≫
       (complex_unit G hB).app ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) := by
-  have ht := hτ ((HomotopyCategory.quotient _ _).obj K)
+  let π := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let RG := G.rightDerivedFunctorOfQuasiIsoResolutions hB
+  let φ := (NatTrans.mapHomologicalComplex β (ComplexShape.up ℤ)).app K ≫
+    (mapHomologicalComplexCompIso (Iso.refl (E ⋙ G)) (ComplexShape.up ℤ)).inv.app K
+  have ht := hτ (π.obj K)
   rw [mapDerivedCategoryFactorsh_hom_app] at ht
-  dsimp [complex_unit, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, DerivedCategory.Qh,
-    HomologicalComplexUpToQuasiIso.Qh, DerivedCategory.Q,
-    mapHomotopyCategory, mapHomotopyCategoryFactors, mapHomotopyCategoryCompIso,
-    NatTrans.mapHomotopyCategory, Quotient.natIsoLift, Quotient.natTransLift,
-    HomotopyCategory.quotient, Quotient.functor, Quotient.lift,
-    Quotient.category, Quotient.comp] at ht ⊢
-  simp only [Functor.map_id, Category.id_comp, Category.comp_id,
-    Functor.map_comp, Category.assoc] at ht ⊢
-  change (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit hA).app
-      ((HomotopyCategory.quotient _ _).obj K) ≫
-      τ.app (DerivedCategory.Q.obj K) ≫
-      (G.rightDerivedFunctorOfQuasiIsoResolutions hB).map
-        (E.mapDerivedCategoryFactors.hom.app K) ≫
-      (G.rightDerivedFunctorOfQuasiIsoResolutions hB).map
-        (DerivedCategory.Q.map (𝟙 ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) =
-    DerivedCategory.Q.map
-      ((NatTrans.mapHomologicalComplex β (ComplexShape.up ℤ)).app K ≫
-        (mapHomologicalComplexCompIso (Iso.refl (E ⋙ G)) (ComplexShape.up ℤ)).inv.app K) ≫
-      (G.rightDerivedFunctorOfQuasiIsoResolutionsUnit hB).app
-        ((HomotopyCategory.quotient _ _).obj
-          ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) at ht
-  rw [DerivedCategory.Q.map_id] at ht
-  erw [(G.rightDerivedFunctorOfQuasiIsoResolutions hB).map_id] at ht
-  simp only [Category.comp_id, Functor.map_comp, Category.assoc] at ht
-  with_unfolding_all exact ht
+  have h1 : DerivedCategory.Qh.map
+      ((E.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app K) = 𝟙 _ :=
+    CategoryTheory.Functor.map_id _ _
+  have h2 : (NatTrans.mapHomotopyCategory β (ComplexShape.up ℤ)).app (π.obj K) ≫
+      (mapHomotopyCategoryCompIso (Iso.refl (E ⋙ G)) (ComplexShape.up ℤ)).inv.app (π.obj K) =
+      (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map φ := rfl
+  rw [h1, h2] at ht
+  erw [Category.comp_id] at ht
+  have ht' := congrArg (· ≫ RG.map ((DerivedCategory.quotientCompQhIso B).hom.app
+    ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) ht
+  simp only [Category.assoc] at ht'
+  erw [← Functor.map_comp] at ht'
+  simp only [Category.assoc, Iso.inv_hom_id_app] at ht'
+  erw [Category.comp_id] at ht'
+  dsimp only [complex_unit, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
+  rw [Category.assoc, Category.assoc, τ.naturality_assoc, Functor.comp_map,
+    ← Functor.map_comp]
+  erw [ht']
+  exact (DerivedCategory.quotientCompQhIso_inv_naturality_assoc φ _).symm
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

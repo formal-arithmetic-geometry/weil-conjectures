@@ -207,7 +207,7 @@ theorem cochainEquiv_boundary (n : ℕ) (a : (freeComplex X U π).X n ⟶ P) :
   apply Finset.sum_congr rfl
   intro i _
   congr 1
-  conv_rhs => erw [← AddCommGrpCat.comp_apply, Pi.lift_π, AddCommGrpCat.comp_apply]
+  conv_rhs => erw [← AddCommGrpCat.comp_apply, Pi.lift_comp_π, AddCommGrpCat.comp_apply]
   dsimp only [cochainEquiv]
   erw [sectionsEquiv_π]
   rfl

@@ -126,9 +126,9 @@ theorem derivedScalarMatePasting
     IsIso ((mateEquiv a₀ a₂).symm
       (Functor.mapDerivedCategorySquareIso k₀₂).hom).natTrans := by
   let cUD := Functor.mapDerivedCategoryNatIso cU ≪≫
-    Functor.mapDerivedCategoryCompIso U₀₁ U₁₂
+    (Functor.mapDerivedCategoryCompIso U₀₁ U₁₂).symm
   let cVD := Functor.mapDerivedCategoryNatIso cV ≪≫
-    Functor.mapDerivedCategoryCompIso V₀₁ V₁₂
+    (Functor.mapDerivedCategoryCompIso V₀₁ V₁₂).symm
   refine mate_paste_isIso a₀ a₁ a₂
     (Functor.mapDerivedCategorySquareIso k₀₁) (Functor.mapDerivedCategorySquareIso k₁₂)
     (Functor.mapDerivedCategorySquareIso k₀₂) cUD cVD ?_ h₀₁ h₁₂

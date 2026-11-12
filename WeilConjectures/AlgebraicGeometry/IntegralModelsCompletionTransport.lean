@@ -206,10 +206,10 @@ theorem completion_transport (l : ℕ) [Fact l.Prime]
   have hφ' := (siteRestrictScalars_exact φ).2
   let α : restriction l E X ⋙ (smallDerivedEquivalence X R).functor ≅
       (smallDerivedEquivalence X S).functor ⋙ ConstantCompletion.dres φ :=
-    (Functor.mapDerivedCategoryCompIso (Mod.comap (scalarMap l E X))
-      (smallModules X R)).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (Mod.comap (scalarMap l E X))
+      (smallModules X R) ≪≫
     Functor.mapDerivedCategoryNatIso (smallRestrictionIso X (scalarMap l E X)) ≪≫
-    Functor.mapDerivedCategoryCompIso (smallModules X S) (ConstantCompletion.res φ)
+    (Functor.mapDerivedCategoryCompIso (smallModules X S) (ConstantCompletion.res φ)).symm
   obtain ⟨hI, hflat, hquot⟩ := integralModels_flat_residue l E X
   obtain ⟨e, ⟨β⟩⟩ := flat_ringed_ideal_complete_equivalence φ I hI hflat hquot
   apply transportCompleteEquivalence (smallDerivedEquivalence X S)

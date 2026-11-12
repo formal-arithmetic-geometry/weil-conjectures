@@ -154,7 +154,7 @@ lemma exact_constantSheaf_map_smul {x : A} {X : ModuleCat.{u + 1} A}
     (hS : (ShortComplex.mk (x • 𝟙 _) g hg).Exact) :
     (ShortComplex.mk _ ((constantSheaf J _).map g) (constantSheaf_map_smul_comp J g hg)).Exact := by
   refine (ShortComplex.exact_iff_of_iso ?_).1 (hS.map (constantSheaf J (ModuleCat.{u + 1} A)))
-  exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp; rfl) (by simp)
+  exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp) (by simp)
 
 section Reduction
 

@@ -16,8 +16,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.ProEtale
 open TensorProduct
@@ -125,6 +125,8 @@ private theorem scalar_conjugation
 
 set_option maxHeartbeats 400000 in
 -- The conjugation contains several derived-functor comparison isomorphisms.
+-- The `CommShift` instance for the twelve-step composite `δ` needs a larger typeclass budget.
+set_option synthInstance.maxHeartbeats 40000 in
 /-- The integral scalar comparison preserves the supplied integral pullback shifts.
 Source: the final automorphism sentence in the current blueprint proof of constructible
 truncations, and steps 1--2 of `lem-pod-isomorphism-pullback-scalar-shift`.
@@ -261,7 +263,7 @@ theorem isomorphismPullbackScalarIntegralShift
           ← hy, SX, χG, GE, b, invL, Functor.comp_obj,
           GeneralAlgebraicallyClosedCoefficients.integralTransition,
           scalar_restrict_obj, pullback_restrict_obj] at hc ⊢
-        convert hc using 1; rfl)
+        convert hc using 1)
     simp only [δ, χF, κE, κL, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.associator_hom_app, Functor.associator_inv_app,

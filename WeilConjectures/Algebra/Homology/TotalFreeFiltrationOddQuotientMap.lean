@@ -41,7 +41,7 @@ lemma full_mem_next (j : ℕ) (k : ℤ) (x : (S j).X₂.X (k + j)) :
     (if 2 * a + 2 ≤ 2 * j + 2 then LinearMap.range (full K a k).hom else ⊥) ⊔
       (if 2 * a + 1 ≤ 2 * j + 2 then LinearMap.range (lower K S e a k).hom else ⊥)) j)
   apply Submodule.mem_sup_left
-  simp only [le_refl, if_true]
+  simp only [le_refl, ite_true]
   exact ⟨(e j).hom.f (k + j) x, rfl⟩
 
 /-- The full-column map, restricted to the next filtration term.
@@ -71,7 +71,7 @@ private lemma earlierColumn_mem (j a : ℕ) (ha : a < j) (q l : ℤ)
       (if 2 * b + 1 ≤ 2 * j + 1 then LinearMap.range (lower K S e b l).hom else ⊥)) a)
   apply (le_sup_left :
     (if 2 * a + 2 ≤ 2 * j + 1 then LinearMap.range (full K a l).hom else ⊥) ≤ _)
-  rw [if_pos (by omega)]
+  rw [ite_eq_left (by omega)]
   exact ⟨x, rfl⟩
 
 include h_positive in
@@ -182,7 +182,7 @@ lemma oddFullQuotientMap_zero (j : ℕ) :
             (if 2 * a + 1 ≤ 2 * j + 1 then
               LinearMap.range (lower K S e a k).hom else ⊥)) j)
         apply Submodule.mem_sup_right
-        simp only [le_refl, if_true]
+        simp only [le_refl, ite_true]
         exact ⟨x, rfl⟩))
   have hL : (S j).f.f (k + j) ≫ fullToNext K S e h_positive j k =
       L ≫ (step K S e h_positive (2 * j + 1)).f k := by

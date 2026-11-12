@@ -647,7 +647,7 @@ theorem closedSupport_triangle {Z U X : Scheme.{u}}
   have hzero (M : DerivedCategory (supportModules Λ Z)) : IsZero (J.obj (L.obj M)) := by
     exact (Functor.isZero_mapDerivedCategory_obj (lowerStar Λ i ⋙ supportPullback Λ j)
       M (fun n ↦ supportCrossZero Λ i j (by rw [hij, compl_compl]) _)).of_iso
-        (((lowerStar Λ i).mapDerivedCategoryCompIso _).symm.app M)
+        (((lowerStar Λ i).mapDerivedCategoryCompIso _).app M)
   have hjoint (M : DerivedCategory (supportModules Λ X))
       (hi : IsZero ((supportPullback Λ i).mapDerivedCategory.obj M))
       (hj : IsZero (J.obj M)) : IsZero M := by

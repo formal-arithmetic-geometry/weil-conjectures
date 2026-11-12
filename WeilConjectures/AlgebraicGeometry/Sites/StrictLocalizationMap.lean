@@ -51,13 +51,14 @@ variable (g : S' ⟶ S) (s' : Spec (.of Ω) ⟶ S')
 along `g`, a pointed étale neighbourhood of `s'`. -/
 noncomputable def pullbackObj (x : PointedEtaleNeighborhood (s' ≫ g)) :
     PointedEtaleNeighborhood s' :=
-  ⟨Etale.mk (pullback.snd x.1.hom g),
-    CategoryTheory.Over.homMk (pullback.lift x.2.left s' (CategoryTheory.Over.w x.2))
-      (pullback.lift_snd _ _ _)⟩
+  { obj := Etale.mk (pullback.snd x.1.hom g)
+    val := CategoryTheory.Over.homMk (pullback.lift x.2.left s' (CategoryTheory.Over.w x.2))
+      (pullback.lift_snd _ _ _) }
 
 lemma pullbackObj_snd_left (x : PointedEtaleNeighborhood (s' ≫ g)) :
     (pullbackObj g s' x).2.left = pullback.lift x.2.left s' (CategoryTheory.Over.w x.2) :=
   rfl
+
 
 /-- Base change of pointed étale neighbourhoods along `g : S' ⟶ S`. -/
 @[simps obj]
@@ -75,16 +76,16 @@ noncomputable def pullback :
         simp [pullbackObj, e, h]
       · simp [pullbackObj, e]⟩
   map_id x := by
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
     apply pullback.hom_ext <;>
-      simp only [Functor.id_obj, Functor.const_obj_obj, CategoryOfElements.id_val, Etale.id_left_eq,
+      simp only [Functor.id_obj, Functor.const_obj_obj, Functor.Elements.id_hom, Etale.id_left_eq,
         pullback.map_id, MorphismProperty.Over.homMk_hom, Over.homMk_left] <;>
       exact Category.id_comp _
   map_comp f g := by
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
-    apply pullback.hom_ext <;> simp [CategoryOfElements.comp_val]
+    apply pullback.hom_ext <;> simp [Functor.Elements.comp_hom]
 
 end PointedEtaleNeighborhood
 

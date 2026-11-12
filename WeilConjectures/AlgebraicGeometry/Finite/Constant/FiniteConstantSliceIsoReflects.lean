@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.FinitePerfectQuotientModelData
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
 import WeilConjectures.Algebra.Homology.LargeFilteredFreeResolution
 import WeilConjectures.Algebra.Homology.FilteredFreeKProjective
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
@@ -49,6 +51,16 @@ private theorem lifted_resolution (B : Type t) [CommRing B]
   classical
   let L := ModuleCat.uliftFunctor.{t + 1, t} B
   let C := L.mapHomologicalComplex (.up ℤ)
+  have (I : Type t) : HasColimitsOfShape (Discrete I) (ModuleCat.{t + 1} B) :=
+    ModuleCat.hasColimitsOfShape _ _
+  have (I : Type (t + 1)) : HasColimitsOfShape (Discrete I) (ModuleCat.{t + 1} B) :=
+    ModuleCat.hasColimitsOfShape _ _
+  have (I : Type t) : HasColimitsOfShape (Discrete I)
+      (CochainComplex (ModuleCat.{t + 1} B) ℤ) :=
+    ⟨fun F ↦ ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩⟩
+  have (I : Type (t + 1)) : HasColimitsOfShape (Discrete I)
+      (CochainComplex (ModuleCat.{t + 1} B) ℤ) :=
+    ⟨fun F ↦ ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩⟩
   have : PreservesColimitsOfSize.{t, t} L := ulift_preservesColimits B
   obtain ⟨P, q, hq, F, ι, step, hz, hm, hc, he, hs, hquot⟩ :=
     CochainComplex.exists_large_filtered_free_resolution.{t, t} M

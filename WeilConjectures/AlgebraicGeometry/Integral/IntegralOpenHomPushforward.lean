@@ -106,7 +106,7 @@ theorem integralOpen_homPushforward
     (SheafOfModules.localizedSystemAdjunction.{u + 1, u, u + 1} R W).mapExactDerivedCategory
   let eJ : cbcJ d j ≅ Q.functor ⋙ EX.mapDerivedCategory :=
     Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerRight ε'.symm EX) ≪≫
-      Functor.mapDerivedCategoryCompIso E.functor EX
+      (Functor.mapDerivedCategoryCompIso E.functor EX).symm
   let ep : d.pull j ≅ RE.mapDerivedCategory ⋙ Q.inverse :=
     ((cbcDerivedOpenAdjunction d j).ofNatIsoLeft eJ).rightAdjointUniq
       (Q.toAdjunction.comp a)
@@ -114,11 +114,12 @@ theorem integralOpen_homPushforward
     (Functor.rightUnitor RE.mapDerivedCategory).symm ≪≫
       Functor.isoWhiskerLeft RE.mapDerivedCategory Q.counitIso.symm ≪≫
       Functor.isoWhiskerRight ep.symm Q.functor
-  let ag : RE.mapDerivedCategory ⊣ Q.inverse ⋙ d.push j :=
+  let G := Q.inverse ⋙ d.push j
+  let ag : RE.mapDerivedCategory ⊣ G :=
     ((cbcPullPushAdjunction d j).comp Q.toAdjunction).ofNatIsoLeft er.symm
   obtain ⟨eh⟩ := ringedOpenDerived_homAdjunction.{
     u + 1, u, u + 1, u + 2} (ProEt.topology T) R W
-      (Q.inverse ⋙ d.push j) ag (Q.functor.obj P)
+      G ag (Q.functor.obj P)
   let hU := RingedHomUniverses.hom.{u + 1, u, u + 1} (ProEt.topology U) S P
   let hW := RingedHomUniverses.hom.{u + 1, u, u + 1}
     ((ProEt.topology T).over W) (R.over W) (Q.functor.obj P)

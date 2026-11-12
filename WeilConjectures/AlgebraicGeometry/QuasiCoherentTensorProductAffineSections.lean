@@ -74,8 +74,7 @@ private theorem affine_tensor (R : CommRingCat.{u}) (F G : (Spec R).Modules)
   let t := TensorProduct.congr (tildeSectionsEquiv R M) (tildeSectionsEquiv R N)
   have ht : ∀ z, tensorSectionsMap (tilde M) (tilde N) ⊤ (t z) = β z := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul m n => exact (hβ m n).symm
     | add x y hx hy => simp only [map_add, hx, hy]
   have hb' : Function.Bijective (tensorSectionsMap (tilde M) (tilde N) ⊤) := by
@@ -90,12 +89,7 @@ private theorem affine_tensor (R : CommRingCat.{u}) (F G : (Spec R).Modules)
       (e.hom.app ⊤) ∘ tensorSectionsMap (tilde M) (tilde N) ⊤ := by
     apply funext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero =>
-      change tensorSectionsMap F G ⊤ ((TensorProduct.congr f g) 0) =
-        (e.hom.app ⊤) (tensorSectionsMap (tilde M) (tilde N) ⊤ 0)
-      rw [map_zero, map_zero, map_zero]
-      exact (e.hom.app ⊤).hom.map_zero.symm
+    induction z using TensorProduct.inductionOn with
     | tmul m n => exact (tensorHom_app_tmulSection eF.hom eG.hom m n).symm
     | add x y hx hy =>
       change tensorSectionsMap F G ⊤ ((TensorProduct.congr f g) (x + y)) = (e.hom.app ⊤)
@@ -126,8 +120,7 @@ private theorem restriction_tensor_bijective {X Y : Scheme.{u}} (j : Y ⟶ X)
   have hn : ∀ z, tensorSectionsMap F G (j ''ᵁ V) (t z) =
       c (d (tensorSectionsMap (F.restrict j) (G.restrict j) V z)) := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul s t => exact (he V s t).symm
     | add x y hx hy => simp only [map_add, hx, hy]
   have hh : Function.Bijective ((tensorSectionsMap F G (j ''ᵁ V)) ∘ t) := by

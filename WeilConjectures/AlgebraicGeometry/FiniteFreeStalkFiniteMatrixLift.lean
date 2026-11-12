@@ -60,7 +60,8 @@ private lemma unit_hom_ext_top {X : Scheme.{u}}
     simpa only [map_one] using hf'.trans ((congrArg (X.presheaf.map _) h).trans hg'.symm)
   have hf := Hom.app_smul f (U := U) a (1 : Γ(X, U))
   have hg := Hom.app_smul g (U := U) a (1 : Γ(X, U))
-  simpa only [smul_eq_mul, mul_one] using hf.trans ((congrArg (a • ·) hU).trans hg.symm)
+  simp only [smul_eq_mul, mul_one] at hf hg
+  exact hf.trans (by rw [hU]; exact hg.symm)
 
 private noncomputable def matrixHom {X : Scheme.{u}} {I J : Type u} [Fintype J]
     (A : Matrix J I Γ(X, ⊤)) :
@@ -74,13 +75,13 @@ private lemma freeMatrix_matrixHom {X : Scheme.{u}} {I J : Type u} [Fintype J]
   change Hom.app (SheafOfModules.ιFree i ≫ matrixHom A ≫ freeπ j) ⊤ (1 : Γ(X, ⊤)) = _
   have h : SheafOfModules.ιFree i ≫ matrixHom A ≫ freeπ j = scalarHom (A j i) := by
     have hi : SheafOfModules.ιFree i ≫ matrixHom A =
-        ∑ k : J, scalarHom (A k i) ≫ SheafOfModules.ιFree k := Sigma.ι_desc _ i
+        ∑ k : J, scalarHom (A k i) ≫ SheafOfModules.ιFree k := Sigma.ι_comp_desc _ i
     rw [← Category.assoc, hi, Preadditive.sum_comp]
     simp only [Category.assoc, ιFree_freeπ]
     rw [Finset.sum_eq_single j]
-    · rw [if_pos rfl, Category.comp_id]
+    · rw [ite_eq_left rfl, Category.comp_id]
     · intro k _ hkj
-      rw [if_neg hkj, comp_zero]
+      rw [ite_eq_right hkj, comp_zero]
     · intro h
       exact (h (Finset.mem_univ j)).elim
   rw [h, scalarHom_app_top]

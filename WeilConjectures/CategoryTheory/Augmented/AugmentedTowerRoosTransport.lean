@@ -42,6 +42,5 @@ private def coconeCoordinates {K L : CochainComplex A ℤ} (φ : K ⟶ L) (i : �
 end ProductRoos
 attribute [local implicit_reducible] WeilConjectures.integralOperationsRoos
   WeilConjectures.integralOperationsRoosFunctor CochainComplex.mappingCocone
-  Functor.mapHomologicalComplex
 
 end CategoryTheory

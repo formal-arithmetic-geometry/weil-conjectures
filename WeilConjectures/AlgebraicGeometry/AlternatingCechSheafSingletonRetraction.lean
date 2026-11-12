@@ -107,7 +107,7 @@ theorem alternatingCechSheafAugmentation_restrict_degreeZero_retraction
     Pi.π _ t ≫ eqToHom (congrArg (cechCapModule G) ht)
   have hp : alternatingCechSheafPresheafZero U G ≫ p = b.val := by
     dsimp [p, alternatingCechSheafPresheafZero]
-    rw [Pi.lift_π_assoc]
+    rw [Pi.lift_comp_π_assoc]
     change cechCapModuleUnit G (alternatingCechIntersection U t) ≫
       eqToHom (congrArg (cechCapModule G) ht) = cechCapModuleUnit G W
     clear p

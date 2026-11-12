@@ -57,8 +57,7 @@ theorem bijective_map_includeRight
   -- The image of `R' ⊗[R] S` lies in the range of `φ`.
   have hmem : ∀ z : R' ⊗[R] S, algebraMap (R' ⊗[R] S) q'.ResidueField z ∈ φ.fieldRange := by
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simpa [map_add] using add_mem hx hy
     | tmul r' s =>
       have : r' ⊗ₜ[R] s = Algebra.TensorProduct.includeLeftRingHom r' *

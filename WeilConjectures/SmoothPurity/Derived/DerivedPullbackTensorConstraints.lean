@@ -305,7 +305,7 @@ private theorem representative_braiding
       S.map (Prod.mkHom p.inv q.inv) ≫ x.inv) ≫
       (x.hom ≫ (γ P Q).hom ≫ y.inv) := by
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_map_assoc]
   rw [reassoc_of% (hc M N), ← reassoc_of% (hn _ _ _ _ p.inv q.inv)]
 
 private theorem localizedBraiding_natural
@@ -350,13 +350,9 @@ private theorem localizedBraiding_natural
         (1 ⊗ₜ[R] (bi M.obj N.obj).hom)
     rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul,
       one_mul, mul_one, mul_comm c a, hn]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp,
-      Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp,
-        Limits.comp_zero]
+    induction g using TensorProduct.inductionOn with
     | tmul c g => exact ht a f c g
     | add g g' hg hg' =>
       simp only [map_add, LinearMap.add_apply, Preadditive.add_comp,
@@ -1018,8 +1014,7 @@ private theorem scalarUnit_rationalLeftUnitor_natural (W : Scheme.{u})
   obtain ⟨b, hb, hp⟩ := spec.2 U U M N
   change T.map (Prod.mkHom (𝟙 U) f) ≫ _ = _
   rw [hb]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, Limits.zero_comp, Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f g hf hg =>
     change (b (𝟙 U)) (f + g) ≫ _ = _ ≫ (f + g)
     rw [map_add, Preadditive.add_comp]
@@ -1267,8 +1262,7 @@ private theorem scalarUnit_rationalRightUnitor_natural (W : Scheme.{u})
   obtain ⟨b, hb, hp⟩ := spec.2 M N U U
   change T.map (Prod.mkHom f (𝟙 U)) ≫ _ = _
   rw [hb]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp, Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f g hf hg =>
     change (b (f + g)) (𝟙 U) ≫ _ = _ ≫ (f + g)
     rw [map_add, LinearMap.add_apply, Preadditive.add_comp]
@@ -1340,6 +1334,9 @@ def pullbackTensorRationalScalarUnit
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)] :=
   (@pullbackTensorRationalScalarUnit_existsUnique l _ E _ _ _ L _ _ _ ι W hW).exists.choose
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The common-stage unit represented over the least finite coefficient field.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
@@ -1616,8 +1613,8 @@ private theorem cu_cocycle (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residu
     (cuUn l Ω W) (fun h ↦ commonScalarUnit l Ω W h) (cu_tower l Ω W) (culu l Ω W)
     (curu l Ω W) (cu_hlu l Ω W) (cu_hru l Ω W) (cu_hR l Ω W) h h'
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonLeftUnitor_existsUnique_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -1672,8 +1669,8 @@ private theorem pullbackTensorCommonLeftUnitor_existsUnique_aux (W : Scheme.{u})
   · intro y₁ y₂ h₁ h₂
     exact Iso.ext (eq_of_heq ((h₁ _ le_rfl).trans (h₂ _ le_rfl).symm))
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonRightUnitor_existsUnique_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -1730,8 +1727,8 @@ end CommonUnitorTransport
 
 attribute [local irreducible] pullbackTensorCommonUnitStage pullbackTensorCommonUnit
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage left unitor has the canonical representative at every larger field.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Represent at the finite
@@ -1777,8 +1774,8 @@ def pullbackTensorCommonLeftUnitor (W : Scheme.{u})
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
   ((@pullbackTensorCommonLeftUnitor_existsUnique l _ Ω _ _ _ W hW) M).exists.choose
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage right unitor has the canonical representative at every larger field.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Represent at the finite
@@ -1821,6 +1818,9 @@ def pullbackTensorCommonRightUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
   ((@pullbackTensorCommonRightUnitor_existsUnique l _ Ω _ _ _ W hW) M).exists.choose
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- Both unit equations for the actual canonical integral comparison.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions

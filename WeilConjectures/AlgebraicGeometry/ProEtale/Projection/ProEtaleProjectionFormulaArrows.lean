@@ -144,8 +144,7 @@ private theorem proEtaleTensorPair_hom_ext
       ((adj.unit.app (M.val ⊗ N.val)).app U t)) =
     w.val.app U ((SheafOfModules.tensorObjIsoSheafification M N).inv.val.app U
       ((adj.unit.app (M.val ⊗ N.val)).app U t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact h U x y
   | add t s ht hs => simp only [map_add, ht, hs]
 
@@ -249,11 +248,12 @@ theorem proEtaleProjectionUnit_existsUnique :
           (proEtaleTensorPair X S _ _ V m' (j.hom.val.app V r')) :=
         congrArg (fun z ↦
           (ρ_ ((proEtaleRingModulePullback f R S c).obj M)).hom.val.app V z) htens
-      _ = (j.hom.val.app V r') • m' :=
+      _ = (show S.obj.obj V from j.hom.val.app V r') • m' :=
         proEtaleTensorPair_rightUnitor X S _ V m' (j.hom.val.app V r')
       _ = ((proEtaleRingDirectImageMap f R S c).hom.app (Opposite.op U) r) • m' :=
         congrArg (fun z ↦ z • m') hjr
-      _ = (adj.unit.app M).val.app (Opposite.op U) (r • m) :=
+      _ = (adj.unit.app M).val.app (Opposite.op U)
+          ((show R.obj.obj (Opposite.op U) from r) • m) :=
         ((adj.unit.app M).val.app (Opposite.op U)).hom.map_smul r m |>.symm
       _ = _ := congrArg (fun z ↦ (adj.unit.app M).val.app (Opposite.op U) z)
         (proEtaleTensorPair_rightUnitor Y R M (Opposite.op U) m r).symm

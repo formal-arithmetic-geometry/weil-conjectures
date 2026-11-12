@@ -65,7 +65,7 @@ private theorem comparison_tor (T : Scheme.{u}) (A : Type u) [CommRing A] [Finit
         ((finiteCoefficientIntrinsicDerivedComparison T A).obj K) a b := by
   let C := comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T
   let R := finiteCoefficientIntrinsicRealization T A
-  let e := (Functor.mapDerivedCategoryCompIso C R).app K
+  let e := (Functor.mapDerivedCategoryCompIso C R).symm.app K
   have h := comparison_torAmplitudeIn_iff A T a b hab ⟨K, hK⟩
   exact h.trans ⟨fun h ↦ tor_of_iso T A e.symm h, fun h ↦ tor_of_iso T A e h⟩
 
@@ -183,9 +183,9 @@ private theorem etale_bounded_iff (T : Scheme.{u}) (A : Type (u + 1))
 private noncomputable def comparison_coordinates (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) :
     finiteCoefficientIntrinsicDerivedComparison T A ≅ etaleOriginOpenComparison A T :=
-  Functor.mapDerivedCategoryCompIso
+  (Functor.mapDerivedCategoryCompIso
     (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T)
-    (finiteCoefficientIntrinsicRealization T A)
+    (finiteCoefficientIntrinsicRealization T A)).symm
 
 private theorem finite_bound (k : Type u) [Field k]
     (A : Type u) [CommRing A] [Finite A]

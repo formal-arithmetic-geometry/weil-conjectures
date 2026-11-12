@@ -81,7 +81,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import WeilConjectures.CategoryTheory.StrictRoosNormalization
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-public import Mathlib.Logic.Denumerable
+public import Mathlib.Basic.Denumerable
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosChainMaps
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution
@@ -595,11 +595,11 @@ private theorem comparison_inclusion (a : Corner LA etaA) (b : Corner LB etaB)
     change F.map ((Limits.Pi.lift (fun n : ℕ ↦
       limit.π X.asFunctor (op n))).f (p + 1)) ≫
         F.map ((Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n).f (p + 1)) = _
-    rw [← F.map_comp, ← HomologicalComplex.comp_f, Limits.Pi.lift_π]
+    rw [← F.map_comp, ← HomologicalComplex.comp_f, Limits.Pi.lift_comp_π]
     have hb := congrArg (fun z ↦ z.f (p + 1))
       (limit.lift_π ((F.mapHomologicalComplex (.up ℤ)).mapCone
         (limit.cone X.asFunctor)) (op n))
-    erw [← HomologicalComplex.comp_f, Limits.Pi.lift_π]
+    erw [← HomologicalComplex.comp_f, Limits.Pi.lift_comp_π]
     exact hb.symm
   · simp only [Category.assoc]
     erw [biprod.map_snd]
@@ -688,7 +688,7 @@ variable [HasDerivedCategory.{wA} (ringedSiteModules.{u + 1} (proEtaleModuleCoef
 
 attribute [local irreducible] localizedSystemAdjunction
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
-attribute [local irreducible] Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+attribute [local irreducible] Functor.mapDerivedCategoryNatIso
   RingedOpenScalar.derivedSquare cbcDerivedSquare
 
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify

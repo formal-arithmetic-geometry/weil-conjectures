@@ -26,6 +26,18 @@ set_option synthInstance.maxSize 2048
 
 namespace CategoryTheory
 
+noncomputable local instance sliceDerivedCategory
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u}) (U : C)
+    [hU : HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))] :
+    Category.{w} (@DerivedCategory
+      (SheafOfModules.{u}
+        ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) _ _ hU) :=
+  inferInstanceAs (Category.{w} (DerivedCategory
+    (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))))
+
 private theorem overMap_preservesColimits
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J RingCat.{u}) {U V : C} (a : V ⟶ U) :
@@ -200,7 +212,7 @@ private theorem completeElementHom_comparison
       F.mapDerivedCategory.mapIso (eK U).symm
     let e₂ : F.mapDerivedCategory.obj (FU.mapDerivedCategory.obj K) ≅
         (FU ⋙ F).mapDerivedCategory.obj K :=
-      (Functor.mapDerivedCategoryCompIso FU F).symm.app K
+      (Functor.mapDerivedCategoryCompIso FU F).app K
     let e₃ : (FU ⋙ F).mapDerivedCategory.obj K ≅ FV.mapDerivedCategory.obj K :=
       (Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u} O a)).app K
     exact e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ eK V

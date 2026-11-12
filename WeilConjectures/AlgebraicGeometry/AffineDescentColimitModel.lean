@@ -88,6 +88,6 @@ theorem exists_affine_descent_colimit_model
   let α := Functor.isoWhiskerLeft T (Scheme.Modules.pullbackIsoPushforwardInv q)
   let eC := (Functor.mapHomologicalComplexCompIso α (.up ℤ)).app P
   exact DerivedCategory.Q.mapIso eC ≪≫ (he.app ((T.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
-    e.functor.mapIso hP.symm ≪≫ e.counitIso.app E
+    (e.functor.mapIso hP).symm ≪≫ e.counitIso.app E
 
 end AlgebraicGeometry

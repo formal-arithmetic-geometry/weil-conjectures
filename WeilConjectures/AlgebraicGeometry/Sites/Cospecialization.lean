@@ -186,9 +186,10 @@ geometric point `t ≫ (S_(s) ⟶ S)` for a geometric point `t` of the strict lo
 pointed by `t` followed by the leg `S_(s) ⟶ V`. -/
 noncomputable def cospecializationNeighborhoodFunctor :
     PointedEtaleNeighborhood s ⥤ PointedEtaleNeighborhood (t ≫ strictLocalizationToBase s) where
-  obj x := ⟨x.1, CategoryTheory.Over.homMk (t ≫ (strictLocalizationConeAll s).π.app x)
-    (by simp)⟩
-  map {x y} f := CategoryOfElements.homMk _ _ f.1 (by
+  obj x :=
+    { obj := x.1
+      val := CategoryTheory.Over.homMk (t ≫ (strictLocalizationConeAll s).π.app x) (by simp) }
+  map {x y} f := Functor.Elements.homMk f.1 (by
     apply CategoryTheory.Over.OverMorphism.ext
     exact (Category.assoc _ _ _).trans (congrArg (t ≫ ·) ((strictLocalizationConeAll s).w f)))
 
@@ -214,7 +215,7 @@ this is the restriction to the geometric point `t`. -/
 noncomputable def cospecializationMap (F : Sheaf S.smallEtaleTopology A) :
     (pointSmallEtale s).sheafFiber.obj F ⟶
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).sheafFiber.obj F :=
-  colimit.pre ((CategoryOfElements.π
+  colimit.pre ((Functor.Elements.π
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).fiber).op ⋙ F.obj)
     (cospecializationNeighborhoodFunctor s t).op
 
@@ -226,7 +227,7 @@ lemma toPresheafFiber_cospecializationMap (F : Sheaf S.smallEtaleTopology A)
     (pointSmallEtale s).toPresheafFiber x.1 x.2 F.obj ≫ cospecializationMap s t A F =
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).toPresheafFiber x.1
         ((cospecializationNeighborhoodFunctor s t).obj x).2 F.obj :=
-  colimit.ι_pre ((CategoryOfElements.π
+  colimit.ι_pre ((Functor.Elements.π
       (pointSmallEtale (t ≫ strictLocalizationToBase s)).fiber).op ⋙ F.obj)
     (cospecializationNeighborhoodFunctor s t).op (op x)
 

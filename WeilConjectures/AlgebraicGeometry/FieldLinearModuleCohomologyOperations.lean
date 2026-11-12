@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
@@ -171,7 +172,7 @@ theorem scalarRestriction_linear (F : SheafOfModules.{u} X.ringCatSheaf)
         ((F.val.map i).hom.toAddMonoidHom x) := by
   intro r x
   change F.val.map i ((scalarMap f U.unop r) • (show F.val.obj U from x)) =
-    (scalarMap f V.unop r) • F.val.map i x
+    (scalarMap f V.unop r) • (show F.val.obj V from F.val.map i x)
   rw [F.val.map_smul]
   congr 1
   change (X.presheaf.map i).hom (scalarMap f U.unop r) = scalarMap f V.unop r

@@ -110,7 +110,7 @@ theorem cochainCoordinates_bijective
       (((cochainFromCoordinates l E P hfree a b q x).v i.val (i.val + q) rfl)
         ((basis l E P hfree i.val) s)) t = _
     simp only [cochainFromCoordinates, CochainComplex.HomComplex.Cochain.mk_v,
-      dif_pos i.property]
+      dite_eq_left i.property]
     change (basis l E P hfree (i.val + q)).repr
       (((basis l E P hfree i.val).constr (A l E) fun s ↦
         (basis l E P hfree (i.val + q)).equivFun.symm fun t ↦ x ⟨i, s, t⟩)
@@ -265,19 +265,19 @@ def freeCochainEquiv {C : Type v} [Category.{w} C] [Preadditive C]
     subst j
     by_cases hi : i ∈ Finset.Icc a b
     · dsimp only [backward, CochainComplex.HomComplex.Cochain.mk_v]
-      rw [dif_pos hi]
+      rw [dite_eq_left hi]
       dsimp only [forward]
       rw [biproduct.components_matrix
         ((e i).inv ≫ z.v i (i + q) rfl ≫ (e (i + q)).hom)]
       simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
     · dsimp only [backward, CochainComplex.HomComplex.Cochain.mk_v]
-      rw [dif_neg hi]
+      rw [dite_eq_right hi]
       exact (hs i hi).eq_of_src _ _
   · intro x
     funext k
     rcases k with ⟨i, s, t⟩
     dsimp only [forward, backward, CochainComplex.HomComplex.Cochain.mk_v]
-    rw [dif_pos i.property]
+    rw [dite_eq_left i.property]
     simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
     erw [biproduct.matrix_components]
 

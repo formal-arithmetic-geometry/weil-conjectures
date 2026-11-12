@@ -453,8 +453,8 @@ theorem cbcOpenUnit_isIso {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
   have := b.fullyFaithfulLOfIsIsoUnit.faithful
   let eD := Functor.mapDerivedCategoryCompIso (cbcModuleToSlice d T W)
     (SheafOfModules.localizedModuleExtension (d.completedRing T) W)
-  have : (cbcJ d j).Full := Functor.Full.of_iso eD.symm
-  have : (cbcJ d j).Faithful := Functor.Faithful.of_iso eD.symm
+  have : (cbcJ d j).Full := Functor.Full.of_iso eD
+  have : (cbcJ d j).Faithful := Functor.Faithful.of_iso eD
   infer_instance
 
 /-- The inverse open comparison is the transpose of the open-extension unit.

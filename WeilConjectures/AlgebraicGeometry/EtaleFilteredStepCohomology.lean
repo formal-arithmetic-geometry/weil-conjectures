@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.EtaleTermwiseHypercohomology
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedTotalResolution
@@ -81,6 +83,7 @@ theorem etale_filtered_step_cohomology_iso
         (cohomology AddCommGrpCat.{u + 1} X p).obj
           (DerivedCategory.Q.obj (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q)))) := by
   exact ⟨etaleFilteredStepCohomologyIso X K T p q⟩
+
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem resolutionObjQIso_naturality

@@ -235,6 +235,7 @@ lemma hasRightDerivedFunctor_iff_op :
       (RF := (F.op.totalLeftDerived W.Q.op W.op).unop)
       (α := NatTrans.unop (F.op.totalLeftDerivedCounit W.Q.op W.op))
 
+
 end
 
 section

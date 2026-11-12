@@ -178,7 +178,7 @@ private lemma systemHomIso_ι
         colimit.ι (U ⋙ uliftYoneda.{u}.obj X) i (ULift.up f) := by
   change (((colimit.ι (inverseSystemRepresentableDiagram U.leftOp) i).app X) ≫
     (systemHomIso U X).hom) f = _
-  simp [systemHomIso, HasColimit.isoOfNatIso_ι_hom]
+  simp [systemHomIso, HasColimit.ι_isoOfNatIso_hom]
   rfl
 
 private lemma systemHomIso_naturality
@@ -302,7 +302,9 @@ theorem finitarySite_enoughPoints
     rw [← ConcreteCategory.comp_apply, ι_colimMap, ConcreteCategory.comp_apply]
     congr 1
     have hh : η ≫ (sectionMorphism J F W z).hom = uliftYonedaEquiv.symm z :=
-      toSheafify_sheafifyLift J.toGrothendieck (uliftYonedaEquiv.symm z) F.property
+      toSheafify_sheafifyLift J.toGrothendieck
+        (P := uliftYoneda.{max u w}.obj W) (Q := F.obj)
+        (uliftYonedaEquiv.symm z) F.property
     let c : (uliftYoneda.{max u w}.obj W).obj (U.obj i) := ULift.up a
     exact ConcreteCategory.congr_hom (congr_app hh (U.obj i)) c
   intro he

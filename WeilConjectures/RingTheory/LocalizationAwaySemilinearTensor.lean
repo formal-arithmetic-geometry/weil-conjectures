@@ -66,8 +66,7 @@ theorem Localization.Away.semilinearTensorMap_smul
     (r : R) (x : Localization.Away t ⊗[R] M) :
     Localization.Away.semilinearTensorMap c hc u hu (r • x) =
       φ r • Localization.Away.semilinearTensorMap c hc u hu x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul a m =>
     rw [TensorProduct.smul_tmul', semilinearTensorMap_tmul, semilinearTensorMap_tmul,
       TensorProduct.smul_tmul', Algebra.smul_def, map_mul, hc, ← Algebra.smul_def]

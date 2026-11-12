@@ -87,4 +87,5 @@ theorem nonempty_isLimit_mapCone (adj : F ⊣ G) {J : Type u₃} [Category.{v₃
   intros
   infer_instance
 
+
 end CategoryTheory.Adjunction

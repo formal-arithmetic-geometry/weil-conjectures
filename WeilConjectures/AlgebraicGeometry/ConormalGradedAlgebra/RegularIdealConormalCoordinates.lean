@@ -111,7 +111,7 @@ private theorem polynomial_monomial {R : Type u} [CommRing R] {c : ℕ} (f : Fin
       rw [hx, hy, Finsupp.prod_add_index]
       · intro a ha; simp
       · intro a ha b₁ b₂; exact pow_add _ _ _
-    · rw [← one_mul (1 : R ⧸ J), ← MvPolynomial.monomial_mul, map_mul, hx', hy']
+    · rw [← one_mul (1 : R ⧸ J), ← MvPolynomial.monomial_mul_monomial, map_mul, hx', hy']
       exact Ideal.associatedGraded_mul J _ _ x y
   have hsingle (j : Fin c) : P (Finsupp.single j 1) := by
     dsimp only [P]
@@ -279,7 +279,7 @@ theorem regular_ideal_conormal_coordinates {V S : Scheme.{u}}
         change (P.hom.hom.app (op W)) (qJ r) =
           SymmetricAlgebraSheaf.sectionMap N (op W) (ep (MvPolynomial.C r))
         simp only [ep, RingEquiv.trans_apply, MvPolynomial.mapEquiv_apply,
-          MvPolynomial.map_C, AlgEquiv.coe_ringEquiv]
+          MvPolynomial.map_C, AlgEquiv.coe_toRingEquiv]
         exact (congrArg (SymmetricAlgebraSheaf.sectionMap N (op W))
           ((SymmetricAlgebra.equivMvPolynomial b).symm.commutes (qJ r))).symm
       · intro j
@@ -288,7 +288,7 @@ theorem regular_ideal_conormal_coordinates {V S : Scheme.{u}}
         change (SymmetricAlgebraSheaf.inclusion N).val.app (op W) (b j) = _
         simp only [ep, RingHom.comp_apply, RingEquiv.trans_apply,
           RingEquiv.coe_toRingHom, MvPolynomial.mapEquiv_apply, MvPolynomial.map_X,
-          AlgEquiv.coe_ringEquiv]
+          AlgEquiv.coe_toRingEquiv]
         exact (congrArg (SymmetricAlgebraSheaf.sectionMap N (op W))
           (SymmetricAlgebra.equivMvPolynomial_symm_X b j)).symm
     rw [hh]

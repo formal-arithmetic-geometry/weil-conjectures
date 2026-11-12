@@ -55,7 +55,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
 
 section
 
-attribute [-instance] Endofunctor.IsoAlgebra.instPreadditive Mod.instPreadditive_weilConjectures
+attribute [-instance] Endofunctor.IsoAlgebra.instPreadditive Mod.instPreadditive
 
 attribute [local instance] OpenTensorDescentInput.e_add OpenTensorDescentInput.r_add
   OpenTensorDescentInput.e_lim OpenTensorDescentInput.e_colim

@@ -89,6 +89,7 @@ private def presentationLanColimit {X : Scheme.{u}}
   change IsColimit ((B.op.leftKanExtension G.obj).mapCocone _)
   exact isColimitOfPreserves _ (presentationModelIsLimit.{u, v} P).op
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The restriction cocone of an etale inverse image is a colimit on every
 specified affine etale presentation. No finite-generation hypothesis is needed.
 

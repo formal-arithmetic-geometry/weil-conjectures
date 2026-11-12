@@ -43,7 +43,7 @@ private noncomputable def exactComp {U V W : Scheme.{u}} (a : U ⟶ V) (b : V �
     D(upperStar AddCommGrpCat.{u + 1} d) ≅
       D(upperStar AddCommGrpCat.{u + 1} b) ⋙ D(upperStar AddCommGrpCat.{u + 1} a) :=
   Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} a b d hd) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 private noncomputable def exactSquare {X Y S T : Scheme.{u}}
     {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (sq : CommSq e h g f) :

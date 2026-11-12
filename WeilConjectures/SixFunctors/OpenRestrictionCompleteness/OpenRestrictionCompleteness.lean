@@ -69,11 +69,11 @@ private theorem principalMap
     intro n
     rw [Category.assoc, hp, ← G.map_comp_assoc]
     simp only [towerTransitionEndomorphism, Preadditive.sub_comp,
-      Category.id_comp, towerProductShift, Pi.lift_π, G.map_sub,
+      Category.id_comp, towerProductShift, Pi.lift_comp_π, G.map_sub,
       Preadditive.sub_comp, G.map_comp, Category.assoc,
       Preadditive.comp_sub, Category.comp_id, hp]
     rw [← Category.assoc p.hom, hp, Category.assoc]
-    rw [← G.map_comp_assoc, Pi.lift_π, G.map_comp, Category.assoc,
+    rw [← G.map_comp_assoc, Pi.lift_comp_π, G.map_comp, Category.assoc,
       CochainComplex.principalLevelIso_step F μ n]
   have hu : G.map (CochainComplex.PrincipalCone.productUnit μ) ≫ p.hom =
       CochainComplex.PrincipalCone.productUnit ν := by
@@ -81,9 +81,9 @@ private theorem principalMap
     intro n
     rw [Category.assoc, hp, ← G.map_comp_assoc]
     change G.map ((Pi.lift _) ≫ Pi.π K n) ≫ (e n).hom = _
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     change G.map _ ≫ (e n).hom = (Pi.lift _) ≫ Pi.π L n
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     exact CochainComplex.principalLevelIso_inr F μ n
   let c := CochainComplex.coneSquareIso (G.map (towerTransitionEndomorphism f))
     (towerTransitionEndomorphism g) p p hsq
@@ -123,7 +123,7 @@ private theorem complete_iff_principal (T : Scheme.{t})
   let : Fact p.Prime := ⟨hprime⟩
   obtain ⟨d, hd, _⟩ := WeilConjectures.PrincipalKoszulStrictReplacement.coefficient_datum l E
   have h := (WeilConjectures.roosIntrinsicCompletenessEquivalence p l (by omega)
-    E T d hd K P eP).out 0 1
+    E T d hd K P eP).out 1 2
   change complete l E T K ↔ WeilConjectures.IntegralPrincipalCone.locallyComplete l E T
     (WeilConjectures.integralCompletionScalarValue l E T) K at h
   exact h.trans (WeilConjectures.IntegralPrincipalCone.localCriterion l E T
@@ -344,12 +344,12 @@ theorem openRestrictionComplete
     ((HomologicalComplex.quasiIso _ (.up ℤ)).inverseImage
       (IntegralOnSlice.Good l E U none).ι)
   let P := q.objPreimage ((star l E j o).obj H)
-  let eP : DerivedCategory.Q.obj P.obj ≅ (star l E j o).obj H :=
+  let eP : q.obj P ≅ (star l E j o).obj H :=
     q.objObjPreimageIso _
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hprime⟩
   obtain ⟨d, hd, _⟩ := WeilConjectures.PrincipalKoszulStrictReplacement.coefficient_datum l E
   exact ((WeilConjectures.roosIntrinsicCompletenessEquivalence p l (by omega)
-    E U d hd _ P eP).out 0 4).mp hcomplete
+    E U d hd _ P eP).out 1 5).mp hcomplete
 
 end WeilConjectures.OpenRestrictionCompleteness

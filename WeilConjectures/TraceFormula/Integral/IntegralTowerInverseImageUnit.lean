@@ -1172,18 +1172,18 @@ def integralDerivedTowerInverseImageUnit :
     coefficientSequenceDerivedRestriction l E Y ⋙ integralDerivedTowerInverseImage l E g ≅
       integralComparisonDerivedSequencePullback l E g ⋙
         coefficientSequenceDerivedRestriction l E X :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (integralTowerInverseImageUnit l E g) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Exact inverse image commutes with the diagonal by the identity at each level.
 Source: Stacks 0941 (blueprint: def-trf-integral-tower-inverse-image-unit). -/
 def integralTowerInverseImageDiagonal :
     inverseImageIntegralDerived l E g ⋙ integralComparisonConstantTower l E X ≅
       integralComparisonConstantTower l E Y ⋙ integralDerivedTowerInverseImage l E g :=
-  (Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryCompIso
     (inverseImageIntegralModules l E g)
-    (Functor.const ℕᵒᵖ : scalarReductionSource l E X ⥤ _)).symm ≪≫
+    (Functor.const ℕᵒᵖ : scalarReductionSource l E X ⥤ _) ≪≫
     Functor.mapDerivedCategoryNatIso
       (@id
         (inverseImageIntegralModules l E g ⋙
@@ -1191,8 +1191,8 @@ def integralTowerInverseImageDiagonal :
           (Functor.const ℕᵒᵖ : scalarReductionSource l E Y ⥤ _) ⋙
             integralTowerInverseImage l E g)
         (Functor.compConstIso ℕᵒᵖ (inverseImageIntegralModules l E g))) ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso
         (Functor.const ℕᵒᵖ : scalarReductionSource l E Y ⥤ _)
-        (integralTowerInverseImage l E g)
+        (integralTowerInverseImage l E g)).symm
 
 end WeilConjectures

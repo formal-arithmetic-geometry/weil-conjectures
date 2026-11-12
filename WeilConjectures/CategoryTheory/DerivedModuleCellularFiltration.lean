@@ -8,6 +8,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Abelian.Exact
 import WeilConjectures.Algebra.Homology.LargeFilteredFreeResolution
 import WeilConjectures.CategoryTheory.DerivedShiftedFreeCoproduct
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact

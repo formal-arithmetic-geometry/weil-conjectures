@@ -19,6 +19,8 @@ open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 open CategoryTheory.Pretriangulated Opposite
 
 private theorem transportDerivedLimit
@@ -63,6 +65,7 @@ private def isoOfSuccessors
     (fun n ↦ by rw [Functor.ofOpSequence_map_homOfLE_succ]; exact h n)
   exact NatIso.ofComponents (fun n ↦ e n.unop) (fun g ↦ a.naturality g)
 
+attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] adicFiniteStrictReductionLevel
   adicFiniteStrictReductionEvaluationIso derivedExtension DerivedCategory.Q
   HasDerivedCategory.standard dres change extend adicFiniteTransition

@@ -21,7 +21,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 open Scheme
 attribute [local instance] GrothendieckTopology.Point.sheafFiber_additive
-noncomputable local instance : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
+noncomputable local instance instAB5OfSizeAddCommGrpCat_underivedGlobalGermExchange
+    : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
 -- Abelian-coefficient version of the proved private helper in FiniteEtaleUnitStalkInclusion.

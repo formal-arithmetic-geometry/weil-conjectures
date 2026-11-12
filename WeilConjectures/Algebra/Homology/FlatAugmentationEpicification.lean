@@ -120,14 +120,14 @@ theorem exists_boundedAbove_flat_epicification
     · exact flat_zero
   have hzP (i : ℤ) (hi : N < i) : IsZero (P i) := by
     dsimp [P]
-    rw [if_neg (not_le.mpr hi)]
+    rw [ite_eq_right (not_le.mpr hi)]
     exact HasZeroObject.zero.choose_spec
   let q (i : ℤ) : P i ⟶ H.X i :=
     if hi : i ≤ N then eqToHom (by simp [P, hi]) ≫ p (H.X i) else 0
   have hq (i : ℤ) : Epi (q i) := by
     by_cases hi : i ≤ N
     · dsimp only [q]
-      rw [dif_pos hi]
+      rw [dite_eq_left hi]
       have := hp (H.X i)
       infer_instance
     · exact (hN i (lt_of_not_ge hi)).epi _
@@ -139,7 +139,7 @@ theorem exists_boundedAbove_flat_epicification
   let D : CochainComplex _ ℤ :=
     { X := X
       d := dd
-      shape := fun i j hij ↦ dif_neg hij
+      shape := fun i j hij ↦ dite_eq_right hij
       d_comp_d' := by
         intro i j k hij hjk
         change i + 1 = j at hij
@@ -150,7 +150,7 @@ theorem exists_boundedAbove_flat_epicification
       intro i
       have hi : i + 1 - 1 = i := by omega
       apply biprod.hom_ext'
-      · simp only [D, dd, dif_pos rfl, Category.assoc,
+      · simp only [D, dd, dite_eq_left rfl, Category.assoc,
           biprod.inl_fst_assoc, biprod.inr_desc]
         simpa using (eqToHom_naturality
           (fun k ↦ q k ≫ H.d k (i + 1)) hi.symm)
@@ -166,12 +166,12 @@ theorem exists_boundedAbove_flat_epicification
   have hcontract : Homotopy (𝟙 D) 0 := by
     refine { hom := hh, zero := ?_, comm := ?_ }
     · intro i j hij
-      exact dif_neg hij
+      exact dite_eq_right hij
     · intro i
       rw [dNext_eq hh (show (ComplexShape.up ℤ).Rel i (i + 1) by rfl),
         prevD_eq hh (show (ComplexShape.up ℤ).Rel (i - 1) i by change i - 1 + 1 = i; omega)]
       have hi' : i - 1 + 1 = i := by omega
-      simp only [D, dd, hh, dif_pos rfl, dif_pos hi', HomologicalComplex.id_f,
+      simp only [D, dd, hh, dite_eq_left rfl, dite_eq_left hi', HomologicalComplex.id_f,
         HomologicalComplex.zero_f, Category.assoc, biprod.inr_snd_assoc,
         biprod.inl_fst_assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp,
         add_zero]

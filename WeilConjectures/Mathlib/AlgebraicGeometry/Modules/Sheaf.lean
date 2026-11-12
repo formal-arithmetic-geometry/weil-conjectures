@@ -71,7 +71,12 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} (U : X.Opens)
-  {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
+
+/-- Evaluation at an open subset is additive. -/
+instance (V : X.Opens) : (SheafOfModules.evaluation X.ringCatSheaf (op V)).Additive :=
+  inferInstanceAs (SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ (op V)).Additive
+
+variable {M N : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ N)
 
 /-- **The sections of a kernel are the kernel of the sections.** Over any open `U`, the image
 of `kernel.ι f` on sections is the set of sections of `M` killed by `f`.
@@ -251,7 +256,7 @@ noncomputable def freeπ {J : Type u} [DecidableEq J] (j : J) :
 @[reassoc (attr := simp)]
 lemma ιFree_freeπ {J : Type u} [DecidableEq J] (i j : J) :
     ιFree i ≫ (freeπ j : free (R := X.ringCatSheaf) J ⟶ _) = if i = j then 𝟙 _ else 0 :=
-  Sigma.ι_desc _ _
+  Sigma.ι_comp_desc _ _
 
 lemma free_hom_ext {I : Type u} {M : X.Modules} {f g : free (R := X.ringCatSheaf) I ⟶ M}
     (h : ∀ i, ιFree i ≫ f = ιFree i ≫ g) : f = g :=
@@ -370,8 +375,8 @@ noncomputable def freeSectionsEquiv (I : Type u) [Fintype I] [DecidableEq I] :
     ext j
     dsimp only
     rw [map_sum, Finset.sum_eq_single j (fun i _ hi ↦ ?_) (by simp)]
-    · rw [freeπ_app_ιFree_app, if_pos rfl]
-    · rw [freeπ_app_ιFree_app, if_neg hi]
+    · rw [freeπ_app_ιFree_app, ite_eq_left rfl]
+    · rw [freeπ_app_ιFree_app, ite_eq_right hi]
 
 /-- The application `Γ(M, U) → Γ(N, U)` of a morphism of `𝒪_X`-modules, as a `Γ(X, U)`-linear
 map. -/

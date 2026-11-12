@@ -253,25 +253,17 @@ private theorem scalarAssoc_rationalAssociator_natural
       (pullbackTensorRationalAssociator l E X K' L' M').hom =
     (pullbackTensorRationalAssociator l E X K L M).hom ≫
       F.map (Prod.mkHom f (F.map (Prod.mkHom g h)))
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    simp only [hb, map_zero, LinearMap.zero_apply, Limits.zero_comp,
-      Limits.comp_zero]
+  induction f using TensorProduct.inductionOn with
   | add f f' hf hf' =>
     simpa only [hb, map_add, LinearMap.add_apply, Preadditive.add_comp,
       Preadditive.comp_add] using congrArg₂ (· + ·) hf hf'
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero =>
-      simp only [hb, map_zero, LinearMap.zero_apply, Limits.zero_comp,
-        Limits.comp_zero]
+    induction g using TensorProduct.inductionOn with
     | add g g' hg hg' =>
       simpa only [hb, map_add, LinearMap.add_apply, Preadditive.add_comp,
         Preadditive.comp_add] using congrArg₂ (· + ·) hg hg'
     | tmul c g =>
-      induction h using TensorProduct.induction_on with
-      | zero =>
-        simp only [hb, map_zero, Limits.zero_comp, Limits.comp_zero]
+      induction h using TensorProduct.inductionOn with
       | add h h' hh hh' =>
         simpa only [hb, map_add, LinearMap.add_apply, Preadditive.add_comp,
           Preadditive.comp_add] using congrArg₂ (· + ·) hh hh'
@@ -527,6 +519,8 @@ theorem rationalScalarAssociatorSquare
 end ScalarAssociator
 
 section HigherCoherence
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
@@ -721,8 +715,8 @@ private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
 
 set_option maxHeartbeats 400000 in
 -- assembling the common-stage associator unfolds long composites of stage comparisons
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -836,8 +830,8 @@ theorem pullbackTensorCommonAssociator_exists (W : Scheme.{u})
             ((@pullbackTensorCommonRight l _ Ω _ _ _ W hW) M N P L hT).inv)) := by
   exact pullbackTensorCommonAssociator_exists_aux l Ω W M N P
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The common-stage associator has its prescribed representative at every larger field.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the rational associator

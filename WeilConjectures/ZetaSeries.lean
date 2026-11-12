@@ -197,10 +197,10 @@ function of the point counts of `X`: `t * Z'(X, t) = (∑ N_n * t ^ n) * Z(X, t)
 `Z(X, t) = exp (∑ N_n t ^ n / n)`.
 (blueprint: `def-weil-point-counts-zeta`) -/
 theorem Hom.X_mul_derivative_zetaSeries :
-    PowerSeries.X * PowerSeries.derivative ℚ f.zetaSeries =
+    PowerSeries.X * PowerSeries.derivative (R := ℚ) f.zetaSeries =
       PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) *
         f.zetaSeries := by
-  have hXF : PowerSeries.X * PowerSeries.derivative ℚ
+  have hXF : PowerSeries.X * PowerSeries.derivative (R := ℚ)
       (PowerSeries.mk fun n ↦ if n = 0 then 0 else (f.pointCount n : ℚ) / n) =
       PowerSeries.mk fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n := by
     ext n
@@ -208,8 +208,8 @@ theorem Hom.X_mul_derivative_zetaSeries :
     | 0 => simp
     | m + 1 =>
       rw [PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_derivative,
-        PowerSeries.coeff_mk, PowerSeries.coeff_mk, if_neg m.succ_ne_zero,
-        if_neg m.succ_ne_zero]
+        PowerSeries.coeff_mk, PowerSeries.coeff_mk, ite_eq_right m.succ_ne_zero,
+        ite_eq_right m.succ_ne_zero]
       have hm : ((m : ℚ) + 1) ≠ 0 := by positivity
       push_cast
       rw [div_mul_cancel₀ _ hm]

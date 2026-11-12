@@ -155,7 +155,7 @@ noncomputable def continuousMapRingSheafToLowerStar :
           ULift.ringEquiv.toRingHom))
       naturality S S' f := by
         ext g
-        refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+        refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
         change g.down (f.unop (profiniteTestObjectProj X S'.unop x)) =
           g.down (profiniteTestObjectProj X S.unop
             (((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).map
@@ -357,7 +357,7 @@ lemma continuousMapToLowerStar_comp_map_continuousMapToPushforward :
     pointLowerStar_map_hom_app_eq, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, h₁,
     h₂, ← Functor.map_comp, ← op_comp]
   ext f
-  refine ULift.ext _ _ (ContinuousMap.ext fun x ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun x ↦ ?_)
   change f.down (profiniteTestObjectProj X S.unop
       ((pullback.fst (profiniteTestObject X S.unop).hom g).base x)) =
     f.down (profiniteTestObjectProj X' S.unop
@@ -569,7 +569,7 @@ instance isLocallySurjective_continuousMapLanHom [T2Space T] [TotallyDisconnecte
         (((profiniteToProEtOf X).op.leftKanExtensionUnit
           (Profinite.continuousMapRingObj.{u} T).obj).app (op K) (ULift.up incl)), ?_⟩
     rw [continuousMapLanHom_app_map_leftKanExtensionUnit_app]
-    refine ULift.ext _ _ (ContinuousMap.ext fun w ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun w ↦ ?_)
     rw [ContinuousMap.comp_apply, ContinuousMap.comp_apply, hψ]
     rfl
 
@@ -605,7 +605,7 @@ lemma map_eq_zero_of_continuousMapLanHom_app_eq_zero [T2Space T] {U : X.ProEt}
     (Profinite.continuousMapRingObj.{u} T).obj).naturality j.op) g
   erw [← hu]
   have h0 : (Profinite.continuousMapRingObj.{u} T).obj.map j.op g = 0 :=
-    ULift.ext _ _ (ContinuousMap.ext fun s ↦ s.2)
+    ULift.ext (ContinuousMap.ext fun s ↦ s.2)
   rw [ConcreteCategory.comp_apply, h0, map_zero, map_zero]
 
 /-- `continuousMapLanHom` is locally injective, by

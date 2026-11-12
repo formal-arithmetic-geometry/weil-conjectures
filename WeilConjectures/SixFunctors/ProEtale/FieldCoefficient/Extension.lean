@@ -58,6 +58,7 @@ noncomputable def fieldUnitPresheafLift {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficien
   app U := ModuleCat.ofHom (LinearMap.toSpanSingleton _ _ (G.map (terminal.from U.unop).op x))
   naturality U U' f := by
     refine ModuleCat.hom_ext (LinearMap.ext fun r ↦ ?_)
+    change ULift.{u + 1} Λ at r
     change (r : ULift Λ) • G.map (terminal.from U'.unop).op x =
       G.map f (r • G.map (terminal.from U.unop).op x)
     rw [map_smul, ← ConcreteCategory.comp_apply, ← G.map_comp,

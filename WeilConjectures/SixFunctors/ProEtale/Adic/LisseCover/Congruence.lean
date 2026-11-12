@@ -236,14 +236,14 @@ lemma finite_image_congruenceSubgroup_zero (k : ℕ) :
   rintro _ ⟨A, hA, rfl⟩
   refine ⟨pat A, ?_⟩
   have h : ∃ B ∈ congruenceSubgroup E n 0, pat B = pat A := ⟨A, hA, rfl⟩
-  simp only [rep, dif_pos h]
+  simp only [rep, dite_eq_left h]
   obtain ⟨hB, hpat⟩ := h.choose_spec
   set B := h.choose
   refine (QuotientGroup.eq.2 (inv_mul_mem_congruenceSubgroup hB hA fun i j ↦ ?_))
   have hAij := entryBound_of_mem_congruenceSubgroup_zero hA i j
   have hBij := entryBound_of_mem_congruenceSubgroup_zero hB i j
   have e : pat B i j = pat A i j := by rw [hpat]
-  simp only [pat, dif_pos hAij, dif_pos hBij] at e
+  simp only [pat, dite_eq_left hAij, dite_eq_left hBij] at e
   have h₁ := (hc _ hAij).choose_spec
   have h₂ := (hc _ hBij).choose_spec
   rw [e] at h₂

@@ -318,7 +318,7 @@ theorem strictPerfectConstantFiniteFreeComparison_isIso (n : ℕ) :
     rw [hk]
     change G.map (ModuleCat.ofHom (LinearMap.proj k)) ≫ e =
       Pi.lift (strictPerfectConstantCoordinate J Λ n) ≫ Pi.π _ k
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     let c := (strictPerfectConstantPresheaf (C := C) Λ).map
       (ModuleCat.ofHom (LinearMap.proj k) : ModuleCat.of Λ (Fin n → Λ) ⟶
         ModuleCat.of Λ Λ)

@@ -5,10 +5,13 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
@@ -151,9 +154,8 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
             ((NatTrans.mapHomologicalComplex (completedConstantLimitUnit d T)
               (.up ℤ)).app C) ≫
           (lim : pbcTowers T (pbcAdicCompletion T d) ⥤
-            pbcModules T (pbcAdicCompletion T d)).rightDerivedFunctorUnit.app
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj
-                (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C)) ≫
+            pbcModules T (pbcAdicCompletion T d)).rightDerivedFunctorUnitQ
+              (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C) ≫
           (completedTowerRlim d T).map
             (((completedTowerConstant d T).mapDerivedCategoryFactors).inv.app C) := by
   let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
@@ -165,13 +167,15 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
       pbcModules T (pbcAdicCompletion T d) := lim
   let Q : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ ⥤
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) := DerivedCategory.Q
+  let ε : L.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ L.rightDerivedFunctor :=
+    { app := L.rightDerivedFunctorUnitQ
+      naturality := fun _ _ f ↦ L.rightDerivedFunctorUnitQ_naturality f }
   let τ : Q ⟶ Q ⋙ (completedDerivedConstant d T ⋙ completedTowerRlim d T) :=
     Functor.whiskerRight
         (NatTrans.mapHomologicalComplex (completedConstantLimitUnit d T) (.up ℤ))
         DerivedCategory.Q ≫
-      Functor.whiskerLeft (Δ.mapHomologicalComplex (.up ℤ))
-        (Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ))
-          L.rightDerivedFunctorUnit) ≫
+      Functor.whiskerLeft (Δ.mapHomologicalComplex (.up ℤ)) ε ≫
       Functor.whiskerRight Δ.mapDerivedCategoryFactors.inv (completedTowerRlim d T)
   let ff := Localization.fullyFaithfulWhiskeringLeft Q
     (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))

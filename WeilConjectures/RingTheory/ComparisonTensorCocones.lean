@@ -233,8 +233,7 @@ theorem exists_comparison_tensor_cocones
         ((d j).symm (b ⊗ₜ[P] 1)))) = ζ (μs j b ⊗ₜ[P] 1)
       erw [hc, hb, hd, hm]
       clear hc hb hd hm
-      induction b with
-      | zero => simp
+      induction b using TensorProduct.inductionOn with
       | tmul a b => simp
       | add b₁ b₂ h₁ h₂ => simp only [map_add, h₁, h₂]
     · apply RingHom.ext

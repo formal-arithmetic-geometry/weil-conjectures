@@ -137,7 +137,7 @@ theorem sum_compTrace_sum_sub_mul [DecidableEq L] {ψ : AddChar K R} (hψ : ψ �
   split_ifs with h
   · simp [h]
   · obtain ⟨i, hi⟩ := Function.ne_iff.1 h
-    exact Finset.prod_eq_zero (Finset.mem_univ i) (if_neg hi)
+    exact Finset.prod_eq_zero (Finset.mem_univ i) (ite_eq_right hi)
 
 /-- **Classical Fourier inversion on `L^ι`.** For a nontrivial additive character `ψ` of `K`,
 the transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L ^ #ι` times
@@ -160,7 +160,7 @@ theorem fourierTransformPi_inv_fourierTransformPi {ψ : AddChar K R} (hψ : ψ �
   simp_rw [fourierTransformPi_eq_sum_compTrace, Finset.sum_mul]
   rw [Finset.sum_comm]
   simp_rw [h, sum_compTrace_sum_sub_mul hψ, mul_ite, mul_zero]
-  rw [Finset.sum_ite_eq' Finset.univ y, if_pos (Finset.mem_univ _), mul_comm]
+  rw [Finset.sum_ite_eq' Finset.univ y, ite_eq_left (Finset.mem_univ _), mul_comm]
 
 /-- **Classical Fourier inversion.** For a nontrivial additive character `ψ` of `K`, the
 transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L` times the
@@ -224,7 +224,7 @@ theorem sum_norm_sq_fourierTransformPi [Finite K] (j : R →+* ℂ) {ψ : AddCha
   rw [Finset.sum_comm]
   refine (Finset.sum_congr rfl fun x _ ↦ Finset.sum_comm).trans ?_
   simp_rw [← Finset.mul_sum, horth, mul_ite, mul_zero, Finset.sum_ite_eq, Finset.mem_univ,
-    if_true, Finset.mul_sum]
+    ite_true, Finset.mul_sum]
   exact Finset.sum_congr rfl fun x _ ↦ by ring
 
 /-- **Classical Plancherel identity.** For a nontrivial additive character `ψ` of a finite field

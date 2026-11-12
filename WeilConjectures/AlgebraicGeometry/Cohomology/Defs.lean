@@ -370,8 +370,8 @@ noncomputable def H.isBilimitLinearEquiv {ι : Type*} [Fintype ι] [DecidableEq 
     rw [← H.map_sum_apply, IsBilimit.total hb, H.map_id_apply]
   right_inv y := funext fun j ↦ by
     simp only [map_sum, ← H.map_comp_apply, b.ι_π]
-    rw [Finset.sum_eq_single j (fun i _ hij ↦ by rw [dif_neg hij, H.map_zero_apply])
-      (by simp), dif_pos rfl, eqToHom_refl, H.map_id_apply]
+    rw [Finset.sum_eq_single j (fun i _ hij ↦ by rw [dite_eq_right hij, H.map_zero_apply])
+      (by simp), dite_eq_left rfl, eqToHom_refl, H.map_id_apply]
 
 /-- **`h^n` of a finite biproduct** is the sum of the `h^n` of the summands, when these are
 finite-dimensional. -/

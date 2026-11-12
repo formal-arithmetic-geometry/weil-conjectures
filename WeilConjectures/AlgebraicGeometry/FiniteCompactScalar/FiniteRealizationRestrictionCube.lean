@@ -29,9 +29,8 @@ set_option backward.defeqAttrib.useBackward true
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
   Functor.rightDerivedFunctor AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
-attribute [local implicit_reducible] CategoryTheory.Equivalence.mk
-  CategoryTheory.Equivalence.mapDerivedCategory
-  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+attribute [local implicit_reducible] CategoryTheory.Equivalence.mapDerivedCategory
+  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
 open CategoryTheory.Limits
 
 namespace MixedDerivedCube
@@ -63,7 +62,7 @@ private theorem squareFactors
         r.mapDerivedCategoryFactors.hom.app ((Fp.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex hF (.up ℤ)).hom.app K) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).inv.app
     (DerivedCategory.Q.obj K))).mp
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app]
@@ -72,7 +71,7 @@ private theorem squareFactors
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rfl
 
 private theorem derived_unit_ext_general
@@ -376,13 +375,13 @@ private theorem realization_adjunction (T : Scheme.{u})
     (HomotopyCategory.quasiIso _ (.up ℤ))
   intro H
   rw [Adjunction.mapDerivedCategoryAdjunction_counit_app_Qh_obj]
-  change ((Functor.mapDerivedCategoryCompIso _ _).inv ≫
+  change ((Functor.mapDerivedCategoryCompIso _ _).hom ≫
     (Functor.mapDerivedCategoryNatIso (sfIntrinsicModuleEquivalence T A).counitIso).hom ≫
       (Functor.mapDerivedCategoryIdIso _).hom).app (DerivedCategory.Qh.obj H) = _
   simp only [NatTrans.comp_app]
   rw [Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj, Functor.mapDerivedCategoryNatIso_fach]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factorsh]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   congr 2
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
   rw [Adjunction.mapHomotopyCategory_counit_app_quotient]

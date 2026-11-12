@@ -657,7 +657,7 @@ private theorem bounded_class_alphaSmall
     dsimp only [Cofan.mk_ι_app, eJ, eSum, Iso.trans_hom]
     dsimp only [Q]
     simp only [Category.assoc, derived_coproduct_inclusion_assoc,
-      Sigma.ι_mapIso_hom_assoc, Sigma.ι_desc, ← Functor.map_comp_assoc,
+      Sigma.ι_mapIso_hom_assoc, Sigma.ι_comp_desc, ← Functor.map_comp_assoc,
       Sigma.ι_mapIso_hom]
   refine ⟨J, hJ, e.inv ≫ inv (Q.map q) ≫ Q.map g ≫ eJ.hom, ?_⟩
   simp only [Category.assoc]

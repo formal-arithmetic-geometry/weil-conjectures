@@ -25,8 +25,8 @@ attribute [local irreducible] HasDerivedCategory.standard Padic
   WeilConjectures.sfRationalScalarExtension WeilConjectures.sfRationalConstructibleLocalization
   WeilConjectures.sfRationalScalarComp
   WeilConjectures.GeneralAlgebraicallyClosedCoefficients.scalarAssociator
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false

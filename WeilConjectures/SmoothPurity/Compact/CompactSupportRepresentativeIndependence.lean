@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Integral.IntegralRationalQbarCompactSupport
 public import WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
@@ -237,7 +239,7 @@ private theorem productProjection
     {D : Type*} [Category D] [HasCountableProducts D]
     {K K' : ℕ → D} {L : D} (p : ∀ n, L ⟶ K n) (e : ∀ n, K n ≅ K' n) (n : ℕ) :
     (Pi.lift p ≫ (Pi.mapIso e).hom) ≫ Pi.π K' n = p n ≫ (e n).hom := by
-  simp only [Category.assoc, Pi.mapIso_hom_π, Pi.lift_π_assoc]
+  simp only [Category.assoc, Pi.mapIso_hom_π, Pi.lift_comp_π_assoc]
 
 private theorem transportLimitTriangle
     {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]

@@ -67,7 +67,7 @@ import WeilConjectures.CategoryTheory.StrictRoosNormalization
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-import Mathlib.Logic.Denumerable
+import Mathlib.Basic.Denumerable
 import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosChainMaps
 import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution

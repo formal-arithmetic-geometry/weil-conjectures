@@ -122,11 +122,11 @@ theorem scalarRoosMap_existsUnique
     have hG := (towerTransitionEndomorphism_eq_iff
       (integralOperationsTowerStep (C ⋙ G)) (scalarRoosBoundary (C ⋙ G))).mp rfl n
     simp only [Category.assoc]
-    rw [show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_π _ n,
+    rw [show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_comp_π _ n,
       ← G.map_comp, hC, G.map_sub, G.map_comp]
     dsimp only [Functor.comp_obj] at hG
     erw [hG]
-    simp only [Preadditive.comp_sub, ← Category.assoc, pc, Pi.lift_π]
+    simp only [Preadditive.comp_sub, ← Category.assoc, pc, Pi.lift_comp_π]
     rfl
   let α := scalarAdditiveCoconeMap F (scalarRoosBoundary C) ≫
     scalarCoconeSquareMap (G.map (scalarRoosBoundary C)) (scalarRoosBoundary (C ⋙ G)) pc pc w
@@ -148,7 +148,7 @@ theorem scalarRoosMap_existsUnique
       dsimp only [α, scalarAdditiveCoconeMap, scalarCoconeSquareMap, G]
       simp only [Category.assoc, mappingCocone.lift_fst_assoc]
       change _ ≫ pc ≫ Pi.π _ n = _
-      rw [show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_π _ n]
+      rw [show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_comp_π _ n]
       exact (G.map_comp _ _).symm
     · intro i j h n
       dsimp only [α, scalarAdditiveCoconeMap, scalarCoconeSquareMap, G]
@@ -159,7 +159,7 @@ theorem scalarRoosMap_existsUnique
       rw [mappingCocone.lift_f_snd_v_assoc]
       simp only [Cochain.map_v]
       have hpc := congrArg (fun z ↦ z.f j)
-        (show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_π _ n)
+        (show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_comp_π _ n)
       change pc.f j ≫ (Pi.π (fun n ↦ G.obj (C.obj (op n))) n).f j =
           F.map ((Pi.π (fun n ↦ C.obj (op n)) n).f j) at hpc
       rw [hpc]
@@ -205,7 +205,7 @@ def scalarRoosMap
 
 section ScalarRoosNaturality
 attribute [local implicit_reducible] integralOperationsRoos
-  Functor.mapHomologicalComplex CochainComplex.mappingCocone
+  CochainComplex.mappingCocone
 open CochainComplex CochainComplex.HomComplex
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
   {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B]
@@ -349,10 +349,10 @@ private theorem scalarRoosCoordinates (F : A ⥤ B) [F.Additive]
         F.map ((Pi.π (fun n : ℕ ↦ C.obj (op n)) n).f (i - 1)) at hp
     change F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
         i (i - 1) (by omega) ≫ (Pi.π (fun n : ℕ ↦ C.obj (op n)) n).f (i - 1)) =
-      (F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
-        i (i - 1) (by omega)) ≫ pc.f (i - 1)) ≫
+      F.map ((mappingCocone.snd (scalarRoosBoundary C)).v
+        i (i - 1) (by omega)) ≫ pc.f (i - 1) ≫
           (Pi.π (fun n : ℕ ↦ G.obj (C.obj (op n))) n).f (i - 1)
-    rw [Category.assoc, hp, ← F.map_comp]
+    rw [hp, ← F.map_comp]
   exact ⟨hf, hs⟩
 
 /-- Naturality of the diagonal Roos comparison on arbitrary strict towers.

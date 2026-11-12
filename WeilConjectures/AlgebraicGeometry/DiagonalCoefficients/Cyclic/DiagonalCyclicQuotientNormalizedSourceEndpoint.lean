@@ -237,7 +237,7 @@ theorem diagonalCyclicQuotient_normalizedSourceEndpoint
     (s0.hom ≫ limit.π (D.ordinary.E.obj (diagonalIntegralSource Y)) (op n))
     ((diagonalScalarAdjunction l (diagonalSurface Y)).unit.app (diagonalIntegralSource Y))
     ((D.ordinary.π n).app (diagonalIntegralSource Y)) s g (hs0' n) (eq_of_heq hs')
-  exact endpoint_generator_argument U
+  exact CyclicAugmentation.endpoint_generator_argument U
     ((Z.mapDerivedCategorySingleFunctor 0).app P)
     (cyclicEvaluationSource l Y n eW sourceIso p) (e.hom.app (diagonalCompletedDomain l Y))
     (sa.hom ≫

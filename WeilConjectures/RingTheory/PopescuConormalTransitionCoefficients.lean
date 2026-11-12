@@ -106,9 +106,9 @@ theorem conormal_transition_coefficients
   have hchosen (i : Fin d.m) : σ (d.a k) * coord (w i) = σ (d.h k i j) := by
     rw [hcoord]
     rw [Finset.sum_eq_single j]
-    · rw [hc j hj, if_pos rfl, mul_one]
+    · rw [hc j hj, ite_eq_left rfl, mul_one]
     · intro t ht htj
-      rw [hc t ht, if_neg htj, mul_zero]
+      rw [hc t ht, ite_eq_right htj, mul_zero]
     · exact fun h ↦ (h hj).elim
   have hcoef : σ (d.a k' * d.h k l j -
       ∑ j' ∈ d.E k', d.h k' l j' * d.h k j' j) = 0 := by

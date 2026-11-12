@@ -12,8 +12,8 @@ import all Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 import Mathlib.CategoryTheory.Limits.Types.Pullbacks
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
-import Mathlib.Data.Finite.Sum
-import Mathlib.Data.Finite.Sigma
+import Mathlib.Basic.Finite.Sum
+import Mathlib.Basic.Finite.Sigma
 import Mathlib.CategoryTheory.Limits.IsConnected
 import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 

@@ -50,12 +50,12 @@ private theorem exists_singleton_fibre_affine_model
     have hnot : ¬ q'.val.asIdeal ≤ q.asIdeal := by
       intro hle
       have hne : q'.val.asIdeal ≠ q.asIdeal := fun h ↦ q'.property.2 (PrimeSpectrum.ext h)
-      have hlt := Ideal.IsIntegral.comap_lt_comap (R := A) (lt_of_le_of_ne hle hne)
+      have hlt := Ideal.IsIntegral.under_lt_under (R := A) (lt_of_le_of_ne hle hne)
       have heq : q'.val.asIdeal.comap (algebraMap A B) =
           q.asIdeal.comap (algebraMap A B) :=
         congrArg PrimeSpectrum.asIdeal (q'.property.1.trans hq.symm)
       exact hlt.ne heq
-    obtain ⟨b, hb, hbq⟩ := SetLike.not_le_iff_exists.mp hnot
+    obtain ⟨b, hb, hbq⟩ := IsConcreteLE.not_le_iff_exists.mp hnot
     exact ⟨b, hb, hbq⟩
   choose b hb hbq using hsep
   let C := Algebra.adjoin A (Set.range b)

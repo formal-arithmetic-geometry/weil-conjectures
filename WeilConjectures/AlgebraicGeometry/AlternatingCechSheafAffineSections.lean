@@ -112,7 +112,8 @@ private noncomputable def mapExtendIso
   by_cases hn' : 0 ≤ n
   · by_cases hm' : 0 ≤ m
     · dsimp only [α]
-      simp only [dif_pos hn', dif_pos hm', Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+      simp only [dite_eq_left hn', dite_eq_left hm', Iso.trans_hom, Iso.symm_hom,
+        Functor.mapIso_hom]
       change _ ≫ (L.extend e).d n m = F.map ((K.extend e).d n m) ≫ _
       rw [L.extend_d_eq e (hi n hn') (hi m hm'),
         K.extend_d_eq e (hi n hn') (hi m hm')]
@@ -183,12 +184,8 @@ private theorem sectionsDifferential_π {X : Scheme.{u}} {r : ℕ}
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro s
-  change (∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
-    (G.presheafModuleCat.map
-      (homOfLE (alternatingCechIntersection_face_le U p t j)).op).hom.comp
-        (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))) s = _
-  simp only [ModuleCat.hom_sum, ModuleCat.hom_zsmul, ModuleCat.hom_comp,
-    ModuleCat.hom_ofHom, LinearMap.sum_apply, LinearMap.smul_apply, LinearMap.comp_apply]
+  simp only [alternatingCechDifferential, ModuleCat.hom_sum, ModuleCat.hom_zsmul,
+    ModuleCat.hom_comp, ModuleCat.hom_ofHom]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
@@ -216,7 +213,7 @@ private theorem presheafTermsSectionsIso_comm {X : Scheme.{u}} {r : ℕ}
   simp only [Preadditive.comp_sum, Preadditive.comp_zsmul, ← Category.assoc,
     presheafTermsSectionsIso_π]
   simp only [Category.assoc, capSectionsIso_naturality]
-  rw [← E.map_comp_assoc, alternatingCechSheafPresheafD, Pi.lift_π]
+  rw [← E.map_comp_assoc, alternatingCechSheafPresheafD, Pi.lift_comp_π]
   simp only [Functor.map_sum, Functor.map_zsmul, Preadditive.sum_comp,
     Preadditive.zsmul_comp, Functor.map_comp, Category.assoc]
   rfl

@@ -257,12 +257,12 @@ def SystemGeometricInverseImageData.derivedEvaluation
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     F.functor.mapDerivedCategory ⋙ derivedSystemEvaluation BX n ≅
       derivedSystemEvaluation BY n ⋙ (F.levelFunctor n).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F.functor (systemEvaluation BX n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso F.functor (systemEvaluation BX n) ≪≫
     Functor.mapDerivedCategoryNatIso
       (G := systemEvaluation BY n ⋙ F.levelFunctor n)
       (F.evaluation n : F.functor ⋙ systemEvaluation BX n ≅
         systemEvaluation BY n ⋙ F.levelFunctor n) ≪≫
-    Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelFunctor n)
+    (Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelFunctor n)).symm
 
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)

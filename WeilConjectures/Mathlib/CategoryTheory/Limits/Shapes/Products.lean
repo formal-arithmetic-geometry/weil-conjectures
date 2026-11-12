@@ -142,6 +142,7 @@ countable products (`CategoryTheory.Limits.HasCountableProducts`) if every famil
 countable type has a product. (blueprint: `def-weil-category-product`) -/
 theorem Pi.existsUnique_lift {β : Type*} {C : Type*} [Category* C] (f : β → C) [HasProduct f]
     {L : C} (g : ∀ b, L ⟶ f b) : ∃! h : L ⟶ ∏ᶜ f, ∀ b, h ≫ Pi.π f b = g b :=
-  ⟨Pi.lift g, fun b ↦ Pi.lift_π g b, fun h hh ↦ Pi.hom_ext _ _ fun b ↦ by simp [hh]⟩
+  ⟨Pi.lift g, fun b ↦ Pi.lift_comp_π g b, fun h hh ↦ Pi.hom_ext _ _ fun b ↦ by simp [hh]⟩
+
 
 end CategoryTheory.Limits

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -14,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! Coherence of an ideal pushforward.
 (blueprint: lem-pc-r2-coherent-pushforward-ideal)

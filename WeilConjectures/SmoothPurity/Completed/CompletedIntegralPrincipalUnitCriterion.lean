@@ -183,7 +183,7 @@ private theorem single_tensor_quotient_component
     koszulTensorFunctor, Functor.flip_obj_map, Functor.map₂HomologicalComplex_map_app,
     CochainComplex.mapBifunctorSingle₁Iso_inv_f, Category.assoc]
   erw [HomologicalComplex.ι_mapBifunctorMap]
-  simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+  simp only [CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self,
     HomologicalComplex.id_f, curriedTensor_map_app, ← comp_whiskerRight_assoc,
     Iso.inv_hom_id_assoc]
@@ -313,7 +313,7 @@ private theorem quotient_roos_comparison
     apply Pi.hom_ext
     intro n
     dsimp only [PrincipalQuotientCompletion.quotientProduct, roosPmap]
-    erw [Category.assoc, Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+    erw [Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact he n
   ext i : 1
   obtain ⟨p, rfl⟩ : ∃ p : ℤ, i = p + 1 := ⟨i - 1, by omega⟩
@@ -513,7 +513,7 @@ theorem completedIntegralPrincipalUnitCriterion
   obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
   let : Fact p.Prime := ⟨hp⟩
   obtain ⟨d, hd, _⟩ := PrincipalKoszulStrictReplacement.coefficient_datum l E
-  have h := (roosIntrinsicCompletenessEquivalence p l (by omega) E Y d hd K P e).out 0 4
+  have h := (roosIntrinsicCompletenessEquivalence p l (by omega) E Y d hd K P e).out 1 5
   change IsDerivedCompleteUnrestricted l E Y K ↔
     IsIso ((IntegralOnSlice.completionUnit l E Y none).app K) at h
   rw [h]

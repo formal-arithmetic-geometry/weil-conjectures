@@ -142,4 +142,5 @@ theorem isSheaf_iff_isSheaf_comp_forget {C : Type u₁} [Category.{v₁} C]
     (P : Cᵒᵖ ⥤ A) : Presheaf.IsSheaf J P ↔ Presheaf.IsSheaf J (P ⋙ forget A) :=
   Presheaf.isSheaf_iff_isSheaf_forget J P (forget A)
 
+
 end CategoryTheory.Presheaf

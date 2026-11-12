@@ -64,8 +64,20 @@ noncomputable def tensorTotalMap {A : Sheaf J CommRingCat.{w}}
 Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
 noncomputable def tensorι {A : Sheaf J CommRingCat.{w}}
     (P Q : Complex A) (p q n : ℤ) (h : p + q = n) :
-    P.X p ⊗ Q.X q ⟶ (total P Q).X n :=
-  CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules A)) p q n h
+    P.X p ⊗ Q.X q ⟶ (total P Q).X n := by
+  have : ∀ (I₁ I₂ : Type w), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  have : HasCoproducts.{0} (Modules A) := fun I ↦ by
+    have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  have : HasFiniteCoproducts (Modules A) :=
+    hasFiniteCoproducts_of_hasCoproducts (C := Modules A)
+  exact CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules A)) p q n h
 
 /-- Auxiliary formula for scalar tensor transitions. Source: Stacks 03EK, 03EL, 07A4
 (auxiliary; not a blueprint node). -/
@@ -76,7 +88,12 @@ def totalPure {A : Sheaf J CommRingCat.{w}} (P Q : Complex A)
     (ringedComparisonPure A (P.X p) (Q.X q) U x y)
 
 @[no_expose] private noncomputable instance tensorCoproducts (R : Sheaf J CommRingCat.{w}) :
-    HasCoproducts.{0} (Modules R) := inferInstance
+    HasCoproducts.{0} (Modules R) := by
+  intro I
+  have : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 @[no_expose] private noncomputable instance hasTensorTotal (R : Sheaf J CommRingCat.{w})
     (P Q : Complex R) :

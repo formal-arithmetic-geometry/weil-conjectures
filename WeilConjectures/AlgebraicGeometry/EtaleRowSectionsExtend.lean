@@ -53,7 +53,6 @@ theorem ceRowSectionsMap_extend {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     dsimp only [ceIntegerSectionsMap, ceExtendedRowMap, HomologicalComplex.comp_f,
       Functor.mapHomologicalComplex_map_f, NatTrans.mapHomologicalComplex,
       HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents]
-    simp only [Functor.mapHomologicalComplex_map_f, HomologicalComplex.comp_f]
     erw [HomologicalComplex.mapExtendX_hom_eq J
       (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
       (ComplexShape.embeddingUpNat.r_f n),

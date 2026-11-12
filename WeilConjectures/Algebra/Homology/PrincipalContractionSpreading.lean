@@ -425,14 +425,12 @@ private noncomputable def tensorExtendEquiv (R : Type u) (S : Type u) [CommRing 
             ((TensorProduct.mk R S N).map_smul r (show S from s)) }
   have h₁ : ∀ x, invFun (toFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   have h₂ : ∀ x, toFun (invFun x) = x := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s n => rfl
     | add x y hx hy => simp only [map_add, hx, hy]
   exact
@@ -440,8 +438,7 @@ private noncomputable def tensorExtendEquiv (R : Type u) (S : Type u) [CommRing 
       invFun := invFun
       map_add' := toFun.map_add
       map_smul' s x := by
-        induction x using TensorProduct.induction_on with
-        | zero => exact (map_zero toFun).trans (show (0 : T) = s • (0 : T) from (smul_zero s).symm)
+        induction x using TensorProduct.inductionOn with
         | tmul s' n => rfl
         | add x y hx hy =>
           rw [smul_add, map_add, hx, hy, map_add]
@@ -455,8 +452,7 @@ private theorem tensorExtend_naturality
     (X Y : ModuleCat.{max u v} R) (a : X ⟶ Y) (x : TensorProduct R S X) :
     ((ModuleCat.extendScalars (algebraMap R S)).map a).hom (tensorExtendEquiv R S X x) =
       tensorExtendEquiv R S Y (a.hom.baseChange S x) := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul s x => rfl
   | add x y hx hy => simp only [map_add, hx, hy]
 

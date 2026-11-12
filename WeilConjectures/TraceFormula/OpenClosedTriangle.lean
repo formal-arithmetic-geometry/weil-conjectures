@@ -41,7 +41,7 @@ lemma exists_distTriang_of_ι {A B C : P.FullSubcategory} (a : A ⟶ B) (b : B �
   refine ⟨P.fullyFaithfulι.preimage (δ ≫ ((P.ι.commShiftIso (1 : ℤ)).app A).inv), ?_⟩
   refine Pretriangulated.isomorphic_distinguished _ h (P.ι.mapTriangle.obj _)
     (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _)
-      (by simp; rfl) (by simp; rfl) ?_)
+      (by simp) (by simp) ?_)
   simp only [Iso.refl_hom, Functor.map_id, Category.comp_id, Category.id_comp]
   change P.ι.map (P.fullyFaithfulι.preimage _) ≫ _ = δ
   rw [Functor.FullyFaithful.map_preimage]

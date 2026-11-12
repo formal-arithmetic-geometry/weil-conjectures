@@ -45,7 +45,7 @@ private theorem isIso_unit_of_kInjective
     [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
     (F : C ⥤ D) [F.Additive] (K : HomotopyCategory.Plus C)
     [CochainComplex.IsKInjective K.obj.as] :
-    IsIso (F.rightDerivedFunctorPlusUnit.app K) := by
+    IsIso (F.rightDerivedFunctorPlusUnith.app K) := by
   let E := DerivedCategory.Plus.injectiveObjectEquivalence C
   let I := (InjectiveObject.ι C).mapHomotopyCategoryPlus.obj
     (E.inverse.obj (DerivedCategory.Plus.Qh.obj K))
@@ -65,10 +65,11 @@ private theorem isIso_unit_of_kInjective
       inv_hom_id := by
         apply (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective I I inferInstance).1
         simp [Functor.map_comp, ha, hb] }
-  rw [NatTrans.isIso_app_iff_of_iso F.rightDerivedFunctorPlusUnit h]
-  change IsIso (F.rightDerivedFunctorPlusUnit.app
+  rw [NatTrans.isIso_app_iff_of_iso F.rightDerivedFunctorPlusUnith h]
+  change IsIso (F.rightDerivedFunctorPlusUnith.app
     ((InjectiveObject.ι C).mapHomotopyCategoryPlus.obj _))
   infer_instance
+
 
 namespace AlgebraicGeometry.Etale
 
@@ -102,10 +103,10 @@ Apply this argument to direct image and to global sections on the two sites. -/
 theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
     (J : HomotopyCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [CochainComplex.IsKInjective J.obj.as] :
-    IsIso ((lowerStar AddCommGrpCat.{v + 1} f).rightDerivedFunctorPlusUnit.app J) ∧
-    IsIso ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnit.app
+    IsIso ((lowerStar AddCommGrpCat.{v + 1} f).rightDerivedFunctorPlusUnith.app J) ∧
+    IsIso ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith.app
       ((lowerStar AddCommGrpCat.{v + 1} f).mapHomotopyCategoryPlus.obj J)) ∧
-    IsIso ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnit.app
+    IsIso ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith.app
       J) := by
   have := (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).preservesKInjectiveComplexes
   have : CochainComplex.IsKInjective
@@ -113,6 +114,7 @@ theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
     Functor.PreservesKInjectiveComplexes.isKInjective_map J.obj.as
   exact ⟨isIso_unit_of_kInjective _ J, isIso_unit_of_kInjective _ _,
     isIso_unit_of_kInjective _ J⟩
+
 
 /-- Pullback of derived global sections is Γ of the derived unit followed by the natural
 Leray identification, for every bounded below derived object (including a sheaf in degree 0).
@@ -134,7 +136,7 @@ the natural transformations and hence of their components at every derived objec
 theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) :
     (Functor.rightDerivedDesc _
-      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnit
+      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith
       (HomotopyCategory.Plus.quasiIso _)
       ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlus ⋙
         (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus)
@@ -154,7 +156,7 @@ theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X
           DerivedCategory.Plus.Qh ≫
         (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} f).mapHomotopyCategoryPlus
-          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnit ≫
+          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnith ≫
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight
           (upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlusFactorsh.inv
@@ -186,7 +188,7 @@ theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X
       (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L ⋙ H))).inv
       DerivedCategory.Plus.Qh ≫
     (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft L.mapHomotopyCategoryPlus H.rightDerivedFunctorPlusUnit ≫
+    Functor.whiskerLeft L.mapHomotopyCategoryPlus H.rightDerivedFunctorPlusUnith ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight L.mapDerivedCategoryPlusFactorsh.inv H.rightDerivedFunctorPlus ≫
     (Functor.associator _ _ _).hom
@@ -195,13 +197,13 @@ theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft L.mapDerivedCategoryPlus
       (Functor.rightDerivedFunctorPlusCompIso' R G e).hom
-  suffices h : Functor.rightDerivedDesc _ G.rightDerivedFunctorPlusUnit
+  suffices h : Functor.rightDerivedDesc _ G.rightDerivedFunctorPlusUnith
       (HomotopyCategory.Plus.quasiIso _) _ β = γ by
     simpa only [γ, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Functor.associator_hom_app,
       Functor.leftUnitor_inv_app, Category.id_comp, Category.assoc] using
       NatTrans.congr_app h K
-  apply Functor.rightDerived_ext _ G.rightDerivedFunctorPlusUnit
+  apply Functor.rightDerived_ext _ G.rightDerivedFunctorPlusUnith
     (HomotopyCategory.Plus.quasiIso _)
   rw [Functor.rightDerived_fac]
   ext M : 2
@@ -211,7 +213,7 @@ theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X
   -- Compute the derived unit before using naturality of the Leray comparison.
   have hu : adj.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj M) =
       DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app M) ≫
-        R.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj M) ≫
+        R.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj M) ≫
         R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.inv.app M) := by
     rw [← Category.assoc, ← adj.derivedPlus_unit_app_fac, Category.assoc,
       ← Functor.map_comp]
@@ -222,7 +224,7 @@ theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X
   simp only [Functor.comp_map] at hn
   dsimp only [Functor.comp_obj] at hn
   rw [hn]
-  have hG := G.rightDerivedFunctorPlusUnit.naturality
+  have hG := G.rightDerivedFunctorPlusUnith.naturality
     (adj.mapHomotopyCategoryPlus.unit.app M)
   simp only [Functor.comp_map] at hG
   rw [← reassoc_of% hG]

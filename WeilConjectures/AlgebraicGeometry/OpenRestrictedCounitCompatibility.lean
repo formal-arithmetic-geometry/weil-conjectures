@@ -6,9 +6,12 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonComposition
-import WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorization
+import all WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorization
 
 /-! # The counit equation for literal open restriction
 
@@ -52,7 +55,7 @@ complexes use the same natural-transformation equations.
 Source: Stacks Project, Tag 0D5S, pullback composition; Tag 0D5U, exact
 restriction to an open subspace.
 (blueprint: lem-pc-open-restricted-counit-compatibility). -/
-theorem openRestricted_counit_compatibility
+private theorem openRestricted_counit_compatibility_private
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)
@@ -68,5 +71,9 @@ theorem openRestricted_counit_compatibility
   dsimp only
   rw [openRestricted_counit_factorization]
   simp
+
+/-- Public export of the private `openRestricted_counit_compatibility_private`
+(used by `import all` importers; linter.privateModule). -/
+alias openRestricted_counit_compatibility := openRestricted_counit_compatibility_private
 
 end AlgebraicGeometry.SingleComplexBaseChange

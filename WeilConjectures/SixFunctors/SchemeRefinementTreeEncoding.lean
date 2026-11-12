@@ -196,13 +196,13 @@ private theorem nonempty_layout
         · subst v
           simp only [parent, Sum.elim_inr, Sum.elim_inl]
           exact Sum.Lex.sep _ _
-        · simp only [parent, Sum.elim_inr, Sum.elim_inl, if_neg h]
+        · simp only [parent, Sum.elim_inr, Sum.elim_inl, ite_eq_right h]
           exact Sum.Lex.inr (Sum.Lex.inl (hpltA v h))
       · by_cases h : v = rootB
         · subst v
           simp only [parent, Sum.elim_inr]
           exact Sum.Lex.sep _ _
-        · simp only [parent, Sum.elim_inr, if_neg h]
+        · simp only [parent, Sum.elim_inr, ite_eq_right h]
           exact Sum.Lex.inr (Sum.Lex.inr (hpltB v h))
     · rintro (⟨⟩ | (v | v)) hv
       · exact hta

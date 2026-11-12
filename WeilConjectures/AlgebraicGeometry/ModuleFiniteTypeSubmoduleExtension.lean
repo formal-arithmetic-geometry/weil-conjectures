@@ -75,6 +75,7 @@ theorem exists_quasicoherent_finiteType_submodule_extension
   have : H.IsQuasicoherent := hH
   have : (H.over U).IsFiniteType := by
     obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData G
+    have (i : q.I) : Epi (α.inv.over (q.X i)) := IsIso.epi_of_iso _
     let q' : (H.over U).LocalGeneratorsData :=
       { I := q.I
         X := q.X
@@ -100,10 +101,10 @@ theorem exists_quasicoherent_finiteType_submodule_extension
   have : Mono (R.map r) := by rw [hr]; infer_instance
   have : Mono (R.map (Abelian.factorThruImage r)) :=
     mono_of_mono_fac (by rw [← Functor.map_comp, Abelian.image.fac])
-  have : Epi (R.map (Abelian.factorThruImage r)) :=
-    inferInstanceAs (Epi ((SheafOfModules.pushforward
-      (F := Over.forget U) (𝟙 ((moduleRings X.toRingedSpace).over U))).map
-        (Abelian.factorThruImage r)))
+  have : R.PreservesEpimorphisms :=
+    Functor.preservesEpimorphisms_of_adjunction
+      (SheafOfModules.overPushforwardOverAdj (R := moduleRings X.toRingedSpace) U)
+  have : Epi (R.map (Abelian.factorThruImage r)) := R.map_epi _
   have : IsIso (R.map (Abelian.factorThruImage r)) := isIso_of_mono_of_epi _
   have himg := quasiCoherent_cokernel_image r
   refine ⟨Abelian.image r, himg.2.2.2.2.2.2.2.1,

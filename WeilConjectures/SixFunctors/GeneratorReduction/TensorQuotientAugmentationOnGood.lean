@@ -68,14 +68,7 @@ private theorem limitUnit_natural (W : Scheme.{u})
     Functor.whiskerRight U.mapDerivedCategoryFactors.inv F.rightDerivedFunctor ≫
     (Functor.associator _ _ _).hom
   have hη (K : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules l E W) ℤ) :
-      η.app K = F.rightDerivedFunctorUnit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj K) := by
-    have h₁ : (DerivedCategory.quotientCompQhIso (integralTowerModules l E W)).inv.app
-        ((F.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-    have h₂ : (DerivedCategory.quotientCompQhIso
-        (ℕᵒᵖ ⥤ integralTowerModules l E W)).hom.app K = 𝟙 _ := rfl
-    dsimp only [η, Functor.rightDerivedFunctorUnitQ]
-    erw [h₁, h₂, F.rightDerivedFunctor.map_id, Category.id_comp, Category.comp_id]
+      η.app K = F.rightDerivedFunctorUnitQ K := rfl
   have hθ (K : CochainComplex (coefficientSequenceModules l E W) ℤ) :
       θ.app K = pullbackTensorLimitUnit l E W K := by
     simp only [θ, NatTrans.comp_app, Functor.isoWhiskerRight_hom,

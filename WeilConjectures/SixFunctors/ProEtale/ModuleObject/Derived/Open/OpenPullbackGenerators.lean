@@ -207,8 +207,8 @@ theorem openPullback_generators
     have h := K.property.1.2 n
     have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
     have hU : CompactSpace U ∧ QuasiSeparatedSpace U := ⟨inferInstance, inferInstance⟩
-    simp only [IsConstantModelConstructible, if_pos hX] at h
-    simp only [IsConstantModelConstructible, if_pos hU]
+    simp only [IsConstantModelConstructible, ite_eq_left hX] at h
+    simp only [IsConstantModelConstructible, ite_eq_left hU]
     exact stratified_pullback Λ j _ h
   · have hflat := upperStar_preservesFlat Λ j
     obtain ⟨a, b, hab⟩ := K.property.2

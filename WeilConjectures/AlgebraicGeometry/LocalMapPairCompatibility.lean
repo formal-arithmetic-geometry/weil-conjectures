@@ -50,4 +50,5 @@ theorem homOfPairCompatibility_hom (r : ∀ a, D₁.obj a ⟶ D₂.obj a)
     (h : ∀ a b, PairCompatibility r a b) (a : ι) :
     (homOfPairCompatibility r h).hom a = r a := rfl
 
+
 end CategoryTheory.Pseudofunctor.DescentData

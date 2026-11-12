@@ -188,6 +188,7 @@ theorem charpoly_mapQ_restrict_dvd (f : V →ₗ[K] V) {U S : Submodule K V}
       fun _ hx ↦ hU hx]
   exact (dvd_mul_left _ _).mul_right _
 
+
 end Field
 
 section IsAlgClosed

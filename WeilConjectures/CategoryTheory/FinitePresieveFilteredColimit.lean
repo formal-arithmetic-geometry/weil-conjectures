@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.IsSheafFor
 public import Mathlib.CategoryTheory.Filtered.Basic
 
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.Data.Finite.Prod
+import Mathlib.Basic.Finite.Prod
 
 /-!
 # The finite-presieve sheaf condition and filtered colimits

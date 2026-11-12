@@ -40,8 +40,7 @@ private def scalarTowerIso
       isIntertwining' := fun g ↦ by
         apply TensorProduct.AlgebraTensorModule.ext
         intro a v
-        induction v using TensorProduct.induction_on with
-        | zero => simp only [TensorProduct.tmul_zero, map_zero]
+        induction v using TensorProduct.inductionOn with
         | add x z hx hz => simp only [TensorProduct.tmul_add, map_add, hx, hz]
         | tmul b x =>
           change e (a ⊗ₜ[L] (b ⊗ₜ[E] X.ρ g x)) =
@@ -59,12 +58,10 @@ private noncomputable def scalarTensorIso
       isIntertwining' := fun g ↦ by
         apply TensorProduct.AlgebraTensorModule.ext
         intro v w
-        induction v using TensorProduct.induction_on generalizing w with
-        | zero => simp only [map_zero, TensorProduct.zero_tmul]
+        induction v using TensorProduct.inductionOn generalizing w with
         | add x z hx hz => simp only [map_add, TensorProduct.add_tmul, hx, hz]
         | tmul a x =>
-          induction w using TensorProduct.induction_on with
-          | zero => simp only [map_zero, TensorProduct.tmul_zero]
+          induction w using TensorProduct.inductionOn with
           | add y z hy hz => simp only [map_add, TensorProduct.tmul_add, hy, hz]
           | tmul b y =>
             change e ((a ⊗ₜ[E] X.ρ g x) ⊗ₜ[Q] (b ⊗ₜ[E] Y.ρ g y)) =

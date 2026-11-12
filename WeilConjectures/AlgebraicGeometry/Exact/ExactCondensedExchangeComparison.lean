@@ -28,7 +28,7 @@ attribute [local irreducible] upperStarFromPoint
 attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
   Functor.rightDerivedFunctor Functor.mapDerivedCategory
   Functor.leftDerivedFunctor Mod.monoidalCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   CondensedRing.upperStar CondensedRing.lowerStar
 /-- The exchange mate formed from exact condensed pullback on the derived category.
 Source: blueprint rational proper-base-change proof, exact derived factorization.
@@ -128,8 +128,8 @@ private theorem total_comp_normalization
         ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g).hom.app M) =
     (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (f ≫ g)).hom.app M ≫
       (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-        Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-          (CondensedRing.upperStar Λ f)).hom.app M := by
+        (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+          (CondensedRing.upperStar Λ f)).symm).hom.app M := by
   simp only [CondensedRing.leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
     Functor.leftDerivedFunctorCompIso,
     CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory,
@@ -162,7 +162,8 @@ private theorem invert_square
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)
+    (Functor.mapDerivedCategoryCompIso
+      (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)).symm
 
 private theorem exactComp_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -170,7 +171,7 @@ private theorem exactComp_hom
     (exactComp Λ f g).hom =
       (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g)).hom ≫
         (Functor.mapDerivedCategoryCompIso
-          (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)).hom := by
+          (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)).inv := by
   delta exactComp
   rfl
 
@@ -190,8 +191,8 @@ private theorem total_inverse_comp
   simpa only [Iso.app_hom, Iso.app_inv, Category.assoc] using
     invert_compositor ((CondensedRing.leftDerivedUpperStarComp Λ f g).app M)
       ((Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-        Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-          (CondensedRing.upperStar Λ f)).app M) _ _ (total_comp_normalization Λ f g M)
+        (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+          (CondensedRing.upperStar Λ f)).symm).app M) _ _ (total_comp_normalization Λ f g M)
 
 private theorem derived_eqToIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -219,13 +220,13 @@ private theorem derived_paste_square (a : J ≅ F₁ ⋙ F₂) (b : J ≅ K)
     (c : K ≅ G₁ ⋙ G₂) :
     (Functor.mapDerivedCategorySquareIso (a.symm ≪≫ b ≪≫ c)).hom =
       (Functor.mapDerivedCategoryNatIso a ≪≫
-        Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫
+        (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).inv ≫
       (Functor.mapDerivedCategoryNatIso b).hom ≫
       (Functor.mapDerivedCategoryNatIso c ≪≫
-        Functor.mapDerivedCategoryCompIso G₁ G₂).hom := by
+        (Functor.mapDerivedCategoryCompIso G₁ G₂).symm).hom := by
   simp only [Functor.mapDerivedCategorySquareIso,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Category.assoc]
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc]
 end DerivedPaste
 
 private theorem exact_square_normalizationFor
@@ -317,7 +318,7 @@ private theorem total_forward_cube
           ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ p).hom.app M) =
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (v ≫ p)).hom.app M ≫
         (exactComp Λ v p).hom.app M := by
-    simpa only [exactComp_hom, Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+    simpa only [exactComp_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       total_comp_normalization Λ v p M
   rw [totalSquare_hom]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]

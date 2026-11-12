@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
@@ -24,6 +25,16 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+local instance (Y : Scheme.{u}) :
+    HasColimitsOfShape (Discrete ℕ)
+      (CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) := by
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  have : HasColimitsOfShape (Discrete ℕ) C := inferInstance
+  refine ⟨fun F ↦ ?_⟩
+  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 /-- A concrete sequential telescope of bounded-above flat complexes.
 The transition cone is constructed explicitly; no existence witness supplies its data.

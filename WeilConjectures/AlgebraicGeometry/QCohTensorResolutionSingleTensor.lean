@@ -40,6 +40,5 @@ theorem tensorResolution_single₂_inv_f (X : Scheme.{u})
   rw [CochainComplex.mapBifunctorSingle₁Iso_inv_f]
   rw [Category.assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
   simp
-  rfl
 
 end AlgebraicGeometry

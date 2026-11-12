@@ -165,7 +165,7 @@ noncomputable def kernelAdjunction (τ : C) (t : G.obj (F.obj τ) ⟶ 𝟙_ C)
     erw [adjΔ.unit_naturality_assoc, adjΔ.unit_naturality_assoc, adjΔ.unit_naturality_assoc]
     rw [hδ]
     erw [reassoc_of% he₀]
-    rw [Functor.Monoidal.map_ε_η_assoc]
+    rw [Functor.Monoidal.ε_η_map_assoc]
   exact ofTraceCounit (kernelAdjunctionUnit adj adjA e adjΔ ι (F.obj τ) κ)
     (kernelAdjunctionUnit_linear adj adjA e adjΔ ι (F.obj τ) κ he hι' hκ)
     (map_kernelAdjunctionUnit_app_comp_traceCounit adj adjA adjB e adjΔ ι (F.obj τ) κ t

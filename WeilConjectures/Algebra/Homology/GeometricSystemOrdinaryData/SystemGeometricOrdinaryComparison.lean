@@ -167,12 +167,12 @@ def GeometricSystemOrdinaryData.derivedEvaluation
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     F.functor.mapDerivedCategory ⋙ derivedSystemEvaluation BX n ≅
       derivedSystemEvaluation BY n ⋙ (F.levelInverseImage n).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F.functor (systemEvaluation BX n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso F.functor (systemEvaluation BX n) ≪≫
     Functor.mapDerivedCategoryNatIso
       (G := systemEvaluation BY n ⋙ F.levelInverseImage n)
       (F.evaluation n : F.functor ⋙ systemEvaluation BX n ≅
         systemEvaluation BY n ⋙ F.levelInverseImage n) ≪≫
-    Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelInverseImage n)
+    (Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelInverseImage n)).symm
 
 /-- Exact termwise inverse image and its ordinary singleton comparison.
 Source: Zheng, Construction 4.1, printed p. 21; Stacks 03D2 and 03EL.

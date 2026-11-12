@@ -121,7 +121,8 @@ theorem constantCoeff_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ 
 lₓ`, by the determinant-trace identity `LinearMap.X_mul_derivative_charpolyRev`. -/
 theorem X_mul_derivative_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
     (x : X.finitePoints) :
-    PowerSeries.X * derivative ℂ (F.lFactor ι x) = F.lFactorLogDeriv ι x * F.lFactor ι x := by
+    PowerSeries.X * derivative (R := ℂ) (F.lFactor ι x) =
+      F.lFactorLogDeriv ι x * F.lFactor ι x := by
   set d := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
   have hd : d ≠ 0 := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
   set P := locPoly ι F x
@@ -131,12 +132,12 @@ theorem X_mul_derivative_lFactor (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k�
   have hPP : P * P⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hP]; exact one_ne_zero)
   have hQQ : Q * Q⁻¹ = 1 := PowerSeries.mul_inv_cancel _ (by rw [hQ]; exact one_ne_zero)
   -- the determinant-trace identity for the stalk
-  have hT : traceGen ι F x = -(PowerSeries.X * derivative ℂ P) * P⁻¹ :=
+  have hT : traceGen ι F x = -(PowerSeries.X * derivative (R := ℂ) P) * P⁻¹ :=
     LinearMap.map_mk_trace_pow (F.stalk x).frobeniusEnd ι
-  have hP' : PowerSeries.X * derivative ℂ P = -traceGen ι F x * P := by
+  have hP' : PowerSeries.X * derivative (R := ℂ) P = -traceGen ι F x * P := by
     rw [hT]
-    linear_combination (-(PowerSeries.X * derivative ℂ P)) * hPP
-  have hQ' : PowerSeries.X * derivative ℂ Q = -F.lFactorLogDeriv ι x * Q := by
+    linear_combination (-(PowerSeries.X * derivative (R := ℂ) P)) * hPP
+  have hQ' : PowerSeries.X * derivative (R := ℂ) Q = -F.lFactorLogDeriv ι x * Q := by
     rw [X_mul_derivative_expand, hP', map_mul, map_neg, lFactorLogDeriv]
     ring
   rw [lFactor_eq, derivative_inv']
@@ -170,7 +171,7 @@ theorem X_pow_dvd_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k
     {x : X.finitePoints} {n : ℕ} (hx : n < (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) :
     PowerSeries.X ^ (n + 1) ∣ F.lFactorLogDeriv ι x :=
   ((pow_dvd_pow _ hx).trans (X_pow_dvd_expand (by
-    rw [traceGen, <- coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_mk, if_pos rfl,
+    rw [traceGen, <- coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_mk, ite_eq_left rfl,
       map_zero]) _)).mul_left _
 
 /-- The coefficients of the logarithmic derivative of a local factor:
@@ -186,13 +187,13 @@ theorem coeff_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ 
   have hd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
   rw [lFactorLogDeriv, coeff_C_mul, coeff_expand]
   by_cases h₁ : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n
-  · rw [if_pos h₁]
+  · rw [ite_eq_left h₁]
     rcases eq_or_ne n 0 with rfl | hn
     · simp
     · have hnd : n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≠ 0 :=
         (Nat.div_ne_zero_iff_of_dvd h₁).2 ⟨hn, hd⟩
-      rw [if_pos ⟨h₁, hn⟩, traceGen, coeff_map, coeff_mk, if_neg hnd]
-  · rw [if_neg h₁, if_neg fun h ↦ h₁ h.1, mul_zero]
+      rw [ite_eq_left ⟨h₁, hn⟩, traceGen, coeff_map, coeff_mk, ite_eq_right hnd]
+  · rw [ite_eq_right h₁, ite_eq_right fun h ↦ h₁ h.1, mul_zero]
 
 variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -258,7 +259,7 @@ trace function over the rational points:
 `t L'(t) = (∑_{n ≥ 1} (∑_{y ∈ X₀(𝔽_{qⁿ})} ι t_{F,n}(y)) tⁿ) L(t)`, the Euler-product form of the
 point count. -/
 theorem X_mul_derivative_lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
-    PowerSeries.X * derivative ℂ (F.lSeries ι) =
+    PowerSeries.X * derivative (R := ℂ) (F.lSeries ι) =
       PowerSeries.mk (fun n ↦ if n = 0 then 0 else ∑ᶠ y, ι (F.traceFunction n y)) *
         F.lSeries ι := by
   classical
@@ -282,7 +283,7 @@ theorem X_mul_derivative_lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k�
   have hsum := F.sum_traceFunction_eq_sum hn (T := (hfin n).toFinset)
     fun x hx ↦ (hfin n).mem_toFinset.2 (Nat.le_of_dvd (Nat.pos_of_ne_zero hn) hx)
   rw [finsum_eq_sum_of_fintype] at hsum
-  rw [if_neg hn, finsum_eq_sum_of_fintype, ← map_sum, hsum, map_sum, Finset.sum_filter]
+  rw [ite_eq_right hn, finsum_eq_sum_of_fintype, ← map_sum, hsum, map_sum, Finset.sum_filter]
   refine Finset.sum_congr rfl fun x _ ↦ ?_
   simp only [hn, ne_eq, not_false_eq_true, and_true, map_mul, map_natCast]
 

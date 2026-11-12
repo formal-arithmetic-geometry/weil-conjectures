@@ -117,7 +117,7 @@ private theorem glue_coproduct_sections {X : Scheme.{u}}
       simp [f, ← Category.assoc]
     · intro t i
       apply MorphismProperty.Over.Hom.ext
-      exact Sigma.ι_desc _ _
+      exact Sigma.ι_comp_desc _ _
     · intro t m hm
       apply MorphismProperty.Over.Hom.ext
       apply Sigma.hom_ext

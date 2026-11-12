@@ -178,8 +178,7 @@ theorem nonempty_closedStructure_tensor_projection
         apply ((PresheafOfModules.sheafificationAdjunction.{u}
           (𝟙 Y.ringCatSheaf.obj)).homEquiv _ _).injective
         ext U z
-        induction z using TensorProduct.induction_on with
-        | zero => exact (map_zero _).trans (map_zero _).symm
+        induction z using TensorProduct.inductionOn with
         | tmul s r => exact hpure U.unop s r
         | add z w hz hw => simp only [map_add, hz, hw] }
   have hi (M : Y.Modules) : IsIso (α.app M) := by

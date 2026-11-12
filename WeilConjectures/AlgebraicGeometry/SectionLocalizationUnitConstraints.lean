@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SectionResolvingOplaxConstraintData
 import WeilConjectures.AlgebraicGeometry.SectionCochainMonoidalConstraints
 import WeilConjectures.AlgebraicGeometry.SectionOrdinaryMonoidalConstraints
@@ -253,10 +255,10 @@ theorem section_localization_unit_constraints (T : Scheme.{u})
     letI := derivedMonoidal Λ T
     (modelTensor Λ T (𝟙_ (CochainComplex (modules Λ T) ℤ)) P ≫
         DerivedCategory.Q.map (λ_ P).hom =
-      regularLeft DerivedCategory.Q (regular Λ T) (DerivedCategory.Q.obj P)) ∧
+      regularLeft DerivedCategory.Q (cast (by rfl) (regular Λ T)) (DerivedCategory.Q.obj P)) ∧
     (modelTensor Λ T P (𝟙_ (CochainComplex (modules Λ T) ℤ)) ≫
         DerivedCategory.Q.map (ρ_ P).hom =
-      regularRight DerivedCategory.Q (regular Λ T) (DerivedCategory.Q.obj P)) := by
+      regularRight DerivedCategory.Q (cast (by rfl) (regular Λ T)) (DerivedCategory.Q.obj P)) := by
   let := derivedMonoidal Λ T
   let F := (equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)
   let : F.IsEquivalence :=

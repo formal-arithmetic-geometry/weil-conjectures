@@ -69,7 +69,7 @@ theorem exists_section_of_picPairing_eq_zero [GeometricallyIntegral (X ↘ Spec 
   obtain ⟨a, ha, t', hs, hχ⟩ := exists_monodromy_eq_pow_smul s G hcard t ht
   have : ConnectedSpace t'.P := connectedSpace_of_surjective_monodromy s G t' fun c ↦ by
     obtain ⟨g, hg⟩ := hs c.down
-    exact ⟨g, ULift.ext _ _ hg⟩
+    exact ⟨g, ULift.ext hg⟩
   obtain ⟨f, hf, hv⟩ := exists_hom_of_monodromy s G ((l ^ a) • AddMonoidHom.id _) t' t
     fun g ↦ (hχ g).symm
   have hc : t'.vadd 1 ≫ f = f ≫ t.vadd ((l ^ a) • 1) := hv 1
@@ -96,11 +96,11 @@ theorem picPairing_zsmul_of_monodromy {l n : ℕ} [Fact l.Prime]
       (t'.picPairing hm' y) := by
   let φ : ULift.{u + 1} (ZMod (l ^ (n + 1))) →+ ULift.{u + 1} (ZMod (l ^ n)) :=
     (ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))).toAddMonoidHom.uliftMap
-  obtain ⟨f, hf, hv⟩ := exists_hom_of_monodromy s G φ t' t fun g ↦ ULift.ext _ _ (h g)
+  obtain ⟨f, hf, hv⟩ := exists_hom_of_monodromy s G φ t' t fun g ↦ ULift.ext (h g)
   have hc : t'.vadd 1 ≫ f = f ≫ t.vadd (1 • 1) := by
     rw [hv 1, one_nsmul]
     congr 2
-    exact ULift.ext _ _ (map_one (ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) _))
+    exact ULift.ext (map_one (ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) _))
   exact picPairing_nsmul (pow_succ l n) hm hm' t t' f hf hc y hy
 
 end AlgebraicGeometry.Scheme.EtaleTorsor

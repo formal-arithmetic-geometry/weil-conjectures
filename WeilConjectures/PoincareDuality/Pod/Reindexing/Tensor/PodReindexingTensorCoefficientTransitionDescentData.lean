@@ -129,7 +129,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   integralOperationsGoodLocalization integralOperationsTensorComplexFunctor
-  integralOperationsRoosFunctor integralOperationsTensorOnGood Functor.mapHomologicalComplex
+  integralOperationsRoosFunctor integralOperationsTensorOnGood
   scalarReductionSourceDerived integralTowerHasDerivedCategory
   integralOperationsCommHasDerivedCategory
 
@@ -343,8 +343,9 @@ private theorem exactSquareFactors
     (H : A ⥤ C) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (I : C ⥤ D) [I.Additive] [PreservesFiniteLimits I] [PreservesFiniteColimits I]
     (e : F ⋙ G ≅ H ⋙ I) (K : CochainComplex A ℤ) :
-    (((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso H I).hom.app
+    ((Functor.mapDerivedCategoryCompIso F G ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫
+      (Functor.mapDerivedCategoryCompIso H I).symm).hom.app
         (DerivedCategory.Q.obj K)) ≫
       I.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app K) ≫
       I.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -359,10 +360,10 @@ private theorem exactSquareFactors
   have hi₂ : (Functor.mapHomologicalComplexCompIso (Iso.refl (H ⋙ I))
       (.up ℤ)).hom.app K = 𝟙 _ := rfl
   erw [hi₂, DerivedCategory.Q.map_id, Category.comp_id] at h₂
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj K))).1
   dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   erw [h₂, Functor.mapDerivedCategoryNatIso_fac, ← h₁]
   simp only [NatIso.mapHomologicalComplex]
   repeat' erw [Category.assoc]
@@ -398,8 +399,8 @@ theorem podCoefficientExactSquareChain
         (F.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map c) ≫
       G.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map d ≫
       DerivedCategory.Q.map r =
-    (((F.mapDerivedCategoryCompIso G).symm ≪≫ mapDerivedCategoryNatIso s ≪≫
-        H.mapDerivedCategoryCompIso I).hom.app (DerivedCategory.Q.obj K)) ≫
+    ((F.mapDerivedCategoryCompIso G ≪≫ mapDerivedCategoryNatIso s ≪≫
+        (H.mapDerivedCategoryCompIso I).symm).hom.app (DerivedCategory.Q.obj K)) ≫
       I.mapDerivedCategory.map
         (H.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map e) ≫
       I.mapDerivedCategoryFactors.hom.app Q ≫ DerivedCategory.Q.map f := by

@@ -283,9 +283,9 @@ private theorem finite_constant_module_neighborhood {Y : Scheme.{u}}
       rintro ⟨z, a, rfl⟩
       exact ⟨a, rfl⟩⟩
   let : AddCommGroup S := q.addCommGroup
-  let : Module Λ S := q.module Λ
+  let : Module Λ S := q.addEquiv.module Λ
   let M : ModuleCat.{u + 1} Λ := ModuleCat.of Λ S
-  let η : M →ₗ[Λ] T := H.subtype.comp (q.linearEquiv Λ).toLinearMap
+  let η : M →ₗ[Λ] T := H.subtype.comp (q.addEquiv.linearEquiv Λ).toLinearMap
   have hM : Finite M := inferInstance
   let β := toSheafify
     (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V))

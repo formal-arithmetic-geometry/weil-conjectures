@@ -107,12 +107,12 @@ private theorem affine_partition_compatible_closed
     · left
       intro x hx
       have := Set.mem_iInter.mp (hr a hx).1 i
-      simpa only [if_pos hi] using this
+      simpa only [ite_eq_left hi] using this
     · right
       apply Set.disjoint_left.mpr
       intro x hx hxi
       have := Set.mem_iInter.mp (hr a hx).2 i
-      have hh : x ∉ C i := by simpa only [if_neg hi, Set.mem_compl_iff] using this
+      have hh : x ∉ C i := by simpa only [ite_eq_right hi, Set.mem_compl_iff] using this
       exact hh hxi
 
 private theorem isPullback_section_lift

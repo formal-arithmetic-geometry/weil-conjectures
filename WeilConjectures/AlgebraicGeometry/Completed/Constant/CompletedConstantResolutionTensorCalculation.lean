@@ -228,8 +228,7 @@ private def scalarReductionMap
       map_smul' := ?_ }
   change ∀ (d : D) (z : TensorProduct B D M), t (d • z) = q d • t z
   intro d z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simp only [smul_add, map_add, hx, hy]
   | tmul d' x =>
     change q (d * d') ⊗ₜ[B, g] x = (q d * q d') ⊗ₜ[B, g] x
@@ -246,8 +245,7 @@ private theorem scalarReductionMap_naturality
   let : Module B D := Module.compHom D f
   change ∀ z : TensorProduct B D M, _
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul p x => rfl
 

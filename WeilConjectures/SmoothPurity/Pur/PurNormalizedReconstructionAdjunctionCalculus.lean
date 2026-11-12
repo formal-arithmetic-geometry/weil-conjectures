@@ -65,7 +65,7 @@ private theorem reconstructionProjectionTransition
     ((coefficientSequenceDerivedRestriction l E W).obj N)
   let := hp
   have h := adjacentRoosProjection _ _ _ δ hδ n
-  simp only [Pi.lift_π_assoc, Pi.lift_π] at h
+  simp only [Pi.lift_comp_π_assoc, Pi.lift_comp_π] at h
   change ((coefficientConstantTowerProjection l E W (n + 1)).app _ ≫
     (coefficientRestrictedEvaluationIso l E W (n + 1)).hom.app N) ≫ _ ≫ _ =
     (coefficientConstantTowerProjection l E W n).app _ ≫
@@ -152,7 +152,7 @@ theorem purNormalizedReconstructionOfScheme
           (normalizedDVRResCompleted l E W D hlp k).map (e k).inv ≫
           (T.evaluationIso k).inv)) ≫ Pi.π _ n ≫ (T.evaluationIso n).hom) =
         q ≫ (e n).inv := by
-      simp only [Pi.lift_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      simp only [Pi.lift_comp_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
       exact adj.homEquiv_naturality_right_symm _ _
     have : IsIso (q ≫ (e n).inv) := by rw [← heq]; exact hi
     have : IsIso q := IsIso.of_isIso_comp_right q (e n).inv
@@ -174,7 +174,8 @@ theorem purNormalizedReconstructionOfScheme
   obtain ⟨D, hlp, P, G, q, hq, eG, hp, δ, hδ⟩ := hK
   let := hp
   have : QuasiIso q := hq.1
-  let e : DerivedCategory.Q.obj P ≅ K := asIso (DerivedCategory.Q.map q) ≪≫ eG
+  let e : (DerivedCategory.Q.obj P : DerivedCategory (scalarReductionSource l E W)) ≅ K :=
+    asIso (DerivedCategory.Q.map q) ≪≫ eG
   let N := S.reduction.obj K
   let X := (coefficientSequenceDerivedRestriction l E W).obj N
   obtain ⟨hpX, δX, hδX⟩ := coefficientConstantTower_roos l E W D hlp X
@@ -236,7 +237,7 @@ theorem purNormalizedReconstructionOfScheme
     (fun n ↦ (integralReductionTower l E W D hlp P).map (homOfLE n.le_succ).op)
     ((coefficientSequenceLimit l E W).obj N) _ δX hδX d
     (fun n ↦ (coefficientConstantTowerProjection l E W n).app X ≫ (d n).hom) ht
-    (fun n ↦ by simp only [Pi.lift_π_assoc])
+    (fun n ↦ by simp only [Pi.lift_comp_π_assoc])
   let := hpP
   obtain ⟨φ⟩ := (exists_isDerivedLimit_and_iso
     (fun n ↦ (integralReductionTower l E W D hlp P).obj (Opposite.op n))

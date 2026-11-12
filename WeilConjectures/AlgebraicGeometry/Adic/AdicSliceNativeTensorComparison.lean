@@ -24,9 +24,10 @@ noncomputable def adicSliceNativeTensorIso {l : ℕ} [Fact l.Prime] {X : Scheme.
       (adicUpperStar l U.hom).obj ((Mod.tensorLeft N).obj M) :=
   by
     have : PreservesColimitsOfShape WalkingParallelPair
-        (Mod.mapModComap (adicUpperStarRingIso (l := l) U.hom)) :=
+        (Mod.mapModComap (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)) :=
       inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (adicUpperStar l U.hom))
-    exact ((Mod.tensorLeftCompMapModComapIso (adicUpperStarRingIso (l := l) U.hom)
+    exact ((Mod.tensorLeftCompMapModComapIso
+      (adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom)
       (fun _ _ ↦ Functor.LaxBraided.braided _ _) N).app M).symm
 
 /-- The native balanced tensor comparison is normalized before taking the quotient.
@@ -42,7 +43,7 @@ theorem adicSliceNativeTensorIso_quotient {l : ℕ} [Fact l.Prime] {X : Scheme.{
         (adicSliceNativeTensorIso U M N).hom.hom =
       Functor.LaxMonoidal.μ (upperStar (WeilCoefficients.{u} l) U.hom) M.X N.X ≫
         (upperStar (WeilCoefficients.{u} l) U.hom).map (Mod.tensorπ M N) := by
-  let rho := adicUpperStarRingIso (l := l) U.hom
+  let rho := adicUpperStarRingIso (l := l) (V := U.left) (X := X) U.hom
   have : PreservesColimitsOfShape WalkingParallelPair (Mod.mapModComap rho) :=
     inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (adicUpperStar l U.hom))
   let e := Mod.tensorLeftCompMapModComapIso rho

@@ -122,7 +122,7 @@ theorem ordinaryEvaluation_diagonal_block (X : Scheme.{u}) (U : X.Opens)
   have he : localEvaluationComponent X U P F (r + n) (-r) n r (by omega) =
       (F.X (r + n) ◁ d) ≫
         SheafOfModules.moduleDualEvaluation (X.sheaf.over U) (P.X r) (F.X (r + n)) := by
-    simp only [localEvaluationComponent, dif_pos (show r + -r = 0 by omega),
+    simp only [localEvaluationComponent, dite_eq_left (show r + -r = 0 by omega),
       HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
     unfold SheafOfModules.moduleDualEvaluation
     rw [← SheafOfModules.tensorHomEquiv_whiskerLeft_comp

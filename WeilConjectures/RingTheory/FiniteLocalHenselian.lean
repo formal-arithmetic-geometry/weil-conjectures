@@ -198,7 +198,7 @@ theorem finite_local_henselian
     [HenselianLocalRing R] [IsLocalRing A] [Algebra R A] [Module.Finite R A] :
     HenselianLocalRing A := by
   classical
-  apply ((HenselianLocalRing.TFAE A).out 1 0).mp
+  apply ((HenselianLocalRing.TFAE A).out 2 1).mp
   apply (IsLocalRing.idempotent_lifting_iff_monic_simple_root_lifting.{v, u} A).mp
   intro C _ _ _ e₀ he₀
   let : Algebra R C := Algebra.compHom C (algebraMap R A)
@@ -218,7 +218,7 @@ theorem finite_local_henselian
     have : Module.Finite A (D i) := Module.Finite.of_surjective φₐ.toLinearMap hφ
     have hmax : ((IsLocalRing.maximalIdeal (D i)).comap
         (algebraMap A (D i))).IsMaximal :=
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal _
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal _
     have hcontract : (IsLocalRing.maximalIdeal (D i)).comap
         (algebraMap A (D i)) = IsLocalRing.maximalIdeal A :=
       IsLocalRing.eq_maximalIdeal hmax
@@ -231,7 +231,7 @@ theorem finite_local_henselian
   obtain ⟨e, he, huniq⟩ := product_idempotent_lifting D K hK (Q e₀) (he₀.map Q)
   refine ⟨E.symm e, ⟨he.1.map E.symm, ?_⟩, ?_⟩
   · apply Q.injective
-    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_ringEquiv,
+    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_toRingEquiv,
       E.apply_symm_apply] using he.2
   · intro f hf
     apply E.injective
@@ -239,6 +239,6 @@ theorem finite_local_henselian
     apply huniq
     refine ⟨hf.1.map E, ?_⟩
     have h := congrArg Q hf.2
-    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_ringEquiv] using h
+    simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_toRingEquiv] using h
 
 end HenselianLocalRing

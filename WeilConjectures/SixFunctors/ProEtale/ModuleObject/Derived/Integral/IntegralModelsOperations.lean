@@ -372,7 +372,7 @@ noncomputable def immersionLowerShriekProjectionIso
   let ei := Functor.mapDerivedCategoryNatIso (supportPullbackIsoUpperStar Λ i)
   let ej := Functor.mapDerivedCategoryNatIso (supportPullbackIsoUpperStar Λ j)
   let ecomp := Functor.mapDerivedCategoryNatIso (upperStarComp Λ j i) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)
+    (Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)).symm
   let er := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
   haveI : IsIso (closedSupportProjection Λ i (qj.obj L) M) :=
     (openClosedSupportProjectionFormula Λ i i.openComplement.ι hij).1 (qj.obj L) M

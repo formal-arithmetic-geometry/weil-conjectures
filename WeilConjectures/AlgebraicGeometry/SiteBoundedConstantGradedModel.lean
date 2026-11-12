@@ -59,24 +59,24 @@ private theorem constant_tower_has_model
     · intro q
       by_cases hq : q = a
       · exact (congrArg (fun T : ModuleCat.{u} B ↦ Module.Finite B T)
-          (show N q = M from if_pos hq)).mpr hM
+          (show N q = M from ite_eq_left hq)).mpr hM
       · have : Subsingleton (0 : ModuleCat.{u} B) :=
           ModuleCat.subsingleton_of_isZero (isZero_zero _)
         exact (congrArg (fun T : ModuleCat.{u} B ↦ Module.Finite B T)
-          (show N q = 0 from if_neg hq)).mpr inferInstance
+          (show N q = 0 from ite_eq_right hq)).mpr inferInstance
     · intro q hq
       have hqa : q ≠ a := by omega
       dsimp only [N]
-      rw [if_neg hqa]
+      rw [ite_eq_right hqa]
       exact isZero_zero _
     · intro q
       by_cases hqa : q = a
       · subst q
-        simpa only [N, if_pos rfl] using
+        simpa only [N, ite_eq_left rfl] using
           (show Nonempty (((CochainComplex.singleFunctor A a).obj (S.obj M)).X a ≅
             S.obj M) from ⟨HomologicalComplex.singleObjXSelf (.up ℤ) a (S.obj M)⟩)
       · dsimp only [N]
-        rw [if_neg hqa]
+        rw [ite_eq_right hqa]
         exact ⟨(HomologicalComplex.isZero_single_obj_X (.up ℤ) a (S.obj M) q hqa).iso
           (S.map_isZero (isZero_zero _))⟩
   | @step n K L M hM hL i δ j hT ih =>
@@ -97,25 +97,25 @@ private theorem constant_tower_has_model
     · intro q
       by_cases hq : q = a + n + 1
       · exact (congrArg (fun T : ModuleCat.{u} B ↦ Module.Finite B T)
-          (show N' q = M from if_pos hq)).mpr hM
+          (show N' q = M from ite_eq_left hq)).mpr hM
       · exact (congrArg (fun T : ModuleCat.{u} B ↦ Module.Finite B T)
-          (show N' q = N q from if_neg hq)).mpr (hfinite q)
+          (show N' q = N q from ite_eq_right hq)).mpr (hfinite q)
     · intro q hq
       have hqa : q ≠ a + n + 1 := by omega
       dsimp only [N']
-      rw [if_neg hqa]
+      rw [ite_eq_right hqa]
       exact hzero q (by omega)
     · intro q
       by_cases hqa : q = a + n + 1
       · dsimp only [N']
-        rw [if_pos hqa]
+        rw [ite_eq_left hqa]
         have hq : q - 1 = a + n := by omega
         refine ⟨eP q ≪≫ (isoZeroBiprod (hEzero q (Or.inr (by omega)))).symm ≪≫ ?_⟩
         exact eqToIso (congrArg (fun r ↦
           ((CochainComplex.singleFunctor A (a + n)).obj (S.obj M)).X r) hq) ≪≫
             HomologicalComplex.singleObjXSelf (.up ℤ) (a + n) (S.obj M)
       · dsimp only [N']
-        rw [if_neg hqa]
+        rw [ite_eq_right hqa]
         exact ⟨eP q ≪≫ (isoBiprodZero
           (HomologicalComplex.isZero_single_obj_X (.up ℤ) (a + n) (S.obj M)
             (q - 1) (by omega))).symm ≪≫ (hterm q).some⟩

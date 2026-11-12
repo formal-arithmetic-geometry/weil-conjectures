@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedExtensionZeroComparison
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
@@ -48,7 +51,6 @@ The completion-unit equation retains its ordinary adjoint-mate normalization.
 
 ## Main statements
 
-- `completedOpenExchangeComparison`: invertibility and all completeness assertions.
 -/
 
 @[expose] public noncomputable section
@@ -194,19 +196,7 @@ private theorem exactConstantComparison
       G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) := by
-  have hc := Functor.mapDerivedCategoryCompIso_hom_app_factors R G P
-  have hi : (Functor.mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj P) ≫
-      (R ⋙ G).mapDerivedCategoryFactors.hom.app P =
-      G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app P) ≫
-        G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) := by
-    apply (cancel_epi
-      ((Functor.mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj P))).mp
-    rw [Iso.hom_inv_id_app_assoc]
-    exact hc.symm
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Category.assoc, hi, Category.assoc]
+  exact Functor.exactSquare_fac e P
 
 private theorem exactSquare_symm
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
@@ -408,6 +398,10 @@ private theorem constantRlimUnit_eq (V : Scheme.{t}) :
   apply (completedConstantRlimUnit_exists d V).unique
     (completedConstantRlimUnit_exists d V).exists.choose_spec
   intro P
+  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   exact exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
 
 private instance cbcOrdinaryUniversal :
@@ -720,6 +714,7 @@ def cbcDatumCompletedExchange [QuasiCompact j]
         (whiskerRight (cbcDatumCompletedTransport d gU).hom
           (cbcDerivedOpenShriek d j' sq.isOpenImmersion'))
 
+
 /-- Quasi-compact open extension preserves intrinsic completeness, and its canonical
 completed exchange is invertible and natural, with both sides intrinsically complete.
 Source: blueprint order 1587; Stacks 03DI, 09BP, 099N
@@ -780,8 +775,7 @@ theorem completedOpenExchangeComparison [QuasiCompact j]
       let N := (d.completedPull f).obj M
       let C := DerivedCategory.Q.objPreimage N
       let eN : DerivedCategory.Q.obj C ≅ N := DerivedCategory.Q.objObjPreimageIso N
-      let e : DerivedCategory.Q.obj C ≅ completedPullbackObject f d M :=
-        eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
+      let e := eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
       have hc := (completedPullback_reduction f d r a ha M
         (DerivedCategory.Q.objPreimage M) (DerivedCategory.Q.objObjPreimageIso M) hm).1 C e
       change IsIso (e.inv ≫ DerivedCategory.Q.map
@@ -808,5 +802,6 @@ theorem completedOpenExchangeComparison [QuasiCompact j]
     refine ⟨(hold.2 K).1, hpull g _ (hold.2 K).1, ?_⟩
     exact ((completedExtensionZeroComparison d sq' r a ha).2
       ⟨(d.completedPull gU).obj K.obj, hpull gU K.obj K.property⟩).1
+
 
 end AlgebraicGeometry.Scheme

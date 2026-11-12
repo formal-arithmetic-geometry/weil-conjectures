@@ -34,12 +34,12 @@ omit [GrpObj G] in
 theorem homOfDerivation_bijective (g : S ⟶ G.left) :
     Function.Bijective (homOfDerivation G g) := by
   refine (Equiv.bijective _).comp ((Equiv.bijective _).comp ⟨fun D₁ D₂ h ↦ ?_, fun φ ↦ ?_⟩)
-  · rw [← (PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₁,
-      ← (PresheafOfModules.DifferentialsConstruction.isUniversal' _).fac D₂]
+  · rw [← (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₁,
+      ← (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).fac D₂]
     exact congrArg _ h
-  · refine ⟨(PresheafOfModules.DifferentialsConstruction.derivation' _).postcomp φ, ?_⟩
-    apply (PresheafOfModules.DifferentialsConstruction.isUniversal' _).postcomp_injective
-    rw [PresheafOfModules.Derivation.Universal.fac]
+  · refine ⟨(PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation' _).postcomp φ, ?_⟩
+    apply (PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal' _).postcomp_injective
+    rw [PresheafOfModulesOfCommRing.Derivation.Universal.fac]
 
 /-- The morphisms `ω_{G/S} ⟶ 𝒪_S` attached to derivations along two morphisms `g₁ = g₂ = e` agree
 only if the derivations do. -/
@@ -103,7 +103,7 @@ noncomputable def derivationOfHom (g : S ⟶ G.left)
     (φ : (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S) :
     ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
       G.hom.pullbackPresheafHom :=
-  (PresheafOfModules.DifferentialsConstruction.derivation' _).postcomp
+  (PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation' _).postcomp
     (PresheafOfModules.sheafificationHomEquiv (𝟙 _)
       ((Scheme.Modules.pullbackPushforwardAdjunction g).homEquiv G.hom.cotangentSheaf
         (Scheme.Modules.unitModule S) φ))
@@ -114,7 +114,7 @@ theorem derivationOfHom_homOfDerivation (g : S ⟶ G.left)
       G.hom.pullbackPresheafHom) :
     derivationOfHom G g (homOfDerivation G g D) = D := by
   rw [derivationOfHom, homOfDerivation, Equiv.apply_symm_apply, Equiv.apply_symm_apply]
-  exact PresheafOfModules.Derivation.Universal.fac _ _
+  exact PresheafOfModulesOfCommRing.Derivation.Universal.fac _ _
 
 omit [GrpObj G] in
 theorem homOfDerivation_derivationOfHom (g : S ⟶ G.left)
@@ -277,6 +277,7 @@ theorem lieEquiv_one : lieEquiv G 1 = 0 := by
   have h := lieEquiv_mul G 1 1
   rw [mul_one] at h
   exact (add_eq_left.mp h.symm)
+
 
 /-- The infinitesimal points form a commutative group: their group law is the addition of tangent
 vectors. -/

@@ -159,8 +159,7 @@ theorem directedColimitBaseChangeElementwise
   have e_of (i : J) (t : A i ⊗[S] M₀) :
       e (Module.DirectLimit.of S J (fun i ↦ A i ⊗[S] M₀) ft i t) =
         (α i).rTensor M₀ t := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a m =>
       dsimp only [e, ft]
       rw [LinearEquiv.trans_apply, TensorProduct.directLimitLeft_symm_of_tmul,
@@ -171,14 +170,12 @@ theorem directedColimitBaseChangeElementwise
   let : DirectedSystem (fun i ↦ A i ⊗[S] M₀) (fun {i j} h ↦ ft i j h) :=
     { map_self := by
         intro i t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul a m => simp only [ft, LinearMap.rTensor_tmul, DirectedSystem.map_self']
         | add t u ht hu => simpa only [map_add] using congrArg₂ (· + ·) ht hu
       map_map := by
         intro i j k hij hjk t
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul a m => simp only [ft, LinearMap.rTensor_tmul, DirectedSystem.map_map']
         | add t u ht hu => simpa only [map_add] using congrArg₂ (· + ·) ht hu }
   dsimp only

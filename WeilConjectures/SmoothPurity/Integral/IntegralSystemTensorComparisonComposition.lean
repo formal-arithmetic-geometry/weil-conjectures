@@ -265,11 +265,11 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
     (e : H ≅ F₁ ⋙ F₂) (K : CochainComplex C ℤ) :
     H.mapDerivedCategoryFactors.hom.app K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) =
-      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app
+      (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F₁ F₂).symm).hom.app
           (DerivedCategory.Q.obj K) ≫
         F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
         F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) := by
-  rw [Iso.trans_hom, NatTrans.comp_app, Category.assoc,
+  rw [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
 
 end Factors
@@ -376,8 +376,10 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · intro P Q hP hQ
     exact integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
   · intro P
-    exact mapDerivedCategoryComposition_factors _ _ _
-      (integralComparisonSequenceComposition l E h f) P
+    dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
+    rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
+      Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
+    rfl
   · exact hm
   · intro P _
     infer_instance

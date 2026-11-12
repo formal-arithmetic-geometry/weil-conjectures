@@ -72,11 +72,11 @@ def exactSitePull {X Y : Scheme.{u}} (f : X ⟶ Y) :
   Functor.isoWhiskerRight
     (Etale.leftDerivedUpperStarIsoMapDerivedCategory
       (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso
         (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The ordinary total-derived direct-image mate; its restriction is fixedComparison's mate.
 Source: Levels (blueprint: def-sp-p1-geometric-coordinates). -/

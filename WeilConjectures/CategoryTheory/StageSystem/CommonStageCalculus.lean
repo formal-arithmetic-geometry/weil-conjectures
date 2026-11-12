@@ -273,10 +273,7 @@ private def tensorShiftZero (R : Type*) [CommRing R] (C : Type*) [Category C]
       change composition R C p _ _ _
           (1 ⊗ₜ[R] (shiftFunctorZero C ℤ).hom.app Y.obj) (mapHom R C p _ _ _ f) =
         composition R C p _ _ _ f (1 ⊗ₜ[R] (shiftFunctorZero C ℤ).hom.app X.obj)
-      induction f using TensorProduct.induction_on with
-      | zero =>
-        simp only [map_zero]
-        rfl
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp [mapHom, composition_tmul,
           (shiftFunctorZero C ℤ).hom.naturality f]
@@ -295,10 +292,7 @@ private def tensorShiftAdd (R : Type*) [CommRing R] (C : Type*) [Category C]
           (1 ⊗ₜ[R] (shiftFunctorAdd C n m).hom.app Y.obj) (mapHom R C p _ _ _ f) =
         composition R C p _ _ _ (mapHom R C p _ _ _ (mapHom R C p _ _ _ f))
           (1 ⊗ₜ[R] (shiftFunctorAdd C n m).hom.app X.obj)
-      induction f using TensorProduct.induction_on with
-      | zero =>
-        simp only [map_zero]
-        rfl
+      induction f using TensorProduct.inductionOn with
       | tmul a f =>
         simp [mapHom, composition_tmul,
           (shiftFunctorAdd C n m).hom.naturality f]

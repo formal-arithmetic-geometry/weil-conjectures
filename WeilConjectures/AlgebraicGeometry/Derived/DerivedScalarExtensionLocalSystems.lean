@@ -788,17 +788,17 @@ private theorem derived_cube
     Iso.trans_hom, Iso.symm_hom, Iso.refl_hom, NatTrans.comp_app,
     NatTrans.id_app, Category.comp_id, CategoryTheory.Functor.map_comp,
     Category.assoc, CategoryTheory.Functor.map_id, Category.id_comp] at h₁ h₂
-  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso r K).hom.app
+  rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso r K).inv.app
     (U.mapDerivedCategory.obj x))]
   rw [← cancel_mono (Z.mapDerivedCategory.map
-    ((Functor.mapDerivedCategoryCompIso H' s').inv.app x))]
+    ((Functor.mapDerivedCategoryCompIso H' s').hom.app x))]
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, CategoryTheory.Functor.map_comp, Category.assoc]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% h₁, ← reassoc_of% h₂]
-  simp only [← Z.mapDerivedCategory.map_comp_assoc, Iso.hom_inv_id_app,
+  simp only [← Z.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
 
 namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S]

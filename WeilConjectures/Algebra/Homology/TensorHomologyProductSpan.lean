@@ -177,7 +177,6 @@ by
       rw [heA, heB] at hh
       simp only [ModuleCat.comp_apply] at hh
       convert hh using 1
-      rfl
     change V.mkQ (T.homologyπ n z) = 0
     apply (Submodule.Quotient.mk_eq_zero V).mpr
     exact Submodule.subset_span ⟨⟨(p, q), hpq⟩, rA p x, rB q y, z, hz, rfl⟩

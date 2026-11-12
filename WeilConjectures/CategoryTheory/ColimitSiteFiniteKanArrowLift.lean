@@ -11,8 +11,8 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Data.Finset.Basic
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.Data.Finite.Prod
-import Mathlib.Data.Finite.Sum
+import Mathlib.Basic.Finite.Prod
+import Mathlib.Basic.Finite.Sum
 
 /-! # Simultaneous lifting of a finite Kan arrow diagram
 

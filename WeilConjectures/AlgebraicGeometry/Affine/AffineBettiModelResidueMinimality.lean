@@ -122,9 +122,8 @@ theorem affine_betti_model_residue_minimality
     exact ConcreteCategory.congr_hom hq x
   apply LinearMap.ext
   intro z
-  refine TensorProduct.induction_on z ?_ ?_ ?_
-  · simp
-  · intro r x
+  induction z using TensorProduct.inductionOn with
+  | tmul r x =>
     simp only [LinearMap.baseChange_tmul, LinearMap.zero_apply]
     apply (e.baseChange Γ(W, U) p.ResidueField).injective
     rw [LinearEquiv.baseChange_tmul, map_zero]
@@ -142,7 +141,7 @@ theorem affine_betti_model_residue_minimality
       PresheafOfModules.evaluation, Functor.comp_map] at hc
     simp only [Algebra.smul_def]
     exact mul_eq_zero.mpr (Or.inl hc)
-  · intro x y hx hy
+  | add x y hx hy =>
     simp [map_add, hx, hy]
 
 end AlgebraicGeometry.Scheme

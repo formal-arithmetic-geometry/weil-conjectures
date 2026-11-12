@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
 import WeilConjectures.AlgebraicGeometry.ProperShriekCompSupports
@@ -178,7 +180,7 @@ private theorem exact_single_identity
   · subst n
     simp [K, Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors, HomologicalComplex.single]
+      CochainComplex.singleFunctor, HomologicalComplex.single]
   · apply (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M n hn).eq_of_tgt
 
 private theorem right_single_identity

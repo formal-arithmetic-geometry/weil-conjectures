@@ -105,8 +105,7 @@ is fixed by a positive power of `τ ⊗ 𝟙`. -/
 theorem exists_congr_refl_pow_apply_eq_self (τ : K ≃ₐ[k] K)
     (hτ : ∀ x, ∃ n, 0 < n ∧ (τ ^ n) x = x) (x : K ⊗[k] R) :
     ∃ n, 0 < n ∧ (congr τ (AlgEquiv.refl : R ≃ₐ[k] R) ^ n) x = x := by
-  induction x using TensorProduct.induction_on with
-  | zero => exact ⟨1, one_pos, map_zero _⟩
+  induction x using TensorProduct.inductionOn with
   | tmul a r =>
     obtain ⟨n, hn, h⟩ := hτ a
     exact ⟨n, hn, by rw [congr_refl_pow_tmul, h]⟩

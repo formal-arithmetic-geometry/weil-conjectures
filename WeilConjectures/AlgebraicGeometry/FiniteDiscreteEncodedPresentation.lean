@@ -18,7 +18,8 @@ universe u v w v₁ v₂ u₁ u₂
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_finiteDiscreteEncodedPresentation
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace CategoryTheory.ConstantInternalModuleSheafEncoding
 

@@ -81,7 +81,7 @@ private theorem constant_cyclic_ext (X : Scheme.{u}) (n : ℕ)
     apply RingHom.ext
     intro a
     obtain ⟨z, hz⟩ := ZMod.intCast_surjective a.down
-    have ha : a = (z : ULift.{u + 1} (ZMod n)) := ULift.ext _ _ hz.symm
+    have ha : a = (z : ULift.{u + 1} (ZMod n)) := ULift.ext hz.symm
     rw [ha]
     simp only [map_intCast]
   let c := sfbConstantRingAbIso X (CommRingCat.of (ULift.{u + 1} (ZMod n)))

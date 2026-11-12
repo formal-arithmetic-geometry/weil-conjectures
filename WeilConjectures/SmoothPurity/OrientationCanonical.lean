@@ -221,7 +221,7 @@ theorem isCanonicalSmoothOrientation_smoothOrientationOfSmooth
     (h : ∃ φ, IsIso φ ∧ IsCanonicalSmoothOrientation ℓ f d φ) :
     IsCanonicalSmoothOrientation ℓ f d (smoothOrientationOfSmooth ℓ f d) := by
   classical
-  rw [smoothOrientationOfSmooth, dif_pos h]
+  rw [smoothOrientationOfSmooth, dite_eq_left h]
   exact h.choose_spec.2
 
 end AlgebraicGeometry.ProEtale.CondensedRing

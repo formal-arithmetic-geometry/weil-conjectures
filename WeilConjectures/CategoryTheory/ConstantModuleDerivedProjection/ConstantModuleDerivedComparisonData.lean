@@ -78,12 +78,19 @@ def RightLocalizationCondition
       T.mapDerivedCategory ⋙ R'.rightDerivedFunctor) : Prop :=
   ∀ P : CochainComplex E ℤ,
     S.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+        R.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso E).hom.app P)) ≫
       right.hom.app (DerivedCategory.Q.obj P) ≫
       R'.rightDerivedFunctor.map (T.mapDerivedCategoryFactors.hom.app P) =
-    S.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
+    S.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso B).hom.app
+        ((R.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      S.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oR (.up ℤ)).hom.app P) ≫
+      (DerivedCategory.quotientCompQhIso F).inv.app
+        ((R'.mapHomologicalComplex (.up ℤ)).obj ((T.mapHomologicalComplex (.up ℤ)).obj P)) ≫
       R'.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((T.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      R'.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso H).hom.app
         ((T.mapHomologicalComplex (.up ℤ)).obj P))
 
 variable {C D : Type u} [Category.{v} C] [Category.{v} D]

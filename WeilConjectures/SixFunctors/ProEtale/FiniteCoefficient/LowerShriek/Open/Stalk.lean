@@ -82,7 +82,7 @@ immersion `j` and `s = t ≫ j`, `D(s^*) D(j_!) ≅ D(t^*)` on complexes. -/
 noncomputable def mapDerivedCategoryOpenImmersionLowerShriekCompUpperStarIsoOfFac
     (t : T ⟶ U) (s : T ⟶ X) (h : t ≫ j = s) :
     D((j)_!open[A]) ⋙ D((s)^*[A]) ≅ D((t)^*[A]) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekCompUpperStarIsoOfFac A j t s h)
 
 /-- Blueprint `lem-cbc-proetale-extension-zero`: Extension by zero on the pro-etale site.
@@ -111,7 +111,7 @@ theorem isZero_mapDerivedCategory_upperStar_openImmersionLowerShriek (s : T ⟶ 
     IsZero (D((s)^*[A]).obj (D((j)_!open[A]).obj K)) :=
   ((j)_!open[A] ⋙ (s)^*[A]).isZero_mapDerivedCategory_obj K
       (fun _ ↦ ProEtale.isZero_upperStar_openImmersionLowerShriek A j s hjs _) |>.of_iso
-    ((Functor.mapDerivedCategoryCompIso _ _).app K).symm
+    ((Functor.mapDerivedCategoryCompIso _ _).app K)
 
 end ProEtale
 

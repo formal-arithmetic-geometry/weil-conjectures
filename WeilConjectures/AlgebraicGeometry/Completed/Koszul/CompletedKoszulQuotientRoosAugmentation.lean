@@ -193,10 +193,10 @@ private theorem roosAugmentation_unit (r : ℕ) (a : Fin r → A)
     have hn := hu P n
     change completedAdicKoszulTensorUnit T d r a P n ≫ _ = _ at hn
     simp only [completedAdicKoszulProductUnit, ExactProductsRoos.product,
-      Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π]
+      Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π]
     change (Limits.Pi.lift (completedAdicKoszulTensorUnit T d r a P) ≫
       Limits.Pi.π (completedAdicKoszulTensor T d r a P) n) ≫ _ = _
-    rw [Limits.Pi.lift_π]
+    rw [Limits.Pi.lift_comp_π]
     exact hn
   ext p : 1
   dsimp only [HomologicalComplex.comp_f, completedAdicKoszulUnitComplex, roosAugmentation]

@@ -22,9 +22,10 @@ Only the scalar mate and the ordinary balanced tensor comparison occur below.
 universe v u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueScalarCounitModel
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
-private theorem tensorPresentation_app
+private theorem tensorPresentation_app_port
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
     [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
@@ -178,7 +179,7 @@ private theorem tensor_counit_app (T : Scheme.{u})
   unfold residueExchangeRestriction residueExchangeReductionCounit
     residueExchangeReduction integralReduction
   dsimp only [id]
-  exact tensorPresentation_app (coefficientMap (integralReductionMap ℓ E) T) P
+  exact tensorPresentation_app_port (coefficientMap (integralReductionMap ℓ E) T) P
 
 set_option linter.unusedVariables false in
 -- Preserve the original public statement, including its auxiliary SX let.

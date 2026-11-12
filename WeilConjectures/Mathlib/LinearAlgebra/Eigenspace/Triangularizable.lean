@@ -111,8 +111,8 @@ theorem exists_complete_invariant_flag [IsAlgClosed K] [FiniteDimensional K V] (
         exacts [h₂ i, hW₂]
       · dsimp only
         by_cases ha : i ≤ k
-        · exact (congrArg (fun p : Submodule K V ↦ finrank K p) (if_pos ha)).trans (h₃ i ha)
-        · refine (congrArg (fun p : Submodule K V ↦ finrank K p) (if_neg ha)).trans ?_
+        · exact (congrArg (fun p : Submodule K V ↦ finrank K p) (ite_eq_left ha)).trans (h₃ i ha)
+        · refine (congrArg (fun p : Submodule K V ↦ finrank K p) (ite_eq_right ha)).trans ?_
           rw [hW₃, h₃ k le_rfl]
           omega
   obtain ⟨F, h₁, h₂, h₃⟩ := key _ le_rfl
@@ -128,7 +128,7 @@ theorem exists_basis_isUpperTriangular_toMatrix [IsAlgClosed K] [FiniteDimension
   set n := finrank K V
   obtain ⟨F, hmono, hinv, hdim⟩ := exists_complete_invariant_flag f
   have hlt : ∀ i : Fin n, ∃ v ∈ F i.succ, v ∉ F i.castSucc := fun i ↦
-    SetLike.exists_of_lt <| lt_of_le_of_ne (hmono (Fin.castSucc_le_succ i)) fun h ↦ by
+    IsConcreteLE.exists_of_lt <| lt_of_le_of_ne (hmono (Fin.castSucc_le_succ i)) fun h ↦ by
       have := congrArg (fun p : Submodule K V ↦ finrank K p) h
       simp only [hdim, Fin.val_castSucc, Fin.val_succ] at this
       omega

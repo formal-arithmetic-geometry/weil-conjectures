@@ -64,6 +64,7 @@ lemma Etale.continuousMapSheaf_obj_map_apply {U V : X.Etale} (f : U ⟶ V)
     (Etale.continuousMapSheaf X A).obj.map f.op s = s.comp f.left.base.hom :=
   rfl
 
+
 section Discrete
 
 variable [DiscreteTopology A]
@@ -82,6 +83,7 @@ omit [DiscreteTopology A] in
 lemma Etale.constToContinuousMap_app_apply (U : X.Etaleᵒᵖ) (a : A) :
     (Etale.constToContinuousMap X A).app U a = ContinuousMap.const _ a :=
   rfl
+
 
 /-- A continuous function to a discrete group is locally constant: it is constant on the open
 fibres, which cover. -/

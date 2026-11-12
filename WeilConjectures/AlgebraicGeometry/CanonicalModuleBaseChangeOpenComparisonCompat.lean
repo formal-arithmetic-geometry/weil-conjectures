@@ -44,7 +44,7 @@ private theorem canonicalTensorComparison
       (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
   · have ht := t.hom_inv_id_app M
     dsimp only [Scheme.Modules.canonicalSinglePullbackMap]
-    erw [Category.assoc, Category.assoc, ← Functor.map_comp, ht]
+    erw [Category.assoc, ← Functor.map_comp, ht]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 set_option linter.unusedVariables false in

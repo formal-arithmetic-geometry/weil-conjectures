@@ -106,10 +106,7 @@ theorem stein_universally_closed_factor
   have : IsIso φ' := by
     apply TopCat.Sheaf.isIso_iff_isIso_basis
       (B := fun W : B'.affineOpens ↦ W.1)
-    · convert B'.isBasis_affineOpens using 1
-      · rfl
-      · ext U
-        exact ⟨fun ⟨W, hW⟩ ↦ hW ▸ W.2, fun hU ↦ ⟨⟨U, hU⟩, rfl⟩⟩
+    · simpa only [Subtype.range_coe] using B'.isBasis_affineOpens
     intro W
     change IsIso (q'.app W.1)
     let hbt : W.1 ≤ b ⁻¹ᵁ (⊤ : (Spec Γ(X, ⊤)).Opens) := by simp

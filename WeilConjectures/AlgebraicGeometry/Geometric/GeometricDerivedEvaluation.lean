@@ -89,9 +89,9 @@ structure GeometryEvaluation where
       (derivedExact.{c, v, max c v r, c, v} J J' (B m) (O.coefficients m) (O.inverseImage
         m).modules).map
         ((A.scalar h).adjunction.unit.app P) ≫
-      (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _).hom.app ((A.scalar h).T.obj P))
+          (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app ((A.scalar h).T.obj P))
 
 /-- Derived direct-image evaluation is obtained by conjugating singleton extension.
 Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10, printed pp. 21, 23;

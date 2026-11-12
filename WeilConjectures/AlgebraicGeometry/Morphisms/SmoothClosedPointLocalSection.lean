@@ -76,7 +76,7 @@ theorem exists_smooth_closed_point_local_section
     rw [fromSpecStalk_closedPoint, hiz, hyclosed]
     exact Spec_closedPoint
   have hβlocal : IsLocalHom β.hom := by
-    apply ((IsLocalRing.local_hom_TFAE β.hom).out 4 0).mp
+    apply ((IsLocalRing.local_hom_TFAE β.hom).out 5 1).mp
     exact congrArg PrimeSpectrum.asIdeal (hβ ▸ hclosed)
   have hβflat : β.hom.Flat := by
     apply Flat.SpecMap_iff.mp

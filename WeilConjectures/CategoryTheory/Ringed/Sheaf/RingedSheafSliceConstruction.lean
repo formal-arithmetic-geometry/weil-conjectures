@@ -35,7 +35,7 @@ Source: Stacks Project, sites.tex, Tag 0791
 (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction). -/
 def elementProjection {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) : A.obj.Elementsᵒᵖ ⥤ C :=
-  (CategoryOfElements.π A.obj).op ⋙ (opOpEquivalence C).functor
+  (Functor.Elements.π A.obj).op ⋙ (opOpEquivalence C).functor
 
 /-- The element-site topology: the finest topology making the projection to the original site
 continuous (Mathlib `Functor.inducedTopology`). The structure below states that it is the
@@ -102,7 +102,7 @@ Source: Stacks Project, sites.tex, Tag 0791
 (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction). -/
 abbrev elementObj {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) (U : Cᵒᵖ) (s : A.obj.obj U) : A.obj.Elementsᵒᵖᵒᵖ :=
-  op (op ⟨U, s⟩)
+  op (op (A.obj.elementsMk U s))
 
 /-- The arrow `(V, A(v)(s)) ⟶ (U,s)` of the element site over `v : V ⟶ U`.
 
@@ -111,8 +111,8 @@ Source: Stacks Project, sites.tex, Tag 0791
 def elementObjMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) {U V : Cᵒᵖ} (f : U ⟶ V) (s : A.obj.obj U) :
     elementObj A U s ⟶ elementObj A V (A.obj.map f s) :=
-  (CategoryOfElements.homMk (A.obj.elementsMk U s) (A.obj.elementsMk V (A.obj.map f s)) f
-    rfl).op.op
+  (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+    (y := A.obj.elementsMk V (A.obj.map f s)) f rfl).op.op
 
 open Classical in
 /-- Restriction of the direct-sum presheaf: the summand indexed by `s` goes to the summand
@@ -187,8 +187,8 @@ theorem elementDirectSumMap_id {C : Type u} [SmallCategory C]
   have aux (t : A.obj.obj U) (ht : A.obj.map (𝟙 U) s = t) :
       DirectSum.lof (R.obj.obj U) (A.obj.obj U)
         (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) t
-        (L.val.map (CategoryOfElements.homMk (A.obj.elementsMk U s)
-          (A.obj.elementsMk U t) (𝟙 U) ht).op.op x) =
+        (L.val.map (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+          (y := A.obj.elementsMk U t) (𝟙 U) ht).op.op x) =
       DirectSum.lof (R.obj.obj U) (A.obj.obj U)
         (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x := by
     have h : s = t := by simpa only [Functor.map_id_apply] using ht
@@ -232,21 +232,21 @@ theorem elementDirectSumMap_comp {C : Type u} [SmallCategory C]
           (fun t ↦ (L.val.obj (elementObj A U t) : Type u)) s x) =
       DirectSum.lof (R.obj.obj W) (A.obj.obj W)
         (fun t ↦ (L.val.obj (elementObj A W t) : Type u)) t
-        (L.val.map (CategoryOfElements.homMk (A.obj.elementsMk U s)
-          (A.obj.elementsMk W t) (f ≫ g) ht).op.op x) := by
+        (L.val.map (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+          (y := A.obj.elementsMk W t) (f ≫ g) ht).op.op x) := by
     cases ht
     exact elementDirectSumMap_lof R A L (f ≫ g) s x
   rw [aux _ (A.obj.map_comp_apply f g s), elementDirectSumMap_lof,
     elementDirectSumMap_lof]
   apply congrArg (DirectSum.lof (R.obj.obj W) (A.obj.obj W)
     (fun t ↦ (L.val.obj (elementObj A W t) : Type u)) (A.obj.map g (A.obj.map f s)))
-  have h : (CategoryOfElements.homMk (A.obj.elementsMk U s)
-      (A.obj.elementsMk W (A.obj.map g (A.obj.map f s))) (f ≫ g)
+  have h : (Functor.Elements.homMk (x := A.obj.elementsMk U s)
+      (y := A.obj.elementsMk W (A.obj.map g (A.obj.map f s))) (f ≫ g)
         (A.obj.map_comp_apply f g s)).op.op =
       elementObjMap A f s ≫ elementObjMap A g (A.obj.map f s) := by
     apply Quiver.Hom.unop_inj
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     rfl
   rw [h]
   exact L.val.map_comp_apply _ _ x
@@ -292,7 +292,7 @@ Source: Stacks Project, sites-modules.tex, Tag 04J4; sites.tex, Tag 0791
 def elementMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {B A : Sheaf J (Type u)} (b : B ⟶ A) :
     B.obj.Elementsᵒᵖ ⥤ A.obj.Elementsᵒᵖ :=
-  (CategoryOfElements.map b.hom).op
+  (NatTrans.mapElements b.hom).op
 
 /-- Module restriction along the induced map of element sites (relocalization at `B ⟶ A`).
 

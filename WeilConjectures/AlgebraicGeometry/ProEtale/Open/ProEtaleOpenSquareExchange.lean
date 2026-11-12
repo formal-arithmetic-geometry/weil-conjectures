@@ -123,10 +123,10 @@ noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     sfIntrinsicDerivedPullback A gU ⋙ sfIntrinsicDerivedOpen A j' ⟶
       sfIntrinsicDerivedOpen A j ⋙ sfIntrinsicDerivedPullback A g :=
   (mapDerivedCategoryCompIso (sfIntrinsicPullback A gU)
-    (sfIntrinsicExtensionByZero j' A)).inv ≫
+    (sfIntrinsicExtensionByZero j' A)).hom ≫
   sfIntrinsicDeriveMap A (sfIntrinsicOpenMate A gU j' j g w) ≫
   (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero j A)
-    (sfIntrinsicPullback A g)).hom
+    (sfIntrinsicPullback A g)).inv
 
 /-- The derived open unit, with the localization identity and composition comparisons.
 Source: Stacks, Tag 05RU (blueprint: lem-trf-open-square-exchange). -/
@@ -136,7 +136,7 @@ noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
   (mapDerivedCategoryIdIso _).inv ≫
     sfIntrinsicDeriveMap A (sfIntrinsicOpenAdjunction A j).unit ≫
     (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero j A)
-      (sfIntrinsicPullback A j)).hom
+      (sfIntrinsicPullback A j)).inv
 
 /-- Pullback composition on unbounded derived categories.
 Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
@@ -145,7 +145,7 @@ noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     sfIntrinsicDerivedPullback A (f ≫ g) ≅
       sfIntrinsicDerivedPullback A g ⋙ sfIntrinsicDerivedPullback A f :=
   mapDerivedCategoryNatIso (sfIntrinsicPullbackComp A f g) ≪≫
-    mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A f)
+    (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A f)).symm
 
 /-- Open-extension composition on unbounded derived categories.
 Source: blueprint order 2367 (blueprint: lem-trf-open-square-exchange). -/
@@ -153,7 +153,8 @@ noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) 
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicDerivedOpen A (i ≫ j) ≅ sfIntrinsicDerivedOpen A i ⋙ sfIntrinsicDerivedOpen A j :=
   mapDerivedCategoryNatIso (sfIntrinsicOpenComp A i j) ≪≫
-    mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero i A) (sfIntrinsicExtensionByZero j A)
+    (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero i A)
+      (sfIntrinsicExtensionByZero j A)).symm
 
 /-- Identity pullback on the unbounded derived category.
 Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
@@ -174,9 +175,9 @@ noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     (w : gU ≫ j = j' ≫ g) :
     sfIntrinsicDerivedPullback A j ⋙ sfIntrinsicDerivedPullback A gU ≅
       sfIntrinsicDerivedPullback A g ⋙ sfIntrinsicDerivedPullback A j' :=
-  (mapDerivedCategoryCompIso (sfIntrinsicPullback A j) (sfIntrinsicPullback A gU)).symm ≪≫
+  mapDerivedCategoryCompIso (sfIntrinsicPullback A j) (sfIntrinsicPullback A gU) ≪≫
     mapDerivedCategoryNatIso (sfIntrinsicSquarePullback A gU j' j g w) ≪≫
-    mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A j')
+    (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A j')).symm
 
 /-- A coherent family of the canonical exchange isomorphisms. The `canonical` field fixes
 its inverse to the specified mate, so none of its isomorphisms is arbitrary. The restriction
@@ -724,8 +725,8 @@ private theorem dMap_square
     [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
     [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
     (q : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) :
-    (mapDerivedCategoryCompIso F₁ F₂).inv ≫ dMap q.hom ≫
-      (mapDerivedCategoryCompIso G₁ G₂).hom = (mapDerivedCategorySquareIso q).hom := by
+    (mapDerivedCategoryCompIso F₁ F₂).hom ≫ dMap q.hom ≫
+      (mapDerivedCategoryCompIso G₁ G₂).inv = (mapDerivedCategorySquareIso q).hom := by
   rw [dMap_iso]
   rfl
 
@@ -735,7 +736,7 @@ private noncomputable def dUnit (L : C₁ ⥤ D₁) (R : D₁ ⥤ C₁)
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (η : 𝟭 C₁ ≅ L ⋙ R) : 𝟭 (DerivedCategory C₁) ≅ L.mapDerivedCategory ⋙ R.mapDerivedCategory :=
   (mapDerivedCategoryIdIso C₁).symm ≪≫ mapDerivedCategoryNatIso η ≪≫
-    mapDerivedCategoryCompIso L R
+    (mapDerivedCategoryCompIso L R).symm
 
 private theorem dUnit_fac (L : C₁ ⥤ D₁) (R : D₁ ⥤ C₁)
     [L.Additive] [R.Additive]
@@ -768,12 +769,12 @@ private theorem dSquare_fac
     F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.hom.app X) ≫
       F₂.mapDerivedCategoryFactorsh.hom.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) ≫
       DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory q.hom (.up ℤ)).app X) := by
-  have hi : (mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Qh.obj X) ≫
+  have hi : (mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Qh.obj X) ≫
       (F₁ ⋙ F₂).mapDerivedCategoryFactorsh.hom.app X =
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.hom.app X) ≫
       F₂.mapDerivedCategoryFactorsh.hom.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) := by
-    rw [← cancel_epi ((mapDerivedCategoryCompIso F₁ F₂).hom.app
-      (DerivedCategory.Qh.obj X)), Iso.hom_inv_id_app_assoc]
+    rw [← cancel_epi ((mapDerivedCategoryCompIso F₁ F₂).inv.app
+      (DerivedCategory.Qh.obj X)), Iso.inv_hom_id_app_assoc]
     exact (mapDerivedCategoryCompIso_hom_app_factorsh F₁ F₂ X).symm
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
@@ -894,11 +895,11 @@ private theorem dMate_restriction
     (hb : mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) =
       TwoSquare.mk _ _ _ _ q.hom) (K : DerivedCategory C₁) :
     G.mapDerivedCategory.map (((mapDerivedCategoryIdIso C₁).inv ≫ dMap adj₁.unit ≫
-      (mapDerivedCategoryCompIso L₁ R₁).hom).app K) ≫
+      (mapDerivedCategoryCompIso L₁ R₁).inv).app K) ≫
       (mapDerivedCategorySquareIso q).hom.app (L₁.mapDerivedCategory.obj K) ≫
       R₂.mapDerivedCategory.map ((mapDerivedCategorySquareIso b).inv.app K) =
     ((mapDerivedCategoryIdIso C₂).inv ≫ dMap adj₂.unit ≫
-      (mapDerivedCategoryCompIso L₂ R₂).hom).app (G.mapDerivedCategory.obj K) := by
+      (mapDerivedCategoryCompIso L₂ R₂).inv).app (G.mapDerivedCategory.obj K) := by
   rw [← asIso_hom adj₁.unit, ← asIso_hom adj₂.unit, dMap_iso, dMap_iso]
   apply dUnit_square_inverse L₁ R₁ L₂ R₂ G H (asIso adj₁.unit) (asIso adj₂.unit) q b
   intro X
@@ -975,6 +976,7 @@ private theorem dSquare_id_inverse (R : C₁ ⥤ C₂) (P : C₁ ⥤ C₁) (p : 
 
 end ExactLocalizationCalculus
 
+
 -- Apply the existing exact-square pasting theorems in both orientations.
 section DerivedPasting
 
@@ -1012,16 +1014,16 @@ private theorem dSquare_comp_reverse
       cG.hom.app (U₀.obj X) ≫ G₁₂.map (q₀₁.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X)) :
     (mapDerivedCategorySquareIso q₀₂).hom =
       whiskerLeft U₀.mapDerivedCategory
-        (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂).hom ≫
+        (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom ≫
       whiskerRight (mapDerivedCategorySquareIso q₀₁).hom G₁₂.mapDerivedCategory ≫
       whiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂).hom ≫
       whiskerRight (mapDerivedCategoryNatIso cF ≪≫
-        mapDerivedCategoryCompIso F₀₁ F₁₂).inv U₂.mapDerivedCategory := by
+        (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).inv U₂.mapDerivedCategory := by
   apply NatTrans.ext
   funext K
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
   rw [← cancel_mono (U₂.mapDerivedCategory.map
-    ((mapDerivedCategoryNatIso cF ≪≫ mapDerivedCategoryCompIso F₀₁ F₁₂).hom.app K))]
+    ((mapDerivedCategoryNatIso cF ≪≫ (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom.app K))]
   simp only [Category.assoc, ← U₂.mapDerivedCategory.map_comp, Iso.inv_hom_id_app]
   erw [U₂.mapDerivedCategory.map_id, Category.comp_id]
   exact mapDerivedCategorySquareIso_hom_app_comp q₀₁ q₁₂ q₀₂ cG cF hq K
@@ -1035,11 +1037,11 @@ private theorem dSquare_comp_forward
       G₁₂.map (q₀₁.hom.app X) = q₀₂.hom.app X ≫ cG.hom.app (U₀.obj X)) :
     (mapDerivedCategorySquareIso q₀₂).hom =
       whiskerRight (mapDerivedCategoryNatIso cF ≪≫
-        mapDerivedCategoryCompIso F₀₁ F₁₂).hom U₂.mapDerivedCategory ≫
+        (mapDerivedCategoryCompIso F₀₁ F₁₂).symm).hom U₂.mapDerivedCategory ≫
       whiskerLeft F₀₁.mapDerivedCategory (mapDerivedCategorySquareIso q₁₂).hom ≫
       whiskerRight (mapDerivedCategorySquareIso q₀₁).hom G₁₂.mapDerivedCategory ≫
       whiskerLeft U₀.mapDerivedCategory
-        (mapDerivedCategoryNatIso cG ≪≫ mapDerivedCategoryCompIso G₀₁ G₁₂).inv := by
+        (mapDerivedCategoryNatIso cG ≪≫ (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).inv := by
   have h := mapDerivedCategorySquareIso_comp F₀₁ F₁₂ F₀₂ G₀₁ G₁₂ G₀₂ U₀ U₁ U₂
     q₀₁ q₁₂ q₀₂ cF cG hq
   apply NatTrans.ext
@@ -1050,13 +1052,12 @@ private theorem dSquare_comp_forward
     associator_inv_app, Category.id_comp, Category.comp_id] at ht
   simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app]
   rw [← cancel_mono ((mapDerivedCategoryNatIso cG ≪≫
-    mapDerivedCategoryCompIso G₀₁ G₁₂).hom.app (U₀.mapDerivedCategory.obj K))]
+    (mapDerivedCategoryCompIso G₀₁ G₁₂).symm).hom.app (U₀.mapDerivedCategory.obj K))]
   simp only [Category.assoc, Iso.inv_hom_id_app]
   erw [Category.comp_id]
   exact ht.symm
 
 end DerivedPasting
-
 private theorem sfPullback_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     eqToIso (congrArg (sfIntrinsicPullback A) h) =
       sfIntrinsicTransportIso A
@@ -1423,10 +1424,7 @@ private theorem sfDerivedMate_eq {U' U Y' Y : Scheme.{u}}
     [IsIso (sfIntrinsicOpenMate A gU j' j g w)] :
     sfIntrinsicDerivedOpenMate A gU j' j g w =
       (mapDerivedCategorySquareIso (asIso (sfIntrinsicOpenMate A gU j' j g w))).hom := by
-  unfold sfIntrinsicDerivedOpenMate
-  exact dMap_square (sfIntrinsicPullback A gU) (sfIntrinsicExtensionByZero j' A)
-    (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A g)
-    (asIso (sfIntrinsicOpenMate A gU j' j g w))
+  rfl
 
 private theorem sfExchange_canonical {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
@@ -1440,6 +1438,7 @@ attribute [local irreducible] sfMateIso sfExchange sfIntrinsicDerivedOpenMate
   sfIntrinsicDerivedPullbackComp sfIntrinsicDerivedOpenComp
   sfIntrinsicDerivedPullbackId sfIntrinsicDerivedOpenId
 
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
 private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g)
@@ -1449,11 +1448,43 @@ private theorem sfRestriction {U' U Y' Y : Scheme.{u}}
         ((sfIntrinsicDerivedOpen A j).obj K) ≫
       (sfIntrinsicDerivedPullback A j').map ((sfExchange A gU j' j g sq).hom.app K) =
         (sfIntrinsicDerivedOpenUnit A j').app ((sfIntrinsicDerivedPullback A gU).obj K) := by
+  have hmate {C₁ C₂ D₁ D₂ : Type (u + 2)}
+      [Category.{u + 1} C₁] [Category.{u + 1} C₂]
+      [Category.{u + 1} D₁] [Category.{u + 1} D₂]
+      [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
+      [HasDerivedCategory.{u + 2} C₁] [HasDerivedCategory.{u + 2} C₂]
+      [HasDerivedCategory.{u + 2} D₁] [HasDerivedCategory.{u + 2} D₂]
+      (L₁ : C₁ ⥤ D₁) (R₁ : D₁ ⥤ C₁) (L₂ : C₂ ⥤ D₂) (R₂ : D₂ ⥤ C₂)
+      (G : C₁ ⥤ C₂) (H : D₁ ⥤ D₂)
+      [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive] [G.Additive] [H.Additive]
+      [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
+      [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
+      [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂]
+      [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
+      [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+      [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+      (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+      [IsIso adj₁.unit] [IsIso adj₂.unit]
+      (q : R₁ ⋙ G ≅ H ⋙ R₂) (b : G ⋙ L₂ ≅ L₁ ⋙ H)
+      (hb : mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) =
+        TwoSquare.mk _ _ _ _ q.hom) (K : DerivedCategory C₁) :
+      G.mapDerivedCategory.map (((mapDerivedCategoryIdIso C₁).inv ≫ dMap adj₁.unit ≫
+        (mapDerivedCategoryCompIso L₁ R₁).inv).app K) ≫
+        (mapDerivedCategorySquareIso q).hom.app (L₁.mapDerivedCategory.obj K) ≫
+        R₂.mapDerivedCategory.map ((mapDerivedCategorySquareIso b).inv.app K) =
+      ((mapDerivedCategoryIdIso C₂).inv ≫ dMap adj₂.unit ≫
+        (mapDerivedCategoryCompIso L₂ R₂).inv).app (G.mapDerivedCategory.obj K) := by
+    rw [← asIso_hom adj₁.unit, ← asIso_hom adj₂.unit, dMap_iso, dMap_iso]
+    apply dUnit_square_inverse L₁ R₁ L₂ R₂ G H (asIso adj₁.unit) (asIso adj₂.unit) q b
+    intro X
+    have h := unit_mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ b.hom) X
+    rw [hb] at h
+    exact h
   have := sfOpenUnit_isIso A j
   have := sfOpenUnit_isIso A j'
   have := sfOpenMate_isIso A gU j' j g sq
   unfold sfIntrinsicDerivedOpenUnit sfIntrinsicDerivedSquarePullback sfExchange sfMateIso
-  exact dMate_restriction (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A j)
+  exact hmate (sfIntrinsicExtensionByZero j A) (sfIntrinsicPullback A j)
     (sfIntrinsicExtensionByZero j' A) (sfIntrinsicPullback A j')
     (sfIntrinsicPullback A gU) (sfIntrinsicPullback A g)
     (sfIntrinsicOpenAdjunction A j) (sfIntrinsicOpenAdjunction A j')
@@ -1488,8 +1519,8 @@ private theorem sfDerivedMate_horizontal {U'' U' U Y'' Y' Y : Scheme.{u}}
     simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Category.assoc,
       Iso.inv_hom_id_app]
     erw [Category.comp_id]
-  simpa only [sfMateIso, sfIntrinsicDerivedPullbackComp] using
-    dSquare_comp_forward (sfIntrinsicPullback A gU) (sfIntrinsicPullback A hU)
+  have hcomp := mapDerivedCategorySquareIso_comp
+    (sfIntrinsicPullback A gU) (sfIntrinsicPullback A hU)
     (sfIntrinsicPullback A (hU ≫ gU)) (sfIntrinsicPullback A g) (sfIntrinsicPullback A h)
     (sfIntrinsicPullback A (h ≫ g)) (sfIntrinsicExtensionByZero j A)
     (sfIntrinsicExtensionByZero j' A) (sfIntrinsicExtensionByZero j'' A)
@@ -1497,6 +1528,20 @@ private theorem sfDerivedMate_horizontal {U'' U' U Y'' Y' Y : Scheme.{u}}
     (asIso (sfIntrinsicOpenMate A hU j'' j' h sq'.w))
     (asIso (sfIntrinsicOpenMate A (hU ≫ gU) j'' j (h ≫ g) outer.w))
     (sfIntrinsicPullbackComp A hU gU) (sfIntrinsicPullbackComp A h g) hq
+  apply NatTrans.ext
+  funext K
+  have ht := congrArg (fun e ↦ e.hom.app K) hcomp
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+    isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app, associator_hom_app,
+    associator_inv_app, Category.id_comp, Category.comp_id] at ht
+  simp only [sfMateIso, sfIntrinsicDerivedPullbackComp, NatTrans.comp_app,
+    whiskerLeft_app, whiskerRight_app]
+  rw [← cancel_mono ((mapDerivedCategoryNatIso (sfIntrinsicPullbackComp A h g) ≪≫
+    (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A h)).symm).hom.app
+      ((sfIntrinsicExtensionByZero j A).mapDerivedCategory.obj K))]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  exact ht.symm
 
 private theorem sfDerivedMate_vertical {V' V U' U Y' Y : Scheme.{u}}
     (i : V ⟶ U) (i' : V' ⟶ U') (j : U ⟶ Y) (j' : U' ⟶ Y')
@@ -1523,15 +1568,22 @@ private theorem sfDerivedMate_vertical {V' V U' U Y' Y : Scheme.{u}}
     simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Category.assoc,
       ← (sfIntrinsicPullback A g).map_comp, Iso.inv_hom_id_app]
     erw [(sfIntrinsicPullback A g).map_id, Category.comp_id]
-  simpa only [sfMateIso, sfIntrinsicDerivedOpenComp] using
-    dSquare_comp_reverse (sfIntrinsicExtensionByZero i A) (sfIntrinsicExtensionByZero j A)
-    (sfIntrinsicExtensionByZero (i ≫ j) A) (sfIntrinsicExtensionByZero i' A)
-    (sfIntrinsicExtensionByZero j' A) (sfIntrinsicExtensionByZero (i' ≫ j') A)
-    (sfIntrinsicPullback A gV) (sfIntrinsicPullback A gU) (sfIntrinsicPullback A g)
+  apply NatTrans.ext
+  funext K
+  simp only [sfMateIso, sfIntrinsicDerivedOpenComp, NatTrans.comp_app,
+    whiskerLeft_app, whiskerRight_app]
+  rw [← cancel_mono ((sfIntrinsicPullback A g).mapDerivedCategory.map
+    ((mapDerivedCategoryNatIso (sfIntrinsicOpenComp A i j) ≪≫
+      (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero i A)
+        (sfIntrinsicExtensionByZero j A)).symm).hom.app K))]
+  simp only [Category.assoc, ← (sfIntrinsicPullback A g).mapDerivedCategory.map_comp,
+    Iso.inv_hom_id_app]
+  erw [(sfIntrinsicPullback A g).mapDerivedCategory.map_id, Category.comp_id]
+  exact mapDerivedCategorySquareIso_hom_app_comp
     (asIso (sfIntrinsicOpenMate A gV i' i gU sq'.w))
     (asIso (sfIntrinsicOpenMate A gU j' j g sq.w))
     (asIso (sfIntrinsicOpenMate A gV (i' ≫ j') (i ≫ j) g outer.w))
-    (sfIntrinsicOpenComp A i j) (sfIntrinsicOpenComp A i' j') hq
+    (sfIntrinsicOpenComp A i' j') (sfIntrinsicOpenComp A i j) hq K
 
 private theorem sfDerivedMate_horizontal_id {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] (sq : IsPullback (𝟙 U) j j (𝟙 Y)) :

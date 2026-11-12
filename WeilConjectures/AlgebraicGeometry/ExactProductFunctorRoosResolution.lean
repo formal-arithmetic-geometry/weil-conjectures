@@ -71,7 +71,7 @@ private theorem inclusion_natural
     apply Pi.hom_ext
     intro n
     dsimp only [roosLimitFunctor, Functor.comp_map]
-    simp only [Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
+    simp only [Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc]
     exact limMap_π _ (op n)
   apply HomologicalComplex.Hom.ext
   funext i
@@ -483,9 +483,9 @@ theorem exactProductFunctorRoosResolution
       simp only [← Category.assoc, hiA, hiB]
       simp only [Category.assoc, biprod.lift_fst_assoc]
       have hπA := congrArg (fun z ↦ z.f (p + 1))
-        (Pi.lift_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
+        (Pi.lift_comp_π (fun n : ℕ ↦ limit.π I.asFunctor (op n)) n)
       have hπB := congrArg (fun z ↦ z.f (p + 1))
-        (Pi.lift_π (fun n : ℕ ↦ limit.π (Ft.obj I).asFunctor (op n)) n)
+        (Pi.lift_comp_π (fun n : ℕ ↦ limit.π (Ft.obj I).asFunctor (op n)) n)
       simp only [HomologicalComplex.comp_f] at hπA hπB
       erw [hπA, hπB]
       exact (congrArg (fun z ↦ z.f (p + 1)) (hbeta I n)).symm

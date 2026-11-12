@@ -497,7 +497,7 @@ private theorem square_factors
   simp only [Category.assoc]
   rw [hG, Functor.mapDerivedCategoryNatIso_fac]
   rw [← hF]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [F₂.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
 

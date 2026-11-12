@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFiniteness
-public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
@@ -42,8 +41,7 @@ theorem exists_isFinite_etale_to_affineSpace {k₀ : Type u} [Field k₀] [Perfe
       IsOpenImmersion j ∧ Nonempty W ∧ IsFinite π ∧ Etale π ∧ Surjective π ∧
       π ≫ O.ι ≫ 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀) =
         j ≫ f := by
-  have : GeometricallyReduced f := GeometricallyReduced.of_perfectField f
-  obtain ⟨x, hx⟩ := (GeometricallyReduced.dense_smoothLocus f).nonempty
+  obtain ⟨x, hx⟩ := f.dense_smoothLocus_of_perfectField.nonempty
   obtain ⟨d, U, V, hU, hV, -, hxV, hVU, e, he, hge⟩ :=
     f.exists_etale_to_affineSpace_of_mem_smoothLocus hx
   have : IsAffine V.toScheme := hV

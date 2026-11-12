@@ -86,8 +86,7 @@ theorem exists_localCotangentComparison_naturality
     rfl
   · apply LinearMap.ext
     intro z
-    induction z with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul r h =>
       simp only [LinearMap.comp_apply, LinearMap.baseChange_tmul,

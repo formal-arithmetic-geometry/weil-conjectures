@@ -74,7 +74,7 @@ theorem supported_kummer_chern_realization (T : Scheme.{u}) (N : ℕ)
     (supportedIntegralOne T)
   let Q := Sheaf.Torsor.lifts terminal hE s
   have hp : Sheaf.Torsor.classH1 T.gmSheaf terminal ⟦P⟧ =
-      Sheaf.H.δ hE terminal s := by
+      Sheaf.H.δSections hE terminal s := by
     have heq := Sheaf.Torsor.classH1_eq_map_of_equivariant terminal (𝟙 T.gmSheaf) P Q
       (fun U p ↦ ⟨f.hom.app U p, hb U p⟩)
       (fun U V g p ↦ Subtype.ext (by
@@ -87,7 +87,7 @@ theorem supported_kummer_chern_realization (T : Scheme.{u}) (N : ℕ)
     simpa only [Sheaf.H.map_apply, Ext.comp_mk₀_id] using heq.symm
   have hpic : Scheme.Pic.toCohomologicalPicardGroup T
       (Scheme.Pic.ofIsInvertible (Scheme.Modules.dual i.ker.toModules)) =
-      Sheaf.H.δ hE terminal s := by
+      Sheaf.H.δSections hE terminal s := by
     rw [Scheme.Pic.toCohomologicalPicardGroup_apply, Scheme.Pic.ofIsInvertible,
       Scheme.Pic.etaleTorsorClass_mk]
     exact hp

@@ -54,8 +54,7 @@ theorem exteriorSupportResolutionUnit_naturality
         exteriorSupportResolutionUnit C i P' =
       exteriorSupportResolutionUnit C i P ≫
         (rightDerivedSectionsWithSupport C i).map (DerivedCategory.Q.map φ) :=
-  (globalSectionsWithSupport C i).rightDerivedFunctorUnit.naturality
-    ((HomotopyCategory.quotient _ _).map φ)
+  (globalSectionsWithSupport C i).rightDerivedFunctorUnitQ_naturality φ
 
 end GlobalSections
 
@@ -94,11 +93,19 @@ theorem exteriorProductResolutionComparison_naturality
       DerivedCategory.Q.map (tensorHom
         (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).map φ)
         (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).map ψ)) := by
-  have h₁ := (upperStar C (pullback.fst f g)).leftDerivedFunctorCounit.naturality
-    ((HomotopyCategory.quotient _ _).map φ)
-  have h₂ := (upperStar C (pullback.snd f g)).leftDerivedFunctorCounit.naturality
-    ((HomotopyCategory.quotient _ _).map ψ)
-  dsimp only [Functor.comp_map] at h₁ h₂
+  let ε {T : Scheme.{u}} (h : pullback f g ⟶ T) :=
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso _).inv
+        (upperStar C h).leftDerivedFunctor ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient _ _)
+        (upperStar C h).leftDerivedFunctorCounit ≫
+      Functor.whiskerRight ((upperStar C h).mapHomotopyCategoryFactors (.up ℤ)).hom
+        DerivedCategory.Qh ≫
+      Functor.whiskerLeft ((upperStar C h).mapHomologicalComplex (.up ℤ))
+        (DerivedCategory.quotientCompQhIso _).hom
+  have h₁ := (ε (pullback.fst f g)).naturality φ
+  have h₂ := (ε (pullback.snd f g)).naturality ψ
+  dsimp only [ε, Functor.comp_map, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app] at h₁ h₂
   rw [exteriorProductResolutionComparison, exteriorProductResolutionComparison,
     derivedTensorHom_comp_assoc]
   erw [h₁, h₂]

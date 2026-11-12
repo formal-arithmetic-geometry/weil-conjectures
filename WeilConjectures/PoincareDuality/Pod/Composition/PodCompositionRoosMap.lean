@@ -17,7 +17,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace WeilConjectures
 
 attribute [local implicit_reducible] integralOperationsRoos
-  Functor.mapHomologicalComplex CochainComplex.mappingCocone
+  CochainComplex.mappingCocone
 
 /-- A normalized additive Roos comparison respects any compositor of additive functors.
 Source: Stacks 0941; blueprint dual-Tate compatibility, Steps 1 and 5

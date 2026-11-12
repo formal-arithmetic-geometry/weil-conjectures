@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
 
 -- Naturality extends a unit equation from K-injective representatives to complexes.
 private theorem normalized_of_kInjectives

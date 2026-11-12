@@ -136,7 +136,7 @@ theorem scheme_derived_hom_gluing
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))
             (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))
-            (Scheme.Modules.overEquiv (U ⊓ V)))).symm ≪≫
+            (Scheme.Modules.overEquiv (U ⊓ V)))) ≪≫
         Functor.mapDerivedCategoryNatIso
           (Functor.associator _ _ _ ≪≫
           Functor.isoWhiskerLeft
@@ -165,7 +165,7 @@ theorem scheme_derived_hom_gluing
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))
             (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))
-            (Scheme.Modules.overEquiv (U ⊓ V)))).symm ≪≫
+            (Scheme.Modules.overEquiv (U ⊓ V)))) ≪≫
         Functor.mapDerivedCategoryNatIso
           (Functor.associator _ _ _ ≪≫
           Functor.isoWhiskerLeft
@@ -207,9 +207,9 @@ theorem scheme_derived_hom_gluing
   let rU := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let rV := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V
   let rW := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (U ⊓ V)
-  let qU := Functor.mapDerivedCategoryCompIso rU eU.functor
-  let qV := Functor.mapDerivedCategoryCompIso rV eV.functor
-  let qW := Functor.mapDerivedCategoryCompIso rW eW.functor
+  let qU := (Functor.mapDerivedCategoryCompIso rU eU.functor).symm
+  let qV := (Functor.mapDerivedCategoryCompIso rV eV.functor).symm
+  let qW := (Functor.mapDerivedCategoryCompIso rW eW.functor).symm
   let a' := eU.functor.mapDerivedCategory.preimage
     (qU.inv.app F ≫ a ≫ qU.hom.app E)
   let b' := eV.functor.mapDerivedCategory.preimage

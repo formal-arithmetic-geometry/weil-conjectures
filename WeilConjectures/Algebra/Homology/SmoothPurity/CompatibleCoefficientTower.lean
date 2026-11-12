@@ -154,8 +154,7 @@ private theorem tensorAddHom_ext
     [Module A P] [Module A Q] (f g : TensorProduct A P Q →+ N)
     (h : ∀ x y, f (x ⊗ₜ[A] y) = g (x ⊗ₜ[A] y)) : f = g := by
   ext t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact h x y
   | add x y hx hy => rw [map_add, map_add, hx, hy]
 

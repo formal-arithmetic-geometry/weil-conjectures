@@ -69,13 +69,9 @@ private theorem localizedBraiding_natural
         (1 ⊗ₜ[R] (bi M.obj N.obj).hom)
     rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul,
       one_mul, mul_one, mul_comm c a, hn]
-  induction f using TensorProduct.induction_on with
-  | zero => simp only [map_zero, LinearMap.zero_apply, zero_comp,
-      comp_zero]
+  induction f using TensorProduct.inductionOn with
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp only [map_zero, LinearMap.zero_apply, zero_comp,
-        comp_zero]
+    induction g using TensorProduct.inductionOn with
     | tmul c g => exact ht a f c g
     | add g g' hg hg' =>
       simp only [map_add, LinearMap.add_apply, Preadditive.add_comp,

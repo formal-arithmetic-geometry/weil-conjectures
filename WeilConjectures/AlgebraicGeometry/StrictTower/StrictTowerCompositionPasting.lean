@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerCompositionMaps
 import all WeilConjectures.AlgebraicGeometry.StrictTower.RefinementExchangeCoherence
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenCalculus
+import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalization
 
 /-!
 # Composition pasting for strict constant-coefficient towers

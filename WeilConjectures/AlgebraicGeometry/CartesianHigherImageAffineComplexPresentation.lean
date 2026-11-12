@@ -29,6 +29,11 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance localInst_CartesianHigherImageAffineComplexPresentation_1
+    (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
 /-- Present affine cartesian derived classes by a qcqs scheme system and its
 abelian complex cohomology cocone. The presentation has canonical transition and
 leg equations, and contains no cohomology continuity or representative assertion.

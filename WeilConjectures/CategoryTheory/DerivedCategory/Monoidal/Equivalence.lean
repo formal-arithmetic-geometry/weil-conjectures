@@ -139,9 +139,11 @@ noncomputable def ihomCompMapDerivedCategoryInvIso (X : DerivedCategory C₂) :
 /-- The functor `D(F)` preserves the unit: `D(F)(𝟙) ≅ 𝟙`, the unit of `D(Cᵢ)` being the image
 of the unit of `Cᵢ` placed in degree `0`. -/
 noncomputable def mapDerivedCategoryUnitIso : F.mapDerivedCategory.obj (𝟙_ _) ≅ 𝟙_ _ :=
-  F.mapDerivedCategoryFactors.app _ ≪≫
+  F.mapDerivedCategory.mapIso ((quotientCompQhIso C₁).app _) ≪≫
+    F.mapDerivedCategoryFactors.app _ ≪≫
     Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app _ ≪≫
-      (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso F).symm)
+      (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso F).symm) ≪≫
+    ((quotientCompQhIso C₂).app _).symm
 
 /-- The functor `D(F⁻¹)` preserves the unit: `D(F⁻¹)(𝟙) ≅ 𝟙`. -/
 noncomputable def mapDerivedCategoryInvUnitIso : F.inv.mapDerivedCategory.obj (𝟙_ _) ≅ 𝟙_ _ :=

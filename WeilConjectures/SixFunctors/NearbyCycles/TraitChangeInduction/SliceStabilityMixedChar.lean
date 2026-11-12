@@ -101,7 +101,7 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
   let lf : (𝒟₂).Ω → (𝒟₁).Ω := fun y ↦ if h : ∃ x, Γ x = y then h.choose else 0
   have hlf : ∀ x, lf (Γ x) = x := fun x ↦ by
     have h : ∃ x', Γ x' = Γ x := ⟨x, rfl⟩
-    simp only [lf, dif_pos h]
+    simp only [lf, dite_eq_left h]
     exact Γ.injective h.choose_spec
   have hlf0 : lf 0 = 0 := by
     have := hlf 0
@@ -247,9 +247,9 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
       have : S ^ (k + 1) - T ^ (k + 1) = S * (S ^ k - T ^ k) + T ^ k * (S - T) := by ring
       rw [this]
       refine lt_of_le_of_lt (v₂.map_add _ _) (max_lt ?_ ?_)
-      · rw [map_mul]; exact mul_lt_one_of_nonneg_of_lt_one_right hS zero_le ih
+      · rw [map_mul]; exact (mul_le_of_le_one_left zero_le hS).trans_lt ih
       · rw [map_mul, map_pow]
-        exact mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' hT _) zero_le hST
+        exact (mul_le_of_le_one_left zero_le (pow_le_one' hT _)).trans_lt hST
   have hres : ∀ z ∈ L₂, v₂ z ≤ 1 → ∀ c : Option (ιw × ℕ) →₀ (𝒟₂).Ω, (∀ j, c j ∈ K) →
       (∀ j, v₂ (c j) ≤ 1) → v₂ (z ^ p - frobeniusComb p w₂ c) < 1 →
         ∀ i : ιw, v₂ (c (some (i, 0))) < 1 := by
@@ -293,7 +293,7 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
       rw [← Finset.sum_sub_distrib]
       refine v₂.map_sum_lt one_ne_zero fun k _ ↦ ?_
       rw [← mul_sub, map_mul, map_pow]
-      refine mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' (hy1 k) _) zero_le ?_
+      refine (mul_le_of_le_one_left zero_le (pow_le_one' (hy1 k) _)).trans_lt ?_
       refine hpowcong S (z ^ p) hS1 (by rw [map_pow]; exact pow_le_one' hz1 _) ?_ k
       rw [← v₂.map_neg, neg_sub]
       exact hlt

@@ -197,7 +197,7 @@ noncomputable def homDualLinearEquiv (M : FrobeniusModule.{u, v} K)
 lemma homDualLinearEquiv_symm_tmul (M : FrobeniusModule.{u, v} K)
     (N : FrobeniusModule.{t, v} K) (x : M.carrier) (y : N.carrier)
     (φ : Module.Dual K M.carrier) : (homDualLinearEquiv M N).symm (x ⊗ₜ y) φ = φ x • y := by
-  simp [homDualLinearEquiv, dualTensorHom_apply]
+  simp [homDualLinearEquiv]
 
 /-- The Frobenius-equivariant isomorphism `Hom(M^∨, N) ≅ M ⊗ N`: `x ⊗ y` corresponds to the map
 `φ ↦ φ(x) y`. -/
@@ -208,8 +208,7 @@ noncomputable def homDualEquiv (M N : FrobeniusModule.{max u v, v} K) :
     have key (T : M.carrier ⊗[K] N.carrier) :
         (homDualLinearEquiv M N).symm ((M.tensor N).frobenius T) =
           (M.dual.linearHom N).frobenius ((homDualLinearEquiv M N).symm T) := by
-      induction T using TensorProduct.induction_on with
-      | zero => simp
+      induction T using TensorProduct.inductionOn with
       | tmul x y =>
         refine LinearMap.ext fun φ ↦ ?_
         rw [tensor_frobenius_tmul, homDualLinearEquiv_symm_tmul, linearHom_frobenius_apply]
@@ -227,6 +226,7 @@ lemma homDualEquiv_symm_tmul (M N : FrobeniusModule.{max u v, v} K) (x : M.carri
       (homDualEquiv M N).toLinearEquiv.symm (x ⊗ₜ y)) φ =
       φ x • y :=
   homDualLinearEquiv_symm_tmul M N x y φ
+
 
 /-- An isomorphism `P ≅ Hom(A, N)` together with `A ≅ M^∨` gives `P ≅ M ⊗ N`, through
 `Hom(M^∨, N) ≅ M ⊗ N` (`FrobeniusModule.homDualEquiv`). -/

@@ -162,7 +162,7 @@ theorem normalizedDerivedUnitPasting
           (Functor.rightDerivedFunctorCompIso' P S ep).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryTriangleIso eo).inv
           W.rightDerivedFunctor =
-      (Functor.mapDerivedCategoryCompIso F G).inv ≫
+      (Functor.mapDerivedCategoryCompIso F G).hom ≫
         (fun a₀ ↦ normalizationLocalizationDesc DerivedCategory.Qh
           (HomotopyCategory.quasiIso C (.up ℤ))
           (normalizationHomotopyTransformation (F ⋙ G) H W a₀))
@@ -179,7 +179,7 @@ theorem normalizedDerivedUnitPasting
         (Functor.rightDerivedFunctorCompIso' P S ep).hom ≫
       Functor.whiskerRight (Functor.mapDerivedCategoryTriangleIso eo).inv
         W.rightDerivedFunctor) = Functor.whiskerLeft DerivedCategory.Qh
-      ((Functor.mapDerivedCategoryCompIso F G).inv ≫
+      ((Functor.mapDerivedCategoryCompIso F G).hom ≫
         nunit (F ⋙ G) H W
           (Functor.whiskerRight ah G ≫ Functor.whiskerLeft J (Functor.whiskerLeft R ae) ≫
             Functor.whiskerLeft J (Functor.whiskerRight χ S) ≫
@@ -301,7 +301,7 @@ theorem normalizedDerivedUnitPasting
   dsimp only [Functor.comp_map, Functor.comp_obj] at hw
   rw [← hw]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factorsh F G K]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     ← DerivedCategory.Qh.map_comp_assoc]
   rw [ht]
 end Pasting

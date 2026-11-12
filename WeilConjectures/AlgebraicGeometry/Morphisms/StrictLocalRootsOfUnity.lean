@@ -91,7 +91,7 @@ theorem strict_local_roots_of_unity
         ∀ a₀ : IsLocalRing.ResidueField H, Polynomial.aeval a₀ p = 0 →
           Polynomial.aeval a₀ p.derivative ≠ 0 →
             ∃ a : H, p.IsRoot a ∧ IsLocalRing.residue H a = a₀ :=
-      ((HenselianLocalRing.TFAE H).out 0 1).mp
+      ((HenselianLocalRing.TFAE H).out 1 2).mp
         (inferInstance : HenselianLocalRing H)
     obtain ⟨a, ha, hqa⟩ := hensel p hp (((ζ : kˣ) : k)) hroot hd
     have hapow : a ^ n = 1 := by simpa [p, Polynomial.IsRoot, sub_eq_zero] using ha

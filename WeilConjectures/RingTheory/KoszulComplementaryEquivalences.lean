@@ -115,7 +115,7 @@ private theorem koszulComplementaryPairing_bijective (A : Type u) [CommRing A] (
     rw [← basis_eq_coe_basis b t, ← basis_eq_coe_basis b s]
     by_cases h : t = c s
     · subst t
-      rw [if_pos rfl, smul_eq_mul, mul_one,
+      rw [ite_eq_left rfl, smul_eq_mul, mul_one,
         basis_mul_of_disjoint b (c s) s (hdisj s)]
       have hu : (Set.powersetCard.disjUnion (hdisj s)).val = Finset.univ := by
         change (c s).val.disjUnion s.val (hdisj s) = Finset.univ
@@ -134,7 +134,7 @@ private theorem koszulComplementaryPairing_bijective (A : Type u) [CommRing A] (
             Set.powersetCard.card_eq t, Fintype.card_fin]
           omega)
         exact h (Subtype.ext heq)
-      rw [if_neg h, smul_zero, basis_mul_of_not_disjoint b t s hnot, map_zero]
+      rw [ite_eq_right h, smul_zero, basis_mul_of_not_disjoint b t s hnot, map_zero]
   have he : (koszulComplementaryPairing A r j f) = e.toLinearMap := by
     apply (b.exteriorPower (r - j)).ext
     intro s

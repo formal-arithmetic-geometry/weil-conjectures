@@ -183,6 +183,7 @@ theorem globalTensorPullback_mates_isIso
       apply ModuleCat.hom_ext
       apply TensorProduct.ext'
       intro r b
+      change Γ(X, ⊤) at r
       change (λ_ (P.obj B)).hom.val.app (op ⊤)
         ((η ▷ P.obj B).val.app (op ⊤)
           (tmulSection ((adj.unit.app (𝟙_ _)).hom r) ((adj.unit.app B).hom b))) =

@@ -307,7 +307,7 @@ noncomputable def correctionSeqIso : homologySeq (ψ := ψ) D ≅ correctionSeq 
       simp only [correctionIso₁, correctionIso₂, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
         Category.assoc, eqToIso_refl, Iso.refl_hom, Category.id_comp]
       rw [← homologySheaf_map_toShiftedComplex_map, toShiftedComplex_map_correctionSeqF]
-      simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc])
+      simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc])
     (by
       change _ ≫ correctionSeqG eB eM = (WeilComplex.homologySheaf (-1)).map
         (fourierTriangle (ψ := ψ) D).mor₂ ≫ _
@@ -316,7 +316,7 @@ noncomputable def correctionSeqIso : homologySeq (ψ := ψ) D ≅ correctionSeq 
         Iso.refl_hom, Category.id_comp]
       rw [← homologySheaf_map_toShiftedComplex_map, toShiftedComplex_map_correctionSeqG,
         fourierTriangle_mor₂, Functor.map_neg, Preadditive.neg_comp, neg_neg]
-      simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc])
+      simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc])
 
 /-- The sequence `0 → B' → G → j'_*M' → 0` of Step 5 is short exact: in the long exact sequence
 of cohomology sheaves of the transformed triangle, `𝓗⁻²` of `(j'_*M')[1]` and `𝓗⁰` of `B'[1]`

@@ -35,7 +35,8 @@ private theorem section_subsingleton (S : Scheme.{u})
     Subsingleton (H.obj.obj (op U)) := by
   let E := sheafToPresheaf S.smallEtaleTopology (Type (max u v)) ⋙
     (CategoryTheory.evaluation S.Etaleᵒᵖ (Type (max u v))).obj (op U)
-  have ht := IsTerminal.isTerminalObj E _ terminalIsTerminal
+  have ht := IsTerminal.isTerminalObj E _
+    (terminalIsTerminal (C := Sheaf S.smallEtaleTopology (Type (max u v))))
   let : Unique (E.obj (⊤_ _)) := Types.isTerminalEquivUnique _ ht
   have hm : Mono (E.map (terminal.from H)) := inferInstance
   exact Function.Injective.subsingleton (f := E.map (terminal.from H))

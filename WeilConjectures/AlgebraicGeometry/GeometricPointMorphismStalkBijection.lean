@@ -59,7 +59,7 @@ theorem geometricPointMorphism_stalk_bijection
     let b : Over.mk s ⟶ Over.mk s' := Over.homMk a ha
     let α : (pointSmallEtale s').fiber ⟶ (pointSmallEtale s).fiber :=
       Functor.whiskerLeft (Etale.forget S) (coyoneda.map b.op)
-    (CategoryOfElements.map α).IsEquivalence ∧
+    (NatTrans.mapElements α).IsEquivalence ∧
     (∀ F : Sheaf S.smallEtaleTopology (Type (max u v)),
       let P := fun f : (pointSmallEtale s').sheafFiber.obj F →
           (pointSmallEtale s).sheafFiber.obj F ↦

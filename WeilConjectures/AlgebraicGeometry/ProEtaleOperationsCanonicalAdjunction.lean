@@ -33,6 +33,12 @@ variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
 set_option hygiene false in
 local notation "𝓡" S => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S
 
+private noncomputable local instance (M : SheafOfModules.{u} (𝓡 A))
+    {U V : Cᵒᵖ} (i : U ⟶ V) :
+    Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars ((𝓡 A).obj.map i).hom).obj (M.val.obj V)) :=
+  inferInstanceAs (Module (A.obj.obj V) (M.val.obj V))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem changeMap_tmul (M : SheafOfModules.{u} (𝓡 A)) {U V : Cᵒᵖ} (i : U ⟶ V)

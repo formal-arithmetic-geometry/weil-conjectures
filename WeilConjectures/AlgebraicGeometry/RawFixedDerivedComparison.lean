@@ -41,9 +41,9 @@ noncomputable def rawFixedDerivedComparison {B T Y : Scheme.{u}}
     (cohomology AddCommGrpCat.{u + 1} (pullback U.hom h) q).map
       ((Functor.mapDerivedCategoryNatIso
           (upperStarComp AddCommGrpCat.{u + 1} (pullback.snd U.hom h) g) ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           (upperStar AddCommGrpCat.{u + 1} g)
-          (upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom h))).inv.app K.obj)
+          (upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom h))).symm).inv.app K.obj)
 
 
 end AlgebraicGeometry.Etale

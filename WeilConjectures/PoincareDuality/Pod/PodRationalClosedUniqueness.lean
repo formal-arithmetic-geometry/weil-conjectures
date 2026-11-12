@@ -40,8 +40,7 @@ private theorem localized_addHom_ext
   cases hX
   apply AddMonoidHom.ext
   intro q
-  induction q using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction q using TensorProduct.inductionOn with
   | tmul a m => exact h a m _ HEq.rfl
   | add q q' hq hq' => simp only [map_add, hq, hq']
 

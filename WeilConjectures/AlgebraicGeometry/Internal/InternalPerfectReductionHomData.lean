@@ -26,6 +26,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Ulift
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.CategoryTheory.CofilteredSystem
+import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealization.AdmissibleScalarRealizationExactSupplement
 
 /-! Internal perfect reduction Hom data. -/
 
@@ -47,8 +48,12 @@ def internalPerfectScalarModel (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
     DerivedCategory (AdicCompletion.Modules l E W) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  letI : (FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W).Additive :=
-    (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
+  letI : (FiniteConstantModel.modelFunctor
+      (Padic.coefficientExtensionIntegers l E) W).Additive := by
+    have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+      (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
+    exact (AdmissibleScalarRealization.pid_scalar_assertions
+      (Padic.coefficientExtensionIntegers l E) W).2.1
   let F := ModuleCat.uliftFunctor.{u + 1, u} (Padic.coefficientExtensionIntegers l E) ⋙
     FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W
   DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)

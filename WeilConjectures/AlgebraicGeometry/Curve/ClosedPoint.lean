@@ -175,7 +175,7 @@ lemma isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
     rw [hdim1] at this
     exact_mod_cast this
   have : IsDiscreteValuationRing (X.presheaf.stalk Q) :=
-    ((IsDiscreteValuationRing.TFAE _ hR).out 0 5).mpr hfin
+    ((IsDiscreteValuationRing.TFAE _ hR).out 1 6).mpr hfin
   intro x
   by_cases hx : x = Q
   · subst hx

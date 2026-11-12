@@ -78,7 +78,7 @@ theorem affinePolynomial_localized_finiteProjectiveDimension_of_stalkwise
         f hperfect U hU V hV e n g hg hcomp p hker
     exact ModuleCat.localizedPolynomial_finiteProjectiveDimension_of_finiteTor
       n p (M.localizedModule p.asIdeal.primeCompl) d hd
-  · obtain ⟨a, ha_ker, ha_p⟩ := SetLike.not_le_iff_exists.mp hker
+  · obtain ⟨a, ha_ker, ha_p⟩ := IsConcreteLE.not_le_iff_exists.mp hker
     let M := (ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V))
     have ha_zero : ∀ m : M, a • m = 0 := by
       intro m

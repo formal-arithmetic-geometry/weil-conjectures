@@ -41,7 +41,7 @@ private theorem conormal_polynomial_chain_rule
     simp only [MvPolynomial.pderiv_mul, MvPolynomial.pderiv_X, map_add, map_mul,
       add_smul, Finset.sum_add_distrib, mul_smul]
     simp only [Pi.single_apply, apply_ite, map_one, map_zero, ite_smul,
-      one_smul, zero_smul, smul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+      one_smul, zero_smul, smul_zero, Finset.sum_ite_eq, Finset.mem_univ, ite_true]
     rw [Finset.smul_sum, add_comm]
     congr 1
     apply Finset.sum_congr rfl

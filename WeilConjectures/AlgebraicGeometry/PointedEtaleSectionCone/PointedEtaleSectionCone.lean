@@ -36,7 +36,7 @@ structure PointedEtaleSectionCone (g : T ⟶ S)
   section_ (i : I) : Scheme.Etale.mk (𝟙 T) ⟶ g.Etale.obj (N.obj i).1
   naturality {i j : I} (a : i ⟶ j) :
     section_ i ≫ g.Etale.map
-      ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).map (N.map a)) = section_ j
+      ((Functor.Elements.π (Scheme.pointSmallEtale s).fiber).map (N.map a)) = section_ j
 
 namespace PointedEtaleSectionCone
 
@@ -82,7 +82,7 @@ theorem existsUnique_restriction
   let hk : IsColimit k :=
     (Functor.Final.isColimitWhiskerEquiv N.op _).symm
       ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone F.obj)
-  let d : Cocone (N.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).op ⋙
+  let d : Cocone (N.op ⋙ (Functor.Elements.π (Scheme.pointSmallEtale s).fiber).op ⋙
       F.obj) :=
     { pt := (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
         ((upperStar AddCommGrpCat.{v + 1} g).obj F)
@@ -91,7 +91,7 @@ theorem existsUnique_restriction
                intro i j a
                dsimp
                simp only [Category.comp_id, restriction]
-               let t := (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).map
+               let t := (Functor.Elements.π (Scheme.pointSmallEtale s).fiber).map
                  (N.map a.unop)
                rw [← Category.assoc, ← Category.assoc]
                erw [((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} g).unit.app

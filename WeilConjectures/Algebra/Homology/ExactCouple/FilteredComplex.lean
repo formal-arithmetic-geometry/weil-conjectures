@@ -90,34 +90,35 @@ noncomputable def coupleg (i j : ℤ × ℤ) : (F.piece i.1).homology i.2 ⟶ (F
 lemma coupleα_self (p n : ℤ) :
     F.coupleα (p + 1, n) (p, n) =
       HomologicalComplex.homologyMap (Subobject.ofLE _ _ (F.F_succ_le p)) n := by
-  rw [coupleα, dif_pos ⟨rfl, rfl⟩, eqToHom_refl, Category.comp_id]
+  rw [coupleα, dite_eq_left ⟨rfl, rfl⟩, eqToHom_refl, Category.comp_id]
 
 lemma couplef_self (p n : ℤ) :
     F.couplef (p, n) (p + 1, n + 1) = (F.ses_shortExact p).δ n (n + 1) rfl := by
-  rw [couplef, dif_pos ⟨rfl, rfl⟩, eqToHom_refl, Category.comp_id]
+  rw [couplef, dite_eq_left ⟨rfl, rfl⟩, eqToHom_refl, Category.comp_id]
 
 lemma coupleg_self (p n : ℤ) :
     F.coupleg (p, n) (p, n) = HomologicalComplex.homologyMap (cokernel.π _) n := by
-  rw [coupleg, dif_pos rfl, eqToHom_refl, Category.comp_id]
+  rw [coupleg, dite_eq_left rfl, eqToHom_refl, Category.comp_id]
 
 lemma coupleα_eq_zero (i j : ℤ × ℤ) (h : i + ((-1, 0) : ℤ × ℤ) ≠ j) : F.coupleα i j = 0 := by
-  rw [coupleα, dif_neg]
+  rw [coupleα, dite_eq_right]
   rintro ⟨h₁, h₂⟩
   exact h (Prod.ext (by simp; omega) (by simp [h₂]))
 
 lemma couplef_eq_zero (i j : ℤ × ℤ) (h : i + ((1, 1) : ℤ × ℤ) ≠ j) : F.couplef i j = 0 := by
-  rw [couplef, dif_neg]
+  rw [couplef, dite_eq_right]
   rintro ⟨h₁, h₂⟩
   exact h (Prod.ext (by simp; omega) (by simp; omega))
 
 lemma coupleg_eq_zero (i j : ℤ × ℤ) (h : i + 0 ≠ j) : F.coupleg i j = 0 := by
-  rw [coupleg, dif_neg]
+  rw [coupleg, dite_eq_right]
   rintro rfl
   exact h (add_zero _)
 
 /-- Reduce statements about the maps of the couple to the case of the standard indices. -/
 private lemma eq_of_add (i j : ℤ × ℤ) (a : ℤ × ℤ) (h : i + a = j) : j = (i.1 + a.1, i.2 + a.2) :=
   h.symm
+
 
 lemma coupleα_coupleg (i j k : ℤ × ℤ) : F.coupleα i j ≫ F.coupleg j k = 0 := by
   by_cases hij : i + ((-1, 0) : ℤ × ℤ) = j

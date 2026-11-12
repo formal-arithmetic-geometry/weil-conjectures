@@ -125,7 +125,7 @@ private theorem restriction_pull_single (a : Λ ⟶ Λ') [IsMonHom a]
     (CondensedRing.comapUpperStarIso a f).symm M]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
     (V₀ a Y) (CondensedRing.upperStar Λ f) M]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 omit [IsCommMonObj Λ] in

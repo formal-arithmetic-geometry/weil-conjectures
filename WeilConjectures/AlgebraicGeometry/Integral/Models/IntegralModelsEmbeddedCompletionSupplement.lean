@@ -239,10 +239,10 @@ theorem integralModelsEmbeddedCompletion
   have : PreservesFiniteLimits (ConstantCompletion.res φ) := (siteRestrictScalars_exact φ).1
   have : PreservesFiniteColimits (ConstantCompletion.res φ) := (siteRestrictScalars_exact φ).2
   let α : r ⋙ ER.functor ≅ EB.functor ⋙ s :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (smallRestrictionIso X (IntegralModelsEmbedded.scalarMap ℓ E X)) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
   obtain ⟨hfinite, hflat, hquot, hkernel⟩ :=
     integralModelsEmbeddedCoefficientKernels ℓ E π hπ X
   change I.extension φ = ConstantCompletion.kernelIdeal qB at hkernel

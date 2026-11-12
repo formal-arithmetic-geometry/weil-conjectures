@@ -20,7 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-private theorem mate_columns
+private theorem mate_columns_private
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {L : A ⥤ C} {R : C ⥤ A} {L' : B ⥤ D} {R' : D ⥤ B}
     {E : A ⥤ B} {U : B ⥤ A} {E' : C ⥤ D} {U' : D ⥤ C}
@@ -126,7 +126,7 @@ theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)
     finiteFreeDirectImage_balancingComputed sW sZ a β hsource hβ
   subst β
   refine ⟨eW _, eZ M, fun i ↦ ?_⟩
-  simpa only [comparison, Category.assoc] using mate_columns
+  simpa only [comparison, Category.assoc] using mate_columns_private
     (proEtaleRingDerivedAdjunction q R.target R.source R.identification)
     (proEtaleRingDerivedAdjunction q S.target S.source S.identification)
     (proEtaleRingRestrictionDerivedPullback q R.target S.target R.source S.source
@@ -139,5 +139,12 @@ theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)
     (fun X i ↦ biproduct.ι (fun _ : Fin d ↦ X) i ≫ (eW X).hom)
     (fun X i ↦ biproduct.ι (fun _ : Fin d ↦ X) i ≫ (eZ X).hom)
     (fun {X Y} f i ↦ by simpa only [Category.assoc] using hnat f i) hpull M i
+
+end AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+
+namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
+/-- Public export of the private `mate_columns_private` (used by `import all` importers;
+linter.privateModule). -/
+alias mate_columns := mate_columns_private
 
 end AlgebraicGeometry.Scheme.FiniteFreeDirectImage

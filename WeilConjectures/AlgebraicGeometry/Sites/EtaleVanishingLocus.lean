@@ -129,6 +129,7 @@ lemma inter_vanishingLocus_subset_sub {U : X.Etale} (s₁ s₂ : F.obj.obj (op U
   rw [sub_eq_add_neg, ← vanishingLocus_neg s₂]
   exact inter_vanishingLocus_subset_add _ _
 
+
 end VanishingLocus
 
 section PullSection

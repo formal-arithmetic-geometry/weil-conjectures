@@ -161,8 +161,7 @@ private theorem coefficientLocalization_equiv
       change s (t (MvPolynomial.C c)) = MvPolynomial.C c
       dsimp only [t]
       rw [MvPolynomial.eval₂Hom_C]
-      induction c using _root_.TensorProduct.induction_on with
-      | zero => simp
+      induction c using _root_.TensorProduct.inductionOn with
       | add c₁ c₂ h₁ h₂ => simp only [map_add, h₁, h₂]
       | tmul r b =>
         change s (ct (_root_.TensorProduct.tmul k r b)) =

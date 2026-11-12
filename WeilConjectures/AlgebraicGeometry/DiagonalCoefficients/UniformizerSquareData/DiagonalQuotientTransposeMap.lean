@@ -68,7 +68,7 @@ local elab "typeOf% " t:term:max : term => do
   (((ScalarCompatibility.compositeAdjunction q.route.first q.route.second).comp
     (finiteAdjunction q.eW)).ofNatIsoRight
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
-        (ScalarCompatibility.compositeRestriction q.route.first q.route.second)).symm).homEquiv
+        (ScalarCompatibility.compositeRestriction q.route.first q.route.second))).homEquiv
           _ _ (finiteSourceIso q.eW
             (ScalarCompatibility.compositeSource q.route.first q.route.second)
             q.sourceComparison.iso).hom

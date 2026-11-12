@@ -67,7 +67,7 @@ def systemSingleLevel (P : systemLevel B n) (m : ℕ) : systemLevel B m :=
 Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
 def systemSingleLevelBelow (P : systemLevel B n) {m : ℕ} (h : m ≤ n) :
     systemSingleLevel S B n P m ≅ (systemTensor S B h).obj P :=
-  eqToIso (dif_pos h)
+  eqToIso (dite_eq_left h)
 
 /-- The transition below n is the tensor transition; from a zero level it is zero.
 Source: Zheng 4.1 (blueprint: lem-pur-system-ordinary-single-extension). -/
@@ -89,7 +89,7 @@ theorem systemSingleTransition_below (P : systemLevel B n) {l m : ℕ}
       systemSingleBelowTransition S T B n P h hm ≫
         (systemRestriction B h).map (systemSingleLevelBelow S B n P (h.trans hm)).inv := by
   dsimp only [systemSingleTransition]
-  rw [dif_pos hm]
+  rw [dite_eq_left hm]
   simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
 
 /-- The constructed transition has the expected formula on each local generator.
@@ -122,7 +122,7 @@ Proof: the defining branch is the zero object. -/
 theorem systemSingleLevelAbove (P : systemLevel B n) {m : ℕ} (h : n < m) :
     IsZero (systemSingleLevel S B n P m) := by
   dsimp only [systemSingleLevel]
-  rw [dif_neg (Nat.not_le_of_lt h)]
+  rw [dite_eq_right (Nat.not_le_of_lt h)]
   exact isZero_zero (systemLevel B m)
 
 /-- Unit tensors detect morphisms out of any constructed level, with the zero case automatic.
@@ -231,7 +231,7 @@ theorem systemSingleMapLevel_tmul {P Q : systemLevel B n} (f : P ⟶ Q) {m : ℕ
   have he : (systemSingleLevelBelow S B n P hm).inv ≫ systemSingleMapLevel S B n f m =
       (systemTensor S B hm).map f ≫ (systemSingleLevelBelow S B n Q hm).inv := by
     dsimp only [systemSingleMapLevel]
-    rw [dif_pos hm]
+    rw [dite_eq_left hm]
     simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
   have ht := congrArg (fun t ↦ t.val.app U
     (systemModelTmul (S (B.map (homOfLE hm).op)).model P U c x)) he
@@ -293,7 +293,7 @@ def systemSingleBelow {m : ℕ} (h : m ≤ n) :
     intro P Q f
     dsimp only [systemSingleMapLevel, systemSingleFunctor, Functor.comp_map,
       systemEvaluation]
-    rw [dif_pos h]
+    rw [dite_eq_left h]
     erw [Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id])
 
 /-- The unit map inserts a local unit tensor at level n.
@@ -360,7 +360,7 @@ theorem systemSingleAdjunctLevel_tmul (P : systemLevel B n) (M : StrictRingSyste
       systemSingleAdjunctLevel S B n P M f m =
       ((systemTensorAdj S B hm).homEquiv P (M.level m)).symm (f ≫ M.transition hm) := by
     dsimp only [systemSingleAdjunctLevel]
-    rw [dif_pos hm]
+    rw [dite_eq_left hm]
     simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
   have ht := congrArg (fun t ↦ t.val.app U
     (systemModelTmul (S (B.map (homOfLE hm).op)).model P U c x)) he
@@ -483,10 +483,10 @@ instance systemSingleFunctorAdditive : (systemSingleFunctor S T B n).Additive wh
     apply Eq.trans (b := systemSingleMapLevel S B n f m + systemSingleMapLevel S B n g m)
     · by_cases hm : m ≤ n
       · dsimp only [systemSingleMapLevel]
-        rw [dif_pos hm, dif_pos hm, dif_pos hm]
+        rw [dite_eq_left hm, dite_eq_left hm, dite_eq_left hm]
         rw [(systemTensor S B hm).map_add, Preadditive.add_comp, Preadditive.comp_add]
       · dsimp only [systemSingleMapLevel]
-        rw [dif_neg hm, dif_neg hm, dif_neg hm, zero_add]
+        rw [dite_eq_right hm, dite_eq_right hm, dite_eq_right hm, zero_add]
     · exact he.symm
 
 /-- The ordinary below-level formula intertwines the two actual adjunction transposes.

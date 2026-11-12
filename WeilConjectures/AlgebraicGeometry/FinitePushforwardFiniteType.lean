@@ -24,6 +24,9 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option synthInstance.maxHeartbeats 200000 in
+-- v4.35 tree: this override is still needed here (green in bumpF build81, whnf timeout without it in build82);
+-- master removed it on the pre-bump tree.
+set_option maxHeartbeats 600000 in
 -- Transport of generators through iterated slice sites needs more elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in

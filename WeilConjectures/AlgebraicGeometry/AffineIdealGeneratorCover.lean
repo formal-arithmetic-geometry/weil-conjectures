@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite ideal generators cover the stalk-surjectivity locus on an affine
 

@@ -333,7 +333,7 @@ private theorem finite_line_tor (S : Scheme.{u}) (A : Type u) [CommRing A]
   let := HasDerivedCategory.standard C
   have := DerivedCategory.hasDerivedMonoidalCategory C
   let : MonoidalCategory (DerivedCategory C) :=
-    DerivedCategory.instMonoidalCategory_weilConjectures C
+    DerivedCategory.instMonoidalCategory C
   have hk (P : CochainComplex C ℤ)
       (hP : CochainComplex.IsAcyclicTensorKFlat (R := R) P) :
       (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by

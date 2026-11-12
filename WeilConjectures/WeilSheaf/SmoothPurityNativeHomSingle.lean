@@ -63,12 +63,11 @@ noncomputable def nativeHomSingleComplexIso (A : ProEtaleWeilSheaf k₀ l X) :
   let P := (CochainComplex.singleFunctor C 0).obj A
   let F := ihomFunctor k₀ l X A
   let q := (CochainComplex.KInjectives.ι (C := C)) ⋙ DerivedCategory.Q
-  have : q.Full :=
-    inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
-      (HomotopyCategory.KInjectives.Qh (C := C))).Full
-  have : q.EssSurj :=
-    inferInstanceAs (CochainComplex.KInjectives.toHomotopyCategory ⋙
-      (HomotopyCategory.KInjectives.Qh (C := C))).EssSurj
+  let e : CochainComplex.KInjectives.toHomotopyCategory ⋙
+      HomotopyCategory.KInjectives.Qh ≅ q :=
+    Functor.isoWhiskerLeft CochainComplex.KInjectives.ι (DerivedCategory.quotientCompQhIso C)
+  have : q.Full := Functor.Full.of_iso e
+  have : q.EssSurj := Functor.essSurj_of_iso e
   let B : CochainComplex C ℤ ⥤ CochainComplex C ℤ :=
     { obj I := CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) P I
       map g := CochainComplex.bifunctorHomMapRight g

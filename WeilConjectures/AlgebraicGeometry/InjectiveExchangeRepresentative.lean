@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.AlgebraicGeometry.InjectiveExchangeSourceTransport
 import WeilConjectures.AlgebraicGeometry.InjectiveExchangeTargetTransport
@@ -131,34 +133,39 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
     (pullbackSquareComparison_hom_app_factorsh AddCommGrpCat.{v + 1} sq) H
   have hb :
       U.mapDerivedCategoryPlus.map
-        (R.rightDerivedFunctorPlusUnit.app H ≫ R.rightDerivedFunctorPlus.map q'.inv) ≫
+        (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv) ≫
           θ.app K =
         U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H) ≫
           DerivedCategory.Plus.Qh.map
             ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap
               AddCommGrpCat.{v + 1} sq)).app H) ≫
-          F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+          F.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj H) ≫
           F.rightDerivedFunctorPlus.map
             (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
               P.mapDerivedCategoryPlus.map q'.inv) := by
     have hn := map_comp_naturality R.rightDerivedFunctorPlus U.mapDerivedCategoryPlus
       P.mapDerivedCategoryPlus F.rightDerivedFunctorPlus θ
-      (R.rightDerivedFunctorPlusUnit.app H) q'.inv
+      (R.rightDerivedFunctorPlusUnith.app H) q'.inv
     have hf := congrArg (fun z ↦ z ≫ F.rightDerivedFunctorPlus.map
       (P.mapDerivedCategoryPlus.map q'.inv)) fac
     refine hn.trans (hf.trans ?_)
     simp only [Functor.map_comp, Category.assoc]
     rfl
   have hs := injectiveExchange_source_transport f K J q
+  dsimp only at hs
+  erw [Category.id_comp] at hs
   have hs' :
       U.mapDerivedCategory.map (sourceInjectiveDirectImageIso f K J q).inv =
         DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
-          (R.rightDerivedFunctorPlusUnit.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
+          (R.rightDerivedFunctorPlusUnith.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
     congrArg U.mapDerivedCategory.map hs
+  have ht := injectiveExchange_target_transport f s K J q
+  dsimp only at ht
+  erw [CategoryTheory.Functor.map_id, Category.id_comp] at ht
   have result := assemble_exchange DerivedCategory.Plus.ι
     (U.mapDerivedCategoryFactors.inv.app
       ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ hs' hb
-    (injectiveExchange_target_transport f s K J q)
+    ht
   exact result
 
 end AlgebraicGeometry.Etale

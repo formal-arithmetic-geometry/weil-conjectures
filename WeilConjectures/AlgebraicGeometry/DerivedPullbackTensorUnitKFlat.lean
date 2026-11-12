@@ -7,8 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Unit laws on K-flat representatives
 
@@ -353,10 +356,10 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
           CochainComplex.IsKFlatTensor (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
-              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
-                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+              cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+                (CochainComplex.mapBifunctor P N (curriedTensor _)))) ≫
               DerivedCategory.Q.map (φ P N).hom =
-            (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
+            cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
               Functor.LaxMonoidal.μ DerivedCategory.Q
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
@@ -402,7 +405,7 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
   have hη : η.inv = (derivedPullback g).map (Functor.LaxMonoidal.ε QX) ≫
       e U ≫ QT.map u.inv ≫ inv (Functor.LaxMonoidal.ε QT) := by
     apply (cancel_mono (Functor.LaxMonoidal.ε QT)).mp
-    simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
+    simpa only [cast_eq, Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
   have he : ∀ {K N : CochainComplex AX ℤ} (f : K ⟶ N),
       (derivedPullback g).map (QX.map f) ≫ e N = e K ≫ QT.map (FC.map f) := by
     intro K N f
@@ -415,7 +418,9 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
       (derivedPullback g).map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫
         QT.map (φ K N).hom := by
     intro K N hK hN
-    rw [← hμ K N hK hN]
+    have hμ' := hμ K N hK hN
+    simp only [cast_eq] at hμ'
+    erw [← hμ']
     dsimp only [QX, QT, e]
     simp only [Iso.app_hom]
     rw [Iso.inv_hom_id_app_app_assoc]

@@ -163,6 +163,7 @@ lemma pointFunctionSheafToLowerStar_app_apply (V : X.Etale) (D : V.left → M)
       D (pullback.fst V.hom g z) :=
   rfl
 
+
 open Classical in
 /-- Extension by zero of a function on `V ×_X Z` along the first projection to `V`: the value
 at `y` is that at a preimage of `y`, if there is one, and `0` otherwise. -/
@@ -177,7 +178,7 @@ lemma extendByZero_of_notMem {V : X.Etale} (c : ↥(pullback V.hom g) → M) {y 
     rintro ⟨z, rfl⟩
     exact hy ⟨pullback.snd V.hom g z,
       (congrArg (fun f ↦ f z) (pullback.condition (f := V.hom) (g := g))).symm⟩
-  rw [extendByZero, dif_neg h]
+  rw [extendByZero, dite_eq_right h]
 
 lemma extendByZero_zero {V : X.Etale} : extendByZero M g (V := V) 0 = 0 := by
   funext y
@@ -195,7 +196,7 @@ variable [IsPreimmersion g]
 lemma extendByZero_fst {V : X.Etale} (c : ↥(pullback V.hom g) → M) (z : ↥(pullback V.hom g)) :
     extendByZero M g c (pullback.fst V.hom g z) = c z := by
   have h : ∃ z', pullback.fst V.hom g z' = pullback.fst V.hom g z := ⟨z, rfl⟩
-  rw [extendByZero, dif_pos h]
+  rw [extendByZero, dite_eq_left h]
   congr 1
   exact (pullback.fst V.hom g).isEmbedding.injective h.choose_spec
 
@@ -236,6 +237,7 @@ lemma lowerStarPointFunctionSheafToPointFunctionSheaf_app_apply (V : X.Etale)
     ((lowerStarPointFunctionSheafToPointFunctionSheaf M g).hom.app (op V) c : _ → M) =
       extendByZero M g c :=
   rfl
+
 
 /-- Extension by zero followed by restriction is the identity. -/
 @[reassoc (attr := simp)]
@@ -297,6 +299,7 @@ lemma pointFunctionSheafIndicator_app_apply (S : Set X) (V : X.Etale) (D : V.lef
       if V.hom y ∈ S then D y else 0 :=
   rfl
 
+
 end Indicator
 
 section Neighbourhoods
@@ -335,7 +338,7 @@ lemma exists_ulift_pointSmallEtale_fiber_ofOpens {V : X.Etale}
     ∃ v' : (pointSmallEtale s).ulift.{u + 1}.fiber.obj (Etale.ofOpens V U),
       (pointSmallEtale s).ulift.{u + 1}.fiber.map (Etale.ofOpensι V U) v' = v := by
   obtain ⟨v', hv'⟩ := exists_pointSmallEtale_fiber_ofOpens s v.down U hU
-  exact ⟨ULift.up v', ULift.ext _ _ hv'⟩
+  exact ⟨ULift.up v', ULift.ext hv'⟩
 
 end Neighbourhoods
 

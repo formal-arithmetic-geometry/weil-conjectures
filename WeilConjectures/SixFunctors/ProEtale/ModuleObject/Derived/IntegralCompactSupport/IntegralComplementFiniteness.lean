@@ -52,7 +52,7 @@ private theorem constructible_of_isZero
       domain := fun _ ↦ X
       immersion := fun _ ↦ 𝟙 X
       range_immersion := fun _ ↦ Set.range_id' }
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
   refine ⟨S, fun a ↦ ?_⟩
   refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun b ↦ ?_⟩
   let P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ :=

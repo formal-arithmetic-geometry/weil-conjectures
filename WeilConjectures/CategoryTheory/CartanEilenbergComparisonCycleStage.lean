@@ -137,7 +137,7 @@ private noncomputable def rowMap {C D : Type*} [Category* C] [Category* D] [Abel
       rw [Category.assoc, hiso_π, Iso.inv_hom_id_assoc]
       simp
     rw [hh]
-    simp only [ShortComplex.map_g, Category.assoc]
+    simp only [Category.assoc]
 
 private noncomputable def rowHom {C : Type*} [Category* C] [Abelian C]
     {K L : CochainComplex C ℤ} (v : K ⟶ L) (p : ℤ) : row K p ⟶ row L p where

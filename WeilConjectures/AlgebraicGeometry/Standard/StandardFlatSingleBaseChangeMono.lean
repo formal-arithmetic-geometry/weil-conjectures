@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+import all WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 import WeilConjectures.AlgebraicGeometry.Single.SingleComplexQcqsHomologyMono
 import WeilConjectures.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison
 import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
@@ -155,6 +158,7 @@ theorem standard_flat_single_baseChange_homology_mono
           (Classical.choose_spec
             (SingleComplexBaseChange.exists_tensorMap p r g q sq z)).2)
   have hc := singleComplexBaseChange_homology_mono p r g q sq _ hG _ hEG _ hstalk n
+  simp only [cast_eq] at hc
   let s : E.obj G ⟶ (CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings (pullback p g).toRingedSpace)) 0).obj
         ((Scheme.Modules.tensorPullback q).obj M) :=
@@ -165,11 +169,7 @@ theorem standard_flat_single_baseChange_homology_mono
         ((HomotopyCategory.quotient _ (.up ℤ)).obj G) ≫
       DerivedCategory.Qh.map ((HomotopyCategory.quotient
         (SheafOfModules.{u} (moduleRings (pullback p g).toRingedSpace)) (.up ℤ)).map s) := by
-    simp only [Scheme.picardTermwiseSingleMap, Scheme.Modules.canonicalSinglePullbackMap,
-      Category.assoc]
-    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
-    erw [Category.comp_id]
-    rfl
+    exact Scheme.single_map_normalize q M
   change Mono ((DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings A.toRingedSpace)) n).map
       (schemeDerivedBaseChangeMap p r g q sq.w (DerivedCategory.Q.obj G) ≫

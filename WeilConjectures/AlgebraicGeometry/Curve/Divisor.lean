@@ -132,7 +132,7 @@ theorem finite_setOf_ord_ne_zero {f : X.functionField} (hf : f ≠ 0) :
   obtain ⟨t, htS, hxt⟩ : x ∈ ⋃₀ S := hSU ▸ hxW
   refine ⟨t, htS, ?_⟩
   have hgt : IsGenericPoint (g t) t := by
-    simp only [g, dif_pos (hSi t htS)]
+    simp only [g, dite_eq_left (hSi t htS)]
     exact (hSi t htS).isGenericPoint_genericPoint (hSc t htS)
   by_contra hne
   have hgW : g t ∉ W := by
@@ -225,7 +225,8 @@ lemma Divisor.surjective_comap : Function.Surjective (Divisor.comap i) := by
   intro D
   refine ⟨Finsupp.mapDomain i.closedPointsMap D, ?_⟩
   ext P
-  rw [comap_apply, Finsupp.mapDomain_apply i.closedPointsMap_injective]
+  rw [comap_apply, Finsupp.mapDomain_apply_of_injective i.closedPointsMap_injective]
+
 
 /-- A divisor restricts to zero on `U` iff it is supported outside the image of `U`. -/
 lemma Divisor.comap_eq_zero_iff (D : X.Divisor) :

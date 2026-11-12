@@ -6,6 +6,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 
@@ -46,7 +52,7 @@ private theorem tensorator_Q_generic
   unfold Functor.LaxMonoidal.μ
   unfold DerivedCategory.laxMonoidalQ
   unfold inferInstance
-  unfold DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures
+  unfold DerivedCategory.instLaxMonoidalQ
   unfold Functor.LaxMonoidal.ofIso
   dsimp only
   rw [Functor.LaxMonoidal.comp_μ]
@@ -320,6 +326,6 @@ theorem canonicalTensor_normalized (T : Scheme.{u}) :
   unfold cochainCompute at h
   unfold canonicalTensor compute scalarCounit D totalScalar
   dsimp only [uncurryTensorIso, NatIso.ofComponents_hom_app, Iso.app_hom, asIso_hom]
-  convert h using 1; rfl
+  convert h using 1 <;> rfl
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

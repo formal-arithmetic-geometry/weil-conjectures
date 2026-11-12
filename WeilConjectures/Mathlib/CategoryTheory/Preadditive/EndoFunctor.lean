@@ -170,6 +170,7 @@ lemma IsoAlgebra.additive_lift_mapOfNatIso {P : ObjectProperty (IsoAlgebra F)}
     (Q.lift (P.ι ⋙ IsoAlgebra.mapOfNatIso e) h).Additive :=
   inferInstance
 
+
 end Map
 
 end CategoryTheory.Endofunctor

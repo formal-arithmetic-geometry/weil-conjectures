@@ -29,11 +29,15 @@ the maps `β` and `α⁻¹`) with Lemma 01EP, and the local-lift paragraph of Le
 
 @[expose] public section
 
-universe u wC wD
+universe u v wC wD
 
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+private local instance boundaryCechModuleProducts (R : Type u) [Ring R] (J : Type v)
+    [Small.{u} J] : HasLimitsOfShape (Discrete J) (ModuleCat.{u} R) :=
+  ModuleCat.hasLimitsOfShape
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -96,7 +100,8 @@ private theorem local_lift_cocycle (X : Scheme.{u})
       PresheafOfModules.presheaf] at h ⊢
     simp only [AddMonoidHom.mk'_apply,
       sub_eq_add_neg] at h ⊢
-    convert h using 1 <;> rfl
+    convert h using 1
+    rfl
   have he (W : X.Opens) := by
     let E := SheafOfModules.evaluation.{u} X.ringCatSheaf (op W)
     let : E.Additive := inferInstanceAs

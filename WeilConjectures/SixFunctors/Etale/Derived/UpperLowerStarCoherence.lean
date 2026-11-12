@@ -133,7 +133,7 @@ unit of the right derived functor with it gives the levelwise image of
 `AlgebraicGeometry.Etale.lowerStarId`. -/
 lemma lowerStarIdDerivedPlus_hom_app_fac
     (K : HomotopyCategory.Plus (Sheaf V.smallEtaleTopology A)) :
-    ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit.app K ≫
+    ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith.app K ≫
         (lowerStarIdDerivedPlus A V).hom.app (DerivedCategory.Plus.Qh.obj K) =
       DerivedCategory.Plus.Qh.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId A V).hom).app K) := by
@@ -158,7 +158,7 @@ lemma lowerStarIdDerivedPlus_inv_app
     (lowerStarIdDerivedPlus A V).inv.app (DerivedCategory.Plus.Qh.obj K) =
       DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId A V).inv).app K) ≫
-        ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit.app K := by
+        ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith.app K := by
   rw [← cancel_mono ((lowerStarIdDerivedPlus A V).hom.app (DerivedCategory.Plus.Qh.obj K)),
     Iso.inv_hom_id_app, Category.assoc, lowerStarIdDerivedPlus_hom_app_fac,
     ← DerivedCategory.Plus.Qh.map_comp, ← NatTrans.comp_app,
@@ -177,19 +177,19 @@ lemma derivedPlus_unit_comp_upperStarIdDerivedPlus :
       (lowerStarIdDerivedPlus A V).inv := by
   rw [← cancel_epi (lowerStarIdDerivedPlus A V).hom, Iso.hom_inv_id]
   refine Functor.rightDerived_ext (((𝟙 V)_*[A]).rightDerivedFunctorPlus)
-    (((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit) (HomotopyCategory.Plus.quasiIso _) _ _ _ ?_
+    (((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith) (HomotopyCategory.Plus.quasiIso _) _ _ _ ?_
   ext K : 2
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     NatTrans.id_app]
   have hnat : DerivedCategory.Plus.Qh.map (((𝟙 V)_*[A]).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarId A V).hom).app K)) ≫
-      ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit.app
+      ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith.app
         ((𝟭 (Sheaf V.smallEtaleTopology A)).mapHomotopyCategoryPlus.obj K) =
-      ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit.app
+      ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith.app
           (((𝟙 V)^*[A]).mapHomotopyCategoryPlus.obj K) ≫
         ((𝟙 V)_*[A]).rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.upperStarId A V).hom).app K)) :=
-    ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit.naturality _
+    ((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith.naturality _
   have hcomb : (NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId A V).hom).app K ≫
       (Etale.upperStarLowerStarAdjunction A (𝟙 V)).mapHomotopyCategoryPlus.unit.app K ≫
         ((𝟙 V)_*[A]).mapHomotopyCategoryPlus.map
@@ -212,7 +212,7 @@ lemma derivedPlus_unit_comp_upperStarIdDerivedPlus :
       (DerivedCategory.Plus.Qh.map_id _)
   rw [← Category.assoc, lowerStarIdDerivedPlus_hom_app_fac, upperStarIdDerivedPlus_hom_app,
     Functor.map_comp, Adjunction.derivedPlus_unit_app_fac_assoc, ← hnat, reassoc_of% hQ]
-  exact (Category.comp_id (((𝟙 V)_*[A]).rightDerivedFunctorPlusUnit.app K)).symm
+  exact (Category.comp_id (((𝟙 V)_*[A]).rightDerivedFunctorPlusUnith.app K)).symm
 
 variable {V}
 
@@ -231,16 +231,16 @@ lemma lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso' (g : V ⟶
         (Functor.rightDerivedFunctorPlusCompIso' ((𝟙 V)_*[A]) ((g)_*[A]) e).hom =
       𝟙 (((g)_*[A]).rightDerivedFunctorPlus) := by
   refine Functor.rightDerived_ext (((g)_*[A]).rightDerivedFunctorPlus)
-    (((g)_*[A]).rightDerivedFunctorPlusUnit) (HomotopyCategory.Plus.quasiIso _) _ _ _ ?_
+    (((g)_*[A]).rightDerivedFunctorPlusUnith) (HomotopyCategory.Plus.quasiIso _) _ _ _ ?_
   ext K : 2
   have hnat : DerivedCategory.Plus.Qh.map (((g)_*[A]).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId A V).inv).app K)) ≫
-      ((g)_*[A]).rightDerivedFunctorPlusUnit.app
+      ((g)_*[A]).rightDerivedFunctorPlusUnith.app
         (((𝟙 V)_*[A]).mapHomotopyCategoryPlus.obj K) =
-      ((g)_*[A]).rightDerivedFunctorPlusUnit.app K ≫
+      ((g)_*[A]).rightDerivedFunctorPlusUnith.app K ≫
         ((g)_*[A]).rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map
           ((NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId A V).inv).app K)) :=
-    ((g)_*[A]).rightDerivedFunctorPlusUnit.naturality _
+    ((g)_*[A]).rightDerivedFunctorPlusUnith.naturality _
   have hfac := NatTrans.congr_app (Functor.rightDerivedFunctorPlusCompIso'_fac
     ((𝟙 V)_*[A]) ((g)_*[A]) e) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,

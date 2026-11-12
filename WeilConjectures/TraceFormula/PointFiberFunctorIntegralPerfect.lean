@@ -73,7 +73,7 @@ theorem isPerfect_pointFiberFunctorIntegral_obj
   have hK : K.IsGE a := G.isGE_mapDerivedCategory_obj N.obj a
   have : K.IsLE b := G.isLE_mapDerivedCategory_obj N.obj b
   refine DerivedCategory.isPerfect_of_isGE_of_isLE (b - a + 1).toNat a K hK
-    (DerivedCategory.TStructure.t.isLE_of_le K b _ (by lia)) fun n _ _ ↦ ?_
+    (DerivedCategory.TStructure.t.isLE_of_le K b _ (by clear * - a b; omega)) fun n _ _ ↦ ?_
   obtain ⟨p, q, g, ⟨e⟩⟩ := isFinitelyPresented_upperStar_of_isConstructibleModuleObject
     (Profinite.padicIntegersRingObj ℓ E.1) (Field.toIsField k) IsField.isSepClosed_toField
     (((mem_boundedConstructible_iff _ _).1 N.property).2 n) (𝟙 _)

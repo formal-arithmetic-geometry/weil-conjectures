@@ -199,8 +199,7 @@ lemma sum_smul_counitHom_unit_smul (F : FrobeniusSystem φ d) {d' : ℕ}
   obtain ⟨z, rfl⟩ :=
     (ConcreteCategory.bijective_of_isIso ((toChangeOfRings (φ := φ) M).app U)).2 y
   let : CommRing ((𝓡 S).obj.obj U) := inferInstanceAs (CommRing (S.obj.obj U))
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m =>
     have hterm (j : Fin d) : ((restrictScalars (𝓻 φ)).map ((smulSections

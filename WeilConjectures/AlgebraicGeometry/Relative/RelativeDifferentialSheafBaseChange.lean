@@ -78,7 +78,7 @@ private theorem existsUnique_baseChangeMap {X S T : Scheme.{u}}
       (by
         intro U a b
         change q.relativeDifferentialsDerivation.d (p.app U.unop (a * b)) = _
-        rw [map_mul, PresheafOfModules.Derivation.d_mul]
+        rw [map_mul, PresheafOfModulesOfCommRing.Derivation.d_mul]
         rfl)
       (by
         intro U V i a
@@ -97,7 +97,7 @@ private theorem existsUnique_baseChangeMap {X S T : Scheme.{u}}
         erw [q.relativeDifferentialsDerivation.d_map]
         change q.relativeDifferentials.val.map _
           (q.relativeDifferentialsDerivation.d (q.app _ (g.app V a))) = 0
-        erw [q.relativeDifferentialsDerivation.d_app_app, map_zero])
+        erw [PresheafOfModules.Derivation'.d_app_app q.relativeDifferentialsDerivation, map_zero])
   obtain ⟨adj, hadj⟩ := Modules.existsUnique_tensorPullbackSectionAdjunction p
   let e := adj.homEquiv f.relativeDifferentials q.relativeDifferentials
   let d := (f.relativeDifferentialsHomEquiv _).symm D

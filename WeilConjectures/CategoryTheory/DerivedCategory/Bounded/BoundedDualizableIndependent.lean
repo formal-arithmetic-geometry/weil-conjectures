@@ -23,7 +23,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{w} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_boundedDualizableIndependent
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 /-- A bounded complex of dualizable objects remains dualizable after localization
 in any supported universe.

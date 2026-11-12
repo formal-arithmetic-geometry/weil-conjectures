@@ -75,6 +75,7 @@ lemma isIso_ihomUnitTensorToIhom_obj (X Z : C) [IsIso (ihomComparison G X).natTr
   exact IsIso.of_isIso_comp_left (((ihomComparison G X).natTrans.app (𝟙_ C) ≫
       (ihom (G.obj X)).map (η G)) ▷ G.obj Z) _
 
+
 /-- If the comparison maps `G [X, -] ⟶ [G X, G -]` are isomorphisms and the comparison map of
 `G X` and `G Z` is invertible, so is the image under `G` of the comparison map of `X` and `Z`. -/
 lemma isIso_map_ihomUnitTensorToIhom_of_ihomComparison (X Z : C)

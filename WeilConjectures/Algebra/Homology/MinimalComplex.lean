@@ -240,7 +240,7 @@ lemma singleHomotopyHom_self (M : CochainComplex C ℤ) (i : ℤ) (G : M.X (i + 
 /-- The components of `singleHomotopyHom M i G` outside bidegree `(i + 1, i)` vanish. -/
 lemma singleHomotopyHom_eq_zero (M : CochainComplex C ℤ) (i : ℤ) (G : M.X (i + 1) ⟶ M.X i)
     {p q : ℤ} (h : ¬ (p = i + 1 ∧ q = i)) : singleHomotopyHom M i G p q = 0 :=
-  dif_neg h
+  dite_eq_right h
 
 /-- The null-homotopic chain endomorphism attached to `G : Mⁱ⁺¹ ⟶ Mⁱ`. -/
 noncomputable def singleNullHomotopicMap (M : CochainComplex C ℤ) (i : ℤ)

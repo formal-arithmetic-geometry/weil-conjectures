@@ -53,7 +53,7 @@ private lemma sumSquareSingle
   rw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor,
     ← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor L R M]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private lemma sumSquareSingleMaps
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]

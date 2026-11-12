@@ -59,8 +59,8 @@ noncomputable def cechNerveObjOneIso :
   inv := Pi.lift fun _ ↦ 𝟙 U₀
   hom_inv_id := Pi.hom_ext _ _ fun l ↦ by
     obtain rfl := Subsingleton.elim (α := Fin 1) l 0
-    rw [Category.assoc, Pi.lift_π, Category.comp_id, Category.id_comp]
-  inv_hom_id := Pi.lift_π _ _
+    rw [Category.assoc, Pi.lift_comp_π, Category.comp_id, Category.id_comp]
+  inv_hom_id := Pi.lift_comp_π _ _
 
 /-- The first face `U₀ ×_V U₀ ⟶ U₀` of the Čech nerve forgets the first factor. -/
 @[reassoc (attr := simp)]
@@ -90,14 +90,14 @@ lemma exists_comp_cechNerveMap_succAbove {Z : C} (p₁ p₂ : Z ⟶ U₀.left)
   have h₁ : G ≫ cechNerveMap _ _ (1 : Fin 2).succAbove =
       Over.homMk p₁ ≫ (cechNerveObjOneIso U₀).inv := Pi.hom_ext _ _ fun l ↦ by
     obtain rfl := Subsingleton.elim (α := Fin 1) l 0
-    rw [Category.assoc, cechNerveMap_π, Pi.lift_π, Category.assoc, cechNerveObjOneIso_inv,
-      Pi.lift_π, Category.comp_id]
+    rw [Category.assoc, cechNerveMap_π, Pi.lift_comp_π, Category.assoc, cechNerveObjOneIso_inv,
+      Pi.lift_comp_π, Category.comp_id]
     rfl
   have h₂ : G ≫ cechNerveMap _ _ (0 : Fin 2).succAbove =
       Over.homMk p₂ hp.symm ≫ (cechNerveObjOneIso U₀).inv := Pi.hom_ext _ _ fun l ↦ by
     obtain rfl := Subsingleton.elim (α := Fin 1) l 0
-    rw [Category.assoc, cechNerveMap_π, Pi.lift_π, Category.assoc, cechNerveObjOneIso_inv,
-      Pi.lift_π, Category.comp_id]
+    rw [Category.assoc, cechNerveMap_π, Pi.lift_comp_π, Category.assoc, cechNerveObjOneIso_inv,
+      Pi.lift_comp_π, Category.comp_id]
     rfl
   exact ⟨G.left, congrArg CommaMorphism.left h₁, congrArg CommaMorphism.left h₂⟩
 
@@ -201,6 +201,7 @@ lemma isLimit_overCechAugmentation_of_isSheafFor
     (h : ∀ a : A, (Presieve.singleton U₀.hom).IsSheafFor (P ⋙ coyoneda.obj (op a))) :
     Nonempty (IsLimit (KernelFork.ofι (overCechAugmentation U₀ P) (overCechAugmentation_d U₀ P))) :=
   ⟨isLimitOverCechAugmentationOfIsSheafFor U₀ P h⟩
+
 
 /-- Conversely, if the augmentation `P(V) ⟶ P(U₀)` is a kernel of the first Čech differential,
 then `P` is a sheaf for the single morphism `U₀ ⟶ V` with respect to all the functors

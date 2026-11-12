@@ -35,7 +35,7 @@ attribute [local instance] constantScalarSheaf_laxBraided
 
 attribute [local irreducible] CondensedRing.upperStar Functor.mapDerivedCategory
   Functor.mapDerivedCategoryHomologyFunctorIso Functor.mapDerivedCategorySingleFunctor
-  _root_.DerivedCategory.instMonoidalCategory_weilConjectures
+  _root_.DerivedCategory.instMonoidalCategory
 
 private theorem tor_of_cover
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -272,6 +272,7 @@ theorem finiteConstantPointAdjunction :
   let E := ((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence
   exact ⟨((counitScalarAdjunction a Λ).comp E.toAdjunction).ofNatIsoLeft
     (constantExtensionCompIso Λ (Spec (.of k))).symm⟩
+
 
 end PointAdjunction
 

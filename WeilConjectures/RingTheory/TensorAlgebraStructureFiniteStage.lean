@@ -104,8 +104,7 @@ theorem exists_tensor_algebra_structure_finite_stage
   have compat (i j : J) (h : i ≤ j) : (μ j).comp (t i j h) = μ i := by
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       dsimp [μ, t]
       exact congrArg (fun a ↦ a ⊗ₜ[F.obj i₀] b)
@@ -115,8 +114,7 @@ theorem exists_tensor_algebra_structure_finite_stage
       (t j k hjk).comp (t i j hij) = t i k (hij.trans hjk) := by
     apply RingHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a b =>
       let := (F.map (homOfLE k.property)).hom.toAlgebra
       dsimp [t]

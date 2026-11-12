@@ -137,7 +137,7 @@ private theorem exactExchange_normalization
     rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
       Functor.mapDerivedCategoryNatIso_fac,
       ← Functor.mapDerivedCategoryCompIso_hom_app_factors F J' P]
-    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   rw [← hf]
   have hn := f.inv.naturality (J.mapDerivedCategoryFactors.hom.app P)

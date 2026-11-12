@@ -170,8 +170,8 @@ theorem coeff_prod_inv_localPolynomial_stalk_eq [IsAffine U]
         ((F.compactlySupportedCohomology 2).localPolynomial : (PadicAlgCl l)⟦X⟧)⁻¹) := by
   rw [coeff_prod_inv_localPolynomial_stalk F
     (fun i hi ↦ subsingleton_compactlySupportedCohomology_of_notMem F hF hi) n s hs,
-    LinearMap.alternatingCharpolyRevProd, Finset.prod_pair (by decide), if_neg (by decide),
-    if_pos (by decide), pow_one, Polynomial.comp_X, Polynomial.comp_X]
+    LinearMap.alternatingCharpolyRevProd, Finset.prod_pair (by decide), ite_eq_right (by decide),
+    ite_eq_left (by decide), pow_one, Polynomial.comp_X, Polynomial.comp_X]
   congr 1
   simp only [FrobeniusModule.localPolynomial]
   have h₁ : constantCoeff

@@ -11,6 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # The divisor sequence of a punctured curve
@@ -366,7 +367,7 @@ lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS 
     (pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
       (by simp [hiU])).appTop
   have hf₀ := hf y hyS
-  rw [Scheme.Etale.ord, if_pos hcoh] at hf₀
+  rw [Scheme.Etale.ord, ite_eq_left hcoh] at hf₀
   obtain ⟨r, hr⟩ := Ring.exists_eq_algebraMap_of_ordOf_eq_zero
     (Units.map ((Scheme.Etale.toLocalGenericRing V y).hom.comp genV.hom).toMonoidHom f) hf₀
   -- spread `r` to a unit on an irreducible neighbourhood avoiding the other punctures
@@ -557,7 +558,7 @@ lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
       ((pullback.fst W'.hom C.fromSpecFunctionField).appTop tW) = if y'.1 = y then 1 else 0 := by
     obtain ⟨y', hy'W⟩ := y'
     by_cases hy'c : coheight (W'.hom ⟨y', hy'W⟩) = 1
-    · rw [Scheme.Etale.ord, if_pos hy'c, Scheme.Etale.toLocalGenericRing_fst_appTop]
+    · rw [Scheme.Etale.ord, ite_eq_left hy'c, Scheme.Etale.toLocalGenericRing_fst_appTop]
       have := Scheme.Etale.isDiscreteValuationRing_stalk W' hy'c
       let := (Scheme.Etale.stalkToLocalGenericRing W' ⟨y', hy'W⟩).hom.toAlgebra
       have := Scheme.Etale.isFractionRing_localGenericRing W' ⟨y', hy'W⟩
@@ -577,7 +578,7 @@ lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
     · have hy' : y' ≠ y := fun h ↦ hy'c (by
         change coheight (V.hom y') = 1
         rw [h, hcoh])
-      rw [Scheme.Etale.ord_of_coheight_ne_one W' hy'c, if_neg hy']
+      rw [Scheme.Etale.ord_of_coheight_ne_one W' hy'c, ite_eq_right hy']
   refine ⟨W, hyW, ha.unit ^ (c z₀).down, fun y' ↦ ?_⟩
   have hgen : (pullback.map W'.hom C.fromSpecFunctionField W'.hom j (𝟙 _) iU (𝟙 _) (by simp)
       (by simp [hiU])).appTop a = (pullback.fst W'.hom C.fromSpecFunctionField).appTop tW := by
@@ -600,11 +601,11 @@ lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
       change V.hom y'.1 ∈ S
       rw [hy', hy]
       exact hP
-    rw [if_pos hS', if_pos hy', mul_one]
+    rw [ite_eq_left hS', ite_eq_left hy', mul_one]
     change _ = Scheme.extendByZero (AddCommGrpCat.of (ULift.{u + 1} ℤ))
       (C.fromSpecResidueField P) c y'.1
     rw [hy', ← hz₀, Scheme.extendByZero_fst]
-  · rw [if_neg hy', mul_zero]
+  · rw [ite_eq_right hy', mul_zero]
     have hne : V.hom (W.ι y') ∉ Set.range (C.fromSpecResidueField P) := by
       rw [Scheme.range_fromSpecResidueField, Set.mem_singleton_iff, ← hy]
       exact (hW y'.1 y'.2 hy').1
@@ -695,10 +696,10 @@ theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k
             ((pullback.map V.hom C.fromSpecFunctionField V.hom j (𝟙 _) iU (𝟙 _) (by simp)
               (by simp [hiU])).appTop (Additive.toMul b.down).val)) else 0) = 0 :=
           congrFun hb y'
-        rw [if_pos hy'] at h₀
+        rw [ite_eq_left hy'] at h₀
         exact congrArg ULift.down h₀)
     exact ⟨W, hyW, ULift.up (Additive.ofMul u),
-      ULift.ext _ _ (congrArg Additive.ofMul (Units.ext hu))⟩)
+      ULift.ext (congrArg Additive.ofMul (Units.ext hu))⟩)
   have h₄ (x : C) := C.exists_sheafFiber_eq_desc dS c hc x fun P a ↦
     C.exists_sheafFiber_eq_pointConstantIntToPointFunctionSheaf dS P.1 (fun V y cf ↦ by
       obtain ⟨W, hyW, g, hg⟩ := exists_ord_eq_extendByZero j iU hiU hC hSc hj V y P.2 cf
@@ -719,11 +720,13 @@ theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k
       simp only [Scheme.extendByZero_fromSpecResidueField_fst]
       change (if V.hom y' ∈ S then D y' else 0) = _
       by_cases hy' : V.hom y' ∈ S
-      · rw [if_pos hy', Finset.sum_eq_single_of_mem (⟨_, hy'⟩ : S) (Finset.mem_univ _), if_pos rfl]
+      · rw [ite_eq_left hy', Finset.sum_eq_single_of_mem (⟨_, hy'⟩ : S) (Finset.mem_univ _),
+          ite_eq_left rfl]
         intro P _ hP
-        rw [if_neg fun e ↦ hP (Subtype.ext e.symm)]
-      · rw [if_neg hy']
-        exact (Finset.sum_eq_zero fun P _ ↦ if_neg fun (e : V.hom y' = P.1) ↦ hy' (e ▸ P.2)).symm
+        rw [ite_eq_right fun e ↦ hP (Subtype.ext e.symm)]
+      · rw [ite_eq_right hy']
+        exact (Finset.sum_eq_zero fun P _ ↦
+          ite_eq_right fun (e : V.hom y' = P.1) ↦ hy' (e ▸ P.2)).symm
     refine ⟨∑ P : S, F.map (c.inj P) (Φ.toPresheafFiber V v (C.pointConstantInt P.1).obj
       ((C.pointFunctionSheafToPointConstantInt P.1).hom.app (op V) D)), ?_⟩
     have hterm (P : S) : F.map ψ (F.map (c.inj P) (Φ.toPresheafFiber V v

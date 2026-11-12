@@ -103,4 +103,5 @@ lemma bijective_comp_singleFunctor_of_injective {E P : DerivedCategory C} [E.IsG
   have : (Triangle.mk u v w).obj₃.IsGE 1 := hZ
   exact bijective_comp_singleFunctor_of_injective_of_isGE _ hT I
 
+
 end DerivedCategory

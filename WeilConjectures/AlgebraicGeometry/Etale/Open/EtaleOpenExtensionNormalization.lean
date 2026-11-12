@@ -130,7 +130,7 @@ private theorem square_inverse_factors
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Category.assoc]
   rw [hN, Functor.mapDerivedCategoryNatIso_fac]
-  rw [← reassoc_of% hL, Iso.inv_hom_id_app_assoc]
+  rw [← reassoc_of% hL, Iso.hom_inv_id_app_assoc]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
   erw [Category.id_comp, Category.id_comp, Iso.inv_hom_id_app_assoc,

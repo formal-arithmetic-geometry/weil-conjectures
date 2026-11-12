@@ -21,6 +21,23 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+noncomputable local instance hasZeroMorphisms_condensedRingObj_condensedLfpHom
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
+
+local instance localInst_CondensedLfpHomContinuity_1
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ) : HasColimit N := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfShape I C := inferInstance
+  have (n : ℤ) : HasColimit (N ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
+
 /-- Continuity for a locally finitely presented module on the scheme itself.
 Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), the locally free calculation.
 (auxiliary; not a blueprint node)

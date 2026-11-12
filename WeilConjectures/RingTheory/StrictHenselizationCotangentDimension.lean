@@ -116,7 +116,7 @@ private theorem cotangent_finrank_of_bijective
   let M := IsLocalRing.CotangentSpace R
   let N := IsLocalRing.CotangentSpace C
   have : IsLocalHom (algebraMap R C) :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap R C)).out 3 0).mp h
+    ⟨fun x ↦ not_imp_not.mp (@h x)⟩
   have : TensorProduct.CompatibleSMul R k l M :=
     TensorProduct.CompatibleSMul.of_algebraMap_surjective l M
       (IsLocalRing.residue_surjective (R := R))

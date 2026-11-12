@@ -399,6 +399,8 @@ private def monoidalKeepingLax
     [∀ X Y, IsIso (Functor.LaxMonoidal.μ F X Y)] : F.Monoidal :=
   { (Functor.Monoidal.ofLaxMonoidal F) with toLaxMonoidal := inferInstance }
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 section OrdinaryProof
 set_option warn.classDefReducibility false
 private def scalarUnit :
@@ -505,6 +507,8 @@ private def rawBraidedGeneric
   braided M N := by
     apply NatTrans.ext
     funext X
+    let : CommRing (((Functor.const Cᵒᵖ).obj (RingCat.of B)).obj X) :=
+      inferInstanceAs (CommRing B)
     change (𝟙 _ ≫ Functor.LaxMonoidal.μ
         (ModuleCat.restrictScalars (ι.app X).hom) (M.obj X) (N.obj X)) ≫
         (ModuleCat.restrictScalars (ι.app X).hom).map (β_ (M.obj X) (N.obj X)).hom =

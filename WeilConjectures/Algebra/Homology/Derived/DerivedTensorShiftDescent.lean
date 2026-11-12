@@ -15,6 +15,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Localization.Construction
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Functor.Currying
@@ -117,6 +119,24 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{r}}
   [HasDerivedCategory.{w} (ringedSiteModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]
+
+local instance (I : Type r) :
+    Limits.HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
+local instance (I : Type r) :
+    Limits.HasColimitsOfShape (Discrete I) (ringedSiteModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+local instance (I : Type) :
+    Limits.HasColimitsOfShape (Discrete I) (ringedSiteModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := by
+  let : Limits.HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 /-- A transparent abbreviation of Mathlib's existing total tensor functor, exposing its
 canonical signed shift instances. This is definitionally `SiteTensorComplexFunctor R`.

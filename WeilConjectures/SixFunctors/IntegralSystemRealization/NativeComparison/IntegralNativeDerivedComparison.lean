@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.NativeComparison.IntegralNativeOrdinaryComparison
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
@@ -17,7 +19,6 @@ set_option genInjectivity false
 set_option synthInstance.maxSize 4096
 universe u v u₁ u₂ u₃ u₄
 attribute [local implicit_reducible] CategoryTheory.TwoSquare
-  CategoryTheory.Functor.mapHomologicalComplex
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.IntegralSystemRealization.NativeComparison

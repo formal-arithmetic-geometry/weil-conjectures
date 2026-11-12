@@ -274,6 +274,7 @@ lemma quasiIso_minusResolutionFunctor_map {K L : CochainComplex.Minus A} (f : K 
   rw [eq]
   infer_instance
 
+
 end
 
 end LeftResolution

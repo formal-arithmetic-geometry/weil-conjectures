@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.CategoryTheory.Monad.Adjunction
 import WeilConjectures.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
@@ -49,7 +50,7 @@ private theorem exact_adjunction_lifts_map
       DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
       l.mapDerivedCategory r.mapDerivedCategory
   let ff := d.fullyFaithfulLOfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso l r).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso l r ≪≫
       Functor.mapDerivedCategoryNatIso c ≪≫ Functor.mapDerivedCategoryIdIso _)
   let : l.mapDerivedCategory.Full := ff.full
   let : l.mapDerivedCategory.Faithful := ff.faithful

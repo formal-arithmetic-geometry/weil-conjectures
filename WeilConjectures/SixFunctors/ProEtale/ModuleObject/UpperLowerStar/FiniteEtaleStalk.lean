@@ -211,7 +211,7 @@ theorem isLimit_stalkLowerStarFan [IsFinite f] [Etale f] {Ω : Type u} [Field Ω
   obtain ⟨v, hv⟩ : ∃ v : P ⟶ U, v ≫ g = y := ⟨eP.hom ≫ v₀, by simp [hv₀]⟩
   have := isIso_lowerStarBaseChange_of_isPullback Λ hpb'
   let N := (fst)^*⟦Λ⟧.obj F
-  have hι (s : S) : Sigma.ι (fun _ : S ↦ U) s ≫ fold = 𝟙 U := Sigma.ι_desc _ _
+  have hι (s : S) : Sigma.ι (fun _ : S ↦ U) s ≫ fold = 𝟙 U := Sigma.ι_comp_desc _ _
   -- the restrictions of `p_* N` along the sections of the trivial cover `p`
   have h5 : IsLimit (Fan.mk ((𝟙 U)^*⟦Λ⟧.obj ((fold)_*⟦Λ⟧.obj N))
       fun s ↦ stalkLowerStarProj Λ (hι s) N) := by

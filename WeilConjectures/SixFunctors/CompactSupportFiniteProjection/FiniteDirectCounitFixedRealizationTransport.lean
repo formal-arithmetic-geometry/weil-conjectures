@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.FiniteProjectionFixedCoordinates
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -171,13 +173,13 @@ private theorem derivedEquivalence_counit_factors (E : A ≌ A')
       DerivedCategory.Qh.map
         ((NatTrans.mapHomotopyCategory E.counitIso.hom (.up ℤ)).app H) =
     E.mapDerivedCategory.counitIso.hom.app (DerivedCategory.Qh.obj H) := by
-  change _ = (Functor.mapDerivedCategoryCompIso E.inverse E.functor).inv.app _ ≫
+  change _ = (Functor.mapDerivedCategoryCompIso E.inverse E.functor).hom.app _ ≫
     (Functor.mapDerivedCategoryNatIso E.counitIso).hom.app _ ≫
     (Functor.mapDerivedCategoryIdIso A').hom.app _
   rw [Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj]
   rw [Functor.mapDerivedCategoryNatIso_fach]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factorsh]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem derivedEquivalence_counitInv_factors (E : A ≌ A')
     [E.functor.Additive] [E.inverse.Additive] (H : HomotopyCategory A' (.up ℤ)) :
@@ -239,7 +241,7 @@ private theorem squareFactors
         r.mapDerivedCategoryFactors.hom.app ((Fp.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex hF (.up ℤ)).hom.app K) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso Fp r).inv.app
     (DerivedCategory.Q.obj K))).mp
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app]
@@ -248,7 +250,7 @@ private theorem squareFactors
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rfl
 
 private theorem squareCounit
@@ -338,7 +340,7 @@ private def liftUnitIso :
     F.mapDerivedCategory ≅ E.functor.mapDerivedCategory ⋙
       (E.inverse ⋙ F).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (E.funInvIdAssoc F).symm ≪≫
-    Functor.mapDerivedCategoryCompIso E.functor (E.inverse ⋙ F)
+    (Functor.mapDerivedCategoryCompIso E.functor (E.inverse ⋙ F)).symm
 
 private theorem liftUnitIso_factors (H : HomotopyCategory A (.up ℤ)) :
     (liftUnitIso E F).hom.app (DerivedCategory.Qh.obj H) ≫
@@ -353,7 +355,7 @@ private theorem liftUnitIso_factors (H : HomotopyCategory A (.up ℤ)) :
   rfl
 
 private theorem derived_unit_counit_coherence :
-    (Functor.mapDerivedCategoryCompIso E.inverse F).hom ≫
+    (Functor.mapDerivedCategoryCompIso E.inverse F).inv ≫
       Functor.whiskerLeft E.inverse.mapDerivedCategory (liftUnitIso E F).hom =
     Functor.whiskerRight E.mapDerivedCategory.counitIso.inv
       (E.inverse ⋙ F).mapDerivedCategory := by
@@ -397,8 +399,8 @@ private theorem derived_unit_counit_coherence :
 private theorem derived_square_coherence
     (G : B ⥤ B') [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (H : DerivedCategory A') :
-    ((Functor.mapDerivedCategoryCompIso E.inverse (F ⋙ G)) ≪≫
-      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso F G)).hom.app H ≫
+    ((Functor.mapDerivedCategoryCompIso E.inverse (F ⋙ G)).symm ≪≫
+      Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso F G).symm).hom.app H ≫
       (Functor.mapDerivedCategorySquareIso (E.funInvIdAssoc (F ⋙ G)).symm).hom.app
         (E.inverse.mapDerivedCategory.obj H) =
     (E.inverse ⋙ F ⋙ G).mapDerivedCategory.map
@@ -407,7 +409,7 @@ private theorem derived_square_coherence
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     liftUnitIso, Functor.whiskerRight_app] at h ⊢
-  simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using h
+  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using h
 
 end
 
@@ -435,7 +437,7 @@ private theorem exactProEtaleAdjunction_eq (A : Type u) [CommRing A]
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
 
 /-- The normalized coefficient square preserves the intrinsic derived counit, before
 any restriction to the specified finite constructible operations. -/
@@ -450,8 +452,8 @@ private theorem intrinsicDerivedCounit_coordinates (A : Type u) [CommRing A] [Fi
     (ModuleCat.{u + 1} (ULift.{u + 1} A)) f
   let adji := sfIntrinsicConstantModuleAdjunction f A
   let b := sfIntrinsicDerivedDirectImageComparison f A
-  let o := Functor.mapDerivedCategoryCompIso EY.inverse (L ⋙ EX.functor) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L EX.functor)
+  let o := (Functor.mapDerivedCategoryCompIso EY.inverse (L ⋙ EX.functor)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L EX.functor).symm
   let RX := EX.mapDerivedCategory
   let RY := EY.mapDerivedCategory
   RX.inverse.map (o.hom.app (Ri.rightDerivedFunctor.obj M)) ≫
@@ -481,8 +483,8 @@ private theorem intrinsicDerivedCounit_coordinates (A : Type u) [CommRing A] [Fi
   have h := squareCounit R Ri EX.functor EY.functor
     L Li adj adji l c.symm hc b.symm
     (sfIntrinsicDerivedDirectImageComparison_inv_unitQ_factors A f)
-  let o := Functor.mapDerivedCategoryCompIso EY.inverse (L ⋙ EX.functor) ≪≫
-    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L EX.functor)
+  let o := (Functor.mapDerivedCategoryCompIso EY.inverse (L ⋙ EX.functor)).symm ≪≫
+    Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L EX.functor).symm
   have ho := derived_square_coherence EY L EX.functor
   have ht := coordinate_counit EY.mapDerivedCategory EX.mapDerivedCategory
     adj.mapDerivedCategoryRightDerivedAdjunction

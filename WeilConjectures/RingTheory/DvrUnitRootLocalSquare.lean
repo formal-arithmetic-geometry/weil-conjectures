@@ -101,7 +101,7 @@ theorem dvr_unit_root_local_square
     ext a
     change φ (algebraMap A C a) ∈ q ↔ a ∈ IsLocalRing.maximalIdeal A
     rw [hφ]
-    change algebraMap A T a ∈ q.comap (algebraMap T D) ↔ _
+    change algebraMap A T a ∈ q.under T ↔ _
     rw [hq]
     exact SetLike.ext_iff.mp (IsLocalRing.maximalIdeal_comap (algebraMap A T)) a
   obtain ⟨hdomA', hdvrA', hAA', hsep, hinjA'⟩ := dvr_unit_root_atPrime A e hepos he v p hp

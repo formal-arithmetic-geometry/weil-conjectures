@@ -103,7 +103,7 @@ theorem truncation_isDerivedLimitTriangle_of_local_bound (X : Scheme.{u})
   have hπ : Pi.lift (fun n : ℕ => (t.truncGEπ (-(n : ℤ))).app E) = c ≫ π := by
     apply Pi.hom_ext
     intro n
-    simpa only [Pi.lift_π, Category.assoc] using (hc n).symm
+    simpa only [Pi.lift_comp_π, Category.assoc] using (hc n).symm
   refine ⟨δ ≫ (shiftFunctor _ (1 : ℤ)).map (inv c), ?_⟩
   apply Pretriangulated.isomorphic_distinguished _ hK
   refine Pretriangulated.Triangle.isoMk _ _ (asIso c) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_

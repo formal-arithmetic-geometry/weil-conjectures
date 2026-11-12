@@ -50,7 +50,7 @@ attribute [local irreducible]
   AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenTensorModel
   DerivedCategory DerivedCategory.Q instCategoryDerivedCategory
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.mapDerivedCategoryFactors
-  CategoryTheory.Functor.mapDerivedCategoryCompIso CategoryTheory.Functor.mapDerivedCategoryNatIso
+  CategoryTheory.Functor.mapDerivedCategoryNatIso
 section ExactFactors
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
@@ -66,8 +66,8 @@ variable {C D A B : Type*} [Category* C] [Category* D] [Category* A] [Category* 
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 private theorem exact_forget_factors (e : L ⋙ V ≅ F ⋙ R) (P : CochainComplex C ℤ) :
-    ((Functor.mapDerivedCategoryCompIso L V).symm ≪≫
-      Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F R).hom.app
+    (Functor.mapDerivedCategoryCompIso L V ≪≫
+      Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F R).symm).hom.app
         (DerivedCategory.Q.obj P) ≫
       R.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       R.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -88,9 +88,9 @@ private theorem exact_forget_factors (e : L ⋙ V ≅ F ⋙ R) (P : CochainCompl
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso L V).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso L V).inv.app
     (DerivedCategory.Q.obj P))).1
-  rw [Iso.hom_inv_id_app_assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
+  rw [Iso.inv_hom_id_app_assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app] at ha
   erw [← ha]
 

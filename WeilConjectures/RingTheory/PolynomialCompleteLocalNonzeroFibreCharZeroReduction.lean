@@ -100,7 +100,7 @@ theorem completeLocalNonzeroFibreCharZero_reduction
   have : Module.Finite (Polynomial A₀) (Polynomial A) := Algebra.IsIntegral.finite
   let q₀ := q.comap (algebraMap (Polynomial A₀) (Polynomial A))
   let r₀ := r.comap (algebraMap (Polynomial A₀) (Polynomial A))
-  have : q₀.IsMaximal := Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q
+  have : q₀.IsMaximal := Ideal.isMaximal_under_of_isIntegral_of_isMaximal q
   have : r₀.IsPrime := Ideal.comap_isPrime _ r
   have hc : (algebraMap (Polynomial A₀) (Polynomial A)).comp
       (Polynomial.C : A₀ →+* Polynomial A₀) =

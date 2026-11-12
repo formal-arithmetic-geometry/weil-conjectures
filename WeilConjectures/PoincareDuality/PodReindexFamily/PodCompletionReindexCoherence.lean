@@ -76,8 +76,8 @@ def compositionDerived {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V)
     [IsIso h] [IsIso f] : podOrdinaryReindex l E (h ≫ f) ≅
       podOrdinaryReindex l E f ⋙ podOrdinaryReindex l E h :=
   Functor.mapDerivedCategoryNatIso (A.composition h f) ≪≫
-    Functor.mapDerivedCategoryCompIso (isoReductionIntegralInverse l E f)
-      (isoReductionIntegralInverse l E h)
+    (Functor.mapDerivedCategoryCompIso (isoReductionIntegralInverse l E f)
+      (isoReductionIntegralInverse l E h)).symm
 
 /-- Ordinary reindexing on the actual complete constructible full subcategories.
 Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-coherence). -/

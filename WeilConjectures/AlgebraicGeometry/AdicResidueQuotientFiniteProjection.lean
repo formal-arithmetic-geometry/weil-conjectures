@@ -107,7 +107,7 @@ private theorem strict_limit_cone
     change Pretriangulated.towerShift hP ≫ P.proj n =
       towerProductShift (fun k ↦ F.map (homOfLE (Nat.le_succ k)).op) ≫ P.proj n
     rw [Pretriangulated.towerShift_proj hP n]
-    exact (Pi.lift_π (fun k : ℕ ↦
+    exact (Pi.lift_comp_π (fun k : ℕ ↦
       Pi.π (fun j : ℕ ↦ F.obj (op j)) (k + 1) ≫
         F.map (homOfLE (Nat.le_succ k)).op) n).symm
   have hp : p ≫ Pretriangulated.towerShift (F := F) hP = p := by
@@ -152,7 +152,7 @@ private theorem strict_limit_cone
     dsimp only [pc]
     erw [piComparison_comp_π, ← DerivedCategory.Q.map_comp]
     congr 1
-    exact Pi.lift_π _ _
+    exact Pi.lift_comp_π _ _
 
 end StrictCone
 

@@ -488,7 +488,7 @@ theorem TorsorSignedRepresents.connecting
   · rw [torsorSignedB_apply]
     erw [hw]
     exact (congrArg (fun t ↦ -(openXIso T U S.X₁ (q + 1) (embeddingUpNat_f_succ q)).hom t)
-      (ShiftedCone.snd_mk r₁ _ _ rfl _ _)).trans (by simp)
+      (ShiftedCone.snd_mk r₁ _ _ rfl _ _)).trans (by simp only [map_zero, neg_zero])
 
 
 end AlgebraicGeometry.Etale

@@ -101,18 +101,18 @@ internal pullback by its total left derived functor. Every isomorphism is specif
   exact Functor.isoWhiskerLeft D+(Etale.upperStar A h)
       ((Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-          (Functor.mapDerivedCategoryCompIso (V S) ES.functor).symm) ≪≫
+          (Functor.mapDerivedCategoryCompIso (V S) ES.functor)) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (Etale.upperStar A h).mapDerivedCategoryPlusCompatibility
       D(V S ⋙ ES.functor) ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-        Functor.mapDerivedCategoryNatIso t ≪≫ Functor.mapDerivedCategoryCompIso _ _) ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
+        Functor.mapDerivedCategoryNatIso t ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
       (Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        (Functor.mapDerivedCategoryCompIso (V T) ET.functor) ≪≫
+        (Functor.mapDerivedCategoryCompIso (V T) ET.functor).symm ≪≫
           Functor.associator _ _ _) D(U) ≪≫
     Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(V T) ⋙ D(ET.functor))
       (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.continuousMapRingObj B) h).symm

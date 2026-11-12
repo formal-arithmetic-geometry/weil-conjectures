@@ -264,12 +264,13 @@ theorem obstruction
     let := he (ULift.{vB} ℕ)
     exact preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) e
   let := heN
-  let : PreservesColimitsOfShape (Discrete ℕ) (evaluation e) :=
+  have hPev : PreservesColimitsOfShape (Discrete ℕ) (evaluation e) :=
     preservesColimitsOfShape_of_natIso (e.mapDerivedCategoryHomologyFunctorIso 0)
   let : PreservesLimitsOfShape (Discrete ℕ) (evaluation e) :=
     preservesLimitsOfShape_of_natIso (e.mapDerivedCategoryHomologyFunctorIso 0)
   let M := cohomology e T F
   let Y (n : ℕ) := T.obj (shifts F n)
+  have : PreservesColimit (Discrete.functor Y) (evaluation e) := hPev.preservesColimit
   let α : ModuleCat.of R (⨁ n : ℕ, M n) ≅ (evaluation e).obj (∐ Y) :=
     (ModuleCat.coprodIsoDirectSum M).symm ≪≫
       Sigma.mapIso (fun n ↦ (shiftIdentification e T F n).symm) ≪≫

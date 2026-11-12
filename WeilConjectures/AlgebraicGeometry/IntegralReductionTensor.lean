@@ -108,7 +108,8 @@ lemma tensorPresentationDerivedCounit_isLeftDerivedFunctor :
 
 end CategoryTheory.Mod
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_algebraicGeometryIntegralReductionTensor
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

@@ -75,7 +75,9 @@ private noncomputable def tensorHomCurryApp_kf (φ : M ⊗ P ⟶ N) {U : C} (p :
     refine (congrArg (φ.app (op W'.unop.left)) ?_).trans
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
-      M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
+      TensorProduct.tmul (R := R.obj (op W'.unop.left))
+        (M := M.obj (op W'.unop.left)) (N := P.obj (op W'.unop.left))
+        (M.map f.unop.left.op m) q) ?_).trans
         (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
@@ -291,7 +293,7 @@ theorem preservesZeroMorphisms_curriedTensor :
         refine ⟨fun P Q ↦ ?_⟩
         change (0 : P ⟶ Q) ▷ M.val = 0
         ext U : 1
-        change (0 : P ⟶ Q).app U ▷ M.val.obj U = 0
+        change whiskerRight (C := ModuleCat (R.obj.obj U)) ((0 : P ⟶ Q).app U) (M.val.obj U) = 0
         simp
       have ht : IsZero ((0 : SheafOfModules.{max u v} (𝓡)).val ⊗ M.val) := by
         exact Functor.map_isZero (tensorRight M.val) hp

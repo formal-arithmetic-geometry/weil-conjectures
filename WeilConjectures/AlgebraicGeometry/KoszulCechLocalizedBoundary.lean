@@ -183,7 +183,7 @@ theorem koszulCechLocalized_boundary (e : ℕ)
   apply Finset.sum_congr rfl
   intro j _
   by_cases h : (J.val.erase j.val).Nonempty
-  · simp only [dif_pos h]
+  · simp only [dite_eq_left h]
     have hcard := Finset.card_erase_add_one j.property
     have hsign := boundary_sign J.val.card hJ n
     have hc1 : (J.val.erase j.val).card - 1 = J.val.card - 2 := by omega
@@ -241,6 +241,6 @@ theorem koszulCechLocalized_boundary (e : ℕ)
       ((z.v (1 - ((J.val.erase j.val).card : ℤ))
         (n + 1 - ((J.val.erase j.val).card : ℤ)) (by ring))
         (B ⟨J.val.erase j.val, h⟩)))
-  · simp only [dif_neg h, map_zero, smul_zero]
+  · simp only [dite_eq_right h, map_zero, smul_zero]
 
 end AlgebraicGeometry

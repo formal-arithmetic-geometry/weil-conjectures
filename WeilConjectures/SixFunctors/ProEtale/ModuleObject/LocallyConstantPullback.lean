@@ -66,15 +66,15 @@ noncomputable def fiberCharFn (R : Type*) [CommRing R] (c : LocallyConstant T V)
 lemma fiberCharFn_apply [DecidableEq V] (c : LocallyConstant T V) (v : V) (t : T) :
     fiberCharFn R c v t = if c t = v then 1 else 0 := by
   by_cases h : c t = v
-  · rw [if_pos h]
+  · rw [ite_eq_left h]
     exact Set.indicator_of_mem (s := {x | c x = v}) h 1
-  · rw [if_neg h]
+  · rw [ite_eq_right h]
     exact Set.indicator_of_notMem (s := {x | c x = v}) h 1
 
 lemma fiberCharFn_apply_of_ne (c : LocallyConstant T V) {v : V} {t : T} (h : c t ≠ v) :
     fiberCharFn R c v t = 0 := by
   classical
-  rw [fiberCharFn_apply, if_neg h]
+  rw [fiberCharFn_apply, ite_eq_right h]
 
 /-- On a compact space, a locally constant function `F ∘ c` is the sum over the (finitely
 many) values `v` of `c` of `F v` times the characteristic function of the fibre of `c`
@@ -85,7 +85,7 @@ lemma sum_const_mul_fiberCharFn [CompactSpace T] (c : LocallyConstant T V) (F : 
   ext t
   simp only [sum_apply, coe_mul, Pi.mul_apply, coe_const, Function.const_apply,
     fiberCharFn_apply, mul_ite, mul_one, mul_zero, map_apply]
-  rw [Finset.sum_ite_eq, if_pos (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
+  rw [Finset.sum_ite_eq, ite_eq_left (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
   rfl
 
 /-- On a compact space, the characteristic functions of the fibres of a locally constant
@@ -95,7 +95,7 @@ lemma sum_fiberCharFn [CompactSpace T] (c : LocallyConstant T V) :
   classical
   ext t
   simp only [sum_apply, fiberCharFn_apply, coe_one, Pi.one_apply]
-  rw [Finset.sum_ite_eq, if_pos (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
+  rw [Finset.sum_ite_eq, ite_eq_left (c.range_finite.mem_toFinset.2 (Set.mem_range_self t))]
 
 /-- A locally constant function which is equal to `r` on the fibre of `c` over `v` is `r` times
 the characteristic function of that fibre, after multiplying with it. -/

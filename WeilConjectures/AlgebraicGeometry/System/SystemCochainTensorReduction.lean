@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReduction
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Tensor compatibility of cochain horizontal reduction adjoints
@@ -199,6 +200,5 @@ theorem cochain_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n 
     A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)]
   have hinv := ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q)
   erw [reassoc_of% hinv]
-  rfl
 
 end WeilConjectures.SemilinearSections

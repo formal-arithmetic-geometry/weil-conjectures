@@ -124,13 +124,13 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
     · refine Finsupp.mapDomain_of_notMem_range _ _ fun ⟨P, hP⟩ ↦ ?_
       exact P.2 (hP ▸ h)
     · change Finsupp.mapDomain Subtype.val _ (Subtype.val (⟨Q, h⟩ : S)) = _
-      rw [Finsupp.mapDomain_apply Subtype.val_injective]
+      rw [Finsupp.mapDomain_apply_of_injective Subtype.val_injective]
       rfl
   let ext : C.Divisor →+ c.Z.Divisor := Finsupp.mapDomain.addMonoidHom c.i.closedPointsMap
   have hext (E : C.Divisor) : Scheme.Divisor.comap c.i (ext E) = E := by
     ext P
     rw [Scheme.Divisor.comap_apply]
-    exact Finsupp.mapDomain_apply c.i.closedPointsMap_injective E P
+    exact Finsupp.mapDomain_apply_of_injective c.i.closedPointsMap_injective E P
   have hsplit (E : c.Z.Divisor) :
       E = ext (Scheme.Divisor.comap c.i E) + divS fun P ↦ E P.1 := by
     ext Q
@@ -142,7 +142,8 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
       have hQ : c.i.closedPointsMap ⟨y, hy'⟩ = Q := Subtype.ext hy
       rw [add_zero, ← hQ]
       change _ = Finsupp.mapDomain _ _ _
-      rw [Finsupp.mapDomain_apply c.i.closedPointsMap_injective, Scheme.Divisor.comap_apply]
+      rw [Finsupp.mapDomain_apply_of_injective c.i.closedPointsMap_injective,
+        Scheme.Divisor.comap_apply]
     · suffices hz : ext (Scheme.Divisor.comap c.i E) Q = 0 by rw [hz, zero_add]
       refine Finsupp.mapDomain_of_notMem_range _ _ fun ⟨P, hP⟩ ↦ h ⟨P.1, congrArg Subtype.val hP⟩
   have hcomap_divS (v : S → ℤ) : Scheme.Divisor.comap c.i (divS v) = 0 := by
@@ -181,7 +182,7 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
         by_contra hne
         have hcl := Scheme.isClosed_of_ord_ne_zero k hne
         have := congrArg (fun E : c.Z.Divisor ↦ E ⟨y, hcl⟩) hh
-        simp only [Scheme.div_apply, hdivS, dif_pos ((hV y).1 hy)] at this
+        simp only [Scheme.div_apply, hdivS, dite_eq_left ((hV y).1 hy)] at this
         exact hne this
       obtain ⟨s, hs, hsh⟩ := Scheme.exists_isUnit_germToFunctionField_eq_of_ord_eq_zero c.g
         h.toMul.ne_zero hord
@@ -194,7 +195,7 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
       refine ⟨.ofMul u, funext fun P ↦ ?_⟩
       rw [hD, toMul_ofMul, hu]
       have := congrArg (fun E : c.Z.Divisor ↦ E P.1) hh
-      simp only [Scheme.div_apply, hdivS, dif_neg P.2] at this
+      simp only [Scheme.div_apply, hdivS, dite_eq_right P.2] at this
       exact this
   · -- the kernel of `D` consists of constants, which are `n`-th powers
     intro u hu

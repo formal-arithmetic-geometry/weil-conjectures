@@ -90,8 +90,7 @@ private noncomputable def tensorCoordinate
     apply AddCommGrpCat.hom_ext
     apply AddMonoidHom.ext
     intro z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simpa using congrArg₂ (· + ·) hz hw
     | tmul s m =>
       change basisTensorEquiv n (b V)
@@ -157,14 +156,14 @@ private noncomputable def tensorProductIso
             ((tensorProductHom α n b hb M).app U z) =
               basisTensorEquiv (M := M.val.obj U) n (b U) z i := by
         exact ConcreteCategory.congr_hom
-          (NatTrans.congr_app (Pi.lift_π (fun i ↦ tensorCoordinate α n b hb M i) i) U) z
+          (NatTrans.congr_app (Pi.lift_comp_π (fun i ↦ tensorCoordinate α n b hb M i) i) U) z
       simp only [hcoord, LinearEquiv.symm_apply_apply]
     · apply (isLimitOfPreserves ((evaluation Cᵒᵖ AddCommGrpCat).obj U)
         (limit.isLimit (Discrete.functor (fun _ : Fin n ↦ M.val.presheaf)))).hom_ext
       intro i
       change (tensorProductInvApp α n b M U ≫ (tensorProductHom α n b hb M).app U) ≫
         (Pi.π (fun _ : Fin n ↦ M.val.presheaf) i.as).app U = _
-      rw [Category.assoc, ← NatTrans.comp_app, tensorProductHom, Pi.lift_π]
+      rw [Category.assoc, ← NatTrans.comp_app, tensorProductHom, Pi.lift_comp_π]
       ext z
       let : Module (R.obj.obj U) (S.obj.obj U) := Module.compHom _ (α.hom.app U).hom
       change basisTensorEquiv (M := M.val.obj U) n (b U)
@@ -194,11 +193,10 @@ private theorem tensorProductIso_naturality
     tensorProductHom α n b hb M ≫ _
   apply Pi.hom_ext
   intro i
-  simp only [tensorProductHom, Category.assoc, Pi.map_π, Pi.lift_π, Pi.lift_π_assoc]
+  simp only [tensorProductHom, Category.assoc, Pi.map_π, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
   ext U z
   let : Module (R.obj.obj U) (S.obj.obj U) := Module.compHom _ (α.hom.app U).hom
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simpa using congrArg₂ (· + ·) hz hw
   | tmul s m =>
     change basisTensorEquiv (M := N.val.obj U) n (b U)

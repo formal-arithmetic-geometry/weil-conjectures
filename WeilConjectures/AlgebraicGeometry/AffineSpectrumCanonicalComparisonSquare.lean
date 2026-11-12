@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
@@ -41,7 +44,7 @@ private theorem comparisonIntoPullback_eq
       comparisonIntoTensorPullback f f' g g' sq z P i ≫
         (comparisonStalkCohomology X' z i).map
           (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-  simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc]
+  simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
 
 set_option maxHeartbeats 1100000 in
 -- The comparison expands several nested stalk and localization functors.

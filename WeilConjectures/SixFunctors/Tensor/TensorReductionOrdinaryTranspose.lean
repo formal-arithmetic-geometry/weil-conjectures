@@ -69,7 +69,7 @@ private theorem roos_projection (W : Scheme.{u})
       pullbackTensorRoosAugmentation l E W C from
     CochainComplex.mappingCocone.lift_fst _ _ _ _]
   simp only [Category.assoc, Pi.map_π, pullbackTensorRoosAugmentation]
-  erw [Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc]
   rfl
 
 private theorem roos_shifted_zero (W : Scheme.{u})

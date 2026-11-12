@@ -122,6 +122,18 @@ open scoped TensorProduct ChangeOfRings
 
 namespace WeilConjectures.PurityFiniteSetting
 
+private abbrev kummerRestrictedSectionModule
+    (T : Scheme.{u}) {A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A))
+    {X Y : T.ProEtᵒᵖ} (i : X ⟶ Y) :
+    Module (A.obj.obj Y) ((ModuleCat.restrictScalars
+      (((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1}
+        RingCat.{u + 1})).obj A).obj.map i).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (A.obj.obj Y) (M.val.obj Y))
+
+attribute [local instance] kummerRestrictedSectionModule
+
 private theorem tensorRestriction_tmul
     (T : Scheme.{u})
     {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S) (M : SheafOfModules.{u + 1}

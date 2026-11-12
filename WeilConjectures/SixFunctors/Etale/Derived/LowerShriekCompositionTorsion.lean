@@ -69,11 +69,11 @@ noncomputable def mapDerivedCategoryUpperStarDerivedRestrictScalarsIso {Λ' : Ty
         ((Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ).obj Z) ≅
       (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj
         (D((g)^*[ModuleCat.{u + 1} Λ']).obj Z) :=
-  ((Functor.mapDerivedCategoryCompIso (Sheaf.restrictScalars Y.smallEtaleTopology φ)
-      (g)^*[ModuleCat.{u + 1} Λ]).app Z).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (Sheaf.restrictScalars Y.smallEtaleTopology φ)
+      (g)^*[ModuleCat.{u + 1} Λ]).app Z ≪≫
     (Functor.mapDerivedCategoryNatIso (asIso (upperStarRestrictScalars φ g).natTrans)).app Z ≪≫
-    (Functor.mapDerivedCategoryCompIso (g)^*[ModuleCat.{u + 1} Λ']
-      (Sheaf.restrictScalars X.smallEtaleTopology φ)).app Z
+    ((Functor.mapDerivedCategoryCompIso (g)^*[ModuleCat.{u + 1} Λ']
+      (Sheaf.restrictScalars X.smallEtaleTopology φ)).app Z).symm
 
 variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 include hϖ

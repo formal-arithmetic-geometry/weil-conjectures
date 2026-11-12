@@ -68,7 +68,7 @@ noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerShriekIso {Z T : S
     R(i)_![A] ⋙ D((i)^*[A]) ≅ 𝟭 _ :=
   Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar A i ≪≫
     Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory (FC := FC) A i) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (asIso (Etale.upperStarLowerStarAdjunction A i).counit) ≪≫
     Functor.mapDerivedCategoryIdIso _
 

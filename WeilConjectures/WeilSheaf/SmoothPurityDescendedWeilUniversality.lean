@@ -31,23 +31,23 @@ local instance descendedWeilUniversalityInst1 : Fact (ringChar (AlgebraicClosure
 local instance descendedWeilUniversalityInst2 : Fact (ringChar (AlgebraicClosure k) ≠ l) :=
   ⟨ringChar_algebraicClosure_ne (k₀ := k) (l := l)⟩
 
-set_option linter.style.longLine false in
-local instance descendedWeilUniversalityInst3 : LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance descendedWeilUniversalityInst3 :
+    LocallyOfFiniteType (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-set_option linter.style.longLine false in
-local instance descendedWeilUniversalityInst4 : QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance descendedWeilUniversalityInst4 :
+    QuasiCompact (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-set_option linter.style.longLine false in
-local instance descendedWeilUniversalityInst5 : IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance descendedWeilUniversalityInst5 :
+    IsSeparated (Over.mk X.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
-set_option linter.style.longLine false in
-local instance descendedWeilUniversalityInst6 : LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance descendedWeilUniversalityInst6 :
+    LocallyOfFiniteType (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
-set_option linter.style.longLine false in
-local instance descendedWeilUniversalityInst7 : QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance descendedWeilUniversalityInst7 :
+    QuasiCompact (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
-set_option linter.style.longLine false in
-local instance descendedWeilUniversalityInst8 : IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
+local instance descendedWeilUniversalityInst8 :
+    IsSeparated (Over.mk Y.hom.geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 local instance descendedWeilUniversalityInst9 : IsProper (traceGeometricFiberOverMap f).left :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper)

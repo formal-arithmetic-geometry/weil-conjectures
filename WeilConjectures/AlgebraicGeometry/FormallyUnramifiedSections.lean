@@ -141,7 +141,8 @@ theorem isIso_sigmaDesc_of_isAlgClosed (a : Z ⟶ Spec (.of K)) [FormallyUnramif
   refine isIso_of_isOpenImmersion_of_opensRange_eq_top _ (eq_top_iff.2 fun z _ ↦ ?_)
   obtain ⟨t, ht, x, rfl⟩ := exists_comp_eq_id_of_isAlgClosed a z
   obtain ⟨i, rfl⟩ := hsurj t ht
-  exact ⟨(Sigma.ι (fun _ : σ ↦ Spec (.of K)) i) x, by rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]⟩
+  refine ⟨(Sigma.ι (fun _ : σ ↦ Spec (.of K)) i) x, ?_⟩
+  rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
 
 end FormallyUnramified
 

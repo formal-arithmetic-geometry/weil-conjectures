@@ -53,12 +53,12 @@ theorem finiteOrdinary_boundary_of_scalar_class (T : Scheme.{u}) (k : Kummer l T
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) (L : T.Pic)
     (a : Etale.ordinaryFiniteUnit (FiniteRing l E n) T ⟶
       (Etale.ordinaryFiniteLine (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧)
+        (ULift.ext (coefficient_annihilates l E n)) T)⟦(2 : ℤ)⟧)
     (hclass : Etale.ordinaryFiniteClass (FiniteRing l E n) T
       (Scheme.finiteEtaleTateLine T (l ^ (n + 1)) (FiniteRing l E n)
-        (ULift.ext _ _ (coefficient_annihilates l E n))) 2 a =
+        (ULift.ext (coefficient_annihilates l E n))) 2 a =
       Sheaf.H.map (Etale.ordinaryFiniteRootMap (FiniteRing l E n) (l ^ (n + 1))
-        (ULift.ext _ _ (coefficient_annihilates l E n)) T) 2
+        (ULift.ext (coefficient_annihilates l E n)) T) 2
           (T.kummerδ₁ (l ^ (n + 1)) hT (Scheme.Pic.toCohomologicalPicardGroup T L))) :
     FiniteKummerBoundary l E T n k L (finiteOrdinaryCoordinateArrow l E n T c a) := by
   let x := T.kummerδ₁ (l ^ (n + 1)) hT (Scheme.Pic.toCohomologicalPicardGroup T L)

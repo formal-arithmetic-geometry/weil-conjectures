@@ -309,11 +309,11 @@ def compactSupportCanonicalJEvaluation {X Z : Scheme.{t}} (j : X ⟶ Z)
   letI := IntegralOpenReduction.systemExtensionColimits l E j o
   letI := compactSupportFiniteExtensionPreservesFiniteLimits l E j o n
   letI := compactSupportFiniteExtensionPreservesFiniteColimits l E j o n
-  (Functor.mapDerivedCategoryCompIso (IntegralOpenReduction.systemExtension l E j o)
-    (coefficientSequenceEvaluation l E Z n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (IntegralOpenReduction.systemExtension l E j o)
+    (coefficientSequenceEvaluation l E Z n) ≪≫
   Functor.mapDerivedCategoryNatIso (IntegralOpenReduction.extensionEvaluation l E j o n) ≪≫
-  Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E X n)
-    (IntegralOpenReduction.finiteExtension l E j o n)
+  (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E X n)
+    (IntegralOpenReduction.finiteExtension l E j o n)).symm
 
 /-- Evaluation presentations for the canonical geometric functors. The right direct-image
 comparison is normalized on arbitrary K-injective resolutions of evaluated systems;
@@ -448,8 +448,8 @@ Source: node statement, `Res_m Res_(m,n) = Res_n`, proof step 5
 def compactSupportSystemRestrictionComp (W : Scheme.{t}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRRes l E W h ⋙ coefficientFiniteDerivedRestriction l E W m ≅
       coefficientFiniteDerivedRestriction l E W n :=
-  (Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E W h)
-    (scalarReductionRestriction l E W m)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (normalizedDVRModuleRes l E W h)
+    (scalarReductionRestriction l E W m) ≪≫
   Functor.mapDerivedCategoryNatIso (eqToIso (coefficientRestrictionComp l E W h))
 
 /-- The extension-form transition `Rp_n(t^N) ∘ b`, for the actual system `N = J_j M`.

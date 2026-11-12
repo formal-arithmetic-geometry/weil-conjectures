@@ -210,13 +210,13 @@ private theorem realization_adjunction (T : Scheme.{u})
     (HomotopyCategory.quasiIso _ (.up ℤ))
   intro H
   rw [Adjunction.mapDerivedCategoryAdjunction_counit_app_Qh_obj]
-  change ((mapDerivedCategoryCompIso _ _).inv ≫
+  change ((mapDerivedCategoryCompIso _ _).hom ≫
     (mapDerivedCategoryNatIso (sfIntrinsicModuleEquivalence T A).counitIso).hom ≫
       (mapDerivedCategoryIdIso _).hom).app (DerivedCategory.Qh.obj H) = _
   simp only [NatTrans.comp_app]
   rw [mapDerivedCategoryIdIso_hom_app_Qh_obj, mapDerivedCategoryNatIso_fach]
   rw [← mapDerivedCategoryCompIso_hom_app_factorsh]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   congr 2
   obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
   rw [Adjunction.mapHomotopyCategory_counit_app_quotient]

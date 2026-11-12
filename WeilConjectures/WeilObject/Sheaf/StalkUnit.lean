@@ -76,7 +76,7 @@ lemma _root_.CategoryTheory.Iso.hom_app_eq_inv_of_hom_app_eq {B : Type*} [Catego
     {b b' : B} (e : b ≅ b') (ε : b ≅ S.obj b)
     (h : τ.hom.app b' = S.map e.inv ≫ ε.inv ≫ e.hom) : τ.hom.app b = ε.inv := by
   have hn := τ.hom.naturality e.hom
-  rw [h, Iso.map_hom_inv_id_assoc, Functor.id_map] at hn
+  rw [h, Iso.hom_inv_id_map_assoc, Functor.id_map] at hn
   exact ((cancel_mono e.hom).1 hn).symm
 
 end CategoryTheory.Functor

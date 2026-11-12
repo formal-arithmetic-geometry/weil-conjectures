@@ -187,7 +187,7 @@ theorem integralPullbackAugmentation_ambient
     rw [Category.assoc, hh]
     apply Limits.Pi.hom_ext
     intro n
-    simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+    simp only [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc]
     apply HomologicalComplex.hom_ext
     intro i
     let f : F.obj (P.X i) ⟶ (T.obj (op n)).X i :=

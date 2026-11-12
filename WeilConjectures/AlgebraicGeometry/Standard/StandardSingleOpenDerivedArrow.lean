@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+import all WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
@@ -109,15 +112,13 @@ private theorem pinnedBaseChange_naturality
   rw [happ A, happ B, ← adj'.homEquiv_naturality_left,
     ← adj'.homEquiv_naturality_right, ht]
 
-attribute [local implicit_reducible] CochainComplex.singleFunctors
-  HomotopyCategory.singleFunctors DerivedCategory.singleFunctors
+attribute [local implicit_reducible] HomotopyCategory.singleFunctors
 attribute [local irreducible] Scheme.Modules.tensorPullbackObj
   schemeDerivedBaseChangeMap Scheme.picardTermwiseSingleMap
 attribute [local implicit_reducible] Scheme.Modules.tensorPullback
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom DerivedCategory
-  Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
-  HomotopyCategory.quotient DerivedCategory.Q DerivedCategory.Qh
+  HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
   HomologicalComplexUpToQuasiIso.Qh
 
 private theorem pinnedSingle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
@@ -128,11 +129,7 @@ private theorem pinnedSingle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.
   refine ⟨ε, ?_, ?_⟩
   · exact (Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition))) f
-  · unfold Scheme.picardTermwiseSingleMap Scheme.Modules.canonicalSinglePullbackMap
-    exact cancelSingleMaps (DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0) _ _
-      (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-        (Scheme.Modules.pullbackPushforwardAdjunction f)).app M)
+  · simpa only [cast_eq] using Scheme.single_map_normalize f M
 
 set_option maxHeartbeats 800000 in
 -- The single-complex and homotopy-coordinate spellings require additional elaboration.
@@ -149,11 +146,7 @@ private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
   have norm (L : Y.Modules) : Scheme.picardTermwiseSingleMap f L =
       ε.app ((HomotopyCategory.singleFunctor _ 0).obj L) ≫
         DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map (r.hom.app L)) := by
-    unfold Scheme.picardTermwiseSingleMap Scheme.Modules.canonicalSinglePullbackMap
-    exact cancelSingleMaps (DerivedCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0) _ _
-      (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-        (Scheme.Modules.pullbackPushforwardAdjunction f)).app L)
+    exact Scheme.single_map_normalize f L
   rw [norm M, norm N]
   have hε := ε.naturality ((HomotopyCategory.singleFunctor _ 0).map k)
   have hr := r.hom.naturality k

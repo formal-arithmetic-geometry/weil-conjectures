@@ -84,7 +84,7 @@ theorem cartanEilenberg_cone_graded_augmentation_representative
     (F.antitone_step (by omega))
   let u := (CochainComplex.mappingCone.inl aug).v (m + 1 + 1) (m + 1) (by omega)
   have hu : imageSubobject u ≤ F.complexStep (m + 1 + 1) (m + 1) := by
-    rw [hF, if_pos (by omega)]
+    rw [hF, ite_eq_left (by omega)]
     exact le_sup_left
   have hmono : Mono ((F.step (m + 1 + 1)).arrow.f (m + 1)) := inferInstance
   have hu' : imageSubobject u ≤ Subobject.mk

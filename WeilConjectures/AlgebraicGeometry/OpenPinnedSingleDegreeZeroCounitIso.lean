@@ -85,7 +85,16 @@ def openPinnedHomotopyTensorRestrictionIso
     dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
     letI := schemeOpenRestriction_additive X U
     letI := schemeOpenRestriction_additive X' U'
-    exact Functor.mapHomotopyCategoryCompIso (openPinnedTensorRestrictionIso k U U' j hj) (.up ℤ) ≪≫
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).symm
+    let mapSquare {C D B E : Type (u + 1)}
+        [Category.{u} C] [Category.{u} D] [Category.{u} B] [Category.{u} E]
+        [Preadditive C] [Preadditive D] [Preadditive B] [Preadditive E]
+        {F : C ⥤ D} {G : D ⥤ E} {R : C ⥤ B} {J : B ⥤ E}
+        [F.Additive] [G.Additive] [R.Additive] [J.Additive]
+        (e : F ⋙ G ≅ R ⋙ J) :
+        F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ) ≅
+          R.mapHomotopyCategory (.up ℤ) ⋙ J.mapHomotopyCategory (.up ℤ) :=
+      Functor.mapHomotopyCategoryCompIso e (.up ℤ) ≪≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ J)) (.up ℤ)).symm
+    exact mapSquare (openPinnedTensorRestrictionIso k U U' j hj)
 
 end AlgebraicGeometry

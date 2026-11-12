@@ -56,10 +56,9 @@ noncomputable def singleComplexOpenTensorRestrictionMap
   have : (Scheme.Modules.tensorPullback g').Additive := tensorPullbackAdditive g'
   have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
       (Scheme.Modules.tensorPullback k).Additive := fun k => tensorPullbackAdditive k
-  exact DerivedCategory.Qh.map
-      ((openPinnedHomotopyTensorRestrictionIso g' U U' j hj).inv.app
-        ((HomotopyCategory.quotient
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)) ≫
-    (schemeOpenRestriction X' U').mapDerivedCategoryFactorsh.inv.app _
+  exact DerivedCategory.Q.map
+      ((NatTrans.mapHomologicalComplex
+        (openPinnedTensorRestrictionIso g' U U' j hj).inv (.up ℤ)).app P) ≫
+    (schemeOpenRestriction X' U').mapDerivedCategoryFactors.inv.app _
 
 end AlgebraicGeometry

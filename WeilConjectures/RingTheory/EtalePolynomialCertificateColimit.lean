@@ -31,7 +31,7 @@ private theorem square_span_range {R : Type*} [CommRing R] {ι : Type*}
     (f : ι → R) :
     (Ideal.span (Set.range f)) ^ 2 =
       Ideal.span (Set.range (fun ab : ι × ι ↦ f ab.1 * f ab.2)) := by
-  rw [pow_two, Ideal.span_mul_span']
+  rw [pow_two, Ideal.span_mul_span]
   congr 1
   ext x
   simp only [Set.mem_mul, Set.mem_range, Prod.exists]

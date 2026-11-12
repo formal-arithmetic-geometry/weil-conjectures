@@ -121,7 +121,6 @@ private theorem transport_norm {X Y : Scheme.{u}} (f : X ⟶ Y)
       apply HomologicalComplex.hom_ext
       intro i
       simp
-      rfl
     rw [hi]
     have hp : NatIso.prod
         (Iso.refl ((G l E f r).leftAdjoint.mapHomologicalComplex (.up ℤ)))

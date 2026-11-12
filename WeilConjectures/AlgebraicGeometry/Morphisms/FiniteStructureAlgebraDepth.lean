@@ -105,7 +105,7 @@ private theorem depth_le_localization {R B : Type*} [CommRing R] [IsLocalRing R]
       trivial
     exact (inferInstance : q.IsPrime).ne_top (Ideal.eq_top_of_isUnit_mem _ (hmap h1) isUnit_one)
   unfold IsLocalRing.depth Ideal.depth
-  rw [if_neg hproper]
+  rw [ite_eq_right hproper]
   split_ifs with hlocal
   · exact le_top
   · apply sSup_le

@@ -46,7 +46,7 @@ private theorem restriction₀_naturality
     Limits.FormalCoproduct.cosimplicialObjectFunctor,
     AlgebraicTopology.alternatingCofaceMapComplex,
     AlgebraicTopology.AlternatingCofaceMapComplex.map, Limits.FormalCoproduct.evalOp]
-  simp only [Category.assoc, Limits.Pi.lift_π, Limits.Pi.map_π, Limits.Pi.lift_π_assoc]
+  simp only [Category.assoc, Limits.Pi.lift_comp_π, Limits.Pi.map_π, Limits.Pi.lift_comp_π_assoc]
   exact f.naturality _
 
 private theorem restriction₀_d
@@ -67,9 +67,9 @@ private theorem restriction₀_d
     Preadditive.comp_add, Preadditive.comp_neg]
   apply Limits.Pi.hom_ext
   intro t
-  simp only [Preadditive.add_comp, Preadditive.neg_comp, Category.assoc, Limits.Pi.lift_π,
+  simp only [Preadditive.add_comp, Preadditive.neg_comp, Category.assoc, Limits.Pi.lift_comp_π,
     restriction₀, Limits.zero_comp]
-  erw [Limits.Pi.lift_π_assoc, Limits.Pi.lift_π_assoc]
+  erw [Limits.Pi.lift_comp_π_assoc, Limits.Pi.lift_comp_π_assoc]
   rw [← F.map_comp, ← F.map_comp]
   have hh :
       (MorphismProperty.Over.homMk (∏ᶜ fun l ↦ U ((t ∘ (0 : Fin 2).succAbove) l)).ι
@@ -169,7 +169,7 @@ theorem etaleAdditiveCech_alpha_quasiIso
       change (I.cocomplex.X q).obj.map t.inv.op ≫
         restriction₀ X U (I.cocomplex.X q).obj ≫ Limits.Pi.π _ y = _
       dsimp only [restriction₀]
-      erw [Limits.Pi.lift_π]
+      erw [Limits.Pi.lift_comp_π]
       rw [← Functor.map_comp]
       congr 1
       apply Quiver.Hom.unop_inj

@@ -104,8 +104,6 @@ lemma affineLine.lowerStar_map_adicConstantSheafToLowerStar_frobenius :
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullbackId]
-    erw [Category.id_comp, pullbackLeftPullbackSndIso_inv_fst]
-    simp
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullbackId]

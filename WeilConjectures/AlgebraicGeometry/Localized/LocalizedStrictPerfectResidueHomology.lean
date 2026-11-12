@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.LocalizedResidueHomology
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor

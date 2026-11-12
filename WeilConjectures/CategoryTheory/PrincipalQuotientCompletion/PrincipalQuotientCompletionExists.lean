@@ -51,6 +51,10 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
     (R : Sheaf J CommRingCat.{r})
 
+local instance (I : Type r) : HasColimitsOfShape (Discrete I)
+    (PresheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local instance] SheafOfModules.monoidalCategory
 private theorem tensorUnit_eq :
@@ -145,8 +149,8 @@ private theorem strictAugmentation_natural
       roosPmap ((quotientTower R t).map f) := by
     apply Pi.hom_ext
     intro n
-    simp only [quotientProduct, Category.assoc, Pi.lift_π, roosPmap, Pi.map_π,
-      Pi.lift_π_assoc]
+    simp only [quotientProduct, Category.assoc, Pi.lift_comp_π, roosPmap, Pi.map_π,
+      Pi.lift_comp_π_assoc]
     exact quotient_natural R t f n
   ext k : 1
   obtain ⟨p, hp'⟩ := (Equiv.addRight (1 : ℤ)).surjective k

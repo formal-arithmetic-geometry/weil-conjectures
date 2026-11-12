@@ -197,7 +197,7 @@ theorem kummerResidue_eq {χ : Gal(Ω/C.functionField) → ZMod N} (z : C) {ξ x
     kummerResidue C χ z ξ = (C.ord f z : ZMod N) := by
   have h : ∃ x : Ω, ∃ f : C.functionField, x ≠ 0 ∧ algebraMap C.functionField Ω f = x ^ N ∧
       ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x := ⟨x, f, hx, hf, hχ⟩
-  rw [kummerResidue, dif_pos h]
+  rw [kummerResidue, dite_eq_left h]
   obtain ⟨hx', hf', hχ'⟩ := h.choose_spec.choose_spec
   set x' := h.choose
   set f' := h.choose_spec.choose

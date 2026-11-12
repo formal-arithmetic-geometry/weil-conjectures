@@ -117,15 +117,10 @@ theorem cochainUniversalCounitTransport
         simp only [derivedCochainCounit, Iso.symm_hom, Iso.refl_hom,
           Functor.whiskerLeft_id', Category.id_comp, Category.assoc])).mp h
   · intro P
-    have h : (derivedCochainCounit F L ε).app P =
-        ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) := by
-      simp only [derivedCochainCounit, derivedCochainComparisonFactors, NatTrans.comp_app,
-        Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv,
-        Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-        Functor.associator_hom_app, Functor.associator_inv_app,
-        Category.id_comp, Category.comp_id]
-      change L.map (𝟙 _) ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
-      simp only [Functor.map_id, Category.id_comp, Category.comp_id]
-    rw [h]
+    dsimp only [derivedCochainCounit, derivedCochainComparisonFactors, NatTrans.comp_app,
+      Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv,
+      Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app]
+    simp only [isIso_comp_left_iff, isIso_comp_right_iff]
 
 end CategoryTheory

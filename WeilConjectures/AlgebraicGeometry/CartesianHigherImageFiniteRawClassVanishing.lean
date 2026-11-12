@@ -23,6 +23,14 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance cartesianHigherImageFiniteRawClassHasShift (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
+noncomputable local instance cartesianHigherImageFiniteRawClassHasZeroMorphisms (T : Scheme.{u}) :
+    HasZeroMorphisms (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
+  inferInstance
+
 /-- Finitely many raw derived classes killed by cartesian exchange are killed at a
 common later stage. This is the cohomological part of affine-section injectivity;
 it does not concern arbitrary homology sections or the sheafification comparison.

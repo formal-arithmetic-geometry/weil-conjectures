@@ -180,14 +180,12 @@ private theorem flat_quotient_range_of_ideal_preimage
   set π := (LinearMap.range φ).mkQ
   have hnat (y : M ⊗[R] J) : π (TensorProduct.rid R M (J.subtype.lTensor M y)) =
       TensorProduct.rid R C (J.subtype.lTensor C (π.rTensor J y)) := by
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add y y' h h' => simp only [map_add] at h h' ⊢; rw [h, h']
     | tmul m j => simp
   have hφnat (y : N ⊗[R] J) : φ (TensorProduct.rid R N (J.subtype.lTensor N y)) =
       TensorProduct.rid R M (J.subtype.lTensor M (φ.rTensor J y)) := by
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | add y y' h h' => simp only [map_add] at h h' ⊢; rw [h, h']
     | tmul m j => simp
   rw [injective_iff_map_eq_zero]

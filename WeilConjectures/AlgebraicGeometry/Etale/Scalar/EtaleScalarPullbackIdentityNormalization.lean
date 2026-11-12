@@ -74,7 +74,7 @@ private theorem exact_identity_unit
     (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} R) (𝟙 T) (𝟙 T) (𝟙 T)
           (Category.id_comp (𝟙 T)).symm) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom.app X ≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app X ≫
       (upperStar (ModuleCat.{u + 1} R) (𝟙 T)).mapDerivedCategory.map
         (((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} R) (𝟙 T)).symm ≪≫
           leftDerivedUpperStarId (ModuleCat.{u + 1} R) T).hom.app X) = 𝟙 _ := by
@@ -167,10 +167,10 @@ theorem leftDerivedUpperStarId_scalarExtension_normalization
       (scalarExtension φ T) (eA.symm ≪≫ iA) (eB.symm ≪≫ iB)
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) (𝟙 T) (𝟙 T) (𝟙 T)
-          (Category.id_comp (𝟙 T)).symm) ≪≫ Functor.mapDerivedCategoryCompIso _ _)
+          (Category.id_comp (𝟙 T)).symm) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm)
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} B) (𝟙 T) (𝟙 T) (𝟙 T)
-          (Category.id_comp (𝟙 T)).symm) ≪≫ Functor.mapDerivedCategoryCompIso _ _) t
+          (Category.id_comp (𝟙 T)).symm) ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm) t
       (exact_identity_unit A T) (exact_identity_unit B T)
       (fun X ↦ scalarPullback_composition φ (𝟙 T) (𝟙 T) (𝟙 T)
         (Category.id_comp (𝟙 T)) X) N

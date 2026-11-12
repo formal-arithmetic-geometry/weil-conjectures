@@ -324,7 +324,7 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
   have hψ (y : ℤ × G) : ψ y = y.2 - y.1 • x₀ := rfl
   let v : S → G := fun P ↦ ψ (T (Finsupp.single P.1 1))
   let Λ : AddSubgroup G := AddSubgroup.closure (Set.range v)
-  have hΛ : Λ.FG := ⟨(Set.finite_range v).toFinset, by simp [Λ]⟩
+  have hΛ : Λ.FG := AddSubgroup.isAddFG_iff.mpr ⟨(Set.finite_range v).toFinset, by simp [Λ]⟩
   let Θ : c.Z.Divisor →+ G ⧸ Λ := (QuotientAddGroup.mk' Λ).comp (ψ.comp T)
   -- `Θ` kills principal divisors and divisors supported on `S`
   have hΘS (D : c.Z.Divisor) (hD : Scheme.Divisor.comap c.i D = 0) : Θ D = 0 := by
@@ -381,7 +381,7 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
   have hext (D : C.Divisor) : Scheme.Divisor.comap c.i (ext D) = D := by
     ext P
     rw [Scheme.Divisor.comap_apply]
-    exact Finsupp.mapDomain_apply c.i.closedPointsMap_injective D P
+    exact Finsupp.mapDomain_apply_of_injective c.i.closedPointsMap_injective D P
   have hΘext (D : c.Z.Divisor) : Θ (ext (Scheme.Divisor.comap c.i D)) = Θ D := by
     rw [← sub_eq_zero, ← map_sub]
     exact hΘS _ (by rw [map_sub, hext, sub_self])

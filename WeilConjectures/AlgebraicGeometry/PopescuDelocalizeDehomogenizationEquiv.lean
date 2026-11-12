@@ -252,7 +252,7 @@ theorem popescu_delocalize_dehomogenization_equiv_exists
         simp only [Fin.val_succ, Fin.val_castSucc, Fin.val_castLE]
         have hi := i.isLt
         omega
-      simp only [aD, if_neg hi]
+      simp only [aD, ite_eq_right hi]
       rfl
     exact (AlgHom.congr_fun he (g j)).trans hz'
   have hφI : ∀ p ∈ I, φ p = 0 := by
@@ -333,10 +333,10 @@ theorem popescu_delocalize_dehomogenization_equiv_exists
     rw [hα]
     rw [show φ (X i) = aD i from MvPolynomial.aeval_X aD i]
     by_cases hi : scaled i
-    · simp only [aD, if_pos hi, map_mul, hβw, hβ]
+    · simp only [aD, ite_eq_left hi, map_mul, hβw, hβ]
       rw [show ψ (X i) = aB i from MvPolynomial.aeval_X aB i]
       simp [aB, hi, mul_assoc]
-    · simp only [aD, if_neg hi, hβ]
+    · simp only [aD, ite_eq_right hi, hβ]
       rw [show ψ (X i) = aB i from MvPolynomial.aeval_X aB i]
       simp [aB, hi]
   have hαβ : α.comp β = AlgHom.id R DL := by
@@ -348,12 +348,12 @@ theorem popescu_delocalize_dehomogenization_equiv_exists
     rw [hβ]
     rw [show ψ (X i) = aB i from MvPolynomial.aeval_X aB i]
     by_cases hi : scaled i
-    · simp only [aB, if_pos hi, map_mul, hαwi, hα]
+    · simp only [aB, ite_eq_left hi, map_mul, hαwi, hα]
       rw [show φ (X i) = aD i from MvPolynomial.aeval_X aD i]
       simp [aD, hi, mul_assoc]
-    · simp only [aB, if_neg hi, hα]
+    · simp only [aB, ite_eq_right hi, hα]
       rw [show φ (X i) = aD i from MvPolynomial.aeval_X aD i]
-      simp only [aD, if_neg hi]
+      simp only [aD, ite_eq_right hi]
   exact ⟨AlgEquiv.ofAlgHom α β hαβ hβα⟩
 
 end Algebra

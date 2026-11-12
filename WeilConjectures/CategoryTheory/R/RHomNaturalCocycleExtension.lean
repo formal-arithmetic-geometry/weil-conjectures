@@ -73,12 +73,17 @@ theorem extend_rhom_injective_cocycle_family
     obtain ⟨m, hm⟩ := J.2
     let := hm
     let : J.obj.IsKInjective := CochainComplex.isKInjective_of_injective J.obj m
+    let eQ := DerivedCategory.quotientCompQhIso C
     obtain ⟨g', hg'⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
-      ((HomotopyCategory.quotient C (.up ℤ)).obj I.obj) J.obj).surjective (U.map g)
+      ((HomotopyCategory.quotient C (.up ℤ)).obj I.obj) J.obj).surjective
+        (eQ.hom.app I.obj ≫ U.map g ≫ eQ.inv.app J.obj)
     obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient C (.up ℤ)).map_surjective g'
     have hg : Q.map (ObjectProperty.homMk φ) = g := by
       apply U.map_injective
-      exact hg'
+      change DerivedCategory.Q.map φ = U.map g
+      apply (cancel_epi (eQ.hom.app I.obj)).1
+      rw [← DerivedCategory.quotientCompQhIso_hom_naturality, hg', Category.assoc, Category.assoc]
+      erw [eQ.inv_hom_id_app, Category.comp_id]
     have h := F.natural I J hi hj n φ a
     change F.map J hj n ((H n).map (RV.map
       (Q.map (ObjectProperty.homMk φ))) a) =

@@ -573,6 +573,7 @@ lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOverAppTop_ap
       (x.1.appTop ≫ (ΓSpecIso (.of Ω)).hom).hom :=
   rfl
 
+
 /-- **Geometric points of a quotient over an affine base.** Let `K` be the action of a finite
 monoid `G` on a finite étale scheme `W` over an affine scheme `X`, with quotient `c`. Then the
 geometric points of the quotient over `s` are the classes of the geometric points of `W`:
@@ -764,6 +765,7 @@ lemma fiberEquivOfOpen_apply_left {U : Scheme.{u}} (f : U ⟶ Y) (s' : Spec (.of
     (hs' : s' ≫ f = s) (P : Y.FiniteEtale) (x : (pullback.snd P.obj.hom f).GeometricFiber s') :
     (fiberEquivOfOpen s f s' hs' P x).left = x.1 ≫ pullback.fst _ _ :=
   rfl
+
 
 /-- **The fibre functor preserves quotients**: the geometric points of the quotient of a finite
 étale `Y`-scheme by a finite monoid are the classes of its geometric points under the equivalence

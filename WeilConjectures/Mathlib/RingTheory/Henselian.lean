@@ -84,7 +84,7 @@ theorem HenselianLocalRing.of_exists_algHom_comap_maximalIdeal_eq
       q.comap (algebraMap R B) = maximalIdeal R →
         ∃ ψ : B →ₐ[R] R, (maximalIdeal R).comap ψ = q) :
     HenselianLocalRing R := by
-  refine ((HenselianLocalRing.TFAE R).out 1 0).mp fun f hf a₀ h₁ h₂ ↦ ?_
+  refine ((HenselianLocalRing.TFAE R).out 2 1).mp fun f hf a₀ h₁ h₂ ↦ ?_
   have hK : RingHom.ker (algebraMap R (ResidueField R)) = maximalIdeal R := by
     rw [ResidueField.algebraMap_eq, ker_residue]
   simpa [ResidueField.algebraMap_eq] using
@@ -209,6 +209,7 @@ theorem HenselianLocalRing.of_krullDimLE_zero {R : Type*} [CommRing R]
     [IsLocalRing R] [Ring.KrullDimLE 0 R] : HenselianLocalRing R :=
   henselianLocalRing_of_maximalIdeal_le_nilradical R
     (Ring.KrullDimLE.nilradical_eq_maximalIdeal (R := R)).ge
+
 
 /-- **Uniqueness of simple roots in a residue class.** Let `R` be a local ring with maximal ideal
 `𝔪`, `f : R[X]` and `a b : R` roots of `f` with `a - b ∈ 𝔪` and `f'(a) ∉ 𝔪`. Then `a = b`.

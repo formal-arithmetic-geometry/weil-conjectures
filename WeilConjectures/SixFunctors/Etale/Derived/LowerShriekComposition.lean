@@ -110,7 +110,7 @@ noncomputable def mapDerivedCategoryOpenImmersionLowerShriekComp (j' : V ⟶ U) 
     [IsOpenImmersion j'] [IsOpenImmersion j] :
     D((j' ≫ j)_!open[A]) ≅ D((j')_!open[A]) ⋙ D((j)_!open[A]) :=
   Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekComp A j' j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The isomorphism `D(j_!) ≅ D(j'_!)` of derived extensions by zero induced by an equality
 `j = j'` of open immersions. -/

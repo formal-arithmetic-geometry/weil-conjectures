@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.CategoryTheory.CanonicalResolutionDerivedIso
 public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 
@@ -60,7 +61,8 @@ theorem resolutionDerivedSingleUnit_augmentation
         (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor A 0).obj X))
         ((DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
           (DerivedCategory.quotientCompQhIso A).symm.app _)).inv ≫
-      (resolutionAugmentationIso I).hom =
+      (resolutionAugmentationIso I).hom ≫
+        (DerivedCategory.Plus.quotientCompQhIso A).inv.app LI =
       DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient A).map g) := by
     apply DerivedCategory.Plus.ι.map_injective
     simp only [resolutionAugmentationIso, Functor.map_comp, Functor.preimageIso_inv,
@@ -71,19 +73,20 @@ theorem resolutionDerivedSingleUnit_augmentation
     erw [(DerivedCategory.quotientCompQhIso A).inv.naturality]
     simp
     rfl
-  have hunit := F.rightDerivedFunctorPlusUnit.naturality
+  rw [← Category.assoc] at htransport
+  have hunit := F.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient A).map g)
   have hcancel : F.rightDerivedPlusSingleUnit X ≫ (resolutionDerivedIso F I).hom =
       (F.mapHomotopyCategoryPlusSingleFunctorQhObjIso 0 X).inv ≫
         DerivedCategory.Plus.Qh.map
-          (F.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient A).map g)) := by
+          (F.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient A).map g)) ≫
+        (DerivedCategory.Plus.quotientCompQhIso B).hom.app
+          (F.mapCochainComplexPlus.obj LI) := by
     dsimp [Functor.rightDerivedPlusSingleUnit, resolutionDerivedIso]
-    rw [Category.assoc, Category.assoc, ← Functor.map_comp_assoc, htransport]
+    rw [Category.assoc, Category.assoc, ← Functor.map_comp_assoc,
+      ← Functor.map_comp_assoc, htransport]
     dsimp only [Functor.comp_map] at hunit
-    erw [← Category.assoc _ _ (CategoryTheory.inv _), ← hunit]
-    change _ ≫ _ ≫ CategoryTheory.inv
-      (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient A).obj LI)) = _
-    erw [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+    erw [← reassoc_of% hunit, IsIso.hom_inv_id_assoc]
   let a := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).inv.app X ≫
     (F.mapHomologicalComplex (.up ℤ)).map I.ι' ≫
       (I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat F).hom
@@ -93,7 +96,7 @@ theorem resolutionDerivedSingleUnit_augmentation
       HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat (i := 0) (i' := 0) (by simp),
       Category.assoc]
     dsimp [a]
-    simp only [Functor.mapHomologicalComplex_map_f,
+    simp only [
       HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
       InjectiveResolution.ι'_f_zero, Functor.map_comp, Category.assoc]
     simp only [InjectiveResolution.cochainComplexXIso, Iso.inv_hom_id_assoc]
@@ -101,7 +104,6 @@ theorem resolutionDerivedSingleUnit_augmentation
     erw [reassoc_of% hφ]
     dsimp [InjectiveResolution.cochainComplexXIso, HomologicalComplex.mapExtendIso,
       HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
-    dsimp only [HomologicalComplex.Hom.isoOfComponents]
     erw [HomologicalComplex.mapExtendX_hom_eq I.cocomplex F
       (ComplexShape.embeddingUpNat.r_f 0)]
     simp [eqToHom_map]
@@ -109,28 +111,22 @@ theorem resolutionDerivedSingleUnit_augmentation
   rw [← Category.assoc, hcancel]
   apply DerivedCategory.Plus.ι.map_injective
   simp only [Functor.map_comp, Functor.mapHomotopyCategoryPlusSingleFunctorQhObjIso,
-    Functor.preimageIso_inv, Functor.map_preimage, Functor.mapIso_inv,
+    Functor.preimageIso_inv, Functor.map_preimage,
     resolutionAugmentationIso, Functor.preimageIso_hom]
   dsimp
-  change (DerivedCategory.Q.map _ ≫
+  simp only [Category.assoc]
+  change DerivedCategory.Q.map _ ≫ (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
       DerivedCategory.Qh.map
         (F.mapHomotopyCategory (.up ℤ) |>.map
-          ((HomotopyCategory.quotient A (.up ℤ)).map I.ι'))) ≫
-      DerivedCategory.Q.map _ = _
+          ((HomotopyCategory.quotient A (.up ℤ)).map I.ι')) ≫
+      (DerivedCategory.quotientCompQhIso B).hom.app _ ≫ DerivedCategory.Q.map _ = _
   rw [Functor.mapHomotopyCategory_map]
-  have hn := (DerivedCategory.quotientCompQhIso B).inv.naturality
-    (HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat)
-  dsimp at hn
-  change _ = ((DerivedCategory.singleFunctorIsoCompQ B 0).hom.app (F.obj X) ≫
-      DerivedCategory.Q.map J.ι' ≫ (DerivedCategory.quotientCompQhIso B).inv.app _) ≫
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient B _).map
-        (HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat))
-  simp only [Category.assoc]
-  erw [← hn]
-  simp only [← Functor.map_comp_assoc, ha]
+  simp only [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  erw [Iso.inv_hom_id_app_assoc]
   change DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ =
-    𝟙 _ ≫ DerivedCategory.Q.map a ≫ 𝟙 _
-  simp only [Category.id_comp, Category.comp_id, ← Functor.map_comp]
+    𝟙 _ ≫ DerivedCategory.Q.map J.ι' ≫
+      DerivedCategory.Q.map (HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat)
+  simp only [Category.id_comp, ← Functor.map_comp, ha]
   rfl
 
 end CategoryTheory

@@ -38,7 +38,7 @@ variable {C : Type*} [Category.{v} C] [Abelian C] (F : C ⥤ C) [F.Additive] [F.
 
 /-- The derived structure isomorphism commutes with the shifts. -/
 instance commShift_derivedStrIso_hom : NatTrans.CommShift (derivedStrIso F).hom ℤ := by
-  rw [show (derivedStrIso F).hom = (Functor.mapDerivedCategoryCompIso (forget F) F).symm.hom ≫
+  rw [show (derivedStrIso F).hom = (Functor.mapDerivedCategoryCompIso (forget F) F).hom ≫
     (Functor.mapDerivedCategoryNatIso (strNatIso F)).hom from rfl]
   infer_instance
 
@@ -63,9 +63,9 @@ lemma derivedStrIso_hom_app_singleFunctor_obj (K : IsoAlgebra F) :
   have h1 := Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor (strNatIso F) K
   have h2 := Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor (forget F) F K
   simp only [strNatIso_hom_app] at h1
-  simp only [derivedStrIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [derivedStrIso, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [h1, ← h2]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 end CategoryTheory.Endofunctor.IsoAlgebra

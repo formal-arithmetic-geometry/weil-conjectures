@@ -91,7 +91,7 @@ theorem isIso_derivedPlus_unit_app_of_rightAcyclic
     exact isIso_of_fully_faithful (HomotopyCategory.Plus.ι C) _
   let LT : CochainComplex.Plus D := ⟨(L.mapHomotopyCategoryPlus.obj K').obj.as,
     (HomotopyCategory.plus_quotient_obj_iff _).1 (L.mapHomotopyCategoryPlus.obj K').property⟩
-  have hR : IsIso (R.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj K')) :=
+  have hR : IsIso (R.rightDerivedFunctorPlusUnith.app (L.mapHomotopyCategoryPlus.obj K')) :=
     R.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic LT (fun n ↦ h₂ (T'.obj.X n))
   have hfac := adj.derivedPlus_unit_app_fac K'
   have : IsIso (adj.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj K') ≫

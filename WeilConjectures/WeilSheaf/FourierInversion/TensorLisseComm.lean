@@ -45,10 +45,10 @@ theorem WeilComplex.nonempty_iso_tensorLisse_comm {X : Scheme.{u}}
       Functor.isoWhiskerLeft _
         (Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _) _ ≪≫
           Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorIsoMapDerivedCategory _) ≪≫
-          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (ProEtaleWeilSheaf.ihomFunctorCompIhomFunctorIso (H.dual hH).obj (G.dual hG).obj) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _ ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
           Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm ≪≫
           Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory _).symm _) ≪≫
       (Functor.associator _ _ _).symm ≪≫

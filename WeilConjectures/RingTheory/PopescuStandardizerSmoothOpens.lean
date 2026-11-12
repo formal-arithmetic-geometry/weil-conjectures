@@ -155,7 +155,7 @@ theorem popescu_standardizer_coefficient_smooth
         MvPolynomial.eval₂Hom_C, xs, Sum.elim_inl, Sum.elim_inr,
         AlgHom.toRingHom_eq_coe, RingHom.coe_coe]
       simp only [z', add_mul, Finset.sum_add_distrib, ite_mul, zero_mul,
-        Finset.sum_ite_eq', Finset.mem_univ, if_true]
+        Finset.sum_ite_eq', Finset.mem_univ, ite_true]
       rw [← hu', mul_assoc, Units.inv_mul, mul_one]
       dsimp only [ε]
       ring
@@ -178,7 +178,7 @@ theorem popescu_standardizer_coefficient_smooth
       exact u.isUnit
     let ψ : L →ₐ[S] T := IsLocalization.Away.liftAlgHom b hφunit
     refine ⟨ψ, ?_⟩
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply IsLocalization.ringHom_ext (Submonoid.powers b)
     apply RingHom.ext
     intro x

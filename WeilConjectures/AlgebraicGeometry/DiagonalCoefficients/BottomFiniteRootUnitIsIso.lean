@@ -58,7 +58,7 @@ private theorem cyclic_tensor_insertion_isIso (N : ℕ)
     intro r m
     change (1 : R) ⊗ₜ[ℤ] (r • m) = r ⊗ₜ[ℤ] m
     obtain ⟨z, hz⟩ := ZMod.intCast_surjective r.down
-    have hr : r = (z : R) := ULift.ext _ _ hz.symm
+    have hr : r = (z : R) := ULift.ext hz.symm
     rw [hr, Int.cast_smul_eq_zsmul, TensorProduct.tmul_smul,
       TensorProduct.smul_tmul', Int.smul_one_eq_cast]
   exact ⟨⟨j, hij, hji⟩⟩

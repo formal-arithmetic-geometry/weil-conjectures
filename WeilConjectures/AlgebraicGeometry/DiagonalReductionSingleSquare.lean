@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
-attribute [local implicit_reducible] DerivedCategory.singleFunctors
-  HomotopyCategory.singleFunctors CochainComplex.singleFunctors
+attribute [local implicit_reducible] HomotopyCategory.singleFunctors
 
 /-- Termwise application preserves finite limits, since it preserves each finite
 limit shape pointwise. Source: Mathlib pointwise functor limits.
@@ -123,11 +122,12 @@ theorem diagonalReduction_single_square
         (K'.ordinary.E.mapHomologicalComplex (.up ℤ)).map
           ((F.mapCochainComplexSingleFunctor 0).hom.app M) ≫
         (K'.ordinary.E.mapCochainComplexSingleFunctor 0).hom.app (F.obj M) := by
-    ext i : 1
+    apply HomologicalComplex.hom_ext
+    intro i
     by_cases hi : i = 0
     · subst i
       simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
-        CochainComplex.singleFunctors, HomologicalComplex.singleObjXSelf,
+        HomologicalComplex.singleObjXSelf,
         HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.single, P]
     · exact (V.map_isZero (K.ordinary.E.map_isZero
         (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M i hi))).eq_of_src _ _

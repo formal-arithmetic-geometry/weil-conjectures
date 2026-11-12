@@ -40,10 +40,7 @@ private theorem pullbackComp_inv_fst {X Y Z : Scheme.{w}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (W : Over Z) :
     ((Over.pullbackComp f g).inv.app W).left ≫ pullback.fst W.hom (f ≫ g) =
       pullback.fst (pullback.snd W.hom g) f ≫ pullback.fst W.hom g := by
-  have H := conjugateEquiv_counit ((Over.mapPullbackAdj f).comp (Over.mapPullbackAdj g))
-    (Over.mapPullbackAdj (f ≫ g)) (Over.mapComp f g).hom W
-  simpa [Over.pullbackComp, Adjunction.comp_counit_app] using
-    congrArg (fun k ↦ k.left) H
+  simp [Over.pullbackComp, Adjunction.comp_counit_app]
 
 private theorem comparison_fst {X Y Z : Scheme.{w}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (h : f ≫ g = k) (W : Over Z) :
@@ -895,7 +892,7 @@ private theorem finite_cofan_stage
       calc
         _ = B.map (ι r a.as) := hp.fac _ a
         _ = B.map (Sigma.ι (V r) a.as) ≫ B.map (q r) :=
-          (congrArg B.map (Sigma.ι_desc (ι r) a.as)).symm.trans
+          (congrArg B.map (Sigma.ι_comp_desc (ι r) a.as)).symm.trans
             (B.map_comp (Sigma.ι (V r) a.as) (q r))
     have hiso : IsIso (B.map (q r)) := by
       rw [← hdesc]
@@ -917,7 +914,7 @@ private theorem finite_cofan_stage
     calc
       _ = B.map (ι r a.as) := hp.fac _ a
       _ = B.map (Sigma.ι (V r) a.as) ≫ B.map (q r) :=
-        (congrArg B.map (Sigma.ι_desc (ι r) a.as)).symm.trans
+        (congrArg B.map (Sigma.ι_comp_desc (ι r) a.as)).symm.trans
           (B.map_comp (Sigma.ι (V r) a.as) (q r))
   rw [hdesc]
   infer_instance

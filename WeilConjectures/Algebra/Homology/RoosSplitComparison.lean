@@ -41,8 +41,8 @@ private theorem transition_isSplitEpi
   intro n
   simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
     Category.comp_id, Preadditive.sub_comp, Category.assoc,
-    Limits.Pi.lift_π, Category.id_comp]
-  rw [Limits.Pi.lift_π_assoc, ha]
+    Limits.Pi.lift_comp_π, Category.id_comp]
+  rw [Limits.Pi.lift_comp_π_assoc, ha]
   simp
 
 private noncomputable abbrev towerProductComplex
@@ -85,7 +85,7 @@ private theorem cofiber_biprod_snd
       biprod.snd = HomologicalComplex.homotopyCofiber.sndX f p := by
   obtain rfl := (ComplexShape.up ℤ).next_eq' h
   dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-  rw [dif_pos h]
+  rw [dite_eq_left h]
 
 @[reassoc]
 private theorem cofiber_biprod_fst

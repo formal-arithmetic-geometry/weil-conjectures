@@ -241,7 +241,7 @@ lemma apply_eq_apply_zero_of_forall_sub_one {F : ULift.{u + 1} (ZMod m) → A}
     (a : ULift.{u + 1} (ZMod m)) : F a = F 0 := by
   have key (k : ℕ) : F ⟨-(k : ZMod m)⟩ = F 0 := by
     induction k with
-    | zero => exact congrArg F (ULift.ext _ _ (by simp))
+    | zero => exact congrArg F (ULift.ext (by simp))
     | succ k ih =>
       rw [← ih, ← h ⟨-(k : ZMod m)⟩]
       congr 1
@@ -309,7 +309,7 @@ lemma exists_of_gmDiff_eq_zero (x : t.pushforwardGm.obj.obj (op U)) (hx : m • 
     change m • t.localUnits σ hσ 0 x = 0
     rw [← map_nsmul, hx, map_zero]
   refine ⟨ULift.up c, ?_, ?_, ?_⟩
-  · exact ULift.ext _ _ hc
+  · exact ULift.ext hc
   · refine t.localUnits_injective σ hσ fun a ↦ ?_
     rw [localUnits_unit]
     exact (hF a).symm
@@ -369,7 +369,7 @@ lemma isIso_muUnit : IsIso t.muUnit := by
         have h' := congrArg (t.localUnits (pullback.snd U.unop.hom t.π)
           (t.coverObj_section U.unop) 0) h
         rw [localUnits_unit, localUnits_unit] at h'
-        exact ULift.ext _ _ h'⟩
+        exact ULift.ext h'⟩
     exact Sheaf.mono_of_isLocallyInjective _
   have : Mono t.muUnit := by
     have : Mono (t.muUnit ≫ kernel.ι t.muDiff ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) := by
@@ -416,7 +416,7 @@ lemma transl_succ (i : ℕ) : t.transl (i + 1) = t.transl i ≫ t.pushforwardGmT
 
 lemma transl_self : t.transl m = 𝟙 _ := by
   have : m • (1 : ULift.{u + 1} (ZMod m)) = 0 :=
-    ULift.ext _ _ (by change m • (1 : ZMod m) = 0; simp)
+    ULift.ext (by change m • (1 : ZMod m) = 0; simp)
   rw [transl, this, pushforwardGmTranslate_zero]
 
 /-- `ρ = ∑_{i < m} i • τ^i` on `π_* 𝔾ₘ`. -/

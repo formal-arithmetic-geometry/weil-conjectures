@@ -67,6 +67,9 @@ theorem affineDerivedSections_truncGE_isIso (A : Type u) [CommRing A]
   let V := forget₂ (ModuleCat.{u} A) AddCommGrpCat.{u}
   let F := S ⋙ V
   let : HasDerivedCategory AddCommGrpCat.{u} := HasDerivedCategory.standard _
+  have : Limits.PreservesLimitsOfShape (Discrete ℕ)
+      (ModuleCat.restrictScalars.{u} (Scheme.ΓSpecIso (.of A)).inv.hom) :=
+    ⟨fun {_} ↦ inferInstance⟩
   have : Limits.PreservesLimitsOfShape (Discrete ℕ) F := by
     dsimp [F, S, RingedSpace.globalSectionsFunctor]
     infer_instance

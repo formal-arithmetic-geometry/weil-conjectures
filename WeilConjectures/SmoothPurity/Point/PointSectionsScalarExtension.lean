@@ -572,8 +572,7 @@ private noncomputable def pointTensorSquareIso
       map_add' := fun x y ↦ et.map_add x y
       map_smul' := ?_ }
   intro b x
-  induction x using TensorProduct.induction_on with
-  | zero => simp only [smul_zero, map_zero]
+  induction x using TensorProduct.inductionOn with
   | tmul c m =>
     change ej (b * (show B from c)) ⊗ₜ[R, g] m =
       ej b • (ej (show B from c) ⊗ₜ[R, g] m)
@@ -720,12 +719,12 @@ noncomputable def pointDerivedSectionsTensor :
     pointCompletedDerivedSections k l E ⋙ pointIntegralModuleDerivedTensor l E L ι ≅
       completedDerivedScalarExtension.{u, u} l E L ι (Spec (.of k)) ⋙
         pointCompletedDerivedSections k l L :=
-  (Functor.mapDerivedCategoryCompIso
-    (pointCompletedSections k l E) (pointIntegralModuleTensor l E L ι)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso
+    (pointCompletedSections k l E) (pointIntegralModuleTensor l E L ι) ≪≫
     Functor.mapDerivedCategoryNatIso (pointSectionsTensor k l E L ι) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k)))
-      (pointCompletedSections k l L) ≪≫
+      (pointCompletedSections k l L)).symm ≪≫
     Functor.isoWhiskerRight (pointOrdinaryDerivedComparison k l E L ι).symm
       (pointCompletedDerivedSections k l L)
 
@@ -889,12 +888,12 @@ Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-ext
 noncomputable def pointDerivedTensorRationalization :
     pointIntegralModuleDerivedTensor l E L ι ⋙ pointModuleDerivedRationalization l L ≅
       pointModuleDerivedRationalization l E ⋙ pointCoefficientFieldDerivedTensor l E L ι :=
-  (Functor.mapDerivedCategoryCompIso
-    (pointIntegralModuleTensor l E L ι) (pointModuleRationalization l L)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso
+    (pointIntegralModuleTensor l E L ι) (pointModuleRationalization l L) ≪≫
       Functor.mapDerivedCategoryNatIso
         (pointTensorRationalization_existsUnique l E L ι).exists.choose ≪≫
-      Functor.mapDerivedCategoryCompIso
-        (pointModuleRationalization l E) (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom)
+      (Functor.mapDerivedCategoryCompIso
+        (pointModuleRationalization l E) (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom)).symm
 
 set_option backward.isDefEq.respectTransparency true
 

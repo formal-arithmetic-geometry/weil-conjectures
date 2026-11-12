@@ -155,8 +155,7 @@ private theorem integralCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l
   exact (A.integral_normalization n.unop U s x).trans
     (C.integral_residues n.unop U s x).symm
 
--- The section topology on `Coefficient` is the normed one, not the transferred `Shrink` one.
-attribute [-instance] Shrink.instTopologicalSpace in
+set_option backward.isDefEq.respectTransparency false in
 /-- The two maps out of the raw completed coefficient ring agree before passing to
 module categories. This is a statement only about coefficient ring sheaves.
 
@@ -200,7 +199,5 @@ theorem finiteCondensedIntegralCoefficientSquare (A : FiniteCondensedData l X)
   erw [integralCoefficientSquare l X _ _ (A.realization E) C]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   erw [hi, finiteCondensedNativeLeg l X A E C]
-  erw [Category.assoc, Iso.hom_inv_id_assoc]
-  rfl
 
 end WeilConjectures.LocallyFiniteAdicRealization

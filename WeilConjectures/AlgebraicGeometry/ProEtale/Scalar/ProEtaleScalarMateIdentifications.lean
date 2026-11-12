@@ -26,6 +26,8 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -228,17 +230,17 @@ def IsScalarMateDerivedTensor {A B : Type u} [CommRing A] [CommRing B]
       a.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P)) (DerivedCategory.Q.map q)) ≫
       h.inv.app (DerivedCategory.Q.obj P) ≫
       (scalarMateRestriction φ W).mapDerivedCategory.map
-        ((Scheme.proEtaleRingDerivedExtensionCounit
+        (cast (by rfl) ((Scheme.proEtaleRingDerivedExtensionCounit
           (Scheme.proEtaleConstantRingMap (T := W) φ)).app
-            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ≫
+            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) ≫
       (scalarMateRestriction φ W).mapDerivedCategoryFactorsh.hom.app
         (((Scheme.proEtaleRingExtension
           (Scheme.proEtaleConstantRingMap (T := W) φ)).mapHomotopyCategory (ComplexShape.up ℤ)).obj
             ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) =
-    DerivedCategory.Q.map
+    cast (by rfl) (DerivedCategory.Q.map
       (HomologicalComplex.mapBifunctorMap (𝟙 P) q
         (Scheme.proEtaleOrdinaryTensor W (Scheme.proEtaleConstantRing W A))
-        (ComplexShape.up ℤ) ≫ (scalarMateOrdinaryComplexIso φ W P).inv)
+        (ComplexShape.up ℤ) ≫ (scalarMateOrdinaryComplexIso φ W P).inv))
 
 /-- The restricted extension is the derived tensor with B, with its full normalization.
 Source: Stacks 06YY, 07A4 (blueprint: def-sp-proetale-scalar-mate-identifications).

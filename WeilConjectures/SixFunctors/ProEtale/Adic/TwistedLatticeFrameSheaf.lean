@@ -94,11 +94,11 @@ noncomputable def frameEvalHom (k : ℕ) (i : Fin N) :
     { app U := AddCommGrpCat.ofHom
         { toFun σ := ULift.up ⟨frameCoord k i U.unop σ,
             (isLocallyConstant_frameCoord k i U.unop σ).continuous⟩
-          map_zero' := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_zero (towerEquiv l k))
-          map_add' σ τ := ULift.ext _ _ (ContinuousMap.ext fun _ ↦ map_add (towerEquiv l k) _ _) }
+          map_zero' := ULift.ext (ContinuousMap.ext fun _ ↦ map_zero (towerEquiv l k))
+          map_add' σ τ := ULift.ext (ContinuousMap.ext fun _ ↦ map_add (towerEquiv l k) _ _) }
       naturality U U' g := by
         ext σ
-        refine ULift.ext _ _ (ContinuousMap.ext fun u ↦ ?_)
+        refine ULift.ext (ContinuousMap.ext fun u ↦ ?_)
         have := congrFun (frameEval_comp_eq (f := f) U.unop.hom rfl g.unop.left
           ((Category.assoc _ _ _).symm.trans (congrArg (· ≫ f) (MorphismProperty.Over.w g.unop)))
           (a' := U'.unop.hom) rfl (MorphismProperty.Over.w g.unop) σ.1) u
@@ -169,7 +169,7 @@ lemma frameExtHom_hom_app_apply (k : ℕ) (i : Fin N) (U : V.ProEtᵒᵖ)
 lemma frameEvalHom_frameExtHom (k : ℕ) (i j : Fin N) :
     frameExtHom hγ k i ≫ frameEvalHom k j = if i = j then 𝟙 _ else 0 := by
   ext U x
-  refine ULift.ext _ _ (ContinuousMap.ext fun u ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun u ↦ ?_)
   have h := congrFun (frameEval_frameExt (f := f) U.unop.hom rfl (hγ.isDescentCocycle_int k)
     (fun u ↦ (Pi.single i ((towerEquiv l k).symm (x.down u)) : LevelModule.{u} l N k))) u
   change towerEquiv l k (frameEval f U.unop.hom rfl (frameExt f U.unop.hom rfl
@@ -204,7 +204,8 @@ lemma sum_frameEvalHom_frameExtHom (k : ℕ) :
     ∑ i, frameEvalHom k i ≫ frameExtHom hγ k i = 𝟙 ((frameTower f γ).obj (op k)) := by
   refine frameEvalHom_ext fun j ↦ ?_
   simp only [Preadditive.sum_comp, Category.assoc, frameEvalHom_frameExtHom, Category.id_comp]
-  rw [Finset.sum_eq_single j (fun b _ hb ↦ by rw [if_neg hb, comp_zero]) (by simp), if_pos rfl,
+  rw [Finset.sum_eq_single j (fun b _ hb ↦ by rw [ite_eq_right hb, comp_zero]) (by simp),
+    ite_eq_left rfl,
     Category.comp_id]
 
 /-- The restriction to `V` of the pro-étale tower, at level `k`, as a direct sum of copies of
@@ -236,7 +237,7 @@ lemma frameEvalHom_naturality {k k' : ℕ} (h : k' ≤ k) (i : Fin N) :
     (frameTower f γ).map (homOfLE h).op ≫ frameEvalHom k' i =
       frameEvalHom k i ≫ (zmodPowAbSheafDiagram V l).map (homOfLE h).op := by
   ext U σ
-  refine ULift.ext _ _ (ContinuousMap.ext fun u ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun u ↦ ?_)
   exact towerEquiv_towerFactor l h _
 
 /-- **The restriction to `V` of the pro-étale tower is the constant tower `(ℤ/ℓᵏ)_V^N`.** -/

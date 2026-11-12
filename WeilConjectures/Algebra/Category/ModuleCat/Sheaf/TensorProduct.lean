@@ -49,6 +49,11 @@ open scoped ChangeOfRings
 variable {R₁ R₂ : Sheaf J CommRingCat.{u}} (α : R₁ ⟶ R₂)
   (M : SheafOfModules.{u} (𝓡 R₁))
 
+local instance {X Y : Cᵒᵖ} (f : X ⟶ Y) :
+    Module (R₁.obj.obj Y)
+      ((ModuleCat.restrictScalars ((𝓡 R₁).obj.map f).hom).obj (M.val.obj Y)) :=
+  inferInstanceAs (Module (R₁.obj.obj Y) (M.val.obj Y))
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The sectionwise tensor restriction exists. Source: Stacks, Tag 03EK
 (blueprint: def-pur-sheaf-tensor-product).

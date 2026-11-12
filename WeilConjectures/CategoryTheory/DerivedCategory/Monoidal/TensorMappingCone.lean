@@ -42,7 +42,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [Abelian.HasFunctorialFlatResolution A]
   {R : Type*} [CommRing R] [Linear R A] [MonoidalLinear R A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_tensorMappingCone
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 omit [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] [MonoidalCategory A]
   [MonoidalClosed A] [MonoidalPreadditive A] [BraidedCategory A]

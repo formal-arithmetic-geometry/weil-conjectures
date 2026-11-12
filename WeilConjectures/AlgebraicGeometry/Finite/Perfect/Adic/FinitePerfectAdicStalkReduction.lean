@@ -37,9 +37,9 @@ private def finitePerfectAdic_pullback_constant_model
       (constantSheaf W.smallEtaleTopology (ModuleCat.{t + 1} B)).mapDerivedCategory.obj E :=
   ((Functor.mapDerivedCategoryNatIso
     (AlgebraicGeometry.Etale.upperStarComp (ModuleCat.{t + 1} B) g f h hg.symm)).app K) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
+    ((Functor.mapDerivedCategoryCompIso _ _).app K).symm ≪≫
     (AlgebraicGeometry.Etale.upperStar (ModuleCat.{t + 1} B) g).mapDerivedCategory.mapIso e ≪≫
-    ((Functor.mapDerivedCategoryCompIso _ _).app E).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).app E ≪≫
     (Functor.mapDerivedCategoryNatIso
       (upperStarConstantSheafIso (ModuleCat.{t + 1} B) g)).app E
 

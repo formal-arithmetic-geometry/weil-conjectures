@@ -288,10 +288,7 @@ private noncomputable def tateLocalizedTensorIso
   change T.map f ≫ eqToHom (ho K') = eqToHom (ho K) ≫ G.map f
   rw [comp_eqToHom_iff, Category.assoc]
   apply (conj_eqToHom_iff_heq _ _ (ho K) (ho K')).mpr
-  induction f using TensorProduct.induction_on with
-  | zero =>
-    rw [hq, map_zero, Functor.map_zero]
-    exact (conj_eqToHom_iff_heq _ _ (ho K) (ho K')).mp (by simp)
+  induction f using TensorProduct.inductionOn with
   | tmul c f =>
     exact (ht K K' c f).trans
       (heq_of_eq (LinearMap.baseChange_tmul (F.mapLinearMap R) c f).symm)
@@ -411,8 +408,8 @@ private theorem tateIntegralLineProduct
   let PG : (IntegralOnSlice.Good ℓ E X none).FullSubcategory :=
     ⟨(integralLineSingle ℓ E X).obj P, tateLineGood X ℓ E P⟩
   let hT := (tateLineGood X ℓ E T).1
-  have ep : DerivedCategory.Q.obj PG.obj ≅ K.obj :=
-    ((DerivedCategory.singleFunctorIsoCompQ _ 0).app P).symm
+  have ep :=
+    ((DerivedCategory.singleFunctorIsoCompQ (integralTowerModules ℓ E X) 0).app P).symm
   have hc : IntegralOnSlice.IsComplete ℓ E X none K.obj :=
     CompletedLineTensor.intrinsic_complete ℓ E X K
   have hi := IntegralLineReduction.comparison_isIso ℓ E X hX L (-m) K.obj hc

@@ -67,8 +67,7 @@ theorem changeOfRings_addHom_ext_tmul {T : Type*} [AddCommGroup T] (W : Cᵒᵖ)
   subst h
   change F₁ ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W p) =
     F₂ ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app W p)
-  induction p using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction p using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m => exact hF s m
 

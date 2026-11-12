@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefOpenTensorEvaluationData
 import all WeilConjectures.AlgebraicGeometry.Geometric.GeometricTensorEvaluation
 import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluation
@@ -59,7 +61,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   SemilinearSections.moduleAbelian SemilinearSections.hasDerived
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
   SemilinearSections.systemRing SemilinearSections.ringPresheaf SemilinearSections.rings
-  SemilinearSections.evaluation Functor.mapHomologicalComplex
+  SemilinearSections.evaluation
   SheafOfModules.pushforward SheafOfModules.restrictScalars
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars

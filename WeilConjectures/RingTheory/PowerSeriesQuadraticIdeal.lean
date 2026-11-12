@@ -86,7 +86,7 @@ theorem mem_span_X_sq_of_coeff_eq_zero (σ : Type u) [Finite σ]
       if h : ∃ p, pair p ≤ m then h.choose else Classical.choice inferInstance
     have hpick (m : σ →₀ ℕ) (hm : ∃ p, pair p ≤ m) : pair (pick m) ≤ m := by
       dsimp only [pick]
-      rw [dif_pos hm]
+      rw [dite_eq_left hm]
       exact hm.choose_spec
     let g (p : σ × σ) : MvPowerSeries σ R := fun d ↦
       if pick (d + pair p) = p then coeff (d + pair p) f else 0
@@ -98,26 +98,26 @@ theorem mem_span_X_sq_of_coeff_eq_zero (σ : Type u) [Finite σ]
       · have hm' := hpick m hm
         rw [Finset.sum_eq_single (pick m)]
         · change coeff m f = coeff m (monomial (pair (pick m)) 1 * g (pick m))
-          rw [coeff_monomial_mul, if_pos hm', one_mul]
+          rw [coeff_monomial_mul, ite_eq_left hm', one_mul]
           change coeff m f = if pick (m - pair (pick m) + pair (pick m)) = pick m
             then coeff (m - pair (pick m) + pair (pick m)) f else 0
-          rw [tsub_add_cancel_of_le hm', if_pos rfl]
+          rw [tsub_add_cancel_of_le hm', ite_eq_left rfl]
         · intro p _ hp
           change coeff m (monomial (pair p) 1 * g p) = 0
           rw [coeff_monomial_mul]
           by_cases hpm : pair p ≤ m
-          · rw [if_pos hpm, one_mul]
+          · rw [ite_eq_left hpm, one_mul]
             change (if pick (m - pair p + pair p) = p
               then coeff (m - pair p + pair p) f else 0) = 0
-            rw [tsub_add_cancel_of_le hpm, if_neg (Ne.symm hp)]
-          · rw [if_neg hpm]
+            rw [tsub_add_cancel_of_le hpm, ite_eq_right (Ne.symm hp)]
+          · rw [ite_eq_right hpm]
         · simp
       · rw [hlow m hm]
         apply Eq.symm
         apply Finset.sum_eq_zero
         intro p _
         change coeff m (monomial (pair p) 1 * g p) = 0
-        rw [coeff_monomial_mul, if_neg (fun hp ↦ hm ⟨p, hp⟩)]
+        rw [coeff_monomial_mul, ite_eq_right (fun hp ↦ hm ⟨p, hp⟩)]
     rw [hsum]
     apply Submodule.sum_mem
     intro p _

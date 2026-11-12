@@ -161,8 +161,7 @@ theorem residueField_mapBaseChange_injective_of_formallySmoothAdic
             rw [hy, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
       have hsquare (x : TensorProduct k K (KaehlerDifferential ℤ k)) :
           g (iota x) = lambdaMap (f x) := by
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul x y =>
           simp only [hiota, g, f, LinearMap.lTensor_tmul]
           rw [hlambda_tmul]

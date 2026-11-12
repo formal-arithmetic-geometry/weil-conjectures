@@ -182,7 +182,7 @@ theorem strictPerfect_tensor_local_cohomology
     exact (RingedSpace.coherent_kernel_cokernel_sum U.toScheme.toRingedSpace).2.2.2.2
       _ _ ((Modules.overFunctorEquiv U).app (G.X n)).symm hc
   let eP : R.mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P :=
-    (Functor.mapDerivedCategoryCompIso S A).app E ≪≫
+    (Functor.mapDerivedCategoryCompIso S A).symm.app E ≪≫
       A.mapDerivedCategory.mapIso e ≪≫ A.mapDerivedCategoryFactors.app K
   let eN : R.mapDerivedCategory.obj (DerivedCategory.Q.obj G) ≅
       DerivedCategory.Q.obj N := R.mapDerivedCategoryFactors.app G

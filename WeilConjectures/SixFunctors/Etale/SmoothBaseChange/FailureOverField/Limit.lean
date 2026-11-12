@@ -479,7 +479,7 @@ lemma Etale.mem_iSup_range_sheafFiber_map_upperStar {S X : Scheme.{u}} (p : X �
     intro y
     obtain ⟨i, y', rfl⟩ := h s y
     refine ⟨((S.uliftPointSmallEtale s).sheafFiber.map (Sigma.ι M i)).hom y', ?_⟩
-    rw [← ModuleCat.comp_apply, ← Functor.map_comp, Sigma.ι_desc]
+    rw [← ModuleCat.comp_apply, ← Functor.map_comp, Sigma.ι_comp_desc]
   have hQ : IsZero (cokernel σ) := by
     have : IsIso (0 : cokernel σ ⟶ cokernel σ) := by
       refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
@@ -518,7 +518,7 @@ lemma Etale.mem_iSup_range_sheafFiber_map_upperStar {S X : Scheme.{u}} (p : X �
   rw [← LinearMap.range_comp, ← ModuleCat.hom_comp]
   change LinearMap.range ((X.uliftPointSmallEtale x).sheafFiber.map
     (((p)^*[ModuleCat.{u + 1} Λ]).map (Sigma.ι M i)) ≫ _).hom ≤ _
-  rw [← Functor.map_comp, ← Functor.map_comp, Sigma.ι_desc]
+  rw [← Functor.map_comp, ← Functor.map_comp, Sigma.ι_comp_desc]
 
 section StageFunctor
 

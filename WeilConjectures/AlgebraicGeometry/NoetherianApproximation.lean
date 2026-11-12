@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
@@ -76,6 +77,7 @@ theorem exists_isLimit_isNoetherian_Spec :
     fun i ↦ inferInstanceAs (IsNoetherian (Spec ((finsetSubringDiagram A).obj i.unop))),
     fun f ↦ inferInstanceAs (IsAffineHom (Spec.map ((finsetSubringDiagram A).map f.unop)))⟩
 
+
 section Constructible
 
 open _root_.PrimeSpectrum Topology
@@ -108,6 +110,8 @@ theorem exists_finset_isConstructible_comap_eq {s : Set (PrimeSpectrum A)}
   conv_rhs => rw [← Finset.attach_image_val (s := S)]
   refine Finset.image_congr fun C _ ↦ ?_
   rfl
+
+
 
 
 /-- A basic constructible set `V(g) \ V(f)` is empty iff `f` lies in the radical of `(g)`. -/
@@ -486,6 +490,7 @@ theorem exists_finset_algEquiv_tensorProduct_of_finite (B : Type u) [CommRing B]
         exact ⟨j, hv j⟩
     exact (Q.baseChange A).quotientEquiv.symm.restrictScalars A |>.trans
       ((Ideal.quotientEquivAlgOfEq A hker).trans (P.quotientEquiv.restrictScalars A))
+
 
 
 /-- **Étale algebras spread out to a finitely generated subring.** An étale `A`-algebra `B` is

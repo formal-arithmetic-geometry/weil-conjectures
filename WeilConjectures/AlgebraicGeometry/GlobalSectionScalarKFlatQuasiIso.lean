@@ -56,6 +56,13 @@ local notation "adjP" => PresheafOfModules.pullbackPushforwardAdjunction
   (F := 𝟭 D) a
 open scoped ChangeOfRings TensorProduct
 
+local instance {M : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)}
+    {U V : Dᵒᵖ} (i : U ⟶ V) :
+    Module (R.obj V)
+      ((ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map i).hom).obj
+        (M.obj V)) :=
+  inferInstanceAs (Module (R.obj V) (M.obj V))
+
 private noncomputable def tensorRestriction (M : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
     {U V : Dᵒᵖ} (i : U ⟶ V) :
     (ModuleCat.extendScalars (α.app U).hom).obj (M.obj U) ⟶

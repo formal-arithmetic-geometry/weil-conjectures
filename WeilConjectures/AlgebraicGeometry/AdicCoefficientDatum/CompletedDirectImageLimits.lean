@@ -394,14 +394,15 @@ private theorem evaluationSquare_inverse
     [HasDerivedCategory (ℕᵒᵖ ⥤ B)] [HasDerivedCategory (ℕᵒᵖ ⥤ C)]
     (P : C ⥤ B) [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
     (n : ℕᵒᵖ) :
-    ((Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P ≪≫
       Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
-        ((CategoryTheory.evaluation ℕᵒᵖ B).obj n)).hom =
-    ((Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
-      ((CategoryTheory.evaluation ℕᵒᵖ B).obj n)).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
+        ((CategoryTheory.evaluation ℕᵒᵖ B).obj n)).symm).hom =
+    (Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
+      ((CategoryTheory.evaluation ℕᵒᵖ B).obj n) ≪≫
       Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).inv := by
+      (Functor.mapDerivedCategoryCompIso
+        ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).symm).inv := by
   simp only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     ← Functor.mapDerivedCategoryNatIso_symm, Iso.refl_symm,
     Functor.mapDerivedCategoryNatIso_refl, Category.id_comp, Category.comp_id]
@@ -456,10 +457,10 @@ private theorem evaluationComparison_mate
     β.hom = (mateEquiv (adj.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
       adj.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        ((Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
-          ((CategoryTheory.evaluation ℕᵒᵖ B).obj n)).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso ((Functor.whiskeringRight ℕᵒᵖ C B).obj P)
+          ((CategoryTheory.evaluation ℕᵒᵖ B).obj n) ≪≫
           Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-          Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).inv
+          (Functor.mapDerivedCategoryCompIso ((CategoryTheory.evaluation ℕᵒᵖ C).obj n) P).symm).inv
         )).natTrans := by
   let F := (Functor.whiskeringRight ℕᵒᵖ B C).obj G
   let EU := (CategoryTheory.evaluation ℕᵒᵖ B).obj n
@@ -518,7 +519,7 @@ private def constantEvaluationIso
     [HasDerivedCategory.{w} B] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)] (n : ℕᵒᵖ) :
     (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙
         ((CategoryTheory.evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ≅ 𝟭 _ :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (Functor.constCompEvaluationObj (D := B) n) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
@@ -533,21 +534,19 @@ private theorem constantEvaluation_factors
         (((Functor.const ℕᵒᵖ : B ⥤ _).mapHomologicalComplex (.up ℤ)).obj J) := by
   let D := (Functor.const ℕᵒᵖ : B ⥤ (ℕᵒᵖ ⥤ B))
   let E := (CategoryTheory.evaluation ℕᵒᵖ B).obj n
-  change (Functor.mapDerivedCategoryCompIso D E).inv.app (DerivedCategory.Q.obj J) ≫
+  change (Functor.mapDerivedCategoryCompIso D E).hom.app (DerivedCategory.Q.obj J) ≫
     (Functor.mapDerivedCategoryNatIso (Iso.refl (𝟭 B))).hom.app (DerivedCategory.Q.obj J) ≫
       (Functor.mapDerivedCategoryIdIso B).hom.app (DerivedCategory.Q.obj J) = _
   rw [Functor.mapDerivedCategoryNatIso_refl]
   simp only [NatTrans.id_app]
-  have hi := Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj B
-    ((HomotopyCategory.quotient B (.up ℤ)).obj J)
-  change (Functor.mapDerivedCategoryIdIso B).hom.app (DerivedCategory.Q.obj J) =
-    (𝟭 B).mapDerivedCategoryFactorsh.hom.app _ at hi
+  rw [Functor.mapDerivedCategoryIdIso_hom_app]
+  have hi : (Functor.mapHomologicalComplexIdIso B (.up ℤ)).hom.app J = 𝟙 _ := rfl
   rw [hi]
-  erw [AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.factorsh_hom]
+  erw [DerivedCategory.Q.map_id, Category.comp_id]
   have h := Functor.mapDerivedCategoryCompIso_hom_app_factors D E J
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso D E).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso D E).inv.app
     (DerivedCategory.Q.obj J))).mp
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   erw [Category.id_comp]
   exact h.symm
 

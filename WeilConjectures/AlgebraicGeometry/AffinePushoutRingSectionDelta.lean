@@ -25,6 +25,13 @@ local notation "r₀" => tensorPullbackRingMap f
 set_option hygiene false in
 local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
+
+local instance instHasLeftKanExtension_affinePushoutRingSectionDelta
+    (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}) :
+    (Opens.map f.base).op.HasLeftKanExtension F :=
+  Functor.HasLeftKanExtension.mk _
+    (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+
 /-- The second section-ring leg is the inverse-image unit followed by `t`.
 Source: Stacks Project, Tag 01SB (blueprint: stage3-affine-pushout-ring-section-delta). -/
 def affinePushoutSectionDelta (B : U.toTopCat.Sheaf CommRingCat.{u}) (t : IA ⟶ B)

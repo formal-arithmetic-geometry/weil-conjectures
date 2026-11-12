@@ -51,6 +51,7 @@ private theorem localizationPresentation_flatOver_restrict
       (M.smul ((p.appLE V.1 U'.1 e').hom r)).hom m
   exact congrArg (fun x ↦ (M.smul x).hom m) (congrArg (fun x ↦ x.hom r) heq)
 
+set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Concrete localized presentation witnesses used by completion.
 Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
 (blueprint: lem-pc-standard-single-flat-counit-localization-presentation-data).

@@ -197,9 +197,9 @@ theorem openDvr_ringed_identification {X Y : Scheme.{u}} (j : X ⟶ Y)
   let b : F ⋙ G ≅ H :=
     (a.ofNatIsoRight e.symm).leftAdjointUniq
       (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j)
-  exact ⟨(Functor.mapDerivedCategoryCompIso
-      (C := scalarReductionSource l E X) (D := ProjectionRestriction.Mod T)
-      (E := scalarReductionSource l E Y) F G).symm ≪≫
+  exact ⟨Functor.mapDerivedCategoryCompIso
+      (C₁ := scalarReductionSource l E X) (C₂ := ProjectionRestriction.Mod T)
+      (C₃ := scalarReductionSource l E Y) F G ≪≫
     Functor.mapDerivedCategoryNatIso
       (C := scalarReductionSource l E X) (D := scalarReductionSource l E Y) b⟩
 

@@ -236,9 +236,7 @@ theorem closedImmersion_conormal_affine_base_change_comparison
   have ht (t : Γ(X, U.1) ⊗[Γ(X', U'.1)] (i'.ker.ideal U').Cotangent) :
       eT (c.app (i ⁻¹ᵁ U.1) (eS.symm t)) =
         (i'.ker.ideal U').tensorCotangentHom Γ(X', U'.1) Γ(X, U.1) t := by
-    induction t using TensorProduct.induction_on with
-    | zero =>
-      simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | tmul b a =>
       obtain ⟨a, rfl⟩ := (i'.ker.ideal U').toCotangent_surjective a
       have ha : (a : Γ(X', U'.1)) ∈ Set.range (i'.ker.toModulesι.app U'.1) := by

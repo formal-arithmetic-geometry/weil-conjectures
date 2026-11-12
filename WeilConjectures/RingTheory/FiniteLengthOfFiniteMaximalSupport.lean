@@ -81,7 +81,7 @@ theorem length_lt_top_of_finite_maximal_support
     change WellFoundedLT (∀ m : S, (L m)ᵒᵈ)
     infer_instance
   have : WellFoundedGT (Submodule R Q) := e.dual.wellFoundedLT
-  have : IsNoetherian R Q := isNoetherian_iff'.mpr inferInstance
+  have : IsNoetherian R Q := isNoetherian_iff.mpr inferInstance
   exact Module.length_ne_top.lt_top
 
 end Module

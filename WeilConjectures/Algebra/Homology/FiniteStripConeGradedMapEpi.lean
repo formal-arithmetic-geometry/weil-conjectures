@@ -93,7 +93,7 @@ private theorem row_joint_images
             simp [finiteStripSourceInclusion, imageSubobject_iso_comp]
           exact (hsrc ▸ h).trans le_sup_left
         · apply le_trans _ le_sup_right
-          rw [hsteps, if_pos (by omega)]
+          rw [hsteps, ite_eq_left (by omega)]
           exact le_sup_left
       · exact bot_le
     · apply Finset.sup_le
@@ -118,7 +118,7 @@ private theorem row_joint_images
             if p + 1 ≤ n - j then imageSubobject
               (K.ιTotalOrZero (ComplexShape.up ℤ) j (n - j) n ≫
                 (CochainComplex.mappingCone.inr b).f n) else ⊥) hi)
-          rw [if_pos (by omega)]
+          rw [ite_eq_left (by omega)]
       · exact bot_le
 
 private theorem filtrationLift_arrow

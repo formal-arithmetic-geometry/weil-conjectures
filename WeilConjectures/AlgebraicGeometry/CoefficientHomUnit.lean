@@ -62,8 +62,10 @@ private noncomputable def coefficientUnitSection
     intro b
     change B.obj (op W.unop.left) at b
     symm
-    change M.map f.unop.left.op (b • M.map W.unop.hom.op m) =
-      B.map f.unop.left.op b • M.map W'.unop.hom.op m
+    change M.map f.unop.left.op
+        (b • (show M.obj (op W.unop.left) from M.map W.unop.hom.op m)) =
+      B.map f.unop.left.op b •
+        (show M.obj (op W'.unop.left) from M.map W'.unop.hom.op m)
     rw [M.map_smul, ← PresheafOfModules.map_comp_apply, ← op_comp, Over.w]
     rfl
 
@@ -86,8 +88,9 @@ private noncomputable def coefficientUnitMap
             intro b
             change B.obj (op W.unop.left) at b
             change M.obj U at m m'
-            change b • M.map W.unop.hom.op (m + m') =
-              b • M.map W.unop.hom.op m + b • M.map W.unop.hom.op m'
+            change b • (show M.obj (op W.unop.left) from M.map W.unop.hom.op (m + m')) =
+              b • (show M.obj (op W.unop.left) from M.map W.unop.hom.op m) +
+                b • (show M.obj (op W.unop.left) from M.map W.unop.hom.op m')
             rw [map_add, smul_add]
           map_smul' a m := by
             change R.obj U at a
@@ -98,9 +101,10 @@ private noncomputable def coefficientUnitMap
             intro b
             change B.obj (op W.unop.left) at b
             change M.obj U at m
-            change b • M.map W.unop.hom.op (φ.app U a • m) =
+            change b • (show M.obj (op W.unop.left) from
+                M.map W.unop.hom.op (φ.app U a • m)) =
               φ.app _ (R.map W.unop.hom.op a) •
-                (b • M.map W.unop.hom.op m)
+                (b • (show M.obj (op W.unop.left) from M.map W.unop.hom.op m))
             rw [M.map_smul]
             have h := CategoryTheory.congr_fun (φ.naturality W.unop.hom.op) a
             change φ.app _ (R.map W.unop.hom.op a) =
@@ -121,8 +125,9 @@ private noncomputable def coefficientUnitMap
         intro b
         change B.obj (op W.unop.left) at b
         change M.obj U at m
-        change b • M.map W.unop.hom.op (M.map f m) =
-          b • M.map ((Over.map f.unop).obj W.unop).hom.op m
+        change b • (show M.obj (op W.unop.left) from M.map W.unop.hom.op (M.map f m)) =
+          b • (show M.obj (op W.unop.left) from
+            M.map ((Over.map f.unop).obj W.unop).hom.op m)
         rw [← PresheafOfModules.map_comp_apply]
         rfl }
 
@@ -385,8 +390,10 @@ private noncomputable def unitBase (M : (SheafOfModules.{u} ((sheafCompose J (fo
   rw [unitRawSection_app, M.val.map_smul]
   refine Eq.trans ?_ hx.symm
   rw [unitRawSection_app]
-  change a • (B.obj.map W.unop.hom.op b • M.val.map W.unop.hom.op m) =
-    (B.obj.map W.unop.hom.op b * a) • M.val.map W.unop.hom.op m
+  change a • (B.obj.map W.unop.hom.op b •
+      (show M.val.obj (op W.unop.left) from M.val.map W.unop.hom.op m)) =
+    (B.obj.map W.unop.hom.op b * a) •
+      (show M.val.obj (op W.unop.left) from M.val.map W.unop.hom.op m)
   rw [← mul_smul, mul_comm]
 
 private theorem restriction_liftRestriction
@@ -469,8 +476,10 @@ private theorem unitRawMap_naturality
   rw [homMap_apply, rawMap_apply, unitRawSection_app, unitRawSection_app]
   change B.obj.obj (op W.unop.left) at b
   change M.val.obj U at m
-  change b • N.val.map W.unop.hom.op ((f.val.app U).hom m) =
-    (f.val.app (op W.unop.left)).hom (b • M.val.map W.unop.hom.op m)
+  change b • (show N.val.obj (op W.unop.left) from
+      N.val.map W.unop.hom.op ((f.val.app U).hom m)) =
+    (f.val.app (op W.unop.left)).hom
+      (b • (show M.val.obj (op W.unop.left) from M.val.map W.unop.hom.op m))
   rw [(f.val.app _).hom.map_smul, PresheafOfModules.naturality_apply]
 
 attribute [local irreducible] homObjMap homObjUnitIso
@@ -551,7 +560,7 @@ omit [HasZeroMorphisms E] [r.PreservesZeroMorphisms] in
 private theorem genericUnitComponent_zero (M : CochainComplex A ℤ) (n : ℤ) :
     genericUnitComponent r H L η M n 0 n (by omega) =
       η (M.X n) := by
-  simp only [genericUnitComponent, dif_pos]
+  simp only [genericUnitComponent, dite_eq_left]
 
 omit [HasZeroMorphisms E] [r.PreservesZeroMorphisms] in
 include hη in
@@ -571,7 +580,7 @@ private theorem genericUnitComponent_naturality {M N : CochainComplex A ℤ}
     rw [hq']
     intro h
     rw [genericUnitComponent_zero, genericUnitComponent_zero, hη]
-  · simp only [genericUnitComponent, dif_neg hp, comp_zero, zero_comp]
+  · simp only [genericUnitComponent, dite_eq_right hp, comp_zero, zero_comp]
 
 private theorem uncurryCurry_map
     {D E F : Type u} [Category.{v} D] [Category.{v} E] [Category.{v} F]

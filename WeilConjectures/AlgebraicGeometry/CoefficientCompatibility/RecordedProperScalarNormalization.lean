@@ -177,6 +177,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   sfIntrinsicModuleEquivalence directImagePresentation scalarPresentation
   directImageScalarComparison
 attribute [local implicit_reducible] proEtaleConstantRingMap scalarExtensionFunctor
-  sfIntrinsicDerivedEquivalence Equivalence.mapDerivedCategory Functor.mapHomologicalComplex
+  sfIntrinsicDerivedEquivalence Equivalence.mapDerivedCategory
 
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

@@ -46,7 +46,7 @@ private lemma odd_le_even_sup (j : ℕ) (k : ℤ) :
     · apply le_trans _ le_sup_left
       apply le_trans _ (le_iSup _ a)
       apply le_sup_of_le_left
-      rw [if_pos (by omega)]
+      rw [ite_eq_left (by omega)]
     · exact bot_le
   · split_ifs with ha
     · by_cases haj : a = j
@@ -55,7 +55,7 @@ private lemma odd_le_even_sup (j : ℕ) (k : ℤ) :
       · apply le_trans _ le_sup_left
         apply le_trans _ (le_iSup _ a)
         apply le_sup_of_le_left
-        rw [if_pos (by omega)]
+        rw [ite_eq_left (by omega)]
         exact lower_range_le_full K S e a k
     · exact bot_le
 
@@ -78,7 +78,7 @@ private lemma column_projection (j : ℕ) (k : ℤ) :
     change K.ιTotal (ComplexShape.up ℤ) (-(a : ℤ)) (k + a) k _ ≫
       K.totalDesc f = 0
     rw [HomologicalComplex₂.ι_totalDesc]
-    exact dif_neg (by omega)
+    exact dite_eq_right (by omega)
 
 /-- Injectivity of the even quotient component.
 Source: Stacks Project, Tag 09KP, proof, disjointness of the lower range and even term.

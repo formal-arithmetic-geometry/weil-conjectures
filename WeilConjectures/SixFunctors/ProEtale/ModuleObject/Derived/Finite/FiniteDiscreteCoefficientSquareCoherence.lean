@@ -379,7 +379,7 @@ private noncomputable def realization_combine (T : Scheme.{u}) :
     Functor.isoWhiskerLeft DerivedCategory.Plus.ι
       (Functor.mapDerivedCategoryCompIso
         (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) T)
-        (finiteDiscreteCoefficientEquivalence B eR G hG T).functor).symm
+        (finiteDiscreteCoefficientEquivalence B eR G hG T).functor)
 
 private theorem pullback_hom {S T : Scheme.{u}} (h : S ⟶ T)
     (K : FiniteDiscreteEtalePlus B T) :
@@ -453,7 +453,7 @@ private theorem pullback_comp {S T U : Scheme.{u}} (f : S ⟶ T) (g : T ⟶ U)
     simp only [Etale.upperStarPlusComp, Iso.trans_hom, NatTrans.comp_app,
       Functor.map_comp, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
       Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app,
-      Functor.mapDerivedCategoryTriangleIso]
+      Functor.mapDerivedCategoryTriangleIso, Iso.symm_hom]
   have hn := (realization_combine B eR G hG S).hom.naturality
     ((Etale.upperStarPlusComp (ModuleCat.{u + 1} (ULift.{u + 1} B)) f g).hom.app K)
   simp only [Functor.comp_map, hc] at hn

@@ -97,12 +97,12 @@ noncomputable def smallModel_sourceInjectiveDirectImageIso {X S : Scheme.{v}} (f
         (((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj
           (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) := by
   let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj J
-  let q' : K ≅ DerivedCategory.Plus.Q.obj M :=
+  let q' : K ≅ (HomotopyCategory.Plus.quotient _ ⋙ DerivedCategory.Plus.Qh).obj M :=
     DerivedCategory.Plus.ι.preimageIso
       (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
   let F := lowerStar AddCommGrpCat.{v + 1} f
   let e := F.rightDerivedFunctorPlus.mapIso q' ≪≫
-    (asIso (F.rightDerivedFunctorPlusUnit.app
+    (asIso (F.rightDerivedFunctorPlusUnith.app
       ((HomotopyCategory.Plus.quotient _).obj M))).symm
   exact DerivedCategory.Plus.ι.mapIso e ≪≫
     DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app M.obj) ≪≫

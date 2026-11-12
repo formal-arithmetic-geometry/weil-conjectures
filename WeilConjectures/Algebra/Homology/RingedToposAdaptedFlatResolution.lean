@@ -263,7 +263,10 @@ private theorem all_tensorRightColimits_adapted :
 attribute [local instance] all_tensorLeftColimits_adapted all_tensorRightColimits_adapted
 
 private theorem hasTensor_adapted :
-    ∀ X₁ X₂ : GradedObject ℤ A, GradedObject.HasTensor X₁ X₂ := by infer_instance
+    ∀ X₁ X₂ : GradedObject ℤ A, GradedObject.HasTensor X₁ X₂ := by
+  have (K : Type r) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{r} (O).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  infer_instance
 
 private theorem hasGoodTensor₁₂_adapted :
     ∀ X₁ X₂ X₃ : GradedObject ℤ A,
@@ -347,6 +350,15 @@ theorem exists_pullback_adapted_flat_resolution
     (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
   let B := SheafOfModules.{w} ((sheafCompose JD
     (forget₂ CommRingCat.{w} RingCat.{w})).obj S)
+  have (K : Type w) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{w}
+      ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (K : Type w) : HasColimitsOfShape (Discrete K) (PresheafOfModules.{w}
+      ((sheafCompose JD (forget₂ CommRingCat.{w} RingCat.{w})).obj S).obj) :=
+    PresheafOfModules.hasColimitsOfShape _ _
+  have (K : Type w) : HasColimitsOfShape (Discrete K) A :=
+    SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf
+      _ _
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   let := symmetricCategory R
@@ -365,6 +377,10 @@ theorem exists_pullback_adapted_flat_resolution
       ((MonoidalCategory.curriedTensor A).flip.obj M) := inferInstance
   have : HasExactColimitsOfShape ℤ A := hasExactColimits_int_adapted R
   have := hasFunctorialFlatResolution_adapted R
+  have : HasFiniteBiproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    HasFiniteBiproducts.of_hasFiniteProducts
+  have : HasFiniteCoproducts (ObjectProperty.flat (A := A)).FullSubcategory :=
+    hasFiniteCoproducts_of_hasFiniteBiproducts _
   let Λ := (Classical.arbitrary (Abelian.LeftResolution
     (ObjectProperty.flat.ι : _ ⥤ A))).reduced
   have hι : (ObjectProperty.flat.ι : _ ⥤ A).essImage ≤ ObjectProperty.flat :=

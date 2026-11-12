@@ -71,7 +71,6 @@ private theorem projectionTensor_eq (φ : R ⟶ S)
       (SheafOfModules.changeOfRingsPresheaf.{v, c, r} φ M)
   have h := (η.app U).hom.map_smul s
     ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
-  rw [TensorProduct.smul_tmul'] at h
   change (toSheafify J (SheafOfModules.changeOfRingsPresheaf.{v, c, r} φ M).presheaf).app U
       ((s * 1) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) =
     @SMul.smul (S.obj.obj U) ((SheafOfModules.changeOfRings.{v, c, r} φ M).val.obj U)
@@ -359,8 +358,7 @@ private theorem scalarTensor_ab_hom_ext (n : ℕ) (M : scalarReductionSource l E
   apply Sheaf.hom_ext
   apply CategoryTheory.sheafify_hom_ext _ _ _ N.property
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s x => exact h U s x
   | add z w hz hw => simpa only [_root_.map_add] using congrArg₂ (· + ·) hz hw
 

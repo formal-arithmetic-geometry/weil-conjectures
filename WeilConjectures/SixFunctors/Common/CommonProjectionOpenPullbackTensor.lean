@@ -99,6 +99,7 @@ Source: thm-sf-pf-field.proof.md, Compatibility
             ((c.directAdjunction Q.i).left.hom.app L)) ≫
         (A'.openTensorPullback.inv.app ((V Q.Z).obj M)).app ((V Q.Z).obj L)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the inverse tensor/pullback comparison for
 an open immersion. This is a square of tensor and pullback maps only: it uses
 neither an open adjunction nor proper image or support identifications.

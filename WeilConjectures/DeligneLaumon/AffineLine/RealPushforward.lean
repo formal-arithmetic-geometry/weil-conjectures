@@ -33,7 +33,7 @@ sign, sums of traces of powers of local Frobenius of `K`, which are `ι`-real si
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory Limits
 
@@ -87,6 +87,13 @@ variable {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
   [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
+/-- The local polynomial of a Frobenius module over `PadicAlgCl l` is its `charpolyRev`, with the
+`CommRing` instance found by instance search (`AlgebraicClosure.instCommRing`) rather than the one
+unfolded from `Field`; stated on a generic module so that the kernel checks it once. -/
+private lemma charpolyRev_eq_localPolynomial {l : ℕ} [Fact l.Prime]
+    (M : FrobeniusModule.{v, 0} (PadicAlgCl l)) :
+    M.frobeniusEnd.charpolyRev = M.localPolynomial := rfl
+
 variable (f) in
 /-- **Reality survives a direct image concentrated in degree one.** Let `f : X ⟶ Y` be a
 separated morphism of finite type of `k₀`-schemes and `K` an `ι`-real Weil sheaf on `X` such
@@ -107,7 +114,8 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilShea
   intro ξ n
   obtain ⟨X', _, g, _, _, _, _, hfib⟩ :=
     exists_fiber_expand_charpolyRev_stalk_higherLowerShriek (k₀ := k₀) (f := f) (l := l) ξ
-  have h₁ := (hK.upperStar g).isReal_compactlySupportedCohomology_of_subsingleton 1 fun i hi ↦ by
+  have h₁ := (hK.upperStar g).isReal_compactlySupportedCohomology_of_subsingleton
+      ((1 : ℕ) : ℤ) fun i hi ↦ by
     rcases lt_or_ge i 0 with h | h
     · exact subsingleton_globalSections_of_isZero
         (isZero_homologySheaf_derivedLowerShriek_of_neg ((upperStar g).obj K) h)
@@ -116,9 +124,12 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilShea
   have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) ξ.2
   have := h₁ (n * (Y ↘ Spec (CommRingCat.of k₀)).degreeOver ξ.1)
   have hc := (hfib K 1).2
-  rw [Nat.cast_one] at hc
-  rwa [FrobeniusModule.localPolynomial, ← hc,
-    Polynomial.coeff_expand_mul (Nat.pos_of_ne_zero hd)] at this
+  -- `hfib` states the characteristic polynomials with the instance
+  -- `AlgebraicClosure.instCommRing`, while `localPolynomial` unfolds to `charpolyRev` through
+  -- `Field.toCommRing`; identify the two on a generic module (`charpolyRev_eq_localPolynomial`)
+  -- so that the kernel never compares them on the stalk (v4.35: timeout).
+  rw [charpolyRev_eq_localPolynomial, charpolyRev_eq_localPolynomial] at hc
+  rwa [← hc, Polynomial.coeff_expand_mul (Nat.pos_of_ne_zero hd)] at this
 
 /-- **Reality survives the Fourier projection.** Let `K` be an `ι`-real Weil sheaf on the
 affine plane `𝔸¹ ×_{k₀} 𝔸¹` such that `Rpr₂!K` has no cohomology sheaves outside degree one,

@@ -24,6 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 /-- The surjective half of the Milnor Hom sequence needs no finiteness condition. -/
 private theorem milnor_surjective
     {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]

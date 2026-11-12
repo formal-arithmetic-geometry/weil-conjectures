@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginScalarPullbackData
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarPullbackCube
 import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteRealizationRestrictionCube
@@ -26,7 +28,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   Functor.leftDerivedFunctor
   Etale.scalarTensorIso Scheme.completedAdicDerivedChange
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  Scheme.sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex
+  Scheme.sfIntrinsicDerivedEquivalence
 
 private theorem mate_whisker_top
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
@@ -485,7 +487,7 @@ theorem etaleOriginRestrictionPullbackCube
     Functor.map_comp, Category.assoc]
   erw [← reassoc_of% he, Iso.inv_hom_id_app_assoc]
   erw [← reassoc_of% hy]
-  erw [Iso.map_inv_hom_id_assoc
+  erw [Iso.inv_hom_id_map_assoc
     ((Scheme.FiniteCompactScalar.intrinsicSiteFunctorIso B Y).app N) (UY ⋙ LA)]
   erw [reassoc_of% hr, reassoc_of% hn, ← reassoc_of% hz]
   erw [reassoc_of% hs']

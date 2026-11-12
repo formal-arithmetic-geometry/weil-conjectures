@@ -235,7 +235,7 @@ theorem etaleHorizontalSupport_tower
     (j'a.comp ba)).symm
     (Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) cs.i (pullback.fst c.g v) r osq.w) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
   let k := Functor.isoWhiskerRight
     (canonicalEtaleCompactSupportComparison A r e).symm
     (rightDerivedLowerStar (ModuleCat.{u + 1} A) p) ≪≫

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
@@ -269,7 +271,7 @@ private local instance genericCochainTensor (A B : CochainComplex D ℤ) :
 /-- The representative normalization of a derived tensor comparison for an additive
 monoidal functor. Source: Stacks Tags 06YU, 07A4 and 0B56
 (blueprint: def-sfb-proetale-rational-localizing-projection-helpers). -/
-@[irreducible]
+@[irreducible, no_expose]
 def tensorRepresentativeFormula
     (μ : Functor.leftDerivedDerivedTensor F ⟶ Functor.derivedTensorLeftDerived F) : Prop :=
   ∀ K P : CochainComplex C ℤ,

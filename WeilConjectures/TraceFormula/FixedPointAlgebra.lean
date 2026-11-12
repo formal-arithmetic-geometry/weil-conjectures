@@ -130,7 +130,7 @@ lemma surjective_evalPoints [Finite F] [Finite σ] : Function.Surjective (evalPo
   refine ⟨∑ a, g a • FiniteField.lagrangeIdem ((C : L →+* MvPolynomial σ L).comp
     (algebraMap F L)) X a, funext fun b ↦ ?_⟩
   simp only [map_sum, map_smul, Finset.sum_apply, Pi.smul_apply, evalPoints_lagrangeIdem,
-    smul_eq_mul, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    smul_eq_mul, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
 
 /-- Evaluation at the points of a subset `Z ⊆ F^σ` is surjective onto `∏_{λ ∈ Z} L`. -/
 lemma surjective_evalPointsOn [Finite F] [Finite σ] (Z : Set (σ → F)) :
@@ -142,7 +142,7 @@ lemma surjective_evalPointsOn [Finite F] [Finite σ] (Z : Set (σ → F)) :
   refine ⟨f, funext fun z ↦ ?_⟩
   change evalPoints F L σ f z.1 = g z
   rw [hf]
-  exact dif_pos z.2
+  exact dite_eq_left z.2
 
 variable [Fintype F]
 
@@ -217,7 +217,7 @@ theorem ker_evalPointsOn [Finite σ] (hZ₁ : ∀ a ∈ Z, ∀ f ∈ J, evalPoin
   classical
   have := Fintype.ofFinite σ
   rw [← ker_evalPoints (F := F), RingHom.ker_eq_comap_bot (evalPoints F L σ),
-    ← Ideal.comap_map_of_surjective _ surjective_evalPoints]
+    ← Ideal.comap_map_of_surjective (f := evalPoints F L σ) surjective_evalPoints]
   ext f
   simp only [RingHom.mem_ker, Ideal.mem_comap]
   constructor

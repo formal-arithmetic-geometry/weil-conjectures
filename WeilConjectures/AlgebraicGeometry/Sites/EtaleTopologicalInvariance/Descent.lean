@@ -410,8 +410,7 @@ theorem exists_affine_descent :
   have hd₂ : d ι ≫ pr₂ ι p V'' = v V'' := pullback.lift_snd _ _ _
   have hmul : ∀ t : A' ⊗[R] E, Algebra.TensorProduct.mulMap R A' E t = (d ι).appTop (ξ t) := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x =>
       rw [ξ_tmul, map_mul, Algebra.TensorProduct.mulMap_tmul, Algebra.smul_def]
       have h1 : (d ι).appTop ((pr₂ ι p V'').appTop a) = (v V'').appTop a :=
@@ -460,8 +459,7 @@ theorem exists_affine_descent :
   have hΘδ : ∀ t, Θ (Algebra.TensorProduct.map (AlgHom.id R A') (δ.restrictScalars R) t) =
       (γ₁ ι e).appTop (ξ t) := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x =>
       rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, AlgHom.restrictScalars_apply, Θ_tmul,
         ξ_tmul, map_mul, δ_apply]
@@ -473,8 +471,7 @@ theorem exists_affine_descent :
       (Algebra.TensorProduct.includeRight (R := R) (A := A') (B := E)) t) =
       (π₁ ι p V'').appTop (ξ t) := by
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x =>
       rw [Algebra.TensorProduct.map_tmul, AlgHom.id_apply, Algebra.TensorProduct.includeRight_apply,
         Θ_tmul, ξ_tmul, ξ_tmul, map_one, one_mul, map_mul]

@@ -424,9 +424,9 @@ structure Open (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion 
   unit_termwise : derivedAdjunction.unit =
     (Functor.mapDerivedCategoryIdIso _).inv ≫
       deriveMap l E ordinaryAdjunction.unit ≫
-      (Functor.mapDerivedCategoryCompIso extension g.pull).hom
+      (Functor.mapDerivedCategoryCompIso extension g.pull).inv
   counit_termwise : derivedAdjunction.counit =
-    (Functor.mapDerivedCategoryCompIso g.pull extension).inv ≫
+    (Functor.mapDerivedCategoryCompIso g.pull extension).hom ≫
       deriveMap l E ordinaryAdjunction.counit ≫
       (Functor.mapDerivedCategoryIdIso _).hom
 
@@ -447,10 +447,10 @@ def openEvaluation (b : Base l E) {U T : Scheme.{u}} {j : U ⟶ T}
   letI := sfIntrinsicExtensionByZero_additive j (R l E n)
   letI := sfIntrinsicExtensionByZero_preservesFiniteLimits j (R l E n)
   letI := sfIntrinsicExtensionByZero_preservesFiniteColimits j (R l E n)
-  exact (Functor.mapDerivedCategoryCompIso o.extension (ev l E T n)).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso o.extension (ev l E T n) ≪≫
     Functor.mapDerivedCategoryNatIso (o.evaluation n) ≪≫
-    Functor.mapDerivedCategoryCompIso (ev l E U n)
-      (sfIntrinsicExtensionByZero j (R l E n))
+    (Functor.mapDerivedCategoryCompIso (ev l E U n)
+      (sfIntrinsicExtensionByZero j (R l E n))).symm
 
 /-- Actual geometric operations and canonical comparisons on the fixed sequence sites.
 Composition is fixed by its finite comparisons and by the underlying ordinary sheaf
@@ -466,7 +466,7 @@ structure Operations (b : Base l E) where
     pull l E b (geometry g) ⋙ pull l E b (geometry f) ≅
       pull l E b (geometry (f ≫ g))
   comp_termwise : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
-    comp f g = (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    comp f g = Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (ordinaryComp f g)
   comp_evaluation : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (n : ℕ) (K : D l E Z),
@@ -647,13 +647,13 @@ structure LocalizationData (b : Base l E) (o : Operations l E b)
       (((Functor.mapDerivedCategoryIdIso _).inv ≫
         deriveMap l E (o.geometry i).ordinaryAdjunction.unit ≫
         (Functor.mapDerivedCategoryCompIso (o.geometry i).pull
-          (o.geometry i).push).hom).app C.obj) δ ∈ distTriang (D l E T) ∧
+          (o.geometry i).push).inv).app C.obj) δ ∈ distTriang (D l E T) ∧
     ∀ n : ℕ, (Ev l E T n).mapTriangle.obj
       (Triangle.mk ((o.openOp a).derivedAdjunction.counit.app C.obj)
         (((Functor.mapDerivedCategoryIdIso _).inv ≫
           deriveMap l E (o.geometry i).ordinaryAdjunction.unit ≫
           (Functor.mapDerivedCategoryCompIso (o.geometry i).pull
-            (o.geometry i).push).hom).app C.obj) δ) ∈
+            (o.geometry i).push).inv).app C.obj) δ) ∈
       distTriang (proEtaleDerivedCategory T (R l E n))
 
 /-- The three clauses, including the precise domains of the invertibility claims.

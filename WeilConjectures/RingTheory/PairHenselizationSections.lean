@@ -99,7 +99,8 @@ private theorem descend_etale
     rw [toAlgebra_algebraMap]
     infer_instance
   obtain ⟨ec⟩ := cancel R (F.obj i) H D₀ D AlgEquiv.refl
-  exact ⟨E.inverse.obj i, D, inferInstance, algebraMap (F.obj i) D, hD, ⟨e.trans ec⟩⟩
+  have e' := e.trans ec
+  exact ⟨E.inverse.obj i, D, inferInstance, algebraMap (F.obj i) D, hD, ⟨e'⟩⟩
 
 /-- Every étale section modulo the extended ideal lifts over a colimit of all étale
 neighbourhoods of a pair whose quotient is the original quotient.

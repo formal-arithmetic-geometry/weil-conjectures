@@ -85,7 +85,7 @@ theorem exists_finite_domain_factors_of_product_embedding
     change f (∑ j, e j * x j) i = (y i).val
     simp only [map_sum, map_mul, Finset.sum_apply, Pi.mul_apply, he]
     simpa only [ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ,
-      if_true, q, AlgHom.comp_apply, Pi.evalAlgHom_apply] using hx i
+      ite_true, q, AlgHom.comp_apply, Pi.evalAlgHom_apply] using hx i
   have hfrac (j) : IsFractionRing (T j) (L j) := by
     have : FaithfulSMul (T j) (L j) :=
       (faithfulSMul_iff_algebraMap_injective _ _).mpr Subtype.val_injective

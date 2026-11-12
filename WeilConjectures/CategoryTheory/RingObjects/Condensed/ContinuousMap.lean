@@ -110,7 +110,7 @@ lemma isSheaf_yonedaPresheaf :
   refine ⟨inferInstance, ?_⟩
   apply +allowSynthFailures equalizerCondition_yonedaPresheaf Profinite.toTopCat.{u} T
   intro Z B π hπ
-  exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 0 2).mp hπ)
+  exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 1 3).mp hπ)
     π.hom.hom.continuous
 
 /-- The presheaf `S ↦ C(S, T)` is a sheaf of rings for the coherent topology on `Profinite`. -/
@@ -178,6 +178,7 @@ lemma continuousMapRingSheafMap_comp {T'' : Type} [TopologicalSpace T''] [Ring T
     continuousMapRingSheafMap.{u} (ψ.comp φ) (hψ.comp hφ) =
       continuousMapRingSheafMap φ hφ ≫ continuousMapRingSheafMap ψ hψ :=
   rfl
+
 
 end Ring
 

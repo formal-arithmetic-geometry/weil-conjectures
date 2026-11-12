@@ -137,6 +137,7 @@ lemma quotient_ρ_mk (g : G) (x : X.obj.V) :
       QuotientAddGroup.mk ((X.obj.ρ g).hom x) :=
   rfl
 
+
 end quotient
 
 lemma subsingleton_H_of_subsingleton (X : DiscreteModule.{w} G) [Subsingleton X.obj.V] (n : ℕ) :
@@ -180,7 +181,7 @@ def ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
     { hom := AddCommGrpCat.ofHom (zmodHom.{max u w} ℓ x hx)
       comm g := AddCommGrpCat.ext fun a ↦ by
         obtain ⟨n, hn⟩ := ZMod.intCast_surjective a.down
-        obtain rfl : a = ULift.up (n : ZMod ℓ) := ULift.ext _ _ hn.symm
+        obtain rfl : a = ULift.up (n : ZMod ℓ) := ULift.ext hn.symm
         change zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)) =
           (X.obj.ρ g).hom (zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)))
         rw [zmodHom_intCast, map_zsmul, hxg g] }
@@ -234,7 +235,7 @@ theorem subsingleton_H_two_of_forall_pow_mem (N : Subgroup G) [N.Normal]
   have hzero : ofInvariant ℓ X x hxℓ hxg ≫ quotientπ X S hS = 0 := by
     ext a
     obtain ⟨m, hm⟩ := ZMod.intCast_surjective a.down
-    obtain rfl : a = ULift.up (m : ZMod ℓ) := ULift.ext _ _ hm.symm
+    obtain rfl : a = ULift.up (m : ZMod ℓ) := ULift.ext hm.symm
     change QuotientAddGroup.mk ((ofInvariant ℓ X x hxℓ hxg).hom.hom.hom _) = 0
     rw [ofInvariant_apply_intCast, QuotientAddGroup.eq_zero_iff]
     exact ⟨m, rfl⟩
@@ -518,7 +519,7 @@ theorem subsingleton_H_two_of_forall_finite (M : DiscreteModule.{w} G)
     else 0
   have hΦ (c) (hc : c ∈ Set.range f.1) : j (Φ c) = c := by
     have h : ∀ y, (rep c).1 y ∈ S := fun y ↦ hTS (Set.mem_biUnion hc ⟨y, rfl⟩)
-    simp only [Φ, dif_pos h, j, coker₁SubMap_mk, smoothFunctionsMap_codRestrict]
+    simp only [Φ, dite_eq_left h, j, coker₁SubMap_mk, smoothFunctionsMap_codRestrict]
     exact Function.surjInv_eq hrep c
   let fN : ((coind₁ G).obj (coker₁ (sub M S hS)).obj.V).obj.V :=
     ⟨Φ ∘ f.1, Subgroup.isOpen_mono (H₁ := rightStab G f.1)

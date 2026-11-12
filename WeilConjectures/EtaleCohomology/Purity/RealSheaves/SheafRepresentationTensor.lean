@@ -132,8 +132,7 @@ theorem exists_equivalence_isLisse_tensor_of_lisseMonodromy
         TensorProduct.map (e.functor.map φ.1).hom.hom.toLinearMap
           (e.functor.map φ.2).hom.hom.toLinearMap
           ((TensorProduct.congr (f X.1) (f X.2)).symm y) := by
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul a b =>
       simp only [TensorProduct.map_tmul, TensorProduct.congr_symm_tmul,
         Representation.IntertwiningMap.coe_toLinearMap, key]

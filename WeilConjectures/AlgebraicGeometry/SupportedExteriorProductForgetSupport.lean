@@ -48,11 +48,14 @@ the localized natural transformation followed by the unit. -/
 theorem rightDerivedFunctorUnit_comp_rightDerivedFunctorNatTrans {T : Scheme.{u}}
     {F G : Sheaf T.smallEtaleTopology C ⥤ C} [F.Additive] [G.Additive] (τ : F ⟶ G)
     (P : CochainComplex (Sheaf T.smallEtaleTopology C) ℤ) :
-    F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj P) ≫
+    F.rightDerivedFunctorUnitQ P ≫
         (Functor.rightDerivedFunctorNatTrans τ).app (DerivedCategory.Q.obj P) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ (.up ℤ)).app P) ≫
-        G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj P) :=
-  Functor.rightDerivedNatTrans_app _ _ _ _ _ _ _
+        G.rightDerivedFunctorUnitQ P := by
+  simp only [Functor.rightDerivedFunctorUnitQ, Category.assoc]
+  rw [(Functor.rightDerivedFunctorNatTrans τ).naturality]
+  simp only [Functor.rightDerivedFunctorNatTrans, Functor.rightDerivedNatTrans_app_assoc]
+  erw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
 
 /-- The support resolution unit followed by forgetting the support is the localized inclusion
 of supported sections followed by the unit of the global sections. -/
@@ -68,8 +71,7 @@ theorem exteriorSupportResolutionUnit_comp_forgetSupport
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
           (Sheaf.ΓSupportι X.smallEtaleTopology C (op (Scheme.Etale.mk i.openComplement.ι)))
           (.up ℤ)).app P) ≫
-        (Sheaf.Γ X.smallEtaleTopology C).rightDerivedFunctorUnit.app
-          ((HomotopyCategory.quotient _ _).obj P) ≫
+        (Sheaf.Γ X.smallEtaleTopology C).rightDerivedFunctorUnitQ P ≫
         (Sheaf.Γ X.smallEtaleTopology C).rightDerivedFunctor.map e := by
   have hnat := (Functor.rightDerivedFunctorNatTrans
     (Sheaf.ΓSupportι X.smallEtaleTopology C
@@ -238,8 +240,8 @@ theorem resolutionSupportedExteriorPairing_comp_forgetSupport
             (.up ℤ)).app Q)) ≫
         Functor.LaxMonoidal.μ DerivedCategory.Q _ _ ≫
         DerivedCategory.Q.map (exteriorSectionsComplex C f g P Q) ≫
-        (Sheaf.Γ (pullback f g).smallEtaleTopology C).rightDerivedFunctorUnit.app
-          ((HomotopyCategory.quotient _ _).obj (exteriorSectionsComplexTarget C f g P Q)) ≫
+        (Sheaf.Γ (pullback f g).smallEtaleTopology C).rightDerivedFunctorUnitQ
+          (exteriorSectionsComplexTarget C f g P Q) ≫
         (Sheaf.Γ (pullback f g).smallEtaleTopology C).rightDerivedFunctor.map
           ((exteriorProductResolutionIso C f g P Q hP hQ).inv ≫ x) := by
   have hnat := (Functor.rightDerivedFunctorNatTrans

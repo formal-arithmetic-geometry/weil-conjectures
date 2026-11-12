@@ -56,7 +56,9 @@ private noncomputable def tensorHomCurryApp_kfg (φ : M ⊗ P ⟶ N) {U : C} (p 
     refine (congrArg (φ.app (op W'.unop.left)) ?_).trans
       (naturality_apply φ f.unop.left.op (m ⊗ₜ[R.obj (op W.unop.left)] P.map W.unop.hom.op p))
     refine (congrArg (fun q : P.obj (op W'.unop.left) ↦
-      M.map f.unop.left.op m ⊗ₜ[R.obj (op W'.unop.left)] q) ?_).trans
+      TensorProduct.tmul (R.obj (op W'.unop.left))
+        (M := M.obj (op W'.unop.left)) (N := P.obj (op W'.unop.left))
+        (M.map f.unop.left.op m) q) ?_).trans
         (Monoidal.tensorObj_map_tmul f.unop.left.op m _).symm
     rw [← map_comp_apply, ← op_comp, Over.w]
 
@@ -445,7 +447,7 @@ private theorem flat_epicification_kfg
   let D : CochainComplex _ ℤ :=
     { X := X
       d := dd
-      shape := fun i j hij ↦ dif_neg hij
+      shape := fun i j hij ↦ dite_eq_right hij
       d_comp_d' := by
         intro i j k hij hjk
         change i + 1 = j at hij
@@ -456,7 +458,7 @@ private theorem flat_epicification_kfg
       intro i
       have hi : i + 1 - 1 = i := by omega
       apply biprod.hom_ext'
-      · simp only [D, dd, dif_pos rfl, Category.assoc,
+      · simp only [D, dd, dite_eq_left rfl, Category.assoc,
           biprod.inl_fst_assoc, biprod.inr_desc]
         simpa using (eqToHom_naturality
           (fun k ↦ q k ≫ H.d k (i + 1)) hi.symm)
@@ -472,12 +474,12 @@ private theorem flat_epicification_kfg
   have hcontract : Homotopy (𝟙 D) 0 := by
     refine { hom := hh, zero := ?_, comm := ?_ }
     · intro i j hij
-      exact dif_neg hij
+      exact dite_eq_right hij
     · intro i
       rw [dNext_eq hh (show (ComplexShape.up ℤ).Rel i (i + 1) by rfl),
         prevD_eq hh (show (ComplexShape.up ℤ).Rel (i - 1) i by change i - 1 + 1 = i; omega)]
       have hi' : i - 1 + 1 = i := by omega
-      simp only [D, dd, hh, dif_pos rfl, dif_pos hi', HomologicalComplex.id_f,
+      simp only [D, dd, hh, dite_eq_left rfl, dite_eq_left hi', HomologicalComplex.id_f,
         HomologicalComplex.zero_f, Category.assoc, biprod.inr_snd_assoc,
         biprod.inl_fst_assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp,
         add_zero]

@@ -165,6 +165,7 @@ lemma exists_bijective_cohomologyMap_cohomologyMap_eq {Z Y' : Scheme.{u}} (f : X
   congr 2
   exact ((Equiv.ofBijective _ hb').symm_apply_apply _).symm
 
+
 variable {ι : Type u} [Finite ι] (U : ι → X.Opens) (hU : ∀ i, IsClosed (U i : Set X))
   (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j)) (hcov : ∀ x : X, ∃ i, x ∈ U i)
 include hU hdisj hcov
@@ -226,5 +227,6 @@ theorem surjective_cohomologyMap_of_isClopen (g : Y ⟶ X)
   dsimp only
   rw [hAx, hxi]
   exact hy i
+
 
 end AlgebraicGeometry.Etale

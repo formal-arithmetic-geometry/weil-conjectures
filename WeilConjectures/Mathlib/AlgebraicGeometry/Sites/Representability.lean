@@ -396,7 +396,7 @@ theorem isRepresentable_of_isSheaf_over (hP : Presheaf.IsSheaf (zariskiTopology.
     refine Eq.trans ?_ (hc t)
     exact congr_arg
       (fun φ : yoneda.obj (X (i t)).left ⟶ F.obj ↦ φ.app (op (U t : Scheme)) (c t))
-      (Sigma.ι_desc f (i t))
+      (Sigma.ι_comp_desc f (i t))
   have := Scheme.LocalRepresentability.isRepresentable (F := F) hf
   exact isRepresentable_of_isRepresentable_sigmaOver P
 
@@ -654,7 +654,7 @@ lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
       change P.map d.down.op (P.map snd.op x) = P.map (d.down ≫ snd).op x
       rw [op_comp, Functor.map_comp_apply]
     · replace h : d.down.left ≫ U.ι = d'.down.left ≫ U.ι := congr_arg (·.down.left) h
-      exact ULift.ext _ _ (Over.OverMorphism.ext ((cancel_mono U.ι).1 h))
+      exact ULift.ext (Over.OverMorphism.ext ((cancel_mono U.ι).1 h))
     · replace h : e.1 = P.map a.down.op x := h
       have hrange : Set.range a.down.left.base ⊆ Set.range U.ι.base := by
         rw [Scheme.Opens.range_ι, ← hU, ← h]
@@ -662,7 +662,7 @@ lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
       let d : W.unop ⟶ b := Over.homMk (IsOpenImmersion.lift U.ι a.down.left hrange) (by
         simp [b, IsOpenImmersion.lift_fac_assoc])
       have hd : d ≫ snd = a.down := by ext; exact IsOpenImmersion.lift_fac _ _ _
-      refine ⟨ULift.up d, Subtype.ext ?_, ULift.ext _ _ hd⟩
+      refine ⟨ULift.up d, Subtype.ext ?_, ULift.ext hd⟩
       change P.map d.op (P.map snd.op x) = e.1
       rw [← Functor.map_comp_apply, ← op_comp, hd, h]
   · change IsOpenImmersion U.ι
@@ -724,5 +724,6 @@ theorem isRepresentable_of_isSheaf_of_zariskiCovers {S : Scheme.{u}}
   · obtain ⟨i, U, ht, h⟩ := hcov T x t
     obtain ⟨b, hb⟩ := (hmem i _).2 h
     exact ⟨i, _, _, b, by simpa [Scheme.Opens.range_ι] using ht, hb⟩
+
 
 end AlgebraicGeometry

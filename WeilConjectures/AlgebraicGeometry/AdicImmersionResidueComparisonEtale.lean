@@ -229,7 +229,7 @@ theorem sfbImmersion_residueComparison_etale
         (A ⧸ I ^ (0 + 1))))
     ∀ C : CochainComplex
         (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ,
-      Nonempty ((Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}
+      Nonempty ((Functor.mapDerivedCategory.{u + 1, u + 2}
           (SfbResidueComparisonCore.sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj
           (DerivedCategory.Q.obj
             (((ProEtale.comparisonUpperStar.{u + 2, u}

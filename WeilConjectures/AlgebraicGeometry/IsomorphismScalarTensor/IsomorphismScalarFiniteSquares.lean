@@ -90,8 +90,7 @@ private theorem finiteRight_ext (n : ℕ)
   let fa := ((e.inv ≫ (SheafOfModules.toSheaf _).map a).hom.app (op U)).hom.comp q.hom
   let fb := ((e.inv ≫ (SheafOfModules.toSheaf _).map b).hom.app (op U)).hom.comp q.hom
   change fa z = fb z
-  induction z using TensorProduct.induction_on with
-  | zero => exact (_root_.map_zero fa).trans (_root_.map_zero fb).symm
+  induction z using TensorProduct.inductionOn with
   | tmul s x => exact h U s x
   | add z w hz hw =>
       exact (_root_.map_add fa z w).trans

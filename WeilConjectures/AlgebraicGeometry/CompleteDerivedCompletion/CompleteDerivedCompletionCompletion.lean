@@ -64,10 +64,60 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 
 namespace CompleteDerivedCompletion
 
+attribute [local instance] AdicCompletion.modulesNatProducts AdicCompletion.complexNatProducts
+  AdicCompletion.complexNatLimit
+
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+/-- The specified right derived inverse limit has the normalized strict Roos model.
+Source: blueprint Notation 1, Stacks Tag 0941
+(blueprint: det-pbc-complete-derived-completion).
+Proof: use the exact-products comparison for the integral module category. Its
+comparison with ordinary inverse limit is invertible on K-injective towers by the
+construction of the total right derived functor. Reverse the resulting comparison. -/
+theorem roosComparison (T : Scheme.{u}) :
+    Nonempty (DerivedCategory.Q ⋙ rlim l E T ≅ ExactProductsRoos.fibre ⋙ DerivedCategory.Q) := by
+  let : CountableAB4Star (AdicCompletion.Modules l E T) :=
+    .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
+      Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
+  obtain ⟨e, _⟩ := ExactProductsRoos.comparisonIso (rlim l E T)
+    (show (inverseLimit l E T).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ rlim l E T from
+      { app := (inverseLimit l E T).rightDerivedFunctorUnitQ
+        naturality _ _ a := (inverseLimit l E T).rightDerivedFunctorUnitQ_naturality a })
+    (fun I hI ↦ by
+      let := hI
+      change IsIso ((inverseLimit l E T).rightDerivedFunctorUnitQ I)
+      rw [Functor.rightDerivedFunctorUnitQ_eq]
+      infer_instance)
+  exact ⟨e.symm⟩
+
+/-- The constant-tower functor on derived categories is fully faithful, so the
+canonical constant-limit unit is invertible.
+Source: blueprint Notation 4 (blueprint: det-pbc-complete-derived-completion).
+Proof: evaluation at the terminal level is exact and left adjoint to the constant
+functor. Derive this adjunction. The composite constant then evaluation is the identity,
+so the derived constant functor is fully faithful. The unit of any adjunction with
+fully faithful left adjoint is invertible, in particular the specified limit adjunction. -/
+theorem constantLimitUnit_isIso (T : Scheme.{u})
+    (M : DerivedCategory (AdicCompletion.Modules l E T)) :
+    IsIso ((constantLimitAdjunction l E T).unit.app M) := by
+  let a := (UnboundedExactTower.evaluationZeroConstAdjunction
+    (AdicCompletion.Modules l E T)).mapDerivedCategoryRightDerivedAdjunction
+    |>.ofNatIsoRight (constant l E T).rightDerivedFunctorIsoMapDerivedCategory
+  let e : dconstant l E T ⋙ dev l E T 0 ≅ 𝟭 _ :=
+    Functor.mapDerivedCategoryCompIso (constant l E T) (ev l E T 0) ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (Functor.constCompEvaluationObj (C := ℕᵒᵖ)
+          (D := AdicCompletion.Modules l E T) (op 0)) ≪≫
+      Functor.mapDerivedCategoryIdIso _
+  let h := a.fullyFaithfulROfCompIsoId e
+  let := h.full
+  let := h.faithful
+  infer_instance
 
 /-- Scalar powers are respected by the induced action on every integral module.
 Source: blueprint Notation 3 (blueprint: det-pbc-complete-derived-completion).
@@ -457,7 +507,7 @@ private theorem strictProductUnit_difference (T : Scheme.{u})
   simp only [strictProductUnit, towerTransitionEndomorphism,
     towerProductShift, Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
     Category.assoc,
-    Pi.lift_π, Pi.lift_π_assoc, sub_eq_zero, zero_comp]
+    Pi.lift_comp_π, Pi.lift_comp_π_assoc, sub_eq_zero, zero_comp]
   apply HomologicalComplex.Hom.ext
   funext j
   have h := (((strictAugmentation l E T).app P).f j).naturality
@@ -505,7 +555,8 @@ private theorem principalPositiveRoos (T : Scheme.{u})
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.comp_sub,
       Preadditive.sub_comp,
-      Category.comp_id, Category.assoc, Pi.lift_π, Pi.lift_π_assoc, hs, sub_self, zero_comp]
+      Category.comp_id, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc, hs, sub_self,
+      zero_comp]
   obtain ⟨b, hb, hu⟩ := strictPrincipalLevels l E T P
   apply AdicCompletion.quotientTowerComparison μ (fun n ↦ X.obj (op n)) t u hz
     (fun n ↦ (b n).inv) (fun _ ↦ inferInstance)
@@ -570,12 +621,12 @@ private theorem adjointRoosAugmentation (T : Scheme.{u})
     intro n
     have hπ : strictProductUnit l E T P ≫
         Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n =
-          ((ev l E T n).mapHomologicalComplex (.up ℤ)).map α := Pi.lift_π _ n
+          ((ev l E T n).mapHomologicalComplex (.up ℤ)).map α := Pi.lift_comp_π _ n
     rw [hπ]
     change (h ≫ (Pi.lift (f := fun n : ℕ ↦ X.asFunctor.obj (op n))
       (fun n : ℕ ↦ (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app X))) ≫
         Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n = _
-    rw [Category.assoc, Pi.lift_π]
+    rw [Category.assoc, Pi.lift_comp_π]
     apply HomologicalComplex.Hom.ext
     funext j
     have he := (a.homEquiv P X).symm_apply_apply α
@@ -876,10 +927,10 @@ private theorem scalarSource_reduction_zero (T : Scheme.{u})
     apply Pi.hom_ext
     intro n
     simp only [towerTransitionEndomorphism, towerProductShift,
-      Preadditive.sub_comp, Category.id_comp, Category.assoc, Pi.lift_π, ht]
+      Preadditive.sub_comp, Category.id_comp, Category.assoc, Pi.lift_comp_π, ht]
     change Pi.π (fun _ : ℕ ↦ P) n - Pi.π (fun _ : ℕ ↦ P) (n + 1) ≫ (r • 𝟙 P) =
       𝟙 V ≫ Pi.π (fun _ : ℕ ↦ P) n - b ≫ a ≫ Pi.π (fun _ : ℕ ↦ P) n
-    simp only [Category.id_comp, a, b, Pi.map_π, Pi.lift_π_assoc]
+    simp only [Category.id_comp, a, b, Pi.map_π, Pi.lift_comp_π_assoc]
   have hq : QuasiIso
       (DerivedNakayama.scalarOnComplex l E T (uniformizer l E)
         (ExactProductsRoos.fibre.obj X)) := by

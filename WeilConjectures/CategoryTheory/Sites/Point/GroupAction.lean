@@ -128,6 +128,7 @@ lemma mem_equivariantMaps {X : C} (f : Φ.fiber.obj X → M.V) :
       ∀ (σ : G) (x : Φ.fiber.obj X), f ((act σ).app X x) = (M.ρ σ).hom (f x) :=
   Iff.rfl
 
+
 /-- Precomposition with `Φ.fiber.map g` on equivariant maps. -/
 def equivariantMapsComap {X Y : C} (g : Y ⟶ X) :
     Φ.equivariantMaps act M X →+ Φ.equivariantMaps act M Y where
@@ -160,6 +161,7 @@ lemma equivariantPresheaf_map_apply_coe {X Y : Cᵒᵖ} (g : X ⟶ Y)
     ((Φ.equivariantPresheaf act M).map g f).1 y = f.1 (Φ.fiber.map g.unop y) :=
   rfl
 
+
 /-- Two elements of the fibre over `X` coming from the fibres over two objects of a covering
 sieve also come from a common object of that sieve. -/
 lemma exists_of_fiber_map_eq {X Y₁ Y₂ : C} (f₁ : Y₁ ⟶ X) (f₂ : Y₂ ⟶ X) (y₁ : Φ.fiber.obj Y₁)
@@ -169,8 +171,8 @@ lemma exists_of_fiber_map_eq {X Y₁ Y₂ : C} (f₁ : Y₁ ⟶ X) (f₂ : Y₂ 
   let α₁ : Φ.fiber.elementsMk _ y₁ ⟶ Φ.fiber.elementsMk _ (Φ.fiber.map f₁ y₁) := ⟨f₁, rfl⟩
   let α₂ : Φ.fiber.elementsMk _ y₂ ⟶ Φ.fiber.elementsMk _ (Φ.fiber.map f₁ y₁) := ⟨f₂, h.symm⟩
   obtain ⟨z, q₁, q₂, fac⟩ := IsCofiltered.cospan α₁ α₂
-  rw [Subtype.ext_iff] at fac
-  exact ⟨z.1, q₁.1, q₂.1, z.2, fac, q₁.2, q₂.2⟩
+  exact ⟨z.obj, q₁.hom, q₂.hom, z.val, congrArg (fun f ↦ f.hom) fac, q₁.map_val,
+    q₂.map_val⟩
 
 lemma isSheaf_equivariantPresheaf : Presheaf.IsSheaf J (Φ.equivariantPresheaf act M) := by
   refine Presheaf.isSheaf_of_isSheaf_comp J _ (forget AddCommGrpCat.{w}) ?_

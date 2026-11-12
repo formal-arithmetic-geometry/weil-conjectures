@@ -82,6 +82,7 @@ private theorem affine_eval_mem
   rw [heval]
   exact hzmem
 
+
 /-- Pointed evaluation lands in the relative separable closure.
 (blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).
 Source: Stacks Project, Tag 04HX. Represent a colimit element by an affine pointed

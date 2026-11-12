@@ -237,7 +237,7 @@ private theorem scalarPresentation (r : End (𝟭 A)) :
       (CompletionTriangle.TowerCalculus.principalCone D t j hjt M) (p + 1)).1
     simp only [RoosConeCalculus.v, roosProj_f] at hh
     erw [reassoc_of% hh]
-    have hπ := congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_π
+    have hπ := congrArg (fun f ↦ f.f (p + 1)) (Pi.lift_comp_π
       (fun n ↦ (CompletionTriangle.TowerCalculus.principalCone D t j hjt M).π.app (op n)) n)
     exact ((Category.assoc _ _ _).symm.trans
       (congrArg (fun f ↦ f ≫ (principalConeCoordinates ((τ n).app M) (p + 1)).hom) hπ)).trans
@@ -265,7 +265,7 @@ private theorem scalarPresentation (r : End (𝟭 A)) :
     symm
     rw [HomologicalComplex.comp_f, roosEval_f, ← Category.assoc, ← Category.assoc,
       roosAugment_χ]
-    erw [biprod.lift_snd, ← HomologicalComplex.comp_f, Pi.lift_π]
+    erw [biprod.lift_snd, ← HomologicalComplex.comp_f, Pi.lift_comp_π]
     rfl
   · intro M
     dsimp only [c]

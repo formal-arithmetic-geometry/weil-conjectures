@@ -192,7 +192,7 @@ lemma sigmaSpec_comp_Spec_map_algebraMap (ι : Type u) (k : Type u) [CommRing k]
         Spec.map (CommRingCat.ofHom (algebraMap k (ι → k))) =
       Sigma.desc fun _ : ι ↦ 𝟙 (Spec (.of k)) := by
   refine Sigma.hom_ext _ _ fun i ↦ ?_
-  rw [Sigma.ι_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
+  rw [Sigma.ι_comp_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
   rfl
 
 /-- A scheme whose ring of global sections is the zero ring is empty: at a point `p` the germ map

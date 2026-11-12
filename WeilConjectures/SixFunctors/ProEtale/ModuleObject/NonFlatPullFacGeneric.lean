@@ -132,14 +132,14 @@ lemma mapDerivedCategoryFactorsh_inv_app_comp_mapDerivedCategoryComapCompIso_inv
         ((comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.hom.app N), Category.assoc, e₁]
     simp
   have e₂' : (comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.inv.app N ≫
-      (Functor.mapDerivedCategoryCompIso (comap ψ) (comap φ)).hom.app (DerivedCategory.Qh.obj N) =
+      (Functor.mapDerivedCategoryCompIso (comap ψ) (comap φ)).inv.app (DerivedCategory.Qh.obj N) =
       (comap φ).mapDerivedCategoryFactorsh.inv.app
           (((comap ψ).mapHomotopyCategory (.up ℤ)).obj N) ≫
         (comap φ).mapDerivedCategory.map ((comap ψ).mapDerivedCategoryFactorsh.inv.app N) := by
     rw [← cancel_epi ((comap ψ ⋙ comap φ).mapDerivedCategoryFactorsh.hom.app N),
       Iso.hom_inv_id_app_assoc, ← e₂]
     simp [← Functor.map_comp]
-  simp only [mapDerivedCategoryComapCompIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, e₃]
+  simp only [mapDerivedCategoryComapCompIso, Iso.trans_inv, NatTrans.comp_app, e₃]
   rw [reassoc_of% e₁', e₂']
 
 /-- The transitivity isomorphism `L(Ext_{φ ≫ ψ}) ≅ L(Ext_φ) ⋙ L(Ext_ψ)` of the derived extensions

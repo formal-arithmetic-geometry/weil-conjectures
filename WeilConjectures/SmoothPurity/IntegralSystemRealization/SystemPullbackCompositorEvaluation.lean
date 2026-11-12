@@ -95,8 +95,8 @@ private theorem localized_compositor (o : Operations l E) (c : Compositors l E o
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     c.pullComp f g =
       Functor.mapDerivedCategoryNatIso (c.ordinaryPull f g) ≪≫
-        Functor.mapDerivedCategoryCompIso
-          (pullbackTensorSequenceInverse l E g) (pullbackTensorSequenceInverse l E f) := by
+        (Functor.mapDerivedCategoryCompIso
+          (pullbackTensorSequenceInverse l E g) (pullbackTensorSequenceInverse l E f)).symm := by
   apply Iso.ext
   apply Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso (coefficientSequenceModules l E Z) (.up ℤ))
@@ -111,7 +111,7 @@ private theorem localized_compositor (o : Operations l E) (c : Compositors l E o
   have hc := congrArg (fun t ↦
     (Functor.mapDerivedCategoryNatIso (c.ordinaryPull f g)).hom.app
       (DerivedCategory.Q.obj P) ≫ t) hf.symm
-  simpa only [Iso.trans_hom, NatTrans.comp_app, Category.assoc, pull,
+  simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc, pull,
     pullbackTensorSequenceDerived] using
     (c.pullComp_model f g P).trans (hn.symm.trans hc)
 

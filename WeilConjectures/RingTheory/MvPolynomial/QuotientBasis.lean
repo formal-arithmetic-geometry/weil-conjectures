@@ -54,7 +54,7 @@ def IsQuotientBasis {A : Type*} [CommRing A] [Algebra R A] (I : Ideal (MvPolynom
 `g`, namely `∑ₘ coeff m g * v (m, k)`. -/
 noncomputable def quotientBasisCoord {A : Type*} [CommRing A] (v : (n →₀ ℕ) × Fin d → A)
     (g : MvPolynomial n A) (k : Fin d) : A :=
-  ∑ m ∈ g.support, coeff m g * v (m, k)
+  ∑ m ∈ g.support, AddMonoidAlgebra.coeff g m * v (m, k)
 
 /-- The relations of the universal ring: the coordinates of `w l` are `e_l`, and the coordinates
 of `X i * m` are those of `∑ₗ v (m, l) • (X i * w l)`. -/
@@ -87,7 +87,7 @@ variable {A : Type*} [CommRing A] (v : (n →₀ ℕ) × Fin d → A)
 of `g`. -/
 theorem quotientBasisCoord_eq_sum_of_subset {g : MvPolynomial n A} {s : Finset (n →₀ ℕ)}
     (hs : g.support ⊆ s) (k : Fin d) :
-    quotientBasisCoord v g k = ∑ m ∈ s, coeff m g * v (m, k) :=
+    quotientBasisCoord v g k = ∑ m ∈ s, AddMonoidAlgebra.coeff g m * v (m, k) :=
   Finset.sum_subset hs fun m _ hm ↦ by rw [notMem_support_iff.mp hm, zero_mul]
 
 /-- Coordinates are additive. -/
@@ -116,7 +116,7 @@ theorem quotientBasisCoord_monomial (m : n →₀ ℕ) (a : A) (k : Fin d) :
     quotientBasisCoord v (monomial m a) k = a * v (m, k) := by
   classical
   rw [quotientBasisCoord_eq_sum_of_subset v support_monomial_subset, Finset.sum_singleton,
-    coeff_monomial, if_pos rfl]
+    coeff_monomial, ite_eq_left rfl]
 
 /-- Coordinates commute with base change along a ring map. -/
 theorem quotientBasisCoord_map {B : Type*} [CommRing B] (φ : A →+* B) (g : MvPolynomial n A)
@@ -136,6 +136,7 @@ noncomputable def quotientBasisCoordLinearMap : MvPolynomial n A →ₗ[A] Fin d
 theorem quotientBasisCoordLinearMap_apply (g : MvPolynomial n A) :
     quotientBasisCoordLinearMap v g = quotientBasisCoord v g :=
   rfl
+
 
 /-- The coordinates of `0` vanish. -/
 @[simp]
@@ -257,7 +258,7 @@ theorem quotientBasisCoord_X_mul (hv : ∀ x ∈ quotientBasisRelations w, aeval
   induction g using MvPolynomial.induction_on' with
   | monomial m a =>
     ext k
-    rw [X, monomial_mul, one_mul, add_comm, quotientBasisCoord_monomial,
+    rw [X, monomial_mul_monomial, one_mul, add_comm, quotientBasisCoord_monomial,
       eq_sum_quotientBasisCoord_of_relations w v hv]
     simp [quotientBasisCoord_monomial, Finset.mul_sum, mul_assoc]
   | add f g hf hg =>
@@ -359,7 +360,7 @@ theorem aeval_eq_zero_of_isQuotientBasis {I : Ideal (MvPolynomial n A)} (hI : Is
   · rw [← repr_mk_eq_quotientBasisCoord w _ hI hle, ← Module.Basis.mk_apply hI.1 hI.2.ge l,
       Module.Basis.repr_self, Finsupp.single_apply]
   · have hX : monomial (m + Finsupp.single i 1) (1 : A) = X i * monomial m 1 := by
-      rw [X, monomial_mul, one_mul, add_comm]
+      rw [X, monomial_mul_monomial, one_mul, add_comm]
     have key : Ideal.Quotient.mk I (monomial (m + Finsupp.single i 1) 1) =
         ∑ l, quotientBasisCoord (fun x ↦ (Module.Basis.mk hI.1 hI.2.ge).repr
           (Ideal.Quotient.mk I (monomial x.1 1)) x.2) (monomial m 1) l •
@@ -384,6 +385,7 @@ theorem aeval_mk_X {σ : Type*} (I : Ideal (MvPolynomial σ R)) (p : MvPolynomia
 theorem isQuotientBasis_quotientBasisIdeal : IsQuotientBasis w (quotientBasisIdeal w) :=
   isQuotientBasis_quotientBasisIdealOf w _ fun x hx ↦ by
     rwa [aeval_mk_X, Ideal.Quotient.eq_zero_iff_mem]
+
 
 /-- The extension of the universal ideal along any `φ : QuotientBasisRing w →ₐ[R] A` is
 `w`-adapted. -/
@@ -432,5 +434,6 @@ theorem coe_quotientBasisEquiv_apply {A : Type*} [CommRing A] [Algebra R A]
     (φ : QuotientBasisRing w →ₐ[R] A) :
     (quotientBasisEquiv w A φ).1 = (quotientBasisIdeal w).map (map φ.toRingHom) :=
   rfl
+
 
 end MvPolynomial

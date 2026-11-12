@@ -68,8 +68,8 @@ theorem exists_simplicial_hom_object (X : Scheme.{u})
   obtain ⟨hobj, hhom, _, _, _, hlimit, _⟩ :=
     S.simplicialIndex_finite_initial hfinite hnonempty d hdegenerate
   let T := ObjectProperty.FullSubcategory
-    (fun x : S.Elements ↦ x.fst.unop.len ≤ 2 * d)
-  let D := CategoryOfElements.π S ⋙ K
+    (fun x : S.Elements ↦ x.obj.unop.len ≤ 2 * d)
+  let D := Functor.Elements.π S ⋙ K
   let : Finite T := hobj
   let (a b : T) : Finite (a ⟶ b) := hhom a b
   -- Raise the hom universe to obtain a small finite category equivalent to T.
@@ -83,27 +83,27 @@ theorem exists_simplicial_hom_object (X : Scheme.{u})
   let : HasLimitsOfShape T (FormalCoproduct.{w} X.Etale) :=
     hasLimitsOfShape_of_equivalence (AsSmall.equiv : T ≌ AsSmall.{0} T).symm
   let : HasLimit D := (hlimit _ D).mpr inferInstance
-  refine ⟨limit D, fun n s ↦ limit.π D ⟨op ⦋n⦌, s⟩, ?_, ?_⟩
+  refine ⟨limit D, fun n s ↦ limit.π D (S.elementsMk (op ⦋n⦌) s), ?_, ?_⟩
   · intro m n φ s
-    exact limit.w D (CategoryOfElements.homMk
-      ⟨op ⦋n⦌, s⟩ ⟨op ⦋m⦌, S.map φ.op s⟩ φ.op rfl)
+    exact limit.w D (Functor.Elements.homMk
+      (x := S.elementsMk (op ⦋n⦌) s) (y := S.elementsMk (op ⦋m⦌) (S.map φ.op s)) φ.op rfl)
   · intro W f hf
     let c : Cone D :=
       { pt := W
         π :=
-          { app := fun a ↦ f a.fst.unop.len a.snd
+          { app := fun a ↦ f a.obj.unop.len a.val
             naturality := by
               intro a b g
               dsimp [D]
-              simpa only [Category.id_comp, Quiver.Hom.op_unop, g.property,
-                CategoryOfElements.π_obj, CategoryOfElements.π_map] using
-                (hf b.fst.unop.len a.fst.unop.len g.val.unop a.snd).symm } }
+              simpa only [Category.id_comp, Quiver.Hom.op_unop, g.map_val,
+                Functor.Elements.π_obj, Functor.Elements.π_map] using
+                (hf b.obj.unop.len a.obj.unop.len g.hom.unop a.val).symm } }
     refine ⟨limit.lift D c, ?_, ?_⟩
     · intro n s
-      exact limit.lift_π c ⟨op ⦋n⦌, s⟩
+      exact limit.lift_π c (S.elementsMk (op ⦋n⦌) s)
     · intro g hg
       apply limit.hom_ext
       intro a
-      exact (hg a.fst.unop.len a.snd).trans (limit.lift_π c a).symm
+      exact (hg a.obj.unop.len a.val).trans (limit.lift_π c a).symm
 
 end AlgebraicGeometry.Scheme

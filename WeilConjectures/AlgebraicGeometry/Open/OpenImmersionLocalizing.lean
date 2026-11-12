@@ -64,11 +64,11 @@ private lemma constantModelConstructible_of_iso
     IsConstantModelConstructible Λ X N := by
   classical
   by_cases hX : CompactSpace X ∧ QuasiSeparatedSpace X
-  · simp only [IsConstantModelConstructible, if_pos hX] at h ⊢
+  · simp only [IsConstantModelConstructible, ite_eq_left hX] at h ⊢
     obtain ⟨S, hS⟩ := h
     exact ⟨S, fun a ↦ finiteConstantLocalModel_of_iso Λ
       ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
-  · simp only [IsConstantModelConstructible, if_neg hX] at h ⊢
+  · simp only [IsConstantModelConstructible, ite_eq_right hX] at h ⊢
     intro V hV
     obtain ⟨S, hS⟩ := h V hV
     exact ⟨S, fun a ↦ finiteConstantLocalModel_of_iso Λ
@@ -116,7 +116,7 @@ private lemma openImmersionLowerShriek_bounded_degree
     quasiSeparatedSpace_of_quasiSeparated (U ↘ Spec (.of k))
   have hU : CompactSpace U ∧ QuasiSeparatedSpace U := ⟨inferInstance, inferInstance⟩
   have hH := K.property.1.2 n
-  rw [IsConstantModelConstructible, if_pos hU] at hH
+  rw [IsConstantModelConstructible, ite_eq_left hU] at hH
   obtain ⟨S, hcon, hS⟩ := finiteStratification_of_models
     (fun T f ↦ HasFiniteConstantLocalModel Λ T
       ((CondensedRing.upperStar Λ f).obj ((DerivedCategory.homologyFunctor _ n).obj K.obj))) hH

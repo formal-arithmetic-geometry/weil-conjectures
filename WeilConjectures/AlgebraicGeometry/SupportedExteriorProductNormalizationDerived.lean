@@ -64,8 +64,24 @@ theorem existsUnique_resolutionSupportedExteriorProduct
           (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj),
       IsResolutionSupportedExteriorProduct (ModuleCat.{u + 1} A) f g i j K.obj L.obj κ :=
   existsUnique_isResolutionSupportedExteriorProduct_of_resolutions (ModuleCat.{u + 1} A) f g i j
-    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k f i)
-    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k g j)
+    (by
+      intro P hP n hn
+      obtain ⟨I, φ, hφ, hI, hunit⟩ :=
+        exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport
+          A k f i P hP n hn
+      refine ⟨I, φ, hφ, hI, ?_⟩
+      have := hunit
+      dsimp only [exteriorSupportResolutionUnit, Functor.rightDerivedFunctorUnitQ]
+      infer_instance)
+    (by
+      intro Q hQ n hn
+      obtain ⟨I, φ, hφ, hI, hunit⟩ :=
+        exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport
+          A k g j Q hQ n hn
+      refine ⟨I, φ, hφ, hI, ?_⟩
+      have := hunit
+      dsimp only [exteriorSupportResolutionUnit, Functor.rightDerivedFunctorUnitQ]
+      infer_instance)
     K.obj L.obj K.property L.property
 
 /-- The supported exterior product κ, defined anew by the unique derived extension
@@ -148,10 +164,26 @@ theorem resolutionSupportedExteriorProduct_forgetSupport
   obtain ⟨n, hn⟩ := K.property
   obtain ⟨m, hm⟩ := L.property
   obtain ⟨I₀, eI₀, hI₀, huI₀⟩ := exists_kFlat_supportResolution_iso (ModuleCat.{u + 1} A) i
-    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k f i)
+    (by
+      intro P hP n hn
+      obtain ⟨I, φ, hφ, hI, hunit⟩ :=
+        exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport
+          A k f i P hP n hn
+      refine ⟨I, φ, hφ, hI, ?_⟩
+      have := hunit
+      dsimp only [exteriorSupportResolutionUnit, Functor.rightDerivedFunctorUnitQ]
+      infer_instance)
     K.obj n hn
   obtain ⟨J₀, eJ₀, hJ₀, huJ₀⟩ := exists_kFlat_supportResolution_iso (ModuleCat.{u + 1} A) j
-    (exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport A k g j)
+    (by
+      intro Q hQ n hn
+      obtain ⟨I, φ, hφ, hI, hunit⟩ :=
+        exists_quasiIso_kFlat_isIso_rightDerivedFunctorUnit_globalSectionsWithSupport
+          A k g j Q hQ n hn
+      refine ⟨I, φ, hφ, hI, ?_⟩
+      have := hunit
+      dsimp only [exteriorSupportResolutionUnit, Functor.rightDerivedFunctorUnitQ]
+      infer_instance)
     L.obj m hm
   have hnorm := (isResolutionSupportedExteriorProduct_iff (ModuleCat.{u + 1} A) f g i j K.obj L.obj
     _).1 (resolutionSupportedExteriorProduct_normalization A k f g i j K L hF) I₀ J₀ hI₀ hJ₀ eI₀ eJ₀

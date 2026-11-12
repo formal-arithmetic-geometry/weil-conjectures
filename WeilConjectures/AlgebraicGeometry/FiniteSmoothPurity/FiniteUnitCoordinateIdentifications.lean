@@ -37,6 +37,9 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
@@ -290,7 +293,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 import Mathlib.CategoryTheory.Abelian.Refinements
 import Mathlib.Algebra.Homology.ShortComplex.Exact

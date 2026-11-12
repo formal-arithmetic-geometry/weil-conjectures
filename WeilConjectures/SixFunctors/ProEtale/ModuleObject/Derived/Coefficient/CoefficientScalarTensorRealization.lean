@@ -59,7 +59,6 @@ the derived direct-image mate. All categories are ordinary unbounded derived cat
 
 ## Main statement
 
-* `coefficientScalarTensorRealization`: the realization and the specified tensor equation.
 -/
 
 @[expose] public noncomputable section

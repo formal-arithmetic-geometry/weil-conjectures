@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -257,8 +258,8 @@ private theorem finiteRetract_total [MonoidalCategory A] [MonoidalPreadditive A]
     dsimp only [forth, back]
     rw [← Category.assoc, HomologicalComplex.ι_mapBifunctorDesc]
     by_cases hp : p ∈ Finset.Icc a b
-    · simp only [dif_pos hp, biproduct.ι_desc, Category.comp_id]
-    · rw [dif_neg hp, zero_comp]
+    · simp only [dite_eq_left hp, biproduct.ι_desc, Category.comp_id]
+    · rw [dite_eq_right hp, zero_comp]
       have hz : IsZero (P.X p ⊗ Q.X q) :=
         (tensorRight (Q.X q)).map_isZero (hb p (by
           simp only [Finset.mem_Icc, not_and_or, not_le] at hp
@@ -284,6 +285,17 @@ private theorem finiteRetract_flat
       unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⟶ M)
     (hip : i ≫ p = 𝟙 M) : IsFlatOnSite (J := J) (R := R) M := by
   let := isMonoidal_W_independentCoefficients R
+  have : HasCountableCoproducts (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) := by
+    have := isGrothendieckAbelian_coefficientUniverse
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+    have : HasColimitsOfSize.{r, r} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+      IsGrothendieckAbelian.hasColimits _
+    have : HasColimitsOfSize.{0, 0} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+      hasColimitsOfSizeShrink.{0, 0, r, r} _
+    exact ⟨fun J _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)⟩
   let := monoidalCategory R
   let := symmetricCategory R
   let := tensorPreadditive R

@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Noetherian.Nilpotent
 public import WeilConjectures.Mathlib.Algebra.CharP.Lemmas
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # The absolute Frobenius of a scheme in characteristic `p`

@@ -88,7 +88,7 @@ theorem root_power_map_invariants
       apply Fin.ext
       exact Nat.eq_of_mul_eq_mul_left hr (congrArg Fin.val hij)
     apply LinearMap.injective_of_linearIndependent (f := φ.toLinearMap) be.basis.span_eq
-    convert bn.basis.linearIndependent.comp f hf using 1 <;> try rfl
+    convert bn.basis.linearIndependent.comp f hf using 1
     funext i
     simp only [Function.comp_apply, AlgHom.toLinearMap_apply, be.basis_eq_pow,
       bn.basis_eq_pow, map_pow]

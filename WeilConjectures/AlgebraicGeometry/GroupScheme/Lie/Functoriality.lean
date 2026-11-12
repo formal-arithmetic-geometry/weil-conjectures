@@ -59,7 +59,7 @@ theorem toLie_infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) :
   rw [Scheme.Modules.homUnit_smul_def, toLie, toLie, Category.assoc, omegaHom_eq_homOfDerivation,
     omegaHom_eq_homOfDerivation, homOfDerivation_comp_unitSmul]
   refine pullbackCongr_inv_comp_homOfDerivation G _ _ _ _ fun {V} a ↦ heq_of_eq ?_
-  rw [PresheafOfModules.Derivation.postcomp_d_apply]
+  rw [PresheafOfModulesOfCommRing.Derivation.postcomp_d_apply]
   change (DualNumber.scale _ (v.1.left.app V.unop a)).snd =
     (v.1.left.app V.unop a).snd * S.presheaf.map (homOfLE le_top).op r
   rw [DualNumber.snd_scale, mul_comm]

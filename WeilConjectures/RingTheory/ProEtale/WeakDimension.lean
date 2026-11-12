@@ -106,6 +106,7 @@ lemma flat_ideal [Ring.WeakDimensionLEOne R] (I : Ideal R) :
     Module.Flat R I :=
   flat_submodule _ _
 
+
 /-- The product of valuation rings is of weak dimension `≤ 1`. -/
 lemma pi_of_isValuationRing {ι : Type*} (R : ι → Type*) [∀ i, CommRing (R i)]
     [∀ i, IsDomain (R i)] [∀ i, ValuationRing (R i)] :
@@ -142,7 +143,7 @@ lemma pi_of_isValuationRing {ι : Type*} (R : ι → Type*) [∀ i, CommRing (R 
     have h1 := congrFun hx i
     by_cases h : f i = 0
     · simpa [hgdef, h] using h1
-    · simp only [hgdef, Pi.mul_apply, Pi.zero_apply, if_neg h] at h1
+    · simp only [hgdef, Pi.mul_apply, Pi.zero_apply, ite_eq_right h] at h1
       exact (mul_eq_zero.mp h1).resolve_right h
   -- The span of the idempotent `e` is a retract of the ring, hence flat.
   have hflat_e : Module.Flat (Π i, R i) (Ideal.span {e}) := by
@@ -300,7 +301,7 @@ theorem tfae : [AbsolutelyFlat R,
 
 instance (priority := low) [AbsolutelyFlat R] : IsReduced R := by
   have h : AbsolutelyFlat R ↔ IsReduced R ∧ ∀ P : Ideal R, P.IsPrime → P.IsMaximal :=
-    (tfae R).out 0 1
+    (tfae R).out 1 2
   exact (h.mp ‹_›).1
 
 variable (R S M : Type*) [CommRing R] [CommRing S] [Algebra R S]
@@ -529,8 +530,7 @@ lemma Algebra.IsEpi.tensorProductMap {R S T B : Type*} [CommRing R] [CommRing S]
     have h2 := congrArg (_root_.TensorProduct.lift φ) h
     simpa [φ, ← Algebra.TensorProduct.one_def] using h2
   intro y
-  induction y using TensorProduct.induction_on with
-  | zero => rw [TensorProduct.tmul_zero, TensorProduct.zero_tmul]
+  induction y using TensorProduct.inductionOn with
   | add y₁ y₂ h₁ h₂ => rw [TensorProduct.tmul_add, TensorProduct.add_tmul, h₁, h₂]
   | tmul t b =>
     have h1 : (t ⊗ₜ[R] b : T ⊗[R] B) =
@@ -581,8 +581,7 @@ theorem Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct
     RingHom.Flat.tensorProductMap (RingHom.flat_algebraMap_iff.mpr hMflat) (RingHom.Flat.id B)
   have hg_eq : ∀ v, g v = (IsScalarTower.toAlgHom A S T).toLinearMap.rTensor B v := by
     intro v
-    induction v using TensorProduct.induction_on with
-    | zero => simp
+    induction v using TensorProduct.inductionOn with
     | add a b ha hb => simp [ha, hb]
     | tmul s b => simp [hgdef]
   have hginj : Function.Injective g := fun a b hab ↦
@@ -602,8 +601,7 @@ theorem Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct
         (IsScalarTower.toAlgHom A S T).toLinearMap ∘ₗ LinearMap.snd A L S).rTensor B w =
       hL (e w).1 - g (e w).2 := by
     intro w
-    induction w with
-    | zero => simp
+    induction w using TensorProduct.inductionOn with
     | add w₁ w₂ h₁ h₂ =>
       simp only [map_add, h₁, h₂, Prod.fst_add, Prod.snd_add]
       ring

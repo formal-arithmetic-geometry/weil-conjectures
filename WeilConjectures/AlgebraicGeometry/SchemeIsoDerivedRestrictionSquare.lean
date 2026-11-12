@@ -89,6 +89,8 @@ theorem exists_scheme_iso_derived_restriction_square {X Y : Scheme.{u}} (s : X �
   let eO := (EV.trans eI).trans EU.symm
   have : e₀.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : eI.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have : eO.functor.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_full eO.functor
   have : eO.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : eO.inverse.Additive := Functor.additive_of_preserves_binary_products _
   let LX := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V
@@ -129,7 +131,7 @@ theorem exists_scheme_iso_derived_restriction_square {X Y : Scheme.{u}} (s : X �
   let d := eO.mapDerivedCategory
   refine ⟨d, ⟨?_⟩⟩
   exact isoWhiskerRight beta LY.mapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso e₀.functor LY).symm ≪≫
-    Functor.mapDerivedCategoryNatIso h1 ≪≫ Functor.mapDerivedCategoryCompIso LX eO.functor
+    (Functor.mapDerivedCategoryCompIso e₀.functor LY) ≪≫
+    Functor.mapDerivedCategoryNatIso h1 ≪≫ (Functor.mapDerivedCategoryCompIso LX eO.functor).symm
 
 end AlgebraicGeometry.Scheme

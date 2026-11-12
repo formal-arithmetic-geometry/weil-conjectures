@@ -173,14 +173,14 @@ theorem IsConnectedCurve.constant_kummer_baseChange_naturality
         (MorphismProperty.Over.mkIdTerminal @Etale C)).apply_symm_apply (ULift.up a)
       have hd := Sheaf.H.δSucc_zero hC
         (MorphismProperty.Over.mkIdTerminal @Etale C) z
-      change Sheaf.H.δ (C.kummerSequence_shortExact n hnC)
+      change Sheaf.H.δSections (C.kummerSequence_shortExact n hnC)
         (MorphismProperty.Over.mkIdTerminal @Etale C) (ULift.up a) = _
       change Sheaf.H.δSucc hC 0 z =
-        Sheaf.H.δ hC (MorphismProperty.Over.mkIdTerminal @Etale C)
+        Sheaf.H.δSections hC (MorphismProperty.Over.mkIdTerminal @Etale C)
           (Sheaf.H.equiv₀ C.gmSheaf
             (MorphismProperty.Over.mkIdTerminal @Etale C) z) at hd
       exact (hd.trans (congrArg
-        (Sheaf.H.δ hC (MorphismProperty.Over.mkIdTerminal @Etale C)) he)).symm
+        (Sheaf.H.δSections hC (MorphismProperty.Over.mkIdTerminal @Etale C)) he)).symm
     rw [hz, hδ 0, hφ₃]
     have hu := hUnits a.toMul
     have hd := Sheaf.H.δSucc_zero hP
@@ -191,7 +191,7 @@ theorem IsConnectedCurve.constant_kummer_baseChange_naturality
         (Etale.cohomologyMap (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
           C.gmSheaf 0 z))
     exact hd.trans (congrArg
-      (Sheaf.H.δ hP (MorphismProperty.Over.mkIdTerminal @Etale (pullback f (Spec.map
+      (Sheaf.H.δSections hP (MorphismProperty.Over.mkIdTerminal @Etale (pullback f (Spec.map
         (CommRingCat.ofHom (algebraMap k K)))))) hu)
 
 end AlgebraicGeometry

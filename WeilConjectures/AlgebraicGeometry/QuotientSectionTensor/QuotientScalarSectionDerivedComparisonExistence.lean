@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! Derived counit normalization for a fixed sectionwise scalar model. -/
 
@@ -81,6 +83,8 @@ private theorem four_comp_id
 namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
 
 open QuotientChange IntegralQuotient ModuleRingedComparison
+
+attribute [local instance] ModuleRingedComparison.sectionFunctorAdditive
 
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -184,6 +188,9 @@ theorem scalar_section_derived_comparison_exists (T : Scheme.{u})
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.map_comp, Category.id_comp, Functor.comp_obj,
     sectionLocalizationComparison, Iso.app_hom, hc, Category.assoc] at h ⊢
-  exact h.trans (four_comp_id _ _ _ _)
+  erw [Category.id_comp] at h
+  set_option backward.isDefEq.respectTransparency false in
+    simpa only [ec, Equivalence.mapHomologicalComplex_functor, ER, ES, F,
+      Category.id_comp, Category.comp_id] using h
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

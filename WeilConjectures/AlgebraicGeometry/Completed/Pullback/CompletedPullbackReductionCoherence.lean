@@ -276,12 +276,12 @@ private theorem source_unit (a : ℕ)
       (pbcRestrict φ)) K
     have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp (pbcRestrict φ)) K
     simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hn hu
-    simp only [completedReductionRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+    simp only [completedReductionRestrictionUnit, Iso.trans_hom,
       NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
       Functor.leftUnitor_hom_app, Functor.map_comp]
     apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)
-      (pbcRestrict φ)).hom.app K)).mp
-    erw [Iso.hom_inv_id_app_assoc]
+      (pbcRestrict φ)).inv.app K)).mp
+    erw [Iso.inv_hom_id_app_assoc]
     simp only [← Category.assoc]
     rw [← hn]
     simp only [Category.assoc]

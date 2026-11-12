@@ -77,10 +77,10 @@ private theorem inclusion_compIso_inv (F : C ⥤ D) (G : D ⥤ E)
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : DerivedCategory.Plus C) :
     DerivedCategory.Plus.ι.map ((Functor.mapDerivedCategoryPlusCompIso F G).inv.app K) =
-      (Functor.mapDerivedCategoryCompIso F G).inv.app K.obj := by
+      (Functor.mapDerivedCategoryCompIso F G).hom.app K.obj := by
   have h : DerivedCategory.Plus.ι.mapIso
       ((Functor.mapDerivedCategoryPlusCompIso F G).app K) =
-      (Functor.mapDerivedCategoryCompIso F G).app K.obj :=
+      (Functor.mapDerivedCategoryCompIso F G).symm.app K.obj :=
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app F G K)
   exact congrArg Iso.inv h
 

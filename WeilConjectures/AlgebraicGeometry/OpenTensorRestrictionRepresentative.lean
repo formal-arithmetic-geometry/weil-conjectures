@@ -7,6 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso
+public import Mathlib.Algebra.Homology.Localization
+
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The representative of ordinary open tensor restriction
 
@@ -23,7 +26,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
-
 private theorem localize_termwise_comparison
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -73,6 +75,7 @@ private theorem localize_termwise_comparison
     𝟙 _ ≫ DerivedCategory.Q.map a at hq
   simpa only [Category.comp_id, Category.id_comp] using
     congrArg (fun t ↦ t ≫ R.mapDerivedCategoryFactors.inv.app N) hq
+
 
 attribute [local irreducible] openPinnedTensorRestrictionIso
 
@@ -124,28 +127,6 @@ theorem openTensorRestriction_representative
     singleComplexOpenTensorRestrictionMap g' U U' j hj P =
       DerivedCategory.Q.map a ≫
         (schemeOpenRestriction X' U').mapDerivedCategoryFactors.inv.app N := by
-  dsimp only
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  have : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U
-  have : (schemeOpenRestriction X' U').Additive := schemeOpenRestriction_additive X' U'
-  have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
-      (Scheme.Modules.tensorPullback k).Additive := fun k ↦ tensorPullbackAdditive k
-  have : HasDerivedCategory.{w} X'.Modules := d X'
-  have : HasDerivedCategory.{w} U'.toScheme.Modules := d U'.toScheme
-  have : PreservesFiniteLimits (schemeOpenRestriction X' U') :=
-    schemeOpenRestriction_preservesFiniteLimits X' U'
-  have : PreservesFiniteColimits (schemeOpenRestriction X' U') :=
-    schemeOpenRestriction_preservesFiniteColimits X' U'
-  dsimp only [singleComplexOpenTensorRestrictionMap, openPinnedHomotopyTensorRestrictionIso]
-  have h := localize_termwise_comparison
-      (A := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      (B := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
-      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
-      (D := SheafOfModules.{u} (moduleRings U'.toScheme.toRingedSpace))
-      (Scheme.Modules.tensorPullback g')
-    (schemeOpenRestriction X U) (Scheme.Modules.tensorPullback j)
-    (schemeOpenRestriction X' U') (openPinnedTensorRestrictionIso g' U U' j hj) P
-  dsimp only at h
-  convert h using 1 <;> rfl
+  rfl
 
 end AlgebraicGeometry

@@ -82,13 +82,13 @@ theorem derivedUnit_classicalPullback_coherence {X X' : Scheme.{u}} (g' : X' ⟶
       (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L ⋙ Γ'))).inv
       DerivedCategory.Plus.Qh ≫
     (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft L.mapHomotopyCategoryPlus Γ'.rightDerivedFunctorPlusUnit ≫
+    Functor.whiskerLeft L.mapHomotopyCategoryPlus Γ'.rightDerivedFunctorPlusUnith ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight L.mapDerivedCategoryPlusFactorsh.inv Γ'.rightDerivedFunctorPlus ≫
     (Functor.associator _ _ _).hom
-  have hα : α = Functor.rightDerivedDesc _ Γ.rightDerivedFunctorPlusUnit
+  have hα : α = Functor.rightDerivedDesc _ Γ.rightDerivedFunctorPlusUnith
       (HomotopyCategory.Plus.quasiIso _) _ β := by
-    apply Functor.rightDerived_ext _ Γ.rightDerivedFunctorPlusUnit
+    apply Functor.rightDerived_ext _ Γ.rightDerivedFunctorPlusUnith
       (HomotopyCategory.Plus.quasiIso _)
     rw [Functor.rightDerived_fac]
     ext M : 2
@@ -96,7 +96,7 @@ theorem derivedUnit_classicalPullback_coherence {X X' : Scheme.{u}} (g' : X' ⟶
       Functor.rightUnitor_inv_app]
     erw [Category.id_comp]
     have hn := (Functor.mapDerivedCategoryPlusIdIso AddCommGrpCat.{u + 1}).inv.naturality
-      (Γ.rightDerivedFunctorPlusUnit.app M)
+      (Γ.rightDerivedFunctorPlusUnith.app M)
     simp only [Functor.id_map] at hn
     rw [reassoc_of% hn]
     have hf := NatTrans.congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac e) M

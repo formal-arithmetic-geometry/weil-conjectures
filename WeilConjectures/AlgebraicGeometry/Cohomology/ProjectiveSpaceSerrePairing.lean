@@ -93,7 +93,7 @@ def twistLaurentMonomial (m : ℤ) (s : Set n) (e : n → ℤ) :
 lemma twistLaurentMonomial_of_mem {m : ℤ} {s : Set n} {e : n → ℤ}
     (h : e ∈ laurentExponents s m) :
     twistLaurentMonomial A m s e = twistMonomialSection (Spec (.of A)) s ⟨e, h⟩ :=
-  dif_pos h
+  dite_eq_left h
 
 variable (A) in
 /-- The `A`-linear map sending a finitely supported family of coefficients `(cₑ)` to the
@@ -859,8 +859,8 @@ theorem twistSerrePairing_basis {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m :
   simp only [Finsupp.linearEquivFunOnFinite_apply, Finsupp.domLCongr_apply,
     Finsupp.domCongr_apply, Finsupp.equivMapDomain_apply, Finsupp.single_apply]
   by_cases h : (e : n → ℤ) = fun i ↦ -(s.1 i : ℤ) - 1
-  · rw [if_pos h, if_pos (Subtype.ext h)]
-  · rw [if_neg h, if_neg fun h' ↦ h (congrArg Subtype.val h')]
+  · rw [ite_eq_left h, ite_eq_left (Subtype.ext h)]
+  · rw [ite_eq_right h, ite_eq_right fun h' ↦ h (congrArg Subtype.val h')]
 
 end Canonical
 

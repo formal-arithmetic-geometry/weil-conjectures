@@ -37,11 +37,11 @@ private def onLocus : M.Submodule where
     intro x hx
     change M.map f x ∈ (if E Y then ⊤ else ⊥ : _root_.Submodule _ _)
     by_cases h : E X
-    · rw [if_pos (hE f h)]
+    · rw [ite_eq_left (hE f h)]
       exact _root_.Submodule.mem_top
     · have hx0 : x = 0 := by
         change x ∈ (if E X then ⊤ else ⊥ : _root_.Submodule _ _) at hx
-        simpa only [if_neg h, _root_.Submodule.mem_bot] using hx
+        simpa only [ite_eq_right h, _root_.Submodule.mem_bot] using hx
       rw [hx0, map_zero]
       exact _root_.Submodule.zero_mem _
 
@@ -63,11 +63,11 @@ private def locusMap
     change (if h : E Y then e Y h (M.map f x.1) else 0) =
       N.map f (if h : E X then e X h x.1 else 0)
     by_cases h : E X
-    · simp only [dif_pos h, dif_pos (hE f h)]
+    · simp only [dite_eq_left h, dite_eq_left (hE f h)]
       exact he f h x.1
     · have hx : x.1 = 0 := by
-        simpa only [onLocus, if_neg h, _root_.Submodule.mem_bot] using x.2
-      simp only [dif_neg h, hx, map_zero]
+        simpa only [onLocus, ite_eq_right h, _root_.Submodule.mem_bot] using x.2
+      simp only [dite_eq_right h, hx, map_zero]
       split_ifs <;> simp
 
 private theorem locusMap_injective
@@ -81,11 +81,11 @@ private theorem locusMap_injective
   · apply (e X h).injective
     change (if h' : E X then e X h' x.1 else 0) =
       (if h' : E X then e X h' y.1 else 0) at hxy
-    simpa only [dif_pos h] using hxy
+    simpa only [dite_eq_left h] using hxy
   · have hx : x.1 = 0 := by
-      simpa only [onLocus, if_neg h, _root_.Submodule.mem_bot] using x.2
+      simpa only [onLocus, ite_eq_right h, _root_.Submodule.mem_bot] using x.2
     have hy : y.1 = 0 := by
-      simpa only [onLocus, if_neg h, _root_.Submodule.mem_bot] using y.2
+      simpa only [onLocus, ite_eq_right h, _root_.Submodule.mem_bot] using y.2
     exact hx.trans hy.symm
 
 /-- Linear identifications on a restriction-stable locus which locally contains every
@@ -122,7 +122,7 @@ theorem exists_sheafificationIso_of_localEquiv
     intro Y f hf
     refine ⟨⟨M.map f.op x, ?_⟩, rfl⟩
     change M.map f.op x ∈ (if E (op Y) then ⊤ else ⊥ : _root_.Submodule _ _)
-    rw [if_pos (h Y f hf)]
+    rw [ite_eq_left (h Y f hf)]
     exact _root_.Submodule.mem_top
   have hbS : Presheaf.IsLocallySurjective J ((toPresheaf R.obj).map b) := by
     constructor
@@ -133,10 +133,10 @@ theorem exists_sheafificationIso_of_localEquiv
     let y := (e (op Y) (h Y f hf)).symm (N.map f.op x)
     refine ⟨⟨y, ?_⟩, ?_⟩
     · change y ∈ (if E (op Y) then ⊤ else ⊥ : _root_.Submodule _ _)
-      rw [if_pos (h Y f hf)]
+      rw [ite_eq_left (h Y f hf)]
       exact _root_.Submodule.mem_top
     · change (if h' : E (op Y) then e (op Y) h' y else 0) = N.map f.op x
-      simp only [dif_pos (h Y f hf), y, LinearEquiv.apply_symm_apply]
+      simp only [dite_eq_left (h Y f hf), y, LinearEquiv.apply_symm_apply]
   have haW := J.W_of_isLocallyBijective ((toPresheaf R.obj).map a)
   have hbW := J.W_of_isLocallyBijective ((toPresheaf R.obj).map b)
   have haIso : IsIso ((sheafification (𝟙 R.obj)).map a) := by
@@ -155,7 +155,7 @@ theorem exists_sheafificationIso_of_localEquiv
   intro X h x
   let y : P.toPresheafOfModules.obj X := ⟨x, by
     change x ∈ (if E X then ⊤ else ⊥ : _root_.Submodule _ _)
-    rw [if_pos h]
+    rw [ite_eq_left h]
     exact _root_.Submodule.mem_top⟩
   let η := (sheafificationAdjunction (𝟙 R.obj)).unit
   have hA := congrArg (fun k ↦ k.app X y) (η.naturality a)
@@ -164,7 +164,7 @@ theorem exists_sheafificationIso_of_localEquiv
     at hA
   change (η.app N).app X (if h' : E X then e X h' x else 0) =
     (S.map b).val.app X ((η.app P.toPresheafOfModules).app X y) at hB
-  simp only [dif_pos h] at hB
+  simp only [dite_eq_left h] at hB
   have hz : S.map a ≫ z.hom = S.map b := by
     simp only [z, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
       IsIso.hom_inv_id_assoc]

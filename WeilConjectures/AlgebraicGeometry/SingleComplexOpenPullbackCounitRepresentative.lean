@@ -11,7 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedCompositi
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
 
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization
-import WeilConjectures.AlgebraicGeometry.SingleComplexOpenHomotopyTensorCounit
+import all WeilConjectures.AlgebraicGeometry.SingleComplexOpenHomotopyTensorCounit
+import WeilConjectures.AlgebraicGeometry.SingleComplexOpenUnderivedTensorMate
 
 /-! # The open pullback square evaluated on a direct-image representative
 

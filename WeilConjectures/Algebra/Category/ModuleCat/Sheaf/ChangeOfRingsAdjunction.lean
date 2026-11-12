@@ -74,6 +74,9 @@ theorem exists_changeOfRingsAdjunction :
       changeOfRingsPresheaf.{u, u, u} (J := 𝓙) α M ≅ T.obj M.val := by
     refine PresheafOfModules.isoMk (q M.val) ?_
     intro U V i
+    let : Module (A.presheaf.obj V)
+        ((ModuleCat.restrictScalars ((𝓡 A).obj.map i).hom).obj (M.val.obj V)) :=
+      inferInstanceAs (Module (A.presheaf.obj V) (M.val.obj V))
     apply ModuleCat.ExtendScalars.hom_ext
     intro m
     change (q M.val V).hom (changeOfRingsMap.{u, u, u} (J := 𝓙) α M i _) = _

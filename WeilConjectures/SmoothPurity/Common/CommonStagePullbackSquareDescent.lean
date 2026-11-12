@@ -72,6 +72,10 @@ private theorem automorphism_iso_existsUnique_transport
   subst G'
   exact hb
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 400000 in
+-- needed on the v4.35 toolchain: the elaboration exceeds the default heartbeat budget
 /-- Compatible isomorphisms of finite-stage pullback composites descend uniquely.
 Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
 sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md,

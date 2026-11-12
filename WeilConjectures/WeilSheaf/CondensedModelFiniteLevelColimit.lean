@@ -206,7 +206,7 @@ lemma exists_isLocallyConstant_comp_eq_of_isLimit [IsCofiltered I]
       (h.some : α) = b := by
     subst hS
     exact congrArg _ (Set.mem_singleton_iff.mp h.some_mem)
-  simp only [Function.comp_apply, F, dif_pos hne]
+  simp only [Function.comp_apply, F, dite_eq_left hne]
   exact key _ hne _ hPx
 
 end Limit
@@ -442,11 +442,11 @@ def isColimitAdicFunctionsPresheafMapCoconeFiniteLevelCone [CompactSpace X₀]
   refine Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun i x y h ↦ ?_)
   · obtain ⟨K, s', hs'⟩ :=
       f.exists_locallyFiniteFunctionsComp_geometricFiberToFiniteLevel_eq l x.down
-    exact ⟨Opposite.op (Opposite.op K), ULift.up s', ULift.ext _ _ hs'.symm⟩
+    exact ⟨Opposite.op (Opposite.op K), ULift.up s', ULift.ext hs'.symm⟩
   · refine ⟨i, 𝟙 i, ?_⟩
     have := f.locallyFiniteFunctionsComp_geometricFiberToFiniteLevel_injective l i.unop.unop
       (congrArg ULift.down h)
-    obtain rfl : x = y := ULift.ext _ _ this
+    obtain rfl : x = y := ULift.ext this
     rfl
 
 end Adic
@@ -576,9 +576,9 @@ def isColimitCondensedRingObjMapCoconeFiniteLevelProEtCone [CompactSpace X₀]
     refine Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun i x y h ↦ ?_)
     · obtain ⟨K, s', hs'⟩ :=
         f.exists_locallyFiniteFunctionsComp_geometricFiberToFiniteLevel_eq l x.down
-      exact ⟨Opposite.op (Opposite.op K), ULift.up s', ULift.ext _ _ hs'.symm⟩
+      exact ⟨Opposite.op (Opposite.op K), ULift.up s', ULift.ext hs'.symm⟩
     · refine ⟨i, 𝟙 i, ?_⟩
-      obtain rfl : x = y := ULift.ext _ _
+      obtain rfl : x = y := ULift.ext
         (f.locallyFiniteFunctionsComp_geometricFiberToFiniteLevel_injective l i.unop.unop
           (congrArg ULift.down h))
       rfl
@@ -632,7 +632,7 @@ theorem exists_condensedRingObj_map_geometricFiberProjProEt_eq [CompactSpace X�
   rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h₂
   refine h₂.symm.trans ?_
   have h₃ : G.obj.map f.geometricFiberProjProEt.op (ULift.up t) = e.hom.app P x :=
-    ULift.ext _ _ ht
+    ULift.ext ht
   have h₄ := ConcreteCategory.congr_hom (e.hom_inv_id_app P) x
   rw [ConcreteCategory.comp_apply, ConcreteCategory.id_apply] at h₄
   exact (congrArg (e.inv.app P) h₃).trans h₄

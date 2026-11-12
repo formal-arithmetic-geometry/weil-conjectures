@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree

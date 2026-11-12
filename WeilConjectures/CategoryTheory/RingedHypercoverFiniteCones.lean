@@ -115,7 +115,7 @@ private lemma finite_local_lifts {A : Type*} (T : C) (s : Finset A) (hs : s.None
   let b : A → B V := fun a ↦ if ha : a ∈ s then (hP V f hf a ha).choose
     else (hP V f hf hs.choose hs.choose_spec).choose
   refine ⟨b, fun a ha ↦ ?_⟩
-  simpa only [b, dif_pos ha] using (hP V f hf a ha).choose_spec
+  simpa only [b, dite_eq_left ha] using (hP V f hf a ha).choose_spec
 
 private lemma face_family_independent (U : SimplicialObject C) (n m : ℕ) (T : C)
     (b : Fin (n + 3) → (T ⟶ U _⦋n + 1⦌))

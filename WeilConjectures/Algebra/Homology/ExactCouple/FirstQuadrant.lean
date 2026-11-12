@@ -276,6 +276,7 @@ lemma firstQuadrantSpectralSequence_page_two_X (hX : X.IsFirstQuadrant) (pq : �
       X.dComplex.homology (pq.1, pq.1 + pq.2) :=
   rfl
 
+
 /-- In a first quadrant couple, the entry `E^{p, n}` of the `N`-th derived couple is stable for
 `N ≥ max p (n - p + 1)`. -/
 lemma nonempty_derivedIter_E_iso_of_isFirstQuadrant (hX : X.IsFirstQuadrant) (p n : ℤ)

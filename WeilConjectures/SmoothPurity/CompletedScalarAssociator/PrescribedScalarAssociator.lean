@@ -22,6 +22,7 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -66,6 +67,7 @@ import all Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import all Mathlib.CategoryTheory.Limits.EssentiallySmall
 import all WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.Algebra.Homology.Localization
 import all Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import all Mathlib.CategoryTheory.Adjunction.Additive
 import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -349,17 +351,31 @@ theorem presentation_associator_exists
         (sectionTensor (p b) ((p a).ordinary.obj M) U t (sectionTensor (p a) M U s x)) =
         sectionTensor (p c) M U (t * b.hom.app U s) x) ∧
       (∀ P : CochainComplex (Modules R) ℤ,
-        (p b).derived.map ((p a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫
+        ((p a).derived ⋙ (p b).derived).map
+            ((DerivedCategory.quotientCompQhIso (Modules R)).inv.app P) ≫
+          (p b).derived.map ((p a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫
           (p b).counit.app ((HomotopyCategory.quotient _ _).obj
             (((p a).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ≫
+          (DerivedCategory.quotientCompQhIso (Modules T)).hom.app
+            (((p b).ordinary.mapHomologicalComplex (.up ℤ)).obj
+              (((p a).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ≫
           DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso o (.up ℤ)).hom.app P) =
         d.hom.app (DerivedCategory.Q.obj P) ≫
-          (p c).counit.app ((HomotopyCategory.quotient _ _).obj P)) ∧
+          (p c).derived.map ((DerivedCategory.quotientCompQhIso (Modules R)).inv.app P) ≫
+          (p c).counit.app ((HomotopyCategory.quotient _ _).obj P) ≫
+          (DerivedCategory.quotientCompQhIso (Modules T)).hom.app
+            (((p c).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ∧
       (∀ (o' : (p a).ordinary ⋙ (p b).ordinary ≅ (p c).ordinary),
         (∀ M U s t x, (o'.hom.app M).val.app U
           (sectionTensor (p b) ((p a).ordinary.obj M) U t (sectionTensor (p a) M U s x)) =
           sectionTensor (p c) M U (t * b.hom.app U s) x) → o' = o) := by
   obtain ⟨v⟩ := scalarCompositionData p a b c hc
-  exact ⟨v.ordinary, v.derived, v.tensor, v.representative, v.unique⟩
+  refine ⟨v.ordinary, v.derived, v.tensor, ?_, v.unique⟩
+  intro P
+  change ((p a).derived ⋙ (p b).derived).map (𝟙 _) ≫ _ ≫ _ ≫ 𝟙 _ ≫ _ =
+    _ ≫ (p c).derived.map (𝟙 _) ≫ _ ≫ 𝟙 _
+  erw [((p a).derived ⋙ (p b).derived).map_id, (p c).derived.map_id,
+    Category.id_comp, Category.id_comp, Category.id_comp, Category.comp_id]
+  exact v.representative P
 
 end WeilConjectures.CompletedScalarAssociator

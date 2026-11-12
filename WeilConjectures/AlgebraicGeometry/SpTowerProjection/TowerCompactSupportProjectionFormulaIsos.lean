@@ -258,7 +258,7 @@ private theorem fixed_constructible
   let R := sfIntrinsicDerivedEquivalence W A
   let ecomp : ProEtale.finiteCoefficientIntrinsicDerivedComparison W A ≅
       F.mapDerivedCategory.{u + 1, u + 1} ⋙ R.functor :=
-    Functor.mapDerivedCategoryCompIso F G
+    (Functor.mapDerivedCategoryCompIso F G).symm
   let e : F.mapDerivedCategory.{u + 1, u + 1}.obj M.obj ≅ R.inverse.obj K :=
     R.unitIso.app _ ≪≫ R.inverse.mapIso
       (ecomp.symm.app M.obj ≪≫ eM)

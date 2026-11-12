@@ -126,7 +126,7 @@ private theorem finite_root_tuple_presentation
   rw [etale_root_restrict]
   have hgi : g ≫ (toProEt T).map (Pi.π D i) = f i := by
     dsimp only [g]
-    rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_π]
+    rw [Category.assoc, inv_piComparison_comp_map_π, Pi.lift_comp_π]
   have hleft := congrArg (fun q ↦ q.left) hgi
   rw [← hf i]
   exact congrArg (fun q : W.unop.left ⟶ V.left ↦

@@ -246,7 +246,7 @@ theorem points (A : Type u) [CommRing A] :
       · intro hne
         have hlt : (e q).val.2.asIdeal < (e q).val.1.asIdeal :=
           lt_of_le_of_ne (e q).property (fun h ↦ hne (PrimeSpectrum.ext h.symm))
-        exact SetLike.exists_of_lt hlt
+        exact IsConcreteLE.exists_of_lt hlt
       · rintro ⟨f, hf, hnf⟩ h
         exact hnf (h ▸ hf)
     rw [← isOpen_compl_iff, hcompl]

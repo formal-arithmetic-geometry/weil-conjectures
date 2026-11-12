@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.Normed.Module.FiniteDimension
 public import Mathlib.NumberTheory.Padics.ProperSpace
+public import Mathlib.Topology.Algebra.Group.Units
 public import Mathlib.Topology.Algebra.Module.FiniteDimension
 public import Mathlib.Topology.Instances.Matrix
 public import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
@@ -64,6 +65,7 @@ theorem coe_matrixUnits_inv (ρ : Representation k W V) (b : Basis ι k V) (w : 
     (((ρ.matrixUnits b w)⁻¹ : (Matrix ι ι k)ˣ) : Matrix ι ι k) =
       (ρ.matrixUnits b w⁻¹ : Matrix ι ι k) := by
   rw [map_inv]
+
 
 end Matrix
 

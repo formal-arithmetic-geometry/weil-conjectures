@@ -79,7 +79,7 @@ theorem derived_open_unit_restriction_isIso
   let : PreservesFiniteLimits (G ⋙ F) := comp_preservesFiniteLimits G F
   let : PreservesFiniteColimits (G ⋙ F) := comp_preservesFiniteColimits G F
   let eD : G.mapDerivedCategory ⋙ F.mapDerivedCategory ≅ 𝟭 (DerivedCategory A) :=
-    (Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso G F) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso A
   let ff := adjD.fullyFaithfulLOfCompIsoId eD
   let ffR := (Adjunction.Triple.fullyFaithfulEquiv ⟨adjD, adj⟩) ff

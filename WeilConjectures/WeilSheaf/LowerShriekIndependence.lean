@@ -490,7 +490,7 @@ noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso {X Y Z : 
       (ProEtaleWeilSheaf.upperStar k₀ l ψ).mapDerivedCategory ⋙
         (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l φ ψ) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 variable {X X' Z Z' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [X'.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]

@@ -47,7 +47,7 @@ variable {D : Type u₂} [Category.{v + 1} D] [Abelian D]
 omit [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C] in
 set_option backward.isDefEq.respectTransparency false in
-private theorem tensorPullCounit_fac (F : C ⥤ D) [F.Additive]
+private theorem tensorPullCounit_fac_port (F : C ⥤ D) [F.Additive]
     (G : DerivedCategory C ⥤ DerivedCategory D)
     (γ : DerivedCategory.Qh ⋙ G ⟶
       F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
@@ -94,7 +94,8 @@ private theorem tensorPullCounit_fac (F : C ⥤ D) [F.Additive]
     ((F.mapHomotopyCategory (.up ℤ)).obj P)]
 
 end GenericNormalization
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralIntegralResidueTensorPullCounitCore
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
@@ -200,10 +201,10 @@ theorem integralResidue_tensorPullCounit_core {X Y : Scheme.{u}} (f : X ⟶ Y)
     let x ← localExpr `X
     let .const _ (level :: _) := (← Lean.Meta.inferType x).getAppFn |
       throwError "scheme universe absent"
-    let info ← Lean.getConstInfo ``tensorPullCounit_fac
+    let info ← Lean.getConstInfo ``tensorPullCounit_fac_port
     let levels := info.levelParams.map fun n =>
       if n == `v then level else Lean.Level.succ (Lean.Level.succ level)
-    let fn := Lean.mkConst ``tensorPullCounit_fac levels
+    let fn := Lean.mkConst ``tensorPullCounit_fac_port levels
     -- Four parameters specify C and its category, abelian and Grothendieck data.
     -- Nine specify D with its monoidal, closed, braided and flat-resolution data.
     -- The final constructor arguments are B', H, epsilon and its derived property.

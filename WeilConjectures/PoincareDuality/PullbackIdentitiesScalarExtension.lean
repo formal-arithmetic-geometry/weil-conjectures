@@ -125,7 +125,7 @@ def pullbackIdentityInverseImageCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
     inverseImageIntegralDerived l E g ⋙ inverseImageIntegralDerived l E (inv g) ≅
       𝟭 (DerivedCategory (integralTowerModules l E Y)) :=
   (Functor.mapDerivedCategoryCompIso (inverseImageIntegralModules l E g)
-    (inverseImageIntegralModules l E (inv g))).symm ≪≫
+    (inverseImageIntegralModules l E (inv g))) ≪≫
       Functor.mapDerivedCategoryNatIso (pullbackIdentityModuleCounit l E g) ≪≫
         Functor.mapDerivedCategoryIdIso _
 

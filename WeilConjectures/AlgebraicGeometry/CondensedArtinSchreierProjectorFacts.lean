@@ -119,7 +119,7 @@ private theorem translation_add (a b : k) : τ a ≫ τ b = τ (a + b) := by
     ρ ((Fintype.equivFin k).symm j)))).1
   apply Pi.hom_ext
   intro c
-  simp only [Category.assoc, Pi.lift_π]
+  simp only [Category.assoc, Pi.lift_comp_π]
   rw [Functor.map_comp, Category.assoc,
     condensedArtinSchreierChart_translation, condensedArtinSchreierChart_translation,
     condensedArtinSchreierChart_translation, add_assoc, add_comm b a]

@@ -208,12 +208,12 @@ theorem principalOpenCech_injective_comparison
       (τ₁ n).hom (α₁.f n (a.f n s)) S
     rw [hb, hα₁, hα]
     by_cases h : S.val.card = 1
-    · simp only [dif_pos h]
+    · simp only [dite_eq_left h]
       rw [hac]
       exact (ConcreteCategory.congr_hom
         (comparison_restriction_naturality A g V _ (hls S h) n _ (hes S h n))
         ((σ n).hom s)).symm
-    · simp only [dif_neg h, map_zero]
+    · simp only [dite_eq_right h, map_zero]
   exact ⟨I, K₁, T₁, σ₁, τ₁, α₁, a, b, (fun n ↦ inferInstance),
     hK₁, hT₁, hα₁, ha, hsquare⟩
 

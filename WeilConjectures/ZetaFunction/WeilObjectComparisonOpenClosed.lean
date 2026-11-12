@@ -417,6 +417,7 @@ theorem hasLocalWeilObjectComparison_toComplex_of_openClosed
   .of_openClosed j i hij (hU.of_iso ((toComplexCompUpperStarIso j).app G).symm)
     (hZ.of_iso ((toComplexCompUpperStarIso i).app G).symm)
 
+
 /-- Open–closed dévissage of the comparison for a Weil sheaf `G` on `X`, from the comparisons for
 the Weil sheaves `j^*G` and `i^*G`. -/
 theorem hasWeilObjectComparison_toComplex_of_openClosed

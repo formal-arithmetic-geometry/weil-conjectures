@@ -71,7 +71,7 @@ attribute [local semireducible] change extend
 attribute [local implicit_reducible] SheafOfModules.restrictScalars change
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj
   ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
-  Functor.mapHomologicalComplex extend extendComparison
+  extend extendComparison
   SheafOfModules.unit PresheafOfModules.unit CategoryTheory.sheafCompose
 
 private theorem strict_scalar_step

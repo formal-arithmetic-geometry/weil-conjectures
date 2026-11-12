@@ -96,21 +96,21 @@ theorem exists_nat_homotopy_cancellation_of_isUnit_entry
     · subst i
       have hS : S (j + 1) = LinearMap.ker α := by simp [S]
       let g' := (g (j + 1)).trans (LinearEquiv.ofEq _ _ hS)
-      simpa only [n', if_true] using Nonempty.intro (bi.map g'.symm)
+      simpa only [n', ite_true] using Nonempty.intro (bi.map g'.symm)
     by_cases ht : i = j
     · subst i
       have hS : S j = LinearMap.ker β := by simp [S]
       let g' := (g j).trans (LinearEquiv.ofEq _ _ hS)
-      simpa only [n', if_neg hne, if_true] using Nonempty.intro (bj.map g'.symm)
+      simpa only [n', ite_eq_right hne, ite_true] using Nonempty.intro (bj.map g'.symm)
     have hS : S i = ⊤ := by simp [S, hs, ht]
     let g' := (g i).trans (LinearEquiv.ofEq _ _ hS)
     let g'' := g'.trans (Submodule.topEquiv : _ ≃ₗ[R] _)
-    simpa only [n', if_neg hs, if_neg ht] using Nonempty.intro ((b i).map g''.symm)
+    simpa only [n', ite_eq_right hs, ite_eq_right ht] using Nonempty.intro ((b i).map g''.symm)
   · have hp := p.isLt
-    simp only [n', if_true]
+    simp only [n', ite_true]
     omega
   · have hq := q.isLt
-    simp only [n', if_neg hne, if_true]
+    simp only [n', ite_eq_right hne, ite_true]
     omega
   · intro i hs ht
     simp [n', hs, ht]

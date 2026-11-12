@@ -120,9 +120,6 @@ theorem tensorResolutionSemilinearMap_eq {A B : CommRingCat.{u}}
   apply ((tensorResolutionSemilinearAdjunction φ).homEquiv M (tilde N)).injective
   simp only [tensorResolutionSemilinearMap, Equiv.apply_symm_apply]
   rw [Adjunction.homEquiv_naturality_right]
-  change _ = ((tensorResolutionSemilinearAdjunction φ).homEquiv M
-    (((ModuleCat.extendScalars φ.hom) ⋙ tilde.functor B).obj M))
-      ((tensorResolutionSemilinearIso φ).hom.app M) ≫ _
   dsimp only [tensorResolutionSemilinearIso]
   rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
   let β := ((ModuleCat.extendRestrictScalarsAdj φ.hom).homEquiv M N).symm f

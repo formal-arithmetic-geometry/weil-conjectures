@@ -976,8 +976,7 @@ private theorem scalar_abelian_ext (S : Scheme.{u})
   apply Sheaf.hom_ext
   apply sheafify_hom_ext (ProEt.topology S) _ _ H.property
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [map_add, hz, hw]
   | tmul b x => exact h U b x
 

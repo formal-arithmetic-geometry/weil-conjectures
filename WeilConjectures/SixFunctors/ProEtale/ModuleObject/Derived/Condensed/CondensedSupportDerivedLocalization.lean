@@ -173,7 +173,7 @@ private theorem derivedOpenUnit {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersio
   let e := openImmersionLowerShriek Λ j
   let r := supportPullback Λ j
   have h := (openSupportDerivedAdjunction Λ j).fullyFaithfulLOfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso e r).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso e r ≪≫
       Functor.mapDerivedCategoryNatIso (asIso adj.unit).symm ≪≫
         Functor.mapDerivedCategoryIdIso (supportModules Λ U))
   have := h.full
@@ -188,7 +188,7 @@ private theorem derivedClosedCounit {Z X : Scheme.{u}} (i : Z ⟶ X)
   let e := lowerStar Λ i
   let r := supportPullback Λ i
   have h := (closedPullbackDerivedAdjunction Λ i).fullyFaithfulROfCompIsoId
-    ((Functor.mapDerivedCategoryCompIso e r).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso e r ≪≫
       Functor.mapDerivedCategoryNatIso (asIso (supportPullbackAdjunction Λ i).counit) ≪≫
         Functor.mapDerivedCategoryIdIso (supportModules Λ Z))
   have := h.full

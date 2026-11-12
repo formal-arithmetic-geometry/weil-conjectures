@@ -61,6 +61,7 @@ lemma continuousSheaf_obj_obj (U : S.ProEt) :
       AddCommGrpCat.of (ULift.{u + 1} C(U.left, A)) :=
   rfl
 
+
 variable {A} {B : Type} [TopologicalSpace B] [AddCommGroup B] [IsTopologicalAddGroup B]
 
 /-- The morphism of presheaves `C(-, A) ⟶ C(-, B)` given by postcomposition with a continuous
@@ -91,6 +92,7 @@ lemma continuousSheafMap_app_apply (φ : ContinuousAddMonoidHom A B) (U : S.ProE
     (f : ULift.{u + 1} C(U.left, A)) :
     (continuousSheafMap S φ).hom.app (op U) f = ULift.up ((φ : C(A, B)).comp f.down) :=
   rfl
+
 
 lemma continuousSheafMap_id :
     continuousSheafMap S (ContinuousAddMonoidHom.id A) = 𝟙 _ :=

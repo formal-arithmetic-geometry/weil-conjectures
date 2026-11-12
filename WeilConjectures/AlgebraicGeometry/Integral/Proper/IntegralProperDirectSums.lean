@@ -132,7 +132,7 @@ private theorem truncGE_preservesCoproducts
           π.app (K i) ≫ Sigma.ι L i
         rw [← π.naturality (Sigma.ι K i)]
         change (Sigma.ι K i ≫ (t.truncGEπ a).app (∐ K)) ≫ t.descTruncGE f a = _
-        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_desc]
+        rw [Category.assoc, t.π_descTruncGE, Sigma.ι_comp_desc]
       · apply t.from_truncGE_obj_ext
         dsimp only [r]
         rw [← Category.assoc, t.π_descTruncGE]
@@ -253,13 +253,13 @@ private theorem preservesCofanOnClass
       obtain ⟨i, hi⟩ := i
       change t.ι.app (Discrete.mk i) ≫ _ = _
       rw [ht.fac]
-      simp only [Cofan.mk_ι_app, dif_pos hi]
+      simp only [Cofan.mk_ι_app, dite_eq_left hi]
     · intro s m hm
       apply ht.hom_ext
       intro ⟨i⟩
       rw [ht.fac]
       by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
           using hm ⟨i, hi⟩
       · exact (not_not.mp hi).eq_of_src _ _
   let e := (equivShrink.{v} J).symm

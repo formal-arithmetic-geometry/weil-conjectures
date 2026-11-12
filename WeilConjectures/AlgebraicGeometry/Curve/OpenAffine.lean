@@ -75,7 +75,6 @@ private lemma exists_germToFunctionField_eq (U : X.Opens) [Nonempty U] [Nonempty
       exact hc f.1 f.2.1
     rw [h₂, mul_assoc]
     convert mul_one b using 2
-    exact h₁
   obtain ⟨t, ht⟩ := Scheme.exists_gluing_of_germToFunctionField_eq V s b hs
   have hle : U ≤ ⨆ i, V i := by
     intro x hx

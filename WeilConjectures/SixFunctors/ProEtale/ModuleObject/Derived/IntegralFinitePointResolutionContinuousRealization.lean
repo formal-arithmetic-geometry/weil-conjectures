@@ -128,8 +128,8 @@ private def resolutionInclusion (O : Type) [CommRing O]
         { toFun b := ULift.up ⟨fun x j ↦ if i = j then b.down x else 0,
             continuous_pi fun j ↦ by
               by_cases h : i = j
-              · simpa only [if_pos h] using b.down.continuous
-              · simp only [if_neg h]; exact continuous_const⟩
+              · simpa only [ite_eq_left h] using b.down.continuous
+              · simp only [ite_eq_right h]; exact continuous_const⟩
           map_zero' := by
             apply ULift.ext
             ext x j
@@ -177,7 +177,7 @@ private def resolutionFreeIso (O : Type) [CommRing O]
           ext x
           change (if i = i then c.down x else 0) = c.down x
           simp
-        · rw [dif_neg h]
+        · rw [dite_eq_right h]
           apply Mod.hom_ext
           ext P c
           apply ULift.ext
@@ -197,6 +197,17 @@ private def resolutionFreeIso (O : Type) [CommRing O]
   rw [map_sum]
   change (∑ i : Fin r, if i = j then c.down x i else 0) = c.down x j
   simp
+
+/-- Shortcut instance: on v4.35 the default search for this instance times out. -/
+local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell) :
+    ContinuousSMul (PadicAlgCl.integers ell E.1) (PadicAlgCl.integers ell E.1) :=
+  ContinuousMul.to_continuousSMul
+
+/-- Shortcut instance: on v4.35 the default search for this instance times out. -/
+local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell) :
+    ContinuousSMul (PadicAlgCl.integers ell E.1) (ULift.{u + 1} (PadicAlgCl.integers ell E.1)) :=
+  ContinuousSMul.induced
+    (ULift.moduleEquiv : ULift.{u + 1} (PadicAlgCl.integers ell E.1) ≃ₗ[_] _)
 
 set_option linter.unusedVariables false in
 -- The supplied section family subsumes the retained scalar-continuity hypothesis.

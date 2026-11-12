@@ -31,8 +31,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Coproduct inference reduces the repeated sheaf-compose expression in the summands.
+local instance {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (O : Sheaf J CommRingCat.{u}) : HasColimitsOfShape (Discrete C)
+      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+  inferInstance
+
 /-- The module category on a small commutative ringed site is Grothendieck abelian,
 with the coproduct of the localized rank-one extensions as a generator. Every
 integer-indexed cochain complex has a functorial K-injective resolution whose

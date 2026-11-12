@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.Integral.Open.IntegralOpenTensorRepresentative
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
@@ -61,13 +63,13 @@ private theorem restriction_factors
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]
     (e : S ⋙ R ≅ T) (Z : CochainComplex C ℤ) :
-    ((Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso S R ≪≫
         Functor.mapDerivedCategoryNatIso e).inv.app (DerivedCategory.Q.obj Z) ≫
       R.mapDerivedCategory.map (S.mapDerivedCategoryFactors.hom.app Z) ≫
       R.mapDerivedCategoryFactors.hom.app ((S.mapHomologicalComplex (.up ℤ)).obj Z) =
     T.mapDerivedCategoryFactors.hom.app Z ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.inv (.up ℤ)).app Z) := by
-  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors S R Z,
     ← Functor.mapDerivedCategoryNatIso_symm e]
   exact Functor.mapDerivedCategoryNatIso_fac e.symm Z
@@ -131,7 +133,7 @@ private theorem localized_quotient_model
       T.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q) =
       DerivedCategory.Q.map ((b.mapHomologicalComplex (.up ℤ)).unit.app Q)) :
     (coefficientQuotientNatTrans ad bd S.mapDerivedCategory
-      ((Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso S R ≪≫
         Functor.mapDerivedCategoryNatIso e)).app (DerivedCategory.Q.obj Q) ≫
       S.mapDerivedCategory.map c ≫
       S.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q) =
@@ -143,7 +145,7 @@ private theorem localized_quotient_model
     ((NatTrans.mapHomologicalComplex τ (.up ℤ)).app Q)
   simp only [Functor.comp_map, Functor.comp_obj] at hn
   refine quotient_model ad bd S.mapDerivedCategory
-    ((Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso S R ≪≫
       Functor.mapDerivedCategoryNatIso e)
     (DerivedCategory.Q.obj Q)
     (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj Q))

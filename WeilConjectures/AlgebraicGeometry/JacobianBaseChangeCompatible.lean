@@ -131,7 +131,7 @@ theorem jacobian_compatibility
     apply (overMapOpCompSheafifyIso b
       (picardSubfunctorDegree f 0).toFunctor).symm.app (.op T) |>.toEquiv.injective
     have h := congrArg (fun η ↦ η.app (.op T) ⟨L, hL⟩) hbc
-    simpa using h.symm
+    simpa [x] using h.symm
   have hunit : E.hom.app (.op T) x = y := by
     change (sheafifyMap (Scheme.fppfTopology.over (Spec (.of K))) eS.hom).app (.op T)
       ((overMapOpCompSheafifyIso b _).hom.app (.op T) x) = y

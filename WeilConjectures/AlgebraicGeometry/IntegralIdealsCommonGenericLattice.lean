@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import WeilConjectures.AlgebraicGeometry.CoherentPushforwardIdeal
 import WeilConjectures.AlgebraicGeometry.CommonGenericLatticeMaps
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Generic common lattices for two integral ideal sheaves
 

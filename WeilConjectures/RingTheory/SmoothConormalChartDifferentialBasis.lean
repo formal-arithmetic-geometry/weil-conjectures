@@ -60,7 +60,7 @@ theorem nonempty_basis_smooth_conormal_chart
   obtain ⟨l, hl⟩ := (Algebra.FormallySmooth.iff_split_injection (R := R) hq).mp
     (inferInstance : Algebra.FormallySmooth R C)
   obtain ⟨e, _, _⟩ := ((exact_kerCotangentToTensor_mapBaseChange R P C hq).split_tfae'
-    (g := (mapBaseChange R P C).restrictScalars P)).out 1 2 rfl rfl |>.mp
+    (g := (mapBaseChange R P C).restrictScalars P)).out 2 3 rfl rfl |>.mp
       ⟨mapBaseChange_surjective R P C hq, l, hl⟩
   let e' : (C ⊗[P] KaehlerDifferential R P) ≃ₗ[P]
       J.Cotangent × KaehlerDifferential R C :=

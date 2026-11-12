@@ -882,7 +882,7 @@ lemma affineLine.restriction_map_artinSchreierIdempotent (ψ : AddChar k₀ (Pad
   ext ⟨h⟩
   simp only [hsum, ModuleCat.hom_sum, ModuleCat.hom_comp,
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
   rw [LinearMap.sum_apply, hdown, AddSubmonoidClass.coe_finsetSum, ContinuousMap.coe_sum,
     Finset.sum_apply]
   refine (Finset.sum_congr rfl fun c _ ↦ ?_).trans
@@ -995,7 +995,7 @@ lemma affineLine.artinSchreierEvalHom_hom_ext
     (show (f ≫ ε.hom.app _) ≫ (ε.inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom) =
       (g ≫ ε.hom.app _) ≫ (ε.inv.app _ ≫ (affineLine.artinSchreierEvalHom l c).hom) by
         simpa using h c)).trans (key c _))
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun z ↦ ?_))
   have := congrArg (fun y ↦ y.down.1 (pullback.fst (V.hom ≫ ĀS) ĀS z))
     (hc (affineLine.artinSchreierIndex V.hom z))
   simp only [adicFunctionsPresheaf_map, ModuleCat.hom_ofHom] at this
@@ -1017,7 +1017,7 @@ lemma affineLine.artinSchreierSplitHom_comp_evalHom (ψ : AddChar k₀ (PadicAlg
   ext ⟨g⟩
   rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ModuleCat.comp_apply]
   erw [affineLine.artinSchreierEvalHom_hom_app]
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
   change ψ (affineLine.artinSchreierIndex V.hom (affineLine.artinSchreierSection V.hom c x)) *
     g.1 (pullback.fst (V.hom ≫ ĀS) ĀS (affineLine.artinSchreierSection V.hom c x)) = ψ c * g.1 x
   rw [affineLine.artinSchreierIndex_artinSchreierSection, affineLine.artinSchreierSection_fst_apply]
@@ -1049,7 +1049,7 @@ lemma affineLine.artinSchreierAverageHom_eq_sum (ψ : AddChar k₀ (PadicAlgCl l
   ext ⟨V⟩ : 3
   ext ⟨h⟩
   rw [hsum, ModuleCat.hom_sum, LinearMap.sum_apply]
-  refine ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
+  refine ULift.ext (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
   rw [hdown, AddSubmonoidClass.coe_finsetSum, ContinuousMap.coe_sum, Finset.sum_apply]
   change (affineLine.artinSchreierAverage l V.hom ψ h).1 x = _
   rw [affineLine.artinSchreierAverage_apply]

@@ -121,7 +121,7 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_mapDerivedCategory_lowerStar
     IsZero (D((j)^*[ModuleCat.{u + 1} R]).obj (D((i)_*[ModuleCat.{u + 1} R]).obj M)) :=
   (Functor.isZero_mapDerivedCategory_obj ((i)_*[ModuleCat.{u + 1} R] ⋙
     (j)^*[ModuleCat.{u + 1} R]) M fun _ ↦ isZero_upperStar_lowerStar_of_disjoint _ i j hij
-      _).of_iso ((((i)_*[ModuleCat.{u + 1} R]).mapDerivedCategoryCompIso _).symm.app M)
+      _).of_iso ((((i)_*[ModuleCat.{u + 1} R]).mapDerivedCategoryCompIso _).app M)
 
 /-- `D(j^*) Ri_* = 0` for a closed immersion `i` whose range is the complement of the range of
 the quasi-compact open immersion `j`: `Ri_*` is `D(i_*)`, `i_*` being exact

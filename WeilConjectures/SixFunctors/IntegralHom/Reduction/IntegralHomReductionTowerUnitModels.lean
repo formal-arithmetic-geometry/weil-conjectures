@@ -38,7 +38,7 @@ attribute [local irreducible] koszulTensorPresentation tensorUnitIso homComplexF
   HasDerivedCategory.standard derivedInternalHomOfUniverses
 attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   completedIntegralCommRingSheafUnrestricted
-  completedIntegralCommRingSheaf CategoryTheory.sheafCompose WithInitial.lift
+  completedIntegralCommRingSheaf CategoryTheory.sheafCompose
 
 open CategoryTheory.MonoidalCategory
 attribute [local instance 20000] abSheafify abLocallyBijective

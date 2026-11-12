@@ -71,7 +71,7 @@ theorem exists_section_proetaleCover_of_ring_retractions
     obtain ⟨y, hy⟩ := 𝒱.covers x
     refine ⟨Sigma.ι (fun j ↦ Spec (𝒱.X j)) (𝒱.idx x) y, ?_⟩
     rw [← Scheme.Hom.comp_apply, show Sigma.ι _ (𝒱.idx x) ≫ q = 𝒱.f (𝒱.idx x)
-      from Sigma.ι_desc 𝒱.f (𝒱.idx x)]
+      from Sigma.ι_comp_desc 𝒱.f (𝒱.idx x)]
     exact hy
   let φ := Spec.preimage ((Scheme.isoSpec Q).inv ≫ q)
   let := φ.hom.toAlgebra
@@ -99,7 +99,7 @@ theorem exists_section_proetaleCover_of_ring_retractions
   have hg : g ≫ Sigma.desc f = q := by
     apply Sigma.hom_ext
     intro j
-    simp only [g, q, Sigma.ι_desc_assoc, Category.assoc, Sigma.ι_desc]
+    simp only [g, q, Sigma.ι_comp_desc_assoc, Category.assoc, Sigma.ι_comp_desc]
     exact h.w₀ j
   exact ⟨s ≫ g, by rw [Category.assoc, hg, hs]⟩
 

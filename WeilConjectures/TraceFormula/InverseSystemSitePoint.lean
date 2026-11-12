@@ -175,10 +175,10 @@ private theorem systemElements_initial {C : Type u} [Category.{u} C]
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (U : Iᵒᵖ ⥤ C) : (systemElements U).Initial := by
   refine Functor.initial_of_exists_of_isCofiltered _ ?_ ?_
-  · rintro ⟨X, x⟩
+  · rintro ⟨x⟩
     obtain ⟨i, f, rfl⟩ := homMk_surjective U x
     exact ⟨op i, ⟨f, by simp [systemElements, homMk_map]⟩⟩
-  · rintro ⟨X, x⟩ i ⟨f, hf⟩ ⟨g, hg⟩
+  · rintro ⟨x⟩ i ⟨f, hf⟩ ⟨g, hg⟩
     obtain ⟨j, q, hq⟩ := homMk_eq U
       (f := f) (g := g) (by simpa [systemElements, homMk_map] using hf.trans hg.symm)
     exact ⟨op j, q.op, by ext; exact hq⟩
@@ -196,7 +196,7 @@ private noncomputable def stalkComparison {C : Type u} [Category.{u} C]
   have : T.Final := inferInstance
   exact Functor.isoWhiskerLeft (sheafToPresheaf J (Type (max u w)))
     (Functor.isoWhiskerLeft
-      ((Functor.whiskeringLeft _ _ _).obj (CategoryOfElements.π (inverseSystemHomFunctor U)).op)
+      ((Functor.whiskeringLeft _ _ _).obj (Functor.Elements.π (inverseSystemHomFunctor U)).op)
       (Functor.Final.colimIso T)).symm
 
 /-- Inverse-system criterion for a point of a small site.

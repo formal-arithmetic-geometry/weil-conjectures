@@ -137,10 +137,10 @@ def AdicCoefficientDatum.constantPullbackIso {U V : Scheme.{t}} (f : U ⟶ V) :
 Source: blueprint direct image and limits (blueprint: def-weil-pbc-exact-pullback-interface). -/
 def AdicCoefficientDatum.derivedConstantPullbackIso {U V : Scheme.{t}} (f : U ⟶ V) :
     d.derivedConstantTower V ⋙ d.towerPull f ≅ d.pull f ⋙ d.derivedConstantTower U :=
-  (Functor.mapDerivedCategoryCompIso (d.constantTower V) (d.towerModulePull f)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (d.constantTower V) (d.towerModulePull f) ≪≫
     Functor.mapDerivedCategoryNatIso (d.constantPullbackIso f) ≪≫
-      Functor.mapDerivedCategoryCompIso
+      (Functor.mapDerivedCategoryCompIso
         (proEtaleRingModulePullback f (d.completedRing V) (d.completedRing U)
-          (d.integralRingIso f)) (d.constantTower U)
+          (d.integralRingIso f)) (d.constantTower U)).symm
 
 end AlgebraicGeometry.Scheme

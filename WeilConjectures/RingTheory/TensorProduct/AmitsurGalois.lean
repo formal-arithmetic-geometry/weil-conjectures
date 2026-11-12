@@ -137,15 +137,13 @@ private noncomputable def χ₃ (p : (L ≃ₐ[K] L) × (L ≃ₐ[K] L)) :
   lift (AlgHom.id L L) (φ₂ p.1 p.2) fun _ _ ↦ .all _ _
 
 private lemma χ₂_apply (b : L ≃ₐ[K] L) (x : L ⊗[K] L) : χ₂ b x = φ₂ 1 b x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul => simp [χ₂, φ₂]
   | add x y hx hy => simp only [map_add, hx, hy]
 
 private lemma χ₃_apply (p : (L ≃ₐ[K] L) × (L ≃ₐ[K] L)) (x : L ⊗[K] (L ⊗[K] L)) :
     χ₃ p x = φ₃ 1 p.1 p.2 x := by
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul => simp [χ₃, φ₃]
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -204,7 +202,7 @@ theorem exists_eq_of_cocycle₂
     have h := congrArg (φ₄ 1 σ (σ * τ) (σ * τ * ρ)) hu
     rw [map_mul, map_mul, ← AlgHom.comp_apply, ← AlgHom.comp_apply, ← AlgHom.comp_apply,
       ← AlgHom.comp_apply, φ₄_comp_δ₀, φ₄_comp_δ₁, φ₄_comp_δ₂, φ₄_comp_δ₃] at h
-    simp only [f, Units.coe_map, MonoidHom.coe_coe, φ₃_equivariant, mul_one, mul_assoc]
+    simp only [f, Units.coe_map, MonoidHom.coe_ofClass, φ₃_equivariant, mul_one, mul_assoc]
     rw [mul_assoc] at h
     linear_combination -h
   obtain ⟨c, hc⟩ := hgal f hf
@@ -225,7 +223,7 @@ theorem exists_eq_of_cocycle₂
   have hab : φ₂ a b w = a (c (a⁻¹ * b)) := by
     rw [← hφw, φ₂_equivariant, mul_one, mul_inv_cancel_left]
   have key := hc a (a⁻¹ * b)
-  simp only [f, Units.coe_map, MonoidHom.coe_coe, mul_inv_cancel_left] at key
+  simp only [f, Units.coe_map, MonoidHom.coe_ofClass, mul_inv_cancel_left] at key
   simp only [χ₃_apply, map_mul]
   rw [← AlgHom.comp_apply, ← AlgHom.comp_apply, ← AlgHom.comp_apply, φ₃_comp_d₀, φ₃_comp_d₁,
     φ₃_comp_d₂, hab, hφw]

@@ -28,7 +28,7 @@ open CategoryTheory.Limits
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   sfIntrinsicModuleEquivalence
 attribute [local implicit_reducible] Equivalence.mapDerivedCategory
-  sfIntrinsicDerivedEquivalence Functor.mapHomologicalComplex PurCompactSupport.finite
+  sfIntrinsicDerivedEquivalence PurCompactSupport.finite
   sfIntrinsicPullback sfIntrinsicTransport sfIntrinsicExtensionByZero
 set_option backward.defeqAttrib.useBackward true
 
@@ -111,8 +111,8 @@ theorem finite_restriction_coordinates
   let kf : L₂ ≅ Li ⋙ L₁ := Functor.mapDerivedCategoryNatIso
       (eqToIso (congrArg (fun t ↦ ProEtale.upperStar B t) r.i_hom.symm) ≪≫
         ProEtale.upperStarComp B c.i r.hom) ≪≫
-    Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B r.hom)
-      (ProEtale.upperStar B c.i)
+    (Functor.mapDerivedCategoryCompIso (ProEtale.upperStar B r.hom)
+      (ProEtale.upperStar B c.i)).symm
   let ED := (sfIntrinsicDerivedEquivalence d.Z A).functor
   let af : Li ⊣ Rf := (ProEtale.upperStarLowerStarAdjunction B r.hom
     ).mapDerivedCategoryRightDerivedAdjunction

@@ -57,6 +57,9 @@ private noncomputable def freeSectionsIso (X : Scheme.{u}) (U : X.Opens)
       ModuleCat.of ((X.ringCatSheaf.over U).obj.obj W)
         (I →₀ (X.ringCatSheaf.over U).obj.obj W) := by
   let E := SheafOfModules.evaluation.{u} (X.ringCatSheaf.over U) W
+  have : E.Additive := by
+    dsimp only [E, SheafOfModules.evaluation]
+    infer_instance
   have : PreservesBiproductsOfShape I E :=
     preservesBiproductsOfShape_of_preservesProductsOfShape E
   have : PreservesColimitsOfShape (Discrete I) E :=
@@ -70,6 +73,9 @@ private theorem freeSectionsIso_inv_single (X : Scheme.{u}) (U : X.Opens)
     (freeSectionsIso X U I W).inv (Finsupp.single i 1) =
       (SheafOfModules.freeSection (R := X.ringCatSheaf.over U) i).val W := by
   let E := SheafOfModules.evaluation.{u} (X.ringCatSheaf.over U) W
+  have : E.Additive := by
+    dsimp only [E, SheafOfModules.evaluation]
+    infer_instance
   have : PreservesBiproductsOfShape I E :=
     preservesBiproductsOfShape_of_preservesProductsOfShape E
   have : PreservesColimitsOfShape (Discrete I) E :=

@@ -70,7 +70,7 @@ theorem Hom.coeff_zetaSeries_eq_natCard_closedPoints {X : Scheme.{u}} (f : X ⟶
   rw [f.coeff_zetaSeries_eq_natCard]
   congr 1
   let e : X.finitePoints ≃ closedPoints X :=
-    Equiv.setCongr (f.finitePoints_eq_closedPoints)
+    Set.equivOfEq (f.finitePoints_eq_closedPoints)
   refine Nat.card_congr ((Finsupp.equivCongrLeft e).subtypeEquiv fun m ↦ ?_)
   rw [Finsupp.equivCongrLeft_apply, Finsupp.equivMapDomain_eq_mapDomain,
     Finsupp.sum_mapDomain_index (fun _ ↦ zero_mul _) fun _ _ _ ↦ add_mul _ _ _]

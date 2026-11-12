@@ -143,7 +143,7 @@ theorem exists_pieceFunctor_obj_hom (t : GeometricFiber f y)
       ψ.1 := by
     rw [← hh₂, Chart.piecePoint₂,
       Subsingleton.elim (ch.piecePoint f hY₀ hy A' φ' hφ' e hval t) (ψ.restrictScalars φ')]
-  refine ⟨s, ⟨CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk ρ hρ) ?_⟩⟩
+  refine ⟨s, ⟨Functor.Elements.homMk (MorphismProperty.Over.homMk ρ hρ) ?_⟩⟩
   apply CategoryTheory.Over.OverMorphism.ext
   change (s.piecePt t).left ≫ ρ = d.2.left
   rw [hpiecePt]

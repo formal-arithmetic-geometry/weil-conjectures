@@ -607,7 +607,7 @@ private instance projectionFaithful
     (A : Sheaf J (Type u)) : (elementProjection A).Faithful where
   map_injective {X Y} f g h := by
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     exact congrArg Quiver.Hom.op h
 
 private abbrev fibreSheaf
@@ -624,41 +624,41 @@ private def flattenElements
     {A B : Sheaf J (Type u)} (b : B ⟶ A) :
     (fibreSheaf b).obj.Elementsᵒᵖ ⥤ B.obj.Elementsᵒᵖ where
   obj X := op (B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
-  map {X Y} f := (CategoryOfElements.homMk
-    (B.obj.elementsMk Y.unop.1.unop.unop.1 Y.unop.2.val)
-    (B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
-    f.unop.val.unop.unop.val (congrArg Subtype.val f.unop.property)).op
+  map {X Y} f := (Functor.Elements.homMk
+    (x := B.obj.elementsMk Y.unop.1.unop.unop.1 Y.unop.2.val)
+    (y := B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
+    f.unop.hom.unop.unop.hom (congrArg Subtype.val f.unop.map_val)).op
 
 private instance flattenElementsFaithful
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).Faithful where
   map_injective {X Y} f g h := by
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     apply Quiver.Hom.unop_inj
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
-    exact congrArg (fun k ↦ k.unop.val) h
+    apply Functor.Elements.hom_ext
+    exact congrArg (fun k ↦ k.unop.hom) h
 
 set_option backward.isDefEq.respectTransparency false in
 private instance flattenElementsFull
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).Full where
   map_surjective {X Y} f := by
-    have hA : A.obj.map f.unop.val Y.unop.1.unop.unop.2 =
+    have hA : A.obj.map f.unop.hom Y.unop.1.unop.unop.2 =
         X.unop.1.unop.unop.2 := by
       rw [← Y.unop.2.property]
-      change A.obj.map f.unop.val (b.hom.app _ Y.unop.2.val) = _
+      change A.obj.map f.unop.hom (b.hom.app _ Y.unop.2.val) = _
       rw [← NatTrans.naturality_apply]
-      change b.hom.app _ (B.obj.map f.unop.val Y.unop.2.val) = _
-      have hf : B.obj.map f.unop.val Y.unop.2.val = X.unop.2.val := f.unop.property
+      change b.hom.app _ (B.obj.map f.unop.hom Y.unop.2.val) = _
+      have hf : B.obj.map f.unop.hom Y.unop.2.val = X.unop.2.val := f.unop.map_val
       rw [hf]
       exact X.unop.2.property
     let g : X.unop.1.unop ⟶ Y.unop.1.unop :=
-      (CategoryOfElements.homMk (F := A.obj) _ _ f.unop.val hA).op
-    refine ⟨(CategoryOfElements.homMk Y.unop X.unop g.op ?_).op, ?_⟩
+      (Functor.Elements.homMk (F := A.obj) f.unop.hom hA).op
+    refine ⟨(Functor.Elements.homMk (x := Y.unop) (y := X.unop) g.op ?_).op, ?_⟩
     · apply Subtype.ext
-      exact f.unop.property
+      exact f.unop.map_val
     · rfl
 
 private instance flattenElementsEssSurj
@@ -763,16 +763,16 @@ private theorem flattenRestrictionEquivalence
     let G := flattenElements b ⋙ elementMap b
     let P := elementProjection (fibreSheaf b)
     let α : G ≅ P := NatIso.ofComponents (fun X ↦
-      (CategoryOfElements.isoMk (P.obj X).unop (G.obj X).unop (Iso.refl _)
+      (Functor.Elements.isoMk (x := (P.obj X).unop) (y := (G.obj X).unop) (Iso.refl _)
         (by
           change A.obj.map (𝟙 _) X.unop.1.unop.unop.2 = b.hom.app _ X.unop.2.val
           rw [A.obj.map_id_apply]
           exact X.unop.2.property.symm)).op) (by
         intro X Y f
         apply Quiver.Hom.unop_inj
-        apply Subtype.ext
-        change (𝟙 _) ≫ f.unop.val.unop.unop.val =
-          f.unop.val.unop.unop.val ≫ (𝟙 _)
+        apply Functor.Elements.hom_ext
+        change (𝟙 _) ≫ f.unop.hom.unop.unop.hom =
+          f.unop.hom.unop.unop.hom ≫ (𝟙 _)
         simp)
     let : P.IsContinuous (elementTopology (fibreSheaf b)) (elementTopology A) :=
       elementProjection_isContinuous (fibreSheaf b)
@@ -800,7 +800,7 @@ private def representableElements
     Over U ⥤ ((presheafToSheaf J (Type u)).obj (yoneda.obj U)).obj.Elementsᵒᵖ where
   obj X := op (((presheafToSheaf J (Type u)).obj (yoneda.obj U)).obj.elementsMk
     (op X.left) ((toSheafify J (yoneda.obj U)).app _ X.hom))
-  map f := (CategoryOfElements.homMk _ _ f.left.op (by
+  map f := (Functor.Elements.homMk f.left.op (by
     rw [← NatTrans.naturality_apply]
     exact congrArg ((toSheafify J (yoneda.obj U)).app _) (Over.w f))).op
 
@@ -809,7 +809,7 @@ private instance representableElementsFaithful
     (representableElements J U).Faithful where
   map_injective {X Y} f g h := by
     ext
-    exact congrArg (fun k ↦ k.unop.val.unop) h
+    exact congrArg (fun k ↦ k.unop.hom.unop) h
 
 private theorem representableElements_cover_iff
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C)
@@ -832,7 +832,7 @@ private instance representableElementsCoverDense
     obtain ⟨a, ha⟩ := hf
     let Y := Over.mk a
     let g : (representableElements J U).obj Y ⟶ X :=
-      (CategoryOfElements.homMk _ _ f.op ha.symm).op
+      (Functor.Elements.homMk f.op ha.symm).op
     exact ⟨_, g, 𝟙 _, Presieve.in_coverByImage _ g, by simp [g, representableElements,
       elementProjection, opOpEquivalence]⟩
 
@@ -844,20 +844,20 @@ private instance representableElementsLocallyFull
   functorPushforward_imageSieve_mem {X Y} f := by
     rw [representableElements_cover_iff, J.mem_over_iff]
     let η := toSheafify J (yoneda.obj U)
-    have he : η.app (op X.left) (f.unop.val.unop ≫ Y.hom) = η.app (op X.left) X.hom := by
-      change η.app _ ((yoneda.obj U).map f.unop.val Y.hom) = _
+    have he : η.app (op X.left) (f.unop.hom.unop ≫ Y.hom) = η.app (op X.left) X.hom := by
+      change η.app _ ((yoneda.obj U).map f.unop.hom Y.hom) = _
       rw [NatTrans.naturality_apply]
-      exact f.unop.property
+      exact f.unop.map_val
     apply J.superset_covering _ (Presheaf.equalizerSieve_mem J η _ _ he)
     intro V k hk
-    change k ≫ (f.unop.val.unop ≫ Y.hom) = k ≫ X.hom at hk
+    change k ≫ (f.unop.hom.unop ≫ Y.hom) = k ≫ X.hom at hk
     rw [Sieve.overEquiv_iff]
-    let l : Over.mk (k ≫ X.hom) ⟶ Y := Over.homMk (k ≫ f.unop.val.unop)
-      (by change (k ≫ f.unop.val.unop) ≫ Y.hom = k ≫ X.hom
+    let l : Over.mk (k ≫ X.hom) ⟶ Y := Over.homMk (k ≫ f.unop.hom.unop)
+      (by change (k ≫ f.unop.hom.unop) ≫ Y.hom = k ≫ X.hom
           simpa only [Category.assoc] using hk)
     refine ⟨l, ?_⟩
     apply Quiver.Hom.unop_inj
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     rfl
 
 private instance representableElementsDense

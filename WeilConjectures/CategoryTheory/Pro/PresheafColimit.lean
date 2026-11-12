@@ -38,6 +38,7 @@ lemma IsFinitelyPresentable.exists_eq_of_isColimit_self {C : Type*} [Category* C
     ∃ (j : J) (a : i ⟶ j), f ≫ D.map a = g ≫ D.map a :=
   exists_eq_of_preservesColimit_coyoneda_self hc _ _ h
 
+
 section
 
 -- `F` is a presheaf

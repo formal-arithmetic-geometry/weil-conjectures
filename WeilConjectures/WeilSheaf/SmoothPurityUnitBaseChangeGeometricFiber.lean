@@ -64,13 +64,13 @@ abbrev geometricFiberOverMap {X Y : Over (Spec (.of k))} (h : X ⟶ Y) :
     geometricFiberOver X ⟶ geometricFiberOver Y :=
   Over.homMk (Scheme.Hom.geometricFiberMap h.left (Over.w h)) (by simp)
 
-set_option linter.unusedSectionVars false in
+omit [Finite k] in
 lemma geometricFiberOverMap_comp {X Y Z : Over (Spec (.of k))} (h₁ : X ⟶ Y) (h₂ : Y ⟶ Z) :
     geometricFiberOverMap (h₁ ≫ h₂) = geometricFiberOverMap h₁ ≫ geometricFiberOverMap h₂ := by
   ext1
   exact Scheme.Hom.geometricFiberMap_comp h₁.left h₂.left (Over.w h₁) (Over.w h₂)
 
-set_option linter.unusedSectionVars false in
+omit [Finite k] in
 /-- The base change square of `h` to `k̄` is cartesian (in the orientation of
 `ProEtale.CondensedRing.upperShriekBaseChangeOfMap`). -/
 lemma isPullback_geometricFiberOverMap {X Y : Over (Spec (.of k))} (h : X ⟶ Y) :
@@ -87,7 +87,7 @@ instance {X Y : Over (Spec (.of k))} (h : X ⟶ Y) [IsProper h.left] :
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) h.left (Over.w h)
     inferInstance
 
-set_option linter.unusedSectionVars false in
+omit [Finite k] in
 /-- The base changes of a jointly surjective family of morphisms are jointly surjective. -/
 lemma exists_geometricFiberOverMap_eq {X : Over (Spec (.of k))} {ι : Type*}
     {U : ι → Over (Spec (.of k))} (j : ∀ i, U i ⟶ X)
@@ -157,7 +157,9 @@ attribute [instance] Chart.hU₁ Chart.hU₂ Chart.hU₃ Chart.hA₁ Chart.hA₂
 
 variable (f : X ⟶ Y)
 
-set_option linter.unusedSectionVars false in
+omit [Finite k] [Fact (ringChar k).Prime]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
 /-- The base change of a chart: `j̄ ≫ f̄ = ḡ ≫ j̄A ≫ p̄ ≫ j̄V`. -/
 lemma Chart.comm_geometricFiber (c : Chart f) :
     geometricFiberOverMap c.j ≫ geometricFiberOverMap f =
@@ -166,8 +168,6 @@ lemma Chart.comm_geometricFiber (c : Chart f) :
   rw [← geometricFiberOverMap_comp, ← geometricFiberOverMap_comp, ← geometricFiberOverMap_comp,
     ← geometricFiberOverMap_comp, c.comm]
 
-set_option linter.style.haveILetI false in
-set_option linter.unusedVariables false in
 /-- **Gluing the charts.** Let `Ex` be a global compact-support exchange for cartesian squares
 over `k₀ ⟶ k̄`, compatible with composition (`hEx`) and equal to proper base change on the
 projective pieces (`hExProper`), whose mates are invertible on the open immersions `j`, `jA`,

@@ -137,7 +137,7 @@ theorem CurveCoefficientPair.finite_pushforward_data
         (s ≫ f) ⟨s, rfl⟩ P.F) := by
       have he : (Etale.stalkIsoPi AddCommGrpCat.{u + 1} f (s ≫ f) P.F).hom ≫
           CategoryTheory.Limits.Pi.π D ⟨s, rfl⟩ = _ :=
-        CategoryTheory.Limits.Pi.lift_π _ _
+        CategoryTheory.Limits.Pi.lift_comp_π _ _
       rw [← he]
       infer_instance
     exact epi_of_epi_fac

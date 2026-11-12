@@ -5,6 +5,10 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+public import Mathlib.Logic.Small.Defs
+import all Mathlib.Algebra.Homology.Localization
+import all Mathlib.Logic.Small.Defs
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
@@ -52,8 +56,6 @@ attribute [local semireducible] QuotientChange.L
 attribute [local implicit_reducible] QuotientChange.L
   InternalAbelianSheafModule.sectionRingSheaf
   DerivedCategory.Q DerivedCategory.Qh
-  HomologicalComplexUpToQuasiIso.Qh HomotopyCategory.quotient
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapHomotopyCategory
   CategoryTheory.catToReflQuiver
   GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
   GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
@@ -115,8 +117,9 @@ theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X
       Functor.whiskerLeft (derivedFunctor Λ Y) barLam.hom
   intro M
   obtain ⟨H, hH, ⟨e⟩⟩ := CondensedRing.exists_kFlat_iso_Qh_obj Λ M
-  have : (extension a Y).PreservesKFlatQuasiIso :=
-    Mod.preservesKFlatQuasiIso (AlgebraicGeometry.ProEtale.coefficientMap a Y)
+  have : (extension a Y).PreservesKFlatQuasiIso := by
+    set_option backward.isDefEq.respectTransparency false in
+      exact Mod.preservesKFlatQuasiIso (AlgebraicGeometry.ProEtale.coefficientMap a Y)
   have hε : IsIso ((scalarCounit a Y).app H) := by
     have := CondensedRing.isLeftDerivabilityStructure_localizerMorphismKFlat Λ Y
     unfold scalarCounit D

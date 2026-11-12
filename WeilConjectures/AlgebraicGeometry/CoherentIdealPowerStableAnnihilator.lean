@@ -157,8 +157,7 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
     apply le_antisymm
     · rintro _ ⟨z, rfl⟩
       obtain ⟨w, rfl⟩ := ht.2 z
-      induction w using TensorProduct.induction_on with
-      | zero => simp only [map_zero]; exact Submodule.zero_mem _
+      induction w using TensorProduct.inductionOn with
       | tmul s t =>
         change a.app U.1 (tensorSectionsMap K M U.1 (s ⊗ₜ t)) ∈ I • ⊤
         rw [hp]
@@ -192,6 +191,13 @@ private theorem multiplication_range {X : Scheme.{u}} {K : X.Modules}
   rw [hi, hb.1]
   exact congrArg (fun P : Submodule Γ(X, U.1) Γ(M, U.1) ↦ (P : Set Γ(M, U.1))) ha
 
+
+local instance localInst_CoherentIdealPowerStableAnnihilator_1 {X : Scheme.{u}} (H : X.Modules)
+    {V W : X.Opens} (h : V ≤ W) :
+    SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
+        (H.val.obj (op V))) :=
+  inferInstanceAs (SMul (X.sheaf.obj.obj (op V)) (H.val.obj (op V)))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A coherent module has a quasi-coherent submodule containing every local

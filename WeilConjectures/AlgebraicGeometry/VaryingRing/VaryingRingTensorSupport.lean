@@ -84,7 +84,7 @@ private theorem support_transport
   let α : L ≅ E := a.leftAdjointUniq b
   let β : q.inverse.mapDerivedCategory ⋙ o.ordinary.mapDerivedCategory ≅
       E.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso q.inverse o.ordinary).symm ≪≫
+    Functor.mapDerivedCategoryCompIso q.inverse o.ordinary ≪≫
       Functor.mapDerivedCategoryNatIso α
   let inc : ObjectProperty.FullSubcategory (resolving RX) ⥤
       ObjectProperty.FullSubcategory

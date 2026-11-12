@@ -300,9 +300,9 @@ noncomputable def pointFiberFunctorIntegralExtendScalarsIso :
       (Functor.isoWhiskerRight Fφ.leftDerivedFunctorIsoMapDerivedCategory _ ≪≫
         Functor.isoWhiskerLeft Fφ.mapDerivedCategory
           (Functor.isoWhiskerRight Fψ.leftDerivedFunctorIsoMapDerivedCategory _ ≪≫
-            (Functor.mapDerivedCategoryCompIso Fψ (pointSections ℓ k)).symm) ≪≫
-        (Functor.mapDerivedCategoryCompIso Fφ (Fψ ⋙ pointSections ℓ k)).symm) ≪≫
+            Functor.mapDerivedCategoryCompIso Fψ (pointSections ℓ k)) ≪≫
+        Functor.mapDerivedCategoryCompIso Fφ (Fψ ⋙ pointSections ℓ k)) ≪≫
     (asIso (Functor.whiskerLeft incl (pointSectionsDerivedExtendScalarsComparison ℓ k E))).symm ≪≫
-    Functor.isoWhiskerLeft incl (Functor.mapDerivedCategoryCompIso _ _)
+    Functor.isoWhiskerLeft incl (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

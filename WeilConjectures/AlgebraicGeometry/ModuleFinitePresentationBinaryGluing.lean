@@ -27,6 +27,54 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 open CategoryTheory.Limits SheafOfModules
 
+-- Keep the iterated-slice transport separate from the cover argument, and keep its
+-- ring sheaf abstract so elaboration does not repeatedly unfold moduleRings.
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem finitePresentation_over_of_overMap
+    (X : Scheme.{u}) (R : Sheaf (_root_.Opens.grothendieckTopology X) RingCat.{u})
+    {U A : X.Opens} (G : SheafOfModules.{u} (R.over U)) (hA : A ≤ U)
+    (hf : ((overMap R (homOfLE hA)).obj G).IsFinitePresentation) :
+    (G.over (Over.mk (homOfLE hA : A ⟶ U))).IsFinitePresentation := by
+  let J := _root_.Opens.grothendieckTopology X
+  have := hf
+  let E := Over.iteratedSliceEquiv (Over.mk (homOfLE hA : A ⟶ U))
+  have : E.inverse.IsDenseSubsite (J.over A)
+      ((J.over U).over (Over.mk (homOfLE hA : A ⟶ U))) := by
+    refine { functorPushforward_mem_iff := ?_ }
+    intro T S
+    simp only [E, GrothendieckTopology.mem_over_iff, Sieve.overEquiv,
+      RelIso.coe_fn_mk, Equiv.coe_fn_mk]
+    dsimp [Over.iteratedSliceEquiv]
+    rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
+    rfl
+  have : E.functor.IsContinuous
+      ((J.over U).over (Over.mk (homOfLE hA : A ⟶ U))) (J.over A) := by
+    infer_instance
+  have : E.functor.IsCocontinuous
+      ((J.over U).over (Over.mk (homOfLE hA : A ⟶ U))) (J.over A) := by
+    infer_instance
+  have (T : Over (Over.mk (homOfLE hA : A ⟶ U))) :
+      (Over.post (X := T) E.functor).IsContinuous
+        (((J.over U).over (Over.mk (homOfLE hA : A ⟶ U))).over T)
+        ((J.over A).over (E.functor.obj T)) := by
+    apply Functor.isContinuous_of_coverPreserving
+      (compatiblePreservingOfFlat _ _) _
+    exact (Functor.IsDenseSubsite.coverPreserving
+      ((J.over U).over (Over.mk (homOfLE hA : A ⟶ U)))
+      (J.over A) E.functor).overPost T
+  let S := (R.over U).over (Over.mk (homOfLE hA : A ⟶ U))
+  let φ : S ⟶ (E.functor.sheafPushforwardContinuous RingCat
+      ((J.over U).over (Over.mk (homOfLE hA : A ⟶ U))) (J.over A)).obj
+        (R.over A) := 𝟙 _
+  let e : (SheafOfModules.pushforward φ).obj ((overMap R (homOfLE hA)).obj G) ≅
+      G.over (Over.mk (homOfLE hA : A ⟶ U)) :=
+    (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _))
+  have hfp := isFinitePresentation_pushforward_of_isLeftAdjoint E.functor φ
+    (Iso.refl _) (M := (overMap R (homOfLE hA)).obj G)
+  exact (isFinitePresentation S).prop_of_iso e hfp
+
 -- Transport across the iterated slice identifies restriction by overMap with over.
 -- Apply the existing finite-presentation locality theorem to the two-open cover.
 set_option backward.defeqAttrib.useBackward true in
@@ -41,46 +89,6 @@ private theorem finitePresentation_binary_local
     G.IsFinitePresentation := by
   let R := moduleRings X.toRingedSpace
   let J := _root_.Opens.grothendieckTopology X
-  have localProps (A : X.Opens) (hA : A ≤ W ⊔ V)
-      (hf : ((overMap R (homOfLE hA)).obj G).IsFinitePresentation) :
-      (G.over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))).IsFinitePresentation := by
-    have := hf
-    let E := Over.iteratedSliceEquiv (Over.mk (homOfLE hA : A ⟶ W ⊔ V))
-    have : E.inverse.IsDenseSubsite (J.over A)
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) := by
-      refine { functorPushforward_mem_iff := ?_ }
-      intro T S
-      simp only [E, GrothendieckTopology.mem_over_iff, Sieve.overEquiv,
-        RelIso.coe_fn_mk, Equiv.coe_fn_mk]
-      dsimp [Over.iteratedSliceEquiv]
-      rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
-      rfl
-    have : E.functor.IsContinuous
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A) := by
-      infer_instance
-    have : E.functor.IsCocontinuous
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A) := by
-      infer_instance
-    have (T : Over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) :
-        (Over.post (X := T) E.functor).IsContinuous
-          (((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))).over T)
-          ((J.over A).over (E.functor.obj T)) := by
-      apply Functor.isContinuous_of_coverPreserving
-        (compatiblePreservingOfFlat _ _) _
-      exact (Functor.IsDenseSubsite.coverPreserving
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V)))
-        (J.over A) E.functor).overPost T
-    let S := (R.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))
-    let φ : S ⟶ (E.functor.sheafPushforwardContinuous RingCat
-        ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A)).obj
-          (R.over A) := 𝟙 _
-    let e : (SheafOfModules.pushforward φ).obj ((overMap R (homOfLE hA)).obj G) ≅
-        G.over (Over.mk (homOfLE hA : A ⟶ W ⊔ V)) :=
-      (SheafOfModules.fullyFaithfulForget _).preimageIso
-        (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _))
-    have hfp := isFinitePresentation_pushforward_of_isLeftAdjoint E.functor φ
-      (Iso.refl _) (M := (overMap R (homOfLE hA)).obj G)
-    exact (isFinitePresentation S).prop_of_iso e hfp
   let U : ULift.{u} Bool → Over (W ⊔ V) := fun b ↦
     if b.down then Over.mk (homOfLE (le_sup_left : W ≤ W ⊔ V))
     else Over.mk (homOfLE (le_sup_right : V ≤ W ⊔ V))
@@ -105,8 +113,8 @@ private theorem finitePresentation_binary_local
   have (b : ULift.{u} Bool) : (G.over (U b)).IsFinitePresentation := by
     rcases b with ⟨b⟩
     cases b
-    · exact localProps V le_sup_right hV
-    · exact localProps W le_sup_left hW
+    · exact finitePresentation_over_of_overMap X R G le_sup_right hV
+    · exact finitePresentation_over_of_overMap X R G le_sup_left hW
   exact IsFinitePresentation.of_coversTop G U hc
 
 /-- Glue the old module on W to a finitely presented replacement on V using the

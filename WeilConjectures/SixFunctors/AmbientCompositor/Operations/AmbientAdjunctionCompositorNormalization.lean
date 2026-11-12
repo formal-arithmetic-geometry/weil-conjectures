@@ -149,7 +149,7 @@ Source: Stacks 0D6E, 09T5, 03D3; Zheng 4.1 and 4.10
 (blueprint: lem-sf-ambient-adjunction-compositor-normalization). -/
 def d {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     o.P g ⋙ o.P f ≅ o.P (f ≫ g) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (o.pullComp f g).symm
 
 /-- Inverse adjunction conjugate of d, with no new choice of direct image.
@@ -294,7 +294,7 @@ structure Laws (F : FiniteFieldDatum.{u}) (o : Operations.{u}) : Prop where
     (_hX : FiniteTypeOver F X) (_hY : FiniteTypeOver F Y) (_hZ : FiniteTypeOver F Z)
     (j : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion b],
-    o.e j b = (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    o.e j b = Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (o.ordinaryE j b)
   s_assoc : ∀ {X Y Z T : Scheme.{u}}
     (_hX : FiniteTypeOver F X) (_hY : FiniteTypeOver F Y) (_hZ : FiniteTypeOver F Z)
@@ -392,10 +392,10 @@ private theorem mapDerived_symm_inv
 private theorem pComp_eq (o : Operations.{u}) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     pComp o f g = Functor.mapDerivedCategoryNatIso (o.pullComp f g) ≪≫
-      Functor.mapDerivedCategoryCompIso (o.pull g) (o.pull f) := by
+      (Functor.mapDerivedCategoryCompIso (o.pull g) (o.pull f)).symm := by
   apply Iso.ext
   simp only [pComp, Operations.d, Iso.symm_hom, Iso.trans_inv,
-    Iso.symm_inv, Iso.trans_hom, mapDerived_symm_inv]
+    Iso.trans_hom, mapDerived_symm_inv]
 
 private structure PullCoherence (o : Operations.{u}) : Prop where
   assoc : ∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),
@@ -459,7 +459,7 @@ private theorem descend_pull_coherence (o : Operations.{u})
     funext M
     have hm := congr_app hh M
     simp only [pComp_eq, Operations.pId, Operations.P,
-      Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
       Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
       Iso.refl_hom, NatTrans.id_app, Category.assoc]
     dsimp only [Functor.comp_obj, Functor.id_obj, NatTrans.id_app] at hm ⊢
@@ -476,7 +476,7 @@ private theorem descend_pull_coherence (o : Operations.{u})
     funext M
     have hm := congr_app hh M
     simp only [pComp_eq, Operations.pId, Operations.P,
-      Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
       Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
       Iso.refl_hom, NatTrans.id_app, Functor.map_comp, Category.assoc]
     dsimp only [Functor.comp_obj, Functor.id_obj, NatTrans.id_app] at hm ⊢
@@ -555,7 +555,7 @@ private theorem open_normalized (o : Operations.{u})
 private theorem open_localized (o : Operations.{u})
     {X Y Z : Scheme.{u}} (j : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion b] :
-    o.e j b = (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    o.e j b = Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (o.ordinaryE j b) := by
   let ac := (o.openAdj j).mapHomologicalComplex (.up ℤ)
   let bc := (o.openAdj b).mapHomologicalComplex (.up ℤ)

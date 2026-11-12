@@ -27,7 +27,6 @@ namespace WeilConjectures
 attribute [local instance] HasDerivedCategory.standard
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
   constantSheaf presheafToSheaf Functor.leftAdjoint HasDerivedCategory.standard
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 
 set_option maxHeartbeats 800000 in
 -- The comparison passes through localization functors and K-injective resolutions.

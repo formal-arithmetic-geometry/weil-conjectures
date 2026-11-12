@@ -102,6 +102,7 @@ lemma eq_toInvertibleExponentBase {X : Scheme.{u}} [HasInvertibleExponent Λ X]
     (f : X ⟶ invertibleExponentBase.{u} Λ) : f = toInvertibleExponentBase X :=
   Subsingleton.elim _ _
 
+
 /-- The canonical morphisms to `Spec ℤ[1/n]` are compatible with all morphisms. -/
 @[reassoc (attr := simp)]
 lemma comp_toInvertibleExponentBase {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]

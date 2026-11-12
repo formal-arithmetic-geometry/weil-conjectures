@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
-public import Mathlib.Data.Finite.Sum
+public import Mathlib.Basic.Finite.Sum
 
 /-!
 # Biproducts indexed by a sum type

@@ -5,6 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.Algebra.Module.LocalizedModule.Exact
+public import Mathlib.FieldTheory.SeparablyGenerated
+public import Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.RingTheory.BertiniNoether
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 
@@ -91,8 +94,7 @@ lemma one_tmul_mem_nonZeroDivisors {A C M : Type*} [CommRing A] [CommRing C] [Al
     rw [← LinearMap.comm_comp_rTensor_comp_comm_eq]
     exact (TensorProduct.comm A _ M).injective.comp (hℓ'.comp (TensorProduct.comm A M C).injective)
   have hmul (y : M ⊗[A] C) : μ.lTensor M y = (1 ⊗ₜ g) * y := by
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul m c => simp [μ]
     | add x y hx hy => simp [mul_add, hx, hy]
   rw [mem_nonZeroDivisors_iff_left]
@@ -154,6 +156,7 @@ variable {A F : Type*} [CommRing A] [Field F] [Algebra A F] {R : Subalgebra A F}
   (hx : x ∈ R)
 
 lemma mem_locSub {z : F} : z ∈ locSub R hx ↔ ∃ r ∈ R, ∃ m : ℕ, z * x ^ m = r := Iff.rfl
+
 
 lemma locSub_congr {y : F} (hxy : x = y) (hy : y ∈ R) : locSub R hx = locSub R hy := by
   subst hxy
@@ -594,8 +597,7 @@ lemma comap_surjective_map_tensor_of_field {A k k' C : Type*} [CommRing A] [Fiel
   have hf : (Algebra.TensorProduct.map (IsScalarTower.toAlgHom A k k') (AlgHom.id A C)).toRingHom =
       (e.toRingHom.comp c.toRingHom).comp (algebraMap (k ⊗[A] C) ((k ⊗[A] C) ⊗[k] k')) := by
     refine RingHom.ext fun x ↦ ?_
-    induction x with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a b =>
       simp [e, c, Algebra.TensorProduct.cancelBaseChange_tmul, Algebra.algebraMap_eq_smul_one a]
     | add x y hx hy => rw [map_add, map_add, hx, hy]
@@ -641,8 +643,7 @@ lemma exists_smul_eq_zero_of_map_eq_zero {A A' L C : Type*} [CommRing A] [CommRi
     (by ext; simp [RingHom.algebraMap_toAlgebra])
   have hcomp (z : A' ⊗[A] C) : j (algebraMap (A' ⊗[A] C) (K' ⊗[A] C) z) =
       Algebra.TensorProduct.map (IsScalarTower.toAlgHom A A' L) (AlgHom.id A C) z := by
-    induction z with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | tmul a c => simp [j, RingHom.algebraMap_toAlgebra]
     | add x y hx hy => rw [map_add, map_add, hx, hy, map_add]
   have hcomp := hcomp y
@@ -677,10 +678,10 @@ lemma exists_ne_zero_dvd_C_mul_of_map_dvd {σ A K : Type*} [CommRing A] [IsDomai
     intro c hc
     obtain ⟨m, hm, rfl⟩ := mem_coeffs_iff.mp hc
     rw [coeff_C_mul]
-    by_cases h0 : coeff m R = 0
+    by_cases h0 : R.coeff m = 0
     · rw [h0, mul_zero]
       exact ⟨0, map_zero _⟩
-    · obtain ⟨d, hd⟩ := hbR (coeff m R) (mem_coeffs_iff.mpr ⟨m, mem_support_iff.mpr h0, rfl⟩)
+    · obtain ⟨d, hd⟩ := hbR (R.coeff m) (mem_coeffs_iff.mpr ⟨m, mem_support_iff.mpr h0, rfl⟩)
       exact ⟨d, by rw [hd, Algebra.smul_def]⟩
   refine ⟨b, nonZeroDivisors.coe_ne_zero ⟨b, hb⟩, R', map_injective _
     (IsFractionRing.injective A K) ?_⟩
@@ -806,8 +807,7 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
     intro z hz
     obtain ⟨y, rfl⟩ := (AlgHom.mem_range _).mp hz
     clear hz
-    induction y with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul a c =>
       have : Φ (a ⊗ₜ c) = algebraMap A' F a * φ (1 ⊗ₜ c) := by
         rw [hΦ, ← one_mul c, ← mul_one (a : A'), ← Algebra.TensorProduct.tmul_mul_tmul,
@@ -823,10 +823,11 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
   -- apply the core theorem to `C'' = Φ(A' ⊗ C) ⊆ F`
   have : Algebra.FiniteType A' Φ.range :=
     Algebra.FiniteType.of_surjective Φ.rangeRestrict Φ.rangeRestrict_surjective
+  have : IsScalarTower A' Φ.range F := .of_algebraMap_eq fun _ ↦ rfl
   have hAC : Function.Injective (algebraMap A' Φ.range) := by
     intro a b hab
     apply hA'F
-    rw [IsScalarTower.algebraMap_apply A' Φ.range F a, hab, ← IsScalarTower.algebraMap_apply]
+    exact congrArg (fun z : Φ.range ↦ (z : F)) hab
   have hvK : AlgebraicIndependent K' (v ∘ Fin.succ) :=
     hv.restrictScalars (algebraMap K' L).injective
   have hPL : map (algebraMap A' L) P' = P := hP'
@@ -871,8 +872,7 @@ theorem exists_ne_zero_forall_irreducibleSpace_of_hypersurface {A C : Type*} [Co
     have hm' : ι' (x ^ m) = 0 := by rw [map_pow]; exact hm
     have hιeq (y : A' ⊗[A] C) :
         Algebra.TensorProduct.map (IsScalarTower.toAlgHom A A' L) (AlgHom.id A C) y = ι' y := by
-      induction y with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | tmul a c => rfl
       | add y z hy hz => rw [map_add, map_add, hy, hz]
     have h3 := (hιeq (x ^ m)).trans hm'

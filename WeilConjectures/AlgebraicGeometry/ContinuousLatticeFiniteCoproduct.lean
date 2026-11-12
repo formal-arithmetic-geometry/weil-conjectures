@@ -237,7 +237,7 @@ theorem continuousLattice_finite_coproduct_of_coefficients
     have hcomp (i : I) :
         (upperStar Λ' (p i)).obj P ≅ (upperStar Λ' (Sigma.ι Y i)).obj Q :=
       (eqToIso (congrArg (fun f ↦ (upperStar Λ' f).obj P)
-        (Sigma.ι_desc p i).symm)) ≪≫ (upperStarComp Λ' (Sigma.ι Y i) (Sigma.desc p)).app P
+        (Sigma.ι_comp_desc p i).symm)) ≪≫ (upperStarComp Λ' (Sigma.ι Y i) (Sigma.desc p)).app P
     have ec (i : I) :
         (Mod.extendScalars (coefficientMap (φ) (∐ Y))).obj (G i) ≅
           (openImmersionLowerShriek Λ' (Sigma.ι Y i)).obj

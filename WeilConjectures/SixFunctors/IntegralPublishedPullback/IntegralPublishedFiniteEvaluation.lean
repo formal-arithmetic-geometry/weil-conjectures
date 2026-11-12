@@ -46,7 +46,6 @@ attribute [local implicit_reducible] WeilConjectures.integralCoefficientSheaf
   WeilConjectures.integralOperationsPullbackLevel WeilConjectures.integralOperationsRestrict
   WeilConjectures.scalarReductionDerivedRestriction
   HomologicalComplex.complexOfFunctorsToFunctorToComplex HomologicalComplex.asFunctor
-  CategoryTheory.Functor.mapHomologicalComplex
   CategoryTheory.Functor.ofOpSequence CategoryTheory.Functor.ofSequence
   WeilConjectures.unrestrictedIntegralReductionFunctor
   WeilConjectures.pullbackTensorConstantLimit WeilConjectures.pullbackTensorTowerQ
@@ -71,9 +70,9 @@ private theorem derived_square_factors
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     [PreservesFiniteLimits I] [PreservesFiniteColimits I]
     (e : F ⋙ G ≅ H ⋙ I) (K : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso F G) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso H I).inv.app (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso H I).symm).inv.app (DerivedCategory.Q.obj K) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
@@ -88,16 +87,16 @@ private theorem derived_square_factors
       (Iso.refl (H ⋙ I)) (.up ℤ)).hom.app K)).1
     rw [Iso.hom_inv_id_app, Functor.mapHomologicalComplexCompIso_refl_hom_app,
       Category.comp_id]
-  apply (cancel_epi (((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+  apply (cancel_epi (((Functor.mapDerivedCategoryCompIso F G) ≪≫
     Functor.mapDerivedCategoryNatIso e ≪≫
-      Functor.mapDerivedCategoryCompIso H I).hom.app (DerivedCategory.Q.obj K))).1
+      (Functor.mapDerivedCategoryCompIso H I).symm).hom.app (DerivedCategory.Q.obj K))).1
   simp only [Iso.hom_inv_id_app_assoc]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
   rw [Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj K))).1
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   simp only [Functor.mapHomologicalComplexCompIso_refl_hom_app, hc,
     Category.id_comp, Category.comp_id]

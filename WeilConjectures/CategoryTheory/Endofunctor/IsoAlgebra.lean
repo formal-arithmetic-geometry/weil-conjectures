@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 
 /-!
@@ -216,13 +217,13 @@ noncomputable def desc : algebra F S ⟶ K :=
       h := map_hom_ext F S fun n ↦ by
         change F.map (Sigma.ι (obj F S) n) ≫ F.map (Sigma.desc (hom K s)) ≫ K.str.hom =
           F.map (Sigma.ι (obj F S) n) ≫ (str F S).hom ≫ Sigma.desc (hom K s)
-        rw [map_ι_comp_str_assoc, ← F.map_comp_assoc, Sigma.ι_desc, Sigma.ι_desc,
+        rw [map_ι_comp_str_assoc, ← F.map_comp_assoc, Sigma.ι_comp_desc, Sigma.ι_comp_desc,
           map_hom_comp_str] }
 
 /-- The morphism `desc K s` restricts to `s` on the summand `S = F⁰ S`. -/
 @[reassoc (attr := simp)]
 lemma ι_desc_hom_f : Sigma.ι (obj F S) 0 ≫ (desc K s).hom.f = s :=
-  Sigma.ι_desc _ _
+  Sigma.ι_comp_desc _ _
 
 /-- The free algebra on a separator of `C` is a separator of `IsoAlgebra F`. -/
 lemma isSeparator_algebra (hS : IsSeparator S) : IsSeparator (algebra F S) := by

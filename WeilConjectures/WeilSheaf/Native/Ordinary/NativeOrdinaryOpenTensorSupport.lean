@@ -215,7 +215,7 @@ theorem native_ordinary_open_tensor_support
         (C.ordinaryClosed.tensor.obj (E.mapDerivedCategory.obj M, N)) :=
       Functor.essImage.ofIso (e.app (E.mapDerivedCategory.obj M)).symm hs
     let ff := a.mapExactDerivedCategory.fullyFaithfulLOfCompIsoId
-      ((Functor.mapDerivedCategoryCompIso E R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso E R ≪≫
         Functor.mapDerivedCategoryNatIso (asIso a.unit).symm ≪≫
         Functor.mapDerivedCategoryIdIso _)
     let : E.mapDerivedCategory.Full := ff.full

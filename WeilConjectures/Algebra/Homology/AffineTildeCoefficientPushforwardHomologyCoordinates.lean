@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 
 public import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
@@ -76,11 +78,15 @@ theorem affineTildeCoefficientPushforwardHomologyCoordinates
     let z₀ := (HomologicalComplex.homologyFunctor (ModuleCat.{u} D) (.up ℤ) i).map
       (eqToHom (by dsimp only [C, α]; rw [hφ] : C = Cg))
     let V := ((ModuleCat.restrictScalars ψ).mapHomologicalComplex (.up ℤ)).obj Cg
-    let _ : (affinePushforwardTilde B).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let _ : (affinePushforwardTilde B).Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of B) f g
     let _ : (affinePushforwardTilde B).PreservesHomology := tilde_preservesHomology B
-    let _ : (affinePushforwardTilde D).Additive :=
-      instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    let _ : (affinePushforwardTilde D).Additive := by
+      constructor
+      intro M N f g
+      exact tilde.map_add (R := .of D) f g
     let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))
     let _ : P.Additive := inferInstance
     let _ : (affinePushforwardTilde D ⋙ P).PreservesZeroMorphisms :=
@@ -102,7 +108,7 @@ theorem affineTildeCoefficientPushforwardHomologyCoordinates
       ((V.sc i).mapHomologyIso (affinePushforwardTilde B)).inv ≫
       (DerivedCategory.homologyFunctorFactors _ i).inv.app
         (((affinePushforwardTilde B).mapHomologicalComplex (.up ℤ)).obj V) ≫
-      H.map (DerivedCategory.Q.map a) ≫ H.map β =
+      H.map (DerivedCategory.Q.map a) ≫ cast (by rfl) (H.map β) =
       T.map ((ModuleCat.restrictScalars j).map (m.comparison i)) ≫
       T.map ((ModuleCat.restrictScalars j).map
         (HomologicalComplex.homologyMap m.ordinaryToLocalized i)) ≫
@@ -112,10 +118,15 @@ theorem affineTildeCoefficientPushforwardHomologyCoordinates
       T.map ((ModuleCat.restrictScalars ψ).map z₀) ≫
         affineTildePushforwardCohomologyMap D B ψ Cg i := by
   let T := affinePushforwardTilde B
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : T.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of B) f g
   let : T.PreservesHomology := tilde_preservesHomology B
-  let : (affinePushforwardTilde D).Additive :=
-    instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : (affinePushforwardTilde D).Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of D) f g
   let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom ψ))
   let : P.Additive := inferInstance
   let : (affinePushforwardTilde D ⋙ P).PreservesZeroMorphisms :=

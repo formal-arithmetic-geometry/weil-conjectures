@@ -61,7 +61,7 @@ private theorem descent_section_reconstruction {Y S T V : Scheme.{u}} [Connected
     IsOpenImmersion.lift_fac _ _ _
   have hlk : l = k := by
     have he := congrArg (fun a ↦ a ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T)) hl
-    simpa only [f, Category.assoc, Sigma.ι_desc, Category.comp_id, hδ,
+    simpa only [f, Category.assoc, Sigma.ι_comp_desc, Category.comp_id, hδ,
       pullback.lift_snd] using he
   dsimp only [fixedSplitSection]
   have he := congrArg (fun a ↦ a ≫ δ.inv ≫ pullback.fst p t) hl

@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupple
 import all WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
 import WeilConjectures.Algebra.Homology.Coefficient.CoefficientLiftKFlatResolution
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Derived scalar extension of the constant realization of an algebraic complex
@@ -64,8 +66,7 @@ private def liftedTensorComparison {A B : Type t} [CommRing A] [CommRing B]
   apply LinearMap.ext
   intro x
   rcases x with ⟨x⟩
-  induction x using TensorProduct.induction_on with
-  | zero => exact (map_zero _).trans (map_zero _).symm
+  induction x using TensorProduct.inductionOn with
   | tmul b m => rfl
   | add x y hx hy =>
     have h : (ULift.up (x + y) : ULift.{t + 1} _) = ULift.up x + ULift.up y := rfl
@@ -110,7 +111,11 @@ private theorem liftedDerivedScalarRepresentative
     ModuleCat.scalarExtensionCounit_isIso_of_kFlat q R
       (ConstantScalarRealization.acyclic_tensor_of_categorical_kFlat R hRcat) L ε hL
   let r : L.obj (DerivedCategory.Q.obj R) ≅ DerivedCategory.Q.obj Rq :=
-    asIso (ε.app ((HomotopyCategory.quotient _ _).obj R))
+    L.mapIso ((DerivedCategory.quotientCompQhIso _).symm.app R) ≪≫
+      asIso (ε.app ((HomotopyCategory.quotient _ _).obj R)) ≪≫
+      DerivedCategory.Qh.mapIso
+        (((ModuleCat.extendScalars q).mapHomotopyCategoryFactors (.up ℤ)).app R) ≪≫
+      (DerivedCategory.quotientCompQhIso _).app Rq
   have : IsIso (ConstantScalarRealization.moduleRepresentative q' R') :=
     ConstantScalarRealization.moduleRepresentative_isIso q' R' hRup
   let a : DerivedCategory.Q.obj R ≅ DerivedCategory.Q.obj P :=

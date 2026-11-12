@@ -166,7 +166,7 @@ lemma isZero_upperStar_rightDerivedLowerShriek (i : Z ⟶ X) [HasCompactificatio
     refine Set.disjoint_left.mp hij ⟨z, ?_⟩ hz
     exact (congrArg (fun f ↦ f.base z) c.comm).trans rfl
   refine (Functor.isZero_mapDerivedCategory_obj ((c.i)_!open[A] ⋙ (pullback.fst c.g j)^*[A]) B
-    fun n ↦ ?_).of_iso ((((c.i)_!open[A]).mapDerivedCategoryCompIso _).symm.app B)
+    fun n ↦ ?_).of_iso ((((c.i)_!open[A]).mapDerivedCategoryCompIso _).app B)
   exact ((Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek A c.i _ hd
     _).isZero).of_iso ((Etale.upperStarIsoOpenImmersionRestriction A _).app _)
 

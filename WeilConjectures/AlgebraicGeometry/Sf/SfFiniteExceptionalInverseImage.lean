@@ -186,8 +186,8 @@ noncomputable def sfDerivedComparisonPullbackIso (A : Type u) [CommRing A]
         sfFixedDerivedPullback A j ≅
       (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) U).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (sfComparisonPullbackIso A j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.ProEtale

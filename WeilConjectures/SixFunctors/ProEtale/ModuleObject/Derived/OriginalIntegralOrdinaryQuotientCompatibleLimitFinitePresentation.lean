@@ -171,7 +171,7 @@ private theorem sections_separated
     originalIntegralOrdinaryQuotientKernel_separated_finitePresentation ell E Y N hN g
       (fun n ↦ by
         have hh := congrArg (fun f ↦ f ≫ Pi.π Q n) hg
-        simpa only [A, Category.assoc, Pi.lift_π, zero_comp] using hh))
+        simpa only [A, Category.assoc, Pi.lift_comp_π, zero_comp] using hh))
   let T := Mod.forget (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y) ⋙
     sheafToPresheaf (ProEt.topology Y) Ab.{u + 1} ⋙
       (evaluation Y.ProEtᵒᵖ Ab.{u + 1}).obj U ⋙ forget Ab.{u + 1}
@@ -182,7 +182,7 @@ private theorem sections_separated
   apply Subtype.ext
   funext n
   change T.map (Pi.π Q n.as) (T.map A x) = T.map (Pi.π Q n.as) (T.map A y)
-  have hp : A ≫ Pi.π Q n.as = cokernel.π (ell ^ (n.as + 1) • 𝟙 N) := Pi.lift_π _ _
+  have hp : A ≫ Pi.π Q n.as = cokernel.π (ell ^ (n.as + 1) • 𝟙 N) := Pi.lift_comp_π _ _
   have hh := congrArg T.map hp
   rw [Functor.map_comp] at hh
   exact (ConcreteCategory.congr_hom hh x).trans

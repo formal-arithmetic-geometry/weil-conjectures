@@ -6,8 +6,12 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorProduct
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalDescent
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
 
 /-! # The canonical monoidal model of derived pullback
@@ -92,10 +96,10 @@ def IsDerivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
           CochainComplex.IsKFlatTensor (R := X.sheaf) N →
           (m.μIso (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
-              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
-                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+              cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+                (CochainComplex.mapBifunctor P N (curriedTensor _)))) ≫
               DerivedCategory.Q.map (φ P N).hom =
-            (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
+            cast (by rfl) (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
               Functor.LaxMonoidal.μ DerivedCategory.Q
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)

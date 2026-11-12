@@ -160,7 +160,7 @@ lemma continuousMonoidHomPadicEquiv_mul (b b' : G →ₜ* Multiplicative ℤ_[l]
     continuousMonoidHomPadicEquiv l s G (b * b') =
       continuousMonoidHomPadicEquiv l s G b + continuousMonoidHomPadicEquiv l s G b' := by
   refine Subtype.ext (funext fun n ↦ (sheafHEquivContinuousMonoidHom _ s G).injective ?_)
-  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (ULift.ext _ _ ?_)
+  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (ULift.ext ?_)
   have h₁ := sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv l s G b n g
   have h₂ := sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv l s G b' n g
   have hadd := congrArg (fun χ ↦ (χ g).toAdd.down) (sheafHEquivContinuousMonoidHom_add _ s G
@@ -227,7 +227,7 @@ theorem continuousMonoidHomPadicEquiv_comp (e : Y ≅ Y)
   induction T using Quotient.inductionOn with | h t => ?_
   rw [← hT, mapIsoH1_classH1]
   apply (sheafHEquivContinuousMonoidHom _ s G).injective
-  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (ULift.ext _ _ ?_)
+  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (ULift.ext ?_)
   rw [sheafHEquivContinuousMonoidHom_classH1, monodromy_mapIso s G e τ σ hσ t g,
     ← sheafHEquivContinuousMonoidHom_classH1 s G t, hT,
     sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv,

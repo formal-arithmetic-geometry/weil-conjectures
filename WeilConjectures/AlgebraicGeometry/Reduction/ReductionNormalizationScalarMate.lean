@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
@@ -83,7 +85,7 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   completedReductionCoefficient completedReductionDerivedNormalization
 
 private theorem counit_eq
@@ -122,7 +124,12 @@ private theorem canonicalTranspose (T : Scheme.{u})
     (reductionDerivedChange T a)
     (complexCounitNat (reductionChange T a) (reductionDerivedChange T a)
       (reductionDerivedCounit T a)) (reductionDerivedCounit T a)
-    (fun P ↦ by simpa only [complexCounitNat_app] using (counit_eq _ _ _ P).symm) ad had
+    (fun P ↦ by
+      change _ ≫ 𝟙 _ = (reductionDerivedChange T a).map (𝟙 _) ≫ _
+      erw [(reductionDerivedChange T a).map_id, Category.id_comp, Category.comp_id]
+      simpa only [complexCounitNat_app] using
+        (counit_eq (reductionChange T a) (reductionDerivedChange T a)
+          (reductionDerivedCounit T a) P).symm) ad had
   have he : ad = pbcDerivedScalarAdjunction a := by
     unfold pbcDerivedScalarAdjunction
     with_unfolding_all

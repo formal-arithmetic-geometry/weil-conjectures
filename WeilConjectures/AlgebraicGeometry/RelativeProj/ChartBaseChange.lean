@@ -169,7 +169,6 @@ lemma mem_span (n : ℕ) {b : B} (hb : b ∈ ℬ n) :
   suffices ∀ x : ℬ n, (x : B) ∈ Submodule.span S (φ '' (𝒜 n : Set A)) from this ⟨b, hb⟩
   intro x
   induction x using (h.isBaseChange n).inductionOn with
-  | zero => exact zero_mem _
   | tmul a => exact Submodule.subset_span ⟨a, a.2, rfl⟩
   | smul c x hx => exact Submodule.smul_mem _ c hx
   | add x y hx hy => exact add_mem hx hy
@@ -202,8 +201,7 @@ private noncomputable abbrev degEquiv (n : ℕ) : S ⊗[R] 𝒜 n ≃ₗ[S] ℬ 
 private lemma chartMap_baseChange_mkLinearMap (k : ℕ) (y : S ⊗[R] 𝒜 (k • d)) :
     chartMap h ((Away.mkLinearMap 𝒜 hs k).baseChange S y) =
       Away.mkLinearMap ℬ (φ.map_mem hs) k (degEquiv h (k • d) y) := by
-  induction y using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction y using TensorProduct.inductionOn with
   | tmul c a =>
     rw [LinearMap.baseChange_tmul, LinearMap.liftBaseChange_tmul, IsBaseChange.equiv_tmul,
       map_smul, Away.mkLinearMap_apply, awayLinearMap_apply, Away.map_mk]
@@ -223,8 +221,7 @@ private lemma degEquiv_comp_baseChange_mulPowLinearMap (k m n : ℕ) (hn : k + m
 omit h in
 private lemma exists_baseChange_mkLinearMap (x : S ⊗[R] Away 𝒜 s) :
     ∃ (k : ℕ) (y : S ⊗[R] 𝒜 (k • d)), (Away.mkLinearMap 𝒜 hs k).baseChange S y = x := by
-  induction x using TensorProduct.induction_on with
-  | zero => exact ⟨0, 0, map_zero _⟩
+  induction x using TensorProduct.inductionOn with
   | tmul c z =>
     obtain ⟨n, a, ha, rfl⟩ := Away.mk_surjective 𝒜 hs z
     exact ⟨n, c ⊗ₜ ⟨a, ha⟩, rfl⟩

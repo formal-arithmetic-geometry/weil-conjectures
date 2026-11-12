@@ -150,7 +150,7 @@ def derivedFreeSummand (n : ℤ) :
     (Free.objFunctor F n).mapDerivedCategory ⟶
       (Free.functor F).mapDerivedCategory ⋙ (forget F).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatTrans (Free.summandι F n) ≫
-    (Functor.mapDerivedCategoryCompIso (Free.functor F) (forget F)).hom
+    (Functor.mapDerivedCategoryCompIso (Free.functor F) (forget F)).inv
 
 /-- The identification of `U (I (Q K))` with the localization of the underlying complex of the
 free algebra on `K`. -/
@@ -284,7 +284,7 @@ def derivedFreeSummandSuccIso (n : ℤ) :
     (Free.objFunctor F (n + 1)).mapDerivedCategory ≅
       (Free.objFunctor F n).mapDerivedCategory ⋙ F.mapDerivedCategory :=
   (Functor.mapDerivedCategoryNatIso (Free.objSuccIso F n)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The summand inclusion `jₙ₊₁ : Fⁿ⁺¹ X ⟶ U (I X)` is `F jₙ` followed by the derived structure
 isomorphism of the free algebra `I X`. -/

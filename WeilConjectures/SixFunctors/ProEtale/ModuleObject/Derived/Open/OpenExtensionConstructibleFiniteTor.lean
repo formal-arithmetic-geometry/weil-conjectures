@@ -239,7 +239,7 @@ theorem openExtension_constructible_finiteTor
       IsConstantModelConstructible Λ X.left (F.obj M) := by
     obtain ⟨S, hS⟩ := (show IsConstantModelConstructible Λ U.left M =
       IsFiniteConstantStratified Λ U.left M from
-        if_pos ⟨inferInstance, inferInstance⟩).mp hM
+        ite_eq_left ⟨inferInstance, inferInstance⟩).mp hM
     obtain ⟨T, hT, hmodels⟩ := finiteStratification_models S
       (fun Y f ↦ HasFiniteConstantLocalModel Λ Y ((upperStar Λ f).obj M)) hS
     have h := constantModelConstructible_openImmersionLowerShriek ℓ (ringChar k)
@@ -253,9 +253,9 @@ theorem openExtension_constructible_finiteTor
     have h := extend _ (A.property.1.2 q)
     obtain ⟨S, hS⟩ := (show IsConstantModelConstructible Λ X.left _ =
       IsFiniteConstantStratified Λ X.left _ from
-        if_pos ⟨inferInstance, inferInstance⟩).mp h
+        ite_eq_left ⟨inferInstance, inferInstance⟩).mp h
     apply (show IsConstantModelConstructible Λ X.left _ =
-      IsFiniteConstantStratified Λ X.left _ from if_pos ⟨inferInstance, inferInstance⟩).mpr
+      IsFiniteConstantStratified Λ X.left _ from ite_eq_left ⟨inferInstance, inferInstance⟩).mpr
     refine ⟨S, fun t ↦ ?_⟩
     obtain ⟨C, hC⟩ := hS t
     refine ⟨C, fun r ↦ ?_⟩
@@ -285,7 +285,7 @@ theorem openExtension_constructible_finiteTor
   intro q
   obtain ⟨S, hS⟩ := (show IsConstantModelConstructible Λ X.left _ =
     IsFiniteConstantStratified Λ X.left _ from
-      if_pos ⟨inferInstance, inferInstance⟩).mp (hc.2 q)
+      ite_eq_left ⟨inferInstance, inferInstance⟩).mp (hc.2 q)
   refine ⟨S, fun t ↦ ?_⟩
   let α := condensedPullbackHom Λ (S.immersion t)
   apply localFinitePresentation_of_comap (inv α)

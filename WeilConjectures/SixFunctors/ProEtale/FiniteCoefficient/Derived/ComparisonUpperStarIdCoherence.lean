@@ -42,8 +42,8 @@ lemma mapDerivedCategoryNatIso_hom_app_id (eE : E ≅ 𝟭 C) (eP : P ≅ 𝟭 D
     (e : N ⋙ P ≅ E ⋙ N)
     (h : ∀ M, e.hom.app M ≫ N.map (eE.hom.app M) = eP.hom.app (N.obj M))
     (K : DerivedCategory C) :
-    (mapDerivedCategoryCompIso N P).inv.app K ≫ (mapDerivedCategoryNatIso e).hom.app K ≫
-        (mapDerivedCategoryCompIso E N).hom.app K ≫
+    (mapDerivedCategoryCompIso N P).hom.app K ≫ (mapDerivedCategoryNatIso e).hom.app K ≫
+        (mapDerivedCategoryCompIso E N).inv.app K ≫
         N.mapDerivedCategory.map ((mapDerivedCategoryNatIso eE).hom.app K) ≫
         N.mapDerivedCategory.map ((mapDerivedCategoryIdIso C).hom.app K) =
       (mapDerivedCategoryNatIso eP).hom.app (N.mapDerivedCategory.obj K) ≫
@@ -61,7 +61,7 @@ lemma mapDerivedCategoryNatIso_hom_app_id (eE : E ≅ 𝟭 C) (eP : P ≅ 𝟭 D
   rw [← reassoc_of% hR, hR']
   -- the identities are those of objects which agree only up to unfolding `𝟭 C ⋙ N`
   erw [Category.comp_id]
-  rw [← NatTrans.comp_app, hD, ← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom,
+  rw [← NatTrans.comp_app, hD, ← Iso.app_hom, ← Iso.eq_inv_comp, Iso.app_inv,
     ← reassoc_of% hL, hL']
   erw [Category.comp_id]
 

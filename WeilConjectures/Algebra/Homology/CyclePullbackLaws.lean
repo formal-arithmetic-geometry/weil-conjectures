@@ -53,7 +53,7 @@ private theorem square_below (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     rw [hd]; rfl
   have h := pair_square T π _ _ hs
   dsimp only [differential]
-  rw [dif_pos hi', dif_pos hn]
+  rw [dite_eq_left hi', dite_eq_left hn]
   simp only [Category.assoc, eqToHom_trans_assoc]
   have h' := congrArg (fun f ↦ eqToHom (term_eq T π F N i hi') ≫ f ≫
     eqToHom (tower_next T π F N (i + 1) hn)) h
@@ -70,7 +70,7 @@ private theorem comm_below (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     rw [hd]; rfl
   have h := pair_comm T π _ _ hs
   dsimp only [differential, augmentation]
-  rw [dif_pos hi', dif_pos hn, dif_pos hi']
+  rw [dite_eq_left hi', dite_eq_left hn, dite_eq_left hi']
   simp only [Category.assoc, eqToHom_trans_assoc]
   rw [target_transport F _ _ i (i + 1) (degree_eq T π F N i hi')
     (degree_eq T π F N (i + 1) hn)]
@@ -89,10 +89,10 @@ private theorem comm_top (T : A ⥤ A) (π : T ⟶ 𝟭 A)
       targetD F (tower T π F N (depth N N)).degree (N + 1) = 0 := by
     simpa only [initial, comp_zero] using pair_comm T π _ _ hs
   have hz : augmentation T π F N (N + 1) = 0 := by
-    simp only [augmentation, dif_neg (by omega : ¬ N + 1 ≤ N)]
+    simp only [augmentation, dite_eq_right (by omega : ¬ N + 1 ≤ N)]
   rw [hz, comp_zero]
   dsimp only [augmentation]
-  rw [dif_pos hi]
+  rw [dite_eq_left hi]
   simp only [Category.assoc]
   rw [target_transport F _ (N + 1) N (N + 1) (degree_eq T π F N N hi) rfl]
   simpa only [Category.assoc, comp_zero, eqToHom_refl, Category.comp_id] using
@@ -127,7 +127,7 @@ theorem tower_laws {A : Type u} [Category.{v} A] [Abelian A]
     · subst i
       refine ⟨?_, comm_top T π F N⟩
       have hz : differential T π F N (N + 1) = 0 := by
-        simp only [differential, dif_neg (by omega : ¬ N + 1 ≤ N)]
+        simp only [differential, dite_eq_right (by omega : ¬ N + 1 ≤ N)]
       rw [hz, comp_zero]
     · have hni : ¬ i ≤ N := by omega
       simp [differential, augmentation, hni]

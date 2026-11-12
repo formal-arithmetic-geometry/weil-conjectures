@@ -163,6 +163,7 @@ theorem coherentFormalModule_annihilated_double (X : Scheme.{u}) [IsNoetherian X
   exact ⟨coherentFormalModule_annihilated_double_kernel X I K F G α r U t hcover ht h n,
     coherentFormalModule_annihilated_double_cokernel X I K F G α r U t hcover ht h n⟩
 
+
 end AlgebraicGeometry
 
 namespace LinearMap
@@ -190,5 +191,6 @@ theorem ker_coker_reduction_annihilated_double
         range ((J • ⊤ : Submodule A M).mapQ (J • ⊤ : Submodule A N) u
           (Submodule.smul_top_le_comap_smul_top J u))) := by
   exact (ker_coker_annihilated_mod_ideal.{u, v, w, v, w, v, w} K t ht u hker hcoker).2.1 J
+
 
 end LinearMap

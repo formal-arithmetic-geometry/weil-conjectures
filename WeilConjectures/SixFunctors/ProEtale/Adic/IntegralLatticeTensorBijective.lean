@@ -149,8 +149,7 @@ lemma tensorSections_stageTensorMap (F : FiniteIntermediateFieldOver l E.1) (n :
             τ)) =
       (upperStarRightDerivedSections g p i W).map (adicConstantSheafLeg T l F.1 n)
         (stageMap _ E (integralLatticeSectionsEquiv g p i E θ W hθW) hθ F τ) := by
-  induction τ using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction τ using TensorProduct.inductionOn with
   | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ']
   | tmul o m =>
     rw [Subalgebra.stageTensorMap_tmul]

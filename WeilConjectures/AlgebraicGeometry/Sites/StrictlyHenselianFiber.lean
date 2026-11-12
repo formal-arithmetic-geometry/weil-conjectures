@@ -41,8 +41,9 @@ variable {R : CommRingCat.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (e : R 
 /-- The terminal étale `Spec R`-scheme `Spec R` together with the geometric point `Spec e`, as
 an element of the fibre functor of the point `pointSmallEtale (Spec.map e)`. -/
 noncomputable def topFiberElement : (pointSmallEtale (Spec.map e)).fiber.Elements :=
-  ⟨Etale.mk (𝟙 (Spec R)), Over.homMk (U := Over.mk (Spec.map e))
-    (V := (Etale.forget _).obj (Etale.mk (𝟙 (Spec R)))) (Spec.map e) (Category.comp_id _)⟩
+  { obj := Etale.mk (𝟙 (Spec R))
+    val := Over.homMk (U := Over.mk (Spec.map e))
+      (V := (Etale.forget _).obj (Etale.mk (𝟙 (Spec R)))) (Spec.map e) (Category.comp_id _) }
 
 @[simp]
 lemma topFiberElement_fst : (topFiberElement e).1 = Etale.mk (𝟙 (Spec R)) :=
@@ -56,17 +57,17 @@ the pointed étale neighbourhood `(Spec R, Spec e)` is initial: every pointed é
 noncomputable def isInitialTopFiberElement (he : RingHom.ker e.hom = maximalIdeal R) :
     IsInitial (topFiberElement e) := by
   refine @IsInitial.ofUniqueHom _ _ _ (fun Y ↦ ?_) (fun Y f ↦ ?_)
-  · obtain ⟨V, v⟩ := Y
+  · obtain @⟨V, v⟩ := Y
     have hv : v.left ≫ V.hom = Spec.map e := Over.w v
     have hσ := existsUnique_section_of_etale e he V.hom v.left hv
     refine ⟨MorphismProperty.Over.homMk hσ.choose (by simpa using hσ.choose_spec.1.1),
       Over.OverMorphism.ext ?_⟩
     exact hσ.choose_spec.1.2
-  · obtain ⟨V, v⟩ := Y
+  · obtain @⟨V, v⟩ := Y
     obtain ⟨f, hf⟩ := f
     have hv : v.left ≫ V.hom = Spec.map e := Over.w v
     have hσ := existsUnique_section_of_etale e he V.hom v.left hv
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
     have h₁ : f.left ≫ V.hom = 𝟙 _ := MorphismProperty.Over.w f
     have h₂ : Spec.map e ≫ f.left = v.left := congrArg CommaMorphism.left hf

@@ -41,8 +41,8 @@ theorem IsIntegral.ringKrullDim_le_and_isMaximal_comap
     apply Order.krullDim_le_of_strictMono
       (fun I : PrimeSpectrum S ↦ (⟨I.asIdeal.comap f, inferInstance⟩ : PrimeSpectrum R))
     intro I J hIJ
-    exact Ideal.IsIntegral.comap_lt_comap hIJ
+    exact Ideal.IsIntegral.under_lt_under hIJ
   · intro I hI
-    exact Ideal.isMaximal_comap_of_isIntegral_of_isMaximal' f hf I
+    exact Ideal.isMaximal_comap_of_isIntegral_of_isMaximal f hf I
 
 end RingHom

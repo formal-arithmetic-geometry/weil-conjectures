@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
 public import WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquares
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
@@ -220,13 +222,19 @@ private theorem actualCompletionUnit_normalization (T : Scheme.{t})
       (completedReductionTowerUnit d T) := by
     unfold completedReductionTowerUnit
     exact (completedReductionTowerUnit_exists d T).exists.choose_spec
+  have h := ht P hP
+  dsimp only [HasCompletedReductionTowerUnitNormalization, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+    Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.comp_id] at h
   unfold completedQuotientOrdinaryUnit
   exact completionUnit_normalization (completedTowerConstant d T)
     (completedTowerLimit T (d.completedRing T)) constLimAdj
     (completedReductionModuleTowerFunctor T d) (completedReductionTower T d)
     (completedReductionTowerCounit d T) (completedReductionModuleUnit d T)
     (completedReductionTowerUnit d T) P
-    (ht P hP)
+    h
 
 set_option linter.style.haveILetI false in
 /-- On a K-flat representative the actual quotient-completion unit is the localized

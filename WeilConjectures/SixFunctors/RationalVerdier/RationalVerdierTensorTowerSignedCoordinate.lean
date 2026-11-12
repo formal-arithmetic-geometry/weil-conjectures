@@ -54,7 +54,7 @@ def strictTensorSignedSwap
     (pullbackTensorTensorTower l E X Q P).hom
 
 section Helpers
-attribute [local implicit_reducible] sheafCompose Functor.mapHomologicalComplex
+attribute [local implicit_reducible] sheafCompose
   integralCoefficientCommRingSheaf
 attribute [local implicit_reducible] IntegralOnSlice.Site IntegralOnSlice.topology
   IntegralOnSlice.ring IntegralOnSlice.finite IntegralOnSlice.restrict

@@ -269,11 +269,11 @@ private theorem restrictionPush_mate_exact :
 private theorem restrictionPull_inv :
     ((Functor.mapDerivedCategoryCompIso
       (Mod.comap (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Y))
-      (CondensedRing.upperStar Λ.X f)).symm ≪≫
+      (CondensedRing.upperStar Λ.X f)) ≪≫
       Functor.mapDerivedCategoryNatIso
         (comapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ'.X f)
-        (Mod.comap (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom X))).hom =
+      (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ'.X f)
+        (Mod.comap (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom X))).symm).hom =
     (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv := by
   simp only [derivedComapUpperStarIso, Iso.trans_inv, Iso.symm_inv,
     Iso.trans_hom, Iso.symm_hom, Functor.mapDerivedCategoryNatIso_symm, Category.assoc]

@@ -159,7 +159,8 @@ private theorem exactCompIso
     Nonempty (@Functor.mapDerivedCategory _ _ _ hA _ _ _ hC (F ⋙ G) _ _ _ ≅
       @Functor.mapDerivedCategory _ _ _ hA _ _ _ hB F _ _ _ ⋙
         @Functor.mapDerivedCategory _ _ _ hB _ _ _ hC G _ _ _) :=
-  ⟨@Functor.mapDerivedCategoryCompIso A B C _ _ _ _ _ _ hA hB hC F G _ _ _ _ _ _⟩
+  ⟨(@Functor.mapDerivedCategoryCompIso A _ _ hA B _ _ hB C _ _ hC
+    F _ _ _ G _ _ _).symm⟩
 
 /-- Exact derived composition preserves an isomorphism already inverted by the first map. -/
 private theorem exactComp_preservesIso
@@ -348,11 +349,11 @@ private theorem tensorLocalIso (X : Scheme.{u}) (U : X.Opens)
   let Ed := @Functor.mapDerivedCategory _ _ _ ho _ _ _ hD E _ _ _
   let R0 := @Functor.mapDerivedCategory _ _ _ hx _ _ _ ho R _ _ _
   let c : RD ≅ R0 ⋙ Ed :=
-    @Functor.mapDerivedCategoryCompIso
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      _ _ _ _ _ _ hx ho hD R E _ _ _ _ _ _
+    (@Functor.mapDerivedCategoryCompIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ hx
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) _ _ ho
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) _ _ hD
+      R _ _ _ E _ _ _).symm
   have : IsIso (RD.map a) :=
     (NatIso.isIso_map_iff c a).mpr (by
       have : IsIso (R0.map a) := ha

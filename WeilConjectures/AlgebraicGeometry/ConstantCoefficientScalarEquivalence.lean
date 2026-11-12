@@ -95,6 +95,10 @@ private noncomputable def extensionPresheafIso (e : R ≅ S)
         (forget₂ CommRingCat.{u} RingCat.{u})).map e.inv)).obj M).val := by
   refine PresheafOfModules.isoMk (extensionSectionIso e M) ?_
   intro U V f
+  let : Module (R.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose T (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (M.val.obj V)) := inferInstanceAs (Module (R.obj.obj V) (M.val.obj V))
   apply ModuleCat.ExtendScalars.hom_ext
   intro m
   change (extensionSectionIso e M V).hom (changeOfRingsMap.{u, u, u} e.hom M f _) = _

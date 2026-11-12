@@ -18,9 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.SupportedKoszulRelativeDetector
 Source: Stacks Project, Tags 0A9C, 0E4G, 094A and 09SP.
 (blueprint: lem-sc-supported-perfect-factorization).
 -/
-
 @[expose] public section
-
 universe u v w
 
 open CategoryTheory CategoryTheory.Limits
@@ -81,7 +79,7 @@ private theorem telescope_factor
     intro n
     dsimp only [d]
     rw [← Category.assoc]
-    rw [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Sigma.ι_desc,
+    rw [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Sigma.ι_comp_desc,
       Category.assoc (tA n.down), he,
       ← Category.assoc (Sigma.ι Y n), he, Preadditive.comp_sub, Category.comp_id]
     simp only [he]

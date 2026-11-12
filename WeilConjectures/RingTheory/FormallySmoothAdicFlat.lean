@@ -216,7 +216,7 @@ theorem flat_of_formallySmoothAdic {A : Type u} {B : Type v}
     exact (hψ n _ a (AdicCompletion.evalₐ_of _ n a)).trans
       (AdicCompletion.evalₐ_of _ n (φ a)).symm
   have hlocal : IsLocalHom ψ := by
-    apply ((IsLocalRing.local_hom_TFAE ψ).out 0 2).mpr
+    apply ((IsLocalRing.local_hom_TFAE ψ).out 1 3).mpr
     rw [AdicCompletion.maximalIdeal_eq_map (R := A)]
     rw [Ideal.map_map]
     apply le_trans (le_of_eq

@@ -48,8 +48,7 @@ private theorem tensor_hom_ext {Y : Scheme.{uModel}} {M N H : Y.Modules}
   apply PresheafOfModules.hom_ext
   intro U
   ext z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s t => exact h U.unop s t
   | add z w hz hw => simp only [map_add, hz, hw]
 
@@ -72,8 +71,7 @@ private theorem tensor_triple_hom_ext {Y : Scheme.{uModel}} {M N L H : Y.Modules
   have hh (z : TensorProduct Γ(Y, W) Γ(M, W) Γ(N, W)) :
       a.app W (tmulSection (tensorSectionsMap M N W z) (L.presheaf.map i.op w)) =
         b.app W (tmulSection (tensorSectionsMap M N W z) (L.presheaf.map i.op w)) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero, zero_tmulSection]
+    induction z using TensorProduct.inductionOn with
     | tmul s t => exact h W s t (L.presheaf.map i.op w)
     | add z z' hz hz' => simp only [map_add, add_tmulSection, hz, hz']
   change H.presheaf.map i.op (a.app U (tmulSection s w)) =

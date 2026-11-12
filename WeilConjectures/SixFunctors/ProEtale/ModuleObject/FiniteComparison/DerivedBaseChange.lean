@@ -74,9 +74,9 @@ noncomputable def finiteCoefficientDerivedUpperStarIso :
         L((f)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)]) :=
   Functor.isoWhiskerRight (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
     (Profinite.continuousMapRingObj.{u} T) f) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (upperStarFiniteCoefficientModEquivalenceIso f T) ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.mapDerivedCategoryNatIso (upperStarFiniteCoefficientModEquivalenceIso f T) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory _ f).symm
 
 /-- The comparison `Rf_* ⋙ D(Φ_Y) ⟶ D(Φ_X) ⋙ Rf_*` between the derived pushforwards: the mate
@@ -132,33 +132,33 @@ theorem finiteCoefficientDerivedUpperStarIso_compCoherence {X Y Z : Scheme.{u}} 
         (ModuleCat.{u + 1} (ULift.{u + 1} T)) (p ≫ q))
       ((Functor.mapDerivedCategoryCompIso
           ((q)^*⟦Profinite.continuousMapRingObj.{u} T⟧)
-          (finiteCoefficientModEquivalence Y T).functor).inv ≫
+          (finiteCoefficientModEquivalence Y T).functor).hom ≫
         (Functor.mapDerivedCategoryNatIso (upperStarFiniteCoefficientModEquivalenceIso q T)).hom ≫
         (Functor.mapDerivedCategoryCompIso (finiteCoefficientModEquivalence Z T).functor
-          ((q)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).hom)
+          ((q)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).inv)
       ((Functor.mapDerivedCategoryCompIso
           ((p)^*⟦Profinite.continuousMapRingObj.{u} T⟧)
-          (finiteCoefficientModEquivalence X T).functor).inv ≫
+          (finiteCoefficientModEquivalence X T).functor).hom ≫
         (Functor.mapDerivedCategoryNatIso (upperStarFiniteCoefficientModEquivalenceIso p T)).hom ≫
         (Functor.mapDerivedCategoryCompIso (finiteCoefficientModEquivalence Y T).functor
-          ((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).hom)
+          ((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).inv)
       ((Functor.mapDerivedCategoryCompIso
           ((p ≫ q)^*⟦Profinite.continuousMapRingObj.{u} T⟧)
-          (finiteCoefficientModEquivalence X T).functor).inv ≫
+          (finiteCoefficientModEquivalence X T).functor).hom ≫
         (Functor.mapDerivedCategoryNatIso
           (upperStarFiniteCoefficientModEquivalenceIso (p ≫ q) T)).hom ≫
         (Functor.mapDerivedCategoryCompIso (finiteCoefficientModEquivalence Z T).functor
-          ((p ≫ q)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).hom)
+          ((p ≫ q)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).inv)
       ((Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp
         (Profinite.continuousMapRingObj.{u} T) p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso
           ((q)^*⟦Profinite.continuousMapRingObj.{u} T⟧)
-          ((p)^*⟦Profinite.continuousMapRingObj.{u} T⟧)).hom)
+          ((p)^*⟦Profinite.continuousMapRingObj.{u} T⟧)).inv)
       ((Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp
         (ModuleCat.{u + 1} (ULift.{u + 1} T)) p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso
           ((q)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])
-          ((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).hom)
+          ((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} T)])).inv)
       ?_ (finiteCoefficientDerivedUpperStarIso T q) (finiteCoefficientDerivedUpperStarIso T p)
       (finiteCoefficientDerivedUpperStarIso T (p ≫ q)) ?_ ?_ ?_
       (CondensedRing.leftDerivedUpperStarComp (Profinite.continuousMapRingObj.{u} T) p q)
@@ -169,21 +169,31 @@ theorem finiteCoefficientDerivedUpperStarIso_compCoherence {X Y Z : Scheme.{u}} 
         (upperStarFiniteCoefficientModEquivalenceIso_compCoherence T p q)
   · intro M
     delta finiteCoefficientDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc]
   · intro M
     delta finiteCoefficientDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc]
   · intro M
     delta finiteCoefficientDerivedUpperStarIso
-    with_reducible exact isoWhiskerRight_trans_isoWhiskerLeft_hom_app _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc]
   · intro M
     delta CondensedRing.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible exact trans_trans_isoWhiskerLeft_hom_app _ _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
   · intro M
     delta ProEtale.leftDerivedUpperStarComp Functor.leftDerivedFunctorNatIso
       Functor.leftDerivedFunctorCompIso ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-    with_reducible exact trans_trans_isoWhiskerLeft_hom_app _ _ _ _ _ _ M
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Category.assoc, Iso.inv_hom_id_app_assoc]
 
 /-- The isomorphisms `finiteCoefficientDerivedUpperStarIso` commute with the transports along an
 equality `u = v` of morphisms of schemes. -/

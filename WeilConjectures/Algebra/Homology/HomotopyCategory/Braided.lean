@@ -56,6 +56,7 @@ lemma braiding_quotient (K L : CochainComplex C ℤ) :
     braiding ((quotient C _).obj K) ((quotient C _).obj L) = (quotient C _).mapIso (β_ K L) :=
   rfl
 
+
 /-- The braided monoidal structure on the homotopy category of cochain complexes. -/
 noncomputable instance braidedCategory : BraidedCategory (HomotopyCategory C (.up ℤ)) where
   braiding := braiding

@@ -80,8 +80,7 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {M N P : X.Modules}
   apply ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).homEquiv
     (M.val ⊗ N.val) P).injective
   ext U t : 3
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul s t => exact h U.unop s t
   | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
 

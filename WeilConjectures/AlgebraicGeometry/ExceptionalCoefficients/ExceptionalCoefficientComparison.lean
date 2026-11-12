@@ -160,7 +160,7 @@ private theorem comparisonInverse_eq [Finite A] [Finite B]
     (c : Compactification f) (M : DerivedCategoryModule A X) :
     comparisonInverse φ c M = (compactSupportIso φ c).inv.app M := by
   have := compactSupport_isIso φ c M
-  simp only [comparisonInverse, dif_pos this]
+  simp only [comparisonInverse, dite_eq_left this]
   simpa only [compactSupportIso_hom_app] using
     (NatIso.inv_hom_app (compactSupportIso φ c) M)
 

@@ -138,7 +138,7 @@ theorem restrictedOverAbelianCocone_complex_data
         apply pullback.hom_ext <;>
           simp [E, P, D, restrictedOverDiagram, rawAffineRestrictedMap, Category.assoc])
     have : IsConnected I := IsCofiltered.isConnected I
-    have : PreservesLimitsOfShape I P := by dsimp [P]; infer_instance
+    have : PreservesLimitsOfShape I P := by dsimp only [P]; infer_instance
     have h := isLimitOfPreserves P (isLimitOfReflects (Over.forget S) hcE)
     apply ((IsLimit.postcomposeHomEquiv eD (P.mapCone cE)).symm h).ofIsoLimit
     refine Cone.ext (pullbackSymmetry (c₀.pt.hom ≫ k) U.hom) ?_

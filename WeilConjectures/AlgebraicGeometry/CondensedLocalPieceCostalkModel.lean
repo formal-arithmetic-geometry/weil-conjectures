@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import WeilConjectures.Algebra.Homology.FunctorialBoundedInjectiveResolution
 import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
-import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
+import all WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-! # A compatible strict costalk model for the Hom cocone of a locally closed piece -/
@@ -26,6 +26,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+noncomputable local instance localPieceCostalkModelHasZeroMorphisms
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) :
+    HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) := inferInstance
 
 private noncomputable def derivedHomAdjIso
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
@@ -187,6 +193,56 @@ private theorem closedAdjoint
   let _ := hleft
   exact ⟨hclosed, H₀, ⟨ash⟩⟩
 
+-- Resolve the diagram in an abstract category, keeping the concrete sheaf-module
+-- structures out of the resolution and colimit comparison calculations.
+private theorem localPieceBoundedInjectiveCocone
+    {A : Type*} [Category* A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
+    (N : I ⥤ CochainComplex A ℤ) (a : ℤ)
+    (hNa : ∀ s, (N.obj s).IsStrictlyGE a) :
+    ∃ (J : I ⥤ CochainComplex A ℤ) (c : Cocone J)
+      (β : N ⟶ J) (βv : colimit N ⟶ c.pt),
+      (∀ s, colimit.ι N s ≫ βv = β.app s ≫ c.ι.app s) ∧
+      (∀ s, QuasiIso (β.app s)) ∧ QuasiIso βv ∧
+      (∀ s, (J.obj s).IsStrictlyGE a) ∧ c.pt.IsStrictlyGE a ∧
+      (∀ s r, Injective ((J.obj s).X r)) ∧ (∀ r, Injective (c.pt.X r)) ∧
+      QuasiIso (colimit.desc J c) := by
+  classical
+  have hNcol : (colimit N).IsStrictlyGE a := colimit_isStrictlyGE N a hNa
+  let Np : I ⥤ CochainComplex.Plus A :=
+    (CochainComplex.plus A).lift N (fun s ↦ ⟨a, hNa s⟩)
+  let cp : Cocone Np :=
+    { pt := ⟨colimit N, ⟨a, hNcol⟩⟩
+      ι := { app s := ⟨colimit.ι N s⟩
+             naturality s t f := by
+               apply ObjectProperty.hom_ext
+               exact (colimit.w N f).trans (Category.comp_id _).symm } }
+  obtain ⟨J₀, η, hη, hJ₀⟩ := CondensedRing.functorialInjectiveEmbeddings (C := A)
+  obtain ⟨R, α, hα, hRi, hRb⟩ :=
+    CochainComplex.exists_functorial_bounded_injective_resolution J₀ η hη hJ₀
+  let J := Np ⋙ R ⋙ CochainComplex.Plus.ι A
+  let c : Cocone J := ((R ⋙ CochainComplex.Plus.ι A).mapCocone cp)
+  let β : N ⟶ J := Functor.whiskerLeft Np α
+  let βv : colimit N ⟶ c.pt := α.app cp.pt
+  have hβ (s : I) : colimit.ι N s ≫ βv = β.app s ≫ c.ι.app s := by
+    exact α.naturality (cp.ι.app s)
+  have hJa (s : I) : (J.obj s).IsStrictlyGE a := hRb (Np.obj s) a (hNa s)
+  have hca : c.pt.IsStrictlyGE a := hRb cp.pt a hNcol
+  have hJi (s : I) (r : ℤ) : Injective ((J.obj s).X r) := hRi (Np.obj s) r
+  have hci (r : ℤ) : Injective (c.pt.X r) := hRi cp.pt r
+  have hβq (s : I) : QuasiIso (β.app s) := hα (Np.obj s)
+  have hβvq : QuasiIso βv := hα cp.pt
+  have hcolq : QuasiIso (colimMap β) :=
+    (HomologicalComplex.quasiIso A (.up ℤ)).colimMap β (fun s ↦ hβq s)
+  have heq : colimMap β ≫ colimit.desc J c = βv := by
+    apply colimit.hom_ext
+    intro s
+    simpa only [ι_colimMap_assoc, colimit.ι_desc] using (hβ s).symm
+  have hq : QuasiIso (colimit.desc J c) := by
+    rw [← quasiIso_iff_comp_left (colimMap β) (colimit.desc J c), heq]
+    exact hβvq
+  exact ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩
+
 set_option maxHeartbeats 400000 in
 -- The derived adjunction and diagram instances need a larger elaboration budget.
 set_option synthInstance.maxHeartbeats 100000 in
@@ -257,6 +313,11 @@ theorem condensed_local_piece_costalk_model
   classical
   let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
   let B := Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasExactColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I B := inferInstance
+  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
+  have : HasColimitsOfShape I (CochainComplex B ℤ) := inferInstance
   obtain ⟨hclosed, H₀, ⟨ash⟩⟩ := closedAdjoint T Λ i
   let _ := hclosed
   have := ash.right_adjoint_additive
@@ -266,54 +327,9 @@ theorem condensed_local_piece_costalk_model
   obtain ⟨a, ha⟩ := hN
   have hNa (s : I) : (N.obj s).IsStrictlyGE a :=
     (CochainComplex.isStrictlyGE_iff _ _).2 (ha s)
-  have hNcol : (colimit N).IsStrictlyGE a := colimit_isStrictlyGE N a hNa
-  let Np : I ⥤ CochainComplex.Plus A :=
-    (CochainComplex.plus A).lift N (fun s ↦ ⟨a, hNa s⟩)
-  let cp : Cocone Np :=
-    { pt := ⟨colimit N, ⟨a, hNcol⟩⟩
-      ι := { app s := ⟨colimit.ι N s⟩
-             naturality s t f := by
-               apply ObjectProperty.hom_ext
-               exact (colimit.w N f).trans (Category.comp_id _).symm } }
   have : IsGrothendieckAbelian.{u + 1} A := Mod.isGrothendieckAbelian _
-  let S := CochainComplex.singleFunctor A 0
-  let E₀ := HomologicalComplex.eval A (ComplexShape.up ℤ) 0
-  let R₀ := CochainComplex.kInjectiveResolutionFunctor.{u + 1} A
-  let ηR := CochainComplex.toKInjectiveResolution.{u + 1} A
-  let J₀ := S ⋙ R₀ ⋙ E₀
-  let η : 𝟭 A ⟶ J₀ :=
-    (HomologicalComplex.singleCompEvalIsoSelf A (ComplexShape.up ℤ) 0).inv ≫
-      Functor.whiskerLeft S (Functor.whiskerRight ηR E₀)
-  have hη (M : A) : Mono (η.app M) := by
-    have := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} A
-      (S.obj M)).1
-    dsimp [η]
-    infer_instance
-  have hJ₀ (M : A) : Injective (J₀.obj M) :=
-    CochainComplex.injective_kInjectiveResolutionFunctor_obj_X (S.obj M) 0
-  obtain ⟨R, α, hα, hRi, hRb⟩ :=
-    CochainComplex.exists_functorial_bounded_injective_resolution J₀ η hη hJ₀
-  let J := Np ⋙ R ⋙ CochainComplex.Plus.ι A
-  let c : Cocone J := ((R ⋙ CochainComplex.Plus.ι A).mapCocone cp)
-  let β : N ⟶ J := Functor.whiskerLeft Np α
-  let βv : colimit N ⟶ c.pt := α.app cp.pt
-  have hβ (s : I) : colimit.ι N s ≫ βv = β.app s ≫ c.ι.app s := by
-    exact α.naturality (cp.ι.app s)
-  have hJa (s : I) : (J.obj s).IsStrictlyGE a := hRb (Np.obj s) a (hNa s)
-  have hca : c.pt.IsStrictlyGE a := hRb cp.pt a hNcol
-  have hJi (s : I) (r : ℤ) : Injective ((J.obj s).X r) := hRi (Np.obj s) r
-  have hci (r : ℤ) : Injective (c.pt.X r) := hRi cp.pt r
-  have hβq (s : I) : QuasiIso (β.app s) := hα (Np.obj s)
-  have hβvq : QuasiIso βv := hα cp.pt
-  have hcolq : QuasiIso (colimMap β) :=
-    (HomologicalComplex.quasiIso A (.up ℤ)).colimMap β (fun s ↦ hβq s)
-  have heq : colimMap β ≫ colimit.desc J c = βv := by
-    apply colimit.hom_ext
-    intro s
-    simpa only [ι_colimMap_assoc, colimit.ι_desc] using (hβ s).symm
-  have hq : QuasiIso (colimit.desc J c) := by
-    rw [← quasiIso_iff_comp_left (colimMap β) (colimit.desc J c), heq]
-    exact hβvq
+  obtain ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩ :=
+    localPieceBoundedInjectiveCocone N a hNa
   have hH₀ := condensed_closed_costalk_injective_continuity T Λ i H₀ ash J c a
     hJa hJi hca hci hq
   have : PreservesColimitsOfShape I (CondensedRing.upperStar Λ j) :=

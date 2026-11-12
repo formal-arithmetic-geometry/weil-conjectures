@@ -104,7 +104,7 @@ def roundTrip (T : Scheme.{u}) :
       𝟭 (DerivedCategory (scalarReductionSource.{u, u} l E T)) :=
   (Functor.mapDerivedCategoryCompIso
     (pbcRestrict (ImmersionCompletedPullback.completedRingIso l E T).hom)
-    (pbcRestrict (ImmersionCompletedPullback.completedRingIso l E T).inv)).symm ≪≫
+    (pbcRestrict (ImmersionCompletedPullback.completedRingIso l E T).inv)) ≪≫
       Functor.mapDerivedCategoryNatIso (moduleRoundTrip l E T) ≪≫
         Functor.mapDerivedCategoryIdIso _
 
@@ -187,11 +187,11 @@ def ordinaryPresentation :
       (ImmersionCompletedPullback.transport l E Y)) ≪≫
     isoWhiskerLeft (back l E X)
       (Functor.mapDerivedCategoryCompIso (ImmersionCompletedPullback.modulePull l E g)
-        (pbcRestrict (ImmersionCompletedPullback.completedRingIso l E Y).inv)).symm ≪≫
+        (pbcRestrict (ImmersionCompletedPullback.completedRingIso l E Y).inv)) ≪≫
     (Functor.mapDerivedCategoryCompIso
       (pbcRestrict (ImmersionCompletedPullback.completedRingIso l E X).hom)
       (ImmersionCompletedPullback.modulePull l E g ⋙
-        pbcRestrict (ImmersionCompletedPullback.completedRingIso l E Y).inv)).symm
+        pbcRestrict (ImmersionCompletedPullback.completedRingIso l E Y).inv))
 
 /-- The actual completion comparison, built from the published strict quotient unit.
 Source: Stacks 099N(2),(5)

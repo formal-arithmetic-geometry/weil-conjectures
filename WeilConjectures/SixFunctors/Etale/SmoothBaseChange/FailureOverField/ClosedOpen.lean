@@ -207,15 +207,15 @@ variable [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives D]
 is an isomorphism at the image of a complex on which the unit of the right derived functor of
 `R` is an isomorphism. -/
 lemma isIso_derivedPlus_counit_app_Qh_obj (hε : ∀ Y, IsIso (adj.counit.app Y))
-    (M : HomotopyCategory.Plus D) [IsIso (R.rightDerivedFunctorPlusUnit.app M)] :
+    (M : HomotopyCategory.Plus D) [IsIso (R.rightDerivedFunctorPlusUnith.app M)] :
     IsIso (adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj M)) := by
   have h := adj.derivedPlus_counit_app_fac M
   have := adj.isIso_mapHomotopyCategoryPlus_counit_app hε M
-  have : IsIso (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app M) ≫
+  have : IsIso (L.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app M) ≫
       adj.derivedPlus.counit.app (DerivedCategory.Plus.Qh.obj M)) := by
     rw [h]; infer_instance
   exact IsIso.of_isIso_comp_left (L.mapDerivedCategoryPlus.map
-    (R.rightDerivedFunctorPlusUnit.app M)) _
+    (R.rightDerivedFunctorPlusUnith.app M)) _
 
 end Plus
 

@@ -184,7 +184,7 @@ theorem exists_limit_module_small_over_system
         intro i j g
         ext x
         dsimp [E, e]
-        simp only [Shrink.linearEquiv, Shrink.addEquiv, Equiv.linearEquiv_apply,
+        simp only [Shrink.linearEquiv, Shrink.addEquiv, AddEquiv.linearEquiv_apply,
           Equiv.addEquiv_apply, Equiv.addEquiv_symm_apply, Equiv.apply_symm_apply]
         change eN ((δ.app j).hom ((D.map g).hom ((e i) x))) =
           eN ((δ.app i).hom ((e i) x))
@@ -227,7 +227,7 @@ theorem exists_limit_module_small_over_system
   · intro i j h y x
     apply (e j).injective
     dsimp [E, e]
-    simp only [Shrink.linearEquiv, Shrink.addEquiv, Equiv.linearEquiv_apply,
+    simp only [Shrink.linearEquiv, Shrink.addEquiv, AddEquiv.linearEquiv_apply,
       Equiv.addEquiv_apply, Equiv.addEquiv_symm_apply, Equiv.apply_symm_apply,
       equivShrink_symm_smul]
     exact hmap i j h y _

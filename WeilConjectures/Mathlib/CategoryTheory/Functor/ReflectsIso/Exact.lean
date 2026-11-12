@@ -120,7 +120,7 @@ lemma JointlyReflectIsomorphisms.exactFunctor_of_iso (hP : JointlyReflectIsomorp
     (T : C ⥤ C') [T.Additive] (T' : ∀ i, D i ⥤ D' i) [∀ i, (T' i).Additive]
     (hT' : ∀ i, exactFunctor _ _ (T' i)) (e : ∀ i, T ⋙ F' i ≅ F i ⋙ T' i) :
     exactFunctor _ _ T := by
-  refine ((Functor.exact_tfae T).out 1 3).1 fun S hS ↦ (hP.exact_iff _).2 fun i ↦ ?_
+  refine ((Functor.exact_tfae T).out 2 4).1 fun S hS ↦ (hP.exact_iff _).2 fun i ↦ ?_
   have : PreservesFiniteLimits (T' i) := (hT' i).1
   have : PreservesFiniteColimits (T' i) := (hT' i).2
   exact (ShortComplex.exact_iff_of_iso (ShortComplex.isoMk ((e i).app _) ((e i).app _)

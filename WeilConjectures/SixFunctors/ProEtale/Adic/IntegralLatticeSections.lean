@@ -49,8 +49,8 @@ noncomputable def continuousMapAbSheafToAdicConstantSheaf :
   hom :=
     { app _ := AddCommGrpCat.ofHom
         { toFun g := ULift.up (AdicSheaf.ringValuedFunction ι hι hιE (ULift.down g))
-          map_zero' := ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun _ ↦ map_zero ι))
-          map_add' _ _ := ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun _ ↦ map_add ι _ _)) }
+          map_zero' := ULift.ext (Subtype.ext (ContinuousMap.ext fun _ ↦ map_zero ι))
+          map_add' _ _ := ULift.ext (Subtype.ext (ContinuousMap.ext fun _ ↦ map_add ι _ _)) }
       naturality _ _ _ := rfl }
 
 @[simp]

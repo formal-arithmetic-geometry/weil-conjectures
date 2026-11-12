@@ -100,8 +100,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-
 /-- The normalized scalar localization square without its identity comparison.
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Expand the termwise functor comparison in ScalarSectionNormalized. The comparison

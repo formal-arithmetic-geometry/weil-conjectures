@@ -222,9 +222,9 @@ def finiteMateDerivedOpenReindexing (A : Type u) [CommRing A] [Finite A]
     (sq : IsPullback h j' j b) :
     sfIntrinsicDerivedOpen A j ⋙ sfIntrinsicDerivedPullback A b ≅
       sfIntrinsicDerivedPullback A h ⋙ sfIntrinsicDerivedOpen A j' :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (finiteMateOpenReindexing A h j' j b sq) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 attribute [local irreducible] finiteMateOpenReindexing finiteMateDerivedOpenReindexing
 

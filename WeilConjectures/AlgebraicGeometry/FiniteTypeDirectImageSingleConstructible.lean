@@ -273,7 +273,7 @@ private theorem finite_torsion (f : X ⟶ Y)
   let eK : K ≅ EX.functor.mapDerivedCategory.obj (νX.mapDerivedCategory.obj L) :=
     (EX.mapDerivedCategory.counitIso.app K).symm ≪≫
       EX.functor.mapDerivedCategory.mapIso eL.symm
-  have hnA : (ℓ : A) ^ n = 0 := ULift.ext _ _ hn
+  have hnA : (ℓ : A) ^ n = 0 := ULift.ext hn
   have hF := finite_etale ℓ f A n hnA L hL
   obtain ⟨c, d, _, hv⟩ := hL.2
   have : L.IsGE c := (DerivedCategory.isGE_iff _ c).2 fun q hq ↦ hv q (Or.inl hq)
@@ -327,7 +327,7 @@ private theorem finite_fixed (f : X ⟶ Y)
       rcases hq with hq | hq
       · exact DerivedCategory.isZero_of_isGE _ a q hq (hX := ha)
       · exact DerivedCategory.isZero_of_isLE _ b q hq (hX := hb))
-  have hnB : (ℓ : B) ^ n = 0 := ULift.ext _ _ hn
+  have hnB : (ℓ : B) ^ n = 0 := ULift.ext hn
   have hFJ := finite_etale ℓ f B n hnB J hJ
   obtain ⟨aJ, bJ, _, hvJ⟩ := hJ.2
   have : J.IsGE aJ := (DerivedCategory.isGE_iff J aJ).2 fun q hq ↦ hvJ q (Or.inl hq)

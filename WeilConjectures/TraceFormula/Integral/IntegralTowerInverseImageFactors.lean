@@ -52,20 +52,20 @@ private theorem derivedSquare_fac :
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) =
-      ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj K) ≫
+      (Functor.mapDerivedCategoryCompIso F G ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F' G').symm).hom.app (DerivedCategory.Q.obj K) ≫
         G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app K) ≫
         G'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj K) := by
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac,
     ← Functor.mapDerivedCategoryCompIso_hom_app_factors F G]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 /-- The same square with the source factor isomorphism moved to the other side. -/
 private theorem derivedSquare_fac_inv :
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app K) ≫
-        ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryCompIso F G ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
+          (Functor.mapDerivedCategoryCompIso F' G').symm).hom.app (DerivedCategory.Q.obj K) ≫
         G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app K) ≫
         G'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj K) =
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫

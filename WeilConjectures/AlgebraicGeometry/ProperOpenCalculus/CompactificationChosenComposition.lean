@@ -165,7 +165,7 @@ theorem binary_tower (X Y Z : {X : Scheme.{u} // A X})
   rw [binary_eq F G X Y Z f g T.cf T.cg T.cfg hT.1 hT.2.1 hT.2.2 T hT]
   apply Iso.ext
   ext M
-  simp [binaryOn, comparison_refl, NatIso.hcomp, NatTrans.hcomp]
+  simp [binaryOn, comparison_refl, NatIso.hcomp]
 
 /-- Simultaneous change of all three compactifications commutes with composition.
 Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
@@ -217,7 +217,7 @@ theorem binary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   rw [hu]
   ext M
   dsimp only [Compactification.Triangle.unitLeft, H, Compactification.copy]
-  simp [comparison_refl, chosenIdentity, H, NatTrans.hcomp, Category.assoc]
+  simp [comparison_refl, chosenIdentity, H, Category.assoc]
 
 /-- The right identity law for an arbitrary identity compactification.
 Source: Stacks 0F7K (blueprint: lem-sp-chosen-compactification-composition). -/
@@ -236,7 +236,7 @@ theorem binary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   rw [hu]
   ext M
   dsimp only [Compactification.Triangle.unitRight, H, Compactification.copy]
-  simp [comparison_refl, chosenIdentity, H, NatTrans.hcomp, Category.assoc]
+  simp [comparison_refl, chosenIdentity, H, Category.assoc]
 
 section AssociativityTransfer
 variable {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]

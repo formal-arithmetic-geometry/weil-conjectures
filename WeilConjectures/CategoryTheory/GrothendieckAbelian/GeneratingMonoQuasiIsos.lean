@@ -137,7 +137,7 @@ lemma exists_epi_diskCopower {T : CochainComplex C ℤ}
   have hφ : ∀ (n : ℤ), Epi ((φ n).f n) := fun n ↦
     HomologicalComplex.epi_f_homEquiv_symm (q n)
   refine ⟨Sigma.desc φ, HomologicalComplex.epi_of_epi_f _ (fun n ↦ ?_)⟩
-  exact epi_of_epi_fac (HomologicalComplex.congr_hom (Sigma.ι_desc φ n) n)
+  exact epi_of_epi_fac (HomologicalComplex.congr_hom (Sigma.ι_comp_desc φ n) n)
 
 /-- Every degreewise `κ`-generated cochain complex is a quotient of a subobject of
 `diskCopower G κ`. -/

@@ -65,7 +65,7 @@ private theorem generic_fractions
       (Algebra.WeaklyEtale.flat_lmul' (FractionRing C) T)
   have htfae : Ring.AbsolutelyFlat T ↔
       IsReduced T ∧ ∀ P : Ideal T, P.IsPrime → P.IsMaximal :=
-    (Ring.AbsolutelyFlat.tfae T).out 0 1
+    (Ring.AbsolutelyFlat.tfae T).out 1 2
   have : IsReduced T := (htfae.mp habs).1
   have hred : IsReduced D := isReduced_of_injective (algebraMap D T) hinj
   refine ⟨?_, hred⟩

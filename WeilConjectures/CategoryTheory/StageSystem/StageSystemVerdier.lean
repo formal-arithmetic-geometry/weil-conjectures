@@ -195,7 +195,7 @@ private theorem commonStage_cocone {X Y : S.PairCategory} (f : X ⟶ Y) :
     n, Triangle.mk u v w, hT, ⟨?_⟩⟩
   exact Triangle.isoMk _ _ (S.isoToStage X hX) (S.isoToStage Y hY) (Iso.refl _)
     (by simp [Functor.mapTriangle, mkHom_eq_isoToStage])
-    (by simp [Functor.mapTriangle]) (by simp [Functor.mapTriangle]; rfl)
+    (by simp [Functor.mapTriangle]) (by simp [Functor.mapTriangle])
 
 private theorem commonStage_rotate (T : Triangle S.PairCategory) :
     S.CommonStageDistinguished T ↔ S.CommonStageDistinguished T.rotate := by

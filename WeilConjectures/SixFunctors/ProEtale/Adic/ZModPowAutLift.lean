@@ -63,7 +63,7 @@ noncomputable def zmodAbSheafOverMul {m : ℕ} {Y : X.ProEt} (c : C(Y.left, ZMod
         (ULift.up (c.comp U.unop.hom.left.base.hom) : ULift.{u + 1} C(U.unop.left.left, ZMod m)))
       naturality U V φ := by
         ext s
-        refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+        refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
         have h : V.unop.hom.left.base t = U.unop.hom.left.base (φ.unop.left.left.base t) := by
           rw [← Over.w φ.unop]
           rfl
@@ -96,7 +96,7 @@ lemma zmodAbSheafOver_hom_ext {m : ℕ} {Y : X.ProEt}
   have hs : (zmodAbSheafOver m _).obj.map φ.op s =
       (ZMod.cast k : ℤ) •
         (zmodAbSheafOver m _).obj.map (Over.toMkId Z).op (zmodAbSheafOver.mk _ 1) := by
-    refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
     have ht : φ.left.left.base t ∈ W k := by
       rw [← hab]
       exact (a.left t).2
@@ -162,7 +162,7 @@ noncomputable def unitsLift {m m' : ℕ} [NeZero m'] (h : m ∣ m') (z : ZMod m)
 /-- `ZMod.unitsLift` lifts units. -/
 lemma castHom_unitsLift {m m' : ℕ} [NeZero m'] (h : m ∣ m') {z : ZMod m} (hz : IsUnit z) :
     castHom h (ZMod m) (unitsLift h z) = z := by
-  rw [unitsLift, dif_pos hz]
+  rw [unitsLift, dite_eq_left hz]
   exact (congrArg Units.val (unitsMap_surjective h hz.unit).choose_spec).trans hz.unit_spec
 
 end ZMod
@@ -220,7 +220,7 @@ theorem exists_iso_hom_comp_zmodPowAbSheafDiagram_map (n : ℕ) (Y : X.ProEt)
     exact Units.mul_inv _
   · refine zmodAbSheafOver_hom_ext ?_
     rw [hα]
-    refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
     exact (by simp only [map_one, mul_one, ZMod.castHom_unitsLift hdvd (hu t)] :
       ZMod.castHom hdvd (ZMod (l ^ n)) (ZMod.unitsLift hdvd (u t) * 1) =
         u t * ZMod.castHom hdvd (ZMod (l ^ n)) 1)

@@ -345,8 +345,7 @@ variable {ℓ M} in
 with `t ∈ T_ℓ M`. -/
 theorem exists_eq_inv_pow_tmul (v : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) :
     ∃ (b : ℕ) (t : tateModule ℓ M), v = ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t := by
-  induction v using TensorProduct.induction_on with
-  | zero => exact ⟨0, 0, by simp⟩
+  induction v using TensorProduct.inductionOn with
   | tmul q t =>
     obtain ⟨b, z, rfl⟩ := Padic.exists_eq_inv_pow_mul q
     refine ⟨b, z • t, ?_⟩
@@ -384,6 +383,7 @@ theorem inv_pow_tmul_eq_inv_pow_tmul_iff (b c : ℕ) (t u : tateModule ℓ M) :
     rw [sub_eq_zero, hcast, hcast] at h0
     rw [h0]
 
+
 variable {ℓ M} {N : Type*} [AddCommGroup N]
 
 /-- The map of rational Tate modules `V_ℓ M → V_ℓ N` induced by a homomorphism `M →+ N`. -/
@@ -407,6 +407,7 @@ noncomputable def fixedSubmodule (s : M →+ M) : Submodule ℚ_[ℓ] (rationalT
 theorem mem_fixedSubmodule {s : M →+ M} {v : rationalTateModule ℓ M} :
     v ∈ fixedSubmodule ℓ s ↔ map s v = v :=
   Iff.rfl
+
 
 variable (ℓ M) in
 /-- Blueprint `prop-av-tate-rank` (group-theoretic content, rational form): if multiplication by

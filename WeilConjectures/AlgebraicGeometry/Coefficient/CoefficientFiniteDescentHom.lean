@@ -261,8 +261,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionStepNonemptyGluing
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteModelExtensions
-public import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
-public import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceHomContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedConstructiblePiece
 public import WeilConjectures.AlgebraicGeometry.CondensedLocallyClosedPiece
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
@@ -275,7 +273,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardContinuitySupplement
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
@@ -297,7 +294,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grot
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeTensorExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeHomContinuity
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
@@ -311,7 +307,6 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.SingleHomology
-public import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkDerivedContinuity
 public import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
@@ -380,7 +375,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
-public import WeilConjectures.AlgebraicGeometry.CondensedClosedCostalkInjectiveContinuity
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.AlgebraicGeometry.CondensedConstructibleExtensionTower
 public import WeilConjectures.AlgebraicGeometry.CondensedConstructibleOneStep

@@ -28,7 +28,7 @@ theorem exists_map_algebraMap_eq_of_forall_map_eq {K L σ : Type*} [Field K] [Fi
   refine mem_range_map_iff_coeffs_subset.mpr fun c hc => ?_
   obtain ⟨m, -, rfl⟩ := mem_coeffs_iff.mp hc
   refine (InfiniteGalois.mem_range_algebraMap_iff_fixed _).mpr fun τ => ?_
-  have h := congrArg (coeff m) (hp τ)
+  have h := congrArg (fun q : MvPolynomial σ L ↦ q.coeff m) (hp τ)
   rwa [coeff_map] at h
 
 end MvPolynomial

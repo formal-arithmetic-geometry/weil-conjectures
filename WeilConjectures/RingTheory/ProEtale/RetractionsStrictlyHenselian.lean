@@ -137,7 +137,7 @@ theorem Algebra.Etale.exists_algHom_localization_atPrime_comap_eq
     have : ¬m ≤ p.asIdeal := by
       intro hle
       exact hpm (((Ideal.IsMaximal.eq_of_le ‹_› p.isPrime.ne_top hle)).symm)
-    obtain ⟨a, ham, hap⟩ := SetLike.not_le_iff_exists.mp this
+    obtain ⟨a, ham, hap⟩ := IsConcreteLE.not_le_iff_exists.mp this
     refine Set.mem_iUnion.mpr ⟨⟨a, ham⟩, ?_⟩
     simpa [PrimeSpectrum.basicOpen] using hap
   obtain ⟨t, ht⟩ := (hU_open.isClosed_compl.isCompact).elim_finite_subcover

@@ -80,7 +80,8 @@ theorem localized_finite_quotient_charts
   intro ψ n hn
   let π := Ideal.Quotient.mk (J ^ n)
   have hJ (P : Ideal B) [P.IsPrime] (hP : J ≤ P) : P.IsMaximal := by
-    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := A) P
+    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := A) P
+    change (P.comap (algebraMap A B)).IsMaximal
     have hm : IsLocalRing.maximalIdeal A ≤ P.comap (algebraMap A B) := by
       rw [← IsLocalization.AtPrime.map_eq_maximalIdeal p A,
         Ideal.map_le_iff_le_comap, Ideal.comap_comap,

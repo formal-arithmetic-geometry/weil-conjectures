@@ -8,6 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux
 import WeilConjectures.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
 
@@ -60,6 +62,11 @@ theorem isIso_modulePullbackComparison_of_isFlatOver_identity
   rw [hc]
   have := isIso_flat_single_derived_counit a G
     (isFlat_of_isFlatOver_identity G hflat) ε hε
+  change IsIso (ε.app ((HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G) ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex
+        (Scheme.Modules.tensorPullback a) (ComplexShape.up ℤ) 0).hom.app G)))
   infer_instance
 
 end AlgebraicGeometry

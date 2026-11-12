@@ -540,9 +540,9 @@ private theorem square_factors (e : F ⋙ G ≅ H ⋙ K) (P : CochainComplex A0 
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
     Functor.mapDerivedCategoryNatIso_fac]
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj P))).1
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
 
 private theorem tower_square_factors (e : F ⋙ G ≅ H ⋙ K)

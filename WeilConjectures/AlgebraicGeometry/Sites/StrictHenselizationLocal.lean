@@ -90,7 +90,7 @@ variable {s} (N : SpecPointedEtaleNeighborhood s)
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine pointed étale neighbourhood `(Spec R, Spec.map pt)` of `s`. -/
 noncomputable def toAffine : AffinePointedEtaleNeighborhood s :=
-  ⟨⟨Etale.mk N.hom, CategoryTheory.Over.homMk (Spec.map N.pt) N.w⟩,
+  ⟨Functor.elementsMk _ (Etale.mk N.hom) (CategoryTheory.Over.homMk (Spec.map N.pt) N.w),
     (inferInstance : IsAffine (Spec N.R))⟩
 
 set_option backward.isDefEq.respectTransparency.types false in
@@ -122,7 +122,7 @@ lemma comp_ι {N N' : SpecPointedEtaleNeighborhood s} (u : N.R ⟶ N'.R)
     apply CategoryTheory.Over.OverMorphism.ext
     change Spec.map N'.pt ≫ Spec.map u = Spec.map N.pt
     rw [← Spec.map_comp, hu']
-  let f : N'.toAffine ⟶ N.toAffine := ObjectProperty.homMk (CategoryOfElements.homMk _ _ g hg)
+  let f : N'.toAffine ⟶ N.toAffine := ObjectProperty.homMk (Functor.Elements.homMk g hg)
   have h2 : Scheme.Γ.map (Spec.map u).op ≫
       colimit.ι (strictHenselizationDiagram s) (op N'.toAffine) =
       colimit.ι (strictHenselizationDiagram s) (op N.toAffine) :=
@@ -195,7 +195,7 @@ lemma exists_specPointedEtaleNeighborhood_range_subset (x : AffinePointedEtaleNe
     change Spec.map (Spec.preimage (IsOpenImmersion.lift j y hsub)) ≫ j = y
     rw [hspec, hl]
   refine ⟨N, subset_trans (range_colimit_ι_subset
-    (ObjectProperty.homMk (CategoryOfElements.homMk _ _ g hg) : N.toAffine ⟶ x)) ?_⟩
+    (ObjectProperty.homMk (Functor.Elements.homMk g hg) : N.toAffine ⟶ x)) ?_⟩
   rintro _ ⟨b, rfl⟩
   exact N.colimit_ι_mem_range_ι b
 
@@ -457,5 +457,6 @@ theorem exists_residueField_hom_strictLocalization :
   refine ⟨strictHenselizationResidueFieldEmb s, ?_⟩
   rw [strictHenselizationResidueFieldEmb_comp_residue, CommRingCat.ofHom_hom]
   exact spec_map_strictHenselizationEval_comp_strictLocalizationToBase s
+
 
 end AlgebraicGeometry.Scheme

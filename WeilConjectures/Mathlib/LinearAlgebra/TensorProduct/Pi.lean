@@ -29,8 +29,7 @@ lemma piScalarRight_lTensor_mulVecLin {R M : Type*} [CommRing R] [AddCommGroup M
     (j : Fin s) :
     TensorProduct.piScalarRight R R M (Fin s) ((b.mulVecLin).lTensor M z) j =
       ∑ m, b j m • TensorProduct.piScalarRight R R M (Fin t) z m := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy =>
     simp only [map_add, Pi.add_apply, hx, hy, smul_add, Finset.sum_add_distrib]
   | tmul x v =>

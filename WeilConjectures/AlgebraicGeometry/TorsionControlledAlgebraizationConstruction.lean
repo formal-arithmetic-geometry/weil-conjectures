@@ -81,7 +81,7 @@ theorem torsionControlled_algebraization_construction
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
         (cokernel a.hom))) := by
   have htorsion := ((coherentFormalModule_annihilated_iff X J J N
-    ((completion X J).obj H) δ).out 1 0).mp hlocal
+    ((completion X J).obj H) δ).out 2 1).mp hlocal
   obtain ⟨F, a, β, hδ, ha⟩ :=
     torsionControlled_easy_algebraization_bridge J H N δ htorsion
   exact ⟨F, a, β, hδ, ha⟩

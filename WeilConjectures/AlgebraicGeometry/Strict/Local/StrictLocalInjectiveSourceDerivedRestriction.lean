@@ -103,9 +103,10 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
         ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f
         (Scheme.strictHenselizationStructuralMap s))
             (Q.smallModelOver i).symm) ≪≫
-          Functor.mapDerivedCategoryCompIso
+          (Functor.mapDerivedCategoryCompIso
             (Etale.upperStar AddCommGrpCat.{v + 1} ((strictLocalNeighbourhoodProjection f s).app i))
-            (Etale.upperStar AddCommGrpCat.{v + 1} (Q.smallModelLegs.app i))).inv.app K.obj) := by
+            (Etale.upperStar AddCommGrpCat.{v + 1}
+              (Q.smallModelLegs.app i))).symm).inv.app K.obj) := by
   set_option backward.isDefEq.respectTransparency false in
     intro i
     let M : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=

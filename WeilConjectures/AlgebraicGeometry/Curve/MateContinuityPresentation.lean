@@ -12,7 +12,8 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry.Neighb
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologyGerms
 import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
 import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalCohomologySourceColimit
-import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalMateProjectionFormulas
+import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalInjectiveSourceSections
+public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 
 /-! # Projection-restriction presentation on the small strict-local model
 
@@ -81,7 +82,35 @@ theorem smallModel_nonempty_strictLocalBaseChange_continuityPresentation
                 |>.natTrans.app K)))) := by
   classical
   obtain ⟨Q⟩ := nonempty_strictLocalNeighbourhoodGeometry f s
-  obtain ⟨E⟩ := smallModel_nonempty_strictLocalMateProjectionData f s K n Q
+  obtain ⟨E⟩ : Nonempty (SmallModelStrictLocalMateProjectionData f s K n Q) := by
+    obtain ⟨b, hb⟩ := K.property
+    let : K.IsGE b := (K.isGE_ι_obj_iff b).1 hb
+    obtain ⟨J, _, ⟨qJ⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K b
+    let q : K.obj ≅ DerivedCategory.Q.obj
+        (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) :=
+      DerivedCategory.Plus.ι.mapIso qJ.symm
+    obtain ⟨e, ht, hr⟩ := smallModel_exists_strictLocalInjectiveSourceSections f s K n Q J q
+    obtain ⟨he, htransition, hrestriction⟩ :=
+      smallModel_injectiveSections_strictLocal_comparison f s K n Q J q
+    let := he
+    let E := fun i ↦ e i ≪≫ asIso (representativeSectionsComparison
+      ((strictLocalNeighbourhoodProjection f s).app i) q n)
+    refine ⟨{ e := E, transition := ?_, restriction := ?_ }⟩
+    · intro i j a
+      have h := htransition a
+      refine (ht a).trans ?_
+      dsimp only [E]
+      simp only [Iso.trans_hom, Iso.trans_inv, asIso_hom, asIso_inv] at h ⊢
+      simp only [Category.assoc] at h ⊢
+      rw [reassoc_of% h]
+      simp only [IsIso.hom_inv_id_assoc]
+    · intro i
+      have h := hrestriction i
+      refine (hr i).trans ?_
+      dsimp only [E]
+      simp only [Iso.trans_hom, Iso.trans_inv, asIso_hom] at h ⊢
+      simp only [Category.assoc] at h ⊢
+      rw [reassoc_of% h]
   let := (Scheme.strictHenselization_properties s).2.1
   obtain ⟨hsource⟩ := smallModel_isColimit_strictLocalCohomologySourceLegs s
     ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n

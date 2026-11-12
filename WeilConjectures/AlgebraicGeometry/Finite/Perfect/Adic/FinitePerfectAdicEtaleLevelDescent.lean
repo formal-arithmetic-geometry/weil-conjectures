@@ -117,9 +117,9 @@ private def pull_constant_model (Y U W : Scheme.{t}) (B : Type (t + 1)) [CommRin
       (constantSheaf W.smallEtaleTopology (ModuleCat.{t + 1} B)).mapDerivedCategory.obj E :=
   (Functor.mapDerivedCategoryNatIso
     (AlgebraicGeometry.Etale.upperStarComp (ModuleCat.{t + 1} B) g f)).app K ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm.app K ≪≫
     (AlgebraicGeometry.Etale.upperStar (ModuleCat.{t + 1} B) g).mapDerivedCategory.mapIso e ≪≫
-    ((Functor.mapDerivedCategoryCompIso _ _).app E).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).app E ≪≫
     (Functor.mapDerivedCategoryNatIso
       (upperStarConstantSheafIso (ModuleCat.{t + 1} B) g)).app E
 
@@ -148,9 +148,9 @@ private def stalk_constant_model
         ((AlgebraicGeometry.Etale.upperStar (ModuleCat.{t + 1} B) f).mapDerivedCategory.obj K) := by
     simpa only [hs, finitePerfectAdicEtaleStalk, uliftPointSmallEtale, S, Φ,
       Functor.comp_obj] using
-      d.symm ≪≫ (Functor.mapDerivedCategoryCompIso _ _).app K
+      d.symm ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm.app K
   exact d' ≪≫ S.mapDerivedCategory.mapIso e ≪≫
-    ((Functor.mapDerivedCategoryCompIso C S).app E).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso C S).app E ≪≫
     (Functor.mapDerivedCategoryNatIso
       (Φ.constantSheafCompSheafFiberIso U.smallEtaleTopology (ModuleCat.{t + 1} B))).app E ≪≫
     (Functor.mapDerivedCategoryIdIso (ModuleCat.{t + 1} B)).app E

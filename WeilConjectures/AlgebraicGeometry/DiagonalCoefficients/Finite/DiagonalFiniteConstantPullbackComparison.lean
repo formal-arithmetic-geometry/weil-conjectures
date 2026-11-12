@@ -160,11 +160,11 @@ private theorem pull_comparison_hom (A : Type (u + 1)) [CommRing A]
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).hom.app
         ((geoP1Comparison A Y).obj K) ≫
       (Functor.mapDerivedCategoryCompIso (comparisonUpperStar (ModuleCat.{u + 1} A) Y)
-        (upperStar (ModuleCat.{u + 1} A) f)).inv.app K ≫
+        (upperStar (ModuleCat.{u + 1} A) f)).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso
         (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) f)).hom.app K ≫
       (Functor.mapDerivedCategoryCompIso (Etale.upperStar (ModuleCat.{u + 1} A) f)
-        (comparisonUpperStar (ModuleCat.{u + 1} A) X)).hom.app K ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} A) X)).inv.app K ≫
       (geoP1Comparison A X).map
         ((Etale.leftDerivedUpperStarIsoMapDerivedCategory
           (ModuleCat.{u + 1} A) f).inv.app K) := by
@@ -213,12 +213,12 @@ private theorem finite_constant_pullback_raw (A : Type (u + 1)) [CommRing A]
       ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj
       ((Etale.ordinaryFiniteSingleFunctor A Y).obj (Etale.ordinaryFiniteConstant A Y))) ≫
     (Functor.mapDerivedCategoryCompIso (comparisonUpperStar (ModuleCat.{u + 1} A) Y) (upperStar
-      (ModuleCat.{u + 1} A) f)).inv.app ((Etale.ordinaryFiniteSingleFunctor A Y).obj
+      (ModuleCat.{u + 1} A) f)).hom.app ((Etale.ordinaryFiniteSingleFunctor A Y).obj
       (Etale.ordinaryFiniteConstant A Y)) ≫
     (Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A)
       f)).hom.app ((Etale.ordinaryFiniteSingleFunctor A Y).obj (Etale.ordinaryFiniteConstant A Y)) ≫
     (Functor.mapDerivedCategoryCompIso (Etale.upperStar (ModuleCat.{u + 1} A) f)
-      (comparisonUpperStar (ModuleCat.{u + 1} A) X)).hom.app ((Etale.ordinaryFiniteSingleFunctor A
+      (comparisonUpperStar (ModuleCat.{u + 1} A) X)).inv.app ((Etale.ordinaryFiniteSingleFunctor A
       Y).obj (Etale.ordinaryFiniteConstant A Y)) ≫
     (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map
       ((Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).inv.app

@@ -101,7 +101,8 @@ theorem relative_flat_module_stalk {S X : Scheme.{u}} (f : X ⟶ S)
                 change G.val.map (homOfLE a.unop.le : W.unop.1.1 ⟶ U.unop.1.1).op
                   ((f.appLE V U.unop.1.1 U.unop.2.2).hom r • m) =
                     (f.appLE V W.unop.1.1 W.unop.2.2).hom r •
-                      G.val.map (homOfLE a.unop.le : W.unop.1.1 ⟶ U.unop.1.1).op m
+                      (show G.val.obj (op W.unop.1.1) from
+                        G.val.map (homOfLE a.unop.le : W.unop.1.1 ⟶ U.unop.1.1).op m)
                 rw [G.val.map_smul]
                 congr 1
                 exact congrArg (fun k : Γ(S, V) ⟶ Γ(X, W.unop.1.1) ↦ k r)

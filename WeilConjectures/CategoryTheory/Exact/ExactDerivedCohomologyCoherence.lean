@@ -86,7 +86,7 @@ theorem exactDerivedCohomologyCoherence
       (@mapDerivedCategoryHomologyFunctorIso A C _ _ _ _ _ _ (F ⋙ G) _
         (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G) a).hom.app K ≫
           (DerivedCategory.homologyFunctor C a).map
-            ((mapDerivedCategoryCompIso F G).hom.app K) =
+            ((mapDerivedCategoryCompIso F G).inv.app K) =
         G.map ((F.mapDerivedCategoryHomologyFunctorIso a).hom.app K) ≫
           (G.mapDerivedCategoryHomologyFunctorIso a).hom.app (F.mapDerivedCategory.obj K)) ∧
     (∀ (L : A ⥤ C) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
@@ -94,7 +94,7 @@ theorem exactDerivedCohomologyCoherence
       G.map ((F.mapDerivedCategoryHomologyFunctorIso a).hom.app K) ≫
           (G.mapDerivedCategoryHomologyFunctorIso a).hom.app (F.mapDerivedCategory.obj K) ≫
           (DerivedCategory.homologyFunctor C a).map
-            (((mapDerivedCategoryCompIso F G).symm ≪≫
+            ((mapDerivedCategoryCompIso F G ≪≫
               @mapDerivedCategoryNatIso A C _ _ _ _ _ _ (F ⋙ G) L _ _
                 (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G)
                 _ _ eta).hom.app K) =
@@ -122,13 +122,13 @@ theorem exactDerivedCohomologyCoherence
       Iso.trans_inv, Functor.mapIso_inv]
   have hcomp :
       ((F ⋙ G).mapDerivedCategoryHomologyFunctorIso a).hom ≫
-          whiskerRight (mapDerivedCategoryCompIso F G).hom
+          whiskerRight (mapDerivedCategoryCompIso F G).inv
             (DerivedCategory.homologyFunctor C a) =
         whiskerRight (F.mapDerivedCategoryHomologyFunctorIso a).hom G ≫
           whiskerLeft F.mapDerivedCategory (G.mapDerivedCategoryHomologyFunctorIso a).hom := by
     refine Localization.natTrans_ext DerivedCategory.Q
       (HomologicalComplex.quasiIso A (.up ℤ)) (fun X ↦ ?_)
-    have hc : (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj X) ≫
+    have hc : (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj X) ≫
         G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app X) ≫
           G.mapDerivedCategoryFactors.hom.app
             ((F.mapHomologicalComplex (.up ℤ)).obj X) =
@@ -140,7 +140,7 @@ theorem exactDerivedCohomologyCoherence
       erw [DerivedCategory.Q.map_id, Category.comp_id] at h
       exact h
     have hfac : (F ⋙ G).mapDerivedCategoryFactors.inv.app X ≫
-        (mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj X) =
+        (mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj X) =
         G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj X) ≫
           G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app X) := by
       apply (cancel_mono (G.mapDerivedCategory.map
@@ -175,9 +175,9 @@ theorem exactDerivedCohomologyCoherence
   have hk := congr_app hcomp K
   simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app] at hk
   rw [← Category.assoc, ← hk]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
     Category.assoc]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
   exact (mapDerivedCategoryHomologyFunctorIso_hom_app_naturality eta a K).symm
 
 end CategoryTheory.Functor

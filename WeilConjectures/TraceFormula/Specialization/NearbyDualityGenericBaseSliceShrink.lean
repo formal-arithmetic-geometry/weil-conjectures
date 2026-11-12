@@ -102,7 +102,7 @@ lemma exists_θ_eq_of_openSubmodel_of_rebase {DXc DX₁ DXη DY DSc DS : Type*} 
   have n₂ := αs.naturality φ
   dsimp only [Functor.comp_obj, Functor.comp_map] at n₁ n₂
   rw [hΦ, ← cancel_epi (αr.app ωc ≫ ΨM.map ρj.hom), Category.assoc, ← h₁, h₂, Category.assoc,
-    reassoc_of% n₁, ← Functor.map_comp_assoc, Iso.map_hom_inv_id_assoc, ← reassoc_of% h₄,
+    reassoc_of% n₁, ← Functor.map_comp_assoc, Iso.hom_inv_id_map_assoc, ← reassoc_of% h₄,
     ← Functor.map_comp_assoc, Iso.hom_inv_id_assoc]
   simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% n₂, ← h₃]

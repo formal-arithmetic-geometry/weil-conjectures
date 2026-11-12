@@ -88,7 +88,7 @@ private theorem rightSquare (e : U₂ ⋙ U₁ ≅ V₂ ⋙ V₁) (t : G₁ ⋙ 
         (b₁.mapDerivedCategoryRightDerivedAdjunction.comp
           b₂.mapDerivedCategoryRightDerivedAdjunction)
         (b₁.comp b₂).mapDerivedCategoryRightDerivedAdjunction
-        (Functor.mapDerivedCategoryCompIso G₁ G₂).hom := by
+        (Functor.mapDerivedCategoryCompIso G₁ G₂).inv := by
     simpa [Functor.rightDerivedFunctorCompIso', Functor.rightDerivedFunctorNatIso,
       Functor.rightDerivedFunctorNatTrans, Functor.mapDerivedCategoryNatIso_refl] using h₂
   apply (cancel_mono (Functor.rightDerivedFunctorCompIso V₂ V₁).inv).1
@@ -99,7 +99,7 @@ private theorem rightSquare (e : U₂ ⋙ U₁ ≅ V₂ ⋙ V₁) (t : G₁ ⋙ 
   congr 1
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
   ext X
-  simp only [NatTrans.comp_app, Iso.hom_inv_id_app_assoc]
+  simp only [NatTrans.comp_app, Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Adjunction
 

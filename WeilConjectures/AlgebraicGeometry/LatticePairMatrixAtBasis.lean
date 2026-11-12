@@ -410,7 +410,7 @@ theorem integralLatticePair_matrixAtBasis (X : Scheme.{u})
     have hT : IsEmpty T.left.left :=
       ⟨fun x ↦ hW ⟨T.hom.left.base x⟩⟩
     let : Subsingleton ((latticeCoefficientSheaf X K).obj.obj (op T.left)) :=
-      ⟨fun x y ↦ ULift.ext _ _ (ContinuousMap.ext (fun z ↦ (hT.false z).elim))⟩
+      ⟨fun x y ↦ ULift.ext (ContinuousMap.ext (fun z ↦ (hT.false z).elim))⟩
     let : Subsingleton ((latticeFreeSheaf X K U n).val.obj
         (op (Over.mk (T.hom ≫ a ≫ f)))) :=
       ⟨fun x y ↦ (frameCoordinates X K U n

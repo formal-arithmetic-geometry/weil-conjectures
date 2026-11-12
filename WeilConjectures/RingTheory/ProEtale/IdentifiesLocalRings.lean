@@ -348,7 +348,7 @@ theorem continuousMap_of_algHom_bijective
     have hcomap (p : PrimeSpectrum C) :
         p.asIdeal.comap f₁.toRingHom = p.asIdeal.comap f₂.toRingHom :=
       congrArg PrimeSpectrum.asIdeal (DFunLike.congr_fun heq p)
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply RingHom.ext
     intro b
     refine eq_of_localizationAtPrime_eq fun p ↦ ?_

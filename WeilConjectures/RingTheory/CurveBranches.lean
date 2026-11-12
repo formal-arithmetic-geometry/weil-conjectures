@@ -194,7 +194,7 @@ lemma maximalIdeal_quotient_ne_bot :
     maximalIdeal (R ⧸ p.1) ≠ ⊥ := by
   let := isLocalRing_quotient_minimalPrimes p
   have := isPrime_of_mem_minimalPrimes' p
-  obtain ⟨r, hrm, hrp⟩ := SetLike.exists_of_lt (lt_of_le_of_ne
+  obtain ⟨r, hrm, hrp⟩ := IsConcreteLE.exists_of_lt (lt_of_le_of_ne
     (le_maximalIdeal (Ideal.IsPrime.ne_top ‹_›)) (ne_maximalIdeal_of_mem_minimalPrimes hdim p.2))
   intro h
   apply hrp
@@ -235,12 +235,12 @@ lemma eq_maximalIdeal_branch_of_ne_bot (Q : Ideal (branch R p)) [Q.IsPrime] (hQ 
   have := isDomain_quotient_minimalPrimes p
   obtain ⟨x, hxQ, hx0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hQ
   have hc : Q.comap (algebraMap (R ⧸ p.1) (branch R p)) ≠ ⊥ :=
-    Ideal.comap_ne_bot_of_integral_mem hx0 hxQ (Algebra.IsIntegral.isIntegral x)
+    Ideal.under_ne_bot_of_integral_mem hx0 hxQ (Algebra.IsIntegral.isIntegral x)
   have hcm := eq_maximalIdeal_quotient_of_ne_bot p hdim _ hc
   have : (Q.comap (algebraMap (R ⧸ p.1) (branch R p))).IsMaximal := by
     rw [hcm]
     exact maximalIdeal.isMaximal _
-  have := Ideal.isMaximal_of_isIntegral_of_isMaximal_comap Q this
+  have := Ideal.isMaximal_of_isIntegral_of_isMaximal_under Q this
   exact IsLocalRing.eq_maximalIdeal this
 
 variable (hfin : Module.Finite (R ⧸ p.1) (branch R p))
@@ -266,7 +266,7 @@ theorem isDiscreteValuationRing_branch [IsNoetherianRing R] :
   have := isNoetherianRing_branch p hfin
   have hint : IsIntegrallyClosed (branch R p) :=
     integralClosure.isIntegrallyClosedOfFiniteExtension (FractionRing (R ⧸ p.1))
-  have h := (IsDiscreteValuationRing.TFAE (branch R p) (not_isField_branch p hdim)).out 0 3
+  have h := (IsDiscreteValuationRing.TFAE (branch R p) (not_isField_branch p hdim)).out 1 4
   refine h.2 ⟨hint, ⟨maximalIdeal _, ⟨?_, inferInstance⟩, fun Q ⟨hQ, hQp⟩ ↦
     eq_maximalIdeal_branch_of_ne_bot p hdim Q hQ⟩⟩
   intro h0
@@ -330,7 +330,7 @@ theorem isAlgClosed_residueField_branch [IsAlgClosed (ResidueField R)] :
   obtain ⟨a, rfl⟩ := residue_surjective a
   obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective a
   refine ⟨r, ?_⟩
-  rw [← residue_eq_zero_iff, map_sub, ← ha, ResidueField.algebraMap_residue,
+  rw [← residue_eq_zero_iff, RingHom.map_sub, ← ha, ResidueField.algebraMap_residue,
     IsScalarTower.algebraMap_apply R (R ⧸ p.1) (branch R p)]
   exact sub_eq_zero.2 rfl
 

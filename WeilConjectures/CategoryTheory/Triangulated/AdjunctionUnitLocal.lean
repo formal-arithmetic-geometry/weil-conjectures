@@ -94,8 +94,7 @@ noncomputable def unitTriangleHom (T : Triangle C) : T ⟶ (L ⋙ R).mapTriangle
       have h := adj.unit_app_commShiftIso_hom_app ℤ (1 : ℤ) T.obj₁
       have h' := adj.unit.naturality T.mor₃
       dsimp at h h' ⊢
-      rw [← h, reassoc_of% h']
-      rfl)
+      rw [← h, reassoc_of% h'])
 
 @[simp]
 lemma unitTriangleHom_hom₁ (T : Triangle C) :

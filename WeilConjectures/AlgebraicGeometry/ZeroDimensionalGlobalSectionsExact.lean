@@ -91,7 +91,7 @@ theorem zero_dimensional_global_sections_preservesFiniteColimits
       apply Pi.hom_ext
       intro x
       dsimp [G, T, GrothendieckTopology.Point.sheafFiber]
-      simp only [c, Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
+      simp only [c, Category.assoc, Pi.lift_comp_π, Pi.map_π, Pi.lift_comp_π_assoc]
       rw [← Category.assoc, Sheaf.ΓRes_naturality, Category.assoc]
       exact congrArg (fun z ↦ F.ΓRes _ ≫ z)
         ((Scheme.pointSmallEtale (s x)).toPresheafFiber_naturality φ.hom

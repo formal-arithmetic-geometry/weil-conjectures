@@ -64,7 +64,7 @@ lemma sigmaDesc_id_eq_sigmaSpec_comp :
       sigmaSpec (fun _ : σ ↦ CommRingCat.of k) ≫
         Spec.map (CommRingCat.ofHom (algebraMap k (σ → k))) := by
   refine Sigma.hom_ext _ _ fun i ↦ ?_
-  rw [Sigma.ι_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
+  rw [Sigma.ι_comp_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
   rfl
 
 /-- The inclusion of a component of `∐_σ Spec k` is `Spec k ⟶ Spec (σ → k) ≅ ∐_σ Spec k`. -/
@@ -286,7 +286,7 @@ theorem IsModelFrobenius.nonempty_isLimit_fixedPointsFork (hΦ : IsModelFrobeniu
         have h₁ : (Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left)
             (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) i a) = i.1.left a := by
           change (Sigma.ι _ i ≫ Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left) a = _
-          rw [Sigma.ι_desc]
+          rw [Sigma.ι_comp_desc]
         have h₂ : (Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left) (((V x).ι ≫ l₀) u) =
             g.left ((V x).ι u) := by
           change ((V x).ι ≫ l₀ ≫ Sigma.desc fun x : FixedPoint Φ m ↦ x.1.left) u = _
@@ -303,7 +303,7 @@ theorem IsModelFrobenius.nonempty_isLimit_fixedPointsFork (hΦ : IsModelFrobeniu
     have e₁ := IsOpenImmersion.lift_fac (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x)
       ((V x).ι ≫ l₀) hrange
     have e₂ : Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x ≫
-        Sigma.desc (fun _ : FixedPoint Φ m ↦ 𝟙 (Spec (.of k))) = 𝟙 _ := Sigma.ι_desc _ _
+        Sigma.desc (fun _ : FixedPoint Φ m ↦ 𝟙 (Spec (.of k))) = 𝟙 _ := Sigma.ι_comp_desc _ _
     have hlx : IsOpenImmersion.lift (Sigma.ι (fun _ : FixedPoint Φ m ↦ Spec (.of k)) x)
         ((V x).ι ≫ l₀) hrange = (V x).ι ≫ T.hom := by
       rw [← Category.comp_id (IsOpenImmersion.lift _ _ hrange), ← e₂, reassoc_of% e₁,

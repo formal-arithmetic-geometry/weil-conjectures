@@ -44,8 +44,12 @@ theorem scalarArrowTranspose (l : ℕ) [Fact l.Prime]
   let G := SemilinearSections.res.{u + 1, u, u + 1} (coefficientSystemMap l E T)
   have had : c.scalar.adjunction.CommShift ℤ := by
     rw [c.scalar.adjunction_eq]
-    exact (SheafOfModules.sheafScalarDerivedAdjunction
-      (coefficientSystemMap l E T) c.scalar.model).commShift_of_rightAdjoint ℤ
+    exact Adjunction.commShift_of_rightAdjoint
+      (C := DerivedCategory (Systems T (Rrings l T)))
+      (D := DerivedCategory (Systems T (Arings l E T)))
+      (F := c.scalar.T) (G := G.mapDerivedCategory)
+      (SheafOfModules.sheafScalarDerivedAdjunction
+        (coefficientSystemMap l E T) c.scalar.model) ℤ
   let := had
   have hx := hc
   dsimp only [unitNormalization] at hx

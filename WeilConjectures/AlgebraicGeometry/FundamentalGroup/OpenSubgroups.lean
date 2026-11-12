@@ -150,9 +150,9 @@ lemma exists_equiv_of_stabilizer_eq {X Z : Type*} [MulAction G X] [MulAction G Z
     (h : MulAction.stabilizer G x = MulAction.stabilizer G z) :
     ∃ e : X ≃ Z, e x = z ∧ ∀ (g : G) (x' : X), e (g • x') = g • e x' := by
   let oX : X ≃ MulAction.orbit G x :=
-    (Equiv.Set.univ X).symm.trans (Equiv.setCongr (MulAction.orbit_eq_univ G x).symm)
+    (Equiv.Set.univ X).symm.trans (Set.equivOfEq (MulAction.orbit_eq_univ G x).symm)
   let oZ : Z ≃ MulAction.orbit G z :=
-    (Equiv.Set.univ Z).symm.trans (Equiv.setCongr (MulAction.orbit_eq_univ G z).symm)
+    (Equiv.Set.univ Z).symm.trans (Set.equivOfEq (MulAction.orbit_eq_univ G z).symm)
   let e : X ≃ Z := oX.trans ((MulAction.orbitEquivQuotientStabilizer G x).trans
     ((Subgroup.quotientEquivOfEq h).trans
       ((MulAction.orbitEquivQuotientStabilizer G z).symm.trans oZ.symm)))

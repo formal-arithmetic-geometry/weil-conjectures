@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Functor.Trifunctor
 public import Mathlib.CategoryTheory.Functor.CurryingThree
 public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.CategoryTheory.Functor.Quadrifunctor
 
 /-!
 # Quatrifunctors
@@ -33,11 +34,6 @@ variable {C₁ C₂ C₃ C₄ C₁₂₃ C₂₃₄ C D₁ D₂ D₃ D₄ E : Ty
 def trifunctorComp₁₂₃ (F₁₂₃ : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₁₂₃) (G : C₁₂₃ ⥤ C₄ ⥤ C) :
     C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ C :=
   (Functor.postcompose₃.obj G).obj F₁₂₃
-
-@[simps!]
-def trifunctorComp₂₃₄ (F : C₁ ⥤ C₂₃₄ ⥤ C) (G₂₃₄ : C₂ ⥤ C₃ ⥤ C₄ ⥤ C₂₃₄) :
-    C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ C :=
-  (F ⋙ Functor.postcompose₃).flip.obj G₂₃₄
 
 variable (E)
 
@@ -230,13 +226,5 @@ lemma uncurry₄_obj_map (F : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) {X Y : C₁
 lemma uncurry₄_map_app {F G : C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E} (f : F ⟶ G) (X : C₁ × C₂ × C₃ × C₄) :
     (uncurry₄.map f).app X = (((f.app X.1).app X.2.1).app X.2.2.1).app X.2.2.2 := by
   rfl
-
-/-- The "postcomposition" with a functor `E ⥤ E'` gives a functor
-`(E ⥤ E') ⥤ (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ⥤ C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E'`. -/
-@[simps!]
-def Functor.postcompose₄ {E' : Type*} [Category E'] :
-    (E ⥤ E') ⥤ (C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E) ⥤ C₁ ⥤ C₂ ⥤ C₃ ⥤ C₄ ⥤ E' :=
-  whiskeringRight C₄ _ _ ⋙ whiskeringRight C₃ _ _ ⋙ whiskeringRight C₂ _ _ ⋙
-    whiskeringRight C₁ _ _
 
 end CategoryTheory

@@ -61,11 +61,11 @@ private theorem ordinaryExchangeArrowIso
     (δ : R.rightDerivedFunctorPlus ⋙ G.mapDerivedCategoryPlus ⟶
       P.mapDerivedCategoryPlus ⋙ R'.rightDerivedFunctorPlus)
     (hδ : ∀ K : HomotopyCategory.Plus C,
-      G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫
+      G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K) ≫
           δ.app (DerivedCategory.Plus.Qh.obj K) =
         G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
           DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus τ).app K) ≫
-          R'.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj K) ≫
+          R'.rightDerivedFunctorPlusUnith.app (P.mapHomotopyCategoryPlus.obj K) ≫
           R'.rightDerivedFunctorPlus.map (P.mapDerivedCategoryPlusFactorsh.inv.app K))
     (F : C) :
     Nonempty (Arrow.mk ((DerivedCategory.Plus.homologyFunctor D' 0).map
@@ -76,10 +76,10 @@ private theorem ordinaryExchangeArrowIso
   have hu₁ := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
     R F
   have ha : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K))) := by
+      (G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnith.app K))) := by
     have hN :=
       (G.mapDerivedCategoryPlusHomologyFunctorIso 0).hom.naturality
-      (R.rightDerivedFunctorPlusUnit.app K)
+      (R.rightDerivedFunctorPlusUnith.app K)
     simp only [Functor.comp_map] at hN
     rw [← IsIso.inv_comp_eq] at hN
     rw [← hN]
@@ -100,20 +100,20 @@ private theorem ordinaryExchangeArrowIso
   have hu₂ := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
     R' (P.obj F)
   have hc : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
-      (R'.rightDerivedFunctorPlusUnit.app
+      (R'.rightDerivedFunctorPlusUnith.app
         (P.mapHomotopyCategoryPlus.obj K))) := by
     have hN := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
-      (R'.rightDerivedFunctorPlusUnit.naturality ψ.hom)
+      (R'.rightDerivedFunctorPlusUnith.naturality ψ.hom)
     simp only [Functor.comp_map, Functor.map_comp] at hN
     exact IsIso.of_isIso_fac_left hN
   let H := DerivedCategory.Plus.homologyFunctor D' 0
   let a := G.mapDerivedCategoryPlus.map
-    (R.rightDerivedFunctorPlusUnit.app K)
+    (R.rightDerivedFunctorPlusUnith.app K)
   let b := G.mapDerivedCategoryPlusFactorsh.hom.app
     (R.mapHomotopyCategoryPlus.obj K)
   let m := DerivedCategory.Plus.Qh.map
     ((NatTrans.mapHomotopyCategoryPlus τ).app K)
-  let c := R'.rightDerivedFunctorPlusUnit.app
+  let c := R'.rightDerivedFunctorPlusUnith.app
       (P.mapHomotopyCategoryPlus.obj K) ≫
     R'.rightDerivedFunctorPlus.map
       (P.mapDerivedCategoryPlusFactorsh.inv.app K)

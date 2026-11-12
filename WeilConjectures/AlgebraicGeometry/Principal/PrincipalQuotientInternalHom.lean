@@ -138,7 +138,8 @@ namespace AlgebraicGeometry.Etale
 /-- The small etale site is essentially small (a local copy of the local instance of
 `WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`, which instance search does not find).
 Source: Stacks 03NU (blueprint: lem-sf-principal-quotient-internal-hom). -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance instEssentiallySmallEtale_principalQuotientInternalHom
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
@@ -146,7 +147,8 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 /-- Sheaves of modules on the small etale site have countable coproducts (local copy of the
 local instance of `WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`).
 Source: Stacks 03CN (blueprint: lem-sf-principal-quotient-internal-hom). -/
-local instance (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
+local instance instHasCountableCoproductsSheaf_principalQuotientInternalHom
+    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     HasCountableCoproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   ⟨fun _ _ ↦ (inferInstance : HasColimitsOfSize.{0, 0} (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))).has_colimits_of_shape _⟩

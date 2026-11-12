@@ -239,6 +239,7 @@ theorem normalizedFunctor_exists
       (J.mapTriangle.mapIso e ≪≫
         (Functor.mapTriangleCompIso (GeneralAlgebraicallyClosedCoefficients.inclusion E)
           J).symm.app V)
+  set_option backward.isDefEq.respectTransparency false in
   let integral (E : Index l (PadicAlgCl l)) :
       sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙
         GeneralAlgebraicallyClosedCoefficients.inclusion E ⋙

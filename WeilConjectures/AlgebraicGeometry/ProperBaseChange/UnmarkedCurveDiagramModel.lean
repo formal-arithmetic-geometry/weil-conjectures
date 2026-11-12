@@ -125,7 +125,7 @@ private theorem finite_purelyInseparable_specMap
       (RingHom.finitePresentation_algebraMap.mpr
         (Algebra.FinitePresentation.of_finiteType.mp inferInstance)),
     ⟨Function.surjective_to_subsingleton _⟩, ?_⟩
-  apply ((tfae_universallyInjective q).out 1 0).mp
+  apply ((tfae_universallyInjective q).out 2 1).mp
   intro Ω _ g₁ g₂ hg
   rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
   apply congrArg Spec.map
@@ -544,7 +544,7 @@ private theorem restrict_chain_to_base
       exact pullback.condition)
   let ν' : (∐ Y') ⟶ pullback f b' := Sigma.desc v'
   have hνcomm (i : Fin n) : Sigma.ι Y' i ≫ ν' ≫ F' = j' i ≫ p' i ≫ t' i := by
-    simp only [ν', Sigma.ι_desc_assoc, v', IsPullback.lift_snd]
+    simp only [ν', Sigma.ι_comp_desc_assoc, v', IsPullback.lift_snd]
     exact (hjT i).symm
   have HY (i : Fin n) : IsPullback (aY i) (r' i) (j i ≫ p i ≫ t i) aV :=
     .of_hasPullback _ _
@@ -556,7 +556,7 @@ private theorem restrict_chain_to_base
     have he : Sigma.desc (fun i ↦ Sigma.ι Y i ≫ ν) = ν := by
       apply Sigma.hom_ext
       intro i
-      exact Sigma.ι_desc _ _
+      exact Sigma.ι_comp_desc _ _
     simpa only [he] using Hσ
   have hνfinite : IsFinite ν' := MorphismProperty.of_isPullback Hν inferInstance
   have hνsurjective : Surjective ν' := MorphismProperty.of_isPullback Hν inferInstance
@@ -594,7 +594,7 @@ private theorem restrict_chain_to_base
     · apply Sigma.hom_ext
       intro i
       apply HX.hom_ext
-      · simp only [Category.assoc, Limits.Sigma.ι_map_assoc, ν', Sigma.ι_desc,
+      · simp only [Category.assoc, Limits.Sigma.ι_map_assoc, ν', Sigma.ι_comp_desc,
           v', IsPullback.lift_fst, aX', hA', aY, pullback.lift_fst_assoc]
         simpa only [Limits.Sigma.ι_map_assoc] using
           congrArg (Sigma.ι A i ≫ ·) Hν₀.w

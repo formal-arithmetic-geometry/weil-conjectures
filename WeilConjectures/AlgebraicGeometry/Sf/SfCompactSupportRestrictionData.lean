@@ -261,7 +261,7 @@ noncomputable def sfCoefficientRestrictionComp (T : Scheme.{u})
 (blueprint: lem-sf-compact-support-restriction-of-scalars). -/
 noncomputable def sfDerivedCoefficientRestrictionComp (T : Scheme.{u})
     (φ : A →+* B) (ψ : B →+* C) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (sfCoefficientRestrictionComp T φ ψ)
 
 end AlgebraicGeometry.Scheme

@@ -203,8 +203,8 @@ def finiteSystemDerivedComposition [∀ n, Finite (A n)]
     finiteSystemDerivedPullback.{u} A τ (h ≫ k) ≅
       finiteSystemDerivedPullback.{u} A τ k ⋙ finiteSystemDerivedPullback.{u} A τ h :=
   Functor.mapDerivedCategoryNatIso (finiteSystemComposition.{u} A τ h k) ≪≫
-    Functor.mapDerivedCategoryCompIso (finiteSystemPullback.{u} A τ k)
-      (finiteSystemPullback.{u} A τ h)
+    (Functor.mapDerivedCategoryCompIso (finiteSystemPullback.{u} A τ k)
+      (finiteSystemPullback.{u} A τ h)).symm
 
 /-- Exact evaluation on the ordinary derived system category.
 Source: Stacks 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
@@ -383,9 +383,9 @@ def finiteSystemDerivedPullbackEvaluation [∀ n, Finite (A n)]
     proEtaleRingModules_hasDerivedCategory.{u} X (proEtaleConstantRing.{u} X (A n))
   letI : HasDerivedCategory (proEtaleRingModules.{u} Y (proEtaleConstantRing.{u} Y (A n))) :=
     proEtaleRingModules_hasDerivedCategory.{u} Y (proEtaleConstantRing.{u} Y (A n))
-  exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  exact Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (finiteSystemPullbackEvaluation.{u} A τ f n) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _
+      (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The existing canonical module comparison, fixed by its fibre-product conjugate.
 The property in the published existence theorem determines its map uniquely:
@@ -639,34 +639,34 @@ private theorem descend_coherence
     (ho : a0 ≪≫ Functor.isoWhiskerRight a02 H =
       e ≪≫ a1 ≪≫ Functor.isoWhiskerLeft F a13) :
     (Functor.mapDerivedCategoryNatIso a0).hom ≫
-        (Functor.mapDerivedCategoryCompIso F02 H).hom ≫
+        (Functor.mapDerivedCategoryCompIso F02 H).inv ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryNatIso a02).hom
           H.mapDerivedCategory ≫
-        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).hom
+        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso F G).inv
           H.mapDerivedCategory =
       (Functor.mapDerivedCategoryNatIso e).hom ≫
         (Functor.mapDerivedCategoryNatIso a1).hom ≫
-        (Functor.mapDerivedCategoryCompIso F F13).hom ≫
+        (Functor.mapDerivedCategoryCompIso F F13).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryNatIso a13).hom ≫
-        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).hom := by
+        Functor.whiskerLeft F.mapDerivedCategory (Functor.mapDerivedCategoryCompIso G H).inv := by
   have hd := congrArg (fun t ↦ (Functor.mapDerivedCategoryNatIso t).hom) ho
   simp only [Functor.mapDerivedCategoryNatIso_trans] at hd
   have hR := Functor.mapDerivedCategoryNatIso_isoWhiskerRight a02 H
   have hL := Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F a13
   have hC := Functor.mapDerivedCategoryCompIso_assoc F G H
-  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).hom,
+  rw [← Category.assoc (Functor.mapDerivedCategoryCompIso F02 H).inv,
     ← hR, Category.assoc, ← hC]
   have ht := congrArg (fun t ↦ t ≫
-    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+    (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
     Functor.whiskerLeft F.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso G H).hom) hd
+      (Functor.mapDerivedCategoryCompIso G H).inv) hd
   calc
     _ = ((Functor.mapDerivedCategoryNatIso e).hom ≫
           (Functor.mapDerivedCategoryNatIso a1).hom ≫
           (Functor.mapDerivedCategoryNatIso (Functor.isoWhiskerLeft F a13)).hom) ≫
-        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).hom ≫
+        (Functor.mapDerivedCategoryCompIso F (G ⋙ H)).inv ≫
         Functor.whiskerLeft F.mapDerivedCategory
-          (Functor.mapDerivedCategoryCompIso G H).hom := by
+          (Functor.mapDerivedCategoryCompIso G H).inv := by
             simpa only [Category.assoc] using ht
     _ = _ := by
       simp only [Category.assoc]
@@ -727,7 +727,7 @@ private theorem systemDerivedCoherence
       E.hom.app S ≫ (finiteSystemDerivedComposition.{u} A τ (j ≫ h) k).hom.app S ≫
         (finiteSystemDerivedComposition.{u} A τ j h).hom.app
           ((finiteSystemDerivedPullback.{u} A τ k).obj S) := by
-    simpa only [finiteSystemDerivedComposition, Iso.trans_hom, NatTrans.comp_app,
+    simpa only [finiteSystemDerivedComposition, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.map_comp, Category.assoc] using hm
   have hf := congrArg (fun t ↦ E.inv.app S ≫ t) hm'
   simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp] at hf
@@ -1083,9 +1083,9 @@ private theorem systemDerivedEvaluationComposition
     with_unfolding_all rfl
   have hc : (proEtaleConstantRingPullbackComposition h k (A n)).symm =
       (Functor.mapDerivedCategoryNatIso (finiteSystemModuleComposition.{u} A h k n) ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           (proEtaleConstantRingPullback (A n) k)
-          (proEtaleConstantRingPullback (A n) h)) := by
+          (proEtaleConstantRingPullback (A n) h)).symm) := by
     simpa only [finiteSystemModuleComposition] using
       proEtaleConstantRingPullbackComposition_eq_mapModuleComparison h k (A n)
   simp only [hi] at hd

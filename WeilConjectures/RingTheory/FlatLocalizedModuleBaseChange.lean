@@ -40,8 +40,7 @@ private theorem flat_at_prime_of_flat_localization
   have : IsLocalizedModule T g := inferInstance
   have hcomm (z : X ⊗[R] J) :
       J.subtype.lTensor Y (g z) = AlgebraTensorModule.rTensor R R f (J.subtype.lTensor X z) := by
-    induction z with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add z z' hz hz' => simp only [map_add, hz, hz']
     | tmul x j => rfl
   have hzero : g y = 0 := by

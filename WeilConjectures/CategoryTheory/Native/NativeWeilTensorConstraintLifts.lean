@@ -418,7 +418,7 @@ private theorem constraintsFromModel
         (μup B A ≫ up.functor.map (e.app (B, A)).inv)
     dsimp only [q, Iso.trans_hom, Iso.symm_hom]
     simp only [CategoryTheory.Functor.map_comp, Category.assoc,
-      Iso.map_inv_hom_id_assoc]
+      Iso.inv_hom_id_map_assoc]
     rw [← Category.assoc, hbraid]
     simp only [Category.assoc]
   · intro A B
@@ -442,7 +442,7 @@ private theorem constraintsFromModel
     change F.map δ.inv ≫ c.unit.hom = ζ.hom ≫ ε.inv
     rw [hc]
     simp only [Iso.trans_hom, CategoryTheory.Functor.mapIso_hom, Iso.symm_hom,
-      Iso.map_inv_hom_id_assoc]
+      Iso.inv_hom_id_map_assoc]
   · intro A B
     subst τ
     simp +instances only [q, Iso.trans_hom, Iso.symm_hom, CategoryTheory.Functor.map_comp,

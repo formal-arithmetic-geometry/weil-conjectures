@@ -30,7 +30,7 @@ attribute [local instance] proEtaleRingRestrictionPullbackInv_isIso
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
-  Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
+  Functor.mapDerivedCategoryNatIso
   proEtaleRingModulePullback proEtaleRingModuleAdjunction
 
 private theorem restrictionComp_inv_sections

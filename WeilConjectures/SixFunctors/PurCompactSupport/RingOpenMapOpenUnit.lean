@@ -40,7 +40,7 @@ theorem openDerivedAdjunction_unit_isIso
   obtain ⟨e, ⟨he⟩⟩ := proEtaleOpen_slicePresentation j (R.ring V) (R.ring U) (R.pull j)
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
-  let he' := Functor.mapDerivedCategoryNatIso he ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let he' := Functor.mapDerivedCategoryNatIso he ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   let L := (SheafOfModules.localizedModuleExtension.{u} (R.ring V)
     (ProEt.mk j)).mapDerivedCategory
   let adjL := SheafOfModules.localizedModuleDerivedAdjunction.{u} (R.ring V) (ProEt.mk j)

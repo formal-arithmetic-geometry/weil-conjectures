@@ -45,6 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω
   [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})
   [∀ x : W, Invertible (l : W.residueField x)] (E : Index l Ω)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The common tensor on two included objects, extended back to their finite stage.
 Source: thm-sf-pf-field.proof.md, common finite coefficient field paragraph
 (blueprint: def-sf-common-stage-inclusion-tensor-model). -/

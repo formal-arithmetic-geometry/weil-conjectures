@@ -37,7 +37,7 @@ theorem span_pair_pow_le_span_monomials {R : Type*} [CommSemiring R] (x y : R) (
     exact subset_span ⟨0, 0, rfl, by simp⟩
   | succ N ih =>
     refine (mul_mono_left ih).trans ?_
-    rw [span_mul_span']
+    rw [span_mul_span]
     refine span_mono ?_
     rintro _ ⟨_, ⟨i, j, rfl, rfl⟩, w, hw, rfl⟩
     rcases hw with rfl | rfl
@@ -76,6 +76,7 @@ theorem TangentConesMeetAtOrigin.symm {I J : Ideal R} (h : TangentConesMeetAtOri
 theorem tangentConesMeetAtOrigin_comm {I J : Ideal R} :
     TangentConesMeetAtOrigin R I J ↔ TangentConesMeetAtOrigin R J I :=
   ⟨.symm, .symm⟩
+
 
 /-- Multiplying an element of `I ∩ 𝔪^M + J ∩ 𝔪^M + 𝔪^(M+1)` by an element of `𝔪^k` gives an
 element of `I ∩ 𝔪^(k+M) + J ∩ 𝔪^(k+M) + 𝔪^(k+M+1)`. -/

@@ -122,7 +122,7 @@ theorem perfectImmersion_standardPerfection
     infer_instance
   let eunit : 𝟙_ (schemeDerivedCategory Z) ≅
       (DerivedCategory.singleFunctor _ 0).obj (SheafOfModules.unit Z.ringCatSheaf) :=
-    Iso.refl _
+    (DerivedCategory.quotientCompQhIso _).app _
   let e := (schemeDerivedDirectImage i).mapIso eunit ≪≫
     F.singleFunctorCompRightDerivedFunctorIso.app (SheafOfModules.unit Z.ringCatSheaf)
   intro x

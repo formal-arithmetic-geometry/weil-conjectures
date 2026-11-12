@@ -18,8 +18,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 set_option autoImplicit false
 set_option linter.style.haveILetI false
 open CategoryTheory
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 private theorem full_hom_heq {D : Type*} [Category D] {P : ObjectProperty D}
     {A B A' B' : P.FullSubcategory} (ha : A.obj = A'.obj) (hb : B.obj = B'.obj)
@@ -249,6 +249,8 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
+set_option maxHeartbeats 400000 in
+-- needed on the v4.35 toolchain: the elaboration exceeds the default heartbeat budget
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
 Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
 (blueprint: lem-sf-canonical-integral-scalar-square).

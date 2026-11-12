@@ -50,6 +50,7 @@ lemma RingHom.IsPurelyInseparable.of_comp_eq_comp {K L M N : Type*} [Field K] [F
   rw [hf]
   exact RingHom.IsPurelyInseparable.comp_of_bijective he hg e''.bijective
 
+
 /-- If `e' ∘ f = g ∘ e` with `e`, `e'` bijective, then `g` is purely inseparable iff `f` is. -/
 lemma RingHom.IsPurelyInseparable.of_comp_eq_comp' {K L M N : Type*} [Field K] [Field L]
     [Field M] [Field N] {e : K →+* M} {f : K →+* L} {g : M →+* N} {e' : L →+* N}

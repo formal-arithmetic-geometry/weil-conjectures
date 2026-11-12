@@ -98,7 +98,7 @@ private theorem directImageDerivedLimit
     · intro n
       simp only [p, Iso.refl_hom, Category.id_comp]
     · refine ⟨inferInstance, ε, ?_⟩
-      simpa only [Pi.lift_π] using hε
+      simpa only [Pi.lift_comp_π] using hε
   obtain ⟨hp, ε', hε'⟩ := hR
   exact ⟨Pi.lift p, ε', hε'⟩
 

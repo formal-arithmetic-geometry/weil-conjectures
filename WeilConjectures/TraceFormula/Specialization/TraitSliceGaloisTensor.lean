@@ -77,7 +77,7 @@ theorem IntermediateField.linearDisjoint_of_isSeparable
   have hsep : ∀ x ∈ B, IsSeparable F x := fun x hx ↦
     (isSeparable_map_iff A.val Subtype.val_injective).mpr
       (Algebra.IsSeparable.isSeparable F (⟨x, hB hx⟩ : A))
-  have : Algebra.IsSeparable F I := ⟨fun y ↦ IsSeparable.of_algHom I.val (hsep y y.2)⟩
+  have : Algebra.IsSeparable F I := ⟨fun y ↦ IsSeparable.of_algHom F I.val (hsep y y.2)⟩
   obtain ⟨α, hα⟩ := Field.exists_primitive_element F I
   have hI : F⟮(α : E)⟯ = I := by rw [← lift_adjoin_simple, hα, lift_top]
   have h := IntermediateField.linearDisjoint_adjoin_simple_of_isSeparable hL (hsep α α.2)

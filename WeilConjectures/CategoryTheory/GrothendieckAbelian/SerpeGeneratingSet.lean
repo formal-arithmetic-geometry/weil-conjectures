@@ -119,7 +119,7 @@ variable (B) in
 /-- The enlargement of `⊤` is `⊤`. -/
 @[simp]
 lemma largerSubobject_top : largerSubobject G κ (⊤ : Subobject B) = ⊤ :=
-  dif_neg (by rintro ⟨D', h, -⟩; exact absurd h not_top_lt)
+  dite_eq_right (by rintro ⟨D', h, -⟩; exact absurd h not_top_lt)
 
 /-- If the inclusion of `D` in `B` is a quasi-isomorphism, then the inclusion of `D` in its
 enlargement is a pushout of a morphism of `CochainComplex.generatingMonoQuasiIsos G κ`. -/
@@ -128,11 +128,12 @@ lemma pushouts_ofLE_le_largerSubobject [Fact κ.IsRegular] (hκ : Cardinal.aleph
     (D : Subobject B) [QuasiIso D.arrow] :
     (generatingMonoQuasiIsos G κ).pushouts
       (Subobject.ofLE _ _ (le_largerSubobject G κ D)) := by
+  have : Nonempty (Subobject B) := ⟨D⟩
   by_cases hD : ∃ (D' : Subobject B) (h : D < D'), QuasiIso D'.arrow ∧
       (generatingMonoQuasiIsos G κ).pushouts (Subobject.ofLE D D' h.le)
   · refine (MorphismProperty.arrow_mk_iso_iff _ ?_).1 hD.choose_spec.choose_spec.2
     exact Arrow.isoMk (Iso.refl _)
-      (Subobject.isoOfEq _ _ (by simp [largerSubobject, dif_pos hD]))
+      (Subobject.isoOfEq _ _ (by simp [largerSubobject, dite_eq_left hD]))
   · have hDtop : D = ⊤ := by
       by_contra hD'
       exact hD (exists_larger_subobject_quasiIso G κ hκ hG hsub D hD')
@@ -154,6 +155,8 @@ lemma top_mem_range (D₀ : Subobject B) {J : Type w} [LinearOrder J] [OrderBot 
 /-- The transfinite iteration of the enlargement reaches `⊤` for a suitable ordinal. -/
 lemma exists_ordinal (D₀ : Subobject B) :
     ∃ (o : Ordinal.{w}) (j : o.ToType), transfiniteIterate (largerSubobject G κ) j D₀ = ⊤ := by
+  have : Nonempty (Subobject B) := ⟨D₀⟩
+  have : Nonempty (Shrink.{w} (Subobject B)) := ⟨equivShrink _ D₀⟩
   let c := Order.succ (Cardinal.mk (Shrink.{w} (Subobject B)))
   have : Nonempty c.ord.ToType := by simp [c]
   have := WellFoundedLT.toOrderBot c.ord.ToType

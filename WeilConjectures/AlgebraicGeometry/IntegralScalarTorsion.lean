@@ -60,7 +60,7 @@ private theorem finite_tensor_terms (B : Type u) [CommRing B]
     · have he := congrArg ((Sigma.ι G ⟨p, hp⟩) ≫ ·) hgh
       have hq : q = i - p := by omega
       subst q
-      simpa only [π, ← Category.assoc, Sigma.ι_desc] using he
+      simpa only [π, ← Category.assoc, Sigma.ι_comp_desc] using he
     · have hz : IsZero ((E.X p ⊗ F.X q) : ModuleCat B) := by
         by_cases hpe : bE < p
         · exact Functor.map_isZero (tensorRight (F.X q)) (hEb p hpe)

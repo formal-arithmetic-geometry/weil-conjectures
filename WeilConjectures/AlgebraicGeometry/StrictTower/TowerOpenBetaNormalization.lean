@@ -372,9 +372,9 @@ theorem openBetaNormalization {U' U X' X : Scheme.{u}}
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
     (sq : IsPullback a j' j g) :
     beta B a j' j g w sq =
-      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso (openBetaTower B a j' j g w sq) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _ ∧
+        (Functor.mapDerivedCategoryCompIso _ _).symm ∧
     (∀ M : Derived B U,
       (jAdj B j').homEquiv _ _ ((beta B a j' j g w sq).inv.app M) =
         (G B a).map ((jAdj B j).unit.app M) ≫

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealization.AdmissibleScalarRealizationExactSupplement
+
 public import WeilConjectures.AlgebraicGeometry.Internal.InternalPerfectReductionHomData
 public import Mathlib.Algebra.Homology.HomotopyCategory
 
@@ -31,7 +33,11 @@ def internalPerfectIntegralComplex (W : Scheme.{u})
     CochainComplex (AdicCompletion.Modules l E W) ℤ :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   letI : (FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W).Additive :=
-    (((AdmissibleScalarRealization.admissible_scalar_realization_exact l W).2.2.1 E).1.1).2.1
+    by
+      have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+        (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
+      exact (AdmissibleScalarRealization.pid_scalar_assertions
+        (Padic.coefficientExtensionIntegers l E) W).2.1
   let F := ModuleCat.uliftFunctor.{u + 1, u} (Padic.coefficientExtensionIntegers l E) ⋙
     FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W
   (F.mapHomologicalComplex (.up ℤ)).obj P

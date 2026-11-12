@@ -94,7 +94,7 @@ private theorem constantUnit_isIso
     ((evaluationConstantAdjunction C).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
       D.rightDerivedFunctorIsoMapDerivedCategory
   let e : D.mapDerivedCategory ⋙ E.mapDerivedCategory ≅ 𝟭 (DerivedCategory C) :=
-    (Functor.mapDerivedCategoryCompIso D E).symm ≪≫
+    Functor.mapDerivedCategoryCompIso D E ≪≫
       Functor.mapDerivedCategoryNatIso (Iso.refl (𝟭 C)) ≪≫
         Functor.mapDerivedCategoryIdIso C
   let ff := a.fullyFaithfulROfCompIsoId e

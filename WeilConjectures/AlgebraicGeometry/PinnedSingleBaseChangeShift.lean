@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import WeilConjectures.AlgebraicGeometry.PinnedBaseChangeMateShifts
 import WeilConjectures.AlgebraicGeometry.PinnedSingleTensorShifts
@@ -67,31 +70,15 @@ def singleDegreeBaseChangeComposite
       (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj
           ((Scheme.Modules.tensorPullback g').obj G) :=
-    ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
-      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+    cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+      DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
         ((HomologicalComplex.singleMapHomologicalComplex
-          (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))
+          (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
   schemeDerivedBaseChangeMap.{u, w} f f' g g' h
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ≫
     (schemeDerivedDirectImage.{u, w, w} f').map c
 
-/-- Shift covariance of the pinned single-complex base-change composite.
-Source: Stacks Project, Tag 08HY, functorial construction of derived base change;
-Mathlib's derived single functors and their shift isomorphisms.
-(blueprint: lem-pc-pinned-single-base-change-shift).
-Proof: the degree-n single functor is the degree-zero single functor shifted by -n.
-Move this shift through the derived direct image, derived pullback and H using
-shift comparisons transported from the termwise functors using the left-derived
-universal property for the selected counits (and the recorded right-derived unit).
-These give a on the source and b on the target. With these transported comparisons,
-the derived adjunctions, the composition-pinned tensor counit and the termwise
-single-complex map commute with shift. Apply these identities to the
-unit, composition comparison and counit defining the base-change mate, then to
-the final tensor counit. Associativity cancels the intermediate shift comparisons,
-yielding the displayed component equation. The maps are natural in G, hence
-define functor isomorphisms. No flatness or boundedness is used; shifts are
-equivalences in every integer degree, including n=0 and negative n. -/
 theorem pinned_single_base_change_shift
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

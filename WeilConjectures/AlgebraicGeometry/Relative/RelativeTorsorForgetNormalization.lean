@@ -42,7 +42,7 @@ theorem relativeFrameClass_forget
         I.cocomplex).extendHomologyIso ComplexShape.embeddingUpNat (rfl : (1 : ℤ) = 1)).hom
           (HomologicalComplex.homologyMap (relativeForgetComplex T U I.cocomplex) 1
             (relativeFrameClass T U I z))) =
-      -Sheaf.H.δ (resolutionLiftSequence_shortExact T I)
+      -Sheaf.H.δSections (resolutionLiftSequence_shortExact T I)
         (MorphismProperty.Over.mkIdTerminal @Etale T) z.1 := by
   rw [relativeFrameAbsoluteCycle_class]
   let hT := MorphismProperty.Over.mkIdTerminal @Etale T

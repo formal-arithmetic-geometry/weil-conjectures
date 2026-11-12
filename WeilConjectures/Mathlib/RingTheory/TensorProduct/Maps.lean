@@ -60,8 +60,7 @@ theorem liftQuotient_map_mkₐ (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hf : ∀
     (hg : ∀ b ∈ J, g b = 0) (t : A ⊗[R] B) :
     liftQuotient I J f g hf hg (map (Ideal.Quotient.mkₐ R I) (Ideal.Quotient.mkₐ R J) t) =
       lift f g (fun _ _ ↦ .all _ _) t := by
-  induction t using _root_.TensorProduct.induction_on with
-  | zero => simp
+  induction t using _root_.TensorProduct.inductionOn with
   | tmul a b => simp [liftQuotient]
   | add a b ha hb => simp only [map_add, ha, hb]
 
@@ -76,8 +75,7 @@ theorem map_mkQ_restrictScalars_eq_zero_iff (t : A ⊗[R] B) :
     (Submodule.Quotient.restrictScalarsEquiv R J)
   have key (t : A ⊗[R] B) : e (_root_.TensorProduct.map (I.restrictScalars R).mkQ
       (J.restrictScalars R).mkQ t) = map (Ideal.Quotient.mkₐ R I) (Ideal.Quotient.mkₐ R J) t := by
-    induction t using _root_.TensorProduct.induction_on with
-    | zero => simp
+    induction t using _root_.TensorProduct.inductionOn with
     | tmul a b => simp [e]
     | add a b ha hb => simp only [map_add, ha, hb]
   rw [← key, LinearEquiv.map_eq_zero_iff]
@@ -101,8 +99,7 @@ theorem eq_zero_of_forall_lift_eq_zero {ι κ : Type*} (f : ι → A →ₐ[K] K
   have key (j : κ) (y : A ⊗[K] B) :
       g j (_root_.TensorProduct.lid K B ((f i).toLinearMap.rTensor B y)) =
         lift (f i) (g j) (fun _ _ ↦ .all _ _) y := by
-    induction y using _root_.TensorProduct.induction_on with
-    | zero => simp
+    induction y using _root_.TensorProduct.inductionOn with
     | tmul a b => simp
     | add a b ha hb => simp only [map_add, ha, hb]
   refine (_root_.TensorProduct.lid K B).injective ?_
@@ -145,8 +142,7 @@ theorem eq_zero_or_eq_one_of_isIdempotentElem (φ : A →ₐ[R] R)
     {e : A ⊗[R] B} (he : IsIdempotentElem e) : e = 0 ∨ e = 1 := by
   let ψ : A ⊗[R] B →ₐ[R] B := lift ((Algebra.ofId R B).comp φ) (AlgHom.id R B) fun _ _ ↦ .all _ _
   have key (x : A ⊗[R] B) : IsNilpotent (x - includeRight (ψ x)) := by
-    induction x using _root_.TensorProduct.induction_on with
-    | zero => simp
+    induction x using _root_.TensorProduct.inductionOn with
     | tmul a b =>
       have hn : IsNilpotent (a - algebraMap R A (φ a)) := hφ _ (by simp)
       have : a ⊗ₜ[R] b - includeRight (ψ (a ⊗ₜ[R] b)) =
@@ -182,8 +178,7 @@ theorem isNilpotent_of_productMap_eq_zero {f : R →ₐ[K] K} {g : S →ₐ[K] K
   set I₁ := (RingHom.ker f).map (includeLeft : R →ₐ[K] R ⊗[K] S)
   set I₂ := (RingHom.ker g).map (includeRight : S →ₐ[K] R ⊗[K] S)
   have key (t : R ⊗[K] S) : t - algebraMap K _ (productMap f g t) ∈ I₁ ⊔ I₂ := by
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy =>
       rw [map_add, map_add, add_sub_add_comm]
       exact add_mem hx hy

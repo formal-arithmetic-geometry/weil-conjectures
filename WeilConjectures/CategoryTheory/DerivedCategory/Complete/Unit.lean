@@ -230,8 +230,6 @@ lemma bijective_smul_homologyFunctor_obj {L : DerivedCategory (ModuleCat.{u} R)}
   have h := ConcreteCategory.bijective_of_isIso
     (ϖ • 𝟙 ((homologyFunctor (ModuleCat.{u} R) n).obj L))
   convert h using 1
-  ext x
-  simp
 
 /-- **`R` is derived `ϖ`-complete.** Let `R` be a principal ideal domain which is `ϖ`-adically
 complete. If `ϖ` acts invertibly on `L ∈ D(R)`, every morphism `L ⟶ R[0]` vanishes. -/

@@ -41,7 +41,7 @@ private theorem finiteFree_hom_preservesHomology
     apply SheafOfModules.hom_ext
     ext U φ
     rfl⟩
-  exact (Functor.exact_tfae H).out 0 2 |>.mp (by
+  exact (Functor.exact_tfae H).out 1 3 |>.mp (by
     intro T hT
     obtain ⟨hz, hs, _⟩ := SheafOfModules.finiteFreeInternalHomExact (R := R) r M hM T hT
     exact hs)

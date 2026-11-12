@@ -95,7 +95,7 @@ theorem representable_pullback_isConstant_of_evaluation_bijective
         have hh := congrArg (fun q ↦ q.left ≫ Limits.pullback.fst P.obj.hom A.obj.hom) hzw
         change (z.left ≫ Sigma.desc σ) ≫ _ = (w.left ≫ Sigma.desc σ) ≫ _ at hh
         rw [← hz', ← hw', hz, hw] at hh
-        simpa only [fiber_map_left, Category.assoc, Sigma.ι_desc_assoc, σ,
+        simpa only [fiber_map_left, Category.assoc, Sigma.ι_comp_desc_assoc, σ,
           Limits.pullback.lift_fst, t] using hh))
       exact fiber_ext t (by rw [← hz', ← hw', hz, hw, hij])
     · intro z
@@ -131,7 +131,7 @@ theorem representable_pullback_isConstant_of_evaluation_bijective
     · subst hIJ
       exact B.smallEtaleTopology.superset_covering (fun _ _ _ ↦ rfl)
         (B.smallEtaleTopology.top_mem _)
-    · have : IsEmpty W.unop.left := ⟨fun x ↦ hIJ (ULift.ext _ _ (by
+    · have : IsEmpty W.unop.left := ⟨fun x ↦ hIJ (ULift.ext (by
         have he := congrArg (fun v ↦ v.down.left x) hij
         exact congrArg Sigma.fst ((sigmaι_eq_iff (fun _ : I ↦ B) _ _ _ _).mp he)))⟩
       refine B.smallEtaleTopology.superset_covering ?_

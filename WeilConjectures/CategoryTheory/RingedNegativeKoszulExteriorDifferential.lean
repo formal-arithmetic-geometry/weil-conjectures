@@ -239,7 +239,7 @@ theorem ringedNegativeKoszulBasis_exterior_d
     have hne : I.1.erase i ≠ L.1 := by
       intro h
       exact hL (Subtype.ext h.symm)
-    simp only [if_neg hne, map_zero, zero_comp]
+    simp only [ite_eq_right hne, map_zero, zero_comp]
   · intro h
     exact (h (Finset.mem_univ _)).elim
 

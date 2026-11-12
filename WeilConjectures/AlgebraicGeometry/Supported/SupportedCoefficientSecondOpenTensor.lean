@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCoefficientOpenTensor
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.Supported.SupportedCoefficientOpenMateQuotient
 import WeilConjectures.AlgebraicGeometry.Supported.SupportedTensorComplexSquare
 import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
@@ -327,7 +329,7 @@ private theorem triangle_fac
     [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
     (α : F' ⟶ F ⋙ H) (P : CochainComplex C ℤ) :
     ((Functor.exactDerivedMap α).app (DerivedCategory.Q.obj P) ≫
-        (Functor.mapDerivedCategoryCompIso F H).hom.app (DerivedCategory.Q.obj P)) ≫
+        (Functor.mapDerivedCategoryCompIso F H).inv.app (DerivedCategory.Q.obj P)) ≫
       H.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
     F'.mapDerivedCategoryFactors.hom.app P ≫
@@ -484,19 +486,19 @@ private theorem exactSquare
       exactComplexSquareCondition G F₁ F₂ G' F₁' F₂' H a₀ a₁ a₂ τ τ' P Q)
     (M N : DerivedCategory C) :
     ((Functor.exactDerivedMap a₀).app (M ⊗ N) ≫
-        (Functor.mapDerivedCategoryCompIso G H).hom.app (M ⊗ N)) ≫
+        (Functor.mapDerivedCategoryCompIso G H).inv.app (M ⊗ N)) ≫
       H.mapDerivedCategory.map (t M N) ≫
       (κ.app (F₁.mapDerivedCategory.obj M)).app (F₂.mapDerivedCategory.obj N) =
     t' M N ≫
       (((Functor.exactDerivedMap a₁).app M ≫
-        (Functor.mapDerivedCategoryCompIso F₁ H).hom.app M) ⊗ₘ
+        (Functor.mapDerivedCategoryCompIso F₁ H).inv.app M) ⊗ₘ
       ((Functor.exactDerivedMap a₂).app N ≫
-        (Functor.mapDerivedCategoryCompIso F₂ H).hom.app N)) := by
+        (Functor.mapDerivedCategoryCompIso F₂ H).inv.app N)) := by
   unfold tensorFactorCondition at hκ
   unfold exactComplexSquareCondition at ha
-  let d₀ := Functor.exactDerivedMap a₀ ≫ (Functor.mapDerivedCategoryCompIso G H).hom
-  let d₁ := Functor.exactDerivedMap a₁ ≫ (Functor.mapDerivedCategoryCompIso F₁ H).hom
-  let d₂ := Functor.exactDerivedMap a₂ ≫ (Functor.mapDerivedCategoryCompIso F₂ H).hom
+  let d₀ := Functor.exactDerivedMap a₀ ≫ (Functor.mapDerivedCategoryCompIso G H).inv
+  let d₁ := Functor.exactDerivedMap a₁ ≫ (Functor.mapDerivedCategoryCompIso F₁ H).inv
+  let d₂ := Functor.exactDerivedMap a₂ ≫ (Functor.mapDerivedCategoryCompIso F₂ H).inv
   refine family_eq_of_models G'.mapDerivedCategory
     (F₁.mapDerivedCategory ⋙ H.mapDerivedCategory)
     (F₂.mapDerivedCategory ⋙ H.mapDerivedCategory) (𝟭 _)
@@ -531,7 +533,7 @@ private theorem exactSquare
     have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
         ((H.mapHomologicalComplex (.up ℤ)).obj ((F₁.mapHomologicalComplex (.up ℤ)).obj P))
         ((H.mapHomologicalComplex (.up ℤ)).obj ((F₂.mapHomologicalComplex (.up ℤ)).obj R))) := by
-      rw [μQ_eq]
+      rw [μQ_eq (C := E)]
       exact DerivedMonoidal.isIso_counit_app_app_of_kFlat_right DerivedCategory.Qh
         (HomotopyCategory.quasiIso E (.up ℤ)) _ _
         ((HomotopyCategory.kFlat_quotient_obj_iff _).2 hR)

@@ -253,6 +253,7 @@ lemma _root_.DiscreteModule.isPrimary_coind₁ {X : DiscreteModule.{w} G} (hX : 
     (by rintro _ ⟨x, rfl⟩; exact hX _)
   exact ⟨J, Subtype.ext (funext fun x ↦ hJ _ ⟨x, rfl⟩)⟩
 
+
 omit [IsTopologicalGroup G] [CompactSpace G] hχ in
 lemma ρ_mul_conj_apply {X : DiscreteModule.{w} G} {y : X.obj.V}
     (hy : ∀ k ∈ χ.toMonoidHom.ker, (X.obj.ρ k).hom y = y) {k : G}
@@ -627,6 +628,7 @@ cohomology is computed by the two-term complex `[M --τ-1--> M]` in degrees `0, 
 theorem subsingleton_H_padicInt (hM : IsPrimary ℓ M) {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (H (Multiplicative ℤ_[ℓ]) M q) :=
   (isEllAdicQuotient_id ℓ).subsingleton_H M hM hq
+
 
 lemma mem_ker_id_iff {k : Multiplicative ℤ_[ℓ]} :
     k ∈ (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker ↔ k = 1 := by

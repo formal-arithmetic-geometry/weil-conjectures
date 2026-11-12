@@ -406,7 +406,7 @@ theorem condensedScalarBalancingChain :
       d ≫ HomologicalComplex.mapBifunctorMap (𝟙 K) (q ≫ r) (curriedTensor _) (.up ℤ) ≫ e'.hom
     apply (cancel_epi ((F.mapHomologicalComplex (.up ℤ)).map
       (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) C P).inv)).1
-    rw [Iso.map_inv_hom_id_assoc, h₃, hcomp, Category.assoc, h₂']
+    rw [Iso.inv_hom_id_map_assoc, h₃, hcomp, Category.assoc, h₂']
     rw [reassoc_of% h₁]
 
 

@@ -242,8 +242,7 @@ private theorem pullbackGradedMap_isBaseChange {X S : Scheme.{u}} (g : X ⟶ S)
   have hΦ : Function.Bijective Φ := by
     have heq : (fun t ↦ (k.trans q) t) = Φ := by
       funext t
-      induction t using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction t using TensorProduct.inductionOn with
       | tmul r a =>
         change q (AlgHom.liftEquiv R T A _ β (r ⊗ₜ[R] a)) = Φ (r ⊗ₜ[R] a)
         rw [AlgHom.liftEquiv_tmul, map_smul, hq, GradedAlgHom.liftEquiv_tmul]

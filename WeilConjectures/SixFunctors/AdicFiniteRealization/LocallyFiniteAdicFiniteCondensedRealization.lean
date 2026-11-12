@@ -58,7 +58,8 @@ private theorem finiteCategoryHEq
     HEq (GeneralAlgebraicallyClosedCoefficients.stageCategory l Ω T E)
       (inferInstance : Category
         (sfRationalConstructibleCategory l (pbcFiniteField.{u} l Ω E) T)) := by
-  exact rawCategoryHEq l T (by rfl) (by
+  exact rawCategoryHEq
+    (na := AlgebraicallyClosedCoefficients.coefficientFinite.{u} l Ω E) l T (by rfl) (by
     unfold pbcFiniteFieldField
     rfl) (by
     unfold pbcFiniteFieldAlgebra
@@ -328,10 +329,10 @@ Source: Stacks 03EK and BS 6.8.2.
     (ProEt.topology T) (ProEtale.padicSubfieldRingObj T l L)
   letI := Functor.additive_of_preserves_binary_products eE.functor
   letI := Functor.additive_of_preserves_binary_products eL.functor
-  let k := (Functor.mapDerivedCategoryCompIso (Mod.comap φ) eE.functor).symm ≪≫
+  let k := Functor.mapDerivedCategoryCompIso (Mod.comap φ) eE.functor ≪≫
     Functor.mapDerivedCategoryNatIso (ProEtale.CondensedRing.sectionModuleComapIso T φ) ≪≫
-    Functor.mapDerivedCategoryCompIso eL.functor
-      (pbcRestrict (ProEtale.CondensedRing.sectionRingMap T φ))
+    (Functor.mapDerivedCategoryCompIso eL.functor
+      (pbcRestrict (ProEtale.CondensedRing.sectionRingMap T φ))).symm
   let a : ProEtale.derivedExtendScalarsSubfield T l h ⊣
       (Mod.comap φ).mapDerivedCategory := by
     exact @Mod.derivedExtendMapDerivedCategoryAdjunction

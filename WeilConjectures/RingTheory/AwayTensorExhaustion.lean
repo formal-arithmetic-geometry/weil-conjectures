@@ -43,8 +43,7 @@ lemma invSelf_pow_add_tmul_pow_smul (k j : ℕ) (c : A) :
 /-- Every element of `S ⊗_R A` is `x⁻ⁿ ⊗ a`. -/
 lemma exists_eq_invSelf_pow_tmul (t : S ⊗[R] A) :
     ∃ (n : ℕ) (a : A), t = ((invSelf x : S) ^ n) ⊗ₜ[R] a := by
-  induction t using TensorProduct.induction_on with
-  | zero => exact ⟨0, 0, by rw [tmul_zero]⟩
+  induction t using TensorProduct.inductionOn with
   | tmul s a =>
     obtain ⟨n, r, h⟩ := surj x s
     refine ⟨n, r • a, ?_⟩

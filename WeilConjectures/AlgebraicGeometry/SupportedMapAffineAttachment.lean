@@ -178,7 +178,7 @@ theorem exists_supported_map_affine_attachment
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Modules.overEquiv U))
   let c : L.mapDerivedCategory ⋙ H.mapDerivedCategory ≅ J.mapDerivedCategory :=
-    (Functor.mapDerivedCategoryCompIso L H).symm ≪≫
+    Functor.mapDerivedCategoryCompIso L H ≪≫
       Functor.mapDerivedCategoryNatIso c₀
   obtain ⟨F, α, hF, hFT, e, he⟩ :=
     exists_supported_map_affine_union_gluing X U W V hUW hW hV T hT hTc E R β hR hRT c

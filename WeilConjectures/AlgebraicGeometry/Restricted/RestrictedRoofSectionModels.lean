@@ -61,7 +61,7 @@ private theorem restrictedDirectImageMap_eq {X Z : Scheme.{u}} (v : Z ⟶ X)
   rfl
 
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
-attribute [local implicit_reducible] Scheme.Modules.Hom Functor.mapHomologicalComplex
+attribute [local implicit_reducible] Scheme.Modules.Hom
 set_option maxHeartbeats 400000 in
 -- Normalize the fixed restriction comparison and its sheaf-module category instances.
 private theorem restriction_pushforward_sections {X Z : Scheme.{u}} (v : Z ⟶ X)

@@ -39,7 +39,7 @@ open WeilConjectures.SemilinearSections
 section ProofEnvironment
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso HasDerivedCategory.standard DerivedCategory.Q
+  HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 variable (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
@@ -282,10 +282,10 @@ Source: the ring-sheaf change adjunction
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P C τ f ⋙ E C τ n X ≅ E C τ n Y ⋙ StrictTower.G (C n) f :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
   Functor.mapDerivedCategoryNatIso
     (@asIso _ _ _ _ (evalPullInv C τ n f) (evalPullInv_isIso C τ n f)).symm ≪≫
-  Functor.mapDerivedCategoryCompIso _ _
+  (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image comparison is the actual derived mate of evalP inverse.
 Source: the ring-sheaf change adjunction
@@ -529,9 +529,9 @@ private theorem eval_derived_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (StrictTower.adj (C n) f) w₁ w₂ (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso G.symm).hom)
     (Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (derived_constant_square_comp (VaryingRing.pull C τ f)
       (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
       (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n))
@@ -593,9 +593,9 @@ private theorem eval_open_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImm
     (StrictTower.jAdj (C n) f) w₁ w₂ (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso G).hom)
     (Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _)
+      (Functor.mapDerivedCategoryCompIso _ _).symm)
     (derived_constant_square_inverse (VaryingRing.pull C τ f)
       (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
       (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n))

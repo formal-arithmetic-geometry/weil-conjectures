@@ -115,10 +115,10 @@ structure SchemeTwoOpenComparisonDiagram
       (homOfLE (show P ⊓ Q ≤ P from inf_le_left))).mapDerivedCategory
     let SQ := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
       (homOfLE (show P ⊓ Q ≤ Q from inf_le_right))).mapDerivedCategory
-    let τU : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τU : RU ⋙ SP ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u}
         (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ P from inf_le_left)))
-    let τV : RV ⋙ SQ ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    let τV : RV ⋙ SQ ≅ RW := Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u}
         (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)))
     TwoOpenComparisonDiagram (derivedPullback g) TU TV TW SU SV

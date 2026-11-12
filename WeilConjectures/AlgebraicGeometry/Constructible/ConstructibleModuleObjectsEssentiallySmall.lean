@@ -45,7 +45,7 @@ private theorem mono_to_product_of_local_isos
   apply detect
   intro i
   have h : kernel.ι f ≫ (adj i).homEquiv M (B i) (e i).hom = 0 := by
-    rw [← Pi.lift_π (fun i ↦ (adj i).homEquiv M (B i) (e i).hom) i,
+    rw [← Pi.lift_comp_π (fun i ↦ (adj i).homEquiv M (B i) (e i).hom) i,
       ← Category.assoc, kernel.condition, zero_comp]
   have h' : (F i).map (kernel.ι f) ≫ (e i).hom = 0 := by
     apply ((adj i).homEquiv _ _).injective

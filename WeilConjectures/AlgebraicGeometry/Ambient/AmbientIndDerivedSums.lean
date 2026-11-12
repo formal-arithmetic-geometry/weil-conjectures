@@ -144,7 +144,7 @@ private theorem localizing_of_small_sums
       intro ⟨i⟩
       rw [hc.fac]
       by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
           using hm ⟨i, hi⟩
       · exact (not_not.mp hi).eq_of_src _ _
   let e := Discrete.equivalence (equivShrink.{w} J).symm

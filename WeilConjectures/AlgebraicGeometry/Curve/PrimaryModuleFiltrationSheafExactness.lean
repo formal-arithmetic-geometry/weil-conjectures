@@ -57,6 +57,7 @@ theorem primarySheafSequence_shortExact
     (primarySheafSequence K Ks H Ω C T e R A B hle hA hB).ShortExact ∧
     Nonempty ((primarySheafSequence K Ks H Ω C T e R A B hle hA hB).X₃ ≅
       primaryAssociatedSheaf K Ks H Ω C T e (primaryTrivialQuotient K Ks H R A B)) := by
+  let : Module ℤ R.obj.V := AddCommGroup.toIntModule _
   let _keep_hC := hC
   let i := primarySubmoduleInclusion K Ks H R A B hle hA hB
   have hi : Mono i.hom := (Rep.mono_iff_injective i.hom).mpr (by

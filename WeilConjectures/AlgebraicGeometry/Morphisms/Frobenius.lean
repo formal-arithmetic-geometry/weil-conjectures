@@ -76,7 +76,7 @@ lemma isUniversalHomeomorphism_specMap_of_pow (ψ : CommRingCat.of k ⟶ R)
   have : IsIntegralHom (Spec.map φ) := isIntegralHom_specMap_of_pow hq hφ
   have : Surjective (Spec.map φ) := ⟨fun x ↦ ⟨x, specMap_base_apply_of_pow hq hφ x⟩⟩
   have : UniversallyInjective (Spec.map φ) := by
-    have h := (tfae_universallyInjective (Spec.map φ)).out 0 1
+    have h := (tfae_universallyInjective (Spec.map φ)).out 1 2
     rw [h]
     intro K _ g₁ g₂ hg
     rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢
@@ -202,6 +202,7 @@ lemma isPullback_of_isOpenImmersion {U : Scheme.{u}} {FU : U ⟶ U} (t : U ⟶ X
   · rw [← cancel_mono t, Category.assoc, hw, ← Category.assoc, IsOpenImmersion.lift_fac,
       s.condition]
   · rw [← cancel_mono t, h₂, IsOpenImmersion.lift_fac]
+
 
 /-- The `m`-th iterate of the `#k`-power Frobenius of a scheme over `Spec k` is its
 `#k ^ m`-power Frobenius (blueprint `d-relative-frob`). -/

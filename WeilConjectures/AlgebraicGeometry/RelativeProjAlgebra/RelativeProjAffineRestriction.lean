@@ -37,8 +37,7 @@ private theorem baseChange_of_directSum
   have hg : g.comp e.toLinearMap = h.equiv.toLinearMap := by
     apply LinearMap.ext
     intro t
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul s m =>
         apply DirectSum.ext
         intro j
@@ -201,8 +200,7 @@ theorem gradeRestriction_baseChange {V W : X.affineOpens} (h : W ≤ V) :
     { toFun t := c (TensorProduct.comm R S C t)
       map_add' x y := by simp
       map_smul' s t := by
-        induction t using TensorProduct.induction_on with
-        | zero => simp
+        induction t using TensorProduct.inductionOn with
         | tmul r a =>
             simp only [TensorProduct.smul_tmul', smul_eq_mul,
               TensorProduct.comm_tmul, ht', mul_smul, RingHom.id_apply]

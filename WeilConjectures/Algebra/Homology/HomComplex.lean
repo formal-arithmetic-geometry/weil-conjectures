@@ -86,7 +86,7 @@ private lemma homDiff_proj (L M : CochainComplex (SheafOfModules.{w}
         SheafOfModules.homObjMap (L.d p p') (𝟙 _)) := by
   subst q q'
   obtain rfl : p' = p + m - n := by omega
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 private lemma homDiff_shape (L M : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n m : ℤ) (h : ¬ n + 1 =
@@ -148,7 +148,7 @@ private lemma homTermMap_proj {L L' M M' : CochainComplex (SheafOfModules.{w}
     homTermMap f g n ≫ homProj L' M' n p q hpq =
       homProj L M n p q hpq ≫ SheafOfModules.homObjMap (f.f p) (g.f q) := by
   subst q
-  exact Pi.lift_π _ _
+  exact Pi.lift_comp_π _ _
 
 private lemma homTermMap_comm {L L' M M' : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ} (f : L' ⟶ L) (g : M ⟶ M')

@@ -94,7 +94,7 @@ theorem graph_open_etale_composition
         (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) b inferInstance))).symm
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) j b r hr) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
     Functor.isoWhiskerRight (graphChosenOpenComparison A j)
         (rightDerivedLowerShriek (ModuleCat.{u + 1} A) b) ≪≫
       Functor.isoWhiskerLeft
@@ -115,7 +115,7 @@ theorem graph_open_etale_composition
           (ModuleCat.{u + 1} A) b inferInstance))).symm
         (Functor.mapDerivedCategoryNatIso
           (upperStarComp (ModuleCat.{u + 1} A) j b (j ≫ b) rfl) ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) = derivedEtaleSumCompIso A j b := by
+          (Functor.mapDerivedCategoryCompIso _ _).symm) = derivedEtaleSumCompIso A j b := by
     rw [etaleOpenSumDerivedAdjunction]
     apply (conjugateIsoEquiv _ _).injective
     rw [Equiv.apply_symm_apply]
@@ -164,7 +164,7 @@ theorem graph_open_etale_composition
       (canonicalEtaleCompactSupportComparison A (j ≫ b) e).hom.app M
   rw [(canonicalEtaleCompactSupportComparison A b d).hom.naturality_assoc]
   apply Eq.trans _ htransport
-  simpa only [etaleNormalizedSupportCompositor, NatTrans.comp_app, NatTrans.hcomp,
+  simpa only [etaleNormalizedSupportCompositor, NatTrans.comp_app, NatTrans.hcomp_app,
     Category.assoc] using hsum.symm
 
 end AlgebraicGeometry.Etale

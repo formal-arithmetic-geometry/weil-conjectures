@@ -43,7 +43,7 @@ lemma sum_Iic_moebiusComponent (π : α → R) (j : α) :
     simp only [mem_Iic, mem_Icc]
     exact ⟨fun h ↦ ⟨⟨h.2, h.1⟩, h.2.trans h.1⟩, fun h ↦ ⟨h.1.2, h.1.1⟩⟩)]
   simp_rw [← sum_smul, sum_Icc_mu_right, ite_smul, one_smul, zero_smul]
-  rw [sum_ite_eq' (Iic j) j, if_pos (mem_Iic.2 le_rfl)]
+  rw [sum_ite_eq' (Iic j) j, ite_eq_left (mem_Iic.2 le_rfl)]
 
 /-- The Möbius component `e k` is `π k` minus the components strictly below `k`. -/
 lemma moebiusComponent_eq_sub (π : α → R) (k : α) :

@@ -78,7 +78,7 @@ instance preservesMonomorphisms_evaluationLeftAdjoint (j : J) :
         Limits.Sigma.map (fun _ : j ⟶ k ↦ f) := by
       refine Sigma.hom_ext _ _ fun g ↦ ?_
       rw [evaluationLeftAdjoint_map_app]
-      erw [Sigma.ι_desc]
+      erw [Sigma.ι_comp_desc]
     rw [this]
     exact mono_sigmaMap _
 

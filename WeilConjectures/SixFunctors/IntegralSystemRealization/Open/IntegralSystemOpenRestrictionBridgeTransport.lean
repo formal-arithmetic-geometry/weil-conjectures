@@ -105,7 +105,7 @@ attribute [local implicit_reducible] coefficientSequenceCommRingSheaf
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf HasDerivedCategory.standard DerivedCategory.Q
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryNatIso
-  Functor.mapDerivedCategoryCompIso Direct.adj Open.adj CanonicalBridge.pull CanonicalBridge.push
+  Direct.adj Open.adj CanonicalBridge.pull CanonicalBridge.push
   CanonicalBridge.shriek ProEtale.SemilinearProperOpen.adj ProEtale.SemilinearProperOpen.jAdj
   ProEtale.SemilinearProperOpen.P ProEtale.SemilinearProperOpen.R
   ProEtale.SemilinearProperOpen.J pullbackTensorSequenceDerived

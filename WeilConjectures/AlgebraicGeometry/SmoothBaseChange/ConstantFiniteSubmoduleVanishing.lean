@@ -101,6 +101,9 @@ theorem isZero_higherDirectImage_constant_of_finite_submodules
             (lowerStar (ModuleCat.{u + 1} R) h).rightDerivedFunctorPlus ⋙
               DerivedCategory.Plus.homologyFunctor _ q) :=
       preservesColimitsOfShape_higherDirectImage_large R h q I
+    have : PreservesColimitsOfShape I H := by
+      dsimp only [H, constantSheaf]
+      infer_instance
     have hc : IsColimit c := ModuleCat.directLimitIsColimit _ _
     have hz : IsZero (H.obj c.pt) := (isColimitOfPreserves H hc).isZero_pt
       ((D ⋙ H).isZero (fun N ↦ by

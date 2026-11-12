@@ -128,8 +128,7 @@ theorem exists_etale_isIdempotentElem_forall_eq [Module.Finite A B] (φ : A →+
     let := φ.toAlgebra
     apply RingHom.ext
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a₁ b =>
       simp only [RingHom.comp_apply, θ, PointsOver.tensor_tmul, map_mul]
       congr 1
@@ -198,11 +197,9 @@ theorem exists_etale_isIdempotentElem_forall_eq [Module.Finite A B] (φ : A →+
       ((t'.tensor hφ₁).tensor hφ₂) x := by
     intro t' x
     let := φ.toAlgebra
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul a₂ y =>
-      induction y using TensorProduct.induction_on with
-      | zero => simp
+      induction y using TensorProduct.inductionOn with
       | tmul a₁ b =>
         rw [show ψ (a₂ ⊗ₜ (a₁ ⊗ₜ b)) = (a₁ • a₂) ⊗ₜ b from
           Algebra.TensorProduct.cancelBaseChange_tmul A A₁ A₂ A₂ B a₂ a₁ b]
@@ -395,17 +392,19 @@ private lemma exists_etale_orthogonalIdempotents_aux [Module.Finite A B] (φ : A
         rw [← map_mul, hortho t hs t' hs' htt', map_zero]
     · intro t ht t'
       by_cases h : t = t₀
-      · rw [show e' t = ψ e'' * ∏ s ∈ S, (1 - f (e s)) from if_pos h, map_mul, hval'', map_prod]
+      · rw [show e' t = ψ e'' * ∏ s ∈ S, (1 - f (e s)) from ite_eq_left h, map_mul, hval'',
+          map_prod]
         simp only [map_sub, map_one, hval']
         by_cases ht' : t' = t
-        · rw [if_pos ht', ht', h, h₁, one_mul]
+        · rw [ite_eq_left ht', ht', h, h₁, one_mul]
           refine Finset.prod_eq_one fun s hs ↦ ?_
-          rw [hval s hs, if_neg (fun h' : t₀ = s ↦ ht₀S (h' ▸ hs)), sub_zero]
-        · rw [if_neg ht']
+          rw [hval s hs, ite_eq_right (fun h' : t₀ = s ↦ ht₀S (h' ▸ hs)), sub_zero]
+        · rw [ite_eq_right ht']
           by_cases ht'S : t' ∈ S
-          · rw [Finset.prod_eq_zero ht'S (by rw [hval t' ht'S, if_pos rfl, sub_self]), mul_zero]
+          · rw [Finset.prod_eq_zero ht'S (by rw [hval t' ht'S, ite_eq_left rfl, sub_self]),
+              mul_zero]
           · rw [hzero t' (fun h' ↦ ht' (h'.trans h.symm)), zero_mul]
-      · rw [show e' t = f (e t) from if_neg h, hval']
+      · rw [show e' t = f (e t) from ite_eq_right h, hval']
         exact hval t (Finset.mem_of_mem_insert_of_ne ht h) t'
 
 variable [IsAlgClosed Ω]

@@ -72,7 +72,7 @@ private theorem depth_zero_of_annihilator (A : Type*) [CommRing A] [IsLocalRing 
   unfold depth Ideal.depth
   have hm : (maximalIdeal A • (⊤ : Submodule A A)) ≠ ⊤ := by
     simpa only [Ideal.smul_eq_mul, Ideal.mul_top] using (maximalIdeal.isMaximal A).ne_top
-  rw [if_neg hm]
+  rw [ite_eq_right hm]
   apply le_antisymm _ zero_le
   apply sSup_le
   rintro n ⟨rs, hreg, hmem, rfl⟩

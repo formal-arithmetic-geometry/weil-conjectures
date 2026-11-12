@@ -10,6 +10,7 @@ import WeilConjectures.SixFunctors.Regular.RegularQuotientInjectiveKernel
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAdjoint
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.Augmentation.RegularQuotientConeTraceShortExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import all Mathlib.Algebra.Homology.Localization
 
 /-! Termwise-injective computation of the regular quotient trace.
 

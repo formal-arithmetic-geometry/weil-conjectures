@@ -50,14 +50,14 @@ theorem finiteAdicHCup_nondegenerate (hl : (l : k) ≠ 0) (m : ℕ) {i j n : ℕ
   have : NeZero (l ^ m) := ⟨pow_ne_zero _ (Fact.out : l.Prime).ne_zero⟩
   have : NeZero (ringChar Λ) := by rw [ringChar.eq Λ (l ^ m)]; infer_instance
   have : HasInvertibleExponent Λ (Spec (.of k)) :=
-    ⟨l ^ m, Nat.pos_of_ne_zero (NeZero.ne _), ULift.ext _ _ (by simp [Λ]), by
+    ⟨l ^ m, Nat.pos_of_ne_zero (NeZero.ne _), ULift.ext (by simp [Λ]), by
       simpa using ((Ne.isUnit (pow_ne_zero m hl)).map (Scheme.ΓSpecIso (.of k)).inv.hom)⟩
   have : HasInvertibleExponent Λ S := .of_hom a
   have hcog : ∀ (M : ModuleCat.{u + 1} Λ) (x : M), x ≠ 0 → ∃ χ : M →ₗ[Λ] Λ, χ x ≠ 0 :=
     fun M x hx ↦ ZModLike.exists_apply_ne_zero (n := l ^ m)
-      (Nat.pos_of_ne_zero (NeZero.ne _)) (ULift.ext _ _ (by
+      (Nat.pos_of_ne_zero (NeZero.ne _)) (ULift.ext (by
         simpa using (Nat.cast_pow l m).symm.trans (ZMod.natCast_self (l ^ m))))
-      (fun x ↦ ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext _ _ (by
+      (fun x ↦ ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext (by
         simpa using (ZMod.intCast_surjective x.down).choose_spec)⟩)
       (fun z hz ↦ (ZMod.intCast_zmod_eq_zero_iff_dvd z _).1 (by
         simpa using congrArg ULift.down hz)) hx

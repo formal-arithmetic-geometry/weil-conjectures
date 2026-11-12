@@ -100,8 +100,7 @@ theorem smooth_localization_conormal_split
   let q : P.toExtension.Cotangent ≃ₗ[MvPolynomial (Fin n) R] I.Cotangent := by
     let q₀ := Extension.cotangentEquivCotangentKer (P := P.toExtension)
     let q₁ := Ideal.Cotangent.equivOfEq P.toExtension.ker I hp
-    dsimp only [Generators.toExtension, Generators.Ring] at q₀ q₁
-    exact q₀.trans q₁
+    exact q₀ ≪≫ₗ q₁
   let qA : P.toExtension.Cotangent ≃ₗ[A] I.Cotangent :=
     q.extendScalarsOfSurjective P.algebraMap_surjective
   let Q := (Generators.localizationAway B a).comp P

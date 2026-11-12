@@ -92,6 +92,7 @@ lemma presheaf_map_apply_congr (M : X.Modules) {U V : X.Opens} (i j : V ⟶ U) (
     M.presheaf.map i.op m = M.presheaf.map j.op m := by
   rw [Subsingleton.elim i j]
 
+
 /-- Restricting twice is restricting once. -/
 lemma presheaf_map_presheaf_map_apply (M : X.Modules) {U V W : X.Opens} (i : V ⟶ U)
     (j : W ⟶ V) (k : W ⟶ U) (m : Γ(M, U)) :

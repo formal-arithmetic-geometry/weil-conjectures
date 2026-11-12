@@ -10,9 +10,9 @@ public import Mathlib.CategoryTheory.Limits.Indization.Category
 public import Mathlib.CategoryTheory.Limits.Lattice
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
 public import Mathlib.CategoryTheory.Sites.Continuous
-public import Mathlib.Data.Finite.Prod
-public import Mathlib.Data.Finite.Sigma
-public import Mathlib.Data.Finite.Sum
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Basic.Finite.Sigma
+public import Mathlib.Basic.Finite.Sum
 
 /-!
 # Sheafs in the pro category
@@ -51,7 +51,8 @@ def Limits.IsLimit.ofPreservesLimitColim {J K C : Type*} [Category J] [Category 
       Cone.postcompose_obj_π, NatTrans.comp_app,
       Functor.mapCone_π_app, colim_map, colimitIsoFlipCompColim_inv_app,
       ι_colimMap_assoc, Category.assoc,
-      colimit.comp_coconePointUniqueUpToIso_hom_assoc, natiso]
+      colimit.comp_coconePointUniqueUpToIso_hom_assoc, natiso,
+      HasColimit.ι_isoOfNatIso_inv_assoc, compEvaluation_inv_app]
     erw [colimitObjIsoColimitCompEvaluation_ι_inv_assoc]
     simp [← NatTrans.comp_app, w]
   IsLimit.equivOfNatIsoOfIso natiso _ e t hc'
@@ -237,6 +238,7 @@ lemma Functor.IsInd.obj_exists [IsInd.{w} F] (X : D) :
   obtain ⟨J, _, _, pres, _, _, _⟩ := hom_exists (F := F) (𝟙 X)
   use J, inferInstance, inferInstance
   exact ⟨pres⟩
+
 
 instance : Functor.IsInd.{v₁} (Ind.yoneda (C := C)) where
   hom_exists {X Y} f := by

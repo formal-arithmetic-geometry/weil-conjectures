@@ -33,9 +33,9 @@ lemma _root_.Valuation.map_pow_sub_pow_lt_one {R Γ₀ : Type*} [CommRing R]
     rw [e]
     refine lt_of_le_of_lt (v.map_add _ _) (max_lt ?_ ?_)
     · rw [map_mul]
-      exact mul_lt_one_of_nonneg_of_lt_one_right hS zero_le ih
+      exact (mul_le_of_le_one_left zero_le hS).trans_lt ih
     · rw [map_mul, map_pow]
-      exact mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' hT _) zero_le hST
+      exact (mul_le_of_le_one_left zero_le (pow_le_one' hT _)).trans_lt hST
 
 /-- **Stability, Kummer case.** -/
 theorem exists_pow_root_of_transcendental {p : ℕ} [Fact p.Prime] [CharZero Ω]
@@ -106,7 +106,7 @@ theorem exists_pow_root_of_transcendental {p : ℕ} [Fact p.Prime] [CharZero Ω]
       rw [← Finset.sum_sub_distrib]
       refine v.map_sum_lt one_ne_zero fun k _ ↦ ?_
       rw [← mul_sub, map_mul, map_pow]
-      refine mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' (hy1 k) _) zero_le ?_
+      refine (mul_le_of_le_one_left zero_le (pow_le_one' (hy1 k) _)).trans_lt ?_
       refine v.map_pow_sub_pow_lt_one hS1 (by rw [map_pow]; exact pow_le_one' hz1 _) ?_ k
       rw [← v.map_neg, neg_sub]
       exact hlt

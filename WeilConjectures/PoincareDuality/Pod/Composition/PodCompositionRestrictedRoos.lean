@@ -50,7 +50,6 @@ private theorem normalized_roos_eq
     (hl.symm.trans (hr.trans (Category.comp_id _)))
 
 section
-attribute [local implicit_reducible] CategoryTheory.Functor.mapHomologicalComplex
 /-- The composition square before localization, on every restricted strict complex.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941
 (blueprint: lem-pod-composition-restricted-roos).

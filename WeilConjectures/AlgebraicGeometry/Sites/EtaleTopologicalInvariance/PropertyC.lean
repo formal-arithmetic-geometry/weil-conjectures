@@ -59,7 +59,7 @@ theorem Algebra.IsUniversalHomeomorphism.isPurelyInseparable_residueField_map
   let φ : CommRingCat.of A ⟶ CommRingCat.of B := CommRingCat.ofHom (algebraMap A B)
   let x : Spec (CommRingCat.of B) := ⟨𝔮, inferInstance⟩
   have h : ((Spec.map φ).residueFieldMap x).hom.IsPurelyInseparable := by
-    have H := (tfae_universallyInjective (Spec.map φ)).out 0 2
+    have H := (tfae_universallyInjective (Spec.map φ)).out 1 3
     exact (H.mp inferInstance).2 x
   change (Ideal.ResidueField.map ((Spec.map φ) x).asIdeal x.asIdeal φ.hom rfl).IsPurelyInseparable
   have hsq := (Iso.inv_comp_eq _).mpr (Spec.residueFieldMap_residueFieldIso_hom φ x)

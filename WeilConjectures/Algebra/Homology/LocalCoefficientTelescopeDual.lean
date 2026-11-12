@@ -449,7 +449,7 @@ private theorem dualTelescope
       S.map_sub, op_sub, H.map_sub, S.map_comp, op_comp, H.map_comp]
   rw [← Category.assoc, hmap, Preadditive.sub_comp, Category.assoc, hβ]
   simp only [towerTransitionEndomorphism, towerProductShift,
-    Preadditive.sub_comp, Category.id_comp, Pi.lift_π, Preadditive.comp_sub,
+    Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π, Preadditive.comp_sub,
     Category.assoc, he]
   rw [← Category.assoc e.hom (Pi.π (fun _ : ℕ ↦ L) (n + 1)) β, he, Category.assoc]
 

@@ -27,6 +27,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+local instance (X : Scheme.{u}) (I : Type u)
+    (K : I → CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    HasCoproduct K := HasColimitsOfShape.has_colimit _
+
 /-- The termwise coproduct representative has the coproduct universal property in the
 derived category. This is the localization and coproduct part of the direct-sums lemma.
 Source: Stacks Project, Injectives, Lemma 07D9 (1)-(2).
@@ -70,7 +74,7 @@ theorem derivedAmbientDirectSumsCofan (X : Scheme.{u})
     let d := DerivedCategory.Q.map (Sigma.desc f) ≫ iso.inv
     have hd (i : I) : DerivedCategory.Q.map (Sigma.ι K i) ≫ d = a i := by
       dsimp [d]
-      rw [← Category.assoc, ← Functor.map_comp, Sigma.ι_desc, hf]
+      rw [← Category.assoc, ← Functor.map_comp, Sigma.ι_comp_desc, hf]
       simp
     refine ⟨d, hd, ?_⟩
     intro m hm
@@ -81,7 +85,7 @@ theorem derivedAmbientDirectSumsCofan (X : Scheme.{u})
       rw [Functor.map_comp, hg, ← Category.assoc, hm, hf]
     have hhom := CategoryTheory.coproduct_homotopy K g (Sigma.desc f) (fun i ↦
       (CategoryTheory.derived_map_homotopy (Sigma.ι K i ≫ g) (Sigma.ι K i ≫ Sigma.desc f)
-        (by simpa only [Sigma.ι_desc] using he i)).some)
+        (by simpa only [Sigma.ι_comp_desc] using he i)).some)
     rw [← hg, DerivedCategory.Q_map_eq_of_homotopy _ hhom.some]
     simp [d]
   let a (t : Cofan E) (i : I) := (e i).hom ≫ t.inj i

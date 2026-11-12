@@ -38,7 +38,7 @@ theorem Derivation.map_aeval_eq_sum [Fintype ι] (D : Derivation k A A) (x : ι 
     have hsum : ∑ i, aeval x (pderiv i (p * X j)) * D (x i) =
         x j * ∑ i, aeval x (pderiv i p) * D (x i) + aeval x p * D (x j) := by
       simp only [h, add_mul, Finset.sum_add_distrib, ite_mul, zero_mul, Finset.sum_ite_eq',
-        Finset.mem_univ, if_true, Finset.mul_sum]
+        Finset.mem_univ, ite_true, Finset.mul_sum]
       congr 1
       exact Finset.sum_congr rfl fun _ _ ↦ by ring
     rw [hsum, map_mul, aeval_X, Derivation.leibniz, smul_eq_mul, smul_eq_mul, hp]

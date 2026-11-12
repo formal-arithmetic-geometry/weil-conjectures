@@ -350,8 +350,7 @@ private noncomputable def sliceScalarSection
       map_smul' := by
         intro r z
         change t (r • z) = r • t z
-        induction z using TensorProduct.induction_on with
-        | zero => simp only [smul_zero, map_zero]
+        induction z using TensorProduct.inductionOn with
         | add z z' hz hz' => simp only [smul_add, map_add, hz, hz']
         | tmul s m =>
           change t (r • (s ⊗ₜ[R₀.obj.obj V, (c₀.hom.app V).hom] m)) =
@@ -381,7 +380,8 @@ private theorem sliceChangeMap_tmul {R S : Sheaf J CommRingCat.{u}}
     (c : R ⟶ S) (M : ringedSiteModules.{u} (localCoefficientRings R))
     {V W : Cᵒᵖ} (v : V ⟶ W) (r : S.obj.obj V) (m : M.val.obj V) :
     changeOfRingsMap c M v (r ⊗ₜ[R.obj.obj V, (c.hom.app V).hom] m) =
-      S.obj.map v r ⊗ₜ[R.obj.obj W, (c.hom.app W).hom] M.val.map v m :=
+      S.obj.map v r ⊗ₜ[R.obj.obj W, (c.hom.app W).hom]
+        PresheafOfModulesOfCommRing.map (R := R.obj) M.val v m :=
   Classical.choose_spec (exists_changeOfRingsMap.{u, u, u} c M v) r m
 
 private noncomputable def sliceScalarRaw

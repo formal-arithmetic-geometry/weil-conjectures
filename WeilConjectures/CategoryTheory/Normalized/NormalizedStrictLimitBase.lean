@@ -190,7 +190,7 @@ theorem normalizedStrictLimitBase
   dsimp only [DP, CategoryTheory.Functor.comp_obj] at hn
   simp only [Category.assoc] at hn
   erw [Limits.Pi.map_π] at hn
-  simp only [piComparison_comp_π, ← DerivedCategory.Q.map_comp, Pi.lift_π] at hn
+  simp only [piComparison_comp_π, ← DerivedCategory.Q.map_comp, Pi.lift_comp_π] at hn
   rw [← hd]
   change (ηF.app X ≫ d.hom.app (DerivedCategory.Q.obj X)) ≫
     (d.inv.app (DerivedCategory.Q.obj X) ≫

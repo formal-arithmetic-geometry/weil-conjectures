@@ -44,6 +44,7 @@ lemma bifunctorHomObj_internalHom (N J : CochainComplex C ℤ) :
     bifunctorHomObj MonoidalClosed.internalHom N J = internalHomObj N J :=
   rfl
 
+
 variable [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]

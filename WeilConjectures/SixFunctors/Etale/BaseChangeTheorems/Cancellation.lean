@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
@@ -60,7 +62,7 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoOfRightAcyclic (M : 
     F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj M) ≅
       (DerivedCategory.Plus.singleFunctor D 0).obj (F.obj M) :=
   let K : CochainComplex.Plus C := ⟨(CochainComplex.singleFunctor C 0).obj M, ⟨0, inferInstance⟩⟩
-  have : IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj K)) :=
+  have : IsIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj K)) :=
     F.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic K fun n ↦ by
       by_cases hn : n = 0
       · subst hn
@@ -68,7 +70,8 @@ noncomputable def rightDerivedFunctorPlusObjSingleFunctorIsoOfRightAcyclic (M : 
           (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 M).symm hM
       · exact F.rightAcyclic.prop_of_isZero
           (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 M n hn)
-  (asIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj K))).symm ≪≫
+  F.rightDerivedFunctorPlus.mapIso ((DerivedCategory.Plus.quotientCompQhIso C).app K).symm ≪≫
+    (asIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj K))).symm ≪≫
     mapHomotopyCategoryPlusSingleFunctorQhObjIso F 0 M
 
 end CategoryTheory.Functor
@@ -119,7 +122,6 @@ theorem isIso_app_of_isIso_Qh_map_mapHomotopyCategoryPlus_app (τ : F ⟶ G) (J 
       α.hom.app J ≫ (HomologicalComplex.single D (ComplexShape.up ℤ) 0).map (τ.app J) := by
     apply HomologicalComplex.to_single_hom_ext
     simp [φ, α, β, K, HomologicalComplex.single_map_f_self]
-    rfl
   have h₅ : IsIso (HomologicalComplex.homologyMap
       ((HomologicalComplex.single D (ComplexShape.up ℤ) 0).map (τ.app J)) 0) := by
     have h₆ : IsIso (HomologicalComplex.homologyMap (φ ≫ β.hom.app J) 0) := by
@@ -216,7 +218,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
   let P := (HomotopyCategory.Plus.quotient _).obj K
   have : IsTorsionModuleSheaf J := .of_isTorsion hΛ J
   have hJ := (hf.hasInjectiveAcyclicity Λ f).rightAcyclic Λ sq J
-  have h₁ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) :=
+  have h₁ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) :=
     (f)_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic K
       fun n ↦ by
         by_cases hn : n = 0
@@ -226,7 +228,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
             ((f)_*[ModuleCat.{u + 1} Λ].rightAcyclic_of_injective J)
         · exact (f)_*[ModuleCat.{u + 1} Λ].rightAcyclic.prop_of_isZero
             (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 J n hn)
-  have h₂ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+  have h₂ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app
       (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
     (f')_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
       (((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj K) fun n ↦ by
@@ -243,7 +245,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
     hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X hΛ _)
   have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
   have h₄ : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnith.app P) ≫
       (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         (DerivedCategory.Plus.Qh.obj P)) := inferInstance
   rw [hfac] at h₄

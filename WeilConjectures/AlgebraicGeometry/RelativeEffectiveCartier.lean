@@ -503,7 +503,7 @@ theorem isInvertible_of_locallyQuasiFinite_of_field {K : Type u} [Field K] {F : 
     exact absurd h0 (by norm_num)
   -- the local ring at `x` is a discrete valuation ring
   have : IsPrincipalIdealRing (F.presheaf.stalk x) := by
-    refine ((tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain _).out 5 0).mp ?_
+    refine ((tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain _).out 6 1).mp ?_
     have h := (IsRegularLocalRing.iff_finrank_cotangentSpace (F.presheaf.stalk x)).mp
       inferInstance
     have h' := (ringKrullDim_stalk_le_topologicalKrullDim x).trans hdim

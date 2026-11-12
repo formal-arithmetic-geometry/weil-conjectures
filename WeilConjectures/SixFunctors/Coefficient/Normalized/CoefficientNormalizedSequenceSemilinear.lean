@@ -133,7 +133,7 @@ attribute [local implicit_reducible] CategoryTheory.uniformProd
   SemilinearSections.evaluation SemilinearSections.ringPresheaf SemilinearSections.rings
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
   integralReductionTargetHasDerivedCategory coefficientFiniteHasDerived
-  coefficientSequenceHasDerived Functor.mapHomologicalComplex
+  coefficientSequenceHasDerived
 attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
   DerivedCategory.Q DerivedCategory.Qh HasDerivedCategory.standard
   coefficientTotalTensor coefficientTensorGenerator CoefficientClosedStructure.tensor
@@ -241,7 +241,7 @@ private noncomputable def localizedTransition (δ : F ⟶ G ⋙ H) :
     (HomologicalComplex.quasiIso A (.up ℤ)) _ _ F.mapDerivedCategory
     (G ⋙ H).mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex δ (.up ℤ)) DerivedCategory.Q) ≫
-      (Functor.mapDerivedCategoryCompIso G H).hom
+      (Functor.mapDerivedCategoryCompIso G H).inv
 
 private theorem mapDerived_eq (H' : D ⥤ B)
     [H'.Additive] [PreservesFiniteLimits H'] [PreservesFiniteColimits H'] (h : H = H') :

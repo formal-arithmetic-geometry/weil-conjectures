@@ -55,18 +55,18 @@ variable {A : Type a} {B : Type b} {C : Type c}
   (i : H ⋙ R ≅ S)
 
 private theorem exactComp_fac (K : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) ≫
       S.mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app K) ≫
       R.mapDerivedCategoryFactors.hom.app
         ((H.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso i (.up ℤ)).hom.app K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc,
     Functor.mapDerivedCategoryNatIso_fac]
   have h := Functor.mapDerivedCategoryCompIso_fac H R K
   rw [← h]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [← CategoryTheory.Functor.map_comp]
   congr 1
   congr 1
@@ -81,7 +81,7 @@ private theorem exactComp_map (K : CochainComplex A ℤ) (L : CochainComplex B �
     (f : L ⟶ (H.mapHomologicalComplex (.up ℤ)).obj K) :
     R.mapDerivedCategory.map
         (DerivedCategory.Q.map f ≫ H.mapDerivedCategoryFactors.inv.app K) ≫
-      ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) ≫
       S.mapDerivedCategoryFactors.hom.app K =
     R.mapDerivedCategoryFactors.hom.app L ≫
@@ -115,7 +115,7 @@ private theorem exact_comp_inv
         S.mapDerivedCategoryFactors.inv.app K =
       R.mapDerivedCategoryFactors.inv.app L ≫ R.mapDerivedCategory.map
         (DerivedCategory.Q.map f ≫ H.mapDerivedCategoryFactors.inv.app K) ≫
-      ((Functor.mapDerivedCategoryCompIso H R).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H R ≪≫
         Functor.mapDerivedCategoryNatIso i).hom.app (DerivedCategory.Q.obj K) := by
   apply (cancel_epi (R.mapDerivedCategoryFactors.hom.app L)).1
   apply (cancel_mono (S.mapDerivedCategoryFactors.hom.app K)).1
@@ -199,8 +199,8 @@ private def coefficientDerivedComp
     coefficientDerivedRes (syst := syst) hmn ⋙
         coefficientDerivedRes (syst := syst) hrm ≅
       coefficientDerivedRes (syst := syst) (le_trans hmn hrm) :=
-  (Functor.mapDerivedCategoryCompIso (coefficientRes syst hmn)
-    (coefficientRes syst hrm)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (coefficientRes syst hmn)
+      (coefficientRes syst hrm) ≪≫
       Functor.mapDerivedCategoryNatIso (syst.finiteComp hrm hmn)
 
 attribute [local irreducible] coefficientDerivedComp Functor.mapDerivedCategory

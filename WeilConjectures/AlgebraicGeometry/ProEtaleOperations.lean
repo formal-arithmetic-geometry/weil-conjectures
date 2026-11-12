@@ -196,6 +196,17 @@ private theorem proEtaleRingModuleDirectImage_isAdditive :
   intro U
   rfl
 
+section
+
+noncomputable local instance {A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (M : proEtaleRingModules X A) {U V : X.ProEtᵒᵖ} (i : U ⟶ V) :
+    Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A).obj.map i).hom).obj
+        (M.val.obj V)) :=
+  inferInstanceAs (Module (A.obj.obj V) (M.val.obj V))
+
 open scoped ChangeOfRings in
 private theorem proEtale_changeOfRingsMap_tmul
     (M : proEtaleRingModules X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))
@@ -204,6 +215,8 @@ private theorem proEtale_changeOfRingsMap_tmul
       (s ⊗ₜ[_, (c.hom.hom.app U).hom] m) =
       S.obj.map i s ⊗ₜ[_, (c.hom.hom.app V).hom] M.val.map i m :=
   Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap c.hom M i) s m
+
+end
 
 set_option backward.isDefEq.respectTransparency false in
 open scoped ChangeOfRings in

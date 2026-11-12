@@ -262,9 +262,9 @@ private theorem pullback_square
           (R.mapDerivedCategory.obj M) =
       (Functor.rightDerivedPullback Q α).app (P.mapDerivedCategory.obj M) ≫
         G'.rightDerivedFunctor.map
-          ((Functor.mapDerivedCategoryCompIso P Q).inv.app M ≫
+          ((Functor.mapDerivedCategoryCompIso P Q).hom.app M ≫
             (Functor.mapDerivedCategoryNatIso ε).hom.app M ≫
-            (Functor.mapDerivedCategoryCompIso R S).hom.app M) := by
+            (Functor.mapDerivedCategoryCompIso R S).inv.app M) := by
   have hP := pullback_id_eq_comparison P G
     (Functor.mapDerivedCategoryCompRightDerivedFunctorIso P G)
     (by ext X; exact Functor.mapDerivedCategoryCompRightDerivedFunctorIso_hom_fac_app P G X)
@@ -278,11 +278,11 @@ private theorem pullback_square
     (Functor.whiskerLeft P α ≫ (Functor.associator P Q G').inv ≫
             Functor.whiskerRight ε.hom G' ≫ (Functor.associator R S G').hom) (𝟙 (S ⋙ G'))
     (Functor.whiskerLeft P α ≫ (Functor.associator P Q G').inv) (by ext; simp) M
-  simp only [Iso.trans_hom, NatTrans.comp_app, mapDerived_refl, Category.id_comp,
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, mapDerived_refl, Category.id_comp,
     hP, hS] at h₁ h₂
   have h₁' := congrArg (fun t ↦ t ≫
-    G'.rightDerivedFunctor.map ((Functor.mapDerivedCategoryCompIso P Q).inv.app M)) h₁
-  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+    G'.rightDerivedFunctor.map ((Functor.mapDerivedCategoryCompIso P Q).hom.app M)) h₁
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id] at h₁'
   erw [Category.comp_id] at h₁'
   rw [← h₂, h₁']
@@ -304,17 +304,17 @@ private theorem cut_derived_square (A : Type (u + 1)) [CommRing A]
     (hc : c'.openComplement = h ⁻¹ᵁ c.openComplement) (K : DerivedCategoryModule A T) :
     (Functor.mapDerivedCategoryCompIso
         (upperStar (ModuleCat.{u + 1} A) c.openComplement.ι)
-        (upperStar (ModuleCat.{u + 1} A) (supportCutOpenMap h c c' hc))).inv.app K ≫
+        (upperStar (ModuleCat.{u + 1} A) (supportCutOpenMap h c c' hc))).hom.app K ≫
       (Functor.mapDerivedCategoryNatIso (support_cut_square A h c c' hc)).hom.app K ≫
       (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) h)
-        (upperStar (ModuleCat.{u + 1} A) c'.openComplement.ι)).hom.app K =
+        (upperStar (ModuleCat.{u + 1} A) c'.openComplement.ι)).inv.app K =
     ((supportExactPullbackCompIso (ModuleCat.{u + 1} A) (supportCutOpenMap h c c' hc)
         c.openComplement.ι (c'.openComplement.ι ≫ h)
         (supportCutOpenMap_over h c c' hc).symm).symm ≪≫
       supportExactPullbackCompIso (ModuleCat.{u + 1} A) c'.openComplement.ι h
         (c'.openComplement.ι ≫ h) rfl).hom.app K := by
   simp only [support_cut_square, squareUpperStarIso, supportExactPullbackCompIso,
-    Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, NatTrans.comp_app]
+    Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, NatTrans.comp_app]
   rw [mapDerived_nat_comp, mapDerived_nat_inv]
   simp only [NatTrans.comp_app, Category.assoc]
 

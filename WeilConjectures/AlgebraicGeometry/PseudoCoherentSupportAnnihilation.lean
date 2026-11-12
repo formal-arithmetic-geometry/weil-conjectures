@@ -54,11 +54,11 @@ theorem isPerfect_tensorUnit (X : Scheme.{u})
   · let F := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) ⊤
     let eunit : 𝟙_ (schemeDerivedCategory X) ≅
         (DerivedCategory.singleFunctor _ 0).obj
-          (SheafOfModules.unit (moduleRings X.toRingedSpace)) := Iso.refl _
+          (SheafOfModules.unit (moduleRings X.toRingedSpace)) :=
+      (DerivedCategory.quotientCompQhIso _).app _
     exact ⟨F.mapDerivedCategory.mapIso eunit ≪≫
       (F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
       (DerivedCategory.singleFunctorIsoCompQ _ 0).app (SheafOfModules.unit R)⟩
-
 private theorem module_restriction_zero
     (Y : Scheme.{u}) (V : Y.Opens)
     (M : SheafOfModules.{u} (moduleRings Y.toRingedSpace))
@@ -75,7 +75,7 @@ private theorem module_restriction_zero
     TopCat.Presheaf.germ M.val.presheaf _ x hx _
   exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
-set_option maxHeartbeats 500000 in
+set_option maxHeartbeats 800000 in
 -- Comparing the shared derived tensor instance with its additive construction is expensive.
 /-- A map `α : P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
 complex into a bounded below one, with `Q` supported on `T = Y \ V`, is killed by the tensor

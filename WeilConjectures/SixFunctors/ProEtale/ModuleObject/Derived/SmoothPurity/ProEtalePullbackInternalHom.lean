@@ -57,7 +57,7 @@ private lemma tensorπ_concreteTensorIso
     change colimit.ι _ WalkingParallelPair.one ≫
       (HasColimit.isoOfNatIso _ ≪≫ _).hom = _
     simp only [Iso.trans_hom]
-    erw [HasColimit.isoOfNatIso_ι_hom_assoc,
+    erw [HasColimit.ι_isoOfNatIso_hom_assoc,
       IsColimit.comp_coconePointUniqueUpToIso_hom]
     simp [diagramIsoParallelPair, Mod.relativeTensorCofork]
   exact congrArg Mod.Hom.hom h

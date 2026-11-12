@@ -66,7 +66,7 @@ private noncomputable def envelopeEmbedding
       apply Pi.hom_ext
       intro k
       simp only [envelopeObj, Functor.ofOpSequence_map_homOfLE_succ,
-        Category.assoc, Pi.lift_π]
+        Category.assoc, Pi.lift_comp_π]
       rw [← T.map_comp]
       rfl)
 
@@ -79,8 +79,8 @@ private noncomputable def envelopeι
     apply Pi.hom_ext
     intro k
     simp only [Functor.id_map, envelope, envelopeMap, envelopeEmbedding,
-      NatTrans.ofOpSequence_app, NatTrans.comp_app, Category.assoc, Pi.lift_π,
-      Limits.Pi.map_π, Pi.lift_π_assoc]
+      NatTrans.ofOpSequence_app, NatTrans.comp_app, Category.assoc, Pi.lift_comp_π,
+      Limits.Pi.map_π, Pi.lift_comp_π_assoc]
     exact (φ.naturality _).symm
 
 private theorem envelope_split

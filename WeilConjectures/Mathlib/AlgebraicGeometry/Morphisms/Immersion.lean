@@ -98,7 +98,7 @@ Here the fibre product `∏_S Yⱼ` over `S` is the categorical product in `Over
 lemma isImmersion_left_pi_lift (i : ι) (h : IsImmersion (g i).left) :
     IsImmersion (Pi.lift g).left := by
   have : IsImmersion ((Pi.lift g).left ≫ (Pi.π Y i).left) := by
-    rw [← Over.comp_left, Pi.lift_π]; infer_instance
+    rw [← Over.comp_left, Pi.lift_comp_π]; infer_instance
   exact .of_comp _ (Pi.π Y i).left
 
 end AlgebraicGeometry

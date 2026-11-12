@@ -139,15 +139,16 @@ private def component (n : ℤ) :
     V.obj (ringedLocalizationTwoTermX O s n) ≅ ringedLocalizationTwoTermX P t n := by
   by_cases h0 : n = 0
   · subst n
-    simpa only [ringedLocalizationTwoTermX, if_pos] using (show V.obj (SheafOfModules.unit
+    simpa only [ringedLocalizationTwoTermX, ite_eq_left] using (show V.obj (SheafOfModules.unit
       ((sheafCompose K (forget₂ CommRingCat RingCat)).obj O)) ≅ SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj P) from Arrow.leftFunc.mapIso h)
   · by_cases h1 : n = 1
     · subst n
-      simpa only [ringedLocalizationTwoTermX, if_neg (show (1 : ℤ) ≠ 0 by decide), if_pos]
+      simpa only [ringedLocalizationTwoTermX,
+        ite_eq_right (show (1 : ℤ) ≠ 0 by decide), ite_eq_left]
         using (show V.obj (ringedSectionLocalization O s) ≅
           ringedSectionLocalization P t from Arrow.rightFunc.mapIso h)
-    · simpa only [ringedLocalizationTwoTermX, if_neg h0, if_neg h1]
+    · simpa only [ringedLocalizationTwoTermX, ite_eq_right h0, ite_eq_right h1]
         using V.mapZeroObject
 
 private def complexIso :

@@ -70,6 +70,10 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalPullbackScalarComparison rationalTensorScalarComparison
   commonStagePullbackComparison commonStageTensorComparison operationStageTransitionIso
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 /-- A stage transport equality gives equality of the corresponding pair-category
 representatives. -/
 theorem pairRepresentative_eq_of_stage_transport

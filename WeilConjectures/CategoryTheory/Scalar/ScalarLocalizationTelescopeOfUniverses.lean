@@ -422,7 +422,9 @@ theorem scalarLocalization_telescopeOfUniverses
   have : IsGrothendieckAbelian.{u} B :=
     SheafOfModules.isGrothendieckAbelian_coefficientUniverse _
   have : HasFiniteBiproducts B := Abelian.hasFiniteBiproducts
-  have : HasCoproducts.{0} B := hasCoproducts_of_finite_and_filtered
+  have hB : HasColimitsOfSize.{u, u} B := IsGrothendieckAbelian.hasColimits B
+  have : HasCoproducts.{u} B := fun J ↦ hB.has_colimits_of_shape (Discrete J)
+  have : HasCoproducts.{0} B := hasCoproducts_shrink.{0, u} (C := B)
   have : HasCountableCoproducts B := hasCountableCoproducts_of_hasCoproducts B
   have : AB5OfSize.{0, 0} B := AB5OfSize_shrink.{0, 0, u, u} B
   have : d.CommShift ℤ := scalarLocalization_unit_commShift F U d η hd (by

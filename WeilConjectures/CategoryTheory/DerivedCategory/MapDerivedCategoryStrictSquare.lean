@@ -91,10 +91,10 @@ theorem strictSquare_localized (δ : Φ₁ ⟶ Φ₀ ⋙ r) (p : r ⋙ u₁ ≅ 
       c.hom.app (u₀.obj (Φ₀.obj N)) ≫ B₀.hom.app N = B₁.hom.app N ≫ o.map (σ.app N))
     (loc : r.mapDerivedCategory ⋙ u₁.mapDerivedCategory ≅
       u₀.mapDerivedCategory ⋙ r'.mapDerivedCategory)
-    (hloc : loc = (mapDerivedCategoryCompIso r u₁).symm ≪≫ mapDerivedCategoryNatIso p ≪≫
-      mapDerivedCategoryCompIso u₀ r')
+    (hloc : loc = mapDerivedCategoryCompIso r u₁ ≪≫ mapDerivedCategoryNatIso p ≪≫
+      (mapDerivedCategoryCompIso u₀ r').symm)
     (coh : r'.mapDerivedCategory ⋙ s₁.mapDerivedCategory ≅ s₀.mapDerivedCategory)
-    (hcoh : coh = (mapDerivedCategoryCompIso r' s₁).symm ≪≫ mapDerivedCategoryNatIso c)
+    (hcoh : coh = mapDerivedCategoryCompIso r' s₁ ≪≫ mapDerivedCategoryNatIso c)
     (P : CochainComplex C ℤ) :
     s₁.mapDerivedCategory.map
         (u₁.mapDerivedCategory.map (strictSquareArrow Φ₁ Φ₀ r δ P) ≫
@@ -123,9 +123,9 @@ theorem strictSquare_localized (δ : Φ₁ ⟶ Φ₀ ⋙ r) (p : r ⋙ u₁ ≅ 
       ((r'.mapHomologicalComplex (ComplexShape.up ℤ)).obj L₀) ⟶
       (s₀.mapHomologicalComplex (ComplexShape.up ℤ)).obj L₀ :=
     (NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℤ)).app L₀
-  set loc := (mapDerivedCategoryCompIso r u₁).symm ≪≫ mapDerivedCategoryNatIso p ≪≫
-    mapDerivedCategoryCompIso u₀ r' with hloc_def
-  set coh := (mapDerivedCategoryCompIso r' s₁).symm ≪≫ mapDerivedCategoryNatIso c with hcoh_def
+  set loc := mapDerivedCategoryCompIso r u₁ ≪≫ mapDerivedCategoryNatIso p ≪≫
+    (mapDerivedCategoryCompIso u₀ r').symm with hloc_def
+  set coh := mapDerivedCategoryCompIso r' s₁ ≪≫ mapDerivedCategoryNatIso c with hcoh_def
   -- the inverse-image comparison on a localized complex
   have hloc : u₁.mapDerivedCategory.map (r.mapDerivedCategoryFactors.inv.app K₀) ≫
       loc.hom.app (DerivedCategory.Q.obj K₀) ≫
@@ -133,10 +133,10 @@ theorem strictSquare_localized (δ : Φ₁ ⟶ Φ₀ ⋙ r) (p : r ⋙ u₁ ≅ 
       r'.mapDerivedCategoryFactors.hom.app L₀ =
       u₁.mapDerivedCategoryFactors.hom.app _ ≫ DerivedCategory.Q.map p' := by
     have h₀ := mapDerivedCategoryCompIso_hom_app_factors u₀ r' K₀
-    have h₁ := (Iso.inv_comp_eq ((mapDerivedCategoryCompIso r u₁).app
-      (DerivedCategory.Q.obj K₀))).mpr (mapDerivedCategoryCompIso_hom_app_factors r u₁ K₀).symm
+    have h₁ := (Iso.eq_inv_comp ((mapDerivedCategoryCompIso r u₁).app
+      (DerivedCategory.Q.obj K₀))).mp (mapDerivedCategoryCompIso_hom_app_factors r u₁ K₀).symm
     have h₂ := mapDerivedCategoryNatIso_fac p K₀
-    simp only [Iso.app_inv] at h₁
+    simp only [Iso.app_hom] at h₁
     simp only [hloc_def, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
     rw [h₀, h₂, reassoc_of% h₁, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id,
       Category.id_comp]
@@ -144,11 +144,11 @@ theorem strictSquare_localized (δ : Φ₁ ⟶ Φ₀ ⋙ r) (p : r ⋙ u₁ ≅ 
   have hcoh : coh.hom.app (DerivedCategory.Q.obj L₀) ≫ s₀.mapDerivedCategoryFactors.hom.app L₀ =
       s₁.mapDerivedCategory.map (r'.mapDerivedCategoryFactors.hom.app L₀) ≫
         s₁.mapDerivedCategoryFactors.hom.app _ ≫ DerivedCategory.Q.map c' := by
-    have h₁ := (Iso.inv_comp_eq ((mapDerivedCategoryCompIso r' s₁).app
-      (DerivedCategory.Q.obj L₀))).mpr (mapDerivedCategoryCompIso_hom_app_factors r' s₁ L₀).symm
+    have h₁ := (Iso.eq_inv_comp ((mapDerivedCategoryCompIso r' s₁).app
+      (DerivedCategory.Q.obj L₀))).mp (mapDerivedCategoryCompIso_hom_app_factors r' s₁ L₀).symm
     have h₂ := mapDerivedCategoryNatIso_fac c L₀
-    simp only [Iso.app_inv] at h₁
-    simp only [hcoh_def, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+    simp only [Iso.app_hom] at h₁
+    simp only [hcoh_def, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
     rw [h₂, reassoc_of% h₁]
   -- the strict square on complexes
   have hstrict : (s₁.mapHomologicalComplex (ComplexShape.up ℤ)).map

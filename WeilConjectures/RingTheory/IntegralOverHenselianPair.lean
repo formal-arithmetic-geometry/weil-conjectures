@@ -58,7 +58,7 @@ theorem henselianRing_of_isIntegral
     rintro M ⟨-, hM⟩
     let : M.IsMaximal := hM
     have hcom : (M.comap (algebraMap A B)).IsMaximal :=
-      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal M
     apply Ideal.map_le_iff_le_comap.mpr
     exact HenselianRing.jac.trans (sInf_le ⟨bot_le, hcom⟩)
   apply (henselianRing_iff_factorization_criterion B J).1.mpr

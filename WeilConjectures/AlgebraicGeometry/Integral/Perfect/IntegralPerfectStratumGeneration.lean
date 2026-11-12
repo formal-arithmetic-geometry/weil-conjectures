@@ -285,11 +285,12 @@ private theorem derived_localization
   obtain ⟨f, g, h, hT⟩ := exact_functors_triangle
     (P ⋙ cbcOpenShriek d U.hom inferInstance) (Q ⋙ D) ε η hs K
   let a := (Functor.mapDerivedCategoryCompIso P
-    (cbcOpenShriek d U.hom inferInstance)).app K
-  let c := (Functor.mapDerivedCategoryCompIso Q D).app K ≪≫
+    (cbcOpenShriek d U.hom inferInstance)).symm.app K
+  let c := (Functor.mapDerivedCategoryCompIso Q D).symm.app K ≪≫
     (D.rightDerivedFunctorIsoMapDerivedCategory.app ((d.pull i).obj K)).symm
   refine ⟨a.inv ≫ f, g ≫ c.hom, c.inv ≫ h ≫ a.hom⟦(1 : ℤ)⟧',
-    isomorphic_distinguished _ hT _
+    Pretriangulated.isomorphic_distinguished
+      (C := DerivedCategory (pbcModules X (pbcAdicCompletion X d))) _ hT _
       (Triangle.isoMk _ _ a.symm (Iso.refl _) c.symm ?_ ?_ ?_)⟩
   · simp
   · simp [Category.assoc]

@@ -99,7 +99,8 @@ theorem flat_stalk_of_affineFlatOver_identity {Y : Scheme.{u}} (G : Y.Modules)
                 change G.val.map (homOfLE f.unop.le : W.unop.1.1 ⟶ U.unop.1.1).op
                   ((Y.presheaf.map (homOfLE U.unop.2.2).op).hom a • m) =
                   (Y.presheaf.map (homOfLE W.unop.2.2).op).hom a •
-                    G.val.map (homOfLE f.unop.le : W.unop.1.1 ⟶ U.unop.1.1).op m
+                    (show G.val.obj (op W.unop.1.1) from
+                      G.val.map (homOfLE f.unop.le : W.unop.1.1 ⟶ U.unop.1.1).op m)
                 rw [G.val.map_smul]
                 congr 1
                 change (Y.presheaf.map (homOfLE f.unop.le).op).hom

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.OrdinaryCocycle
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
@@ -162,13 +164,13 @@ private theorem pbcRestrictComp_factors (K : CochainComplex (pbcModules T B) ℤ
   dsimp only [pbcDerivedRestrictComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
   rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac]
   have hc' := Functor.mapDerivedCategoryCompIso_hom_app_factors (pbcRestrict ψ) (pbcRestrict φ) K
-  have hc2 : ((pbcRestrict ψ).mapDerivedCategoryCompIso (pbcRestrict φ)).inv.app
+  have hc2 : ((pbcRestrict ψ).mapDerivedCategoryCompIso (pbcRestrict φ)).hom.app
       (DerivedCategory.Q.obj K) ≫
         (pbcRestrict ψ ⋙ pbcRestrict φ).mapDerivedCategoryFactors.hom.app K =
       (pbcRestrict φ).mapDerivedCategory.map ((pbcRestrict ψ).mapDerivedCategoryFactors.hom.app K) ≫
         (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
           (((pbcRestrict ψ).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) := by
-    rw [← hc', Iso.inv_hom_id_app_assoc]
+    rw [← hc', Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% hc2]
   erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp, Iso.inv_hom_id_app_assoc, Category.comp_id]

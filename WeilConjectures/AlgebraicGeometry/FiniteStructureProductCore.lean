@@ -448,4 +448,6 @@ theorem finite_structure_product_section_identity
     G hG hproper ψ hψ
 
 
+
+
 end AlgebraicGeometry

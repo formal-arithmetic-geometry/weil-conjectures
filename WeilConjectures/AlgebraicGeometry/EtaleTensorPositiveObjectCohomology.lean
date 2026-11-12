@@ -151,7 +151,7 @@ theorem etaleTensorPositiveObjectCohomology
   have htarget : Subsingleton
       ((((K.homology (n + 1)) ⋙ AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (op (Scheme.Etale.mk U.ι)))) :=
-    ⟨fun x y ↦ ULift.ext x y (hobj.elim x.down y.down)⟩
+    ⟨fun x y ↦ ULift.ext (hobj.elim x.down y.down)⟩
   have hcoh : Subsingleton (ULift.{u + 1}
       (Sheaf.H' G (n + 1) (Scheme.Etale.mk U.ι))) :=
     @Function.Injective.subsingleton _ _ _ he.injective htarget

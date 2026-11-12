@@ -72,9 +72,9 @@ def pullbackSquare (C : Type v) [Category.{u + 1} C] [Abelian C]
   let CT := comparisonUpperStar C T
   let CZ := comparisonUpperStar C Z
   Functor.isoWhiskerLeft (comparison C T) P.leftDerivedFunctorIsoMapDerivedCategory ≪≫
-    (Functor.mapDerivedCategoryCompIso CT P).symm ≪≫
+    Functor.mapDerivedCategoryCompIso CT P ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso C i) ≪≫
-    Functor.mapDerivedCategoryCompIso E CZ ≪≫
+    (Functor.mapDerivedCategoryCompIso E CZ).symm ≪≫
     Functor.isoWhiskerRight E.leftDerivedFunctorIsoMapDerivedCategory.symm (comparison C Z)
 
 /-- The canonical direct-image mate, with its ordinary counit normalization built in.

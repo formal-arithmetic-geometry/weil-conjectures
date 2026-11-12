@@ -414,6 +414,11 @@ private theorem tensorTotal_mapAux
     Functor.map_id, NatTrans.id_app, Category.id_comp, Category.comp_id,
     ← HomologicalComplex₂.total.map_comp]
 
+private local instance (A : Sheaf J CommRingCat.{r}) (I : Type r) :
+    HasColimitsOfShape (Discrete I) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
 private theorem tensorTotal_map
     (A : Sheaf J CommRingCat.{r})
     {P P' Q Q' : CochainComplex (𝓜 A) ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :

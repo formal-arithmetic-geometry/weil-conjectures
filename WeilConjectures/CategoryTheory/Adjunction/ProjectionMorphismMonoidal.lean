@@ -65,7 +65,7 @@ lemma projectionMorphism_tensor (A : C) (B B' : D) :
   congr 1
   simp only [Category.assoc, comp_whiskerRight]
   rw [associator_naturality_left_assoc, Functor.OplaxMonoidal.associativity_assoc,
-    Iso.map_inv_hom_id_assoc, whisker_exchange_assoc, ← whiskerLeft_comp, Functor.Monoidal.δ_μ,
+    Iso.inv_hom_id_map_assoc, whisker_exchange_assoc, ← whiskerLeft_comp, Functor.Monoidal.δ_μ,
     whiskerLeft_id, Category.comp_id]
 
 end ProjectionMorphism

@@ -55,9 +55,9 @@ variable {X : Type a} {Y : Type b} {Z : Type c} {V : Type d}
 
 private theorem localization_square (δ : R ⋙ E ≅ F ⋙ S)
     (P : CochainComplex X ℤ) :
-    ((Functor.mapDerivedCategoryCompIso R E).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso R E) ≪≫
         Functor.mapDerivedCategoryNatIso δ ≪≫
-        Functor.mapDerivedCategoryCompIso F S).hom.app (DerivedCategory.Q.obj P) ≫
+        (Functor.mapDerivedCategoryCompIso F S).symm).hom.app (DerivedCategory.Q.obj P) ≫
         S.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         S.mapDerivedCategoryFactors.hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj P) =
@@ -76,7 +76,7 @@ private theorem localization_square (δ : R ⋙ E ≅ F ⋙ S)
   erw [hj, CategoryTheory.Functor.map_id, Category.comp_id] at h₂
   erw [h₁, Functor.mapDerivedCategoryNatIso_fac]
   erw [← h₂]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 end LocalizationSquare
 

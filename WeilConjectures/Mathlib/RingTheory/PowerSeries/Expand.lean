@@ -31,7 +31,8 @@ namespace PowerSeries
 theorem expand_inv {K : Type*} [Field K] (p : ℕ) (hp : p ≠ 0) (f : K⟦X⟧) :
     expand p hp f⁻¹ = (expand p hp f)⁻¹ := by
   by_cases hf : constantCoeff f = 0
-  · rw [inv_eq_zero.2 hf, map_zero, inv_eq_zero.2 (by rwa [constantCoeff_expand])]
+  · rw [PowerSeries.inv_eq_zero.2 hf, map_zero,
+      PowerSeries.inv_eq_zero.2 (by rwa [constantCoeff_expand])]
   · rw [eq_inv_iff_mul_eq_one (by rwa [constantCoeff_expand]), ← map_mul,
       PowerSeries.inv_mul_cancel _ hf, map_one]
 
@@ -44,14 +45,14 @@ theorem X_pow_dvd_expand_sub_C_constantCoeff {R : Type*} [CommRing R] (p : ℕ) 
   rw [map_sub, coeff_expand, coeff_C]
   rcases eq_or_ne m 0 with rfl | h0
   · simp
-  · rw [if_neg fun h ↦ (Nat.le_of_dvd (Nat.pos_of_ne_zero h0) h).not_gt hm, if_neg h0,
+  · rw [ite_eq_right fun h ↦ (Nat.le_of_dvd (Nat.pos_of_ne_zero h0) h).not_gt hm, ite_eq_right h0,
       sub_zero]
 
 variable {R : Type*} [CommRing R]
 
 /-- The `n`-th coefficient of `X f'` is `n` times that of `f`. -/
 theorem coeff_X_mul_derivative (f : R⟦X⟧) (n : ℕ) :
-    coeff n (X * derivative R f) = n * coeff n f := by
+    coeff n (X * derivative (R := R) f) = n * coeff n f := by
   rcases n with _ | n
   · simp
   · rw [coeff_succ_X_mul, coeff_derivative, mul_comm]
@@ -61,7 +62,8 @@ theorem coeff_X_mul_derivative (f : R⟦X⟧) (n : ℕ) :
 /-- The Euler operator `X d/dX` and the expansion `X ↦ X ^ p`:
 `X (f (X ^ p))' = p (X f')(X ^ p)`. -/
 theorem X_mul_derivative_expand (p : ℕ) (hp : p ≠ 0) (f : R⟦X⟧) :
-    X * derivative R (expand p hp f) = C (p : R) * expand p hp (X * derivative R f) := by
+    X * derivative (R := R) (expand p hp f) =
+      C (p : R) * expand p hp (X * derivative (R := R) f) := by
   ext n
   rw [coeff_X_mul_derivative, coeff_C_mul, coeff_expand, coeff_expand]
   split_ifs with h
@@ -82,15 +84,15 @@ lemma eq_sum_X_pow_mul_expand (f : PowerSeries R) :
       X ^ r * expand m hm (mk fun n ↦ coeff (m * n + r) f) := by
   ext N
   rw [map_sum, Finset.sum_eq_single (N % m)]
-  · rw [coeff_X_pow_mul', if_pos (Nat.mod_le N m), coeff_expand]
+  · rw [coeff_X_pow_mul', ite_eq_left (Nat.mod_le N m), coeff_expand]
     have hd : m ∣ N - N % m := Nat.dvd_sub_mod N
-    rw [if_pos hd, coeff_mk]
+    rw [ite_eq_left hd, coeff_mk]
     congr 1
     rw [Nat.mul_div_cancel' hd, Nat.sub_add_cancel (Nat.mod_le N m)]
   · intro r hr hrN
     rw [coeff_X_pow_mul']
     split_ifs with hrle
-    · rw [coeff_expand, if_neg]
+    · rw [coeff_expand, ite_eq_right]
       intro hd
       apply hrN
       have h2 : N % m = r % m := ((Nat.modEq_iff_dvd' hrle).2 hd).symm

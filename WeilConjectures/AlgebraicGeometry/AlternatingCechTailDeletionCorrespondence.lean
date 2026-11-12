@@ -95,7 +95,7 @@ private theorem outgoing_rank {I : Type v} [LinearOrder I] (p : ℕ)
       intro he
       apply hn
       simp only [cechJunction]
-      rw [dif_pos (by omega)]
+      rw [dite_eq_left (by omega)]
       congr 1
       exact Fin.ext he.symm
     omega
@@ -104,7 +104,7 @@ private theorem outgoing_rank {I : Type v} [LinearOrder I] (p : ℕ)
     intro he
     apply hn
     simp only [cechJunction]
-    rw [dif_neg (by omega)]
+    rw [dite_eq_right (by omega)]
     convert he using 1
     congr 1
     apply Fin.ext
@@ -185,7 +185,7 @@ private theorem outgoing_positive {I : Type v} [LinearOrder I] (p : ℕ)
   have he : x.val.2.2.2.val = x.val.2.1.val := by omega
   apply hn
   simp only [cechJunction]
-  rw [dif_pos (by omega)]
+  rw [dite_eq_left (by omega)]
   congr 1
   exact Fin.ext he
 
@@ -312,7 +312,7 @@ private theorem tail_delete_surjective {I : Type v} [LinearOrder I] (p : ℕ)
   let r : Fin (p + 3) := k.succ
   have hnj : cechJunction σ τ a r ≠ σ a := by
     simp only [cechJunction]
-    rw [dif_neg (by change ¬ k.val + 1 ≤ a.val; omega)]
+    rw [dite_eq_right (by change ¬ k.val + 1 ≤ a.val; omega)]
     intro he
     have hek : (⟨r.val - 1, by omega⟩ : Fin (p + 2)) = k := Fin.ext (by
       change k.val + 1 - 1 = k.val
@@ -412,14 +412,14 @@ theorem cechTailDeletionJunction {I : Type v} [LinearOrder I] (p : ℕ)
       dsimp only [r, b, y, a] at *
       omega)]
     simp only [cechJunction, Fin.val_castSucc]
-    rw [dif_pos (by dsimp only [a, b, y] at *; omega), dif_pos hz]
+    rw [dite_eq_left (by dsimp only [a, b, y] at *; omega), dite_eq_left hz]
     exact hp ⟨z.val, by omega⟩ hz
   · simp only [cechJunction]
-    rw [dif_neg hz]
+    rw [dite_eq_right hz]
     by_cases hzr : z.val < r.val
     · rw [Fin.succAbove_of_castSucc_lt _ _ (by exact hzr)]
       simp only [Fin.val_castSucc]
-      rw [dif_neg (by dsimp only [a, b, y] at *; omega)]
+      rw [dite_eq_right (by dsimp only [a, b, y] at *; omega)]
       have h := hτ ⟨z.val - 1, by omega⟩
       rw [Fin.succAbove_of_castSucc_lt _ _ (by
         simp only [Fin.lt_def, Fin.val_castSucc]
@@ -428,7 +428,7 @@ theorem cechTailDeletionJunction {I : Type v} [LinearOrder I] (p : ℕ)
       exact h
     · rw [Fin.succAbove_of_le_castSucc _ _ (by exact le_of_not_gt hzr)]
       simp only [Fin.val_succ]
-      rw [dif_neg (by dsimp only [a, b, y] at *; omega)]
+      rw [dite_eq_right (by dsimp only [a, b, y] at *; omega)]
       have h := hτ ⟨z.val - 1, by omega⟩
       rw [Fin.succAbove_of_le_castSucc _ _ (by
         simp only [Fin.le_def, Fin.val_castSucc]

@@ -41,7 +41,7 @@ variable (B : Type (u + 1)) [CommRing B]
 
 section NormalizedComparison
 attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   Functor.mapDerivedCategoryFactors Functor.rightDerivedFunctor HasDerivedCategory.standard
   constantSheaf DerivedCategory.Q rhoOrdinary alpha gamma
   WeilConjectures.SemilinearSections.systemRing coefficientMap VaryingRing.ringMap

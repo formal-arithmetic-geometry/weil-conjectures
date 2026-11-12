@@ -465,8 +465,7 @@ private theorem tensorRestriction_hom_ext (T : Scheme.{t})
     g.val.app U ((toSheafify (ProEt.topology T)
       (SheafOfModules.changeOfRingsPresheaf p M).presheaf).app U z)
   let : Module (R.obj.obj U) (S.obj.obj U) := Module.compHom _ (p.hom.app U).hom
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s x =>
     obtain ⟨r, rfl⟩ := hp U s
     have he : (p.hom.app U r) ⊗ₜ[R.obj.obj U,(p.hom.app U).hom] x =

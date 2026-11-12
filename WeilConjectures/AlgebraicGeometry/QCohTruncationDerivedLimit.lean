@@ -120,7 +120,7 @@ theorem rightDerivedFunctor_qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{
             (-(n : ℤ))).app E)) := by
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_π, Pi.lift_π]
+    rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_comp_π, Pi.lift_comp_π]
   exact ⟨_, hp ▸ h⟩
 
 end AlgebraicGeometry

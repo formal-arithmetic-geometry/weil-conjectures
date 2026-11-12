@@ -81,6 +81,7 @@ lemma toFiniteEtale_pullback :
     (t.pullback f).toFiniteEtale = (FiniteEtale.pullback f).obj t.toFiniteEtale :=
   rfl
 
+
 @[simp]
 lemma pullback_P : (t.pullback f).P = Limits.pullback t.π f :=
   rfl

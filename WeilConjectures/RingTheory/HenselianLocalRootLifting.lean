@@ -46,7 +46,7 @@ private theorem lift_idempotent_small
   refine ⟨E e, he.1.map E, ?_⟩
   have h := congrArg Q he.2
   rw [Q.apply_symm_apply] at h
-  simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_ringEquiv] using h
+  simpa only [Q, Ideal.quotientEquiv_mk, AlgEquiv.coe_toRingEquiv] using h
 
 private theorem factorization_of_lifting
     {R : Type u} [CommRing R] [IsLocalRing R]
@@ -181,7 +181,7 @@ theorem idempotent_lifting_iff_monic_simple_root_lifting
       · have hc := congrArg (fun p : (ResidueField R)[X] ↦ p.coeff 0) hgm
         simpa using congrArg Neg.neg hc
     · intro H B _ _ _ e₀ he₀
-      have : HenselianLocalRing R := ((HenselianLocalRing.TFAE R).out 1 0).mp H
+      have : HenselianLocalRing R := ((HenselianLocalRing.TFAE R).out 2 1).mp H
       exact Algebra.existsUnique_isIdempotentElem_of_henselianRing
         R (maximalIdeal R) B e₀ he₀
 

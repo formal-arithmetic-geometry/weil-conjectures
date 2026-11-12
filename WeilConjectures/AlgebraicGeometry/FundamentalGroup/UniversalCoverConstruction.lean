@@ -520,7 +520,7 @@ lemma isIso_graphDesc (P : Y.FiniteEtale) [IsGalois P] :
   refine isIso_sigmaDesc_of_existsUnique (M := ULift.{u + 1} (Aut P)) y P
     (fun m ↦ m.down.hom) fun a b ↦ ?_
   obtain ⟨σ, hσ, hu⟩ := (evaluation_aut_bijective_of_isGalois (fiber y) P a).existsUnique b
-  exact ⟨⟨σ⟩, hσ, fun m hm ↦ ULift.ext _ _ (hu m.down hm)⟩
+  exact ⟨⟨σ⟩, hσ, fun m hm ↦ ULift.ext (hu m.down hm)⟩
 
 include y in
 omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
@@ -538,7 +538,7 @@ lemma exists_aut_of_mem_pullback (P : Y.FiniteEtale) [IsGalois P]
     ((inv Φ).base q)
   refine ⟨m.down, z, ?_⟩
   rw [sigmaOpenCover_f] at hz
-  rw [← Sigma.ι_desc (fun m : ULift.{u + 1} (Aut P) ↦ Limits.pullback.lift (f := P.obj.hom)
+  rw [← Sigma.ι_comp_desc (fun m : ULift.{u + 1} (Aut P) ↦ Limits.pullback.lift (f := P.obj.hom)
     (g := P.obj.hom) m.down.hom.hom.left (𝟙 P.obj.left)
       (by rw [Category.id_comp]; exact hom_left_comp m.down.hom)) m, Scheme.Hom.comp_apply]
   erw [hz]
@@ -561,7 +561,7 @@ lemma aut_eq_of_pullback_lift_eq (P : Y.FiniteEtale) [IsGalois P] (σ σ' : Aut 
   have e (τ : Aut P) (w : P.obj.left) : (Limits.pullback.lift (f := P.obj.hom) (g := P.obj.hom)
       τ.hom.hom.left (𝟙 P.obj.left) (by rw [Category.id_comp]; exact hom_left_comp τ.hom)).base w =
       Φ.base ((Sigma.ι (fun _ : ULift.{u + 1} (Aut P) ↦ P.obj.left) ⟨τ⟩).base w) := by
-    rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+    rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
   rw [e, e] at h
   have h' := (sigmaι_eq_iff _ _ _ _ _).mp (((ConcreteCategory.bijective_of_isIso Φ.base).1) h)
   exact congrArg ULift.down (Sigma.mk.inj_iff.mp h').1
@@ -808,7 +808,7 @@ lemma isLocallyConstant_pairIndex (j : Index y) : IsLocallyConstant (pairIndex y
   have : IsIso (Sigma.desc fun m : ULift.{u + 1} (Aut ((obj y).obj j)) ↦ gr m.down) :=
     isIso_graphDesc y ((obj y).obj j)
   have hgr (σ : Aut ((obj y).obj j)) : IsOpenImmersion (gr σ) := by
-    rw [← Sigma.ι_desc (fun m : ULift.{u + 1} (Aut ((obj y).obj j)) ↦ gr m.down) ⟨σ⟩]
+    rw [← Sigma.ι_comp_desc (fun m : ULift.{u + 1} (Aut ((obj y).obj j)) ↦ gr m.down) ⟨σ⟩]
     infer_instance
   have h (σ : Aut ((obj y).obj j)) : pairIndex y j ⁻¹' {σ} = Set.range (gr σ).base := by
     ext w

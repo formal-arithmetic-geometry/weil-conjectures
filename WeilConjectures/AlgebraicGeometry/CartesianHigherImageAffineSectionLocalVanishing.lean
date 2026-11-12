@@ -25,6 +25,14 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance cartesianHigherImageAffineSectionHasShift (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
+noncomputable local instance cartesianHigherImageAffineSectionHasZeroMorphisms (T : Scheme.{u}) :
+    HasZeroMorphisms (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
+  inferInstance
+
 private noncomputable def rawSectionsComparison
     (S : Scheme.{u}) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) :

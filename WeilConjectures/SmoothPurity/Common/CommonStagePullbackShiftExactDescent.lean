@@ -17,7 +17,7 @@ Source: the Weil-structures paragraph of the current blueprint.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry

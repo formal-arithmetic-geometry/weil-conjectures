@@ -88,8 +88,9 @@ theorem charpoly_roots_eq_of_mul_charpolyRev_eq (f : Module.End K V) (g : Module
   have e2 := congrArg (Multiset.filter (fun x ↦ ¬ P x)) hroots
   rw [Multiset.filter_add, Multiset.filter_add, Multiset.filter_eq_self.2 hmemg,
     Multiset.filter_eq_nil.2 hmemf, Multiset.filter_eq_nil.2 hPS, Multiset.filter_singleton,
-    if_pos hPa, add_zero, zero_add] at e1
-  rw [Multiset.filter_add, Multiset.filter_add, Multiset.filter_singleton, if_neg (not_not.2 hPa),
+    ite_eq_left hPa, add_zero, zero_add] at e1
+  rw [Multiset.filter_add, Multiset.filter_add, Multiset.filter_singleton,
+    ite_eq_right (not_not.2 hPa),
     Multiset.filter_eq_self.2 hmemf, Multiset.filter_eq_self.2 hPS,
     Multiset.filter_eq_nil.2 fun x hx hn ↦ hn (hmemg x hx), Multiset.empty_eq_zero, zero_add,
     add_zero] at e2

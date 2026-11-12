@@ -431,7 +431,7 @@ Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius
 def pullComp {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
     pull d (u ≫ v) ≅ pull d v ⋙ pull d u :=
   Functor.mapDerivedCategoryNatIso (modulePullComp d u v) ≪≫
-    Functor.mapDerivedCategoryCompIso (modulePull d v) (modulePull d u)
+    (Functor.mapDerivedCategoryCompIso (modulePull d v) (modulePull d u)).symm
 
 /-- The Frobenius face comparison, directed Phi_U Lu* to Lu* Phi_V.
 Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
@@ -656,9 +656,9 @@ theorem moduleRestrictionPull_exists {U V : Scheme.{t}} (u : U ⟶ V) :
 Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
 def restrictionPull {U V : Scheme.{t}} (u : U ⟶ V) :
     pull d u ⋙ restriction d U ≅ restriction d V ⋙ d.towerPull u :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleRestrictionPull_exists d u).exists.choose ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Comparison of quotient and ambient derived direct image, normalized by universal units.
 Source: blueprint paragraph 4; Stacks 0D6E
@@ -758,9 +758,9 @@ Source: blueprint paragraph 4
 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
 def evaluationPull {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :
     pull d u ⋙ evaluation d U n ≅ evaluation d V n ⋙ d.finitePull u n :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleEvaluationPull_exists d u n).exists.choose ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The finite direct-image cochain unit, before any evaluation of a resolution.
 Source: blueprint paragraph 4
@@ -813,12 +813,12 @@ Source: blueprint paragraph 4
 def restrictionEvaluation (T : Scheme.{t}) (n : ℕ) :
     restriction d T ⋙ ambientEvaluation d T n ≅
       evaluation d T n ⋙ finiteRestriction d T n :=
-  (Functor.mapDerivedCategoryCompIso (moduleRestriction d T)
-    (ambientModuleEvaluation d T n)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (moduleRestriction d T)
+    (ambientModuleEvaluation d T n) ≪≫
     Functor.mapDerivedCategoryNatIso
       (moduleRestrictionEvaluation_exists d T n).exists.choose ≪≫
-    Functor.mapDerivedCategoryCompIso (moduleEvaluation d T n)
-      (reductionRestrict T (d.projection T n))
+    (Functor.mapDerivedCategoryCompIso (moduleEvaluation d T n)
+      (reductionRestrict T (d.projection T n))).symm
 
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}

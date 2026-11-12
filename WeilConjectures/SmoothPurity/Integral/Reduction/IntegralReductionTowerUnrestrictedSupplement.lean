@@ -108,8 +108,7 @@ private noncomputable def sectionMap (U : Cᵒᵖ) :
     { toFun := TensorProduct.map h (LinearMap.id : M.val.obj U →ₗ[R.obj.obj U] M.val.obj U)
       map_add' := map_add _
       map_smul' := fun s z ↦ by
-        induction z using TensorProduct.induction_on with
-        | zero => simp only [smul_zero, map_zero]
+        induction z using TensorProduct.inductionOn with
         | tmul t x =>
           change S.obj.obj U at t
           change q.hom.app U (s * t) ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x =
@@ -121,6 +120,15 @@ private theorem sectionMap_tmul (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U
     sectionMap f g q hq M U (s ⊗ₜ[R.obj.obj U,(f.hom.app U).hom] x) =
       (show (changeOfRingsPresheaf g M).obj U from
         q.hom.app U s ⊗ₜ[R.obj.obj U,(g.hom.app U).hom] x) := rfl
+
+private local instance {A : Sheaf J CommRingCat.{r}}
+    {N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)}
+    {U V : Cᵒᵖ} (i : U ⟶ V) :
+    Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map i).hom).obj
+          (N.val.obj V)) :=
+  inferInstanceAs (Module (A.obj.obj V) (N.val.obj V))
 
 private theorem restriction_tmul {A B : Sheaf J CommRingCat.{r}} (c : A ⟶ B)
     (N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
@@ -214,8 +222,7 @@ private theorem restricted_hom_ext
   apply Sheaf.hom_ext
   apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s x => exact h U s x
   | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
 

@@ -82,27 +82,27 @@ def isAffine : ObjectProperty (PointedEtaleNeighborhood s) :=
 
 /-- The pointed étale neighbourhood `(S, s)`; it is a terminal object. -/
 noncomputable def base : PointedEtaleNeighborhood s :=
-  ⟨Etale.mk (𝟙 S), CategoryTheory.Over.homMk s (by simp)⟩
+  Functor.elementsMk _ (Etale.mk (𝟙 S)) (CategoryTheory.Over.homMk s (by simp))
 
 /-- The structure morphism of a pointed étale neighbourhood, as a morphism to `base s`. -/
 noncomputable def toBase (x : PointedEtaleNeighborhood s) : x ⟶ base s :=
-  CategoryOfElements.homMk _ _ (MorphismProperty.Over.homMk x.1.hom (Category.comp_id _)) (by
-    obtain ⟨X, x⟩ := x
+  Functor.Elements.homMk (MorphismProperty.Over.homMk x.1.hom (Category.comp_id _)) (by
+    obtain @⟨X, x⟩ := x
     exact CategoryTheory.Over.OverMorphism.ext (CategoryTheory.Over.w x))
 
 /-- The pointed étale neighbourhood `(S, s)` is terminal. -/
 noncomputable def isTerminalBase : IsTerminal (base s) :=
   IsTerminal.ofUniqueHom (toBase s) fun x f ↦ by
-    apply Subtype.ext
+    apply Functor.Elements.hom_ext
     apply MorphismProperty.Over.Hom.ext
-    exact f.1.w.trans (Category.comp_id _)
+    exact f.hom.w.trans (Category.comp_id _)
 
 /-- Every pointed étale neighbourhood `(V, v)` is refined by the spectrum of a ring with an
 étale morphism to `S`: take an affine open of `V` containing the image of `v`. -/
 lemma exists_precomp_hom (d : PointedEtaleNeighborhood s) :
     ∃ c, Nonempty ((Functor.Elements.precomp (AffineEtale.Spec S)
       (pointSmallEtale s).fiber).obj c ⟶ d) := by
-  obtain ⟨X, x⟩ := d
+  obtain @⟨X, x⟩ := d
   cases X with | _ Y f
   obtain ⟨y, hy, rfl⟩ := CategoryTheory.Over.homMk_surjective x
   dsimp at y hy
@@ -166,7 +166,7 @@ end AffinePointedEtaleNeighborhood
 
 /-- The underlying scheme of a pointed étale neighbourhood. -/
 noncomputable def neighborhoodDiagram : PointedEtaleNeighborhood s ⥤ Scheme.{u} :=
-  CategoryOfElements.π _ ⋙ Etale.forget S ⋙ CategoryTheory.Over.forget S
+  Functor.Elements.π _ ⋙ Etale.forget S ⋙ CategoryTheory.Over.forget S
 
 /-- The underlying scheme of an affine pointed étale neighbourhood. -/
 noncomputable def affineNeighborhoodDiagram : AffinePointedEtaleNeighborhood s ⥤ Scheme.{u} :=
@@ -213,6 +213,7 @@ noncomputable def strictLocalizationCone : Cone (affineNeighborhoodDiagram s) :=
 
 lemma strictLocalizationCone_pt : (strictLocalizationCone s).pt = strictLocalization s := rfl
 
+
 lemma strictLocalizationCone_π_app (x : AffinePointedEtaleNeighborhood s) :
     (strictLocalizationCone s).π.app x =
       Spec.map (colimit.ι (strictHenselizationDiagram s) (op x)) ≫
@@ -252,7 +253,7 @@ lemma strictLocalizationCone_π_app_hom (x : AffinePointedEtaleNeighborhood s) :
 /-- The diagram of affine pointed étale neighbourhoods of `s`, as schemes over `S`. -/
 noncomputable def affineNeighborhoodDiagramOver :
     AffinePointedEtaleNeighborhood s ⥤ CategoryTheory.Over S :=
-  AffinePointedEtaleNeighborhood.ι s ⋙ CategoryOfElements.π _ ⋙ Etale.forget S
+  AffinePointedEtaleNeighborhood.ι s ⋙ Functor.Elements.π _ ⋙ Etale.forget S
 
 /-- The strict localization `S_(s)` as a cone over the affine pointed étale neighbourhoods of
 `s` in the category of schemes over `S`. -/
@@ -301,6 +302,7 @@ lemma isLimitStrictLocalizationConePullback_pt {X : Scheme.{u}} (f : X ⟶ S) :
       pullback (strictLocalizationToBase s) f :=
   rfl
 
+
 section Stalk
 
 variable (A : Type*) [Category A] [HasColimitsOfSize.{u, u} A]
@@ -344,6 +346,7 @@ theorem shortExact_map_geometricStalkFunctor
     {T : ShortComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})} (hT : T.ShortExact) :
     (T.map (geometricStalkFunctor s AddCommGrpCat.{u})).ShortExact :=
   hT.map_of_exact _
+
 
 end Stalk
 

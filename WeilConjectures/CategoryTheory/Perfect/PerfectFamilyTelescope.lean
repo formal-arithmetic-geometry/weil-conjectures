@@ -100,7 +100,7 @@ private theorem perfect_sum_kernel
   let e (i : I) : (∐ F i) ⟶ K i := Sigma.desc fun e ↦ e.2
   have he (i : I) (j : J) : Function.Surjective (fun g : S j ⟶ ∐ F i ↦ g ≫ e i) := by
     intro g
-    exact ⟨Sigma.ι (F i) ⟨j, g⟩, Sigma.ι_desc _ _⟩
+    exact ⟨Sigma.ι (F i) ⟨j, g⟩, Sigma.ι_comp_desc _ _⟩
   obtain ⟨g', hg'⟩ := hperfect I (fun i ↦ ∐ F i) K e he j g
   change g' ≫ Limits.Sigma.map e = g at hg'
   rw [← hg, ← hg']
@@ -113,7 +113,7 @@ private theorem perfect_sum_kernel
   have hi : e i ≫ k i ≫ c = 0 := by
     apply Sigma.hom_ext
     intro a
-    simp only [e, Sigma.ι_desc_assoc, comp_zero]
+    simp only [e, Sigma.ι_comp_desc_assoc, comp_zero]
     rw [← Category.assoc]
     apply hkill a.1
     rw [← hb i, ← map_comp_apply]
@@ -197,12 +197,12 @@ private theorem perfectFamily_tower_separation
       rw [map_comp_apply, hb, hg, sub_self]
     refine ⟨g ≫ biprod.inl + Sigma.ι (F n) ⟨j, f - g ≫ b n, hk⟩ ≫ biprod.inr, ?_⟩
     simp only [Preadditive.add_comp, Category.assoc, p, biprod.inl_desc,
-      biprod.inr_desc, κ, Sigma.ι_desc]
+      biprod.inr_desc, κ, Sigma.ι_comp_desc]
     exact add_sub_cancel _ _
   have hκa (n : ℕ) : κ n ≫ a n = 0 := by
     apply Sigma.hom_ext
     intro k
-    simpa only [κ, Sigma.ι_desc_assoc, comp_zero] using hkill n k.1 k.2.val k.2.property
+    simpa only [κ, Sigma.ι_comp_desc_assoc, comp_zero] using hkill n k.1 k.2.val k.2.property
   -- Compare the tower with the constant sequences at its first two stages.
   let Y₀ : ℕ → C := fun _ ↦ X 0
   let Y₁ : ℕ → C := fun _ ↦ X 1
@@ -250,7 +250,7 @@ private theorem perfectFamily_tower_separation
     rw [Limits.Sigma.ι_map, Limits.Sigma.ι_map]
     change b (n + 1) ≫ Telescope.ι X (n + 1) =
       (a 0 ≫ Sigma.ι (fun _ : ULift.{v} ℕ ↦ X 1) (ULift.up n)) ≫ c₁
-    simpa only [Category.assoc, c₁, Sigma.ι_desc] using
+    simpa only [Category.assoc, c₁, Sigma.ι_comp_desc] using
       congrArg (fun k ↦ k ≫ Telescope.ι X (n + 1)) (hb₁ n)
   have hpa (n : ℕ) : p n ≫ a n = biprod.fst ≫ b (n + 1) := by
     apply biprod.hom_ext'
@@ -269,7 +269,7 @@ private theorem perfectFamily_tower_separation
     change p n.down ≫ Telescope.ι X n.down ≫ Telescope.shift X a = _
     rw [Telescope.ι_shift, ← Category.assoc, hpa, Category.assoc]
     dsimp only [c₀, s₀]
-    rw [Sigma.ι_desc_assoc]
+    rw [Sigma.ι_comp_desc_assoc]
     simp only [Category.assoc, Telescope.ι_shift_assoc, Category.id_comp]
     change _ = biprod.fst ≫ (Sigma.ι _ (ULift.up (n.down + 1)) ≫ B)
     dsimp only [B]
@@ -384,12 +384,12 @@ theorem perfectFamily_telescope_bijective
       rw [map_comp_apply, hb, hg, sub_self]
     refine ⟨g ≫ biprod.inl + Sigma.ι (F n) ⟨j, f - g ≫ b n, hk⟩ ≫ biprod.inr, ?_⟩
     simp only [Preadditive.add_comp, Category.assoc, p, biprod.inl_desc,
-      biprod.inr_desc, κ, Sigma.ι_desc]
+      biprod.inr_desc, κ, Sigma.ι_comp_desc]
     exact add_sub_cancel _ _
   have hκa (n : ℕ) : κ n ≫ a n = 0 := by
     apply Sigma.hom_ext
     intro k
-    simpa only [κ, Sigma.ι_desc_assoc, comp_zero] using hkill n k.1 k.2.val k.2.property
+    simpa only [κ, Sigma.ι_comp_desc_assoc, comp_zero] using hkill n k.1 k.2.val k.2.property
   have hκq (n : ℕ) : κ n ≫ Telescope.ι X n ≫ q = 0 := by
     rw [Telescope.ι_π hT n, ← Category.assoc, hκa, zero_comp]
   have hpq (n : ℕ) : p n ≫ Telescope.ι X n ≫ q = biprod.fst ≫ Telescope.ι X 0 ≫ q := by
@@ -407,7 +407,7 @@ theorem perfectFamily_telescope_bijective
     apply Sigma.hom_ext
     intro n
     dsimp only [ps, c]
-    simp only [Limits.Sigma.ι_map_assoc, Sigma.ι_desc_assoc]
+    simp only [Limits.Sigma.ι_map_assoc, Sigma.ι_comp_desc_assoc]
     exact hpq n.down
   have hfactor (j : J) (f : S j ⟶ T) :
       ∃ g : S j ⟶ X 0, f = g ≫ Telescope.ι X 0 ≫ q := by

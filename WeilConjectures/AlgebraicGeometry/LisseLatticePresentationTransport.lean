@@ -53,14 +53,14 @@ private theorem ulift_preservesSheafification
     have hh := Presheaf.equalizerSieve_mem J f x.down y.down hh'
     apply J.superset_covering _ hh
     intro W g hg
-    exact ULift.ext _ _ hg
+    exact ULift.ext hg
   have : Presheaf.IsLocallySurjective J g := by
     constructor
     intro X x
     apply J.superset_covering _ (Presheaf.imageSieve_mem J f x.down)
     intro W g hg
     obtain ⟨y, hy⟩ := hg
-    exact ⟨ULift.up y, ULift.ext _ _ hy⟩
+    exact ⟨ULift.up y, ULift.ext hy⟩
   exact J.W_of_isLocallyBijective g
 private instance sliceFrom_dense (X : Scheme.{u}) (W : X.ProEt) :
     (sliceEquiv X W).inverse.IsDenseSubsite

@@ -90,7 +90,7 @@ lemma Scheme.bijective_appTop_sigmaι {ι : Type*} [Finite ι] (X : ι → Schem
       exact (adj.homEquiv _ (op B)).apply_symm_apply _
     refine ⟨ψ Polynomial.X, funext fun i ↦ mor_inj _ _ ?_⟩
     dsimp only
-    rw [← mor_comp, h1, Sigma.ι_desc]
+    rw [← mor_comp, h1, Sigma.ι_comp_desc]
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -153,6 +153,7 @@ lemma gmSheafToLowerStarGmSheaf_app_val {V : X.Etale} (x : X.gmSheaf.obj.obj (op
       (pullback.fst V.hom g).appTop
         ((Additive.toMul x.down : Γ(V.left, ⊤)ˣ) : Γ(V.left, ⊤)) :=
   rfl
+
 
 end Scheme
 
@@ -296,7 +297,7 @@ lemma bijective_localSection_appTop :
   convert h using 1
   funext x a
   simp only [Function.comp_apply]
-  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Sigma.ι_desc]
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Sigma.ι_comp_desc]
 
 end Local
 
@@ -315,9 +316,10 @@ lemma pushforwardGmUnits_add (x y : t.pushforwardGm.obj.obj (op U)) :
     t.pushforwardGmUnits (x + y) = t.pushforwardGmUnits x * t.pushforwardGmUnits y :=
   rfl
 
+
 lemma injective_pushforwardGmUnits :
     Function.Injective (t.pushforwardGmUnits (U := U)) :=
-  fun _ _ h ↦ ULift.ext _ _ (Additive.toMul.injective h)
+  fun _ _ h ↦ ULift.ext (Additive.toMul.injective h)
 
 lemma pushforwardGmUnits_translate (b : M) (x : t.pushforwardGm.obj.obj (op U)) :
     (t.pushforwardGmUnits ((t.pushforwardGmTranslate b).hom.app (op U) x) :

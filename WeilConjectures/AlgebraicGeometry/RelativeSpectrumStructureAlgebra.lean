@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Structure algebra from compatible spectral charts
 

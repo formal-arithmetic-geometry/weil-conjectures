@@ -58,7 +58,7 @@ lemma universallyInjective_specMap_iterateFrobeniusOfPrime {R : CommRingCat.{u}}
     (hR : (p : R) = 0) (n : ℕ) :
     UniversallyInjective (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime R hp hR n))) := by
   have h := (tfae_universallyInjective
-    (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime R hp hR n)))).out 0 1
+    (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime R hp hR n)))).out 1 2
   rw [h]
   intro K _ g₁ g₂ hg
   rw [← Spec.map_preimage g₁, ← Spec.map_preimage g₂] at hg ⊢

@@ -93,6 +93,10 @@ local notation "𝓡" T => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" φ => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ
 
+noncomputable local instance (M : SheafOfModules.{u} (𝓡 R)) (V : Cᵒᵖ) :
+    SMul ((unit (𝓡 R)).val.obj V) (M.val.obj V) :=
+  inferInstanceAs (SMul ((𝓡 R).obj.obj V) (M.val.obj V))
+
 private theorem coordinatesForFunctor (a : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
       (restrictScalars (𝓻 a)).obj (unit (𝓡 S)))
@@ -167,8 +171,7 @@ private theorem coordinatesForFunctor (a : R ⟶ S) (d : ℕ)
   apply (cancel_epi v).mp
   apply SheafOfModules.scalarExtension_hom_ext_of_basis a d e M M
   ext V z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add z w hz hw => simp only [map_add, hz, hw]
   | tmul s x =>
     have hh := (hγ M V s x j).trans (hβ M V s x j).symm
@@ -176,6 +179,11 @@ private theorem coordinatesForFunctor (a : R ⟶ S) (d : ℕ)
     exact hh
 
 end OrdinaryProof
+
+noncomputable local instance (W : Scheme.{u}) {R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
+    (M : pbcModules W R) (V : W.ProEtᵒᵖ) :
+    SMul ((SheafOfModules.unit ((adicLisseForget W).obj R)).val.obj V) (M.val.obj V) :=
+  inferInstanceAs (SMul (((adicLisseForget W).obj R).obj.obj V) (M.val.obj V))
 
 attribute [local irreducible] CategoryTheory.Limits.limit
 

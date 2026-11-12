@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeRhoLambda
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import all WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeRhoLambda
 public import WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantReductionTower
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
@@ -191,6 +193,11 @@ theorem completedReductionAugmentation_complexCounit (T : Scheme.{t})
             (G := completedReductionModuleTowerFunctor T d) (completedReductionModuleUnit d T)
             (.up ℤ)).app P) := by
   have h := (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
+  dsimp only [HasCompletedReductionTowerUnitNormalization, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift,
+    Functor.mapHomotopyCategoryFactors, NatIso.ofComponents, Iso.refl] at h
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id] at h
   unfold completedReductionTowerComplexCounit Scheme.reductionComplexCounit
   change _ ≫ ((completedReductionTower T d).map (𝟙 _) ≫
     (coherenceReductionTowerCounit T d).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫

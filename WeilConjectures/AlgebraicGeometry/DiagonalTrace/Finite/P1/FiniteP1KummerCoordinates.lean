@@ -67,7 +67,7 @@ def finiteKummerLineCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     finiteKummerLine l E X n ≅
       (finiteOverRealization l E n e).obj
         (geoP1Twist (FiniteRing l E n) (l ^ (n + 1))
-          (ULift.ext _ _ (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2) :=
+          (ULift.ext (coefficient_annihilates l E n)) (ProjectiveLine S) 1 2) :=
   ((shiftFunctor _ (2 : ℤ)).mapIso
     ((SpTowerP1.nuSingle l E n X _) ≪≫
       (DerivedCategory.singleFunctor _ 0).mapIso c.line)).symm ≪≫
@@ -76,7 +76,7 @@ def finiteKummerLineCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
       (Scheme.sfIntrinsicModuleEquivalence X (SpTowerShriek.R l E n)).functor).mapIso
       (geoP1TwistPullback (FiniteRing l E n) (l ^ (n + 1))
         (pow_pos (Fact.out : l.Prime).pos _)
-        (ULift.ext _ _ (coefficient_annihilates l E n)) e.hom
+        (ULift.ext (coefficient_annihilates l E n)) e.hom
         (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)
           (by simpa only [Nat.cast_pow] using hS.pow (n + 1))) 1 2).symm
 
@@ -105,7 +105,7 @@ def finiteP1OrdinaryKummerArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
       ((geoP1Comparison (FiniteRing l E n) (ProjectiveLine S)).map
         (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))
           (pow_pos (Fact.out : l.Prime).pos _)
-          (ULift.ext _ _ (coefficient_annihilates l E n)) S
+          (ULift.ext (coefficient_annihilates l E n)) S
           (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))) ≫
     (finiteKummerLineCoordinate l E n e hS c).inv
 

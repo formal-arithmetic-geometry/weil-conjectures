@@ -153,8 +153,7 @@ private theorem quasicoherent_affine_stalk_germ_localization (X : Scheme.{u}) (F
         have h := congrArg (F.presheaf.map (homOfLE hgV).op) heq
         rw [← Functor.map_comp_apply, ← Functor.map_comp_apply] at h
         rw [map_sub, sub_eq_zero]
-        convert h using 1 <;>
-          exact congrArg (fun i ↦ F.presheaf.map i _) (Subsingleton.elim _ _)
+        convert h using 1
       obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_isAffineOpen F U.2 g (m₁ - m₂) hz
       refine ⟨⟨g ^ n, S.pow_mem (hprime g hxg) n⟩, ?_⟩
       exact sub_eq_zero.mp ((smul_sub _ _ _).symm.trans hn)

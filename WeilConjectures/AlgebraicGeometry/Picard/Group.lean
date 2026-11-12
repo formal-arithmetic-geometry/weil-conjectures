@@ -71,6 +71,10 @@ namespace Scheme.Pic
 
 variable {X Y : Scheme.{u}}
 
+local instance (Y : Scheme.{u}) :
+    SheafOfModules.IsInvertible.{u, u, u} (SheafOfModules.unit Y.ringCatSheaf) :=
+  SheafOfModules.instIsInvertibleUnit.{u, u, u}
+
 /-- The chosen representative of a class in the Picard group is invertible. -/
 instance isInvertible_fromSkeleton (L : Y.Pic) :
     Modules.IsInvertible ((fromSkeleton Y.Modules).obj L.val) :=

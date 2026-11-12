@@ -149,6 +149,7 @@ theorem SpectralSequence.Hom.isIso_pageInfinity {E E' : E₂CohomologicalSpectra
   have := φ.isIso_hom h (pq.1 + pq.2 + 2 : ℕ) (by lia)
   infer_instance
 
+
 end PageInduction
 
 end CategoryTheory

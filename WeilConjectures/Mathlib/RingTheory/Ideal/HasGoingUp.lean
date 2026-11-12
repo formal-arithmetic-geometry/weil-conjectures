@@ -28,7 +28,7 @@ chain of primes of `S` gives a strict chain of primes of `R` (incomparability). 
 theorem ringKrullDim_le_of_isIntegral (R S : Type*) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.IsIntegral R S] : ringKrullDim S ≤ ringKrullDim R :=
   Order.krullDim_le_of_strictMono (PrimeSpectrum.comap (algebraMap R S))
-    fun _ _ h ↦ Ideal.IsIntegral.comap_lt_comap (R := R) h
+    fun _ _ h ↦ Ideal.IsIntegral.under_lt_under (R := R) h
 
 /-- An injective integral extension `R → S` preserves the Krull dimension:
 `dim S = dim R` (Stacks `00OK`). Incomparability bounds `dim S ≤ dim R`, and lying over together

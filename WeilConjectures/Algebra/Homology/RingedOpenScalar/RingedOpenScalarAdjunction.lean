@@ -52,7 +52,6 @@ def Equations {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     qR.map (e.hom.app N) = adjR.unit.app (rU.obj N)) ∧
   (∀ Q : C, e.hom.app (qS.obj Q) ≫ JR.map (d.inv.app Q) ≫
     adjR.counit.app (rT.obj Q) = rT.map (adjS.counit.app Q))
-
 /-- The canonical exact-derived square, retaining the standard composition factors.
 Source: Stacks 015F (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
 def derivedSquare {A B C D : Type t} [Category.{h} A] [Category.{h} B]
@@ -67,8 +66,8 @@ def derivedSquare {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     [PreservesFiniteLimits K] [PreservesFiniteColimits K] (e : F ⋙ G ≅ H ⋙ K) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ K.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso H K
+  Functor.mapDerivedCategoryCompIso F G ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso H K).symm
 
 /-- All termwise and localized forms of the two equations for the same square.
 The tower index 0 denotes the original index 1.
@@ -162,6 +161,7 @@ def Transport {A B C D : Type t} [Category.{h} A] [Category.{h} B]
         ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso d))
       (OpenTensorNormalization.exactDerivedAdjunction (adjS.whiskerRight ℕᵒᵖ))
       (OpenTensorNormalization.exactDerivedAdjunction (adjR.whiskerRight ℕᵒᵖ))
+
 
 section EquationCalculus
 
@@ -300,7 +300,6 @@ private theorem equations_derived (he : Equations e d adjS adjR) :
   exact equations_of_inverseMate _ _ _ _ hd
 
 end EquationCalculus
-
 private theorem transport_of_equations {A B C D : Type t} [Category.{h} A] [Category.{h} B]
     [Category.{h} C] [Category.{h} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -347,6 +346,7 @@ private theorem transport_of_equations {A B C D : Type t} [Category.{h} A] [Cate
     equations_derived e d adjS adjR he, equations_tower e d adjS adjR he,
     equations_complex _ _ _ _ (equations_tower e d adjS adjR he),
     equations_derived _ _ _ _ (equations_tower e d adjS adjR he)⟩
+
 
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -513,7 +513,6 @@ abbrev sliceAbelian (B : Sheaf (J.over U) RingCat.{max c v r}) :
   @SheafOfModules.instAbelian.{max c v r, v, max c v r, max c v}
     (Over U) _ (J.over U) B (sliceSheafify.{c, v, r} U)
       (sliceLocallyBijective.{c, v, r} U)
-
 /-- The concrete transported equations, with the recorded exactness instances explicit.
 Source: Stacks 03DI, 03DJ, 015F
 (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
@@ -575,6 +574,7 @@ def transportedEquations
     Transport.{w, (max c v r) + 1, max c v r} e (restrictionIso.{c, v, r} U a)
     (localizedSystemAdjunction.{c, v, r} S U)
     (localizedSystemAdjunction.{c, v, r} R U)
+
 
 @[irreducible] private def presheafComparison :
     extensionByZeroPresheaf.{max c v r} (rings.{c, v, r} S) U ⋙

@@ -114,7 +114,7 @@ private def triangle {F : A₀ ⥤ A₁} {G : A₀ ⥤ A₂} {R : A₂ ⥤ A₁}
     ((G ⋙ R).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
     F.mapDerivedCategory (G ⋙ R).mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex δ (.up ℤ)) DerivedCategory.Q) ≫
-      (Functor.mapDerivedCategoryCompIso G R).hom
+      (Functor.mapDerivedCategoryCompIso G R).inv
 
 private theorem triangle_fac {F : A₀ ⥤ A₁} {G : A₀ ⥤ A₂} {R : A₂ ⥤ A₁}
     [F.Additive] [G.Additive] [R.Additive]
@@ -156,22 +156,22 @@ private theorem triangle_comp (a : F ⟶ G ⋙ R) (b : G ⟶ H ⋙ S)
     (hi : ∀ X, a.app X ≫ R.map (b.app X) ≫ i.hom.app (H.obj X) = d.app X) :
     triangle a ≫ Functor.whiskerRight (triangle b) R.mapDerivedCategory ≫
         Functor.whiskerLeft H.mapDerivedCategory
-          ((Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+          ((Functor.mapDerivedCategoryCompIso S R) ≪≫
             Functor.mapDerivedCategoryNatIso i).hom = triangle d := by
   apply Localization.natTrans_ext DerivedCategory.Q
     (HomologicalComplex.quasiIso A₀ (.up ℤ))
   intro P
   let Pn := (H.mapHomologicalComplex (.up ℤ)).obj P
-  let c := (Functor.mapDerivedCategoryCompIso S R).symm ≪≫
+  let c := (Functor.mapDerivedCategoryCompIso S R) ≪≫
     Functor.mapDerivedCategoryNatIso i
   have hc : c.hom.app (DerivedCategory.Q.obj Pn) ≫ T.mapDerivedCategoryFactors.hom.app Pn =
       R.mapDerivedCategory.map (S.mapDerivedCategoryFactors.hom.app Pn) ≫
         R.mapDerivedCategoryFactors.hom.app ((S.mapHomologicalComplex (.up ℤ)).obj Pn) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex i.hom (.up ℤ)).app Pn) := by
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso S R).hom.app
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso S R).inv.app
       (DerivedCategory.Q.obj Pn))).mp
-    simp only [c, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
-      Iso.hom_inv_id_app_assoc]
+    simp only [c, Iso.trans_hom, NatTrans.comp_app, Category.assoc,
+      Iso.inv_hom_id_app_assoc]
     rw [Functor.mapDerivedCategoryNatIso_fac,
       Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   apply (cancel_mono (T.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app P) ≫

@@ -178,9 +178,9 @@ instance preservesEpimorphisms_Γ_of_isSepClosed :
 instance preservesFiniteColimits_Γ_of_isSepClosed :
     PreservesFiniteColimits (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
   have h := (Functor.preservesFiniteLimits_tfae
-    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 3 0
+    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 4 1
   have h' := (Functor.preservesFiniteColimits_tfae
-    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 0 3
+    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 1 4
   exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
 
 /-- Over a separably closed field `k`, the cohomology of the derived global sections of an
@@ -285,7 +285,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance instEssentiallySmallEtale_point
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _

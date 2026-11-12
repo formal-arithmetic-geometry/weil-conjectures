@@ -38,6 +38,11 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
+-- v4.35 tree: this override is still needed here (green in bumpF builds up to 81, timeout without
+-- it in build83);
+-- master removed it on the pre-bump tree.
+set_option maxHeartbeats 600000 in
+-- needed on the v4.35 toolchain: the elaboration exceeds the default heartbeat budget
 set_option synthInstance.maxHeartbeats 200000 in
 -- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in

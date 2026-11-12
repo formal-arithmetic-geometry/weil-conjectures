@@ -128,7 +128,7 @@ lemma sum_sum_comp_incl_proj_comp {Y Z : C} (f : Y ⟶ X) (g : X ⟶ Z) :
     split_ifs with hij
     · rw [hij, Category.id_comp]
     · rw [zero_comp, comp_zero, comp_zero]
-  simp only [h, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  simp only [h, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
   rw [← Preadditive.comp_sum]
   simp only [← Category.assoc, ← Preadditive.sum_comp]
   rw [Category.assoc, b.total, Category.id_comp]
@@ -187,7 +187,7 @@ theorem traceOrZero_eq_sum (φ : X ⟶ X) :
     split_ifs with hij
     · rw [hij, Category.id_comp]
     · rw [zero_comp]
-  simp only [h, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  simp only [h, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
 
 end Trace
 

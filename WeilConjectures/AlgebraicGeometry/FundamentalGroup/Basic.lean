@@ -103,8 +103,8 @@ For connected `Y` the finite étale `Y`-schemes form a Galois category: a geomet
 `Spec κ(y)^alg ⟶ Y` at any point `y` gives a fibre functor. -/
 theorem galoisCategory [ConnectedSpace Y] : GaloisCategory Y.FiniteEtale := by
   obtain ⟨y⟩ := (inferInstance : Nonempty Y)
-  exact ⟨⟨_, ⟨fiberFunctor (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y)
-    (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)⟩⟩⟩
+  exact ⟨⟨_, fiberFunctor (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y)
+    (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)⟩⟩
 
 attribute [instance] galoisCategory
 
@@ -178,14 +178,15 @@ lemma isIso_sigmaDesc_of_existsUnique {M : Type (u + 1)} [Finite M]
       have : Nonempty (Spec (.of Ω)) := inferInstanceAs (Nonempty (PrimeSpectrum Ω))
       obtain ⟨m, x', hx'⟩ := exists_comp_sigmaι_eq_of_subsingleton (X := Spec (.of Ω)) x.left
       obtain ⟨n, y', hy'⟩ := exists_comp_sigmaι_eq_of_subsingleton (X := Spec (.of Ω)) y.left
-      rw [← hx', ← hy', Category.assoc, Category.assoc, hφ, Sigma.ι_desc, Sigma.ι_desc] at hxy'
+      rw [← hx', ← hy', Category.assoc, Category.assoc, hφ,
+        Sigma.ι_comp_desc, Sigma.ι_comp_desc] at hxy'
       have h₁ := congrArg (· ≫ pullback.fst _ _) hxy'
       have h₂ := congrArg (· ≫ pullback.snd _ _) hxy'
       simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd, Category.comp_id] at h₁ h₂
       subst h₂
       have hxs : x' ≫ P.obj.hom = s := by
         rw [← fiber_left_comp s x, ← hx', Category.assoc]
-        exact congrArg (x' ≫ ·) (Sigma.ι_desc (fun _ : M ↦ P.obj.hom) m).symm
+        exact congrArg (x' ≫ ·) (Sigma.ι_comp_desc (fun _ : M ↦ P.obj.hom) m).symm
       have hmn : m = n := by
         obtain ⟨k, -, hk⟩ := hv (pt x' hxs) ((fiber s).map (v m) (pt x' hxs))
         rw [hk m rfl, hk n (fiber_ext s h₁.symm)]
@@ -202,7 +203,7 @@ lemma isIso_sigmaDesc_of_existsUnique {M : Type (u + 1)} [Finite M]
         congrArg (fun u ↦ u.left) hm
       have hA : ((z.left ≫ pullback.snd _ _) ≫ Sigma.ι (fun _ : M ↦ P.obj.left) m) ≫ a = s := by
         rw [Category.assoc]
-        exact (congrArg _ (Sigma.ι_desc _ _)).trans h₂
+        exact (congrArg _ (Sigma.ι_comp_desc _ _)).trans h₂
       refine ⟨Over.homMk (V := (Etale.forget Y).obj A.obj) _ hA, fiber_ext s ?_⟩
       change ((z.left ≫ pullback.snd _ _) ≫ Sigma.ι (fun _ : M ↦ P.obj.left) m) ≫ φ = z.left
       refine pullback.hom_ext ?_ ?_

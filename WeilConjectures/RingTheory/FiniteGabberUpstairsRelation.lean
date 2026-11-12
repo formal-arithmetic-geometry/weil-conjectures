@@ -200,7 +200,7 @@ theorem exists_gabber_upstairs_tensor_relation
         by_cases hn : n = p.natDegree
         · subst n
           simp [hp.coeff_natDegree]
-        · rw [if_neg hn]
+        · rw [ite_eq_right hn]
           exact Ideal.Quotient.eq_zero_iff_mem.mpr (hpc n hn)
       have hrmap : r.map (Ideal.Quotient.mk J) = 0 := by
         have hamod : Ideal.Quotient.mk J a = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr ha

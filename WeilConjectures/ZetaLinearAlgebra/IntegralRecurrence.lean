@@ -55,6 +55,7 @@ lemma intSeqShift_apply (x : ℕ → ℚ) (n : ℕ) : intSeqShift x n = x (n + 1
 
 lemma coe_intSeqShift : ⇑intSeqShift = ⇑(seqShift ℚ) := rfl
 
+
 lemma iterate_intSeqShift_apply (m : ℕ) (x : ℕ → ℚ) (n : ℕ) :
     (⇑intSeqShift)^[m] x n = x (n + m) :=
   iterate_seqShift_apply ℚ m x n
@@ -219,7 +220,7 @@ theorem exists_int_normalized_fraction' (f : ℤ⟦X⟧)
     rw [Finset.sum_congr rfl hstep, hre, hF]
     exact hrec (n - C.natDegree)
   refine ⟨trunc (C.natDegree + 1) (f * (C.reverse : ℤ⟦X⟧)), C.reverse, hB0, ?_, ?_⟩
-  · rw [coeff_trunc, if_pos (Nat.succ_pos _), coeff_zero_eq_constantCoeff, map_mul,
+  · rw [coeff_trunc, ite_eq_left (Nat.succ_pos _), coeff_zero_eq_constantCoeff, map_mul,
       ← coeff_zero_eq_constantCoeff, Polynomial.coeff_coe, hB0, mul_one]
   · refine PowerSeries.ext fun n => ?_
     rw [Polynomial.coeff_coe, coeff_trunc]

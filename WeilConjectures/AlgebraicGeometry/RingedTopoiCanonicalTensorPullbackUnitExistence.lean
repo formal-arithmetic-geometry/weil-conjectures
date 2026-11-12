@@ -91,14 +91,9 @@ private theorem inverseImage_unit_iso :
       congrArg (fun f ↦ f.hom.app W x) I.ringUnderlying.hom_inv_id
     simp only [id_eq] at hi
     rw [hc] at hi
-    let m (x : (uInv.obj Z).obj.obj W) : (I.modules.obj U).val.obj W :=
-      (I.moduleUnderlying.inv.app U).hom.app W x
-    have hm : m t = (I.ringUnderlying.hom.hom.app W t : RI.obj.obj W) •
-        m ((uInv.map one).hom.app W t) := by
-      have h := I.moduleSMul U Z (𝟙 Z) one (𝟙 Z)
-        (fun W x ↦ (mul_one (show R.obj.obj W from x)).symm) W t
-      erw [uInv.map_id] at h
-      exact h
+    have hm := I.moduleSMul U Z (𝟙 Z) one (𝟙 Z)
+      (fun W x ↦ (mul_one (show R.obj.obj W from x)).symm) W t
+    erw [uInv.map_id] at hm
     erw [ht, hi] at hm
     exact hm
   let eW (W : Dᵒᵖ) : RI.obj.obj W ≃ₗ[RI.obj.obj W] (I.modules.obj U).val.obj W :=
@@ -143,8 +138,7 @@ private theorem scalarExtension_unit_iso :
       apply ModuleCat.hom_ext
       apply LinearMap.ext
       intro x
-      induction x using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction x using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add, hx, hy]
       | tmul s r =>
         change S.obj.obj W at s

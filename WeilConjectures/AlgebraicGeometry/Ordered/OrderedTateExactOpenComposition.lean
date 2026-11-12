@@ -497,7 +497,7 @@ private theorem raw_single_coherence
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (e : H ≅ F ⋙ G) :
     Functor.whiskerLeft (DerivedCategory.singleFunctor C 0)
-        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G).hom ≫
+        (Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm).hom ≫
       Functor.whiskerRight (F.mapDerivedCategorySingleFunctor 0).hom G.mapDerivedCategory ≫
       Functor.whiskerLeft F (G.mapDerivedCategorySingleFunctor 0).hom =
       (H.mapDerivedCategorySingleFunctor 0).hom ≫
@@ -550,7 +550,7 @@ private theorem raw_comparison_comp
     {K : C} {L : D} {M : E} (a : F.obj K ≅ L) (b : G.obj L ≅ M)
     (d : H.obj K ≅ M) (h : e.hom.app K ≫ G.map a.hom ≫ b.hom = d.hom) :
     (Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso F G).hom.app
+        (Functor.mapDerivedCategoryCompIso F G).symm).hom.app
           ((DerivedCategory.singleFunctor C 0).obj K) ≫
       G.mapDerivedCategory.map
         (singleComparisonHom F.mapDerivedCategory (DerivedCategory.singleFunctor C 0)
@@ -577,7 +577,7 @@ private theorem exactLine₀_comp (A : Type (u + 1)) [CommRing A]
     (h : (upperStarComp (ModuleCat.{u + 1} A) f g fg hfg).hom.app K ≫
       (upperStar (ModuleCat.{u + 1} A) f).map a.hom ≫ b.hom = d.hom) :
     (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) f g fg hfg) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).hom.app (ordinaryFiniteDegreeZero A Z K) ≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app (ordinaryFiniteDegreeZero A Z K) ≫
         (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.map
           (exactLine₀ A g a) ≫ exactLine₀ A f b = exactLine₀ A fg d := by
   unfold exactLine₀ ordinaryFiniteDegreeZero ordinaryFiniteSingleFunctor
@@ -635,7 +635,7 @@ private theorem shifted_line_comp
       (ordinaryFiniteShiftedLinePullback A N hA t fg hZ).hom := by
   let c := Functor.mapDerivedCategoryNatIso
       (upperStarComp (ModuleCat.{u + 1} A) f g fg hfg) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
   have hc₀ := exactLine₀_comp A f g fg hfg
     (t.line g hZ) (t.line f hY) (t.line fg hZ)
     (normalized_line_comp_eq A N hA t f g fg hfg hZ hY)
@@ -779,8 +779,8 @@ private lemma exact_coefficient_comp (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hw : w = p ≫ v) (hS : IsUnit (N : Γ(S, ⊤))) (hU : IsUnit (N : Γ(U, ⊤))) (d : ℕ) :
     let c := Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) p v w hw) ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) v)
-        (upperStar (ModuleCat.{u + 1} A) p)
+      (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) v)
+        (upperStar (ModuleCat.{u + 1} A) p)).symm
     c.inv.app (affineLinearBaseCoefficient A N hA S d) ≫
         (orderedTateExactPullback A N hA t w hS d).hom =
       (upperStar (ModuleCat.{u + 1} A) p).mapDerivedCategory.map
@@ -796,8 +796,8 @@ private lemma exact_coefficient_comp (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) w)
     (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw)
     (Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} A) p v w hw) ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) v)
-        (upperStar (ModuleCat.{u + 1} A) p))
+      (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) v)
+        (upperStar (ModuleCat.{u + 1} A) p)).symm)
     ?_ _ _ _ (coefficient_comp A N hA t p v w hw hS hU d)
   simp only [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
     Functor.leftDerivedFunctorCompIso, leftDerivedUpperStarIsoMapDerivedCategory,
@@ -822,8 +822,8 @@ private lemma open_comp_eq (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
       (Functor.mapDerivedCategoryNatIso
         (upperStarComp (ModuleCat.{u + 1} A) (X.homOfLE h) V.ι U.ι
           (Scheme.homOfLE_ι X h).symm) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) V.ι)
-          (upperStar (ModuleCat.{u + 1} A) (X.homOfLE h))).symm := by
+        (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) V.ι)
+          (upperStar (ModuleCat.{u + 1} A) (X.homOfLE h))).symm).symm := by
   unfold DegreeZeroMapGluing.openComp
   rw [upperStar_comp_transport A (X.homOfLE h) V.ι U.ι
     (Scheme.homOfLE_ι X h).symm, Iso.trans_symm]

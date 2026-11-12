@@ -89,7 +89,7 @@ theorem exists_integral_conj_of_transitionValues {S : Scheme.{u}} [IsLocallyNoet
   classical
   -- the single cover `F : ∐ V_k ⟶ S`
   let F : ∐ 𝒰.X ⟶ S := Sigma.desc 𝒰.f
-  have hιF (k : 𝒰.I₀) : Sigma.ι 𝒰.X k ≫ F = 𝒰.f k := Sigma.ι_desc _ _
+  have hιF (k : 𝒰.I₀) : Sigma.ι 𝒰.X k ≫ F = 𝒰.f k := Sigma.ι_comp_desc _ _
   have hwe (k : 𝒰.I₀) : WeaklyEtale (𝒰.f k) :=
     Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ 𝒰.mem₀ (.mk k)
   have : WeaklyEtale F := IsZariskiLocalAtSource.sigmaDesc (P := @WeaklyEtale) fun k ↦ hwe k

@@ -124,7 +124,7 @@ private theorem joinSummand_transition (r : ℕ) (a : Fin (r + 1) → A)
         omega
       rw [transition_component 1 _ m _ p hnp, transition_component r _ m _ q hnq,
         transition_component (r + 1) _ m _ i hni]
-      simp only [koszulJoinSummand, dif_pos hp, dif_pos hq, koszulGradedTermIso,
+      simp only [koszulJoinSummand, dite_eq_left hp, dite_eq_left hq, koszulGradedTermIso,
         tensorHom_comp_tensorHom_assoc, Category.assoc, Iso.inv_hom_id_assoc,
         Iso.inv_hom_id, Category.comp_id]
       rw [← tensorHom_comp_tensorHom_assoc]
@@ -188,7 +188,7 @@ private theorem koszulJoinGraded_unit (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ
     ((ExteriorAlgebra.koszulComplex A (r + 1) (fun j ↦ a j ^ (m + 1))).extendXIso
       ComplexShape.embeddingDownNat (i := 0) rfl).hom).mp
   simp only [koszulJoinGraded, Category.assoc, HomologicalComplex.ι_mapBifunctorDesc_assoc]
-  simp only [koszulJoinSummand, le_refl, dif_pos,
+  simp only [koszulJoinSummand, le_refl, dite_eq_left,
     finiteKoszulExteriorUnitZero, koszulGradedTermIso, tensorHom_comp_tensorHom_assoc,
     Category.assoc, Iso.inv_hom_id, Category.comp_id]
   apply ModuleCat.hom_ext

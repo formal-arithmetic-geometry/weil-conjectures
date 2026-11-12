@@ -21,7 +21,7 @@ private noncomputable def sigmaRestrictInclusion
     (ι : ∀ i, C i ⟶ X) (U : X.Opens) (i : Fin n) :
     (ι i ⁻¹ᵁ U).toScheme ⟶ (Limits.Sigma.desc ι ⁻¹ᵁ U).toScheme :=
   (Limits.Sigma.ι C i).resLE _ _ (by
-    rw [← Scheme.Hom.comp_preimage, Limits.Sigma.ι_desc])
+    rw [← Scheme.Hom.comp_preimage, Limits.Sigma.ι_comp_desc])
 
 private theorem isIso_sigmaRestrictInclusion
     (X : Scheme.{u}) (n : ℕ) (C : Fin n → Scheme.{u})

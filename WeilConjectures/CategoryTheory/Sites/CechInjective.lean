@@ -80,7 +80,7 @@ lemma cechOver_δ_π (n : ℕ) (i : Fin (n + 2)) (y : Fin (n + 2) → ι) :
     ((FormalCoproduct.cosimplicialObjectFunctor (FormalCoproduct.mk _ U).cech).obj
         ((Over.forget X).op ⋙ P)).δ i ≫ cechCochainπ U P (n + 1) y =
       cechCochainπ U P n (y ∘ i.succAbove) ≫ P.map (cechNerveMap U y i.succAbove).left.op := by
-  erw [Pi.lift_π]
+  erw [Pi.lift_comp_π]
   rfl
 
 lemma cechCochainπ_d (n : ℕ) (c : (cechOver U P).X n) (y : Fin (n + 2) → ι) :

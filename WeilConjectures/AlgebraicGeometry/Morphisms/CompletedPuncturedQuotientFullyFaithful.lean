@@ -42,8 +42,8 @@ private theorem depth_le_of_flat_local {R S : Type u} [CommRing R] [CommRing S]
   classical
   unfold IsLocalRing.depth Ideal.depth
   simp only [Ideal.smul_eq_mul, Ideal.mul_top,
-    if_neg (IsLocalRing.maximalIdeal.isMaximal R).ne_top,
-    if_neg (IsLocalRing.maximalIdeal.isMaximal S).ne_top]
+    ite_eq_right (IsLocalRing.maximalIdeal.isMaximal R).ne_top,
+    ite_eq_right (IsLocalRing.maximalIdeal.isMaximal S).ne_top]
   apply sSup_le
   rintro n ⟨rs, hreg, hmem, rfl⟩
   have hmem' : ∀ s ∈ rs.map (algebraMap R S), s ∈ IsLocalRing.maximalIdeal S := by

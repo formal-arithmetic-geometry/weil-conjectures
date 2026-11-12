@@ -235,10 +235,12 @@ theorem Scheme.GaloisCover.ordinaryGraphEvaluation_bijective
     obtain ⟨U, i, z, x, hiz, hs, hx⟩ := hγ s w
     have hi : graph U (i ≫ f) ≫ c.sectionRestriction i =
         i.left ≫ graph W.unop f := by
-      apply pullback.hom_ext <;> simp [graph, Scheme.GaloisCover.sectionRestriction] <;> rfl
+      apply pullback.hom_ext <;> simp [graph, Scheme.GaloisCover.sectionRestriction]
+      rfl
     have hf : graph U (i ≫ f) ≫ c.sectionRestriction (i ≫ f) =
         (i ≫ f).left ≫ graph c.sectionObject (𝟙 _) := by
-      apply pullback.hom_ext <;> simp [graph, Scheme.GaloisCover.sectionRestriction] <;> rfl
+      apply pullback.hom_ext <;> simp [graph, Scheme.GaloisCover.sectionRestriction]
+      rfl
     change β W s (graph W.unop f w) = γ s w
     rw [hx, ← hiz]
     rw [← Scheme.Hom.comp_apply, ← hi, Scheme.Hom.comp_apply]

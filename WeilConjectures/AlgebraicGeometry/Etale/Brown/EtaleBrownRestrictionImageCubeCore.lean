@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProjectionRealization
 public import WeilConjectures.CategoryTheory.Etale.EtaleUnboundedRestrictionComparison
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
@@ -33,7 +35,6 @@ set_option backward.defeqAttrib.useBackward true
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.rightAdditive

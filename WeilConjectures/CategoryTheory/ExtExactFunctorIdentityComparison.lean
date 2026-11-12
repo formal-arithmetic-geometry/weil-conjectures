@@ -95,15 +95,12 @@ theorem exactFunctorIdentityComparison
     simp only [Category.comp_id, ← Q.map_comp]
     change Q.map _ = Q.map _
     congr 1
-    ext i
+    apply HomologicalComplex.from_single_hom_ext
     dsimp [Functor.mapCochainComplexSingleFunctor,
       HomologicalComplex.singleMapHomologicalComplex, η,
       NatIso.mapHomologicalComplex, Functor.mapHomologicalComplexIdIso,
       CochainComplex.singleFunctor, CochainComplex.singleFunctors, HomologicalComplex.single]
-    by_cases hi : i = 0
-    · subst i; simp
-    · have hz := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 (F.obj Z) i hi
-      exact hz.eq_of_src _ _
+    simp
   have hy (Z : C) :
       δ.inv.app ((CochainComplex.singleFunctor C 0).obj Z) ≫
         Q.map ((F.mapCochainComplexSingleFunctor 0).app Z).hom ≫

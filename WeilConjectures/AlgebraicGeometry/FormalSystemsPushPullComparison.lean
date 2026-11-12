@@ -7,12 +7,15 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealPowerProductImage
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FormalCompletionPushforwardLift
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Construction of the formal push-pull comparison
 

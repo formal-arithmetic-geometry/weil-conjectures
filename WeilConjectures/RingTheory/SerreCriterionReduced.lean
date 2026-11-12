@@ -73,7 +73,7 @@ private theorem exists_regular_element_of_depth (A : Type u) [CommRing A]
     exact (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
       (IsLocalRing.maximalIdeal_le_jacobson (Module.annihilator A A))).symm
   unfold IsLocalRing.depth Ideal.depth at hd
-  rw [if_neg hm] at hd
+  rw [ite_eq_right hm] at hd
   obtain ⟨n, ⟨rs, hreg, hmem, rfl⟩, hn⟩ := lt_sSup_iff.mp (lt_of_lt_of_le
     (show (0 : ℕ∞) < 1 by decide) hd)
   cases rs with

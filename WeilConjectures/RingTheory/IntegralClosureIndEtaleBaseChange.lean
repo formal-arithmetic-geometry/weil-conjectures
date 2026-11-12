@@ -100,7 +100,8 @@ private theorem polynomial_rep
     · refine ⟨(P.diag.map (co.ι.app ⟨⟨n, hn⟩⟩)).hom (a ⟨n, hn⟩), ?_⟩
       have hw := ConcreteCategory.congr_hom (P.w (co.ι.app ⟨⟨n, hn⟩⟩)) (a ⟨n, hn⟩)
       exact hw.trans (ha ⟨n, hn⟩)
-    · exact ⟨0, by simp [Polynomial.notMem_support_iff.mp hn]⟩
+    · exact ⟨0, by
+      rw [Polynomial.notMem_support_iff.mp hn]; exact map_zero (P.ι.app co.pt).hom.toRingHom⟩
   obtain ⟨q, hq, -, hqm⟩ := Polynomial.lifts_and_natDegree_eq_and_monic
     (p.lifts_iff_coeff_lifts.mpr hcoeff) hp
   exact ⟨co.pt, q, hq, hqm⟩

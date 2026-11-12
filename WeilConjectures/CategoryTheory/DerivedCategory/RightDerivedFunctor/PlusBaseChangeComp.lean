@@ -60,7 +60,7 @@ lemma rightDerivedFunctorPlusUnit_app_comp_rightDerivedFunctorPlusCompIso'_inv_a
     [EnoughInjectives C] [EnoughInjectives D] (F : C ⥤ D) (G : D ⥤ E) {H : C ⥤ E}
     [F.Additive] [G.Additive] [H.Additive] [F.PreservesInjectiveObjects] (e : F ⋙ G ≅ H)
     (M : HomotopyCategory.Plus C) :
-    H.rightDerivedFunctorPlusUnit.app M ≫
+    H.rightDerivedFunctorPlusUnith.app M ≫
         (rightDerivedFunctorPlusCompIso' F G e).inv.app (DerivedCategory.Plus.Qh.obj M) =
       DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e.inv).app M) ≫
         (rightDerivedFunctorPlusCompUnit F G).app M := by
@@ -104,7 +104,7 @@ theorem rightDerivedFunctorPlusBaseChange_comp (eH : G₁ ⋙ G₂ ≅ H) (eH' :
         (rightDerivedFunctorPlusCompIso' G₁' G₂' eH').inv
   have heq : L = R := by
     apply Functor.rightDerived_ext (H.rightDerivedFunctorPlus ⋙ δ.mapDerivedCategoryPlus)
-      (Functor.whiskerRight H.rightDerivedFunctorPlusUnit δ.mapDerivedCategoryPlus ≫
+      (Functor.whiskerRight H.rightDerivedFunctorPlusUnith δ.mapDerivedCategoryPlus ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B)
     apply NatTrans.ext
     funext M
@@ -119,7 +119,7 @@ theorem rightDerivedFunctorPlusBaseChange_comp (eH : G₁ ⋙ G₂ ≅ H) (eH' :
     have hc' := rightDerivedFunctorPlusUnit_app_comp_rightDerivedFunctorPlusCompIso'_inv_app
       G₁' G₂' eH' (β.mapHomotopyCategoryPlus.obj M)
     have hn₂ := (rightDerivedFunctorPlusBaseChange e₂).naturality
-      (G₁.rightDerivedFunctorPlusUnit.app M)
+      (G₁.rightDerivedFunctorPlusUnith.app M)
     simp only [Functor.comp_map, Functor.comp_obj] at hn₂
     simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id, Functor.comp_obj, L, R,
@@ -146,7 +146,7 @@ theorem rightDerivedFunctorPlusBaseChange_comp (eH : G₁ ⋙ G₂ ≅ H) (eH' :
           (G₁.mapHomotopyCategoryPlus.obj M)) = 𝟙 _ := by
       rw [← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id]
     rw [reassoc_of% hcancel]
-    have hu := G₂'.rightDerivedFunctorPlusUnit.naturality
+    have hu := G₂'.rightDerivedFunctorPlusUnith.naturality
       ((NatTrans.mapHomotopyCategoryPlus e₁).app M)
     simp only [Functor.comp_map, Functor.comp_obj] at hu
     erw [← reassoc_of% hu]
@@ -176,7 +176,7 @@ the levelwise image of the isomorphism. -/
 lemma rightDerivedFunctorPlusUnit_app_comp_natIso_trans_idIso_hom_app
     {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] [EnoughInjectives C]
     {G : C ⥤ C} [G.Additive] (ε : G ≅ 𝟭 C) (M : HomotopyCategory.Plus C) :
-    G.rightDerivedFunctorPlusUnit.app M ≫
+    G.rightDerivedFunctorPlusUnith.app M ≫
         (rightDerivedFunctorPlusNatIso ε ≪≫ rightDerivedFunctorPlusIdIso C).hom.app
           (DerivedCategory.Plus.Qh.obj M) =
       DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus ε.hom).app M) := by
@@ -211,7 +211,7 @@ theorem rightDerivedFunctorPlusBaseChange_id (ε : G ≅ 𝟭 B) (ε' : G' ≅ �
       Functor.whiskerLeft β.mapDerivedCategoryPlus ι'.inv
   have heq : rightDerivedFunctorPlusBaseChange e = R := by
     apply Functor.rightDerived_ext (G.rightDerivedFunctorPlus ⋙ β.mapDerivedCategoryPlus)
-      (Functor.whiskerRight G.rightDerivedFunctorPlusUnit β.mapDerivedCategoryPlus ≫
+      (Functor.whiskerRight G.rightDerivedFunctorPlusUnith β.mapDerivedCategoryPlus ≫
         (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso B)
     apply NatTrans.ext
     funext M

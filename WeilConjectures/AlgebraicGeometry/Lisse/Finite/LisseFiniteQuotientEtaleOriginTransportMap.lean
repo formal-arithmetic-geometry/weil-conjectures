@@ -73,10 +73,10 @@ private def constantEncodingIso (X : Scheme.{u})
   let e0 : (F ⋙ R) ⋙ S ≅ Q ⋙ constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} B) :=
     Functor.isoWhiskerRight (Functor.isoWhiskerLeft (Q ⋙ L) e.counitIso) S ≪≫
       Functor.isoWhiskerLeft Q (constantEncodingNatIso X B).symm
-  exact ((Functor.mapDerivedCategoryCompIso R S).app (F.mapDerivedCategory.obj E)).symm ≪≫
-    ((Functor.mapDerivedCategoryCompIso F (R ⋙ S)).app E).symm ≪≫
+  exact (Functor.mapDerivedCategoryCompIso R S).app (F.mapDerivedCategory.obj E) ≪≫
+    (Functor.mapDerivedCategoryCompIso F (R ⋙ S)).app E ≪≫
       (Functor.mapDerivedCategoryNatIso e0).app E ≪≫
-        (Functor.mapDerivedCategoryCompIso Q _).app E
+        ((Functor.mapDerivedCategoryCompIso Q _).app E).symm
 
 /-- A constant model on an étale chart gives an isomorphism to the actual pullback
 of `K`, hence a morphism which is monic and epic.
@@ -129,33 +129,33 @@ theorem lisse_finite_quotient_etale_origin_transport_map
   let PE := ProEtale.upperStar (ModuleCat.{u + 1} B) (W.hom ≫ g)
   obtain ⟨eE⟩ := hE
   obtain ⟨eC⟩ := C.comparison
-  let eQ := (Functor.mapDerivedCategoryCompIso QV UZ).symm ≪≫
+  let eQ := Functor.mapDerivedCategoryCompIso QV UZ ≪≫
     Functor.mapDerivedCategoryNatIso
       (AlgebraicGeometry.Etale.upperStarRestrictScalarsIsoSheaf
         (constantAdicQuotientMap d.ideal n) Z.hom) ≪≫
-      Functor.mapDerivedCategoryCompIso (AlgebraicGeometry.Etale.upperStar _ Z.hom) QZ
-  let eConst := (Functor.mapDerivedCategoryCompIso
-      (constantSheaf Z.left.smallEtaleTopology _) QZ).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso (AlgebraicGeometry.Etale.upperStar _ Z.hom) QZ).symm
+  let eConst := Functor.mapDerivedCategoryCompIso
+      (constantSheaf Z.left.smallEtaleTopology _) QZ ≪≫
     Functor.mapDerivedCategoryNatIso
       (constantCommuteCompose Z.left.smallEtaleTopology Q) ≪≫
-      Functor.mapDerivedCategoryCompIso Q (constantSheaf Z.left.smallEtaleTopology _)
+      (Functor.mapDerivedCategoryCompIso Q (constantSheaf Z.left.smallEtaleTopology _)).symm
   let eZ := eQ.app C.level ≪≫ QZ.mapDerivedCategory.mapIso eE ≪≫ eConst.app E
-  let eCompare := (Functor.mapDerivedCategoryCompIso UZ FZ).symm ≪≫
+  let eCompare := Functor.mapDerivedCategoryCompIso UZ FZ ≪≫
     Functor.mapDerivedCategoryNatIso
       (ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B) Z.hom).symm ≪≫
-      Functor.mapDerivedCategoryCompIso FV PZ
-  let eFConst := (Functor.mapDerivedCategoryCompIso
-      (constantSheaf Z.left.smallEtaleTopology _) FZ).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso FV PZ).symm
+  let eFConst := Functor.mapDerivedCategoryCompIso
+      (constantSheaf Z.left.smallEtaleTopology _) FZ ≪≫
     Functor.mapDerivedCategoryNatIso
       (ProEtale.constantSheafCompComparisonUpperStarIso (ModuleCat.{u + 1} B) Z.left)
-  let eTConst := (Functor.mapDerivedCategoryCompIso
-      (constantSheaf (ProEt.topology Z.left) _) T).symm ≪≫
+  let eTConst := Functor.mapDerivedCategoryCompIso
+      (constantSheaf (ProEt.topology Z.left) _) T ≪≫
     Functor.mapDerivedCategoryNatIso
       (ProEtale.constantSheafCompUpperStarIso (ModuleCat.{u + 1} B) t)
   let eH := (Functor.mapDerivedCategoryNatIso
       (ProEtale.upperStarComp (ModuleCat.{u + 1} B) t Z.hom)).app
         (FV.mapDerivedCategory.obj (QV.mapDerivedCategory.obj C.level)) ≪≫
-    (Functor.mapDerivedCategoryCompIso PZ T).app _
+    ((Functor.mapDerivedCategoryCompIso PZ T).app _).symm
   let eModel := eH ≪≫
     T.mapDerivedCategory.mapIso ((eCompare.app (QV.mapDerivedCategory.obj C.level)).symm ≪≫
       FZ.mapDerivedCategory.mapIso eZ ≪≫ eFConst.app (Q.mapDerivedCategory.obj E)) ≪≫
@@ -170,7 +170,7 @@ theorem lisse_finite_quotient_etale_origin_transport_map
       (ProEtale.upperStarCongr (ModuleCat.{u + 1} B) hcomp.symm)).app J ≪≫
     (Functor.mapDerivedCategoryNatIso
       (ProEtale.upperStarComp (ModuleCat.{u + 1} B) h (V.hom ≫ g))).app J ≪≫
-    (Functor.mapDerivedCategoryCompIso PG H).app J
+    ((Functor.mapDerivedCategoryCompIso PG H).app J).symm
   let eTarget := ePull ≪≫ H.mapDerivedCategory.mapIso eC.symm ≪≫ eModel
   let R := pbcRestrict ((adicTowerInverseImage (W.hom ≫ g)).map
     (pbcLevelConstantComparison X d n).hom)
@@ -183,8 +183,8 @@ theorem lisse_finite_quotient_etale_origin_transport_map
   let eSource := targetEncodingIso (W.hom ≫ g) d n
       ((constantAdicQuotientModules X d n).mapDerivedCategory.obj E) ≪≫
     PE.mapDerivedCategory.mapIso (constantEncodingIso X d n E) ≪≫
-    ((Functor.mapDerivedCategoryCompIso (constantSheaf (ProEt.topology X) _) PE).app
-      (Q.mapDerivedCategory.obj E)).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (constantSheaf (ProEt.topology X) _) PE).app
+      (Q.mapDerivedCategory.obj E) ≪≫
     (Functor.mapDerivedCategoryNatIso
       (ProEtale.constantSheafCompUpperStarIso (ModuleCat.{u + 1} B) (W.hom ≫ g))).app
       (Q.mapDerivedCategory.obj E)

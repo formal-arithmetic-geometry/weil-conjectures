@@ -107,7 +107,7 @@ theorem isIso_compactSupportGraphDerivedComparison_of_isFinite
     have hG : IsIso ((lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctorUnit.app
         (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapHomotopyCategory
           (.up ℤ)).obj K)) := hunit K
-    dsimp [compactSupportComparisonOnHomotopy, normalizationHomotopyComponent]
+    dsimp only [compactSupportComparisonOnHomotopy, normalizationHomotopyComponent]
     infer_instance
   have hwhisk : IsIso (Functor.whiskerLeft DerivedCategory.Qh
       (compactSupportDerivedComparison A f c a)) := NatIso.isIso_of_isIso_app _

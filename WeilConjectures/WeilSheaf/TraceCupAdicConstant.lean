@@ -116,10 +116,10 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
       (y : (H j).carrier) : cup i j k h x y = Θ k (by omega)
         (ProEtale.adicConstantHCup l f.geometricFiber hfin (i := i.toNat) (j := j.toNat)
           (k := k.toNat) (by omega) ((Θ i hij.1).symm x) ((Θ j hij.2).symm y)) := by
-    simp only [cup, dif_pos hij]
+    simp only [cup, dite_eq_left hij]
     rfl
   have hcup0 (i j k : ℤ) (h : i + j = k) (hij : ¬ (0 ≤ i ∧ 0 ≤ j)) : cup i j k h = 0 := by
-    simp only [cup, dif_neg hij]
+    simp only [cup, dite_eq_right hij]
   refine ⟨FrobeniusModule.TraceCup.mk cup ?_ ?_ tr.toLinearMap htr,
     ⟨tr.bijective, fun i j h ↦ ?_⟩⟩
   · intro i j k h x y

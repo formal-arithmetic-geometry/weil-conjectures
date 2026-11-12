@@ -302,6 +302,7 @@ theorem isColimit_forget₂_and_exists_rep {J : Type u} [SmallCategory J] [IsFil
       ∀ x : c.pt, ∃ (j : J) (a : F.obj j), c.ι.app j a = x :=
   ⟨⟨isColimitOfPreserves _ hc⟩, fun x ↦ Concrete.isColimit_exists_rep F hc x⟩
 
+
 end CommAlgCat
 
 instance AlgCat.preservesFilteredColimitsOfSize_forget_moduleCat (R : Type u) [CommRing R] :

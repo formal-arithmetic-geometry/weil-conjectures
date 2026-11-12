@@ -220,7 +220,7 @@ lemma mono_sheafFiber_map_image_ι_isotypicIdempotent_comp_stalkRestrict
   have h1 : u ≫ (Scheme.pointSmallEtale y).sheafFiber.map ι = 0 := by
     rw [← cancel_mono (Pi.lift ρ), zero_comp]
     refine Pi.hom_ext _ _ fun t ↦ ?_
-    rw [Category.assoc, Pi.lift_π, zero_comp]
+    rw [Category.assoc, Pi.lift_comp_π, zero_comp]
     obtain ⟨g, hg⟩ := htrans t
     obtain ⟨θ, hθ⟩ := exists_sheafFiber_map_lowerStarConstantSheafEndOfOver_comp_stalkRestrict
       (Λ := Λ) f τ hτ y g t s hg

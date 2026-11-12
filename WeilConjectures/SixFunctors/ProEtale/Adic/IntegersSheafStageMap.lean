@@ -64,8 +64,8 @@ noncomputable def stageBiadd (F : FiniteIntermediateFieldOver l E.1) :
   AddMonoidHom.mk' (fun o ↦ (Φ.map (padicIntegersSheafMulOfLE T (E := E) (F := F.1) F.2
       (integersSubalgebraFamilyEquiv E F o))).hom.comp θ.toAddMonoidHom) fun o o' ↦ by
     ext a
-    simp only [map_add, padicIntegersSheafMulOfLE_add, Functor.map_add, AddCommGrpCat.hom_add,
-      AddMonoidHom.add_apply, AddMonoidHom.coe_comp, Function.comp_apply]
+    simp only [RingEquiv.map_add, padicIntegersSheafMulOfLE_add, Functor.map_add,
+      AddCommGrpCat.hom_add, AddMonoidHom.add_apply, AddMonoidHom.coe_comp, Function.comp_apply]
 
 include hθ in
 lemma stageBiadd_balanced (F : FiniteIntermediateFieldOver l E.1) (r : integers l E.1)
@@ -141,8 +141,7 @@ lemma stageMap_rTensor {F F' : FiniteIntermediateFieldOver l E.1} (hFF' : F.1.1 
     stageMap Φ E θ hθ F' ((Subalgebra.inclusion hs).toLinearMap.rTensor A τ) =
       Φ.map ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
         (padicIntegersSheafMapOfLE T l hFF')) (stageMap Φ E θ hθ F τ) := by
-  induction τ using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction τ using TensorProduct.inductionOn with
   | add τ τ' hτ hτ' => simp only [map_add, hτ, hτ']
   | tmul o a =>
     change Φ.map (padicIntegersSheafMulOfLE T (E := E) (F := F'.1) F'.2

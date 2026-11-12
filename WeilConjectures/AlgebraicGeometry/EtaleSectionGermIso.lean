@@ -35,9 +35,9 @@ private noncomputable def restrictionStalkIso
   let e := FunctorToTypes.fromOverFunctorElementsEquivalence Φ.fiber a
   let F := e.functor ⋙ Over.forget (Φ.fiber.elementsMk U a)
   have : F.Initial := inferInstance
-  change colimit ((CategoryOfElements.π (Φ.over a).fiber).op ⋙ (G.over U).obj) ≅
-    colimit ((CategoryOfElements.π Φ.fiber).op ⋙ G.obj)
-  change colimit (F.op ⋙ (CategoryOfElements.π Φ.fiber).op ⋙ G.obj) ≅ _
+  change colimit ((Functor.Elements.π (Φ.over a).fiber).op ⋙ (G.over U).obj) ≅
+    colimit ((Functor.Elements.π Φ.fiber).op ⋙ G.obj)
+  change colimit (F.op ⋙ (Functor.Elements.π Φ.fiber).op ⋙ G.obj) ≅ _
   exact Functor.Final.colimitIso F.op _
 
 end CategoryTheory.GrothendieckTopology.Point

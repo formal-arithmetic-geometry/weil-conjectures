@@ -68,8 +68,7 @@ private theorem idealMul_range {A X : Type*} [CommRing A] [AddCommGroup X] [Modu
     (J : Ideal A) : LinearMap.range (idealMul (X := X) J) = J • (⊤ : Submodule A X) := by
   apply le_antisymm
   · rintro _ ⟨t, rfl⟩
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul a x => exact Submodule.smul_mem_smul a.property (Submodule.mem_top)
     | add x y hx hy => simpa using Submodule.add_mem _ hx hy
   · apply Submodule.smul_le.mpr
@@ -97,8 +96,7 @@ private theorem idealTensorChange_mul {A B X : Type*}
     (J : Ideal A) (t : J ⊗[A] X) :
     idealMul (J.map (algebraMap A B)) (idealTensorChange (B := B) J t) =
       (1 : B) ⊗ₜ[A] idealMul J t := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul a x =>
     rw [idealTensorChange_tmul, idealMul_tmul, idealMul_tmul]
     simp [TensorProduct.tmul_smul]
@@ -108,8 +106,7 @@ private theorem idealMul_naturality {A X Y : Type*}
     [CommRing A] [AddCommGroup X] [Module A X] [AddCommGroup Y] [Module A Y]
     (J : Ideal A) (q : X →ₗ[A] Y) (t : J ⊗[A] X) :
     q (idealMul J t) = idealMul J (q.lTensor J t) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul a x => simp [idealMul_tmul]
   | add x y hx hy => simp [hx, hy]
 
@@ -120,8 +117,7 @@ private theorem idealTensorChange_naturality {A B X Y : Type*}
     (q.baseChange B).lTensor (J.map (algebraMap A B))
       (idealTensorChange (B := B) J t) =
         idealTensorChange (B := B) J (q.lTensor J t) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul a x => simp [idealTensorChange_tmul]
   | add x y hx hy => simp [hx, hy]
 
@@ -195,8 +191,7 @@ theorem exists_baseChange_ideal_kernel_generators
     rintro z ⟨t, rfl⟩
     rw [LinearMap.mem_ker]
     change γ (q.ker.subtype.baseChange R' t) = 0
-    induction t using TensorProduct.induction_on with
-    | zero => simp
+    induction t using TensorProduct.inductionOn with
     | tmul r k => simp [γ, LinearMap.mem_ker.mp k.property]
     | add a b ha hb => simp [ha, hb]
   have hleft : (q.ker ⊓ I • (⊤ : Submodule R F)).baseChange R' ≤ W := by

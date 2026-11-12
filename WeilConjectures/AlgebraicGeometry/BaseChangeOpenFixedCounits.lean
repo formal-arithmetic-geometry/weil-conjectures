@@ -47,7 +47,7 @@ private theorem canonical_single_pullback_comparison_fixed
       (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) g'
   · have ht := t.hom_inv_id_app G
     dsimp only [Scheme.Modules.canonicalSinglePullbackMap]
-    erw [Category.assoc, Category.assoc, ← Functor.map_comp, ht]
+    erw [Category.assoc, ← Functor.map_comp, ht]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- The explicit fixed-counit restriction statement. -/

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
@@ -458,11 +460,9 @@ theorem between_laws :
   · intro K
     simp [betweenHom]
   · intro K L M f g
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | tmul b g =>
-      induction f using TensorProduct.induction_on with
-      | zero => simp
+      induction f using TensorProduct.inductionOn with
       | tmul a f => simp [betweenHom, composition_tmul]
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
@@ -488,8 +488,7 @@ theorem betweenNat_naturality (α : F ⟶ G) (K L : ScalarLocalization R C p)
       ((1 : Localization.Away p) ⊗ₜ[R] α.app K.obj) ≫ (between R p G).map f := by
   change composition R D p _ _ _ _ (betweenHom R p F _ _ f) =
     composition R D p _ _ _ (betweenHom R p G _ _ f) _
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [betweenHom, composition_tmul, α.naturality f]
   | add f g hf hg => simp [map_add, hf, hg]
 
@@ -1279,7 +1278,8 @@ private def sbcPresentationBackEquiv :
 include ha in
 private theorem sbcIntrinsicWitness (M : PbcCompletedDerived X d)
     (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ)
-    (e : DerivedCategory.Q.obj C ≅
+    (e : (DerivedCategory.Q.obj C :
+        DerivedCategory (adicDatumModules X (intrinsicPresentationDatum d))) ≅
       (pbcDerivedExtend (pbcCompletedComparison X d).inv).obj M)
     (h : IsIso (e.inv ≫ DerivedCategory.Q.map
       (completedKoszulUnitComplex X (intrinsicPresentationDatum d) r a C))) :
@@ -1299,10 +1299,12 @@ private theorem sbcPresentation_of_complete (M : PbcCompletedDerived X d)
   let adj := pbcDerivedScalarAdjunction (pbcCompletedComparison X d).inv
   have : E.symm.functor.Additive := inferInstanceAs G.Additive
   have : E.symm.inverse.Additive := inferInstanceAs B.Additive
-  let ej := E.symm.mapDerivedCategory.toAdjunction
+  let ej := (E.symm.mapDerivedCategory : DerivedCategory (pbcModules X (pbcAdicCompletion X d)) ≌
+    DerivedCategory (adicDatumModules X (intrinsicPresentationDatum d))).toAdjunction
   let j : G.mapDerivedCategory ≅ pbcDerivedExtend (pbcCompletedComparison X d).inv :=
     Adjunction.leftAdjointUniq ej adj
-  let eC : DerivedCategory.Q.obj C' ≅
+  let eC : (DerivedCategory.Q.obj C' :
+        DerivedCategory (adicDatumModules X (intrinsicPresentationDatum d))) ≅
       (pbcDerivedExtend (pbcCompletedComparison X d).inv).obj M :=
     (G.mapDerivedCategoryFactors.app C).symm ≪≫ G.mapDerivedCategory.mapIso real ≪≫ j.app M
   have hu : IsIso (DerivedCategory.Q.map (intrinsicCompletionComplexUnit X d r a C)) := by
@@ -1366,10 +1368,16 @@ private theorem sbcConstantFiniteRestriction_complete (n : ℕ)
     (siteRestrictScalars_exact q).2
   let e : ConstantCompletion.dres p ⋙ ConstantCompletion.dres φ ≅
       ConstantCompletion.dres q :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso (ConstantCompletion.resCompIso φ p q hp)
   have hm := CategoryTheory.AdicSites.finiteRestriction_complete S A
     d.toCompleteCoefficientDatum n M
+  let : ∀ U : completedCechSite X, HasDerivedCategory
+      (SheafOfModules (siteModuleRings ((ConstantCompletion.constant J A).over U))) :=
+    fun _ ↦ HasDerivedCategory.standard _
+  let : ∀ U : completedCechSite X, HasDerivedCategory
+      (SheafOfModules (siteModuleRings ((ConstantCompletion.completed J A d.ideal).over U))) :=
+    fun _ ↦ HasDerivedCategory.standard _
   have hm' : ConstantCompletion.IsComplete (ConstantCompletion.quotient J A d.ideal 0)
       ((ConstantCompletion.dres φ).obj ((ConstantCompletion.dres p).obj M)) := by
     exact locallyDerivedRingedIdealComplete_of_iso _ _ (e.app M) hm
@@ -1415,8 +1423,8 @@ private theorem sbcFiniteRestricted_complete (n : ℕ)
   let τD : pbcDerivedRestrict (completedReductionProjection X d n) ⋙ ED.functor ≅
       FD.functor ⋙ ConstantCompletion.dres
         (ConstantCompletion.projection (completedCechTopology X) A d.ideal n) :=
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-      Functor.mapDerivedCategoryNatIso τ' ≪≫ Functor.mapDerivedCategoryCompIso _ _
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+      Functor.mapDerivedCategoryNatIso τ' ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
   have : PreservesFiniteLimits (completedCechModulesEquiv X d).functor := inferInstance
   have : PreservesFiniteColimits (completedCechModulesEquiv X d).functor := inferInstance
   have : (completedCechModulesEquiv X d).functor.Additive :=
@@ -1443,8 +1451,8 @@ private theorem sbcFiniteRestricted_complete (n : ℕ)
   let δD : ED.functor ≅ (completedCechDerivedEquiv X d).functor ⋙
       ConstantCompletion.dres β.inv :=
     Functor.mapDerivedCategoryNatIso (comparisonModulesEquiv_to_cech X d) ≪≫
-      Functor.mapDerivedCategoryCompIso (completedCechModulesEquiv X d).functor
-        (ConstantCompletion.res β.inv)
+      (Functor.mapDerivedCategoryCompIso (completedCechModulesEquiv X d).functor
+        (ConstantCompletion.res β.inv)).symm
   let N := (pbcDerivedRestrict (completedReductionProjection X d n)).obj M
   let C := wfCompletionRepresentative X d N
   let real := DerivedCategory.Q.objObjPreimageIso N
@@ -1455,6 +1463,9 @@ private theorem sbcFiniteRestricted_complete (n : ℕ)
   obtain ⟨_, _, _, _, hi⟩ := ConstantCompletion.koszul_quotient_reflector
     (completedCechTopology X) A d.ideal true r a ha
   have hm := sbcConstantFiniteRestriction_complete X d n (FD.functor.obj M)
+  let : ∀ U : completedCechSite X, HasDerivedCategory (SheafOfModules (siteModuleRings
+      ((ConstantCompletion.completed (completedCechTopology X) A d.ideal).over U))) :=
+    fun _ ↦ HasDerivedCategory.standard _
   have hm' : ConstantCompletion.IsComplete
       (ConstantCompletion.projection (completedCechTopology X) A d.ideal 0)
       (ED.functor.obj N) :=

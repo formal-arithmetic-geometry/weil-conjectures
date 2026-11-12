@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullCore
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Comparison of a formal system with a proper pushforward
 
@@ -96,7 +97,7 @@ theorem exists_formalSystemsPushPull {X Y : Scheme.{u}} [IsNoetherian Y]
         (kernel (α.hom.app (op n)))) ∧
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
         (cokernel (α.hom.app (op n))))) := ⟨t, ht, hn⟩
-  have h04 := (List.TFAE.out htf 0 3).mp hfirst
+  have h04 := (List.TFAE.out htf 1 4).mp hfirst
   obtain ⟨k, c, hk, hc, t', ht', ha⟩ := h04
   refine ⟨t', k, c, ht', hk, hc, ?_, ?_⟩
   · intro n

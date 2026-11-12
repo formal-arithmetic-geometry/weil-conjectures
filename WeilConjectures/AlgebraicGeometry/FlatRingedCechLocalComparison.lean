@@ -49,10 +49,14 @@ private noncomputable def rawScalarIso
   intro X Y g
   apply AddCommGrpCat.hom_ext
   ext z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m b =>
+    let : Module (R.obj.obj Y)
+        ((ModuleCat.restrictScalars
+          (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map g).hom).obj
+            (M.val.obj Y)) :=
+      inferInstanceAs (Module (R.obj.obj Y) (M.val.obj Y))
     change B.obj.map g b ⊗ₜ[R.obj.obj Y, (φ.hom.app Y).hom] M.val.map g m =
       SheafOfModules.changeOfRingsMap φ M g
         (b ⊗ₜ[R.obj.obj X, (φ.hom.app X).hom] m)
@@ -188,8 +192,7 @@ private theorem underlying_pure_hom_ext
   apply AddCommGrpCat.hom_ext
   apply AddMonoidHom.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m n => exact h X m n
 
@@ -278,8 +281,7 @@ private noncomputable def rawOverScalarIso
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul b m =>
     change SheafOfModules.changeOfRingsMap φ M ((Over.forget U).op.map g)
@@ -403,8 +405,7 @@ private theorem underlyingScalarIso_naturality
   rw [← S.map_comp, ← S.map_comp]
   apply congrArg S.map
   ext X z
-  induction z using TensorProduct.induction_on with
-  | zero => simp
+  induction z using TensorProduct.inductionOn with
   | add z t hz ht => simp only [map_add, hz, ht]
   | tmul m b =>
     change B.obj.obj X at b
@@ -574,7 +575,7 @@ private theorem generating_row_cokernel_iso
       (fun _ : σ.I ↦ SheafOfModules.unit A)).hom ≫ σ.π := by
     apply Sigma.hom_ext
     intro i
-    rw [Sigma.ι_desc, ← Category.assoc]
+    rw [Sigma.ι_comp_desc, ← Category.assoc]
     have h := SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply σ.π (e.symm i)
     have hi := Sigma.ι_reindex_hom e.symm (fun _ : σ.I ↦ SheafOfModules.unit A) i
     calc
@@ -589,8 +590,8 @@ private theorem generating_row_cokernel_iso
           (ringedSliceSection R U (f i)).property⟩) := by
     apply Sigma.hom_ext
     intro i
-    rw [← Category.assoc, Sigma.ι_desc, SheafOfModules.unitHomEquiv_symm_comp]
-    erw [SheafOfModules.LocalizationCech.idealRow, Sigma.ι_desc]
+    rw [← Category.assoc, Sigma.ι_comp_desc, SheafOfModules.unitHomEquiv_symm_comp]
+    erw [SheafOfModules.LocalizationCech.idealRow, Sigma.ι_comp_desc]
     change (SheafOfModules.unit A).unitHomEquiv.symm
       (SheafOfModules.sectionsMap (I.inclusion.over U) (σ.s (e.symm i))) =
       (SheafOfModules.unit A).unitHomEquiv.symm

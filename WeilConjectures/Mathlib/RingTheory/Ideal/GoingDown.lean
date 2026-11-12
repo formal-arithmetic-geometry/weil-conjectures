@@ -72,3 +72,4 @@ theorem Algebra.HasGoingDown.isLocalization_atPrime_of_subsingleton {R S : Type*
   exact (IsLocalization.isLocalization_iff_of_algEquiv T
     (IsLocalization.algEquiv q.primeCompl (Localization T) (Localization.AtPrime q))).mp
     inferInstance
+

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -23,6 +24,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Comparing an integral ideal with a module of generic rank one
 

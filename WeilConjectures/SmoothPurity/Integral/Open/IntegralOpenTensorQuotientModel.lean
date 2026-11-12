@@ -66,13 +66,13 @@ private theorem squareFactors (e : F ⋙ G ≅ H ⋙ K) (P : CochainComplex A �
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P) := by
-  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).hom.app
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F G).inv.app
     (DerivedCategory.Q.obj P))).mp
   dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app]
   simp only [Category.assoc]
   erw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   erw [Functor.mapDerivedCategoryNatIso_fac,
     Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
   rfl

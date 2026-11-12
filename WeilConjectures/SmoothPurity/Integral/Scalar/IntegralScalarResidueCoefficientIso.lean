@@ -325,7 +325,7 @@ theorem integralScalarResidueCoefficientIso (n : ℕ)
   have hz : Function.Surjective z := by
     intro b
     obtain ⟨r, hr⟩ := Ideal.Quotient.mk_surjective b.down
-    exact ⟨r, ULift.ext _ _ hr⟩
+    exact ⟨r, ULift.ext hr⟩
   have hq : Function.Surjective q := by
     intro c
     obtain ⟨r, hr⟩ := Ideal.Quotient.mk_surjective c.down

@@ -237,7 +237,8 @@ theorem proEtaleLocalScalarDerivedIso {X Y : Scheme.{u}} (i : Y ⟶ X)
   let T' := LocalScalar.change i R B φ U
   let : T'.Additive := LocalScalar.change_additive i R B φ U
   let DT := completedAdicDerivedChange X φ
-  let DT' := LocalScalar.derivedChange i R B φ U
+  let DT' : DerivedCategory (LocalScalar.source i R U) ⥤
+      DerivedCategory (LocalScalar.target B U) := LocalScalar.derivedChange i R B φ U
   let c := LocalScalar.complexCounit T DT (pbcExtensionCounit φ)
   let c' := LocalScalar.counit i R B φ U
   let P : ObjectProperty (CochainComplex (proEtaleRingModules X R) ℤ) := fun C ↦
@@ -275,7 +276,7 @@ theorem proEtaleLocalScalarDerivedIso {X Y : Scheme.{u}} (i : Y ⟶ X)
     L.mapDerivedCategory.mapIso
       ((F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage (DT.obj M))).symm ≪≫
         F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso (DT.obj M))) ≪≫
-      ((Functor.mapDerivedCategoryCompIso F L).app (DT.obj M)).symm
+      (Functor.mapDerivedCategoryCompIso F L).app (DT.obj M)
   exact ⟨iso K ≪≫ α.app K ≪≫ Dloc.mapIso eH ≪≫ (α.app K').symm ≪≫ (iso K').symm⟩
 
 end AlgebraicGeometry.Scheme

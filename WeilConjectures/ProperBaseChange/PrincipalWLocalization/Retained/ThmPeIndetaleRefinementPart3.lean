@@ -122,8 +122,8 @@ private theorem evaluation_selector (E : Set (PrimeSpectrum R))
         exact (hmem hx).elim
   change evalFactor _ x (if (partAt (selectorIndex E hE) x).val ⊆ E then 1 else 0) = _
   by_cases hx : x ∈ E
-  · simp only [if_pos hx, if_pos (hsub.mpr hx), map_one]
-  · simp only [if_neg hx, if_neg (fun h ↦ hx (hsub.mp h)), map_zero]
+  · simp only [ite_eq_left hx, ite_eq_left (hsub.mpr hx), map_one]
+  · simp only [ite_eq_right hx, ite_eq_right (fun h ↦ hx (hsub.mp h)), map_zero]
 
 private theorem evaluation_surjective (x : PrimeSpectrum R) :
     Function.Surjective (evaluation x) := by
@@ -137,8 +137,8 @@ private theorem evaluation_surjective (x : PrimeSpectrum R) :
       nonvanishing := by
         intro E y hy
         by_cases h : E.val ⊆ D
-        · simpa only [if_pos h] using h hy
-        · simp only [if_neg h, PrimeSpectrum.basicOpen_one,
+        · simpa only [ite_eq_left h] using h hy
+        · simp only [ite_eq_right h, PrimeSpectrum.basicOpen_one,
             TopologicalSpace.Opens.coe_top, Set.mem_univ] }
   have hparts : (partAt i x).val = D ∨ (partAt i x).val = Dᶜ := by
     have h := (partAt i x).property
@@ -150,7 +150,7 @@ private theorem evaluation_surjective (x : PrimeSpectrum R) :
     · have hmem := partAt_mem i x
       rw [h] at hmem
       exact (hmem s.property).elim
-  have hden : i.denominator (partAt i x) = s.val := if_pos hsub
+  have hden : i.denominator (partAt i x) = s.val := ite_eq_left hsub
   let b : Stage i := fun E ↦ IsLocalization.mk' (Localization.Away (i.denominator E))
     a ⟨i.denominator E, Submonoid.mem_powers _⟩
   refine ⟨(CategoryTheory.Limits.colimit.ι (diagram (A := R)) i).hom b, ?_⟩
@@ -501,10 +501,10 @@ theorem properties (T : Set (PrimeSpectrum R)) (hT : IsClosed T) :
     change evaluation x (selector E hE) ∉ IsLocalRing.maximalIdeal L ↔ x ∈ E
     rw [evaluation_selector]
     by_cases hx : x ∈ E
-    · rw [if_pos hx]
+    · rw [ite_eq_left hx]
       exact iff_of_true
         (fun h ↦ m.isPrime.ne_top (m.asIdeal.eq_top_of_isUnit_mem h isUnit_one)) hx
-    · rw [if_neg hx]
+    · rw [ite_eq_right hx]
       exact iff_of_false (fun h ↦ h (Ideal.zero_mem _)) hx
   let C := PrincipalWLocalization.algebra R
   let B := algebra T hT

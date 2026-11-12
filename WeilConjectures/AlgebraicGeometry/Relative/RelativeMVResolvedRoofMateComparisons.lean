@@ -321,6 +321,5 @@ theorem relativeMV_resolved_roof_mate_comparisons
   simp only [t, t', Category.assoc, schemeMayerVietorisComplex,
     schemeMVImageChainMap, ShortComplex.homMk] at hroof ⊢
   convert hroof using 1
-  all_goals congr 3
 
 end AlgebraicGeometry

@@ -297,7 +297,7 @@ theorem koszulCechCocone_exists :
       CochainComplex.HomComplex.Cochain.ofHom_v, ModuleCat.comp_apply,
       koszulCechBasis_transition A r f a b hab J.val J.property,
       map_smul]
-    exact smul_comm _ _ _
+    exact @smul_comm ℤˣ A N _ _ _ _ _ _
   let ι (e : ℕ) : D.obj e ⟶ (principalCechFunctor r f).obj F :=
     (koszulCechHomObjIso A r f M e).hom ≫ g e ≫ (principalCechObjIso r f F).inv
   have hι (a b : ℕ) (hab : a ≤ b) : D.map (homOfLE hab) ≫ ι b = ι a := by

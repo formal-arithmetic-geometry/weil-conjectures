@@ -6,10 +6,13 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparison
 public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization
+import all WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalization
 
 /-! # Ordinary affine exchange in tensor coordinates
 
@@ -36,7 +39,10 @@ local instance (priority := 2000) ordinaryCoordinatesAbelian (Y : Scheme.{u}) :
 
 
 local instance ordinaryExchangeTildeAdditive (C : Type u) [CommRing C] :
-    (affinePushforwardTilde C).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+    (affinePushforwardTilde C).Additive := by
+  constructor
+  intro M N f g
+  exact tilde.map_add (R := .of C) f g
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -70,10 +76,10 @@ def affineTildeTensorOrdinaryTargetMap
   let a := affineTildePushforwardComplexMap D B ψ Cg
   exact DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map k) ≫
     DerivedCategory.Q.map a ≫
-    (RingedSpace.moduleDirectImage
+    cast (by rfl) ((RingedSpace.moduleDirectImage
       (Spec.map (CommRingCat.ofHom ψ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg))
+          (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg)))
 
 /-- Ordinary exchange, in unit-normalized affine tensor coordinates, followed by
 its right-derived unit. This is independent of any derived tensor model or counit.
@@ -126,18 +132,21 @@ theorem affineTildeTensorOrdinaryExchange
       (DerivedCategory.Q.obj
         (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)) M (Iso.refl _) hc
     DerivedCategory.Q.map (affineTildeTensorOrdinarySourceIso R A B M).hom ≫
-        DerivedCategory.Qh.map ((moduleHomotopyBaseChange f f' g p hw).app H) ≫
+        cast (by rfl) ((DerivedCategory.Qh.{w}
+          (C := SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))).map
+          ((moduleHomotopyBaseChange f f' g p hw).app H)) ≫
         (RingedSpace.moduleDirectImage f'.toLRSHom.toShHom).rightDerivedFunctorUnit.app
           (((Scheme.Modules.tensorPullback p).mapHomotopyCategory (.up ℤ)).obj H) =
       affineTildeTensorOrdinaryTargetMap R A B D M φ ψ k ≫
         (schemeDerivedDirectImage f').map t.hom ≫
-        (schemeDerivedDirectImage f').map ((SingleComplexBaseChange.counit p).app H) := by
+        (schemeDerivedDirectImage f').map
+          (cast (by rfl) ((SingleComplexBaseChange.counit p).app H)) := by
   dsimp only
   have h := affineTildeTensorOrdinaryExchange_preNormalization R A B D M φ ψ hw k hk
   dsimp only at h
   rw [← (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom ψ))).map_comp,
     affineBaseChangeTildeRepresentativeIso_counit A D φ M hc]
-  simpa only [affineTildeTensorOrdinaryTargetMap, Category.assoc] using h
+  simpa only [affineTildeTensorOrdinaryTargetMap, cast_eq, Category.assoc] using h
 
 
 end AlgebraicGeometry

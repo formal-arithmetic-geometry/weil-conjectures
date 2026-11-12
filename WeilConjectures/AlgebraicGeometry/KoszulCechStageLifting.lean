@@ -96,7 +96,7 @@ private theorem koszul_basis_values
   have hp : 1 - (J.val.card : ℤ) ≤ 0 := by omega
   have ht : (-(1 - (J.val.card : ℤ))).toNat = J.val.card - 1 := by omega
   dsimp only [z]
-  rw [CochainComplex.HomComplex.Cochain.mk_v, dif_pos hp]
+  rw [CochainComplex.HomComplex.Cochain.mk_v, dite_eq_left hp]
   simp only [ht]
   dsimp only [v, L]
   simp only [koszulCechBasis, ModuleCat.comp_apply, Iso.inv_hom_id_apply]

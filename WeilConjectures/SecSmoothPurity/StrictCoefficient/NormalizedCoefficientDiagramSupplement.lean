@@ -67,8 +67,20 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 /-- The existing tensor isomorphism on total complexes, with instances fixed once.
 Source: Stacks 07A4 (blueprint: lem-pur-strict-coefficient-comparison-calculus). -/
 abbrev totalIso {R : Sheaf J CommRingCat.{w}} {P Q P' Q' : Complex R}
-    (f : P ≅ P') (g : Q ≅ Q') : total P Q ≅ total P' Q' :=
-  @MonoidalCategory.tensorIso (Complex R) _ inferInstance P P' Q Q' f g
+    (f : P ≅ P') (g : Q ≅ Q') : total P Q ≅ total P' Q' := by
+  let : ∀ (I₁ I₂ : Type w), HasColimitsOfShape (Discrete I₂)
+      (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+    fun _ _ ↦ PresheafOfModules.hasColimitsOfShape _ _
+  let : HasCoproducts.{0} (Modules R) := fun I ↦ by
+    let : HasColimitsOfShape (Discrete I) (PresheafOfModules.{w}
+        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+      PresheafOfModules.hasColimitsOfShape _ _
+    exact
+      SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+  let : HasFiniteCoproducts (Modules R) :=
+    hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
+  exact @MonoidalCategory.tensorIso (Complex R) _ inferInstance P P' Q Q' f g
 
 attribute [instance] Diagram.additive
 

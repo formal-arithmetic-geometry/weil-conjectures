@@ -72,6 +72,7 @@ theorem existsUnique_condensedFieldPullbackRealization
         (condensedFieldContinuousMapIso E V).hom.hom := by
   exact ⟨_, rfl, fun _ h ↦ h⟩
 
+
 /-- The realization of coefficients pulled back along an arbitrary scheme map.
 Source: Hemo--Richarz--Scholbach, Example 3.1
 (auxiliary; not a blueprint node).

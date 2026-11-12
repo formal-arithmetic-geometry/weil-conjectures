@@ -47,6 +47,8 @@ noncomputable def purityFieldPullbackCompatibility :
       (boundedConstructible _).ι ⋙ L((πY)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
 
+section Compactification
+
 variable (c : Compactification f.left) (c' : Compactification f'.left)
   {πZ : c'.Z ⟶ c.Z} (hi : IsPullback c'.i πX πZ c.i)
   (hg : IsPullback πZ c'.g c.g πY) [WeaklyEtale πZ] [WeaklyEtale πY]
@@ -104,7 +106,8 @@ noncomputable def purityFieldLowerShriekExchange :
       (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
         c' (compactificationOverField f'))
 
-set_option linter.overlappingInstances false in
+end Compactification
+
 /-- Compact-support base change for an arbitrary cartesian cross-field square along
 weakly étale base change, with both lower-shriek functors chosen by Nagata. -/
 noncomputable def purityFieldLowerShriekBaseChange

@@ -147,7 +147,8 @@ import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import all Mathlib.Analysis.Normed.Field.WithAbs
 import all Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import all Mathlib.GroupTheory.Coset.Defs
-import all Mathlib.Topology.Algebra.Module.Equiv
+import all Mathlib.Topology.Algebra.Module.Equiv.Basic
+import all Mathlib.Topology.Algebra.Module.Equiv.Pi
 import all Mathlib.Topology.CompactOpen
 import all Mathlib.LinearAlgebra.Basis.Defs
 import all WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal

@@ -131,4 +131,5 @@ theorem Scheme.exists_pow_eq_zero_of_isNilpotent (X : Scheme.{u}) [CompactSpace 
   exact (Ideal.mem_bot.mp ((Ideal.pow_le_pow_right (Finset.le_sup hxt)).trans
     (hN x y hyx).le hmem))
 
+
 end AlgebraicGeometry

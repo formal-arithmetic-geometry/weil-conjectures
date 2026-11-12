@@ -29,6 +29,10 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 attribute [local irreducible] completedAdicChangeData completedAdicScalar
 
+local instance finitePerfectAdicFlatTensorCategory
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
+    Category.{t + 2} (DerivedCategory (CompletedAdicModules X d)) := inferInstance
+
 private theorem completedExactComparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [PreservesFiniteLimits (completedAdicScalarExtension X d)]
@@ -102,7 +106,7 @@ theorem finitePerfectAdicFlatTensor_comparison
   obtain ⟨e⟩ := completedExactComparison X d
   let dc : D ≅ finitePerfectAdicDerivedConstant X A ⋙
       completedAdicDerivedChange X (completedAdicScalar X d) :=
-    Functor.mapDerivedCategoryCompIso F E ≪≫
+    (Functor.mapDerivedCategoryCompIso F E).symm ≪≫
       Functor.isoWhiskerLeft F.mapDerivedCategory e.symm
   obtain ⟨c⟩ := finitePerfectAdicTensorComplexDiagram_ordinaryComparison X d P
   have := hb

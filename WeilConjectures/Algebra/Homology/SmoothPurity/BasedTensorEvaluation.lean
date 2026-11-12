@@ -106,6 +106,15 @@ private theorem sectionProduct_ext (d : ℕ)
   exact (sections_coordinate (R := R) d M V x i).trans
     ((h i).trans (sections_coordinate (R := R) d M V y i).symm)
 
+noncomputable local instance
+    (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    {V W : Cᵒᵖ} (f : V ⟶ W) :
+    Module (R.obj.obj W)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj.map f).hom).obj
+          (M.val.obj W)) :=
+  inferInstanceAs (Module (R.obj.obj W) (M.val.obj W))
+
 private theorem changeMap_tmul (φ : R ⟶ S)
     (M : SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -170,6 +179,10 @@ private theorem basisCoordinates_apply (φ : R ⟶ S) (d : ℕ)
   (coordinateEquiv (φ.hom.app V).hom (basisCoordinates φ d e V)
     (M.val.obj V)).toModuleIso ≪≫ (basedTensorProductSections (R := R) d M V).symm
 
+noncomputable local instance (M : SheafOfModules.{u} (𝓡 R)) (V : Cᵒᵖ) :
+    SMul ((unit (𝓡 R)).val.obj V) (M.val.obj V) :=
+  inferInstanceAs (SMul (R.obj.obj V) (M.val.obj V))
+
 private theorem tensorCoordinateApp_tmul (φ : R ⟶ S) (d : ℕ)
     (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
       (restrictScalars (𝓻 φ)).obj (unit (𝓡 S)))
@@ -202,8 +215,7 @@ private theorem tensorCoordinateApp_tmul (φ : R ⟶ S) (d : ℕ)
   PresheafOfModules.isoMk (tensorCoordinateApp φ d e M) (by
     intro V W f
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => exact map_zero _ |>.trans (map_zero _).symm
+    induction x using TensorProduct.inductionOn with
     | add x y hx hy =>
       exact (map_add _ x y).trans ((congrArg₂ (· + ·) hx hy).trans
         (map_add _ x y).symm)
@@ -229,7 +241,8 @@ private theorem tensorCoordinateApp_tmul (φ : R ⟶ S) (d : ℕ)
           (((e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val.app V) s) m
         have hb := PresheafOfModules.naturality_apply
           (e.inv ≫ Pi.π (fun _ : Fin d ↦ unit (𝓡 R)) i).val f s
-        exact (congrArg (fun r ↦ r • M.val.map f m) hb).trans
+        exact (congrArg (fun r : R.obj.obj W ↦
+          r • (show M.val.obj W from M.val.map f m)) hb).trans
           (hl.symm.trans ((congrArg (M.val.map f) hc).symm.trans hπ.symm)))))
 
 private theorem tensor_isSheaf (φ : R ⟶ S) (d : ℕ)
@@ -290,8 +303,7 @@ private theorem tensorCoordinates_naturality (φ : R ⟶ S) (d : ℕ)
         ((tensorPresheafFunctor φ).map f) ≫ (tensorCoordinates φ d e G).hom =
       (tensorCoordinates φ d e F).hom ≫ (Limits.Pi.map (fun _ : Fin d ↦ f)).val := by
   ext V x
-  induction x using TensorProduct.induction_on with
-  | zero => exact map_zero _ |>.trans (map_zero _).symm
+  induction x using TensorProduct.inductionOn with
   | add x y hx hy =>
     exact (map_add _ x y).trans ((congrArg₂ (· + ·) hx hy).trans
       (map_add _ x y).symm)

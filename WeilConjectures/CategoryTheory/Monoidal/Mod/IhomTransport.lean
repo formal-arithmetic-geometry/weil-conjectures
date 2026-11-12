@@ -122,6 +122,7 @@ lemma trIso_hom [∀ M N, IsIso (c M N)] {M N : Mod C A} {M' N' : Mod D B}
     (trIso ρ c φM φN).hom = trHom ρ c φM φN :=
   rfl
 
+
 /-- The transport is an isomorphism when the comparisons are. -/
 instance isIso_trHom [∀ M N, IsIso (c M N)] {M N : Mod C A} {M' N' : Mod D B}
     (φM : (mapModComap ρ).obj M ≅ M') (φN : (mapModComap ρ).obj N ≅ N') :

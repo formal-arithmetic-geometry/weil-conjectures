@@ -55,7 +55,7 @@ private theorem subsingleton_of_positive_local_depth
     (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
       (IsLocalRing.maximalIdeal_le_jacobson (Module.annihilator A T))).symm
   have hz : IsLocalRing.depth (R := A) T = 0 := by
-    rw [IsLocalRing.depth, Ideal.depth, if_neg ht]
+    rw [IsLocalRing.depth, Ideal.depth, ite_eq_right ht]
     apply le_antisymm _ zero_le
     apply sSup_le
     rintro n ⟨rs, hrs, hm, rfl⟩

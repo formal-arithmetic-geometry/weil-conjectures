@@ -83,6 +83,7 @@ private theorem stage_model_map
         ((T.ι E).map_comp ((F.β h).hom.app K₀.obj)
           ((F.Φ E).map c.hom)).symm)
 
+set_option backward.isDefEq.respectTransparency false
 attribute [local irreducible] sfIntegralConstructible ScalarLocalization.linear
   ScalarLocalization.preadditive Linear.homModule Preadditive.homGroup
   Preadditive.fullSubcategory Linear.fullSubcategory sfIntegralConstructibleLinear

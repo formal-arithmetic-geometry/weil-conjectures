@@ -152,6 +152,7 @@ private lemma scalarBoundFiniteBiproduct {C : Type*} [Category C] [Abelian C]
   simpa only [Preadditive.nsmul_comp, Category.id_comp, Preadditive.comp_nsmul,
     Category.comp_id, Limits.zero_comp, Limits.comp_zero] using hzero
 
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 private lemma constantNormNeighborhood (ℓ : ℕ) [Fact ℓ.Prime]
@@ -222,7 +223,7 @@ private lemma integralPrincipalQuotientFunctionsSurjective (ℓ : ℕ) [Fact ℓ
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
     (S : Type u) [TopologicalSpace S] :
     Function.Surjective ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous S
-      continuous_quot_mk) := by
+      continuous_quotient_mk') := by
   classical
   let : DiscreteTopology ((continuousIntegers ℓ E) ⧸ Ideal.span {a}) :=
     integralPrincipalQuotientDiscrete ℓ E a ha
@@ -238,7 +239,7 @@ private lemma integralPrincipalQuotientFunctionsKernel (ℓ : ℕ) [Fact ℓ.Pri
     (a : continuousIntegers ℓ E) (ha : a ≠ 0)
     (S : Type u) [TopologicalSpace S] (f : C(S, continuousIntegers ℓ E))
     (hf : ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous S
-      continuous_quot_mk) f = 0) :
+      continuous_quotient_mk') f = 0) :
     ∃ g : C(S, continuousIntegers ℓ E), ContinuousMap.const S a * g = f := by
   have ha' : (a : E) ≠ 0 := fun h ↦ ha (Subtype.ext h)
   have hdiv (x : S) : (f x : E) / a ∈ continuousIntegers ℓ E := by
@@ -306,7 +307,7 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
   let q : R ⟶ continuousAbRing X ((continuousIntegers ℓ E) ⧸ Ideal.span {a}) :=
     (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (continuousMapRingSheafMap X (Ideal.Quotient.mk (Ideal.span {a}))
-        continuous_quot_mk)
+        continuous_quotient_mk')
   have hqa : Ideal.Quotient.mk (Ideal.span {a}) a = 0 :=
     Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton a))
   have hw : p.hom ≫ q = 0 := by
@@ -338,12 +339,12 @@ private lemma integralPrincipalCokernelIso (ℓ : ℕ) [Fact ℓ.Prime]
       intro y
       obtain ⟨x, hx⟩ := integralPrincipalQuotientFunctionsSurjective ℓ E a ha
         U.unop.left y.down
-      exact ⟨ULift.up x, ULift.ext _ _ hx⟩
+      exact ⟨ULift.up x, ULift.ext hx⟩
     have hex : T.Exact := by
       rw [ShortComplex.ab_exact_iff]
       intro x hx
       have hx' : ((Ideal.Quotient.mk (Ideal.span {a})).compLeftContinuous
-          U.unop.left continuous_quot_mk) x.down = 0 := congrArg ULift.down hx
+          U.unop.left continuous_quotient_mk') x.down = 0 := congrArg ULift.down hx
       obtain ⟨g, hg⟩ := integralPrincipalQuotientFunctionsKernel ℓ E a ha U.unop.left
         x.down hx'
       refine ⟨ULift.up g, ?_⟩
@@ -544,6 +545,7 @@ private lemma integralCyclicLocalChart (ℓ : ℕ) [Fact ℓ.Prime]
   exact ⟨integralConstantNormCokernelSetConstant ℓ E U bU (b x) hx hb,
     integralConstantNormCokernelBound ℓ E U bU (b x) hx hb⟩
 
+
 private lemma finiteConstantAbSet (X : Scheme.{u}) (G : Ab.{u + 1}) [Finite G] :
     ∃ n : ℕ, Nonempty
       ((sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj
@@ -636,6 +638,7 @@ private lemma integralColumnDivides (ℓ : ℕ) [Fact ℓ.Prime]
     exact mul_comm _ _
   rw [he, hq]
 
+
 private lemma finiteSetBiprod (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
     (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
@@ -699,6 +702,7 @@ private lemma finiteSetBiproduct (X : Scheme.{u})
     PreservesProduct.iso F M ≪≫ Pi.mapIso (fun i ↦ (e i).some) ≪≫
     (PreservesProduct.iso K A).symm ≪≫ K.mapIso (Types.productIso A) ≪≫
       K.mapIso eFin.toIso⟩⟩
+
 
 private lemma scalarFiniteFreeMono (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
@@ -804,6 +808,9 @@ private lemma integralDiagonalLocalChart (ℓ : ℕ) [Fact ℓ.Prime]
     simp only [map_zero, Nat.cast_pow] at he
     exact pow_ne_zero n hpE he
   exact integralFreeTorsionScalarChart ℓ E X r (ℓ ^ n) hk _ (hN n hn) hT
+
+-- Rationalization already has free charts. Keep this proved universe comparison beside
+-- the remaining local integral chart construction, for use in its matrix induction.
 
 -- Rationalization already has free charts. Keep this proved universe comparison beside
 -- the remaining local integral chart construction, for use in its matrix induction.

@@ -87,6 +87,7 @@ theorem exists_iso_spec_mvPolynomial_quotient {X₀ : Scheme.{u}} (f₀ : X₀ �
   rw [Iso.trans_hom, Category.assoc, specIsoOfAlgEquiv_hom_comp, hf₀]
   rfl
 
+
 end Presentation
 
 section BaseCases
@@ -130,6 +131,7 @@ theorem isFinite_spec_mvPolynomial_fin_one_quotient {J : Ideal (MvPolynomial (Fi
   rw [IsFinite.SpecMap_iff, CommRingCat.hom_ofHom, RingHom.finite_algebraMap]
   exact module_finite_mvPolynomial_fin_one_quotient hJ
 
+
 /-- The polynomial algebra `R[X₀, …, X_{n-1}]` is standard smooth of relative dimension `n`
 over `R`. -/
 lemma isStandardSmoothOfRelativeDimension_mvPolynomial (R : Type u) [CommRing R] (n : ℕ) :
@@ -153,6 +155,7 @@ theorem smoothOfRelativeDimension_spec_mvPolynomial_fin_one :
   exact RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _
     ((RingHom.isStandardSmoothOfRelativeDimension_algebraMap 1).2
       (isStandardSmoothOfRelativeDimension_mvPolynomial k₀ 1))
+
 
 /-- The isomorphism `Spec (k₀[X] ⧸ ⊥) ≅ Spec k₀[X]`. -/
 noncomputable def specMvPolynomialQuotientBotIso :
@@ -358,6 +361,7 @@ theorem exists_iso_pullback_mvPolynomialQuotientProjection
   have h := isPullback_SpecMap_of_isPushout _ _ _ _ (isPushout_evalInit I φ)
   exact ⟨_, h.isoPullback.symm, h.isoPullback_inv_snd⟩
 
+
 end Projection
 
 section Frobenius
@@ -429,6 +433,7 @@ theorem exists_spec_point_of_frobenius_comp_eq {k₀ k A : Type u} [Field k₀] 
     simp only [RingHom.coe_comp, Function.comp_apply, CommRingCat.hom_comp,
       CommRingCat.hom_ofHom] at h1 h2
     simp [h1, h2]
+
 
 end Frobenius
 

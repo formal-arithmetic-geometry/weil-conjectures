@@ -168,10 +168,14 @@ exact, `Lg^*` is computed by applying `g^*` degreewise, and `g^*` sends the unit
 to that of `Z` because it is strong monoidal. -/
 noncomputable def leftDerivedUpperStarUnitIso : (L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _ :=
   (leftDerivedUpperStarIsoMapDerivedCategory A g).app _ ≪≫
+    D((g)^*[A]).mapIso ((DerivedCategory.quotientCompQhIso _).app
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj (𝟙_ _))) ≪≫
     ((g)^*[A].mapDerivedCategoryFactors).app _ ≪≫
     DerivedCategory.Q.mapIso
       (((HomologicalComplex.singleMapHomologicalComplex (g)^*[A] (.up ℤ) 0).app _) ≪≫
-        (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm)
+        (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso (g)^*[A]).symm) ≪≫
+    ((DerivedCategory.quotientCompQhIso _).app
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj (𝟙_ _))).symm
 
 /-- The derived pullback preserves the unit, `Lg^* Λ_Y ≅ Λ_Z`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`). -/

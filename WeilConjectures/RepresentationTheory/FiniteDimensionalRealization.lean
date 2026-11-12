@@ -79,6 +79,7 @@ theorem isContinuousOn_iff_of_linearEquiv {V V' : Type*} [AddCommGroup V] [Modul
     apply e.injective
     simp [he]⟩
 
+
 end IsContinuousOn
 
 section transport

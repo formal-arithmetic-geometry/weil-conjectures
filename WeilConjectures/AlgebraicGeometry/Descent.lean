@@ -211,7 +211,7 @@ theorem isFiniteLocallyFreeOfRank_of_pullback_of_iUnion_range_eq_univ {R : CommR
     refine isFiniteLocallyFreeOfRank_of_isOpenImmersion _ (Sigma.ι W)
       (sigmaOpenCover W).iSup_opensRange fun j ↦ ?_
     have := h j
-    exact .of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_desc f j) P).symm
+    exact .of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_comp_desc f j) P).symm
   exact isFiniteLocallyFreeOfRank_of_pullback_of_isAffine (Sigma.desc f) P
 
 end Scheme.Modules

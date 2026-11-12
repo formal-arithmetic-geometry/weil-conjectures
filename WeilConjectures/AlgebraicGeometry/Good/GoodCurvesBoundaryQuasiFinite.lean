@@ -72,7 +72,7 @@ private theorem proper_sigmaMap
         ∃ w, Sigma.ι C i w = Sigma.ι C k z
       have heq : Sigma.desc (fun j ↦ b j ≫ Sigma.ι T j) (Sigma.ι C k z) =
           Sigma.ι T k (b k z) := by
-        rw [← Scheme.Hom.comp_apply, Sigma.ι_desc]
+        rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
         rfl
       rw [heq]
       constructor
@@ -209,7 +209,7 @@ theorem good_curves_boundary_quasiFinite
       change Sigma.desc (fun i ↦ b i ≫ t i) (j z) = y at hy
       rw [← hx] at hy
       change Sigma.desc (fun i ↦ b i ≫ t i) (Sigma.ι C i x) = y at hy
-      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc] at hy
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc] at hy
       exact hy
     · intro hxU
       obtain ⟨o, rfl⟩ := hxU

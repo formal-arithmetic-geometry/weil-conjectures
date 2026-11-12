@@ -118,7 +118,7 @@ lemma sign_succAboveSwap (hpq : p ≠ q) :
       simp only [P, Perm.mul_apply, Perm.inv_def, cycleRange_symm_succ]
       rw [← succAbove_succAboveSwap, cycleRange_succAbove]
   have h := congrArg Perm.sign hP
-  rw [Perm.decomposeFin.symm_sign, if_pos rfl, one_mul] at h
+  rw [Perm.decomposeFin.symm_sign, ite_eq_left rfl, one_mul] at h
   rw [← h]
   simp only [P, map_mul, map_inv, sign_cycleRange, Perm.sign_swap hpq]
   rw [← inv_pow, inv_neg_one, mul_neg_one, neg_mul, mul_comm]
@@ -161,10 +161,10 @@ theorem ιMulti_chart_transition (δ : R → N) (hδ : ∀ a b, δ (a * b) = a �
     funext m
     by_cases hm : m = m₀
     · subst hm
-      simp only [c, d, hu, hm₀, if_true, zero_smul, add_zero, swap_apply_right, hδq]
+      simp only [c, d, hu, hm₀, ite_true, zero_smul, add_zero, swap_apply_right, hδq]
     · have hk₁ : p.succAbove m ≠ p := Fin.succAbove_ne p m
       have hk₂ : p.succAbove m ≠ q := fun h ↦ hm (Fin.succAbove_right_injective (h.trans hm₀.symm))
-      simp only [c, d, hm, hu, hm₀, if_true, if_false, swap_apply_of_ne_of_ne hk₁ hk₂,
+      simp only [c, d, hm, hu, hm₀, ite_true, ite_false, swap_apply_of_ne_of_ne hk₁ hk₂,
         swap_apply_right, hy _ hk₁ hk₂, hδ, ← hδq]
       rw [add_comm]
   have hprod : ∏ m, c m = -(y q ^ (D + 1)) := by
@@ -172,15 +172,15 @@ theorem ιMulti_chart_transition (δ : R → N) (hδ : ∀ a b, δ (a * b) = a �
       have := m₀.pos
       omega
     rw [← Finset.mul_prod_erase Finset.univ c (Finset.mem_univ m₀),
-      Finset.prod_congr rfl (fun m hm ↦ if_neg (Finset.ne_of_mem_erase hm) : ∀ m ∈
+      Finset.prod_congr rfl (fun m hm ↦ ite_eq_right (Finset.ne_of_mem_erase hm) : ∀ m ∈
         Finset.univ.erase m₀, c m = y q), Finset.prod_const, Finset.card_erase_of_mem
         (Finset.mem_univ m₀), Finset.card_univ, Fintype.card_fin, ← hD, pow_add]
-    simp only [c, if_true]
+    simp only [c, ite_true]
     ring
   have hsq : ((-1 : R) ^ (p : ℕ)) * (-1) ^ (p : ℕ) = 1 := by
     rw [← mul_pow, neg_one_mul, neg_neg, one_pow]
   rw [hv, AlternatingMap.map_add_smul_self_of_eq_zero (ιMulti R D)
-      (fun m ↦ c m • u (Fin.succAboveSwap p q m)) m₀ d (by simp only [d, if_true]),
+      (fun m ↦ c m • u (Fin.succAboveSwap p q m)) m₀ d (by simp only [d, ite_true]),
     AlternatingMap.map_smul_univ]
   rw [show (fun m ↦ u (Fin.succAboveSwap p q m)) = u ∘ Fin.succAboveSwap p q from rfl,
     AlternatingMap.map_perm, Fin.sign_succAboveSwap hpq, hprod, Units.smul_def,

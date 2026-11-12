@@ -37,7 +37,7 @@ noncomputable def strictLocalNeighbourhoods {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s) ⥤ S.Etale :=
   (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
-    CategoryOfElements.π _ ⋙ Scheme.AffineEtale.Spec S
+    Functor.Elements.π _ ⋙ Scheme.AffineEtale.Spec S
 
 /-- The base-changed neighbourhood diagram, with the order V ×_S X.
 Source: Stacks, Tag 03Q9, first proof paragraph

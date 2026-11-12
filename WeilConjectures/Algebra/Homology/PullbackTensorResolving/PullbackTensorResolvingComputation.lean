@@ -308,6 +308,9 @@ private theorem isKFlat_of_iso
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R
   intro A hA n
+  have : ∀ (J₂ : Type r), HasColimitsOfShape (Discrete J₂) (PresheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R).obj) := fun J₂ ↦
+    PresheafOfModules.hasColimitsOfShape _ _
   let F := (MonoidalCategory.curriedTensor (SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).mapBifunctorHomologicalComplex
       (ComplexShape.up ℤ) (ComplexShape.up ℤ)
@@ -470,7 +473,13 @@ theorem pullback_resolving_computation
       eps.app (H.obj P)) := by rw [hfac]; infer_instance
   have hi'' := IsIso.of_isIso_comp_left
     (e.hom.app (DerivedCategory.Qh.obj (H.obj P))) (eps.app (H.obj P))
-  rw [← heps P]
-  exact hi''
+  rw [heps P] at hi''
+  have := IsIso.of_isIso_comp_left
+    (L.map ((DerivedCategory.quotientCompQhIso (Modules R)).hom.app P))
+    (epsilon.app P ≫ (DerivedCategory.quotientCompQhIso (Modules S)).inv.app
+      ((f.L.mapHomologicalComplex (.up ℤ)).obj P))
+  exact IsIso.of_isIso_comp_right (epsilon.app P)
+    ((DerivedCategory.quotientCompQhIso (Modules S)).inv.app
+      ((f.L.mapHomologicalComplex (.up ℤ)).obj P))
 
 end SheafOfModules.PullbackTensorResolving

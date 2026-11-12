@@ -245,7 +245,7 @@ lemma mapDomain_mem_red [NeZero p] {ι : Type*} {z : ι → K} (hz : Injective z
     exact ⟨i, rfl⟩
   · by_cases hs : s ∈ range z
     · obtain ⟨i, rfl⟩ := hs
-      rw [Finsupp.mapDomain_apply hz]; exact E.2 i
+      rw [Finsupp.mapDomain_apply_of_injective hz]; exact E.2 i
     · rw [Finsupp.mapDomain_of_notMem_range _ _ hs]; exact Nat.pos_of_neZero p
 
 omit [Field K] [Fact p.Prime] [CharP K p] in

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
@@ -427,7 +429,7 @@ import all Mathlib.CategoryTheory.Sites.LocalProperties
 import all Mathlib.CategoryTheory.Limits.Connected
 import all Mathlib.CategoryTheory.Filtered.Connected
 import all Mathlib.CategoryTheory.Filtered.Final
-import all Mathlib.Data.Finite.Prod
+import all Mathlib.Basic.Finite.Prod
 import all WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 import all WeilConjectures.AlgebraicGeometry.LisseLatticeClassSheaf
 import all WeilConjectures.AlgebraicGeometry.LatticeSheafLocallyConstant
@@ -464,7 +466,8 @@ import all Mathlib.Analysis.Normed.Field.WithAbs
 import all Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import all Mathlib.GroupTheory.Coset.Defs
 import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
-import all Mathlib.Topology.Algebra.Module.Equiv
+import all Mathlib.Topology.Algebra.Module.Equiv.Basic
+import all Mathlib.Topology.Algebra.Module.Equiv.Pi
 import all Mathlib.Topology.CompactOpen
 import all Mathlib.LinearAlgebra.Basis.Defs
 import all WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
@@ -912,7 +915,7 @@ private theorem integralModel_extension_constructible
   apply single_constructible Λ X
   have hc : CompactSpace X := inferInstance
   have hq : QuasiSeparatedSpace X := inferInstance
-  rw [IsConstantModelConstructible, if_pos (And.intro hc hq)]
+  rw [IsConstantModelConstructible, ite_eq_left (And.intro hc hq)]
   exact hi
 
 set_option backward.isDefEq.respectTransparency.types false in
@@ -994,7 +997,10 @@ private theorem integralModel_flat_derived_single
   have hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K :=
     (CochainComplex.kFlat_single_obj_iff_flat M 0).mpr hM
   have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat K hK
-  exact ⟨asIso (F.leftDerivedFunctorCounit.app
+  exact ⟨(integralModel_derivedScalar φ).mapIso
+      ((DerivedCategory.singleFunctorIsoCompQ _ 0).app M ≪≫
+        ((DerivedCategory.quotientCompQhIso _).app K).symm) ≪≫
+    asIso (F.leftDerivedFunctorCounit.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) ≪≫
     DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app K) ≪≫
     (DerivedCategory.quotientCompQhIso _).app
@@ -1687,7 +1693,7 @@ private theorem integralModel_constant_constructible
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : IsConstantModelConstructible Λ X M) :
     IsConstructibleModuleObject (condensedRingObj Λ X) M := by
-  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩] at hM
+  rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩] at hM
   obtain ⟨S, hS⟩ := hM
   refine ⟨S, fun a ↦ ?_⟩
   have h := constantModel_lfp Λ (S.domain a) _ (hS a)

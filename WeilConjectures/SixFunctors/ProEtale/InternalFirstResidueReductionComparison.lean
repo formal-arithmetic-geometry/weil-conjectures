@@ -105,9 +105,17 @@ private theorem firstResidueDerivedSquare
     (NatIso.mapHomologicalComplex γ (.up ℤ))
     (Mod.KFlatScalarTower.computationCounit p) t.mapDerivedCategoryFactors.hom P hres
     (fun _ _ ↦ inferInstance)
-    (fun K hK ↦ f.isIso_leftDerivedFunctorCounit_app_of_kFlat _
-      (firstResidueRestrictionKFlat X a K hK))
-    (fun K hK ↦ b.isIso_leftDerivedFunctorCounit_app_of_kFlat K hK)
+    (fun K hK ↦ by
+      have := f.isIso_leftDerivedFunctorCounit_app_of_kFlat _
+        (firstResidueRestrictionKFlat X a K hK)
+      dsimp only [Mod.KFlatScalarTower.computationCounit, NatTrans.comp_app,
+        Functor.whiskerRight_app, Functor.whiskerLeft_app]
+      infer_instance)
+    (fun K hK ↦ by
+      have := b.isIso_leftDerivedFunctorCounit_app_of_kFlat K hK
+      dsimp only [Mod.KFlatScalarTower.computationCounit, NatTrans.comp_app,
+        Functor.whiskerRight_app, Functor.whiskerLeft_app]
+      infer_instance)
     (fun _ _ ↦ inferInstance)
   exact ⟨d⟩
 
@@ -121,7 +129,7 @@ private def firstResidueRestrictionComp
       (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (f ≫ g)).mapDerivedCategory :=
   (Functor.mapDerivedCategoryCompIso
     (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) g)
-    (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) f)).symm ≪≫
+    (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) f)) ≪≫
     Functor.mapDerivedCategoryNatIso (Mod.comapComp f g).symm
 
 attribute [local irreducible] firstResidueRestrictionComp

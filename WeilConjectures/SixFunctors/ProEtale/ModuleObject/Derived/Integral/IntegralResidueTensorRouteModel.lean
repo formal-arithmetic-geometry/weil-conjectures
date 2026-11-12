@@ -30,7 +30,8 @@ attribute [local semireducible] residueExchangeTensorModelTarget
   residueExchangeTensorIso Mod.residueDerivedTensorIso residueExchangeUpperStar
   residueExchangeUpperStarCounit
   residueExchangeReduction
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueTensorRouteModel
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 set_option linter.style.haveILetI false in
 set_option cleanup.letToHave false in

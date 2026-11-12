@@ -184,7 +184,8 @@ lemma injective_telescopeMap : Function.Injective (telescopeMap ϖ) := by
       exact this.symm
     | succ k ih =>
       have := h (k + 1)
-      rw [hy, Finsupp.mapDomain_apply Nat.succ_injective, ih, mul_zero, sub_zero] at this
+      rw [hy, Finsupp.mapDomain_apply_of_injective Nat.succ_injective, ih, mul_zero,
+        sub_zero] at this
       exact this.symm
   exact Finsupp.ext hk
 

@@ -84,14 +84,14 @@ lemma constantZModUnit_smul [NeZero N] (M : SheafOfModules.{w} (constantZModShea
     {U : Cᵒᵖ} (a : ZMod N) (x : M.val.obj U) :
     (constantZModUnit J N).app U ⟨a⟩ • x = a.val • x := by
   have : (⟨a⟩ : ULift.{w} (ZMod N)) = (a.val : ULift.{w} (ZMod N)) :=
-    ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
+    ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_zmod_val])
   rw [this, map_natCast, Nat.cast_smul_eq_nsmul]
 
 /-- A sheaf of `(ℤ/N)_C`-modules is killed by `N`. -/
 lemma nsmul_eq_zero_of_constantZMod (M : SheafOfModules.{w} (constantZModSheaf J N))
     {U : Cᵒᵖ} (x : M.val.obj U) : N • x = 0 := by
   have h : (N : ULift.{w} (ZMod N)) = 0 :=
-    ULift.ext _ _ (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
+    ULift.ext (by rw [ULift.down_natCast, ZMod.natCast_self]; rfl)
   have h' : ((constantZModUnit J N).app U).hom (N : ULift.{w} (ZMod N)) =
       (N : (constantZModSheaf J N).obj.obj U) := map_natCast _ N
   rw [← Nat.cast_smul_eq_nsmul (R := (constantZModSheaf J N).obj.obj U), ← h', h, map_zero,

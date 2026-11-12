@@ -103,11 +103,11 @@ private theorem componentRestriction_isIso {ι : Type u} (X : ι → Scheme.{u})
         (piObjIso _ W).hom = Pi.lift (fun i ↦ F.obj.map (π i).op) := by
       apply Pi.hom_ext
       intro i
-      rw [Category.assoc, piObjIso_hom_comp_π, ← NatTrans.comp_app, Pi.lift_π]
+      rw [Category.assoc, piObjIso_hom_comp_π, ← NatTrans.comp_app, Pi.lift_comp_π]
       change (componentRestriction X F i).app W =
         (Pi.lift (fun i ↦ F.obj.map (π i).op)) ≫
           Pi.π (fun i ↦ F.obj.obj (op (D i))) i
-      rw [Pi.lift_π]
+      rw [Pi.lift_comp_π]
       rfl
     rw [← Iso.eq_comp_inv] at h
     rw [h]

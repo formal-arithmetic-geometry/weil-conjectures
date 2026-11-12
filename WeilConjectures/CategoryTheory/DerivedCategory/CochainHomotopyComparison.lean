@@ -41,7 +41,10 @@ theorem exists_homotopy_leftDerived_comparison
     ∃ ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh,
       T.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)) ∧
         ∀ P : CochainComplex A ℤ,
-          ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) = εc.app P := by
+          ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P) =
+            T.map ((DerivedCategory.quotientCompQhIso A).hom.app P) ≫ εc.app P ≫
+              (DerivedCategory.quotientCompQhIso B).inv.app
+                ((E.mapHomologicalComplex (.up ℤ)).obj P) := by
   classical
   let q := HomotopyCategory.quotient A (.up ℤ)
   let F := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh (C := B)
@@ -121,16 +124,6 @@ theorem exists_homotopy_leftDerived_comparison
   intro P
   have he := congrArg (fun t ↦ t.app P) hε
   change ε.app (q.obj P) = _ at he
-  have hi : i.hom.app P = 𝟙 _ := rfl
-  have hj : j.inv.app P = 𝟙 _ := by
-    simp only [j, Iso.trans_inv, NatTrans.comp_app, Functor.associator_inv_app,
-    Functor.mapHomotopyCategoryFactors,
-    DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso]
-    simp
-    rfl
-  change ε.app (q.obj P) = T.map (i.hom.app P) ≫ εc.app P ≫ j.inv.app P at he
-  rw [hi, hj, T.map_id, Category.id_comp, Category.comp_id] at he
-  exact he
+  simpa [α, j, Functor.mapHomotopyCategoryFactors] using he
 
 end CategoryTheory

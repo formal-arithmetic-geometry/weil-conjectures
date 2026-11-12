@@ -68,7 +68,7 @@ lemma pow_smul_comp_padicIntAbSheafCone_π (Y : Scheme.{u}) (n : ℕ) :
         (padicIntSheafCone Y ℓ)).π.app (op n) = 0 := by
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ ?_))
   ext x
-  refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
   refine (map_zsmul (PadicInt.toZModPow n) _ (x.down t)).trans ?_
   rw [zsmul_eq_mul, Int.cast_natCast, ZMod.natCast_self, zero_mul]
   rfl
@@ -78,11 +78,11 @@ noncomputable def isColimitCokernelCoforkPadicIntAbSheafCone (Y : Scheme.{u}) (n
     IsColimit (CokernelCofork.ofπ _ (pow_smul_comp_padicIntAbSheafCone_π ℓ Y n)) := by
   refine Sheaf.isColimitCokernelCoforkOfSurjective _ _ _ (fun U x ↦ ?_) (fun U x hx ↦ ?_)
   · refine ⟨ULift.up ((⟨fun z : ZMod (ℓ ^ n) ↦ (z.val : ℤ_[ℓ]), continuous_of_discreteTopology⟩ :
-      C(ZMod (ℓ ^ n), ℤ_[ℓ])).comp x.down), ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)⟩
+      C(ZMod (ℓ ^ n), ℤ_[ℓ])).comp x.down), ULift.ext (ContinuousMap.ext fun t ↦ ?_)⟩
     exact (map_natCast (PadicInt.toZModPow n) (x.down t).val).trans (ZMod.natCast_zmod_val _)
   · obtain ⟨g, hg⟩ := PadicInt.exists_continuousMap_pow_mul_eq n x.down (fun t ↦
       congrArg (fun y : ULift.{u + 1} C(U.unop.left, ZMod (ℓ ^ n)) ↦ y.down t) hx)
-    refine ⟨ULift.up g, ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)⟩
+    refine ⟨ULift.up g, ULift.ext (ContinuousMap.ext fun t ↦ ?_)⟩
     refine (zsmul_eq_mul (g t) _).trans ?_
     rw [Int.cast_natCast, Nat.cast_pow, hg]
 

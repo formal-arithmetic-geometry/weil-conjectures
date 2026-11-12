@@ -66,12 +66,10 @@ lemma exists_eq_mul_self_mul_tensor_of_intermediateField {L : Type*} [Field L]
       map_smul, smul_eq_mul]
   have hr : ∀ (c : E ⊗[k] E) (z : L ⊗[k] L), r (ι c * z) = c * r z := by
     intro c z
-    induction c using TensorProduct.induction_on with
-    | zero => simp
+    induction c using TensorProduct.inductionOn with
     | add c c' hc hc' => simp only [map_add, add_mul, hc, hc']
     | tmul c₁ c₂ =>
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | add z z' hz hz' => simp only [map_add, mul_add, hz, hz']
       | tmul z₁ z₂ =>
         simp only [ι, r, Algebra.TensorProduct.map_tmul, IntermediateField.coe_val,
@@ -252,5 +250,6 @@ lemma tensorEvalRight_X_sub_C (a : L) :
     tensorEvalRight K L a (Polynomial.X - Polynomial.C a) =
       (1 ⊗ₜ[K] a - a ⊗ₜ[K] 1 : L ⊗[K] L) := by
   simp
+
 
 end Algebra.WeaklyEtale

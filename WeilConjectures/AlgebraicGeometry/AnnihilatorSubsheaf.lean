@@ -49,7 +49,6 @@ private def annihilatorPresheaf (X : Scheme.{u}) (J : X.IdealSheafData)
     have hh := hs W (h.trans f.unop.le) a ha
     rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     convert hh using 1
-    congr 2
 
 private theorem ideal_restrict_mem (X : Scheme.{u}) (J : X.IdealSheafData)
     {U V : X.Opens} (h : V ≤ U) {a : Γ(X, U)} (ha : a ∈ J.idealOfOpens U) :

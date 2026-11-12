@@ -135,8 +135,7 @@ theorem linear_fiber_quotient
     | _ z =>
       change h (gq (Ideal.Quotient.mk I z)) = Ideal.Quotient.mk I z
       change h (g z) = Ideal.Quotient.mk I z
-      induction z using TensorProduct.induction_on with
-      | zero => simp
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp [hz, hw]
       | tmul k s =>
         rw [gg]
@@ -148,8 +147,7 @@ theorem linear_fiber_quotient
         rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
   · intro z
     change gq (h z) = z
-    induction z using TensorProduct.induction_on with
-    | zero => simp
+    induction z using TensorProduct.inductionOn with
     | add z w hz hw => simp only [map_add, hz, hw]
     | tmul k s =>
       rw [hh]

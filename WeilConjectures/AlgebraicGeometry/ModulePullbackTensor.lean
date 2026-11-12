@@ -68,8 +68,7 @@ private def tensorPresheafHom {X Y : Scheme.{v}} (f : X ⟶ Y) (M N : Y.Modules)
   naturality {U U'} i := by
     ext1
     refine LinearMap.ext fun z ↦ ?_
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul s t =>
       have ht := PresheafOfModules.Monoidal.tensorObj_map_tmul (R := Y.presheaf) i s t
       refine (congrArg (TensorProduct.lift (sectionsBilinear f M N U'.unop)) ht).trans ?_
@@ -148,8 +147,7 @@ private theorem tensor_hom_ext {Y : Scheme.{v}} {M N H : Y.Modules}
   apply PresheafOfModules.hom_ext
   intro U
   ext z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | tmul s t => exact h U.unop s t
   | add z w hz hw => simp only [map_add, hz, hw]
 

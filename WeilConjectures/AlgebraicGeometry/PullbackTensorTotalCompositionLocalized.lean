@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorComparisonComposition
 
 /-! # Ordinary tensor pullback composition after localization
@@ -171,7 +173,8 @@ theorem pullback_tensor_total_composition_localized
         ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
           (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
         (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)
-    (((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app
+    cast (by rfl)
+      (((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app
         ((HomotopyCategory.quotient
           (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj P))) ⊗ₘ
       ((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app
@@ -187,10 +190,11 @@ theorem pullback_tensor_total_composition_localized
       DerivedCategory.Q.map θ.inv ≫
       DerivedCategory.Q.map
         (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).map ψ.inv) ≫
-      (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app
+      cast (by rfl)
+        ((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app
         ((HomotopyCategory.quotient
           (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj
-          (pullbackTensorTotal Z P N))) ≫
+          (pullbackTensorTotal Z P N)))) ≫
       DerivedCategory.Q.map φ.hom := by
   let : MonoidalCategory Z.Modules := pullbackDescentModuleTensor Z
   let : MonoidalCategory Y.Modules := pullbackDescentModuleTensor Y

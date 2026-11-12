@@ -94,7 +94,7 @@ theorem isGeometricallyRegular_genericFiber_of_formallySmoothAdic
   have : IsAdicComplete (IsLocalRing.maximalIdeal A₀) A₀ := hcomplete
   have : Module.Finite A₀ A := hfinite
   have hlocal : IsLocalHom A₀.subtype := by
-    apply ((IsLocalRing.local_hom_TFAE _).out 3 0).mp
+    apply ((IsLocalRing.local_hom_TFAE _).out 4 1).mp
     rw [hmax]
   have := hlocal
   have hres : Function.Bijective (IsLocalRing.ResidueField.map A₀.subtype) := by

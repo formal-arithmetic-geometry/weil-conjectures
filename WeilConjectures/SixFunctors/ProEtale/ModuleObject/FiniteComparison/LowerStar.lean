@@ -105,8 +105,8 @@ noncomputable def finiteCoefficientDerivedOpenImmersionLowerShriekIso {U : Schem
         D((j)_!open[ModuleCat.{u + 1} (ULift.{u + 1} T)]) ≅
       D((j)_!open⟦Profinite.continuousMapRingObj T⟧) ⋙
         (finiteCoefficientDerivedEquivalence X T).functor :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (finiteCoefficientModOpenImmersionLowerShriekIso T j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.ProEtale

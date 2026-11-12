@@ -66,8 +66,7 @@ lemma bijective_tensorRestrictScalarsHom (M : ModuleCat.{u} R) (P : ModuleCat.{u
       (AlgebraTensorModule.cancelBaseChange R S S P M).symm.toAddEquiv).trans
       (TensorProduct.comm S P (S ⊗[R] M)).toAddEquiv
   have key : ∀ x : M ⊗[R] P, tensorRestrictScalarsHom f M P x = e x := fun x ↦ by
-    induction x using TensorProduct.induction_on with
-    | zero => exact (map_zero _).trans (map_zero e).symm
+    induction x using TensorProduct.inductionOn with
     | tmul m p =>
       rw [tensorRestrictScalarsHom_tmul]
       rfl

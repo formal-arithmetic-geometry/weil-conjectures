@@ -46,7 +46,7 @@ lemma Profinite.padicIntegersRingObjMulLeft_natCast_pow :
       (ℓ : ℤ) ^ n • 𝟙 (Profinite.padicIntegersRingObj.{u} ℓ E) := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   ext S a
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
+  refine ULift.ext (ContinuousMap.ext fun s ↦ ?_)
   rw [Profinite.padicIntegersRingObjMulLeft_hom_app_apply,
     Profinite.zsmul_id_padicIntegersRingObj_hom_app_apply]
   simp [zsmul_eq_mul]

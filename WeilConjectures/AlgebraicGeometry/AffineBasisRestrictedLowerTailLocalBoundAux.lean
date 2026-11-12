@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyComparison
 import WeilConjectures.Topology.RestrictInjectiveResolution
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 @[expose] public section
 universe u wC wV

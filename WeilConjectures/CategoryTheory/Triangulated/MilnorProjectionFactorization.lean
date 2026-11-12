@@ -78,11 +78,11 @@ theorem milnor_projection_epi [HasDerivedCategory.{v} AddCommGrpCat.{u}]
     change (inv (piComparison H P) ≫ H.map (Pi.π P n)) (j y) = _
     rw [inv_piComparison_comp_map_π]
     exact ConcreteCategory.congr_hom
-      (Pi.lift_π (fun n : ℕ => limit.π (K ⋙ H) (Opposite.op n)) n) y
+      (Pi.lift_comp_π (fun n : ℕ => limit.π (K ⋙ H) (Opposite.op n)) n) y
   have htπ (n : ℕ) : H.map t ≫ H.map (Pi.π P n) = H.map (Pi.π P n) -
       H.map (Pi.π P (n + 1)) ≫ H.map (K.map (homOfLE (Nat.le_succ n)).op) := by
     simp only [← H.map_comp, t, towerTransitionEndomorphism, towerProductShift,
-      Preadditive.sub_comp, Category.id_comp, Pi.lift_π, Functor.map_sub]
+      Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π, Functor.map_sub]
   have hxzero : H.map t x = 0 := by
     apply Concrete.isLimit_ext (Discrete.functor (fun n : ℕ => H.obj (P n))) hprod
     intro ⟨n⟩

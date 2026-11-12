@@ -97,14 +97,14 @@ theorem etale_coefficient_product_embedding_compatibility
   intro t
   change (φ f ≫ etaleCoefficientProductEmbedding D F φ j) ≫ Pi.π _ t = _
   unfold etaleCoefficientProductEmbedding
-  rw [Category.assoc, Pi.lift_π]
+  rw [Category.assoc, Pi.lift_comp_π]
   unfold etaleCoefficientProductTransition
-  rw [Category.assoc, Pi.lift_π,
+  rw [Category.assoc, Pi.lift_comp_π,
     ← Adjunction.homEquiv_naturality_left_symm]
   apply ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
     (D.map f.op)).homEquiv _ _).injective
   rw [Equiv.apply_symm_apply, Adjunction.homEquiv_naturality_right]
-  erw [Pi.lift_π_assoc]
+  erw [Pi.lift_comp_π_assoc]
   dsimp only
   rw [hcomposition]
   simp only [Category.assoc]

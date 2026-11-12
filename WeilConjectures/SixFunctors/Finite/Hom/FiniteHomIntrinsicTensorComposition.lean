@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SixFunctors.Etale.EtaleFiniteCoefficientHomArrow
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorChainSquare

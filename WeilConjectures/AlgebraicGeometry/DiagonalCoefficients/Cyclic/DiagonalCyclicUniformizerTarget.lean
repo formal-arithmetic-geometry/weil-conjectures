@@ -151,7 +151,7 @@ private theorem diagonalCyclic_uniformizerTarget_proof
     (a := q.cyclicAdjunction) (b := q.quotientAdjunction)
     (H := q.restriction.mapDerivedCategory)
     (s := Functor.mapDerivedCategoryNatIso s ≪≫
-      Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight)
+      (Functor.mapDerivedCategoryCompIso q.restriction q.cyclicRight).symm)
     (X := M) (f := q.quotientTarget) (g := q.cyclicTarget)
     (v := shiftedRootInsertion q.quotientRight q.quotientRootInsertion)
     (w := shiftedRootInsertion q.cyclicRight q.cyclicRootInsertion)

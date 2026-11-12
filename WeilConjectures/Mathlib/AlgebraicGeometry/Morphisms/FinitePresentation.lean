@@ -110,7 +110,7 @@ theorem LocallyOfFinitePresentation.of_comp_of_flat_of_surjective_of_isAffine_of
   have : LocallyOfFinitePresentation (g ≫ f) := by
     have : g ≫ f = Sigma.desc fun i : s ↦ (W i.1 : X'.Opens).ι ≫ u ≫ f := by
       ext i
-      simp [g, Sigma.ι_desc]
+      simp [g, Sigma.ι_comp_desc]
     rw [this]
     exact IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
   have : Surjective g := Surjective.sigmaDesc_of_union_range_eq_univ <|
@@ -172,6 +172,7 @@ theorem Scheme.Hom.diagonal_finitePresentation [LocallyOfFinitePresentation f]
     LocallyOfFinitePresentation (pullback.diagonal f) ∧ QuasiCompact (pullback.diagonal f) ∧
       QuasiSeparated (pullback.diagonal f) :=
   ⟨inferInstance, inferInstance, inferInstance⟩
+
 
 end Diagonal
 

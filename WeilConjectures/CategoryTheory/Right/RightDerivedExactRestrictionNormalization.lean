@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedExactCompositionComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 import Mathlib.Tactic.Convert
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Full-unit normalization of an exact restriction square -/
 

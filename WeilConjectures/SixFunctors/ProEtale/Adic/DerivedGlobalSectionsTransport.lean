@@ -144,7 +144,7 @@ lemma derivedGlobalSectionsUnitIso_trans {X Y Z : Scheme.{u}} (e : X ≅ Y) (e' 
       (DerivedCategory.singleFunctor _ 0).map (adicLowerStarUnitIso l (e ≪≫ e')).hom =
       ((Functor.mapDerivedCategoryNatIso (adicLowerStarComp l e.hom e'.hom).symm).hom.app
           ((DerivedCategory.singleFunctor _ 0).obj (AdicSheaf.unit l X)) ≫
-        ((e.hom)_*ᵃ[l].mapDerivedCategoryCompIso (e'.hom)_*ᵃ[l]).hom.app
+        (Functor.mapDerivedCategoryCompIso (e.hom)_*ᵃ[l] (e'.hom)_*ᵃ[l]).inv.app
           ((DerivedCategory.singleFunctor _ 0).obj (AdicSheaf.unit l X))) ≫
       (e'.hom)_*ᵃ[l].mapDerivedCategory.map
           (((e.hom)_*ᵃ[l].mapDerivedCategorySingleFunctor 0).hom.app (AdicSheaf.unit l X) ≫

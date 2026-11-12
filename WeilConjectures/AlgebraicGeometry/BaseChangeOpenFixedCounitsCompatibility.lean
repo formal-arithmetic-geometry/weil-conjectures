@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 
 module
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeSquare
@@ -96,10 +99,10 @@ theorem restricted_base_change_compatibility_single_degree
               (moduleRings X'.toRingedSpace)),
         (derivedPullback g').IsLeftDerivedFunctor ε
             (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) ∧
-          c = ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
+          c = cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫
             DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
               ((HomologicalComplex.singleMapHomologicalComplex
-                (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))))
+                (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))))
     (V : S.Opens) (W : S'.Opens) (hWV : W ≤ g ⁻¹ᵁ V) :
     let U := f ⁻¹ᵁ V
     let fA := f ∣_ V
@@ -121,11 +124,11 @@ theorem restricted_base_change_compatibility_single_degree
               (moduleRings (pullback fA gA).toRingedSpace)),
         (derivedPullback (pullback.fst fA gA)).IsLeftDerivedFunctor ε
             (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) ∧
-          c0 = ε.app ((HomotopyCategory.singleFunctor _ n).obj H) ≫
+          c0 = cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor _ n).obj H) ≫
             DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
               ((HomologicalComplex.singleMapHomologicalComplex
                 (Scheme.Modules.tensorPullback (pullback.fst fA gA))
-                  (ComplexShape.up ℤ) n).hom.app H)))),
+                  (ComplexShape.up ℤ) n).hom.app H))))),
       ∃ a : R.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≅
           (derivedPullback gA).obj ((schemeDerivedDirectImage fA).obj E0),
       ∃ b : R.obj ((schemeDerivedDirectImage f').obj

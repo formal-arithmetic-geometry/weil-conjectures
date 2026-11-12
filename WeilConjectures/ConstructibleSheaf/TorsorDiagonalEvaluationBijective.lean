@@ -61,7 +61,7 @@ private theorem graphCoproduct_isIso (W : c.P.Etale) :
     apply Sigma.hom_ext
     intro g
     dsimp only [D']
-    erw [Sigma.ι_desc, ← Category.assoc, ← Category.assoc,
+    erw [Sigma.ι_comp_desc, ← Category.assoc, ← Category.assoc,
       (Sigma.ι_reindex_hom Equiv.ulift.symm (fun _ : ULift.{u + 1} P ↦ c.P) g),
       Category.assoc]
     apply pullback.hom_ext <;> simp [D]
@@ -75,7 +75,7 @@ private theorem graphCoproduct_isIso (W : c.P.Etale) :
         (𝟙 W.left) (W.hom ≫ c.smul ⟨g⟩) (by simp [c.smul_π])) := by
     apply Sigma.hom_ext
     intro g
-    simp only [Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc]
     apply pullback.hom_ext
     · simp only [diagonalSection, sectionAction, pullback.map, Category.assoc,
         pullback.lift_fst, Category.comp_id]
@@ -102,7 +102,7 @@ private theorem graphHomeo_mk (W : c.P.Etale) (g : P) (x : W.left) :
   change (Sigma.desc fun g : P ↦ c.diagonalSection W ≫
     c.sectionAction ((MorphismProperty.Over.map ⊤ c.etale).obj W) g)
       (AlgebraicGeometry.sigmaMk (fun _ : P ↦ W.left) ⟨g, x⟩) = _
-  rw [AlgebraicGeometry.sigmaMk_mk, ← Scheme.Hom.comp_apply, Sigma.ι_desc]
+  rw [AlgebraicGeometry.sigmaMk_mk, ← Scheme.Hom.comp_apply, Sigma.ι_comp_desc]
   rfl
 
 private theorem sectionAction_mul (W : V.Etale) (g h : P) :

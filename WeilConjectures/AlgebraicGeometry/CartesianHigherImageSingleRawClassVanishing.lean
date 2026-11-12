@@ -26,6 +26,14 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance singleRawClassVanishingHasShift (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
+noncomputable local instance singleRawClassVanishingHasZeroMorphisms (T : Scheme.{u}) :
+    HasZeroMorphisms (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
+  inferInstance
+
 private theorem iso_reflects_zero {A B : AddCommGrpCat.{u + 1}} (e : A ≅ B) (x : A)
     (h : e.hom x = 0) : x = 0 := by
   have hi := congrArg e.inv h

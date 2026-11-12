@@ -119,7 +119,7 @@ private theorem plusCompIso_commShift
     NatTrans.CommShift (mapDerivedCategoryPlusCompIso F G).hom ℤ := by
   have he : whiskerRight (mapDerivedCategoryPlusCompIso F G).hom DerivedCategory.Plus.ι =
       (F ⋙ G).mapDerivedCategoryPlusCompatibility.hom ≫
-        whiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G).hom ≫
+        whiskerLeft DerivedCategory.Plus.ι (mapDerivedCategoryCompIso F G).inv ≫
         (associator _ _ _).inv ≫
         whiskerRight F.mapDerivedCategoryPlusCompatibility.inv G.mapDerivedCategory ≫
         (associator _ _ _).hom ≫

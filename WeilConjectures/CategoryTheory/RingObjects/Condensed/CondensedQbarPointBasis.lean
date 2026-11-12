@@ -171,8 +171,8 @@ private noncomputable def scalarSection (U : Profinite.{u}) (x : PadicAlgCl ℓ)
       have hx : FiniteDimensional ℚ_[ℓ] ℚ_[ℓ]⟮x⟯ :=
         IntermediateField.adjoin.finiteDimensional (Algebra.IsIntegral.isIntegral x)
       refine ⟨E.1 ⊔ ℚ_[ℓ]⟮x⟯, inferInstance, fun t ↦ ?_⟩
-      exact mul_mem (SetLike.le_def.mp le_sup_left (f t).property)
-        (SetLike.le_def.mp le_sup_right (IntermediateField.mem_adjoin_simple_self _ _))⟩
+      exact mul_mem (IsConcreteLE.le_iff.mp le_sup_left (f t).property)
+        (IsConcreteLE.le_iff.mp le_sup_right (IntermediateField.mem_adjoin_simple_self _ _))⟩
 
 private noncomputable def scalarSectionHom (U : Profinite.{u}) (x : PadicAlgCl ℓ) :
     C(U, E) →+ PadicAlgCl.finiteIntermediateFieldValued ℓ U where

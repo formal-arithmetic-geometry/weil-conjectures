@@ -39,7 +39,7 @@ namespace AlgebraicGeometry
 /-- The geometric point over a closed point is a section of the structure morphism of the
 geometric fiber over `k̄`. -/
 @[reassoc (attr := simp)]
-lemma Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure
+lemma Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure'
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) (x : X.finitePoints) :
     f.geometricFiberPointOfFinitePoint x ≫ f.geometricFiberToAlgebraicClosure = 𝟙 _ := by
   let := (f.residueFieldAlgebraMap x.1).toAlgebra
@@ -57,7 +57,7 @@ lemma Scheme.Hom.isOpenImmersion_geometricFiberPointOfFinitePoint {k : Type u} [
   have : Etale f.geometricFiberToAlgebraicClosure := inferInstanceAs (Etale (pullback.snd _ _))
   have : IsOpenImmersion (f.geometricFiberPointOfFinitePoint x ≫
       f.geometricFiberToAlgebraicClosure) := by
-    rw [geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure]
+    rw [geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure']
     infer_instance
   exact FormallyUnramified.isOpenImmersion_of_comp f.geometricFiberToAlgebraicClosure _
 
@@ -70,7 +70,7 @@ lemma Scheme.Hom.isClosedImmersion_geometricFiberPointOfFinitePoint {k : Type u}
     inferInstanceAs (IsFinite (pullback.snd _ _))
   have : IsClosedImmersion (f.geometricFiberPointOfFinitePoint x ≫
       f.geometricFiberToAlgebraicClosure) := by
-    rw [geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure]
+    rw [geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure']
     infer_instance
   exact IsClosedImmersion.of_comp _ f.geometricFiberToAlgebraicClosure
 namespace WeilSheaf

@@ -71,7 +71,7 @@ theorem exists_homogeneous_notMem_of_finset (s : Finset (ProjectiveSpectrum 𝒜
       h ∉ p.asHomogeneousIdeal := by
     have hle : ¬ x.1.asHomogeneousIdeal ≤ p.asHomogeneousIdeal := fun hle ↦
       (Finset.mem_erase.mp x.2).1 (le_antisymm hle (hp.2 (Finset.mem_erase.mp x.2).2 hle))
-    obtain ⟨a, hax, hap⟩ := SetLike.not_le_iff_exists.mp hle
+    obtain ⟨a, hax, hap⟩ := IsConcreteLE.not_le_iff_exists.mp hle
     by_contra! H
     refine hap ?_
     rw [← DirectSum.sum_support_decompose 𝒜 a]

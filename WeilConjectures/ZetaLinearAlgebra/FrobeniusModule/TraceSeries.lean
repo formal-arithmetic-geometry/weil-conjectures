@@ -96,6 +96,7 @@ theorem leadingCoeff_localPolynomial_ne_zero (M : FrobeniusModule.{u, v} K) :
   exact mul_ne_zero (pow_ne_zero _ (neg_ne_zero.2 one_ne_zero))
     (LinearEquiv.isUnit_det' M.frobenius).ne_zero
 
+
 /-- The *alternating trace series*
 
 `str_F(T) = ∑_{n ≥ 1} (∑_{i ∈ s} (-1) ^ i tr (F_i ^ n ∣ V_i)) T ^ n / n`
@@ -114,6 +115,7 @@ trace series. -/
 theorem alternatingTraceSeries_eq_sum (s : Finset ℤ) (M : ℤ → FrobeniusModule.{u, v} K) :
     alternatingTraceSeries s M = ∑ i ∈ s, (i.negOnePow : ℤ) • (M i).traceSeries :=
   rfl
+
 
 /-- The `n`-th coefficient of the alternating trace series is
 `(∑_{i ∈ s} (-1) ^ i tr (F_i ^ n ∣ V_i)) / n`, and `0` for `n = 0` (blueprint:

@@ -72,7 +72,8 @@ private lemma degreeOf_zero_t' {a : k} (ha : a ≠ 0) : ((T' f) (monomial v a)).
     ∑ i : Fin (n + 1), (r i) * v i := by
   rw [← natDegree_finSuccEquiv, monomial_eq, Finsupp.prod_pow v fun a ↦ X a]
   simp only [Fin.prod_univ_succ, Fin.sum_univ_succ, map_mul, map_prod, map_pow,
-    AlgEquiv.ofAlgHom_apply, MvPolynomial.aeval_C, MvPolynomial.aeval_X, if_pos, Fin.succ_ne_zero,
+    AlgEquiv.ofAlgHom_apply, MvPolynomial.aeval_C, MvPolynomial.aeval_X, ite_eq_left,
+    Fin.succ_ne_zero,
     ite_false, one_smul, map_add, finSuccEquiv_X_zero, finSuccEquiv_X_succ, algebraMap_eq]
   have h (i : Fin n) :
       (Polynomial.C (X (R := k) i) + Polynomial.X ^ r i.succ) ^ v i.succ ≠ 0 :=
@@ -86,16 +87,16 @@ private lemma degreeOf_zero_t' {a : k} (ha : a ≠ 0) : ((T' f) (monomial v a)).
 
 /-- `T'` maps different monomials of `f` to polynomials with different degrees in `X_0`. -/
 private lemma degreeOf_t_ne_of_ne' (hv : v ∈ f.support) (hw : w ∈ f.support) (ne : v ≠ w) :
-    (T' f <| monomial v <| coeff v f).degreeOf 0 ≠
-    (T' f <| monomial w <| coeff w f).degreeOf 0 := by
+    (T' f <| monomial v <| f.coeff v).degreeOf 0 ≠
+    (T' f <| monomial w <| f.coeff w).degreeOf 0 := by
   rw [degreeOf_zero_t' _ _ <| mem_support_iff.mp hv, degreeOf_zero_t' _ _ <| mem_support_iff.mp hw]
   refine sum_r_mul_ne' f v w (fun i ↦ ?_) (fun i ↦ ?_) ne <;>
   exact lt_of_le_of_lt ((monomial_le_degreeOf i ‹_›).trans (degreeOf_le_totalDegree f i))
     (by lia)
 
 private lemma leadingCoeff_finSuccEquiv_t' :
-    (finSuccEquiv k n ((T' f) ((monomial v) (coeff v f)))).leadingCoeff =
-    algebraMap k _ (coeff v f) := by
+    (finSuccEquiv k n ((T' f) ((monomial v) (f.coeff v)))).leadingCoeff =
+    algebraMap k _ (f.coeff v) := by
   rw [monomial_eq, Finsupp.prod_fintype]
   · simp only [map_mul, map_prod, leadingCoeff_mul, leadingCoeff_prod]
     rw [AlgEquiv.ofAlgHom_apply, algHom_C, algebraMap_eq, finSuccEquiv_apply,
@@ -105,7 +106,7 @@ private lemma leadingCoeff_finSuccEquiv_t' :
     have : ∀ j, ((finSuccEquiv k n) ((T1 f) 1 (X j))).leadingCoeff = 1 := fun j ↦ by
       by_cases h : j = 0
       · simp [h, finSuccEquiv_apply]
-      · simp only [aeval_eq_bind₁, bind₁_X_right, if_neg h, one_smul, map_add, map_pow]
+      · simp only [aeval_eq_bind₁, bind₁_X_right, ite_eq_right h, one_smul, map_add, map_pow]
         obtain ⟨i, rfl⟩ := Fin.exists_succ_eq.mpr h
         simp [finSuccEquiv_X_succ, finSuccEquiv_X_zero, add_comm]
     simp only [this, one_pow, Finset.prod_const_one, mul_one]
@@ -115,8 +116,8 @@ private lemma leadingCoeff_finSuccEquiv_t' :
 private lemma T'_leadingcoeff_isUnit (fne : f ≠ 0) :
     IsUnit (finSuccEquiv k n (T' f f)).leadingCoeff := by
   obtain ⟨v, vin, vs⟩ := Finset.exists_max_image f.support
-    (fun v ↦ (T' f ((monomial v) (coeff v f))).degreeOf 0) (support_nonempty.mpr fne)
-  set h := fun w ↦ (MvPolynomial.monomial w) (coeff w f)
+    (fun v ↦ (T' f ((monomial v) (f.coeff v))).degreeOf 0) (support_nonempty.mpr fne)
+  set h := fun w ↦ (MvPolynomial.monomial w) (f.coeff w)
   simp only [← natDegree_finSuccEquiv] at vs
   replace vs : ∀ x ∈ f.support \ {v}, (finSuccEquiv k n ((T' f) (h x))).degree <
       (finSuccEquiv k n ((T' f) (h v))).degree := by
@@ -210,13 +211,13 @@ theorem finite_quotient_comp_rename_succ (p : MvPolynomial (Fin (n + 1)) R)
     refine ringHom_ext (fun r ↦ ?_) (fun i ↦ ?_)
     · simp only [RingHom.coe_comp, Function.comp_apply, Ideal.quotientMap_mk,
         AlgHom.toRingHom_eq_coe, RingHom.coe_coe, rename_C, RingEquiv.toRingHom_eq_coe,
-        AlgEquiv.coe_ringEquiv]
+        AlgEquiv.coe_toRingEquiv]
       congr 1
       rw [AlgEquiv.symm_apply_eq]
       simp [finSuccEquiv_apply]
     · simp only [RingHom.coe_comp, Function.comp_apply, Ideal.quotientMap_mk]
       rw [AlgHom.toRingHom_eq_coe, RingHom.coe_coe, rename_X, RingEquiv.toRingHom_eq_coe,
-        RingEquiv.coe_toRingHom, AlgEquiv.coe_ringEquiv, ← finSuccEquiv_X_succ,
+        RingEquiv.coe_toRingHom, AlgEquiv.coe_toRingEquiv, ← finSuccEquiv_X_succ,
         AlgEquiv.symm_apply_apply]
   rw [← heq]
   refine RingHom.Finite.comp (RingHom.Finite.of_surjective _

@@ -6,6 +6,9 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
+
 public import WeilConjectures.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 
 /-! # Single-complex identities for exact restriction and tensor reassociation
@@ -54,7 +57,6 @@ private lemma exact_single_hom
   erw [Category.comp_id, Category.id_comp] at h
   rw [h]
   erw [Category.id_comp]
-  rfl
 
 private lemma complex_single_square
     {C D B E : Type*} [Category C] [Category D] [Category B] [Category E]
@@ -186,7 +188,7 @@ composition identify the rest. In degree zero both paths are the same tensor
 restriction map; in every other degree the maps are between zero objects.
 Apply the homotopy quotient and Qh and reassociate. The identities use only
 additive tensor pullback and exact restriction, without any derived counit. -/
-theorem open_pinned_single_tensor_restriction_factors
+private theorem open_pinned_single_tensor_restriction_factors_private
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
@@ -235,5 +237,10 @@ theorem open_pinned_single_tensor_restriction_factors
       (Scheme.Modules.tensorPullback k)
       (schemeOpenRestriction X' U') (schemeOpenRestriction X U)
       (Scheme.Modules.tensorPullback j) (openPinnedTensorRestrictionIso k U U' j hj) M
+
+/-- Public export of the private `open_pinned_single_tensor_restriction_factors_private`
+(used by `import all` importers; linter.privateModule). -/
+alias open_pinned_single_tensor_restriction_factors :=
+  open_pinned_single_tensor_restriction_factors_private
 
 end AlgebraicGeometry

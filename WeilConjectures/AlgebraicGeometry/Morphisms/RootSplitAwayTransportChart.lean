@@ -112,7 +112,7 @@ private theorem root_split_degree_one_chart
     Sigma.ι_reindex_hom_assoc]
   simp only [AlgebraicGeometry.ι_sigmaSpec_assoc]
   simp only [e, si, Scheme.Spec.mapIso_hom, Iso.op_hom, RingEquiv.toCommRingCatIso_hom,
-    AlgebraicGeometry.Scheme.Spec_map, Sigma.ι_desc]
+    AlgebraicGeometry.Scheme.Spec_map, Sigma.ι_comp_desc]
   rw [← AlgebraicGeometry.Spec.map_comp, ← AlgebraicGeometry.Spec.map_comp,
     ← AlgebraicGeometry.Spec.map_comp, ← AlgebraicGeometry.Spec.map_id S]
   congr 1

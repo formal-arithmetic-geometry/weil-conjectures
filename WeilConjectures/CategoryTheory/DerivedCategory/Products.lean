@@ -84,6 +84,6 @@ noncomputable def isLimitFanMkQObj {K : β → CochainComplex C ℤ} {s : Fan K}
       (fun j ↦ by simp [φ, ← HomologicalComplex.homologyMap_comp]))⟩
   exact Fan.IsLimit.ofIsos (isLimitFanMkQObjOfIsKInjective (productIsProduct I))
     (fun j ↦ asIso (Q.map (i j))) (asIso (Q.map φ))
-    (fun j ↦ by simp only [asIso_hom, fan_mk_proj, ← Functor.map_comp, φ, Pi.lift_π])
+    (fun j ↦ by simp only [asIso_hom, fan_mk_proj, ← Functor.map_comp, φ, Pi.lift_comp_π])
 
 end DerivedCategory

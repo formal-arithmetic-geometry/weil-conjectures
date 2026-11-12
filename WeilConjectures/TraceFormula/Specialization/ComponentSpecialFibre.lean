@@ -110,8 +110,7 @@ lemma isClosedImmersion_componentSpecialLift [IsClosedImmersion (j ≫ F.ι).lef
       (IsClosedImmersion (fixedLocusOfDiag.ι (hc.specialLeg₁ k') (hc.specialLeg₂ k')).left)
   have : IsClosedImmersion
       ((hc.componentSpecialLift k' j hb).left ≫ (hc.specialFixedLocus k').ι.left) := by
-    rw [← Over.comp_left, componentSpecialLift_ι]
-    assumption
+    rwa [← Over.comp_left, componentSpecialLift_ι]
   exact IsClosedImmersion.of_comp_isClosedImmersion _ (hc.specialFixedLocus k').ι.left
 
 /-- The factorization `B'' ⟶ F'` is surjective: `F'` has at most one point

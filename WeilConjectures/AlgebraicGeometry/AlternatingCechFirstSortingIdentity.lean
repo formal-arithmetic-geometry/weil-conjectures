@@ -175,7 +175,7 @@ theorem cechFirstSortingIdentity (X : Scheme.{u}) {I : Type v} [LinearOrder I]
       have h : i = j := by omega
       subst j
       rfl
-    rw [if_pos hm, if_pos hm, indexMap_id]
+    rw [ite_eq_left hm, ite_eq_left hm, indexMap_id]
     erw [op_id, F.map_id]
     erw [ConcreteCategory.id_apply]
     rw [sub_self]

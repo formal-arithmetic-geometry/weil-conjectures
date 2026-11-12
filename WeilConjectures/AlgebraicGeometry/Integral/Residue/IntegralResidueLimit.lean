@@ -106,7 +106,7 @@ private theorem exists_unique_continuous_lift (S : Type*) [TopologicalSpace S]
     exact hz.trans_lt hn
   refine ⟨⟨f, hcont⟩, hres, ?_⟩
   intro g hg
-  ext x
+  ext x : 1
   apply ext_of_toZModPow.mp
   intro n
   exact (hg n x).trans (hres n x).symm

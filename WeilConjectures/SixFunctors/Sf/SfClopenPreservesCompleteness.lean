@@ -464,15 +464,15 @@ private theorem roos_transport
   have hp : Φ.map p ≫ b.hom = Pi.lift legs := by
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, hb, Pi.lift_π, ← Category.assoc, ← Φ.map_comp, hlegs]
+    rw [Category.assoc, hb, Pi.lift_comp_π, ← Category.assoc, ← Φ.map_comp, hlegs]
   have ht : Φ.map (towerTransitionEndomorphism f) ≫ b.hom =
       b.hom ≫ towerTransitionEndomorphism f' := by
     apply Pi.hom_ext
     intro n
     simp only [Category.assoc, hb, towerTransitionEndomorphism, towerProductShift,
-      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, Pi.lift_π,
+      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, Pi.lift_comp_π,
       Functor.map_sub]
-    simp only [← Category.assoc, ← Φ.map_comp, Pi.lift_π, Category.id_comp]
+    simp only [← Category.assoc, ← Φ.map_comp, Pi.lift_comp_π, Category.id_comp]
     rw [Φ.map_comp, Category.assoc, hnat, ← Category.assoc, ← hb]
     simp only [Category.assoc]
     simpa only [Category.assoc] using
@@ -489,7 +489,6 @@ private theorem roos_transport
     rw [← Category.assoc, ← ht]
     simp
   · simp
-    rfl
 
 private instance clopen_commShift
     {l : ℕ} [Fact l.Prime] {E : Type u} [Field E] [Algebra ℚ_[l] E]
@@ -558,7 +557,7 @@ theorem sf_clopen_preserves_completeness
   let Φ := sfClopenDerivedRestriction d
   let Ψ := sfClopenComplexRestriction d
   let : PreservesLimitsOfShape (Discrete ℕ) Φ := clopen_derived_products d
-  let eP : DerivedCategory.Q.obj P ≅ M :=
+  let eP :=
     integralTowerAugmentationIso l E T D hl q hq ≪≫ e
   let e' : DerivedCategory.Q.obj (Ψ.obj P) ≅ Φ.obj M :=
     (sfClopenLocalizationIso d P).symm ≪≫ Φ.mapIso eP
@@ -588,7 +587,7 @@ theorem sf_clopen_preserves_completeness
   have hlegs (n : ℕ) : legs n =
       Φ.map (p ≫ Pi.π K n) ≫ (tower P).hom.app (op n) := by
     dsimp only [p]
-    rw [Pi.lift_π]
+    rw [Pi.lift_comp_π]
     change legs n = Φ.map (e.inv ≫ integralReductionTowerMap l E T D hl q hq n) ≫ _
     rw [integralReductionTowerMap, integralTowerUnit_eq]
     dsimp only [legs]
@@ -614,7 +613,7 @@ theorem sf_clopen_preserves_completeness
         e'.inv).π.app (op n))) = Pi.lift legs := by
     apply Pi.hom_ext
     intro n
-    rw [Pi.lift_π, Pi.lift_π]
+    rw [Pi.lift_comp_π, Pi.lift_comp_π]
     change e'.inv ≫
       (integralTowerAugmentationIso l E U.toScheme D hl (𝟙 (Ψ.obj P)) hq').inv ≫
         DerivedCategory.Q.map (integralTowerUnit l E U.toScheme D hl (Ψ.obj P) n) = _

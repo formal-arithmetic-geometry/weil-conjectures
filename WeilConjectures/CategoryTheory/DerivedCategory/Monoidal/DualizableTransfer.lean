@@ -106,7 +106,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
   [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance instHasColimitsOfSize_monoidalDualizableTransfer
+    : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 /-- The chain-level data of the dualizability criterion `DerivedCategory.isDualizable_Qh_obj_iff`
 for a complex `P`: K-injective resolutions `u : 𝟙 ⟶ I₁` and `i : P ⟶ I`, a map
@@ -230,8 +231,10 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ G)
   [∀ X : C, IsIso (ihomComparison G X).natTrans]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
-local instance : HasColimitsOfSize.{0, 0} D := hasColimitsOfSizeShrink D
+local instance instHasColimitsOfSize_monoidalDualizableTransfer_2
+    : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance instHasColimitsOfSize_monoidalDualizableTransfer_3
+    : HasColimitsOfSize.{0, 0} D := hasColimitsOfSizeShrink D
 
 attribute [local instance] CochainComplex.monoidalClosed
 
@@ -344,7 +347,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
   [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance instHasColimitsOfSize_monoidalDualizableTransfer_4
+    : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 omit [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C] in
 /-- A K-flat complex admits a `DualizabilityDatum`: take K-injective resolutions of the unit and

@@ -96,6 +96,7 @@ lemma galoisPoint_fiber_obj (X : (Spec (.of K)).Etale) :
       ULift.{u + 1} (Over.mk (specAlgebraMap K Ω) ⟶ (Etale.forget _).obj X) :=
   rfl
 
+
 @[simp]
 lemma galoisPoint_fiber_map_down {X Y : (Spec (.of K)).Etale} (f : X ⟶ Y)
     (x : (galoisPoint K Ω).fiber.obj X) :
@@ -109,7 +110,7 @@ noncomputable def galoisPointActHom (σ : Gal(Ω/K)) :
   app X := TypeCat.ofHom fun x ↦ ULift.up (galoisOverHom σ ≫ x.down)
   naturality X Y f := by
     ext x
-    exact ULift.ext _ _ (Category.assoc _ _ _).symm
+    exact ULift.ext (Category.assoc _ _ _).symm
 
 @[simp]
 lemma galoisPointActHom_app_down (σ : Gal(Ω/K)) {X : (Spec (.of K)).Etale}
@@ -123,13 +124,13 @@ noncomputable def galoisPointAct : Gal(Ω/K) →* End (galoisPoint K Ω).fiber w
   map_one' := by
     refine NatTrans.ext (funext fun X ↦ ?_)
     ext x
-    refine ULift.ext _ _ ?_
+    refine ULift.ext ?_
     change galoisOverHom 1 ≫ x.down = x.down
     rw [galoisOverHom_one, Category.id_comp]
   map_mul' σ τ := by
     refine NatTrans.ext (funext fun X ↦ ?_)
     ext x
-    refine ULift.ext _ _ ?_
+    refine ULift.ext ?_
     change galoisOverHom (σ * τ) ≫ x.down = galoisOverHom σ ≫ galoisOverHom τ ≫ x.down
     rw [galoisOverHom_mul, Category.assoc]
 
@@ -192,7 +193,7 @@ lemma galoisPointAct_galoisPointFiberSpec_eq_iff (σ : Gal(Ω/K)) :
     rw [← Spec.map_comp, Spec.map_inj] at h'
     exact congr($(h').hom ⟨x, hx⟩)
   · intro h
-    refine ULift.ext _ _ (Over.OverMorphism.ext ?_)
+    refine ULift.ext (Over.OverMorphism.ext ?_)
     change Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫
         Spec.map (CommRingCat.ofHom (algebraMap E Ω)) =
         Spec.map (CommRingCat.ofHom (algebraMap E Ω))
@@ -216,7 +217,7 @@ lemma exists_galoisPointAct_galoisPointFiberSpec_eq
     { ψ.hom with commutes' r := congr($(hw).hom r) }
   let τ := φ.liftNormal Ω
   let σ : Gal(Ω/K) := AlgEquiv.ofBijective τ (Algebra.IsAlgebraic.algHom_bijective τ)
-  refine ⟨σ, ULift.ext _ _ (Over.OverMorphism.ext ?_)⟩
+  refine ⟨σ, ULift.ext (Over.OverMorphism.ext ?_)⟩
   change Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫
       Spec.map (CommRingCat.ofHom (algebraMap E Ω)) = y.down.left
   rw [← Spec.map_comp, ← hψ]
@@ -273,7 +274,7 @@ lemma exists_galoisPoint_fiber_map_eq (X : (Spec (.of K)).Etale)
     congr 1
     ext r
     exact congrArg Subtype.val (ψ.commutes r)
-  · refine ULift.ext _ _ (Over.OverMorphism.ext ?_)
+  · refine ULift.ext (Over.OverMorphism.ext ?_)
     change Spec.map (CommRingCat.ofHom (algebraMap φ'.fieldRange Ω)) ≫
       Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ X.left.fromSpecResidueField p = x.down.left
     rw [← hφ, ← Category.assoc, ← Spec.map_comp]
@@ -389,6 +390,7 @@ lemma etaleSheafEquivDiscreteModule_functor_obj_obj
     ((etaleSheafEquivDiscreteModule K Ω).functor.obj F).obj =
       ((galoisPoint K Ω).sheafFiberAction (galoisPointAct K Ω)).obj F :=
   rfl
+
 
 /-- **Étale cohomology of a field is Galois cohomology**:
 `Hⁿ(Spec K_ét, F) ≃ Hⁿ(Gal(Ω/K), F_Ω)` for every abelian étale sheaf `F` on `Spec K`.

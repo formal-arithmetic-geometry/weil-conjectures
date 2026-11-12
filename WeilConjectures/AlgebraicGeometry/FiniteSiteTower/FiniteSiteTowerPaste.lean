@@ -257,7 +257,7 @@ def AEUnbounded (E : Etale.DerivedCategoryModule R X) :=
       ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b).mapDerivedCategory.obj
         ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) a).mapDerivedCategory.obj E)) ≫
     (Etale.lowerStar (ModuleCat.{u + 1} R) (p ≫ q)).rightDerivedFunctor.map
-      ((Functor.mapDerivedCategoryCompIso _ _).inv.app E ≫
+      ((Functor.mapDerivedCategoryCompIso _ _).hom.app E ≫
         (Functor.mapDerivedCategoryNatIso
           (Etale.openImmersionLowerShriekComp (ModuleCat.{u + 1} R) a b).symm).hom.app E)
 
@@ -317,7 +317,7 @@ private theorem mE_restriction (E : DE R X) :
     DerivedCategory.Plus.ι.map ((mE R a b).hom.app E) =
       (Functor.mapDerivedCategoryCompIso
         (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) a)
-        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).inv.app E.obj ≫
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).hom.app E.obj ≫
       (Functor.mapDerivedCategoryNatIso
         (Etale.openImmersionLowerShriekComp (ModuleCat.{u + 1} R) a b).symm).hom.app E.obj := by
   have hc : DerivedCategory.Plus.ι.mapIso
@@ -326,7 +326,7 @@ private theorem mE_restriction (E : DE R X) :
         (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).app E) =
       (Functor.mapDerivedCategoryCompIso
         (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) a)
-        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).app E.obj := by
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).symm.app E.obj := by
     apply Iso.ext
     exact Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ E
   simp only [mE, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
@@ -470,13 +470,13 @@ private theorem AEUnbounded_eq_triangle (M : Etale.DerivedCategoryModule R X) :
     (ModuleCat.{u + 1} R) p q).hom.naturality
       ((Functor.mapDerivedCategoryCompIso
         (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) a)
-        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).inv.app M ≫
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) b)).hom.app M ≫
       (Functor.mapDerivedCategoryNatIso
         (Etale.openImmersionLowerShriekComp
           (ModuleCat.{u + 1} R) a b).symm).hom.app M)
   dsimp only [Functor.comp_map] at hn
   simpa only [Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc,
-    Functor.mapDerivedCategoryNatIso_symm, Iso.symm_hom,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.symm_hom, Iso.symm_inv,
     Etale.rightDerivedLowerStar] using
     congrArg (fun t ↦ (Etale.lowerStar (ModuleCat.{u + 1} R) q).rightDerivedFunctor.map
       ((Etale.openImmersionLowerShriekLowerStarExchange

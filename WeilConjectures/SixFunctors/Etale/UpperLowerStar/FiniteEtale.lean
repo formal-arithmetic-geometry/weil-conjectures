@@ -433,7 +433,7 @@ omit [IsSeparated f] in
 geometric point `t'` of `X` over `y`. -/
 lemma Etale.basePt_fiberMapPoint (t t' : Scheme.Hom.GeometricFiber f y) (U : X.Etale)
     (x : (Scheme.pointSmallEtale t.1).fiber.obj U) :
-    Scheme.Hom.basePt f ⟨_, Etale.fiberMapPoint f t U x⟩ t' =
+    Scheme.Hom.basePt f (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x)) t' =
       pullback.lift x.left t'.1 (by
         have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
         change x.left ≫ U.hom ≫ f = _
@@ -451,9 +451,11 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict (t : Scheme.Hom.GeometricFiber f
   intro U x
   refine Eq.trans ?_ (Category.comp_id _).symm
   erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
-  rw [Etale.toPresheafFiber_stalkRestrict A f y t G ⟨_, Etale.fiberMapPoint f t U x⟩]
+  rw [Etale.toPresheafFiber_stalkRestrict A f y t G
+    (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))]
   have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
-  have : ((Etale.baseChangeNbhd f y t).obj ⟨_, Etale.fiberMapPoint f t U x⟩).2 =
+  have : ((Etale.baseChangeNbhd f y t).obj
+      (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))).2 =
       (Scheme.pointSmallEtale t.1).fiber.map (Scheme.Etale.graph f U) x := by
     refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
     · change Scheme.Hom.basePt f _ t ≫ _ = (x.left ≫ (Scheme.Etale.graph f U).left) ≫ _
@@ -477,9 +479,10 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.Geometr
   intro U x
   refine Eq.trans ?_ (comp_zero).symm
   erw [Etale.toPresheafFiber_sheafFiberToLowerStar_assoc]
-  rw [Etale.toPresheafFiber_stalkRestrict A f y t' G ⟨_, Etale.fiberMapPoint f t U x⟩]
+  rw [Etale.toPresheafFiber_stalkRestrict A f y t' G
+    (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))]
   have hx : x.left ≫ U.hom = t.1 := CategoryTheory.Over.w x
-  let b := Scheme.Hom.basePt f ⟨_, Etale.fiberMapPoint f t U x⟩ t'
+  let b := Scheme.Hom.basePt f (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x)) t'
   -- the point `(u, t')` lies off the graph
   have hb : Set.range b ⊆ Set.range (Scheme.Etale.graphComplι f U).left := by
     rintro _ ⟨p, rfl⟩
@@ -507,7 +510,8 @@ lemma Etale.sheafFiberToLowerStar_stalkRestrict_of_ne {t t' : Scheme.Hom.Geometr
         change _ ≫ (Scheme.Etale.graphComplι f U).left ≫ _ = _
         rw [← Category.assoc, IsOpenImmersion.lift_fac]
         exact pullback.lift_snd _ _ _)
-  have : ((Etale.baseChangeNbhd f y t').obj ⟨_, Etale.fiberMapPoint f t U x⟩).2 =
+  have : ((Etale.baseChangeNbhd f y t').obj
+      (Functor.elementsMk _ _ (Etale.fiberMapPoint f t U x))).2 =
       (Scheme.pointSmallEtale t'.1).fiber.map (Scheme.Etale.graphComplι f U) w :=
     CategoryTheory.Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _).symm
   rw [this]
@@ -541,7 +545,7 @@ lemma Etale.biproductSheafFiberToLowerStar_comp_lift_stalkRestrict :
   by_cases h : t = t'
   · subst h
     simp
-  · rw [dif_neg (Ne.symm h)]
+  · rw [dite_eq_right (Ne.symm h)]
     exact Etale.sheafFiberToLowerStar_stalkRestrict_of_ne A f (Ne.symm h) G
 
 instance Etale.isIso_biproductSheafFiberToLowerStar :

@@ -283,7 +283,7 @@ theorem integralClosed_homPreservesCoproduct
   let eP : (d.push i).obj P ≅ qiA.rightDerivedFunctor.obj (Q.functor.obj P) :=
     F.rightDerivedFunctorIsoMapDerivedCategory.app P ≪≫
       (Functor.mapDerivedCategoryNatIso ε).app P ≪≫
-      (Functor.mapDerivedCategoryCompIso E.functor qi).app P ≪≫
+      (Functor.mapDerivedCategoryCompIso E.functor qi).symm.app P ≪≫
       ep.symm.app (Q.functor.obj P)
   exact preservesColimit_of_natIso (Discrete.functor N)
     ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1}

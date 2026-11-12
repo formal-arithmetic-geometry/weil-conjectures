@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.FiniteRealization.DiagonalRootRouteInsertions
 import all WeilConjectures.CategoryTheory.Exact.ExactDegreeZeroSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
@@ -123,12 +125,12 @@ theorem equivalence_single_transpose (e : C ≌ D)
           ((e.inverse.mapDerivedCategorySingleFunctor 0).hom.app N) ≫
         (e.functor.mapDerivedCategorySingleFunctor 0).hom.app (e.inverse.obj N) ≫
           (DerivedCategory.singleFunctor D 0).map (e.counitIso.hom.app N) := by
-    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso e.inverse e.functor).hom.app
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso e.inverse e.functor).inv.app
       ((DerivedCategory.singleFunctor D 0).obj N))).mp
-    change _ ≫ ((Functor.mapDerivedCategoryCompIso e.inverse e.functor).inv.app _ ≫
+    change _ ≫ ((Functor.mapDerivedCategoryCompIso e.inverse e.functor).hom.app _ ≫
       (Functor.mapDerivedCategoryNatIso e.counitIso).hom.app _ ≫
         (Functor.mapDerivedCategoryIdIso D).hom.app _) = _
-    rw [Iso.hom_inv_id_app_assoc, SheafExactDegreeZero.derived_id_single,
+    rw [Iso.inv_hom_id_app_assoc, SheafExactDegreeZero.derived_id_single,
       Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
     rw [reassoc_of% Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor]
   apply (e.mapDerivedCategory.toAdjunction.homEquiv _ _).symm.injective
@@ -178,7 +180,7 @@ theorem composite_single_transpose
       (R.mapDerivedCategorySingleFunctor 0).inv.app N)
     (hg : b.homEquiv _ _ g = (DerivedCategory.singleFunctor D 0).map w ≫
       (S.mapDerivedCategorySingleFunctor 0).inv.app P) :
-    ((a.comp b).ofNatIsoRight (Functor.mapDerivedCategoryCompIso S R).symm).homEquiv _ _
+    ((a.comp b).ofNatIsoRight (Functor.mapDerivedCategoryCompIso S R)).homEquiv _ _
         (G.map f ≫ g) =
       (DerivedCategory.singleFunctor C 0).map (v ≫ R.map w) ≫
         ((S ⋙ R).mapDerivedCategorySingleFunctor 0).inv.app P := by
@@ -194,9 +196,9 @@ theorem composite_single_transpose
   congr 1
   apply (cancel_mono (((S ⋙ R).mapDerivedCategorySingleFunctor 0).hom.app P)).mp
   simp only [Category.assoc, Iso.inv_hom_id_app]
-  change _ ≫ _ ≫ (Functor.mapDerivedCategoryCompIso S R).inv.app _ ≫ _ = _
+  change _ ≫ _ ≫ (Functor.mapDerivedCategoryCompIso S R).hom.app _ ≫ _ = _
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor S R P]
-  simp only [Iso.inv_hom_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
   rw [← R.mapDerivedCategory.map_comp_assoc]
   simp only [Iso.inv_hom_id_app]
   erw [R.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app]
@@ -239,7 +241,7 @@ theorem equivalence_commShift (e : C ≌ D)
   have := target_derivedId_shift D
   apply Equivalence.CommShift.mk'' e.mapDerivedCategory ℤ
   change NatTrans.CommShift
-    ((Functor.mapDerivedCategoryCompIso e.inverse e.functor).inv ≫
+    ((Functor.mapDerivedCategoryCompIso e.inverse e.functor).hom ≫
       (Functor.mapDerivedCategoryNatIso e.counitIso).hom ≫
         (Functor.mapDerivedCategoryIdIso D).hom) ℤ
   infer_instance

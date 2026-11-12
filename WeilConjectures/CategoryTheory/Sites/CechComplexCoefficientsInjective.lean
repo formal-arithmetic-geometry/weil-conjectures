@@ -103,9 +103,9 @@ noncomputable def piCofree : Cᵒᵖ ⥤ A where
   map {Y Y'} h := Pi.lift fun x : Σ Z : C, (Z ⟶ Y'.unop) ↦
     Pi.π (fun x : Σ Z : C, (Z ⟶ Y.unop) ↦ P.obj (op x.1)) ⟨x.1, x.2 ≫ h.unop⟩
   map_id Y := Pi.hom_ext _ _ fun x ↦ by
-    rw [Pi.lift_π, unop_id, Category.comp_id, Category.id_comp]
+    rw [Pi.lift_comp_π, unop_id, Category.comp_id, Category.id_comp]
   map_comp h h' := Pi.hom_ext _ _ fun x ↦ by
-    rw [Pi.lift_π, Category.assoc, Pi.lift_π, Pi.lift_π, unop_comp, Category.assoc]
+    rw [Pi.lift_comp_π, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π, unop_comp, Category.assoc]
 
 /-- The embedding of a presheaf into `CategoryTheory.Presheaf.piCofree`, with components the
 restrictions `P(g) : P(Y) ⟶ P(Z)` along all the morphisms `g : Z ⟶ Y`. -/
@@ -113,13 +113,13 @@ restrictions `P(g) : P(Y) ⟶ P(Z)` along all the morphisms `g : Z ⟶ Y`. -/
 noncomputable def toPiCofree : P ⟶ piCofree P where
   app Y := Pi.lift fun x : Σ Z : C, (Z ⟶ Y.unop) ↦ P.map x.2.op
   naturality Y Y' h := Pi.hom_ext _ _ fun x ↦ by
-    rw [Category.assoc, Pi.lift_π, piCofree_map, Category.assoc, Pi.lift_π, Pi.lift_π, op_comp,
-      Quiver.Hom.op_unop, P.map_comp]
+    rw [Category.assoc, Pi.lift_comp_π, piCofree_map, Category.assoc, Pi.lift_comp_π,
+      Pi.lift_comp_π, op_comp, Quiver.Hom.op_unop, P.map_comp]
 
 instance : Mono (toPiCofree P) := by
   have (Y : Cᵒᵖ) : IsSplitMono ((toPiCofree P).app Y) :=
     IsSplitMono.mk' ⟨Pi.π (fun x : Σ Z : C, (Z ⟶ Y.unop) ↦ P.obj (op x.1)) ⟨Y.unop, 𝟙 _⟩, by
-      rw [toPiCofree_app, Pi.lift_π, op_id, P.map_id]⟩
+      rw [toPiCofree_app, Pi.lift_comp_π, op_id, P.map_id]⟩
   exact NatTrans.mono_of_mono_app _
 
 variable [Preadditive A]
@@ -130,8 +130,8 @@ noncomputable def piCofreeHomAddEquiv (a : A) (Y : Cᵒᵖ) :
     (a ⟶ (piCofree P).obj Y) ≃+ ∀ (Z : C) (_ : Z ⟶ Y.unop), a ⟶ P.obj (op Z) where
   toFun φ Z g := φ ≫ Pi.π (fun x : Σ Z : C, (Z ⟶ Y.unop) ↦ P.obj (op x.1)) ⟨Z, g⟩
   invFun c := Pi.lift fun x ↦ c x.1 x.2
-  left_inv _ := Pi.hom_ext _ _ fun _ ↦ Pi.lift_π _ _
-  right_inv _ := funext fun _ ↦ funext fun _ ↦ Pi.lift_π _ _
+  left_inv _ := Pi.hom_ext _ _ fun _ ↦ Pi.lift_comp_π _ _
+  right_inv _ := funext fun _ ↦ funext fun _ ↦ Pi.lift_comp_π _ _
   map_add' _ _ := funext fun _ ↦ funext fun _ ↦ Preadditive.add_comp _ _ _ _ _ _
 
 /-- The functor `Hom(a, -)` sends `CategoryTheory.Presheaf.piCofree P` to the cofree abelian
@@ -140,7 +140,7 @@ noncomputable def piCofreeCompPreadditiveCoyonedaIso (a : A) :
     piCofree P ⋙ preadditiveCoyoneda.obj (op a) ≅ cofree (P ⋙ preadditiveCoyoneda.obj (op a)) :=
   NatIso.ofComponents (fun Y ↦ (piCofreeHomAddEquiv P a Y).toAddCommGrpIso) fun h ↦
     AddCommGrpCat.ext fun φ ↦ funext fun _ ↦ funext fun _ ↦ by
-      exact (Category.assoc _ _ _).trans (congrArg (φ ≫ ·) (Pi.lift_π _ _))
+      exact (Category.assoc _ _ _).trans (congrArg (φ ≫ ·) (Pi.lift_comp_π _ _))
 
 end PiCofree
 

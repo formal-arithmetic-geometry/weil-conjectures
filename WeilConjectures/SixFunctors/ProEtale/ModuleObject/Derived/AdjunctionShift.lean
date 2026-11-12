@@ -63,7 +63,7 @@ instance commShift_leftDerivedUpperStarComp_hom (g : Y ⟶ Z) :
   have e : (leftDerivedUpperStarComp Λ f g).hom =
       (leftDerivedUpperStarIsoMapDerivedCategory Λ (f ≫ g)).hom ≫
         (Functor.mapDerivedCategoryNatIso (upperStarComp Λ f g)).hom ≫
-        ((g)^*⟦Λ⟧.mapDerivedCategoryCompIso (f)^*⟦Λ⟧).hom ≫
+        ((g)^*⟦Λ⟧.mapDerivedCategoryCompIso (f)^*⟦Λ⟧).inv ≫
         Functor.whiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ g).inv
           D((f)^*⟦Λ⟧) ≫
         Functor.whiskerLeft L((g)^*⟦Λ⟧) (leftDerivedUpperStarIsoMapDerivedCategory Λ f).inv := by

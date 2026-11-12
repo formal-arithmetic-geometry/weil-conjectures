@@ -117,7 +117,7 @@ theorem closed_free_ideal_product_iso
           (tensorLeft K.toModules).map pB.hom ≫ μH
     rw [ι_comp_sigmaComparison_assoc]
     dsimp only [j]
-    rw [← Functor.map_comp, Sigma.ι_desc, Functor.map_comp, ← Category.assoc, hc]
+    rw [← Functor.map_comp, Sigma.ι_comp_desc, Functor.map_comp, ← Category.assoc, hc]
     change μB ≫ (pushforward i).map
       (Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) k) =
       (K.toModules ◁ Sigma.ι (fun _ : Fin r ↦ B) k) ≫

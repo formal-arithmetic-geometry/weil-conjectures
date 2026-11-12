@@ -214,7 +214,14 @@ private theorem chartScalarIso (X : Scheme.{t})
     (fun Z ↦ hT _
       ((SheafOfModules.ringedSite_restriction_exact_kflat.{t + 1, t, 0} J R U).2.2
         Z.obj Z.property)) b
-  exact ⟨c.app K ≪≫ DT.mapIso e ≪≫ (c.app L).symm⟩
+  -- The instances are unified with those in the type of `c`, not synthesized.
+  have app : ∀ {C D : Type (t + 2)} {_ : Category.{t + 2} C} {_ : Category.{t + 2} D}
+      {F G : C ⥤ D} (c : F ≅ G) (Z : C), F.obj Z ≅ G.obj Z := fun c Z ↦ c.app Z
+  have mapIso : ∀ {C D : Type (t + 2)} {_ : Category.{t + 2} C} {_ : Category.{t + 2} D}
+      (F : C ⥤ D) {Z Z' : C}, (Z ≅ Z') → (F.obj Z ≅ F.obj Z') := fun F _ _ e ↦ F.mapIso e
+  have conj : ∀ {D : Type (t + 2)} {_ : Category.{t + 2} D} {A A' B B' : D},
+      (A ≅ B) → (B ≅ B') → (A' ≅ B') → (A ≅ A') := fun a b c ↦ a ≪≫ b ≪≫ c.symm
+  exact ⟨conj (app c K) (mapIso DT e) (app c L)⟩
 
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in

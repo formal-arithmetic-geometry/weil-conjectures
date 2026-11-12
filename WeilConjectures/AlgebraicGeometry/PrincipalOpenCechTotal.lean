@@ -328,7 +328,7 @@ private theorem principalCechHorizontalValue_square {A : Type uC} [CommRing A]
     have hl := (principalCechIntersection_erase_le r f T.val a.val).trans
       (principalCechIntersection_erase_le r f (T.val.erase a.val) b.val)
     dsimp only [t, doubleTerm]
-    rw [dif_pos hc, dif_pos hl]
+    rw [dite_eq_left hc, dite_eq_left hl]
     split
     next hn₂ =>
       rw [map_smul, map_smul, smul_smul]
@@ -660,7 +660,7 @@ private theorem principalCechAugmentationComponent_one (n : ℤ)
           (eqToHom (congrArg F.X he)) s) := by
   classical
   change (if h : J.val.card = 1 then _ else (0 : _ →ₗ[A] _)) s = _
-  rw [dif_pos h]
+  rw [dite_eq_left h]
   rfl
 
 private theorem principalCechAugmentationComponent_large (n : ℤ)
@@ -669,7 +669,7 @@ private theorem principalCechAugmentationComponent_large (n : ℤ)
     principalCechAugmentationComponent r f F n s J = 0 := by
   classical
   change (if h : J.val.card = 1 then _ else (0 : _ →ₗ[A] _)) s = 0
-  rw [dif_neg (ne_of_gt h)]
+  rw [dite_eq_right (ne_of_gt h)]
   rfl
 
 private theorem principalCech_transport_restriction_d
@@ -786,7 +786,7 @@ private theorem principalCechAugmentationComponent_comm (n : ℤ) :
         simp [hab.ne']
       have hna : (({a, b} : Finset (Fin r)).erase a).Nonempty := by simp [hea]
       have hnb : (({a, b} : Finset (Fin r)).erase b).Nonempty := by simp [heb]
-      rw [dif_pos hna, dif_pos hnb]
+      rw [dite_eq_left hna, dite_eq_left hnb]
       have hca : (({a, b} : Finset (Fin r)).erase a).card = 1 := by simp [hea]
       have hcb : (({a, b} : Finset (Fin r)).erase b).card = 1 := by simp [heb]
       have hlea : principalCechIntersection r f (({a, b} : Finset (Fin r)).erase a) ≤
@@ -1001,13 +1001,13 @@ theorem principalCechAugmentation_quasiIso
         else 0 := by
     change ((α ≫ (principalCechObjIso r f J).hom).f n) s S = _
     by_cases h : S.val.card = 1
-    · rw [dif_pos h]
+    · rw [dite_eq_left h]
       obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h
       rcases S with ⟨S, hS⟩
       dsimp only at hj
       subst S
       exact (principalCechAugmentation_exists r f).choose_spec.1 J n s j
-    · rw [dif_neg h]
+    · rw [dite_eq_right h]
       have hlarge : 1 < S.val.card := by
         have := S.property.card_pos
         omega

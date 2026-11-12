@@ -160,7 +160,7 @@ theorem finitePerfectAdic_quotient_coordinate_tower
   have : IsIso (DerivedCategory.Q.map s) := by
     rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
     exact hs
-  let eP : DerivedCategory.Q.obj P ≅ M :=
+  let eP : (DerivedCategory.Q (C := CompletedAdicModules X d)).obj P ≅ M :=
     asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso M
   -- the quotient coordinates are computed by the strict coordinates of `P`
   have hJ (n : ℕ) : Nonempty (finitePerfectAdicQuotientCoordinates X d φ M V n ≅
@@ -195,6 +195,9 @@ theorem finitePerfectAdic_quotient_coordinate_tower
   · obtain ⟨h⟩ := hδ n P hP
     exact StructuredArrow.IsUniversal.nonempty_iso_comp (εJ (n + 1)) _ (εJ n).symm h
   choose B hBsq using hB
+  have hτ (n : ℕ) : (completedAdicOrdinaryTower X d ⋙
+      (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op n)).Additive :=
+    inferInstance
   have hO₁ : ∀ W : X.ProEt, (SheafOfModules.overFunctor (completedAdicRing X d) W).Additive :=
     fun W ↦ (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).1
   have hO₂ : ∀ W : X.ProEt,

@@ -32,7 +32,7 @@ theorem elementary_standard_is_strict
       exact Finset.mem_map.mpr ⟨i, Finset.mem_univ i, rfl⟩
     · exact (Fin.castLEOrderEmb (le_trans hc (min_le_left n m))).strictMono
   refine ⟨n, m, c, P, hc, (fun t => if t = s₀ then b else 0), ?_, hrel⟩
-  simp only [ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  simp only [ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
   rw [hab]
   congr 1
   rw [← Matrix.det_transpose]

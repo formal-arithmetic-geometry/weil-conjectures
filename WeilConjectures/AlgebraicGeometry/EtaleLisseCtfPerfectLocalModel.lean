@@ -118,9 +118,9 @@ theorem etale_lisse_ctf_perfect_local_model
   let eF : F.mapDerivedCategory.obj L ≅ _root_.DerivedCategory.Q.obj E :=
     ((Functor.mapDerivedCategoryNatIso
       (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) (𝒱.f j) t)).app L).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso _ G).app L ≪≫ G.mapDerivedCategory.mapIso
+      ((Functor.mapDerivedCategoryCompIso _ G).app L).symm ≪≫ G.mapDerivedCategory.mapIso
         (e ≪≫ (C.mapDerivedCategoryFactors.app E).symm) ≪≫
-      ((Functor.mapDerivedCategoryCompIso C G).app _).symm ≪≫ eC
+      (Functor.mapDerivedCategoryCompIso C G).app _ ≪≫ eC
   obtain ⟨a, b, hTor⟩ := hTor
   have hTor' : DerivedCategory.hasTorAmplitudeIn A S (min a b) b L := by
     intro N q hq

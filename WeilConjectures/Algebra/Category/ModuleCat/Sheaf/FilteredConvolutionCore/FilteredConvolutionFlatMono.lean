@@ -27,6 +27,21 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   {R : Sheaf J CommRingCat.{w}}
 
+/- Instance search for coproducts of presheaves and sheaves of modules times out, so the
+instances are given directly. -/
+local instance (ι : Type w) : HasColimitsOfShape (Discrete ι)
+    (PresheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj) :=
+  PresheafOfModules.hasColimitsOfShape _ _
+
+local instance (ι : Type w) : HasColimitsOfShape (Discrete ι) (Modules R) :=
+  SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
+
+local instance (ι : Type) : HasColimitsOfShape (Discrete ι) (Modules R) :=
+  hasColimitsOfShape_of_equivalence (Discrete.equivalence Equiv.ulift.{w})
+
+local instance (ι : Type) : HasColimitsOfShape (Discrete ι) (Complex R) :=
+  HomologicalComplex.instHasColimitsOfShape
+
 /-- Coproducts indexed by a small type are exact in module sheaves (AB4). -/
 private theorem hasExactColimitsOfShape_discrete (R : Sheaf J CommRingCat.{w}) (ι : Type) :
     HasExactColimitsOfShape (Discrete ι) (Modules R) := by

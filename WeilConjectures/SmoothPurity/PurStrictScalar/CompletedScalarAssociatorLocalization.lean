@@ -37,17 +37,17 @@ private theorem exact_associator_factors
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits J] [PreservesFiniteColimits J]
     (e : F ⋙ G ≅ J) (P : CochainComplex A ℤ) :
-    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso F G ≪≫
       Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
       J.mapDerivedCategoryFactors.hom.app P =
     G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
       DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_fac]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors F G P]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
 private theorem model_naturality
@@ -92,13 +92,13 @@ private theorem model_composition
     (K : DerivedCategory A) :
     a.hom.app K ≫ mJ.hom.app K =
       Gd.map (mF.hom.app K) ≫ mG.hom.app (F.mapDerivedCategory.obj K) ≫
-        ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso F G ≪≫
           Functor.mapDerivedCategoryNatIso e).hom.app K := by
   let τ : Fd ⋙ Gd ⟶ J.mapDerivedCategory := a.hom ≫ mJ.hom
   let σ : Fd ⋙ Gd ⟶ J.mapDerivedCategory :=
     Functor.whiskerRight mF.hom Gd ≫
       Functor.whiskerLeft F.mapDerivedCategory mG.hom ≫
-        ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso F G ≪≫
           Functor.mapDerivedCategoryNatIso e).hom
   have he : τ = σ := by
     apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso A (.up ℤ))
@@ -152,7 +152,7 @@ theorem completedTensorModel_composition
        ((completedTensorModel l E F i W).hom.app K) ≫
        (completedTensorModel l F L j W).hom.app
          ((pbcExtend (completedCoefficientMap l E F i W)).mapDerivedCategory.obj K) ≫
-       ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+       (Functor.mapDerivedCategoryCompIso _ _ ≪≫
          Functor.mapDerivedCategoryNatIso
            (ordinaryScalarAssociator _ _ _
              (PurCompactSupport.completedMap_composition l E F i L j W))).hom.app K) := by

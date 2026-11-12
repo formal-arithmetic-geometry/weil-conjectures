@@ -118,4 +118,5 @@ theorem toSheaf_exact_and_preservesLimitsColimits :
     (F.rightUnitor.symm ≪≫ Functor.isoWhiskerLeft F (asIso adj.counit).symm)
   exact ⟨HasColimit.isoOfNatIso e ≪≫ (preservesColimitIso L (F ⋙ forget R)).symm⟩
 
+
 end SheafOfModules

@@ -70,4 +70,5 @@ theorem isTriangulated_lift_ι_comp (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangu
     (S'.lift (S.ι ⋙ F) hF).IsTriangulated ∧ S'.lift (S.ι ⋙ F) hF ⋙ S'.ι = S.ι ⋙ F :=
   ⟨inferInstance, rfl⟩
 
+
 end CategoryTheory.ObjectProperty

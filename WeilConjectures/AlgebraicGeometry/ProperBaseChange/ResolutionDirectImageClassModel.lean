@@ -131,7 +131,7 @@ private theorem edge_directImage_localClass
       H.map ((RingedSpace.derivedLocalAbelianSections Y).map
         (RingedSpace.topEdgeDirectImageComparison f K).hom) ≫
       H.map ((RingedSpace.derivedLocalAbelianSections Y).map e.hom) = _
-    simpa only [b, a, t, RingedSpace.inverseOpenHypercohomologyPresheaf,
+    simpa only [cast_eq, b, a, t, RingedSpace.inverseOpenHypercohomologyPresheaf,
       Functor.comp_map, Iso.trans_inv, Functor.mapIso_inv,
       Functor.map_comp, Category.assoc] using
       congrArg (fun z ↦ a.inv ≫ H.map z) hl

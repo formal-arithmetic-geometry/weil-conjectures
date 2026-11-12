@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
@@ -16,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplem
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import WeilConjectures.AlgebraicGeometry.ProEtaleLocalRestriction.ProEtaleLocalDerivedRestrictionComparisonsSupplement
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
@@ -595,19 +598,7 @@ private theorem exactConstantComparison
       G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app P) ≫
         G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) := by
-  have hc := Functor.mapDerivedCategoryCompIso_hom_app_factors R G P
-  have hi : (Functor.mapDerivedCategoryCompIso R G).inv.app (DerivedCategory.Q.obj P) ≫
-      (R ⋙ G).mapDerivedCategoryFactors.hom.app P =
-      G.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app P) ≫
-        G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) := by
-    apply (cancel_epi
-      ((Functor.mapDerivedCategoryCompIso R G).hom.app (DerivedCategory.Q.obj P))).mp
-    rw [Iso.hom_inv_id_app_assoc]
-    exact hc.symm
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Category.assoc, hi, Category.assoc]
+  exact Functor.exactSquare_fac e P
 
 private theorem exactSquare_symm
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
@@ -891,6 +882,10 @@ private theorem constantRlimUnit_eq (V : Scheme.{u}) :
   apply (completedConstantRlimUnit_exists d V).unique
     (completedConstantRlimUnit_exists d V).exists.choose_spec
   intro P
+  simp only [Functor.rightDerivedFunctorUnitQ, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   exact exactLeftDerivedUnit (completedTowerConstant d V) lim constLimAdj P
 
 private theorem pullbackDatumTowerModulePull_eq :

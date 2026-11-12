@@ -95,9 +95,9 @@ noncomputable def finiteCoefficientDerivedEquivalenceComapIso :
         (finiteCoefficientDerivedEquivalence X T).functor ≅
       (finiteCoefficientDerivedEquivalence X T').functor ⋙
         Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ.ulift :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (finiteCoefficientModEquivalenceComapIso X ρ) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 variable {ρ} (hρ : Function.Surjective ρ) {a : ULift.{u + 1} T}
   (ha : RingHom.ker ρ.ulift = Ideal.span {a})
@@ -111,7 +111,7 @@ other (`finiteCoefficientDerivedEquivalenceComapIso`). -/
 noncomputable def finiteCoefficientDerivedEquivalenceExtendScalarsIso :
     (finiteCoefficientDerivedEquivalence X T).functor ⋙
         derivedExtendScalars (φ := ρ.ulift) (fun y ↦ ⟨⟨(hρ y.down).choose⟩,
-          ULift.ext _ _ (hρ y.down).choose_spec⟩) ha X ≅
+          ULift.ext (hρ y.down).choose_spec⟩) ha X ≅
       (Mod.extendScalars (coefficientMap (Profinite.continuousMapRingObjMap.{u} ρ
           continuous_of_discreteTopology) X)).leftDerivedFunctor ⋙
         (finiteCoefficientDerivedEquivalence X T').functor :=

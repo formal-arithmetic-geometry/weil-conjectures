@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceRebaseTwist
+import all WeilConjectures.TraceFormula.Specialization.NearbyCyclesZeroTwist
 
 /-!
 

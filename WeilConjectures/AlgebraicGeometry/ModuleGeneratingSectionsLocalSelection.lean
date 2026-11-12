@@ -65,10 +65,12 @@ theorem exists_finset_generatingSections_near_point
     (hUK.trans hKV) σ.I n l ⟨x.val, hxU⟩
   refine ⟨W, hWU.trans hUK, hxW, S, ?_⟩
   let F := overMap (moduleRings X.toRingedSpace) (homOfLE hWU)
+  have : F.PreservesEpimorphisms := Functor.preservesEpimorphisms_of_adjunction
+    (overMapPushforwardAdj (moduleRings X.toRingedSpace) (homOfLE hWU))
   have : Epi (F.map (l ≫ (overMap (moduleRings X.toRingedSpace)
       (homOfLE (hUK.trans hKV))).map σ.π)) := by
     have := hl
-    infer_instance
+    exact F.map_epi _
   have hfac : a ≫ (overMap (moduleRings X.toRingedSpace)
       (homOfLE ((hWU.trans hUK).trans hKV))).map
         (freeMap (R := (moduleRings X.toRingedSpace).over V) ((↑) : S → σ.I) ≫ σ.π) =

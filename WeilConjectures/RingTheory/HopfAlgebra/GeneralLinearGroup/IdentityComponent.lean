@@ -181,6 +181,7 @@ theorem finite_connectedComponents_zeroLocus :
       (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))) :=
   inferInstance
 
+
 /-- The connected components of a closed subgroup `G = V(I)` of `GL_n` are the cosets of the
 identity component: a point `x` of `G` lies in the connected component of `g ∈ G` if and only if
 `g⁻¹ * x ∈ G°`. (blueprint: `sk-p-geometry`) -/
@@ -227,5 +228,6 @@ theorem isClopen_connectedComponent_zeroLocus
     (p : PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) :
     IsClopen (connectedComponent p) :=
   ⟨isClosed_connectedComponent, TopologicalSpace.NoetherianSpace.isOpen_connectedComponent p⟩
+
 
 end Matrix.GeneralLinearGroup

@@ -75,8 +75,9 @@ lemma isRightDerivedFunctor_rightDerivedFunctor_comp_mapOfNatIso_of_iso :
   have h₂ := isIso_rightDerivedFunctorUnit_app_mapOfNatIso e₂
     ((Φ.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
   have h₂' : IsIso ((mapOfNatIso e₂).rightDerivedFunctorUnit.app
-      ((Φ.mapHomotopyCategory (ComplexShape.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) := h₂
+      ((HomotopyCategory.quotient (IsoAlgebra G) (ComplexShape.up ℤ)).obj
+        ((Φ.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          ((HomotopyCategory.quotient (IsoAlgebra F) (ComplexShape.up ℤ)).obj K).as))) := h₂
   dsimp [Functor.rightDerivedFunctorCompUnit]
   infer_instance
 

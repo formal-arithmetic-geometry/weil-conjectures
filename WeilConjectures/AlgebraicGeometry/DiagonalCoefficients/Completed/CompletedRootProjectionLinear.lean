@@ -135,6 +135,13 @@ private theorem projectionConstantRingIso_hom (X : Scheme.{u}) (A : CommRingCat.
 attribute [local irreducible] projectionConstantRingIso projectionConstantMonIso
   projectionRingSectionsIso
 
+-- Sections of the reconstructed module are acted on by the sections of the coefficient object.
+private local instance sectionModuleSMul (X : Scheme.{u})
+    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] [IsCommMonObj B]
+    (M : Mod _ B) (V : X.ProEtᵒᵖ) :
+    SMul (B.obj.obj V) (((sectionModuleFunctor (Scheme.ProEt.topology X) B).obj M).val.obj V) :=
+  (((sectionModuleFunctor (Scheme.ProEt.topology X) B).obj M).val.obj V).isModule.toSMul
+
 -- Scalar restriction under section reconstruction is unchanged on elements.
 private theorem section_comap_smul (X : Scheme.{u})
     {R B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}

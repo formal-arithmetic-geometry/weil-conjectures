@@ -34,6 +34,12 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open SheafOfModules
 namespace SheafOfModules.RingedPresentationOnSites
 
+private local instance sheafBinaryProducts
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) :
+    HasBinaryProducts (Sheaf J (Type u)) := Sheaf.instHasLimitsOfShape
+
+attribute [local instance] SheafOfModules.sheafHasBinaryProduct
+
 private theorem reflect_binary
     {C D : Type*} [Category C] [Category D] [HasBinaryProducts C] [HasBinaryProducts D]
     (F : C ⥤ D) [PreservesFiniteProducts F]

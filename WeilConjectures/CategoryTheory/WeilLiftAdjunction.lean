@@ -102,7 +102,7 @@ lemma isWeilEquivariant_counit_transportedDatum (hlift : IsWeilLift σC σD e κ
       UD.map (adjW.counit.app L') := hθ
   have hε : adj₀.counit.app (UD.obj L') = T₀.map θ.inv ≫ κ.inv.app (RW.obj L') ≫
       UD.map (adjW.counit.app L') := by
-    rw [← hθ', Iso.inv_hom_id_app_assoc, Iso.map_inv_hom_id_assoc]
+    rw [← hθ', Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_map_assoc]
   have hnat : G.map (UD.map (adjW.counit.app L')) ≫ σD.app L' =
       σD.app (T.obj (RW.obj L')) ≫ UD.map (adjW.counit.app L') :=
     σD.naturality (adjW.counit.app L')
@@ -116,7 +116,7 @@ lemma isWeilEquivariant_counit_transportedDatum (hlift : IsWeilLift σC σD e κ
   unfold IsWeilEquivariant leftWeilDatum transportedDatum
   rw [hε]
   simp only [Functor.map_comp, Category.assoc]
-  rw [hnat, ← reassoc_of% hcomm, reassoc_of% hstr', Iso.map_hom_inv_id_assoc,
+  rw [hnat, ← reassoc_of% hcomm, reassoc_of% hstr', Iso.hom_inv_id_map_assoc,
     Iso.hom_inv_id_app_assoc]
 
 /-- **The Weil structure of a right adjoint is the exceptional datum**: for a counit-compatible
@@ -128,7 +128,7 @@ lemma isWeilEquivariant_rightWeilDatum_of_counitCompat (hlift : IsWeilLift σC �
   rw [← adj₀.eq_rightWeilDatum_of_isWeilEquivariant_counit e _
     (isWeilEquivariant_counit_transportedDatum hlift L' θ hθ)]
   unfold IsWeilEquivariant transportedDatum
-  rw [Iso.map_hom_inv_id_assoc]
+  rw [Iso.hom_inv_id_map_assoc]
 
 /-- The form of `isWeilEquivariant_rightWeilDatum_of_counitCompat` for an arbitrary Weil datum
 `v` on `R₀ (U_D L')` for which the counit is equivariant. -/

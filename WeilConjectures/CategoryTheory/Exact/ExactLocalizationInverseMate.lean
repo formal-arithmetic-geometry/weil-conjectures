@@ -115,7 +115,7 @@ private lemma square_fac
   have hF := Functor.mapDerivedCategoryCompIso_fac F₁ F₂ K
   have hG := Functor.mapDerivedCategoryCompIso_fac G₁ G₂ K
   have he := Functor.mapDerivedCategoryNatIso_fac e K
-  have hG' : (Functor.mapDerivedCategoryCompIso G₁ G₂).hom.app (DerivedCategory.Q.obj K) ≫
+  have hG' : (Functor.mapDerivedCategoryCompIso G₁ G₂).inv.app (DerivedCategory.Q.obj K) ≫
       G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
       G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) =
       (G₁ ⋙ G₂).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map
@@ -125,13 +125,13 @@ private lemma square_fac
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
   have hF' : F₂.mapDerivedCategoryFactors.inv.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.inv.app K) ≫
-      (Functor.mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Q.obj K) =
+      (Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj K) =
       DerivedCategory.Q.map
         ((Functor.mapHomologicalComplexCompIso (Iso.refl (F₁ ⋙ F₂)) (.up ℤ)).hom.app K) ≫
         (F₁ ⋙ F₂).mapDerivedCategoryFactors.inv.app K := by
     rw [← cancel_mono ((F₁ ⋙ F₂).mapDerivedCategoryFactors.hom.app K)]
     simp only [Category.assoc, Iso.inv_hom_id_app]
-    rw [← hF, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    rw [← hF, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
     exact (Category.comp_id _).symm
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]

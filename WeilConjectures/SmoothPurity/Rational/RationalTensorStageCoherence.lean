@@ -156,6 +156,10 @@ private theorem tensorTowerDatum_coherent
 end
 end ProofHelpers
 
+-- Match the transported structures on the small coefficient models.
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
   (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]

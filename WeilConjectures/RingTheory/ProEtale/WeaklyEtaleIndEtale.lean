@@ -55,7 +55,7 @@ results on weakly étale algebras over fields. -/
 theorem Algebra.WeaklyEtale.isSeparable_residueField [Algebra.WeaklyEtale A B]
     (m : Ideal A) (q : Ideal B) [m.IsPrime] [q.IsPrime] [q.LiesOver m]
     [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
-    [Localization.AtPrime.IsLiesOverAlgebra m q] :
+    [IsScalarTower A (Localization.AtPrime m) (Localization.AtPrime q)] :
     Algebra.IsSeparable m.ResidueField q.ResidueField := by
   have : Algebra.IndEtale m.ResidueField (m.Fiber B) :=
     Algebra.WeaklyEtale.indEtale_field m.ResidueField (m.Fiber B)
@@ -83,7 +83,7 @@ of hypothesis required by the w-localization lemmas (Stacks 097A). -/
 theorem Algebra.WeaklyEtale.isAlgebraic_residueField_of_liesOver [Algebra.WeaklyEtale A B]
     (m : Ideal A) (q : Ideal B) [m.IsPrime] [q.IsPrime] [q.LiesOver m]
     [Algebra (Localization.AtPrime m) (Localization.AtPrime q)]
-    [Localization.AtPrime.IsLiesOverAlgebra m q] :
+    [IsScalarTower A (Localization.AtPrime m) (Localization.AtPrime q)] :
     Algebra.IsAlgebraic m.ResidueField q.ResidueField :=
   have : Algebra.IsSeparable m.ResidueField q.ResidueField :=
     Algebra.WeaklyEtale.isSeparable_residueField m q
@@ -289,7 +289,7 @@ theorem Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement [Algebra.WeaklyEt
   have : Algebra.WeaklyEtale C D' := inferInstance
   have hres : ∀ (m : Ideal C) (q' : Ideal D') [q'.LiesOver m] [m.IsMaximal] [q'.IsPrime]
       [Algebra (Localization.AtPrime m) (Localization.AtPrime q')]
-      [Localization.AtPrime.IsLiesOverAlgebra m q'],
+      [IsScalarTower C (Localization.AtPrime m) (Localization.AtPrime q')],
       Algebra.IsAlgebraic m.ResidueField q'.ResidueField := by
     intro m q' _ hm _ _ _
     have : m.IsPrime := hm.isPrime

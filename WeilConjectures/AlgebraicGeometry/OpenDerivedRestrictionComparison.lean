@@ -90,10 +90,21 @@ theorem open_derived_restriction_comparison
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
     (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
     (Scheme.Modules.overEquiv U)
+  -- Reuse exactness instances across the derived functors and their comparison maps.
+  have : PreservesFiniteLimits r := inferInstance
+  have : PreservesFiniteColimits r := inferInstance
+  have : r.Additive := Functor.additive_of_preserves_binary_products r
+  have : e.IsEquivalence := inferInstance
+  have : PreservesFiniteLimits e := inferInstance
+  have : PreservesFiniteColimits e := inferInstance
+  have : e.Additive := Functor.additive_of_preserves_binary_products e
   let F := r ⋙ e
+  have : PreservesFiniteLimits F := comp_preservesFiniteLimits r e
+  have : PreservesFiniteColimits F := comp_preservesFiniteColimits r e
+  have : F.Additive := inferInstance
   let M := F.mapDerivedCategory
   let L := r.mapDerivedCategory
-  let c : M ≅ L ⋙ e.mapDerivedCategory := Functor.mapDerivedCategoryCompIso r e
+  let c : M ≅ L ⋙ e.mapDerivedCategory := (Functor.mapDerivedCategoryCompIso r e).symm
   refine ⟨hD, (nonempty_derivedOpenLocalization.{u, w} U.toScheme).some, R, adj,
     ?_, ?_, ?_, ?_⟩
   · intro K hK

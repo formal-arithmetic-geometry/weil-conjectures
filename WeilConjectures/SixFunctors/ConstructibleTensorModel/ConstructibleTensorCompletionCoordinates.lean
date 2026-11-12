@@ -66,7 +66,7 @@ theorem tensorChain_first
       (fun n ↦ ((IntegralAmbient.tensorTowerIso l E W).hom.app (P, Q)).app (op n)) n)).trans
         (by
           with_unfolding_all
-            exact Pi.lift_π_assoc (f := K) a n
+            exact Pi.lift_comp_π_assoc (f := K) a n
               (((IntegralAmbient.tensorTowerIso l E W).hom.app (P, Q)).app (op n)))))
   rw [tensorCompletionChain_app]
   unfold tensorCompletionUnitMap

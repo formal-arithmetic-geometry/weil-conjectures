@@ -53,7 +53,7 @@ private theorem scalar_exact
       ModuleCat.RestrictScalars.obj', LinearMap.baseChange]
     all_goals rfl
   have h : PreservesFiniteLimits F ∧ PreservesFiniteColimits F :=
-    ((Functor.exact_tfae F).out 1 3).mp hex
+    ((Functor.exact_tfae F).out 2 4).mp hex
   exact h.1
 
 private theorem pseudoCoherent_mono

@@ -2274,12 +2274,12 @@ private theorem generic_sum_exchange_transport
     [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
     {U X X' : Scheme.{u}} (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :
     ((Functor.mapDerivedCategoryCompIso
-        (etaleLowerShriek A f inferInstance) (upperStar A g)).symm ≪≫
+        (etaleLowerShriek A f inferInstance) (upperStar A g)) ≪≫
       Functor.mapDerivedCategoryNatIso (@asIso _ _ _ _ _
         (isIso_etaleLowerShriekSquareBaseChangeMap A
           (IsPullback.of_hasPullback g f).flip)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar A (pullback.snd g f))
-        (etaleLowerShriek A (pullback.fst g f) inferInstance)).hom =
+      (Functor.mapDerivedCategoryCompIso (upperStar A (pullback.snd g f))
+        (etaleLowerShriek A (pullback.fst g f) inferInstance)).symm).hom =
       Functor.whiskerLeft (etaleLowerShriek A f
         inferInstance).mapDerivedCategory
         (leftDerivedUpperStarIsoMapDerivedCategory A g).inv ≫
@@ -2290,12 +2290,12 @@ private theorem generic_sum_exchange_transport
           (pullback.snd g f)).hom _ := by
   have hb :
       (Functor.mapDerivedCategoryCompIso
-        (etaleLowerShriek A f inferInstance) (upperStar A g)).symm ≪≫
+        (etaleLowerShriek A f inferInstance) (upperStar A g)) ≪≫
       Functor.mapDerivedCategoryNatIso (@asIso _ _ _ _ _
         (isIso_etaleLowerShriekSquareBaseChangeMap A
           (IsPullback.of_hasPullback g f).flip)).symm ≪≫
-      Functor.mapDerivedCategoryCompIso (upperStar A (pullback.snd g f))
-        (etaleLowerShriek A (pullback.fst g f) inferInstance) =
+      (Functor.mapDerivedCategoryCompIso (upperStar A (pullback.snd g f))
+        (etaleLowerShriek A (pullback.fst g f) inferInstance)).symm =
       (mapDerivedCategoryEtaleLowerShriekBaseChangeIso A
         (IsPullback.of_hasPullback g f).flip).symm := by
     simp only [mapDerivedCategoryEtaleLowerShriekBaseChangeIso,

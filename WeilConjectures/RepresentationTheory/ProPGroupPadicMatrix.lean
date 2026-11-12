@@ -113,7 +113,7 @@ theorem eq_one_of_forall_dvd_sub_one_of_tendsto_pow_prime_pow {G : Type*} [Group
     | succ m hm ih =>
       choose A hA using ih
       have hρg : (ρ g : Matrix n n ℤ_[ℓ]) = 1 + (ℓ : ℤ_[ℓ]) ^ m • Matrix.of A := by
-        ext i j
+        ext i j : 1
         rw [Matrix.add_apply, ← sub_eq_iff_eq_add', ← Matrix.sub_apply, hA]
         simp
       by_cases hdiv : ∀ i j, (ℓ : ℤ_[ℓ]) ∣ Matrix.of A i j

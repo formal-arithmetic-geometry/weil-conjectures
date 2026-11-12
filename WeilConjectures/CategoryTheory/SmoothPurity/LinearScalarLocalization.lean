@@ -69,16 +69,14 @@ private theorem composition_unique (K L M : C)
 private theorem composition_id_comp (K L : C)
     (f : Localization.Away p ⊗[R] (K ⟶ L)) :
     composition R C p K K L f (1 ⊗ₜ[R] 𝟙 K) = f := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [composition_tmul]
   | add f g hf hg => simp [hf, hg]
 
 private theorem composition_comp_id (K L : C)
     (f : Localization.Away p ⊗[R] (K ⟶ L)) :
     composition R C p K L L (1 ⊗ₜ[R] 𝟙 L) f = f := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul a f => simp [composition_tmul]
   | add f g hf hg => simp [hf, hg]
 
@@ -88,16 +86,13 @@ private theorem composition_assoc (K L M N : C)
     (h : Localization.Away p ⊗[R] (M ⟶ N)) :
     composition R C p K M N h (composition R C p K L M g f) =
       composition R C p K L N (composition R C p L M N h g) f := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | add f f' hf hf' => simp [hf, hf']
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | add g g' hg hg' => simp [hg, hg']
     | tmul b g =>
-      induction h using TensorProduct.induction_on with
-      | zero => simp
+      induction h using TensorProduct.inductionOn with
       | add h h' hh hh' => simp [hh, hh']
       | tmul c h => simp [composition_tmul, Category.assoc, mul_assoc]
 
@@ -109,12 +104,10 @@ private theorem map_composition (T : C ⥤ C) [T.Additive] [T.Linear R]
       composition R C p (T.obj K) (T.obj L) (T.obj M)
         ((T.mapLinearMap R).baseChange (Localization.Away p) g)
         ((T.mapLinearMap R).baseChange (Localization.Away p) f) := by
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | add f f' hf hf' => simp [hf, hf']
   | tmul a f =>
-    induction g using TensorProduct.induction_on with
-    | zero => simp
+    induction g using TensorProduct.inductionOn with
     | add g g' hg hg' => simp [hg, hg']
     | tmul b g => simp [composition_tmul]
 

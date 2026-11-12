@@ -121,7 +121,7 @@ lemma telescopeTransition_self (n : ℕ) : telescopeTransition (X := X) n n = �
 lemma telescopeTransition_comp {n k : ℕ} (h : n ≤ k) :
     telescopeTransition (X := X) n k ≫ X.map (homOfLE (Nat.le_add_right k 1)) =
       telescopeTransition n (k + 1) := by
-  simp only [telescopeTransition, dif_pos h, dif_pos (h.trans (Nat.le_add_right k 1)),
+  simp only [telescopeTransition, dite_eq_left h, dite_eq_left (h.trans (Nat.le_add_right k 1)),
     ← X.map_comp]
   rfl
 
@@ -130,14 +130,14 @@ lemma telescopeTransition_comp {n k : ℕ} (h : n ≤ k) :
 lemma map_comp_telescopeTransition {n k : ℕ} (h : n + 1 ≤ k) :
     X.map (homOfLE (Nat.le_add_right n 1)) ≫ telescopeTransition (n + 1) k =
       telescopeTransition n k := by
-  simp only [telescopeTransition, dif_pos h, dif_pos ((Nat.le_add_right n 1).trans h),
+  simp only [telescopeTransition, dite_eq_left h, dite_eq_left ((Nat.le_add_right n 1).trans h),
     ← X.map_comp]
   rfl
 
 /-- The transition morphisms are compatible with the legs of the cocone. -/
 lemma telescopeTransition_comp_ι {n k : ℕ} (h : n ≤ k) :
     telescopeTransition (X := X) n k ≫ c.ι.app k = c.ι.app n := by
-  simp [telescopeTransition, dif_pos h]
+  simp [telescopeTransition, dite_eq_left h]
 
 include hN in
 /-- The inverse of the leg `c.ι.app k` for `N ≤ k`, and `0` otherwise. -/
@@ -147,11 +147,11 @@ noncomputable def telescopeInv (k : ℕ) : c.pt ⟶ X.obj k :=
 /-- `telescopeInv` is a right inverse of the legs from the index `N` on. -/
 @[reassoc]
 lemma ι_telescopeInv {k : ℕ} (h : N ≤ k) : c.ι.app k ≫ telescopeInv N hN k = 𝟙 _ := by
-  simp [telescopeInv, dif_pos h]
+  simp [telescopeInv, dite_eq_left h]
 
 /-- `telescopeInv` is a left inverse of the legs from the index `N` on. -/
 lemma telescopeInv_ι {k : ℕ} (h : N ≤ k) : telescopeInv N hN k ≫ c.ι.app k = 𝟙 _ := by
-  simp [telescopeInv, dif_pos h]
+  simp [telescopeInv, dite_eq_left h]
 
 /-- The inverses of the legs are compatible with the transition morphisms. -/
 @[reassoc]

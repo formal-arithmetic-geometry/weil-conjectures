@@ -55,6 +55,13 @@ private theorem compositor_generator {X Y Z : Scheme.{t}}
       generator ell E (f ≫ g) s M U W
         (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U) m
         (scalar ell E f s V W q a * b) := by
+  let : ∀ (T : Scheme.{t}) (P : Modules ell E T s)
+      {U V : (Site T s)ᵒᵖ} (i : U ⟶ V),
+      MulAction ((coefficients ell E T s).obj.obj V)
+        ((ModuleCat.restrictScalars
+          ((ring (topology T s) (coefficients ell E T s)).obj.map i).hom).obj
+            (P.val.obj V)) :=
+    fun _ P {_ _} _ ↦ (P.val.obj _).isModule.toDistribMulAction.toMulAction
   let LgM := (pull ell E g s).obj M
   let H := (pull ell E f s).obj LgM
   let N := (pull ell E (f ≫ g) s).obj M
@@ -73,7 +80,8 @@ private theorem compositor_generator {X Y Z : Scheme.{t}}
   let r := scalar ell E f s V W q a
   have hs : ef.val.app (op V) (a • LgM.val.map p.op (eg.val.app (op U) m)) =
       (ringComponent ell E f s (op V)).hom a •
-        H.val.map ((base f s).map p).op z := by
+        (show H.val.obj (op ((base f s).obj V)) from
+          H.val.map ((base f s).map p).op z) := by
     calc
       _ = (ringComponent ell E f s (op V)).hom a •
           (show H.val.obj (op ((base f s).obj V)) from
@@ -83,7 +91,9 @@ private theorem compositor_generator {X Y Z : Scheme.{t}}
           (ringComponent ell E f s (op V)).hom a • y)
         (PresheafOfModules.naturality_apply ef.val p.op (eg.val.app (op U) m))
   have ht : H.val.map q.op
-      ((ringComponent ell E f s (op V)).hom a • H.val.map ((base f s).map p).op z) =
+      ((ringComponent ell E f s (op V)).hom a •
+        (show H.val.obj (op ((base f s).obj V)) from
+          H.val.map ((base f s).map p).op z)) =
       r • H.val.map q.op (H.val.map ((base f s).map p).op z) :=
     H.val.map_smul q.op ((ringComponent ell E f s (op V)).hom a) _
   have hn : c.val.app (op W)
@@ -101,7 +111,8 @@ private theorem compositor_generator {X Y Z : Scheme.{t}}
   calc
     _ = c.val.app (op W)
         (b • H.val.map q.op ((ringComponent ell E f s (op V)).hom a •
-          H.val.map ((base f s).map p).op z)) :=
+          (show H.val.obj (op ((base f s).obj V)) from
+            H.val.map ((base f s).map p).op z))) :=
       congrArg (fun y ↦ c.val.app (op W) (b • H.val.map q.op y)) hs
     _ = c.val.app (op W)
         (b • (r • H.val.map q.op (H.val.map ((base f s).map p).op z))) :=

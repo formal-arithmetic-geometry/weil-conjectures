@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.SixFunctors.MixedDerivedMateUnit
 import WeilConjectures.AlgebraicGeometry.ProperGraphTransfer.EtaleProperGraphTransfer
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection

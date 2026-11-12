@@ -47,7 +47,7 @@ private theorem restrict_derived_adjunction (adj : f ⊣ g) :
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) := by
     simp [Functor.rightDerivedFunctorPlusCompatibility]
   have h₄ : DerivedCategory.Plus.ι.map
-      (g.rightDerivedFunctorPlusUnit.app (f.mapHomotopyCategoryPlus.obj K)) =
+      (g.rightDerivedFunctorPlusUnith.app (f.mapHomotopyCategoryPlus.obj K)) =
       g.ιRightDerivedFunctorUnit.app (f.mapHomotopyCategoryPlus.obj K) ≫
         g.rightDerivedFunctorPlusCompatibility.inv.app
           (DerivedCategory.Plus.Qh.obj (f.mapHomotopyCategoryPlus.obj K)) := by
@@ -92,7 +92,7 @@ private theorem included_pullback (A : Type (u + 1)) [CommRing A]
         (comparisonUpperStar (ModuleCat.{u + 1} A) X)).app K) =
       (Functor.mapDerivedCategoryCompIso
         (Etale.upperStar (ModuleCat.{u + 1} A) g)
-        (comparisonUpperStar (ModuleCat.{u + 1} A) X)).app K.obj :=
+        (comparisonUpperStar (ModuleCat.{u + 1} A) X)).symm.app K.obj :=
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ K)
   simp only [fixedComparisonPullbackPlus, unboundedDirectImagePullbackIso,
     Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
@@ -103,7 +103,7 @@ private theorem included_pullback (A : Type (u + 1)) [CommRing A]
         (comparisonUpperStar (ModuleCat.{u + 1} A) X)).inv.app K) =
       (Functor.mapDerivedCategoryCompIso
         (Etale.upperStar (ModuleCat.{u + 1} A) g)
-        (comparisonUpperStar (ModuleCat.{u + 1} A) X)).inv.app K.obj from
+        (comparisonUpperStar (ModuleCat.{u + 1} A) X)).hom.app K.obj from
     congrArg Iso.inv hc]
   rw [Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
     Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app,

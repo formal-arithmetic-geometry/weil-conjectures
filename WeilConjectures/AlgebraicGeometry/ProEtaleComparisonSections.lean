@@ -218,6 +218,7 @@ private theorem setIsColimitLan {S : Scheme.{u}} (F : S.Etaleᵒᵖ ⥤ (Type (u
     inferInstanceAs (PreservesColimit (K.op ⋙ (toProEt S).op) _)
   exact ⟨isColimitOfPreserves ((toProEt S).op.leftKanExtension F) hc₁.op⟩
 
+
 open Scheme in
 private theorem setIsIsoToSheafify {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (Y : S.ProEt) (hY : proAffineEtale Y.hom) :
@@ -495,6 +496,7 @@ theorem proEtaleComparisonSectionsModules {X : Scheme.{u}} [IsAffine X]
   refine ⟨comparisonCocone_isColimit U Λ D π hc F, ?_⟩
   intro i
   exact (Category.assoc _ _ _).trans (modulesSectionsIso_leg U Λ (D.obj i) (π.app i) F)
+
 
 private noncomputable abbrev setComparisonPullback (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X)
@@ -780,6 +782,7 @@ theorem proEtaleComparisonSectionsSets {X : Scheme.{u}} [IsAffine X]
   refine ⟨setComparisonCocone_isColimit U D π hc F, ?_⟩
   intro i
   exact (Category.assoc _ _ _).trans (setsSectionsIso_leg U (D.obj i) (π.app i) F)
+
 
 end AlgebraicGeometry
 

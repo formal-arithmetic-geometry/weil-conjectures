@@ -37,7 +37,7 @@ namespace OrdinaryTowerProof
 attribute [local irreducible] Functor.leftAdjoint
   coefficientSequenceCommRingSheaf integralCoefficientCommRingSheaf
   directEvaluation inverseEvaluation moduleLevel level
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
+attribute [local implicit_reducible]
   HomologicalComplex.complexOfFunctorsToFunctorToComplex HomologicalComplex.asFunctor
 
 private theorem level_unit {X Y : Scheme.{t}} (f : X ⟶ Y)

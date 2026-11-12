@@ -131,14 +131,14 @@ private theorem exact_scalar_unit
     ((Functor.whiskerRight adj.unit U.mapDerivedCategory ≫
       (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft L
-        ((Functor.mapDerivedCategoryCompIso R U).symm ≪≫
+        ((Functor.mapDerivedCategoryCompIso R U) ≪≫
           Iso.refl (R ⋙ U).mapDerivedCategory).hom).app
             ((DerivedCategory.singleFunctor A 0).obj M)) ≫
       (R ⋙ U).mapDerivedCategory.map d ≫
       ((R ⋙ U).mapDerivedCategorySingleFunctor 0).hom.app N =
     (U.mapDerivedCategorySingleFunctor 0).hom.app M ≫
       (DerivedCategory.singleFunctor C 0).map (U.map m) := by
-  have hn := (Functor.mapDerivedCategoryCompIso R U).inv.naturality d
+  have hn := (Functor.mapDerivedCategoryCompIso R U).hom.naturality d
   dsimp only [Functor.comp_map] at hn
   dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Iso.trans_hom, Iso.symm_hom, Iso.refl_hom,
@@ -147,7 +147,7 @@ private theorem exact_scalar_unit
   rw [← reassoc_of% hn, ← U.mapDerivedCategory.map_comp_assoc, hd]
   simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   rw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor R U N]
-  simp only [Iso.inv_hom_id_app_assoc, ← U.mapDerivedCategory.map_comp_assoc,
+  simp only [Iso.hom_inv_id_app_assoc, ← U.mapDerivedCategory.map_comp_assoc,
     Iso.inv_hom_id_app]
   exact (congrArg (fun f ↦ U.mapDerivedCategory.map f ≫
       (U.mapDerivedCategorySingleFunctor 0).hom.app (R.obj N))
@@ -200,26 +200,26 @@ private theorem exact_underlying_single
     U.mapDerivedCategory.map ((H.mapDerivedCategorySingleFunctor 0).inv.app (G.obj Y)) ≫
       U.mapDerivedCategory.map
         (H.mapDerivedCategory.map ((G.mapDerivedCategorySingleFunctor 0).inv.app Y)) ≫
-      (Functor.mapDerivedCategoryCompIso H U).inv.app
+      (Functor.mapDerivedCategoryCompIso H U).hom.app
         (G.mapDerivedCategory.obj ((DerivedCategory.singleFunctor A 0).obj Y)) ≫
-      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).inv.app
+      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).hom.app
         ((DerivedCategory.singleFunctor A 0).obj Y) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app
         ((DerivedCategory.singleFunctor A 0).obj Y) ≫
       (V.mapDerivedCategorySingleFunctor 0).hom.app Y =
     (U.mapDerivedCategorySingleFunctor 0).hom.app (H.obj (G.obj Y)) ≫
       (DerivedCategory.singleFunctor D 0).map (e.hom.app Y) := by
-  have hn := (Functor.mapDerivedCategoryCompIso H U).inv.naturality
+  have hn := (Functor.mapDerivedCategoryCompIso H U).hom.naturality
     ((G.mapDerivedCategorySingleFunctor 0).inv.app Y)
   dsimp only [Functor.comp_map] at hn
   erw [reassoc_of% hn]
   erw [Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor,
     ← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor G (H ⋙ U) Y]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [(H ⋙ U).mapDerivedCategory.map_id, Category.id_comp]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor H U (G.obj Y)]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← CategoryTheory.Functor.map_comp_assoc,
     Iso.inv_hom_id_app]
   erw [U.mapDerivedCategory.map_id, Category.id_comp]
 
@@ -239,7 +239,7 @@ private theorem cyclic_generator_epi (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (
     erw [AddCommGrpCat.epi_iff_surjective]
     intro x
     obtain ⟨a, ha⟩ := ZMod.intCast_surjective x.down
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
   have he : constantGenerator A X =
       (constantSheaf J Ab.{u + 1}).map f ≫ (finiteConstantAbComparison A X).inv := by
     apply Sheaf.hom_ext
@@ -292,8 +292,8 @@ private theorem three_source_underlying
     let c : G.mapDerivedCategory ⋙ H.mapDerivedCategory ⋙ U.mapDerivedCategory ≅
         V.mapDerivedCategory :=
       Functor.isoWhiskerLeft G.mapDerivedCategory
-        (Functor.mapDerivedCategoryCompIso H U).symm ≪≫
-      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso H U) ≪≫
+      (Functor.mapDerivedCategoryCompIso G (H ⋙ U)) ≪≫
       Functor.mapDerivedCategoryNatIso e
     U.mapDerivedCategory.map
       ((H.mapDerivedCategorySingleFunctor 0).inv.app Z ≫
@@ -310,8 +310,8 @@ private theorem three_source_underlying
   let c : G.mapDerivedCategory ⋙ H.mapDerivedCategory ⋙ U.mapDerivedCategory ≅
       V.mapDerivedCategory :=
     Functor.isoWhiskerLeft G.mapDerivedCategory
-      (Functor.mapDerivedCategoryCompIso H U).symm ≪≫
-    (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso H U) ≪≫
+    (Functor.mapDerivedCategoryCompIso G (H ⋙ U)) ≪≫
     Functor.mapDerivedCategoryNatIso e
   have hn := c.hom.naturality q.hom
   dsimp only [Functor.comp_map] at hn
@@ -350,8 +350,8 @@ private theorem three_source_folded
       R.obj ((DerivedCategory.singleFunctor A₁ 0).obj X₁)) :
     U.mapDerivedCategory.map (threeFunctorSource R G H q.hom s) ≫
       (Functor.isoWhiskerLeft G.mapDerivedCategory
-          (Functor.mapDerivedCategoryCompIso H U).symm ≪≫
-        (Functor.mapDerivedCategoryCompIso G (H ⋙ U)).symm ≪≫
+          (Functor.mapDerivedCategoryCompIso H U) ≪≫
+        (Functor.mapDerivedCategoryCompIso G (H ⋙ U)) ≪≫
         Functor.mapDerivedCategoryNatIso e).hom.app
           (R.obj ((DerivedCategory.singleFunctor A₁ 0).obj X₁)) ≫
       V.mapDerivedCategory.map q.inv ≫ (V.mapDerivedCategorySingleFunctor 0).hom.app Y =
@@ -525,9 +525,9 @@ private theorem exact_square_single
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (e : U ⋙ V ≅ F ⋙ R) (M : A) :
-    ((Functor.mapDerivedCategoryCompIso U V).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso U V) ≪≫
       Functor.mapDerivedCategoryNatIso e ≪≫
-        Functor.mapDerivedCategoryCompIso F R).hom.app
+        (Functor.mapDerivedCategoryCompIso F R).symm).hom.app
           ((DerivedCategory.singleFunctor A 0).obj M) ≫
       R.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
       (R.mapDerivedCategorySingleFunctor 0).hom.app (F.obj M) =
@@ -538,7 +538,7 @@ private theorem exact_square_single
   erw [Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor,
     Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor]
   erw [← Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem completed_underlying_single
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
@@ -630,9 +630,9 @@ private theorem cyclic_source_forward
     (DerivedCategory.singleFunctor _ 0).mapIso sourceIso
   let d := Functor.isoWhiskerLeft p.eW.F.mapDerivedCategory
       (Functor.mapDerivedCategoryCompIso
-        (diagonalFiniteToPadic l n (diagonalSurface Y)) U).symm ≪≫
+        (diagonalFiniteToPadic l n (diagonalSurface Y)) U) ≪≫
     (Functor.mapDerivedCategoryCompIso p.eW.F
-      (diagonalFiniteToPadic l n (diagonalSurface Y) ⋙ U)).symm ≪≫
+      (diagonalFiniteToPadic l n (diagonalSurface Y) ⋙ U)) ≪≫
     Functor.mapDerivedCategoryNatIso (cyclicFiniteUnderlying l Y n p)
   have hf := three_source_folded R p.eW.F
     (diagonalFiniteToPadic l n (diagonalSurface Y)) U V

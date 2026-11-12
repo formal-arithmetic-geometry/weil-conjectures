@@ -63,8 +63,8 @@ theorem additiveCech_alpha_natural
   change (Pi.lift _ ≫ Limits.Pi.map (fun y : Fin 1 → ι ↦
       ((InjectiveResolution.desc f I I).f n).hom.app
         (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))))) ≫ _ = _
-  erw [Category.assoc, Limits.Pi.map_π, ← Category.assoc, Pi.lift_π,
-    Category.assoc, Pi.lift_π]
+  erw [Category.assoc, Limits.Pi.map_π, ← Category.assoc, Pi.lift_comp_π,
+    Category.assoc, Pi.lift_comp_π]
   exact ((InjectiveResolution.desc f I I).f n).hom.naturality _
 
 /-- The coefficient augmentation commutes with multiplication.
@@ -107,7 +107,7 @@ theorem additiveCech_scalar_chain_action
     ((InjectiveResolution.desc (μ r) I I).f 0).hom.app
       (op ((additiveCechOpenInclusion X).obj (∏ᶜ fun l ↦ U (y l)))))) _) = _
   erw [← ConcreteCategory.comp_apply, Limits.Pi.map_π, ConcreteCategory.comp_apply]
-  erw [Pi.lift_π_apply, Pi.lift_π_apply]
+  erw [Pi.lift_comp_π_apply, Pi.lift_comp_π_apply]
   let V := ∏ᶜ fun l ↦ U (y l)
   let W := op ((additiveCechOpenInclusion X).obj V)
   let π := TopCat.Presheaf.cechComplexFunctorπ U

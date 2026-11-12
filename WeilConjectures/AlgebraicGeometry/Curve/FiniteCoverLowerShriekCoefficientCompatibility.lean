@@ -6,6 +6,8 @@ Authors: Bin Wu
 
 module
 
+public import Mathlib.Algebra.Field.ULift
+public import Mathlib.Algebra.Module.Torsion.Field
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
@@ -168,6 +170,7 @@ theorem finiteCoverLowerShriek_torsion {k : Type u}
       have := ModuleCat.subsingleton_of_isZero
         ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
       exact ⟨0, Subsingleton.elim _ _⟩
+
 
 /-- The coefficient hypotheses needed for retract descent pass to the finite-cover sheaf.
 This statement contains no cohomology assertions and does not assume a unit retraction.

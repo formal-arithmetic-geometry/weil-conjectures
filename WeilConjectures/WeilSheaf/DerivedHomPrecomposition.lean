@@ -83,7 +83,7 @@ private lemma tensorComponent_π (M N : Mod C R) :
   have h := congrArg Mod.Hom.hom
     (show colimit.ι ((Mod.tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
         (tensorComponent M N).hom = relativeTensorπ M N by
-      simp [tensorComponent, HasColimit.isoOfNatIso_ι_hom_assoc, relativeTensorCofork])
+      simp [tensorComponent, HasColimit.ι_isoOfNatIso_hom_assoc, relativeTensorCofork])
   exact h
 
 private noncomputable def tensorIso (N : Mod C R) :
@@ -291,10 +291,13 @@ local notation "HO" => H (C := Sheaf
   (R := ProEtale.adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
 
 private instance preservesProducts (n : ℤ) :
-    PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n)) (U) :=
-  inferInstanceAs (PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n))
-    ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
-      Endofunctor.Algebra.forget (WeilSheaf.frobeniusPullback k₀ l X)))
+    PreservesLimitsOfShape (Discrete (CochainComplex.HomComplex.Triplet n)) (U) := by
+  let A := ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+  have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
+  have : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} A
+  exact
+    (IsoAlgebra.Free.adjunction (WeilSheaf.frobeniusPullback k₀ l X)).rightAdjoint_preservesLimits
+      |>.preservesLimitsOfShape
 
 private noncomputable def forgetIhom (M N : ProEtaleWeilSheaf k₀ l X) :
     (U).obj (((HW).obj (op M)).obj N) ≅ ((HO).obj (op ((U).obj M))).obj ((U).obj N) :=

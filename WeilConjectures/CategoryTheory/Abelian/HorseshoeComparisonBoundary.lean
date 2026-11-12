@@ -43,8 +43,7 @@ private noncomputable def resolutionAugmentationIso
       DerivedCategory.Plus.Q.obj (resolutionPlus I) :=
   DerivedCategory.Plus.ι.preimageIso
     ((DerivedCategory.singleFunctorIsoCompQ A 0).app X ≪≫
-      asIso (DerivedCategory.Q.map I.ι') ≪≫
-      (DerivedCategory.quotientCompQhIso A).symm.app _)
+      asIso (DerivedCategory.Q.map I.ι'))
 
 set_option maxHeartbeats 100000 in
 -- The quotient factorization and the lifted unit involve several nested functors.
@@ -66,7 +65,7 @@ private theorem comparison_eq_unit
   let g : resolutionPlus R ⟶ resolutionPlus I := ObjectProperty.homMk φ.hom'
   let vg : v.rightDerivedPlusComplex X ⟶ v.mapCochainComplexPlus.obj (resolutionPlus I) :=
     ObjectProperty.homMk ((v.mapHomologicalComplex _).map φ.hom')
-  have hη := v.rightDerivedFunctorPlusUnit.naturality
+  have hη := v.rightDerivedFunctorPlusUnith.naturality
     ((HomotopyCategory.Plus.quotient A).map g)
   have ha : (resolutionAugmentationIso R).hom ≫ DerivedCategory.Plus.Q.map g =
       (resolutionAugmentationIso I).hom := by
@@ -75,16 +74,15 @@ private theorem comparison_eq_unit
       Functor.map_preimage, Iso.trans_hom, Category.assoc]
     dsimp only [DerivedCategory.Plus.Q, Functor.comp_map, ObjectProperty.ι_map,
       HomotopyCategory.Plus.quotient, ObjectProperty.lift, g]
-    erw [← DerivedCategory.quotientCompQhIso_inv_naturality,
-      ← DerivedCategory.Q.map_comp_assoc]
-    simp only [ObjectProperty.homMk_hom, InjectiveResolution.Hom.ι'_comp_hom',
-      Functor.map_id, Category.id_comp, asIso_hom, Iso.symm_hom, Iso.app_hom]
-    rfl
-  have hu : inv (v.rightDerivedFunctorPlusUnit.app
+    simp only [ObjectProperty.homMk_hom, asIso_hom]
+    rw [← DerivedCategory.Q.map_comp]
+    simp [InjectiveResolution.Hom.ι'_comp_hom']
+  have hu : inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R))) ≫
-      DerivedCategory.Plus.Q.map vg =
-    v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
-      inv (v.rightDerivedFunctorPlusUnit.app
+      (DerivedCategory.Plus.Qh (C := B)).map ((HomotopyCategory.Plus.quotient B).map vg) =
+    v.rightDerivedFunctorPlus.map
+        ((DerivedCategory.Plus.Qh (C := A)).map ((HomotopyCategory.Plus.quotient A).map g)) ≫
+      inv (v.rightDerivedFunctorPlusUnith.app
         ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus I))) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
     exact hη.symm
@@ -95,27 +93,35 @@ private theorem comparison_eq_unit
           ComplexShape.embeddingUpNat := by
     ext i
     exact HomologicalComplex.mapExtensIso_hom_f_naturality _ _ _ _
+  have : IsIso (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R)) :=
+    isIso_rightDerivedFunctorPlusUnit_of_injective v (resolutionPlus R)
+  have : IsIso (v.rightDerivedFunctorPlusUnit.app (resolutionPlus I)) :=
+    isIso_rightDerivedFunctorPlusUnit_of_injective v (resolutionPlus I)
   simp only [injectiveResolutionDerivedComparison, boundedBelowInjectiveComparison,
     Functor.rightDerivedFunctorPlusObjSingleFunctorIsoQ, Iso.trans_hom,
     Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc, Functor.comp_map]
   change DerivedCategory.Plus.ι.map
       (v.rightDerivedFunctorPlus.map (resolutionAugmentationIso R).hom) ≫
-      DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app
-        ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
-      (DerivedCategory.quotientCompQhIso B).hom.app _ ≫
+      DerivedCategory.Plus.ι.map (inv
+        (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R))) ≫
       DerivedCategory.Q.map (R.cocomplex.mapExtendIso ComplexShape.embeddingUpNat v).hom ≫
       DerivedCategory.Q.map (HomologicalComplex.extendMap
         ((v.mapHomologicalComplex _).map φ.hom) ComplexShape.embeddingUpNat) = _
   rw [← DerivedCategory.Q.map_comp, ← he, Functor.map_comp]
-  erw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
-  change _ ≫ DerivedCategory.Plus.ι.map (inv (v.rightDerivedFunctorPlusUnit.app
-      ((HomotopyCategory.Plus.quotient A).obj (resolutionPlus R)))) ≫
+  change _ ≫ DerivedCategory.Plus.ι.map (inv
+      (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R))) ≫
       DerivedCategory.Plus.ι.map (DerivedCategory.Plus.Q.map vg) ≫ _ = _
-  have hu' := congrArg (fun f ↦ DerivedCategory.Plus.ι.map f) hu
-  simp only [Functor.map_comp] at hu'
-  erw [reassoc_of% hu']
+  have hη' := v.rightDerivedFunctorPlusUnit.naturality g
+  have hu' : inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus R)) ≫
+        DerivedCategory.Plus.Q.map vg =
+      v.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map g) ≫
+        inv (v.rightDerivedFunctorPlusUnit.app (resolutionPlus I)) := by
+    rw [IsIso.inv_comp_eq, ← Category.assoc, eq_comm, IsIso.comp_inv_eq]
+    exact hη'.symm
+  have hu'' := congrArg (fun f ↦ DerivedCategory.Plus.ι.map f) hu'
+  simp only [Functor.map_comp] at hu''
+  erw [reassoc_of% hu'']
   rw [← DerivedCategory.Plus.ι.map_comp_assoc, ← v.rightDerivedFunctorPlus.map_comp, ha]
-  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -196,39 +202,27 @@ private theorem augmentation_boundary
   simp only [ShortComplex.ShortExact.singleTrianglePlus, Pretriangulated.Triangle.mk_mor₃,
     boundedBelowSESBoundary, Functor.map_preimage, Category.assoc]
   simp only [resolutionAugmentationIso, Functor.preimageIso_hom, Functor.map_preimage,
-    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, asIso_hom,
-    DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, NatTrans.id_app,
+    Iso.trans_hom, Iso.app_hom, asIso_hom,
     Category.assoc]
   change (hS.singleδ ≫ (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
       ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁)) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
         ((DerivedCategory.Plus.singleFunctor A 0).obj S.X₁) ≫
-      (𝟙 _ ≫ DerivedCategory.Q.map IA.ι' ≫
-        (DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' =
-    𝟙 _ ≫ DerivedCategory.Q.map IC.ι' ≫
-      (DerivedCategory.quotientCompQhIso A).inv.app IC.cochainComplex ≫
-      (DerivedCategory.quotientCompQhIso A).hom.app IC.cochainComplex ≫
-      DerivedCategory.triangleOfSESδ hH ≫
-      ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' ≫
+      (shiftFunctor (DerivedCategory A) 1).map
+        (((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₁).hom ≫
+          DerivedCategory.Q.map IA.ι') =
+    ((DerivedCategory.singleFunctorIsoCompQ A 0).app S.X₃).hom ≫
+      DerivedCategory.Q.map IC.ι' ≫ DerivedCategory.triangleOfSESδ hH ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).inv.app
         (DerivedCategory.Plus.Q.obj (resolutionPlus IA)) ≫
       (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
         (DerivedCategory.Plus.Q.obj (resolutionPlus IA))
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
-    Category.id_comp, Functor.map_comp]
-  simp only [ShortComplex.ShortExact.singleδ,
-    Functor.mapIso_hom, Functor.mapIso_inv, SingleFunctors.evaluation_map,
-    DerivedCategory.singleFunctorsPostcompQIso_hom_hom,
-    DerivedCategory.singleFunctorsPostcompQIso_inv_hom, NatTrans.id_app,
-    Category.id_comp]
-  change (DerivedCategory.triangleOfSESδ
-        (hS.map_of_exact (HomologicalComplex.single A (.up ℤ) 0)) ≫
-      (𝟙 _)⟦(1 : ℤ)⟧') ≫ (DerivedCategory.Q.map IA.ι')⟦(1 : ℤ)⟧' ≫
-      ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' =
-    DerivedCategory.Q.map IC.ι' ≫ DerivedCategory.triangleOfSESδ hH ≫
-      ((DerivedCategory.quotientCompQhIso A).inv.app IA.cochainComplex)⟦(1 : ℤ)⟧' ≫ 𝟙 _
-  simp only [Functor.map_id, Category.comp_id]
-  erw [reassoc_of% hn]
+    Functor.map_comp]
+  simp only [ShortComplex.ShortExact.singleδ]
+  simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.app_hom, Iso.refl_hom, NatTrans.id_app]
+  erw [Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+  exact hn
 
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
@@ -306,6 +300,22 @@ theorem horseshoe_comparison_boundary
   have : ∀ n : ℤ, Injective (H.X₂.obj.X n) := resolutionPlus_injective IB
   have : ∀ n : ℤ, Injective (H.X₃.obj.X n) := resolutionPlus_injective IC
   have hunit := rightDerived_injectiveComplex_boundary v H hH hV
+  have hshift (n : ℤ) :
+      (Functor.commShiftIso v.rightDerivedFunctorPlus
+        (self := v.instCommShiftPlusRightDerivedFunctorPlusInt) n).hom =
+      (v.rightDerivedFunctorPlus.commShiftIso n).hom := by
+    apply Functor.rightDerived_ext _
+      (Functor.IsRightDerivedFunctor.precomposeShiftNatTrans _ v.rightDerivedFunctorPlusUnith n)
+      (HomotopyCategory.Plus.quasiIso A)
+    refine NatTrans.ext (funext fun K ↦ ?_)
+    have h₁ := by
+      letI := v.instCommShiftPlusRightDerivedFunctorPlusInt
+      exact NatTrans.shift_app_comm v.rightDerivedFunctorPlusUnith n K
+    have h₂ := NatTrans.shift_app_comm v.rightDerivedFunctorPlusUnith n K
+    simpa only [NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.IsRightDerivedFunctor.precomposeShiftNatTrans_app,
+      Functor.commShiftIso_comp_hom_app, Category.assoc] using h₁.symm.trans h₂
+  simp only [Functor.commShiftIso_comp_hom_app, hshift] at hunit
   have he := DerivedCategory.triangleOfSESδ_naturality hV hExt e.hom
   dsimp only
   rw [comparison_eq_unit v IA, comparison_eq_unit v IC]
@@ -313,7 +323,20 @@ theorem horseshoe_comparison_boundary
     Category.assoc]
   rw [← Functor.commShiftIso_hom_naturality_assoc,
     ← Functor.map_comp_assoc, haug, Functor.map_comp, Category.assoc]
-  erw [reassoc_of% hunit, he]
+  have hunit' :
+      DerivedCategory.Plus.ι.map (v.rightDerivedFunctorPlus.map
+          (boundedBelowSESBoundary H hH)) ≫
+        DerivedCategory.Plus.ι.map
+          ((v.rightDerivedFunctorPlus.commShiftIso (1 : ℤ)).hom.app
+            (DerivedCategory.Plus.Q.obj H.X₁)) ≫
+        (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app
+          (v.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj H.X₁)) ≫
+        (boundedBelowInjectiveComparison v H.X₁)⟦(1 : ℤ)⟧' =
+      boundedBelowInjectiveComparison v H.X₃ ≫
+        DerivedCategory.triangleOfSESδ hV := by
+    simpa only [Functor.comp_map, Functor.commShiftIso_comp_hom_app, Category.assoc] using hunit
+  simp only [Functor.comp_map, Functor.commShiftIso_comp_hom_app, Category.assoc]
+  erw [reassoc_of% hunit', he]
   rfl
 
 end CategoryTheory

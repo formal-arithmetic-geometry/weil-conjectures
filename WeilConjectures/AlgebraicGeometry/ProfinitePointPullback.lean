@@ -972,7 +972,7 @@ private lemma derivedLeftUnit (I : D ⥤ D) [I.Additive]
     (c : K ≅ F ⋙ I) (i : I ≅ 𝟭 D) (w : K = F)
     (h : c ≪≫ isoWhiskerLeft F i = eqToIso w) (M : DerivedCategory C) :
     (mapDerivedCategoryNatIso c).hom.app M ≫
-      (mapDerivedCategoryCompIso F I).hom.app M ≫
+      (mapDerivedCategoryCompIso F I).inv.app M ≫
       (mapDerivedCategoryNatIso i).hom.app (F.mapDerivedCategory.obj M) ≫
       (mapDerivedCategoryIdIso D).hom.app (F.mapDerivedCategory.obj M) =
       (eqToHom (show K.mapDerivedCategory = F.mapDerivedCategory by cases w; rfl)).app M := by
@@ -992,7 +992,7 @@ private lemma derivedRightUnit (I : C ⥤ C) [I.Additive]
     (c : K ≅ I ⋙ F) (i : I ≅ 𝟭 C) (w : K = F)
     (h : c ≪≫ isoWhiskerRight i F = eqToIso w) (M : DerivedCategory C) :
     (mapDerivedCategoryNatIso c).hom.app M ≫
-      (mapDerivedCategoryCompIso I F).hom.app M ≫
+      (mapDerivedCategoryCompIso I F).inv.app M ≫
       F.mapDerivedCategory.map
         ((mapDerivedCategoryNatIso i).hom.app M ≫ (mapDerivedCategoryIdIso C).hom.app M) =
       (eqToHom (show K.mapDerivedCategory = F.mapDerivedCategory by cases w; rfl)).app M := by
@@ -1029,14 +1029,14 @@ private lemma derivedAssociativity
     (h : c₀ ≪≫ isoWhiskerLeft F c₁ = eqToIso w ≪≫ c₂ ≪≫ isoWhiskerRight c₃ H)
     (M : DerivedCategory C) :
     (mapDerivedCategoryNatIso c₀).hom.app M ≫
-        (mapDerivedCategoryCompIso F Q).hom.app M ≫
+        (mapDerivedCategoryCompIso F Q).inv.app M ≫
         ((mapDerivedCategoryNatIso c₁).hom.app (F.mapDerivedCategory.obj M) ≫
-          (mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj M)) =
+          (mapDerivedCategoryCompIso G H).inv.app (F.mapDerivedCategory.obj M)) =
       (eqToHom (show R'.mapDerivedCategory = R.mapDerivedCategory by cases w; rfl)).app M ≫
         (mapDerivedCategoryNatIso c₂).hom.app M ≫
-        (mapDerivedCategoryCompIso P H).hom.app M ≫
+        (mapDerivedCategoryCompIso P H).inv.app M ≫
         H.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₃).hom.app M ≫
-          (mapDerivedCategoryCompIso F G).hom.app M) := by
+          (mapDerivedCategoryCompIso F G).inv.app M) := by
   subst R'
   simp only [eqToIso_refl, Iso.refl_trans] at h
   have hm := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app M) h.symm
@@ -1068,7 +1068,7 @@ noncomputable def profinitePointAbelianDerivedComp
     (upperStar Ab.{u + 1} (f ≫ g)).mapDerivedCategory ≅
       (upperStar Ab.{u + 1} g).mapDerivedCategory ⋙ (upperStar Ab.{u + 1} f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (upperStarComp Ab.{u + 1} f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)
+    (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
 ordinary inverse-image identity and its normalization on the identity functor.
@@ -1135,13 +1135,13 @@ theorem profinite_point_pullback_abelianderived_coherence
             w)).app M ≫
           (profinitePointAbelianDerivedComp f' g).hom.app M =
         (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} f) (upperStar Ab.{u + 1}
-          b)).inv.app M ≫
+          b)).hom.app M ≫
           (Functor.mapDerivedCategoryNatIso
             ((upperStarComp Ab.{u + 1} b f).symm ≪≫
               eqToIso (congrArg (fun k : X' ⟶ Y ↦ (upperStar Ab.{u + 1} k)) w) ≪≫
               (upperStarComp Ab.{u + 1} f' g))).hom.app M ≫
           (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1}
-            f')).hom.app M) := by
+            f')).inv.app M) := by
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro X Y f M
     have h : upperStarComp Ab.{u + 1} (𝟙 X) f ≪≫
@@ -1152,7 +1152,7 @@ theorem profinite_point_pullback_abelianderived_coherence
       funext N
       exact profinite_point_pullback_abelian_coherence.1 X Y f N
     simpa only [profinitePointAbelianDerivedComp, profinitePointAbelianDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedLeftUnit (upperStar Ab.{u + 1} f)
         (upperStar Ab.{u + 1} (𝟙 X)) (upperStar Ab.{u + 1} (𝟙 X ≫ f))
         (upperStarComp Ab.{u + 1} (𝟙 X) f) (upperStarId Ab.{u + 1} X)
@@ -1166,7 +1166,7 @@ theorem profinite_point_pullback_abelianderived_coherence
       funext N
       exact profinite_point_pullback_abelian_coherence.2.1 X Y f N
     simpa only [profinitePointAbelianDerivedComp, profinitePointAbelianDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedRightUnit (upperStar Ab.{u + 1} f)
         (upperStar Ab.{u + 1} (𝟙 Y)) (upperStar Ab.{u + 1} (f ≫ 𝟙 Y))
         (upperStarComp Ab.{u + 1} f (𝟙 Y)) (upperStarId Ab.{u + 1} Y)
@@ -1184,8 +1184,8 @@ theorem profinite_point_pullback_abelianderived_coherence
         Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
         eqToIso.hom, Category.assoc] using
         profinite_point_pullback_abelian_coherence.2.2.1 X Y Z W f g h N
-    simpa only [profinitePointAbelianDerivedComp, Iso.trans_hom, NatTrans.comp_app,
-      Category.assoc] using
+    simpa only [profinitePointAbelianDerivedComp, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedAssociativity
         (upperStar Ab.{u + 1} h) (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)
         (upperStar Ab.{u + 1} (g ≫ h)) (upperStar Ab.{u + 1} (f ≫ g))
@@ -1195,7 +1195,7 @@ theorem profinite_point_pullback_abelianderived_coherence
         (congrArg (upperStar Ab.{u + 1}) (Category.assoc f g h)) hc M
   · intro X' X Y' Y b f f' g w M
     simp only [profinitePointAbelianDerivedComp, Iso.trans_inv, Iso.trans_hom,
-      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
+      Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
     rw [abelianDerived_congr w]
 
@@ -1211,7 +1211,8 @@ noncomputable def profinitePointModuleDerivedComp
       (CondensedRing.upperStar Λ g).mapDerivedCategory ⋙ (CondensedRing.upperStar Λ
         f).mapDerivedCategory :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)
+    (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
+      (CondensedRing.upperStar Λ f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
 ordinary inverse-image identity and its normalization on the identity functor.
@@ -1286,13 +1287,13 @@ theorem profinite_point_pullback_modulederived_coherence
             w)).app M ≫
           (profinitePointModuleDerivedComp Λ f' g).hom.app M =
         (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ f) (CondensedRing.upperStar
-          Λ b)).inv.app M ≫
+          Λ b)).hom.app M ≫
           (Functor.mapDerivedCategoryNatIso
             ((CondensedRing.upperStarComp Λ b f).symm ≪≫
               eqToIso (congrArg (fun k : X' ⟶ Y ↦ (CondensedRing.upperStar Λ k)) w) ≪≫
               (CondensedRing.upperStarComp Λ f' g))).hom.app M ≫
           (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
-            (CondensedRing.upperStar Λ f')).hom.app M) := by
+            (CondensedRing.upperStar Λ f')).inv.app M) := by
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro X Y f M
     have h : CondensedRing.upperStarComp Λ (𝟙 X) f ≪≫
@@ -1303,7 +1304,7 @@ theorem profinite_point_pullback_modulederived_coherence
       funext N
       exact (profinite_point_pullback_module_coherence Λ).1 X Y f N
     simpa only [profinitePointModuleDerivedComp, profinitePointModuleDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedLeftUnit (CondensedRing.upperStar Λ f)
         (CondensedRing.upperStar Λ (𝟙 X)) (CondensedRing.upperStar Λ (𝟙 X ≫ f))
         (CondensedRing.upperStarComp Λ (𝟙 X) f) (profinitePointModuleIdentity Λ X)
@@ -1317,7 +1318,7 @@ theorem profinite_point_pullback_modulederived_coherence
       funext N
       exact (profinite_point_pullback_module_coherence Λ).2.1 X Y f N
     simpa only [profinitePointModuleDerivedComp, profinitePointModuleDerivedIdentity,
-      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedRightUnit (CondensedRing.upperStar Λ f)
         (CondensedRing.upperStar Λ (𝟙 Y)) (CondensedRing.upperStar Λ (f ≫ 𝟙 Y))
         (CondensedRing.upperStarComp Λ f (𝟙 Y)) (profinitePointModuleIdentity Λ Y)
@@ -1336,8 +1337,8 @@ theorem profinite_point_pullback_modulederived_coherence
         Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
         eqToIso.hom, Category.assoc] using
         (profinite_point_pullback_module_coherence Λ).2.2 X Y Z W f g h N
-    simpa only [profinitePointModuleDerivedComp, Iso.trans_hom, NatTrans.comp_app,
-      Category.assoc] using
+    simpa only [profinitePointModuleDerivedComp, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc] using
       CategoryTheory.Functor.derivedAssociativity
         (CondensedRing.upperStar Λ h) (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)
         (CondensedRing.upperStar Λ (g ≫ h)) (CondensedRing.upperStar Λ (f ≫ g))
@@ -1347,7 +1348,7 @@ theorem profinite_point_pullback_modulederived_coherence
         (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h)) hc M
   · intro X' X Y' Y b f f' g w M
     simp only [profinitePointModuleDerivedComp, Iso.trans_inv, Iso.trans_hom,
-      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
+      Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
       Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
     rw [moduleDerived_congr Λ w]
 

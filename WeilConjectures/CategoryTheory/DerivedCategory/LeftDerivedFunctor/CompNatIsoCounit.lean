@@ -96,8 +96,8 @@ lemma leftDerivedFunctorCompNatIso_hom_app_comp_counit (τ : G₁ ⋙ G₂ ≅ F
           ((mapHomotopyCategoryCompIso (Iso.refl (G₁ ⋙ G₂)) (.up ℤ)).hom.app K ≫
             (NatTrans.mapHomotopyCategory τ.hom (.up ℤ)).app K ≫
             (mapHomotopyCategoryCompIso (Iso.refl (F₁ ⋙ F₂)) (.up ℤ)).inv.app K) := by
-  rw [mapHomotopyCategoryCompIso_refl_hom_app, mapHomotopyCategoryCompIso_refl_inv_app,
-    Category.id_comp, Category.comp_id]
+  rw [mapHomotopyCategoryCompIso_refl_hom_app, mapHomotopyCategoryCompIso_refl_inv_app]
+  erw [Category.id_comp, Category.comp_id]
   simp only [leftDerivedFunctorCompNatIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc]
   have k : (G₁.leftDerivedFunctorCompIso G₂).inv.app (DerivedCategory.Qh.obj K) ≫

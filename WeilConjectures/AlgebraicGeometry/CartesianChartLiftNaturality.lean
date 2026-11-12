@@ -183,6 +183,7 @@ private theorem rawComparison_inv_naturality {S Y Y' : Scheme.{u}}
   rw [Iso.inv_hom_id_apply] at hraw
   exact (congrArg (fun y ↦ R'.inv y) hraw).trans (Iso.hom_inv_id_apply R' _)
 
+
 private theorem chartPull_adj_naturality {S X B T T' : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)
     (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)

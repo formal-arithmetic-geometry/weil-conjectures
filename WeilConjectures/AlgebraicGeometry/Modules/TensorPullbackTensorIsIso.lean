@@ -87,8 +87,7 @@ theorem isIso_tensorPullback_of_tmul {X Y : Scheme.{v}} (f : X ⟶ Y)
     have he : l.inv ≫ SX.map α ≫ r.hom = (Functor.Monoidal.μIso F (SY.obj M) (SY.obj N)).inv := by
       apply ModuleCat.ExtendScalars.hom_ext
       intro z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [TensorProduct.tmul_zero, map_zero]
+      induction z using TensorProduct.inductionOn with
       | add z w hz hw => simp only [TensorProduct.tmul_add, map_add, hz, hw]
       | tmul s t =>
         obtain ⟨U, hxU, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf s
@@ -111,7 +110,8 @@ theorem isIso_tensorPullback_of_tmul {X Y : Scheme.{v}} (f : X ⟶ Y)
               (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app
                 (M ⊗ N)).val.app (op (U ⊓ V)) (tmulSection s' t'))) =
             (1 : X.presheaf.stalk x) ⊗ₜ[_, (f.stalkMap x).hom]
-              ((TopCat.Presheaf.germ M.val.presheaf (U ⊓ V) (f x) hx s') ⊗ₜ
+              (TensorProduct.tmul (Y.presheaf.stalk (f x)) (M := SY.obj M) (N := SY.obj N)
+                (TopCat.Presheaf.germ M.val.presheaf (U ⊓ V) (f x) hx s')
                 (TopCat.Presheaf.germ N.val.presheaf (U ⊓ V) (f x) hx t')) := by
           change F.map (ty M N).hom ((p.hom.app (M ⊗ N)) _) = _
           rw [hl]

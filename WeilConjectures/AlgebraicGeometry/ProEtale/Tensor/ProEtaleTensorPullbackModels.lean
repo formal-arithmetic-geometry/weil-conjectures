@@ -259,8 +259,7 @@ private theorem modelTensor_hom_ext (X : Scheme.{u})
   apply PresheafOfModules.hom_ext
   intro U
   ext t
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul m n => exact h U m n
   | add t s ht hs => simp only [_root_.map_add, ht, hs]
 

@@ -108,7 +108,6 @@ private theorem quotientComplexCounit_app (W : Scheme.{u}) {m n : ℕ} (h : n �
     CategoryTheory.Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv, asIso_hom]
   change _ = (coefficientFiniteQuotientDerived l E W h).map (𝟙 _) ≫ _ ≫ 𝟙 _
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, asIso_hom]
-  exact (Category.comp_id _).symm
 
 attribute [local irreducible] quotientComplexCounit
 

@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Field.ULift
 import Mathlib.CategoryTheory.Limits.Constructions.Filtered
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.LinearAlgebra.Basis.VectorSpace
@@ -77,6 +78,11 @@ theorem exists_constantModSheaf_finite_sum_colimit
   let T : ModuleCat.{u + 1} R ⥤ Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1} :=
     forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1} ⋙
       constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}
+  have : PreservesColimits (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1}) :=
+    ModuleCat.forget₂PreservesColimitsOfSize.{u + 1, u + 1, u + 1, u + 1} R
+  have : PreservesColimits T := by
+    dsimp [T, constantSheaf]
+    infer_instance
   let eM : (∐ a) ≅ ModuleCat.of R M :=
     (colimit.isColimit (Discrete.functor a)).coconePointUniqueUpToIso
       (ModuleCat.finsuppCoconeIsColimit R R B) ≪≫ b.repr.symm.toModuleIso

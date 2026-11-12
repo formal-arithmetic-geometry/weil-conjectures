@@ -27,6 +27,10 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+noncomputable local instance cartesianHigherImageRawAffineDescentHasShift (T : Scheme.{u}) :
+    HasShift (DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) ℤ :=
+  inferInstance
+
 /-- A raw derived class on an affine etale test object factors through a pulled-back
 stage derived image. No assertion about arbitrary homology sections or germs is made.
 Source: Stacks Project, Tag 0EYM, second proof, left vertical arrow; Tags 0EYL and 09YQ.

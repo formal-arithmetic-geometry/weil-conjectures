@@ -54,7 +54,7 @@ private theorem scalar_roos_unit_eq (W : Scheme.{u})
       exact (Category.assoc _ _ _).symm.trans
         ((congrArg (fun f ↦ f ≫ CategoryTheory.Limits.Pi.π
           (fun m ↦ I.asFunctor.obj (Opposite.op m)) n) hf).trans
-            (CategoryTheory.Limits.Pi.lift_π _ n))
+            (CategoryTheory.Limits.Pi.lift_comp_π _ n))
     · intro i j h
       exact CochainComplex.mappingCocone.lift_f_snd_v
         (scalarRoosBoundary I.asFunctor) (pullbackTensorRoosAugmentation l E W I) 0
@@ -145,7 +145,7 @@ private theorem coherent_roos_augmentation (X : Scheme.{u})
       dsimp only [b, trfStrictQuotientConeAugmentation]
       rw [CochainComplex.mappingCocone.lift_fst]
       rw [Pi.map_π]
-      erw [← Category.assoc, Pi.lift_π]
+      erw [← Category.assoc, Pi.lift_comp_π]
     rw [hv]
     change ((a.inv.app (op n)).f i).val.app U
       ((((unrestrictedTowerUnit l E X P.obj n).f i).val.app U) x) = _

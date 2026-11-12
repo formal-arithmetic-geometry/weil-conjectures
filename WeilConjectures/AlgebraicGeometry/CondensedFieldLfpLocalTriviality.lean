@@ -276,4 +276,5 @@ theorem exists_finiteFree_cover_on_condensedField_strata
   obtain ⟨n, ⟨f⟩⟩ := free_comap (F.map φ) (hC i)
   exact ⟨n, ⟨(F.mapMod R).mapIso e.symm ≪≫ (F.mapModComapIso φ).app Q ≪≫ f⟩⟩
 
+
 end AlgebraicGeometry.ProEtale

@@ -63,7 +63,7 @@ variable {κ : Type w} [AddCommGroup κ] {a b c : κ} (X : ExactCouple C a b c)
 
 /-- The composite `α⁰ : D k ⟶ D i` for `k = i`. -/
 lemma αPow_zero (k i : κ) (h : k = i) : X.αPow 0 k i = eqToHom (congrArg X.D h) := by
-  rw [αPow, dif_pos h]
+  rw [αPow, dite_eq_left h]
 
 /-- The composite `αᴺ⁺¹` is `αᴺ` followed by `α`. -/
 lemma αPow_succ (N : ℕ) (k i : κ) : X.αPow (N + 1) k i = X.αPow N k (i - a) ≫ X.α (i - a) i :=
@@ -93,7 +93,8 @@ lemma αPow_succ' (N : ℕ) (k j i : κ) (h : k + a = j) :
       rw [X.αPow_zero k (j - a) (eq_sub_of_add_eq h), X.αPow_zero j j rfl,
         eqToHom_comp_α _ (eq_sub_of_add_eq h),
         eqToHom_refl, Category.comp_id]
-    · rw [αPow, dif_neg (fun h' ↦ hi (by rw [← h, h', sub_add_cancel])), αPow, dif_neg hi,
+    · rw [αPow, dite_eq_right (fun h' ↦ hi (by rw [← h, h', sub_add_cancel])), αPow,
+        dite_eq_right hi,
         zero_comp, comp_zero]
   | succ N ih =>
     rw [X.αPow_succ (N + 1) k i, ih (i - a), Category.assoc, ← X.αPow_succ N j i]
@@ -153,14 +154,14 @@ noncomputable def halfPlaneι (p n : ℤ) : X.D (p, n) ⟶ X.D (0, n) :=
 /-- The map `ι : D^{p, n} ⟶ D^{0, n}` is `αᵖ` for `p ≥ 0`. -/
 lemma halfPlaneι_of_nonneg (p n : ℤ) (hp : 0 ≤ p) :
     halfPlaneι h hb p n = X.αPow p.toNat (p, n) (0, n) := by
-  rw [halfPlaneι, dif_pos hp]
+  rw [halfPlaneι, dite_eq_left hp]
 
 /-- The map `ι : D^{p, n} ⟶ D^{0, n}` is the inverse of `α⁻ᵖ` for `p < 0`. -/
 lemma halfPlaneι_of_neg (p n : ℤ) (hp : p < 0) :
     halfPlaneι h hb p n =
       (have := h.isIso_αPow hb n (-p).toNat p (by omega)
       inv (X.αPow (-p).toNat (0, n) (p, n))) := by
-  rw [halfPlaneι, dif_neg (by omega)]
+  rw [halfPlaneι, dite_eq_right (by omega)]
 
 /-- The map `ι : D^{p, n} ⟶ D^{0, n}` is an isomorphism for `p ≤ 0`. -/
 lemma isIso_halfPlaneι (p n : ℤ) (hp : p ≤ 0) : IsIso (halfPlaneι h hb p n) := by

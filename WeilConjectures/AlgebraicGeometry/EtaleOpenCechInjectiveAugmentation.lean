@@ -58,7 +58,7 @@ private theorem openCechAugmentation_zero
   let a : P.obj (op ⊤) ⟶ K.X 0 := Pi.lift fun y ↦ P.map (homOfLE le_top).op
   have hap (y : Fin 1 → ι) :
       a ≫ TopCat.Presheaf.cechComplexFunctorπ U P 0 y = P.map (homOfLE le_top).op :=
-    Pi.lift_π _ y
+    Pi.lift_comp_π _ y
   have ha : a ≫ K.d 0 1 = 0 := by
     apply Pi.hom_ext
     intro y

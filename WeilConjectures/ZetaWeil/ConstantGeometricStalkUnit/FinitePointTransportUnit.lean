@@ -170,7 +170,7 @@ private theorem chain_unit (D : FiniteFieldDatum.{u}) (m : ℕ) :
     Functor.mapCochainComplexSingleFunctor,
     HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-    CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+    CochainComplex.singleFunctor,
     HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
     HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
     Category.id_comp, HomologicalComplex.id_f]

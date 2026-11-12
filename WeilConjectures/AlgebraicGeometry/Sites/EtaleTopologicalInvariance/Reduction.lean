@@ -67,6 +67,7 @@ lemma etale_essImage_of_isEmpty {X Y : Scheme.{u}} (f : X ⟶ Y) (U : X.Etale) [
   exact ⟨Etale.mk (⊥ : Y.Opens).ι, ⟨MorphismProperty.Over.isoMk (asIso (isInitialOfIsEmpty.to _))
     (isInitialOfIsEmpty.hom_ext _ _)⟩⟩
 
+
 end Scheme.Hom
 
 end AlgebraicGeometry

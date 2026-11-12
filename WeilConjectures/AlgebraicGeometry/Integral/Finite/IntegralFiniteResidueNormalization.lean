@@ -65,14 +65,14 @@ its image. The third isomorphism theorem, since its positive power lies inside i
 identifies the further quotient with the first coefficient quotient. -/
 def integralResidueQuotientEquiv (n : ℕ) :
     (Padic.coefficientExtensionRing l E (n + 1) ⧸
-      Ideal.span ({Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
-        (Padic.coefficientExtensionUniformizer l E)} :
+      Ideal.span ({(Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
+        (Padic.coefficientExtensionUniformizer l E))} :
         Set (Padic.coefficientExtensionRing l E (n + 1)))) ≃+*
       Padic.coefficientExtensionRing l E 1 := by
   let J := Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
     Set (Padic.coefficientExtensionIntegers l E))
-  have he : Ideal.span ({Ideal.Quotient.mk (J ^ (n + 1))
-      (Padic.coefficientExtensionUniformizer l E)} :
+  have he : Ideal.span ({(Ideal.Quotient.mk (J ^ (n + 1))
+      (Padic.coefficientExtensionUniformizer l E))} :
       Set (Padic.coefficientExtensionIntegers l E ⧸ J ^ (n + 1))) =
       J.map (Ideal.Quotient.mk (J ^ (n + 1))) := by
     dsimp only [J]

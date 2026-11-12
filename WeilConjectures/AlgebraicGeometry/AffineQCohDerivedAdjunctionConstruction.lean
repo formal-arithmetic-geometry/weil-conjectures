@@ -57,7 +57,10 @@ theorem affineQCohDerivedAdjunction_construction (A : Type u) [CommRing A]
     tilde.functor (.of A)
   let R := RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
     ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom
-  let : L.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  let : L.Additive := by
+    constructor
+    intro M N f g
+    exact tilde.map_add (R := .of A) f g
   have adj : L ⊣ R := tilde.adjunction
   let : L.IsLeftAdjoint := adj.isLeftAdjoint
   let : Limits.PreservesFiniteColimits L := inferInstance
@@ -83,7 +86,9 @@ theorem affineQCohDerivedAdjunction_construction (A : Type u) [CommRing A]
     let e := (L.mapDerivedCategoryHomologyFunctorIso n).app K
     apply (SheafOfModules.isQuasicoherent
       (moduleRings (Spec (.of A)).toRingedSpace)).prop_of_iso e
-    exact instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecOfCarrierObjModuleCatModulesFunctor _
+    change (tilde (R := .of A)
+      ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) n).obj K)).IsQuasicoherent
+    infer_instance
   let F := P.lift L.mapDerivedCategory hL
   let G := P.ι ⋙ R.rightDerivedFunctor
   let dadj := adj.mapDerivedCategoryRightDerivedAdjunction

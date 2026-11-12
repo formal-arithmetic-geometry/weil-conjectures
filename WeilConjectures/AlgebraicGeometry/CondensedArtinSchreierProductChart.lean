@@ -145,7 +145,7 @@ private theorem regular_sheets_product
       Pi.lift ρ ≫ (Pi.mapIso e).hom := by
     apply Pi.hom_ext
     intro j
-    simp only [Category.assoc, Pi.mapIso_hom_π, Pi.lift_π, Pi.lift_π_assoc]
+    simp only [Category.assoc, Pi.mapIso_hom_π, Pi.lift_comp_π, Pi.lift_comp_π_assoc]
     simp only [condensedRegularSheetProjection, e, sheet_regular_iso_hom, ρ]
   rw [hf]
   infer_instance
@@ -185,7 +185,7 @@ private theorem sheets_colimit (k : Type u) [Field k] [Fintype k] :
           (pullbackSymmetry q q).hom := by
     apply Sigma.hom_ext
     intro j
-    rw [Sigma.ι_desc]
+    rw [Sigma.ι_comp_desc]
     have hr := Sigma.ι_reindex_hom θ (fun _ : PUnit.{u + 1} → k ↦ A) j
     dsimp only [Function.comp_def] at hr
     rw [reassoc_of% hr]
@@ -194,7 +194,7 @@ private theorem sheets_colimit (k : Type u) [Field k] [Fintype k] :
         pullback.lift_fst, pullback.lift_snd, pullbackSymmetry_hom_comp_fst,
         pullbackSymmetry_hom_comp_snd]
     all_goals
-      erw [Sigma.ι_desc_assoc]
+      erw [Sigma.ι_comp_desc_assoc]
       first | erw [pullback.lift_snd] | erw [pullback.lift_fst]
       all_goals simp [t, σ, Etale.artinSchreierTranslation, θ, ε, Equiv.funUnique]
   have : IsIso (Sigma.desc fun j ↦ pullback.lift (t j) (𝟙 A)

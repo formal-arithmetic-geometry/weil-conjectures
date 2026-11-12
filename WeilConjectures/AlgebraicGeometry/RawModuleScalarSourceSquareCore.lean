@@ -41,7 +41,6 @@ private lemma single_hom (G : C ⥤ D) [G.Additive]
         ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) n).hom.app X) := by
   simp [mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ]
   erw [Category.id_comp]
-  rfl
 
 omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] in
 private lemma complex_single_comp (G : C ⥤ D) (H : D ⥤ E) [G.Additive] [H.Additive]
@@ -59,7 +58,7 @@ private lemma complex_single_comp (G : C ⥤ D) (H : D ⥤ E) [G.Additive] [H.Ad
 private lemma derived_single_comp (G : C ⥤ D) (H : D ⥤ E) [G.Additive] [H.Additive]
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
     [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H] (n : ℤ) (X : C) :
-    (mapDerivedCategoryCompIso G H).hom.app ((DerivedCategory.singleFunctor C n).obj X) ≫
+    (mapDerivedCategoryCompIso G H).inv.app ((DerivedCategory.singleFunctor C n).obj X) ≫
       H.mapDerivedCategory.map ((G.mapDerivedCategorySingleFunctor n).hom.app X) ≫
       (H.mapDerivedCategorySingleFunctor n).hom.app (G.obj X) =
     ((G ⋙ H).mapDerivedCategorySingleFunctor n).hom.app X := by

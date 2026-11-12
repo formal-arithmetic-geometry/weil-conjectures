@@ -100,7 +100,7 @@ theorem isIso_freeComparison_mapOfNatIso (S : C)
     refine Sigma.hom_ext _ _ fun n ↦ ?_
     rw [forget_map, Sigma.ι_map_assoc, ι_comp_sigmaComparison, ← hφ]
     rw [freeComparison_mapOfNatIso]
-    exact Sigma.ι_desc _ n
+    exact Sigma.ι_comp_desc _ n
   rw [h]
   infer_instance
 

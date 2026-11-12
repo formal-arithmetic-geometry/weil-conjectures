@@ -43,7 +43,7 @@ theorem filteredColimit_prime_chain_contraction
   intro n p hp hmono
   let P := {q : Fin (n + 1) × Fin (n + 1) // q.1 < q.2}
   have hsep (q : P) : ∃ x ∈ p q.val.2, x ∉ p q.val.1 :=
-    SetLike.exists_of_lt (hmono q.property)
+    IsConcreteLE.exists_of_lt (hmono q.property)
   choose x hx hn using hsep
   have hrep (q : P) : ∃ (i : I) (y : R.obj i), (colimit.ι R i).hom y = x q :=
     Concrete.colimit_exists_rep R (x q)

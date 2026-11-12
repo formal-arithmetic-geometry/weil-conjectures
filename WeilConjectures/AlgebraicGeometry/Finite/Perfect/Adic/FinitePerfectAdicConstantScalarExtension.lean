@@ -62,8 +62,7 @@ private def liftedTensorComparison {A B : Type t} [CommRing A] [CommRing B]
   apply LinearMap.ext
   intro x
   rcases x with ⟨x⟩
-  induction x using TensorProduct.induction_on with
-  | zero => exact (map_zero _).trans (map_zero _).symm
+  induction x using TensorProduct.inductionOn with
   | tmul b m => rfl
   | add x y hx hy =>
     have h : (ULift.up (x + y) : ULift.{t + 1} _) = ULift.up x + ULift.up y := rfl
@@ -89,7 +88,7 @@ private def constantFactorization (X : Scheme.{t}) (A : Type t) [CommRing A] :
       (ModuleCat.restrictScalars.{t + 1}
         (ULift.ringEquiv : ULift.{t + 1} A ≃+* A).toRingHom)
       (koszulConstantFunctor X A)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso (coefficientLift A) (koszulConstantFunctor X A)
+    (Functor.mapDerivedCategoryCompIso (coefficientLift A) (koszulConstantFunctor X A)).symm
 
 /-- Constant realization, including its coefficient-universe lift, commutes with
 algebraic derived scalar extension on a perfect complex.

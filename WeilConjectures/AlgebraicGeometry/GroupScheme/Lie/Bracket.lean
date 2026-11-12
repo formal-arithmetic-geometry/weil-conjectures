@@ -570,6 +570,7 @@ theorem tangentCoeff_inv (v : pointsKer G aug₁) (a : stalkOne G) :
   rw [mul_inv_cancel, tangentCoeff_one] at h
   linear_combination -h
 
+
 theorem snd_snd_algebraMap₂ (c : k) :
     (algebraMap k (DualNumber (DualNumber k)) c).snd.snd = 0 := by
   simp [algebraMap_eq_inl']
@@ -596,10 +597,14 @@ theorem tangentCoeff_tangentBracket (v w : pointsKer G aug₁) (a : stalkOne G) 
   have e : tangentMul (tangentBracket v w) * (tangentDel w * tangentEps v) =
       tangentEps v * tangentDel w := by
     rw [tangentMul_tangentBracket, commutatorElement_def]
-    group
+    simp only [mul_assoc, inv_mul_cancel_left, inv_mul_cancel, mul_one]
   have h := congrArg (fun p ↦ (kerHom p a).snd.snd) e
-  rw [kerHom_tangentMap_mul (eps₂ * del₂) aug₂_eps₂_mul_del₂ eps₂_mul_del₂_mul,
-    kerHom_tangentMap_mul_tangentMap, kerHom_tangentMap_mul_tangentMap] at h
+  rw [kerHom_tangentMap_mul (G := G) (π := aug₂) (eps₂ * del₂) aug₂_eps₂_mul_del₂
+      eps₂_mul_del₂_mul (tangentBracket v w) (tangentDel w * tangentEps v) a,
+    kerHom_tangentMap_mul_tangentMap (G := G) (π := aug₂) del₂ eps₂ del₂_mul_self
+      eps₂_mul_self aug₂_del₂ aug₂_eps₂ w v a,
+    kerHom_tangentMap_mul_tangentMap (G := G) (π := aug₂) eps₂ del₂ eps₂_mul_self
+      del₂_mul_self aug₂_eps₂ aug₂_del₂ v w a] at h
   simp only [snd_add, snd_snd_algebraMap₂, snd_snd_algebraMap₂_mul_eps₂,
     snd_snd_algebraMap₂_mul_del₂, snd_snd_algebraMap₂_mul_eps₂_mul_del₂,
     snd_snd_algebraMap₂_mul_del₂_mul_eps₂] at h
@@ -783,6 +788,7 @@ theorem tangentBracket_inv_left (v w : pointsKer G aug₁) :
   rw [eq_inv_iff_mul_eq_one, ← tangentBracket_mul_left, inv_mul_cancel,
     tangentBracket_one_left]
 
+
 variable (G) in
 /-- The Lie algebra of `G` is the group of tangent vectors: `Lie(G) ≃ ker(G(k[ε]) → G(k))`. -/
 noncomputable def lieEquivTangent : Lie G ≃ pointsKer G (aug₁ (k := k)) :=
@@ -843,6 +849,7 @@ theorem lie_antisymm' (x y : Lie G) : ⁅x, y⁆ = -⁅y, x⁆ := by
 
 theorem lie_neg_right' (x y : Lie G) : ⁅x, -y⁆ = -⁅x, y⁆ := by
   rw [lie_antisymm', lie_neg_left', neg_neg, lie_antisymm' x y, neg_neg]
+
 
 theorem lieEquivTangent_neg (x : Lie G) : lieEquivTangent G (-x) = (lieEquivTangent G x)⁻¹ := by
   rw [eq_inv_iff_mul_eq_one, ← lieEquivTangent_add, neg_add_cancel,

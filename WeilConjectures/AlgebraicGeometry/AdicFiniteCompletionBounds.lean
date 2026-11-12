@@ -23,6 +23,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] HasDerivedCategory.standard
+
 private theorem tor_cohomology_bounds
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     (R : Sheaf T CommRingCat.{w}) (K : ConstantCompletion.D R) (a b : ℤ)

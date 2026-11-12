@@ -70,13 +70,13 @@ theorem hasTotal_of_firstQuadrant
   · intro t ij
     dsimp [c]
     split_ifs with h
-    · exact Sigma.ι_desc _ _
+    · exact Sigma.ι_comp_desc _ _
     · exact (hK ij.1.1 ij.1.2 (by omega)).eq_of_src _ _
   · intro t m hm
     apply Sigma.hom_ext (f := Y)
     intro ij
     have hi := hm ij.1
-    simpa [c, ij.2, Sigma.ι_desc] using hi
+    simpa [c, ij.2, Sigma.ι_comp_desc] using hi
 
 variable [K.HasTotal (ComplexShape.up ℤ)]
 

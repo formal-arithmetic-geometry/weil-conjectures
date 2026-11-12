@@ -311,7 +311,7 @@ private lemma constantModel_eq_of_localFree
       (condensedRingObj Λ X)) :
       IsConstantModelConstructible Λ X M ↔
         IsConstructibleModuleObject (condensedRingObj Λ X) M := by
-    rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+    rw [IsConstantModelConstructible, ite_eq_left ⟨inferInstance, inferInstance⟩]
     constructor
     · rintro ⟨S, hS⟩
       refine ⟨S, fun a ↦ ?_⟩

@@ -57,13 +57,13 @@ theorem isIdempotentComplete_of_countableCoproducts
     | k + 1 => p ≫ ι k + q ≫ ι (k + 1)
   have hφ (n : ℕ) : ι n ≫ φ = q ≫ ι n + p ≫ ι (n + 1) := by
     dsimp [ι, φ]
-    simp only [Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc]
   have hψ₀ : ι 0 ≫ ψ = ι 0 := by
     dsimp [ι, ψ]
-    simp only [Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc]
   have hψ (n : ℕ) : ι (n + 1) ≫ ψ = p ≫ ι n + q ≫ ι (n + 1) := by
     dsimp [ι, ψ]
-    simp only [Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc]
   have hφψ : φ ≫ ψ = 𝟙 S := by
     apply Sigma.hom_ext
     intro n
@@ -92,10 +92,10 @@ theorem isIdempotentComplete_of_countableCoproducts
     match n.down with
     | 0 => p
     | _ + 1 => 0
-  have hc₀ : ι 0 ≫ c = p := by dsimp [ι, c]; simp only [Sigma.ι_desc]
+  have hc₀ : ι 0 ≫ c = p := by dsimp [ι, c]; simp only [Sigma.ι_comp_desc]
   have hc (n : ℕ) : ι (n + 1) ≫ c = 0 := by
     dsimp [ι, c]
-    simp only [Sigma.ι_desc]
+    simp only [Sigma.ι_comp_desc]
   have hφc : φ ≫ c = 0 := by
     apply Sigma.hom_ext
     intro n

@@ -61,9 +61,8 @@ noncomputable def homologyRightDerivedFunctorPlusObjIso [EnoughInjectives C]
   have : ∀ i, Injective (L.obj.X i) := h₀.2
   let φ : K ⟶ L := ObjectProperty.homMk R₀.ι
   have : IsIso (DerivedCategory.Plus.Q.map φ) :=
-    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
-      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2
-        ((HomologicalComplex.mem_quasiIso_iff _).2 R₀.quasiIso_ι))
+    Localization.inverts DerivedCategory.Plus.Q (CochainComplex.Plus.quasiIso C) φ
+      ((HomologicalComplex.mem_quasiIso_iff R₀.ι).2 R₀.quasiIso_ι)
   (DerivedCategory.Plus.homologyFunctor D p).mapIso
       (v.rightDerivedFunctorPlus.mapIso (asIso (DerivedCategory.Plus.Q.map φ))) ≪≫
     v.homologyRightDerivedFunctorPlusObjQIsoOfInjective L p ≪≫ R₀.rightDerivedHomologyIso R v p

@@ -63,7 +63,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 private theorem inverseOrZero_eq_inv {A : Type*} [Category A] [HasZeroMorphisms A]
     {K H : A} (f : K ⟶ H) [IsIso f] : GeneratorReduction.inverseOrZero f = inv f := by
-  simp only [GeneratorReduction.inverseOrZero, dif_pos (inferInstance : IsIso f)]
+  simp only [GeneratorReduction.inverseOrZero, dite_eq_left (inferInstance : IsIso f)]
 
 private theorem pull_transpose (o : Operations l E) (a : AmbientModels l E o)
     {U V : Scheme.{u}} (f : U ⟶ V) {K : Integral l E V} {M : System l E V}

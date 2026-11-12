@@ -413,7 +413,6 @@ private theorem roosMap_coordinates
         (add_zero p) (p + -1) (by omega),
       Cochain.leftShift_v (mappingCone.fst φ).1 (-1) 0 (by omega) p p
         (add_zero p) (p + -1) (by omega)]
-    erw [Category.id_comp, Category.id_comp]
     exact hc₁ p
   · intro p q h
     obtain rfl : q = p + -1 := h.symm
@@ -426,7 +425,6 @@ private theorem roosMap_coordinates
       Cochain.leftShift_v (mappingCone.snd φ) (-1) (-1) (by omega)
         p (p + -1) rfl (p + -1) (by omega),
       Int.negOnePow_even 2 ⟨1, rfl⟩]
-    erw [Category.id_comp, Category.id_comp]
     exact hc₂ p
 
 private theorem roosUnit_fst (W : Scheme.{t})

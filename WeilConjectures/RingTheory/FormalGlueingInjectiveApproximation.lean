@@ -163,8 +163,7 @@ private theorem exists_h0_morphism {R : Type u} {S : Type v}
     apply LinearMap.ext
     intro y
     change TensorProduct R S H at y
-    induction y using TensorProduct.induction_on with
-    | zero => simp
+    induction y using TensorProduct.inductionOn with
     | tmul s h =>
       have hbase := LinearMap.congr_fun ((exists_compare φ (f i) H).exists.choose_spec)
         (TensorProduct.tmul R s h)

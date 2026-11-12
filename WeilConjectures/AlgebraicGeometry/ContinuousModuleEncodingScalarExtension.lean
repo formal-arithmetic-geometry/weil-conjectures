@@ -32,6 +32,14 @@ variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
   {A B : Sheaf J CommRingCat.{u}} (α : A ⟶ B)
 
+local instance scalarExtensionRestrictedModule {U V : Cᵒᵖ} (i : U ⟶ V)
+    (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :
+    Module (A.obj.obj V)
+      ((ModuleCat.restrictScalars
+        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj.map i).hom).obj
+          (M.val.obj V)) :=
+  inferInstanceAs (Module (A.obj.obj V) (M.val.obj V))
+
 private theorem scalarExtensionMap_tmul {U V : Cᵒᵖ} (i : U ⟶ V)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (s : B.obj.obj U) (m : M.val.obj U) :

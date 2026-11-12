@@ -13,7 +13,8 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_algebraicGeometryIntegralResiduePullOrdinaryUnit
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 attribute [local irreducible] Mod.extendScalarsIsoComapInv
 private theorem extendSquare_forget
     {C : Type*} [Category C] [MonoidalCategory C]
@@ -100,7 +101,7 @@ private theorem comapUpperStar_forget
   erw [← Category.assoc, hs]
   rfl
 
-private theorem comapUpperStar_inv_forget
+private theorem comapUpperStar_inv_forget_private
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -112,6 +113,10 @@ private theorem comapUpperStar_inv_forget
   let e := (Mod.forget (condensedRingObj Λ X)).mapIso
     ((CondensedRing.comapUpperStarIso a f).app N)
   exact isoInvFac e _ _ (comapUpperStar_forget a f N)
+
+/-- Public export of the private `comapUpperStar_inv_forget_private`
+(used by `import all` importers; linter.privateModule). -/
+alias comapUpperStar_inv_forget := comapUpperStar_inv_forget_private
 
 set_option maxHeartbeats 400000 in
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
@@ -146,13 +151,13 @@ private theorem ordinary_vertical_unit
           ((Mod.comap (coefficientMap a Y)).obj N)) := by
     change (lowerStar Ab.{u + 1} f).map
       (((CondensedRing.comapUpperStarIso a f).inv.app N).hom) ≫ _ = _
-    erw [← Functor.map_comp, comapUpperStar_inv_forget]
+    erw [← Functor.map_comp, comapUpperStar_inv_forget_private]
   erw [hm, moduleUnit_forget Λ' f N,
     moduleUnit_forget Λ f ((Mod.comap (coefficientMap a Y)).obj N)]
   rfl
 
 -- The concrete comparisons unfold several coefficient and module functor wrappers.
-private theorem ordinaryScalarUnit
+private theorem ordinaryScalarUnit_private
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -178,6 +183,10 @@ private theorem ordinaryScalarUnit
   exact unitCompositeMate (Mod.extendRestrictAdjunction (coefficientMap a Y))
     (Mod.extendRestrictAdjunction (coefficientMap a X)) au av e
     (CondensedRing.comapUpperStarIso a f).inv hq M
+
+/-- Public export of the private `ordinaryScalarUnit_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryScalarUnit := ordinaryScalarUnit_private
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

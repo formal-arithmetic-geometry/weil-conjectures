@@ -54,10 +54,10 @@ noncomputable def openProjectionExtensionComparison (Λ : Type (u + 1)) [CommRin
         (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory ≅
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory ⋙
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical inverse-image comparison, converted from exact termwise pullbacks
 using `leftDerivedUpperStarIsoMapDerivedCategory` on both sites. Its direction is
@@ -71,10 +71,10 @@ noncomputable def openProjectionRestrictionComparison (Λ : Type (u + 1)) [CommR
         (upperStar (ModuleCat.{u + 1} Λ) j).leftDerivedFunctor :=
   Functor.isoWhiskerRight
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j) _ ≪≫
-    ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _ ≪≫
       Functor.mapDerivedCategoryNatIso
         (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j) ≪≫
-      Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).symm).symm ≪≫
     Functor.isoWhiskerLeft _
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm
 

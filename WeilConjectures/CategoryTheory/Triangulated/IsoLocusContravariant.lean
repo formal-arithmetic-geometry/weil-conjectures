@@ -60,6 +60,7 @@ def shiftIsoLocusOp (κ : S ⟶ T) : ObjectProperty C :=
 lemma shiftIsoLocusOp_iff (κ : S ⟶ T) (N : C) :
     κ.shiftIsoLocusOp N ↔ ∀ n : ℤ, IsIso (κ.app (op (N⟦n⟧))) := Iff.rfl
 
+
 /-- If `N` lies in `κ.shiftIsoLocusOp`, then `κ` is an isomorphism at the iterated shifts
 `N⟦n⟧⟦m⟧`. -/
 lemma isIso_app_op_shift_shift (κ : S ⟶ T) {N : C} (hN : κ.shiftIsoLocusOp N) (n m : ℤ) :

@@ -58,7 +58,7 @@ abbrev nu (T : Scheme.{u}) :=
 /-- The annihilating exponent in the lifted ring is the recorded quotient equation.
 Source: coefficient convention (blueprint: def-sp-p1-level-words). -/
 abbrev levelAnnihilates : ((l ^ (n + 1) : ℕ) : levelRing l E n) = 0 :=
-  ULift.ext _ _ (SpTowerClasses.coefficient_annihilates l E n)
+  ULift.ext (SpTowerClasses.coefficient_annihilates l E n)
 
 /-- An etale expression, its tower expression, and their specified comparison arrow.
 The arrow is built recursively from site mates and evaluation; it is not freely chosen

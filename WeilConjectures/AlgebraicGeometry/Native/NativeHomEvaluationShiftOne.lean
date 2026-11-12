@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Native.NativeHomSourceShiftData
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeDerivedClosedTensorShifts
 
 /-! # Evaluation and the signed source shift in degree one
@@ -117,6 +119,23 @@ private lemma uncurry_nativeHom_comparison
     simp
   rw [hμ]
   congr 1
+
+private lemma nativeHom_comparison_transport
+    {C : Type d} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C] (P I : CochainComplex C ℤ) :
+    (DerivedCategory.quotientCompQhIso C).inv.app (CochainComplex.internalHomObj P I) ≫
+        DerivedCategory.qhInternalHomToIhom P I ≫
+        (ihom (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P))).map
+          ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
+        (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app P)).app
+          (DerivedCategory.Q.obj I) = DerivedCategory.qhInternalHomToIhom P I := by
+  change (𝟙 _ ≫ DerivedCategory.qhInternalHomToIhom P I ≫
+    (ihom (DerivedCategory.Q.obj P)).map (𝟙 (DerivedCategory.Q.obj I)) ≫
+    (MonoidalClosed.pre (𝟙 (DerivedCategory.Q.obj P))).app (DerivedCategory.Q.obj I)) = _
+  simp only [MonoidalClosed.pre_id, NatTrans.id_app, Category.id_comp, Category.comp_id]
+  erw [(ihom (DerivedCategory.Q.obj P)).map_id, Category.comp_id]
 
 private lemma localize_evaluation_shift
     {E : Type*} {D : Type*} [Category E] [Category D]
@@ -360,7 +379,15 @@ theorem nativeHom_evaluation_shift_one
     (hσ : ∀ (n p q : ℤ) (hpq : p + n = q),
       σ.f n ≫ CochainComplex.internalHomπ (P⟦(-1 : ℤ)⟧) I n p q hpq =
         p.negOnePow • CochainComplex.internalHomπ P I (n + 1) (p + -1) q (by omega)) :
-    DerivedCategory.Q.map σ ≫ DerivedCategory.qhInternalHomToIhom (P⟦(-1 : ℤ)⟧) I ≫
+    DerivedCategory.Q.map σ ≫
+        (DerivedCategory.quotientCompQhIso C).inv.app
+          (CochainComplex.internalHomObj (P⟦(-1 : ℤ)⟧) I) ≫
+        DerivedCategory.qhInternalHomToIhom (P⟦(-1 : ℤ)⟧) I ≫
+        (ihom (DerivedCategory.Qh.obj
+          ((HomotopyCategory.quotient C (.up ℤ)).obj (P⟦(-1 : ℤ)⟧)))).map
+            ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
+        (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app
+          (P⟦(-1 : ℤ)⟧))).app (DerivedCategory.Q.obj I) ≫
         (MonoidalClosed.internalHom.flip.obj (DerivedCategory.Q.obj I)).map
           ((DerivedCategory.Q.commShiftIso (-1 : ℤ)).inv.app P).op ≫
         (MonoidalClosed.internalHom.flip.obj (DerivedCategory.Q.obj I)).map
@@ -369,7 +396,14 @@ theorem nativeHom_evaluation_shift_one
         siteHomSignedSourceComponent (DerivedCategory.Q.obj I) 1
           (op (DerivedCategory.Q.obj P)) =
       (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app (CochainComplex.internalHomObj P I) ≫
-        (DerivedCategory.qhInternalHomToIhom P I)⟦(1 : ℤ)⟧' := by
+        ((DerivedCategory.quotientCompQhIso C).inv.app (CochainComplex.internalHomObj P I) ≫
+          DerivedCategory.qhInternalHomToIhom P I ≫
+          (ihom (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P))).map
+            ((DerivedCategory.quotientCompQhIso C).hom.app I) ≫
+          (MonoidalClosed.pre ((DerivedCategory.quotientCompQhIso C).inv.app P)).app
+            (DerivedCategory.Q.obj I))⟦(1 : ℤ)⟧' := by
+  rw [reassoc_of% nativeHom_comparison_transport (P⟦(-1 : ℤ)⟧) I,
+    nativeHom_comparison_transport P I]
   let K := DerivedCategory.Q.obj P
   let M := DerivedCategory.Q.obj I
   let U := CochainComplex.internalHomObj P I

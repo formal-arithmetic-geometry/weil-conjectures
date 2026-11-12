@@ -45,7 +45,7 @@ private theorem tupleGenerator_face (X : Scheme.{u}) (ι : Type u) (U₀ : X.Eta
     (PresheafOfModules.free O).map (yoneda.map (p i).left) ≫
       Sigma.ι (F n) (i ∘ j.succAbove))).app (op W))
         (((Sigma.ι (F (n + 1)) i).app (op W)) (ModuleCat.freeMk g.left)) = _
-  rw [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app, Sigma.ι_desc]
+  rw [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app, Sigma.ι_comp_desc]
   simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply,
     PresheafOfModules.free_map_app]
   dsimp only [yoneda_map_app, types_comp_apply]
@@ -74,7 +74,7 @@ this generator to r times the coproduct injection of the free generator associat
 with the compatible tuple x. The n-th differential is the sum over j in Fin (n+2)
 of (-1)^j times the j-th face. A face reindexes the indices along Fin.succAbove j
 and postcomposes the product map with the corresponding product projection.
-The equations Pi.lift_π in Over U₀ identify that composite with the product map
+The equations Pi.lift_comp_π in Over U₀ identify that composite with the product map
 for the tuple with its j-th entry omitted. Thus every summand is r times the
 same generator with the same sign on both sides. The block index φ is preserved.
 The integer sign action agrees with multiplication by the corresponding power
@@ -96,7 +96,7 @@ theorem freeCechDifferential_compatibility (X : Scheme.{u}) (ι : Type u) (U₀ 
   classical
   dsimp
   intro n
-  simp only [Functor.mapHomologicalComplex_obj_d,
+  simp only [
     AlgebraicTopology.alternatingFaceMapComplex_obj_d]
   apply DFinsupp.lhom_ext'
   intro φ

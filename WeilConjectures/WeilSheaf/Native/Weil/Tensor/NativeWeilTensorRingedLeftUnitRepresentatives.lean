@@ -10,6 +10,8 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorForge
 public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorDescent
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssociatorNormalized
 import WeilConjectures.CategoryTheory.SixFunctors.SemigroupalUnit
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The left-unit representative calculation
 

@@ -81,6 +81,7 @@ lemma F_eq_top_of_isZero_gr (m p : ℤ) (hm : F.F m = ⊤) (h : ∀ k < p, IsZer
       rw [F.F_succ_eq_of_isZero_gr q (h q (by omega))]
       exact ih q (fun l hl ↦ h l (by omega)) (by push_cast at hk; omega)
 
+
 end DecreasingFiltration
 
 namespace ExactCouple
@@ -140,6 +141,7 @@ lemma d_eq_zero_of_isZero (hb : 0 < b.1) (N₀ : ℕ)
     obtain ⟨p, n⟩ := i
     exact h p n hi
 
+
 variable {X} {A : ℤ → C} {ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n} {F : ∀ n, DecreasingFiltration (A n)}
 
 /-- The *edge map* `Aⁿ ⟶ E_{N₀}^{0, n}` of a convergent couple, when `F⁰ Aⁿ = Aⁿ` and the
@@ -193,6 +195,7 @@ theorem isIso_edge (hb : 0 < b.1) (c : X.ConvergenceData ι F)
   dsimp only [ConvergenceData.edge]
   exact IsIso.comp_isIso' (Iso.isIso_inv _)
     (IsIso.comp_isIso' this (IsIso.comp_isIso' (Iso.isIso_inv _) (Iso.isIso_hom _)))
+
 
 end Collapse
 

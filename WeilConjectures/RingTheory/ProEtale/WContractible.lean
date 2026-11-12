@@ -821,3 +821,4 @@ theorem exists_forall_exists_retraction :
   intro T _ _ _ _
   obtain ⟨f, hf⟩ := IsWContractibleRing.exists_retraction S T
   use f, hf
+

@@ -429,7 +429,7 @@ lemma isIso_freeYonedaToConst {T : C} (hT : IsTerminal T) :
     IsIso (freeYonedaToConst R T) := by
   have (W : Cᵒᵖ) : IsIso ((freeYonedaToConst R T).app W) := by
     have : Unique (ULift.{u} (W.unop ⟶ T)) :=
-      ⟨⟨⟨hT.from _⟩⟩, fun a ↦ ULift.ext _ _ (hT.hom_ext _ _)⟩
+      ⟨⟨⟨hT.from _⟩⟩, fun a ↦ ULift.ext (hT.hom_ext _ _)⟩
     rw [ConcreteCategory.isIso_iff_bijective]
     refine ⟨fun a b hab ↦ Finsupp.unique_ext ?_, fun r ↦ ⟨Finsupp.single default r, ?_⟩⟩
     · have h₁ := Finsupp.linearCombination_unique (α := ULift.{u} (W.unop ⟶ T)) (R := R) a

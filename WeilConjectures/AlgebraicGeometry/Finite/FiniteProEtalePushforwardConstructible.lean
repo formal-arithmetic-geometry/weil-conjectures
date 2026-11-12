@@ -53,10 +53,10 @@ def finitePushforwardDerivedPullbackComparison (B : Type (u + 1)) [CommRing B]
         (upperStar (ModuleCat.{u + 1} B) f).mapDerivedCategory ≅
       (Etale.upperStar (ModuleCat.{u + 1} B) f).mapDerivedCategory ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B) f) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical ordinary total derived direct-image comparison, defined as the
 counit mate of the specified exact pullback comparison. Thus its component is the

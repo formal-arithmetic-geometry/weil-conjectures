@@ -451,6 +451,10 @@ end CoefficientCone
 
 open CategoryTheory CategoryTheory.Limits Opposite CochainComplex RoosConeCalculus
 namespace RoosCompletion
+attribute [local instance] AlgebraicGeometry.ProEtale.AdicCompletion.modulesNatProducts
+  AlgebraicGeometry.ProEtale.AdicCompletion.complexNatProducts
+  AlgebraicGeometry.ProEtale.AdicCompletion.complexNatLimit
+
 variable {A : Type*} [Category A] [Abelian A] [HasCountableProducts A]
 private def signedX (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) :
     (roosF.obj N).X q ≅ (roosP N).X q ⊞ (roosP N).X (q - 1) where
@@ -622,8 +626,8 @@ private theorem augmentation_sign (P : CochainComplex (Modules l E X) ℤ) :
     congr 1
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, productIso_π, ← Category.assoc, Pi.lift_π]
-    simp only [unitProduct, Pi.lift_π, eqToIso_refl, Iso.refl_hom, Category.comp_id]
+    rw [Category.assoc, productIso_π, ← Category.assoc, Pi.lift_comp_π]
+    simp only [unitProduct, Pi.lift_comp_π, eqToIso_refl, Iso.refl_hom, Category.comp_id]
     rfl
   · simp only [Category.assoc, biprod.map_snd, biprod.lift_snd_assoc, biprod.lift_snd]
     rw [← Category.assoc, Preadditive.comp_neg, augment_u, neg_zero, zero_comp]
@@ -770,8 +774,8 @@ private def strictAugmentationNat (data : PrincipalReductionConeData l E X)
       congr 1
       apply Pi.hom_ext
       intro n
-      simp only [Category.assoc, Pi.lift_π, roosPmap, Pi.map_π,
-        Pi.lift_π_assoc]
+      simp only [Category.assoc, Pi.lift_comp_π, roosPmap, Pi.map_π,
+        Pi.lift_comp_π_assoc]
       exact (data.j n).naturality f
 
 namespace TowerAssembly

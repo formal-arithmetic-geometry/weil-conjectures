@@ -81,7 +81,7 @@ public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorStrictLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
-public import Mathlib.Logic.Denumerable
+public import Mathlib.Basic.Denumerable
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosChainMaps
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosResolution

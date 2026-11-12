@@ -54,7 +54,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   coefficientConstantTowerEvaluation scalarReductionDerivedRestriction
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
   compactSupportLevelSheafQuotient
-  Functor.mapHomologicalComplex NatTrans.mapHomologicalComplex HomologicalComplex.asFunctor
+  NatTrans.mapHomologicalComplex HomologicalComplex.asFunctor
   SemilinearSections.evaluation SheafOfModules.pushforward SheafOfModules.restrictScalars
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
@@ -93,7 +93,7 @@ private theorem directRestrictionComp_eq (W : Scheme.{u}) (n : ℕ) :
       (Functor.mapDerivedCategoryCompIso
         (proEtaleCoefficientRestrictScalars W
           (compactSupportLevelQuotient l E (n + 1) n n.le_succ))
-        (scalarReductionRestriction l E W (n + 1))).symm ≪≫
+        (scalarReductionRestriction l E W (n + 1))) ≪≫
       Functor.mapDerivedCategoryNatIso (eqToIso (directRestriction_eq l E W n)) := by
   unfold compactSupportRestrictionComp pbcDerivedRestrictComp
   have h := scalarComp_eqToIso

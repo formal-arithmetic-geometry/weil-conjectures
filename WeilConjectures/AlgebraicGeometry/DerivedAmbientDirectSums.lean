@@ -26,6 +26,16 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+local instance instHasColimitsOfShape_derivedAmbientDirectSums (X : Scheme.{u}) (I : Type u) :
+    HasColimitsOfShape (Discrete I)
+      (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  have : HasColimitsOfShape (Discrete I) C := inferInstance
+  refine ⟨fun F ↦ ?_⟩
+  have (n : ℤ) : HasColimit (F ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
+
 /-- Termwise direct sums of any representatives give direct sums in `D(𝒪_X)`, and their
 cohomology is canonically the direct sum of the cohomology sheaves.
 Source: Stacks Project, Lemma 07D9 (1)-(2), and proof of Lemma 08DT

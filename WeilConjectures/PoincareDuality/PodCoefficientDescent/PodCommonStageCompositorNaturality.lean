@@ -93,8 +93,7 @@ private theorem pod_rational_composition_naturality
         ((constructibleIntegralPullback l E f).obj M.obj)⟩ := by
     rw [obj, obj]
   have hc (M) := (pullbackTensorRationalComposition_existsUnique l E f h M).exists.choose_spec
-  induction a using TensorProduct.induction_on with
-  | zero => simp
+  induction a using TensorProduct.inductionOn with
   | tmul c a =>
     have hm := (pod_map_heq (rationalDerivedPullback l E h) (obj f K) (obj f L)
       (hom f K.obj L.obj a c)).trans
@@ -140,7 +139,7 @@ private theorem pod_composition_representative_naturality
       (aK.hom ≫ eK.hom ≫ F.map bK.inv ≫ dK.inv) ≫
         (dK.hom ≫ F.map (bK.hom ≫ G.map r ≫ bN.inv) ≫ dN.inv) := by
   simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
-    Iso.map_inv_hom_id_assoc]
+    Iso.inv_hom_id_map_assoc]
   simpa only [Category.assoc] using
     congrArg (fun t ↦ aK.hom ≫ t ≫ F.map bN.inv ≫ dN.inv) nat
 
@@ -161,6 +160,8 @@ private theorem pod_ofHom_square
     StageSystem.PairCategory.mkHom_comp_mkHom] using
       congrArg (StageSystem.PairCategory.mkHom L hP hS) e
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The prescribed common-stage pullback compositor is natural in every arrow.
 Source: blueprint dual-Tate compatibility, Step 5: rational and common-stage descent.
 (blueprint: lem-pod-common-stage-compositor-naturality).

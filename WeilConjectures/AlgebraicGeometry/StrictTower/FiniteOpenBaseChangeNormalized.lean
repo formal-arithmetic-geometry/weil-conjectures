@@ -308,10 +308,10 @@ noncomputable def singleBeta [Finite B] {U' U X' X : Scheme.{u}}
     (hsq : IsPullback a j' j g) :
     (moduleJ B j).mapDerivedCategory ⋙ (modulePullback B g).mapDerivedCategory ≅
       (modulePullback B a).mapDerivedCategory ⋙ (moduleJ B j').mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+  Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (@asIso _ _ _ _ (singleBetaInv B a j' j g h)
         (singleBetaInv_isIso B a j' j g h hsq)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
+    (Functor.mapDerivedCategoryCompIso _ _).symm
 
 end AlgebraicGeometry.ProEtale.StrictTower

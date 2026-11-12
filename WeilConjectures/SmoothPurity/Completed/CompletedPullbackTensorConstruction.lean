@@ -489,6 +489,8 @@ def pullbackTensorAtCommonStage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (commonStagePullbackObject l Ω f (commonStageTensorObject l Ω Y P Q)).toStage h ≅
       (commonStageTensorObject l Ω X
         (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q)).toStage h :=
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
   commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω Y P Q) L h ≪≫
   ((@rationalDerivedPullback l _ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ X Y f
     hX hY)).mapIso

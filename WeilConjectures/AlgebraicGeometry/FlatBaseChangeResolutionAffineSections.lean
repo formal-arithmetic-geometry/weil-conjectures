@@ -97,8 +97,7 @@ theorem Scheme.Modules.flatBaseChangeResolutionBeta_affine_bijective_iff
   have hcomm (z : TensorProduct Γ(S, V) Γ(S', W) (Scheme.Modules.HOver h N p)) :
       Scheme.Modules.Hom.app β W (a z) =
         b (Scheme.Modules.H.baseChange (S := Γ(S', W)) h N p z) := by
-    induction z using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction z using TensorProduct.inductionOn with
     | tmul s xi =>
       rw [ha_tmul, Scheme.Modules.Hom.app_smul]
       have hs := Scheme.Modules.flatBaseChangeResolutionBeta_sections f g I J t ht p

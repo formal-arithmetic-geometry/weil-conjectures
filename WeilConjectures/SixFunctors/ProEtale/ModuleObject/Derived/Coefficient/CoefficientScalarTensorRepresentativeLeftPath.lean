@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeHypotheses
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorInternalComplex
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeTotalPath
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientTensorLocalization
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeTotalPath
 
 /-! # The localized left scalar tensor path
 
@@ -37,7 +37,6 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   Localization.Monoidal.tensorBifunctor
 
 -- Match native prolongations before reducing concrete section constructions.
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 

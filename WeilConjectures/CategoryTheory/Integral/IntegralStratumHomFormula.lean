@@ -104,7 +104,7 @@ private theorem mapDerivedLimitTriangle
   have hp : F.map p ≫ e.hom = Pi.lift (fun n ↦ F.map (p ≫ Pi.π K n)) := by
     apply Pi.hom_ext
     intro n
-    rw [Category.assoc, he, ← F.map_comp, Pi.lift_π]
+    rw [Category.assoc, he, ← F.map_comp, Pi.lift_comp_π]
   have ht : F.map (towerTransitionEndomorphism f) ≫ e.hom =
       e.hom ≫ towerTransitionEndomorphism (fun n ↦ F.map (f n)) := by
     apply Pi.hom_ext
@@ -112,7 +112,7 @@ private theorem mapDerivedLimitTriangle
     rw [Category.assoc, he, ← F.map_comp]
     rw [(towerTransitionEndomorphism_eq_iff f _).mp rfl n, F.map_sub, F.map_comp]
     simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Preadditive.comp_sub, Category.comp_id, Category.assoc, Pi.lift_π]
+      Preadditive.comp_sub, Category.comp_id, Category.assoc, Pi.lift_comp_π]
     simp only [← Category.assoc, he]
   change Triangle.mk _ _ ε ∈ distinguishedTriangles
   let t := Triangle.mk p (towerTransitionEndomorphism f) δ

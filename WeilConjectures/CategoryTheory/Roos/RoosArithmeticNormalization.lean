@@ -40,9 +40,9 @@ namespace CategoryTheory
 
 attribute [local implicit_reducible] CategoryTheory.roosF CategoryTheory.roosConeFunctor
   CategoryTheory.strictRoosComplex CategoryTheory.strictRoosEndomorphism
-  CategoryTheory.strictRoosProduct HomologicalComplex.asFunctor HomologicalComplex.eval
+  CategoryTheory.strictRoosProduct HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
-  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.NatTrans.mapHomologicalComplex
+  CategoryTheory.NatTrans.mapHomologicalComplex
   HomologicalComplex.coneOfHasLimitEval CategoryTheory.strictTowerLimitIso
 
 universe v w d

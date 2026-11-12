@@ -92,7 +92,7 @@ theorem exists_section_of_finite_clopen_open_cover
     refine ⟨i, ?_⟩
     change _ ∈ Set.range (pi i)
     refine ⟨x, ?_⟩
-    rw [← Scheme.Hom.comp_apply (Sigma.ι Vi i) (Sigma.desc k), Sigma.ι_desc, hpi i]
+    rw [← Scheme.Hom.comp_apply (Sigma.ι Vi i) (Sigma.desc k), Sigma.ι_comp_desc, hpi i]
     rfl
   -- Group the subset strata by their first chosen image.
   obtain ⟨W, hWle, hWsup, hWdisj⟩ := Fintype.exists_disjointed_le U

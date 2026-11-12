@@ -28,7 +28,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 namespace AlgebraicGeometry.ProEtale.RationalP1
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_rationalP1NativeModelP2Equation
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 open DiagonalCoefficients CondensedRing
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 

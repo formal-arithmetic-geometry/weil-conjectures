@@ -25,7 +25,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 open Scheme
 attribute [local instance] GrothendieckTopology.Point.sheafFiber_additive
-noncomputable local instance : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
+noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedGlobalGermExchange
+    : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
 /-- The canonical derived global germ intertwines exchange with the derived unit.
@@ -88,7 +89,7 @@ theorem derivedGlobalGerm_exchange
       (Functor.associator L R.rightDerivedFunctorPlus HR).hom ≫
       Functor.whiskerLeft L e.hom ≫ Functor.whiskerLeft L (derivedGlobalGerm f' t)
   have h : δ = ε := by
-    apply Functor.rightDerived_ext HR H.rightDerivedFunctorPlusUnit
+    apply Functor.rightDerived_ext HR H.rightDerivedFunctorPlusUnith
       (HomotopyCategory.Plus.quasiIso _) _ δ ε
     ext M : 2
     have ha := derivedPulledGlobalGerm_fac f f' g g' sq.toCommSq t M

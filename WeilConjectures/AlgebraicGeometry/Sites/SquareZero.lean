@@ -129,7 +129,7 @@ theorem isLocallySurjective_gaSheafToLowerStarGaSheaf [IsClosedImmersion h] :
       (pullback.fst (A.ι ≫ V.hom) h)).2
       ((((Etale.lowerStar AddCommGrpCat.{u + 1} h).obj Z.gaSheaf).obj.map
         (etaleOfOpensι V A).op s).down)
-    exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+    exact ⟨ULift.up a, ULift.ext ha⟩
 
 /-- **The ideal sequence.** For a closed immersion `h : Z ⟶ Y`, the sequence
 `0 → K → 𝔾ₐ → h_* 𝔾ₐ → 0` of étale sheaves on `Y` is short exact. -/
@@ -188,11 +188,11 @@ theorem subsingleton_H_upperStar_gaKernel [IsClosedImmersion h] {W : Scheme.{u}}
       intro s
       obtain ⟨a, ha⟩ := (IsClosedImmersion.isAffine_surjective_of_isAffine
         (pullback.fst w h)).2 s.down
-      exact ⟨ULift.up a, ULift.ext _ _ ha⟩
+      exact ⟨ULift.up a, ULift.ext ha⟩
     refine subsingleton_of_forall_eq 0 fun x ↦ ?_
     obtain ⟨s, rfl⟩ := (Sheaf.H.exact_δ_map hS hT x).1 (Subsingleton.elim _ _)
     obtain ⟨t, ht⟩ := hsurj s
-    have : s ∈ (Sheaf.H.δ hS hT).ker := by
+    have : s ∈ (Sheaf.H.δSections hS hT).ker := by
       rw [Sheaf.H.ker_δ]
       exact ⟨t, ht⟩
     exact this
@@ -229,7 +229,7 @@ lemma gaKernelVal_zero (T : Y.Etaleᵒᵖ) : gaKernelVal h T 0 = 0 := by
 
 lemma gaKernelVal_injective (T : Y.Etaleᵒᵖ) [IsClosedImmersion h] :
     Function.Injective (gaKernelVal h T) := fun _ _ hxy ↦
-  Sheaf.injective_app_f (gaKernelSequence_shortExact h) T (ULift.ext _ _ hxy)
+  Sheaf.injective_app_f (gaKernelSequence_shortExact h) T (ULift.ext hxy)
 
 lemma gaKernelVal_map {T T' : Y.Etaleᵒᵖ} (g : T ⟶ T') (x : (gaKernel h).obj.obj T) :
     gaKernelVal h T' ((gaKernel h).obj.map g x) = g.unop.left.appTop (gaKernelVal h T x) := by
@@ -245,7 +245,7 @@ lemma appTop_gaKernelVal (T : Y.Etaleᵒᵖ) (x : (gaKernel h).obj.obj T) :
 lemma exists_gaKernelVal_eq [IsClosedImmersion h] (T : Y.Etaleᵒᵖ) (a : Γ(T.unop.left, ⊤))
     (ha : (pullback.fst T.unop.hom h).appTop a = 0) : ∃ x, gaKernelVal h T x = a := by
   obtain ⟨x, hx⟩ := Sheaf.exists_app_f_eq (gaKernelSequence_shortExact h) T (ULift.up a)
-    (ULift.ext _ _ ha)
+    (ULift.ext ha)
   exact ⟨x, congrArg ULift.down hx⟩
 
 /-- The unit underlying a section of `𝔾ₘ`. -/
@@ -259,7 +259,7 @@ noncomputable def gmMk {X : Scheme.{u}} (T : X.Etaleᵒᵖ) (v : Γ(T.unop.left,
   ULift.up (Additive.ofMul v)
 
 lemma gmVal_injective {X : Scheme.{u}} (T : X.Etaleᵒᵖ) : Function.Injective (gmVal T) :=
-  fun _ _ hxy ↦ ULift.ext _ _ (Additive.toMul.injective hxy)
+  fun _ _ hxy ↦ ULift.ext (Additive.toMul.injective hxy)
 
 /-- On sections, `𝔾ₘ ⟶ h_* 𝔾ₘ` is pullback of functions along `T ×_Y Z ⟶ T`. -/
 lemma val_gmSheafToLowerStarGmSheaf_app (T : Y.Etaleᵒᵖ) (x : Y.gmSheaf.obj.obj T) :
@@ -308,7 +308,7 @@ theorem isLocallySurjective_gmSheafToLowerStarGmSheaf [IsClosedImmersion h] :
         inv := b * (1 - (a * b - 1))
         val_inv := by linear_combination -hcc
         inv_val := by linear_combination -hcc }
-    exact ⟨ULift.up (Additive.ofMul ua), ULift.ext _ _ (Additive.toMul.injective (Units.ext ha))⟩
+    exact ⟨ULift.up (Additive.ofMul ua), ULift.ext (Additive.toMul.injective (Units.ext ha))⟩
 
 theorem gmKernelSequence_shortExact [IsClosedImmersion h] : (gmKernelSequence h).ShortExact :=
   have := isLocallySurjective_gmSheafToLowerStarGmSheaf hsq
@@ -350,7 +350,7 @@ lemma val_gaKernelToGmSheaf_app (T : Y.Etaleᵒᵖ) (x : (gaKernel h).obj.obj T)
 lemma gaKernelToGmSheaf_comp : gaKernelToGmSheaf hsq ≫ gmSheafToLowerStarGmSheaf h = 0 := by
   apply Sheaf.hom_ext
   ext T x
-  refine ULift.ext _ _ (Additive.toMul.injective (Units.ext ?_))
+  refine ULift.ext (Additive.toMul.injective (Units.ext ?_))
   change (pullback.fst T.unop.hom h).appTop ((1 : Γ(T.unop.left, ⊤)) + gaKernelVal h T x) = 1
   rw [map_add, map_one, appTop_gaKernelVal h T x, add_zero]
 

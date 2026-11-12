@@ -114,6 +114,7 @@ lemma coe_twistMonomialFraction_apply {a b : n → ℤ} (h : ∑ i, a i = ∑ i,
       Localization.mk (monomialToNat R a) ⟨monomialToNat R b, hU x.1 x.2⟩ :=
   rfl
 
+
 lemma monomialToNat_nsmul_indicator_notMem {x : Proj (homogeneousSubmodule n R)}
     (hx : x ∈ Proj.basicOpen _ (monomialToNat R (s.indicator 1))) (N : ℕ) :
     monomialToNat R (N • s.indicator (1 : n → ℤ)) ∉ x.asHomogeneousIdeal := by
@@ -167,7 +168,7 @@ open Classical in
 /-- The exponent vector `m eᵢ` of the monomial `Xᵢ ^ m`, for `i ∈ s`. -/
 noncomputable def singleExponent {i : n} (hi : i ∈ s) : laurentExponents s m :=
   ⟨Pi.single i m, by simp, fun j hj ↦ by
-    rw [Pi.single_apply, if_neg fun h : j = i ↦ hj (h ▸ hi)]⟩
+    rw [Pi.single_apply, ite_eq_right fun h : j = i ↦ hj (h ▸ hi)]⟩
 
 /-- `xᵢ ^ m` is a free generator of `𝒪(m)` on `D₊(∏_{j ∈ s} Xⱼ)`, for `i ∈ s`. -/
 lemma isFreeGenerator_twistMonomial_singleExponent {i : n} (hi : i ∈ s) :
@@ -214,7 +215,7 @@ variable (m) in
 noncomputable def shiftExponent {i : n} (hi : i ∈ s) (e : laurentExponents s m) :
     laurentExponents s 0 :=
   ⟨e.1 - Pi.single i m, by simp [Finset.sum_sub_distrib, e.2.1], fun j hj ↦ by
-    rw [Pi.sub_apply, Pi.single_apply, if_neg fun h : j = i ↦ hj (h ▸ hi), sub_zero]
+    rw [Pi.sub_apply, Pi.single_apply, ite_eq_right fun h : j = i ↦ hj (h ▸ hi), sub_zero]
     exact e.2.2 j hj⟩
 
 /-- **`xᵉ = (xᵉ / xᵢ ^ m) xᵢ ^ m`** in `𝒪(m)` over `D₊(∏_{j ∈ s} Xⱼ)`, for `i ∈ s`. -/
@@ -273,7 +274,7 @@ noncomputable def awayMonomialBasisInt (s : Set n) :
       (HomogeneousLocalization.Away (homogeneousSubmodule n (ULift.{u} ℤ))
         (monomialToNat (ULift.{u} ℤ) (s.indicator 1))) :=
   (awayMonomialBasis (ULift.{u} ℤ) s).mapCoeffs ULift.ringEquiv fun c x ↦ by
-    conv_rhs => rw [show c = ((c.down : ℤ) : ULift.{u} ℤ) from ULift.ext _ _ (by simp)]
+    conv_rhs => rw [show c = ((c.down : ℤ) : ULift.{u} ℤ) from ULift.ext (by simp)]
     rw [Int.cast_smul_eq_zsmul]
     rfl
 
@@ -383,7 +384,7 @@ noncomputable def shiftExponentEquiv {s : Set n} {i : n} (hi : i ∈ s) :
     laurentExponents s m ≃ laurentExponents s 0 where
   toFun := Proj.shiftExponent m hi
   invFun e := ⟨e.1 + Pi.single i m, by simp [Finset.sum_add_distrib, e.2.1], fun j hj ↦ by
-    rw [Pi.add_apply, Pi.single_apply, if_neg fun h : j = i ↦ hj (h ▸ hi), add_zero]
+    rw [Pi.add_apply, Pi.single_apply, ite_eq_right fun h : j = i ↦ hj (h ▸ hi), add_zero]
     exact e.2.2 j hj⟩
   left_inv e := Subtype.ext (by simp [Proj.shiftExponent])
   right_inv e := Subtype.ext (by simp [Proj.shiftExponent])
@@ -560,7 +561,7 @@ lemma supportedEquivFinsupp_monomialCechComplex_d (p : ℕ)
   congr 1
   by_cases he : e.1 ∈ laurentExponents (Set.range (τ ∘ i.succAbove)) m
   · rw [show e = Set.inclusion (laurentExponents_mono (Set.range_comp_subset_range _ _) m)
-        ⟨e.1, he⟩ from rfl, Finsupp.mapDomain_apply (Set.inclusion_injective _),
+        ⟨e.1, he⟩ from rfl, Finsupp.mapDomain_apply_of_injective (Set.inclusion_injective _),
       supportedEquivFinsupp_apply]
   · rw [Finsupp.mapDomain_of_notMem_range _ _ fun ⟨e', he'⟩ ↦ he (he' ▸ e'.2)]
     exact ProjectiveSpace.MonomialCechCochain.coeff_eq_zero_of_notMem c _ he

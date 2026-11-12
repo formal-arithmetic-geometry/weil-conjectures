@@ -290,7 +290,7 @@ private theorem exists_source_regular_flat_quotients
   have hcomm : ψ.comp (Ideal.Quotient.mk J) = (Ideal.Quotient.mk K).comp φ :=
     Ideal.quotientMap_comp_mk hJK
   have hlocal : IsLocalHom ψ := by
-    apply ((local_hom_TFAE ψ).out 3 0).mp
+    apply ((local_hom_TFAE ψ).out 4 1).mp
     rw [← map_maximalIdeal_of_surjective (Ideal.Quotient.mk J)
       Ideal.Quotient.mk_surjective, Ideal.map_le_iff_le_comap,
       Ideal.comap_comap, hcomm, ← Ideal.comap_comap]

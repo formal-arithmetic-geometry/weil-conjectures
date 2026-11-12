@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+
 public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.AlgebraicGeometry.SectionKFlatTensorComparison
 public import WeilConjectures.AlgebraicGeometry.SectionTotalOplaxComparisonData
@@ -357,7 +358,10 @@ theorem internal_oplax_resolving_components {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (CondensedRing.upperStar Λ f).leftDerivedFunctorCounit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           (𝟙_ (CochainComplex (internalModules Λ Y) ℤ))) ≫
-        DerivedCategory.Q.map (actualInternalTotalUnit Λ f) := by
+        DerivedCategory.Qh.map
+          (((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app
+              (𝟙_ (CochainComplex (internalModules Λ Y) ℤ)) ≫
+            (HomotopyCategory.quotient _ (.up ℤ)).map (actualInternalTotalUnit Λ f)) := by
   constructor
   · have hδ : internalDelta Λ f =
         (CondensedRing.upperStar Λ f).leftDerivedTensorComparison := by
@@ -368,14 +372,7 @@ theorem internal_oplax_resolving_components {X Y : Scheme.{u}} (f : X ⟶ Y) :
       _ _ (internal_kFlat Λ Y) (internal_pull_resolving Λ f)
   constructor
   · exact (KFlatSectionComparison.section_kflat_tensor_comparison.{u, 0, 0} Λ Y).2.2.2.2.2.2.2.1
-  · have hfac : ((CondensedRing.upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app
-        (𝟙_ (CochainComplex (internalModules Λ Y) ℤ)) = 𝟙 _ := by
-      simp [Functor.mapHomotopyCategoryFactors]
-      rfl
-    simp only [CondensedRing.leftDerivedUpperStarUnitIso, Iso.trans_hom,
-      Iso.app_hom, Functor.mapIso_hom, actualInternalTotalUnit, Functor.map_comp,
-      asIso_hom, hfac]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  · unfold CondensedRing.leftDerivedUpperStarUnitIso actualInternalTotalUnit
     rfl
 
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison

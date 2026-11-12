@@ -93,8 +93,7 @@ private noncomputable def sectionTensorIso
       map_add' := fun _ _ ↦ rfl
       map_smul' := by
         intro r x
-        induction x using TensorProduct.induction_on with
-        | zero => simp
+        induction x using TensorProduct.inductionOn with
         | tmul s m => rfl
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
   exact e.toModuleIso
@@ -115,8 +114,7 @@ private noncomputable def presheafTensorIso
   PresheafOfModules.isoMk (sectionTensorIso φ M) (by
     intro X Y f
     ext x
-    induction x using TensorProduct.induction_on with
-    | zero => simp
+    induction x using TensorProduct.inductionOn with
     | tmul s m =>
       change changeOfRingsMap φ M f (s ⊗ₜ m) = _
       rw [show changeOfRingsMap φ M f (s ⊗ₜ m) = _ from
@@ -150,8 +148,7 @@ private lemma presheafTensorIso_naturality
         ((restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj
           (unit (𝓡 O'))).val ◁ a.val := by
   ext X x
-  induction x using TensorProduct.induction_on with
-  | zero => simp
+  induction x using TensorProduct.inductionOn with
   | tmul s m => rfl
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
@@ -296,6 +293,7 @@ private theorem tensorLeft_additive_independent (S : SheafOfModules.{r} (𝓡 O)
     intro M N f g
     apply PresheafOfModules.hom_ext
     intro X
+    let : CommRing ((𝓡 O).obj.obj X) := inferInstanceAs (CommRing (O.obj.obj X))
     change S.val.obj X ◁ (f.app X + g.app X) =
       S.val.obj X ◁ f.app X + S.val.obj X ◁ g.app X
     exact MonoidalPreadditive.whiskerLeft_add _ _

@@ -106,6 +106,7 @@ theorem ker_coker_annihilated_iff_exists_exact_sequence
         apply atN
         rw [p.hom.map_smul, Module.mem_annihilator.mp (hQ hf) (p y)]
 
+
 /-- Source: Stacks Project, Remark 0888, the final scalar-composite argument
 (blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
 

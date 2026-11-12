@@ -328,17 +328,18 @@ private theorem ordinary_transpose_quasiIso
   have hd : IsIso d := by
     apply isIso_of_coyoneda_map_bijective
     intro Z
-    have he : (fun b : DerivedCategory.Q.obj K ⟶ Z ↦
+    have he : (fun b : (DerivedCategory.Q (C := normalizedDVRModules l E X n)).obj K ⟶ Z ↦
         qf ≫ (normalizedDVRRes l E X h).map b) =
         (fun b ↦ S.adjunction.homEquiv (DerivedCategory.Q.obj F) Z b) ∘
-          (fun b : DerivedCategory.Q.obj K ⟶ Z ↦ d ≫ b) := by
+          (fun b : (DerivedCategory.Q (C := normalizedDVRModules l E X n)).obj K ⟶ Z ↦ d ≫ b) := by
       funext b
       dsimp only [Function.comp_apply]
       rw [Adjunction.homEquiv_naturality_right]
       simp only [d, Equiv.apply_symm_apply]
       rfl
     have hb := hf Z
-    change Function.Bijective (fun b : DerivedCategory.Q.obj K ⟶ Z ↦
+    change Function.Bijective (fun b :
+      (DerivedCategory.Q (C := normalizedDVRModules l E X n)).obj K ⟶ Z ↦
       qf ≫ (normalizedDVRRes l E X h).map b) at hb
     rw [he] at hb
     exact hb.of_comp_left (S.adjunction.homEquiv _ _).injective

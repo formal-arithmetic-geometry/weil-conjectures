@@ -170,11 +170,11 @@ theorem generator_tower_normalize
           exact (isZero_zero C).eq_of_src _ _
         | succ n =>
           change Sigma.ι B ⟨n⟩ ≫ Sigma.desc _ = _
-          exact Sigma.ι_desc _ _
+          exact Sigma.ι_comp_desc _ _
       · intro T f hf
         apply Sigma.hom_ext (f := B)
         intro n
-        rw [Sigma.ι_desc]
+        rw [Sigma.ι_comp_desc]
         simpa [S, j, B] using hf (n.down + 1)
     let s : (∐ B) ⟶ ∐ B := Sigma.desc (fun n : ULift.{u} ℕ ↦
       t n.down ≫ Sigma.ι B ⟨n.down + 1⟩)

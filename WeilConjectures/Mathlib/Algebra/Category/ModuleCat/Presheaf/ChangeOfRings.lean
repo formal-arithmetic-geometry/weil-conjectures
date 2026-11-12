@@ -6,8 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompat
 
 /-!
 # The restriction of scalars of presheaves of modules is lax monoidal

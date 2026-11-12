@@ -19,10 +19,11 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueRestrictPullComp
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
-  Functor.leftDerivedFunctorIsoMapDerivedCategory Functor.mapDerivedCategoryCompIso
+  Functor.leftDerivedFunctorIsoMapDerivedCategory
   Functor.mapDerivedCategoryNatIso
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
@@ -95,7 +96,8 @@ theorem residueExchangeRestrictPullIso_comp
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hnat]
   simp only [Functor.mapDerivedCategoryTriangleIso, Iso.trans_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc, residueExchangeRestriction] at HD
+    NatTrans.comp_app, Iso.symm_hom, Functor.map_comp, Category.assoc,
+    residueExchangeRestriction] at HD
   rw [← reassoc_of% HD]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

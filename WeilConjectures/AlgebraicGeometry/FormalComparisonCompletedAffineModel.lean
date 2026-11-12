@@ -15,6 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 
 import WeilConjectures.AlgebraicGeometry.FormalAffineMorphismRealization
 import WeilConjectures.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherent model of the affine formal comparison
 

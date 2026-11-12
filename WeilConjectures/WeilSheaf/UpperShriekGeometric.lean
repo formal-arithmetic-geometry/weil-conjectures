@@ -100,16 +100,19 @@ section Instances
 
 variable (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of k₀))]
 
-instance [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+instance instIsSeparatedHomScheme_upperShriekGeometric
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
     IsSeparated (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (IsSeparated (pullback.snd _ _))
 
-instance [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+instance instLocallyOfFiniteType_upperShriekGeometric
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
     LocallyOfFiniteType
       (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
 
-instance [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
+instance instQuasiCompactHomScheme_upperShriekGeometric
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :
     QuasiCompact (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).hom :=
   inferInstanceAs (QuasiCompact (pullback.snd _ _))
 

@@ -30,6 +30,7 @@ open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 open ProjectionCoefficientTransport
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Inclusion preserves each compact-support projection through one tensor comparison,
 independent of the compactification. This is an individual mate calculation: no
 compactification comparison law, composition law or invertibility of projection is assumed.

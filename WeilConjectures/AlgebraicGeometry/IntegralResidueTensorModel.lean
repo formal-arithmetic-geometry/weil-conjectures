@@ -108,7 +108,6 @@ theorem tensorModelCoefficientIso_counit (F : C ⥤ D) [F.Additive]
     F.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app_assoc]
   erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
     DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
-  rfl
 
 /-- The ordinary tensor model built from a functor on derived categories and
 its counit to the homotopy image of F. The definition uses those named data directly.

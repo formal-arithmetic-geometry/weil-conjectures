@@ -102,8 +102,7 @@ theorem mem_span_ideal_kernel_localized_baseChange
   have hcompat (k : I ⊗[R] M) :
       α (TensorProduct.comm R' (I.map (algebraMap R R')) (R' ⊗[R] M) (θN k)) =
         TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) (θ k) := by
-    induction k using TensorProduct.induction_on with
-    | zero => simp
+    induction k using TensorProduct.inductionOn with
     | tmul a x => simp [hθN, hθ, hα]
     | add a b ha hb => simp [ha, hb]
   have htransport (y : (I.map (algebraMap R R')) ⊗[R'] (R' ⊗[R] M))

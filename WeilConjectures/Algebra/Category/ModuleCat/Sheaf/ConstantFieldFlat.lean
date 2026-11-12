@@ -68,7 +68,7 @@ theorem isFlat_constantFieldModule
   let : Module κ (N.val.obj (Opposite.op V)) := Module.compHom _ ρ
   have heq : (∑ p : Fin n, c p •
       (show N.val.obj (Opposite.op V) from N.val.map f.op (s p))) = 0 := by
-    change (∑ p : Fin n, ρ (c p) • N.val.map f.op (s p)) = 0
+    change (∑ p : Fin n, ρ (c p) • N.val.restrictₛₗ f.op (s p)) = 0
     simp_rw [show ∀ p, ρ (c p) = R.obj.map f.op (a p) from hc]
     have hh := congrArg (fun z ↦ (show N.val.obj (Opposite.op V) from
       N.val.map f.op z)) hs

@@ -107,7 +107,6 @@ private theorem scalarComplexCounit_shift
     ext P
     simp only [complexCounit, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp]
-    rfl
   rw [he]
   infer_instance
 

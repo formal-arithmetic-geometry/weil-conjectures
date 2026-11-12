@@ -92,7 +92,7 @@ theorem dvr_root_tensor_factor_integralClosure_finite
   let : Module.Finite K F := Module.Finite.trans E F
   have halpha : Function.Injective alpha := by
     apply (RingHom.injective_iff_ker_eq_bot alpha).mpr
-    apply Ideal.eq_bot_of_comap_eq_bot (R := B)
+    apply Ideal.eq_bot_of_under_eq_bot (R := B)
     ext b
     simp only [Ideal.mem_comap, RingHom.mem_ker, Ideal.mem_bot]
     change algebraMap A F (algebraMap B A b) = 0 ↔ b = 0
@@ -121,8 +121,7 @@ theorem dvr_root_tensor_factor_integralClosure_finite
     apply Algebra.FormallyUnramified.of_surjective φ
     intro x
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
-    induction x using TensorProduct.induction_on with
-    | zero => exact ⟨0, map_zero φ⟩
+    induction x using TensorProduct.inductionOn with
     | tmul e a =>
       refine ⟨algebraMap A L a ⊗ₜ[K] e, ?_⟩
       simp only [φ, Algebra.TensorProduct.lift_tmul, Algebra.ofId_apply,

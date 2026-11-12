@@ -47,16 +47,16 @@ variable {C : Type*} [Category.{v} C] [Abelian C] {F : C ⥤ C} [F.Additive] [F.
 /-- The derived exchange `D(L) ⋙ D(G) ≅ D(F) ⋙ D(L)` induced by `e`. -/
 def derivedExactCommIso :
     L.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ L.mapDerivedCategory :=
-  ((Functor.mapDerivedCategoryCompIso L G).symm ≪≫ Functor.mapDerivedCategoryNatIso e) ≪≫
-    Functor.mapDerivedCategoryCompIso F L
+  (Functor.mapDerivedCategoryCompIso L G ≪≫ Functor.mapDerivedCategoryNatIso e) ≪≫
+    (Functor.mapDerivedCategoryCompIso F L).symm
 
 /-- The derived transport `D(T)` lies over `D(L)`: `D(T) ⋙ D(U_G) ≅ D(U_F) ⋙ D(L)`. -/
 def derivedExactForgetCommIso :
     (mapOfNatIso e).mapDerivedCategory ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.mapDerivedCategory :=
-  ((Functor.mapDerivedCategoryCompIso (mapOfNatIso e) (forget G)).symm ≪≫
+  (Functor.mapDerivedCategoryCompIso (mapOfNatIso e) (forget G) ≪≫
     Functor.mapDerivedCategoryNatIso (mapOfNatIsoCompForgetIso e)) ≪≫
-    Functor.mapDerivedCategoryCompIso (forget F) L
+    (Functor.mapDerivedCategoryCompIso (forget F) L).symm
 
 /-- **The derived structure of a transported object is the transport of the structure**: for
 `M` in `D(IsoAlgebra F)`, the derived structure isomorphism of `D(T) M` corresponds, through

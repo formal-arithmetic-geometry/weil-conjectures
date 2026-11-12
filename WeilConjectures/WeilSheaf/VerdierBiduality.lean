@@ -122,10 +122,12 @@ noncomputable def bifunctorEvaluation :
     (Endofunctor.Algebra.Hom.ext (Mod.bidual_comp_ihom_map A.carrier g.hom.f))
 
 instance (J : Type) : PreservesLimitsOfShape (Discrete J)
-    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) :=
-  inferInstanceAs (PreservesLimitsOfShape (Discrete J)
-    ((Endofunctor.Algebra.IsIsoStr (WeilSheaf.frobeniusPullback k₀ l X)).ι ⋙
-      Endofunctor.Algebra.forget (WeilSheaf.frobeniusPullback k₀ l X)))
+    (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) := by
+  let A := ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
+  have : HasColimitsOfSize.{u + 1, u + 1} A := inferInstance
+  have : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} A
+  exact (Endofunctor.IsoAlgebra.Free.adjunction
+    (WeilSheaf.frobeniusPullback k₀ l X)).rightAdjoint_preservesLimits.preservesLimitsOfShape
 
 /-- Forgetting the Weil structure commutes with the internal homs. -/
 noncomputable def ihomBifunctorMapIso :

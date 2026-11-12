@@ -165,13 +165,13 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     letI := coefficientSequenceEvaluation_colimits l E Y n
     IsIso (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
-      (((Functor.mapDerivedCategoryCompIso
+      ((Functor.mapDerivedCategoryCompIso
         (coefficientSequenceEvaluation l E Y n)
-        (sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) f)).symm ≪≫
+        (sfIntrinsicPullback (Padic.coefficientExtensionRing l E (n + 1)) f) ≪≫
         Functor.mapDerivedCategoryNatIso θ ≪≫
-        Functor.mapDerivedCategoryCompIso
+        (Functor.mapDerivedCategoryCompIso
           (integralComparisonSequencePullback l E f)
-          (coefficientSequenceEvaluation l E X n)).hom)).natTrans := by
+          (coefficientSequenceEvaluation l E X n)).symm).hom)).natTrans := by
   let : Abelian.HasKInjectiveResolutions (normalizedDVRModules l E X n) :=
     proEtaleRingModules_hasKInjectiveResolutions X
       (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1)))

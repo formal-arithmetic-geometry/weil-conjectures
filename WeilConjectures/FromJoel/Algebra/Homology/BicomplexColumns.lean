@@ -191,9 +191,9 @@ lemma cofanOfIsZero_inj (j : J) :
     (cofanOfIsZero X ι).inj (ι j) = Sigma.ι (X ∘ ι) j := by
   dsimp [cofanOfIsZero]
   have hi : ι j ∈ Set.range ι := ⟨j, rfl⟩
-  rw [dif_pos hi]
+  rw [dite_eq_left hi]
   apply Sigma.eqToHom_comp_ι (X ∘ ι)
-  exact (hι hi.choose_spec).symm
+  exact hι hi.choose_spec
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -261,7 +261,7 @@ noncomputable def cofanOfIsZeroButOne : Cofan X := Cofan.mk (X i)
 @[simp]
 lemma cofanOfIsZeroButOne_ι_self :
     (cofanOfIsZeroButOne X i hX).inj i = 𝟙 _ :=
-  dif_pos rfl
+  dite_eq_left rfl
 
 set_option backward.defeqAttrib.useBackward true in
 noncomputable def isColimitCofanOfIsZeroButOne :
@@ -934,6 +934,7 @@ lemma hasTotal_of_isStrictlyGE_of_isStrictlyLE (K : HomologicalComplex₂ C (up 
       exact h ⟨⟨k, by omega⟩, by simp only [Subtype.mk.injEq, Prod.mk.injEq]; omega⟩
     · exact (HomologicalComplex.eval _ _ y).map_isZero
         (CochainComplex.isZero_of_isStrictlyGE K x₀ x (by simpa using hx))
+
 
 set_option backward.defeqAttrib.useBackward true in
 lemma total.quasiIso_map_of_finitely_many_columns {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)}

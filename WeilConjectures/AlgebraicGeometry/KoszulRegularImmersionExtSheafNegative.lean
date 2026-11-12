@@ -87,7 +87,7 @@ theorem koszulRegularImmersion_extSheaf_negative
     (DerivedCategory.isZero_of_isGE (DerivedCategory.Q.obj K) 0 q hq).of_iso
       ((DerivedCategory.homologyFunctor A q).mapIso (e ≪≫ DerivedCategory.Q.mapIso h))
   refine ⟨hz.iso ?_⟩
-  rw [Scheme.Modules.locallyRankedExteriorTerm, if_neg (not_le.mpr hq)]
+  rw [Scheme.Modules.locallyRankedExteriorTerm, ite_eq_right (not_le.mpr hq)]
   exact (Scheme.Modules.pushforward i).map_isZero (isZero_zero _)
 
 

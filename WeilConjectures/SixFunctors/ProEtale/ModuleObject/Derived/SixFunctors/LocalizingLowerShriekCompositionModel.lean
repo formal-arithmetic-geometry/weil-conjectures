@@ -286,7 +286,7 @@ theorem exists_localizingLowerShriekComposition_model
         (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ cr.i))
     exact (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (cf.i ≫ cr.i)).ofNatIsoRight
       (Functor.mapDerivedCategoryNatIso (upperStarComp Λ cf.i cr.i) ≪≫
-        Functor.mapDerivedCategoryCompIso _ _)
+        (Functor.mapDerivedCategoryCompIso _ _).symm)
   have er := (directImageComposition Λ cr.g cg.g).symm
   have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ := by
     rcases _hΛ with h | h

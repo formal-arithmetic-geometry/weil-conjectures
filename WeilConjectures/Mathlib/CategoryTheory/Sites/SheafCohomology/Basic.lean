@@ -190,16 +190,16 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` of a short exact sequence of abelian
 sheaves, where global sections are sections over a terminal object `T`. -/
-noncomputable def Sheaf.H.δ : S.X₃.obj.obj (op T) →+ H S.X₁ 1 :=
+noncomputable def Sheaf.H.δSections : S.X₃.obj.obj (op T) →+ H S.X₁ 1 :=
   (hS.extClass.postcomp _ (zero_add 1)).comp (H.equiv₀ S.X₃ hT).symm.toAddMonoidHom
 
 lemma Sheaf.H.δ_apply (s : S.X₃.obj.obj (op T)) :
-    H.δ hS hT s = ((H.equiv₀ S.X₃ hT).symm s).comp hS.extClass (zero_add 1) :=
+    H.δSections hS hT s = ((H.equiv₀ S.X₃ hT).symm s).comp hS.extClass (zero_add 1) :=
   rfl
 
 /-- The kernel of the connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` consists of the global
 sections of `S.X₃` which lift to `S.X₂`. -/
-lemma Sheaf.H.ker_δ : (H.δ hS hT).ker = (S.g.hom.app (op T)).hom.range := by
+lemma Sheaf.H.ker_δ : (H.δSections hS hT).ker = (S.g.hom.app (op T)).hom.range := by
   ext s
   rw [AddMonoidHom.mem_ker, AddMonoidHom.mem_range, H.δ_apply]
   constructor
@@ -213,7 +213,7 @@ lemma Sheaf.H.ker_δ : (H.δ hS hT).ker = (S.g.hom.app (op T)).hom.range := by
 
 /-- The long exact cohomology sequence is exact at `H¹(S.X₁)`: the kernel of
 `H¹(S.X₁) → H¹(S.X₂)` is the image of the connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)`. -/
-lemma Sheaf.H.exact_δ_map : Function.Exact (H.δ hS hT) (H.map S.f 1) := by
+lemma Sheaf.H.exact_δ_map : Function.Exact (H.δSections hS hT) (H.map S.f 1) := by
   intro x
   constructor
   · intro hx
@@ -234,7 +234,7 @@ lemma Sheaf.H.exact_map_map (n : ℕ) : Function.Exact (H.map S.f n) (H.map S.g 
     rw [← H.map_comp_apply, S.zero, H.map_apply, Ext.mk₀_zero, Ext.comp_zero]
 
 /-- The connecting homomorphism `Γ(S.X₃) → H¹(S.X₁)` is surjective when `H¹(S.X₂) = 0`. -/
-lemma Sheaf.H.surjective_δ [Subsingleton (H S.X₂ 1)] : Function.Surjective (H.δ hS hT) := by
+lemma Sheaf.H.surjective_δ [Subsingleton (H S.X₂ 1)] : Function.Surjective (H.δSections hS hT) := by
   intro x
   obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS x (Subsingleton.elim _ _) (zero_add 1)
   exact ⟨H.equiv₀ S.X₃ hT y, by rw [H.δ_apply, AddEquiv.symm_apply_apply]⟩
@@ -267,6 +267,7 @@ theorem Sheaf.exists_shortExact_injective_addEquiv_H_one (hT : IsTerminal T)
   exact ⟨S.X₂, S.X₃, S.f, S.g, S.zero, hS, inferInstance, fun _ ↦ inferInstance,
     ⟨(H.quotientRangeAddEquiv hS hT).symm⟩⟩
 
+
 end HOneCokernel
 
 section Connecting
@@ -284,9 +285,9 @@ lemma Sheaf.H.δSucc_apply (n : ℕ) (x : H S.X₃ n) : H.δSucc hS n x = x.comp
   rfl
 
 /-- In degree `0`, the connecting homomorphism `H⁰(S.X₃) → H¹(S.X₁)` is the connecting
-homomorphism `CategoryTheory.Sheaf.H.δ` on global sections. -/
+homomorphism `CategoryTheory.Sheaf.H.δSections` on global sections. -/
 lemma Sheaf.H.δSucc_zero {T : C} (hT : Limits.IsTerminal T) (x : H S.X₃ 0) :
-    H.δSucc hS 0 x = H.δ hS hT (H.equiv₀ S.X₃ hT x) := by
+    H.δSucc hS 0 x = H.δSections hS hT (H.equiv₀ S.X₃ hT x) := by
   rw [H.δ_apply, AddEquiv.symm_apply_apply]
   rfl
 

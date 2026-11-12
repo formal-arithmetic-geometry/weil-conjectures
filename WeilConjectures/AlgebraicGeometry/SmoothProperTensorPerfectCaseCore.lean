@@ -136,7 +136,6 @@ theorem smoothProper_tensor_perfect_case_core
       Equiv.coe_fn_mk, Equiv.coe_fn_symm_mk, Iso.refl_hom, Iso.refl_inv,
       Category.id_comp, Category.comp_id]
     convert hh using 1
-    congr 6
   have hf : (fun q : E ⟶ S ↦ q ≫ (adj.homEquiv S K)
       (ObjectProperty.homMk (pfK.hom ≫
         K.obj ◁ (adj.counit.app O).hom ≫ (ρ_ K.obj).hom))) = e := by

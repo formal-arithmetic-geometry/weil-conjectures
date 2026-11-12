@@ -123,7 +123,7 @@ theorem cechPartialSort_advance (p : ℕ) (σ τ ρ : Equiv.Perm (Fin (p + 2)))
     · rw [hc_lo k hka, Fin.succAbove_of_castSucc_lt _ _ (by
         simp only [Fin.lt_def, Fin.val_castSucc, Fin.val_succ]; omega)]
       simp only [cechJunction, Fin.val_castSucc]
-      rw [dif_pos (by omega)]
+      rw [dite_eq_left (by omega)]
       exact (hτ.1 k hka).symm
     · by_cases hke : k = a
       · subst k
@@ -136,11 +136,11 @@ theorem cechPartialSort_advance (p : ℕ) (σ τ ρ : Equiv.Perm (Fin (p + 2)))
         · rw [hc_mid k hak hkb, Fin.succAbove_of_castSucc_lt _ _ (by
             simp only [Fin.lt_def, Fin.val_castSucc, Fin.val_succ]; omega)]
           simp only [cechJunction, Fin.val_castSucc]
-          rw [dif_neg (by omega)]
+          rw [dite_eq_right (by omega)]
         · rw [hc_hi k (lt_of_not_ge hkb), Fin.succAbove_of_le_castSucc _ _ (by
             simp only [Fin.le_def, Fin.val_castSucc, Fin.val_succ]; omega)]
           simp only [cechJunction, Fin.val_succ]
-          rw [dif_neg (by omega)]
+          rw [dite_eq_right (by omega)]
           congr 1
   obtain ⟨ρ₀, _, hu⟩ := cechPartialSort_existsUnique (p + 2) σ (a.val + 1) (by omega)
   have hπρ : π = ρ := (hu π hπ).trans (hu ρ hρ).symm

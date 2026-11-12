@@ -34,7 +34,7 @@ private theorem moduleUnit_mono (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     rw [ModuleCat.mono_iff_injective]
     intro x y h
     change r • x = r • y at h
-    exact ULift.ext _ _ (nsmul_right_injective hr (congrArg ULift.down h))
+    exact ULift.ext (nsmul_right_injective hr (congrArg ULift.down h))
   have hm' : Mono (r • 𝟙 ((constantSheaf (Scheme.ProEt.topology W)
       (ModuleCat.{u + 1} R)).obj (ModuleCat.of R R))) := by
     have : Mono ((Functor.const W.ProEtᵒᵖ).map (r • 𝟙 (ModuleCat.of R R))) :=

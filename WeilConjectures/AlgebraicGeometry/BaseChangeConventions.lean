@@ -92,6 +92,7 @@ theorem baseChange_fiber (f : X ⟶ S) (T : Over S) (t : T.left) :
   · exact pullbackLeftPullbackSndIso_inv_snd_snd f T.hom
       (T.left.fromSpecResidueField t)
 
+
 /-- The geometric fibre `X ×_S Spec Ω` at `t`, for a chosen algebraic closure `Ω` of `κ(t)`.
 The map from `Spec Ω` is induced by the residue-field embedding and the canonical point map.
 Source: blueprint Definition def-pc-base-change; Stacks, Tags 01K0, 03PO
@@ -121,6 +122,7 @@ theorem baseChange_section_characterization (f : X ⟶ S) (σ : SplitEpi f) (T :
   apply pullback.hom_ext
   · simpa only [sectionBaseChange, pullback.lift_fst] using hs₂
   · simpa only [sectionBaseChange, pullback.lift_snd] using hs₁
+
 
 end
 end AlgebraicGeometry

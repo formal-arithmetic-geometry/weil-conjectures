@@ -521,6 +521,7 @@ lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
   rw [hn] at h
   exact h.symm
 
+
 /-- Monoidal sheafification carries the regular module to the regular module.
 Source: RefactorInstruction, Section 4, coefficient realization
 (auxiliary; not a blueprint node). -/

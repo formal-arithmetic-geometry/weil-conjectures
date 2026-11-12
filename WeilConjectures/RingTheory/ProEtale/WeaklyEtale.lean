@@ -42,6 +42,7 @@ lemma RingHom.Flat.iff_comp_ringEquiv {R S T : Type*} [CommRing R] [CommRing S]
   rw [this]
   exact .comp (.of_bijective e.symm.bijective) hf
 
+
 def TensorProduct.congrRing
     {R S : Type*} (M N : Type*) [CommSemiring R] [CommSemiring S]
     [AddCommMonoid M] [AddCommMonoid N]
@@ -161,6 +162,7 @@ lemma RingHom.Flat.lift_includeLeft_includeRight {R S : Type u} (T A : Type u)
         (CommRingCat.isPushout_tensorProduct R T A).isoPushout.symm
     · exact (CommRingCat.isPushout_tensorProduct S T A).isoPushout.symm
     all_goals ext <;> simp
+
 
 namespace Algebra
 

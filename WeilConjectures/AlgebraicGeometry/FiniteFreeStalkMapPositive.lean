@@ -162,7 +162,7 @@ theorem exists_local_free_stalk_map_of_nonempty
     rw [H.hom.naturality_assoc]
     rw [← H.inv.naturality_assoc]
     simp only [Functor.comp_obj, NatTrans.naturality_assoc, Functor.comp_map,
-      ← Functor.map_comp_assoc, Iso.map_hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_map, CategoryTheory.Functor.map_id, Category.id_comp,
       cancelIso, Functor.isoWhiskerRight, Functor.isoWhiskerLeft, Iso.trans_hom,
       Functor.mapIso_hom, Functor.whiskeringRight_obj_map, Functor.whiskeringLeft_obj_map,
       NatTrans.comp_app, Functor.whiskerRight_app, Functor.associator_hom_app,

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
@@ -19,6 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Abelian.Subcategory
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine comparison of the completed arrows
 

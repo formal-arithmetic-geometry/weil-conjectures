@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TraceShiftUnit
@@ -73,13 +75,14 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSize_traceSupertrace
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 variable (A) in
 /-- The endomorphisms of the unit of `A`, placed in degree `0`, as endomorphisms of the unit of
 `D(A)`. -/
 noncomputable def singleFunctorUnitEndRingHom : End (𝟙_ A) →+* End (𝟙_ (DerivedCategory A)) :=
-  (singleFunctor A 0).mapEndRingHom (𝟙_ A)
+  cast (by rfl) ((singleFunctor A 0).mapEndRingHom (𝟙_ A))
 
 variable (A) in
 /-- The homology in degree `-n` of the shift by `n` of an object placed in degree `0`. -/
@@ -159,7 +162,8 @@ lemma trace_eq_singleFunctor_map_superTrace_of_shift (n : ℤ)
     ⟨(singleFunctor A 0).preimage ((shiftFunctor (DerivedCategory A) n).preimage b), by
       erw [Functor.map_preimage, Functor.map_preimage]⟩
   refine (@trace_shiftFunctor_map_singleFunctor_map _ _ _ _ _ _ _ _ _ _ n r ‹_›).trans ?_
-  erw [superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map, map_zsmul]
+  erw [superTrace_homologyFunctor_map_shiftFunctor_map_singleFunctor_map, map_zsmul,
+    Category.id_comp, Category.comp_id]
   rfl
 
 /-- **The trace as a supertrace** (blueprint `prop-trf-trace-formal-laws`, item (4)): for an

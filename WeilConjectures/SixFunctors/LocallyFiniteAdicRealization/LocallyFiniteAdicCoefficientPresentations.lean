@@ -332,6 +332,7 @@ private theorem presentation_scalar {i : E →ₐ[ℚ_[l]] PadicAlgCl l}
 
 end PresentationConstruction
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite-field continuous coefficient presentations, compatible with field inclusion.
 
 Source: Bhatt--Scholze, Lemma 6.8.2; native realization proof step 2

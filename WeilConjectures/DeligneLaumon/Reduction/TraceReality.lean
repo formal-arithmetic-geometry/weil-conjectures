@@ -44,7 +44,7 @@ variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V] [Finite
 `P = σ (det (1 - T A))` satisfies `T P' = - (∑_{n ≥ 1} σ (tr Aⁿ) Tⁿ) P`. -/
 theorem X_mul_derivative_map_charpolyRev {L : Type*} [Field L] (σ : K →+* L)
     (A : Module.End K V) :
-    X * derivative L ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) =
+    X * derivative (R := L) ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) =
       (-PowerSeries.mk fun n ↦ if n = 0 then 0 else σ (LinearMap.trace K V (A ^ n))) *
         ((A.charpolyRev.map σ : Polynomial L) : L⟦X⟧) := by
   have h := congrArg (PowerSeries.map σ) (X_mul_derivative_charpolyRev A)
@@ -78,7 +78,7 @@ theorem conj_trace_pow_of_charpolyRev (ι : K →+* ℂ) (A : Module.End K V)
   have hne : ((A.charpolyRev.map ι : Polynomial ℂ) : ℂ⟦X⟧) ≠ 0 := fun h0 ↦ by
     simpa [h0] using constantCoeff_coe_map_charpolyRev ι A
   have := congrArg (coeff m) (neg_injective (mul_right_cancel₀ hne e₂))
-  simp only [coeff_mk, if_neg hm, RingHom.coe_comp, Function.comp_apply] at this
+  simp only [coeff_mk, ite_eq_right hm, RingHom.coe_comp, Function.comp_apply] at this
   exact this.symm
 
 section IsAlgClosed
@@ -148,10 +148,10 @@ theorem map_charpolyRev_mul_conj_eq_of_trace (ι : K →+* ℂ) {V₂ : Type*} [
     if n = 0 then 0 else ((starRingEnd ℂ).comp ι) (LinearMap.trace K V (A₁ ^ n))
   set T₂' := PowerSeries.mk fun n ↦
     if n = 0 then 0 else ((starRingEnd ℂ).comp ι) (LinearMap.trace K V₂ (A₂ ^ n))
-  have hQ : X * derivative ℂ (P₁ * P₂') = (-(T₁ + T₂')) * (P₁ * P₂') := by
+  have hQ : X * derivative (R := ℂ) (P₁ * P₂') = (-(T₁ + T₂')) * (P₁ * P₂') := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination P₁ * e₂' + P₂' * e₁
-  have hR : X * derivative ℂ (P₁' * P₂) = (-(T₁' + T₂)) * (P₁' * P₂) := by
+  have hR : X * derivative (R := ℂ) (P₁' * P₂) = (-(T₁' + T₂)) * (P₁' * P₂) := by
     rw [Derivation.leibniz, smul_eq_mul, smul_eq_mul]
     linear_combination P₁' * e₂ + P₂ * e₁'
   have h0 : PowerSeries.constantCoeff (P₁ * P₂') = PowerSeries.constantCoeff (P₁' * P₂) := by

@@ -95,8 +95,8 @@ private def residueDerivedSquare
     (e : U ⋙ F ≅ G ⋙ V) :
     U.mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       G.mapDerivedCategory ⋙ V.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso G V
+  Functor.mapDerivedCategoryCompIso U F ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ (Functor.mapDerivedCategoryCompIso G V).symm
 
 /-- Small-site precomposition commutes literally with restriction of scalars. -/
 private def residueSiteScalarSquare (X : Scheme.{u})
@@ -302,7 +302,7 @@ theorem sfbResidue_normalization
       (ConstantCompletion.res c.inv).mapDerivedCategory.mapIso
         ((TB.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)).symm ≪≫
           TB.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K)) ≪≫
-      (Functor.mapDerivedCategoryCompIso TB (ConstantCompletion.res c.inv)).symm.app K
+      (Functor.mapDerivedCategoryCompIso TB (ConstantCompletion.res c.inv)).app K
   let P := DerivedCategory.Q.objPreimage ((completedAdicDerivedChange X π).obj K)
   let : HasDerivedCategory.{u + 1}
       (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) :=
@@ -312,7 +312,7 @@ theorem sfbResidue_normalization
         HS.mapDerivedCategory.obj ((completedAdicDerivedChange X π).obj K) :=
     T.mapDerivedCategory.mapIso (H.mapDerivedCategoryFactors.{u + 2, u + 1}.app P).symm ≪≫
       (Functor.mapDerivedCategoryCompIso.{_, _, _, _, _, _, u + 2, u + 1, u + 2}
-        H T).symm.app (DerivedCategory.Q.obj P) ≪≫
+        H T).app (DerivedCategory.Q.obj P) ≪≫
       HS.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso _)
   exact ⟨(ConstantCompletion.extend p).mapIso eB ≪≫ (dπ.app K).symm ≪≫ eS.symm⟩
 

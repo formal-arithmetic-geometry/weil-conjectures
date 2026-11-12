@@ -30,7 +30,8 @@ universe u v r s u₁ v₁ u₂ v₂
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open scoped TensorProduct
-local instance (priority := 5000) (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
+local instance (priority := 5000) instEssentiallySmallProEt_automorphismRationalShiftDescent
+    (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective

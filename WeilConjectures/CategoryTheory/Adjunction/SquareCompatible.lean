@@ -132,6 +132,7 @@ lemma of_eq_natTrans {α β : F ⟶ G} {α' β' : F' ⟶ G'} (h : SquareCompatib
   subst hα hα'
   exact h
 
+
 section Whisker
 
 variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Category* D']

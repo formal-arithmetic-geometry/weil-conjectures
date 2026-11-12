@@ -113,6 +113,7 @@ noncomputable def rightDual : CochainComplex C ℤ where
 
 lemma rightDual_X (n : ℤ) : K.rightDual.X n = (K.X (-n))ᘁ := rfl
 
+
 lemma rightDual_d (i j : ℤ) : K.rightDual.d i j = j.negOnePow • (K.d (-j) (-i))ᘁ := rfl
 
 namespace rightDual
@@ -319,7 +320,7 @@ lemma evalCoev_term (p q k n : ℤ) (hpq : p + q = 0) (hk : q + n = k) (hpk : p 
   by_cases hk0 : k = 0
   · subst hk0
     obtain rfl : n = p := by omega
-    rw [if_pos rfl, rightUnitor_inv_f, ι_eval_f, whiskerLeft_comp]
+    rw [ite_eq_left rfl, rightUnitor_inv_f, ι_eval_f, whiskerLeft_comp]
     have hf : (K.XIsoOfEq (show n = -q by omega)).hom =
         (K.XIsoOfEq (show -q = n by omega)).inv := by
       rw [← cancel_epi (K.XIsoOfEq (show -q = n by omega)).hom, Iso.hom_inv_id,
@@ -330,7 +331,7 @@ lemma evalCoev_term (p q k n : ℤ) (hpq : p + q = 0) (hk : q + n = k) (hpk : p 
       zigzag_conj (K.XIsoOfEq (show -q = n by omega)) _ hf
     simp only [assoc]
     rw [reassoc_of% key]
-  · rw [if_neg (by omega), eval_f_eq_zero K k hk0]
+  · rw [ite_eq_right (by omega), eval_f_eq_zero K k hk0]
     simp
 
 lemma coev_whiskerRight_comp :
@@ -370,7 +371,7 @@ lemma coevEval_term (n p q k : ℤ) (hpq : p + q = 0) (hk : n + p = k) (hkq : k 
   · subst hk0
     obtain rfl : p = -n := by omega
     obtain rfl : n = q := by omega
-    rw [if_pos rfl, leftUnitor_inv_f, ι_eval_f, comp_whiskerRight]
+    rw [ite_eq_left rfl, leftUnitor_inv_f, ι_eval_f, comp_whiskerRight]
     have hf : (K.XIsoOfEq (show -n = -n by omega)).hom =
         (K.XIsoOfEq (show -n = -n by omega)).inv := by
       rw [HomologicalComplex.XIsoOfEq_rfl]
@@ -380,7 +381,7 @@ lemma coevEval_term (n p q k : ℤ) (hpq : p + q = 0) (hk : n + p = k) (hkq : k 
       zigzag_conj' (K.XIsoOfEq (show -n = -n by omega)) _ hf
     simp only [assoc]
     rw [reassoc_of% key]
-  · rw [if_neg (by omega), eval_f_eq_zero K k hk0]
+  · rw [ite_eq_right (by omega), eval_f_eq_zero K k hk0]
     simp
 
 lemma whiskerLeft_coev_comp :

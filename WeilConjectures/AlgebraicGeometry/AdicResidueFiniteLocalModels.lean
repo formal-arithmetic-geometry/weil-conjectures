@@ -114,9 +114,7 @@ private theorem adicResidue_restriction_factor
   let : PreservesFiniteColimits H := ringedSite_overFunctor_colimits T B U
   refine ⟨G.mapDerivedCategory, ⟨?_⟩⟩
   let c : (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
-    Functor.mapDerivedCategoryCompIso
-      (C := SheafOfModules.{w} O) (D := SheafOfModules.{w} (O.over V))
-      (E := SheafOfModules.{w} (O.over U)) F G
+    (Functor.mapDerivedCategoryCompIso F G).symm
   exact c.symm ≪≫
     Functor.mapDerivedCategoryNatIso
       (C := SheafOfModules.{w} O) (D := SheafOfModules.{w} (O.over U))

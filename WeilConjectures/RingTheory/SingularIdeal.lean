@@ -72,6 +72,7 @@ theorem isOpen_smoothAtPrime_locus (R : Type u) (A : Type v) [CommRing R] [CommR
   rw [smoothAtPrime_locus_eq]
   exact isOpen_iUnion fun g ↦ isOpen_iUnion fun _ ↦ (PrimeSpectrum.basicOpen g).isOpen
 
+
 /-- The zero locus of `H_{A/R}` is precisely the nonsmooth locus, or equivalently the
 intersection of the zero loci of all smooth localization elements. A prime contains
 the radical of a generated ideal exactly when it contains every generator: containment
@@ -115,5 +116,6 @@ theorem singularIdeal_unique (R : Type u) (A : Type v) [CommRing R] [CommRing A]
   have h := PrimeSpectrum.zeroLocus_eq_iff.mp
     (hV.trans (singularIdeal_zeroLocus R A).1.symm)
   rwa [hJ.radical, (singularIdeal_isRadical R A).radical] at h
+
 
 end Algebra

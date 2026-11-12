@@ -7,6 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized
 import WeilConjectures.Algebra.Homology.KFlatPullback
 
@@ -130,18 +132,20 @@ theorem derivedPullback_tensor_successive_normalization
           (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≫
       ((c f g).hom.app (DerivedCategory.Q.obj P) ⊗ₘ
         (c f g).hom.app (DerivedCategory.Q.obj N))) ≫
-      (((SingleComplexBaseChange.counit (f ≫ g)).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
-        (SingleComplexBaseChange.counit (f ≫ g)).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+      ((cast (by rfl) ((SingleComplexBaseChange.counit (f ≫ g)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ⊗ₘ
+        cast (by rfl) ((SingleComplexBaseChange.counit (f ≫ g)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N))) ≫
         pullbackTensorModelMap X
           (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)
           (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)) =
     (derivedPullback f).map ((derivedPullback g).map (pullbackTensorModelMap Z P N)) ≫
-      (derivedPullback f).map ((SingleComplexBaseChange.counit g).app H) ≫
+      (derivedPullback f).map (cast (by rfl) ((SingleComplexBaseChange.counit g).app H)) ≫
       (SingleComplexBaseChange.counit f).app
         (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫
-      DerivedCategory.Qh.map (β.hom.app H) ≫ DerivedCategory.Q.map φ.hom := by
+      DerivedCategory.Qh.map (β.hom.app H) ≫
+      cast (by rfl) ((DerivedCategory.Q.{w}
+        (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map φ.hom) := by
   classical
   let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),
       derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=

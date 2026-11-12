@@ -637,7 +637,7 @@ theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.le
     have h : l' w' = 0 := hl' hw'
     rw [Module.Dual.apply_eq_sum_mul] at h
     simp only [F, map_sum, map_smul, hM1, Matrix.one_apply, smul_eq_mul, mul_ite, mul_one,
-      mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+      mul_zero, Finset.sum_ite_eq, Finset.mem_univ, ite_true]
     rw [← h]
     exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
   -- the invariant derivation of a tangent vector `v` acts on the matrix coefficients through `dr`

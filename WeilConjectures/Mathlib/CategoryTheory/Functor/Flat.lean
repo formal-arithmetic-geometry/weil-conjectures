@@ -138,4 +138,5 @@ theorem nonempty_lan_adjunction_and_preservesFiniteLimits {C D : Type u₁} [Sma
         PreservesFiniteLimits (b.op.lan : (Cᵒᵖ ⥤ Type u₁) ⥤ _) :=
   ⟨⟨b.op.lanAdjunction _⟩, by intros; infer_instance⟩
 
+
 end CategoryTheory

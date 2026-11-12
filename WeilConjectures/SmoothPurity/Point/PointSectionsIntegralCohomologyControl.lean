@@ -130,9 +130,9 @@ private theorem exact_map_roos
     intro n
     simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
       Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
-      Pi.lift_π, Functor.map_sub]
+      Pi.lift_comp_π, Functor.map_sub]
     rw [← Category.assoc, he, ← Functor.map_comp]
-    rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_comp_π, Category.id_comp, Functor.map_comp]
   refine ⟨Φ.map p ≫ e.hom,
     e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app M, ?_⟩
   exact CategoryTheory.Pretriangulated.isomorphic_distinguished _
@@ -511,8 +511,8 @@ theorem point_sections_integral_cohomology_control (D : FiniteFieldDatum.{u})
         (fun n ↦ (sfDerivedReductionTransition l E (Spec (.of D.k)) n).app K) K :=
       ⟨_, δ, hT⟩
     have hFL := exact_map_roos F L _ K hL
-    have hnil : ∀ (a : R), a ∈ Ideal.span {ULift.up
-        (Padic.coefficientExtensionUniformizer l E)} → ∀ n : ℕ, ∃ e : ℕ,
+    have hnil : ∀ (a : R), a ∈ Ideal.span
+        {ULift.up (Padic.coefficientExtensionUniformizer l E)} → ∀ n : ℕ, ∃ e : ℕ,
         1 ≤ e ∧ (a ^ e) • 𝟙 (F.mapDerivedCategory.obj (L n)) = 0 := by
       intro a ha n
       refine ⟨n + 1, by omega, ?_⟩

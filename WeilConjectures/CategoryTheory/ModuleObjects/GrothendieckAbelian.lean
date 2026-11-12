@@ -104,7 +104,7 @@ noncomputable instance monoidalClosed : MonoidalClosed (Mod C R) where
         apply colimit.hom_ext
         intro j
         simp only [Functor.comp_map, colim_map, Iso.trans_hom, Category.assoc,
-          ι_colimMap_assoc, HasColimit.isoOfNatIso_ι_hom_assoc]
+          ι_colimMap_assoc, HasColimit.ι_isoOfNatIso_hom_assoc]
         cases j
         · simp [D, F₀, F₁, f, g, tensorObjπ_whiskerRight]
           have h := congrArg (fun k ↦ k ≫ tensorObjπ N' M) (f.naturality φ)

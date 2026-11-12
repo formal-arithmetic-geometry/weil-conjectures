@@ -29,6 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 open Scheme.Modules
 
+attribute [local instance] instModuleRestrictedSections
+
 attribute [local irreducible] tensorPullback tensorPullbackObj tensorPullbackSection
 attribute [local irreducible] pulledQuotient lineQuotientPullback
 

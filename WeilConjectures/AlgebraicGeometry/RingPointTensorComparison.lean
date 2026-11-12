@@ -176,7 +176,7 @@ private theorem pointTensorMap_unit {A : CommRingCat.{u}} (M : RingSiteModules A
   have hfinal := he.trans ((congrArg ((adj.counit.app M).val.app U) hu.symm).trans ht)
   simp only [Functor.id_obj, PresheafOfModules.id_app, ModuleCat.id_apply] at hfinal
   delta pointTensorMap
-  convert hfinal using 1 <;> rfl
+  convert hfinal using 1
 
 section
 variable (A : CommRingCat.{u})

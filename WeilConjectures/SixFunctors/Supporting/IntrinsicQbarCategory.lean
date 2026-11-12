@@ -90,8 +90,7 @@ private theorem rationalScalar_map_smul
         s • (eqToHom (hobj K) ≫ g ≫ eqToHom (hobj M).symm) := by
     rw [Linear.smul_comp, Linear.comp_smul]
   change F.map (a • f) = _ • F.map f
-  induction f using TensorProduct.induction_on with
-  | zero => simp
+  induction f using TensorProduct.inductionOn with
   | tmul b g =>
     rw [TensorProduct.smul_tmul', smul_eq_mul, hm, hm]
     simp only [map_mul]

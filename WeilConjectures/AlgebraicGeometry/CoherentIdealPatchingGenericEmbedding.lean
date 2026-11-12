@@ -9,10 +9,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import WeilConjectures.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore
 import WeilConjectures.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingStalkBijective
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # A generic embedding of an ideal multiple into an ideal sum

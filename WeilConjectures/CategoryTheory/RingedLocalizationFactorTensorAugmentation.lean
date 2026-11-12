@@ -228,7 +228,7 @@ private noncomputable def localization_split
           (ringedSectionLocalization O s) n hn'
         have hz₂ : IsZero ((ringedLocalizationTwoTerm O s).X n) := by
           change IsZero (ringedLocalizationTwoTermX O s n)
-          simp only [ringedLocalizationTwoTermX, if_neg hn, if_neg hn']
+          simp only [ringedLocalizationTwoTermX, ite_eq_right hn, ite_eq_right hn']
           exact isZero_zero _
         exact ⟨⟨0, hz₁.eq_of_src _ _, hz₂.eq_of_src _ _⟩⟩
     · exact HomologicalComplex.isZero_single_obj_X (.up ℤ) 0
@@ -352,7 +352,7 @@ theorem ringed_localization_factor_tensor_augmentation_quasiIso
     intro n hn hn'
     apply F.map_isZero
     change IsZero (ringedLocalizationTwoTermX O s n)
-    simp only [ringedLocalizationTwoTermX, if_neg hn, if_neg hn']
+    simp only [ringedLocalizationTwoTermX, ite_eq_right hn, ite_eq_right hn']
     exact isZero_zero _)
   let eS : (HomologicalComplex.single A (.up ℤ) 1).obj S ≅
       ((HomologicalComplex.single A (.up ℤ) 0).obj S)⟦(-1 : ℤ)⟧ :=

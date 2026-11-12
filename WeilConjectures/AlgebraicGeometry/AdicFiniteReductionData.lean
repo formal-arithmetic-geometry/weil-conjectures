@@ -243,7 +243,7 @@ def adicFiniteDresComp {R S V : Sheaf T CommRingCat.{w}} (f : R ⟶ S) (g : S �
   letI := (siteRestrictScalars_exact g).2
   letI := (siteRestrictScalars_exact (f ≫ g)).1
   letI := (siteRestrictScalars_exact (f ≫ g)).2
-  (Functor.mapDerivedCategoryCompIso (res g) (res f)).symm ≪≫
+  Functor.mapDerivedCategoryCompIso (res g) (res f) ≪≫
     Functor.mapDerivedCategoryNatIso (adicFiniteResComp f g)
 
 @[no_expose]

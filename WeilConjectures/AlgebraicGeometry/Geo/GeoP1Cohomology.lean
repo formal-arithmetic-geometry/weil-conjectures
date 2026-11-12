@@ -302,10 +302,10 @@ def geoP1PullComparison (A : Type (u + 1)) [CommRing A]
     geoP1Comparison A Y ⋙ geoP1Pullback A f ≅
       Etale.ordinaryFinitePullback A f ⋙ geoP1Comparison A X :=
   Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) f) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerRight
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).symm _
 

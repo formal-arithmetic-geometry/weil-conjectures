@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDerivedTensorData
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # Complex and homotopy localization tensor maps
 
@@ -30,7 +32,7 @@ with homotopy localization and complex localization also has identity components
 Expand the transported tensorator, then remove the identity factors. This gives
 exactly the homotopy localization tensorator.
 (blueprint: lem-sfb-internal-complex-localization-tensor-comparison). -/
-theorem coefficientScalarTensor_complexLocalization
+private theorem coefficientScalarTensor_complexLocalization_private
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ X)]
@@ -57,5 +59,10 @@ theorem coefficientScalarTensor_complexLocalization
   rw [ht, hc, he, he, he']
   simp only [id_tensorHom_id, Category.id_comp]
   exact Category.comp_id _
+
+/-- Public export of the private `coefficientScalarTensor_complexLocalization_private`
+(used by `import all` importers; linter.privateModule). -/
+alias coefficientScalarTensor_complexLocalization :=
+  coefficientScalarTensor_complexLocalization_private
 
 end AlgebraicGeometry.ProEtale.CondensedRing

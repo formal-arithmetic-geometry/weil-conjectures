@@ -70,11 +70,10 @@ private lemma singleTensor_component (F G : SheafOfModules.{u}
   have hs : (ComplexShape.up ℤ).σ (.up ℤ) (.up ℤ) 0 0 = 1 := by rfl
   rw [hs, one_smul]
   erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
-  simp only [and_self, dif_pos,
+  simp only [and_self, dite_eq_left,
     HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
   dsimp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq]
   simp only [whiskerLeft_id, id_whiskerRight, Category.comp_id, Category.id_comp, tensorHom_id]
-  exact Category.id_comp _
 
 set_option linter.unusedSectionVars false in
 /-- A realization respects the coefficient augmentations before localization.

@@ -116,7 +116,7 @@ private noncomputable def ordinaryTotalIso (P Q : CochainComplex (Mod C R) ℤ) 
       (curriedTensor (Mod C R)) (.up ℤ)
 
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory (Mod C R)] in
-private theorem ordinaryTotalIso_ι (P Q : CochainComplex (Mod C R) ℤ)
+private theorem ordinaryTotalIso_ι_private (P Q : CochainComplex (Mod C R) ℤ)
     (p q n : ℤ) (hpq : p + q = n) :
     HomologicalComplex.ιMapBifunctor P Q (ordinaryBifunctor)
         (.up ℤ) p q n hpq ≫ (ordinaryTotalIso P Q).hom.f n =
@@ -134,6 +134,10 @@ private theorem ordinaryTotalIso_ι (P Q : CochainComplex (Mod C R) ℤ)
   rw [Category.assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
   simp only [Units.smul_def, Preadditive.comp_zsmul, mul_comm p q]
   rfl
+
+/-- Public export of the private `ordinaryTotalIso_ι_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryTotalIso_ι := ordinaryTotalIso_ι_private
 
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory (Mod C R)] in
 private theorem ordinaryTotalIso_naturality
@@ -170,7 +174,7 @@ private theorem ordinaryTotalIso_naturality
     rw [← Category.assoc, ← MonoidalCategory.tensorHom_def]
   simp only [HomologicalComplex.comp_f, ← Category.assoc]
   rw [HomologicalComplex.ι_mapBifunctorMap]
-  simp only [Category.assoc, ordinaryTotalIso_ι, Units.smul_def,
+  simp only [Category.assoc, ordinaryTotalIso_ι_private, Units.smul_def,
     Preadditive.comp_zsmul, Preadditive.zsmul_comp, hι]
   simpa only [ordinaryBifunctor, Category.assoc] using
     congrArg (fun k ↦ ((p * q).negOnePow : ℤ) •
@@ -192,7 +196,7 @@ private noncomputable def ordinaryModel (P Q : CochainComplex (Mod C R) ℤ) (hP
   exact asIso (Functor.LaxMonoidal.μ DerivedCategory.Q Q P) ≪≫
     DerivedCategory.Q.mapIso (ordinaryTotalIso P Q).symm
 
-private theorem ordinaryModel_naturality (P Q P' Q' : CochainComplex (Mod C R) ℤ)
+private theorem ordinaryModel_naturality_private (P Q P' Q' : CochainComplex (Mod C R) ℤ)
     (hP : ordinaryFlat P) (hP' : ordinaryFlat P')
     (f : P ⟶ P') (g : Q ⟶ Q') :
     (DerivedCategory.Q.map g ⊗ₘ DerivedCategory.Q.map f) ≫
@@ -211,6 +215,10 @@ private theorem ordinaryModel_naturality (P Q P' Q' : CochainComplex (Mod C R) �
       DerivedCategory.Q.map (ordinaryTotalIso P Q).inv) ≫ _
   rw [← Category.assoc, Functor.LaxMonoidal.μ_natural, Category.assoc,
     ← Functor.map_comp, hi, Functor.map_comp, Category.assoc]
+
+/-- Public export of the private `ordinaryModel_naturality_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryModel_naturality := ordinaryModel_naturality_private
 
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory (Mod C R)] in
 private theorem ordinaryTotalIso_inv_ι (P Q : CochainComplex (Mod C R) ℤ)
@@ -244,7 +252,7 @@ private theorem ordinarySwap_ι (P Q : CochainComplex (Mod C R) ℤ)
             (.up ℤ) q p n (by change q + p = n; omega)) := by
   simp only [ordinarySwap, Iso.trans_hom, Iso.symm_hom, HomologicalComplex.comp_f,
     ← Category.assoc]
-  rw [ordinaryTotalIso_ι]
+  rw [ordinaryTotalIso_ι_private]
   simp only [Units.smul_def, Preadditive.zsmul_comp, Category.assoc]
   have hb : HomologicalComplex.ιTensorObj Q P q p n (by omega) ≫
       (β_ Q P).hom.f n ≫ (ordinaryTotalIso Q P).inv.f n =
@@ -259,7 +267,7 @@ private theorem ordinarySwap_ι (P Q : CochainComplex (Mod C R) ℤ)
     ← Units.val_mul, Int.units_mul_self, mul_one]
 
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory (Mod C R)] in
-private theorem ordinarySwap_signed :
+private theorem ordinarySwap_signed_private :
     ordinarySigned (ordinarySwap (C := C) (R := R)) := by
   intro P Q p q n hpq hqp
   have hi : Mod.tensorObjπ (P.X p) (Q.X q) ≫
@@ -278,7 +286,11 @@ private theorem ordinarySwap_signed :
   simp only [Category.assoc]
   rw [← Category.assoc (Mod.tensorObjπ (P.X p) (Q.X q)), hi]
 
-private theorem ordinaryModel_braiding (P Q : CochainComplex (Mod C R) ℤ)
+/-- Public export of the private `ordinarySwap_signed_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinarySwap_signed := ordinarySwap_signed_private
+
+private theorem ordinaryModel_braiding_private (P Q : CochainComplex (Mod C R) ℤ)
     (hP : ordinaryFlat P) (hQ : ordinaryFlat Q) :
     letI := RingedDerivedNative.derivedSymmetric (A := Mod C R)
     (β_ (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)).hom ≫
@@ -295,6 +307,10 @@ private theorem ordinaryModel_braiding (P Q : CochainComplex (Mod C R) ℤ)
     DerivedCategory.Q.map_id, Category.id_comp, ← Category.assoc]
   rw [← Functor.LaxBraided.braided]
   exact Category.assoc _ _ _
+
+/-- Public export of the private `ordinaryModel_braiding_private`
+(used by `import all` importers; linter.privateModule). -/
+alias ordinaryModel_braiding := ordinaryModel_braiding_private
 
 end GenericOrdinaryTensor
 

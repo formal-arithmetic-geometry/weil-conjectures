@@ -38,7 +38,7 @@ def systemDerivedTransition {m n : ℕ} (h : m ≤ n) :
     (Functor.whiskerRight
       (NatTrans.mapHomologicalComplex (strictSystemTransition B h) (.up ℤ))
       DerivedCategory.Q) ≫
-    (Functor.mapDerivedCategoryCompIso (systemEvaluation B m) (systemRestriction B h)).hom
+    (Functor.mapDerivedCategoryCompIso (systemEvaluation B m) (systemRestriction B h)).inv
 
 /-- The localized transition is represented by the original strict transition.
 Source: Zheng 4.1; Stacks 015F (blueprint: lem-pur-system-derived-transition).

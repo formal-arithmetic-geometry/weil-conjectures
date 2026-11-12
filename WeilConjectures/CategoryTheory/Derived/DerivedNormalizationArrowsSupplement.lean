@@ -106,12 +106,12 @@ noncomputable def normalizationConstantRestrict (q : R →+* S) :
       normalizationModuleRestrict q ⋙
         normalizationConstant (R := R) J :=
   (Functor.mapDerivedCategoryCompIso (constantSheaf J (ModuleCat.{u + 1} S))
-    (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))).symm ≪≫
+    (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))) ≪≫
     Functor.mapDerivedCategoryNatIso (constantCommuteCompose J
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)
-      (constantSheaf J (ModuleCat.{u + 1} R))
+      (constantSheaf J (ModuleCat.{u + 1} R))).symm
 
 /-- The constant normalization arrow is the image of the specified module normalization
 arrow, transported by the canonical constant/restriction comparison.

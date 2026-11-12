@@ -123,7 +123,6 @@ private noncomputable def pointwise_change_iso
   intro X
   dsimp [Functor.RightExtension.coneAt, Functor.RightExtension.mk, Φ, k]
   simp [Category.assoc]
-  rfl
 
 -- Computation on a resolving class is invariant under the chosen universal pair.
 private theorem comparison_from_resolutions

@@ -42,6 +42,17 @@ local instance hasColimitsOfSize_leftUnitorShift : HasColimitsOfSize.{0, 0} C :=
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
 open TensorCommShift₂ in
+private lemma leftUnitor_liftingIsoApp_hom (K : CochainComplex C ℤ) :
+    (Functor.CommShift₂OfLocalization.liftingIsoApp (LKFlat C) (L C)
+      (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat (HomologicalComplex.quasiIso C (.up ℤ))
+      (F C) (curriedTensor (DerivedCategory C)) (unitKFlat C)).app K ≫ (L C).map (λ_ K).hom =
+        (λ_ ((L C).obj K)).hom := by
+  have h := DerivedMonoidal.leftUnitor_hom_app Qh (HomotopyCategory.quasiIso C (.up ℤ))
+    ((HomotopyCategory.quotient C _).obj K)
+  have h' := HomotopyCategory.MonoidalCategory.leftUnitor_hom_app K
+  exact (congrArg (_ ≫ Qh.map ·) h'.symm).trans h.symm
+
+open TensorCommShift₂ in
 /-- The left unitor of `D(C)` commutes with the shifts at the image of a cochain complex. -/
 lemma leftUnitor_commShift_app_obj (K₀ : CochainComplex C ℤ) (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).obj (𝟙_ _)).commShiftIso n).hom.app ((L C).obj K₀) ≫
@@ -52,14 +63,7 @@ lemma leftUnitor_commShift_app_obj (K₀ : CochainComplex C ℤ) (n : ℤ) :
   have h₁ := NatTrans.shift_app_comm (Functor.CommShift₂OfLocalization.liftingIsoApp (LKFlat C)
     (L C) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat (HomologicalComplex.quasiIso C (.up ℤ))
     (F C) (curriedTensor (DerivedCategory C)) (unitKFlat C)) n K₀
-  have hl (K : CochainComplex C ℤ) : (Functor.CommShift₂OfLocalization.liftingIsoApp (LKFlat C)
-      (L C) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat (HomologicalComplex.quasiIso C (.up ℤ))
-      (F C) (curriedTensor (DerivedCategory C)) (unitKFlat C)).app K ≫ (L C).map (λ_ K).hom =
-        (λ_ ((L C).obj K)).hom := by
-    have h := DerivedMonoidal.leftUnitor_hom_app Qh (HomotopyCategory.quasiIso C (.up ℤ))
-      ((HomotopyCategory.quotient C _).obj K)
-    have h' := HomotopyCategory.MonoidalCategory.leftUnitor_hom_app K
-    exact (congrArg (_ ≫ Qh.map ·) h'.symm).trans h.symm
+  have hl := leftUnitor_liftingIsoApp_hom C
   rw [Functor.commShiftIso_comp_hom_app] at h₁
   have h₂ : (((F C).obj (unitKFlat C)).commShiftIso n).hom.app K₀ =
       (L C).map (CochainComplex.mapBifunctorShift₂Iso (𝟙_ _) K₀ (curriedTensor C) n).hom ≫
@@ -68,14 +72,13 @@ lemma leftUnitor_commShift_app_obj (K₀ : CochainComplex C ℤ) (n : ℤ) :
     rfl
   rw [h₂] at h₁
   simp only [assoc] at h₁
-  have hA : ((curriedTensor (DerivedCategory C)).obj (𝟙_ _)).map
-      (((L C).commShiftIso n).hom.app K₀) ≫ (λ_ (((L C).obj K₀)⟦n⟧)).hom =
-        (λ_ ((L C).obj (K₀⟦n⟧))).hom ≫ ((L C).commShiftIso n).hom.app K₀ :=
-    leftUnitor_naturality _
+  have hA := leftUnitor_naturality (((L C).commShiftIso n).hom.app K₀)
   have hE := ((L C).commShiftIso_hom_naturality (λ_ K₀).hom n).symm
   have hF := CochainComplex.mapBifunctorShift₂Iso_hom_leftUnitor_hom K₀ n
   rw [← cancel_epi (((curriedTensor (DerivedCategory C)).obj (𝟙_ _)).map
-    (((L C).commShiftIso n).hom.app K₀)), hA, ← hl (K₀⟦n⟧), ← hl K₀, Functor.map_comp]
+    (((L C).commShiftIso n).hom.app K₀))]
+  erw [hA, ← hl (K₀⟦n⟧), ← hl K₀]
+  rw [(shiftFunctor (DerivedCategory C) n).map_comp]
   erw [reassoc_of% h₁]
   rw [assoc]
   congr 1

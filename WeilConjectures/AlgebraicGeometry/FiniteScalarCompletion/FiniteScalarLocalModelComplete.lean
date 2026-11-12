@@ -341,7 +341,7 @@ private theorem roosAugment_quasiIso
   let i := Pi.lift f
   obtain ⟨hz, ⟨hk⟩⟩ := CategoryTheory.roos_kernel N.asFunctor c hc
     (Fan.mk _ (fun n ↦ Pi.π _ n)) (productIsProduct _) i (roosU N)
-    (fun n ↦ (Pi.lift_π f n).trans (hleg n)) (by
+    (fun n ↦ (Pi.lift_comp_π f n).trans (hleg n)) (by
       intro n
       exact (towerTransitionEndomorphism_eq_iff _ _).mp rfl n)
   exact roosLift_quasiIso i hz hk hepi
@@ -1008,7 +1008,7 @@ private theorem augmentation_comparison (d : ℕ)
     congr 1
     apply Pi.hom_ext
     intro n
-    simp only [Category.assoc, roosPmap, Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+    simp only [Category.assoc, roosPmap, Pi.map_π, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact hq n
 
 end

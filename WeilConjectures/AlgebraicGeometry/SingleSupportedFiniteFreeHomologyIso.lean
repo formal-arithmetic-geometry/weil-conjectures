@@ -101,7 +101,7 @@ theorem single_supported_finiteFree_homology_iso
     apply SheafOfModules.hom_ext
     ext W φ
     rfl⟩
-  let : H.PreservesHomology := (Functor.exact_tfae H).out 0 2 |>.mp (by
+  let : H.PreservesHomology := (Functor.exact_tfae H).out 1 3 |>.mp (by
     intro S hS
     obtain ⟨hz, hs, _⟩ := SheafOfModules.finiteFreeInternalHomExact (R := R) r (E.X k) hfree S hS
     exact hs)

@@ -46,9 +46,9 @@ noncomputable def leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso :
   Functor.isoWhiskerRight
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
         (Profinite.continuousMapRingObj T) f) _ ≪≫
-    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _) ≪≫
     Functor.mapDerivedCategoryNatIso (upperStarFiniteCoefficientModEquivalenceIso f T) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.isoWhiskerLeft _
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} T)) f).symm
 

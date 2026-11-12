@@ -64,22 +64,10 @@ theorem identityDerivedHomologyComparison {C : Type*} [Category C] [Abelian C]
     have hId (K : CochainComplex C ℤ) :
         (mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj K) =
           (𝟭 C).mapDerivedCategoryFactors.hom.app K := by
-      have hf := congr_app (congrArg Iso.hom (mapDerivedCategoryIdIso_factorsh C))
-        ((HomotopyCategory.quotient C (.up ℤ)).obj K)
-      simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
-        whiskerLeft_app, rightUnitor_hom_app, isoWhiskerRight_hom,
-        whiskerRight_app, leftUnitor_hom_app,
-        mapDerivedCategoryFactorsh_hom_app, mapHomotopyCategoryIdIso_hom_app] at hf
-      have h₁ : ((𝟭 C).mapHomotopyCategoryFactors (.up ℤ)).inv.app K = 𝟙 _ := rfl
-      have h₂ : (mapHomologicalComplexIdIso C (.up ℤ)).hom.app K = 𝟙 _ := rfl
-      rw [h₁, h₂] at hf
-      erw [Functor.map_id, Functor.map_id, Category.comp_id, Category.comp_id] at hf
-      have he : (DerivedCategory.quotientCompQhIso C).inv.app
-          (((𝟭 C).mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
-      rw [he] at hf
-      erw [Category.id_comp, Category.comp_id] at hf
-      erw [Category.comp_id] at hf
-      exact hf
+      rw [mapDerivedCategoryIdIso_hom_app]
+      have h : (mapHomologicalComplexIdIso C (.up ℤ)).hom.app K = 𝟙 _ := rfl
+      rw [h]
+      erw [DerivedCategory.Q.map_id, Category.comp_id]
     have hInv (K : CochainComplex C ℤ) :
         (mapDerivedCategoryIdIso C).inv.app (DerivedCategory.Q.obj K) =
           (𝟭 C).mapDerivedCategoryFactors.inv.app K := by

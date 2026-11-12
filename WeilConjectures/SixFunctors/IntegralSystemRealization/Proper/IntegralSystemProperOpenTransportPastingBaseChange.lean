@@ -167,7 +167,7 @@ attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
   ProEtale.SemilinearProperOpen.P ProEtale.SemilinearProperOpen.R
   ProEtale.SemilinearProperOpen.J
   Functor.mapDerivedCategory Functor.rightDerivedFunctor Functor.leftAdjoint
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso
   DerivedCategory.Q Functor.mapDerivedCategoryFactors
 
 private structure CubeData

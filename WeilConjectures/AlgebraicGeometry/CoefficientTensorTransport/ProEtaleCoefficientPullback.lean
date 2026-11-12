@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackModels
+import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 
 /-! # Normalization of exact derived coefficient pullback
 
@@ -20,7 +21,7 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 attribute [local instance]
   AlgebraicGeometry.Scheme.proEtaleRingRestrictionPullbackInv_isIso
 attribute [local implicit_reducible] AlgebraicGeometry.Scheme.pbcDerivedRestrict
-  Functor.mapHomologicalComplex SheafOfModules.restrictScalars
+  SheafOfModules.restrictScalars
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
   AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackFactors SheafOfModules.monoidalCategory
 
@@ -39,23 +40,10 @@ private theorem derivedId_factors
     (P : CochainComplex C ℤ) :
     (Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj P) =
       (𝟭 C).mapDerivedCategoryFactors.hom.app P := by
-  have hId := NatTrans.congr_app
-    (congrArg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh
-      C)) ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
-    isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
-    rightUnitor_hom_app, leftUnitor_hom_app,
-    Functor.mapHomotopyCategoryIdIso_hom_app_eq_id] at hId
-  erw [Functor.mapDerivedCategoryFactorsh_hom_app] at hId
-  dsimp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-    Functor.mapHomotopyCategoryFactors] at hId
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id] at hId
-  repeat' (first
-    | erw [Category.comp_id] at hId
-    | erw [Category.id_comp] at hId)
-  exact hId
+  rw [Functor.mapDerivedCategoryIdIso_hom_app]
+  have h : (Functor.mapHomologicalComplexIdIso C (.up ℤ)).hom.app P = 𝟙 _ := rfl
+  rw [h]
+  erw [DerivedCategory.Q.map_id, Category.comp_id]
 
 private theorem derivedRefl_factors
     (C : Type*) [Category C] [Abelian C] [HasDerivedCategory C]
@@ -78,7 +66,7 @@ private theorem derivedComp_factors
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     (P : CochainComplex C ℤ) :
-    (Functor.mapDerivedCategoryCompIso F G).hom.app (DerivedCategory.Q.obj P) ≫
+    (Functor.mapDerivedCategoryCompIso F G).inv.app (DerivedCategory.Q.obj P) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
       G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
         (F ⋙ G).mapDerivedCategoryFactors.hom.app P := by
@@ -120,9 +108,9 @@ private theorem exactPullback_factors
     [PreservesFiniteLimits U] [PreservesFiniteColimits U]
     [PreservesFiniteLimits M] [PreservesFiniteColimits M]
     (e : L ⋙ U ≅ (𝟭 C) ⋙ M) (P : CochainComplex C ℤ) :
-    (Functor.mapDerivedCategoryCompIso L U).inv.app (DerivedCategory.Q.obj P) ≫
+    (Functor.mapDerivedCategoryCompIso L U).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
-      (Functor.mapDerivedCategoryCompIso (𝟭 C) M).hom.app (DerivedCategory.Q.obj P) ≫
+      (Functor.mapDerivedCategoryCompIso (𝟭 C) M).inv.app (DerivedCategory.Q.obj P) ≫
       M.mapDerivedCategory.map
         ((Functor.mapDerivedCategoryNatIso (Iso.refl (𝟭 C)) ≪≫
           Functor.mapDerivedCategoryIdIso C).hom.app (DerivedCategory.Q.obj P)) ≫
@@ -137,15 +125,15 @@ private theorem exactPullback_factors
   have h₂ := derivedComp_factors L U P
   have h₃ := Functor.mapDerivedCategoryNatIso_fac e P
   have hn := paste_pullback_factors
-    ((Functor.mapDerivedCategoryCompIso (𝟭 C) M).app (DerivedCategory.Q.obj P))
+    ((Functor.mapDerivedCategoryCompIso (𝟭 C) M).symm.app (DerivedCategory.Q.obj P))
     ((Functor.mapDerivedCategoryNatIso e).app (DerivedCategory.Q.obj P))
-    ((Functor.mapDerivedCategoryCompIso L U).app (DerivedCategory.Q.obj P))
+    ((Functor.mapDerivedCategoryCompIso L U).symm.app (DerivedCategory.Q.obj P))
     _ (M.mapDerivedCategoryFactors.hom.app P) _ _ _ _ h₁ h₂ h₃
   have ht := hn.trans (congrArg (fun t ↦
     (U.mapDerivedCategory.map (L.mapDerivedCategoryFactors.hom.app P) ≫
       U.mapDerivedCategoryFactors.hom.app ((L.mapHomologicalComplex (.up ℤ)).obj P)) ≫
         DerivedCategory.Q.map t) (complex_left_id_hom L U M e P))
-  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using ht
+  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv, Iso.symm_hom, Iso.symm_inv] using ht
 
 namespace AlgebraicGeometry.Scheme.CoefficientTensorChain
 
@@ -251,9 +239,9 @@ theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerRight_hom,
     whiskerRight_app, leftUnitor_hom_app, Category.assoc]
   erw [Category.id_comp]
-  change (Functor.mapDerivedCategoryCompIso L U).inv.app (DerivedCategory.Q.obj P) ≫
+  change (Functor.mapDerivedCategoryCompIso L U).hom.app (DerivedCategory.Q.obj P) ≫
       (Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj P) ≫
-      (Functor.mapDerivedCategoryCompIso (𝟭 (proEtaleRingModules Y R)) M).hom.app
+      (Functor.mapDerivedCategoryCompIso (𝟭 (proEtaleRingModules Y R)) M).inv.app
         (DerivedCategory.Q.obj P) ≫
       M.mapDerivedCategory.map
         ((Functor.mapDerivedCategoryNatIso (Iso.refl (𝟭 (proEtaleRingModules Y R))) ≪≫

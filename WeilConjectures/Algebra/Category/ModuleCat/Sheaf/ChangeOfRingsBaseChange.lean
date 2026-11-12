@@ -57,8 +57,7 @@ noncomputable def changeOfRingsPresheafBaseChangeIso
     (by
       intro U V v
       ext z
-      induction z using TensorProduct.induction_on with
-      | zero => simp only [map_zero]
+      induction z using TensorProduct.inductionOn with
       | add x y hx hy => simp only [map_add, hx, hy]
       | tmul b m =>
         have heU := (ModuleCat.exists_extendScalars_restrictScalars_iso_of_isPushout
@@ -126,8 +125,7 @@ theorem changeOfRingsBaseChangeIso_hom_naturality
     ← Functor.map_comp_assoc]
   congr 2
   ext U z
-  induction z using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction z using TensorProduct.inductionOn with
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul b m =>
     simp only [PresheafOfModules.comp_app, ModuleCat.hom_comp, LinearMap.comp_apply]

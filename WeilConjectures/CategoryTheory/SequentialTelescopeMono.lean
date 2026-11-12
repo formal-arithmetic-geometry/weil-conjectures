@@ -55,7 +55,7 @@ private theorem inj_telescope_coordinate
     simp [show ¬ k + 1 ≤ k by omega]
   · by_cases hki : k ≤ i
     · have hki' : k + 1 ≤ i := by omega
-      simp only [dif_pos hki, dif_pos hki', dif_neg h, ← E.map_comp]
+      simp only [dite_eq_left hki, dite_eq_left hki', dite_eq_right h, ← E.map_comp]
       exact sub_self _
     · have hki' : ¬ k + 1 ≤ i := by omega
       simp [hki, hki', h]
@@ -114,14 +114,14 @@ theorem sequentialTelescope_mono
           B.inj k.val.as := by
         change Sigma.ι (fun j : S ↦ E.obj j.val.as) k ≫
           (Sigma.desc (fun j : S ↦ Sigma.ι K j.val.as) ≫ e.hom) = _
-        rw [← Category.assoc, Sigma.ι_desc]
+        rw [← Category.assoc, Sigma.ι_comp_desc]
         exact IsColimit.comp_coconePointUniqueUpToIso_hom
           (colimit.isColimit _) hB (Discrete.mk k.val.as)
       change (Sigma.ι (fun j : S ↦ E.obj j.val.as) k ≫
         ((cB.ι.app S ≫ t) ≫ r)) ≫ biproduct.π _ i = _
       rw [Category.assoc, Category.assoc, Category.assoc, biproduct.lift_π]
       rw [← Category.assoc, ← Category.assoc, hk, inj_telescope_coordinate E B hB t ht]
-      rw [biproduct.isoCoproduct_inv, Sigma.ι_desc]
+      rw [biproduct.isoCoproduct_inv, Sigma.ι_comp_desc]
       by_cases h : k = i
       · subst i
         simp

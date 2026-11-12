@@ -193,7 +193,7 @@ theorem exists_isFinite_etale_specAlgOver (B : Type u) [CommRing B] [Algebra k B
     rwa [RingHom.mem_ker, Ideal.Quotient.mkₐ_eq_mk, Ideal.Quotient.eq_zero_iff_mem] at hx
   -- `ψ ∘ σ_b = σ_A ∘ ψ` and `σ_A ∘ π = π`
   have hψσ : ψ.comp σb.toAlgHom = σAc.toAlgHom.comp ψ := by
-    refine AlgHom.coe_ringHom_injective (IsLocalization.ringHom_ext (Submonoid.powers b) ?_)
+    refine AlgHom.toRingHom_injective (IsLocalization.ringHom_ext (Submonoid.powers b) ?_)
     ext x
     simp only [ψ, σb, σAc, AlgHom.coe_comp, AlgHom.toRingHom_eq_coe,
       RingHom.coe_comp, RingHom.coe_coe, Function.comp_apply, AlgEquiv.coe_toAlgHom,
@@ -202,7 +202,7 @@ theorem exists_isFinite_etale_specAlgOver (B : Type u) [CommRing B] [Algebra k B
       IsLocalization.map_eq]
     rfl
   have hπσ : σAc.toAlgHom.comp π = π := by
-    refine AlgHom.coe_ringHom_injective (IsLocalization.ringHom_ext (Submonoid.powers c') ?_)
+    refine AlgHom.toRingHom_injective (IsLocalization.ringHom_ext (Submonoid.powers c') ?_)
     ext x
     simp only [π, σAc, AlgHom.coe_comp, AlgHom.toRingHom_eq_coe,
       RingHom.coe_comp, RingHom.coe_coe, Function.comp_apply, AlgEquiv.coe_toAlgHom,

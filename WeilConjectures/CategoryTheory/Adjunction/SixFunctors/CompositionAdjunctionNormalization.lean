@@ -58,7 +58,8 @@ private lemma compIso_hom_eq_conjugate (e : F ⋙ G ≅ H) (eL : L ≅ L₂ ⋙ 
       conjugateEquiv (adj₂.mapDerivedCategoryRightDerivedAdjunction.comp
           adj₁.mapDerivedCategoryRightDerivedAdjunction)
         adj.mapDerivedCategoryRightDerivedAdjunction
-        (Functor.mapDerivedCategoryNatIso eL ≪≫ Functor.mapDerivedCategoryCompIso _ _).hom := by
+        (Functor.mapDerivedCategoryNatIso eL ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).hom := by
   apply (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).rightDerived_ext
     (Functor.rightDerivedFunctorCompUnit F G) (HomotopyCategory.quasiIso C (.up ℤ))
   ext X
@@ -94,7 +95,7 @@ private lemma compIso_hom_eq_conjugate (e : F ⋙ G ≅ H) (eL : L ≅ L₂ ⋙ 
       L.mapDerivedCategory.map ((Functor.rightDerivedFunctorCompUnit F G).app X) ≫
         (Functor.mapDerivedCategoryNatIso eL).hom.app
           (G.rightDerivedFunctor.obj (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj X))) ≫
-        (L₂.mapDerivedCategoryCompIso L₁).hom.app
+        (L₂.mapDerivedCategoryCompIso L₁).inv.app
           (G.rightDerivedFunctor.obj (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj X))) ≫
         L₁.mapDerivedCategory.map (adj₂.mapDerivedCategoryRightDerivedAdjunction.counit.app
           (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj X))) ≫
@@ -102,9 +103,9 @@ private lemma compIso_hom_eq_conjugate (e : F ⋙ G ≅ H) (eL : L ≅ L₂ ⋙ 
       DerivedCategory.Qh.map m := by
     have hσ : ∀ {a b : DerivedCategory E} (f : a ⟶ b),
         L.mapDerivedCategory.map f ≫ (Functor.mapDerivedCategoryNatIso eL).hom.app b ≫
-          (L₂.mapDerivedCategoryCompIso L₁).hom.app b =
+          (L₂.mapDerivedCategoryCompIso L₁).inv.app b =
         (Functor.mapDerivedCategoryNatIso eL).hom.app a ≫
-          (L₂.mapDerivedCategoryCompIso L₁).hom.app a ≫
+          (L₂.mapDerivedCategoryCompIso L₁).inv.app a ≫
             L₁.mapDerivedCategory.map (L₂.mapDerivedCategory.map f) := by
       intro a b f
       rw [NatTrans.naturality_assoc, NatTrans.naturality]

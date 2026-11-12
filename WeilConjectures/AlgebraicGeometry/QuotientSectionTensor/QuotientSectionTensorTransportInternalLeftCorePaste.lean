@@ -46,8 +46,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
-
 attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTensor
   totalComparison totalScalar QuotientChange.compute Mod.extendScalars
   CondensedRing.internalScalarMonoidal Mod.monoidalCategoryStruct

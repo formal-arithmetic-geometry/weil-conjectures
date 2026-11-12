@@ -44,12 +44,12 @@ import all WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtension
 import all Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 import all WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBase
 import all Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import all Mathlib.Data.Finite.Sigma
+import all Mathlib.Basic.Finite.Sigma
 import all WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionConstruction
 import all WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentComposition
 import all WeilConjectures.AlgebraicGeometry.SiteHypercoverAttachmentOperators
 import all WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionSplit
-import all Mathlib.Data.Finite.Sum
+import all Mathlib.Basic.Finite.Sum
 import all Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 import all Mathlib.CategoryTheory.Limits.Types.Pullbacks
 import all Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
@@ -209,7 +209,7 @@ theorem exists_single_affine_wContractible_hypercover
       apply Sigma.hom_ext
       intro i
       simp only [Functor.comp_map, F, R, GeometryRealization.sheafRealization,
-        FormalCoproduct.eval_obj_map, Sigma.ι_desc_assoc,
+        FormalCoproduct.eval_obj_map, Sigma.ι_comp_desc_assoc,
         Function.comp_def, Category.assoc, familyMap]
       rw [hb m]
       rw [← Category.assoc, hb n]

@@ -205,7 +205,6 @@ lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (
       · simp [MorphismProperty.Over.pullbackCongr]
         simp [-pullbackLeftPullbackSndIso_hom_fst, -pullbackLeftPullbackSndIso_hom_fst_assoc,
           pullbackLeftPullbackSndIso_inv_fst_fst_over_assoc,
-          pullbackLeftPullbackSndIso_inv_id_fst_fst_over,
           pullbackLeftPullbackSndIso_inv_fst_fst_over,
           pullbackLeftPullbackSndIso_hom_fst_over_assoc, pullbackLeftPullbackSndIso_hom_fst_over]
       · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,

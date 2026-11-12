@@ -64,10 +64,10 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) g' Λ).hom.app
@@ -78,10 +78,10 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f Λ).hom.app M) =
@@ -90,10 +90,10 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) f' Λ).hom.app
@@ -104,10 +104,10 @@ theorem comparison_square_of_component
         (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility
         D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫
       Functor.isoWhiskerLeft DerivedCategory.Plus.ι
-        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso
             (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫
-          Functor.mapDerivedCategoryCompIso _ _) ≪≫
+          (Functor.mapDerivedCategoryCompIso _ _).symm) ≪≫
       Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm
 ) g Λ).hom.app M) ≫

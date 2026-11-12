@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.AmplePullbackIdealAffineSection
 import WeilConjectures.AlgebraicGeometry.AffineImageAwayClosedCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.ConductorSections
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Affine power sections away from component intersections
 

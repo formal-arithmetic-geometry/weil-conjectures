@@ -251,7 +251,7 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finit
         (𝐅).mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj K) ≫
           DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
             (c i • 𝟙 (((𝐅).mapHomologicalComplex _).obj K))) := by
-      rw [Functor.map_smul, CategoryTheory.Functor.map_id, Functor.map_smul,
+      erw [Functor.map_smul, CategoryTheory.Functor.map_id, Functor.map_smul,
         CategoryTheory.Functor.map_id, Linear.smul_comp, Linear.comp_smul, Category.id_comp]
       erw [Category.comp_id]
     have e₂ := (𝐆).mapDerivedCategoryFactorsh.hom.naturality
@@ -417,10 +417,10 @@ theorem hasProjectionFormulaOfCompactification_extendScalars {X Y : Scheme.{u}} 
         (D((c.i)_!open[ModuleCat.{u + 1} R]).obj K) :=
     D((c.i)_!open[ModuleCat.{u + 1} S]).mapIso
         ((sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorIsoMapDerivedCategory.app K) ≪≫
-      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _ ≪≫
         Functor.mapDerivedCategoryNatIso
           (openImmersionLowerShriekCompSheafExtendScalarsIso (R := R) (S := S) c.i).symm ≪≫
-        Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
+        (Functor.mapDerivedCategoryCompIso _ _).symm).app K ≪≫
       ((sheafExtendScalars (algebraMap R S) c.Z).leftDerivedFunctorIsoMapDerivedCategory.app
         _).symm
   have := NatTrans.isIso_app_app_of_iso

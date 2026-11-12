@@ -64,7 +64,7 @@ lemma surjective_terminalSections_map_globalSectionsEvaluation (X : Scheme.{u})
     ((adj.homEquiv _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s)))
   rw [Equiv.apply_symm_apply] at h
   rw [← ConcreteCategory.comp_apply, Category.assoc, ← Γ.map_comp,
-    globalSectionsEvaluation, Sigma.ι_desc, ← h]
+    globalSectionsEvaluation, Sigma.ι_comp_desc, ← h]
   simp only [ModuleCat.hom_ofHom]
   exact one_smul Λ s
 
@@ -78,8 +78,8 @@ lemma globalSectionsEvaluation_comp {X : Scheme.{u}}
         (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
           (ψ.hom.app _ s)) ≫ globalSectionsEvaluation Λ X F := by
   refine Sigma.hom_ext _ _ fun s ↦ ?_
-  rw [globalSectionsEvaluation, Sigma.ι_desc_assoc, Sigma.ι_desc_assoc, globalSectionsEvaluation,
-    Sigma.ι_desc, ← Adjunction.homEquiv_naturality_right_symm]
+  rw [globalSectionsEvaluation, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc_assoc,
+    globalSectionsEvaluation, Sigma.ι_comp_desc, ← Adjunction.homEquiv_naturality_right_symm]
   congr 1
   ext
   simp
@@ -95,7 +95,7 @@ theorem isGloballyGenerated_of_epi_sigmaDesc {X : Scheme.{u}} {ι : Type w}
   refine ⟨fun {T} g h e ↦ ?_⟩
   refine (cancel_epi (Sigma.desc ψ)).1 (Sigma.hom_ext _ _ fun i ↦ ?_)
   have : Epi (globalSectionsEvaluation Λ X (G i)) := hG i
-  rw [Sigma.ι_desc_assoc, Sigma.ι_desc_assoc,
+  rw [Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc_assoc,
     ← cancel_epi (globalSectionsEvaluation Λ X (G i)),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i), e]
@@ -119,7 +119,7 @@ theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
     (h : Subsingleton (F.obj.obj (op (etaleTerminal X)))) : IsZero F := by
   have h0 : globalSectionsEvaluation Λ X F = 0 := by
     refine Sigma.hom_ext _ _ fun s ↦ ?_
-    rw [globalSectionsEvaluation, Sigma.ι_desc, comp_zero, Subsingleton.elim s 0,
+    rw [globalSectionsEvaluation, Sigma.ι_comp_desc, comp_zero, Subsingleton.elim s 0,
       Adjunction.homEquiv_counit]
     have hz (M : ModuleCat.{u + 1} Λ) :
         ModuleCat.ofHom (LinearMap.toSpanSingleton Λ M (0 : M)) = 0 := by

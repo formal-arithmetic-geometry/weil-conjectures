@@ -203,6 +203,8 @@ attribute [local irreducible] ObjectProperty.FullSubcategory.category
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized commonstage comparison obeys this coherence equation.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-iso). Proof: Apply coherent reduction to both routes.
@@ -508,8 +510,8 @@ theorem canonicalCommonStagePullbackTensor_braiding_spec {X Y : Scheme.{u}}
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
     (@canonicalCommonStagePullbackTensor_braiding l _ Ω _ _ _ X Y f hX hY) := by
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
     intro M N
     let F := commonStageDerivedPullback l Ω f
     let OY := commonStageTensorObject l Ω Y

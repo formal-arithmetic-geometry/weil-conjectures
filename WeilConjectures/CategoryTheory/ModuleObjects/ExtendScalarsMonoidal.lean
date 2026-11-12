@@ -595,6 +595,7 @@ lemma extendScalarsMonoidal_toOplaxMonoidal :
     (extendScalarsMonoidal φ).toOplaxMonoidal = extendScalarsOplaxMonoidal φ :=
   rfl
 
+
 end ExtendScalars
 
 end CategoryTheory.Mod

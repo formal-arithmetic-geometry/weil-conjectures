@@ -80,7 +80,7 @@ noncomputable def relativeTensorRightIso (N : Mod C R) :
     apply colimit.hom_ext
     intro j
     simp only [id_eq, Iso.trans_hom, tensorLeft, Functor.comp_map, colim_map, Category.assoc,
-      ι_colimMap_assoc, HasColimit.isoOfNatIso_ι_hom_assoc]
+      ι_colimMap_assoc, HasColimit.ι_isoOfNatIso_hom_assoc]
     cases j <;> apply Mod.hom_ext <;>
       simp [relativeTensorCofork, relativeTensorπ, tensorObjπ_whiskerRight])
 
@@ -157,7 +157,8 @@ end CategoryTheory.Mod.ResidueOrdinary
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local instance 20000] sheafBraidedCategory
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallProfinite_integralResidueOrdinaryMonoidal
+    : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 @[instance_reducible] private noncomputable def ordinary_braided

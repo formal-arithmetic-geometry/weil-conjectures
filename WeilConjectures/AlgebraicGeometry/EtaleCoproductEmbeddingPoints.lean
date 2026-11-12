@@ -61,7 +61,7 @@ theorem etaleCoproduct_embedding_points
       (Spec.map (CommRingCat.ofHom p.2.toRingHom) ≫ Sigma.ι S p.1) (by
         change (Spec.map (CommRingCat.ofHom p.2.toRingHom) ≫ Sigma.ι S p.1) ≫
           b = Spec.map (CommRingCat.ofHom (algebraMap K Ksep))
-        rw [Category.assoc, Sigma.ι_desc, ← Spec.map_comp]
+        rw [Category.assoc, Sigma.ι_comp_desc, ← Spec.map_comp]
         congr 1
         ext k
         exact p.2.commutes k)
@@ -102,7 +102,7 @@ theorem etaleCoproduct_embedding_points
         rw [Spec.map_comp, hσ]
         have hw := Over.w x
         change x.left ≫ b = Spec.map (CommRingCat.ofHom (algebraMap K Ksep)) at hw
-        rw [← hl, Category.assoc, Sigma.ι_desc] at hw
+        rw [← hl, Category.assoc, Sigma.ι_comp_desc] at hw
         exact hw
       let φ : E i →ₐ[K] Ksep :=
         { σ.hom with

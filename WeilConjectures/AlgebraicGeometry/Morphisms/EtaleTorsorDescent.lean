@@ -204,7 +204,7 @@ lemma eq_of_reprVadd {V : Y.Etale} (κ : V ⟶ Etale.mk π) {m m' : M}
         (e.inv.hom.app (op V) ⟨κ⟩)) =
       e.hom.hom.app (op V) (R.vadd (op V) (ContinuousMap.const _ m')
         (e.inv.hom.app (op V) ⟨κ⟩)) :=
-    ULift.ext _ _ h₁
+    ULift.ext h₁
   have h₂' := congr_arg (fun z ↦ e.inv.hom.app (op V) z) h₂
   simp only [reprE_inv_hom] at h₂'
   have h₃ := (R.bijective_vadd (op V) (e.inv.hom.app (op V) ⟨κ⟩)).1 h₂'
@@ -251,7 +251,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
         congr_arg (fun χ : T ⟶ E₂ ↦ V.ι ≫ χ.left) hxx
       simp only [← Category.assoc] at hxD
       rw [e₁, e₂] at hxD
-      simp only [Category.assoc, Sigma.ι_desc] at hxD
+      simp only [Category.assoc, Sigma.ι_comp_desc] at hxD
       have hsnd := congr_arg (· ≫ pullback.snd π π) hxD
       have hfst := congr_arg (· ≫ pullback.fst π π) hxD
       simp only [Category.assoc, pullback.lift_snd, pullback.lift_fst, Category.comp_id]
@@ -261,7 +261,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
       · obtain ⟨v⟩ := not_isEmpty_iff.1 hV
         have hκ : (T.left.homOfLE h₁ ≫ k) ≫ π = V.ι ≫ T.hom := by
           have := congr_arg (· ≫ Sigma.desc fun _ : M ↦ π) e₁
-          simp only [Category.assoc, Sigma.ι_desc] at this
+          simp only [Category.assoc, Sigma.ι_comp_desc] at this
           rw [Category.assoc, ← this]
           exact congr_arg _ (MorphismProperty.Over.w x)
         let W : Y.Etale := Etale.mk (V.ι ≫ T.hom)
@@ -294,7 +294,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
       · change T.left.glueOfContinuousMap f _ ≫ Sigma.desc (fun _ : M ↦ π) = T.hom
         rw [Scheme.glueOfContinuousMap_comp]
         refine Scheme.glueOfContinuousMap_eq fun m ↦ ?_
-        rw [Category.assoc, Sigma.ι_desc]
+        rw [Category.assoc, Sigma.ι_comp_desc]
         exact congr_arg _ (MorphismProperty.Over.w ψe)
       · change T.left.glueOfContinuousMap f _ ≫ reprSigmaDesc R π e = g.left
         refine pullback.hom_ext ?_ ?_
@@ -307,7 +307,7 @@ theorem isIso_reprSigmaDesc : IsIso (reprSigmaDesc R π e) := by
         · rw [Category.assoc, Scheme.glueOfContinuousMap_comp]
           change _ = ψe.left
           refine Scheme.glueOfContinuousMap_eq fun m ↦ ?_
-          simp only [reprSigmaDesc, Category.assoc, Sigma.ι_desc_assoc, pullback.lift_snd]
+          simp only [reprSigmaDesc, Category.assoc, Sigma.ι_comp_desc_assoc, pullback.lift_snd]
           erw [Category.comp_id]
   exact (Etale.forget Y ⋙ Over.forget Y).map_isIso D
 
@@ -408,8 +408,8 @@ theorem finite_sheafFiber (R : Sheaf.Torsor (Etale.continuousMapSheaf Y M)) {Ω 
     Φ.toPresheafFiber V₀ v₀ R.sheaf.obj (R.vadd (op V₀) (ContinuousMap.const _ m) x₀)
   refine Finite.of_surjective φ fun p ↦ ?_
   obtain ⟨V, v, z, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := R.sheaf.obj) p
-  let E₁ : Φ.fiber.Elements := ⟨V, v⟩
-  let E₂ : Φ.fiber.Elements := ⟨V₀, v₀⟩
+  let E₁ : Φ.fiber.Elements := Φ.fiber.elementsMk V v
+  let E₂ : Φ.fiber.Elements := Φ.fiber.elementsMk V₀ v₀
   let Wel := IsCofiltered.min E₁ E₂
   let f₁ := IsCofiltered.minToLeft E₁ E₂
   let f₂ := IsCofiltered.minToRight E₁ E₂

@@ -142,6 +142,7 @@ private lemma exists_comp_eq_smul (B : Module.End K W) (A' : Module.End K V) (β
       obtain ⟨μ', hμ', ψ', h⟩ := ih ψ₁ h₁ hβ₁ h0₁
       exact ⟨μ', Multiset.mem_cons_of_mem hμ', ψ', h⟩
 
+
 variable [IsAlgClosed K]
 
 /-- If `P ≅ Hom(A, B)` with the Frobenius of `P` becoming `φ ↦ F_B ∘ φ ∘ F_A⁻¹`, then every
@@ -208,6 +209,7 @@ theorem IsPureOfWeight.of_linearEquiv_hom {ι : K →+* ℂ} {q : ℕ} (hq : 0 <
     ← Real.rpow_add hq']
   congr 1
   ring
+
 
 end Eigenvalues
 

@@ -213,7 +213,7 @@ theorem formalKernel_polynomial_action
                 ((K 0).val.map (homOfLE hZW).op
                   ((K 0).val.map (homOfLE (hWV.trans hVU)).op (t i))) := by
               convert M.naturality m 0 W Z hZW (a i)
-                ((K 0).val.map (homOfLE (hWV.trans hVU)).op (t i)) using 1 <;> rfl
+                ((K 0).val.map (homOfLE (hWV.trans hVU)).op (t i)) using 1
             _ = _ := by
               congr 1
               exact ((K 0).val.map_comp_apply (homOfLE (hWV.trans hVU)).op

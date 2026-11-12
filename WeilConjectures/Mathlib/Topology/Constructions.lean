@@ -47,3 +47,4 @@ theorem Prod.continuous_toSigma [DiscreteTopology α] : Continuous (Prod.toSigma
   refine ⟨by simp, hU a, by simp, hab, fun t hT ↦ ?_⟩
   simp only [Set.mem_prod, Set.mem_singleton_iff, Set.mem_preimage] at hT
   simpa [Prod.toSigma, ← hT.1] using hT.2
+

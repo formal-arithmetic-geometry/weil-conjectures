@@ -75,4 +75,5 @@ lemma Scheme.isCompact_inf_of_quasiSeparatedSpace {X : Scheme.{u}} [QuasiSeparat
     IsCompact ((U ⊓ V : X.Opens) : Set X) :=
   QuasiSeparatedSpace.inter_isCompact _ _ U.2 hU V.2 hV
 
+
 end AlgebraicGeometry

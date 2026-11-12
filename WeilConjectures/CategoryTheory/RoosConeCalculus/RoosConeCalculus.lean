@@ -574,7 +574,7 @@ private theorem ucoord_χ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
           biprod.snd := by
     obtain rfl := (ComplexShape.up ℤ).next_eq' hq
     dsimp only [HomologicalComplex.homotopyCofiber.sndX]
-    rw [dif_pos hq]
+    rw [dite_eq_left hq]
   simp [ucoord, roosχ, mappingCocone.snd, HomComplex.Cochain.leftShift_v,
     show Int.negOnePow 2 = 1 by rfl, mappingCone.snd, hs p (p + 1) rfl]
 
@@ -1223,7 +1223,7 @@ private theorem augment_v_π {N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
     (j : Cone N.asFunctor) (q : ℤ) (n : ℕ) :
     (augmentation j).f q ≫ v N q ≫ π N q n = (j.π.app (op n)).f q := by
   rw [← Category.assoc, (augment_coordinates j q).1]
-  exact congrArg (fun k ↦ k.f q) (Pi.lift_π (fun n ↦ j.π.app (op n)) n)
+  exact congrArg (fun k ↦ k.f q) (Pi.lift_comp_π (fun n ↦ j.π.app (op n)) n)
 
 private theorem shift_augmentation : ShiftAugmentation (roosCommShift (A := A)) := by
   intro N j r js c h
@@ -1408,7 +1408,7 @@ private theorem derived_roos [HasDerivedCategory.{w} A]
         (fun n : ℕ ↦ N.asFunctor.map (homOfLE (Nat.le_succ n)).op) _).mp rfl n
     simp only [Category.assoc, he, ← Functor.map_comp, hsπ, Functor.map_sub]
     simp only [sd, towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
-      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, he]
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_comp_π, he]
     rw [Functor.map_comp, ← Category.assoc, he]
   let T := Q.mapTriangle.obj (mappingCocone.triangle (roosU N))
   have hT : T ∈ distTriang (DerivedCategory A) :=

@@ -116,7 +116,7 @@ theorem boundedConstructible_derivedCondensedRealization [Fact (ringChar k₀ �
     ((Functor.mapDerivedCategoryNatIso (eqToIso
       (ProEtale.forgetAb_comp_comap_nativeModuleCoefficientIso l _))).app
         (U.mapDerivedCategory.obj K) ≪≫
-      ((U.mapDerivedCategoryCompIso _).app K).symm) h
+      (U.mapDerivedCategoryCompIso _).app K) h
 
 /-- **The proper projection formula for condensed realizations of Weil complexes**: for a
 proper morphism `g : Z ⟶ Y` of separated `k₀`-schemes of finite type, the projection map

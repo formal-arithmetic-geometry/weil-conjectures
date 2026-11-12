@@ -49,6 +49,7 @@ lemma rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac
   simp [rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso]
 
 variable {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+  [Abelian.HasKInjectiveResolutions B]
   {L₀ : A ⥤ B} [L₀.Additive]
   (S : B ⥤ IsoAlgebra G) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
@@ -60,6 +61,7 @@ noncomputable def traceDescentComparison (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso 
     (Functor.rightDerivedFunctorNatIso β).symm ≪≫
     Functor.rightDerivedFunctorCompMapDerivedCategoryIso L₀ S
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- Normalization of the derived descent square by the two derived units. -/
 lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : HomotopyCategory A (.up ℤ)) :
@@ -81,6 +83,7 @@ lemma traceDescentComparison_inv_fac (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
   rw [reassoc_of% h₁, reassoc_of% h₂,
     rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso_hom_fac]
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- The derived-unit normalization with the source unit expanded. -/
 lemma traceDescentComparison_inv_fac' (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : HomotopyCategory A (.up ℤ)) :
@@ -113,16 +116,17 @@ noncomputable def ordinaryTraceDescentIso (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso
     Functor.isoWhiskerLeft T (mapOfNatIsoCompForgetIso e) ≪≫
     (Functor.associator T (forget F) L).symm ≪≫ Functor.isoWhiskerRight α L
 
+omit [Abelian.HasKInjectiveResolutions B] in
 /-- Forgetting the derived descent comparison gives the derived ordinary square. -/
 theorem traceDescentComparison_forget (β : L₀ ⋙ S ≅ T ⋙ mapOfNatIso e)
     (K : DerivedCategory A) :
     (Functor.rightDerivedFunctorCommIso (ordinaryTraceDescentIso e T α S αS β)).hom.app K =
-      ((Functor.mapDerivedCategoryCompIso S (forget G)).symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso S (forget G)) ≪≫
         Functor.mapDerivedCategoryNatIso αS).inv.app (L₀.rightDerivedFunctor.obj K) ≫
       (forget G).mapDerivedCategory.map ((traceDescentComparison e T α S β).inv.app K) ≫
       (rightDerivedFunctorMapOfNatIsoCompForgetIso F e).hom.app (T.mapDerivedCategory.obj K) ≫
       L.rightDerivedFunctor.map
-        (((Functor.mapDerivedCategoryCompIso T (forget F)).symm ≪≫
+        (((Functor.mapDerivedCategoryCompIso T (forget F)) ≪≫
           Functor.mapDerivedCategoryNatIso α).hom.app K) := by
   apply Functor.traceDerivedSquare_comp (mapOfNatIsoCompForgetIso e) β
     (ordinaryTraceDescentIso e T α S αS β)

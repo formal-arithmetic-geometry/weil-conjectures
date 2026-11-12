@@ -55,6 +55,7 @@ lemma Etale.continuousMapSheafType_obj_map_apply {U V : X.Etale} (f : U ⟶ V)
     (Etale.continuousMapSheafType X A).obj.map f.op s = s.comp f.left.base.hom :=
   rfl
 
+
 variable [DiscreteTopology A]
 
 /-- The constant functions, as a map from the constant presheaf with value `A` to the sheaf of
@@ -177,7 +178,7 @@ lemma comp_sigmaIdx_apply {W : Scheme.{u}} (a : W ⟶ ∐ fun _ : S' ↦ X) (w :
     exact ⟨y, hy⟩
   have h := IsOpenImmersion.lift_fac (Sigma.ι (fun _ : S' ↦ X) σ) (O.ι ≫ a) hrange
   have hl := congrArg (· ≫ Sigma.desc (fun _ : S' ↦ 𝟙 X)) h
-  simp only [Category.assoc, Sigma.ι_desc, Category.comp_id, ha] at hl
+  simp only [Category.assoc, Sigma.ι_comp_desc, Category.comp_id, ha] at hl
   rw [← h, hl, Category.assoc]
 
 variable {A : Type w} [TopologicalSpace A] [DiscreteTopology A] (e : A ≃ S')
@@ -223,6 +224,7 @@ lemma sigmaHomEquiv_apply_coe {W : Scheme.{u}} (w : W ⟶ X) (f : C(W, A)) :
 lemma sigmaHomEquiv_symm_apply {W : Scheme.{u}} (w : W ⟶ X)
     (a : {a : W ⟶ ∐ fun _ : S' ↦ X // a ≫ Sigma.desc (fun _ ↦ 𝟙 X) = w}) (z : W) :
     (sigmaHomEquiv e w).symm a z = e.symm (sigmaIdx S' X (a.1 z)) := rfl
+
 
 /-- `sigmaHomEquiv` is natural in `W`. -/
 lemma sigmaHomEquiv_comp {W W' : Scheme.{u}} (φ : W' ⟶ W) (w : W ⟶ X) (f : C(W, A)) :

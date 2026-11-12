@@ -88,6 +88,7 @@ lemma image_F {B : C} (φ : A ⟶ B) (n : ℤ) :
     (F.image φ).F n = imageSubobject ((F.F n).arrow ≫ φ) :=
   rfl
 
+
 end DecreasingFiltration
 
 end CategoryTheory

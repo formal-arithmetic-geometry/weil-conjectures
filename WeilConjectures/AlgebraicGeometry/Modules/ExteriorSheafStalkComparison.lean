@@ -104,7 +104,8 @@ private theorem exteriorGermMap_res {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
   | add z w hz hw ihz ihw => simpa only [map_add] using congrArg₂ (· + ·) ihz ihw
   | smul a z hz ih =>
     rw [r.hom.map_smul]
-    change K (X.presheaf.map f.op a • r z) = L (a • z)
+    change K (X.presheaf.map f.op a •
+      (show ⋀[X.presheaf.obj (op V)]^n (M.val.obj (op V)) from r z)) = L (a • z)
     rw [K.map_smul, L.map_smul]
     change X.presheaf.germ V x hx (X.presheaf.map f.op a) • K (r z) =
       X.presheaf.germ U x (f.le hx) a • L z

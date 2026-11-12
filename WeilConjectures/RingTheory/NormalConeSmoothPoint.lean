@@ -83,7 +83,8 @@ lemma mvPolynomialOriginReesQuotEquiv_X (i : σ) :
         (MvPolynomial.X i) = Ideal.Quotient.mk _ (MvPolynomial.X i) from
       (RingEquiv.symm_apply_eq _).2 (by simp)]
   simp only [quotEquivOfEq_mk, quotientEquiv_apply, RingHom.toMonoidHom_eq_coe,
-    OneHom.toFun_eq_coe, MonoidHom.toOneHom_coe, MonoidHom.coe_coe, quotientMap_mk, RingHom.coe_coe]
+    OneHom.toFun_eq_coe, MonoidHom.toOneHom_coe, MonoidHom.coe_ofClass, quotientMap_mk,
+    RingHom.coe_coe]
   congr 1
   exact Subtype.ext (mvPolynomialToLaurent_X C σ i)
 

@@ -311,8 +311,7 @@ private theorem tensor_ext (R : Sheaf J CommRingCat.{w})
       (((SA (J := J) R).unit.app (M.val ⊗ N.val)).app U t)) =
     g.val.app U ((tensorObjIsoSheafification M N).inv.val.app U
       (((SA (J := J) R).unit.app (M.val ⊗ N.val)).app U t))
-  induction t using TensorProduct.induction_on with
-  | zero => simp only [map_zero]
+  induction t using TensorProduct.inductionOn with
   | tmul x y => exact h U x y
   | add x y hx hy => simp only [map_add, hx, hy]
 
@@ -470,7 +469,7 @@ private theorem tmul_natural {A S : Sheaf J CommRingCat.{w}} (a : A ⟶ S)
         (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x)) at h
   rw [show (changeOfRingsPresheaf (J := J) a M).map i
       (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x) =
-      S.obj.map i s ⊗ₜ[A.obj.obj V, (a.hom.app V).hom] M.val.map i x from
+      S.obj.map i s ⊗ₜ[A.obj.obj V, (a.hom.app V).hom] M.val.restrictₛₗ i x from
     Classical.choose_spec (exists_changeOfRingsMap (J := J) a M i) s x] at h
   unfold scalarExtensionConstraintTmul
   exact h.symm
@@ -549,8 +548,7 @@ private noncomputable def extensionPresheafIso {A S : Sheaf J CommRingCat.{w}}
     intro U V i
     apply ModuleCat.hom_ext
     ext t
-    induction t using TensorProduct.induction_on with
-    | zero => simp only [map_zero]
+    induction t using TensorProduct.inductionOn with
     | add x y hx hy => simp only [map_add, hx, hy]
     | tmul s x =>
       change changeOfRingsMap a M i (s ⊗ₜ[A.obj.obj U, (a.hom.app U).hom] x) =

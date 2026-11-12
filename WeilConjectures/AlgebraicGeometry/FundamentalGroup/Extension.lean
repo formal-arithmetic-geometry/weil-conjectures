@@ -90,7 +90,7 @@ theorem exists_pullback_iso_of_ker_smul (hρ : Function.Surjective (fundamentalG
   -- the finite étale `V`-scheme attached to the `π₁(V, t)`-set `X`
   let Xc : ContAction FintypeCat.{u} GV :=
     ⟨Action.FintypeCat.ofMulAction GV ((fiber s).obj Z), by
-      rw [Action.isContinuous_def]
+      constructor
       exact hcont.continuous_smul⟩
   let EV := equivalenceContAction t GV
   let ZV := EV.inverse.obj Xc
@@ -145,6 +145,7 @@ lemma isClosed_fixingSubgroup [TopologicalSpace G] [∀ P, ContinuousSMul G ((fi
   rw [this]
   exact isClosed_iInter fun P ↦ isClosed_iInter fun x ↦
     isClosed_eq (continuous_id.smul continuous_const) continuous_const
+
 
 variable [IsNaturalSMul (fiber s) G]
 

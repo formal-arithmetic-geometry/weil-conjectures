@@ -48,7 +48,7 @@ private theorem towerAugmentationCondition
   apply Pi.hom_ext
   intro n
   simp only [towerTransitionEndomorphism, Preadditive.comp_sub, Category.comp_id,
-    Preadditive.sub_comp, towerProductShift, Category.assoc, Pi.lift_π, Pi.lift_π_assoc,
+    Preadditive.sub_comp, towerProductShift, Category.assoc, Pi.lift_comp_π, Pi.lift_comp_π_assoc,
     zero_comp]
   apply sub_eq_zero.mpr
   change γ.app (op n) = γ.app (op (n + 1)) ≫ T.map (homOfLE (Nat.le_succ n)).op
@@ -91,7 +91,7 @@ private theorem normalizedConeComparison
     apply Pi.hom_ext
     intro n
     simp only [Category.id_comp, p, Category.assoc, Pi.mapIso_hom_π,
-      CochainComplex.PrincipalCone.productUnit, Pi.lift_π_assoc, Pi.lift_π]
+      CochainComplex.PrincipalCone.productUnit, Pi.lift_comp_π_assoc, Pi.lift_comp_π]
     exact (hu n).symm
   refine ⟨DerivedCategory.Q.mapIso i, ?_⟩
   change DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ) ≫
@@ -558,8 +558,7 @@ theorem principalConeKoszulRoosComparison
     exact (hμ q U x).trans (by
       have h := (quotientAction_apply R P b 0 q U x).symm
       simp only [b, Nat.zero_add, pow_one] at h
-      convert h using 1
-      rfl)
+      convert h using 1)
   subst μ
   obtain ⟨e, he⟩ := @coneTowerRoosComparison.{u, w} C inferInstance J R inferInstance P
     (End.of (quotientAction R P b 0)) (koszulTensorTower R P b)

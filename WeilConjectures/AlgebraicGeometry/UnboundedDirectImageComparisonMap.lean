@@ -66,14 +66,14 @@ noncomputable def unboundedDirectImagePullbackIso
         (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ≅
       (Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ⋙
         (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory :=
-  (Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryCompIso
     (comparisonUpperStar (ModuleCat.{u + 1} A) Y)
-    (ProEtale.upperStar (ModuleCat.{u + 1} A) g)).symm ≪≫
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) g) ≪≫
     Functor.mapDerivedCategoryNatIso
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) g) ≪≫
-    Functor.mapDerivedCategoryCompIso
+    (Functor.mapDerivedCategoryCompIso
       (Etale.upperStar (ModuleCat.{u + 1} A) g)
-      (comparisonUpperStar (ModuleCat.{u + 1} A) X)
+      (comparisonUpperStar (ModuleCat.{u + 1} A) X)).symm
 
 /-- The specified unbounded comparison: transpose the pullback-square identification
 followed by the etale derived counit under the pro-etale derived adjunction.

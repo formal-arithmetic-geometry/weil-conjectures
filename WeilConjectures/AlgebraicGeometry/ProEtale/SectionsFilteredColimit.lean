@@ -64,6 +64,7 @@ lemma abSectionsFunctor_mapCocone_ι_app_apply (W : X.ProEt) (k : K)
     ((abSectionsFunctor W).mapCocone c).ι.app k t = (c.ι.app k).hom.app (op W) t :=
   rfl
 
+
 end Large
 
 section Small

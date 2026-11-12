@@ -436,16 +436,15 @@ private theorem exactExtensionDerived {Y : Scheme.{u}}
   have h := congrArg (fun t ↦ t.app ((HomotopyCategory.quotient _ _).obj P)) hd
   change _ = d.hom.app _ ≫ _
   dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h
-  rw [Functor.mapDerivedCategoryFactorsh_hom_app] at h
-  dsimp only [pbcComplexCounit, DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-    Functor.mapHomotopyCategoryFactors, Functor.map_id,
-    Category.id_comp, Category.comp_id] at h ⊢
-  erw [D.map_id, DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp]
-  erw [L.mapDerivedCategory.map_id, DerivedCategory.Qh.map_id, Category.comp_id] at h
-  erw [Category.id_comp] at h
-  exact h.symm
+  unfold pbcComplexCounit
+  rw [← h, Functor.mapDerivedCategoryFactorsh_hom_app]
+  dsimp only [L, D]
+  simp only [Category.assoc, ← NatTrans.naturality_assoc,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+  simp only [Category.id_comp, Iso.inv_hom_id_app]
+  exact congrArg (fun f ↦ d.hom.app (DerivedCategory.Q.obj P) ≫ f)
+    (Category.comp_id (L.mapDerivedCategoryFactors.hom.app P))
 
 /-- Restricting an ambient derived tensor pullback is scalar extension on the restricted
 inverse image. The counit equation specifies the comparison on K-flat representatives.

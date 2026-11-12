@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizatio
 import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # The finite component of a strict normalized pullback comparison
 
@@ -29,7 +30,6 @@ attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.completedIntegralCoefficientSheafUnrestricted
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
-  CategoryTheory.Functor.mapDerivedCategoryCompIso
   CategoryTheory.Functor.mapDerivedCategoryNatIso
 attribute [local implicit_reducible] WeilConjectures.SemilinearSections.moduleAbelian
   WeilConjectures.integralCoefficientSheaf
@@ -37,7 +37,6 @@ attribute [local implicit_reducible] WeilConjectures.SemilinearSections.moduleAb
 attribute [local implicit_reducible] WeilConjectures.coefficientFiniteDerivedExtension
   WeilConjectures.coefficientFiniteDerivedRestriction
   WeilConjectures.coefficientConstantTowerEvaluation
-  CategoryTheory.Functor.mapHomologicalComplex
   CategoryTheory.Functor.ofOpSequence CategoryTheory.Functor.ofSequence
   CategoryTheory.NatIso.mapHomologicalComplex CategoryTheory.NatTrans.mapHomologicalComplex
   HomologicalComplex.asFunctor
@@ -99,32 +98,6 @@ private theorem mapped_square {A B : Type*} [Category A] [Category B]
   rw [hq, he]
   simp only [Category.assoc, ← R.map_comp]
   rw [hh]
-
-private theorem exactSquare_fac
-    {A₀ A₁ A₂ A₃ : Type*} [Category A₀] [Category A₁] [Category A₂] [Category A₃]
-    [Abelian A₀] [Abelian A₁] [Abelian A₂] [Abelian A₃]
-    [HasDerivedCategory A₀] [HasDerivedCategory A₁]
-    [HasDerivedCategory A₂] [HasDerivedCategory A₃]
-    (U : A₀ ⥤ A₁) (F : A₁ ⥤ A₃) (G : A₀ ⥤ A₂) (R : A₂ ⥤ A₃)
-    [U.Additive] [F.Additive] [G.Additive] [R.Additive]
-    [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
-    (e : U ⋙ F ≅ G ⋙ R) (K : CochainComplex A₀ ℤ) :
-    (((Functor.mapDerivedCategoryCompIso U F).symm ≪≫
-        Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso G R).hom.app
-          (DerivedCategory.Q.obj K)) ≫
-        R.mapDerivedCategory.map (G.mapDerivedCategoryFactors.hom.app K) ≫
-        R.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) =
-      F.mapDerivedCategory.map (U.mapDerivedCategoryFactors.hom.app K) ≫
-        F.mapDerivedCategoryFactors.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, CategoryTheory.Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors]
-  erw [Functor.mapDerivedCategoryNatIso_fac]
-  erw [← Functor.mapDerivedCategoryCompIso_hom_app_factors U F K]
-  simp only [CategoryTheory.Category.assoc, Iso.inv_hom_id_app_assoc]
 
 attribute [local irreducible] unrestrictedIntegralReductionFunctor scalarReductionExtension
 attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestrictionColimits
@@ -545,21 +518,14 @@ private theorem finiteEvaluation_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
         (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C) ≫
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex (finiteEvaluation l E f n).hom (.up ℤ)).app C) := by
+  have hfac := Functor.exactSquare_fac (finiteEvaluation l E f n) C
   have hb : finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
       (integralSystemTransition l E) f n =
-      (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E f)
-        (coefficientSequenceEvaluation l E X n)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso (finiteEvaluation l E f n) ≪≫
-      Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E Y n)
-        (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f) := by
+      Functor.mapDerivedCategorySquareIso (finiteEvaluation l E f n) := by
     unfold finiteSystemDerivedPullbackEvaluation finiteEvaluation
     rfl
-  rw [hb]
-  exact exactSquare_fac
-    (integralComparisonSequencePullback l E f) (coefficientSequenceEvaluation l E X n)
-    (coefficientSequenceEvaluation l E Y n)
-    (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f)
-    (finiteEvaluation l E f n) C
+  erw [← hb] at hfac
+  exact hfac
 
 
 /-- The derived finite evaluation comparison, followed by an arbitrary map of finite
@@ -618,12 +584,18 @@ private theorem finiteEvaluation_fac_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
       (coefficientSequenceEvaluation l E Y n).mapDerivedCategory ⋙ BD :=
     finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
       (integralSystemTransition l E) f n
+  have hfac := Functor.exactSquare_fac (finiteEvaluation l E f n) C
+  have hβ : finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)
+      (integralSystemTransition l E) f n =
+      Functor.mapDerivedCategorySquareIso (finiteEvaluation l E f n) := by
+    unfold finiteSystemDerivedPullbackEvaluation finiteEvaluation
+    rfl
+  erw [← hβ] at hfac
   dsimp only [BD, proEtaleConstantRingDerivedPullback]
   simp only [Functor.map_comp, Category.assoc]
   erw [B.mapDerivedCategoryFactors.hom.naturality k]
-  erw [reassoc_of% (finiteEvaluation_fac l E f C n)]
+  erw [reassoc_of% hfac]
   dsimp only [Functor.comp_map]
-  erw [Category.assoc, Category.assoc]
   change VD.map (F.mapDerivedCategoryFactors.inv.app C) ≫
     VD.map (F.mapDerivedCategoryFactors.hom.app C) ≫
     V.mapDerivedCategoryFactors.hom.app D ≫ DerivedCategory.Q.map H ≫
@@ -661,10 +633,10 @@ private theorem restrictedFactors_fac (W : Scheme.{u})
           ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app C) ≫
         (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
           (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C) := by
-  have h := exactSquare_fac
-    (coefficientSequenceRestriction l E W)
-    ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n))
-    (coefficientSequenceEvaluation l E W n) (scalarReductionRestriction l E W n)
+  have h := Functor.exactSquare_fac
+    (R := coefficientSequenceRestriction l E W)
+    (G := (evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n))
+    (L := coefficientSequenceEvaluation l E W n) (S := scalarReductionRestriction l E W n)
     (eqToIso (coefficientSequenceRestriction_evaluation l E W n)) C
   change (coefficientRestrictedEvaluationIso l E W n).hom.app
       (DerivedCategory.Q.obj C) ≫ _ = _ at h

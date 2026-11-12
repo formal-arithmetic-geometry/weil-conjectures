@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeHypotheses
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorTotal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientTensorLocalization
 
@@ -35,7 +36,6 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   Localization.Monoidal.tensorBifunctor
 
 -- Match native prolongations before reducing concrete section constructions.
-attribute [local implicit_reducible] Functor.mapHomologicalComplex
 attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorData
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
@@ -56,11 +56,14 @@ private theorem scalar_natural (Z : Scheme.{u})
         d.b.derived d.b.counit P ≫
       DerivedCategory.Q.map ((d.b.extension.mapHomologicalComplex (.up ℤ)).map f) := by
   unfold SheafOfModules.scalarPairComplexComparison
-  change d.b.derived.map (DerivedCategory.Q.map f) ≫
-      (d.b.derived.map (𝟙 _) ≫ _ ≫ 𝟙 _) =
-    (d.b.derived.map (𝟙 _) ≫ _ ≫ 𝟙 _) ≫ _
+  have h₁ (K : CochainComplex (ModuleRingedComparison.modules R Z) ℤ) :
+      (DerivedCategory.quotientCompQhIso _).inv.app K = 𝟙 _ := rfl
+  have h₂ (K : CochainComplex (ModuleRingedComparison.modules S Z) ℤ) :
+      (DerivedCategory.quotientCompQhIso _).hom.app K = 𝟙 _ := rfl
+  erw [h₁, h₁, h₂, h₂]
   erw [d.b.derived.map_id _, d.b.derived.map_id _]
-  simp only [Category.id_comp, Category.comp_id]
+  simp only [Category.id_comp]
+  erw [Category.comp_id, Category.comp_id]
   exact d.b.counit.naturality ((HomotopyCategory.quotient _ (.up ℤ)).map f)
 
 private theorem paste_total_path {𝒞 : Type*} [Category 𝒞]

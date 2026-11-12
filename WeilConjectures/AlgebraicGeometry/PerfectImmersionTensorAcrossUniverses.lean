@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackAcrossUniverses
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -17,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
 import WeilConjectures.AlgebraicGeometry.DerivedLocalizationTensorComparison
 import WeilConjectures.AlgebraicGeometry.DerivedQCohStandardAdjunction
 import WeilConjectures.AlgebraicGeometry.PerfectImmersionStandardPerfection
+import all Mathlib.Algebra.Homology.Localization
 
 /-! # The perfect immersion tensor formula in independent derived universes
 

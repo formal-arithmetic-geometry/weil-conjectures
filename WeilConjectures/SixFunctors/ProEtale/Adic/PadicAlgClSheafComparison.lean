@@ -94,7 +94,7 @@ instance mono_padicAlgClPresheafToAdicConstantSheaf :
     Mono (padicAlgClPresheafToAdicConstantSheaf X l) := by
   have (U : X.ProEtᵒᵖ) : Mono ((padicAlgClPresheafToAdicConstantSheaf X l).app U) :=
     (AddCommGrpCat.mono_iff_injective _).2 fun x y h ↦
-      ULift.ext _ _ (Subtype.ext (congrArg (fun z ↦ z.down.1) h))
+      ULift.ext (Subtype.ext (congrArg (fun z ↦ z.down.1) h))
   exact NatTrans.mono_of_mono_app _
 
 /-- `padicAlgClSheaf X ℓ ⟶ adicConstantSheaf ℓ X` is a monomorphism: sheafification preserves

@@ -161,6 +161,7 @@ lemma awayMap_awayAlgebraMap_apply {a : A} (ha : a ∈ I) {g : reesAlgebra I}
       awayAlgebraMap I x r :=
   awayMap_fromZeroRingHom (reesGrading I) hg hx ((reesGradingZero I) r)
 
+
 /-- The `Away.isLocalizationElem` of two degree-one Rees elements is the slope. -/
 lemma isLocalizationElem_eq_awaySlope {a b : A} (ha : a ∈ I) (hb : b ∈ I) :
     HomogeneousLocalization.Away.isLocalizationElem (reesX_mem I a ha) (reesX_mem I b hb) =

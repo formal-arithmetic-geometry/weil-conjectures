@@ -82,7 +82,7 @@ theorem freeSheafDualTranspose_component {X : Scheme.{u}} {I J : Type u}
     Functor.opMapBiproductIso, biproduct.uniqueUpToIso,
     biproduct.isoCoproduct_inv,
     SheafOfModules.ιFree, Category.assoc]
-  simp only [Sigma.ι_desc_assoc, biproduct.mapIso_inv, biproduct.ι_map_assoc,
+  simp only [Sigma.ι_comp_desc_assoc, biproduct.mapIso_inv, biproduct.ι_map_assoc,
     biproduct.ι_desc_assoc, Functor.opMapBicone_ι,
     biproduct.mapIso_hom, coproduct_projection]
   simp only [biproduct.map_π, biproduct.lift_π_assoc, Functor.opMapBicone_π]

@@ -9,6 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.CategoryTheory.Comma.Arrow
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumComparisonSourceTransport
 
 /-! # Pointwise conjugacy for termwise affine spectrum representatives
@@ -62,7 +64,7 @@ private theorem spectrum_stalkComparison_normalized
   simp only [Category.assoc] at ht''
   simp only [stalkComparison, comparisonIntoPullback, Category.assoc, Functor.map_comp]
   rw [← Functor.map_comp, ← Functor.map_comp, ← c.represents]
-  simp only [Functor.map_comp, IsIso.inv_hom_id_assoc]
+  simp only [cast_eq, Functor.map_comp, IsIso.inv_hom_id_assoc]
   rw [ht'']
 
 private theorem square_of_normalizations

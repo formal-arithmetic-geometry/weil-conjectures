@@ -35,7 +35,7 @@ private theorem small_pushforward_eq_pullback (X : Scheme.{u})
       (show AsSmall.up.obj Y ⟶ Z from ⟨b⟩)
     change S (show AsSmall.up.obj Y ⟶ AsSmall.up.obj W from ⟨f⟩)
     have he : (show AsSmall.up.obj Y ⟶ Z from ⟨b⟩) ≫ a = ⟨f⟩ :=
-      ULift.ext _ _ hab.symm
+      ULift.ext hab.symm
     exact he ▸ hh
   · intro hf
     exact ⟨AsSmall.up.obj Y, ⟨f⟩, 𝟙 _, hf, by simp⟩

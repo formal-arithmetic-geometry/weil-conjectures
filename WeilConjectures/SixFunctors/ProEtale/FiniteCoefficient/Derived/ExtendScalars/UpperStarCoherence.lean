@@ -278,7 +278,8 @@ private lemma leftDerived_hom_app_comp_aux {VY VZ VT WY WZ WT DY DZ DT D'Y D'Z D
     have h₉ := he K
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Category.assoc] at h₀ h₄ h₅ ⊢
-    dsimp at h₂ h₃ h₆ h₇
+    simp only [Functor.comp_map, Functor.comp_obj] at h₂ h₆ h₇
+    dsimp at h₃
     have h₅' := congrArg Lq₁.map h₅
     simp only [Functor.map_comp] at h₅'
     have hinv : (ET.mapHomotopyCategory c).map ((NatTrans.mapHomotopyCategory γR.hom c).app K) ≫

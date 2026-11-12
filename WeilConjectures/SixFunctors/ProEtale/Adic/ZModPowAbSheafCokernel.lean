@@ -68,7 +68,7 @@ theorem exists_isColimit_cokernelCofork_zmodPowAbSheafDiagram (n : ℕ) (Y : X.P
   have w : (((l ^ n : ℕ) : ℤ) • 𝟙 _) ≫ π = 0 := by
     refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun U ↦ ?_))
     ext x
-    refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
     have h : (((((l ^ n : ℕ) : ℤ) • 𝟙 _) ≫ π).hom.app U x) =
         π.hom.app U (((l ^ n : ℕ) : ℤ) • x) := rfl
     rw [h, hπ]
@@ -82,7 +82,7 @@ theorem exists_isColimit_cokernelCofork_zmodPowAbSheafDiagram (n : ℕ) (Y : X.P
     refine ⟨ULift.up ((⟨s, continuous_of_discreteTopology⟩ :
       C(ZMod (l ^ n), ZMod (l ^ (n + 1)))).comp x.down), ?_⟩
     rw [hπ]
-    exact ULift.ext _ _ (ContinuousMap.ext fun t ↦
+    exact ULift.ext (ContinuousMap.ext fun t ↦
       Function.surjInv_eq (ZMod.castHom_surjective hdvd) _)
   · have ht (t : _) : ZMod.castHom hdvd (ZMod (l ^ n)) (x.down t) = 0 :=
       congrArg (fun y : ULift.{u + 1} C(_, ZMod (l ^ n)) ↦ y.down t) ((hπ U x).symm.trans hx)
@@ -92,14 +92,14 @@ theorem exists_isColimit_cokernelCofork_zmodPowAbSheafDiagram (n : ℕ) (Y : X.P
     refine ⟨ULift.up ((⟨d, continuous_of_discreteTopology⟩ :
       C(ZMod (l ^ (n + 1)), ZMod (l ^ (n + 1)))).comp x.down), ?_⟩
     rw [hN]
-    refine ULift.ext _ _ (ContinuousMap.ext fun t ↦ ?_)
+    refine ULift.ext (ContinuousMap.ext fun t ↦ ?_)
     have hd : (((l ^ n : ℕ) : ℤ) • (ULift.up ((⟨d, continuous_of_discreteTopology⟩ :
         C(ZMod (l ^ (n + 1)), ZMod (l ^ (n + 1)))).comp x.down) :
           (((ProEt.topology X).overPullback Ab.{u + 1} Y).obj
             ((zmodPowAbSheafDiagram X l).obj (op (n + 1)))).obj.obj U)).down t =
         ((l ^ n : ℕ) : ℤ) • d (x.down t) := rfl
     rw [hd, zsmul_eq_mul, Int.cast_natCast]
-    simp only [d, dif_pos (ht t)]
+    simp only [d, dite_eq_left (ht t)]
     exact (ZMod.exists_mul_eq_of_castHom_eq_zero hdvd (ht t)).choose_spec
 
 /-- **An `ℓ`-adic tower of locally constant sheaves of rank one has a lattice which is locally

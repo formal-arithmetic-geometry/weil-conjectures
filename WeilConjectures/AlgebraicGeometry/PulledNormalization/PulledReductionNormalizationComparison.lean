@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Algebra.Homology.Localization
+import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionStrictTowerComparison
 public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 public import WeilConjectures.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
@@ -1192,7 +1194,12 @@ private theorem canonicalTranspose (T : Scheme.{t})
     (reductionDerivedChange T a)
     (complexCounitNat (reductionChange T a) (reductionDerivedChange T a)
       (reductionDerivedCounit T a)) (reductionDerivedCounit T a)
-    (fun P ↦ by simpa only [complexCounitNat_app] using (counit_eq _ _ _ P).symm) ad had
+    (fun P ↦ by
+      change _ ≫ 𝟙 _ = (reductionDerivedChange T a).map (𝟙 _) ≫ _
+      erw [(reductionDerivedChange T a).map_id, Category.id_comp, Category.comp_id]
+      simpa only [complexCounitNat_app] using
+        (counit_eq (reductionChange T a) (reductionDerivedChange T a)
+          (reductionDerivedCounit T a) P).symm) ad had
   have he : ad = pbcDerivedScalarAdjunction a := by
     unfold pbcDerivedScalarAdjunction
     with_unfolding_all
@@ -1708,7 +1715,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local instance_reducible] reductionChangeComplex QuotientCompatibility
-  Functor.mapHomologicalComplex
 
 attribute [local irreducible] proEtaleReductionPullbackInv
 
@@ -2231,15 +2237,16 @@ private theorem scalarCollapse_assoc (T : Scheme.{t}) (nrm : ScalarNormalization
   subst ab
   subst bc
   subst abc
-  simp only [eqToIso_refl, Iso.trans_refl, Iso.trans_hom, NatTrans.comp_app,
-    eqToIso.hom, eqToHom_app]
-  exact @Normalization.associative.{t + 1, t, t + 1, t + 2} T.ProEt inferInstance
+  simp only [eqToIso_refl, Iso.trans_refl]
+  have hh := @Normalization.associative.{t + 1, t, t + 1, t + 2} T.ProEt inferInstance
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T) inferInstance
     (WeilConjectures.integralCoefficientAbLocallyBijective.{t, t} T)
     (WeilConjectures.integralCoefficientAbSheafify.{t, t} T)
     (fun Z ↦ reductionModulesHasDerivedCategory T Z)
     (fun {Z Z' : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
       (f : Z ⟶ Z') ↦ scalarPresentation T f) nrm R S V W a b c K
+  simp only [eqToHom_refl, Category.comp_id] at hh
+  simpa only [scalarAssoc, scalarPresentation] using hh
 
 private theorem derivedCollapse_assoc (T : Scheme.{t}) (nrm : ScalarNormalization T)
     {R S V W : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}

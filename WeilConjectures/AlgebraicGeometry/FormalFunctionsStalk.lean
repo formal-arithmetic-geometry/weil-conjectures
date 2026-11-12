@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # The theorem on formal functions at a point of the base
 
@@ -39,6 +40,16 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
 
 namespace AlgebraicGeometry
+
+private theorem completion_congr_eval {A M N : Type*} [CommRing A]
+    [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
+    (I : Ideal A) (a : M ≃ₗ[A] N) (n : ℕ) (x : AdicCompletion I M) (z : M)
+    (hx : AdicCompletion.eval I M n x = Submodule.Quotient.mk z) :
+    AdicCompletion.eval I N n (AdicCompletion.congr I a x) =
+      Submodule.Quotient.mk (a z) := by
+  change a.toLinearMap.reduceModIdeal (I ^ n) (AdicCompletion.eval I M n x) = _
+  rw [hx]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -172,28 +183,21 @@ theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f]
     simp only [ConcreteCategory.comp_apply] at hg
     change (limit.π S (op n)) (g.inv (d.hom (e.hom (c.hom x)))) =
       (limit.π (S ⋙ R) (op n)) (d.hom (e.hom (c.hom x))) at hg
-    rw [hg]
     have hd := congrArg (fun k ↦ k (e.hom (c.hom x)))
       (HasLimit.isoOfNatIso_hom_π b (op n))
     simp only [ConcreteCategory.comp_apply] at hd
-    rw [hd]
     have hh := congrArg (fun k ↦ k (c.hom x)) (he n)
     simp only [ConcreteCategory.comp_apply] at hh
     change (limit.π (formalCompletionSystem J F' ⋙ C) (op n))
       (e.hom (c.hom x)) = q n (AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x)) at hh
-    rw [hh]
     have hc : AdicCompletion.eval I (C.obj F') (n + 1) (c.hom x) =
         Submodule.Quotient.mk (a z) := by
-      change a.toLinearMap.reduceModIdeal (I ^ (n + 1))
-        (AdicCompletion.eval I (formalFunctionsStalk f y F p) (n + 1) x) = _
-      rw [hx]
-      rfl
-    rw [hc]
+      exact completion_congr_eval I a (n + 1) x z hx
     have hqn := LinearMap.congr_fun (hq n) (a z)
     change q n (Submodule.Quotient.mk (a z)) =
       (C.map (formalModuleQuotientπ J (n + 1) F')) (a z) at hqn
-    rw [hqn]
-    exact (hb n z).symm
+    exact hg.trans (hd.trans ((congrArg (b.hom.app (op n))
+      (hh.trans ((congrArg (q n) hc).trans hqn))).trans (hb n z).symm))
   have hcomp : ∀ (n : ℕ) (z : formalFunctionsStalk f y F p),
       (limit.π S (op n)) (v.hom (AdicCompletion.of I _ z)) = θ n z := by
     intro n z

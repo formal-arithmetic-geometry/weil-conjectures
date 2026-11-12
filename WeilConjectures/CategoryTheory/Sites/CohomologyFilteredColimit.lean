@@ -449,19 +449,19 @@ lemma H_map_isColimit_succ_of_shortExact {D I Q : K ⥤ Sheaf J AddCommGrpCat.{m
     have hm : Sheaf.H.map (cQ.ι.app m) n
         (Sheaf.H.map (Q.map a) n w - Sheaf.H.map (Q.map b) n (Sheaf.H.map (π.app k₁) n v₁)) =
           0 := by
-      rw [map_sub, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
-        ← Sheaf.H.map_comp_apply, cQ.w a, cQ.w b, ← hg, Sheaf.H.map_comp_apply]
-      exact sub_eq_zero.2 hv.symm
+      simp only [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply,
+        Category.assoc, cQ.w, ← hg]
+      rw [Sheaf.H.map_comp_apply]
+      exact hv.symm
     obtain ⟨k', a', ha'⟩ := injQ m _ hm
     refine ⟨k', a ≫ a', ?_⟩
     change Sheaf.H.map (shortComplexAppMap ι π h (a ≫ a')).τ₁ (n + 1) _ = 0
     rw [Sheaf.H.map_δSucc (hS k) (hS k') (shortComplexAppMap ι π h (a ≫ a')) n w]
     change Sheaf.H.δSucc (hS k') n (Sheaf.H.map (Q.map (a ≫ a')) n w) = 0
-    rw [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
-      ← Q.map_comp, ← Q.map_comp, ← Sheaf.H.map_comp_apply, ← π.naturality,
-      Sheaf.H.map_comp_apply] at ha'
-    rw [ha']
-    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, rfl⟩
+    simp only [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply,
+      Category.assoc, ← Q.map_comp, ← π.naturality] at ha'
+    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2
+      ⟨_, by simpa only [Sheaf.H.map_comp_apply] using ha'.symm⟩
 
 variable [∀ V : C, HasFiniteProducts (Over V)] {T : C}
 

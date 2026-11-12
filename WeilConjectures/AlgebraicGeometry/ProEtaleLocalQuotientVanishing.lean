@@ -161,7 +161,7 @@ theorem localSubobjectQuotientMap_zero_of_compatible
   intro k
   change (q i ≫ B.map (localSubobjectQuotientMap X Q U L q)) ≫
     B.map (Pi.π D k.as) = 0 ≫ B.map (Pi.π D k.as)
-  rw [Category.assoc, ← B.map_comp, localSubobjectQuotientMap, Pi.lift_π, zero_comp]
+  rw [Category.assoc, ← B.map_comp, localSubobjectQuotientMap, Pi.lift_comp_π, zero_comp]
   let j := k.as
   let p := pullback.fst (U.f i) (U.f j)
   let s := pullback.snd (U.f i) (U.f j)

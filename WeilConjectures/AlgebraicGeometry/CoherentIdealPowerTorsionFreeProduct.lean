@@ -42,6 +42,13 @@ private theorem product_qc {X : Scheme.{u}} {K : X.Modules}
   exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
     (Abelian.imageIsoImage a) hi
 
+local instance {X : Scheme.{u}} (H : X.Modules)
+    {V W : X.Opens} (h : V ≤ W) :
+    SMul ((SheafOfModules.unit X.ringCatSheaf).val.obj (op V))
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map (homOfLE h).op).hom).obj
+        (H.val.obj (op V))) :=
+  inferInstanceAs (SMul (X.sheaf.obj.obj (op V)) (H.val.obj (op V)))
+
 /-- A sufficiently high ideal-power product has no ideal-power torsion,
 and its inclusion is bijective on sections over the ideal complement.
 
