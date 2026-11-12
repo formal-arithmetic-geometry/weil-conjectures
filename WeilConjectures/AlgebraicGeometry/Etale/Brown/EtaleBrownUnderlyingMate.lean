@@ -337,7 +337,8 @@ theorem etaleBrownOrdinaryRestrictionCube
             (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).map
       ((RV.val.ordinaryRestriction h).hom.app M) := by
   simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Category.assoc] using
+    Functor.comp_obj, Category.assoc, brownMateRestriction, coefficientRestriction,
+    coefficientQuotientMap, strictEtaleBrownRingMap] using
     (brown_underlying_ordinary_cube (strictEtaleBrownRing O t n)
       (strictEtaleBrownRing O t m) (strictEtaleBrownRingMap O t h) g
       (A.right m) (A.right n)
