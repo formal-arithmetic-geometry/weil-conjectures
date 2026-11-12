@@ -51,7 +51,7 @@ private theorem counit_restriction_pasting
   simp only [← S.map_comp_assoc]
   rw [hm]
   simp only [Functor.map_comp, Category.assoc]
-  rw [ho, reassoc_of% hn, hq]
+  rw [ho, reassoc_of% hn, reassoc_of% hq]
 
 private theorem counit_tensor_pasting
     {C D H K : Type*} [Category C] [Category D] [Category H] [Category K]
@@ -174,9 +174,11 @@ private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
       (residueExchangeUpperStarCounit
         (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app TP ≫
       DerivedCategory.Qh.map pH.inv := by
-    exact counit_inverse_square
+    refine counit_inverse_square
       (((residueExchangePullComparisons ℓ E).pull f).app (DerivedCategory.Qh.obj P))
-      (DerivedCategory.Qh.mapIso pH) _ _ _ _ hm
+      (DerivedCategory.Qh.mapIso pH) _ _ _ _ ?_
+    unfold residueExchangePullComparisons
+    exact hm
   have ho := SX.mapDerivedCategoryFactorsh.hom.naturality pH.inv
   have hq := restrict_pull_fac ℓ E f TP
   have hn := (residueExchangeRestrictPullIso ℓ E f).hom.naturality
@@ -184,7 +186,7 @@ private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [Functor.comp_map] at hn ho
   have h := counit_restriction_pasting (residueExchangeRestriction ℓ E X)
     _ _ _ _ _ _ _ _ _ _ _ _ _ hmi ho hn.symm hq
-  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc] using h
+  simpa only [pH, Functor.comp_map, Functor.map_comp, Category.assoc] using h
 
 private theorem tensor_counit_app (T : Scheme.{u})
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
@@ -319,14 +321,12 @@ theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     (integralReductionMap ℓ E) f P
   unfold residueExchangeTensorModelMap Functor.tensorModelMapWith residueExchangeTensorCounit
   dsimp only [id]
-  refine counit_tensor_pasting
+  dsimp only at ho
+  exact counit_tensor_pasting
     (residueExchangeUpperStar (integralCoeff ℓ E) f) DerivedCategory.Qh
     (((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh
     (residueExchangeUpperStarCounit (integralCoeff ℓ E) f)
-    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ?_ ?_ ?_ ?_
-  · exact tensor_counit_app ℓ E X _
-  · exact tensor_counit_app ℓ E Y P
-  · exact h
-  · dsimp only at ho
-    simpa only [Category.assoc] using ho
+    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+    (tensor_counit_app ℓ E X _) (tensor_counit_app ℓ E Y P) h
+    (by simpa only [Category.assoc] using ho)
 end AlgebraicGeometry.ProEtale.CondensedRing
