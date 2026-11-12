@@ -113,6 +113,7 @@ noncomputable def exceptionalProjectionMorphismOfCompactificationNatTrans
   app B := exceptionalProjectionMorphismOfCompactification Λ c K B
   naturality _ _ h := exceptionalProjectionMorphismOfCompactification_natural_right Λ c K h
 
+set_option trace.profiler true in
 set_option synthInstance.maxSize 4096 in
 set_option synthInstance.maxHeartbeats 1000000 in
 -- the instance problems for the composite functors are large
