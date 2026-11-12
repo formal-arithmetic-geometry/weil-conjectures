@@ -284,8 +284,6 @@ variable {Fc Cc Xc Pc Fb Cb Yb Pb : Over (Spec (.of k))}
   {ιb : Fb ⟶ Cb} {b : Cb ⟶ Pb} {db : Fb ⟶ Yb} {Δb : Yb ⟶ Pb}
   {g : Cc ⟶ Cb} {q : Pc ⟶ Pb} {f : Xc ⟶ Yb} {h : Fc ⟶ Fb}
 
-set_option maxHeartbeats 1000000 in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- **Exchange of the traces of two squares along a map of squares**, on compactly supported
 direct images: for squares `ιc ≫ c = dc ≫ Δc` and `ιb ≫ b = db ≫ Δb` and a map
 `(h, g, f, q)` between them, the two maps `Rb_! Rg_! Rιc_! ω ⟶ RΔb_! ω` built from the
@@ -341,38 +339,24 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
   have n₄ := (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.naturality
     (lowerShriekDualizingComplexTrace ℓ h)
   simp only [Functor.comp_map] at n₁ n₃ n₄
-  rw [reassoc_of% n₁, reassoc_of% n₂, reassoc_of% n₃, ← Functor.map_comp, T₁]
+  simp only [reassoc_of% n₁, reassoc_of% n₂, reassoc_of% n₃]
+  simp only [← (boundedConstructibleLowerShriek ℓ Δb).map_comp
+    ((boundedConstructibleLowerShriek ℓ f).map (lowerShriekDualizingComplexTrace ℓ dc))
+    (lowerShriekDualizingComplexTrace ℓ f), T₁]
   simp only [Functor.map_comp, Category.assoc]
-  have n₄' : (boundedConstructibleLowerShriek ℓ b).map
-      ((boundedConstructibleLowerShriek ℓ ιb).map
-        (lowerShriekDualizingComplexTrace ℓ h)) ≫
-      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.app (dualizingComplex' ℓ Fb) ≫
-      (boundedConstructibleLowerShriek ℓ Δb).map
-        (lowerShriekDualizingComplexTrace ℓ db) =
-      (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ wb).hom.app
-          ((boundedConstructibleLowerShriek ℓ h).obj
-            (dualizingComplex' ℓ Fc)) ≫
-        (boundedConstructibleLowerShriek ℓ Δb).map
-          ((boundedConstructibleLowerShriek ℓ db).map
-            (lowerShriekDualizingComplexTrace ℓ h)) ≫
-        (boundedConstructibleLowerShriek ℓ Δb).map
-          (lowerShriekDualizingComplexTrace ℓ db) := by
-    rw [← Category.assoc, n₄, Category.assoc]
-  rw [n₄', ← Functor.map_comp _ ((boundedConstructibleLowerShriek ℓ db).map _), T₂]
+  simp only [reassoc_of% n₄]
+  simp only [← (boundedConstructibleLowerShriek ℓ Δb).map_comp
+    ((boundedConstructibleLowerShriek ℓ db).map (lowerShriekDualizingComplexTrace ℓ h))
+    (lowerShriekDualizingComplexTrace ℓ db), T₂]
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, Iso.trans_hom, Iso.symm_hom,
     eqToIso.hom, NatTrans.comp_app, eqToHom_app, Functor.map_comp, Category.assoc]
-  rw [lowerShriekComp_hom_app_map_inv_app_assoc, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ
-      wc,
-    reassoc_of% (boundedConstructibleLowerShriekComp_padicAlgCl_assoc ℓ dc Δc q
-      (dualizingComplex' ℓ Fc)), Iso.hom_inv_id_app_assoc,
-    lowerShriekComp_hom_app_comp_eqToHom_assoc ℓ wq, lowerShriekComp_hom_app_comp_hom_app_assoc,
-    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ whd,
+  simp only [lowerShriekComp_hom_app_map_inv_app_assoc,
+    lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ wc,
+    Iso.hom_inv_id_app_assoc, lowerShriekComp_hom_app_comp_eqToHom_assoc ℓ wq,
+    lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ whd,
     eqToHom_comp_lowerShriekComp_inv_app_assoc ℓ wgb,
     lowerShriek_map_lowerShriekComp_hom_app_comp_inv_app_assoc,
-    lowerShriekComp_hom_app_comp_eqToHom_assoc ℓ wb, lowerShriekComp_hom_app_comp_hom_app_assoc,
-    ← Functor.map_comp_assoc _ ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ h db).hom.app _)]
-  simp only [Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+    lowerShriekComp_hom_app_comp_eqToHom_assoc ℓ wb]
   rw [lowerShriek_map_lowerShriekComp_inv_app_comp_eqToHom_comp_inv_app_assoc ℓ ιc g b wh]
   simp only [eqToHom_trans_assoc]
 
