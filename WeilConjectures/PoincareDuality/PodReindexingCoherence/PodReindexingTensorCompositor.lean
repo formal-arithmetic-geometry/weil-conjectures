@@ -282,6 +282,8 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   Functor.mapHomologicalComplexUpToQuasiIso Functor.mapHomologicalComplexUpToQuasiIsoFactors
   CoefficientClosedStructure.tensor SheafOfModules.monoidalCategory
   podReindexingHomModel homComplexFunctor homComplexπ derivedInternalHomOfUniverses
+attribute [local semireducible] podReindexingFunctor podReindexingComplexFunctor
+  podReindexingDerivedFunctor podReindexingDerivedFactors
 
 -- Keep the coefficient and site presentations shared during this comparison.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
