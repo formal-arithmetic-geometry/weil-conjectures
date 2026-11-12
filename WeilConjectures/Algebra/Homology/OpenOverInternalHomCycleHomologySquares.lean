@@ -135,6 +135,7 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   let : PreservesFiniteColimits F := comp_preservesFiniteColimits R B
   let : F.PreservesZeroMorphisms := moduleOpenOver_preservesZeroMorphisms X V W
   let : F.Additive := Functor.additive_of_preserves_binary_products F
+  have : F.PreservesHomology := inferInstance
   let A := (moduleOpenOverComplexFunctor X V W).obj T
   let K := (moduleOpenOverComplexFunctor X V W).obj J
   let z (L : CochainComplex X.Modules ℤ) (i : ℤ) :
@@ -149,12 +150,10 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (L.sc i).mapCyclesIso_hom_iCycles F
   have zp (L : CochainComplex X.Modules ℤ) (i : ℤ) :
       (z L i).inv ≫ F.map (L.homologyπ i) ≫ (d L i).hom =
-        ((moduleOpenOverComplexFunctor X V W).obj L).homologyπ i := by
-    have h := congrArg (fun f ↦ f ≫ ((L.sc i).mapHomologyIso F).inv)
-      ((L.sc i).homologyπ_mapHomologyIso_hom F).symm
-    simp only [Category.assoc] at h
-    erw [Iso.hom_inv_id, Category.comp_id] at h
-    exact h
+        ((moduleOpenOverComplexFunctor X V W).obj L).homologyπ i :=
+    (Category.assoc _ _ _).symm.trans
+      (((L.sc i).mapHomologyIso F).comp_inv_eq.mpr
+        ((L.sc i).homologyπ_mapHomologyIso_hom F).symm)
   let H {M M' N N' : SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)}
       (a : M ≅ M') (b : N ≅ N') :
       SheafOfModules.homObj (R := V.toScheme.sheaf.over W) M N ≅
@@ -180,13 +179,13 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   let v := e (T.cycles (-n)) (J.homology 0) ≪≫ H (z T (-n)) (d J 0)
   refine ⟨b, s, t, v, ?_, ?_, ?_, ?_⟩
   · dsimp only [t, H, Iso.trans_hom, Iso.refl_hom]
-    rw [← Category.assoc, he]
+    rw [← Category.assoc, he _ _ _ _ (T.iCycles (-n)) (𝟙 (J.X 0))]
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp]
     congr 2
     exact zi T (-n)
   · dsimp only [t, s, H, Iso.trans_hom, Iso.refl_hom]
-    rw [← Category.assoc, he]
+    rw [← Category.assoc, he _ _ _ _ (𝟙 (T.cycles (-n))) (J.iCycles 0)]
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
@@ -195,14 +194,14 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     erw [Category.comp_id]
     exact zi J 0
   · dsimp only [v, s, H, Iso.trans_hom]
-    rw [← Category.assoc, he]
+    rw [← Category.assoc, he _ _ _ _ (𝟙 (T.cycles (-n))) (J.homologyπ 0)]
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
     apply (cancel_epi (z J 0).inv).1
     simpa only [Category.assoc, Iso.inv_hom_id_assoc] using zp J 0
   · dsimp only [v, b, H, Iso.trans_hom]
-    rw [← Category.assoc, he]
+    rw [← Category.assoc, he _ _ _ _ (T.homologyπ (-n)) (𝟙 (J.homology 0))]
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
