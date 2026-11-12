@@ -179,14 +179,26 @@ private theorem reindex_normalized_aux {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
     congr 1
     exact (limMap_π _ _).symm
   rw [← Category.assoc] at hk2
+  let q := ((coefficientSequenceRestriction l E X).map (e.hom.app N)).app (op n)
+  let t := ((integralTowerInverseImageUnit l E g).hom.app (MY.tensor.obj N)).app (op n)
   have hs := congrArg (fun k ↦ k.val.app (op U) x) hk2
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app] at hs
-  erw [ConcreteCategory.comp_apply, unit_projection_section l E X MX,
-    restriction_map_section l E X, ConcreteCategory.comp_apply, inverseImage_map_section,
-    unit_projection_section l E Y MY N n (op ((proEtaleIsoPostcompose g).obj U)) x,
-    (integralTowerInverseImageUnit_existsUnique l E g).exists.choose_spec] at hs
-  unfold integralComparisonRestrictedSection at hs
-  exact unaryIso_inv_section (e.app N) (op (n, U)) _ _ ((cast_inj _).mp hs)
+  change q.val.app (op U) _ = t.val.app (op U) _ at hs
+  have hX := (congrArg (fun z ↦ q.val.app (op U) z)
+    (unit_projection_section l E X MX ((inverseImageIntegralModules l E g).obj N)
+      n (op U) x)).trans
+    (restriction_map_section l E X (e.hom.app N) n (op U)
+      (PodQuotientTransition.unitSection l E X MX
+        ((inverseImageIntegralModules l E g).obj N) n (op U) x))
+  have hY := congrArg (fun z ↦ t.val.app (op U) z)
+    ((inverseImage_map_section l E g (MY.adjunction.unit.app N ≫
+      limit.π ((coefficientSequenceRestriction l E Y).obj (MY.tensor.obj N)) (op n)) U x).trans
+        (unit_projection_section l E Y MY N n (op ((proEtaleIsoPostcompose g).obj U)) x))
+  have hT := (integralTowerInverseImageUnit_existsUnique l E g).exists.choose_spec
+    (MY.tensor.obj N) n U
+    (PodQuotientTransition.unitSection l E Y MY N n (op ((proEtaleIsoPostcompose g).obj U)) x)
+  have h := hX.symm.trans (hs.trans (hY.trans hT))
+  exact unaryIso_inv_section (e.app N) (op (n, U)) _ _ ((cast_inj _).mp h)
+
 
 
 /-- Unit generators are compatible with an equality of modules.
@@ -239,9 +251,24 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     (m : M.val.obj (op (n, V))) :
     r • @id (((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) m =
       @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) r • m := by
-  exact (unaryPushforward_smul
+  exact (unaryPushforward_smul (F := Prod.sectR n W.ProEt)
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m).trans
       (congrArg (fun b ↦ b • m) (congrArg (fun f ↦ f r) (evaluationRing_app l E W n V)))
+
+-- Normalize the tensor before placing it inside the reindexing composite.
+private theorem unitSection_tensor_smul (W : Scheme.{u})
+    (M : CompletionUnit.OrdinaryModel l E W) (N : scalarReductionSource l E W)
+    (n : ℕ) (V : W.ProEt)
+    (a : (integralCoefficientCommRingSheaf l E W n).obj.obj (op V))
+    (x : N.val.obj (op V)) :
+    ((M.evaluation n).inv.app N).val.app (op V)
+        (unrestrictedTowerTensorSection l E W n N (op V) a x) =
+      @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) a •
+        PodQuotientTransition.unitSection l E W M N n (op V) x := by
+  let f := ((M.evaluation n).inv.app N).val.app (op V)
+  exact (congrArg (fun z ↦ f z) (isoReduction_tensor_smul l E W n N (op V) a x)).trans
+    ((f.hom.map_smul a (unrestrictedTowerTensorSection l E W n N (op V) 1 x)).trans
+      (evaluation_smul l E W n (M.tensor.obj N) V a _))
 
 /-- The sequence inverse-image generator is semilinear.
 Source: Stacks 03D6 and 0941. -/
@@ -288,6 +315,30 @@ private theorem sequenceRing_comma {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n
   rw [sequenceRing_vertical]
   exact congrArg (fun f ↦ f.hom.app (op U) a) (towerFiniteCoefficientMap_eq l E g n)
 
+private theorem unaryGenerator_comma_smul {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (N : coefficientSequenceModules l E Y) (n : ℕ) (U : X.ProEt)
+    (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj
+      (op ((proEtaleIsoPostcompose g).obj U)))
+    (x : N.val.obj (op (n, (proEtaleIsoPostcompose g).obj U))) :
+    ((integralComparisonSequencePullback l E g).obj N).val.map
+        (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+        (integralComparisonSequenceGenerator l E g N n
+          ((proEtaleIsoPostcompose g).obj U) (a • x)) =
+      (isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a •
+        ((integralComparisonSequencePullback l E g).obj N).val.map
+          (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+          (integralComparisonSequenceGenerator l E g N n
+            ((proEtaleIsoPostcompose g).obj U) x) := by
+  let P := ((integralComparisonSequencePullback l E g).obj N).val
+  let f := (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+  exact (congrArg (fun z ↦ P.map f z)
+    (generator_smul l E g N n ((proEtaleIsoPostcompose g).obj U) a x)).trans
+      ((P.map_smul f _ _).trans
+        (congrArg (fun b ↦ b • P.map f
+          (integralComparisonSequenceGenerator l E g N n
+            ((proEtaleIsoPostcompose g).obj U) x)) (sequenceRing_comma l E g n U a)))
+
 set_option profiler true in
 -- Scalar linearity of every map involved, followed by the unit normalization.
 /-- A unit-normalized reindexing comparison is fixed on every scalar tensor generator.
@@ -314,14 +365,20 @@ theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
           (op U) ((isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
             (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app
               (op U) a) x) := by
-  have hsY := isoReduction_tensor_smul l E Y n N (op ((proEtaleIsoPostcompose g).obj U)) a x
-  have hsX := isoReduction_tensor_smul l E X n ((isoReductionIntegralInverse l E g).obj N) (op U)
-    ((isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
-      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a) x
-  rw [hsY, hsX, map_smul, map_smul]
-  erw [evaluation_smul l E Y n (MY.tensor.obj N), evaluation_smul l E X n]
-  erw [generator_smul, PresheafOfModules.map_smul, map_smul, hβ N n U x,
-    sequenceRing_comma]
-  rfl
+  let P := ((integralComparisonSequencePullback l E g).obj (MY.tensor.obj N)).val
+  let f := (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+  let k := (β.hom.app N).val.app (op (n, U))
+  let b := (isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
+    (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a
+  have hY := unitSection_tensor_smul l E Y MY N n ((proEtaleIsoPostcompose g).obj U) a x
+  have hX := unitSection_tensor_smul l E X MX ((isoReductionIntegralInverse l E g).obj N)
+    n U b x
+  exact (congrArg (fun z ↦ k (P.map f
+    (integralComparisonSequenceGenerator l E g (MY.tensor.obj N) n
+      ((proEtaleIsoPostcompose g).obj U) z))) hY).trans
+    ((congrArg (fun z ↦ k z) (unaryGenerator_comma_smul l E g (MY.tensor.obj N) n U a
+      (PodQuotientTransition.unitSection l E Y MY N n
+        (op ((proEtaleIsoPostcompose g).obj U)) x))).trans
+      ((k.hom.map_smul b _).trans ((congrArg (fun z ↦ b • z) (hβ N n U x)).trans hX.symm)))
 
 end WeilConjectures.PodReductionRepresentatives
