@@ -58,6 +58,11 @@ private theorem schemeCompUnit_app {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶
       (Scheme.Modules.pushforward t).rightDerivedFunctor.map
         ((Scheme.Modules.pushforward s).rightDerivedFunctorUnit.app K) := by
   exact compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K
+
+private theorem schemeNormalizedDirectImageCompIso_eq {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
+    schemeNormalizedDirectImageCompIso s t =
+      Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
+        s.toLRSHom.toShHom t.toLRSHom.toShHom) := rfl
 -- The chosen composition comparison unfolds the two module-category presentations.
 /-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
 Source: Stacks Project, Cohomology, Tag 0D5T.
@@ -69,6 +74,7 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
+  rw [schemeNormalizedDirectImageCompIso_eq]
   exact (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       A.toRingedSpace B.toRingedSpace C.toRingedSpace
