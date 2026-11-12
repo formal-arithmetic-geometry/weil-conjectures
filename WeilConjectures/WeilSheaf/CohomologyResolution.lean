@@ -68,7 +68,6 @@ end ProEtaleWeilSheaf
 
 namespace ProEtale
 
-set_option profiler true in
 /-- Global sections identify the Frobenius from a commuting square with the structure map
 of the original sheaf. -/
 lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
@@ -82,6 +81,8 @@ lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
       (adicLowerStarCompGlobalSectionsIso l hW).inv).app X =
       (adicLowerStarCompGlobalSectionsIso l hZ).inv.app X.carrier ≫
         (adicGlobalSections l Z).map X.str.hom := by
+  -- Keep the comparison at the adic level, so the kernel does not have to unfold the
+  -- module pushforward to compare its underlying sheaf maps.
   have hnat := (adicLowerStarCompGlobalSectionsIso l g).hom.naturality X.str.hom
   rw [Functor.comp_map] at hnat
   rw [IsoAlgebra.frobeniusNatTrans_app, Functor.map_comp]
@@ -111,7 +112,6 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option profiler true in
 omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
