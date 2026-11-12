@@ -90,12 +90,12 @@ lemma isIso_map_homEquiv_counit_tensor_of_isDualizable
       (Functor.OplaxMonoidal.δ F (G.obj (F.obj B)) (G.obj A) ≫
         (adj.counit.app (F.obj B) ⊗ₘ adj.counit.app A)))) := by
   have := adj.isIso_leftProjectionMorphism_of_isDualizable hB A
-  have : IsIso (H.map (adj.unit.app B ▷ G.obj A)) := by
+  have h₁ : IsIso (H.map (adj.unit.app B ▷ G.obj A)) := by
     rw [Functor.Monoidal.map_whiskerRight]
     infer_instance
   have h := H.map_isIso (adj.leftProjectionMorphism B A)
   rw [← adj.whiskerRight_unit_comp_homEquiv B A, Functor.map_comp] at h
-  exact IsIso.of_isIso_comp_left (H.map (adj.unit.app B ▷ G.obj A)) _
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ h₁ h
 
 end Adjunction
 
