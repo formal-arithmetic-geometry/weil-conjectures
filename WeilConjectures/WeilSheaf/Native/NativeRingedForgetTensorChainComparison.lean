@@ -23,10 +23,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
 set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborate the two site tensors through their comparison APIs.
-set_option maxHeartbeats 1200000 in
--- The independently chosen site tensors require large definitional equalities.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
@@ -57,11 +53,6 @@ structure NativeRingedForgetTensorChainComparison where
         (α_ (F.obj P) (F.obj Q) (F.obj N)).hom
 
 set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborate the two site tensors through their comparison APIs.
-set_option maxHeartbeats 1200000 in
--- The independently chosen site tensors require large definitional equalities.
--- Elaborate the two site tensors through their comparison APIs.
 /-- Restriction has the comparison obtained by summing its underived tensorators.
 Its summand equations determine it uniquely.
 Source: Stacks 06YN and 0FPT
