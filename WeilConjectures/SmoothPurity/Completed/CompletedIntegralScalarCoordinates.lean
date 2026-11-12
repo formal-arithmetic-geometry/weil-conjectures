@@ -102,8 +102,9 @@ theorem integralOrdinaryScalar_coordinates :
         eqToHom (hobj₀ M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
           eqToHom (hobj₀ N).symm := by
     simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
   obtain ⟨-, -, hO⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
-  obtain ⟨a, ha⟩ := hO (SheafOfModules.changeOfRingsFunctor φ) hobj₀ hmap₀
+  obtain ⟨a, ha⟩ := hO (SheafOfModules.changeOfRingsFunctor φ) hobj₀ (fun f ↦ hmap₀ f)
   obtain ⟨d, Φ, κ, hκ, hκc, -, b, hb, hbasis, htrace, -⟩ :=
     integralCompletedScalarMap_frobeniusSystem_trace l E L ι Y
   obtain ⟨e⟩ := completedIntegralFiniteFree.{u, u} l E Y L ι φ
