@@ -145,7 +145,6 @@ theorem directImage_augmentation_pullReduction_coherence :
     have hfac := (pull l E f).mapDerivedCategoryFactors_hom_naturality
       ((strictAugmentation l E Y).app P)
     dsimp only [dpull]
-    simp only [Category.assoc]
     rw [reassoc_of% hfac, ← Functor.map_comp_assoc]
     have hinr := directImage_strictPullReduction_inr l E f P
     change ((pull l E f).mapHomologicalComplex (.up ℤ)).map
