@@ -177,6 +177,7 @@ private noncomputable abbrev cochainMap
       simp [map_add, map_sum, map_zsmul, Rep.hom_comm_apply])
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The explicit complexes and coefficient-object tuple need additional elaboration fuel.
 /-- Continuous inhomogeneous cochains carry a short exact sequence of discrete continuous
 representations to a short exact sequence of complexes. The equivalences `e` identify
