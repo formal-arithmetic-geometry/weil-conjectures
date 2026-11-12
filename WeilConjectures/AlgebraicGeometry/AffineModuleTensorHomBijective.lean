@@ -63,9 +63,6 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-set_option maxHeartbeats 1000000 in
-set_option trace.profiler true in
--- Comparing the composite scalar restrictions unfolds three module pushforwards.
 /-- The canonical tensor-unit map induces a Hom bijection for the two scalar extensions.
 Source: Stacks Project, Tags 01SB (elucidation), 008A and 008Y.
 (blueprint: lem-sc-affine-module-tensor-hom-bijective).
@@ -168,8 +165,9 @@ theorem affine_module_tensor_hom_bijective
           Iso.symm_inv, Iso.refl_hom, Category.comp_id,
           Category.assoc]
         rfl
-      rw [heε, hz₀]
-      erw [← hH G W p]
+      refine (congrArg (fun q ↦ q.val.app W p) heε).trans (hz₀.trans ?_)
+      refine (congrArg ((eqToHom (hobj G).symm ≫ a).val.app W)
+        (hH G W p).symm).trans ?_
       change ((eqToHom (hobj G) ≫ eqToHom (hobj G).symm ≫ a).val.app W)
         ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = _
       simp only [← Category.assoc, eqToHom_trans, eqToHom_refl, Category.id_comp]
@@ -184,34 +182,38 @@ theorem affine_module_tensor_hom_bijective
         Category.assoc]
       rfl
     change (φ G _ (et (eε a))).val.app V g = _
-    rw [evalφ, het]
+    refine (evalφ G _ (et (eε a)) V g).trans ?_
     have hq₀ := evalt (I G) ((SheafOfModules.restrictScalars (𝓻 ε)).obj F)
       (eqToHom (pobj G).symm ≫ eε a) W
       ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)
     change (adjt.homEquiv (I G) _
       (eqToHom (qt (I G)) ≫ eqToHom (pobj G).symm ≫ eε a)).val.app W _ = _ at hq₀
-    erw [hq₀]
+    refine (congrArg (fun q ↦ q.val.app W _) het).trans (hq₀.trans ?_)
     change (eε a).val.app W ((eqToHom (pobj G).symm).val.app W _) = _
-    erw [← hP G V g]
+    refine (congrArg (fun p ↦ (eε a).val.app W ((eqToHom (pobj G).symm).val.app W p))
+      (hP G V g).symm).trans ?_
     change (eε a).val.app W
       ((eqToHom (pobj G) ≫ eqToHom (pobj G).symm).val.app W
         ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g))) = _
     simp only [eqToHom_trans, eqToHom_refl]
     change (eε a).val.app W
       ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g)) = _
-    rw [hz]
+    refine (hz W _).trans ?_
     change a.val.app W ((γ.app G).val.app W
       ((κ.inv.app G ≫ κ.hom.app G).val.app W
         (((adj₀).unit.app ((S).obj G)).val.app V g))) = _
-    rw [κ.inv_hom_id_app]
-    have hb := congrArg (fun q ↦ q.val.app V g) (hβ G)
+    have hk := congrArg (fun q ↦ q.val.app W
+      (((adj₀).unit.app ((S).obj G)).val.app V g)) (κ.inv_hom_id_app G)
+    refine (congrArg (fun p ↦ a.val.app W ((γ.app G).val.app W p)) hk).trans ?_
+    have hb := hβ G
     rw [Adjunction.homEquiv_unit] at hb
+    have hb := congrArg (fun q ↦ q.val.app V g) hb
     change (β.app G).val.app V g =
       (γ.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g) at hb
     change a.val.app W
       ((γ.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g)) =
       a.val.app W ((β.app G).val.app V g)
-    rw [hb]
+    exact congrArg (a.val.app W) hb.symm
   have heq : (fun a : H.obj G ⟶ F ↦ β.app G ≫ (R).map a) = e := by
     funext a
     exact (he a).symm
