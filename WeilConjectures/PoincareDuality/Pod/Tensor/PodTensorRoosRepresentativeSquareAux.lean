@@ -375,6 +375,24 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
     ObjectProperty.lift, ObjectProperty.ι_obj] at finish hc ⊢
   have final := finish.trans hc
+  run_tac
+    let target ← Lean.Elab.Tactic.getMainTarget
+    let actual := (← Lean.Meta.getLocalDeclFromUserName `final).type
+    let mut work := #[(actual, target, "eq")]
+    let mut differences := 0
+    for _ in [:1000] do
+      if work.isEmpty || differences >= 20 then break
+      let (a, b, path) := work.back!
+      work := work.pop
+      let a := a.consumeMData
+      let b := b.consumeMData
+      if a == b then continue
+      if a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
+        Lean.logInfo m!"difference {path}: {a.getAppFn} / {b.getAppFn}"
+        differences := differences + 1
+      else
+        for i in [:a.getAppNumArgs] do
+          work := work.push (a.getAppArgs[i]!, b.getAppArgs[i]!, path ++ "." ++ toString i)
   exact final
 
 end WeilConjectures
