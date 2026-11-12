@@ -77,16 +77,15 @@ local instance : Abelian.HasKInjectiveResolutions 𝒜 :=
 set_option synthInstance.maxSize 512 in
 noncomputable local instance : MonoidalCategory (HomotopyCategory 𝒜 (.up ℤ)) := inferInstance
 
-private def curryProdResolutionIso
+/-- Curry a resolved bifunctor and then evaluate its fixed first argument. -/
+def curryProdResolutionIso
     {D₁ D₂ D₃ D₄ : Type*} [Category D₁] [Category D₂] [Category D₃] [Category D₄]
     (I : D₂ ⥤ D₂) (H : D₁ ⥤ D₂ ⥤ D₃) (Q : D₃ ⥤ D₄) (L : D₁) :
     (Functor.curry.obj ((𝟭 D₁).prod I ⋙ Functor.uncurry.obj H ⋙ Q)).obj L ≅
       I ⋙ H.obj L ⋙ Q :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
-    intro M M' g
-    simp only [Functor.curry_obj_obj_map, Functor.comp_map, Functor.prod_map,
-      Functor.id_map, Functor.uncurry_obj_map, Functor.map_id, NatTrans.id_app,
-      Category.id_comp, Iso.refl_hom, Category.comp_id])
+  (Functor.curryObjProdComp (𝟭 D₁) I (Functor.uncurry.obj H ⋙ Q)).app L ≪≫
+    Functor.isoWhiskerLeft I
+      (Functor.isoWhiskerRight ((Functor.currying.unitIso.app H).app L).symm Q)
 
 variable [HasDerivedCategory.{u} 𝒜] (L : CochainComplex 𝒜 ℤ)
 
