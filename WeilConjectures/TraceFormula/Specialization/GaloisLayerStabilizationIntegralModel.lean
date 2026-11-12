@@ -44,38 +44,32 @@ set_option profiler true in
 private lemma integralModel_extendScalars_iso (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T))
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))}
-    (hK : boundedConstructible _ K)
+    (K : PadicAlgClConstructible T ℓ)
     (e : (constructibleToPadicAlgCl T ℓ E).obj
-      ((boundedConstructibleExtendScalars T ℓ E).obj K₀) ≅ ⟨K, hK⟩) :
+      ((boundedConstructibleExtendScalars T ℓ E).obj K₀) ≅ K) :
     Nonempty ((Mod.extendScalars (coefficientMap
       (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) T)).leftDerivedFunctor.obj
         ((Mod.extendScalars (coefficientMap
-          (padicIntegersRingObjToContinuousMapRingObj ℓ E) T)).leftDerivedFunctor.obj K₀.obj) ≅ K) := by
-  exact_mod_proofs Nonempty.intro ((ObjectProperty.ι _).mapIso e)
+          (padicIntegersRingObjToContinuousMapRingObj ℓ E) T)).leftDerivedFunctor.obj K₀.obj) ≅
+            K.obj) := by
+  exact_mod_proofs Nonempty.intro ((boundedConstructible (padicAlgClRingObj T ℓ)).ι.mapIso e)
 
 set_option profiler true in
 /-- Lift residue-field base change at a pulled-back integral model, then transport it
 along the isomorphism identifying its scalar extensions with the given complex. -/
 private lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegralModel
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    {T X Y X' Y' Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace T]
+    {T X Y X' Y' Z : Scheme.{u}} [IsNoetherian T]
     {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace X'] [QuasiSeparatedSpace X']
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']
     [CompactSpace Z] [QuasiSeparatedSpace Z]
     [QuasiCompact p] [QuasiSeparated p] [QuasiCompact p'] [QuasiSeparated p']
     (sq : CommSq g' p' p g) (i : Z ⟶ Y') (ε : X ⟶ T)
-    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T)))
-    (hK₀ : boundedConstructible _ K₀)
-    {K : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))}
-    (e : Nonempty ((Mod.extendScalars (coefficientMap
-      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) T)).leftDerivedFunctor.obj
-        ((Mod.extendScalars (coefficientMap
-          (padicIntegersRingObjToContinuousMapRingObj ℓ E) T)).leftDerivedFunctor.obj K₀) ≅ K))
+    (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T))
+    (K : PadicAlgClConstructible T ℓ)
+    (e : (constructibleToPadicAlgCl T ℓ E).obj
+      ((boundedConstructibleExtendScalars T ℓ E).obj K₀) ≅ K)
     (h : IsIso ((L((i)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)).map
       ((Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction
           (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) p)
@@ -85,22 +79,25 @@ private lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegra
           (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) sq)).app
         ((Mod.extendScalars (coefficientMap
           (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj
-            ((L((ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀))))) :
+            ((L((ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀.obj))))) :
     IsIso ((L((i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map ((Adjunction.exchangeRight
       (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p)
       (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p')
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq)).app
-        ((L((ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K))) := by
+        ((L((ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj))) := by
+  have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
   obtain ⟨n, hn⟩ := hK₀.1.1
-  have hεn := isGE_leftDerivedUpperStar_obj _ ε K₀ n
+  have hεn := isGE_leftDerivedUpperStar_obj _ ε K₀.obj n
   have hc := derivedCompleteIntegers_leftDerivedUpperStar_obj ε
     (derivedCompleteIntegers_of_boundedConstructible hK₀)
   have h₃ := isIso_map_baseChangeMap_app_padicAlgCl_of_residueField ℓ E sq i _ n hc
     (by exact_mod_proofs h)
-  refine isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
+  have e' := integralModel_extendScalars_iso T ℓ E K₀ K e
+  have hgen := isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) sq i ε K₀ e ?_
-  exact_mod_proofs h₃
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) sq i ε K₀.obj (K := K.obj)
+    (by exact_mod_proofs e') (by exact_mod_proofs h₃)
+  exact_mod_proofs hgen
 
 namespace NearbyCyclesModel
 
@@ -148,7 +145,10 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_integralModel
                 (N.galoisLayerHom h L'.toIntermediateField).generic)).obj K₀.obj))))) :
     IsIso (((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
       (Profinite.padicAlgClRingObj ℓ)).app C) := by
-  have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
+  -- Normalize the coefficient instances before specializing the geometric argument.
+  revert C hC E K₀ e hL'
+  normalize_precoherent
+  intro C hC E K₀ e hL'
   -- finiteness properties of the Galois layers
   have i₁ := N.compactSpace_galoisLayer_generic h L'.toIntermediateField
   have i₂ := N.quasiSeparatedSpace_galoisLayer_generic h L'.toIntermediateField
@@ -165,10 +165,9 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_integralModel
   have i₁₁ : CompactSpace (N.galoisLayer h Ω).total := inferInstanceAs (CompactSpace N.total)
   have i₁₂ : QuasiSeparatedSpace (N.galoisLayer h Ω).total :=
     inferInstanceAs (QuasiSeparatedSpace N.total)
-  have e' := integralModel_extendScalars_iso N.generic ℓ E K₀ hC e
   have hgen := isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegralModel ℓ E
     (N.galoisLayerRestrict h Ω L'.toIntermediateField).commSq_j (N.galoisLayer h Ω).i
-    (N.galoisLayerHom h L'.toIntermediateField).generic K₀.obj hK₀ e'
+    (N.galoisLayerHom h L'.toIntermediateField).generic K₀ ⟨_, hC⟩ e
     (by exact_mod_proofs hL')
   -- reduction to the restricted base change map at `Lg^* (Lε^* C)`
   refine Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ _ C ?_
