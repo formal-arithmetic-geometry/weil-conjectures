@@ -213,6 +213,7 @@ def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopolo
       (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q))
     (CoefficientClosedStructure.comparison S T)
 
+set_option profiler true in
 theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
