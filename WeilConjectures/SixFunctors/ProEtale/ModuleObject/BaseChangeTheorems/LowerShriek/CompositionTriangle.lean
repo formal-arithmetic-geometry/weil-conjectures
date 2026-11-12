@@ -626,11 +626,12 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
         (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
           (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
           (Compactification.Triangle.overCfg T'')).symm)
-  · exact (NatTrans.exchange _ _ _ _).symm.trans (congrArg₂ NatTrans.hcomp
-      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        T.cf T₀.cf T''.cf))
-      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        T.cg T₀.cg T''.cg)))
+  · have hcf := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+      T.cf T₀.cf T''.cf
+    have hcg := boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+      T.cg T₀.cg T''.cg
+    exact (NatTrans.exchange _ _ _ _).symm.trans
+      (congrArg₂ NatTrans.hcomp (congrArg Iso.hom hcf) (congrArg Iso.hom hcg))
 
 end AnyTriangle
 
