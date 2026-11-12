@@ -338,10 +338,10 @@ private theorem sliceUnderlyingComparison
     (I : AlgebraicInverseImage L RY RI)
     (a : elementSheafPullback A ⋙ LA ≅ L ⋙ elementSheafPullback B)
     (M : ringedSiteModules.{u} (localCoefficientRings RY)) :
-    (sliceComposite (elementSheafPullback A) LA (sliceRestriction RY A) IA).
-        moduleUnderlying.hom.app M ≫
-      (sliceTransport a (sliceComposite L (elementSheafPullback B) I (sliceRestriction RI B))).
-        moduleUnderlying.inv.app M =
+    (sliceComposite (elementSheafPullback A) LA
+        (sliceRestriction RY A) IA).moduleUnderlying.hom.app M ≫
+      (sliceTransport a (sliceComposite L (elementSheafPullback B)
+        I (sliceRestriction RI B))).moduleUnderlying.inv.app M =
       IA.moduleUnderlying.hom.app ((elementModulePullback (localCoefficientRings RY) A).obj M) ≫
         a.hom.app ((toSheaf (localCoefficientRings RY) ⋙
           sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ≫
