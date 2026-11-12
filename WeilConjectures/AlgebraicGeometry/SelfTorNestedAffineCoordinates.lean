@@ -92,7 +92,29 @@ private theorem exterior_over_component_ext
       (f.val.app (op (Over.mk (b ≫ a₁)))).hom.map_smul,
       (g.val.app (op (Over.mk (b ≫ a₂)))).hom.map_smul, hx]
 
-set_option maxHeartbeats 500000 in
+private theorem exterior_over_component_ext_le
+    {X : Scheme.{u}} (M Q : X.Modules) (n : ℕ) (L₁ L₂ : X.Opens) (h : L₂ ≤ L₁)
+    (f : (Scheme.Modules.exteriorPower M n).over L₁ ⟶ Q.over L₁)
+    (g : (Scheme.Modules.exteriorPower M n).over L₂ ⟶ Q.over L₂)
+    (hwedge : ∀ (W : X.Opens) (hW : W ≤ L₂)
+      (a : Fin n → M.val.obj (op W)) (p : X) (_hp : p ∈ W),
+      ∃ (W' : X.Opens) (hW' : W' ≤ W), p ∈ W' ∧
+        Q.presheaf.map (homOfLE hW').op
+            (f.val.app (op (Over.mk (homOfLE (hW.trans h))))
+              (Scheme.Modules.wedge (M := M) (r := n) (U := W) a)) =
+          Q.presheaf.map (homOfLE hW').op
+            (g.val.app (op (Over.mk (homOfLE hW)))
+              (Scheme.Modules.wedge (M := M) (r := n) (U := W) a))) :
+    f.val.app (op (Over.mk (homOfLE h))) = g.val.app (op (Over.mk (𝟙 L₂))) := by
+  apply exterior_over_component_ext
+  intro W b a p hp
+  obtain ⟨W', hW', hpW', heq⟩ := hwedge W (leOfHom b) a p hp
+  refine ⟨W', hW', hpW', ?_⟩
+  have hb₁ : homOfLE ((leOfHom b).trans h) = b ≫ homOfLE h := Subsingleton.elim _ _
+  have hb₂ : homOfLE (leOfHom b) = b ≫ 𝟙 L₂ := Subsingleton.elim _ _
+  rw [hb₁, hb₂] at heq
+  exact heq
+
 set_option profiler true in
 -- Identifying the derived tensor coordinates with abstract module maps needs extra fuel.
 set_option backward.isDefEq.respectTransparency false in
@@ -160,18 +182,8 @@ theorem exists_nested_affine_selfTor_coordinates
   classical
   obtain ⟨s, t, hwedge⟩ := exists_local_wedge_selfTor_coordinates i n
   refine ⟨s, t, ?_⟩
-  dsimp only at hwedge ⊢
-  intro V U h
-  apply exterior_over_component_ext
-  intro W b a p hp
-  obtain ⟨W', hW', hpW', heq⟩ := hwedge V U h W (leOfHom b) a p hp
-  refine ⟨W', hW', hpW', ?_⟩
-  have hbU : homOfLE ((leOfHom b).trans
-      ((TopologicalSpace.Opens.map i.base).monotone h)) =
-      b ≫ homOfLE ((TopologicalSpace.Opens.map i.base).monotone h) :=
-    Subsingleton.elim _ _
-  have hbV : homOfLE (leOfHom b) = b ≫ 𝟙 (i ⁻¹ᵁ V.1) := Subsingleton.elim _ _
-  rw [hbU, hbV] at heq
-  exact heq
+  intro φ V U h
+  exact exterior_over_component_ext_le _ _ n _ _
+    ((TopologicalSpace.Opens.map i.base).monotone h) (φ U) (φ V) (hwedge V U h)
 
 end AlgebraicGeometry

@@ -31,7 +31,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
 -- Elaborating the scalar-restriction comparison unfolds several sheaf category instances.
 /-- An affine morphism gives an equivalence with quasi-coherent derived modules over
@@ -150,7 +149,8 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
   let E := adjQ.toEquivalence.symm
   let S := (schemeDerivedQCohProperty Y).lift (pA.ι ⋙ T.rightDerivedFunctor)
     (fun M ↦ hT M.obj M.property)
-  refine ⟨E, ⟨Iso.refl _⟩, S, ⟨Iso.refl _⟩, ?_⟩
+  refine ⟨E, ⟨pA.liftCompιIso _ _⟩, S,
+    ⟨(schemeDerivedQCohProperty Y).liftCompιIso _ _⟩, ?_⟩
   exact ⟨Functor.isoWhiskerLeft pX.ι comparison⟩
 
 end AlgebraicGeometry

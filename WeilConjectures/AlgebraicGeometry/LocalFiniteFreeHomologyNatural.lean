@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 import WeilConjectures.AlgebraicGeometry.HomComplexRestrictSchemeNatural
 import WeilConjectures.Algebra.Homology.StrictlyPerfectHomQuasiIso
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
@@ -36,7 +36,6 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
   DerivedCategory.homologyFunctor Functor.mapHomologicalComplex
 
 
-set_option maxHeartbeats 500000 in
 set_option profiler true in
 -- The functor-level comparisons require more elaboration steps than objectwise comparisons.
 /-- A bounded finite free resolution on an open computes restricted Ext
@@ -96,12 +95,6 @@ theorem local_finite_free_homology_natural
   let : PreservesFiniteLimits R := @preservesFiniteLimits_of_natIso _ _ _ _ (O ⋙ T) R eR hOTl
   let : PreservesFiniteColimits R := @preservesFiniteColimits_of_natIso _ _ _ _ (O ⋙ T) R eR hOTc
   let hRadd : R.Additive := R.additive_of_preserves_binary_products
-  let : T.Additive := T.additive_of_preserves_binary_products
-  let hOTadd : (O ⋙ T).Additive := (O ⋙ T).additive_of_preserves_binary_products
-  let hRzero : R.PreservesZeroMorphisms :=
-    @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ R hRadd
-  let hOTzero : (O ⋙ T).PreservesZeroMorphisms :=
-    @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ (O ⋙ T) hOTadd
   let Rc : CochainComplex A ℤ ⥤ CochainComplex U.toScheme.Modules ℤ :=
     R.mapHomologicalComplex (.up ℤ)
   let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
@@ -140,29 +133,8 @@ theorem local_finite_free_homology_natural
         (DerivedCategory.homologyFunctorFactors A q)) R ≪≫
       Functor.isoWhiskerLeft (J ⋙ HL) (R.mapHomologicalComplexHomologyIso (.up ℤ) q).symm ≪≫
       Functor.isoWhiskerRight (Functor.isoWhiskerLeft J eC) CU
-  let eRc := @NatIso.mapHomologicalComplex ℤ _ _ _ _ _ _ (O ⋙ T) R
-    hOTzero hRzero eR (.up ℤ)
-  have hKI (C : A) : CochainComplex.IsKInjective (Rc.obj (J.obj C)) := by
-    let Ic := J.obj C
-    let : Ic.IsKInjective :=
-      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A (cs.obj C)
-    let : (Scheme.Modules.overEquiv U).symm.functor.Additive :=
-      (Scheme.Modules.overEquiv U).symm.functor.additive_of_preserves_binary_products
-    let : T.PreservesKInjectiveComplexes :=
-      (Scheme.Modules.overEquiv U).symm.toAdjunction.preservesKInjectiveComplexes
-    let : CochainComplex.IsKInjective ((O.mapHomologicalComplex (.up ℤ)).obj Ic) :=
-      kInjective_of_restrict_open Y.toRingedSpace U Ic
-    let : CochainComplex.IsKInjective ((T.mapHomologicalComplex (.up ℤ)).obj
-        ((O.mapHomologicalComplex (.up ℤ)).obj Ic)) :=
-      Functor.PreservesKInjectiveComplexes.isKInjective_map (F := T)
-        ((O.mapHomologicalComplex (.up ℤ)).obj Ic)
-    have : CochainComplex.IsKInjective
-        (((O ⋙ T).mapHomologicalComplex (.up ℤ)).obj Ic) :=
-      CochainComplex.isKInjective_of_iso
-        (L₁ := (T.mapHomologicalComplex (.up ℤ)).obj
-          ((O.mapHomologicalComplex (.up ℤ)).obj Ic))
-        ((Functor.mapHomologicalComplexCompIso (Iso.refl (O ⋙ T)) (.up ℤ)).app Ic)
-    exact CochainComplex.isKInjective_of_iso (eRc.app Ic)
+  have : R.PreservesKInjectiveComplexes :=
+    (openImmersion_restriction_derived_properties U.ι).2
   let eSingle := HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0
   let t : E ⟶ Rc.obj L := ε ≫ (eSingle.app B).inv
   have : QuasiIso t := by
@@ -175,7 +147,8 @@ theorem local_finite_free_homology_natural
   have : IsIso αq := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro C
-    have : CochainComplex.IsKInjective (Rc.obj (J.obj C)) := hKI C
+    have : CochainComplex.IsKInjective (Rc.obj (J.obj C)) :=
+      Functor.PreservesKInjectiveComplexes.isKInjective_map (F := R) (J.obj C)
     have : QuasiIso (α.app C) := by
       simpa [α] using quasiIso_homComplex_map (𝟙 (Rc.obj (J.obj C))) t
     change IsIso (CU.map (α.app C))
