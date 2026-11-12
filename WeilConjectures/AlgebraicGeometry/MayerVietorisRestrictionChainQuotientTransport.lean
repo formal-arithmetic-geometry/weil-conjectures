@@ -24,8 +24,24 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+private lemma schemeMV_exact_restriction_quotient_inv
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (I : CochainComplex C ℤ) :
+    L.mapDerivedCategoryFactorsh.inv.app ((HomotopyCategory.quotient _ _).obj I) ≫
+        L.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) =
+      (DerivedCategory.quotientCompQhIso _).hom.app
+          ((L.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        L.mapDerivedCategoryFactors.inv.app I := by
+  apply (cancel_epi (L.mapDerivedCategoryFactorsh.hom.app
+    ((HomotopyCategory.quotient _ _).obj I))).1
+  rw [Iso.hom_inv_id_app_assoc, L.mapDerivedCategoryFactorsh_hom_app]
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv, Category.assoc]
+  erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
+    Iso.hom_inv_id_app, Category.comp_id]
+
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
 -- The quotient transports fit the original budget when elaboration respects transparency.
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
 Source: Stacks Project, Tags 08FE and 079V.
@@ -66,19 +82,7 @@ theorem schemeMV_restriction_chain_quotient_transport
         (LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I)) := by
   let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
   let LY := schemeOpenRestriction Y W
-  have hxi : LX.mapDerivedCategoryFactorsh.inv.app
-      ((HomotopyCategory.quotient _ _).obj I) ≫
-      LX.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).hom.app I) =
-      (DerivedCategory.quotientCompQhIso _).hom.app
-          ((LX.mapHomologicalComplex (.up ℤ)).obj I) ≫
-        LX.mapDerivedCategoryFactors.inv.app I := by
-    apply (cancel_epi (LX.mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ _).obj I))).1
-    rw [Iso.hom_inv_id_app_assoc, LX.mapDerivedCategoryFactorsh_hom_app]
-    simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-      Category.assoc]
-    erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
-      Iso.hom_inv_id_app, Category.comp_id]
+  have hxi := schemeMV_exact_restriction_quotient_inv LX I
   have hy := LY.mapDerivedCategoryFactorsh_hom_app
     (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj I)
@@ -87,8 +91,6 @@ theorem schemeMV_restriction_chain_quotient_transport
       (HomotopyCategory.quotient _ _).map
         ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
           (.up ℤ)).app I) := by
-    simp only [schemeMVHomotopyOpenRestriction, Iso.trans_hom, NatTrans.comp_app,
-      Iso.symm_hom]
     change (HomotopyCategory.quotient _ _).map
       ((NatTrans.mapHomologicalComplex (schemeMVUnderivedOpenRestriction h W).hom
         (.up ℤ)).app I) ≫ (HomotopyCategory.quotient _ _).map (𝟙 _) = _

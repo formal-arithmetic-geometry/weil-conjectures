@@ -26,7 +26,6 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
 -- Transport through the complex and homotopy localization interfaces.
 /-- The open composition unit equation on any complex on the inverse-image open.
 Source: Stacks Project, Tags 08FE and 0D5T.
@@ -107,9 +106,6 @@ theorem schemeMVOpenComposition_complex_localization
         t ≫ (schemeDerivedDirectImage W.ι).map
           ((schemeDerivedDirectImage (h ∣_ W)).map
             ((DerivedCategory.quotientCompQhIso _).hom.app J))) hn
-  dsimp +instances [F, RX, G, RY, b₀, DerivedCategory.Q, DerivedCategory.Qh,
-    schemeDerivedDirectImage, RingedSpace.derivedModuleDirectImage,
-    instCategoryDerivedCategory] at ht ⊢
   simpa only [Functor.comp_map, Functor.mapHomotopyCategory_obj,
     HomotopyCategory.quotient_obj_as, Category.assoc] using ht
 
