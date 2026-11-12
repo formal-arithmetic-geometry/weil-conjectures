@@ -20448,6 +20448,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Counit
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.IdentityPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso
