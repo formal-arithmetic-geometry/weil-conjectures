@@ -206,7 +206,8 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
     simp [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso]
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChange_eq]
   ext K
-  have hE' := congr_app (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ)
+  have hE' := congr_app (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ
+      (f := f) (f' := f') (g := g))
     ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
       (Compactification.ofIsOpenImmersion f.left).overI).obj K)
   have hθ' := congr_app hb K
