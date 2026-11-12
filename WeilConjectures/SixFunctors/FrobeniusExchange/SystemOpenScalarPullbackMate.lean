@@ -112,6 +112,7 @@ private theorem mate_eq_of_factorization
   simp only [Category.assoc]
   rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Category.assoc, i.inv_hom_id,
     Category.comp_id, reassoc_of% h₅, hk]
+  simp only [Category.assoc]
 
 section Ordinary
 
@@ -141,7 +142,12 @@ Source: Stacks 03D3 and 06YY. -/
 private def sequenceRestrictionPullbackInv {X B : Scheme.{u}} (j : X ⟶ B) :
     sequenceRestriction l E L ι B ⋙ integralComparisonSequencePullback l E j ⟶
       integralComparisonSequencePullback l L j ⋙ sequenceRestriction l E L ι X :=
-  ((mateEquiv (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
+  ((mateEquiv
+    (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
+      (sequenceQuotient l L) j)
+    (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
+      (sequenceQuotient l E) j)
+    (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
     (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv))
 
@@ -210,21 +216,6 @@ private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X �
       (sequenceQuotient l E) j)
     (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
     (openRestrictionMate_isIso l E L ι j)
-  have he :
-      (mateEquiv
-        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
-        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
-          (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv) =
-      (mateEquiv
-        (R₁ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L)
-          (sequenceQuotient l L) j)
-        (R₂ := AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E)
-          (sequenceQuotient l E) j)
-        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
-        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))).symm
-          (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv) := rfl
-  unfold sequenceRestrictionPullbackInv
-  rw [he]
   exact h
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
@@ -354,6 +345,9 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
   have hoX : oX.unit = AX.ordinaryAdj.unit := by
     ext P U x
     rw [huX, AX.unit_normalized]
+  have hoB' : oB = AB.ordinaryAdj := Adjunction.ext hoB
+  have hoX' : oX = AX.ordinaryAdj := Adjunction.ext hoX
+  subst oB oX
   refine ⟨AB.adjunction, AX.adjunction, ?_⟩
   unfold integralComparisonDerivedSequencePullback at S hS ⊢
   apply sequenceDerived_kflat_ext l E B
@@ -417,8 +411,8 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
     rw [Adjunction.homEquiv_unit]
     apply HomologicalComplex.hom_ext
     intro n
-    have hu := unit_mateEquiv_symm oB oX (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
-    rw [hoB, hoX] at hu
+    have hu := unit_mateEquiv_symm AB.ordinaryAdj AX.ordinaryAdj
+      (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
     simpa [kP, qK, K, ha] using hu
   apply (cancel_mono
     ((integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
