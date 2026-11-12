@@ -78,6 +78,24 @@ lemma finiteSupportTensorRight (T : Scheme.{u})
 
 attribute [local instance] finiteSupportTensorFour finiteSupportTensorLeft finiteSupportTensorRight
 
+/-- A property of the generic coordinate fibres can be transported along an implication. -/
+private lemma exists_generic_coordinates_mono {k : Type u} [Field k] {Y : Scheme.{u}}
+    {Q Q' : ∀ (T : Scheme.{u}), (T ⟶ Y) → Prop} (h : ∀ T r, Q T r → Q' T r)
+    (H : ∃ (ι : Type u) (_ : Finite ι) (b : ι → (Y ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))),
+      (∀ i, LocallyOfFiniteType (b i)) ∧
+      (∀ y : Y, (∀ i, IsClosed {b i y}) → IsClosed {y}) ∧
+      ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))
+        (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧ Q _ (pullback.fst (b i) ξ)) :
+    ∃ (ι : Type u) (_ : Finite ι) (b : ι → (Y ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))),
+      (∀ i, LocallyOfFiniteType (b i)) ∧
+      (∀ y : Y, (∀ i, IsClosed {b i y}) → IsClosed {y}) ∧
+      ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))
+        (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧ Q' _ (pullback.fst (b i) ξ) := by
+  obtain ⟨ι, hι, b, hb, hcl, hgen⟩ := H
+  refine ⟨ι, hι, b, hb, hcl, fun i ↦ ?_⟩
+  obtain ⟨K, hK, ξ, t, ht, hi⟩ := hgen i
+  exact ⟨K, hK, ξ, t, ht, h _ _ hi⟩
+
 set_option profiler true in
 /-- A morphism between bounded constructible complexes is invertible away from finitely many
 closed points if it is invertible over the generic points of local coordinate lines. -/
@@ -506,15 +524,12 @@ private theorem exists_local_coordinates_isIso_kunnethMap
       simp [ψ₁, ψ₂, Scheme.Hom.resLE_comp_ι_assoc, hgen]
     have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
     have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-    match exists_coordinates_isIso_kunnethMap_of_charts Λ hMV hNW hpbU hPU hgenU
-      (hm.restrict V) (hm'.restrict W) hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB' with
-    | ⟨ι, hι, b, hb, hcl, hgen⟩ =>
-      refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ι, hι, b, hb, hcl, fun i ↦ ?_⟩
-      match hgen i with
-      | ⟨K, hK, ξ, t, ht, hi⟩ =>
-        refine ⟨K, hK, ξ, t, ht, ?_⟩
-        exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _
-          (isKunnethRestriction_restrictOpen φ₁ φ₂ V W) _ A B).2 hi
+    refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ?_⟩
+    refine exists_generic_coordinates_mono (fun T r hi ↦ ?_)
+      (exists_coordinates_isIso_kunnethMap_of_charts Λ hMV hNW hpbU hPU hgenU
+        (hm.restrict V) (hm'.restrict W) hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB')
+    exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction Λ
+      (isKunnethRestriction_restrictOpen φ₁ φ₂ V W) L((r)^*⟦Λ⟧) A B).2 hi
 
 end LocalCoordinates
 
