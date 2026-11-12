@@ -20,6 +20,32 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [local instance] Mod.monoidalCategoryCochainComplex
 
+/-- Compare the two normalized paths through a summand using only additive functor laws. -/
+private theorem binaryChainSquare_of_summands
+    {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+    [Preadditive C₁] [Preadditive C₃]
+    (F : C₁ ⥤ C₃) [F.Additive] (G : C₂ ⥤ C₃)
+    {S S' T T' : C₁} {A A' B B' B'' : C₂} {R R' Z Z' : C₃}
+    {i : S ⟶ S'} {f : S' ⟶ T'} {a : S ⟶ T} {j : T ⟶ T'}
+    {r : F.obj T' ⟶ R'} {b : F.obj T ⟶ R} {j' : R ⟶ R'}
+    {z : R' ⟶ Z'} {t : R ⟶ Z} {k : Z ⟶ Z'}
+    {g : A ⟶ A'} {h : A' ⟶ B'} {e : A ⟶ B} {l : B ⟶ B'}
+    {κ : B' ⟶ B''} {o : G.obj B'' ⟶ Z'} {d : G.obj B ⟶ Z}
+    {τ₀ : F.obj S ⟶ G.obj A} {τ₁ : F.obj S' ⟶ G.obj A'} (s : ℤ)
+    (hs : i ≫ f = s • (a ≫ j)) (hr : F.map j ≫ r = b ≫ j')
+    (hc : g ≫ h = e ≫ l) (ho : G.map l ≫ G.map κ ≫ o = s • (d ≫ k))
+    (ht : F.map i ≫ τ₁ = τ₀ ≫ G.map g) (hi : j' ≫ z = t ≫ k)
+    (hb : F.map a ≫ b ≫ t = τ₀ ≫ G.map e ≫ d) :
+    F.map i ≫ F.map f ≫ r ≫ z = F.map i ≫ τ₁ ≫ G.map (h ≫ κ) ≫ o := by
+  rw [← F.map_comp_assoc, hs]
+  simp only [Functor.map_zsmul, Functor.map_comp, Preadditive.zsmul_comp,
+    Category.assoc]
+  rw [reassoc_of% hr, hi, reassoc_of% ht, ← G.map_comp_assoc, hc]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [ho]
+  simp only [Preadditive.comp_zsmul]
+  exact congrArg (fun f ↦ s • f) ((reassoc_of% hb) k)
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
@@ -38,8 +64,6 @@ def nativeRingedChainBridgeSquare :
   NatIso.mapHomologicalComplex D.b.square (.up ℤ)
 
 -- Both normalized site tensors occur in this square.
-set_option synthInstance.maxHeartbeats 200000 in
-set_option maxHeartbeats 1600000 in
 -- The degreewise comparison crosses three concrete total constructions.
 /-- The normalized comparisons commute for a single pair of native complexes.
 Source: Stacks 06YS, 06YU and 0FPT
@@ -99,31 +123,6 @@ theorem native_weil_tensor_ringed_binary_chain_square
   have ht := D.b.square.hom.naturality
     (HomologicalComplex.ιMapBifunctor Q P T (.up ℤ) p q n hpq)
   dsimp only [Functor.comp_map] at ht
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
-  change D.b.forget.map (D.b.native.functor.map _) ≫
-      D.b.forget.map ((D.A.chain Q P).hom.f n) ≫
-        (r.tensor.hom.app (E.obj P, E.obj Q)).f n ≫
-          (τ.hom.app P ⊗ₘ τ.hom.app Q).f n =
-    D.b.forget.map (D.b.native.functor.map _) ≫
-      (τ.hom.app (nativeTensorComplex T P Q)).f n ≫
-        D.b.ordinary.functor.map ((nativeChainForgetC D P Q).hom.f n) ≫
-          (o.tensor.hom.app (U.obj P, U.obj Q)).f n
-  rw [← D.b.forget.map_comp_assoc, hs]
-  simp only [nativeRingedTensorSign]
-  have hmap := D.b.forget.map_zsmul ((p * q).negOnePow : ℤ)
-    ((D.A.underived (Q.X p) (P.X q)).hom ≫
-      RingedForgetTensorTransposition.tensorSummand D.b.J D.b.R
-        (E.obj P) (E.obj Q) q p n hqp)
-  rw [hmap, D.b.forget.map_comp]
-  simp only [Preadditive.zsmul_comp, Category.assoc]
-  erw [reassoc_of% hr]
-  dsimp only [nativeChainForgetC, Iso.trans_hom, HomologicalComplex.comp_f]
-  simp only [D.b.ordinary.functor.map_comp, Category.assoc]
-  erw [reassoc_of% ht]
-  rw [← D.b.ordinary.functor.map_comp_assoc, hc]
-  simp only [D.b.ordinary.functor.map_comp, Category.assoc]
-  erw [ho]
-  simp only [Units.smul_def, Preadditive.comp_zsmul]
   have hi : RingedForgetTensorTransposition.tensorSummand D.b.K D.b.Q
       (F.obj (E.obj P)) (F.obj (E.obj Q)) q p n hqp ≫
         (τ.hom.app P ⊗ₘ τ.hom.app Q).f n =
@@ -136,21 +135,7 @@ theorem native_weil_tensor_ringed_binary_chain_square
       CochainComplex.ιTensorObj_whiskerLeft_f]
     rw [← MonoidalCategory.tensorHom_def_assoc]
     rfl
-  erw [hi]
-  change ((p * q).negOnePow : ℤ) •
-      (D.b.forget.map (D.A.underived (Q.X p) (P.X q)).hom ≫
-        D.b.underived.tensor.hom.app (D.b.native.functor.obj (P.X q),
-          D.b.native.functor.obj (Q.X p)) ≫
-        (D.b.square.hom.app (P.X q) ⊗ₘ D.b.square.hom.app (Q.X p)) ≫
-        RingedForgetTensorTransposition.tensorSummand D.b.K D.b.Q
-          (G.obj (U.obj P)) (G.obj (U.obj Q)) q p n hqp) =
-    ((p * q).negOnePow : ℤ) •
-      (D.b.square.hom.app ((T.obj (Q.X p)).obj (P.X q)) ≫
-        D.b.ordinary.functor.map (D.e.hom.app (Q.X p, P.X q)) ≫
-        (d.underived (Q.X p).carrier (P.X q).carrier).hom ≫
-        RingedForgetTensorTransposition.tensorSummand D.b.K D.b.Q
-          (G.obj (U.obj P)) (G.obj (U.obj Q)) q p n hqp)
-  apply congrArg (fun f ↦ ((p * q).negOnePow : ℤ) • f)
-  exact (reassoc_of% hb) _
+  exact binaryChainSquare_of_summands D.b.forget D.b.ordinary.functor
+    ((p * q).negOnePow : ℤ) hs hr hc ho ht hi hb
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
