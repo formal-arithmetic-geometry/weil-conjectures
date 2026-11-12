@@ -305,7 +305,10 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (ψ := (baseChangeGaloisModel hM b hb v hv).galoisLayerHom
       (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (hχ := hM1)
+    (χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+      (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+      (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
+    (A := A) (hχ := by exact_mod_proofs hM1)
     (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁)
     (actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
       (baseChangeGaloisResidue hM b hb v hv)
@@ -318,6 +321,6 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
   · exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _
   · exact hL₁.1
   · ph112_remaining "PH112 before average"
-    exact hL₁.2
+    exact_mod_proofs hL₁.2
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
