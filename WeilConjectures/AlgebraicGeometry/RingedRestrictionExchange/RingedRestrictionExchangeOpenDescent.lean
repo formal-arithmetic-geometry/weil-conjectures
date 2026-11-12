@@ -802,7 +802,7 @@ private theorem identity_square_conjugate_section_value {P T : Scheme.{u}} (p : 
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId S) a)
     (hb : ExchangeModuleCompositionNormalized p (𝟙 T) R R S
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c b)
-    (N : proEtaleRingModules P S) (V : P.ProEtaleᵒᵖ) (m : N.val.obj V) :
+    (N : proEtaleRingModules P S) (V : P.ProEtᵒᵖ) (m : N.val.obj V) :
     let ah := (proEtaleRingModuleAdjunction p R S c).comp
       (proEtaleRingModuleAdjunction (𝟙 P) S S
         (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
@@ -823,24 +823,24 @@ private theorem identity_square_conjugate_section_value {P T : Scheme.{u}} (p : 
     let g := u ≫ v ≫ db.hom.app N
     f.val.app V m = g.val.app V m := by
   dsimp only
-    let ah := (proEtaleRingModuleAdjunction p R S c).comp
-      (proEtaleRingModuleAdjunction (𝟙 P) S S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-    let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
-      (proEtaleRingModuleAdjunction p R S c)
-    let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
-      (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
-    let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
-      p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
-    let da := conjugateIsoEquiv ah (arrowAdj z) a
-    let db := conjugateIsoEquiv ab (arrowAdj w) b
-    let t := (eqToIso (congrArg arrowPush e)).symm
-    let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
-    let v := (identityDirect T R).inv.app
-      ((proEtaleRingModuleDirectImage p R S c).obj N)
-    let f := da.hom.app N ≫ t.hom.app N
-    let g := u ≫ v ≫ db.hom.app N
+  let ah := (proEtaleRingModuleAdjunction p R S c).comp
+    (proEtaleRingModuleAdjunction (𝟙 P) S S
+      (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
+  let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
+    (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
+    (proEtaleRingModuleAdjunction p R S c)
+  let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
+    (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
+  let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
+    p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
+  let da := conjugateIsoEquiv ah (arrowAdj z) a
+  let db := conjugateIsoEquiv ab (arrowAdj w) b
+  let t := (eqToIso (congrArg arrowPush e)).symm
+  let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
+  let v := (identityDirect T R).inv.app
+    ((proEtaleRingModuleDirectImage p R S c).obj N)
+  let f := da.hom.app N ≫ t.hom.app N
+  let g := u ≫ v ≫ db.hom.app N
   simp only [f, g, SheafOfModules.comp_val, PresheafOfModules.comp_app,
     ModuleCat.comp_apply]
   change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
@@ -933,24 +933,24 @@ private theorem identity_square_conjugate_sections {P T : Scheme.{u}} (p : P ⟶
         (identityDirect T R).inv.app
           ((proEtaleRingModuleDirectImage p R S c).obj N) ≫ db.hom.app N := by
   dsimp only
-    let ah := (proEtaleRingModuleAdjunction p R S c).comp
-      (proEtaleRingModuleAdjunction (𝟙 P) S S
-        (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
-    let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
-      (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
-      (proEtaleRingModuleAdjunction p R S c)
-    let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
-      (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
-    let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
-      p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
-    let da := conjugateIsoEquiv ah (arrowAdj z) a
-    let db := conjugateIsoEquiv ab (arrowAdj w) b
-    let t := (eqToIso (congrArg arrowPush e)).symm
-    let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
-    let v := (identityDirect T R).inv.app
-      ((proEtaleRingModuleDirectImage p R S c).obj N)
-    let f := da.hom.app N ≫ t.hom.app N
-    let g := u ≫ v ≫ db.hom.app N
+  let ah := (proEtaleRingModuleAdjunction p R S c).comp
+    (proEtaleRingModuleAdjunction (𝟙 P) S S
+      (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
+  let ab := (proEtaleRingModuleAdjunction (𝟙 T) R R
+    (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).comp
+    (proEtaleRingModuleAdjunction p R S c)
+  let z : RingedArrow P T R S := ⟨𝟙 P ≫ p, proEtaleRingCompositeCoefficients
+    (𝟙 P) p R S S c (AlgebraicGeometry.ProEtaleTensorComparison.ringId S)⟩
+  let w : RingedArrow P T R S := ⟨p ≫ 𝟙 T, proEtaleRingCompositeCoefficients
+    p (𝟙 T) R R S (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c⟩
+  let da := conjugateIsoEquiv ah (arrowAdj z) a
+  let db := conjugateIsoEquiv ab (arrowAdj w) b
+  let t := (eqToIso (congrArg arrowPush e)).symm
+  let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
+  let v := (identityDirect T R).inv.app
+    ((proEtaleRingModuleDirectImage p R S c).obj N)
+  let f := da.hom.app N ≫ t.hom.app N
+  let g := u ≫ v ≫ db.hom.app N
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro V
