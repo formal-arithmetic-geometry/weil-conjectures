@@ -620,7 +620,6 @@ private theorem systemScalarModel_transpose_counit (W : Scheme.{u})
   refine (A.transpose P _ (𝟙 _)).trans ?_
   rw [Adjunction.homEquiv_id]
 
-set_option profiler true in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of any localization
 of an ordinary restriction/pullback square whose ordinary scalar mate is the ordinary
@@ -729,7 +728,6 @@ theorem finiteEvaluationSystemScalarAdjunction_heq_model (W : Scheme.{u}) :
   unfold finiteEvaluationSystemScalarAdjunction
   exact mpr_heq_self _ _
 
-set_option profiler true in
 -- the scalar/pullback comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the inverse mate, along the fixed
 finite-evaluation scalar adjunctions, of any localization of the ordinary
@@ -820,7 +818,6 @@ instance normalizedRestrictScalars_preservesFiniteColimits (W : Scheme.{u}) (n :
       (proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)) :=
   proEtaleCoefficientRestrictScalars_preservesFiniteColimits _ _
 
-set_option profiler true in
 -- comparing the semilinear-system presentation with the sequence-site presentation
 /-- The scalar evaluation square of the normalized finite evaluation is the localization of
 an identity-on-sections ordinary restriction-evaluation square. -/
@@ -958,7 +955,6 @@ private theorem normalizedRestrictScalars_map_heq {W : Scheme.{u}} {n : ℕ}
     HEq ((((proEtaleCoefficientRestrictScalars W (integralScalarQuotientMap l E L ι n)).map
       g).val.app U) x) x := h U x
 
-set_option profiler true in
 /-- Evaluating the inverse restriction comparison still gives the identity on sections. -/
 private theorem sequenceScalarPullbackRight_inv_evaluation_heq
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (N : coefficientSequenceModules l L X)
@@ -1022,7 +1018,6 @@ private theorem sheafOfModules_comp_three_eq_of_heq
   exact eq_of_heq (((hf₃ U _).trans ((hf₂ U _).trans (hf₁ U x))).trans
     ((hg₃ U _).trans ((hg₂ U _).trans (hg₁ U x))).symm)
 
-set_option profiler true in
 -- sectionwise comparison of identity-on-sections squares
 /-- The ordinary cube of right-adjoint squares: direct image, restriction of scalars and
 finite evaluation commute compatibly, since every comparison is the identity on sections. -/
