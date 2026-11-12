@@ -181,12 +181,10 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
     T₀ M₁.ε hA₂
   obtain ⟨r, hr, hco⟩ := exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor M₁
     resM Ω T₀ hp _ hC μs id (fun L' σ ↦ ⟨σ.liftNormal Ω, fun x ↦ σ.liftNormal_commutes Ω x⟩)
-  have hGE : (L((𝟙 ZS' ≫ rP' ≫ f₂')^*⟦Λ⟧).obj ((N.nearbyCycles Λ).obj
-      ((L((𝟙 Y)^*⟦Λ⟧)).obj ((L((𝟙 Y)^*⟦Λ⟧)).obj B)))).IsGE a := by
-    have := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) B a
-    have := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) ((L((𝟙 Y)^*⟦Λ⟧)).obj B) a
-    have := isGE_nearbyCycles_obj Λ N ((L((𝟙 Y)^*⟦Λ⟧)).obj ((L((𝟙 Y)^*⟦Λ⟧)).obj B)) a
-    exact isGE_leftDerivedUpperStar_obj Λ _ _ a
+  have hB₁GE := isGE_leftDerivedUpperStar_obj Λ (𝟙 Y) B a
+  have hB₂GE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 Y) _ a hB₁GE
+  have hNGE := @isGE_nearbyCycles_obj Λ _ _ _ _ N _ a hB₂GE
+  have hGE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 ZS' ≫ rP' ≫ f₂') _ a hNGE
   have sqρ := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange' Λ
     (galoisLayerFst μ₁ h₁ Ω) (galoisLayerSnd (hP := resP) (ψP.comp φ₂) Ω) μS νS ρM (Hom.id N) ρP
     htotρ hgenρ ?e1 ?e2 hbρ ?e3 ?e4 ?e5 ((L((𝟙 X)^*⟦Λ⟧)).obj ((L((𝟙 X)^*⟦Λ⟧)).obj A))
