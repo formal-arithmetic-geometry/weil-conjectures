@@ -196,6 +196,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {i : Z ⟶ P} {i' : Z' ⟶ P'} [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
+/-- Identify the closed exceptional pullback from a triangle whose third term receives no maps
+from closed pushforwards or their shifts. The adjunction and full faithfulness are shared between
+the original triangle and its base change. -/
 private lemma nonempty_iso_upperShriek_of_distinguished_triangle
     (Tr : Triangle (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left))))
@@ -216,7 +219,6 @@ private lemma nonempty_iso_upperShriek_of_distinguished_triangle
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i))
     (ObjectProperty.fullyFaithfulι _) hLi Tr hT e₁ e₂ h₀ h₁
 
-set_option profiler true in
 /-- **Closed exceptional inverse images commute with base change along field extensions**: for a
 closed immersion `i : Z ⟶ P` of separated `F`-schemes of finite type, its base change
 `i' : Z' ⟶ P'` along a field extension `F ⟶ L` (`πP : P' ⟶ P`, `πZ : Z' ⟶ Z`) and a bounded
