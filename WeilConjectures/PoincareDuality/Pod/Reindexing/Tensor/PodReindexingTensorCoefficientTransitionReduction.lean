@@ -120,7 +120,8 @@ private theorem transition_cube_descent
   rw [α.naturality, β.naturality]
   exact congrArg (fun z ↦ z ≫ (rE ⋙ sY ⋙ qL).map e.hom) (h P)
 
--- Prove the pasting identity before instantiating the categories with derived sheaves.
+/-- Paste the scalar, reindexing, and naturality squares in abstract categories,
+so the diagram algebra does not unfold the concrete derived sheaf functors. -/
 private theorem reduction_cube_pasting
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (R : A ⥤ D) (S : B ⥤ D) (T : C ⥤ D)
@@ -181,7 +182,6 @@ private theorem reduction_cube_pasting
       _ = _ := by rw [reassoc_of% hnb]
   rw [hleft, hright, hc]
 
-set_option profiler true in
 private theorem good_reduction
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
