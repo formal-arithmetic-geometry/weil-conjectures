@@ -85,6 +85,7 @@ variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspon
 
 set_option maxHeartbeats 1600000 in
 -- the proof assembles many composites of morphisms of `Dᵇc(X ⨯ X)` in one declaration
+set_option profiler true in
 /-- **Additivity of trace classes along a distinguished triangle** (blueprint
 `lem-trf-trace-triangle-compatibility`, `sk-i-additivity`): see the module docstring. -/
 theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
