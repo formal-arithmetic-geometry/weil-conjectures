@@ -92,6 +92,8 @@ theorem affineResidueModelEquiv_naturality
       (derivedFiberCohomologyFunctor W w 1).map b
         (affineResidueModelEquiv W w U hwU hU p hp E K hK m z) := by
   classical
+  let : Abelian (SheafOfModules.{v} (moduleRings W.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) := inferInstance
   let R := (SheafOfModules.overFunctor.{v}
     (moduleRings W.toRingedSpace) U).mapDerivedCategory
   let H := localDerivedFiberCohomologyFunctor W w U hwU 1
