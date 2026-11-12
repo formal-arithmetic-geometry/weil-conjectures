@@ -46,7 +46,7 @@ private theorem unaryPushforward_smul
     (M : SheafOfModules.{u} R) (U : Cᵒᵖ) (r : S.obj.obj U)
     (m : M.val.obj (F.op.obj U)) :
     r • @id (((SheafOfModules.pushforward φ).obj M).val.obj U) m =
-      (φ.hom.app U r • m : M.val.obj (F.op.obj U)) := rfl
+      (@id (R.obj.obj (F.op.obj U)) (φ.hom.app U r) • m : M.val.obj (F.op.obj U)) := rfl
 
 private theorem unaryMap_smul
     {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
@@ -275,7 +275,8 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     rfl
   have hm := congrArg
     (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr
-  exact hs.trans hm
+  have h := @Eq.trans (M.val.obj (op (n, V))) _ _ _ hs hm
+  exact h
 
 -- Normalize the tensor before placing it inside the reindexing composite.
 private theorem unitSection_tensor_smul (W : Scheme.{u})
