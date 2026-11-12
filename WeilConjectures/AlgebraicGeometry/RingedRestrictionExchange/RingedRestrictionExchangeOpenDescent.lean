@@ -802,7 +802,7 @@ private theorem identity_square_conjugate_section_value {P T : Scheme.{u}} (p : 
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId S) a)
     (hb : ExchangeModuleCompositionNormalized p (𝟙 T) R R S
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) c b)
-    (N : proEtaleRingModules P S) (V : P.ProEtᵒᵖ) (m : N.val.obj V) :
+    (N : proEtaleRingModules P S) (V : T.ProEtᵒᵖ) (m : _) :
     let ah := (proEtaleRingModuleAdjunction p R S c).comp
       (proEtaleRingModuleAdjunction (𝟙 P) S S
         (AlgebraicGeometry.ProEtaleTensorComparison.ringId S))
