@@ -79,7 +79,6 @@ attribute [local irreducible] constantResidueHomEquiv
 
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
-set_option profiler true in
 /-- Evaluation of scalar extension represents additive maps from the roots sheaf.
 Source: blueprint classes (2), evaluation of coefficient extension
 (blueprint: lem-sp-tower-line-evaluation-universal).
