@@ -181,13 +181,14 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       A hC E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   have htriv := hL₁.1
   have hSA := hL₁.2
+  let eG := GenericAut.galoisEquiv (k' := k') (K := K)
   have htriv' (σ : GenericAut k' K)
-      (hσ : GenericAut.galoisEquiv σ ∈ L₁.toIntermediateField.fixingSubgroup) :
+      (hσ : eG σ ∈ L₁.toIntermediateField.fixingSubgroup) :
       (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicAlgClRingObj ℓ)
         (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) = 𝟙 _ := by
     have h₂ : ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut
         (baseChangeGaloisResidue hM b hb v hv) (traitTensorCompositumSep (PowerSeries K)
-            (traitGenericField k') (traitGenericField K)) (GenericAut.galoisEquiv σ)).autAction
+            (traitGenericField k') (traitGenericField K)) (eG σ)).autAction
           (Profinite.padicAlgClRingObj ℓ) A = 𝟙 _ :=
       eq_id_of_naturality_of_iso _ (fun g ↦ Hom.autAction_naturality _ _ g)
         ((leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) X).app A).symm (htriv _ hσ)
@@ -197,7 +198,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       (Profinite.padicAlgClRingObj ℓ) σ A
     rw [h₂, CategoryTheory.Functor.map_id, Category.id_comp] at key
     exact (cancel_epi _).1 (key.trans (Category.comp_id _).symm)
-  obtain ⟨r, hr, havg⟩ := exists_retraction_pullbackExchange_of_comp_galoisLayer
+  refine (exists_retraction_pullbackExchange_of_comp_galoisLayer
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
@@ -210,23 +211,25 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     Finset.univ
     (fun τ : L₁.toIntermediateField ≃ₐ[traitTensorCompositum (PowerSeries K)
         (traitGenericField k') (traitGenericField K)] L₁.toIntermediateField ↦
-      baseChangeAut hM b hb v hv (GenericAut.galoisEquiv.symm (τ.liftNormal _)))
+      baseChangeAut hM b hb v hv (eG.symm (τ.liftNormal _)))
     (fun τ ↦ (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
       (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
       (τ.liftNormal _))
     (Fintype.card _) (by exact_mod_proofs hSA)
     (fun τ D ↦ pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv
-      (Profinite.padicAlgClRingObj ℓ) (τ.liftNormal _) D)
+      (Profinite.padicAlgClRingObj ℓ) (τ.liftNormal _) D)).elim fun r hravg ↦ ?_
+  have hr := hravg.1
+  have havg := hravg.2
   obtain ⟨π, hπdef⟩ : ∃ π : GenericAut k' K →* (L₁.toIntermediateField ≃ₐ[traitTensorCompositum
       (PowerSeries K) (traitGenericField k') (traitGenericField K)] L₁.toIntermediateField),
       π = (AlgEquiv.restrictNormalHom L₁.toIntermediateField).comp
-        (GenericAut.galoisEquiv (k' := k') (K := K)).toMonoidHom := ⟨_, rfl⟩
+        eG.toMonoidHom := ⟨_, rfl⟩
   have hπ : Function.Surjective π := by
     rw [hπdef]
-    exact (AlgEquiv.restrictNormalHom_surjective _).comp (GenericAut.galoisEquiv).surjective
+    exact (AlgEquiv.restrictNormalHom_surjective _).comp (eG).surjective
   have hker (σ : GenericAut k' K) (hσ : σ ∈ π.ker) :
-      GenericAut.galoisEquiv σ ∈ L₁.toIntermediateField.fixingSubgroup := by
+      eG σ ∈ L₁.toIntermediateField.fixingSubgroup := by
     rw [← IntermediateField.restrictNormalHom_ker]
     rw [hπdef] at hσ
     exact hσ
@@ -239,7 +242,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
       rw [autAction_baseChangeAut_mul]
       refine (congrArg (· ≫ _) ?_).trans (Category.id_comp _)
       exact_mod_proofs htriv' w (hker w hw))
-    (fun τ ↦ GenericAut.galoisEquiv.symm (τ.liftNormal _))
+    (fun τ ↦ eG.symm (τ.liftNormal _))
     (fun τ ↦ by
       simp only [hπdef, MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.apply_symm_apply]
       exact τ.restrict_liftNormal _) (fun _ ↦ rfl)
