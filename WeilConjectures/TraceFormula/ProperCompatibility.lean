@@ -66,9 +66,7 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y) (Fc : c.FixedLocus)
   (Fb : P.pushforward.FixedLocus)
 
-set_option maxHeartbeats 3000000 in
 set_option profiler true in
--- composite functors on bounded constructible complexes are unfolded
 /-- The point `T_b = 𝔱 ∘ ũ` of the pushed correspondence is obtained from that of `c` by
 transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
 `T_b = Ri_{b*} τ_h ∘ Rg_* T_c ∘ η_g`. -/
@@ -85,6 +83,8 @@ lemma mate_comp_traceMap_pushforward :
         (boundedConstructibleLowerStar ℓ Fb.ι).map
           (lowerStarDualizingComplexTrace ℓ (P.fixMap Fc Fb)) := by
   have e4 := Adjunction.homEquiv_comp_mateEquiv_of_eq
+    (G := boundedConstructibleLowerStar ℓ P.g)
+    (H := boundedConstructibleLowerStar ℓ (prod.map P.f P.f))
     (boundedConstructibleUpperShriekAdjunction ℓ c.support)
     (boundedConstructibleUpperShriekAdjunction ℓ P.pushforward.support)
     (lowerStarLowerShriekCompIso ℓ P.g_comp_support).hom
@@ -109,9 +109,7 @@ lemma mate_comp_traceMap_pushforward :
   rw [← cancel_mono Fb.supportIso.hom]
   simpa only [Category.assoc] using e5
 
-set_option maxHeartbeats 3000000 in
 set_option profiler true in
--- composite functors on bounded constructible complexes are unfolded
 /-- **Proper pushforward compatibility of the trace class** (blueprint
 `thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
 diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed loci `h`,
