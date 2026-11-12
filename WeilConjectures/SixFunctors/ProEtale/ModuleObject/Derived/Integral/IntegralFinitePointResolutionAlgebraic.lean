@@ -24,7 +24,9 @@ private theorem finite_torsion_pid_resolution
     (R : Type*) [CommRing R] [IsDomain R] [IsPrincipalIdealRing R]
     (M : Type*) [AddCommGroup M] [Module R M] [Module.Finite R M]
     (t : R) (ht : t ≠ 0) (hkill : ∀ x : M, t • x = 0) :
-    ∃ (r : ℕ) (f : (Fin r → R) →ₗ[R] (Fin r → R)) (g : (Fin r → R) →ₗ[R] M),
+    ∃ (r : ℕ)
+      (f : (Fin r → ULift.{u + 1} R) →ₗ[R] (Fin r → ULift.{u + 1} R))
+      (g : (Fin r → ULift.{u + 1} R) →ₗ[R] M),
       Function.Injective f ∧ Function.Exact f g ∧ Function.Surjective g := by
   classical
   obtain ⟨r, g, hg⟩ := Module.Finite.exists_fin' R M
@@ -53,16 +55,25 @@ private theorem finite_torsion_pid_resolution
     rw [hb, hr] at h₁ h₂
     exact Nat.le_antisymm h₁ h₂
   subst s
+  let e : (Fin r → ULift.{u + 1} R) ≃ₗ[R] (Fin r → R) :=
+    LinearEquiv.piCongrRight (fun _ ↦ ULift.moduleEquiv)
   let k : (Fin r → R) ≃ₗ[R] K := b.equivFun.symm
-  refine ⟨r, K.subtype.comp k.toLinearMap, g, K.subtype_injective.comp k.injective, ?_, hg⟩
-  intro x
-  constructor
-  · intro hx
-    let y : K := ⟨x, hx⟩
-    refine ⟨k.symm y, ?_⟩
-    exact congrArg Subtype.val (k.apply_symm_apply y)
-  · rintro ⟨y, rfl⟩
-    exact (k y).property
+  let f := e.symm.toLinearMap.comp (K.subtype.comp (k.toLinearMap.comp e.toLinearMap))
+  let g' := g.comp e.toLinearMap
+  refine ⟨r, f, g', ?_, ?_, hg.comp e.surjective⟩
+  · exact e.symm.injective.comp (K.subtype_injective.comp (k.injective.comp e.injective))
+  · intro x
+    constructor
+    · intro hx
+      let y : K := ⟨e x, hx⟩
+      refine ⟨e.symm (k.symm y), ?_⟩
+      change e.symm (K.subtype (k (e (e.symm (k.symm y))))) = x
+      simp only [LinearEquiv.apply_symm_apply, Submodule.coe_subtype,
+        LinearEquiv.symm_apply_apply]
+    · rintro ⟨y, rfl⟩
+      change g (e (e.symm (K.subtype (k (e y))))) = 0
+      rw [e.apply_symm_apply]
+      exact (k (e y)).property
 
 /-- A finite integral algebra admits an equal-rank ordinary free resolution.
 
@@ -108,23 +119,6 @@ theorem integralFinitePointResolution_algebraic
     exact ULift.ext (hn a.down)
   obtain ⟨r, f₀, g, hf₀, hexact, hg⟩ :=
     finite_torsion_pid_resolution R (ULift.{u + 1} A) t ht hkill
-  let e : (Fin r → ULift.{u + 1} R) ≃ₗ[R] (Fin r → R) :=
-    LinearEquiv.piCongrRight (fun _ ↦ ULift.moduleEquiv)
-  let f := e.symm.toLinearMap.comp (f₀.comp e.toLinearMap)
-  let g' := g.comp e.toLinearMap
-  refine ⟨r, ModuleCat.ofHom f, ModuleCat.ofHom g', ?_, ?_, ?_⟩
-  · exact e.symm.injective.comp (hf₀.comp e.injective)
-  · intro x
-    constructor
-    · intro hx
-      obtain ⟨y, hy⟩ := (hexact (e x)).mp hx
-      refine ⟨e.symm y, ?_⟩
-      change e.symm (f₀ (e (e.symm y))) = x
-      rw [e.apply_symm_apply, hy, e.symm_apply_apply]
-    · rintro ⟨y, rfl⟩
-      change g (e (e.symm (f₀ (e y)))) = 0
-      rw [e.apply_symm_apply]
-      exact (hexact (f₀ (e y))).mpr ⟨e y, rfl⟩
-  · exact hg.comp e.surjective
+  exact ⟨r, ModuleCat.ofHom f₀, ModuleCat.ofHom g, hf₀, hexact, hg⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

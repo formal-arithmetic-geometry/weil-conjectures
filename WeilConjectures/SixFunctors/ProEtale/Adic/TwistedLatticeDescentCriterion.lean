@@ -52,6 +52,18 @@ private lemma comp_restrictPadicInt_eq_zero {A B : AdicSheaf l T}
   rw [comp_restrictPadicInt_map_hom_app, h]
   simp
 
+private lemma comp_restrictPadicInt_free_eq_zero {W : Scheme.{u}} (g : W ⟶ T)
+    {n : ℕ} {A : AdicSheaf l T} {Z : Sheaf (ProEt.topology T) Ab.{u + 1}}
+    (Φ : Z ⟶ ((AdicSheaf.restrictPadicInt T l).obj A).X)
+    (φ : A ⟶ (g)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ AdicSheaf.unit l W))
+    (h : ∀ (T' : T.ProEtᵒᵖ) (s : Z.obj.obj T'),
+      comps (B := W) (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj T'.unop)
+        (φ.hom.hom.app T' (Φ.hom.app T' s)) = 0) :
+    Φ ≫ ((AdicSheaf.restrictPadicInt T l).map φ).hom = 0 := by
+  apply comp_restrictPadicInt_eq_zero Φ φ
+  intro T' s
+  exact comps_injective ((h T' s).trans comps_zero.symm)
+
 /-- **A criterion for landing in a descent**: a morphism of abelian sheaves into `f_* ℚ̄_ℓ,Vⁿ`
 whose sections satisfy `γ · ρ₁^* y = ρ₂^* y` is killed by the descent map of `γ`. -/
 lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
@@ -70,12 +82,10 @@ lemma comp_descentMap_eq_zero [WeaklyEtale f] {n : ℕ}
         locallyFiniteFunctionsComp l (descentρ₁ f T').base.hom (y T' s j) =
       locallyFiniteFunctionsComp l (descentρ₂ f T').base.hom (y T' s i)) :
     Φ ≫ ((AdicSheaf.restrictPadicInt T l).map (descentMap f Γ)).hom = 0 := by
-  apply comp_restrictPadicInt_eq_zero Φ (descentMap f Γ)
+  apply comp_restrictPadicInt_free_eq_zero (pullback.fst f f ≫ f) Φ (descentMap f Γ)
   intro T' s
-  refine comps_injective (B := pullback f f) (n := n)
-    (Z := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (pullback.fst f f ≫ f)).obj T'.unop) ?_
   refine (comps_descentMap f Γ T'.unop (Φ.hom.app T' s)).trans ?_
-  rw [comps_zero, hy T'.unop s]
+  rw [hy T'.unop s]
   funext i
   rw [h T'.unop s i, sub_self]
   rfl
