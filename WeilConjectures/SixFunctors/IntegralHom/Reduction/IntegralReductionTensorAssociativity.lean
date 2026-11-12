@@ -328,21 +328,22 @@ private theorem normalizedReductionComparison_square
     totalTensor, coefficientTotalTensor, ordinaryTensor] at hnorm ⊢
   have hs := comp_of_right_inverse _ _ _ _ (DerivedCategory.Q.map beta) _ _ hnorm hcan
   run_tac
-    let rec diffs (fuel : Nat) (a b : Lean.Expr) : List (Lean.Expr × Lean.Expr) :=
-      if a == b then [] else
+    let rec firstDiff (fuel : Nat) (a b : Lean.Expr) : Option (Lean.Expr × Lean.Expr) :=
+      if a == b then none else
       match fuel, a, b with
-      | n + 1, .app f x, .app g y => diffs n f g ++ diffs n x y
-      | n + 1, .mdata _ x, _ => diffs n x b
-      | n + 1, _, .mdata _ y => diffs n a y
-      | _, _, _ => [(a, b)]
-    let ty := (← Lean.getLocalDeclFromUserName `hs).type
+      | n + 1, .app f x, .app g y => (firstDiff n f g).orElse (fun _ ↦ firstDiff n x y)
+      | n + 1, .mdata _ x, _ => firstDiff n x b
+      | n + 1, _, .mdata _ y => firstDiff n a y
+      | _, _, _ => some (a, b)
+    let ty := (← Lean.Meta.getLocalDeclFromUserName `hs).type
     let target ← Lean.Elab.Tactic.getMainTarget
-    for (a, b) in (diffs 64 ty target).take 12 do
+    if let some (a, b) := firstDiff 64 ty target then
       Lean.logInfo m!"PH324 type difference: {a}\nversus: {b}"
+      Lean.logInfo m!"PH324 heads: {repr a.getAppFn}\nversus: {repr b.getAppFn}"
   dsimp only [scalarReductionSourceDerived, scalarReductionTargetDerived,
     integralReductionSourceHasDerivedCategory, integralReductionTargetHasDerivedCategory,
     coefficientFiniteHasDerived, derivedCategory] at hs ⊢
-  exact hs
+  with_unfolding_all exact hs
 
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
