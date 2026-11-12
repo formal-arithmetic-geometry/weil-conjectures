@@ -200,7 +200,6 @@ private theorem reindex_normalized_aux {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   exact unaryIso_inv_section (e.app N) (op (n, U)) _ _ ((cast_inj _).mp h)
 
 
-
 /-- Unit generators are compatible with an equality of modules.
 Source: Stacks 06YY. -/
 private theorem unitSection_eqToHom (W : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E W)
@@ -251,9 +250,15 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     (m : M.val.obj (op (n, V))) :
     r • @id (((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) m =
       @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) r • m := by
-  exact (unaryPushforward_smul (F := Prod.sectR n W.ProEt)
-    (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m).trans
-      (congrArg (fun b ↦ b • m) (congrArg (fun f ↦ f r) (evaluationRing_app l E W n V)))
+  have hs := unaryPushforward_smul (F := Prod.sectR n W.ProEt)
+    (S := integralCoefficientSheaf l E W n)
+    (R := (sheafCompose (coefficientSequenceTopology (ProEt.topology W))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (coefficientSequenceCommRingSheaf l E W))
+    (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m
+  have hr := congrArg (fun f ↦ f r) (evaluationRing_app l E W n V)
+  exact hs.trans (congrArg
+    (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr)
 
 -- Normalize the tensor before placing it inside the reindexing composite.
 private theorem unitSection_tensor_smul (W : Scheme.{u})
@@ -373,12 +378,20 @@ theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have hY := unitSection_tensor_smul l E Y MY N n ((proEtaleIsoPostcompose g).obj U) a x
   have hX := unitSection_tensor_smul l E X MX ((isoReductionIntegralInverse l E g).obj N)
     n U b x
-  exact (congrArg (fun z ↦ k (P.map f
+  have h0 := congrArg (fun z ↦ k (P.map f
     (integralComparisonSequenceGenerator l E g (MY.tensor.obj N) n
-      ((proEtaleIsoPostcompose g).obj U) z))) hY).trans
-    ((congrArg (fun z ↦ k z) (unaryGenerator_comma_smul l E g (MY.tensor.obj N) n U a
+      ((proEtaleIsoPostcompose g).obj U) z))) hY
+  have h1 := congrArg (fun z ↦ k z)
+    (unaryGenerator_comma_smul l E g (MY.tensor.obj N) n U a
       (PodQuotientTransition.unitSection l E Y MY N n
-        (op ((proEtaleIsoPostcompose g).obj U)) x))).trans
-      ((k.hom.map_smul b _).trans ((congrArg (fun z ↦ b • z) (hβ N n U x)).trans hX.symm)))
+        (op ((proEtaleIsoPostcompose g).obj U)) x))
+  have h2 := k.hom.map_smul b (P.map f
+    (integralComparisonSequenceGenerator l E g (MY.tensor.obj N) n
+      ((proEtaleIsoPostcompose g).obj U)
+      (PodQuotientTransition.unitSection l E Y MY N n
+        (op ((proEtaleIsoPostcompose g).obj U)) x)))
+  have h3 := congrArg (fun z : (MX.tensor.obj
+    ((isoReductionIntegralInverse l E g).obj N)).val.obj (op (n, U)) ↦ b • z) (hβ N n U x)
+  exact h0.trans (h1.trans (h2.trans (h3.trans hX.symm)))
 
 end WeilConjectures.PodReductionRepresentatives
