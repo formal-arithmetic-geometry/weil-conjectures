@@ -33,9 +33,21 @@ local instance ordinaryRingedTensorSourceMonoidal :
     MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
   Mod.monoidalCategoryCochainComplex
 
+local instance ordinaryRingedTensorSourceStruct :
+    MonoidalCategoryStruct (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
+  (ordinaryRingedTensorSourceMonoidal l Y).toMonoidalCategoryStruct
+
+local instance ordinaryRingedTensorTargetCoefficients :
+    MonoidalCategory (RingedTensorModules.{u + 1, u + 1, u + 1} J R) :=
+  SheafOfModules.monoidalCategory R
+
 local instance ordinaryRingedTensorTargetMonoidal :
     MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
   HomologicalComplex.monoidalCategory _ (.up ℤ)
+
+local instance ordinaryRingedTensorTargetStruct :
+    MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
+  (ordinaryRingedTensorTargetMonoidal J R).toMonoidalCategoryStruct
 
 /-- A binary comparison fixed uniquely by its tensor--Hom mate.
 Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
