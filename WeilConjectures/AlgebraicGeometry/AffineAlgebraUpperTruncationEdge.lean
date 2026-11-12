@@ -75,7 +75,7 @@ private theorem restriction_properties {Z : TopCat.{v}}
     inferInstanceAs (SheafOfModules.toSheaf A).ReflectsIsomorphisms
   exact ⟨hlim, hcolim, reflectsIsomorphisms_of_comp T (SheafOfModules.toSheaf O)⟩
 
-set_option trace.profiler true in
+set_option profiler true in
 private theorem affineAlgebra_lowerTruncation_isIso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]
@@ -103,7 +103,11 @@ private theorem affineAlgebra_lowerTruncation_isIso
   have : PreservesFiniteLimits T := hlim
   have : PreservesFiniteColimits T := hcolim
   have : T.ReflectsIsomorphisms := hreflect
-  have underived : F ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
+  have underived : F ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
+      intro M N g
+      ext U x
+      rfl)
   let comparison : G ⋙ T.mapDerivedCategory ≅ schemeDerivedDirectImage f :=
     (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).symm ≪≫
       Functor.rightDerivedFunctorNatIso underived
