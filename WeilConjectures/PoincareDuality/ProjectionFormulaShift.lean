@@ -27,6 +27,9 @@ open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+-- Reuse the tensor and colimit instances when elaborating composite derived functors.
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -114,10 +117,6 @@ noncomputable def exceptionalProjectionMorphismOfCompactificationNatTrans
   naturality _ _ h := exceptionalProjectionMorphismOfCompactification_natural_right Λ c K h
 
 set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 1000000 in
--- the instance problems for the composite functors are large
-set_option maxHeartbeats 1000000 in
--- the instances of the composite functors are large
 /-- **The exceptional projection morphism commutes with the shifts** in its second variable. -/
 instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
