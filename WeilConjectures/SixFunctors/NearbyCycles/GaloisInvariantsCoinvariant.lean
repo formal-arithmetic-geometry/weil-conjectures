@@ -132,7 +132,7 @@ private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
     adj.unit.app B ≫ G.map (F.map e.inv) ≫ R ≫ e.hom = 𝟙 _ := by
   change adj.unit.app B ≫ (F ⋙ G).map e.inv ≫ R ≫ e.hom = 𝟙 _
   rw [← adj.unit.naturality_assoc e.inv]
-  rw [Category.assoc ((𝟭 C).map e.inv) (adj.unit.app A) R]
+  rw [← Category.assoc (adj.unit.app A) R e.hom]
   rw [hR, Category.id_comp, e.inv_hom_id]
 
 -- the derived functors of the tower are large terms
@@ -223,7 +223,7 @@ private lemma unit_comp_map_map_inv_comp_retraction_comp_hom_eq_id
     adj.unit.app B ≫ G.map (F.map e.inv) ≫ R ≫ e.hom = 𝟙 _ := by
   change adj.unit.app B ≫ (F ⋙ G).map e.inv ≫ R ≫ e.hom = 𝟙 _
   rw [← adj.unit.naturality_assoc e.inv]
-  rw [Category.assoc ((𝟭 C).map e.inv) (adj.unit.app A) R]
+  rw [← Category.assoc (adj.unit.app A) R e.hom]
   rw [hR, Category.id_comp, e.inv_hom_id]
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
