@@ -85,7 +85,7 @@ private lemma bijective_sum_comp_map_iso
         simp only [Preadditive.sum_comp, Category.assoc, hA']
         rw [Finset.sum_eq_single j (fun i _ hi ↦ by simp [hi]) (by simp)]
         simp
-      rw [← hj h, ← hj h', hh]
+      exact (hj h).symm.trans ((congrArg (fun g ↦ g ≫ Q.map (π j)) hh).trans (hj h'))
     · simp only [Category.assoc, ← Preadditive.comp_sum, hB', Category.comp_id]
   convert (bijective_comp_hom (X := X) e).comp hbij using 1
   funext h
@@ -213,7 +213,7 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
     have hBc' : ∑ j, πC j ≫ (unitP ≫ R.map (smulC j)) = 𝟙 _ := hBc
     let e := (fR.app OP).symm ≪≫ Res.mapDerivedCategory.mapIso (fO.app P).symm
     have h := bijective_sum_comp_map_iso DerivedCategory.Q
-      (fun i ↦ unitP ≫ R.map (smulC i)) πC e hAc' hBc' (X := X)
+      (fun i ↦ unitP ≫ R.map (smulC i)) πC e hAc' hBc' (P := P) (X := X)
     convert h using 1
     funext h
     simp only [Θ, hιQ, e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
