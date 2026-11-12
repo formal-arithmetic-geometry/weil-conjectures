@@ -84,10 +84,8 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_map_exchangeRight_app (�
 variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'}
   {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the coefficient changes of the base change morphism are matched against large types
-open PadicAlgCl in
+open PadicAlgCl
 /-- **Split pullback exchanges from the integral case** (the mechanism of SGA 4½,
 [Th. finitude], Lemme 3.4, for `ℚ̄_ℓ`-coefficients). Let `φ : M ⟶ N` be a morphism of models
 whose schemes are quasi-compact and quasi-separated, and let `B ≅ ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)`
