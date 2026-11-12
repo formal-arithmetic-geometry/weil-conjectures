@@ -47,24 +47,26 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
--- Share colimit preservation for tensor products before specializing the coefficients.
-private noncomputable instance (priority := 2000) integralModelTensorLeftColimits
-    (T : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-    PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft P) := by
+-- Tensoring preserves each colimit directly, avoiding repeated searches through adjoints.
+private noncomputable instance (priority := 2000) integralModelTensorLeftPreservesColimit
+    {J : Type} [SmallCategory J] (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    PreservesColimit F (MonoidalCategory.tensorLeft P) := by
   infer_instance
 
-private noncomputable instance (priority := 2000) integralModelTensorRightColimits
-    (T : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-    PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight P) := by
+private noncomputable instance (priority := 2000) integralModelTensorRightPreservesColimit
+    {J : Type} [SmallCategory J] (T : Scheme.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    PreservesColimit F (MonoidalCategory.tensorRight P) := by
   infer_instance
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option profiler true in
+set_option trace.profiler true in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
