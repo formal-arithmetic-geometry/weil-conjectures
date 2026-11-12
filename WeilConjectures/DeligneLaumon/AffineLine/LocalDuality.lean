@@ -365,7 +365,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
         PadicAlgCl l) ^ (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 ≠ 0 := by
       rw [hone]
       exact one_ne_zero
-    have hrescale (x : (H.dual hH).stalk zf).carrier :
+    have hrescale (x : ((H.dual hH).stalk zf).carrier) :
         (((H.dual hH).stalk zf).rescale
           (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
             (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius x =
