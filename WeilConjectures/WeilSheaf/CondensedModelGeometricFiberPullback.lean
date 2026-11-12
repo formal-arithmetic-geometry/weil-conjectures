@@ -270,12 +270,23 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
   rw [← Equiv.eq_symm_apply]
   refine NatTrans.ext (funext fun x ↦ ?_)
+  have h :
+      (adicSheafEquivCondensedMod l T).functor.map
+          ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app x) ≫
+        (adicLowerStarCompCondensedModIso l e.hom).hom.app ((e.inv)_*ᵃ[l].obj x) =
+      (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e).unit.app
+          ((adicSheafEquivCondensedMod l T).functor.obj x) ≫
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
+          ((adicLowerStarCompCondensedModIso l e.inv).inv.app x) := by
+    apply (cancel_mono ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
+      ((adicLowerStarCompCondensedModIso l e.inv).hom.app x))).mp
+    rw [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id,
+      Category.comp_id]
+    exact adicSheafEquivCondensedMod_map_unit_comp l e x
   rw [CategoryTheory.mateEquiv_symm_natTrans_app]
   rw [← Functor.map_comp_assoc]
-  rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc,
-    ← Functor.map_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  rfl
+  rw [h, Functor.map_comp]
+  simp
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/
