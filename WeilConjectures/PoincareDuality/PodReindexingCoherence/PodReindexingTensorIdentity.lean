@@ -310,10 +310,15 @@ private theorem identity_tensor_chain (X : Scheme.{u})
     (podReindexingRing l E X s) P Q p q n hpq
       (op ((proEtaleIsoPostcompose (𝟙 X)).obj U.unop)) x y,
     c.tensorChain_pure P Q p q n hpq U.unop x y, ?_⟩
-  erw [ScalarHomTensor.tensor_generator_map]
-  erw [identity_complex_sections, identity_complex_sections, identity_complex_sections]
+  refine (ScalarHomTensor.tensor_generator_map (k.complex P).hom
+    (k.complex Q).hom p q n hpq U x y).trans ?_
+  refine (congrArg₂ (fun a b ↦ coefficientTensorGenerator.{u, u + 1, u}
+    (ProEt.topology X) (podReindexingRing l E X s) P Q p q n hpq U a b)
+      (identity_complex_sections l E X s k P p U.unop x)
+      (identity_complex_sections l E X s k Q q U.unop y)).trans ?_
   exact (identity_generator_restrict l E X s P Q p q n hpq
-    ((siteId X).inv.app U.unop).op x y).symm
+    ((siteId X).inv.app U.unop).op x y).symm.trans
+      (identity_complex_sections l E X s k ((total l E X s).obj (P, Q)) n U.unop _).symm
 
 private theorem identity_representative_square
     {C : Type*} [Category C] (F : C ⥤ C) (B : C × C ⥤ C)
