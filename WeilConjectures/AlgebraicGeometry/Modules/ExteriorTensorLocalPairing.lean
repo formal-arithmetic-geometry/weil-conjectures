@@ -68,6 +68,7 @@ private theorem wedgeMul_map_wedge {R A B C : Type v} [CommRing R]
         (fun i ↦ t (c i))) := by
   rw [_root_.exteriorPower.map_apply_ιMulti, _root_.exteriorPower.map_apply_ιMulti,
     wedgeMul_wedge]
+  rfl
 
 private theorem exterior_pairing_naturality_of_generators
     {R S A C P A' C' P' : Type v} [CommRing R] [CommRing S]
@@ -162,7 +163,8 @@ theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
       wedge (M := B) (r := (r + s)) (U := W)
         (Fin.append (fun j ↦ f.val.app (op W) (a j)) (fun j ↦ t W hW (c j))) := by
     exact congrArg ((η.app (B.val.exteriorPower (R := X.presheaf) (r + s))).app (op W))
-      (wedgeMul_map_wedge r s (f.val.app (op W)).hom (t W hW) a c)
+      (wedgeMul_map_wedge (R := X.presheaf.obj (op W)) r s
+        (f.val.app (op W)).hom (t W hW) a c)
   have hbmap : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) (x y),
       b Z (hZW.trans hW) ((A.val.exteriorPower (R := X.presheaf) r).map (homOfLE hZW).op x)
         ((C.val.exteriorPower (R := X.presheaf) s).map (homOfLE hZW).op y) =
