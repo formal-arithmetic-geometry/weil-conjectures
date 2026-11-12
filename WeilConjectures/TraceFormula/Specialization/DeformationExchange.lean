@@ -67,6 +67,40 @@ private lemma componentSpecialLift_comp_d_deformation
       (map_siteIdeal_ker_le_of_comp_eq _ (by rw [← Category.assoc, hb]))]
   exact deformationSpecialFibreMap_eq_of_eq k' _ _ (by simp only [Category.assoc, F.ι_c₁]) _
 
+private lemma componentSupport_lowerStar_obj_eq
+    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
+    (j : B ⟶ F.F) (N : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    R((((j ≫ F.ι).left ≫ (supportClosureι c).left) ≫
+      (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
+        (supportClosureMap c ≫ Limits.prod.snd)).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj N.obj =
+      ((boundedConstructibleLowerStar ℓ ((j ≫ F.d) ≫ diag X)).obj N).obj := by
+  have hphg : ((j ≫ F.ι).left ≫ (supportClosureι c).left) ≫
+      (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
+        (supportClosureMap c ≫ Limits.prod.snd)).left = ((j ≫ F.d) ≫ diag X).left :=
+    (componentPointModelHom_comp_diag_left (F := F) j).symm
+  rw [hphg]
+  rfl
+
+private lemma componentSupport_special_lowerStar_obj_eq
+    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
+    (j : B ⟶ F.F) [IsOpenImmersion j.left] {b : RationalPoint B}
+    (hb : b ≫ j ≫ F.ι = y)
+    (N : Dᵇc((deformationSpecialFibre B b.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    R((((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
+      (supportClosureSpecialMap c y k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj N.obj =
+      ((boundedConstructibleLowerStar ℓ ((hc.componentSpecialLift k' j hb ≫
+        (hc.specialFixedLocus k').d) ≫
+          diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))).obj N).obj := by
+  have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
+      (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
+        (hc.specialFixedLocus k').d) ≫
+          diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := by
+    rw [Category.assoc, ← Over.comp_left, ← Over.comp_left, hc.supportClosureSpecialι_comp k',
+      ← hc.componentSpecialLift_ι k' j hb, Category.assoc, (hc.specialFixedLocus k').isPullback.w,
+      ← Category.assoc]
+  rw [hphg']
+  rfl
+
 set_option profiler true in
 private lemma supportCompactSupportExchange_component_identity
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom]
@@ -81,13 +115,7 @@ private lemma supportCompactSupportExchange_component_identity
       (specializationProd (ℓ := ℓ) k' (y ≫ c.c₁)).map
         ((lowerStarLowerShriekCompIso ℓ F.isPullback.w).hom.app
           ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
-      ((deformationDiagModelHom X (y ≫ c.c₁).left.ker k').boundedConstructiblePushforwardExchange ℓ
-        ((deformationModel X (y ≫ c.c₁).left.ker k').preservesBoundedConstructible_of_isTraitModel
-          (ℓ := ℓ) (isTraitModel_deformationModel X _ k') (deformationModel_exists_comp_ε X _ k'))
-        (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
-          (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
-          (isTraitModel_deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
-          (deformationProdModel_exists_comp_ε X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k'))).app
+      (diagPushforwardExchange ℓ X k' (y ≫ c.c₁)).app
           ((boundedConstructibleLowerShriek ℓ F.d).obj
             ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
       (boundedConstructibleLowerStar ℓ
@@ -161,10 +189,6 @@ private lemma supportCompactSupportExchange_component_identity
   have hF3 := componentSupportModelHom_pushforwardExchange_app hc k' j hb
   have : IsProper (j ≫ F.ι).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((j ≫ F.d) ≫ diag X).left := by rw [Over.comp_left]; infer_instance
-  have hphg : ((j ≫ F.ι).left ≫ (supportClosureι c).left) ≫
-      (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
-        (supportClosureMap c ≫ Limits.prod.snd)).left = ((j ≫ F.d) ≫ diag X).left :=
-    (componentPointModelHom_comp_diag_left (F := F) j).symm
   have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (((j ≫ F.ι) ≫ supportClosureι c) ≫ Limits.prod.lift
@@ -175,7 +199,7 @@ private lemma supportCompactSupportExchange_component_identity
     (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
       (supportClosureMap c ≫ Limits.prod.snd))
     (by rw [prodLift_supportClosureMap, supportClosureι_map])
-    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (by rw [hphg]; rfl)
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (componentSupport_lowerStar_obj_eq F j _)
   have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
     diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left :=
     isProper_left_of_isProper_of_isSeparated _
@@ -187,29 +211,22 @@ private lemma supportCompactSupportExchange_component_identity
     isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
     supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
-  have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
-      (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
-        (hc.specialFixedLocus k').d) ≫
-          diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := by
-    rw [Category.assoc, ← Over.comp_left, ← Over.comp_left, hc.supportClosureSpecialι_comp k',
-      ← hc.componentSpecialLift_ι k' j hb, Category.assoc, (hc.specialFixedLocus k').isPullback.w,
-      ← Category.assoc]
   have hF2' := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ
     (hc.componentSpecialLift k' j hb) (hc.componentSpecialLift_ι k' j hb)
     (hc.specialFixedLocus k').isPullback.w (hc.supportClosureSpecialι k')
     (supportClosureSpecialMap c y k') (hc.supportClosureSpecialι_comp k')
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (by rw [hphg']; rfl)
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb _)
   have hfsp := hc.componentSpecialLift_comp_d_deformation k' F j hb
   have hL := eqToHom_comp_map_lowerStarComp_inv ℓ (j ≫ F.d) (j ≫ F.d) rfl (diag X)
     (componentPointModelHom_comp_diag_left j) (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (by rw [hphg]; rfl)
+    (componentSupport_lowerStar_obj_eq F j _)
   have hL' := eqToHom_comp_map_lowerStarComp_inv ℓ
     (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) _ hfsp
     (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))
     (componentPointModelHom_comp_diag_special hc k' j hb)
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
-      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (by rw [hphg']; rfl)
+      (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb _)
   have hχg := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
       (componentModelHom k' j hb) hM hN
   have hχΔ := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
