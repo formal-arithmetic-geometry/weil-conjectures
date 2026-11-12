@@ -174,8 +174,6 @@ end TensorEvaluationFormal
 open TensorEvaluation
 variable {k₀ l X}
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The proof combines both normalizations and their dependent representative isomorphisms.
 /-- Forgetting commutes with inverse transposition on K-flat tensor representatives
 and a K-injective target.
@@ -224,12 +222,12 @@ theorem native_weil_representative_uncurry
   let F := nativeForget k₀ l X
   let δ := (U (k₀ := k₀) (l := l) (X := X)).mapDerivedCategoryFactors
   let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model P I hI).inv
-  obtain ⟨hUI, c, hc, hs⟩ := native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI
+  rcases native_hom_evaluation_square_all_sources k₀ l X M χ hχ P I hI with ⟨hUI, c, hc, hs⟩
   let φ' := (UC).map φ ≫ c.hom
   let f' := DerivedCategory.Q.map φ' ≫ (M.ordinaryRepresentatives.model _ _ hUI).inv
-  obtain ⟨ψ, hψ, hloc⟩ := hW P Q I hP hQ hI φ
-  obtain ⟨ψ', hψ', hloc'⟩ := N.ordinaryNormalization ((UC).obj P) ((UC).obj Q)
-    ((UC).obj I) (N.preserves_flat P hP) (N.preserves_flat Q hQ) hUI φ'
+  rcases hW P Q I hP hQ hI φ with ⟨ψ, hψ, hloc⟩
+  rcases N.ordinaryNormalization ((UC).obj P) ((UC).obj Q)
+    ((UC).obj I) (N.preserves_flat P hP) (N.preserves_flat Q hQ) hUI φ' with ⟨ψ', hψ', hloc'⟩
   have hchain := native_weil_chain_uncurry_forget M S W t N P Q I c hc φ ψ ψ' hψ hψ'
   have hchain' : (UC).map ψ = (N.chain P Q).hom ≫ ψ' := by
     rw [← hchain, Iso.hom_inv_id_assoc]
