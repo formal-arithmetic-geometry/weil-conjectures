@@ -75,27 +75,18 @@ private lemma supportCompactSupportExchange_component_identity
     [IsProper (j ≫ F.d).left]
     [IsProper (deformationSpecialFibre B b.left.ker k').hom]
     [IsProper (hc.componentSpecialLift k' j hb).left]
-    [IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left]
-    (hM : (deformationModel B b.left.ker k').PreservesBoundedConstructible
-      (Profinite.padicAlgClRingObj ℓ))
-    (hN : (deformationModel c.C y.left.ker k').PreservesBoundedConstructible
-      (Profinite.padicAlgClRingObj ℓ))
-    (hXm : (deformationModel X (y ≫ c.c₁).left.ker k').PreservesBoundedConstructible
-      (Profinite.padicAlgClRingObj ℓ))
-    (hXXm : (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k').
-      PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) :
+    [IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left] :
     (hc.supportCompactSupportExchange k').app ((boundedConstructibleLowerStar ℓ F.ι).obj
         ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
-      (NearbyCyclesModel.boundedConstructibleNearbyCycles hXXm).map
+      (specializationProd (ℓ := ℓ) k' (y ≫ c.c₁)).map
         ((lowerStarLowerShriekCompIso ℓ F.isPullback.w).hom.app
           ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
-      ((deformationDiagModelHom X (y ≫ c.c₁).left.ker k').
-        boundedConstructiblePushforwardExchange ℓ hXm hXXm).app
+      (diagPushforwardExchange ℓ X k' (y ≫ c.c₁)).app
           ((boundedConstructibleLowerShriek ℓ F.d).obj
             ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ≫
       (boundedConstructibleLowerStar ℓ
         (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))).map
-          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hXm).map
+          ((specialization (ℓ := ℓ) k' (y ≫ c.c₁)).map
             ((boundedConstructibleLowerShriek ℓ F.d).map
                 ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _)) ≫
               (boundedConstructibleLowerShriek ℓ F.d).map
@@ -104,35 +95,58 @@ private lemma supportCompactSupportExchange_component_identity
               (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (j ≫ F.d)).hom.app
                 (𝟙_ _)) ≫
             ((componentPointModelHom k' j hb).boundedConstructiblePushforwardExchange
-              ℓ hM hXm).app (𝟙_ _)) =
+              ℓ
+              ((deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
+                (ℓ := ℓ) (isTraitModel_deformationModel B _ k')
+                (deformationModel_exists_comp_ε B _ k'))
+              ((deformationModel X (y ≫ c.c₁).left.ker k').preservesBoundedConstructible_of_isTraitModel
+                (ℓ := ℓ) (isTraitModel_deformationModel X _ k')
+                (deformationModel_exists_comp_ε X _ k'))).app (𝟙_ _)) =
       (boundedConstructibleLowerShriek ℓ (hc.specialCorrespondence k').support).map
-        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).map
+        ((specialization (ℓ := ℓ) k' y).map
           ((boundedConstructibleLowerStar ℓ F.ι).map
               ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _)) ≫
             (boundedConstructibleLowerStarCompOfEq ℓ j F.ι rfl).hom.app (𝟙_ _)) ≫
-          ((componentModelHom k' j hb).boundedConstructiblePushforwardExchange ℓ hM hN).app
+          ((componentModelHom k' j hb).boundedConstructiblePushforwardExchange ℓ
+              ((deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
+                (ℓ := ℓ) (isTraitModel_deformationModel B _ k')
+                (deformationModel_exists_comp_ε B _ k'))
+              ((deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
+                (ℓ := ℓ) (isTraitModel_deformationModel c.C _ k')
+                (deformationModel_exists_comp_ε c.C _ k'))).app
             (𝟙_ _) ≫
           (boundedConstructibleLowerStarCompOfEq ℓ (hc.componentSpecialLift k' j hb)
             (hc.specialFixedLocus k').ι (hc.componentSpecialLift_ι k' j hb)).inv.app
-              ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
+              ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
         (lowerStarLowerShriekCompIso ℓ (hc.specialFixedLocus k').isPullback.w).hom.app
           ((boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
-            ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
+            ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
         (boundedConstructibleLowerStar ℓ
           (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))).map
             (((boundedConstructibleLowerShriek ℓ (hc.specialFixedLocus k').d).map
                 ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
                   (hc.componentSpecialLift k' j hb)).inv.app
-                    ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
+                    ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
               (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (hc.componentSpecialLift k' j hb)
                 (hc.specialFixedLocus k').d).inv.app
-                  ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)) ≫
+                  ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)) ≫
               (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
                 (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)).hom.app
-                  ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
+                  ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
               eqToHom (congrArg (fun f ↦ (boundedConstructibleLowerStar ℓ f).obj
-                ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)))
+                ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)))
                   (hc.componentSpecialLift_comp_d_deformation k' F j hb))) := by
+  have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
+    (ℓ := ℓ) (isTraitModel_deformationModel B _ k') (deformationModel_exists_comp_ε B _ k')
+  have hN := (deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
+    (ℓ := ℓ) (isTraitModel_deformationModel c.C _ k') (deformationModel_exists_comp_ε c.C _ k')
+  have hXm := (deformationModel X (y ≫ c.c₁).left.ker k')
+    |>.preservesBoundedConstructible_of_isTraitModel
+    (ℓ := ℓ) (isTraitModel_deformationModel X _ k') (deformationModel_exists_comp_ε X _ k')
+  have hXXm := NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
+      (deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+      (isTraitModel_deformationProdModel X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
+      (deformationProdModel_exists_comp_ε X (y ≫ c.c₁).left.ker X (y ≫ c.c₁).left.ker k')
   have hF1 := supportCompactSupportExchange_app_lowerStar_eq hc k' j hb
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   have hF3 := componentSupportModelHom_pushforwardExchange_app hc k' j hb
@@ -229,38 +243,44 @@ private lemma fixedLocusExchange_component_factorization
     (j : B ⟶ F.F) [IsOpenImmersion j.left] [IsProper j.left]
     {b : RationalPoint B} (hb : b ≫ j ≫ F.ι = y)
     [IsProper (deformationTotalToTrait B b.left.ker k')]
-    [IsProper (hc.componentSpecialLift k' j hb).left]
-    (hM : (deformationModel B b.left.ker k').PreservesBoundedConstructible
-      (Profinite.padicAlgClRingObj ℓ))
-    (hN : (deformationModel c.C y.left.ker k').PreservesBoundedConstructible
-      (Profinite.padicAlgClRingObj ℓ)) :
+    [IsProper (hc.componentSpecialLift k' j hb).left] :
     (hc.fixedLocusExchange k' (hc.supportCompactSupportExchange k')
       (pointCompactSupportExchangeOfSeparated (y ≫ c.c₁) k') F).app
         ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _)) =
       ((boundedConstructibleLowerShriek ℓ (toPoint (hc.specialFixedLocus k').F)).map
         (((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (hc.specialFixedLocus k').ι).map
-            ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).map
+            ((specialization (ℓ := ℓ) k' y).map
               ((boundedConstructibleLowerStar ℓ F.ι).map
                 ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _)) ≫
                 (boundedConstructibleLowerStarComp ℓ j F.ι).hom.app (𝟙_ _)) ≫
               ((componentModelHom k' j hb).boundedConstructiblePushforwardExchange
-                ℓ hM hN).app (𝟙_ _) ≫
+                ℓ
+              ((deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
+                (ℓ := ℓ) (isTraitModel_deformationModel B _ k')
+                (deformationModel_exists_comp_ε B _ k'))
+              ((deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
+                (ℓ := ℓ) (isTraitModel_deformationModel c.C _ k')
+                (deformationModel_exists_comp_ε c.C _ k'))).app (𝟙_ _) ≫
               (boundedConstructibleLowerStarCompOfEq ℓ (hc.componentSpecialLift k' j hb)
                 (hc.specialFixedLocus k').ι (hc.componentSpecialLift_ι k' j hb)).inv.app
-                  ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
-            (boundedConstructibleUpperStarLowerStarAdjunction ℓ (hc.specialFixedLocus k').ι).
-              counit.app ((boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
-                ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _)))) ≫
+                  ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
+            (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+              (hc.specialFixedLocus k').ι).counit.app ((boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj
+                ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _)))) ≫
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
             (hc.componentSpecialLift k' j hb)).inv.app
-              ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
+              ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
         (lowerShriekCompOfEq ℓ (hc.componentSpecialLift k' j hb)
           (toPoint (hc.specialFixedLocus k').F) (comp_toPoint _)).inv.app
-            ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) ≫
+            ((specialization (ℓ := ℓ) k' b).obj (𝟙_ _))) ≫
         (deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _) ≫
         (traitSpecialization k k').map
           ((lowerShriekCompOfEq ℓ j (toPoint F.F) (comp_toPoint j)).hom.app (𝟙_ _)) := by
+  have hM := (deformationModel B b.left.ker k').preservesBoundedConstructible_of_isTraitModel
+    (ℓ := ℓ) (isTraitModel_deformationModel B _ k') (deformationModel_exists_comp_ε B _ k')
+  have hN := (deformationModel c.C y.left.ker k').preservesBoundedConstructible_of_isTraitModel
+    (ℓ := ℓ) (isTraitModel_deformationModel c.C _ k') (deformationModel_exists_comp_ε c.C _ k')
   have hXm := (deformationModel X (y ≫ c.c₁).left.ker k')
     |>.preservesBoundedConstructible_of_isTraitModel
     (ℓ := ℓ) (isTraitModel_deformationModel X _ k') (deformationModel_exists_comp_ε X _ k')
@@ -271,7 +291,7 @@ private lemma fixedLocusExchange_component_factorization
   have : IsProper (j ≫ F.d).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
     isProper_left_of_isProper_of_isSeparated _
-  have hSI := hc.supportCompactSupportExchange_component_identity k' F j hb hM hN hXm hXXm
+  have hSI := hc.supportCompactSupportExchange_component_identity k' F j hb
   have hfsp := hc.componentSpecialLift_comp_d_deformation k' F j hb
   -- fact (II): the factorization of `ν_F` on `j_! ℚ̄_ℓ`
   have : IsProper (deformationSpecialFibreMap (j ≫ F.d)
@@ -294,13 +314,12 @@ private lemma fixedLocusExchange_component_factorization
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
   have hac := boundedConstructibleLowerStarCompOfEq_hom_app_rfl ℓ j F.ι
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-  dsimp only [fixedLocusExchange, diagPushforwardExchange, specialization, specializationProd]
+  dsimp only [fixedLocusExchange]
   apply_by_match CategoryTheory.exchange_app_eq_of_fixedSquare_aux
     [h := hFPE, hS3 := hS3, hS4 := hS4, hac := hac]
 
 set_option Elab.async false in
-set_option maxHeartbeats 2000000 in
-set_option trace.profiler true in
+set_option profiler true in
 -- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
 -- (`Elab.async false`), which keeps the memory below 4 GB
@@ -339,10 +358,9 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').ι
     (hc.componentSpecialLift_ι k' j hb) hI
   have hD := unitClass_comp_map_comp_deformationCompactSupportExchange_app B b.left.ker k' (ℓ := ℓ)
-  have h1 := hc.fixedLocusExchange_component_factorization k' F j hb hM hN
+  have h1 := hc.fixedLocusExchange_component_factorization k' F j hb
   -- fact (III) glued to the unit class identity of `ν_B`
   instantiate_by_match CategoryTheory.comp_map_comp_comp_eq_of_eq' [h := h3, h' := hD] as h2
-  trace_state
   -- the cancellation
   apply_by_match TraceSpecialization.specializesComponentClass_of_eq [j := j, hI := hI,
     h₁ := h1, h₂ := h2]
