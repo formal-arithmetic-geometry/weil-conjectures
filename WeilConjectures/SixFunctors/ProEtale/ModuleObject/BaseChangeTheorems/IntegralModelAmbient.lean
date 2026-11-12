@@ -57,6 +57,12 @@ private theorem exists_isGE_boundedConstructible_aux (ℓ : ℕ) [Fact ℓ.Prime
     ∃ n : ℤ, K₀.obj.IsGE n :=
   K₀.property.1.1
 
+private theorem boundedConstructible_obj_aux (ℓ : ℕ) [Fact ℓ.Prime]
+    {X : Scheme.{u}} {E : FiniteIntermediateField ℓ}
+    {K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)} :
+    boundedConstructible _ K₀.obj :=
+  K₀.property
+
 private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.Prime]
     {X : Scheme.{u}} [IsNoetherian X] {E : FiniteIntermediateField ℓ}
     {K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
@@ -73,7 +79,7 @@ private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.P
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀.obj) ≅ K) := by
   obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
-  refine ⟨n, ?_, hn, K₀.property, he⟩
+  refine ⟨n, ?_, hn, boundedConstructible_obj_aux ℓ (X := X) (E := E) (K₀ := K₀), he⟩
   exact derivedCompleteIntegers_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
 
 private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ) [Fact ℓ.Prime]
