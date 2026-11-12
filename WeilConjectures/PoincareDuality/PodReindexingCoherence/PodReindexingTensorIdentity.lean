@@ -265,7 +265,6 @@ private theorem identity_complex_sections (X : Scheme.{u})
   exact eq_of_heq (k.sections (P.X n) U x)
 
 -- Check a map out of a tensor presentation using chosen preimages of its generators.
-set_option profiler true in
 private theorem identity_tensor_iso_hom_ext (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (A P Q H : K l E X s) (e : A ≅ (total l E X s).obj (P, Q))
@@ -295,7 +294,6 @@ private theorem identity_tensor_iso_hom_ext (X : Scheme.{u})
   exact congrArg (fun z ↦ (g.f n).val.app U z) hi.symm
 
 -- Evaluate the two routes directly on the preimages of pure generators.
-set_option profiler true in
 private theorem identity_tensor_chain (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
@@ -343,7 +341,6 @@ private theorem identity_representative_square
     _ = _ := by rw [hδ, Category.assoc, hd, Category.assoc]; rfl
 
 -- State the localized naturality square explicitly before composing it with the chain square.
-set_option profiler true in
 private theorem identity_tensor_representative (X : Scheme.{u})
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)
     (S : Closed l E X s) (T : Models l E X s S)
