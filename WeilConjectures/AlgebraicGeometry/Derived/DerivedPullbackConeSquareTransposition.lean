@@ -96,6 +96,7 @@ private theorem mappingCone_map_isIso
     [∀ i, P.HasHomology i] [∀ i, Q.HasHomology i]
     [∀ i, A.HasHomology i] [∀ i, B.HasHomology i]
     (p : P ⟶ Q) (t : A ⟶ B) (x : P ⟶ A) (y : Q ⟶ B)
+    [∀ i, (CochainComplex.mappingCone p t).HasHomology i]
     (h : p ≫ y = x ≫ t) (hx : QuasiIso x) (hy : QuasiIso y) :
     IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.map p t x y h)) := by
   have hxiso : IsIso (DerivedCategory.Q.map x) :=
