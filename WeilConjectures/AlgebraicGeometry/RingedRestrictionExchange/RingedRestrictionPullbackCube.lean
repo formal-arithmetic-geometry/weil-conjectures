@@ -157,7 +157,6 @@ private theorem push_congr_forget {S X : RingedVertex.{u}}
 attribute [local irreducible] RingedMap.pullComp
   exchangeModuleComposition
 
-set_option profiler true in
 private theorem push_assoc {S X T W : RingedVertex.{u}}
     (a : RingedMap S X) (b : RingedMap T S)
     (d : RingedMap W T)
@@ -187,6 +186,7 @@ private theorem push_assoc {S X T W : RingedVertex.{u}}
   have hm : (SheafOfModules.toSheaf _).map (a.push.map ((pushComp b d).hom.app N)) =
       (AlgebraicGeometry.ProEtale.lowerStar AddCommGrpCat.{u + 1} a.hom).map
         ((SheafOfModules.toSheaf _).map ((pushComp b d).hom.app N)) := rfl
+  -- Apply the sectionwise identifications together to avoid repeated dependent rewrites.
   simp only [hab, ha, hb, Iso.symm_hom, hh, hc, hm, hbd]
   exact H
 
