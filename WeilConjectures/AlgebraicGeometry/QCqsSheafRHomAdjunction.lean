@@ -123,8 +123,7 @@ private theorem trace_bijective_of_projection
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 900000 in
--- Elaborating the derived tensor instances needs this budget.
+set_option trace.profiler true in
 /-- For qcqs schemes and a qcqs morphism `f`, let `adj : Rf_* ⊣ a` be the restricted
 adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `Rf_* RHom_X(L, M) ⟶ RHom_Y(Rf_* L, Rf_* M)`, tied by the mate equation `hc` of

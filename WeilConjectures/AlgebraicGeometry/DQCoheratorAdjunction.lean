@@ -354,8 +354,7 @@ private noncomputable def unitClassDerivedEquiv (Y : Scheme.{u})
 
 open CochainComplex HomComplex in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Unfolding the composite Hom equivalence also checks both localization and shift structures.
+set_option trace.profiler true in
 private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {I J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
