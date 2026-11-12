@@ -24,6 +24,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Comparing the sheaf-ring coercions in the derived module models needs extra heartbeats.
 /-- Every local morphism from a restricted perfect source into a shift of a restricted
