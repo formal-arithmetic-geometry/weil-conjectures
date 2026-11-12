@@ -282,10 +282,8 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
       ← Functor.map_comp, Iso.hom_inv_id_app]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
   rw [CategoryTheory.mateEquiv_symm_natTrans_app]
-  simp only [TwoSquare.mk]
-  rw [← Functor.map_comp_assoc]
-  rw [← h]
-  simp
+  simp only [TwoSquare.mk, Category.assoc, ← Functor.map_comp]
+  simpa using h.symm
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
 comparison along `e⁻¹`, through the identifications `e^* ≅ (e⁻¹)_*` of both models. -/
