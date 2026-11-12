@@ -35,7 +35,6 @@ private instance moduleToSheaf_additive (Y : Scheme.{u}) :
     (SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace)).Additive where
   map_add := by intros; rfl
 
-set_option profiler true in
 -- Exact restriction comparisons involve several nested localized module categories.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -88,6 +87,7 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
         (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj
           (F ⊞ F⟦(1 : ℤ)⟧)).val.presheaf x))) := by
   classical
+  -- Reuse the abelian structures and exactness instances in the derived comparisons.
   let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
   let : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
   let G := schemeOpenRestriction X W
@@ -121,6 +121,7 @@ theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens)
       ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫
         Modules.restrictFunctorCongr s.inv_hom_id ≪≫ Modules.restrictFunctorId)
     let A := (EV.trans ES).trans EO.symm
+    -- Inferring these repeatedly unfolds all three constituent equivalences.
     have : A.functor.Additive := inferInstance
     have : A.inverse.Additive := inferInstance
     have : PreservesFiniteLimits A.functor := inferInstance
