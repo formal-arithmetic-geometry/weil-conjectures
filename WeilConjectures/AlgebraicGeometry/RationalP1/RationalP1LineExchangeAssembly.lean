@@ -497,7 +497,7 @@ end ProofHelpers
 set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
-set_option profiler true in
+set_option trace.profiler true in
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
 This is the line-only substep of the rational P1 closure naturality proof; it has
@@ -568,6 +568,6 @@ theorem rational_p1_line_exchange_assembly
   unfold LineExchangeSquare finiteSecondTraceExchange closureSecondTraceExchange
   unfold PullArrowSquare at h ⊢
   dsimp only [coefficient, line] at h
-  coefficient_finish h
+  exact h
 
 end AlgebraicGeometry.ProEtale.RationalP1
