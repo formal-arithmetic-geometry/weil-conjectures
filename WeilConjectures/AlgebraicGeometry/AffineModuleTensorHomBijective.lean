@@ -188,7 +188,9 @@ theorem affine_module_tensor_hom_bijective
       ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)
     change (adjt.homEquiv (I G) _
       (eqToHom (qt (I G)) ≫ eqToHom (pobj G).symm ≫ eε a)).val.app W _ = _ at hq₀
-    refine (congrArg (fun q ↦ q.val.app W _) het).trans (hq₀.trans ?_)
+    refine (congrArg (fun q ↦ q.val.app W
+      ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)) het).trans
+        (hq₀.trans ?_)
     change (eε a).val.app W ((eqToHom (pobj G).symm).val.app W _) = _
     refine (congrArg (fun p ↦ (eε a).val.app W ((eqToHom (pobj G).symm).val.app W p))
       (hP G V g).symm).trans ?_
