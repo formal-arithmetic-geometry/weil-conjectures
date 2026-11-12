@@ -101,6 +101,11 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       hhalg, hσε, ← Category.assoc, hhalg]
 
+-- Select the pointwise action directly; searching through the integral-closure actions is costly.
+noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens} :
+    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
+  Ideal.pointwiseDistribMulAction.toMulAction
+
 -- the rewriting of morphisms between spectra of rings of invariants is slow
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
