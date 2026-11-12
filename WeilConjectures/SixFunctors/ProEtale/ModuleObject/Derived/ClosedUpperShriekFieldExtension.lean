@@ -196,9 +196,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {i : Z ⟶ P} {i' : Z' ⟶ P'} [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- the proof elaborates two triangles and several base change maps of the derived categories
 /-- **Closed exceptional inverse images commute with base change along field extensions**: for a
 closed immersion `i : Z ⟶ P` of separated `F`-schemes of finite type, its base change
 `i' : Z' ⟶ P'` along a field extension `F ⟶ L` (`πP : P' ⟶ P`, `πZ : Z' ⟶ Z`) and a bounded
