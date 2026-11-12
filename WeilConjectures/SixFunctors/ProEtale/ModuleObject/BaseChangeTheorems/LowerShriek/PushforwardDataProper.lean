@@ -190,6 +190,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
   obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   rfl
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- the final `exact` identifies the pullback along `g'` with the pullback along the map between the
 -- middle objects of the trivial compactifications, which is only definitional
