@@ -32,6 +32,7 @@ open Scheme PadicAlgCl CondensedRing
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
+set_option profiler true in
 /-- The derived pullback `Lj^*` along an open immersion preserves derived complete complexes: it
 is right adjoint to the extension by zero `Dj_!`, which commutes with the first derived
 reduction. -/
@@ -56,6 +57,6 @@ theorem derivedCompleteIntegers_leftDerivedUpperStar_obj_of_isOpenImmersion {U X
     (g ≫ e.hom)
   calc
     g = (g ≫ e.hom) ≫ e.inv := by rw [Category.assoc, e.hom_inv_id, Category.comp_id]
-    _ = 0 := (congrArg (fun f ↦ f ≫ e.inv) h).trans (zero_comp _)
+    _ = 0 := (congrArg (fun f ↦ f ≫ e.inv) h).trans zero_comp
 
 end AlgebraicGeometry.ProEtale
