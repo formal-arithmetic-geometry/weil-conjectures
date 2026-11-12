@@ -278,10 +278,10 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
           ((adicSheafEquivCondensedMod l T).functor.obj x) ≫
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
           ((adicLowerStarCompCondensedModIso l e.inv).inv.app x) := by
-    apply (cancel_mono ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) e.hom).map
-      ((adicLowerStarCompCondensedModIso l e.inv).hom.app x))).mp
-    simpa only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id,
-      Category.comp_id] using adicSheafEquivCondensedMod_map_unit_comp l e x
+    rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
+      ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    rfl
   rw [CategoryTheory.mateEquiv_symm_natTrans_app]
   rw [← Functor.map_comp_assoc]
   rw [h]
