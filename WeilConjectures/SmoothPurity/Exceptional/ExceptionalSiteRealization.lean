@@ -77,7 +77,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (integralExceptionalUniformizer l E))
   (B : IntegralExceptionalComparison l E W P)
 
-set_option profiler true in
 private theorem integralExceptionalSiteRight_underlying_apply (n : ℕ)
     (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
       (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
@@ -126,7 +125,6 @@ private theorem integralExceptionalSiteRight_underlying_apply (n : ℕ)
       ((I.moduleUnderlying.inv.app (R.obj M)).hom.app
         ((Scheme.toProEt W).op.obj U) x)) h
 
-set_option profiler true in
 private theorem integralExceptionalSiteRight_map_add (n : ℕ)
     (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
       (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
@@ -169,7 +167,6 @@ private theorem integralExceptionalSiteRight_map_add (n : ℕ)
   exact ht.trans ((congrArg ε h).trans
     ((ε.map_add _ _).trans (congrArg₂ (· + ·) ha.symm hb.symm)))
 
-set_option profiler true in
 private theorem integralExceptionalSiteRight_map_smul (n : ℕ)
     (M : coefficientLevelModules (J := Scheme.ProEt.topology W)
       (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n)
@@ -266,7 +263,6 @@ private theorem integralExceptionalSiteRight_map_smul (n : ℕ)
   exact ht'.trans ((congrArg ε h).trans
     ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
 
-set_option profiler true in
 /-- Ordinary site direct-image realization, fixed on every section by the actual
 underlying set-sheaf comparison.
 Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization).
