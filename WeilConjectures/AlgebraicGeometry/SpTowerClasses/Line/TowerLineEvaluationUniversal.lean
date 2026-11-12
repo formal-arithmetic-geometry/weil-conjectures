@@ -79,6 +79,7 @@ attribute [local irreducible] constantResidueHomEquiv
 
 attribute [local irreducible] SemilinearSections.scalarExtensionSection
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The coefficient-system encodings require normalization when applying the Hom equivalence.
 /-- Evaluation of scalar extension represents additive maps from the roots sheaf.

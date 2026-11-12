@@ -144,6 +144,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 
 include he
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The two identity coefficient transports require substantial kernel normalization.
 private theorem evaluatedTensorRestriction_left

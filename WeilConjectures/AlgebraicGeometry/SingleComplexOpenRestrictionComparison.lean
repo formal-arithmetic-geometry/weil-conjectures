@@ -27,6 +27,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the sheaf tensor comparisons and their naturality needs this budget.
 set_option backward.isDefEq.respectTransparency false in
