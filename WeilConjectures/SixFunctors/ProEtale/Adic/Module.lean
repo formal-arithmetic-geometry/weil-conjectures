@@ -166,7 +166,8 @@ lemma adicUpperStar_map_hom {M N : AdicSheaf l Y} (f : M ⟶ N) :
   rfl
 
 instance : ((g)_*ᵃ[l]).Additive :=
-  inferInstanceAs (Functor.mapMod _ _ ⋙ Mod.comap _).Additive
+  inferInstanceAs ((g)_*[WeilCoefficients.{u} l].mapMod (adicConstantSheaf l Z) ⋙
+    Mod.comap (adicConstantSheafToLowerStar l g)).Additive
 
 instance : ((g)^*ᵃ[l]).Additive :=
   inferInstanceAs (Functor.mapMod _ _ ⋙ Mod.comap _).Additive
