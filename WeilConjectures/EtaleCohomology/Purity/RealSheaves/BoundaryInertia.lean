@@ -421,10 +421,10 @@ lemma BoundaryChart.restrictionMap_genericGaloisMap (σ : Gal(Ω/C.functionField
 
 -- Make the action on the integral closure explicit so synthesis does not search through
 -- `SeparableClosure` and its integral closures while elaborating the stabilizer.
-local instance boundarySmulCommClass :
+noncomputable local instance boundarySmulCommClass :
     SMulCommClass Gal(Ω/C.functionField) Γ(C, c.W) Ω :=
-  AlgEquiv.smulCommClass_of_isScalarTower
-local instance boundaryIntegralClosureAction :
+  AlgEquiv.smulCommClass_of_isScalarTower (Γ(C, c.W)) C.functionField Ω
+noncomputable local instance boundaryIntegralClosureAction :
     MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
 
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
