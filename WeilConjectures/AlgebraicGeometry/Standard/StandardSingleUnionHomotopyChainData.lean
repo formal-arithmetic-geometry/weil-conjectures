@@ -65,7 +65,7 @@ private noncomputable def standardSingle_open_relative_arrow_cached
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 300000 in
+set_option maxHeartbeats 500000 in
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
 (blueprint: lem-pc-standard-single-union-homotopy-chain-data).
