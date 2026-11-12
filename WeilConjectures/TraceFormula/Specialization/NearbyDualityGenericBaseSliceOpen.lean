@@ -314,25 +314,22 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
       (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom = 𝟙 _ := by
     rw [hf']
     simp
-  rw [hM, hN]
+  have hM' := congrArg (fun z ↦ (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
+    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map z ≫
+      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hM
+  have hN' := congrArg (fun z ↦ z ≫
+    (N.nearbyCycles _).map (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv) hN
+  apply hM'.trans
+  apply Eq.trans ?_ hN'.symm
+  rw [← Category.assoc, hunit'']
   calc
-    _ = (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
-        ((leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
-          (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
-            (Profinite.padicAlgClRingObj ℓ) f).inv) := by
-      rw [← Category.assoc, hunit'']
-    _ = N.unit _ ≫ (N.nearbyCycles _).map
-        (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv := by
-      calc
-        _ = ((leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
-          (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom) ≫
-            (N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
-              (Profinite.padicAlgClRingObj ℓ) f).inv) := by simp only [Category.assoc]
-        _ = N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
-              (Profinite.padicAlgClRingObj ℓ) f).inv := by rw [houter, Category.id_comp]
-        _ = _ := hf'''.symm
-    _ = _ := by
-      rw [hN]
+    _ = ((leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom) ≫
+        (N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+          (Profinite.padicAlgClRingObj ℓ) f).inv) := by simp only [Category.assoc]
+    _ = N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+          (Profinite.padicAlgClRingObj ℓ) f).inv := by rw [houter, Category.id_comp]
+    _ = _ := hf'''.symm
 
 -- the shifts of the derived categories of module objects unfold deeply
 /-- The specialization map of `ℚ̄_ℓ(0)[n]` is the shift of that of `ℚ̄_ℓ(0)`
