@@ -381,7 +381,7 @@ theorem structure_derived_image_module_naturality
       Modules.pushforwardId_hom_app_app]
     let y : (H₁.obj K).val.presheaf.obj (op ⊤) :=
       Modules.Hom.app (topEdgeTruncatedCounit (𝟙 T) 1 K) ⊤
-      (Modules.Hom.app (H₁.map α) ⊤ (affineLerayEquiv q ((affineLerayEquiv q).symm z)))
+      (Modules.Hom.app (H₁.map α) ⊤ z)
     with_unfolding_all change (H₁.obj K).val.presheaf.map (𝟙 (op ⊤)) y = y
     with_unfolding_all exact
       ConcreteCategory.congr_hom ((H₁.obj K).val.presheaf.map_id (op ⊤)) y
