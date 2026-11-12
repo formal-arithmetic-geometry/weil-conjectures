@@ -75,7 +75,6 @@ private theorem module_restriction_zero
     TopCat.Presheaf.germ M.val.presheaf _ x hx _
   exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
-set_option profiler true in
 /-- A map `α : P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
 complex into a bounded below one, with `Q` supported on `T = Y \ V`, is killed by the tensor
 action of a perfect `I → 𝒪_Y[0]` that is an isomorphism over `V`. The tensor is the derived
@@ -190,6 +189,7 @@ theorem exists_perfect_annihilator
     have hid : H.map ((𝟙 P.obj).op, 𝟙 Q.obj) = 𝟙 K := H.map_id _
     simpa only [hid, Category.comp_id, tensorHom_id, Category.id_comp] using hh
   have hezero : e T.obj₁ P.obj Q.obj 0 = 0 := by
+    -- Apply naturality to the inverse image of zero, so the right side composes with zero.
     have hh := hn T.obj₁ T.obj₁ (0 : T.obj₁ ⟶ T.obj₁) ((e T.obj₁ P.obj Q.obj).symm 0)
     simpa only [zero_comp, Equiv.apply_symm_apply, comp_zero] using hh
   refine ⟨T.obj₁, T.mor₁, hI, hiso, ?_⟩
