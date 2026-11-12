@@ -115,7 +115,7 @@ private theorem integralExceptionalSiteRight_underlying_apply (n : ℕ)
       ((B.ordinary.levelAdj n).counit.app M)) ≫ β.hom.app M = _ at h
     rw [hc, Q.map_id, Category.id_comp] at h
     exact h
-  have hβ' := (hβ M).trans (adj.homEquiv_unit _)
+  have hβ' := (hβ M).trans (adj.homEquiv_unit _ _ _)
   refine (congrArg (fun f ↦ f.hom.app U (a.hom.app U z)) hβ').trans ?_
   have h := congrArg (fun f ↦ f.hom.app U z) (adj.unit.naturality a)
   change (adj.unit.app (Q.obj (R.obj M))).hom.app U (a.hom.app U z) =
