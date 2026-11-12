@@ -96,16 +96,16 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
       deformationProdFstGeneric X x.left.ker X x.left.ker k' = 𝟙 _
     apply pullback.hom_ext <;>
       simp only [deformationDiagGeneric, deformationProdFstGeneric, deformationDiagTotal,
-        Category.assoc, pullback.map_fst, pullback.map_snd, pullback.lift_fst,
-        Category.comp_id, Category.id_comp, pullback.lift_fst_assoc]
+        Category.assoc, pullback.lift_fst, pullback.lift_snd,
+        Category.comp_id, Category.id_comp]
   have hgen₂ : (deformationDiagModelHom X x.left.ker k').generic ≫
       (deformationProdSndModelHom X x.left.ker X x.left.ker k').generic = 𝟙 _ := by
     change deformationDiagGeneric X x.left.ker k' ≫
       deformationProdSndGeneric X x.left.ker X x.left.ker k' = 𝟙 _
     apply pullback.hom_ext <;>
       simp only [deformationDiagGeneric, deformationProdSndGeneric, deformationDiagTotal,
-        Category.assoc, pullback.map_fst, pullback.map_snd, pullback.lift_snd,
-        Category.comp_id, Category.id_comp, pullback.lift_snd_assoc]
+        Category.assoc, pullback.lift_fst, pullback.lift_snd,
+        Category.comp_id, Category.id_comp]
   have hmapU : ∀ {A B : Dᵇc((deformationSpecialFibre X x.left.ker k' ⨯
       deformationSpecialFibre X x.left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧} (g : A ⟶ B),
       ((boundedConstructibleUpperStar _ ℓ (diag (deformationSpecialFibre X x.left.ker k'))).map
@@ -185,6 +185,14 @@ theorem universalKernelSpecialization_comp_evaluationKernel
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ
       (diag (deformationSpecialFibre X x.left.ker k')))
-    _ (Correspondence.IsContractingAt.diagPushforwardExchange ℓ X k' x) hχ _ _ _ _ hρ
+    ((deformationDiagModelHom X x.left.ker k').boundedConstructiblePullbackExchange ℓ
+      ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
+        (isTraitModel_deformationModel X x.left.ker k')
+        (deformationModel_exists_comp_ε X x.left.ker k'))
+      (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
+        (deformationProdModel X x.left.ker X x.left.ker k')
+        (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
+        (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k')))
+    (Correspondence.IsContractingAt.diagPushforwardExchange ℓ X k' x) hχ _ _ _ _ hρ
 
 end AlgebraicGeometry.ProEtale.CondensedRing
