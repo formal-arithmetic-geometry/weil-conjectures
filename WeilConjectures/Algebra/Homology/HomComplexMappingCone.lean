@@ -51,7 +51,6 @@ private lemma homObjMap_zero_right
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- The product comparison unfolds the chosen Hom-complex functor repeatedly.
 set_option backward.isDefEq.respectTransparency false in
 /-- Internal Hom in the second variable commutes with mapping cones.
@@ -84,6 +83,7 @@ theorem homComplex_mappingCone_iso
     Nonempty (CochainComplex.mappingCone
         (((homComplexFunctor (R := R)).obj (op E)).map f) ≅
       homComplex (R := R) E (CochainComplex.mappingCone f)) := by
+  rw [CochainComplex.mappingCone, CochainComplex.mappingCone, homComplex]
   classical
   let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
   let HG := ((homComplexFunctor (R := R)).obj (op E)).obj G
