@@ -658,7 +658,6 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
-set_option profiler true in
 -- The constituent bound elaborates exterior powers of direct sums of subquotients.
 /-- Steps 1–3 of `thm-rp-real-lisse-purity-affine`, for the composition factors.
 
