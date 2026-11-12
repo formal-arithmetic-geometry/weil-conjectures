@@ -430,7 +430,7 @@ local notation "Ω" => SeparableClosure (Scheme.functionField C)
 instance : Fact (IsAffineOpen c.W) := ⟨c.isAffineOpen⟩
 
 -- Select the pointwise ideal action directly, avoiding searches through unrelated actions.
-local instance boundaryIdealMulAction :
+noncomputable local instance boundaryIdealMulAction :
     MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) :=
   Ideal.pointwiseDistribMulAction.toMulAction
 
