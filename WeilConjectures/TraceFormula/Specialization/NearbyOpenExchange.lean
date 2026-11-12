@@ -580,6 +580,7 @@ variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   {T : NearbyCyclesModel (point k).left (point k').left}
   (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- the instantiation and the three identities `H` together exceed the default budget
 /-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
