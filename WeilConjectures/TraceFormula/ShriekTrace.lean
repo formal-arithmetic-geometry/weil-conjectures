@@ -285,8 +285,6 @@ variable {Fc Cc Xc Pc Fb Cb Yb Pb : Over (Spec (.of k))}
   {g : Cc ⟶ Cb} {q : Pc ⟶ Pb} {f : Xc ⟶ Yb} {h : Fc ⟶ Fb}
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- **Exchange of the traces of two squares along a map of squares**, on compactly supported
 direct images: for squares `ιc ≫ c = dc ≫ Δc` and `ιb ≫ b = db ≫ Δb` and a map
 `(h, g, f, q)` between them, the two maps `Rb_! Rg_! Rιc_! ω ⟶ RΔb_! ω` built from the
@@ -362,7 +360,7 @@ theorem lowerShriekSquareIso_trace_exchange (wc : ιc ≫ c = dc ≫ Δc) (wb : 
   rw [n₄', ← Functor.map_comp _ ((boundedConstructibleLowerShriek ℓ db).map _), T₂]
   simp only [boundedConstructibleLowerShriekSquareIso_padicAlgCl, Iso.trans_hom, Iso.symm_hom,
     eqToIso.hom, NatTrans.comp_app, eqToHom_app, Functor.map_comp, Category.assoc]
-  rw [lowerShriekComp_hom_app_map_inv_app_assoc, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ
+  simp only [lowerShriekComp_hom_app_map_inv_app_assoc, lowerShriekComp_hom_app_comp_map_eqToHom_assoc ℓ
       wc,
     reassoc_of% (boundedConstructibleLowerShriekComp_padicAlgCl_assoc ℓ dc Δc q
       (dualizingComplex' ℓ Fc)), Iso.hom_inv_id_app_assoc,
