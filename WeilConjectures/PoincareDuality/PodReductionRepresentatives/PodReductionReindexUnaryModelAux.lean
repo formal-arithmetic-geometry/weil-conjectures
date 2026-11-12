@@ -270,7 +270,13 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
         (coefficientSequenceCommRingSheaf l E W))
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m
-  simpa only [evaluationRing_app, RingCat.hom_id, RingHom.id_apply] using hs
+  have hr : (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm).hom.app
+      (op V) r = @id ((coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V))) r := by
+    rw [evaluationRing_app]
+    rfl
+  have hm := congrArg
+    (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr
+  exact hs.trans hm
 
 -- Normalize the tensor before placing it inside the reindexing composite.
 private theorem unitSection_tensor_smul (W : Scheme.{u})
