@@ -272,7 +272,7 @@ private lemma targetZeroIso_hom_comp {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
       (pointPull Λ Z).map
         ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 S.X₃).hom ≫ t.hom) ≫
         (coefficientModuleIso a Z).hom := by
-  simpa only [targetZeroIso, mapIso_composite_hom]
+  simp only [targetZeroIso, mapIso_composite_hom]
 
 -- Retain the native degree-zero object throughout the coefficient square.
 private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
@@ -287,7 +287,8 @@ private lemma point_target_zero_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
     ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 S.X₃).hom ≫ t.hom)
   rw [targetZeroIso_hom_comp, targetZeroIso_hom_comp]
   rw [pointComplexComp_hom_f]
-  simpa only [Functor.map_comp, Category.assoc] using h
+  run_tac withMainContext do
+    structuralCast (← getMainGoal) (← getLocalDeclFromUserName `h).toExpr
 
 -- Prove naturality for abstract complexes before inserting the mapping-cone augmentation.
 private lemma pointComplexComp_naturality (Λ : ScalarSixRing.{u})
