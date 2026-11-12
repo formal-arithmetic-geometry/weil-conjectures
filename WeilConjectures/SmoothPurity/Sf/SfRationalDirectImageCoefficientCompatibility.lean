@@ -143,8 +143,7 @@ theorem sfRationalDirectImageCoefficientCompatibility
     let e := rationalPullbackScalarComparison l E' F' ι f
     have hY := (stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E F h
     have hX := (stageSystem_existsUnique l Ω X).exists.choose_spec.1 E F h
-    have hi : IsIso (mateEquiv (a E) (a F) (TwoSquare.mk _ _ _ _ e.inv)) := by
-      exact rationalPullbackScalar_rightMate_isIso l E' F' ι f (R E) (R F) (a E) (a F)
+    let hi := rationalPullbackScalar_rightMate_isIso l E' F' ι f (R E) (R F) (a E) (a F)
     exact rightMate_transport (a E) (a F) hY hX e hi
   · rintro ⟨Φ, β, coh⟩ ⟨hΦ, hβ, _⟩
     dsimp only at hΦ
