@@ -204,6 +204,8 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
         (boundedConstructibleUpperStar Λ ℓ g) ≫
       P.baseChange (isPullback_ofIsProper_overG sq).toCommSq := by
   -- Normalize the trivial compactifications before constructing the exchange identity.
+  have hf := ‹IsProper f.left›
+  have hf' := ‹IsProper f'.left›
   obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
   obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
   obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
@@ -215,6 +217,8 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   obtain ⟨gl, ⟨⟨⟨⟩⟩⟩, gw⟩ := g'
   let f : Over.mk (fl ≫ Y.hom) ⟶ Y := Over.homMk fl rfl
   let f' : Over.mk (fl' ≫ Y'.hom) ⟶ Y' := Over.homMk fl' rfl
+  have : IsProper f.left := hf
+  have : IsProper f'.left := hf'
   have hw : SepFinType.homMk (ofIsProperBaseChangeHom sq) ≫
         𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj) =
       𝟙 (SepFinType.mk (Compactification.ofIsProper f'.left).overObj) ≫
