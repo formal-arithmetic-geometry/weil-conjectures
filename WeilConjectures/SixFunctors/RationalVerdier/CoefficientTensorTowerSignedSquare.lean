@@ -58,18 +58,19 @@ private theorem evaluationSection_zsmul
   unfold coefficientEvaluationSection
   apply ab_eqToHom_zsmul
 
+set_option profiler true in
 private theorem signedTotal_generator
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
     (R : Sheaf J CommRingCat.{u + 1})
     (P Q : CochainComplex (SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) ℤ)
     (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ)
     (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
     ((pullbackTensorSignedTotal J R P Q).hom.f k).val.app U
-        (coefficientTensorGenerator J R P Q p q k h U x y) =
-      (p * q).negOnePow • coefficientTensorGenerator J R Q P q p k
+        (coefficientTensorGenerator.{u, u + 1, u} J R P Q p q k h U x y) =
+      (p * q).negOnePow • coefficientTensorGenerator.{u, u + 1, u} J R Q P q p k
         ((add_comm q p).trans h) U y x :=
   (pullbackTensorSignedTotal_existsUnique J R P Q).exists.choose_spec p q k h U x y
 
@@ -178,6 +179,7 @@ private theorem restrictedLevel_natural
         ((coefficientSequenceEvaluation l E X n).map (b.f k))
   exact (eqToIso (coefficientSequenceRestriction_evaluation l E X n)).hom.naturality (b.f k)
 
+set_option profiler true in
 private theorem tensorTowerLevel_def
     (P Q : CochainComplex (integralTowerModules l E X) ℤ) (n : ℕ) :
     pullbackTensorTensorTowerLevel l E X P Q n =
