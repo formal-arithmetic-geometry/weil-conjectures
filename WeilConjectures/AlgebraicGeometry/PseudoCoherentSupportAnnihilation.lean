@@ -75,9 +75,7 @@ private theorem module_restriction_zero
     TopCat.Presheaf.germ M.val.presheaf _ x hx _
   exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Comparing the shared derived tensor instance with its additive construction is expensive.
 /-- A map `α : P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
 complex into a bounded below one, with `Q` supported on `T = Y \ V`, is killed by the tensor
 action of a perfect `I → 𝒪_Y[0]` that is an isomorphism over `V`. The tensor is the derived
@@ -191,20 +189,9 @@ theorem exists_perfect_annihilator
       (i ⊗ₘ 𝟙 P.obj) ≫ e B P.obj Q.obj f ≫ 𝟙 Q.obj at hh
     have hid : H.map ((𝟙 P.obj).op, 𝟙 Q.obj) = 𝟙 K := H.map_id _
     simpa only [hid, Category.comp_id, tensorHom_id, Category.id_comp] using hh
-  have : MonoidalPreadditive (schemeDerivedCategory Y) := by
-    let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-    let := SheafOfModules.monoidalCategory Y.sheaf
-    let := SheafOfModules.symmetricCategory Y.sheaf
-    have : MonoidalPreadditive C := Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
-    let : MonoidalClosed C := Classical.choice (SheafOfModules.tensorClosed Y.sheaf).2.1
-    have : IsGrothendieckAbelian.{u} C := SheafOfModules.isGrothendieckAbelian _
-    have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0, u, u} C
-    have := schemeModule_hasFunctorialFlatResolution Y
-    have := DerivedCategory.hasDerivedMonoidalCategory C
-    exact DerivedCategory.monoidalPreadditive
   have hezero : e T.obj₁ P.obj Q.obj 0 = 0 := by
-    have hh := hn T.obj₁ T.obj₁ (0 : T.obj₁ ⟶ T.obj₁) (0 : T.obj₁ ⟶ K)
-    simpa only [zero_comp, MonoidalPreadditive.zero_whiskerRight] using hh
+    have hh := hn T.obj₁ T.obj₁ (0 : T.obj₁ ⟶ T.obj₁) ((e T.obj₁ P.obj Q.obj).symm 0)
+    simpa only [zero_comp, Equiv.apply_symm_apply, comp_zero] using hh
   refine ⟨T.obj₁, T.mor₁, hI, hiso, ?_⟩
   have hh := hn T.obj₁ (𝟙_ (schemeDerivedCategory Y)) T.mor₁ a
   rw [hia, hezero] at hh
