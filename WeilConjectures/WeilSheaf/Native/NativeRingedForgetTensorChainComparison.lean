@@ -18,34 +18,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
--- Use the same sheaf tensor presentation as the summand comparison.
-attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
-  SheafOfModules.monoidalCategory
-attribute [local instance 4000] HomologicalComplex.monoidalCategory
-attribute [local instance 5000] MonoidalCategory.toMonoidalCategoryStruct
-
--- Share the total tensor instance instead of reconstructing its colimit data at
--- every occurrence of a tensor product in the comparison fields.
-private def nativeChainCochainMonoidal {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
-    MonoidalCategory (CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ) :=
-  { HomologicalComplex.monoidalCategory _ _ with
-    tensorObj P Q := (coefficientTotalTensor.{u, u, u} J R).obj (P, Q) }
-
-attribute [local instance 5000] nativeChainCochainMonoidal
-
-private def nativeChainModulesMonoidalStruct {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
-    MonoidalCategoryStruct (RingedTensorModules.{u, u, u} J R) :=
-  (SheafOfModules.monoidalCategory R).toMonoidalCategoryStruct
-
-private def nativeChainCochainMonoidalStruct {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
-    MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ) :=
-  (nativeChainCochainMonoidal J R).toMonoidalCategoryStruct
-
-attribute [local instance 10000] nativeChainModulesMonoidalStruct nativeChainCochainMonoidalStruct
-
 -- Construct and prove coherence with abstract monoidal categories, so the
 -- categorical identities do not unfold either site's sheafification tensor.
 set_option profiler true in
@@ -98,15 +70,15 @@ private theorem nativeChainTensorComparison
   let iB : Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex) ≅
       MonoidalCategory.tensor (CochainComplex B ℤ) :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
-      intro P Q f
+      rintro ⟨P, Q⟩ ⟨P', Q'⟩ ⟨f, g⟩
       simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp, tensor_map] using
-        (RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2))
+        (RingedForgetTensorTransposition.tensor_map₂_eq f g))
   let iA : Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex) ≅
       MonoidalCategory.tensor (CochainComplex A ℤ) :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
-      intro P Q f
+      rintro ⟨P, Q⟩ ⟨P', Q'⟩ ⟨f, g⟩
       simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp, tensor_map] using
-        (RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2))
+        (RingedForgetTensorTransposition.tensor_map₂_eq f g))
   let ε := Functor.isoWhiskerRight iB.symm F ≪≫ δ ≪≫
     Functor.isoWhiskerLeft (F.prod F) iA
   have hε (P Q : CochainComplex B ℤ) : ε.hom.app (P, Q) = δ.hom.app (P, Q) := by
@@ -177,12 +149,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
-#synth MonoidalCategory (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
-#synth MonoidalCategoryStruct (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
-#synth MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ)
-#synth MonoidalCategoryStruct (CochainComplex
-  (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ)
-
 set_option profiler true in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
@@ -201,10 +167,10 @@ structure NativeRingedForgetTensorChainComparison where
       (p q n : ℤ) (h : p + q = n) :
     b.forget.map (RingedForgetTensorTransposition.tensorSummand b.J b.R P Q p q n h) ≫
         (tensor.hom.app (P, Q)).f n =
-      b.underived.tensor.hom.app (P.X p, Q.X q) ≫
+      (by exact b.underived.tensor.hom.app (P.X p, Q.X q) ≫
         RingedForgetTensorTransposition.tensorSummand b.K b.Q
           ((b.forget.mapHomologicalComplex (.up ℤ)).obj P)
-          ((b.forget.mapHomologicalComplex (.up ℤ)).obj Q) p q n h
+          ((b.forget.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
   associativity (P Q N :
       CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ) :
     let F := b.forget.mapHomologicalComplex (.up ℤ)
