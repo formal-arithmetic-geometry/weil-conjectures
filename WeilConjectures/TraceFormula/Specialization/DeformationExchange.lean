@@ -56,7 +56,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 set_option Elab.async false in
 set_option maxHeartbeats 2000000 in
-set_option profiler true in
+set_option trace.profiler true in
 -- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
 -- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
 -- (`Elab.async false`), which keeps the memory below 4 GB
@@ -207,7 +207,6 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
       (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as hSI
-  run_tac Lean.logInfo (← Lean.Meta.inferType (← Lean.Elab.Tactic.elabTerm (← `(hSI)) none))
   -- fact (II): the factorization of `ν_F` on `j_! ℚ̄_ℓ`
   have : IsProper (deformationSpecialFibreMap (j ≫ F.d)
       (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k').left := by
@@ -231,10 +230,9 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   instantiate_by_match CategoryTheory.exchange_app_eq_of_fixedSquare_aux
     [h := hFPE, hS3 := hS3, hS4 := hS4, hac := hac] as h1
-  run_tac Lean.logInfo (← Lean.Meta.inferType (← Lean.Elab.Tactic.elabTerm (← `(h1)) none))
   -- fact (III) glued to the unit class identity of `ν_B`
   instantiate_by_match CategoryTheory.comp_map_comp_comp_eq_of_eq' [h := h3, h' := hD] as h2
-  run_tac Lean.logInfo (← Lean.Meta.inferType (← Lean.Elab.Tactic.elabTerm (← `(h2)) none))
+  trace_state
   -- the cancellation
   apply_by_match TraceSpecialization.specializesComponentClass_of_eq [j := j, hI := hI,
     h₁ := h1, h₂ := h2]
