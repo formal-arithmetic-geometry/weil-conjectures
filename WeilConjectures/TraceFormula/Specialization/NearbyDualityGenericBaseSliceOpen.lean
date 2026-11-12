@@ -312,9 +312,14 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
     L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
       (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)) hf'
   have hf''' := congrArg (fun z ↦ N.unit _ ≫ (N.nearbyCycles _).map z) hf
-  have hunit := φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
+  have hunit'' : L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
+        (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
+          (Profinite.padicAlgClRingObj ℓ) f).inv := by
+    transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
   have hunit' := congrArg (fun z ↦
-    (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫ z) hunit
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫ z) hunit''
   have hcancel := congrArg (fun z ↦
     (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
       (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ z) hf'''.symm
