@@ -73,8 +73,8 @@ private lemma isClosed_singleton_of_specialCoordinate_comp_hom
     (hcoord : ∀ a : ι, (φ.total ≫ c ≫ AffineSpace.reindex
       (fun _ : ULift.{u} (Fin 1) ↦ a) (trait k')) ≫
         𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = qP)
-    (hz : ∀ a, IsClosed {specialCoordinate hP
-      (φ.total ≫ c ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (hcoord a) z}) :
+    (hz : ∀ a, IsClosed {(specialCoordinate hP
+      (φ.total ≫ c ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (hcoord a) z)}) :
     IsClosed {f₁' z} := by
   refine isClosed_singleton_of_isImmersion hM c hc _ fun a ↦ ?_
   have h := hz a
