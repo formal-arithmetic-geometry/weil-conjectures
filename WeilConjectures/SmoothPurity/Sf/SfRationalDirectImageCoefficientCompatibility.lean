@@ -139,6 +139,12 @@ theorem sfRationalDirectImageCoefficientCompatibility
     rw [hbIso]
     let E' := Coefficient.{u} l Ω E
     let F' := Coefficient.{u} l Ω F
+    let := (inferInstance : Field E')
+    let := (inferInstance : Algebra (ℚ_[l]) E')
+    let := (inferInstance : FiniteDimensional (ℚ_[l]) E')
+    let := (inferInstance : Field F')
+    let := (inferInstance : Algebra (ℚ_[l]) F')
+    let := (inferInstance : FiniteDimensional (ℚ_[l]) F')
     let ι := AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E F h
     let e := rationalPullbackScalarComparison l E' F' ι f
     have hY := (stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E F h
