@@ -95,9 +95,15 @@ theorem integralOrdinaryScalar_coordinates :
   have : (SheafOfModules.changeOfRingsFunctor φ).Additive := by
     rw [← hOC]
     infer_instance
+  have hobj₀ (M : integralTowerModules l E Y) :
+      (SheafOfModules.changeOfRingsFunctor φ).obj M = SheafOfModules.changeOfRings φ M := rfl
+  have hmap₀ {M N : integralTowerModules l E Y} (f : M ⟶ N) :
+      (SheafOfModules.changeOfRingsFunctor φ).map f =
+        eqToHom (hobj₀ M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
+          eqToHom (hobj₀ N).symm := by
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
   obtain ⟨-, -, hO⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
-  obtain ⟨a, ha⟩ := hO (SheafOfModules.changeOfRingsFunctor φ) (fun _ ↦ rfl)
-    (fun _ ↦ by simp only [eqToHom_refl, Category.id_comp, Category.comp_id])
+  obtain ⟨a, ha⟩ := hO (SheafOfModules.changeOfRingsFunctor φ) hobj₀ hmap₀
   obtain ⟨d, Φ, κ, hκ, hκc, -, b, hb, hbasis, htrace, -⟩ :=
     integralCompletedScalarMap_frobeniusSystem_trace l E L ι Y
   obtain ⟨e⟩ := completedIntegralFiniteFree.{u, u} l E Y L ι φ
