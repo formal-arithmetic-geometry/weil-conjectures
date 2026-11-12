@@ -451,7 +451,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 private theorem strengthReductionExtension_eq :
     integralReductionChangeOfRings l E X D hl n = scalarReductionExtension l E X n := rfl
 
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private def reductionNat :
     DerivedCategory.Q ⋙ scalarReductionDerivedExtension l E X n ⟶
       (scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ) ⋙
@@ -467,13 +466,10 @@ private def reductionNat :
       ((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ))
       (DerivedCategory.quotientCompQhIso _).hom
 
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionNat_app
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (reductionNat l E X D hl n).app P = reductionCounit l E X D hl n P := rfl
 
-set_option profiler true in
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionCounit_isIso
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) P) :
@@ -482,8 +478,6 @@ private theorem reductionCounit_isIso
   unfold reductionCounit
   infer_instance
 
-set_option profiler true in
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem restrictionComparison_eq
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (scalarReductionDerivedRestriction l E X n).map (reductionCounit l E X D hl n P) ≫
@@ -506,7 +500,6 @@ private theorem restrictionComparison_eq
   exact congrArg₂ (fun f g ↦ (scalarReductionDerivedRestriction l E X n).map f ≫ g)
     hc hf.symm
 
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem unit_compatibility
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) P) :
@@ -644,8 +637,7 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))) e.hom_inv_id
   simp only [coefficientIso, pair, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  refine congrArg ((SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
-    (R := R) (coefficient X R S c) M).inv.val.app U) ?_
+  congr 1
   erw [hei]
   have hn := sheafification_map_unit_section X A _ _ (rawIso X R S c M).hom U
     (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x)
@@ -677,8 +669,6 @@ private noncomputable def levelIso (n : ℕ) (M : scalarReductionSource l E X) :
     (eqToIso ((scalarReductionExistence.{t, u} l E X n).choose_spec.choose M)) ≪≫
     coefficientIso X (base X l E) (level X l E n) (projection X l E n) M
 
-set_option profiler true in
--- Total tensor comparison types require unfolding the coefficient wrappers.
 private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
     (U : X.ProEtᵒᵖ) (s : (level X l E n).obj.obj U) (x : M.val.obj U) :
     (levelIso X l E n M).hom.val.app U (strengthReductionTensor l E X n M U s x) =
@@ -833,7 +823,6 @@ private theorem normalized_beta_scalar (D : FiniteFieldDatum.{d}) (hl : l ≠ D.
   simp only [reductionUnit_section] at hbeta
   exact beta_scalar X l E n P Q beta hbeta i j V s x y
 
-set_option profiler true in
 -- The unit normalization crosses the finite coefficient wrappers.
 private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
     {V W : X.ProEtᵒᵖ} (i : V ⟶ W) (x : M.val.obj V) :
@@ -1152,8 +1141,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   completedIntegralCommRingSheafUnrestricted integralCoefficientCommRingSheaf
   integralCoefficientSheaf
 
-set_option profiler true in
--- Keep the coefficient wrappers folded while elaborating the comparison squares.
+-- Normalize the coefficient wrappers before applying the generic mate calculation.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
 This is a one-level calculation: no consecutive quotient map occurs in it.
 
@@ -1320,7 +1308,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-set_option profiler true in
 -- Elaborating the normalized contraction retains independent coefficient universes.
 /-- The normalized reduction tensor mate is invertible on K-flat representatives.
 Source: Stacks 03CZ, 06YY, 07A4; integral Hom reduction, paragraphs 1--2.
