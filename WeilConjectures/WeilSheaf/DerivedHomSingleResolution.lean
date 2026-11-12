@@ -356,7 +356,6 @@ private lemma resolutionComparison_hom (A : ProEtaleWeilSheaf k₀ l X)
       DerivedCategory.Q.map (singleResolutionProjection A I) ≫
       ((ihomFunctor k₀ l X A).rightDerivedFunctorObjQIso I).inv := rfl
 
-set_option trace.profiler true in
 /-- Native derived internal Hom from A[0] is the total right derived functor of H_A.
 The comparison is represented by precomposition with every K-injective resolution
 of A[0], followed by the canonical source-degree-zero projection. It is independent
@@ -463,14 +462,16 @@ theorem derivedHom_single_resolution
     have hP := (CommSq.mk (projection_left A B a I)).map DerivedCategory.Q
     have hR := (CommSq.mk (Functor.rightDerivedFunctorNatTrans_app_Q_obj
       ((ihomBifunctor k₀ l X).map a.op) I)).vert_inv
-    simpa only [c, resolutionComparison_hom] using (hC.vert_comp (hP.vert_comp hR)).w
+    simp only [c, resolutionComparison_hom]
+    exact (hC.vert_comp (hP.vert_comp hR)).w
   · intro A I I' _ _ hI hI' g
     have hC := CommSq.mk (SingleResolutionAux.comparison_right (ihomBifunctor k₀ l X) g
       ((CochainComplex.singleFunctor _ 0).obj A))
     have hP := (CommSq.mk (projection_right A g)).map DerivedCategory.Q
     have hR := CommSq.mk (Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_inv
       (ihomFunctor k₀ l X A) g)
-    simpa only [c, resolutionComparison_hom] using (hC.vert_comp (hP.vert_comp hR)).w
+    simp only [c, resolutionComparison_hom]
+    exact (hC.vert_comp (hP.vert_comp hR)).w
   · intro A N _
     refine ⟨resolutionComparison A (DerivedCategory.kInjectiveRep N)
       (hi A (DerivedCategory.kInjectiveRep N)) ≪≫

@@ -139,7 +139,6 @@ lemma nativeWeilHom_map_model_hom (P : CochainComplex (ProEtaleWeilSheaf k₀ l 
     Category.id_comp] at h
   exact h
 
-set_option trace.profiler true in
 /-- **The native internal hom out of a single sheaf**: for a pro-étale Weil sheaf `A` placed in
 degree `d`, the native derived internal hom `RHom(A[-d], -)` is `R𝓗om(A, -)[d]`, naturally. On a
 K-injective complex `I` it is the hom complex into `I`
