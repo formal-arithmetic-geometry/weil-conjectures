@@ -69,8 +69,6 @@ variable {A B A' B' : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCom
   {f : A ⟶ B} {g : B' ⟶ B} {f' : A' ⟶ B'} {g' : A' ⟶ A}
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the instances of the categories of module objects are found for the ambient lemma
 /-- **Weakly étale base change on bounded constructible complexes**: for a commutative square
 `g' ≫ f = f' ≫ g` whose underlying square of schemes is cartesian, with `g` and `g'` weakly étale
 (for instance open immersions), the base change morphism `Lg^* Rf_* ⟶ Rf'_* Lg'^*` is an
@@ -88,15 +86,10 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
   have hamb : IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq).app K.obj) := by
     have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ) hsq
     infer_instance
-  unfold baseChangeMap at hamb
-  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso] at hamb
-  have hθ (K : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
-      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
-  have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
+  exact Adjunction.isIso_exchangeRight_restrictFullyFaithful_app
+    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
+    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
+    (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
@@ -104,9 +97,8 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
-    hθ K hamb
-  convert key using 3
-  all_goals rfl
+    (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+      ℓ (Profinite.padicAlgClRingObj ℓ) sq) K hamb
 
 end BaseChange
 
