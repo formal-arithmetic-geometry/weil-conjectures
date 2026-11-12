@@ -228,6 +228,7 @@ private instance stabilizationTensorRightSequential (T : Scheme.{u}) :
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := by
   infer_instance
 
+set_option trace.profiler true in
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
 of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible at `L(𝟙)^* C` (stabilization at the
