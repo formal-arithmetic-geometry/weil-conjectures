@@ -96,7 +96,6 @@ private lemma exists_generic_coordinates_mono {k : Type u} [Field k] {Y : Scheme
   obtain ⟨K, hK, ξ, t, ht, hi⟩ := hgen i
   exact ⟨K, hK, ξ, t, ht, h _ _ hi⟩
 
-set_option profiler true in
 /-- A morphism between bounded constructible complexes is invertible away from finitely many
 closed points if it is invertible over the generic points of local coordinate lines. -/
 private theorem exists_finset_isIso_of_forall_exists_coordinates
@@ -473,7 +472,6 @@ section LocalCoordinates
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Local affine charts give coordinates on a neighbourhood of each special-fibre point,
 with the original Künneth map invertible after pullback to their generic fibres. -/
@@ -528,6 +526,8 @@ private theorem exists_local_coordinates_isIso_kunnethMap
     refine exists_generic_coordinates_mono (Y := (P.restrictSpecialFibre U).left)
       (Q := fun T r ↦ IsIso (L((r)^*⟦Λ⟧).map
         (kunnethMap Λ ψ₁ ψ₂ (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B))))
+      (Q' := fun T r ↦ IsIso (L((r)^*⟦Λ⟧).map
+        (L(((P.i ⁻¹ᵁ U).ι)^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))))
       (fun T r hi ↦ ?_)
       (exists_coordinates_isIso_kunnethMap_of_charts Λ hMV hNW hpbU hPU hgenU
         (hm.restrict V) (hm'.restrict W) hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB')
@@ -536,7 +536,6 @@ private theorem exists_local_coordinates_isIso_kunnethMap
 
 end LocalCoordinates
 
-set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
