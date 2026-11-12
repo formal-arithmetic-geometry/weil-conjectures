@@ -334,6 +334,8 @@ private theorem residue_open_image
   exact ⟨hbc, min a b, max b a + d, hta⟩
 
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.
+set_option maxHeartbeats 800000 in
+set_option profiler true in
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
