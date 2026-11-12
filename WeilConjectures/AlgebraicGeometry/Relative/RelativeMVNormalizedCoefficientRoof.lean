@@ -24,10 +24,35 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CochainComplex
 namespace AlgebraicGeometry
 
+private lemma normalized_localization_naturality
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {I L E : C} {A B : D} (r : I ⟶ L) (e : L ≅ E) (p : I ⟶ E)
+    (q : A ⟶ B) (ηI : A ⟶ F.obj I) (ηL : B ⟶ F.obj L)
+    (hn : q ≫ ηL = ηI ≫ F.map r) (hr : r ≫ e.hom = p) :
+    q ≫ ηL ≫ F.map e.hom = ηI ≫ F.map p := by
+  rw [← Category.assoc, hn, Category.assoc, ← F.map_comp, hr]
+
+private lemma normalized_roof_of_comparison
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B T A' B' : D} {Y Y' : C}
+    (u : A ⟶ B) (v : T ⟶ B) [IsIso v] (η : T ⟶ F.obj Y)
+    (a : A ≅ A') (b : Y ≅ Y') (d : B ≅ B')
+    (β : A' ⟶ B') (δ : B' ⟶ F.obj Y')
+    (hu : u ≫ d.hom = a.hom ≫ β)
+    (hv : v ≫ d.hom ≫ δ = η ≫ F.map b.hom) :
+    u ≫ inv v ≫ η = a.hom ≫ β ≫ δ ≫ F.map b.inv := by
+  have hvinv : inv v ≫ η = d.hom ≫ δ ≫ F.map b.inv := by
+    apply (cancel_epi v).mp
+    simp only [IsIso.hom_inv_id_assoc]
+    have he := congrArg (fun t ↦ t ≫ F.map b.inv) hv
+    simp only [Category.assoc, ← F.map_comp, b.hom_inv_id, F.map_id,
+      Category.comp_id] at he
+    exact he.symm
+  rw [hvinv, ← Category.assoc, ← Category.assoc, hu]
+  simp only [Category.assoc]
+
 set_option linter.all false in
-set_option maxHeartbeats 600000 in
 set_option profiler true in
--- Normalization compares several chosen derived functors on three representatives.
 /-- A normalized coefficient roof localizes to the corresponding direct-image
 square mate. Source: Stacks Project, Tags 08HY and 0D5T.
 (blueprint: lem-pc-relative-mv-normalized-coefficient-roof).
@@ -107,8 +132,11 @@ theorem relativeMV_normalized_coefficient_roof
     dsimp only [d, a, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
     rw [← schemeMVDirectImageLocalization_app f L,
       ← schemeMVDirectImageLocalization_app f I]
-    rw [← Category.assoc, hn, Category.assoc,
-      ← Functor.map_comp, hnr, Functor.map_comp, Category.assoc]
+    have ht := normalized_localization_naturality (schemeDerivedDirectImage f)
+      (DerivedCategory.Q.map r) eL (eI.hom ≫ β) (DerivedCategory.Q.map (Ff.map r))
+      ((schemeMVDirectImageLocalization f).app I)
+      ((schemeMVDirectImageLocalization f).app L) hn hnr
+    simpa only [Functor.map_comp, Category.assoc] using ht
   have hn := (schemeMVDirectImageLocalization f).naturality s
   dsimp only [Functor.comp_map] at hn
   have hfs : DerivedCategory.Q.map (Ff.map s) ≫
@@ -119,8 +147,11 @@ theorem relativeMV_normalized_coefficient_roof
           (.up ℤ)).obj J) ≫
       (schemeDerivedDirectImage f).map ((schemeMVDirectImageLocalization g').app J) ≫
       (schemeDerivedDirectImage f).map ((schemeDerivedDirectImage g').map eJ.hom) := by
-    rw [← Category.assoc, hn, Category.assoc,
-      ← Functor.map_comp, hns, Functor.map_comp]
+    have ht := normalized_localization_naturality (schemeDerivedDirectImage f)
+      (DerivedCategory.Q.map s) eL _ (DerivedCategory.Q.map (Ff.map s))
+      ((schemeMVDirectImageLocalization f).app _)
+      ((schemeMVDirectImageLocalization f).app L) hn hns
+    simpa only [Functor.map_comp] using ht
   have hd := δ.naturality eJ.hom
   dsimp only [Functor.comp_map] at hd
   have hunit := relativeMV_direct_image_square_localization f f' g g' h J
@@ -160,17 +191,9 @@ theorem relativeMV_normalized_coefficient_roof
           DerivedCategory.Q.map_id, Category.id_comp, ← Functor.map_comp]
         dsimp only [b, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
         rw [schemeMVDirectImageLocalization_app f' J]
-  have hvinv : inv (DerivedCategory.Q.map v) ≫
-      (schemeMVDirectImageLocalization g).app (Ff'.obj J) =
-      d.hom ≫ δ.app E' ≫ (schemeDerivedDirectImage g).map b.inv := by
-    apply (cancel_epi (DerivedCategory.Q.map v)).mp
-    simp only [IsIso.hom_inv_id_assoc]
-    have he := congrArg (fun t ↦ t ≫ (schemeDerivedDirectImage g).map b.inv) hvn
-    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id] at he
-    rw [(schemeDerivedDirectImage g).map_id] at he
-    exact (Category.comp_id _).symm.trans he.symm
-  rw [hvinv]
-  simpa only [Category.assoc] using congrArg (fun t ↦
-    t ≫ δ.app E' ≫ (schemeDerivedDirectImage g).map b.inv) hu
+  exact normalized_roof_of_comparison (schemeDerivedDirectImage g)
+    (DerivedCategory.Q.map (Ff.map r)) (DerivedCategory.Q.map v)
+    ((schemeMVDirectImageLocalization g).app (Ff'.obj J)) a b d
+    ((schemeDerivedDirectImage f).map β) (δ.app E') hu hvn
 
 end AlgebraicGeometry

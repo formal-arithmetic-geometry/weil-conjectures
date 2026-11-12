@@ -153,9 +153,7 @@ private theorem open_resolution_numerator
     Functor.mapIso_inv, H, Functor.map_comp, Category.assoc, Iso.hom_inv_id, Category.comp_id]
     using hh
 
-set_option maxHeartbeats 500000 in
 set_option profiler true in
--- Normalization of the composed derived and open functors needs extra heartbeats.
 private theorem open_resolution_denominator_intersection
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -195,8 +193,10 @@ private theorem open_resolution_denominator_intersection
         g'.toLRSHom.toShHom (schemeOpenModuleImageComplex X' W' J)).hom ≫
       DerivedCategory.Q.map (schemeMVImageComponent g' W J L s) =
       (schemeMVOpenComparison g' W K').hom ≫ b.inv := by
+    have hcomp := schemeMV_image_resolution_comparison_intersection X' X g' U V K' s hf
+    dsimp only [schemeMVImageChainMap] at hcomp
     dsimp only [a, b, Iso.trans_inv, Functor.mapIso_inv]
-    exact schemeMV_image_resolution_comparison_intersection X' X g' U V K' s hf
+    exact hcomp
   have hh := congrArg (fun t ↦
     (schemeMVDirectImageLocalization g').app (schemeOpenModuleImageComplex X' W' J) ≫
       (schemeDerivedDirectImage g').map a.hom ≫ t) hn
