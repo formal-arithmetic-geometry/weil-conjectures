@@ -185,7 +185,7 @@ theorem nativeChainForgetComponent_transport
         (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
       E U F G r.tensor o.tensor
       hτ (nativeTensorComplex T)
-      (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D) P Q N
+      (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D) _ _ _ P Q N
       (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom
     · intro P Q
       exact native_weil_tensor_ringed_binary_chain_square D d o r P Q
