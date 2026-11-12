@@ -138,6 +138,7 @@ private theorem map_comp_square
     F.map (f ≫ g) ≫ h = (F.map f ≫ k) ≫ t := by
   rw [Functor.map_comp, Category.assoc, hn, Category.assoc]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- The tensor-cohomology transports require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in

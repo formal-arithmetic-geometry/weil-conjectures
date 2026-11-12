@@ -75,6 +75,7 @@ private theorem transport_representatives
 
 set_option linter.unusedVariables false in
 -- The quantified proof hypotheses occur only in the proof, not in the conclusion.
+set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- Elaborating the stalk tensor-model instances and their scalar extensions needs this budget.
 /-- Transport the localized tensor comparison into derived pullback, independently

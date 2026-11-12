@@ -77,6 +77,7 @@ private theorem square_of_normalizations
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- The two squares require elaborating distinct nested stalk cohomology models.
 /-- Pointwise comparison arrows are conjugate when the spectrum representatives
