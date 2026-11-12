@@ -44,6 +44,17 @@ attribute [-instance] monoidalCategory_boundedConstructible
 
 namespace NearbyCyclesModel
 
+/-- Vanishing after pullback is preserved by any further factorization of the map. -/
+lemma isZero_leftDerivedUpperStar_of_factorization
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {Y Z W : Scheme.{u}} (p : W ⟶ Y) (q : Z ⟶ Y)
+    (hp : ∃ l : W ⟶ Z, l ≫ q = p)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) (hC : IsZero (L((q)^*⟦Λ⟧).obj C)) :
+    IsZero (L((p)^*⟦Λ⟧).obj C) := by
+  obtain ⟨l, hl⟩ := hp
+  exact (L((l)^*⟦Λ⟧).map_isZero hC).of_iso ((leftDerivedUpperStarCompOfEq Λ hl).app C)
+
 variable {k : Type u} [Field k] {k' : Type u} [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X.left X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
@@ -234,9 +245,8 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     have hz : IsZero (L((sliceSpecialMap (traitSliceCoord k') hRM (hcoord a))^*⟦
         Profinite.padicAlgClRingObj ℓ⟧).obj (L((r')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) :=
       Triangle.isZero₃_of_isIso₁ _ hT₂ hs'
-    obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hRM (hcoord a)
-    exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
-      ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hl).app _)
+    exact isZero_leftDerivedUpperStar_of_factorization (Profinite.padicAlgClRingObj ℓ) _ _
+      (exists_comp_sliceSpecialMap (traitSliceCoord k') hRM (hcoord a)) _ hz
 
 /-- **The base case of the finite-support step** (blueprint `sk-prop-tf-nearby-duality-foundation`,
 "This also supplies the base case `n = 0`"): if the special fibre `X'` has finitely many points,
