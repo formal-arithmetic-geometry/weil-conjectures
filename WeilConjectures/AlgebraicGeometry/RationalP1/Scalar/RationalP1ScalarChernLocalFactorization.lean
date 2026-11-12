@@ -293,6 +293,25 @@ private theorem canonical_local_adjunct
   unfold modelLocalAdjunct
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
+-- Identify any factored adjunct using its normalized unit pullback.
+private theorem canonical_local_adjunct_of_eq
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S)
+    (D : DiagonalRightDerived (CondensedRing.lowerStar Λ f))
+    (canonical : D.R = derivedLower Λ f)
+    (hcanonical : IsCanonicalRightDerived (CondensedRing.lowerStar Λ f) D canonical)
+    (u : (derivedUpper Λ f).obj (unit Λ S) ⟶ unit Λ X)
+    (hu : ∀ cF : UnitPullEndpoint Λ f, cF.derived = u)
+    {T : DerivedCategory (Modules Λ X)} {z : unit Λ X ⟶ T}
+    {c : unit Λ S ⟶ D.R.obj T} (hc : c = regularUnitPush Λ f D ≫ D.R.map z) :
+    c ≫ (eqToIso canonical).hom.app T =
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).homEquiv _ _ (u ≫ z) := by
+  obtain ⟨cF⟩ := unitEndpoint_nonempty Λ f
+  refine (hc =≫ (eqToIso canonical).hom.app T).trans
+    ((canonical_local_adjunct Λ f D canonical hcanonical cF T z).trans ?_)
+  exact congrArg ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).homEquiv
+    (unit Λ S) T) (hu cF =≫ z)
+
 -- Compare the canonical adjunct and the monoidal endpoint before specializing coefficients.
 private theorem canonical_q_local_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -399,12 +418,11 @@ theorem scalar_chern_local_factorization
       _ (family.integral E).Rq (family.rational E).Rq (family.toRational E).q.square
       ((family.toRational E).units Y) ((family.toRational E).units (ProjectiveLine Y))
       (family.toRational E).lineP hi
-    refine Eq.trans ?_ (canonical_q_local_adjunct (coefficient l (some E)).X Y
+    have hfinal := canonical_local_adjunct_of_eq
+      (Profinite.continuousMapRingObj.{u} E.1) (ProjectiveLine Y ↘ Y)
       (family.rational E).Rq (family.rational E).q_canonical (family.rational E).q_unit
-      _ (scalarQLocalChern l E Y r z))
-    unfold scalarQChern scalarQLocalChern
-    dsimp only
-    exact hq =≫ (eqToIso (family.rational E).q_canonical).hom.app _
+      (scalarUnitPullIso _ Y).hom (unitPullEndpoint_eq _ Y) hq
+    simpa only [scalarQChern, scalarQLocalChern, coefficient, line] using hfinal
   · have hreal := realize_local_regular_adjunct l _ hP r.t₂.toPresentation
       r.eW r.eP family.zl.R₂ family.zl.p₂_canonical family.zl.p₂_unit r.p₂_square b hb w hw
     have hi := extend_local_adjunct_of_eq (integralMap l E) _ family.zl.R₂
@@ -415,11 +433,11 @@ theorem scalar_chern_local_factorization
       _ (family.integral E).R₂ (family.rational E).R₂ (family.toRational E).p₂.square
       ((family.toRational E).units (ProjectiveLine Y))
       ((family.toRational E).units (diagonalSurface Y)) (family.toRational E).lineW hi
-    refine Eq.trans ?_ (canonical_p2_local_adjunct (coefficient l (some E)).X Y
+    have hfinal := canonical_local_adjunct_of_eq
+      (Profinite.continuousMapRingObj.{u} E.1) (secondProjection Y)
       (family.rational E).R₂ (family.rational E).p₂_canonical (family.rational E).p₂_unit
-      _ (scalarP2LocalChern l E Y r w))
-    unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
-    dsimp only
-    exact hq =≫ (eqToIso (family.rational E).p₂_canonical).hom.app _
+      (scalarP2UnitIso _ Y).hom (native_p2_endpoint _ Y) hq
+    simpa only [scalarP2Chern, scalarP2LocalChern, secondDiagramPushIso, coefficient, line]
+      using hfinal
 
 end AlgebraicGeometry.ProEtale.RationalP1
