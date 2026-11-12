@@ -256,8 +256,6 @@ lemma boundedConstructiblePullbackSquareComparison_inv_app_paste_vert {i : X ⟶
   simp only [eqToHom_trans_assoc]
 
 
-set_option maxHeartbeats 1000000 in
--- the comparison of the projection formulas with their composition laws is slow
 /-- **The projection formula is compatible with base change, by factorisation**: for a cartesian
 square `g' ≫ f = f' ≫ g` and factorisations `f = i ≫ p`, `f' = i' ≫ p'` into open immersions
 followed by proper maps, through cartesian squares `g' ≫ i = i' ≫ gZ` and `gZ ≫ p = p' ≫ g`, the
@@ -282,6 +280,8 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
         sq.toCommSq)
       (boundedConstructibleExceptionalProjection ℓ f)
       (boundedConstructibleExceptionalProjection ℓ f') := by
+  -- Eliminate the equality transports before comparing the composition laws.
+  subst hf hf'
   refine ProjectionBaseChange.pfBaseChange_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gZ)
@@ -294,27 +294,25 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq)
     (boundedConstructibleExceptionalProjection ℓ p)
     (boundedConstructibleExceptionalProjection ℓ i)
-    (boundedConstructibleExceptionalProjection ℓ f)
+    (boundedConstructibleExceptionalProjection ℓ (i ≫ p))
     (boundedConstructibleExceptionalProjection ℓ p')
     (boundedConstructibleExceptionalProjection ℓ i')
-    (boundedConstructibleExceptionalProjection ℓ f')
-    (boundedConstructibleLowerShriekCompOfEq ℓ hf) (boundedConstructibleLowerShriekCompOfEq ℓ hf')
-    (boundedConstructibleUpperStarCompOfEq ℓ hf) (boundedConstructibleUpperStarCompOfEq ℓ hf')
+    (boundedConstructibleExceptionalProjection ℓ (i' ≫ p'))
+    (boundedConstructibleLowerShriekCompOfEq ℓ (rfl : i ≫ p = i ≫ p))
+    (boundedConstructibleLowerShriekCompOfEq ℓ (rfl : i' ≫ p' = i' ≫ p'))
+    (boundedConstructibleUpperStarCompOfEq ℓ (rfl : i ≫ p = i ≫ p))
+    (boundedConstructibleUpperStarCompOfEq ℓ (rfl : i' ≫ p' = i' ≫ p'))
     ?_ ?_ ?_ ?_ ?_ ?_
   · intro K B
-    rw [boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app]
-    convert boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ hf K B using 3
+    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ
+      (rfl : i ≫ p = i ≫ p) K B
   · intro K B
-    rw [boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app]
-    convert boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ hf' K B using 3
+    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ
+      (rfl : i' ≫ p' = i' ≫ p') K B
   · exact fun M ↦ boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert_of_eq ℓ sq s₁ s₂
-      hf' hf M
+      rfl rfl M
   · exact fun B ↦ boundedConstructiblePullbackSquareComparison_inv_app_paste_vert ℓ sq.toCommSq
-      s₁.toCommSq s₂.toCommSq hf hf' B
+      s₁.toCommSq s₂.toCommSq rfl rfl B
   · exact boundedConstructibleExceptionalProjectionMorphism_baseChange ℓ s₂
   · exact pfBaseChange_boundedConstructibleExceptionalProjection_of_isOpenImmersion ℓ s₁
 
