@@ -76,7 +76,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
-    (SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n).isIso := by
+    SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n := by
+  refine ⟨?_⟩
   intro X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂' φ₁ φ₂ qM gM qN gN hM hN hpb hP hgen hX hY hZ b hb
     m₁ m₂ hle h₁ h₂ eM heM eN heN A B hA hB
   obtain ⟨E, A₀, B₀, ⟨eA⟩, ⟨eB⟩⟩ :=
@@ -124,7 +125,7 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
     SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n :=
-  ⟨sliceKunnethFormula_padicAlgCl_isIso h⟩
+  sliceKunnethFormula_padicAlgCl_isIso h
 
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- **Gabber's Künneth formula for proper models with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**
