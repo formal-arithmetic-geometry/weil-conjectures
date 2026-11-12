@@ -191,15 +191,9 @@ theorem relativeMV_resolved_roof_middle_mate_comparison
     (η.app (Ff'.obj (JU ⊞ JV))) (η.app (Ff'.obj JU)) (η.app (Ff'.obj JV))
     (DerivedCategory.Q.map u.τ₂) pU pV (DerivedCategory.Q.map v.τ₂) qU qV hp hq ha
   have hmates := relativeMV_pair_mates adj i j eU eV eU' eV' (b U).hom (b V).hom
-  have hU' : pU ≫ inv qU ≫ η.app (Ff'.obj JU) =
-      (adj.homEquiv (H.obj IU) (H'.obj JU))
-        (eU.hom ≫ (b U).hom ≫ eU'.inv) := by
-    simpa only [pU, qU, wU, T, H, Ff, Ff', F, G, c, JU, J, sU, L] using hU
-  have hV' : pV ≫ inv qV ≫ η.app (Ff'.obj JV) =
-      (adj.homEquiv (H.obj IV) (H'.obj JV))
-        (eV.hom ≫ (b V).hom ≫ eV'.inv) := by
-    simpa only [pV, qV, wV, T, H, Ff, Ff', F, G, c, JV, J, sV, L] using hV
-  rw [hU', hV'] at hroof
+  change pU ≫ inv qU ≫ η.app (Ff'.obj JU) = _ at hU
+  change pV ≫ inv qV ≫ η.app (Ff'.obj JV) = _ at hV
+  rw [hU, hV] at hroof
   apply (cancel_mono ((schemeDerivedDirectImage g).map j.hom ≫
     ((schemeDerivedDirectImage g).mapBiprod (H'.obj JU) (H'.obj JV)).hom)).mp
   simpa only [Category.assoc, e₂, e₂'] using hroof.trans hmates.symm
