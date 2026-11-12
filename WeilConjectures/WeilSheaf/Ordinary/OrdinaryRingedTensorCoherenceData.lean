@@ -30,9 +30,8 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 
 -- Share the concrete cochain structures across the comparison fields.
 local instance ordinaryRingedTensorSourceMonoidal :
-    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) where
-  toMonoidalCategoryStruct := HomologicalComplex.monoidalCategoryStruct _ (.up ℤ)
-  __ := Mod.monoidalCategoryCochainComplex
+    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
+  Mod.monoidalCategoryCochainComplex
 
 local instance ordinaryRingedTensorSourceStruct :
     MonoidalCategoryStruct (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
@@ -43,9 +42,8 @@ local instance ordinaryRingedTensorTargetCoefficients :
   SheafOfModules.monoidalCategory R
 
 local instance ordinaryRingedTensorTargetMonoidal :
-    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) where
-  tensorObj P Q := (coefficientTotalTensor J R).obj (P, Q)
-  __ := HomologicalComplex.monoidalCategory _ (.up ℤ)
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
+  HomologicalComplex.monoidalCategory _ (.up ℤ)
 
 local instance ordinaryRingedTensorTargetStruct :
     MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
@@ -100,10 +98,15 @@ structure OrdinaryRingedTensorChainComparison
         (.up ℤ) p q n hpq) ≫
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
-      (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
-        RingedForgetTensorTransposition.tensorSummand J R
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)
+      (by
+        change E.functor.obj (((ordinaryTensorBifunctor l Y).obj (P.X p)).obj (Q.X q)) ⟶
+          ((coefficientTotalTensor J R).obj
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q,
+              (E.functor.mapHomologicalComplex (.up ℤ)).obj P)).X n
+        exact (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
+          RingedForgetTensorTransposition.tensorSummand J R
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
   associativity (P Q N : CochainComplex (ProEtale.AdicSheaf l
       Y) ℤ) :
     let G := E.functor.mapHomologicalComplex (.up ℤ)
