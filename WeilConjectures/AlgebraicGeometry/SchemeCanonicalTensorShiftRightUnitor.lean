@@ -30,8 +30,39 @@ variable (C : Type u) [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{s} C]
 
 attribute [local instance] commShift₂CurriedTensor
 
-set_option maxHeartbeats 400000 in
--- Elaborating the shifted K-flat representative exceeds the default heartbeat limit.
+-- Cache the tensor structures used repeatedly in the localization comparison.
+private noncomputable local instance rightUnitor_cochainMonoidal :
+    MonoidalCategory (CochainComplex C ℤ) := inferInstance
+
+private noncomputable local instance rightUnitor_homotopyMonoidal :
+    MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
+
+private noncomputable local instance rightUnitor_derivedMonoidal :
+    MonoidalCategory (DerivedCategory C) := inferInstance
+
+open DerivedCategory.TensorCommShift₂ in
+private lemma rightUnitor_liftingIsoApp_hom (P : CochainComplex.KFlat C) :
+    (Functor.CommShift₂OfLocalization.liftingIsoApp (L C) (LKFlat C)
+      (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
+      (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)).app P ≫
+        (L C).map (ρ_ P.obj).hom =
+      (ρ_ ((LKFlat C).obj P)).hom := by
+  have h := DerivedMonoidal.rightUnitor_hom_app Qh (HomotopyCategory.quasiIso C (.up ℤ))
+    ((HomotopyCategory.quotient C _).obj P.obj)
+  have h' := HomotopyCategory.MonoidalCategory.rightUnitor_hom_app P.obj
+  exact (congrArg (_ ≫ Qh.map ·) h'.symm).trans h.symm
+
+open DerivedCategory.TensorCommShift₂ in
+omit [Abelian.HasFunctorialFlatResolution C] [HasColimitsOfSize.{0, 0} C]
+  [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (.up ℤ))] in
+private lemma rightUnitor_shift_tensor_hom (P : CochainComplex.KFlat C) (n : ℤ) :
+    (((F C).flip.obj (𝟙_ _)).commShiftIso n).hom.app P =
+      (L C).map (((CochainComplex.ιKFlat C).commShiftIso n).hom.app P ▷ 𝟙_ _ ≫
+        (CochainComplex.mapBifunctorShift₁Iso P.obj (𝟙_ _) (curriedTensor C) n).hom) ≫
+        ((L C).commShiftIso n).hom.app _ := by
+  erw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app]
+  rfl
+
 open DerivedCategory.TensorCommShift₂ in
 private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app
@@ -46,21 +77,8 @@ private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
     (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
     (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)) n P
   rw [Functor.commShiftIso_comp_hom_app] at h₁
-  have hr (P : CochainComplex.KFlat C) : (Functor.CommShift₂OfLocalization.liftingIsoApp (L C)
-      (LKFlat C) (HomologicalComplex.quasiIso C (.up ℤ))
-      (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat (F C).flip
-      (curriedTensor (DerivedCategory C)).flip (𝟙_ _)).app P ≫ (L C).map (ρ_ P.obj).hom =
-        (ρ_ ((LKFlat C).obj P)).hom := by
-    have h := DerivedMonoidal.rightUnitor_hom_app Qh (HomotopyCategory.quasiIso C (.up ℤ))
-      ((HomotopyCategory.quotient C _).obj P.obj)
-    have h' := HomotopyCategory.MonoidalCategory.rightUnitor_hom_app P.obj
-    exact (congrArg (_ ≫ Qh.map ·) h'.symm).trans h.symm
-  have h₂ : (((F C).flip.obj (𝟙_ _)).commShiftIso n).hom.app P =
-      (L C).map (a ▷ 𝟙_ _ ≫
-        (CochainComplex.mapBifunctorShift₁Iso P.obj (𝟙_ _) (curriedTensor C) n).hom) ≫
-        ((L C).commShiftIso n).hom.app _ := by
-    erw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app]
-    rfl
+  have hr := rightUnitor_liftingIsoApp_hom C
+  have h₂ := rightUnitor_shift_tensor_hom C P n
   have h₃ : ((LKFlat C).commShiftIso n).hom.app P =
       (L C).map (a) ≫
       ((L C).commShiftIso n).hom.app P.obj :=
