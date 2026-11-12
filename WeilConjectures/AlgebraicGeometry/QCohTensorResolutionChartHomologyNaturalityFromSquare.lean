@@ -24,7 +24,6 @@ local instance trChartHomFromSquareObjZero (X : Scheme.{u}) (M : X.Modules) :
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- Naturality of chart homology follows from the tensor-model chain square. -/
 theorem tensorResolutionChartHomologyIso_naturality_of_square

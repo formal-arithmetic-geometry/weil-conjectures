@@ -29,7 +29,6 @@ local instance TensorResolutionComparisonRestrictionNaturality_localInst4
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
-set_option maxHeartbeats 400000 in
 -- The four tensor squares need a larger elaboration budget.
 /-- The common K-flat zigzag respects three compatible restriction squares.
 
