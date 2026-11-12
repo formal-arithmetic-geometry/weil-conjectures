@@ -43,24 +43,22 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 /-- Transport a retraction and its coinvariant property simultaneously for all functors.
 The witness is constructed before the target category and functor are chosen. -/
 lemma CategoryTheory.exists_retraction_of_eq_comp_map_comp_of_coinvariant
-    {C D E : Type*} [Category C] [Category D] [Category E] (F₁ : C ⥤ D) (F₂ : D ⥤ E)
-    {A₀ T : C} {W : D} {P : E} (α : P ⟶ F₂.obj W) (i : P ≅ F₂.obj (F₁.obj A₀))
-    (c : F₁.obj T ⟶ W) (κ : F₂.obj (F₁.obj T) ≅ F₂.obj W) (hκ : κ.hom = F₂.map c)
-    (η : A₀ ⟶ T) (R : T ⟶ A₀) (hα : α = i.hom ≫ F₂.map (F₁.map η ≫ c))
-    (hR : η ≫ R = 𝟙 A₀) {ι : Type*} (act : ι → (T ⟶ T))
-    (ρ : ι → (F₂.obj W ⟶ F₂.obj W))
-    (hρ : ∀ σ, ρ σ = κ.inv ≫ F₂.map (F₁.map (act σ)) ≫ κ.hom) :
+    {C E : Type*} [Category C] [Category E] (F : C ⥤ E)
+    {A₀ T : C} {P Q : E} (α : P ⟶ Q) (i : P ≅ F.obj A₀) (κ : F.obj T ≅ Q)
+    (η : A₀ ⟶ T) (R : T ⟶ A₀) (hα : α = i.hom ≫ F.map η ≫ κ.hom)
+    (hR : η ≫ R = 𝟙 A₀) {ι : Type*} (act : ι → (T ⟶ T)) (ρ : ι → (Q ⟶ Q))
+    (hρ : ∀ σ, ρ σ = κ.inv ≫ F.map (act σ) ≫ κ.hom) :
     ∃ r, α ≫ r = 𝟙 P ∧
-      ∀ {A : Type*} [Category A] (G : E ⥤ A) {B : A} (φ : G.obj (F₂.obj W) ⟶ B),
-        (∀ φ' : G.obj (F₂.obj (F₁.obj T)) ⟶ B,
-          (∀ σ, G.map (F₂.map (F₁.map (act σ))) ≫ φ' = φ') →
-            G.map (F₂.map (F₁.map (R ≫ η))) ≫ φ' = φ') →
+      ∀ {A : Type*} [Category A] (G : E ⥤ A) {B : A} (φ : G.obj Q ⟶ B),
+        (∀ φ' : G.obj (F.obj T) ⟶ B,
+          (∀ σ, G.map (F.map (act σ)) ≫ φ' = φ') →
+            G.map (F.map (R ≫ η)) ≫ φ' = φ') →
         (∀ σ, G.map (ρ σ) ≫ φ = φ) → G.map (r ≫ α) ≫ φ = φ := by
-  refine ⟨_, (retraction_of_eq_comp_map_comp_of_coinvariant F₁ F₂ (𝟭 E)
-    α i c κ hκ η R hα hR act ρ hρ).1, ?_⟩
+  refine ⟨_, (retraction_of_eq_comp_map_comp_of_coinvariant F (𝟭 E) (𝟭 E)
+    α i κ.hom κ rfl η R hα hR act ρ hρ).1, ?_⟩
   intro A _ G B φ hcoinv hφ
-  exact (retraction_of_eq_comp_map_comp_of_coinvariant F₁ F₂ G
-    α i c κ hκ η R hα hR act ρ hρ).2 φ hcoinv hφ
+  exact (retraction_of_eq_comp_map_comp_of_coinvariant F (𝟭 E) G
+    α i κ.hom κ rfl η R hα hR act ρ hρ).2 φ hcoinv hφ
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
@@ -253,15 +251,19 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   have hα := Hom.pullbackExchange_app_of_total_eq_id (Profinite.continuousMapRingObj T₀) N (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
-  let i := (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app ((N.nearbyCycles (Profinite.continuousMapRingObj T₀)).obj C)
-  let eLayer := N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C
+  rw [Functor.map_comp] at hα
   refine Exists.imp ?_ (exists_retraction_of_eq_comp_map_comp_of_coinvariant
-    R((N.j)_*⟦(Profinite.continuousMapRingObj T₀)⟧) L((N.i)^*⟦(Profinite.continuousMapRingObj T₀)⟧)
-    (A₀ := L((N.ε)^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj C)
-    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦(Profinite.continuousMapRingObj T₀)⟧).obj (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj (L((N.ε)^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj C)))
-    (W := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))) ≫ N.j)_*⟦(Profinite.continuousMapRingObj T₀)⟧).obj
-      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))) ≫ N.ε)^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj (L((𝟙 X)^*⟦(Profinite.continuousMapRingObj T₀)⟧).obj C)))
-    ((N.galoisLayerHom h Ω).pullbackExchange (Profinite.continuousMapRingObj T₀) |>.app C) i _ eLayer rfl _ R hα hRC
+    (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
+    (A₀ := L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)
+    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦Profinite.continuousMapRingObj T₀⟧).obj
+      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦Profinite.continuousMapRingObj T₀⟧).obj
+        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))
+    (((N.galoisLayerHom h Ω).pullbackExchange (Profinite.continuousMapRingObj T₀)).app C)
+    ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app _)
+    (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C)
+    ((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
+    R hα hRC
       (fun k ↦ derivedUnitTransport (Profinite.continuousMapRingObj T₀)
         (pullbackAction h _ specGaloisAction_comp (act k))
         (pullbackAction_fst h _ specGaloisAction_comp (act k))
