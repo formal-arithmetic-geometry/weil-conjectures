@@ -310,7 +310,6 @@ theorem zeroLocusMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Alge
   rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
     homMulEquiv_zeroLocusMulEquiv_comp]
 
-set_option profiler true in
 /-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
 (`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
@@ -324,6 +323,7 @@ theorem containsCommutators_subgroupSchemeHom
     IsMonHom.ContainsCommutators (subgroupSchemeHom h) := by
   refine ⟨fun {X} a b ↦ ?_⟩
   obtain ⟨R, _, _, t, ht⟩ := Over.exists_bijective_comp_toSpecΓ X
+  -- Fix the group of points used when transporting commutators.
   let : Group ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) := Hom.group
   obtain ⟨a', rfl⟩ := (ht _).2 a
   obtain ⟨b', rfl⟩ := (ht _).2 b
@@ -336,9 +336,8 @@ theorem containsCommutators_subgroupSchemeHom
   rw [Category.assoc, zeroLocusMulEquiv_comp_subgroupSchemeHom,
     show (⟨_, zeroLocus_le_zeroLocus h R hmem⟩ : zeroLocus I R) = x * y * x⁻¹ * y⁻¹ from rfl,
     ← commutatorElement_def, map_commutatorElement, commutatorElement_def,
-    MulEquiv.apply_symm_apply,
-    MulEquiv.apply_symm_apply, MonObj.comp_mul, MonObj.comp_mul, MonObj.comp_mul,
-    GrpObj.comp_inv, GrpObj.comp_inv]
+    MulEquiv.apply_symm_apply, MulEquiv.apply_symm_apply, MonObj.comp_mul, MonObj.comp_mul,
+    MonObj.comp_mul, GrpObj.comp_inv, GrpObj.comp_inv]
 
 end Inclusion
 
@@ -484,7 +483,6 @@ Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J
 instance : (derivedIdeal I).IsHopfIdeal k :=
   Ideal.isHopfIdeal_sSup fun _ ⟨hJ, _, _⟩ ↦ hJ
 
-set_option profiler true in
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 
 Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
