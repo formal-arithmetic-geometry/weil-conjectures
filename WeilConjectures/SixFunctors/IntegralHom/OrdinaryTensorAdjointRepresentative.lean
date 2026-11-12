@@ -124,7 +124,7 @@ private theorem derived_map_surjective
     (CategoryTheory.RingedDerivedNative.GenericDerived.qHomEquiv_map P I q).symm.trans hg⟩
 
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
-set_option profiler true in
+set_option maxHeartbeats 400000 in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] totalPair pair projection evaluate in
