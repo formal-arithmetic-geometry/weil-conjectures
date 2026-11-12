@@ -40,7 +40,7 @@ private theorem transport_triangle
       eB.hom ≫ (eB.inv ≫ T.mor₃ ≫ eN.hom⟦(1 : ℤ)⟧')
     simp only [Iso.hom_inv_id_assoc]
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing localized right adjoints and their composite shift isomorphism.
 /-- The inverse rotation of the direct-image Mayer--Vietoris triangle, expressed using
 any right adjoints to localized derived restrictions. Its second arrow is constructed by transposing
