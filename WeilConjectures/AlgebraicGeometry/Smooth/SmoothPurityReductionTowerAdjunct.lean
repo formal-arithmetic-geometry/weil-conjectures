@@ -135,9 +135,9 @@ private theorem scalar_adjunct_isIso_of_generators (hd : d = a ≫ b)
     (en : N ≅ A.model.E.obj X) (em : M ≅ D.model.E.obj X)
     (t : N ⟶ (restrictScalars ((sheafCompose J
       (forget₂ CommRingCat.{r} RingCat.{r})).map b)).obj M)
-    (ht : ∀ U x,
-      (t.val.app U (en.inv.val.app U (systemModelTmul A.model X U 1 x)) : M.val.obj U) =
-        em.inv.val.app U (systemModelTmul D.model X U 1 x)) :
+    (ht : ∀ U x, @Eq (M.val.obj U)
+      (t.val.app U (en.inv.val.app U (systemModelTmul A.model X U 1 x)))
+      (em.inv.val.app U (systemModelTmul D.model X U 1 x))) :
     IsIso ((B.ordinaryAdj.homEquiv N M).symm t) := by
   apply scalar_adjunct_isIso hd A B D X N M en em t
   intro U x

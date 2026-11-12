@@ -461,8 +461,8 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
   have hf (n : ℕ) : f.app (op n) = (μ ^ (n + 1)).asHom := power_on_complex l E T P n
   let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1)).asHom
     (Iso.refl P) (Iso.refl P) (by
-      rw [hf n]
-      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp])
+      change (f.app (op n) : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ (μ ^ (n + 1)).asHom
+      rw [Category.comp_id, Category.id_comp, hf n])
   let b (n : ℕ) := e.app (op n) ≪≫ c n
   refine ⟨b, ?_, ?_⟩
   · intro n
@@ -482,10 +482,10 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
           (f.naturality (homOfLE (Nat.le_succ n)).op).symm ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n
       apply coneIso_natural
-      · rw [hX]
-        simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-      · rw [hY]
-        simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      · change (X.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ μ.asHom
+        rw [Category.comp_id, Category.id_comp, hX]
+      · change (Y.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ 𝟙 P
+        rw [Category.comp_id, Category.id_comp, hY]
     change _ ≫ (e.hom.app (op n) ≫ (c n).hom) =
       (e.hom.app (op (n + 1)) ≫ (c (n + 1)).hom) ≫ _
     calc
