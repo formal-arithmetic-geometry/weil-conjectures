@@ -164,7 +164,6 @@ lemma isDualizable_shift_unit_derivedCategory (X : Scheme.{u}) (d : ℤ) :
 
 variable (k' : Type u) [Field k'] [IsSepClosed k']
 
-set_option trace.profiler true in
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism for
 `U = Lη̄^* (𝟙⟦d⟧)`: precomposed with the unit, it is the left projection morphism of the
