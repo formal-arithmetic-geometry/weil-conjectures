@@ -54,173 +54,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
 
-section
-open Lean Meta
-mutual
-/-- Syntactic first-order matching of a pattern `p` (with metavariables) against a term `t`,
-reporting the path to the first conflict. -/
-meta partial def ph083SynMatch (p t : Expr) : MetaM Unit := do
-  try ph083SynMatchCore p t
-  catch e =>
-    let p' ← instantiateMVars p
-    throwError m!"{e.toMessageData}\n<- {p'.getAppFn} /{p'.getAppNumArgs} vs {t.getAppFn}"
-
-/-- The matching step of `ph083SynMatch`: metavariables of `p` are assigned without type check,
-proof arguments are skipped, `(F ⋙ G).obj X` is unfolded one step, `ι.obj m` and `ι.map f` for the
-inclusion `ι` of a full subcategory are matched against projections, reducible definitions are
-unfolded, and the unifier is the last resort. -/
-meta partial def ph083SynMatchCore (p t : Expr) : MetaM Unit := do
-  let p ← instantiateMVars p
-  if p == t then return
-  let p' := p.consumeMData; let t' := t.consumeMData
-  if let .mvar m := p' then
-    unless ← m.isAssigned do
-      m.assign t'
-      return
-  -- `(F ⋙ G).obj X` and `(F ⋙ G).map f` are `G.obj (F.obj X)` and `G.map (F.map f)`
-  let compUnfold (e : Expr) : MetaM (Option Expr) := do
-    if (e.isAppOfArity ``CategoryTheory.Functor.obj 6 ||
-        e.isAppOfArity ``CategoryTheory.Functor.map 8)
-        && (e.getArg! 4).isAppOf ``Functor.comp then
-      let some FG' ← unfoldDefinition? (e.getArg! 4) | return none
-      let e' := mkAppN e.getAppFn (e.getAppArgs.set! 4 FG')
-      let some e2 ← unfoldDefinition? e' | return none
-      let r ← whnfCore e2
-      return some r
-    return none
-  if let some p2 ← compUnfold p' then return ← ph083SynMatchCore p2 t'
-  if let some t2 ← compUnfold t' then return ← ph083SynMatchCore p' t2
-  -- `(𝟭 C).obj X` and `(𝟭 C).map f` are `X` and `f`
-  let idUnfold (e : Expr) : Option Expr :=
-    if (e.isAppOfArity ``CategoryTheory.Functor.obj 6 ||
-        e.isAppOfArity ``CategoryTheory.Functor.map 8) && (e.getArg! 4).isAppOf ``Functor.id then
-      some e.appArg! else none
-  if let some p2 := idUnfold p' then return ← ph083SynMatchCore p2 t'
-  if let some t2 := idUnfold t' then return ← ph083SynMatchCore p' t2
-  -- if `F.obj X` does not match `G.obj Y`, a functor `G` that unfolds (through projections of
-  -- definitions) to a composite is unfolded
-  if (p'.isAppOfArity ``CategoryTheory.Functor.obj 6 ||
-      p'.isAppOfArity ``CategoryTheory.Functor.map 8) && t'.isApp &&
-      t'.getAppFn.constName? == p'.getAppFn.constName? && t'.getAppNumArgs == p'.getAppNumArgs then
-    let s ← saveState
-    try return ← ph083SynMatchStep p' t'
-    catch e =>
-      s.restore
-      if let some G ← unfoldToComp (t'.getArg! 4) then
-        if let some t2 ← compUnfold (mkAppN t'.getAppFn (t'.getAppArgs.set! 4 G)) then
-          return ← ph083SynMatchCore p' t2
-      -- the same on the side of the pattern, once its functor is known
-      let Fp ← instantiateMVars (p'.getArg! 4)
-      if Fp.hasMVar then throw e
-      let some G ← unfoldToComp Fp | throw e
-      let some p2 ← compUnfold (mkAppN p'.getAppFn (p'.getAppArgs.set! 4 G)) | throw e
-      return ← ph083SynMatchCore p2 t'
-  ph083SynMatchStep p' t'
-
-/-- The structural step of `ph083SynMatchCore`. -/
-meta partial def ph083SynMatchStep (p' t' : Expr) : MetaM Unit := do
-  -- `ι.obj m` against a projection `Y.obj`, and `ι.map f` against a projection `g.hom`
-  if p'.isApp && ((p'.getAppFn.isProj &&
-      (p'.getAppFn.find? (·.isAppOf ``ObjectProperty.ι)).isSome) ||
-      ((p'.isAppOf ``Prefunctor.obj || p'.isAppOf ``Prefunctor.map) &&
-        ((p'.getArg! 4).find? (·.isAppOf ``ObjectProperty.ι)).isSome)) then
-    do
-      let arg := p'.appArg!
-      let tStruct? : Option Expr ← do
-        match t' with
-        | .proj _ _ e => pure (some e)
-        | _ =>
-          if let some n := t'.getAppFn.constName? then
-            if (← getProjectionFnInfo? n).isSome then pure (some t'.appArg!) else pure none
-          else pure none
-      if let some e := tStruct? then
-        return ← ph083SynMatch arg e
-  match p', t' with
-  | .sort u, .sort v => discard <| isLevelDefEq u v
-  | .const n us, .const n' vs =>
-    if n == n' && us.length == vs.length then
-      for (u, v) in us.zip vs do discard <| isLevelDefEq u v
-      return
-    throwError m!"ph083SynMatch: constants {p'} vs {t'}"
-  | .forallE _ d b _, .forallE _ d' b' _ => ph083SynMatch d d'; ph083SynMatch b b'
-  | .lam _ d b _, .lam _ d' b' _ => ph083SynMatch d d'; ph083SynMatch b b'
-  | .proj s i e, .proj s' i' e' =>
-    if s == s' && i == i' then ph083SynMatch e e' else throwError m!"ph083SynMatch: projections"
-  | .proj _ i e, _ =>
-    if let some n := t'.getAppFn.constName? then
-      if let some info ← getProjectionFnInfo? n then
-        if info.i == i && t'.getAppNumArgs == info.numParams + 1 then
-          return ← ph083SynMatch e t'.appArg!
-    let t2 ← whnfR t'
-    if t2 != t' then return ← ph083SynMatch p' t2
-    Lean.logInfo m!"DEFEQ {(← Lean.getRemainingHeartbeats) / 1000}: {p'}\nAGAINST {t'}"
-    if ← isDefEqLimited p' t' then return
-    throwError m!"ph083SynMatch conflict (proj):\n{p'}\nvs\n{t'}"
-  | _, _ =>
-    if p'.isApp && t'.isApp && p'.getAppNumArgs == t'.getAppNumArgs then
-      let fp := p'.getAppFn; let ft := t'.getAppFn
-      let ok ← (do ph083SynMatch fp ft; pure true) <|> pure false
-      if ok then
-        let ps := p'.getAppArgs; let ts := t'.getAppArgs
-        let mut deferred : Array Nat := #[]
-        for i in [0:ps.size] do
-          if ← (do try isProof ts[i]! catch _ => pure false) then
-            let pi ← instantiateMVars ps[i]!
-            if let .mvar m := pi.consumeMData then
-              unless ← m.isAssigned do m.assign ts[i]!
-            continue
-          -- an argument whose pattern still has metavariables is retried after the others
-          let s ← saveState
-          try ph083SynMatch ps[i]! ts[i]!
-          catch e =>
-            s.restore
-            unless (← instantiateMVars ps[i]!).hasExprMVar do
-              throwError m!"{e.toMessageData} [arg {i}]"
-            deferred := deferred.push i
-        for i in deferred do
-          try ph083SynMatch ps[i]! ts[i]!
-          catch e => throwError m!"{e.toMessageData} [deferred arg {i}]"
-        return
-    let p2 ← whnfR p'
-    if p2 != p' then return ← ph083SynMatch p2 t'
-    let t2 ← whnfR t'
-    if t2 != t' then return ← ph083SynMatch p' t2
-    Lean.logInfo m!"WHNF LEFT {(← Lean.getRemainingHeartbeats) / 1000}: {p'}\nAGAINST {t'}"
-    let p3 ← whnf p' 
-    if p3 != p' then
-      if ← (do ph083SynMatch p3 t'; pure true) <|> pure false then return
-    Lean.logInfo m!"DEFEQ {(← Lean.getRemainingHeartbeats) / 1000}: {p'}\nAGAINST {t'}"
-    if ← isDefEqLimited p' t' then return
-    throwError m!"ph083SynMatch conflict:\n{p'}\nvs\n{t'}"
-
-end
-end
-
-open Lean Meta Elab Tactic in
-elab "probe_by_match " c:ident " [" args:(ident ":=" term),* "]" : tactic =>
-  withMainContext do
-  let cst ← realizeGlobalConstNoOverload c
-  let e ← mkConstWithFreshMVarLevels cst
-  let ty ← inferType e
-  let mut names : Array Name := #[]
-  let mut t := ty
-  while t.isForall do
-    names := names.push t.bindingName!
-    t := t.bindingBody!
-  let (mvs, _, concl) ← forallMetaTelescope ty
-  for a in args.getElems do
-    let nm := a.raw[0].getId
-    let some idx := names.findIdx? (· == nm) | throwError m!"no binder {nm}"
-    let ety ← instantiateMVars (← inferType mvs[idx]!)
-    let v ← elabTerm a.raw[2] none
-    Term.synthesizeSyntheticMVarsNoPostponing
-    let v ← instantiateMVars v
-    Lean.logInfo m!"probe binder {nm} at {(← Lean.getRemainingHeartbeats) / 1000}"
-    ph083SynMatch ety (← inferType v)
-    (mvs[idx]!).mvarId!.assign v
-  ph083SynMatch concl (← getMainTarget)
-  throwError "diagnostic matching complete"
-
 private lemma eq_fullSubcategory_hom_to_map {C : Type*} [Category C]
     {P : ObjectProperty C} {A B : P.FullSubcategory} {f : A.obj ⟶ B.obj} {g : A ⟶ B}
     (h : f = g.hom) : f = P.ι.map g := h
@@ -393,6 +226,7 @@ private lemma supportCompactSupportExchange_component_identity
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
     supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
   have hF2' := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ
+    (C := deformationSpecialFibre c.C y.left.ker k')
     (hc.componentSpecialLift k' j hb) (hc.componentSpecialLift_ι k' j hb)
     (hc.specialFixedLocus k').isPullback.w (hc.supportClosureSpecialι k')
     (supportClosureSpecialMap c y k') (hc.supportClosureSpecialι_comp k')
@@ -428,7 +262,7 @@ private lemma supportCompactSupportExchange_component_identity
   run_tac do
     let n ← Lean.getRemainingHeartbeats
     Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
-  probe_by_match CategoryTheory.supportIdentity_aux
+  apply_by_match CategoryTheory.supportIdentity_aux
     [Sp := specialization (ℓ := ℓ) k' y,
     Ts := specializationProd (ℓ := ℓ) k' (y ≫ c.c₁),
     SX := specialization (ℓ := ℓ) k' (y ≫ c.c₁),
