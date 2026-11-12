@@ -84,12 +84,28 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
     Category.comp_id, Category.assoc, leftProjectionNatTrans, curriedTensor_map_app,
     curriedTensor_obj_obj, Functor.map_comp, MonoidalCategory.whiskerLeft_comp]
   refine whisker_eq _ (whisker_eq _ (whisker_eq _ ?_))
-  dsimp only [verdierDual, dualizingComplex, Functor.comp_obj, curriedTensor_obj_obj]
   exact NatIso.map_map₆_comp_hom_app_comp_map_comp_hom_app
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
     (boundedConstructibleLowerShriek ℓ (prod.map f f))
     (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
     (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ (prod.map_fst f f))
-    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f) _ _ _ _ _ _ _
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
+    (prodUpperStarCounit ℓ (prod.map_snd f f) K ▷ externalProduct ℓ K (verdierDual ℓ K))
+    (α_ ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)
+      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj (verdierDual ℓ K))).inv
+    ((β_ ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)
+      ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)).hom ▷
+      (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj (verdierDual ℓ K))
+    (α_ ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)
+      ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj (verdierDual ℓ K))).hom
+    (((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) ◁
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X))
+        K (verdierDual ℓ K))
+    (((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ X ⟶ X)).obj K) ◁
+      (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).map
+        ((ihom.ev K).app (dualizingComplex' ℓ X)))
+    (exceptionalKunnethAdjoint ℓ K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
