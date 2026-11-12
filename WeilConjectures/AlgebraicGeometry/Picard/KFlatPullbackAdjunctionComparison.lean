@@ -92,6 +92,8 @@ theorem kFlat_pullback_adjunction_comparison
           (e P hP).hom ≫ ((relativeMVAdj g).homEquiv _ _).symm
             (DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I) := by
   classical
+  letI : HasDerivedCategory.{w} S.Modules := d S
+  letI : HasDerivedCategory.{w} S'.Modules := d S'
   let hL := @Classical.choose _ _ (@exists_derivedPullbackComposition.{u, w} d)
   let ε := (Classical.choose (Classical.choose_spec (exists_derivedPullbackComposition))) g
   have hε := (Classical.choose (Classical.choose_spec
