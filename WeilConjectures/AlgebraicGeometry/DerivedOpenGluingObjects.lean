@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.AlgebraicGeometry.DerivedOpenDifferenceDiagram
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
