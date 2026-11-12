@@ -66,7 +66,7 @@ private theorem isomorphismOrdinaryFiniteAugmentation_section
         (((b).hom.app (P.X i)).val.app
           (op ((proEtaleBaseChange g).obj V.unop))
           (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x))) =
-      (((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i).val.app
+      ((((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i).val.app
         (op ((proEtaleBaseChange g).obj V.unop))
         (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x) := by
   erw [hb, ha]
