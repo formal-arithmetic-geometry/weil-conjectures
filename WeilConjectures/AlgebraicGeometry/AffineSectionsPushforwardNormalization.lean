@@ -99,6 +99,7 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Scalar-action comparisons unfold global-section and derived-functor identifications.
 /-- Sections of pushforward retain their affine scalar action before and after deriving.
 There are no internal-Hom, perfectness or quasi-coherence inputs in this statement.

@@ -109,6 +109,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Comparing the normalized adjunctions unfolds their canonical tensor-Hom data.
 /-- The natural evaluation mate for fixed pullback and tensor-Hom adjunctions.
 This statement concerns only sheaf internal Hom, with no global sections or base rings.
