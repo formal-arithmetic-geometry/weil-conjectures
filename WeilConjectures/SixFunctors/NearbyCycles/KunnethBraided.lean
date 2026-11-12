@@ -81,7 +81,7 @@ namespace NearbyCyclesModel
 
 variable {X X' : Scheme.{u}} (M : NearbyCyclesModel X X')
 
-set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- the derived categories are unfolded when matching the braidings
 /-- **The lax tensor map of nearby cycles commutes with the braidings.** -/
 @[reassoc]
