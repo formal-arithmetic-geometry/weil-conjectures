@@ -597,7 +597,6 @@ private noncomputable def coefficientIso (M : Modules.{t, u} X R) :
     (SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
       (R := R) (coefficient X R S c) M).symm
 
-set_option profiler true in
 -- Compare the scalar and module sheafifications explicitly.
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in
@@ -637,6 +636,7 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))) e.hom_inv_id
   simp only [coefficientIso, pair, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  -- Retain the common tensor comparison while comparing its inputs.
   congr 1
   erw [hei]
   have hn := sheafification_map_unit_section X A _ _ (rawIso X R S c M).hom U
