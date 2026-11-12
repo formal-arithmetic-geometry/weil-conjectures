@@ -40,7 +40,7 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
 local instance (priority := 2000) rationalCompletedRestrictionCoeFun
     {R S : Type*} [Ring R] [Ring S]
     (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S) :
-    CoeFun (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) (fun _ ↦ M → N) where
+    CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) (fun _ ↦ M → N) where
   coe f := f.hom
 
 #print rationalCompletedRestrictionCoeFun
