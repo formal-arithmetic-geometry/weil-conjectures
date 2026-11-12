@@ -54,6 +54,7 @@ private noncomputable def kFlat_pullback_adjunction_comparison_iso
     {S S' : Scheme.{u}} (g : S' ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S'.toRingedSpace))]
+    [hL : (Scheme.Modules.tensorPullback g).Additive]
     (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
       (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
         DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
