@@ -228,11 +228,15 @@ theorem mixedSections_left_unit_normalization
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
     dsimp only [p]
     simp only [Category.assoc]
-    rw [← Functor.map_comp_assoc, he, Functor.map_comp_assoc]
+    rw [← Functor.map_comp_assoc]
+    erw [he]
+    rw [Functor.map_comp_assoc]
     have hn := (mixedGlobalSectionsDirectImageIso g).hom.naturality
       (Df.rightDerivedFunctorUnit.app K)
     simp only [Functor.comp_map] at hn
-    rw [hn, ← Category.assoc, ← Category.assoc, hg₀]
+    erw [hn]
+    simp only [← Category.assoc] at hg₀ ⊢
+    erw [hg₀]
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
     ((mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F))
