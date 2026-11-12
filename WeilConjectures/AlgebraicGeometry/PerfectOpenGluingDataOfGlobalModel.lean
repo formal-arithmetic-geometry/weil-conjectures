@@ -80,6 +80,7 @@ private theorem perfect_exactOpenRestriction (Y : Scheme.{u}) (A : Y.Opens)
     (moduleRings A.toScheme.toRingedSpace) V).mapDerivedCategory.mapIso c ≪≫ iK⟩
 
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Exact nested restrictions require a larger elaboration budget.
 /-- A global perfect model and its limit comparison provide local gluing data.

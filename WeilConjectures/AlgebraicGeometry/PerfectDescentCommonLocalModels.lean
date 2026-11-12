@@ -25,6 +25,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 700000 in
 -- Elaborating the two dependent stage-model families exceeds the default heartbeat budget.
 /-- Descend the two restrictions separately and move them to a common stage.
