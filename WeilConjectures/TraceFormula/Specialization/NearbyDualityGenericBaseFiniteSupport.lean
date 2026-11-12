@@ -53,8 +53,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the triangles of the duality map live on large derived categories
 /-- **Finite support of the cone of the duality map over a generic base, from the generic
 slices** (blueprint `sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if, for every
