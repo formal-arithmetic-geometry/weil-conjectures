@@ -143,7 +143,7 @@ theorem class_pushforward_core :
         ((boundedConstructibleUpperStarComp _ ℓ c.support (prod.map P.f P.f)).hom.app _ ▷ _) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
           (prod.map P.f P.f)).hom.app _ := by
-    simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using
+    simpa only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using
       (congrArg (· ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
         (prod.map P.f P.f)).hom.app _) hc).symm
   conv_rhs => simp only [Functor.map_comp₃_assoc_of_eq
@@ -157,9 +157,7 @@ theorem class_pushforward_core :
     (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd P.pushforward.support_fst
     P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
     (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
-  refine Eq.trans ?_ (hcoh.trans ?_)
-  · rfl
-  · rfl
+  simpa only [Functor.comp_obj, Functor.map_comp, Category.assoc] using hcoh
 
 end Correspondence.ProperPushforwardDiagram
 

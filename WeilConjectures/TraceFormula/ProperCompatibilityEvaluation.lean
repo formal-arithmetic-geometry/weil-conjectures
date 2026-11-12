@@ -44,8 +44,6 @@ section EvaluationExchange
 variable (ℓ) {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom]
 
-set_option profiler true in
--- composite functors on bounded constructible complexes are unfolded
 /-- **Exchange of the evaluation kernels** along a proper morphism `f` (blueprint
 `lem-trf-trace-map-exchange`, (1)): with `q = f × f` and `K' = Rf_* K`,
 `e_{K'} ∘ ρ_f = RΔ_{Y*} τ_f ∘ Rq_* e_K`, read through `Rq_* RΔ_{X*} ≅ RΔ_{Y*} Rf_*`. -/
