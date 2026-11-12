@@ -48,6 +48,66 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+namespace Etale
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- *Reading a base-changed family at a section.* Let `F : X ⟶ P` with a section `σ`, base changed
+along `v : P' ⟶ P` to `F' : X' ⟶ P'` with section `σ'`, and let `i : B ⟶ P`, `i' : B' ⟶ P'` be
+sections over `h : B' ⟶ B` with fibres `f : Y ⟶ B`, `f' : Y' ⟶ B'`, so that `f'` is the base
+change of `f` along `h`. Let `θ : Li^* 𝒞(F, σ) ≅ 𝒞(f, s)` be the fibre identification and
+`κ : 𝒞(F', σ') ≅ La'^* C₀` a trivialization. Reading the trivialization `β ≫ κ` of
+`Lv^* 𝒞(F, σ)` at `i'` against `θ` (`AlgebraicGeometry.Etale.sectionRestrictionIso`) gives the base
+change isomorphism `Lh^* 𝒞(f, s) ≅ 𝒞(f', s')`, followed by the fibre identification of `F'` at `i'`
+read through `κ`. -/
+theorem sectionRestrictionIso_sectionInvariantBaseChangeIso {P P' B B' X X' Y Y' : Scheme.{u}}
+    {F : X ⟶ P} {F' : X' ⟶ P'} {v : P' ⟶ P} {hD : X' ⟶ X} [HasCompactification F]
+    [HasCompactification F'] [QuasiCompact F] [QuasiCompact F'] (sqD : IsPullback hD F' F v)
+    {h : B' ⟶ B} {i : B ⟶ P} {i' : B' ⟶ P'} (hi : i' ≫ v = h ≫ i) {a' : P' ⟶ B'}
+    (hsec' : i' ≫ a' = 𝟙 B') {f : Y ⟶ B} {f' : Y' ⟶ B'} {ι : Y ⟶ X} {ι' : Y' ⟶ X'}
+    {hY : Y' ⟶ Y} [HasCompactification f] [HasCompactification f'] [QuasiCompact f]
+    [QuasiCompact f'] (sq₁ : IsPullback ι f F i) (sq₂ : IsPullback ι' f' F' i')
+    (sqV : IsPullback hY f' f h) (hι : ι' ≫ hD = hY ≫ ι)
+    [IsIso (dualizingComplexBaseChangeMap Λ sqD)] [IsIso (dualizingComplexBaseChangeMap Λ sq₁)]
+    [IsIso (dualizingComplexBaseChangeMap Λ sq₂)] [IsIso (dualizingComplexBaseChangeMap Λ sqV)]
+    [IsIso (dualizingComplexBaseChangeMap Λ (sq₂.paste_horiz sqD))]
+    {σ : P ⟶ X} {σ' : P' ⟶ X'} (hσ : σ' ≫ hD = v ≫ σ) {s : B ⟶ Y} {s' : B' ⟶ Y'}
+    (hs₁ : s ≫ ι = i ≫ σ) (hs₂ : s' ≫ ι' = i' ≫ σ') (hs : s' ≫ hY = h ≫ s)
+    {C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (κ : sectionInvariant Λ F' σ' ≅ (L((a')^*[ModuleCat.{u + 1} Λ])).obj C₀) :
+    sectionRestrictionIso (ModuleCat.{u + 1} Λ) h v hi hsec'
+        (sectionInvariantBaseChangeIso Λ sq₁ σ s hs₁)
+        (sectionInvariantBaseChangeIso Λ sqD σ σ' hσ ≪≫ κ) =
+      sectionInvariantBaseChangeIso Λ sqV s s' hs ≪≫
+        (sectionInvariantBaseChangeIso Λ sq₂ σ' s' hs₂).symm ≪≫
+        (L((i')^*[ModuleCat.{u + 1} Λ])).mapIso κ ≪≫
+        (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) i' a' hsec').app C₀ := by
+  have hs₃ : s' ≫ ι' ≫ hD = (i' ≫ v) ≫ σ := by
+    rw [reassoc_of% hs₂, hσ, Category.assoc]
+  have ha := sectionInvariantBaseChangeIso_paste_horiz Λ sqD sq₂ (sq₂.paste_horiz sqD) rfl rfl
+    σ σ' s' hσ hs₂ hs₃
+  have hb := sectionInvariantBaseChangeIso_paste_horiz Λ sq₁ sqV (sq₂.paste_horiz sqD) hi hι
+    σ s s' hs₁ hs hs₃
+  have ha' : (sectionInvariantBaseChangeIso Λ (sq₂.paste_horiz sqD) σ s' hs₃).hom ≫
+      (sectionInvariantBaseChangeIso Λ sq₂ σ' s' hs₂).inv =
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) i' v).hom.app _ ≫
+        (L((i')^*[ModuleCat.{u + 1} Λ])).map
+          (sectionInvariantBaseChangeIso Λ sqD σ σ' hσ).hom := by
+    rw [ha]
+    simp
+  have hb' : (sectionInvariantBaseChangeIso Λ sqV s s' hs).hom =
+      (L((h)^*[ModuleCat.{u + 1} Λ])).map (sectionInvariantBaseChangeIso Λ sq₁ σ s hs₁).inv ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) h i (i' ≫ v) hi).inv.app _ ≫
+        (sectionInvariantBaseChangeIso Λ (sq₂.paste_horiz sqD) σ s' hs₃).hom := by
+    rw [hb]
+    simp
+  ext
+  simp only [sectionRestrictionIso, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
+    Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv, Functor.map_comp,
+    Category.assoc, hb', reassoc_of% ha']
+
+end Etale
+
 namespace Scheme.Hom.DeformationToNormalConeData
 
 open _root_.AlgebraicGeometry.Etale
@@ -85,7 +145,48 @@ theorem sectionInvariantIso_baseChange {V' B' : Scheme.{u}} {g' : V' ⟶ B'} {s'
     (L((h)^*[ModuleCat.{u + 1} Λ])).map (D.sectionInvariantIso Λ aB).hom ≫
         (sectionInvariantBaseChangeIso Λ sqN N.zeroSection N'.zeroSection hz).hom =
       (sectionInvariantBaseChangeIso Λ sqV s s' hs).hom ≫ (D'.sectionInvariantIso Λ aB').hom := by
-  sorry
+  have := quasiSeparatedSpace_of_quasiSeparated aB
+  have := quasiSeparatedSpace_of_quasiSeparated aB'
+  have : QuasiCompact g := MorphismProperty.of_isPullback D.isPullback_oneFibre inferInstance
+  have : QuasiCompact N.proj := MorphismProperty.of_isPullback D.isPullback_zeroFibre inferInstance
+  have := D.isIso_dualizingComplexBaseChangeMap Λ sqD
+  have := D.isIso_dualizingComplexBaseChangeMap Λ D.isPullback_oneFibre
+  have := D.isIso_dualizingComplexBaseChangeMap Λ D.isPullback_zeroFibre
+  have := D'.isIso_dualizingComplexBaseChangeMap Λ D'.isPullback_oneFibre
+  have := D'.isIso_dualizingComplexBaseChangeMap Λ D'.isPullback_zeroFibre
+  have := D.isIso_dualizingComplexBaseChangeMap Λ (D'.isPullback_oneFibre.paste_horiz sqD)
+  have := D.isIso_dualizingComplexBaseChangeMap Λ (D'.isPullback_zeroFibre.paste_horiz sqD)
+  -- the comparison of `D'` normalized at `t = 1`
+  let κ' := D'.familyObjectIso Λ aB' (D'.oneFibreIso Λ)
+  have key := D.leftDerivedUpperStar_mapIso_sectionInvariantIsoOfFibreIso Λ aB (D.oneFibreIso Λ)
+    (D.zeroFibreIso Λ) h (sectionInvariantBaseChangeIso Λ sqD D.sect D'.sect hsect ≪≫ κ')
+  rw [oneFibreIso, zeroFibreIso,
+    sectionRestrictionIso_sectionInvariantBaseChangeIso Λ sqD (AffineSpace.oneSection_comp_map h)
+      (AffineSpace.oneSection_comp_over _ B') D.isPullback_oneFibre D'.isPullback_oneFibre sqV h₁
+      hsect D.comp_oneFibre D'.comp_oneFibre hs,
+    sectionRestrictionIso_sectionInvariantBaseChangeIso Λ sqD (AffineSpace.zeroSection_comp_map h)
+      (AffineSpace.zeroSection_comp_over _ B') D.isPullback_zeroFibre D'.isPullback_zeroFibre sqN
+      h₀ hsect D.comp_zeroFibre D'.comp_zeroFibre hz] at key
+  -- at `t = 1` the comparison `κ'` reads as the fibre identification of `D'`
+  have e₁ : (D'.oneFibreIso Λ).symm ≪≫
+      (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B')^*[ModuleCat.{u + 1} Λ])).mapIso κ' ≪≫
+      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) _ _
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B')).app _ = Iso.refl _ := by
+    ext
+    simp [κ', D'.leftDerivedUpperStar_map_familyObjectIso_hom_comp Λ aB' (D'.oneFibreIso Λ)]
+  -- at `t = 0` it reads as the DNC isomorphism of `D'`
+  have e₀ : (D'.zeroFibreIso Λ).symm ≪≫
+      (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B')^*[ModuleCat.{u + 1} Λ])).mapIso κ' ≪≫
+      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) _ _
+        (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) B')).app _ =
+      (D'.sectionInvariantIso Λ aB').symm := by
+    ext
+    simp [κ', sectionInvariantIso, sectionInvariantIsoOfFibreIso]
+  rw [← oneFibreIso, ← zeroFibreIso, ← oneFibreIso, ← zeroFibreIso, e₁, e₀] at key
+  have k := congrArg Iso.hom key
+  simp only [sectionInvariantIso, Functor.mapIso_hom, Iso.trans_hom, Iso.refl_hom,
+    Category.comp_id, Iso.symm_hom] at k
+  simp [sectionInvariantIso, k]
 
 /-- Blueprint `lemma-naturality-under-base-change-etale` (7): *naturality under étale maps of
 pairs.* Let `e : V' ⟶ V` be an étale `B`-morphism with `g' = e ≫ g` and `s' ≫ e = s`, and let
