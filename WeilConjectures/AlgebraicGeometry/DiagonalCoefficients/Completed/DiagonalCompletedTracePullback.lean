@@ -232,13 +232,8 @@ theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
   obtain ⟨b', hb'⟩ := DiagonalTrace.diagonalTrace_completedChern_lift l t'.toPresentation hunit'
   let B := RationalP1.realizeScalarChern l f eX eS t.Rc D push b
   let B' := RationalP1.realizeScalarChern l f' eX' eS' t'.Rc D' push' b'
-  obtain ⟨v, hv, hvt, hBt⟩ :
-      ∃ v : V S ⟶ D.R.obj (V X), IsIso (biprod.desc v B) ∧
-        v ≫ τ = 0 ∧ B ≫ τ = 𝟙 _ :=
-    realizedTrace_splitting l f hunit eX eS t D push b hb
-  obtain ⟨v', hv', hvt', hBt'⟩ :
-      ∃ v' : V S' ⟶ D'.R.obj (V X'), IsIso (biprod.desc v' B') ∧
-        v' ≫ τ' = 0 ∧ B' ≫ τ' = 𝟙 _ :=
+  obtain ⟨v, hv, hvt, hBt⟩ := realizedTrace_splitting l f hunit eX eS t D push b hb
+  obtain ⟨v', hv', hvt', hBt'⟩ :=
     realizedTrace_splitting l f' hunit' eX' eS' t' D' push' b' hb'
   have : F.Additive :=
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ hS).left_adjoint_additive
@@ -274,8 +269,9 @@ theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
       rw [← t'.model.over_eq]
       simp only [s', Category.assoc, Iso.inv_hom_id_assoc, ProjectiveLine.infinity_over]
     simpa only [E, E₀, Category.assoc] using
-      diagonalDerivedLineExchange_coordinate l f f' hX hS square.w.symm s hs s' hs'
-        D D' canonical canonical' line v B v' B' τ τ' hvt hBt hvt' hBt'
+      @diagonalDerivedLineExchange_coordinate l ‹Fact l.Prime› X S X' S'
+        instX instS instX' instS' f f' hX hS square.w.symm s hs s' hs'
+        D D' canonical canonical' line v B v' B' hv hv' τ τ' hvt hBt hvt' hBt'
   have hhigh : F.map B ≫ E ≫ τ' = c.derived := by
     simpa only [E, E₀, Category.assoc] using
       diagonalCompletedChern_highCoordinate l f f' hX hS square hunit hunit'
