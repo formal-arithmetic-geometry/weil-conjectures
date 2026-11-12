@@ -106,6 +106,7 @@ private theorem tensor_square_pasting
 
 -- Compare the concrete total tensors through their map APIs.
 -- Synthesis compares the existing ordinary and ringed cochain tensor instances.
+set_option profiler true in
 /-- The ringed associator square, after one outer homogeneous inclusion, transports
 through the ordinary comparison and the signed balanced tensor quotient.
 Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT.
