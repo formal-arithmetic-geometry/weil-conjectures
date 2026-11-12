@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
+public import WeilConjectures.TraceFormula.Specialization.SliceSpecialPullback
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 
 /-!
