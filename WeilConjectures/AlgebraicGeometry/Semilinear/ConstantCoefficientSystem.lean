@@ -137,7 +137,6 @@ theorem evaluation_ring_app (n : ℕ) (U : Cᵒᵖ) :
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 700000 in
 -- The membership checks of the restriction maps unfold the evaluation functors.
 /-- A system is determined by its evaluations together with its transitions. -/
 theorem system_ext {X Y : Systems.{c, v, r} J B τ}
