@@ -201,10 +201,8 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
   rw [lowerStarKunnethMap'_eq_homEquiv_counit]
   let KX := R((aX)_*⟦Λ⟧).obj A
   let KY := R((aY)_*⟦Λ⟧).obj B
-  let cA := (leftDerivedUpperStarComp Λ p₁ aX).hom.app KX ≫
-    L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A)
-  let cB := (leftDerivedUpperStarComp Λ p₂ aY).hom.app KY ≫
-    L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
+  let cA := L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A)
+  let cB := L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
   -- the transported counit of the first square is the one of `w`, up to `L(𝟙)^* ≅ 𝟭`
   have e₁ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KX) ≫
       (pullbackSquareComparison Λ sq₁).hom.app KX ≫ cA =
