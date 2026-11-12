@@ -170,9 +170,6 @@ end TensorHomAdjunction
 
 
 
-set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- Elaborating the derived tensor witnesses requires additional heartbeats.
 /-- The natural internal-Hom comparison for `Rf_*`, specified as the mate of evaluation.
 The witnesses `a`, `bX`, `bY` and `t` exhibit the pullback/direct-image adjunction,
 tensor/internal-Hom adjunctions and pullback/tensor comparison. The last equation
@@ -237,8 +234,10 @@ theorem exists_derivedDirectImage_internalHom_comparison
     Classical.choose (exists_canonicalDerivedTensorHom.{u, w} Y)
   have hx := (Classical.choose_spec (exists_canonicalDerivedTensorHom.{u, w} X)).1
   have hy := (Classical.choose_spec (exists_canonicalDerivedTensorHom.{u, w} Y)).1
-  obtain ⟨a⟩ := nonempty_derivedPullbackAdjunction.{u, w} f
-  obtain ⟨m, _⟩ := exists_derivedPullbackMonoidalModel.{u, w} f
+  let a : derivedPullback f ⊣ schemeDerivedDirectImage f :=
+    Classical.choice (nonempty_derivedPullbackAdjunction.{u, w} f)
+  let m : (derivedPullback f).CoreMonoidal :=
+    Classical.choose (exists_derivedPullbackMonoidalModel.{u, w} f)
   let F := derivedPullback f
   let t : tensor (schemeDerivedCategory Y) ⋙ F ≅
       F.prod F ⋙ tensor (schemeDerivedCategory X) :=
