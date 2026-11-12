@@ -153,10 +153,10 @@ theorem sfRationalDirectImageCoefficientCompatibility
     exact rightMate_transport
       (L₁ := rationalDerivedPullback l E' f) (R₁ := R E)
       (L₂ := rationalDerivedPullback l F' f) (R₂ := R F)
-      (G := (stageSystem l Ω X).T h)
-      (G' := GeneralAlgebraicallyClosedCoefficients.transition l Ω X E F h)
-      (H := (stageSystem l Ω Y).T h)
-      (H' := GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E F h)
+      (G := (stageSystem l Ω Y).T h)
+      (G' := GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E F h)
+      (H := (stageSystem l Ω X).T h)
+      (H' := GeneralAlgebraicallyClosedCoefficients.transition l Ω X E F h)
       (a E) (a F) hY hX e hi
   · rintro ⟨Φ, β, coh⟩ ⟨hΦ, hβ, _⟩
     dsimp only at hΦ
