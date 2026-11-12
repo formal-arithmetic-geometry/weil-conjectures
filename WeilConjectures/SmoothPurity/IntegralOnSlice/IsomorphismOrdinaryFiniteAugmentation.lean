@@ -71,52 +71,6 @@ private theorem finitePullbackGenerator_counit
     exact congrArg Quiver.Hom.op (adj.right_triangle_components V)
   exact mapCompIdApply N.val.presheaf _ _ ht _
 
-set_option profiler true in
-private theorem isomorphismOrdinaryFiniteAugmentation_section
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    (b : ordinaryPull l E g ≅ inverseImageIntegralModules l E g)
-    (hb :
-    ∀ (M : integralTowerModules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)),
-      (b.hom.app M).val.app (op ((proEtaleBaseChange g).obj V))
-        (((ordinaryAdjunction l E g).unit.app M).val.app (op V) x) =
-      M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
-        (inferInstance : WeaklyEtale g) trivial).counit.app V).op x)
-    (P : Cx l E Y none) (n : ℕ)
-    (a : (tower l E Y none).obj P ⋙ trfInverseImageComplex l E g ≅
-      (integralOperationsPullbackTowerFunctor l E g).obj P)
-    (ha : ∀ k : ℕ, a.hom.app (op k) = QuotientTensor.insertion l E g k
-      ((unrestrictedIntegralFiniteComplex l E Y k).obj P)) (i : ℤ)
-    (V : Y.ProEtᵒᵖ) (x : (P.X i).val.obj V) :
-    (((a).hom.app (op n)).f i).val.app
-        (op ((proEtaleBaseChange g).obj V.unop))
-      (((((augmentation l E Y none).app P).app (op n)).f i).val.app
-        (op ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V.unop)))
-        (((b).hom.app (P.X i)).val.app
-          (op ((proEtaleBaseChange g).obj V.unop))
-          (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x))) =
-      ((((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i).val.app
-        (op ((proEtaleBaseChange g).obj V.unop))
-        (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x) := by
-  erw [hb, ha]
-  let adj := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
-    (inferInstance : WeaklyEtale g) trivial
-  let c := adj.counit.app V.unop
-  let r := (((augmentation l E Y none).app P).app (op n)).f i
-  have hr := PresheafOfModules.naturality_apply r.val c.op x
-  erw [hr]
-  have hins := (QuotientTensor.insertion_existsUnique l E g n
-    ((unrestrictedIntegralFiniteComplex l E Y n).obj P)).exists.choose_spec i
-  erw [hins]
-  simp only [QuotientTensor.tensorSection, one_smul]
-  let M := ((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i
-  erw [finitePullbackGenerator_counit l E g n M V.unop (r.val.app V x)]
-  have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
-  have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
-    P n i V.unop x
-  exact (congrArg (integralOperationsPullbackGenerator l E g n M V.unop) haug).trans hord.symm
-
 /-- The finite quotient augmentation agrees on each degree after the two comparisons.
 Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of the coefficient-twist definition.
 (blueprint: lem-pur-isomorphism-ordinary-finite-augmentation).
@@ -149,6 +103,29 @@ theorem isomorphismOrdinaryFiniteAugmentation
   dsimp only [Adjunction.homEquiv, Equiv.coe_fn_mk]
   ext V x
   dsimp only [ordinaryPush]
-  exact isomorphismOrdinaryFiniteAugmentation_section l E g b hb P n a ha i V x
+  change (((a).hom.app (op n)).f i).val.app
+      (op ((proEtaleBaseChange g).obj V.unop))
+      (((((augmentation l E Y none).app P).app (op n)).f i).val.app
+        (op ((proEtaleIsoPostcompose g).obj ((proEtaleBaseChange g).obj V.unop)))
+        (((b).hom.app (P.X i)).val.app
+          (op ((proEtaleBaseChange g).obj V.unop))
+          (((ordinaryAdjunction l E g).unit.app (P.X i)).val.app V x))) = _
+  erw [hb, ha]
+  let adj := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+    (inferInstance : WeaklyEtale g) trivial
+  let c := adj.counit.app V.unop
+  let r := (((augmentation l E Y none).app P).app (op n)).f i
+  have hr := PresheafOfModules.naturality_apply r.val c.op x
+  erw [hr]
+  have hins := (QuotientTensor.insertion_existsUnique l E g n
+    ((unrestrictedIntegralFiniteComplex l E Y n).obj P)).exists.choose_spec i
+  erw [hins]
+  simp only [QuotientTensor.tensorSection, one_smul]
+  let M := ((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i
+  erw [finitePullbackGenerator_counit l E g n M V.unop (r.val.app V x)]
+  have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
+  have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
+    P n i V.unop x
+  exact (congrArg (integralOperationsPullbackGenerator l E g n M V.unop) haug).trans hord.symm
 
 end WeilConjectures.IntegralOnSlice
