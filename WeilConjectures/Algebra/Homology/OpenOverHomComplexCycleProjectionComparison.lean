@@ -98,13 +98,18 @@ theorem openOver_homComplex_cycle_projection_comparison (X : Scheme.{u})
           (e (T.X (-n)) (J.X 0)).hom = c.hom ≫ Q.iCycles n ≫ π ∧
       F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n :=
       by
+  let : Category (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instCategory
+  let : Preadditive (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instPreadditive _
+  let : Abelian (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instAbelian _
   intro F P A K Q π
-  obtain ⟨h, hp⟩ := openOver_homComplex_chain_projection_iso X V W e he T J n
-  obtain ⟨a, c, hc, ha⟩ := openOver_chain_cycle_homology_comparison X V W
-    P Q h n
-  refine ⟨a, c, ?_, ha⟩
-  exact openOver_projection_square_comp F (P.iCycles n)
-    (homologyEvaluationProjection X T J n) (h.hom.f n)
-    (e (T.X (-n)) (J.X 0)).hom c.hom (Q.iCycles n) π hp hc
+  exact (openOver_homComplex_chain_projection_iso X V W e he T J n).elim fun h hp ↦
+    (openOver_chain_cycle_homology_comparison X V W P Q h n).elim fun a hac ↦
+      hac.elim fun c hc ↦
+        ⟨a, c, openOver_projection_square_comp F (P.iCycles n)
+          (homologyEvaluationProjection X T J n) (h.hom.f n)
+          (e (T.X (-n)) (J.X 0)).hom c.hom (Q.iCycles n) π hp hc.1, hc.2⟩
 
 end CategoryTheory

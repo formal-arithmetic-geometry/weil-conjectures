@@ -110,6 +110,12 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
             v.hom = b.hom ≫ SheafOfModules.homObjMap
               (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) := by
   classical
+  let : Category (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instCategory
+  let : Preadditive (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instPreadditive _
+  let : Abelian (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) :=
+    SheafOfModules.instAbelian _
   let O := SheafOfModules.overFunctor.{u} X.ringCatSheaf V
   let E := (Scheme.Modules.overEquiv V).functor
   let R := Scheme.Modules.restrictFunctor V.ι
