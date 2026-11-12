@@ -74,6 +74,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The derived unit calculation elaborates several affine carrier identifications.
 /-- The extension counit computes the affine chart source, and intertwines Hom transposes.

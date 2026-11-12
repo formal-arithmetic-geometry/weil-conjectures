@@ -28,7 +28,7 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
--- The chart carrier and the two localization universes require additional elaboration.
+set_option profiler true in
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7 and 0D5T.
@@ -103,15 +103,7 @@ theorem exists_mixedAffineSections_chart_model_factorization
       ∀ [F.Additive] [H.Additive] [J.Additive] [E.Additive] [K.Additive]
         (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)
         (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),
-      letI : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive F
-      letI : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive H
-      letI : J.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive J
-      letI : E.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive E
-      letI : K.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive K
-      letI : (F ⋙ H ⋙ E).PreservesZeroMorphisms := by infer_instance
-      letI : (F ⋙ K ⋙ J).PreservesZeroMorphisms := by infer_instance
-      let C := (F.mapHomologicalComplex (.up ℤ)).obj P
-      let Q := DerivedCategory.Q.obj C
+      let Q := DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)
       ∃ (a : (mixedGlobalExtension g).obj ((schemeDerivedGlobalSections S).obj Q) ≅
             DerivedCategory.Q.obj (((F ⋙ H ⋙ E).mapHomologicalComplex (.up ℤ)).obj P))
         (b : (schemeDerivedGlobalSections T).obj ((derivedPullback g).obj Q) ≅
@@ -132,6 +124,12 @@ theorem exists_mixedAffineSections_chart_model_factorization
   let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g
   let R := ModuleCat.restrictScalars.{u} g.appTop.hom
+  have : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive F
+  have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive H
+  have : J.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive J
+  have : E.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive E
+  have : K.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive K
+  have : R.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive R
   let C := (F.mapHomologicalComplex (.up ℤ)).obj P
   let d : F ⋙ H ⟶ F ⋙ K ⋙ J ⋙ R :=
     Functor.whiskerRight (Functor.whiskerLeft F

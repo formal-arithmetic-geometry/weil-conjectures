@@ -43,6 +43,7 @@ private theorem sectionsComplexUnit_eq (S : Scheme.{u})
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.id_comp, Category.id_comp, Category.comp_id]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the scheme and sheaf presentations of module categories needs extra reduction.
 /-- Apply sections to a pullback counit satisfying the underived unit factorization.
