@@ -106,6 +106,17 @@ private theorem forgotten_flip_summand
   simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp, hc]
   rfl
 
+private theorem signed_summand_comp
+    {C : Type a} [Category.{b} C] [Preadditive C] {A B D E G : C}
+    (π : A ⟶ B) (i : B ⟶ D) (v : D ⟶ E) (κ : E ⟶ G)
+    (j : B ⟶ E) (out : A ⟶ G) (s : ℤˣ) (hs : s * s = 1)
+    (hi : i ≫ v = s • j) (hκ : π ≫ j ≫ κ = s • out) :
+    π ≫ i ≫ v ≫ κ = out := by
+  rw [← Category.assoc i, hi]
+  have hk := congrArg (s • ·) hκ
+  simp only [smul_smul, hs, one_smul] at hk
+  simpa only [Units.smul_def, Preadditive.comp_zsmul, Preadditive.zsmul_comp] using hk
+
 private theorem signed_uncurry_summand
     {C D : Type a} [Category.{b} C] [Category.{b} D] [Preadditive C] [Preadditive D]
     (U : C ⥤ D) [U.Additive] {A B T : C} {B' : D}
@@ -397,24 +408,19 @@ theorem native_forget_normalized_binary_models
       apply forgotten_flip_summand U (nativeTensorBifunctor k₀ l X)
         P T (chain T P).hom p q n hpq
       exact (hchain T P q p n hqp).trans (Category.id_comp _)
-    have hk := hκ (V.obj T) (V.obj P) q p n hqp hpq
-    have hc : Mod.tensorπ (P.X p).carrier (T.X q).carrier ≫
-        (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-          (flip ≪≫ chain T P).hom.f n).hom ≫
-        ((κ (V.obj T) (V.obj P)).hom.f n).hom =
-          Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
-            (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom := by
-      change Mod.tensorπ ((V.obj P).X p) ((V.obj T).X q) ≫
-          (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq) ≫
-            (flip ≪≫ chain T P).hom.f n).hom ≫
-          ((κ (V.obj T) (V.obj P)).hom.f n).hom =
-        Mod.tensorObjπ ((V.obj P).X p) ((V.obj T).X q) ≫
-          (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom
-      rw [hv]
-      have hk' := congrArg (fun z ↦ (q * p).negOnePow • z) hk
-      simp only [smul_smul, Int.units_mul_self, one_smul] at hk'
-      simpa only [Units.smul_def, Mod.zsmul_hom, Preadditive.zsmul_comp,
-        Preadditive.comp_zsmul, Category.assoc] using hk'
+    have hc := signed_summand_comp
+      (Mod.tensorπ (P.X p).carrier (T.X q).carrier)
+      (U.map (nativeOpenTensorInsertion k₀ l X P T p q n hpq)).hom
+      ((flip ≪≫ chain T P).hom.f n).hom ((κ (V.obj T) (V.obj P)).hom.f n).hom
+      (HomologicalComplex.ιMapBifunctor (V.obj T) (V.obj P)
+        (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+        (.up ℤ) q p n hqp).hom
+      (Mod.tensorObjπ (P.X p).carrier (T.X q).carrier ≫
+        (HomologicalComplex.ιTensorObj (V.obj P) (V.obj T) p q n hpq).hom)
+      (q * p).negOnePow (Int.units_mul_self _)
+      (by simpa only [Mod.comp_hom', Units.smul_def, Mod.zsmul_hom] using
+        congrArg (fun z ↦ z.hom) hv)
+      (hκ (V.obj T) (V.obj P) q p n hqp hpq)
     simpa only [c, Iso.trans_hom, HomologicalComplex.comp_f, Mod.comp_hom',
       Category.assoc] using hc
   · let C := nativeDerivedClosedComparison k₀ l X
@@ -469,9 +475,15 @@ theorem native_forget_normalized_binary_models
       simp only [HomologicalComplex.comp_f]
       refine signed_uncurry_summand U _ _ _ _ _ _ _ (q * p).negOnePow hi
         (by simpa only [mul_comm p q] using hψ p q n hpq) (hψ' q p n hqp) ?_
-      dsimp only [φ', HomologicalComplex.comp_f]
-      rw [Category.assoc, hχ p q n hqp]
-      rfl
+      have hproj := (Category.assoc (U.map (φ.f p)) (χ.hom.f p)
+        (CochainComplex.bifunctorHomπ
+          (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+          (V.obj T) (V.obj I) p q n hqp)).trans
+        ((congrArg (U.map (φ.f p) ≫ ·) (hχ p q n hqp)).trans (U.map_comp _ _).symm)
+      exact (congrArg (fun z ↦
+        ((ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj
+          ((V.obj T).X q)).map z ≫
+            (Mod.ihomAdjunction ((V.obj T).X q)).counit.app ((V.obj I).X n)) hproj).symm
     let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model T I hI).inv
     let f' := DerivedCategory.Q.map φ' ≫
       (M.ordinaryRepresentatives.model (V.obj T) (V.obj I) hUI).inv
