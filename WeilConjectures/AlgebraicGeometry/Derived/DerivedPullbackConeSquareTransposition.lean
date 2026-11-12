@@ -89,6 +89,16 @@ private theorem cone_precompose
   · simp [CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.map,
       Category.assoc]
 
+private theorem iso_comp_homEquiv
+    {C D : Type*} [Category C] [Category D]
+    (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R)
+    {X A B : C} {Y : D} (q : X ⟶ Y)
+    (e : X ≅ L.obj A) (i : A ⟶ B) [IsIso i] (f : B ⟶ R.obj Y)
+    (h : q = e.hom ≫ (adj.homEquiv _ _).symm (i ≫ f)) :
+    q = (e ≪≫ L.mapIso (asIso i)).hom ≫ (adj.homEquiv _ _).symm f := by
+  simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+    Adjunction.homEquiv_naturality_left_symm, Category.assoc] using h
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
@@ -194,13 +204,17 @@ theorem derivedPullback_cone_square_transposition
     DerivedCategory.Q.mapIso (CochainComplex.mappingCone.mapHomologicalComplexIso p E).symm ≪≫
       e _ hconeP ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map c)), ?_, ?_, ?_⟩
   · have hh := he P hP A' (x ≫ α)
-    rw [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-      Adjunction.homEquiv_naturality_left_symm, Category.assoc]
-    exact hh
+    apply iso_comp_homEquiv (L := derivedPullback g)
+      (R := (relativeMVAdj g).right) (adj := relativeMVAdj g)
+      (e := e P hP) (i := DerivedCategory.Q.map x)
+      (f := DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app A')
+    simpa only [Functor.map_comp, ac, adj₀, E, L] using hh
   · have hh := he Q hQ B' (y ≫ β)
-    rw [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-      Adjunction.homEquiv_naturality_left_symm, Category.assoc]
-    exact hh
+    apply iso_comp_homEquiv (L := derivedPullback g)
+      (R := (relativeMVAdj g).right) (adj := relativeMVAdj g)
+      (e := e Q hQ) (i := DerivedCategory.Q.map y)
+      (f := DerivedCategory.Q.map β ≫ (schemeMVDirectImageLocalization g).app B')
+    simpa only [Functor.map_comp, ac, adj₀, E, L] using hh
   · rw [htrans, Functor.map_comp]
     have h := he _ hconeP (CochainComplex.mappingCone t')
       (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
