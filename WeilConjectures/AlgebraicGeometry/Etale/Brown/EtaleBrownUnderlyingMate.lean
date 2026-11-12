@@ -135,12 +135,56 @@ private theorem brown_underlying_cube
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
+private def brown_underlying_localization_coherence
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t)
+    (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  letI := R.ordinaryAdditive
+  ∀ {m n : ℕ} (h : m ≤ n) (K : CochainComplex (strictEtaleLevel W O t m) ℤ),
+    (R.restriction h).hom.app (DerivedCategory.Q.obj K) ≫
+      (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)).map ((R.factors m).hom.app K) ≫
+      (Sheaf.restrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
+          (((strictEtaleBrownConstant O t W m).mapHomologicalComplex (.up ℤ)).obj K) =
+    (R.derived n).map ((P.scalar h).restrictionFactors.hom.app K) ≫
+      (R.factors n).hom.app
+        (((coefficientRestriction (J := W.smallEtaleTopology) O t h).mapHomologicalComplex
+          (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (R.ordinaryRestriction h) (.up ℤ)).hom.app K)
+
+private def brown_underlying_scalar_coherence
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t)
+    (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
+  ∀ {m n : ℕ} (h : m ≤ n),
+    (mateEquiv (P.scalar h).derivedAdj
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
+        (strictEtaleBrownRingMap O t h)))
+      (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom
+
+set_option profiler true in
+private theorem brown_underlying_coherence_iff
+    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
+    (P : StrictEtaleEvaluation W O t)
+    (R : StrictEtaleBrownRealizationData O t W P) :
+    StrictEtaleBrownRealizationCoherence O t W P R ↔
+      (∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
+        (U : W.Etaleᵒᵖ) (x : M.val.obj U),
+        HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x) ∧
+      brown_underlying_localization_coherence O t W P R ∧
+      brown_underlying_scalar_coherence O t W P R := Iff.rfl
+
 set_option profiler true in
 private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
-    (R : StrictEtaleBrownRealization O t W P) : type_of% (@R.property.1) :=
-  @R.property.1
+    (R : StrictEtaleBrownRealization O t W P) :
+    ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
+      (U : W.Etaleᵒᵖ) (x : M.val.obj U),
+      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x :=
+  ((brown_underlying_coherence_iff O t W P R.val).mp R.property).1
 
 private theorem brown_underlying_right_section
     (O : Type (u + 1)) [CommRing O] (t : O)
