@@ -109,7 +109,7 @@ private theorem directImage_constantInterchange_inverse_factors
   rw [hsymm] at hh ⊢
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.symm_hom,
     ← Functor.map_comp, Iso.hom_inv_id_app] at hh
-  erw [Functor.map_id, Category.comp_id] at hh
+  erw [(DerivedCategory.Q (C := Tow l E X)).map_id, Category.comp_id] at hh
   exact hh
 
 private theorem directImage_augmentation_factors (T : Scheme.{u})
