@@ -62,9 +62,8 @@ proves in `thm-a1-curve-perverse-heart` that on a smooth curve they are the uppe
 classes above. The support and cosupport conditions are formalised on the étale site, in
 `WeilConjectures.SixFunctors.Etale.Perverse.Basic`; for Weil complexes, which have no Verdier
 dual yet, the curve classes are taken as the definition, and parts (1) and (3) of the theorem
-hold by definition. Part (5), on short exact sequences in the heart, is not stated: the
-provisional `AlgebraicGeometry.WeilComplex` is not triangulated, so its curve perverse heart
-carries no abelian structure.
+hold by definition. The truncation triangles, and with them the t-structure and the abelian
+structure of the heart, are in `WeilConjectures.DeligneLaumon.AffineLine.PerverseTStructure`.
 
 Following the blueprint, the lower class is reached through orthogonality: `FT_ψ` and its
 inverse preserve the upper classes, hence `FT_ψ` preserves their right orthogonals.
