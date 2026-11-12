@@ -211,7 +211,9 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
       (R((aX)_*⟦Λ⟧).obj A) (h := by rw [← sq₁.w])
     have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
       ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A))
-    rw [pullbackSquareComparison_hom_app, pullbackSquareComparison_hom_app]
+    have hs₁ := pullbackSquareComparison_hom_app Λ sq₁ (R((aX)_*⟦Λ⟧).obj A)
+    have hw := pullbackSquareComparison_hom_app Λ w (R((aX)_*⟦Λ⟧).obj A)
+    rw [hs₁, hw]
     simp only [Category.assoc]
     rw [reassoc_of% hc, reassoc_of% hn]
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
@@ -225,7 +227,8 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
       (R((aY)_*⟦Λ⟧).obj B) (h := by rw [← sq₂.w])
     have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
       ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B))
-    rw [pullbackSquareComparison_hom_app]
+    have hs₂ := pullbackSquareComparison_hom_app Λ sq₂ (R((aY)_*⟦Λ⟧).obj B)
+    rw [hs₂]
     simp only [Category.assoc]
     rw [reassoc_of% hc, reassoc_of% hn]
     simp
