@@ -29,6 +29,8 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option profiler true in
+set_option maxHeartbeats 800000 in
 -- Comparing the explicit stalk and module composites unfolds several derived functors.
 private theorem affineBaseChangeTildeModuleMap_localized_aux2
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
