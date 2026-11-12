@@ -31,7 +31,6 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 attribute [local irreducible] quotientLine quotientLineMap derivedScalars
   QuotientLineRealization FiniteDiagonalComparison
 
-set_option profiler true in
 /-- Identify a supplied scalar-compatible quotient diagram with the positive finite
 Cartier class and trace, at the fixed annihilating exponent. No quotient diagram or
 scalar compatibility is constructed by this statement.
@@ -113,6 +112,7 @@ theorem diagonalUniformizer_finiteNormalization
   let A := ULift.{u + 1} B
   let R := Profinite.continuousMapRingObj.{u} B
   let := hfinite
+  -- Direct elimination avoids reducing the large conclusion for each model witness.
   refine (diagonalUniformizer_finiteModels l Y hY E π hπ n hA hYpow hWpow
     rootsP rootsW).elim fun eY heY ↦ heY.elim fun eP heP ↦ heP.elim fun eW heW ↦
       heW.elim fun lineP hlineP ↦ hlineP.elim fun lineW hlineW ↦ ?_

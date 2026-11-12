@@ -64,7 +64,6 @@ private theorem quotient_section_coordinates
   exact ⟨LinearEquiv.ofBijective l hq, fun _ ↦ rfl⟩
 
 set_option linter.unusedVariables false in
-set_option profiler true in
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented
 lift of the canonical quotient restriction on each basic inclusion.
 This theorem only constructs one compatible augmented lift on each basic inclusion;
@@ -162,6 +161,7 @@ theorem exists_derived_selfTor_chosen_affine_coordinates
   let := HasDerivedCategory.standard M
   let := SheafOfModules.monoidalCategory Y.sheaf
   let N := (CochainComplex.singleFunctor M 0).obj B
+  -- Direct elimination keeps the conclusion fixed while introducing the resolution witnesses.
   refine (CochainComplex.exists_isKFlatResolution N).elim fun K hK' ↦
     hK'.elim fun q hK' ↦ ?_
   have hK := hK'.1
