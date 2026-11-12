@@ -97,10 +97,12 @@ local instance supportCriterionModuleAbelian (X : Scheme.{u}) :
 local instance supportCriterionOverModuleAbelian (X : Scheme.{u}) (U : X.Opens) :
     Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
 
-local instance supportCriterionRestrictionPreservesZero (X : Scheme.{u}) (U : X.Opens) :
+private theorem supportCriterionRestrictionPreservesZero (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenRestriction X U).PreservesZeroMorphisms := by
   letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U
   exact Functor.preservesZeroMorphisms_of_additive _
+
+attribute [local instance] supportCriterionRestrictionPreservesZero
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
