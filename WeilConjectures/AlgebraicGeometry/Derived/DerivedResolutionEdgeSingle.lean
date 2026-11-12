@@ -126,11 +126,12 @@ private theorem resolutionEdge_unit_of_map
     (b : J ⟶ I) (hb : DerivedCategory.Q.map b = r.inv) :
     (DerivedCategory.homologyFunctor D q).map (F.complexDerivedUnit.app J) ≫
       (((DerivedCategory.homologyFunctor D q).mapIso
-        (F.rightDerivedFunctor.mapIso r.symm ≪≫ F.rightDerivedFunctorObjQIso I) ≪≫
-      (DerivedCategory.homologyFunctorFactors D q).app
-        ((F.mapHomologicalComplex (.up ℤ)).obj I)).hom ≫ ShortComplex.leftExactHomologyEdge F (I.sc q) ≫
+          (F.rightDerivedFunctor.mapIso r.symm ≪≫ F.rightDerivedFunctorObjQIso I) ≪≫
+        (DerivedCategory.homologyFunctorFactors D q).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj I)).hom ≫
+        ShortComplex.leftExactHomologyEdge F (I.sc q) ≫
         F.map ((DerivedCategory.homologyFunctor C q).mapIso r.symm ≪≫
-      (DerivedCategory.homologyFunctorFactors C q).app I).inv) =
+          (DerivedCategory.homologyFunctorFactors C q).app I).inv) =
       (DerivedCategory.homologyFunctorFactors D q).hom.app
           ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
         ShortComplex.leftExactHomologyEdge F (J.sc q) ≫
@@ -146,9 +147,9 @@ private theorem resolutionEdge_unit_of_map
       complexUnit_resolutionIso, Category.comp_id]
   have ha : H.map (F.complexDerivedUnit.app J) ≫
       ((DerivedCategory.homologyFunctor D q).mapIso
-        (F.rightDerivedFunctor.mapIso r.symm ≪≫ F.rightDerivedFunctorObjQIso I) ≪≫
-      (DerivedCategory.homologyFunctorFactors D q).app
-        ((F.mapHomologicalComplex (.up ℤ)).obj I)).hom =
+          (F.rightDerivedFunctor.mapIso r.symm ≪≫ F.rightDerivedFunctorObjQIso I) ≪≫
+        (DerivedCategory.homologyFunctorFactors D q).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj I)).hom =
       (DerivedCategory.homologyFunctorFactors _ q).hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj J) ≫
           HomologicalComplex.homologyMap ((F.mapHomologicalComplex (.up ℤ)).map b) q := by
@@ -164,7 +165,7 @@ private theorem resolutionEdge_unit_of_map
     ((HomologicalComplex.shortComplexFunctor _ (.up ℤ) q).map b)
   have hr : HomologicalComplex.homologyMap b q ≫
       ((DerivedCategory.homologyFunctor C q).mapIso r.symm ≪≫
-      (DerivedCategory.homologyFunctorFactors C q).app I).inv =
+        (DerivedCategory.homologyFunctorFactors C q).app I).inv =
       (DerivedCategory.homologyFunctorFactors _ q).inv.app J := by
     have hf := (DerivedCategory.homologyFunctorFactors _ q).inv.naturality b
     simp only [Functor.comp_map, Functor.comp_obj,
@@ -187,7 +188,6 @@ private theorem resolutionEdge_unit_of_map
         ShortComplex.leftExactHomologyEdge F (J.sc q) ≫ F.map z) hr
   simpa only [Functor.map_comp, Category.assoc, HomologicalComplex.homologyMap,
     HomologicalComplex.sc] using hh
-
 
 private theorem single_homology_edge
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -223,8 +223,8 @@ private theorem single_homology_edge
   rw [reassoc_of% hraw]
   change (DerivedCategory.homologyFunctorFactors _ q).hom.app
     ((CochainComplex.singleFunctor _ q).obj (F.obj M)) ≫
-      ((HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q (F.obj M)).hom ≫
-        F.map (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q M).inv) ≫
+      (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q (F.obj M)).hom ≫
+        F.map (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) q M).inv ≫
           F.map ((DerivedCategory.homologyFunctorFactors _ q).inv.app J) =
     ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ q).app (F.obj M)).hom ≫
       F.map ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ q).app M).inv
@@ -236,7 +236,7 @@ private theorem single_homology_edge
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
--- The fixed resolution and the two homology factorizations carry large module parameters.
+-- Specialize the abstract calculation to the fixed resolution.
 private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ) :
     let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
@@ -254,7 +254,6 @@ private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
   exact resolutionEdge_unit_of_map
     (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) q J I r b hb
 
--- Integer singles have several definitionally equal quotient and homotopy presentations.
 /-- The constructed edge on a single complex is normalized by the derived unit.
 Source: Stacks, Tags 0BKJ and 079W
 (blueprint: lem-weil-pbc-resolution-local-class-edge-single).
