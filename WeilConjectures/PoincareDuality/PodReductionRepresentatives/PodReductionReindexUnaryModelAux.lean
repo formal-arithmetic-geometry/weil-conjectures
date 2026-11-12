@@ -256,9 +256,7 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
         (coefficientSequenceCommRingSheaf l E W))
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m
-  have hr := congrArg (fun f ↦ f r) (evaluationRing_app l E W n V)
-  exact hs.trans (congrArg
-    (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr)
+  simpa only [evaluationRing_app, RingCat.id_apply] using hs
 
 -- Normalize the tensor before placing it inside the reindexing composite.
 private theorem unitSection_tensor_smul (W : Scheme.{u})
@@ -392,6 +390,9 @@ theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (op ((proEtaleIsoPostcompose g).obj U)) x)))
   have h3 := congrArg (fun z : (MX.tensor.obj
     ((isoReductionIntegralInverse l E g).obj N)).val.obj (op (n, U)) ↦ b • z) (hβ N n U x)
-  exact h0.trans (h1.trans (h2.trans (h3.trans hX.symm)))
+  refine h0.trans ?_
+  refine h1.trans ?_
+  refine h2.trans ?_
+  exact h3.trans hX.symm
 
 end WeilConjectures.PodReductionRepresentatives
