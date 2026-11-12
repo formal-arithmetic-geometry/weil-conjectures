@@ -35,10 +35,6 @@ private theorem derivedOpenGluing_additive_of_preservesFiniteLimits
     F.Additive :=
   Functor.additive_of_preserves_binary_products _
 
--- Use finite-limit preservation directly, avoiding the circular search through additivity
--- when inferring preservation of binary products and zero morphisms separately.
-attribute [local instance] derivedOpenGluing_additive_of_preservesFiniteLimits
-
 private theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.Opens)
     [Preadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
@@ -48,6 +44,25 @@ private theorem derivedOpenGluing_restriction_additive (X : Scheme.{u}) (U : X.O
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U)).Additive := by
   apply derivedOpenGluing_additive_of_preservesFiniteLimits
+
+private theorem derivedOpenGluing_overlap_additive (X : Scheme.{u})
+    (U V : X.Opens) (i : V ⟶ U)
+    [Preadditive (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    [Preadditive (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] :
+    (Equivalence.inverse
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U) ⋙
+      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))
+        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv V)).Additive := by
+  apply derivedOpenGluing_additive_of_preservesFiniteLimits
+
+-- Package the preservation proofs once for each restriction, rather than searching through
+-- binary products and zero morphisms again at every occurrence of a composite functor.
+attribute [local instance] derivedOpenGluing_restriction_additive derivedOpenGluing_overlap_additive
 
 private theorem compatible_composites
     {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
