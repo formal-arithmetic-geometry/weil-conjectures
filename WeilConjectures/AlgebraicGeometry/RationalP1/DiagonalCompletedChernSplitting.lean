@@ -46,7 +46,7 @@ private theorem map_split
   rw [he]
   infer_instance
 
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The derived biproduct structure on completed coefficients is found by unfolding.
 /-- A normalized completed Chern adjunct is the second component of a splitting.
 

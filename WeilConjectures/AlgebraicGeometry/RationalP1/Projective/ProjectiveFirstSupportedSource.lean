@@ -143,7 +143,7 @@ private theorem exact_single_unit_iso
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
   rw [← Category.assoc, hu, Iso.inv_hom_id_app]
 
-set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Cancel the exact-single augmentation with fixed native functor instances.
 /-- The normalized supported source agrees with the first-projection section arrow.
 There is no variable tensor factor, kernel class, functional or outer direct image.
