@@ -242,7 +242,6 @@ private theorem sliceNat
       (L'.map q).hom.app V ((e.app X).hom.app V v) :=
   congrArg (fun k ↦ k.hom.app V v) (e.naturality q)
 
-set_option profiler true in
 -- The graph equations compare several composed underlying-sheaf functors.
 private noncomputable def sliceTransport
     {L L' : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
@@ -351,8 +350,8 @@ private theorem sliceUnderlyingComparison
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Iso.symm_inv,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    NatTrans.id_app, CategoryTheory.Functor.map_id, Category.assoc,
-    Category.id_comp, Category.comp_id]
+    NatTrans.id_app, CategoryTheory.Functor.map_id, Category.assoc]
+  erw [Category.id_comp, Category.comp_id]
 
 -- The graph equations compare several composed underlying-sheaf functors.
 private noncomputable def sliceScalarSection
@@ -797,7 +796,6 @@ private theorem sliceTensorComparisonNaturality
   exact congrArg (fun q ↦ q.val.app V m) (b.naturality h)
 
 end SliceHelpers
-set_option profiler true in
 -- Elaborating the sliced presentations unfolds several layers of functors.
 /-- Ordinary module pullback commutes with localization once the sliced data are given.
 
@@ -907,14 +905,12 @@ theorem geometric_ringed_pullback_slice_modules
   refine Exists.elim (algebraic_image (elementTopology A) (elementTopology B)
     fA.inverse fA.direct fA.adj (presentationElementRing RY A)) (fun RIA hIA ↦ ?_)
   refine Nonempty.elim hIA (fun IA ↦ ?_)
-  trace "slice: algebraic_image complete"
   have : PreservesFiniteLimits (elementSheafPullback A) := by
     rw [← y.localization_inverse]
     exact y.localization.leftExact
   let P := sliceComposite (elementSheafPullback A) fA.inverse (sliceRestriction RY A) IA
   let Q := sliceTransport a
     (sliceComposite f.inverse (elementSheafPullback B) I (sliceRestriction RI B))
-  trace "slice: composites complete"
   let d := sliceRingHom P Q
   have hd : (sheafCompose (elementTopology B)
       (CategoryTheory.forget CommRingCat.{u})).map d =
@@ -931,7 +927,6 @@ theorem geometric_ringed_pullback_slice_modules
       (sheafCompose (elementTopology B)
         (CategoryTheory.forget CommRingCat.{u})).map d = Q.ringUnderlying.hom := by
     rw [hd, Iso.hom_inv_id_assoc]
-  trace "slice: ring comparison complete"
   have hca : IA.ringUnderlying.hom ≫
       (sheafCompose (elementTopology B)
         (CategoryTheory.forget CommRingCat.{u})).map ca = fA.ringMap := by
@@ -949,10 +944,8 @@ theorem geometric_ringed_pullback_slice_modules
           ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c) = fA.ringMap
     rw [Category.comp_id, Category.assoc, ← Functor.map_comp, hc]
     exact hr.symm
-  trace "slice: structural map complete"
   refine Exists.elim (sliceModuleComparison P Q (@asIso _ _ _ _ d hdi) hd')
     (fun b hb ↦ ?_)
-  trace "slice: module comparison complete"
   have hb' (M : ringedSiteModules.{u} (localCoefficientRings RY)) :
       (toSheaf (localCoefficientRings RIA) ⋙
         sheafCompose (elementTopology B) (CategoryTheory.forget AddCommGrpCat.{u})).map
@@ -963,11 +956,9 @@ theorem geometric_ringed_pullback_slice_modules
             sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ≫
           (elementSheafPullback B).map (I.moduleUnderlying.inv.app M) := by
     exact (hb M).trans (sliceUnderlyingComparison RY RI A B f.inverse fA.inverse IA I a M)
-  trace "slice: underlying module comparison complete"
   choose e he using fun M : ringedSiteModules.{u} (localCoefficientRings RY) ↦
     sliceTensorComparison c B (@asIso _ _ _ _ d hdi) ca rfl
       (P.modules.obj M) (I.modules.obj M) (b.app M)
-  trace "slice: tensor comparison complete"
   refine ⟨RIA, IA, ca, hca, e, ?_, ?_⟩
   · intro M N h
     exact sliceTensorComparisonNaturality c B (@asIso _ _ _ _ d hdi) ca
