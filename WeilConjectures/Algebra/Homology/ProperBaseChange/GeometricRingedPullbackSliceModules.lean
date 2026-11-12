@@ -243,7 +243,6 @@ private theorem sliceNat
   congrArg (fun k ↦ k.hom.app V v) (e.naturality q)
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- The graph equations compare several composed underlying-sheaf functors.
 private noncomputable def sliceTransport
     {L L' : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
@@ -717,7 +716,6 @@ private theorem sliceTensorComparison
 
 end SliceHelpers
 set_option profiler true in
-set_option maxHeartbeats 6000000 in
 -- Elaborating the sliced presentations unfolds several layers of functors.
 /-- Ordinary module pullback commutes with localization once the sliced data are given.
 
