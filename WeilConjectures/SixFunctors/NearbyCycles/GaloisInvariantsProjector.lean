@@ -345,11 +345,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
-  dsimp only [galoisLayer, galoisLayerExchangeIso, Functor.comp_map, Functor.mapIso_hom,
-    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv] at hα
+  have hα' := hα
+  simp only [Functor.map_comp] at hα'
   have key := exists_retraction_of_eq_comp_map_comp_of_invariant_eq R((N.j)_*⟦Λ⟧)
     L((N.i)^*⟦Λ⟧) _ ((leftDerivedUpperStarId Λ X').app _) _ (N.galoisLayerExchangeIso h Ω Λ C)
-    rfl _ R hα hR
+    rfl _ R hα' hR
     (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
