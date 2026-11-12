@@ -96,6 +96,7 @@ noncomputable def diagonalSpecialization :
     (boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
     (diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- `erw` matches the composition up to the instance arguments of the bounded constructible
 -- categories, which takes more than the default budget.

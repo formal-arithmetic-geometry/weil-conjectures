@@ -284,6 +284,7 @@ variable {Fc Cc Xc Pc Fb Cb Yb Pb : Over (Spec (.of k))}
   {ιb : Fb ⟶ Cb} {b : Cb ⟶ Pb} {db : Fb ⟶ Yb} {Δb : Yb ⟶ Pb}
   {g : Cc ⟶ Cb} {q : Pc ⟶ Pb} {f : Xc ⟶ Yb} {h : Fc ⟶ Fb}
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- **Exchange of the traces of two squares along a map of squares**, on compactly supported
