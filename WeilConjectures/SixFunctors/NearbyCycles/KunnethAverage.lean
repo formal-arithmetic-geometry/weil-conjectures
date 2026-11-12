@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -45,23 +46,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
--- Share the colimit-preservation proofs used by the graded tensor constructions
--- underlying each derived pullback in the statement.
-local instance (priority := 10000) kunnethTensorLeftColimit (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
-    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-    Limits.PreservesColimit V ((curriedTensor _).obj M) := by
-  infer_instance
+-- Reuse the graded tensor and colimit proofs at each derived pullback.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
 
-local instance (priority := 10000) kunnethTensorRightColimit (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
-    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
-    Limits.PreservesColimit V ((curriedTensor _).flip.obj M) := by
-  infer_instance
-
-set_option trace.profiler true in
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
@@ -110,7 +99,9 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
         (L((r)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))) :
     IsTensorRetract (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
       hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) := by
-  refine isTensorRetract_of_sum' _ s n hn
+  refine isTensorRetract_of_sum'
+    (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
+      hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) s n hn
     (L((e₁')^*⟦Λ⟧).map rM ≫
       (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ hrP
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
