@@ -82,12 +82,15 @@ lemma adicGlobalSections_frobeniusNatTrans_app {Z W : Scheme.{u}} (g : Z ⟶ W)
       (adicLowerStarCompGlobalSectionsIso l hW).inv).app X =
       (adicLowerStarCompGlobalSectionsIso l hZ).inv.app X.carrier ≫
         (adicGlobalSections l Z).map X.str.hom := by
-  have h := adicLowerStarCompGlobalSectionsIso_inv_app_comm l g hW hZ g comm X.carrier
   have hnat := (adicLowerStarCompGlobalSectionsIso l g).hom.naturality X.str.hom
   rw [Functor.comp_map] at hnat
   rw [IsoAlgebra.frobeniusNatTrans_app, Functor.map_comp]
   simp only [Category.assoc]
-  rw [hnat, reassoc_of% h, Iso.inv_hom_id_app_assoc]
+  rw [hnat]
+  have h := congrArg (fun f ↦ (adicLowerStarCompGlobalSectionsIso l g).inv.app X.carrier ≫
+      f ≫ (adicGlobalSections l Z).map X.str.hom)
+    (adicLowerStarCompGlobalSectionsIso_inv_app_comm l g hW hZ g comm X.carrier)
+  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using h
 
 /-- The underlying morphism of sheaves of the Frobenius exchange isomorphism. -/
 lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app {k : Type u}
