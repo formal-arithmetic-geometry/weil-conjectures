@@ -48,6 +48,12 @@ private theorem unaryPushforward_smul
     r • @id (((SheafOfModules.pushforward φ).obj M).val.obj U) m =
       φ.hom.app U r • m := rfl
 
+private theorem unaryMap_smul
+    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {M N : SheafOfModules.{u} R} (f : M ⟶ N) (U : Cᵒᵖ) (r : R.obj.obj U)
+    (x : M.val.obj U) :
+    f.val.app U (r • x) = r • f.val.app U x := (f.val.app U).hom.map_smul r x
+
 private theorem unaryIso_inv_section
     {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
     {M N : SheafOfModules.{u} R} (e : M ≅ N) (U : Cᵒᵖ)
@@ -256,7 +262,7 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
         (coefficientSequenceCommRingSheaf l E W))
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm) M (op V) r m
-  simpa only [evaluationRing_app, RingCat.id_apply] using hs
+  simpa only [evaluationRing_app, ConcreteCategory.id_apply] using hs
 
 -- Normalize the tensor before placing it inside the reindexing composite.
 private theorem unitSection_tensor_smul (W : Scheme.{u})
@@ -371,7 +377,8 @@ theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   let P := ((integralComparisonSequencePullback l E g).obj (MY.tensor.obj N)).val
   let f := (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
   let k := (β.hom.app N).val.app (op (n, U))
-  let b := (isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
+  let b : (coefficientSequenceCommRingSheaf l E X).obj.obj (op (n, U)) :=
+    (isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
     (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a
   have hY := unitSection_tensor_smul l E Y MY N n ((proEtaleIsoPostcompose g).obj U) a x
   have hX := unitSection_tensor_smul l E X MX ((isoReductionIntegralInverse l E g).obj N)
@@ -383,7 +390,7 @@ theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (unaryGenerator_comma_smul l E g (MY.tensor.obj N) n U a
       (PodQuotientTransition.unitSection l E Y MY N n
         (op ((proEtaleIsoPostcompose g).obj U)) x))
-  have h2 := k.hom.map_smul b (P.map f
+  have h2 := unaryMap_smul (β.hom.app N) (op (n, U)) b (P.map f
     (integralComparisonSequenceGenerator l E g (MY.tensor.obj N) n
       ((proEtaleIsoPostcompose g).obj U)
       (PodQuotientTransition.unitSection l E Y MY N n
