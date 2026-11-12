@@ -171,7 +171,8 @@ lemma assemble_natIso_aux {S R : C ⥤ P} (ι : S ≅ R) {A B B' D E F H : P} {M
     a₁ ≫ a₂ ≫ a₃ ≫ S.map u ≫ b₁ ≫ b₂ =
       p₁ ≫ (p₂ ≫ (p₃ ≫ R.map u ≫ q₁) ≫ q₂) ≫ q₃ := by
   rw [assemble_aux hA (S.map u) hB]
-  simp only [Category.assoc, Iso.naturality_1_assoc]
+  simp only [Category.assoc]
+  rw [← ι.inv.naturality_assoc, Iso.inv_hom_id_app_assoc]
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -374,7 +375,6 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
   exact lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux ℓ c.c₂ (toPoint X) (toPoint c.C)
     (comp_toPoint _) K
 
-set_option profiler true in
 /-- **The pushed coefficient map is the global operator** (blueprint
 `thm-trf-fixed-point-localization`, proof): the coefficient pushforward `[a_X, a_C]_! u` of `u`
 along the diagram to the point is the global operator `T_c(u)`, read through
