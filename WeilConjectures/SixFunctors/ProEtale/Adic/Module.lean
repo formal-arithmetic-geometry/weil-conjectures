@@ -116,9 +116,18 @@ instance : IsMonHom (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).
 variable (l) in
 /-- The pushforward `g_*` of sheaves of modules over the constant `ℓ`-adic sheaves: the
 pushforward of the underlying sheaf, a module over `ℚ̄_ℓ,Y` along `ℚ̄_ℓ,Y ⟶ g_* ℚ̄_ℓ,Z`. -/
-noncomputable def adicLowerStar : AdicSheaf l Z ⥤ AdicSheaf l Y :=
-  (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).modRight
-    (adicConstantSheafToLowerStar l g)
+noncomputable def adicLowerStar : AdicSheaf l Z ⥤ AdicSheaf l Y where
+  -- Expose the underlying sheaf and map without reducing the module action or the adjunction.
+  obj M :=
+    { X := (g)_*[WeilCoefficients.{u} l].obj M.X
+      mod := (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).modRight
+        (adicConstantSheafToLowerStar l g)).obj M).mod }
+  map f :=
+    { hom := (g)_*[WeilCoefficients.{u} l].map f.hom
+      isModHom := (((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).modRight
+        (adicConstantSheafToLowerStar l g)).map f).isModHom }
+  map_id M := Mod.hom_ext _ _ ((g)_*[WeilCoefficients.{u} l].map_id M.X)
+  map_comp f h := Mod.hom_ext _ _ ((g)_*[WeilCoefficients.{u} l].map_comp f.hom h.hom)
 
 variable (l) in
 /-- The pullback `g^*` of sheaves of modules over the constant `ℓ`-adic sheaves: the pullback of
