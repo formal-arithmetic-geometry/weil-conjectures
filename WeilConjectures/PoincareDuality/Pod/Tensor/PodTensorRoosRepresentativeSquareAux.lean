@@ -369,7 +369,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     eP eQ e k _ hs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
   have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
-  dsimp only [podReindexingTensorFrame] at hc
+  dsimp only [eP, eQ, e, k, fP, fQ, podRepresentativeReindexFactors, Iso.app,
+    podReindexingTensorFrame, integralOperationsTensorOnGood,
+    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
+    podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
+    integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.lift, ObjectProperty.ι_obj] at finish hc ⊢
   exact finish.trans hc
 
 end WeilConjectures
