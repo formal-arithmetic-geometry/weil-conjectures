@@ -305,7 +305,9 @@ private theorem representative_mate
       q.map (TP.map t) ≫ q.map b ≫ h.inv.app (F.obj (TP.obj Q)) := by
     rw [ho, q.map_comp] at hg
     apply (cancel_mono (h.hom.app (F.obj (TP.obj Q)))).1
-    simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using hg
+    simp only [Category.assoc]
+    erw [Iso.inv_hom_id_app, Category.comp_id]
+    exact hg
   have hn : (e.app Z).hom ≫ T.map (Prod.mkHom (𝟙 (q.obj P)) (q.map t)) =
       q.map (TP.map t) ≫ (e.app (V.obj (F.obj Q))).hom :=
     (e.hom.naturality t).symm
@@ -316,8 +318,10 @@ private theorem representative_mate
     (c.app (TP.obj Z)) (c.app (TP.obj Q))
     (c.app Z ≫ r.map t' ≫ inv (c.app Q)) (r.map ψ) hn hf hμ hg'
   have hh' := congrArg (fun k ↦ k ≫ h.hom.app (F.obj (TP.obj Q))) hh
-  simpa only [Category.assoc, Iso.inv_hom_id_app, Iso.trans_hom, Functor.mapIso_hom,
-    asIso_hom, Iso.app_hom, Iso.app_inv, Category.comp_id] using hh'
+  simp only [Category.assoc, Iso.inv_hom_id_app, Iso.trans_hom, Functor.mapIso_hom,
+    asIso_hom, Iso.app_hom, Iso.app_inv] at hh'
+  erw [Category.comp_id] at hh'
+  exact hh'
 
 end Representatives
 
@@ -337,7 +341,8 @@ private theorem counit_quotient_eq
       ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
   change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
   rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id]
+    Category.id_comp, Category.comp_id]
+  exact Category.comp_id _
 
 private theorem restrictionFactors_quotient_eq
     [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
@@ -1123,10 +1128,14 @@ theorem restrictionTensor_mate_model
       (MateDerived.reductionCounit_isIso l E X D hl n Q hQ)
   let t' : F.obj Z ⟶ F.obj Q := (adj₀.homEquiv Z (F.obj Q)).symm t
   have hZ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
+  have hF : integralReductionChangeOfRings l E X D hl n =
+      scalarReductionExtension l E X n := rfl
   have normZ := m.normalization P Z hP hZ₀
+  rw [hF] at normZ
   obtain ⟨hFP, hFZ, betaZ₀, hiZ₀, hbZ, hnZ⟩ := normZ
   have hQ₀ : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) Q := hQ
   have normQ := m.normalization P Q hP hQ₀
+  rw [hF] at normQ
   obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := normQ
   let betaZ := betaZ₀
   let betaQ := betaQ₀
