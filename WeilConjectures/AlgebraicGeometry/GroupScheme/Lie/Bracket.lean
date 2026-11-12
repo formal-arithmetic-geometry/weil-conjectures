@@ -788,8 +788,10 @@ theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
     tangentBracket (tangentBracket x⁻¹ y) z * tangentBracket (tangentBracket z⁻¹ x) y *
       tangentBracket (tangentBracket y⁻¹ z) x = 1 := by
   apply tangentMon_injective
-  exact (tangentMap_tangentBracket_hallWitt alp₃ bet₃ gam₃ alp₃_mul_self bet₃_mul_self
-    gam₃_mul_self aug₃_alp₃ aug₃_bet₃ aug₃_gam₃ mon₃ aug₃_mon₃ mon₃_mul rfl x y z).trans
+  exact (tangentMap_tangentBracket_hallWitt
+    (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) (G := G)
+    alp₃ bet₃ gam₃ alp₃_mul_self bet₃_mul_self gam₃_mul_self
+    aug₃_alp₃ aug₃_bet₃ aug₃_gam₃ mon₃ aug₃_mon₃ mon₃_mul rfl x y z).trans
     (map_one _).symm
 /-! ### The Lie algebra -/
 
