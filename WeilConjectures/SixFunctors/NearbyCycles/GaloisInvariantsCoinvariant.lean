@@ -235,7 +235,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option profiler true in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (SGA 4½, [Th. finitude],
 Lemme 3.4; torsion coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
