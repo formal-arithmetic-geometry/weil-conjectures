@@ -135,14 +135,16 @@ private theorem brown_underlying_cube
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
+set_option profiler true in
 private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
     (R : StrictEtaleBrownRealization O t W P) :
     ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
       (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x :=
-  R.property.1
+      HEq (((R.val.ordinaryRestriction h).hom.app M).hom.app U x) x := by
+  obtain ⟨hr, _⟩ := R.property
+  exact @hr
 
 private theorem brown_underlying_right_section
     (O : Type (u + 1)) [CommRing O] (t : O)
