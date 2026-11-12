@@ -79,6 +79,7 @@ lemma restrictNormal_eq_one_of_forall_apply_eq (L' : FiniteGaloisIntermediateFie
   AlgEquiv.ext fun x ↦
     (algebraMap L' Ω).injective ((AlgEquiv.restrictNormal_commutes σ L' x).trans (hσ x))
 
+set_option profiler true in
 -- matching the derived functors of the Galois layer with those of the field tower (as in
 -- `exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`)
 /-- **Continuity of the Galois action on a noetherian cohomology sheaf of nearby cycles**
@@ -159,8 +160,7 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       (DerivedCategory.homologyFunctor _ q).map
       (N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω 1
         (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) := by
-    rw [galoisLayerAction, galoisLayerAction, galoisLayerAut_autAction, galoisLayerAut_autAction,
-      Functor.map_comp, Functor.map_comp, Functor.map_comp, Functor.map_comp, hA]
+    simp only [galoisLayerAction, galoisLayerAut_autAction, Functor.map_comp, hA]
   rw [hσ1, galoisLayerAction_one, CategoryTheory.Functor.map_id]
 
 /-- **Continuity of the Galois action on noetherian cohomology sheaves of nearby cycles**, for
