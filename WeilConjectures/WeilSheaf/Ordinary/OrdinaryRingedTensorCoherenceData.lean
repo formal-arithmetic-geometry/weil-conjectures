@@ -28,6 +28,32 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (H : Functor.uncurry.obj (ordinaryIhomBifunctor l Y) ⋙ E.functor ≅
     E.functor.op.prod E.functor ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
+-- Share the concrete cochain structures before the fields introduce large tensor expressions.
+local instance ordinaryRingedTensorSourceMonoidal :
+    MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
+  Mod.monoidalCategoryCochainComplex
+
+local instance ordinaryRingedTensorSourceStruct :
+    MonoidalCategoryStruct (CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
+  (ordinaryRingedTensorSourceMonoidal l Y).toMonoidalCategoryStruct
+
+local instance ordinaryRingedTensorTargetCoefficients :
+    MonoidalCategory (RingedTensorModules.{u + 1, u + 1, u + 1} J R) :=
+  SheafOfModules.monoidalCategory R
+
+local instance ordinaryRingedTensorTargetMonoidal :
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
+  HomologicalComplex.monoidalCategory _ (.up ℤ)
+
+local instance ordinaryRingedTensorTargetStruct :
+    MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) :=
+  (ordinaryRingedTensorTargetMonoidal J R).toMonoidalCategoryStruct
+
+-- Infer the sign action with abstract endpoints, without unfolding total-tensor objects.
+local instance ordinaryRingedTensorHomSMul
+    (M N : RingedTensorModules.{u + 1, u + 1, u + 1} J R) :
+    HSMul ℤˣ (M ⟶ N) (M ⟶ N) := inferInstance
+
 /-- A binary comparison fixed uniquely by its tensor--Hom mate.
 Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
 structure OrdinaryRingedTensorUnderivedData where
@@ -48,10 +74,6 @@ structure OrdinaryRingedTensorUnderivedData where
           (E.functor.obj Q) (E.functor.obj I)).symm
             (E.functor.map f ≫ H.hom.app (op P, I))
 
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option maxHeartbeats 1200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- A normalized comparison on the existing ordinary and ringed cochain tensors.
@@ -76,10 +98,16 @@ structure OrdinaryRingedTensorChainComparison
         (.up ℤ) p q n hpq) ≫
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
-      (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
-        RingedForgetTensorTransposition.tensorSummand J R
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)
+      (by
+        -- Normalize the hom type before elaborating its scalar action.
+        change E.functor.obj (((ordinaryTensorBifunctor l Y).obj (P.X p)).obj (Q.X q)) ⟶
+          ((coefficientTotalTensor J R).obj
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q,
+              (E.functor.mapHomologicalComplex (.up ℤ)).obj P)).X n
+        exact (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
+          RingedForgetTensorTransposition.tensorSummand J R
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
+            ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
   associativity (P Q N : CochainComplex (ProEtale.AdicSheaf l
       Y) ℤ) :
     let G := E.functor.mapHomologicalComplex (.up ℤ)
@@ -88,10 +116,6 @@ structure OrdinaryRingedTensorChainComparison
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ G.obj N) ≫
         (α_ (G.obj P) (G.obj Q) (G.obj N)).hom
 
-set_option synthInstance.maxHeartbeats 200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
-set_option maxHeartbeats 1200000 in
--- Elaborating the concrete tensor instances requires large definitional comparisons.
 /-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
 The normalization equations fix every tensorator uniquely. The first clause retains
 symmetry relative to the actual ordinary balanced tensor. This is a property of
