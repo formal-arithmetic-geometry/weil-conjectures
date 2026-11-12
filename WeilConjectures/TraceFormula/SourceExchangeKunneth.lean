@@ -111,7 +111,6 @@ section ExceptionalKunneth
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The adjoint of the exceptional Künneth map precomposed with a map `t : N ⟶ ω_Y` in the second
 factor: the counit of `Ra_Y! ⊣ Ra_Y^!` is precomposed with `Ra_Y! t`. -/
@@ -184,7 +183,6 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
-set_option maxHeartbeats 2000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- The base-change core of the exceptional Künneth part of identity (a) (blueprint
 `lem-trf-trace-source-exchange`, Step 3): the projection formula for `p₁'`, compact-support base
