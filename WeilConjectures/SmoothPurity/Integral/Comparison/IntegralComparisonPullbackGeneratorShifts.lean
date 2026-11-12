@@ -95,7 +95,7 @@ private theorem product_shift_square {A : Type*} [Category A] [Abelian A]
     (fun n ↦ (evaluation ℕᵒᵖ (CochainComplex A ℤ)).obj (op n)) D m
   intro n
   simp only [Category.assoc, ← Functor.map_comp]
-  rw [hp, ← Category.assoc, Limits.Pi.map_π, Category.assoc]
+  erw [hp, ← Category.assoc, Limits.Pi.map_π, Category.assoc]
   rw [Limits.Pi.map_π, (shiftFunctor (CochainComplex A ℤ) m).map_comp]
   rw [← Category.assoc _ _ ((q.app (op n))⟦m⟧'), hr]
   simp only [Category.assoc]
@@ -275,11 +275,9 @@ theorem integralComparisonPullbackGenerator_shift {X Y : Scheme.{u}} (f : X ⟶ 
         integralComparisonSequenceRoosFunctor l E X).commShiftIso m).hom.app C =
       integralOperationsRoosFunctor.map (K.map a) ≫
         ((K ⋙ integralOperationsRoosFunctor).commShiftIso m).hom.app D := by
-    change (K ⋙ integralOperationsRoosFunctor).map
-        (R.map ((B.commShiftIso m).hom.app C)) ≫
-        ((R ⋙ K ⋙ integralOperationsRoosFunctor).commShiftIso m).hom.app (B.obj C) = _
-    rw [Functor.commShiftIso_comp_hom_app]
-    simp only [Functor.comp_map, a, Functor.map_comp, Category.assoc]
+    dsimp only [integralComparisonSequenceRoosFunctor, integralComparisonSequenceRoosShift]
+    simp only [Functor.commShiftIso_comp_hom_app, Functor.comp_map, a,
+      Functor.map_comp, Category.assoc]
     rfl
   have hproduct :
       Limits.Pi.map (fun n ↦ qm.hom.app (op n)) ≫
