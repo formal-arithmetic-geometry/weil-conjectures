@@ -159,7 +159,9 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
   have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
       r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
     have h0 : r (a - ε (r a)) = 0 := by
-      rw [map_sub, show r (ε (r a)) = r a from RingHom.congr_fun hrε _, sub_self]
+      calc
+        r (a - ε (r a)) = r a - r (ε (r a)) := map_sub r _ _
+        _ = 0 := by rw [RingHom.congr_fun hrε, sub_self]
     have h1 : ¬ IsUnit (Ideal.inertiaInvariantsMap C.functionField Q hσF (a - ε (r a))) :=
       fun hu ↦ (hr _).1 h0 (Ideal.isUnit_of_isUnit_inertiaInvariantsMap hσF hu)
     have h2 : r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
@@ -222,10 +224,10 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   let _ := Fintype.ofFinite K
   have hW := c.isAffineOpen
   have hxW : x.1 ∈ c.W := c.mem
-  have : IsDedekindDomain Γ(C, c.W) := isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
-  letI : IsLocalRing (Ideal.inertiaInvariants C.functionField Q) := by
-    letI := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
-    infer_instance
+  letI : IsDedekindDomain Γ(C, c.W) :=
+    isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
+  letI : IsLocalRing (Ideal.inertiaInvariants C.functionField Q) :=
+    (isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q).toHenselianLocalRing.toIsLocalRing
   -- the embedding of `k̄` and the residue map
   have hε₀ : (genericEmb (U ↘ Spec (.of K)) j).comp (algebraMap K (AlgebraicClosure K)) =
       (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
