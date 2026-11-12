@@ -18,21 +18,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
--- Use the same sheaf tensor presentation as the summand comparison.
-attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
-  SheafOfModules.monoidalCategory
-attribute [local instance 4000] HomologicalComplex.monoidalCategory
-attribute [local instance 5000] MonoidalCategory.toMonoidalCategoryStruct
-
--- Share the total tensor instance instead of reconstructing its colimit data at
--- every occurrence of a tensor product in the comparison fields.
-private def nativeChainCochainMonoidal {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
-    MonoidalCategory (CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ) :=
-  { HomologicalComplex.monoidalCategory _ _ with
-    tensorObj P Q := (coefficientTotalTensor.{u, u, u} J R).obj (P, Q) }
-
-attribute [local instance 5000] nativeChainCochainMonoidal
+-- Expose the total-tensor abbreviation when elaborating the summand endpoints.
+attribute [local reducible] coefficientTotalTensor
 
 -- Construct and prove coherence with abstract monoidal categories, so the
 -- categorical identities do not unfold either site's sheafification tensor.
@@ -87,12 +74,14 @@ private theorem nativeChainTensorComparison
       MonoidalCategory.tensor (CochainComplex B ℤ) :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
       intro P Q f
-      exact RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2)
+      simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using
+        (RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2))
   let iA : Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex) ≅
       MonoidalCategory.tensor (CochainComplex A ℤ) :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
       intro P Q f
-      exact RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2)
+      simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using
+        (RingedForgetTensorTransposition.tensor_map₂_eq f.1 f.2))
   let ε := Functor.isoWhiskerRight iB.symm F ≪≫ δ ≪≫
     Functor.isoWhiskerLeft (F.prod F) iA
   have hε (P Q : CochainComplex B ℤ) : ε.hom.app (P, Q) = δ.hom.app (P, Q) := by
