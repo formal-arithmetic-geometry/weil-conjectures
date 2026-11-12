@@ -99,7 +99,7 @@ theorem native_weil_chain_uncurry_forget
   have hu := N.underived_uncurry (P.X p) (Q.X q) (I.X n)
     (φ.f q ≫ CochainComplex.bifunctorHomπ (HW) P I q p n hpq)
   simp only [Adjunction.homEquiv_counit] at hu
-  rw [hu]
+  refine hu.trans ?_
   simp only [HomologicalComplex.comp_f, Category.assoc, hc]
   rfl
 

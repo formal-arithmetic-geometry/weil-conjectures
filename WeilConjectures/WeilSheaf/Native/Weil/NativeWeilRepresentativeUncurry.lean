@@ -174,6 +174,7 @@ end TensorEvaluationFormal
 open TensorEvaluation
 variable {k₀ l X}
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The proof combines both normalizations and their dependent representative isomorphisms.
 /-- Forgetting commutes with inverse transposition on K-flat tensor representatives

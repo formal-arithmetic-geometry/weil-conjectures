@@ -133,6 +133,7 @@ namespace TensorEvaluation
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The K-flat replacement and K-injective fullness use the two derived model instances.
 private theorem representative_evaluation
