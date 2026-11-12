@@ -131,12 +131,6 @@ private meta partial def conversionCongruence
       if e.headBeta != e then return some e.headBeta
       if let some e' ← e.reduceProjStruct? then return some e'
       return none
-    if let some a' ← reduce a then
-      return ← conversionTrans (← conversionReduction a a')
-        (← conversionCongruence cache congrCache a' b)
-    if let some b' ← reduce b then
-      return ← conversionTrans (← conversionCongruence cache congrCache a b')
-        (← conversionSymm (← conversionReduction b b'))
     let mut congruenceError : Option Lean.Exception := none
     let sameHead := a.getAppFn == b.getAppFn ||
       (a.getAppFn.isConst && b.getAppFn.isConst &&
@@ -175,6 +169,13 @@ private meta partial def conversionCongruence
         let h := Lean.mkAppN ct.proof args
         return ← if (← Lean.Meta.inferType h).isHEq then pure h else conversionOfEq h
       catch err => congruenceError := some err
+    -- Compare applications before unfolding their common structural head.
+    if let some a' ← reduce a then
+      return ← conversionTrans (← conversionReduction a a')
+        (← conversionCongruence cache congrCache a' b)
+    if let some b' ← reduce b then
+      return ← conversionTrans (← conversionCongruence cache congrCache a b')
+        (← conversionSymm (← conversionReduction b b'))
     if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
       return ← conversionReduction a b
     let a' ← Lean.Meta.withTransparency .reducible (Lean.Meta.whnf a)
@@ -458,8 +459,17 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     (comparisonFinitePull l E b g n) (comparisonFinitePull l E b (pullback.fst c.g g) n)
     (comparisonFinitePull l E b h n) (comparisonFiniteOpen l E b (c.ofIsPullback sq).i n)
     (coordinates.val (c.ofIsPullback sq).g n).right N
-    hp ho
-  exact H
+    (by
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `hp) none
+        exactByConversion h)
+    (by
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `ho) none
+        exactByConversion h)
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+    exactByConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
