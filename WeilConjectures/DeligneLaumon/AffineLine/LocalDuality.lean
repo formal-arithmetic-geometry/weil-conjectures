@@ -192,6 +192,7 @@ private theorem localBoundaryLinearEquiv_frobenius
   rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
     FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
     LinearEquiv.symm_apply_apply, smul_eq_mul]
+  rfl
 
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 set_option profiler true in
