@@ -59,8 +59,9 @@ theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsPrope
           (dualizingComplex' ℓ X)) hΔ) ≫
         (boundedConstructibleLowerStarComp ℓ f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
         (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ f) := by
-  rewrite [kernelPushforward, Category.assoc, IsIso.inv_comp_eq, prodLowerStarExternalProduct,
-    evaluationKernel, evaluationKernel]
+  simp only [kernelPushforward, Category.assoc]
+  rewrite [IsIso.inv_comp_eq]
+  simp only [prodLowerStarExternalProduct, evaluationKernel]
   rewrite [Adjunction.homEquiv_comp_map_comp,
     ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left,
     homEquiv_comp_lowerStarComp_hom_app_assoc, homEquiv_comp_eqToHom_of_eq_assoc,

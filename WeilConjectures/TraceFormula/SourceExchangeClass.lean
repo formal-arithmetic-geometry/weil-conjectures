@@ -100,7 +100,7 @@ theorem class_pushforward_core :
   simp only [curriedTensor_obj_map, MonoidalCategory.whiskerLeft_comp, Functor.map_comp,
     Category.assoc]
   conv_rhs =>
-    rw [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc
+    simp only [Functor.map_whiskerLeft_hom_app_comp_map_whiskerLeft_inv_app_assoc
       (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y))
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map P.f P.f))
