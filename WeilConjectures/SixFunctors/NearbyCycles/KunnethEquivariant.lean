@@ -139,7 +139,7 @@ lemma kunnethMap_comp_map_tensorHom (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom 
   exact kunnethMap_comp_map_tensorHom_aux (φ₁.pullbackExchange Λ) (φ₂.pullbackExchange Λ)
     (P.tensorMap Λ) (fun x y ↦ P.tensorMap_natural Λ x y) a b
 
-set_option profiler true in
+set_option trace.profiler true in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The comultiplication of `L(𝟙)^*` followed by the pullback comparisons of the squares with
 identity sides and the identity isomorphisms `L(𝟙)^* ≅ 𝟭` is the identity isomorphism. -/
