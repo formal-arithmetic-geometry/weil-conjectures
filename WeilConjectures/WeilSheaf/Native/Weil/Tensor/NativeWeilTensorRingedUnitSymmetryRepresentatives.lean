@@ -281,9 +281,10 @@ theorem native_weil_tensor_ringed_unit_symmetry_representatives
             (β.toBraidedCategory.braiding (F.obj (DerivedCategory.Q.obj P))
               (F.obj (DerivedCategory.Q.obj Q))).hom) := by
   classical
-  obtain ⟨ε, hl⟩ := native_weil_tensor_ringed_left_unit_representatives
+  refine (native_weil_tensor_ringed_left_unit_representatives
     k₀ l X T adj e he chain hchain b A M S hmonoidal
-    SB TB βB cB SA TA βA cA d ordinaryModel hcanonical _hnaturality t hforget
+    SB TB βB cB SA TA βA cA d ordinaryModel hcanonical _hnaturality t hforget).elim ?_
+  intro ε hl
   obtain ⟨model, swap, _hn, hsigned, hβ, κ', hκ', hm'⟩ := hS
   obtain ⟨κ, hκ, hm⟩ := hcanonical
   have hκeq (P Q : CochainComplex (ProEtale.AdicSheaf l
