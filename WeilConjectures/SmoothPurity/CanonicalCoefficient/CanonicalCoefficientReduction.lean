@@ -248,7 +248,9 @@ theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : Grothendieck
     apply (S.transpose _ _ _).injective
     calc
       _ = T.transpose _ _ _ ((T.transpose _ _ _).symm x) :=
-        CoefficientClosedStructure.comparison_transpose S T _ _ _
+        CoefficientClosedStructure.comparison_transpose S T
+          (DerivedCategory.Q.obj P.1) (DerivedCategory.Q.obj L.1)
+          (DerivedCategory.Q.obj N) ((T.transpose _ _ _).symm x)
       _ = x := (T.transpose _ _ _).apply_symm_apply x
       _ = S.transpose _ _ _ ((S.transpose _ _ _).symm x) :=
         ((S.transpose _ _ _).apply_symm_apply x).symm
