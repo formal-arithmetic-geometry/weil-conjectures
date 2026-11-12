@@ -130,7 +130,6 @@ variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
   (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option maxHeartbeats 800000 in
 -- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**, from the
 finiteness of the torsion nearby cycles. Let `Ω/L` be Galois with finite subextensions of degree
@@ -195,7 +194,6 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_isNoethe
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀).symm) ?_
   transport_exact h₁
 
-set_option maxHeartbeats 800000 in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients.** Under the hypotheses of
