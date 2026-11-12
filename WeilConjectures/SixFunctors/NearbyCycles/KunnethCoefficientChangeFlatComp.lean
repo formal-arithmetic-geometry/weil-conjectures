@@ -34,6 +34,29 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Derived functors repeatedly request these graded tensor properties. Prove them once for
+-- module sheaves so elaborating each functor does not reconstruct the same colimit arguments.
+local instance flatComp_hasTensor₄ObjExt
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) :
+    ∀ K₁ K₂ K₃ K₄ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), GradedObject.HasTensor₄ObjExt K₁ K₂ K₃ K₄ := by
+  infer_instance
+
+local instance flatComp_hasGoodTensor₁₂Tensor
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) :
+    ∀ K₁ K₂ K₃ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), GradedObject.HasGoodTensor₁₂Tensor K₁ K₂ K₃ := by
+  infer_instance
+
+local instance flatComp_hasGoodTensorTensor₂₃
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (S : Scheme.{u}) :
+    ∀ K₁ K₂ K₃ : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), GradedObject.HasGoodTensorTensor₂₃ K₁ K₂ K₃ := by
+  infer_instance
+
 variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ₁]
   [IsCommMonObj Λ₁] [MonObj Λ₂] [IsCommMonObj Λ₂] [MonObj Λ₃] [IsCommMonObj Λ₃]
   (a₁ : Λ₁ ⟶ Λ₂) [IsMonHom a₁] (a₂ : Λ₂ ⟶ Λ₃) [IsMonHom a₂]
