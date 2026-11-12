@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart
 public import WeilConjectures.AlgebraicGeometry.PolynomialChartFibreStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.RingTheory.KrullDimension.Field
 
 /-!
 

@@ -8,6 +8,7 @@ public import WeilConjectures.CategoryTheory.RingedExtendedCech
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.Algebra.Homology.HomComplexComponents
+public import Mathlib.CategoryTheory.Adjunction.ParametrizedLimits
 
 /-! # The Hom cone of a sequential colimit
 

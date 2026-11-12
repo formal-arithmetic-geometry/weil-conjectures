@@ -62,7 +62,7 @@ the mate of the tensorator. -/
 theorem isIso_ihomComparison_boundedConstructibleExtendScalars
     (A : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso (Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleExtendScalars X.left ℓ E) A).natTrans := by
+      (boundedConstructibleExtendScalars X.left ℓ E) A) := by
   have := noetherianSpace_left_of_over X
   let T := boundedConstructibleExtendScalars X.left ℓ E
   let τ : tensorLeft A ⋙ T ≅ T ⋙ tensorLeft (T.obj A) :=
@@ -79,7 +79,7 @@ constructible `E`-complexes `A` and `B`, the comparison
 `CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism. -/
 theorem isIso_ihomComparison_constructibleToPadicAlgCl
     (A : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧) :
-    IsIso (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A).natTrans :=
+    IsIso (Functor.LaxMonoidal.ihomComparison (constructibleToPadicAlgCl X.left ℓ E) A) :=
   isIso_ihomComparison_constructibleToPadicAlgCl_of_twoColimit ℓ X E A
 
 /-- **The internal Hom comparison for `𝒪_E ⟶ ℚ̄_ℓ` is an isomorphism** (blueprint
@@ -89,7 +89,7 @@ theorem isIso_ihomComparison_boundedConstructibleIntegersToPadicAlgCl
     (A : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso (Functor.LaxMonoidal.ihomComparison
       (boundedConstructibleExtendScalars X.left ℓ E ⋙ constructibleToPadicAlgCl X.left ℓ E)
-        A).natTrans := by
+        A) := by
   have := isIso_ihomComparison_boundedConstructibleExtendScalars ℓ E A
   have := isIso_ihomComparison_constructibleToPadicAlgCl ℓ E
     ((boundedConstructibleExtendScalars X.left ℓ E).obj A)

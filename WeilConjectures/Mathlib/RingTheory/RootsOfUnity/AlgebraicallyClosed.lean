@@ -36,7 +36,7 @@ theorem IsSepClosed.exists_isPrimitiveRoot (k : Type*) [Field k] [IsSepClosed k]
     (nthRoots n (1 : k)).Nodup ∧ (nthRootsFinset n (1 : k)).card = n ∧
       ∃ ζ : k, IsPrimitiveRoot ζ n ∧
         ∀ (K : Type*) [Field K] (φ : k →+* K), IsPrimitiveRoot (φ ζ) n := by
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k n
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k n
   exact ⟨hζ.nthRoots_one_nodup, hζ.card_nthRootsFinset, ζ, hζ,
     fun K _ φ ↦ hζ.map_of_injective φ.injective⟩
 
@@ -66,7 +66,7 @@ theorem IsSepClosed.exists_isPrimitiveRoot_pow_eq (k : Type*) [Field k] [IsSepCl
     [NeZero (ℓ : k)] :
     ∃ ζ : ℕ → k, (∀ n, IsPrimitiveRoot (ζ n) (ℓ ^ n)) ∧ ∀ n, ζ (n + 1) ^ ℓ = ζ n := by
   have hℓ : 0 < ℓ := Nat.pos_of_ne_zero (NeZero.of_neZero_natCast k).ne
-  obtain ⟨ζ₁, hζ₁⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k ℓ
+  obtain ⟨ζ₁, hζ₁⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k ℓ
   choose r hr using fun x : k ↦ IsSepClosed.exists_pow_nat_eq x ℓ
   let f : ℕ → k := fun n ↦ Nat.rec ζ₁ (fun _ z ↦ r z) n
   have hf : ∀ n, IsPrimitiveRoot (f n) (ℓ ^ (n + 1)) := by

@@ -804,16 +804,16 @@ variable (e : Aut X)
 set_option backward.isDefEq.respectTransparency false in
 private theorem wfPullback_preservesComplete :
     (∀ M, WfIsComplete X d r a ha M →
-      WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M)) ∧
+      WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.asIso.hom d).obj M)) ∧
     (∀ M, WfIsComplete X d r a ha M →
-      WfIsComplete X d r a ha ((pbcActualDerivedPush e.hom d).obj M)) := by
-  let H := pbcIsoAmbientPullback e.hom d
-  let G := pbcActualDerivedPush e.hom d
-  let adj : H ⊣ G := (pbcActualDerivedAdjunction e.hom d).ofNatIsoLeft
-    (pbcIsoOrdinaryDerivedComparison e.hom d)
+      WfIsComplete X d r a ha ((pbcActualDerivedPush e.asIso.hom d).obj M)) := by
+  let H := pbcIsoAmbientPullback e.asIso.hom d
+  let G := pbcActualDerivedPush e.asIso.hom d
+  let adj : H ⊣ G := (pbcActualDerivedAdjunction e.asIso.hom d).ofNatIsoLeft
+    (pbcIsoOrdinaryDerivedComparison e.asIso.hom d)
   have : H.IsEquivalence := inferInstance
   have : G.IsEquivalence := adj.isEquivalence_right_of_isEquivalence_left
-  have hCompletion := pbcActualDirectCompletionIso_exists e.hom d
+  have hCompletion := pbcActualDirectCompletionIso_exists e.asIso.hom d
   obtain ⟨c, hc⟩ := hCompletion.exists
   have hG (M : PbcCompletedDerived X d) :
       WfIsComplete X d r a ha (G.obj M) ↔ WfIsComplete X d r a ha M := by
@@ -837,14 +837,14 @@ bijection through this adjunction to obtain the universal property of the pulled
 completion. The unique maps between the two reflections are inverse, and the same
 Hom bijection proves uniqueness with the required unit equation. -/
 theorem wfPullbackCompletion_exists (M : PbcCompletedDerived X d) :
-    ∃! c : (pbcIsoAmbientPullback e.hom d).obj (wfCompletionObj X d r a ha M) ≅
-        wfCompletionObj X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M),
-      (pbcIsoAmbientPullback e.hom d).map (wfCompletionUnit X d r a ha M) ≫ c.hom =
-        wfCompletionUnit X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M) := by
-  let H := pbcIsoAmbientPullback e.hom d
-  let G := pbcActualDerivedPush e.hom d
-  let adj : H ⊣ G := (pbcActualDerivedAdjunction e.hom d).ofNatIsoLeft
-    (pbcIsoOrdinaryDerivedComparison e.hom d)
+    ∃! c : (pbcIsoAmbientPullback e.asIso.hom d).obj (wfCompletionObj X d r a ha M) ≅
+        wfCompletionObj X d r a ha ((pbcIsoAmbientPullback e.asIso.hom d).obj M),
+      (pbcIsoAmbientPullback e.asIso.hom d).map (wfCompletionUnit X d r a ha M) ≫ c.hom =
+        wfCompletionUnit X d r a ha ((pbcIsoAmbientPullback e.asIso.hom d).obj M) := by
+  let H := pbcIsoAmbientPullback e.asIso.hom d
+  let G := pbcActualDerivedPush e.asIso.hom d
+  let adj : H ⊣ G := (pbcActualDerivedAdjunction e.asIso.hom d).ofNatIsoLeft
+    (pbcIsoOrdinaryDerivedComparison e.asIso.hom d)
   have hH := (wfPullback_preservesComplete X d r a ha e).1
   have hG := (wfPullback_preservesComplete X d r a ha e).2
   have hbij (L : PbcCompletedDerived X d) (hL : WfIsComplete X d r a ha L) :
@@ -897,9 +897,9 @@ site equivalences to the strict Koszul tower. They preserve products and both fi
 fiber summands; the projection comparison commutes with 1-shift and with the signed
 fiber differential. It identifies the (u,0) units, hence preserves their invertibility. -/
 theorem wfIsoPullback_complete (M : WfCompleteCategory X d r a ha) :
-    WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.hom d).obj M.obj) := by
+    WfIsComplete X d r a ha ((pbcIsoAmbientPullback e.asIso.hom d).obj M.obj) := by
   change IsIso (wfCompletionUnit X d r a ha
-    ((pbcIsoAmbientPullback e.hom d).obj M.obj))
+    ((pbcIsoAmbientPullback e.asIso.hom d).obj M.obj))
   obtain ⟨c, hc, _⟩ := wfPullbackCompletion_exists X d r a ha e M.obj
   have : IsIso (wfCompletionUnit X d r a ha M.obj) := M.property
   rw [← hc]
@@ -909,7 +909,7 @@ theorem wfIsoPullback_complete (M : WfCompleteCategory X d r a ha) :
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
 def wfCompletePullback : WfCompleteCategory X d r a ha ⥤ WfCompleteCategory X d r a ha :=
   ObjectProperty.lift (WfIsComplete X d r a ha)
-    (ObjectProperty.ι (WfIsComplete X d r a ha) ⋙ pbcIsoAmbientPullback e.hom d)
+    (ObjectProperty.ι (WfIsComplete X d r a ha) ⋙ pbcIsoAmbientPullback e.asIso.hom d)
     (wfIsoPullback_complete X d r a ha e)
 
 attribute [local semireducible] pbcCompletedComparison
@@ -931,18 +931,18 @@ private theorem wfCompletedScalar_projection (n : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem wfCompletedScalar_pullback :
-    proEtaleConstantInverseImageMap e.hom CommRingCat.{u + 1} (CommRingCat.of A) ≫
+    proEtaleConstantInverseImageMap e.asIso.hom CommRingCat.{u + 1} (CommRingCat.of A) ≫
         pbcCompletedScalar X d =
-      (proEtaleSheafInverseImage e.hom CommRingCat.{u + 1}).map
-        (pbcCompletedScalar X d) ≫ completedCoefficientMap e.hom d := by
-  let F := proEtaleSheafInverseImage e.hom CommRingCat.{u + 1}
+      (proEtaleSheafInverseImage e.asIso.hom CommRingCat.{u + 1}).map
+        (pbcCompletedScalar X d) ≫ completedCoefficientMap e.asIso.hom d := by
+  let F := proEtaleSheafInverseImage e.asIso.hom CommRingCat.{u + 1}
   apply limit.hom_ext (F := pbcAdicRings X d)
   intro n
   change _ ≫ pbcAdicProjection X d n.unop = _ ≫ pbcAdicProjection X d n.unop
   rw [Category.assoc, wfCompletedScalar_projection]
   rw [Category.assoc]
-  have hp : completedCoefficientMap e.hom d ≫ pbcAdicProjection X d n.unop =
-      completedCoefficientComponent e.hom d n.unop := limit.lift_π _ n
+  have hp : completedCoefficientMap e.asIso.hom d ≫ pbcAdicProjection X d n.unop =
+      completedCoefficientComponent e.asIso.hom d n.unop := limit.lift_π _ n
   rw [hp]
   dsimp only [completedCoefficientComponent, completedFiniteCoefficientMap]
   rw [← F.map_comp_assoc, wfCompletedScalar_projection]
@@ -953,20 +953,20 @@ private theorem wfCompletedScalar_pullback :
     Category.id_comp]
   simpa only [Category.assoc] using congrArg
     (fun z ↦ z ≫ (pbcLevelConstantComparison X d n.unop).hom)
-    ((proEtaleIso_constantComparison e.hom CommRingCat.{u + 1}).2
+    ((proEtaleIso_constantComparison e.asIso.hom CommRingCat.{u + 1}).2
       (CommRingCat.of A) (CommRingCat.of (A ⧸ d.ideal ^ (n.unop + 1)))
       (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n.unop + 1)))))
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem wfCompletedScalar_directImage :
-    pbcCompletedScalar X d ≫ proEtaleRingDirectImageMap e.hom
+    pbcCompletedScalar X d ≫ proEtaleRingDirectImageMap e.asIso.hom
         (pbcAdicCompletion X d) (pbcAdicCompletion X d)
-          (asIso (completedCoefficientMap e.hom d)) =
-      proEtaleConstantDirectImageMap e.hom CommRingCat.{u + 1} (CommRingCat.of A) ≫
-        (proEtaleSheafDirectImage e.hom CommRingCat.{u + 1}).map
+          (asIso (completedCoefficientMap e.asIso.hom d)) =
+      proEtaleConstantDirectImageMap e.asIso.hom CommRingCat.{u + 1} (CommRingCat.of A) ≫
+        (proEtaleSheafDirectImage e.asIso.hom CommRingCat.{u + 1}).map
           (pbcCompletedScalar X d) := by
-  let G := proEtaleSheafDirectImage e.hom CommRingCat.{u + 1}
-  let adj := proEtaleSheafAdjunction e.hom CommRingCat.{u + 1}
+  let G := proEtaleSheafDirectImage e.asIso.hom CommRingCat.{u + 1}
+  let adj := proEtaleSheafAdjunction e.asIso.hom CommRingCat.{u + 1}
   dsimp only [proEtaleRingDirectImageMap, asIso_hom]
   have hn := adj.unit.naturality (pbcCompletedScalar X d)
   dsimp only [Functor.id_map, Functor.comp_map] at hn
@@ -978,33 +978,33 @@ private theorem wfCompletedScalar_directImage :
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem wfCompletedSection_directImage (U : X.ProEtᵒᵖ) (b : A) :
-    (proEtaleRingDirectImageMap e.hom (pbcAdicCompletion X d) (pbcAdicCompletion X d)
-      (asIso (completedCoefficientMap e.hom d))).hom.app U (pbcCompletedSection X d U b) =
-        pbcCompletedSection X d ((proEtaleBaseChange e.hom).op.obj U) b := by
+    (proEtaleRingDirectImageMap e.asIso.hom (pbcAdicCompletion X d) (pbcAdicCompletion X d)
+      (asIso (completedCoefficientMap e.asIso.hom d))).hom.app U (pbcCompletedSection X d U b) =
+        pbcCompletedSection X d ((proEtaleBaseChange e.asIso.hom).op.obj U) b := by
   have hn := Equiv.apply_symm_apply
     ((sheafificationAdjunction (ProEt.topology X) CommRingCat.{u + 1}).homEquiv
       ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))
-      ((proEtaleSheafDirectImage e.hom CommRingCat.{u + 1}).obj
+      ((proEtaleSheafDirectImage e.asIso.hom CommRingCat.{u + 1}).obj
         ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of A))))
-    (Functor.whiskerLeft (proEtaleBaseChange e.hom).op
+    (Functor.whiskerLeft (proEtaleBaseChange e.asIso.hom).op
       (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))))
-  change _ ≫ (proEtaleConstantDirectImageMap e.hom CommRingCat.{u + 1}
+  change _ ≫ (proEtaleConstantDirectImageMap e.asIso.hom CommRingCat.{u + 1}
     (CommRingCat.of A)).hom = _ at hn
   have hu := ConcreteCategory.congr_hom (congr_app hn U) b
-  change (proEtaleConstantDirectImageMap e.hom CommRingCat.{u + 1}
+  change (proEtaleConstantDirectImageMap e.asIso.hom CommRingCat.{u + 1}
       (CommRingCat.of A)).hom.app U
         ((toSheafify (ProEt.topology X)
           ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))).app U b) =
     (toSheafify (ProEt.topology X)
       ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))).app
-        ((proEtaleBaseChange e.hom).op.obj U) b at hu
+        ((proEtaleBaseChange e.asIso.hom).op.obj U) b at hu
   have h := ConcreteCategory.congr_hom
     (congrArg (fun z ↦ z.hom.app U) (wfCompletedScalar_directImage X d e))
       ((toSheafify (ProEt.topology X)
         ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))).app U b)
   change _ = (pbcCompletedScalar X d).hom.app
-    ((proEtaleBaseChange e.hom).op.obj U)
-      ((proEtaleConstantDirectImageMap e.hom CommRingCat.{u + 1}
+    ((proEtaleBaseChange e.asIso.hom).op.obj U)
+      ((proEtaleConstantDirectImageMap e.asIso.hom CommRingCat.{u + 1}
         (CommRingCat.of A)).hom.app U _) at h
   rw [hu] at h
   exact h
@@ -1018,36 +1018,36 @@ through complexes and localization, and restricts to the complete full subcatego
 theorem wfCompletePullback_linear :
     (wfCompletePullback X d r a ha e).Additive ∧
       (wfCompletePullback X d r a ha e).Linear A := by
-  have hAdd : (pbcIsoModulePullback e.hom d).Additive := by
+  have hAdd : (pbcIsoModulePullback e.asIso.hom d).Additive := by
     rw [pbcIsoModulePullback_eq_completed]
     infer_instance
-  have : (pbcIsoAmbientPullback e.hom d).Additive := inferInstance
+  have : (pbcIsoAmbientPullback e.asIso.hom d).Additive := inferInstance
   constructor
   · constructor
     intro M N f g
     apply ObjectProperty.hom_ext
-    exact (pbcIsoAmbientPullback e.hom d).map_add
-  · let G := proEtaleRingModuleDirectImage e.hom (pbcAdicCompletion X d)
-      (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.hom d))
+    exact (pbcIsoAmbientPullback e.asIso.hom d).map_add
+  · let G := proEtaleRingModuleDirectImage e.asIso.hom (pbcAdicCompletion X d)
+      (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.asIso.hom d))
     have : G.Linear A := by
       constructor
       intro M N f b
       ext U x
-      change pbcCompletedSection X d ((proEtaleBaseChange e.hom).op.obj U) b •
-          ((f.val.app ((proEtaleBaseChange e.hom).op.obj U)).hom x) =
-        (proEtaleRingDirectImageMap e.hom (pbcAdicCompletion X d) (pbcAdicCompletion X d)
-          (asIso (completedCoefficientMap e.hom d))).hom.app U
+      change pbcCompletedSection X d ((proEtaleBaseChange e.asIso.hom).op.obj U) b •
+          ((f.val.app ((proEtaleBaseChange e.asIso.hom).op.obj U)).hom x) =
+        (proEtaleRingDirectImageMap e.asIso.hom (pbcAdicCompletion X d) (pbcAdicCompletion X d)
+          (asIso (completedCoefficientMap e.asIso.hom d))).hom.app U
             (pbcCompletedSection X d U b) •
-              ((f.val.app ((proEtaleBaseChange e.hom).op.obj U)).hom x)
+              ((f.val.app ((proEtaleBaseChange e.asIso.hom).op.obj U)).hom x)
       rw [wfCompletedSection_directImage]
-    have : (pbcIsoModulePullback e.hom d).Linear A :=
-      (proEtaleRingModuleAdjunction e.hom (pbcAdicCompletion X d) (pbcAdicCompletion X d)
-        (asIso (completedCoefficientMap e.hom d))).left_adjoint_linear
-    have : (pbcIsoAmbientPullback e.hom d).Linear A := inferInstance
+    have : (pbcIsoModulePullback e.asIso.hom d).Linear A :=
+      (proEtaleRingModuleAdjunction e.asIso.hom (pbcAdicCompletion X d) (pbcAdicCompletion X d)
+        (asIso (completedCoefficientMap e.asIso.hom d))).left_adjoint_linear
+    have : (pbcIsoAmbientPullback e.asIso.hom d).Linear A := inferInstance
     constructor
     intro M N f b
     apply ObjectProperty.hom_ext
-    exact (pbcIsoAmbientPullback e.hom d).map_smul b f.hom
+    exact (pbcIsoAmbientPullback e.asIso.hom d).map_smul b f.hom
 
 /-- The additive part of the specified coefficient transport.
 Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
@@ -1080,17 +1080,17 @@ def wfIntegralTensorPullback (M N : WfCompleteCategory X d r a ha) :
     (wfPullbackCompletion X d r a ha e ((wfOrdinaryDerivedTensor X d).obj (M.obj, N.obj)) ≪≫
       (ObjectProperty.ι (WfIsComplete X d r a ha)).mapIso
         ((wfCompletion X d r a ha).mapIso
-          ((proEtaleCanonicalTensorComparison e.hom (pbcAdicCompletion X d)
-            (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.hom d))
+          ((proEtaleCanonicalTensorComparison e.asIso.hom (pbcAdicCompletion X d)
+            (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.asIso.hom d))
             (wfTensorModel X d) (wfTensorModel X d)).app (M.obj, N.obj))))
 
 private theorem wfPullbackCompletion_naturality {M N : PbcCompletedDerived X d}
     (f : M ⟶ N) :
-    (pbcIsoAmbientPullback e.hom d).map (((wfCompletion X d r a ha).map f).hom) ≫
+    (pbcIsoAmbientPullback e.asIso.hom d).map (((wfCompletion X d r a ha).map f).hom) ≫
         (wfPullbackCompletion X d r a ha e N).hom =
       (wfPullbackCompletion X d r a ha e M).hom ≫
-        ((wfCompletion X d r a ha).map ((pbcIsoAmbientPullback e.hom d).map f)).hom := by
-  let H := pbcIsoAmbientPullback e.hom d
+        ((wfCompletion X d r a ha).map ((pbcIsoAmbientPullback e.asIso.hom d).map f)).hom := by
+  let H := pbcIsoAmbientPullback e.asIso.hom d
   let cM := wfPullbackCompletion X d r a ha e M
   have hc (K : PbcCompletedDerived X d) :
       H.map (wfCompletionUnit X d r a ha K) ≫
@@ -1124,10 +1124,10 @@ private theorem wfIntegralTensorPullback_naturality
           ((wfCompletePullback X d r a ha e).map g)) := by
   apply ObjectProperty.hom_ext
   let T := wfOrdinaryDerivedTensor X d
-  let H := pbcIsoAmbientPullback e.hom d
+  let H := pbcIsoAmbientPullback e.asIso.hom d
   let L := wfCompletion X d r a ha
-  let alpha := proEtaleCanonicalTensorComparison e.hom (pbcAdicCompletion X d)
-    (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.hom d))
+  let alpha := proEtaleCanonicalTensorComparison e.asIso.hom (pbcAdicCompletion X d)
+    (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.asIso.hom d))
     (wfTensorModel X d) (wfTensorModel X d)
   change H.map ((L.map (T.map (Prod.mkHom f.hom g.hom))).hom) ≫
       (wfPullbackCompletion X d r a ha e (T.obj (M'.obj, N'.obj))).hom ≫
@@ -1293,7 +1293,7 @@ theorem wfConstructiblePullback_obj (p : A) (M : PbcRationalCategory X d p) :
   rcases M with ⟨M⟩
   change (wfAmbientRationalPullback X d r a ha e p).obj
       ((wfConstructibleInclusion X d r a ha p).obj ⟨M⟩) =
-    (wfConstructibleInclusion X d r a ha p).obj ⟨(pbcIsoIntegralPullback e.hom d).obj M⟩
+    (wfConstructibleInclusion X d r a ha p).obj ⟨(pbcIsoIntegralPullback e.asIso.hom d).obj M⟩
   rw [hobj, hobj]
   apply congrArg (ScalarLocalization.mk (R := A) (p := p))
   apply ObjectProperty.FullSubcategory.ext

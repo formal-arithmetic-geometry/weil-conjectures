@@ -160,7 +160,7 @@ lemma WeilCoefficients.trace_toModuleCat_map_eq_of_comp_eq {l : ℕ} [Fact l.Pri
 geometric Frobenius `σ` of `Spec k̄` agree. -/
 lemma specGeometricFrobenius_pow_hom_eq_geometricFrobeniusField_pow_hom (k : Type u) [Field k]
     [Finite k] (m : ℕ) :
-    (specGeometricFrobenius k ^ m).hom = ((geometricFrobeniusField k).pow m).hom := by
+    (specGeometricFrobenius k ^ m).asIso.hom = ((geometricFrobeniusField k).pow m).hom := by
   let := Fintype.ofFinite k
   have e : FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) =
       FiniteField.geometricFrobenius k (AlgebraicClosure k) := by

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.GroupTheory.Torsion
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # The map on sheaf cohomology induced by an exact functor

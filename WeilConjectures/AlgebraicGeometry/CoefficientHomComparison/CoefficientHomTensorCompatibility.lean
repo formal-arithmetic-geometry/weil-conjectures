@@ -30,10 +30,10 @@ theorem closed_comparison_tensor
     μ F ((ihom K).obj L) ((ihom P).obj Q) ≫
         F.map (curry (tensorμ K P ((ihom K).obj L) ((ihom P).obj Q) ≫
           ((ihom.ev K).app L ⊗ₘ (ihom.ev P).app Q))) ≫
-        (ihomComparison F (K ⊗ P)).natTrans.app (L ⊗ Q) ≫
+        (ihomComparison F (K ⊗ P)).app (L ⊗ Q) ≫
         (pre (μ F K P)).app (F.obj (L ⊗ Q)) =
-      ((ihomComparison F K).natTrans.app L ⊗ₘ
-        (ihomComparison F P).natTrans.app Q) ≫
+      ((ihomComparison F K).app L ⊗ₘ
+        (ihomComparison F P).app Q) ≫
         curry (tensorμ (F.obj K) (F.obj P) ((ihom (F.obj K)).obj (F.obj L))
           ((ihom (F.obj P)).obj (F.obj Q)) ≫
           ((ihom.ev (F.obj K)).app (F.obj L) ⊗ₘ

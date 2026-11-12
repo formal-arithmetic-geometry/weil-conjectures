@@ -164,13 +164,13 @@ private theorem matrix_models (M : B) :
       Nonempty (P ≅ cokernel f) ∧ Nonempty (M ≅ G.obj P)) ↔
     ∃ (m n : ℕ) (a : Fin m → Fin n → End R)
       (f : (⨁ fun _ : Fin m ↦ U) ⟶ ⨁ fun _ : Fin n ↦ U),
-      (∀ j k, biproduct.ι _ j ≫ f ≫ biproduct.π _ k = e.inv ≫ G.map (a j k) ≫ e.hom) ∧
+      (∀ j k, biproduct.ι _ j ≫ f ≫ biproduct.π _ k = e.inv ≫ G.map (a j k).asHom ≫ e.hom) ∧
       Nonempty (M ≅ cokernel f) := by
   constructor
   · rintro ⟨P, n, m, f, ⟨hP⟩, ⟨hM⟩⟩
     let f' := (freeComparison G e m).inv ≫ G.map f ≫ (freeComparison G e n).hom
-    refine ⟨m, n, (fun j k ↦ biproduct.ι (fun _ : Fin m ↦ R) j ≫ f ≫
-      biproduct.π (fun _ : Fin n ↦ R) k), f', ?_, ?_⟩
+    refine ⟨m, n, (fun j k ↦ .of (biproduct.ι (fun _ : Fin m ↦ R) j ≫ f ≫
+      biproduct.π (fun _ : Fin n ↦ R) k)), f', ?_, ?_⟩
     · intro j k
       simpa only [f', Category.assoc] using matrix_entries G e f j k
     · exact ⟨hM ≪≫ G.mapIso hP ≪≫ PreservesCokernel.iso G f ≪≫
@@ -178,7 +178,7 @@ private theorem matrix_models (M : B) :
           (by simp [f'])⟩
   · rintro ⟨m, n, a, f, ha, ⟨hM⟩⟩
     let f₀ : (⨁ fun _ : Fin m ↦ R) ⟶ ⨁ fun _ : Fin n ↦ R :=
-      biproduct.desc fun j ↦ biproduct.lift (a j)
+      biproduct.desc fun j ↦ biproduct.lift (fun k ↦ (a j k).asHom)
     have hf : (freeComparison G e m).inv ≫ G.map f₀ ≫
         (freeComparison G e n).hom = f := by
       apply biproduct.hom_ext'
@@ -223,9 +223,9 @@ private def pointRegularIso (X : Scheme.{u}) :
 private theorem pointScalarValue (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (U : X.ProEtᵒᵖ)
     (x : (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U) :
-    (((pointRegularIso l E X).inv ≫ (pointSectionFunctor l E X).map d ≫
+    (((pointRegularIso l E X).inv ≫ (pointSectionFunctor l E X).map d.asHom ≫
       (pointRegularIso l E X).hom).val.app U) x = sectionScalarValue l E X d U * x := by
-  let f := (pointRegularIso l E X).inv ≫ (pointSectionFunctor l E X).map d ≫
+  let f := (pointRegularIso l E X).inv ≫ (pointSectionFunctor l E X).map d.asHom ≫
     (pointRegularIso l E X).hom
   have hf : (f.val.app U) (1 :
     (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U) =

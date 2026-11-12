@@ -88,7 +88,7 @@ def directImageScalarComparison {A B : Type u} [CommRing A] [CommRing B]
   (mateEquiv
     (directImageConstantAdjunction A f)
     (directImageConstantAdjunction B f)
-    (directImageScalarPullbackIso φ f).hom).natTrans
+    (directImageScalarPullbackIso φ f).hom)
 
 /-- The canonical geometric pullback-square comparison with constant coefficients.
 Source: Stacks Tag 0D6D (blueprint: lem-fix-direct-image-scalar-exchange). -/
@@ -125,6 +125,6 @@ def directImageConstantExchange (A : Type u) [CommRing A]
   (mateEquiv
     (directImageConstantAdjunction A f)
     (directImageConstantAdjunction A f')
-    (directImageConstantPullbackIso A sq).hom).natTrans
+    (directImageConstantPullbackIso A sq).hom)
 
 end AlgebraicGeometry.ProEtale

@@ -150,12 +150,12 @@ variable (k : Type u) [Field k] (N : ℕ) [NeZero N] [NeZero (N : k)]
 
 /-- A chosen primitive `N`-th root of unity of `k`, for `k` with enough roots of unity. -/
 noncomputable def primitiveRootOfUnity [HasEnoughRootsOfUnity k N] : k :=
-  (HasEnoughRootsOfUnity.exists_primitiveRoot k N).choose
+  (HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N).choose
 
 omit [NeZero N] [NeZero (N : k)] in
 lemma isPrimitiveRoot_primitiveRootOfUnity [HasEnoughRootsOfUnity k N] :
     IsPrimitiveRoot (primitiveRootOfUnity k N) N :=
-  (HasEnoughRootsOfUnity.exists_primitiveRoot k N).choose_spec
+  (HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N).choose_spec
 
 variable {k} [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
 

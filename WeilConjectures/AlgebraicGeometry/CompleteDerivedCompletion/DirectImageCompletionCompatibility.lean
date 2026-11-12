@@ -39,7 +39,7 @@ Source: assertion (2), projection-formula normalization.
 (blueprint: prop-weil-pbc-direct-image-limits-completion-compatibility) -/
 def pushReductionMap : rpushModule l E f ⋙ red l E Y ⟶ red l E X ⋙ rpush l E f :=
   (mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
-    (.mk _ _ _ _ (pullReduction l E f).hom)).natTrans
+    (.mk _ _ _ _ (pullReduction l E f).hom))
 
 /-- The completion equation follows by applying the derived limit to the augmentation
 square and the iterated-mate identity. -/
@@ -47,7 +47,7 @@ private theorem directImage_completion_compatibility_eq
     (χ : rpushModule l E f ⋙ dconstant l E Y ≅ dconstant l E X ⋙ rpush l E f)
     (hχ : χ.hom = (mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
       (.mk _ _ _ _ (constantInterchange l E
-        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv)).natTrans)
+        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv)))
     (hsquare : ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       (augmentation l E Y).app ((rpushModule l E f).obj K) ≫
           (pushReductionMap l E f).app K =

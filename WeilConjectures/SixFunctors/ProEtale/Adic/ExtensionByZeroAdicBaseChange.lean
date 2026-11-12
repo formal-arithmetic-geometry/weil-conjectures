@@ -78,14 +78,14 @@ noncomputable def integralToCompactAdicConstantH (n : ℕ) :
     x (Ext.mk₀ (integralToCompactAdicConstantSheaf l j)) (add_zero n)
   map_add' x y := Ext.add_comp _ _ _ _
   map_smul' c x := by
-    change (Ext.comp x (Ext.mk₀ (compactIntegralSmulRingHom j l c)) (add_zero n)).comp
+    change (Ext.comp x (Ext.mk₀ (compactIntegralSmulRingHom j l c).asHom) (add_zero n)).comp
         (Ext.mk₀ (integralToCompactAdicConstantSheaf l j)) (add_zero n) =
       (Ext.comp x (Ext.mk₀ (integralToCompactAdicConstantSheaf l j)) (add_zero n)).comp
-        (Ext.mk₀ (compactAdicScalarRingHom l j (algebraMap ℤ_[l] (PadicAlgCl l) c)))
+        (Ext.mk₀ (compactAdicScalarRingHom l j (algebraMap ℤ_[l] (PadicAlgCl l) c)).asHom)
           (add_zero n)
     rw [Ext.comp_assoc_of_third_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,
       Ext.mk₀_comp_mk₀]
-    simp only [Functor.mapRingHom_apply, ← Functor.map_comp,
+    simp only [Functor.mapRingHom_apply_asHom, ← Functor.map_comp,
       integralSmulRingHom_comp_continuousSheafToAdicConstantSheaf]
 
 lemma integralToCompactAdicConstantH_apply (n : ℕ) (x : CompactIntegralAdicH j l n) :
@@ -206,7 +206,7 @@ theorem isBaseChange_integralToCompactAdicConstantH [CompactSpace T] [QuasiSepar
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       have e : continuousSheafMap U (Λ.mulHom (Λ.basis i) (Λ.basis i).2) ≫
           (compactLatticeDiagram l U).map a ≫ continuousSheafMap U (Λ'.coordHom k) =
-          integralSmulRingHom U l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩) := by
+          (integralSmulRingHom U l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩)).asHom := by
         have e1 : (compactLatticeDiagram l U).map a ≫ continuousSheafMap U (Λ'.coordHom k) =
             continuousSheafMap U ((Λ'.coordHom k).comp
               ⟨AddSubgroup.inclusion hΛΛ', continuous_subtype_val.subtype_mk _⟩) :=
@@ -217,7 +217,7 @@ theorem isBaseChange_integralToCompactAdicConstantH [CompactSpace T] [QuasiSepar
       have e' : E.map (continuousSheafMap U (Λ.mulHom (Λ.basis i) (Λ.basis i).2)) ≫
           (compactLatticeDiagram l U ⋙ E).map a ≫
             E.map (continuousSheafMap U (Λ'.coordHom k)) =
-          compactIntegralSmulRingHom j l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩) := by
+          (compactIntegralSmulRingHom j l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩)).asHom := by
         rw [Functor.comp_map, ← E.map_comp, ← E.map_comp, e]
         rfl
       rw [Ext.comp_assoc_of_third_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,

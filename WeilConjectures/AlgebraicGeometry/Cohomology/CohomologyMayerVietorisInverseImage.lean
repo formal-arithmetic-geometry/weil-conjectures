@@ -24,8 +24,9 @@ private noncomputable def extTransport
     {A B : Type u} [AddCommGroup A] [AddCommGroup B] [Module T A] [Module T B]
     {n k m : ℕ} (α : CategoryTheory.Abelian.Ext P Q k) (h : k + n = m)
     (e : A ≃+ CategoryTheory.Abelian.Ext Q F n) (e' : B ≃+ CategoryTheory.Abelian.Ext P F m)
-    (he : ∀ a x, e (a • x) = (e x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a)) (add_zero n))
-    (he' : ∀ a x, e' (a • x) = (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a)) (add_zero m)) :
+    (he : ∀ a x, e (a • x) = (e x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) (add_zero n))
+    (he' : ∀ a x, e' (a • x) =
+      (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) (add_zero m)) :
     A →ₗ[T] B where
   __ := e'.symm.toAddMonoidHom.comp ((α.precomp F h).comp e.toAddMonoidHom)
   map_smul' a x := by
@@ -34,7 +35,7 @@ private noncomputable def extTransport
       e' (a • e'.symm (α.comp (e x) h))
     rw [e'.apply_symm_apply, he, he', e'.apply_symm_apply]
     exact (CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero α (e x)
-      (CategoryTheory.Abelian.Ext.mk₀ (ρ a)) h).symm
+      (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) h).symm
 private lemma extTransport_apply
     {T : Type u} [CommRing T]
     {C : Type (u + 1)} [Category.{u} C] [Abelian C] [HasExt.{u} C]
@@ -42,9 +43,9 @@ private lemma extTransport_apply
     {A B : Type u} [AddCommGroup A] [AddCommGroup B] [Module T A] [Module T B]
     {n k m : ℕ} (α : CategoryTheory.Abelian.Ext P Q k) (h : k + n = m)
     (e : A ≃+ CategoryTheory.Abelian.Ext Q F n) (e' : B ≃+ CategoryTheory.Abelian.Ext P F m)
-    (he : ∀ a x, e (a • x) = (e x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a)) (add_zero n))
+    (he : ∀ a x, e (a • x) = (e x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) (add_zero n))
     (he' : ∀ a x, e' (a • x) =
-      (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a)) (add_zero m)) (x : A) :
+      (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) (add_zero m)) (x : A) :
     extTransport ρ α h e e' he he' x = e'.symm (α.comp (e x) h) := rfl
 private lemma transport_exact
     {A B C D E F : Type u}

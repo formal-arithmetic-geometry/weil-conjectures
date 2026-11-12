@@ -88,11 +88,11 @@ morphism `a_X`, read through the unit isomorphism `ℚ̄_ℓ,X ≅ La_X^* ℚ̄_
 noncomputable def scalar [LocallyOfFiniteType X.hom] [IsSeparated X.hom]
     (t : End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :
     End (𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  (Functor.Monoidal.εIso
+  .of ((Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).hom ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map t ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map t.asHom ≫
     (Functor.Monoidal.εIso
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv)
 
 /-- **Linearity of the integral** (blueprint `lem-trf-integration-linear`,
 `rem-ptr-trf-integration-8`): for a scalar `t ∈ End (ℚ̄_ℓ,s)` acting on a Borel–Moore section `α`
@@ -101,12 +101,14 @@ through `scalar`, `∫_X (t • α) = t ∘ ∫_X α`. Together with `integral_a
 lemma integral_scalar_comp [IsProper X.hom]
     (t : End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
     (α : BorelMooreSection ℓ X) :
-    integral (scalar t ≫ α : BorelMooreSection ℓ X) = t ≫ α.integral := by
+    integral ((scalar t).asHom ≫ α : BorelMooreSection ℓ X) =
+      .of (t.asHom ≫ α.integral.asHom) := by
+  apply End.ext
   have : IsProper (toPoint X).left := by
     rw [toPoint_left]
     infer_instance
   have hn := (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-    (toPoint X)).unit.naturality t
+    (toPoint X)).unit.naturality t.asHom
   simp only [Functor.id_map, Functor.comp_map] at hn
   simp only [integral, scalar, Adjunction.homEquiv_counit, Category.assoc, Functor.map_comp]
   rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.naturality_assoc
@@ -196,8 +198,10 @@ instance isProper_toPoint_left [IsProper X.hom] : IsProper (toPoint X).left := b
 `lem-trf-integration-as-pushforward`): for `X` proper over `s`, the integral `∫_X α` is the
 pushforward `(a_X)_* α` along the structure morphism, read through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem integral_eq_pushforward [IsProper X.hom] (α : BorelMooreSection ℓ X) :
-    α.integral = pushforward (toPoint X) α ≫ (dualizingComplexPointIso ℓ k).hom := by
-  rw [integral, pushforward, Adjunction.homEquiv_counit, Functor.map_comp]
+    α.integral = .of (pushforward (toPoint X) α ≫ (dualizingComplexPointIso ℓ k).hom) := by
+  apply End.ext
+  dsimp only [integral, pushforward]
+  rw [Adjunction.homEquiv_counit, Functor.map_comp]
   simp only [Category.assoc]
   rw [(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
       (toPoint X)).inv.naturality_assoc α, lowerShriek_map_dualizingComplexComp_inv_counit]

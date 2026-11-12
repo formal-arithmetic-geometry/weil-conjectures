@@ -162,7 +162,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω]
 /-- The graph `x ↦ (x, g x)` of the transport of the universal cover along a loop `g`. -/
 noncomputable def graph (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
     U.cover t ⟶ pullback (U.proj t) (U.proj t) :=
-  pullback.lift (𝟙 _) (U.transport g).hom (by rw [Category.id_comp, U.transport_proj])
+  pullback.lift (𝟙 _) (U.transport g.asIso).hom (by rw [Category.id_comp, U.transport_proj])
 
 /-- The graph of a loop, followed by the first projection, is the identity. -/
 lemma graph_fst (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
@@ -171,7 +171,7 @@ lemma graph_fst (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t))
 
 /-- The graph of a loop, followed by the second projection, is the transport. -/
 lemma graph_snd (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t)) :
-    U.graph t g ≫ pullback.snd _ _ = (U.transport g).hom :=
+    U.graph t g ≫ pullback.snd _ _ = (U.transport g.asIso).hom :=
   pullback.lift_snd _ _ _
 
 /-- The graph of a loop lies over `Y`. -/
@@ -187,7 +187,7 @@ these graphs cover `Ỹ_t ×_Y Ỹ_t`. -/
 theorem resOver_fst_apply_eq_resOver_snd_apply (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (M : LisseSheaf l Y)
     (s : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj ((U.proj t)^*[_].obj M.obj.X))
-    (hs : ∀ g : Aut (fiber t), ((U.transportRes l g).hom.app M.obj.X).hom s = s) :
+    (hs : ∀ g : Aut (fiber t), ((U.transportRes l g.asIso).hom.app M.obj.X).hom s = s) :
     ((resOver (WeilCoefficients.{u} l) (pullback.fst (U.proj t) (U.proj t)) rfl).app
         M.obj.X).hom s =
       ((resOver (WeilCoefficients.{u} l) (pullback.snd (U.proj t) (U.proj t))
@@ -211,11 +211,11 @@ theorem resOver_fst_apply_eq_resOver_snd_apply (t : Spec (.of (AlgebraicClosure 
       (by rw [graph_snd, U.transport_proj]) M.obj.X)
     simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at h₁ h₂
     rw [hβ, map_sub, h₁, h₂, resOver_congr _ (graph_fst t g) _ (Category.id_comp _),
-      resOver_id, resOver_congr _ (graph_snd t g) _ (U.transport_proj g)]
-    have hinv : ((resOver (WeilCoefficients.{u} l) (U.transport g).hom
-        (U.transport_proj g)).app M.obj.X).hom s = s := by
+      resOver_id, resOver_congr _ (graph_snd t g) _ (U.transport_proj g.asIso)]
+    have hinv : ((resOver (WeilCoefficients.{u} l) (U.transport g.asIso).hom
+        (U.transport_proj g.asIso)).app M.obj.X).hom s = s := by
       have h := congrArg (fun φ ↦ φ.hom s)
-        (congrArg (fun α ↦ α.app M.obj.X) (U.transportRes l g).hom_inv_id)
+        (congrArg (fun α ↦ α.app M.obj.X) (U.transportRes l g.asIso).hom_inv_id)
       simp only [NatTrans.comp_app, ModuleCat.hom_comp, LinearMap.comp_apply, NatTrans.id_app,
         ModuleCat.hom_id, LinearMap.id_apply, hs g] at h
       exact h
@@ -263,7 +263,7 @@ morphisms `a b : Z ⟶ Ỹ_t` over `Y`. -/
 theorem resOver_apply_eq_of_invariant (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (M : LisseSheaf l Y)
     (s : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj ((U.proj t)^*[_].obj M.obj.X))
-    (hs : ∀ g : Aut (fiber t), ((U.transportRes l g).hom.app M.obj.X).hom s = s)
+    (hs : ∀ g : Aut (fiber t), ((U.transportRes l g.asIso).hom.app M.obj.X).hom s = s)
     {Z : Scheme.{u}} {c : Z ⟶ Y} (a b : Z ⟶ U.cover t) (ea : a ≫ U.proj t = c)
     (eb : b ≫ U.proj t = c) :
     ((resOver (WeilCoefficients.{u} l) a ea).app M.obj.X).hom s =
@@ -339,7 +339,7 @@ which is invariant under the monodromy of all loops at `t` is the restriction of
 section of `M`. -/
 theorem exists_globalSection_of_invariant (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (M : LisseSheaf l Y) (m : (stalkFunctor l t).obj M.obj.X)
-    (hm : ∀ g : Aut (fiber t), ((monoIso hU g).hom.app M).hom m = m) :
+    (hm : ∀ g : Aut (fiber t), ((monoIso hU g.asIso).hom.app M).hom m = m) :
     ∃ σ : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj M.obj.X,
       ((globalSectionsToUpperStar _ t).app M.obj.X).hom σ = m := by
   have := isIso_ptRes_app hU t M
@@ -347,10 +347,10 @@ theorem exists_globalSection_of_invariant (t : Spec (.of (AlgebraicClosure Ω)) 
   have hsm : ((U.ptRes l t).app M.obj.X).hom s = m := by
     rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]
     rfl
-  have hs (g : Aut (fiber t)) : ((U.transportRes l g).hom.app M.obj.X).hom s = s := by
+  have hs (g : Aut (fiber t)) : ((U.transportRes l g.asIso).hom.app M.obj.X).hom s = s := by
     apply (asIso ((U.ptRes l t).app M.obj.X)).toLinearEquiv.injective
     simp only [Iso.toLinearEquiv_apply, asIso_hom]
-    rw [← monoIso_hom_app_ptRes_apply hU g M s, hsm, hm g]
+    rw [← monoIso_hom_app_ptRes_apply hU g.asIso M s, hsm, hm g]
   -- the section of `M` over the universal cover, as a section over `Ỹ_t ∈ Y_proét`
   let F := M.obj.X
   let V := U.coverProEt t

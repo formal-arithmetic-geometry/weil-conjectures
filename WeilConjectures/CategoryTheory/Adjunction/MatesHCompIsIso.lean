@@ -40,7 +40,7 @@ noncomputable def _root_.CategoryTheory.Functor.isoHComp (e₁ : T ⋙ R ≅ L �
 /-- The underlying 2-square of `CategoryTheory.Functor.isoHComp e₁ e₂` is `e₁.hom ≫ₕ e₂.hom`. -/
 lemma _root_.CategoryTheory.Functor.isoHComp_hom (e₁ : T ⋙ R ≅ L ⋙ B₁)
     (e₂ : T' ⋙ R' ≅ R ⋙ B₂) :
-    (Functor.isoHComp e₁ e₂).hom = (e₁.hom ≫ₕ e₂.hom : TwoSquare _ _ _ _).natTrans :=
+    (Functor.isoHComp e₁ e₂).hom = (e₁.hom ≫ₕ e₂.hom : TwoSquare _ _ _ _) :=
   rfl
 
 
@@ -56,8 +56,8 @@ lemma _root_.CategoryTheory.Functor.isoHComp_hom_app (e₁ : T ⋙ R ≅ L ⋙ B
 lemma isIso_mateEquiv_isoHComp {R₂ : D ⥤ C} {R₃ : F ⥤ E}
     {R₁ : B ⥤ A} (adj₁ : L ⊣ R₁) (adj₂ : R ⊣ R₂) (adj₃ : R' ⊣ R₃)
     (e₁ : T ⋙ R ≅ L ⋙ B₁) (e₂ : T' ⋙ R' ≅ R ⋙ B₂)
-    [IsIso (mateEquiv adj₁ adj₂ e₁.hom).natTrans] [IsIso (mateEquiv adj₂ adj₃ e₂.hom).natTrans] :
-    IsIso (mateEquiv adj₁ adj₃ (Functor.isoHComp e₁ e₂).hom).natTrans :=
+    [IsIso (mateEquiv adj₁ adj₂ e₁.hom)] [IsIso (mateEquiv adj₂ adj₃ e₂.hom)] :
+    IsIso (mateEquiv adj₁ adj₃ (Functor.isoHComp e₁ e₂).hom) :=
   isIso_mateEquiv_hComp adj₁ adj₂ adj₃ e₁.hom e₂.hom
 
 end IsoHComp

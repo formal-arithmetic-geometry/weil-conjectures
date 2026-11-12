@@ -125,7 +125,7 @@ noncomputable def derivedExtendScalarsPullbackMap :
       derivedExtendScalars hρ ha X ⋙ L((e)^*[ModuleCat.{u + 1} Λ']) :=
   ((mateEquiv (derivedExtendScalarsAdjunction hρ ha X)
     (derivedExtendScalarsAdjunction hρ ha U)).symm
-      (leftDerivedUpperStarRestrictScalarsIso ρ e).hom).natTrans
+      (leftDerivedUpperStarRestrictScalarsIso ρ e).hom)
 
 /-- The defining property of `derivedExtendScalarsPullbackMap`: its transpose is
 `Le^*(K ⟶ Res Ψ K) ≫ (Le^* Res ≅ Res Le^*)`. -/

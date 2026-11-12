@@ -560,7 +560,7 @@ private def exceptionalSiteInverse (n : ℕ) :
   let adj₂ := ProEtale.comparisonAdjunction
     (ModuleCat.{u + 1} (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))) W
   let β := (exceptionalSiteRight_existsUnique O ell W S n).exists.choose
-  let α := ((mateEquiv adj₁ adj₂).symm β.hom).natTrans
+  let α := ((mateEquiv adj₁ adj₂).symm β.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences adj₁ adj₂ β
   exact (asIso α).symm
 

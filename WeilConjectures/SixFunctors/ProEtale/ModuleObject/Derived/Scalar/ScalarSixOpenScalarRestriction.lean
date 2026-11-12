@@ -56,7 +56,7 @@ private theorem transportRestriction_open
     have ht : e'.functor.map (e'.unitIso.inv.app (J.obj M)) =
         e'.counitIso.hom.app (e'.functor.obj (J.obj M)) := by
       apply (cancel_epi (e'.counitIso.inv.app (e'.functor.obj (J.obj M)))).mp
-      simpa only [Functor.id_obj, Iso.inv_hom_id_app] using e'.counitIso_functor_comp (J.obj M)
+      simpa only [Functor.id_obj, Iso.inv_hom_id_app] using e'.counitInv_functor_comp (J.obj M)
     rw [ht]
     exact e'.counitIso.hom.naturality (d.inv.app M)
   have hi : Q.map (d.inv.app M) ≫ p.inv.app (J.obj M) ≫
@@ -231,7 +231,7 @@ private theorem openRestriction
     change e.functor.map (adj.unit.app N) ≫
         (mateEquiv adj (E.openAdjunction b
           (inferInstanceAs (IsOpenImmersion j.left)))
-          (.mk _ _ _ _ (O.comparison Λ j).inv)).natTrans.app (J.obj N) =
+          (.mk _ _ _ _ (O.comparison Λ j).inv)).app (J.obj N) =
       (E.openAdjunction b (inferInstanceAs (IsOpenImmersion j.left))).unit.app
         (e.functor.obj N) ≫ b.pull.map ((O.comparison Λ j).inv.app N) at hh
     rw [O.normalization] at hh

@@ -15,6 +15,8 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import WeilConjectures.RingTheory.FlatLocalDepthReduction
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Depth formula for a flat local homomorphism

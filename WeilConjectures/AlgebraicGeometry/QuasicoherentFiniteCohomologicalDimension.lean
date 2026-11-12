@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Finite cohomological dimension for quasi-coherent modules

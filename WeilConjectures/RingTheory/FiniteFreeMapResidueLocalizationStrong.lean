@@ -125,7 +125,7 @@ private theorem exists_nonzero_minor
     funext i
     exact hr i
   exact (Matrix.isUnit_iff_isUnit_det _).mp
-    (Matrix.linearIndependent_rows_iff_isUnit.mp (hrows.symm ▸ c.linearIndependent)) |>.ne_zero
+    (Matrix.linearIndependent_row_iff_isUnit.mp (hrows.symm ▸ c.linearIndependent)) |>.ne_zero
 
 /-- A matrix minor argument gives a split localized map and a free cokernel, while an
 isomorphism on the residue field gives an explicit inverse after localization. The proof is

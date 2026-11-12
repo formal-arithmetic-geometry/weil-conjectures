@@ -52,8 +52,8 @@ private theorem mate_naturality_general
     (hc : ∀ X, K.map (pG.app X) ≫ β.app X =
       α.app X ≫ pH.app (F.obj X)) (N : B) :
     pG.app (R.obj N) ≫
-        (mateEquiv a b (TwoSquare.mk _ _ _ _ β)).natTrans.app N =
-      (mateEquiv a b (TwoSquare.mk _ _ _ _ α)).natTrans.app N ≫
+        (mateEquiv a b (TwoSquare.mk _ _ _ _ β)).app N =
+      (mateEquiv a b (TwoSquare.mk _ _ _ _ α)).app N ≫
         S.map (pH.app N) := by
   apply (b.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
@@ -95,15 +95,15 @@ theorem directImageCompletionUnitSquare :
     ∃ χ : rpushModule l E f ⋙ dconstant l E Y ≅ dconstant l E X ⋙ rpush l E f,
       χ.hom = (mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
         (.mk _ _ _ _ (constantInterchange l E
-          (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv)).natTrans ∧
+          (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv)) ∧
       ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
         (augmentation l E Y).app ((rpushModule l E f).obj K) ≫
             ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
-              (.mk _ _ _ _ (pullReduction l E f).hom)).natTrans).app K =
+              (.mk _ _ _ _ (pullReduction l E f).hom))).app K =
           χ.hom.app K ≫ (rpush l E f).map ((augmentation l E X).app K) := by
   let χ := (mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
     (.mk _ _ _ _ (constantInterchange l E
-      (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv)).natTrans
+      (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).inv))
   have : IsIso χ := directImage_constant_mate_isIso l E f
   refine ⟨asIso χ, rfl, ?_⟩
   intro K

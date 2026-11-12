@@ -115,18 +115,18 @@ private theorem arrow_of_cube
       L'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
     (E : B)
-    (hF : IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).natTrans.app E))
-    (hK : IsIso ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).natTrans.app (H.obj E))) :
+    (hF : IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).app E))
+    (hK : IsIso ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).app (H.obj E))) :
     Nonempty (Arrow.mk (c.map
-      ((mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans.app E)) ≅
-      Arrow.mk ((mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).natTrans.app (b.obj E))) := by
+      ((mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).app E)) ≅
+      Arrow.mk ((mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).app (b.obj E))) := by
   have := hF
   have := hK
   have h := exchangeMate_cube adj adjK adj' adjK' a b c d pF pG pH pK θ θ' hc E
   refine ⟨Arrow.isoMk
     (pG.app (R.obj E) ≪≫ G'.mapIso
-      (asIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).natTrans.app E)))
-    (asIso ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).natTrans.app (H.obj E)) ≪≫
+      (asIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).app E)))
+    (asIso ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).app (H.obj E)) ≪≫
       S'.mapIso (pH.app E)) ?_⟩
   simpa only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
     asIso_hom, Arrow.mk_hom, Category.assoc] using h.symm
@@ -148,12 +148,12 @@ private theorem arrow_of_cube_named
       L'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
     (E : B)
-    (hF : IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).natTrans.app E))
-    (hK : IsIso ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).natTrans.app
+    (hF : IsIso ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ pF.inv)).app E))
+    (hK : IsIso ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ pK.inv)).app
       (H.obj E)))
     (τ : R ⋙ G ⟶ H ⋙ S) (τ' : R' ⋙ G' ⟶ H' ⋙ S')
-    (hτ : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans = τ)
-    (hτ' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).natTrans = τ') :
+    (hτ : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)) = τ)
+    (hτ' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')) = τ') :
     Nonempty (Arrow.mk (c.map (τ.app E)) ≅ Arrow.mk (τ'.app (b.obj E))) := by
   obtain ⟨e⟩ := arrow_of_cube adj adjK adj' adjK' a b c d pF pG pH pK θ θ' hc E hF hK
   rw [hτ, hτ'] at e
@@ -177,19 +177,19 @@ private theorem arrow_of_cube_native_named
         L'.map (qG.hom.app X) ≫ qK.hom.app (G.obj X) ≫ d.map (θ.app X))
     (E : B)
     (τF : R ⋙ a ⟶ b ⋙ R') (τK : S ⋙ c ⟶ d ⋙ S')
-    (hτF : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ qF.hom)).natTrans = τF)
-    (hτK : (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ qK.hom)).natTrans = τK)
+    (hτF : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ qF.hom)) = τF)
+    (hτK : (mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ qK.hom)) = τK)
     (hF : IsIso (τF.app E)) (hK : IsIso (τK.app (H.obj E)))
     (τ : R ⋙ G ⟶ H ⋙ S) (τ' : R' ⋙ G' ⟶ H' ⋙ S')
-    (hτ : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)).natTrans = τ)
-    (hτ' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')).natTrans = τ') :
+    (hτ : (mateEquiv adj adjK (TwoSquare.mk _ _ _ _ θ)) = τ)
+    (hτ' : (mateEquiv adj' adjK' (TwoSquare.mk _ _ _ _ θ')) = τ') :
     Nonempty (Arrow.mk (c.map (τ.app E)) ≅ Arrow.mk (τ'.app (b.obj E))) := by
   have hmF : IsIso
-      ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ qF.hom)).natTrans.app E) := by
+      ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ qF.hom)).app E) := by
     rw [hτF]
     exact hF
   have hmK : IsIso
-      ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ qK.hom)).natTrans.app (H.obj E)) := by
+      ((mateEquiv adjK adjK' (TwoSquare.mk _ _ _ _ qK.hom)).app (H.obj E)) := by
     rw [hτK]
     exact hK
   exact arrow_of_cube_named adj adjK adj' adjK' a b c d
@@ -221,7 +221,7 @@ private theorem totalExchange_mate_eq
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
         (derivedUpperStarLowerStarAdjunction Λ f')
         (TwoSquare.mk (upperStar Λ j).leftDerivedFunctor _ _
-          (upperStar Λ i).leftDerivedFunctor (pullbackSquareComparison Λ sq).hom)).natTrans := by
+          (upperStar Λ i).leftDerivedFunctor (pullbackSquareComparison Λ sq).hom)) := by
   unfold moduleObjectDerivedExchange moduleObjectDerivedPullbackSquareComparison
     moduleObjectDerivedPullback pullbackSquareComparison
   rfl
@@ -243,7 +243,7 @@ private theorem squareExchange_eq_mate
     (a : F ⊣ R) (a' : F' ⊣ R') (G : A ⥤ C) (H : B ⥤ D)
     (e : G ⋙ F' ≅ F ⋙ H) :
     Adjunction.squareExchange a a' G H e =
-      (mateEquiv a a' (TwoSquare.mk G F F' H e.hom)).natTrans := by
+      (mateEquiv a a' (TwoSquare.mk G F F' H e.hom)) := by
   ext N
   apply (a'.homEquiv _ _).symm.injective
   rw [Adjunction.squareExchange_adjunct]

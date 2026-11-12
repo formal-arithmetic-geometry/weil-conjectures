@@ -181,7 +181,7 @@ theorem exists_equivalence_isLisse_of_lisseMonodromy
     obtain ⟨π⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor
       (Scheme.FiniteEtale.fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
       (Scheme.FiniteEtale.fiber B.t)
-    set h := B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm
+    set h := Aut.of (B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm)
     set m := (C ↘ Spec (.of K)).degreeOver x.1
     obtain ⟨c, hc⟩ := isConj_iff.mp (B.isConj_frobenius x π)
     set ρ := (e.functor.obj F).obj.ρ

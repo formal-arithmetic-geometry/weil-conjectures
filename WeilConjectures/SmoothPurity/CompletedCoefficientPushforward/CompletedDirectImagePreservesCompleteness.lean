@@ -190,7 +190,7 @@ private theorem principalKInjective [HasCountableProducts A]
     (P : CochainComplex A ℤ) [P.IsKInjective] (μ : End P) :
     (CochainComplex.PrincipalCone.completion μ).IsKInjective := by
   let : ∀ n : ℕ, ((CochainComplex.PrincipalCone.tower μ).obj (op n)).IsKInjective :=
-    fun n ↦ coneKInjective (μ ^ (n + 1))
+    fun n ↦ coneKInjective (μ ^ (n + 1)).asHom
   have : (∏ᶜ fun n : ℕ ↦ (CochainComplex.PrincipalCone.tower μ).obj (op n)).IsKInjective :=
     productKInjective _
   have : (CochainComplex.mappingCone
@@ -322,16 +322,19 @@ private theorem coneCast_natural {P Q P' Q' : CochainComplex B ℤ}
   simp
 
 private theorem mapEnd_pow (G : CochainComplex A ℤ ⥤ CochainComplex B ℤ)
-    (P : CochainComplex A ℤ) (μ : End P) (n : ℕ) : G.map (μ ^ n) = ((G.mapEnd P) μ) ^ n :=
-  map_pow (G.mapEnd P) μ n
+    (P : CochainComplex A ℤ) (μ : End P) (n : ℕ) :
+    G.map (μ ^ n).asHom = (((G.mapEnd P) μ) ^ n).asHom :=
+  congrArg End.asHom (map_pow (G.mapEnd P) μ n)
 
 private def principalLevelIso (H : A ⥤ B) [H.Additive]
     {P : CochainComplex A ℤ} (μ : End P) (n : ℕ) :
     (H.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.PrincipalCone.level μ n) ≅
-      CochainComplex.PrincipalCone.level ((H.mapHomologicalComplex (.up ℤ)).map μ) n :=
-  CochainComplex.mappingCone.mapHomologicalComplexIso (μ ^ (n + 1)) H ≪≫
+      CochainComplex.PrincipalCone.level
+        (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n :=
+  CochainComplex.mappingCone.mapHomologicalComplexIso (μ ^ (n + 1)).asHom H ≪≫
     eqToIso (congrArg
-      (fun z : End ((H.mapHomologicalComplex (.up ℤ)).obj P) ↦ CochainComplex.mappingCone z)
+      (fun z : (H.mapHomologicalComplex (.up ℤ)).obj P ⟶
+        (H.mapHomologicalComplex (.up ℤ)).obj P ↦ CochainComplex.mappingCone z)
       (mapEnd_pow (H.mapHomologicalComplex (.up ℤ)) P μ (n + 1)))
 
 private theorem principalLevelIso_step (H : A ⥤ B) [H.Additive]
@@ -339,7 +342,8 @@ private theorem principalLevelIso_step (H : A ⥤ B) [H.Additive]
     (H.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.step μ n) ≫
         (principalLevelIso H μ n).hom =
       (principalLevelIso H μ (n + 1)).hom ≫
-        CochainComplex.PrincipalCone.step ((H.mapHomologicalComplex (.up ℤ)).map μ) n := by
+        CochainComplex.PrincipalCone.step
+          (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n := by
   simp only [principalLevelIso, Iso.trans_hom, CochainComplex.PrincipalCone.step]
   rw [← Category.assoc, mapCone_natural]
   rw [Category.assoc, coneCast_natural _ _ _ _
@@ -348,7 +352,7 @@ private theorem principalLevelIso_step (H : A ⥤ B) [H.Additive]
     (by
       rw [(H.mapHomologicalComplex (.up ℤ)).map_id P]
       exact CochainComplex.PrincipalCone.square
-        ((H.mapHomologicalComplex (.up ℤ)).map μ) n)]
+        (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n)]
   simp only [(H.mapHomologicalComplex (.up ℤ)).map_id P, Category.assoc]
   rfl
 
@@ -397,7 +401,8 @@ private def principalMapIso (H : A ⥤ B) [H.Additive]
     [PreservesLimitsOfShape (Discrete ℕ) H]
     {P : CochainComplex A ℤ} (μ : End P) :
     (H.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.PrincipalCone.completion μ) ≅
-      CochainComplex.PrincipalCone.completion ((H.mapHomologicalComplex (.up ℤ)).map μ) :=
+      CochainComplex.PrincipalCone.completion
+        (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) :=
   mapCoconeIso H (CochainComplex.PrincipalCone.oneSubShift μ) ≪≫
     (shiftFunctor _ (-1 : ℤ)).mapIso
       (coneSquareIso _ _
@@ -463,8 +468,10 @@ private theorem scalar_chain_push {X Y : Scheme.{t}} (f : X ⟶ Y)
     (hc : ∀ n, c ≫ (ringPush.{t, u} f).map (projection l E X n) =
       projection l E Y n ≫ finiteStructure l E f n)
     [hpush : (push f c).Additive] (P : IntegralOnSlice.Cx l E X none) :
-    ((push f c).mapHomologicalComplex (.up ℤ)).map (integralKoszulScalar l E X P) =
+    End.of (((push f c).mapHomologicalComplex (.up ℤ)).map
+      (integralKoszulScalar l E X P).asHom) =
       integralKoszulScalar l E Y (((push f c).mapHomologicalComplex (.up ℤ)).obj P) := by
+  apply End.ext
   apply (integralKoszulScalar_existsUnique l E Y
     (((push f c).mapHomologicalComplex (.up ℤ)).obj P)).unique
   · intro q U x
@@ -544,7 +551,7 @@ theorem directImage_preservesComplete (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)
   have : (CochainComplex.PrincipalCone.completion μ).IsKInjective := principalKInjective J μ
   have : QuasiIso (G.map (CochainComplex.PrincipalCone.unit μ)) :=
     mapKInjectiveQuasiIso H _ hμ
-  have hscalar : G.map μ = integralKoszulScalar l E Y (G.obj J) :=
+  have hscalar : End.of (G.map μ.asHom) = integralKoszulScalar l E Y (G.obj J) :=
     scalar_chain_push l E f c hc J
   let a : DerivedCategory.Q.obj (G.obj J) ≅
       DerivedCategory.Q.obj

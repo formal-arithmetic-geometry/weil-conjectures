@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 import WeilConjectures.CategoryTheory.RingedSingletonCoefficientCone
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # The singleton dual Koszul tensor as a scalar cone
 
@@ -49,12 +49,12 @@ Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
 @[irreducible] def ringedSingletonKoszulPower
     (a : (O.obj ⋙ forget CommRingCat).sections) (P : ringedSiteComplex O) (n : ℕ) :
     End (((ringedKoszulTensor O).obj P).obj (ringedSiteRingComplex O)) :=
-  ((ringedKoszulTensor O).obj P).map
-    ((HomologicalComplex.single _ (.up ℤ) 0).map (ringedKoszulScalar O a ^ (n + 1)))
+  End.of (((ringedKoszulTensor O).obj P).map
+    ((HomologicalComplex.single _ (.up ℤ) 0).map (ringedKoszulScalar O a ^ (n + 1)).asHom))
 
 private abbrev singletonScalar
     (a : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :=
-  (HomologicalComplex.single _ (.up ℤ) 0).map (ringedKoszulScalar O a ^ (n + 1))
+  (HomologicalComplex.single _ (.up ℤ) 0).map (ringedKoszulScalar O a ^ (n + 1)).asHom
 
 private abbrev singletonTensorPower
     (a : (O.obj ⋙ forget CommRingCat).sections) (P : ringedSiteComplex O) (n : ℕ) :=
@@ -174,7 +174,7 @@ private theorem singletonTensorCone
     have hz : (d n).hom.f j ≫
         (CochainComplex.mappingCone.snd
           ((HomologicalComplex.single _ (.up ℤ) 0).map
-            (ringedKoszulScalar O a ^ (n + 1)))).v j j (add_zero j) = 0 :=
+            (ringedKoszulScalar O a ^ (n + 1)).asHom)).v j j (add_zero j) = 0 :=
       (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ j hj).eq_of_tgt _ _
     rw [hz, Functor.map_zero, zero_comp]
   · intro n q
@@ -212,26 +212,26 @@ theorem ringedSingletonKoszulCone
     (a : (O.obj ⋙ forget CommRingCat).sections) (P : ringedSiteComplex O) :
     ∃ e : ∀ n : ℕ,
         ((ringedKoszulTensorTower O 1 (fun _ ↦ a)).obj P).obj (op n) ≅
-          CochainComplex.mappingCone (ringedSingletonKoszulPower O a P n),
+          CochainComplex.mappingCone (ringedSingletonKoszulPower O a P n).asHom,
       (∀ n, ringedKoszulTensorUnitComponent O 1 (fun _ ↦ a) P (op n) ≫
         (e n).hom = (ringedKoszulRightUnitIso O P).inv ≫
-          CochainComplex.mappingCone.inr (ringedSingletonKoszulPower O a P n)) ∧
+          CochainComplex.mappingCone.inr (ringedSingletonKoszulPower O a P n).asHom) ∧
       (∀ (n : ℕ) (p j : ℤ), j ≠ 0 →
         HomologicalComplex.ιMapBifunctor P
             ((ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n))
             (curriedTensor _) (.up ℤ) p j (p + j) rfl ≫
           (e n).hom.f (p + j) ≫
             (CochainComplex.mappingCone.snd
-              (ringedSingletonKoszulPower O a P n)).v
+              (ringedSingletonKoszulPower O a P n).asHom).v
                 (p + j) (p + j) (add_zero _) = 0) ∧
       (∀ (n : ℕ) (q : ℤ),
         (((ringedKoszulTensorTower O 1 (fun _ ↦ a)).obj P).map
           (homOfLE (Nat.le_add_right n 1)).op).f q ≫ (e n).hom.f q ≫
             (CochainComplex.mappingCone.snd
-              (ringedSingletonKoszulPower O a P n)).v q q (add_zero _) =
+              (ringedSingletonKoszulPower O a P n).asHom).v q q (add_zero _) =
           (e (n + 1)).hom.f q ≫
             (CochainComplex.mappingCone.snd
-              (ringedSingletonKoszulPower O a P (n + 1))).v q q (add_zero _)) := by
+              (ringedSingletonKoszulPower O a P (n + 1)).asHom).v q q (add_zero _)) := by
   unfold ringedSingletonKoszulPower
   dsimp only [ringedKoszulTensorUnitComponent,
     ringedKoszulTensorTower, ringedKoszulTensor, Functor.comp_obj, Functor.comp_map,

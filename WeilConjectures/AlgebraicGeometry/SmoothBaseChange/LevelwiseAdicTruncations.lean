@@ -563,7 +563,6 @@ private theorem reduction_allpair_comparison (b a : ℕ) (hab : a ≤ b) :
   erw [hs]
   erw [reassoc_of% (he b)]
   have hn := τ.naturality q
-  try dsimp only [Functor.comp_map] at hn
   change τ.app _ ≫ (E a).map q ≫ (F a).mapDerivedCategoryFactors.hom.app J = _
   rw [← Category.assoc, ← hn, Category.assoc, ht]; rfl
 
@@ -1112,7 +1111,6 @@ private theorem truncated_strict_transitionGE (M : AdicTower T d) (m : ℤ)
   erw [truncated_evaluationGE_unit T d M m a]
   have ht := M.transition b a hab
   dsimp only [pbcDerivedRestrict] at ht
-  try simp only [Category.assoc]
   erw [reassoc_of% ht]
   erw [reassoc_of% truncated_evaluationGE_unit T d M m b]
   have hn := (pbcTowerTransition T (pbcAdicCompletion T d) b a hab).naturality

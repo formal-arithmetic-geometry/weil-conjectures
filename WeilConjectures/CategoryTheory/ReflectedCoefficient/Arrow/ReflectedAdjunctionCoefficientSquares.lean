@@ -774,8 +774,8 @@ private theorem mate_shift {L : C₀ ⥤ C₁} {R : C₁ ⥤ C₀}
     [L.CommShift ℤ] [R.CommShift ℤ] [L'.CommShift ℤ] [R'.CommShift ℤ]
     [G.CommShift ℤ] [H.CommShift ℤ] [adj.CommShift ℤ] [adj'.CommShift ℤ]
     (δ : G ⋙ L' ⟶ L ⋙ H) [NatTrans.CommShift δ ℤ] :
-    NatTrans.CommShift (mateEquiv adj adj' δ).natTrans ℤ := by
-  dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
+    NatTrans.CommShift (mateEquiv adj adj' δ) ℤ := by
+  dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk]
   infer_instance
 
 /-- The reflected coefficient comparison and its right mate respect shifts.
@@ -806,7 +806,7 @@ theorem Square.commShift (s : Square a₀ a₁ cA cB)
       NatTrans.CommShift s.localComparison.hom ℤ ∧
       NatTrans.CommShift
         (mateEquiv a₀.reflectedAdjunction a₁.reflectedAdjunction
-          s.localComparison.hom).natTrans ℤ := by
+          s.localComparison.hom) ℤ := by
   let τ := (associator cA.F a₁.F B₁.completion).inv ≫
     whiskerRight s.delta.hom B₁.completion ≫
     (associator a₀.F cB.F B₁.completion).hom ≫ whiskerLeft a₀.F cB.kappa.inv

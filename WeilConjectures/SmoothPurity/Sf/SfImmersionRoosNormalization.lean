@@ -172,7 +172,6 @@ private theorem normalized_exact_counit
     DerivedCategory.Qh.map_id] at h
   erw [Category.comp_id] at h
   have hn := e.hom.naturality ((DerivedCategory.quotientCompQhIso C).inv.app P)
-  try dsimp only [Functor.comp_map] at hn
   simp only [eqToIso_refl, Iso.refl_hom, DerivedCategory.Q.map_id, Category.comp_id]
   dsimp only [Functor.leftDerivedCounitOnComplex]
   rw [← h, F.mapDerivedCategoryFactorsh_hom_app]

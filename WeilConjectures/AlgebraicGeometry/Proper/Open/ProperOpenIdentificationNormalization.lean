@@ -631,7 +631,7 @@ private theorem mate_transpose
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (a : L ⊣ R) (b : L' ⊣ R') {G : C ⥤ E} {H : D ⥤ F}
     (α : TwoSquare G L L' H) (M : D) :
-    (b.homEquiv _ _).symm ((mateEquiv a b α).natTrans.app M) =
+    (b.homEquiv _ _).symm ((mateEquiv a b α).app M) =
       α.app (R.obj M) ≫ H.map (a.counit.app M) := by
   rw [Adjunction.homEquiv_counit]
   exact mateEquiv_counit a b α M
@@ -641,7 +641,7 @@ private theorem mate_transpose_eq
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (a : L ⊣ R) (b : L' ⊣ R') {G : C ⥤ E} {H : D ⥤ F}
     (α : TwoSquare G L L' H) (M : D) (r : G.obj (R.obj M) ⟶ R'.obj (H.obj M))
-    (hr : r = (mateEquiv a b α).natTrans.app M) :
+    (hr : r = (mateEquiv a b α).app M) :
     (b.homEquiv _ _).symm r = α.app (R.obj M) ≫ H.map (a.counit.app M) := by
   rw [hr]
   exact mate_transpose a b α M

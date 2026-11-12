@@ -63,7 +63,7 @@ private lemma map_mateEquiv_app_comp_counit_aux
     (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f').map
         ((mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
-          (boundedConstructibleUpperStarLowerStarAdjunction ℓ f') β).natTrans.app A) ≫
+          (boundedConstructibleUpperStarLowerStarAdjunction ℓ f') β).app A) ≫
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ f').counit.app
           ((boundedConstructibleNearbyCycles hM).obj A) =
       β.app ((boundedConstructibleLowerStar ℓ f).obj A) ≫
