@@ -232,8 +232,13 @@ theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
   obtain ⟨b', hb'⟩ := DiagonalTrace.diagonalTrace_completedChern_lift l t'.toPresentation hunit'
   let B := RationalP1.realizeScalarChern l f eX eS t.Rc D push b
   let B' := RationalP1.realizeScalarChern l f' eX' eS' t'.Rc D' push' b'
-  obtain ⟨v, hv, hvt, hBt⟩ := realizedTrace_splitting l f hunit eX eS t D push b hb
-  obtain ⟨v', hv', hvt', hBt'⟩ :=
+  obtain ⟨v, hv, hvt, hBt⟩ :
+      ∃ v : V S ⟶ D.R.obj (V X), IsIso (biprod.desc v B) ∧
+        v ≫ τ = 0 ∧ B ≫ τ = 𝟙 _ :=
+    realizedTrace_splitting l f hunit eX eS t D push b hb
+  obtain ⟨v', hv', hvt', hBt'⟩ :
+      ∃ v' : V S' ⟶ D'.R.obj (V X'), IsIso (biprod.desc v' B') ∧
+        v' ≫ τ' = 0 ∧ B' ≫ τ' = 𝟙 _ :=
     realizedTrace_splitting l f' hunit' eX' eS' t' D' push' b' hb'
   have : F.Additive :=
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ hS).left_adjoint_additive
