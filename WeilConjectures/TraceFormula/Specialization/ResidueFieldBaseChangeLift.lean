@@ -36,6 +36,29 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+section GradedTensor
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+  [IsCommMonObj Λ] (S : Scheme.{u})
+
+-- Share the graded tensor conditions used by each total left derived functor.
+private lemma gradedTensorFourCondensedRingObj
+    (K L M N : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))) : GradedObject.HasTensor₄ObjExt K L M N := inferInstance
+
+private lemma gradedTensorLeftCondensedRingObj
+    (K L M : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))) : GradedObject.HasGoodTensor₁₂Tensor K L M := inferInstance
+
+private lemma gradedTensorRightCondensedRingObj
+    (K L M : GradedObject ℤ (Mod (Sheaf (ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))) : GradedObject.HasGoodTensorTensor₂₃ K L M := inferInstance
+
+end GradedTensor
+
+attribute [local instance] gradedTensorFourCondensedRingObj gradedTensorLeftCondensedRingObj
+  gradedTensorRightCondensedRingObj
+
 section Generic
 
 variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ₁]
@@ -45,7 +68,7 @@ variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap b X))]
   {T X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- The restricted base change map with coefficients `Λ₃` is invertible at `Lε^* K` as soon as
 it is invertible at `T_b (T_a (Lε^* K₀))` for some `K₀` with `T_b (T_a K₀) ≅ K`. -/
 lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
@@ -62,10 +85,9 @@ lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
             ((L((ε)^*⟦Λ₁⟧)).obj K₀)))))) :
     IsIso ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
       (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
-      (pullbackSquareComparison Λ₃ sq)).app ((L((ε)^*⟦Λ₃⟧)).obj K))) := by
-  refine isIso_map_app_of_iso _ _ ?_ h
-  exact (leftDerivedUpperStarExtendScalarsExtendScalarsIso a b ε K₀).symm ≪≫
-    Functor.mapIso _ e.some
+      (pullbackSquareComparison Λ₃ sq)).app ((L((ε)^*⟦Λ₃⟧)).obj K))) :=
+  isIso_map_app_of_iso _ _ ((leftDerivedUpperStarExtendScalarsExtendScalarsIso a b ε K₀).symm ≪≫
+    (L((ε)^*⟦Λ₃⟧)).mapIso e.some) h
 
 end Generic
 
