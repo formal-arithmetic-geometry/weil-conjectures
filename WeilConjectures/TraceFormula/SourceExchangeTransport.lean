@@ -115,7 +115,10 @@ lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinit
       (classTransport ℓ f K).app _ ≫
         (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K (𝟙 _)) :=
     by simp only [classTest, classTransportMap, uncurry_curry, Equiv.symm_apply_apply]
-  simpa only [classTest_comp, hΦ, hψ, Functor.map_comp, Category.assoc] using
-    (classTransport ℓ f K).naturality_assoc ψ _
+  rw [classTest_comp]
+  rw [hΦ]
+  rw [hψ]
+  rw [Functor.map_comp]
+  exact (classTransport ℓ f K).naturality_assoc ψ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
