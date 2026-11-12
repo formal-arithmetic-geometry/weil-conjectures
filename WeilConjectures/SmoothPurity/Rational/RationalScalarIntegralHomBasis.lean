@@ -68,8 +68,6 @@ theorem integralScalarChainAction_app_f (x : Padic.coefficientExtensionIntegers 
   intro y
   exact (integralScalarChainAction_existsUnique l L Y x).exists.choose_spec K n U y
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- The transports between `Q ⋙ F.mapDerivedCategory` and `F.mapHomologicalComplex ⋙ Q` are slow.
 /-- The finite free Hom formula for the exact ordinary scalar extension on derived categories:
 for an `𝒪_E`-basis `b` of `𝒪_L`, every morphism `Ord X ⟶ Ord Z` is uniquely
