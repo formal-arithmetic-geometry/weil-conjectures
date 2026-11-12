@@ -64,6 +64,21 @@ private lemma isSplitMono_map_app_of_iso_aux {C D E : Type*}
     (h : IsSplitMono (H.map (η.app o))) : IsSplitMono (H.map (η.app o')) :=
   NatTrans.isSplitMono_app_of_iso (Functor.whiskerRight η H) e.symm h
 
+/-- Transport a split component through two coefficient changes commuting with pullback. -/
+private lemma isSplitMono_map_app_of_two_pullIsos
+    {C₀ C₁ C₂ D₀ D₁ D₂ A B : Type*}
+    [Category C₀] [Category C₁] [Category C₂] [Category D₀] [Category D₁] [Category D₂]
+    [Category A] [Category B]
+    {T₀ : C₀ ⥤ C₁} {T₁ : C₁ ⥤ C₂} {U₀ : D₀ ⥤ D₁} {U₁ : D₁ ⥤ D₂}
+    {P₀ : C₀ ⥤ D₀} {P₁ : C₁ ⥤ D₁} {P₂ : C₂ ⥤ D₂}
+    (α : P₀ ⋙ U₀ ≅ T₀ ⋙ P₁) (β : P₁ ⋙ U₁ ≅ T₁ ⋙ P₂)
+    {F G : D₂ ⥤ A} (η : F ⟶ G) (H : A ⥤ B)
+    (o : C₀) {o' : C₂} (e : T₁.obj (T₀.obj o) ≅ o')
+    (h : IsSplitMono (H.map (η.app (U₁.obj (U₀.obj (P₀.obj o)))))) :
+    IsSplitMono (H.map (η.app (P₂.obj o'))) :=
+  isSplitMono_map_app_of_iso_aux η H
+    (U₁.mapIso (α.app o) ≪≫ β.app (T₀.obj o) ≪≫ P₂.mapIso e) h
+
 end Abstract
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -130,19 +145,14 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers (φ : M.Ho
     ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀
   have hA := isSplitMono_map_baseChangeMap_app_padicAlgCl_of_padicSubfield ℓ E φ.commSq_j M.i
     _ n₀ hnE (by exact_mod_proofs hE)
-  -- `ℚ̄_ℓ ⊗ (E ⊗ Lε^* K₀) ≅ Lε^* B`
-  have e' :=
-    (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-      N.generic))).mapIso ((derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        N.ε).app K₀) ≪≫
-    (derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) N.ε).app _ ≪≫
-    (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso e
-  have h := isSplitMono_map_app_of_iso_aux
+  have h := isSplitMono_map_app_of_two_pullIsos
+    (derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) N.ε)
+    (derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) N.ε)
     (Adjunction.exchangeRight
       (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) N.j)
       (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) M.j)
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ.commSq_j))
-      (L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)) e' (by exact_mod_proofs hA)
+      (L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)) K₀ e (by exact_mod_proofs hA)
   have := isSplitMono_pullbackExchange_app_of_isSplitMono_map_exchangeRight_app
     (Profinite.padicAlgClRingObj ℓ) φ B (by exact_mod_proofs h)
   exact_mod_proofs this
