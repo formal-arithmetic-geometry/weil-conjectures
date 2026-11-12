@@ -65,9 +65,13 @@ private theorem roosMap_comp_snd_eq_zero
     (a ≫ f ≫ integralOperationsRoosFunctor.map q).f i ≫
       (CochainComplex.mappingCocone.snd (scalarRoosBoundary D)).v i (i - 1) (by omega) =
         0 := by
+  have hq : (integralOperationsRoosFunctor.map q).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary D)).v i (i - 1) (by omega) =
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v i (i - 1) (by omega) ≫
+        (Limits.Pi.map (fun n : ℕ ↦ q.app (op n))).f (i - 1) :=
+    (IntegralAmbient.roosMap_coordinates q).2 i (i - 1) (by omega)
   simp only [HomologicalComplex.comp_f, Category.assoc]
-  rw [(IntegralAmbient.roosMap_coordinates q).2 i (i - 1) (by omega),
-    ← Category.assoc, hf i, zero_comp, comp_zero]
+  rw [hq, ← Category.assoc (f.f i), hf i, zero_comp, comp_zero]
 
 private theorem cast_map
     {A : Type*} [Category A] {P Q : A ⥤ AddCommGrpCat.{u + 1}} (e : P = Q)
@@ -95,7 +99,6 @@ private theorem restrictedSection_naturality
     rfl
   exact cast_map e f x
 
-set_option profiler true in
 /-- The defining Roos lift of the inverse-image comparison is the limit lift of the
 inverse image of a strict quotient presentation, followed by the whole-tower tensor
 unit and the normalized pullback tower identification.
