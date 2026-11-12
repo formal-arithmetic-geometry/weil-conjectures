@@ -228,12 +228,6 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
       (h := by rw [← sq₁.w])
     have hn := (leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
       ((leftDerivedUpperStarId Λ S).hom.app K)
-    change
-      (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj K) ≫
-          (pullbackSquareComparison Λ sq₁).hom.app K ≫ C =
-        L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
-          ((leftDerivedUpperStarId Λ S).hom.app K)) ≫
-          (pullbackSquareComparison Λ w).hom.app K ≫ C
     exact CategoryTheory.comp_chain_eq_of_eq _ _ _ _ _ _ _ _ _ _ _ _ hs hc hn hw
       (by apply Subsingleton.elim)
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
