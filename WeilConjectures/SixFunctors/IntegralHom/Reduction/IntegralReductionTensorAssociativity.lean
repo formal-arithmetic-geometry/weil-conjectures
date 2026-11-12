@@ -168,6 +168,18 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+private theorem integral_totalPair_eq_generator
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      CommRingCat.{max u (t + 1)})
+    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ)
+    (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+    (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    totalPair Y R P Q i j U x y =
+      coefficientTensorGenerator.{u, t + 1, t}
+        (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
+  rfl
+
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem normalizedBeta_inv_generator (n : ℕ)
@@ -201,7 +213,7 @@ private theorem normalizedBeta_inv_generator (n : ℕ)
         (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
         (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
         i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)  := by
+          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y) := by
   intro i j k hij U x y
   subst k
   have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
@@ -227,6 +239,7 @@ private theorem reductionUnit_eq_coefficientIntegralScalarUnitSection
       coefficientIntegralScalarUnitSection l E Y n M U x := by
   with_unfolding_all rfl
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem normalizedBeta_eq (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
@@ -247,12 +260,12 @@ private theorem normalizedBeta_eq (n : ℕ)
         ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
-    (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q  := by
+    (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
     simpa only [CoefficientScalarTensorGenerators, reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      totalPair] using
+      integral_totalPair_eq_generator, Iso.symm_hom, asIso_inv] using
       (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j (i + j) rfl U x y)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
@@ -271,13 +284,145 @@ private theorem nativeReductionMonoidal
     let : MonoidalCategory (Derived.{t, u} Y S) :=
       RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S
     let F : Derived.{t, u} Y R ⥤ Derived.{t, u} Y S := by
-      exact integralDerivedReduction l E Y D hl n
+      with_unfolding_all exact integralDerivedReduction l E Y D hl n
     let e := tensorPresentationNativeIso Y R a
     let f := tensorPresentationNativeIso Y S m.target
     ∃ core : F.CoreMonoidal, ∀ X Z,
       (core.μIso X Z).inv = F.map (e.inv.app (X, Z)) ≫
         m.mu.hom.app (X, Z) ≫ f.hom.app (F.obj X, F.obj Z) := by
-  sorry
+  classical
+  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  let : HasSheafify J AddCommGrpCat.{max u (t + 1)} :=
+    integralCoefficientAbSheafify.{t, u} Y
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    integralCoefficientAbLocallyBijective.{t, u} Y
+  let R := completedIntegralCommRingSheafUnrestricted l E Y
+  let S := integralCoefficientCommRingSheaf l E Y n
+  let : MonoidalCategory (Derived.{t, u} Y S) :=
+    RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S
+  let : MonoidalCategory (Derived.{t, u} Y R) :=
+    RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J R
+  obtain ⟨⟨monR, adjR, evR⟩, hmonR, TR, βR, hR, _, hTR⟩ :=
+    ringedDerived_closed_symmetric_monoidal_native.{t + 1, t, u, max u (t + 1) + 1} J R
+  dsimp only [CoefficientClosedStructure.monoidal] at hmonR
+  subst monR
+  obtain ⟨⟨monS, adjS, evS⟩, hmonS, TS, βS, hS, _, hTS⟩ :=
+    ringedDerived_closed_symmetric_monoidal_native.{t + 1, t, u, max u (t + 1) + 1} J S
+  dsimp only [CoefficientClosedStructure.monoidal] at hmonS
+  subst monS
+  let AR : CoefficientClosedStructure (derivedInternalHomOfUniverses.{t + 1, t, u} J R) :=
+    ⟨RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J R, adjR, evR⟩
+  let AS : CoefficientClosedStructure (derivedInternalHomOfUniverses.{t + 1, t, u} J S) :=
+    ⟨RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S, adjS, evS⟩
+  let D' := finiteCochainModel l E Y n
+  let F : Derived.{t, u} Y R ⥤ Derived.{t, u} Y S := by
+    with_unfolding_all exact integralDerivedReduction l E Y D hl n
+  let e := tensorPresentationNativeIso Y R a
+  let f := tensorPresentationNativeIso Y S m.target
+  let mu : AR.tensor ⋙ F ≅ F.prod F ⋙ AS.tensor :=
+    Functor.isoWhiskerRight e.symm F ≪≫ m.mu ≪≫ Functor.isoWhiskerLeft (F.prod F) f
+  let φ := completedIntegralCommRingProjectionUnrestricted l E Y n
+  obtain ⟨κ, hκ, _⟩ := ringedFiniteFreeHomBaseChange_complex.{t + 1, t, u,
+    max u (t + 1) + 1} J φ D'
+  have hc (P Q : CochainComplex (scalarReductionSource l E Y) ℤ) :
+      κ.app (P, Q) = coefficientScalarTensorIso l E Y n P Q := by
+    apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
+    · intro p q k hpq U x y
+      subst k
+      have h := hκ P Q p q U x y
+      dsimp only [D', finiteCochainModel] at h
+      dsimp only [J, φ] at h
+      simp only [coefficientFiniteScalarSection] at h
+      exact h
+    · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+      exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
+    max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
+      intro P Q hP hQ
+      obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
+      let := hbeta
+      have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
+      have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      refine ⟨hEP, hEQ, ?_⟩
+      have hrepR := nativeIso_representative Y R a P Q hP hQ
+      have hrepS := nativeIso_representative Y S m.target _ _ hEP hEQ
+      have hTR' := eq_of_heq (hTR P Q hP hQ)
+      have hTS' := eq_of_heq (hTS _ _ hEP hEQ)
+      change (TR.iso J R AR P Q hP hQ) = _ at hTR'
+      change (TS.iso J S AS _ _ hEP hEQ) = _ at hTS'
+      change _ = (RingedDerivedNative.tensorIso J R P Q (Or.inl hP)).hom at hrepR
+      have hcr : (TR.iso J R AR P Q hP hQ).hom =
+          a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫
+            e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) := by
+        rw [hTR']
+        exact hrepR.symm
+      have heps (A : CochainComplex (scalarReductionSource l E Y) ℤ)
+          (hA : A.IsKFlatIndependentCoefficients) :
+          D'.ε.app A = reductionCounit l E Y D hl n A := by
+        rw [finiteCochainModel_counit l E Y n A hA]
+        unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
+        dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+        change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
+        simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+        with_unfolding_all rfl
+      rw [heps P hP, heps Q hQ, heps _
+        (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
+      let εP := reductionCounit l E Y D hl n P
+      let εQ := reductionCounit l E Y D hl n Q
+      let cS := (TS.iso J S AS _ _ hEP hEQ).hom
+      have hcs : cS = m.target.representative.hom.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫
+          f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
+        dsimp only [cS]
+        rw [hTS']
+        exact hrepS.symm
+      have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
+          𝟙 _ := by
+        rw [← Functor.map_comp]
+        have hh : beta ≫ κ.hom.app (P, Q) = 𝟙 _ := by
+          change beta ≫ (κ.app (P, Q)).hom = _
+          rw [← hbκ]
+          exact (asIso beta).hom_inv_id
+        rw [hh, CategoryTheory.Functor.map_id]
+      have hnat := f.hom.naturality (Prod.mkHom εP εQ)
+      let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
+        m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+          m.target.tensor.map (Prod.mkHom εP εQ)
+      calc
+        _ = G ≫ f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
+          with_unfolding_all
+            rw [hcr]
+            dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
+              F, integralDerivedReduction, G, AS, CoefficientClosedStructure.tensor,
+              CategoryTheory.Functor.prod_obj, mu, Iso.trans_hom, Iso.symm_hom,
+              Functor.isoWhiskerRight_hom,
+              Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+              Functor.whiskerLeft_app]
+            simp only [Functor.map_comp, Category.assoc]
+            simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+            erw [← hnat, Category.comp_id]
+        _ = G ≫ m.target.representative.inv.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫ cS := by
+          rw [hcs]
+          simp only [Iso.inv_hom_id_app_assoc]
+          rfl
+        _ = reductionCounit l E Y D hl n _ ≫
+            DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫ cS := by
+          have hh := congrArg (fun z ↦ z ≫
+            DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫ cS) hnorm
+          with_unfolding_all
+            simpa only [F, G, εP, εQ, J, R, completedIntegralCommRingSheaf,
+              totalTensor, coefficientTotalTensor, ordinaryTensor,
+              CategoryTheory.Functor.uncurry_obj_obj, Category.assoc,
+              reassoc_of% hcan, Category.id_comp] using hh)
+  refine ⟨core, ?_⟩
+  intro X Z
+  have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
+  have hi := congrArg Iso.inv hi
+  with_unfolding_all
+    simpa only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
+      F, integralDerivedReduction, e, f, CategoryTheory.Functor.prod_obj,
+      Iso.symm_inv, Iso.app_hom, mu, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app] using hi
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -305,10 +450,10 @@ theorem reductionTensorStrength_associativity
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n) :
     let R := completedIntegralCommRingSheaf l E Y D hl
     letI : MonoidalCategory (completedIntegralDerivedCategory l E Y D hl) := by
-      exact RingedDerivedNative.monoidal.{t + 1, t, u,
+      with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
         max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) R
     let e : a.tensor ≅ tensor (completedIntegralDerivedCategory l E Y D hl) := by
-      exact tensorPresentationNativeIso Y R a
+      with_unfolding_all exact tensorPresentationNativeIso Y R a
     let B := integralDerivedReduction l E Y D hl n ⋙ scalarReductionDerivedRestriction l E Y n
     let p := nativeScalarTensorStrength
       (C := completedIntegralDerivedCategory l E Y D hl) a.tensor m.target.tensor
@@ -316,6 +461,23 @@ theorem reductionTensorStrength_associativity
     ∀ X V Z : completedIntegralDerivedCategory l E Y D hl,
       X ◁ p.app (V, Z) ≫ p.app (X, V ⊗ Z) ≫ B.map (α_ X V Z).inv =
         (α_ X V (B.obj Z)).inv ≫ p.app (X ⊗ V, Z) := by
-  sorry
+  let R := completedIntegralCommRingSheaf l E Y D hl
+  let S := integralCoefficientCommRingSheaf l E Y n
+  let : MonoidalCategory (completedIntegralDerivedCategory l E Y D hl) := by
+    with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
+      max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) R
+  let : MonoidalCategory
+      (DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n))) := by
+    with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
+      max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) S
+  let e : a.tensor ≅ tensor (completedIntegralDerivedCategory l E Y D hl) := by
+    with_unfolding_all exact tensorPresentationNativeIso Y R a
+  let f := tensorPresentationNativeIso Y S m.target
+  obtain ⟨core, hcore⟩ := nativeReductionMonoidal l E Y D hl a n m
+  with_unfolding_all exact (CategoryTheory.transportedTensorMate_assoc
+    (C := completedIntegralDerivedCategory l E Y D hl)
+    (D := DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)))
+    a.tensor m.target.tensor
+    (derivedScalarExtensionRestrictionAdjunction l E Y n).choose m.mu e f core hcore)
 
 end WeilConjectures.IntegralHom
