@@ -36,7 +36,6 @@ attribute [local irreducible] HasDerivedCategory.standard
   integralComparisonSequenceScalarPullback coefficientSequenceLimit
   scalarCompletionIso
 
-set_option maxHeartbeats 800000 in
 -- STATEMENT-DISPUTED: the former version allowed arbitrary q. Composing q with
 -- negation negates the left side while fixing the right side. The missing hq is
 -- supplied by every current caller and fixes the nested tensor-unit generators.

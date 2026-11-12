@@ -93,7 +93,6 @@ private theorem finiteTensorModelOnKFlatFamily_app (W : Scheme.{u}) (n : ℕ)
   unfold finiteTensorModelOnKFlatFamily
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Elaborating the two tensor natural transformations needs the enlarged heartbeat budget.
 /-- Both composites in the ordinary pullback tensor square are natural on every
 family of K-flat complexes with K-flat pullbacks. Source: Stacks 06YS and 07A4

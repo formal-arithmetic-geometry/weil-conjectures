@@ -231,7 +231,6 @@ private theorem scalar_tensor_level_ext (W : AlgebraicGeometry.Scheme.{u})
   exact (congrArg ((a.f (p + q)).val.app U) hs).trans
     ((hab p q U x y).trans (congrArg ((b.f (p + q)).val.app U) hs.symm))
 
-set_option maxHeartbeats 800000 in
 -- Quotient section casts and tower identifications need extra elaboration heartbeats.
 /-- The tensor quotient maps and the scalar comparison give the specified strict tower map.
 Source: Stacks 03EL, 07A4 and 0941; the pure tensor calculation in

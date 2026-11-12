@@ -68,7 +68,6 @@ private theorem associativitySectionSquare
     tB (κB (ηB (σ x))) = τ (tA (κA (ηA x))) := by
   rw [hσ, hκB, htB, hκA, htA, hτ]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the nested total-complex comparison uses extra heartbeats.
 /-- The normalized sequence pullback commutes with cochain reassociation.
 Source: Stacks 07A4, with the unsigned reassociation of Tag 06YN.

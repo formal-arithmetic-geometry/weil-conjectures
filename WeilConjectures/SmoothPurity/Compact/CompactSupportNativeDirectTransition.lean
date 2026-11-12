@@ -151,7 +151,6 @@ private theorem normalized_postcompose
     CategoryTheory.Functor.map_comp, Category.assoc]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Compare the native presentation with the specified finite coefficient categories.
 private theorem native_normalized {Z Y : Scheme.{u}} (g : Z ⟶ Y) (n : ℕ) :
     @CategoryTheory.ExactDerivedSquare.unitNormalized.{u + 1, u + 2}

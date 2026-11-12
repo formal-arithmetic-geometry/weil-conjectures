@@ -74,7 +74,6 @@ private theorem exists_coefficientTestDatum (l : ℕ) :
   change l ≠ p
   omega
 
-set_option maxHeartbeats 800000 in
 -- Sheafification comparison elaborates several large dependent module categories.
 private noncomputable def constantRegularIso
     (Y : AlgebraicGeometry.Scheme.{u}) (A : Type u) [CommRing A] :
@@ -224,7 +223,6 @@ theorem finiteConstantCoefficient_constructible (n : ℕ) :
   rw [hg.2.1]
   exact eM.hom.hom.map_smul _ _
 
-set_option maxHeartbeats 1000000 in
 -- The normalized adjunction comparison traverses several localization isomorphisms.
 /-- Part 2, with the same integral membership in both recorded presentations.
 Source: blueprint order 1510; Bhatt--Scholze, Definition 3.5.2, Section 6.5,

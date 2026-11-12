@@ -122,7 +122,6 @@ private theorem primitiveInverseMateUnit
     e.hom_inv_id_app]
   erw [R.map_id, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the concrete ringed-site functors requires additional elaboration work.
 attribute [local irreducible] coefficientSequenceEvaluation
   Scheme.coefficientProEtaleModuleDirectImage Scheme.coefficientProEtaleDirectRingMap in
@@ -149,7 +148,6 @@ private theorem primitiveInverseEvaluation_choice {X Y : Scheme.{t}} (f : X ⟶ 
 
 end
 
-set_option maxHeartbeats 4000000 in
 -- Identify the concrete functors once before applying their abstract mate equation.
 attribute [local irreducible] coefficientSequenceEvaluation
   Scheme.coefficientProEtaleModuleAdjunction Scheme.coefficientProEtaleModuleDirectImage
@@ -188,7 +186,6 @@ private theorem primitiveIsoTransHomApp
 
 end
 
-set_option maxHeartbeats 800000 in
 -- The strict quotient comparison carries the full independent-universe coefficient data.
 attribute [local irreducible] coefficientSequenceEvaluation
   Scheme.coefficientProEtaleModuleAdjunction Scheme.coefficientProEtaleModuleDirectImage

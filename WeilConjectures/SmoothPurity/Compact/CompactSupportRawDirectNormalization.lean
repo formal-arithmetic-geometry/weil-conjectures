@@ -51,7 +51,6 @@ private theorem cochainUnit_eq
   erw [DerivedCategory.Qh.map_id, Category.id_comp]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Native and level module categories share a concrete sequence-site presentation.
 /-- Native ordinary direct evaluation satisfies the derived unit equation.
 Source: Zheng, Construction 4.1; Stacks 0D6E and 0D6J.

@@ -102,7 +102,6 @@ private theorem finiteTensor_model_naturality (W : Scheme.{u}) (n : ℕ)
     (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hP⟩) (Y := ⟨P', hP'⟩) a)
       (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) b))
 
-set_option maxHeartbeats 1000000 in
 -- Transport of the two-factor tensor-model square needs the enlarged heartbeat budget.
 /-- The ordinary K-flat representative square transported through the prescribed
 finite realization. Source: Stacks 06YS and 07A4

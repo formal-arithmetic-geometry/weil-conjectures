@@ -242,7 +242,6 @@ private theorem paste_tensor_comparisons {C : Type*} [Category C]
       simpa only [Category.assoc] using
         congrArg (fun h ↦ scalarBefore ≫ h ≫ tensorEnd) ho
 
-set_option maxHeartbeats 600000 in
 -- Pasting the normalized derived comparisons requires extra elaboration heartbeats.
 /-- Tensoring strict systems has its actual tensor transition and respects ordinary
 and derived quotient adjuncts on Good representatives.
