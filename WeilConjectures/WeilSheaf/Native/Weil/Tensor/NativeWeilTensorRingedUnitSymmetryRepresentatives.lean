@@ -63,6 +63,15 @@ private theorem braiding_of_iso {P Q P' Q' : B} (e : P ≅ P') (e' : Q ≅ Q')
     BraidedCategory.braiding_naturality]
   rfl
 
+/-- A braiding square for tensor models is preserved by changing both inputs. -/
+private theorem braiding_model_of_iso {P Q P' Q' Z Z' : D}
+    (a : P ≅ P') (a' : Q ≅ Q') (o : P' ⊗ Q' ≅ Z) (o' : Q' ⊗ P' ≅ Z')
+    (s : Z ⟶ Z') (h : (β_ P' Q').hom ≫ o'.hom = o.hom ≫ s) :
+    (β_ P Q).hom ≫ ((MonoidalCategory.tensor D).mapIso (a'.prod a) ≪≫ o').hom =
+      ((MonoidalCategory.tensor D).mapIso (a.prod a') ≪≫ o).hom ≫ s := by
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, tensor_map, Category.assoc]
+  rw [← BraidedCategory.braiding_naturality_assoc, h]
+
 /-- A left-unit equation and the braiding equation imply the right-unit equation. -/
 private theorem right_unit_of_left (ε : F.obj (𝟙_ B) ≅ 𝟙_ D) (P : B)
     (hl : t.hom.app (𝟙_ B, P) ≫ (ε.hom ⊗ₘ 𝟙 _) ≫
@@ -95,7 +104,6 @@ attribute [local irreducible] Functor.mapDerivedCategory
   Functor.mapDerivedCategoryFactors DerivedCategory DerivedCategory.Q
   instCategoryDerivedCategory NativeOrdinaryKFlat NativeTensorKFlat
 
-set_option maxHeartbeats 600000 in
 -- The normalization compares independently presented total-complex models.
 /-- Unit and signed-symmetry squares on native K-flat representatives.
 
@@ -281,9 +289,11 @@ theorem native_weil_tensor_ringed_unit_symmetry_representatives
             (β.toBraidedCategory.braiding (F.obj (DerivedCategory.Q.obj P))
               (F.obj (DerivedCategory.Q.obj Q))).hom) := by
   classical
-  obtain ⟨ε, hl⟩ := native_weil_tensor_ringed_left_unit_representatives
+  refine (native_weil_tensor_ringed_left_unit_representatives
     k₀ l X T adj e he chain hchain b A M S hmonoidal
-    SB TB βB cB SA TA βA cA d ordinaryModel hcanonical _hnaturality t hforget
+    SB TB βB cB SA TA βA cA d ordinaryModel hcanonical _hnaturality t hforget).elim ?_
+  intro ε hl
+  clear _hnaturality d cA βA TA SA hmonoidal
   obtain ⟨model, swap, _hn, hsigned, hβ, κ', hκ', hm'⟩ := hS
   obtain ⟨κ, hκ, hm⟩ := hcanonical
   have hκeq (P Q : CochainComplex (ProEtale.AdicSheaf l
@@ -338,24 +348,17 @@ theorem native_weil_tensor_ringed_unit_symmetry_representatives
     let o' := S.tensor.mapIso (aQ.prod aP) ≪≫ ordinaryModel Pc Qc hPc
     apply braiding_of_models F t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
       n n' o o' (DerivedCategory.Q.map (swap Qc Pc).hom)
-    · simpa only [n, o, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
-        Iso.prod_hom, Category.assoc, F, U, C, Pc, Qc, aP, aQ] using hforget Q P hQ
-    · simpa only [n', o', Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
-        Iso.prod_hom, Category.assoc, F, U, C, Pc, Qc, aP, aQ] using hforget P Q hP
+    · exact hforget Q P hQ
+    · exact hforget P Q hP
     · simpa only [n, n', Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
         Category.assoc] using native_weil_tensor_ringed_swap_localization
           k₀ l X T adj e he chain hchain b A SB TB βB cB swap hsigned P Q hP hQ
-    · have hb := hβ Qc Pc hQc hPc
-      rw [← hmodels Pc Qc hPc hQc, ← hmodels Qc Pc hQc hPc] at hb
-      have hnat := BraidedCategory.braiding_naturality aP.hom aQ.hom
-      simp only [o, o', Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
-        CoefficientClosedStructure.tensor, tensor_map, Category.assoc]
-      change (β_ (F.obj (DerivedCategory.Q.obj P))
-          (F.obj (DerivedCategory.Q.obj Q))).hom ≫
-          (aQ.hom ⊗ₘ aP.hom) ≫ (ordinaryModel Pc Qc hPc).hom =
-        (aP.hom ⊗ₘ aQ.hom) ≫ (ordinaryModel Qc Pc hQc).hom ≫
-          DerivedCategory.Q.map (swap Qc Pc).hom
-      rw [← reassoc_of% hnat, hb]
+    · have hb : (β_ (DerivedCategory.Q.obj Pc) (DerivedCategory.Q.obj Qc)).hom ≫
+          (ordinaryModel Pc Qc hPc).hom =
+            (ordinaryModel Qc Pc hQc).hom ≫ DerivedCategory.Q.map (swap Qc Pc).hom := by
+        simpa only [hmodels Pc Qc hPc hQc, hmodels Qc Pc hQc hPc] using hβ Qc Pc hQc hPc
+      exact braiding_model_of_iso aP aQ (ordinaryModel Qc Pc hQc)
+        (ordinaryModel Pc Qc hPc) (DerivedCategory.Q.map (swap Qc Pc).hom) hb
   let K : ObjectProperty (CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :=
     NativeTensorKFlat k₀ l X T
   let q := K.ι ⋙ DerivedCategory.Q
