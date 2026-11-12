@@ -157,15 +157,16 @@ end OpenRestriction
 /-- The ordinary restriction/pullback comparison is invertible for an open immersion. -/
 private theorem sequenceRestrictionPullbackInv_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j] : IsIso (sequenceRestrictionPullbackInv l E L ι j) := by
-  letI := openRestrictionMate_isIso l E L ι j
-  exact inverseMate_isIso_of_left_adjoints
-    (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j))
-    (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
-      (sequenceQuotient l L) j)
-    (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j))
-    (AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
-      (sequenceQuotient l E) j)
-    (TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv)
+  let pL := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j)
+  let bL := AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l L)
+    (sequenceQuotient l L) j
+  let pE := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j)
+  let bE := AlgebraicGeometry.ProEtale.VaryingRing.openPullAdj (sequenceRings l E)
+    (sequenceQuotient l E) j
+  let w := TwoSquare.mk _ _ _ _ (sequenceScalarPullbackRight l E L ι j).inv
+  letI : IsIso ((mateEquiv bL bE).symm w) := openRestrictionMate_isIso l E L ι j
+  change IsIso ((mateEquiv pL pE).symm w)
+  exact inverseMate_isIso_of_left_adjoints pL bL pE bE w
 
 /-- The normalized adjoint comparison is the conjugate of the given isomorphism. -/
 private theorem normalizedAdjointComparison_choose_eq
