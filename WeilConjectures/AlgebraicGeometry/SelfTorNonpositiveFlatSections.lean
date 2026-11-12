@@ -32,7 +32,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
 /-- Nonpositive termwise flat resolutions have affine quotient-tensor coordinates.
 This lemma does not construct algebraic augmented comparison maps, and does not
 compare an unbounded K-flat resolution with a bounded one.
@@ -120,6 +119,7 @@ theorem exists_selfTor_nonpositive_flat_sections
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  -- Keep the tensor homology object named while unpacking the comparison data.
   intro B S Q
   obtain ⟨c, hc⟩ := exists_selfTor_nonpositive_chosen_comparisons
     i K q hbounded hflat hq n
