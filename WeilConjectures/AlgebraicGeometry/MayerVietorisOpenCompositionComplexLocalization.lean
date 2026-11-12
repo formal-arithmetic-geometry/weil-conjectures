@@ -45,6 +45,7 @@ private lemma schemeMV_localization_unit_app
   simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
   erw [DerivedCategory.Qh.map_id, Category.id_comp]
 
+-- Cancel the quotient comparisons before specializing to derived categories of modules.
 private lemma schemeMV_transport_composition_unit
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (F : B ⥤ D) (RX : A ⥤ B) (G : A ⥤ C) (RY : C ⥤ D)
@@ -64,12 +65,12 @@ private lemma schemeMV_transport_composition_unit
   simp only [Functor.map_comp, Category.assoc]
   rw [← F.map_comp_assoc, ex.hom_inv_id, F.map_id, Category.id_comp]
   rw [← RY.map_comp_assoc, ev.hom_inv_id, RY.map_id, Category.id_comp]
-  rw [β.hom.naturality, reassoc_of% hb]
+  have hβ := β.hom.naturality e.hom
+  dsimp only [Functor.comp_map] at hβ
+  rw [hβ, reassoc_of% hb]
   simpa only [Functor.comp_map, Category.assoc] using
     congrArg (fun t ↦ ey.inv ≫ t ≫ RY.map (G.map e.hom)) hn
 
-set_option trace.profiler true in
--- Transport through the complex and homotopy localization interfaces.
 /-- The open composition unit equation on any complex on the inverse-image open.
 Source: Stacks Project, Tags 08FE and 0D5T.
 Proof: apply schemeMVOpenComposition_unit_normalization to the homotopy quotient of J.

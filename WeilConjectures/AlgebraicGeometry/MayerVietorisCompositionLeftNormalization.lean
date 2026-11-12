@@ -26,6 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+-- Keep the composition calculation independent of the concrete derived functors.
 private lemma schemeMV_composition_postcompose
     {C D : Type*} [Category C] [Category D] (R : C ⥤ D)
     {P₁ P₂ P₃ P₄ : D} {Q₁ Q₂ Q₃ : C}
@@ -39,8 +40,6 @@ private lemma schemeMV_composition_postcompose
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-set_option trace.profiler true in
--- The exact restriction factors require additional categorical instance conversions.
 /-- Left-hand composition normalization to the complex-composition composite.
 Source: Stacks Project, Tags 08FE, 0D5T and 079V.
 
@@ -83,8 +82,6 @@ theorem schemeMV_composition_left_normalization
          (schemeDerivedDirectImage (h ∣_ W)).map
            (LX.mapDerivedCategoryFactors.inv.app I) ≫
          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))) := by
-  let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
-  let J := (LX.mapHomologicalComplex (.up ℤ)).obj I
   let β := (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫
     eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫
     schemeMVDirectImageComposition (h ∣_ W) W.ι

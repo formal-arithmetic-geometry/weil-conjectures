@@ -41,6 +41,7 @@ private lemma schemeMV_exact_restriction_quotient_inv
   erw [DerivedCategory.Qh.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
     Iso.hom_inv_id_app, Category.comp_id]
 
+-- Prove the transport algebra without unfolding the exact or derived functors.
 private lemma schemeMV_transport_restriction_chain
     {B C D : Type*} [Category B] [Category C] [Category D]
     (L : B ⥤ D) (R : C ⥤ D)
@@ -75,10 +76,8 @@ private lemma schemeMV_quotient_restriction_app
   change (HomotopyCategory.quotient _ _).map
     ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app I) ≫
       (HomotopyCategory.quotient _ _).map (𝟙 _) = _
-  rw [Functor.map_id, Category.comp_id]
+  rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-set_option trace.profiler true in
--- The quotient transports fit the original budget when elaboration respects transparency.
 /-- Transport of the explicit four-map restriction chain to the homotopy quotient.
 Source: Stacks Project, Tags 08FE and 079V.
 Proof: Expand the chain and the transported direct-image unit. Substitute
@@ -132,12 +131,12 @@ theorem schemeMV_restriction_chain_quotient_transport
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Functor.map_id, Category.id_comp, Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   change (schemeMVHomotopyOpenRestriction h W).hom.app
       ((HomotopyCategory.quotient _ _).obj I) = _ at hr
   rw [hr]
   simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    Functor.map_id, Category.comp_id] at hy
+    CategoryTheory.Functor.map_id, Category.comp_id] at hy
   exact schemeMV_transport_restriction_chain LY.mapDerivedCategory
     (RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom).rightDerivedFunctor
     ((DerivedCategory.quotientCompQhIso _).app
