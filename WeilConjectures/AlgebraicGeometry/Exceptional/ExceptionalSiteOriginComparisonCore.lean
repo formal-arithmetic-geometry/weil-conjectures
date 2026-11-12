@@ -325,6 +325,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O) (W : Scheme.{u})
     (K := Scheme.ProEt.topology W) O ell _ _ (Scheme.proEtaleSiteComparison W))
 
 set_option maxHeartbeats 1300000 in
+set_option trace.profiler true in
 -- Elaborate the sectionwise addition and scalar-action graph calculations.
 private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     ∃! e : S.right n ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n ≅
@@ -675,6 +676,7 @@ private theorem exceptional_inverse_scalar_transpose
       rw [Category.comp_id]
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- Assemble the derived comparison and all evaluation and scalar-mate clauses.
 /-- The site comparison core, before the final evaluation-origin projection.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.
