@@ -198,8 +198,6 @@ private lemma liftExchange_paste_horiz_aux
     boundedConstructibleUpperStarOfMapComp_hom_app_hom, boundedConstructibleLowerStar_map_hom]
   exact h K.obj
 
-set_option profiler true in
--- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Horizontal pasting of base change maps** on bounded constructible complexes: for two
 horizontally pasted commutative squares
 ```
@@ -228,6 +226,7 @@ lemma boundedConstructibleBaseChangeOfMap_app_paste (sq₁ : CommSq πZ f'.left 
       (baseChangeMap 𝐐 sq).app K ≫
         R((f''.left)_*⟦𝐐⟧).map ((leftDerivedUpperStarComp 𝐐 πZ' πZ).hom.app K) := by
     intro K
+    -- Unfold directly to avoid expensive rewrite matching through derived functor objects.
     unfold baseChangeMap
     exact_mod_proofs Adjunction.exchangeRight_app_paste
       (G₁ := L((πP)^*⟦𝐐⟧)) (G₁' := L((πZ)^*⟦𝐐⟧))
