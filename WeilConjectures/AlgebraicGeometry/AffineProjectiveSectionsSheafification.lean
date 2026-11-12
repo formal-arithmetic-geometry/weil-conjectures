@@ -94,6 +94,33 @@ private noncomputable def affineSectionsIso (Y : Scheme.{u}) [IsAffine Y] :
         f.val.app _ (M.presheaf.map (homOfLE _).op ((M.restrictAppIso _ ⊤).hom m))
       exact (ConcreteCategory.congr_hom (f.mapPresheaf.naturality _) _).symm)
 
+-- Compare section scalar actions before introducing the homological complex.
+private theorem affine_restrictTilde_flat (Y : Scheme.{u}) [IsAffine Y]
+    (M : ModuleCat.{u} Γ(Y, ⊤)) [Module.Projective Γ(Y, ⊤) M] :
+    ((restrictFunctor Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M)).IsFlatOver
+      (𝟙 Y) := by
+  have hflat := flatOver_affineAssociatedModule Y M
+    (inferInstance : Module.Flat Γ(Y, ⊤) M)
+  let e := (restrictFunctorIsoPullback Y.isoSpec.hom).app
+    ((tilde.functor Γ(Y, ⊤)).obj M)
+  intro V U hUV
+  let : Module Γ(Y, V.1)
+      Γ((restrictFunctor Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M), U.1) :=
+    Module.compHom _ ((𝟙 Y : Y ⟶ Y).appLE V.1 U.1 hUV).hom
+  let : Module Γ(Y, V.1)
+      Γ((pullback Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M), U.1) :=
+    Module.compHom _ ((𝟙 Y : Y ⟶ Y).appLE V.1 U.1 hUV).hom
+  let a := (SheafOfModules.evaluation Y.ringCatSheaf (op U.1)).mapIso e
+  let e' :
+      Γ((restrictFunctor Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M), U.1) ≃ₗ[Γ(Y, V.1)]
+      Γ((pullback Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M), U.1) :=
+    { a.toLinearEquiv.toAddEquiv with
+      map_smul' := fun r m ↦ a.hom.hom.map_smul _ _ }
+  have : Module.Flat Γ(Y, V.1)
+      Γ((pullback Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj M), U.1) :=
+    hflat V U hUV
+  exact Module.Flat.of_linearEquiv e'
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The chart and section scalar actions require additional definitional-equality checks.
@@ -139,25 +166,7 @@ theorem affine_projective_sections_sheafification
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro n
     have := hprojective n
-    have hflat := flatOver_affineAssociatedModule Y (P.X n)
-      (inferInstance : Module.Flat Γ(Y, ⊤) (P.X n))
-    let e := (restrictFunctorIsoPullback Y.isoSpec.hom).app
-      ((tilde.functor Γ(Y, ⊤)).obj (P.X n))
-    intro V U hUV
-    let : Module Γ(Y, V.1) Γ(C.X n, U.1) :=
-      Module.compHom _ ((𝟙 Y : Y ⟶ Y).appLE V.1 U.1 hUV).hom
-    let : Module Γ(Y, V.1)
-        Γ((pullback Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj (P.X n)), U.1) :=
-      Module.compHom _ ((𝟙 Y : Y ⟶ Y).appLE V.1 U.1 hUV).hom
-    let a := (SheafOfModules.evaluation Y.ringCatSheaf (op U.1)).mapIso e
-    let e' : Γ(C.X n, U.1) ≃ₗ[Γ(Y, V.1)]
-        Γ((pullback Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj (P.X n)), U.1) :=
-      { a.toLinearEquiv.toAddEquiv with
-        map_smul' := fun r m ↦ a.hom.hom.map_smul _ _ }
-    have : Module.Flat Γ(Y, V.1)
-        Γ((pullback Y.isoSpec.hom).obj ((tilde.functor Γ(Y, ⊤)).obj (P.X n)), U.1) :=
-      hflat V U hUV
-    exact Module.Flat.of_linearEquiv e'
+    exact affine_restrictTilde_flat Y (P.X n)
   · intro n
     change ((restrictFunctor Y.isoSpec.hom).obj
       ((tilde.functor Γ(Y, ⊤)).obj (P.X n))).IsQuasicoherent
