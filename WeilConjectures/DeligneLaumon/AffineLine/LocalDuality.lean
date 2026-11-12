@@ -190,8 +190,8 @@ private theorem exists_pairing_of_rescale_equiv
   rw [show (M.rescale c).frobenius x = c • M.frobenius x from
       FrobeniusModule.frobeniusEnd_rescale_apply hc x,
     show (N.rescale t).frobenius (E.toLinearEquiv x) = t • N.frobenius (E.toLinearEquiv x) from
-      FrobeniusModule.frobeniusEnd_rescale_apply (ht ▸ one_ne_zero) _, map_smul,
-    ht, one_smul] at hE
+      FrobeniusModule.frobeniusEnd_rescale_apply (ht ▸ one_ne_zero) _, map_smul] at hE
+  simp only [ht, one_smul] at hE
   have hE' : E.toLinearEquiv (M.frobenius x) = q • N.frobenius (E.toLinearEquiv x) := by
     rw [← hE, smul_smul, hqc, one_smul]
   simp only [LinearEquiv.trans_apply]
