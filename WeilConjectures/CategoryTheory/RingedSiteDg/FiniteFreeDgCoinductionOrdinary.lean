@@ -225,17 +225,11 @@ theorem finiteFreeDgExtension_unit (A : Algebra O) (M : Complex O) :
       (ρ_ M).inv ≫ (M ◁ (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) := by
   rfl
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem right_action_assoc {A : Algebra O} (M : Module A) :
     (action M ▷ A.X) ≫ action M =
       (α_ ((underlying A).obj M) A.X A.X).hom ≫
         (((underlying A).obj M) ◁ (MonObj.mul : A.X ⊗ A.X ⟶ A.X)) ≫ action M := by
   exact congrArg Quiver.Hom.unmop (ModObj.assoc_flip M.X)
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem right_action_unit {A : Algebra O} (M : Module A) :
     (((underlying A).obj M) ◁ (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) ≫ action M =
       (ρ_ ((underlying A).obj M)).hom := by
@@ -252,9 +246,6 @@ private theorem liftUnderlying_eval {A : Algebra O}
     (liftUnderlying core M N f ▷ A.X) ≫ core.evaluation N = action M ≫ f :=
   ((core.hom_universal N ((underlying A).obj M)).surjective (action M ≫ f)).choose_spec
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem liftUnderlying_linear {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Module A) (N : Complex O)
     (f : (underlying A).obj M ⟶ N) :
@@ -274,9 +265,6 @@ private def evaluationOne {A : Algebra O}
     (((underlying A).obj (core.coinduction.obj N)) ◁
       (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) ≫ core.evaluation N
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem liftUnderlying_evaluationOne {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Module A) (N : Complex O)
     (f : (underlying A).obj M ⟶ N) :
@@ -285,9 +273,6 @@ private theorem liftUnderlying_evaluationOne {A : Algebra O}
   rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc,
     liftUnderlying_eval, reassoc_of% (right_action_unit M), Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem action_evaluationOne {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (N : Complex O) :
     action (core.coinduction.obj N) ≫ evaluationOne core N = core.evaluation N := by
@@ -428,9 +413,49 @@ private theorem finiteFreeDualizable (A : Algebra O)
   obtain ⟨r, ⟨e⟩⟩ := finiteFree n
   exact (finiteCopiesDualizable r).of_iso e.symm
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- The representing evaluation and monoidal-opposite transports need a larger budget.
+/-- Construct the core with the closed structure kept as a parameter during the transport proofs. -/
+private theorem coinductionCoreOfClosed (A : Algebra O) [HasLeftDual (mop A.X)]
+    [Closed (mop A.X)] : Nonempty (FiniteFreeCoinductionOrdinaryCore A) := by
+  let := Mod.comparisonNat_iso (mop A.X)
+  refine ⟨{
+    coinduction := mopFunctor (Complex O) ⋙ Mod.localCofree (mop A.X)
+    evaluation M := ((ihom.ev (mop A.X)).app (mop M)).unmop
+    hom_universal := ?_
+    evaluation_natural := ?_
+    hom_action := ?_
+    tensorDual := mopFunctor (Complex O) ⋙ Mod.tensorCofree (mop A.X)
+    tensorDualIso := Iso.refl _
+    tensorDual_action := ?_
+    comparison := Functor.isoWhiskerLeft (mopFunctor (Complex O))
+      (asIso (Mod.comparisonNat (mop A.X)))
+    comparison_evaluation := ?_ }⟩
+  · intro M L
+    constructor
+    · intro f g h
+      apply Quiver.Hom.mop_inj
+      apply (MonoidalClosed.uncurry_injective
+        (A := mop A.X) (X := mop M) (Y := mop L))
+      exact congrArg Quiver.Hom.mop h
+    · intro f
+      refine ⟨(MonoidalClosed.curry (A := mop A.X) (X := mop M) (Y := mop L)
+        f.mop).unmop, ?_⟩
+      exact congrArg Quiver.Hom.unmop (MonoidalClosed.uncurry_curry (A := mop A.X) f.mop)
+  · intro M N f
+    exact congrArg Quiver.Hom.unmop ((ihom.ev (mop A.X)).naturality f.mop)
+  · intro M
+    exact congrArg Quiver.Hom.unmop (Mod.localUncurry_cofreeAct (mop A.X) (mop M))
+  · intro M
+    change _ ≫ 𝟙 _ = (𝟙 _ ▷ A.X) ≫ _
+    simp only [Category.comp_id, id_whiskerRight, Category.id_comp]
+    rfl
+  · intro M
+    change ((Mod.comparisonHom (mop A.X) (mop M)).hom.unmop ▷ A.X) ≫ _ = _
+    simp only [Iso.refl_hom, NatTrans.id_app, id_whiskerRight, Category.id_comp]
+    have h := congrArg Quiver.Hom.unmop
+      (Mod.comparison_evaluation (mop A.X) (mop M))
+    exact h
+
+
 /-- Ordinary finite-free coinduction with its representing evaluation and tensor-dual map.
 
 Source: Stacks 0FRS; the bounded-dual construction in
@@ -471,43 +496,6 @@ theorem finite_free_dg_coinduction_core (A : Algebra O)
         exact ExactPairing.coevaluation_evaluation A.X A.Xᘁ }
   let : HasLeftDual (mop A.X) := ⟨mop A.Xᘁ⟩
   let : Closed (mop A.X) := closedOfHasLeftDual (mop A.X)
-  let := Mod.comparisonNat_iso (mop A.X)
-  refine ⟨{
-    coinduction := mopFunctor (Complex O) ⋙ Mod.localCofree (mop A.X)
-    evaluation M := ((ihom.ev (mop A.X)).app (mop M)).unmop
-    hom_universal := ?_
-    evaluation_natural := ?_
-    hom_action := ?_
-    tensorDual := mopFunctor (Complex O) ⋙ Mod.tensorCofree (mop A.X)
-    tensorDualIso := Iso.refl _
-    tensorDual_action := ?_
-    comparison := Functor.isoWhiskerLeft (mopFunctor (Complex O))
-      (asIso (Mod.comparisonNat (mop A.X)))
-    comparison_evaluation := ?_ }⟩
-  · intro M L
-    constructor
-    · intro f g h
-      apply Quiver.Hom.mop_inj
-      apply (MonoidalClosed.uncurry_injective
-        (A := mop A.X) (X := mop M) (Y := mop L))
-      exact congrArg Quiver.Hom.mop h
-    · intro f
-      refine ⟨(MonoidalClosed.curry (A := mop A.X) (X := mop M) (Y := mop L)
-        f.mop).unmop, ?_⟩
-      exact congrArg Quiver.Hom.unmop (MonoidalClosed.uncurry_curry (A := mop A.X) f.mop)
-  · intro M N f
-    exact congrArg Quiver.Hom.unmop ((ihom.ev (mop A.X)).naturality f.mop)
-  · intro M
-    exact congrArg Quiver.Hom.unmop (Mod.localUncurry_cofreeAct (mop A.X) (mop M))
-  · intro M
-    change _ ≫ 𝟙 _ = (𝟙 _ ▷ A.X) ≫ _
-    simp only [Category.comp_id, id_whiskerRight, Category.id_comp]
-    rfl
-  · intro M
-    change ((Mod.comparisonHom (mop A.X) (mop M)).hom.unmop ▷ A.X) ≫ _ = _
-    simp only [Iso.refl_hom, NatTrans.id_app, id_whiskerRight, Category.id_comp]
-    have h := congrArg Quiver.Hom.unmop
-      (Mod.comparison_evaluation (mop A.X) (mop M))
-    exact h
+  exact coinductionCoreOfClosed A
 
 end CategoryTheory.RingedSiteDg
