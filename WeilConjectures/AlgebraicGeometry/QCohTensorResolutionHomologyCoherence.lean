@@ -44,6 +44,7 @@ noncomputable def tensorResolutionNormalizedRestrictHomologyIso {X Y : Scheme.{u
     (tensorResolutionRestrictionTotalIso j E F)
 
 -- Tensor-resolution comparisons require substantial definitional reduction.
+set_option profiler true in
 /-- Nested chart restriction is compatible with normalized tensor homology. -/
 theorem tensorResolutionNormalizedRestrictHomologyIso_naturality
     (Y : Scheme.{u}) (V U : Y.affineOpens) (h : V.1 ≤ U.1)
