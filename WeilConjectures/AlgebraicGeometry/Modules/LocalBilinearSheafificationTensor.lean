@@ -45,14 +45,13 @@ private theorem local_bilinear_tensor_morphism {X : Scheme.{v}}
       F.obj W →ₗ[X.presheaf.obj W] G.obj W →ₗ[X.presheaf.obj W] K.val.obj W)
     (hβ : ∀ {W Z : X.Opensᵒᵖ} (g : W ⟶ Z) (x : F.obj W) (y : G.obj W),
       β Z (F.map g x) (G.map g y) = K.val.map g (β W x y)) :
-    ∃ φ : (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj F ⊗
-        (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj G ⟶ K,
+    let S : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj ⥤ X.Modules :=
+      PresheafOfModules.sheafification.{v} (𝟙 X.ringCatSheaf.obj)
+    let η := (PresheafOfModules.sheafificationAdjunction.{v} (𝟙 X.ringCatSheaf.obj)).unit
+    ∃ φ : S.obj F ⊗ S.obj G ⟶ K,
       ∀ (W : X.Opensᵒᵖ) (x : F.obj W) (y : G.obj W),
-        φ.val.app W (tmulSection
-          (((PresheafOfModules.sheafificationAdjunction
-            (𝟙 X.ringCatSheaf.obj)).unit.app F).app W x)
-          (((PresheafOfModules.sheafificationAdjunction
-            (𝟙 X.ringCatSheaf.obj)).unit.app G).app W y)) = β W x y := by
+        φ.val.app W (tmulSection ((η.app F).app W x) ((η.app G).app W y)) = β W x y := by
+  dsimp only
   let : Presheaf.IsLocallyInjective (Opens.grothendieckTopology X)
       (𝟙 X.ringCatSheaf.obj) :=
     Presheaf.isLocallyInjective_of_injective _ _ (fun _ ↦ Function.injective_id)

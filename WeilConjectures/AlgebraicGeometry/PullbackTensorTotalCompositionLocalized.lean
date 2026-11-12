@@ -62,7 +62,6 @@ local instance pullbackTensorTotal_hasMapBifunctor (X : Scheme.{u})
     letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
     HomologicalComplex.HasMapBifunctor P N (curriedTensor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (.up ℤ) := by
-  dsimp only
   infer_instance
 
 variable [∀ Z : Scheme.{u},
@@ -78,6 +77,8 @@ private theorem pullbackTensorModelMap_natural (X : Scheme.{u})
       pullbackTensorModelMap X P' N' =
     pullbackTensorModelMap X P N ≫ DerivedCategory.Q.map
       (HomologicalComplex.mapBifunctorMap a b (curriedTensor _) (.up ℤ)) := by
+  let : HasDerivedCategory.{w} X.Modules := inferInstanceAs
+    (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
   let : MonoidalCategory X.Modules := pullbackDescentModuleTensor X
   let : (curriedTensor X.Modules).PreservesZeroMorphisms :=
     SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
