@@ -79,8 +79,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-! ### For a compactification -/
 
-set_option synthInstance.maxHeartbeats 80000 in
--- The instance search through the pasting is slower for `E̲` than for `ℚ̲̄_ℓ`.
+set_option profiler true in
 include ℓ k in
 /-- **The base change theorem for the compactly supported direct image attached to a
 compactification** of bounded constructible `E`-sheaves: for a compactification
