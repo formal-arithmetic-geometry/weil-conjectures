@@ -191,6 +191,8 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q
   coefficientTotalTensor coefficientTensorGenerator
   CochainComplex.IsKFlatIndependentCoefficients homComplex homComplexFunctor
   derivedInternalHomOfUniverses SheafOfModules.monoidalCategory
+  coefficientHomResolution coefficientHomResolutionIso coefficientHomResolutionInverse
+  coefficientHomSectionEvaluation
 
 -- The independent-universe representative square has large dependent module types.
 def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -211,59 +213,6 @@ def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopolo
       (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q))
     (CoefficientClosedStructure.comparison S T)
 
-theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    (R : Sheaf J CommRingCat.{max c v r})
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]
-    (S T : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
-    (M : CoefficientTensorModels.{r, c, v, w} J R S)
-    (u : ∀ (P L : ObjectProperty.FullSubcategory
-        (CochainComplex.IsKFlatIndependentCoefficients.{c, v, max c v r}
-          (J := J) (R := R))),
-      ∀ (N : CochainComplex (SheafOfModules.{max c v r}
-        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ),
-      ∀ (φ : P.1 ⟶ homComplex.{c, v, max c v r, max c v r} (R := R) L.1
-          ((coefficientHomResolution.{r, c, v} J R).obj N)),
-      ∃ ψ : (coefficientTotalTensor.{r, c, v} J R).obj (P.1, L.1) ⟶
-          (coefficientHomResolution.{r, c, v} J R).obj N,
-        ((∀ (p q k : ℤ) (h : p + q = k) (h' : q + p = k) (U : Cᵒᵖ)
-          (x : (P.1.X p).val.obj U) (y : (L.1.X q).val.obj U),
-          (ψ.f k).val.app U (coefficientTensorGenerator.{r, c, v} J R P.1 L.1 p q k h U x y) =
-            coefficientHomSectionEvaluation.{r, c, v} J R P.1 L.1 N φ p q k h' U x y) ∧
-        M.comparison.hom.app (P, L) ≫
-          (S.transpose (DerivedCategory.Q.obj P.1) (DerivedCategory.Q.obj L.1)
-            (DerivedCategory.Q.obj N)).symm
-              (DerivedCategory.Q.map φ ≫
-                (coefficientHomResolutionIso.{r, c, v, w} J R L.1 N).inv) =
-          DerivedCategory.Q.map ψ ≫ coefficientHomResolutionInverse.{r, c, v, w} J R N)) :
-    CoefficientTensorUncurryModel.{r, c, v, w} J R T
-      (tensorModelsComparison J R S T M) := by
-  intro P L N φ
-  obtain ⟨ψ, hψ, he⟩ := u P L N φ
-  refine ⟨ψ, hψ, ?_⟩
-  change (M.comparison.hom.app (P, L) ≫
-    (CoefficientClosedStructure.comparison S T).hom.app
-      (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj L.obj)) ≫
-    (T.transpose _ _ _).symm
-      (DerivedCategory.Q.map φ ≫ (coefficientHomResolutionIso.{r, c, v, w}
-        J R L.obj N).inv) = _
-  rw [Category.assoc]
-  have ht : (CoefficientClosedStructure.comparison S T).hom.app
-        (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj L.obj) ≫
-      (T.transpose _ _ _).symm
-        (DerivedCategory.Q.map φ ≫
-          (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) =
-    (S.transpose _ _ _).symm
-        (DerivedCategory.Q.map φ ≫
-          (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) := by
-    apply (S.transpose _ _ _).injective
-    rw [CoefficientClosedStructure.comparison_transpose, Equiv.apply_symm_apply,
-      Equiv.apply_symm_apply]
-  rw [ht]
-  exact he
-
 /-- Change the tensor model by the same adjoint comparison, retaining ordinary uncurrying. -/
 def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -275,7 +224,30 @@ def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (M : CoefficientTensorModels.{r, c, v, w} J R S) :
     CoefficientTensorModels.{r, c, v, w} J R T where
   comparison := tensorModelsComparison J R S T M
-  uncurry_model := tensorModelsUncurryModel J R S T M M.uncurry_model
+  uncurry_model := by
+    intro P L N φ
+    obtain ⟨ψ, hψ, he⟩ := M.uncurry_model P L N φ
+    refine ⟨ψ, hψ, ?_⟩
+    change (M.comparison.hom.app (P, L) ≫
+      (CoefficientClosedStructure.comparison S T).hom.app
+        (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj L.obj)) ≫
+      (T.transpose _ _ _).symm
+        (DerivedCategory.Q.map φ ≫ (coefficientHomResolutionIso.{r, c, v, w}
+          J R L.obj N).inv) = _
+    rw [Category.assoc]
+    have ht : (CoefficientClosedStructure.comparison S T).hom.app
+          (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj L.obj) ≫
+        (T.transpose _ _ _).symm
+          (DerivedCategory.Q.map φ ≫
+            (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) =
+      (S.transpose _ _ _).symm
+          (DerivedCategory.Q.map φ ≫
+            (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) := by
+      apply (S.transpose _ _ _).injective
+      rw [CoefficientClosedStructure.comparison_transpose, Equiv.apply_symm_apply,
+        Equiv.apply_symm_apply]
+    rw [ht]
+    exact he
 
 /-- Fixed normalized closed structures, with the old representative models transported
 by the uniquely evaluation-preserving comparison. -/
