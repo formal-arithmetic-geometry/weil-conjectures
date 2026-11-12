@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
 
 /-!
 # Integral models in the ambient derived category
@@ -30,8 +31,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-set_option maxHeartbeats 1000000 in
-set_option profiler true in
 -- the existential statement is matched against the large types of the coefficient changes
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
@@ -49,22 +48,9 @@ theorem exists_derivedCompleteIntegers_iso_integralModel (ℓ : ℕ) [Fact ℓ.P
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀) ≅ K) := by
-  let K' : PadicAlgClConstructible X ℓ := ⟨K, by exact_mod_proofs hK⟩
-  have H := exists_padicAlgCl_iso_integralModel X ℓ K'
-  choose E K₀ he using H
-  obtain ⟨e⟩ := he
-  have hobj : (ObjectProperty.ι _).obj K' = K := rfl
-  have i₁ := (ObjectProperty.liftCompιIso (boundedConstructible (padicAlgClRingObj X ℓ))
-    ((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙ derivedExtendScalarsToPadicAlgCl X ℓ E)
-    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X ℓ E K)).app
-      ((boundedConstructibleExtendScalars X ℓ E).obj K₀)
-  have i₂ := (derivedExtendScalarsToPadicAlgCl X ℓ E).mapIso
-    ((boundedConstructibleExtendScalarsCompatibility X ℓ E).app K₀)
-  have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
-  obtain ⟨n, hn⟩ := hK₀.1.1
-  have hc := derivedCompleteIntegers_of_boundedConstructible hK₀
-  have hne := Nonempty.intro ((i₁ ≪≫ i₂).symm ≪≫ (ObjectProperty.ι _).mapIso e ≪≫ eqToIso hobj)
-  refine ⟨E, K₀.obj, n, by exact_mod_proofs hc, hn, hK₀, ?_⟩
-  exact hne
+  obtain ⟨E, K₀, he⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ X K hK
+  obtain ⟨n, hn⟩ := K₀.property.1.1
+  exact ⟨E, K₀.obj, n, derivedCompleteIntegers_of_boundedConstructible K₀.property, hn,
+    K₀.property, he⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
