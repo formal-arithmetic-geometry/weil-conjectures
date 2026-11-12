@@ -267,6 +267,25 @@ lemma mateEquiv_inv_app_comp_conjugateIsoEquiv (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ
   dsimp only [Functor.comp_obj]
   simp only [Category.comp_id]
 
+/-- The form of `mateEquiv_inv_app_comp_conjugateIsoEquiv` for right adjoint comparisons `ρ` and
+composition isomorphisms `U` given by their defining equations. -/
+lemma mateEquiv_inv_app_comp_conjugateIsoEquiv' (ιf : Lf ⋙ TY ≅ TX ⋙ Lfₜ)
+    (ιg : Lg ⋙ TZ ≅ TY ⋙ Lgₜ) (ιgf : Lgf ⋙ TZ ≅ TX ⋙ Lgfₜ) (e : Lgf ≅ Lf ⋙ Lg)
+    (eₜ : Lgfₜ ≅ Lfₜ ⋙ Lgₜ)
+    (h : NatTrans.SquareCompatible ιgf (Functor.pasteSquareIso ιf ιg) e.hom eₜ.hom)
+    {ρf : Rf ⋙ TX ⟶ TY ⋙ Rfₜ} {ρg : Rg ⋙ TY ⟶ TZ ⋙ Rgₜ} {ρgf : Rgf ⋙ TX ⟶ TZ ⋙ Rgfₜ}
+    (hρf : ρf = (mateEquiv adjf adjfₜ (TwoSquare.mk _ _ _ _ ιf.inv)).natTrans)
+    (hρg : ρg = (mateEquiv adjg adjgₜ (TwoSquare.mk _ _ _ _ ιg.inv)).natTrans)
+    (hρgf : ρgf = (mateEquiv adjgf adjgfₜ (TwoSquare.mk _ _ _ _ ιgf.inv)).natTrans)
+    {U : Rgf ≅ Rg ⋙ Rf} {Uₜ : Rgfₜ ≅ Rgₜ ⋙ Rfₜ}
+    (hU : U = conjugateIsoEquiv adjgf (adjf.comp adjg) e.symm)
+    (hUₜ : Uₜ = conjugateIsoEquiv adjgfₜ (adjfₜ.comp adjgₜ) eₜ.symm) (K : AZ) :
+    TX.map (U.hom.app K) ≫ ρf.app (Rg.obj K) ≫ Rfₜ.map (ρg.app K) =
+      ρgf.app K ≫ Uₜ.hom.app (TZ.obj K) := by
+  subst hρf hρg hρgf hU hUₜ
+  exact mateEquiv_inv_app_comp_conjugateIsoEquiv adjf adjg adjgf adjfₜ adjgₜ adjgfₜ ιf ιg ιgf e eₜ
+    h K
+
 end VerticalComp
 
 end CategoryTheory
