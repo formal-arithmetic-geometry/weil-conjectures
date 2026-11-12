@@ -257,10 +257,7 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   have hA' := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId_self Λ
     (Category.id_comp f') ((N₁.nearbyCycles Λ).obj C)
   run_tac Lean.logInfo m!"PH329: square and unit identities: {(← Lean.getRemainingHeartbeats) / 1000}"
-  have hIA : (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f')).hom.app
-      ((N₁.nearbyCycles Λ).obj C) = (leftDerivedUpperStarId Λ X₂').inv.app _ := by
-    rw [← cancel_mono ((leftDerivedUpperStarId Λ X₂').hom.app _), hA', Iso.inv_hom_id_app]
-    rfl
+  have hIA := (Iso.comp_hom_eq_id ((leftDerivedUpperStarId Λ X₂').app _)).1 hA'
   run_tac Lean.logInfo m!"PH329: proved hIA: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
   run_tac Lean.logInfo m!"PH329: obtained naturality: {(← Lean.getRemainingHeartbeats) / 1000}"
