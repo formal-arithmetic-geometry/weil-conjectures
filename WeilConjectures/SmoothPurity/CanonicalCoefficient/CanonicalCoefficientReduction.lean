@@ -264,7 +264,7 @@ def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (M : CoefficientTensorModels.{r, c, v, w} J R S) :
     CoefficientTensorModels.{r, c, v, w} J R T where
   comparison := tensorModelsComparison J R S T M
-  uncurry_model := tensorModelsUncurryModel J R S T
+  uncurry_model := tensorModelsUncurryModel J R S T M
     (tensorModelsComparison J R S T M) rfl
 
 /-- Fixed normalized closed structures, with the old representative models transported
