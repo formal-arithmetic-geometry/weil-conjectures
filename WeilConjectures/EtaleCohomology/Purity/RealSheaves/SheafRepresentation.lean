@@ -100,10 +100,10 @@ theorem exists_linearEquiv_dual_of_linearEquiv_dual (M : FrobeniusModule k) {N :
     (show Module.Dual k M.carrier from φ) (c.symm (ψ ∘ₗ T.toLinearMap))
   rw [dual_frobenius_apply, LinearMap.comp_apply, LinearEquiv.coe_toLinearMap, key]
 
-set_option profiler true in
 /-- Dualising invariant sections of a contragredient representation gives coinvariants,
 compatibly with the action of a group element. -/
-private theorem exists_linearEquiv_dual_of_invariants {G : Type*} [Group G] {V V' : Type*} [AddCommGroup V] [Module k V]
+private theorem exists_linearEquiv_dual_of_invariants {G : Type*} [Group G] {V V' : Type*}
+    [AddCommGroup V] [Module k V]
     [FiniteDimensional k V] [AddCommGroup V'] [Module k V'] (ρ : Representation k G V)
     (ρ' : Representation k G V') (H : Subgroup G) [H.Normal] (γ : G)
     (b : ρ'.Equiv ρ.dual) (M : FrobeniusModule k)
@@ -387,7 +387,6 @@ private theorem repLinearEquivOfIso_apply {k G : Type*} [CommRing k] [Monoid G]
 
 variable {W l}
 
-set_option profiler true in
 /-- A lisse representation `ρ` of `W(C₀)` is the Weil fundamental representation of a lisse Weil
 sheaf `ℱ` on `C₀`: the local Frobenius `F_x` on the stalk `ℱ_x̄` has the characteristic
 polynomial of `ρ (Frob_x)` at every closed point `x`, and the geometric coinvariants
