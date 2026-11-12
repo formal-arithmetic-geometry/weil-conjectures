@@ -44,8 +44,7 @@ omit [Fact (ringChar k₀ ≠ l)] in
 /-- The powers of the image of a scalar multiplication of `ℓ`-adic sheaves under a functor. -/
 lemma pow_map_adicSheafSmul {D : Type*} [Category D] {Z : Scheme.{u}} (F : AdicSheaf l Z ⥤ D)
     (c : PadicAlgCl l) (M : AdicSheaf l Z) (n : ℕ) :
-    @HPow.hPow (End (F.obj M)) ℕ (End (F.obj M)) instHPow
-        (F.map (AdicSheaf.smul (ULift.up c) M)) n =
+    (End.of (F.map (AdicSheaf.smul (ULift.up c) M)) ^ n).asHom =
       F.map (AdicSheaf.smul (ULift.up (c ^ n)) M) := by
   induction n with
   | zero =>
@@ -60,8 +59,7 @@ omit [Fact (ringChar k₀ ≠ l)] in
 /-- The powers of the image of the multiplication by `b ∈ ℚ̄_ℓˣ` under a functor. -/
 lemma pow_map_smulIso_hom {D : Type*} [Category D] {Z : Scheme.{u}} (F : AdicSheaf l Z ⥤ D)
     (b : (PadicAlgCl l)ˣ) (M : AdicSheaf l Z) (n : ℕ) :
-    @HPow.hPow (End (F.obj M)) ℕ (End (F.obj M)) instHPow
-        (F.map (WeilCoefficients.smulIso b M).hom) n =
+    (End.of (F.map (WeilCoefficients.smulIso b M).hom) ^ n).asHom =
       F.map (AdicSheaf.smul (ULift.up ((b : PadicAlgCl l) ^ n)) M) :=
   pow_map_adicSheafSmul F (b : PadicAlgCl l) M n
 
@@ -99,10 +97,9 @@ lemma endTensorUnitRingEquiv_traceOrZero_galoisUpperStarEnd_pow_smulIso {Ω : Ty
     (b : (PadicAlgCl l)ˣ) (n : ℕ) :
     CondensedRing.endTensorUnitRingEquiv l Ω (traceOrZero
       (galoisUpperStarEnd σ x h τ ((adicSheafEquivCondensedMod l Y).functor.obj H)
-          (@HPow.hPow (End ((adicSheafEquivCondensedMod l Y).functor.obj H)) ℕ
-            (End ((adicSheafEquivCondensedMod l Y).functor.obj H)) instHPow
-            ((adicSheafEquivCondensedMod l Y).functor.mapIso (WeilCoefficients.smulIso b H)).hom
-            n))) =
+          (End.of
+            ((adicSheafEquivCondensedMod l Y).functor.mapIso (WeilCoefficients.smulIso b H)).hom ^
+            n).asHom)) =
       (b : PadicAlgCl l) ^ n * LinearMap.trace (PadicAlgCl l) _
         ((WeilCoefficients.toModuleCat l).map (galoisGlobalSections σ x h H)).hom := by
   rw [Functor.mapIso_hom, pow_map_smulIso_hom]
