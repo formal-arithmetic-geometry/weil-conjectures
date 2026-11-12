@@ -34,8 +34,13 @@ noncomputable local instance (priority := 2000) openOverInternalHomCycleHomology
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 attribute [local irreducible] homComplexFunctor
 
-/- Inference for the composite open-restriction comparisons exceeds the default heartbeats.
--/
+/-- Postcompose a commuting square without rewriting its object expressions. -/
+private theorem openOver_comp_naturality
+    {C : Type*} [Category C] {A B D E G : C}
+    {f : A ⟶ B} {g : B ⟶ E} {h : A ⟶ D} {i : D ⟶ E}
+    (sq : f ≫ g = h ≫ i) (j : E ⟶ G) : f ≫ g ≫ j = h ≫ i ≫ j := by
+  rw [← Category.assoc, sq, Category.assoc]
+
 /- Transport of source and target cycles and homology through internal Hom.
 Source: Stacks Project, Tag 08DL; step 2 of the parent restriction-diagram plan.
 (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares).
@@ -179,13 +184,15 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
   let v := e (T.cycles (-n)) (J.homology 0) ≪≫ H (z T (-n)) (d J 0)
   refine ⟨b, s, t, v, ?_, ?_, ?_, ?_⟩
   · dsimp only [t, H, Iso.trans_hom, Iso.refl_hom]
-    rw [← Category.assoc, he _ _ _ _ (T.iCycles (-n)) (𝟙 (J.X 0))]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (T.iCycles (-n)) (𝟙 (J.X 0))) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp]
     congr 2
     exact zi T (-n)
   · dsimp only [t, s, H, Iso.trans_hom, Iso.refl_hom]
-    rw [← Category.assoc, he _ _ _ _ (𝟙 (T.cycles (-n))) (J.iCycles 0)]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (𝟙 (T.cycles (-n))) (J.iCycles 0)) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
@@ -194,14 +201,16 @@ theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     erw [Category.comp_id]
     exact zi J 0
   · dsimp only [v, s, H, Iso.trans_hom]
-    rw [← Category.assoc, he _ _ _ _ (𝟙 (T.cycles (-n))) (J.homologyπ 0)]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (𝟙 (T.cycles (-n))) (J.homologyπ 0)) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2
     apply (cancel_epi (z J 0).inv).1
     simpa only [Category.assoc, Iso.inv_hom_id_assoc] using zp J 0
   · dsimp only [v, b, H, Iso.trans_hom]
-    rw [← Category.assoc, he _ _ _ _ (T.homologyπ (-n)) (𝟙 (J.homology 0))]
+    refine (openOver_comp_naturality
+      (he _ _ _ _ (T.homologyπ (-n)) (𝟙 (J.homology 0))) _).trans ?_
     simp only [Category.assoc, hc,
       Functor.map_id, Category.id_comp, Category.comp_id]
     congr 2

@@ -44,7 +44,6 @@ private theorem openOver_projection_square_comp
     F.map (i ≫ p) ≫ e = c ≫ i' ≫ p' := by
   rw [Functor.map_comp, Category.assoc, ← hp, ← Category.assoc, hc, Category.assoc]
 
-set_option profiler true in
 /-- The projection square on Hom cycles and the cycle-to-homology quotient square.
 Source: Stacks Project, Tags 0A8X and 08DL; steps 1 and 2 of the parent plan.
 (blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison).
