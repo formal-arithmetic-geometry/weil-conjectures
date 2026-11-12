@@ -323,11 +323,13 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₂).obj B)
   nth_rewrite 1 [reassoc_of% h_tensor]
   simp only [MonoidalCategory.tensorHom_comp_tensorHom]
-  trace_state
-  rw [boundedConstructibleUpperStarComp_square_coherence_comp (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
-      ΔY q p₁ p₁' h₁ h₂ h₃ h₄,
-    boundedConstructibleUpperStarComp_square_coherence_comp (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
-        ΔY q p₂ p₂' h₁ h₂' h₃' h₄']
+  have h_coherence₁ := boundedConstructibleUpperStarComp_square_coherence_comp
+    (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX
+      ΔY q p₁ p₁' h₁ h₂ h₃ h₄
+  have h_coherence₂ := boundedConstructibleUpperStarComp_square_coherence_comp
+    (Profinite.padicAlgClRingObj ℓ) ℓ f ΔX ΔY q p₂ p₂' h₁ h₂' h₃' h₄'
+  have h_coherence := congrArg₂ (fun a b ↦ a ⊗ₘ b) h_coherence₁ h_coherence₂
+  rw [h_coherence]
 end Coherence
 
 end AlgebraicGeometry.ProEtale.CondensedRing
