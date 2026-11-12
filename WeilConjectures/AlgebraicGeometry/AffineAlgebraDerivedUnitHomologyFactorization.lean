@@ -51,6 +51,7 @@ private theorem restriction_exact {Z : TopCat.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- The scalar-restriction comparison unfolds the ringed-space and sheaf category instances.
 /-- Under the cohomology comparison, the derived affine algebra unit is the
 underived unit applied to the cohomology module.

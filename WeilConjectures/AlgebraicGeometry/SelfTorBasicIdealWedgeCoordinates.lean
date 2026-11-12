@@ -84,6 +84,7 @@ private theorem conormal_wedge_coordinate_restrict
   exact hs
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Keep the nested derived tensor and chart identifications folded during elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
