@@ -332,6 +332,17 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
     (g) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
+  have hlift : ∀ (j : FiniteGaloisIntermediateField L Ω) (b : (galoisTower Ω h).Γ j), ∃ k,
+      pullbackAction h _ specGaloisAction_comp (act k) ≫ (galoisTower Ω h).π j =
+        (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := fun j b ↦ by
+    obtain ⟨k, hk⟩ := hact j b
+    refine ⟨k, ?_⟩
+    have hres : (act k).restrictNormal j = b := by
+      ext x
+      exact (AlgEquiv.restrictNormal_commutes (act k) (j : IntermediateField L Ω) x).trans (hk x)
+    have := pullbackAction_comp_galoisLevelProjection h j (act k)
+    rw [hres] at this
+    exact this
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
