@@ -114,7 +114,6 @@ def affineSpectrumTensorComplexIso {X X' : Scheme.{u}}
       ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm)
     (.up ℤ)).app P
 
-set_option maxHeartbeats 600000 in
 -- Evaluating the localization lift includes the exact stalk and pullback factors.
 private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (i : ℤ)
@@ -164,7 +163,6 @@ private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [Is
     H0.map_id, F0.map_id, Category.comp_id]
 
 
-set_option maxHeartbeats 1000000 in
 -- Unifying the two stalk-ring diagrams and their tensor models needs this budget.
 /-- The base-derived tensor comparison is invariant under affine spectrum coordinates
 before introducing either inverse counit for g'. No K-flatness is needed here.
