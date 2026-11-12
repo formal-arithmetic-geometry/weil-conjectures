@@ -92,27 +92,19 @@ private theorem counit_of_unit_normalizations
   apply (cancel_epi s).mp
   have hl : s ≫ LY'.map (β.hom.app (QA.obj K)) ≫
       b.counit.app (G'.obj (QA.obj K)) =
-    eLY.hom.app (F.obj (RX.obj K)) ≫
-      QB.map (LY.map β₀ ≫ εY) ≫
-      ηG.app K := by
+    eLY.hom.app (F.obj (RX.obj K)) ≫ QB.map (LY.map β₀ ≫ εY) ≫ ηG.app K := by
     dsimp only [s]
     rw [← Functor.map_comp_assoc]
     simp only [Category.assoc]
     rw [hβ]
     simp only [Functor.map_comp, Category.assoc]
-    have hn : LY'.map
-        (RY'.map (ηG.app K)) ≫
-        b.counit.app (G'.obj (QA.obj K)) =
-      b.counit.app (QB.obj (G.obj K)) ≫
-        ηG.app K :=
+    have hn : LY'.map (RY'.map (ηG.app K)) ≫ b.counit.app (G'.obj (QA.obj K)) =
+      b.counit.app (QB.obj (G.obj K)) ≫ ηG.app K :=
       b.counit.naturality (ηG.app K)
     rw [hn]
-    rw [← Category.assoc (LY'.map
-      (ηRY.app (G.obj K))), hb]
-    have hf : LY'.map (QY.map β₀) ≫
-        eLY.hom.app (RY.obj (G.obj K)) =
-      eLY.hom.app (F.obj (RX.obj K)) ≫
-        QB.map (LY.map β₀) :=
+    rw [← Category.assoc (LY'.map (ηRY.app (G.obj K))), hb]
+    have hf : LY'.map (QY.map β₀) ≫ eLY.hom.app (RY.obj (G.obj K)) =
+      eLY.hom.app (F.obj (RX.obj K)) ≫ QB.map (LY.map β₀) :=
       eLY.hom.naturality β₀
     simp only [Category.assoc]
     rw [reassoc_of% hf]
@@ -122,27 +114,19 @@ private theorem counit_of_unit_normalizations
       QB.map (α₀ ≫ G.map εX) ≫ ηG.app K := by
     dsimp only [s]
     simp only [Functor.map_comp, Category.assoc]
-    have hn : LY'.map
-        (F'.map (ηRX.app K)) ≫
-        α.hom.app (RX'.obj (QA.obj K)) =
-      α.hom.app (QX.obj (RX.obj K)) ≫
-        G'.map (LX'.map
-          (ηRX.app K)) :=
+    have hn : LY'.map (F'.map (ηRX.app K)) ≫ α.hom.app (RX'.obj (QA.obj K)) =
+      α.hom.app (QX.obj (RX.obj K)) ≫ G'.map (LX'.map (ηRX.app K)) :=
       α.hom.naturality (ηRX.app K)
     rw [reassoc_of% hn]
     simp only [Functor.comp_obj, ← Functor.map_comp]
     rw [ha, Functor.map_comp]
-    simp only [Category.assoc]
     rw [reassoc_of% hα]
-    have hg : QB.map (G.map εX) ≫
-        ηG.app K =
-      ηG.app (LX.obj (RX.obj K)) ≫
-        G'.map (QA.map εX) :=
+    have hg : QB.map (G.map εX) ≫ ηG.app K =
+      ηG.app (LX.obj (RX.obj K)) ≫ G'.map (QA.map εX) :=
       ηG.naturality εX
     rw [← hg]
   rw [hl, hr, h₀]
 
-set_option trace.profiler true in
 /-- On a K-injective complex on the inverse-image open, restricting the normalized
 composition comparison and then applying the base-open counit agrees with first
 using the open-restriction comparison and then pushing forward the source-open counit.
