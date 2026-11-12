@@ -103,7 +103,6 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
-set_option profiler true in
 include hmu hsheaf in
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma projection_totalTensorSquare_of_sheaf
@@ -145,5 +144,6 @@ lemma projection_totalTensorSquare_of_sheaf
     (((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
   refine tensorSquare_paste_summand hpull' hnZ ?_ hs hn hy hd
   erw [CochainComplex.ιTensorObj_tensorHom_f, hcomp P p, hcomp T q]
+  rfl
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
