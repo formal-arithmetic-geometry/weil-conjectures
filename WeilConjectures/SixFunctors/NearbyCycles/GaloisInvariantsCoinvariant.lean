@@ -129,14 +129,16 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant (a : ℤ) [K.Is
   rw [show CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf =
     (CondensedRing.upperStarLowerStarAdjunction Λ ginf).derivedAdjunction from rfl, hR]
   let D := Adjunction.derivedUnitIso (f := (ginf)^*⟦Λ⟧) (g := (ginf)_*⟦Λ⟧) K a hK
+  let U := ((CondensedRing.upperStarLowerStarAdjunction Λ ginf).mapHomologicalComplex _).unit.app K
+  change G.map (D.inv ≫ DerivedCategory.Q.map (T.complexTrace Λ hd K hc ≫ U) ≫ D.hom) ≫ φ = φ
   have key := T.map_complexTrace_comp_unit_comp_eq_of_invariant Λ hd K hc
     (DerivedCategory.Q ⋙ G) hG act hact hlift hW (G.map D.hom ≫ φ) fun i ↦ by
       have h := derivedUnitIso_hom_comp_derivedUnitTransport_self Λ ginf (act i) (hact i) K a hK
       rw [Functor.comp_map, ← Category.assoc, ← G.map_comp, ← h, G.map_comp, Category.assoc,
         hφ i]
   rw [Functor.comp_map] at key
-  rw [G.map_comp]
-  rw [G.map_comp]
+  rw [G.map_comp D.inv (DerivedCategory.Q.map (T.complexTrace Λ hd K hc ≫ U) ≫ D.hom)]
+  rw [G.map_comp (DerivedCategory.Q.map (T.complexTrace Λ hd K hc ≫ U)) D.hom]
   rw [Category.assoc]
   rw [Category.assoc]
   rw [key]
