@@ -217,13 +217,10 @@ theorem representative_uncurry_evaluation
         coefficientHomResolutionInverse.{u, t + 1, t, (max u (t + 1)) + 1} J R I = 𝟙 _ := by
       exact (augmentationIso.{t + 1, t, u, (max u (t + 1)) + 1} J R I).hom_inv_id
     erw [hr, Category.comp_id] at hsquare
-    change _ ≫ (S.transpose _ _ _).symm
-      (DerivedCategory.Q.map φ' ≫ (coefficientHomResolutionIso J R L I).inv) = _ at hsquare
-    dsimp only [φ'] at hsquare
-    erw [CategoryTheory.Functor.map_comp] at hsquare
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
-      simpa only [Category.assoc, homModelMap, r] using hsquare
+      simpa only [φ', CategoryTheory.Functor.map_comp, Category.assoc, homModelMap, r]
+        using hsquare
 
 end Representatives
 end WeilConjectures.IntegralHom
