@@ -62,7 +62,6 @@ lemma mateEquiv_inv_eq_of_unit_comp_map_hom (adj₁ : L₁ ⊣ R₁) (adj₂ : L
   rw [← h, Category.assoc, Category.assoc, ← Functor.map_comp,
     Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
-  rfl
 
 /-- **An abstract coherence square for comparisons of structure isomorphisms.** Let
 `c : P ⋙ E' ≅ E ⋙ P'` be a comparison of two functors `P` and `P'` along `E` and `E'`. Suppose
@@ -274,6 +273,7 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
   rfl
 
+set_option profiler true in
 /-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
 adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
 lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
