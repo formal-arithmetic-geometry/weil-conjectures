@@ -361,12 +361,21 @@ theorem picard_h1_fixed_model_comparison
     let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
     let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
     trace "PH298: fibre trivialization selected"
-    obtain ⟨φ, e, ei, hmaps⟩ := picard_residue_cycle_homology_geometric_maps
+    have hcompare := picard_residue_cycle_homology_geometric_maps
       f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
       (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
+    trace "PH298: residue comparison theorem applied"
+    let φ := hcompare.choose
+    let e := hcompare.choose_spec.choose
+    let ei := hcompare.choose_spec.choose_spec.choose
+    have hmaps := hcompare.choose_spec.choose_spec.choose_spec
     trace "PH298: residue comparisons selected"
     refine residue_joint_coordinates W U p m K C (fun i ↦ (hC i).1)
-      (fun i ↦ (hC i).2.2.1) e0 e1 _ _ _ e ei φ hmaps ?_
+      (fun i ↦ (hC i).2.2.1) e0 e1 _ _
+      (fun i ↦ structureSheafCohomologyPullback
+        (((Over.pullback (S.fromSpecResidueField s)).map
+          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+            (ui i) (hui i))).left) 1) e ei φ hmaps ?_
     trace "PH298: joint coordinates applied"
     exact affine_betti_model_residue_minimality W _ w U hwU hU K hK.1 hrank hE
 
