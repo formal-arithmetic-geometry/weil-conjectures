@@ -218,6 +218,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
+private theorem reductionExtension_eq_scalarExtension (n : ℕ) :
+    integralReductionChangeOfRings l E Y D hl n = scalarReductionExtension l E Y n := rfl
+
 set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -246,23 +249,20 @@ private theorem normalizedBeta_eq (n : ℕ)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
   let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
-  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
-    integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence,
-    completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at *
-  apply (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2
-  intro i j k hij U x y
-  subst k
-  have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
-    (hbeta i j U x y)
-  simp only [nativeReductionPair_eq_generator] at hh
-  dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
-    coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
-  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
-    integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence,
-    completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at hh ⊢
-  exact hh
+  simp only [reductionExtension_eq_scalarExtension] at beta hbeta ⊢
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at beta hbeta ⊢
+  apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
+  · intro i j k hij U x y
+    subst k
+    have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
+      (hbeta i j U x y)
+    simp only [nativeReductionPair_eq_generator] at hh
+    dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
+      coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
+    dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hh ⊢
+    exact hh
+  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem finiteCochainModel_reductionCounit (n : ℕ)
@@ -348,6 +348,7 @@ private theorem nativeReductionMonoidal
       run_tac Lean.logInfo "PH324: before normalization"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
       let := hbeta
+      simp only [reductionExtension_eq_scalarExtension] at beta hgen ⊢
       run_tac Lean.logInfo "PH324: before normalizedBeta_eq"
       have hbκ : (asIso beta).symm = κ.app (P, Q) := by
         rw [hc P Q]
