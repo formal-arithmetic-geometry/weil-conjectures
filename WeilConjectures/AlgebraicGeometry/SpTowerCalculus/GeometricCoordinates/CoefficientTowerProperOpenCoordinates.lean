@@ -153,7 +153,6 @@ private noncomputable def graphPushIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (SemilinearProperOpen.coefficientMap_forget_eq (graphRings l E) (graphTransitions l E) f)
 
 -- Keep the adjacent maps abstract until the equality transport is performed once.
-set_option maxHeartbeats 900000 in
 -- The section pins compare functors on large coefficient-system categories.
 private structure OrdinaryModel
     (σ : ∀ T : Scheme.{u}, ∀ n,
@@ -180,13 +179,16 @@ private structure OrdinaryModel
   evalP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ),
     push f ⋙ EE l E Y (σ Y) n ≅
       EE l E X (σ X) n ⋙ proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f
+  -- `pushSection` is the identity; its type exposes the carrier conversion directly.
   horizontal : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : SS l E X (σ X))
     {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
     (x : ((EE l E Y (σ Y) m).obj ((push f).obj M)).val.obj V),
-    ((evalP f n).hom.app M).val.app V
-        (SpTowerShriek.HS l E Y (σ Y) h ((push f).obj M) V x) =
+    SpTowerShriek.pushSection (SpTowerShriek.R l E n) f ((EE l E X (σ X) n).obj M) V
+      (((evalP f n).hom.app M).val.app V
+        (SpTowerShriek.HS l E Y (σ Y) h ((push f).obj M) V x)) =
       SpTowerShriek.HS l E X (σ X) h M (SpTowerShriek.chart f V)
-        (((evalP f m).hom.app M).val.app V x)
+        (SpTowerShriek.pushSection (SpTowerShriek.R l E m) f ((EE l E X (σ X) m).obj M) V
+          (((evalP f m).hom.app M).val.app V x))
   comparison : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : SS l E X (σ X) ⥤ SS l E Y (σ Y)) (_d : G ≅ push f),
     (presentation X).inverse ⋙ G ⋙ (presentation Y).functor ≅
@@ -202,7 +204,44 @@ private structure OrdinaryModel
 
 attribute [local instance] OrdinaryModel.additive OrdinaryModel.inverseAdditive
 
-set_option maxHeartbeats 900000 in
+-- Check the carrier conversion before specializing the abstract rings to the quotient tower.
+private theorem ordinaryPushHorizontal (A : ℕ → Type u) [∀ n, CommRing (A n)]
+    (φ : ∀ n, CommRingCat.of (ULift.{u + 1} (A (n + 1))) ⟶
+      CommRingCat.of (ULift.{u + 1} (A n))) :
+    let C : ℕ → CommRingCat.{u + 1} := fun n ↦ CommRingCat.of (ULift.{u + 1} (A n))
+    ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : VaryingRing.Modules C φ X)
+      {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
+      (x : ((VaryingRing.eval C φ Y m).obj ((VaryingRing.push C φ f).obj M)).val.obj V),
+      SpTowerShriek.pushSection (A n) f ((VaryingRing.eval C φ X n).obj M) V
+        (((VaryingRing.moduleEvalP C φ f n).hom.app M).val.app V
+          (SpTowerShriek.transitionValue (ProEt.topology Y) (VaryingRing.coefficients C Y)
+            (VaryingRing.coefficientTransition C φ Y) h ((VaryingRing.push C φ f).obj M) V x)) =
+        SpTowerShriek.transitionValue (ProEt.topology X) (VaryingRing.coefficients C X)
+          (VaryingRing.coefficientTransition C φ X) h M (SpTowerShriek.chart f V)
+          (SpTowerShriek.pushSection (A m) f ((VaryingRing.eval C φ X m).obj M) V
+            (((VaryingRing.moduleEvalP C φ f m).hom.app M).val.app V x)) := by
+  intro C X Y f M m n h V x
+  exact SpTowerShriek.canonicalPushHorizontal C φ f M h V x
+
+private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (G : SS l E X (σgraph l E X) ⥤ SS l E Y (σgraph l E Y))
+    (d : G ≅ VaryingRing.push (graphRings l E) (graphTransitions l E) f)
+    (M : SemilinearProperOpen.Modules (graphRings l E) (graphTransitions l E) X)
+    (n : ℕ) (V : Y.ProEtᵒᵖ) :
+    HEq (fun x ↦ ((Functor.leftUnitor (G ⋙ 𝟭 _) ≪≫ Functor.rightUnitor G ≪≫ d ≪≫
+      (graphPushIso l E f).symm).hom.app M).val.app (op (n, V.unop)) x)
+      (fun x ↦ (((EE l E Y (σgraph l E Y) n).map (d.hom.app M) ≫
+        (VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app
+          V x)) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app,
+    Functor.rightUnitor_hom_app]
+  apply heq_of_eq
+  funext x
+  simp only [Iso.symm_hom, graphPushIso, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  exact ((VaryingRing.moduleEvalP_existsUnique
+    (graphRings l E) (graphTransitions l E) f n).choose_spec.1 M V.unop _).symm
+
 -- Equality transport identifies the full coefficient-system presentation.
 private noncomputable def ordinaryModel
     (σ : ∀ T : Scheme.{u}, ∀ n,
@@ -221,18 +260,10 @@ private noncomputable def ordinaryModel
     push := fun f ↦ VaryingRing.push (graphRings l E) (graphTransitions l E) f
     evalP := fun f n ↦ VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n
     horizontal := fun {X Y} f M {m n} h V x ↦
-      SpTowerShriek.canonicalPushHorizontal (graphRings l E) (graphTransitions l E) f M h V x
+      ordinaryPushHorizontal (SpTowerShriek.R l E) (graphTransitions l E) f M h V x
     comparison := fun f G d ↦
       Functor.leftUnitor _ ≪≫ Functor.rightUnitor _ ≪≫ d ≪≫ (graphPushIso l E f).symm
-    comparison_sections := ?_ }
-  intro X Y f G d M n V
-  apply heq_of_eq
-  funext x
-  change ((d.hom.app M).val.app (op (n, V.unop)) x) =
-    ((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app V
-      ((d.hom.app M).val.app (op (n, V.unop)) x)
-  exact ((VaryingRing.moduleEvalP_existsUnique
-    (graphRings l E) (graphTransitions l E) f n).choose_spec.1 M V.unop _).symm
+    comparison_sections := fun f G d M n V ↦ ordinaryComparisonSections l E f G d M n V }
 
 -- Cancellation compares horizontal morphisms on large module-sheaf categories.
 -- Assemble the level isomorphisms and check their naturality on every section.
