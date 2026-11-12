@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicIntegers
 
@@ -71,8 +72,9 @@ private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.P
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀.obj) ≅ K) := by
-  obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux ℓ (K₀ := K₀)
-  exact ⟨n, derivedCompleteIntegers_boundedConstructible_aux ℓ, hn, K₀.property, he⟩
+  obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
+  exact ⟨n, derivedCompleteIntegers_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀),
+    hn, K₀.property, he⟩
 
 private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ) [Fact ℓ.Prime]
     {X : Scheme.{u}} [IsNoetherian X] [TopologicalSpace.NoetherianSpace X]
