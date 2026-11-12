@@ -501,7 +501,6 @@ section Punctured
 variable {U : Scheme.{u}} [U.Over (Spec (.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
   [j.IsOver (Spec (.of k₀))]
 
-set_option profiler true in
 omit [Finite k₀] [IsSepClosed Ω] in
 include x hxW in
 /-- **The punctured neighbourhood.** If `U ∩ W = D(ϖ)` for some `0 ≠ ϖ` in the prime of `x`, the
