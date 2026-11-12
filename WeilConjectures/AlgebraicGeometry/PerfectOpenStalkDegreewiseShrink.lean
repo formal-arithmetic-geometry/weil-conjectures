@@ -67,7 +67,6 @@ private theorem conjugate_map
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- A degreewise family already defined near x becomes a chain map after shrinking
 if its stalk commutes with the differentials. The second conclusion records the
 stalks of the restricted components in the original comparison coordinates.
