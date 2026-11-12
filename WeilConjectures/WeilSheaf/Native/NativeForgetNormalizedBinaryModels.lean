@@ -188,15 +188,21 @@ theorem native_forget_normalized_binary_models
       ((nativeTensorBifunctor k₀ l X).obj P).Additive := by
     intro P
     exact (tensorIhomAdjunction k₀ l X P).left_adjoint_additive
-  obtain ⟨chain, hchain⟩ := native_weil_tensor_chain k₀ l X
+  have hchains := native_weil_tensor_chain k₀ l X
     (nativeTensorBifunctor k₀ l X) (tensorBifunctorForget k₀ l X)
+  let chain := hchains.choose
+  have hchain := hchains.choose_spec
   rcases d with ⟨⟨m, adjO, evO⟩, βO, hm, hmodels⟩
   dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hm
   subst m
   let S : WeilConjectures.CoefficientClosedStructure
       (nativeDerivedClosedComparison k₀ l X).homModels.ordinaryHom :=
     ⟨inferInstance, adjO, evO⟩
-  obtain ⟨model, swap, hnorm, hswap, hbraid, κ, hκ, hmodel⟩ := hmodels
+  let model := hmodels.choose
+  have hnorm := hmodels.choose_spec.choose_spec.1
+  let κ := hmodels.choose_spec.choose_spec.2.2.2.choose
+  have hκ := hmodels.choose_spec.choose_spec.2.2.2.choose_spec.1
+  have hmodel := hmodels.choose_spec.choose_spec.2.2.2.choose_spec.2
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)
   let flip : V.obj (((nativeTensorTotal k₀ l X).obj P).obj T) ≅
@@ -256,12 +262,19 @@ theorem native_forget_normalized_binary_models
             (tensorIhomAdjunction k₀ l X A)
             ((ihomBifunctor k₀ l X).map f.op) Q).symm }
     let N := ((nativeTensorTotal k₀ l X).obj P).obj T
-    obtain ⟨I, hI, j, _, hj⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective N
+    have hres := Abelian.HasKInjectiveResolutions.exists_isKInjective N
+    let I := hres.choose
+    have hI := hres.choose_spec.1
+    let j := hres.choose_spec.2.choose
+    have hj := hres.choose_spec.2.choose_spec.2
     let θ := (HomologicalComplex.mapBifunctorFlipIso T P
       (nativeTensorBifunctor k₀ l X) (.up ℤ)).inv ≫ j
     let φ := DerivedNativeTensorProof.internalHomEquiv a T I P θ
-    obtain ⟨ψ, hψ, hloc⟩ := (native_normalized_tensor_models k₀ l X).choose_spec.2
+    have hnormalized := (native_normalized_tensor_models k₀ l X).choose_spec.2
       P T I hP hT hI φ
+    let ψ := hnormalized.choose
+    have hψ := hnormalized.choose_spec.1
+    have hloc := hnormalized.choose_spec.2
     have hψj : ψ = j := by
       have hθ : (HomologicalComplex.mapBifunctorFlipIso T P
           (nativeTensorBifunctor k₀ l X) (.up ℤ)).hom ≫ θ = j := by
@@ -283,13 +296,20 @@ theorem native_forget_normalized_binary_models
         Linear.units_smul_comp, ← hv, Adjunction.homEquiv_counit]
       change (p * q).negOnePow • _ = (q * p).negOnePow • _
       rw [mul_comm q p]
-    subst ψ
-    obtain ⟨hUI, χ, hχ, hs⟩ := native_hom_evaluation_square_all_sources k₀ l X
+    rw [hψj] at hloc hψ
+    have hsources := native_hom_evaluation_square_all_sources k₀ l X
       M C.homComparison hC.2.1 T I hI
+    have hUI := hsources.choose
+    let χ := hsources.choose_spec.choose
+    have hχ := hsources.choose_spec.choose_spec.1
+    have hs := hsources.choose_spec.choose_spec.2
     let φ' := V.map φ ≫ χ.hom
     have hUP := native_two_sided_kflat_forget k₀ l X P hP
     have hUT := native_two_sided_kflat_forget k₀ l X T hT
-    obtain ⟨ψ', hψ', hloc'⟩ := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
+    have hnormalized' := hnorm (V.obj T) (V.obj P) (V.obj I) hUT hUP hUI φ'
+    let ψ' := hnormalized'.choose
+    have hψ' := hnormalized'.choose_spec.1
+    have hloc' := hnormalized'.choose_spec.2
     let v := flip ≪≫ chain T P
     have hchain' : V.map j = v.hom ≫ ψ' := by
       apply HomologicalComplex.hom_ext
