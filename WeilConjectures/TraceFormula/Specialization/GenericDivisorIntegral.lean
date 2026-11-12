@@ -115,6 +115,7 @@ local instance genericDivisorTensor4Ext (T : Scheme.{u})
     GradedObject.HasTensor₄ObjExt A B C D := by
   infer_instance
 
+/-- Flat coefficient change preserves lower bounds after extension by zero and pullback. -/
 private lemma isGE_upperStar_lowerShriek_extendScalars
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -139,8 +140,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   (M : NearbyCyclesModel X X') (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
   [IsOpenImmersion ι]
 
-set_option profiler true in
--- Elaborating the statement compares the derived categories of the coefficient rings.
 /-- **Restricted nearby cycles of extensions by zero, from the residue field to `𝒪_E`**: let `M`
 be a model of `X` whose total space and geometric generic fibre are quasi-compact and
 quasi-separated, `o : U ⟶ X` an open immersion, `e : Y ⟶ X'` a morphism of quasi-compact
@@ -187,8 +186,6 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_res
     have k' := k (by transport_mod_proofs hφ) (by transport_mod_proofs h)
     transport_mod_proofs k'
 
-set_option profiler true in
--- Elaborating the statement compares the derived categories of the coefficient rings.
 omit [IsOpenImmersion ι] in
 /-- **Restricted nearby cycles of extensions by zero, from `𝒪_E` to `ℚ̄_ℓ`**: let `M` be a model
 of `X` whose inclusion `j` of the geometric generic fibre is quasi-compact and quasi-separated,
@@ -225,7 +222,7 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
   -- the coefficient rings carry different proofs of `Precoherent Profinite`
   have h₁ := k₁ (by transport_mod_proofs hφ₁) h
   -- from `E` to `ℚ̄_ℓ`
-  have hn₃ : DerivedCategory.TStructure.t.IsGE
+  have hnE : DerivedCategory.TStructure.t.IsGE
       ((L((M.ε)^*⟦Profinite.continuousMapRingObj E.1⟧)).obj
       (D((o)_!open⟦Profinite.continuousMapRingObj E.1⟧).obj
         ((L(Mod.extendScalars
@@ -253,8 +250,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-set_option profiler true in
--- Destructuring the finite-coefficient statement unfolds the coefficient rings.
 open NearbyCyclesModel in
 /-- **Generic vanishing along a divisor for `ℚ̄_ℓ`-coefficients, from finite coefficients**: let
 `X` be normal, `Z = V(h)` for a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ`
