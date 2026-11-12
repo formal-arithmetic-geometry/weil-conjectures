@@ -108,7 +108,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
--- the Künneth maps of the two products are large terms
+set_option profiler true in
 /-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
 `sk-prop-tf-nearby-external-kunneth`). In the square of the Künneth maps and pullbacks

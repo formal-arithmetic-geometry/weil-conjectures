@@ -52,7 +52,6 @@ attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod 
   hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
   preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
 
--- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
 `sk-prop-tf-nearby-external-kunneth`). Let finite families of automorphisms `σM i`, `σN i`, `σP i`
