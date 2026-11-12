@@ -234,14 +234,15 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
       Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT₁
     have hz := Triangle.isZero₃_of_isIso₁ _ hT₂ hs'
     have hcoord_a := hcoord a
-    have hcomp :
-        ∃ l : pullback (specialCoordinate hRM (coord a) hcoord_a)
-            (traitSlicePoint (traitSliceCoord k')) ⟶ sliceSpecial (traitSliceCoord k') (coord a),
-          l ≫ sliceSpecialMap (traitSliceCoord k') hRM hcoord_a = pullback.fst _ _ :=
-      exists_comp_sliceSpecialMap (k' := k') (K := traitSliceField k')
-        (M := M.restrictOpen V) (q := V.ι ≫ q) (g := (M.j ⁻¹ᵁ V).ι ≫ g)
-        (traitSliceCoord k') hRM (b := coord a) hcoord_a
-    obtain ⟨l, hl⟩ := hcomp
+    have hpb := isPullback_sliceSpecialMap_traitSlicePoint (traitSliceCoord k') hRM hcoord_a
+    let l : pullback (specialCoordinate hRM (coord a) hcoord_a)
+        (traitSlicePoint (traitSliceCoord k')) ⟶ sliceSpecial (traitSliceCoord k') (coord a) :=
+      hpb.lift (pullback.fst _ _) (pullback.snd _ _) (by
+        rw [Category.assoc]
+        exact pullback.condition)
+    have hl : l ≫ sliceSpecialMap (traitSliceCoord k') hRM hcoord_a = pullback.fst _ _ := by
+      dsimp [l]
+      exact hpb.lift_fst _ _ _
     rw [← hl]
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
       ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)
