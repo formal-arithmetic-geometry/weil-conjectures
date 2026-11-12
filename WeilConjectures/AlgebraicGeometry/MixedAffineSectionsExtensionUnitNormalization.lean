@@ -99,6 +99,8 @@ private instance normalizationExtendScalars_preservesKFlatQuasiIso
   exact (quasiIso_iff_of_arrow_mk_iso _ _
     (Arrow.isoMk (e₁.app P) (e₁.app Q) (e₁.hom.naturality α).symm)).1 h'
 
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
 private theorem normalizationExtension_unit
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)
     (X : CochainComplex (ModuleCat.{u} A) ℤ)

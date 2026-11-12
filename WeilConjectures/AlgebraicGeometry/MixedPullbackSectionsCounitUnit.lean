@@ -41,7 +41,6 @@ private theorem mixedSections_unit_naturality
   rw [← Functor.map_comp_assoc, hunit, Functor.map_comp]
   simp only [Category.assoc]
   erw [← s.naturality_assoc a]
-  simp only [Functor.comp_map]
   rw [hL]
 
 variable [∀ Z : Scheme.{u},
@@ -98,6 +97,8 @@ private theorem mixedSections_leray_unit {S T : Scheme.{u}} (g : T ⟶ S)
   rw [Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hL
   exact hL
 
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
 private theorem normalizationRestriction_factors_inv
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)
     (E : CochainComplex (ModuleCat.{u} B) ℤ) :
@@ -193,12 +194,13 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
     DerivedCategory.Q.map ((d.mapHomologicalComplex (.up ℤ)).app C) ≫
       R.mapDerivedCategoryFactors.inv.app ((J.mapHomologicalComplex (.up ℤ)).obj D) ≫
       (schemeGlobalScalarRestriction g).map (mixedSectionsComplexUnit T D) := by
-  let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
-  let J := RingedSpace.globalSectionsFunctor T.toRingedSpace
-  let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g
+  intro H J K R d D e
   let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
-  let R := ModuleCat.restrictScalars.{u} g.appTop.hom
+  have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive H
+  have : J.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive J
+  have : K.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive K
+  have : R.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive R
+  have : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive F
   let M := (HomotopyCategory.quotient _ (.up ℤ)).obj C
   let N := (K.mapHomotopyCategory (.up ℤ)).obj M
   let adj : K ⊣ F := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
@@ -209,22 +211,7 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
   let β := F.rightDerivedFunctorUnit
   let η := (schemeHomPullbackAdjunction.{u, w} g).unit
   let L := mixedGlobalSectionsDirectImageIso g
-  let D := (K.mapHomologicalComplex (.up ℤ)).obj C
   let E := (J.mapHomologicalComplex (.up ℤ)).obj D
-  let d : H ⟶ K ⋙ J ⋙ R := Functor.whiskerRight adj.unit H
-  let e : (derivedPullback.{u, w} g).obj (DerivedCategory.Q.obj C) ⟶
-      DerivedCategory.Q.obj D :=
-    (derivedPullback.{u, w} g).map ((DerivedCategory.quotientCompQhIso _).inv.app C) ≫
-      ε.app M ≫ DerivedCategory.Qh.map
-        ((K.mapHomotopyCategoryFactors (.up ℤ)).hom.app C) ≫
-      (DerivedCategory.quotientCompQhIso _).hom.app D
-  change mixedSectionsComplexUnit S C ≫
-      (schemeDerivedGlobalSections S).map (η.app (DerivedCategory.Q.obj C)) ≫
-      L.hom.app ((derivedPullback g).obj (DerivedCategory.Q.obj C)) ≫
-      (schemeGlobalScalarRestriction g).map ((schemeDerivedGlobalSections T).map e) =
-      DerivedCategory.Q.map ((d.mapHomologicalComplex (.up ℤ)).app C) ≫
-      R.mapDerivedCategoryFactors.inv.app E ≫
-      (schemeGlobalScalarRestriction g).map (mixedSectionsComplexUnit T D)
   have he : e = ε.app M := by
     change (derivedPullback.{u, w} g).map (𝟙 (DerivedCategory.Q.obj C)) ≫
       ε.app M ≫ DerivedCategory.Qh.map (𝟙 N) ≫ 𝟙 (DerivedCategory.Q.obj D) = _
