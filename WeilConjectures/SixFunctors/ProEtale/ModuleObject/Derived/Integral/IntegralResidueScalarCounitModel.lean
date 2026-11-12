@@ -186,7 +186,9 @@ private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [Functor.comp_map] at hn ho
   have h := counit_restriction_pasting (residueExchangeRestriction ℓ E X)
     _ _ _ _ _ _ _ _ _ _ _ _ _ hmi ho hn.symm hq
-  simpa only [pH, Functor.comp_map, Functor.map_comp, Category.assoc] using h
+  simp only [pH, Functor.comp_map, Functor.map_comp, Category.assoc] at h
+  simp only [Functor.map_comp, Category.assoc]
+  erw [h]
 
 private theorem tensor_counit_app (T : Scheme.{u})
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
