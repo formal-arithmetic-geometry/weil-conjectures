@@ -386,7 +386,6 @@ private abbrev quotientMap (O : Type (u + 1)) [CommRing O] (t : O)
     {m n : ℕ} (h : n ≤ m) : coefficient O t m →+* coefficient O t n :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-set_option maxHeartbeats 800000 in
 -- Compare the bundled coefficient presentations without unfolding their scalar actions.
 private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
@@ -405,7 +404,6 @@ private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     ext U x
     rfl
 
-set_option maxHeartbeats 800000 in
 -- Compare the bundled coefficient presentations without unfolding their scalar actions.
 private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
