@@ -88,7 +88,7 @@ theorem integralOrdinaryScalar_coordinates :
   let := ι.toAlgebra
   let φ := integralCompletedScalarMap l E L ι Y
   let F : integralTowerModules l E Y ⥤ integralTowerModules l L Y :=
-    SheafOfModules.changeOfRingsFunctor φ
+    SheafOfModules.changeOfRingsFunctor.{u, u + 1} φ
   obtain ⟨hobj, hmap, -⟩ := (integralOrdinaryScalarWitness l E L ι Y).choose_spec
   have hOC : integralOrdinaryScalar l E L ι Y = F :=
     CategoryTheory.Functor.ext hobj fun _ _ f ↦ hmap f
