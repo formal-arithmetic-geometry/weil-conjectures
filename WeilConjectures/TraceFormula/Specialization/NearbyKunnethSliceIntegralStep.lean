@@ -67,7 +67,7 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de
 monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait
@@ -97,9 +97,7 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
   have : A₀.IsGE (min a a') := DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left a a')
   have : B₀.IsGE (min a a') :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right a a')
-  have hAB : boundedConstructible (condensedRingObj 𝒪 Z)
-      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
-    boundedConstructible_tensorObj
+  have hAB := boundedConstructible_tensorObj
       (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
@@ -110,34 +108,24 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
     hN E (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B₀ hB₀)
   have hu₁ := isSplitMono_pullbackExchange_baseChangeHom_traitSlice_padicIntegers hM b hb E
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A₀ hA₀)
-  have hπ : IsIso (kunnethMap 𝒪 (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
-      (L((𝟙 X)^*⟦𝒪⟧).obj A₀) (L((𝟙 Y)^*⟦𝒪⟧).obj B₀)) :=
-    isIso_kunnethMap_of_iso _ _ _ ((leftDerivedUpperStarId _ X).app A₀)
+  have hπ := isIso_kunnethMap_of_iso 𝒪 (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
+      ((leftDerivedUpperStarId _ X).app A₀)
       ((leftDerivedUpperStarId _ Y).app B₀) h
   -- the pullback of the Künneth map is a split monomorphism
-  have hx : IsSplitMono (L((baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
-        (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')))^*⟦𝒪⟧).map
-      (kunnethMap 𝒪 φ₁ φ₂ A₀ B₀)) := by
-    refine isSplitMono_map_kunnethMap_of_isSplitMono 𝒪 φ₁ φ₂
+  have hx := isSplitMono_map_kunnethMap_of_isSplitMono 𝒪 φ₁ φ₂
       (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
       (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
         (traitSlice_over (traitSliceCoord k')))
       (baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
         (Category.comp_id _))
       (baseChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb) (traitSlice (traitSliceCoord k'))
-        (traitSlice_over (traitSliceCoord k'))) ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_ A₀ B₀ ?_ ?_ ?_
-    rotate_left 8
-    · exact_mod_proofs hu₁
-    · exact_mod_proofs hu₂
-    · exact_mod_proofs hπ
-    · exact Hom.baseChange_total_comp hM hP _ _ _ _ φ₁ _ _ _ rfl
-    · exact Hom.baseChange_generic_comp hM hP _ _ _ _ φ₁ _ _ _ rfl
-    · exact Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm
-    · exact Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm
-    · simp
-    · exact Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _
-    · simp
-    · exact Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _
+        (traitSlice_over (traitSliceCoord k')))
+      (Hom.baseChange_total_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
+      (Hom.baseChange_generic_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
+      (Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
+      (Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
+      (by simp) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
+      (by simp) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A₀ B₀ hu₁ hu₂ hπ
   -- finiteness properties of the total spaces and of the special and generic fibres
   have := hM.locallyOfFiniteType
   have := hM.quasiCompact
