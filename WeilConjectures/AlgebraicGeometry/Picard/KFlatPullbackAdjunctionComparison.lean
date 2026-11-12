@@ -50,6 +50,8 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
   rw [← he]
   infer_instance
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def kFlat_pullback_adjunction_comparison_iso
     {S S' : Scheme.{u}} (g : S' ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
