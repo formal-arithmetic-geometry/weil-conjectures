@@ -30,6 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+set_option profiler true in
 set_option maxHeartbeats 0 in
 -- The coefficient and compactification comparisons elaborate large instance terms.
 private theorem transport_compactSupport_baseChange
@@ -100,6 +101,7 @@ private theorem transport_compactSupport_baseChange
       ((derivedComapLeftDerivedUpperStarIso a g').app K) ≪≫
     ((ec c').app ((upperStar Λ g').leftDerivedFunctor.obj K)).symm
 
+set_option profiler true in
 set_option maxHeartbeats 0 in
 -- The coefficient and compactification comparisons elaborate large instance terms.
 /-- Compact-support base change on bounded constructible complexes is independent
