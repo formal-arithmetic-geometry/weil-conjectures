@@ -50,6 +50,23 @@ theorem finiteAdjunction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
   rw [Adjunction.homEquiv_unit]
   exact congrArg (f.val.app U) (finiteAdjunction_unit_apply l E W n M U x)
 
+/-- Transposing an evaluated ordinary reduction map evaluates it on the quotient unit. -/
+theorem ordinaryReduction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
+    (M : integralTowerModules l E W) (N : coefficientSequenceModules l E W)
+    (f : (pullbackTensorOrdinaryReduction l E W).obj M ⟶ N)
+    (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
+    (((pullbackTensorFiniteAdjunction l E W n).homEquiv M
+      ((coefficientSequenceEvaluation l E W n).obj N)
+      ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
+        (coefficientSequenceEvaluation l E W n).map f)).val.app U) x =
+      f.val.app (op (n, U.unop))
+        (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app U
+          (unrestrictedIntegralTensorSection l E W n M U 1 x)) := by
+  exact finiteAdjunction_homEquiv_apply l E W n M
+    ((coefficientSequenceEvaluation l E W n).obj N)
+    ((pullbackTensorReductionEvaluation l E W n).hom.app M ≫
+      (coefficientSequenceEvaluation l E W n).map f) U x
+
 
 /-- Degreewise, the complex-level reduction evaluation is the termwise one.
 Source: Stacks 0941. -/
@@ -75,9 +92,6 @@ theorem reductionEvaluationComplex_inv_f (W : Scheme.{u}) (n : ℕ)
     NatIso.mapHomologicalComplex_inv_app_f]
   exact Category.id_comp _
 
-set_option profiler true in
-set_option maxHeartbeats 2000000 in
--- Elaborating the sections of the transported reduction maps is expensive.
 /-- Maps out of the ordinary reduction of a degree of a total tensor are determined by the
 reductions of unit-inserted pure tensors at every level.
 Source: Stacks 03EK, 06YY and 0941. -/
@@ -107,19 +121,8 @@ theorem reduction_total_hom_ext (W : Scheme.{u})
     refine StrictTensorAugmentation.total_hom_ext l E W P Q k
       ((scalarReductionRestriction l E W n).obj ((coefficientSequenceEvaluation l E W n).obj N)) ?_
     intro p q hpq V x y
-    have e1 (f : (pullbackTensorOrdinaryReduction l E W).obj
-        (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)).X k) ⟶ N)
-        (z : ((unrestrictedIntegralReductionFunctor l E W n).obj
-          (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)).X k)).val.obj V) :
-        (((pullbackTensorReductionEvaluation l E W n).hom.app _ ≫
-          (coefficientSequenceEvaluation l E W n).map f).val.app V) z =
-        f.val.app (op (n, V.unop))
-          (((pullbackTensorReductionEvaluation l E W n).hom.app _).val.app V z) := rfl
-    exact (finiteAdjunction_homEquiv_apply l E W n _ _ _ V _).trans ((e1 h₁ _).trans
-      ((h n p q hpq V.unop x y).trans ((e1 h₂ _).symm.trans
-        (finiteAdjunction_homEquiv_apply l E W n _ _ _ V _).symm)))
+    rw [ordinaryReduction_homEquiv_apply, ordinaryReduction_homEquiv_apply]
+    exact h n p q hpq V.unop x y
   apply SheafOfModules.hom_ext
   ext ⟨n, V⟩ r
   exact congrArg (fun f ↦ f.val.app (op V) r) (hn n)
