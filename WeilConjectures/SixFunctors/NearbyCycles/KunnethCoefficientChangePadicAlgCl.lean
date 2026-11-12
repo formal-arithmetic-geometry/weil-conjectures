@@ -50,7 +50,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option profiler true in
 /-- **The Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: for models whose `j`s are
 quasi-compact and quasi-separated and bounded below `𝒪_E`-complexes `A₀`, `B₀` such that
 `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` and the Künneth map
@@ -87,7 +86,7 @@ theorem nonempty_arrowIso_map_map_kunnethMap_padicAlgCl [QuasiCompact M.j] [Quas
       exact_mod_proofs isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E j K n)
     φ₁ φ₂ A₀ B₀ n m
   exact_mod_proofs k
-set_option profiler true in
+
 /-- **The restricted Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`, for every `h : W ⟶ Z'`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Lh^* Π_{A₀,B₀}` and `Lh^* Π_{A,B}` are isomorphic arrows. -/
