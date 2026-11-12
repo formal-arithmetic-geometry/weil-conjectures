@@ -54,19 +54,19 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 -- Derive these tensor-existence facts once for an arbitrary scheme, so that the
 -- pullbacks below do not repeat the generic colimit search on each slice.
-private lemma sliceSquare_hasTensorFour (T : Scheme.{u})
+lemma sliceSquare_hasTensorFour (T : Scheme.{u})
     (A B C D : GradedObject ℤ
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
     GradedObject.HasTensor₄ObjExt A B C D := by
   infer_instance
 
-private lemma sliceSquare_hasGoodTensorLeft (T : Scheme.{u})
+lemma sliceSquare_hasGoodTensorLeft (T : Scheme.{u})
     (A B C : GradedObject ℤ
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
     GradedObject.HasGoodTensor₁₂Tensor A B C := by
   infer_instance
 
-private lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
+lemma sliceSquare_hasGoodTensorRight (T : Scheme.{u})
     (A B C : GradedObject ℤ
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
     GradedObject.HasGoodTensorTensor₂₃ A B C := by
