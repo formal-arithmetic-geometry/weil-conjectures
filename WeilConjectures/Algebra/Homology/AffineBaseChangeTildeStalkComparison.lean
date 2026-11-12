@@ -53,7 +53,6 @@ affineDerivedCohomologyStalkIso (with its canonical localization map). Thus both
 paths are equal and the source identification is lU. All comparisons are natural
 and hold in every degree. Empty prime spectra give no obligations; zero complexes,
 identity localizations and zero rings need no exceptional hypotheses. -/
-set_option profiler true in
 theorem affineBaseChangeTildeModuleMap_localized
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']
@@ -101,8 +100,7 @@ theorem affineBaseChangeTildeModuleMap_localized
         ∀ x, affineDerivedCohomologyStalkIso A' i p L
           (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)  := by
   have _ := hK
-  dsimp only
-  intro p
+  rintro p
   obtain ⟨lU, hlU⟩ := exists_affineBaseChangeOrdinaryStalkComparison
     R A R' A' φg' φf' hφg' hφf' sq M hM i m p
   refine ⟨lU, ?_⟩
