@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangePadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -34,12 +35,15 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
+-- Reuse the tensor and colimit instances at each occurrence of a derived functor.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 2000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` is invertible if and only if `Π_{A,B}` is. -/
@@ -68,8 +72,6 @@ theorem isIso_map_map_kunnethMap_iff_padicAlgCl [QuasiCompact M.j] [QuasiSeparat
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_map_kunnethMap_padicAlgCl ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
-set_option maxHeartbeats 2000000 in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`, for every `h : W ⟶ Z'`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{A,B}` is. -/
