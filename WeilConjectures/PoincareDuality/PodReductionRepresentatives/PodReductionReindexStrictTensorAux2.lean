@@ -86,13 +86,16 @@ theorem strictMap_generator (W : Scheme.{u})
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
         (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y)) := by
+  trace "PH199: strictMap_generator proof started"
   have hc := congrArg (fun φ ↦ (φ.f k).val.app (op V)
     (((pullbackTensorReductionEvaluation l E W n).hom.app _).val.app (op V)
         (unrestrictedIntegralTensorSection l E W n _ (op V) 1
           (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
             (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y))))
     (tensorReductionStrictMap_component l E W P Q n)
+  trace "PH199: component equation evaluated"
   refine hc.trans ?_
+  trace "PH199: component equation applied"
   let G := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)
   let T := (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)
@@ -126,9 +129,11 @@ theorem strictMap_generator (W : Scheme.{u})
       (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
     (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
       (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y))
+  trace "PH199: generator equations prepared"
   exact (congrArg (fun s ↦ (c.inv.f k).val.app (op V)
     ((b.f k).val.app (op V) ((a.hom.f k).val.app (op V) s))) hcancel).trans
       ((congrArg (fun s ↦ (c.inv.f k).val.app (op V) ((b.f k).val.app (op V) s)) hs).trans
         ((congrArg ((c.inv.f k).val.app (op V)) hm).trans hi))
+  trace "PH199: strictMap_generator proof completed"
 
 end WeilConjectures.PodReductionRepresentatives
