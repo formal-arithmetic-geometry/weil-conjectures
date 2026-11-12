@@ -595,6 +595,7 @@ private theorem restriction_mate_component
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 1000000 in
 -- Derived adjunctions require additional definitional comparison during specialization.
+set_option trace.profiler true in
 private theorem triangle_restriction_mate_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -640,6 +641,7 @@ attribute [local irreducible] limit limit.cone
 
 set_option maxHeartbeats 1000000 in
 -- Specialize coherent pullback and restriction identities at the functor level.
+set_option trace.profiler true in
 private theorem pullRestriction_baseChange_nat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -732,6 +734,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 1000000 in
 -- Specializing four derived adjunctions compares large module category expressions.
 set_option synthInstance.maxHeartbeats 100000 in
+set_option trace.profiler true in
 private theorem local_refinement_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
