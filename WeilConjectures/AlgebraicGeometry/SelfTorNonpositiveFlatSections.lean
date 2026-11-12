@@ -32,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- Comparing restricted tensor complexes requires additional elaboration heartbeats.
+set_option trace.profiler true in
 /-- Nonpositive termwise flat resolutions have affine quotient-tensor coordinates.
 This lemma does not construct algebraic augmented comparison maps, and does not
 compare an unbounded K-flat resolution with a bounded one.
