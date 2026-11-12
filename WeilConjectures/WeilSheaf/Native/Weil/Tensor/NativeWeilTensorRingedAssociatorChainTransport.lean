@@ -140,6 +140,12 @@ theorem nativeChainForgetComponent_transport
   let := SheafOfModules.monoidalCategory D.b.R
   let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.Q
   let := SheafOfModules.monoidalCategory D.b.Q
+  let mB : MonoidalCategory (CochainComplex
+      (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R) ℤ) := inferInstance
+  let := mB.toMonoidalCategoryStruct
+  let mA : MonoidalCategory (CochainComplex
+      (RingedTensorModules.{u + 1, u + 1, u + 1} D.b.K D.b.Q) ℤ) := inferInstance
+  let := mA.toMonoidalCategoryStruct
   obtain ⟨d⟩ := native_ordinary_ringed_tensor_underived_data D.b
   obtain ⟨o⟩ := native_ordinary_ringed_tensor_chain_comparison D.b D.κ D.hκ d
   obtain ⟨r⟩ := native_ringed_forget_tensor_chain_comparison D.b
