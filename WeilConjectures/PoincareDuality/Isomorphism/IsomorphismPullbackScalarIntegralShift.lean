@@ -123,6 +123,7 @@ private theorem scalar_conjugation
   simp only [Category.assoc, ← F.map_comp_assoc, Iso.hom_inv_id, Category.id_comp]
   rw [F.map_id, Category.id_comp]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- The conjugation contains several derived-functor comparison isomorphisms.
 -- The `CommShift` instance for the twelve-step composite `δ` needs a larger typeclass budget.
