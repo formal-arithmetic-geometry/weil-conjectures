@@ -378,6 +378,6 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     scalarReductionSourceDerived, integralTowerHasDerivedCategory,
     integralOperationsCommHasDerivedCategory] at finish hc ⊢
   have final := finish.trans hc
-  exact final
+  assumption
 
 end WeilConjectures
