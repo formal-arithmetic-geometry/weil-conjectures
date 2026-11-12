@@ -19,6 +19,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [local instance] Mod.monoidalCategoryCochainComplex
+attribute [local implicit_reducible] coefficientTotalTensor
 
 variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)
