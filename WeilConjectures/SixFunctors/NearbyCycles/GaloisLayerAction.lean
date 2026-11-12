@@ -181,7 +181,6 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option profiler true in
 -- the conjugates of the composition isomorphisms of derived pullbacks are large terms
 /-- **Associativity of the composition isomorphisms of derived pushforwards**: the two ways of
 identifying `R(a ≫ b ≫ c)_*` with `Ra_* ⋙ Rb_* ⋙ Rc_*` agree. It is the conjugate of the
@@ -193,8 +192,10 @@ lemma rightDerivedLowerStarComp_inv_app_assoc {A₀ A₁ A₂ A₃ : Scheme.{u}}
         (rightDerivedLowerStarComp Λ b c).inv.app (R((a)_*⟦Λ⟧).obj Z) =
       eqToHom (by rw [Category.assoc]) ≫ (rightDerivedLowerStarComp Λ (a ≫ b) c).inv.app Z ≫
         R((c)_*⟦Λ⟧).map ((rightDerivedLowerStarComp Λ a b).inv.app Z) := by
-  refine conjugateIsoEquiv_assoc_aux (fun m : A₀ ⟶ A₃ ↦ L((m)^*⟦Λ⟧))
-    (fun m : A₀ ⟶ A₃ ↦ R((m)_*⟦Λ⟧)) (fun m ↦ derivedUpperStarLowerStarAdjunction Λ m)
+  let L' : (A₀ ⟶ A₃) → _ := fun m ↦ L((m)^*⟦Λ⟧)
+  let R' : (A₀ ⟶ A₃) → _ := fun m ↦ R((m)_*⟦Λ⟧)
+  let adj' : ∀ m, L' m ⊣ R' m := fun m ↦ derivedUpperStarLowerStarAdjunction Λ m
+  refine conjugateIsoEquiv_assoc_aux L' R' adj'
     (Category.assoc a b c).symm (derivedUpperStarLowerStarAdjunction Λ c)
     (derivedUpperStarLowerStarAdjunction Λ b) (derivedUpperStarLowerStarAdjunction Λ a)
     (derivedUpperStarLowerStarAdjunction Λ (b ≫ c))
@@ -202,7 +203,7 @@ lemma rightDerivedLowerStarComp_inv_app_assoc {A₀ A₁ A₂ A₃ : Scheme.{u}}
     (leftDerivedUpperStarComp Λ a b) (leftDerivedUpperStarComp Λ a (b ≫ c))
     (leftDerivedUpperStarComp Λ (a ≫ b) c) (fun K ↦ ?_) Z
   have h := leftDerivedUpperStarComp_assoc_app Λ a b c K
-  rw [← cancel_epi (eqToHom (congrArg (fun m ↦ L((m)^*⟦Λ⟧).obj K) (Category.assoc a b c))),
+  rw [← cancel_epi (eqToHom (congrArg (fun m ↦ (L' m).obj K) (Category.assoc a b c))),
     ← h, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
 
 /-- The **unit transport** along `s : G ⟶ G'` of `R(p)_* L(q)^*`, for `s ≫ p = p₁` and
