@@ -38,6 +38,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Comparing the derived direct-image expressions and localized module instances is expensive.
 /-- Construct the local finite-free model and its degree-one comparison square, without
 assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
