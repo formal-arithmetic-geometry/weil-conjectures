@@ -901,6 +901,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
     Category.assoc]
   rw [← Category.assoc, h]
+  simp
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
