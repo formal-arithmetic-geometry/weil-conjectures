@@ -249,7 +249,7 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     simp only [u, IsUnit.unit_spec, hι, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Iso.op_hom, Scheme.Spec_map, Quiver.Hom.unop_op, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
-    rw [hcancel hU.isoPullback]
+    simp only [hcancel]
     rw [hnat]
     rw [hnat]
     congr 2
