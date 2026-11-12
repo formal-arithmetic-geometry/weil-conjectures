@@ -157,7 +157,11 @@ theorem class_pushforward_core :
     (prod.map P.f P.f) P.f prod.fst prod.snd prod.fst prod.snd P.pushforward.support_fst
     P.pushforward.support_snd c.support_fst c.support_snd P.g_comp_support
     (prod.map_fst P.f P.f) (prod.map_snd P.f P.f) P.w₁ P.w₂ K
-  simpa only [Functor.comp_obj, Functor.map_comp, Category.assoc] using hcoh
+  refine Eq.trans ?_ (hcoh.trans ?_)
+  all_goals
+    trace_state
+    repeat' apply congrArg₂ (fun a b ↦ a ≫ b)
+    all_goals rfl
 
 end Correspondence.ProperPushforwardDiagram
 
