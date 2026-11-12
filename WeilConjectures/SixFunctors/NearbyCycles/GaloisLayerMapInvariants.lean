@@ -89,15 +89,16 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_gene
   obtain ⟨r₂, hr₂, hinv₂, -⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector.{u, u} N₂ h₂ Ω₂
       T₀ hp₂ _ hC₂
-  have key := τ.isIso_pullbackExchange_app_of_galoisLayerMap (Profinite.continuousMapRingObj T₀)
-    (hω := hω) hτ C (fun k : Ω₂ ≃ₐ[L₂] Ω₂ ↦ (AlgEquiv.restrictNormalHomAlong hω k, k))
-    (fun k x ↦ AlgEquiv.restrictNormalHomAlong_commutes hω k x)
-    ⟨r₁, hr₁, fun q W φ hφ ↦ hproj₁ f' q φ _
-      (fun L' a ↦ AlgEquiv.exists_restrictNormalHomAlong_eq hω hclosed L' a) hφ⟩
-    (L((f)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) rfl
-  -- the instances `Precoherent Profinite` in the statement of `key` and here are elaborated
-  -- differently; unifying them through the derived categories is too slow
-  have key₂ := @key ⟨r₂, hr₂, fun σ₂ ↦ (hinv₂ σ₂).1⟩ ?inst
+  with_reducible
+    have key := τ.isIso_pullbackExchange_app_of_galoisLayerMap (Profinite.continuousMapRingObj T₀)
+      (hω := hω) hτ C (fun k : Ω₂ ≃ₐ[L₂] Ω₂ ↦ (AlgEquiv.restrictNormalHomAlong hω k, k))
+      (fun k x ↦ AlgEquiv.restrictNormalHomAlong_commutes hω k x)
+      ⟨r₁, hr₁, fun q W φ hφ ↦ hproj₁ f' q φ _
+        (fun L' a ↦ AlgEquiv.exists_restrictNormalHomAlong_eq hω hclosed L' a) hφ⟩
+      (L((f)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) rfl
+    -- the instances `Precoherent Profinite` in the statement of `key` and here are elaborated
+    -- differently; unifying them through the derived categories is too slow
+    have key₂ := @key ⟨r₂, hr₂, fun σ₂ ↦ (hinv₂ σ₂).1⟩ ?inst
   · exact_mod_proofs key₂
   · exact_mod_proofs hiso
 
