@@ -51,7 +51,7 @@ variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `C₀`. Then `𝒢` is `ι`-mixed: the successive
 quotients of a filtration with irreducible lisse quotients are irreducible constituents of `𝒢`,
 punctually pure by `thm-rp-real-lisse-purity-affine` (blueprint: `thm-zl-real-mixed-by-curves`,
-the curve case). -/
+the curve case; `theorem-purity-real-sheaves-curves`, second assertion). -/
 theorem IsReal.isMixed_of_isLisse [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}

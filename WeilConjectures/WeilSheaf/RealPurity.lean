@@ -235,7 +235,8 @@ variable {ι : PadicAlgCl l →+* ℂ} {C : Scheme.{u}} [C.Over (Spec (CommRingC
   [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
 
 /-- **Purity of real lisse sheaves on curves** (blueprint: `thm-rp-real-lisse-purity-affine`,
-`sk-p-real-purity`, of the section `sec-purity-real-sheaves`). Let `C₀` be a smooth geometrically
+`sk-p-real-purity`, of the section `sec-purity-real-sheaves`; `theorem-purity-real-sheaves-curves`,
+first assertion). Let `C₀` be a smooth geometrically
 connected curve over `k₀` and `𝒢₀` an `ι`-real lisse Weil sheaf on `C₀`. Every irreducible
 constituent `V` of `𝒢₀`, that is, every irreducible lisse quotient `V = 𝒢₂ / 𝒢₁` of lisse Weil
 subsheaves `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure of its determinant weight `w`: at every closed
