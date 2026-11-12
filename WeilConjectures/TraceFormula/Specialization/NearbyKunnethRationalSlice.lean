@@ -73,8 +73,6 @@ end General
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
-set_option maxHeartbeats 1600000 in
-set_option profiler true in
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- **The generic-slicing step with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"): if the generic-slicing step holds with
@@ -92,7 +90,11 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
     {b} hb {m₁ m₂} hle h₁ h₂ {eM} heM {eN} heN {A B} hA hB ↦ ?_⟩
   obtain ⟨E, A₀, B₀, ⟨eA⟩, ⟨eB⟩⟩ :=
     ProEtale.exists_derivedExtendScalars_iso_integralModel_pair X Y ℓ ⟨A, hA⟩ ⟨B, hB⟩
-  have h₀ := (h E).isIso φ₁ φ₂ hM hN hpb hP hgen hX hY hZ hb hle h₁ h₂ heM heN A₀.2 B₀.2
+  let s := baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+    (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k'))
+  have h₀ : IsIso (L((s)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).map
+      (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A₀.obj B₀.obj)) := by
+    exact (h E).isIso φ₁ φ₂ hM hN hpb hP hgen hX hY hZ hb hle h₁ h₂ heM heN A₀.2 B₀.2
   -- bounds below of `A₀`, `B₀` and of their external product
   obtain ⟨a, ha⟩ := A₀.2.1.1
   obtain ⟨a', ha'⟩ := B₀.2.1.1
@@ -115,10 +117,9 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
   have : QuasiCompact P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
   have : QuasiSeparated P.j := MorphismProperty.of_isPullback hP.isPullback_j.flip inferInstance
   have key := (isIso_map_map_map_kunnethMap_iff_padicAlgCl ℓ E φ₁ φ₂
-    (baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
-      (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')))
+    s
     A₀.obj B₀.obj (min a a') c).1 (Functor.map_isIso _ _)
-  exact isIso_map_kunnethMap_of_iso _ _ φ₁ φ₂ eA.symm eB.symm key
+  simpa only [s] using isIso_map_kunnethMap_of_iso _ _ φ₁ φ₂ eA.symm eB.symm key
 
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- **Gabber's Künneth formula for proper models with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**
