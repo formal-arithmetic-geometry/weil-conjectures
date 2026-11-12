@@ -17,6 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The differential formula unfolds localized Hom and evaluated kernel structures.
 /-- Every pair of local cycle representatives has a representative in the target cycles.

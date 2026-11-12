@@ -35,6 +35,7 @@ private lemma homObj_epi_ext (X : Scheme.{u}) (U : X.Opens)
   exact he'
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Restricting sections unfolds the localized internal-Hom module structures.
 /-- Cycle formulas determine a morphism once every local cycle has a target-cycle lift.
