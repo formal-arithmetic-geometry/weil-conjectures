@@ -493,8 +493,7 @@ section Punctured
 variable {U : Scheme.{u}} [U.Over (Spec (.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
   [j.IsOver (Spec (.of k₀))]
 
-set_option profiler true in
-set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- instance search for the localization and pullback squares is slow
 omit [Finite k₀] [IsSepClosed Ω] in
 include x hxW in
