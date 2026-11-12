@@ -34,7 +34,8 @@ private theorem tensorComparison_binaryMate
       (F.prod F) ⋙ MonoidalCategory.tensor D)
     {P Q H I : C} {H' : D} (f : Q ⟶ H) (h : F.obj H ⟶ H')
     (ev : H ⊗ P ⟶ I) (ev' : H' ⊗ F.obj P ⟶ F.obj I)
-    (he : μ.hom.app (H, P) ≫ (MonoidalCategory.tensor D).map (h, 𝟙 (F.obj P)) ≫ ev' = F.map ev) :
+    (he : μ.hom.app (H, P) ≫ (MonoidalCategory.tensor D).map
+      (X := (F.obj H, F.obj P)) (Y := (H', F.obj P)) (h, 𝟙 (F.obj P)) ≫ ev' = F.map ev) :
     μ.hom.app (Q, P) ≫ ((F.map f ≫ h) ⊗ₘ 𝟙 (F.obj P)) ≫ ev' =
       F.map ((f ⊗ₘ 𝟙 P) ≫ ev) := by
   have hn := μ.hom.naturality (show (Q, P) ⟶ (H, P) from (f, 𝟙 P))
@@ -205,7 +206,6 @@ private theorem binaryMate_forget
 
 include he
 
-set_option profiler true in
 private theorem binary_square
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :
@@ -282,8 +282,6 @@ private theorem binary_square
     (by simpa only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv,
       Category.assoc, Functor.comp_obj, Functor.uncurry_obj_obj, I] using hv)
 
-
-set_option profiler true in
 private theorem underived_swap_square
     (d : NativeOrdinaryRingedTensorUnderivedData b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :
