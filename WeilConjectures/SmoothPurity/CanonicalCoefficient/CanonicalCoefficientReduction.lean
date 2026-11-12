@@ -192,7 +192,6 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q
   CochainComplex.IsKFlatIndependentCoefficients homComplex homComplexFunctor
   derivedInternalHomOfUniverses SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 -- The independent-universe representative square has large dependent module types.
 /-- Change the tensor model by the same adjoint comparison, retaining ordinary uncurrying. -/
 def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
