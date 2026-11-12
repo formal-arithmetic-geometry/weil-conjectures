@@ -250,7 +250,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
   have hcomm (σ : Ω ≃ₐ[L] Ω) :=
     N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ σ
       (F.obj C)
-  have key := stabilization_of_equivariant_iso_aux
+  have k0 := stabilization_of_equivariant_iso_aux
     (L₀ := F) (Lfg := F') (Lg := F') (Lf := F')
     (ΨM := N.nearbyCycles Λ) (Ψ₁ := (N.galoisLayer h L').nearbyCycles Λ)
     (Ψ := (N.galoisLayer h Ω).nearbyCycles Λ)
@@ -260,10 +260,19 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab
-    (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift Finset.univ _
+  run_tac Lean.logInfo "PH135 prefix elaborated"
+  have k1 := k0
+    (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift Finset.univ (Fintype.card (L' ≃ₐ[L] L'))
     (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (F.obj C))
     (fun σ C' ↦ (N.galoisLayerAut h Ω σ).autAction Λ C')
-    (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g) hfix hsplit hcomm
+    (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g)
+  run_tac Lean.logInfo "PH135 actions elaborated"
+  have k2 := k1 hfix
+  run_tac Lean.logInfo "PH135 fixer elaborated"
+  have k3 := k2 hsplit
+  run_tac Lean.logInfo "PH135 splitting elaborated"
+  have key := k3 hcomm
+  run_tac Lean.logInfo "PH135 equivariance elaborated"
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
