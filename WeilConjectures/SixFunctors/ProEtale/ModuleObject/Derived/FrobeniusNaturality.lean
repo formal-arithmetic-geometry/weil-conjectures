@@ -218,12 +218,13 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
       eqToHom (congrArg (fun s ↦ L((s)^*⟦Λ⟧).obj M) h) ≫
         (leftDerivedUpperStarComp Λ FT g).hom.app M ≫
           (Functor.leftDerivedFunctorIdIso κT).hom.app (L((g)^*⟦Λ⟧).obj M) := by
-  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso,
-    leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso,
-    Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
-      (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
-      (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M,
-    upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
+  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
+  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
+  rw [Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
+    (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
+    (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M]
+  rw [upperStarCongr]
+  rw [Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
