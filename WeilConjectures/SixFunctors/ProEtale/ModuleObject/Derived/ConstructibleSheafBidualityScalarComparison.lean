@@ -78,6 +78,7 @@ private lemma integral_qbar_biduality_map_hom
       ((Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
         derivedExtendScalarsToPadicAlgCl X.left ℓ E).map f.hom := rfl
 
+omit [IsSeparated X.hom] in
 private lemma integral_qbar_biduality_braided
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K M : BoundedConstructible
@@ -170,10 +171,14 @@ theorem integral_qbar_biduality_comparison
         (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
   -- The lax braided bidual square gives the compatibility before forgetting.
   obtain ⟨c, h⟩ := integral_qbar_biduality_comparison_bounded ℓ E L W W' w
+  run_tac Lean.logInfo "PH022: obtained bounded comparison"
   refine ⟨(boundedConstructible _).ι.mapIso c, ?_⟩
+  run_tac Lean.logInfo "PH022: mapped comparison iso"
   have h' := congrArg (fun f ↦ f.hom) h
+  run_tac Lean.logInfo "PH022: mapped equality"
   rw [ObjectProperty.toIhomIhom_hom, ObjectProperty.comp_hom,
     integral_qbar_biduality_map_hom, ObjectProperty.toIhomIhom_hom] at h'
+  run_tac Lean.logInfo "PH022: rewritten equality"
   exact h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing
