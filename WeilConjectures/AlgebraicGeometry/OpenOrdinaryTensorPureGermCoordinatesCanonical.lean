@@ -108,9 +108,10 @@ private theorem tensorStalkIso_unit
           AddCommGrpCat.{u} g'.base z) m := by
   let := leftAlgebra f g' z
   let := rightAlgebra f f' g g' sq z
-  rw [Classical.choose_spec (exists_tensorStalkIso f f' g g' sq z P) n]
-  exact tensor_unit_stalk_cast g' z (P.X n) _
-    (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1 m
+  exact (ConcreteCategory.congr_hom
+    (Classical.choose_spec (exists_tensorStalkIso f f' g g' sq z P) n) _).trans
+      (tensor_unit_stalk_cast g' z (P.X n) _
+        (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1 m)
 
 private theorem open_coordinate_smul (X : Scheme.{u}) (U : X.Opens) (x : U.toScheme)
     (M : X.Modules) (r : U.toScheme.presheaf.stalk x)
