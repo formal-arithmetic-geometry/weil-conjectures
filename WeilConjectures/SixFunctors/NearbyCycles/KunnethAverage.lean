@@ -45,6 +45,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
+set_option trace.Meta.synthInstance true in
 set_option profiler true in
 local instance fastHomAddCommGroup {C : Type*} [Category C] [Preadditive C]
     (X Y : C) : AddCommGroup (X ⟶ Y) := Preadditive.homGroup X Y
