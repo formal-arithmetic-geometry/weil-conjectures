@@ -33,9 +33,9 @@ attribute [local instance_reducible] IntegralOnSlice.Site IntegralOnSlice.topolo
 attribute [local instance_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 
 private theorem mapCompIdApply
-    {C D : Type*} [Category C] [Category D] [ConcreteCategory D]
-    (F : C ⥤ D) {A B : C}
-    (f : A ⟶ B) (h : B ⟶ A) (hcomp : f ≫ h = 𝟙 _) (x : F.obj A) :
+    {C D : Type*} [Category C] [Category D] {FC : D → D → Type*} {CC : D → Type*}
+    [∀ A B, FunLike (FC A B) (CC A) (CC B)] [ConcreteCategory D FC] (F : C ⥤ D) {A B : C}
+    (f : A ⟶ B) (h : B ⟶ A) (hcomp : f ≫ h = 𝟙 _) (x : CC (F.obj A)) :
     (F.map h) ((F.map f) x) = x := by
   rw [← ConcreteCategory.comp_apply, ← F.map_comp, hcomp, F.map_id,
     ConcreteCategory.id_apply]
@@ -113,9 +113,7 @@ theorem isomorphismOrdinaryFiniteAugmentation
       (N.val.map ((proEtaleBaseChange g).map c).op
         (integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x))) =
       integralOperationsPullbackGenerator l E g n M V.unop (r.val.app V x) := by
-    let F := N.val
-    change F.map _ (F.map _ _) = _
-    exact mapCompIdApply F _ _ ht _
+    exact mapCompIdApply N.val _ _ ht _
   erw [hv]
   have haug := (augmentation_existsUnique l E Y none).exists.choose_spec P n i V x
   have hord := (ordinaryQuotientAugmentation_existsUnique l E g).exists.choose_spec
