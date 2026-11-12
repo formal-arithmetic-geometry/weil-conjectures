@@ -287,20 +287,24 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
-  let b := asIso beta
-  unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
-  refine (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2 b.symm ?_
-  intro i j k hij U x y
-  subst k
-  have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
-  rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
-    reductionUnit_eq_coefficientIntegralScalarUnitSection,
-    reductionUnit_eq_coefficientIntegralScalarUnitSection,
-    reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
-  dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-    integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
-  exact hh
+  have hu := coefficientScalarTensorIso_exists l E Y n P Q
+  dsimp only [integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence, totalTensor, coefficientTotalTensor,
+    ordinaryTensor, Functor.uncurry_obj_obj] at hu
+  apply hu.unique
+  · intro i j k hij U x y
+    subst k
+    have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
+    rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
+    dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
+      integralReductionChangeOfRings, integralReductionExistence,
+      scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
+    exact hh
+  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -383,6 +387,7 @@ private theorem nativeReductionMonoidal
       trace "native: normalization obtained"
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
+      trace "native: beta theorem applied"
       have hbκ := hb.trans (hc P Q).symm
       trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
