@@ -35,7 +35,8 @@ open–closed sequence.
 
 - `AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`: the Noetherian
   induction of `thm-zl-real-mixed-by-curves`.
-- `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
+- `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint
+  `theorem-real-constructible-sheaves-are-mixed` (and `--1`), formerly `sk-i-dl-general-real` and
   `thm-zl-real-mixed-by-curves`.
 
 ## References
@@ -406,7 +407,9 @@ theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
   exact ho
 
 /-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed
-(blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`).
+(blueprint: `theorem-real-constructible-sheaves-are-mixed` and its clause
+`theorem-real-constructible-sheaves-are-mixed--1`; formerly `sk-i-dl-general-real`,
+`thm-zl-real-mixed-by-curves`).
 
 By Noetherian induction
 (`AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`) it suffices
