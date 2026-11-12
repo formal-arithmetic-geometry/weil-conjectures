@@ -191,7 +191,6 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q
   coefficientTotalTensor coefficientTensorGenerator
   CochainComplex.IsKFlatIndependentCoefficients homComplex homComplexFunctor
   derivedInternalHomOfUniverses SheafOfModules.monoidalCategory
-  CoefficientTensorUncurryModel
 
 -- The independent-universe representative square has large dependent module types.
 def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
