@@ -52,6 +52,31 @@ private theorem Qh_mapHomotopyCategoryCompIso_refl_hom_app
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app]
   exact DerivedCategory.Qh.map_id _
 
+private theorem comp_Qh_mapHomotopyCategoryCompIso_refl_hom_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Abelian E] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory C (.up ℤ)) {X : DerivedCategory E}
+    (f : X ⟶ DerivedCategory.Qh.obj
+      ((F.mapHomotopyCategory (.up ℤ) ⋙ G.mapHomotopyCategory (.up ℤ)).obj K)) :
+    f ≫ DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) =
+      f := by
+  rw [Qh_mapHomotopyCategoryCompIso_refl_hom_app]
+  exact Category.comp_id f
+
+private theorem Qh_mapHomotopyCategoryCompIso_refl_hom_app_comp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Abelian E] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory C (.up ℤ)) {X : DerivedCategory E}
+    (f : DerivedCategory.Qh.obj (((F ⋙ G).mapHomotopyCategory (.up ℤ)).obj K) ⟶ X) :
+    DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) ≫ f =
+      f := by
+  rw [Qh_mapHomotopyCategoryCompIso_refl_hom_app]
+  exact Category.id_comp f
+
 /-- The specified nonflat derived scalar pullback comparison has the specified restriction mate.
 
 Source: proof step 2 of `lem-sp-original-integral-finite-quotient-mate-transport`, above
@@ -96,8 +121,8 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc]
-  simpa only [Qh_mapHomotopyCategoryCompIso_refl_hom_app,
-    Category.comp_id, Category.id_comp] using
+  simpa only [comp_Qh_mapHomotopyCategoryCompIso_refl_hom_app,
+    Qh_mapHomotopyCategoryCompIso_refl_hom_app_comp] using
     derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
 
 
