@@ -86,10 +86,18 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
   have hamb : IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq).app K.obj) := by
     have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ) hsq
     infer_instance
-  have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app
-    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
-    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
-    (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)
+  have hcomp := pullbackSquareComparison_eq_leftDerivedFunctorSquareIso
+    (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq
+  unfold baseChangeMap at hamb
+  rw [hcomp] at hamb
+  have hθ (K : Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
+        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+          (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)).hom.app K.obj := by
+    rw [← hcomp]
+    exact boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+      ℓ (Profinite.padicAlgClRingObj ℓ) sq K
+  have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app _ _ _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
@@ -97,8 +105,7 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
-    (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicAlgClRingObj ℓ) sq) K hamb
+    hθ K hamb
   convert key using 3
   all_goals rfl
 
