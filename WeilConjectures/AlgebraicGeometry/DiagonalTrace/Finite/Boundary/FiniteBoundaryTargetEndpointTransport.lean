@@ -89,10 +89,15 @@ theorem finiteBoundary_target_endpoint
   trace "target: scalar section named"
   let w := (e.inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
   trace "target: restricted section named"
-  have hw : HEq w v := finiteBoundaryTargetRestriction_inv_section l T r n _ U v
+  have hw : HEq w v := by
+    dsimp only [w, e]
+    exact finiteBoundaryTargetRestriction_inv_section l T r n
+      (lineModule l (ULift.{u} (Padic l)) c) U v
   trace "target: restriction comparison complete"
+  dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
+  trace "target: tensor normalization complete"
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
   dsimp only [w, v, η, x'] at ht hi

@@ -67,12 +67,16 @@ theorem finiteBoundary_source_endpoint
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
-  have hx : HEq x x' := finiteBoundarySourceRestriction_inv_section l T r n _ U x'
+  have hx : HEq x x' := by
+    dsimp only [x, e]
+    exact finiteBoundarySourceRestriction_inv_section l T r n
+      (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U x'
   have ha := k.coefficient_one n U x (hx.trans hx')
   have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
   rw [Int.cast_one] at hi
   dsimp only [x, x', z, U] at ha
   dsimp only [U] at hi
+  trace_state
   exact ha.trans hi.symm
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
