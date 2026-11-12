@@ -23,7 +23,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The fixed derived comparison terms need extra elaboration heartbeats.
 /-- The actual canonical section map commutes with successive base change.
 It asserts an equality of maps and does not assert their bijectivity.
@@ -81,7 +81,6 @@ theorem picardDirectImageSectionMap_restriction
   set_option backward.isDefEq.respectTransparency.types false in
   set_option backward.defeqAttrib.useBackward true in
   set_option maxRecDepth 2048 in
-  set_option maxHeartbeats 800000 in
   -- The fixed derived comparison terms need extra elaboration heartbeats.
     classical
     dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
