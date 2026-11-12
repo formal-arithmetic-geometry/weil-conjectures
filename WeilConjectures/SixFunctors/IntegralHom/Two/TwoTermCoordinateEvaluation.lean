@@ -59,6 +59,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 variable (Q : CochainComplex (Modules.{t, u} Y R) ℤ)
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Four coordinate checks use sheafified tensors and Hom products; elapsed time stays below 60 s.
 /-- A homogeneous signed evaluation map has the two invertible finite coordinates.
