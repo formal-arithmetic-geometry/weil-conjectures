@@ -380,16 +380,11 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (W := (isoReductionIntegralComplex l E g).obj
       (integralOperationsRoos
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))))
-  trace "cancel core"
   have cancelP := cancelCore eP
-  trace "cancel P"
   have cancelQ := cancelP eQ
-  trace "cancel Q"
-  run_tac Lean.Elab.Tactic.withMainContext do
-    Lean.logInfo m!"e: {(← Lean.Meta.getLocalDeclFromUserName `e).type}"
-    Lean.logInfo m!"cancelQ: {(← Lean.Meta.getLocalDeclFromUserName `cancelQ).type}"
+  dsimp only [integralOperationsRoosFunctor, podOrdinaryReindex,
+    isoReductionIntegralComplex] at cancelQ
   have cancel := cancelQ e
-  trace "cancel e"
   have cancel' := cancel
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
