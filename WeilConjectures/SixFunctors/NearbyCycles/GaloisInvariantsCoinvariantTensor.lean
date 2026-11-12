@@ -46,18 +46,18 @@ open Scheme
 
 -- Resolve tensor colimit obligations directly, before instance search expands the graded
 -- tensor diagrams used in the construction of each derived pullback.
-private theorem galoisTensorModuleColimit (Y : Scheme.{u})
+theorem galoisTensorModuleColimit (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
     HasColimit F := inferInstance
 
-private theorem galoisTensorLeftColimit (Y : Scheme.{u})
+theorem galoisTensorLeftColimit (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
     PreservesColimit F ((curriedTensor _).obj M) := inferInstance
 
-private theorem galoisTensorRightColimit (Y : Scheme.{u})
+theorem galoisTensorRightColimit (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
     {J : Type} [SmallCategory J] (F : J ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
