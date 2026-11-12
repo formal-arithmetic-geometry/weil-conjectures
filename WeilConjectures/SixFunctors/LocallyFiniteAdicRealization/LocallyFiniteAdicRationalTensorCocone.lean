@@ -183,7 +183,6 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
     simp only [Functor.comp_obj, Functor.comp_map] at hn
     simp only [reassoc_of% hn]
     simp only [rationalTensorTransition_hom_app l X C k]
-    dsimp only [T]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.comp_map, Functor.comp_obj]
     simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
     simp only [Category.assoc]
