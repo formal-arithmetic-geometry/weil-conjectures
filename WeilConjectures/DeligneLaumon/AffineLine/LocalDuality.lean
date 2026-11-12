@@ -182,7 +182,8 @@ private theorem localBoundaryLinearEquiv_frobenius
     {N H Q : FrobeniusModule.{max u v, v} K}
     (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) (q : K)
     (hΨ : ∀ x, Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) :
-    ∀ x y, (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x (Q.frobenius y) =
+    ∀ x y, (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap)
+        (M.frobenius x) (Q.frobenius y) =
       q * (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x y := by
   intro x y
   rw [LinearEquiv.trans_apply, LinearEquiv.trans_apply]
