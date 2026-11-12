@@ -64,6 +64,7 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- Comparing the composite scalar restrictions unfolds three module pushforwards.
 /-- The canonical tensor-unit map induces a Hom bijection for the two scalar extensions.
 Source: Stacks Project, Tags 01SB (elucidation), 008A and 008Y.
