@@ -90,10 +90,23 @@ private theorem supported_unit_isIso_iff
   · intro hz
     exact IsZero.isIso hz htarget _
 
+-- Cache the module and restriction instances used repeatedly in the criterion's type.
+local instance supportCriterionModuleAbelian (X : Scheme.{u}) :
+    Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+
+local instance supportCriterionOverModuleAbelian (X : Scheme.{u}) (U : X.Opens) :
+    Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
+
+private theorem supportCriterionRestrictionPreservesZero (X : Scheme.{u}) (U : X.Opens) :
+    (schemeOpenRestriction X U).PreservesZeroMorphisms := by
+  have : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U
+  exact Functor.preservesZeroMorphisms_of_additive _
+
+attribute [local instance] supportCriterionRestrictionPreservesZero
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 600000 in
 -- The statement repeats transported derived restriction and full-subcategory lifts.
 /-- Restriction of the right adjoint is compatible with the open square precisely when
 it preserves complexes supported on the closed complements.
