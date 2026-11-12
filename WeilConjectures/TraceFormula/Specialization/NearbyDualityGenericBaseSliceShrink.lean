@@ -258,12 +258,6 @@ private lemma boundedConstructibleNearbyCycles_map_shrinkSquare_hom
           (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) c j.left).hom.app A.obj) := by
   rw [boundedConstructibleNearbyCycles_map_hom''', boundedConstructibleShrinkSquareIso_hom_hom]
 
-private lemma boundedConstructibleUpperStarOfMap_obj
-    (A : Dᵇc(Zc.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStarOfMap ℓ (X := Zc) (Y := Zη) π).obj A =
-      ⟨L((π)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj,
-        boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ π A.obj A.property⟩ := rfl
-
 private lemma boundedConstructiblePullbackExchange_app_upperStarOfMap_hom
     (s : N.Hom P' sb.left j'.left)
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -273,8 +267,8 @@ private lemma boundedConstructiblePullbackExchange_app_upperStarOfMap_hom
       ((boundedConstructibleUpperStarOfMap ℓ (X := Zc) (Y := Zη) π).obj A)).hom =
       (s.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
         (L((π)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj) := by
-  rw [boundedConstructibleUpperStarOfMap_obj]
-  exact Hom.boundedConstructiblePullbackExchange_app_hom _ _ _ _ _
+  transport_exact s.boundedConstructiblePullbackExchange_app_hom ℓ hN hP'
+    ((boundedConstructibleUpperStarOfMap ℓ (X := Zc) (Y := Zη) π).obj A)
 
 private lemma boundedConstructibleSpecialIdExchange_square
     (ψ : N.Hom M c (𝟙 S.left)) (r : M.Hom P j.left j'.left)
@@ -309,8 +303,9 @@ private lemma boundedConstructibleSpecialIdExchange_square
       (congrArg (L((j'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map) (hρc A))
   · exact boundedConstructiblePullbackExchange_app_upperStarOfMap_hom s hN hP' A
   · exact boundedConstructibleNearbyCycles_map_shrinkSquare_hom hN hb A
-  · exact Hom.boundedConstructiblePullbackExchange_app_hom _ _ _ _ _
-  · exact hρψ _
+  · exact r.boundedConstructiblePullbackExchange_app_hom ℓ hM hP A
+  · transport_exact hρψ
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj A)
 
 end BoundedConstructibleShrink
 
