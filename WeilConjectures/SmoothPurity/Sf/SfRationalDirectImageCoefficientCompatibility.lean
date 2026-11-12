@@ -62,7 +62,40 @@ private theorem rightMate_transport
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.refl_symm,
     Functor.isoWhiskerRight_refl, Iso.refl_trans, Iso.trans_refl] using hi
 
-set_option maxHeartbeats 400000 in
+private theorem rightMate_transport_stage
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (R : ∀ E : Index l Ω,
+      sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) X ⥤
+        sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y)
+    (a : ∀ E, rationalDerivedPullback l (Coefficient.{u} l Ω E) f ⊣ R E)
+    {E F : Index l Ω} (h : E ≤ F)
+    (hY : (stageSystem l Ω Y).T h =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E F h)
+    (hX : (stageSystem l Ω X).T h =
+      GeneralAlgebraicallyClosedCoefficients.transition l Ω X E F h)
+    (hi : IsIso (mateEquiv (a E) (a F) (TwoSquare.mk _ _ _ _
+      (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
+        (Coefficient.{u} l Ω F)
+        (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E F h) f).inv))) :
+    IsIso (mateEquiv (a E) (a F) (TwoSquare.mk _ _ _ _
+      (rationalPullbackStageComparison l Ω f h).inv)) := by
+  unfold rationalPullbackStageComparison
+  exact rightMate_transport
+    (L₁ := rationalDerivedPullback l (Coefficient.{u} l Ω E) f) (R₁ := R E)
+    (L₂ := rationalDerivedPullback l (Coefficient.{u} l Ω F) f) (R₂ := R F)
+    (G := (stageSystem l Ω Y).T h)
+    (G' := GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E F h)
+    (H := (stageSystem l Ω X).T h)
+    (H' := GeneralAlgebraicallyClosedCoefficients.transition l Ω X E F h)
+    (a E) (a F) hY hX
+    (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
+      (Coefficient.{u} l Ω F)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E F h) f) hi
+
 -- The transported coefficient structures are unfolded with `respectTransparency false`.
 /-- Coherent coefficient pullback comparisons and invertible direct-image mates.
 Source: Bhatt--Scholze 6.8.14(2), Remark 6.8.15; finite-free scalar change
@@ -138,15 +171,19 @@ theorem sfRationalDirectImageCoefficientCompatibility
       funext K
       exact eq_of_heq (hb h K).1
     rw [hbIso]
-    exact rightMate_transport (a E) (a F)
-      ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E F h)
-      ((stageSystem_existsUnique l Ω X).exists.choose_spec.1 E F h)
-      (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
-        (Coefficient.{u} l Ω F) (AlgebraicallyClosedCoefficients.coefficientInclusion
-          l Ω E F h) f)
-      (rationalPullbackScalar_rightMate_isIso l (Coefficient.{u} l Ω E)
-        (Coefficient.{u} l Ω F) (AlgebraicallyClosedCoefficients.coefficientInclusion
-          l Ω E F h) f (R E) (R F) (a E) (a F))
+    let E' := Coefficient.{u} l Ω E
+    let F' := Coefficient.{u} l Ω F
+    let := (inferInstance : Field E')
+    let := (inferInstance : Algebra (ℚ_[l]) E')
+    let := (inferInstance : FiniteDimensional (ℚ_[l]) E')
+    let := (inferInstance : Field F')
+    let := (inferInstance : Algebra (ℚ_[l]) F')
+    let := (inferInstance : FiniteDimensional (ℚ_[l]) F')
+    let ι := AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E F h
+    have hY := (stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E F h
+    have hX := (stageSystem_existsUnique l Ω X).exists.choose_spec.1 E F h
+    let hi := rationalPullbackScalar_rightMate_isIso l E' F' ι f (R E) (R F) (a E) (a F)
+    exact rightMate_transport_stage l Ω f R a h hY hX hi
   · rintro ⟨Φ, β, coh⟩ ⟨hΦ, hβ, _⟩
     dsimp only at hΦ
     cases hΦ
