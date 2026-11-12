@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the fixed stalk complex types needs substantial definitional reduction.
 /-- The canonical affine-spectrum comparison respects tensor generators for the explicitly
 constructed input coordinates, not for arbitrary chain isomorphisms.
