@@ -426,6 +426,13 @@ noncomputable local instance boundarySmulCommClass :
   AlgEquiv.smulCommClass_of_isScalarTower (Γ(C, c.W)) C.functionField Ω
 noncomputable local instance boundaryIntegralClosureAction :
     MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
+noncomputable local instance boundaryIdealAction :
+    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) where
+  smul g I := I.map (MulSemiringAction.toRingHom _ _ g)
+  one_smul I :=
+    congr_arg (I.map ·) (RingHom.ext <| one_smul Gal(Ω/C.functionField)) |>.trans I.map_id
+  mul_smul g h I :=
+    congr_arg (I.map ·) (RingHom.ext <| mul_smul g h) |>.trans (I.map_map _ _).symm
 
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Frobenius lifts in the decomposition group.** Some element of the decomposition group of `Q`
