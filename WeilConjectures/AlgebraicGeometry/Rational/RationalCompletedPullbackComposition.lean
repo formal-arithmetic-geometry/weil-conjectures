@@ -36,19 +36,19 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
--- Expose the unchanged carrier of scalar restriction before elaborating section applications.
+/-- Apply a scalar-restricted module map with the original target carrier as its result type. -/
 def rationalCompletedRestrictionApply {R S : Type*} [Ring R] [Ring S]
     (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S)
     (f : M ⟶ (ModuleCat.restrictScalars φ).obj N) (m : M) : N :=
   f.hom m
 
+-- Keep expected-type propagation from unfolding the scalar-restriction object.
 local instance (priority := 2000) rationalCompletedRestrictionCoeFun
     {R S : Type*} [Ring R] [Ring S]
     (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S) :
     CoeFun (M ⟶ (ModuleCat.restrictScalars φ).obj N) (fun _ ↦ M → N) where
   coe := rationalCompletedRestrictionApply φ M N
 
-set_option trace.profiler true in
 /-- Completed composition and descent to all raw rational fraction arrows.
 Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15.
 
