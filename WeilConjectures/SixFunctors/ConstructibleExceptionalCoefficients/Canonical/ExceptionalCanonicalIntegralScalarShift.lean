@@ -249,8 +249,6 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
-set_option maxHeartbeats 400000 in
--- needed on the v4.35 toolchain: the elaboration exceeds the default heartbeat budget
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
 Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
 (blueprint: lem-sf-canonical-integral-scalar-square).
@@ -326,20 +324,24 @@ theorem canonical_integral_scalar_square
   letI bShift : B.CommShift ℤ := PurCompactSupport.scalarCommShift
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
   let θ : S.functor ⋙ JX ≅ IX ⋙ B := S.realization
-  haveI thetaShift : θ.hom.CommShift ℤ := canonicalIntegralScalarShift_compatibility l Ω S
-  obtain ⟨e₀, hχ, heO⟩ := ordinary_completed_scalar_shift l E.carrier L.carrier i T
+  letI := canonicalIntegralScalarShift_compatibility l Ω S
+  let ordinaryData := ordinary_completed_scalar_shift l E.carrier L.carrier i T
+  let e₀ := ordinaryData.choose
+  have hχ := ordinaryData.choose_spec.1
+  have heO := ordinaryData.choose_spec.2
   let eO := e₀
-  haveI := heO
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
-  haveI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
+  letI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
   let rF : IE ⋙ IY ≅ IX := Iso.refl _
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
-  haveI rfShift : rF.hom.CommShift ℤ :=
-    finiteTorIntegralShift_compatibility l Ω E T
-  haveI rgShift : rG.hom.CommShift ℤ :=
-    finiteTorIntegralShift_compatibility l Ω L T
-  obtain ⟨e, hs, he⟩ := restriction_iso IX IY JX JY IE IL S.functor SI O B
+  letI := finiteTorIntegralShift_compatibility l Ω E T
+  letI := finiteTorIntegralShift_compatibility l Ω L T
+  have restrictionData := restriction_iso IX IY JX JY IE IL S.functor SI O B
+    (C₁ := C.{u, v} l Ω T (.integral E))
+    (C₂ := sfIntegralConstructibleCategory l E.carrier T)
+    (C₃ := C.{u, v} l Ω T (.integral L))
+    (C₄ := sfIntegralConstructibleCategory l L.carrier T)
     (sC1 := sE) (sC2 := siE) (sC3 := sL) (sC4 := siL)
     (sIX := ixShift) (sIY := iyShift) (sJX := jxShift) (sJY := jyShift)
     (sIE := ieShift) (sIL := ilShift) (sS := sShift) (sSI := siShift) (sB := bShift)
@@ -347,8 +349,8 @@ theorem canonical_integral_scalar_square
       (integralOrdinaryScalar l E.carrier L.carrier i T))
     (fullJY := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.full)
     (faithfulJY := (sfIntegralConstructible l L.carrier T).fullyFaithfulι.faithful)
-    rF rG χ θ eO (hRF := rfShift) (hRG := rgShift)
-    (hChi := chiShift) (hTheta := thetaShift) (hOrd := heO)
+    rF rG χ θ eO (hOrd := heO)
+  obtain ⟨e, hs, he⟩ := restrictionData
   refine ⟨e, ?_, hs⟩
   intro K
   have hV : SI.obj (IE.obj K) = IL.obj (S.functor.obj K) := by
