@@ -68,7 +68,6 @@ variable {A B A' B' : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCom
   [LocallyOfFiniteType B'.hom] [QuasiCompact B'.hom] [IsSeparated B'.hom]
   {f : A ⟶ B} {g : B' ⟶ B} {f' : A' ⟶ B'} {g' : A' ⟶ A}
 
-set_option profiler true in
 /-- **Weakly étale base change on bounded constructible complexes**: for a commutative square
 `g' ≫ f = f' ≫ g` whose underlying square of schemes is cartesian, with `g` and `g'` weakly étale
 (for instance open immersions), the base change morphism `Lg^* Rf_* ⟶ Rf'_* Lg'^*` is an
@@ -83,6 +82,7 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)).app
         K) := by
+  -- Reuse the graded tensor instances across the schemes in the square.
   have tensor₄ (T : Scheme.{u})
       (W X Y Z : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))) :
