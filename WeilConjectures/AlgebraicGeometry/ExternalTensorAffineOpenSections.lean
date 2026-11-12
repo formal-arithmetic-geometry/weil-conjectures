@@ -153,6 +153,7 @@ private def rightSectionEquiv :
   rfl
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The section tensor comparison elaborates several compatible restricted scalar actions.
 private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
     (hA : IsAffineOpen A) (hV : IsAffineOpen V)

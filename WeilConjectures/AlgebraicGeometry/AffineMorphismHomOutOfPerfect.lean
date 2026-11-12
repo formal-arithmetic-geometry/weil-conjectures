@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeNaturality
 public import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorComparison
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
@@ -15,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
 import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
+import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeNaturality
 
 /-!
 # Affine base change for global Hom out of a perfect complex
@@ -32,7 +32,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- Elaborating the fixed derived-adjunction choices requires additional heartbeats.
+-- Reuse coefficient naturality without re-elaborating the fixed derived-adjunction choices.
 private theorem baseChangeMap_naturality
     [∀ Y : Scheme.{uAH},
       HasDerivedCategory.{wAH} (SheafOfModules.{uAH} (moduleRings Y.toRingedSpace))]
@@ -42,7 +42,7 @@ private theorem baseChangeMap_naturality
     (derivedPullback g).map ((schemeDerivedDirectImage f).map φ) ≫
         schemeDerivedBaseChangeMap f f' g g' h F =
       schemeDerivedBaseChangeMap f f' g g' h E ≫
-    (schemeDerivedDirectImage f').map ((derivedPullback g').map φ) :=
+        (schemeDerivedDirectImage f').map ((derivedPullback g').map φ) :=
   schemeDerivedBaseChangeMap_naturality f f' g g' h φ
 
 /-- Over affine bases, global derived Hom out of a perfect complex commutes with
