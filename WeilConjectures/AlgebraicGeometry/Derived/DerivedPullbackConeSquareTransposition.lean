@@ -89,6 +89,21 @@ private theorem cone_precompose
   · simp [CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.map,
       Category.assoc]
 
+private theorem mappingCone_map_isIso
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory.{w} E]
+    {P Q A B : CochainComplex E ℤ}
+    (p : P ⟶ Q) (t : A ⟶ B) (x : P ⟶ A) (y : Q ⟶ B)
+    (h : p ≫ y = x ≫ t) [IsIso (DerivedCategory.Q.map x)]
+    [IsIso (DerivedCategory.Q.map y)] :
+    IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.map p t x y h)) := by
+  let m := DerivedCategory.Q.mapTriangle.map
+    (CochainComplex.mappingCone.triangleMap p t x y h)
+  have h₁ : IsIso m.hom₁ := inferInstanceAs (IsIso (DerivedCategory.Q.map x))
+  have h₂ : IsIso m.hom₂ := inferInstanceAs (IsIso (DerivedCategory.Q.map y))
+  exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
+    (DerivedCategory.mappingCone_triangle_distinguished p)
+    (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
+
 private theorem map_transpose_of_composite
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (Q : C ⥤ C') (Q' : D ⥤ D')
@@ -196,18 +211,7 @@ theorem derivedPullback_cone_square_transposition
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ x).2 hx
   have : IsIso (DerivedCategory.Q.map y) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ y).2 hy
-  have : IsIso (DerivedCategory.Q.map c) := by
-    let m := DerivedCategory.Q.mapTriangle.map
-      (CochainComplex.mappingCone.triangleMap p t x y hc)
-    have h₁ : IsIso m.hom₁ := by
-      change IsIso (DerivedCategory.Q.map x)
-      infer_instance
-    have h₂ : IsIso m.hom₂ := by
-      change IsIso (DerivedCategory.Q.map y)
-      infer_instance
-    exact CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ m
-      (DerivedCategory.mappingCone_triangle_distinguished p)
-      (DerivedCategory.mappingCone_triangle_distinguished t) h₁ h₂
+  have : IsIso (DerivedCategory.Q.map c) := mappingCone_map_isIso p t x y hc
   have hconeP := CochainComplex.isKFlat_mappingCone p hP hQ
   refine ⟨L.obj P, L.obj Q, L.map p, (ac.homEquiv _ _).symm (x ≫ α),
     (ac.homEquiv _ _).symm (y ≫ β), H',
