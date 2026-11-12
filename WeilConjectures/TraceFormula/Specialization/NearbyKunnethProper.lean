@@ -208,6 +208,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
+set_option trace.profiler true in
 /-- **Gabber's Künneth formula for proper models** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product `P` over the
 strictly henselian trait of models `M`, `N` of finite type along proper structure morphisms, with

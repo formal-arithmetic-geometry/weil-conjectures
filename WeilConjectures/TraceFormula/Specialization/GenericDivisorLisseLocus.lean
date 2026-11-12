@@ -164,6 +164,50 @@ theorem exists_opens_inter_subset_image (hX : IsNormalScheme X.left) {h : Γ(X.l
     by_contra hyS
     exact hyR (subset_closure ⟨hyO, hyS⟩)
 
+/-- A dense open in the divisor complement contains the complement in a neighbourhood of
+its generic point, together with the cartesian comparison of the two complements. -/
+lemma exists_opens_pullback_range_subset (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)}
+    (hh : h ≠ 0) {I : X.left.IdealSheafData}
+    (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h})) (ζ : (centre X I).left)
+    (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
+    (D : (overRestrict X I.support.compl).left.Opens)
+    (hD : Dense (D : Set (overRestrict X I.support.compl).left)) :
+    ∃ (V : X.left.Opens)
+      (ζV : (centre (overRestrict X V) (I.comap (overRestrictι X V).left)).left)
+      (w : overRestrict (overRestrict X V) (I.comap (overRestrictι X V).left).support.compl ⟶
+        overRestrict X I.support.compl),
+      (centreMap (overRestrictι X V) I).left ζV = ζ ∧
+      IsPullback w
+        (overRestrictι (overRestrict X V) (I.comap (overRestrictι X V).left).support.compl)
+        (overRestrictι X I.support.compl) (overRestrictι X V) ∧
+      Set.range w.left.base ⊆ Set.range D.ι.base := by
+  have hV := exists_opens_inter_subset_image hX hh hI ζ hζ D hD
+  obtain ⟨V, hζV, hVD⟩ := hV
+  have hζ' : ζ ∈ Set.range (centreMap (overRestrictι X V) I).left := by
+    rw [range_centreMap, Set.mem_preimage, range_overRestrictι]
+    exact hζV
+  obtain ⟨ζV, rfl⟩ := hζ'
+  have hsq := exists_isPullback_overRestrictι_comap I V
+  obtain ⟨w, sq⟩ := hsq
+  have hw : Set.range w.left.base ⊆ Set.range D.ι.base := by
+    rintro _ ⟨x, rfl⟩
+    have hx := congrArg (fun f ↦ f.left.base x) sq.w
+    simp only [Over.comp_left, Scheme.Hom.comp_base, TopCat.hom_comp,
+      ContinuousMap.comp_apply] at hx
+    have hmem : (overRestrictι X I.support.compl).left.base (w.left.base x) ∈
+        (V : Set X.left) ∩ (I.support.compl : Set X.left) := by
+      refine ⟨?_, ?_⟩
+      · rw [hx, ← range_overRestrictι X V]
+        exact ⟨_, rfl⟩
+      · rw [← range_overRestrictι X I.support.compl]
+        exact ⟨_, rfl⟩
+    have hd := hVD hmem
+    obtain ⟨d, hd, hdx⟩ := hd
+    rw [Scheme.Opens.range_ι,
+      ← (overRestrictι X I.support.compl).left.isOpenEmbedding.injective hdx]
+    exact hd
+  exact ⟨V, ζV, w, rfl, sq, hw⟩
+
 end Geometry
 
 open PadicAlgCl
@@ -227,37 +271,13 @@ theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left
     (A := ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) F₀
     (by exact_mod_proofs hF₀)
   obtain ⟨R, hR⟩ := key
-  -- shrinking `X` around `ζ`
-  have hV := exists_opens_inter_subset_image hX hh hI ζ hζ R.interiorUnion R.dense_interiorUnion
-  obtain ⟨V, hζV, hVD⟩ := hV
-  have hζ' : ζ ∈ Set.range (centreMap (overRestrictι X V) I).left := by
-    rw [range_centreMap, Set.mem_preimage, range_overRestrictι]
-    exact hζV
-  obtain ⟨ζV, rfl⟩ := hζ'
+  obtain ⟨V, ζV, w, hζeq, sq, hw⟩ := exists_opens_pullback_range_subset hX hh hI ζ hζ
+    R.interiorUnion R.dense_interiorUnion
   have : Nonempty (overRestrict X V).left :=
     ⟨(centreι (overRestrict X V) (I.comap (overRestrictι X V).left)).left ζV⟩
-  have hsq := exists_isPullback_overRestrictι_comap I V
-  obtain ⟨w, sq⟩ := hsq
-  have hw : Set.range w.left.base ⊆ Set.range R.interiorUnion.ι.base := by
-    rintro _ ⟨x, rfl⟩
-    have hx := congrArg (fun f ↦ f.left.base x) sq.w
-    simp only [Over.comp_left, Scheme.Hom.comp_base, TopCat.hom_comp,
-      ContinuousMap.comp_apply] at hx
-    have hmem : (overRestrictι X I.support.compl).left.base (w.left.base x) ∈
-        (V : Set X.left) ∩ (I.support.compl : Set X.left) := by
-      refine ⟨?_, ?_⟩
-      · rw [hx, ← range_overRestrictι X V]
-        exact ⟨_, rfl⟩
-      · rw [← range_overRestrictι X I.support.compl]
-        exact ⟨_, rfl⟩
-    have hd := hVD hmem
-    obtain ⟨d, hd, hdx⟩ := hd
-    rw [Scheme.Opens.range_ι,
-      ← (overRestrictι X I.support.compl).left.isOpenEmbedding.injective hdx]
-    exact hd
-  refine ⟨V, ζV, rfl, hX.of_isOpenImmersion (overRestrictι X V).left,
+  refine ⟨V, ζV, hζeq, hX.of_isOpenImmersion (overRestrictι X V).left,
     (overRestrictι X V).left.appTop_ne_zero_of_isOpenImmersion hh, ?_,
-    closure_singleton_mem_irreducibleComponents_of_centreMap (overRestrictι X V) I rfl hζ,
+    closure_singleton_mem_irreducibleComponents_of_centreMap (overRestrictι X V) I hζeq hζ,
     L((w.left)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F,
     D(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
       w.left).obj F₀,
@@ -281,7 +301,8 @@ theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left
       ((Functor.mapDerivedCategoryHomologyFunctorIso
         (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) w.left)
         n).app F₀)
-  · exact nearbyCyclesVanishNear_of_isOpenImmersion (overRestrictι X V) I k' _ _ ζV
+  · rw [← hζeq]
+    exact nearbyCyclesVanishNear_of_isOpenImmersion (overRestrictι X V) I k' _ _ ζV
       ((nearbyCyclesVanishNear _ _ k' _ ζV).prop_of_iso
         ((boundedConstructible _).ι.mapIso
           ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' _ ℓ sq).app
