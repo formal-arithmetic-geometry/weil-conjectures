@@ -153,7 +153,8 @@ theorem trace_frobeniusEnd_stalkAt_ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse
   LinearMap.trace_eq_mul_of_bijective (stalkAtIhomPairing s m hs D hD F)
     (bijective_stalkAtIhomPairing s m hs D hD F)
     ((D.ihom hD F).stalkAt s m hs).frobeniusEnd (D.stalkAt s m hs).frobenius
-    (F.stalkAt s m hs).frobeniusEnd (stalkAtIhomPairing_frobenius s m hs D hD F)
+    (F.stalkAt s m hs).frobeniusEnd
+    (fun v x ↦ stalkAtIhomPairing_frobenius s m hs D hD F v x)
 
 /-- The trace of the Frobenius on the stalk of `[G^∨, F] = G ⊗ F`, for a lisse Weil sheaf `G`,
 is the product of the traces on the stalks of `G` and `F`. -/
