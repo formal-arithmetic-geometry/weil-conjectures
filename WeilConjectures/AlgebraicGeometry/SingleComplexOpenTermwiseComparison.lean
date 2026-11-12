@@ -160,8 +160,10 @@ theorem exists_singleComplexOpen_termwise_comparison
   let Q := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P
   have hcQ := counit_isIso_kFlat j Q hQ
   refine ⟨hQ, hcQ, ?_⟩
-  obtain ⟨l, hl⟩ := exists_singleComplexOpen_ordinary_comparison
+  have hs := exists_singleComplexOpen_ordinary_comparison
     f f' g g' sq V V' hV' j hj sq₀ P z i
+  let l := hs.choose
+  have hl := hs.choose_spec
   refine ⟨l, ?_⟩
   let K := DerivedCategory.Q.obj P
   let a := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategoryFactors.symm.app P

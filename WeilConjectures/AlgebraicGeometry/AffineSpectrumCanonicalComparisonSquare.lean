@@ -123,8 +123,10 @@ theorem exists_affineSpectrum_canonicalComparison_square
   let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))
     AddCommGrpCat.{u}
   let T := isoPullbackStalkCohomologyIso X'.isoSpec.inv z0 i
-  obtain ⟨l, hl⟩ := exists_affineSpectrum_ordinaryComparison_square
+  have hs := exists_affineSpectrum_ordinaryComparison_square
     f f' g g' sq sq0 z0 i P
+  let l := hs.choose
+  have hl := hs.choose_spec
   refine ⟨l, ?_⟩
   have hn := T.hom.naturality
     (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
