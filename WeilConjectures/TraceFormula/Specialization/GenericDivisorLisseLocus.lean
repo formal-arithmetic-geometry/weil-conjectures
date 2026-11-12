@@ -285,13 +285,20 @@ theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left
   have := hX.1
   -- the étale model of `F` and a stratification on which its homology is lisse
   refine ((DerivedCategory.boundedConstructible_iff _ _ _).1
-    (isEtaleOrigin_of_isConstructible _ hF)).elim fun F₀ ⟨hF₀, ⟨e₀⟩⟩ ↦ ?_
+    (isEtaleOrigin_of_isConstructible _ hF)).elim fun F₀ hmodel ↦ ?_
+  have hF₀ := hmodel.1
+  refine hmodel.2.elim fun e₀ ↦ ?_
   have key := exists_stratification_isFiniteLocallyConstantSheaf_upperStar_homology
     (A := ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) F₀
     (by exact_mod_proofs hF₀)
   refine key.elim fun R hR ↦ ?_
   refine (exists_opens_pullback_range_subset hX hh hI ζ hζ
-    R.interiorUnion R.dense_interiorUnion).elim fun V ⟨ζV, w, hζeq, sq, hw⟩ ↦ ?_
+    R.interiorUnion R.dense_interiorUnion).elim fun V hV ↦ ?_
+  refine hV.elim fun ζV hζV ↦ ?_
+  refine hζV.elim fun w hw ↦ ?_
+  have hζeq := hw.1
+  have sq := hw.2.1
+  have hw := hw.2.2
   have : Nonempty (overRestrict X V).left :=
     ⟨(centreι (overRestrict X V) (I.comap (overRestrictι X V).left)).left ζV⟩
   let K := (boundedConstructibleUpperStar
