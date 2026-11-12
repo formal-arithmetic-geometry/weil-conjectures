@@ -23,6 +23,14 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory
 
+noncomputable local instance homologyEvaluationRoofComparisonAbelian (X : Scheme.{u}) :
+    Abelian X.Modules :=
+  SheafOfModules.instAbelian X.ringCatSheaf
+
+noncomputable local instance homologyEvaluationRoofComparisonOverAbelian
+    (X : Scheme.{u}) (U : X.Opens) : Abelian (SheafOfModules.{u} (X.ringCatSheaf.over U)) :=
+  SheafOfModules.instAbelian (X.ringCatSheaf.over U)
+
 private theorem homComplex_precomp_homology_isIso
     {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
     {R : Sheaf S CommRingCat.{u}}
