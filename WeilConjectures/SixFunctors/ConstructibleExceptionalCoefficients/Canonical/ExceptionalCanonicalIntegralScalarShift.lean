@@ -247,8 +247,8 @@ private theorem ordinary_completed_scalar_shift_plain
       [FiniteDimensional (ℚ_[l]) E] [Field L] [Algebra (ℚ_[l]) L]
       [FiniteDimensional (ℚ_[l]) L]
     (i : E →ₐ[ℚ_[l]] L) (T : Scheme.{u})
-    [AlgebraicGeometry.Scheme.pbcDerivedExtend
-      (completedCoefficientMap.{u, u} l E L i T)].CommShift ℤ :
+    [(AlgebraicGeometry.Scheme.pbcDerivedExtend
+      (completedCoefficientMap.{u, u} l E L i T)).CommShift ℤ] :
     ∃ e : integralOrdinaryDerivedScalar l E L i T ≅
         AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap l E L i T),
       e.hom ≫ completedScalarComparison l E L i T = scalarCompletion l E L i T ∧
