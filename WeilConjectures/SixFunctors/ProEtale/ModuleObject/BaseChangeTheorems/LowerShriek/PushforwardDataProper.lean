@@ -203,22 +203,6 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
     Functor.whiskerRight (P.lowerShriekOfCompactificationOfIsProperIso f).hom
         (boundedConstructibleUpperStar Λ ℓ g) ≫
       P.baseChange (isPullback_ofIsProper_overG sq).toCommSq := by
-  -- Normalize the trivial compactifications before constructing the exchange identity.
-  have hf := ‹IsProper f.left›
-  have hf' := ‹IsProper f'.left›
-  obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
-  obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
-  obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
-  obtain ⟨fl', ⟨⟨⟨⟩⟩⟩, fw'⟩ := f'
-  change Xl ⟶ Y.left at fl
-  change Xl' ⟶ Y'.left at fl'
-  obtain rfl : Xh = fl ≫ Y.hom := by simpa using fw.symm
-  obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
-  obtain ⟨gl, ⟨⟨⟨⟩⟩⟩, gw⟩ := g'
-  let f : Over.mk (fl ≫ Y.hom) ⟶ Y := Over.homMk fl rfl
-  let f' : Over.mk (fl' ≫ Y'.hom) ⟶ Y' := Over.homMk fl' rfl
-  have : IsProper f.left := hf
-  have : IsProper f'.left := hf'
   have hw : SepFinType.homMk (ofIsProperBaseChangeHom sq) ≫
         𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj) =
       𝟙 (SepFinType.mk (Compactification.ofIsProper f'.left).overObj) ≫
@@ -239,6 +223,9 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
   rewrite [P.baseChange_eq_pfBaseChange,
     P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
+  -- Expose the underlying scheme maps before comparing the pullback functors.
+  dsimp only [exchangeFormalism, boundedConstructibleUpperStar, ofIsProperBaseChangeHom,
+    Compactification.overObj, Compactification.ofIsProper] at key ⊢
   exact key
 
 variable {P}
