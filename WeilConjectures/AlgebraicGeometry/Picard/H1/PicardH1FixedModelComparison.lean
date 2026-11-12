@@ -234,10 +234,10 @@ private theorem residue_joint_coordinates
 attribute [local irreducible] structureSheafAb structureSheafCohomologyPullback
   derivedFiberBetti
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
--- The dependent geometric comparisons require additional elaboration heartbeats.
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
 Source: Stacks Project, Tag 0BF2, displayed chain maps; Tags 08CR and 0B91.
