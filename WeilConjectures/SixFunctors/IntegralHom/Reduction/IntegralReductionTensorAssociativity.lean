@@ -262,7 +262,7 @@ private theorem normalizedBeta_eq (n : ℕ)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
   let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
-  simp only [reductionExtension_eq_scalarExtension] at beta hbeta ⊢
+  dsimp only [reductionExtension_eq_scalarExtension] at beta hbeta ⊢
   dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at beta hbeta ⊢
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
@@ -311,7 +311,7 @@ private theorem normalizedReductionComparison_square
         DerivedCategory.Q.map (coefficientScalarTensorIso l E Y n P Q).hom := by
   have hn := m.normalization
   have hb := normalizedBeta_eq l E Y D hl n
-  simp only [reductionExtension_eq_scalarExtension] at hn hb ⊢
+  dsimp only [reductionExtension_eq_scalarExtension] at hn hb ⊢
   dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hn hb ⊢
   obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := hn P Q hP hQ
   let := hbeta
@@ -389,7 +389,7 @@ private theorem nativeReductionMonoidal
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
   have hn := normalizedReductionComparison_square l E Y D hl a n m
-  simp only [reductionExtension_eq_scalarExtension] at hn
+  dsimp only [reductionExtension_eq_scalarExtension] at hn
   dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hn
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
@@ -424,7 +424,7 @@ private theorem nativeReductionMonoidal
         simpa only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
           F, integralDerivedReduction, AS, CoefficientClosedStructure.tensor,
           totalTensor, coefficientTotalTensor, ordinaryTensor,
-          CategoryTheory.Functor.uncurry_obj_obj] using
+          CategoryTheory.Functor.uncurry_obj_obj, Category.assoc] using
           (transportedTensorComparison_square F e f m.mu
           (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))
           (TR.iso J R AR P Q hP hQ).hom
