@@ -121,8 +121,7 @@ private theorem affine_iso_of_section_equiv {X : Scheme.{u}} (U : X.affineOpens)
     exact hx
   exact transport _ V.ι_image_top (V.ι_image_le ⊤) e₀ rfl ht
 
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
+set_option profiler true in
 /-- The affine quotient tensor resolutions compute the ambient homology sheaf,
 before any pullback to the closed subscheme.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG, and Tag 00LS.
@@ -206,6 +205,7 @@ theorem exists_selfTor_ambient_resolution_charts
               (t V).hom.val.app (op (Over.mk (𝟙 (V.1))))
                 (s V _ (q x)) := by
   classical
+  let : Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
   dsimp only
   let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
   let S := DerivedCategory.singleFunctor
