@@ -73,8 +73,8 @@ private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.P
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀.obj) ≅ K) := by
   obtain ⟨n, hn⟩ := exists_isGE_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
-  exact ⟨n, derivedCompleteIntegers_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀),
-    hn, K₀.property, he⟩
+  refine ⟨n, ?_, hn, K₀.property, he⟩
+  exact derivedCompleteIntegers_boundedConstructible_aux ℓ (X := X) (E := E) (K₀ := K₀)
 
 private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ) [Fact ℓ.Prime]
     {X : Scheme.{u}} [IsNoetherian X] [TopologicalSpace.NoetherianSpace X]
