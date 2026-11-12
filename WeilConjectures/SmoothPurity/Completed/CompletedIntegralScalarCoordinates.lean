@@ -54,6 +54,7 @@ noncomputable def integralScalarSMul (x : Padic.coefficientExtensionIntegers l L
     (fun V ↦ integralScalarConstant l L Y V x) (fun g ↦ integralScalarConstant_map l L Y g x)
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- The `erw` transport across `integralOrdinaryScalar = changeOfRingsFunctor` is slow.
 /-- Coordinates for the completed coefficient extension: the extension ⊣ restriction
 adjunction `Ord ⊣ Res`, an `𝒪_E`-basis `b` of `𝒪_L`, and coordinate maps `π j` with
