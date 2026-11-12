@@ -76,6 +76,7 @@ private theorem module_restriction_zero
   exact (hM x (leOfHom U.unop.hom hx)).elim _ _
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the shared derived tensor instance with its additive construction is expensive.
 /-- A map `α : P → Q` in D_QCoh(Y), from a perfect complex, or from a pseudo-coherent
 complex into a bounded below one, with `Q` supported on `T = Y \ V`, is killed by the tensor
