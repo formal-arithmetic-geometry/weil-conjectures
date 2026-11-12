@@ -46,7 +46,6 @@ private theorem comparisonIntoPullback_eq
           (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
   simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc, cast_eq]
 
-set_option profiler true in
 /-- The comparison square for the termwise spectrum pullback with its canonical counit.
 
 Proof: isoSpec naturality and stalkMap_comp identify the four stalk rings and
@@ -127,6 +126,7 @@ theorem exists_affineSpectrum_canonicalComparison_square
     f f' g g' sq sq0 z0 i P
   let l := hs.choose
   have hl := hs.choose_spec
+  -- Simplify the comparison equation without changing the predicate used to choose l.
   change l.hom ≫ _ = _ at hl
   refine ⟨l, ?_⟩
   have hn := T.hom.naturality
