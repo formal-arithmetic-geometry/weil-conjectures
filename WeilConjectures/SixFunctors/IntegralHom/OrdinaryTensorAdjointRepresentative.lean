@@ -123,7 +123,6 @@ private theorem derived_map_surjective
   exact ⟨q,
     (CategoryTheory.RingedDerivedNative.GenericDerived.qHomEquiv_map P I q).symm.trans hg⟩
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -240,7 +239,6 @@ private theorem representative_square_after_injective
       rw [hbv, Functor.map_comp]
     _ = _ := by rw [Category.assoc, hvs']
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
