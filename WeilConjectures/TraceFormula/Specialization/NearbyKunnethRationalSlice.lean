@@ -73,6 +73,8 @@ end General
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
+set_option maxHeartbeats 1600000 in
+set_option profiler true in
 private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
