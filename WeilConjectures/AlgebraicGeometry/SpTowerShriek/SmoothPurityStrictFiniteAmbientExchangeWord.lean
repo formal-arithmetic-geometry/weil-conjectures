@@ -212,9 +212,8 @@ private meta partial def conversionCongruence
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
   let h ← compute
-  let ty ← Lean.Meta.mkHEq a b
-  let h ← Lean.Meta.mkAuxTheorem ty h
-    (zetaDelta := true) (kind? := `_finiteCongruence)
+  -- Share composed proofs in the expression cache. Only reduction certificates and
+  -- reusable congruence rules need separate declarations and kernel checks.
   cache.modify fun m => m.insert (a, b) h
   return h
 

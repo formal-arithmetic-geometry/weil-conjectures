@@ -57,34 +57,34 @@ private theorem derivedPullback_chosen_counit_normalization
       ε.app (((Scheme.Modules.pushforward s).mapHomotopyCategory
         (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Qh.map (b.counit.app K) := by
   classical
-  let ε {A B : Scheme.{u}} (s : A ⟶ B) :=
+  let ε :=
     (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
-  let b {A B : Scheme.{u}} (s : A ⟶ B) :=
+  let b :=
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction s)).mapHomotopyCategory
       (ComplexShape.up ℤ)
-  let a {A B : Scheme.{u}} (s : A ⟶ B) := schemeHomPullbackAdjunction.{u, w} s
+  let a := schemeHomPullbackAdjunction.{u, w} s
   have hc (M : HomotopyCategory
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
       (J : HomotopyCategory
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))
       (t : ((Scheme.Modules.tensorPullback s).mapHomotopyCategory
         (ComplexShape.up ℤ)).obj M ⟶ J) :
-      (a s).homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj J)
-        ((ε s).app M ≫ DerivedCategory.Qh.map t) =
+      a.homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj J)
+        (ε.app M ≫ DerivedCategory.Qh.map t) =
       (DerivedCategory.Qh
         (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).map
-          ((b s).homEquiv M J t) ≫
+          (b.homEquiv M J t) ≫
         (RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app J := by
     dsimp only [a]
     delta schemeHomPullbackAdjunction
     exact Classical.choose_spec (exists_schemeDerivedAdjunction s
       (hAdd := (Classical.choose exists_derivedPullbackComposition) s)
-      (ε s) ((Classical.choose (Classical.choose_spec
+      ε ((Classical.choose (Classical.choose_spec
         (Classical.choose_spec exists_derivedPullbackComposition))) s)) M J t
-  have he := counit_of_normalization (b s) (a s)
+  have he := counit_of_normalization b a
     (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
     (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    (ε s)
+    ε
     (RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit hc K
   dsimp only [a] at he
   exact he
@@ -120,6 +120,7 @@ theorem derivedPullbackComposition_counit_normalization
       derivedCompositionCounitApex f g K
     := by
   exact normalizeCounitPrecomposition
+    (C := DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
     ((canonicalDerivedPullbackComposition f g).hom.app
       (((RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).mapHomotopyCategory
         (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).obj K))
