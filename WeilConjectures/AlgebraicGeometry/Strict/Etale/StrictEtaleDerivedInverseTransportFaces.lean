@@ -267,7 +267,6 @@ private theorem scalar_insertion_ext (n : ℕ)
   apply congrArg ((strictEtaleSetAdjunction g).homEquiv _ _)
   exact he
 
-set_option maxHeartbeats 400000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
 private theorem ordinary_evaluation
     {DA : CoefficientDerivedImage A.inverse A.rightSystem A.systemAdj}
@@ -319,15 +318,23 @@ private theorem ordinary_evaluation
     ((A.inverseEvaluation (index n)).inv.app M)
   simp only [CategoryTheory.Functor.map_comp]
   dsimp only [underlying, coefficientUnderlying, CategoryTheory.Functor.comp_map] at hnB ⊢
-  erw [← reassoc_of% hnB]
-  rw [← (Scheme.etaleSetPullback g).map_comp_assoc]
-  rw [← CategoryTheory.Functor.map_comp, ← hUS]
-  erw [reassoc_of% he (M.level (index n))]
-  erw [← reassoc_of% hnat']
+  -- Focus on each composition so rewriting does not unfold unrelated sheaf maps.
+  conv_lhs =>
+    arg 2
+    erw [← reassoc_of% hnB]
+  conv_lhs =>
+    rw [← (Scheme.etaleSetPullback g).map_comp_assoc]
+    rw [← CategoryTheory.Functor.map_comp, ← hUS]
+  conv_rhs =>
+    erw [reassoc_of% he (M.level (index n))]
+    arg 2
+    erw [← reassoc_of% hnat']
   have hUT' := congrArg
     ((sheafCompose T.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).map) hUT
   simp only [CategoryTheory.Functor.map_comp] at hUT'
-  erw [← hUT']
+  conv_rhs =>
+    arg 2; arg 2
+    erw [← hUT']
   exact hs'
 
 -- Nested coefficient and inverse-image transposes require additional elaboration.
