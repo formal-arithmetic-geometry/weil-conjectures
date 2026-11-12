@@ -28,6 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Unfolding the two ring-sheaf presentations and the derived composition consumes extra heartbeats.
 /-- Scalar restriction of the algebra-valued derived pushforward is the scheme pushforward.
 Source: Stacks Project, Tag 0AVW, final pushforward identification
