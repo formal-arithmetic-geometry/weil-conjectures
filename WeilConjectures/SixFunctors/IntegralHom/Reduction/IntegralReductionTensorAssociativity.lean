@@ -251,6 +251,23 @@ theorem reductionTensorStrength_associativity
     ∀ X V Z : completedIntegralDerivedCategory l E Y D hl,
       X ◁ p.app (V, Z) ≫ p.app (X, V ⊗ Z) ≫ B.map (α_ X V Z).inv =
         (α_ X V (B.obj Z)).inv ≫ p.app (X ⊗ V, Z) := by
-  sorry
+  let R := completedIntegralCommRingSheaf l E Y D hl
+  let S := integralCoefficientCommRingSheaf l E Y n
+  let : MonoidalCategory (completedIntegralDerivedCategory l E Y D hl) := by
+    with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
+      max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) R
+  let : MonoidalCategory
+      (DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n))) := by
+    with_unfolding_all exact RingedDerivedNative.monoidal.{t + 1, t, u,
+      max u (t + 1) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) S
+  let e : a.tensor ≅ tensor (completedIntegralDerivedCategory l E Y D hl) := by
+    with_unfolding_all exact tensorPresentationNativeIso Y R a
+  let f := tensorPresentationNativeIso Y S m.target
+  obtain ⟨core, hcore⟩ := nativeReductionMonoidal l E Y D hl a n m
+  exact (CategoryTheory.transportedTensorMate_assoc
+    (C := completedIntegralDerivedCategory l E Y D hl)
+    (D := DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)))
+    a.tensor m.target.tensor
+    (derivedScalarExtensionRestrictionAdjunction l E Y n).choose m.mu e f core hcore)
 
 end WeilConjectures.IntegralHom
