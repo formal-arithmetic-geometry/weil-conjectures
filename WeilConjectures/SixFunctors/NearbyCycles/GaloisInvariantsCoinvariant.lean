@@ -101,6 +101,14 @@ variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : Galoi
     (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
   (hc : ∀ n, IsColimit (T.moduleCocone Λ (K.X n)))
 
+private lemma map_iso_inv_comp_map_eq_of_map_comp_eq
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y : C} (i : X ≅ Y) {t : X ⟶ X} {Z : D} (φ : F.obj Y ⟶ Z)
+    (h : F.map t ≫ F.map i.hom ≫ φ = F.map i.hom ≫ φ) :
+    F.map (i.inv ≫ t ≫ i.hom) ≫ φ = φ := by
+  rw [F.map_comp, F.map_comp, Category.assoc, Category.assoc, h,
+    ← F.map_comp_assoc, i.inv_hom_id, F.map_id, Category.id_comp]
+
 -- the derived functors of the tower are large terms
 /-- **The derived trace projector is the projector onto the invariants, after any continuous
 additive functor.** Let `R` be the retraction of the derived unit `K ⟶ Rg_{∞*} Lg_∞^* K` induced by
@@ -128,23 +136,13 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant (a : ℤ) [K.Is
   rw [show CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf =
     (CondensedRing.upperStarLowerStarAdjunction Λ ginf).derivedAdjunction from rfl, hR]
   let D := Adjunction.derivedUnitIso (f := (ginf)^*⟦Λ⟧) (g := (ginf)_*⟦Λ⟧) K a hK
-  let U := ((CondensedRing.upperStarLowerStarAdjunction Λ ginf).mapHomologicalComplex _).unit.app K
-  change G.map (D.inv ≫ DerivedCategory.Q.map (T.complexTrace Λ hd K hc ≫ U) ≫ D.hom) ≫ φ = φ
   have key := T.map_complexTrace_comp_unit_comp_eq_of_invariant Λ hd K hc
     (DerivedCategory.Q ⋙ G) hG act hact hlift hW (G.map D.hom ≫ φ) fun i ↦ by
       have h := derivedUnitIso_hom_comp_derivedUnitTransport_self Λ ginf (act i) (hact i) K a hK
       rw [Functor.comp_map, ← Category.assoc, ← G.map_comp, ← h, G.map_comp, Category.assoc,
         hφ i]
   rw [Functor.comp_map] at key
-  rw [G.map_comp D.inv (DerivedCategory.Q.map (T.complexTrace Λ hd K hc ≫ U) ≫ D.hom)]
-  rw [G.map_comp (DerivedCategory.Q.map (T.complexTrace Λ hd K hc ≫ U)) D.hom]
-  rw [Category.assoc]
-  rw [Category.assoc]
-  rw [key]
-  rw [← G.map_comp_assoc]
-  rw [Iso.inv_hom_id]
-  rw [G.map_id]
-  rw [Category.id_comp]
+  exact map_iso_inv_comp_map_eq_of_map_comp_eq G D φ key
 
 -- the derived functors of the tower are large terms
 /-- `GaloisTower.map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant` for an object `C ≅ K`
