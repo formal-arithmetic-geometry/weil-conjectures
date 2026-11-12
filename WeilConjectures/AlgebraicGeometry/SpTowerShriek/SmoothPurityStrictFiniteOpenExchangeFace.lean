@@ -232,6 +232,7 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let y ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
     let strip (e : Lean.Expr) : Lean.Expr := e.replace fun v =>
       if v.isMData then some v.consumeMData else none
+    -- Expand local aliases once so they do not generate congruence subproblems.
     let x ← Lean.Meta.zetaReduce (strip x)
     let y ← Lean.Meta.zetaReduce (strip y)
     let cache ← IO.mkRef ({} : Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr)
@@ -526,7 +527,6 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
-set_option trace.profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}
@@ -609,7 +609,6 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
-set_option trace.profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
     (o : Operations l E b) (levels : ComparisonLevels l E b o)
