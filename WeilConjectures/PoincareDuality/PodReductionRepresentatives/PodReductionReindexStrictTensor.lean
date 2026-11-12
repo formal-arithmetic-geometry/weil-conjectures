@@ -86,6 +86,35 @@ theorem proEtaleIsoCommaArrow_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (
     @AlgebraicGeometry.WeaklyEtale ⊤ g
     (inferInstance : AlgebraicGeometry.WeaklyEtale g) trivial).unit.app U))
 
+private theorem inverseImage_reduction_total_hom_ext {X Y : Scheme.{u}}
+    (g : X ⟶ Y) [IsIso g] (P Q : CochainComplex (scalarReductionSource l E Y) ℤ) (k : ℤ)
+    {N : coefficientSequenceModules l E X}
+    {f₁ f₂ : (integralComparisonSequencePullback l E g).obj
+      ((pullbackTensorOrdinaryReduction l E Y).obj (((T[Y]).obj (P, Q)).X k)) ⟶ N}
+    (h : ∀ (n : ℕ) (p q : ℤ) (hpq : p + q = k) (U : X.ProEt)
+      (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U)))
+      (y : (Q.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
+      let V := (n, (proEtaleIsoPostcompose g).obj U)
+      let s := ((Adjunction.ofIsRightAdjoint
+        (integralComparisonSequenceDirectImage l E g)).unit.app
+          ((pullbackTensorOrdinaryReduction l E Y).obj (((T[Y]).obj (P, Q)).X k))).val.app
+            (op V) (reducedUnitSection l E Y n _ (op V.2)
+              (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
+                (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y))
+      N.val.map (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+          (f₁.val.app (op ((pullbackTensorSequenceBase g).obj V)) s) =
+        N.val.map (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+          (f₂.val.app (op ((pullbackTensorSequenceBase g).obj V)) s)) : f₁ = f₂ := by
+  apply ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).homEquiv
+    _ _).injective
+  apply reduction_total_hom_ext_postcompose l E g P Q k
+  intro n p q hpq U x y
+  have := proEtaleIsoCommaArrow_isIso g U
+  refine (inverseImage_homEquiv_apply l E g _ _ _ (n, (proEtaleIsoPostcompose g).obj U) _).trans
+    (Eq.trans ?_ (inverseImage_homEquiv_apply l E g _ _ _ _ _).symm)
+  apply sequence_restrict_injective l E _ n (proEtaleIsoCommaArrow g U)
+  exact h n p q hpq U x y
+
 private theorem generators_unitSection {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (β : (I[g]).obj ((R[Y]).obj P) ≅ (R[X]).obj ((F[g]).obj P))
@@ -159,22 +188,14 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (S[X]).map (Prod.mkHom βP.hom βQ.hom) =
       βT.hom ≫ (R[X]).map t.hom ≫
         tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q) := by
-  trace "PH199: strict proof started"
   apply HomologicalComplex.hom_ext
   intro k
-  apply ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).homEquiv
-    _ _).injective
-  apply reduction_total_hom_ext_postcompose l E g P Q k
+  apply inverseImage_reduction_total_hom_ext l E g P Q k
   intro n p q hpq U x y
-  trace "PH199: generator extensionality applied"
-  have := proEtaleIsoCommaArrow_isIso g U
-  refine (inverseImage_homEquiv_apply l E g _ _ _ (n, (proEtaleIsoPostcompose g).obj U) _).trans
-    (Eq.trans ?_ (inverseImage_homEquiv_apply l E g _ _ _ _ _).symm)
-  trace "PH199: adjunction evaluated"
-  apply sequence_restrict_injective l E _ n (proEtaleIsoCommaArrow g U)
-  trace "PH199: restriction applied"
-  rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f]
-  erw [sheafOfModules_comp_apply, sheafOfModules_comp_apply]
+  change (((S[X]).obj ((R[X]).obj ((F[g]).obj P), (R[X]).obj ((F[g]).obj Q))).X k).val.map _
+    ((((S[X]).map (Prod.mkHom βP.hom βQ.hom)).f k).val.app _
+      ((((systemChain l E g).hom.app ((R[Y]).obj P, (R[Y]).obj Q)).f k).val.app _
+        ((((I[g]).map (tensorReductionStrictMap l E Y P Q)).f k).val.app _ _))) = _
   trace "PH199: composition evaluated"
   have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k)
     (n, (proEtaleIsoPostcompose g).obj U)
