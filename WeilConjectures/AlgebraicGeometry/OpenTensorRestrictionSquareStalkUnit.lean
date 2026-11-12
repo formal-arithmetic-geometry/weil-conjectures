@@ -65,6 +65,11 @@ private theorem composition_unit {X Y Z : Scheme.{u}}
 
 section
 
+attribute [local irreducible] Scheme.Modules.tensorPullback
+  Scheme.Modules.tensorPullbackCompositionIso Scheme.Modules.pushforward
+  Scheme.Modules.pushforwardComp Scheme.Modules.pushforwardCongr
+  openTensorRestrictionIso openTensorRestrictionSquareIso
+
 private def square_unit_cancel_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
     (U : X.Opens) (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
