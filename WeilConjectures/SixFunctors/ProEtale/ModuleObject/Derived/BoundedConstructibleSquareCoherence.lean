@@ -308,10 +308,8 @@ lemma boundedConstructibleUpperStarComp_square_coherence_tensor (f : X ⟶ Y) (�
               ℓ u).obj B) h₃') ≫
           (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).hom.app B)) ≫
       δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) _ _ ≫ (φ ⊗ₘ ψ) := by
-  rw [← reassoc_of% (δ_natural (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΔX)
-      _ _)]
-  rw [← reassoc_of% (δ_natural (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) _
-      _)]
+  rw [← Functor.OplaxMonoidal.δ_natural_assoc]
+  rw [← Functor.OplaxMonoidal.δ_natural_assoc]
   rw [← reassoc_of% (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ ΔX q _ _)]
   rw [reassoc_of% (eqToHom_comp_δ_boundedConstructibleUpperStar ℓ h₁
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p₁).obj A)
