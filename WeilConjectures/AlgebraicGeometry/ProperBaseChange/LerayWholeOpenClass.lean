@@ -51,7 +51,6 @@ attribute [local irreducible] moduleCohomologyFMap sectionCohomologyTheta
   resolutionSectionClass
 
 set_option backward.defeqAttrib.useBackward false in
-set_option trace.profiler true in
 -- Compare the cycle kernels in the module, presheaf, and additive group categories.
 private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F) (n : ℕ)
@@ -130,7 +129,6 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((P.mapHomologyIso E).hom x)) hp).trans
       (hclass.trans (congrArg (Hom.app (K.homologyπ n) ⊤) hc))
 
-set_option trace.profiler true in
 -- The edge formula and the resolution comparison use definitionally equal section functors.
 /-- The whole-open resolution section class is the cocycle-defined Leray edge.
 Source: Stacks Project, cohomology.tex, Tags 01E4 and 01F4.
@@ -160,6 +158,7 @@ theorem whole_open_leray_edge {X Y : Scheme.{u}} (f : X ⟶ Y)
   let S := RingedSpace.globalSectionsComplex I
   let U := forget₂ (ModuleCat ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
     AddCommGrpCat.{u}
+  -- Compare after the epimorphisms from cycles to cohomology.
   apply (cancel_epi (U.map
     (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv)).1
   apply (cancel_epi (U.map (S.homologyπ n))).1
