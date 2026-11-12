@@ -278,6 +278,7 @@ private lemma coinvariant_action_lift {κ : Type*} (act : κ → (Ω ≃ₐ[L] �
   rw [hres] at h
   exact h
 
+omit [IsGalois L Ω] in
 private lemma galoisLayerExchange_factorization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
