@@ -203,31 +203,32 @@ lemma restrictNormal_eq_one_of_mem_fixingSubgroup [Normal L L'] {σ : Ω ≃ₐ[
 
 -- Cache the graded tensor hypotheses of `leftDerivedFunctor`: rebuilding them for every
 -- pullback in the statement and proof dominates elaboration.
-@[local instance] theorem stabilizationHasTensorFour (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationHasTensorFour (T : Scheme.{u}) :
     ∀ (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasTensor₄ObjExt A B C D := by
   infer_instance
 
-@[local instance] theorem stabilizationHasGoodTensor12 (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationHasGoodTensor12 (T : Scheme.{u}) :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasGoodTensor₁₂Tensor A B C := by
   infer_instance
 
-@[local instance] theorem stabilizationHasGoodTensor23 (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationHasGoodTensor23 (T : Scheme.{u}) :
     ∀ (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))), GradedObject.HasGoodTensorTensor₂₃ A B C := by
   infer_instance
 
-@[local instance] theorem stabilizationTensorLeftSequential (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationTensorLeftSequential (T : Scheme.{u}) :
     ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := by
   infer_instance
 
-@[local instance] theorem stabilizationTensorRightSequential (T : Scheme.{u}) :
+@[local instance 20000] theorem stabilizationTensorRightSequential (T : Scheme.{u}) :
     ∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T),
       Limits.PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := by
   infer_instance
 
+set_option profiler true in
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
 of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible at `L(𝟙)^* C` (stabilization at the
