@@ -127,16 +127,11 @@ theorem exists_selfTor_nonpositive_chosen_comparisons
   let F := (Functor.const PUnit.{1}).obj K
   let G := (Functor.const PUnit.{1}).obj T
   obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y F G (fun _ ↦ hK)
-  let e : DerivedCategory.Q.obj K ⊗ DerivedCategory.Q.obj T ≅
-      DerivedCategory.Q.obj (CochainComplex.mapBifunctor K T (curriedTensor M)) :=
-    (comparison.app PUnit.unit.{1}).app PUnit.unit.{1}
+  let e := (comparison.app PUnit.unit.{1}).app PUnit.unit.{1}
   have : QuasiIso q := hq
-  let d : DerivedCategory.Q.obj K ≅ DerivedCategory.Q.obj T :=
-    asIso (DerivedCategory.Q.map q)
+  let d := asIso (DerivedCategory.Q.map q)
   let H := DerivedCategory.homologyFunctor M (-(n : ℤ))
-  let eQ : H.obj (DerivedCategory.Q.obj T ⊗ DerivedCategory.Q.obj T) ≅
-      (CochainComplex.mapBifunctor K T (curriedTensor M)).homology (-(n : ℤ)) :=
-    H.mapIso ((MonoidalCategory.tensorIso d (Iso.refl _)).symm ≪≫ e) ≪≫
+  let eQ := H.mapIso ((MonoidalCategory.tensorIso d (Iso.refl _)).symm ≪≫ e) ≪≫
     (DerivedCategory.homologyFunctorFactors M (-(n : ℤ))).app _
   obtain ⟨c, hc⟩ := exists_derived_selfTor_affine_coordinates i n
   refine ⟨fun U ↦ (c U).trans (Scheme.Modules.appLinearEquivOfIso eQ U.1), ?_⟩
@@ -144,11 +139,11 @@ theorem exists_selfTor_nonpositive_chosen_comparisons
   have hI : ∀ x ∈ I, φ x ∈ J := by
     intro x hx
     exact i.ker.ideal_le_comap_ideal h hx
-  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
-    A C I J φ hI P R
-  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+  refine (exists_quotient_resolution_tensor_comparison A C I J φ hI P R).imp
+    (fun ψ hψ ↦ hψ.imp (fun a ha ↦ ha.imp (fun k hk ↦ ?_)))
+  refine ⟨hk.1, hk.2.1, hk.2.2, ?_⟩
   intro e' x
-  have hn := hc V U h hbasic ψ a k hψ ha hk x
+  have hn := hc V U h hbasic ψ a k hk.1 hk.2.1 hk.2.2 x
   have hs := PresheafOfModules.naturality_apply eQ.hom.val (homOfLE h).op (c U x)
   change _ = eQ.hom.val.app (op V.1) _
   exact hs.symm.trans (congrArg (eQ.hom.val.app (op V.1)) hn)
