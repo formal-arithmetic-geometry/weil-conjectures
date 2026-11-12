@@ -13,6 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonPasting
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.Algebra.Homology.System.SystemScalarModel
+import all WeilConjectures.CategoryTheory.Cochain.CochainInverseMateComparison
 
 /-! # Open scalar mates on strict coefficient systems
 
@@ -242,8 +243,12 @@ private theorem sequenceScalarPullback_hom_eq {X B : Scheme.{u}} (j : X ⟶ B) :
   have hY := sequenceScalarAdjunction_unit l E L ι B
   let adjZ := (sequenceScalarAdjunction l E L ι X).choose
   have hZ := sequenceScalarAdjunction_unit l E L ι X
-  let pE := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j)
-  let pL := Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j)
+  let pE : integralComparisonSequencePullback l E j ⊣
+      AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l E) (sequenceQuotient l E) j :=
+    Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E j)
+  let pL : integralComparisonSequencePullback l L j ⊣
+      AlgebraicGeometry.ProEtale.VaryingRing.push (sequenceRings l L) (sequenceQuotient l L) j :=
+    Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l L j)
   let adj₁ := pE.comp adjZ
   let adj₂ := adjY.comp pL
   let e := sequenceScalarPullbackRight l E L ι j
@@ -406,14 +411,9 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
         (((integralComparisonSequencePullback l E j).mapHomologicalComplex (.up ℤ)).map
           ((AB.ordinaryAdj.mapHomologicalComplex (.up ℤ)).unit.app P)) ≫
         DerivedCategory.Q.map qK := by
-    rw [← DerivedCategory.Q.map_comp]
-    congr 1
-    rw [Adjunction.homEquiv_unit]
-    apply HomologicalComplex.hom_ext
-    intro n
-    have hu := unit_mateEquiv_symm AB.ordinaryAdj AX.ordinaryAdj
-      (TwoSquare.mk _ _ _ _ q.inv) (P.X n)
-    simpa [kP, qK, K, ha] using hu
+    have hc := CategoryTheory.cochainMate_unit AB.ordinaryAdj AX.ordinaryAdj q.inv P
+    rw [← ha] at hc
+    exact (congrArg DerivedCategory.Q.map hc).trans (DerivedCategory.Q.map_comp _ _)
   apply (cancel_mono
     ((integralComparisonSequencePullback l L j).mapDerivedCategory.map (AB.model.ε.app P) ≫
     (integralComparisonSequencePullback l L j).mapDerivedCategoryFactors.hom.app K)).1
