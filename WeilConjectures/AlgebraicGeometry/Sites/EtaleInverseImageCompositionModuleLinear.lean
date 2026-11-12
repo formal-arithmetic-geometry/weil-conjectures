@@ -25,8 +25,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- The dependent core application exceeds the default heartbeat limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
 image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
@@ -191,7 +189,6 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
-  dsimp
   intros gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
   obtain ⟨d, c, hd, hc, hu⟩ :=
     etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
