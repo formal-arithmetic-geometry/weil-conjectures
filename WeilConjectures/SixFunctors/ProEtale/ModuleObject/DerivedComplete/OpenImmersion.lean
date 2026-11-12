@@ -32,6 +32,7 @@ open Scheme PadicAlgCl CondensedRing
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Unfolding the derived extension by zero of the reduction is slow.
 /-- The derived pullback `Lj^*` along an open immersion preserves derived complete complexes: it
