@@ -316,11 +316,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
         Adjunction.derivedUnitRetraction K a hK
           ((galoisTower Ω h).complexTrace (Profinite.continuousMapRingObj T₀) hd K hc) ≫
           e.hom) = 𝟙 _ := by
-    have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction
+    erw [← (CondensedRing.derivedUpperStarLowerStarAdjunction
       (Profinite.continuousMapRingObj T₀)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.naturality e.inv
-    simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
-    rw [← hn]
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.naturality_assoc]
     erw [reassoc_of% hadj]
     exact e.inv_hom_id
   have hmain := fun (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
