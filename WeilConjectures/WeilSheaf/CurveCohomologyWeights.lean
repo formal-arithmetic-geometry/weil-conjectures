@@ -26,12 +26,20 @@ needed here.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.hasWeightsAtMostOver_globalSections`: blueprint
-  `lemma-degree-zero-top-cohomology--5`.
-- `HasWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology_two`: blueprint
-  `lemma-degree-zero-top-cohomology--6`.
+- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.hasWeightsAtMostOver_globalSections`: if `F` is
+  punctually of weights `≤ a`, then so is `H⁰(X, F)`.
+- `HasWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology_two`: if `F` is lisse and
+  punctually of weights `≤ a`, then `H_c²(X, F)` has weights `≤ a + 2`.
 - `IsPunctuallyPureOfWeight.isPureOfWeightOver_globalSections_and_compactlySupportedCohomology_two`:
-  blueprint `lemma-degree-zero-top-cohomology--7`.
+  if `F` is lisse and punctually pure of weight `a`, then `H⁰(X, F)` and `H_c²(X, F)` are pure of
+  weights `a` and `a + 2`.
+
+## Implementation details
+
+`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two_of_isLisse` repeats
+the Poincaré duality argument of
+`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`, which only uses
+that `X₀` is a smooth curve.
 -/
 
 @[expose] public section
@@ -45,13 +53,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--5`: if `F` is punctually of weights `≤ a`, the
-weights of `H⁰(X, F)` are at most `a`.
-
-Every eigenvalue `β` of the Frobenius on the global sections is, up to the power `deg x`, a local
-Frobenius eigenvalue of `F` at some closed point `x`
-(`AlgebraicGeometry.WeilSheaf.exists_hasEigenvalue_stalk_of_hasEigenvalue_globalSections`). This
-holds on any `k₀`-scheme of finite type, without smoothness or lissity. -/
+/-- If `F` is punctually of weights `≤ a`, then the weights of `H⁰(X, F)` are at most `a`. -/
 theorem HasWeightsAtMost.hasWeightsAtMostOver_globalSections {F : WeilSheaf k₀ l X} {a : ℝ}
     (hF : F.HasWeightsAtMost ι a) : F.globalSections.HasWeightsAtMostOver k₀ ι a := by
   intro β hβ
@@ -64,8 +66,7 @@ theorem HasWeightsAtMost.hasWeightsAtMostOver_globalSections {F : WeilSheaf k₀
   exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
 
 /-- If `F` is punctually `ι`-pure of weight `a`, then `H⁰(X, F)` is `ι`-pure of weight `a`
-(possibly zero): every Frobenius eigenvalue on the global sections is, up to the power `deg x`, a
-local Frobenius eigenvalue of `F` at some closed point `x`. -/
+(possibly zero). -/
 theorem IsPunctuallyPureOfWeight.isPureOfWeightOver_globalSections {F : WeilSheaf k₀ l X}
     {a : ℝ} (hF : F.IsPunctuallyPureOfWeight ι a) :
     F.globalSections.IsPureOfWeightOver k₀ ι a := by
@@ -82,9 +83,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- `H_c²(X, F) ≃ V_{π₁(X)}(-1)` for a lisse Weil sheaf `F` on a smooth curve `X₀`, not
-necessarily affine or geometrically connected: the proof of
-`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`, by Poincaré duality
-`H_c²(X, F) ≃ H⁰(X, F^∨)^∨(-1)`, only uses that `X₀` is a smooth curve. -/
+necessarily affine or geometrically connected. -/
 theorem nonempty_equiv_compactlySupportedCohomology_two_of_isLisse (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) :
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
@@ -97,14 +96,8 @@ theorem nonempty_equiv_compactlySupportedCohomology_two_of_isLisse (F : WeilShea
     rw [hPF, neg_neg, zpow_one, pow_one]).trans
       ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--6`: if `F` is punctually of weights `≤ a`, the
-weights of `H_c²(X, F)` are at most `a + 2`.
-
-Here `X₀` is a smooth curve and `F` is lisse. By Poincaré duality
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two_of_isLisse`) an
-eigenvalue of the Frobenius on `H_c²(X, F)` is `q β` for an eigenvalue `β` on the geometric
-coinvariants, which have weights at most `a`
-(`AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`). -/
+/-- If `F` is lisse and punctually of weights `≤ a`, then the weights of `H_c²(X, F)` are at most
+`a + 2`. -/
 theorem HasWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology_two
     {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {a : ℝ} (hw : F.HasWeightsAtMost ι a) :
     (F.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (a + 2) := by
@@ -126,14 +119,8 @@ theorem HasWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology_two
 
 namespace IsPunctuallyPureOfWeight
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--7`: if `F` is pure of weight `a`, then `H⁰(X, F)`
-and `H_c²(X, F)`, when nonzero, are pure of weights `a` and `a + 2`, respectively.
-
-Here `X₀` is a smooth curve and `F` is lisse and punctually `ι`-pure of weight `a`. The statement
-for `H⁰` is `IsPunctuallyPureOfWeight.isPureOfWeightOver_globalSections`.
-For `H_c²`, Poincaré duality identifies it with the Tate twist `(-1)` of the geometric coinvariants
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two_of_isLisse`), which
-are pure of weight `a` (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`). -/
+/-- If `F` is lisse and punctually `ι`-pure of weight `a`, then `H⁰(X, F)` and `H_c²(X, F)` are
+`ι`-pure of weights `a` and `a + 2` respectively (possibly zero). -/
 theorem isPureOfWeightOver_globalSections_and_compactlySupportedCohomology_two
     {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {a : ℝ} (hw : F.IsPunctuallyPureOfWeight ι a) :
     F.globalSections.IsPureOfWeightOver k₀ ι a ∧

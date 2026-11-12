@@ -23,8 +23,15 @@ matrix `Bᵀ` in the dual basis.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_toMatrix_dualBasis_eq_transpose_frobenius`
-  (blueprint `proposition-kummer-duality-integral-tate-module--3`).
+- `AlgebraicGeometry.Scheme.EtaleTorsor.exists_toMatrix_dualBasis_eq_transpose_frobenius`:
+  the matrix of the geometric Frobenius on the dual Tate module is the transpose of the matrix
+  of the arithmetic Frobenius on the Tate module.
+
+## Implementation details
+
+The geometric Frobenius of `C` acts on `lim_n H¹(C, ℤ/ℓⁿ)` by transport of torsors along
+`𝟙 × Spec σ`, where `σ : x ↦ x ^ q` is the arithmetic Frobenius of `Gal(K̄ / K)`; that is, by
+pullback along the geometric Galois Frobenius `𝟙 × Spec σ⁻¹`.
 -/
 
 @[expose] public section
@@ -42,18 +49,10 @@ variable {K : Type u} [Field K] [Fintype K] {C : Scheme.{u}} (p : C ⟶ Spec (.o
   [Smooth p] [SmoothOfRelativeDimension 1 p] [IsProper p] [GeometricallyIntegral p] (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)] [ConnectedSpace p.geometricFiber]
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--3`: if the arithmetic Frobenius
-on `T_ℓ J` has matrix `B`, then the geometric Frobenius on `Hom_{ℤ_ℓ}(T_ℓ J, ℤ_ℓ)` has matrix `Bᵀ`
-in the dual basis.
-
-Let `b` be a basis of the Tate module `T_ℓ J` of the Jacobian (given by a Jacobian torsion datum
-`d`), and `B` the matrix in `b` of the arithmetic Frobenius `σ : x ↦ x ^ q` of `Gal(K̄ / K)`,
-acting on `T_ℓ J` by coordinates. The geometric Frobenius of `C` acts on `lim_n H¹(C, ℤ/ℓⁿ)`
-by transport of torsors along `𝟙 × Spec σ`, that is, by pullback along the geometric Galois
-Frobenius `𝟙 × Spec σ⁻¹`. There is an endomorphism `Φ` of `Hom_{ℤ_ℓ}(T_ℓ J, ℤ_ℓ)` through which
-it acts under the identification
-`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHOneLimitAddEquivDualJacobianTateModule`, and the
-matrix of `Φ` in the dual basis of `b` is `Bᵀ`. -/
+/-- Let `b` be a basis of the Tate module `T_ℓ J` of the Jacobian, and `B` the matrix in `b` of the
+arithmetic Frobenius `σ : x ↦ x ^ q` of `Gal(K̄ / K)`. Then the geometric Frobenius of `C` acts on
+`lim_n H¹(C, ℤ/ℓⁿ) ≃ Hom_{ℤ_ℓ}(T_ℓ J, ℤ_ℓ)` through an endomorphism `Φ` whose matrix in the dual
+basis of `b` is `Bᵀ`. -/
 theorem exists_toMatrix_dualBasis_eq_transpose_frobenius
     (s : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber) (G : Type u) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]

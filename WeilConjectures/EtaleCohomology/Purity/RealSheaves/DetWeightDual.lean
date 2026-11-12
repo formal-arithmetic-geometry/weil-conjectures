@@ -22,8 +22,7 @@ form a composition series of `ρ^∨` whose factors are the contragredients of t
 ## Main statements
 
 - `AlgebraicGeometry.WeilGroup.detWeight_dual`: `dw_ι(ρ^∨) = -dw_ι(ρ)`.
-- `AlgebraicGeometry.WeilGroup.detWeightMultiset_dual`: `DW(ρ^∨) = -DW(ρ)` (blueprint
-  `proposition-determinant-weights-tensor-operations--3`).
+- `AlgebraicGeometry.WeilGroup.detWeightMultiset_dual`: `DW(ρ^∨) = -DW(ρ)`.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ variable {W : WeilGroup p} {l : ℕ} [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
-/-- The determinant weight of the contragredient is the negative of the determinant weight:
-`det(γ | ρ^∨) = det(γ | ρ)⁻¹` and `ρ^∨` has the same rank as `ρ`. -/
+/-- The determinant weight of the contragredient is the negative of the determinant weight. -/
 theorem detWeight_dual : W.detWeight l ρ.dual ι = -W.detWeight l ρ ι := by
   have hdet : LinearMap.det (ρ.dual W.frobeniusLift) = (LinearMap.det (ρ W.frobeniusLift))⁻¹ := by
     change LinearMap.det (ρ W.frobeniusLift⁻¹).dualMap = _
@@ -49,13 +47,9 @@ theorem detWeight_dual : W.detWeight l ρ.dual ι = -W.detWeight l ρ ι := by
       ← Representation.coe_detCharacter_apply, map_inv, Units.val_inv_eq_inv_val]
   rw [detWeight, detWeight, hdet, frobeniusWeight_inv, Subspace.dual_finrank_eq, neg_div]
 
-/-- Blueprint `proposition-determinant-weights-tensor-operations--3`: `DW(V^∨) = -DW(V)`.
-
-The determinant weights of the composition factors of the contragredient `ρ^∨` of a
+/-- The determinant weights of the composition factors of the contragredient `ρ^∨` of a
 finite-dimensional Weil representation `ρ` are the negatives of those of `ρ`, with
-multiplicities: the composition factors of `ρ^∨` are the contragredients of those of `ρ`
-(`Representation.CompositionSeries.exists_equiv_dual`), and `dw_ι(A^∨) = -dw_ι(A)`
-(`AlgebraicGeometry.WeilGroup.detWeight_dual`). -/
+multiplicities: `DW(ρ^∨) = -DW(ρ)`. -/
 theorem detWeightMultiset_dual :
     W.detWeightMultiset l ρ.dual ι = (W.detWeightMultiset l ρ ι).map Neg.neg := by
   let s := ρ.exists_compositionSeries.some
