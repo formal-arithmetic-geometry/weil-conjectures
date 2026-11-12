@@ -142,7 +142,6 @@ private theorem square_unit_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
   erw [reassoc_of% hcP]
   simp only [← Functor.map_comp]
   have hb := βp.hom_inv_id_app_assoc M (βq.hom.app M ≫ (T q).map (θj.hom.app M))
-  simp only [βp] at *
   rw [hb]
   have hn' : (H U.ι).map (θj.hom.app M) ≫
       (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) =
