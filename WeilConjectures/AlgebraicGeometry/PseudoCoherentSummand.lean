@@ -106,8 +106,6 @@ private theorem summand_affine_finiteFree_model (S : Scheme.{u}) (U : S.Opens)
 
 
 
-set_option trace.profiler true in
--- Affine-site functor comparisons and local model witnesses require extra elaboration budget.
 /-- If a pseudo-coherent object of `D(𝒪_X)` is isomorphic to a binary biproduct,
 both summands are pseudo-coherent. Source: Stacks Project, Cohomology of Sheaves,
 Tag 08CE, with More on Algebra, Tag 064X (blueprint: lem-pc-pseudo-coherent-summand).
@@ -138,6 +136,7 @@ theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u})
     (hK : IsPseudoCoherent X K) :
     IsPseudoCoherent X L ∧ IsPseudoCoherent X M := by
   classical
+  -- Share the site instances across the affine restriction and both summand models.
   have : ∀ U : X.Opens,
       HasSheafify ((Opens.grothendieckTopology X.toRingedSpace).over U)
         AddCommGrpCat.{u} := inferInstance
