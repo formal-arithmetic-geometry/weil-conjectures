@@ -194,53 +194,53 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   apply inverseImage_reduction_total_hom_ext l E g P Q k
   intro n p q hpq U x y
   simp only [sheafOfModules_comp_apply]
-  trace "PH199: composition evaluated"
-  have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k)
-    (n, (proEtaleIsoPostcompose g).obj U)
-    (reducedUnitSection l E Y n _ (op ((proEtaleIsoPostcompose g).obj U))
+  let V := (n, (proEtaleIsoPostcompose g).obj U)
+  let V' := (pullbackTensorSequenceBase g).obj V
+  let c := (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
+  let η := (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit
+  let res := (((S[X]).obj ((R[X]).obj ((F[g]).obj P),
+    (R[X]).obj ((F[g]).obj Q))).X k).val.map c
+  let m := (((S[X]).map (Prod.mkHom βP.hom βQ.hom)).f k).val.app (op V')
+  let a := (((systemChain l E g).hom.app ((R[Y]).obj P, (R[Y]).obj Q)).f k).val.app (op V')
+  let x₀ := reducedUnitSection l E Y n (P.X p) (op V.2) x
+  let y₀ := reducedUnitSection l E Y n (Q.X q) (op V.2) y
+  let uP := (η.app (((R[Y]).obj P).X p)).val.app (op V) x₀
+  let uQ := (η.app (((R[Y]).obj Q).X q)).val.app (op V) y₀
+  have e1 := inverseImage_map_unit l E g ((tensorReductionStrictMap l E Y P Q).f k) V
+    (reducedUnitSection l E Y n _ (op V.2)
       (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-        (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-        (op ((proEtaleIsoPostcompose g).obj U)) x y))
-  have e2 := strictMap_reducedUnit_generator l E Y P Q n p q k hpq
-    ((proEtaleIsoPostcompose g).obj U) x y
-  erw [e1, e2]
+        (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y))
+  have e2 := strictMap_reducedUnit_generator l E Y P Q n p q k hpq V.2 x y
+  have e12 := e1.trans (congrArg
+    ((η.app (((S[Y]).obj ((R[Y]).obj P, (R[Y]).obj Q)).X k)).val.app (op V)) e2)
+  refine (congrArg (fun z ↦ res (m (a z))) e12).trans ?_
   trace "PH199: strict map evaluated"
-  have e3 := systemChain_generator l E g ((R[Y]).obj P) ((R[Y]).obj Q) p q k hpq
-    (n, (proEtaleIsoPostcompose g).obj U)
-    (reducedUnitSection l E Y n (P.X p) (op ((proEtaleIsoPostcompose g).obj U)) x)
-    (reducedUnitSection l E Y n (Q.X q) (op ((proEtaleIsoPostcompose g).obj U)) y)
-  erw [e3]
+  have e3 := systemChain_generator l E g ((R[Y]).obj P) ((R[Y]).obj Q)
+    p q k hpq V x₀ y₀
+  refine (congrArg (fun z ↦ res (m z)) e3).trans ?_
   trace "PH199: system tensor evaluated"
   have e4 := coefficientTotalTensor_map_tensorGenerator.{u, u + 1, u}
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
-    βP.hom βQ.hom p q k hpq
-    (op ((pullbackTensorSequenceBase g).obj (n, (proEtaleIsoPostcompose g).obj U)))
-    (((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app
-      ((((R[Y]).obj P).X p))).val.app (op (n, (proEtaleIsoPostcompose g).obj U))
-      (reducedUnitSection l E Y n (P.X p) (op ((proEtaleIsoPostcompose g).obj U)) x))
-    (((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E g)).unit.app
-      ((((R[Y]).obj Q).X q))).val.app (op (n, (proEtaleIsoPostcompose g).obj U))
-      (reducedUnitSection l E Y n (Q.X q) (op ((proEtaleIsoPostcompose g).obj U)) y))
-  erw [e4]
-  erw [coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
+    βP.hom βQ.hom p q k hpq (op V') uP uQ
+  refine (congrArg res e4).trans ?_
+  refine (coefficientTensorGenerator_restrict (coefficientSequenceTopology (ProEt.topology X))
     (coefficientSequenceCommRingSheaf l E X) ((R[X]).obj ((F[g]).obj P))
-    ((R[X]).obj ((F[g]).obj Q)) p q k hpq]
-  erw [← PresheafOfModules.naturality_apply (βP.hom.f p).val
-    (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op,
-    ← PresheafOfModules.naturality_apply (βQ.hom.f q).val
-    (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op]
-  trace "PH199: tensor restriction evaluated"
-  have rP := generators_unitSection l E g P βP hβP n p U x
-  have rQ := generators_unitSection l E g Q βQ hβQ n q U y
+    ((R[X]).obj ((F[g]).obj Q)) p q k hpq c
+    ((βP.hom.f p).val.app (op V') uP) ((βQ.hom.f q).val.app (op V') uQ)).trans ?_
+  have rP := (PresheafOfModules.naturality_apply (βP.hom.f p).val c uP).symm.trans
+    (generators_unitSection l E g P βP hβP n p U x)
+  have rQ := (PresheafOfModules.naturality_apply (βQ.hom.f q).val c uQ).symm.trans
+    (generators_unitSection l E g Q βQ hβQ n q U y)
+  refine (congrArg₂ (coefficientTensorGenerator.{u, u + 1, u}
+    (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
+    ((R[X]).obj ((F[g]).obj P)) ((R[X]).obj ((F[g]).obj Q)) p q k hpq (op (n, U)))
+    rP rQ).trans ?_
   have rT := generators_unitSection l E g ((T[Y]).obj (P, Q)) βT hβT n k U
     (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-      (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
-      (op ((proEtaleIsoPostcompose g).obj U)) x y)
-  erw [rP]
-  erw [rQ]
-  refine Eq.trans ?_ (PresheafOfModules.naturality_apply ((βT.hom ≫ (R[X]).map t.hom ≫
-    tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val
-    (CategoryTheory.Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op _)
+      (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq (op V.2) x y)
+  refine Eq.trans ?_ (PresheafOfModules.naturality_apply
+    (βT.hom.f k ≫ ((R[X]).map t.hom).f k ≫
+      (tensorReductionStrictMap l E X ((F[g]).obj P) ((F[g]).obj Q)).f k).val c _)
   trace "PH199: left side completed"
   have r3 := reducedUnitSection_map l E X n (t.hom.f k) U
     (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
