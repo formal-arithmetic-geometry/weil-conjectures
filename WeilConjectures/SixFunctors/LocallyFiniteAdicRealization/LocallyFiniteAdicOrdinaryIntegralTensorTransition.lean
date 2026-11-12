@@ -164,6 +164,7 @@ private theorem iso_factor_six
   simp only [Iso.trans_assoc]
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 private theorem finiteOrdinaryIntegralTensorModel_factor
     (A : FiniteCondensedData l X) (C : CoefficientSystem l X)
     (E : Index l (PadicAlgCl l)) :
