@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.Diago
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientConePush
 import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteBoundaryEndpointMaps
+import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLinePullbackLowerTensor
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
@@ -57,6 +58,15 @@ private theorem finiteEvaluationSection_exists
     ∃ v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U,
       HEq v x := ⟨x, HEq.rfl⟩
 
+private def moduleIsoSectionEquiv
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u + 1}} {M N : SheafOfModules.{u + 1} R}
+    (e : M ≅ N) (U : Cᵒᵖ) : M.val.obj U ≃ N.val.obj U where
+  toFun := e.hom.val.app U
+  invFun := e.inv.val.app U
+  left_inv x := congrArg (fun q : M ⟶ M ↦ q.val.app U x) e.hom_inv_id
+  right_inv x := congrArg (fun q : N ⟶ N ↦ q.val.app U x) e.inv_hom_id
+
 set_option profiler true in
 -- Compare the finite scalar-extension unit with the normalized root evaluation.
 private theorem normalizedRootSection
@@ -95,9 +105,8 @@ private theorem normalizedRootSection
         ((addSectionEquiv (k.lineForget.app (op n)) U).apply_symm_apply z).symm)
   have hwv : ((restrictionUnderlying l T r n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U w = v :=
-    congrArg (fun q ↦ q.hom.app U v)
-      ((restrictionUnderlying l T r n).inv_hom_id_app
-        (lineModule l (ULift.{u} (Padic l)) c))
+    eq_of_heq ((restrictionUnderlying_hom_section l T r n
+      (lineModule l (ULift.{u} (Padic l)) c) U w).trans hw)
   have hnorm := (lineEvaluation_existsUnique l (ULift.{u} (Padic l)) c n).exists.choose_spec
     U 1 x x' v hx.symm
     (by simpa only [one_smul] using hv)
@@ -175,8 +184,7 @@ private theorem horizontal_varying_root_square
       (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U
         (Scheme.tateFiniteTensor X l (FiniteRing l (ULift.{u} (Padic l)) n) n
           (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1 z) := by
-    let e := addSectionEquiv ((finiteForget l (ULift.{u} (Padic l)) X n).mapIso
-      (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n)) U
+    let e := moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n) U
     exact (e.symm_apply_apply x).symm.trans (congrArg e.symm hcoord)
   let v := (((d.varyingPush.hom.app N').app (op n)).hom.app U)
     (((p.restrictionX.F.map α).app (op n)).hom.app U y)
@@ -190,7 +198,7 @@ private theorem horizontal_varying_root_square
       d.line.iso.hom n U x) := by
     exact (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).trans hv
   have hn := d.line.normalization n U 1 z
-  rw [← hinput, map_one] at hn
+  rw [pushforward_map_apply, ← hinput, map_one] at hn
   have heval : (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' x' =
       Scheme.tateFiniteTensor X' l (FiniteRing l (ULift.{u} (Padic l)) n) n
         (finiteScalar l (ULift.{u} (Padic l)) n) U'.unop 1
@@ -202,13 +210,14 @@ private theorem horizontal_varying_root_square
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
       p'.coefficientsX n U' (restrictRoot l hX n U z)
-    let e := (finiteForget l (ULift.{u} (Padic l)) X' n).mapIso
-      (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n)
-    have heinj := (addSectionEquiv e U').injective
+    have heinj :=
+      (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n) U').injective
     have hxv := heinj (heval.trans hleft.symm)
-    let s := (restrictionUnderlying l X' p'.restrictionX n).app N'
-    have hsinj := (addSectionEquiv s U').injective
-    have hv' := hsinj hxv
+    have hv' : v = (p'.coefficientsX.lineForget.inv.app (op n)).hom.app U'
+        (restrictRoot l hX n U z) :=
+      eq_of_heq ((restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).symm.trans
+        ((heq_of_eq hxv).trans
+          (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' _)))
     have hzv := congrArg
       (fun q ↦ (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' q) hv'
     have hir := (addSectionEquiv (p'.coefficientsX.lineForget.app (op n)) U').apply_symm_apply
