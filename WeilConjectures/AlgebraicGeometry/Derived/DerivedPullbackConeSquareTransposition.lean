@@ -89,14 +89,27 @@ private theorem cone_precompose
   · simp [CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.map,
       Category.assoc]
 
+private theorem map_transpose_of_composite
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (Q : C ⥤ C') (Q' : D ⥤ D')
+    {Ld : C' ⥤ D'} {Rd : D' ⥤ C'} (adj' : Ld ⊣ Rd)
+    {P A : C} {I Z : D} (c : P ⟶ A) (b : P ⟶ R.obj I) (α : A ⟶ R.obj I)
+    (k : Z ⟶ L.obj P) (a : Z ⟶ I)
+    (e : Q'.obj (L.obj P) ⟶ Ld.obj (Q.obj P))
+    (η : Q.obj (R.obj I) ⟶ Rd.obj (Q'.obj I))
+    (ha : a = k ≫ (adj.homEquiv _ _).symm b) (hb : b = c ≫ α)
+    (he : Q'.map ((adj.homEquiv _ _).symm b) =
+      e ≫ (adj'.homEquiv _ _).symm (Q.map b ≫ η)) :
+    Q'.map a = (Q'.map k ≫ e ≫ Ld.map (Q.map c)) ≫
+      (adj'.homEquiv _ _).symm (Q.map α ≫ η) := by
+  rw [ha, Functor.map_comp, he, hb, Functor.map_comp, Category.assoc,
+    Adjunction.homEquiv_naturality_left_symm]
+  simp only [Category.assoc]
+
 -- Cache the finite biproduct instance used by all three cone comparisons.
 local instance coneSquare_hasBinaryBiproducts (S : Scheme.{u}) :
     HasBinaryBiproducts (SheafOfModules.{u} (moduleRings S.toRingedSpace)) :=
   inferInstance
-
-local instance coneSquare_hasHomology (S : Scheme.{u})
-    (K : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) (i : ℤ) :
-    K.HasHomology i := inferInstance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -210,17 +223,16 @@ theorem derivedPullback_cone_square_transposition
     simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
       Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
     convert hh using 2
-  · rw [htrans, Functor.map_comp]
-    have h := he _ hconeP (CochainComplex.mappingCone t')
+  · have h := he _ hconeP (CochainComplex.mappingCone t')
       (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
         (CochainComplex.mappingCone.mapHomologicalComplexIso t' G).inv)
-    rw [hcone] at h
-    rw [hcone]
-    have hh := congrArg (fun k ↦ DerivedCategory.Q.map
-      (CochainComplex.mappingCone.mapHomologicalComplexIso p E).inv ≫ k) h
-    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom,
-      Functor.map_comp, Adjunction.homEquiv_naturality_left_symm, Category.assoc,
-      adj₀, E, L, c, F, G] at hh ⊢
-    convert hh using 2
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+    apply map_transpose_of_composite ac DerivedCategory.Q DerivedCategory.Q (relativeMVAdj g)
+      c _ _ (CochainComplex.mappingCone.mapHomologicalComplexIso p E).inv _
+      (e _ hconeP).hom _ htrans
+    · exact (congrArg (fun k ↦ k ≫
+        (CochainComplex.mappingCone.mapHomologicalComplexIso t' G).inv) hcone).trans
+          (Category.assoc _ _ _)
+    · exact h
 
 end AlgebraicGeometry
