@@ -162,10 +162,8 @@ theorem nativeChainForgetComponent_transport
     simp only [nativeRingedTripleLeft, nativeRingedTripleRight, Iso.trans_hom,
       Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom] at hs
     dsimp only [coefficientTotalTensor] at hs
-    erw [RingedForgetTensorTransposition.tensor_map₂_eq
-      (B := RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R),
-      RingedForgetTensorTransposition.tensor_map₂_eq
-        (B := RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R)] at hs
+    simp only [RingedForgetTensorTransposition.tensor_map₂_eq
+      (B := RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R)] at hs
     simpa only [tensor_map, id_tensorHom, tensorHom_id, Category.assoc] using hs
   have hc := tensor_square_pasting E U F G r.tensor o.tensor
     (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
