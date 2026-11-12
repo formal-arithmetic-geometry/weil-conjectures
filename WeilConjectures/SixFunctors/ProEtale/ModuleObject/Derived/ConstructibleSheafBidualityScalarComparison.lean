@@ -29,6 +29,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Matching the bounded-constructible closed structure with the ambient one is slow.
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
