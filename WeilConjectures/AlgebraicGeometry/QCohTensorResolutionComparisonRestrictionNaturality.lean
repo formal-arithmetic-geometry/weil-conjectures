@@ -143,8 +143,8 @@ theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
   have hz := tensorResolution_homology_zigzag R (.up ℤ) i
     a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ f₀ f₁ f₂ f₃ f₄ h₀ h₁ h₂ h₃
   rw [tensorResolutionComparison_hom, tensorResolutionComparison_hom]
-  simpa only [tensorResolutionSiteModules, Scheme.Modules, moduleRings,
+  convert hz using 1 <;> simp only [tensorResolutionSiteModules, Scheme.Modules, moduleRings,
     CochainComplex.mapBifunctor, R, a₀, a₁, a₂, a₃, b₀, b₁, b₂, b₃, f₀, f₄,
-    Category.assoc] using hz
+    Category.assoc]
 
 end AlgebraicGeometry
