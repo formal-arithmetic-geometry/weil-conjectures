@@ -124,6 +124,13 @@ private lemma pullbackComparison_id_self_aux {C : Type*} [Category C]
   rw [hu, ← Category.assoc a, hc, Category.comp_id]
   rw [← Category.assoc, ← hn, Category.assoc, hb, Category.comp_id]
 
+/-- Compose a factorization of a mapped morphism with another mapped morphism. -/
+private lemma map_comp_of_comp_eq_map_aux {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {X Y Z : C} {T : D} (i : F.obj X ⟶ T) (u : T ⟶ F.obj Y)
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : i ≫ u = F.map f) :
+    i ≫ u ≫ F.map g = F.map (f ≫ g) ≫ 𝟙 _ := by
+  rw [← Category.assoc, h, ← F.map_comp, Category.comp_id]
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 section Transpose
@@ -250,34 +257,16 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
   let KX := R((aX)_*⟦Λ⟧).obj A
   let KY := R((aY)_*⟦Λ⟧).obj B
   let cA := L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A)
-  let cB := L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
   -- the transported counit of the first square is the one of `w`, up to `L(𝟙)^* ≅ 𝟭`
-  have e₁ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KX) ≫
-      (pullbackSquareComparison Λ sq₁).hom.app KX ≫ cA =
-      L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
-        ((leftDerivedUpperStarId Λ S).hom.app KX)) ≫
-        (pullbackSquareComparison Λ w).hom.app KX ≫ cA := by
-    exact (Category.assoc _ _ _).symm.trans
-      ((congrArg (fun f ↦ f ≫ cA)
-        (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id Λ sq₁ w KX)).trans
-          (Category.assoc _ _ _))
+  have e₁ := (reassoc_of%
+    (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id Λ sq₁ w KX)) cA
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
-  have e₂ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KY) ≫
-      (pullbackSquareComparison Λ sq₂).hom.app KY ≫ cB =
-      L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
-        ((leftDerivedUpperStarId Λ S).hom.app KY) ≫
-        (derivedUpperStarLowerStarAdjunction Λ aY).counit.app B) ≫ 𝟙 _ := by
-    rw [← Category.assoc,
-      leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self Λ sq₂ KY]
-    exact (L((p₂)^*⟦Λ⟧).map_comp _ _).symm.trans (Category.comp_id _).symm
-  have t₁ : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
-      ((leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj KX) ≫
-        (pullbackSquareComparison Λ sq₁).hom.app KX ≫ cA)) := by
-    have hg : IsIso ((derivedUpperStarLowerStarAdjunction Λ p₂).homEquiv _ _
-        ((pullbackSquareComparison Λ w).hom.app KX ≫ cA)) := by
-      rw [homEquiv_pullbackSquareComparison_comp_counit]
-      exact h₁
-    exact Adjunction.isIso_homEquiv_of_eq_map_comp _ _ _ _ e₁ (hg := hg)
+  have e₂ := map_comp_of_comp_eq_map_aux L((p₂)^*⟦Λ⟧) _ _ _
+    ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
+    (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self Λ sq₂ KY)
+  have hg := (congrArg IsIso (homEquiv_pullbackSquareComparison_comp_counit Λ w A)).mpr h₁
+  have t₁ := Adjunction.isIso_homEquiv_of_eq_map_comp
+    (derivedUpperStarLowerStarAdjunction Λ p₂) _ _ _ e₁ (hg := hg)
   have t₂ := Adjunction.isIso_homEquiv_map_comp_counit (derivedUpperStarLowerStarAdjunction Λ aY)
     ((leftDerivedUpperStarId Λ S).hom.app KY)
   have t₃ := Adjunction.isIso_leftProjectionMorphism_of_isIso
