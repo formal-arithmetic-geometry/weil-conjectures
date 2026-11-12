@@ -26,8 +26,33 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem derivedOpenGluing_overFunctor_additive (X : Scheme.{u}) (U : X.Opens) :
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).Additive := by
+  constructor
+  intro M N f g
+  ext W x
+  rfl
+
+private theorem derivedOpenGluing_overMap_additive (X : Scheme.{u})
+    {U V : X.Opens} (i : U ⟶ V) :
+    (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).Additive := by
+  constructor
+  intro M N f g
+  ext W x
+  rfl
+
+private theorem derivedOpenGluing_overEquiv_additive (X : Scheme.{u}) (U : X.Opens) :
+    (Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+-- Infer additivity componentwise, without searching for products of composite functors.
+attribute [local instance] derivedOpenGluing_overFunctor_additive
+  derivedOpenGluing_overMap_additive derivedOpenGluing_overEquiv_additive
 
 private theorem compatible_composites
     {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
@@ -49,10 +74,7 @@ private theorem compatible_composites
 set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 500000 in
--- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Derived complexes and compatible morphisms glue across a two-open cover of a scheme.
 D(O_X), D(O_U), D(O_V), D(O_(U ∩ V)) are `schemeDerivedCategory` of `X`, `U.toScheme`,
 `V.toScheme`, `(U ⊓ V).toScheme`. Restriction from X to an open W is restriction to the
