@@ -122,8 +122,12 @@ private theorem comparisonsForCoefficient
           (φ f c d).app K = refinementIso Λ r K.obj e) := by
   classical
   simp only [← forall_and]
-  rw [← Classical.skolem, ← Classical.skolem, ← Classical.skolem]
-  intro X Y f
+  refine Classical.axiomOfChoice (α := Spaces k) ?_
+  intro X
+  refine Classical.axiomOfChoice (α := Spaces k) ?_
+  intro Y
+  refine Classical.axiomOfChoice (α := X ⟶ Y) ?_
+  intro f
   have : IsSeparated X.obj.hom := X.property.1
   have : LocallyOfFiniteType X.obj.hom := X.property.2.1
   have : QuasiCompact X.obj.hom := X.property.2.2
