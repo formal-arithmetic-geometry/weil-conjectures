@@ -437,7 +437,8 @@ theorem scalar_chern_local_factorization
       (Profinite.continuousMapRingObj.{u} E.1) (secondProjection Y)
       (family.rational E).R₂ (family.rational E).p₂_canonical (family.rational E).p₂_unit
       (scalarP2UnitIso _ Y).hom (native_p2_endpoint _ Y) hq
-    simpa only [scalarP2Chern, scalarP2LocalChern, secondDiagramPushIso, coefficient, line]
-      using hfinal
+    unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
+    dsimp only
+    simpa only [coefficient, line] using hfinal
 
 end AlgebraicGeometry.ProEtale.RationalP1
