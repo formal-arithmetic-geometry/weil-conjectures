@@ -31,6 +31,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
+-- Normalize the mate cube before specializing to the derived categories.
 private lemma mateEquiv_app_cube_converse_of_eq
     {DY DX DY' DX' EY EX EY' EX' : Type*}
     [Category* DY] [Category* DX] [Category* DY'] [Category* DX']
@@ -66,7 +67,6 @@ private lemma mateEquiv_app_cube_converse_of_eq
   rw [hσr, hαf', hαf, hσs]
   exact h K
 
-set_option profiler true in
 private lemma brown_scalarPullback_mate
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
     {V W : Scheme.{u}} (g : V ⟶ W) :
@@ -84,7 +84,7 @@ private lemma brown_scalarPullback_mate
   rw [← he]
   exact (mateEquiv _ _).apply_symm_apply _
 
-set_option profiler true in
+-- Share this projection: unfolding the full coherence predicate is expensive.
 private lemma brown_realization_scalar_mate
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealization O t W P)
@@ -96,7 +96,6 @@ private lemma brown_realization_scalar_mate
   R.property.2.2 h
 
 -- Compare four independently normalized adjunctions.
-set_option profiler true in
 /-- The scalar mate of the exact ordinary restriction square respects normalized
 Brown inverse-image realizations.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4.
