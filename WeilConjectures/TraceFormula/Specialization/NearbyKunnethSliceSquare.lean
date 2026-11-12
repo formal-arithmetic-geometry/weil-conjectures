@@ -53,10 +53,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- the statement involves the Künneth maps of the product and of its slice, whose instances
--- on module objects over the slice need a long search
-set_option synthInstance.maxHeartbeats 200000 in
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
@@ -120,7 +116,7 @@ lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver
                 (Category.comp_id _)).pullbackExchange Λ).app B))) ≫
         kunnethMap Λ (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
           (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B) := by
-  have h := map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ (sliceFst hM hP hb)
+  exact map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ (sliceFst hM hP hb)
       (sliceSnd hN hpb hP hgen hb)
       (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
         (traitSlice_over (traitSliceCoord k')))
@@ -136,6 +132,5 @@ lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver
       (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
       ((Category.comp_id f₂).trans (Category.id_comp f₂).symm)
       (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A B
-  exact h
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
