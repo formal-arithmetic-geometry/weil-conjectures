@@ -30,7 +30,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option profiler true in
 private theorem nonempty_compactSupport_comapIso
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -52,7 +51,6 @@ private theorem nonempty_compactSupport_comapIso
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight j P'.rightDerivedFunctor ≪≫ Functor.associator _ _ _⟩
 
-set_option profiler true in
 private theorem transport_compactSupport_baseChange
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -71,6 +69,7 @@ private theorem transport_compactSupport_baseChange
         ((rightDerivedLowerShriekOfCompactification Λ c).obj K) ≅
       (rightDerivedLowerShriekOfCompactification Λ c').obj
         ((upperStar Λ g').leftDerivedFunctor.obj K)) := by
+  -- Fix the coefficient objects before elaborating the derived comparisons.
   let a : Λ' ⟶ Λ := e.inv.hom
   have : IsMonHom a := inferInstanceAs (IsMonHom e.inv.hom)
   have : IsIso a := inferInstanceAs (IsIso ((Mon.forget _).map e.inv))
@@ -109,7 +108,6 @@ private theorem transport_compactSupport_baseChange
       ((derivedComapLeftDerivedUpperStarIso a g').app K) ≪≫
     (ec'.app ((upperStar Λ g').leftDerivedFunctor.obj K)).symm
 
-set_option profiler true in
 /-- Compact-support base change on bounded constructible complexes is independent
 of the chosen compactifications and of an isomorphic presentation of E or Qlbar.
 
