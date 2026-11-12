@@ -174,7 +174,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
       ((Mod.ihomAdjunction P.carrier).homEquiv Q.carrier I.carrier).symm f.hom.f)
 
 -- Compare the two concrete sheaf tensor constructions in the evaluation square.
-set_option profiler true in
 private theorem binaryMate_forget
     (P Q I : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)
     (f : Q ⟶ SheafOfModules.homObj (R := b.R) P I) :
