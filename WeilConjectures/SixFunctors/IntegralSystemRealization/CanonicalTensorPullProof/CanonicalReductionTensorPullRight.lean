@@ -145,7 +145,9 @@ theorem right_on_representatives
         B.map (Prod.mkHom (S.map (eV P) ≫ s (RV.obj P.obj))
           (S.map (eV Q) ≫ s (RV.obj Q.obj))) = _
   simp only [Category.assoc]
-  rw [map_pair_factorization B hδP hδQ]
+  refine (congrArg (fun t ↦ R'.map (F.map rV) ≫
+    R'.map ((ringedTensorPull l E d f).hom.app _) ≫ (mu l E d U).app _ ≫ t)
+      (map_pair_factorization B hδP hδQ)).trans ?_
   exact paste_right hμ hr hμU he hz
 
 end WeilConjectures.IntegralSystemRealization.CanonicalTensorPullProof
