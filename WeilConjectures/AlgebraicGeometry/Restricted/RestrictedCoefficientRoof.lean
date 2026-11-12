@@ -182,11 +182,74 @@ private theorem transport_equation {C : Type*} [Category C]
   rw [hden, hnum]
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ sL) hn
 
+private theorem transport_roof_comparisons {C : Type*} [Category C]
+    {A B M N P Q PZ QZ R RZ : C}
+    (m : A ⟶ B) (rI : A ⟶ M) (rJ : B ⟶ N) (nI : M ⟶ P) (nJ : N ⟶ Q)
+    (sI : P ⟶ PZ) (sJ : Q ⟶ QZ) (sL : R ⟶ RZ)
+    (betaN : P ⟶ R) (ellN : Q ⟶ R) (betaZ : PZ ⟶ RZ) (ellZ : QZ ⟶ RZ)
+    (uI : A ⟶ PZ) (uJ : B ⟶ QZ)
+    (hI : uI = rI ≫ nI ≫ sI) (hJ : uJ = rJ ≫ nJ ≫ sJ)
+    (hn : m ≫ rJ ≫ nJ ≫ ellN = rI ≫ nI ≫ betaN)
+    (hden : sJ ≫ ellZ = ellN ≫ sL) (hnum : sI ≫ betaZ = betaN ≫ sL) :
+    m ≫ uJ ≫ ellZ = uI ≫ betaZ := by
+  rw [hI, hJ]
+  exact transport_equation m rI rJ nI nJ sI sJ sL betaN ellN betaZ ellZ hn hden hnum
+
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom
 attribute [local irreducible] moduleCohomologyFMap sectionExtendIso
 
-set_option maxHeartbeats 500000 in
+private theorem pushforward_sectionExtendIso_naturality
+    {X Z : Scheme.{u}} (v : Z ⟶ X) (U : X.Opens)
+    (J : CochainComplex Z.Modules ℕ) (L : CochainComplex X.Modules ℕ)
+    (ell : ((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj J ⟶ L)
+    (q : ℕ) :
+    let E := RingedSpace.openModuleSections X.toRingedSpace U
+    let Γ := E.mapHomologicalComplex (ComplexShape.up ℤ)
+    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) (q : ℤ)
+    (sectionExtendIso (RingedSpace.openModuleSections Z.toRingedSpace (v ⁻¹ᵁ U)) J q).hom ≫
+        H.map (Γ.map ((J.mapExtendIso ComplexShape.embeddingUpNat (pushforward v)).hom ≫
+          HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)) =
+      HomologicalComplex.homologyMap
+        ((E.mapHomologicalComplex (ComplexShape.up ℕ)).map ell) q ≫
+          (sectionExtendIso E L q).hom := by
+  intro E Γ H
+  dsimp only [Scheme.Modules, Scheme.Modules.Hom, Scheme.Modules.instCategory,
+    Scheme.Modules.instAbelian] at *
+  let : E.Additive := inferInstanceAs
+    (RingedSpace.openModuleSections X.toRingedSpace U).Additive
+  let : (pushforward v).Additive := inferInstanceAs (pushforward v).Additive
+  let sJ := sectionExtendIso (RingedSpace.openModuleSections Z.toRingedSpace (v ⁻¹ᵁ U)) J q
+  have hcomp := map_map_comp Γ H sJ.hom
+    (J.mapExtendIso ComplexShape.embeddingUpNat (pushforward v)).hom
+    (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)
+  refine hcomp.trans ?_
+  exact (congrArg (fun z ↦ z ≫ H.map (Γ.map
+    (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)))
+      (sectionExtendIso_comp (pushforward v) E J q
+        (hG := inferInstanceAs E.Additive))).trans (sectionExtendIso_naturality E ell q)
+
+private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Modules}
+    (I : InjectiveResolution F) (U : X.Opens) (R : RestrictedResolutionSections I U)
+    (q : ℕ) :
+    let r := (forget₂ _ AddCommGrpCat.{u}).mapIso
+      ((show InjectiveResolution (C := SheafOfModules.{u}
+          (moduleRings U.toScheme.toRingedSpace)) ((restrictFunctor U.ι).obj F) from
+          R.resolution).isoRightDerivedObj
+        (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) q) ≪≫
+      (((RingedSpace.globalSectionsComplex R.resolution).sc q).mapHomologyIso
+        (forget₂ _ AddCommGrpCat.{u})).symm
+    (squareResolutionCohomologyIso I U R q).hom =
+      r.hom ≫ HomologicalComplex.homologyMap R.sections.hom q ≫
+        (sectionExtendIso (RingedSpace.openModuleSections X.toRingedSpace U)
+          I.cocomplex q).hom := by
+  intro r
+  unfold squareResolutionCohomologyIso
+  dsimp only [r]
+  unfold sectionExtendIso CochainComplex.mapExtendHomologyIso
+  dsimp only [Iso.trans, Iso.symm, Functor.mapIso]
+  exact regroup_five (C := AddCommGrpCat.{u}) _ _ _ _ _
+
 -- The proof transports the natural-indexed section equation through fixed integer models.
 /-- Restriction of an augmented roof computes the classical h-map on an arbitrary open.
 There is one scheme morphism, no direct-image square, and no total derived functor.
@@ -258,38 +321,22 @@ theorem restrictedCoefficient_roof {X Z : Scheme.{u}} (v : Z ⟶ X)
     (RingedSpace.openModuleSections Z.toRingedSpace (v ⁻¹ᵁ U)) J.cocomplex q
   let sL := sectionExtendIso E L q
   have hI : (squareResolutionCohomologyIso I U R q).hom =
-      rI.hom ≫ HN.map R.sections.hom ≫ sI.hom := by
-    unfold squareResolutionCohomologyIso
-    dsimp only [rI, sI]
-    unfold sectionExtendIso CochainComplex.mapExtendHomologyIso
-    dsimp only [Iso.trans, Iso.symm, Functor.mapIso]
-    exact regroup_five (C := AddCommGrpCat.{u}) _ _ _ _ _
+      rI.hom ≫ HN.map R.sections.hom ≫ sI.hom :=
+    squareResolutionCohomologyIso_hom I U R q
   have hJ : (squareResolutionCohomologyIso J (v ⁻¹ᵁ U) R' q).hom =
-      rJ.hom ≫ HN.map R'.sections.hom ≫ sJ.hom := by
-    unfold squareResolutionCohomologyIso
-    dsimp only [rJ, sJ]
-    unfold sectionExtendIso CochainComplex.mapExtendHomologyIso
-    dsimp only [Iso.trans, Iso.symm, Functor.mapIso]
-    exact regroup_five (C := AddCommGrpCat.{u}) _ _ _ _ _
+      rJ.hom ≫ HN.map R'.sections.hom ≫ sJ.hom :=
+    squareResolutionCohomologyIso_hom J (v ⁻¹ᵁ U) R' q
   have hβ : sI.hom ≫ H.map (Γ.map betaZ) = HN.map (EN.map beta) ≫ sL.hom :=
     sectionExtendIso_naturality E beta q
-  have hdenom : sJ.hom ≫ H.map (Γ.map ellZ) = HN.map (EN.map ell) ≫ sL.hom := by
-    have hcomp := map_map_comp Γ H sJ.hom
-      (J.cocomplex.mapExtendIso ComplexShape.embeddingUpNat (pushforward v)).hom
-      (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)
-    refine hcomp.trans ?_
-    exact (congrArg (fun z ↦ z ≫ H.map (Γ.map
-      (HomologicalComplex.extendMap ell ComplexShape.embeddingUpNat)))
-        (sectionExtendIso_comp (pushforward v) E J.cocomplex q
-          (hG := inferInstanceAs E.Additive))).trans
-          (sectionExtendIso_naturality E ell q)
+  have hdenom : sJ.hom ≫ H.map (Γ.map ellZ) = HN.map (EN.map ell) ≫ sL.hom :=
+    pushforward_sectionExtendIso_naturality v U J.cocomplex L ell q
   have hn := restrictedCoefficient_natRoof v F G φ I J L hL ell hell beta hbeta U R R' q
   let m := moduleCohomologyFMap (v.resLE U (v ⁻¹ᵁ U) le_rfl)
     (restrictedDirectImageMap v φ U) q
-  exact (congrArg (fun z ↦ m ≫ z ≫ H.map (Γ.map ellZ)) hJ).trans
-    ((transport_equation m rI.hom rJ.hom (HN.map R.sections.hom) (HN.map R'.sections.hom)
-      sI.hom sJ.hom sL.hom (HN.map (EN.map beta)) (HN.map (EN.map ell))
-      (H.map (Γ.map betaZ)) (H.map (Γ.map ellZ)) hn hdenom hβ).trans
-        (congrArg (fun z ↦ z ≫ H.map (Γ.map betaZ)) hI).symm)
+  exact transport_roof_comparisons m rI.hom rJ.hom
+    (HN.map R.sections.hom) (HN.map R'.sections.hom) sI.hom sJ.hom sL.hom
+    (HN.map (EN.map beta)) (HN.map (EN.map ell)) (H.map (Γ.map betaZ)) (H.map (Γ.map ellZ))
+    (squareResolutionCohomologyIso I U R q).hom
+    (squareResolutionCohomologyIso J (v ⁻¹ᵁ U) R' q).hom hI hJ hn hdenom hβ
 
 end AlgebraicGeometry

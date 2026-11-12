@@ -26,7 +26,54 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-set_option maxHeartbeats 800000 in
+private theorem map_comp_through {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {K L M N P : C} {Q : D}
+    (k : Q ⟶ F.obj K) (i : K ⟶ L) (j : M ⟶ P) (f : K ⟶ M)
+    (a : L ⟶ N) (b : N ⟶ P) (i' : Q ⟶ F.obj L)
+    (hf : f ≫ j = i ≫ a ≫ b) (hk : k ≫ F.map i = i') :
+    k ≫ F.map f ≫ F.map j = i' ≫ F.map a ≫ F.map b := by
+  rw [← F.map_comp, hf]
+  simp only [F.map_comp, ← Category.assoc, hk]
+
+private theorem mapExtend_comp_component
+    {C D E T : Type*} [Category C] [Category D] [Category E] [Category T]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian T]
+    (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ T) [F.Additive] [G.Additive] [H.Additive]
+    (L : CochainComplex C ℕ) (q : ℕ) :
+    let B := (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj L
+    let Γ := (F ⋙ G) ⋙ H
+    let A := (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj L
+    (A.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).inv ≫
+        (L.mapExtendIso ComplexShape.embeddingUpNat Γ).inv.f (q : ℤ) ≫
+        H.map (G.map ((L.mapExtendIso ComplexShape.embeddingUpNat F).hom.f (q : ℤ))) ≫
+        H.map (G.map (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom) =
+      𝟙 (A.X q) := by
+  intro B Γ A
+  have hr : ComplexShape.embeddingUpNat.r (q : ℤ) = some q :=
+    ComplexShape.embeddingUpNat.r_f q
+  dsimp only [HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents,
+    HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
+  erw [HomologicalComplex.mapExtendX_hom_eq L Γ hr,
+    HomologicalComplex.mapExtendX_hom_eq L F hr]
+  simp only [eqToIso.hom, eqToIso.inv, eqToHom_map, eqToHom_trans, eqToHom_refl]
+
+private theorem localClass_of_cycles {C : Type*} [Category C]
+    {Z H ZA HA T ZJ HJ ZB HB : C}
+    (π : Z ⟶ H) [Epi π] (m : H ⟶ HB) (a : H ⟶ HA) (α : ZA ⟶ HA)
+    (z : Z ⟶ ZA) (η : HA ⟶ T) (c : T ⟶ HJ) (k : ZA ⟶ ZJ)
+    (πJ : ZJ ⟶ HJ) (d : HJ ⟶ HB) (zD : ZJ ⟶ ZB) (πB : ZB ⟶ HB)
+    (zM : Z ⟶ ZB) (hleft : π ≫ m = zM ≫ πB) (ha : π ≫ a = z ≫ α)
+    (hclass : α ≫ η ≫ c = k ≫ πJ) (hd : πJ ≫ d = zD ≫ πB)
+    (hz : z ≫ k ≫ zD = zM) : m = a ≫ η ≫ c ≫ d := by
+  apply (cancel_epi π).mp
+  rw [hleft, ← Category.assoc π a, ha]
+  simp only [Category.assoc]
+  rw [← Category.assoc α η, ← Category.assoc (α ≫ η) c,
+    Category.assoc α η c, hclass]
+  simp only [Category.assoc]
+  rw [hd, ← Category.assoc z k, ← Category.assoc (z ≫ k) zD,
+    Category.assoc z k zD, hz]
+
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
 with extension by zero and exact evaluation. No derived category or acyclicity
@@ -88,28 +135,15 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
           (RingedSpace.localSectionComplexSheafificationIso Y.toRingedSpace (q : ℤ) J).hom).app
             (op V) ≫
         ((RingedSpace.localAbelianSections Y.toRingedSpace).map d.hom).app (op V) := by
-  dsimp only
+  intro P E Γ B a J d
   let F := RingedSpace.localAbelianSections Y.toRingedSpace
-  let P := D ⋙ F
-  let E := (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
-  let Γ := P ⋙ E
-  let B := (D.mapHomologicalComplex (.up ℕ)).obj L
+  let : F.Additive := inferInstanceAs
+    (RingedSpace.localAbelianSections Y.toRingedSpace).Additive
+  let : P.Additive := inferInstanceAs (D ⋙ F).Additive
+  let : Γ.Additive := inferInstanceAs (P ⋙ E).Additive
   let I := L.extend ComplexShape.embeddingUpNat
-  let J := (D.mapHomologicalComplex (.up ℤ)).obj I
   let A := (P.mapHomologicalComplex (.up ℤ)).obj I
   let C := (Γ.mapHomologicalComplex (.up ℕ)).obj L
-  let a :=
-    (((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj L).extendHomologyIso
-      ComplexShape.embeddingUpNat (j := q) rfl).symm ≪≫
-    (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ)
-      (q : ℤ)).mapIso (L.mapExtendIso ComplexShape.embeddingUpNat Γ).symm ≪≫
-    (((P.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-      (L.extend ComplexShape.embeddingUpNat)).sc (q : ℤ)).mapHomologyIso E
-  let d :=
-    (HomologicalComplex.homologyFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) (q : ℤ)).mapIso
-      (L.mapExtendIso ComplexShape.embeddingUpNat D) ≪≫
-    B.extendHomologyIso ComplexShape.embeddingUpNat (j := q) rfl
   let z := (C.extendCyclesIso ComplexShape.embeddingUpNat (j := q) rfl).inv ≫
     HomologicalComplex.cyclesMap (L.mapExtendIso ComplexShape.embeddingUpNat Γ).inv
       (q : ℤ) ≫ ((A.sc (q : ℤ)).mapCyclesIso E).hom
@@ -160,24 +194,18 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
         (L.mapExtendIso ComplexShape.embeddingUpNat Γ).inv.f (q : ℤ) ≫
         E.map (F.map ((L.mapExtendIso ComplexShape.embeddingUpNat D).hom.f (q : ℤ))) ≫
         E.map (F.map (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom) =
-      𝟙 (C.X q) := by
-    have hr : ComplexShape.embeddingUpNat.r (q : ℤ) = some q :=
-      ComplexShape.embeddingUpNat.r_f q
-    dsimp only [HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents,
-      HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso]
-    erw [HomologicalComplex.mapExtendX_hom_eq L Γ hr,
-      HomologicalComplex.mapExtendX_hom_eq L D hr]
-    simp only [eqToIso.hom, eqToIso.inv, eqToHom_map, eqToHom_trans, eqToHom_refl]
+      𝟙 (C.X q) := mapExtend_comp_component D F E L q
   have hcycles : z ≫ E.map k ≫ E.map (F.map zD) = zM := by
     apply (cancel_mono (E.map (F.map (B.iCycles q)))).1
     have hh : k ≫ F.map zD ≫ F.map (B.iCycles q) =
         A.iCycles (q : ℤ) ≫
           F.map ((L.mapExtendIso ComplexShape.embeddingUpNat D).hom.f (q : ℤ)) ≫
           F.map (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom := by
-      erw [← F.map_comp zD (B.iCycles q), hdz, F.map_comp, F.map_comp]
-      erw [← Category.assoc k (F.map (J.iCycles (q : ℤ))),
-        ((J.sc (q : ℤ)).map F).isoCyclesOfIsLimit_inv_ι]
-      rfl
+      exact map_comp_through F k (J.iCycles (q : ℤ)) (B.iCycles q) zD
+        ((L.mapExtendIso ComplexShape.embeddingUpNat D).hom.f (q : ℤ))
+        (B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom
+        (A.iCycles (q : ℤ)) hdz
+        (((J.sc (q : ℤ)).map F).isoCyclesOfIsLimit_inv_ι _)
     have hhE := congrArg E.map hh
     simp only [Functor.map_comp] at hhE
     calc
@@ -199,18 +227,19 @@ theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
     change E.map (A.homologyπ (q : ℤ) ≫ η ≫ c) =
       E.map (k ≫ F.map (J.homologyπ (q : ℤ))) at h
     simpa only [Functor.map_comp] using h
-  apply (cancel_epi (C.homologyπ q)).1
-  change C.homologyπ q ≫
+  have hleft : C.homologyπ q ≫
       ((M.mapHomologyIso E').hom ≫ E'.map (sectionCohomologyTheta B q)) =
-    C.homologyπ q ≫ (a.hom ≫ E.map η ≫ E.map c ≫ E.map (F.map d.hom))
-  have hleft := section_comparison_cycles B q V
-  change C.homologyπ q ≫ (M.mapHomologyIso E').hom ≫
-      E'.map (sectionCohomologyTheta B q) = zM ≫ E.map (F.map (B.homologyπ q)) at hleft
-  erw [hleft, reassoc_of% hπ, reassoc_of% hh]
-  erw [← E.map_comp (F.map (J.homologyπ (q : ℤ))) (F.map d.hom),
-    ← F.map_comp (J.homologyπ (q : ℤ)) d.hom, hdπ,
-    F.map_comp zD (B.homologyπ q), E.map_comp (F.map zD) (F.map (B.homologyπ q))]
-  simpa only [Category.assoc] using
-    congrArg (fun z' ↦ z' ≫ E.map (F.map (B.homologyπ q))) hcycles.symm
+      zM ≫ E.map (F.map (B.homologyπ q)) := by
+    have h := section_comparison_cycles B q V
+    change C.homologyπ q ≫ (M.mapHomologyIso E').hom ≫
+      E'.map (sectionCohomologyTheta B q) = zM ≫ E.map (F.map (B.homologyπ q)) at h
+    exact h
+  have hd : E.map (F.map (J.homologyπ (q : ℤ))) ≫ E.map (F.map d.hom) =
+      E.map (F.map zD) ≫ E.map (F.map (B.homologyπ q)) := by
+    simpa only [Functor.map_comp] using congrArg (fun f ↦ E.map (F.map f)) hdπ
+  exact localClass_of_cycles (C.homologyπ q) _ a.hom (E.map (A.homologyπ (q : ℤ)))
+    z (E.map η) (E.map c) (E.map k) (E.map (F.map (J.homologyπ (q : ℤ))))
+    (E.map (F.map d.hom)) (E.map (F.map zD)) (E.map (F.map (B.homologyπ q)))
+    zM hleft hπ hh hd hcycles
 
 end AlgebraicGeometry
