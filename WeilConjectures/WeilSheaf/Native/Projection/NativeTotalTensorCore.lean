@@ -80,6 +80,7 @@ variable
     (nativeOpenSheafTensor k₀ l Z) mu (condensedRealizationSheafTensorIso k₀ l Y)
     (condensedRealizationSheafTensorIso k₀ l Z) a M N)
 
+set_option profiler true in
 include hmu hsheaf in
 /-- Equality of the two total-complex tensor squares, checked on each tensor summand. -/
 lemma projection_totalTensorSquare_of_sheaf

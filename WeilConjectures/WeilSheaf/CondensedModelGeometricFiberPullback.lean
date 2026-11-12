@@ -60,7 +60,8 @@ lemma mateEquiv_inv_eq_of_unit_comp_map_hom (adj₁ : L₁ ⊣ R₁) (adj₂ : L
   apply mateEquiv_eq_of_unit_comp_map
   intro a
   rw [← h, Category.assoc, Category.assoc, ← Functor.map_comp,
-    Iso.hom_inv_id_app, Functor.map_id, Category.comp_id]
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
 /-- **An abstract coherence square for comparisons of structure isomorphisms.** Let
