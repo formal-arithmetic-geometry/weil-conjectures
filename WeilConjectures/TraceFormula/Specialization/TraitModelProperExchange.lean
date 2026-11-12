@@ -232,18 +232,21 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     exact isIso_baseChangeMap_of_weaklyEtale 𝐐 hsq
   -- the proper exchange of the model of the geometric generic fibre is invertible
   have hC₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme 𝐐 e A hA
-  have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) _ hC₀
-  have hχgen := @NatTrans.isIso_app_of_iso' _ _ _ _ _ _
-    (hM.toTraitGeneric.pushforwardExchange 𝐐) _ _
-    ((leftDerivedUpperStarCompOfEq 𝐐 he).app A) h₀
+  have h₀ := hM.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) (L((e)^*⟦𝐐⟧).obj A) hC₀
+  have iso : L((M.ε)^*⟦𝐐⟧).obj A ≅ L((M.j)^*⟦𝐐⟧).obj (L((e)^*⟦𝐐⟧).obj A) :=
+    (leftDerivedUpperStarCompOfEq 𝐐 he).app A
+  have hχgen : IsIso ((hM.toTraitGeneric.pushforwardExchange 𝐐).app (L((M.ε)^*⟦𝐐⟧).obj A)) :=
+    NatTrans.isIso_app_of_iso' _ iso
   have := Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 (point k').left).symm
-  exact_mod_proofs Hom.isIso_pushforwardExchange_app_of_square
-    (X₁ := (point k).left) (X₁' := (point k').left) (Z₁' := (point k').left)
+  cast_proofs Hom.isIso_pushforwardExchange_app_of_square
     𝐐 (toGenericSelfHom M) h.toTrait
     hM.toTraitGeneric (traitGenericModelHom k k')
     (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs A
-    (by infer_instance) (by infer_instance) (by infer_instance)
-    (by exact_mod_proofs pbc) (by exact_mod_proofs hχgen)
+    (by infer_instance) (by infer_instance)
+    (by
+      cast_proofs NatIso.isIso_app_of_isIso ((traitGenericModelHom k k').pullbackExchange 𝐐)
+        (R(((toPoint X).left)_*⟦𝐐⟧).obj A))
+    (by cast_proofs pbc) (by cast_proofs hχgen)
 
 /-- **Proper exchange for a proper trait model over the base**: if `X` is proper over `k`, the
 total space of the trait model `M` over the base is proper over the trait and its geometric
