@@ -138,6 +138,26 @@ private theorem trace_of_mapped_diagonal_components
   exact trace_of_diagonal_components (F.map a) (F.map b) a' b' e dB
     (F.map t) t' ha hb hat' hbt' hzero hlow hhigh
 
+private theorem trace_of_mapped_diagonal_components_factor
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D] (F : C ⥤ D) [F.Additive]
+    {A B K : C} {A' B' K' L : D} (a : A ⟶ K) (b : B ⟶ K)
+    (a' : A' ⟶ K') (b' : B' ⟶ K')
+    [IsIso (biprod.desc a b)] [IsIso (biprod.desc a' b')]
+    (e : F.obj K ⟶ L) (q : L ⟶ K') [IsIso q] (dB : F.obj B ≅ B')
+    (t : K ⟶ B) (t' : K' ⟶ B')
+    (hat : a ≫ t = 0) (hbt : b ≫ t = 𝟙 B)
+    (hat' : a' ≫ t' = 0) (hbt' : b' ≫ t' = 𝟙 B')
+    (hzero : F.map a ≫ (e ≫ q) ≫ t' = 0)
+    (hlow : IsIso (F.map a ≫ (e ≫ q) ≫ inv (biprod.desc a' b') ≫ biprod.fst))
+    (hhigh : F.map b ≫ (e ≫ q) ≫ t' = dB.hom) :
+    IsIso e ∧ F.map t ≫ dB.hom = e ≫ q ≫ t' := by
+  have htrace := trace_of_mapped_diagonal_components F a b a' b' (e ≫ q) dB t t'
+    hat hbt hat' hbt' hzero hlow hhigh
+  have : IsIso (e ≫ q) := htrace.1
+  refine ⟨IsIso.of_isIso_comp_right e q, ?_⟩
+  simpa only [Category.assoc] using htrace.2
+
 /-- The canonical realization of the shifted positive line is an isomorphism.
 Source: the exact realization's single and shift comparisons
 (blueprint: lem-diagonal-completed-trace-pullback).
@@ -310,13 +330,10 @@ theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
       diagonalCompletedChern_highCoordinate l f f' hX hS square hunit hunit'
         eX eS eX' eS' t.toPresentation t'.toPresentation D D' canonical canonical'
         hcanonical hcanonical' push push' line c b hb b' hb' τ' hBt'
-  obtain ⟨hi, he⟩ := trace_of_mapped_diagonal_components F v B v' B'
-    E (asIso c.derived) τ τ' hvt hBt hvt' hBt' hzero hlow hhigh
   have : IsIso line.shift := by unfold PullEndpoint.shift PullEndpoint.derived; infer_instance
-  have : IsIso E₀ := IsIso.of_isIso_comp_right E₀ (D'.R.map line.shift)
   unfold TracePullback
-  change IsIso E₀ ∧ F.map τ ≫ c.derived = E₀ ≫ D'.R.map line.shift ≫ τ'
-  refine And.intro (show IsIso E₀ from inferInstance) ?_
-  simpa only [E, asIso_hom, Category.assoc] using he
+  exact trace_of_mapped_diagonal_components_factor F v B v' B'
+    E₀ (D'.R.map line.shift) (asIso c.derived) τ τ'
+    hvt hBt hvt' hBt' hzero hlow hhigh
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
