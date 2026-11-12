@@ -114,6 +114,7 @@ def affineSpectrumTensorComplexIso {X X' : Scheme.{u}}
       ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm)
     (.up ℤ)).app P
 
+set_option profiler true in
 -- Evaluating the localization lift includes the exact stalk and pullback factors.
 private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y) (i : ℤ)
