@@ -458,7 +458,6 @@ private theorem inverse_constant_hom_ext {T W : ScalarSite.{u, v, r, w} A B}
   simpa only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     ConcreteCategory.comp_apply, constant_map_unit W.toSite, TypeCat.ofHom_apply] using hx
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem inverse_coefficient_square {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) :
@@ -1074,7 +1073,6 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
   rfl
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem tau_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
@@ -1092,7 +1090,6 @@ private theorem tau_comp {T W Z : ScalarSite.{u, v, r, w} A B}
 
 end
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem tensor_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
