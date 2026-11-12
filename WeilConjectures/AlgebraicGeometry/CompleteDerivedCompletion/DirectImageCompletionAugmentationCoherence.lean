@@ -81,6 +81,35 @@ private theorem directImage_constantInterchange_factors
   simp only [Iso.hom_inv_id_app_assoc, Category.assoc]
   simp only [NatIso.mapHomologicalComplex]
 
+private theorem directImage_constantInterchange_inverse_factors
+    (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
+    let H := CondensedRing.upperStar (DerivedNakayama.integerRing l E) f
+    (pull l E f).mapDerivedCategory.map
+        ((constant l E Y).mapDerivedCategoryFactors.hom.app P) ≫
+      (pull l E f).mapDerivedCategoryFactors.hom.app
+        (((constant l E Y).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H).symm (.up ℤ)).hom.app P) =
+      (constantInterchange l E H).inv.app (DerivedCategory.Q.obj P) ≫
+        (dconstant l E X).map (H.mapDerivedCategoryFactors.hom.app P) ≫
+        (constant l E X).mapDerivedCategoryFactors.hom.app
+          ((H.mapHomologicalComplex (.up ℤ)).obj P) := by
+  dsimp only
+  let H := CondensedRing.upperStar (DerivedNakayama.integerRing l E) f
+  have hforward := directImage_constantInterchange_factors l E f P
+  have hh := congrArg
+    (fun q ↦ (constantInterchange l E H).inv.app (DerivedCategory.Q.obj P) ≫ q ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H).symm (.up ℤ)).hom.app P))
+    hforward
+  have hsymm :
+      NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H).symm (.up ℤ) =
+        (NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H) (.up ℤ)).symm := rfl
+  dsimp only [H] at hsymm hh
+  rw [hsymm] at hh ⊢
+  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.symm_hom,
+    ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id, Category.comp_id] using hh
+
 private theorem directImage_augmentation_factors (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     (augmentation l E T).app (DerivedCategory.Q.obj P) ≫ (redFactors l E T).hom.app P =
@@ -152,19 +181,11 @@ theorem directImage_augmentation_pullReduction_coherence :
       (NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H).symm (.up ℤ)).hom.app P ≫
         (strictAugmentation l E X).app ((H.mapHomologicalComplex (.up ℤ)).obj P) at hinr
     rw [hinr, Functor.map_comp]
-    have hforward := directImage_constantInterchange_factors l E f P
     have hh := congrArg
-      (fun q ↦ (constantInterchange l E H).inv.app (DerivedCategory.Q.obj P) ≫ q ≫
-        DerivedCategory.Q.map
-          ((NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H).symm (.up ℤ)).hom.app P) ≫
-        DerivedCategory.Q.map ((strictAugmentation l E X).app
-          ((H.mapHomologicalComplex (.up ℤ)).obj P))) hforward
-    have hsymm :
-        NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H).symm (.up ℤ) =
-          (NatIso.mapHomologicalComplex (Functor.compConstIso ℕᵒᵖ H) (.up ℤ)).symm := rfl
-    rw [hsymm] at hh ⊢
-    simpa only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.symm_hom,
-      ← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp] using hh
+      (fun q ↦ q ≫ DerivedCategory.Q.map ((strictAugmentation l E X).app
+        ((H.mapHomologicalComplex (.up ℤ)).obj P)))
+      (directImage_constantInterchange_inverse_factors l E f P)
+    simpa only [Category.assoc] using hh
   intro M
   exact congr_app hab M
 
