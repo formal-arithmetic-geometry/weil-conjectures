@@ -54,8 +54,21 @@ private theorem qc_overEquiv_inverse (X : Scheme.{u}) (U : X.Opens)
     (U.overEquivalence.functor) _
     (U.sheafOfModulesEquivOverInverseUnit X.ringCatSheaf)
 
-set_option maxHeartbeats 400000 in
--- Transport through the localized-site equivalence requires substantial reduction.
+private theorem mapped_homology_mem_of_shortExact
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [F.PreservesZeroMorphisms] [F.PreservesHomology]
+    (P : ObjectProperty D) [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels]
+    [P.IsClosedUnderExtensions] (S : ShortComplex (CochainComplex C ℤ))
+    (hS : S.ShortExact)
+    (h₁ : ∀ i : ℤ, P (F.obj (S.X₁.homology i)))
+    (h₃ : ∀ i : ℤ, P (F.obj (S.X₃.homology i))) (n : ℤ) :
+    P (F.obj (S.X₂.homology n)) := by
+  exact P.prop_of_exact_of_exact_of_exact
+    ((hS.homology_exact₁ (n - 1) n (by simp)).map F)
+    ((hS.homology_exact₂ n).map F)
+    ((hS.homology_exact₃ n (n + 1) (by simp)).map F)
+    (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
+
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
 
 Source: Stacks Project, Tag 0117, long exact sequence, and Tag 01IE, extension closure.
@@ -78,6 +91,8 @@ theorem localized_complex_qc_homology_extension
     (h₁ : ∀ i : ℤ, (S.X₁.homology i).IsQuasicoherent)
     (h₃ : ∀ i : ℤ, (S.X₃.homology i).IsQuasicoherent) (n : ℤ) :
     (S.X₂.homology n).IsQuasicoherent := by
+  -- Share the abelian structure across the localized homology computations.
+  let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
   let e := Scheme.Modules.overEquiv U
   let F := e.functor
   let P : ObjectProperty U.toScheme.Modules :=
@@ -85,30 +100,21 @@ theorem localized_complex_qc_homology_extension
   let : P.IsClosedUnderIsomorphisms :=
     inferInstanceAs
       (SheafOfModules.isQuasicoherent U.toScheme.ringCatSheaf).IsClosedUnderIsomorphisms
+  -- Pass the quasi-coherence proofs explicitly to avoid repeating site instance inference.
   let : P.IsClosedUnderKernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
-    let : M.IsQuasicoherent := hM
-    let : N.IsQuasicoherent := hN
     exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
-      (Scheme.Modules.isQuasicoherent_kernel f)⟩
+      (@Scheme.Modules.isQuasicoherent_kernel U.toScheme M N hM hN f)⟩
   let : P.IsClosedUnderCokernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
-    let : M.IsQuasicoherent := hM
-    let : N.IsQuasicoherent := hN
     exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
-      (Scheme.Modules.isQuasicoherent_cokernel f)⟩
+      (@Scheme.Modules.isQuasicoherent_cokernel U.toScheme M N hM hN f)⟩
   let : P.IsClosedUnderExtensions := ⟨by
     intro T hT h₁ h₃
-    let : T.X₁.IsQuasicoherent := h₁
-    let : T.X₃.IsQuasicoherent := h₃
-    exact Scheme.Modules.isQuasicoherent_of_shortExact (S := T) hT⟩
-  have h₀ := (hS.homology_exact₁ (n - 1) n (by simp)).map F
-  have hmid := (hS.homology_exact₂ n).map F
-  have hlast := (hS.homology_exact₃ n (n + 1) (by simp)).map F
+    exact @Scheme.Modules.isQuasicoherent_of_shortExact U.toScheme T hT h₁ h₃⟩
   have hqc : P (F.obj (S.X₂.homology n)) :=
-    P.prop_of_exact_of_exact_of_exact h₀ hmid hlast
-      (qc_overEquiv X U _ (h₃ (n - 1))) (qc_overEquiv X U _ (h₁ n))
-      (qc_overEquiv X U _ (h₃ n)) (qc_overEquiv X U _ (h₁ (n + 1)))
+    mapped_homology_mem_of_shortExact F P S hS
+      (fun i ↦ qc_overEquiv X U _ (h₁ i)) (fun i ↦ qc_overEquiv X U _ (h₃ i)) n
   have hinv := qc_overEquiv_inverse X U _ hqc
   exact (SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over U)).prop_of_iso
     (e.unitIso.app (S.X₂.homology n)).symm hinv
