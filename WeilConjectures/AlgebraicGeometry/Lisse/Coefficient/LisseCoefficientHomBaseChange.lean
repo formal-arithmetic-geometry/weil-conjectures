@@ -375,6 +375,15 @@ private theorem sheaf_comp_app_apply {A : Type (d + 1)} [Ring A]
   rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ModuleCat.comp_apply]
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
+private theorem sheaf_iso_hom_inv_app_apply {A : Type (d + 1)} [Ring A]
+    {M N : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A)} (e : M ≅ N)
+    (U : Y.Etale) (x : N.obj.obj (op U)) :
+    e.hom.hom.app (op U) (e.inv.hom.app (op U) x) = x := by
+  rw [← ModuleCat.comp_apply, ← NatTrans.comp_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, e.inv_hom_id,
+    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app, ModuleCat.id_apply]
+
+omit [IsNoetherian Y] [Y.IsSeparated] in
 private theorem restrictedScalarSheaf_ext
     {A B : Type (d + 1)} [CommRing A] [CommRing B] (f : A →+* B)
     (M N : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A))
@@ -784,6 +793,8 @@ attribute [local irreducible] lisseIntegerInclusion lisseRamificationIndex lisse
   Padic.coefficientExtensionAbsoluteValue Padic.coefficientExtensionUniformizer
   Padic.coefficientExtensionMaximalIdeal
 
+set_option profiler true in
+set_option maxHeartbeats 5000000 in
 private theorem coefficientCofinal_reconstruct
     (F : LisseIntegralSheaf l E Y) (n : ℕ) (U : Y.Etale)
     (z : ((((lisseIntegralScalarExtension l E Y L ι).obj F).obj.obj
@@ -808,9 +819,7 @@ private theorem coefficientCofinal_reconstruct
       ((lisseCoherence_scalarSheafUnit Y _ (F.obj.obj (op n))).hom.app (op U)
         ((quotientCoordinateSheaf Y b _ _ _ i).hom.app (op U)
           (e.hom.hom.app (op U) z)))) = _
-  erw [← ModuleCat.comp_apply, ← NatTrans.comp_app,
-    ← ObjectProperty.FullSubcategory.comp_hom, e.inv_hom_id,
-    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app, ModuleCat.id_apply]
+  rw [sheaf_iso_hom_inv_app_apply]
 
 private def coefficientHomCoordinate
     (b : letI := (lisseIntegerInclusion l E L ι).toAlgebra
