@@ -384,7 +384,7 @@ private lemma derived_lowerStar_conjugate
     (upperStarLowerStarAdjunction Λ (f ≫ g)) _ (upperStarComp Λ f g) (by
       change _ = (conjugateEquiv _ _) ((conjugateEquiv _ _).symm _)
       exact (Equiv.apply_symm_apply _ _).symm)]
-  rw [hadj, hadj, hadj]
+  simp only [hadj]
   ext K
   simp [conjugateEquiv_apply_app, leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
     Functor.leftDerivedFunctorCompIso]

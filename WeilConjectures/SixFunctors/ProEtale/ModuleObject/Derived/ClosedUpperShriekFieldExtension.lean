@@ -228,10 +228,15 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
     rw [← Scheme.Hom.comp_apply, sq.w, Scheme.Hom.comp_apply]
   have sqV : IsPullback (πP ∣_ V) V'.ι V.ι πP := isPullback_morphismRestrict πP V
   /- The triangle `X ⟶ M ⟶ Rj_* j^* M ⟶`. -/
-  let adjV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
+  -- Reuse the derived functors instead of resynthesizing their categorical infrastructure.
+  let pullV := L((V.ι)^*⟦𝐐⟧)
+  let pushV := R((V.ι)_*⟦𝐐⟧)
+  let pullZ := L((i.left)^*⟦𝐐⟧)
+  let pullP := L((πP)^*⟦𝐐⟧)
+  let adjV : pullV ⊣ pushV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
   obtain ⟨X, f, h, hT⟩ := distinguished_cocone_triangle₁ (adjV.unit.app M.obj)
-  have hjX : IsZero ((L((V.ι)^*⟦𝐐⟧)).obj X) := by
-    refine Triangle.isZero₁_of_isIso₂ _ ((L((V.ι)^*⟦𝐐⟧)).map_distinguished _ hT) ?_
+  have hjX : IsZero (pullV.obj X) := by
+    refine Triangle.isZero₁_of_isIso₂ _ (pullV.map_distinguished _ hT) ?_
     exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adjV.left_triangle_components M.obj)
   have hiX : IsIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X) :=
     isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero _ V.ι i.left hcompl hjX
@@ -242,14 +247,14 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
   have : IsSeparated (Over.mk (V.ι ≫ P.hom)).hom :=
     inferInstanceAs (IsSeparated (V.ι ≫ P.hom))
   have hjM := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ V.ι M.obj M.property
-  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
+  have hRj : boundedConstructible _ (pushV.obj (pullV.obj M.obj)) :=
     boundedConstructible_rightDerivedLowerStar_obj ℓ
       (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
   have hX : boundedConstructible _ X :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₁ _ hT M.property hRj
   /- The closed part `Q₀ = Li^* X`, with `Ri_* Q₀ ≅ X`. -/
   let Q₀ : Dᵇc(Z.left)⟦𝐐⟧ :=
-    ⟨(L((i.left)^*⟦𝐐⟧)).obj X,
+    ⟨pullZ.obj X,
       boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ i.left X hX⟩
   let e₁ : (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ i).obj Q₀) ≅ X :=
     (asIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X)).symm
@@ -268,8 +273,8 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
     (fun Q ↦ subsingleton_hom_rightDerivedLowerStar_shift_of_disjoint _ V.ι i.left
         hcompl.symm.disjoint Q.obj _ _)
   /- The pulled back triangle. -/
-  let Tr' := (L((πP)^*⟦𝐐⟧)).mapTriangle.obj (Triangle.mk f (adjV.unit.app M.obj) h)
-  have hT' : Tr' ∈ distTriang _ := (L((πP)^*⟦𝐐⟧)).map_distinguished _ hT
+  let Tr' := pullP.mapTriangle.obj (Triangle.mk f (adjV.unit.app M.obj) h)
+  have hT' : Tr' ∈ distTriang _ := pullP.map_distinguished _ hT
   have hbcZ : IsIso ((baseChangeMap 𝐐 sq.toCommSq).app Q₀.obj) :=
     have : IsNoetherian P.left := isNoetherian_of_locallyOfFiniteType P.hom
     have : IsNoetherian P'.left := isNoetherian_of_locallyOfFiniteType P'.hom
@@ -278,15 +283,15 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
   let Q₀' := (boundedConstructibleUpperStarOfMap ℓ (X := Z) (Y := Z') πZ).obj Q₀
   let e₁' : (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ i').obj Q₀') ≅
       Tr'.obj₁ :=
-    (asIso ((baseChangeMap 𝐐 sq.toCommSq).app Q₀.obj)).symm ≪≫ (L((πP)^*⟦𝐐⟧)).mapIso e₁
+    (asIso ((baseChangeMap 𝐐 sq.toCommSq).app Q₀.obj)).symm ≪≫ pullP.mapIso e₁
   have : IsLocallyNoetherian P.left := LocallyOfFiniteType.isLocallyNoetherian P.hom
   have : IsNoetherian V.toScheme := {}
-  have hbcU : IsIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) := by
+  have hbcU : IsIso ((baseChangeMap 𝐐 sqV.toCommSq).app (pullV.obj M.obj)) := by
     exact_mod_proofs isIso_baseChangeMap_app_padicAlgCl_of_fieldExtension P.hom P'.hom hP ℓ sqV
       (isUnit_natCast_spec ℓ F) _ hjM
   let e₃ : Tr'.obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
-      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
-    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
+      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj (pullV.obj M.obj)) :=
+    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app (pullV.obj M.obj))
   have hLi' : (boundedConstructibleLowerStar ℓ i' ⋙ (boundedConstructible _).ι).FullyFaithful :=
     ((ObjectProperty.fullyFaithfulι _).comp
       (derivedUpperStarLowerStarAdjunction 𝐐 i'.left).fullyFaithfulROfIsIsoCounit).ofIso
