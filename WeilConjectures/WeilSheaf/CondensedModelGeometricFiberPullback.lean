@@ -281,8 +281,8 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
     rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
       ← Functor.map_comp, Iso.hom_inv_id_app]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
-    rfl
   rw [CategoryTheory.mateEquiv_symm_natTrans_app]
+  simp only [TwoSquare.mk]
   rw [← Functor.map_comp_assoc]
   rw [h]
   simp
