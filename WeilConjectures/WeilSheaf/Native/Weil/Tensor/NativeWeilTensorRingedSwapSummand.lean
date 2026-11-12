@@ -22,6 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
+set_option trace.profiler true in
 set_option synthInstance.maxHeartbeats 100000 in
 -- The canonical sheaf tensor instances require additional elaboration fuel.
 set_option maxHeartbeats 1200000 in
@@ -68,6 +69,7 @@ def nativeRingedSwapUnderived (P Q : ProEtaleWeilSheaf k₀ l X) :
   exact b.native.functor.preimageIso (A.underived Q P ≪≫
     β_ (b.native.functor.obj P) (b.native.functor.obj Q) ≪≫ (A.underived P Q).symm)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1200000 in
 -- The mapped total-complex instances require additional elaboration fuel.
 set_option synthInstance.maxHeartbeats 100000 in
