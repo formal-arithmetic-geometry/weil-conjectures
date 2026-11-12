@@ -42,7 +42,7 @@ private local instance rationalCompletedRestrictionFunLike
     (φ : R →+* S) (M : ModuleCat.{u} R) (N : ModuleCat.{u} S) :
     FunLike (ModuleCat.Hom M ((ModuleCat.restrictScalars φ).obj N)) M N where
   coe f := f.hom
-  coe_injective' _ _ h := ModuleCat.hom_ext (DFunLike.coe_injective h)
+  coe_injective _ _ h := ModuleCat.hom_ext (DFunLike.coe_injective h)
 
 attribute [local instance 2000] DFunLike.toCoeFun
 
