@@ -1425,8 +1425,7 @@ private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D �
   rw [← hc]
   simp
 
-set_option maxHeartbeats 1000000 in
--- reason: the stage-system coherence equation has large functor-object types
+set_option trace.profiler true in
 /-- The pullback comparisons are compatible with one further transition.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
 private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
