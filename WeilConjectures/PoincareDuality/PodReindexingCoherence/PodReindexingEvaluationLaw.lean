@@ -425,6 +425,7 @@ private theorem normalized_uncurry (W : Scheme.{u})
 
 set_option maxHeartbeats 800000 in
 -- Elaborate the fixed Hom and tensor model equations across the two sites.
+set_option profiler true in
 private theorem evaluation_representatives {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)
