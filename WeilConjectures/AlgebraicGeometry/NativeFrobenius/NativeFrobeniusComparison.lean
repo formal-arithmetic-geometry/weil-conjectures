@@ -50,6 +50,7 @@ private theorem sectionCounit_injective (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
 attribute [local irreducible] homComparison sectionCounit
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The section calculation crosses the large native Hom and equivalence interfaces.
 /-- For the *specified* lifted native coefficient model and its *specified* ordinary
 Hom comparison, native pushforward by an inverse scheme isomorphism is translation,
