@@ -361,6 +361,7 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
     (comp_toPoint _) K
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- the rewrites unify large composites of six-functor maps
 /-- **The pushed coefficient map is the global operator** (blueprint
 `thm-trf-fixed-point-localization`, proof): the coefficient pushforward `[a_X, a_C]_! u` of `u`
