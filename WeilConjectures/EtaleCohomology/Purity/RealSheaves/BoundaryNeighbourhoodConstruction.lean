@@ -148,9 +148,10 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         Spec.map (CommRingCat.ofHom
           (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) ≫ α := by
   let _ := Fintype.ofFinite K
-  obtain ⟨Φ, hΦ⟩ : ∃ Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K,
-      Φ = FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n :=
-    ⟨_, rfl⟩
+  let Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K :=
+    FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n
+  have hΦ : Φ = FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K
+      (AlgebraicClosure K) ^ n := rfl
   have hσε (y : AlgebraicClosure K) :
       Ideal.inertiaInvariantsMap C.functionField Q hσF (ε y) = ε (Φ y) :=
     Ideal.injective_inertiaInvariantsToField _ Q (by
@@ -222,7 +223,7 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   have hW := c.isAffineOpen
   have hxW : x.1 ∈ c.W := c.mem
   have : IsDedekindDomain Γ(C, c.W) := isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
-  have := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
+  letI := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
   -- the embedding of `k̄` and the residue map
   have hε₀ : (genericEmb (U ↘ Spec (.of K)) j).comp (algebraMap K (AlgebraicClosure K)) =
       (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
