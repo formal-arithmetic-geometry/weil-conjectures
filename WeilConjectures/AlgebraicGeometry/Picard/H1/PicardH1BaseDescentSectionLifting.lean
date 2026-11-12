@@ -28,7 +28,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
--- The dependent section types require extra elaboration heartbeats.
+set_option profiler true in
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
 This asserts surjectivity of restriction, not existence of a generating section.
 Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0.
