@@ -249,7 +249,6 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
-set_option maxHeartbeats 400000 in
 /-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
 Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison
 (blueprint: lem-sf-canonical-integral-scalar-square).
