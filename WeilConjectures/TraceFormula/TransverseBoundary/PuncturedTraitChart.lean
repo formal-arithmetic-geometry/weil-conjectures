@@ -242,14 +242,14 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     have hι : C.puncturedTraitι (xR ≫ W.2.fromSpec) =
         eP.inv ≫ Spec.map (CommRingCat.ofHom fm) ≫ hU.isoPullback.hom := by
       rw [← hP.isoPullback_hom_snd, Iso.inv_hom_id_assoc]
-    have hcancel (a : Γ(Spec (.of (Localization.Away (ρ.hom t))), ⊤)) :
-        hU.isoPullback.hom.appTop (hU.isoPullback.inv.appTop a) = a := by
-      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, Iso.hom_inv_id,
+    have hcancel {X Y : Scheme.{u}} (e : X ≅ Y) (a : Γ(X, ⊤)) :
+        e.hom.appTop (e.inv.appTop a) = a := by
+      rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, e.hom_inv_id,
         Scheme.Hom.id_appTop, CommRingCat.id_apply]
     simp only [u, IsUnit.unit_spec, hι, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Iso.op_hom, Scheme.Spec_map, Quiver.Hom.unop_op, Scheme.Hom.comp_appTop,
       CommRingCat.comp_apply]
-    rw [hcancel, hnat, hnat]
+    rw [hcancel hU.isoPullback, hnat, hnat]
     congr 2
     exact (IsLocalization.map_eq (S := Localization.Away (ρ.hom t)) (Q := Sm)
       (Submonoid.le_comap_map _) (ρ.hom t)).trans (eK.symm.commutes π).symm
