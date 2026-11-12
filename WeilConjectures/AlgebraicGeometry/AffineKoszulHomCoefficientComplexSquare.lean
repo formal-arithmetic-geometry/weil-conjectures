@@ -27,8 +27,15 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- Elaborating the transported module-sheaf aliases and complex isomorphisms needs more fuel.
+private theorem exists_iso_square_trans {C : Type*} [Category* C]
+    {X₁ X₂ Y₁ Y₂ Z₁ Z₂ : C} {f : X₁ ⟶ X₂} {g : Y₁ ⟶ Y₂} {h : Z₁ ⟶ Z₂}
+    (hf : ∃ (a : X₁ ≅ Y₁) (b : X₂ ≅ Y₂), f ≫ b.hom = a.hom ≫ g)
+    (hg : ∃ (a : Y₁ ≅ Z₁) (b : Y₂ ≅ Z₂), g ≫ b.hom = a.hom ≫ h) :
+    ∃ (a : X₁ ≅ Z₁) (b : X₂ ≅ Z₂), f ≫ b.hom = a.hom ≫ h := by
+  obtain ⟨a, b, hab⟩ := hf
+  obtain ⟨c, d, hcd⟩ := hg
+  exact ⟨a ≪≫ c, b ≪≫ d, (CommSq.vert_comp ⟨hab⟩ ⟨hcd⟩).w⟩
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Applying internal Hom to the sheafified coefficient quotient gives the
@@ -90,23 +97,11 @@ theorem affine_koszul_hom_coefficient_complex_square
   let TC := T.mapHomologicalComplex (ComplexShape.up ℤ)
   let E := TC.obj
     ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)
-  obtain ⟨aO, aQ, ha⟩ := homComplex_to_single_coefficient_square
-    (R := U.1.toScheme.toRingedSpace.sheaf) E
-    (T.obj (ModuleCat.of A A)) (T.obj (ModuleCat.of A (A ⧸ I)))
-    (T.map (ModuleCat.ofHom I.mkQ))
-  obtain ⟨bO, bQ, hb⟩ := affine_koszul_signed_dual_coefficient_square U I n f
-  refine ⟨aO ≪≫ bO, aQ ≪≫ bQ, ?_⟩
-  change _ ≫ (aQ.hom ≫ bQ.hom) = (aO.hom ≫ bO.hom) ≫ _
-  calc
-    _ = (_ ≫ aQ.hom) ≫ bQ.hom := (Category.assoc _ _ _).symm
-    _ = (aO.hom ≫ signedSheafDualCoefficientMap E
-          (T.map (ModuleCat.ofHom I.mkQ))) ≫ bQ.hom :=
-      congrArg (fun g ↦ g ≫ bQ.hom) ha
-    _ = aO.hom ≫ (signedSheafDualCoefficientMap E
-          (T.map (ModuleCat.ofHom I.mkQ)) ≫ bQ.hom) := Category.assoc _ _ _
-    _ = aO.hom ≫ (bO.hom ≫ TC.map (HomologicalComplex.extendMap
-          (ExteriorAlgebra.koszulCoefficientReduction A I n f)
-          ComplexShape.embeddingUpNat)) := congrArg (fun g ↦ aO.hom ≫ g) hb
-    _ = _ := (Category.assoc _ _ _).symm
+  exact exists_iso_square_trans
+    (homComplex_to_single_coefficient_square
+      (R := U.1.toScheme.toRingedSpace.sheaf) E
+      (T.obj (ModuleCat.of A A)) (T.obj (ModuleCat.of A (A ⧸ I)))
+      (T.map (ModuleCat.ofHom I.mkQ)))
+    (affine_koszul_signed_dual_coefficient_square U I n f)
 
 end AlgebraicGeometry
