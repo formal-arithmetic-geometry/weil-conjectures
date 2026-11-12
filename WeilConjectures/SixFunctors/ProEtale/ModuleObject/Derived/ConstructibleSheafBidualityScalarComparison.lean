@@ -63,6 +63,7 @@ private lemma integral_qbar_biduality_map_hom
       ((Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
         derivedExtendScalarsToPadicAlgCl X.left ℓ E).map f.hom := rfl
 
+set_option trace.profiler true in
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
 Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark
