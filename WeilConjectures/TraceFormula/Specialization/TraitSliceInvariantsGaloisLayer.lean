@@ -211,12 +211,6 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
             (Profinite.padicAlgClRingObj ℓ)).app A) =
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
-  let χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
-    (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
-    (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian
-  have hχ : IsIso ((χ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app A) := by
-    dsimp only [χ]
-    exact_mod_proofs hM1
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
   have : QuasiCompact (baseChangeTotalStructure hM b hb v hv) := hT.quasiCompact
@@ -282,10 +276,12 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    χ
+    (((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+      (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+      (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
     (baseChangeHom hM b hb v hv) (baseChangeToGaloisModel_comp_total hM b hb v hv)
     (baseChangeToGaloisModel_comp_generic hM b hb v hv) A
-    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) hχ
+    (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) (by exact_mod_proofs hM1)
     (GenericAut.galoisEquiv (k' := k') (K := K)) L₁ (baseChangeAut hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerAut (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
