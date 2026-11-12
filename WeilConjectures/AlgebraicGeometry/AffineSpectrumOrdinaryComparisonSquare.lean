@@ -80,8 +80,7 @@ private theorem cancel_transport_factors
     F.map c.hom ≫ (F.mapIso c.symm ≪≫ e ≪≫ F0.mapIso cE).hom ≫ F0.map cE.inv =
       (e.hom ≫ d.inv) ≫ d.hom := by
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
-    ← F.map_comp_assoc, ← F0.map_comp, Iso.hom_inv_id, Functor.map_id,
-    Category.id_comp, Category.comp_id, Iso.inv_hom_id_assoc]
+    ← F.map_comp_assoc, ← F0.map_comp, Iso.hom_inv_id]
   simp only [F.map_id, F0.map_id, Category.id_comp, Category.comp_id, d.inv_hom_id]
 
 variable [∀ Y : Scheme.{u},
@@ -170,7 +169,6 @@ private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [Is
     (F0.mapIso (H0.mapIso ((isoPullbackComplexCounitIso j).app P)))
 
 
-set_option profiler true in
 -- Unifying the two stalk-ring diagrams and their tensor models.
 /-- The base-derived tensor comparison is invariant under affine spectrum coordinates
 before introducing either inverse counit for g'. No K-flatness is needed here.
