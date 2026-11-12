@@ -28,6 +28,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
+/-- Compose the conormal equivalences and their unit formulas on abstract modules, so the
+scalar calculation and witness elimination do not unfold the sheaf constructions. -/
 private theorem affineOpen_conormal_transport_comp
     {R A B S : Type*} [CommRing R] [CommRing A] [CommRing B] [CommRing S]
     (r : R ≃+* A) (w : B ≃+* A) (ρ : A →+* S) (I : Ideal R)
@@ -61,7 +63,6 @@ private theorem affineOpen_conormal_transport_comp
   obtain ⟨t, ht, hu⟩ := hd s
   exact (congrArg d (hc a t (ht.trans (congrArg w.symm hs)))).trans hu
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual kernel conormal on an affine closed chart, with its original unit.
