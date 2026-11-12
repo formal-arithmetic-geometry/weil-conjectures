@@ -45,13 +45,18 @@ theorem exists_isZero_homology_rightDerivedLowerStar_comparisonUpperStar_of_fini
     (K : Type u) [Field K] {X Y : Scheme.{u}} [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))]
     [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))]
     [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))]
-    (f : X ⟶ Y) [f.IsOver (Spec (.of K))] [QuasiCompact f] [QuasiSeparated f] :
+    (f : X ⟶ Y) [f.IsOver (Spec (.of K))] :
     ∃ N : ℕ, ∀ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}, F.IsTorsion →
       ∀ q : ℤ, (N : ℤ) < q →
         IsZero ((DerivedCategory.Plus.homologyFunctor _ q).obj
           (R+(ProEtale.lowerStar AddCommGrpCat.{u + 1} f).obj
             ((DerivedCategory.Plus.singleFunctor _ 0).obj
               ((comparisonUpperStar AddCommGrpCat.{u + 1} X).obj F)))) := by
+  have := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))
+  have := LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of K))
+  have : CompactSpace X := (quasiCompact_iff_compactSpace (X ↘ Spec (.of K))).mp inferInstance
+  have : QuasiCompact f := quasiCompact_of_compactSpace f
+  have : QuasiSeparated f := QuasiSeparated.of_quasiSeparatedSpace f
   obtain ⟨_, ⟨n, rfl, hn⟩, _⟩ :=
     sInf_lt_iff.mp (torsionEtaleCohomologicalDimension_finite_of_finiteType K X Y f).1
   obtain ⟨e⟩ := nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar

@@ -53,20 +53,20 @@ This is blueprint `theorem-results-from-etale-theory--2`, for bounded below comp
 proper base change isomorphism `Lx̄^* Rf_* K ≅ Rf'_* Lx̄'^* K`
 (`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`) followed by the Leray
 isomorphism for the projection `f' : X_x̄ ⟶ Spec Ω`. -/
-theorem nonempty_derivedGeometricStalk_rightDerivedLowerStar_iso_of_isProper [Finite Λ]
+noncomputable def derivedGeometricStalkRightDerivedLowerStarIsoOfIsProper [Finite Λ]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (x : Spec (.of Ω) ⟶ S)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :
-    Nonempty ((derivedGeometricStalk (ModuleCat.{u + 1} Λ) x).obj
+    (derivedGeometricStalk (ModuleCat.{u + 1} Λ) x).obj
         (R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K) ≅
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (pullback f x)).obj
-        (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f x)).obj K)) := by
-  have := isIso_derivedBaseChangeMap_app_of_isProper Λ (IsPullback.of_hasPullback f x) K hK
-  exact ⟨(rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of Ω))).mapIso
+        (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f x)).obj K) :=
+  haveI := isIso_derivedBaseChangeMap_app_of_isProper Λ (IsPullback.of_hasPullback f x) K hK
+  (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of Ω))).mapIso
       (asIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
         (IsPullback.of_hasPullback f x).toCommSq).app K)) ≪≫
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ)
-      (pullback.snd f x)).app _⟩
+      (pullback.snd f x)).app _
 
 end AlgebraicGeometry.ProEtale

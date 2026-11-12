@@ -51,7 +51,10 @@ Y' --g---> Y
 with `f` proper and every complex `K ∈ D(X_proét, Λ)` with classical cohomology sheaves, the
 base change map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism.
 
-This is blueprint `theorem-results-from-etale-theory--1`. On the étale site this is Stacks
+This is blueprint `theorem-results-from-etale-theory--1`, under the extra assumption that `Y'`
+is of finite type over `k` and `g` is a morphism over `k` (the blueprint allows any
+`g : Y' ⟶ Y`): the unbounded comparison is applied to `f'` as well as to `f`, and it needs a
+target of finite type over `k`. On the étale site this is Stacks
 Project, Tag 0F0C
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`); for
 bounded below complexes the pro-étale statement is
