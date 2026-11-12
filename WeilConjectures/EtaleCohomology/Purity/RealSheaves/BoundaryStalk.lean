@@ -432,7 +432,6 @@ instance : Fact (IsAffineOpen c.W) := ⟨c.isAffineOpen⟩
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level): for a dense open
 `j : U₀ ⟶ C₀` of a smooth curve over a finite field, a boundary point `z` with an affine chart

@@ -269,7 +269,6 @@ section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- The decomposition group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of
 the stabiliser of `Q`. -/
