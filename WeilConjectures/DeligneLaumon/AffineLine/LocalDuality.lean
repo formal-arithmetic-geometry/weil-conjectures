@@ -185,7 +185,10 @@ private theorem localBoundaryLinearEquiv_frobenius
     ∀ x y, (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x (Q.frobenius y) =
       q * (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x y := by
   intro x y
-  rw [LinearEquiv.trans_apply, LinearEquiv.trans_apply, hΨ, map_smul, S.map_frobenius]
+  rw [LinearEquiv.trans_apply, LinearEquiv.trans_apply]
+  change ψ.toLinearEquiv.symm.dualMap (S.toLinearEquiv (Ψ (M.frobenius x)))
+      (Q.frobenius y) = _
+  rw [hΨ x, map_smul, S.map_frobenius]
   rw [LinearEquiv.dualMap_apply, LinearEquiv.dualMap_apply, LinearMap.smul_apply,
     FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
     FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
