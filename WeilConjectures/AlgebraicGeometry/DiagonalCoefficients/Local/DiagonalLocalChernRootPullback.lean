@@ -51,6 +51,15 @@ private theorem restrictionUnderlying_inv_section
     HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x :=
   finiteBoundary_cast_heq (r.underlying M n U).symm x
 
+private theorem restrictionUnderlying_hom_injective
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ) :
+    Function.Injective (((restrictionUnderlying l T r n).hom.app M).hom.app U) := by
+  intro x y h
+  exact eq_of_heq ((restrictionUnderlying_hom_section l T r n M U x).symm.trans
+    ((heq_of_eq h).trans (restrictionUnderlying_hom_section l T r n M U y)))
+
 private theorem finiteEvaluationSection_exists
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
     (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
@@ -212,7 +221,8 @@ private theorem horizontal_varying_root_square
   rw [← hinput, map_one] at hn
   have hmap := constantPushforward_map_heq (SpTowerShriek.R l (ULift.{u} (Padic l)) n) hX
     (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom U x' _ hx'
-  have heval := hmap.trans hn
+  rw [← hmap] at hn
+  have heval := hn
   let z' := (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
@@ -221,10 +231,8 @@ private theorem horizontal_varying_root_square
       (moduleIsoSectionEquiv (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n) U').injective
     have hxv := heinj (heval.trans hleft.symm)
     dsimp only [x', N'] at hxv
-    have hv' := eq_of_heq ((restrictionUnderlying_hom_section l X' p'.restrictionX n
-      (lineModule l (ULift.{u} (Padic l)) p'.chernX) U' v).symm.trans
-      ((heq_of_eq hxv).trans (restrictionUnderlying_hom_section l X' p'.restrictionX n
-        (lineModule l (ULift.{u} (Padic l)) p'.chernX) U' _)))
+    have hv' := restrictionUnderlying_hom_injective l X' p'.restrictionX n
+      (lineModule l (ULift.{u} (Padic l)) p'.chernX) U' hxv
     have hzv := congrArg
       (fun q ↦ (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' q) hv'
     have hir := (addSectionEquiv (p'.coefficientsX.lineForget.app (op n)) U').apply_symm_apply
