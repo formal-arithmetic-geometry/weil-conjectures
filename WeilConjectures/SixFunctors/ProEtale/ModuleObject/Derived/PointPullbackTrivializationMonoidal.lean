@@ -64,9 +64,9 @@ private local instance mapModLaxMonoidal (F : C ⥤ D) [F.Braided]
     (F.mapMod R).LaxMonoidal :=
   (Functor.monoidal_mapMod F).toLaxMonoidal
 
-private local instance comapLaxMonoidal {R S : C} [MonObj R] [MonObj S]
+private local instance comapIsoLaxMonoidal {R S : C} [MonObj R] [MonObj S]
     [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] :
-    (Mod.comap φ).LaxMonoidal :=
+    (Mod.comap φ : Mod C S ⥤ Mod C R).LaxMonoidal :=
   (Mod.monoidal_comap φ).toLaxMonoidal
 
 private local instance extendScalarsLaxMonoidal [MonoidalClosed C] [HasEqualizers C]
