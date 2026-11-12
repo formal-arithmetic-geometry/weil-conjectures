@@ -287,20 +287,18 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
-  apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
-  · intro i j k hij U x y
-    subst k
-    have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta
-      i j U x y
-    rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
-    dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-      integralReductionChangeOfRings, Functor.uncurry_obj_obj] at hh ⊢
-    exact hh
-  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
-    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  refine (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2 (asIso beta).symm ?_
+  intro i j k hij U x y
+  subst k
+  have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
+  rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
+    reductionUnit_eq_coefficientIntegralScalarUnitSection,
+    reductionUnit_eq_coefficientIntegralScalarUnitSection,
+    reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
+  dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
+    integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
+  exact hh
 
 
 -- Comparing the fixed localization models requires many definitional equalities.
