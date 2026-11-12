@@ -294,7 +294,8 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
           (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n) := by
   have hr := finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n
   rw [← hr]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    Functor.map_id, Category.id_comp]
   have hline := diagonalFiniteForgetIso_transport l n (diagonalSurface Y)
     ((diagonalForget l (diagonalSurface Y)).obj
       ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)))
@@ -337,16 +338,12 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   have hw : HEq w v := by
     dsimp only [w, evalIso]
     exact restrictionInverseSection l T r n (lineModule l (ULift.{u} (Padic l)) c) U v
-  have hv : v = SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
-      (coefficientSystemMap l (ULift.{u} (Padic l)) T)
-      c.scalar c.rootModule (op (n, U.unop)) x := by
-    dsimp only [v]
-    exact he.trans hu
-  have ht := k.line_tensor n U x x' w hx.symm (hw.trans hv.heq)
+  dsimp only [v] at hw
+  have ht := k.line_tensor n U x x' w hx.symm
+    (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
   dsimp only [w, v, η, x'] at ht hi
-  trace_state
   exact congrArg ((cartierProRootMap (diagonalResidue.{u} l n) (l ^ (n + 1))
     (cartierResidue_cast l (n + 1)) (diagonalSurface Y)
     (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n)).hom.app U)
@@ -583,7 +580,8 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
       siteIntegralGenerator (diagonalResidue.{u} l n) (diagonalSurface Y) := by
   apply constantAb_ext_one
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    AddCommGrpCat.comp_apply, diagonalForget_section]
+    AddCommGrpCat.comp_apply]
+  erw [diagonalForget_section]
   let T := diagonalSurface Y
   let U := op (Scheme.ProEt.mk (𝟙 T))
   let z := (toSheafify (Scheme.ProEt.topology T)
@@ -612,7 +610,6 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     rfl
   have ht := (hi (a.coefficient.hom.hom.app U x)).trans ha
   have hs := siteIntegralGenerator_section (diagonalResidue.{u} l n) T (ULift.up 1)
-  trace_state
   change (((diagonalFiniteForgetIso l n T).inv.app
       (geoCartierConstant (diagonalResidue.{u} l n) T)).hom.app U)
     (a.coefficient.hom.hom.app U x) = (siteIntegralGenerator _ T).hom.app U z
