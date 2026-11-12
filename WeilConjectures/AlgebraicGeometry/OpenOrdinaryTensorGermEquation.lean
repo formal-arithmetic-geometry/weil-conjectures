@@ -36,6 +36,7 @@ private theorem assemble_homology_transport
 attribute [local irreducible] tensorStalkIso tensorComplex openPinnedTensorRestrictionIso
 attribute [local irreducible] openDerivedAdditiveStalkIso comparisonStalkHomologyIso
 
+set_option profiler true in
 set_option maxHeartbeats 1200000 in
 -- The homology comparisons involve several composed functors and localization factors.
 /-- A degreewise canonical open tensor-stalk square induces the homology square.

@@ -28,6 +28,7 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The target combines two large categorical transports and needs extra elaboration budget.
 /-- Open restriction identifies the ordinary tensor stalk complexes in germ
