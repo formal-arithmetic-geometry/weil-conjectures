@@ -100,6 +100,7 @@ lemma _root_.WithBot.ENat.eq_one_of_add_one_eq_two {d : WithBot ℕ∞} (h : d +
 variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ C.Z)
 
 -- The computation of the iterated pullbacks through the chart is a long chain of rewrites.
+set_option profiler true in
 /-- **The punctured trait is the spectrum of the fraction field of a strictly henselian
 trait** (blueprint `det-tf-transverse-corner-constant`, the punctured trait). For a geometric
 point `z̄` over the corner point (with `Ω` algebraically closed) there are a strictly henselian
