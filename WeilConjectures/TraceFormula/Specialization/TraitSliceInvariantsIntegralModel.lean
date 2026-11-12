@@ -50,7 +50,6 @@ open Scheme PadicAlgCl
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
 `ℚ̄_ℓ ⊗ (E ⊗ Lw^* B₀) ≅ Lw^* B`, by the compatibility of the extensions of scalars with the derived
@@ -116,7 +115,6 @@ lemma baseChangeGaloisModel_j_comp_total :
   rw [pullback.condition]
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the derived pullbacks along the large composites of the base change model are large terms
 /-- The identification `L(j'')^* Lφ^* B ≅ L(ε'')^* A` on the generic fibre of `N''`. -/
 noncomputable def baseChangeGaloisModelPullbackIso
@@ -145,7 +143,6 @@ noncomputable def baseChangeGaloisModelPullbackIso
             (baseChangeGaloisModel hM b hb v hv).ε)).app A).symm
 
 set_option profiler true in
-set_option maxHeartbeats 4000000 in
 -- the integral model is transported along several derived pullbacks of the base change model
 /-- **An integral model on the generic fibre of `N''` with finite torsion nearby cycles**: if
 `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space of `M`, then `L(ε'')^* A` has
@@ -223,7 +220,6 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
 
 set_option linter.style.whitespace false in
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
 -- comparing the Galois actions of `Gal(L^sep / L)` on the concrete layer is slow
 /-- **`ρ` intertwines the actions, indexed by `Gal(L^sep / L)`**: the exchange of
 `ρ : M'' ⟶ N''_{L^sep}` carries the action of `τ` on the Galois layer to that of the generic
@@ -243,8 +239,8 @@ lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
             (traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
               (traitGenericField K)) τ).autAction Λ C) ≫
         ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C := by
-  obtain ⟨σ, rfl⟩ := GenericAut.galoisEquiv.surjective τ
-  rw [MulEquiv.symm_apply_apply]
-  exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ σ C
+  simpa only [MulEquiv.apply_symm_apply] using
+    pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ
+      (GenericAut.galoisEquiv.symm τ) C
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
