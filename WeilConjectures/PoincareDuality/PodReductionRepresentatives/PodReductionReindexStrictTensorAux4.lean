@@ -71,15 +71,11 @@ private def sequenceEvaluation_hom_apply (W : Scheme.{u}) (n : ℕ)
     (z : M.val.obj (op V)) : N.val.obj (op (n, V)) :=
   f.val.app (op V) z
 
-private theorem sequenceEvaluation_hom_naturality (W : Scheme.{u}) (n : ℕ)
-    {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
-    (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N)
-    {V V' : W.ProEt} (i : V' ⟶ V) (z : M.val.obj (op V)) :
-    N.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op (f.val.app (op V) z) =
-      f.val.app (op V') (M.val.map i.op z) := by
-  have h := PresheafOfModules.naturality_apply f.val i.op z
-  simpa only [coefficientSequenceEvaluation, SheafOfModules.pushforward_obj_val,
-    PresheafOfModules.pushforward_obj_map_apply] using h.symm
+private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
+    (M : coefficientSequenceModules l E W) {V V' : W.ProEt} (i : V' ⟶ V)
+    (z : ((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) :
+    ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
+      M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
 
 set_option profiler true in
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
@@ -92,8 +88,8 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
         (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)) =
       ((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')
         (unrestrictedIntegralTensorSection l E W n M (op V') 1 (M.val.map i.op z)) := by
-  have h1 := sequenceEvaluation_hom_naturality l E W n
-    ((pullbackTensorReductionEvaluation l E W n).hom.app M) i
+  have h1 := PresheafOfModules.naturality_apply
+    ((pullbackTensorReductionEvaluation l E W n).hom.app M).val i.op
     (unrestrictedIntegralTensorSection l E W n M (op V) 1 z)
   have h2 := PresheafOfModules.naturality_apply
     ((pullbackTensorFiniteAdjunction l E W n).unit.app M).val i.op z
@@ -104,7 +100,16 @@ theorem reduction_restrict_unitSection (W : Scheme.{u}) (n : ℕ)
     exact h2.symm
   have h4 := congrArg
     (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V')) h3
-  exact h1.trans h4
+  have h0 := sequenceEvaluation_map_apply l E W n
+    ((pullbackTensorOrdinaryReduction l E W).obj M) i
+    (((pullbackTensorReductionEvaluation l E W n).hom.app M).val.app (op V)
+      (unrestrictedIntegralTensorSection l E W n M (op V) 1 z))
+  dsimp only [Functor.comp_obj, coefficientSequenceEvaluation, SheafOfModules.pushforward,
+    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
+    PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
+    PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars,
+    ModuleCat.RestrictScalars.obj'] at h0 h1 h4 ⊢
+  exact h0.symm.trans (h1.symm.trans h4)
 
 
 set_option profiler true in
