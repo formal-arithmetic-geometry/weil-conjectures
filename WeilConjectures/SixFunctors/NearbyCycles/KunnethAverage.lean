@@ -45,13 +45,21 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-noncomputable local instance kunnethDerivedMonoidal (T : Scheme.{u}) :
-    MonoidalCategory (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))) := inferInstance
+-- Share the colimit-preservation proofs used by the graded tensor constructions
+-- underlying each derived pullback in the statement.
+local instance (priority := 10000) kunnethTensorLeftColimit (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+    Limits.PreservesColimit V ((curriedTensor _).obj M) := by
+  infer_instance
 
-noncomputable local instance kunnethDerivedPreadditive (T : Scheme.{u}) :
-    Preadditive (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj Λ T))) := inferInstance
+local instance (priority := 10000) kunnethTensorRightColimit (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+    Limits.PreservesColimit V ((curriedTensor _).flip.obj M) := by
+  infer_instance
 
 -- the Künneth maps of the two products are large terms
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
