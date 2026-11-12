@@ -39,7 +39,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-set_option profiler true in
 /-- Forgetting constructibility identifies an integral model with its two scalar extensions. -/
 private lemma integralModel_extendScalars_iso (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -54,7 +53,6 @@ private lemma integralModel_extendScalars_iso (T : Scheme.{u}) (ℓ : ℕ) [Fact
             K.obj) := by
   exact ⟨(boundedConstructible (padicAlgClRingObj T ℓ)).ι.mapIso e⟩
 
-set_option profiler true in
 /-- Lift residue-field base change at a pulled-back integral model, then transport it
 along the isomorphism identifying its scalar extensions with the given complex. -/
 private lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegralModel
@@ -106,7 +104,6 @@ namespace NearbyCyclesModel
 variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option profiler true in
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients, at a given integral
 model.** Let `C` be a `ℚ̄_ℓ`-complex and `K₀` a bounded constructible `𝒪_E`-complex on the
 noetherian generic fibre with `ℚ̄_ℓ ⊗ (E ⊗ K₀) ≅ Lε^* C`. If there is a finite Galois
