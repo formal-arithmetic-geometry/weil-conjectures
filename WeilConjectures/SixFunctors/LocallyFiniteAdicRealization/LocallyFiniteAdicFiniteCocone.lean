@@ -176,6 +176,7 @@ private theorem sixfold_reassoc
 
 -- Keep the named equivalence available when elaborating its shift data.
 set_option cleanup.letToHave false in
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 /-- The finite-field tensor realizations form a normalized coherent cocone.
 

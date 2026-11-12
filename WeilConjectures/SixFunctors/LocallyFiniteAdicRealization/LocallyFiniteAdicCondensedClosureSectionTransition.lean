@@ -108,6 +108,7 @@ private theorem closureSectionComparison_factor (A : FiniteCondensedData l X)
   unfold finiteCondensedClosureSectionComparison finiteCondensedClosureEncoding
   exact whisker_factor _ _ _ _ _ _ _ _ _
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 private theorem finiteScalarEncoding_map (A : FiniteCondensedData l X)
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
