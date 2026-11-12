@@ -32,6 +32,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 set_option profiler true in
+/-- A homology-coordinate identity for one augmented lift holds for every such lift. -/
 private theorem quotient_tensor_coordinates_of_chosen
     {A C : Type u} [CommRing A] [CommRing C] {T : Type*}
     (I : Ideal A) (J : Ideal C) (φ : A →+* C)
@@ -52,11 +53,11 @@ private theorem quotient_tensor_coordinates_of_chosen
         ∀ x, f x = g (HomologicalComplex.homologyMap k₀ n x)) →
       ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))
         (a : P.complex ⟶ F.obj R.complex)
-        (k : TA.obj P.complex ⟶ F.obj (TC.obj R.complex))
-        (hψ : ∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x))
-        (ha : ∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x))
-        (hk : ∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),
-          k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)),
+        (k : TA.obj P.complex ⟶ F.obj (TC.obj R.complex)),
+        (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →
+        (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →
+        (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),
+          k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →
         ∀ x, f x = g (HomologicalComplex.homologyMap k n x) := by
   intro TA TC F ψ₀ f g hc ψ a k hψ ha hk
   rcases hc with ⟨a₀, k₀, ha₀, hk₀, hnat⟩
@@ -145,7 +146,7 @@ theorem exists_derived_selfTor_affine_coordinates
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
-  intro inst B S D Q
+  intro B S D Q
   rcases exists_derived_selfTor_chosen_affine_coordinates i n with ⟨c, hc⟩
   refine ⟨c, ?_⟩
   intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk e x
