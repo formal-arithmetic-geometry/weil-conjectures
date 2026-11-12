@@ -180,9 +180,12 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso (a : ℤ
           (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app
             (DerivedCategory.Q.obj K)) ≫ R((ginf)_*⟦Λ⟧).map (L((ginf)^*⟦Λ⟧).map e.hom) := by
     simp only [Category.assoc, hn]
-  rw [h, G.map_comp, G.map_comp, Category.assoc, Category.assoc, key, ← G.map_comp_assoc,
-    ← Functor.map_comp, ← Functor.map_comp, e.inv_hom_id, CategoryTheory.Functor.map_id,
-    CategoryTheory.Functor.map_id, G.map_id, Category.id_comp]
+  let E := (R((ginf)_*⟦Λ⟧).mapIso (L((ginf)^*⟦Λ⟧).mapIso e))
+  have hE : G.map E.inv ≫ G.map E.hom = 𝟙 _ := by
+    rw [← G.map_comp, E.inv_hom_id, G.map_id]
+  rw [h, G.map_comp, G.map_comp, Category.assoc, Category.assoc, key]
+  change G.map E.inv ≫ G.map E.hom ≫ φ = φ
+  rw [hE, Category.id_comp]
 
 end AlgebraicGeometry.ProEtale.GaloisTower
 
