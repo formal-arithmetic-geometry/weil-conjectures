@@ -138,7 +138,8 @@ private theorem signed_evaluation_comp_exchange
           (i * j).negOnePow • coefficientTensorGenerator.{u, t + 1, t}
             (AlgebraicGeometry.Scheme.ProEt.topology Y) R Q P j i k h' U y x)
     (q : Q ⟶ homComplex (R := R) P I)
-    (b : ((totalTensor.{t, u} Y R).obj P).obj Q ⟶ I)
+    (b : (coefficientTotalTensor.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (P, Q) ⟶ I)
     (hb : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
         (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
       (b.f (i + j)).val.app U (totalPair.{t, u} Y R P Q i j U x y) =
@@ -154,7 +155,7 @@ private theorem signed_evaluation_comp_exchange
           (op (Over.mk (𝟙 U.unop)))) x) :
     b = s ≫ v := by
   let J := AlgebraicGeometry.Scheme.ProEt.topology Y
-  apply total_generator_ext Y R P Q I (f := b) (g := s ≫ v)
+  refine total_generator_ext Y R P Q I (f := b) (g := s ≫ v) ?_
   intro i j k hij U x y
   subst k
   have hpair : totalPair.{t, u} Y R P Q i j U x y =
@@ -209,6 +210,7 @@ private theorem representative_square_after_injective
       ((a.adjunction (DerivedCategory.Q.obj P)).leftAdjointUniq
         (S.adjunction (DerivedCategory.Q.obj P))).hom.app (DerivedCategory.Q.obj Q)) ≫ f =
       (DerivedCategory.Q.map s ≫ T.comparison.hom.app (⟨Q, hQ⟩, ⟨P, hP⟩)) ≫ f := by
+  letI := derivedCategory.{t, u} Y R
   classical
   have : I.IsKInjective := hI
   have : (homComplex (R := R) P I).IsKInjective :=
