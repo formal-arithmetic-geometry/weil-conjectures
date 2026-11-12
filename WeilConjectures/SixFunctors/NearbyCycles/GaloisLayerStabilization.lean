@@ -252,7 +252,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
       (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
       (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
       (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
-      (fun τ ↦ by
-        rw [N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ (lift τ), hlift])
+      (fun τ ↦ (N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ
+        (lift τ) (L((𝟙 X)^*⟦Λ⟧).obj C)).trans
+          (congrArg (fun σ ↦ L((𝟙 X')^*⟦Λ⟧).map
+            ((N.galoisLayerAut h L' σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C)) ≫
+              ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ).app
+                (L((𝟙 X)^*⟦Λ⟧).obj C)) (hlift τ)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
