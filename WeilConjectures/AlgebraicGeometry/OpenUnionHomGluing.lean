@@ -37,8 +37,7 @@ private theorem transported_morphism_eq
   rw [h, Functor.map_preimage]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 500000 in
--- Elaborating the transported derived restriction diagram needs this budget.
+set_option profiler true in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible local maps between restrictions of two fixed ambient objects glue on

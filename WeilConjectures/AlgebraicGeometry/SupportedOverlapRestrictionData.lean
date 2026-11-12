@@ -74,8 +74,7 @@ private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) 
       Modules.pushforwardCongr s.inv_hom_id ≪≫ Modules.pushforwardId T)
 
 
-set_option maxHeartbeats 400000 in
--- Derived composition comparisons involve three transported module categories.
+set_option profiler true in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
