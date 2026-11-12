@@ -170,6 +170,55 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+private theorem normalizedBeta_inv_generator (n : ℕ)
+    (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
+    (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
+      (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
+      (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q) ⟶
+      ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj
+        (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q))
+    [IsIso beta]
+    (hbeta : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
+      (beta.f (i + j)).val.app U
+        (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
+          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
+          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+          i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
+            ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) =
+      (reductionUnit l E Y D hl n
+        ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
+          (i + j))).val.app U
+        (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
+    ∀ (i j k : ℤ) (hij : i + j = k) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
+      ((inv beta).f k).val.app U
+        (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
+          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
+          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+          i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
+            ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) =
+      (reductionUnit l E Y D hl n
+        ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X k)).val.app U
+        (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)  := by
+  intro i j k hij U x y
+  subst k
+  have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
+      (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
+          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
+      (asIso beta).hom_inv_id
+  rw [show (asIso beta).hom = beta from rfl,
+    show (asIso beta).inv = inv beta from rfl] at hh
+  dsimp only [HomologicalComplex.comp_f] at hh
+  have hcomp := congrArg (fun z ↦ ((inv beta).f (i + j)).val.app U z)
+    (hbeta i j U x y)
+  rw [← ConcreteCategory.comp_apply] at hcomp
+  change (ConcreteCategory.hom ((beta.f (i + j) ≫ (inv beta).f (i + j)).val.app U)) _ = _ at hcomp
+  exact hcomp.symm.trans hh
+
 private theorem normalizedBeta_eq (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
@@ -190,29 +239,12 @@ private theorem normalizedBeta_eq (n : ℕ)
         ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
-    (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
+    (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q  := by
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
-  · intro i j k hij U x y
-    subst k
-    have h_inv : (asIso beta).symm.hom = inv beta := rfl
-    rw [h_inv]
-    have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
-      (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
-        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
-          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
-      (asIso beta).hom_inv_id
-    rw [show (asIso beta).hom = beta from rfl,
-      show (asIso beta).inv = inv beta from rfl] at hh
-    dsimp only [HomologicalComplex.comp_f] at hh
-    have hcomp := congrArg (fun z ↦ ((inv beta).f (i + j)).val.app U z)
-      (hbeta i j U x y)
-    rw [← ConcreteCategory.comp_apply] at hcomp
-    change (ConcreteCategory.hom ((beta.f (i + j) ≫ (inv beta).f (i + j)).val.app U)) _ = _ at hcomp
-    exact hcomp.symm.trans hh
+  · exact normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
