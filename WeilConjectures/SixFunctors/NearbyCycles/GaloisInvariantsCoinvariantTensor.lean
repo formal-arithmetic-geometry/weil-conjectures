@@ -61,7 +61,7 @@ private theorem galoisTensorHasGoodTensorTensor₂₃ (Y : Scheme.{u})
     (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y))) : GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
 
-attribute [local instance] galoisTensorHasTensor₄ObjExt galoisTensorHasGoodTensor₁₂Tensor
+attribute [local instance 2000] galoisTensorHasTensor₄ObjExt galoisTensorHasGoodTensor₁₂Tensor
   galoisTensorHasGoodTensorTensor₂₃
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
