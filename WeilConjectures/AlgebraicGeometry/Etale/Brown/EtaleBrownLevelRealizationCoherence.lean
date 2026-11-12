@@ -57,6 +57,15 @@ private def brownLevelConstantRestrictionIso (W : Scheme.{u})
     rfl
 
 set_option trace.profiler true in
+private theorem brownLevelConstantRestrictionIso_sections (W : Scheme.{u})
+    (A B : CommRingCat.{u + 1}) (f : A ⟶ B)
+    (M : WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1} W.smallEtaleTopology
+      ((constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}).obj B))
+    (U : W.Etaleᵒᵖ) (x : M.val.obj U) :
+    HEq (((brownLevelConstantRestrictionIso W A B f).hom.app M).hom.app U x) x :=
+  HEq.rfl
+
+set_option trace.profiler true in
 private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     coefficientRestriction (J := W.smallEtaleTopology) O t h ⋙
       strictEtaleBrownConstant O t W n ≅
@@ -133,7 +142,8 @@ theorem etaleBrownLevelRealizationCoherence_exists
       HEq (((ordinaryRestrictionIso O t W h).hom.app M).hom.app U x) x) ∧ _
   refine ⟨?_, ?_, ?_⟩
   · intro m n h M U x
-    exact HEq.rfl
+    exact brownLevelConstantRestrictionIso_sections W _ _
+      (CommRingCat.ofHom (strictEtaleBrownRingMap O t h)) M U x
   · exact hrestriction
   · intro m n h
     exact brownLevelInverseMateIso_mate (P.scalar h).derivedAdj
