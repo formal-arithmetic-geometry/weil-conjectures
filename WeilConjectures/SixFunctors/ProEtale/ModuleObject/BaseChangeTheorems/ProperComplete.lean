@@ -37,6 +37,10 @@ proper base change for torsion coefficients
 `C` (`ProEtale.isIso_zsmul_id_of_isZero_derivedReduction`) and `C = 0` by derived Nakayama
 (`CategoryTheory.IsDerivedAdicComplete.isZero_of_isIso_zsmul_id`).
 
+The same argument only uses that `Lg^* Rt_* R` and `Lg'^* R` are derived complete; this is
+`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete_upperStar`
+(blueprint `lemma-completed-ordinary-base-change--2`).
+
 -/
 
 @[expose] public section
@@ -54,36 +58,34 @@ open Scheme PadicAlgCl
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 400000 in
--- the derived categories of module objects are slow to elaborate
-/-- **Proper base change for derived complete integral complexes** (blueprint
-`sk-prop-pbc-complete`, for pullbacks which preserve countable products): for a cartesian square
-`g' ≫ p = p' ≫ g` with `p` proper, along which `Lg^*` and `Lg'^*` preserve countable products,
-and a bounded below derived `ℓ`-adically complete `𝒪_E`-complex `R` whose first derived
-reduction is of étale origin, the base change morphism `Lg^* Rp_* R ⟶ Rp'_* Lg'^* R` is an
-isomorphism. -/
-theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete [IsProper p]
+/-- **Completed and ordinary base change, isomorphism criterion.** For a cartesian square
+`g' ≫ p = p' ≫ g` with `p` proper and a bounded below `𝒪_E`-complex `R` whose first derived
+reduction is of étale origin, if `Lg^* Rp_* R` and `Lg'^* R` are derived `ℓ`-adically complete,
+then the base change morphism `Lg^* Rp_* R ⟶ Rp'_* Lg'^* R` is an isomorphism.
+
+Both sides are derived complete (`Rp'_*` is a right adjoint), so the cone `C` of the base change
+morphism is. Its first derived reduction is the base change morphism with coefficients `𝔽_E`,
+invertible by proper base change for torsion coefficients, so `C ⊗ᴸ 𝔽_E = 0` and `C = 0` by
+derived Nakayama.
+(blueprint: lemma-completed-ordinary-base-change--2) -/
+theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete_upperStar [IsProper p]
     (hsq : IsPullback g' p' p g)
-    [PreservesLimitsOfShape (Discrete ℕ) L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)]
-    [PreservesLimitsOfShape (Discrete ℕ) L((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)]
     (R : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [R.IsGE n]
-    (hR : IsDerivedAdicComplete (ℓ : ℤ) R)
     (hR₁ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) X
-      ((derivedReduction X ℓ E).obj R)) :
-    IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) hsq.toCommSq).app R) := by
-  have h₁ : IsDerivedAdicComplete (ℓ : ℤ)
+      ((derivedReduction X ℓ E).obj R))
+    (h₁ : IsDerivedAdicComplete (ℓ : ℤ)
       (L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
-        (R((p)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj R)) := by
-    have := (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
-      p).rightAdjoint_preservesLimits.{0, 0}
-    exact (hR.map' _).map' _
-  have h₂ : IsDerivedAdicComplete (ℓ : ℤ)
+        (R((p)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj R)))
+    (h₂ : IsDerivedAdicComplete (ℓ : ℤ)
+      (L((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj R)) :
+    IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) hsq.toCommSq).app R) := by
+  have h₂' : IsDerivedAdicComplete (ℓ : ℤ)
       (R((p')_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
         (L((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj R)) := by
     have := (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
       p').rightAdjoint_preservesLimits.{0, 0}
-    exact (hR.map' _).map' _
+    exact h₂.map' _
   have hβ : ∃ (C : DerivedCategory (Mod (Sheaf (ProEt.topology Y') Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y'))) (a : _ ⟶ C)
       (b : C ⟶ (shiftFunctor _ (1 : ℤ)).obj (L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
@@ -93,7 +95,7 @@ theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete [IsProper p
     distinguished_cocone_triangle _
   obtain ⟨C, a, b, hT⟩ := hβ
   have hC : IsDerivedAdicComplete (ℓ : ℤ) C :=
-    IsDerivedAdicComplete.of_distTriang₁₂ _ hT h₁ h₂
+    IsDerivedAdicComplete.of_distTriang₁₂ _ hT h₁ h₂'
   -- the first derived reduction of the base change morphism is invertible
   have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
     inferInstanceAs (Finite (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
@@ -117,5 +119,26 @@ theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete [IsProper p
   have hCz : IsZero C :=
     hC.isZero_of_isIso_zsmul_id (isIso_zsmul_id_of_isZero_derivedReduction Y' ℓ E C hC₁)
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 hCz
+
+/-- **Proper base change for derived complete integral complexes** (blueprint
+`sk-prop-pbc-complete`, for pullbacks which preserve countable products): for a cartesian square
+`g' ≫ p = p' ≫ g` with `p` proper, along which `Lg^*` and `Lg'^*` preserve countable products,
+and a bounded below derived `ℓ`-adically complete `𝒪_E`-complex `R` whose first derived
+reduction is of étale origin, the base change morphism `Lg^* Rp_* R ⟶ Rp'_* Lg'^* R` is an
+isomorphism. -/
+theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete [IsProper p]
+    (hsq : IsPullback g' p' p g)
+    [PreservesLimitsOfShape (Discrete ℕ) L((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)]
+    [PreservesLimitsOfShape (Discrete ℕ) L((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)]
+    (R : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [R.IsGE n]
+    (hR : IsDerivedAdicComplete (ℓ : ℤ) R)
+    (hR₁ : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) X
+      ((derivedReduction X ℓ E).obj R)) :
+    IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) hsq.toCommSq).app R) := by
+  have := (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+    p).rightAdjoint_preservesLimits.{0, 0}
+  exact isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete_upperStar ℓ E hsq R n hR₁
+    ((hR.map' _).map' _) (hR.map' _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

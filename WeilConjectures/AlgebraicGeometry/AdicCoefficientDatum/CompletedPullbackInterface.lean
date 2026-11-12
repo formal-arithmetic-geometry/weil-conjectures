@@ -70,6 +70,17 @@ def AdicCoefficientDatum.completionUnit (T : Scheme.{t}) (K : d.derived T) :
   (d.constantRlimAdjunction T).unit.app K ≫
     (completedRlim T (d.completedRing T)).map ((completedReductionAugmentation d T).app K)
 
+/-- The quotient completion unit is natural.
+Source: blueprint completed pullback (blueprint: thm-cbc-complete-proetale). -/
+theorem AdicCoefficientDatum.completionUnit_naturality (T : Scheme.{t}) {K L : d.derived T}
+    (f : K ⟶ L) :
+    f ≫ d.completionUnit T L = d.completionUnit T K ≫
+      (completedRlim T (d.completedRing T)).map ((completedReductionTower T d).map f) := by
+  have h := ((d.constantRlimAdjunction T).unit ≫ Functor.whiskerRight
+    (completedReductionAugmentation d T) (completedRlim T (d.completedRing T))).naturality f
+  simpa only [AdicCoefficientDatum.completionUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.comp_map, Functor.id_map, Category.assoc] using h
+
 /-- Quotient-tower completeness is invertibility of the specified canonical completion unit.
 This is the completeness condition in the completed base-change construction.
 Source: blueprint completed base-change map, input paragraph and canonical quotient unit
