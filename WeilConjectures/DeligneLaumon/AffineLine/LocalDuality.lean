@@ -188,9 +188,9 @@ private theorem localBoundaryLinearEquiv_frobenius
   intro x y
   simp only [LinearEquiv.trans_apply]
   rw [hΨ x, map_smul, S.map_frobenius]
-  simp only [LinearEquiv.dualMap_apply, LinearMap.smul_apply,
-    FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply]
-  rw [FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
+  erw [LinearEquiv.dualMap_apply]
+  rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
+    FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
     LinearEquiv.symm_apply_apply, smul_eq_mul]
 
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
