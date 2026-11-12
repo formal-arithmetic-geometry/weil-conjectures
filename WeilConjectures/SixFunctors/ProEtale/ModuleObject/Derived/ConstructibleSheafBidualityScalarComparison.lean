@@ -59,6 +59,33 @@ lemma CategoryTheory.MonoidalClosed.exists_biduality_comparison
   dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
   rw [map_toIhomIhom_comp_dualComparison_assoc, IsIso.hom_inv_id, Category.comp_id]
 
+/-- Forget a biduality comparison for a composite of restrictions to full subcategories. -/
+lemma CategoryTheory.ObjectProperty.exists_biduality_comparison_lift_comp
+    {C D E : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+    [Category* D] [Category* E] [MonoidalCategory E] [BraidedCategory E] [MonoidalClosed E]
+    (P : ObjectProperty C) [P.IsMonoidal] [P.IsMonoidalClosed] (Q : ObjectProperty D)
+    (R : ObjectProperty E) [R.IsMonoidal] [R.IsMonoidalClosed]
+    (F : C ⥤ D) (G : D ⥤ E)
+    (hF : ∀ K : P.FullSubcategory, Q (F.obj K.obj))
+    (hG : ∀ K : Q.FullSubcategory, R (G.obj K.obj))
+    (L W : P.FullSubcategory) (W' : R.FullSubcategory)
+    (h : let T := Q.lift (P.ι ⋙ F) hF ⋙ R.lift (Q.ι ⋙ G) hG
+      ∃ c : T.obj ((ihom ((ihom L).obj W)).obj W) ≅
+          (ihom ((ihom (T.obj L)).obj W')).obj W',
+        toIhomIhom W' (T.obj L) = T.map (toIhomIhom W L) ≫ c.hom) :
+    ∃ c : (F ⋙ G).obj ((ihom ((ihom L.obj).obj W.obj)).obj W.obj) ≅
+        (ihom ((ihom ((F ⋙ G).obj L.obj)).obj W'.obj)).obj W'.obj,
+      toIhomIhom W'.obj ((F ⋙ G).obj L.obj) =
+        (F ⋙ G).map (toIhomIhom W.obj L.obj) ≫ c.hom := by
+  obtain ⟨c, h⟩ := h
+  refine ⟨R.ι.mapIso c, ?_⟩
+  have h' := congrArg (fun f ↦ f.hom) h
+  rw [toIhomIhom_hom, comp_hom] at h'
+  change toIhomIhom W'.obj ((F ⋙ G).obj L.obj) =
+    (F ⋙ G).map (toIhomIhom W L).hom ≫ (R.ι.mapIso c).hom at h'
+  rw [toIhomIhom_hom] at h'
+  exact h'
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
@@ -66,17 +93,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   {X S : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
-
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
-private lemma integral_qbar_biduality_map_hom
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    {K M : BoundedConstructible
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)} (f : K ⟶ M) :
-    ((boundedConstructibleExtendScalars X.left ℓ E ⋙
-      constructibleToPadicAlgCl X.left ℓ E).map f).hom =
-      ((Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
-        derivedExtendScalarsToPadicAlgCl X.left ℓ E).map f.hom := rfl
 
 omit [IsSeparated X.hom] in
 private lemma integral_qbar_biduality_braided
@@ -170,15 +186,12 @@ theorem integral_qbar_biduality_comparison
       (boundedConstructibleUpperShriek ℓ a).mapIso
         (Functor.Monoidal.εIso (constructibleToPadicAlgCl S.left ℓ E)).symm
   -- The lax braided bidual square gives the compatibility before forgetting.
-  obtain ⟨c, h⟩ := integral_qbar_biduality_comparison_bounded ℓ E L W W' w
-  run_tac Lean.logInfo "PH022: obtained bounded comparison"
-  refine ⟨(boundedConstructible _).ι.mapIso c, ?_⟩
-  run_tac Lean.logInfo "PH022: mapped comparison iso"
-  have h' := congrArg (fun f ↦ f.hom) h
-  run_tac Lean.logInfo "PH022: mapped equality"
-  rw [ObjectProperty.toIhomIhom_hom, ObjectProperty.comp_hom,
-    integral_qbar_biduality_map_hom, ObjectProperty.toIhomIhom_hom] at h'
-  run_tac Lean.logInfo "PH022: rewritten equality"
-  exact h'
+  exact ObjectProperty.exists_biduality_comparison_lift_comp
+    (boundedConstructible _) (boundedConstructible _) (boundedConstructible _)
+    (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor
+    (derivedExtendScalarsToPadicAlgCl X.left ℓ E)
+    (boundedConstructible_derivedExtendScalars_obj X.left ℓ E)
+    (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E) L W W'
+    (integral_qbar_biduality_comparison_bounded ℓ E L W W' w)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
