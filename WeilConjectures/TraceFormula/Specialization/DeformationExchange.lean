@@ -233,6 +233,7 @@ private lemma supportCompactSupportExchange_component_identity
       (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
           (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
+  dsimp only [Functor.comp_obj] at hF2'
   instantiate_by_match eq_fullSubcategory_hom_to_map [h := hF2'] as hF2map
   have hfsp := hc.componentSpecialLift_comp_d_deformation k' F j hb
   have hL := eqToHom_comp_map_lowerStarComp_inv ℓ (j ≫ F.d) (j ≫ F.d) rfl (diag X)
@@ -260,87 +261,6 @@ private lemma supportCompactSupportExchange_component_identity
   run_tac do
     let n ← Lean.getRemainingHeartbeats
     Lean.logInfo m!"support before assembly: {n / 1000} heartbeats remain"
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let saved ← Lean.Meta.saveState
-    let e ← Lean.Meta.mkConstWithFreshMVarLevels ``CategoryTheory.supportIdentity_aux
-    let ty ← Lean.Meta.inferType e
-    let mut names : Array Lean.Name := #[]
-    let mut binderTy := ty
-    while binderTy.isForall do
-      names := names.push binderTy.bindingName!
-      binderTy := binderTy.bindingBody!
-    let (mvs, _, concl) ← Lean.Meta.forallMetaTelescope ty
-    for (binder, value) in #[
-        ("Sp", "specialization (ℓ := ℓ) k' y"),
-        ("Ts", "specializationProd (ℓ := ℓ) k' (y ≫ c.c₁)"),
-        ("SX", "specialization (ℓ := ℓ) k' (y ≫ c.c₁)"),
-        ("SB", "NearbyCyclesModel.boundedConstructibleNearbyCycles hM"),
-        ("χΔ", "diagPushforwardExchange ℓ X k' (y ≫ c.c₁)"),
-        ("N₀", "(𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)"),
-        ("Rι'", "boundedConstructibleLowerStar ℓ (hc.specialFixedLocus k').ι"),
-        ("Rd'", "boundedConstructibleLowerShriek ℓ (hc.specialFixedLocus k').d"),
-        ("Ξ'", "lowerStarLowerShriekCompIso ℓ (hc.specialFixedLocus k').isPullback.w"),
-        ("M'", "(boundedConstructibleLowerStar ℓ (hc.componentSpecialLift k' j hb)).obj\n      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("T'", "(boundedConstructibleLowerStar ℓ\n      (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)).obj\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("T₂'", "(boundedConstructibleLowerStar ℓ\n      ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫\n        diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k'))).obj\n          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("hχΔ", "hχΔ'"),
-        ("hχg", "hχg"),
-        ("hχdj", "hχdj"),
-        ("hF2", "hF2"),
-        ("hF2'", "hF2map"),
-        ("hL", "hL"),
-        ("hL'", "hL'"),
-        ("hF1", "hF1"),
-        ("hF3", "hF3"),
-        ("t", "(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app (𝟙_ _)"),
-        ("hι", "(ObjectProperty.fullyFaithfulι (boundedConstructible (condensedRingObj\n      (Profinite.padicAlgClRingObj ℓ) (deformationSpecialFibre X (y ≫ c.c₁).left.ker k' ⨯\n        deformationSpecialFibre X (y ≫ c.c₁).left.ker k').left))).faithful"),
-        ("hback", "NatIso.hom_app_comp_inv_app_comp_map_eqToHom\n      (boundedConstructibleLowerStarComp ℓ (j ≫ F.d) (diag X)) (𝟙_ _) rfl"),
-        ("cinv", "(boundedConstructibleLowerStarCompOfEq ℓ (hc.componentSpecialLift k' j hb)\n      (hc.specialFixedLocus k').ι (hc.componentSpecialLift_ι k' j hb)).inv.app\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("hcinv", "Iso.inv_hom_id_app (boundedConstructibleLowerStarCompOfEq ℓ\n      (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').ι\n        (hc.componentSpecialLift_ι k' j hb))\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))"),
-        ("tr", "eqToHom (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj\n      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)"),
-        ("hback'", "NatIso.hom_app_comp_inv_app_comp_map_eqToHom_eq (boundedConstructibleLowerStarComp ℓ\n      (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d)\n      (diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')))\n      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))\n      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)\n      (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj\n        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)")] do
-      let some idx := names.findIdx? (· == Lean.Name.mkSimple binder)
-        | throwError "missing binder"
-      let ety ← Lean.instantiateMVars (← Lean.Meta.inferType mvs[idx]!)
-      let .ok parsed := Lean.Parser.runParserCategory (← Lean.getEnv) `term value
-        | throwError "parse failure"
-      let v ← Lean.Elab.Tactic.elabTerm parsed none
-      Lean.Elab.Term.synthesizeSyntheticMVarsNoPostponing
-      let v ← Lean.instantiateMVars v
-      Lean.logInfo m!"matching {binder} at {(← Lean.getRemainingHeartbeats) / 1000}"
-      if binder == "hF2'" then
-        let vty ← Lean.Meta.inferType v
-        for i in [0:3] do
-          Lean.logInfo m!"Eq part {i} at {(← Lean.getRemainingHeartbeats) / 1000}"
-          if i == 1 then
-            let mut todo := #[(ety.getArg! i, vty.getArg! i, "lhs", 4)]
-            while !todo.isEmpty do
-              let (p, t, path, fuel) := todo.back!
-              todo := todo.pop
-              let p ← Lean.instantiateMVars p
-              if p == t then continue
-              if ← Lean.Meta.isProof t then
-                if let .mvar m := p.consumeMData then
-                  unless ← m.isAssigned do m.assign t
-                continue
-              Lean.logInfo m!"probe {path}: {p.getAppFn}/{p.getAppNumArgs} vs {t.getAppFn}/{t.getAppNumArgs}, {(← Lean.getRemainingHeartbeats) / 1000}"
-              if fuel > 0 && p.getAppFn == t.getAppFn && p.getAppNumArgs == t.getAppNumArgs && p.isApp then
-                for a in (List.range p.getAppNumArgs).reverse do
-                  todo := todo.push (p.getArg! a, t.getArg! a, path ++ "/" ++ toString a, fuel - 1)
-              else
-                synMatch p t
-          else
-            synMatch (ety.getArg! i) (vty.getArg! i)
-      else
-        synMatch ety (← Lean.Meta.inferType v)
-      mvs[idx]!.mvarId!.assign v
-    Lean.logInfo m!"matching target at {(← Lean.getRemainingHeartbeats) / 1000}"
-    synMatch concl (← Lean.Elab.Tactic.getMainTarget)
-    Lean.logInfo m!"transporting at {(← Lean.getRemainingHeartbeats) / 1000}"
-    let _ ← transportedApp e mvs
-    let n ← Lean.getRemainingHeartbeats
-    saved.restore
-    Lean.logInfo m!"finished transport at {n / 1000}"
   apply_by_match CategoryTheory.supportIdentity_aux
     [Sp := specialization (ℓ := ℓ) k' y,
     Ts := specializationProd (ℓ := ℓ) k' (y ≫ c.c₁),
