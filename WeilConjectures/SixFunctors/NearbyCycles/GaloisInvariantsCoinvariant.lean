@@ -359,7 +359,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
       (condensedRingObj (Λ) X')) ⥤
         Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
           (condensedRingObj (Λ) Z)) ↦
-    retraction_of_eq_comp_map_comp_of_coinvariant
+    @retraction_of_eq_comp_map_comp_of_coinvariant _ _ _ _
+      inferInstance inferInstance inferInstance inferInstance
       F₁ F₂ G _ ((leftDerivedUpperStarId (Λ) X').app _) _
       κ rfl _ _ hα hRC
       (fun k ↦ derivedUnitTransport (Λ)
