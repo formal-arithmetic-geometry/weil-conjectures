@@ -497,7 +497,6 @@ end ProofHelpers
 set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
-set_option maxHeartbeats 1700000 in
 set_option profiler true in
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
@@ -568,6 +567,7 @@ theorem rational_p1_line_exchange_assembly
     coefficient_finish he)
   unfold LineExchangeSquare finiteSecondTraceExchange closureSecondTraceExchange
   unfold PullArrowSquare at h ⊢
+  dsimp only [coefficient, line] at h
   coefficient_finish h
 
 end AlgebraicGeometry.ProEtale.RationalP1
