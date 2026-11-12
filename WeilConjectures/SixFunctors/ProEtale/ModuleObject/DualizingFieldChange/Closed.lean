@@ -418,7 +418,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   {i : Z ⟶ P} {i' : Z' ⟶ P'} [IsClosedImmersion i.left] [IsClosedImmersion i'.left]
   {πP : P'.left ⟶ P.left} {πZ : Z'.left ⟶ Z.left}
 
-set_option trace.profiler true in
 /-- **The base change map of a closed exceptional inverse image along a field extension is an
 isomorphism**: for a closed immersion `i : Z ⟶ P` of separated `F`-schemes of finite type, its
 base change `i' : Z' ⟶ P'` along a field extension `F ⟶ L` and a bounded constructible
@@ -460,7 +459,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_fieldExtension
     inferInstanceAs (IsSeparated (V.ι ≫ P.hom))
   have hjM := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ V.ι M.obj M.property
   have hRj := boundedConstructible_rightDerivedLowerStar_obj ℓ
-      (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
+    (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
   have hX : boundedConstructible _ X :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₁ _ hT M.property hRj
   /- The closed part `Q₀ = Li^* X`, with `Ri_* Q₀ ≅ X`. -/
