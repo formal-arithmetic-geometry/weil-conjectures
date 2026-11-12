@@ -300,6 +300,7 @@ section FiniteEvaluationMate
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the evaluation comparison unfolds the chosen scalar systems
 /-- The normalized finite evaluation of system scalar extension is the inverse mate of
@@ -345,6 +346,7 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- comparing the two derived adjunctions unfolds large derived functor types
 /-- Two system scalar models with the same cochain model have the same normalized
@@ -399,6 +401,7 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory WeilConjectures.integralComparisonSequenceScalarModel
 
+set_option profiler true in
 set_option maxHeartbeats 5000000 in
 -- the derived mate comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the derived scalar mate of the
@@ -550,6 +553,7 @@ private theorem finiteEvaluationSystemScalarAdjunction_heq (l : ℕ) [Fact l.Pri
   unfold finiteEvaluationSystemScalarAdjunction
   exact eq_mpr_heq_self _ _
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the scalar/pullback comparison unfolds several large adjunction composites
 /-- The derived scalar/pullback comparison is the inverse mate, along the fixed
