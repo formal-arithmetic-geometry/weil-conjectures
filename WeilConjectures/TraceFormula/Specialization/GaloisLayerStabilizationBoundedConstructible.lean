@@ -197,6 +197,15 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
     K.obj
   exact retraction_of_stabilization N h Ω ℓ C L' hL'
 
+private theorem integralModel_induction (X : Scheme.{u}) [IsNoetherian X]
+    (ℓ : ℕ) [Fact ℓ.Prime] (K : PadicAlgClConstructible X ℓ) {P : Prop}
+    (step : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
+      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)),
+      (constructibleToPadicAlgCl X ℓ E).obj
+        ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K → P) : P := by
+  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X ℓ K
+  exact step E K₀ e
+
 set_option profiler true in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
@@ -238,7 +247,8 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_forall
             (N.galoisLayerAut h Ω (τ.liftNormal Ω)).autAction (Profinite.padicAlgClRingObj ℓ)
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   let K : PadicAlgClConstructible N.generic ℓ := ⟨_, hC⟩
-  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel N.generic ℓ K
+  apply integralModel_induction N.generic ℓ K
+  intro E K₀ e
   exact N.exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel h Ω ℓ hdeg C hC E K₀ e
     (htors E K₀.obj K₀.property)
 
