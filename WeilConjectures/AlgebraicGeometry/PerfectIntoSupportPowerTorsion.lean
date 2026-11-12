@@ -95,8 +95,6 @@ private theorem top_restriction_faithful (X : Scheme.{u})
   exact inferInstance
 
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- The induction compares restriction functors at four opens and arbitrary integer shifts.
 /-- Maps from a perfect complex into a quasi-coherent complex supported on `V(f)` are
 annihilated by a power of `f`. Source: Stacks Project, Tag 08EJ
 (blueprint: lem-sc-perfect-into-support-on-T).
@@ -136,7 +134,7 @@ theorem exists_pow_smul_eq_zero_of_perfect_supported
     (R U).map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj))
   have hmul (U : X.Opens) (a b : ℕ) : S U (a + b) = S U a ≫ S U b := by
     dsimp [S]
-    rw [pow_add, scalar_id_mul, Functor.map_comp]
+    simp only [pow_add, scalar_id_mul, Functor.map_comp]
   let P := fun U : X.Opens ↦
     ∀ (k : ℤ) (β : (R U).obj E.obj ⟶ (R U).obj (E'.obj⟦k⟧)),
       ∃ n : ℕ, S U n ≫ β = 0
@@ -155,18 +153,18 @@ theorem exists_pow_smul_eq_zero_of_perfect_supported
         (homOfLE le_sup_left) (S (U ⊔ V) (a + b) ≫ β) = 0 := by
       rw [restriction_precomp]
       change S U (a + b) ≫ _ = 0
-      rw [Nat.add_comm a b, hmul, Category.assoc, ha, comp_zero]
+      simp only [Nat.add_comm a b, hmul U b a, Category.assoc, ha, comp_zero]
     have hzeroV : derivedOpenHomRestriction X.toRingedSpace
         (homOfLE le_sup_right) (S (U ⊔ V) (a + b) ≫ β) = 0 := by
       rw [restriction_precomp]
       change S V (a + b) ≫ _ = 0
-      rw [hmul, Category.assoc, hb, comp_zero]
+      simp only [hmul V a b, Category.assoc, hb, comp_zero]
     obtain ⟨γ, hγ⟩ := hlift (S (U ⊔ V) (a + b) ≫ β) hzeroU hzeroV
     obtain ⟨c, hc⟩ := hUV (k - 1) γ
     refine ⟨c + (a + b), ?_⟩
-    rw [hmul, Category.assoc, ← hγ]
+    rw [hmul (U ⊔ V) c (a + b), Category.assoc, ← hγ]
     change (R (U ⊔ V)).map (schemeDerivedScalar X (f ^ c) (𝟙 E.obj)) ≫ δ γ = 0
-    rw [← hlinear, hc, map_zero]
+    exact (hlinear (f ^ c) γ).symm.trans ((congrArg δ hc).trans (map_zero δ))
   have htop : P ⊤ := quasiCompactOpen_induction X P h_affine h_union ⊤ isCompact_univ
   let e : E'.obj⟦(0 : ℤ)⟧ ≅ E'.obj :=
     (shiftFunctorZero (schemeDerivedCategory X) ℤ).app E'.obj
@@ -179,6 +177,6 @@ theorem exists_pow_smul_eq_zero_of_perfect_supported
   have hz' : schemeDerivedScalar X (f ^ n) (𝟙 E.obj) ≫ α.hom = 0 := by
     apply (cancel_mono e.inv).mp
     simpa only [Category.assoc, zero_comp] using hz
-  simpa [schemeDerivedScalar, Linear.smul_comp] using hz'
+  simpa only [schemeDerivedScalar, Linear.smul_comp, Category.id_comp] using hz'
 
 end AlgebraicGeometry.Scheme
