@@ -35,7 +35,6 @@ private lemma moduleDirectImage_restrictScalars_eq {X Y : Scheme.{u}} (f : X ⟶
         ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ =
       RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
 
-set_option trace.profiler true in
 /-- Scalar restriction of the algebra-valued derived pushforward is the scheme pushforward.
 Source: Stacks Project, Tag 0AVW, final pushforward identification
 (blueprint: lem-sc-finite-affine-derived-factorization).

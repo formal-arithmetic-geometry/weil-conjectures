@@ -146,7 +146,6 @@ instance isStrictlyHenselianLocalRing_atPrime_of_fact [Fact (IsAffineOpen W)] [Q
     IsStrictlyHenselianLocalRing (Localization.AtPrime Q) :=
   isStrictlyHenselianLocalRing_atPrime_of_isAffineOpen Fact.out Q
 
-set_option profiler true in
 include hϖ hWU m in
 /-- **A point of an integral cover fixed by inertia extends to an étale neighbourhood.** Let `Z`
 be an integral finite étale `U`-scheme and `t` a point of `Z` over the generic geometric point `η`
