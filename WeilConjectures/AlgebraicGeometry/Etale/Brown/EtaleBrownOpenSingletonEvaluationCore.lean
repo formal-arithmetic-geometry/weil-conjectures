@@ -200,8 +200,13 @@ private theorem iso_inv_of_rep_comparison
     (he : e.hom ≫ v ≫ w = u ≫ r) : f = e.inv := by
   apply (cancel_epi e.hom).1
   apply (cancel_mono u).1
-  rw [Category.assoc, hf, ← Category.assoc e.hom v, ← Category.assoc, he,
-    Category.assoc, hrs, Category.comp_id, e.hom_inv_id, Category.id_comp]
+  calc
+    (e.hom ≫ f) ≫ u = (e.hom ≫ v ≫ w) ≫ s := by
+      rw [Category.assoc, hf]
+      simp only [Category.assoc]
+    _ = (u ≫ r) ≫ s := congrArg (fun z ↦ z ≫ s) he
+    _ = (e.hom ≫ e.inv) ≫ u := by
+      rw [Category.assoc, hrs, Category.comp_id, e.hom_inv_id, Category.id_comp]
 
 private theorem scalar_conjugate
     {TA : A ⥤ B₀} {RA : B₀ ⥤ A} (a : TA ⊣ RA)
@@ -255,6 +260,18 @@ private theorem scalar_inverse_mate
   rw [hi] at hh
   exact hh.trans (mate_of_unit an am β.hom δ.inv hβ).symm
 
+private theorem mate_unit_of_eq
+    {L : A ⥤ B₀} {R : B₀ ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    (a : L ⊣ R) (b : L' ⊣ R') {F : A ⥤ C} {G : B₀ ⥤ D}
+    (α : F ⋙ L' ⟶ L ⋙ G) (β : R ⋙ F ⟶ G ⋙ R')
+    (h : mateEquiv a b (.mk _ _ _ _ α) = β) (P : A) :
+    F.map (a.unit.app P) ≫ β.app (L.obj P) =
+      b.unit.app (F.obj P) ≫ R'.map (α.app P) := by
+  have hu := unit_mateEquiv a b (.mk _ _ _ _ α) P
+  change F.map (a.unit.app P) ≫ (mateEquiv a b (.mk _ _ _ _ α)).app _ = _ at hu
+  rw [h] at hu
+  exact hu
+
 end MateCalculus
 
 variable (O : Type (u + 1)) [CommRing O] (t : O)
@@ -294,15 +311,17 @@ private theorem open_evaluation_mate
         (.mk _ _ _ _ (S.val.openEvaluation n).inv))).app _ = _ at hh
       rw [← S.property.2.1 n] at hh
       exact hh.symm) P
-  apply iso_inv_of_rep_comparison
+  refine iso_inv_of_rep_comparison
     ((S.openDerivedEvaluation n).app (DerivedCategory.Q.obj P)) _
     ((S.PZ.evaluation n).map (S.val.openFactors.hom.app P) ≫
       (S.PZ.evaluationFactors n).hom.app
         ((S.val.openExtension.mapHomologicalComplex (.up ℤ)).obj P))
-    _ _ _ _ _ h (S.property.2.2.2.2 n P)
-  exact DerivedCategory.Q.mapIso
-    ((NatIso.mapHomologicalComplex (S.val.openEvaluation n) (.up ℤ)).app P)
-    |>.hom_inv_id
+    _ _ (DerivedCategory.Q.map
+      ((NatIso.mapHomologicalComplex (S.val.openEvaluation n) (.up ℤ)).hom.app P))
+    _ ?_ h ?_
+  · exact (DerivedCategory.Q.mapIso
+      ((NatIso.mapHomologicalComplex (S.val.openEvaluation n) (.up ℤ)).app P)).hom_inv_id
+  · simpa only [Category.assoc] using S.property.2.2.2.2 n P
 
 set_option profiler true in
 -- Two successive Hom transposes involve the full strict etale derived packages.
@@ -350,7 +369,8 @@ theorem etaleBrownOpenSingletonEvaluationCore
       (S.levelDerivedOpenAdjunction n).unit.app P ≫
         (S.openDerived.level n).inverse.map
           ((S.PZ.derivedAdj n).unit.app ((S.levelDerivedOpen n).obj P)) := by
-    simpa only [Adjunction.comp_homEquiv, Adjunction.comp_unit_app] using
+    simpa only [Adjunction.comp_homEquiv, Adjunction.comp_unit_app, Equiv.trans_apply,
+      i, Iso.symm_hom] using
       conjugate_inverse_transpose
       ((S.PX.derivedAdj n).comp S.derivedOpenAdjunction)
       ((S.levelDerivedOpenAdjunction n).comp (S.PZ.derivedAdj n))
@@ -408,24 +428,13 @@ theorem etaleBrownOpenSingletonEvaluationCore
   simp only [Functor.comp_map, ← Category.assoc, ← Functor.map_comp]
   simp only [← Category.assoc] at hz'
   erw [hz']
-  have hqu := unit_mateEquiv (S.levelDerivedOpenAdjunction n)
-    (S.levelDerivedOpenAdjunction m) (.mk _ _ _ _ q.hom) P
-  change (S.PX.scalar h).derived.map ((S.levelDerivedOpenAdjunction n).unit.app P) ≫
-      ((mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)
-        (.mk _ _ _ _ q.hom))).app _ = _ at hqu
-  erw [hq] at hqu
-  have hqu' : (S.PX.scalar h).derived.map ((S.levelDerivedOpenAdjunction n).unit.app P) ≫
-      (S.openDerived.derivedTensor h).inv.app ((S.levelDerivedOpen n).obj P) =
-      (S.levelDerivedOpenAdjunction m).unit.app ((S.PX.scalar h).derived.obj P) ≫
-        (S.openDerived.level m).inverse.map (q.hom.app P) := by
-    simpa only [Functor.id_obj, Functor.id_map, NatTrans.id_app] using hqu
+  have hqu' := mate_unit_of_eq (S.levelDerivedOpenAdjunction n)
+    (S.levelDerivedOpenAdjunction m) q.hom (S.openDerived.derivedTensor h).inv hq P
   erw [(S.levelDerivedOpenAdjunction m).homEquiv_unit, ← hqu',
     (S.PX.scalar h).derivedAdj.homEquiv_naturality_left]
-  have hsu := unit_mateEquiv (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
-    (.mk _ _ _ _ (S.openDerived.derivedTensor h).inv) ((S.levelDerivedOpen n).obj P)
-  change _ ≫ ((mateEquiv (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
-    (.mk _ _ _ _ (S.openDerived.derivedTensor h).inv))).app _ = _ at hsu
-  erw [hs] at hsu
+  have hsu := mate_unit_of_eq (S.PZ.scalar h).derivedAdj (S.PX.scalar h).derivedAdj
+    (S.openDerived.derivedTensor h).inv (S.openDerived.restrictedInverse h).hom hs
+    ((S.levelDerivedOpen n).obj P)
   erw [(S.PX.scalar h).derivedAdj.homEquiv_unit]
   simpa only [Functor.id_obj, Functor.comp_obj, Category.assoc] using congrArg
     (fun z ↦ (S.levelDerivedOpenAdjunction n).unit.app P ≫ z) hsu
