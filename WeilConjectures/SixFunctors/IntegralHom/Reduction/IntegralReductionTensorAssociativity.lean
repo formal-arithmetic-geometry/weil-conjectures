@@ -274,6 +274,49 @@ private theorem reductionUnit_eq_coefficientIntegralScalarUnitSection
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 set_option profiler true in
+private theorem integralScalarTensorIso_unique (n : ℕ)
+    (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
+    (b : ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj
+        (((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q) ≅
+      ((totalTensor Y (integralCoefficientCommRingSheaf l E Y n)).obj
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q))
+    (h : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+      (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
+      (b.hom.f (i + j)).val.app U
+        ((reductionUnit l E Y D hl n
+          ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
+            (i + j))).val.app U
+          (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) =
+      totalPair Y (integralCoefficientCommRingSheaf l E Y n)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q)
+        i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
+          ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) :
+    b = coefficientScalarTensorIso l E Y n P Q := by
+  have hu := coefficientScalarTensorIso_exists l E Y n P Q
+  dsimp only [coefficientScalarTensorIso, coefficientUniqueComparisonChoice,
+    totalTensor, coefficientTotalTensor, ordinaryTensor,
+    integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence,
+    completedIntegralCommRingSheaf, completedIntegralCommRingProjection,
+    Functor.uncurry_obj_obj] at hu ⊢
+  apply hu.unique
+  · intro i j k hij U x y
+    subst k
+    have hh := h i j U x y
+    dsimp only [totalPair, coefficientTensorGenerator, reductionUnit,
+      coefficientIntegralScalarUnitSection, coefficientOrdinaryScalarAdjunction,
+      coefficientRestrictionSection, totalTensor, coefficientTotalTensor, ordinaryTensor,
+      integralReductionChangeOfRings, integralReductionExistence,
+      scalarReductionExtension, scalarReductionExistence,
+      completedIntegralCommRingSheaf, completedIntegralCommRingProjection,
+      Functor.uncurry_obj_obj] at hh ⊢
+    exact hh
+  · exact hu.choose_spec.1
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+set_option profiler true in
 private theorem normalizedBeta_eq (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
@@ -295,24 +338,8 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
-  have hu := coefficientScalarTensorIso_exists l E Y n P Q
-  dsimp only [coefficientScalarTensorIso, coefficientUniqueComparisonChoice,
-    totalTensor, coefficientTotalTensor, ordinaryTensor,
-    integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hu ⊢
-  apply hu.unique
-  · intro i j k hij U x y
-    subst k
-    have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
-    rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
-    dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-      integralReductionChangeOfRings, integralReductionExistence,
-      scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh
-    with_unfolding_all exact hh
-  · exact hu.choose_spec.1
+  exact integralScalarTensorIso_unique l E Y D hl n P Q (asIso beta).symm
+    (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta)
 
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -400,7 +427,8 @@ private theorem nativeReductionMonoidal
       dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
         integralReductionChangeOfRings, integralReductionExistence,
         scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hb hkc
-      have hbκ := hb.trans hkc.symm
+      dsimp only [D', finiteCochainModel] at hkc
+      have hbκ := (hkc.trans hb.symm).symm
       trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
       trace "native: preservation supplied"
