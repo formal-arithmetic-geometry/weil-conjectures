@@ -200,8 +200,6 @@ private lemma isIso_of_invariant_summands_square {D E₁ E : Type*} [Category D]
     rw [h]
     exact he₁ q φ hφ
 
-set_option profiler true in
--- the statement involves several large derived functor objects
 /-- **Change of trait on the invariant summands** (SGA 4½, [Th. finitude], proof of 3.7, 3.8). Let
 `τ : N₂ ⟶ N₁` be a morphism of models over `Spec l`, `ω : Ω₁ ⟶ Ω₂` a homomorphism of extensions
 over `l`, `τ'` the change of Galois layers, and `σᵢ : Nᵢ_{Ωᵢ} ⟶ Nᵢ` the projections. Assume
@@ -237,12 +235,10 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
     (hβ : IsIso (((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app
       (L((𝟙 X₁)^*⟦Λ⟧).obj C))) :
     IsIso ((τ.pullbackExchange Λ).app C) := by
-  run_tac Lean.logInfo m!"PH329: proof start: {(← Lean.getRemainingHeartbeats) / 1000}"
   obtain ⟨r₁, hr₁, he₁⟩ := h₁split
   have := hβ
   subst hC₂
   obtain ⟨r₂, hr₂, he₂⟩ := h₂split
-  run_tac Lean.logInfo m!"PH329: destructured retractions: {(← Lean.getRemainingHeartbeats) / 1000}"
   -- the composition isomorphisms
   let cA := (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f)).app C
   let cB := (leftDerivedUpperStarCompOfEq Λ (Category.comp_id f)).app C
@@ -252,24 +248,19 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   let α₁ := ((N₁.galoisLayerHom h₁ Ω₁).pullbackExchange Λ).app C
   let α₂ := ((N₂.galoisLayerHom h₂ Ω₂).pullbackExchange Λ).app (L((f)^*⟦Λ⟧).obj C)
   let β := ((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app (L((𝟙 X₁)^*⟦Λ⟧).obj C)
-  run_tac Lean.logInfo m!"PH329: named functors and maps: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hsq := pullbackExchange_galoisLayerMap_square Λ Ω₁ Ω₂ ω hω τ hτ C
   have hA' := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId_self Λ
     (Category.id_comp f') ((N₁.nearbyCycles Λ).obj C)
-  run_tac Lean.logInfo m!"PH329: square and unit identities: {(← Lean.getRemainingHeartbeats) / 1000}"
+  -- Use the inverse characterization directly, without a cancellation rewrite.
   have hIA := (Iso.comp_hom_eq_id ((leftDerivedUpperStarId Λ X₂').app _)).1 hA'
-  run_tac Lean.logInfo m!"PH329: proved hIA: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
-  run_tac Lean.logInfo m!"PH329: obtained naturality: {(← Lean.getRemainingHeartbeats) / 1000}"
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
-  run_tac Lean.logInfo m!"PH329: simplified naturality: {(← Lean.getRemainingHeartbeats) / 1000}"
   let α := (τ.pullbackExchange Λ).app C
   let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
   let H := DerivedCategory.homologyFunctor A
-  run_tac Lean.logInfo m!"PH329: specialized homology functors: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hcons {X Y : DerivedCategory A} (g : X ⟶ Y) :
       (∀ q, IsIso ((H q).map g)) → IsIso g := (DerivedCategory.isIso_iff A g).2
-  run_tac Lean.logInfo m!"PH329: specialized conservativity: {(← Lean.getRemainingHeartbeats) / 1000}"
+  -- Infer the pullback functor and the action objects from the square and retractions.
   have key := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
     _ Ψ₂Ω H (fun g hg ↦ hcons g hg) α α₁ r₁ hr₁ α₂ r₂ hr₂
     cA cB cB' I' _ _ _ hnat hIA β hsq
@@ -280,7 +271,6 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
       (σ k).1 (σ k).2 (hσ k) _).symm)
     (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
     (fun k ↦ he₂ (σ k).2) he₁
-  run_tac Lean.logInfo m!"PH329: assembled helper application: {(← Lean.getRemainingHeartbeats) / 1000}"
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
