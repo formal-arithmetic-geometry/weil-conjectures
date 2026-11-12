@@ -175,6 +175,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' {W : Scheme.{u}} (f : W 
         eqToHom ((congrArg (fun φ ↦ L((φ)^*⟦Λ⟧).obj K) (Category.comp_id f)).symm.trans h) := by
   rw [← leftDerivedUpperStarComp_inv_app_comp_eqToHom_id Λ f K, Category.assoc, eqToHom_trans]
 
+set_option profiler true in
 lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit
     {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {aX : X ⟶ S} {aY : Y ⟶ S}
     (sq₁ : CommSq p₁ (p₂ ≫ aY) aX (𝟙 S)) (w : CommSq p₁ p₂ aX aY)
