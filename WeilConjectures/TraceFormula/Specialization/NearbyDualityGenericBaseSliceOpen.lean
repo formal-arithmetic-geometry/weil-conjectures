@@ -273,7 +273,6 @@ noncomputable def tateTwistZeroShiftUpperStarIso (f : Y ⟶ X) (n : ℤ) :
 variable {ℓ} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : Y ⟶ X} {f' : Y' ⟶ X'}
 
 -- the twists `ℚ̄_ℓ(0)` are the units only up to deep definitional unfoldings
-set_option profiler true in
 /-- The unit law of the pullback exchange
 (`NearbyCyclesModel.Hom.map_unit_comp_pullbackExchange_app`) for the specialization maps of
 `ℚ̄_ℓ(0)` in degree `0`. -/
@@ -304,34 +303,15 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
   have hf : (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv =
       (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
     rw [leftDerivedUpperStarTateTwistDerivedZeroIso_eq]
-  have hf''' := congrArg (fun z ↦ N.unit _ ≫ (N.nearbyCycles _).map z) hf
-  have hunit'' : L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
-      (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
-      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom ≫ N.unit _ ≫
-        (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
-          (Profinite.padicAlgClRingObj ℓ) f).inv := by
-    transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
-  have houter : (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
-      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom = 𝟙 _ := by
-    rw [hf']
+  have hu : (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').inv ≫
+      L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map (M.unit _) ≫
+        (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0) =
+      N.unit _ ≫ (N.nearbyCycles _).map
+        (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv := by
+    rw [← Category.assoc, φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)]
     simp
-  let e := (φ.pullbackExchange _).app (tateTwistDerived X ℓ 0)
-  have hM' := congrArg (fun z ↦ (leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
-    L((f')^*⟦Profinite.padicAlgClRingObj ℓ⟧).map z) hM
-  have hM'' := congrArg (fun z ↦ z ≫ e) hM'
-  let r := (N.nearbyCycles _).map (leftDerivedUpperStarTateTwistDerivedZeroIso f ℓ).inv
-  have hN' := congrArg (fun z ↦ z ≫ r) hN
-  apply hM''.trans
-  apply Eq.trans ?_ hN'.symm
-  rw [← Category.assoc, hunit'']
-  calc
-    _ = ((leftDerivedUpperStarTateTwistDerivedZeroIso f' ℓ).inv ≫
-      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f').hom) ≫
-        (N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
-          (Profinite.padicAlgClRingObj ℓ) f).inv) := by simp only [Category.assoc]
-    _ = N.unit _ ≫ (N.nearbyCycles _).map (leftDerivedUpperStarUnitIso
-          (Profinite.padicAlgClRingObj ℓ) f).inv := by rw [houter, Category.id_comp]
-    _ = _ := hf'''.symm
+  simpa only [hM, hN, hf', hf] using hu
+
 
 -- the shifts of the derived categories of module objects unfold deeply
 /-- The specialization map of `ℚ̄_ℓ(0)[n]` is the shift of that of `ℚ̄_ℓ(0)`
