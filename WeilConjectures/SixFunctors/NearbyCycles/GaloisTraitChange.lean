@@ -237,11 +237,12 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
     (hβ : IsIso (((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app
       (L((𝟙 X₁)^*⟦Λ⟧).obj C))) :
     IsIso ((τ.pullbackExchange Λ).app C) := by
+  run_tac Lean.logInfo m!"PH329: proof start: {(← Lean.getRemainingHeartbeats) / 1000}"
   obtain ⟨r₁, hr₁, he₁⟩ := h₁split
   have := hβ
   subst hC₂
   obtain ⟨r₂, hr₂, he₂⟩ := h₂split
-  trace "PH329: destructured retractions"
+  run_tac Lean.logInfo m!"PH329: destructured retractions: {(← Lean.getRemainingHeartbeats) / 1000}"
   -- the composition isomorphisms
   let cA := (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f)).app C
   let cB := (leftDerivedUpperStarCompOfEq Λ (Category.comp_id f)).app C
@@ -251,42 +252,43 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   let α₁ := ((N₁.galoisLayerHom h₁ Ω₁).pullbackExchange Λ).app C
   let α₂ := ((N₂.galoisLayerHom h₂ Ω₂).pullbackExchange Λ).app (L((f)^*⟦Λ⟧).obj C)
   let β := ((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app (L((𝟙 X₁)^*⟦Λ⟧).obj C)
-  trace "PH329: named functors and maps"
+  run_tac Lean.logInfo m!"PH329: named functors and maps: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hsq := pullbackExchange_galoisLayerMap_square Λ Ω₁ Ω₂ ω hω τ hτ C
   have hA' := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId_self Λ
     (Category.id_comp f') ((N₁.nearbyCycles Λ).obj C)
-  trace "PH329: square and unit identities"
+  run_tac Lean.logInfo m!"PH329: square and unit identities: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hIA : (leftDerivedUpperStarCompOfEq Λ (Category.id_comp f')).hom.app
       ((N₁.nearbyCycles Λ).obj C) = (leftDerivedUpperStarId Λ X₂').inv.app _ := by
     rw [← cancel_mono ((leftDerivedUpperStarId Λ X₂').hom.app _), hA', Iso.inv_hom_id_app]
     rfl
-  trace "PH329: proved hIA"
+  run_tac Lean.logInfo m!"PH329: proved hIA: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hnat := (leftDerivedUpperStarId Λ X₂').inv.naturality ((τ.pullbackExchange Λ).app C)
-  trace "PH329: obtained naturality"
+  run_tac Lean.logInfo m!"PH329: obtained naturality: {(← Lean.getRemainingHeartbeats) / 1000}"
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
-  trace "PH329: simplified naturality"
+  run_tac Lean.logInfo m!"PH329: simplified naturality: {(← Lean.getRemainingHeartbeats) / 1000}"
   let α := (τ.pullbackExchange Λ).app C
-  let F : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₁') Ab.{u + 1})
-      (condensedRingObj Λ X₁')) ⥤
-      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1})
-        (condensedRingObj Λ X₂')) := L((f')^*⟦Λ⟧)
-  trace "PH329: named pullback functor"
+  with_reducible
+    let F : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₁') Ab.{u + 1})
+        (condensedRingObj Λ X₁')) ⥤
+        DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1})
+          (condensedRingObj Λ X₂')) := L((f')^*⟦Λ⟧)
+  run_tac Lean.logInfo m!"PH329: named pullback functor: {(← Lean.getRemainingHeartbeats) / 1000}"
   let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
   let H := DerivedCategory.homologyFunctor A
-  trace "PH329: specialized homology functors"
+  run_tac Lean.logInfo m!"PH329: specialized homology functors: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hcons {X Y : DerivedCategory A} (g : X ⟶ Y) :
       (∀ q, IsIso ((H q).map g)) → IsIso g := (DerivedCategory.isIso_iff A g).2
-  trace "PH329: specialized conservativity"
+  run_tac Lean.logInfo m!"PH329: specialized conservativity: {(← Lean.getRemainingHeartbeats) / 1000}"
   with_reducible
     have key₀ := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
       F Ψ₂Ω
-  trace "PH329: specialized functors"
+  run_tac Lean.logInfo m!"PH329: specialized functors: {(← Lean.getRemainingHeartbeats) / 1000}"
   with_reducible
     have key₁ := key₀ H
-  trace "PH329: matched homology functors"
+  run_tac Lean.logInfo m!"PH329: matched homology functors: {(← Lean.getRemainingHeartbeats) / 1000}"
   with_reducible
     have key₂ := key₁ (fun g hg ↦ hcons g hg)
-  trace "PH329: specialized abstract categories"
+  run_tac Lean.logInfo m!"PH329: specialized abstract categories: {(← Lean.getRemainingHeartbeats) / 1000}"
   with_reducible
     have key := key₂ α α₁ r₁ hr₁ α₂ r₂ hr₂
       cA cB cB' I' _ _ _ hnat hIA β hsq
@@ -299,7 +301,7 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
         (σ k).1 (σ k).2 (hσ k) _).symm)
       (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
       (fun k ↦ he₂ (σ k).2) he₁
-  trace "PH329: assembled helper application"
+  run_tac Lean.logInfo m!"PH329: assembled helper application: {(← Lean.getRemainingHeartbeats) / 1000}"
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
