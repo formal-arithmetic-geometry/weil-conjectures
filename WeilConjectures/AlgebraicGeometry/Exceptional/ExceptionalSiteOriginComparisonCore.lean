@@ -325,7 +325,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O) (W : Scheme.{u})
     (K := Scheme.ProEt.topology W) O ell _ _ (Scheme.proEtaleSiteComparison W))
 
 set_option trace.profiler true in
--- Elaborate the sectionwise addition and scalar-action graph calculations.
+-- Lift the underlying right-adjoint comparison using the counit's linearity.
 private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
     ∃! e : S.right n ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n ≅
       exceptionalLevelRealization (Scheme.ProEt.topology W) O ell n ⋙
@@ -491,7 +491,7 @@ private theorem exceptionalSiteRight_existsUnique (n : ℕ) :
       ((L.map a).hom.app ((Scheme.toProEt W).op.obj U)
         ((adj.unit.app T).hom.app U z)) = _ at hc'
     have hs := hc'.trans hconst
-    simp only [hs]
+    rw [hs]
     exact (((S.levelAdj n).counit.app M).val.app
       ((Scheme.toProEt W).op.obj U)).hom.map_smul _ _
   let F := R ⋙ exceptionalLevelRealization W.smallEtaleTopology O ell n
@@ -676,6 +676,7 @@ private theorem exceptional_inverse_scalar_transpose
       dsimp only [Functor.comp_obj]
       rw [Category.comp_id]
 
+/-- Transport an adjoint transpose through isomorphisms of its source and target. -/
 private theorem exceptional_transpose_conjugate
     {C D : Type*} [Category C] [Category D]
     {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
@@ -859,6 +860,7 @@ theorem exceptionalSiteOriginComparison_core
           ((PX.transition h).app (I.system.inverse.obj M)) =
           (PX.scalar h).derived.map em.hom ≫ g ≫ en.inv := by
         apply exceptional_transpose_conjugate (PX.scalar h).derivedAdj em en _ g
+        dsimp only [Functor.comp_obj] at hg ⊢
         simpa only [hg, Category.assoc] using I.inverseTransition h M
       rw [he]
       dsimp only [g]
