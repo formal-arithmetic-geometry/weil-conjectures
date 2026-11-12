@@ -42,6 +42,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 attribute [local irreducible] derivedComapUpperStarIso comapUpperStarIso
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Compute the scalar mate before using any K-flat invertibility.
 /-- Restricted scalar counits commute with exact geometric pullback and the normalized
 scalar mate.
