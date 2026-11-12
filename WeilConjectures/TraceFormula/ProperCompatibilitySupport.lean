@@ -231,10 +231,11 @@ theorem lowerStar_map_supportIso_comp_exchange :
       eqToHom (by rw [P.diag_comp_prodMap]) ≫
       (boundedConstructibleLowerStarComp ℓ P.f (diag Y)).inv.app (dualizingComplex' ℓ X) ≫
       (boundedConstructibleLowerStar ℓ (diag Y)).map (lowerStarDualizingComplexTrace ℓ P.f))
-  simp only [Category.id_comp] at hm
-  simp only [lowerStarUpperShriekExchange, ← hm, Equiv.symm_apply_apply]
+  rw [Category.id_comp] at hm
+  rw [lowerStarUpperShriekExchange, ← hm]
+  rw [Equiv.symm_apply_apply]
   simp only [Adjunction.homEquiv_naturality_left_symm]
-  simp only [Fc.homEquiv_symm_supportIso_hom, Fb.homEquiv_symm_supportIso_hom,
+  rw [Fc.homEquiv_symm_supportIso_hom, Fb.homEquiv_symm_supportIso_hom,
     CategoryTheory.Functor.map_id, Category.id_comp]
   have key := lowerStar_square_trace_exchange ℓ Fc.ι_support Fb.ι_support P.g_comp_support
     P.diag_comp_prodMap (P.fixMap_ι Fc Fb).symm whd
