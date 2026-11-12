@@ -377,7 +377,7 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     (fun v ↦ (((total l E Z s).map
       (Prod.mkHom (k.complex P).hom (k.complex L).hom)).f n).val.app U v)
     (cgh.tensorChain_pure P L p q n hpq U.unop x y)
-  rw [hcg']
+  trace_state
   sorry
 
 set_option maxHeartbeats 8000000 in
