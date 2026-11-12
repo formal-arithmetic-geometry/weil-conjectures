@@ -99,7 +99,9 @@ lemma adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_smul_comp_hom (Ω : T
         (adicSheafEquivCondensedMod l (Spec (.of Ω))).functor.map
           (AdicSheaf.smul (ULift.up c) (AdicSheaf.unit l (Spec (.of Ω)))) ≫
         (adicSheafEquivCondensedModTensorUnitIso l (Spec (.of Ω))).hom =
-      CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c := by
+      (CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c).asHom := by
+  apply End.homEquiv.symm.injective
+  dsimp only [End.homEquiv, Equiv.symm, Equiv.coe_fn_mk]
   apply (CondensedRing.endTensorUnitRingEquiv l Ω).injective
   rw [adicSheafEquivCondensedModTensorUnitIso_eq,
     endTensorUnitRingEquiv_adicSheafEquivCondensedMod_map_smul,
@@ -109,7 +111,7 @@ lemma condensedSectionOfAdicSection_smul_comp (Ω : Type u) [Field Ω] [IsSepClo
     {T : Scheme.{u}} (x : Spec (.of Ω) ⟶ T) (H : AdicSheaf l T) (c : PadicAlgCl l)
     (v : AdicSheaf.unit l (Spec (.of Ω)) ⟶ (x)^*ᵃ[l].obj H) :
     condensedSectionOfAdicSection x H (AdicSheaf.smul (ULift.up c) _ ≫ v) =
-      CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c ≫
+      (CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c).asHom ≫
           condensedSectionOfAdicSection x H v := by
   rw [← adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_smul_comp_hom,
     condensedSectionOfAdicSection, condensedSectionOfAdicSection, Functor.map_comp]
@@ -224,7 +226,7 @@ theorem endTensorUnitRingEquiv_traceOrZero_galoisUpperStarEnd {Ω : Type u} [Fie
   have hsurj (w : (adicGlobalSectionsModule l (Spec (.of Ω))).obj ((x)^*ᵃ[l].obj H)) :
       ∃ v, adicGlobalSectionOfHom v = w := (bijective_globalSectionOfModHom _).2 w
   have he (c' : PadicAlgCl l) (w) :
-      e (c' • w) = CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c' ≫ e w := by
+      e (c' • w) = (CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c').asHom ≫ e w := by
     obtain ⟨v, rfl⟩ := hsurj w
     rw [← adicGlobalSectionOfHom_comp_smul, he_apply, he_apply, ← AdicSheaf.smul_comp,
       condensedSectionOfAdicSection_smul_comp]

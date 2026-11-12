@@ -199,7 +199,7 @@ comparison `G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` of duals along a lax monoidal
 trace `Rf_* ω_X ⟶ ω_Y` it is the Verdier exchange `Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`; for the restriction
 to an open subscheme and `j^* ω_Y ≅ ω_W` it is `j^* 𝔻_Y ⟶ 𝔻_W j^*`. -/
 noncomputable def dualComparison (X : C) : G.obj ((ihom X).obj W) ⟶ (ihom (G.obj X)).obj W' :=
-  (Functor.LaxMonoidal.ihomComparison G X).natTrans.app W ≫ (ihom (G.obj X)).map e
+  (Functor.LaxMonoidal.ihomComparison G X).app W ≫ (ihom (G.obj X)).map e
 
 /-- Blueprints `lem-weil-delta-restriction` and `lem-weil-delta-proper-pushforward` (formal
 core): the double-dual map is compatible with lax braided functors: for `G` lax braided and

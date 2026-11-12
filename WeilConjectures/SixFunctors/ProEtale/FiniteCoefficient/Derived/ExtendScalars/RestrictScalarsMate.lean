@@ -48,7 +48,7 @@ lemma upperStarRestrictScalarsMap_eq :
     upperStarRestrictScalarsMap R S g = (upperStarRestrictScalarsIso (algebraMap R S) g).hom := by
   have hA : (mateEquiv (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
       (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g)
-        (upperStarRestrictScalarsMap R S g)).natTrans =
+        (upperStarRestrictScalarsMap R S g)) =
       conjugateEquiv ((sheafExtendScalarsAdjunction (algebraMap R S) Y).comp
           (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g))
         ((ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).comp

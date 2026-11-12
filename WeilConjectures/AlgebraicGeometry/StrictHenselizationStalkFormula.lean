@@ -103,7 +103,7 @@ theorem strictHenselizationStalkFormula
                   (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
                     (IsPullback.of_hasPullback f
                       (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-                    |>.natTrans.app K)) ≫
+                    |>.app K)) ≫
             (strictHenselizationLerayHomologyIso s f n _).hom) := by
   constructor
   · exact (fun (_ : F.IsTorsion) ↦ unrestricted_strictHenselization_stalk f s F q) hF

@@ -50,7 +50,7 @@ private theorem comparison_ordinary_mate_isIso {A B : Type (u + 1)} [CommRing A]
     (φ : A →+* B) (X : Scheme.{u}) :
     IsIso (((mateEquiv (scalarAdjunction X.smallEtaleTopology φ)
       (scalarAdjunction (Scheme.ProEt.topology X) φ)).symm
-      (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsSheafIso X A φ).hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsSheafIso X A φ).hom))) := by
   let adj₁ := (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).comp
     (comparisonAdjunction (ModuleCat.{u + 1} A) X)
   let adj₂ := (comparisonAdjunction (ModuleCat.{u + 1} B) X).comp
@@ -107,12 +107,12 @@ private theorem comparison_computed_mate_isIso {A B : Type (u + 1)} [CommRing A]
       (scalarDerivedAdjunctionData (Scheme.ProEt.topology X) φ).adjunction).symm
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategorySquareIso
-          (Scheme.comparisonRestrictScalarsSheafIso X A φ)).hom)).natTrans) := by
+          (Scheme.comparisonRestrictScalarsSheafIso X A φ)).hom))) := by
   have := comparisonUpperStar_preservesFlat A X
   have : IsIso (((mateEquiv (scalarAdjunction X.smallEtaleTopology φ)
       (scalarAdjunction (Scheme.ProEt.topology X) φ)).symm
       (TwoSquare.mk _ _ _ _
-        (Scheme.comparisonRestrictScalarsSheafIso X A φ).symm.inv)).natTrans) := by
+        (Scheme.comparisonRestrictScalarsSheafIso X A φ).symm.inv))) := by
     simpa only [Iso.symm_inv] using comparison_ordinary_mate_isIso φ X
   have h := derived_mate_isIso_of_flat
     (A := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -153,11 +153,11 @@ theorem isIso_mate_comparisonRestrictScalarsIso {A B : Type (u + 1)} [CommRing A
       (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
       (Adjunction.ofIsRightAdjoint
         (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ))).symm
-      (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom)).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom))) := by
   have : IsIso (((mateEquiv
       (scalarDerivedAdjunctionData X.smallEtaleTopology φ).adjunction
       (scalarDerivedAdjunctionData (Scheme.ProEt.topology X) φ).adjunction).symm
-      (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom)).natTrans) :=
+      (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom))) :=
     comparison_computed_mate_isIso φ X
   exact isIso_left_mate_change_adjunction
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))

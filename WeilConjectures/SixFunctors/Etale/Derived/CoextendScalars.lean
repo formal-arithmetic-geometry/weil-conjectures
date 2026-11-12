@@ -216,7 +216,7 @@ noncomputable def coextendScalarsUpperStarMap :
       (g)^*[ModuleCat.{u + 1} Λ] ⋙ coextendScalars φ Z :=
   ((mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g)).symm
-      (TwoSquare.mk _ _ _ _ (lowerStarCompCoextendScalarsIso φ g).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (lowerStarCompCoextendScalarsIso φ g).hom))
 
 end Pullback
 

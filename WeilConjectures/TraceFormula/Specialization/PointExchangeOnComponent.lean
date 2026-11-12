@@ -95,8 +95,8 @@ lemma pointExchange_comp_aux {DB DX DY SB SX SY SP DS SS : Type*} [Category DB] 
     (αg : ΨX ⋙ Lg' ⟶ Lg ⋙ ΨB) (αu : ΨY ⋙ Lu' ⟶ Lu ⋙ ΨX) (αgu : ΨY ⋙ Lgu' ⟶ Lgu ⋙ ΨB)
     (hαu : ∀ K, αgu.app K ≫ ΨB.map (cu.hom.app K) =
       cu'.hom.app (ΨY.obj K) ≫ Lg'.map (αu.app K) ≫ αg.app (Lu.obj K))
-    (χg : Rg ⋙ ΨX ⟶ ΨB ⋙ Rg') (hχg : χg = (mateEquiv adjg adjg' αg).natTrans)
-    (χgu : Rgu ⋙ ΨY ⟶ ΨB ⋙ Rgu') (hχgu : χgu = (mateEquiv adjgu adjgu' αgu).natTrans)
+    (χg : Rg ⋙ ΨX ⟶ ΨB ⋙ Rg') (hχg : χg = (mateEquiv adjg adjg' αg))
+    (χgu : Rgu ⋙ ΨY ⟶ ΨB ⋙ Rgu') (hχgu : χgu = (mateEquiv adjgu adjgu' αgu))
     (bu : Rgu ⋙ Lu ⟶ Rg)
     (hbu : ∀ N, Lg.map (bu.app N) ≫ adjg.counit.app N =
       cu.inv.app (Rgu.obj N) ≫ adjgu.counit.app N)
@@ -114,7 +114,7 @@ lemma pointExchange_comp_aux {DB DX DY SB SX SY SP DS SS : Type*} [Category DB] 
     (αguh : ΨP ⋙ Lguh' ⟶ Lguh ⋙ ΨB)
     (hαh : ∀ K, αguh.app K ≫ ΨB.map (c.hom.app K) =
       c'.hom.app (ΨP.obj K) ≫ Lgu'.map (αh.app K) ≫ αgu.app (L1.obj K))
-    (χguh : Rguh ⋙ ΨP ⟶ ΨB ⋙ Rguh') (hχguh : χguh = (mateEquiv adjguh adjguh' αguh).natTrans)
+    (χguh : Rguh ⋙ ΨP ⟶ ΨB ⋙ Rguh') (hχguh : χguh = (mateEquiv adjguh adjguh' αguh))
     (b : Rguh ⋙ L1 ⟶ Rgu)
     (hb : ∀ N, Lgu.map (b.app N) ≫ adjgu.counit.app N =
       c.inv.app (Rguh.obj N) ≫ adjguh.counit.app N)
@@ -318,7 +318,7 @@ lemma map_mateEquiv_inv_liftExchange (adj : DuS ⊣ RuA) (adj' : DuS' ⊣ RuA')
           (PB.liftCompιIso _ hL).symm (PA.liftCompιIso _ hR).symm)
         (adj'.restrictFullyFaithful PA'.fullyFaithfulι PB'.fullyFaithfulι
           (PB'.liftCompιIso _ hL').symm (PA'.liftCompιIso _ hR').symm)).symm
-          (TwoSquare.mk _ _ _ _ (inv (NearbyCyclesModel.liftExchange α hB hA hR' hR)))).natTrans.app
+          (TwoSquare.mk _ _ _ _ (inv (NearbyCyclesModel.liftExchange α hB hA hR' hR)))).app
           K) =
       (PB'.liftCompιIso _ hL').hom.app ((PA'.lift _ hA).obj K) ≫
         DuS'.map ((PA'.liftCompιIso _ hA).hom.app K) ≫

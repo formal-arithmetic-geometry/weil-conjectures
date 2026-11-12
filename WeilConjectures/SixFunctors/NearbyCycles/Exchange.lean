@@ -171,7 +171,7 @@ private lemma unit_pullbackExchange_aux'
     (hε : θε.app oY = G.map uεN.hom ≫ ug.hom ≫ uεM.inv ≫ EM.map uf.inv) :
     Fp'.map (uiN.inv ≫ IN.map (adjN.unit.app oTN ≫ JNs.map (ujN.hom ≫ uεN.inv))) ≫
         (Functor.whiskerLeft (EN ⋙ JNs) θi ≫
-          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj).natTrans ≫
+          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj) ≫
             Functor.whiskerRight θε JMs) IM).app oY =
       uf'.hom ≫ (uiM.inv ≫ IM.map (adjM.unit.app oTM ≫ JMs.map (ujM.hom ≫ uεM.inv))) ≫
         (EM ⋙ JMs ⋙ IM).map uf.inv := by
@@ -198,7 +198,7 @@ private lemma unit_pullbackExchange_aux''
     (hε : θε.app oY = G.map uεN.hom ≫ ug.hom ≫ uεM.inv ≫ EM.map uf.inv)
     (α : (EN ⋙ JNs ⋙ IN) ⋙ Fp' ⟶ F ⋙ EM ⋙ JMs ⋙ IM)
     (hα : α = Functor.whiskerLeft (EN ⋙ JNs) θi ≫
-          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj).natTrans ≫
+          Functor.whiskerRight (Functor.whiskerLeft EN (mateEquiv adjN adjM θj) ≫
             Functor.whiskerRight θε JMs) IM)
     (σN : oY' ⟶ (EN ⋙ JNs ⋙ IN).obj oY)
     (hσN : σN = uiN.inv ≫ IN.map (adjN.unit.app oTN ≫ JNs.map (ujN.hom ≫ uεN.inv)))
@@ -212,7 +212,7 @@ private lemma homEquiv_symm_comp_mateEquiv_aux' {DY DX DY' DX' : Type*} [Categor
     [Category DX] [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (hχ : χ = (mateEquiv adjf adjf' α)) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
     (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
     (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv)
     {E : DX} (h : oY ⟶ Rf.obj E) :
@@ -225,7 +225,7 @@ private lemma unit_comp_mateEquiv_aux' {DY DX DY' DX' : Type*} [Category DY] [Ca
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (hχ : χ = (mateEquiv adjf adjf' α)) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
     (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
     (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv) :
     σN ≫ ΨN.map (adjf.unit.app oY ≫ Rf.map uf.hom) ≫ χ.app oX =
@@ -237,7 +237,7 @@ private lemma unit_mateEquiv_aux {DY DX DY' DX' : Type*} [Category DY] [Category
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) (K : DY) :
+    (hχ : χ = (mateEquiv adjf adjf' α)) (K : DY) :
     ΨN.map (adjf.unit.app K) ≫ χ.app (Ff.obj K) =
       adjf'.unit.app (ΨN.obj K) ≫ Rf'.map (α.app K) := by
   subst hχ
@@ -247,7 +247,7 @@ private lemma mateEquiv_counit_aux {DY DX DY' DX' : Type*} [Category DY] [Catego
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) (E : DX) :
+    (hχ : χ = (mateEquiv adjf adjf' α)) (E : DX) :
     Ff'.map (χ.app E) ≫ adjf'.counit.app (ΨM.obj E) =
       α.app (Rf.obj E) ≫ ΨM.map (adjf.counit.app E) := by
   subst hχ
@@ -257,14 +257,14 @@ private lemma unit_comp_mateEquiv_aux₂ {DY DX DY' DX' : Type*} [Category DY] [
     [Category DY'] [Category DX'] {Ff : DY ⥤ DX} {Rf : DX ⥤ DY} {Ff' : DY' ⥤ DX'}
     {Rf' : DX' ⥤ DY'} (adjf : Ff ⊣ Rf) (adjf' : Ff' ⊣ Rf') {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'}
     (α : ΨN ⋙ Ff' ⟶ Ff ⋙ ΨM) (χ : Rf ⋙ ΨN ⟶ ΨM ⋙ Rf')
-    (hχ : χ = (mateEquiv adjf adjf' α).natTrans) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
+    (hχ : χ = (mateEquiv adjf adjf' α)) {oY : DY} {oX : DX} {oY' : DY'} {oX' : DX'}
     (σN : oY' ⟶ ΨN.obj oY) (σM : oX' ⟶ ΨM.obj oX) (uf' : Ff'.obj oY' ≅ oX')
     (uf : Ff.obj oY ≅ oX) (ha : Ff'.map σN ≫ α.app oY = uf'.hom ≫ σM ≫ ΨM.map uf.inv) :
     σN ≫ ΨN.map (adjf.unit.app oY) ≫ χ.app (Ff.obj oY) =
       adjf'.unit.app oY' ≫ Rf'.map (uf'.hom ≫ σM ≫ ΨM.map uf.inv) := by
   have hb := unit_comp_mateEquiv_aux adjf adjf' α σN σM uf' uf ha
   subst hχ
-  have hn := (mateEquiv adjf adjf' α).natTrans.naturality uf.hom
+  have hn := (mateEquiv adjf adjf' α).naturality uf.hom
   simp only [Functor.comp_map] at hn
   rw [Functor.map_comp, Category.assoc, hn] at hb
   rw [← cancel_mono (Rf'.map (ΨM.map uf.hom))]
@@ -365,7 +365,7 @@ noncomputable def pullbackExchange :
       (Functor.whiskerLeft L((N.ε)^*⟦Λ⟧)
           (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
             (derivedUpperStarLowerStarAdjunction Λ M.j)
-            (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans ≫
+            (pullbackSquareComparison Λ φ.commSq_j).hom) ≫
         Functor.whiskerRight (pullbackSquareComparison Λ φ.commSq_ε).hom R((M.j)_*⟦Λ⟧))
       L((M.i)^*⟦Λ⟧)
 
@@ -383,7 +383,7 @@ lemma isIso_pullbackExchange_of_isIso [IsIso φ.total] [IsIso φ.generic] :
     IsIso (φ.pullbackExchange Λ) := by
   have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
+      (pullbackSquareComparison Λ φ.commSq_j).hom) := by
     have := isIso_baseChangeMap_of_weaklyEtale Λ (IsPullback.of_horiz_isIso φ.commSq_j)
     rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
   unfold pullbackExchange
@@ -395,7 +395,7 @@ adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def pushforwardExchange :
     R((f)_*⟦Λ⟧) ⋙ N.nearbyCycles Λ ⟶ M.nearbyCycles Λ ⋙ R((f')_*⟦Λ⟧) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
-    (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ)).natTrans
+    (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ))
 
 /-- The pushforward exchange is the mate of the pullback exchange: compatibility with the units
 of `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/

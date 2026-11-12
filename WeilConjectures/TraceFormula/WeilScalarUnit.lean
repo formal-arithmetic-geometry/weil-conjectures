@@ -95,10 +95,10 @@ noncomputable def scalarEndRingHom (Y : Scheme.{u}) :
 
 lemma scalarEndRingHom_apply (Y : Scheme.{u}) (c : _root_.PadicAlgCl ℓ) :
     scalarEndRingHom ℓ Y c =
-      (Functor.Monoidal.εIso (upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y)).hom ≫
+      .of ((Functor.Monoidal.εIso (upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y)).hom ≫
         (upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y).map
-          (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c) ≫
-        (Functor.Monoidal.εIso (upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y)).inv :=
+          (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c).asHom ≫
+        (Functor.Monoidal.εIso (upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y)).inv) :=
   rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
@@ -108,9 +108,12 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 lemma scalarEndRingHom_eq_map (Y : Scheme.{u}) (c : _root_.PadicAlgCl ℓ) :
-    scalarEndRingHom ℓ Y c = (upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y).map
-      (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c) := by
+    scalarEndRingHom ℓ Y c = .of ((upperStarFromPointMod (Profinite.padicAlgClRingObj ℓ) Y).map
+      (X := Mod.regular (Profinite.padicAlgClRingObj ℓ))
+      (Y := Mod.regular (Profinite.padicAlgClRingObj ℓ))
+      (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c).asHom) := by
   rw [scalarEndRingHom_apply]
+  apply End.ext
   refine Mod.hom_ext _ _ ?_
   rw [Mod.comp_hom', Mod.comp_hom']
   exact (Category.id_comp _).trans (Category.comp_id _)
@@ -158,31 +161,31 @@ the action of `c` on `ℚ̲̄_ℓ,X`. -/
 lemma εIso_hom_comp_map_scalarEndRingHom_comp_εIso_inv {X Y : Scheme.{u}} (f : X ⟶ Y)
     (c : _root_.PadicAlgCl ℓ) :
     (Functor.Monoidal.εIso (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom ≫
-      (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (scalarEndRingHom ℓ Y c) ≫
+      (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (scalarEndRingHom ℓ Y c).asHom ≫
         (Functor.Monoidal.εIso (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv =
-      scalarEndRingHom ℓ X c :=
+      (scalarEndRingHom ℓ X c).asHom :=
   Iso.hom_comp_map_conj_comp_inv_eq _ _ _ _
     (upperStarFromPointModComp_hom_app_unit (Profinite.padicAlgClRingObj ℓ) f)
-    (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c)
+    (Profinite.PadicAlgCl.endRegularRingEquiv ℓ c).asHom
 
 /-- The automorphism of the unit `ℚ̲̄_ℓ,Y` of `Mod_Y` given by the action of a unit `c` of
 `ℚ̄_ℓ`. -/
 noncomputable def scalarAut (Y : Scheme.{u}) (c : (_root_.PadicAlgCl ℓ)ˣ) :
     𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y)) ≅ 𝟙_ _ :=
-  Aut.unitsEndEquivAut _ (Units.map (scalarEndRingHom ℓ Y).toMonoidHom c)
+  (Aut.unitsEndEquivAut _ (Units.map (scalarEndRingHom ℓ Y).toMonoidHom c)).asIso
 
 lemma scalarAut_hom (Y : Scheme.{u}) (c : (_root_.PadicAlgCl ℓ)ˣ) :
-    (scalarAut ℓ Y c).hom = scalarEndRingHom ℓ Y c :=
+    (scalarAut ℓ Y c).hom = (scalarEndRingHom ℓ Y c).asHom :=
   rfl
 
 /-- The action of a constant on the unit commutes with the unit comparison of a pullback. -/
 lemma map_scalarEndRingHom_comp_εIso_inv {X Y : Scheme.{u}} (f : X ⟶ Y)
     (c : _root_.PadicAlgCl ℓ) :
-    (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (scalarEndRingHom ℓ Y c) ≫
+    (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map (scalarEndRingHom ℓ Y c).asHom ≫
         (Functor.Monoidal.εIso (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv =
       (Functor.Monoidal.εIso (f)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv ≫
-        scalarEndRingHom ℓ X c := by
+        (scalarEndRingHom ℓ X c).asHom := by
   rw [← εIso_hom_comp_map_scalarEndRingHom_comp_εIso_inv ℓ f c, Iso.inv_hom_id_assoc]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
@@ -195,10 +198,10 @@ theorem CategoryTheory.Iso.powSuccStr_symm_trans_hom_eq {C D : Type*} [Category 
     [Category D] {X : C} (e : X ≅ X) (P : (X ⟶ X) → D ⥤ D)
     (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a : D} (ε : ∀ g : X ⟶ X, a ≅ (P g).obj a)
     (h : ∀ f g : X ⟶ X, (comp f g).hom.app a ≫ (P f).map (ε g).inv ≫ (ε f).inv = (ε (f ≫ g)).inv)
-    (T : a ≅ a) (t : End a) (ht : T.hom = t)
-    (hT : ∀ g : X ⟶ X, (P g).map t ≫ (ε g).inv = (ε g).inv ≫ t) (n : ℕ) :
+    (T : a ≅ a) (t : End a) (ht : T.hom = t.asHom)
+    (hT : ∀ g : X ⟶ X, (P g).map t.asHom ≫ (ε g).inv = (ε g).inv ≫ t.asHom) (n : ℕ) :
     (e.powSuccStr P comp ((ε e.hom).symm ≪≫ T) n).hom =
-      (ε (e.pow (n + 1)).hom).inv ≫ t ^ (n + 1) := by
+      (ε (e.pow (n + 1)).hom).inv ≫ (t ^ (n + 1)).asHom := by
   induction n with
   | zero =>
     have key : ∀ (g g' : X ⟶ X) (h : g = g'),
@@ -207,19 +210,20 @@ theorem CategoryTheory.Iso.powSuccStr_symm_trans_hom_eq {C D : Type*} [Category 
       simp
     rw [powSuccStr_zero, Iso.trans_hom, Iso.trans_hom, eqToIso.hom, Iso.symm_hom, ht,
       ← Category.assoc, key _ _ (Category.id_comp e.hom)]
-    exact congrArg (fun s ↦ (ε (e.pow 1).hom).inv ≫ s) (_root_.pow_one t).symm
+    exact congrArg (fun s : End a ↦ (ε (e.pow 1).hom).inv ≫ s.asHom) (_root_.pow_one t).symm
   | succ n ih =>
     rw [powSuccStr_succ, Iso.trans_hom, Iso.trans_hom, ih, Iso.app_hom, Functor.mapIso_hom,
       Iso.trans_hom, Functor.map_comp, Iso.symm_hom, ht, Category.assoc, reassoc_of% hT,
       reassoc_of% h]
-    exact congrArg (fun s ↦ (ε (e.pow (n + 2)).hom).inv ≫ s) (_root_.pow_succ t (n + 1)).symm
+    exact congrArg (fun s : End a ↦ (ε (e.pow (n + 2)).hom).inv ≫ s.asHom)
+      (_root_.pow_succ t (n + 1)).symm
 
 /-- If the carrier of an algebra for the identity functor is isomorphic to the unit, by an
 isomorphism conjugating the structure automorphism to an endomorphism `t` of the unit, then the
 structure automorphism has trace `t`. -/
 lemma CategoryTheory.Endofunctor.IsoAlgebra.traceOrZero_str_hom_eq {C : Type*} [Category C]
     [MonoidalCategory C] [hC : BraidedCategory C] [Preadditive C] (A : IsoAlgebra (𝟭 C))
-    (ε : 𝟙_ C ≅ A.carrier) (t : End (𝟙_ C)) (h : ε.hom ≫ A.str.hom ≫ ε.inv = t) :
+    (ε : 𝟙_ C ≅ A.carrier) (t : End (𝟙_ C)) (h : ε.hom ≫ A.str.hom ≫ ε.inv = t.asHom) :
     traceOrZero A.str.hom = t := by
   rw [← traceOrZero_conj ε.symm, Iso.symm_inv, Iso.symm_hom, h]
   let : HasRightDual (𝟙_ C) := ⟨𝟙_ C⟩
@@ -273,8 +277,8 @@ lemma powSuccStr_εIso_symm_trans_scalarAut_hom (c : (_root_.PadicAlgCl ℓ)ˣ) 
       ((Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).symm ≪≫
         scalarAut ℓ X.left c) n).hom =
       (Functor.Monoidal.εIso ((e.pow (n + 1)).hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv ≫
-        scalarEndRingHom ℓ X.left
-          ((c ^ (n + 1) : (_root_.PadicAlgCl ℓ)ˣ) : _root_.PadicAlgCl ℓ) := by
+        (scalarEndRingHom ℓ X.left
+          ((c ^ (n + 1) : (_root_.PadicAlgCl ℓ)ˣ) : _root_.PadicAlgCl ℓ)).asHom := by
   rw [Units.val_pow_eq_pow_val, map_pow]
   exact e.powSuccStr_symm_trans_hom_eq _ _
     (fun g ↦ Functor.Monoidal.εIso (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -302,7 +306,7 @@ lemma WeilSheaf.stalkFunctor_obj_scalarUnit_str_hom {Ω : Type u} [Field Ω] [h�
     (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom ≫
       ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj (WeilSheaf.scalarUnit ℓ e c)).str.hom ≫
         (Functor.Monoidal.εIso (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv =
-      scalarEndRingHom ℓ (Spec (.of Ω)) c := by
+      (scalarEndRingHom ℓ (Spec (.of Ω)) c).asHom := by
   have h0 := WeilSheaf.stalkFunctor_obj_unit_str_hom ℓ e σ x hx
   rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.unit_str] at h0
   rw [WeilSheaf.stalkFunctor_obj_str, WeilSheaf.scalarUnit_str]
@@ -376,23 +380,23 @@ lemma homologyFunctor_map_homologyUnitEndRingHom
     (t : End (𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))) :
     (DerivedCategory.homologyFunctor _ 0).map
-        ((boundedConstructible _).ι.map (homologyUnitEndRingHom ℓ X t)) ≫
+        ((boundedConstructible _).ι.map (homologyUnitEndRingHom ℓ X t).asHom) ≫
       (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom =
-      (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom ≫ t := by
+      (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom ≫ t.asHom := by
   rw [ι_map_homologyUnitEndRingHom]
-  exact DerivedCategory.homologyFunctorZeroQhSingleIso_hom_naturality t
+  exact DerivedCategory.homologyFunctorZeroQhSingleIso_hom_naturality t.asHom
 
 /-- The automorphism of the unit `ℚ̲̄_ℓ,X` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` given by the action of a unit `c` of
 `ℚ̄_ℓ`, placed in degree `0`. -/
 noncomputable def boundedConstructibleScalarAut (c : (_root_.PadicAlgCl ℓ)ˣ) :
     𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ≅ 𝟙_ _ :=
-  Aut.unitsEndEquivAut _
-    (Units.map ((homologyUnitEndRingHom ℓ X).comp (scalarEndRingHom ℓ X.left)).toMonoidHom c)
+  (Aut.unitsEndEquivAut _
+    (Units.map ((homologyUnitEndRingHom ℓ X).comp (scalarEndRingHom ℓ X.left)).toMonoidHom c)).asIso
 
 omit [IsSeparated X.hom] in
 lemma boundedConstructibleScalarAut_hom (c : (_root_.PadicAlgCl ℓ)ˣ) :
     (boundedConstructibleScalarAut ℓ (X := X) c).hom =
-      homologyUnitEndRingHom ℓ X (scalarEndRingHom ℓ X.left c) :=
+      (homologyUnitEndRingHom ℓ X (scalarEndRingHom ℓ X.left c)).asHom :=
   rfl
 
 variable (e : X ≅ X)
@@ -443,7 +447,7 @@ lemma homologyFunctor_obj_weilScalarUnit_str_hom_comp (c : (_root_.PadicAlgCl �
     (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
         (DerivedCategory.homologyFunctorZeroQhSingleIso _ (𝟙_ _)).hom ≫
       (Functor.Monoidal.εIso (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).inv ≫
-        scalarEndRingHom ℓ X.left c := by
+        (scalarEndRingHom ℓ X.left c).asHom := by
   have h := WeilBoundedConstructible.homologyFunctor_obj_unit_str_hom_comp ℓ e
   rw [WeilBoundedConstructible.homologyFunctor_obj_str] at h
   rw [WeilBoundedConstructible.homologyFunctor_obj_str, weilScalarUnit_str, ← Category.assoc]

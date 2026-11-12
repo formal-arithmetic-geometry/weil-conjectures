@@ -19,6 +19,7 @@ import Mathlib.Algebra.Homology.BifunctorFlip
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Open restriction and comparison of K-flat tensor homology
 

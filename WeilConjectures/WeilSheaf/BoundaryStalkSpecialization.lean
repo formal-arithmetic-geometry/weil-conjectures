@@ -96,8 +96,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (G : WeilSheaf k
 global sections along the iterated Weil structure. -/
 lemma stalkAt_frobenius_apply
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (v) :
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s) (v) :
     (G.stalkAt s m hs).frobenius v = ((WeilCoefficients.toModuleCat l).map
       (globalSectionsTransport _ hs.symm (G.frobeniusPowStr m))).hom v :=
   LinearMap.congr_fun (frobeniusEnd_stalkAt G s m hs) v
@@ -191,26 +191,28 @@ Weil structures, a lift `α` of `Frᵐ` to `Spec A` and `a` of `Frᵐ` to `Spec 
 iterated Weil structures. -/
 theorem genericSpecialization_frobenius (G : WeilSheaf k₀ l X)
     (θ : (j̄)^*[WeilCoefficients.{u} l].obj G.obj.carrier.X ⟶ F.obj.carrier.X)
-    (hθ : (ProEtale.upperStarComp _ (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+    (hθ : (ProEtale.upperStarComp _
+      (U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
       (j̄)).hom.app G.obj.carrier.X ≫
-        ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map θ ≫
+        ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[_].map θ ≫
           F.frobeniusStr =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           j (comp_over j (Spec (CommRingCat.of k₀)))).symm).hom.app G.obj.carrier.X ≫
         (ProEtale.upperStarComp _ (j̄)
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app G.obj.carrier.X ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom.app
+            G.obj.carrier.X ≫
         (j̄)^*[_].map G.frobeniusStr ≫ θ)
     (m : ℕ) (hm : 1 ≤ m) (α : Spec (.of A) ⟶ Spec (.of A))
-    (hα : α ≫ h = h ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
+    (hα : α ≫ h = h ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
     (a : Spec (.of Ω) ⟶ Spec (.of Ω))
-    (ha : a ≫ η = η ≫ ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom)
+    (ha : a ≫ η = η ≫ ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom)
     (haε : a ≫ ε = ε ≫ α) :
     ProEtale.globalSectionsTransport _ hα (G.frobeniusPowStr m) ≫
         genericSpecialization j h η ε hε G.obj.carrier.X θ =
       genericSpecialization j h η ε hε G.obj.carrier.X θ ≫
         ProEtale.globalSectionsTransport _ ha (F.frobeniusPowStr m) := by
   have haC : a ≫ (η ≫ j̄) =
-      (η ≫ j̄) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom := by
+      (η ≫ j̄) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom := by
     rw [← Category.assoc, ha, Category.assoc, Category.assoc,
       ← Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow]
   rw [genericSpecialization, ← Category.assoc,
@@ -332,14 +334,14 @@ theorem exists_stalk_directImage_linearMap_invariants (hF : F.IsLisse)
       IsLocalRing.closedPoint A)
     (α : Spec (.of A) ⟶ Spec (.of A))
     (hα : α ≫ h = h ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom)
-    (hcα : (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom ≫
+      (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).asIso.hom)
+    (hcα : (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).asIso.hom ≫
       (t.left ≫ pullback.fst h _) = (t.left ≫ pullback.fst h _) ≫ α)
     (η : Spec (.of Ω) ⟶ (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (hη : specFieldMap K' Ω ≫ k = η) (a : Spec (.of Ω) ⟶ Spec (.of Ω))
     (ha : a ≫ η = η ≫
       ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom)
+        (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).asIso.hom)
     (haε : a ≫ nbhdGenericPoint j h Ω k e = nbhdGenericPoint j h Ω k e ≫ α) :
     ∃ Sp : (((lowerStar j).obj F).stalk x).carrier →ₗ[PadicAlgCl l]
         (WeilCoefficients.toModuleCat l).obj

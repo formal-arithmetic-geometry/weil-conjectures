@@ -64,7 +64,7 @@ morphism**: the isomorphism `Rp_* ⋙ Rν_* ≅ Rν_* ⋙ Rp_*` is the mate of t
 theorem mateEquiv_rightDerivedComparisonBaseChange {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (mateEquiv (ProEtale.derivedUpperStarLowerStarAdjunction A p)
         (Etale.derivedUpperStarLowerStarAdjunction A p)
-        (rightDerivedComparisonBaseChange A p)).natTrans =
+        (rightDerivedComparisonBaseChange A p)) =
       (rightDerivedLowerStarCompComparisonLowerStarIso A p).hom := by
   let eP := ProEtale.leftDerivedUpperStarIsoMapDerivedCategory A p
   let eE := Etale.leftDerivedUpperStarIsoMapDerivedCategory A p
@@ -82,8 +82,8 @@ theorem mateEquiv_rightDerivedComparisonBaseChange {X Y : Scheme.{u}} (p : X ⟶
       (Functor.mapDerivedCategoryCompIso _ _).inv
   have h₁ : (mateEquiv (ProEtale.derivedUpperStarLowerStarAdjunction A p)
       (Etale.derivedUpperStarLowerStarAdjunction A p)
-      (rightDerivedComparisonBaseChange A p)).natTrans =
-      (mateEquiv aP aE (mateEquiv aνY aνX β)).natTrans := by
+      (rightDerivedComparisonBaseChange A p)) =
+      (mateEquiv aP aE (mateEquiv aνY aνX β)) := by
     have hP : ProEtale.derivedUpperStarLowerStarAdjunction A p = aP.ofNatIsoLeft eP.symm :=
       Adjunction.derivedAdjunction_eq_ofNatIsoLeft _
     have hE : Etale.derivedUpperStarLowerStarAdjunction A p = aE.ofNatIsoLeft eE.symm :=

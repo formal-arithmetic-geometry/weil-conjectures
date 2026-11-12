@@ -69,7 +69,6 @@ lemma mateEquiv_app_comp_eq_of_fac (e : p ⊣ q) (e' : p' ⊣ q') (A : P ⊣ Q) 
     Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
     Functor.comp_map, Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
-  dsimp only [TwoSquare.natTrans]
   rw [reassoc_of% n₁]
   simp only [← Q'.map_comp]
   rw [reassoc_of% n₂, ← T_X.map_comp_assoc, h₂, T_X.map_comp_assoc, n₃, reassoc_of% h₃]

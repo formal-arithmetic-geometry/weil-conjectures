@@ -33,7 +33,7 @@ noncomputable def openExchangeAux {A A' B B' P P' : Type*} [Category A] [Categor
     (α : SpB ⋙ Ru' ⟶ Ru ⋙ SpA) (hα : IsIso α) (i' : LSa' ≅ Lu' ⋙ LSb') (i : LSa ≅ Lu ⋙ LSb)
     (νY : SpB ⋙ LSb' ⟶ LSb ⋙ Ts) : SpA ⋙ LSa' ⟶ LSa ⋙ Ts :=
   Functor.whiskerLeft SpA i'.hom ≫ (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ (inv α))).natTrans LSb' ≫
+    Functor.whiskerRight ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ (inv α))) LSb' ≫
     (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Lu νY ≫ (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight i.inv Ts
 

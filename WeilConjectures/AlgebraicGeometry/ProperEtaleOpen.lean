@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 @[expose] public section
 

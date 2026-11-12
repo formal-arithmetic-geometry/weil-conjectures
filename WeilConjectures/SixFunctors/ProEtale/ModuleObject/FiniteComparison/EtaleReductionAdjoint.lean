@@ -91,15 +91,15 @@ theorem hasEtaleReductionLowerShriekIso_of_isProper_of_compatible (p : X ⟶ Y) 
       (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left)
       (finiteEtaleReading ℓ E n Y) :=
     TwoSquare.mk _ _ _ _ γC.inv
-  have : IsIso α.natTrans := inferInstanceAs (IsIso (γB.inv ≫ _))
-  have : IsIso β.natTrans := inferInstanceAs (IsIso γC.inv)
+  have : IsIso α := inferInstanceAs (IsIso (γB.inv ≫ _))
+  have : IsIso β := inferInstanceAs (IsIso γC.inv)
   have := TwoSquare.isIso_hComp α β
   have : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
-      adjH' α).natTrans :=
+      adjH' α) :=
     hB
-  have : IsIso (mateEquiv adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left) β).natTrans :=
+  have : IsIso (mateEquiv adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left) β) :=
     hγC
-  refine ⟨(asIso (α.hComp β).natTrans).symm, ?_⟩
+  refine ⟨(asIso (α.hComp β)).symm, ?_⟩
   exact isIso_mateEquiv_hComp (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
     adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left) α β
 

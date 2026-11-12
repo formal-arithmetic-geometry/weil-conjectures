@@ -231,7 +231,7 @@ private theorem condensed_dualizability_test
     have : PreservesColimitsOfSize.{0, 0} L := adj.leftAdjoint_preservesColimits
     have := Adjunction.left_adjoint_additive adj
     have (A : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-        IsIso (Functor.LaxMonoidal.ihomComparison S A).natTrans :=
+        IsIso (Functor.LaxMonoidal.ihomComparison S A) :=
       isIso_ihomComparison_upperStar Ab.{u + 1} f A
     let : adj.HasProjectionFormula := ⟨fun A B ↦ by
       have := Functor.Monoidal.isIso_projectionMap_of_isIso_ihomComparison adj A
@@ -255,7 +255,7 @@ private theorem condensed_dualizability_test
       dsimp only [LM]
       exact comp_preservesFiniteLimits _ _
     have (A : CondensedRing.supportModules Λ.X X) :
-        IsIso (Functor.LaxMonoidal.ihomComparison G A).natTrans :=
+        IsIso (Functor.LaxMonoidal.ihomComparison G A) :=
       CondensedRing.supportPullback_ihomComparison_isIso Λ.X f A
     have : G.PreservesFlat := inverseImageModule_preservesFlat f
       (condensedRingObj Λ.X X) (condensedRingObj Λ.X T)

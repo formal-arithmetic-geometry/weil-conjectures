@@ -211,13 +211,15 @@ private theorem local_pair_contraction
     intro j hj
     have h : T j = ModuleCat.of R PUnit.{max u v + 1} := by simp [T, show j ≠ -1 by omega,
       show j ≠ 0 by omega, show j ≠ 1 by omega]
-    exact (ModuleCat.isZero_of_subsingleton _).of_iso (eqToIso h)
+    exact (ModuleCat.isZero_of_subsingleton (ModuleCat.of R PUnit.{max u v + 1})).of_iso
+      (eqToIso h)
   have hhigh : P.IsStrictlyLE 1 := by
     rw [P.isStrictlyLE_iff]
     intro j hj
     have h : T j = ModuleCat.of R PUnit.{max u v + 1} := by simp [T, show j ≠ -1 by omega,
       show j ≠ 0 by omega, show j ≠ 1 by omega]
-    exact (ModuleCat.isZero_of_subsingleton _).of_iso (eqToIso h)
+    exact (ModuleCat.isZero_of_subsingleton (ModuleCat.of R PUnit.{max u v + 1})).of_iso
+      (eqToIso h)
   have hp0 : P.X 0 = Y := by simp [P, T]
   have hpm : P.X (-1) = X := by simp [P, T]
   have hpp : P.X 1 = Z := by simp [P, T]
@@ -235,8 +237,8 @@ private theorem local_pair_contraction
     let S := ShortComplex.mk (E.map a) (E.map b) (by rw [← E.map_comp, hab, E.map_zero])
     let iso : (C.sc' (-1) 0 1) ≅ S := ShortComplex.isoMk
       (E.mapIso (eqToIso hpm)) (E.mapIso (eqToIso hp0)) (E.mapIso (eqToIso hpp))
-      (by simp [C, S, E, hpa]; rfl)
-      (by simp [C, S, E, hpb]; rfl)
+      (by simp [C, S, E, hpa])
+      (by simp [C, S, E, hpb])
     have hh : S.Exact := S.moduleCat_exact_iff_range_eq_ker.mpr
       (LinearMap.exact_iff.mp hexact).symm
     exact ((C.sc' (-1) 0 1).moduleCat_exact_iff_range_eq_ker.mp

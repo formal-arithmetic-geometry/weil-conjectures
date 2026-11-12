@@ -386,9 +386,9 @@ them. -/
 lemma mateEquiv (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [NatTrans.CommConnecting ι adj₁.unit]
     [NatTrans.CommConnecting ιt adj₁.counit] [NatTrans.CommConnecting ιs adj₂.unit]
     [NatTrans.CommConnecting ιu adj₂.counit] (α : TwoSquare G L₁ L₂ H)
-    [NatTrans.CommConnecting ι α.natTrans] :
-    NatTrans.CommConnecting ιt (CategoryTheory.mateEquiv adj₁ adj₂ α).natTrans := by
-  dsimp only [CategoryTheory.mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
+    [NatTrans.CommConnecting ι α] :
+    NatTrans.CommConnecting ιt (CategoryTheory.mateEquiv adj₁ adj₂ α) := by
+  dsimp only [CategoryTheory.mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk]
   infer_instance
 
 end Mates
@@ -403,14 +403,14 @@ lemma conjugateEquiv {L₁ L₂ : Cx ⥤ Cs} {R₁ R₂ : Cs ⥤ Cx} [Functor.Sh
     [NatTrans.CommConnecting ιs adj₂.counit] (α : L₂ ⟶ L₁) [NatTrans.CommConnecting ι α] :
     NatTrans.CommConnecting ιs (CategoryTheory.conjugateEquiv adj₁ adj₂ α) := by
   have : NatTrans.CommConnecting ι
-      (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv)).natTrans := by
-    dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+      (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv)) := by
+    dsimp only [TwoSquare.mk]
     infer_instance
   have := mateEquiv (ι := ι) (ιs := ι) (ιt := ιs) (ιu := ιs) (G := 𝟭 Cx) (H := 𝟭 Cs) adj₁ adj₂
     (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv))
   have e : CategoryTheory.conjugateEquiv adj₁ adj₂ α = R₁.rightUnitor.inv ≫
       (CategoryTheory.mateEquiv adj₁ adj₂
-        (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv))).natTrans ≫
+        (TwoSquare.mk _ _ _ _ (L₂.leftUnitor.hom ≫ α ≫ L₁.rightUnitor.inv))) ≫
       R₂.leftUnitor.hom := rfl
   rw [e]
   infer_instance

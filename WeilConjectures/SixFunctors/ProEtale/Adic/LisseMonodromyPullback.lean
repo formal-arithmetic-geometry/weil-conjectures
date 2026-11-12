@@ -82,9 +82,9 @@ action of `π₁(Y', y)` on `(f^* G)_y` with that of its image in `π₁(Y, y �
 lemma IsCompatible.rep_apply (hc : IsCompatible f M M')
     {y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'} (σ : Aut (fiber y)) (G : LisseSheaf l Y)
     (v : StalkSpace (y ≫ f) G) :
-    upperStarStalkLinearEquiv f y G (M.rep (y ≫ f) G (pullbackPathIso f σ) v) =
+    upperStarStalkLinearEquiv f y G (M.rep (y ≫ f) G (Aut.of (pullbackPathIso f σ.asIso)) v) =
       M'.rep y (G.upperStar l f) σ (upperStarStalkLinearEquiv f y G v) := by
-  have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) (hc σ G)
+  have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) (hc σ.asIso G)
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h
 
@@ -102,7 +102,8 @@ of `G'_t` in `(f^* N)_t = N_{t ≫ f}` is `π₁(Y')`-stable, hence `π₁(Y)`-s
 of a lisse sheaf `G` on `Y`, and `f^* G ≅ G'` since both have the same `π₁(Y')`-representation. -/
 theorem exists_upperStar_iso_of_injective {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'}
     (hM : M.IsEquivalenceAt (t ≫ f)) (hM' : M'.IsEquivalenceAt t) (hc : IsCompatible f M M')
-    (hsurj : ∀ σ : Aut (fiber (t ≫ f)), ∃ σ' : Aut (fiber t), pullbackPathIso f σ' = σ)
+    (hsurj : ∀ σ : Aut (fiber (t ≫ f)), ∃ σ' : Aut (fiber t),
+      Aut.of (pullbackPathIso f σ'.asIso) = σ)
     {N : LisseSheaf l Y} {G' : LisseSheaf l Y'} (i : G' ⟶ N.upperStar l f)
     (hi : Function.Injective ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map i)).hom) :
     ∃ G : LisseSheaf l Y, Nonempty (G.upperStar l f ≅ G') := by
@@ -230,7 +231,8 @@ lemma exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk [IsLocallyNoetherian
     [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
     (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
-    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ := by
+    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t),
+      Aut.of (pullbackPathIso j σ'.asIso) = σ := by
   have : Nonempty Y' := ⟨t.base (Nonempty.some inferInstance)⟩
   obtain ⟨-, -, _⟩ :=
     isLocallyNoetherian_isIntegrallyClosed_stalk_connectedSpace_of_isOpenImmersion hY j
@@ -260,7 +262,8 @@ lemma exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk [IsLocallyNoetherian
 schemes being normal). -/
 lemma exists_pullbackPathIso_eq_of_isRegular [IsLocallyNoetherian Y] [IsRegular Y]
     [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
-    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ :=
+    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t),
+      Aut.of (pullbackPathIso j σ'.asIso) = σ :=
   exists_pullbackPathIso_eq_of_isIntegrallyClosed_stalk
     (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) j t σ
 

@@ -78,7 +78,7 @@ noncomputable def forgetComparisonUpperStarLowerStarIso :
         comparisonUpperStarUpperStarIso AddCommGrpCat.{u + 1} e.hom) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
-      (asIso (Etale.upperStarForget₂ (ULift.{u + 1} (ZMod (l ^ m))) e.hom).natTrans) _ ≪≫
+      (asIso (Etale.upperStarForget₂ (ULift.{u + 1} (ZMod (l ^ m))) e.hom)) _ ≪≫
     Functor.associator _ _ _
 
 variable (S) in

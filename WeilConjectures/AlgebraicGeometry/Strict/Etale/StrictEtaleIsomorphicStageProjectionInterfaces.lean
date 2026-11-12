@@ -41,11 +41,11 @@ structure StrictEtaleQuotientProjection
       (S.properDerived.level m).direct ⋙ (S.PY.scalar h).derived
   open_mate : ∀ {m n : ℕ} (h : n ≤ m),
     (mateEquiv (S.levelDerivedOpenAdjunction m) (S.levelDerivedOpenAdjunction n)
-      (.mk _ _ _ _ (openProjection h).hom)).natTrans = (S.openDerived.derivedTensor h).inv
+      (.mk _ _ _ _ (openProjection h).hom)) = (S.openDerived.derivedTensor h).inv
   proper_mate : ∀ {m n : ℕ} (h : n ≤ m),
     (proper h).inv =
       (mateEquiv (S.properDerived.level m).adjunction (S.properDerived.level n).adjunction
-        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom)).natTrans
+        (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom))
 
 /-- Compose the open and proper quotient faces.
 Source: Zheng, Construction 5.15

@@ -97,7 +97,7 @@ noncomputable def Etale.baseChangeMap (sq : CommSq g' f' f g) :
     (f)_*[A] ⋙ (g)^*[A] ⟶ (g')^*[A] ⋙ (f')_*[A] :=
   (mateEquiv (Etale.upperStarLowerStarAdjunction A f)
     (Etale.upperStarLowerStarAdjunction A f')
-    (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq).hom))
 
 /-- The base change map as a `TwoSquare`, for the mate calculus. -/
 noncomputable abbrev Etale.baseChangeSquare (sq : CommSq g' f' f g) :
@@ -153,7 +153,7 @@ square isomorphism `AlgebraicGeometry.Etale.squareLowerStarIso` along the horizo
 adjunctions, which is the usual description of the base change map. -/
 lemma Etale.mateEquiv_baseChangeSquare (sq : CommSq g' f' f g) :
     (mateEquiv (Etale.upperStarLowerStarAdjunction A g') (Etale.upperStarLowerStarAdjunction A g)
-      (Etale.baseChangeSquare A sq)).natTrans = (Etale.squareLowerStarIso A sq).hom := by
+      (Etale.baseChangeSquare A sq)) = (Etale.squareLowerStarIso A sq).hom := by
   rw [Etale.baseChangeSquare, iterated_mateEquiv_conjugateEquiv]
   change conjugateEquiv _ _ ((Etale.upperStarComp A f' g (g' ≫ f) sq.w).inv ≫
     (Etale.upperStarComp A g' f).hom) = (Etale.lowerStarComp A g' f).hom ≫
@@ -228,7 +228,7 @@ instance Etale.isIso_baseChangeMap_of_isUniversalHomeomorphism (sq : CommSq g' f
   have h₂ := Etale.isEquivalence_lowerStar A g
   have : IsIso (Etale.upperStarLowerStarAdjunction A g').unit := inferInstance
   have : IsIso (Etale.upperStarLowerStarAdjunction A g).counit := inferInstance
-  change IsIso (Etale.baseChangeSquare A sq).natTrans
+  change IsIso (Etale.baseChangeSquare A sq)
   rw [Etale.baseChangeSquare_eq_mateEquiv_symm]
   unfold mateEquiv
   dsimp only [Equiv.coe_fn_symm_mk]
@@ -243,7 +243,7 @@ instance Etale.isIso_baseChangeMap_of_isIso (sq : CommSq g' f' f g) [IsIso g] [I
     IsIso (Etale.baseChangeMap A sq) := by
   have : IsIso (Etale.upperStarLowerStarAdjunction A g').unit := inferInstance
   have : IsIso (Etale.upperStarLowerStarAdjunction A g).counit := inferInstance
-  change IsIso (Etale.baseChangeSquare A sq).natTrans
+  change IsIso (Etale.baseChangeSquare A sq)
   rw [Etale.baseChangeSquare_eq_mateEquiv_symm]
   unfold mateEquiv
   dsimp only [Equiv.coe_fn_symm_mk]

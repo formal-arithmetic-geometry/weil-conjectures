@@ -57,7 +57,7 @@ structure GeometricCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y)
   mate : (mateEquiv
     (fixedAdjunction l E n f)
     (Adjunction.mapDerivedCategoryRightDerivedAdjunction
-      (proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f)) pull.hom).natTrans = derived.inv
+      (proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f)) pull.hom) = derived.inv
 
 /-- Exact site inverse-image coordinates, including the canonical left-derived/exact iso.
 Source: Levels (blueprint: def-sp-p1-geometric-coordinates). -/
@@ -84,6 +84,6 @@ def exactSitePush {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (mateEquiv
     (Etale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f)
-    (fixedAdjunction l E n f) (exactSitePull l E n f).inv).natTrans
+    (fixedAdjunction l E n f) (exactSitePull l E n f).inv)
 
 end AlgebraicGeometry.ProEtale.SpTowerP1

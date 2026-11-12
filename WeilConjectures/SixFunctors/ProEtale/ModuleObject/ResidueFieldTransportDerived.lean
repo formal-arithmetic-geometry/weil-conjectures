@@ -65,7 +65,7 @@ noncomputable def residueFieldDerivedPushHom :
   (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction
     (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
     (ProEtale.derivedUpperStarLowerStarAdjunction _ f)
-    (residueFieldDerivedUpperStarIso ℓ E f).inv).natTrans
+    (residueFieldDerivedUpperStarIso ℓ E f).inv)
 
 /-- **The derived pushforwards commute with the equivalences `D(G)`**: the comparison
 `residueFieldDerivedPushHom` is an isomorphism, being the mate of an isomorphism along

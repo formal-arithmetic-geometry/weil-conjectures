@@ -471,9 +471,7 @@ private theorem localization_linear :
       (Y := 𝟭 (DerivedCategory (integralTowerModules l E W)))
       (Functor.whiskerRight (integralScalarChainAction l E W a) DerivedCategory.Q)
   have hα : integralScalarDerivedAction l E W a = α := by
-    first
-    | rfl
-    | exact (existsUnique_eq (a' := α)).exists.choose_spec
+    exact (existsUnique_eq (a' := α)).exists.choose_spec
   have hscalar : (integralScalarDerivedAction l E W a).app (DerivedCategory.Q.obj P) =
       DerivedCategory.Q.map ((integralScalarChainAction l E W a).app P) := by
     rw [hα]

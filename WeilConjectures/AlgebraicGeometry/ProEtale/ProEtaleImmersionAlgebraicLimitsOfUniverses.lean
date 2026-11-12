@@ -231,7 +231,7 @@ private theorem large_evaluation (A : Type t) [CommRing A] (I : Ideal A) :
     (Functor.sheafPushforwardContinuousComp u (toProEt Z) (Type (max u (t + 1)))
       (topology X) (topology Z) (ProEt.topology Z)).symm
   let alpha := ((mateEquiv (inverseAdj.{t, u} i) a).symm
-    beta.hom).natTrans
+    beta.hom)
   have : IsIso alpha :=
     isIso_inverseMate_of_equivalences (inverseAdj.{t, u} i) a beta
   exact ⟨(asIso alpha).symm⟩

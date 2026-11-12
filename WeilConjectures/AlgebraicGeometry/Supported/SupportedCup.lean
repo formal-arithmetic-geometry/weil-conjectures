@@ -399,7 +399,7 @@ private theorem monoidal_mate
     [R₁.LaxMonoidal] [R₂.LaxMonoidal]
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [adj₁.IsMonoidal] [adj₂.IsMonoidal]
     (β : R₁ ⋙ G ⟶ H ⋙ R₂) [NatTrans.IsMonoidal β] :
-    NatTrans.IsMonoidal (TwoSquare.natTrans ((mateEquiv adj₁ adj₂).symm β)) := by
+    NatTrans.IsMonoidal (((mateEquiv adj₁ adj₂).symm β)) := by
   change NatTrans.IsMonoidal (_ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _ ≫ _)
   infer_instance
 

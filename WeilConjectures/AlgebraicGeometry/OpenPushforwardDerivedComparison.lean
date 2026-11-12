@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Derived comparison for an acyclic module on an open subscheme -/
 

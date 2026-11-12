@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategor
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Derived pushforward through the direct-image algebra
 

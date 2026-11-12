@@ -190,12 +190,12 @@ theorem Hom.extendScalars_map_pullbackExchange_app (φ : M.Hom N f f')
   have key := map_exchange_comp_eq (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (pullbackSquareComparison Λ φ.commSq_ε).hom
     (pullbackSquareComparison Λ' φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ' N.j)
       (derivedUpperStarLowerStarAdjunction Λ' M.j)
-      (pullbackSquareComparison Λ' φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ' φ.commSq_j).hom)
     (pullbackSquareComparison Λ' φ.commSq_ε).hom
     (derivedUpperStarExtendScalarsIso a f') (derivedUpperStarExtendScalarsIso a N.i)
     (derivedUpperStarExtendScalarsIso a M.i) (derivedUpperStarExtendScalarsIso a φ.total)

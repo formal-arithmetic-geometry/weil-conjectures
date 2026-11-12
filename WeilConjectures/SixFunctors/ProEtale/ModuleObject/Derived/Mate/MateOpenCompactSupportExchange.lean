@@ -41,8 +41,8 @@ private theorem mate_component
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     {H : A ⥤ C} {H' : B ⥤ D} (a : L ⊣ R) (b : L' ⊣ R')
     (θ : TwoSquare H L L' H') (M : B) :
-    (mateEquiv a b θ).natTrans.app M =
-      b.homEquiv _ _ (θ.natTrans.app (R.obj M) ≫ H'.map (a.counit.app M)) := by
+    (mateEquiv a b θ).app M =
+      b.homEquiv _ _ (θ.app (R.obj M) ≫ H'.map (a.counit.app M)) := by
   simp [mateEquiv, Adjunction.homEquiv_unit]
 
 private theorem supported_open_counit
