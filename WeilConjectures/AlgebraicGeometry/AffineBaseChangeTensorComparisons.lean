@@ -80,7 +80,6 @@ private theorem tensorQCSections (A C : Type u) [CommRing A] [CommRing C]
       (Spec.map (CommRingCat.ofHom (algebraMap A C))))).unit.app F).app ⊤)
       (fromTildeΓ_app_toOpen (R := .of A) F n))
 
-set_option maxHeartbeats 400000 in
 -- Nested affine functor and scalar identifications require more elaboration heartbeats.
 /-- Tensor coordinates for the source and target, normalized by the pullback units.
 Source: Stacks Project, Schemes, Lemma 01I9 (1),(2), and Cohomology of Schemes, Lemma 02KG.

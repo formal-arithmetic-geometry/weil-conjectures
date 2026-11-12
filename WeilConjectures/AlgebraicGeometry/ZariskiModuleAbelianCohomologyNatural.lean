@@ -58,7 +58,6 @@ private theorem resolutionForget_naturality
       ((HomologicalComplex.shortComplexFunctor _ _ q).map
         ((G.mapHomologicalComplex _).map φ)) V)
 
-set_option maxHeartbeats 400000 in
 -- Comparing the two section complexes requires unfolding module and abelian evaluations.
 set_option backward.isDefEq.respectTransparency false in
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.

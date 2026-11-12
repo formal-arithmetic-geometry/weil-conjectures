@@ -66,7 +66,6 @@ private theorem conjugate_transport {C D : Type*} [Category C] [Category D]
       simp only [Iso.inv_hom_id_app_assoc]
     _ = d₀F.inv ≫ L₀.map r ≫ d₀G.hom := by rw [heF, heG]
 
-set_option maxHeartbeats 600000 in
 -- Cover projection instance comparisons during rewriting need additional elaboration heartbeats.
 /-- Recovery for two successive base changes, without an earlier base scheme.
 Source: Stacks Project, Tag 01ZR, first proof, base change of local lifts;

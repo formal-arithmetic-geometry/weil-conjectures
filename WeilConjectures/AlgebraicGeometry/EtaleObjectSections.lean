@@ -56,7 +56,6 @@ private lemma terminalEvaluation_eq_res {C : Type*} [Category C]
   simp [constantSheafAdj, Adjunction.comp_unit_app]
 
 set_option maxRecDepth 2048 in
-set_option maxHeartbeats 500000 in
 -- Comparing nested pullback and localization components needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

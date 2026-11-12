@@ -50,7 +50,6 @@ private theorem cancel_representative_tail
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Comparing the pinned functor instances needs additional elaboration heartbeats.
 /-- The representative identity after cancelling the open-restriction factorization.
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.

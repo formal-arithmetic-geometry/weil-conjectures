@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the transported scheme module adjunctions needs this budget.
 private theorem underived_open_mate
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
@@ -42,7 +41,6 @@ private theorem underived_open_mate
     (TwoSquare.mk _ _ _ _ (singleComplexOpenUnderivedDirectImageIso f V).hom) M
   exact h.trans (schemeMVOrdinaryOpenCounit_square X Y f V M).symm
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the transported scheme module adjunctions needs this budget.
 private theorem open_conjugate (X : Scheme.{u}) (V : X.Opens) :
     conjugateEquiv (schemeOpenModuleAdjunction X V)
@@ -109,7 +107,6 @@ private theorem pushforward_congr_inv {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f 
   subst g
   rfl
 
-set_option maxHeartbeats 1200000 in
 -- Match the chosen tensor adjunctions with the generic four-factor calculation.
 private theorem tensor_open_conjugate
     {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
@@ -150,7 +147,6 @@ private theorem tensor_open_conjugate
   rw [pushforward_congr_refl, pushforward_congr_inv]
   simp only [Category.comp_id, Iso.symm_hom]
 
-set_option maxHeartbeats 1000000 in
 -- The iterated mates law specializes four transported scheme module adjunctions.
 /-- The sectionwise direct-image comparison is the mate of the inverse underived
 restriction comparison. No complexes, derived categories, or additivity assumptions occur.
