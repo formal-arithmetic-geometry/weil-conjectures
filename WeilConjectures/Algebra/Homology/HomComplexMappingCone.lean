@@ -50,6 +50,7 @@ private lemma homObjMap_zero_right
   ext X φ
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The product comparison unfolds the chosen Hom-complex functor repeatedly.
 set_option backward.isDefEq.respectTransparency false in
