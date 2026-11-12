@@ -91,9 +91,7 @@ private theorem termwise_homotopy_square_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
   rfl
 
-set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- Reusing the abstract exact-factor normalization keeps the proof within the original budget.
+set_option profiler true in
 /-- The derived open coefficient on an actual restricted complex is compatible
 with ordinary tensor pullback and the pinned counits. This is an equality before
 stalks and cohomology; it needs neither a base-change square nor K-flatness.
@@ -145,7 +143,6 @@ theorem singleComplexOpen_termwise_counit_compatibility
           (SheafOfModules.{u} (moduleRings U'.toScheme.toRingedSpace))).hom.app
           (((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj Q) ≫
         singleComplexOpenTensorRestrictionMap g' U U' j hj P := by
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
       (Scheme.Modules.tensorPullback k).Additive := fun k => tensorPullbackAdditive k
   let := schemeOpenRestriction_additive X U
@@ -188,20 +185,16 @@ theorem singleComplexOpen_termwise_counit_compatibility
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).obj P)))
     ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
       (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)))
-    (by
-      change _ = _ at h
-      exact h)
+    h
   have htarget := congrArg Iso.inv
     (termwise_exact_factors (schemeOpenRestriction X' U')
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P))
-  simp only [Iso.app_inv] at htarget
   have hβ : DerivedCategory.Qh.map
       ((openPinnedHomotopyTensorRestrictionIso g' U U' j hj).inv.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (openPinnedTensorRestrictionIso g' U U' j hj).inv (.up ℤ)).app P) := by
     exact termwise_homotopy_square_inv (openPinnedTensorRestrictionIso g' U U' j hj) P
-  simp only [Functor.mapIso_inv, Iso.app_inv] at h'
   exact h'.trans (congrArg₂ (fun x y =>
     (counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
       (((schemeOpenRestriction X U).mapHomologicalComplex (.up ℤ)).obj P)) ≫ x ≫ y)
