@@ -34,6 +34,7 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 -- The nested hypotheses keep their documented names although the conclusion is nondependent.
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborating the two restricted tensor lifts needs additional heartbeats.
 /-- The intrinsic derived self-tensor of a closed-immersion quotient has normalized
 projective-resolution coordinates on affine opens. The restriction equation holds
