@@ -74,18 +74,29 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
-  rw [schemeNormalizedDirectImageCompIso_eq (A := A) (B := B) (C := C) s t]
-  exact (Classical.choose_spec
-    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
-      A.toRingedSpace B.toRingedSpace C.toRingedSpace
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› A)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
-      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
-      s.toLRSHom.toShHom t.toLRSHom.toShHom) K).trans
-    (schemeCompUnit_app s t K).symm
+  have hcomp := congrArg (fun e ↦ e.inv.app (DerivedCategory.Qh.obj K))
+    (schemeNormalizedDirectImageCompIso_eq (A := A) (B := B) (C := C) s t)
+  calc
+    _ = (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫
+        (Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
+          s.toLRSHom.toShHom t.toLRSHom.toShHom)).inv.app (DerivedCategory.Qh.obj K) := by
+      rw [hcomp]
+    _ = (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+          (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory
+            (.up ℤ)).obj K) ≫
+        (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctor.map
+          ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
+      exact Classical.choose_spec
+        (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
+          A.toRingedSpace B.toRingedSpace C.toRingedSpace
+          (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+            (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› A)
+          (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+            (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
+          (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+            (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
+          s.toLRSHom.toShHom t.toLRSHom.toShHom) K
+    _ = _ := (schemeCompUnit_app s t K).symm
 
 
 
