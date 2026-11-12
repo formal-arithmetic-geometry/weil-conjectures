@@ -91,6 +91,25 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+-- Share the graded tensor instances used by every derived pullback.
+private instance lisseHasTensorFour (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt A B C D := by
+  infer_instance
+
+private instance lisseHasGoodTensor12 (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := by
+  infer_instance
+
+private instance lisseHasGoodTensor23 (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := by
+  infer_instance
+
 section Geometry
 
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))}
@@ -158,9 +177,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
--- The elaboration of the derived functors with coefficients `𝔽_E` on the nested open subschemes
--- is expensive.
 /-- **Reduction of the generic vanishing along a divisor to the lisse case** (the shrinking step
 of blueprint `det-sp-generic-divisor`): let `X` be normal, `Z = V(h)`, `j : X ∖ Z ⟶ X`, `ζ` a
 generic point of `Z` and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`.
