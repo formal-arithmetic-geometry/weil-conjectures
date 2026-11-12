@@ -30,8 +30,23 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
--- Transporting the four vertex comparisons and their shift data needs extra elaboration.
+private theorem triangle_transport_distinguished
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (T : Triangle C) (hT : T ∈ distTriang C) {B D : C}
+    (e₂ : T.obj₂ ≅ B) (e₃ : T.obj₃ ≅ D)
+    (f : T.obj₁ ⟶ B) (g : B ⟶ D)
+    (hf : T.mor₁ ≫ e₂.hom = f) (hg : T.mor₂ ≫ e₃.hom = e₂.hom ≫ g) :
+    Triangle.mk f g (e₃.inv ≫ T.mor₃) ∈ distTriang C := by
+  apply isomorphic_distinguished _ hT
+  refine (Triangle.isoMk T (Triangle.mk f g (e₃.inv ≫ T.mor₃))
+    (Iso.refl _) e₂ e₃ ?_ hg ?_).symm
+  · change T.mor₁ ≫ e₂.hom = 𝟙 _ ≫ f
+    simpa only [Category.id_comp] using hf
+  · change T.mor₃ ≫ (shiftFunctor C (1 : ℤ)).map (𝟙 T.obj₁) =
+      e₃.hom ≫ e₃.inv ≫ T.mor₃
+    rw [(shiftFunctor C (1 : ℤ)).map_id, Category.comp_id, Iso.hom_inv_id_assoc]
+
 /-- The pinned relative restriction maps are the first two arrows of a functorial
 pair of distinguished triangles. Their morphism has the prescribed global, open,
 and overlap components. This is a derived-category statement, with no assertion
@@ -128,8 +143,7 @@ theorem relativeMV_pinned_triangle_comparison
         (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).hom ≫ e₃'.inv := by
       apply (cancel_mono e₃'.hom).mp
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-      rw [h₃]
-      simp only [Iso.inv_hom_id_assoc]
+      simp only [h₃, Iso.inv_hom_id_assoc]
     have hd' : (F.mapTriangle.obj T).mor₃ ≫
         (relativeMVGlobalArrow f f' g g' hpull K K' φ).hom⟦(1 : ℤ)⟧' =
         mvBaseChangeOpenMap f f' g g' hpull.w K K' φ (U ⊓ V) ≫
@@ -137,26 +151,12 @@ theorem relativeMV_pinned_triangle_comparison
       simpa only [Functor.mapTriangle, T, T', mvBaseChangeTriangle, Triangle.mk,
         Functor.id_obj, relativeMVGlobalArrow, Arrow.mk_hom, F, G, Category.assoc] using hd
     dsimp only [δ, δ']
-    rw [Category.assoc, hd', ← Category.assoc, hi, Category.assoc]
+    simp only [Category.assoc, hd']
+    simpa only [Category.assoc] using
+      congrArg (fun k ↦ k ≫ (G.mapTriangle.obj T').mor₃) hi
   refine ⟨δ, δ', ?_, ?_, ?_⟩
-  · apply isomorphic_distinguished _ hT
-    refine (Triangle.isoMk (F.mapTriangle.obj T)
-      (Triangle.mk (relativeMVSourceFirst f g U V K)
-        (relativeMVSourceSecond f g U V K) δ) (Iso.refl _) e₂ e₃ ?_ hg ?_).symm
-    · simpa only [Functor.mapTriangle, T, mvBaseChangeTriangle, Triangle.mk, F,
-        Iso.refl_hom, Category.id_comp] using hf
-    · simp only [Iso.refl_hom, Triangle.mk_mor₃, δ,
-        Iso.hom_inv_id_assoc]
-      rw [(shiftFunctor _ (1 : ℤ)).map_id, Category.comp_id]
-  · apply isomorphic_distinguished _ hT'
-    refine (Triangle.isoMk (G.mapTriangle.obj T')
-      (Triangle.mk (relativeMVTargetFirst g' f' U V K')
-        (relativeMVTargetSecond g' f' U V K') δ') (Iso.refl _) e₂' e₃' ?_ hg' ?_).symm
-    · simpa only [Functor.mapTriangle, T', mvBaseChangeTriangle, Triangle.mk, G,
-        Iso.refl_hom, Category.id_comp] using hf'
-    · simp only [Iso.refl_hom, Triangle.mk_mor₃, δ',
-        Iso.hom_inv_id_assoc]
-      rw [(shiftFunctor _ (1 : ℤ)).map_id, Category.comp_id]
+  · exact triangle_transport_distinguished (F.mapTriangle.obj T) hT e₂ e₃ _ _ hf hg
+  · exact triangle_transport_distinguished (G.mapTriangle.obj T') hT' e₂' e₃' _ _ hf' hg'
   · exact ⟨Triangle.homMk _ _
       (relativeMVGlobalArrow f f' g g' hpull K K' φ).hom
       (biprod.map (relativeMVLocalArrow f f' g g' hpull K K' φ U).hom

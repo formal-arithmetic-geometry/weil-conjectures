@@ -42,8 +42,37 @@ local instance pinnedTensorSquareRightSummandInstance2 (Y : Scheme.{u}) :
 attribute [local instance] pinnedTensorSquareLeftSummandInstance3
   pinnedTensorSquareLeftSummandInstance4
 
-set_option maxHeartbeats 1000000 in
--- Nested tensor-complex functors require additional elaboration heartbeats.
+private theorem extendScalars_tensor_summand
+    {A B : Type u} [CommRing A] [CommRing B] (b : A →+* B)
+    (U V : CochainComplex (ModuleCat.{u} A) ℤ)
+    {U' V' W T : CochainComplex (ModuleCat.{u} B) ℤ}
+    (α : ((ModuleCat.extendScalars b).mapHomologicalComplex (.up ℤ)).obj U ⟶ U')
+    (β : ((ModuleCat.extendScalars b).mapHomologicalComplex (.up ℤ)).obj V ⟶ V')
+    (γ : V' ⟶ W) (θ : U' ⊗ W ⟶ T) (n p q : ℤ) (h : p + q = n) :
+    let G := ModuleCat.extendScalars b
+    let F := G.mapHomologicalComplex (.up ℤ)
+    G.map (HomologicalComplex.ιMapBifunctor U V (curriedTensor _) (.up ℤ) p q n h) ≫
+        (Functor.OplaxMonoidal.δ F U V ≫ (F.obj U ◁ (β ≫ γ)) ≫
+          (α ⊗ₘ 𝟙 W) ≫ θ).f n =
+      Functor.OplaxMonoidal.δ G (U.X p) (V.X q) ≫ (α.f p ⊗ₘ β.f q) ≫
+        (𝟙 _ ⊗ₘ γ.f q) ≫
+        HomologicalComplex.ιMapBifunctor U' W (curriedTensor _) (.up ℤ) p q n h ≫
+        θ.f n := by
+  dsimp only
+  simp only [HomologicalComplex.comp_f, Functor.mapCochainComplex_δ,
+    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
+    HomologicalComplex.mapBifunctorComparison_f]
+  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX_assoc]
+  erw [CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
+    HomologicalComplex.ι_mapBifunctorMap_assoc]
+  simp only [HomologicalComplex.id_f, HomologicalComplex.comp_f]
+  simp only [HomologicalComplex.mapBifunctorComparisonApp,
+    Functor.OplaxMonoidal.δNatTrans, curriedTensor, tensorHom_def, whiskerLeft_comp,
+    Category.assoc, id_whiskerRight]
+  rw [whisker_exchange_assoc, whisker_exchange_assoc]
+  simp only [whiskerLeft_id, Category.id_comp]
+  rfl
+
 /-- Scalar-tensor route on one summand, in explicit stalk coordinates.
 
 Proof: expand the complex tensorator as the total-complex oplax comparison and use
@@ -102,22 +131,11 @@ theorem pinned_tensor_square_right_summand
       (𝟙 _ ⊗ₘ (S.map a).f q) ≫
       HomologicalComplex.ιMapBifunctor (S.obj (H.obj P)) (S.obj N)
         (curriedTensor _) (.up ℤ) p q n h ≫ (e' (H.obj P) N).inv.f n  := by
-  dsimp only
-  simp only [HomologicalComplex.comp_f, Iso.trans_hom, tensorIso_hom, Iso.refl_hom,
-    Iso.symm_hom]
-  simp only [Functor.Monoidal.μIso_inv, Functor.mapCochainComplex_δ,
-    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
-    HomologicalComplex.mapBifunctorComparison_f]
-  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX_assoc]
-  erw [CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
-    HomologicalComplex.ι_mapBifunctorMap_assoc]
-  simp only [HomologicalComplex.id_f, HomologicalComplex.comp_f]
-  simp only [HomologicalComplex.mapBifunctorComparisonApp,
-    Functor.OplaxMonoidal.δNatTrans, curriedTensor, tensorHom_def, whiskerLeft_comp,
-    Category.assoc, id_whiskerRight]
-  rw [whisker_exchange_assoc, whisker_exchange_assoc]
-  simp only [whiskerLeft_id, Category.id_comp]
-  rfl
+  extract_lets R A B C F S U V t H e' ρ G ι
+  exact extendScalars_tensor_summand _ U V
+    (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z P).hom
+    (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z Q).hom
+    (S.map a) (e' (H.obj P) N).inv n p q h
 
 
 end AlgebraicGeometry
