@@ -115,10 +115,9 @@ theorem affine_residue_evaluation_homology_naturality
     W U (hU.isoSpec.hom ⟨w, hwU⟩).asIdeal)
   have hq := Classical.choose_spec (affine_residue_quotient_homology_naturality
     W U (hU.isoSpec.hom ⟨w, hwU⟩).asIdeal)
-  exact ⟨fun K ↦ (q K).trans (γ.app K).toLinearEquiv.toAddEquiv, fun K C φ z ↦ by
-    change (γ.app C).hom (q C (affineResidueCycleHomologyMap φ z)) = _
-    rw [hq K C φ z]
-    exact ConcreteCategory.congr_hom (γ.hom.naturality φ) (q K z)⟩
+  exact ⟨fun K ↦ (q K).trans (γ.app K).toLinearEquiv.toAddEquiv, fun K C φ z ↦
+    (congrArg (γ.app C).hom (hq K C φ z)).trans
+      (ConcreteCategory.congr_hom (γ.hom.naturality φ) (q K z))⟩
 
 end
 end AlgebraicGeometry.Scheme
