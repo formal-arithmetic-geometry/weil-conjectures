@@ -100,30 +100,26 @@ private theorem tensor_presentation_parameter_evaluation_of_coefficients
     [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)}]
     (S : CoefficientClosedStructure
-      (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y)
-        R))
-    (T : CoefficientTensorModels (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      R S)
+      (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y) R))
+    (T : CoefficientTensorModels (AlgebraicGeometry.Scheme.ProEt.topology Y) R S)
     : ∃ adj : Functor.curry.obj S.tensor ⊣₂
         Functor.curry.obj (hom Y R),
-    ∀ (P I S' : CochainComplex (Modules.{t,u} Y
-      R) ℤ)
-      (hP : flat.{t,u} Y R P)
-      (hS : flat.{t,u} Y R S'), I.IsKInjective →
-      ∀ q : S' ⟶ homComplex.{t+1,t,max u (t+1),max u (t+1)}
-        (R := completedIntegralCommRingSheaf l E Y D hl) P I,
-      ∃ beta : ((totalTensor.{t,u} Y R).obj P).obj S' ⟶ I,
+    ∀ (P I S' : CochainComplex (Modules.{t, u} Y R) ℤ)
+      (hP : flat.{t, u} Y R P)
+      (hS : flat.{t, u} Y R S'), I.IsKInjective →
+      ∀ q : S' ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)}
+        (R := R) P I,
+      ∃ beta : ((totalTensor.{t, u} Y R).obj P).obj S' ⟶ I,
         (∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
           (x : (P.X i).val.obj U) (s : (S'.X j).val.obj U),
-          (beta.f (i+j)).val.app U
-            (totalPair.{t,u} Y R P S' i j U x s) =
-            (i*j).negOnePow • evaluate.{t,u} Y R
-              P I j i U ((q.f j).val.app U s) x) ∧
-        T.comparison.inv.app (⟨P,hP⟩,⟨S',hS⟩) ≫ DerivedCategory.Q.map beta =
+          (beta.f (i + j)).val.app U
+            (totalPair.{t, u} Y R P S' i j U x s) =
+            (i * j).negOnePow • evaluate.{t, u} Y R P I j i U ((q.f j).val.app U s) x) ∧
+        T.comparison.inv.app (⟨P, hP⟩, ⟨S', hS⟩) ≫ DerivedCategory.Q.map beta =
           S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P))
-            (DerivedCategory.Q.map q ≫ homModelMap.{t,u} Y
-              R P I)) ≫
+            (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)) ≫
           (adj.adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I) := by
+  letI := derivedCategory.{t, u} Y R
   let J := AlgebraicGeometry.Scheme.ProEt.topology Y
   have hkoszul := ringedTensor_koszul_exists.{t + 1, t, u, (max u (t + 1)) + 1} J R S T
   let σ := hkoszul.choose
