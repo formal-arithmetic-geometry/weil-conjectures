@@ -900,7 +900,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
     Category.assoc]
-  rw [h]
+  rw [← Category.assoc, h]
   simp only [Iso.inv_hom_id_app, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency true in
