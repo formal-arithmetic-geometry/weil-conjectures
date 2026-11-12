@@ -120,7 +120,12 @@ private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
       PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor A₀).obj M) := inferInstance
   have (M : A₀) :
       PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor A₀).flip.obj M) := inferInstance
-  have : W.localizerMorphismKFlat.IsLeftDerivabilityStructure := inferInstance
+  have (j : ℤ) : HasColimitsOfShape
+      (Discrete ((ComplexShape.up ℤ).π (.up ℤ) (.up ℤ) ⁻¹' {j})) A₀ := inferInstance
+  have : W.localizerMorphismKFlat.IsLeftDerivabilityStructure := by
+    let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ A₀) := Classical.arbitrary _
+    exact Λ.reduced.homotopyCategory_kFlat_isLeftDerivabilityStructure
+      ObjectProperty.flat.essImage_ι_le
   let G : A₀ ⥤ B₀ := Scheme.Modules.tensorPullback g'
   have : G.Additive := tensorPullbackAdditive.{u, w} g'
   have : (derivedPullback g').IsLeftDerivedFunctor (counit g') W :=
