@@ -451,6 +451,71 @@ lemma isTraitModelOver_restrictOpen_productOpen
   convert hP.restrictOpen (productOpen φ₁ φ₂ V W) using 1 <;>
     simp [Scheme.Hom.resLE_comp_ι_assoc]
 
+section LocalCoordinates
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- Local affine charts give coordinates on a neighbourhood of each special-fibre point,
+with the original Künneth map invertible after pullback to their generic fibres. -/
+private theorem exists_local_coordinates_isIso_kunnethMap
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
+    [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
+    (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
+    (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula Λ k' (m + m' - 1))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))}
+    (hA : boundedConstructible (condensedRingObj Λ X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))}
+    (hB : boundedConstructible (condensedRingObj Λ Y) B)
+    (z : Z'.left) :
+    ∃ (U : Z'.left.Opens) (_ : z ∈ U) (ι : Type u) (_ : Finite ι)
+      (b : ι → (U.toScheme ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))),
+      (∀ i, LocallyOfFiniteType (b i)) ∧ (∀ v : U, (∀ i, IsClosed {b i v}) → IsClosed {v}) ∧
+      ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))
+        (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧
+        IsIso (L((pullback.fst (b i) ξ)^*⟦Λ⟧).map
+          (L((U.ι)^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) := by
+  have := hM.isTraitModel.isNoetherian_total
+  have := hN.isTraitModel.isNoetherian_total
+  have := hP.isTraitModel.isNoetherian_total
+  have := hM.locallyOfFiniteType
+  have := hN.locallyOfFiniteType
+  obtain ⟨V, hzV, ιV, _, cV, hcardV, hcVi, hcV⟩ := hm (φ₁.total (P.i z))
+  obtain ⟨W, hzW, ιW, _, cW, hcardW, hcWi, hcW⟩ := hm' (φ₂.total (P.i z))
+  have : QuasiCompact V.ι := inferInstance
+  have : QuasiCompact W.ι := inferInstance
+  have : QuasiCompact (productOpen φ₁ φ₂ V W).ι := inferInstance
+  let U := productOpen φ₁ φ₂ V W
+  let ψ₁ := φ₁.restrictOpen U V inf_le_left
+  let ψ₂ := φ₂.restrictOpen U W inf_le_right
+  have hMV := hM.restrictOpen V
+  have hNW := hN.restrictOpen W
+  have hpbU : IsPullback ψ₁.total ψ₂.total (V.ι ≫ qM) (W.ι ≫ qN) := isPullback_resLE_inf hpb V W
+  have hPU := isTraitModelOver_restrictOpen_productOpen (φ₂ := φ₂) hP V W
+  have heMV : (M.restrictOpen V).j ≫ V.ι ≫ eM = (M.restrictOpen V).ε := by simp [← heM]
+  have heNW : (N.restrictOpen W).j ≫ W.ι ≫ eN = (N.restrictOpen W).ε := by simp [← heN]
+  have hgenU : ψ₂.generic ≫ (N.j ⁻¹ᵁ W).ι ≫ gN = ψ₁.generic ≫ (M.j ⁻¹ᵁ V).ι ≫ gM := by
+    simp [ψ₁, ψ₂, Scheme.Hom.resLE_comp_ι_assoc, hgen]
+  have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
+  have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
+  obtain ⟨ι, hι, b, hb, hcl, hgen⟩ := exists_coordinates_isIso_kunnethMap_of_charts
+    Λ hMV hNW hpbU hPU hgenU (hm.restrict V) (hm'.restrict W)
+    hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB'
+  refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ι, hι, b, hb, hcl, fun i ↦ ?_⟩
+  obtain ⟨K, hK, ξ, t, ht, hi⟩ := hgen i
+  refine ⟨K, hK, ξ, t, ht, ?_⟩
+  exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _
+    (isKunnethRestriction_restrictOpen φ₁ φ₂ V W) _ A B).2 hi
+
+end LocalCoordinates
+
 set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
@@ -499,38 +564,9 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
-  have := hM.isTraitModel.isNoetherian_total
-  have := hN.isTraitModel.isNoetherian_total
-  have := hP.isTraitModel.isNoetherian_total
-  have := hM.locallyOfFiniteType
-  have := hN.locallyOfFiniteType
-  refine exists_finset_isIso_of_forall_exists_coordinates Z' _ hsrc htgt fun z ↦ ?_
-  obtain ⟨V, hzV, ιV, _, cV, hcardV, hcVi, hcV⟩ := hm (φ₁.total (P.i z))
-  obtain ⟨W, hzW, ιW, _, cW, hcardW, hcWi, hcW⟩ := hm' (φ₂.total (P.i z))
-  have : QuasiCompact V.ι := inferInstance
-  have : QuasiCompact W.ι := inferInstance
-  have : QuasiCompact (productOpen φ₁ φ₂ V W).ι := inferInstance
-  let U := productOpen φ₁ φ₂ V W
-  let ψ₁ := φ₁.restrictOpen U V inf_le_left
-  let ψ₂ := φ₂.restrictOpen U W inf_le_right
-  have hMV := hM.restrictOpen V
-  have hNW := hN.restrictOpen W
-  have hpbU : IsPullback ψ₁.total ψ₂.total (V.ι ≫ qM) (W.ι ≫ qN) := isPullback_resLE_inf hpb V W
-  have hPU := isTraitModelOver_restrictOpen_productOpen (φ₂ := φ₂) hP V W
-  have heMV : (M.restrictOpen V).j ≫ V.ι ≫ eM = (M.restrictOpen V).ε := by simp [← heM]
-  have heNW : (N.restrictOpen W).j ≫ W.ι ≫ eN = (N.restrictOpen W).ε := by simp [← heN]
-  have hgenU : ψ₂.generic ≫ (N.j ⁻¹ᵁ W).ι ≫ gN = ψ₁.generic ≫ (M.j ⁻¹ᵁ V).ι ≫ gM := by
-    simp [ψ₁, ψ₂, Scheme.Hom.resLE_comp_ι_assoc, hgen]
-  have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
-  have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-  obtain ⟨ι, hι, b, hb, hcl, hgen⟩ := exists_coordinates_isIso_kunnethMap_of_charts
-    (Profinite.padicAlgClRingObj ℓ) hMV hNW hpbU hPU hgenU (hm.restrict V) (hm'.restrict W)
-    hslice cV hcV hcardV cW hcW hcardW heMV heNW hA' hB'
-  refine ⟨P.i ⁻¹ᵁ U, ⟨hzV, hzW⟩, ι, hι, b, hb, hcl, fun i ↦ ?_⟩
-  obtain ⟨K, hK, ξ, t, ht, hi⟩ := hgen i
-  refine ⟨K, hK, ξ, t, ht, ?_⟩
-  exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _
-    (isKunnethRestriction_restrictOpen φ₁ φ₂ V W) _ A B).2 hi
+  exact exists_finset_isIso_of_forall_exists_coordinates Z' _ hsrc htgt
+    (exists_local_coordinates_isIso_kunnethMap (Profinite.padicAlgClRingObj ℓ)
+      hM hN hpb hP hgen hm hm' hslice heM heN hA hB)
 
 end FiniteSupport
 
