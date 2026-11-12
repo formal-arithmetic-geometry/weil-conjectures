@@ -74,6 +74,7 @@ theorem towerSheafIso_inv_hom_apply {C : Type*} [Category C] {J : GrothendieckTo
   exact h
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- Matching the two presentations of section maps of the chain-level model is expensive.
 /-- The tower map induced by the chain-level model of the system tensor comparison sends the
 total tensor of two unit-inserted original sections to the same total tensor after reindexing.
