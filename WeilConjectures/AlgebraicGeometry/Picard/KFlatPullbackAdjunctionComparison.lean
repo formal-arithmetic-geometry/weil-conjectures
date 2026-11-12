@@ -59,8 +59,7 @@ private noncomputable def kFlat_pullback_adjunction_comparison_iso
       (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙
         DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace)))
     (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-    (hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
-    :
+    (hεP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
     (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≅
       (derivedPullback g).obj (DerivedCategory.Q.obj P) := by
@@ -126,6 +125,7 @@ private theorem kFlat_pullback_adjunction_comparison_transpose
   rw [← Functor.map_comp]
   exact congrArg q.map ((ac.homEquiv P I).apply_symm_apply α)
 
+-- Keeping the counit and adjunction as parameters avoids unfolding their choices in rewrites.
 private theorem kFlat_pullback_adjunction_comparison_naturality
     [d : ∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -147,11 +147,16 @@ private theorem kFlat_pullback_adjunction_comparison_naturality
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map α) ≫
         (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) :
-    adj.homEquiv _ _
-      ((kFlat_pullback_adjunction_comparison_iso g ε P hεP).inv ≫ DerivedCategory.Q.map a) =
-      DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I := by
+    DerivedCategory.Q.map a =
+      (kFlat_pullback_adjunction_comparison_iso g ε P hεP).hom ≫
+        (adj.homEquiv _ _).symm
+          (DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app I) := by
   let : HasDerivedCategory.{w} S.Modules := d S
   let : HasDerivedCategory.{w} S'.Modules := d S'
+  apply (cancel_epi (kFlat_pullback_adjunction_comparison_iso g ε P hεP).inv).1
+  simp only [Iso.inv_hom_id_assoc]
+  apply (adj.homEquiv _ _).injective
+  rw [Equiv.apply_symm_apply]
   rw [kFlat_pullback_adjunction_comparison_iso_inv]
   dsimp only [Functor.mapIso_inv]
   simp only [Category.assoc]
@@ -238,10 +243,6 @@ theorem kFlat_pullback_adjunction_comparison
   intro P hP I α
   let ac := A.mapHomologicalComplex (.up ℤ)
   let a := (ac.homEquiv _ _).symm α
-  apply (cancel_epi (e P hP).inv).1
-  simp only [Iso.inv_hom_id_assoc]
-  apply ((relativeMVAdj g).homEquiv _ _).injective
-  rw [Equiv.apply_symm_apply]
   let hεP_inst : IsIso (ε.app (q.obj P)) := hεP P hP
   apply kFlat_pullback_adjunction_comparison_naturality g ε (relativeMVAdj g) P I α a
   have h := Classical.choose_spec (exists_schemeDerivedAdjunction g ε hε)
