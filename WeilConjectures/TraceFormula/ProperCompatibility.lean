@@ -89,7 +89,6 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y) (Fc : c.FixedLocus)
   (Fb : P.pushforward.FixedLocus)
 
-set_option trace.profiler true in
 /-- The point `T_b = 𝔱 ∘ ũ` of the pushed correspondence is obtained from that of `c` by
 transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
 `T_b = Ri_{b*} τ_h ∘ Rg_* T_c ∘ η_g`. -/
@@ -125,11 +124,13 @@ lemma mate_comp_traceMap_pushforward :
     (lowerStarUpperShriekExchange ℓ P.g_comp_support)
     (by unfold lowerStarUpperShriekExchange; rfl)
     (P.lowerStar_map_supportIso_comp_exchange Fc Fb)
-  rw [← cancel_mono Fb.supportIso.hom, Category.assoc,
-    mate_comp_traceMap_comp_supportIso P.pushforward Fb, P.kernelClass_pushforward]
-  simpa only [Category.assoc, P.kernelPushforward_comp_evaluationKernel] using e4
+  have e1 := mate_comp_traceMap_comp_supportIso P.pushforward Fb
+  rw [P.kernelClass_pushforward] at e1
+  simp only [Category.assoc, P.kernelPushforward_comp_evaluationKernel] at e1
+  have e5 := e1.trans e4
+  rw [← cancel_mono Fb.supportIso.hom]
+  simpa only [Category.assoc] using e5
 
-set_option profiler true in
 /-- **Proper pushforward compatibility of the trace class** (blueprint
 `thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
 diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed loci `h`,
