@@ -89,20 +89,14 @@ private theorem cone_precompose
   · simp [CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.map,
       Category.assoc]
 
-private theorem iso_comp_homEquiv
-    {C D : Type*} [Category C] [Category D]
-    (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R)
-    {X Y : D} {A B : C} (q : X ⟶ Y)
-    (e : X ≅ L.obj A) (i : A ⟶ B) [IsIso i] (f : B ⟶ R.obj Y)
-    (h : q = e.hom ≫ (adj.homEquiv _ _).symm (i ≫ f)) :
-    q = (e ≪≫ L.mapIso (asIso i)).hom ≫ (adj.homEquiv _ _).symm f := by
-  simpa only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
-    Adjunction.homEquiv_naturality_left_symm, Category.assoc] using h
+-- Cache the finite biproduct instance used by all three cone comparisons.
+local instance coneSquare_hasBinaryBiproducts (S : Scheme.{u}) :
+    HasBinaryBiproducts (SheafOfModules.{u} (moduleRings S.toRingedSpace)) :=
+  inferInstance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
 set_option profiler true in
 /-- Transpose a specified cone-square through derived pullback/direct image.
 This is independent of open covers and of base-change comparison maps.
@@ -171,7 +165,6 @@ theorem derivedPullback_cone_square_transposition
   obtain ⟨hL, e, he⟩ := kFlat_pullback_adjunction_comparison g
   let E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings S'.toRingedSpace) := Scheme.Modules.tensorPullback g
-  letI : E.Additive := hL
   let G := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   let L := E.mapHomologicalComplex (.up ℤ)
   let F := G.mapHomologicalComplex (.up ℤ)
@@ -206,17 +199,13 @@ theorem derivedPullback_cone_square_transposition
     DerivedCategory.Q.mapIso (CochainComplex.mappingCone.mapHomologicalComplexIso p E).symm ≪≫
       e _ hconeP ≪≫ (derivedPullback g).mapIso (asIso (DerivedCategory.Q.map c)), ?_, ?_, ?_⟩
   · have hh := he P hP A' (x ≫ α)
-    apply iso_comp_homEquiv (L := derivedPullback g)
-      (R := schemeDerivedDirectImage g) (adj := relativeMVAdj g)
-      (e := e P hP) (i := DerivedCategory.Q.map x)
-      (f := DerivedCategory.Q.map α ≫ (schemeMVDirectImageLocalization g).app A')
-    simpa only [Functor.map_comp, Category.assoc, ac, adj₀, E, L] using hh
+    simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
+    convert hh using 2
   · have hh := he Q hQ B' (y ≫ β)
-    apply iso_comp_homEquiv (L := derivedPullback g)
-      (R := schemeDerivedDirectImage g) (adj := relativeMVAdj g)
-      (e := e Q hQ) (i := DerivedCategory.Q.map y)
-      (f := DerivedCategory.Q.map β ≫ (schemeMVDirectImageLocalization g).app B')
-    simpa only [Functor.map_comp, Category.assoc, ac, adj₀, E, L] using hh
+    simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Functor.map_comp,
+      Adjunction.homEquiv_naturality_left_symm, Category.assoc, ac, adj₀, E, L] at hh ⊢
+    convert hh using 2
   · rw [htrans, Functor.map_comp]
     have h := he _ hconeP (CochainComplex.mappingCone t')
       (CochainComplex.mappingCone.mapOfHomotopy H₀ ≫
