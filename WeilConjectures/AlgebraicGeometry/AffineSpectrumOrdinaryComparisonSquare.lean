@@ -82,6 +82,7 @@ private theorem cancel_transport_factors
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
     ← F.map_comp_assoc, ← F0.map_comp, Iso.hom_inv_id, Functor.map_id,
     Category.id_comp, Category.comp_id, Iso.inv_hom_id_assoc]
+  simp only [F.map_id, F0.map_id, Category.id_comp, Category.comp_id, d.inv_hom_id]
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -252,7 +253,19 @@ theorem exists_affineSpectrum_ordinaryComparison_square
   let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
   have hcoordinates := exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
-  rcases hcoordinates with ⟨eR, eA, eB, eD, q, t, hA, hB, hD, ht, hcoord⟩
+  let eR := hcoordinates.choose
+  have hcoordinates := hcoordinates.choose_spec
+  let eA := hcoordinates.choose
+  have hcoordinates := hcoordinates.choose_spec
+  let eB := hcoordinates.choose
+  have hcoordinates := hcoordinates.choose_spec
+  let eD := hcoordinates.choose
+  have hcoordinates := hcoordinates.choose_spec
+  let q := hcoordinates.choose
+  have hcoordinates := hcoordinates.choose_spec
+  let t := hcoordinates.choose
+  have hcoordinates := hcoordinates.choose_spec
+  obtain ⟨hA, hB, hD, ht, hcoord⟩ := hcoordinates
   obtain ⟨l, hl⟩ := ModuleCat.exists_baseDerivedTensor_ringIso_square.{u, u + 1}
     eR eA eB eD hA hB hD (stalkComplex g' z P)
     (stalkComplex (Spec.map g'.appTop) z0 P0) q M M0 t ht i
