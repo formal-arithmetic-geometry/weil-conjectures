@@ -411,7 +411,7 @@ theorem reductionTensorStrength_associativity
     with_unfolding_all exact tensorPresentationNativeIso Y R a
   let f := tensorPresentationNativeIso Y S m.target
   obtain ⟨core, hcore⟩ := nativeReductionMonoidal l E Y D hl a n m
-  with_unfolding_all exact (CategoryTheory.transportedTensorMate_assoc
+  exact (CategoryTheory.transportedTensorMate_assoc
     (C := completedIntegralDerivedCategory l E Y D hl)
     (D := DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)))
     a.tensor m.target.tensor
