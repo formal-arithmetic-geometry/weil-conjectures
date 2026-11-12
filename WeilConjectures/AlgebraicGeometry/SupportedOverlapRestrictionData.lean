@@ -74,7 +74,6 @@ private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) 
       Modules.pushforwardCongr s.inv_hom_id ≪≫ Modules.pushforwardId T)
 
 
-set_option profiler true in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -139,6 +138,8 @@ theorem exists_supported_overlap_restriction_data
           Nonempty ((schemeOpenRestriction V.toScheme U).mapDerivedCategory ⋙ e.functor ≅ SV) ∧
           Nonempty (e.functor.obj (G ⊞ G⟦(1 : ℤ)⟧) ≅ SW.obj (F ⊞ F⟦(1 : ℤ)⟧)) := by
   classical
+  -- Reuse the abelian structures throughout the derived comparisons. Keep their values visible
+  -- so the chosen derived localizations still have definitionally equal instance parameters.
   let : Abelian (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) := inferInstance
   let : Abelian (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) := inferInstance
   let : Abelian (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace)) :=
