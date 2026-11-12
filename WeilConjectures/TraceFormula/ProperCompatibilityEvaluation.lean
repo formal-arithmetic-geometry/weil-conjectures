@@ -62,12 +62,18 @@ theorem kernelPushforward_comp_evaluationKernel_lowerStar (f : X ⟶ Y) [IsPrope
   simp only [kernelPushforward, Category.assoc]
   rewrite [IsIso.inv_comp_eq]
   simp only [prodLowerStarExternalProduct, evaluationKernel]
-  rewrite [Adjunction.homEquiv_comp_map_comp,
-    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left,
-    homEquiv_comp_lowerStarComp_hom_app_assoc, homEquiv_comp_eqToHom_of_eq_assoc,
-    homEquiv_comp_lowerStarComp_inv_app_assoc, ← Adjunction.homEquiv_naturality_right]
-  swap
-  · exact hΔ
+  rewrite [Adjunction.homEquiv_comp_map_comp
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (prod.map f f))]
+  conv_lhs =>
+    rw [← Adjunction.homEquiv_naturality_left
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag Y))]
+  conv_rhs =>
+    rw [← Adjunction.homEquiv_naturality_left
+      (boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X))]
+  rewrite [homEquiv_comp_lowerStarComp_hom_app_assoc ℓ (diag X) (prod.map f f),
+    homEquiv_comp_eqToHom_of_eq_assoc ℓ hΔ,
+    homEquiv_comp_lowerStarComp_inv_app_assoc ℓ f (diag Y),
+    ← Adjunction.homEquiv_naturality_right]
   have hu : (boundedConstructibleLowerStar ℓ f).obj K ◁ lowerStarVerdierDualMap ℓ f K ≫
       (ihom.ev ((boundedConstructibleLowerStar ℓ f).obj K)).app (dualizingComplex' ℓ Y) =
       lowerStarTensorMap ℓ f K (verdierDual ℓ K) ≫

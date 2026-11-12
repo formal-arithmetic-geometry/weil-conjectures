@@ -106,7 +106,8 @@ theorem class_pushforward_core :
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (prod.map P.f P.f))
       ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _))]
   simp only [← Functor.map_comp (boundedConstructibleLowerStar ℓ P.f)]
-  conv_rhs => rw [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.naturality]
+  conv_rhs =>
+    simp only [← (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.naturality]
   simp only [← Category.assoc]
   refine congrArg (· ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.app _) ?_
   simp only [Category.assoc, Functor.map_comp, leftProjectionNatTrans, curriedTensor_map_app,
