@@ -56,7 +56,6 @@ private theorem map_desc_comparison
     biprod.mapBiprod_inv_map_desc]
   ext <;> simp [biprod.mapIso, hU, hV]
 
-set_option trace.profiler true in
 /-- Vertex comparisons for the canonical exact-restriction presentation of the
 relative Mayer--Vietoris rows. The overlap component satisfies the vertical-pasting
 identity. No boundary, distinguishedness, or morphism of triangles is asserted.

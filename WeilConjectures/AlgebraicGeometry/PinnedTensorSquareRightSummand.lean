@@ -73,7 +73,6 @@ private theorem extendScalars_tensor_summand
   simp only [whiskerLeft_id, Category.id_comp]
   rfl
 
-set_option trace.profiler true in
 /-- Scalar-tensor route on one summand, in explicit stalk coordinates.
 
 Proof: expand the complex tensorator as the total-complex oplax comparison and use

@@ -39,12 +39,12 @@ private theorem triangle_transport_distinguished
     (hf : T.mor₁ ≫ e₂.hom = f) (hg : T.mor₂ ≫ e₃.hom = e₂.hom ≫ g) :
     Triangle.mk f g (e₃.inv ≫ T.mor₃) ∈ distTriang C := by
   apply isomorphic_distinguished _ hT
-  refine (Triangle.isoMk T _ (Iso.refl _) e₂ e₃ ?_ hg ?_).symm
+  refine (Triangle.isoMk T (Triangle.mk f g (e₃.inv ≫ T.mor₃))
+    (Iso.refl _) e₂ e₃ ?_ hg ?_).symm
   · simpa only [Iso.refl_hom, Category.id_comp] using hf
   · simp only [Iso.refl_hom, Triangle.mk_mor₃, Iso.hom_inv_id_assoc,
       Functor.map_id, Category.comp_id]
 
-set_option trace.profiler true in
 /-- The pinned relative restriction maps are the first two arrows of a functorial
 pair of distinguished triangles. Their morphism has the prescribed global, open,
 and overlap components. This is a derived-category statement, with no assertion
