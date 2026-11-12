@@ -50,8 +50,6 @@ private theorem transport_biprod_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Transporting the relative comparison requires additional elaboration heartbeats.
 /-- The resolved cover comparison before cylinder rectification.
 Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
