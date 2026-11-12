@@ -268,6 +268,7 @@ theorem affineCoordinateHomotopyComparison_hom_app
         ((affineCoordinateComplexComparison a b φ p hp).hom.app M) := by
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Evaluating the nested termwise functors needs more elaboration heartbeats.
 /-- The same composition equation on concrete homotopy models.
