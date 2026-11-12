@@ -92,6 +92,14 @@ theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
   let f₂ := tensorResolutionRestrictionTensorMap j M F M' F' m f
   let f₃ := tensorResolutionRestrictionTensorMap j K F K' F' k f
   let f₄ := tensorResolutionRestrictionTensorMap j K N K' N' k t
+  let hEF : CochainComplex.HasMapBifunctor E F (curriedTensor Y.Modules) := inferInstance
+  let hEN : CochainComplex.HasMapBifunctor E N (curriedTensor Y.Modules) := inferInstance
+  let hMF : CochainComplex.HasMapBifunctor M F (curriedTensor Y.Modules) := inferInstance
+  let hKF : CochainComplex.HasMapBifunctor K F (curriedTensor Y.Modules) := inferInstance
+  let hE'F' : CochainComplex.HasMapBifunctor E' F' (curriedTensor X.Modules) := inferInstance
+  let hE'N' : CochainComplex.HasMapBifunctor E' N' (curriedTensor X.Modules) := inferInstance
+  let hM'F' : CochainComplex.HasMapBifunctor M' F' (curriedTensor X.Modules) := inferInstance
+  let hK'F' : CochainComplex.HasMapBifunctor K' F' (curriedTensor X.Modules) := inferInstance
   have h₀ : RC.map a₀ ≫ f₀ = f₁ ≫ b₀ := by
     dsimp only [a₀, b₀, f₀, f₁, tensorResolutionRestrictionTensorMap]
     simpa only [Category.assoc] using
