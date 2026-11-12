@@ -35,7 +35,7 @@ private theorem mixedSections_homEquiv_unit
     (h : adj.homEquiv _ _ (ε ≫ Q'.map (𝟙 _)) =
       Q.map (adj₀.homEquiv _ _ (𝟙 _)) ≫ β) :
     adj.unit.app (Q.obj M) ≫ R.map ε = Q.map (adj₀.unit.app M) ≫ β := by
-  erw [Functor.map_id, Category.comp_id, Adjunction.homEquiv_id,
+  erw [CategoryTheory.Functor.map_id, Category.comp_id, Adjunction.homEquiv_id,
     Adjunction.homEquiv_unit] at h
   exact h
 
