@@ -177,31 +177,33 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (ProEtaleWeilSheaf.constantTwistCompLowerStarIso k₀ l φ b).app P.obj ≪≫
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
-private noncomputable def localBoundaryPairingEquiv
-    {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
-    {N H Q : FrobeniusModule.{max u v, v} K}
-    (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) :
-    M.carrier ≃ₗ[K] Module.Dual K Q.carrier :=
-  Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap
-
-private theorem localBoundaryLinearEquiv_frobenius
-    {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
-    {N H Q : FrobeniusModule.{max u v, v} K}
-    (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) (q : K)
-    (x : M.carrier) (hΨ : Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) (y : Q.carrier) :
-    localBoundaryPairingEquiv Ψ S ψ (M.frobenius x) (Q.frobenius y) =
-      q * localBoundaryPairingEquiv Ψ S ψ x y := by
-  simp only [localBoundaryPairingEquiv]
+/-- Transport a rescaled Frobenius comparison into a pairing with the dual module. -/
+private theorem exists_pairing_of_rescale_equiv
+    {K : Type v} [Field K] {M N H Q : FrobeniusModule.{max u v, v} K}
+    (q : K) {c t : K} (hc : c ≠ 0) (ht : t = 1) (hqc : q * c = 1)
+    (E : (M.rescale c).Equiv (N.rescale t)) (S : N.Equiv H.dual) (e : H.Equiv Q) :
+    ∃ f : M.carrier ≃ₗ[K] Module.Dual K Q.carrier,
+      ∀ x y, f (M.frobenius x) (Q.frobenius y) = q * f x y := by
+  refine ⟨E.toLinearEquiv ≪≫ₗ S.toLinearEquiv ≪≫ₗ e.toLinearEquiv.symm.dualMap,
+    fun x y ↦ ?_⟩
+  have hE := E.map_frobenius x
+  rw [show (M.rescale c).frobenius x = c • M.frobenius x from
+      FrobeniusModule.frobeniusEnd_rescale_apply hc x,
+    show (N.rescale t).frobenius (E.toLinearEquiv x) = t • N.frobenius (E.toLinearEquiv x) from
+      FrobeniusModule.frobeniusEnd_rescale_apply (ht ▸ one_ne_zero) _, map_smul,
+    ht, one_smul] at hE
+  have hE' : E.toLinearEquiv (M.frobenius x) = q • N.frobenius (E.toLinearEquiv x) := by
+    rw [← hE, smul_smul, hqc, one_smul]
   simp only [LinearEquiv.trans_apply]
-  rw [hΨ, map_smul, S.map_frobenius]
+  rw [hE', map_smul, S.map_frobenius]
   erw [LinearEquiv.dualMap_apply]
   rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
-    FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
+    FrobeniusModule.Equiv.symm_map_frobenius e y, LinearEquiv.coe_coe,
     LinearEquiv.symm_apply_apply, smul_eq_mul]
   rfl
 
--- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 set_option profiler true in
+-- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
 closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perfect pairing
@@ -219,7 +221,7 @@ It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
 twist. (blueprint: `lem-a1-local-boundary-duality`, `sk-i-dl-a1-local`)
 -/
-private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
+theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [IsDominant j]
@@ -229,14 +231,14 @@ private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
     [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
     (hsU : s.1 ∉ Set.range j.base) :
-    ∃ e : (((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
-        Module.Dual (PadicAlgCl l) (((WeilComplex.homologySheaf 1).obj
-          ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))).stalk s).carrier,
-      ∀ a b, e ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a)
-          ((((WeilComplex.homologySheaf 1).obj
-            ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))).stalk s).frobenius b) =
+    ∃ e : (((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
+        Module.Dual (PadicAlgCl l) (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier,
+      ∀ a b, e ((((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).frobenius a)
+          ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
         (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
   classical
+  rw [WeilSheaf.higherDirectImage_obj_eq, show ((1 : ℕ) : ℤ) = 1 from rfl,
+    show WeilSheaf.directImage (k₀ := k₀) (l := l) j = WeilSheaf.lowerStar j from rfl]
   -- the open `U` is a smooth separated curve
   have hjC : j ≫ C ↘ Spec (CommRingCat.of k₀) = U ↘ Spec (CommRingCat.of k₀) := comp_over j _
   have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by rw [← hjC]; infer_instance
@@ -275,10 +277,10 @@ private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
     ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))
   let c := WeilSheaf.cyclotomicUnit k₀ l ^ (1 : ℤ)
   let G := (F.dual hF).constantTwist c
-  let eU := Classical.choice (WeilComplex.nonempty_verdierDual_toComplex_iso_of_isLisse 1 F hF)
-  let eT := Classical.choice (WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso F hF 1)
-  let e₄ := Classical.choice (WeilComplex.nonempty_verdierDual_upperStar_derivedLowerStar_iso j i hc
-    (WeilSheaf.toComplex.obj F))
+  obtain ⟨eU⟩ := WeilComplex.nonempty_verdierDual_toComplex_iso_of_isLisse 1 F hF
+  obtain ⟨eT⟩ := WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso F hF 1
+  obtain ⟨e₄⟩ := WeilComplex.nonempty_verdierDual_upperStar_derivedLowerStar_iso j i hc
+    (WeilSheaf.toComplex.obj F)
   -- `𝔻_Z A(F) ≅ A(F^∨(1))[1]`, hence `𝓗⁻¹(𝔻_Z A(F)) ≅ i^*((j_* F^∨)(1))`
   let E₁ : (WeilComplex.verdierDual k₀ l Z).obj (op A) ≅
       (((WeilComplex.upperStar i).obj ((WeilComplex.derivedLowerStar j).obj
@@ -299,116 +301,50 @@ private theorem exists_linearEquiv_dual_stalk_higherDirectImage_core
   -- `𝔻_Z` is t-exact on the finite `Z`: `𝓗⁻¹(𝔻_Z A(F)) ≅ (𝓗¹ A(F))^∨`
   set H := (WeilComplex.homologySheaf 1).obj A
   have hH : H.IsLisse := WeilSheaf.isLisse_of_isFinite_of_isReduced H
-  let R₁ := Classical.choice (WeilComplex.nonempty_homologySheaf_neg_one_verdierDual_iso A)
-  let R₂ := Classical.choice (WeilComplex.nonempty_verdierDual_toComplex_iso_of_isFinite H)
-  let R₃ := Classical.choice (WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso H hH 0)
+  obtain ⟨R₁⟩ := WeilComplex.nonempty_homologySheaf_neg_one_verdierDual_iso A
+  obtain ⟨R₂⟩ := WeilComplex.nonempty_verdierDual_toComplex_iso_of_isFinite H
+  obtain ⟨R₃⟩ := WeilSheaf.nonempty_dual_tensorObj_tateTwistSheaf_iso H hH 0
   let R : (WeilComplex.homologySheaf (-1)).obj ((WeilComplex.verdierDual k₀ l Z).obj (op A)) ≅
       (H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) :=
     R₁ ≪≫ (WeilComplex.homologySheaf 0).mapIso R₂ ≪≫
       WeilSheaf.toComplexCompHomologySheafIso.app _ ≪≫ R₃
   -- the stalks at `z`
-  let S₁ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_upperStar i
-    (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c) zf s hz hdeg)
-  let S₂ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_constantTwist
-    ((WeilSheaf.lowerStar j).obj (F.dual hF)) c s)
+  have S₁ := (WeilSheaf.nonempty_equiv_stalk_upperStar i
+    (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c) zf s hz hdeg).some
+  have S₂ := (WeilSheaf.nonempty_equiv_stalk_constantTwist
+    ((WeilSheaf.lowerStar j).obj (F.dual hF)) c s).some
   have S₃ : (((WeilSheaf.upperStar i).obj
       (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c)).stalk zf).Equiv
       (((H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ))).stalk zf) :=
-    Classical.choice (WeilSheaf.nonempty_equiv_stalk_of_iso (L.symm ≪≫ R) zf)
-  let S₄ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_constantTwist (H.dual hH)
-    (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) zf)
-  let S₅ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_dual hH zf)
+    (WeilSheaf.nonempty_equiv_stalk_of_iso (L.symm ≪≫ R) zf).some
+  have S₄ := (WeilSheaf.nonempty_equiv_stalk_constantTwist (H.dual hH)
+    (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) zf).some
+  have S₅ := (WeilSheaf.nonempty_equiv_stalk_dual hH zf).some
   have S₆ : (H.stalk zf).Equiv (((WeilSheaf.upperStar i).obj ((WeilComplex.homologySheaf 1).obj
       ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F)))).stalk zf) :=
-    Classical.choice (WeilSheaf.nonempty_equiv_stalk_of_iso (WeilComplex.homologySheafUpperStarIso i 1 _)
-      zf)
-  let S₇ := Classical.choice (WeilSheaf.nonempty_equiv_stalk_upperStar i ((WeilComplex.homologySheaf 1).obj
-      ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))) zf s hz hdeg)
-  -- the linear algebra
-  set q : PadicAlgCl l := (Nat.card k₀ : PadicAlgCl l)
-  set d := (C ↘ Spec (CommRingCat.of k₀)).degreeOver s.1
+    (WeilSheaf.nonempty_equiv_stalk_of_iso (WeilComplex.homologySheafUpperStarIso i 1 _)
+      zf).some
+  have S₇ := (WeilSheaf.nonempty_equiv_stalk_upperStar i ((WeilComplex.homologySheaf 1).obj
+      ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))) zf s hz hdeg).some
+  -- Apply the pairing calculation to the stalk comparison as abstract Frobenius modules.
+  let q : PadicAlgCl l := (Nat.card k₀ : PadicAlgCl l)
+  let d := (C ↘ Spec (CommRingCat.of k₀)).degreeOver s.1
   have hcd : (c : PadicAlgCl l) ^ d = (q ^ d)⁻¹ := by
     rw [WeilSheaf.cyclotomicUnit_zpow_eq, zpow_neg, zpow_one, inv_pow]
   have hq : q ≠ 0 := Nat.cast_ne_zero.2 Nat.card_pos.ne'
-  have hk : (c : PadicAlgCl l) ^ d ≠ 0 := by
-    rw [hcd]
-    exact inv_ne_zero (pow_ne_zero _ hq)
   have hone : ((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-      (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 = 1 := by
-    simp
-  let Ψ := Classical.choice (show Nonempty _ from
-    ⟨S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))⟩)
-  let ψ := Classical.choice (show Nonempty _ from ⟨S₆.trans S₇⟩)
-  let S₅' : (((H.dual hH).stalk zf).rescale
-      (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-        (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).Equiv (H.stalk zf).dual := by
-    rw [hone]
-    exact (FrobeniusModule.rescaleOneEquiv ((H.dual hH).stalk zf)).trans S₅
-  refine ⟨localBoundaryPairingEquiv Ψ.toLinearEquiv S₅' ψ,
-    fun a b ↦ ?_⟩
-  have hΨ := Ψ.map_frobenius a
-  rw [show ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).rescale
-      ((c : PadicAlgCl l) ^ d)).frobenius a = (c : PadicAlgCl l) ^ d •
-        (((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a from
-      FrobeniusModule.frobeniusEnd_rescale_apply hk a,
-    show (((H.dual hH).stalk zf).rescale
-      (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-        (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius (Ψ.toLinearEquiv a) =
-      _ • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) from
-      FrobeniusModule.frobeniusEnd_rescale_apply (by rw [hone]; exact one_ne_zero) _,
-    map_smul] at hΨ
-  simp only [hone, one_smul] at hΨ
-  have hΨ' : Ψ.toLinearEquiv ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a) =
-      (q ^ d) • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) := by
-    rw [← hΨ, smul_smul, show q ^ d * (c : PadicAlgCl l) ^ d = 1 by
-      rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
+      (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 = 1 := by simp
   have hqd : q ^ d = ((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l) := by
     simp [Scheme.Hom.residueCard, q, d]
-  have hΨN : Ψ.toLinearEquiv ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a) =
-      (q ^ d) • (((H.dual hH).stalk zf).rescale
-        (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-          (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius
-        (Ψ.toLinearEquiv a) := by
-    have hc0 : ((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) :
-        PadicAlgCl l) ^ (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 ≠ 0 := by
-      rw [hone]
-      exact one_ne_zero
-    have hrescale (x : ((H.dual hH).stalk zf).carrier) :
-        (((H.dual hH).stalk zf).rescale
-          (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-            (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius x =
-          ((H.dual hH).stalk zf).frobenius x := by
-      change (((H.dual hH).stalk zf).rescale
-          (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-            (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobeniusEnd x =
-        ((H.dual hH).stalk zf).frobeniusEnd x
-      rw [FrobeniusModule.frobeniusEnd_rescale_apply hc0, hone, one_smul]
-    rw [hrescale]
-    exact hΨ'
   rw [← hqd]
-  exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
-    (F.dual hF)).stalk s) Ψ.toLinearEquiv
-    S₅' ψ (q ^ d) a hΨN b
-
-theorem exists_linearEquiv_dual_stalk_higherDirectImage
-    {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
-    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
-    [IsDominant j]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
-    [IsSeparated (C ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (s : C.finitePoints)
-    (hsU : s.1 ∉ Set.range j.base) :
-    ∃ e : (((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).carrier ≃ₗ[PadicAlgCl l]
-        Module.Dual (PadicAlgCl l) (((WeilSheaf.higherDirectImage j 1).obj F).stalk s).carrier,
-      ∀ a b, e ((((WeilSheaf.directImage j).obj (F.dual hF)).stalk s).frobenius a)
-          ((((WeilSheaf.higherDirectImage j 1).obj F).stalk s).frobenius b) =
-        (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
-  classical
-  rw [WeilSheaf.higherDirectImage_obj_eq, show ((1 : ℕ) : ℤ) = 1 from rfl,
-    show WeilSheaf.directImage (k₀ := k₀) (l := l) j = WeilSheaf.lowerStar j from rfl]
-  exact exists_linearEquiv_dual_stalk_higherDirectImage_core j F hF s hsU
+  exact exists_pairing_of_rescale_equiv
+    (M := ((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s)
+    (N := (H.dual hH).stalk zf) (H := H.stalk zf)
+    (Q := ((WeilComplex.homologySheaf 1).obj ((WeilComplex.derivedLowerStar j).obj
+      (WeilSheaf.toComplex.obj F))).stalk s)
+    (q ^ d) (by rw [hcd]; exact inv_ne_zero (pow_ne_zero _ hq)) hone
+    (by rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)])
+    (S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))) S₅ (S₆.trans S₇)
 
 private theorem exact_boundary_of_triangle
     (T : Triangle (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
