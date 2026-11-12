@@ -52,6 +52,7 @@ theorem comparisonIntoPullback_comp_counit
     ← Functor.map_comp, IsIso.inv_hom_id]
   simp
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- Elaborating coefficient transport through the four stalk rings needs this budget.
 /-- Scalar transport of the base-derived tensor comparison to the ordinary pullback.

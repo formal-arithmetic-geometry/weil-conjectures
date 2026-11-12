@@ -91,6 +91,7 @@ private theorem termwise_homotopy_square_inv
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp]
   rfl
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Reusing the abstract exact-factor normalization keeps the proof within the original budget.
 /-- The derived open coefficient on an actual restricted complex is compatible

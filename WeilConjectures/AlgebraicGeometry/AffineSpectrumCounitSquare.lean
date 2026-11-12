@@ -32,6 +32,7 @@ attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
   HomotopyCategory DerivedCategory.Q DerivedCategory.Qh
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1500000 in
 -- The quotient comparison normalization unfolds several derived-category factors.
 /-- The inverse pullback counits commute with the canonical affine coordinate comparison.
