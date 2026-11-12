@@ -255,11 +255,12 @@ theorem podTensorReindexAt_generators
 private lemma podTensorRepresentative_cancel {C D : Type*} [Category C] [Category D]
     (T : C × C ⥤ D) {P Q P' Q' : C} {A B Z : D}
     (eP : P ≅ P') (eQ : Q ≅ Q') (e : T.obj (P', Q') ≅ B)
-    (k : A ⟶ T.obj (P, Q)) (t : A ⟶ B)
-    (h : HEq (k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom) t)
+    (k : A ⟶ T.obj (P, Q)) {α : Type*} (x y : α) (hxy : x = y)
+    (t : α → (A ⟶ B))
+    (h : HEq (k ≫ T.map (Prod.mkHom eP.hom eQ.hom) ≫ e.hom) (t x))
     (f : T.obj (P, Q) ⟶ Z) :
-    t ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
-  rw [← eq_of_heq h]
+    t y ≫ e.inv ≫ T.map (Prod.mkHom eP.inv eQ.inv) ≫ f = k ≫ f := by
+  rw [← hxy, ← eq_of_heq h]
   simp only [Category.assoc, e.hom_inv_id_assoc]
   rw [← T.map_comp_assoc]
   simp only [Prod.mkHom, prod_comp, eP.hom_inv_id, eQ.hom_inv_id,
@@ -347,9 +348,10 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
   let fQ := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)
   dsimp only [podOrdinaryReindex] at fP fQ
+  generalize ht : (podTensorReindexAt l E g D hD P Q τ).tower P Q = τ' at hs
   have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
-    eP eQ e k _ hs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
-  rw [podTensorReindexAt_tower] at finish
+    eP eQ e k τ' τ (ht.symm.trans (podTensorReindexAt_tower l E g D hD P Q τ))
+    _ hs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
   have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
   dsimp only [podReindexingTensorFrame, podOrdinaryReindex] at hc
   exact finish.trans hc
