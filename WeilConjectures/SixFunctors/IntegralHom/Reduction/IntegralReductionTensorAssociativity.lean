@@ -17,6 +17,7 @@ Source: Stacks 06YY, 07A4 and 0FPT; integral Hom reduction, paragraphs 1--2.
 
 @[expose] public section
 set_option autoImplicit false
+set_option synthInstance.maxSize 4096
 
 universe d t u
 open CategoryTheory CategoryTheory.MonoidalCategory
@@ -164,6 +165,8 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   integralReductionSourceHasDerivedCategory integralReductionTargetHasDerivedCategory
   coefficientFiniteHasDerived coefficientFiniteDerivedExtension derivedCategory
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
+  integralReductionChangeOfRings integralReductionExistence
+  scalarReductionExtension scalarReductionExistence completedIntegralCommRingProjection
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
