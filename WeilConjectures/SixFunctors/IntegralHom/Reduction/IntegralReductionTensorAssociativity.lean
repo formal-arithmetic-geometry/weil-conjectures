@@ -208,8 +208,7 @@ private theorem normalizedBeta_eq (n : ℕ)
       (hbeta i j U x y)
     rw [← ConcreteCategory.comp_apply] at hcomp
     change (ConcreteCategory.hom ((beta.f (i + j) ≫ (inv beta).f (i + j)).val.app U)) _ = _ at hcomp
-    rw [hcomp] at hh
-    exact hh
+    exact hcomp.symm.trans hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
