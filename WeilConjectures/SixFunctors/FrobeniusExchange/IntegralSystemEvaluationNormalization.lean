@@ -129,7 +129,7 @@ private theorem varyingDerivedMateIso (R : ℕ → CommRingCat.{u + 1})
   rw [ProEtale.VaryingRing.square_symm]
   exact ProEtale.VaryingRing.evalPMate_isIso R q f n
 
-set_option trace.profiler true in
+set_option profiler true in
 private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     (q : ∀ n, R (n + 1) ⟶ R n) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     {L : ProEtale.VaryingRing.Modules R q Y ⥤ ProEtale.VaryingRing.Modules R q X}
@@ -175,7 +175,7 @@ private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     θ (ProEtale.VaryingRing.moduleEvalG R q f n).symm hT hS hG hH hθ hb
     (varyingDerivedMateIso R q f n)
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- An ordinary invertible evaluation mate for strict integral systems has an
 invertible canonical right-derived mate for the actual integral pullback models.
 Source: Zheng 4.10; Stacks Tags 070I, 070K and 07A7
@@ -219,7 +219,7 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
   let : Abelian.HasKInjectiveResolutions (normalizedDVRModules l E X n) :=
     proEtaleRingModules_hasKInjectiveResolutions X
       (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1)))
-  exact varyingEvaluationMate_isIso (rs l E) (qs l E) f n
+  apply varyingEvaluationMate_isIso (rs l E) (qs l E) f n
     (lAdditive := integralComparisonSequencePullbackAdditive l E f)
     (tAdditive := inferInstanceAs (integralComparisonSequenceDirectImage l E f).Additive)
     (lnAdditive := sfIntrinsicPullback_additive (Padic.coefficientExtensionRing l E (n + 1)) f)
