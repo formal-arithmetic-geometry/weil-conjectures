@@ -117,6 +117,7 @@ private theorem inverseImage_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
       h.val.app (op ((proEtaleIsoPostcompose g).obj U)) x := rfl
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- The comparison is the left-adjoint mate of the tower unit; the unit generators are
 -- traced through the actual limit projections.
 private theorem reindex_normalized_aux {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -214,6 +215,7 @@ private theorem evaluationRing_app (W : Scheme.{u}) (n : ℕ) (V : W.ProEt) :
   rfl
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Unfolding the pushforward module structure of a quotient level is slow.
 /-- Scalars of a quotient level act through the sequence ring.
 Source: Stacks 0941. -/
@@ -274,6 +276,7 @@ private theorem sequenceRing_comma {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (n
   exact congrArg (fun f ↦ f.hom.app (op U) a) (towerFiniteCoefficientMap_eq l E g n)
 
 set_option maxHeartbeats 1600000 in
+set_option profiler true in
 -- Scalar linearity of every map involved, followed by the unit normalization.
 /-- A unit-normalized reindexing comparison is fixed on every scalar tensor generator.
 Source: Stacks 03D6, 06YY and 0941. -/
