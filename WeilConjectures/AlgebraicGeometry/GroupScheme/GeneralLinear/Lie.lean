@@ -215,49 +215,51 @@ theorem coe_homMulEquiv_inv {A : Type u} [CommRing A] (g : GL n A) (N : Matrix n
       = ((g⁻¹ : GL n A) : Matrix n n A) * ((g : Matrix n n A) * (1 - N)) := by rw [h, mul_one]
     _ = 1 - N := by rw [← mul_assoc, Units.inv_mul, one_mul]
 
-set_option maxHeartbeats 400000 in
--- the matrix computation over `k[ε, δ]` unfolds several dual-number layers
+/-- The commutator of two invertible matrices with square-zero scalar parts. -/
+open scoped commutatorElement in
+theorem coe_commutator_of_eq_one_add_smul {A : Type*} [CommRing A] (e d : A)
+    (he : e * e = 0) (hd : d * d = 0) (a b : GL n A) (X Y : Matrix n n A)
+    (ha : (a : Matrix n n A) = 1 + e • X) (hb : (b : Matrix n n A) = 1 + d • Y) :
+    (↑⁅a, b⁆ : Matrix n n A) = 1 + (e * d) • (X * Y - Y * X) := by
+  have hai := coe_homMulEquiv_inv a _ (smul_mul_smul_eq_zero e he X) ha
+  have hbi := coe_homMulEquiv_inv b _ (smul_mul_smul_eq_zero d hd Y) hb
+  simp only [commutatorElement_def, Units.val_mul, ha, hb, hai, hbi]
+  exact one_add_smul_mul_one_add_smul_mul_one_sub_smul_mul_one_sub_smul e d he hd X Y
+
 set_option trace.profiler true in
 open scoped commutatorElement in
 theorem tangentMatrix_tangentBracket (p q : GrpObj.pointsKer 𝔾𝕃(n; k) GrpObj.aug₁) :
     tangentMatrix n k (GrpObj.tangentBracket p q) =
       tangentMatrix n k p * tangentMatrix n k q - tangentMatrix n k q * tangentMatrix n k p := by
-  have h := congrArg (fun r : GrpObj.pointsKer 𝔾𝕃(n; k) (GrpObj.aug₂ (k := k)) ↦
-    ((homMulEquiv n k _ r.1 : GL n _) : Matrix n n (DualNumber (DualNumber k))))
-    (GrpObj.tangentMul_tangentBracket p q)
-  rw [GrpObj.tangentMul, coe_homMulEquiv_tangentMap] at h
-  obtain ⟨X, hX⟩ : ∃ X : Matrix n n (DualNumber (DualNumber k)),
-      X = (tangentMatrix n k p).map (algebraMap k _) := ⟨_, rfl⟩
-  obtain ⟨Y, hY⟩ : ∃ Y : Matrix n n (DualNumber (DualNumber k)),
-      Y = (tangentMatrix n k q).map (algebraMap k _) := ⟨_, rfl⟩
-  obtain ⟨a, ha₀⟩ : ∃ a : GL n (DualNumber (DualNumber k)),
-      a = homMulEquiv n k _ (GrpObj.tangentEps p).1 := ⟨_, rfl⟩
-  obtain ⟨b, hb₀⟩ : ∃ b : GL n (DualNumber (DualNumber k)),
-      b = homMulEquiv n k _ (GrpObj.tangentDel q).1 := ⟨_, rfl⟩
-  have ha : (a : Matrix n n (DualNumber (DualNumber k))) = 1 + GrpObj.eps₂ (k := k) • X := by
-    rw [ha₀, hX]
-    exact coe_homMulEquiv_tangentMap _ _ _ p
-  have hb : (b : Matrix n n (DualNumber (DualNumber k))) = 1 + GrpObj.del₂ (k := k) • Y := by
-    rw [hb₀, hY]
-    exact coe_homMulEquiv_tangentMap _ _ _ q
-  have hai := coe_homMulEquiv_inv a _ (smul_mul_smul_eq_zero _ GrpObj.eps₂_mul_self X) ha
-  have hbi := coe_homMulEquiv_inv b _ (smul_mul_smul_eq_zero _ GrpObj.del₂_mul_self Y) hb
-  have e : homMulEquiv n k _ (⁅GrpObj.tangentEps p, GrpObj.tangentDel q⁆ :
-      GrpObj.pointsKer 𝔾𝕃(n; k) (GrpObj.aug₂ (k := k))).1 = a * b * a⁻¹ * b⁻¹ := by
-    rw [ha₀, hb₀, commutatorElement_def]
-    simp only [Subgroup.coe_mul, Subgroup.coe_inv, map_mul, map_inv]
-  rw [e, Units.val_mul, Units.val_mul, Units.val_mul, ha, hb, hai, hbi,
-    one_add_smul_mul_one_add_smul_mul_one_sub_smul_mul_one_sub_smul _ _ GrpObj.eps₂_mul_self
-      GrpObj.del₂_mul_self X Y, hX, hY] at h
-  have hm : (tangentMatrix n k p).map (algebraMap k (DualNumber (DualNumber k))) *
-        (tangentMatrix n k q).map (algebraMap k _) -
-      (tangentMatrix n k q).map (algebraMap k _) * (tangentMatrix n k p).map (algebraMap k _) =
+  let X := (tangentMatrix n k p).map (algebraMap k (DualNumber (DualNumber k)))
+  let Y := (tangentMatrix n k q).map (algebraMap k (DualNumber (DualNumber k)))
+  let f : GrpObj.pointsKer 𝔾𝕃(n; k) (GrpObj.aug₂ (k := k)) →*
+      GL n (DualNumber (DualNumber k)) :=
+    (homMulEquiv n k (DualNumber (DualNumber k))).toMonoidHom.comp
+      (GrpObj.pointsKer 𝔾𝕃(n; k) (GrpObj.aug₂ (k := k))).subtype
+  have ha : (f (GrpObj.tangentEps p) : Matrix n n (DualNumber (DualNumber k))) =
+      1 + GrpObj.eps₂ • X :=
+    coe_homMulEquiv_tangentMap (π := GrpObj.aug₂) GrpObj.eps₂ GrpObj.eps₂_mul_self
+      GrpObj.aug₂_eps₂ p
+  have hb : (f (GrpObj.tangentDel q) : Matrix n n (DualNumber (DualNumber k))) =
+      1 + GrpObj.del₂ • Y :=
+    coe_homMulEquiv_tangentMap (π := GrpObj.aug₂) GrpObj.del₂ GrpObj.del₂_mul_self
+      GrpObj.aug₂_del₂ q
+  have hc := coe_commutator_of_eq_one_add_smul GrpObj.eps₂ GrpObj.del₂
+    GrpObj.eps₂_mul_self GrpObj.del₂_mul_self (f (GrpObj.tangentEps p))
+    (f (GrpObj.tangentDel q)) X Y ha hb
+  have h := coe_homMulEquiv_tangentMap (π := GrpObj.aug₂) (GrpObj.eps₂ * GrpObj.del₂)
+    GrpObj.eps₂_mul_del₂_mul_self GrpObj.aug₂_eps₂_mul_del₂ (GrpObj.tangentBracket p q)
+  change (f (GrpObj.tangentMul (GrpObj.tangentBracket p q)) :
+    Matrix n n (DualNumber (DualNumber k))) = _ at h
+  rw [GrpObj.tangentMul_tangentBracket, map_commutatorElement, hc, add_right_inj] at h
+  have hm : X * Y - Y * X =
       (tangentMatrix n k p * tangentMatrix n k q - tangentMatrix n k q * tangentMatrix n k p).map
         (algebraMap k (DualNumber (DualNumber k))) := by
-    simp only [← RingHom.mapMatrix_apply, map_sub, map_mul]
-  rw [hm, add_right_inj] at h
+    simp only [X, Y, ← RingHom.mapMatrix_apply, map_sub, map_mul]
+  rw [hm] at h
   ext i j
-  have hij := congrArg (fun M : Matrix n n (DualNumber (DualNumber k)) ↦ (M i j).snd.snd) h
+  have hij := congrArg (fun M : Matrix n n (DualNumber (DualNumber k)) ↦ (M i j).snd.snd) h.symm
   simp only [Matrix.smul_apply, Matrix.map_apply, smul_eq_mul] at hij
   rwa [mul_comm, GrpObj.snd_snd_algebraMap₂_mul_eps₂_mul_del₂, mul_comm,
     GrpObj.snd_snd_algebraMap₂_mul_eps₂_mul_del₂] at hij
