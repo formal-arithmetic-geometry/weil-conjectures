@@ -170,22 +170,34 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
 
 -- Cache the graded tensor instances used by each derived pullback. Reconstructing them
 -- through the monoidal closed structure of module sheaves dominates elaboration below.
-private instance galoisRestrictTensor₄ObjExt (Y : Scheme.{u})
+local instance galoisRestrictTensor₄ObjExt (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P Q S T : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
     GradedObject.HasTensor₄ObjExt P Q S T := by
   infer_instance
 
-private instance galoisRestrictGoodTensor₁₂Tensor (Y : Scheme.{u})
+local instance galoisRestrictGoodTensor₁₂Tensor (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P Q S : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q S := by
   infer_instance
 
-private instance galoisRestrictGoodTensorTensor₂₃ (Y : Scheme.{u})
+local instance galoisRestrictGoodTensorTensor₂₃ (Y : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P Q S : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q S := by
+  infer_instance
+
+local instance galoisRestrictTensorLeftSequential (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := by
+  infer_instance
+
+local instance galoisRestrictTensorRightSequential (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := by
   infer_instance
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
