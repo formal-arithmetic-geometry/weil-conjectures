@@ -334,19 +334,18 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
   let w : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U :=
     ((evalIso l T r n).inv.app (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  run_tac do Lean.logInfo m!"PH302 before hw {← IO.monoMsNow}"
   have hw : HEq w v := by
     dsimp only [w, evalIso]
     exact restrictionInverseSection l T r n (lineModule l (ULift.{u} (Padic l)) c) U v
-  dsimp only [v] at hw
-  run_tac do Lean.logInfo m!"PH302 before ht {← IO.monoMsNow}"
-  have ht := k.line_tensor n U x x' w hx.symm
-    (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
-  run_tac do Lean.logInfo m!"PH302 before hi {← IO.monoMsNow}"
+  have hv : v = SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+      (coefficientSystemMap l (ULift.{u} (Padic l)) T)
+      c.scalar c.rootModule (op (n, U.unop)) x := by
+    dsimp only [v]
+    exact he.trans hu
+  have ht := k.line_tensor n U x x' w hx.symm (hw.trans hv.heq)
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
   dsimp only [w, v, η, x'] at ht hi
-  run_tac do Lean.logInfo m!"PH302 before exact {← IO.monoMsNow}"
   exact congrArg ((cartierProRootMap (diagonalResidue.{u} l n) (l ^ (n + 1))
     (cartierResidue_cast l (n + 1)) (diagonalSurface Y)
     (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n)).hom.app U)
@@ -612,11 +611,9 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     rfl
   have ht := (hi (a.coefficient.hom.hom.app U x)).trans ha
   have hs := siteIntegralGenerator_section (diagonalResidue.{u} l n) T (ULift.up 1)
-  change (((diagonalFiniteForgetIso l n T).inv.app
-      (geoCartierConstant (diagonalResidue.{u} l n) T)).hom.app U)
-    (a.coefficient.hom.hom.app U x) = (siteIntegralGenerator _ T).hom.app U z
-  rw [hs]
-  simpa only [Int.cast_one] using eq_of_heq ht
+  simp only [Int.cast_one] at hs
+  dsimp only [x, x', z, U, T] at ht hs
+  exact (eq_of_heq ht).trans hs.symm
 
 -- Use the same intrinsic abelian-sheaf localization as FiniteChernNormalization.
 @[instance_reducible] private def integralAbDerived (T : Scheme.{u}) :
