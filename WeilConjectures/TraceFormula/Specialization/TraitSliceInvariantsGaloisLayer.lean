@@ -215,16 +215,18 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         ∑ σ : GenericAut k' K ⧸ V, (baseChangeAut hM b hb v hv σ.out).autAction
           (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
   ph112_remaining "PH112 start remaining:"
-  have finish := exists_subgroup_pullbackExchange_of_galois_average
+  have finishModels := exists_subgroup_pullbackExchange_of_galois_average
     (M'' := baseChange hM b hb v hv) (N₁ := baseChangeGaloisLayer hM b hb v hv)
     (N := baseChangeGaloisModel hM b hb v hv) (M := M)
+    (f' := baseChangeSpecialMap hM b hb v hv)
     (G := GenericAut k' K)
     (L := traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
     (Ω := traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
     (Profinite.padicAlgClRingObj ℓ) (baseChangeToGaloisLayer hM b hb v hv)
     ((baseChangeGaloisModel hM b hb v hv).galoisLayerHom (baseChangeGaloisResidue hM b hb v hv)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (baseChangeHom hM b hb v hv) A hM1
+  ph112_remaining "PH112 model specialization"
+  have finish := finishModels (baseChangeHom hM b hb v hv) A hM1
   ph112_remaining "PH112: cartesian comparison accepted; remaining:"
   have hT := IsTraitModelOver.baseChange hM b hb v hv
   have : LocallyOfFiniteType (baseChangeTotalStructure hM b hb v hv) := hT.locallyOfFiniteType
