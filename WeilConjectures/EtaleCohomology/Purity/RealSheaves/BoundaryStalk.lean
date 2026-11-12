@@ -432,6 +432,8 @@ instance : Fact (IsAffineOpen c.W) := ⟨c.isAffineOpen⟩
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
 
+set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level): for a dense open
 `j : U₀ ⟶ C₀` of a smooth curve over a finite field, a boundary point `z` with an affine chart
@@ -466,6 +468,8 @@ lemma boundaryStalkEquiv_apply (hz : z ∉ Set.range j.base)
     (c.boundaryStalkEquiv F hz y).1 = boundarySpecialization j c.point F y :=
   rfl
 
+set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-boundary-stalk-invariants` (Frobenius equivariance): for `σ` in the
 decomposition group of `Q`, the identification `(j_* F)_x̄ ≃ F_η^I` intertwines the action of `σ`
@@ -487,6 +491,8 @@ variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
   [∀ P, MulAction GU ((FiniteEtale.fiber sU).obj P)]
   [PreGaloisCategory.IsFundamentalGroup (FiniteEtale.fiber sU) GU]
 
+set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [Finite K] in
 lemma map_inertiaInvariants_transport :
@@ -510,6 +516,8 @@ lemma map_inertiaInvariants_transport :
     rw [hT, T.apply_symm_apply]
     exact hy ⟨_, σ, hσ, rfl⟩
 
+set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level, representation form):
 the boundary stalk `(j_* F)_x̄` is isomorphic to the invariants, in the stalk `F_{s_U}` with its
@@ -523,6 +531,8 @@ noncomputable def boundaryStalkEquivInvariants (hz : z ∉ Set.range j.base) :
   (c.boundaryStalkEquiv F hz).trans (LinearEquiv.ofSubmodules _ _ _
     (c.map_inertiaInvariants_transport F sU GU))
 
+set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-boundary-stalk-invariants` (Frobenius equivariance, representation form):
 for `σ` in the decomposition group of `Q`, the identification of the boundary stalk with the
