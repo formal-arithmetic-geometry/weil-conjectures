@@ -153,7 +153,6 @@ set_option quotPrecheck false in
 set_option hygiene false in
 local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 
-set_option trace.profiler true in
 -- The representative assembles several large localized and sectionwise comparisons.
 /-- The whole-system reduction mate has an ordinary quotient representative.
 Source: blueprint dual-Tate compatibility Steps 1, 2 and 4; Stacks 03EL, 07A6, 0941.
