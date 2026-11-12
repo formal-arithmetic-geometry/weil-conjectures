@@ -256,6 +256,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_padicAlgCl_of_isNoethe
   have key := N.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso h Ω
     L'.toIntermediateField (Profinite.padicAlgClRingObj ℓ) C (by cast_proofs hstab)
     (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
-  cast_proofs key
+  rcases key with ⟨hkey, r, hr, havg⟩
+  refine ⟨?_, r, ?_, ?_⟩
+  · cast_proofs hkey
+  · cast_proofs hr
+  · cast_proofs havg
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
