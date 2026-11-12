@@ -48,7 +48,6 @@ private lemma comp_eq_comp_of_points {C : Type*} [Category C]
   simp only [← Category.assoc] at hpg hhb ⊢
   rw [hpg, hhb, ← htr]
 
-
 /-- Transporting a point and then a section through a naturality square agrees with
 transporting their composite. The two composition isomorphisms cancel at the point. -/
 private lemma comp_map_eq_of_point_square {A B C D : Type*}
@@ -90,7 +89,7 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y) (Fc : c.FixedLocus)
   (Fb : P.pushforward.FixedLocus)
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The point `T_b = 𝔱 ∘ ũ` of the pushed correspondence is obtained from that of `c` by
 transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
 `T_b = Ri_{b*} τ_h ∘ Rg_* T_c ∘ η_g`. -/
@@ -126,12 +125,9 @@ lemma mate_comp_traceMap_pushforward :
     (lowerStarUpperShriekExchange ℓ P.g_comp_support)
     (by unfold lowerStarUpperShriekExchange; rfl)
     (P.lowerStar_map_supportIso_comp_exchange Fc Fb)
-  have e1 := mate_comp_traceMap_comp_supportIso P.pushforward Fb
-  rw [P.kernelClass_pushforward] at e1
-  simp only [Category.assoc, P.kernelPushforward_comp_evaluationKernel] at e1
-  have e5 := e1.trans e4
-  rw [← cancel_mono Fb.supportIso.hom]
-  simpa only [Category.assoc] using e5
+  rw [← cancel_mono Fb.supportIso.hom, Category.assoc,
+    mate_comp_traceMap_comp_supportIso P.pushforward Fb, P.kernelClass_pushforward]
+  simpa only [Category.assoc, P.kernelPushforward_comp_evaluationKernel] using e4
 
 set_option profiler true in
 /-- **Proper pushforward compatibility of the trace class** (blueprint
