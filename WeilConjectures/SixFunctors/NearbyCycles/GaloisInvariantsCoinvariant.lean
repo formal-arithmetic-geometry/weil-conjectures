@@ -296,6 +296,7 @@ private lemma galoisLayerExchange_factorization
   rw [Functor.map_comp] at hα
   exact hα
 
+omit [IsGalois L Ω] in
 /-- Transport the coinvariant property of a retraction of the derived unit through the
 Galois layer exchange isomorphism. The retraction is independent of the functor `G`. -/
 private lemma coinvariant_pullbackExchange_of_unit
