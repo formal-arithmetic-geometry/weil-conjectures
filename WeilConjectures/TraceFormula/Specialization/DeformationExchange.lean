@@ -234,7 +234,6 @@ private lemma supportCompactSupportExchange_component_identity
       (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) (hc.componentSupport_special_lowerStar_obj_eq k' F j hb
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj
           (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)))
-  dsimp only [Functor.comp_obj, componentSpecialFibreMap] at hF2'
   instantiate_by_match eq_fullSubcategory_hom_to_map [h := hF2'] as hF2map
   have hfsp := hc.componentSpecialLift_comp_d_deformation k' F j hb
   have hL := eqToHom_comp_map_lowerStarComp_inv ℓ (j ≫ F.d) (j ≫ F.d) rfl (diag X)
