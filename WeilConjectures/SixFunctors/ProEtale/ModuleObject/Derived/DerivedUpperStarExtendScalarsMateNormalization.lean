@@ -41,6 +41,17 @@ private theorem derived_unique_fac
     Iso.refl_hom, NatTrans.id_app, Category.comp_id] using
     Functor.leftDerivedNatTrans_app LF LF' c c' W (𝟙 _) K
 
+private theorem Qh_mapHomotopyCategoryCompIso_refl_hom_app
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Preadditive C] [Preadditive D] [Abelian E] [HasDerivedCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    (K : HomotopyCategory C (.up ℤ)) :
+    DerivedCategory.Qh.map
+        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) =
+      𝟙 _ := by
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+  exact DerivedCategory.Qh.map_id _
+
 /-- The specified nonflat derived scalar pullback comparison has the specified restriction mate.
 
 Source: proof step 2 of `lem-sp-original-integral-finite-quotient-mate-transport`, above
@@ -85,8 +96,8 @@ theorem derivedUpperStarExtendScalarsMateNormalization {U V : Scheme.{u}} (h : U
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc]
-  simpa only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    DerivedCategory.Qh.map_id, Category.comp_id, Category.id_comp] using
+  simpa only [Qh_mapHomotopyCategoryCompIso_refl_hom_app,
+    Category.comp_id, Category.id_comp] using
     derivedUpperStarExtendScalarsIso_hom_app_comp_counit a h K
 
 
