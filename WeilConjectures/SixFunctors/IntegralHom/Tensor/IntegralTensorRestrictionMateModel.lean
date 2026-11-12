@@ -1220,16 +1220,19 @@ theorem restrictionTensor_mate_model
   have hTPZ : flat.{u, u} X R (TP.obj Z) :=
     coefficientTotalTensor_isKFlat.{u, u + 1, u} (Scheme.ProEt.topology X) R P Z hP hZ
   trace "PH045: before generic mate"
-  have hh := GenericMate.representative_mate a.tensor m.target.tensor L V adj m.mu
+  have hm := GenericMate.representative_mate a.tensor m.target.tensor L V adj m.mu
     q r F U adj₀ c h P Q Z TP T' e t (b Q) betaZ betaQ
     (a.representative.app (⟨P, hP⟩, ⟨Z, hZ⟩))
-    (a.representative.app (⟨P, hP⟩, ⟨Q, hQ⟩)) (he Z hZ) (he Q hQ)
-    repZ repQ hnZ hnQ hr' ho
-    (MateDerived.unit_compatibility l E X D hl n Z hZ)
-    (MateDerived.unit_compatibility l E X D hl n (TP.obj Z) hTPZ)
+    (a.representative.app (⟨P, hP⟩, ⟨Q, hQ⟩)) (he Z hZ) (he Q hQ) repZ repQ
+  simp only [c, MateDerived.reductionNat_app] at hm
+  have huZ := MateDerived.unit_compatibility l E X D hl n Z hZ
+  have huTPZ := MateDerived.unit_compatibility l E X D hl n (TP.obj Z)
+    hTPZ
+  simp only [MateDerived.reductionNat_app] at huZ huTPZ
+  have hh := hm hnZ hnQ hr' ho huZ huTPZ
   trace "PH045: generic mate complete"
   have hc (K : CochainComplex (scalarReductionSource l E X) ℤ) :
-      V.map (c.app K) ≫ h.hom.app (F.obj K) =
+      V.map (reductionCounit l E X D hl n K) ≫ h.hom.app (F.obj K) =
         sfReductionRepresentativeComparison l E X n K :=
     MateDerived.restrictionComparison_eq l E X D hl n K
   rw [hc Q, hc (TP.obj Q)] at hh
