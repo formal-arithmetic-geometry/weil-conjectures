@@ -25,7 +25,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections.
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
 first paragraph (blueprint: lem-pc-derived-structure-sheaf-hom-hypercohomology).

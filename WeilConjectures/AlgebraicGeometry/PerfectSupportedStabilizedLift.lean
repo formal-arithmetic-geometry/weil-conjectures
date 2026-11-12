@@ -38,7 +38,6 @@ private theorem stabilized_biprod_fst_comparison
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
     Iso.inv_hom_id_assoc, biprod.mapIso_hom, biprod.map_fst_assoc]
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine-cover construction extends one finite stabilization of the given map.
 This records the actual iterated object and its first-projection map.

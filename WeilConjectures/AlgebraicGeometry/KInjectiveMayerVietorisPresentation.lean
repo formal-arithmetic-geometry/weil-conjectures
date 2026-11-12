@@ -71,7 +71,6 @@ private theorem mayerVietoris_map_desc_comparison
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- The injective representative gives a short exact sequence with comparisons of
 its first two arrows to the derived units and the difference of restriction maps.
 Source: Stacks Project, Cohomology, Tag 08BV, construction of the short exact sequence
