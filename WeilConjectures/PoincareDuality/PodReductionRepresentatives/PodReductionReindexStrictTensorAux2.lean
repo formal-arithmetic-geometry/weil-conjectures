@@ -55,6 +55,13 @@ theorem sheafOfModules_natIso_inv_hom_apply {C : Type*} [Category C]
     (s : (F.obj X).val.obj U) : (e.inv.app X).val.app U ((e.hom.app X).val.app U s) = s :=
   sheafOfModules_inv_hom_apply (e.app X) U s
 
+private theorem cochainHom_eq_apply {C : Type*} [Category C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
+    {A B : CochainComplex (SheafOfModules.{u + 1} R) ℤ}
+    {f g : A ⟶ B} (h : f = g) (k : ℤ) (U : Cᵒᵖ) (s : (A.X k).val.obj U) :
+    (f.f k).val.app U s = (g.f k).val.app U s :=
+  congrArg (fun φ ↦ (φ.f k).val.app U s) h
+
 /-- The ordinary unit section is the reduction of `1 ⊗ x`.
 Source: Stacks 06YY. -/
 theorem scalarUnitSection_eq (W : Scheme.{u}) (n : ℕ)
@@ -87,12 +94,11 @@ theorem strictMap_generator (W : Scheme.{u})
         (((pullbackTensorReductionEvaluation l E W n).hom.app (Q.X q)).val.app (op V)
           (unrestrictedIntegralTensorSection l E W n _ (op V) 1 y)) := by
   trace "PH199: proof started"
-  have hc := congrArg (fun φ ↦ (φ.f k).val.app (op V)
+  have hc := cochainHom_eq_apply (tensorReductionStrictMap_component l E W P Q n) k (op V)
     (((pullbackTensorReductionEvaluation l E W n).hom.app _).val.app (op V)
         (unrestrictedIntegralTensorSection l E W n _ (op V) 1
           (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
-            (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y))))
-    (tensorReductionStrictMap_component l E W P Q n)
+            (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y)))
   trace "PH199: component evaluated"
   refine hc.trans ?_
   trace "PH199: component applied"
