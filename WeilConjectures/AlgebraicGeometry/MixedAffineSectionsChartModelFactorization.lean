@@ -103,6 +103,11 @@ theorem exists_mixedAffineSections_chart_model_factorization
       ∀ [F.Additive] [H.Additive] [J.Additive] [E.Additive] [K.Additive]
         (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)
         (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),
+      letI : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive F
+      letI : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive H
+      letI : J.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive J
+      letI : E.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive E
+      letI : K.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive K
       let C := (F.mapHomologicalComplex (.up ℤ)).obj P
       let Q := DerivedCategory.Q.obj C
       ∃ (a : (mixedGlobalExtension g).obj ((schemeDerivedGlobalSections S).obj Q) ≅
