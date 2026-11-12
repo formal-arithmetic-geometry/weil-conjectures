@@ -30,7 +30,8 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 private theorem derivedOpenGluing_additive_of_preservesFiniteLimits
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-    [HasFiniteProducts C] [HasZeroObject C] (F : C ⥤ D) [PreservesFiniteLimits F] :
+    [HasFiniteProducts C] [HasZeroObject C] [HasZeroObject D]
+    (F : C ⥤ D) [PreservesFiniteLimits F] :
     F.Additive :=
   Functor.additive_of_preserves_binary_products _
 
