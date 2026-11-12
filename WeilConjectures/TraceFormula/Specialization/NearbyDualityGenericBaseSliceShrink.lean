@@ -124,6 +124,11 @@ lemma specialIdExchange_square_aux {D : Type*} [Category D]
   rw [← hLIπ, ← hsψ, ← cancel_epi e, Category.assoc, ← reassoc_of% hk₂, ← reassoc_of% hb, hn,
     ha, hk₁, reassoc_of% hnat, Category.assoc]
 
+private lemma map_iso_hom_comp_inv {D E : Type*} [Category D] [Category E]
+    (F : D ⥤ E) {A B C : D} (e : A ≅ B) (f : A ⟶ C) :
+    F.map e.hom ≫ F.map (e.inv ≫ f) = F.map f := by
+  rw [← Functor.map_comp, Iso.hom_inv_id_assoc]
+
 end Abstract
 
 section AmbientShrink
@@ -171,7 +176,8 @@ lemma specialIdExchange_comp_pullbackExchange_square (ψ : N.Hom M c (𝟙 S))
       (N.nearbyCycles Λ).map
         ((leftDerivedUpperStarCompOfEq Λ (rfl : c ≫ j = c ≫ j)).hom.app C) := by
     rw [leftDerivedUpperStarCompOfEq_rfl]
-    rw [← Functor.map_comp, Iso.hom_inv_id_app_assoc]
+    exact map_iso_hom_comp_inv (N.nearbyCycles Λ)
+      ((leftDerivedUpperStarCompOfEq Λ hb).app C) ((leftDerivedUpperStarComp Λ c j).hom.app C)
   have h₃ : L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).hom.app ((P.nearbyCycles Λ).obj C)) ≫
       L((j')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Sc).inv.app ((P.nearbyCycles Λ).obj C)) =
       𝟙 _ :=
