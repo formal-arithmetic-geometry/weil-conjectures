@@ -67,9 +67,15 @@ theorem reduction_map_unitSection (W : Scheme.{u}) (n : ℕ)
 
 private theorem sequenceEvaluation_map_apply (W : Scheme.{u}) (n : ℕ)
     (M : coefficientSequenceModules l E W) {V V' : W.ProEt} (i : V' ⟶ V)
-    (z : M.val.obj (op (n, V))) :
+    (z : ((coefficientSequenceEvaluation l E W n).obj M).val.obj (op V)) :
     ((coefficientSequenceEvaluation l E W n).obj M).val.map i.op z =
       M.val.map (CategoryTheory.Prod.mkHom (𝟙 n) i).op z := rfl
+
+private def sequenceEvaluation_hom_apply (W : Scheme.{u}) (n : ℕ)
+    {M : normalizedDVRModules l E W n} {N : coefficientSequenceModules l E W}
+    (f : M ⟶ (coefficientSequenceEvaluation l E W n).obj N) (V : W.ProEt)
+    (z : M.val.obj (op V)) : N.val.obj (op (n, V)) :=
+  f.val.app (op V) z
 
 set_option profiler true in
 /-- Ordinary reduction is compatible with restriction of reduced unit sections.
@@ -145,7 +151,8 @@ theorem reduction_total_hom_ext_postcompose {X Y : Scheme.{u}} (g : X ⟶ Y) [Is
       (completedIntegralCommRingSheafUnrestricted l E Y)).obj (P, Q)).X k)
   let unitAt (V : Y.ProEt) (z : T.val.obj (op V)) :
       ((pullbackTensorOrdinaryReduction l E Y).obj T).val.obj (op (n, V)) :=
-    ((pullbackTensorReductionEvaluation l E Y n).hom.app T).val.app (op V)
+    sequenceEvaluation_hom_apply l E Y n
+      ((pullbackTensorReductionEvaluation l E Y n).hom.app T) V
       (unrestrictedIntegralTensorSection l E Y n T (op V) 1 z)
   let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
     (completedIntegralCommRingSheafUnrestricted l E Y) P Q p q k hpq
