@@ -123,6 +123,7 @@ private theorem derived_map_surjective
   exact ⟨q,
     (CategoryTheory.RingedDerivedNative.GenericDerived.qHomEquiv_map P I q).symm.trans hg⟩
 
+/-- Signed and unsigned evaluations agree after the prescribed tensor exchange. -/
 private theorem signed_evaluation_comp_exchange
     (P Q I : CochainComplex (Modules.{t, u} Y R) ℤ)
     (s : (coefficientTotalTensor.{u, t + 1, t}
@@ -178,7 +179,6 @@ private theorem signed_evaluation_comp_exchange
     _ = _ := by rw [hs i j (i + j) rfl (add_comm j i) U x y]
 
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] totalPair pair projection evaluate in
