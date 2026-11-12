@@ -70,6 +70,7 @@ private theorem reflect_factored_square {C D : Type*} [Category C] [Category D]
     _ = F.map (mi ≫ r) := (F.map_comp _ _).symm
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The component formulas compare cached finite-stage and native presentations.
 /-- The integral finite-Tor numerator calculation underlying the generator transition.
 Source: Proposition 6.8.14 and Remark 6.8.15, the integral numerator calculation.
