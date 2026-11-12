@@ -225,7 +225,6 @@ private theorem unionChain_of_rows
         e₃.hom ≫ jUV.hom.left ≫ aUV.hom
     rw [← jUV.hom.w]
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible chain models before the short exact cylinder construction.
