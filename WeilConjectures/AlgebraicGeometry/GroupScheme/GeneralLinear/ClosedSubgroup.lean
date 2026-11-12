@@ -331,12 +331,12 @@ theorem containsCommutators_subgroupSchemeHom
   set y := (zeroLocusMulEquiv I R).symm b'
   have hmem : ((x * y * x⁻¹ * y⁻¹ : zeroLocus I R) : GL n R) ∈ zeroLocus J R := by
     apply hIJ R
-    have := Subgroup.commutator_mem_commutator x.2 y.2
-    simpa [commutatorElement_def] using this
+    exact Subgroup.commutator_mem_commutator x.2 y.2
   refine ⟨t ≫ zeroLocusMulEquiv J R ⟨_, hmem⟩, ?_⟩
   rw [Category.assoc, zeroLocusMulEquiv_comp_subgroupSchemeHom,
     show (⟨_, zeroLocus_le_zeroLocus h R hmem⟩ : zeroLocus I R) = x * y * x⁻¹ * y⁻¹ from rfl,
-    map_mul, map_mul, map_mul, map_inv, map_inv, MulEquiv.apply_symm_apply,
+    ← commutatorElement_def, map_commutatorElement, commutatorElement_def,
+    MulEquiv.apply_symm_apply,
     MulEquiv.apply_symm_apply, MonObj.comp_mul, MonObj.comp_mul, MonObj.comp_mul,
     GrpObj.comp_inv, GrpObj.comp_inv]
 
@@ -490,14 +490,15 @@ Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where the
 `derivedIdeal I`, hence those of their sum. (blueprint: `sk-i-restriction`) -/
 instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
   refine ⟨fun {X} a b ↦ ?_⟩
+  let : Group (X ⟶ subgroupScheme I) := Hom.group
   obtain ⟨R, _, _, t, ht⟩ := Over.exists_bijective_comp_toSpecΓ X
   let : Group ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) := Hom.group
   obtain ⟨a', rfl⟩ := (ht _).2 a
   obtain ⟨b', rfl⟩ := (ht _).2 b
-  have hγ : (t ≫ a') * (t ≫ b') * (t ≫ a')⁻¹ * (t ≫ b')⁻¹ =
-      t ≫ (a' * b' * a'⁻¹ * b'⁻¹) := by
-    rw [MonObj.comp_mul, MonObj.comp_mul, MonObj.comp_mul, GrpObj.comp_inv, GrpObj.comp_inv]
-  obtain ⟨ψ, hψ⟩ := Spec.mapMulEquiv.surjective (a' * b' * a'⁻¹ * b'⁻¹)
+  have hγ : ⁅t ≫ a', t ≫ b'⁆ =
+      t ≫ ⁅a', b'⁆ := by
+    simp only [commutatorElement_def, MonObj.comp_mul, GrpObj.comp_inv]
+  obtain ⟨ψ, hψ⟩ := Spec.mapMulEquiv.surjective ⁅a', b'⁆
   obtain ⟨ψ, rfl⟩ : ∃ ψ₀, toConv ψ₀ = ψ := ⟨_, toConv_ofConv ψ⟩
   have hkill (J : Ideal (CoordinateRing n k)) [J.IsHopfIdeal k] (hIJ : I ≤ J)
       (hc : IsMonHom.ContainsCommutators (subgroupSchemeHom hIJ)) :
@@ -506,7 +507,7 @@ instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) 
     obtain ⟨c, hc'⟩ := hc.exists_comp_eq_commutator (t ≫ a') (t ≫ b')
     obtain ⟨c', rfl⟩ := (ht _).2 c
     obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective c'
-    have e : Spec.mapMulEquiv χ ≫ subgroupSchemeHom hIJ = a' * b' * a'⁻¹ * b'⁻¹ :=
+    have e : Spec.mapMulEquiv χ ≫ subgroupSchemeHom hIJ = ⁅a', b'⁆ :=
       (ht _).1 (by
         beta_reduce at hc' ⊢
         rw [← Category.assoc, hc', hγ])
