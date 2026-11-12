@@ -147,9 +147,9 @@ theorem isIso_lowerStar_kunnethMap_finiteCoefficient (hM : M.IsTraitModelOver qM
   have hχN := hN.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient T _ hB
   have hχP := hP.isIso_pushforwardExchange_toTraitGeneric_app_finiteCoefficient T _ hAB
   refine isIso_lowerStar_kunnethMap_of_isIso 𝐓 hM hN hpb hP hgen A B ?_ ?_ ?_ hκs hκΩ hT
-  · exact_mod_proofs hχM
-  · exact_mod_proofs hχN
-  · exact_mod_proofs hχP
+  · cast_proofs hχM
+  · cast_proofs hχN
+  · cast_proofs hχP
 
 end Global
 
