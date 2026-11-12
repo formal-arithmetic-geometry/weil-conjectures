@@ -27,6 +27,7 @@ attribute [local instance 2000] schemeMVModuleAbelian
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh RingedSpace.moduleDirectImage
 
+set_option maxHeartbeats 900000 in
 set_option profiler true in
 set_option trace.profiler true in
 -- The middle-vertex type contains fixed complex and derived functor comparisons.
