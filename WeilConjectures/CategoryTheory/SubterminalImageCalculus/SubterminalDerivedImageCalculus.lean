@@ -157,8 +157,7 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Additivity of the composite restriction functor is found by a deep search.
+set_option profiler true in
 /-- The sectionwise identity for iterated restriction, on complexes.
 Source: Stacks 03DH (blueprint: lem-sp-subterminal-derived-image-calculus). -/
 def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
