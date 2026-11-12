@@ -355,6 +355,7 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
     (Q := (podReindexingComplexFunctor l E (h ≫ g) s).obj L)
     (n := n)
     (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
+  intro p q hpq U x y
   sorry
 
 set_option maxHeartbeats 8000000 in
