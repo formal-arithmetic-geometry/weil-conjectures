@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.Integral.IntegralReductionTensorStr
 import Mathlib.CategoryTheory.Monoidal.Functor
 import all WeilConjectures.SixFunctors.Coefficient.Finite.CoefficientFiniteTensorMonoidal
 import all WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
-import all WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterEvaluation
 
 /-! # Associativity of the normalized reduction tensor strength
 
@@ -200,6 +199,21 @@ private theorem nativeIso_representative
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Iso.hom_inv_id_app_assoc]
   all_goals rfl
 
+private theorem nativeReductionPair_eq_generator
+    (Y : AlgebraicGeometry.Scheme.{t})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)}]
+    [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)}]
+    (P Q : CochainComplex (Modules.{t, u} Y R) ℤ) (i j : ℤ)
+    (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
+    totalPair.{t, u} Y R P Q i j U x y = coefficientTensorGenerator.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j (i + j) rfl U x y := by
+  simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
+    CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  rfl
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
@@ -228,12 +242,20 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
+    integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence,
+    completedIntegralCommRingProjection, completedIntegralCommRingSheaf] at *
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
     have hh := reduction_iso_inv_section_of_hom_section (asIso beta) (i + j) U _ _
       (hbeta i j U x y)
-    simp only [totalPair_eq_coefficientTensorGenerator] at hh
+    simp only [nativeReductionPair_eq_generator] at hh
     dsimp only [coefficientIntegralScalarUnitSection, coefficientRestrictionSection,
       coefficientOrdinaryScalarAdjunction, reductionUnit] at hh ⊢
     dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
@@ -325,10 +347,13 @@ private theorem nativeReductionMonoidal
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
+      run_tac Lean.logInfo "PH324: before normalization"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
       let := hbeta
+      run_tac Lean.logInfo "PH324: before normalizedBeta_eq"
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      run_tac Lean.logInfo "PH324: before representative square"
       refine ⟨hEP, hEQ, ?_⟩
       have hrepR := nativeIso_representative Y R a P Q hP hQ
       have hrepS := nativeIso_representative Y S m.target _ _ hEP hEQ
@@ -354,6 +379,7 @@ private theorem nativeReductionMonoidal
         dsimp only [cS]
         rw [hTS']
         exact hrepS.symm
+      run_tac Lean.logInfo "PH324: before cancellation"
       have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
           𝟙 _ := by
         rw [← Functor.map_comp]
