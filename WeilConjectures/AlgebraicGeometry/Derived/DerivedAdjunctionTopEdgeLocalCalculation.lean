@@ -56,7 +56,6 @@ private theorem paste_naturality_squares
     f ≫ (q ≫ b) = (p ≫ a) ≫ k := by
   rw [← Category.assoc, h₁, Category.assoc, h₂, ← Category.assoc]
 
-set_option profiler true in
 private theorem truncatedCounit_naturality {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) {K K' : schemeDerivedCategory T} (k : K ⟶ K') :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

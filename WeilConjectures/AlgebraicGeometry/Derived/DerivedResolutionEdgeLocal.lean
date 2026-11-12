@@ -294,17 +294,18 @@ theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ
     change F.map (d.hom ≫ ShortComplex.leftExactHomologyEdge D (I.sc q) ≫
       D.map c.inv) = _
     simp only [Functor.map_comp]
-  have hp := paste_edges (C := (Opens S)ᵒᵖ ⥤ AddCommGrpCat.{u}) l.hom b.hom m
-    (RingedSpace.topEdgeLocalClass S.toRingedSpace q ((schemeDerivedDirectImage g).obj K))
-    (F.map d.hom) (ShortComplex.leftExactHomologyEdge F (J.sc q))
-    (F.map (ShortComplex.leftExactHomologyEdge D (I.sc q))) (F.map (D.map c.inv))
-    (W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)))
-    (W.map (a.inv ≫ RingedSpace.topEdgeLocalClass T.toRingedSpace q K)) ht hs hw
   have h : RingedSpace.topEdgeLocalClass S.toRingedSpace q
         ((schemeDerivedDirectImage g).obj K) ≫ F.map (resolutionLocalClassEdge g q K) =
       l.hom ≫ RingedSpace.topEdgeInverseLocalClass f q K := by
-    exact (congrArg (fun z ↦ RingedSpace.topEdgeLocalClass S.toRingedSpace q
-      ((schemeDerivedDirectImage g).obj K) ≫ z) hr).trans hp
+    rw [hr]
+    change RingedSpace.topEdgeLocalClass S.toRingedSpace q
+        ((schemeDerivedDirectImage g).obj K) ≫ F.map d.hom ≫
+          F.map (ShortComplex.leftExactHomologyEdge D (I.sc q)) ≫ F.map (D.map c.inv) =
+      l.hom ≫ b.hom ≫ m ≫
+        W.map (a.inv ≫ RingedSpace.topEdgeLocalClass T.toRingedSpace q K)
+    rw [← Category.assoc _ (F.map d.hom), ht]
+    simp only [Category.assoc]
+    rw [reassoc_of% hs, hw]
   exact NatTrans.congr_app h V
 
 end AlgebraicGeometry
