@@ -28,31 +28,31 @@ namespace AlgebraicGeometry
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-private theorem derivedOpenGluing_overFunctor_additive (X : Scheme.{u}) (U : X.Opens) :
-    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).Additive := by
+private theorem derivedOpenGluing_overFunctor_additive
+    {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (U : C) :
+    (SheafOfModules.overFunctor.{u} R U).Additive := by
   constructor
   intro M N f g
   ext W x
   rfl
 
-private theorem derivedOpenGluing_overMap_additive (X : Scheme.{u})
-    {U V : X.Opens} (i : U ⟶ V) :
-    (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).Additive := by
+private theorem derivedOpenGluing_overMap_additive
+    {C : Type*} [Category C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
+    {U V : C} (i : U ⟶ V) :
+    (SheafOfModules.overMap.{u} R i).Additive := by
   constructor
   intro M N f g
   ext W x
   rfl
 
-private theorem derivedOpenGluing_overEquiv_additive (X : Scheme.{u}) (U : X.Opens) :
-    (Equivalence.functor
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      (Scheme.Modules.overEquiv U)).Additive :=
+private theorem derivedOpenGluing_equivalence_additive
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] (e : C ≌ D) :
+    e.functor.Additive :=
   Functor.additive_of_preserves_binary_products _
 
 -- Infer additivity componentwise, without searching for products of composite functors.
 attribute [local instance] derivedOpenGluing_overFunctor_additive
-  derivedOpenGluing_overMap_additive derivedOpenGluing_overEquiv_additive
+  derivedOpenGluing_overMap_additive derivedOpenGluing_equivalence_additive
 
 private theorem compatible_composites
     {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
