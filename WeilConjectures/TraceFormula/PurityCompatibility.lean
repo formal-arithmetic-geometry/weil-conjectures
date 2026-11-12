@@ -153,7 +153,7 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
     congr 1
     simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
   unfold exceptionalKunnethMap exceptionalKunnethAdjoint upperShriekUnitTensorMap
-  exact exceptionalKunnethMap_factorization_aux
+  have h := exceptionalKunnethMap_factorization_aux
     (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)) M
     ((boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M)
@@ -169,6 +169,7 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
     ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
       ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
     (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv hx
+  exact h
 
 /-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
 `Y` be smooth over `k`. The exceptional Künneth map
