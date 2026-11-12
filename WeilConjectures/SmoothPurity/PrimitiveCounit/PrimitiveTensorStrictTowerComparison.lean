@@ -209,7 +209,6 @@ private theorem restricted_transition_section (W : Scheme.{t})
     (integralComparisonRestrictedSectionType l E W M m U)
     (integralComparisonRestrictedSectionType l E W M n U) hf' hx).trans hy.symm)
 
-set_option profiler true in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem reduction_step
     (S : CoefficientDerivedSystemReduction l E W)
@@ -254,7 +253,6 @@ private theorem reduction_step
     (e (n+1)) (e n) _ _ _ _ (ha (n+1)) (ha n) (finite_unit_step l E W P.obj n i)
     (limit.w I (homOfLE (Nat.le_succ n)).op)
 
-set_option profiler true in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem reduction_section_step
     (S : CoefficientDerivedSystemReduction l E W)
@@ -270,9 +268,6 @@ private theorem reduction_section_step
       ((((M.evaluation (n+1)).hom.app P).f k).val.app U
         (coefficientEvaluationSection l E W ((M.complexes.obj P).X k) (n+1) U x)) := by
   let C := M.complexes.obj P
-  let a (j : ℕ) := restrictEvaluation l E W C j ≪≫
-    ((scalarReductionRestriction l E W j).mapHomologicalComplex (.up ℤ)).mapIso
-      ((M.evaluation j).app P)
   have hh := congrArg (fun z ↦ (z.f k).val.app U
     (integralComparisonRestrictedSection l E W (C.X k) (n+1) U x))
       (reduction_step l E W S M P n)
@@ -292,6 +287,7 @@ private theorem reduction_section_step
         ((((eqToIso (coefficientSequenceRestriction_evaluation l E W (n+1))).hom.app
           (C.X k)).val.app U)
           (integralComparisonRestrictedSection l E W (C.X k) (n+1) U x))) at hh
+  -- Compose section equalities without rewriting inside the full complex comparison.
   have hleft := congrArg (fun z ↦ (((M.evaluation n).hom.app P).f k).val.app U z) hen
   have hstep := congrArg (fun z ↦ (((M.evaluation n).hom.app P).f k).val.app U
     ((((eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app
@@ -489,7 +485,6 @@ private theorem cochainIso_inv_section
   (congrArg (fun z ↦ (e.inv.f k).val.app U z) h).symm.trans
     (congrArg (fun z : P ⟶ P ↦ (z.f k).val.app U x) e.hom_inv_id)
 
-set_option profiler true in
 -- Normalize the coefficient functor and complex instances within this declaration.
 private theorem tensorLevel_transition
     (S : CoefficientDerivedSystemReduction l E W)
