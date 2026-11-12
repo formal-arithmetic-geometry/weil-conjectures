@@ -109,8 +109,8 @@ noncomputable local instance boundaryIdealMulSemiringActionConstruction {W : C.O
     AlgEquiv.smulCommClass_of_isScalarTower Γ(C, W) C.functionField Ω
   infer_instance
 
-noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens}
-    [Algebra Γ(C, W) Ω] :
+noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens} [Nonempty W]
+    [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] :
     MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
   Ideal.pointwiseDistribMulAction.toMulAction
 
