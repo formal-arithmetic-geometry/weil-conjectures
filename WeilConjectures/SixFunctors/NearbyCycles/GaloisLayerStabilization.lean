@@ -227,7 +227,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     ∃ r, ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) =
         ∑ τ, (N.galoisLayerAut h Ω (lift τ)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
-  have := hstab
   have : Normal L L' := inferInstance
   constructor
   · intro σ hσ
@@ -246,11 +245,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
     have hx := (N.galoisLayerRestrict h Ω L').pullbackExchange_comp_app_of_eq Λ
       (N.galoisLayerHom h L') (N.galoisLayerHom h Ω) (Category.id_comp (𝟙 X))
       (Category.id_comp (𝟙 X')) (by simp) (N.galoisLayerRestrict_generic_comp h Ω L') C
-    exact retraction_of_comp_of_isIso_aux ((N.galoisLayerHom h Ω).pullbackExchange Λ)
+    exact @retraction_of_comp_of_isIso_aux
+      _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+      ((N.galoisLayerHom h Ω).pullbackExchange Λ)
       ((N.galoisLayerHom h L').pullbackExchange Λ)
       ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
       (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
-      (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx r hr Finset.univ _
+      (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab r hr _ Finset.univ _
       (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C))
       (fun τ C' ↦ (N.galoisLayerAut h Ω (lift τ)).autAction Λ C')
       (fun τ _ _ g ↦ Hom.autAction_naturality Λ _ g) havg
