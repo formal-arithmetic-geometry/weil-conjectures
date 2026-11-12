@@ -112,7 +112,7 @@ theorem class_pushforward_core :
   refine congrArg (· ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.app _) ?_
   simp only [Category.assoc, Functor.map_comp, leftProjectionNatTrans, curriedTensor_map_app,
     curriedTensor_obj_obj]
-  conv_rhs => rw [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
+  conv_rhs => simp only [Functor.map_map_comp_map_map_assoc_of_eq (boundedConstructibleLowerShriek ℓ P.f)
     (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ X ⟶ X))
     (Verdier.leftProjection_naturality_left
         (boundedConstructibleExceptionalProjection ℓ c.support)
@@ -123,7 +123,7 @@ theorem class_pushforward_core :
         ((boundedConstructibleUpperStar _ ℓ (prod.map P.f P.f)).obj
           ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff)) (𝟙_ _))
   simp only [Functor.comp_map] at hsq
-  conv_rhs => rw [← reassoc_of% hsq]
+  conv_rhs => simp only [← reassoc_of% hsq]
   have hc := leftProjection_lowerShriek_comp ℓ c.support (prod.map P.f P.f)
     ((boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff) (𝟙_ _)
   have h₃ : (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ Y ⟶ Y)).obj P.coeff ◁
@@ -143,11 +143,12 @@ theorem class_pushforward_core :
         ((boundedConstructibleUpperStarComp _ ℓ c.support (prod.map P.f P.f)).hom.app _ ▷ _) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
           (prod.map P.f P.f)).hom.app _ := by
-    rewrite [reassoc_of% hc]
-    simp
-  conv_rhs => rw [Functor.map_comp₃_assoc_of_eq
+    simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using
+      (congrArg (· ≫ (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.support
+        (prod.map P.f P.f)).hom.app _) hc).symm
+  conv_rhs => simp only [Functor.map_comp₃_assoc_of_eq
     (boundedConstructibleLowerShriek ℓ (prod.fst : Y ⨯ Y ⟶ Y)) h₃]
-  conv_rhs => rw [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support
+  conv_rhs => simp only [map_leftProjection_lowerShriek_comp_unit ℓ P.g P.pushforward.support
       P.g_comp_support]
   refine whisker_eq _ (whisker_eq _ ?_)
   unfold pushforwardCoeffUnit
