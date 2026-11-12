@@ -43,23 +43,6 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
--- Share the graded tensor existence proofs used in each derived pullback. Reconstructing these
--- colimit-preservation instances for every occurrence of `L((f)^*⟦Λ⟧)` is expensive.
-private theorem kunnethHasTensor₄ObjExt (W : Scheme.{u})
-    (K L M N : GradedObject ℤ (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj Λ W))) : GradedObject.HasTensor₄ObjExt K L M N := inferInstance
-
-private theorem kunnethHasGoodTensor₁₂Tensor (W : Scheme.{u})
-    (K L M : GradedObject ℤ (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj Λ W))) : GradedObject.HasGoodTensor₁₂Tensor K L M := inferInstance
-
-private theorem kunnethHasGoodTensorTensor₂₃ (W : Scheme.{u})
-    (K L M : GradedObject ℤ (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj Λ W))) : GradedObject.HasGoodTensorTensor₂₃ K L M := inferInstance
-
-attribute [local instance] kunnethHasTensor₄ObjExt kunnethHasGoodTensor₁₂Tensor
-  kunnethHasGoodTensorTensor₂₃
-
 /-- The comultiplication of `L(𝟙 W)^*` is compatible with the identity isomorphism
 `L(𝟙 W)^* ≅ 𝟭`. -/
 lemma δ_leftDerivedUpperStarId (W : Scheme.{u})
@@ -211,24 +194,15 @@ lemma kunnethMap_autAction (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f�
   have h := map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁ φ₂ σM σN σP htot₁.symm hgen₁.symm
     htot₂.symm hgen₂.symm hb₁ hs₁ hb₂ hs₂ A B
   have key := kunnethMap_autAction_aux (leftDerivedUpperStarId Λ Z') (P.nearbyCycles Λ)
-    (kunnethMap Λ φ₁ φ₂ A B)
-    (kunnethMap Λ φ₁ φ₂ (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B))
-    (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
-      L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B))
-    (L((f₁')^*⟦Λ⟧).map ((M.nearbyCycles Λ).map ((leftDerivedUpperStarId Λ X).hom.app A)))
-    (L((f₂')^*⟦Λ⟧).map ((N.nearbyCycles Λ).map ((leftDerivedUpperStarId Λ Y).hom.app B)))
-    (kunnethMap_comp_map_tensorHom Λ φ₁ φ₂ _ _)
-    ((σP.pullbackExchange Λ).app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) _ _
-    (δ_comp_pullbackSquareComparison_id Λ hb₁ hb₂ A B)
-    (Functor.OplaxMonoidal.δ L((𝟙 Z')^*⟦Λ⟧) _ _) (δ_leftDerivedUpperStarId Λ Z' _ _)
-    _ _ (L((f₁')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X').inv.app ((M.nearbyCycles Λ).obj A)))
-    (pullbackSquareComparison_id_hom_app_comp_map Λ f₁' hs₁ _)
-    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₁' _)
-    (L((f₁')^*⟦Λ⟧).map ((σM.pullbackExchange Λ).app A))
-    _ _ (L((f₂')^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y').inv.app ((N.nearbyCycles Λ).obj B)))
-    (pullbackSquareComparison_id_hom_app_comp_map Λ f₂' hs₂ _)
-    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₂' _)
-    (L((f₂')^*⟦Λ⟧).map ((σN.pullbackExchange Λ).app B)) h
+    _ _ _ _ _
+    (kunnethMap_comp_map_tensorHom Λ φ₁ φ₂
+      ((leftDerivedUpperStarId Λ X).hom.app A) ((leftDerivedUpperStarId Λ Y).hom.app B))
+    _ _ _ (δ_comp_pullbackSquareComparison_id Λ hb₁ hb₂ A B)
+    _ (δ_leftDerivedUpperStarId Λ Z' _ _)
+    _ _ _ (pullbackSquareComparison_id_hom_app_comp_map Λ f₁' hs₁ _)
+    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₁' _) _
+    _ _ _ (pullbackSquareComparison_id_hom_app_comp_map Λ f₂' hs₂ _)
+    (map_leftDerivedUpperStarId_hom_comp_map_inv Λ f₂' _) _ h
   simp only [Hom.autAction, CategoryTheory.Functor.map_comp]
   exact key
 
