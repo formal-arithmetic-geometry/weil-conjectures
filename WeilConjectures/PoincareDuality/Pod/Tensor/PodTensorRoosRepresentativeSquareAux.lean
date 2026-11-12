@@ -392,11 +392,12 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
   have cancelTower := cancel' _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
-  have finish := cancelTower hs
-    ((integralCompletedTensor l E X).map
-      (Prod.mkHom
-        ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
-        ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))))
+  have cancelHs := cancelTower hs
+  trace "normalization supplied"
+  let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
+  let fQ := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)
+  dsimp only [podOrdinaryReindex] at fP fQ
+  have finish := cancelHs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
   have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
   dsimp only [podReindexingTensorFrame, podOrdinaryReindex] at hc
   exact finish.trans hc
