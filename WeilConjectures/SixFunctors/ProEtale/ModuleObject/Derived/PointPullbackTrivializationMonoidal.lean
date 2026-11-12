@@ -70,6 +70,8 @@ private theorem mapModComp_monoidal (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
   letI : (F.mapMod R).Monoidal := Functor.monoidal_mapMod F
   letI : (G.mapMod (F.obj R)).Monoidal := Functor.monoidal_mapMod G
   letI : (H.mapMod R).Monoidal := Functor.monoidal_mapMod H
+  letI : (F.mapMod R ⋙ G.mapMod (F.obj R)).Monoidal :=
+    Functor.Monoidal.instComp _ _
   apply NatTrans.IsMonoidal.of_isIso_of_δ
   intro M N
   apply Mod.hom_ext
@@ -107,6 +109,8 @@ private theorem comap_unit_monoidal [MonoidalClosed C] [HasEqualizers C]
   letI : (Mod.comap φ : Mod C S ⥤ Mod C R).Monoidal := Mod.monoidal_comap φ
   letI : (Mod.comap (asIso φ).inv : Mod C R ⥤ Mod C S).Monoidal :=
     Mod.monoidal_comap (asIso φ).inv
+  letI : (Mod.comap φ ⋙ Mod.comap (asIso φ).inv).Monoidal :=
+    Functor.Monoidal.instComp _ _
   apply NatTrans.IsMonoidal.of_isIso_of_δ
   intro M N
   apply Mod.hom_ext
@@ -146,6 +150,11 @@ private theorem mapModCompExtend_monoidal [MonoidalClosed E] [HasEqualizers E]
   letI : (Mod.extendScalars (Functor.compAlgHom F G τ R)).Monoidal :=
     Mod.monoidal_extendScalars (Functor.compAlgHom F G τ R)
   letI : (H.mapMod R).Monoidal := Functor.monoidal_mapMod H
+  letI : (F.mapMod R ⋙ G.mapMod (F.obj R)).Monoidal :=
+    Functor.Monoidal.instComp _ _
+  letI : (F.mapMod R ⋙ G.mapMod (F.obj R) ⋙
+      Mod.extendScalars (Functor.compAlgHom F G τ R)).Monoidal :=
+    Functor.Monoidal.instComp _ _
   have := mapModComp_monoidal F G H τ R
   have := extend_comap_monoidal (Functor.compAlgHom F G τ R)
   have := comap_unit_monoidal (Functor.compAlgHom F G τ R)
