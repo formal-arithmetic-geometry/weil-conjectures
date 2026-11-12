@@ -186,7 +186,7 @@ private theorem localBoundaryLinearEquiv_frobenius
         (M.frobenius x) (Q.frobenius y) =
       q * (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x y := by
   simp only [LinearEquiv.trans_apply]
-  rw [hΨ x, map_smul, S.map_frobenius]
+  rw [hΨ, map_smul, S.map_frobenius]
   erw [LinearEquiv.dualMap_apply]
   rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
     FrobeniusModule.Equiv.symm_map_frobenius ψ y, LinearEquiv.coe_coe,
@@ -356,10 +356,17 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
       rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
   have hqd : q ^ d = ((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l) := by
     simp [Scheme.Hom.residueCard, q, d]
+  have hΨN : Ψ.toLinearEquiv ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a) =
+      (q ^ d) • (((H.dual hH).stalk zf).rescale
+        (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
+          (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius
+        (Ψ.toLinearEquiv a) := by
+    rw [FrobeniusModule.frobeniusEnd_rescale_apply (by rw [hone]; exact one_ne_zero)]
+    exact hΨ'
   rw [← hqd]
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
     (F.dual hF)).stalk s) Ψ.toLinearEquiv
-    S₅' ψ (q ^ d) a (by simpa [hone] using hΨ') b
+    S₅' ψ (q ^ d) a hΨN b
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 set_option profiler true in
