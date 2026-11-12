@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.Native.Projection.NativeTotalSquareState
 public import WeilConjectures.Algebra.Homology.Monoidal.MapCochainComplexCoherence
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 
 /-! # The totalized native pullback tensor square -/
 
@@ -122,11 +123,9 @@ lemma projection_totalTensorSquare_of_sheaf
     (F := (nativeTensorBifunctor k₀ l Y).flip)
   intro p q hpq
   simp only [Functor.comp_map L (condensedRealization k₀ l Z)]
-  have hpull := hmu P T p q n hpq
-  have hpull' := (condensedRealization k₀ l Z).congr_map hpull
-  dsimp only [nativeOpenTensorInsertion] at hpull'
-  simp only [Functor.map_comp, Iso.app_hom, Functor.comp_obj,
-    Functor.prod_obj, Functor.uncurry_obj_obj] at hpull'
+  have hpull' := Functor.map_comp_map_eq_map_comp_map (condensedRealization k₀ l Z)
+    (hmu P T p q n hpq)
+  dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hpull'
   have hnZ := condensedRealizationTotalTensorIso_summand k₀ l Z
     ((L.mapHomologicalComplex (.up ℤ)).obj P)
     ((L.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
@@ -136,13 +135,15 @@ lemma projection_totalTensorSquare_of_sheaf
   have hn := a.inv.naturality
     (nativeOpenTensorInsertion k₀ l Y P T p q n hpq)
   dsimp only [nativeOpenTensorInsertion] at hn
-  simp only [Functor.comp_map L (condensedRealization k₀ l Z),
+  dsimp only [Functor.comp_map L (condensedRealization k₀ l Z),
     Functor.comp_map (condensedRealization k₀ l Y) R] at hn
   have hnY := condensedRealizationTotalTensorIso_summand k₀ l Y P T p q n hpq
   dsimp only [nativeOpenTensorInsertion, Iso.app_hom] at hnY
-  refine tensorSquare_paste_summand hpull' hnZ ?_ hs hn ?_ ?_
-  · erw [CochainComplex.ιTensorObj_tensorHom_f, hcomp P p, hcomp T q]
-  · simpa only [Functor.map_comp] using R.congr_map hnY
-  · exact Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f R _ _ p q n hpq
+  have hy := Functor.map_comp_map_eq_map_comp_map R hnY
+  have hd := Functor.map_ιTensorObj_mapCochainComplexμIso_inv_f R
+    (((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)).obj P)
+    (((condensedRealization k₀ l Y).mapHomologicalComplex (.up ℤ)).obj T) p q n hpq
+  refine tensorSquare_paste_summand hpull' hnZ ?_ hs hn hy hd
+  erw [CochainComplex.ιTensorObj_tensorHom_f, hcomp P p, hcomp T q]
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

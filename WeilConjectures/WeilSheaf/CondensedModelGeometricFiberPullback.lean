@@ -273,7 +273,6 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
   rfl
 
-set_option profiler true in
 /-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
 adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
 lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
