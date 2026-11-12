@@ -135,79 +135,12 @@ private theorem brown_underlying_cube
     (A.rightUnderlying m) (A.rightUnderlying n) (A.restrictInverse h)
     (A.levelTranspose m) (A.levelTranspose n) (A.restrictInverseUnderlying h) M
 
-private def brown_underlying_localization_coherence
-    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
-    (P : StrictEtaleEvaluation W O t)
-    (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
-  letI := R.ordinaryAdditive
-  ∀ {m n : ℕ} (h : m ≤ n) (K : CochainComplex (strictEtaleLevel W O t m) ℤ),
-    (R.restriction h).hom.app (DerivedCategory.Q.obj K) ≫
-      (Sheaf.derivedRestrictScalars W.smallEtaleTopology
-        (strictEtaleBrownRingMap O t h)).map ((R.factors m).hom.app K) ≫
-      (Sheaf.restrictScalars W.smallEtaleTopology
-        (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors.hom.app
-          (((strictEtaleBrownConstant O t W m).mapHomologicalComplex (.up ℤ)).obj K) =
-    (R.derived n).map ((P.scalar h).restrictionFactors.hom.app K) ≫
-      (R.factors n).hom.app
-        (((coefficientRestriction (J := W.smallEtaleTopology) O t h).mapHomologicalComplex
-          (.up ℤ)).obj K) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex (R.ordinaryRestriction h) (.up ℤ)).hom.app K)
-
-private def brown_underlying_scalar_coherence
-    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
-    (P : StrictEtaleEvaluation W O t)
-    (R : StrictEtaleBrownRealizationData O t W P) : Prop :=
-  ∀ {m n : ℕ} (h : m ≤ n),
-    (mateEquiv (P.scalar h).derivedAdj
-      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology
-        (strictEtaleBrownRingMap O t h)))
-      (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom
-
 set_option profiler true in
 private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
-    (R : StrictEtaleBrownRealizationData O t W P)
-    (hR : StrictEtaleBrownRealizationCoherence O t W P R) :
-    ∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
-      (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x := by
-  have hR' : (∀ {m n : ℕ} (h : m ≤ n) (M : strictEtaleLevel W O t m)
-      (U : W.Etaleᵒᵖ) (x : M.val.obj U),
-      HEq (((R.ordinaryRestriction h).hom.app M).hom.app U x) x) ∧
-      brown_underlying_localization_coherence O t W P R ∧
-      brown_underlying_scalar_coherence O t W P R := hR
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let a ← Lean.Meta.getLocalDeclFromUserName `hR
-    let b ← Lean.Meta.getLocalDeclFromUserName `hR'
-    let mut pending := #[(a.type, b.type)]
-    let mut count := 0
-    for _ in [:2000] do
-      if pending.isEmpty || count >= 12 then break
-      let (a, b) := pending.back!
-      pending := pending.pop
-      if a == b then continue
-      let a ← if a.isAppOf ``StrictEtaleBrownRealizationCoherence then
-        Lean.Meta.whnf a else pure a
-      let b ← if b.isAppOf ``brown_underlying_localization_coherence ||
-          b.isAppOf ``brown_underlying_scalar_coherence then
-        Lean.Meta.whnf b else pure b
-      if a == b then continue
-      match a, b with
-      | .app .., .app .. =>
-        if a.getAppFn == b.getAppFn && a.getAppNumArgs == b.getAppNumArgs then
-          pending := pending ++ a.getAppArgs.zip b.getAppArgs
-        else
-          count := count + 1
-          Lean.logInfo m!"coherence difference: {a} versus {b}"
-      | .forallE _ a₁ a₂ _, .forallE _ b₁ b₂ _
-      | .lam _ a₁ a₂ _, .lam _ b₁ b₂ _ =>
-        pending := pending ++ #[(a₁, b₁), (a₂, b₂)]
-      | _, _ =>
-        count := count + 1
-        Lean.logInfo m!"coherence difference: {a} versus {b}"
-  exact @hR'.1
+    (R : StrictEtaleBrownRealization O t W P) :=
+  @R.property.1
 
 private theorem brown_underlying_right_section
     (O : Type (u + 1)) [CommRing O] (t : O)
@@ -262,9 +195,9 @@ theorem etaleBrownOrdinaryRestrictionCube
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
     (.mk _ _ _ _ (A.restrictInverse h).hom))
   have ho := brown_underlying_cube O t g A h M
-  have hrW := brown_underlying_restriction_section O t W PW RW.val RW.property h
+  have hrW := brown_underlying_restriction_section O t W PW RW h
     ((A.right m).obj M)
-  have hrV := brown_underlying_restriction_section O t V PV RV.val RV.property h M
+  have hrV := brown_underlying_restriction_section O t V PV RV h M
   have hrgm := brown_underlying_right_section O t g m A PW PV B RV RW (rg m) M
   have hrgn := brown_underlying_right_section O t g n A PW PV B RV RW (rg n)
   ext U x
