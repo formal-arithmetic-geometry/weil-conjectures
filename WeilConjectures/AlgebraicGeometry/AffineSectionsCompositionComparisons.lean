@@ -108,6 +108,7 @@ private theorem affineSectionsAcyclic
     (affineGlobalSectionsRestriction (𝟙 (Spec A))) _
     (isIso_directImage_globalSections_unit_on_kInjective h I)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The three comparisons expand scalar actions and derived-functor identifications.
 /-- Normalized sections comparisons for f, its base change, and g itself.

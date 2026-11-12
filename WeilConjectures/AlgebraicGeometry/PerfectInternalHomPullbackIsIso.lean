@@ -83,6 +83,7 @@ private theorem monoidal_adjunct_isIso
     infer_instance
   exact IsIso.of_isIso_comp_left (F.map (s.hom.app K)) q
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Elaborating the shared derived tensor instances needs additional heartbeats.
 /-- Pullback of internal Hom from a perfect source commutes with internal Hom.
