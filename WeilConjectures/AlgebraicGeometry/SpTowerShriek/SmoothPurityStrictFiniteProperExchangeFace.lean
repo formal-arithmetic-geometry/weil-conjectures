@@ -370,30 +370,6 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
               proEtaleConstantRingDerivedPullback (R l E n) a) sq.w.symm) ≪≫
             (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom)
         ).app ((comparisonFiniteRealization l E b X n).obj N)   := by
-  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
-  let θ := (leftDerivedUpperStarSquareIso B sq.toCommSq).hom
-  let θ' := (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
-    eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
-      sq.w.symm) ≪≫
-    (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
-  have H := coordinates_cube_from_coordinates
-    (coordinates.val f n) (coordinates.val f' n)
-    (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
-    (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
-    θ θ' (derivedBaseChangeMap B sq.toCommSq)
-    (by
-      have HN := native_base_change_mate (R l E n) sq.toCommSq
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
-        exactByConversion h)
-    (by
-      intro M
-      have HC := strictFinitePullbackSquareCoherence l E b sq n M
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h)
-    N (coordinates.property f n) (coordinates.property f' n)
-  simpa only [B, θ, θ', Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
-    Category.assoc] using H
+  sorry
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
