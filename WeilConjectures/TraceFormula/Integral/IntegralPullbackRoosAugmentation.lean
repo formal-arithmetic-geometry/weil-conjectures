@@ -54,6 +54,21 @@ private theorem cone_ext
         ← CochainComplex.mappingCocone.id_X δ i (i - 1) (by omega)]
       rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc]
 
+/-- A Roos map preserves a vanishing shifted coordinate, also after precomposition. -/
+private theorem roosMap_comp_snd_eq_zero
+    {A : Type*} [Category A] [Abelian A] [HasCountableProducts A]
+    {P Q : CochainComplex A ℤ} {C D : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (a : P ⟶ Q) (f : Q ⟶ integralOperationsRoos C) (q : C ⟶ D)
+    (hf : ∀ i : ℤ, f.f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v i (i - 1) (by omega) = 0)
+    (i : ℤ) :
+    (a ≫ f ≫ integralOperationsRoosFunctor.map q).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary D)).v i (i - 1) (by omega) =
+        0 := by
+  simp only [HomologicalComplex.comp_f, Category.assoc]
+  rw [(IntegralAmbient.roosMap_coordinates q).2 i (i - 1) (by omega),
+    ← Category.assoc, hf i, zero_comp, comp_zero]
+
 private theorem cast_map
     {A : Type*} [Category A] {P Q : A ⥤ AddCommGrpCat.{u + 1}} (e : P = Q)
     {U V : A} (f : U ⟶ V) (x : Q.obj U) :
@@ -165,11 +180,6 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
   have hi2 (i : ℤ) : (integralComparisonLimitToRoos l E Z T).f i ≫
       (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
         i (i - 1) (by omega) = 0 := hi.2 i (i - 1) (by omega)
-  have hsecond (i : ℤ) : (integralOperationsRoosFunctor.map q.hom).f i ≫
-      (CochainComplex.mappingCocone.snd δ).v i (i - 1) (by omega) =
-      (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
-        i (i - 1) (by omega) ≫ (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) :=
-    (IntegralAmbient.roosMap_coordinates q.hom).2 i (i - 1) (by omega)
   change _ = a ≫ integralComparisonLimitToRoos l E Z T ≫
     integralOperationsRoosFunctor.map q.hom
   apply cone_ext δ
@@ -237,12 +247,7 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
         unfold inverseImageRoosComparisonComplex
         rw [CochainComplex.mappingCocone.lift_f_snd_v]
         rfl
-      _ = a.f i ≫ ((integralComparisonLimitToRoos l E Z T).f i ≫
-          (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
-            i (i - 1) (by omega)) ≫
-          (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) := by
-        rw [hi2 i, comp_zero, zero_comp]
-      _ = _ := by
-        simp only [HomologicalComplex.comp_f, Category.assoc, hsecond i]
+      _ = _ :=
+        (roosMap_comp_snd_eq_zero a (integralComparisonLimitToRoos l E Z T) q.hom hi2 i).symm
 
 end WeilConjectures
