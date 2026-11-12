@@ -142,6 +142,36 @@ theorem stalkAtIhomPairing_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
 
 set_option profiler true in
+/-- The perfect stalk pairing identifies the stalk of the internal hom with linear maps. -/
+noncomputable def stalkAtIhomLinearEquiv (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+    (F : WeilSheaf k₀ l X) :
+    ((D.ihom hD F).stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l]
+      ((D.stalkAt s m hs).carrier →ₗ[PadicAlgCl l] (F.stalkAt s m hs).carrier) :=
+  LinearEquiv.ofBijective (stalkAtIhomPairing s m hs D hD F)
+    (bijective_stalkAtIhomPairing s m hs D hD F)
+
+set_option profiler true in
+lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+    (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier)
+    (x : (D.stalkAt s m hs).carrier) :
+    stalkAtIhomLinearEquiv s m hs D hD F v x =
+      Mod.evaluationPairing (stalkFunctor l s) D.obj.carrier F.obj.carrier v x :=
+  rfl
+
+set_option profiler true in
+/-- Under the stalk equivalence, Frobenius acts by pre- and post-composition. -/
+lemma stalkAtIhomLinearEquiv_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+    (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier) :
+    stalkAtIhomLinearEquiv s m hs D hD F (((D.ihom hD F).stalkAt s m hs).frobenius v) =
+      (F.stalkAt s m hs).frobenius.toLinearMap ∘ₗ stalkAtIhomLinearEquiv s m hs D hD F v ∘ₗ
+        (D.stalkAt s m hs).frobenius.symm.toLinearMap := by
+  refine LinearMap.ext fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := (D.stalkAt s m hs).frobenius.surjective x
+  rw [LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.coe_coe,
+    LinearEquiv.symm_apply_apply, stalkAtIhomLinearEquiv_apply, stalkAtIhomLinearEquiv_apply]
+  exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v y
+
+set_option profiler true in
 /-- The trace of the Frobenius on the stalk of the internal hom `[D, F]` out of a lisse Weil
 sheaf: `tr(F | [D, F]_s) = tr(F | F_s) tr(F⁻¹ | D_s)`, the stalk being `Hom(D_s, F_s)` with the
 Frobenius `f ↦ F ∘ f ∘ F⁻¹`. -/
@@ -150,16 +180,14 @@ theorem trace_frobeniusEnd_stalkAt_ihom (D : WeilSheaf k₀ l X) (hD : D.IsLisse
     LinearMap.trace (PadicAlgCl l) _ ((D.ihom hD F).stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd *
         LinearMap.trace (PadicAlgCl l) _ (D.stalkAt s m hs).frobenius.symm.toLinearMap := by
-  let V := (D.ihom hD F).stalkAt s m hs
-  let M := D.stalkAt s m hs
-  let N := F.stalkAt s m hs
-  let p : V.carrier →ₗ[PadicAlgCl l] M.carrier →ₗ[PadicAlgCl l] N.carrier :=
-    stalkAtIhomPairing s m hs D hD F
-  have hp : Function.Bijective p := bijective_stalkAtIhomPairing s m hs D hD F
-  have h : ∀ v x, p (V.frobeniusEnd v) (M.frobenius x) = N.frobeniusEnd (p v x) :=
-    stalkAtIhomPairing_frobenius s m hs D hD F
-  exact FrobeniusModule.trace_frobeniusEnd_eq_mul_of_bijective
-    (V := V) (M := M) (N := N) p hp h
+  refine LinearMap.trace_eq_mul_of_bijective (stalkAtIhomLinearEquiv s m hs D hD F).toLinearMap
+    (stalkAtIhomLinearEquiv s m hs D hD F).bijective
+    ((D.ihom hD F).stalkAt s m hs).frobeniusEnd (D.stalkAt s m hs).frobenius
+    (F.stalkAt s m hs).frobeniusEnd ?_
+  intro v x
+  have h := LinearMap.congr_fun (stalkAtIhomLinearEquiv_frobenius s m hs D hD F v)
+    ((D.stalkAt s m hs).frobenius x)
+  simpa only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply] using h
 
 /-- The trace of the Frobenius on the stalk of `[G^∨, F] = G ⊗ F`, for a lisse Weil sheaf `G`,
 is the product of the traces on the stalks of `G` and `F`. -/
