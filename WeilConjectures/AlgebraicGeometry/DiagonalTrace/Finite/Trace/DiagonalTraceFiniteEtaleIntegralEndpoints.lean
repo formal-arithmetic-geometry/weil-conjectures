@@ -292,9 +292,11 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         cartierProRootMap (diagonalResidue.{u} l n) (l ^ (n + 1))
           (cartierResidue_cast l (n + 1)) (diagonalSurface Y)
           (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n) := by
+  run_tac do Lean.logInfo m!"PH302 have hr := finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n {← IO.monoMsNow}"
   have hr := finiteBoundary_rootMap l (ULift.{u} (Padic l)) c n
   rw [← hr]
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
+  run_tac do Lean.logInfo m!"PH302 have hline := diagonalFiniteForgetIso_transport l n (diagonalSurface Y) {← IO.monoMsNow}"
   have hline := diagonalFiniteForgetIso_transport l n (diagonalSurface Y)
     ((diagonalForget l (diagonalSurface Y)).obj
       ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)))
@@ -312,33 +314,48 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   ext U z
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     AddCommGrpCat.comp_apply]
+  run_tac do Lean.logInfo m!"PH302 let T := diagonalSurface Y {← IO.monoMsNow}"
   let T := diagonalSurface Y
+  run_tac do Lean.logInfo m!"PH302 let x' := (c.rootForget.inv.app (op n)).hom.app U z {← IO.monoMsNow}"
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
+  run_tac do Lean.logInfo m!"PH302 let x : c.rootModule.val.obj (op (n, U.unop)) := {← IO.monoMsNow}"
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
     (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
+  run_tac do Lean.logInfo m!"PH302 have hx : HEq x' x := (finiteBoundary_cast_heq {← IO.monoMsNow}"
   have hx : HEq x' x := (finiteBoundary_cast_heq
     (c.reduction.forget.sections c.rootModule n U) x').symm
+  run_tac do Lean.logInfo m!"PH302 let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule {← IO.monoMsNow}"
   let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule
+  run_tac do Lean.logInfo m!"PH302 have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x {← IO.monoMsNow}"
   have hf := finiteBoundary_forgetMapSection T _ c.reduction.forget η n U x x' hx
+  run_tac do Lean.logInfo m!"PH302 have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n {← IO.monoMsNow}"
   have he := finiteScalarForgetIso_section l (ULift.{u} (Padic l)) c n
     (lineModule l (ULift.{u} (Padic l)) c) U _ _ hf
+  run_tac do Lean.logInfo m!"PH302 have hu : η.val.app (op (n, U.unop)) x = {← IO.monoMsNow}"
   have hu : η.val.app (op (n, U.unop)) x =
       SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
         (coefficientSystemMap l (ULift.{u} (Padic l)) T)
         c.scalar c.rootModule (op (n, U.unop)) x :=
     scalarUnitSection.{u + 1, u, u + 1} _ c.scalar c.rootModule _ x
+  run_tac do Lean.logInfo m!"PH302 let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj {← IO.monoMsNow}"
   let v : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj
       (lineModule l (ULift.{u} (Padic l)) c)).val.obj U :=
     ((finiteScalarForgetIso l (ULift.{u} (Padic l)) c n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U
         (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
+  run_tac do Lean.logInfo m!"PH302 let w := ((evalIso l T r n).inv.app {← IO.monoMsNow}"
   let w := ((evalIso l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
+  run_tac do Lean.logInfo m!"PH302 have hw : HEq w v := restrictionInverseSection l T r n _ U v {← IO.monoMsNow}"
   have hw : HEq w v := restrictionInverseSection l T r n _ U v
+  run_tac do Lean.logInfo m!"PH302 have ht := k.line_tensor n U x x' w hx.symm {← IO.monoMsNow}"
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
+  run_tac do Lean.logInfo m!"PH302 have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_h {← IO.monoMsNow}"
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
+  run_tac do Lean.logInfo m!"PH302 change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi {← IO.monoMsNow}"
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hi
+  run_tac do Lean.logInfo m!"PH302 exact congrArg ((cartierProRootMap _ _ _ _ _ _).hom.app U) (ht.trans hi) {← IO.monoMsNow}"
   exact congrArg ((cartierProRootMap _ _ _ _ _ _).hom.app U) (ht.trans hi)
 
 private theorem normalizedLift_glue {D : Type*} [Category D] [HasShift D ℤ]
@@ -568,32 +585,46 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   apply constantAb_ext_one
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     AddCommGrpCat.comp_apply]
+  run_tac do Lean.logInfo m!"PH302 let T := diagonalSurface Y {← IO.monoMsNow}"
   let T := diagonalSurface Y
+  run_tac do Lean.logInfo m!"PH302 let U := op (Scheme.ProEt.mk (𝟙 T)) {← IO.monoMsNow}"
   let U := op (Scheme.ProEt.mk (𝟙 T))
+  run_tac do Lean.logInfo m!"PH302 let z := (toSheafify (Scheme.ProEt.topology T) {← IO.monoMsNow}"
   let z := (toSheafify (Scheme.ProEt.topology T)
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
       (ULift.up 1)
+  run_tac do Lean.logInfo m!"PH302 let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z {← IO.monoMsNow}"
   let x' := (finiteQuotient l (ULift.{u} (Padic l)) T n).hom.app U z
+  run_tac do Lean.logInfo m!"PH302 let x := ((evalIso l T r n).inv.app {← IO.monoMsNow}"
   let x := ((evalIso l T r n).inv.app
     (coefficient T (Arings l (ULift.{u} (Padic l)) T))).hom.app U x'
+  run_tac do Lean.logInfo m!"PH302 have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists {← IO.monoMsNow}"
   have hq := (finiteQuotient_existsUnique l (ULift.{u} (Padic l)) T n).exists.choose_spec
       U (ULift.up 1)
+  run_tac do Lean.logInfo m!"PH302 have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj {← IO.monoMsNow}"
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
+  run_tac do Lean.logInfo m!"PH302 have hx : HEq x x' := restrictionInverseSection l T r n _ U x' {← IO.monoMsNow}"
   have hx : HEq x x' := restrictionInverseSection l T r n _ U x'
+  run_tac do Lean.logInfo m!"PH302 have ha := a.coefficient_one U x (hx.trans hx') {← IO.monoMsNow}"
   have ha := a.coefficient_one U x (hx.trans hx')
+  run_tac do Lean.logInfo m!"PH302 have hi (y : ((diagonalForget l T).obj ((diagonalFiniteToPadic l n T).obj {← IO.monoMsNow}"
   have hi (y : ((diagonalForget l T).obj ((diagonalFiniteToPadic l n T).obj
       (geoCartierConstant (diagonalResidue.{u} l n) T))).obj.obj U) :
       HEq (((diagonalFiniteForgetIso l n T).inv.app
         (geoCartierConstant (diagonalResidue.{u} l n) T)).hom.app U y) y := by
     unfold diagonalFiniteForgetIso diagonalFiniteToPadic diagonalForget cartierForget
     rfl
+  run_tac do Lean.logInfo m!"PH302 have ht := (hi (a.coefficient.hom.hom.app U x)).trans ha {← IO.monoMsNow}"
   have ht := (hi (a.coefficient.hom.hom.app U x)).trans ha
+  run_tac do Lean.logInfo m!"PH302 have hs := siteIntegralGenerator_section (diagonalResidue.{u} l n) T (ULift {← IO.monoMsNow}"
   have hs := siteIntegralGenerator_section (diagonalResidue.{u} l n) T (ULift.up 1)
+  run_tac do Lean.logInfo m!"PH302 change (((diagonalFiniteForgetIso l n T).inv.app {← IO.monoMsNow}"
   change (((diagonalFiniteForgetIso l n T).inv.app
       (geoCartierConstant (diagonalResidue.{u} l n) T)).hom.app U)
     (a.coefficient.hom.hom.app U x) = (siteIntegralGenerator _ T).hom.app U z
+  run_tac do Lean.logInfo m!"PH302 rw [hs] {← IO.monoMsNow}"
   rw [hs]
   simpa only [Int.cast_one] using eq_of_heq ht
 
