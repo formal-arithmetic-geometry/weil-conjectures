@@ -191,8 +191,12 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
               (adicLowerStarComp l p q).hom.app ((a₁)_*ᵃ[l].obj M) ≫
                 (adicLowerStarCongr l hr).hom.app ((a₁)_*ᵃ[l].obj M) := by
   apply Mod.hom_ext
-  simp only [Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarComp_hom_app_hom,
-    adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+  repeat' rw [Mod.comp_hom']
+  repeat' rw [adicLowerStar_map_hom]
+  repeat' rw [Mod.comp_hom']
+  repeat' rw [adicLowerStarComp_hom_app_hom]
+  repeat' rw [adicLowerStarComp_inv_app_hom]
+  repeat' rw [adicLowerStarCongr_hom_app_hom]
   exact lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X
 
 end ProEtale

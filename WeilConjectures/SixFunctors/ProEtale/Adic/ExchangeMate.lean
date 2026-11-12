@@ -206,10 +206,16 @@ lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y �
       (adicLowerStarComp l J b.hom).inv := by
   refine mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _) fun M ↦ ?_
   apply Mod.hom_ext
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Mod.comp_hom',
-    adicLowerStar_map_hom, adicLowerStarComp_hom_app_hom,
-    adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom,
-    adicLowerStarEquivalence_symm_unit_app_hom]
+  repeat' rw [Iso.trans_hom]
+  repeat' rw [Iso.symm_hom]
+  repeat' rw [NatTrans.comp_app]
+  repeat' rw [Mod.comp_hom']
+  repeat' rw [adicLowerStar_map_hom]
+  repeat' rw [Mod.comp_hom']
+  repeat' rw [adicLowerStarComp_hom_app_hom]
+  repeat' rw [adicLowerStarComp_inv_app_hom]
+  repeat' rw [adicLowerStarCongr_hom_app_hom]
+  repeat' rw [adicLowerStarEquivalence_symm_unit_app_hom]
   exact lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X
 
 /-- The exchange isomorphism
