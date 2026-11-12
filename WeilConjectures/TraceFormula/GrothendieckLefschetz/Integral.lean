@@ -68,7 +68,6 @@ The coefficient identifications `α`, `β` are those of the realizations
 (`AlgebraicGeometry.Etale.adicRealization`), compatible with the Frobenius pullbacks. -/
 theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I = Ideal.span {ϖ})
     (F : S.FrobeniusSystem f.geometricGaloisFrobenius.hom) {m : ℕ} (hm : m ≠ 0)
-    [Finite (geometricFixedPoint f m)]
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars f.geometricFiber.smallEtaleTopology
         (I.powSuccFactor n) ⋙ compactlySupportedGlobalSections (ModuleCat.{u + 1}
           (R ⧸ I ^ (n + 1 + 1))) f.geometricFiberToAlgebraicClosure ≅
@@ -104,6 +103,7 @@ theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I 
       ((F.iterate m).localOperatorFamily x.2.2 (β x) (hβ x)) (Vx x)) :
     trace V = ∑ᶠ x : geometricFixedPoint f m, trace (Vx x) := by
   classical
+  have := finite_geometricFixedPoint f hm
   have := Fintype.ofFinite (geometricFixedPoint f m)
   obtain ⟨r, hr, hrn⟩ := (F.iterate m).exists_trace_eq_globalOperatorFamily hϖ hI _ α hα hα' hc hV
   choose rx hrx hrxn using fun x ↦ (F.iterate m).exists_trace_eq_localOperatorFamily hϖ hI
@@ -114,9 +114,9 @@ theorem trace_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R) (hI : I 
     simp_rw [← hrxn _ n]
     rw [← finsum_eq_sum_of_fintype]
     have h := trace_globalOperator_iterateWeilDatum_eq_finsum f (R ⧸ I ^ (n + 1))
-      (S.boundedConstructibleFiniteTor (n + 1)) (F.coeff (n + 1)) hm (_hΓ := inferInstanceAs
+      (S.boundedConstructibleFiniteTor (n + 1)) (F.coeff (n + 1)) hm (hΓ := inferInstanceAs
         (HasRightDual ((S.compactSupportTower f.geometricFiberToAlgebraicClosure α hα).obj n)))
-      (_hx := fun x ↦ inferInstanceAs (HasRightDual ((S.stalkTower x.1 (β x) (hβ x)).obj n)))
+      (hx := fun x ↦ inferInstanceAs (HasRightDual ((S.stalkTower x.1 (β x) (hβ x)).obj n)))
     exact h
   have hr' : r = ∑ x, rx x := by
     refine sub_eq_zero.1 (IsHausdorff.haus (inferInstance : IsHausdorff I R) _ fun n ↦ ?_)

@@ -73,7 +73,6 @@ identification of the Frobenius operators of `K_E` with them is left to the call
 theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
     (hI : I = Ideal.span {ϖ})
     (F : S.FrobeniusSystem f.geometricGaloisFrobenius.hom) {m : ℕ} (hm : m ≠ 0)
-    [Finite (geometricFixedPoint f m)]
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars f.geometricFiber.smallEtaleTopology
         (I.powSuccFactor n) ⋙ compactlySupportedGlobalSections (ModuleCat.{u + 1}
           (R ⧸ I ^ (n + 1 + 1))) f.geometricFiberToAlgebraicClosure ≅
@@ -113,6 +112,7 @@ theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
     [HasRightDual (G.obj c.pt)] [∀ x : geometricFixedPoint f m, HasRightDual (G.obj (cx x).pt)]
     (t : E) :
     trace (t • G.map V) = ∑ᶠ x : geometricFixedPoint f m, trace (t • G.map (Vx x)) := by
+  have := finite_geometricFixedPoint f hm
   have := Fintype.ofFinite (geometricFixedPoint f m)
   have h := trace_eq_finsum_trace f hϖ hI F hm α hα hα' hc hV β hβ hβ' cx hcx Vx hVx
   rw [hG.trace_smul, G.trace_eq_unitEndRingHom_trace V _ (Iso.refl _) (by simp), h,
