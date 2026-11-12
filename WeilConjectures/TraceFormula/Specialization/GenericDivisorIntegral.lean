@@ -95,6 +95,26 @@ instance [IsSeparated X.hom] : QuasiSeparatedSpace (deformationSpecialFibre X I 
 
 end Instances
 
+-- Each derived pullback needs these tensor properties. Synthesize them once for module
+-- categories, instead of rebuilding their colimit instances at every coefficient change.
+local instance genericDivisorGoodTensor12 (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := by
+  infer_instance
+
+local instance genericDivisorGoodTensor23 (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := by
+  infer_instance
+
+local instance genericDivisorTensor4Ext (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt A B C D := by
+  infer_instance
+
 namespace NearbyCyclesModel
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X X' U Y W : Scheme.{u}}
