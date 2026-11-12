@@ -89,6 +89,7 @@ private theorem relativeTensorPullback_model_homology
     (HomologicalComplex.homologyFunctor E (.up ℤ) i).mapIso e ≪≫
     (Z'.sc i).mapHomologyIso V⟩
 
+set_option trace.profiler true in
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
