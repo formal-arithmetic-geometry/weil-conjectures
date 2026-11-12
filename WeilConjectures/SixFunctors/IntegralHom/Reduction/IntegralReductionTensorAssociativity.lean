@@ -201,7 +201,8 @@ private theorem normalizedBeta_eq (n : ℕ)
         i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)
           ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)))
       (asIso beta).hom_inv_id
-    simpa only [asIso_hom, Iso.symm_hom] at hh
+    rw [show (asIso beta).hom = beta from rfl,
+      show (asIso beta).inv = inv beta from rfl] at hh
     rw [hbeta i j U x y] at hh
     exact hh
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
