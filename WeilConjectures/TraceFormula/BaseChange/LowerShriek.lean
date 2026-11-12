@@ -180,8 +180,6 @@ variable {S : Type u} [Field S] [Fact (ringChar S).Prime] [Fact (ringChar S ≠ 
   {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D}
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- the objects of the bounded constructible and of the ambient derived categories are compared
 omit [Fact ℓ.Prime] in
 /-- On the ambient derived categories, the pullback comparison of a commutative square
 `a ≫ b = c ≫ d` is `L(c ≫ d)^* = L(a ≫ b)^*` between the composition isomorphisms. -/
@@ -193,10 +191,13 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq [Fact ℓ.Prim
         eqToHom (congrArg (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj)
           (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
         (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).hom.app K.obj := by
-  rw [boundedConstructiblePullbackSquareComparison_hom_app,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    boundedConstructibleUpperStarComp_inv_app_hom, boundedConstructibleUpperStarComp_hom_app_hom,
-    ObjectProperty.FullSubcategory.eqToHom_hom']
+  have h := congrArg (fun φ ↦ φ.hom)
+    (boundedConstructiblePullbackSquareComparison_hom_app (Profinite.padicAlgClRingObj ℓ) ℓ sq K)
+  refine h.trans ?_
+  exact congrArg₂ (· ≫ ·)
+    (boundedConstructibleUpperStarComp_inv_app_hom _ ℓ c d K)
+    (congrArg₂ (· ≫ ·) (ObjectProperty.FullSubcategory.eqToHom_hom' _)
+      (boundedConstructibleUpperStarComp_hom_app_hom _ ℓ a b K))
 
 end SquareComparison
 
