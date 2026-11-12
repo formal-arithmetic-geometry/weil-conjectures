@@ -57,7 +57,6 @@ variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
   (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option maxHeartbeats 800000 in
 -- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**, from the bounded
 constructibility of the torsion nearby cycles at an integral model. Let `Ω/L` be Galois with
@@ -111,7 +110,6 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_of_integralModel
       (N.galoisLayerHom h L'.toIntermediateField).generic).app K₀.obj).symm) ?_
   transport_exact h₁
 
-set_option maxHeartbeats 800000 in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles at an
@@ -168,7 +166,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_integralModel
     (fun τ ↦ τ.liftNormal Ω) (fun τ ↦ τ.restrict_liftNormal Ω)
   cast_proofs key
 
-set_option maxHeartbeats 800000 in
 -- the statement involves several large derived functor objects
 /-- **Nearby cycles of the Galois layer are the invariants of a finite quotient,
 `ℚ̄_ℓ`-coefficients**, from the bounded constructibility of the torsion nearby cycles of all
