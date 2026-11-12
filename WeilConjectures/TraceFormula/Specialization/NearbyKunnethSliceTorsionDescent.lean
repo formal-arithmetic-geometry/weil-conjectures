@@ -148,6 +148,8 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
     (hS : IsIso (kunnethMap Λ μS νS ((L((σM)^*⟦Λ⟧)).obj A) B)) :
     IsIso (L((rP')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) := by
   subst hrM hrP
+  let pullX := L((𝟙 X)^*⟦Λ⟧)
+  let pullY := L((𝟙 Y)^*⟦Λ⟧)
   have := hBa
   have : IsIso (Hom.id N).total := inferInstanceAs (IsIso (𝟙 _))
   have : IsIso (Hom.id N).generic := inferInstanceAs (IsIso (𝟙 _))
@@ -187,8 +189,8 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
   have hGE := @isGE_leftDerivedUpperStar_obj Λ _ _ _ _ (𝟙 ZS' ≫ rP' ≫ f₂') _ a hNGE
   have sqρ := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange' Λ
     (galoisLayerFst μ₁ h₁ Ω) (galoisLayerSnd (hP := resP) (ψP.comp φ₂) Ω) μS νS ρM (Hom.id N) ρP
-    htotρ hgenρ ?e1 ?e2 hbρ ?e3 ?e4 ?e5 ((L((𝟙 X)^*⟦Λ⟧)).obj ((L((𝟙 X)^*⟦Λ⟧)).obj A))
-    ((L((𝟙 Y)^*⟦Λ⟧)).obj ((L((𝟙 Y)^*⟦Λ⟧)).obj B)) ?jM ?jN ?jP (𝟭 _)
+    htotρ hgenρ ?e1 ?e2 hbρ ?e3 ?e4 ?e5 (pullX.obj (pullX.obj A))
+    (pullY.obj (pullY.obj B)) ?jM ?jN ?jP (𝟭 _)
   case jM => cast_proofs hρM _
   case jN => infer_instance
   case jP =>
@@ -207,7 +209,7 @@ theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙
       (hsν.trans ((Category.id_comp _).symm.trans (Category.id_comp _).symm))
   -- the Künneth map descends along the Galois layer
   have hG := isIso_kunnethMap_of_isIso_galoisLayer μ₁ (ψP.comp φ₂) h₁ Ω T₀ ?hp
-    ((L((𝟙 X)^*⟦Λ⟧)).obj A) ((L((𝟙 Y)^*⟦Λ⟧)).obj B) ?hAB ?r ?hr ?hco ?hK
+    (pullX.obj A) (pullY.obj B) ?hAB ?r ?hr ?hco ?hK
   case r => exact_by_kernel r
   case hp => exact_by_kernel hp
   case hAB => exact_by_kernel hAB
