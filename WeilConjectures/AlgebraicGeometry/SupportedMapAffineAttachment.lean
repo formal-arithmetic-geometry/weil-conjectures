@@ -49,7 +49,6 @@ private theorem restrict_map_comparison
         Functor.mapIso_hom, Category.assoc]
 
 set_option synthInstance.maxSize 2048 in
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Attaching a single affine open extends the source plus its shift.
 The input source need only be perfect and supported on the old open; its behaviour
@@ -137,12 +136,14 @@ theorem exists_supported_map_affine_attachment
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory.map β := by
   classical
+  -- Cache the sheaf-category structures used by the restriction and lifting steps.
   let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
     fun Z ↦ inferInstance
   let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
       Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
     fun Z O ↦ inferInstance
   let Y := W ⊔ V
+  -- Destructure a named hypothesis to avoid generalizing an application across the large goal.
   have hlocalY := open_derived_localization_data X Y
   obtain ⟨hY, ⟨hYO⟩⟩ := hlocalY
   let := hY

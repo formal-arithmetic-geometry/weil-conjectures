@@ -52,7 +52,6 @@ private theorem map_lift_transport
       rw [hn]
       rfl
 
-set_option trace.profiler true in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Construct the affine member and its compatible overlap map; no object on the union
@@ -126,19 +125,20 @@ theorem exists_supported_affine_overlap_map
               x))) ∧
         SW.map a ≫ kW.hom.app E.obj = c.hom ≫ SV.map b ≫ kV.hom.app E.obj := by
   classical
+  -- Cache the sheaf-category structures used by the restriction and lifting steps.
   let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
     fun Z ↦ inferInstance
   let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
       Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
     fun Z O ↦ inferInstance
   intro JW JV SW SV kW kV A a
+  -- Destructure a named hypothesis to avoid generalizing an application across the large goal.
   have hstabilization := local_perfect_supported_stabilization X W T R hR hRT
   obtain ⟨hF, hFT, hA, hAT⟩ := hstabilization
   have hextension :=
     exists_supported_overlap_perfect_extension X W V hW hV T hT hTc (JW.obj R) hF hFT
   obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ := hextension
-  have hrestriction :=
-    exists_compact_overlap_restriction_model X W V hW hV
+  have hrestriction := exists_compact_overlap_restriction_model X W V hW hV
   obtain ⟨U, hU, hD, e, ⟨d⟩⟩ := hrestriction
   let := hD
   let : IsAffine V.toScheme := hV
@@ -152,8 +152,7 @@ theorem exists_supported_affine_overlap_map
     q.hom ≫ SW.map a ≫ kW.hom.app E.obj ≫ kV.inv.app E.obj
   let α₀ : L.obj Q ⟶ L.obj EV.obj :=
     e.functor.preimage (d.hom.app Q ≫ α ≫ d.inv.app EV.obj)
-  have hlift :=
-    exists_perfect_map_lift_of_isAffine V.toScheme U hU EV Q hQ α₀
+  have hlift := exists_perfect_map_lift_of_isAffine V.toScheme U hU EV Q hQ α₀
   obtain ⟨B, I, δ, b, hB, _hI, _hδ, ⟨bU, _hbU, hα₀⟩, hBT⟩ := hlift
   let bS : SV.obj B ≅ SV.obj Q :=
     (d.app B).symm ≪≫ e.functor.mapIso bU ≪≫ d.app Q

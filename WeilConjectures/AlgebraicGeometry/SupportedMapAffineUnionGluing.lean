@@ -98,7 +98,6 @@ private theorem stabilized_map_restriction
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 /-- The affine construction produces a perfect supported source on the union itself.
 There is no ambient extension in this statement. The supplied natural comparison `c`
 identifies iterated restriction through the union with direct restriction to `U`.
@@ -190,6 +189,7 @@ theorem exists_supported_map_affine_union_gluing
         H.mapDerivedCategory.map α ≫ c.hom.app E.obj =
           e.hom ≫ biprod.fst ≫ J.mapDerivedCategory.map β := by
   classical
+  -- Cache the sheaf-category structures used by the restriction and lifting steps.
   let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
     fun Z ↦ inferInstance
   let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
@@ -210,6 +210,7 @@ theorem exists_supported_map_affine_union_gluing
       ∃ e : H.obj F ≅ J.obj R ⊞ (J.obj R)⟦(1 : ℤ)⟧,
         H.map α ≫ c.hom.app E.obj = e.hom ≫ biprod.fst ≫ J.map β
   intro c
+  -- Destructure a named hypothesis to avoid generalizing an application across the large goal.
   have hlocalW := open_derived_localization_data X W
   obtain ⟨hDW, ⟨hOW⟩⟩ := hlocalW
   let := hDW
