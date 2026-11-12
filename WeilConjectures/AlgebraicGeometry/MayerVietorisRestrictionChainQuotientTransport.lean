@@ -24,6 +24,13 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+private lemma schemeMV_quotient_factor_inv_map
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Abelian D]
+    [HasDerivedCategory D] (F : C ⥤ D) [F.Additive] (I : CochainComplex C ℤ) :
+    DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).inv.app I) = 𝟙 _ := by
+  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv]
+  exact DerivedCategory.Qh.map_id _
+
 private lemma schemeMV_exact_restriction_quotient_inv
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -130,13 +137,11 @@ theorem schemeMV_restriction_chain_quotient_transport
   simp only [schemeMVDirectImageLocalization, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+    schemeMV_quotient_factor_inv_map, Category.id_comp, Category.comp_id]
   change (schemeMVHomotopyOpenRestriction h W).hom.app
       ((HomotopyCategory.quotient _ _).obj I) = _ at hr
   rw [hr]
-  simp only [Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_inv,
-    CategoryTheory.Functor.map_id, Category.comp_id] at hy
+  simp only [schemeMV_quotient_factor_inv_map, Category.comp_id] at hy
   exact schemeMV_transport_restriction_chain LY.mapDerivedCategory
     (RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom).rightDerivedFunctor
     ((DerivedCategory.quotientCompQhIso _).app
