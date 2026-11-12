@@ -163,7 +163,6 @@ private theorem iso_factor_six
     a ≪≫ b ≪≫ c ≪≫ d ≪≫ e ≪≫ f = (a ≪≫ b ≪≫ c) ≪≫ (d ≪≫ e ≪≫ f) := by
   simp only [Iso.trans_assoc]
 
-set_option profiler true in
 private theorem finiteOrdinaryIntegralTensorModel_factor
     (A : FiniteCondensedData l X) (C : CoefficientSystem l X)
     (E : Index l (PadicAlgCl l)) :
@@ -172,6 +171,7 @@ private theorem finiteOrdinaryIntegralTensorModel_factor
         finiteOrdinaryCoefficientIntegralModel l X A C E := by
   unfold finiteOrdinaryIntegralTensorModel finiteOrdinaryRawIntegralModel
     finiteOrdinaryCoefficientIntegralModel
+  -- Keep the component constructions in local definitions while reassociating the composite.
   extract_lets
   simp only [Iso.trans_assoc]
   rfl
