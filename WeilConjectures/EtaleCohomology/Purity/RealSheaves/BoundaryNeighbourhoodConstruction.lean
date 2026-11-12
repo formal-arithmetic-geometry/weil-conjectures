@@ -101,25 +101,10 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       hhalg, hσε, ← Category.assoc, hhalg]
 
--- Select the pointwise action directly; searching through the integral-closure actions is costly.
-noncomputable local instance boundaryIdealMulSemiringActionConstruction {W : C.Opens} [Nonempty W]
-    [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] :
-    MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, W) Ω) := by
-  letI : SMulCommClass Gal(Ω/C.functionField) Γ(C, W) Ω :=
-    AlgEquiv.smulCommClass_of_isScalarTower Γ(C, W) C.functionField Ω
-  infer_instance
-
-noncomputable local instance boundaryIdealMulActionConstruction {W : C.Opens} [Nonempty W]
-    [Algebra Γ(C, W) Ω] [IsScalarTower Γ(C, W) C.functionField Ω] :
-    MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, W) Ω)) :=
-  Ideal.pointwiseDistribMulAction.toMulAction
-
-lemma comp_map_sub_for_hb_cleanup {A B D : Type*} [Ring A] [Ring B] [Ring D]
-    (r : B →+* D) (f : A →+* B) (a b : A) :
-    r (f a - f b) = r (f (a - b)) := by
-  exact congrArg r (f.map_sub a b).symm
-
+set_option maxHeartbeats 3200000 in
 -- the rewriting of morphisms between spectra of rings of invariants is slow
+set_option synthInstance.maxHeartbeats 200000 in
+set_option profiler true in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
   [Smooth (C ↘ Spec (.of K))] in
@@ -153,43 +138,24 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         Spec.map (CommRingCat.ofHom
           (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) ≫ α := by
   let _ := Fintype.ofFinite K
-  let Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K :=
-    FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n
-  have hΦ : Φ = FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K
-      (AlgebraicClosure K) ^ n := rfl
+  obtain ⟨Φ, hΦ⟩ : ∃ Φ : AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K,
+      Φ = FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n :=
+    ⟨_, rfl⟩
   have hσε (y : AlgebraicClosure K) :
       Ideal.inertiaInvariantsMap C.functionField Q hσF (ε y) = ε (Φ y) :=
     Ideal.injective_inertiaInvariantsToField _ Q (by
       rw [Ideal.inertiaInvariantsToField_inertiaInvariantsMap, hε, hε, hσFk, hΦ])
   have hrσ (a : Ideal.inertiaInvariants C.functionField Q) :
       r (Ideal.inertiaInvariantsMap C.functionField Q hσF a) = Φ (r a) := by
-    let τ : Ideal.inertiaInvariants C.functionField Q →+*
-        Ideal.inertiaInvariants C.functionField Q :=
-      Ideal.inertiaInvariantsMap C.functionField Q hσF
-    let b : Ideal.inertiaInvariants C.functionField Q := ε (r a)
-    let c : Ideal.inertiaInvariants C.functionField Q := a - b
-    have hεr : r b = r a := RingHom.congr_fun hrε (r a)
     have h0 : r (a - ε (r a)) = 0 := by
-      change r c = 0
-      calc
-        r c = r a - r b := by
-          change r (a - b) = r a - r b
-          exact r.map_sub _ _
-        _ = r a - r a := congrArg (fun y => r a - y) hεr
-        _ = 0 := sub_self _
-    have hnonunit : ¬ IsUnit c := by
-      intro hu
-      exact (hr c).1 h0 hu
-    have hτzero := (hr (τ c)).2 (by
-      intro hu
-      exact hnonunit (Ideal.isUnit_of_isUnit_inertiaInvariantsMap (K := C.functionField)
-        (Q := Q) (a := c) hσF hu))
-    have hmap := comp_map_sub_for_hb_cleanup r τ a b
-    have hc' := congrArg (fun x : Ideal.inertiaInvariants C.functionField Q => r (τ x))
-      (show c = a - b from rfl)
-    have hτzero' := hc'.symm.trans hτzero
-    have h2 := hmap.symm.trans hτzero'
-    exact (sub_eq_zero.1 ((r.map_sub _ _).symm.trans h2)).trans
+      rw [map_sub, show r (ε (r a)) = r a from RingHom.congr_fun hrε _, sub_self]
+    have h1 : ¬ IsUnit (Ideal.inertiaInvariantsMap C.functionField Q hσF (a - ε (r a))) :=
+      fun hu ↦ (hr _).1 h0 (Ideal.isUnit_of_isUnit_inertiaInvariantsMap hσF hu)
+    have h2 : r (Ideal.inertiaInvariantsMap C.functionField Q hσF a -
+        Ideal.inertiaInvariantsMap C.functionField Q hσF (ε (r a))) = 0 := by
+      rw [← map_sub]
+      exact (hr _).2 h1
+    exact (sub_eq_zero.1 ((RingHom.map_sub r _ _).symm.trans h2)).trans
       ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
   have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
       ≫ CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF) =
@@ -218,7 +184,10 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
   · rw [← Spec.map_comp, ← Spec.map_comp]
     exact congrArg Spec.map htfc
 
+set_option maxHeartbeats 3200000 in
 -- the construction assembles many morphisms of schemes over `C̄` and `Ū`
+set_option synthInstance.maxHeartbeats 200000 in
+set_option profiler true in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected (C ↘ Spec (.of K))] in
 /-- **A strictly henselian neighbourhood of a boundary point from a compatible point.** Let `c`
@@ -245,10 +214,8 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   let _ := Fintype.ofFinite K
   have hW := c.isAffineOpen
   have hxW : x.1 ∈ c.W := c.mem
-  letI : IsDedekindDomain Γ(C, c.W) :=
-    isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
-  letI : IsLocalRing (Ideal.inertiaInvariants C.functionField Q) :=
-    (isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q).toHenselianLocalRing.toIsLocalRing
+  have : IsDedekindDomain Γ(C, c.W) := isDedekindDomain_of_isAffineOpen (C ↘ Spec (.of K)) hW
+  have := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
   -- the embedding of `k̄` and the residue map
   have hε₀ : (genericEmb (U ↘ Spec (.of K)) j).comp (algebraMap K (AlgebraicClosure K)) =
       (algebraMap Γ(C, c.W) Ω).comp (sectionsStructHom (k₀ := K) hW) := by
@@ -291,13 +258,8 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
   have ht : (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
       (closedPoint (AlgebraicClosure K)) =
         closedPoint (Ideal.inertiaInvariants C.functionField Q) := by
-    calc
-      (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
-          (closedPoint (AlgebraicClosure K)) =
-          (Spec.map (CommRingCat.ofHom r)) (closedPoint (AlgebraicClosure K)) :=
-        congrArg (fun f => f (closedPoint (AlgebraicClosure K))) htl
-      _ = closedPoint (Ideal.inertiaInvariants C.functionField Q) :=
-        specMap_closedPoint_of_forall_eq_zero_iff r hr
+    rw [htl]
+    exact specMap_closedPoint_of_forall_eq_zero_iff r hr
   -- the punctured neighbourhood
   obtain ⟨e', he'⟩ := exists_iso_pullback_geometricFiberMap hW Q x hxW j c.ϖ (c.opensRange_inf hz)
     c.ϖ_mem (c.ϖ_ne_zero hz) h hhproj
