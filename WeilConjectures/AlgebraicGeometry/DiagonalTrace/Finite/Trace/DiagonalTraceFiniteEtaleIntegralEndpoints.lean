@@ -334,8 +334,10 @@ private theorem rootEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
         (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
   let w := ((evalIso l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  have hw : HEq w v := restrictionInverseSection l T r n
-    (lineModule l (ULift.{u} (Padic l)) c) U v
+  have hw : HEq w v := by
+    dsimp only [w, evalIso]
+    exact restrictionInverseSection l T r n (lineModule l (ULift.{u} (Padic l)) c) U v
+  dsimp only [v] at hw
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hi := congrArg (fun f ↦ f.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
@@ -582,8 +584,10 @@ private theorem sourceEndpoint (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
-  have hx : HEq x x' := restrictionInverseSection l T r n
-    (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U x'
+  have hx : HEq x x' := by
+    dsimp only [x, evalIso]
+    exact restrictionInverseSection l T r n
+      (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U x'
   have ha := a.coefficient_one U x (hx.trans hx')
   have hi (y : ((diagonalForget l T).obj ((diagonalFiniteToPadic l n T).obj
       (geoCartierConstant (diagonalResidue.{u} l n) T))).obj.obj U) :
