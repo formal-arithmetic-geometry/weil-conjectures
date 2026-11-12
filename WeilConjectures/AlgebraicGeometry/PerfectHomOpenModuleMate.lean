@@ -74,6 +74,7 @@ def perfectHomOpenModuleMate {S Y T : Scheme.{u}}
     (schemeOpenModuleAdjunction Y B)).symm
       (TwoSquare.mk _ _ _ _ (perfectHomOpenModuleComposition s B r).hom))
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Sectionwise evaluation unfolds the module-restriction adjunction and comparisons.
 /-- The ordinary open-square mate is the sectionwise direct-image/restriction identity.

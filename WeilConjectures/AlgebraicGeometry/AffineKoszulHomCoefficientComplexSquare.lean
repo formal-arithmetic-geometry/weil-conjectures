@@ -27,6 +27,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the transported module-sheaf aliases and complex isomorphisms needs more fuel.
 set_option backward.isDefEq.respectTransparency true in
