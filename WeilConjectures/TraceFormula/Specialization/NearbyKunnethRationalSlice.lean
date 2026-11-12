@@ -73,23 +73,12 @@ end General
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
-set_option maxHeartbeats 1600000 in
-set_option profiler true in
--- the Künneth maps of the derived categories of module objects are large terms
-/-- **The generic-slicing step with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"): if the generic-slicing step holds with
-`𝒪_E`-coefficients in chart dimension `n` for every finite subextension `E ⊆ ℚ̄_ℓ`, it holds with
-`ℚ̄_ℓ`-coefficients. Bounded constructible `A`, `B` on the noetherian schemes `X`, `Y` have
-integral models `A₀`, `B₀` over a common `𝒪_E`
-(`ProEtale.exists_derivedExtendScalars_iso_integralModel_pair`), and the pullback of `Π_{A,B}` is
-invertible since that of `Π_{A₀,B₀}` is
-(`NearbyCyclesModel.isIso_map_map_map_kunnethMap_iff_padicAlgCl`). -/
-theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
+private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
-    SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n := by
-  refine ⟨fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hX hY hZ
-    {b} hb {m₁ m₂} hle h₁ h₂ {eM} heM {eN} heN {A B} hA hB ↦ ?_⟩
+    (SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n).isIso := by
+  intro X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂' φ₁ φ₂ qM gM qN gN hM hN hpb hP hgen hX hY hZ b hb
+    m₁ m₂ hle h₁ h₂ eM heM eN heN A B hA hB
   obtain ⟨E, A₀, B₀, ⟨eA⟩, ⟨eB⟩⟩ :=
     ProEtale.exists_derivedExtendScalars_iso_integralModel_pair X Y ℓ ⟨A, hA⟩ ⟨B, hB⟩
   let s := baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
@@ -121,6 +110,21 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
   have key := (isIso_map_map_map_kunnethMap_iff_padicAlgCl ℓ E φ₁ φ₂
     s A₀.obj B₀.obj (min A₀.2.1.1.choose B₀.2.1.1.choose) c).1 (Functor.map_isIso _ _)
   simpa only [s] using isIso_map_kunnethMap_of_iso _ _ φ₁ φ₂ eA.symm eB.symm key
+
+-- the Künneth maps of the derived categories of module objects are large terms
+/-- **The generic-slicing step with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones** (blueprint
+`sk-prop-tf-nearby-external-kunneth`, "Finite support"): if the generic-slicing step holds with
+`𝒪_E`-coefficients in chart dimension `n` for every finite subextension `E ⊆ ℚ̄_ℓ`, it holds with
+`ℚ̄_ℓ`-coefficients. Bounded constructible `A`, `B` on the noetherian schemes `X`, `Y` have
+integral models `A₀`, `B₀` over a common `𝒪_E`
+(`ProEtale.exists_derivedExtendScalars_iso_integralModel_pair`), and the pullback of `Π_{A,B}` is
+invertible since that of `Π_{A₀,B₀}` is
+(`NearbyCyclesModel.isIso_map_map_map_kunnethMap_iff_padicAlgCl`). -/
+theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
+    (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
+      SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
+    SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n :=
+  ⟨sliceKunnethFormula_padicAlgCl_isIso h⟩
 
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- **Gabber's Künneth formula for proper models with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**
