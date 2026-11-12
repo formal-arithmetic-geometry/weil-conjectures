@@ -59,23 +59,31 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
-  calc
-    _ = (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctorUnit.app
-          (((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).mapHomotopyCategory
-            (.up ℤ)).obj K) ≫
-        (RingedSpace.moduleDirectImage t.toLRSHom.toShHom).rightDerivedFunctor.map
-          ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
-      exact Classical.choose_spec
-        (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
-          A.toRingedSpace B.toRingedSpace C.toRingedSpace
-          (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-            (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› A)
-          (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-            (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
-          (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
-            (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
-          s.toLRSHom.toShHom t.toLRSHom.toShHom) K
-    _ = _ := (compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K).symm
+  obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  dsimp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
+  have hi : (Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (Scheme.Modules.pushforward s ⋙ Scheme.Modules.pushforward t)) (.up ℤ)).inv.app
+      ((HomotopyCategory.quotient _ _).obj L) = 𝟙 _ := by
+    have h := Iso.inv_hom_id_app
+      (Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (Scheme.Modules.pushforward s ⋙ Scheme.Modules.pushforward t)) (.up ℤ))
+      ((HomotopyCategory.quotient _ _).obj L)
+    erw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at h
+    exact h
+  erw [hi, CategoryTheory.Functor.map_id, Category.id_comp]
+  exact Classical.choose_spec
+    (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
+      A.toRingedSpace B.toRingedSpace C.toRingedSpace
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› A)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› B)
+      (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
+      s.toLRSHom.toShHom t.toLRSHom.toShHom) _
+
 
 
 end AlgebraicGeometry
