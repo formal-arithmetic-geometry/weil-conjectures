@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Retract
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -95,6 +96,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
+-- Reuse the graded tensor and colimit proofs at each derived pullback.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X X' Y Y' Z Z' XU XU' YU YU' ZU ZU' : Scheme.{u}} {M : NearbyCyclesModel X X'}
   {N : NearbyCyclesModel Y Y'} {P : NearbyCyclesModel Z Z'} {MU : NearbyCyclesModel XU XU'}
@@ -103,8 +109,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-set_option maxHeartbeats 1600000 in
--- the Künneth maps of the two products are large terms
 /-- **Invariants under a pro-`p` group commute with the Künneth map**, coinvariant form (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
 `sk-prop-tf-nearby-external-kunneth`). In the square of the Künneth maps and pullbacks
@@ -173,17 +177,19 @@ theorem isIso_map_kunnethMap_of_coinvariant (φ₁ : P.Hom M f₁ f₁') (φ₂ 
     (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
     (x := L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))
     hsq (L((e₁')^*⟦Λ⟧).map rM ≫
-      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ hrP
+      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ ?_
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
     (fun i ↦ (σP i).autAction Λ _) (fun i ↦ (σP i).autAction Λ _)
-    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) (fun i ↦ ?_) hinvP (fun q W φ hφ ↦ ?_)
+    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) (fun i ↦ ?_) ?_ (fun q W φ hφ ↦ ?_)
   · have e := congrArg L((e₁')^*⟦Λ⟧).map hrM
     simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at e
     simp only [Category.assoc, reassoc_of% e, Iso.hom_inv_id_app]
     rfl
+  · cast_proofs hrP
   · have h := hequiv i
     simp only [hN i, CategoryTheory.Functor.map_id, tensorHom_id] at h
     exact h
+  · cast_proofs hinvP
   · have h := hcoinv q φ hφ
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp]
     exact h

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -45,8 +47,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-set_option maxHeartbeats 800000 in
--- the Künneth maps of the two products are large terms
+-- Reuse the graded tensor and colimit proofs at each derived pullback.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 /-- **Invariants under a finite group commute with the Künneth map** (blueprint
 `det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
 `sk-prop-tf-nearby-external-kunneth`). Let finite families of automorphisms `σM i`, `σN i`, `σP i`
@@ -94,21 +99,25 @@ theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N
         (L((r)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))) :
     IsTensorRetract (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
       hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) := by
-  refine isTensorRetract_of_sum' _ s n hn
+  refine isTensorRetract_of_sum'
+    (map_kunnethMap_comp_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁
+      hgen₁ htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B) s n hn
     (L((e₁')^*⟦Λ⟧).map rM ≫
-      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ hrP
+      (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ ?_
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))
     (fun i ↦ (σP i).autAction Λ _) (fun i ↦ (σP i).autAction Λ _)
-    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ havgP
+    (fun i ↦ Hom.autAction_naturality Λ (σP i) _) ?_ ?_ ?_
   · have e := congrArg L((e₁')^*⟦Λ⟧).map hrM
     simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at e
     simp only [Category.assoc, reassoc_of% e, Iso.hom_inv_id_app]
     rfl
+  · cast_proofs hrP
   · intro i
     have h := hequiv i
     simp only [hN i, CategoryTheory.Functor.map_id, tensorHom_id] at h
     exact h
   · simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← CategoryTheory.Functor.map_comp,
       ← CategoryTheory.Functor.map_nsmul, havgM, CategoryTheory.Functor.map_sum]
+  · cast_proofs havgP
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
