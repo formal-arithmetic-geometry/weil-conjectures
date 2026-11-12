@@ -75,7 +75,6 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
 set_option profiler true in
-set_option maxHeartbeats 500000 in
 -- The derived unit calculation elaborates several affine carrier identifications.
 /-- The extension counit computes the affine chart source, and intertwines Hom transposes.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0AA7.
@@ -120,17 +119,9 @@ theorem exists_mixedAffineSections_extension_unit_normalization
               (R.mapHomologicalComplex (.up ℤ)).map f) ≫
           R.mapDerivedCategoryFactors.inv.app Z := by
   classical
-  dsimp only
-  intro instF instH instE P hP
-  let F := tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ
-  let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
-  let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom
-  let R := ModuleCat.restrictScalars.{u} g.appTop.hom
+  intro F H E R instF instH instE P hP C X
   let lAdj : mixedGlobalExtension g ⊣ R.mapDerivedCategory :=
     mixedGlobalExtensionAdjunction g
-  let C := (F.mapHomologicalComplex (.up ℤ)).obj P
-  let X : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ :=
-    ((F ⋙ H).mapHomologicalComplex (.up ℤ)).obj P
   let Y : DerivedCategory (ModuleCat.{u} Γ(S, ⊤)) :=
     (schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)
   let eX : P ≅ X :=

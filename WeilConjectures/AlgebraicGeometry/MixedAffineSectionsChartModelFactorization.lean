@@ -113,16 +113,7 @@ theorem exists_mixedAffineSections_chart_model_factorization
             (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q))) ≫
               b.hom = a.hom ≫
                 DerivedCategory.Q.map ((c.mapHomologicalComplex (.up ℤ)).app P) := by
-  dsimp only
-  intro c hc instF instH instJ instE instK P hP
-  let F : ModuleCat.{u} Γ(S, ⊤) ⥤
-      SheafOfModules.{u} (moduleRings S.toRingedSpace) :=
-    tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ
-  let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
-  let J := RingedSpace.globalSectionsFunctor T.toRingedSpace
-  let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom
-  let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g
+  intro F H J E K c hc instF instH instJ instE instK P hP Q
   let R := ModuleCat.restrictScalars.{u} g.appTop.hom
   have : F.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive F
   have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive H
