@@ -152,6 +152,7 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
       Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Category.assoc]
     congr 1
     simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
+  unfold exceptionalKunnethMap exceptionalKunnethAdjoint upperShriekUnitTensorMap
   exact exceptionalKunnethMap_factorization_aux
     (boundedConstructibleLowerShriek ℓ (prod.fst : X ⨯ Y ⟶ X))
     (boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)) M
@@ -163,7 +164,11 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
     (((boundedConstructibleExceptionalProjection ℓ (prod.fst : X ⨯ Y ⟶ X)).app
       ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ Y ⟶ X)).obj (𝟙_ _))).app M)
     (boundedConstructibleExceptionalProjectionMorphism_natural_left ℓ _
-      (prodUpperShriekBaseChangeUnit ℓ) M) _ _ _ hx
+      (prodUpperShriekBaseChangeUnit ℓ) M)
+    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y))
+    ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
+      ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)))
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv hx
 
 /-- **Purity for a smooth projection** (blueprint `sk-thm-sp-qbar`, `sk-prop-sp-purity-bc`). Let
 `Y` be smooth over `k`. The exceptional Künneth map
