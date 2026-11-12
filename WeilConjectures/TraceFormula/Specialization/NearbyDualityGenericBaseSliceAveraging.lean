@@ -307,8 +307,6 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
   have hkA := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
     hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
     (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
-  have havgU := (congrArg (fun z ↦ U.relIndex V • z) havgB).trans hs.symm
-  rw [← mul_smul, ← hn] at havgU
   exact exists_retraction_pullbackExchange_comp_of_isIso_left (Profinite.padicAlgClRingObj ℓ)
     (genericSliceToBaseChange (traitSliceCoord k') hM hb hc)
     (baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
@@ -319,7 +317,10 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
     (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦
       baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out)
     (Fintype.card (GenericAut k' (traitSliceField k') ⧸ U))
-    (by exact ⟨rB, hrB, havgU⟩)
+    (by
+      refine ⟨rB, hrB, ?_⟩
+      exact (congrArg (fun n : ℕ ↦ n • _) hn).trans
+        ((mul_smul _ _ _).trans ((congrArg (fun z ↦ U.relIndex V • z) havgB).trans hs.symm)))
     (fun σ D ↦ pullbackExchange_genericSliceToBaseChange_app_comp_autAction
       (traitSliceCoord k') hM hb (Profinite.padicAlgClRingObj ℓ) hc σ.out D)
 
