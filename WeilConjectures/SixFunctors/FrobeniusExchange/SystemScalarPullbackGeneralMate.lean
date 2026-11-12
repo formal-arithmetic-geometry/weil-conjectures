@@ -986,6 +986,25 @@ private theorem coefficientDirectImageComparison_app_heq
   heq_of_eq ((Classical.choose_spec
     (proEtaleCoefficientDirectImageComparison_existsUnique f φ)).1 N U x)
 
+/-- The finite comparison is sectionwise the identity in the normalized module categories. -/
+private theorem normalizedCoefficientDirectImageComparison_app_heq
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (N : normalizedDVRModules l L X n) :
+    letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+    ∀ (U : Y.ProEtᵒᵖ)
+      (x : ((proEtaleCoefficientRestrictScalars Y (integralScalarQuotientMap l E L ι n)).obj
+        ((proEtaleConstantModuleDirectImage f
+          (Padic.coefficientExtensionRing l L (n + 1))).obj N)).val.obj U),
+      HEq ((((proEtaleCoefficientDirectImageComparison f
+        (integralScalarQuotientMap l E L ι n)).hom.app N).val.app U).hom x) x := by
+  have := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+  intro U x
+  exact coefficientDirectImageComparison_app_heq
+    (A := Padic.coefficientExtensionRing l E (n + 1))
+    (B := Padic.coefficientExtensionRing l L (n + 1))
+    f (integralScalarQuotientMap l E L ι n) N U x
+
 /-- Two triples of sectionwise identity maps have the same composite. -/
 private theorem sheafOfModules_comp_three_eq_of_heq
     {C : Type*} [Category C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
@@ -1055,10 +1074,8 @@ private theorem ordinaryDirectRestrictionEvaluation_cube {X Y : Scheme.{u}} (f :
   · intro W x
     exact heq_apply_of_heq_id _ (hρY _ W) rfl rfl x
   · exact normalizedRestrictScalars_map_heq l E L ι (W := Y) (n := n) (dL.app N) (pdL N)
-  · exact coefficientDirectImageComparison_app_heq
-      (A := Padic.coefficientExtensionRing l E (n + 1))
-      (B := Padic.coefficientExtensionRing l L (n + 1))
-      f (integralScalarQuotientMap l E L ι n) ((coefficientSequenceEvaluation l L X n).obj N)
+  · exact normalizedCoefficientDirectImageComparison_app_heq l E L ι f n
+      ((coefficientSequenceEvaluation l L X n).obj N)
 
 end OrdinaryCube
 
