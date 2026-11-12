@@ -87,8 +87,8 @@ private theorem tensorHom_counit_evaluation
         (adj.counit.app (H.obj (op P, Q)) ⊗ₘ adj.counit.app P)) ≫
       R.map (e _ P Q (𝟙 _)) := by
   have hn := he _ _ P P Q Q (adj.counit.app (H.obj (op P, Q))) (𝟙 P) (𝟙 Q) (𝟙 _)
-  change e _ P Q (_ ≫ 𝟙 _ ≫ H.map (𝟙 (op P, Q))) = _ at hn
-  simp only [Functor.map_id, Category.comp_id] at hn
+  have hid : H.map ((𝟙 P).op, 𝟙 Q) = 𝟙 (H.obj (op P, Q)) := H.map_id (op P, Q)
+  erw [hid, Category.comp_id, Category.comp_id, Category.comp_id] at hn
   rw [Adjunction.homEquiv_counit, F.map_id, Category.id_comp, hn,
     ← adj.homEquiv_naturality_right]
   exact congrArg (adj.homEquiv _ Q)
@@ -128,6 +128,59 @@ private theorem evaluation_formula (S : Scheme.{u})
     (derivedInternalHom (Opens.grothendieckTopology S) S.sheaf).map_id (op P, Q)
   erw [hid] at hn
   simpa only [Category.comp_id] using hn
+
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
+private theorem tensorHom_directImage_evaluation
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (H : Dᵒᵖ × D ⥤ D) (R : C ⥤ D)
+    (e : ∀ A P Q : D, (A ⟶ H.obj (op P, Q)) ≃ (A ⊗ P ⟶ Q))
+    (he : ∀ (A A' P P' Q Q' : D) (a : A' ⟶ A) (b : P' ⟶ P) (d : Q ⟶ Q')
+      (z : A ⟶ H.obj (op P, Q)),
+      e A' P' Q' (a ≫ z ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A P Q z ≫ d)
+    {A P Q E : C} {U V : D} (a : A ⟶ E)
+    (c : R.obj E ⟶ H.obj (op (R.obj P), R.obj Q))
+    (v : E ⊗ P ⟶ Q) (q : A ⊗ P ⟶ Q)
+    (μ : R.obj A ⊗ R.obj P ⟶ R.obj (A ⊗ P))
+    (μE : R.obj E ⊗ R.obj P ⟶ R.obj (E ⊗ P))
+    (ha : (a ⊗ₘ 𝟙 P) ≫ v = q)
+    (hc : e _ _ _ c = μE ≫ R.map v)
+    (hμ : (R.map a ⊗ₘ 𝟙 (R.obj P)) ≫ μE = μ ≫ R.map (a ⊗ₘ 𝟙 P))
+    (b : U ⟶ R.obj A) (d : V ⟶ R.obj P) :
+    e U V (R.obj Q) (b ≫ R.map a ≫ c ≫ H.map (d.op, 𝟙 _)) =
+      (b ⊗ₘ d) ≫ μ ≫ R.map q := by
+  have hn := he _ _ _ _ _ _ (b ≫ R.map a) d (𝟙 _) c
+  simp only [Category.comp_id, Category.assoc] at hn
+  rw [hn, hc]
+  have hs : ((b ≫ R.map a) ⊗ₘ d) = (b ⊗ₘ d) ≫ (R.map a ⊗ₘ 𝟙 _) := by
+    rw [tensorHom_comp_tensorHom, Category.comp_id]
+  rw [hs]
+  simp only [Category.assoc]
+  rw [reassoc_of% hμ, ← R.map_comp, ha]
+
+omit [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] in
+private theorem tensorHom_pullback_evaluation
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (H : Dᵒᵖ × D ⥤ D) (F : C ⥤ D)
+    (τ : tensor C ⋙ F ≅ F.prod F ⋙ tensor D)
+    (e : ∀ A P Q : D, (A ⟶ H.obj (op P, Q)) ≃ (A ⊗ P ⟶ Q))
+    (he : ∀ (A A' P P' Q Q' : D) (a : A' ⟶ A) (b : P' ⟶ P) (d : Q ⟶ Q')
+      (z : A ⟶ H.obj (op P, Q)),
+      e A' P' Q' (a ≫ z ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A P Q z ≫ d)
+    {A P Q E : C} {V : D} (t : A ⟶ E)
+    (b : F.obj E ⟶ H.obj (op (F.obj P), F.obj Q))
+    (v : E ⊗ P ⟶ Q) (q : A ⊗ P ⟶ Q)
+    (hb : e _ _ _ b = τ.inv.app (E, P) ≫ F.map v)
+    (ht : (t ⊗ₘ 𝟙 P) ≫ v = q) (d : F.obj Q ⟶ V) :
+    e _ _ _ (F.map t ≫ b ≫ H.map ((𝟙 (F.obj P)).op, d)) =
+      τ.inv.app (A, P) ≫ F.map q ≫ d := by
+  rw [he, hb]
+  have hn := τ.inv.naturality (X := (A, P)) (Y := (E, P)) (t, 𝟙 P)
+  dsimp only [Functor.comp_map, Functor.prod_map, tensor] at hn
+  rw [Functor.map_id] at hn
+  simp only [Category.assoc]
+  rw [reassoc_of% hn, ← F.map_comp, ht]
 
 set_option profiler true in
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
@@ -222,63 +275,36 @@ theorem mixedInternalHom_baseChange_exchange
     L.map t ≫ b ≫ (H Y').map ((𝟙 _).op, β N) by
       simpa only [z, t, a, b, R, R', L, L', E, β, Category.assoc] using hex
   apply (schemeDerivedTensorHomEquiv Y' _ _ _).injective
-  have hl := schemeHomTensorHom_naturality Y'
-    (R'.obj E') (L.obj (R.obj E)) (R'.obj (L'.obj M)) (L.obj (R.obj M))
-    (R'.obj (L'.obj N)) (R'.obj (L'.obj N)) (β E ≫ R'.map a) (β M) (𝟙 _)
-    ((c (pullback.snd f g)).app (op (L'.obj M), L'.obj N))
-  simp only [Category.comp_id] at hl
-  have hr := schemeHomTensorHom_naturality Y'
-    _ _ _ _ _ _ (L.map t) (𝟙 _) (β N) b
-  have hc' : schemeDerivedTensorHomEquiv Y' (R'.obj E')
-      (R'.obj (L'.obj M)) (R'.obj (L'.obj N))
-      ((c (pullback.snd f g)).app (op (L'.obj M), L'.obj N)) =
-      mixedDirectImageTensorPairing (pullback.snd f g) E' (L'.obj M) ≫
-        R'.map (schemeDerivedTensorHomEquiv (pullback f g) E' (L'.obj M) (L'.obj N)
-          (𝟙 E')) := directImage_evaluation (pullback.snd f g) (L'.obj M) (L'.obj N)
-  have hc := directImage_evaluation f M N
-  simp only [z, Category.assoc] at hl ⊢
-  rw [hl, hr, hc']
-  have hp' := evaluation_formula (pullback f g) _ _ _ a
-  have hpt := evaluation_formula Y _ _ _ t
   have ha : schemeDerivedTensorHomEquiv (pullback f g) _ _ _ a =
       (mixedHomTensorPullbackIso (pullback.fst f g)).inv.app (E, M) ≫
-        L'.map (schemeDerivedTensorHomEquiv X E M N (𝟙 E)) := by
-    exact (schemeDerivedTensorHomEquiv (pullback f g) _ _ _).apply_symm_apply _
+        L'.map (schemeDerivedTensorHomEquiv X E M N (𝟙 E)) :=
+    (schemeDerivedTensorHomEquiv (pullback f g) _ _ _).apply_symm_apply _
   have hb : schemeDerivedTensorHomEquiv Y' _ _ _ b =
       (mixedHomTensorPullbackIso g).inv.app
         ((H Y).obj (op (R.obj M), R.obj N), R.obj M) ≫
-        L.map (schemeDerivedTensorHomEquiv Y _ _ _ (𝟙 _)) := by
-    exact (schemeDerivedTensorHomEquiv Y' _ _ _).apply_symm_apply _
-  rw [hb]
+        L.map (schemeDerivedTensorHomEquiv Y _ _ _ (𝟙 _)) :=
+    (schemeDerivedTensorHomEquiv Y' _ _ _).apply_symm_apply _
   have hq := tensorPairing_naturality (pullback.snd f g) a (𝟙 (L'.obj M))
-  have ht := (mixedHomTensorPullbackIso g).inv.naturality
-    (X := (R.obj E, R.obj M))
-    (Y := ((H Y).obj (op (R.obj M), R.obj N), R.obj M)) (t, 𝟙 _)
-  dsimp only [Functor.comp_map, Functor.prod_map, tensor] at ht
-  rw [CategoryTheory.Functor.map_id] at hq ht
-  have hsplit : ((β E ≫ R'.map a) ⊗ₘ β M) =
-      (β E ⊗ₘ β M) ≫ (R'.map a ⊗ₘ 𝟙 _) := by
-    rw [tensorHom_comp_tensorHom, Category.comp_id]
-  rw [hsplit]
-  simp only [Category.assoc]
-  rw [reassoc_of% hq, ← R'.map_comp, ← hp', ha]
-  rw [reassoc_of% ht]
-  have hm := map_pair_comp L (t ⊗ₘ 𝟙 (R.obj M))
+  erw [Functor.map_id] at hq
+  have hl := tensorHom_directImage_evaluation (H Y') R'
+    (schemeDerivedTensorHomEquiv Y') (schemeHomTensorHom_naturality Y') a
+    ((c (pullback.snd f g)).app (op (L'.obj M), L'.obj N))
+    (schemeDerivedTensorHomEquiv (pullback f g) E' (L'.obj M) (L'.obj N) (𝟙 E'))
+    ((mixedHomTensorPullbackIso (pullback.fst f g)).inv.app (E, M) ≫
+      L'.map (schemeDerivedTensorHomEquiv X E M N (𝟙 E)))
+    (mixedDirectImageTensorPairing (pullback.snd f g) (L'.obj E) (L'.obj M))
+    (mixedDirectImageTensorPairing (pullback.snd f g) E' (L'.obj M))
+    ((evaluation_formula (pullback f g) _ _ _ a).symm.trans ha)
+    (directImage_evaluation (pullback.snd f g) (L'.obj M) (L'.obj N)) hq (β E) (β M)
+  have hr := tensorHom_pullback_evaluation (H Y') L (mixedHomTensorPullbackIso g)
+    (schemeDerivedTensorHomEquiv Y') (schemeHomTensorHom_naturality Y') t b
     (schemeDerivedTensorHomEquiv Y ((H Y).obj (op (R.obj M), R.obj N))
       (R.obj M) (R.obj N) (𝟙 _))
-  have hm' := congrArg (fun k ↦
-    (mixedHomTensorPullbackIso g).inv.app (R.obj E, R.obj M) ≫ k ≫ β N) hm
-  have heval : (t ⊗ₘ 𝟙 (R.obj M)) ≫
-      schemeDerivedTensorHomEquiv Y ((H Y).obj (op (R.obj M), R.obj N))
-        (R.obj M) (R.obj N) (𝟙 _) =
-      mixedDirectImageTensorPairing f E M ≫
-        R.map (schemeDerivedTensorHomEquiv X E M N (𝟙 E)) := hpt.symm.trans hc
-  have hm'' := congrArg (fun k ↦
-    (mixedHomTensorPullbackIso g).inv.app (R.obj E, R.obj M) ≫ L.map k ≫ β N) heval
-  have hright := Eq.trans hm' hm''
-  simp only [Category.assoc] at hright
-  apply Eq.trans _ hright.symm
-  exact mixedTensorPairing_baseChange f g E M N
-    (schemeDerivedTensorHomEquiv X E M N (𝟙 E))
+    (mixedDirectImageTensorPairing f E M ≫
+      R.map (schemeDerivedTensorHomEquiv X E M N (𝟙 E))) hb
+    ((evaluation_formula Y _ _ _ t).symm.trans (directImage_evaluation f M N)) (β N)
+  simpa only [z, Category.assoc] using
+    hl.trans ((mixedTensorPairing_baseChange f g E M N
+      (schemeDerivedTensorHomEquiv X E M N (𝟙 E))).trans hr.symm)
 
 end AlgebraicGeometry
