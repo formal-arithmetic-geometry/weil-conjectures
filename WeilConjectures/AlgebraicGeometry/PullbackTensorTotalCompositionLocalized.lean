@@ -64,6 +64,14 @@ local instance pullbackTensorTotal_hasMapBifunctor (X : Scheme.{u})
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (.up ℤ) := by
   infer_instance
 
+local instance pullbackTensorTotal_modules_hasMapBifunctor (X : Scheme.{u})
+    (P N : CochainComplex X.Modules ℤ) :
+    letI := pullbackDescentModuleTensor X
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+    HomologicalComplex.HasMapBifunctor P N (curriedTensor X.Modules) (.up ℤ) :=
+  pullbackTensorTotal_hasMapBifunctor X P N
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
@@ -95,7 +103,6 @@ private theorem pullbackTensorModelMap_natural (X : Scheme.{u})
   let : Functor.LaxMonoidal (DerivedCategory.Q (C := X.Modules)) := pullbackDescentQLax X
   exact Functor.LaxMonoidal.μ_natural (DerivedCategory.Q (C := X.Modules)) a b
 
-set_option profiler true in
 private theorem pullback_tensor_total_composition_chain
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
@@ -440,7 +447,11 @@ theorem pullback_tensor_total_composition_localized
   let Fc := F.mapHomologicalComplex (.up ℤ)
   let Gc := G.mapHomologicalComplex (.up ℤ)
   let b := Functor.mapHomologicalComplexCompIso (tensorCompMate f g) (.up ℤ)
-  have hchain := pullback_tensor_total_composition_chain f g P N ψ hψ θ hθ φ hφ
+  have hchain : Fc.map ψ.hom ≫ θ.hom ≫
+      HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
+        (curriedTensor X.Modules) (.up ℤ) =
+      b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom :=
+    pullback_tensor_total_composition_chain f g P N ψ hψ θ hθ φ hφ
   have hsol : HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
       (curriedTensor _) (.up ℤ) =
       θ.inv ≫ Fc.map ψ.inv ≫ b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom := by
