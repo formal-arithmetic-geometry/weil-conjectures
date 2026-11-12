@@ -122,6 +122,46 @@ private lemma exists_surjective_galoisRestriction_of_equiv
     simp only [π, MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.apply_symm_apply]
     exact τ.restrict_liftNormal Ω
 
+/-- Exchange invertibility is independent of the presentation of its source model. -/
+private lemma isIso_pullbackExchange_app_of_model_eq
+    {X S S' : Scheme.{u}} {M₀ M₁ : NearbyCyclesModel X S} {N : NearbyCyclesModel X S'}
+    {f : X ⟶ X} {f' : S ⟶ S'}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (φ₀ : M₀.Hom N f f') (φ₁ : M₁.Hom N f f')
+    (hM : M₀ = M₁) (hφ : HEq φ₀ φ₁)
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (h : IsIso ((φ₀.pullbackExchange Λ).app A)) :
+    IsIso ((φ₁.pullbackExchange Λ).app A) := by
+  cases hM
+  cases hφ
+  exact h
+
+/-- A Galois average is independent of the presentation of its source model. -/
+private lemma galois_average_of_model_eq
+    {X S : Scheme.{u}} {M₀ M₁ N : NearbyCyclesModel X S}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {L Ω : Type*} [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω]
+    (L₁ : FiniteGaloisIntermediateField L Ω)
+    (ψ₀ : M₀.Hom N (𝟙 X) (𝟙 S)) (ψ₁ : M₁.Hom N (𝟙 X) (𝟙 S))
+    (act₀ : Gal(Ω/L) → M₀.Hom M₀ (𝟙 X) (𝟙 S))
+    (act₁ : Gal(Ω/L) → M₁.Hom M₁ (𝟙 X) (𝟙 S))
+    (hM : M₀ = M₁) (hψ : HEq ψ₀ ψ₁) (hact : HEq act₀ act₁)
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (h : ∃ r, (ψ₀.pullbackExchange Λ).app A ≫ r = 𝟙 _ ∧
+      Fintype.card Gal(L₁.toIntermediateField/L) • (r ≫ (ψ₀.pullbackExchange Λ).app A) =
+        ∑ τ : Gal(L₁.toIntermediateField/L),
+          (act₀ (τ.liftNormal Ω)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A)) :
+    ∃ r, (ψ₁.pullbackExchange Λ).app A ≫ r = 𝟙 _ ∧
+      Fintype.card Gal(L₁.toIntermediateField/L) • (r ≫ (ψ₁.pullbackExchange Λ).app A) =
+        ∑ τ : Gal(L₁.toIntermediateField/L),
+          (act₁ (τ.liftNormal Ω)).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A) := by
+  cases hM
+  cases hψ
+  cases hact
+  exact h
+
 /-- An equivariant Galois average gives a retraction averaged over a finite quotient. -/
 private lemma exists_subgroup_pullbackExchange_of_galois_average
     {X S S' : Scheme.{u}} {M'' N₁ N : NearbyCyclesModel X S}
@@ -308,32 +348,42 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
         ph112_data_diff "constructibility" hC
         cast_proofs hC) E K₀ e htors).elim fun L₁ hL₁ ↦ ?_
   ph112_remaining "PH112 finite layer ready"
+  let χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
+    (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+    (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian
+  let ψ := (baseChangeGaloisModel hM b hb v hv).galoisLayerHom
+    (baseChangeGaloisResidue hM b hb v hv)
+    (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
+  let actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+    (baseChangeGaloisResidue hM b hb v hv)
+    (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
   have result := exists_subgroup_pullbackExchange_of_galois_average
     (Λ := Profinite.padicAlgClRingObj ℓ)
-    (ρ := baseChangeToGaloisLayer hM b hb v hv)
-    (ψ := (baseChangeGaloisModel hM b hb v hv).galoisLayerHom
-      (baseChangeGaloisResidue hM b hb v hv)
-      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
-    (χ := ((baseChangeHom hM b hb v hv).traitChangeModelHom (traitGenericField K)
-      (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
-      (baseChangeHom_total_comp hM b hb v hv)).comp (baseChangeHom hM b hb v hv).fromCartesian)
-    (φ := baseChangeHom hM b hb v hv)
-    (A := A) (hχ := by
-      ph112_data_diff "cartesian" hM1
-      convert (config := {closePre := false, typeEqs := true}) hM1 using 6)
+    (ρ := baseChangeToGaloisLayer hM b hb v hv) (ψ := ψ) (χ := χ)
+    (φ := baseChangeHom hM b hb v hv) (A := A)
+    (hχ := by
+      exact isIso_pullbackExchange_app_of_model_eq
+        (M₀ := (baseChangeHom hM b hb v hv).traitChangeModel (traitGenericField K)
+          (baseChangeTotalStructure hM b hb v hv) q g hM.isPullback_j.w
+          (baseChangeHom_total_comp hM b hb v hv))
+        (M₁ := baseChangeGaloisModel hM b hb v hv)
+        (Profinite.padicAlgClRingObj ℓ) χ χ rfl HEq.rfl A hM1)
     (htot := baseChangeToGaloisModel_comp_total hM b hb v hv)
     (hgen := baseChangeToGaloisModel_comp_generic hM b hb v hv)
     (hρ := isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _)
     (act := baseChangeAut hM b hb v hv)
-    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁)
-    (actΩ := (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
-      (baseChangeGaloisResidue hM b hb v hv)
-      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+    (eG := GenericAut.galoisEquiv (k' := k') (K := K)) (L₁ := L₁) (actΩ := actΩ)
     (hmul := autAction_baseChangeAut_mul hM b hb v hv _)
     (hint := pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv _)
-    (htriv := hL₁.1) (hSA := by
-      ph112_data_diff "average" hL₁.2
-      convert (config := {closePre := false, typeEqs := true}) hL₁.2 using 10)
+    (htriv := hL₁.1)
+    (hSA := by
+      exact galois_average_of_model_eq
+        (M₀ := (baseChangeGaloisModel hM b hb v hv).galoisLayer
+          (baseChangeGaloisResidue hM b hb v hv)
+          (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K)))
+        (M₁ := baseChangeGaloisLayer hM b hb v hv)
+        (Profinite.padicAlgClRingObj ℓ) L₁ ψ ψ actΩ actΩ rfl HEq.rfl HEq.rfl A
+        (by cast_proofs hL₁.2))
   ph112_remaining "PH112 average ready"
   ph112_data_diff "conclusion" result
   cast_proofs result
