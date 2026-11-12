@@ -108,8 +108,9 @@ private theorem splitMono_padicSubfield_of_integral
             N.generic)).leftDerivedFunctor.obj
             ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) := by
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
-  fo_apply isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E φ.commSq_j M.i
-    using ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀), n₀, hn₀, h𝒪
+  fo_apply isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers
+    using ℓ, E, φ.commSq_j, M.i,
+      ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀), n₀, hn₀, h𝒪
 
 open PadicAlgCl in
 /-- **Split pullback exchanges from the integral case** (the mechanism of SGA 4½,
