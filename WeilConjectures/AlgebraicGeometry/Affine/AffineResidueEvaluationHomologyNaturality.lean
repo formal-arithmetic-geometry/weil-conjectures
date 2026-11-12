@@ -99,8 +99,8 @@ theorem affine_residue_evaluation_homology_naturality
   have : T.Additive := (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
   let Gp := (F ⋙ S).mapHomologicalComplex (.up ℤ)
   let G := (F ⋙ T).mapHomologicalComplex (.up ℤ)
-  obtain ⟨δ'⟩ := affine_residue_scalar_transport W U hU ⟨w, hwU⟩
-  let δ : S ⋙ R ≅ T := δ'
+  let δ : S ⋙ R ≅ T := Classical.choice
+    (affine_residue_scalar_transport W U hU ⟨w, hwU⟩)
   let σ : Gp ⋙ R.mapHomologicalComplex (.up ℤ) ≅ G := by
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
@@ -112,13 +112,14 @@ theorem affine_residue_evaluation_homology_naturality
     Functor.isoWhiskerLeft Gp (restrictionHomologyIso e.hom.hom 1) ≪≫
       Functor.isoWhiskerRight σ
         (HomologicalComplex.homologyFunctor (ModuleCat.{v} (W.residueField w)) (.up ℤ) 1)
-  obtain ⟨q, hq⟩ := affine_residue_quotient_homology_naturality
-    W U (hU.isoSpec.hom ⟨w, hwU⟩).asIdeal
-  refine ⟨fun K ↦ (q K).trans (γ.app K).toLinearEquiv.toAddEquiv, ?_⟩
-  intro K C φ z
-  change (γ.app C).hom (q C (affineResidueCycleHomologyMap φ z)) = _
-  rw [hq K C φ z]
-  exact ConcreteCategory.congr_hom (γ.hom.naturality φ) (q K z)
+  let q := Classical.choose (affine_residue_quotient_homology_naturality
+    W U (hU.isoSpec.hom ⟨w, hwU⟩).asIdeal)
+  have hq := Classical.choose_spec (affine_residue_quotient_homology_naturality
+    W U (hU.isoSpec.hom ⟨w, hwU⟩).asIdeal)
+  exact ⟨fun K ↦ (q K).trans (γ.app K).toLinearEquiv.toAddEquiv, fun K C φ z ↦ by
+    change (γ.app C).hom (q C (affineResidueCycleHomologyMap φ z)) = _
+    rw [hq K C φ z]
+    exact ConcreteCategory.congr_hom (γ.hom.naturality φ) (q K z)⟩
 
 end
 end AlgebraicGeometry.Scheme
