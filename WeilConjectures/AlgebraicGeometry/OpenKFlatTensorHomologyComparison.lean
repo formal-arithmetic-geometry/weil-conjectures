@@ -271,7 +271,7 @@ theorem open_kFlat_tensor_homology_comparison
   let M := SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))
   let := HasDerivedCategory.standard M
-  obtain ⟨L, a, b, ha, hb⟩ := quasiIso_common_roof (VC.map q) s t
+  obtain ⟨L, a, b, ha, hb⟩ := quasiIso_common_roof (C := M) (VC.map q) s t
   let N := (HomologicalComplex.single M (.up ℤ) 0).obj (V.obj F)
   obtain ⟨d⟩ := site_kFlat_tensor_homology_iso hVP hT a b ha hb N i
   obtain ⟨c⟩ := open_localized_tensor_homology_iso R U inferInstance P F i
