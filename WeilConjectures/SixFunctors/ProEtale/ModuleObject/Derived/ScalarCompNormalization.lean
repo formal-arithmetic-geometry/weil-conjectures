@@ -69,7 +69,7 @@ theorem scalarCompNormalization
         ((NatTrans.mapHomotopyCategory (Mod.extendScalarsComp φ ψ).hom (.up ℤ)).app K ≫
           (Functor.mapHomotopyCategoryCompIso
             (Iso.refl (Mod.extendScalars φ ⋙ Mod.extendScalars ψ)) (.up ℤ)).inv.app K) := by
-  rw [scalarCompNormalization_comparison (Mod.extendScalarsComp φ ψ).symm]
+  erw [scalarCompNormalization_comparison (Mod.extendScalarsComp φ ψ).symm (.up ℤ) K]
   simpa only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
     Functor.map_id, Category.comp_id] using
     congrArg (fun f ↦ f ≫ DerivedCategory.Qh.map
