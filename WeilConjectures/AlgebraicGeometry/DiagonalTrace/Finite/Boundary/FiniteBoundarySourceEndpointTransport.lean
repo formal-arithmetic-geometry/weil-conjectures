@@ -62,6 +62,7 @@ theorem finiteBoundary_source_endpoint
     (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
   have ha := k.coefficient_one n U x (hx.trans hx')
   have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
-  exact ha.trans ((hi.trans Int.cast_one).symm)
+  rw [Int.cast_one] at hi
+  exact ha.trans hi.symm
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

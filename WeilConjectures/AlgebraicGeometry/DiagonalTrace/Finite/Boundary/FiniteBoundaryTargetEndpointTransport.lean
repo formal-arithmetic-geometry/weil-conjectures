@@ -55,7 +55,6 @@ theorem finiteBoundary_target_endpoint
   simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id]
   apply Sheaf.hom_ext
   ext U z
-  simp only [NatTrans.comp_app, AddCommGrpCat.comp_apply]
   trace "target: extensionality complete"
   let x' := (c.rootForget.inv.app (op n)).hom.app U z
   let x : c.rootModule.val.obj (op (n, U.unop)) :=
