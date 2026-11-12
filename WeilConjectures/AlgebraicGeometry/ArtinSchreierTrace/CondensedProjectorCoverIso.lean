@@ -102,7 +102,6 @@ private lemma functionPull_comp
     Category.comp_id] at hc ⊢
   simp only [Category.assoc]
   erw [← hc]
-  simp only [Category.assoc]
   erw [← (ProEtale.lowerStarComp Ab.{u + 1} g pP).hom.naturality_assoc]
   rfl
 

@@ -155,6 +155,29 @@ private lemma tensor_map_second {X : Scheme.{u}}
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A) (𝟙 _)).unit.naturality
         (SheafOfModules.siteTensorSecondMap M.val g.val))).symm
 
+private lemma adicSliceTensorIso_hom (l : ℕ) [Fact l.Prime]
+    (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
+    (c : ∀ (X : Scheme.{u}) (U : X.ProEt),
+      (base U.left).ring ≅
+        (localizationRestriction RingCat.{u + 1} U.hom U.prop).obj (base X).ring)
+    (r : AdicSliceRestrictionData l base c)
+    (X : Scheme.{u}) (U : X.ProEt) (M N : AdicSheaf l X)
+    : (adicSliceTensorIso l base c r X U M N).hom =
+      let P := base X
+      let Q := base U.left
+      let F := adicComparisonRestriction U P Q (c X U)
+      let m := (adicUpperStar l U.hom).obj M
+      let n := (adicUpperStar l U.hom).obj N
+      ((Q.E.functor.mapIso (adicSliceNativeTensorIso U M N)) ≪≫
+        (r.sliceIso X U).app ((Mod.tensorLeft N).obj M) ≪≫
+          F.mapIso ((P.tensorIso N).app M)).inv ≫
+      ((Q.tensorIso n).app m).hom ≫
+      (SheafOfModules.siteSheafTensorRight (A := Q.R) (Q.E.functor.obj n)).map
+        ((r.sliceIso X U).app M).hom ≫
+      SheafOfModules.siteSheafTensorSecondMap (A := Q.R) (F.obj (P.E.functor.obj M))
+        ((r.sliceIso X U).app N).hom := by
+  rfl
+
 set_option profiler true in
 /-- The explicitly constructed tensor restriction iso preserves local pure tensors.
 Source: Stacks 03EL and 0E8H; the pure-tensor test in step 2 of the parent comparison.
@@ -195,6 +218,7 @@ theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
           ((base X).E.functor.obj M))
         ((adicComparisonRestriction U (base X) (base U.left) (c X U)).obj
           ((base X).E.functor.obj N)) V x y := by
+  rw [adicSliceTensorIso_hom]
   let P := base X
   let Q := base U.left
   let F := adicComparisonRestriction U P Q (c X U)
@@ -206,11 +230,11 @@ theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
   obtain ⟨a, ha⟩ := (Q.sectionsEquiv m V).surjective (sm.inv.val.app V x)
   obtain ⟨b, hb⟩ := (Q.sectionsEquiv n V).surjective (sn.inv.val.app V y)
   have hx : sm.hom.val.app V (Q.sectionsEquiv m V a) = x := by
-    rw [ha]
-    exact congrArg (fun f ↦ f.val.app V x) sm.inv_hom_id
+    exact (congrArg (fun t ↦ sm.hom.val.app V t) ha).trans
+      (congrArg (fun f ↦ f.val.app V x) sm.inv_hom_id)
   have hy : sn.hom.val.app V (Q.sectionsEquiv n V b) = y := by
-    rw [hb]
-    exact congrArg (fun f ↦ f.val.app V y) sn.inv_hom_id
+    exact (congrArg (fun t ↦ sn.hom.val.app V t) hb).trans
+      (congrArg (fun f ↦ f.val.app V y) sn.inv_hom_id)
   let d := (Q.E.functor.mapIso (adicSliceNativeTensorIso U M N)) ≪≫
     (r.sliceIso X U).app ((Mod.tensorLeft N).obj M) ≪≫
       F.mapIso ((P.tensorIso N).app M)
@@ -241,15 +265,10 @@ theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
   let k := ((Q.tensorIso n).app m).hom ≫
     (SheafOfModules.siteSheafTensorRight (A := Q.R) (Q.E.functor.obj n)).map sm.hom ≫
       SheafOfModules.siteSheafTensorSecondMap (A := Q.R) (F.obj (P.E.functor.obj M)) sn.hom
-  rw [← hd]
-  change k.val.app V (d.inv.val.app V (d.hom.val.app V z)) = _
   have hdid : d.inv.val.app V (d.hom.val.app V z) = z :=
     congrArg (fun f ↦ f.val.app V z) d.hom_inv_id
-  rw [hdid]
-  change (SheafOfModules.siteSheafTensorSecondMap (A := Q.R)
-    (F.obj (P.E.functor.obj M)) sn.hom).val.app V
-      (((SheafOfModules.siteSheafTensorRight (A := Q.R) (Q.E.functor.obj n)).map
-        sm.hom).val.app V (((Q.tensorIso n).hom.app m).val.app V z)) = _
+  refine (congrArg (fun t ↦ k.val.app V (d.inv.val.app V t)) hd.symm).trans ?_
+  refine (congrArg (fun t ↦ k.val.app V t) hdid).trans ?_
   have hfirst := tensor_map_first (X := U.left) Q.R
     (M := Q.E.functor.obj m) (M' := F.obj (P.E.functor.obj M))
     (N := Q.E.functor.obj n) sm.hom V (Q.sectionsEquiv m V a) (Q.sectionsEquiv n V b)
