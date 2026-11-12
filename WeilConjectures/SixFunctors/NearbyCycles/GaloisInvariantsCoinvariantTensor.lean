@@ -66,6 +66,31 @@ theorem galoisTensorRightColimit (Y : Scheme.{u})
 attribute [local instance 2000] galoisTensorModuleColimit galoisTensorLeftColimit
   galoisTensorRightColimit
 
+/-- Transport the normalized trace retraction of a tower from a bounded below complex
+across an isomorphism in the derived category. -/
+theorem galoisTower_derivedUnit_retraction_of_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {S S∞ : Scheme.{u}} (g : S∞ ⟶ S) [WeaklyEtale g] (T : GaloisTower g)
+    (hd : ∀ (j : T.J) (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)), IsIso (Fintype.card (T.Γ j) • 𝟙 M))
+    (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S)) ℤ) (hc : ∀ n, IsColimit (T.moduleCocone Λ (K.X n)))
+    (a : ℤ) [K.IsStrictlyGE a]
+    (hK : ∀ n, ((g)_*⟦Λ⟧).rightAcyclic (((g)^*⟦Λ⟧).obj (K.X n)))
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))} (e : DerivedCategory.Q.obj K ≅ A) :
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).unit.app A ≫
+      (R((g)_*⟦Λ⟧).map (L((g)^*⟦Λ⟧).map e.inv) ≫
+        Adjunction.derivedUnitRetraction (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK
+          (T.complexTrace Λ hd K hc) ≫ e.hom) = 𝟙 _ := by
+  have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).unit.naturality e.inv
+  simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
+  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction
+    (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK (T.complexTrace Λ hd K hc)
+    (CondensedRing.upperStarLowerStarAdjunction Λ g) (T.unit_comp_complexTrace Λ hd K hc)
+  rw [← reassoc_of% hn, reassoc_of% hadj]
+  exact e.inv_hom_id
+
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
@@ -149,25 +174,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     have := pullbackAction_comp_galoisLevelProjection h j (act k)
     rw [hres] at this
     exact this
-  have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction
-    (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK
-    ((galoisTower Ω h).complexTrace Λ hd K hc)
-    (CondensedRing.upperStarLowerStarAdjunction Λ
-      g)
-    ((galoisTower Ω h).unit_comp_complexTrace Λ hd K hc)
   let R := R((g)_*⟦Λ⟧).map (L((g)^*⟦Λ⟧).map e.inv) ≫
     Adjunction.derivedUnitRetraction (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK
       ((galoisTower Ω h).complexTrace Λ hd K hc) ≫ e.hom
-  have hRC : (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).unit.app
-      (L((N.ε)^*⟦Λ⟧).obj C) ≫ R = 𝟙 _ := by
-    dsimp only [R]
-    have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction
-      Λ
-      g).unit.naturality e.inv
-    simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
-    rw [← reassoc_of% hn]
-    erw [reassoc_of% hadj]
-    exact e.inv_hom_id
+  have hRC := galoisTower_derivedUnit_retraction_of_iso Λ g (galoisTower Ω h) hd K hc a hK e
   let i := (leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)
   let eLayer := N.galoisLayerExchangeIso h Ω Λ C
   let r := eLayer.inv ≫ L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map R) ≫ i.inv
