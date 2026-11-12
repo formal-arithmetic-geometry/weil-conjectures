@@ -144,7 +144,6 @@ private theorem exists_isIso_map_kunnethMap_of_not_isClosed_of_charts
       (hslice (by omega)) (by omega) hm
       (locallyEmbedsInAffineSpace_pullback_reindex cN a _) heM heN hA hB
 
-set_option profiler true in
 /-- **The non-closed points are reached by generic slices**: under the generic-slicing step in
 chart dimension `m + m' - 1` with coefficients `Λ`, every point `z` of the special fibre of the
 product which is not closed is the image of a point under a morphism `h : W ⟶ X_s × Y_s` along
