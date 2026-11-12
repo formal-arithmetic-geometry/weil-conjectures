@@ -264,37 +264,24 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
   dsimp only [Functor.id_obj, Functor.id_map] at hnat
   run_tac Lean.logInfo m!"PH329: simplified naturality: {(← Lean.getRemainingHeartbeats) / 1000}"
   let α := (τ.pullbackExchange Λ).app C
-  with_reducible
-    let F : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₁') Ab.{u + 1})
-        (condensedRingObj Λ X₁')) ⥤
-        DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1})
-          (condensedRingObj Λ X₂')) := L((f')^*⟦Λ⟧)
-  run_tac Lean.logInfo m!"PH329: named pullback functor: {(← Lean.getRemainingHeartbeats) / 1000}"
   let A := Mod (Sheaf (Scheme.ProEt.topology X₂') Ab.{u + 1}) (condensedRingObj Λ X₂')
   let H := DerivedCategory.homologyFunctor A
   run_tac Lean.logInfo m!"PH329: specialized homology functors: {(← Lean.getRemainingHeartbeats) / 1000}"
   have hcons {X Y : DerivedCategory A} (g : X ⟶ Y) :
       (∀ q, IsIso ((H q).map g)) → IsIso g := (DerivedCategory.isIso_iff A g).2
   run_tac Lean.logInfo m!"PH329: specialized conservativity: {(← Lean.getRemainingHeartbeats) / 1000}"
-  with_reducible
-    have key₀ := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
-      F Ψ₂Ω
-  run_tac Lean.logInfo m!"PH329: specialized functors: {(← Lean.getRemainingHeartbeats) / 1000}"
-  with_reducible
-    have key₁ := key₀ H
-  run_tac Lean.logInfo m!"PH329: matched homology functors: {(← Lean.getRemainingHeartbeats) / 1000}"
-  with_reducible
-    have key := key₁ (fun g hg ↦ hcons g hg) α α₁ r₁ hr₁ α₂ r₂ hr₂
-      cA cB cB' I' _ _ _ hnat hIA β hsq
-      (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
-      (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
-        (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
-      (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
-        (L((𝟙 X₂)^*⟦Λ⟧).obj (L((f)^*⟦Λ⟧).obj C)))
-      (fun k ↦ (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
-        (σ k).1 (σ k).2 (hσ k) _).symm)
-      (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
-      (fun k ↦ he₂ (σ k).2) he₁
+  have key := isIso_of_invariant_summands_square (A := fun _ : ℤ ↦ A)
+    _ Ψ₂Ω H (fun g hg ↦ hcons g hg) α α₁ r₁ hr₁ α₂ r₂ hr₂
+    cA cB cB' I' _ _ _ hnat hIA β hsq
+    (fun k ↦ N₁.galoisLayerAction Λ h₁ Ω₁ (σ k).1 (L((𝟙 X₁)^*⟦Λ⟧).obj C))
+    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
+      (L((f)^*⟦Λ⟧).obj (L((𝟙 X₁)^*⟦Λ⟧).obj C)))
+    (fun k ↦ N₂.galoisLayerAction Λ h₂ Ω₂ (σ k).2
+      (L((𝟙 X₂)^*⟦Λ⟧).obj (L((f)^*⟦Λ⟧).obj C)))
+    (fun k ↦ (pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction Λ Ω₁ Ω₂ ω hω τ hτ
+      (σ k).1 (σ k).2 (hσ k) _).symm)
+    (fun k ↦ N₂.galoisLayerAction_naturality Λ h₂ Ω₂ (σ k).2 (cB.inv ≫ cA.hom))
+    (fun k ↦ he₂ (σ k).2) he₁
   run_tac Lean.logInfo m!"PH329: assembled helper application: {(← Lean.getRemainingHeartbeats) / 1000}"
   exact key
 
