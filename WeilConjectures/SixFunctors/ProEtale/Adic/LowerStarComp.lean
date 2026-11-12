@@ -197,25 +197,25 @@ lemma adicLowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T�
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
   have key := congrArg (fun φ ↦ φ.hom.app V)
     (lowerStarComp_exchange' (WeilCoefficients.{u} l) p q r hr a₁ a₂ a₃ h₁ h₂ h₁₃ M.X)
-  repeat' rw [Functor.map_comp]
-  repeat' rw [Mod.comp_hom']
-  repeat' rw [ObjectProperty.FullSubcategory.comp_hom]
-  repeat' rw [NatTrans.comp_app]
-  repeat' rw [adicLowerStar_map_hom_hom_app]
-  repeat' rw [adicLowerStarComp_hom_app_hom_hom_app]
-  repeat' rw [adicLowerStarComp_inv_app_hom_hom_app]
-  repeat' rw [adicLowerStarCongr_hom_app_hom_hom_app]
-  repeat' rw [adicLowerStar_obj_X_obj_map]
-  repeat' rw [Functor.map_comp] at key
-  repeat' rw [ObjectProperty.FullSubcategory.comp_hom] at key
-  repeat' rw [NatTrans.comp_app] at key
-  repeat' rw [lowerStar_map_hom_app'] at key
-  repeat' rw [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
-  repeat' rw [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
-  repeat' rw [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
-  repeat' rw [lowerStarComp_hom_app_hom_app] at key
-  repeat' rw [lowerStarComp_inv_app_hom_app] at key
-  repeat' rw [lowerStarCongr_hom_app_hom_app] at key
+  repeat' rewrite [Functor.map_comp]
+  repeat' rewrite [Mod.comp_hom']
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [adicLowerStar_map_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarComp_inv_app_hom_hom_app]
+  repeat' rewrite [adicLowerStarCongr_hom_app_hom_hom_app]
+  repeat' rewrite [adicLowerStar_obj_X_obj_map]
+  repeat' rewrite [Functor.map_comp] at key
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom] at key
+  repeat' rewrite [NatTrans.comp_app] at key
+  repeat' rewrite [lowerStar_map_hom_app'] at key
+  repeat' rewrite [lowerStarComp_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_lowerStar_obj_hom_app] at key
+  repeat' rewrite [lowerStarComp_hom_app_hom_app] at key
+  repeat' rewrite [lowerStarComp_inv_app_hom_app] at key
+  repeat' rewrite [lowerStarCongr_hom_app_hom_app] at key
   simp only [← Functor.map_comp, ← op_comp, Quiver.Hom.unop_op, Category.assoc] at key ⊢
   exact key
 
