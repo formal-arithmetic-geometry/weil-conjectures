@@ -95,7 +95,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicIntegers_of_isProper
   change Xl' ⟶ Y'.left at pl'
   obtain rfl : Xh = pl ≫ Y.hom := by simpa using pw.symm
   obtain rfl : Xh' = pl' ≫ Y'.hom := by simpa using pw'.symm
-  rw [boundedConstructibleLowerShriekBaseChange_padicIntegers_eq_pushforwardData,
+  rewrite [boundedConstructibleLowerShriekBaseChange_padicIntegers_eq_pushforwardData,
     boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardData,
     boundedConstructibleLowerShriekIsoLowerStar_padicIntegers_eq_pushforwardData,
     PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]

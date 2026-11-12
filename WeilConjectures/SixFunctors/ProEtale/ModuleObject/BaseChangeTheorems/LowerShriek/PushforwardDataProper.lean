@@ -190,6 +190,13 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
   obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   rfl
 
+/-- Pullback along the map between trivial compactifications is the original pullback. -/
+lemma boundedConstructibleUpperStar_ofIsProperBaseChangeHom (sq : IsPullback g' f' f g) :
+    boundedConstructibleUpperStar Λ ℓ (ofIsProperBaseChangeHom sq) =
+      boundedConstructibleUpperStar Λ ℓ g' := by
+  unfold boundedConstructibleUpperStar
+  rfl
+
 set_option profiler true in
 /-- The compact-support exchange map of `P` of the trivial compactifications of the proper `f`
 and `f'` is the base change `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` of `P` of the square of their
@@ -218,20 +225,15 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
     (SepFinType.homMk (Compactification.ofIsProper f'.left).overG)
     (SepFinType.homMk (ofIsProperBaseChangeHom sq)) (SepFinType.homMk g) hw
     (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)
-  -- Identify the trivial compactifications at the level of schemes over the base,
-  -- before comparing the induced functors.
-  obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
-  obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
-  obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
-  obtain ⟨fl', ⟨⟨⟨⟩⟩⟩, fw'⟩ := f'
-  change Xl ⟶ Y.left at fl
-  change Xl' ⟶ Y'.left at fl'
-  obtain rfl : Xh = fl ≫ Y.hom := by simpa using fw.symm
-  obtain rfl : Xh' = fl' ≫ Y'.hom := by simpa using fw'.symm
   simp only [lowerShriekOfCompactificationOfIsProperIso, Iso.trans_hom,
     Functor.isoWhiskerRight_hom,
     P.boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_eq_shId]
-  rw [P.baseChange_eq_pfBaseChange, P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
+  rewrite [P.baseChange_eq_pfBaseChange,
+    P.lowerShriekOfCompactificationBaseChange_ofIsProper_eq sq hw]
+  have hpb : (𝔽).pb (SepFinType.homMk (ofIsProperBaseChangeHom sq)) =
+      boundedConstructibleUpperStar Λ ℓ g' :=
+    boundedConstructibleUpperStar_ofIsProperBaseChangeHom sq
+  simp only [hpb] at key
   exact key
 
 variable {P}
