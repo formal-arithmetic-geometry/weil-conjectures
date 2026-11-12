@@ -107,6 +107,8 @@ private local instance brown_mate_pullback_continuous
     (MorphismProperty.Over.pullback @Etale ⊤ g).IsContinuous
       W.smallEtaleTopology V.smallEtaleTopology := Etale.isContinuous_overPullback g
 
+-- Prove the section calculation for arbitrary coefficient rings before specializing
+-- to quotient rings and the supplied derived realization data.
 section UnderlyingOrdinaryCube
 
 private abbrev brownMateLevel (W : Scheme.{u}) (R : Type (u + 1)) [CommRing R] :=
@@ -269,7 +271,6 @@ private def brown_underlying_scalar_coherence
         (strictEtaleBrownRingMap O t h)))
       (.mk _ _ _ _ (R.scalar h).inv)) = (R.restriction h).hom
 
-set_option profiler true in
 private theorem brown_underlying_coherence_iff
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
@@ -279,7 +280,6 @@ private theorem brown_underlying_coherence_iff
       brown_underlying_localization_coherence O t W P R ∧
       brown_underlying_scalar_coherence O t W P R := Iff.rfl
 
-set_option profiler true in
 private theorem brown_underlying_restriction_section
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t)
@@ -304,7 +304,6 @@ private theorem brown_underlying_right_section
   r.property.1
 
 -- Check the section calculation independently of the derived assembly.
-set_option profiler true in
 /-- The ordinary Brown restriction/image cube, before deriving.
 Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CV and 03CZ.
 (blueprint: lem-pur-brown-ordinary-restriction-cube).
