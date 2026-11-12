@@ -68,6 +68,7 @@ private theorem finite_stable_submodule
   | add y z hy hz ihy ihz => simpa using W.add_mem ihy ihz
   | smul n y hy ih => simpa using W.smul_mem n ih
 
+-- Prove the transport with abstract functors, so rewriting does not unfold the stalk comparison.
 private theorem finite_subobject_element_of_equivalence
     {C D : Type*} [Category C] [Category D] (E : C ≌ D)
     (Φ : C ⥤ AddCommGrpCat.{u + 1}) (R : D ⥤ AddCommGrpCat.{u + 1})
@@ -103,7 +104,6 @@ private theorem finite_subobject_element_of_equivalence
   simpa only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply] using hy
 
 set_option backward.isDefEq.respectTransparency false in
--- Comparing the stalk functor with the composite forgetful functor unfolds several layers.
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.style.haveILetI false in
 /-- Every element of the geometric stalk of a torsion sheaf over a field comes from

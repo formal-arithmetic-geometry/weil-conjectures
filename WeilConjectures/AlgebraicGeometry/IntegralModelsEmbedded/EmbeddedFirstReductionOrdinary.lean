@@ -462,7 +462,6 @@ private theorem first_reduction_square
   exact ((upperStarFromPoint X).map_comp _ _).symm.trans
     (((upperStarFromPoint X).congr_map hp).trans ((upperStarFromPoint X).map_comp _ _))
 
--- Specializing the reconstructed coefficient diagrams requires extra definitional checks.
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Ordinary reduction commutes with restriction of the actual embedded coefficient map.
 
@@ -520,6 +519,7 @@ theorem embeddedFirstReductionOrdinary
       integralModelsEmbedded_scalar_square ℓ E π hπ X,
       integralModelsEmbedded_residue_square ℓ E π X,
       integralModelsEmbedded_reduction_square ℓ E π hπ X⟩
+  -- Fix the comparison's type before checking its sectionwise hypotheses.
   have hi : Nonempty (Mod.comap φ ⋙ Mod.extendScalars (q ≫ e) ≅
       Mod.extendScalars p) := by
     apply smallQuotientComparisonIso X φ q e p
