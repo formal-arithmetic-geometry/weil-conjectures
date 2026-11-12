@@ -201,6 +201,7 @@ private theorem section_edge_square {T S : Scheme.{u}} (g : T ⟶ S)
 -- Transport the section edge along arbitrary choices of homology models.
 -- Keeping the complex and comparison isomorphisms as parameters avoids repeatedly
 -- reducing the fixed derived resolutions in this ordinary categorical calculation.
+set_option profiler true in
 private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ) (q : ℤ) :
     let D := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
@@ -215,15 +216,18 @@ private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
       (d : H ≅ J.homology q) (c : H' ≅ I.homology q) (l : L ≅ M)
       (b : M ≅ ((F.mapHomologicalComplex (.up ℤ)).obj J).homology q)
       (a : N ≅ ((G.mapHomologicalComplex (.up ℤ)).obj I).homology q)
+      (m : ((F.mapHomologicalComplex (.up ℤ)).obj J).homology q ⟶
+        W.obj (((G.mapHomologicalComplex (.up ℤ)).obj I).homology q))
       (s : L ⟶ F.obj H) (t : N ⟶ G.obj H'),
       b.inv ≫ l.inv ≫ s ≫ F.map d.hom = ShortComplex.leftExactHomologyEdge F (J.sc q) →
       a.inv ≫ t ≫ G.map c.hom = ShortComplex.leftExactHomologyEdge G (I.sc q) →
+      ShortComplex.leftExactHomologyEdge F (J.sc q) ≫
+          F.map (ShortComplex.leftExactHomologyEdge D (I.sc q)) =
+        m ≫ W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)) →
       s ≫ F.map (d.hom ≫ ShortComplex.leftExactHomologyEdge D (I.sc q) ≫ D.map c.inv) =
-        l.hom ≫ b.hom ≫
-          (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app
-            ((G.mapHomologicalComplex (.up ℤ)).obj I) ≫ W.map (a.inv ≫ t) := by
+        l.hom ≫ b.hom ≫ m ≫ W.map (a.inv ≫ t) := by
   dsimp only
-  intro H H' L M N d c l b a s t hd hc
+  intro H H' L M N d c l b a m s t hd hc hs
   let D := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   let F := RingedSpace.localAbelianSections S.toRingedSpace
   let G := RingedSpace.localAbelianSections T.toRingedSpace
@@ -240,19 +244,20 @@ private theorem section_edge_transport {T S : Scheme.{u}} (g : T ⟶ S)
     exact iso_target (G.mapIso c) (a.inv ≫ t)
       (ShortComplex.leftExactHomologyEdge G (I.sc q))
       (by simpa only [Functor.mapIso_hom, Category.assoc] using hc)
-  have hs := section_edge_square g I q
-  dsimp only at hs
   have hw : W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)) ≫ F.map (D.map c.inv) =
       W.map (a.inv ≫ t) := by
     change W.map (ShortComplex.leftExactHomologyEdge G (I.sc q)) ≫ W.map (G.map c.inv) = _
     exact (W.map_comp _ _).symm.trans (congrArg W.map hc')
-  rw [Functor.map_comp, Functor.map_comp, ← Category.assoc s (F.map d.hom), ht]
-  simp only [Category.assoc]
-  erw [reassoc_of% hs, hw]
+  simpa only [Functor.map_comp] using
+    paste_edges l.hom b.hom m s (F.map d.hom)
+      (ShortComplex.leftExactHomologyEdge F (J.sc q))
+      (F.map (ShortComplex.leftExactHomologyEdge D (I.sc q))) (F.map (D.map c.inv))
+      (W.map (ShortComplex.leftExactHomologyEdge G (I.sc q))) (W.map (a.inv ≫ t)) ht hs hw
 
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
+set_option profiler true in
 /-- The kernel/cokernel resolution edge has the fixed local-class description.
 Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
 construction and local Leray comparison; Tag 079W, normalization by the derived unit.
@@ -296,6 +301,8 @@ theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ
   let D := RingedSpace.moduleDirectImage f
   let F := RingedSpace.localAbelianSections S.toRingedSpace
   let G := RingedSpace.localAbelianSections T.toRingedSpace
+  let W := (Functor.whiskeringLeft (Opens S)ᵒᵖ (Opens T)ᵒᵖ AddCommGrpCat.{u}).obj
+    (Opens.map f.hom.base).op
   let I := RingedSpace.topEdgeResolution T.toRingedSpace K
   let J := (D.mapHomologicalComplex (.up ℤ)).obj I
   let b := RingedSpace.topEdgeInverseModel f q K
@@ -310,12 +317,16 @@ theorem resolutionLocalClassEdge_local {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ
   have hc : a.inv ≫ RingedSpace.topEdgeLocalClass T.toRingedSpace q K ≫
       G.map c.hom = ShortComplex.leftExactHomologyEdge G (I.sc q) :=
     fixed_model_class T.toRingedSpace q K
+  let m : ((F.mapHomologicalComplex (.up ℤ)).obj J).homology q ⟶
+      W.obj (((G.mapHomologicalComplex (.up ℤ)).obj I).homology q) :=
+    (W.mapHomologicalComplexHomologyIso (.up ℤ) q).hom.app
+      ((G.mapHomologicalComplex (.up ℤ)).obj I)
   have h : RingedSpace.topEdgeLocalClass S.toRingedSpace q
         ((schemeDerivedDirectImage g).obj K) ≫ F.map (resolutionLocalClassEdge g q K) =
       l.hom ≫ RingedSpace.topEdgeInverseLocalClass f q K := by
-    exact section_edge_transport g I q d c l b a
+    exact section_edge_transport g I q d c l b a m
       (RingedSpace.topEdgeLocalClass S.toRingedSpace q ((schemeDerivedDirectImage g).obj K))
-      (RingedSpace.topEdgeLocalClass T.toRingedSpace q K) hd hc
+      (RingedSpace.topEdgeLocalClass T.toRingedSpace q K) hd hc (section_edge_square g I q)
   exact NatTrans.congr_app h V
 
 end AlgebraicGeometry
