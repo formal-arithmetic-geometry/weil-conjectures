@@ -1425,7 +1425,12 @@ private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D �
   rw [← hc]
   simp
 
-set_option trace.profiler true in
+-- Use the same cached category for the rational and stage presentations.
+local instance podCoefficientStageCategory (W : Scheme.{u}) (L : Index l Ω) :
+    Category (sfRationalConstructibleCategory l (Coefficient.{u} l Ω L) W) :=
+  stageCategory l Ω W L
+
+set_option profiler true in
 /-- The pullback comparisons are compatible with one further transition.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
 private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
