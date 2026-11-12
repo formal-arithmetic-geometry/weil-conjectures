@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ResidueFieldBaseChangeLift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeAmbient
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerStabilization
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegral
@@ -46,6 +48,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
+-- Reuse the tensor and colimit instances for each occurrence of a derived functor.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod
+  hasGoodTensorTensor₂₃_mod hasColimitsOfShape_int_mod
+  preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
 
 namespace NearbyCyclesModel
 
@@ -84,8 +91,6 @@ lemma quasiSeparated_galoisLayer_j [QuasiSeparated N.j] (L' : Type u) [Field L']
 
 variable (Ω : Type u) [Field Ω] [Algebra L Ω] (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option maxHeartbeats 800000 in
--- the statement and the proof involve several large derived functor objects
 /-- **Nearby cycles stabilize at a finite Galois layer, `ℚ̄_ℓ`-coefficients**. Let `C` be a
 `ℚ̄_ℓ`-complex whose restriction `Lε^* C` to the noetherian generic fibre is bounded constructible.
 Assume that for every finite subextension `E ⊆ ℚ̄_ℓ` and every bounded constructible
@@ -134,12 +139,8 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
     ∃ L' : FiniteGaloisIntermediateField L Ω,
       IsIso (((N.galoisLayerRestrict h Ω L'.toIntermediateField).pullbackExchange
         (Profinite.padicAlgClRingObj ℓ)).app C) := by
-  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel N.generic ℓ ⟨_, hC⟩
+  obtain ⟨E, K₀, e'⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ N.generic _ hC
   have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
-  -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
-  revert C hC hres E K₀ e
-  normalize_precoherent
-  intro C hC hres E K₀ e hK₀
   refine (hres E K₀.obj (by exact_mod_proofs hK₀)).elim fun L' hL' ↦ ⟨L', ?_⟩
   -- finiteness properties of the Galois layers
   have i₁ := N.compactSpace_galoisLayer_generic h L'.toIntermediateField
@@ -167,35 +168,23 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
   have h₃ := isIso_map_baseChangeMap_app_padicAlgCl_of_residueField ℓ E
     (N.galoisLayerRestrict h Ω L'.toIntermediateField).commSq_j (N.galoisLayer h Ω).i _ n hc
     (by exact_mod_proofs hL')
-  -- the integral model as an object of the ambient derived category, `ℚ̄_ℓ ⊗ (E ⊗ K₀) ≅ Lε^* C`
-  have hobj : (ObjectProperty.ι _).obj (⟨_, hC⟩ : PadicAlgClConstructible N.generic ℓ) =
-    L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C := rfl
-  have e₁ := (ObjectProperty.liftCompιIso (boundedConstructible (padicAlgClRingObj N.generic ℓ))
-    ((boundedConstructible (padicSubfieldRingObj N.generic ℓ E)).ι ⋙
-      derivedExtendScalarsToPadicAlgCl N.generic ℓ E)
-    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj N.generic ℓ E K)).app
-      ((boundedConstructibleExtendScalars N.generic ℓ E).obj K₀)
-  have e₂ := (derivedExtendScalarsToPadicAlgCl N.generic ℓ E).mapIso
-    ((boundedConstructibleExtendScalarsCompatibility N.generic ℓ E).app K₀)
-  have e' := Nonempty.intro ((e₁ ≪≫ e₂).symm ≪≫ (ObjectProperty.ι _).mapIso e ≪≫ eqToIso hobj)
   have hgen := isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
     (N.galoisLayerRestrict h Ω L'.toIntermediateField).commSq_j (N.galoisLayer h Ω).i
     (N.galoisLayerHom h L'.toIntermediateField).generic K₀.obj
     (K := L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)
-  -- reduction to the restricted base change map at `Lg^* (Lε^* C)`
-  refine Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ _ C ?_
-  refine isIso_map_app_of_iso _ _ (A := L(upperStar (Profinite.padicAlgClRingObj ℓ)
-      (N.galoisLayerHom h L'.toIntermediateField).generic).obj
-        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
-    (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
-  -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
-  clear e₁ e₂ hobj e hK₀ hL' hc hgn hres hC i₁ i₂ i₃ i₄ i₅ i₆ i₇ i₈ i₉ i₁₀ i₁₁ i₁₂
-  revert C E K₀ L' n hn h₃ e' hgen
-  normalize_precoherent
-  intro C E K₀ L' n hn h₃ e' hgen
-  exact hgen e' h₃
+  -- Identify the proof arguments at each interface without transporting the whole context.
+  have hresult := hgen (by cast_proofs e') (by cast_proofs h₃)
+  -- Reduce to the restricted base change map at `Lg^* (Lε^* C)`.
+  have hfinal := Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app
+    (Profinite.padicAlgClRingObj ℓ) (N.galoisLayerRestrict h Ω L'.toIntermediateField) C (by
+      refine isIso_map_app_of_iso _ _ (A := L(upperStar (Profinite.padicAlgClRingObj ℓ)
+          (N.galoisLayerHom h L'.toIntermediateField).generic).obj
+            (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
+        (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
+      cast_proofs hresult)
+  cast_proofs hfinal
 
 end NearbyCyclesModel
 
