@@ -28,6 +28,8 @@ universe u w wA
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+attribute [local instance 1000] Functor.preservesZeroMorphisms_of_additive
+
 -- The chart carrier and the two localization universes require additional elaboration.
 /-- Localization transports the ordinary unit equation to the fixed mixed
 adjunction mate. No invertibility of the ordinary comparison c is assumed.
