@@ -180,6 +180,7 @@ lemma baseChangeToGaloisModel_comp_generic :
   exact (baseChangeToGaloisLayer_generic_fst_fst_assoc hM b hb v hv _).trans
     (pullback.lift_fst _ _ _)
 
+set_option trace.profiler true in
 /-- **The slicing exchange is the inclusion of the invariants, given the cartesian step**: if the
 pullback exchange of the cartesian part `χ : N'' ⟶ M` of the base change is invertible at `A`
 (`hM1`) and `Lε^* A ≅ Lj^* B` for a bounded constructible `B` on the total space, a subgroup `V` of
