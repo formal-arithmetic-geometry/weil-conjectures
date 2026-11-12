@@ -441,7 +441,7 @@ lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
   have := congrArg (padicIntToPadicAlgCl l) key
   rw [map_sum] at this
   simp only [RingHom.map_mul] at this
-  rw [map_sum (locallyFiniteFunctionsEval w).toAddMonoidHom]
+  refine (map_sum (locallyFiniteFunctionsEval (l := l) w).toAddMonoidHom _ _).trans ?_
   exact this
 
 /-- **The rationalised lattice of an integral cocycle is a descent**: `ℚ̄_ℓ ⊗ M` is the descent

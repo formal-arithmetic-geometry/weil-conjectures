@@ -57,6 +57,31 @@ open Scheme
 attribute [local semireducible] residueExchangeUpperStar residueExchangeLowerStar
   residueExchangeReduction
 
+/-- Invertible push comparisons identify the ambient integral and residue exchange arrows. -/
+private theorem integralResidue_exchange_arrow_iso
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+    (c : IntegralResiduePullComparisons.{u} ℓ E) (sq : CommSq g' f' f g)
+    [IsIso (c.push f)] [IsIso (c.push f')]
+    (K : residueExchangeDerived (integralCoeff ℓ E) X) :
+    Nonempty (Arrow.mk ((residueExchangeReduction ℓ E Y').map
+        ((residueExchangeBaseChange (integralCoeff ℓ E) sq).app K)) ≅
+      Arrow.mk ((residueExchangeBaseChange
+        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) sq).app
+        ((residueExchangeReduction ℓ E X).obj K))) := by
+  let S := (c.pull g).app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K) ≪≫
+    (residueExchangeUpperStar
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) g).mapIso
+      (asIso ((c.push f).app K))
+  let T := asIso ((c.push f').app
+      ((residueExchangeUpperStar (integralCoeff ℓ E) g').obj K)) ≪≫
+    (residueExchangeLowerStar
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f').mapIso
+      ((c.pull g').app K)
+  refine ⟨Arrow.isoMk S T ?_⟩
+  simpa only [S, T, Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Iso.app_hom,
+    Arrow.mk_hom, Category.assoc] using integralResidue_exchange_square ℓ E c sq K
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
   [FiniteDimensional ℚ_[ℓ] E]
 
@@ -82,29 +107,6 @@ instance fact_isNilpotent_natCast_integralResidue :
   ⟨⟨1, by
     rw [pow_one]
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))⟩⟩
-
-/-- Invertible push comparisons identify the ambient integral and residue exchange arrows. -/
-private theorem integralResidue_exchange_arrow_iso
-    (c : IntegralResiduePullComparisons.{u} ℓ E) (sq : CommSq g' f' f g)
-    [IsIso (c.push f)] [IsIso (c.push f')]
-    (K : residueExchangeDerived (integralCoeff ℓ E) X) :
-    Nonempty (Arrow.mk ((residueExchangeReduction ℓ E Y').map
-        ((residueExchangeBaseChange (integralCoeff ℓ E) sq).app K)) ≅
-      Arrow.mk ((residueExchangeBaseChange
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) sq).app
-        ((residueExchangeReduction ℓ E X).obj K))) := by
-  let S := (c.pull g).app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K) ≪≫
-    (residueExchangeUpperStar
-      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) g).mapIso
-      (asIso ((c.push f).app K))
-  let T := asIso ((c.push f').app
-      ((residueExchangeUpperStar (integralCoeff ℓ E) g').obj K)) ≪≫
-    (residueExchangeLowerStar
-      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f').mapIso
-      ((c.pull g').app K)
-  refine ⟨Arrow.isoMk S T ?_⟩
-  simpa only [S, T, Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Iso.app_hom,
-    Arrow.mk_hom, Category.assoc] using integralResidue_exchange_square ℓ E c sq K
 
 set_option profiler true in
 /-- Derived coefficient reduction compares integral exchange to residue exchange.
