@@ -517,13 +517,11 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
   let F := CondensedRing.upperStar Λ.X f
   let FC := (F.mapHomologicalComplex (.up ℤ)).obj C
   let c := F.mapDerivedCategoryFactors.hom.app C
-  let wY := HomologicalComplex.tensorHom (augmentation Λ S Y) (𝟙 C) ≫
-    (betaTotalNatIso a S t Y).hom.app C
-  let EC := ((Mod.extendScalars (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj C
-  let p := (NatTrans.mapHomologicalComplex
-    (pullIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv (.up ℤ)).app C
-  let q := (NatTrans.mapHomologicalComplex
-    (comapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv (.up ℤ)).app EC
+  let wY : complex Λ S Y ⊗ C ⟶
+      ((Mod.comap (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj
+        (((Mod.extendScalars (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj C) :=
+    HomologicalComplex.tensorHom (augmentation Λ S Y) (𝟙 C) ≫
+      (betaTotalNatIso a S t Y).hom.app C
   have hFC : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat FC :=
     CondensedRing.kFlat_upperStar_mapHomologicalComplex_obj Λ.X f hC
   have hNY : (β Y).hom.app (DerivedCategory.Q.obj C) ≫
@@ -571,16 +569,7 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     have hs := congrArg (fun g ↦ (scalarSixPull Λ f).map g) hNY
     simp only [Functor.map_comp] at hs
     rw [reassoc_of% hs]
-    have hnat := F.mapDerivedCategoryFactors.hom.naturality wY
-    dsimp only [Functor.comp_map] at hnat
-    change _ ≫ F.mapDerivedCategoryFactors.hom.app
-        (((Mod.comap (betaMap a Y)).mapHomologicalComplex (.up ℤ)).obj EC) = _ at hnat
-    have hnat' := congrArg
-      (fun k ↦ k ≫ DerivedCategory.Q.map q ≫
-        DerivedCategory.Q.map
-          (((Mod.comap (betaMap a X)).mapHomologicalComplex (.up ℤ)).map p)) hnat
-    simp only [Category.assoc] at ⊢
-    rw [hnat']
+    erw [reassoc_of% F.mapDerivedCategoryFactors.hom.naturality wY]
     have haug := congrArg (fun g ↦ DerivedCategory.Q.map g)
       (augmented_tensor_pull a S t f C)
     dsimp only [wY]
