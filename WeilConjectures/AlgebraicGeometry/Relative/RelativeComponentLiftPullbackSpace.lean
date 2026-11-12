@@ -168,8 +168,10 @@ theorem relative_component_lift_pullback_space (T : Scheme.{u}) [IsAffine T] :
   let r : ∀ E : Over (affineComponentSpace T), C((U.obj E).left, E.left) :=
     (Scheme.ProEt.affine_component_site_projection T).choose_spec.choose
   have hU := (Scheme.ProEt.affine_component_site_projection T).choose_spec.choose_spec
-  obtain ⟨hr, hmapU⟩ := component_mapping_property T U r
+  have hUmapping := component_mapping_property T U r
     (fun E ↦ ⟨(hU.1 E).2.2.1, (hU.1 E).2.2.2.1⟩)
+  have hr := hUmapping.1
+  have hmapU := hUmapping.2
   let L := F ⋙ Scheme.ProEt.forget T
   let M := U ⋙ Scheme.ProEt.forget T
   have extL (W : Over T) (E : Over (affineComponentSpace T))
