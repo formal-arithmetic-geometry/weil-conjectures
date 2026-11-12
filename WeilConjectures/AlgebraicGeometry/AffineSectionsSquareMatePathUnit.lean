@@ -407,20 +407,6 @@ private theorem sections_unit_pasting
 
 
 
-local instance affineSections_hasSheafCompose {C : Type u} [SmallCategory C]
-    (J : GrothendieckTopology C) :
-    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
-
-local instance affineSections_directImage_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).Additive := inferInstance
-
-local instance affineSections_globalSections_additive {R : CommRingCat.{u}} {X : Scheme.{u}}
-    (f : X ⟶ Spec R) : (affineGlobalSections f).Additive := inferInstance
-
-local instance affineSections_module_kInjective (X : Scheme.{u}) :
-    Abelian.HasKInjectiveResolutions
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
-
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
@@ -443,7 +429,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 -- Profiling found expensive linting of the fixed, nondependent forall binders.
 set_option linter.all false in
 set_option cleanup.letToHave false in
-set_option profiler true in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
 unit for p_* followed by affine sections. This formula does not involve the derived
@@ -589,6 +574,7 @@ theorem affineSections_square_mate_path_unit
   intro P₀ Q₀ F₀ G₀ P Q RF RG A₀ B₀ S₀ T₀ A D S T aA aB aS aT ρ₀ aρ
     t b ht hb z d hz hd v r hv hr s hs J a p k δ
   rw [show aρ = _ from affineBaseChangedSectionsDerivedIso_eq f g]
+  -- Elaborate the mate witness before unpacking the existential.
   have hmate := exists_derivedPushforwardSquareMateUnit f g
   obtain ⟨e, he, hδ⟩ := hmate
   let α : P₀ ⋙ S₀ ≅ T₀ ⋙ ρ₀ :=

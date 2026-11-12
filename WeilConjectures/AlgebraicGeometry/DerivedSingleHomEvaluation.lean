@@ -83,7 +83,6 @@ private theorem localized_hom_evaluation
   rfl
 
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
 -- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
@@ -147,6 +146,7 @@ theorem derived_single_hom_evaluation (Y : Scheme.{u})
   have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
   let T := CochainComplex.kInjectiveResolutionFunctor.{u} A
   let η := CochainComplex.toKInjectiveResolution.{u} A
+  -- Elaborate the comparisons before unpacking their witnesses.
   have hd := derivedInternalHom_comparison.{u, wY}
     (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf T η
     (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,

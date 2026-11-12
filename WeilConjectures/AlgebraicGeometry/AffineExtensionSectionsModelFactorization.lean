@@ -28,6 +28,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry
+
+-- Check the categorical calculation independently of the scheme-module presentations.
 private theorem model_factorization_of_units
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     (qC : C ⥤ C') (qD : D ⥤ D') (U₀ : D ⥤ C) {L : C' ⥤ D'} {U : D' ⥤ C'}
