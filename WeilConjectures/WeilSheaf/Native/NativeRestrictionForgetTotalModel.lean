@@ -904,15 +904,11 @@ private theorem native_restriction_goal_proof
   have hmU := hmodelsU.choose_spec.2
   let e : (Lα) ⋙ FU ≅ F ⋙ R :=
     Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso α
-  let a : (Lα).mapHomologicalComplex (.up ℤ) ⋙
-      FU.mapHomologicalComplex (.up ℤ) ≅
-      F.mapHomologicalComplex (.up ℤ) ⋙ R.mapHomologicalComplex (.up ℤ) :=
-    Functor.mapHomologicalComplexCompIso e (.up ℤ) ≪≫
-      (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ R)) (.up ℤ)).symm
   have ha (K : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) :
-      a.hom.app K = 𝟙 _ := by
+      (complex_square (Lα) FU F R e).hom.app K = 𝟙 _ := by
     ext n : 1
-    simp only [HomologicalComplex.id_f, a, e, Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
+    simp only [HomologicalComplex.id_f, complex_square, e,
+      Endofunctor.IsoAlgebra.mapOfNatIsoCompForgetIso,
       Iso.refl_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_hom_app_f,
       Functor.mapHomologicalComplexCompIso_inv_app_f, Iso.refl_inv,
