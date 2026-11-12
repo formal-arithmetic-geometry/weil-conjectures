@@ -261,7 +261,6 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
   rfl
 
-set_option profiler true in
 /-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
 adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
 lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
@@ -269,7 +268,7 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
         (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
         (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
       TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
-  refine CategoryTheory.mateEquiv_eq_of_unit_comp_map _ _ _ _ fun x ↦ ?_
+  refine CategoryTheory.mateEquiv_eq_of_unit _ _ _ _ fun x ↦ ?_
   rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
     ← Functor.map_comp, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
