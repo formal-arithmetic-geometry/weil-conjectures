@@ -125,12 +125,8 @@ private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
   let θj := openTensorRestrictionIso U.ι
   let βp := Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl
   let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm
-  change ak.unit.app M ≫ (H k).map (ap.unit.app ((T k).obj M)) ≫
-      (H p ⋙ H k).map (θp.hom.app ((T k).obj M)) ≫
-      (H p ⋙ H k).map (θ.hom.app M) ≫ cP.hom.app _ =
-    aj.unit.app M ≫ (H U.ι).map (θj.hom.app M) ≫
-      (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
-      cQ.hom.app _
+  unfold square_unit_cancel_statement
+  dsimp only
   have hcP := composition_unit p k (p ≫ k) rfl M
   have hcQ := composition_unit q U.ι (p ≫ k) pullback.condition.symm M
   have hn := aq.unit_naturality (θj.hom.app M)
