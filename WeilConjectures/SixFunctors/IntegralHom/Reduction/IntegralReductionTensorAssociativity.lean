@@ -220,6 +220,13 @@ private theorem normalizedBeta_inv_generator (n : ℕ)
   change (ConcreteCategory.hom ((beta.f (i + j) ≫ (inv beta).f (i + j)).val.app U)) _ = _ at hcomp
   exact hcomp.symm.trans hh
 
+private theorem reductionUnit_eq_coefficientIntegralScalarUnitSection
+    (n : ℕ) (M : completedIntegralModuleSheaves l E Y D hl)
+    (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : M.val.obj U) :
+    (reductionUnit l E Y D hl n M).val.app U x =
+      coefficientIntegralScalarUnitSection l E Y n M U x := by
+  with_unfolding_all rfl
+
 private theorem normalizedBeta_eq (n : ℕ)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj
@@ -244,7 +251,7 @@ private theorem normalizedBeta_eq (n : ℕ)
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
-    simpa only [CoefficientScalarTensorGenerators, coefficientIntegralScalarUnitSection,
+    simpa only [CoefficientScalarTensorGenerators, reductionUnit_eq_coefficientIntegralScalarUnitSection,
       totalPair] using
       (normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j (i + j) rfl U x y)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
