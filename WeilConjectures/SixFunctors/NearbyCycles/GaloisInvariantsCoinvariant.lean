@@ -135,8 +135,7 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant (a : ℤ) [K.Is
       rw [Functor.comp_map, ← Category.assoc, ← G.map_comp, ← h, G.map_comp, Category.assoc,
         hφ i]
   rw [Functor.comp_map] at key
-  rw [G.map_comp, G.map_comp, Category.assoc, Category.assoc, key, ← G.map_comp_assoc,
-    Iso.inv_hom_id, G.map_id, Category.id_comp]
+  simpa only [G.map_comp, Category.assoc, Iso.inv_hom_id, G.map_id, Category.id_comp] using key
 
 set_option profiler true in
 -- the derived functors of the tower are large terms
