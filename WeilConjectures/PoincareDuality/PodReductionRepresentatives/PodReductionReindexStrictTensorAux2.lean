@@ -100,6 +100,7 @@ private theorem reductionEvaluationComplex_inv_unitSection (W : Scheme.{u}) (n :
     (coefficientIntegralScalarUnitSection l E W n (C.X k) U z))
     ((pullbackTensorReductionEvaluationComplex l E W n).app C).hom_inv_id
 
+-- Retain the evaluation transports until both sides are sections of the same finite module.
 private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q k : ℤ)
     (hpq : p + q = k) (V : W.ProEt)
@@ -174,7 +175,7 @@ theorem strictMap_reducedUnit_generator (W : Scheme.{u})
         (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
           (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y))))
     (tensorReductionStrictMap_component l E W P Q n)
-  exact (coefficientEvaluationSection_map l E W (tensorReductionStrictMap l E W P Q |>.f k)
+  exact (coefficientEvaluationSection_map l E W ((tensorReductionStrictMap l E W P Q).f k)
     n (op V) _).symm.trans
       (hc.trans (tensorReductionFiniteComponent_generator l E W P Q n p q k hpq V x y))
 

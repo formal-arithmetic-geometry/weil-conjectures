@@ -148,7 +148,6 @@ private theorem reducedUnitSection_map (W : Scheme.{u}) (n : ℕ)
       reducedUnitSection l E W n M' (op V) (φ.val.app (op V) z) :=
   reduction_map_unitSection l E W n φ V z
 
-set_option profiler true in
 -- The generator calculation passes through several transported comparison maps.
 /-- Scalar-generator normalization implies the tensor equation before localization.
 There are no derived-category maps, adjunction mates, or completion data in this
@@ -239,6 +238,7 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)
     ((R[X]).obj ((F[g]).obj P)) ((R[X]).obj ((F[g]).obj Q)) p q k hpq (op (n, U)))
     rP rQ
+  -- Normalize the unit before composing the pointwise equations from left to right.
   dsimp only [a, V', inverseImageUnitSection] at hL1 hL2
   have hL12 := hL1.trans hL2
   have hL123 := hL12.trans hL3
@@ -270,6 +270,7 @@ theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   have hR012 := hR01.trans hR2
   have hR0123 := hR012.trans hR3
   have hR := hR0123.trans r5
+  -- Compare the formulas in the same presentation as the expanded composites.
   dsimp only [res, m, a, V, V', c, s, z, inverseImageUnitSection] at hL hR ⊢
   simp only [sheafOfModules_comp_apply, Functor.mapHomologicalComplex_map_f] at hR
   exact hL.trans hR.symm
