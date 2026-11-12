@@ -128,6 +128,7 @@ private lemma boundedConstructibleUpperStarOfMapCompIso_hom_hom (hc : c' ≫ π 
   rfl
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the motive checks of the rewrites in the proof take a few seconds each on the large goal
 /-- **The exchange factorization of a composite** on bounded constructible complexes: for
 morphisms of models `φ = φ' ≫ ψ` as in
