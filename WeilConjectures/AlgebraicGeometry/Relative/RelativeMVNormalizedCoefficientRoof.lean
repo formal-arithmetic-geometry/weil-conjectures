@@ -77,7 +77,6 @@ private lemma normalized_roof_of_comparison
   simp only [Category.assoc]
 
 set_option linter.all false in
-set_option profiler true in
 /-- A normalized coefficient roof localizes to the corresponding direct-image
 square mate. Source: Stacks Project, Tags 08HY and 0D5T.
 (blueprint: lem-pc-relative-mv-normalized-coefficient-roof).

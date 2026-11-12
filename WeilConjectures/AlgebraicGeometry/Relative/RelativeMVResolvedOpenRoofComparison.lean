@@ -162,7 +162,6 @@ private lemma map_iso_cancel_left
   rw [← h, ← F.map_comp_assoc, a.hom_inv_id, F.map_id, Category.id_comp,
     e.inv_hom_id_assoc]
 
-set_option profiler true in
 private theorem open_resolution_denominator_intersection
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -203,6 +202,7 @@ private theorem open_resolution_denominator_intersection
       DerivedCategory.Q.map (schemeMVImageComponent g' W J L s) =
       (schemeMVOpenComparison g' W K').hom ≫ b.inv := by
     have hcomp := schemeMV_image_resolution_comparison_intersection X' X g' U V K' s hf
+    -- Normalize the comparisons and third chain-map component before matching the theorem.
     simpa only [a, b, H, H', J, L, W, W', Iso.trans_inv, Functor.mapIso_inv,
       schemeMVImageChainMap, ShortComplex.homMk] using hcomp
   rw [schemeMVDirectImageLocalization_app g'
