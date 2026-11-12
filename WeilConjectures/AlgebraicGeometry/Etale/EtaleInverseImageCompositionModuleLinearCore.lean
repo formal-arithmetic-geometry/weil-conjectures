@@ -110,6 +110,7 @@ private theorem compare_by_homEquiv
   exact h
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The dependent comparison package requires additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency.types false in

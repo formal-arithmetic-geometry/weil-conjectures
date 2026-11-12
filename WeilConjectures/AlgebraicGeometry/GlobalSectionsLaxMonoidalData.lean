@@ -39,6 +39,7 @@ local instance globalSectionsLaxDataClosed :
     MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 set_option backward.isDefEq.respectTransparency true in
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Comparing evaluated tensor maps with section identities requires extra reduction steps.
 /-- The canonical lax structure has the concrete unit and tensor maps.

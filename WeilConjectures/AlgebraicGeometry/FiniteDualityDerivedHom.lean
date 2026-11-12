@@ -34,6 +34,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the large existential adjunction type needs additional heartbeats.
 /--
