@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidue
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -32,13 +33,17 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
+-- Reuse the graded tensor and colimit instances needed by each derived functor.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
 
 set_option profiler true in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` is invertible if and
 only if `Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
@@ -63,7 +68,6 @@ theorem isIso_map_kunnethMap_iff_residueField (φ₁ : P.Hom M f₁ f₁') (φ�
     (nonempty_arrowIso_map_kunnethMap_residueField ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
 set_option profiler true in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: under the hypotheses of
 `NearbyCyclesModel.isIso_map_kunnethMap_iff_residueField`, for every `h : W ⟶ Z'`,
 `𝔽_E ⊗ᴸ Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
