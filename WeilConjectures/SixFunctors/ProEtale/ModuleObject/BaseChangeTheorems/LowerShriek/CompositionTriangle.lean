@@ -548,7 +548,6 @@ section AnyTriangle
 
 variable (f g)
 
-set_option profiler true in
 -- the comparison through a common refinement unfolds the composition isomorphisms
 /-- **The composition isomorphism of the lower shriek is computed by any triangle of
 compactifications** `T` of `f` and `g`: it is the comparison with the compactification
@@ -621,13 +620,17 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
       T₀.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
       T₀.cg)) n₁ n₂ ?_ ?_
   · exact congrArg Iso.hom
-      ((boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ _ _ _).trans
-        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ _ _ _).symm)
+      ((boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+          (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀)
+          (Compactification.Triangle.overCfg T'')).trans
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+          (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T)
+          (Compactification.Triangle.overCfg T'')).symm)
   · exact (NatTrans.exchange _ _ _ _).symm.trans (congrArg₂ NatTrans.hcomp
       (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        _ _ _))
+        T.cf T₀.cf T''.cf))
       (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        _ _ _)))
+        T.cg T₀.cg T''.cg)))
 
 end AnyTriangle
 
