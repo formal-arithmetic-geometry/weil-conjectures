@@ -39,7 +39,6 @@ private theorem conjugate_endomorphism_of_commutative_squares
   rw [← F.map_comp_assoc, hx, F.map_comp]
   simpa only [Category.assoc] using congrArg (fun z ↦ F.map γ'.hom ≫ z) hn
 
-set_option profiler true in
 /-- The canonical levelwise derived-to-homotopy comparisons commute with successor
 scalar extension. The levelwise bijections themselves are already constructed and proved.
 No scalar Hom cohomology or locally constant functions enter this assertion.
@@ -102,7 +101,8 @@ theorem internalPerfectReduction_homotopyComparison
     simp only [γ, Iso.hom_inv_id_assoc]
   have hn : F.leftDerivedFunctor.map (DerivedCategory.Qh.map f) ≫ δ =
       δ ≫ DerivedCategory.Qh.map (internalPerfectOrdinaryHomStep l E W.left P n f) := by
-    exact internalPerfectOrdinaryStepCounit_naturality l E W.left P n f
+    simpa only [δ, Category.assoc] using
+      internalPerfectOrdinaryStepCounit_naturality l E W.left P n f
   let := internalPerfectOrdinaryReduction_kprojective l E W.left
     (Scheme.ProEt.isWeaklyContractible_self_of_object X W _hweak) P b _hb _hfree n
   apply (CochainComplex.IsKProjective.Qh_map_bijective

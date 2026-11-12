@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Proj
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical linear projection of polynomial Proj is an isomorphism when
 restricted to either standard affine chart of the projective line.

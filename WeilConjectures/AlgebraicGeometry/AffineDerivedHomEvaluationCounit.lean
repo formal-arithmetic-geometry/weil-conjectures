@@ -90,6 +90,40 @@ private noncomputable def affineScalarLocalizationIso {X Y : Scheme.{u}} (f : X 
 
 
 set_option profiler true in
+private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsAffineHom f]
+    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] :
+    let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+    let A := SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))
+    let S := SheafOfModules.restrictScalars
+      (R := moduleRings Y.toRingedSpace)
+      (R' := moduleRings (directImageAlgebraSpace f))
+      ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩
+    let B := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+    let U := (DerivedCategory.singleFunctor C 0).obj (SheafOfModules.unit Y.ringCatSheaf)
+    let M := (DerivedCategory.singleFunctor C 0).obj
+      ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))
+    let p := (Functor.curry.obj B).map
+      (((DerivedCategory.singleFunctor C 0).map
+        (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)
+    ∃ (R : DerivedCategory C ⥤ DerivedCategory A)
+      (L : DerivedCategory A ⥤ DerivedCategory C)
+      (e : L ≅ S.rightDerivedFunctor) (adj : L ⊣ R),
+      ∀ (ι : (Functor.curry.obj B).obj (op U) ≅ 𝟭 _) (K : CochainComplex C ℤ),
+      ∃ d : L.obj (R.obj (DerivedCategory.Q.obj K)) ≅ B.obj (op M, DerivedCategory.Q.obj K),
+        d.hom ≫ p.app (DerivedCategory.Q.obj K) ≫ ι.hom.app (DerivedCategory.Q.obj K) =
+          adj.counit.app (DerivedCategory.Q.obj K) := by
+  intro C A S B U M p
+  obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
+    exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
+  let _ := hH₀
+  refine ⟨R, L, affineScalarLocalizationIso.{u, wY, wA} f L t, adj, ?_⟩
+  intro ι K
+  exact affine_derivedHom_localized_evaluation.{u, wY, wA}
+    f H₀ iH adj₀ h_eval R β L t adj hR h_counit ι K
+
+set_option profiler true in
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
 This lemma involves neither a quasi-coherent right adjoint of pushforward nor its
 comparison with scalar restriction.
@@ -142,18 +176,14 @@ theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
             (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op, 𝟙 K) ≫
         ι.hom.app K = adjH.counit.app K := by
-  obtain ⟨H₀, hH₀, iH, adj₀, h_eval, R, β, L, t, adj, hR, _, _, h_counit⟩ :=
-    exists_affine_derivedSheafHom_adjunction.{u, wY, wA} f
-  let _ := hH₀
+  obtain ⟨R, L, e, adj, h_eval⟩ := exists_affine_localizedEvaluation.{u, wY, wA} f
   let ι := Classical.choice (derivedInternalHom_unit_iso.{u, wY} Y)
-  let e := affineScalarLocalizationIso.{u, wY, wA} f L t
   refine ⟨R, adj.ofNatIsoLeft e, ι, ?_⟩
   intro K
   let Kc : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ :=
     DerivedCategory.Q.objPreimage K
   let q : DerivedCategory.Q.obj Kc ≅ K := DerivedCategory.Q.objObjPreimageIso K
-  obtain ⟨d₀, hd₀⟩ := affine_derivedHom_localized_evaluation.{u, wY, wA}
-    f H₀ iH adj₀ h_eval R β L t adj hR h_counit ι Kc
+  obtain ⟨d₀, hd₀⟩ := h_eval ι Kc
   let F := (Functor.curry.obj
     (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj
       (op ((DerivedCategory.singleFunctor
