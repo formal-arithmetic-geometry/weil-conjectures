@@ -150,8 +150,6 @@ lemma sc_f_sectionsAddEquiv (p : ℕ)
   rw [Functor.map_comp] at hd
   rw [Category.assoc, hd]
 
-set_option profiler true in
--- unifying the terms of the image of a resolution with the images of its terms is slow
 lemma extMk_eq_zero_iff_sectionsAddEquiv
     (f : constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X r)
     (hf : f ≫ (I.map (forgetAb k₀ l Y)).cocomplex.d r (r + 1) = 0) :
@@ -163,25 +161,23 @@ lemma extMk_eq_zero_iff_sectionsAddEquiv
     refine (InjectiveResolution.extMk_eq_zero_iff_of_zero _ f hf).trans ?_
     have h0 : I.cocomplex.d ((ComplexShape.up ℕ).prev 0) 0 = 0 :=
       I.cocomplex.shape _ _ (by simp)
-    refine ⟨fun h ↦ ⟨0, ?_⟩, fun ⟨x, hx⟩ ↦ ?_⟩
-    · rw [map_zero, h, map_zero]
-    · refine (sectionsAddEquiv _).injective ?_
-      rw [map_zero, ← hx]
-      exact ConcreteCategory.congr_hom ((ShortComplex.map_f _ _).trans
+    have hz (x) : ((I.cocomplex.sc 0).map (globalSectionsWeilFunctor k₀ l Y)).f x = 0 :=
+      ConcreteCategory.congr_hom ((ShortComplex.map_f _ _).trans
         ((congrArg (globalSectionsWeilFunctor k₀ l Y).map h0).trans
           ((globalSectionsWeilFunctor k₀ l Y).map_zero _ _))) x
+    exact ⟨fun h ↦ ⟨0, (hz 0).trans
+      (((sectionsAddEquiv (I.cocomplex.X 0)).map_zero).symm.trans
+        (congrArg (sectionsAddEquiv (I.cocomplex.X 0)) h.symm))⟩,
+      fun ⟨x, hx⟩ ↦ (sectionsAddEquiv (I.cocomplex.X 0)).injective
+        (hx.symm.trans ((hz x).trans ((sectionsAddEquiv (I.cocomplex.X 0)).map_zero).symm))⟩
   | succ p =>
     refine (InjectiveResolution.extMk_eq_zero_iff _ f _ rfl hf p rfl).trans ?_
     rw [InjectiveResolution.map_cocomplex_d]
-    constructor
-    · rintro ⟨g, hg⟩
-      exact ⟨sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm) g,
-        by rw [sc_f_sectionsAddEquiv, hg]⟩
-    · rintro ⟨x, hx⟩
-      refine ⟨(sectionsAddEquivOfIso
-        (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm)).symm x,
-        (sectionsAddEquiv _).injective ?_⟩
-      rw [← sc_f_sectionsAddEquiv, AddEquiv.apply_symm_apply, hx]
+    refine (sectionsAddEquivOfIso
+      (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm)).toEquiv.exists_congr
+        (fun g ↦ ?_)
+    rw [sc_f_sectionsAddEquiv]
+    exact (sectionsAddEquiv (I.cocomplex.X (p + 1))).injective.eq_iff.symm
 
 /-- The `r`-th pro-étale `Ext` of `ℤ` into the underlying abelian sheaf of a pro-étale Weil sheaf
 `K` is the `r`-th homology of the complex of global sections of an injective resolution of `K`. -/
@@ -222,8 +218,6 @@ lemma extAddEquivHomology_extMk
   InjectiveResolution.extAddEquivHomology_extMk _ _ _ _ _ _ f hf c hc
 
 set_option maxRecDepth 4000 in
-set_option profiler true in
--- the terms of the image of a resolution are only definitionally the images of its terms
 /-- `extAddEquivHomology` is `ℚ̄_ℓ`-linear: multiplication by `c` on the coefficients corresponds
 to multiplication by `c` on the homology of the global sections. -/
 lemma extAddEquivHomology_comp_smul (c : PadicAlgCl l)
@@ -346,8 +340,6 @@ variable [Fact (ringChar k₀ ≠ l)] {Y : Scheme.{u}} [Y.Over (Spec (CommRingCa
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option profiler true in
--- the carriers of the homology of global sections are only definitionally equal
 /-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, with its Frobenius.** For an injective
 resolution `I` of the constant Weil sheaf, `Hʳ(Ȳ_proét, ℚ̄_ℓ) ≅ Hʳ(Y ⊗ k̄, ℚ̄_ℓ)`, the geometric
 Frobenius corresponding to the Frobenius `ProEtaleWeilSheaf.extFrobenius I r` induced by the
@@ -365,8 +357,6 @@ theorem exists_addEquiv_adicConstantH_cohomology
     (ProEtaleWeilSheaf.extAddEquivHomology I r).toEquiv Θ.toEquiv _ _ _
     (ProEtaleWeilSheaf.extAddEquivHomology_extFrobenius I r) hΘ x
 
-set_option profiler true in
--- `AdicConstantH` is only definitionally the `Ext` group of the underlying abelian sheaf
 /-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, `ℚ̄_ℓ`-linearly, with its Frobenius.**
 For an injective resolution `I` of the constant Weil sheaf,
 `Hʳ(Ȳ_proét, ℚ̄_ℓ) ≅ Hʳ(Y ⊗ k̄, ℚ̄_ℓ)` as `ℚ̄_ℓ`-vector spaces, the geometric Frobenius
