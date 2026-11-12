@@ -122,6 +122,7 @@ private theorem transition_cube_descent
 
 set_option maxHeartbeats 800000 in
 -- The eight-sided categorical pasting has many reassociated functor images.
+set_option profiler true in
 private theorem good_reduction
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
