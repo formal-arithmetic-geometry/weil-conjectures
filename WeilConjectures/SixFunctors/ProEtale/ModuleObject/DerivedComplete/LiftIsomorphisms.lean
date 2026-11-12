@@ -32,24 +32,28 @@ open CategoryTheory Limits Opposite
 
 namespace CategoryTheory
 
-/-- A sequence of nonempty finite sets of isomorphisms has a compatible family. -/
-lemma exists_compatible_isos_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
+/-- A tower with finite morphism sets and isomorphism-preserving transition maps has a
+compatible family of isomorphisms whenever its objects are isomorphic at every stage. -/
+lemma exists_compatible_isIso_homs_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
     {K L : ∀ n, C n} (hfin : ∀ n, Finite (K n ⟶ L n))
     (hne : ∀ n, Nonempty (K n ≅ L n))
-    (r : ∀ n, (K (n + 1) ≅ L (n + 1)) → (K n ≅ L n)) :
-    ∃ t : ∀ n, K n ≅ L n, ∀ n, r n (t (n + 1)) = t n := by
+    (r : ∀ n, (K (n + 1) ⟶ L (n + 1)) → (K n ⟶ L n))
+    (hiso : ∀ n s, IsIso s → IsIso (r n s)) :
+    ∃ t : ∀ n, K n ⟶ L n, (∀ n, IsIso (t n)) ∧ ∀ n, r n (t (n + 1)) = t n := by
+  let ri (n : ℕ) (s : K (n + 1) ≅ L (n + 1)) : K n ≅ L n :=
+    @asIso _ _ _ _ (r n s.hom) (hiso n s.hom inferInstance)
   let F : ℕᵒᵖ ⥤ Type _ :=
-    Functor.ofOpSequence (X := fun n ↦ K n ≅ L n) fun n ↦ TypeCat.ofHom (r n)
+    Functor.ofOpSequence (X := fun n ↦ K n ≅ L n) fun n ↦ TypeCat.ofHom (ri n)
   have : ∀ j, Finite (F.obj j) := fun j ↦ by
     have := hfin j.unop
     exact Finite.of_injective (fun e : K j.unop ≅ L j.unop ↦ e.hom)
       fun _ _ h ↦ Iso.ext h
   have : ∀ j, Nonempty (F.obj j) := fun j ↦ hne j.unop
   obtain ⟨s, hs⟩ := nonempty_sections_of_finite_inverse_system F
-  refine ⟨fun n ↦ s (op n), fun n ↦ ?_⟩
+  refine ⟨fun n ↦ (s (op n)).hom, fun n ↦ inferInstance, fun n ↦ ?_⟩
   have h := hs (homOfLE (Nat.le_add_right n 1)).op
   rw [Functor.ofOpSequence_map_homOfLE_succ] at h
-  exact h
+  exact congrArg Iso.hom h
 
 end CategoryTheory
 
@@ -115,16 +119,14 @@ theorem exists_forall_isIso_derivedReduction_map
     ∃ f : K ⟶ L, ∀ n : ℕ,
       IsIso ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map
         f) := by
-  obtain ⟨t, ht⟩ := exists_compatible_isos_of_finite hfin hne fun n s ↦
-    @asIso _ _ _ _ (derivedReductionStep (X := X) (ℓ := ℓ) (E := E)
-      (n + 1) (K := K) (L := L) s.hom)
-      (isIso_derivedReductionStep (X := X) (ℓ := ℓ) (E := E)
-        (n + 1) (K := K) (L := L) s.hom)
+  obtain ⟨t, hi, ht⟩ := exists_compatible_isIso_homs_of_finite hfin hne
+    (fun n ↦ derivedReductionStep (X := X) (ℓ := ℓ) (E := E) (n + 1) (K := K) (L := L))
+    (fun n s hs ↦ isIso_derivedReductionStep (n + 1) s)
   obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq
     (X := X) (ℓ := ℓ) (E := E) (K := K) (L := L) hL
-    (fun n ↦ (t n).hom) fun n ↦ by
-    rw [← congrArg Iso.hom (ht n)]
-    exact map_comp_reductionTransition_derivedReductionStep (n + 1) (t (n + 1)).hom
-  exact ⟨f, fun n ↦ (hf n) ▸ inferInstance⟩
+    t fun n ↦ by
+    rw [← ht n]
+    exact map_comp_reductionTransition_derivedReductionStep (n + 1) (t (n + 1))
+  exact ⟨f, fun n ↦ (hf n) ▸ hi n⟩
 
 end AlgebraicGeometry.ProEtale

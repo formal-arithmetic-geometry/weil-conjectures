@@ -124,7 +124,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant
   exact exists_invariant_retraction_of_conjugate (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
-    (N.galoisLayerExchangeIso h Ω Λ C) hα _ hinv
+    (N.galoisLayerExchangeIso h Ω Λ C) (by
+      dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
+        Iso.symm, Iso.app]
+      exact hα) _ hinv
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
     (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
