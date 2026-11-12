@@ -194,6 +194,7 @@ private theorem normalizedBeta_eq (n : ℕ)
   apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
   · intro i j k hij U x y
     subst k
+    change ((inv beta).f (i + j)).val.app U _ = _
     have hh := congrArg (fun f ↦ (f.f (i + j)).val.app U
       (totalPair Y (integralCoefficientCommRingSheaf l E Y n)
         (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)
