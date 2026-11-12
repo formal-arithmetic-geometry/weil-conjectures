@@ -329,8 +329,6 @@ private theorem generator_restrict (W : Scheme.{u})
         ((SheafOfModules.tensorObjIsoSheafification (R := R) (P.X p) (L.X q)).inv.val.app V)
         hu.symm))))
 
-set_option profiler true in
-set_option maxHeartbeats 8000000 in
 -- The three transported total-complex presentations need additional elaboration time.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
