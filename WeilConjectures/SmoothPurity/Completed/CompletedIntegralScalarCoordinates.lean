@@ -119,8 +119,9 @@ theorem integralOrdinaryScalar_coordinates :
       (m : M.val.obj U) : (a.unit.app M).val.app U m =
         (SheafOfModules.toChangeOfRings (φ := φ) M).app U
           (ModuleCat.FrobeniusData.tmulExt (φ.hom.app U).hom (M.val.obj U) 1 m) := by
-    have h := ha M _ (𝟙 _) U m
-    simpa only [eqToHom_refl, Category.id_comp, Adjunction.homEquiv_id] using h
+    have h := ha M (F.obj M) (𝟙 (F.obj M)) U m
+    rw [eqToHom_refl, Category.id_comp, Adjunction.homEquiv_id] at h
+    exact h
   refine ⟨d, b, a, fun j ↦ Functor.whiskerRight (Functor.whiskerLeft
     F (σ j)) _ ≫ εF, hb, ?_, ?_⟩
   · intro i j M
