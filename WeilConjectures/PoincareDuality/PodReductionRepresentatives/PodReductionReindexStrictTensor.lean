@@ -86,8 +86,7 @@ theorem proEtaleIsoCommaArrow_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (
     @AlgebraicGeometry.WeaklyEtale ⊤ g
     (inferInstance : AlgebraicGeometry.WeaklyEtale g) trivial).unit.app U))
 
-set_option trace.profiler true in
-set_option maxHeartbeats 4000000 in
+set_option profiler true in
 -- The generator calculation passes through several transported comparison maps.
 /-- Scalar-generator normalization implies the tensor equation before localization.
 There are no derived-category maps, adjunction mates, or completion data in this
