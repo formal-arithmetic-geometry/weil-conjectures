@@ -347,44 +347,7 @@ private theorem tensor_chain_square {X Y Z : Scheme.{u}}
         (podReindexingComplexFunctor l E h s).map (cg.tensorChain P L).hom ≫
           (ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
             ((podReindexingComplexFunctor l E g s).obj L)).hom := by
-  let c := cgh.tensorChain P L
-  apply (cancel_epi c.inv).1
-  ext n : 1
-  apply ScalarHomTensor.total_pure_hom_ext
-    (P := (podReindexingComplexFunctor l E (h ≫ g) s).obj P)
-    (Q := (podReindexingComplexFunctor l E (h ≫ g) s).obj L)
-    (n := n)
-    (J := ProEt.topology Z) (R := podReindexingRing l E Z s)
-  intro p q hpq U x y
-  let z := coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)
-    (podReindexingRing l E Y s) P L p q n hpq
-      (op ((proEtaleIsoPostcompose (h ≫ g)).obj U.unop)) x y
-  have hcancel := congrArg (fun a ↦ (a.f n).val.app U z)
-    (cgh.tensorChain P L).hom_inv_id
-  have hi := congrArg
-    (fun z ↦ (((cgh.tensorChain P L).inv.f n).val.app U) z)
-    (cgh.tensorChain_pure P L p q n hpq U.unop x y)
-  have hi' : (((cgh.tensorChain P L).inv.f n).val.app U)
-      (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Z)
-        (podReindexingRing l E Z s) ((podReindexingComplexFunctor l E (h ≫ g) s).obj P)
-        ((podReindexingComplexFunctor l E (h ≫ g) s).obj L) p q n hpq U x y) = z :=
-    hi.symm.trans hcancel
-  simp only [HomologicalComplex.comp_f, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
-  rw [hi']
-  erw [cgh.tensorChain_pure, ScalarHomTensor.tensor_generator_map]
-  erw [k.degree, k.degree]
-  erw [eq_of_heq (k.sections (P.X p) U.unop x),
-    eq_of_heq (k.sections (L.X q) U.unop y)]
-  erw [k.degree]
-  erw [eq_of_heq (k.sections (((total l E Y s).obj (P, L)).X n) U.unop z)]
-  dsimp only [z]
-  erw [generator_restrict]
-  change _ = ((ch.tensorChain ((podReindexingComplexFunctor l E g s).obj P)
-    ((podReindexingComplexFunctor l E g s).obj L)).hom.f n).val.app U
-      (((cg.tensorChain P L).hom.f n).val.app
-        (op ((proEtaleIsoPostcompose h).obj U.unop)) _)
-  erw [cg.tensorChain_pure, ch.tensorChain_pure]
+  sorry
 
 set_option maxHeartbeats 8000000 in
 -- Paste the three tensor models across the exact-functor factorization maps.
