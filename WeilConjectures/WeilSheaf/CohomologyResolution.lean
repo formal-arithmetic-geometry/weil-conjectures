@@ -78,35 +78,6 @@ lemma adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
           (lowerStarComp (WeilCoefficients.{u} l) _ _).inv.app M.X :=
   rfl
 
-/-- Global sections identify the Frobenius transported through a commuting square of adic
-pushforwards with the Frobenius on the source. -/
-lemma adicFrobeniusNatTrans_eq_of_comm {Z W : Scheme.{u}} (g : Z ⟶ W)
-    (hW : W ⟶ W) (hZ : Z ⟶ Z) (comm : hZ ≫ g = g ≫ hW)
-    (e : adicLowerStar l g ⋙ adicLowerStar l hW ≅
-      adicLowerStar l hZ ⋙ adicLowerStar l g)
-    (he : ∀ M : AdicSheaf l Z, (e.hom.app M).hom =
-      (lowerStarComp (WeilCoefficients.{u} l) g hW).hom.app M.X ≫
-        (lowerStarCongr (WeilCoefficients.{u} l) comm.symm).hom.app M.X ≫
-          (lowerStarComp (WeilCoefficients.{u} l) hZ g).inv.app M.X)
-    (τ : IsoAlgebra.forget (adicLowerStar l hZ) ⋙ AdicSheaf.forget Z ⋙ Sheaf.Γ _ _ ⟶
-      IsoAlgebra.forget (adicLowerStar l hZ) ⋙ AdicSheaf.forget Z ⋙ Sheaf.Γ _ _)
-    (hτ : ∀ X, τ.app X = (globalSectionsLowerStarIso _ hZ).inv.app X.carrier.X ≫
-      (Sheaf.Γ _ _).map X.str.hom.hom) :
-    IsoAlgebra.frobeniusNatTrans e (AdicSheaf.forget W ⋙ Sheaf.Γ _ _)
-      (AdicSheaf.forget Z ⋙ Sheaf.Γ _ _)
-      (Functor.isoWhiskerLeft (AdicSheaf.forget Z) (globalSectionsLowerStarIso _ g))
-      (Functor.whiskerLeft (AdicSheaf.forget W) (globalSectionsLowerStarIso _ hW).inv) = τ := by
-  refine NatTrans.ext (funext fun X ↦ ?_)
-  rw [hτ]
-  change (globalSectionsLowerStarIso _ g).inv.app X.carrier.X ≫
-    (globalSectionsLowerStarIso _ hW).inv.app ((adicLowerStar l g).obj X.carrier).X ≫
-      (Sheaf.Γ _ _).map ((e.hom.app X.carrier).hom ≫
-        ((adicLowerStar l g).map X.str.hom).hom) ≫
-      (globalSectionsLowerStarIso _ g).hom.app X.carrier.X = _
-  rw [he, adicLowerStar_map_hom, Category.assoc, Category.assoc]
-  exact globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l) g g hW hZ comm
-    X.carrier.X X.str.hom.hom
-
 end ProEtale
 
 namespace WeilSheaf
@@ -115,7 +86,6 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
@@ -137,19 +107,26 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
         (Spec (CommRingCat.of k₀) ↘
           Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv) =
       ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
-  exact adicFrobeniusNatTrans_eq_of_comm
+  refine NatTrans.ext (funext fun X ↦ ?_)
+  have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
+    (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
+      (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
       (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
-    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm _
-    (fun M ↦ adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app
-      (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _) M)
-    (ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y) (fun _ ↦ rfl)
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
+    ((AdicSheaf.forget _).map X.str.hom)
+  simp only [IsoAlgebra.frobeniusNatTrans_app,
+    ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.comp_map, Functor.map_comp, Category.assoc]
+  simp only [Mod.forget_map, adicLowerStar_map_hom]
+  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
+  simp only [Functor.map_comp, Category.assoc] at h ⊢
+  exact h
 
 
-set_option profiler true in
--- the kernel unfolds the pushforward of sheaves of modules to its underlying sheaf
 /-- **Weil cohomology from an injective resolution.** Let `I` be an injective resolution of a
 Weil sheaf `F` by pro-étale Weil sheaves. Then `Hʳ(Y ⊗ k̄, F)` is the `r`-th cohomology of the
 complex `Γ(Ȳ, I)`, and its geometric Frobenius is induced by the Frobenius
