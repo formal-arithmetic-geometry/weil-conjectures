@@ -44,7 +44,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option profiler true in
 /-- **The Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` is invertible if and only if `Π_{A,B}` is. -/
@@ -73,7 +72,6 @@ theorem isIso_map_map_kunnethMap_iff_padicAlgCl [QuasiCompact M.j] [QuasiSeparat
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_map_kunnethMap_padicAlgCl ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
-set_option profiler true in
 /-- **The restricted Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`, for every `h : W ⟶ Z'`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Lh^* Π_{A₀,B₀}` is invertible if and only if `Lh^* Π_{A,B}` is. -/
