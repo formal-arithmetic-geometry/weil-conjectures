@@ -67,7 +67,6 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
-set_option profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Pulling nearby cycles back to a slice preserves derived completeness for a bounded
 constructible integral complex. -/
@@ -116,7 +115,6 @@ private theorem derivedCompleteIntegers_nearbyCycles_baseChangeSpecial_obj
         (derivedCompleteIntegers_of_boundedConstructible
           (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε _ hA₀))))
 
-set_option profiler true in
 /-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de
 monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait
@@ -147,9 +145,9 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
   have : B₀.IsGE (min a a') :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right a a')
   have hAB := boundedConstructible_tensorObj
-      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
+    (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
   let c := hAB.1.1.choose
   have hc := hAB.1.1.choose_spec
   -- the exchange of the change of trait of `N` is invertible, that of the slice of `M` splits
@@ -158,25 +156,25 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
   have hu₁ := isSplitMono_pullbackExchange_baseChangeHom_traitSlice_padicIntegers hM b hb E
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A₀ hA₀)
   have hπ := isIso_kunnethMap_of_iso 𝒪 (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
-      ((leftDerivedUpperStarId _ X).app A₀)
-      ((leftDerivedUpperStarId _ Y).app B₀) h
+    ((leftDerivedUpperStarId _ X).app A₀)
+    ((leftDerivedUpperStarId _ Y).app B₀) h
   -- the pullback of the Künneth map is a split monomorphism
   have hx := isSplitMono_map_kunnethMap_of_isSplitMono 𝒪 φ₁ φ₂
-      (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
-      (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
-        (traitSlice_over (traitSliceCoord k')))
-      (baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
-        (Category.comp_id _))
-      (baseChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb) (traitSlice (traitSliceCoord k'))
-        (traitSlice_over (traitSliceCoord k')))
-      (Hom.baseChange_total_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
-      (Hom.baseChange_generic_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
-      (Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
-      (Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
-      (by simp) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
-      (by simp) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A₀ B₀
-      (by exact_mod_proofs hu₁) (by exact_mod_proofs hu₂) (by exact_mod_proofs hπ)
-  -- finiteness properties of the total spaces and of the special and generic fibres
+    (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
+    (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+      (traitSlice_over (traitSliceCoord k')))
+    (baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
+      (Category.comp_id _))
+    (baseChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb) (traitSlice (traitSliceCoord k'))
+      (traitSlice_over (traitSliceCoord k')))
+    (Hom.baseChange_total_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
+    (Hom.baseChange_generic_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
+    (Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
+    (Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
+    (by simp) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
+    (by simp) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A₀ B₀
+    (by exact_mod_proofs hu₁) (by exact_mod_proofs hu₂) (by exact_mod_proofs hπ)
+  -- finiteness properties of the geometric generic fibres
   have := hM.locallyOfFiniteType
   have := hM.quasiCompact
   have := hN.locallyOfFiniteType
