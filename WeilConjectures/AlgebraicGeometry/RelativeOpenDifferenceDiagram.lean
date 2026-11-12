@@ -124,6 +124,7 @@ private theorem open_counit_isIso (X : Scheme.{u}) (O : X.Opens)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
+set_option trace.profiler true in
 set_option synthInstance.maxHeartbeats 400000 in
 -- The threefold transported restriction needs additional instance search.
 set_option maxHeartbeats 600000 in
