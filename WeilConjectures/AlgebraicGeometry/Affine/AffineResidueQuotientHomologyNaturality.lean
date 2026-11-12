@@ -240,7 +240,7 @@ theorem affine_residue_quotient_homology_naturality :
   dsimp only
   refine ⟨quotientIso W U p, ?_⟩
   intro K C φ
-  apply (affineResidueCycleClass_surjective_kernel W U p K).1.forall.2
+  refine (affineResidueCycleClass_surjective_kernel W U p K).1.forall.2 ?_
   intro x
   calc
     _ = ((residueComplexFunctor W U p).obj C).homologyπ 1
