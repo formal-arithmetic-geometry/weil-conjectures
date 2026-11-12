@@ -381,6 +381,7 @@ lemma adicLowerStarRestrictPadicIntIso_inv_app_hom_app_apply (B : AdicSheaf l V)
 
 set_option maxRecDepth 20000 in
 set_option synthInstance.maxHeartbeats 200000 in
+set_option profiler true in
 -- The sections of composites of sheaf morphisms are unfolded.
 /-- The adjoint of the trivialisation, restricted to `ℤ_ℓ`-modules, as a morphism of abelian
 sheaves. -/

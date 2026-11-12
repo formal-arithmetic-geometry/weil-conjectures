@@ -84,6 +84,7 @@ instance fact_isNilpotent_natCast_integralResidue :
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))⟩⟩
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Checking both coefficient-ring base-change comparisons needs the extra elaboration budget.
 /-- Derived coefficient reduction compares integral exchange to residue exchange.
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3), using the
