@@ -582,6 +582,7 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     have hnat'' := congrArg
       (fun k ↦ (scalarSixPull Λ f).map
         (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Y) C) ≫ k) hnat'
+    simpa only [scalarSixPull, F, Functor.comp_map, Functor.comp_obj] at hnat''
     have haug := congrArg (fun g ↦ DerivedCategory.Q.map g)
       (augmented_tensor_pull a S t f C)
     dsimp only [wY]
