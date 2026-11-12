@@ -122,7 +122,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The original existential statement names a witness unused by True.
 set_option linter.unusedVariables false in
-set_option profiler true in
+set_option trace.profiler true in
 /-- The localized sequence sites admit the ordinary native open tensor datum.
 Source: Stacks sites-modules.tex 0E8I, sites-cohomology.tex 0GL1 and 0G7E,
 and Homology 012Z.
@@ -176,10 +176,12 @@ theorem nativeOpenTensor_system_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
   let RZ := coefficientSequenceCommRingSheaf.{u, u} l E Z
   let RX := coefficientSequenceCommRingSheaf.{u, u} l E X
   let g := ProEtale.VaryingRing.baseChange j
-  let F := ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
-    (compactSupportSystemQuotient l E) j
-  let G := ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)
-    (compactSupportSystemQuotient l E) j
+  let F : SemilinearSections.Mod K RX ⥤ SemilinearSections.Mod J RZ :=
+    ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) j
+  let G : SemilinearSections.Mod J RZ ⥤ SemilinearSections.Mod K RX :=
+    ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) j
   let adj : F ⊣ G := ProEtale.VaryingRing.moduleJAdj (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) j
   let aG : G ⊣ ProEtale.VaryingRing.push (compactSupportSystemLevel l E)

@@ -129,7 +129,6 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
   SemilinearSections.sequenceSmall SemilinearSections.sliceSmall
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-set_option profiler true in
 /-- Totalize an ordinary natural extension/tensor isomorphism, with its summand equation.
 Source: Stacks, sites-cohomology.tex Tag 0GL1 and Homology Tag 012Z.
 (blueprint: lem-coef-native-open-tensor-totalization).
