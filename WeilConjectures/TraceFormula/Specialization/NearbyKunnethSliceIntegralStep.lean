@@ -67,9 +67,7 @@ set_option hygiene false in
 /-- The condensed ring `𝒪̲_E`. -/
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
--- the square of the Künneth maps of the slice is a large term
 /-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de
 monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait
@@ -92,8 +90,10 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
         (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')))^*⟦𝒪⟧).map
       (kunnethMap 𝒪 φ₁ φ₂ A₀ B₀)) := by
   -- bounds below of `A₀`, `B₀` and of their external product
-  obtain ⟨a, ha⟩ := hA₀.1.1
-  obtain ⟨a', ha'⟩ := hB₀.1.1
+  let a := hA₀.1.1.choose
+  have : A₀.IsGE a := hA₀.1.1.choose_spec
+  let a' := hB₀.1.1.choose
+  have : B₀.IsGE a' := hB₀.1.1.choose_spec
   have : A₀.IsGE (min a a') := DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left a a')
   have : B₀.IsGE (min a a') :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right a a')
@@ -103,7 +103,8 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers [TopologicalSpace.N
       (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
-  obtain ⟨c, hc⟩ := hAB.1.1
+  let c := hAB.1.1.choose
+  have hc := hAB.1.1.choose_spec
   -- the exchange of the change of trait of `N` is invertible, that of the slice of `M` splits
   have hu₂ := isIso_pullbackExchange_baseChangeHom_traitMap_padicIntegers (K := traitSliceField k')
     hN E (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B₀ hB₀)
