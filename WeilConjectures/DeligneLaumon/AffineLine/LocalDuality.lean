@@ -178,6 +178,7 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
 -- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
+set_option profiler true in
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
 closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perfect pairing
@@ -350,6 +351,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   rfl
 
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
+set_option profiler true in
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
 of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
 open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
