@@ -67,7 +67,19 @@ set_option hygiene false in
 local notation "𝒪" => Profinite.padicIntegersRingObj ℓ E.1
 
 -- the Künneth maps of the product are large terms
-set_option profiler true in
+private theorem boundedConstructible_kunnethMap_residueField [IsNoetherian X] [IsNoetherian Y]
+    [TopologicalSpace.NoetherianSpace Z]
+    {A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj 𝒪 X))} (hA₀ : boundedConstructible (condensedRingObj 𝒪 X) A₀)
+    {B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj 𝒪 Y))} (hB₀ : boundedConstructible (condensedRingObj 𝒪 Y) B₀) :
+    boundedConstructible (condensedRingObj 𝒪 Z)
+      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
+  boundedConstructible_tensorObj
+    (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
+
 /-- **Gabber's Künneth formula for proper models, modulo `ϖ`** (blueprint
 `sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
 Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`, `N` of finite
@@ -95,6 +107,8 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj B₀)) := by
   have : TopologicalSpace.NoetherianSpace X := inferInstance
   have : TopologicalSpace.NoetherianSpace Y := inferInstance
+  have ha : A₀.IsGE hA₀.1.1.choose := hA₀.1.1.choose_spec
+  have ha' : B₀.IsGE hB₀.1.1.choose := hB₀.1.1.choose_spec
   have hT : IsField (PadicAlgCl.integersResidueField ℓ E.1) := Field.toIsField _
   have hAe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hA₀
   have hBe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hB₀
@@ -108,13 +122,7 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
     DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
   have : B₀.IsGE n :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right _ _)
-  have hA₁ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀
-  have hB₁ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀
-  have hAB : boundedConstructible (condensedRingObj 𝒪 Z)
-      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
-    boundedConstructible_tensorObj
-      (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
-      hA₁ hB₁
+  have hAB := boundedConstructible_kunnethMap_residueField E (f₁ := f₁) (f₂ := f₂) hA₀ hB₀
   obtain ⟨c, hc⟩ := exists_isGE_of_boundedConstructible hAB
   -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
   have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
