@@ -624,6 +624,14 @@ private theorem native_restriction_data
         heq_of_eq (congrArg (fun S ↦ fun M N ↦ S.obj (M, N))
           (eq_of_heq hc.2.2.1)), hc.2.2.2⟩
 
+-- Tensor totalizations only need small coproducts. Record them directly so synthesis
+-- does not repeatedly search through the module and sheaf colimit instances.
+private instance restriction_adicSmallColimits (X : Scheme.{u})
+    [X.Over (Spec (CommRingCat.of k₀))] :
+    HasColimitsOfSize.{0, 0}
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+  hasColimitsOfSizeShrink _
+
 section AbstractTransport
 variable (α : (ProEtale.adicUpperStar l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))) ⋙
