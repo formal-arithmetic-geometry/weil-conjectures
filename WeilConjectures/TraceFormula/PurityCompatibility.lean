@@ -123,6 +123,24 @@ noncomputable def prodUpperShriekBaseChangeUnit :
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv
 
 set_option profiler true in
+/-- Transposing the base change map at the unit gives the inverse compact-support base
+change, followed by the pulled-back counit and the monoidal unit isomorphism. -/
+private lemma prodUpperShriekBaseChangeUnit_homEquiv_symm :
+    ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv
+    _ _).symm
+    (prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y)) =
+    (prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ≫
+      (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
+        ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
+      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv := by
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+    (isPullback_prod_toPoint X Y)
+  rw [prodUpperShriekBaseChangeUnit, upperShriekBaseChange,
+    Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Category.assoc]
+  congr 1
+  simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
+
+set_option profiler true in
 /-- The exceptional Künneth map `α : Lp_X^* M ⊗ Lp_Y^* ω_Y ⟶ Rp_X^! M` factors as the exceptional
 base change map of the product square at the unit, `Lp_Y^* ω_Y ⟶ Rp_X^! ℚ̄_ℓ`, followed by the
 purity map `γ_{p_X, M} : Lp_X^* M ⊗ Rp_X^! ℚ̄_ℓ ⟶ Rp_X^! M`. -/
@@ -131,20 +149,7 @@ lemma exceptionalKunnethMap_eq (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
       (boundedConstructibleUpperStar _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M ◁
           prodUpperShriekBaseChangeUnit ℓ ≫
         upperShriekUnitTensorMap ℓ (prod.fst : X ⨯ Y ⟶ X) M := by
-  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
-    (isPullback_prod_toPoint X Y)
-  -- the adjoint of the base change map
-  have hx : ((boundedConstructibleUpperShriekAdjunction ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv
-      _ _).symm
-      (prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y)) =
-      (prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ≫
-        (boundedConstructibleUpperStar _ ℓ (toPoint X)).map
-          ((boundedConstructibleUpperShriekAdjunction ℓ (toPoint Y)).counit.app (𝟙_ _)) ≫
-        (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv := by
-    rw [prodUpperShriekBaseChangeUnit, upperShriekBaseChange,
-      Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Category.assoc]
-    congr 1
-    simp only [prodBaseChangeIso, Iso.symm_hom, asIso_inv, NatIso.isIso_inv_app]
+  have hx := prodUpperShriekBaseChangeUnit_homEquiv_symm ℓ (X := X) (Y := Y)
   have hx' := ((boundedConstructibleUpperShriekAdjunction ℓ
     (prod.fst : X ⨯ Y ⟶ X)).homEquiv_counit
       (g := prodUpperShriekBaseChangeUnit ℓ (X := X) (Y := Y))).symm.trans hx
