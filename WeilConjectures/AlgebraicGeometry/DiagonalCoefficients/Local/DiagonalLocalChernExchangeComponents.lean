@@ -109,7 +109,6 @@ private theorem adjunct_sum_factor
   simp only [Preadditive.add_comp, Category.assoc]
 
 set_option linter.unusedVariables false in
-set_option profiler true in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base.
 
@@ -226,7 +225,9 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
         exact map_comp_factor L' c.derived γ v _ hbase
   refine ⟨c.derived ≫ γ, adj'.homEquiv _ _ v ≫ (eqToIso canonical').inv.app _, ?_⟩
   unfold modelLocalAdjunct modelExchange derivedExchange
-  rw [conjugated_exchange_adjunct]
+  rw [conjugated_exchange_adjunct (adj := adj) (adj' := adj') (θ := θ)
+    (i := eqToIso canonical) (i' := eqToIso canonical')
+    (a := cF.derived ≫ eX.localChern l X z) (t := line.shift)]
   refine (congrArg (fun a ↦ adj'.homEquiv _ _ a ≫
     (eqToIso canonical').inv.app _) hlocal).trans ?_
   exact adjunct_sum_factor (L := derivedUpper Λ f') adj' (eqToIso canonical') c.derived γ v

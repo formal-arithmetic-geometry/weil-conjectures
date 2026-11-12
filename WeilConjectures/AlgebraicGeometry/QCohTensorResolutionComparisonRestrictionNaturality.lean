@@ -61,7 +61,6 @@ private theorem tensorResolution_restriction_tensor_square_id_right
   simpa only [tensorResolutionRestrictionTensorMap, Category.assoc] using
     tensorResolution_restrictedTensor_square j r (𝟙 F) r' (𝟙 F') e m f f hrr (by simp)
 
-set_option profiler true in
 /-- The common K-flat zigzag respects three compatible restriction squares.
 
 Source: Stacks Tags 06YT and 08DX(2), functoriality of comparison through a common
@@ -143,8 +142,7 @@ theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}
   have hz := tensorResolution_homology_zigzag R (.up ℤ) i
     a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ f₀ f₁ f₂ f₃ f₄ h₀ h₁ h₂ h₃
   rw [tensorResolutionComparison_hom, tensorResolutionComparison_hom]
-  convert hz using 1 <;> simp only [tensorResolutionSiteModules, Scheme.Modules, moduleRings,
-    CochainComplex.mapBifunctor, R, a₀, a₁, a₂, a₃, b₀, b₁, b₂, b₃, f₀, f₄,
-    Category.assoc]
+  convert hz using 1 <;> simp only [tensorResolutionSiteModules, Scheme.Modules,
+    CochainComplex.mapBifunctor, R, a₀, a₁, a₂, a₃, b₀, b₁, b₂, b₃, f₀, f₄]
 
 end AlgebraicGeometry
