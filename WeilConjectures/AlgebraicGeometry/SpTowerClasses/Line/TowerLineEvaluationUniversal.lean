@@ -152,8 +152,7 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
     erw [Equiv.trans_apply, Equiv.trans_apply, constantResidueHomEquiv_apply,
       Iso.homCongr_apply]
     simp only [Iso.symm_inv, Iso.refl_hom, Category.comp_id]
-    trace_state
-    rfl
+    dsimp only [Rrings, Functor.ofOpSequence]
   refine ⟨Φ, ?_, ?_⟩
   · intro N N' f g
     erw [hΦ, hΦ, hΨ]
@@ -161,8 +160,8 @@ theorem towerLineEvaluation_universal (l : ℕ) [Fact l.Prime]
     rfl
   · intro N f U a x x' v hx hv
     erw [hΦ]
-    change f.val.app U v = a • (Ψ N f).val.app U
-      (e.hom.hom.app U (((c.rootForget.hom.app (op n)).hom.app U) x'))
+    change f.val.app U v = a • (show N.val.obj U from (Ψ N f).val.app U
+      (e.hom.hom.app U (((c.rootForget.hom.app (op n)).hom.app U) x')))
     rw [he U x x' hx]
     exact hsection N f U a x v hv
 
