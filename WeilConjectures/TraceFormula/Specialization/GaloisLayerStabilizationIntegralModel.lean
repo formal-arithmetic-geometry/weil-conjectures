@@ -67,9 +67,11 @@ private lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegra
     [QuasiCompact p] [QuasiSeparated p] [QuasiCompact p'] [QuasiSeparated p']
     (sq : CommSq g' p' p g) (i : Z ⟶ Y') (ε : X ⟶ T)
     (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T))
-    (K : PadicAlgClConstructible T ℓ)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T)))
+    (hK : boundedConstructible _ K)
     (e : (constructibleToPadicAlgCl T ℓ E).obj
-      ((boundedConstructibleExtendScalars T ℓ E).obj K₀) ≅ K)
+      ((boundedConstructibleExtendScalars T ℓ E).obj K₀) ≅ ⟨K, hK⟩)
     (h : IsIso ((L((i)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)).map
       ((Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction
           (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) p)
@@ -84,7 +86,7 @@ private lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegra
       (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p)
       (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p')
       (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq)).app
-        ((L((ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K.obj))) := by
+        ((L((ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K))) := by
   have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
   obtain ⟨n, hn⟩ := hK₀.1.1
   have hεn := isGE_leftDerivedUpperStar_obj _ ε K₀.obj n
@@ -92,10 +94,10 @@ private lemma isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegra
     (derivedCompleteIntegers_of_boundedConstructible hK₀)
   have h₃ := isIso_map_baseChangeMap_app_padicAlgCl_of_residueField ℓ E sq i _ n hc
     (by exact_mod_proofs h)
-  have e' := integralModel_extendScalars_iso T ℓ E K₀ K e
+  have e' := integralModel_extendScalars_iso T ℓ E K₀ ⟨K, hK⟩ e
   have hgen := isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) sq i ε K₀.obj (K := K.obj)
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) sq i ε K₀.obj (K := K)
     (by exact_mod_proofs e') (by exact_mod_proofs h₃)
   exact_mod_proofs hgen
 
@@ -167,7 +169,7 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_integralModel
     inferInstanceAs (QuasiSeparatedSpace N.total)
   have hgen := isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_residueIntegralModel ℓ E
     (N.galoisLayerRestrict h Ω L'.toIntermediateField).commSq_j (N.galoisLayer h Ω).i
-    (N.galoisLayerHom h L'.toIntermediateField).generic K₀ ⟨_, hC⟩ e
+    (N.galoisLayerHom h L'.toIntermediateField).generic K₀ _ hC e
     (by exact_mod_proofs hL')
   -- reduction to the restricted base change map at `Lg^* (Lε^* C)`
   refine Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ _ C ?_
@@ -175,10 +177,10 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_integralModel
       (N.galoisLayerHom h L'.toIntermediateField).generic).obj
         (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
-  clear e hL' K₀ E
-  revert C hC hgen
+  clear e hL' K₀ E hC
+  revert C hgen
   normalize_precoherent
-  intro C hC hgen
+  intro C hgen
   exact hgen
 
 end NearbyCyclesModel
