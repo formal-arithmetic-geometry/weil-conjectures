@@ -143,7 +143,8 @@ theorem exists_supported_map_affine_attachment
       Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
     fun Z O ↦ inferInstance
   let Y := W ⊔ V
-  obtain ⟨hY, ⟨hYO⟩⟩ := open_derived_localization_data X Y
+  have hlocalY := open_derived_localization_data X Y
+  obtain ⟨hY, ⟨hYO⟩⟩ := hlocalY
   let := hY
   let := hYO
   let L := schemeOpenRestriction X Y
@@ -152,10 +153,12 @@ theorem exists_supported_map_affine_attachment
   let J := schemeOpenRestriction X U
   let c : L.mapDerivedCategory ⋙ H.mapDerivedCategory ≅ J.mapDerivedCategory :=
     schemeDerivedOpenRestrictionCompIso X (homOfLE (le_trans hUW le_sup_left) : U ⟶ Y)
-  obtain ⟨F, α, hF, hFT, e, he⟩ :=
+  have hunion :=
     exists_supported_map_affine_union_gluing X U W V hUW hW hV T hT hTc E R β hR hRT c
-  obtain ⟨R', β', hR', hRT', d, hd⟩ :=
+  obtain ⟨F, α, hF, hFT, e, he⟩ := hunion
+  have hambient :=
     exists_supported_map_initial_ambient_lift X Y T E F hF hFT α
+  obtain ⟨R', β', hR', hRT', d, hd⟩ := hambient
   refine ⟨R', β', hR', hRT', c.symm.app R' ≪≫ H.mapDerivedCategory.mapIso d ≪≫ e, ?_⟩
   change J.mapDerivedCategory.map β' =
     (c.symm.app R' ≪≫ H.mapDerivedCategory.mapIso d ≪≫ e).hom ≫

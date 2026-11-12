@@ -132,11 +132,14 @@ theorem exists_supported_affine_overlap_map
       Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
     fun Z O ↦ inferInstance
   intro JW JV SW SV kW kV A a
-  obtain ⟨hF, hFT, hA, hAT⟩ := local_perfect_supported_stabilization X W T R hR hRT
-  obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ :=
+  have hstabilization := local_perfect_supported_stabilization X W T R hR hRT
+  obtain ⟨hF, hFT, hA, hAT⟩ := hstabilization
+  have hextension :=
     exists_supported_overlap_perfect_extension X W V hW hV T hT hTc (JW.obj R) hF hFT
-  obtain ⟨U, hU, hD, e, ⟨d⟩⟩ :=
+  obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ := hextension
+  have hrestriction :=
     exists_compact_overlap_restriction_model X W V hW hV
+  obtain ⟨U, hU, hD, e, ⟨d⟩⟩ := hrestriction
   let := hD
   let : IsAffine V.toScheme := hV
   let L := (schemeOpenRestriction V.toScheme U).mapDerivedCategory
@@ -149,8 +152,9 @@ theorem exists_supported_affine_overlap_map
     q.hom ≫ SW.map a ≫ kW.hom.app E.obj ≫ kV.inv.app E.obj
   let α₀ : L.obj Q ⟶ L.obj EV.obj :=
     e.functor.preimage (d.hom.app Q ≫ α ≫ d.inv.app EV.obj)
-  obtain ⟨B, I, δ, b, hB, _hI, _hδ, ⟨bU, _hbU, hα₀⟩, hBT⟩ :=
+  have hlift :=
     exists_perfect_map_lift_of_isAffine V.toScheme U hU EV Q hQ α₀
+  obtain ⟨B, I, δ, b, hB, _hI, _hδ, ⟨bU, _hbU, hα₀⟩, hBT⟩ := hlift
   let bS : SV.obj B ≅ SV.obj Q :=
     (d.app B).symm ≪≫ e.functor.mapIso bU ≪≫ d.app Q
   have hα : α = bS.inv ≫ SV.map b := by
