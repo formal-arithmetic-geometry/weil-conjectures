@@ -55,9 +55,6 @@ open Scheme
 
 attribute [local instance] DerivedCategory.braidedCategory'
 
--- Resolve the underlying categories directly when elaborating derived pullback objects.
-attribute [local instance 30000] instCategoryDerivedCategory CategoryTheory.Mod.instCategory
-
 /-- The transpose of `F f ≫ g` along `F ⊣ G` is invertible if `f` and the transpose of `g` are. -/
 lemma _root_.CategoryTheory.Adjunction.isIso_homEquiv_of_eq_map_comp {C D : Type*} [Category C]
     [Category D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) {X X' : D} {Y : C} (f : X' ⟶ X)
@@ -268,9 +265,11 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
   have e₂ := map_comp_of_comp_eq_map_aux L((p₂)^*⟦Λ⟧) _ _ _
     ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B)
     (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self Λ sq₂ KY)
-  have hg := (congrArg IsIso (homEquiv_pullbackSquareComparison_comp_counit Λ w A)).mpr h₁
+  have hg := h₁
+  rw [← homEquiv_pullbackSquareComparison_comp_counit Λ w A] at hg
   have t₁ := Adjunction.isIso_homEquiv_of_eq_map_comp
-    (derivedUpperStarLowerStarAdjunction Λ p₂) _ _ _ e₁ (hg := hg)
+    (derivedUpperStarLowerStarAdjunction Λ p₂)
+    (L((aY)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ S).hom.app KX)) _ _ e₁ (hg := hg)
   have t₂ := Adjunction.isIso_homEquiv_map_comp_counit (derivedUpperStarLowerStarAdjunction Λ aY)
     ((leftDerivedUpperStarId Λ S).hom.app KY)
   have t₃ := Adjunction.isIso_leftProjectionMorphism_of_isIso
