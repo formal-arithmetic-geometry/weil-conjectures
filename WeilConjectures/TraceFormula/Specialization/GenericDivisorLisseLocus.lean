@@ -91,23 +91,19 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
--- Share the graded tensor instances used by every derived pullback.
-private instance (priority := 10000) lisseHasTensorFour (T : Scheme.{u})
+-- Reuse tensor preservation of colimits throughout the graded tensor constructions.
+private instance (priority := 10000) lisseTensorLeftColimit (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt A B C D := by
+    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimit V ((MonoidalCategory.curriedTensor _).obj M) := by
   infer_instance
 
-private instance (priority := 10000) lisseHasGoodTensor12 (T : Scheme.{u})
+private instance (priority := 10000) lisseTensorRightColimit (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor A B C := by
-  infer_instance
-
-private instance (priority := 10000) lisseHasGoodTensor23 (T : Scheme.{u})
-    (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ A B C := by
+    (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)
+    {J : Type} [SmallCategory J] (V : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimit V ((MonoidalCategory.curriedTensor _).flip.obj M) := by
   infer_instance
 
 section Geometry
