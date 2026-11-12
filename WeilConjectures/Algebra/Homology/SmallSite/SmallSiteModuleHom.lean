@@ -52,13 +52,24 @@ def restriction : SheafOfModules.{u + 1}
     ((sheafCompose (topology J)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficient J R)) ⥤
     SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) :=
-  pushforward (F := AsSmall.up.{u, u + 1, u + 1}) (𝟙 _)
+  { obj M :=
+      { val :=
+          { obj V := M.val.obj (op (AsSmall.up.{u, u + 1, u + 1}.obj V.unop))
+            map f := M.val.map (AsSmall.up.{u, u + 1, u + 1}.map f.unop).op
+            map_id V := M.val.map_id (op (AsSmall.up.{u, u + 1, u + 1}.obj V.unop))
+            map_comp f g := M.val.map_comp
+              (AsSmall.up.{u, u + 1, u + 1}.map f.unop).op
+              (AsSmall.up.{u, u + 1, u + 1}.map g.unop).op }
+        isSheaf := ((pushforward (F := AsSmall.up.{u, u + 1, u + 1}) (𝟙 _)).obj M).isSheaf }
+    map f :=
+      { val :=
+          { app V := f.val.app (op (AsSmall.up.{u, u + 1, u + 1}.obj V.unop))
+            naturality g := f.val.naturality (AsSmall.up.{u, u + 1, u + 1}.map g.unop).op } }
+    map_id _ := rfl
+    map_comp _ _ := rfl }
 
-/-- Both lift directions restrict modules and give inverse equivalences.
-Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom).
-The coefficient maps are identities. The lifted category's unit and counit have
-identity underlying arrows, so the pushforward composition equations are identities. -/
-def equivalence : SheafOfModules.{u + 1}
+/-- The generic pushforward construction supplies the lift coherence data. -/
+def pushforwardEquivalence : SheafOfModules.{u + 1}
     ((sheafCompose (topology J)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficient J R)) ≌
     SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) :=
@@ -82,6 +93,40 @@ def equivalence : SheafOfModules.{u + 1}
         ext U x
         change R.obj.map (𝟙 _) x = x
         exact ConcreteCategory.congr_hom (R.obj.map_id _) x)
+
+/-- The lift unit, presented using direct restriction. -/
+def restriction_unitIso :
+    𝟭 _ ≅ restriction J R ⋙ (pushforwardEquivalence J R).inverse :=
+  (pushforwardEquivalence J R).unitIso
+
+/-- The lift counit, presented using direct restriction. -/
+def restriction_counitIso :
+    (pushforwardEquivalence J R).inverse ⋙ restriction J R ≅ 𝟭 _ :=
+  (pushforwardEquivalence J R).counitIso
+
+/-- Both lift directions restrict modules and give inverse equivalences.
+Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom).
+The coefficient maps are identities. The lifted category's unit and counit have
+identity underlying arrows, so the pushforward composition equations are identities. -/
+def equivalence : SheafOfModules.{u + 1}
+    ((sheafCompose (topology J)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficient J R)) ≌
+    SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) :=
+  { functor := restriction J R
+    inverse := (pushforwardEquivalence J R).inverse
+    unitIso := restriction_unitIso J R
+    counitIso := restriction_counitIso J R
+    functor_unitIso_comp X := by
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro U
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro x
+      change X.val.map (𝟙 (op (AsSmall.up.obj U.unop)))
+        (X.val.map (𝟙 (op (AsSmall.up.obj U.unop))) x) = x
+      exact (ConcreteCategory.congr_hom (X.val.map_id _) _).trans
+        (ConcreteCategory.congr_hom (X.val.map_id _) x) }
 
 /-- The forward functor of the lifted equivalence is the specified restriction.
 Source: Stacks 03D6 (blueprint: lem-sf-small-site-module-hom). -/
