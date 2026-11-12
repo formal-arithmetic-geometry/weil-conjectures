@@ -64,6 +64,7 @@ set_option hygiene false in
 local notation "𝔽" => Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)
 
 -- the Künneth maps of the two product configurations are large terms
+set_option profiler true in
 omit [Fact (ringChar k').Prime] in
 /-- **From the geometric slice to the slice over a generic slice trait** (SGA 4½,
 [Th. finitude], 3.7; `𝔽_E`-coefficients): if the Künneth map of the geometric slice of the product
