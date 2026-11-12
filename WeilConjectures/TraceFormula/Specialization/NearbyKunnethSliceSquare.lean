@@ -154,6 +154,6 @@ lemma map_kunnethMap_sliceSpecial_comp_pullbackExchange (hM : M.IsTraitModelOver
       (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
       ((Category.comp_id f₂).trans (Category.id_comp f₂).symm)
       (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _) A B
-  exact_mod_proofs h
+  cast_proofs h
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
