@@ -338,6 +338,7 @@ lemma isIso_app_of_forall_upperStar {X'' : Scheme.{u}} {M : NearbyCyclesModel X 
 
 end Transport
 
+set_option profiler true in
 /-- The proper exchange is invertible at any complex isomorphic to the pullback of a bounded
 constructible complex on the total space. -/
 lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
@@ -352,9 +353,11 @@ lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
       boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C₀ ∧
         Nonempty (U ≅ L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) :
     IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app U) := by
-  refine isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) (M := M.toGeneric)
-    (h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) ?_ U hU
-  cast_proofs IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) h
+  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := hU
+  have : IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app
+      (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) := by
+    cast_proofs h.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) C₀ hC₀
+  exact NatTrans.isIso_app_of_iso' _ e
 
 /-! ### The global-sections step, for general coefficients -/
 
@@ -581,11 +584,11 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
       (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
     cast_proofs h₃
   -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
-  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
       (X := X') (Y := Y') (P := Z') f₁' f₂'
       (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
       (isPullback_special hM hN hpb hP) _ (by cast_proofs hΨA') _ (by cast_proofs hΨB')
-  · cast_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
       (K := traitGenericField k') (X := Over.mk gM)
       (Y := Over.mk gN)
       (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
