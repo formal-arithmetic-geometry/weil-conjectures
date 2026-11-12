@@ -83,7 +83,7 @@ theorem homComplex_mappingCone_iso
     Nonempty (CochainComplex.mappingCone
         (((homComplexFunctor (R := R)).obj (op E)).map f) ≅
       homComplex (R := R) E (CochainComplex.mappingCone f)) := by
-  rw [CochainComplex.mappingCone, CochainComplex.mappingCone, homComplex]
+  rw [CochainComplex.mappingCone, CochainComplex.mappingCone]
   classical
   let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
   let HG := ((homComplexFunctor (R := R)).obj (op E)).obj G
