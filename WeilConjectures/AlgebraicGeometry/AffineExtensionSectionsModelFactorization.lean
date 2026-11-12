@@ -172,7 +172,6 @@ theorem exists_affineExtensionSections_model_factorization
       (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
   let K := T.obj M
   let S := affineGlobalSections (𝟙 (Spec R))
-  let E := ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)
   let U := ModuleCat.restrictScalars.{u} (affineBaseRingMap g)
   let P : SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace) :=

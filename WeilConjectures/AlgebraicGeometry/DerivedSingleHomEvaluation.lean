@@ -103,7 +103,7 @@ private theorem sheaf_hom_evaluation
         c.hom ≫ (derivedInternalHom J R).map
           ((DerivedCategory.Q.map k).op, 𝟙 (DerivedCategory.Q.obj I)) ≫
           j.hom.app (DerivedCategory.Q.obj I) =
-            DerivedCategory.Q.map ((homComplexFunctor (R := R)).map k.op |>.app I ≫
+            DerivedCategory.Q.map (((homComplexFunctor (R := R)).map k.op).app I ≫
               e.hom.app I) := by
   let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
   have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
@@ -136,7 +136,6 @@ private theorem sheaf_hom_evaluation
       quasiIso_homComplex_map (R := R)
         (show I ⟶ T.obj I from η.app I) (𝟙 B)
   exact hj B k I inferInstance
-
 
 set_option backward.isDefEq.respectTransparency true in
 -- The scheme/module comparison has several nested functor types.
