@@ -78,7 +78,6 @@ private theorem abEqToHom_cancel {A B : AddCommGrpCat.{u}} (h : A = B) (x : A) :
   subst B
   rfl
 
-set_option maxHeartbeats 800000 in
 -- The two strict tower comparisons elaborate large coefficient-functor types.
 /-- The prescribed quotient-generator normalization determines both primitive
 natural realization isomorphisms uniquely.
