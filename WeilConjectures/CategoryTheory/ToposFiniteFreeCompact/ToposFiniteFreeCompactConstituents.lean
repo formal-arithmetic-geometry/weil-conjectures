@@ -1067,7 +1067,6 @@ private theorem restriction_compositor_of_underlying_isos
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← F.map_comp_assoc, eA.inv_hom_id, F.map_id, Category.id_comp]
 
-set_option profiler true in
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) (M : Mod Z.toSite B) :
