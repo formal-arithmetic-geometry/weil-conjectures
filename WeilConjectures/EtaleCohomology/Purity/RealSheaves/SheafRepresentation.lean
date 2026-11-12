@@ -312,8 +312,7 @@ private theorem repLinearEquivOfIso_apply {k G : Type*} [CommRing k] [Monoid G]
 
 variable {W l}
 
-set_option maxHeartbeats 400000 in
--- the final transport through the duals unfolds large `let`-bound linear equivalences
+set_option profiler true in
 /-- A lisse representation `ρ` of `W(C₀)` is the Weil fundamental representation of a lisse Weil
 sheaf `ℱ` on `C₀`: the local Frobenius `F_x` on the stalk `ℱ_x̄` has the characteristic
 polynomial of `ρ (Frob_x)` at every closed point `x`, and the geometric coinvariants
