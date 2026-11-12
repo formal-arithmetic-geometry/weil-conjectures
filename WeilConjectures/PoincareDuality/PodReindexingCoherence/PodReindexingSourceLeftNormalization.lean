@@ -45,6 +45,54 @@ private theorem map_pair_id {D : Type*} [Category D] (H : Dᵒᵖ × D ⥤ D)
     (A B : D) : H.map (Prod.mkHom (𝟙 A).op (𝟙 B)) = 𝟙 _ := by
   exact H.map_id (op A, B)
 
+private theorem source_shift_normalization_inv {D : Type*} [Category D] (G : D ⥤ D)
+    {A B C T U : D} (e : A ≅ B) (S : G.obj T ≅ U) (q : A ⟶ G.obj C)
+    (x : C ⟶ T) (y : T ⟶ C) (k : B ⟶ U) (hxy : x ≫ y = 𝟙 C)
+    (h : q ≫ G.map x ≫ S.hom = e.hom ≫ k) :
+    k ≫ S.inv ≫ G.map y = e.inv ≫ q := by
+  have h' := congrArg (fun z ↦ e.inv ≫ z ≫ S.inv ≫ G.map y) h
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id_assoc,
+    ← G.map_comp, hxy, G.map_id, Category.comp_id] using h'.symm
+
+private theorem source_model_tail {D : Type*} [Category D] (G : D ⥤ D)
+    (H : Dᵒᵖ × D ⥤ D) {A B L M R J K O₀ O₁ O₂ : D}
+    (eI : J ≅ K) (d : B ⟶ A) (t : R ⟶ B) (p : L ⟶ M)
+    (u : O₀ ⟶ H.obj (op A, K)) (v : O₁ ⟶ H.obj (op B, K))
+    (k : H.obj (op L, K) ⟶ O₂) (q : O₀ ⟶ O₁)
+    (sK : H.obj (op R, K) ⟶ G.obj (H.obj (op M, K)))
+    (sJ : H.obj (op R, J) ⟶ G.obj (H.obj (op M, J))) (z : O₁ ⟶ G.obj O₂)
+    (hm : u ≫ H.map (Prod.mkHom d.op (𝟙 K)) = q ≫ v)
+    (ht : H.map (Prod.mkHom (𝟙 R).op eI.inv) ≫ sJ =
+      sK ≫ G.map (H.map (Prod.mkHom (𝟙 M).op eI.inv)))
+    (hn : v ≫ H.map (Prod.mkHom t.op (𝟙 K)) ≫ sK ≫
+      G.map (H.map (Prod.mkHom p.op (𝟙 K)) ≫ k) = z) :
+    u ≫ H.map (Prod.mkHom (t ≫ d).op eI.inv) ≫ sJ ≫
+      G.map (H.map (Prod.mkHom p.op eI.hom) ≫ k) = q ≫ z := by
+  have hsplit : H.map (Prod.mkHom (t ≫ d).op eI.inv) =
+      H.map (Prod.mkHom d.op (𝟙 K)) ≫ H.map (Prod.mkHom t.op (𝟙 K)) ≫
+        H.map (Prod.mkHom (𝟙 R).op eI.inv) := by
+    simp only [map_pair_comp, Category.id_comp]
+  have hout : H.map (Prod.mkHom (𝟙 M).op eI.inv) ≫
+      H.map (Prod.mkHom p.op eI.hom) ≫ k = H.map (Prod.mkHom p.op (𝟙 K)) ≫ k := by
+    rw [map_pair_comp_assoc, Category.comp_id, eI.inv_hom_id]
+  rw [hsplit]
+  simp only [Category.assoc]
+  rw [reassoc_of% hm, reassoc_of% ht, ← G.map_comp, hout, hn]
+
+private theorem source_model_naturality {D : Type*} [Category D] (H : Dᵒᵖ × D ⥤ D)
+    {A B C U V W P P' P'' I J T R : D} (e : A ≅ B) (i : A ⟶ C)
+    (c : C ⟶ H.obj (op P', I)) (c₀ : A ⟶ H.obj (op P, I))
+    (u : B ⟶ U) (v : U ⟶ V) (k : V ⟶ H.obj (op W, J))
+    (f : P ⟶ W) (j : J ⟶ I) (r : P' ⟶ P) (t : P'' ⟶ P')
+    (s : H.obj (op P'', I) ⟶ T) (o : T ⟶ R) (z : V ⟶ R)
+    (hnat : i ≫ c = c₀ ≫ H.map (Prod.mkHom r.op (𝟙 I)))
+    (hmodel : c₀ = e.hom ≫ u ≫ v ≫ k ≫ H.map (Prod.mkHom f.op j))
+    (htail : k ≫ H.map (Prod.mkHom (t ≫ r ≫ f).op j) ≫ s ≫ o = z) :
+    e.inv ≫ i ≫ c ≫ H.map (Prod.mkHom t.op (𝟙 I)) ≫ s ≫ o = u ≫ v ≫ z := by
+  rw [reassoc_of% hnat, hmodel]
+  simp only [Category.assoc, e.inv_hom_id_assoc, map_pair_comp_assoc, Category.comp_id]
+  rw [htail]
+
 private theorem model_inv (W : Scheme.{u})
     [EssentiallySmall.{u + 1} W.ProEt] (s : Option ℕ)
     (P I : K l E W s) [I.IsKInjective] :
@@ -60,7 +108,6 @@ private theorem model_inv (W : Scheme.{u})
 attribute [local irreducible] podReindexingHomModel podReindexingCoefficient
   Padic Padic.coefficientExtensionIntegers
 
-set_option maxHeartbeats 1500000 in
 -- The explicit model transports require many dependent functor-map equalities.
 /-- The left route of the source-shift square on localized Hom models.
 
@@ -159,9 +206,6 @@ theorem source_left_normalization
       Q.map eX.hom ≫ (podReindexingHomModel l E X s (KP⟦a⟧) KI).inv ≫
         H.map (Prod.mkHom ((f.hom.app P)⟦a⟧' ≫
           (Q.commShiftIso a).inv.app KP).op (𝟙 (Q.obj KI))) at hn
-  have hn' := congrArg (fun z ↦ Q.map eX.inv ≫ z ≫ S.inv.app (Q.obj KI) ≫
-    (H.map (Prod.mkHom (f.inv.app P).op (𝟙 (Q.obj KI))) ≫
-      (podReindexingHomModel l E X s KP KI).hom)⟦-a⟧') hn
   have hc : (podReindexingHomModel l E X s KP KI).inv ≫
       H.map (Prod.mkHom (f.hom.app P).op (𝟙 (Q.obj KI))) ≫
       H.map (Prod.mkHom (f.inv.app P).op (𝟙 (Q.obj KI))) ≫
@@ -169,10 +213,16 @@ theorem source_left_normalization
     simp only [map_pair_comp_assoc, Iso.inv_hom_id_app, Category.comp_id, map_pair_id]
     erw [Category.id_comp]
     exact (podReindexingHomModel l E X s KP KI).inv_hom_id
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp] at hn'
-  rw [hc, CategoryTheory.Functor.map_id] at hn'
-  simp only [← Q.map_comp_assoc, eX.inv_hom_id, Q.map_id, Category.id_comp] at hn'
-  erw [Category.comp_id] at hn'
+  have hn' := (source_shift_normalization_inv (shiftFunctor _ (-a)) (Q.mapIso eX)
+    (S.app (Q.obj KI)) ((Q.commShiftIso (-a)).hom.app (hom l E X s KP KI))
+    ((podReindexingHomModel l E X s KP KI).inv ≫
+      H.map (Prod.mkHom (f.hom.app P).op (𝟙 (Q.obj KI))))
+    (H.map (Prod.mkHom (f.inv.app P).op (𝟙 (Q.obj KI))) ≫
+      (podReindexingHomModel l E X s KP KI).hom)
+    ((podReindexingHomModel l E X s (KP⟦a⟧) KI).inv ≫
+      H.map (Prod.mkHom ((f.hom.app P)⟦a⟧' ≫
+        (Q.commShiftIso a).inv.app KP).op (𝟙 (Q.obj KI))))
+    (by simpa only [Category.assoc] using hc) hn).symm
   have hs := NatTrans.shift_app_comm f.hom a P
   simp only [Functor.commShiftIso_comp_hom_app, Functor.comp_obj, Category.assoc] at hs
   change F.map (((podReindexingQ l E Y s).commShiftIso a).hom.app P) ≫
@@ -226,61 +276,24 @@ theorem source_left_normalization
       ((complexShift l E g s a).inv.app P).op).app KI) ≫
       Q.map eX.inv ≫ (Q.commShiftIso (-a)).hom.app (hom l E X s KP KI) := by
     rw [hs']
-    have hsplit : H.map (Prod.mkHom
-        ((f.hom.app P)⟦a⟧' ≫ (Q.commShiftIso a).inv.app KP ≫
-          Q.map ((complexShift l E g s a).inv.app P)).op (f.inv.app I)) =
-      H.map (Prod.mkHom (Q.map ((complexShift l E g s a).inv.app P)).op
-        (𝟙 (Q.obj KI))) ≫
-      H.map (Prod.mkHom ((f.hom.app P)⟦a⟧' ≫ (Q.commShiftIso a).inv.app KP).op
-        (𝟙 (Q.obj KI))) ≫
-      H.map (Prod.mkHom (𝟙 (M⟦a⟧)).op (f.inv.app I)) := by
-      simp only [map_pair_comp, Category.id_comp, Category.assoc]
-    rw [hsplit]
-    simp only [← Category.assoc]
-    rw [hm]
-    simp only [Category.assoc]
-    rw [reassoc_of% ht]
-    have hout : H.map (Prod.mkHom (𝟙 M).op (f.inv.app I)) ≫
-        H.map (Prod.mkHom (f.inv.app P).op (f.hom.app I)) ≫
-        (podReindexingHomModel l E X s KP KI).hom =
-      H.map (Prod.mkHom (f.inv.app P).op (𝟙 (Q.obj KI))) ≫
-        (podReindexingHomModel l E X s KP KI).hom := by
-      simp only [map_pair_comp_assoc, Category.comp_id, Iso.inv_hom_id_app]
-      rfl
-    dsimp only [sourceModelOutput, Functor.mapIso_hom, Iso.trans_hom,
-      Iso.prod_hom, Iso.op_hom, Iso.symm_hom, Iso.app_hom]
-    rw [← (shiftFunctor _ (-a)).map_comp]
-    change Q.map (((podReindexingHom l E X s).map
-        ((complexShift l E g s a).inv.app P).op).app KI) ≫
-      (podReindexingHomModel l E X s (KP⟦a⟧) KI).inv ≫
-      H.map (Prod.mkHom ((f.hom.app P)⟦a⟧' ≫ (Q.commShiftIso a).inv.app KP).op
-        (𝟙 (Q.obj KI))) ≫ S.inv.app (Q.obj KI) ≫
-      (H.map (Prod.mkHom (𝟙 M).op (f.inv.app I)) ≫
-        H.map (Prod.mkHom (f.inv.app P).op (f.hom.app I)) ≫
-        (podReindexingHomModel l E X s KP KI).hom)⟦-a⟧' = _
-    rw [hout]
-    exact congrArg (fun z ↦
-      Q.map (((podReindexingHom l E X s).map
-        ((complexShift l E g s a).inv.app P).op).app KI) ≫ z) hn'.symm
+    simpa only [Category.assoc, sourceModelOutput, Functor.mapIso_hom, Iso.trans_hom,
+      Iso.prod_hom, Iso.op_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv] using
+      source_model_tail (D := podReindexingDerived l E X s) (shiftFunctor _ (-a)) H
+      (K := Q.obj KI) (L := Q.obj KP) (M := M) (R := M⟦a⟧) (f.app I)
+      (Q.map ((complexShift l E g s a).inv.app P))
+      ((f.hom.app P)⟦a⟧' ≫ (Q.commShiftIso a).inv.app KP) (f.inv.app P)
+      (podReindexingHomModel l E X s (KY.obj (P⟦a⟧)) KI).inv
+      (podReindexingHomModel l E X s (KP⟦a⟧) KI).inv
+      (podReindexingHomModel l E X s KP KI).hom
+      (Q.map (((podReindexingHom l E X s).map
+        ((complexShift l E g s a).inv.app P).op).app KI))
+      (S.inv.app (Q.obj KI)) (S.inv.app (F.obj ((podReindexingQ l E Y s).obj I)))
+      (Q.map eX.inv ≫ (Q.commShiftIso (-a)).hom.app (hom l E X s KP KI)) hm ht
+      (by simpa only [Category.assoc, Functor.mapIso_inv, Iso.app_inv] using hn'.symm)
   have hnat := c.derived.hom.naturality
     (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
       (𝟙 ((podReindexingQ l E Y s).obj I)))
-  obtain ⟨_, hmodel⟩ := c.derived_model (P⟦a⟧) I inferInstance
-  dsimp only [sourceModelInput, Functor.mapIso_hom, Iso.trans_hom,
-    Iso.symm_hom, Iso.prod_hom, Iso.op_hom, Iso.app_inv, Iso.refl_hom]
-  simp only [Category.assoc]
-  change F.map ((podReindexingHomModel l E Y s (P⟦a⟧) I).inv ≫
-      (podReindexingDerivedHom l E Y s).map
-        (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
-          (𝟙 ((podReindexingQ l E Y s).obj I)))) ≫
-      c.derived.hom.app (op (((podReindexingQ l E Y s).obj P)⟦a⟧),
-        (podReindexingQ l E Y s).obj I) ≫
-      H.map (Prod.mkHom ((F.commShiftIso a).inv.app
-        ((podReindexingQ l E Y s).obj P)).op
-        (𝟙 (F.obj ((podReindexingQ l E Y s).obj I)))) ≫
-      S.inv.app (F.obj ((podReindexingQ l E Y s).obj I)) ≫
-      (sourceModelOutput l E g s P I a).hom = _
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  have hmodel := (c.derived_model (P⟦a⟧) I inferInstance).choose_spec
   change F.map ((podReindexingDerivedHom l E Y s).map
       (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
         (𝟙 ((podReindexingQ l E Y s).obj I)))) ≫
@@ -291,25 +304,31 @@ theorem source_left_normalization
       H.map (Prod.mkHom (F.map
         (((podReindexingQ l E Y s).commShiftIso a).inv.app P)).op
         (F.map (𝟙 ((podReindexingQ l E Y s).obj I)))) at hnat
-  rw [reassoc_of% hnat, hmodel]
-  simp only [Category.assoc, F.map_id, Functor.mapIso_hom, Iso.prod_hom, Iso.op_hom,
-    Iso.symm_hom, Iso.app_hom, Iso.app_inv]
-  change F.map ((podReindexingHomModel l E Y s (P⟦a⟧) I).inv) ≫
-    F.map ((podReindexingHomModel l E Y s (P⟦a⟧) I).hom) ≫
-    f.hom.app (hom l E Y s (P⟦a⟧) I) ≫ Q.map (c.chain (P⟦a⟧) I).hom ≫
-    (podReindexingHomModel l E X s (KY.obj (P⟦a⟧)) KI).inv ≫
-    H.map (Prod.mkHom (f.hom.app (P⟦a⟧)).op (f.inv.app I)) ≫
-    H.map (Prod.mkHom (F.map
-      (((podReindexingQ l E Y s).commShiftIso a).inv.app P)).op
-      (𝟙 (F.obj ((podReindexingQ l E Y s).obj I)))) ≫
-    H.map (Prod.mkHom ((F.commShiftIso a).inv.app
-      ((podReindexingQ l E Y s).obj P)).op
-      (𝟙 (F.obj ((podReindexingQ l E Y s).obj I)))) ≫
-    S.inv.app (F.obj ((podReindexingQ l E Y s).obj I)) ≫
-    (sourceModelOutput l E g s P I a).hom = _
-  rw [← F.map_comp_assoc, Iso.inv_hom_id, F.map_id, Category.id_comp]
-  simp only [map_pair_comp_assoc, Category.comp_id, Category.assoc]
-  erw [Category.comp_id]
-  rw [htail]
+  simp only [F.map_id] at hnat
+  have hcalc := source_model_naturality H
+    (F.mapIso (podReindexingHomModel l E Y s (P⟦a⟧) I))
+    (F.map ((podReindexingDerivedHom l E Y s).map
+      (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
+        (𝟙 ((podReindexingQ l E Y s).obj I)))))
+    (c.derived.hom.app (op (((podReindexingQ l E Y s).obj P)⟦a⟧),
+      (podReindexingQ l E Y s).obj I))
+    (c.derived.hom.app (op ((podReindexingQ l E Y s).obj (P⟦a⟧)),
+      (podReindexingQ l E Y s).obj I))
+    (f.hom.app (hom l E Y s (P⟦a⟧) I)) (Q.map (c.chain (P⟦a⟧) I).hom)
+    (podReindexingHomModel l E X s (KY.obj (P⟦a⟧)) KI).inv
+    (f.hom.app (P⟦a⟧)) (f.inv.app I)
+    (F.map (((podReindexingQ l E Y s).commShiftIso a).inv.app P))
+    ((F.commShiftIso a).inv.app ((podReindexingQ l E Y s).obj P))
+    (S.inv.app (F.obj ((podReindexingQ l E Y s).obj I)))
+    (sourceModelOutput l E g s P I a).hom
+    (Q.map (((podReindexingHom l E X s).map
+      ((complexShift l E g s a).inv.app P).op).app KI) ≫
+      Q.map eX.inv ≫ (Q.commShiftIso (-a)).hom.app (hom l E X s KP KI))
+    hnat (by simpa only [Functor.mapIso_hom, Iso.prod_hom, Iso.op_hom,
+      Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc] using hmodel) htail
+  simpa only [sourceModelInput, Functor.mapIso_hom, Functor.mapIso_inv,
+    Iso.trans_hom, Iso.symm_hom,
+    Iso.prod_hom, Iso.op_hom, Iso.app_inv, Iso.refl_hom,
+    CategoryTheory.Functor.map_comp, Category.assoc] using hcalc
 
 end WeilConjectures.PodReindexingCoherence
