@@ -57,8 +57,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [IsProper f.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
 
-set_option profiler true in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- **The kernel pushforward and the Künneth–Verdier isomorphisms** (blueprint
 `lem-trf-trace-source-exchange`, identity (a)): `κ_Y ∘ ρ_f = Φ ∘ Rq_* κ_X`. -/
 theorem kernelPushforward_comp_kunnethVerdierMap :
@@ -127,6 +125,6 @@ theorem kernelPushforward_comp_kunnethVerdierMap :
   dsimp only [externalProduct, verdierDual, dualizingComplex, dualizingComplex', toPoint,
     tensorLeft, Functor.comp_obj, Functor.id_obj, curriedTensor_obj_obj,
     curriedTensor_obj_map] at htransport ⊢
-  convert! htransport using 1 <;> (congr 1 <;> rfl)
+  convert! htransport using 1
 
 end AlgebraicGeometry.ProEtale.CondensedRing
