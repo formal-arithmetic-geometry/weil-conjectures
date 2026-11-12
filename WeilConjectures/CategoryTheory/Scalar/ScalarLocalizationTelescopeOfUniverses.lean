@@ -322,8 +322,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-set_option trace.profiler true in
--- Comparing tensor objects and both derived scalar actions requires extensive instance search.
 /-- Restriction of localized coefficients is the normalized scalar telescope.
 The statement has independent object, morphism and coefficient universes and makes no
 assertion about Hom groups or Hom continuity.
@@ -387,6 +385,8 @@ theorem scalarLocalization_telescopeOfUniverses
   let φ := ringedLocalizationRingUnitOfUniverses R (a t)
   let U := SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+  -- Share the witnesses and their specifications without repeatedly reducing the
+  -- large dependent goal when eliminating the existential statements.
   have hU :=
     SheafOfModules.scalarLocalizationCoefficientAdjunctionOfUniverses φ
   have : PreservesFiniteLimits U := hU.choose
