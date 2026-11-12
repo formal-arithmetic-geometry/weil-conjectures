@@ -87,6 +87,7 @@ lemma Hom.map_boundedConstructiblePushforwardExchange_app_comp_counit_app
   exact map_mateEquiv_app_comp_counit_aux hM hN _ A
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the concrete ℚ̲̄_ℓ-coefficient functors are unfolded when matching the generic statements
 /-- The oplax monoidality of `NearbyCyclesModel.liftExchange` of an arbitrary transformation
 `α : Ψ_N ⋙ Lf'^* ⟶ Lf^* ⋙ Ψ_M`, deduced from that of `α`; the transformation is kept abstract so
