@@ -295,13 +295,13 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
     (leftDerivedUpperStarComp Λ p₂ aY) (fun U V ↦ leftDerivedUpperStarTensor_comp Λ p₂ aY U V)
     (fun U V ↦ (leftDerivedUpperStarTensor_braiding Λ aY U V).symm)
     ((leftDerivedUpperStarId Λ S).app (R((aX)_*⟦Λ⟧).obj A))
-    ((leftDerivedUpperStarId Λ S).app (R((aY)_*⟦Λ⟧).obj B)) _ _ _ ?_ ?_ ?_ h₂ h₃
+    ((leftDerivedUpperStarId Λ S).app (R((aY)_*⟦Λ⟧).obj B)) _ _ _ ?_ ?_
+    (kunneth_isIso_of_eq_aux (homEquiv_pullbackSquareComparison_comp_counit Λ w A) h₁) h₂ h₃
   · exact (reassoc_of% (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id
       Λ sq₁ w (R((aX)_*⟦Λ⟧).obj A))) _
   · exact map_comp_of_comp_eq_map_aux _ _ _ _ _
       (leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self
         Λ sq₂ (R((aY)_*⟦Λ⟧).obj B))
-  · exact kunneth_isIso_of_eq_aux (homEquiv_pullbackSquareComparison_comp_counit Λ w A) h₁
 
 end Criterion
 
