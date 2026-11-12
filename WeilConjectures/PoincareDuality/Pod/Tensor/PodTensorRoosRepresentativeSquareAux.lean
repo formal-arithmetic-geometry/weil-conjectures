@@ -323,6 +323,16 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have hs := podReindexing_tensor_roos_normalization l E g D
     (podTensorReindexAt l E g D hD P Q τ) hD
     (podTensorReindexAt_generators l E g D hD P Q τ hgen) P Q
+  let t (τ' : (podReindexTower l E g).obj
+      ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj)) ≅
+      (integralOperationsTensorTowerFunctor l E X).obj
+        (((podGoodReindex l E g D).obj P).obj, ((podGoodReindex l E g D).obj Q).obj)) :=
+    (podOrdinaryReindex l E g).map
+        ((integralCompletedTensorComparison l E Y).hom.app (P, Q)) ≫
+      (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app _ ≫
+      DerivedCategory.Q.map
+        ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
+          integralOperationsRoosFunctor.map τ'.hom)
   exact (podTensorRepresentative_cancel (integralCompletedTensor l E X)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app P.obj)
     ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.app Q.obj)
@@ -331,15 +341,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     (podReindexingLimitTensorComparisonHom l E g D hD
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
-    (fun τ' ↦ by
-      dsimp only [integralOperationsTensorOnGood, integralOperationsTensorComplexFunctor,
-        Functor.comp_obj, Functor.prod_obj]
-      exact (podOrdinaryReindex l E g).map
-        ((integralCompletedTensorComparison l E Y).hom.app (P, Q)) ≫
-        (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app _ ≫
-        DerivedCategory.Q.map
-          ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom ≫
-            integralOperationsRoosFunctor.map τ'.hom)) hs _).trans
+    t hs _).trans
       (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
 
 end WeilConjectures
