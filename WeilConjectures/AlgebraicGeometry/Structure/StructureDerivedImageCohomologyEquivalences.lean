@@ -372,7 +372,7 @@ theorem structure_derived_image_module_naturality
       (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) =
       Γ.map edge (H.map α (affineLerayEquiv q ((affineLerayEquiv q).symm z))) := by
     with_reducible refine hg.trans ?_
-    with_unfolding_all simp only [Scheme.Hom.id_base, eqToHom_refl,
+    with_reducible simp only [Scheme.Hom.id_base, eqToHom_refl,
       edge, H, H₁, Γ, globalLerayUnitMap, globalLerayImage,
       RingedSpace.globalSectionsFunctor, Modules.Hom.comp_app,
       Functor.comp_map, Functor.map_comp,
