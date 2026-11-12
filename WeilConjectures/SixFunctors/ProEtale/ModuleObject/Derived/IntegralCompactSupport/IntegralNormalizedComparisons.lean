@@ -57,6 +57,7 @@ attribute [local irreducible] DerivedCategory.monoidalClosed
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+/-- Restrict a comparison along an inclusion of full subcategories. -/
 private def restrict_comparison {C D : Type*} [Category C] [Category D]
     {P Q : ObjectProperty C} (h : P ≤ Q) {F G : C ⥤ D}
     (e : Q.ι ⋙ F ≅ Q.ι ⋙ G) : P.ι ⋙ F ≅ P.ι ⋙ G :=
@@ -103,7 +104,6 @@ private theorem dense_refinement {X Y : Scheme.{u}} (f : X ⟶ Y)
     h.2.2.2.2.2.2.2.2.2.2.2.1⟩
 
 variable (k : Type u) [Field k]
-set_option profiler true in
 -- The explicit comparison family has several large derived-category instance arguments.
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem comparisonsForCoefficient
