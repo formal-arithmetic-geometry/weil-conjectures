@@ -241,16 +241,13 @@ private theorem scalar_unit_pull_formula
   unfold scalarUnitPullIso
   rfl
 
-set_option profiler true in
--- Normalize the native module-object tensor instances and derived-functor comparisons.
+-- Normalize the unit comparison before applying the derived adjunction.
 attribute [-instance] internalMonoidal internalTensorCommShift in
-private theorem scalar_unit_pull_adjunct
+private theorem scalar_unit_pull_native_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
-    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)).homEquiv
-        _ _ (scalarUnitPullIso Λ Y).hom =
-      coefficientUnitPush Λ Y
-        (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ (ProjectiveLine Y ↘ Y))) := by
+    HEq (scalarUnitPullIso Λ Y).hom
+      (CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)).hom := by
   generalize hU : secondTraceUnitIso Λ Y = U
   have hu_global := native_unit_comparison Λ Y
   rw [hU] at hu_global
@@ -261,6 +258,36 @@ private theorem scalar_unit_pull_adjunct
   let : MonoidalClosed (Modules Λ (ProjectiveLine Y)) :=
     scalar_module_closed Λ (ProjectiveLine Y)
   rw [scalar_unit_pull_formula]
+  have hY := (singleUnit_existsUnique Λ Y).exists.choose_spec
+  have hP := (singleUnit_existsUnique Λ (ProjectiveLine Y)).exists.choose_spec
+  unfold singleUnitIso internalMonoidal internalTensorBundle nativeTensorBundle at hY hP ⊢
+  erw [eq_of_heq hY, eq_of_heq hP]
+  erw [native_single_unit_hom, native_single_unit_inv]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  unfold internalMonoidal internalTensorBundle nativeTensorBundle
+    moduleObjectDerivedPullback at U hu_global
+  have hu' : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
+    eq_of_heq hu_global
+  erw [hU, hu']
+
+set_option profiler true in
+-- Normalize the native module-object tensor instances and derived-functor comparisons.
+attribute [-instance] internalMonoidal internalTensorCommShift in
+private theorem scalar_unit_pull_adjunct
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)).homEquiv
+        _ _ (scalarUnitPullIso Λ Y).hom =
+      coefficientUnitPush Λ Y
+        (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ (ProjectiveLine Y ↘ Y))) := by
+  let : BraidedCategory (Modules Λ Y) := scalar_module_braided Λ Y
+  let : BraidedCategory (Modules Λ (ProjectiveLine Y)) :=
+    scalar_module_braided Λ (ProjectiveLine Y)
+  let : MonoidalClosed (Modules Λ Y) := scalar_module_closed Λ Y
+  let : MonoidalClosed (Modules Λ (ProjectiveLine Y)) :=
+    scalar_module_closed Λ (ProjectiveLine Y)
+  unfold internalMonoidal internalTensorBundle nativeTensorBundle
+  erw [eq_of_heq (scalar_unit_pull_native_hom Λ Y)]
   let ad := CondensedRing.derivedUpperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)
   let ad' := (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (CondensedRing.upperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y))).ofNatIsoLeft
@@ -276,17 +303,6 @@ private theorem scalar_unit_pull_adjunct
   change ad.homEquiv _ _ _ = _
   rw [ha, Adjunction.homEquiv_ofNatIsoLeft_apply]
   simp only [Iso.symm_hom]
-  have hY := (singleUnit_existsUnique Λ Y).exists.choose_spec
-  have hP := (singleUnit_existsUnique Λ (ProjectiveLine Y)).exists.choose_spec
-  unfold singleUnitIso internalMonoidal internalTensorBundle nativeTensorBundle at hY hP ⊢
-  erw [eq_of_heq hY, eq_of_heq hP]
-  erw [native_single_unit_hom, native_single_unit_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  unfold internalMonoidal internalTensorBundle nativeTensorBundle
-    moduleObjectDerivedPullback at U hu_global
-  have hu' : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
-    eq_of_heq hu_global
-  erw [hU, hu']
   erw [CondensedRing.leftDerivedUpperStarUnitIso_hom_eq,
     ← Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh]
   erw [Category.assoc, Iso.inv_hom_id_app_assoc]

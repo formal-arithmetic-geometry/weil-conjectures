@@ -242,32 +242,17 @@ theorem exists_selfTor_ambient_resolution_charts
               (t V).hom.val.app (op (Over.mk (𝟙 (V.1))))
                 (s V _ (q x)) := by
   classical
-  dsimp only
-  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
-  let S := DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
-  let Q := (DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)
+  intro B S Q T s₀
   let M := fun U : Y.affineOpens ↦
     ((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)
       ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).leftDerived n).obj
       (ModuleCat.of (Γ(Y, U.1) : Type u) ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))
-  let T := fun U : Y.affineOpens ↦
-    tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
-      Scheme.Modules.pushforward U.1.ι
-  let s := fun (U : Y.affineOpens) (x : M U) ↦
-    let L := (tilde.functor Γ(Y, U.1)).obj (M U)
-    (Scheme.Modules.restrictAppIso U.2.isoSpec.hom L (U.1.ι ⁻¹ᵁ U.1)).inv
-      (L.val.map (homOfLE le_top).op ((tilde.adjunction.unit.app (M U)) x))
+  let s := fun (U : Y.affineOpens) (x : M U) ↦ s₀ U (M U) x
   have : Q.IsQuasicoherent := selfTor_ambient_isQuasicoherent i n
   obtain ⟨c, hc⟩ := exists_selfTor_ambient_section_coordinates.{u, w} i n
-  have hcharts (U : Y.affineOpens) :
-      ∃ t : ((T U).obj (M U)).over U.1 ≅ Q.over U.1,
-        ∀ x, t.hom.val.app (op (Over.mk (𝟙 U.1))) (s U x) = c U x :=
-    affine_iso_of_chart_coordinates U (M U) Q (c U)
-  choose t ht using hcharts
+  choose t ht using fun U ↦ affine_iso_of_chart_coordinates U (M U) Q (c U)
   refine ⟨t, ?_⟩
-  intro V U h hbasic ψ a k hψ ha hk x
+  intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk e q x
   let f : Over.mk (homOfLE h) ⟶ Over.mk (𝟙 U.1) := Over.homMk (homOfLE h)
   have hn := congr($((t U).hom.val.naturality f.op) (s U x))
   change (t U).hom.val.app (op (Over.mk (homOfLE h)))

@@ -104,9 +104,8 @@ private theorem affineAlgebra_lowerTruncation_isIso
   have : PreservesFiniteColimits T := hcolim
   have : T.ReflectsIsomorphisms := hreflect
   have underived : F ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
-  let comparison : G ⋙ T.rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
-    Functor.isoWhiskerLeft G T.rightDerivedFunctorIsoMapDerivedCategory ≪≫
-      (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).symm ≪≫
+  let comparison : G ⋙ T.mapDerivedCategory ≅ schemeDerivedDirectImage f :=
+    (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).symm ≪≫
       Functor.rightDerivedFunctorNatIso underived
   have : IsGrothendieckAbelian.{v} X.Modules := Scheme.Modules.isGrothendieckAbelian X
   have hacyc : ∀ (M : C), M.IsQuasicoherent → ∀ (p : ℤ), 0 < p →
@@ -156,7 +155,7 @@ private theorem affineAlgebra_lowerTruncation_isIso
     ((schemeDerivedDirectImage f).map u)) at hscheme
   let c : G ⋙ H ⋙ T ≅ schemeDerivedDirectImage f ⋙
       DerivedCategory.homologyFunctor B n :=
-    Functor.isoWhiskerLeft G (T.rightDerivedFunctorHomologyFunctorIso n) ≪≫
+    Functor.isoWhiskerLeft G (T.mapDerivedCategoryHomologyFunctorIso n) ≪≫
       Functor.isoWhiskerRight comparison (DerivedCategory.homologyFunctor B n)
   have hT := (NatIso.isIso_map_iff c u).2 hscheme
   change IsIso (T.map (H.map (G.map u))) at hT
