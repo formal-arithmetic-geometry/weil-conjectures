@@ -216,8 +216,8 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
       (fun i ↦ unitP ≫ R.map (smulC i)) πC e hAc' hBc' (P := P) (X := X)
     convert h using 1
     funext h
-    simp only [Θ, hιQ, e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-      Category.assoc]
+    simp only [Θ, hιQ, e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    rfl
   have hbij : Function.Bijective (Θ Z) := by
     let P := DerivedCategory.Q.objPreimage Z
     let e : DerivedCategory.Q.obj P ≅ Z := DerivedCategory.Q.objObjPreimageIso Z
