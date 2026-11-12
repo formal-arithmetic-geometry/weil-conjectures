@@ -205,6 +205,11 @@ private structure OrdinaryModel
 
 attribute [local instance] OrdinaryModel.additive OrdinaryModel.inverseAdditive
 
+private theorem ordinaryPushSection_eq (A : Type u) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) (V : Y.ProEtᵒᵖ) :
+    SpTowerShriek.pushSection A f M V = fun x ↦ x := rfl
+
 set_option profiler true in
 private theorem ordinaryPushHorizontal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : SS l E X (σgraph l E X)) {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
@@ -220,7 +225,7 @@ private theorem ordinaryPushHorizontal {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((EE l E X (σgraph l E X) m).obj M) V
           (((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f m).hom.app M).val.app
             V x)) := by
-  dsimp only [SpTowerShriek.pushSection]
+  rw [ordinaryPushSection_eq, ordinaryPushSection_eq]
   exact SpTowerShriek.canonicalPushHorizontal
     (graphRings l E) (graphTransitions l E) f M h V x
 
@@ -236,12 +241,11 @@ private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
         (VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app
           V x)) := by
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app,
-    Functor.rightUnitor_hom_app, Category.id_comp]
+    Functor.rightUnitor_hom_app]
   apply heq_of_eq
   funext x
   simp only [Iso.symm_hom, graphPushIso, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    SheafOfModules.pushforwardCongr_inv_app_val_app]
+    PresheafOfModules.comp_app, ModuleCat.comp_apply]
   exact ((VaryingRing.moduleEvalP_existsUnique
     (graphRings l E) (graphTransitions l E) f n).choose_spec.1 M V.unop _).symm
 
