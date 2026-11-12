@@ -74,6 +74,16 @@ on `P`, the canonical map `πZ^* Ri^! M ⟶ Ri'^! πP^* M` is invertible. -/
 theorem isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale [WeaklyEtale πP]
     (sq : IsPullback πZ i'.left i.left πP) (M : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((upperShriekBaseChangeOfMap ℓ sq).app M) := by
+  -- Cache the tensor facts used repeatedly when elaborating the derived pullbacks.
+  have : ∀ X₁ X₂ X₃ X₄ : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left)),
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left)),
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology P.left) Ab.{u + 1}) (condensedRingObj 𝐐 P.left)),
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
   /- The open complement `V` of `i` and its preimage `V'` in `P'`. -/
   let V : P.left.Opens :=
     ⟨(Set.range i.left.base)ᶜ, i.left.isClosedEmbedding.isClosed_range.isOpen_compl⟩
@@ -92,12 +102,10 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale [WeaklyEtale πP]
     rw [← Scheme.Hom.comp_apply, sq.w, Scheme.Hom.comp_apply]
   have sqV : IsPullback (πP ∣_ V) V'.ι V.ι πP := isPullback_morphismRestrict πP V
   /- The triangle `X ⟶ M ⟶ Rj_* j^* M ⟶`. -/
-  -- Reuse the derived pullbacks to avoid repeating their instance search.
-  let jStar := L((V.ι)^*⟦𝐐⟧)
   let adjV := derivedUpperStarLowerStarAdjunction 𝐐 V.ι
   obtain ⟨X, f, h, hT⟩ := distinguished_cocone_triangle₁ (adjV.unit.app M.obj)
-  have hjX : IsZero (jStar.obj X) := by
-    refine Triangle.isZero₁_of_isIso₂ _ (jStar.map_distinguished _ hT) ?_
+  have hjX : IsZero ((L((V.ι)^*⟦𝐐⟧)).obj X) := by
+    refine Triangle.isZero₁_of_isIso₂ _ ((L((V.ι)^*⟦𝐐⟧)).map_distinguished _ hT) ?_
     exact IsIso.of_isIso_fac_right (hh := IsIso.id _) (adjV.left_triangle_components M.obj)
   have hiX : IsIso ((derivedUpperStarLowerStarAdjunction 𝐐 i.left).unit.app X) :=
     isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero _ V.ι i.left hcompl hjX
@@ -108,7 +116,7 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale [WeaklyEtale πP]
   have : IsSeparated (Over.mk (V.ι ≫ P.hom)).hom :=
     inferInstanceAs (IsSeparated (V.ι ≫ P.hom))
   have hjM := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ V.ι M.obj M.property
-  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj (jStar.obj M.obj)) :=
+  have hRj : boundedConstructible _ ((R((V.ι)_*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
     boundedConstructible_rightDerivedLowerStar_obj ℓ
       (Over.homMk V.ι : Over.mk (V.ι ≫ P.hom) ⟶ P) ⟨_, hjM⟩
   have hX : boundedConstructible _ X :=
@@ -128,19 +136,18 @@ theorem isIso_upperShriekBaseChangeOfMap_app_of_weaklyEtale [WeaklyEtale πP]
       (derivedUpperStarLowerStarAdjunction 𝐐 i'.left).fullyFaithfulROfIsIsoCounit).ofIso
       (boundedConstructibleLowerStarCompatibility ℓ i').symm
   /- The pulled back triangle; its third term is computed by weakly étale base change. -/
-  let πStar := L((πP)^*⟦𝐐⟧)
   let Tr := Triangle.mk f (adjV.unit.app M.obj) h
-  have hT' : πStar.mapTriangle.obj Tr ∈ distTriang _ :=
-    πStar.map_distinguished _ hT
+  have hT' : (L((πP)^*⟦𝐐⟧)).mapTriangle.obj Tr ∈ distTriang _ :=
+    (L((πP)^*⟦𝐐⟧)).map_distinguished _ hT
   have : IsIso (baseChangeMap 𝐐 sqV.toCommSq) := isIso_baseChangeMap_of_weaklyEtale 𝐐 sqV
-  let e₃ : (πStar.mapTriangle.obj Tr).obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
-      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj (jStar.obj M.obj)) :=
-    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app (jStar.obj M.obj))
+  let e₃ : ((L((πP)^*⟦𝐐⟧)).mapTriangle.obj Tr).obj₃ ≅ (R((V'.ι)_*⟦𝐐⟧)).obj
+      ((L((πP ∣_ V)^*⟦𝐐⟧)).obj ((L((V.ι)^*⟦𝐐⟧)).obj M.obj)) :=
+    asIso ((baseChangeMap 𝐐 sqV.toCommSq).app ((L((V.ι)^*⟦𝐐⟧)).obj M.obj))
   have := isIso_boundedConstructibleBaseChangeOfMap ℓ sq
   exact isIso_mateEquiv_inv_app_of_triangle (lowerStarUpperShriekAdjunction ℓ i)
     (lowerStarUpperShriekAdjunction ℓ i') (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) hLi hLi'
-    πStar (ObjectProperty.liftCompιIso _ _ _) Tr hT hT' e₁ (Iso.refl _)
+    (L((πP)^*⟦𝐐⟧)) (ObjectProperty.liftCompιIso _ _ _) Tr hT hT' e₁ (Iso.refl _)
     (fun Q ↦ adjV.subsingleton_hom_of_isZero
       (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint _ V.ι i.left
         hcompl.symm.disjoint Q.obj) _)
