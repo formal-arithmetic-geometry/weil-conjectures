@@ -54,8 +54,6 @@ Proof: Restriction is exact by the localization finite-limit and finite-colimit
  products or differential. No finiteness or nonempty-open assumption is needed;
  zero and identity maps satisfy the same naturality equations. -/
 set_option profiler true in
-set_option maxHeartbeats 400000 in
--- Inference for the composite open-restriction comparisons exceeds the default heartbeats.
 /-- (blueprint: new-t4-open-over-internal-hom-cycle-homology-squares) -/
 theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)

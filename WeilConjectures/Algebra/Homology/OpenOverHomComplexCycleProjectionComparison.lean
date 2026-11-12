@@ -34,9 +34,17 @@ noncomputable local instance (priority := 2000) openOverHomComplexCycleProjectio
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 attribute [local irreducible] homComplexFunctor
 
+/-- Compose a mapped projection square with a square on the source inclusions. -/
+private theorem openOver_projection_square_comp
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {Z P H : C} {Z' P' H' : D}
+    (i : Z ⟶ P) (p : P ⟶ H) (h : F.obj P ⟶ P') (e : F.obj H ⟶ H')
+    (c : F.obj Z ⟶ Z') (i' : Z' ⟶ P') (p' : P' ⟶ H')
+    (hp : h ≫ p' = F.map p ≫ e) (hc : F.map i ≫ h = c ≫ i') :
+    F.map (i ≫ p) ≫ e = c ≫ i' ≫ p' := by
+  rw [Functor.map_comp, Category.assoc, ← hp, ← Category.assoc, hc, Category.assoc]
+
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the restricted complexes and comparison maps exceeds the default budget.
 /-- The projection square on Hom cycles and the cycle-to-homology quotient square.
 Source: Stacks Project, Tags 0A8X and 08DL; steps 1 and 2 of the parent plan.
 (blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison).
@@ -95,12 +103,8 @@ theorem openOver_homComplex_cycle_projection_comparison (X : Scheme.{u})
   obtain ⟨a, c, hc, ha⟩ := openOver_chain_cycle_homology_comparison X V W
     P Q h n
   refine ⟨a, c, ?_, ha⟩
-  change h.hom.f n ≫ π = F.map (homologyEvaluationProjection X T J n) ≫
-    (e (T.X (-n)) (J.X 0)).hom at hp
-  change F.map (P.iCycles n) ≫ h.hom.f n = c.hom ≫ Q.iCycles n at hc
-  calc
-    _ = F.map (P.iCycles n) ≫ (h.hom.f n ≫ π) := by
-      rw [Functor.map_comp, Category.assoc, hp]
-    _ = _ := by rw [← Category.assoc, hc, Category.assoc]
+  exact openOver_projection_square_comp F (P.iCycles n)
+    (homologyEvaluationProjection X T J n) (h.hom.f n)
+    (e (T.X (-n)) (J.X 0)).hom c.hom (Q.iCycles n) π hp hc
 
 end CategoryTheory
