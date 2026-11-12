@@ -110,7 +110,8 @@ theorem galoisTower_derivedUnit_retraction_of_iso
   have hadj := Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction
     (f := (g)^*⟦Λ⟧) (g := (g)_*⟦Λ⟧) K a hK (T.complexTrace Λ hd K hc)
     (CondensedRing.upperStarLowerStarAdjunction Λ g) (T.unit_comp_complexTrace Λ hd K hc)
-  rw [← reassoc_of% hn, reassoc_of% hadj]
+  rw [← reassoc_of% hn]
+  erw [reassoc_of% hadj]
   exact e.inv_hom_id
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
@@ -202,8 +203,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   have hRC := galoisTower_derivedUnit_retraction_of_iso Λ g (galoisTower Ω h) hd K hc a hK e
   let i := (leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)
   let eLayer := N.galoisLayerExchangeIso h Ω Λ C
-  obtain ⟨r, hr, hcoinv⟩ := exists_retraction_of_eq_comp_map_comp_of_coinvariant
-    R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧) _ i _ eLayer rfl _ R hα hRC
+  refine Exists.imp ?_ (exists_retraction_of_eq_comp_map_comp_of_coinvariant
+    R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧)
+    (A₀ := L((N.ε)^*⟦Λ⟧).obj C)
+    (T := R((g)_*⟦Λ⟧).obj (L((g)^*⟦Λ⟧).obj (L((N.ε)^*⟦Λ⟧).obj C)))
+    (W := R((g ≫ N.j)_*⟦Λ⟧).obj
+      (L((g ≫ N.ε)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)))
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ |>.app C) i _ eLayer rfl _ R hα hRC
       (fun k ↦ derivedUnitTransport Λ
         (pullbackAction h _ specGaloisAction_comp (act k))
         (pullbackAction_fst h _ specGaloisAction_comp (act k))
@@ -211,8 +217,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
         (L((N.ε)^*⟦Λ⟧).obj C))
       (fun k ↦ N.galoisLayerAction Λ h Ω (act k)
         (L((𝟙 X)^*⟦Λ⟧).obj C))
-      (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
-  refine ⟨r, hr, ?_⟩
+      (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C))
+  intro r hr
+  refine ⟨hr.1, ?_⟩
   intro Z G _ hG W φ hφ
   have hdZ : ∀ (j : FiniteGaloisIntermediateField L Ω)
       (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -224,7 +231,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     rw [hc]
     exact CondensedRing.isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀)
       (hp j) M
-  refine hcoinv G (B := W) φ ?_ hφ
+  refine hr.2 G (B := W) φ ?_ hφ
   intro φ' hφ'
   exact (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
     Λ hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e
