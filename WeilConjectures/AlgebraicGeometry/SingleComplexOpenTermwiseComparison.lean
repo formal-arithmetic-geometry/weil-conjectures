@@ -197,7 +197,8 @@ theorem exists_singleComplexOpen_termwise_comparison
         (C := SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace))
         (D := SheafOfModules.{u} (moduleRings (f' ⁻¹ᵁ V').toScheme.toRingedSpace))
         (Scheme.Modules.tensorPullback j)
-        (derivedPullback j) (counit j) Q] at hcompat
+        (derivedPullback j) (counit j)
+        (((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P)] at hcompat
     simpa only [Functor.map_comp, Category.assoc] using
       congrArg (fun t => F₀.map (H₀.map t)) hcompat
   have hν := ν.hom.naturality ε

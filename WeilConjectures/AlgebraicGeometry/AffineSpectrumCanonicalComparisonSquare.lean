@@ -151,6 +151,6 @@ theorem exists_affineSpectrum_canonicalComparison_square
   simp only [comparisonIntoPullback_eq, Functor.map_comp, Category.assoc,
     eqToIso_refl, Iso.trans_hom, Iso.refl_hom, Iso.app_hom, Iso.symm_hom,
     Category.id_comp, c0, d0, b, a0, P0, T, F, F0, H0, z] at hh ⊢
-  exact hh
+  convert hh using 1 <;> rfl
 
 end AlgebraicGeometry.SingleComplexBaseChange
