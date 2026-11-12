@@ -101,6 +101,7 @@ private theorem unitComparison (t : Y ⟶ X) :
     (Opens.map t.base) (ModuleCat.{w} k) (Opens.grothendieckTopology X)
       (Opens.grothendieckTopology Y) (Opposite.op ⊤)).symm
 
+set_option profiler true in
 -- Normalize the inverse-image functor before applying monoidal coherence.
 /-- Compatibility of the first tensor transport with exact inverse image.
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV.
