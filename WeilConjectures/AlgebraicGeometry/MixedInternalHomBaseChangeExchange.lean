@@ -68,6 +68,7 @@ private theorem tensor_evaluation_interchange
     Category.comp_id]
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Evaluation crosses the two definitionally equal presentations of scheme module sheaves.
 private theorem directImage_evaluation {S T : Scheme.{u}} (h : T ⟶ S)
     (P Q : schemeDerivedCategory T) :
@@ -121,6 +122,7 @@ private theorem evaluation_formula (S : Scheme.{u})
   simpa only [Category.comp_id] using hn
 
 set_option maxHeartbeats 1200000 in
+set_option profiler true in
 -- Tensor-Hom naturality crosses scheme and ringed-space presentations.
 /-- The exchange identity before applying global sections.
 Here `p` is the pullback of evaluation transposed by the fixed tensor-Hom bijection.
