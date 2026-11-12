@@ -287,18 +287,23 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
-  refine (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2 (asIso beta).symm ?_
-  intro i j k hij U x y
-  subst k
-  have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
-  rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
-    reductionUnit_eq_coefficientIntegralScalarUnitSection,
-    reductionUnit_eq_coefficientIntegralScalarUnitSection,
-    reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
-  dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-    integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
-  exact hh
+  dsimp only [integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence, totalTensor, coefficientTotalTensor,
+    ordinaryTensor, Functor.uncurry_obj_obj] at *
+  apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
+  · intro i j k hij U x y
+    subst k
+    have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
+    rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection,
+      reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
+    dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
+      integralReductionChangeOfRings, integralReductionExistence,
+      scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
+    exact hh
+  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
 
 -- Comparing the fixed localization models requires many definitional equalities.
@@ -322,13 +327,11 @@ private theorem nativeReductionMonoidal
       (core.μIso X Z).inv = F.map (e.inv.app (X, Z)) ≫
         m.mu.hom.app (X, Z) ≫ f.hom.app (F.obj X, F.obj Z) := by
   classical
-  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  intro J R S F e f
   let : HasSheafify J AddCommGrpCat.{max u (t + 1)} :=
     integralCoefficientAbSheafify.{t, u} Y
   let : J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
     integralCoefficientAbLocallyBijective.{t, u} Y
-  let R := completedIntegralCommRingSheafUnrestricted l E Y
-  let S := integralCoefficientCommRingSheaf l E Y n
   let : MonoidalCategory (Derived.{t, u} Y S) :=
     RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S
   let : MonoidalCategory (Derived.{t, u} Y R) :=
@@ -346,10 +349,6 @@ private theorem nativeReductionMonoidal
   let AS : CoefficientClosedStructure (derivedInternalHomOfUniverses.{t + 1, t, u} J S) :=
     ⟨RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S, adjS, evS⟩
   let D' := finiteCochainModel l E Y n
-  let F : Derived.{t, u} Y R ⥤ Derived.{t, u} Y S := by
-    with_unfolding_all exact integralDerivedReduction l E Y D hl n
-  let e := tensorPresentationNativeIso Y R a
-  let f := tensorPresentationNativeIso Y S m.target
   let mu : AR.tensor ⋙ F ≅ F.prod F ⋙ AS.tensor :=
     Functor.isoWhiskerRight e.symm F ≪≫ m.mu ≪≫ Functor.isoWhiskerLeft (F.prod F) f
   let φ := completedIntegralCommRingProjectionUnrestricted l E Y n
@@ -370,11 +369,15 @@ private theorem nativeReductionMonoidal
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
+      trace "native: entered representative square"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
+      trace "native: normalization obtained"
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
+      trace "native: preservation supplied"
       have hrepR := nativeIso_representative Y R a P Q hP hQ
       have hrepS := nativeIso_representative Y S m.target _ _ hEP hEQ
       have hTR' := eq_of_heq (hTR P Q hP hQ)
@@ -422,6 +425,7 @@ private theorem nativeReductionMonoidal
         (reductionCounit l E Y D hl n _)
         (DerivedCategory.Q.mapIso (asIso beta)) (DerivedCategory.Q.map (κ.hom.app (P, Q)))
         hcr hcs hcan hnorm)
+  trace "native: core obtained"
   refine ⟨core, ?_⟩
   intro X Z
   have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
