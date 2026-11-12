@@ -127,8 +127,8 @@ private theorem finiteScalarEncoding_map (A : FiniteCondensedData l X)
           K) := by
   unfold finiteCondensedScalarComparison
   dsimp only [ProEtale.constructibleExtendScalars]
-  simp only [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+  simp only [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,
     Functor.comp_map, Category.assoc]

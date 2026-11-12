@@ -181,10 +181,8 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
     have hn := (rationalTensorTransition l X C k).hom.naturality
       ((rationalIntegralTransition l X h).inv.app K)
     simp only [Functor.comp_obj, Functor.comp_map] at hn
-    simp only [← Category.assoc ((rationalTensor l X C L).map
-      ((rationalIntegralTransition l X h).inv.app K)), hn]
-    simp only [Category.assoc]
-    simp only [rationalTensorTransition_hom_app l X C k (T.obj K)]
+    simp only [reassoc_of% hn]
+    simp only [rationalTensorTransition_hom_app l X C k]
     dsimp only [T]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.comp_map, Functor.comp_obj]
     simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
