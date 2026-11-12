@@ -89,7 +89,6 @@ private theorem relativeTensorPullback_model_homology
     (HomologicalComplex.homologyFunctor E (.up ℤ) i).mapIso e ≪≫
     (Z'.sc i).mapHomologyIso V⟩
 
-set_option profiler true in
 -- Derived and ordinary homology comparisons involve several nested functors.
 /-- On K-flat representatives in both source module categories, the balanced tensor
 identity computes the underlying homology of derived tensor with derived pullback.
@@ -139,11 +138,11 @@ theorem relativeTensorPullback_kFlat_model
               (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i)) := by
   classical
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  have : Abelian C := inferInstance
+  let : Abelian C := inferInstance
   let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf
   let B := (sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R
-  have : Abelian (SheafOfModules.{u} B) := inferInstance
+  let : Abelian (SheafOfModules.{u} B) := inferInstance
   let V := SheafOfModules.toSheaf B
   let W := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
   have hV := CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u}
@@ -159,7 +158,9 @@ theorem relativeTensorPullback_kFlat_model
   let T := G
   let TL := (T.mapHomologicalComplex (.up ℤ)).obj L
   obtain ⟨et⟩ := relativeTensorPullback_kFlat_tensor X A TL hA
-  let ed := (tensorLeft (DerivedCategory.Q.obj A)).mapIso ep ≪≫ et
+  let ed : DerivedCategory.Q.obj A ⊗ (derivedPullback f).obj (DerivedCategory.Q.obj L) ≅
+      DerivedCategory.Q.obj (CochainComplex.mapBifunctor A TL (curriedTensor C)) :=
+    (tensorLeft (DerivedCategory.Q.obj A)).mapIso ep ≪≫ et
   obtain ⟨eb⟩ := relativeTensorPullback_complex_comparison f G hG hGmap A L
   let Z := CochainComplex.mapBifunctor A TL (curriedTensor C)
   let U := SheafOfModules.restrictScalars
