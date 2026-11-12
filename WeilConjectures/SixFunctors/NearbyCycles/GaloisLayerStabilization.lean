@@ -106,6 +106,7 @@ private lemma eq_id_of_intertwining_of_epi_aux {D E : Type*} [Category D] [Categ
   rw [hf, F.map_id, Category.id_comp] at h
   exact (cancel_epi e).1 (h.trans (Category.comp_id e).symm)
 
+/-- Transfer trivial actions and an averaged retraction through an equivariant isomorphism. -/
 private lemma stabilization_of_equivariant_iso_aux {DX DM DT DS : Type*}
     [Category DX] [Category DM] [Category DT] [Category DS]
     [Preadditive DT] [Preadditive DS] {L₀ : DX ⥤ DX} {Lfg : DM ⥤ DS}
@@ -210,7 +211,6 @@ private lemma galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup [Normal L L
     (restrictNormal_eq_one_of_mem_fixingSubgroup Ω L' hσ)).trans
       (N.galoisLayerAction_one Λ h L' C)
 
-set_option profiler true in
 /-- **Nearby cycles of a Galois layer stabilizing at a finite level are the invariants of a
 finite quotient.** Let `L ⊆ L' ⊆ Ω` with `L'/L` finite Galois, and suppose the pullback exchange
 of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible at `L(𝟙)^* C` (stabilization at the
@@ -244,31 +244,19 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimens
   have hfix := N.galoisLayerAction_restrict_eq_id_of_mem_fixingSubgroup h Ω L' Λ
   have hsplit := N.exists_retraction_pullbackExchange_galoisLayerHom_autAction Λ h L' C
   have hcomm := N.pullbackExchange_galoisLayerRestrict_app_comp_autAction h Ω L' Λ
-  have p0 := stabilization_of_equivariant_iso_aux
+  have key := stabilization_of_equivariant_iso_aux
     (G := Ω ≃ₐ[L] Ω) (ι := L' ≃ₐ[L] L')
     ((N.galoisLayerHom h Ω).pullbackExchange Λ)
     ((N.galoisLayerHom h L').pullbackExchange Λ)
     ((N.galoisLayerRestrict h Ω L').pullbackExchange Λ)
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X)))
-    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C
-  run_tac Lean.logInfo "PH135 categorical data elaborated"
-  have p1 := p0 hx
-  run_tac Lean.logInfo "PH135 composition supplied"
-  have k0 := p1 hstab
-  run_tac Lean.logInfo "PH135 stabilization supplied"
-  have k1 := k0
+    (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))) C hx hstab
     (L'.fixingSubgroup : Set (Ω ≃ₐ[L] Ω)) (fun σ ↦ σ.restrictNormal L') lift hlift
     Finset.univ (Fintype.card (L' ≃ₐ[L] L'))
     (fun τ ↦ (N.galoisLayerAut h L' τ).autAction Λ _)
     (fun σ C' ↦ (N.galoisLayerAut h Ω σ).autAction Λ C')
     (fun σ _ _ g ↦ Hom.autAction_naturality Λ _ g)
-  run_tac Lean.logInfo "PH135 actions elaborated"
-  have k2 := k1 (fun σ hσ ↦ hfix σ hσ _)
-  run_tac Lean.logInfo "PH135 fixer supplied"
-  have k3 := k2 hsplit
-  run_tac Lean.logInfo "PH135 splitting supplied"
-  have key := k3 (fun σ ↦ hcomm σ _)
-  run_tac Lean.logInfo "PH135 equivariance supplied"
+    (fun σ hσ ↦ hfix σ hσ _) hsplit (fun σ ↦ hcomm σ _)
   exact key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
