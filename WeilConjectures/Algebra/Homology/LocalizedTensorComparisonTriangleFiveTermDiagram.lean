@@ -28,6 +28,18 @@ open scoped TensorProduct
 set_option autoImplicit false
 namespace ModuleCat
 
+-- Check the row projections on abstract arrows, before substituting homology maps.
+private def homMk₄OfSquares {D : Type*} [Category* D]
+    {X₀ X₁ X₂ X₃ X₄ Y₀ Y₁ Y₂ Y₃ Y₄ : D}
+    (s₀ : X₀ ⟶ X₁) (s₁ : X₁ ⟶ X₂) (s₂ : X₂ ⟶ X₃) (s₃ : X₃ ⟶ X₄)
+    (d₀ : Y₀ ⟶ Y₁) (d₁ : Y₁ ⟶ Y₂) (d₂ : Y₂ ⟶ Y₃) (d₃ : Y₃ ⟶ Y₄)
+    (a₀ : X₀ ⟶ Y₀) (a₁ : X₁ ⟶ Y₁) (a₂ : X₂ ⟶ Y₂)
+    (a₃ : X₃ ⟶ Y₃) (a₄ : X₄ ⟶ Y₄)
+    (w₀ : s₀ ≫ a₁ = a₀ ≫ d₀) (w₁ : s₁ ≫ a₂ = a₁ ≫ d₁)
+    (w₂ : s₂ ≫ a₃ = a₂ ≫ d₂) (w₃ : s₃ ≫ a₄ = a₃ ≫ d₃) :
+    ComposableArrows.mk₄ s₀ s₁ s₂ s₃ ⟶ ComposableArrows.mk₄ d₀ d₁ d₂ d₃ :=
+  ComposableArrows.homMk₄ a₀ a₁ a₂ a₃ a₄ w₀ w₁ w₂ w₃
+
 variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
   [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]
   [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} A)]
@@ -40,8 +52,6 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
--- The five model comparisons involve nested monoidal and cohomology functors.
 /-- The comparison is a morphism of exact five-term cohomology sequences.
 No component is assumed or asserted to be invertible.
 
@@ -140,7 +150,10 @@ theorem exists_localizedTensorComparison_triangle_five_term_diagram
     d₂ (HomologicalComplex.homologyMap (F.map f ▷ N) (i + 1))
   have hD : D.Exact := tensorConeTriangle_five_term_exact
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))) f N i
-  let φ : S ⟶ D := ComposableArrows.homMk₄
+  let φ : S ⟶ D := homMk₄OfSquares s₀ s₁ s₂ s₃
+    (HomologicalComplex.homologyMap (F.map f ▷ N) i)
+    (HomologicalComplex.homologyMap (F.map (CochainComplex.mappingCone.inr f) ▷ N) i)
+    d₂ (HomologicalComplex.homologyMap (F.map f ▷ N) (i + 1))
     (cmp P₁ mP₁ i) (cmp P₂ mP₂ i) (cmp P₃ mP₃ i)
     (cmp P₁ mP₁ (i + 1)) (cmp P₂ mP₂ (i + 1)) w₀ w₁ w₂ w₃
   have transport (P V : CochainComplex (ModuleCat.{u} A) ℤ)
