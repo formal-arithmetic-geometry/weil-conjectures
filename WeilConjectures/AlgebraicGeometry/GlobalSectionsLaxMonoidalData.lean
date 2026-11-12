@@ -48,8 +48,9 @@ private theorem globalSectionsTensor_natural_left
   apply ModuleCat.hom_ext
   apply TensorProduct.ext'
   intro x y
-  simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_whiskerRight,
+    LinearMap.rTensor_tmul, moduleCup_sectionTensorMap, ModuleCat.hom_ofHom,
+    tensorSectionsMap_tmul]
   exact (whiskerRight_app_tmulSection (X := X) (N := P) (U := ⊤) f x y).symm
 
 private theorem globalSectionsTensor_natural_right
@@ -62,8 +63,9 @@ private theorem globalSectionsTensor_natural_right
   apply ModuleCat.hom_ext
   apply TensorProduct.ext'
   intro x y
-  simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_whiskerLeft,
+    LinearMap.lTensor_tmul, moduleCup_sectionTensorMap, ModuleCat.hom_ofHom,
+    tensorSectionsMap_tmul]
   exact (whiskerLeft_app_tmulSection (X := X) (M := P) (U := ⊤) f x y).symm
 
 private theorem globalSectionsTensor_associativity
@@ -80,8 +82,10 @@ private theorem globalSectionsTensor_associativity
   apply ModuleCat.hom_ext
   apply TensorProduct.ext_threefold
   intro x y z
-  simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_whiskerRight,
+    ModuleCat.hom_whiskerLeft, ModuleCat.hom_hom_associator, LinearEquiv.coe_coe,
+    LinearMap.rTensor_tmul, LinearMap.lTensor_tmul, TensorProduct.assoc_tmul,
+    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
   exact associator_hom_app_tmulSection (X := X) (M := M) (N := N) (P := P)
     (U := ⊤) x y z
 

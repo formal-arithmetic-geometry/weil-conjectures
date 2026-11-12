@@ -85,7 +85,7 @@ private theorem erase_map_id
 private theorem insert_map_id
     {A B : Type*} [Category A] [Category B] (r : B ⥤ A)
     {X : A} (Y : B) (f g : X ⟶ r.obj Y) (h : f = g) :
-    f ≫ 𝟙 (r.obj Y) ≫ r.map (𝟙 Y) = g := by
+    f ≫ 𝟙 (r.obj Y) ≫ r.map (𝟙 Y) = 𝟙 X ≫ g := by
   simpa only [r.map_id, Category.id_comp, Category.comp_id] using h
 
 private theorem erase_middle_id
@@ -265,6 +265,7 @@ private theorem constantSheaf_composition_map
   exact congrArg (fun k ↦ k r)
     ((toSheafify J₃ ((Functor.const C₃ᵒᵖ).obj R)).naturality (α.hom.app W.unop).op).symm
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
