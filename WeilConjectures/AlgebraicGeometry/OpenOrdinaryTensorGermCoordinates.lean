@@ -24,8 +24,6 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 set_option profiler true in
-set_option maxHeartbeats 900000 in
--- Checking the two explicit scalar-extension tensor types needs additional heartbeats.
 /-- Compatible ordinary tensor coordinates, pinned to the actual open restriction map.
 
 Proof: use the inverse stalk maps of the four open inclusions, transporting
@@ -126,7 +124,7 @@ theorem exists_openOrdinaryTensor_germ_coordinates
                 F₀.map (L₀.map ((openPinnedTensorRestrictionIso g'
                   (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv.app (P.X n))) ≫
                 γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n))) := by
-  dsimp only
+  intro Q₀ R₀ A₀ B₀ C₀ R₁ A₁ B₁ C₁ K₀ K T₀ T F₀ F L₀ γ
   let := leftAlgebra (f ∣_ V) j z
   let := rightAlgebra (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z
   let := (tensorMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z).toAlgebra
