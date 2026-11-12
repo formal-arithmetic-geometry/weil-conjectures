@@ -25,6 +25,59 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 local instance instEssentiallySmallProfinite_integralResidueScalarCounitModel
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
+-- Prove the diagram identities with abstract morphisms, before specializing to sheaves.
+private theorem counit_inverse_square
+    {C : Type*} [Category C] {A B U V W Z : C}
+    (p : A ≅ B) (q : W ≅ Z) (a : A ⟶ U) (b : U ⟶ W)
+    (c : B ⟶ V) (d : V ⟶ Z)
+    (h : a ≫ b ≫ q.hom = p.hom ≫ c ≫ d) :
+    p.inv ≫ a ≫ b = c ≫ d ≫ q.inv := by
+  calc
+    _ = p.inv ≫ (a ≫ b ≫ q.hom) ≫ q.inv := by simp [Category.assoc]
+    _ = _ := by rw [h]; simp
+
+private theorem counit_restriction_pasting
+    {C D : Type*} [Category C] [Category D] (S : C ⥤ D)
+    {A B C' D' E F : C} {U V W Z : D}
+    (p : A ⟶ B) (a : B ⟶ C') (b : C' ⟶ D')
+    (c : A ⟶ E) (d : E ⟶ F) (ph : F ⟶ D')
+    (q : U ⟶ S.obj A) (q' : V ⟶ S.obj E) (f : U ⟶ V)
+    (k : S.obj D' ⟶ Z) (k' : S.obj F ⟶ W) (r : W ⟶ Z) (s : V ⟶ W)
+    (hm : p ≫ a ≫ b = c ≫ d ≫ ph)
+    (ho : S.map ph ≫ k = k' ≫ r)
+    (hn : q ≫ S.map c = f ≫ q')
+    (hq : q' ≫ S.map d ≫ k' = s) :
+    q ≫ S.map p ≫ S.map a ≫ S.map b ≫ k = f ≫ s ≫ r := by
+  simp only [← S.map_comp_assoc]
+  rw [hm]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [ho, reassoc_of% hn, hq]
+
+private theorem counit_tensor_pasting
+    {C D H K : Type*} [Category C] [Category D] [Category H] [Category K]
+    (F : C ⥤ D) (QY : H ⥤ C) (FH : H ⥤ K) (QX : K ⥤ D)
+    (α : QY ⋙ F ⟶ FH ⋙ QX)
+    {N N' : C} {U V W : H} {A B Z : K} {L M R R' : D}
+    (q : F.obj N ⟶ L) (a : L ⟶ M) (b : M ⟶ R)
+    (gX : R ⟶ R') (kX : R' ⟶ QX.obj A) (εX : R ⟶ QX.obj B)
+    (gY : N ⟶ N') (kY : N' ⟶ QY.obj U) (εY : N ⟶ QY.obj V)
+    (r : FH.obj U ⟶ A) (tX : A ⟶ B) (sX : B ⟶ Z)
+    (tY : U ⟶ V) (sY : V ⟶ W) (δ : FH.obj W ⟶ Z)
+    (hX : εX = gX ≫ kX ≫ QX.map tX) (hY : εY = gY ≫ kY ≫ QY.map tY)
+    (h : q ≫ a ≫ b ≫ gX ≫ kX = F.map (gY ≫ kY) ≫ α.app U ≫ QX.map r)
+    (ho : r ≫ tX ≫ sX = FH.map (tY ≫ sY) ≫ δ) :
+    q ≫ a ≫ b ≫ εX ≫ QX.map sX =
+      F.map εY ≫ α.app V ≫ QX.map (FH.map sY ≫ δ) := by
+  rw [hX, hY]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h]
+  simp only [← QX.map_comp, Category.assoc]
+  rw [ho]
+  have hn := α.naturality tY
+  dsimp only [Functor.comp_map] at hn
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hn]
+
 private theorem tensorPresentation_app_port
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
@@ -50,7 +103,6 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 -- Normalize the inverse scalar mate, retaining ordinary restriction factors.
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Naturality compares the four derived functors with their homotopy models.
 private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -122,39 +174,17 @@ private theorem scalar_restriction_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
       (residueExchangeUpperStarCounit
         (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app TP ≫
       DerivedCategory.Qh.map pH.inv := by
-    have hi := ((residueExchangePullComparisons ℓ E).pull f).inv_hom_id_app
-      (DerivedCategory.Qh.obj P)
-    have hp : ((residueExchangePullComparisons ℓ E).pull f).hom.app
-        (DerivedCategory.Qh.obj P) = (residueExchangePullHom ℓ E f).app
-          (DerivedCategory.Qh.obj P) := by
-      unfold residueExchangePullComparisons
-      rfl
-    rw [hp] at hi
-    calc
-      _ = ((residueExchangePullComparisons ℓ E).pull f).inv.app
-            (DerivedCategory.Qh.obj P) ≫
-          ((residueExchangeReduction ℓ E X).map
-            ((residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app P) ≫
-            (residueExchangeReductionCounit ℓ E X).app FP ≫
-            DerivedCategory.Qh.map pH.hom) ≫ DerivedCategory.Qh.map pH.inv := by
-        simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id,
-          DerivedCategory.Qh.map_id]
-        erw [Category.comp_id]
-      _ = _ := by
-        rw [hm]
-        simp only [← Category.assoc, hi, Category.id_comp]
-        rfl
+    exact counit_inverse_square
+      (((residueExchangePullComparisons ℓ E).pull f).app (DerivedCategory.Qh.obj P))
+      (DerivedCategory.Qh.mapIso pH) _ _ _ _ hm
   have ho := SX.mapDerivedCategoryFactorsh.hom.naturality pH.inv
   have hq := restrict_pull_fac ℓ E f TP
   have hn := (residueExchangeRestrictPullIso ℓ E f).hom.naturality
     ((residueExchangeReductionCounit ℓ E Y).app P)
   dsimp only [Functor.comp_map] at hn ho
-  simp only [← Functor.map_comp_assoc]
-  rw [hmi]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [ho]
-  erw [← reassoc_of% hn]
-  erw [reassoc_of% hq]
+  have h := counit_restriction_pasting (residueExchangeRestriction ℓ E X)
+    _ _ _ _ _ _ _ _ _ _ _ _ _ hmi ho hn.symm hq
+  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc] using h
 
 private theorem tensor_counit_app (T : Scheme.{u})
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
@@ -185,7 +215,6 @@ private theorem tensor_counit_app (T : Scheme.{u})
 set_option linter.unusedVariables false in
 -- Preserve the original public statement, including its auxiliary SX let.
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- The counit calculation compares several composed concrete module functors.
 /-- The scalar pull square, followed by the tensor-presentation counit on X,
 computes the ordinary pullback model map. No derived tensor comparison occurs.
@@ -290,17 +319,14 @@ theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     (integralReductionMap ℓ E) f P
   unfold residueExchangeTensorModelMap Functor.tensorModelMapWith residueExchangeTensorCounit
   dsimp only [id]
-  erw [tensor_counit_app ℓ E X, tensor_counit_app ℓ E Y]
-  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
-  dsimp only at h ho
-  erw [reassoc_of% h]
-  simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
-  have ho' := congrArg DerivedCategory.Qh.map ho
-  erw [ho']
-  have hn := (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).naturality
-    ((Mod.tensorPresentationHomotopyIso
-      (coefficientMap (integralReductionMap ℓ E) Y)).hom.app P)
-  dsimp only [Functor.comp_map] at hn
-  simp only [Functor.map_comp, Category.assoc]
-  erw [← reassoc_of% hn]
+  refine counit_tensor_pasting
+    (residueExchangeUpperStar (integralCoeff ℓ E) f) DerivedCategory.Qh
+    (((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh
+    (residueExchangeUpperStarCounit (integralCoeff ℓ E) f)
+    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ?_ ?_ ?_ ?_
+  · exact tensor_counit_app ℓ E X _
+  · exact tensor_counit_app ℓ E Y P
+  · exact h
+  · dsimp only at ho
+    simpa only [Category.assoc] using ho
 end AlgebraicGeometry.ProEtale.CondensedRing
