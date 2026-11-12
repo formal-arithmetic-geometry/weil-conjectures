@@ -837,13 +837,15 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
   let u := (proEtaleRingModuleDirectImage p R S c).map ((identityDirect P S).hom.app N)
   let v := (identityDirect T R).inv.app
     ((proEtaleRingModuleDirectImage p R S c).obj N)
-  have h : da.hom.app N ≫ t.hom.app N = u ≫ v ≫ db.hom.app N := by
+  let f := da.hom.app N ≫ t.hom.app N
+  let g := u ≫ v ≫ db.hom.app N
+  have hfg : f = g := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
     apply ConcreteCategory.hom_ext
     intro m
-    simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    simp only [f, g, SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
     change (t.hom.app N).val.app V ((da.hom.app N).val.app V m) =
       (db.hom.app N).val.app V (v.val.app V (u.val.app V m))
@@ -895,6 +897,8 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
         (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
       N.val.map k.op m)
       (site_identity p (congrArg Sigma.fst e) V.unop)
+  have h : da.hom.app N ≫ t.hom.app N = u ≫ v ≫ db.hom.app N := by
+    simpa only [f, g] using hfg
   change da.hom.app N ≫ t.hom.app N ≫ db.inv.app N = _
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
