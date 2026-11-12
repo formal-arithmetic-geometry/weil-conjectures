@@ -55,7 +55,7 @@ lemma Adjunction.homEquiv_symm_comp_conjugateIsoEquiv {C₁ C₂ C₃ C₄ : Typ
   have hm := (a.homEquiv M P).apply_symm_apply (m ≫ v)
   rw [← Category.assoc, ← Category.assoc, ← hm, ← a.homEquiv_naturality_right,
     ← b.homEquiv_naturality_left, ← Category.assoc,
-    homEquiv_homEquiv_comp_conjugateIsoEquiv_app]
+    homEquiv_homEquiv_comp_conjugateIsoEquiv_app, Equiv.symm_apply_apply]
 
 end CategoryTheory
 
@@ -120,7 +120,6 @@ noncomputable def diagonalSpecialization :
     (boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
     (diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)
 
-set_option profiler true in
 /-- **The trace class is an exceptional adjoint along the fixed locus** (blueprint
 `lem-trf-trace-class-diagonal-pairing`, Step 2): `Tr_c(u)` is the exceptional adjoint along
 `d : Fix(c) ⟶ X` of `diagonalSpecialization`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C` and the
