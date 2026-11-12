@@ -44,6 +44,21 @@ lemma CategoryTheory.ObjectProperty.braided_lift_comp
   apply ObjectProperty.hom_ext
   exact Functor.LaxBraided.braided (F := F ⋙ G) K.obj M.obj
 
+/-- Invertible dual comparisons identify the two biduality maps. -/
+lemma CategoryTheory.MonoidalClosed.exists_biduality_comparison
+    {C D : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
+    [Category* D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
+    (T : C ⥤ D) [T.LaxBraided] {W : C} {W' : D} (e : T.obj W ⟶ W') (L : C)
+    [IsIso (dualComparison T e L)] [IsIso (dualComparison T e ((ihom L).obj W))] :
+    ∃ c : T.obj ((ihom ((ihom L).obj W)).obj W) ≅
+        (ihom ((ihom (T.obj L)).obj W')).obj W',
+      toIhomIhom W' (T.obj L) = T.map (toIhomIhom W L) ≫ c.hom := by
+  have := isIso_pre_app (dualComparison T e L) W'
+  refine ⟨asIso (dualComparison T e ((ihom L).obj W)) ≪≫
+    (asIso ((pre (dualComparison T e L)).app W')).symm, ?_⟩
+  dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
+  rw [map_toIhomIhom_comp_dualComparison_assoc, IsIso.hom_inv_id, Category.comp_id]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
@@ -63,7 +78,24 @@ private lemma integral_qbar_biduality_map_hom
       ((Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
         derivedExtendScalarsToPadicAlgCl X.left ℓ E).map f.hom := rfl
 
-set_option trace.profiler true in
+private lemma integral_qbar_biduality_braided
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (K M : BoundedConstructible
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)) :
+    let T := boundedConstructibleExtendScalars X.left ℓ E ⋙
+      constructibleToPadicAlgCl X.left ℓ E
+    Functor.LaxMonoidal.μ T K M ≫ T.map (β_ K M).hom =
+      (β_ (T.obj K) (T.obj M)).hom ≫ Functor.LaxMonoidal.μ T M K := by
+  let := leftDerivedExtendScalarsPadicIntegersBraided ℓ E X.left
+  let := leftDerivedExtendScalarsPadicAlgClBraided ℓ E X.left
+  exact ObjectProperty.braided_lift_comp (boundedConstructible _) (boundedConstructible _)
+    (boundedConstructible _)
+    (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor
+    (derivedExtendScalarsToPadicAlgCl X.left ℓ E)
+    (boundedConstructible_derivedExtendScalars_obj X.left ℓ E)
+    (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E) K M
+
+set_option profiler true in
 /-- The actual scalar-extension double-dual comparison, including its evaluation equation.
 
 Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark
@@ -91,8 +123,6 @@ theorem integral_qbar_biduality_comparison
     ∃ c : F.obj ((ihom ((ihom L.obj).obj W)).obj W) ≅
         (ihom ((ihom (F.obj L.obj)).obj W')).obj W',
       toIhomIhom W' (F.obj L.obj) = F.map (toIhomIhom W L.obj) ≫ c.hom := by
-  let := leftDerivedExtendScalarsPadicIntegersBraided ℓ E X.left
-  let := leftDerivedExtendScalarsPadicAlgClBraided ℓ E X.left
   let := ObjectProperty.fullBraidedSubcategory
     (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left))
   let := boundedConstructibleBraiding (ℓ := ℓ) X
@@ -113,12 +143,7 @@ theorem integral_qbar_biduality_comparison
   let : T.Braided := by
     constructor
     intro K M
-    exact ObjectProperty.braided_lift_comp (boundedConstructible _) (boundedConstructible _)
-      (boundedConstructible _)
-      (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor
-      (derivedExtendScalarsToPadicAlgCl X.left ℓ E)
-      (boundedConstructible_derivedExtendScalars_obj X.left ℓ E)
-      (boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X.left ℓ E) K M
+    exact integral_qbar_biduality_braided ℓ E K M
   -- Both dual comparisons are invertible on bounded constructible objects.
   have hβ (K : BoundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)) :
@@ -128,14 +153,9 @@ theorem integral_qbar_biduality_comparison
     infer_instance
   have := hβ L
   have := hβ ((ihom L).obj W)
-  have := isIso_pre_app (dualComparison T w.hom L) W'
-  let c := asIso (dualComparison T w.hom ((ihom L).obj W)) ≪≫
-    (asIso ((pre (dualComparison T w.hom L)).app W')).symm
   -- The lax braided bidual square gives the compatibility before forgetting.
+  obtain ⟨c, h⟩ := exists_biduality_comparison T w.hom L
   refine ⟨(boundedConstructible _).ι.mapIso c, ?_⟩
-  have h : toIhomIhom W' (T.obj L) = T.map (toIhomIhom W L) ≫ c.hom := by
-    dsimp only [c, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
-    rw [map_toIhomIhom_comp_dualComparison_assoc, IsIso.hom_inv_id, Category.comp_id]
   have h' := congrArg (fun f ↦ f.hom) h
   rw [ObjectProperty.toIhomIhom_hom, ObjectProperty.comp_hom,
     integral_qbar_biduality_map_hom, ObjectProperty.toIhomIhom_hom] at h'
