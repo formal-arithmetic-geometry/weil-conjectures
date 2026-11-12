@@ -180,6 +180,7 @@ private structure OrdinaryModel
   evalP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ),
     push f ⋙ EE l E Y (σ Y) n ≅
       EE l E X (σ X) n ⋙ proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f
+  -- `pushSection` is the identity; its type exposes the carrier conversion directly.
   horizontal : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : SS l E X (σ X))
     {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
     (x : ((EE l E Y (σ Y) m).obj ((push f).obj M)).val.obj V),
@@ -205,6 +206,45 @@ private structure OrdinaryModel
 attribute [local instance] OrdinaryModel.additive OrdinaryModel.inverseAdditive
 
 set_option profiler true in
+private theorem ordinaryPushHorizontal {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : SS l E X (σgraph l E X)) {m n : ℕ} (h : n ≤ m) (V : Y.ProEtᵒᵖ)
+    (x : ((EE l E Y (σgraph l E Y) m).obj
+      ((VaryingRing.push (graphRings l E) (graphTransitions l E) f).obj M)).val.obj V) :
+    SpTowerShriek.pushSection (SpTowerShriek.R l E n) f
+      ((EE l E X (σgraph l E X) n).obj M) V
+      (((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app V
+        (SpTowerShriek.HS l E Y (σgraph l E Y) h
+          ((VaryingRing.push (graphRings l E) (graphTransitions l E) f).obj M) V x)) =
+      SpTowerShriek.HS l E X (σgraph l E X) h M (SpTowerShriek.chart f V)
+        (SpTowerShriek.pushSection (SpTowerShriek.R l E m) f
+          ((EE l E X (σgraph l E X) m).obj M) V
+          (((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f m).hom.app M).val.app
+            V x)) := by
+  exact SpTowerShriek.canonicalPushHorizontal
+    (graphRings l E) (graphTransitions l E) f M h V x
+
+set_option profiler true in
+private theorem ordinaryComparisonSections {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (G : SS l E X (σgraph l E X) ⥤ SS l E Y (σgraph l E Y))
+    (d : G ≅ VaryingRing.push (graphRings l E) (graphTransitions l E) f)
+    (M : SemilinearProperOpen.Modules (graphRings l E) (graphTransitions l E) X)
+    (n : ℕ) (V : Y.ProEtᵒᵖ) :
+    HEq (fun x ↦ ((Functor.leftUnitor (G ⋙ 𝟭 _) ≪≫ Functor.rightUnitor G ≪≫ d ≪≫
+      (graphPushIso l E f).symm).hom.app M).val.app (op (n, V.unop)) x)
+      (fun x ↦ (((EE l E Y (σgraph l E Y) n).map (d.hom.app M) ≫
+        (VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app
+          V x) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.leftUnitor_hom_app,
+    Functor.rightUnitor_hom_app, Category.id_comp]
+  apply heq_of_eq
+  funext x
+  simp only [Iso.symm_hom, graphPushIso, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    SheafOfModules.pushforwardCongr_inv_app_val_app]
+  exact ((VaryingRing.moduleEvalP_existsUnique
+    (graphRings l E) (graphTransitions l E) f n).choose_spec.1 M V.unop _).symm
+
+set_option profiler true in
 -- Equality transport identifies the full coefficient-system presentation.
 private noncomputable def ordinaryModel
     (σ : ∀ T : Scheme.{u}, ∀ n,
@@ -223,18 +263,10 @@ private noncomputable def ordinaryModel
     push := fun f ↦ VaryingRing.push (graphRings l E) (graphTransitions l E) f
     evalP := fun f n ↦ VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n
     horizontal := fun {X Y} f M {m n} h V x ↦
-      SpTowerShriek.canonicalPushHorizontal (graphRings l E) (graphTransitions l E) f M h V x
+      ordinaryPushHorizontal l E f M h V x
     comparison := fun f G d ↦
       Functor.leftUnitor _ ≪≫ Functor.rightUnitor _ ≪≫ d ≪≫ (graphPushIso l E f).symm
-    comparison_sections := ?_ }
-  intro X Y f G d M n V
-  apply heq_of_eq
-  funext x
-  change ((d.hom.app M).val.app (op (n, V.unop)) x) =
-    ((VaryingRing.moduleEvalP (graphRings l E) (graphTransitions l E) f n).hom.app M).val.app V
-      ((d.hom.app M).val.app (op (n, V.unop)) x)
-  exact ((VaryingRing.moduleEvalP_existsUnique
-    (graphRings l E) (graphTransitions l E) f n).choose_spec.1 M V.unop _).symm
+    comparison_sections := fun f G d M n V ↦ ordinaryComparisonSections l E f G d M n V }
 
 -- Cancellation compares horizontal morphisms on large module-sheaf categories.
 -- Assemble the level isomorphisms and check their naturality on every section.
