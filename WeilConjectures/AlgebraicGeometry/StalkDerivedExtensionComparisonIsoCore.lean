@@ -28,6 +28,16 @@ noncomputable section
 
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
+private theorem mapped_iso_left_normalization
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {U V : C} {A B Z Y : D} (s : U ≅ V) (c : A ≅ B)
+    (j : F.obj U ⟶ A) (ε : F.obj V ⟶ Z) (t : Z ⟶ Y) (k : Y ⟶ B)
+    (hj : j ≫ c.hom = F.map s.hom ≫ ε ≫ t ≫ k) :
+    F.map s.inv ≫ j = ε ≫ t ≫ k ≫ c.inv := by
+  apply (cancel_mono c.hom).mp
+  simp only [Category.assoc, c.inv_hom_id, Category.comp_id]
+  rw [hj, ← F.map_comp_assoc, s.inv_hom_id, F.map_id, Category.id_comp]
+
 private theorem extendScalars_transport_naturality
     {R₀ S₀ : Type u} [CommRing R₀] [CommRing S₀]
     {a b : R₀ →+* S₀} (h : a = b) {M N : ModuleCat.{u} R₀} (s : M ⟶ N) :
@@ -219,20 +229,21 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     change 𝟙 _ ≫ _ = _
     exact Category.id_comp _
   rw [hα] at hj
-  have hcoord := congrArg
-    (fun k ↦ L.map (St.mapDerivedCategoryFactors.inv.app P) ≫ k ≫
-      inv ((comparisonDerivedStalk X' z).map ((counit g').app (q.obj P)))) hj
-  simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id] at hcoord
-  dsimp only [βc, δ, NatTrans.comp_app, Functor.whiskerRight_app,
-    Functor.whiskerLeft_app] at hcoord
-  simp only [Category.assoc] at hcoord
-  erw [← L.map_comp_assoc, Iso.inv_hom_id_app, L.map_id, Category.id_comp] at hcoord
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Functor.mapHomotopyCategoryFactors,
-    CategoryTheory.Quotient.lift.isLift_hom, CategoryTheory.Quotient.lift.isLift_inv]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.id_comp, Functor.map_inv]
-  simpa only [Category.assoc] using hcoord
+  have hcoord := mapped_iso_left_normalization L (St.mapDerivedCategoryFactors.app P)
+    ((comparisonDerivedStalk X' z).mapIso (asIso ((counit g').app (q.obj P))))
+    (j.app (DerivedCategory.Q.obj P))
+    (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (Sc.obj P)))
+    (DerivedCategory.Q.map (tensorStalkIso f f' g g' sq z P).hom)
+    (St'.mapDerivedCategoryFactors.inv.app (Pc.obj P)) hj
+  have hq : L.map ((DerivedCategory.quotientCompQhIso _).inv.app
+      (stalkComplex g' z P)) = 𝟙 _ := L.map_id _
+  have hE : DerivedCategory.Qh.map ((E.mapHomotopyCategoryFactors (.up ℤ)).hom.app
+      (stalkComplex g' z P)) = 𝟙 _ := DerivedCategory.Qh.map_id _
+  have hq' : (DerivedCategory.quotientCompQhIso (ModuleCat.{u} (C z))).hom.app
+      (tensorComplex f f' g g' sq z P) = 𝟙 _ := rfl
+  rw [hq, hE, hq', Category.id_comp, Category.id_comp, Category.id_comp]
+  exact hcoord
+
 
 
 end AlgebraicGeometry.SingleComplexBaseChange

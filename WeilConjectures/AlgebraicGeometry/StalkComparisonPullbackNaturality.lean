@@ -43,8 +43,8 @@ private theorem map_conjugate_comp_naturality
     L.map (s.inv ≫ F.map a ≫ t.hom) ≫ (L.map t.inv ≫ j.app Q) =
       (L.map s.inv ≫ j.app P) ≫ G.map a := by
   simp only [Functor.map_comp, Category.assoc]
-  rw [← L.map_comp_assoc t.hom, t.hom_inv_id, L.map_id, Category.id_comp,
-    j.naturality]
+  rw [← L.map_comp_assoc t.hom, t.hom_inv_id, L.map_id, Category.id_comp]
+  exact congrArg (fun k ↦ L.map s.inv ≫ k) (j.naturality a)
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -79,7 +79,6 @@ def comparisonIntoPullback (z : X')
             (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ⟶
           (derivedPullback g').obj (DerivedCategory.Q.obj P))
 
-set_option profiler true in
 /-- The comparison into derived pullback is natural for derived isomorphisms of
 K-flat sheaf representatives, using any tensor-algebra lift of the specified
 underlying cohomology transport.

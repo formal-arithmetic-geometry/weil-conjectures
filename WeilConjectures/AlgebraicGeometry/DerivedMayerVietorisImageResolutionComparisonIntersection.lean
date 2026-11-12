@@ -39,7 +39,6 @@ private theorem image_resolution_comparison_of_localization
   simp only [hfactor, Q.map_comp, Category.assoc, c.inv_hom_id, Category.comp_id]
   rw [hnat, reassoc_of% hl, ← H.map_comp, hn]
 
-set_option profiler true in
 /-- The restriction-induced intersection component realizes the canonical derived comparison.
 Source: Stacks Project, Tags 08FE, 08BV and 0D5T.
 (blueprint: lem-pc-mayer-vietoris-image-resolution-comparison-intersection).
