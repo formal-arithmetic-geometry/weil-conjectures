@@ -104,8 +104,15 @@ private theorem tensor_square_pasting
   rw [reassoc_of% hL]
   rw [hν]
 
--- Compare the concrete total tensors through their map APIs.
--- Synthesis compares the existing ordinary and ringed cochain tensor instances.
+private theorem coefficientTotalTensor_map_tensorHom
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u})
+    {P P' Q Q' : CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ}
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    (coefficientTotalTensor.{u, u, u} J R).map (X := (P, Q)) (Y := (P', Q')) (f, g) =
+      f ⊗ₘ g := by
+  exact RingedForgetTensorTransposition.tensor_map₂_eq f g
+
 set_option profiler true in
 /-- The ringed associator square, after one outer homogeneous inclusion, transports
 through the ordinary comparison and the signed balanced tensor quotient.
@@ -165,12 +172,9 @@ theorem nativeChainForgetComponent_transport
           (α_ (E.obj P) (E.obj Q) (E.obj N)).hom := by
       apply HomologicalComplex.hom_ext
       exact hsquare
-    simp only [nativeRingedTripleLeft, nativeRingedTripleRight, Iso.trans_hom,
-      Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom] at hs
-    dsimp only [coefficientTotalTensor] at hs
-    simp only [RingedForgetTensorTransposition.tensor_map₂_eq
-      (B := RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R)] at hs
-    simpa only [tensor_map, id_tensorHom, tensorHom_id, Category.assoc] using hs
+    simpa only [nativeRingedTripleLeft, nativeRingedTripleRight, Iso.trans_hom,
+      Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, coefficientTotalTensor_map_tensorHom,
+      id_tensorHom, tensorHom_id, Category.assoc] using hs
   have hc :
       U.map (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ≫
           (nativeChainForgetC D P (nativeTensorComplex T Q N)).hom ≫
