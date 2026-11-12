@@ -106,6 +106,18 @@ private theorem forgotten_flip_summand
   simp only [Units.smul_def, Functor.map_zsmul, Preadditive.zsmul_comp, hc]
   rfl
 
+private theorem signed_uncurry_summand
+    {C D : Type a} [Category.{b} C] [Category.{b} D] [Preadditive C] [Preadditive D]
+    (U : C ⥤ D) [U.Additive] {A B T : C} {B' : D}
+    (i : A ⟶ B) (v : U.obj B ⟶ B') (g : B ⟶ T)
+    (i' : U.obj A ⟶ B') (g' : B' ⟶ U.obj T)
+    (a : A ⟶ T) (a' : U.obj A ⟶ U.obj T) (s : ℤˣ)
+    (hi : U.map i ≫ v = s • i') (hg : i ≫ g = s • a)
+    (hg' : i' ≫ g' = a') (hu : U.map a = a') :
+    U.map i ≫ U.map g = U.map i ≫ v ≫ g' := by
+  rw [← Category.assoc, hi, Linear.units_smul_comp, hg',
+    ← U.map_comp, hg, Functor.map_units_smul, hu]
+
 -- Paste the representative square before specializing to derived categories.
 private theorem representative_hom_square
     {B D E : Type a} [Category.{b} B] [Category.{b} D] [Category.{b} E]
@@ -454,12 +466,8 @@ theorem native_forget_normalized_binary_models
           P T (chain T P).hom p q n hpq
         exact (hchain T P q p n hqp).trans (Category.id_comp _)
       simp only [HomologicalComplex.comp_f]
-      rw [← Category.assoc, hi, Linear.units_smul_comp]
-      simp only [hψ' q p n hqp]
-      rw [← U.map_comp, hψ p q n hpq, Functor.map_units_smul]
-      change (p * q).negOnePow • _ = (q * p).negOnePow • _
-      rw [mul_comm q p]
-      congr 1
+      refine signed_uncurry_summand U _ _ _ _ _ _ _ (q * p).negOnePow hi
+        (by simpa only [mul_comm p q] using hψ p q n hpq) (hψ' q p n hqp) ?_
       dsimp only [φ', HomologicalComplex.comp_f]
       rw [Category.assoc, hχ p q n hqp]
       rfl
@@ -481,7 +489,10 @@ theorem native_forget_normalized_binary_models
       C.homComparison hC.1 (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj T)
       (DerivedCategory.Q.obj I) f
     simp only [Iso.app_hom, Iso.app_inv] at hunc
-    rw [hf] at hunc
+    have hunc' := (congrArg
+      (C.ordinaryClosed.transpose (F.obj (DerivedCategory.Q.obj P))
+        (F.obj (DerivedCategory.Q.obj T)) (F.obj (DerivedCategory.Q.obj I))).symm hf).symm.trans
+      hunc
     let ρ := nativeOrdinaryClosedTensorIso C.ordinaryClosed S
     have hmodel' : (model (V.obj T) (V.obj P) hUT).hom ≫
         DerivedCategory.Q.map (κ (V.obj T) (V.obj P)).hom =
@@ -508,7 +519,7 @@ theorem native_forget_normalized_binary_models
         (DerivedCategory.Q.map v.hom) (DerivedCategory.Q.map ψ')
         (model (V.obj T) (V.obj P) hUT).hom f' hloc hloc'
         (by simpa only [Functor.comp_map, Functor.map_comp] using
-          congrArg DerivedCategory.Q.map hchain') hunc
+          congrArg DerivedCategory.Q.map hchain') hunc'
     have hh := congrArg
       (fun z ↦ z ≫ DerivedCategory.Q.map (κ (V.obj T) (V.obj P)).hom) hmain
     simp only [Category.assoc, hmodel'] at hh
