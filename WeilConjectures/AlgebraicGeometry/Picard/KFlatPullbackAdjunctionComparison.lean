@@ -95,6 +95,34 @@ private theorem kFlat_pullback_adjunction_comparison_iso_inv
   simp [kFlat_pullback_adjunction_comparison_iso, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv]
 
+private theorem kFlat_pullback_adjunction_comparison_transpose
+    {S S' : Scheme.{u}} (g : S' ⟶ S)
+    {P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ}
+    {I : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ}
+    {α : P ⟶ ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
+      (.up ℤ)).obj I} :
+    (((Classical.choose
+      (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomotopyCategory
+        (.up ℤ)).homEquiv _ _)
+      (HomotopyCategory.quotient
+        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) (.up ℤ)).map
+        ((((Classical.choose
+          (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
+            (.up ℤ)).homEquiv _ _).symm α) =
+      (HomotopyCategory.quotient
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map α := by
+  rw [Adjunction.homEquiv_apply]
+  erw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  change (HomotopyCategory.quotient
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ)).map _ = _
+  rw [← Functor.map_comp]
+  exact congrArg _
+    (((Classical.choose
+      (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomologicalComplex
+        (.up ℤ)).homEquiv _ _).apply_symm_apply α
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
