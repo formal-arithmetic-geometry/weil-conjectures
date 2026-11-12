@@ -38,6 +38,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Keep tensor instances as local abbreviations during the representative computation.
 private theorem affinePerfectTensorRoof_aux
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
