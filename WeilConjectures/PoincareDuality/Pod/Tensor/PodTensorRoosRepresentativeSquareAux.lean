@@ -375,6 +375,20 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
     integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
     ObjectProperty.lift, ObjectProperty.ι_obj] at finish hc ⊢
-  exact finish.trans hc
+  have final := finish.trans hc
+  run_tac
+    let target ← Lean.Elab.Tactic.getMainTarget
+    let actual := (← Lean.Meta.getLocalDeclFromUserName `final).type
+    let rec diff (path : String) (a b : Lean.Expr) (depth : Nat) : Lean.MetaM Unit := do
+      if a == b then return
+      let a := a.consumeMData
+      let b := b.consumeMData
+      if depth == 0 || a.getAppFn != b.getAppFn || a.getAppNumArgs != b.getAppNumArgs then
+        Lean.logInfo m!"difference {path}: {a.getAppFn} / {b.getAppFn}"
+      else
+        for i in [:a.getAppNumArgs] do
+          diff (path ++ "." ++ toString i) a.getAppArgs[i]! b.getAppArgs[i]! (depth - 1)
+    diff "eq" actual target 15
+  exact final
 
 end WeilConjectures
