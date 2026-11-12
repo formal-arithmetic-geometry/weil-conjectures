@@ -219,8 +219,7 @@ lemma μ_prodMapUpperStarSndIso_hom_app (j : U ⟶ Y)
     Functor.Monoidal.μ_comp_hom_app_of_δ _ _ _ _
       (boundedConstructibleUpperStarComp_hom_app_tensor_δ ℓ
         prod.snd j),
-    tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom_assoc, Category.assoc,
-    Category.assoc]
+    tensorHom_comp_tensorHom_assoc]
 
 /-- The pullback `Lf^*` on bounded constructible complexes is compatible with the Koszul
 braidings, in terms of its tensor structure. -/
@@ -378,7 +377,8 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
           (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
             (prod.snd : X ⨯ U ⟶ U)).map (dualizingComplexUpperStarIso ℓ j).hom)) ≫
         exceptionalKunnethMap ℓ (Y := U) M := by
-    simp only [hα, exceptionalKunnethSourceRestrictionIso, Iso.trans_hom, Iso.symm_hom, Functor.Monoidal.μIso_inv, tensorIso_hom,
+    rw [hα, exceptionalKunnethSourceRestrictionIso]
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.Monoidal.μIso_inv, tensorIso_hom,
       Iso.app_hom, Functor.mapIso_hom, Category.assoc, Functor.Monoidal.μ_δ_assoc]
   have key := map_curry_comp
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (prod.map (𝟙 X) j))
@@ -400,7 +400,7 @@ theorem map_kunnethVerdierMap_comp_kunnethVerdierTargetRestrictionIso_hom
       (exceptionalKunnethMap ℓ (Y := U) M) hα' N)
   simp only [kunnethVerdierTargetRestrictionIso_hom, kunnethVerdierSourceRestrictionIso_hom,
     verdierDualUpperStarIso_hom, kunnethVerdierMap_eq_curry_swapEvPairing, Category.assoc]
-  exact key
+  simpa only [Category.assoc] using key
 
 /-- **Restriction of the Künneth–Verdier map to `X ⨯ U`**: if the exceptional Künneth map is
 compatible with restriction, the restriction `L(𝟙 × j)^* κ^Y_{M,N}` is an isomorphism if and only
