@@ -743,6 +743,7 @@ private theorem native_restriction_goal_proof
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
   let P₀ := (F.mapHomologicalComplex (.up ℤ)).obj P
   let T₀ := (F.mapHomologicalComplex (.up ℤ)).obj T
+  let μR := R.mapCochainComplexμIso P₀ T₀
   have hmodelsZ := native_forget_normalized_binary_models k₀ l Z P T hP hT dZ
   let cZ := hmodelsZ.choose
   have hcZ := hmodelsZ.choose_spec.1
@@ -832,7 +833,7 @@ private theorem native_restriction_goal_proof
     conv_lhs =>
       arg 1
       rw [hs]
-    apply (cancel_mono ((R.mapCochainComplexμIso P₀ T₀).hom.f n)).1
+    apply (cancel_mono (μR.hom.f n)).1
     simp only [Category.assoc]
     conv_rhs =>
       arg 1
@@ -842,11 +843,11 @@ private theorem native_restriction_goal_proof
       arg 2
       arg 2
       arg 1
-      change (R.mapCochainComplexμIso P₀ T₀).inv.f n
+      change μR.inv.f n
     have hcancel := congrArg
       (fun f : (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ⟶
         (R.mapHomologicalComplex (.up ℤ)).obj (P₀ ⊗ T₀) ↦ f.f n)
-      (Iso.inv_hom_id (R.mapCochainComplexμIso P₀ T₀))
+      (Iso.inv_hom_id μR)
     simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f] at hcancel
     conv_rhs =>
       arg 2
@@ -890,7 +891,7 @@ private theorem native_restriction_goal_proof
     rfl
   dsimp only [t₂, t₁, t₀, r₄, r₂, r₁, r₀, r₃, ztotal] at hchain
   simp only [Category.assoc] at hchain
-  obtain ⟨mU, hmU', hsquare⟩ :=
+  have hdiagram :=
     final_total_diagram (Lα) FU F R e
       (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l U)
       (nativeDerivedClosedComparison k₀ l U).ordinaryClosed.tensor
@@ -900,8 +901,7 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
       cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) hchain mZ rfl
-  refine ⟨mZ, mU, hmZ', hmU', ?_⟩
-  exact hsquare
+  exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
 set_option profiler true in
 -- Preserve the named restriction functor when specializing the Frobenius comparison.
