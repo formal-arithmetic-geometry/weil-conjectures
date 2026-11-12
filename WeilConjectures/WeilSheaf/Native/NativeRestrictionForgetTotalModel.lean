@@ -792,7 +792,7 @@ private theorem native_restriction_chain
   simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
   conv_lhs =>
     arg 2
-    rw [hι]
+    erw [hι]
   have hsheaf := ordinary_sheaf_restriction_tensor k₀ l j
     (P.X p).carrier (T.X q).carrier
   have hfinal := congrArg
@@ -933,11 +933,8 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
       cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) (by
-        change _ ≫ cU.hom ≫ (MonoidalCategory.tensor _).map
-            (Prod.mkHom (a.hom.app P) (a.hom.app T)) = a.hom.app ztotal ≫ _
-        rw [ha, ha, ha]
-        change _ ≫ cU.hom ≫ (MonoidalCategory.tensor _).map (𝟙 _) = 𝟙 _ ≫ _
-        simpa only [Functor.map_id, Category.comp_id, Category.id_comp] using hchain) mZ rfl
+        simpa only [ha, ← prod_id, Functor.map_id, Category.comp_id, Category.id_comp]
+          using hchain) mZ rfl
   exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
 set_option profiler true in
