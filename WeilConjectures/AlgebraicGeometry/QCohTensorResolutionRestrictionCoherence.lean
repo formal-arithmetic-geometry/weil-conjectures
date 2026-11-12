@@ -49,7 +49,6 @@ theorem tensorResolution_presheaf_map_tmul {X : Scheme.{u}} (F G : X.Modules)
   exact ht
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
 -- Tensor-resolution comparisons require substantial definitional reduction.
 /-- The normalized tensor restriction comparisons respect successive affine restrictions. -/
 theorem tensorResolutionChartRestriction_tensor_inv (Y : Scheme.{u})
@@ -74,8 +73,11 @@ theorem tensorResolutionChartRestriction_tensor_inv (Y : Scheme.{u})
     (Spec.map (Y.presheaf.map (homOfLE h).op))
     (F.restrict U.2.fromSpec) (G.restrict U.2.fromSpec) W s t]
   erw [tensorResolutionRestrictionTensor_inv_tmul U.2.fromSpec F G
-    ((Spec.map (Y.presheaf.map (homOfLE h).op)) ''ᵁ W) s t]
-  erw [tensorResolution_presheaf_map_tmul F G, tensorResolution_presheaf_map_tmul F G]
-  rfl
+    ((Spec.map (Y.presheaf.map (homOfLE h).op)) ''ᵁ W)
+    (((F.restrict U.2.fromSpec).restrictAppIso
+      (Spec.map (Y.presheaf.map (homOfLE h).op)) W).hom s)
+    (((G.restrict U.2.fromSpec).restrictAppIso
+      (Spec.map (Y.presheaf.map (homOfLE h).op)) W).hom t)]
+  simp only [tensorResolution_presheaf_map_tmul]
 
 end AlgebraicGeometry
