@@ -244,7 +244,8 @@ degree `1`, write a class as `∑ⱼ ψⱼ(xⱼ)` with `xⱼ ∈ H¹(X₀, ((h�
 (`AlgebraicGeometry.Etale.surjective_cohomologyMap_one_lowerStar_constantSheaf`),
 and its image in `H¹(X, I)` vanishes since the underlying abelian sheaf of `I` is acyclic
 (`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
-(blueprint: prop-weil-pbc-p1-acyclicity)
+(blueprint: prop-weil-pbc-p1-acyclicity, `lemma-acyclicity-closed-fibre`,
+`lemma-acyclicity-closed-fibre--1`)
 -/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
