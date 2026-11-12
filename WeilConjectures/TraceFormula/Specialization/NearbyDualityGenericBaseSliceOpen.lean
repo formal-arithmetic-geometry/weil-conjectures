@@ -272,7 +272,6 @@ noncomputable def tateTwistZeroShiftUpperStarIso (f : Y ⟶ X) (n : ℤ) :
 
 variable {ℓ} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : Y ⟶ X} {f' : Y' ⟶ X'}
 
-set_option maxHeartbeats 1000000 in
 -- the twists `ℚ̄_ℓ(0)` are the units only up to deep definitional unfoldings
 /-- The unit law of the pullback exchange
 (`NearbyCyclesModel.Hom.map_unit_comp_pullbackExchange_app`) for the specialization maps of
