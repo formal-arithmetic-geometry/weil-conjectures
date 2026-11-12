@@ -74,7 +74,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
-private theorem normalizationExtendScalars_preservesKFlatQuasiIso
+private instance normalizationExtendScalars_preservesKFlatQuasiIso
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     (ModuleCat.extendScalars.{u, u, u} f).PreservesKFlatQuasiIso := by
   constructor

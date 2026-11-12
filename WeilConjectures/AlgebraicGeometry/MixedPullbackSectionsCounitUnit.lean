@@ -36,11 +36,13 @@ private theorem mixedSections_unit_naturality
     (hunit : η ≫ F.map ε = Q.map a ≫ β)
     (hL : s.app M' ≫ H.map β ≫ L.hom.app Y = u) :
     s.app M ≫ H.map η ≫ L.hom.app X ≫ R.map (J.map ε) = H₀.map a ≫ u := by
-  rw [← L.hom.naturality ε]
+  erw [← L.hom.naturality ε]
   change s.app M ≫ H.map η ≫ H.map (F.map ε) ≫ L.hom.app Y = _
-  rw [← Functor.map_comp_assoc, hunit, Functor.map_comp, Category.assoc,
-    ← s.naturality_assoc a]
-  exact congrArg (fun f ↦ H₀.map a ≫ f) hL
+  rw [← Functor.map_comp_assoc, hunit, Functor.map_comp]
+  simp only [Category.assoc]
+  erw [← s.naturality_assoc a]
+  simp only [Functor.comp_map]
+  rw [hL]
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -58,6 +60,67 @@ private theorem sectionsComplexUnit_eq (S : Scheme.{u})
     Quotient.lift.isLift_inv]
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.id_comp, Category.id_comp, Category.comp_id]
+
+private theorem mixedSections_leray_unit {S T : Scheme.{u}} (g : T ⟶ S)
+    [(RingedSpace.globalSectionsFunctor S.toRingedSpace).Additive]
+    [(RingedSpace.globalSectionsFunctor T.toRingedSpace).Additive]
+    (N : HomotopyCategory (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (.up ℤ)) :
+    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace
+    let J := RingedSpace.globalSectionsFunctor T.toRingedSpace
+    let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
+    let R := ModuleCat.restrictScalars.{u} g.appTop.hom
+    let s := H.rightDerivedFunctorUnit
+    let t := J.rightDerivedFunctorUnit
+    let β := F.rightDerivedFunctorUnit
+    let L := mixedGlobalSectionsDirectImageIso g
+    s.app ((F.mapHomotopyCategory (.up ℤ)).obj N) ≫
+        (schemeDerivedGlobalSections S).map (β.app N) ≫ L.hom.app _ =
+      R.mapDerivedCategoryFactorsh.inv.app ((J.mapHomotopyCategory (.up ℤ)).obj N) ≫
+        (schemeGlobalScalarRestriction g).map (t.app N) := by
+  intro H J F R s t β L
+  let c₀ := Classical.choose (exists_mixedGlobalSectionsDirectImageIso g)
+  have hc := Classical.choose_spec
+    (Classical.choose_spec (exists_mixedGlobalSectionsDirectImageIso g))
+  have hc₀ : c₀ = Iso.refl (F ⋙ H) := by
+    apply Iso.ext
+    ext A x
+    exact hc.1 A x
+  have hL := hc.2 N
+  change s.app ((F.mapHomotopyCategory (.up ℤ)).obj N) ≫
+      (schemeDerivedGlobalSections S).map (β.app N) ≫ L.hom.app _ = _ at hL
+  rw [show Classical.choose (exists_mixedGlobalSectionsDirectImageIso g) =
+      Iso.refl (F ⋙ H) from hc₀] at hL
+  change _ = DerivedCategory.Qh.map
+      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ H)) (.up ℤ)).hom.app N ≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ H)) (.up ℤ)).inv.app N) ≫
+      R.mapDerivedCategoryFactorsh.inv.app ((J.mapHomotopyCategory (.up ℤ)).obj N) ≫
+      (schemeGlobalScalarRestriction g).map (t.app N) at hL
+  rw [Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hL
+  exact hL
+
+private theorem normalizationRestriction_factors_inv
+    {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)
+    (E : CochainComplex (ModuleCat.{u} B) ℤ) :
+    let R := ModuleCat.restrictScalars.{u} f
+    R.mapDerivedCategoryFactorsh.inv.app ((HomotopyCategory.quotient _ (.up ℤ)).obj E) =
+      R.mapDerivedCategoryFactors.inv.app E := by
+  intro R
+  have hfac := R.mapDerivedCategoryFactorsh_hom_app E
+  simp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv] at hfac
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id, Category.comp_id] at hfac
+  have hR : R.mapDerivedCategoryFactorsh.inv.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj E) =
+      R.mapDerivedCategoryFactors.inv.app E := by
+    apply (cancel_mono (R.mapDerivedCategoryFactors.hom.app E)).1
+    erw [← hfac]
+    erw [Iso.inv_hom_id_app]
+    erw [hfac, Iso.inv_hom_id_app]
+    rfl
+  exact hR
 
 set_option profiler true in
 -- Comparing the scheme and sheaf presentations of module categories needs extra reduction.
@@ -169,24 +232,7 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
       Category.id_comp, Category.comp_id, Category.comp_id]
   erw [sectionsComplexUnit_eq, sectionsComplexUnit_eq]
   rw [he]
-  let c₀ := Classical.choose (exists_mixedGlobalSectionsDirectImageIso g)
-  have hc := Classical.choose_spec
-    (Classical.choose_spec (exists_mixedGlobalSectionsDirectImageIso g))
-  have hc₀ : c₀ = Iso.refl (F ⋙ H) := by
-    apply Iso.ext
-    ext A x
-    exact hc.1 A x
-  have hL := hc.2 N
-  change s.app ((F.mapHomotopyCategory (.up ℤ)).obj N) ≫
-      (schemeDerivedGlobalSections S).map (β.app N) ≫ L.hom.app _ = _ at hL
-  rw [show Classical.choose (exists_mixedGlobalSectionsDirectImageIso g) =
-      Iso.refl (F ⋙ H) from hc₀] at hL
-  change _ = DerivedCategory.Qh.map
-      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ H)) (.up ℤ)).hom.app N ≫
-        (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ H)) (.up ℤ)).inv.app N) ≫
-      R.mapDerivedCategoryFactorsh.inv.app ((J.mapHomotopyCategory (.up ℤ)).obj N) ≫
-      (schemeGlobalScalarRestriction g).map (t.app N) at hL
-  rw [Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hL
+  have hL := mixedSections_leray_unit g N
   change (schemeHomPullbackAdjunction.{u, w} g).homEquiv
       (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj N)
       (ε.app M ≫ DerivedCategory.Qh.map (𝟙 N)) =
@@ -218,21 +264,7 @@ theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)
     rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
     rw [Functor.mapHomotopyCategory_map]
     congr 1
-  have hfac := R.mapDerivedCategoryFactorsh_hom_app E
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
-    Quotient.lift.isLift_inv] at hfac
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.comp_id] at hfac
-  have hR : R.mapDerivedCategoryFactorsh.inv.app
-      ((J.mapHomotopyCategory (.up ℤ)).obj N) =
-      R.mapDerivedCategoryFactors.inv.app E := by
-    apply (cancel_mono (R.mapDerivedCategoryFactors.hom.app E)).1
-    erw [← hfac]
-    erw [Iso.inv_hom_id_app]
-    erw [hfac, Iso.inv_hom_id_app]
-    rfl
+  have hR := normalizationRestriction_factors_inv g.appTop.hom E
   erw [ha, hR] at hh
   exact hh
 
