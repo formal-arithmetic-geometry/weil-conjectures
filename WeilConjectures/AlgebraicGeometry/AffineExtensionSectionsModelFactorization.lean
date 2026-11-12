@@ -28,11 +28,36 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry
+
+-- Check the categorical calculation independently of the scheme-module presentations.
+private theorem model_factorization_of_units
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    (qC : C ⥤ C') (qD : D ⥤ D') (U₀ : D ⥤ C) {L : C' ⥤ D'} {U : D' ⥤ C'}
+    (adj : L ⊣ U) (τ : U₀ ⋙ qC ⟶ qD ⋙ U)
+    {X : C} {V Y : D} {Z : C'} {W : D'}
+    (a : L.obj Z ≅ qD.obj V) (b : W ≅ qD.obj Y) (s : Z ⟶ qC.obj X)
+    (η : X ⟶ U₀.obj V) (ψ : X ⟶ U₀.obj Y) (f : V ⟶ Y) (φ : Z ⟶ U.obj W)
+    (ha : adj.unit.app Z ≫ U.map a.hom = s ≫ qC.map η ≫ τ.app V)
+    (hb : φ ≫ U.map b.hom = s ≫ qC.map ψ ≫ τ.app Y)
+    (hc : η ≫ U₀.map f = ψ) :
+    (adj.homEquiv _ _).symm φ ≫ b.hom = a.hom ≫ qD.map f := by
+  apply (adj.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply,
+    Adjunction.homEquiv_unit, hb]
+  symm
+  calc
+    _ = (adj.unit.app Z ≫ U.map a.hom) ≫ U.map (qD.map f) := by
+      rw [Functor.map_comp, Category.assoc]
+    _ = (s ≫ qC.map η ≫ τ.app V) ≫ U.map (qD.map f) := by rw [ha]
+    _ = s ≫ qC.map η ≫ qC.map (U₀.map f) ≫ τ.app Y := by
+      simpa only [Category.assoc, Functor.comp_map] using
+        congrArg (fun z ↦ s ≫ qC.map η ≫ z) (τ.naturality f).symm
+    _ = s ≫ qC.map ψ ≫ τ.app Y := by rw [← qC.map_comp_assoc, hc]
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option maxHeartbeats 500000 in
 -- Affine functor identifications need to unfold the scheme module carrier.
 /-- Localization of the normalized underived model comparison computes the derived mate.
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
@@ -149,7 +174,6 @@ theorem exists_affineExtensionSections_model_factorization
       (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
   let K := T.obj M
   let S := affineGlobalSections (𝟙 (Spec R))
-  let E := ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)
   let U := ModuleCat.restrictScalars.{u} (affineBaseRingMap g)
   let P : SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace) :=
@@ -171,55 +195,11 @@ theorem exists_affineExtensionSections_model_factorization
             ((P.mapHomologicalComplex (.up ℤ)).obj K) := by
     ext i : 1
     exact hc (M.X i)
-  let Y := ((affineGlobalSections (𝟙 (Spec B))).mapHomologicalComplex (.up ℤ)).obj
-    ((P.mapHomologicalComplex (.up ℤ)).obj K)
   let η := ((ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).mapHomologicalComplex
     (.up ℤ)).unit.app X
-  have hnat : U.mapDerivedCategoryFactors.inv.app
-        ((E.mapHomologicalComplex (.up ℤ)).obj X) ≫
-      U.mapDerivedCategory.map (DerivedCategory.Q.map f) =
-      DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map f) ≫
-        U.mapDerivedCategoryFactors.inv.app Y := by
-    exact (U.mapDerivedCategoryFactors.inv.naturality f).symm
-  have hright : (affineDerivedExtensionAdjunction g).unit.app
-      ((affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)) ≫
-      U.mapDerivedCategory.map (a.hom ≫ DerivedCategory.Q.map f) =
-      s.hom ≫ DerivedCategory.Q.map
-        ((S.mapHomologicalComplex (.up ℤ)).map
-            ((adjP.mapHomologicalComplex (.up ℤ)).unit.app K) ≫
-          (v.hom.mapHomologicalComplex (.up ℤ)).app
-            ((P.mapHomologicalComplex (.up ℤ)).obj K)) ≫
-        U.mapDerivedCategoryFactors.inv.app Y := by
-    calc
-      _ = ((affineDerivedExtensionAdjunction g).unit.app
-            ((affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)) ≫
-          U.mapDerivedCategory.map a.hom) ≫
-            U.mapDerivedCategory.map (DerivedCategory.Q.map f) := by
-        rw [Functor.map_comp, Category.assoc]
-      _ = (s.hom ≫ DerivedCategory.Q.map η ≫
-          U.mapDerivedCategoryFactors.inv.app
-            ((E.mapHomologicalComplex (.up ℤ)).obj X)) ≫
-            U.mapDerivedCategory.map (DerivedCategory.Q.map f) :=
-        congrArg (fun z ↦ z ≫ U.mapDerivedCategory.map (DerivedCategory.Q.map f)) ha
-      _ = s.hom ≫ DerivedCategory.Q.map η ≫
-          DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map f) ≫
-            U.mapDerivedCategoryFactors.inv.app Y := by
-        simp only [Category.assoc]
-        exact congrArg (fun z ↦ s.hom ≫ DerivedCategory.Q.map η ≫ z) hnat
-      _ = _ := by
-        rw [← DerivedCategory.Q.map_comp_assoc]
-        exact congrArg (fun z ↦ s.hom ≫ DerivedCategory.Q.map z ≫
-          U.mapDerivedCategoryFactors.inv.app Y) hchain
-  apply ((affineDerivedExtensionAdjunction g).homEquiv _ _).injective
-  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply,
-    Adjunction.homEquiv_unit]
-  change ((affineDerivedGlobalSections (𝟙 (Spec R))).map
-      ((canonicalPullbackAdjunction g).unit.app (DerivedCategory.Q.obj K)) ≫
-    r.hom.app ((derivedPullback g).obj (DerivedCategory.Q.obj K))) ≫
-    U.mapDerivedCategory.map b.hom =
-    (affineDerivedExtensionAdjunction g).unit.app
-      ((affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)) ≫
-    U.mapDerivedCategory.map (a.hom ≫ DerivedCategory.Q.map f)
-  exact (Category.assoc _ _ _).trans (hb.trans hright.symm)
+  exact model_factorization_of_units DerivedCategory.Q DerivedCategory.Q
+    (U.mapHomologicalComplex (.up ℤ)) (affineDerivedExtensionAdjunction g)
+    U.mapDerivedCategoryFactors.inv a b s.hom η _ f _ ha
+    ((Category.assoc _ _ _).trans hb) hchain
 
 end AlgebraicGeometry
