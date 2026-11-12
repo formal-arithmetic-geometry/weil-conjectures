@@ -139,11 +139,12 @@ private theorem nativeRingedAssociatorComponent_normalize
   let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.R
   let := SheafOfModules.monoidalCategory D.b.R
   let E := D.b.native.functor.mapHomologicalComplex (.up ℤ)
+  dsimp only
   intro hsquare
   have hs : E.map a ≫ (nativeRingedTripleRight D.b T D.adj D.A P Q N).hom =
       (nativeRingedTripleLeft D.b T D.adj D.A P Q N).hom ≫
         (α_ (E.obj P) (E.obj Q) (E.obj N)).hom :=
-    HomologicalComplex.hom_ext hsquare
+    HomologicalComplex.hom_ext _ _ hsquare
   simpa only [nativeRingedTripleLeft, nativeRingedTripleRight, Iso.trans_hom,
     Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, coefficientTotalTensor_map_tensorHom,
     id_tensorHom, tensorHom_id, Category.assoc] using hs
@@ -175,9 +176,10 @@ theorem nativeChainForgetComponent_transport
     (n p q : ℤ) (h : p + q = n) :
     nativeChainForgetComponent D P Q N n p q h := by
   classical
-  let : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
+  let mO : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
     Mod.monoidalCategoryCochainComplex
+  let := mO.toMonoidalCategoryStruct
   let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.R
   let := SheafOfModules.monoidalCategory D.b.R
   let := SheafOfModules.isMonoidal_W_independentCoefficients D.b.Q
