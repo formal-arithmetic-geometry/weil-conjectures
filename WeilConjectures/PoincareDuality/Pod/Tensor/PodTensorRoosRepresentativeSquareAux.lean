@@ -356,6 +356,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   dsimp only [podReindexingTensorFrame] at k
   let fP := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj)
   let fQ := (podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)
+  -- Focus the tower rewrite so its derived endpoints stay folded.
   conv at hs =>
     rhs
     arg 2
@@ -377,16 +378,6 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
     scalarReductionSourceDerived, integralTowerHasDerivedCategory,
     integralOperationsCommHasDerivedCategory] at finish hc ⊢
   have final := finish.trans hc
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let target := (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)).consumeMData
-    let actual :=
-      (← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type).consumeMData
-    Lean.logInfo m!"remaining initially: {← Lean.getRemainingHeartbeats}"
-    for i in ([0, 2, 1] : List Nat) do
-      Lean.logInfo m!"comparing equality argument {i}"
-      let matched ← Lean.Meta.isDefEq actual.getAppArgs[i]! target.getAppArgs[i]!
-      Lean.logInfo m!"comparison {i}: {matched}; remaining: {← Lean.getRemainingHeartbeats}"
-    Lean.logInfo m!"full comparison: {← Lean.Meta.isDefEq actual target}"
   exact final
 
 end WeilConjectures
