@@ -187,7 +187,7 @@ theorem nativeChainForgetComponent_transport
       hτ (nativeTensorComplex T)
       (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
       (hb := ?_) (hμ := ?_) (hν := ?_) P Q N
-      (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom
+      (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ?_
     · intro P Q
       exact native_weil_tensor_ringed_binary_chain_square D d o r P Q
     · exact hμ
