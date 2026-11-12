@@ -102,21 +102,15 @@ theorem localized_complex_qc_homology_extension
       (SheafOfModules.isQuasicoherent U.toScheme.ringCatSheaf).IsClosedUnderIsomorphisms
   let : P.IsClosedUnderKernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
-    let := hM
-    let := hN
     exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
-      (Scheme.Modules.isQuasicoherent_kernel f)⟩
+      (@Scheme.Modules.isQuasicoherent_kernel U.toScheme M N hM hN f)⟩
   let : P.IsClosedUnderCokernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
-    let := hM
-    let := hN
     exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
-      (Scheme.Modules.isQuasicoherent_cokernel f)⟩
+      (@Scheme.Modules.isQuasicoherent_cokernel U.toScheme M N hM hN f)⟩
   let : P.IsClosedUnderExtensions := ⟨by
     intro T hT h₁ h₃
-    let := h₁
-    let := h₃
-    exact Scheme.Modules.isQuasicoherent_of_shortExact (S := T) hT⟩
+    exact @Scheme.Modules.isQuasicoherent_of_shortExact U.toScheme T hT h₁ h₃⟩
   have hqc : P (F.obj (S.X₂.homology n)) :=
     mapped_homology_mem_of_shortExact F P S hS
       (fun i ↦ qc_overEquiv X U _ (h₁ i)) (fun i ↦ qc_overEquiv X U _ (h₃ i)) n
