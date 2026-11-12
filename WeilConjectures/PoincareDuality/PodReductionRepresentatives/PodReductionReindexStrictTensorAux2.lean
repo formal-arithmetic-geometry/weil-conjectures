@@ -86,6 +86,22 @@ private theorem reductionEvaluationComplex_inv_unitSection (W : Scheme.{u}) (n :
     (pullbackTensorReductionEvaluation l E W n) (C.X k) U _).trans
       (scalarUnitSection_eq l E W n (C.X k) U z).symm
 
+private theorem evaluationTensorIso_inv_apply (W : Scheme.{u}) (n : ℕ)
+    (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (p q k : ℤ) (hpq : p + q = k) (U : W.ProEtᵒᵖ)
+    (x : ((coefficientSequenceEvaluation l E W n).obj (P.X p)).val.obj U)
+    (y : ((coefficientSequenceEvaluation l E W n).obj (Q.X q)).val.obj U) :
+    ((coefficientEvaluationTensorIso l E W n P Q).inv.f k).val.app U
+      (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+        (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q)
+        p q k hpq U x y) =
+      coefficientTensorGenerator.{u, u + 1, u}
+        (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
+        P Q p q k hpq (op (n, U.unop)) x y :=
+  coefficientEvaluationTensorIso_inv_generator l E W n P Q p q k hpq U x y
+
 set_option profiler true in
 private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (p q k : ℤ)
@@ -105,7 +121,7 @@ private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
         (unrestrictedIntegralTensorSection l E W n _ (op V) 1
           (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)
             (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq (op V) x y))) := by
-  symm
+  apply Eq.symm
   let G := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)
   let T := (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)
@@ -129,7 +145,7 @@ private theorem tensorReductionFiniteComponent_generator (W : Scheme.{u})
     rhs
     simp only [e, reductionEvaluationComplex_hom_f, scalarUnitSection_eq]
   trace "PH199: tensor map prepared"
-  have hi := coefficientEvaluationTensorIso_inv_generator l E W n
+  have hi := evaluationTensorIso_inv_apply l E W n
     (G.obj P) (G.obj Q) p q k hpq (op V)
     (((pullbackTensorReductionEvaluation l E W n).hom.app (P.X p)).val.app (op V)
       (unrestrictedIntegralTensorSection l E W n _ (op V) 1 x))
