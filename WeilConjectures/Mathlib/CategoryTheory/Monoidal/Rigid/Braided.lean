@@ -217,6 +217,13 @@ theorem IsDualizable.ihom_unit {X : C} (hX : IsDualizable X) :
   let := exactPairingCongrLeft (Y := X) (ihomUnitIsoRightDual X)
   exact ⟨⟨X⟩⟩
 
+/-- In a braided monoidal closed category, a dualizable object `X` is paired with its internal
+dual `[X, 𝟙_ C]`: the right dual of `X` can be taken to be `[X, 𝟙_ C]`. -/
+theorem IsDualizable.nonempty_exactPairing_ihom_unit {X : C} (hX : IsDualizable X) :
+    Nonempty (ExactPairing X ((ihom X).obj (𝟙_ C))) := by
+  obtain ⟨_⟩ := hX
+  exact ⟨exactPairingCongrRight (ihomUnitIsoRightDual X)⟩
+
 namespace MonoidalClosed
 
 /-- The canonical double-dual map `X ⟶ [[X, W], W]` relative to an object `W` of a braided

@@ -25,6 +25,13 @@ scalar by which it acts on `H⁰(A) = A`.
 - `DerivedCategory.unitEndScalar`: the degree-`0` scalar `End_{D(A)}(A) ⟶ A`.
 - `DerivedCategory.IsPerfect.categoricalTrace`: the categorical trace `tr_A(v | P) ∈ A`.
 
+## Main statements
+
+- `DerivedCategory.IsPerfect.nonempty_exactPairing_ihom_unit`: `P^∨ = RHom_A(P, A)` is a right
+  dual of a perfect complex `P`.
+- `DerivedCategory.IsPerfect.categoricalTrace_eq_of_exactPairing_ihom`: the categorical trace
+  computed with the coevaluation and evaluation of a dual pair `(P, RHom_A(P, A))`.
+
 ## Implementation notes
 
 `D(A)` only carries a braiding up to `Nonempty` (`DerivedCategory.nonempty_braidedCategory`), so
@@ -79,7 +86,8 @@ lemma unitEndScalar_id : unitEndScalar R (𝟙 _) = 1 := by
 
 variable {R}
 
-/-- Blueprint `def-trf-categorical-trace`: Perfect complex and its categorical trace.
+/-- Blueprint `definition-categorical-trace` (`def-trf-categorical-trace`): Perfect complex and
+its categorical trace.
 
 For a perfect complex `P ∈ D^b_fin(A)` and an endomorphism `v : P ⟶ P`, the categorical trace
 `tr_A(v | P) = ev_P ∘ sym ∘ (v ⊗ᴸ 1) ∘ coev_P ∈ End_{D(A)}(A)`
@@ -90,5 +98,30 @@ noncomputable def IsPerfect.categoricalTrace [BraidedCategory (DerivedCategory (
     {P : DerivedCategory (ModuleCat.{u} R)} (hP : P.IsPerfect) (v : P ⟶ P) : R :=
   letI : HasRightDual P := hP.isDualizable.some
   unitEndScalar R (MonoidalCategory.trace v)
+
+/-- Blueprint `definition-categorical-trace--1`: for a perfect complex `P ∈ Perf(A)`, the
+derived dual `P^∨ = RHom_A(P, A)` is a right dual of `P`: `P` and `P^∨` form an exact pairing
+in `D(A)`, with a coevaluation `A ⟶ P ⊗ᴸ P^∨` and an evaluation `P^∨ ⊗ᴸ P ⟶ A`. -/
+theorem IsPerfect.nonempty_exactPairing_ihom_unit {P : DerivedCategory (ModuleCat.{u} R)}
+    (hP : P.IsPerfect) : Nonempty (ExactPairing P ((ihom P).obj (𝟙_ _))) := by
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  exact hP.isDualizable.nonempty_exactPairing_ihom_unit
+
+/-- Blueprint `definition-categorical-trace--2`: the categorical trace of an endomorphism
+`v : P ⟶ P` of a perfect complex is the scalar
+```
+A --coev--> P ⊗ᴸ P^∨ --v ⊗ᴸ 1--> P ⊗ᴸ P^∨ --sym--> P^∨ ⊗ᴸ P --ev--> A
+```
+for the coevaluation and evaluation of any dual pair `(P, P^∨)` with `P^∨ = RHom_A(P, A)`
+(which exists by `DerivedCategory.IsPerfect.nonempty_exactPairing_ihom_unit`), read as an
+element of `A`. -/
+theorem IsPerfect.categoricalTrace_eq_of_exactPairing_ihom
+    [BraidedCategory (DerivedCategory (ModuleCat.{u} R))] {P : DerivedCategory (ModuleCat.{u} R)}
+    (hP : P.IsPerfect) [ExactPairing P ((ihom P).obj (𝟙_ _))] (v : P ⟶ P) :
+    hP.categoricalTrace v = unitEndScalar R (η_ P ((ihom P).obj (𝟙_ _)) ≫
+      v ▷ (ihom P).obj (𝟙_ _) ≫ (β_ P ((ihom P).obj (𝟙_ _))).hom ≫
+        ε_ P ((ihom P).obj (𝟙_ _))) := by
+  let : HasRightDual P := hP.isDualizable.some
+  exact congrArg (unitEndScalar R) (trace_eq_of_exactPairing _ v)
 
 end DerivedCategory

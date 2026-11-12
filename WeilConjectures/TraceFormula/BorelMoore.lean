@@ -54,7 +54,7 @@ variable {T T' : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact 
   (h : T ⟶ T') [IsProper h.left]
 
 /-- The *pushforward* `h_* α` of a Borel–Moore section `α` along a proper morphism `h`
-(blueprint `def-trf-borel-moore-pushforward`):
+(blueprint `definition-pushforward-correspondence--2`, `def-trf-borel-moore-pushforward`):
 ```
 ℚ̄_ℓ,T' ⟶ Rh_* Lh^* ℚ̄_ℓ,T' ≅ Rh_* ℚ̄_ℓ,T --Rh_* α--> Rh_* ω_T ≅ Rh_! ω_T ≅ Rh_! Rh^! ω_T'
   ⟶ ω_T'.

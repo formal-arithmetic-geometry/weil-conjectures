@@ -189,7 +189,8 @@ lemma hom_ext {W : Over (Spec (.of k))} {t t' : W ⟶ F.F} (h : t ≫ F.ι = t' 
 end FixedLocus
 
 /-- A *proper pushforward diagram* `(f, g) : (C, c) ⟶ (D, b)` of an endocorrespondence `c` of
-`(X, K)` to a scheme `Y` (blueprint `def-trf-coefficient-pushforward`): a proper morphism
+`(X, K)` to a scheme `Y` (blueprint `definition-pushforward-correspondence--1`,
+`def-trf-coefficient-pushforward`): a proper morphism
 `f : X ⟶ Y`, a separated `k`-scheme of finite type `D` with morphisms `b₁, b₂ : D ⟶ Y`, and a
 proper morphism `g : C ⟶ D` with `g ≫ bᵢ = cᵢ ≫ f`. No cartesian condition is imposed on the
 leg squares. -/
@@ -223,7 +224,8 @@ noncomputable abbrev coeff : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ 
   (boundedConstructibleLowerStar ℓ P.f).obj K
 
 /-- The *ordinary half* `γ : Lb₂^* K' ⟶ Rg_* Lc₂^* K` of the coefficient pushforward (blueprint
-`def-trf-coefficient-pushforward`, item 1):
+`definition-pushforward-correspondence--1`, the map `α`; `def-trf-coefficient-pushforward`,
+item 1):
 ```
 Lb₂^* K' --η_g--> Rg_* Lg^* Lb₂^* K' ≅ Rg_* L(g ≫ b₂)^* K' = Rg_* L(c₂ ≫ f)^* K'
   ≅ Rg_* Lc₂^* Lf^* Rf_* K --Rg_* Lc₂^* ε_f--> Rg_* Lc₂^* K.
@@ -244,7 +246,8 @@ noncomputable def pushforwardCoeffUnit :
             P.f).counit.app K))
 
 /-- The *exceptional half* `δ : Rg_* Rc₁^! K ⟶ Rb₁^! K'` of the coefficient pushforward
-(blueprint `def-trf-coefficient-pushforward`, item 2): the adjoint for `Rb₁_! ⊣ Rb₁^!` of
+(blueprint `definition-pushforward-correspondence--1`, the map `β`;
+`def-trf-coefficient-pushforward`, item 2): the adjoint for `Rb₁_! ⊣ Rb₁^!` of
 ```
 Rb₁_! Rg_* Rc₁^! K ≅ Rb₁_! Rg_! Rc₁^! K ≅ R(g ≫ b₁)_! Rc₁^! K = R(c₁ ≫ f)_! Rc₁^! K
   ≅ Rf_! Rc₁_! Rc₁^! K ≅ Rf_* Rc₁_! Rc₁^! K --Rf_* ε_{c₁}--> Rf_* K,
@@ -260,7 +263,7 @@ noncomputable def pushforwardCoeffCounit :
 
 /-- The *coefficient pushforward* `[f, g]_! u = δ ∘ Rg_* u ∘ γ : Lb₂^* K' ⟶ Rb₁^! K'` of the
 coefficient map of `c` along a proper pushforward diagram (blueprint
-`def-trf-coefficient-pushforward`, item 3). -/
+`definition-pushforward-correspondence--1`, `def-trf-coefficient-pushforward`, item 3). -/
 noncomputable def pushforwardCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ P.b₂).obj P.coeff ⟶
       (boundedConstructibleUpperShriek ℓ P.b₁).obj P.coeff :=
@@ -269,7 +272,8 @@ noncomputable def pushforwardCoeff :
     P.pushforwardCoeffCounit
 
 /-- The *proper pushforward* `(D, b₁, b₂, [f, g]_! u)` of the correspondence `c`, a
-correspondence of `(Y, Rf_* K)` (blueprint `def-trf-coefficient-pushforward`). -/
+correspondence of `(Y, Rf_* K)` (blueprint `definition-pushforward-correspondence`,
+`def-trf-coefficient-pushforward`). -/
 noncomputable abbrev pushforward : Correspondence ℓ P.coeff where
   C := P.D
   c₁ := P.b₁
@@ -291,7 +295,8 @@ lemma fixedLocus_ι_comp_g_comp_b₁ :
   rw [Category.assoc, Category.assoc, P.w₁, P.w₂, ← Category.assoc, Fc.w, Category.assoc]
 
 /-- The *induced map of fixed loci* `h : Fix(c) ⟶ Fix(b)` of a proper pushforward diagram, the
-restriction of `g` (blueprint `def-trf-coefficient-pushforward`, item 4): the factorization of
+restriction of `g` (blueprint `definition-pushforward-correspondence--2`,
+`def-trf-coefficient-pushforward`, item 4): the factorization of
 `Fix(c) ⟶ C ⟶ D` through the equalizer `Fix(b) ⟶ D` of `b₁` and `b₂`. -/
 noncomputable def fixMap : Fc.F ⟶ Fb.F :=
   Fork.IsLimit.lift Fb.isLimit (Fc.ι ≫ P.g) (P.fixedLocus_ι_comp_g_comp_b₁ Fc)
@@ -392,9 +397,9 @@ instance isProper_pullbackSnd_g : IsProper (pullback.snd P.g Fb.ι).left :=
   MorphismProperty.of_isPullback ((IsPullback.of_hasPullback P.g Fb.ι).map (Over.forget _))
     (inferInstanceAs (IsProper P.g.left))
 
-/-- **The induced map of fixed loci is proper** (blueprint `lem-trf-fixed-map-proper`,
-item 2): `h = π ∘ κ` is the composite of the closed immersion `κ` and the base change `π` of
-the proper `g`. -/
+/-- **The induced map of fixed loci is proper** (blueprint
+`definition-pushforward-correspondence--2`, `lem-trf-fixed-map-proper`, item 2): `h = π ∘ κ` is the
+composite of the closed immersion `κ` and the base change `π` of the proper `g`. -/
 instance isProper_fixMap : IsProper (P.fixMap Fc Fb).left := by
   rw [← P.fixMapFactor_snd Fc Fb, Over.comp_left]
   infer_instance

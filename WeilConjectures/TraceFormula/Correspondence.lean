@@ -138,8 +138,8 @@ attribute [instance] locallyOfFiniteType quasiCompact isSeparated
 variable {ℓ} {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
 /-- The *global operator* `T_c(u)` of an endocorrespondence with proper ordinary leg `c₂` on
-compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K` (blueprint `def-trf-global-operator`,
-`sk-d-operator`):
+compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K` (blueprint
+`definition-action-correspondence`, `def-trf-global-operator`, `sk-d-operator`):
 ```
 Ra_{X!} K ⟶ Ra_{X!} Rc₂_* Lc₂^* K ≅ Ra_{X!} Rc₂_! Lc₂^* K ≅ Ra_{C!} Lc₂^* K
   --Ra_{C!} u--> Ra_{C!} Rc₁^! K ≅ Ra_{X!} Rc₁_! Rc₁^! K ⟶ Ra_{X!} K.
