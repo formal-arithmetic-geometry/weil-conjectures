@@ -33,6 +33,23 @@ attribute [local irreducible] SemilinearSections.scalarExtensionSection
 attribute [local implicit_reducible] spCoefficientCommRings SpTowerShriek.tau
   Functor.ofOpSequence Functor.ofSequence SemilinearSections.evaluation
 
+-- Prove the carrier transports before specializing to the scalar-extended line.
+private theorem restrictionUnderlying_hom_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((r.F.obj M).obj (op n)).obj.obj U) :
+    HEq (((restrictionUnderlying l T r n).hom.app M).hom.app U x) x :=
+  finiteBoundary_cast_heq (r.underlying M n U) x
+
+private theorem restrictionUnderlying_inv_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U) :
+    HEq (((restrictionUnderlying l T r n).inv.app M).hom.app U x) x :=
+  finiteBoundary_cast_heq (r.underlying M n U).symm x
+
 set_option profiler true in
 -- Compare the finite scalar-extension unit with the normalized root evaluation.
 private theorem normalizedRootSection
@@ -68,13 +85,11 @@ private theorem normalizedRootSection
       (((c.reduction.forget.F.map η).app (op n)).hom.app U x')
   let w := ((restrictionUnderlying l T r n).inv.app
     (lineModule l (ULift.{u} (Padic l)) c)).hom.app U v
-  have hw : HEq w v := by
-    change HEq ((eqToHom (r.underlying _ n U).symm) v) v
-    exact finiteBoundary_cast_heq _ _
+  have hw : HEq w v := restrictionUnderlying_inv_section l T r n
+    (lineModule l (ULift.{u} (Padic l)) c) U v
   have ht := k.line_tensor n U x x' w hx.symm
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
-  have hz := congrArg (fun q ↦ q.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
-  change (c.rootForget.hom.app (op n)).hom.app U x' = z at hz
+  have hz := (addSectionEquiv (c.rootForget.app (op n)) U).apply_symm_apply z
   have hw' : w = (k.lineForget.inv.app (op n)).hom.app U z := by
     exact (addSectionEquiv (k.lineForget.app (op n)) U).injective
       ((ht.trans hz).trans
@@ -120,23 +135,18 @@ private theorem horizontal_varying_root_square
   let N' := lineModule l (ULift.{u} (Padic l)) p'.chernX
   let α := d.geometry.ordinaryAdjunction.homEquiv _ _ d.line.iso.hom
   let y := (p.coefficientsX.lineForget.inv.app (op n)).hom.app U z
-  let x := (((restrictionUnderlying l X p.restrictionX n).hom.app N).hom.app U) y
-  have hx : HEq y x := by
-    change HEq y ((eqToHom (p.restrictionX.underlying N n U)) y)
-    exact (finiteBoundary_cast_heq _ _).symm
+  let x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X n).obj N).val.obj U :=
+    (((restrictionUnderlying l X p.restrictionX n).hom.app N).hom.app U) y
+  have hx : HEq y x :=
+    (restrictionUnderlying_hom_section l X p.restrictionX n N U y).symm
   have hcoord := normalizedRootSection l X p.chernX p.restrictionX p.coefficientsX n U z
-  change (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).hom.val.app U x = _
-    at hcoord
   have hinput : x =
       (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U
         (Scheme.tateFiniteTensor X l (FiniteRing l (ULift.{u} (Padic l)) n) n
           (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1 z) := by
-    have hi := congrArg (fun q ↦ q.val.app U x)
-      (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).hom_inv_id
-    change (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U
-      ((lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).hom.val.app U x) = x at hi
-    exact hi.symm.trans (congrArg
-      (fun q ↦ (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n).inv.val.app U q) hcoord)
+    let e := addSectionEquiv ((finiteForget l (ULift.{u} (Padic l)) X n).mapIso
+      (lineEvaluation l (ULift.{u} (Padic l)) p.chernX n)) U
+    exact (e.symm_apply_apply x).symm.trans (congrArg e.symm hcoord)
   have hα := additive_transport_apply
     (p.restrictionX.underlying N n U)
     (p.restrictionX.underlying (d.geometry.push.obj N') n U)
@@ -152,10 +162,11 @@ private theorem horizontal_varying_root_square
       d.line.iso.hom n U x) :=
     (d.varyingPush_sections N' n U _).trans (hα.trans hp.symm)
   let U' := (Scheme.proEtaleBaseChange hX).op.obj U
-  let x' := (((restrictionUnderlying l X' p'.restrictionX n).hom.app N').hom.app U') v
+  let x' : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) X' n).obj N').val.obj U' :=
+    (((restrictionUnderlying l X' p'.restrictionX n).hom.app N').hom.app U') v
   have hx' : HEq x' (adjointSection l (ULift.{u} (Padic l)) d.geometry
       d.line.iso.hom n U x) := by
-    exact (finiteBoundary_cast_heq (p'.restrictionX.underlying N' n U') v).trans hv
+    exact (restrictionUnderlying_hom_section l X' p'.restrictionX n N' U' v).trans hv
   have hn := d.line.normalization n U 1 z
   rw [← hinput, map_one] at hn
   have heval : (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n).hom.val.app U' x' =
@@ -178,15 +189,13 @@ private theorem horizontal_varying_root_square
     have hv' := hsinj hxv
     have hzv := congrArg
       (fun q ↦ (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' q) hv'
-    have hir := congrArg (fun q ↦ q.hom.app U' (restrictRoot l hX n U z))
-      (p'.coefficientsX.lineForget.app (op n)).inv_hom_id
+    have hir := (addSectionEquiv (p'.coefficientsX.lineForget.app (op n)) U').apply_symm_apply
+      (restrictRoot l hX n U z)
     exact hzv.trans hir
-  have hiS := congrArg (fun q ↦ q.hom.app U z)
-    (p.coefficientsX.lineForget.app (op n)).inv_hom_id
+  have hiS := (addSectionEquiv (p.coefficientsX.lineForget.app (op n)) U).apply_symm_apply z
   change (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' v =
     (Scheme.proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).hom.app U
       ((p.coefficientsX.lineForget.hom.app (op n)).hom.app U y)
-  rw [show (p.coefficientsX.lineForget.hom.app (op n)).hom.app U y = z from hiS]
   have hr : (Scheme.proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).hom.app U z =
       restrictRoot l hX n U z := by
     apply (Scheme.proEtaleRootsOfUnitySections X' (l ^ (n + 1))
@@ -195,7 +204,8 @@ private theorem horizontal_varying_root_square
     have hr :=
       (Scheme.existsUnique_proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).exists
     exact hr.choose_spec U z
-  exact hroot.trans hr.symm
+  exact hroot.trans (hr.symm.trans (congrArg
+    ((Scheme.proEtaleRootsOfUnityDirectImageMap hX (l ^ (n + 1))).hom.app U) hiS.symm))
 
 -- Identify the completed and varying root cones through their actual finite projections.
 private theorem horizontal_root_cone_transposed
