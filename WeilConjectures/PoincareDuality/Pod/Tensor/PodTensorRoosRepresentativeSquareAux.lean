@@ -368,7 +368,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have finish := podTensorRepresentative_cancel (integralCompletedTensor l E X)
     eP eQ e k _ hs ((integralCompletedTensor l E X).map (Prod.mkHom fP fQ))
   have hc := podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩
-  dsimp only [eP, eQ, e, k, fP, fQ, podRepresentativeReindexFactors, Iso.app,
+  dsimp only [eP, eQ, e, k, fP, fQ, podRepresentativeReindexFactors, Iso.app, id,
     podReindexingTensorFrame, integralOperationsTensorOnGood,
     integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
     podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
@@ -377,7 +377,7 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
   have final := finish.trans hc
   run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
-    let actual := (← Lean.Meta.getLocalDeclFromUserName `final).type
+    let actual ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `final).type
     let mut work := #[(actual, target, "eq")]
     let mut differences := 0
     for _ in [:1000] do
