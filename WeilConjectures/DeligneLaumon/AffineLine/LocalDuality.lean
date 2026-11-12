@@ -351,7 +351,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
       rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
   have hqd : q ^ d = ((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l) := by
     simp [Scheme.Hom.residueCard, q, d]
-  rw [hqd]
+  rw [← hqd]
   exact localBoundaryLinearEquiv_frobenius (M := ((WeilSheaf.lowerStar j).obj
     (F.dual hF)).stalk s) Ψ.toLinearEquiv S₅ ψ (q ^ d) hΨ' a b
 
