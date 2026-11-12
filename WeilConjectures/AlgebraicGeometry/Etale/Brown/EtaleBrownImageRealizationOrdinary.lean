@@ -58,8 +58,6 @@ private theorem constantSection_apply
         (CategoryTheory.forget CommRingCat.{u + 1}))
   exact congrArg (fun f ↦ f.app U t) h
 
-set_option maxHeartbeats 2000000 in
--- The sectionwise linearity argument elaborates several sheaf constructions.
 /-- Construction of the section-normalized ordinary comparison.
 Source: Zheng, Construction 5.15; Stacks 03CY and 07A4.
 (blueprint: lem-pur-etale-brown-image-realization-ordinary).
@@ -150,11 +148,11 @@ theorem etaleBrownImageRealization_ordinaryRight_exists
     change (β.hom.app M).hom.app U (x + y) = _ at ht
     change (β.hom.app M).hom.app U x = _ at ha
     change (β.hom.app M).hom.app U y = _ at hb
-    rw [ht, ha, hb]
     dsimp only [id] at h
-    rw [h]
-    exact (((A.levelAdj n).counit.app M).val.app
-      (p.op.obj U)).hom.map_add _ _
+    exact ht.trans ((congrArg
+      (fun x ↦ ((A.levelAdj n).counit.app M).val.app (p.op.obj U) x) h).trans
+        ((((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom.map_add _ _ |>.trans
+          (congrArg₂ (fun x y : M.val.obj (p.op.obj U) ↦ x + y) ha.symm hb.symm)))
   have hsmul (M) (U : W.Etaleᵒᵖ) (q : strictEtaleBrownRing O t n)
       (x : (R.obj M).val.obj U) :
       (β.hom.app M).hom.app U
@@ -221,11 +219,7 @@ theorem etaleBrownImageRealization_ordinaryRight_exists
       ((show (coefficientQuotientSheaf (J := W.smallEtaleTopology)
         O t n).obj.obj U from a.hom.app U z) • x) = _ at ht
     change (β.hom.app M).hom.app U x = _ at hb
-    rw [ha] at ht
-    rw [ht]
-    conv_rhs => rw [hb]
     dsimp only [id] at h
-    rw [h]
     have hconst := constantSection_apply (V.smallEtaleTopology)
       (strictEtaleBrownRing O t n) q (p.op.obj U)
       ((A.singleton.hom).hom.app (p.op.obj U)
@@ -235,9 +229,14 @@ theorem etaleBrownImageRealization_ordinaryRight_exists
       ((L.map a).hom.app (p.op.obj U)
         ((adj.unit.app T).hom.app U z)) = _ at hc'
     have hs := hc'.trans hconst
-    rw [hs]
-    exact (((A.levelAdj n).counit.app M).val.app
-      (p.op.obj U)).hom.map_smul _ _
+    have ht' := (congrArg (fun a : (coefficientQuotientSheaf (J := W.smallEtaleTopology)
+      O t n).obj.obj U ↦ (β.hom.app M).hom.app U (a • x)) ha).symm.trans ht
+    exact ht'.trans ((congrArg
+      (fun x ↦ ((A.levelAdj n).counit.app M).val.app (p.op.obj U) x) h).trans
+        ((((A.levelAdj n).counit.app M).val.app (p.op.obj U)).hom.map_smul _ _ |>.trans
+          (congrArg₂ (fun a : (coefficientQuotientSheaf (J := V.smallEtaleTopology)
+            O t n).obj.obj (p.op.obj U) ↦ fun x : M.val.obj (p.op.obj U) ↦ a • x)
+              hs hb.symm)))
   let F := R ⋙ strictEtaleBrownConstant O t W n
   let G := strictEtaleBrownConstant O t V n ⋙
     Etale.lowerStar (ModuleCat.{u + 1}
