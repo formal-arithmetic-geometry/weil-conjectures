@@ -150,7 +150,14 @@ theorem sfRationalDirectImageCoefficientCompatibility
     have hY := (stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E F h
     have hX := (stageSystem_existsUnique l Ω X).exists.choose_spec.1 E F h
     let hi := rationalPullbackScalar_rightMate_isIso l E' F' ι f (R E) (R F) (a E) (a F)
-    exact rightMate_transport (a E) (a F) hY hX e hi
+    exact rightMate_transport
+      (L₁ := rationalDerivedPullback l E' f) (R₁ := R E)
+      (L₂ := rationalDerivedPullback l F' f) (R₂ := R F)
+      (G := (stageSystem l Ω X).T h)
+      (G' := GeneralAlgebraicallyClosedCoefficients.transition l Ω X E F h)
+      (H := (stageSystem l Ω Y).T h)
+      (H' := GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E F h)
+      (a E) (a F) hY hX e hi
   · rintro ⟨Φ, β, coh⟩ ⟨hΦ, hβ, _⟩
     dsimp only at hΦ
     cases hΦ
