@@ -94,7 +94,6 @@ lemma unitTransport_mapHomotopyCategory_app_quotient {X Y Y' : Scheme.{u}} (s : 
     ← Functor.map_comp, ← Functor.map_comp]
   congr 1
 
-set_option profiler true in
 /-- **The derived unit transport on acyclic complexes**: for a bounded below complex `K` such that
 all `g^*(Kⁿ)` are `g_*`-acyclic and all `p₁^*(Kⁿ)` are `p₁_*`-acyclic, the derived unit transport
 along `s` (for `s ≫ g = p₁`) at `K` is, through the isomorphisms
