@@ -227,6 +227,8 @@ theorem exists_affineSpectrum_ordinaryComparison_square
           (DerivedCategory.Q.obj Pg) ≫
         F0.map (H0.map ((isoPullbackComplexCounitIso X'.isoSpec.inv).hom.app Pg ≫
           DerivedCategory.Q.map (affineSpectrumTensorComplexIso g' P).inv)) := by
+  have hcoordinates := exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
+  rcases hcoordinates with ⟨eR, eA, eB, eD, q, t, hA, hB, hD, ht, hcoord⟩
   let z := X'.isoSpec.inv z0
   let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
     (.up ℤ)).obj P
@@ -253,8 +255,6 @@ theorem exists_affineSpectrum_ordinaryComparison_square
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
   let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
-  obtain ⟨eR, eA, eB, eD, q, t, hA, hB, hD, ht, hcoord⟩ :=
-    exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
   have hlocalized := ModuleCat.exists_baseDerivedTensor_ringIso_square.{u, u + 1}
     (R := R f g' z) (A := A g' z) (B := B f' z) (D := C z)
     (R0 := R (Spec.map f.appTop) (Spec.map g'.appTop) z0)
