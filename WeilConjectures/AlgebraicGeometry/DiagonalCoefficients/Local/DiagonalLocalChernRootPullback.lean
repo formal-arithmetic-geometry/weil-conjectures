@@ -33,7 +33,6 @@ attribute [local irreducible] SemilinearSections.scalarExtensionSection
 attribute [local implicit_reducible] spCoefficientCommRings SpTowerShriek.tau
   Functor.ofOpSequence Functor.ofSequence SemilinearSections.evaluation
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- Compare the finite scalar-extension unit with the normalized root evaluation.
 private theorem normalizedRootSection
@@ -76,27 +75,25 @@ private theorem normalizedRootSection
     (hw.trans ((heq_of_eq he).trans (heq_of_eq hu)))
   have hz := congrArg (fun q ↦ q.hom.app U z) (c.rootForget.app (op n)).inv_hom_id
   change (c.rootForget.hom.app (op n)).hom.app U x' = z at hz
-  rw [hz] at ht
   have hw' : w = (k.lineForget.inv.app (op n)).hom.app U z := by
-    have hi := congrArg (fun q ↦ q.hom.app U w)
-      (k.lineForget.app (op n)).hom_inv_id
-    change (k.lineForget.inv.app (op n)).hom.app U
-      ((k.lineForget.hom.app (op n)).hom.app U w) = w at hi
-    exact hi.symm.trans (congrArg
-      (fun q ↦ (k.lineForget.inv.app (op n)).hom.app U q) ht)
-  rw [← hw']
+    exact (addSectionEquiv (k.lineForget.app (op n)) U).injective
+      ((ht.trans hz).trans
+        ((addSectionEquiv (k.lineForget.app (op n)) U).apply_symm_apply z).symm)
   have hv : ((restrictionUnderlying l T r n).hom.app
       (lineModule l (ULift.{u} (Padic l)) c)).hom.app U w = v :=
-    congrArg (fun q ↦ q.hom.app U v)
-      ((restrictionUnderlying l T r n).app
-        (lineModule l (ULift.{u} (Padic l)) c)).inv_hom_id
-  rw [hv]
+    (addSectionEquiv ((restrictionUnderlying l T r n).app
+      (lineModule l (ULift.{u} (Padic l)) c)) U).apply_symm_apply v
   have hnorm := (lineEvaluation_existsUnique l (ULift.{u} (Padic l)) c n).exists.choose_spec
     U 1 x x' v hx.symm
     (by simpa only [one_smul] using (heq_of_eq he).trans (heq_of_eq hu))
-  exact hnorm.trans (by rw [hz])
+  have hsection := (congrArg
+    (((restrictionUnderlying l T r n).hom.app
+      (lineModule l (ULift.{u} (Padic l)) c)).hom.app U) hw'.symm).trans hv
+  exact (congrArg ((lineEvaluation l (ULift.{u} (Padic l)) c n).hom.val.app U)
+    hsection).trans (hnorm.trans (congrArg
+      (Scheme.tateFiniteTensor T l (FiniteRing l (ULift.{u} (Padic l)) n) n
+        (finiteScalar l (ULift.{u} (Padic l)) n) U.unop 1) hz))
 
-set_option maxHeartbeats 2000000 in
 set_option profiler true in
 -- Compare the line sections in the two scalar restrictions and finite evaluations.
 private theorem horizontal_varying_root_square
@@ -172,15 +169,12 @@ private theorem horizontal_varying_root_square
   have hroot : z' = restrictRoot l hX n U z := by
     have hleft := normalizedRootSection l X' p'.chernX p'.restrictionX
       p'.coefficientsX n U' (restrictRoot l hX n U z)
-    let e := lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n
-    have heinj : Function.Injective (e.hom.val.app U') :=
-      (show Function.LeftInverse (e.inv.val.app U') (e.hom.val.app U') from
-        fun v ↦ congrArg (fun q ↦ q.val.app U' v) e.hom_inv_id).injective
+    let e := (finiteForget l (ULift.{u} (Padic l)) X' n).mapIso
+      (lineEvaluation l (ULift.{u} (Padic l)) p'.chernX n)
+    have heinj := (addSectionEquiv e U').injective
     have hxv := heinj (heval.trans hleft.symm)
     let s := (restrictionUnderlying l X' p'.restrictionX n).app N'
-    have hsinj : Function.Injective (s.hom.hom.app U') :=
-      (show Function.LeftInverse (s.inv.hom.app U') (s.hom.hom.app U') from
-        fun v ↦ congrArg (fun q ↦ q.hom.app U' v) s.hom_inv_id).injective
+    have hsinj := (addSectionEquiv s U').injective
     have hv' := hsinj hxv
     have hzv := congrArg
       (fun q ↦ (p'.coefficientsX.lineForget.hom.app (op n)).hom.app U' q) hv'
