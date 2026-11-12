@@ -198,7 +198,7 @@ private lemma liftExchange_paste_horiz_aux
     boundedConstructibleUpperStarOfMapComp_hom_app_hom, boundedConstructibleLowerStar_map_hom]
   exact h K.obj
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Horizontal pasting of base change maps** on bounded constructible complexes: for two
 horizontally pasted commutative squares
