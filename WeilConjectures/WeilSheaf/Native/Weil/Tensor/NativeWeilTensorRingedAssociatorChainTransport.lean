@@ -165,12 +165,19 @@ theorem nativeChainForgetComponent_transport
     simp only [RingedForgetTensorTransposition.tensor_map₂_eq
       (B := RingedTensorModules.{u + 1, u + 1, u + 1} D.b.J D.b.R)] at hs
     simpa only [tensor_map, id_tensorHom, tensorHom_id, Category.assoc] using hs
-  have hc := tensor_square_pasting E U F G r.tensor o.tensor
-    (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
-    (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
-    (native_weil_tensor_ringed_binary_chain_square D d o r)
-    r.associativity o.associativity P Q N
-    (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ha
+  have hc :
+      U.map (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ≫
+          (nativeChainForgetC D P (nativeTensorComplex T Q N)).hom ≫
+            (U.obj P ◁ (nativeChainForgetC D Q N).hom) =
+        (nativeChainForgetC D (nativeTensorComplex T P Q) N).hom ≫
+          ((nativeChainForgetC D P Q).hom ▷ U.obj N) ≫
+            (α_ (U.obj P) (U.obj Q) (U.obj N)).hom := by
+    exact tensor_square_pasting E U F G r.tensor o.tensor
+      (nativeRingedChainBridgeSquare D) (nativeTensorComplex T)
+      (fun P Q ↦ D.A.chain Q P) (nativeChainForgetC D)
+      (native_weil_tensor_ringed_binary_chain_square D d o r)
+      r.associativity o.associativity P Q N
+      (nativeRingedAssociatorComplex D.b T D.adj D.A P Q N).hom ha
   exact congrArg (fun f ↦
     (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map
       (HomologicalComplex.ιMapBifunctor N (Q.mapBifunctor P T) T
