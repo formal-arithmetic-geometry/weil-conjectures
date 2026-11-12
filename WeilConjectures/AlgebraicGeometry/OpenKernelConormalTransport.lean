@@ -342,7 +342,7 @@ theorem open_kernel_conormal_transport {X Y : Scheme.{u}} (g : X ⟶ Y)
     have ht : δ.inv.app ⊤ t = s₀ := by
       exact ConcreteCategory.congr_hom
         (congrArg (fun q ↦ q.app ⊤) δ.hom_inv_id) s₀
-    exact (congrArg e hn.symm).trans
+    exact (congrArg e hn).trans
       ((congrArg (fun z ↦ e (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
         L).app ⊤ z)) ht).trans (he s))
 
