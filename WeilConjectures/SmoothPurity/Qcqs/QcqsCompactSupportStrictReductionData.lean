@@ -66,6 +66,7 @@ private theorem changeCoordinates_comp
   rw [Category.assoc, ← F'.map_comp]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
+-- Naturality pastes the two comparison equations, cancelling their middle coordinates.
 private theorem map_paste_cancel
     {C D : Type*} [Category C] [Category D] (P : C ⥤ D)
     {U U' V W : C} {A B T R : D} (ρ : U ≅ U')
@@ -84,6 +85,7 @@ private theorem map_paste_cancel
   simp only [Iso.inv_hom_id_assoc]
 
 -- Evaluation respects a change of finite coordinates for any strict-system object.
+omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
 private theorem compactSupportSystemEvaluation_coordinates (n : ℕ)
     (M : coefficientSequenceDerived l E X) {U V : normalizedDVRDerived l E X n}
     (b : (coefficientSequenceDerivedEvaluation l E X n).obj M ⟶ V) (t : U ≅ V) :
@@ -133,8 +135,6 @@ private theorem compactSupportSystemEvaluation_coordinates (n : ℕ)
 include K₀ hl
 -- The existing statement retains the geometric hypotheses of its source.
 set_option linter.unusedSectionVars false in
-set_option profiler true in
--- Elaborate the explicit paste across the two equivalent sequence-site presentations.
 
 /-- The strict comparison map exists and has the prescribed finite coordinate identity.
 
@@ -184,6 +184,7 @@ theorem qcqsCompactSupport_strictReductionData :
     (compactSupportSystemQuotient l E) c.i
   let Ps := ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) c.g
+  -- Functor composition is definitionally associative, so the paste needs no associators.
   let β : image (completed l E) c ⋙ SY.reduction ⟶ SX.reduction ⋙ Js ⋙ Ps :=
     Functor.whiskerLeft J βP ≫ Functor.whiskerRight βJ Ps
   refine ⟨SX, SY, β, ?_⟩
