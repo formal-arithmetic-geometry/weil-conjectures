@@ -179,8 +179,19 @@ variable {S : Type u} [Field S] [Fact (ringChar S).Prime] [Fact (ringChar S ≠ 
   [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
   {a : A ⟶ B} {b : B ⟶ D} {c : A ⟶ C} {d : C ⟶ D}
 
-set_option maxHeartbeats 800000 in
--- the objects of the bounded constructible and of the ambient derived categories are compared
+/-- Compute the ambient comparison with an abstract coefficient ring before specialization. -/
+private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_comp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq a c b d) (K : Dᵇc(D.left)⟦Λ⟧) :
+    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
+      (leftDerivedUpperStarComp Λ c.left d.left).inv.app K.obj ≫
+        eqToHom (congrArg (fun t ↦ L((t)^*⟦Λ⟧).obj K.obj)
+          (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
+        (leftDerivedUpperStarComp Λ a.left b.left).hom.app K.obj := by
+  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    ℓ Λ sq K).trans
+      (pullbackSquareComparison_hom_app Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ K.obj)
+
 omit [Fact ℓ.Prime] in
 /-- On the ambient derived categories, the pullback comparison of a commutative square
 `a ≫ b = c ≫ d` is `L(c ≫ d)^* = L(a ≫ b)^*` between the composition isomorphisms. -/
@@ -192,10 +203,8 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq [Fact ℓ.Prim
         eqToHom (congrArg (fun t ↦ L((t)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj)
           (Over.left_comp_left_eq_of_comp_eq sq.w).symm) ≫
         (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).hom.app K.obj := by
-  rw [boundedConstructiblePullbackSquareComparison_hom_app,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
-    boundedConstructibleUpperStarComp_inv_app_hom, boundedConstructibleUpperStarComp_hom_app_hom,
-    ObjectProperty.FullSubcategory.eqToHom_hom']
+  -- Infer the coefficient-ring instances from the goal when applying the generic formula.
+  rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_comp]
 
 end SquareComparison
 
