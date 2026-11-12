@@ -253,7 +253,7 @@ private theorem ordinary_completed_scalar_shift_plain
         AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap l E L i T),
       e.hom ≫ completedScalarComparison l E L i T = scalarCompletion l E L i T ∧
       e.hom.CommShift ℤ := by
-  exact ordinary_completed_scalar_shift l E L i T
+  simpa only [] using ordinary_completed_scalar_shift l E L i T
 
 /-- The shift on an integral scalar functor induced by its specified ordinary realization.
 This is an actual fully faithful lift of the ambient scalar shift, independent of any
