@@ -62,7 +62,8 @@ lemma exists_isIso_maps_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
     (hne : ∀ n, Nonempty (K n ≅ L n))
     (r : ∀ n, (K (n + 1) ⟶ L (n + 1)) → (K n ⟶ L n))
     (hiso : ∀ n s, IsIso s → IsIso (r n s)) {S : Type*} {map : S → ∀ n, K n ⟶ L n}
-    (hlift : ∀ t, (∀ n, r n (t (n + 1)) = t n) → ∃ f, ∀ n, map f n = t n) :
+    (hlift : ∀ t : ∀ n, K n ⟶ L n,
+      (∀ n, r n (t (n + 1)) = t n) → ∃ f, ∀ n, map f n = t n) :
     ∃ f, ∀ n, IsIso (map f n) := by
   obtain ⟨t, hi, ht⟩ := exists_compatible_isIso_homs_of_finite hfin hne r hiso
   obtain ⟨f, hf⟩ := hlift t ht
