@@ -260,6 +260,7 @@ private theorem tensorStalkIso_one
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).obj (P.X k)) x)
 
 set_option maxHeartbeats 600000 in
+set_option trace.profiler true in
 -- The extension-restriction unit is lifted through several complex functor isomorphisms.
 private theorem canonicalSpectrumStalkComplexIso_one
     (X : Scheme.{u}) [IsAffine X] (x : X) (y : Spec Γ(X, ⊤))

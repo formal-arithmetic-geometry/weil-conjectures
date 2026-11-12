@@ -42,6 +42,7 @@ private theorem isoPullbackAdditiveStalkIso_smul
   rfl
 
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Identifying the complex composition factors reduces several stalk functor types.
 /-- Scalar compatibility of the fixed additive comparison; this assertion does not involve
 input-complex coordinates or the coefficient-one equation.
