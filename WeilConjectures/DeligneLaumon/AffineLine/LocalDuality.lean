@@ -178,7 +178,8 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
 private theorem localBoundaryLinearEquiv_frobenius
-    {K : Type v} [Field K] {M N H Q : FrobeniusModule.{u, v} K}
+    {K : Type v} [Field K] {M : FrobeniusModule.{u, v} K}
+    {N H Q : FrobeniusModule.{max u v, v} K}
     (Ψ : M.carrier ≃ₗ[K] N.carrier) (S : N.Equiv H.dual) (ψ : H.Equiv Q) (q : K)
     (hΨ : ∀ x, Ψ (M.frobenius x) = q • N.frobenius (Ψ x)) :
     ∀ x y, (Ψ ≪≫ₗ S.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap) x (Q.frobenius y) =
