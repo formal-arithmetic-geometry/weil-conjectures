@@ -170,6 +170,7 @@ private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [Is
     (F0.mapIso (H0.mapIso ((isoPullbackComplexCounitIso j).app P)))
 
 
+set_option profiler true in
 -- Unifying the two stalk-ring diagrams and their tensor models.
 /-- The base-derived tensor comparison is invariant under affine spectrum coordinates
 before introducing either inverse counit for g'. No K-flatness is needed here.
@@ -252,23 +253,15 @@ theorem exists_affineSpectrum_ordinaryComparison_square
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
   let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop)
     (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0
-  have hcoordinates := exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
-  let eR := hcoordinates.choose
-  have hcoordinates := hcoordinates.choose_spec
-  let eA := hcoordinates.choose
-  have hcoordinates := hcoordinates.choose_spec
-  let eB := hcoordinates.choose
-  have hcoordinates := hcoordinates.choose_spec
-  let eD := hcoordinates.choose
-  have hcoordinates := hcoordinates.choose_spec
-  let q := hcoordinates.choose
-  have hcoordinates := hcoordinates.choose_spec
-  let t := hcoordinates.choose
-  have hcoordinates := hcoordinates.choose_spec
-  obtain ⟨hA, hB, hD, ht, hcoord⟩ := hcoordinates
-  obtain ⟨l, hl⟩ := ModuleCat.exists_baseDerivedTensor_ringIso_square.{u, u + 1}
+  obtain ⟨eR, eA, eB, eD, q, t, hA, hB, hD, ht, hcoord⟩ :=
+    exists_affineSpectrum_tensor_coordinates f f' g g' sq sq0 z0 i P
+  have hlocalized := ModuleCat.exists_baseDerivedTensor_ringIso_square.{u, u + 1}
+    (R := R f g' z) (A := A g' z) (B := B f' z) (D := C z)
+    (R0 := R (Spec.map f.appTop) (Spec.map g'.appTop) z0)
+    (A0 := A (Spec.map g'.appTop) z0) (B0 := B (Spec.map f'.appTop) z0) (D0 := C z0)
     eR eA eB eD hA hB hD (stalkComplex g' z P)
     (stalkComplex (Spec.map g'.appTop) z0 P0) q M M0 t ht i
+  rcases hlocalized with ⟨l, hl⟩
   refine ⟨l, ?_⟩
   let T := ModuleCat.restrictScalars.{u} eD.toRingHom
   let alpha := affineSpectrumTensorComplexIso g' P
