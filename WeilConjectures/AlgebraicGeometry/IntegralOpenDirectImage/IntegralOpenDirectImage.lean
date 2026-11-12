@@ -425,7 +425,7 @@ theorem integral_open_direct_image
   let : IsNoetherian X := ⟨⟩
   have hlimits := internal_integral_direct_image_limits l E j
   have hχ : IsIso (reductionPullbackMap l E j) := hlimits.choose
-  letI := hχ
+  haveI := hχ
   have hpush := hlimits.choose_spec
   let adj := (CondensedRing.derivedUpperStarLowerStarAdjunction
     (DerivedNakayama.integerRing l E) j).ofNatIsoLeft
