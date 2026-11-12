@@ -355,6 +355,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
         (g)) e
       (Adjunction.derivedUnitRetraction K a hK
         ((galoisTower Ω h).complexTrace (Λ) hd K hc)) hadj
+  let F₃ := L((f')^*⟦Λ⟧)
   have hmain := fun (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Λ) X')) ⥤
         Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -371,11 +372,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
       (fun k ↦ N.galoisLayerAction (Λ) h Ω (act k)
         (L((𝟙 X)^*⟦Λ⟧).obj C))
       (fun k ↦ galoisLayerAut_autAction (Λ) N h Ω (act k) C)
-  refine ⟨_, (hmain (L((f')^*⟦Λ⟧) ⋙
+  refine ⟨_, (hmain (F₃ ⋙
     DerivedCategory.homologyFunctor _ 0)).1, fun q W φ hφ ↦ ?_⟩
-  refine (hmain (L((f')^*⟦Λ⟧) ⋙
+  refine (hmain (F₃ ⋙
     DerivedCategory.homologyFunctor _ q)).2 φ (fun φ' hφ' ↦ ?_) hφ
-  let F₃ := L((f')^*⟦Λ⟧)
   let Hq := DerivedCategory.homologyFunctor _ q
   have hkey := (galoisTower Ω h).map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso
     (Λ) hd K hc a hK (L((N.ε)^*⟦Λ⟧).obj C) e (F₁ ⋙ F₂ ⋙ F₃ ⋙ Hq)
