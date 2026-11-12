@@ -110,8 +110,11 @@ theorem native_weil_tensor_ringed_binary_chain_square
           (o.tensor.hom.app (U.obj P, U.obj Q)).f n
   rw [← D.b.forget.map_comp_assoc, hs]
   simp only [nativeRingedTensorSign]
-  trace_state
-  erw [D.b.forget.map_zsmul, D.b.forget.map_comp]
+  have hmap := D.b.forget.map_zsmul ((p * q).negOnePow : ℤ)
+    ((D.A.underived (Q.X p) (P.X q)).hom ≫
+      RingedForgetTensorTransposition.tensorSummand D.b.J D.b.R
+        (E.obj P) (E.obj Q) q p n hqp)
+  rw [hmap, D.b.forget.map_comp]
   simp only [Preadditive.zsmul_comp, Category.assoc]
   erw [reassoc_of% hr]
   dsimp only [nativeChainForgetC, Iso.trans_hom, HomologicalComplex.comp_f]
