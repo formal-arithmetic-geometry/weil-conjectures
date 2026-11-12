@@ -257,8 +257,6 @@ lemma boundedConstructiblePullbackSquareComparison_inv_app_paste_vert {i : X ⟶
 
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
--- the comparison of the projection formulas with their composition laws is slow
 /-- **The projection formula is compatible with base change, by factorisation**: for a cartesian
 square `g' ≫ f = f' ≫ g` and factorisations `f = i ≫ p`, `f' = i' ≫ p'` into open immersions
 followed by proper maps, through cartesian squares `g' ≫ i = i' ≫ gZ` and `gZ ≫ p = p' ≫ g`, the
@@ -303,15 +301,9 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
     (boundedConstructibleUpperStarCompOfEq ℓ hf) (boundedConstructibleUpperStarCompOfEq ℓ hf')
     ?_ ?_ ?_ ?_ ?_ ?_
   · intro K B
-    rw [boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app]
-    convert boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ hf K B using 3
+    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ hf K B
   · intro K B
-    rw [boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app,
-      boundedConstructibleExceptionalProjection_app_app]
-    convert boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ hf' K B using 3
+    exact boundedConstructibleExceptionalProjectionMorphism_comp_of_eq' ℓ hf' K B
   · exact fun M ↦ boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert_of_eq ℓ sq s₁ s₂
       hf' hf M
   · exact fun B ↦ boundedConstructiblePullbackSquareComparison_inv_app_paste_vert ℓ sq.toCommSq
