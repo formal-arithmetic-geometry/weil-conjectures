@@ -301,6 +301,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant [QuasiComp
   have hterms := hcomplexa.2.1
   have he := hcomplexa.2.2
   let e := he.some
+  choose F₀ hF₀ using hterms
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
