@@ -110,6 +110,5 @@ lemma classTest_correspondenceClassEquiv_symm {C : Over (Spec (.of k))} [Locally
   simp only [Functor.comp_map] at hn
   simp only [hP]
   simp only [← Category.assoc, hn]
-  simp only [Category.assoc]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
