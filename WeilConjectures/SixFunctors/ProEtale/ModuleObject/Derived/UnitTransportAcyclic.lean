@@ -85,6 +85,7 @@ lemma unitTransport_mapHomotopyCategory_app_quotient {X Y Y' : Scheme.{u}} (s : 
   congr 1
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- the derived functors and the derived unit transport are large terms
 /-- **The derived unit transport on acyclic complexes**: for a bounded below complex `K` such that
 all `g^*(Kⁿ)` are `g_*`-acyclic and all `p₁^*(Kⁿ)` are `p₁_*`-acyclic, the derived unit transport
