@@ -291,7 +291,6 @@ private theorem constantSheaf_composition_map
   exact congrArg (fun k ↦ k r)
     ((toSheafify J₃ ((Functor.const C₃ᵒᵖ).obj R)).naturality (α.hom.app W.unop).op).symm
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -583,18 +582,21 @@ theorem etaleInverseImageCompositionModuleLinearCore
       change (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
         ((lv.map (eU.inv.app G) ≫ eV.inv.app (LU.obj G)) ≫ UZ.map (c.hom.app G)) = _
       rw [Category.assoc]
-      calc
-        _ = UX.map ((aU.comp aV).homEquiv G (LUV.obj G) (c.hom.app G)) :=
-          (hcomp G (LUV.obj G) (c.hom.app G)).symm
-        _ = UX.map (aUV.unit.app G) ≫ UX.map (d.hom.app (LUV.obj G)) :=
-          map_homEquiv_of_unit UX (aU.comp aV) G (LUV.obj G) (c.hom.app G)
-            (aUV.unit.app G) (d.hom.app (LUV.obj G)) (hu G)
-        _ = _ := congrArg (fun k ↦ UX.map (aUV.unit.app G) ≫ k) (hd (LUV.obj G))
-    calc
-      _ = ec.hom ≫ c0.hom.app (UX.obj G) :=
-        comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
-          (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
-      _ = _ := Category.assoc (eV.hom.app (LU.obj G)) (lv.map (eU.hom.app G))
-        (c0.hom.app (UX.obj G))
+      have hmap : UX.map ((aU.comp aV).homEquiv G (LUV.obj G) (c.hom.app G)) =
+          UX.map (aUV.unit.app G) ≫ UX.map (d.hom.app (LUV.obj G)) :=
+        map_homEquiv_of_unit UX (aU.comp aV) G (LUV.obj G) (c.hom.app G)
+          (aUV.unit.app G) (d.hom.app (LUV.obj G)) (hu G)
+      have hmap' : UX.map (aUV.unit.app G) ≫ UX.map (d.hom.app (LUV.obj G)) =
+          UX.map (aUV.unit.app G) ≫ d0.hom.app (UZ.obj (LUV.obj G)) :=
+        congrArg (fun k : UX.obj ((SheafOfModules.pushforward chi).obj (LUV.obj G)) ⟶
+            UX.obj ((SheafOfModules.pushforward psi ⋙
+              SheafOfModules.pushforward phi).obj (LUV.obj G)) ↦
+          UX.map (aUV.unit.app G) ≫ k) (hd (LUV.obj G))
+      exact (hcomp G (LUV.obj G) (c.hom.app G)).symm.trans (hmap.trans hmap')
+    have hh : UZ.map (c.hom.app G) ≫ eUV.hom.app G = ec.hom ≫ c0.hom.app (UX.obj G) :=
+      comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
+        (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
+    exact hh.trans (Category.assoc (eV.hom.app (LU.obj G)) (lv.map (eU.hom.app G))
+      (c0.hom.app (UX.obj G)))
 
 end AlgebraicGeometry
