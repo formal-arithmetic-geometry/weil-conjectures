@@ -34,6 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 variable (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
 
 set_option maxHeartbeats 2000000 in
+set_option trace.profiler true in
 -- Checking section identities unfolds the two constant-scalar restriction constructions.
 private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     coefficientRestriction (J := W.smallEtaleTopology) O t h ⋙
@@ -67,6 +68,7 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     rfl
 
 set_option maxHeartbeats 2000000 in
+set_option trace.profiler true in
 -- The normalization transports adjunctions between two concrete derived-category universes.
 /-- Normalize the comparison maps while retaining the supplied derived functors and
 factorizations. Arbitrary comparison isomorphisms are not automatically normalized.
