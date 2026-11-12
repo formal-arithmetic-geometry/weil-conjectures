@@ -287,24 +287,32 @@ private theorem normalizedBeta_eq (n : ℕ)
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
     (asIso beta).symm = coefficientScalarTensorIso l E Y n P Q := by
-  dsimp only [integralReductionChangeOfRings, integralReductionExistence,
-    scalarReductionExtension, scalarReductionExistence, totalTensor, coefficientTotalTensor,
-    ordinaryTensor, Functor.uncurry_obj_obj] at *
-  apply (coefficientScalarTensorIso_exists l E Y n P Q).unique
-  · intro i j k hij U x y
-    subst k
-    have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
-    rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection,
-      reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
-    dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-      integralReductionChangeOfRings, integralReductionExistence,
-      scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
-    exact hh
-  · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
-    exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+  refine (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.2 (asIso beta).symm ?_
+  intro i j k hij U x y
+  subst k
+  have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
+  rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
+    reductionUnit_eq_coefficientIntegralScalarUnitSection,
+    reductionUnit_eq_coefficientIntegralScalarUnitSection,
+    reductionUnit_eq_coefficientIntegralScalarUnitSection] at hh
+  dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
+    integralReductionChangeOfRings, integralReductionExistence,
+    scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hh ⊢
+  exact hh
 
+
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
+private theorem native_reduction_counit (n : ℕ)
+    (A : CochainComplex (scalarReductionSource l E Y) ℤ)
+    (hA : A.IsKFlatIndependentCoefficients) :
+    (finiteCochainModel l E Y n).ε.app A = reductionCounit l E Y D hl n A := by
+  rw [finiteCochainModel_counit l E Y n A hA]
+  unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+  change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  with_unfolding_all rfl
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -327,7 +335,7 @@ private theorem nativeReductionMonoidal
       (core.μIso X Z).inv = F.map (e.inv.app (X, Z)) ≫
         m.mu.hom.app (X, Z) ≫ f.hom.app (F.obj X, F.obj Z) := by
   classical
-  intro J R S F e f
+  intro J R S monR₀ monS₀ F e f
   let : HasSheafify J AddCommGrpCat.{max u (t + 1)} :=
     integralCoefficientAbSheafify.{t, u} Y
   let : J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
@@ -387,28 +395,18 @@ private theorem nativeReductionMonoidal
       change _ = (RingedDerivedNative.tensorIso J R P Q (Or.inl hP)).hom at hrepR
       have hcr : (TR.iso J R AR P Q hP hQ).hom =
           a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫
-            e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) := by
-        rw [hTR']
-        exact hrepR.symm
-      have heps (A : CochainComplex (scalarReductionSource l E Y) ℤ)
-          (hA : A.IsKFlatIndependentCoefficients) :
-          D'.ε.app A = reductionCounit l E Y D hl n A := by
-        rw [finiteCochainModel_counit l E Y n A hA]
-        unfold coefficientFiniteReductionModel coefficientLocalizedCounitModel reductionCounit
-        dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
-        change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
-        simp only [CategoryTheory.Functor.map_id, Category.id_comp]
-        with_unfolding_all rfl
-      rw [heps P hP, heps Q hQ, heps _
-        (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
+            e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :=
+        (congrArg Iso.hom hTR').trans hrepR.symm
+      rw [native_reduction_counit l E Y D hl n P hP,
+        native_reduction_counit l E Y D hl n Q hQ,
+        native_reduction_counit l E Y D hl n _
+          (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
       let cS := (TS.iso J S AS _ _ hEP hEQ).hom
       have hcs : cS = m.target.representative.hom.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫
-          f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
-        dsimp only [cS]
-        rw [hTS']
-        exact hrepS.symm
+          f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) :=
+        (congrArg Iso.hom hTS').trans hrepS.symm
       have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
           𝟙 _ := by
         rw [← Functor.map_comp]
