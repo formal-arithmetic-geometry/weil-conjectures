@@ -18,6 +18,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
+-- Use the same sheaf tensor presentation as the summand comparison.
+attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
+  SheafOfModules.monoidalCategory
+attribute [local instance 4000] HomologicalComplex.monoidalCategory
+attribute [local instance 4000] HomologicalComplex.monoidalCategoryStruct
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
