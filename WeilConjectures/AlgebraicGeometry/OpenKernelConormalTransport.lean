@@ -262,8 +262,6 @@ private theorem open_pullback_sections_transport {X Y : Scheme.{u}} (g : X ⟶ Y
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
--- Transporting the kernel and its unit elaborates nested module functor applications.
 /-- Restrict the actual kernel pullback to a chart where the morphism is closed.
 Source: Stacks Project, Tags 01R3 (1), 00A0 and 0096.
 (blueprint: lem-sc-open-kernel-conormal-transport).
