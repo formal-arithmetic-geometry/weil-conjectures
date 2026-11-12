@@ -97,6 +97,7 @@ private theorem openBaseChange_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the dependent stage objects and their composed comparison needs more heartbeats.
 /-- Descent on one original open supplies models on its inverse image at every later stage.

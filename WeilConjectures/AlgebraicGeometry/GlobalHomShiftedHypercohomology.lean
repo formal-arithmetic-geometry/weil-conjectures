@@ -114,6 +114,7 @@ private noncomputable def globalSectionsShiftIso (X : Scheme.{u})
       (DerivedCategory.homologyFunctor A 0 ⋙ U) ≪≫
     Functor.isoWhiskerLeft (shiftFunctor (schemeDerivedCategory X) k) (globalSectionsZeroIso X)
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the site and ringed-space presentations of the derived category is expensive.
 /-- Cohomology of module-valued global Hom agrees with zeroth additive-group-valued

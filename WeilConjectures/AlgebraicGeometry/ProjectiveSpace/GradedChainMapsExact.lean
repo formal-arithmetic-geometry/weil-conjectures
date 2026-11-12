@@ -113,6 +113,7 @@ private theorem basis_chain_exact
   · exact ComposableArrows.exact₂_mk _ hc₂ he₂
   · exact ComposableArrows.exact₂_mk _ hc₁ he₁
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- The four dependent module/chart families require extra elaboration heartbeats.
 /-- Fixed associated sheaves of an exact graded chain admit an exact chain of maps.
