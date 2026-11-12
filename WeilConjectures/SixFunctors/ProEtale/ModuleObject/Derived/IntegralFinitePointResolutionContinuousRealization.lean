@@ -212,6 +212,7 @@ local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateFi
 set_option linter.unusedVariables false in
 -- The supplied section family subsumes the retained scalar-continuity hypothesis.
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Elaborating the mixed-universe module maps and their action comparisons needs this budget.
 /-- Realize a sectionwise exact lifted resolution as a short exact point-module complex.
 

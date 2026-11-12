@@ -63,6 +63,7 @@ lemma finiteCoefficientDerivedEquivalence_map_eqToHom_comp_leftDerivedUpperStarI
   exact (finiteCoefficientDerivedUpperStarIso_hom_app_id T Y M).symm
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- unifying the derived comparison `Φ` with `D(Φ)` in the composition coherence is expensive
 /-- **The finite-coefficient comparison carries the section isomorphisms of module objects to
 those of sheaves of `T`-modules.** For a section `s` of `p : X ⟶ Y` and `M` in the derived
