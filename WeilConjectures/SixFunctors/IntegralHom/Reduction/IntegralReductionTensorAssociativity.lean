@@ -119,6 +119,12 @@ private theorem transportedTensorMate_assoc
   simp only [← U.map_comp, ← F.map_comp, Iso.hom_inv_id,
     Functor.map_id, Category.comp_id]
 
+private theorem map_comp_eq_id_of_inverse
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y : C} (b : X ≅ Y) (k : Y ⟶ X) (h : b.inv = k) :
+    F.map b.hom ≫ F.map k = 𝟙 (F.obj X) := by
+  rw [← h, ← F.map_comp, b.hom_inv_id, F.map_id]
+
 private theorem transport_tensor_normalization
     {C D : Type*} [Category C] [Category D]
     (T T' : C × C ⥤ C) (S S' : D × D ⥤ D) (F : C ⥤ D)
@@ -156,6 +162,8 @@ attribute [local implicit_reducible] completedIntegralCoefficientSheaf
   integralReductionSourceHasDerivedCategory integralReductionTargetHasDerivedCategory
   coefficientFiniteHasDerived coefficientFiniteDerivedExtension derivedCategory
   CategoryTheory.sheafCompose CommRingCat.hasForgetToRingCat
+  integralReductionChangeOfRings integralReductionExistence
+  scalarReductionExtension scalarReductionExistence
 
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
@@ -286,13 +294,14 @@ private theorem normalizedBeta_generators (n : ℕ)
         ((((totalTensor Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X
           (i + j))).val.app U
         (totalPair Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) :
+    let b := asIso beta
     CoefficientScalarTensorGenerators.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y)
       (integralCoefficientCommRingSheaf l E Y n) (scalarReductionExtension l E Y n)
       (hF := coefficientFiniteExtensionAdditive l E Y n)
-      (coefficientIntegralScalarUnitSection l E Y n) P Q (asIso beta).symm := by
-  intro i j k hij U x y
+      (coefficientIntegralScalarUnitSection l E Y n) P Q b.symm := by
+  intro b i j k hij U x y
   subst k
   have hh := normalizedBeta_inv_generator l E Y D hl n P Q beta hbeta i j U x y
   rw [integral_totalPair_eq_generator, integral_totalPair_eq_generator,
@@ -412,11 +421,7 @@ private theorem nativeReductionMonoidal
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       trace "native: beta theorem applied"
-      have hkc := hc P Q
-      dsimp only [totalTensor, coefficientTotalTensor, ordinaryTensor,
-        integralReductionChangeOfRings, integralReductionExistence,
-        scalarReductionExtension, scalarReductionExistence, Functor.uncurry_obj_obj] at hb hkc
-      have hbκ := hb.trans hkc.symm
+      have hbκ := (congrArg Iso.hom hb).trans (congrArg Iso.hom (hc P Q)).symm
       trace "native: beta identified"
       refine ⟨hEP, hEQ, ?_⟩
       trace "native: preservation supplied"
@@ -441,14 +446,8 @@ private theorem nativeReductionMonoidal
       have hcs : cS = m.target.representative.hom.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫
           f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) :=
         (congrArg Iso.hom hTS').trans hrepS.symm
-      have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
-          𝟙 _ := by
-        rw [← Functor.map_comp]
-        have hh : beta ≫ κ.hom.app (P, Q) = 𝟙 _ := by
-          change beta ≫ (κ.app (P, Q)).hom = _
-          rw [← hbκ]
-          exact (asIso beta).hom_inv_id
-        rw [hh, CategoryTheory.Functor.map_id]
+      have hcan := CategoryTheory.map_comp_eq_id_of_inverse DerivedCategory.Q
+        (asIso beta) (κ.hom.app (P, Q)) hbκ
       exact CategoryTheory.transport_tensor_normalization
         a.tensor AR.tensor m.target.tensor AS.tensor F e f m.mu
         (a.representative.app (⟨P, hP⟩, ⟨Q, hQ⟩))
