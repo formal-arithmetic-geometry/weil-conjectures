@@ -131,18 +131,8 @@ theorem affineBaseChangeTildeModuleMap_localized
   have hcoord := affineTensorPullbackHomologyStalkIso_coordinates A A' φg' K hL M e hc i p
   rw [hcoord]
   rw [hlU]
-  have hid : ∀ X, ((Spec (.of A')).toRingedSpace.moduleStalkFunctor p).map
-      ((DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).map
-      ((DerivedCategory.Qh
-        (C := SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace))).map
-      (((Scheme.Modules.tensorPullback
-        (Spec.map (CommRingCat.ofHom φg'))).mapHomotopyCategoryFactors (.up ℤ)).inv.app X))) =
-        𝟙 _ := by
-    intro X
-    simp
-  simp only [affineBaseChangeIntoPullback, Category.assoc, Functor.map_comp, hid,
-    Functor.comp_obj]
+  simp only [affineBaseChangeIntoPullback, Category.assoc, Functor.map_comp,
+    Functor.map_id, Functor.comp_obj]
   rfl
 
 end AlgebraicGeometry
