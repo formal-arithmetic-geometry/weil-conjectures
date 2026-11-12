@@ -24,6 +24,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option diagnostics true in
 -- Elaborating the derived restriction comparisons needs this larger budget.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
