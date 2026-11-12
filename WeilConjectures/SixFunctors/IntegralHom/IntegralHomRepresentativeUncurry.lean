@@ -220,7 +220,7 @@ theorem representative_uncurry_evaluation
     change _ ≫ (S.transpose _ _ _).symm
       (DerivedCategory.Q.map φ' ≫ (coefficientHomResolutionIso J R L I).inv) = _ at hsquare
     dsimp only [φ'] at hsquare
-    erw [DerivedCategory.Q.map_comp] at hsquare
+    simp only [Functor.map_comp] at hsquare
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
       simpa only [Category.assoc, homModelMap, r] using hsquare
