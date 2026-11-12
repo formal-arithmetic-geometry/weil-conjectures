@@ -49,12 +49,7 @@ private theorem globalSectionsTensor_natural_left
   apply TensorProduct.ext'
   intro x y
   simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    ModuleCat.MonoidalCategory.whiskerLeft_apply,
-    ModuleCat.MonoidalCategory.whiskerRight_apply,
-    ModuleCat.MonoidalCategory.associator_hom_apply,
-    ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
-    ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
+    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
   exact (whiskerRight_app_tmulSection (X := X) (N := P) (U := ⊤) f x y).symm
 
 private theorem globalSectionsTensor_natural_right
@@ -68,12 +63,7 @@ private theorem globalSectionsTensor_natural_right
   apply TensorProduct.ext'
   intro x y
   simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    ModuleCat.MonoidalCategory.whiskerLeft_apply,
-    ModuleCat.MonoidalCategory.whiskerRight_apply,
-    ModuleCat.MonoidalCategory.associator_hom_apply,
-    ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
-    ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
+    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
   exact (whiskerLeft_app_tmulSection (X := X) (M := P) (U := ⊤) f x y).symm
 
 private theorem globalSectionsTensor_associativity
@@ -91,12 +81,7 @@ private theorem globalSectionsTensor_associativity
   apply TensorProduct.ext_threefold
   intro x y z
   simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    ModuleCat.MonoidalCategory.whiskerLeft_apply,
-    ModuleCat.MonoidalCategory.whiskerRight_apply,
-    ModuleCat.MonoidalCategory.associator_hom_apply,
-    ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
-    ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
+    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
   exact associator_hom_app_tmulSection (X := X) (M := M) (N := N) (P := P)
     (U := ⊤) x y z
 
@@ -111,12 +96,7 @@ private theorem globalSectionsTensor_left_unitality
   apply TensorProduct.ext'
   intro r s
   simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    ModuleCat.MonoidalCategory.whiskerLeft_apply,
-    ModuleCat.MonoidalCategory.whiskerRight_apply,
-    ModuleCat.MonoidalCategory.associator_hom_apply,
-    ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
-    ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
+    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
   exact (leftUnitor_hom_app_tmulSection (X := X) (M := M) (U := ⊤) r s).symm
 
 private theorem globalSectionsTensor_right_unitality
@@ -130,12 +110,7 @@ private theorem globalSectionsTensor_right_unitality
   apply TensorProduct.ext'
   intro s r
   simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    ModuleCat.MonoidalCategory.whiskerLeft_apply,
-    ModuleCat.MonoidalCategory.whiskerRight_apply,
-    ModuleCat.MonoidalCategory.associator_hom_apply,
-    ModuleCat.MonoidalCategory.leftUnitor_hom_apply,
-    ModuleCat.MonoidalCategory.rightUnitor_hom_apply,
-    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom, tensorSectionsMap_tmul]
+    moduleCup_sectionTensorMap, ModuleCat.hom_ofHom]
   exact (rightUnitor_hom_app_tmulSection (X := X) (M := M) (U := ⊤) r s).symm
 
 set_option backward.isDefEq.respectTransparency true in

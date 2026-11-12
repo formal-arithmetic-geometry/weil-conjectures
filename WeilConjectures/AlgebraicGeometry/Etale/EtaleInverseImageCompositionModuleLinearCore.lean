@@ -154,6 +154,16 @@ private theorem compare_by_homEquiv
   rw [← Category.assoc, b.homEquiv_naturality_right]
   exact h
 
+/-- Map the unit description of a hom-equivalence without unfolding the adjunction. -/
+private theorem map_homEquiv_of_unit
+    {M N A : Type*} [Category M] [Category N] [Category A]
+    (U : M ⥤ A) {L : M ⥤ N} {R : N ⥤ M} (a : L ⊣ R)
+    (G : M) (F : N) (k : L.obj G ⟶ F) {T : M}
+    (v : G ⟶ T) (w : T ⟶ R.obj F)
+    (h : a.unit.app G ≫ R.map k = v ≫ w) :
+    U.map (a.homEquiv G F k) = U.map v ≫ U.map w := by
+  rw [a.homEquiv_apply, h, U.map_comp]
+
 /-- A comparison is determined by its image under an adjunction and the mate unit equation. -/
 private theorem comparison_forget_of_units
     {A B : Type*} [Category A] [Category B]
@@ -459,10 +469,12 @@ theorem etaleInverseImageCompositionModuleLinearCore
     exact congrArg
       ((sheafCompose JX
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map) hr
-  let d := SheafOfModules.pushforwardCongr₂ chi alpha hr' ≪≫
+  let d : SheafOfModules.pushforward chi ≅
+      SheafOfModules.pushforward psi ⋙ SheafOfModules.pushforward phi :=
+    SheafOfModules.pushforwardCongr₂ chi alpha hr' ≪≫
     (SheafOfModules.pushforwardComp (J := JX)
       (K := JY) (K' := JZ) (F := f) (G := g) phi psi).symm
-  let c := (conjugateIsoEquiv aUV (aU.comp aV)).symm d
+  let c : LU ⋙ LV ≅ LUV := (conjugateIsoEquiv aUV (aU.comp aV)).symm d
   have hd : ∀ F, UX.map (d.hom.app F) = d0.hom.app (UZ.obj F) := by
     intro F
     ext W x
@@ -515,8 +527,11 @@ theorem etaleInverseImageCompositionModuleLinearCore
         UX.map (aUV.unit.app G) ≫ d0.hom.app (UZ.obj (LUV.obj G)) := by
       change (au.comp av).homEquiv (UX.obj G) (UZ.obj (LUV.obj G))
         ((lv.map (eU.inv.app G) ≫ eV.inv.app (LU.obj G)) ≫ UZ.map (c.hom.app G)) = _
-      rw [Category.assoc, ← hcomp G (LUV.obj G) (c.hom.app G),
-        (aU.comp aV).homEquiv_apply, hu G, UX.map_comp, hd (LUV.obj G)]
+      rw [Category.assoc]
+      exact (hcomp G (LUV.obj G) (c.hom.app G)).symm.trans
+        ((map_homEquiv_of_unit UX (aU.comp aV) G (LUV.obj G) (c.hom.app G)
+          (aUV.unit.app G) (d.hom.app (LUV.obj G)) (hu G)).trans
+          (congrArg (fun k ↦ UX.map (aUV.unit.app G) ≫ k) (hd (LUV.obj G))))
     rw [← Category.assoc]
     exact comparison_forget_of_units (au.comp av) auv d0 c0 (UX.obj G) ec (eUV.app G)
       (UZ.map (c.hom.app G)) (UX.map (aUV.unit.app G)) hc (hunit G) (hmate (UX.obj G))
