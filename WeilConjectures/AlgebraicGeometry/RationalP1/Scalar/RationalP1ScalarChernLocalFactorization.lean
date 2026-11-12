@@ -439,6 +439,6 @@ theorem scalar_chern_local_factorization
       (scalarP2UnitIso _ Y).hom (native_p2_endpoint _ Y) hq
     unfold scalarP2Chern scalarP2LocalChern secondDiagramPushIso
     dsimp only
-    simpa only [coefficient, line] using! hfinal
+    simpa only [coefficient, line, secondProjection] using hfinal
 
 end AlgebraicGeometry.ProEtale.RationalP1
