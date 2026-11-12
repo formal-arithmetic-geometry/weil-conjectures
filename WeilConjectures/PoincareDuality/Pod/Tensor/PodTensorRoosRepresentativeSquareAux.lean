@@ -390,23 +390,11 @@ theorem podTensorRoosRepresentativeSquare_of_normalization
       (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj))
     a b (D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj, Q.obj))).hom
   have finish := cancel'
-    _ τ (podTensorReindexAt_tower l E g D hD P Q τ)
-    (by
-      dsimp only [a, b, eP, eQ, e, integralOperationsTensorOnGood,
-        integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
-        podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
-        integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-        ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj, Iso.app_hom]
-      exact hs)
+    _ τ (podTensorReindexAt_tower l E g D hD P Q τ) hs
     ((integralCompletedTensor l E X).map
       (Prod.mkHom
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
         ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))))
-  dsimp only [a, b, eP, eQ, e, integralOperationsTensorOnGood,
-    integralOperationsTensorComplexFunctor, integralOperationsGoodLocalization,
-    podOrdinaryReindex, isoReductionIntegralComplex, podGoodReindex,
-    integralOperationsRoosFunctor, Functor.comp_obj, Functor.prod_obj,
-    ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj, Iso.app_hom, Iso.app_inv] at finish
   exact finish.trans
     (podReindexingLimitTensorComparison_canonical l E g D hD ⟨_, hP⟩ ⟨_, hQ⟩)
 
