@@ -48,7 +48,6 @@ private lemma homObj_comp_naturality_apply (X : Scheme.{u})
   exact PresheafOfModules.restrictOver_hom_app_congr _ (Category.id_comp W.unop.hom) _
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 -- Restricting sections unfolds the localized internal-Hom module structures.
 /-- Cycle formulas determine a morphism once every local cycle has a target-cycle lift.
 Source: Stacks Project, Tag 08DH, separatedness of internal Hom.

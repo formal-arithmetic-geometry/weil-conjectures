@@ -40,15 +40,14 @@ private lemma localCycleLift_differential_apply (X : Scheme.{u})
     map_sub, map_zsmul] at he
   change (r.val.app (op U) (d.val.app (op U) s)).app (op (Over.mk (𝟙 U))) z =
     b.val.app (op U) ((p.val.app (op U) s).app (op (Over.mk (𝟙 U))) z) -
-      (c : ℤ) • (q.val.app (op U) s).app (op (Over.mk (𝟙 U)))
-        (a.val.app (op U) z) at he
+      (c : ℤ) • (show B'.val.obj (op U) from
+        (q.val.app (op U) s).app (op (Over.mk (𝟙 U))) (a.val.app (op U) z)) at he
   rw [hs, hz, map_zero, map_zero] at he
   change 0 = b.val.app (op U) ((p.val.app (op U) s).app (op (Over.mk (𝟙 U))) z) -
     (c : ℤ) • (0 : B'.val.obj (op U)) at he
   simpa only [smul_zero, sub_zero] using he.symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 -- The differential formula unfolds localized Hom and evaluated kernel structures.
 /-- Every pair of local cycle representatives has a representative in the target cycles.
 Source: Stacks Project, Tag 0A8X, Hom differential formula.
