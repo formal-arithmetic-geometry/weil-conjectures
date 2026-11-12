@@ -105,6 +105,84 @@ private lemma source_hom_sections_ext (W : Scheme.{u}) (s : Option ℕ)
   apply ModuleCat.hom_ext
   exact LinearMap.ext (h U z V)
 
+private theorem source_chain_conjugate {D : Type*} [Category D]
+    {A B C D₀ E₀ : D} (e : A ≅ B) (e' : E₀ ≅ D₀)
+    (f : B ⟶ C) (k : C ⟶ D₀) (h : A ⟶ E₀)
+    (w : e.hom ≫ f ≫ k = h ≫ e'.hom) : f ≫ k ≫ e'.inv = e.inv ≫ h := by
+  apply (cancel_epi e.hom).mp
+  simp only [← Category.assoc]
+  rw [w, Category.assoc, e'.hom_inv_id, Category.comp_id, e.hom_inv_id,
+    Category.id_comp]
+
+private lemma source_complexShift_projection
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (s : Option ℕ)
+    (P I : K l E Y s) (a r p q : ℤ) (hpq : p + r = q) :
+    (((podReindexingHom l E X s).map ((complexShift l E g s a).inv.app P).op).app
+      ((podReindexingComplexFunctor l E g s).obj I)).f r ≫
+        proj l E X s (((podReindexingComplexFunctor l E g s).obj P)⟦a⟧)
+          ((podReindexingComplexFunctor l E g s).obj I) r p q hpq =
+      proj l E X s ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧))
+        ((podReindexingComplexFunctor l E g s).obj I) r p q hpq := by
+  have hmap := homComplexFunctor_map_f_π (R := podReindexingRing l E X s)
+    ((complexShift l E g s a).inv.app P)
+    (𝟙 ((podReindexingComplexFunctor l E g s).obj I)) r p q hpq
+  have him := ((podReindexingHom l E X s).obj
+    (op (((podReindexingComplexFunctor l E g s).obj P)⟦a⟧))).map_id
+      ((podReindexingComplexFunctor l E g s).obj I)
+  dsimp only [podReindexingHom] at him
+  simp only [Functor.comp_obj] at hmap
+  erw [him, Category.comp_id] at hmap
+  simp only [complexShift_inv_f, HomologicalComplex.id_f] at hmap
+  have hid := SheafOfModules.homObjMap_id (R := podReindexingRing l E X s)
+    (M := ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧)).X p)
+    (N := ((podReindexingComplexFunctor l E g s).obj I).X q)
+  simpa only [hid, Category.comp_id] using hmap
+
+private lemma source_chain_leftFormula
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]
+    (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)
+    (TX : Models l E X s SX) (TY : Models l E Y s SY)
+    (c : Comparison l E g s SX SY TX TY) (P I : K l E Y s) (a : ℤ)
+    (eY : (hom l E Y s P I)⟦-a⟧ ≅ hom l E Y s (P⟦a⟧) I)
+    (hY : CategoryTheory.RingedHomUniverses.LeftFormula.{u + 1, u, u}
+      (ProEt.topology Y) (podReindexingRing l E Y s) P I a eY)
+    (r p q : ℤ) (hpq : p + r = q) :
+    ((podReindexingComplexFunctor l E g s).map eY.hom).f r ≫
+      (c.chain (P⟦a⟧) I).hom.f r ≫
+        proj l E X s ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧))
+          ((podReindexingComplexFunctor l E g s).obj I) r p q hpq =
+      (a * r).negOnePow • ((c.chain P I).hom.f (r + -a) ≫
+        proj l E X s ((podReindexingComplexFunctor l E g s).obj P)
+          ((podReindexingComplexFunctor l E g s).obj I) (r + -a) (p + a) q (by omega)) := by
+  apply source_hom_sections_ext l E X s
+  intro U z V x
+  refine Eq.trans ?_ (hom_units l E X s
+    ((c.chain P I).hom.f (r + -a) ≫
+      proj l E X s ((podReindexingComplexFunctor l E g s).obj P)
+        ((podReindexingComplexFunctor l E g s).obj I) (r + -a) (p + a) q (by omega))
+    (a * r).negOnePow U z V x).symm
+  change
+    (((proj l E X s ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧))
+      ((podReindexingComplexFunctor l E g s).obj I) r p q hpq).val.app U
+        (((c.chain (P⟦a⟧) I).hom.f r).val.app U
+          ((eY.hom.f r).val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) z))).app V).hom x =
+      (a * r).negOnePow •
+        (((proj l E X s ((podReindexingComplexFunctor l E g s).obj P)
+          ((podReindexingComplexFunctor l E g s).obj I) (r + -a) (p+a) q (by omega)).val.app U
+            (((c.chain P I).hom.f (r + -a)).val.app U z)).app V).hom x
+  rw [chain_projection', chain_projection']
+  have hy := congrArg
+    (fun f ↦ ((f.val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) z).app
+      (op (Over.mk ((proEtaleIsoPostcompose g).map V.unop.hom)))).hom x)
+    (hY r p q hpq)
+  have hs := hom_units l E Y s
+    (proj l E Y s P I (r + -a) (p+a) q (by omega)) (a * r).negOnePow
+    (op ((proEtaleIsoPostcompose g).obj U.unop)) z
+    (op (Over.mk ((proEtaleIsoPostcompose g).map V.unop.hom))) x
+  exact hy.trans hs
+
+
 set_option profiler true in
 -- The degreewise sheaf, presheaf, and linear-map extensionality needs extra elaboration fuel.
 /-- The signed source reindexings commute with the fixed sectionwise chain comparison.
@@ -137,61 +215,14 @@ theorem source_chain_square
       (podReindexingComplexFunctor l E g s).map eY.inv ≫
         (complexShift l E g s (-a)).hom.app (hom l E Y s P I) ≫
         ((c.chain P I).hom)⟦-a⟧' := by
-  let ey := (podReindexingComplexFunctor l E g s).mapIso eY
-  apply (cancel_epi ey.hom).mp
-  have hi : ey.hom ≫ (podReindexingComplexFunctor l E g s).map eY.inv = 𝟙 _ :=
-    ey.hom_inv_id
-  rw [← Category.assoc ey.hom ((podReindexingComplexFunctor l E g s).map eY.inv),
-    hi, Category.id_comp]
-  apply (cancel_mono eX.hom).mp
-  simp only [Category.assoc, eX.inv_hom_id]
-  erw [Category.comp_id]
+  apply source_chain_conjugate ((podReindexingComplexFunctor l E g s).mapIso eY) eX
   apply HomologicalComplex.hom_ext
   intro r
   apply homComplex_hom_ext
   intro p q hpq
-  have hmap := homComplexFunctor_map_f_π (R := podReindexingRing l E X s)
-    ((complexShift l E g s a).inv.app P)
-    (𝟙 ((podReindexingComplexFunctor l E g s).obj I)) r p q hpq
-  have him := ((podReindexingHom l E X s).obj
-    (op (((podReindexingComplexFunctor l E g s).obj P)⟦a⟧))).map_id
-      ((podReindexingComplexFunctor l E g s).obj I)
-  dsimp only [podReindexingHom] at him
-  simp only [Functor.comp_obj] at hmap
-  erw [him, Category.comp_id] at hmap
-  simp only [complexShift_inv_f, HomologicalComplex.id_f] at hmap
-  have hid := SheafOfModules.homObjMap_id (R := podReindexingRing l E X s)
-    (M := ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧)).X p)
-    (N := ((podReindexingComplexFunctor l E g s).obj I).X q)
   simp only [HomologicalComplex.comp_f, Category.assoc,
-    CochainComplex.shiftFunctor_map_f', complexShift_hom_f]
-  erw [hmap, hid, Category.comp_id]
-  rw [hX, Linear.comp_units_smul]
-  apply source_hom_sections_ext l E X s
-  intro U z V x
-  refine Eq.trans ?_ (hom_units l E X s
-    ((c.chain P I).hom.f (r + -a) ≫
-      proj l E X s ((podReindexingComplexFunctor l E g s).obj P)
-        ((podReindexingComplexFunctor l E g s).obj I) (r + -a) (p + a) q (by omega))
-    (a * r).negOnePow U z V x).symm
-  change
-    (((proj l E X s ((podReindexingComplexFunctor l E g s).obj (P⟦a⟧))
-      ((podReindexingComplexFunctor l E g s).obj I) r p q hpq).val.app U
-        (((c.chain (P⟦a⟧) I).hom.f r).val.app U
-          ((eY.hom.f r).val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) z))).app V).hom x =
-      (a * r).negOnePow •
-        (((proj l E X s ((podReindexingComplexFunctor l E g s).obj P)
-          ((podReindexingComplexFunctor l E g s).obj I) (r + -a) (p+a) q (by omega)).val.app U
-            (((c.chain P I).hom.f (r + -a)).val.app U z)).app V).hom x
-  rw [chain_projection', chain_projection']
-  have hy := congrArg
-    (fun f ↦ ((f.val.app (op ((proEtaleIsoPostcompose g).obj U.unop)) z).app
-      (op (Over.mk ((proEtaleIsoPostcompose g).map V.unop.hom)))).hom x)
-    (hY r p q hpq)
-  have hs := hom_units l E Y s
-    (proj l E Y s P I (r + -a) (p+a) q (by omega)) (a * r).negOnePow
-    (op ((proEtaleIsoPostcompose g).obj U.unop)) z
-    (op (Over.mk ((proEtaleIsoPostcompose g).map V.unop.hom))) x
-  exact hy.trans hs
+    CochainComplex.shiftFunctor_map_f', complexShift_hom_f, Category.id_comp]
+  rw [source_complexShift_projection, hX, Linear.comp_units_smul]
+  exact source_chain_leftFormula l E g s SX SY TX TY c P I a eY hY r p q hpq
 
 end WeilConjectures.PodReindexingCoherence

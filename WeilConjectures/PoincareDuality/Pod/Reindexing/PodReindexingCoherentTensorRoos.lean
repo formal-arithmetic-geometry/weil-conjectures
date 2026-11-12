@@ -135,6 +135,7 @@ theorem podReindexing_tensor_roos_normalization
           (βQ ≪≫ ((pullbackTensorOrdinaryReduction l E X).mapHomologicalComplex (.up ℤ)).mapIso
             (podReindexComplexIso l E g Q.obj)).hom)) hσ hτ)
   apply heq_of_eq
-  simpa only [podReindexingLimitTensorComparisonHom_eq, Category.assoc] using hroos
+  rw [podReindexingLimitTensorComparisonHom_eq]
+  simpa only [Category.assoc] using hroos
 
 end WeilConjectures

@@ -273,7 +273,7 @@ theorem source_left_normalization
         ((complexShift l E g s a).inv.app P).op).app KI))
       (S.inv.app (Q.obj KI)) (S.inv.app (F.obj ((podReindexingQ l E Y s).obj I)))
       (Q.map eX.inv ≫ (Q.commShiftIso (-a)).hom.app (hom l E X s KP KI)) hm ht
-      (by simpa only [Category.assoc] using hn'.symm)
+      (by simpa only [Category.assoc, Functor.mapIso_inv, Iso.app_inv] using hn'.symm)
   have hnat := c.derived.hom.naturality
     (Prod.mkHom (((podReindexingQ l E Y s).commShiftIso a).inv.app P).op
       (𝟙 ((podReindexingQ l E Y s).obj I)))
