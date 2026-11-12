@@ -27,7 +27,8 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem map_lift_transport
     {C D H : Type*} [Category C] [Category D] [Category H]
@@ -125,16 +126,12 @@ theorem exists_supported_affine_overlap_map
               x))) ∧
         SW.map a ≫ kW.hom.app E.obj = c.hom ≫ SV.map b ≫ kV.hom.app E.obj := by
   classical
-  let JW := (schemeOpenRestriction X W).mapDerivedCategory
-  let JV := (schemeOpenRestriction X V).mapDerivedCategory
-  let SW := (schemeOpenOverlapRestriction X
-    (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory
-  let SV := (schemeOpenOverlapRestriction X
-    (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory
-  let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)
-  let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)
-  let A := JW.obj R ⊞ (JW.obj R)⟦(1 : ℤ)⟧
-  let a : A ⟶ JW.obj E.obj := biprod.fst ≫ JW.map β
+  let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
+    fun Z ↦ inferInstance
+  let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
+      Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
+    fun Z O ↦ inferInstance
+  intro JW JV SW SV kW kV A a
   obtain ⟨hF, hFT, hA, hAT⟩ := local_perfect_supported_stabilization X W T R hR hRT
   obtain ⟨Q, hQ, hQT, ⟨q⟩⟩ :=
     exists_supported_overlap_perfect_extension X W V hW hV T hT hTc (JW.obj R) hF hFT

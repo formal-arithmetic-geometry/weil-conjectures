@@ -25,7 +25,8 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
@@ -189,6 +190,11 @@ theorem exists_supported_map_affine_union_gluing
         H.mapDerivedCategory.map α ≫ c.hom.app E.obj =
           e.hom ≫ biprod.fst ≫ J.mapDerivedCategory.map β := by
   classical
+  let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
+    fun Z ↦ inferInstance
+  let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
+      Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
+    fun Z O ↦ inferInstance
   let Y := W ⊔ V
   let L := (schemeOpenRestriction X Y).mapDerivedCategory
   let H := (schemeOpenOverlapRestriction X

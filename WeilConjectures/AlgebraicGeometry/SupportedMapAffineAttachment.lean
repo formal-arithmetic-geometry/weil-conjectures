@@ -25,7 +25,8 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 private theorem restrict_map_comparison
     {C D B : Type*} [Category C] [Category D] [Category B]
@@ -136,6 +137,11 @@ theorem exists_supported_map_affine_attachment
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory.map β := by
   classical
+  let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
+    fun Z ↦ inferInstance
+  let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
+      Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
+    fun Z O ↦ inferInstance
   let Y := W ⊔ V
   obtain ⟨hY, ⟨hYO⟩⟩ := open_derived_localization_data X Y
   let := hY
