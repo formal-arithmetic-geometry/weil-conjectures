@@ -97,6 +97,9 @@ theorem strictEtaleBrownInverse_representative
             (strictEtaleBrownOrdinaryInverse O t g n A B R) (.up ℤ)).app K) := by
   let : (strictEtaleBrownConstant O t V n).Additive := RV.val.ordinaryAdditive n
   let : (strictEtaleBrownConstant O t W n).Additive := RW.val.ordinaryAdditive n
+  have : Functor.PreservesZeroMorphisms
+      ((A.lift n).modules ⋙ strictEtaleBrownConstant O t V n) :=
+    Functor.preservesZeroMorphisms_comp _ _
   let b := Etale.upperStarLowerStarAdjunction
     (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g
   have hm : ((mateEquiv B.adjunction b.mapDerivedCategoryRightDerivedAdjunction).symm
