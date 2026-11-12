@@ -136,6 +136,36 @@ theorem evaluation_ring_app (n : ℕ) (U : Cᵒᵖ) :
   rw [ObjectProperty.eqToHom_hom, eqToHom_app]
   rfl
 
+private theorem system_obj_eq_of_evaluation {X Y : Systems.{c, v, r} J B τ}
+    (n : ℕ) (he : (evaluation.{c, v, r} J B τ n).obj X =
+      (evaluation.{c, v, r} J B τ n).obj Y) (U : Cᵒᵖ) :
+    X.val.obj (op (n, U.unop)) = Y.val.obj (op (n, U.unop)) := by
+  exact moduleCat_restrictScalars_obj_injective _ (evaluation_ring_app J B τ n U)
+    (congrArg (fun Z ↦ Z.val.obj U) he)
+
+private theorem system_vertical_map_heq {X Y : Systems.{c, v, r} J B τ}
+    (n : ℕ) (he : (evaluation.{c, v, r} J B τ n).obj X =
+      (evaluation.{c, v, r} J B τ n).obj Y) {U V : Cᵒᵖ} (g : U ⟶ V)
+    (x : X.val.obj (op (n, U.unop))) (y : Y.val.obj (op (n, U.unop))) (hxy : x ≍ y) :
+    X.val.map ((Prod.sectR n C).map g.unop).op x ≍
+      Y.val.map ((Prod.sectR n C).map g.unop).op y := by
+  exact sheafOfModules_map_heq he g x y hxy
+
+private theorem system_horizontal_map_heq {X Y : Systems.{c, v, r} J B τ}
+    {m n : ℕ} (h : n ≤ m)
+    (hm : (evaluation.{c, v, r} J B τ m).obj X = (evaluation.{c, v, r} J B τ m).obj Y)
+    (hn : (evaluation.{c, v, r} J B τ n).obj X = (evaluation.{c, v, r} J B τ n).obj Y)
+    (ht : (transition.{c, v, r} J B τ h).app X ≍ (transition.{c, v, r} J B τ h).app Y)
+    (U : Cᵒᵖ) (x : X.val.obj (op (m, U.unop))) (y : Y.val.obj (op (m, U.unop)))
+    (hxy : x ≍ y) :
+    X.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x ≍
+      Y.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y := by
+  have hsection := sheafOfModules_app_heq hm
+    (congrArg (res.{c, v, r} (coefficientMap.{c, v, r} J B τ h)).obj hn)
+    _ _ ht U x y hxy
+  exact (heq_of_eq (transition_app_apply J B τ X h U x)).symm.trans
+    (hsection.trans (heq_of_eq (transition_app_apply J B τ Y h U y)))
+
 set_option profiler true in
 -- The membership checks of the restriction maps unfold the evaluation functors.
 /-- A system is determined by its evaluations together with its transitions. -/
@@ -144,27 +174,17 @@ theorem system_ext {X Y : Systems.{c, v, r} J B τ}
     (ht : ∀ {m n : ℕ} (h : n ≤ m),
       (transition.{c, v, r} J B τ h).app X ≍ (transition.{c, v, r} J B τ h).app Y) :
     X = Y := by
-  obtain ⟨X, hX⟩ := X
-  obtain ⟨Y, hY⟩ := Y
-  obtain rfl : X = Y := by
-    refine presheafOfModules_ext (funext fun ⟨⟨n, U⟩⟩ ↦ ?_) ?_
-    · exact moduleCat_restrictScalars_obj_injective _
-        (evaluation_ring_app.{c, v, r} J B τ n (op U))
-        (congrArg (fun Z ↦ Z.val.obj (op U)) (he n))
-    · rintro ⟨⟨n, U⟩⟩ ⟨⟨m, V⟩⟩ g x y hxy
-      have hg : g = (Prod.mkHom g.unop.1 (𝟙 U)).op ≫ ((Prod.sectR m C).map g.unop.2).op := by
-        apply Quiver.Hom.unop_inj
-        ext <;> simp
-      rw [hg, PresheafOfModules.map_comp_apply, PresheafOfModules.map_comp_apply]
-      refine sheafOfModules_map_heq (he m) g.unop.2.op
-        (X.map (Prod.mkHom g.unop.1 (𝟙 U)).op x) (Y.map (Prod.mkHom g.unop.1 (𝟙 U)).op y) ?_
-      exact (heq_of_eq (transition_app_apply.{c, v, r} J B τ ⟨X, hX⟩ (leOfHom g.unop.1)
-        (op U) x)).symm.trans ((sheafOfModules_app_heq (he n)
-          (congrArg (res.{c, v, r} (coefficientMap.{c, v, r} J B τ (leOfHom g.unop.1))).obj
-            (he m)) _ _ (ht _) (op U) x y hxy).trans
-          (heq_of_eq (transition_app_apply.{c, v, r} J B τ ⟨Y, hY⟩ (leOfHom g.unop.1)
-            (op U) y)))
-  rfl
+  apply sheafOfModules_ext
+  refine presheafOfModules_ext (funext fun ⟨⟨n, U⟩⟩ ↦ ?_) ?_
+  · exact system_obj_eq_of_evaluation J B τ n (he n) (op U)
+  · rintro ⟨⟨n, U⟩⟩ ⟨⟨m, V⟩⟩ g x y hxy
+    have hg : g = (Prod.mkHom g.unop.1 (𝟙 U)).op ≫ ((Prod.sectR m C).map g.unop.2).op := by
+      apply Quiver.Hom.unop_inj
+      ext <;> simp
+    rw [hg, PresheafOfModules.map_comp_apply, PresheafOfModules.map_comp_apply]
+    apply system_vertical_map_heq J B τ m (he m) g.unop.2.op
+    exact system_horizontal_map_heq J B τ (leOfHom g.unop.1)
+      (he n) (he m) (ht _) (op U) x y hxy
 
 /-- A morphism of systems is determined by its evaluations. -/
 theorem system_hom_heq {X X' Y Y' : Systems.{c, v, r} J B τ} (hX : X = X') (hY : Y = Y')
