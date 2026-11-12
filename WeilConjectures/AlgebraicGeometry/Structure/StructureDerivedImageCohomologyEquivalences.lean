@@ -358,10 +358,10 @@ theorem structure_derived_image_module_naturality
   let θiso := H.mapIso ψ.symm ≪≫ Γ.mapIso edgeIso
   let θ := ((forget₂ _ AddCommGrpCat).mapIso θiso).addCommGroupIsoToAddEquiv
   apply (affineLerayEquiv qY).injective
-  with_reducible change affineLerayEquiv qY ((affineLerayEquiv qY).symm
+  change affineLerayEquiv qY ((affineLerayEquiv qY).symm
       (θ (H.map b z))) = affineLerayEquiv qY
     (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z))
-  rw [AddEquiv.apply_symm_apply]
+  simp only [AddEquiv.apply_symm_apply]
   have hg := globalLeray_unitSquare q qY (𝟙 T) j hs
     (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit Y.ringCatSheaf)
     φ 1 (topEdgeTruncatedCounit (𝟙 T) 1
