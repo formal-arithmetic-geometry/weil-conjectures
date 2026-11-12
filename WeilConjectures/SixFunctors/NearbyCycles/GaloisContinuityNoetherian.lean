@@ -41,7 +41,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 private lemma map_eq_of_epi_of_intertwining
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (Q : C ⥤ D) (F : D ⥤ E) {A B : C} {Z : D}
-    (i : A ⟶ B) [Epi ((Q ⋙ F).map i)] (e : Q.obj B ≅ Z)
+    (i : A ⟶ B) (_hi : Epi ((Q ⋙ F).map i)) (e : Q.obj B ≅ Z)
     {u v : B ⟶ B} {x y : Z ⟶ Z} (huv : i ≫ u = i ≫ v)
     (hx : e.hom ≫ x = Q.map u ≫ e.hom) (hy : e.hom ≫ y = Q.map v ≫ e.hom) :
     F.map x = F.map y := by
@@ -144,7 +144,7 @@ theorem exists_forall_homology_galoisLayerAction_eq_id [QuasiCompact N.j] [Quasi
       (pullbackAction h _ specGaloisAction_comp τ)
       (pullbackAction_fst h _ specGaloisAction_comp τ)
   have hA := map_eq_of_epi_of_intertwining DerivedCategory.Q Ψ
-    (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j) eK
+    (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j) hj eK
     ((hU σ hσ).trans (hU 1 fun _ ↦ rfl).symm) (he σ) (he 1)
   have hact (τ : Ω ≃ₐ[L] Ω) := congrArg H.map
     (galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω τ C)
