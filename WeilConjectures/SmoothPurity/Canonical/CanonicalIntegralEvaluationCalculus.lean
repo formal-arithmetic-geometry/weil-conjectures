@@ -146,7 +146,6 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q HasDerivedCatego
   coefficientTotalTensor coefficientTensorGenerator coefficientHomResolution
   coefficientHomResolutionIso coefficientHomResolutionInverse derivedInternalHomOfUniverses
 
-set_option trace.profiler true in
 private theorem tensorModels_unique
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (M N : CoefficientTensorModels.{r, c, v, w} J R S) : M = N := by
