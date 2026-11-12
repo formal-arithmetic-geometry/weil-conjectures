@@ -462,6 +462,7 @@ private theorem first_reduction_square
   exact ((upperStarFromPoint X).map_comp _ _).symm.trans
     (((upperStarFromPoint X).congr_map hp).trans ((upperStarFromPoint X).map_comp _ _))
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- Specializing the reconstructed coefficient diagrams requires extra definitional checks.
 attribute [-instance] integralModel_coefficientMonObj in
