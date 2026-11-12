@@ -168,12 +168,30 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
     _ (Category.id_comp (𝟙 X)) (Category.id_comp (𝟙 X')) (Category.id_comp _)
     (N.galoisLayerTower_generic_comp_galoisLayerRestrict_generic h Ω L') C
 
+-- Cache the graded tensor instances used by each derived pullback. Reconstructing them
+-- through the monoidal closed structure of module sheaves dominates elaboration below.
+private instance galoisRestrictTensor₄ObjExt (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q S T : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt P Q S T := by
+  infer_instance
+
+private instance galoisRestrictGoodTensor₁₂Tensor (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q S : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor P Q S := by
+  infer_instance
+
+private instance galoisRestrictGoodTensorTensor₂₃ (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q S : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ P Q S := by
+  infer_instance
+
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option maxHeartbeats 1600000 in
 set_option trace.profiler true in
--- the pullback exchanges of the three layers are large terms
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
 of `Ω/L` are invertible). Let `L ⊆ L' ⊆ Ω` with `L'/L` finite and `Lε^* C` bounded below of étale
