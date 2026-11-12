@@ -138,12 +138,14 @@ private theorem varyingEvaluationMate_isIso (R : ℕ → CommRingCat.{u + 1})
     {S : ProEtale.StrictTower.Modules (R n) X ⥤ ProEtale.StrictTower.Modules (R n) Y}
     (G : ProEtale.VaryingRing.Modules R q Y ⥤ ProEtale.StrictTower.Modules (R n) Y)
     (H : ProEtale.VaryingRing.Modules R q X ⥤ ProEtale.StrictTower.Modules (R n) X)
-    [L.Additive] [T.Additive] [L'.Additive] [S.Additive] [G.Additive] [H.Additive]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    [Abelian.HasKInjectiveResolutions (ProEtale.VaryingRing.Modules R q X)]
+    [lAdditive : L.Additive] [tAdditive : T.Additive]
+    [lnAdditive : L'.Additive] [sAdditive : S.Additive]
+    [gAdditive : G.Additive] [hAdditive : H.Additive]
+    [lLimits : PreservesFiniteLimits L] [lColimits : PreservesFiniteColimits L]
+    [lnLimits : PreservesFiniteLimits L'] [lnColimits : PreservesFiniteColimits L']
+    [gLimits : PreservesFiniteLimits G] [gColimits : PreservesFiniteColimits G]
+    [hLimits : PreservesFiniteLimits H] [hColimits : PreservesFiniteColimits H]
+    [sourceResolutions : Abelian.HasKInjectiveResolutions (ProEtale.VaryingRing.Modules R q X)]
     (a : L ⊣ T) (b : L' ⊣ S) (θ : G ⋙ L' ≅ L ⋙ H)
     (hT : T = ProEtale.VaryingRing.push R q f)
     (hS : S = ProEtale.StrictTower.moduleDirectImage (R n) f)
@@ -218,6 +220,25 @@ theorem integralSystemEvaluationMate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     proEtaleRingModules_hasKInjectiveResolutions X
       (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1)))
   exact varyingEvaluationMate_isIso (rs l E) (qs l E) f n
+    (lAdditive := integralComparisonSequencePullbackAdditive l E f)
+    (tAdditive := inferInstanceAs (integralComparisonSequenceDirectImage l E f).Additive)
+    (lnAdditive := sfIntrinsicPullback_additive (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (sAdditive := proEtaleConstantModuleDirectImage_additive f
+      (Padic.coefficientExtensionRing l E (n + 1)))
+    (gAdditive := coefficientSequenceEvaluation_additiveInstance l E Y n)
+    (hAdditive := coefficientSequenceEvaluation_additiveInstance l E X n)
+    (lLimits := integralComparisonSequencePullbackLimits l E f)
+    (lColimits := integralComparisonSequencePullbackColimits l E f)
+    (lnLimits := sfIntrinsicPullback_preservesFiniteLimits
+      (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (lnColimits := sfIntrinsicPullback_preservesFiniteColimits
+      (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (gLimits := coefficientSequenceEvaluation_limits l E Y n)
+    (gColimits := coefficientSequenceEvaluation_colimits l E Y n)
+    (hLimits := coefficientSequenceEvaluation_limits l E X n)
+    (hColimits := coefficientSequenceEvaluation_colimits l E X n)
+    (sourceResolutions := inferInstanceAs
+      (Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)))
     (coefficientSequenceEvaluation l E Y n) (coefficientSequenceEvaluation l E X n)
     a b θ (by rfl) (finitePush_eq l E f n) (by rfl) (by rfl) hθ
 end WeilConjectures.FrobeniusExchange
