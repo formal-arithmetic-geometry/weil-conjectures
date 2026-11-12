@@ -49,7 +49,6 @@ private theorem sectionCounit_injective (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
 -- Use the evaluation API without unfolding the chosen Hom map or counit.
 attribute [local irreducible] homComparison sectionCounit
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
 -- The section calculation crosses the large native Hom and equivalence interfaces.
 /-- For the *specified* lifted native coefficient model and its *specified* ordinary
