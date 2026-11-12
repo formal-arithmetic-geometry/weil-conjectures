@@ -24,6 +24,15 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local instance 4000] HomologicalComplex.monoidalCategory
 attribute [local instance 4000] HomologicalComplex.monoidalCategoryStruct
 
+-- Share the total tensor instance instead of reconstructing its colimit data at
+-- every occurrence of a tensor product in the comparison fields.
+private def nativeChainCochainMonoidal {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :
+    MonoidalCategory (CochainComplex (RingedTensorModules.{u, u, u} J R) ℤ) :=
+  HomologicalComplex.monoidalCategory _ _
+
+attribute [local instance 5000] nativeChainCochainMonoidal
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
