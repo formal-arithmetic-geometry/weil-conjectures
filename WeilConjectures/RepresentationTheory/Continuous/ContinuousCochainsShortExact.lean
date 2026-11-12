@@ -176,9 +176,7 @@ private noncomputable abbrev cochainMap
             c (Fin.contractNth k (· * ·) g))
       simp [map_add, map_sum, map_zsmul, Rep.hom_comm_apply])
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- The explicit complexes and coefficient-object tuple need additional elaboration fuel.
 /-- Continuous inhomogeneous cochains carry a short exact sequence of discrete continuous
 representations to a short exact sequence of complexes. The equivalences `e` identify
 complex terms with continuous maps, and specify both differentials and postcomposition maps.
@@ -228,6 +226,27 @@ theorem continuousCochains_shortExact
               (-1 : ℤ) ^ (k.val + 1) • e j n f (Fin.contractNth k (· * ·) g)) := by
   classical
   intro hS
+  let F := ObjectProperty.ι (fun M : Rep.{w} A G ↦
+    ∀ m : M.V, IsOpen {g : G | M.ρ g m = m}) ⋙
+    forget₂ (Rep.{w} A G) (ModuleCat.{w} A)
+  obtain ⟨h, ha, hl, hc, he⟩ := discreteRep_abelian_structure A G
+  let := h
+  have : F.Additive := ha
+  have := hl
+  have := hc
+  have hT : (S.map F).ShortExact := by
+    have : Mono S.f := hS.mono_f
+    have : Epi S.g := hS.epi_g
+    refine ShortComplex.ShortExact.mk' ((he S).mp hS.exact) ?_ ?_
+    · change Mono (F.map S.f)
+      infer_instance
+    · change Epi (F.map S.g)
+      infer_instance
+  have hf : Function.Injective S.f.hom.hom := hT.moduleCat_injective_f
+  have hg : Function.Surjective S.g.hom.hom := hT.moduleCat_surjective_g
+  have hex : ∀ y : S.X₂.obj.V, S.g.hom.hom y = 0 →
+      ∃ x : S.X₁.obj.V, S.f.hom.hom x = y :=
+    (ShortComplex.moduleCat_exact_iff (S.map F)).mp hT.exact
   dsimp only
   let X : Fin 3 → DiscreteContinuousRep.{v, u, w} A G := ![S.X₁, S.X₂, S.X₃]
   let : ∀ j : Fin 3, TopologicalSpace (X j).obj.V := fun _ ↦ ⊥
@@ -251,27 +270,6 @@ theorem continuousCochains_shortExact
     have h := congrArg (fun f ↦ f.hom.hom (c g)) S.zero
     exact h
   let T := ShortComplex.mk i p hip
-  let F := ObjectProperty.ι (fun M : Rep.{w} A G ↦
-    ∀ m : M.V, IsOpen {g : G | M.ρ g m = m}) ⋙
-    forget₂ (Rep.{w} A G) (ModuleCat.{w} A)
-  obtain ⟨h, ha, hl, hc, he⟩ := discreteRep_abelian_structure A G
-  let := h
-  have : F.Additive := ha
-  have := hl
-  have := hc
-  have hT : (S.map F).ShortExact := by
-    have : Mono S.f := hS.mono_f
-    have : Epi S.g := hS.epi_g
-    refine ShortComplex.ShortExact.mk' ((he S).mp hS.exact) ?_ ?_
-    · change Mono (F.map S.f)
-      infer_instance
-    · change Epi (F.map S.g)
-      infer_instance
-  have hf : Function.Injective S.f.hom.hom := hT.moduleCat_injective_f
-  have hg : Function.Surjective S.g.hom.hom := hT.moduleCat_surjective_g
-  have hex : ∀ y : S.X₂.obj.V, S.g.hom.hom y = 0 →
-      ∃ x : S.X₁.obj.V, S.f.hom.hom x = y :=
-    (ShortComplex.moduleCat_exact_iff (S.map F)).mp hT.exact
   have hn : ∀ n : ℕ, Function.Injective (i.f n) ∧
       Set.range (i.f n) = {x | p.f n x = 0} ∧ Function.Surjective (p.f n) := by
     intro n
