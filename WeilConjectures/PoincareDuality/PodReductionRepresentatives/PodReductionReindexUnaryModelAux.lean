@@ -150,7 +150,6 @@ private theorem inverseImage_map_section {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
     ((inverseImageIntegralModules l E g).map h).val.app (op U) x =
       h.val.app (op ((proEtaleIsoPostcompose g).obj U)) x := rfl
 
-set_option profiler true in
 -- The comparison is the left-adjoint mate of the tower unit; the unit generators are
 -- traced through the actual limit projections.
 private theorem reindex_normalized_aux {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -256,7 +255,7 @@ private theorem evaluationRing_app (W : Scheme.{u}) (n : ℕ) (V : W.ProEt) :
   rfl
 
 set_option profiler true in
--- Unfolding the pushforward module structure of a quotient level is slow.
+-- Use the abstract pushforward formula to avoid unfolding the quotient module structure.
 /-- Scalars of a quotient level act through the sequence ring.
 Source: Stacks 0941. -/
 private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSequenceModules l E W)
@@ -276,6 +275,7 @@ private theorem evaluation_smul (W : Scheme.{u}) (n : ℕ) (M : coefficientSeque
     rfl
   have hm := congrArg
     (fun b : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, V)) ↦ b • m) hr
+  dsimp only [coefficientSequenceEvaluation, id]
   exact hs.trans hm
 
 -- Normalize the tensor before placing it inside the reindexing composite.
@@ -362,7 +362,6 @@ private theorem unaryGenerator_comma_smul {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIs
           (integralComparisonSequenceGenerator l E g N n
             ((proEtaleIsoPostcompose g).obj U) x)) (sequenceRing_comma l E g n U a)))
 
-set_option profiler true in
 -- Scalar linearity of every map involved, followed by the unit normalization.
 /-- A unit-normalized reindexing comparison is fixed on every scalar tensor generator.
 Source: Stacks 03D6, 06YY and 0941. -/
@@ -392,7 +391,7 @@ theorem reindexNormalized_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   let f := (Prod.mkHom (𝟙 n) (proEtaleIsoCommaArrow g U)).op
   let b : (coefficientSequenceCommRingSheaf l E X).obj.obj (op (n, U)) :=
     (isoSectionwiseConstantMap.{u, u} g (CommRingCat.of
-    (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app (op U) a
   have hY := unitSection_tensor_smul l E Y MY N n ((proEtaleIsoPostcompose g).obj U) a x
   have hX := unitSection_tensor_smul l E X MX ((isoReductionIntegralInverse l E g).obj N)
     n U b x
