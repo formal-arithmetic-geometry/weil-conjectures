@@ -820,7 +820,7 @@ private theorem coefficientCofinal_reconstruct
         ((quotientCoordinateSheaf Y b _ _ _ i).hom.app (op U)
           (e.hom.hom.app (op U) z)))) = _
   congr 1
-  exact sheaf_iso_hom_inv_app_apply e U _
+  exact sheaf_iso_hom_inv_app_apply Y e U _
 
 private def coefficientHomCoordinate
     (b : letI := (lisseIntegerInclusion l E L ι).toAlgebra
