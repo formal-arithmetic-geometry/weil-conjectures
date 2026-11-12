@@ -251,7 +251,6 @@ theorem eq_proEtaleFamilyObjectIso
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] at h
   exact (cancel_mono _).1 h
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
 -- the proof chases a long diagram of naturality squares between derived categories
 /-- Blueprint `prop-pur-dnc-family-constancy` (4), pro-étale: *base change.* Let `u : B' ⟶ B`,
