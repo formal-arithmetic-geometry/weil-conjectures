@@ -267,7 +267,6 @@ private theorem evaluationRing_app (W : Scheme.{u}) (n : ℕ) (V : W.ProEt) :
   rw [ObjectProperty.eqToHom_hom, eqToHom_app]
   rfl
 
-set_option profiler true in
 -- Use the abstract pushforward formula to avoid unfolding the quotient module structure.
 /-- Scalars of a quotient level act through the sequence ring.
 Source: Stacks 0941. -/
