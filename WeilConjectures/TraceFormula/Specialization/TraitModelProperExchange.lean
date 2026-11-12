@@ -191,6 +191,7 @@ set_option hygiene false in
 /-- The condensed field `ℚ̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 
+set_option profiler true in
 -- the square law of the exchanges is instantiated on the ambient derived categories
 /-- **Proper exchange for a proper trait model over the base**, on the ambient derived
 categories: if the total space of the trait model `M` over the base is proper over the trait and
@@ -236,12 +237,13 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     (hM.toTraitGeneric.pushforwardExchange 𝐐) _ _
     ((leftDerivedUpperStarCompOfEq 𝐐 he).app A) h₀
   have := Functor.isEquivalence_of_iso (leftDerivedUpperStarId 𝐐 (point k').left).symm
-  exact Hom.isIso_pushforwardExchange_app_of_square
+  exact_mod_proofs Hom.isIso_pushforwardExchange_app_of_square
     (X₁ := (point k).left) (X₁' := (point k').left) (Z₁' := (point k').left)
     𝐐 (toGenericSelfHom M) h.toTrait
     hM.toTraitGeneric (traitGenericModelHom k k')
     (by simp [IsTraitModelOfBase.toTrait]) (by simp [IsTraitModelOfBase.toTrait]) hb hs A
-    (by infer_instance) (by infer_instance) (by infer_instance) pbc hχgen
+    (by infer_instance) (by infer_instance) (by infer_instance)
+    (by exact_mod_proofs pbc) (by exact_mod_proofs hχgen)
 
 /-- **Proper exchange for a proper trait model over the base**: if `X` is proper over `k`, the
 total space of the trait model `M` over the base is proper over the trait and its geometric
