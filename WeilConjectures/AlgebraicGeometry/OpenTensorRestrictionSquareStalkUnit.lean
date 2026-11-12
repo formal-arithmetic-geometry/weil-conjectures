@@ -98,9 +98,29 @@ private def square_unit_cancel_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
       (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
       cQ.hom.app _
 
+private def square_unit_mid_statement {X X' : Scheme.{u}} (k : X' ⟶ X)
+    (U : X.Opens) (M : X.Modules) : Prop :=
+  let p := pullback.fst k U.ι
+  let q := pullback.snd k U.ι
+  let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
+  let H {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.pushforward a
+  let aq := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q)
+  let aj := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U.ι)
+  let cQ := Scheme.Modules.pushforwardComp q U.ι ≪≫
+    Scheme.Modules.pushforwardCongr pullback.condition.symm
+  let θj := openTensorRestrictionIso U.ι
+  let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k)
+    pullback.condition.symm
+  (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (p ≫ k))).unit.app M ≫
+      (H (p ≫ k)).map (βq.hom.app M) ≫
+      (H (p ≫ k)).map ((T q).map (θj.hom.app M)) =
+    aj.unit.app M ≫ (H U.ι).map (θj.hom.app M) ≫
+      (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) ≫
+      cQ.hom.app _
+
 set_option profiler true in
 set_option maxHeartbeats 600000 in
-private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
+private theorem square_unit_pre_to_mid {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
     (M : X.Modules)
     (θ : Scheme.Modules.tensorPullback k ⋙
         Scheme.Modules.restrictFunctor (pullback.fst k U.ι) ≅
@@ -114,7 +134,7 @@ private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
             (pullback.fst k U.ι ≫ k) pullback.condition.symm).hom.app M ≫
           (Scheme.Modules.tensorPullback (pullback.snd k U.ι)).map
             ((openTensorRestrictionIso U.ι).hom.app M)) :
-    square_unit_cancel_statement k U M θ := by
+    square_unit_mid_statement k U M := by
   let p := pullback.fst k U.ι
   let q := pullback.snd k U.ι
   let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
@@ -130,11 +150,9 @@ private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
   let θj := openTensorRestrictionIso U.ι
   let βp := Scheme.Modules.tensorPullbackCompositionIso p k (p ≫ k) rfl
   let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k) pullback.condition.symm
-  unfold square_unit_cancel_statement
+  unfold square_unit_mid_statement
   dsimp only
   have hcP := composition_unit p k (p ≫ k) rfl M
-  have hcQ := composition_unit q U.ι (p ≫ k) pullback.condition.symm M
-  have hn := aq.unit_naturality (θj.hom.app M)
   have hθ' : θp.hom.app ((T k).obj M) ≫ θ.hom.app M =
       βp.inv.app M ≫ βq.hom.app M ≫ (T q).map (θj.hom.app M) := by
     simpa only [p, q, T, θp, θj, βp, βq] using hθ
@@ -144,6 +162,26 @@ private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
   simp only [← Functor.map_comp]
   have hb := βp.hom_inv_id_app_assoc M (βq.hom.app M ≫ (T q).map (θj.hom.app M))
   rw [hb]
+  simpa only [βq, aj, aq, H, T, cQ]
+
+private theorem square_unit_mid_to_cancel {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
+    (M : X.Modules) (hmid : square_unit_mid_statement k U M) :
+    square_unit_cancel_statement k U
+      M (openTensorRestrictionSquareIso k U) := by
+  let p := pullback.fst k U.ι
+  let q := pullback.snd k U.ι
+  let T {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.tensorPullback a
+  let H {A B : Scheme.{u}} (a : A ⟶ B) := Scheme.Modules.pushforward a
+  let aj := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U.ι)
+  let aq := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction q)
+  let cQ := Scheme.Modules.pushforwardComp q U.ι ≪≫
+    Scheme.Modules.pushforwardCongr pullback.condition.symm
+  let θj := openTensorRestrictionIso U.ι
+  let βq := Scheme.Modules.tensorPullbackCompositionIso q U.ι (p ≫ k)
+    pullback.condition.symm
+  unfold square_unit_cancel_statement
+  dsimp only
+  have hn := aq.unit_naturality (θj.hom.app M)
   have hn' : (H U.ι).map (θj.hom.app M) ≫
       (H U.ι).map (aq.unit.app ((Scheme.Modules.restrictFunctor U.ι).obj M)) =
     (H U.ι).map (aq.unit.app ((T U.ι).obj M)) ≫
@@ -155,6 +193,7 @@ private theorem square_unit_cancel_aux {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X
     rhs
     rhs
     erw [cQ.hom.naturality ((T q).map (θj.hom.app M))]
+  have hcQ := composition_unit q U.ι (p ≫ k) pullback.condition.symm M
   have hQ := congrArg
     (fun v ↦ v ≫ (H (p ≫ k)).map ((T q).map (θj.hom.app M))) hcQ
   simpa only [Category.assoc, Functor.map_comp, βq, aj, aq, H, T, cQ] using hQ.symm
@@ -217,7 +256,8 @@ private theorem square_unit {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)
   simp only [Functor.comp_obj, Category.assoc, Functor.map_comp]
   erw [Iso.inv_hom_id_app, Category.comp_id]
   simp only [← Functor.comp_map]
-  exact square_unit_cancel_aux k U M (openTensorRestrictionSquareIso k U) hθ
+  have hmid := square_unit_pre_to_mid k U M (openTensorRestrictionSquareIso k U) hθ
+  exact square_unit_mid_to_cancel k U M hmid
 
 end
 
