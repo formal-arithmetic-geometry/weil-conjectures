@@ -894,6 +894,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
         (proEtaleBaseChange (𝟙 P)).obj ((proEtaleBaseChange p).obj V.unop) ↦
       N.val.map k.op m)
       (site_identity p (congrArg Sigma.fst e) V.unop)
+  change da.hom.app N ≫ t.hom.app N ≫ db.inv.app N = _
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
