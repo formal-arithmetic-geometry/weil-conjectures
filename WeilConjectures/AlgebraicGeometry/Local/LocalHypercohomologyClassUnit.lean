@@ -204,7 +204,7 @@ private theorem sheafification_unit_of_resolution
     dsimp only [RingedSpace.localHypercohomologySheafificationModel,
       Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom, Iso.app_inv]
     simp only [Functor.map_comp, Category.assoc]
-    erw [((DerivedCategory.homologyFunctorFactors _ q).app J).map_inv_hom_id T,
+    erw [((DerivedCategory.homologyFunctorFactors _ q).app J).inv_hom_id_map T,
       Category.comp_id]
   have : Mono (T.map ((HomologicalComplex.homologyFunctor _ (.up ℤ) q).map s)) :=
     inferInstanceAs (Mono (T.map (HomologicalComplex.homologyMap s q)))
