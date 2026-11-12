@@ -30,9 +30,17 @@ variable (C : Type u) [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{s} C]
 
 attribute [local instance] commShift₂CurriedTensor
 
-set_option maxHeartbeats 400000 in
+-- Cache the tensor structures used repeatedly in the localization comparison.
+private noncomputable local instance rightUnitor_cochainMonoidal :
+    MonoidalCategory (CochainComplex C ℤ) := inferInstance
+
+private noncomputable local instance rightUnitor_homotopyMonoidal :
+    MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
+
+private noncomputable local instance rightUnitor_derivedMonoidal :
+    MonoidalCategory (DerivedCategory C) := inferInstance
+
 set_option profiler true in
--- Elaborating the shifted K-flat representative exceeds the default heartbeat limit.
 open DerivedCategory.TensorCommShift₂ in
 private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app

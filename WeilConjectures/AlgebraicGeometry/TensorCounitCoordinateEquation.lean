@@ -177,9 +177,7 @@ private theorem modelMap_natural
   let := pullbackDescentQLax X
   exact Functor.LaxMonoidal.μ_natural DerivedCategory.Q r s
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Elaborating the recorded tensor and localization instances needs this heartbeat budget.
 /-- The shared pullback counit is compatible with the localization tensor maps,
 without a K-flatness assumption on either argument. The chain comparison is
 specified on every tensor summand, so its underlying map is uniquely determined.
