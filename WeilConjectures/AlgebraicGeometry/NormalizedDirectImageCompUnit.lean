@@ -59,11 +59,12 @@ private theorem schemeCompUnit_app {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶
         ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
   exact compUnit_app (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t) K
 
-private theorem schemeNormalizedDirectImageCompIso_eq {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
+private theorem schemeNormalizedDirectImageCompIso_eq
+    {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
     schemeNormalizedDirectImageCompIso s t =
       Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
         s.toLRSHom.toShHom t.toLRSHom.toShHom) := rfl
--- The chosen composition comparison unfolds the two module-category presentations.
+
 /-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
 Source: Stacks Project, Cohomology, Tag 0D5T.
 (blueprint: lem-pc-normalized-direct-image-square-unit-comp-normalization).
@@ -74,6 +75,7 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =
     (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)
       (Scheme.Modules.pushforward t)).app K := by
+  -- Focus each rewrite to avoid reducing the derived functors on the other side.
   have hcomp := congrArg (fun e ↦ e.inv.app (DerivedCategory.Qh.obj K))
     (schemeNormalizedDirectImageCompIso_eq (A := A) (B := B) (C := C) s t)
   conv_rhs => rw [schemeCompUnit_app (A := A) (B := B) (C := C) s t K]
@@ -88,7 +90,5 @@ theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B 
       (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› C)
       s.toLRSHom.toShHom t.toLRSHom.toShHom) K
-
-
 
 end AlgebraicGeometry

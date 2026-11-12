@@ -52,8 +52,7 @@ private theorem transport_biprod_comparison
 private theorem unionHomotopyChainData_transport
     {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
     {a b₁ b₂ b₃ c₁ c₂ c₃ : Arrow (DerivedCategory E)}
-    (h :
-    ∃ (C D C' D' : CochainComplex E ℤ)
+    (h : ∃ (C D C' D' : CochainComplex E ℤ)
       (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),
       ∃ (H : Homotopy (t ≫ β) (α ≫ t'))
         (e₁ : DerivedCategory.Q.obj C ≅ a.left)
