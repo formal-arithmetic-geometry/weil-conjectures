@@ -270,7 +270,7 @@ theorem pinned_tensor_square_left_summand
     let transport := eqToHom (congrArg (fun a ↦ T ⋙ ModuleCat.extendScalars a)
       (Classical.choose_spec
         (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1)
-    simpa only [NatTrans.comp_app, eqToHom_app, Category.assoc] using
+    simpa only [transport, NatTrans.comp_app, eqToHom_app, Category.assoc] using
       (transport ≫ (Classical.choose
         (Scheme.Modules.exists_tensorPullback_stalk_iso g' z)).inv).naturality iPQ
   have hm : G.map (ty (P.X p) (Q.X q)).inv ≫
@@ -284,10 +284,12 @@ theorem pinned_tensor_square_left_summand
         (tx (H.obj (P.X p)) (H.obj (Q.X q))).hom =
       Functor.OplaxMonoidal.δ G (T.obj (P.X p)) (T.obj (Q.X q)) ≫
         (k P p ⊗ₘ k Q q) := by
-    rw [hk, hk]
-    exact pinnedTensorSquareLeftSummand_tensor_square g' z b
+    refine (pinnedTensorSquareLeftSummand_tensor_square g' z b
       (Classical.choose_spec
-        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1 (P.X p) (Q.X q)
+        (SingleComplexBaseChange.exists_tensorMap f f' g g' sq z)).1
+      (P.X p) (Q.X q)).trans ?_
+    exact congrArg (Functor.OplaxMonoidal.δ G (T.obj (P.X p)) (T.obj (Q.X q)) ≫ ·)
+      (congrArg₂ (fun u v ↦ u ⊗ₘ v) (hk P p).symm (hk Q q).symm)
   have hj :
       HomologicalComplex.ιMapBifunctor
           ((HC.obj P))
