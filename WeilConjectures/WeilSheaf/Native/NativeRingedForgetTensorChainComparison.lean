@@ -37,6 +37,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
+#synth MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ)
+#synth MonoidalCategoryStruct (CochainComplex
+  (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ)
+
 set_option profiler true in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
