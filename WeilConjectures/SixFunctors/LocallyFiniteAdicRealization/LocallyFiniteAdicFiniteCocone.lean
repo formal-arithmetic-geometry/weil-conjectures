@@ -176,7 +176,6 @@ private theorem sixfold_reassoc
 
 -- Keep the named equivalence available when elaborating its shift data.
 set_option cleanup.letToHave false in
-set_option profiler true in
 /-- The finite-field tensor realizations form a normalized coherent cocone.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15;
@@ -270,6 +269,7 @@ theorem finiteCocone_exists
   refine ⟨{ toFiniteCoconeData := A, normalization := ?_ }⟩
   unfold FiniteCoconeData.normalized
   intro E L h K
+  -- Reduce the cocone projections directly before simplifying their components.
   with_unfolding_all simp only [A, nativeTransitionIso_inv,
     nativeIntegralIso_hom, nativeIntegralIso_inv]
   with_unfolding_all

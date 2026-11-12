@@ -135,7 +135,6 @@ instance rationalTensorTransition_shift {E L : Index l (PadicAlgCl l)} (h : E â‰
     infer_instance
   exact commShift_of_localization Q (integralTensorW l X E) _
 
-set_option profiler true in
 /-- The localized comparisons obey the field-tower equation.
 Source: BS 6.8.14(2), Remark 6.8.15
 (blueprint: lem-sf-native-rational-tensor-cocone). -/
