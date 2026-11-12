@@ -44,7 +44,7 @@ local instance ordinaryRingedTensorTargetCoefficients :
 
 local instance ordinaryRingedTensorTargetMonoidal :
     MonoidalCategory (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} J R) ℤ) where
-  toMonoidalCategoryStruct := HomologicalComplex.monoidalCategoryStruct _ (.up ℤ)
+  tensorObj P Q := (coefficientTotalTensor J R).obj (P, Q)
   __ := HomologicalComplex.monoidalCategory _ (.up ℤ)
 
 local instance ordinaryRingedTensorTargetStruct :
