@@ -142,10 +142,6 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
         (Profinite.padicAlgClRingObj ℓ)).app C) := by
   obtain ⟨E, K₀, e'⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ N.generic _ hC
   have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
-  -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
-  revert C hC hres E K₀ e'
-  normalize_precoherent
-  intro C hC hres E K₀ e' hK₀
   refine (hres E K₀.obj (by exact_mod_proofs hK₀)).elim fun L' hL' ↦ ⟨L', ?_⟩
   -- finiteness properties of the Galois layers
   have i₁ := N.compactSpace_galoisLayer_generic h L'.toIntermediateField
@@ -185,12 +181,9 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
       (N.galoisLayerHom h L'.toIntermediateField).generic).obj
         (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
-  -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
-  clear hK₀ hL' hc hgn hres hC i₁ i₂ i₃ i₄ i₅ i₆ i₇ i₈ i₉ i₁₀ i₁₁ i₁₂
-  revert C E K₀ L' n hn h₃ e' hgen
-  normalize_precoherent
-  intro C E K₀ e' L' n hn h₃ hgen
-  exact hgen e' h₃
+  -- Identify the proof arguments at each interface without transporting the whole context.
+  have hresult := hgen (by cast_proofs e') (by cast_proofs h₃)
+  cast_proofs hresult
 
 end NearbyCyclesModel
 
