@@ -29,7 +29,21 @@ private theorem cechPullbackHasSheafCompose {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
 
-attribute [local instance 20000] cechPullbackHasSheafCompose
+private theorem cechPullbackHasSheafify {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) : HasSheafify J AddCommGrpCat.{u} := inferInstance
+
+private theorem cechPullbackWEquals {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) :
+    J.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+
+attribute [local instance 20000] cechPullbackHasSheafCompose cechPullbackHasSheafify
+  cechPullbackWEquals
+
+private theorem cechPullbackHasZeroObject {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) :
+    HasZeroObject (SheafOfModules.{u} R) := inferInstance
+
+attribute [local instance 20000] cechPullbackHasZeroObject
 
 private theorem ringedExtendedCech_succ_tensor
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
@@ -49,7 +63,6 @@ private theorem ringedExtendedCech_succ_tensor
           (ringedExtendedCech O r (fun i ↦ b i.succ)).2 ≫
           (HomologicalComplex.leftUnitor (ringedSiteRingComplex O)).hom⟩) := rfl
 
-set_option profiler true in
 /-- One successor step of the finite Cech comparison, including its augmentation.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
 Proof: expand the successor clause of ringedExtendedCech. The adjunction makes F additive
