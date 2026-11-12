@@ -48,6 +48,7 @@ namespace Correspondence.FixedLocus
 variable {c : Correspondence ℓ K} (F : c.FixedLocus)
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- the pullbacks and shrieks of bounded constructible complexes are unfolded in defeq checks
 /-- **The exceptional adjoint of the support isomorphism** (blueprint
 `def-trf-kernel-pushforward-maps`, item 8, last assertion): the `Rc_! ⊣ Rc^!`-adjoint of
@@ -118,6 +119,7 @@ lemma lowerStarDualizingComplexTrace_eq (a : Xc ⟶ Yb) [IsProper a.left] :
   rw [lowerStarDualizingComplexTrace, lowerShriekDualizingComplexTrace]
 
 set_option maxHeartbeats 2000000 in
+set_option trace.profiler true in
 -- the direct images of bounded constructible complexes are unfolded in the defeq checks
 /-- The exchange of the support isomorphisms along a map of squares, in terms of the
 exceptional adjoints of the support isomorphisms (blueprint `lem-trf-trace-map-exchange`, (2),
@@ -193,6 +195,7 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
 
 set_option maxHeartbeats 2000000 in
+set_option trace.profiler true in
 -- the direct images of bounded constructible complexes are unfolded in the defeq checks
 /-- **Exchange of the support isomorphisms** (blueprint `lem-trf-trace-map-exchange`, (2)):
 `Rb^!(RΔ_{Y*} τ_f) ∘ E ∘ Rg_* ζ_c = ζ_b ∘ Ri_{b*} τ_h`, read through `g ∘ i_c = i_b ∘ h`. -/
