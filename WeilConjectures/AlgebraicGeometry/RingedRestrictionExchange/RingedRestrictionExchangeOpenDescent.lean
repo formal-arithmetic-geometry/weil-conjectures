@@ -872,7 +872,7 @@ private theorem identity_square_conjugate_aux {P T : Scheme.{u}} (p : P ⟶ T)
     ((proEtaleRingModuleDirectImage p R S c).obj N) V.unop
     (N.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ P).inv.app
       ((proEtaleBaseChange p).obj V.unop)).op m)
-  rw [hidT]
+  erw [hidT]
   have hdb := hb N V.unop
     (N.val.map ((proEtaleBaseChange p).map
       ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ T).hom.app V.unop)).op
