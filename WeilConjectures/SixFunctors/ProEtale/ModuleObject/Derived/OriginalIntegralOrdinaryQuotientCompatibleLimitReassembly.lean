@@ -172,6 +172,91 @@ private theorem pullback_products
     reflectsLimitsOfShape_of_reflectsIsomorphisms
   exact preservesLimitsOfShape_of_reflects_of_preserves _ (Mod.forget _)
 
+-- Keep the preservation and concrete-category checks independent of the coefficient equivalence.
+private theorem quotient_sections_separated
+    {C : Type*} [Category C] [HasLimitsOfShape (Discrete ℕ) C]
+    {D : Type v} [Category.{w} D] {J : GrothendieckTopology D}
+    {R : Sheaf J RingCat.{max v w}} (F : C ≌ SheafOfModules.{max v w} R)
+    (N : C) (Q : ℕ → C) (q : ∀ n, N ⟶ Q n) [Mono (Pi.lift q)]
+    (U : Dᵒᵖ) (x y : (F.functor.obj N).val.obj U)
+    (hxy : ∀ n, (F.functor.map (q n)).val.app U x =
+      (F.functor.map (q n)).val.app U y) : x = y := by
+  let T := F.functor ⋙ SheafOfModules.evaluation R U ⋙ forget (ModuleCat.{max v w} _)
+  have hmono : Mono (T.map (Pi.lift q)) := inferInstance
+  apply (CategoryTheory.mono_iff_injective (T.map (Pi.lift q))).mp hmono
+  have hlim := isLimitOfPreserves T (limit.isLimit (Discrete.functor Q))
+  have hsec : Types.sectionOfCone (T.mapCone (limit.cone (Discrete.functor Q)))
+        (T.map (Pi.lift q) x) =
+      Types.sectionOfCone (T.mapCone (limit.cone (Discrete.functor Q)))
+        (T.map (Pi.lift q) y) := by
+    apply Subtype.ext
+    funext n
+    change T.map (Pi.π Q n.as) (T.map (Pi.lift q) x) =
+      T.map (Pi.π Q n.as) (T.map (Pi.lift q) y)
+    have hp := congrArg T.map (Pi.lift_π q n.as)
+    rw [Functor.map_comp] at hp
+    exact (ConcreteCategory.congr_hom hp x).trans
+      ((hxy n.as).trans (ConcreteCategory.congr_hom hp y).symm)
+  exact (Types.isLimit_iff_bijective_sectionOfCone _).mp ⟨hlim⟩ |>.injective hsec
+
+private theorem map_cokernel_zero_of_factor
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [F.Additive] {W N P : C} (A : N ⟶ P) (t : W ⟶ P)
+    (g : F.obj W ⟶ F.obj N) (hg : g ≫ F.map A = F.map t) :
+    F.map (t ≫ cokernel.π A) = 0 := by
+  rw [Functor.map_comp, ← hg, Category.assoc, ← F.map_comp,
+    cokernel.condition, F.map_zero, comp_zero]
+
+private theorem quotient_hom_lifts_finitePresentation
+    (ell : ℕ) [Fact ell.Prime]
+    (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))
+    [FiniteDimensional ℚ_[ell] E]
+    {Y : Scheme.{u}}
+    (N : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y))
+    (hN : Mod.IsFinitelyPresented
+      (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y) N)
+    (hlocal :
+      let F := sectionModuleFunctor (ProEt.topology Y)
+        (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y)
+      ∀ (U : Y.ProEtᵒᵖ) (b : ℕ → (F.obj N).val.obj U),
+        (∀ n m : ℕ, n ≤ m →
+            ((F.map (cokernel.π (ell ^ (n + 1) • 𝟙 N))).val.app U) (b m) =
+              ((F.map (cokernel.π (ell ^ (n + 1) • 𝟙 N))).val.app U) (b n)) →
+        ∃ x : (F.obj N).val.obj U, ∀ n : ℕ,
+            ((F.map (cokernel.π (ell ^ (n + 1) • 𝟙 N))).val.app U) x =
+              ((F.map (cokernel.π (ell ^ (n + 1) • 𝟙 N))).val.app U) (b n))
+    (W : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y))
+    (a : ℕ → (W ⟶ N))
+    (ha : ∀ n m, n ≤ m → a m ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) =
+      a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N)) :
+    ∃ g : W ⟶ N, ∀ n, g ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) =
+      a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) := by
+  classical
+  let Λ := Profinite.padicIntegersRingObj ell E
+  let F := sectionModuleEquivalence.{u + 1, u + 1, u}
+    (ProEt.topology Y) (condensedRingObj Λ Y)
+  let qN (n : ℕ) := cokernel.π (ell ^ (n + 1) • 𝟙 N)
+  let A := OriginalIntegralQuotientSequence.augmentation ell N
+  have hA : Mono A := Preadditive.mono_of_cancel_zero A (fun g hg ↦ by
+    apply originalIntegralOrdinaryQuotientKernel_separated_finitePresentation
+      ell E Y N hN g
+    intro n
+    simpa [A, OriginalIntegralQuotientSequence.augmentation] using
+      congrArg (fun t ↦ t ≫ Pi.π _ n) hg)
+  have sep := quotient_sections_separated F N
+    (fun n ↦ cokernel (ell ^ (n + 1) • 𝟙 N)) qN
+  obtain ⟨g, hg⟩ := lift_sectionwise (F.functor.obj N) (F.functor.obj W)
+    (fun n ↦ F.functor.obj (cokernel (ell ^ (n + 1) • 𝟙 N)))
+    (fun n ↦ F.functor.map (qN n)) sep hlocal
+    (fun n ↦ F.functor.map (a n))
+    (fun n m hnm ↦ by
+      simpa only [← Functor.map_comp] using congrArg F.functor.map (ha n m hnm))
+  refine ⟨F.functor.preimage g, fun n ↦ ?_⟩
+  apply F.functor.map_injective
+  simpa only [Functor.map_comp, Functor.map_preimage] using hg n
+
 set_option profiler true in
 
 /-- Reassembly of individual section limits over a constructible module.
@@ -228,60 +313,6 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
           ((F.map (cokernel.π (ell ^ (n + 1) • 𝟙 M))).val.app U) (b n) := by
   classical
   let Λ := Profinite.padicIntegersRingObj ell E
-  have hfinite {Y : Scheme.{u}}
-      (N : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
-      (hN : Mod.IsFinitelyPresented (condensedRingObj Λ Y) N)
-      (W : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
-      (a : ℕ → (W ⟶ N))
-      (ha : ∀ n m, n ≤ m → a m ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) =
-        a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N)) :
-      ∃ g : W ⟶ N, ∀ n, g ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) =
-        a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) := by
-    let F := sectionModuleEquivalence.{u + 1, u + 1, u}
-      (ProEt.topology Y) (condensedRingObj Λ Y)
-    let qN (n : ℕ) := cokernel.π (ell ^ (n + 1) • 𝟙 N)
-    let A := OriginalIntegralQuotientSequence.augmentation ell N
-    have hA : Mono A := Preadditive.mono_of_cancel_zero A (fun g hg ↦ by
-      apply originalIntegralOrdinaryQuotientKernel_separated_finitePresentation
-        ell E Y N hN g
-      intro n
-      simpa [A, OriginalIntegralQuotientSequence.augmentation] using
-        congrArg (fun t ↦ t ≫ Pi.π _ n) hg)
-    have sep (U : Y.ProEtᵒᵖ) (x y : (F.functor.obj N).val.obj U)
-        (hxy : ∀ n, (F.functor.map (qN n)).val.app U x =
-          (F.functor.map (qN n)).val.app U y) : x = y := by
-      let R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1} :=
-        CategoryTheory.InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
-        (ProEt.topology Y) (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y)
-      let T := F.functor ⋙ SheafOfModules.evaluation
-        ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) U ⋙
-          forget (ModuleCat.{u + 1} _)
-      have hmono : Mono (T.map A) := inferInstance
-      apply (CategoryTheory.mono_iff_injective (T.map A)).mp hmono
-      let D := Discrete.functor (fun n : ℕ ↦ cokernel (ell ^ (n + 1) • 𝟙 N))
-      have hlim := isLimitOfPreserves T (limit.isLimit D)
-      have hsec : Types.sectionOfCone (T.mapCone (limit.cone D)) (T.map A x) =
-          Types.sectionOfCone (T.mapCone (limit.cone D)) (T.map A y) := by
-        apply Subtype.ext
-        funext n
-        change T.map (Pi.π _ n.as) (T.map A x) =
-          T.map (Pi.π _ n.as) (T.map A y)
-        have heq : A ≫ Pi.π _ n.as = qN n.as := by
-          simp [A, qN, CategoryTheory.OriginalIntegralQuotientSequence.augmentation]
-        have hp := congrArg T.map heq
-        rw [Functor.map_comp] at hp
-        exact (ConcreteCategory.congr_hom hp x).trans
-          ((hxy n.as).trans (ConcreteCategory.congr_hom hp y).symm)
-      exact (Types.isLimit_iff_bijective_sectionOfCone _).mp ⟨hlim⟩ |>.injective hsec
-    obtain ⟨g, hg⟩ := lift_sectionwise (F.functor.obj N) (F.functor.obj W)
-      (fun n ↦ F.functor.obj (cokernel (ell ^ (n + 1) • 𝟙 N)))
-      (fun n ↦ F.functor.map (qN n)) sep (hlocal Y N hN)
-      (fun n ↦ F.functor.map (a n))
-      (fun n m hnm ↦ by
-        simpa only [← Functor.map_comp] using congrArg F.functor.map (ha n m hnm))
-    refine ⟨F.functor.preimage g, fun n ↦ ?_⟩
-    apply F.functor.map_injective
-    simpa only [Functor.map_comp, Functor.map_preimage] using hg n
   have hhom
       (W : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
       (a : ℕ → (W ⟶ M))
@@ -309,7 +340,8 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
           rw [Preadditive.sub_comp, ha n m hnm, sub_self]
         have h := map_quotient_zero L (a m - a n) _ hz
         simpa only [Functor.map_sub, Preadditive.sub_comp, sub_eq_zero] using h
-      obtain ⟨g, hg⟩ := hfinite (L.obj M) hfp (L.obj W) (fun n ↦ L.map (a n)) hcompat
+      obtain ⟨g, hg⟩ := quotient_hom_lifts_finitePresentation ell E
+        (L.obj M) hfp (hlocal Y (L.obj M) hfp) (L.obj W) (fun n ↦ L.map (a n)) hcompat
       have he : g ≫ L.map A = L.map t := by
         apply (isLimitOfPreserves L (limit.isLimit (Discrete.functor Q))).hom_ext
         intro n
@@ -321,9 +353,7 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
         rw [hπ]
         simpa only [t, q, Pi.lift_comp_π, L.map_comp] using
           quotient_lift_map L g (a n.as) (ell ^ (n.as + 1)) (hg n.as)
-      change L.map (t ≫ cokernel.π A) = 0
-      rw [Functor.map_comp, ← he, Category.assoc, ← L.map_comp,
-        cokernel.condition, L.map_zero, comp_zero]
+      exact map_cokernel_zero_of_factor L A t g he
     have hraw {Y : Scheme.{u}} (f : Y ⟶ X)
         [PreservesLimitsOfShape (Discrete ℕ) ((f)^*[Ab.{u + 1}])]
         (hfp : Mod.IsFinitelyPresented (condensedRingObj Λ Y) ((f)^*⟦Λ⟧.obj M)) :
