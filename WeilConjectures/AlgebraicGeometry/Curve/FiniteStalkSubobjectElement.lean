@@ -68,9 +68,42 @@ private theorem finite_stable_submodule
   | add y z hy hz ihy ihz => simpa using W.add_mem ihy ihz
   | smul n y hy ih => simpa using W.smul_mem n ih
 
+-- Prove the transport with abstract functors, so rewriting does not unfold the stalk comparison.
+private theorem finite_subobject_element_of_equivalence
+    {C D : Type*} [Category C] [Category D] (E : C ≌ D)
+    (Φ : C ⥤ AddCommGrpCat.{u + 1}) (R : D ⥤ AddCommGrpCat.{u + 1})
+    (i : E.functor ⋙ R ≅ Φ) {M : C} {B : D}
+    (inc : B ⟶ E.functor.obj M) [Mono inc] [Finite (R.obj B)]
+    (y : R.obj B) (x : Φ.obj M) (hy : (R.map inc ≫ i.hom.app M) y = x) :
+    ∃ (N : Subobject M) (_ : Finite (Φ.obj (N : C))) (z : Φ.obj (N : C)),
+      Φ.map N.arrow z = x := by
+  classical
+  let f : E.inverse.obj B ⟶ M := E.functor.preimage (E.counitIso.hom.app B ≫ inc)
+  have hf : E.functor.map f = E.counitIso.hom.app B ≫ inc := E.functor.map_preimage _
+  have : Mono (E.functor.map f) := by rw [hf]; infer_instance
+  have : Mono f := E.functor.mono_of_mono_map inferInstance
+  let e : Φ.obj (E.inverse.obj B) ≅ R.obj B :=
+    (i.app (E.inverse.obj B)).symm ≪≫ R.mapIso (E.counitIso.app B)
+  have hmap : Φ.map f = e.hom ≫ R.map inc ≫ i.hom.app M := by
+    calc
+      Φ.map f = i.inv.app (E.inverse.obj B) ≫ (E.functor ⋙ R).map f ≫
+          i.hom.app M := by
+        rw [i.hom.naturality, Iso.inv_hom_id_app_assoc]
+      _ = e.hom ≫ R.map inc ≫ i.hom.app M := by
+        simp only [Functor.comp_map, hf, R.map_comp, e, Iso.trans_hom, Iso.symm_hom,
+          Functor.mapIso_hom, Category.assoc]
+        rfl
+  let N := Subobject.mk f
+  let eN : Φ.obj (N : C) ≅ R.obj B := Φ.mapIso (Subobject.underlyingIso f) ≪≫ e
+  have hN : Finite (Φ.obj (N : C)) := Finite.of_injective eN.hom
+    (ConcreteCategory.bijective_of_isIso _).1
+  refine ⟨N, hN, eN.inv y, ?_⟩
+  change Φ.map N.arrow ((e.inv ≫ Φ.map (Subobject.underlyingIso f).inv) y) = x
+  rw [ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+    ← Φ.map_comp, Subobject.underlyingIso_arrow, hmap]
+  simpa only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply] using hy
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Comparing the stalk functor with the composite forgetful functor unfolds several layers.
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.style.haveILetI false in
 /-- Every element of the geometric stalk of a torsion sheaf over a field comes from
@@ -133,34 +166,8 @@ theorem torsion_exists_finite_stalk_subobject_element
   let inc : B ⟶ A := ObjectProperty.homMk (Rep.subtype A.obj W hW)
   have : Mono (U.map inc) := (Rep.mono_iff_injective _).mpr Subtype.val_injective
   have : Mono inc := U.mono_of_mono_map inferInstance
-  let f : E.inverse.obj B ⟶ M := E.functor.preimage (E.counitIso.hom.app B ≫ inc)
-  have hf : E.functor.map f = E.counitIso.hom.app B ≫ inc := E.functor.map_preimage _
-  have : Mono (E.functor.map f) := by rw [hf]; infer_instance
-  have : Mono f := E.functor.mono_of_mono_map inferInstance
-  let e : Φ.obj (E.inverse.obj B) ≅ R.obj B :=
-    (i.app (E.inverse.obj B)).symm ≪≫ R.mapIso (E.counitIso.app B)
-  have hmap : Φ.map f = e.hom ≫ R.map inc ≫ i.hom.app M := by
-    calc
-      Φ.map f = i.inv.app (E.inverse.obj B) ≫ (E.functor ⋙ R).map f ≫
-          i.hom.app M := by
-        rw [i.hom.naturality, Iso.inv_hom_id_app_assoc]
-      _ = e.hom ≫ R.map inc ≫ i.hom.app M := by
-        rw [Functor.comp_map, hf, R.map_comp]
-        simp only [e, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
-        rfl
-  let N := Subobject.mk f
-  let eN : Φ.obj (N : Sheaf (Spec (.of K)).smallEtaleTopology
-      AddCommGrpCat.{u + 1}) ≅ R.obj B := Φ.mapIso (Subobject.underlyingIso f) ≪≫ e
   have : Finite (R.obj B) := hfin
-  have hN : Finite (Φ.obj (N : Sheaf (Spec (.of K)).smallEtaleTopology
-      AddCommGrpCat.{u + 1})) := Finite.of_injective eN.hom
-        (ConcreteCategory.bijective_of_isIso _).1
-  refine ⟨N, hN, eN.inv ⟨a, ha⟩, ?_⟩
-  change Φ.map N.arrow ((e.inv ≫ Φ.map (Subobject.underlyingIso f).inv) ⟨a, ha⟩) = x
-  rw [ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
-    ← Φ.map_comp, Subobject.underlyingIso_arrow]
-  rw [hmap]
-  simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+  apply finite_subobject_element_of_equivalence E Φ R i inc ⟨a, ha⟩ x
   change (i.hom.app M) ((i.inv.app M) x) = x
   exact Iso.inv_hom_id_apply (i.app M) x
 

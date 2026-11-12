@@ -380,8 +380,6 @@ private theorem ordinary_unit (n : ℕ) (M : coefficientLevelModules (J := J) O 
     L.map (𝟙 _) ≫ (A.lift n).moduleUnderlying.inv.app M
   erw [L.map_id, Category.id_comp, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
--- Matching the three normalized comparison words unfolds several functor composites.
 private theorem ordinary_composition {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n ≤ m)
     (M : coefficientLevelModules (J := J) O t r) :
     (A.lift n).modules.map ((PW.tensorAssoc h₁ h₂).hom.app M) ≫
@@ -402,9 +400,17 @@ private theorem ordinary_composition {r m n : ℕ} (h₁ : m ≤ r) (h₂ : n �
     ← L.map_comp_assoc]
   erw [Category.assoc (insertion J h₁ M), insertion_comp J PW h₁ h₂ M,
     tensor_insertion PW PV A E (h₂.trans h₁) M]
-  erw [reassoc_of% tensor_insertion PW PV A E h₂ ((tensor J h₁).obj M),
-    ← reassoc_of% hi, reassoc_of% tensor_insertion PW PV A E h₁ M,
-    insertion_comp K PV h₁ h₂ ((A.lift r).modules.obj M)]
+  -- Focus on each insertion to avoid unfolding unrelated functor composites while matching.
+  conv_rhs =>
+    arg 2
+    erw [reassoc_of% tensor_insertion PW PV A E h₂ ((tensor J h₁).obj M)]
+  conv_rhs =>
+    arg 2; arg 2
+    erw [← reassoc_of% hi]
+  conv_rhs => erw [reassoc_of% tensor_insertion PW PV A E h₁ M]
+  conv_rhs =>
+    arg 2
+    erw [insertion_comp K PV h₁ h₂ ((A.lift r).modules.obj M)]
 
 variable [PreservesFiniteLimits L]
 
