@@ -30,7 +30,6 @@ variable
   [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
     (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The comparison from the residue cycle homology of a strictly perfect affine model `K` of
@@ -115,7 +114,8 @@ theorem affineResidueModelEquiv_naturality
         (q K z)
   have hsquare : H.map (DerivedCategory.Q.map φ) ≫ oC.hom = oK.hom ≫ A.map b := by
     dsimp only [oC, oK, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
-    rw [hφ, H.map_comp, H.map_comp]
+    rw [hφ]
+    simp only [H.map_comp]
     simp only [Category.assoc]
     rw [← H.map_comp_assoc m'.hom m'.inv, m'.hom_inv_id, H.map_id, Category.id_comp]
     have hn := θ.hom.naturality b
