@@ -49,6 +49,23 @@ private theorem derivedCompleteIntegers_boundedConstructible_aux (ℓ : ℕ) [Fa
     derivedCompleteIntegers ℓ E X K₀.obj :=
   derivedCompleteIntegers_of_boundedConstructible K₀.property
 
+private theorem integralModel_obj_to_derivedComplete_aux (ℓ : ℕ) [Fact ℓ.Prime]
+    {X : Scheme.{u}} [IsNoetherian X] {E : FiniteIntermediateField ℓ}
+    {K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
+    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (he : Nonempty ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+        (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj K₀.obj) ≅ K) :
+    ∃ (n : ℤ), derivedCompleteIntegers ℓ E X K₀.obj ∧ K₀.obj.IsGE n ∧
+      boundedConstructible _ K₀.obj ∧
+        Nonempty ((L(Mod.extendScalars (coefficientMap
+          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
+            ((L(Mod.extendScalars (coefficientMap
+              (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀.obj) ≅ K) := by
+  obtain ⟨n, hn⟩ := K₀.property.1.1
+  exact ⟨n, derivedCompleteIntegers_boundedConstructible_aux ℓ, hn, K₀.property, he⟩
+
 private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ) [Fact ℓ.Prime]
     {X : Scheme.{u}} [IsNoetherian X] [TopologicalSpace.NoetherianSpace X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -63,9 +80,8 @@ private theorem exists_derivedCompleteIntegers_iso_integralModel_aux (ℓ : ℕ)
             ((L(Mod.extendScalars (coefficientMap
               (padicIntegersRingObjToContinuousMapRingObj ℓ E) X))).obj K₀) ≅ K) := by
   obtain ⟨E, K₀, he⟩ := exists_padicAlgCl_iso_integralModel_obj_aux ℓ X K hK
-  obtain ⟨n, hn⟩ := K₀.property.1.1
-  exact ⟨E, K₀.obj, n, derivedCompleteIntegers_boundedConstructible_aux ℓ, hn,
-    K₀.property, he⟩
+  obtain ⟨n, hcomplete, hn, hK₀, he⟩ := integralModel_obj_to_derivedComplete_aux ℓ he
+  exact ⟨E, K₀.obj, n, hcomplete, hn, hK₀, he⟩
 
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
