@@ -86,7 +86,7 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
   have hamb : IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq).app K.obj) := by
     have := isIso_baseChangeMap_of_weaklyEtale (Profinite.padicAlgClRingObj ℓ) hsq
     infer_instance
-  exact Adjunction.isIso_exchangeRight_restrictFullyFaithful_app
+  have key := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
     (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) hsq.toCommSq)
@@ -99,6 +99,8 @@ theorem isIso_exchangeRight_pullbackSquareComparison_app_of_weaklyEtale (sq : Co
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
     (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
       ℓ (Profinite.padicAlgClRingObj ℓ) sq) K hamb
+  convert key using 3
+  all_goals rfl
 
 end BaseChange
 
