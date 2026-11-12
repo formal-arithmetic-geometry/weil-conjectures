@@ -280,6 +280,7 @@ private theorem finite_adj_shift (n : ℕ)
   · intro Q hQ
     apply (Iso.eq_comp_inv (R.mapDerivedCategoryFactors.app _)).2
     have hu := CompletionUnit.finiteModel_unit l E W Q hQ n
+    -- Normalize the named model instead of searching inside the expanded cochain counit.
     simp only [← finiteCochainModel_counit l E W n Q hQ] at hu
     with_unfolding_all exact (Category.assoc _ _ _).trans hu
 
@@ -391,8 +392,9 @@ theorem purReductionFiniteShiftNormalization
     have := hsf n
     have h := NatTrans.shift_app_comm (finiteCochainModel l E W n).ε r Q
     simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+    -- Use the cochain counits on both sides, with the same composition normal form as h.
     simp only [← finiteCochainModel_counit l E W n Q hQ,
-      ← finiteCochainModel_counit l E W n (Q⟦r⟧) hQr]
+      ← finiteCochainModel_counit l E W n (Q⟦r⟧) hQr, Category.assoc]
     with_unfolding_all exact h
   · intro n
     let := sf n
