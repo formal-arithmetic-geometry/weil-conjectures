@@ -45,7 +45,6 @@ private theorem mapped_counit_factorization
   rw [hf]
   simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc, hc]
 
-set_option profiler true in
 set_option linter.unusedVariables false in
 /-- Homology identifications and counit compatibility for fixed stalk data.
 Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
