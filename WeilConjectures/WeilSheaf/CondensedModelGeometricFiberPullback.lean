@@ -283,7 +283,7 @@ lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
   rw [CategoryTheory.mateEquiv_symm_natTrans_app]
   simp only [TwoSquare.mk]
-  change _ = (adicLowerStarCompCondensedModIso l e.inv).inv.app x
+  symm
   rw [← Functor.map_comp_assoc, h]
   simp
 
