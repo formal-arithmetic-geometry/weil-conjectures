@@ -155,8 +155,8 @@ lemma δ_comp_pullbackSquareComparison_id (h₁ : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f
         (L((f₁)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app A) ⊗ₘ
           L((f₂)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app B)) =
       (leftDerivedUpperStarId Λ Z).hom.app (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B) := by
-  have h₁' := pullbackSquareComparison_id_hom_app_comp_map (Z := Z) (X := X) Λ f₁ h₁ A
-  have h₂' := pullbackSquareComparison_id_hom_app_comp_map (Z := Z) (X := Y) Λ f₂ h₂ B
+  have h₁' := pullbackSquareComparison_hom_app_id_right Λ f₁ (⟨h₁⟩ : CommSq f₁ (𝟙 Z) (𝟙 X) f₁) A
+  have h₂' := pullbackSquareComparison_hom_app_id_right Λ f₂ (⟨h₂⟩ : CommSq f₂ (𝟙 Z) (𝟙 Y) f₂) B
   calc
     _ = Functor.OplaxMonoidal.δ L((𝟙 Z)^*⟦Λ⟧) (L((f₁)^*⟦Λ⟧).obj A)
           (L((f₂)^*⟦Λ⟧).obj B) ≫
