@@ -36,7 +36,6 @@ private theorem assemble_homology_transport
 attribute [local irreducible] tensorStalkIso tensorComplex openPinnedTensorRestrictionIso
 attribute [local irreducible] openDerivedAdditiveStalkIso comparisonStalkHomologyIso
 
-set_option profiler true in
 /-- A degreewise canonical open tensor-stalk square induces the homology square.
 
 Proof: the hypothesis is an equality in every degree of the two additive chain

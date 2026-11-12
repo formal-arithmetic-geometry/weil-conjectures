@@ -23,6 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
+
 -- Extensionality on pure tensors keeps tensor induction independent of the stalk constructions.
 private theorem tensor_germ_hom_ext
     {R M N : Type u} [CommRing R] [AddCommGroup M] [AddCommGroup N]
@@ -34,7 +35,6 @@ private theorem tensor_germ_hom_ext
   | tmul m n => exact h m n
   | add x y hx hy => simp only [map_add, hx, hy]
 
-set_option profiler true in
 /-- Compatible ordinary tensor coordinates, pinned to the actual open restriction map.
 
 Proof: use the inverse stalk maps of the four open inclusions, transporting

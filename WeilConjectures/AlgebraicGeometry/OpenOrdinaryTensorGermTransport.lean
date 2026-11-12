@@ -28,7 +28,6 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 
-set_option profiler true in
 /-- Open restriction identifies the ordinary tensor stalk complexes in germ
 coordinates. This concerns only ordinary tensor complexes, not the cohomology
 of a base-derived tensor or its comparison map.
