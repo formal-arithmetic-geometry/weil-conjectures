@@ -170,7 +170,6 @@ private theorem affineBaseChangeTildeModuleMap_localized_aux
         (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)  := by
   have _ := hK
   dsimp only
-  intro p
   exact affineBaseChangeTildeModuleMap_localized_aux2
     R A R' A' φg' φf' hφg' hφf' sq K hK hL M hM e hc i m p
 
