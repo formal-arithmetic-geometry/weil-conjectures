@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
+import Mathlib.Algebra.Category.ModuleCat.ExteriorPower
 
 /-! Component data for exterior presheaf pullback. -/
 
@@ -320,20 +321,24 @@ private theorem restriction_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
           (fun i ↦ M.val.map f (a i)) :=
   (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f) a
 
+/-- Identify restricted sections before applying the exterior-power functor. -/
+private def openSectionTransportIso {X : Scheme.{v}} (M : X.Modules)
+    (U : X.Opens) (V : U.toScheme.Opensᵒᵖ) :
+    (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
+      (M.val.obj (U.ι.opensFunctor.op.obj V)) ≅ (M.restrict U.ι).val.obj V :=
+  Iso.refl _
+
 /-- Scalar transport on exterior powers, expressed in the actual section modules. -/
 private noncomputable def openExteriorComponent {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (U : X.Opens) (V : U.toScheme.Opensᵒᵖ) :
     ((openPresheafRestriction U.ι).obj
       (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).obj V ≅
-      (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).obj V := by
-  change _ ≅ ModuleCat.of (U.toScheme.presheaf.obj V)
-    (⋀[U.toScheme.presheaf.obj V]^n ((M.restrict U.ι).val.obj V))
-  rw [show (M.restrict U.ι).val.obj V =
-    (ModuleCat.restrictScalars (U.ι.appIso V.unop).inv.hom).obj
-      (M.val.obj (U.ι.opensFunctor.op.obj V)) from rfl]
-  exact ringTransportIso
+      (_root_.PresheafOfModules.exteriorPower (R := _) (M.restrict U.ι).val n).obj V :=
+  ringTransportIso
     (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
-    (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
+    (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n ≪≫
+      (ModuleCat.exteriorPower.functor (U.toScheme.presheaf.obj V) n).mapIso
+        (openSectionTransportIso M U V)
 
 /-- The section comparison takes a pure wedge to the same sections after restriction. -/
 private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
@@ -343,7 +348,13 @@ private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
       (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a) =
       exteriorPower.ιMulti (U.toScheme.presheaf.obj V) n
         (M := (M.restrict U.ι).val.obj V) a := by
-  exact ringTransportInverse_wedge _ _ _ _ n a
+  change ModuleCat.exteriorPower.map (openSectionTransportIso M U V).hom n
+      (ringTransportInverse
+        (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) (U.toScheme.presheaf.obj V)
+        (U.ι.appIso V.unop) (M.val.obj (U.ι.opensFunctor.op.obj V)) n
+        (exteriorPower.ιMulti (X.presheaf.obj (U.ι.opensFunctor.op.obj V)) n a)) = _
+  rw [ringTransportInverse_wedge]
+  exact ModuleCat.exteriorPower.map_mk (openSectionTransportIso M U V).hom a
 
 set_option profiler true in
 -- The comparison unfolds section modules and their transported scalar actions.

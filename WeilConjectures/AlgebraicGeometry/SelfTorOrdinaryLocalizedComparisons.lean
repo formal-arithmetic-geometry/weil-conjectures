@@ -217,7 +217,7 @@ private theorem exists_nonpositive_flat_quasiIso (Y : Scheme.{u})
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
+set_option profiler true in
 -- Total tensor and the bounded replacement involve large module-category instance terms.
 /-- The ordinary affine tensor comparison is compatible with one augmented algebraic
 comparison for each basic inclusion. Independence of the supplied comparison is not
@@ -300,9 +300,7 @@ theorem exists_selfTor_ordinary_localized_comparisons
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
   classical
-  let M := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
-  let S := CochainComplex.singleFunctor M 0
+  intro inst B S Q
   let T := S.obj B
   have hT : ∀ j : ℤ, 0 < j → IsZero (T.X j) := by
     intro j hj
@@ -310,7 +308,6 @@ theorem exists_selfTor_ordinary_localized_comparisons
   rcases exists_nonpositive_flat_quasiIso Y T hT with ⟨E, r, hflat, hbound, hr⟩
   have hE : E.IsKFlatTensor := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
     Y.toRingedSpace E ⟨0, hbound⟩ hflat
-  let := SheafOfModules.monoidalCategory Y.sheaf
   rcases tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq (-(n : ℤ)) with ⟨e⟩
   rcases exists_selfTor_nonpositive_flat_sections i E r hbound hflat hr n with ⟨d, hd⟩
   refine ⟨fun U ↦ (d U).trans (Scheme.Modules.appLinearEquivOfIso e U.1), ?_⟩

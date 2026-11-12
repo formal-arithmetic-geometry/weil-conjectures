@@ -114,6 +114,7 @@ theorem exists_selfTor_ordinary_resolution_sections
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  intro inst B S Q
   obtain ⟨c, hc⟩ := exists_selfTor_ordinary_localized_comparisons i K q hK hq n
   refine ⟨c, ?_⟩
   intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk
