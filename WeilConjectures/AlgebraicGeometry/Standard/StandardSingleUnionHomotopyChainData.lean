@@ -101,9 +101,9 @@ theorem standardSingle_union_homotopy_chain_data
         DerivedCategory.Q.map (CochainComplex.mappingCone.mapOfHomotopy H) ≫ e₃'.hom =
           e₃.hom ≫ aUV.hom := by
   classical
-  letI inst : ∀ X : Scheme.{u}, HasDerivedCategory.standard
+  letI inst : ∀ X : Scheme.{u}, HasDerivedCategory
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := fun X ↦
-    HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    HasDerivedCategory.standard _
   let W := U ⊔ V
   let f := W.ι ≫ p
   let K := (DerivedCategory.singleFunctor
