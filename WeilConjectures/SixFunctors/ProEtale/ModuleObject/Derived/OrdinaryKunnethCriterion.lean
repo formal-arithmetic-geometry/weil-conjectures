@@ -191,9 +191,17 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit
   simp only [Category.assoc]
   have hcomp := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
     (R((aX)_*⟦Λ⟧).obj A) (h := by rw [← sq₁.w])
-  rw [reassoc_of% hcomp]
-  rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-    ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A)))]
+  have hcomp' := congrArg (fun z ↦ z ≫
+      ((leftDerivedUpperStarComp Λ p₁ aX).hom.app (R((aX)_*⟦Λ⟧).obj A) ≫
+        L((p₁)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aX).counit.app A))) hcomp
+  have hcomp'' := congrArg (fun z ↦
+      (leftDerivedUpperStarComp Λ p₂ aY).inv.app
+          (L((𝟙 S)^*⟦Λ⟧).obj (R((aX)_*⟦Λ⟧).obj A)) ≫ z) hcomp'
+  calc
+    _ = _ := by simpa only [Category.assoc] using hcomp''
+    _ = _ := by
+      rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
+        ((leftDerivedUpperStarId Λ S).hom.app (R((aX)_*⟦Λ⟧).obj A)))]
 
 lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
     {p₂ : P ⟶ Y} {aY : Y ⟶ S}
@@ -210,10 +218,18 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_counit_id
   simp only [Category.assoc]
   have hcomp := leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' Λ (p₂ ≫ aY)
     (R((aY)_*⟦Λ⟧).obj B) (h := by rw [← sq₂.w])
-  rw [reassoc_of% hcomp]
-  rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
-    ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)))]
-  simp
+  have hcomp' := congrArg (fun z ↦ z ≫
+      ((leftDerivedUpperStarComp Λ p₂ aY).hom.app (R((aY)_*⟦Λ⟧).obj B) ≫
+        L((p₂)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ aY).counit.app B))) hcomp
+  have hcomp'' := congrArg (fun z ↦
+      (leftDerivedUpperStarComp Λ p₂ aY).inv.app
+          (L((𝟙 S)^*⟦Λ⟧).obj (R((aY)_*⟦Λ⟧).obj B)) ≫ z) hcomp'
+  calc
+    _ = _ := by simpa only [Category.assoc] using hcomp''
+    _ = _ := by
+      rw [← reassoc_of% ((leftDerivedUpperStarComp Λ p₂ aY).inv.naturality
+        ((leftDerivedUpperStarId Λ S).hom.app (R((aY)_*⟦Λ⟧).obj B)))]
+      simp
 
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
