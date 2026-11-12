@@ -69,10 +69,8 @@ private theorem affineHom_mapComparison
     (bB.app I).symm
   have hc : d₀.hom ≫ q.app I ≫ e₀.hom.app I =
       (NatTrans.mapHomologicalComplex c (.up ℤ)).app I := by
-    change (Functor.mapHomologicalComplexCompIso j (.up ℤ)).hom.app I ≫
-      bB.inv.app I ≫ q.app I ≫ bO.hom.app I ≫
-      (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app I ≫
-      (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).hom.app I = _
+    simp only [d₀, e₀, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+      NatTrans.comp_app, Category.assoc]
     rw [← Category.assoc _ (bO.hom.app I) _, hb I]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
     apply HomologicalComplex.hom_ext

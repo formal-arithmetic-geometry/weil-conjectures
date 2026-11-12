@@ -80,7 +80,7 @@ private theorem wedge_bilinear_naturality {X : Scheme.{v}} {A B : X.Modules}
     erw [hb V (fun i ↦ A.val.map g (a i)) (fun i ↦ B.val.map g (c i)), hb U a c]
     let d := Fin.append (fun j ↦ f.val.app U (a j)) c
     change wedge _ = (exteriorPower B (r + s)).presheaf.map g (wedge d)
-    rw [wedge_map g.unop d]
+    erw [wedge_map g.unop d]
     apply congrArg (wedge (M := B) (r := r + s) (U := V.unop))
     funext i
     refine Fin.addCases (fun j ↦ ?_) (fun j ↦ ?_) i
@@ -170,12 +170,11 @@ theorem exteriorSheaf_wedgeMap_exists {X : Scheme.{v}} {A B : X.Modules}
         (_root_.exteriorPower.ιMulti (X.presheaf.obj U) s c)) = _
     rw [_root_.exteriorPower.map_apply_ιMulti, wedgeMul_wedge]
     rfl
-  have hbmap := wedge_bilinear_naturality f r s b hb
   obtain ⟨β, ⟨hβ, hβunit⟩, _⟩ :=
     PresheafOfModules.existsUnique_bilinear_sheafification_extension
       X.presheaf X.sheaf (𝟙 X.ringCatSheaf.obj)
       (A.val.exteriorPower (R := X.presheaf) r) (B.val.exteriorPower (R := X.presheaf) s)
-      (exteriorPower B (r + s)) b hbmap
+      (exteriorPower B (r + s)) b (wedge_bilinear_naturality f r s b hb)
   obtain ⟨ψ, hψ, _⟩ := SheafOfModules.tensor_bilinear_universal X.sheaf
     (exteriorPower A r) (exteriorPower B s) (exteriorPower B (r + s)) β hβ
   refine ⟨ψ, ?_⟩
