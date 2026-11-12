@@ -69,7 +69,6 @@ private theorem mapped_homology_mem_of_shortExact
     ((hS.homology_exact₃ n (n + 1) (by simp)).map F)
     (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
-set_option profiler true in
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
 
 Source: Stacks Project, Tag 0117, long exact sequence, and Tag 01IE, extension closure.
@@ -92,6 +91,7 @@ theorem localized_complex_qc_homology_extension
     (h₁ : ∀ i : ℤ, (S.X₁.homology i).IsQuasicoherent)
     (h₃ : ∀ i : ℤ, (S.X₃.homology i).IsQuasicoherent) (n : ℤ) :
     (S.X₂.homology n).IsQuasicoherent := by
+  -- Share the abelian structure across the localized homology computations.
   let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
   let e := Scheme.Modules.overEquiv U
   let F := e.functor
@@ -100,6 +100,7 @@ theorem localized_complex_qc_homology_extension
   let : P.IsClosedUnderIsomorphisms :=
     inferInstanceAs
       (SheafOfModules.isQuasicoherent U.toScheme.ringCatSheaf).IsClosedUnderIsomorphisms
+  -- Pass the quasi-coherence proofs explicitly to avoid repeating site instance inference.
   let : P.IsClosedUnderKernels := ⟨by
     rintro _ @⟨M, N, f, k, hk, hM, hN⟩
     exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
