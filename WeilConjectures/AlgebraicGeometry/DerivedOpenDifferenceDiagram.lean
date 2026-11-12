@@ -110,6 +110,7 @@ set_option synthInstance.maxHeartbeats 400000 in
 -- The threefold transported restriction needs additional instance search.
 set_option maxHeartbeats 1600000 in
 -- The derived restriction functors and their comparisons need this elaboration budget.
+set_option trace.profiler true in
 /-- The difference arrow has split normal form on each of the two opens.
 The middle and last objects are the explicit direct-image sum and overlap image.
 This constructs their maps, not a glued object.
