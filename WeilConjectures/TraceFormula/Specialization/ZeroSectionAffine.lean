@@ -71,6 +71,7 @@ lemma mem_range_centreSpecialFibreMap_iff {k : Type u} [Field k]
     y ∈ Set.range (centreSpecialFibreMap f I k').left.base ↔
       I.subschemeι (constantSpecialFibreProj k' (centre X I) y) ∈ Set.range f.left.base := by
   rw [range_centreSpecialFibreMap_eq_preimage, range_centreMap]
+  rfl
 
 /-- Projection to the ambient scheme commutes with the map on constant special fibres. -/
 lemma centreSpecialFibreMap_toBase_apply {k : Type u} [Field k]
@@ -81,8 +82,11 @@ lemma centreSpecialFibreMap_toBase_apply {k : Type u} [Field k]
       ((centreSpecialFibreMap f I k').left x)) =
       f.left ((centreι X' (I.comap f.left)).left
         (constantSpecialFibreProj k' (centre X' (I.comap f.left)) x)) := by
-  rw [← Scheme.Hom.comp_apply, centreSpecialFibreMap_constantSpecialFibreProj,
-    Scheme.Hom.comp_apply]
+  have h := congrArg (fun g ↦ g.base x)
+    (centreSpecialFibreMap_constantSpecialFibreProj k' f I)
+  change constantSpecialFibreProj k' (centre X I) ((centreSpecialFibreMap f I k').left x) =
+    (centreMap f I).left (constantSpecialFibreProj k' (centre X' (I.comap f.left)) x) at h
+  rw [h]
   exact congrArg (fun g ↦ g.left (constantSpecialFibreProj k'
     (centre X' (I.comap f.left)) x)) (centreMap_centreι f I)
 
@@ -234,12 +238,12 @@ theorem isZero_specializationDefect_of_isFinite (N : ℕ)
       (centre (polyAffine k (N + 2)) (H.comap v.left))) ⁻¹ᵁ U).ι)^*⟦Λ⟧)).mapIso
       e₁.symm)).of_iso ((leftDerivedUpperStarComp Λ _ _).app C)
   · -- outside `U`, the point lies over `a`
-    rcases hY ⟨_, hx, rfl⟩ with ⟨s, hs⟩
     refine absurd ?_ hy₂
     apply (mem_range_centreSpecialFibreMap_iff k' aO H y).2
-    refine ⟨s, ?_⟩
-    change v.left (a s) = _
-    rw [← hxy, centreSpecialFibreMap_toBase_apply, hs]
+    rw [← hxy, centreSpecialFibreMap_toBase_apply]
+    change v.left.base _ ∈ Set.range (a ≫ v.left).base
+    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+    exact Set.mem_image_of_mem v.left.base (hY ⟨_, hx, rfl⟩)
 
 /-- The inductive step of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`. -/
 theorem isZero_specializationDefect_polyAffine_succ (N : ℕ)
