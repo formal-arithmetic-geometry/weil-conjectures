@@ -98,15 +98,20 @@ theorem exists_forall_isIso_derivedReduction_map
     ∃ f : K ⟶ L, ∀ n : ℕ,
       IsIso ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.map
         f) := by
-  let T := fun n : ℕ ↦
-    (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ≅
-      (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj L
+  let red (n : ℕ) := (Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctor
+  let T (n : ℕ) := (red (n + 1)).obj K ≅ (red (n + 1)).obj L
   let r (n : ℕ) : T (n + 1) → T n := fun s ↦
-    @asIso _ _ _ _ (derivedReductionStep (n + 1) s.hom) (isIso_derivedReductionStep (n + 1) s.hom)
+    @asIso _ _ _ _ (derivedReductionStep (n + 1) (K := K) (L := L) s.hom)
+      (isIso_derivedReductionStep (n + 1) (K := K) (L := L) s.hom)
   obtain ⟨t, ht⟩ := exists_compatible_isos_of_finite r hfin hne
-  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq hL (fun n ↦ (t n).hom) fun n ↦ by
+  obtain ⟨f, hf⟩ := exists_derivedReduction_map_eq (K := K) (L := L) hL
+    (fun n ↦ (t n).hom) fun n ↦ by
     rw [← congrArg Iso.hom (ht n)]
-    exact Mod.map_comp_derivedReductionTransition_app _ _ _ _ _
+    exact Mod.map_comp_derivedReductionTransition_app
+      (integersModPowReduction X ℓ E (n + 1 + 1)) (integersModPowTransition X ℓ E (n + 1))
+      (integersModPowReduction X ℓ E (n + 1))
+      (integersModPowReduction_comp_integersModPowTransition X ℓ E (n + 1))
+      (A := L) (B := K) (t (n + 1)).hom
   exact ⟨f, fun n ↦ (hf n) ▸ inferInstance⟩
 
 end AlgebraicGeometry.ProEtale

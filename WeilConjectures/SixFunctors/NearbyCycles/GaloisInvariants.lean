@@ -61,21 +61,23 @@ lemma exists_retraction_of_eq_comp_map_comp_of_invariant {C D E : Type*} [Catego
     simp only [Category.assoc, Iso.hom_inv_id_assoc]
     rw [← F₂.map_comp_assoc, ← F₁.map_comp, hinv]
 
-/-- If the action also fixes the inclusion, the invariant retraction gives a projector fixed
-by the action on both sides. -/
-lemma exists_retraction_of_eq_comp_map_comp_of_invariant_both {C D E : Type*} [Category C]
-    [Category D] [Category E] (F₁ : C ⥤ D) (F₂ : D ⥤ E) {A T : C} {W : D} {P : E}
-    (α : P ⟶ F₂.obj W) (i : P ≅ F₂.obj (F₁.obj A)) (c : F₁.obj T ⟶ W)
-    (κ : F₂.obj (F₁.obj T) ≅ F₂.obj W) (hκ : κ.hom = F₂.map c) (η : A ⟶ T) (R : T ⟶ A)
-    (hα : α = i.hom ≫ F₂.map (F₁.map η ≫ c)) (hR : η ≫ R = 𝟙 A) {ι : Type*}
-    (u : ι → (T ⟶ T)) (ρ : ι → (F₂.obj W ⟶ F₂.obj W))
-    (hρ : ∀ σ, ρ σ = κ.inv ≫ F₂.map (F₁.map (u σ)) ≫ κ.hom) (hinv : ∀ σ, u σ ≫ R = R)
+/-- A retraction invariant under endomorphisms stays invariant after applying a functor and
+transporting along isomorphisms. If the transported action fixes the inclusion, its projector
+is fixed on both sides. -/
+lemma exists_invariant_retraction_of_conjugate {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (i : P ≅ F.obj A) (κ : F.obj T ≅ Q)
+    (η : A ⟶ T) (R : T ⟶ A) (hα : α = i.hom ≫ F.map η ≫ κ.hom) (hR : η ≫ R = 𝟙 A)
+    {ι : Type*} (u : ι → (T ⟶ T)) (ρ : ι → (Q ⟶ Q))
+    (hρ : ∀ σ, ρ σ = κ.inv ≫ F.map (u σ) ≫ κ.hom) (hinv : ∀ σ, u σ ≫ R = R)
     (hfix : ∀ σ, α ≫ ρ σ = α) :
     ∃ r, α ≫ r = 𝟙 P ∧ ∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α := by
-  obtain ⟨r, hr, hinv⟩ := exists_retraction_of_eq_comp_map_comp_of_invariant
-    F₁ F₂ α i c κ hκ η R hα hR u ρ hρ hinv
-  refine ⟨r, hr, fun σ ↦ ⟨hinv σ, ?_⟩⟩
-  rw [Category.assoc, hfix]
+  refine ⟨κ.inv ≫ F.map R ≫ i.inv, ?_, fun σ ↦ ⟨?_, ?_⟩⟩
+  · rw [hα]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc, hR, F.map_id,
+      Category.id_comp, Iso.hom_inv_id]
+  · rw [hρ]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc, hinv]
+  · rw [Category.assoc, hfix]
 
 end CategoryTheory
 
@@ -117,10 +119,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
-  exact exists_retraction_of_eq_comp_map_comp_of_invariant_both R((N.j)_*⟦Λ⟧) L((N.i)^*⟦Λ⟧)
+  rw [Functor.map_comp] at hα
+  exact exists_invariant_retraction_of_conjugate (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C)
-    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)) _
-    (N.galoisLayerExchangeIso h Ω Λ C) rfl _ R hα hR
+    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
+    (N.galoisLayerExchangeIso h Ω Λ C) _ R hα hR
     (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
