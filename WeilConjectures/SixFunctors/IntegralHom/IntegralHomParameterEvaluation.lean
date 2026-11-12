@@ -114,7 +114,6 @@ private theorem totalPair_eq_coefficientTensorGenerator
     CochainComplex.ιMapBifunctor, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   rfl
 
-set_option profiler true in
 private theorem tensor_presentation_parameter_evaluation_of_coefficients
     (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
@@ -171,7 +170,8 @@ private theorem tensor_presentation_parameter_evaluation_of_coefficients
     rw [hs']
     simp only [Units.smul_def, map_zsmul]
     rw [hψ j i (i + j) (add_comm j i) rfl U y x]
-    simp only [evaluate, projection, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+    simp only [evaluate, projection, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+      ModuleCat.comp_apply]
   · change (T.iso J R S P S' hP hS).inv ≫ DerivedCategory.Q.map (s.hom ≫ ψ) = _
     exact (map_comp_swap_evaluation DerivedCategory.Q
       (T.iso J R S P S' hP hS) (T.iso J R S S' P hS hP)
@@ -190,7 +190,6 @@ variable [EssentiallySmall.{t + 1} Y.ProEt]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 -- The representative square elaborates independent site and coefficient universes.
-set_option profiler true in
 /-- The signed representative evaluation uses an adjunction natural in its tensor parameter.
 
 Source: Stacks Tags 08J9 and 06YU; the normalized Koszul exchange construction.
