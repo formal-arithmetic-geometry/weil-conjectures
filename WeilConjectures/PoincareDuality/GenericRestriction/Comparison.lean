@@ -284,11 +284,12 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := inferInstance
   let (X : Scheme.{u}) : MonoidalClosed (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) := inferInstance
-  -- Elaborate each derived functor once, including its K-flat tensor instances.
-  let gStar := L((gZ)^*⟦Λ⟧)
-  let jStar := L((j)^*⟦Λ⟧)
-  let jStar' := L((j')^*⟦Λ⟧)
-  let gUStar := L((gU)^*⟦Λ⟧)
+  -- Elaborate the K-flat tensor instances once, uniformly in the pullback morphism.
+  let pullback {X Y : Scheme.{u}} (f : X ⟶ Y) := L((f)^*⟦Λ⟧)
+  let gStar := pullback gZ
+  let jStar := pullback j
+  let jStar' := pullback j'
+  let gUStar := pullback gU
   let jPush := R((j)_*⟦Λ⟧)
   -- the triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`
   obtain ⟨C, v', w, hT⟩ := distinguished_cocone_triangle
