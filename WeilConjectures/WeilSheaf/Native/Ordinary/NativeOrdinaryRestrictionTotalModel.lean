@@ -210,6 +210,17 @@ theorem native_ordinary_restriction_total_model
     ((dZ.tensorIso k₀ l).hom.app (M, N))
     ((dU.tensorIso k₀ l).app (R.mapDerivedCategory.obj M, R.mapDerivedCategory.obj N))
     h
+  change (R.mapDerivedCategory.map ((dZ.tensorIso k₀ l).hom.app (M, N)) ≫
+      Functor.OplaxMonoidal.δ R.mapDerivedCategory M N ≫
+      (dU.tensorIso k₀ l).inv.app (R.mapDerivedCategory.obj M,
+        R.mapDerivedCategory.obj N)) ≫
+      (dU.tensorIso k₀ l).hom.app (R.mapDerivedCategory.obj M, R.mapDerivedCategory.obj N) ≫
+      (MonoidalCategory.tensor _).map
+        (Prod.mkHom (R.mapDerivedCategory.map f.hom ≫ R.mapDerivedCategoryFactors.hom.app P)
+          (R.mapDerivedCategory.map g.hom ≫ R.mapDerivedCategoryFactors.hom.app T)) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Q
+        ((R.mapHomologicalComplex (.up ℤ)).obj P)
+        ((R.mapHomologicalComplex (.up ℤ)).obj T) = _
   simpa only [Functor.map_comp, Category.assoc] using hfinal
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

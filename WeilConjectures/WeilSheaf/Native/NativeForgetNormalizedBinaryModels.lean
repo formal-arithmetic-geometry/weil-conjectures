@@ -199,9 +199,9 @@ theorem native_forget_normalized_binary_models
             (((Endofunctor.IsoAlgebra.forget
                 (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj T)   := by
   classical
-  let : MonoidalCategory (DerivedCategory
+  let : MonoidalCategoryStruct (DerivedCategory
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
-  let : MonoidalCategory (CochainComplex
+  let : MonoidalCategoryStruct (CochainComplex
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
   have (P T : CochainComplex
       (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :
@@ -217,6 +217,16 @@ theorem native_forget_normalized_binary_models
       ((nativeTensorBifunctor k₀ l X).obj P).Additive := by
     intro P
     exact (tensorIhomAdjunction k₀ l X P).left_adjoint_additive
+  have (P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
+      HomologicalComplex.HasMapBifunctor P T (nativeTensorBifunctor k₀ l X) (.up ℤ) := by
+    intro n
+    infer_instance
+  have (P T : CochainComplex
+      (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :
+      HomologicalComplex.HasMapBifunctor P T
+        (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (.up ℤ) := by
+    intro n
+    infer_instance
   obtain ⟨chain, hchain⟩ := native_weil_tensor_chain k₀ l X
     (nativeTensorBifunctor k₀ l X) (tensorBifunctorForget k₀ l X)
   rcases d with ⟨⟨m, adjO, evO⟩, βO, hm, hmodels⟩
