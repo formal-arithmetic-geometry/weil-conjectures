@@ -175,6 +175,16 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' {W : Scheme.{u}} (f : W 
         eqToHom ((congrArg (fun φ ↦ L((φ)^*⟦Λ⟧).obj K) (Category.comp_id f)).symm.trans h) := by
   rw [← leftDerivedUpperStarComp_inv_app_comp_eqToHom_id Λ f K, Category.assoc, eqToHom_trans]
 
+lemma _root_.CategoryTheory.comp_chain_eq_of_eq {C : Type*} [Category C]
+    {A₀ A₁ A₂ A₃ A₄ A₅ A₆ : C}
+    (i : A₀ ⟶ A₁) (u : A₁ ⟶ A₄) (a : A₁ ⟶ A₂) (e : A₂ ⟶ A₃)
+    (b : A₃ ⟶ A₄) (m : A₁ ⟶ A₂) (e' : A₂ ⟶ A₃) (j : A₀ ⟶ A₆)
+    (i' : A₆ ⟶ A₂) (e'' : A₂ ⟶ A₃) (v : A₆ ⟶ A₄) (c : A₄ ⟶ A₅)
+    (h₁ : u = a ≫ e ≫ b) (h₂ : a ≫ e = m ≫ e')
+    (h₃ : i ≫ m = j ≫ i') (h₄ : v = i' ≫ e'' ≫ b) (h₅ : e' = e'') :
+    i ≫ u ≫ c = j ≫ v ≫ c := by
+  simp only [h₁, h₂, h₃, h₄, h₅, Category.assoc]
+
 -- the composition isomorphisms of the derived pullbacks are unfolded
 /-- **A criterion for the ordinary Künneth map**: for commutative squares `p₁ ≫ a_X = q ≫ 𝟙`,
 `p₂ ≫ a_Y = q ≫ 𝟙` and `p₁ ≫ a_X = p₂ ≫ a_Y`, the Künneth map
@@ -222,7 +232,8 @@ theorem isIso_lowerStarKunnethMap'_of_isIso {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {a
         L((p₂)^*⟦Λ⟧).map (L((aY)^*⟦Λ⟧).map
           ((leftDerivedUpperStarId Λ S).hom.app K)) ≫
           (pullbackSquareComparison Λ w).hom.app K ≫ C
-    simp only [hs, hc, hn, hw, Category.assoc]
+    exact CategoryTheory.comp_chain_eq_of_eq _ _ _ _ _ _ _ _ _ _ _ _ hs hc hn hw
+      (by apply Subsingleton.elim)
   -- the transported counit of the second square is `Lp₂^*` of a transposed identity
   have e₂ : (leftDerivedUpperStarComp Λ p₂ aY).inv.app (L((𝟙 S)^*⟦Λ⟧).obj (R((aY)_*⟦Λ⟧).obj B)) ≫
       (pullbackSquareComparison Λ sq₂).hom.app (R((aY)_*⟦Λ⟧).obj B) ≫
