@@ -167,10 +167,11 @@ structure NativeRingedForgetTensorChainComparison where
       (p q n : ℤ) (h : p + q = n) :
     b.forget.map (RingedForgetTensorTransposition.tensorSummand b.J b.R P Q p q n h) ≫
         (tensor.hom.app (P, Q)).f n =
-      (by exact b.underived.tensor.hom.app (P.X p, Q.X q) ≫
-        RingedForgetTensorTransposition.tensorSummand b.K b.Q
-          ((b.forget.mapHomologicalComplex (.up ℤ)).obj P)
-          ((b.forget.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
+      (by
+        exact b.underived.tensor.hom.app (P.X p, Q.X q) ≫
+          RingedForgetTensorTransposition.tensorSummand b.K b.Q
+            ((b.forget.mapHomologicalComplex (.up ℤ)).obj P)
+            ((b.forget.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
   associativity (P Q N :
       CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ) :
     let F := b.forget.mapHomologicalComplex (.up ℤ)
